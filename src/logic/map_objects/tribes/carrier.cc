@@ -185,15 +185,15 @@ void Carrier::transport_update(Game& game, State& state) {
 		// A sanity check is necessary, in case the building has been destroyed
 		PlayerImmovable* const next = ware.get_next_move_step(game);
 
-		if (next && next != &flag && &next->base_flag() == &flag) {
+		if (next && next != &flag && &next->base_flag() == &flag && road.descr().type() == MapObjectType::ROAD) {
 			// Pay some coins before entering the building,
 			// to compensate for the time to be spent in its street-segment.
 			// Ferries cannot enter buildings, so they lave the ware at the flag
 			// for the building's worker to fetch it.
 			if (upcast(Road, r, &road)) {
 				r->pay_for_building();
-				enter_building(game, state);
 			}
+			enter_building(game, state);
 		} else if ((flag.has_capacity() || !swap_or_wait(game, state)) &&
 		           !start_task_walktoflag(game, state.ivar1 ^ 1)) {
 			// If the flag is overloaded we are allowed to drop wares as

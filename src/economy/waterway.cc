@@ -83,15 +83,10 @@ bool Waterway::notify_ware(Game& game, FlagId flag) {
 void Waterway::remove_worker(Worker& w) {
 	if (ferry_ == &w) {
 		ferry_ = nullptr;
-
-		// TODO(Nordfriese): We do not issue a new request because this causes a
-		// segfault if this is called because this waterway is being destroyed.
-		// We should somehow check whether we need to issue a new request or not.
-		// NOCOM(codereview): We should have a look at this before merging the branch
-
-		// request_ferry();
+		// Since waterways cannot have any other worker than their own ferry and since a
+		// ferry cannot be disassigned except by destroying its waterway, I assume that
+		// this method is called only on cleanup, so we don't need to issue a new request
 	}
-
 	PlayerImmovable::remove_worker(w);
 }
 

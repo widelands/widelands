@@ -166,10 +166,10 @@ struct CmdBuildRoad : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 private:
-	Path* path;
+	std::unique_ptr<Path> path;
 	Coords start;
 	Path::StepVector::size_type nsteps;
-	char* steps;
+	std::unique_ptr<uint8_t[]> steps;
 };
 
 struct CmdBuildWaterway : public PlayerCommand {
@@ -191,10 +191,10 @@ struct CmdBuildWaterway : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 private:
-	Path* path;
+	std::unique_ptr<Path> path;
 	Coords start;
 	Path::StepVector::size_type nsteps;
-	char* steps;
+	std::unique_ptr<uint8_t[]> steps;
 };
 
 struct CmdFlagAction : public PlayerCommand {

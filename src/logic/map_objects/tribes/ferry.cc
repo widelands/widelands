@@ -156,8 +156,6 @@ void Ferry::row_update(Game& game, State&) {
 			molog("[row]: Got signal '%s' -> recalculate\n", signal.c_str());
 			signal_handled();
 		} else if (signal == "blocked") {
-			// NOCOM(codereview): Can this happen to ferries?
-			// NOCOM(Nordfriese): Yes, if the battle takes place on one of the end flags. A waterway can also touch a corner of land in its middle, so this is rare but possible.
 			molog("[row]: Blocked by a battle\n");
 			signal_handled();
 			return start_task_idle(game, descr().get_animation("idle"), 900);

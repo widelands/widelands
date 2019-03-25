@@ -579,11 +579,11 @@ Begin building a road
 void InteractiveBase::start_build_road(Coords road_start, Widelands::PlayerNumber const player) {
 	// create an empty path
 	assert(!buildroad_);
-	buildroad_ = new CoordPath(road_start);
+	buildroad_.reset(new CoordPath(road_start));
 
 	road_build_player_ = player;
 
-	roadb_add_overlay();
+	road_building_add_overlay();
 
 	set_sel_picture(g_gr->images().get("images/ui_basic/fsel_roadbuilding.png"));
 }
@@ -591,11 +591,11 @@ void InteractiveBase::start_build_road(Coords road_start, Widelands::PlayerNumbe
 void InteractiveBase::start_build_waterway(Coords waterway_start, Widelands::PlayerNumber const player) {
 	// create an empty path
 	assert(!buildwaterway_);
-	buildwaterway_ = new CoordPath(waterway_start);
+	buildwaterway_.reset(new CoordPath(waterway_start));
 
 	waterway_build_player_ = player;
 
-	waterwayb_add_overlay();
+	waterway_building_add_overlay();
 
 	set_sel_picture(g_gr->images().get("images/ui_basic/fsel_waterwaybuilding.png"));
 }
@@ -608,12 +608,11 @@ Stop building the road
 void InteractiveBase::abort_build_road() {
 	assert(buildroad_);
 
-	roadb_remove_overlay();
+	road_building_remove_overlay();
 
 	road_build_player_ = 0;
 
-	delete buildroad_;
-	buildroad_ = nullptr;
+	buildroad_.reset(nullptr);
 
 	unset_sel_picture();
 }
@@ -621,12 +620,11 @@ void InteractiveBase::abort_build_road() {
 void InteractiveBase::abort_build_waterway() {
 	assert(buildwaterway_);
 
-	waterwayb_remove_overlay();
+	waterway_building_remove_overlay();
 
 	waterway_build_player_ = 0;
 
-	delete buildwaterway_;
-	buildwaterway_ = nullptr;
+	buildwaterway_.reset(nullptr);
 
 	unset_sel_picture();
 }
@@ -639,7 +637,7 @@ Finally build the road
 void InteractiveBase::finish_build_road() {
 	assert(buildroad_);
 
-	roadb_remove_overlay();
+	road_building_remove_overlay();
 
 	if (buildroad_->get_nsteps()) {
 		upcast(Game, game, &egbase());
@@ -680,8 +678,7 @@ void InteractiveBase::finish_build_road() {
 		}
 	}
 
-	delete buildroad_;
-	buildroad_ = nullptr;
+	buildroad_.reset(nullptr);
 
 	unset_sel_picture();
 }
@@ -689,7 +686,7 @@ void InteractiveBase::finish_build_road() {
 void InteractiveBase::finish_build_waterway() {
 	assert(buildwaterway_ != nullptr);
 
-	waterwayb_remove_overlay();
+	waterway_building_remove_overlay();
 
 	const size_t length = buildwaterway_->get_nsteps();
 	if (length > egbase().map().get_waterway_max_length()) {
@@ -735,8 +732,7 @@ void InteractiveBase::finish_build_waterway() {
 		}
 	}
 
-	delete buildwaterway_;
-	buildwaterway_ = nullptr;
+	buildwaterway_.reset(nullptr);
 
 	unset_sel_picture();
 }
@@ -779,8 +775,8 @@ bool InteractiveBase::append_build_road(Coords const field) {
 		buildroad_->append(map, path);
 	}
 
-	roadb_remove_overlay();
-	roadb_add_overlay();
+	road_building_remove_overlay();
+	road_building_add_overlay();
 
 	return true;
 }
@@ -821,8 +817,8 @@ bool InteractiveBase::append_build_waterway(Coords const field) {
 		buildwaterway_->truncate(map.get_waterway_max_length());
 	}
 
-	waterwayb_remove_overlay();
-	waterwayb_add_overlay();
+	waterway_building_remove_overlay();
+	waterway_building_add_overlay();
 
 	return true;
 }
@@ -902,7 +898,7 @@ void InteractiveBase::resize_chat_overlay() {
 Add road building data to the road overlay
 ===============
 */
-void InteractiveBase::roadb_add_overlay() {
+void InteractiveBase::road_building_add_overlay() {
 	assert(buildroad_);
 	assert(road_building_overlays_.road_previews.empty());
 	assert(road_building_overlays_.steepness_indicators.empty());
@@ -957,22 +953,20 @@ void InteractiveBase::roadb_add_overlay() {
 		const char* name = nullptr;
 
 		if (slope <= -4)
-			name = "images/wui/overlays/roadb_reddown.png";
+			name = "images/wui/overlays/road_building_reddown.png";
 		else if (slope <= -2)
-			name = "images/wui/overlays/roadb_yellowdown.png";
+			name = "images/wui/overlays/road_building_yellowdown.png";
 		else if (slope < 2)
-			name = "images/wui/overlays/roadb_green.png";
+			name = "images/wui/overlays/road_building_green.png";
 		else if (slope < 4)
-			name = "images/wui/overlays/roadb_yellow.png";
+			name = "images/wui/overlays/road_building_yellow.png";
 		else
-			name = "images/wui/overlays/roadb_red.png";
+			name = "images/wui/overlays/road_building_red.png";
 		road_building_overlays_.steepness_indicators[neighb] = g_gr->images().get(name);
 	}
 }
 
-// NOCOM(codereview). WHat does the b stand for? Choose a longer name.
-// NOCOM(Nordfriese): Copied this 1:1 from roadbuilding, b means _build(ing)
-void InteractiveBase::waterwayb_add_overlay() {
+void InteractiveBase::waterway_building_add_overlay() {
 	assert(buildwaterway_);
 	assert(waterway_building_overlays_.road_previews.empty());
 	assert(waterway_building_overlays_.steepness_indicators.empty());
@@ -1047,15 +1041,15 @@ void InteractiveBase::waterwayb_add_overlay() {
 		const char* name = nullptr;
 
 		if (slope <= -4) {
-			name = "images/wui/overlays/waterb_steepdown.png";
+			name = "images/wui/overlays/waterway_building_steepdown.png";
 		} else if (slope >= 4) {
-			name = "images/wui/overlays/waterb_steepup.png";
+			name = "images/wui/overlays/waterway_building_steepup.png";
 		} else if (slope <= -2) {
-			name = "images/wui/overlays/waterb_down.png";
+			name = "images/wui/overlays/waterway_building_down.png";
 		} else if (slope >= 2) {
-			name = "images/wui/overlays/waterb_up.png";
+			name = "images/wui/overlays/waterway_building_up.png";
 		} else {
-			name = "images/wui/overlays/waterb_even.png";
+			name = "images/wui/overlays/waterway_building_even.png";
 		}
 		waterway_building_overlays_.steepness_indicators[neighb] = g_gr->images().get(name);
 	}
@@ -1066,13 +1060,13 @@ void InteractiveBase::waterwayb_add_overlay() {
 Remove road building data from road overlay
 ===============
 */
-void InteractiveBase::roadb_remove_overlay() {
+void InteractiveBase::road_building_remove_overlay() {
 	assert(buildroad_);
 	road_building_overlays_.road_previews.clear();
 	road_building_overlays_.steepness_indicators.clear();
 }
 
-void InteractiveBase::waterwayb_remove_overlay() {
+void InteractiveBase::waterway_building_remove_overlay() {
 	assert(buildwaterway_);
 	waterway_building_overlays_.road_previews.clear();
 	waterway_building_overlays_.steepness_indicators.clear();

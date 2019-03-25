@@ -365,23 +365,20 @@ CmdBuildRoad::CmdBuildRoad(StreamRead& des)
      path(nullptr),
      start(read_coords_32(&des)),
      nsteps(des.unsigned_16()),
-     steps(new char[nsteps]) {
+     steps(new uint8_t[nsteps]) {
 	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		steps[i] = des.unsigned_8();
 	}
 }
 
 CmdBuildRoad::~CmdBuildRoad() {
-	delete path;
-
-	delete[] steps;
 }
 
 void CmdBuildRoad::execute(Game& game) {
 	if (path == nullptr) {
 		assert(steps);
 
-		path = new Path(start);
+		path.reset(new Path(start));
 		for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
 			path->append(game.map(), steps[i]);
 	}
@@ -410,8 +407,8 @@ void CmdBuildRoad::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& m
 			PlayerCommand::read(fr, egbase, mol);
 			start = read_coords_32(&fr, egbase.map().extent());
 			nsteps = fr.unsigned_16();
-			path = nullptr;
-			steps = new char[nsteps];
+			path.reset(nullptr);
+			steps.reset(new uint8_t[nsteps]);
 			for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
 				steps[i] = fr.unsigned_8();
 		} else {
@@ -450,24 +447,20 @@ CmdBuildWaterway::CmdBuildWaterway(StreamRead& des)
      path(nullptr),
      start(read_coords_32(&des)),
      nsteps(des.unsigned_16()),
-     steps(new char[nsteps]) {
+     steps(new uint8_t[nsteps]) {
 	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		steps[i] = des.unsigned_8();
 	}
 }
 
 CmdBuildWaterway::~CmdBuildWaterway() {
-	// NOCOM(codereview) Use unique_ptr and get rid of the delete commands
-	// NOCOM(Nordfriese): Copied this 1:1 from CmdBuildRoad
-	delete path;
-	delete[] steps;
 }
 
 void CmdBuildWaterway::execute(Game& game) {
 	if (path == nullptr) {
 		assert(steps);
 
-		path = new Path(start);
+		path.reset(new Path(start));
 		for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 			path->append(game.map(), steps[i]);
 		}
@@ -498,8 +491,8 @@ void CmdBuildWaterway::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoade
 			PlayerCommand::read(fr, egbase, mol);
 			start = read_coords_32(&fr, egbase.map().extent());
 			nsteps = fr.unsigned_16();
-			path = nullptr;
-			steps = new char[nsteps];
+			path.reset(nullptr);
+			steps.reset(new uint8_t[nsteps]);
 			for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 				steps[i] = fr.unsigned_8();
 			}
