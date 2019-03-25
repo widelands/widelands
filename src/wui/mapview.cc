@@ -387,7 +387,7 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 	const Transition transition = animate_map_panning_ ? passed_transition : Transition::Jump;
 	switch (transition) {
 	case Transition::Jump: {
-		if (view_ == target_view) {
+		if (view_.view_near(target_view)) {
 			// We're already there
 			return;
 		}
@@ -398,7 +398,7 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 	}
 
 	case Transition::Smooth: {
-		if (!view_plans_.empty() && view_plans_.back().back().view == target_view) {
+		if (!view_plans_.empty() && view_plans_.back().back().view.view_near(target_view)) {
 			// We're already there
 			return;
 		}
@@ -517,7 +517,7 @@ void MapView::zoom_around(float new_zoom,
 	const TimestampedView current = animation_target_view();
 	switch (transition) {
 	case Transition::Jump: {
-		if (view_.zoom == new_zoom) {
+		if (view_.zoom_near(new_zoom)) {
 			// We're already there
 			return;
 		}
@@ -530,7 +530,7 @@ void MapView::zoom_around(float new_zoom,
 	}
 
 	case Transition::Smooth: {
-		if (!view_plans_.empty() && view_plans_.back().back().view.zoom == new_zoom) {
+		if (!view_plans_.empty() && view_plans_.back().back().view.zoom_near(new_zoom)) {
 			// We're already there
 			return;
 		}
