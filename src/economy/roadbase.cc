@@ -159,7 +159,16 @@ void RoadBase::set_path(EditorGameBase& egbase, const Path& path) {
 inline void RoadBase::set_roadtype(EditorGameBase& egbase, const FCoords curf, uint8_t dir, RoadType type) const {
 	if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E) {
 		if (type != RoadType::kNone && is_bridge(egbase, curf, dir)) {
-			type += RoadType::kBridgeNormal - RoadType::kNormal;
+			switch (type) {
+				case RoadType::kNormal:
+					type = RoadType::kBridgeNormal;
+					break;
+				case RoadType::kBusy:
+					type = RoadType::kBridgeBusy;
+					break;
+				default:
+					NEVER_HERE();
+			}
 		}
 		egbase.set_road(curf, dir, type);
 	}
