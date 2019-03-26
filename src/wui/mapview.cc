@@ -388,6 +388,10 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 	const Transition transition = animate_map_panning_ ? passed_transition : Transition::Jump;
 	switch (transition) {
 	case Transition::Jump: {
+		if (view_.view_near(target_view)) {
+			// We're already there
+			return;
+		}
 		view_ = target_view;
 		MapviewPixelFunctions::normalize_pix(map_, &view_.viewpoint);
 		changeview();
@@ -395,6 +399,10 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 	}
 
 	case Transition::Smooth: {
+		if (!view_plans_.empty() && view_plans_.back().back().view.view_near(target_view)) {
+			// We're already there
+			return;
+		}
 		const TimestampedView current = animation_target_view();
 		const auto plan =
 		   plan_map_transition(current.t, map_, current.view, target_view, get_w(), get_h());
@@ -510,6 +518,10 @@ void MapView::zoom_around(float new_zoom,
 	const TimestampedView current = animation_target_view();
 	switch (transition) {
 	case Transition::Jump: {
+		if (view_.zoom_near(new_zoom)) {
+			// We're already there
+			return;
+		}
 		// Zoom around the current mouse position. See
 		// http://stackoverflow.com/questions/2916081/zoom-in-on-a-point-using-scale-and-translate
 		// for a good explanation of this math.
@@ -519,6 +531,10 @@ void MapView::zoom_around(float new_zoom,
 	}
 
 	case Transition::Smooth: {
+		if (!view_plans_.empty() && view_plans_.back().back().view.zoom_near(new_zoom)) {
+			// We're already there
+			return;
+		}
 		const int w = get_w();
 		const int h = get_h();
 		const auto plan = plan_zoom_transition(

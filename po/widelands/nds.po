@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-03 08:19+0000\n"
-"PO-Revision-Date: 2019-03-03 10:30+0000\n"
+"POT-Creation-Date: 2019-03-18 09:59+0000\n"
+"PO-Revision-Date: 2019-03-22 11:27+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgstr "%1$s un %2$s"
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1062
+#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1052
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -1123,7 +1123,7 @@ msgid "Not set"
 msgstr "Nich fastleggt"
 
 #: ../../src/logic/game.cc:214 ../../src/logic/game.cc:266
-#: ../../src/logic/game.cc:337 ../../src/logic/game.cc:372
+#: ../../src/logic/game.cc:341 ../../src/logic/game.cc:376
 msgid "Preloading map"
 msgstr "Lade de Kaart vör"
 
@@ -1135,35 +1135,35 @@ msgstr "Lade de Welt"
 msgid "Loading map…"
 msgstr "Lade de Kaart …"
 
-#: ../../src/logic/game.cc:318
+#: ../../src/logic/game.cc:317
 msgid "Initializing game…"
 msgstr "Speel word vörbereidt …"
 
-#: ../../src/logic/game.cc:350 ../../src/logic/game.cc:389
+#: ../../src/logic/game.cc:354 ../../src/logic/game.cc:393
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1424
 msgid "Loading…"
 msgstr "Lade …"
 
-#: ../../src/logic/game.cc:452
+#: ../../src/logic/game.cc:456
 msgid "Creating player infrastructure"
 msgstr "Maak de Kraam för de Spelers"
 
-#: ../../src/logic/game.cc:463 ../../src/logic/player.cc:222
+#: ../../src/logic/game.cc:467 ../../src/logic/player.cc:222
 msgid "Missing starting position"
 msgstr "Do fehlt eene Anfangs-Position"
 
-#: ../../src/logic/game.cc:464 ../../src/logic/player.cc:223
+#: ../../src/logic/game.cc:468 ../../src/logic/player.cc:223
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands kunn dat Speel nich laden, wiel Speler %u keene Anfangs-Position hett.\nDu kannst tum Ofhelpen eene Anfangs-Position mit de Widelands-Bewarker daartodoon."
 
-#: ../../src/logic/game.cc:854
+#: ../../src/logic/game.cc:858
 msgid "Trade Offer"
 msgstr "Hannel-Anbott"
 
-#: ../../src/logic/game.cc:856
+#: ../../src/logic/game.cc:860
 msgid "This market has received a new trade offer."
 msgstr "Deese Markt hett een nejes Hannel-Anbott bekomen."
 
@@ -1475,7 +1475,7 @@ msgstr "(stoppt)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../src/logic/map_objects/tribes/productionsite.cc:407
-#: ../../src/wui/building_statistics_menu.cc:683
+#: ../../src/wui/building_statistics_menu.cc:688
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -1681,7 +1681,7 @@ msgstr "Nich to henkomen"
 msgid "This objective has no description."
 msgstr "Dit Upgaav is nich beschreven."
 
-#: ../../src/logic/player.cc:1336
+#: ../../src/logic/player.cc:1345
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -2913,7 +2913,7 @@ msgstr "Fenster-Grött"
 
 #: ../../src/ui_fsmenu/options.cc:120
 msgid "Fullscreen"
-msgstr "Heler Bildschirm"
+msgstr "Heler Billschirm"
 
 #: ../../src/ui_fsmenu/options.cc:121
 msgid "Grab Input"
@@ -3162,7 +3162,7 @@ msgstr "Word beschickt:"
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window - 'Low Productivity <input>%:'
 #: ../../src/wui/building_statistics_menu.cc:78
-#: ../../src/wui/building_statistics_menu.cc:695
+#: ../../src/wui/building_statistics_menu.cc:700
 msgid "Low Productivity"
 msgstr "Lege Wöörde"
 
@@ -3172,50 +3172,50 @@ msgstr "Lege Wöörde"
 msgid "%:"
 msgstr "%:"
 
-#: ../../src/wui/building_statistics_menu.cc:145
-#: ../../src/wui/building_statistics_menu.cc:155
-#: ../../src/wui/building_statistics_menu.cc:165
-msgid "Show previous building"
-msgstr "Vörig Huus wiesen"
-
 #: ../../src/wui/building_statistics_menu.cc:150
 #: ../../src/wui/building_statistics_menu.cc:160
 #: ../../src/wui/building_statistics_menu.cc:170
+msgid "Show previous building"
+msgstr "Vörig Huus wiesen"
+
+#: ../../src/wui/building_statistics_menu.cc:155
+#: ../../src/wui/building_statistics_menu.cc:165
+#: ../../src/wui/building_statistics_menu.cc:175
 msgid "Show next building"
 msgstr "Anner Huus wiesen"
 
-#: ../../src/wui/building_statistics_menu.cc:303
+#: ../../src/wui/building_statistics_menu.cc:308
 msgid "Small buildings"
 msgstr "Lütte Husen"
 
-#: ../../src/wui/building_statistics_menu.cc:305
+#: ../../src/wui/building_statistics_menu.cc:310
 msgid "Medium buildings"
 msgstr "Middelmatig Husen"
 
-#: ../../src/wui/building_statistics_menu.cc:307
+#: ../../src/wui/building_statistics_menu.cc:312
 msgid "Big buildings"
 msgstr "Grote Husen"
 
-#: ../../src/wui/building_statistics_menu.cc:309
+#: ../../src/wui/building_statistics_menu.cc:314
 msgid "Mines"
 msgstr "Bargwarken"
 
-#: ../../src/wui/building_statistics_menu.cc:311
+#: ../../src/wui/building_statistics_menu.cc:316
 msgid "Ports"
 msgstr "Muden"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../src/wui/building_statistics_menu.cc:713
-#: ../../src/wui/building_statistics_menu.cc:739
-#: ../../src/wui/building_statistics_menu.cc:741
+#: ../../src/wui/building_statistics_menu.cc:718
+#: ../../src/wui/building_statistics_menu.cc:744
+#: ../../src/wui/building_statistics_menu.cc:746
 #: ../../src/wui/productionsitewindow.cc:177
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:727
+#: ../../src/wui/building_statistics_menu.cc:732
 msgid "Lacking Soldiers:"
 msgstr "Soldaten hapern:"
 
