@@ -435,10 +435,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps) {
 			    !player_->is_building_type_allowed(building_index)) {
 				continue;
 			}
-			if (building_descr->needs_seafaring() && !ibase().egbase().map().allows_seafaring()) {
-				continue;
-			}
-			if (building_descr->needs_waterways() && ibase().egbase().map().get_waterway_max_length() < 2) {
+			if (!building_descr->meets_requirements(ibase().egbase().map().allows_seafaring(),
+					ibase().egbase().map().get_waterway_max_length() >= 2)) {
 				continue;
 			}
 		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced())
@@ -513,9 +511,10 @@ void FieldActionWindow::add_buttons_road(bool flag) {
 void FieldActionWindow::add_buttons_waterway(bool flag) {
 	UI::Box& buildbox = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
 
-	if (flag)
+	if (flag) {
 		add_button(&buildbox, "build_flag", pic_buildflag, &FieldActionWindow::act_buildflag,
 		           _("Build flag"));
+	}
 
 	add_button(&buildbox, "cancel_waterway", pic_abort, &FieldActionWindow::act_abort_buildwaterway,
 	           _("Cancel waterway"));
@@ -611,11 +610,11 @@ void FieldActionWindow::act_buildflag() {
 	else
 		player_->build_flag(node_);
 
-	if (ibase().is_building_road())
+	if (ibase().is_building_road()) {
 		ibase().finish_build_road();
-	else if (ibase().is_building_waterway())
+	} else if (ibase().is_building_waterway()) {
 		ibase().finish_build_waterway();
-	else if (game) {
+	} else if (game) {
 		upcast(InteractivePlayer, iaplayer, &ibase());
 		iaplayer->set_flag_to_connect(node_);
 	}
@@ -701,8 +700,9 @@ void FieldActionWindow::act_abort_buildroad() {
 }
 
 void FieldActionWindow::act_abort_buildwaterway() {
-	if (!ibase().is_building_waterway())
+	if (!ibase().is_building_waterway()) {
 		return;
+	}
 
 	ibase().abort_build_waterway();
 	reset_mouse_and_die();

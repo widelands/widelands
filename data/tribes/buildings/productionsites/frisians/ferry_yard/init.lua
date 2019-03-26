@@ -8,7 +8,7 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   needs_waterways = true,
+   map_check = {"waterways"},
 
    buildcost = {
       brick = 3,

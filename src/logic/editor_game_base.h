@@ -117,7 +117,7 @@ public:
 	void load_graphics(UI::ProgressWindow& loader_ui);
 	virtual void cleanup_for_load();
 
-	void set_road(const FCoords&, uint8_t direction, uint8_t roadtype);
+	void set_road(const FCoords&, uint8_t direction, RoadType roadtype);
 
 	// warping stuff. instantly creating map_objects
 	Building&

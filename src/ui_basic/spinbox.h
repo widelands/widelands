@@ -45,7 +45,7 @@ public:
 		kValueList  // Uses the values that are set by set_value_list().
 	};
 
-	enum class Units { kNone, kPixels, kMinutes, kPercent };
+	enum class Units { kNone, kPixels, kMinutes, kPercent, kFields };
 
 	/**
 	 * Text conventions: Sentence case for the 'label_text' and for all values

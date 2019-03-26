@@ -245,7 +245,6 @@ struct SimpleRouterFixture {
 	 * cycle wraps around.
 	 */
 	void reset() {
-		// Is it really necessary to reset both cycles here?
 		if (d0) {
 			d0->reset_path_finding_cycle(wwWARE);
 			d0->reset_path_finding_cycle(wwWORKER);
@@ -483,7 +482,6 @@ struct ComplexRouterFixture {
 	 */
 	void reset() {
 		for (RoutingNode* node : nodes) {
-			// Is it really necessary to reset both cycles here?
 			node->reset_path_finding_cycle(wwWARE);
 			node->reset_path_finding_cycle(wwWORKER);
 		}

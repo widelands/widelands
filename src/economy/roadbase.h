@@ -64,7 +64,7 @@ struct RoadBase : public PlayerImmovable {
 		return *flags_[flag];
 	}
 
-	uint8_t get_roadtype() const {
+	RoadType get_roadtype() const {
 		return type_;
 	}
 
@@ -104,6 +104,8 @@ protected:
 
 	virtual void link_into_flags(EditorGameBase&);
 
+	inline void set_roadtype(EditorGameBase& egbase, const FCoords curf, uint8_t dir, RoadType type) const;
+
 	Flag* flags_[2];      ///< start and end flag
 	int32_t flagidx_[2];  ///< index of this road in the flag's road array
 
@@ -113,7 +115,7 @@ protected:
 	Path path_;            ///< path goes from start to end
 	uint32_t idle_index_;  ///< index into path where carriers should idle
 
-	uint8_t type_;        ///< RoadType
+	RoadType type_;        ///< RoadType
 };
 }
 

@@ -8,13 +8,13 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   needs_waterways = true,
+   map_check = {"waterways"},
 
    buildcost = {
       log = 3,
       blackwood = 2,
       granite = 3,
-      thatch_reed = 2
+      cloth = 2
    },
    return_on_dismantle = {
       log = 1,

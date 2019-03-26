@@ -109,9 +109,11 @@ struct Fleet : MapObject {
 	uint32_t count_ports() const;
 	bool get_act_pending() const;
 
-	void request_ferry(Waterway* waterway);
-	void rerout_ferry_request(Game& game, Waterway* oldww, Waterway* newww);
+	void request_ferry(Waterway* waterway, uint32_t gametime);
+	void reroute_ferry_request(Game& game, Waterway* oldww, Waterway* newww);
 	void cancel_ferry_request(Game& game, Waterway* waterway);
+
+	bool empty() const;
 
 protected:
 	void act(Game&, uint32_t data) override;
@@ -130,7 +132,7 @@ private:
 	std::vector<Ship*> ships_;
 	std::vector<PortDock*> ports_;
 	std::vector<Ferry*> ferries_;
-	std::vector<Waterway*> pending_ferry_requests_;
+	std::multimap<uint32_t, Waterway*> pending_ferry_requests_;
 
 	bool act_pending_;
 
@@ -153,9 +155,9 @@ protected:
 
 	private:
 		std::vector<uint32_t> ships_;
-		std::vector<uint32_t> ferries_;
-		std::vector<uint32_t> pending_ferry_requests_;
 		std::vector<uint32_t> ports_;
+		std::vector<uint32_t> ferries_;
+		std::multimap<uint32_t, uint32_t> pending_ferry_requests_;
 	};
 
 public:

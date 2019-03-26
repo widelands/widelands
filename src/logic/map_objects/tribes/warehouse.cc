@@ -159,28 +159,42 @@ void WarehouseSupply::set_economy(Economy* const e, WareWorker type) {
 
 	if (Economy* ec = (type == wwWARE ? ware_economy_ : worker_economy_)) {
 		ec->remove_supply(*this);
-		if (type == wwWARE) {
-			for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i)
-				if (wares_.stock(i))
-					ec->remove_wares(i, wares_.stock(i));
-		} else {
-			for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i)
-				if (workers_.stock(i))
-					ec->remove_workers(i, workers_.stock(i));
+		switch (type) {
+			case wwWARE:
+				for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i) {
+					if (wares_.stock(i)) {
+						ec->remove_wares(i, wares_.stock(i));
+					}
+				}
+				break;
+			case wwWORKER:
+				for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i) {
+					if (workers_.stock(i)) {
+						ec->remove_workers(i, workers_.stock(i));
+					}
+				}
+				break;
 		}
 	}
 
 	(type == wwWARE ? ware_economy_ : worker_economy_) = e;
 
 	if (Economy* ec = (type == wwWARE ? ware_economy_ : worker_economy_)) {
-		if (type == wwWARE) {
-			for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i)
-				if (wares_.stock(i))
-					ec->add_wares(i, wares_.stock(i));
-		} else {
-			for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i)
-				if (workers_.stock(i))
-					e->add_workers(i, workers_.stock(i));
+		switch (type) {
+			case wwWARE:
+				for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i) {
+					if (wares_.stock(i)) {
+						ec->add_wares(i, wares_.stock(i));
+					}
+				}
+				break;
+			case wwWORKER:
+				for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i) {
+					if (workers_.stock(i)) {
+						e->add_workers(i, workers_.stock(i));
+					}
+				}
+				break;
 		}
 		ec->add_supply(*this);
 	}
@@ -191,8 +205,9 @@ void WarehouseSupply::add_wares(DescriptionIndex const id, Quantity const count)
 	if (!count)
 		return;
 
-	if (ware_economy_)  // No economies in the editor
+	if (ware_economy_) { // No economies in the editor
 		ware_economy_->add_wares(id, count);
+	}
 	wares_.add(id, count);
 }
 
@@ -202,8 +217,9 @@ void WarehouseSupply::remove_wares(DescriptionIndex const id, uint32_t const cou
 		return;
 
 	wares_.remove(id, count);
-	if (ware_economy_)  // No economies in the editor
+	if (ware_economy_) { // No economies in the editor
 		ware_economy_->remove_wares(id, count);
+	}
 }
 
 /// Add workers and update the economy.
@@ -211,8 +227,9 @@ void WarehouseSupply::add_workers(DescriptionIndex const id, uint32_t const coun
 	if (!count)
 		return;
 
-	if (worker_economy_)  // No economies in the editor
+	if (worker_economy_) { // No economies in the editor
 		worker_economy_->add_workers(id, count);
+	}
 	workers_.add(id, count);
 }
 
@@ -225,8 +242,9 @@ void WarehouseSupply::remove_workers(DescriptionIndex const id, uint32_t const c
 		return;
 
 	workers_.remove(id, count);
-	if (worker_economy_)  // No economies in the editor
+	if (worker_economy_) { // No economies in the editor
 		worker_economy_->remove_workers(id, count);
+	}
 }
 
 /// Return the position of the Supply, i.e. the owning Warehouse.
@@ -610,10 +628,12 @@ void Warehouse::init_portdock(EditorGameBase& egbase) {
 	}
 	portdock_->init(egbase);
 
-	if (get_economy(wwWARE) != nullptr)
+	if (get_economy(wwWARE) != nullptr) {
 		portdock_->set_economy(get_economy(wwWARE), wwWARE);
-	if (get_economy(wwWORKER) != nullptr)
+	}
+	if (get_economy(wwWORKER) != nullptr) {
 		portdock_->set_economy(get_economy(wwWORKER), wwWORKER);
+	}
 
 	// this is just to indicate something wrong is going on
 	PortDock* pd_tmp = portdock_;
@@ -787,8 +807,9 @@ void Warehouse::set_economy(Economy* const e, WareWorker type) {
 	if (old)
 		old->remove_warehouse(*this);
 
-	if (portdock_)
+	if (portdock_) {
 		portdock_->set_economy(e, type);
+	}
 	supply_->set_economy(e, type);
 	Building::set_economy(e, type);
 
@@ -799,10 +820,6 @@ void Warehouse::set_economy(Economy* const e, WareWorker type) {
 			}
 		}
 	}
-
-	// Why is this here twice? Isn't this superfluous?
-	if (portdock_)
-		portdock_->set_economy(e, type);
 
 	if (e)
 		e->add_warehouse(*this);

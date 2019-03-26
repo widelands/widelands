@@ -152,7 +152,7 @@ function plan_the_future()
    message_box_objective(plr, economy_settings2)
    o = message_box_objective(plr, economy_settings3)
 
-   while sf.brn.immovable.economy:ware_target_quantity("marble_column") ~= 20 do
+   while sf.brn.immovable.ware_economy:ware_target_quantity("marble_column") ~= 20 do
       sleep(200)
    end
    -- wait that the player has really changed the target quantity

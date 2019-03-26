@@ -600,11 +600,11 @@ Begin building a road
 void InteractiveBase::start_build_road(Coords road_start, Widelands::PlayerNumber const player) {
 	// create an empty path
 	assert(!buildroad_);
-	buildroad_ = new CoordPath(road_start);
+	buildroad_.reset(new CoordPath(road_start));
 
 	road_build_player_ = player;
 
-	roadb_add_overlay();
+	road_building_add_overlay();
 
 	set_sel_picture(g_gr->images().get("images/ui_basic/fsel_roadbuilding.png"));
 }
@@ -612,11 +612,11 @@ void InteractiveBase::start_build_road(Coords road_start, Widelands::PlayerNumbe
 void InteractiveBase::start_build_waterway(Coords waterway_start, Widelands::PlayerNumber const player) {
 	// create an empty path
 	assert(!buildwaterway_);
-	buildwaterway_ = new CoordPath(waterway_start);
+	buildwaterway_.reset(new CoordPath(waterway_start));
 
 	waterway_build_player_ = player;
 
-	waterwayb_add_overlay();
+	waterway_building_add_overlay();
 
 	set_sel_picture(g_gr->images().get("images/ui_basic/fsel_waterwaybuilding.png"));
 }
@@ -629,12 +629,11 @@ Stop building the road
 void InteractiveBase::abort_build_road() {
 	assert(buildroad_);
 
-	roadb_remove_overlay();
+	road_building_remove_overlay();
 
 	road_build_player_ = 0;
 
-	delete buildroad_;
-	buildroad_ = nullptr;
+	buildroad_.reset(nullptr);
 
 	unset_sel_picture();
 }
@@ -642,12 +641,11 @@ void InteractiveBase::abort_build_road() {
 void InteractiveBase::abort_build_waterway() {
 	assert(buildwaterway_);
 
-	waterwayb_remove_overlay();
+	waterway_building_remove_overlay();
 
 	waterway_build_player_ = 0;
 
-	delete buildwaterway_;
-	buildwaterway_ = nullptr;
+	buildwaterway_.reset(nullptr);
 
 	unset_sel_picture();
 }
@@ -660,7 +658,7 @@ Finally build the road
 void InteractiveBase::finish_build_road() {
 	assert(buildroad_);
 
-	roadb_remove_overlay();
+	road_building_remove_overlay();
 
 	if (buildroad_->get_nsteps()) {
 		upcast(Game, game, &egbase());
@@ -701,16 +699,15 @@ void InteractiveBase::finish_build_road() {
 		}
 	}
 
-	delete buildroad_;
-	buildroad_ = nullptr;
+	buildroad_.reset(nullptr);
 
 	unset_sel_picture();
 }
 
 void InteractiveBase::finish_build_waterway() {
-	assert(buildwaterway_);
+	assert(buildwaterway_ != nullptr);
 
-	waterwayb_remove_overlay();
+	waterway_building_remove_overlay();
 
 	const size_t length = buildwaterway_->get_nsteps();
 	if (length > egbase().map().get_waterway_max_length()) {
@@ -721,10 +718,11 @@ void InteractiveBase::finish_build_waterway() {
 		upcast(Game, game, &egbase());
 
 		// Build the path as requested
-		if (game)
+		if (game) {
 			game->send_player_build_waterway(waterway_build_player_, *new Widelands::Path(*buildwaterway_));
-		else
+		} else {
 			egbase().get_player(waterway_build_player_)->build_waterway(*new Widelands::Path(*buildwaterway_));
+		}
 
 		if (allow_user_input() && (SDL_GetModState() & KMOD_CTRL)) {
 			//  place flags
@@ -733,31 +731,29 @@ void InteractiveBase::finish_build_waterway() {
 			std::vector<Coords>::const_iterator const first = c_vector.begin() + 2;
 			std::vector<Coords>::const_iterator const last = c_vector.end() - 2;
 
-			if (SDL_GetModState() & KMOD_SHIFT) {
-				for //  start to end
-					(std::vector<Coords>::const_iterator it = first;
-					 it <= last;
-					 ++it)
-					if (game)
-						game->send_player_build_flag(waterway_build_player_, map.get_fcoords(*it));
-					else
-						egbase().get_player(waterway_build_player_)->build_flag(map.get_fcoords(*it));
+			auto place_flag = [this, game](const Widelands::FCoords& coords) {
+				if (game) {
+					game->send_player_build_flag(waterway_build_player_, coords);
+				} else {
+					egbase().get_player(waterway_build_player_)->build_flag(coords);
+				}
+			};
 
+			if (SDL_GetModState() & KMOD_SHIFT) {
+				//  start to end
+				for (std::vector<Coords>::const_iterator it = first; it <= last; ++it) {
+					place_flag(map.get_fcoords(*it));
+				}
 			} else {
-				for //  end to start
-					(std::vector<Coords>::const_iterator it = last;
-					 first <= it;
-					 --it)
-					if (game)
-						game->send_player_build_flag(waterway_build_player_, map.get_fcoords(*it));
-					else
-						egbase().get_player(waterway_build_player_)->build_flag(map.get_fcoords(*it));
+				//  end to start
+				for (std::vector<Coords>::const_iterator it = last; first <= it; --it) {
+					place_flag(map.get_fcoords(*it));
+				}
 			}
 		}
 	}
 
-	delete buildwaterway_;
-	buildwaterway_ = nullptr;
+	buildwaterway_.reset(nullptr);
 
 	unset_sel_picture();
 }
@@ -800,8 +796,8 @@ bool InteractiveBase::append_build_road(Coords const field) {
 		buildroad_->append(map, path);
 	}
 
-	roadb_remove_overlay();
-	roadb_add_overlay();
+	road_building_remove_overlay();
+	road_building_add_overlay();
 
 	return true;
 }
@@ -815,15 +811,15 @@ bool InteractiveBase::append_build_waterway(Coords const field) {
 	{  //  find a path to the clicked-on node
 		Widelands::Path path;
 		Widelands::CheckStepRoad cstep(player, Widelands::MOVECAPS_SWIM);
-		if (map.findpath(buildwaterway_->get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0)
+		if (map.findpath(buildwaterway_->get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0) {
 			return false;  //  could not find a path
+		}
 		buildwaterway_->append(map, path);
 	}
 
 	{
 		//  Fix the waterway by finding an optimal path through the set of nodes
-		//  currently used by the waterway. This will not claim any new nodes, so it
-		//  is guaranteed to not hinder building placement.
+		//  currently used by the waterway. This will not claim any new nodes.
 		Widelands::Path path;
 		{
 			Widelands::CheckStepLimited cstep;
@@ -838,11 +834,12 @@ bool InteractiveBase::append_build_waterway(Coords const field) {
 		buildwaterway_->append(map, path);
 	}
 
-	if (buildwaterway_->get_nsteps() > map.get_waterway_max_length())
+	if (buildwaterway_->get_nsteps() > map.get_waterway_max_length()) {
 		buildwaterway_->truncate(map.get_waterway_max_length());
+	}
 
-	waterwayb_remove_overlay();
-	waterwayb_add_overlay();
+	waterway_building_remove_overlay();
+	waterway_building_add_overlay();
 
 	return true;
 }
@@ -922,7 +919,7 @@ void InteractiveBase::resize_chat_overlay() {
 Add road building data to the road overlay
 ===============
 */
-void InteractiveBase::roadb_add_overlay() {
+void InteractiveBase::road_building_add_overlay() {
 	assert(buildroad_);
 	assert(road_building_overlays_.road_previews.empty());
 	assert(road_building_overlays_.steepness_indicators.empty());
@@ -977,20 +974,20 @@ void InteractiveBase::roadb_add_overlay() {
 		const char* name = nullptr;
 
 		if (slope <= -4)
-			name = "images/wui/overlays/roadb_reddown.png";
+			name = "images/wui/overlays/road_building_reddown.png";
 		else if (slope <= -2)
-			name = "images/wui/overlays/roadb_yellowdown.png";
+			name = "images/wui/overlays/road_building_yellowdown.png";
 		else if (slope < 2)
-			name = "images/wui/overlays/roadb_green.png";
+			name = "images/wui/overlays/road_building_green.png";
 		else if (slope < 4)
-			name = "images/wui/overlays/roadb_yellow.png";
+			name = "images/wui/overlays/road_building_yellow.png";
 		else
-			name = "images/wui/overlays/roadb_red.png";
+			name = "images/wui/overlays/road_building_red.png";
 		road_building_overlays_.steepness_indicators[neighb] = g_gr->images().get(name);
 	}
 }
 
-void InteractiveBase::waterwayb_add_overlay() {
+void InteractiveBase::waterway_building_add_overlay() {
 	assert(buildwaterway_);
 	assert(waterway_building_overlays_.road_previews.empty());
 	assert(waterway_building_overlays_.steepness_indicators.empty());
@@ -1007,7 +1004,7 @@ void InteractiveBase::waterwayb_add_overlay() {
 			map.get_neighbour(c, dir, &c);
 			dir = Widelands::get_reverse_dir(dir);
 		}
-		waterway_building_overlays_.road_previews.emplace(c, std::vector<uint8_t>());
+		waterway_building_overlays_.road_previews.insert(std::make_pair(c, std::vector<uint8_t>()));
 		waterway_building_overlays_.road_previews[c].push_back(dir);
 	}
 
@@ -1046,8 +1043,9 @@ void InteractiveBase::waterwayb_add_overlay() {
 		bool has_flag = false;
 		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
 			has_flag = dynamic_cast<const Widelands::Flag*>(imm);
-			if (!(has_flag || (caps & Widelands::BUILDCAPS_FLAG)))
+			if (!(has_flag || (caps & Widelands::BUILDCAPS_FLAG))) {
 				continue;
+			}
 		}
 		if (!has_flag && !(caps & Widelands::MOVECAPS_SWIM) && !(caps & Widelands::BUILDCAPS_FLAG)) {
 			continue;
@@ -1055,23 +1053,25 @@ void InteractiveBase::waterwayb_add_overlay() {
 
 		int32_t slope;
 
-		if (Widelands::WALK_E == dir || Widelands::WALK_NE == dir || Widelands::WALK_SE == dir)
+		if (Widelands::WALK_E == dir || Widelands::WALK_NE == dir || Widelands::WALK_SE == dir) {
 			slope = neighb.field->get_height() - endpos.field->get_height();
-		else
+		} else {
 			slope = endpos.field->get_height() - neighb.field->get_height();
+		}
 
 		const char* name = nullptr;
 
-		if (slope <= -4)
-			name = "images/wui/overlays/waterb_steepdown.png";
-		else if (slope >= 4)
-			name = "images/wui/overlays/waterb_steepup.png";
-		else if (slope <= -2)
-			name = "images/wui/overlays/waterb_down.png";
-		else if (slope >= 2)
-			name = "images/wui/overlays/waterb_up.png";
-		else
-			name = "images/wui/overlays/waterb_even.png";
+		if (slope <= -4) {
+			name = "images/wui/overlays/waterway_building_steepdown.png";
+		} else if (slope >= 4) {
+			name = "images/wui/overlays/waterway_building_steepup.png";
+		} else if (slope <= -2) {
+			name = "images/wui/overlays/waterway_building_down.png";
+		} else if (slope >= 2) {
+			name = "images/wui/overlays/waterway_building_up.png";
+		} else {
+			name = "images/wui/overlays/waterway_building_even.png";
+		}
 		waterway_building_overlays_.steepness_indicators[neighb] = g_gr->images().get(name);
 	}
 }
@@ -1081,13 +1081,13 @@ void InteractiveBase::waterwayb_add_overlay() {
 Remove road building data from road overlay
 ===============
 */
-void InteractiveBase::roadb_remove_overlay() {
+void InteractiveBase::road_building_remove_overlay() {
 	assert(buildroad_);
 	road_building_overlays_.road_previews.clear();
 	road_building_overlays_.steepness_indicators.clear();
 }
 
-void InteractiveBase::waterwayb_remove_overlay() {
+void InteractiveBase::waterway_building_remove_overlay() {
 	assert(buildwaterway_);
 	waterway_building_overlays_.road_previews.clear();
 	waterway_building_overlays_.steepness_indicators.clear();

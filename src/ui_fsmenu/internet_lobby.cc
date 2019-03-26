@@ -136,9 +136,9 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	std::string t_tip =
 	   (boost::format("%s%s%s%s%s%s%s%s%s%s") %
 	    "<rt padding=2><p align=center spacing=3><font bold=yes underline=yes>" % _("User Status") %
-	    "</font></p>" % "<p valign=bottom><img src=images/wui/overlays/roadb_green.png> " %
-	    _("Administrator") % "<br><img src=images/wui/overlays/roadb_yellow.png> " %
-	    _("Registered") % "<br><img src=images/wui/overlays/roadb_red.png> " % _("Unregistered") %
+	    "</font></p>" % "<p valign=bottom><img src=images/wui/overlays/road_building_green.png> " %
+	    _("Administrator") % "<br><img src=images/wui/overlays/road_building_yellow.png> " %
+	    _("Registered") % "<br><img src=images/wui/overlays/road_building_red.png> " % _("Unregistered") %
 	    "</p></rt>")
 	      .str();
 	clientsonline_list_.add_column(22, "*", t_tip);
@@ -274,15 +274,15 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 			const Image* pic;
 			switch (convert_clienttype(client.type)) {
 			case kClientUnregistered:
-				pic = g_gr->images().get("images/wui/overlays/roadb_red.png");
+				pic = g_gr->images().get("images/wui/overlays/road_building_red.png");
 				er.set_picture(0, pic);
 				break;
 			case kClientRegistered:
-				pic = g_gr->images().get("images/wui/overlays/roadb_yellow.png");
+				pic = g_gr->images().get("images/wui/overlays/road_building_yellow.png");
 				er.set_picture(0, pic);
 				break;
 			case kClientSuperuser:
-				pic = g_gr->images().get("images/wui/overlays/roadb_green.png");
+				pic = g_gr->images().get("images/wui/overlays/road_building_green.png");
 				er.set_color(RGBColor(0, 255, 0));
 				er.set_picture(0, pic);
 				break;

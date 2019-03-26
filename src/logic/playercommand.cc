@@ -365,23 +365,20 @@ CmdBuildRoad::CmdBuildRoad(StreamRead& des)
      path(nullptr),
      start(read_coords_32(&des)),
      nsteps(des.unsigned_16()),
-     steps(new char[nsteps]) {
+     steps(new uint8_t[nsteps]) {
 	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		steps[i] = des.unsigned_8();
 	}
 }
 
 CmdBuildRoad::~CmdBuildRoad() {
-	delete path;
-
-	delete[] steps;
 }
 
 void CmdBuildRoad::execute(Game& game) {
 	if (path == nullptr) {
 		assert(steps);
 
-		path = new Path(start);
+		path.reset(new Path(start));
 		for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
 			path->append(game.map(), steps[i]);
 	}
@@ -410,8 +407,8 @@ void CmdBuildRoad::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& m
 			PlayerCommand::read(fr, egbase, mol);
 			start = read_coords_32(&fr, egbase.map().extent());
 			nsteps = fr.unsigned_16();
-			path = nullptr;
-			steps = new char[nsteps];
+			path.reset(nullptr);
+			steps.reset(new uint8_t[nsteps]);
 			for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
 				steps[i] = fr.unsigned_8();
 		} else {
@@ -429,8 +426,9 @@ void CmdBuildRoad::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& 
 	PlayerCommand::write(fw, egbase, mos);
 	write_coords_32(&fw, start);
 	fw.unsigned_16(nsteps);
-	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		fw.unsigned_8(path ? (*path)[i] : steps[i]);
+	}
 }
 
 /*** class Cmd_BuildWaterway ***/
@@ -449,25 +447,23 @@ CmdBuildWaterway::CmdBuildWaterway(StreamRead& des)
      path(nullptr),
      start(read_coords_32(&des)),
      nsteps(des.unsigned_16()),
-     steps(new char[nsteps]) {
+     steps(new uint8_t[nsteps]) {
 	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		steps[i] = des.unsigned_8();
 	}
 }
 
 CmdBuildWaterway::~CmdBuildWaterway() {
-	delete path;
-
-	delete[] steps;
 }
 
 void CmdBuildWaterway::execute(Game& game) {
 	if (path == nullptr) {
 		assert(steps);
 
-		path = new Path(start);
-		for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+		path.reset(new Path(start));
+		for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 			path->append(game.map(), steps[i]);
+		}
 	}
 
 	game.get_player(sender())->build_waterway(*path);
@@ -481,8 +477,9 @@ void CmdBuildWaterway::serialize(StreamWrite& ser) {
 
 	assert(path || steps);
 
-	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		ser.unsigned_8(path ? (*path)[i] : steps[i]);
+	}
 }
 
 constexpr uint16_t kCurrentPacketVersionCmdBuildWaterway = 1;
@@ -494,10 +491,11 @@ void CmdBuildWaterway::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoade
 			PlayerCommand::read(fr, egbase, mol);
 			start = read_coords_32(&fr, egbase.map().extent());
 			nsteps = fr.unsigned_16();
-			path = nullptr;
-			steps = new char[nsteps];
-			for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+			path.reset(nullptr);
+			steps.reset(new uint8_t[nsteps]);
+			for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 				steps[i] = fr.unsigned_8();
+			}
 		} else {
 			throw UnhandledVersionError(
 			   "CmdBuildWaterway", packet_version, kCurrentPacketVersionCmdBuildWaterway);
@@ -513,8 +511,9 @@ void CmdBuildWaterway::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSav
 	PlayerCommand::write(fw, egbase, mos);
 	write_coords_32(&fw, start);
 	fw.unsigned_16(nsteps);
-	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		fw.unsigned_8(path ? (*path)[i] : steps[i]);
+	}
 }
 
 /*** Cmd_FlagAction ***/
@@ -1216,11 +1215,7 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 	fw.signed_32(index_);
-	if (type_ == wwWARE) {
-		fw.unsigned_8(0);
-	} else {
-		fw.unsigned_8(1);
-	}
+	fw.unsigned_8(type_ == wwWARE ? 0 : 1);
 	fw.unsigned_32(max_fill_);
 }
 
@@ -1262,11 +1257,7 @@ void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial_);
 	ser.signed_32(index_);
-	if (type_ == wwWARE) {
-		ser.unsigned_8(0);
-	} else {
-		ser.unsigned_8(1);
-	}
+	ser.unsigned_8(type_ == wwWARE ? 0 : 1);
 	ser.unsigned_32(max_fill_);
 }
 

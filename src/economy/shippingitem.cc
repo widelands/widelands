@@ -66,10 +66,12 @@ void ShippingItem::set_economy(Game& game, Economy* e, WareWorker type) {
 	Worker* worker;
 	get(game, &ware, &worker);
 
-	if (ware && type == wwWARE)
+	if (ware && type == wwWARE) {
 		ware->set_economy(e);
-	if (worker)
+	}
+	if (worker) {
 		worker->set_economy(e, type);
+	}
 }
 
 void ShippingItem::set_location(Game& game, MapObject* obj) {

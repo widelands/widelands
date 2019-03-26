@@ -72,7 +72,7 @@ private:
 
 	void link_into_flags(EditorGameBase&);
 
-	void request_ferry();
+	void request_ferry(uint32_t gametime);
 
 	Ferry* ferry_;
 	Fleet* fleet_;

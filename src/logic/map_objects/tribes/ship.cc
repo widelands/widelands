@@ -770,7 +770,7 @@ uint32_t Ship::calculate_sea_route(Game& game, PortDock& pd, Path* finalpath) co
 	se.conservative_ = false;
 	se.estimator_bias_ = -5 * map->calc_cost(0);
 
-	MapAStar<StepEvalAStar> astar(*map, se);
+	MapAStar<StepEvalAStar> astar(*map, se, wwWORKER);
 
 	astar.push(get_position());
 
@@ -1120,7 +1120,8 @@ Load / Save implementation
 */
 
 constexpr uint8_t kCurrentPacketVersion = 9;
-
+// NOCOM(codereview) Add savegame compatibility
+// NOCOM(Nordfriese): See reply in MapFlagPacket
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")
 		return &taskShip;

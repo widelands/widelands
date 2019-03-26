@@ -98,14 +98,16 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	// Put all wares from the WaresQueues back into the warehouse
 	Warehouse* const warehouse = portdock_->get_warehouse();
 	for (std::unique_ptr<InputQueue>& iq : queues_) {
-		if (iq->get_type() == wwWARE) {
-			warehouse->insert_wares(iq->get_index(), iq->get_filled());
-		} else {
-			assert(iq->get_type() == wwWORKER);
-			WorkersQueue* wq = dynamic_cast<WorkersQueue*>(iq.get());
-			while (iq->get_filled() > 0) {
-				warehouse->incorporate_worker(game, wq->extract_worker());
-			}
+		switch (iq->get_type()) {
+			case wwWARE:
+				warehouse->insert_wares(iq->get_index(), iq->get_filled());
+				break;
+			case wwWORKER:
+				WorkersQueue* wq = dynamic_cast<WorkersQueue*>(iq.get());
+				while (iq->get_filled() > 0) {
+					warehouse->incorporate_worker(game, wq->extract_worker());
+				}
+				break;
 		}
 		iq->cleanup();
 	}
@@ -147,10 +149,12 @@ void ExpeditionBootstrap::set_economy(Economy* new_economy, WareWorker type) {
 
 	// Transfer the wares and workers.
 	for (std::unique_ptr<InputQueue>& iq : queues_) {
-		if (Economy* e = type == wwWARE ? ware_economy_ : worker_economy_)
+		if (Economy* e = type == wwWARE ? ware_economy_ : worker_economy_) {
 			iq->remove_from_economy(*e);
-		if (new_economy)
+		}
+		if (new_economy) {
 			iq->add_to_economy(*new_economy);
+		}
 	}
 
 	(type == wwWARE ? ware_economy_ : worker_economy_) = new_economy;
@@ -161,19 +165,23 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares(Game& game,
                                                         std::vector<Worker*>* return_workers,
                                                         std::vector<WareInstance*>* return_wares) {
 	for (std::unique_ptr<InputQueue>& iq : queues_) {
-		if (iq->get_type() == wwWARE) {
-			const DescriptionIndex ware_index = iq->get_index();
-			for (uint32_t j = 0; j < iq->get_filled(); ++j) {
-				WareInstance* temp = new WareInstance(ware_index, tribe.get_ware_descr(ware_index));
-				temp->init(game);
-				temp->set_location(game, portdock_);
-				return_wares->emplace_back(temp);
+		switch (iq->get_type()) {
+			case wwWARE: {
+				const DescriptionIndex ware_index = iq->get_index();
+				for (uint32_t j = 0; j < iq->get_filled(); ++j) {
+					WareInstance* temp = new WareInstance(ware_index, tribe.get_ware_descr(ware_index));
+					temp->init(game);
+					temp->set_location(game, portdock_);
+					return_wares->emplace_back(temp);
+				}
+				break;
 			}
-		} else {
-			assert(iq->get_type() == wwWORKER);
-			WorkersQueue* wq = dynamic_cast<WorkersQueue*>(iq.get());
-			while (iq->get_filled() > 0) {
-				return_workers->emplace_back(wq->extract_worker());
+			case wwWORKER: {
+				WorkersQueue* wq = dynamic_cast<WorkersQueue*>(iq.get());
+				while (iq->get_filled() > 0) {
+					return_workers->emplace_back(wq->extract_worker());
+				}
+				break;
 			}
 		}
 	}

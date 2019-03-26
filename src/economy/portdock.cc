@@ -123,12 +123,14 @@ PortDock* PortDock::get_dock(Flag& flag) const {
  * change to @ref Fleet.
  */
 void PortDock::set_economy(Economy* e, WareWorker type) {
-	if (e == get_economy(type))
+	if (e == get_economy(type)) {
 		return;
+	}
 
 	PlayerImmovable::set_economy(e, type);
-	if (fleet_)
+	if (fleet_) {
 		fleet_->set_economy(e, type);
+	}
 
 	if (upcast(Game, game, &get_owner()->egbase())) {
 		for (ShippingItem& shipping_item : waiting_) {
@@ -136,8 +138,9 @@ void PortDock::set_economy(Economy* e, WareWorker type) {
 		}
 	}
 
-	if (expedition_bootstrap_)
+	if (expedition_bootstrap_) {
 		expedition_bootstrap_->set_economy(e, type);
+	}
 }
 
 void PortDock::draw(uint32_t, const TextToDraw, const Vector2f&, float, RenderTarget*) {
@@ -392,12 +395,15 @@ uint32_t PortDock::count_waiting(WareWorker waretype, DescriptionIndex wareindex
 		Worker* worker;
 		shipping_item.get(owner().egbase(), &ware, &worker);
 
-		if (waretype == wwWORKER) {
-			if (worker && worker->descr().worker_index() == wareindex)
-				count++;
-		} else {
-			if (ware && ware->descr_index() == wareindex)
-				count++;
+		switch (waretype) {
+			case wwWORKER:
+				if (worker && worker->descr().worker_index() == wareindex)
+					count++;
+				break;
+			case wwWARE:
+				if (ware && ware->descr_index() == wareindex)
+					count++;
+				break;
 		}
 	}
 

@@ -591,13 +591,15 @@ void Economy::split(const std::set<OPtr<Flag>>& flags) {
 
 /**
  * Make sure the request timer is running.
- * We can skip this for flagless economies (expedition ships don't need economy balancing…).
+ * We can skip this for flagless economies (expedition ships don't need economy balancing...).
  */
 void Economy::start_request_timer(int32_t const delta) {
-	if (get_arbitrary_flag())
-		if (upcast(Game, game, &owner_.egbase()))
+	if (!flags_.empty()) {
+		if (upcast(Game, game, &owner_.egbase())) {
 			game->cmdqueue().enqueue(
 			   new CmdCallEconomyBalance(game->get_gametime() + delta, this, request_timerid_));
+		}
+	}
 }
 
 /**

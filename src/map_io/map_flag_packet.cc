@@ -62,7 +62,8 @@ void MapFlagPacket::read(FileSystem& fs,
 				if (!(0 < owner && owner <= nr_players)) {
 					throw GameDataError("Invalid player number: %i.", owner);
 				}
-
+// NOCOM(codereview): Add savegame compatibility
+// NOCOM(Nordfriese): Savegame compatibility means that in games where economies don't have a WareWorker type, all economies need to be loaded and then split into one of each type, and for every PlayerImmovable we need to retrieve the appropriate economies and assign them. I didn't intend to rewrite the whole codebase ;) And if I remember correctly, there was a plan to fix and re-add the anti-congestion algorithm, which will break compatibility anyway. So there´s no need to preserve compatibility using lots of ugly hacking IMHO.
 				const Serial ware_economy_serial = fr.unsigned_32();
 				const Serial worker_economy_serial = fr.unsigned_32();
 

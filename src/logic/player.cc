@@ -543,21 +543,23 @@ Waterway* Player::build_waterway(const Path& path) {
 			for (int32_t i = 0; i < laststep; ++i) {
 				fc = map.get_neighbour(fc, path[i]);
 
-				if (BaseImmovable* const imm = fc.field->get_immovable())
+				if (BaseImmovable* const imm = fc.field->get_immovable()) {
 					if (imm->get_size() >= BaseImmovable::SMALL) {
 						return nullptr;
 					}
+				}
 				if (!map.can_reach_by_water(fc)) {
-					log("%i: building waterway, unswimable\n", player_number());
+					log("%i: building waterway aborted, unswimmable\n", player_number());
 					return nullptr;
 				}
 			}
 			return &Waterway::create(egbase(), *start, *end, path);
-		} else
-			log("%i: building waterway, missed end flag\n", player_number());
-	} else
-		log("%i: building waterway, missed start flag\n", player_number());
-
+		} else {
+			log("%i: building waterway aborted, missing end flag\n", player_number());
+		}
+	} else {
+		log("%i: building waterway aborted, missing start flag\n", player_number());
+	}
 	return nullptr;
 }
 

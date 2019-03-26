@@ -72,7 +72,7 @@ void Waterway::link_into_flags(EditorGameBase& egbase) {
 	RoadBase::link_into_flags(egbase);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
 	if (upcast(Game, game, &egbase)) {
-		request_ferry();
+		request_ferry(egbase.get_gametime());
 	}
 }
 
@@ -83,20 +83,16 @@ bool Waterway::notify_ware(Game& game, FlagId flag) {
 void Waterway::remove_worker(Worker& w) {
 	if (ferry_ == &w) {
 		ferry_ = nullptr;
-
-		// TODO(Nordfriese): We do not issue a new request because this causes a
-		// segfault if this is called because this waterway is being destroyed.
-		// We should somehow check whether we need to issue a new request or not.
-
-		// request_ferry();
+		// Since waterways cannot have any other worker than their own ferry and since a
+		// ferry cannot be disassigned except by destroying its waterway, I assume that
+		// this method is called only on cleanup, so we don't need to issue a new request
 	}
-
 	PlayerImmovable::remove_worker(w);
 }
 
-void Waterway::request_ferry() {
+void Waterway::request_ferry(uint32_t gametime) {
 	Fleet* fleet = new Fleet(get_owner());
-	fleet->request_ferry(this);
+	fleet->request_ferry(this, gametime);
 	fleet->init(get_owner()->egbase());
 }
 
@@ -104,7 +100,7 @@ void Waterway::assign_carrier(Carrier& c, uint8_t) {
 	if (ferry_) {
 		ferry_->set_location(nullptr);
 	}
-	ferry_ = &dynamic_cast<Ferry&>(c);
+	ferry_ = dynamic_cast<Ferry*>(&c);
 }
 
 Fleet* Waterway::get_fleet() const {
@@ -112,13 +108,17 @@ Fleet* Waterway::get_fleet() const {
 }
 
 void Waterway::set_fleet(Fleet* fleet) {
-	// TODO(Nordfriese): We should tell our fleet that we no longer need a ferry from it...
-	// but this causes a segfault during end-of-game cleanup
-	/* if (fleet_ && fleet_ != fleet) {
+	if (fleet_ == fleet) {
+		return;
+	}
+	if (fleet_ && fleet) {
+		// Only if the new fleet is non-null, to avoid problems in end-of-game cleanup
 		if (upcast(Game, game, &get_owner()->egbase())) {
 			fleet_->cancel_ferry_request(*game, this);
 		}
-	} */
+	}
+	// This function should be called only by Fleet code, so we assume that the
+	// new fleet (if non-null) already registered us for a ferry request
 	fleet_ = fleet;
 }
 
@@ -173,7 +173,6 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 	newww.set_owner(get_owner());
 	newww.flags_[FlagStart] = &flag;  //  flagidx will be set on init()
 	newww.flags_[FlagEnd] = &oldend;
-	newww.fleet_ = fleet_;
 	newww.set_path(game, secondpath);
 
 	// Initialize the new waterway
@@ -195,18 +194,18 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 		if (other) {
 			molog("Assigning the ferry to the NEW waterway\n");
 			ferry_->set_destination(game, &newww);
-			request_ferry();
+			request_ferry(game.get_gametime());
 		}
 		else {
 			molog("Assigning the ferry to the OLD waterway\n");
 			ferry_->set_destination(game, this);
-			newww.request_ferry();
+			newww.request_ferry(game.get_gametime());
 		}
 	}
 	else {
 		// this is needed to make sure the ferry finds the way correctly
-		fleet_->rerout_ferry_request(game, this, this);
-		newww.request_ferry();
+		fleet_->reroute_ferry_request(game, this, this);
+		newww.request_ferry(game.get_gametime());
 	}
 
 	//  Make sure wares waiting on the original endpoint flags are dealt with.

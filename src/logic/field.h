@@ -178,7 +178,7 @@ struct Field {
 		owner_info_and_selections = (owner_info_and_selections & ~Border_Bitmask) | (b << Border_Bit);
 	}
 
-	uint8_t get_road(uint8_t dir) const {
+	RoadType get_road(uint8_t dir) const {
 		switch (dir) {
 			case WALK_E:
 				return road_east;
@@ -190,7 +190,7 @@ struct Field {
 				throw wexception("Queried road going in invalid direction %i", dir);
 		}
 	}
-	void set_road(uint8_t dir, uint8_t type) {
+	void set_road(uint8_t dir, RoadType type) {
 		switch (dir) {
 			case WALK_E:
 				road_east = type;
@@ -260,9 +260,9 @@ private:
 	uint8_t caps = 0U;
 	uint8_t max_caps = 0U;
 
-	uint8_t road_east = 0U;
-	uint8_t road_southeast = 0U;
-	uint8_t road_southwest = 0U;
+	RoadType road_east = RoadType::kNone;
+	RoadType road_southeast = RoadType::kNone;
+	RoadType road_southwest = RoadType::kNone;
 
 	Height height = 0U;
 	int8_t brightness = 0;
@@ -279,9 +279,9 @@ private:
 
 // Check that Field is tightly packed.
 #ifndef WIN32
-static_assert(sizeof(Field) == sizeof(void*) * 2 + 13, "Field is not tightly packed.");
+static_assert(sizeof(Field) == sizeof(void*) * 2 + sizeof(RoadType) * 3 + 10, "Field is not tightly packed.");
 #else
-static_assert(sizeof(Field) <= sizeof(void*) * 2 + 14, "Field is not tightly packed.");
+static_assert(sizeof(Field) <= sizeof(void*) * 2 + sizeof(RoadType) * 3 + 11, "Field is not tightly packed.");
 #endif
 }  // namespace Widelands
 

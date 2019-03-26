@@ -175,12 +175,15 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 	//  Target and economy should be set. Same is true for callback stuff.
 
 	assert(type_ == wwWARE || type_ == wwWORKER);
-	if (type_ == wwWARE) {
-		assert(game.tribes().ware_exists(index_));
-		fw.c_string(game.tribes().get_ware_descr(index_)->name());
-	} else if (type_ == wwWORKER) {
-		assert(game.tribes().worker_exists(index_));
-		fw.c_string(game.tribes().get_worker_descr(index_)->name());
+	switch (type_) {
+		case wwWARE:
+			assert(game.tribes().ware_exists(index_));
+			fw.c_string(game.tribes().get_ware_descr(index_)->name());
+			break;
+		case wwWORKER:
+			assert(game.tribes().worker_exists(index_));
+			fw.c_string(game.tribes().get_worker_descr(index_)->name());
+			break;
 	}
 
 	fw.unsigned_32(count_);
@@ -385,20 +388,25 @@ void Request::start_transfer(Game& game, Supply& supp) {
 	ss.unsigned_32(supp.get_position(game)->serial());
 
 	Transfer* t;
-	if (get_type() == wwWORKER) {
-		//  Begin the transfer of a soldier or worker.
-		//  launch_worker() creates or starts the worker
-		Worker& s = supp.launch_worker(game, *this);
-		ss.unsigned_32(s.serial());
-		t = new Transfer(game, *this, s);
-	} else {
-		//  Begin the transfer of an ware. The ware itself is passive.
-		//  launch_ware() ensures the WareInstance is transported out of the
-		//  warehouse. Once it's on the flag, the flag code will decide what to
-		//  do with it.
-		WareInstance& ware = supp.launch_ware(game, *this);
-		ss.unsigned_32(ware.serial());
-		t = new Transfer(game, *this, ware);
+	switch (get_type()) {
+		case wwWORKER: {
+			//  Begin the transfer of a soldier or worker.
+			//  launch_worker() creates or starts the worker
+			Worker& s = supp.launch_worker(game, *this);
+			ss.unsigned_32(s.serial());
+			t = new Transfer(game, *this, s);
+			break;
+		}
+		case wwWARE: {
+			//  Begin the transfer of an ware. The ware itself is passive.
+			//  launch_ware() ensures the WareInstance is transported out of the
+			//  warehouse. Once it's on the flag, the flag code will decide what to
+			//  do with it.
+			WareInstance& ware = supp.launch_ware(game, *this);
+			ss.unsigned_32(ware.serial());
+			t = new Transfer(game, *this, ware);
+			break;
+		}
 	}
 
 	transfers_.push_back(t);

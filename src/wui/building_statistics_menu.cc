@@ -324,12 +324,8 @@ bool BuildingStatisticsMenu::own_building_is_valid(const Widelands::Player& play
                                                    bool map_allows_seafaring,
                                                    bool map_allows_waterways) const {
 	const BuildingDescr& descr = *player.tribe().get_building_descr(index);
-	// Skip seafaring buildings if not needed
-	if (descr.needs_seafaring() && !map_allows_seafaring &&
-	    player.get_building_statistics(index).empty()) {
-		return false;
-	}
-	if (descr.needs_waterways() && !map_allows_waterways &&
+
+	if (!descr.meets_requirements(map_allows_seafaring, map_allows_waterways) &&
 	    player.get_building_statistics(index).empty()) {
 		return false;
 	}

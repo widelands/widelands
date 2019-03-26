@@ -126,10 +126,7 @@ public:
 
 	//  road building
 	bool is_building_road() const {
-		return buildroad_;
-	}
-	Widelands::CoordPath* get_build_road() {
-		return buildroad_;
+		return buildroad_ != nullptr;
 	}
 	void start_build_road(Widelands::Coords start, Widelands::PlayerNumber player);
 	void abort_build_road();
@@ -139,10 +136,7 @@ public:
 	Widelands::Coords get_build_road_end() const;
 
 	bool is_building_waterway() const {
-		return buildwaterway_;
-	}
-	Widelands::CoordPath* get_build_waterway() {
-		return buildwaterway_;
+		return buildwaterway_ != nullptr;
 	}
 	void start_build_waterway(Widelands::Coords start, Widelands::PlayerNumber player);
 	void abort_build_waterway();
@@ -267,10 +261,10 @@ protected:
 private:
 	int32_t stereo_position(Widelands::Coords position_map);
 	void resize_chat_overlay();
-	void roadb_add_overlay();
-	void roadb_remove_overlay();
-	void waterwayb_add_overlay();
-	void waterwayb_remove_overlay();
+	void road_building_add_overlay();
+	void road_building_remove_overlay();
+	void waterway_building_add_overlay();
+	void waterway_building_remove_overlay();
 	void cmd_map_object(const std::vector<std::string>& args);
 	void cmd_lua(const std::vector<std::string>& args);
 
@@ -319,10 +313,10 @@ private:
 	uint32_t frametime_;        //  in millseconds
 	uint32_t avg_usframetime_;  //  in microseconds!
 
-	Widelands::CoordPath* buildroad_;  //  path for the new road
+	std::unique_ptr<Widelands::CoordPath> buildroad_;  //  path for the new road
 	Widelands::PlayerNumber road_build_player_;
 
-	Widelands::CoordPath* buildwaterway_;
+	std::unique_ptr<Widelands::CoordPath> buildwaterway_;
 	Widelands::PlayerNumber waterway_build_player_;
 
 	UI::UniqueWindow::Registry debugconsole_;

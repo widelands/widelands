@@ -75,7 +75,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					road.set_owner(egbase.get_player(player_index));
 					road.wallet_ = fr.unsigned_32();
 					road.last_wallet_charge_ = fr.unsigned_32();
-					road.type_ = fr.unsigned_32();
+					road.type_ = static_cast<RoadType>(fr.unsigned_8());
 					{
 						uint32_t const flag_0_serial = fr.unsigned_32();
 						try {
@@ -108,12 +108,11 @@ void MapRoaddataPacket::read(FileSystem& fs,
 							throw GameDataError("step #%" PRIuS ": %s", nr_steps - i, e.what());
 						}
 					road.set_path(egbase, p);
+					road.idle_index_ = p.get_nsteps() / 2;
 
 					//  Now that all rudimentary data is set, init this road. Then
 					//  overwrite the initialization values.
 					road.link_into_flags(game);
-
-					road.idle_index_ = fr.unsigned_32();
 
 					uint32_t const count = fr.unsigned_32();
 					if (!count)
@@ -193,7 +192,7 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				fw.unsigned_32(r->wallet_);
 				fw.unsigned_32(r->last_wallet_charge_);
 
-				fw.unsigned_32(r->type_);
+				fw.unsigned_8(r->type_);
 
 				//  serial of flags
 				assert(mos.is_object_known(*r->flags_[0]));
@@ -212,8 +211,6 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				fw.unsigned_16(nr_steps);
 				for (Path::StepVector::size_type i = 0; i < nr_steps; ++i)
 					fw.unsigned_8(path[i]);
-
-				fw.unsigned_32(r->idle_index_);  //  TODO(unknown): do not save this
 
 				fw.unsigned_32(r->carrier_slots_.size());
 

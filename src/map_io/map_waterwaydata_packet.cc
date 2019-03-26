@@ -45,8 +45,9 @@ void MapWaterwaydataPacket::read(FileSystem& fs,
                              EditorGameBase& egbase,
                              bool const skip,
                              MapObjectLoader& mol) {
-	if (skip)
+	if (skip) {
 		return;
+	}
 
 	FileRead fr;
 	try {
@@ -60,16 +61,17 @@ void MapWaterwaydataPacket::read(FileSystem& fs,
 		if (packet_version == kCurrentPacketVersion) {
 			const Map& map = egbase.map();
 			PlayerNumber const nr_players = map.get_nrplayers();
+			Game& game = dynamic_cast<Game&>(egbase);
 			while (!fr.end_of_file()) {
 				Serial const serial = fr.unsigned_32();
 				try {
-					Game& game = dynamic_cast<Game&>(egbase);
 					Waterway& ww = mol.get<Waterway>(serial);
-					if (mol.is_object_loaded(ww))
+					if (mol.is_object_loaded(ww)) {
 						throw GameDataError("already loaded");
+					}
 					PlayerNumber player_index = fr.unsigned_8();
 					if (!(0 < player_index && player_index <= nr_players)) {
-						throw GameDataError("Invalid player number: %i.", player_index);
+						throw GameDataError("Invalid player number: %i.", static_cast<unsigned int>(player_index));
 					}
 
 					ww.set_owner(egbase.get_player(player_index));
@@ -95,22 +97,23 @@ void MapWaterwaydataPacket::read(FileSystem& fs,
 					ww.cost_[0] = fr.unsigned_32();
 					ww.cost_[1] = fr.unsigned_32();
 					Path::StepVector::size_type const nr_steps = fr.unsigned_16();
-					if (!nr_steps)
+					if (!nr_steps) {
 						throw GameDataError("nr_steps = 0");
+					}
 					Path p(ww.flags_[0]->get_position());
-					for (Path::StepVector::size_type i = nr_steps; i; --i)
+					for (Path::StepVector::size_type i = nr_steps; i; --i) {
 						try {
 							p.append(map, read_direction_8(&fr));
 						} catch (const WException& e) {
 							throw GameDataError("step #%" PRIuS ": %s", nr_steps - i, e.what());
 						}
+					}
 					ww.set_path(egbase, p);
+					ww.idle_index_ = p.get_nsteps() / 2;
 
 					//  Now that all rudimentary data is set, init this waterway. Then
 					//  overwrite the initialization values.
 					ww.link_into_flags(game);
-
-					ww.idle_index_ = fr.unsigned_32();
 
 					uint32_t fleet_serial = fr.unsigned_32();
 					uint32_t ferry_serial = fr.unsigned_32();
@@ -153,15 +156,15 @@ void MapWaterwaydataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 
 	const Map& map = egbase.map();
 	const Field& fields_end = map[map.max_index()];
-	for (Field const* field = &map[0]; field < &fields_end; ++field)
-		if (upcast(Waterway const, r, field->get_immovable()))
+	for (Field const* field = &map[0]; field < &fields_end; ++field) {
+		if (upcast(Waterway const, r, field->get_immovable())) {
 			if (!mos.is_object_saved(*r)) {
 				assert(mos.is_object_known(*r));
 
 				fw.unsigned_32(mos.get_object_file_index(*r));
 
 				//  First, write PlayerImmovable Stuff
-				//  Theres only the owner
+				//  There's only the owner
 				fw.unsigned_8(r->owner().player_number());
 
 				//  serial of flags
@@ -179,17 +182,17 @@ void MapWaterwaydataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 				const Path& path = r->path_;
 				const Path::StepVector::size_type nr_steps = path.get_nsteps();
 				fw.unsigned_16(nr_steps);
-				for (Path::StepVector::size_type i = 0; i < nr_steps; ++i)
+				for (Path::StepVector::size_type i = 0; i < nr_steps; ++i) {
 					fw.unsigned_8(path[i]);
-
-				fw.unsigned_32(r->idle_index_);  //  TODO(unknown): do not save this
+				}
 
 				fw.unsigned_32(r->fleet_ ? mos.get_object_file_index(*r->fleet_) : 0);
 				fw.unsigned_32(r->ferry_ ? mos.get_object_file_index(*r->ferry_) : 0);
 
 				mos.mark_object_as_saved(*r);
 			}
-
+		}
+	}
 	fw.write(fs, "binary/waterway_data");
 }
 }
