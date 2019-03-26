@@ -43,7 +43,7 @@ std::vector<std::string> MapObjectProgram::split_string(const std::string& s, co
 }
 
 
-unsigned int MapObjectProgram::read_number(const std::string& input, int min_value, int max_value) {
+unsigned int MapObjectProgram::read_int(const std::string& input, int min_value, int max_value) {
 	unsigned int  result = 0U;
 	char* endp;
 	long int const value = strtol(input.c_str(), &endp, 0);
@@ -61,7 +61,7 @@ unsigned int MapObjectProgram::read_number(const std::string& input, int min_val
 }
 
 unsigned int MapObjectProgram::read_positive(const std::string& input, int max_value) {
-	return read_number(input, 1, max_value);
+	return read_int(input, 1, max_value);
 }
 
 MapObjectProgram::ProgramParseInput MapObjectProgram::parse_program_string(const std::string& line) {
@@ -101,7 +101,7 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(const 
 	}
 	result.animation = descr.get_animation(animation_name);
 
-	if (arguments.size() == 2) {  //  The next parameter is the duration.
+	if (arguments.size() == 2) {
 		result.duration = read_positive(arguments.at(1));
 	}
 	return result;

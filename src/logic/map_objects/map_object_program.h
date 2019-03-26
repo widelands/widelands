@@ -20,17 +20,17 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_PROGRAM_H
 #define WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_PROGRAM_H
 
-#include <cstring>
+#include <limits>
 #include <string>
+#include <vector>
 
-#include "base/macros.h"
-
-#include "logic/map_objects/buildcost.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 
 struct MapObjectDescr;
 
+/// Superclass for Worker, immovable and productionsite programs. Includes a program name and diverse parsing convenience functions. The creation and execution of program actions is left to the sub-classes.
 struct MapObjectProgram {
 	std::string name() const;
 
@@ -38,33 +38,55 @@ struct MapObjectProgram {
 	virtual ~MapObjectProgram() = default;
 
 protected:
-	/// Split a string by separators.
+	/// Splits a string by separators.
 	/// \note This ignores empty elements, so do not use this for example to split
 	/// a string with newline characters into lines, because it would ignore empty
 	/// lines.
 	static std::vector<std::string> split_string(const std::string&, char const* separators);
 
-	static unsigned int read_number(const std::string& input, int min_value, int max_value = std::numeric_limits<int32_t>::max());
+	/// Reads an int value from a string. Throws a GameDataError if 'min_value' or 'max_value' are exceeded
+	static unsigned int read_int(const std::string& input, int min_value, int max_value = std::numeric_limits<int32_t>::max());
+	/// Same as 'read_int', with 'min_value' == 1
 	static unsigned int read_positive(const std::string& input, int max_value = std::numeric_limits<int32_t>::max());
 
+	/**
+	 * @brief Reads a key-value pair from a string using the given separator, e.g. "attrib:tree", "meat:2", "return=skipped unless economy needs meal"
+	 * @param input The string to parse
+	 * @param separator The separator for splitting the string, e.g. ':' or '='
+	 * @param default_value A default to assign to the right-hand value if the separator is not found
+	 * @param expected_key If this is not empty, the left-hand key must match this string
+	 * @return A key, value pair
+	 */
 	static const std::pair<std::string, std::string> read_key_value_pair(const std::string& input, const char separator, const std::string& default_value = "", const std::string& expected_key = "");
 
+	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped unless economy needs meal"
 	struct ProgramParseInput {
+		/// Program name, e.g. "return"
 		std::string name;
+		/// Program arguments, e.g. { "skipped", "unless", "economy", "needs", "meal" }
 		std::vector<std::string> arguments;
 	};
+	/// Reads the program name and arguments from a string
 	static ProgramParseInput parse_program_string(const std::string& line);
 
+	/// Animation information
 	struct AnimationParameters {
+		/// Animation ID
 		uint32_t animation = 0;
-		Duration duration = 0; //  forever
+		/// Animation duration. 0 will play the animation forever.
+		Duration duration = 0;
 	};
+	/// Parses the arguments for an animation action, e.g. { "working", "24000" }. If 'is_idle_allowed' == false, throws a GameDataError if the animation is called "idle".
 	static AnimationParameters parse_act_animate(const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed);
 
+	/// Sound effect information
 	struct PlaySoundParameters {
+		/// Sound effect string ID
 		std::string name;
+		/// Sound effect priority
 		uint8_t priority = 0;
 	};
+	/// Parses the arguments for a play_sound action, e.g. { "sound/smiths", "sharpening", "120" }
 	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments, uint8_t default_priority);
 
 private:

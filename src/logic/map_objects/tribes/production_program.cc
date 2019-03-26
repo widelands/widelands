@@ -1027,7 +1027,7 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::strin
 	} else {
 		throw GameDataError("Expected health|attack|defense|evade after 'soldier' but found '%s'", arguments.at(1).c_str());
 	}
-	level_ = read_number(arguments.at(2), 0);
+	level_ = read_int(arguments.at(2), 0);
 }
 
 void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps) const {
@@ -1091,7 +1091,7 @@ ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments)
 	} else {
 		throw GameDataError("Expected health|attack|defense|evade after 'soldier' but found '%s'", arguments.at(1).c_str());
 	}
-	level_ = read_number(arguments.at(2), 0);
+	level_ = read_int(arguments.at(2), 0);
 	target_level_ = read_positive(arguments.at(3));
 }
 

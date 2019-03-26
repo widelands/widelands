@@ -123,7 +123,6 @@ struct MapObjectDescr {
 		return type_;
 	}
 
-	uint32_t get_animation(char const* const anim) const;
 	uint32_t get_animation(const std::string& animname) const;
 	uint32_t main_animation() const;
 	std::string get_animation_name(uint32_t) const;  ///< needed for save, debug
