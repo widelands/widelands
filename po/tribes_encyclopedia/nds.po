@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-03 08:19+0000\n"
-"PO-Revision-Date: 2019-03-03 11:02+0000\n"
+"POT-Creation-Date: 2019-03-18 09:59+0000\n"
+"PO-Revision-Date: 2019-03-22 11:29+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -371,6 +371,7 @@ msgstr "Spinnt Spinnenstoff för Husen un Seils, un Kluften, um Soldaten uttorü
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:13
 #: ../../data/tribes/buildings/productionsites/empire/well/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:13
 msgctxt "building"
 msgid "Draws water out of the deep."
 msgstr "Hisst Water ut de Deepde."
@@ -466,7 +467,7 @@ msgstr "De Wille Extensmede is dat middelste Huus vun eener Riege vun dree Husen
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
 #: ../../data/tribes/scripting/help/global_helptexts.lua:69
@@ -2339,7 +2340,7 @@ msgid ""
 msgstr "Wat Anföhrer Arldor antwoordt hett, as he fraggt wurr, waarum sien Volk keen Soltwater drinken kann"
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The well needs %s on average to produce one bucket of water."
@@ -3240,7 +3241,7 @@ msgstr "Gauheid vum Speel anhogen"
 #: ../../data/tribes/scripting/help/controls.lua:44
 msgctxt "hotkey"
 msgid "Page Up"
-msgstr "Bild rup"
+msgstr "Bill rup"
 
 #: ../../data/tribes/scripting/help/controls.lua:46
 msgid "Decrease game speed"
@@ -3251,7 +3252,7 @@ msgstr "Gauheid vum Speel minnern"
 #: ../../data/tribes/scripting/help/controls.lua:46
 msgctxt "hotkey"
 msgid "Page Down"
-msgstr "Bild runner"
+msgstr "Bill runner"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -3378,7 +3379,7 @@ msgstr "Strg + F11"
 
 #: ../../data/tribes/scripting/help/controls.lua:79
 msgid "Take a screenshot"
-msgstr "Foto vum Bildschirm maken"
+msgstr "Foto vum Billschirm maken"
 
 #. TRANSLATORS: This is an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:82

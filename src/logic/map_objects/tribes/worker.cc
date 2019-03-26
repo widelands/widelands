@@ -2140,6 +2140,14 @@ void Worker::start_task_fetchfromflag(Game& game) {
 }
 
 void Worker::fetchfromflag_update(Game& game, State& state) {
+	std::string signal = get_signal();
+	if (signal.size()) {
+		if (signal == "location") {
+			molog("[fetchfromflag]: Building disappeared, become fugitive\n");
+			return pop_task(game);
+		}
+	}
+
 	PlayerImmovable& employer = *get_location(game);
 	PlayerImmovable* const location =
 	   dynamic_cast<PlayerImmovable*>(game.map().get_immovable(get_position()));
