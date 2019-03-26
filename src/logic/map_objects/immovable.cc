@@ -170,6 +170,8 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 			action = new ActRemove(arguments.get(), *immovable);
 		} else if (parts[0] == "seed") {
 			action = new ActSeed(arguments.get(), *immovable);
+		} else if (parts[0] == "playsound") {
+			action = new ActPlaySound(arguments.get(), *immovable);
 		} else if (parts[0] == "construct") {
 			action = new ActConstruct(arguments.get(), *immovable);
 		} else {
@@ -786,6 +788,34 @@ void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) con
 	immovable.start_animation(game, id_);
 	immovable.program_step(
 	   game, duration_ ? 1 + game.logic_rand() % duration_ + game.logic_rand() % duration_ : 0);
+}
+
+ImmovableProgram::ActPlaySound::ActPlaySound(char* parameters, const ImmovableDescr&) {
+	try {
+		bool reached_end;
+		std::string name = next_word(parameters, reached_end);
+
+		if (!reached_end) {
+			char* endp;
+			unsigned long long int const value = strtoull(parameters, &endp, 0);
+			priority = value;
+			if (*endp || priority != value)
+				throw GameDataError("expected %s but found \"%s\"", "priority", parameters);
+		} else
+			priority = 127;
+
+		fx = g_sh->register_fx(SoundType::kAmbient, name);
+	} catch (const WException& e) {
+		throw GameDataError("playsound: %s", e.what());
+	}
+}
+
+/** Demand from the g_sound_handler to play a certain sound effect.
+ * Whether the effect actually gets played
+ * is decided only by the sound server*/
+void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) const {
+	Notifications::publish(NoteSound(SoundType::kAmbient, fx, immovable.get_position(), priority));
+	immovable.program_step(game);
 }
 
 ImmovableProgram::ActTransform::ActTransform(char* parameters, ImmovableDescr& descr) {

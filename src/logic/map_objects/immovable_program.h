@@ -128,6 +128,28 @@ struct ImmovableProgram {
 		uint8_t probability;
 	};
 
+	/// Plays a sound effect.
+	///
+	/// Parameter syntax:
+	///    parameters ::= directory sound [priority]
+	/// Parameter semantics:
+	///    path:
+	///       The directory of the sound files, relative to the datadir, followed
+	///       by the base filename of a sound effect (relative to the directory).
+	///    priority:
+	///       An integer. If omitted, 127 is used.
+	///
+	/// Plays the specified sound effect with the specified priority. Whether the
+	/// sound effect is actually played is determined by the sound handler.
+	struct ActPlaySound : public Action {
+		ActPlaySound(char* parameters, const ImmovableDescr&);
+		void execute(Game&, Immovable&) const override;
+
+	private:
+		FxId fx;
+		uint8_t priority;
+	};
+
 	/**
 	 * Puts the immovable into construction mode.
 	 *
