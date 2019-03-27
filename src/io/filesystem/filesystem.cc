@@ -265,14 +265,14 @@ std::string FileSystem::get_homedir() {
 FilenameSet FileSystem::get_sequential_files(const std::string& directory, const std::string& basename, const std::string& extension) const {
 	// Get numbered files
 	boost::regex re(basename + "_\\d+\\." + extension);
-	FilenameSet files = filter_directory(directory, [&re](const std::string& fn) {
-		return boost::regex_match(FileSystem::fs_filename(fn.c_str()), re);
+	FilenameSet files = filter_directory(directory, [&re](const std::string& filename) {
+		return boost::regex_match(FileSystem::fs_filename(filename.c_str()), re);
 	});
 
 	if (files.empty()) {
 		// Maybe we have only 1 file without number
-		files = filter_directory(directory, [&re, basename, extension](const std::string& fn) {
-			return fn == (basename + "." + extension);
+		files = filter_directory(directory, [&re, basename, extension](const std::string& filename) {
+			return filename == (basename + "." + extension);
 		});
 	}
 	if (files.empty()) {

@@ -38,16 +38,14 @@
 #include "graphic/image_cache.h"
 #include "graphic/playercolor.h"
 #include "graphic/texture.h"
+#include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/game_data_error.h"
 #include "scripting/lua_table.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 
 namespace {
-// The mipmap scales supported by the engine.
-// Ensure that this always matches supported_scales in data/scripting/mapobjects.lua.
-const std::set<float> kSupportedScales { 0.5, 1, 2, 4};
-
 /**
  * Implements the Animation interface for an animation that is unpacked on disk, that
  * is every frame and every pc color frame is an singular file on disk.
@@ -55,7 +53,7 @@ const std::set<float> kSupportedScales { 0.5, 1, 2, 4};
 class NonPackedAnimation : public Animation {
 public:
 	struct MipMapEntry {
-		explicit MipMapEntry(float scale, const LuaTable& table);
+		explicit MipMapEntry(std::vector<std::string> files);
 
 		// Whether this image set has player color masks provided
 		bool has_playercolor_masks;
@@ -121,17 +119,9 @@ private:
 	bool play_once_;
 };
 
-NonPackedAnimation::MipMapEntry::MipMapEntry(float scale, const LuaTable& table) : has_playercolor_masks(false) {
-	if (scale <= 0.0f) {
-		throw wexception("Animation scales must be positive numbers. Found %.2f", scale);
-	}
-
-	// TODO(GunChleoc): We want to rename these from "pictures" to "files", because we'll have spritesheets etc. in the future, and this naming will be clearer.
-	// We don't want to convert them in bulk right now though - it will take care of itself as we convert to mipmaps.
-	image_files = (table.has_key("files") ? table.get_table("files") : table.get_table("pictures"))->array_entries<std::string>();
-
+NonPackedAnimation::MipMapEntry::MipMapEntry(std::vector<std::string> files) : has_playercolor_masks(false), image_files(files) {
 	if (image_files.empty()) {
-		throw wexception("Animation without image files. For a scale of 1.0, the template should look similar to this:"
+		throw Widelands::GameDataError("Animation without image files. For a scale of 1.0, the template should look similar to this:"
 		                 " 'directory/idle_1_??.png' for 'directory/idle_1_00.png' etc.");
 	}
 
@@ -141,7 +131,7 @@ NonPackedAnimation::MipMapEntry::MipMapEntry(float scale, const LuaTable& table)
 			has_playercolor_masks = true;
 			playercolor_mask_image_files.push_back(image_file);
 		} else if (has_playercolor_masks) {
-			throw wexception("Animation is missing player color file: %s", image_file.c_str());
+			throw Widelands::GameDataError("Animation is missing player color file: %s", image_file.c_str());
 		}
 	}
 
@@ -167,23 +157,44 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 			play_once_ = table.get_bool("play_once");
 		}
 
-		if (table.has_key("mipmap")) {
-			std::unique_ptr<LuaTable> mipmaps_table = table.get_table("mipmap");
-			for (const int key : mipmaps_table->keys<int>()) {
-				std::unique_ptr<LuaTable> current_scale_table = mipmaps_table->get_table(key);
-				const float current_scale = current_scale_table->get_double("scale");
-				if (kSupportedScales.count(current_scale) != 1) {
-					std::string supported_scales = "";
-					for (const float supported_scale : kSupportedScales) {
-						supported_scales = (boost::format("%s %.1f") % supported_scales % supported_scale).str();
-					}
-					throw wexception(
-						"Animation has unsupported scale '%.1f' in mipmap - supported scales are:%s", current_scale, supported_scales.c_str());
-				}
-				mipmaps_.insert(std::make_pair(current_scale, std::unique_ptr<MipMapEntry>(new MipMapEntry(current_scale, *current_scale_table))));
-			}
+		// Get image files
+		if (table.has_key("pictures")) {
+			// TODO(GunChleoc): Old code - remove this option once conversion has been completed
+			mipmaps_.insert(std::make_pair(
+								1.0f,
+								std::unique_ptr<MipMapEntry>(new MipMapEntry(table.get_table("pictures")->array_entries<std::string>()))));
 		} else {
-			mipmaps_.insert(std::make_pair(1.0f, std::unique_ptr<MipMapEntry>(new MipMapEntry(1.0f, table))));
+			if (!table.has_key("basename") || !table.has_key("directory")) {
+				throw Widelands::GameDataError("Animation did not define both a directory and a basename for its image files");
+			}
+			const std::string basename = table.get_string("basename");
+			const std::string directory = table.get_string("directory");
+
+			auto add_scale = [this, basename, directory](float scale_as_float, const std::string& scale_as_string) {
+				FilenameSet filenames = g_fs->get_sequential_files(directory, basename + (scale_as_string.empty() ? "" : "_" + scale_as_string), "png");
+				if (!filenames.empty()) {
+					// TODO(GunChleoc): This is ugly. We're getting a set from the file system, but we need a vector
+					std::vector<std::string> fn;
+					for (const std::string& filename : filenames) {
+						fn.push_back(filename);
+					}
+					mipmaps_.insert(std::make_pair(scale_as_float, std::unique_ptr<MipMapEntry>(new MipMapEntry(fn))));
+				}
+			};
+			add_scale(0.5f, "0.5");
+			add_scale(1.0f, "1");
+			add_scale(2.0f, "2");
+			add_scale(4.0f, "4");
+
+			if (mipmaps_.count(1.0f) == 0) {
+				// There might be only 1 scale
+				add_scale(1.0f, "");
+				if (mipmaps_.count(1.0f) == 0) {
+					// No files found at all
+					throw Widelands::GameDataError(
+						"Animation has no images for mandatory scale '1' in mipmap - supported scales are: 0.5, 1, 2, 4");
+				}
+			}
 		}
 
 		// Frames

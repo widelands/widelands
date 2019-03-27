@@ -132,10 +132,11 @@ static int L_dirname(lua_State* L) {
 /* RST
 .. function:: list_files(filename_template)
 
-   Lists the full path for all files that fit the template pattern.
+   **DEPRECATED**. Lists the full path for all files that fit the template pattern.
    Use ? as placeholders for numbers, e.g. 'directory/idle\_??.png' will list
    'directory/idle_00.png', 'directory/idle_01.png' etc, and
    'directory/idle.png' will just list 'directory/idle.png'.
+   Lua Tables need lots of memory, so only use this when you have to.
 
    :type filename_template: class:`string`
    :arg filename_template: The filename template to use for the listing.
@@ -165,7 +166,7 @@ static int L_list_files(lua_State* L) {
 .. function:: list_directory(filename)
 
    **DEPRECATED**. Returns all file names contained in the given directory.
-   Lua Tables leed lots of memory, so only use this when you have to.
+   Lua Tables need lots of memory, so only use this when you have to.
 
    :type filename: class:`string`
    :arg filename: The directory to read.
