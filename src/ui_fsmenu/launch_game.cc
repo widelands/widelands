@@ -77,8 +77,6 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 	   boost::bind(&FullscreenMenuLaunchGame::clicked_back, boost::ref(*this)));
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchGame::clicked_ok, boost::ref(*this)));
 
-	peaceful_.set_enabled(settings_->can_change_map());
-
 	lua_ = new LuaInterface();
 
 	title_.set_fontsize(fs_big());
@@ -86,6 +84,14 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 
 FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
 	delete lua_;
+}
+
+void FullscreenMenuLaunchGame::update_peaceful_mode() {
+	bool scenario_or_savegame = settings_->settings().scenario || settings_->settings().savegame;
+	peaceful_.set_enabled(!scenario_or_savegame && settings_->can_change_map());
+	if (scenario_or_savegame) {
+		peaceful_.set_state(false);
+	}
 }
 
 bool FullscreenMenuLaunchGame::init_win_condition_label() {

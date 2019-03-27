@@ -264,6 +264,7 @@ bool FullscreenMenuLaunchSPG::select_map() {
 	safe_place_for_host(nr_players_);
 	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
 	update_win_conditions();
+	update_peaceful_mode();
 	update(true);
 	return true;
 }

@@ -57,6 +57,9 @@ protected:
 	/// Creates a blank label/tooltip and returns 'false' otherwise.
 	bool init_win_condition_label();
 
+	/// Enables or disables the peaceful mode checkbox.
+	void update_peaceful_mode();
+
 	/// Loads all win conditions that can be played with the map into the selection dropdown.
 	/// Disables the dropdown if the map is a scenario.
 	void update_win_conditions();

@@ -423,6 +423,7 @@ void FullscreenMenuLaunchMPG::refresh() {
 	change_map_or_save_.set_enabled(settings_->can_change_map());
 	change_map_or_save_.set_visible(settings_->can_change_map());
 
+	update_peaceful_mode();
 	peaceful_.set_state(settings_->is_peaceful_mode());
 
 	if (!settings_->can_change_map() && !init_win_condition_label()) {
