@@ -170,15 +170,11 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 			const std::string basename = table.get_string("basename");
 			const std::string directory = table.get_string("directory");
 
+			// List files for the given scale, and if we have any, add a mipmap entry for them.
 			auto add_scale = [this, basename, directory](float scale_as_float, const std::string& scale_as_string) {
-				FilenameSet filenames = g_fs->get_sequential_files(directory, basename + (scale_as_string.empty() ? "" : "_" + scale_as_string), "png");
+				std::vector<std::string> filenames = g_fs->get_sequential_files(directory, basename + (scale_as_string.empty() ? "" : "_" + scale_as_string), "png");
 				if (!filenames.empty()) {
-					// TODO(GunChleoc): This is ugly. We're getting a set from the file system, but we need a vector
-					std::vector<std::string> fn;
-					for (const std::string& filename : filenames) {
-						fn.push_back(filename);
-					}
-					mipmaps_.insert(std::make_pair(scale_as_float, std::unique_ptr<MipMapEntry>(new MipMapEntry(fn))));
+					mipmaps_.insert(std::make_pair(scale_as_float, std::unique_ptr<MipMapEntry>(new MipMapEntry(filenames))));
 				}
 			};
 			add_scale(0.5f, "0.5");

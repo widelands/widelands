@@ -262,10 +262,11 @@ std::string FileSystem::get_homedir() {
 	return homedir;
 }
 
-FilenameSet FileSystem::get_sequential_files(const std::string& directory, const std::string& basename, const std::string& extension) const {
+// Returning a vector rather than a set because animations need the indices
+std::vector<std::string> FileSystem::get_sequential_files(const std::string& directory, const std::string& basename, const std::string& extension) const {
 	// Get numbered files
 	boost::regex re(basename + "_\\d+\\." + extension);
-	FilenameSet files = filter_directory(directory, [&re](const std::string& filename) {
+	std::vector<std::string> files = filter_directory(directory, [&re](const std::string& filename) {
 		return boost::regex_match(FileSystem::fs_filename(filename.c_str()), re);
 	});
 

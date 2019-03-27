@@ -136,20 +136,21 @@ public:
 
 	/// Return the files in the given 'directory' that match the condition in 'test', i.e. 'test' returned 'true' for their filenames.
 	template <class UnaryPredicate>
-	FilenameSet filter_directory(const std::string& directory, UnaryPredicate test) const {
+	std::vector<std::string> filter_directory(const std::string& directory, UnaryPredicate test) const {
+		// Returning a vector rather than a set because animations need the indices
+		std::vector<std::string> filtered;
 		FilenameSet container = list_directory(directory);
-		FilenameSet filtered;
 		for (const auto& entry : container) {
 			if (!test(entry)) {
 				continue;
 			}
-			filtered.insert(entry);
+			filtered.push_back(entry);
 		}
 		return filtered;
 	}
 
 	/// Returns all files in the given 'directory' that match 'basename[_{<digit>}].extension'
-	FilenameSet get_sequential_files(const std::string& directory, const std::string& basename, const std::string& extension) const;
+	std::vector<std::string> get_sequential_files(const std::string& directory, const std::string& basename, const std::string& extension) const;
 
 	virtual unsigned long long disk_space() = 0;
 

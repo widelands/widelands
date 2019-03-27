@@ -356,23 +356,27 @@ UI::Button* LoadOrSaveGame::delete_button() {
 	return delete_;
 }
 
+
+
 void LoadOrSaveGame::fill_table() {
-
-	clear_selections();
-	table_.clear();
-
-	FilenameSet gamefiles;
-
+	std::vector<std::string> gamefiles;
 	if (filetype_ == FileType::kReplay) {
-		gamefiles = g_fs->filter_directory(kReplayDir, [](const std::string& fn) {
-			return boost::ends_with(fn, kReplayExtension);
-		});
 		// Update description column title for replays
 		table_.set_column_tooltip(2, show_filenames_ ? _("Filename: Map name (start of replay)") :
 		                                               _("Map name (start of replay)"));
+		fill_table<std::vector<std::string>>(g_fs->filter_directory(kReplayDir, [](const std::string& fn) {
+			return boost::ends_with(fn, kReplayExtension);
+		}));
 	} else {
-		gamefiles = g_fs->list_directory(kSaveDir);
+		fill_table<FilenameSet>(g_fs->list_directory(kSaveDir));
 	}
+}
+
+// We're getting a set from list_directory, but a vector from filter_directory, so we have to template this
+template <typename Container>
+void LoadOrSaveGame::fill_table(const Container& gamefiles) {
+	clear_selections();
+	table_.clear();
 
 	Widelands::GamePreloadPacket gpdp;
 

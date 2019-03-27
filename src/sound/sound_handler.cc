@@ -272,7 +272,7 @@ void SoundHandler::load_fx_if_needed(const std::string& dir,
 
 	fxs_.insert(std::make_pair(fx_name, std::unique_ptr<FXset>(new FXset())));
 
-	FilenameSet files = g_fs->get_sequential_files(dir, basename, "ogg");
+	std::vector<std::string> files = g_fs->get_sequential_files(dir, basename, "ogg");
 	for (const std::string& path : files) {
 		assert(!g_fs->is_directory(path));
 		load_one_fx(path, fx_name);
@@ -457,7 +457,7 @@ void SoundHandler::register_song(const std::string& dir, const std::string& base
 	assert(g_fs);
 
 
-	FilenameSet files = g_fs->get_sequential_files(dir, basename, "ogg");
+	std::vector<std::string> files = g_fs->get_sequential_files(dir, basename, "ogg");
 
 	for (const std::string& filename : files) {
 		assert(!g_fs->is_directory(filename));
