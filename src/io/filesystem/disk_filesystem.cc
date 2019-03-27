@@ -76,7 +76,7 @@ bool RealFSImpl::is_writable() const {
 	return true;
 }
 
-std::set<std::string> RealFSImpl::list_directory(const std::string& path) {
+std::set<std::string> RealFSImpl::list_directory(const std::string& path) const {
 #ifdef _WIN32
 	std::string buf;
 	struct _finddata_t c_file;

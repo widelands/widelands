@@ -51,7 +51,7 @@ public:
 	}
 
 	// Returns all files and directories (full path) in the given directory 'directory'.
-	virtual std::set<std::string> list_directory(const std::string& directory) = 0;
+	virtual std::set<std::string> list_directory(const std::string& directory) const = 0;
 
 	virtual bool is_writable() const = 0;
 	virtual bool is_directory(const std::string& path) = 0;
@@ -136,9 +136,9 @@ public:
 
 	/// Return the files in the given 'directory' that match the condition in 'test', i.e. 'test' returned 'true' for their filenames.
 	template <class UnaryPredicate>
-	std::set<std::string> filter_directory(const std::string& directory, UnaryPredicate test) {
-		std::set<std::string> container = list_directory(directory);
-		std::set<std::string> filtered;
+	FilenameSet filter_directory(const std::string& directory, UnaryPredicate test) const {
+		FilenameSet container = list_directory(directory);
+		FilenameSet filtered;
 		for (const auto& entry : container) {
 			if (!test(entry)) {
 				continue;
@@ -147,6 +147,9 @@ public:
 		}
 		return filtered;
 	}
+
+	/// Returns all files in the given 'directory' that match 'basename[_{<digit>}].extension'
+	FilenameSet get_sequential_files(const std::string& directory, const std::string& basename, const std::string& extension) const;
 
 	virtual unsigned long long disk_space() = 0;
 

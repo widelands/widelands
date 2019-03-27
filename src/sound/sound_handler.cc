@@ -24,8 +24,6 @@
 
 #include <SDL.h>
 #include <SDL_mixer.h>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/regex.hpp>
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -274,11 +272,7 @@ void SoundHandler::load_fx_if_needed(const std::string& dir,
 
 	fxs_.insert(std::make_pair(fx_name, std::unique_ptr<FXset>(new FXset())));
 
-	boost::regex re(basename + "_\\d+\\.ogg");
-	FilenameSet files = g_fs->filter_directory(dir, [&re](const std::string& fn) {
-		return boost::regex_match(FileSystem::fs_filename(fn.c_str()), re);
-	});
-
+	FilenameSet files = g_fs->get_sequential_files(dir, basename, "ogg");
 	for (const std::string& path : files) {
 		assert(!g_fs->is_directory(path));
 		load_one_fx(path, fx_name);
@@ -462,12 +456,8 @@ void SoundHandler::register_song(const std::string& dir, const std::string& base
 		return;
 	assert(g_fs);
 
-	FilenameSet files;
 
-	files = g_fs->filter_directory(dir, [&basename](const std::string& fn) {
-		const std::string only_filename = FileSystem::fs_filename(fn.c_str());
-		return boost::starts_with(only_filename, basename) && boost::ends_with(only_filename, ".ogg");
-	});
+	FilenameSet files = g_fs->get_sequential_files(dir, basename, "ogg");
 
 	for (const std::string& filename : files) {
 		assert(!g_fs->is_directory(filename));

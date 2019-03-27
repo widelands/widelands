@@ -38,7 +38,7 @@ public:
 
 	bool is_writable() const override;
 
-	std::set<std::string> list_directory(const std::string& path) override;
+	std::set<std::string> list_directory(const std::string& path) const override;
 
 	bool is_directory(const std::string& path) override;
 	bool file_exists(const std::string& path) override;

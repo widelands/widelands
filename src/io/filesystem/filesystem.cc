@@ -35,6 +35,7 @@
 // We have to add Boost to this block to make codecheck happy
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
+#include <boost/regex.hpp>
 #ifdef _WIN32
 #include <direct.h>
 #include <io.h>
@@ -259,6 +260,26 @@ std::string FileSystem::get_homedir() {
 	}
 
 	return homedir;
+}
+
+FilenameSet FileSystem::get_sequential_files(const std::string& directory, const std::string& basename, const std::string& extension) const {
+	// Get numbered files
+	boost::regex re(basename + "_\\d+\\." + extension);
+	FilenameSet files = filter_directory(directory, [&re](const std::string& fn) {
+		return boost::regex_match(FileSystem::fs_filename(fn.c_str()), re);
+	});
+
+	if (files.empty()) {
+		// Maybe we have only 1 file without number
+		files = filter_directory(directory, [&re, basename, extension](const std::string& fn) {
+			return fn == (basename + "." + extension);
+		});
+	}
+	if (files.empty()) {
+		log("Warning: No files found for '%s/%s[_{<digit>}].%s'\n", directory.c_str(), basename.c_str(),
+			extension.c_str());
+	}
+	return files;
 }
 
 /**

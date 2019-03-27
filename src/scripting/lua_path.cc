@@ -164,7 +164,8 @@ static int L_list_files(lua_State* L) {
 /* RST
 .. function:: list_directory(filename)
 
-   Returns all file names contained in the given directory.
+   **DEPRECATED**. Returns all file names contained in the given directory.
+   Lua Tables leed lots of memory, so only use this when you have to.
 
    :type filename: class:`string`
    :arg filename: The directory to read.
