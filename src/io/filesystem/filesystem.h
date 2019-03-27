@@ -36,6 +36,7 @@ using FilenameSet = std::set<std::string>;
 class StreamRead;
 class StreamWrite;
 
+
 /**
  * FileSystem is an abstract base class representing certain filesystem
  * operations.
@@ -131,6 +132,21 @@ public:
 	/// Given a filename, return the name with any path or extension stripped off.
 	static std::string filename_without_ext(const char* n);
 	static std::string get_homedir();
+
+
+	/// Return the files in the given 'directory' that match the condition in 'test', i.e. 'test' returned 'true' for their filenames.
+	template <class UnaryPredicate>
+	std::set<std::string> filter_directory(const std::string& directory, UnaryPredicate test) {
+		std::set<std::string> container = list_directory(directory);
+		std::set<std::string> filtered;
+		for (const auto& entry : container) {
+			if (!test(entry)) {
+				continue;
+			}
+			filtered.insert(entry);
+		}
+		return filtered;
+	}
 
 	virtual unsigned long long disk_space() = 0;
 

@@ -31,7 +31,6 @@
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "graphic/font_handler.h"
-#include "helper.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
@@ -365,7 +364,7 @@ void LoadOrSaveGame::fill_table() {
 	FilenameSet gamefiles;
 
 	if (filetype_ == FileType::kReplay) {
-		gamefiles = filter(g_fs->list_directory(kReplayDir), [](const std::string& fn) {
+		gamefiles = g_fs->filter_directory(kReplayDir, [](const std::string& fn) {
 			return boost::ends_with(fn, kReplayExtension);
 		});
 		// Update description column title for replays
