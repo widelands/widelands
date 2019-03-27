@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-23 09:59+0000\n"
+"POT-Creation-Date: 2019-03-08 07:26+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -111,8 +111,8 @@ msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr ""
-"Tog taigh-seinnse, a taigh-iasgair, a taigh-toitidh, croit-dhearc agus "
-"taigh-cruinniche."
+"Tog taigh-tàirn, taigh-iasgair, taigh-toitidh, croit-dhearc agus taigh-"
+"cruinniche."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance your food economy"
@@ -132,7 +132,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build an iron mine and a mining infrastructure"
-msgstr "Tog mèinn iarainn agus bun-structar mèinnearachd."
+msgstr "Tog mèinn iarainn agus bun-structar mèinnearachd"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:76
 msgid "Build Mines and Mining Infrastructure"
@@ -141,8 +141,7 @@ msgstr "Tog mèinnean agus bun-structar mèinnearachd"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:77
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
 msgstr ""
-"Togail an mèinn iarainn, fùirneis, ceàrdach gobhainn agus ceàrdach armachd "
-"bheag."
+"Tog mèinn iarainn, fùirneis, ceàrdach gobhainn agus ceàrdach armachd bheag."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:256
@@ -222,8 +221,8 @@ msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
-"Tog port, a taigh nam beart ’s doca agus tòisich air triall an uairsin ach "
-"an teich teich thu on eilean mus dèid e fon tuil-ruadh."
+"Tog port, taigh nam beart ’s doca agus tòisich air triall an uairsin ach an "
+"teich teich thu on eilean mus dèid e fon tuil-ruadh."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:118
 msgid ""
@@ -262,7 +261,7 @@ msgid ""
 "tribe away to start a quiet, peaceful life on this untouched island."
 msgstr ""
 "Tha mi fhìn ’s mo cuideachd dìreach air tighinn on tìr-mhòr. Bha còmhstri an"
-" aghaidh nan Dànaich gu tuath is nan Lochlannach gu ear… Mar sin, chuir mi "
+" aghaidh nan Dànach gu tuath is nan Lochlannach gu ear… Mar sin, chuir mi "
 "romham an treubh agam a stiùireadh air falbh ach am buannaicheamaid beatha "
 "shìtheil shàmhach san eilean ùr seo."
 
@@ -370,7 +369,7 @@ msgid ""
 " sentinels to expand."
 msgstr ""
 "Tha criadh furasta ri dhèanamh: Gearraidh digear-criadha a tha ag obair aig "
-"sùil-chriadha beagan ùire is measgaichidh e le uisge i. Cha leig thu leas "
+"sùil-chriadha beagan ùire is measgaichidh e le uisge i. Cha leig sibh leas "
 "ach dèanamh cinnteach gum bi pailteas rùim timcheall air an t-sùil-chriadha "
 "aige. Nach tog sinn taigh-caithris no dhà a leudachadh ar ranntair?"
 
@@ -407,10 +406,10 @@ msgid ""
 "wait until we have gathered some more materials. We could expand our "
 "territory some more, to see what else can be found on this island."
 msgstr ""
-"’S math a rinn thu. Tha saothrachadh nan stuthan-togail uile ag obair a-nis."
-" Fuiricheamaid gus an cruinnich sinn barrachd stòrais dhiubh. B’ urrainn "
-"dhuinn ar ranntair a leudachadh ach an lorg sinn dè eile a tha san eilean "
-"seo."
+"’S math a rinn sibh. Tha saothrachadh nan stuthan-togail uile ag obair "
+"a-nis. Fuiricheamaid gus an cruinnich sinn barrachd stòrais dhiubh. B’ "
+"urrainn dhuinn ar ranntair a leudachadh ach an lorg sinn dè eile a tha san "
+"eilean seo."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:185
 msgid "Reed Shortages"
@@ -594,9 +593,9 @@ msgid ""
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
 msgstr ""
-"Gidheadh, nuair a dh’fheumas sinn na mèinnean a leasachadh, cha chum na "
-"greimeagan na mèinnearan toilichte. ’S fheàirrde a bhith cùramach – tog "
-"taigh-tàirn eile agus beachdaich air a leasachadh ’na talla-òil."
+"Gidheadh, nuair a dh’fheumas sinn na mèinnean a leasachadh, cha chùm na "
+"greimeagan na mèinnearan toilichte. ’S fheàirrde a bhith cùramach – togaibh "
+"taigh-tàirn eile agus beachdaichibh air a leasachadh ’na talla-òil."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:237
@@ -624,7 +623,7 @@ msgstr ""
 "Bu chòir dhuibh an taigh-fuine ’s an taigh-grùide a leasachadh cho luath ’s "
 "a bhios eòlas gu leòr aig an luchd-obrach. ’S urrainn dhaibh mil-dheoch agus"
 " aran-meala a shaothrachadh an uairsin. Togaibh beachlann ri taobh na croit-"
-"dhearc airson mil a shaothrachadh as urrainn dhuinn cuir dhan stòras gus am "
+"dhearc airson mil a shaothrachadh as urrainn dhuinn cur dhan stòras gus am "
 "bi feum againn air."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:245
@@ -794,7 +793,7 @@ msgid ""
 "hell for ever!"
 msgstr ""
 "’S ann leamsa a tha an t-eilean seo! Is sibhse an ionnsaigheach! Nì mi "
-"ùrnaigh dhan aon fhìor-dhia gun cuiridh sinn gu bàs sibh uile agus gum "
+"ùrnaigh dhan aon fhìor-dhia gun cuireamaid gu bàs sibh uile agus gum "
 "fulaingeadh ur n-anman san ifrinn gu sìorraidh bràth!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
@@ -972,8 +971,8 @@ msgid ""
 msgstr ""
 "’S cinnteach gum b’ fheàrr leam fhìn na saighdearan againn a chumail beò ach"
 " chan urrainn dhuinn gach uile beatha a shàbhaladh. Gheibh saighdearan bàs "
-"air a’ bhlàr, seo mar a thachras. Tha e an urra riut fhèin dè cho fada a "
-"dh’fhanas sinn mus doir sinn ionnsaigh orra ach na fan ro fhada air neo "
+"air a’ bhlàr, seo mar a thachras. Tha e an urra ribh fhèin dè cho fada ’s a "
+"dh’fhanas sinn mus doir sinn ionnsaigh orra ach na fanaibh ro fhada air neo "
 "gabhaidh an nàmhaid brath air ar laigse."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:366
@@ -1082,9 +1081,9 @@ msgid ""
 "need to build a new settlement, we may be able to escape."
 msgstr ""
 "Misnichibh on a mhothaich mi gu bheil dòchas againn fhathast! Tha coltas gu "
-"bheil ceann an ear an eilein cho math ris an àite far an robh prìomh-àras an"
-" deamhain iomchaidh airson port a thogail ann. Ma thèid leinn long a thogail"
-" ’s ma chuireas sinn innte na dh’fheumas sinn airson tuineachadh ùr a "
+"bheil ceann an ear an eilein iomchaidh airson port a thogail ann mar bhiodh "
+"an àite far an robh prìomh-àras an deamhain. Ma thèid leinn long a thogail "
+"’s ma chuireas sinn innte na dh’fheumas sinn airson tuineachadh ùr a "
 "thogail, dh’fhaoidte gun dèid leinn teicheadh."
 
 #. TRANSLATORS: Hauke – rising water
