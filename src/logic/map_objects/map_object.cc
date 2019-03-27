@@ -240,7 +240,11 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 	if (table.has_key("animations")) {
 		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
 		for (const std::string& animation : anims->keys<std::string>()) {
-			add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
+			try {
+				add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
+			} catch (const WException& e) {
+				throw GameDataError("Error loading '%s' animation for '%s': %s", animation.c_str(), init_name.c_str(), e.what());
+			}
 		}
 		if (!is_animation_known("idle")) {
 			throw GameDataError(

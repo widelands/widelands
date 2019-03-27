@@ -177,7 +177,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 					mipmaps_.insert(std::make_pair(scale_as_float, std::unique_ptr<MipMapEntry>(new MipMapEntry(filenames))));
 				}
 			};
-			add_scale(0.5f, "0.5");
+			add_scale(0.5f, "0\\.5");
 			add_scale(1.0f, "1");
 			add_scale(2.0f, "2");
 			add_scale(4.0f, "4");
@@ -188,7 +188,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 				if (mipmaps_.count(1.0f) == 0) {
 					// No files found at all
 					throw Widelands::GameDataError(
-						"Animation has no images for mandatory scale '1' in mipmap - supported scales are: 0.5, 1, 2, 4");
+						"Animation in directory '%s' with basename '%s' has no images for mandatory scale '1' in mipmap - supported scales are: 0.5, 1, 2, 4", directory.c_str(), basename.c_str());
 				}
 			}
 		}

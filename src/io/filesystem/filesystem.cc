@@ -276,10 +276,6 @@ std::vector<std::string> FileSystem::get_sequential_files(const std::string& dir
 			return filename == (basename + "." + extension);
 		});
 	}
-	if (files.empty()) {
-		log("Warning: No files found for '%s/%s[_{<digit>}].%s'\n", directory.c_str(), basename.c_str(),
-			extension.c_str());
-	}
 	return files;
 }
 
