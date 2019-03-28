@@ -78,9 +78,6 @@ protected:
 	void clicked_delete();
 
 private:
-	template <typename Container>
-	void fill_table(const Container& gamefiles);
-
 	/// Returns the filename for the table entry at 'index'
 	const std::string get_filename(int index) const;
 

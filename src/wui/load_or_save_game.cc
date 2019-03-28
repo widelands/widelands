@@ -31,6 +31,7 @@
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "graphic/font_handler.h"
+#include "helper.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
@@ -356,27 +357,23 @@ UI::Button* LoadOrSaveGame::delete_button() {
 	return delete_;
 }
 
-
-
 void LoadOrSaveGame::fill_table() {
-	std::vector<std::string> gamefiles;
+
+	clear_selections();
+	table_.clear();
+
+	FilenameSet gamefiles;
+
 	if (filetype_ == FileType::kReplay) {
+		gamefiles = g_fs->filter_directory(kReplayDir, [](const std::string& fn) {
+			return boost::ends_with(fn, kReplayExtension);
+		});
 		// Update description column title for replays
 		table_.set_column_tooltip(2, show_filenames_ ? _("Filename: Map name (start of replay)") :
 		                                               _("Map name (start of replay)"));
-		fill_table<std::vector<std::string>>(g_fs->filter_directory(kReplayDir, [](const std::string& fn) {
-			return boost::ends_with(fn, kReplayExtension);
-		}));
 	} else {
-		fill_table<FilenameSet>(g_fs->list_directory(kSaveDir));
+		gamefiles = g_fs->list_directory(kSaveDir);
 	}
-}
-
-// We're getting a set from list_directory, but a vector from filter_directory, so we have to template this
-template <typename Container>
-void LoadOrSaveGame::fill_table(const Container& gamefiles) {
-	clear_selections();
-	table_.clear();
 
 	Widelands::GamePreloadPacket gpdp;
 

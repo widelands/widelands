@@ -154,7 +154,7 @@ bool ZipFilesystem::is_writable() const {
  * pathname) in the results. There doesn't seem to be an even remotely
  * cross-platform way of doing this
  */
-std::set<std::string> ZipFilesystem::list_directory(const std::string& path_in) const {
+FilenameSet ZipFilesystem::list_directory(const std::string& path_in) const {
 	assert(path_in.size());  //  prevent invalid read below
 
 	std::string path = basedir_in_zip_file_;

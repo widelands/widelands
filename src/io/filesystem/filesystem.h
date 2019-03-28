@@ -51,7 +51,7 @@ public:
 	}
 
 	// Returns all files and directories (full path) in the given directory 'directory'.
-	virtual std::set<std::string> list_directory(const std::string& directory) const = 0;
+	virtual FilenameSet list_directory(const std::string& directory) const = 0;
 
 	virtual bool is_writable() const = 0;
 	virtual bool is_directory(const std::string& path) = 0;
@@ -136,17 +136,16 @@ public:
 
 	/// Return the files in the given 'directory' that match the condition in 'test', i.e. 'test' returned 'true' for their filenames.
 	template <class UnaryPredicate>
-	std::vector<std::string> filter_directory(const std::string& directory, UnaryPredicate test) const {
-		// Returning a vector rather than a set because animations need the indices
-		std::vector<std::string> filtered;
-		FilenameSet container = list_directory(directory);
-		for (const auto& entry : container) {
-			if (!test(entry)) {
-				continue;
+	FilenameSet filter_directory(const std::string& directory, UnaryPredicate test) const {
+		FilenameSet result = list_directory(directory);
+		for (auto it = result.begin(); it != result.end();) {
+			if (!test(*it)) {
+				it = result.erase(it);
+			} else {
+				++it;
 			}
-			filtered.push_back(entry);
 		}
-		return filtered;
+		return result;
 	}
 
 	/// Returns all files in the given 'directory' that match 'basename[_\d{1,3}].extension'
