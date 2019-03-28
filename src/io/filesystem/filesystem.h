@@ -55,7 +55,7 @@ public:
 
 	virtual bool is_writable() const = 0;
 	virtual bool is_directory(const std::string& path) = 0;
-	virtual bool file_exists(const std::string& path) = 0;
+	virtual bool file_exists(const std::string& path) const = 0;
 
 	virtual void* load(const std::string& fname, size_t& length) = 0;
 
@@ -149,7 +149,7 @@ public:
 		return filtered;
 	}
 
-	/// Returns all files in the given 'directory' that match 'basename[_{<digit>}].extension'
+	/// Returns all files in the given 'directory' that match 'basename[_\d{1,3}].extension'
 	std::vector<std::string> get_sequential_files(const std::string& directory, const std::string& basename, const std::string& extension) const;
 
 	virtual unsigned long long disk_space() = 0;

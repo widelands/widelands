@@ -34,8 +34,9 @@
 
 // We have to add Boost to this block to make codecheck happy
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
-#include <boost/regex.hpp>
+#include <boost/lexical_cast.hpp>
 #ifdef _WIN32
 #include <direct.h>
 #include <io.h>
@@ -82,6 +83,54 @@ const std::vector<std::string> illegal_filename_starting_characters{
 const std::vector<std::string> illegal_filename_characters{
    "<", ">", ":", "\"", "|", "?", "*", "/", "\\",
 };
+
+/// A class that makes iteration over filename_?.* templates easy. It is much faster than using regex.
+class NumberGlob {
+public:
+	explicit NumberGlob(const std::string& file_template);
+
+	/// If there is a next filename, puts it in 's' and returns true.
+	bool next(std::string* s);
+
+private:
+	std::string template_;
+	std::string format_;
+	std::string to_replace_;
+	uint32_t current_;
+	uint32_t max_;
+
+	DISALLOW_COPY_AND_ASSIGN(NumberGlob);
+};
+
+/**
+ * Implementation for NumberGlob.
+ */
+NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template), current_(0) {
+	int nchars = count(file_template.begin(), file_template.end(), '?');
+	format_ = "%0" + boost::lexical_cast<std::string>(nchars) + "i";
+
+	max_ = 1;
+	for (int i = 0; i < nchars; ++i) {
+		max_ *= 10;
+		to_replace_ += "?";
+	}
+	max_ -= 1;
+}
+
+bool NumberGlob::next(std::string* s) {
+	if (current_ > max_) {
+		return false;
+	}
+
+	if (max_) {
+		*s = boost::replace_last_copy(
+		   template_, to_replace_, (boost::format(format_) % current_).str());
+	} else {
+		*s = template_;
+	}
+	++current_;
+	return true;
+}
 }  // namespace
 
 /**
@@ -264,19 +313,33 @@ std::string FileSystem::get_homedir() {
 
 // Returning a vector rather than a set because animations need the indices
 std::vector<std::string> FileSystem::get_sequential_files(const std::string& directory, const std::string& basename, const std::string& extension) const {
-	// Get numbered files
-	boost::regex re(basename + "_\\d+\\." + extension);
-	std::vector<std::string> files = filter_directory(directory, [&re](const std::string& filename) {
-		return boost::regex_match(FileSystem::fs_filename(filename.c_str()), re);
-	});
+	std::vector<std::string> result;
 
-	if (files.empty()) {
-		// Maybe we have only 1 file without number
-		files = filter_directory(directory, [&re, basename, extension](const std::string& filename) {
-			return filename == (basename + "." + extension);
-		});
+	auto get_files = [this, directory, basename, extension](const std::string& number_template) {
+		std::vector<std::string> files;
+		const std::string filename_template = directory + file_separator() + basename + number_template + "." + extension;
+
+		NumberGlob glob(filename_template);
+		std::string filename;
+		while (glob.next(&filename)) {
+			if (!file_exists(filename)) {
+				break;
+			}
+			files.push_back(filename);
+		}
+		return files;
+	};
+	result = get_files("");
+	if (result.empty()) {
+		result = get_files("_?");
 	}
-	return files;
+	if (result.empty()) {
+		result = get_files("_??");
+	}
+	if (result.empty()) {
+		result = get_files("_???");
+	}
+	return result;
 }
 
 /**
