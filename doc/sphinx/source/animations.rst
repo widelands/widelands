@@ -19,7 +19,8 @@ are available, and what your image files need to look like:
 
    animations = {
       idle = {
-         files = path.list_files(path.dirname(__file__) .. "idle_??.png"),
+         directory = path.dirname(__file__),
+         basename = "idle",
          hotspot = { 5, 7 },
          fps = 4,
          sound_effect = {
@@ -35,11 +36,20 @@ Let's have a detailed look at the ``idle`` animation:
 **idle**
    *Mandatory*. This is the name of the animation. The animation can then be referenced by this name e.g. if you want to trigger it in a production program.
 
-**files**
-   *Mandatory*. A template for the image names. Our example will pick up any image from ``idle_00.png`` through ``idle_99.png`` in the specified directory path -- the current path in our example. These images can optionally have corresponding player color mask images called ``idle_00_pc.png`` through ``idle_99_pc.png``. Make sure to include leading 0's in the file names and to have consistent length -- we support 1, 2 and 3 digit numbers in an animation.
+**directory**
+   *Mandatory*. The directory where the animation image files are located.
+
+**basename**
+   *Mandatory*. The filename prefix for the image files. Our example will pick up any image from ``idle_00.png`` through ``idle_99.png`` in the specified directory path -- the current path in our example. These images can optionally have corresponding player color mask images called ``idle_00_pc.png`` through ``idle_99_pc.png``. Make sure to include leading 0's in the file names and to have consistent length -- we support 1, 2 and 3 digit numbers in an animation.
+   If your animation contains only one file, you can also call it ``idle.png`` (and ``idle_pc.png`` for the player color mask) without ``_`` or any numbers in the file name.
+
+   We support *mipmaps* for animations. They allow us to provide the same image in different resolutions for optimum rendering quality.
+   For using mipmaps, simply name your files accordingly, and the engine will pick them up. e.g. ``idle_0.5_00.png`` will be rendered at scale ``0.5``, and ``idle_1_00.png`` will be rendered at the neutral scale ``1``.
+   The scale of ``1`` is mandatory, and other supported scales are ``0.5``, ``2`` and ``4``.
 
 **pictures**
-   *DEPRECATED*. The same as ``files``.
+   *DEPRECATED*. This is older code that is slowly being phased out - do not use this parameter.
+   A table with full directory and file names.
 
 **hotspot**
    *Mandatory*. Hotspots define a place on a graphic image through its *x* and *y* coordinates that can be used as a handle or reference point to provide control over positioning the image on the map. For example, hotspots help carriers stay on the road, and control the positioning of the wares they carry. Increase ``x`` to shift the animation to the left and ``y`` to shift it upwards.
@@ -49,55 +59,6 @@ Let's have a detailed look at the ``idle`` animation:
 
 **sound_effect**
    *Optional*. Our example will look for the sound files ``bar_00.ogg`` through ``bar_99.ogg`` in the directory ``data/sound/foo`` and play them in sequence.
-
-
-Mipmaps
--------
-
-We support mipmaps for animations. They allow us to provide the same image in different
-resolutions for optimum rendering quality. Let's look at an example with a mipmap ``idle`` animation and a normal ``build`` animation:
-
-.. code-block:: lua
-
-   animations = {
-      idle = {
-         mipmap = {
-            {
-               scale = 0.5,
-               files = path.list_files(dirname .. "idle_0.5_??.png"),
-            },
-            {
-               scale = 1,
-               files = path.list_files(dirname .. "idle_1_??.png"),
-            },
-            {
-               scale = 2,
-               files = path.list_files(dirname .. "idle_2_??.png"),
-            },
-            {
-               scale = 4,
-               files = path.list_files(dirname .. "idle_4_??.png"),
-            }
-         },
-         hotspot = { 5, 7 },
-         fps = 4,
-         sound_effect = {
-            directory = "sound/foo",
-            name = "bar",
-         },
-      },
-      build = {
-         files = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 5, 7 },
-      }
-   },
-
-The scale of ``1`` is mandatory, and other supported scales are ``0.5``, ``2``
-and ``4``.
-The base table should no longer contain the ``files`` entry
-when you're using a mipmap.
-Each mimap entry must define the ``files`` and the ``scale``.
-See also :ref:`animations_converting_formats`.
 
 
 Directional Animations
