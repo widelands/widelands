@@ -3,12 +3,13 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore()
    -- TRANSLATORS#: Lore helptext for a building
-   return no_lore_text_yet()
+   return pgettext("barbarians_building", [[‘Seasonal fish and game specialities served with pitta bread.<br>
+            Choose from different regional craft beer brands.’]])
 end
 
 function building_helptext_lore_author()
    -- TRANSLATORS#: Lore author helptext for a building
-   return no_lore_author_text_yet()
+   return pgettext("barbarians_building", "Menu of ‘The Laughing Barbarian’")
 end
 
 function building_helptext_purpose()

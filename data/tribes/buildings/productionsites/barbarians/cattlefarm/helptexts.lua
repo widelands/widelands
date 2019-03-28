@@ -3,12 +3,12 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore()
    -- TRANSLATORS#: Lore helptext for a building
-   return no_lore_text_yet()
+   return pgettext("barbarians_building", "‘The smart leader builds roads, while the really wise leader breeds cattle.’")
 end
 
 function building_helptext_lore_author()
    -- TRANSLATORS#: Lore author helptext for a building
-   return no_lore_author_text_yet()
+   return pgettext("barbarians_building", "Khantarakh, ‘The Modern Babarian Economy’,<br> 5th cowhide ‘Traffic and Logistics’")
 end
 
 function building_helptext_purpose()
