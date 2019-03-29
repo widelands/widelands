@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-18 09:59+0000\n"
-"PO-Revision-Date: 2019-03-22 11:27+0000\n"
+"POT-Creation-Date: 2019-03-22 18:47+0000\n"
+"PO-Revision-Date: 2019-03-24 10:19+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -377,7 +377,7 @@ msgstr "Knütt"
 #: ../../src/editor/tools/info_tool.cc:55
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
-msgstr "Position: (%1$i|%2$i)"
+msgstr "Stee: (%1$i|%2$i)"
 
 #. * TRANSLATORS: Editor terrain property: small building plot
 #: ../../src/editor/tools/info_tool.cc:64
@@ -683,7 +683,7 @@ msgstr "Teken:"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:127
 #: ../../src/wui/suggested_teams_box.cc:90
 msgid "Suggested Teams:"
-msgstr "Vörslagen för Klottjes:"
+msgstr "Vörslagen för Klottjen:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:137
 #: ../../src/ui_fsmenu/launch_mpg.cc:592
@@ -703,7 +703,7 @@ msgstr "Teken:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:146
 msgid "Teams"
-msgstr "Klottjes:"
+msgstr "Klottjen:"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:58
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:66
@@ -836,7 +836,7 @@ msgid ""
 "The map has been generated. Please double-check the player starting "
 "positions to make sure that your carriers won’t drown, or be stuck on an "
 "island or on top of a mountain."
-msgstr "De Kaart is fardig. Bidde kiek na, of de Anfangs-Positionen vun de Spelers good sünd un de Lüü nich verdrinken oder up 'n Barg fastsitten."
+msgstr "De Kaart is fardig. Bidde kiek na, of de Anfangs-Steden vun de Spelers good sünd un de Lüü nich verdrinken oder up 'n Barg fastsitten."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:62
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:31
@@ -875,7 +875,7 @@ msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Eene Datei mit de Naam »%s« gifft 't al. Overschrieven?"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:298
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:340
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:341
 msgid "Error Saving Map!"
 msgstr "Fehler bi’n Kaart sekern!"
 
@@ -961,7 +961,7 @@ msgstr "Dat Volk word tofällig utköört"
 #. position tool
 #: ../../src/editor/ui_menus/player_menu.cc:204
 msgid "Set this player’s starting position"
-msgstr "Anfangs-Position för deesen Speler fastleggen"
+msgstr "Anfangs-Stee för deesen Speler fastleggen"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:35
 msgid "Height Tools Options"
@@ -1038,7 +1038,7 @@ msgstr "Maak Rüümte för Muden fast"
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
-msgstr "Maak de Position fast, dat de Position (0|0) ween sall. Dat is de linke boven Eck vun de lütte Kaart."
+msgstr "Maak de Stee fast, dat de Stee (0|0) ween sall. Dat is de linke boven Eck vun de lütte Kaart."
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:38
 msgid "Random Height Options"
@@ -1150,14 +1150,14 @@ msgstr "Maak de Kraam för de Spelers"
 
 #: ../../src/logic/game.cc:467 ../../src/logic/player.cc:222
 msgid "Missing starting position"
-msgstr "Do fehlt eene Anfangs-Position"
+msgstr "Do fehlt eene Anfangs-Stee"
 
 #: ../../src/logic/game.cc:468 ../../src/logic/player.cc:223
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
-msgstr "Widelands kunn dat Speel nich laden, wiel Speler %u keene Anfangs-Position hett.\nDu kannst tum Ofhelpen eene Anfangs-Position mit de Widelands-Bewarker daartodoon."
+msgstr "Widelands kunn dat Speel nich laden, wiel Speler %u keene Anfangs-Stee hett.\nDu kannst tum Ofhelpen eene Anfangs-Stee mit de Widelands-Bewarker daartodoon."
 
 #: ../../src/logic/game.cc:858
 msgid "Trade Offer"
@@ -2751,7 +2751,7 @@ msgstr "Speel anfangen"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:123
 msgid "Switch to position"
-msgstr "To deeser Position wesseln"
+msgstr "To deeser Stee wesseln"
 
 #: ../../src/ui_fsmenu/loadgame.cc:40
 msgid "Choose a replay"
