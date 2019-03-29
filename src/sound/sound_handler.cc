@@ -273,6 +273,9 @@ void SoundHandler::load_fx_if_needed(const std::string& dir,
 	fxs_.insert(std::make_pair(fx_name, std::unique_ptr<FXset>(new FXset())));
 
 	std::vector<std::string> files = g_fs->get_sequential_files(dir, basename, "ogg");
+	if (files.empty()) {
+		log("WARNING: No files found for sound in directory %s with basename %s\n", dir.c_str(), basename.c_str());
+	}
 	for (const std::string& path : files) {
 		assert(!g_fs->is_directory(path));
 		load_one_fx(path, fx_name);
