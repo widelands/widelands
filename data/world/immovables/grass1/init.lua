@@ -13,7 +13,7 @@ world:new_immovable_type{
          hotspot = { 10, 20 },
          sound_effect = {
             directory = "sound/animals",
-            name = "frog1",
+            name = "frog",
          },
       },
    }

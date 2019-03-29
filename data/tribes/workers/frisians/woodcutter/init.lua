@@ -33,7 +33,9 @@ tribes:new_worker_type {
       harvest = {
          "findobject=attrib:tree radius:10",
          "walk=object",
+         "playsound=sound/woodcutting woodcutting 255",
          "animate=hacking 10000",
+         "playsound=sound/woodcutting tree_falling 130",
          "callobject=fall",
          "animate=idle 2000",
          "createware=log",

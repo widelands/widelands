@@ -35,7 +35,7 @@ tribes:new_worker_type {
          "walk=object",
          "playsound=sound/atlanteans/saw sawing 230",
          "animate=sawing 10000",
-         "playsound=sound/woodcutting tree-falling 130",
+         "playsound=sound/woodcutting tree_falling 130",
          "callobject=fall",
          "animate=idle 2000",
          "createware=log",

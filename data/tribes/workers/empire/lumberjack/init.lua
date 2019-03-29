@@ -37,7 +37,7 @@ tribes:new_worker_type {
          "playsound=sound/woodcutting fast_woodcutting 250",
          "animate=hacking 10000",
          --  "playsound=sound/spoken timber 156",
-         "playsound=sound/woodcutting tree-falling 130",
+         "playsound=sound/woodcutting tree_falling 130",
          "callobject=fall",
          "animate=idle 2000",
          "createware=log",
