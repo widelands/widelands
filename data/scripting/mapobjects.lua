@@ -85,11 +85,7 @@ end
 --    :type fps: :class:`integer`
 function add_walking_animations(animationtable, animationname, dirname, basename, hotspot, fps)
    for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
-      if fps ~= nil then
-         add_animation(animationtable, animationname .. "_" .. dir, dirname, basename .. "_" .. dir, hotspot, fps)
-      else
-         add_animation(animationtable, animationname .. "_" .. dir, dirname, basename .. "_" .. dir, hotspot)
-      end
+      add_animation(animationtable, animationname .. "_" .. dir, dirname, basename .. "_" .. dir, hotspot, fps)
    end
 end
 

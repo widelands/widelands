@@ -177,7 +177,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 					mipmaps_.insert(std::make_pair(scale_as_float, std::unique_ptr<MipMapEntry>(new MipMapEntry(filenames))));
 				}
 			};
-			add_scale(0.5f, "0\\.5");
+			add_scale(0.5f, "0.5");
 			add_scale(1.0f, "1");
 			add_scale(2.0f, "2");
 			add_scale(4.0f, "4");
