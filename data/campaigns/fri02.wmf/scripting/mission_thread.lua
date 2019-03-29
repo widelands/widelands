@@ -339,7 +339,7 @@ function mission_thread()
    p2:set_attack_forbidden(1, true)
    p2:set_attack_forbidden(3, true)
    run(function()
-      while true do
+      repeat
          local conquered = (#p3:get_buildings("empire_sentry") +
                             #p3:get_buildings("empire_blockhouse") +
                             #p3:get_buildings("empire_outpost") +
@@ -354,7 +354,8 @@ function mission_thread()
                             #p2:get_buildings("barbarians_citadel"))
          p2:set_attack_forbidden(3, conquered <= 0)
          sleep(6913)
-      end
+      until p3.defeated or p2.defeated
+      p2:set_attack_forbidden(3, false)
    end)
 
    campaign_message_box(intro_3)
