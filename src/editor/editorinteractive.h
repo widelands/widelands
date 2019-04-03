@@ -29,6 +29,7 @@
 #include "editor/tools/noise_height_tool.h"
 #include "editor/tools/place_critter_tool.h"
 #include "editor/tools/place_immovable_tool.h"
+#include "editor/tools/resize_tool.h"
 #include "editor/tools/set_origin_tool.h"
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_starting_pos_tool.h"
@@ -49,7 +50,7 @@ class EditorTool;
 class EditorInteractive : public InteractiveBase {
 public:
 	struct Tools {
-		Tools()
+		Tools(const Widelands::Map& map)
 		   : current_pointer(&info),
 		     use_tool(EditorTool::First),
 		     increase_height(decrease_height, set_height),
@@ -58,7 +59,8 @@ public:
 		     place_critter(delete_critter),
 		     increase_resources(decrease_resources, set_resources),
 		     set_port_space(unset_port_space),
-		     set_origin() {
+		     set_origin(),
+		     resize(map.get_width(), map.get_height()) {
 		}
 		EditorTool& current() const {
 			return *current_pointer;
@@ -83,6 +85,7 @@ public:
 		EditorSetPortSpaceTool set_port_space;
 		EditorUnsetPortSpaceTool unset_port_space;
 		EditorSetOriginTool set_origin;
+		EditorResizeTool resize;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
 
@@ -162,6 +165,7 @@ private:
 	UI::UniqueWindow::Registry immovablemenu_;
 	UI::UniqueWindow::Registry crittermenu_;
 	UI::UniqueWindow::Registry resourcesmenu_;
+	UI::UniqueWindow::Registry resizemenu_;
 	UI::UniqueWindow::Registry helpmenu_;
 
 	UI::Button* toggle_buildhelp_;

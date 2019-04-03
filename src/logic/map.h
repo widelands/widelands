@@ -104,6 +104,18 @@ struct FindBobAlwaysTrue : public FindBob {
 	}  // make gcc shut up
 };
 
+// Helper struct to save certain elemental data of a field without an actual instance of Field
+struct FieldData {
+	FieldData(const Field& f);
+
+	std::string immovable;
+	std::list<std::string> bobs;
+	uint8_t height;
+	DescriptionIndex resources;
+	uint8_t resource_amount;
+	Field::Terrains terrains;
+};
+
 /** class Map
  *
  * This really identifies a map like it is in the game
@@ -497,6 +509,9 @@ public:
 
 	// Visible for testing.
 	void set_size(uint32_t w, uint32_t h);
+
+	// Change the map size
+	std::map<Coords, FieldData> resize(EditorGameBase& egbase, Coords coords, int32_t w, int32_t h);
 
 private:
 	void recalc_border(const FCoords&);

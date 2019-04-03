@@ -72,7 +72,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      is_painting_(false),
      undo_(nullptr),
      redo_(nullptr),
-     tools_(new Tools()),
+     tools_(new Tools(e.map())),
      history_(nullptr)  // history needs the undo/redo buttons
 {
 	add_toolbar_button("wui/menus/menu_toggle_menu", "menu", _("Main menu"), &mainmenu_, true);
@@ -652,7 +652,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 		undo_->set_enabled(false);
 		redo_->set_enabled(false);
 
-		tools_.reset(new Tools());
+		tools_.reset(new Tools(egbase().map()));
 		select_tool(tools_->info, EditorTool::First);
 		set_sel_radius(0);
 

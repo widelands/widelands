@@ -21,9 +21,11 @@
 #define WL_EDITOR_TOOLS_ACTION_ARGS_H
 
 #include <list>
+#include <map>
 #include <string>
 
 #include "logic/field.h"
+#include "logic/map.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
@@ -52,11 +54,16 @@ struct EditorActionArgs {
 	std::list<Widelands::Field::Height> original_heights;  // change height tool
 	Widelands::DescriptionIndex current_resource;          // resources change tools
 	Widelands::ResourceAmount set_to;                      // resources change tools
+	Widelands::Extent new_map_size;                                   // resize tool
 
 	struct ResourceState {
 		Widelands::FCoords location;
 		Widelands::DescriptionIndex idx;
 		Widelands::ResourceAmount amount;
+	};
+	struct ResizeHistory {
+		Widelands::Extent old_map_size = Widelands::Extent(0, 0);
+		std::map<Widelands::Coords, Widelands::FieldData> deleted_fields;
 	};
 
 	std::list<ResourceState> original_resource;                        // resources set tool
@@ -65,6 +72,7 @@ struct EditorActionArgs {
 	std::list<Widelands::DescriptionIndex> new_immovable_types;        // immovable change tools
 	Widelands::HeightInterval interval;                                // noise height tool
 	std::list<Widelands::DescriptionIndex> terrain_type, original_terrain_type;  // set terrain tool
+	ResizeHistory resized;                                             // resize tool
 
 	std::list<EditorToolAction*> draw_actions;  // draw tool
 
