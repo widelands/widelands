@@ -547,13 +547,15 @@ void Map::set_origin(const Coords& new_origin) {
 /* Helper function for resize():
  * Calculates the coords of 'c' after resizing the map from the given old size to the given new size at 'split'.
  */
-static Coords transform_coords(Coords c, Coords split,
+static Coords transform_coords(const Coords& c, const Coords& split,
 		int16_t w_new, int16_t h_new, int16_t w_old, int16_t h_old) {
 	const int16_t delta_w = w_new - w_old;
 	const int16_t delta_h = h_new - h_old;
 	if (c.x < split.x && c.y < split.y) {
 		// Nothing to shift
-		return c;
+		Coords result(c);
+		Map::normalize_coords(result, w_new, h_new);
+		return result;
 	} else if ((w_new < w_old && c.x >= split.x && c.x < split.x - delta_w) ||
 			(h_new < h_old && c.y >= split.y && c.y < split.y - delta_h)) {
 		// Field removed
@@ -566,14 +568,15 @@ static Coords transform_coords(Coords c, Coords split,
 	if (c.y >= split.y) {
 		result.y += delta_h;
 	}
+	Map::normalize_coords(result, w_new, h_new);
 	return result;
 }
 
-/* Change the size of the (already initialized) map.
+/* Change the size of the (already initialized) map to 'w'×'h' by inserting/deleting fields south and east of 'split'.
  * Returns the data of fields that were deleted during resizing.
  * Note that you should call recalc_whole_map() afterwards to resolve height differences etc.
  */
-std::map<Coords, FieldData> Map::resize(EditorGameBase& egbase, Coords coords, const int32_t w, const int32_t h) {
+std::map<Coords, FieldData> Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {
 	assert(w > 0);
 	assert(h > 0);
 
@@ -583,6 +586,7 @@ std::map<Coords, FieldData> Map::resize(EditorGameBase& egbase, Coords coords, c
 	}
 
 	const uint32_t field_size = w * h;
+	const uint32_t old_field_size = width_ * height_;
 
 	std::unique_ptr<Field[]> new_fields(new Field[field_size]);
 	clear_array(&new_fields, field_size);
@@ -591,40 +595,48 @@ std::map<Coords, FieldData> Map::resize(EditorGameBase& egbase, Coords coords, c
 	for (uint8_t i = get_nrplayers(); i;) {
 		--i;
 		if (starting_pos_[i]) {
-			starting_pos_[i] = transform_coords(starting_pos_[i], coords, w, h, width_, height_);
+			starting_pos_[i] = transform_coords(starting_pos_[i], split, w, h, width_, height_);
 		}
 	}
 
 	PortSpacesSet new_port_spaces;
 	for (Coords it : port_spaces_) {
-		if (Coords c = transform_coords(it, coords, w, h, width_, height_)) {
+		if (Coords c = transform_coords(it, split, w, h, width_, height_)) {
 			new_port_spaces.insert(c);
 		}
 	}
 	port_spaces_ = new_port_spaces;
 
 	Field::Terrains default_terrains;
-	default_terrains.d = 0;
 	default_terrains.r = 0;
+	default_terrains.d = 0;
+
+	std::unique_ptr<bool[]> preserved_coords(new bool[old_field_size]);
+	memset(preserved_coords.get(), false, sizeof(bool) * old_field_size);
+
 	for (int16_t x = 0; x < w; ++x) {
 		for (int16_t y = 0; y < h; ++y) {
 			Coords c_new = Coords(x, y);
-			if (Coords c_old = transform_coords(c_new, coords, width_, height_, w, h)) {
-				// Copy existing field
-				new_fields[get_index(c_new, w)] = operator[](c_old);
-			} else {
-				// Init new field
-				Field& field = new_fields[get_index(c_new, w)];
-				field.set_height(10);
-				field.set_terrains(default_terrains);
+			if (Coords c_old = transform_coords(c_new, split, width_, height_, w, h)) {
+				bool& entry = preserved_coords[get_index(c_old, width_)];
+				if (!entry) {
+					// Copy existing field
+					entry = true;
+					new_fields[get_index(c_new, w)] = operator[](c_old);
+					continue;
+				}
 			}
+			// Init new field
+			Field& field = new_fields[get_index(c_new, w)];
+			field.set_height(10);
+			field.set_terrains(default_terrains);
 		}
 	}
 
 	for (int16_t x = 0; x < width_; ++x) {
 		for (int16_t y = 0; y < height_; ++y) {
 			Coords c(x, y);
-			if (!transform_coords(c, coords, w, h, width_, height_)) {
+			if (!preserved_coords[get_index(c, width_)]) {
 				// Save the data of fields that will be deleted
 				Field& field = operator[](c);
 				deleted.emplace(c, FieldData(field));
@@ -645,7 +657,7 @@ std::map<Coords, FieldData> Map::resize(EditorGameBase& egbase, Coords coords, c
 	for (size_t ind = 0; ind < field_size; ind++) {
 		fields_[ind] = new_fields[ind];
 	}
-	log("Resized map from (%d, %d) to (%u, %u) at (%d, %d)\n", width_, height_, w, h, coords.x, coords.y);
+	log("Resized map from (%d, %d) to (%u, %u) at (%d, %d)\n", width_, height_, w, h, split.x, split.y);
 	width_ = w;
 	height_ = h;
 

@@ -29,7 +29,17 @@ int32_t EditorResizeTool::handle_click_impl(const Widelands::World& world,
                                                   EditorActionArgs* args,
                                                   Widelands::Map* map) {
 	Widelands::EditorGameBase& egbase = parent.egbase();
+
 	args->resized.old_map_size = map->extent();
+	args->resized.port_spaces.clear();
+	args->resized.starting_positions.clear();
+	for (const Widelands::Coords& ps : map->get_port_spaces()) {
+		args->resized.port_spaces.push_back(Widelands::Coords(ps));
+	}
+	for (uint8_t i = 1; i <= map->get_nrplayers(); ++i) {
+		args->resized.starting_positions.push_back(map->get_starting_pos(i));
+	}
+
 	args->resized.deleted_fields = map->resize(egbase, center.node, args->new_map_size.w, args->new_map_size.h);
 
 	map->recalc_whole_map(world);
@@ -69,6 +79,14 @@ int32_t EditorResizeTool::handle_undo_impl(
 			egbase.create_critter(f, bob);
 		}
 	}
+
+	for (const Widelands::Coords& c : args->resized.port_spaces) {
+		map->set_port_space(world, c, true);
+	}
+	for (uint8_t i = 1; i <= map->get_nrplayers(); ++i) {
+		map->set_starting_pos(i, args->resized.starting_positions[i - 1]);
+	}
+
 	map->recalc_whole_map(world);
 	return 0;
 }
