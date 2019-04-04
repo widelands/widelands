@@ -1110,7 +1110,9 @@ void Fleet::Loader::load(FileRead& fr) {
 
 	const uint32_t nrww = fr.unsigned_32();
 	for (uint32_t i = 0; i < nrww; ++i) {
-		pending_ferry_requests_.emplace(fr.unsigned_32(), fr.unsigned_32());
+		const uint32_t gametime = fr.unsigned_32();
+		const uint32_t serial = fr.unsigned_32();
+		pending_ferry_requests_.emplace(gametime, serial);
 	}
 }
 
