@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-22 18:47+0000\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -222,7 +222,7 @@ msgid "Dec"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:222
-#: ../../src/logic/game.cc:275
+#: ../../src/logic/game.cc:282
 msgid "Loading tribes"
 msgstr ""
 
@@ -301,7 +301,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:181 ../../src/logic/game.cc:232
-#: ../../src/logic/game.cc:282
+#: ../../src/logic/game.cc:289
 msgid "Creating players"
 msgstr ""
 
@@ -1086,37 +1086,37 @@ msgstr ""
 msgid "Not set"
 msgstr ""
 
-#: ../../src/logic/game.cc:214 ../../src/logic/game.cc:266
-#: ../../src/logic/game.cc:341 ../../src/logic/game.cc:376
+#: ../../src/logic/game.cc:214 ../../src/logic/game.cc:273
+#: ../../src/logic/game.cc:348 ../../src/logic/game.cc:383
 msgid "Preloading map"
 msgstr ""
 
-#: ../../src/logic/game.cc:220 ../../src/logic/game.cc:272
+#: ../../src/logic/game.cc:220 ../../src/logic/game.cc:279
 msgid "Loading world"
 msgstr ""
 
-#: ../../src/logic/game.cc:242 ../../src/logic/game.cc:310
+#: ../../src/logic/game.cc:249 ../../src/logic/game.cc:317
 msgid "Loading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:317
+#: ../../src/logic/game.cc:324
 msgid "Initializing game…"
 msgstr ""
 
-#: ../../src/logic/game.cc:354 ../../src/logic/game.cc:393
+#: ../../src/logic/game.cc:361 ../../src/logic/game.cc:400
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1424
 msgid "Loading…"
 msgstr ""
 
-#: ../../src/logic/game.cc:456
+#: ../../src/logic/game.cc:463
 msgid "Creating player infrastructure"
 msgstr ""
 
-#: ../../src/logic/game.cc:467 ../../src/logic/player.cc:222
+#: ../../src/logic/game.cc:474 ../../src/logic/player.cc:222
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:468 ../../src/logic/player.cc:223
+#: ../../src/logic/game.cc:475 ../../src/logic/player.cc:223
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting "
@@ -1125,11 +1125,11 @@ msgid ""
 "this problem."
 msgstr ""
 
-#: ../../src/logic/game.cc:858
+#: ../../src/logic/game.cc:865
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:860
+#: ../../src/logic/game.cc:867
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -3199,19 +3199,19 @@ msgstr ""
 msgid "Center view on this"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:525
+#: ../../src/wui/buildingwindow.cc:528
 msgid "Hide work area"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:528
+#: ../../src/wui/buildingwindow.cc:531
 msgid "Show work area"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:561
+#: ../../src/wui/buildingwindow.cc:564
 msgid "Start an expedition"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:565
+#: ../../src/wui/buildingwindow.cc:568
 msgid "Cancel the expedition"
 msgstr ""
 
