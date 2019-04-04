@@ -34,7 +34,7 @@ int32_t EditorResizeTool::handle_click_impl(const Widelands::World& world,
 	args->resized.port_spaces.clear();
 	args->resized.starting_positions.clear();
 	for (const Widelands::Coords& ps : map->get_port_spaces()) {
-		args->resized.port_spaces.push_back(Widelands::Coords(ps));
+		args->resized.port_spaces.insert(Widelands::Coords(ps));
 	}
 	for (uint8_t i = 1; i <= map->get_nrplayers(); ++i) {
 		args->resized.starting_positions.push_back(map->get_starting_pos(i));
@@ -81,7 +81,7 @@ int32_t EditorResizeTool::handle_undo_impl(
 	}
 
 	for (const Widelands::Coords& c : args->resized.port_spaces) {
-		map->set_port_space(world, c, true);
+		map->set_port_space(world, c, true, true);
 	}
 	for (uint8_t i = 1; i <= map->get_nrplayers(); ++i) {
 		map->set_starting_pos(i, args->resized.starting_positions[i - 1]);

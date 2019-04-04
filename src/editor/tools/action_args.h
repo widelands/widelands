@@ -24,6 +24,7 @@
 #include <map>
 #include <set>
 #include <string>
+#include <vector>
 
 #include "logic/field.h"
 #include "logic/map.h"
@@ -66,7 +67,7 @@ struct EditorActionArgs {
 		Widelands::Extent old_map_size = Widelands::Extent(0, 0);
 		std::map<Widelands::Coords, Widelands::FieldData> deleted_fields;
 		std::set<Widelands::Coords> port_spaces;
-		std::list<Widelands::Coords> starting_positions;
+		std::vector<Widelands::Coords> starting_positions;
 	};
 
 	std::list<ResourceState> original_resource;                        // resources set tool
