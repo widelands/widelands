@@ -70,7 +70,7 @@ private:
 	friend struct Fleet;
 	void set_fleet(Fleet* fleet);
 
-	void link_into_flags(EditorGameBase&);
+	void link_into_flags(EditorGameBase&) override;
 
 	void request_ferry(uint32_t gametime);
 

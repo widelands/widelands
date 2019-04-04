@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Jonatan Nyberg, 2018
+# Jonatan Nyberg, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-23 08:41+0000\n"
+"POT-Creation-Date: 2019-03-22 18:47+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Jonatan Nyberg, 2018\n"
+"Last-Translator: Jonatan Nyberg, 2019\n"
 "Language-Team: Swedish (https://www.transifex.com/widelands/teams/35159/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -869,6 +869,10 @@ msgid ""
 "it to build some of the training buildings for our soldiers. And most "
 "important and most imminent of all, we need it to send out expeditions."
 msgstr ""
+"Vi behöver lite tyg också för att producera rustning i vår rustningssmedja. "
+"Vi behöver den för att bygga några av träningsbyggnaderna för våra soldater."
+" Och viktigast och mest  överhängande av allt, vi behöver det för att skicka"
+" ut expeditioner."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:542
 msgid ""

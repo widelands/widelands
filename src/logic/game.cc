@@ -232,7 +232,14 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	loader_ui.step(_("Creating players"));
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		add_player(p, 0, map().get_scenario_player_tribe(p), map().get_scenario_player_name(p));
+		// If tribe name is empty, pick a random tribe
+		std::string tribe = map().get_scenario_player_tribe(p);
+		if (tribe.empty()) {
+			log("Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
+			const DescriptionIndex random = std::rand() % tribes().nrtribes();
+			tribe = tribes().get_tribe_descr(random)->name();
+		}
+		add_player(p, 0, tribe, map().get_scenario_player_name(p));
 		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
 	win_condition_displayname_ = "Scenario";

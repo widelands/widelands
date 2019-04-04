@@ -146,10 +146,10 @@ template <typename _Type> struct DefaultCookieAccessor {
 
 template <typename _T, typename _Cw, typename _CA>
 CookiePriorityQueue<_T, _Cw, _CA>::CookiePriorityQueue(
-   Widelands::WareWorker type,
+   Widelands::WareWorker wwtype,
    const typename CookiePriorityQueue<_T, _Cw, _CA>::Compare& comparator,
    const typename CookiePriorityQueue<_T, _Cw, _CA>::CookieAccessor& accessor)
-   : type_(type), c(comparator), ca(accessor) {
+   : type_(wwtype), c(comparator), ca(accessor) {
 }
 
 template <typename _T, typename _Cw, typename _CA>
