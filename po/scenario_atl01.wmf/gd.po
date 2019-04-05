@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2018
+# GunChleoc, 2015-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2015
 # GunChleoc, 2013-2014,2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-02 08:01+0000\n"
-"PO-Revision-Date: 2018-03-02 09:23+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-03-29 17:42+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -897,7 +897,7 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away…"
-msgstr "Moladh do Shatul! Chaidh an latha le Ostur, an saor-luinge òg. Tha trì longan againn – chan fhaca mi gin na bu treasa roimhe riamh – le rum gu leòr annta gus ar muinntir gu lèir agus beagan stòrasan a chur annta. Agus fhuair sinn teasairginn ri deagh-àm: tha Lutas gu bhith slugadh an corr dhen eilean ’s an cuan ag èiridh nas luaithe gach uair. Ach teichidh sinn a-nis agus gheibh sinn beatha ùr air tìr nas fhaide air falbh…"
+msgstr "Moladh do Shatul! Chaidh an latha le Ostur, an saor-luinge òg. Tha trì longan againn – chan fhaca mi gin na bu treasa roimhe riamh – le rum gu leòr annta gus ar muinntir gu lèir agus beagan bhatharan a chur annta. Agus fhuair sinn teasairginn ri deagh-àm: tha Lutas gu bhith slugadh an corr dhen eilean ’s an cuan ag èiridh nas luaithe gach uair. Ach teichidh sinn a-nis agus gheibh sinn beatha ùr air tìr nas fhaide air falbh…"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:477

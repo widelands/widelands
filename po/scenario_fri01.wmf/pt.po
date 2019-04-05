@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# zecas <jjorge@free.fr>, 2018
+# zecas <jjorge@free.fr>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: zecas <jjorge@free.fr>, 2018\n"
+"Last-Translator: zecas <jjorge@free.fr>, 2019\n"
 "Language-Team: Portuguese (https://www.transifex.com/widelands/teams/35159/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +41,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:37
 msgid "Brick Economy"
-msgstr ""
+msgstr "Economia de Tijolos"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:38
 msgid ""
@@ -64,41 +64,43 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × Troncos"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "30 × Granite"
-msgstr ""
+msgstr "30 × Granito"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "10 × Clay"
-msgstr ""
+msgstr "10 × Argila"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "40 × Brick"
-msgstr ""
+msgstr "40 × Tijolo"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:51
 msgid "20 × Coal"
-msgstr ""
+msgstr "20 × Carvão"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:52
 msgid "30 × Thatch Reed"
-msgstr ""
+msgstr "30 × Colmo"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:53
 msgid ""
 "Remember that you can set target quantities for most of these wares in your "
 "economy settings."
 msgstr ""
+"Lembre-se que pode controlar a quantia produzida na configuração da "
+"economia."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Produce food for the miners"
-msgstr ""
+msgstr "Produz comida para os mineiros"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:60
 msgid "Food Economy"
-msgstr ""
+msgstr "Economia da Alimentação"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:61
 msgid ""
