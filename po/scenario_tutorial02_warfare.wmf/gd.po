@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2018
+# GunChleoc, 2015-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-23 09:59+0000\n"
-"PO-Revision-Date: 2019-02-28 09:03+0000\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-03-29 17:20+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -274,7 +274,7 @@ msgid ""
 " ability levels cannot be compared: an Imperial soldier has a base attack of"
 " %1% at level 0, while a Barbarian soldier at the same level only has a base"
 " attack of %2%."
-msgstr "Thoir an aire cuideachd gu bheil dòighean oideachaidh fa leth aig gach treubh ann an Widelands, mar sin tha na togalaichean agus am bathar eadar-dhealaichte. Cuideachd, cha ghabh na leibheilean a choimeas: tha ionnsaigh bhunasach dhe %1% aig saighdear na h-Impireachd air leibheil 0 fad ’s nach eil ach  ionnsaigh bhunasach dhe %2% aig saighdear Tùsanach air an aon leibheil."
+msgstr "Thoir an aire cuideachd gu bheil dòighean oideachaidh fa leth aig gach treubh ann an Widelands, mar sin tha na togalaichean agus am bathar eadar-dhealaichte. Cuideachd, cha ghabh na leibheilean a choimeas: tha ionnsaigh bhunasach dhe %1% aig saighdear na h-Impireachd air leibheil 0 fad ’s nach eil ach ionnsaigh bhunasach dhe %2% aig saighdear Tùsanach air an aon leibheil."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
