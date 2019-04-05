@@ -574,7 +574,10 @@ static Coords transform_coords(const Coords& c, const Coords& split,
 
 /* Change the size of the (already initialized) map to 'w'×'h' by inserting/deleting fields south and east of 'split'.
  * Returns the data of fields that were deleted during resizing.
- * Note that you should call recalc_whole_map() afterwards to resolve height differences etc.
+ * You should call recalc_whole_map() afterwards to resolve height differences etc., and then notify the
+ * players (e.g. with Notifications or EditorGameBase::allocate_player_maps()) about the map changes.
+ * This is not done by this function because the editor may want to do some post-resize cleanup first,
+ * and this function is intended to be used only by the editor anyway.
  */
 std::map<Coords, FieldData> Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {
 	assert(w > 0);
