@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # tamanegi, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-15 11:14+0000\n"
-"PO-Revision-Date: 2019-02-22 13:42+0000\n"
-"Last-Translator: tamanegi\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-03-29 16:59+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -369,6 +370,7 @@ msgstr "建物の建設、船の帆、兵士の訓練に使うタバードに使
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:13
 #: ../../data/tribes/buildings/productionsites/empire/well/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:13
 msgctxt "building"
 msgid "Draws water out of the deep."
 msgstr "地下から水を汲み上げます。"
@@ -464,7 +466,7 @@ msgstr "野蛮人の斧工房は三段階の内、真ん中の段階です。金
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
 #: ../../data/tribes/scripting/help/global_helptexts.lua:69
@@ -1457,7 +1459,7 @@ msgstr "大麦と水から鉱夫や兵士が食べるパンを焼きます。"
 #, lua-format
 msgctxt "frisians_building"
 msgid "The bakery needs %s on average to produce one loaf of bread."
-msgstr "パン職人が一単位のパンを焼くには平均 %1%かかります。"
+msgstr "パン職人が一単位のパンを焼くには平均 %sかかります。"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:3
@@ -2336,7 +2338,7 @@ msgid ""
 msgstr "部族が塩水を飲まないのはなぜだ、と問われた時にアールドール族長が返した言葉"
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The well needs %s on average to produce one bucket of water."
