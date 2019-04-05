@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-15 11:14+0000\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -133,7 +133,7 @@ msgid ""
 "Replace the two forester’s houses by new ones to increase productivity."
 msgstr ""
 "Tog taighean planntair-choille ùra an àite na seann-fheadhna airson barrachd"
-" dèanadais."
+" cinneasachd."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:109
 msgid "Find the monastery in the north"
@@ -233,15 +233,16 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:165
 msgid "Build 2 charcoal kiln"
-msgstr "Tog 2 àth-ghuail"
+msgstr "Tog 2 shloc guail-fhiodha"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:167
 msgid "Build Two Charcoal Kilns"
-msgstr "Tog dà àth-ghuail"
+msgstr "Tog dà shloc guail-fhiodha"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:168
 msgid "Build two charcoal kilns to support the iron industry."
-msgstr "Tog dà àth-ghuail airson taic a chur ri gnìomhachas an iarrainn."
+msgstr ""
+"Tog dà shloc guail-fhiodha airson taic a chur ri gnìomhachas an iarainn."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:169
 msgid "Remember to ensure a constant log supply for them."
@@ -373,7 +374,7 @@ msgid ""
 "the road network seems to be completely in shambles as well. Who might be "
 "responsible for this chaos?"
 msgstr ""
-"Ochan ò! Tha Amalea ceart. A dh’innse na fìrinn, chan fhaic mi saothrachadh "
+"Ochan ò! Tha Amalea ceart. A dh’innse na fìrinn, chan fhaic mi cinneasachd "
 "sam bith. Agus tha coltas gu bheil lìonra nan rathaidean millte gu lèir. "
 "Saoil cò dh’adhbharaich an rù-rà sin?"
 
@@ -493,7 +494,7 @@ msgstr "Tha Amalea a’ cur neònachas oirre"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:295
 msgid "Amalea is doubtful…"
-msgstr "Tha Amalea amharasach"
+msgstr "Tha Amalea amharasach…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:297
@@ -513,10 +514,10 @@ msgid ""
 " managed our country while we were absent created utter chaos. I’m not quite"
 " sure how we can fix this, if at all possible."
 msgstr ""
-"Seall air an eaconamaidh againn. Cha mhòr nach dèid dad a shaothrachadh "
-"idir. Ge b’ e cò a stiùirich ar dùthaich fad ’s a bha sinn thall thairis, "
-"cha do chruthaich iad ach bùrach mòr. Chan eil mi buileach cinnteach ciamar "
-"a chàraicheas sinn e ma ghabhas a chàradh idir."
+"Seall air an eaconamaidh againn. Cha mhòr nach dèid dad a chinneasachd idir."
+" Ge b’ e cò a stiùirich ar dùthaich fad ’s a bha sinn thall thairis, cha do "
+"chruthaich iad ach bùrach mòr. Chan eil mi buileach cinnteach ciamar a "
+"chàraicheas sinn e ma ghabhas a chàradh idir."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:305
 msgid "Amalea Investigates"
@@ -599,9 +600,9 @@ msgid ""
 " productivity and the constructors don’t know how to dismantle them either."
 msgstr ""
 "’S e an dorch-fhortan gun do chaill ar muinntir na planaichean-togail is "
-"obrachaidh nan tuathanasan. Chan fhaigh iad toradh sam bith air a shàilleibh"
-" agus chan eil fios aig an luchd-togail mar a chuireas iad às an cèile iad "
-"nas motha."
+"obrachaidh nan tuathanasan. Chan fhaigh iad cinneasachd sam bith air a "
+"shàilleibh agus chan eil fios aig an luchd-togail mar a chuireas iad às an "
+"cèile iad nas motha."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:330
@@ -870,9 +871,9 @@ msgid ""
 "too many resources."
 msgstr ""
 "Nise, a Lutius, seo duilgheadas eile dhut: às dèidh cuid a leann is flùr a "
-"shaothrachadh, mhothaich mi gu bheil an teicneolas a tha na muilleanan is na"
-" taighean-grùide againn a’ cleachdadh caran sean. Tha iad a’ caitheamh fada "
-"cus a stòrasan mar sin."
+"shaothrachadh, mhothaich mi gu bheil an teicneolas a tha na muilleannan is "
+"na taighean-grùide againn a’ cleachdadh caran sean. Tha iad a’ caitheamh "
+"fada cus a stòrasan mar sin."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:441
@@ -944,7 +945,7 @@ msgid ""
 "and her priestesses could have helped us against the Barbarians."
 msgstr ""
 "Chan eil mi cinnteach am bu sin an roghainn cheart. Seadh, ’s ann gun d’ "
-"fhuair sinn na planaichean. Ach ged a tha sinn comasach air muilleanan is "
+"fhuair sinn na planaichean. Ach ged a tha sinn comasach air muilleannan is "
 "taighean-grùide a thogail ’s a leasachadh leis an teicneolas leasaichte "
 "a-nis, cha bhi fios againn gu bràth tuilleadh an cuidicheadh Vesta ’s a ban-"
 "sagartan sinn an aghaidh nan Tùsanach."
@@ -955,8 +956,8 @@ msgid ""
 "Furthermore, we will have to live with the guilt of destroying a temple of "
 "an Empire goddess on our souls."
 msgstr ""
-"A bharrachd air sin, ’s ann air ar n-anman-ne a tha an an cionta a-nis gun "
-"do mhill sinn teampall ban-dia na h-Impireachd."
+"A bharrachd air sin, ’s ann air ar n-anman-ne a tha an cionta a-nis gun do "
+"mhill sinn teampall ban-dia na h-Impireachd."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:474
 msgid "Amalea is Very Content"
@@ -975,7 +976,7 @@ msgid ""
 msgstr ""
 "Glè mhath. ’S urrainn dhuinn togalaichean nas èifeachdaiche a thogail a-nis "
 "ach am pisich sinn a’ chruithneachd againn. A bharrachd air sin, leigidh na "
-"planaichean leinn am muillean is taigh-grùide againn a leasachadh leis an "
+"planaichean leinn am muilleann is taigh-grùide againn a leasachadh leis an "
 "teicneolas leasaichte."
 
 #. TRANSLATORS: Amalea
@@ -1473,10 +1474,10 @@ msgid ""
 "training facilities, we should train as many fully promoted soldiers as we "
 "can. I really would consider them heroes after that."
 msgstr ""
-"A chinn-fheachd, nise on a tha barrachd ghoireasan oideachaidh againn ’s iad"
-" nas fheàrr cuideachd, bu chòir dhuinn nas urrainn dhuinn a shaighdearan "
-"oideachadh ach an ruig iad an rang às àirde. Chuirinn-sa curaidhean orra an "
-"uairsin."
+"A chinn-fheachd, nise on a tha barrachd leanna againn ’s goireasan "
+"oideachaidh leasaichte cuideachd, bu chòir dhuinn nas urrainn dhuinn a "
+"shaighdearan oideachadh ach an ruig iad an rang às àirde. Chuirinn-sa "
+"curaidhean orra an uairsin."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:693
 msgid ""

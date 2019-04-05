@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2018
+# GunChleoc, 2015-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-23 09:59+0000\n"
-"PO-Revision-Date: 2019-02-28 09:03+0000\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-03-29 17:44+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -600,7 +600,7 @@ msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as"
 " many flags as you can on road segments to share the load better."
-msgstr "Thoir an aire air na slèibhtean nuair a thogas tu rathaidean is faigh buannachd asta. Feuch cuideachd gun cum thu na rathaidean cho goirid ’s a ghabhas is cuimhnich gun tog thu an uiread de bhrataich a ghabhas air roinnean an rathaid gus an eallach a sgaoileadh nas fhearr."
+msgstr "Thoir an aire air na slèibhtean nuair a thogas tu rathaidean is faigh buannachd asta. Feuch cuideachd gun cum thu na rathaidean cho goirid ’s a ghabhas is cuimhnich gun tog thu an uiread de bhrataichean a ghabhas air roinnean an rathaid gus an eallach a sgaoileadh nas fhearr."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:305
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:315
