@@ -77,8 +77,7 @@ void StockMenu::fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::W
 	const Widelands::Player& player = *player_.get_player();
 	for (const auto& economy : player.economies()) {
 		if (economy.second->type() == type) {
-			waresdisplay->add_warelist(type == Widelands::wwWARE ? economy.second->get_wares() :
-				                                                   economy.second->get_workers());
+			waresdisplay->add_warelist(economy.second->get_wares_or_workers());
 		}
 	}
 }

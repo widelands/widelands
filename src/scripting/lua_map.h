@@ -799,10 +799,8 @@ public:
 	/*
 	 * Lua methods
 	 */
-	int ware_target_quantity(lua_State*);
-	int worker_target_quantity(lua_State*);
-	int set_ware_target_quantity(lua_State*);
-	int set_worker_target_quantity(lua_State*);
+	int target_quantity(lua_State*);
+	int set_target_quantity(lua_State*);
 
 	/*
 	 * C methods

@@ -299,7 +299,7 @@ std::string ProductionProgram::ActReturn::Negation::description_negation(const T
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate(const ProductionSite& ps) const {
-	return ps.get_economy(wwWARE)->needs_ware(ware_type);
+	return ps.get_economy(wwWARE)->needs_ware_or_worker(ware_type);
 }
 std::string
 ProductionProgram::ActReturn::EconomyNeedsWare::description(const Tribes& tribes) const {
@@ -321,7 +321,7 @@ ProductionProgram::ActReturn::EconomyNeedsWare::description_negation(const Tribe
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate(const ProductionSite& ps) const {
-	return ps.get_economy(wwWORKER)->needs_worker(worker_type);
+	return ps.get_economy(wwWORKER)->needs_ware_or_worker(worker_type);
 }
 std::string
 ProductionProgram::ActReturn::EconomyNeedsWorker::description(const Tribes& tribes) const {

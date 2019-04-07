@@ -29,7 +29,7 @@
 
 namespace Widelands {
 
-struct Fleet;
+struct ShipFleet;
 struct RoutingNodeNeighbour;
 struct Ship;
 class Warehouse;
@@ -67,7 +67,7 @@ private:
  * port that is on a land bridge and therefore close to two
  * disconnected bodies of water. Such a port would have to have
  * two PortDock that belong to the same @ref Warehouse, but have
- * separate @ref Fleet instances.
+ * separate @ref ShipFleet instances.
  * However, we expect this to be such a rare case that it is not
  * implemented at the moment.
  */
@@ -81,7 +81,7 @@ public:
 	void add_position(Widelands::Coords where);
 	Warehouse* get_warehouse() const;
 
-	Fleet* get_fleet() const {
+	ShipFleet* get_fleet() const {
 		return fleet_;
 	}
 	PortDock* get_dock(Flag& flag) const;
@@ -135,14 +135,14 @@ public:
 	void expedition_bootstrap_complete(Game& game);
 
 private:
-	friend struct Fleet;
+	friend struct ShipFleet;
 
 	void init_fleet(EditorGameBase& egbase);
-	void set_fleet(Fleet* fleet);
+	void set_fleet(ShipFleet* fleet);
 	void update_shippingitem(Game&, std::vector<ShippingItem>::iterator);
 	void set_need_ship(Game&, bool need);
 
-	Fleet* fleet_;
+	ShipFleet* fleet_;
 	Warehouse* warehouse_;
 	PositionList dockpoints_;
 	std::vector<ShippingItem> waiting_;

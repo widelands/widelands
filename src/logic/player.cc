@@ -548,8 +548,8 @@ Waterway* Player::build_waterway(const Path& path) {
 						return nullptr;
 					}
 				}
-				if (!map.can_reach_by_water(fc)) {
-					log("%i: building waterway aborted, unswimmable\n", player_number());
+				if (!CheckStepFerry(egbase()).reachable_dest(map, fc)) {
+					log("%i: building waterway aborted, unreachable for ferries\n", player_number());
 					return nullptr;
 				}
 			}

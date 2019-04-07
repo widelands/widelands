@@ -27,7 +27,7 @@
 
 namespace Widelands {
 
-struct Fleet;
+struct FerryFleet;
 struct Waterway;
 struct Coords;
 
@@ -64,7 +64,7 @@ struct Ferry : public Carrier {
 	bool init(EditorGameBase&) override;
 	void set_economy(Game&, Economy*, WareWorker);
 
-	Fleet* get_fleet() const;
+	FerryFleet* get_fleet() const;
 
 	Waterway* get_destination(Game& game) const;
 	void set_destination(Game& game, Waterway* ww);
@@ -76,13 +76,13 @@ struct Ferry : public Carrier {
 	bool unemployed();
 
 private:
-	friend struct Fleet;
-	Fleet* fleet_;
+	friend struct FerryFleet;
+	FerryFleet* fleet_;
 
 	std::unique_ptr<Coords> destination_;
 
 	bool init_fleet();
-	void set_fleet(Fleet* fleet);
+	void set_fleet(FerryFleet* fleet);
 
 	static const Task taskUnemployed;
 	static const Task taskRow;

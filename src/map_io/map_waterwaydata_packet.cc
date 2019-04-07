@@ -22,8 +22,8 @@
 #include <map>
 
 #include "base/macros.h"
+#include "economy/ferry_fleet.h"
 #include "economy/flag.h"
-#include "economy/fleet.h"
 #include "economy/waterway.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -119,7 +119,7 @@ void MapWaterwaydataPacket::read(FileSystem& fs,
 					uint32_t ferry_serial = fr.unsigned_32();
 					if (fleet_serial > 0) {
 						try {
-							ww.fleet_ = &mol.get<Fleet>(fleet_serial);
+							ww.fleet_ = &mol.get<FerryFleet>(fleet_serial);
 						} catch (const WException& e) {
 							throw GameDataError("fleet (%u): %s", fleet_serial, e.what());
 						}

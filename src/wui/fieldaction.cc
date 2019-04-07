@@ -27,6 +27,7 @@
 #include "economy/waterway.h"
 #include "graphic/graphic.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/attack_target.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -320,7 +321,8 @@ void FieldActionWindow::add_buttons_auto() {
 			if (can_act) {
 				add_button(buildbox, "build_road", pic_buildroad, &FieldActionWindow::act_buildroad,
 				           _("Build road"));
-				if (map_.can_reach_by_water(node_) && map_.get_waterway_max_length() >= 2) {
+				if (map_.get_waterway_max_length() >= 2 &&
+						Widelands::CheckStepFerry(igbase->egbase()).reachable_dest(map_, node_)) {
 					add_button(buildbox, "build_waterway", pic_buildwaterway, &FieldActionWindow::act_buildwaterway,
 						       _("Build waterway"));
 	           }

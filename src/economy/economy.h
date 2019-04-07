@@ -152,14 +152,10 @@ public:
 	// (i.e. an Expedition ship).
 	Flag* get_arbitrary_flag();
 
-	void set_ware_target_quantity(DescriptionIndex, Quantity, Time);
-	void set_worker_target_quantity(DescriptionIndex, Quantity, Time);
+	void set_target_quantity(DescriptionIndex, Quantity, Time);
 
-	void add_wares(DescriptionIndex, Quantity count = 1);
-	void remove_wares(DescriptionIndex, Quantity count = 1);
-
-	void add_workers(DescriptionIndex, Quantity count = 1);
-	void remove_workers(DescriptionIndex, Quantity count = 1);
+	void add_wares_or_workers(DescriptionIndex, Quantity count = 1);
+	void remove_wares_or_workers(DescriptionIndex, Quantity count = 1);
 
 	void add_warehouse(Warehouse&);
 	void remove_warehouse(Warehouse&);
@@ -174,34 +170,20 @@ public:
 	void remove_supply(Supply&);
 
 	/// information about this economy
-	Quantity stock_ware(DescriptionIndex const i) {
-		return wares_.stock(i);
-	}
-	Quantity stock_worker(DescriptionIndex const i) {
-		return workers_.stock(i);
+	Quantity stock_ware_or_worker(DescriptionIndex const i) {
+		return wares_or_workers_.stock(i);
 	}
 
-	/// Whether the economy needs more of this ware type.
+	/// Whether the economy needs more of this ware/worker type.
 	/// Productionsites may ask this before they produce, to avoid depleting a
 	/// ware type by overproducing another from it.
-	bool needs_ware(DescriptionIndex) const;
+	bool needs_ware_or_worker(DescriptionIndex) const;
 
-	/// Whether the economy needs more of this worker type.
-	/// Productionsites may ask this before they produce, to avoid depleting a
-	/// ware type by overproducing a worker type from it.
-	bool needs_worker(DescriptionIndex) const;
-
-	const TargetQuantity& ware_target_quantity(DescriptionIndex const i) const {
-		return ware_target_quantities_[i];
+	const TargetQuantity& target_quantity(DescriptionIndex const i) const {
+		return target_quantities_[i];
 	}
-	TargetQuantity& ware_target_quantity(DescriptionIndex const i) {
-		return ware_target_quantities_[i];
-	}
-	const TargetQuantity& worker_target_quantity(DescriptionIndex const i) const {
-		return worker_target_quantities_[i];
-	}
-	TargetQuantity& worker_target_quantity(DescriptionIndex const i) {
-		return worker_target_quantities_[i];
+	TargetQuantity& target_quantity(DescriptionIndex const i) {
+		return target_quantities_[i];
 	}
 
 	bool has_window() const {
@@ -211,11 +193,8 @@ public:
 		has_window_ = yes;
 	}
 
-	const WareList& get_wares() const {
-		return wares_;
-	}
-	const WareList& get_workers() const {
-		return workers_;
+	const WareList& get_wares_or_workers() const {
+		return wares_or_workers_;
 	}
 
 	///< called by \ref Cmd_Call_Economy_Balance
@@ -276,8 +255,7 @@ private:
 
 	using Flags = std::vector<Flag*>;
 	Flags flags_;
-	WareList wares_;    ///< virtual storage with all wares in this Economy
-	WareList workers_;  ///< virtual storage with all workers in this Economy
+	WareList wares_or_workers_;    ///< virtual storage with all wares/workers in this Economy
 	std::vector<Warehouse*> warehouses_;
 
 	WareWorker type_;  ///< whether we are a WareEconomy or a WorkerEconomy
@@ -285,8 +263,7 @@ private:
 	RequestList requests_;  ///< requests
 	SupplyList supplies_;
 
-	TargetQuantity* ware_target_quantities_;
-	TargetQuantity* worker_target_quantities_;
+	TargetQuantity* target_quantities_;
 	std::unique_ptr<Router> router_;
 
 	using SplitPair = std::pair<OPtr<Flag>, OPtr<Flag>>;

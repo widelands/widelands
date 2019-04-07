@@ -26,7 +26,7 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "economy/expedition_bootstrap.h"
-#include "economy/fleet.h"
+#include "economy/ship_fleet.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
 #include "io/filewrite.h"
@@ -82,11 +82,11 @@ Warehouse* PortDock::get_warehouse() const {
 }
 
 /**
- * Update which @ref Fleet we belong to.
+ * Update which @ref ShipFleet we belong to.
  *
- * @warning This should only be called via @ref Fleet itself.
+ * @warning This should only be called via @ref ShipFleet itself.
  */
-void PortDock::set_fleet(Fleet* fleet) {
+void PortDock::set_fleet(ShipFleet* fleet) {
 	fleet_ = fleet;
 }
 
@@ -120,7 +120,7 @@ PortDock* PortDock::get_dock(Flag& flag) const {
  * Signal to the dock that it now belongs to the given economy.
  *
  * Called by @ref Warehouse::set_economy, and responsible for forwarding the
- * change to @ref Fleet.
+ * change to @ref ShipFleet.
  */
 void PortDock::set_economy(Economy* e, WareWorker type) {
 	if (e == get_economy(type)) {
@@ -159,11 +159,11 @@ bool PortDock::init(EditorGameBase& egbase) {
 }
 
 /**
- * Create our initial singleton @ref Fleet. The fleet code ensures
+ * Create our initial singleton @ref ShipFleet. The fleet code ensures
  * that we merge with a larger fleet when possible.
  */
 void PortDock::init_fleet(EditorGameBase& egbase) {
-	Fleet* fleet = new Fleet(get_owner());
+	ShipFleet* fleet = new ShipFleet(get_owner());
 	fleet->add_port(egbase, this);
 	fleet->init(egbase);
 	// Note: the Fleet calls our set_fleet automatically

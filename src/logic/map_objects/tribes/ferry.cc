@@ -19,8 +19,8 @@
 
 #include "logic/map_objects/tribes/ferry.h"
 
+#include "economy/ferry_fleet.h"
 #include "economy/flag.h"
-#include "economy/fleet.h"
 #include "economy/waterway.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
@@ -35,8 +35,10 @@ FerryDescr::FerryDescr(const std::string& init_descname,
    : CarrierDescr(init_descname, table, egbase, MapObjectType::FERRY) {
 }
 
+// When pathfinding, we _always_ use a CheckStepFerry to account for our very special movement rules.
+// This function result ensures that bob code won't complain about our sometimes strange paths.
 uint32_t FerryDescr::movecaps() const {
-	return MOVECAPS_SWIM;
+	return MOVECAPS_SWIM | MOVECAPS_WALK;
 }
 
 Ferry::Ferry(const FerryDescr& ferry_descr)
@@ -66,8 +68,12 @@ void Ferry::unemployed_update(Game& game, State&) {
 		}
 	}
 
+	const Map& map = game.map();
+	const FCoords& pos = get_position();
+
+
 	if (does_carry_ware()) {
-		if (upcast(Flag, flag, get_position().field->get_immovable())) {
+		if (upcast(Flag, flag, pos.field->get_immovable())) {
 			// We are on a flag
 			if (flag->has_capacity()) {
 				molog("[unemployed]: dropping ware here\n");
@@ -77,25 +83,24 @@ void Ferry::unemployed_update(Game& game, State&) {
 		}
 		molog("[unemployed]: trying to find a flag\n");
 		std::vector<ImmovableFound> flags;
-		if (!game.map().find_reachable_immovables(Area<FCoords>(get_position(), 4),
+		if (!map.find_reachable_immovables(Area<FCoords>(pos, 4),
 				&flags,
-				CheckStepDefault(MOVECAPS_SWIM),
+				CheckStepFerry(game),
 				FindImmovableType(MapObjectType::FLAG))) {
 			molog("[unemployed]: no flag found at all\n");
 			// Fall through to the selection of a random nearby location
-		}
-		else {
+		} else {
 			for (ImmovableFound& imm : flags) {
 				if (upcast(Flag, flag, imm.object)) {
 					if (flag->get_owner() == get_owner()) {
 						if (flag->has_capacity()) {
-							molog("[unemployed]: moving to nearby flag\n");
-							if (!start_task_movepath(game, flag->get_position(), -1,
-									descr().get_right_walk_anims(does_carry_ware()))) {
-								molog("[unemployed]: unable to row to reachable flag!\n");
-								return start_task_idle(game, descr().get_animation("idle"), 50);
+							Path path(pos);
+							if (map.findpath(pos, flag->get_position(), 0, path, CheckStepFerry(game))) {
+								molog("[unemployed]: moving to nearby flag\n");
+								return start_task_movepath(game, path, descr().get_right_walk_anims(true));
 							}
-							return;
+							molog("[unemployed]: unable to row to reachable flag!\n");
+							return start_task_idle(game, descr().get_animation("idle"), 50);
 						}
 					}
 				}
@@ -106,28 +111,31 @@ void Ferry::unemployed_update(Game& game, State&) {
 	}
 
 	bool move = false;
-	if (get_position().field->get_immovable()) {
+	if (!(pos.field->nodecaps() & MOVECAPS_SWIM)) {
+		molog("[unemployed]: we are on shore\n");
+		move = true;
+	} else if (pos.field->get_immovable()) {
 		molog("[unemployed]: we are on location\n");
 		move = true;
-	} else if (get_position().field->get_first_bob()->get_next_bob()) {
+	} else if (pos.field->get_first_bob()->get_next_bob()) {
 		molog("[unemployed]: we are on another bob\n");
 		move = true;
 	}
 
 	if (move) {
-		// 4, 2 and 4 are arbitrary values that define how far away we'll
+		// 2 and 5 are arbitrary values that define how far away we'll
 		// row at most and how hard we'll try to find a nice new location.
-		for (uint8_t i = 0; i < 4; i++) {
-			if (start_task_movepath(game, game.random_location(get_position(), 2), 4,
-									descr().get_right_walk_anims(does_carry_ware()))) {
-				return;
+		Path path(pos);
+		for (uint8_t i = 0; i < 5; i++) {
+			if (map.findpath(pos, game.random_location(pos, 2), 0, path, CheckStepFerry(game))) {
+				return start_task_movepath(game, path, descr().get_right_walk_anims(does_carry_ware()));
 			}
 		}
-		molog("[unemployed]: no suitable locations to row to found!\n");
+		molog("[unemployed]: no suitable locations to row to found\n");
 		return start_task_idle(game, descr().get_animation("idle"), 50);
 	}
 
-	return start_task_idle(game, descr().get_animation("idle"), 50);
+	return start_task_idle(game, descr().get_animation("idle"), 500);
 }
 
 bool Ferry::unemployed() {
@@ -151,9 +159,11 @@ void Ferry::row_update(Game& game, State&) {
 	const Map& map = game.map();
 
 	const std::string& signal = get_signal();
+	bool recalc = false;
 	if (signal.size()) {
 		if (signal == "road" || signal == "fail" || signal == "row" || signal == "wakeup") {
 			molog("[row]: Got signal '%s' -> recalculate\n", signal.c_str());
+			recalc = true;
 			signal_handled();
 		} else if (signal == "blocked") {
 			molog("[row]: Blocked by a battle\n");
@@ -165,7 +175,9 @@ void Ferry::row_update(Game& game, State&) {
 		}
 	}
 
-	if (get_position() == *destination_) {
+	const FCoords& pos = get_position();
+
+	if (pos == *destination_) {
 		// Reached destination
 		if (upcast(Waterway, ww, map.get_immovable(*destination_))) {
 			destination_.reset(nullptr);
@@ -179,12 +191,14 @@ void Ferry::row_update(Game& game, State&) {
 		destination_.reset(nullptr);
 		return pop_task(game);
 	}
-	if (start_task_movepath(game, *destination_, 0, descr().get_right_walk_anims(does_carry_ware()))) {
-		return;
+
+	Path path(pos);
+	if (!map.findpath(pos, *destination_, 0, path, CheckStepFerry(game))) {
+		molog("[row]: Can't find a path to the waterway!\n");
+		// try again later
+		return schedule_act(game, 50);
 	}
-	molog("[row]: Can't find path to the waterway for some reason!\n");
-	// try again later
-	return schedule_act(game, 50);
+	return start_task_movepath(game, path, descr().get_right_walk_anims(does_carry_ware()));
 }
 
 void Ferry::init_auto_task(Game& game) {
@@ -203,20 +217,21 @@ void Ferry::set_economy(Game& game, Economy* e, WareWorker type) {
 	// we do not need to maintain our worker economy
 }
 
-Fleet* Ferry::get_fleet() const {
+FerryFleet* Ferry::get_fleet() const {
 	return fleet_;
 }
 
-void Ferry::set_fleet(Fleet* fleet) {
+void Ferry::set_fleet(FerryFleet* fleet) {
 	fleet_ = fleet;
 }
 
 bool Ferry::init_fleet() {
-	assert(get_owner() != nullptr);
-	Fleet* fleet = new Fleet(get_owner());
-	fleet->add_ferry(this);
+	assert(get_owner());
+	EditorGameBase& egbase = get_owner()->egbase();
+	FerryFleet* fleet = new FerryFleet(get_owner());
+	fleet->add_ferry(egbase, this);
 	// fleet calls the set_fleet function appropriately
-	return fleet->init(get_owner()->egbase());
+	return fleet->init(egbase);
 }
 
 Waterway* Ferry::get_destination(Game& game) const {

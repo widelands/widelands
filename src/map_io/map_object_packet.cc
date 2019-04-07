@@ -20,8 +20,9 @@
 #include "map_io/map_object_packet.h"
 
 #include "base/wexception.h"
-#include "economy/fleet.h"
+#include "economy/ferry_fleet.h"
 #include "economy/portdock.h"
+#include "economy/ship_fleet.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -96,8 +97,12 @@ void MapObjectPacket::read(FileSystem& fs,
 					loaders.insert(PortDock::load(egbase, mol, fr));
 					break;
 
-				case MapObject::HeaderFleet:
-					loaders.insert(Fleet::load(egbase, mol, fr));
+				case MapObject::HeaderShipFleet:
+					loaders.insert(ShipFleet::load(egbase, mol, fr));
+					break;
+
+				case MapObject::HeaderFerryFleet:
+					loaders.insert(FerryFleet::load(egbase, mol, fr));
 					break;
 
 				default:

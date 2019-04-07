@@ -25,9 +25,9 @@
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
-#include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
+#include "economy/ship_fleet.h"
 #include "economy/transfer.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -221,14 +221,14 @@ void WareInstance::set_economy(Economy* const e) {
 		return;
 
 	if (economy_)
-		economy_->remove_wares(descr_index_, 1);
+		economy_->remove_wares_or_workers(descr_index_, 1);
 
 	economy_ = e;
 	if (supply_)
 		supply_->set_economy(e);
 
 	if (economy_)
-		economy_->add_wares(descr_index_, 1);
+		economy_->add_wares_or_workers(descr_index_, 1);
 }
 
 /**

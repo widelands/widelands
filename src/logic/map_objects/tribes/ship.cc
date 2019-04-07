@@ -27,8 +27,8 @@
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
-#include "economy/fleet.h"
 #include "economy/portdock.h"
+#include "economy/ship_fleet.h"
 #include "economy/wares_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
@@ -142,7 +142,7 @@ PortDock* Ship::get_lastdock(EditorGameBase& egbase) const {
 	return lastdock_.get(egbase);
 }
 
-Fleet* Ship::get_fleet() const {
+ShipFleet* Ship::get_fleet() const {
 	return fleet_;
 }
 
@@ -164,13 +164,13 @@ bool Ship::init(EditorGameBase& egbase) {
 }
 
 /**
- * Create the initial singleton @ref Fleet to which we belong.
+ * Create the initial singleton @ref ShipFleet to which we belong.
  * The fleet code will automatically merge us into a larger
  * fleet, if one is reachable.
  */
 bool Ship::init_fleet(EditorGameBase& egbase) {
 	assert(get_owner() != nullptr);
-	Fleet* fleet = new Fleet(get_owner());
+	ShipFleet* fleet = new ShipFleet(get_owner());
 	fleet->add_ship(this);
 	return fleet->init(egbase);
 	// fleet calls the set_fleet function appropriately
@@ -197,9 +197,9 @@ void Ship::cleanup(EditorGameBase& egbase) {
 }
 
 /**
- * This function is to be called only by @ref Fleet.
+ * This function is to be called only by @ref ShipFleet.
  */
-void Ship::set_fleet(Fleet* fleet) {
+void Ship::set_fleet(ShipFleet* fleet) {
 	fleet_ = fleet;
 }
 
@@ -730,7 +730,7 @@ void Ship::set_economy(Game& game, Economy* e, WareWorker type) {
 /**
  * Enter a new destination port for the ship.
  *
- * @note This is supposed to be called only from the scheduling code of @ref Fleet.
+ * @note This is supposed to be called only from the scheduling code of @ref ShipFleet.
  */
 void Ship::set_destination(Game& game, PortDock& pd) {
 	molog("set_destination / sending to portdock %u (carrying %" PRIuS " items)\n", pd.serial(),

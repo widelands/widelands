@@ -799,7 +799,8 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case MapObjectType::MAPOBJECT:
 	case MapObjectType::BATTLE:
 	case MapObjectType::BOB:
-	case MapObjectType::FLEET:
+	case MapObjectType::SHIP_FLEET:
+	case MapObjectType::FERRY_FLEET:
 	case MapObjectType::WARE:
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
 		                static_cast<int>(mo->descr().type()))
@@ -3744,10 +3745,8 @@ Economy
 */
 const char LuaEconomy::className[] = "Economy";
 const MethodType<LuaEconomy> LuaEconomy::Methods[] = {
-   METHOD(LuaEconomy, ware_target_quantity),
-   METHOD(LuaEconomy, worker_target_quantity),
-   METHOD(LuaEconomy, set_ware_target_quantity),
-   METHOD(LuaEconomy, set_worker_target_quantity),
+   METHOD(LuaEconomy, target_quantity),
+   METHOD(LuaEconomy, set_target_quantity),
    {nullptr, nullptr},
 };
 const PropertyType<LuaEconomy> LuaEconomy::Properties[] = {
@@ -3771,87 +3770,50 @@ void LuaEconomy::__unpersist(lua_State* L) {
 }
 
 /* RST
-   .. method:: ware_target_quantity(warename)
+   .. method:: target_quantity(name)
 
-      Returns the amount of the given ware that should be kept in stock for this economy.
-
-      **Warning**: Since economies can disappear when a player merges them
-      through placing/deleting roads and flags, you must get a fresh economy
-      object every time you use this function.
-
-      :arg warename: the name of the ware.
-      :type warename: :class:`string`
-*/
-int LuaEconomy::ware_target_quantity(lua_State* L) {
-	const std::string warename = luaL_checkstring(L, 2);
-	const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(warename);
-	if (get_egbase(L).tribes().ware_exists(index)) {
-		const Widelands::Economy::TargetQuantity& quantity = get()->ware_target_quantity(index);
-		lua_pushinteger(L, quantity.permanent);
-	} else {
-		report_error(L, "There is no ware '%s'.", warename.c_str());
-	}
-	return 1;
-}
-
-/* RST
-   .. method:: worker_target_quantity(workername)
-
-      Returns the amount of the given worker that should be kept in stock for this economy.
+      Returns the amount of the given ware or worker that should be kept in stock for this economy.
+      Whether this works only for wares or only for workers is determined by the type of this economy.
 
       **Warning**: Since economies can disappear when a player merges them
       through placing/deleting roads and flags, you must get a fresh economy
       object every time you use this function.
 
-      :arg workername: the name of the worker.
-      :type workername: :class:`string`
+      :arg name: the name of the ware or worker.
+      :type name: :class:`string`
 */
-int LuaEconomy::worker_target_quantity(lua_State* L) {
-	const std::string workername = luaL_checkstring(L, 2);
-	const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(workername);
-	if (get_egbase(L).tribes().worker_exists(index)) {
-		const Widelands::Economy::TargetQuantity& quantity = get()->worker_target_quantity(index);
-		lua_pushinteger(L, quantity.permanent);
-	} else {
-		report_error(L, "There is no worker '%s'.", workername.c_str());
-	}
-	return 1;
-}
-
-/* RST
-   .. method:: set_ware_target_quantity(warename)
-
-      Sets the amount of the given ware type that should be kept in stock for this economy.
-
-      **Warning**: Since economies can disappear when a player merges them
-      through placing/deleting roads and flags, you must get a fresh economy
-      object every time you use this function.
-
-      :arg warename: the name of the ware type.
-      :type warename: :class:`string`
-
-      :arg amount: the new target amount for the ware. Needs to be >= 0.
-      :type amount: :class:`integer`
-*/
-int LuaEconomy::set_ware_target_quantity(lua_State* L) {
-	const std::string warename = luaL_checkstring(L, 2);
-	const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(warename);
-	if (get_egbase(L).tribes().ware_exists(index)) {
-		const int quantity = luaL_checkinteger(L, 3);
-		if (quantity < 0) {
-			report_error(L, "Target ware quantity needs to be >= 0 but was '%d'.", quantity);
+int LuaEconomy::target_quantity(lua_State* L) {
+	const std::string wname = luaL_checkstring(L, 2);
+	switch (get()->type()) {
+		case Widelands::wwWARE: {
+			const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(wname);
+			if (get_egbase(L).tribes().ware_exists(index)) {
+				const Widelands::Economy::TargetQuantity& quantity = get()->target_quantity(index);
+				lua_pushinteger(L, quantity.permanent);
+			} else {
+				report_error(L, "There is no ware '%s'.", wname.c_str());
+			}
+			break;
 		}
-		get()->set_ware_target_quantity(index, quantity, get_egbase(L).get_gametime());
-	} else {
-		report_error(L, "There is no ware '%s'.", warename.c_str());
+		case Widelands::wwWORKER: {
+			const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(wname);
+			if (get_egbase(L).tribes().worker_exists(index)) {
+				const Widelands::Economy::TargetQuantity& quantity = get()->target_quantity(index);
+				lua_pushinteger(L, quantity.permanent);
+			} else {
+				report_error(L, "There is no worker '%s'.", wname.c_str());
+			}
+			break;
+		}
 	}
 	return 1;
 }
 
 /* RST
-   .. method:: set_worker_target_quantity(workername)
+   .. method:: set_target_quantity(name)
 
-      Sets the amount of the given worker type that should be kept in stock for this economy.
+      Sets the amount of the given ware or worker type that should be kept in stock for this economy.
+      Whether this works only for wares or only for workers is determined by the type of this economy.
 
       **Warning**: Since economies can disappear when a player merges them
       through placing/deleting roads and flags, you must get a fresh economy
@@ -3863,17 +3825,35 @@ int LuaEconomy::set_ware_target_quantity(lua_State* L) {
       :arg amount: the new target amount for the worker. Needs to be >= 0.
       :type amount: :class:`integer`
 */
-int LuaEconomy::set_worker_target_quantity(lua_State* L) {
-	const std::string workername = luaL_checkstring(L, 2);
-	const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(workername);
-	if (get_egbase(L).tribes().worker_exists(index)) {
-		const int quantity = luaL_checkinteger(L, 3);
-		if (quantity < 0) {
-			report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
+int LuaEconomy::set_target_quantity(lua_State* L) {
+	const std::string wname = luaL_checkstring(L, 2);
+	switch (get()->type()) {
+		case Widelands::wwWARE: {
+			const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(wname);
+			if (get_egbase(L).tribes().ware_exists(index)) {
+				const int quantity = luaL_checkinteger(L, 3);
+				if (quantity < 0) {
+					report_error(L, "Target ware quantity needs to be >= 0 but was '%d'.", quantity);
+				}
+				get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+			} else {
+				report_error(L, "There is no ware '%s'.", wname.c_str());
+			}
+			break;
 		}
-		get()->set_worker_target_quantity(index, quantity, get_egbase(L).get_gametime());
-	} else {
-		report_error(L, "There is no worker '%s'.", workername.c_str());
+		case Widelands::wwWORKER: {
+			const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(wname);
+			if (get_egbase(L).tribes().worker_exists(index)) {
+				const int quantity = luaL_checkinteger(L, 3);
+				if (quantity < 0) {
+					report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
+				}
+				get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+			} else {
+				report_error(L, "There is no worker '%s'.", wname.c_str());
+			}
+			break;
+		}
 	}
 	return 1;
 }
@@ -3994,7 +3974,8 @@ int LuaMapObject::get_descr(lua_State* L) {
 	case MapObjectType::BATTLE:
 	case MapObjectType::BOB:
 	case MapObjectType::CRITTER:
-	case MapObjectType::FLEET:
+	case MapObjectType::FERRY_FLEET:
+	case MapObjectType::SHIP_FLEET:
 	case MapObjectType::SHIP:
 	case MapObjectType::FLAG:
 	case MapObjectType::ROAD:
