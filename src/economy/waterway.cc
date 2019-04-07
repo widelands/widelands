@@ -179,9 +179,10 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 	newww.init(game);
 
 	if (ferry_) {
-		// We simply assign the ferry to the waterway part it currently is on
+		assert(ferry_->get_location(game) == this);
+		// We assign the ferry to the waterway part it currently is on
 		bool other = true;
-		const Coords pos(ferry_->get_position());
+		const Coords pos = ferry_->get_position();
 		Coords temp(flags_[FlagStart]->get_position());
 		for (uint32_t i = 0; i < path_.get_nsteps(); i++) {
 			if (temp == pos) {

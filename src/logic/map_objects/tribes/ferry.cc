@@ -61,16 +61,23 @@ void Ferry::unemployed_update(Game& game, State&) {
 	if (get_signal().size()) {
 		molog("[unemployed]: interrupted by signal '%s'\n", get_signal().c_str());
 		if (get_signal() == "row") {
+			assert(destination_);
 			signal_handled();
 			pop_task(game);
 			push_task(game, taskRow);
 			return schedule_act(game, 10);
 		}
 	}
+	if (destination_) {
+		// Sometimes (e.g. when reassigned directly from waterway servicing),
+		// the 'row' signal is consumed before we can receive it
+		pop_task(game);
+		push_task(game, taskRow);
+		return schedule_act(game, 10);
+	}
 
 	const Map& map = game.map();
 	const FCoords& pos = get_position();
-
 
 	if (does_carry_ware()) {
 		if (upcast(Flag, flag, pos.field->get_immovable())) {
@@ -139,7 +146,7 @@ void Ferry::unemployed_update(Game& game, State&) {
 }
 
 bool Ferry::unemployed() {
-	return get_state(taskUnemployed);
+	return get_state(taskUnemployed) && !destination_;
 }
 
 const Bob::Task Ferry::taskRow = {
@@ -159,11 +166,9 @@ void Ferry::row_update(Game& game, State&) {
 	const Map& map = game.map();
 
 	const std::string& signal = get_signal();
-	bool recalc = false;
 	if (signal.size()) {
 		if (signal == "road" || signal == "fail" || signal == "row" || signal == "wakeup") {
 			molog("[row]: Got signal '%s' -> recalculate\n", signal.c_str());
-			recalc = true;
 			signal_handled();
 		} else if (signal == "blocked") {
 			molog("[row]: Blocked by a battle\n");
