@@ -108,7 +108,7 @@ bool ShipFleet::init(EditorGameBase& egbase) {
 	return find_other_fleet(egbase);
 }
 
-struct StepEvalFindFleet {
+struct StepEvalFindShipFleet {
 	int32_t estimate(Map& /* map */, FCoords /* pos */) const {
 		return 0;
 	}
@@ -137,7 +137,7 @@ struct StepEvalFindFleet {
  * of the same player.
  */
 bool ShipFleet::find_other_fleet(EditorGameBase& egbase) {
-	MapAStar<StepEvalFindFleet> astar(*egbase.mutable_map(), StepEvalFindFleet(), wwWORKER);
+	MapAStar<StepEvalFindShipFleet> astar(*egbase.mutable_map(), StepEvalFindShipFleet(), wwWORKER);
 	for (const Ship* temp_ship : ships_) {
 		astar.push(temp_ship->get_position());
 	}

@@ -83,8 +83,8 @@ bool FerryFleet::init(EditorGameBase& egbase) {
 	return find_other_fleet(egbase);
 }
 
-struct StepEvalFindFleet {
-	StepEvalFindFleet(const EditorGameBase& egbase)
+struct StepEvalFindFerryFleet {
+	StepEvalFindFerryFleet(const EditorGameBase& egbase)
 		: checkstep_(new CheckStepFerry(egbase)) {
 	}
 
@@ -103,8 +103,8 @@ private:
  * of the same player.
  */
 bool FerryFleet::find_other_fleet(EditorGameBase& egbase) {
-	StepEvalFindFleet stepeval(egbase);
-	MapAStar<StepEvalFindFleet> astar(*egbase.mutable_map(), stepeval, wwWORKER);
+	StepEvalFindFerryFleet stepeval(egbase);
+	MapAStar<StepEvalFindFerryFleet> astar(*egbase.mutable_map(), stepeval, wwWORKER);
 	for (const Ferry* temp_ferry : ferries_) {
 		astar.push(temp_ferry->get_position());
 	}
