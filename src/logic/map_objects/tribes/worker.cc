@@ -1190,7 +1190,7 @@ void Worker::set_economy(Economy* const economy, WareWorker type) {
 			supply_->set_economy(worker_economy_);
 		}
 		if (worker_economy_) {
-			worker_economy_->add_wares_or_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
+			worker_economy_->add_wares_or_workers(owner().tribe().worker_index(descr().name().c_str()), 1, ware_economy_);
 		}
 	} break;
 	}
@@ -1345,7 +1345,7 @@ DescriptionIndex Worker::level(Game& game) {
 
 	// Inform the economy, that something has changed
 	worker_economy_->remove_wares_or_workers(old_index, 1);
-	worker_economy_->add_wares_or_workers(new_index, 1);
+	worker_economy_->add_wares_or_workers(new_index, 1, ware_economy_);
 
 	create_needed_experience(game);
 	return old_index;  //  So that the caller knows what to replace him with.

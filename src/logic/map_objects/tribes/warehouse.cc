@@ -184,14 +184,14 @@ void WarehouseSupply::set_economy(Economy* const e, WareWorker type) {
 			case wwWARE:
 				for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i) {
 					if (wares_.stock(i)) {
-						ec->add_wares_or_workers(i, wares_.stock(i));
+						ec->add_wares_or_workers(i, wares_.stock(i), worker_economy_);
 					}
 				}
 				break;
 			case wwWORKER:
 				for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i) {
 					if (workers_.stock(i)) {
-						e->add_wares_or_workers(i, workers_.stock(i));
+						e->add_wares_or_workers(i, workers_.stock(i), ware_economy_);
 					}
 				}
 				break;
@@ -206,7 +206,7 @@ void WarehouseSupply::add_wares(DescriptionIndex const id, Quantity const count)
 		return;
 
 	if (ware_economy_) { // No economies in the editor
-		ware_economy_->add_wares_or_workers(id, count);
+		ware_economy_->add_wares_or_workers(id, count, worker_economy_);
 	}
 	wares_.add(id, count);
 }
@@ -228,7 +228,7 @@ void WarehouseSupply::add_workers(DescriptionIndex const id, uint32_t const coun
 		return;
 
 	if (worker_economy_) { // No economies in the editor
-		worker_economy_->add_wares_or_workers(id, count);
+		worker_economy_->add_wares_or_workers(id, count, ware_economy_);
 	}
 	workers_.add(id, count);
 }

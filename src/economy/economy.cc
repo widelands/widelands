@@ -334,10 +334,16 @@ void Economy::set_target_quantity(DescriptionIndex const ware_or_worker_type,
  * has felled a tree.
  * This is also called when a ware is added to the economy through trade or
  * a merger.
+ * Also notifies the corresponding other-type economy, if desired,
+ * so it may check e.g. whether a worker for whom a tool was missing can now be created.
  */
-void Economy::add_wares_or_workers(DescriptionIndex const id, Quantity const count) {
+void Economy::add_wares_or_workers(DescriptionIndex const id, Quantity const count, Economy* other_economy) {
 	wares_or_workers_.add(id, count);
 	start_request_timer();
+	if (other_economy) {
+		assert(other_economy->type() != type_);
+		other_economy->start_request_timer();
+	}
 
 	// TODO(unknown): add to global player inventory?
 }

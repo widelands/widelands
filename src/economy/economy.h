@@ -154,7 +154,7 @@ public:
 
 	void set_target_quantity(DescriptionIndex, Quantity, Time);
 
-	void add_wares_or_workers(DescriptionIndex, Quantity count = 1);
+	void add_wares_or_workers(DescriptionIndex, Quantity count = 1, Economy* other_economy = nullptr);
 	void remove_wares_or_workers(DescriptionIndex, Quantity count = 1);
 
 	void add_warehouse(Warehouse&);
