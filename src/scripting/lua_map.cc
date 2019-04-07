@@ -680,6 +680,14 @@ parse_wares_as_bill_of_material(lua_State* L, int table_index, const TribeDescr&
 	return result;
 }
 
+const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tribename) {
+	if (!Widelands::tribe_exists(tribename)) {
+		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
+	}
+	const Tribes& tribes = get_egbase(L).tribes();
+	return *tribes.get_tribe_descr(tribes.tribe_index(tribename));
+}
+
 }  // namespace
 
 /*
@@ -3046,12 +3054,12 @@ WareDescription
 */
 const char LuaWareDescription::className[] = "WareDescription";
 const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
+   METHOD(LuaWareDescription, consumers),
    METHOD(LuaWareDescription, is_construction_material),
+   METHOD(LuaWareDescription, producers),
    {nullptr, nullptr},
 };
 const PropertyType<LuaWareDescription> LuaWareDescription::Properties[] = {
-   PROP_RO(LuaWareDescription, consumers),
-   PROP_RO(LuaWareDescription, producers),
    {nullptr, nullptr, nullptr},
 };
 
@@ -3075,25 +3083,35 @@ void LuaWareDescription::__unpersist(lua_State* L) {
  */
 
 /* RST
-   .. attribute:: consumers
+   .. method:: consumers(tribename)
+
+      :arg tribename: the name of the tribe that this ware gets checked for
+      :type tribename: :class:`string`
 
       (RO) An array with :class:`LuaBuildingDescription` with buildings that
       need this ware for their production.
 */
-int LuaWareDescription::get_consumers(lua_State* L) {
+int LuaWareDescription::consumers(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	const Widelands::TribeDescr& tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
+
 	lua_newtable(L);
 	int index = 1;
 	for (const DescriptionIndex& building_index : get()->consumers()) {
-		lua_pushint32(L, index++);
-		upcasted_map_object_descr_to_lua(
-		   L, get_egbase(L).tribes().get_building_descr(building_index));
-		lua_rawset(L, -3);
+		if (tribe.has_building(building_index)) {
+			lua_pushint32(L, index++);
+			upcasted_map_object_descr_to_lua(
+			   L, get_egbase(L).tribes().get_building_descr(building_index));
+			lua_rawset(L, -3);
+		}
 	}
 	return 1;
 }
 
 /* RST
-   .. method:: is_construction_material
+   .. method:: is_construction_material(tribename)
 
       :arg tribename: the name of the tribe that this ware gets checked for
       :type tribename: :class:`string`
@@ -3114,19 +3132,29 @@ int LuaWareDescription::is_construction_material(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: producers
+   .. method:: producers(tribename)
+
+      :arg tribename: the name of the tribe that this ware gets checked for
+      :type tribename: :class:`string`
 
       (RO) An array with :class:`LuaBuildingDescription` with buildings that
       can procude this ware.
 */
-int LuaWareDescription::get_producers(lua_State* L) {
+int LuaWareDescription::producers(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	const Widelands::TribeDescr& tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
+
 	lua_newtable(L);
 	int index = 1;
 	for (const DescriptionIndex& building_index : get()->producers()) {
-		lua_pushint32(L, index++);
-		upcasted_map_object_descr_to_lua(
-		   L, get_egbase(L).tribes().get_building_descr(building_index));
-		lua_rawset(L, -3);
+		if (tribe.has_building(building_index)) {
+			lua_pushint32(L, index++);
+			upcasted_map_object_descr_to_lua(
+			   L, get_egbase(L).tribes().get_building_descr(building_index));
+			lua_rawset(L, -3);
+		}
 	}
 	return 1;
 }

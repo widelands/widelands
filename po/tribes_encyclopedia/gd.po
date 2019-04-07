@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2018
+# GunChleoc, 2015-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013-2014
 # GunChleoc, 2014-2015
 # GunChleoc, 2014-2015
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-09 09:43+0000\n"
-"PO-Revision-Date: 2019-02-10 12:29+0000\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-03-30 10:22+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -371,6 +371,7 @@ msgstr "Fighidh e sìoda airson togalaichean is siùil nan longan agus airson l�
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:13
 #: ../../data/tribes/buildings/productionsites/empire/well/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:13
 msgctxt "building"
 msgid "Draws water out of the deep."
 msgstr "Togaidh e uisge on doimhneachd."
@@ -466,7 +467,7 @@ msgstr "’S e an togalach air ìre meadhanach ann an sreath de thrì togalaiche
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
 #: ../../data/tribes/scripting/help/global_helptexts.lua:69
@@ -1647,14 +1648,14 @@ msgstr "Chan eil treubh sam bith eile cho comasach air fiodh a losgadh ’na ghu
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "The inventor of the Frisian charcoal kiln"
-msgstr "Am fear a thog a’ chiad àth-ghuail dha na Frìoslannaich"
+msgstr "Am fear a thog a’ chiad shloc guail-fhiodha dha na Frìoslannaich"
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr "Bheir an t-àth-ghuail %s sa chuibheas gus gual a dhèanamh."
+msgstr "Bheir an sloc guail-fhiodha %s sa chuibheas gus gual a dhèanamh."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:6
@@ -1717,7 +1718,7 @@ msgstr "Ma thèid biadh a lìbhrigeadh dhi gu cunbhalach, saothraichidh a’ mh�
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "Meat doesn’t grow on bushes. Fruit does."
-msgstr "Chan fhàs feòil air preasan. Fàsaidh measan."
+msgstr "Chan fhàs feòil air preasan. Fàsaidh dearcan."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:8
@@ -1854,7 +1855,7 @@ msgstr "Bidh an taigh planntair-choille feumach air rum shaor am broinn an raoin
 #, lua-format
 msgctxt "frisians_building"
 msgid "The forester pauses %s before going to work again."
-msgstr "Gabhaidh am planntair-choille fois fad %s mus tòisich e air an obair a-rithist."
+msgstr "Gabhaidh am planntair-coille fois fad %s mus tòisich e air an obair a-rithist."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/helptexts.lua:6
@@ -1892,7 +1893,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the gold mine can produce one piece of gold "
 "ore in %s on average."
-msgstr "Ma thèid biadh a lìbhrigeadh dhi gu cunbhalach, saothraichidh a’ mhèinn-òir clach-òir gach %s sa chuibheas."
+msgstr "Ma thèid biadh a lìbhrigeadh dhi gu cunbhalach, saothraichidh a’ mhèinn òir clach-òir gach %s sa chuibheas."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:21
@@ -1911,7 +1912,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep gold mine can produce two pieces of "
 "gold ore in %s on average."
-msgstr "Ma thèid biadh a lìbhrigeadh dhi gu cunbhalach, saothraichidh a’ mhèinn-òir dhomhainn dà chlach-òir gach %s sa chuibheas."
+msgstr "Ma thèid biadh a lìbhrigeadh dhi gu cunbhalach, saothraichidh a’ mhèinn òir dhomhainn dà chlach-òir gach %s sa chuibheas."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/helptexts.lua:6
@@ -1933,7 +1934,7 @@ msgctxt "building"
 msgid ""
 "Bakes honey bread out of barley, water and honey to feed miners in deep "
 "mines and soldiers in advanced training."
-msgstr "Nì e aran de dh’eòrna, uisge is mil airson biadh a thoirt dha na mèinnearan sna mèinnean domhainn agus dha na saighdearan san trèanadh adhartach."
+msgstr "Nì e aran-meala de dh’eòrna, uisge is mil airson biadh a thoirt dha na mèinnearan sna mèinnean domhainn agus dha na saighdearan san trèanadh adhartach."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:21
@@ -1964,7 +1965,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the iron mine can produce one piece of iron "
 "ore in %s on average."
-msgstr "Ma thèid biadh a lìbhrigeadh dhi gu cunbhalach, saothraichidh a’ mhèinn-iarainn clach-iarainn gach %s sa chuibheas."
+msgstr "Ma thèid biadh a lìbhrigeadh dhi gu cunbhalach, saothraichidh a’ mhèinn iarainn clach-iarainn gach %s sa chuibheas."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:21
@@ -1983,7 +1984,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep iron mine can produce two pieces of "
 "iron ore in %s on average."
-msgstr "Ma thèid biadh a lìbhrigeadh dhi gu cunbhalach, saothraichidh a’ mhèinn-iarainn dhomhainn dà chlach-iarainn gach %s sa chuibheas."
+msgstr "Ma thèid biadh a lìbhrigeadh dhi gu cunbhalach, saothraichidh a’ mhèinn iarainn dhomhainn dà chlach-iarainn gach %s sa chuibheas."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/helptexts.lua:6
@@ -2086,7 +2087,7 @@ msgid ""
 "Reed is the traditional material for roofing. It is also needed for "
 "producing buckets and fishing nets, and it is woven – together with reindeer"
 " fur – into the cloth used for ships’ sails."
-msgstr "Tha feur ’ga chleachdadh airson mullaich a thogail gu dualchasach. Bidh feum air airson peilichean is lìn-èisg a dhèanamh cuideachd agus thèid a bheart-fhighe – le bian rèin-fhèidh – airson clò a dhèanamh do shiùil nan long."
+msgstr "Tha feur ’ga chleachdadh airson mullaich a thogail gu dualchasach. Bidh feum air airson peilichean is lìontan-èisg a dhèanamh cuideachd agus thèid a bheart-fhighe – le bian rèin-fhèidh – airson clò a dhèanamh do shiùil nan long."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/helptexts.lua:6
@@ -2249,7 +2250,7 @@ msgctxt "building"
 msgid ""
 "Smokes fish and meat using logs. Only smoked meat and fish are good enough "
 "to be eaten by miners and soldiers."
-msgstr "Cuiridh e toit ri iasg is feòil. Chan eil ach feòil-rèiste is iasg-rèiste math gu leòr ach an ith na mèinnearan is na saighdearan e."
+msgstr "Toitidh e feòil is èisg le fiodh. Chan eil ach feòil-rèiste is iasg-rèiste math gu leòr ach an ith na mèinnearan is na saighdearan e."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:23
@@ -2282,7 +2283,7 @@ msgstr "Cuiridh e iarann no òr ri còtaichean-bèin airson deagh armachd a dhè
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "Nothing but fruit all day… Couldn’t you hurry up a bit?"
-msgstr "Chan fhaigh sinn ach measan fad an latha… nach cuir thu greas ort?"
+msgstr "Chan fhaigh sinn ach dearcan fad an latha… nach cuir thu greas ort?"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:8
@@ -2297,7 +2298,7 @@ msgctxt "frisians_building"
 msgid ""
 "The tavern can produce one ration in %s on average if the supply is steady; "
 "otherwise, it will take 50%% longer."
-msgstr "Saothraichidh an taigh-tàrn greimeag gach %s sa chuibheas ma thèid stuthan a lìbhrigeadh dha gu cunbhalach; mura dèid, bheir e 50%% nas fhaide."
+msgstr "Saothraichidh an taigh-tàirn greimeag gach %s sa chuibheas ma thèid stuthan a lìbhrigeadh dha gu cunbhalach; mura dèid, bheir e 50%% nas fhaide."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:3
@@ -2341,7 +2342,7 @@ msgid ""
 msgstr "Na dh’fhreagair an ceannard Arldor nuair a chaidh fhaighneachd dha carson nach gabh a chuideachd sàl"
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The well needs %s on average to produce one bucket of water."
@@ -2786,7 +2787,7 @@ msgstr "Tha torr guail an-seo."
 #: ../../data/tribes/immovables/resi/helptexts/gold_1.lua:5
 #: ../../data/tribes/immovables/resi/helptexts/gold_2.lua:5
 msgid "Gold veins contain gold ore that can be dug up by gold mines."
-msgstr "Tha òr sa chuisle òir seo a ghabhas tochladh le mèinn òir."
+msgstr "Tha chlach-òir sa chuisle òir seo a ghabhas tochladh le mèinn òir."
 
 #. TRANSLATORS: Helptext for a resource: Gold
 #: ../../data/tribes/immovables/resi/helptexts/gold_1.lua:7
@@ -2825,7 +2826,7 @@ msgstr "Chan eil stòras sam bith san talamh an-seo."
 msgid ""
 "Precious stones are used in the construction of big buildings. They can be "
 "dug up by a crystal mine. You will also get granite from the mine."
-msgstr "Thèid clachan uasail a chleachdadh gus togalaichean mòra a thogail. Tochlaidh mèin criostail iad. Gheibh thu gaireal on mhèinn cuideachd."
+msgstr "Thèid clachan uasail a chleachdadh gus togalaichean mòra a thogail. Tochlaidh mèinn criostail iad. Gheibh thu gaireal on mhèinn cuideachd."
 
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:7
@@ -4042,7 +4043,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Bread is made out of barley and water and is used in the taverns and "
 "drinking halls to prepare rations. It is also consumed by training soldiers."
-msgstr "Thèid aran a dhèanamh à eòrna is uisge agus ’ga chleachdadh sna taighean-tàirn is taighean-òil airson greimeagan a dhèanamh. Ithidh na saighdearan e cuideachd nuair a thèid an oideachadh."
+msgstr "Thèid aran a dhèanamh à eòrna is uisge agus ’ga chleachdadh sna taighean-tàirn is tallachan-òil airson greimeagan a dhèanamh. Ithidh na saighdearan e cuideachd nuair a thèid an oideachadh."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:4
@@ -5074,7 +5075,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Meat is smoked in a smokery. Smoked meat is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr "Thèid feòil is a thoiteadh ann an taigh-toitidh. Ithidh saighdearan an  fheòil-rèiste rè an oideachaidh an uairsin no thèid greimeagan is miasan a dhèanamh dhith airson mèinnearan is rabhadairean."
+msgstr "Thèid feòil is a thoiteadh ann an taigh-toitidh. Ithidh saighdearan an fheòil-rèiste rè an oideachaidh an uairsin no thèid greimeagan is miasan a dhèanamh dhith airson mèinnearan is rabhadairean."
 
 #. TRANSLATORS: Helptext for a ware: Snack
 #: ../../data/tribes/wares/snack/helptexts.lua:4
@@ -5211,7 +5212,7 @@ msgid ""
 "Thatch reed is a special kind of reed that is grown in a reed farm. Nothing "
 "is better suited to make roofs waterproof. It is also used to make buckets "
 "and fishing nets as well as cloth."
-msgstr "’s e seòrsa sònraichte de chuilc a tha san fheur thughaidh a thèid a dh’fhàs ann an tuathanas-cuilce. Chan eil gin nas fhearr ach an dìon do mhullach do thaigh on uisge. Thèid a cleachdadh cuideachd airson peilichean, lìontan-èisg is clò a dhèanamh."
+msgstr "’S e seòrsa sònraichte de chuilceach a tha san fheur thughaidh a thèid a dh’fhàs ann an tuathanas-cuilce. Chan eil gin nas fhearr ach an dìon do mhullach do thaigh on uisge. Thèid a cleachdadh cuideachd airson peilichean, lìontan-èisg is clò a dhèanamh."
 
 #. TRANSLATORS: Helptext for a ware: Double Trident
 #: ../../data/tribes/wares/trident_double/helptexts.lua:4
