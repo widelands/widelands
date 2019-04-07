@@ -906,7 +906,7 @@ void ShipFleet::log_general_info(const EditorGameBase& egbase) const {
 	molog("%" PRIuS " ships and %" PRIuS " ports\n", ships_.size(), ports_.size());
 }
 
-constexpr uint8_t kCurrentPacketVersion = 3;
+constexpr uint8_t kCurrentPacketVersion = 4;
 
 ShipFleet::Loader::Loader() {
 }
