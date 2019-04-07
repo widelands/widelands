@@ -43,7 +43,6 @@ int32_t EditorResizeTool::handle_click_impl(const Widelands::World& world,
 	args->resized.deleted_fields = map->resize(egbase, center.node, args->new_map_size.w, args->new_map_size.h);
 
 	map->recalc_whole_map(world);
-	egbase.allocate_player_maps();
 	return 0;
 }
 
@@ -89,7 +88,6 @@ int32_t EditorResizeTool::handle_undo_impl(
 	}
 
 	map->recalc_whole_map(world);
-	egbase.allocate_player_maps();
 	return 0;
 }
 
