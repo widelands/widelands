@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-01 12:45+0000\n"
-"PO-Revision-Date: 2019-03-01 15:22+0000\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-04-04 16:10+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -182,7 +182,7 @@ msgstr "Up welker Kaart du spööldest as de Fehler passeerde."
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr "Wenn sük de Fehler up de Anzeige betreckt oder dat dat Probleem verklaart, giff bidde eenen oder een paar Bildschirmfotos."
+msgstr "Wenn sük de Fehler up de Anzeige betreckt oder dat dat Probleem verklaart, giff bidde eenen oder een paar Billschirmfotos."
 
 #: ../../data/txts/README.lua:34
 msgid ""
@@ -413,7 +413,7 @@ msgstr "Rüümte tum Bauen wiesen oder verbargen"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'f'
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
-msgstr "Helen Bildschirm umschalten (wenn dat BS dat verlöövt)"
+msgstr "Helen Billschirm umschalten (wenn dat BS dat verlöövt)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
@@ -473,7 +473,7 @@ msgstr "Mit eenem künstelken Speler verbunnen (dat Gesicht in de Bill un de Tex
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid "Set as shared in starting position for another player."
-msgstr "As deelte Anfangs-Position för eenen annern Speler fastleggt."
+msgstr "As deelte Anfangs-Stee för eenen annern Speler fastleggt."
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Closed."
@@ -604,7 +604,7 @@ msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
-msgstr "Du kannst een middelmatigs Huus up elkeen Knütt setten, waar de Schüünte höchstens 1 na Süüdoost un de Höchten-Unnerscheed to all Knütten bit 2 Felden Ofstand höchstens 2 is."
+msgstr "Du kannst een middelmatigs Huus up elkeen Knütt setten, waar de Schüünte nich mehr as 1 na Süüdoost un de Höchten-Unnerscheed to all Knütten bit 2 Felden Ofstand nich mehr as 2 is."
 
 #: ../../data/txts/tips/editor.lua:47
 msgid ""
@@ -761,7 +761,7 @@ msgstr "Wenn een Huus ofrieten word, söken de Arbeiders na eener Fahn, vun waar
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr "Du kannst de »Bild rup«- un »Bild runner«-Tasten bruken, um diene leevste Gauheid fasttosetten – de echte Gauheid is dann de Snee."
+msgstr "Du kannst de »Bill rup«- un »Bill runner«-Tasten bruken, um diene leevste Gauheid fasttosetten – de echte Gauheid is dann de Snee."
 
 #: ../../data/txts/tips/multiplayer.lua:8
 msgid ""
