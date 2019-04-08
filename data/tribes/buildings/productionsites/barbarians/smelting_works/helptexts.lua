@@ -2,13 +2,13 @@
 include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore()
-   -- TRANSLATORS#: Lore helptext for a building
+   -- TRANSLATORS: Lore helptext for a building
    return pgettext("barbarians_building", [[‘From inferior looking rubble they form shiny gold and gleaming iron.<br>
             For real, the smelters are the magicians among our craftsmen.’]])
 end
 
 function building_helptext_lore_author()
-   -- TRANSLATORS#: Lore author helptext for a building
+   -- TRANSLATORS: Lore author helptext for a building
    return pgettext("barbarians_building", "Chat’Karuth<br> at the 5th conference of master craftsmen")
 end
 

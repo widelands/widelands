@@ -2,13 +2,13 @@
 include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore()
-   -- TRANSLATORS#: Lore helptext for a building
+   -- TRANSLATORS: Lore helptext for a building
    return pgettext("barbarians_building", [[‘Fine cloth and jewelry mean nothing to a true Barbarian.<br>
             But a noble sail in the wind pleases his eyes.’]])
 end
 
 function building_helptext_lore_author()
-   -- TRANSLATORS#: Lore author helptext for a building
+   -- TRANSLATORS: Lore author helptext for a building
    return pgettext("barbarians_building", "Khantarakh, ‘The Modern Babarian Economy’,<br> 9th cowhide ‘Seafaring and Conquest’")
 end
 

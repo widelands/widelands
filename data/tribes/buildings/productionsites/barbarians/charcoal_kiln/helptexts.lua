@@ -2,7 +2,7 @@
 include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore()
-   -- TRANSLATORS#: Lore helptext for a building
+   -- TRANSLATORS: Lore helptext for a building
    return pgettext("barbarians_building", [[‘What's the work of a charcoal burner?<br>
          He's the tribe's most plodding earner!<br>
          Logs on logs he piles up high,<br>
@@ -14,7 +14,7 @@ function building_helptext_lore()
 end
 
 function building_helptext_lore_author()
-   -- TRANSLATORS#: Lore author helptext for a building
+   -- TRANSLATORS: Lore author helptext for a building
    return pgettext("barbarians_building", "Song of the charcoal burners")
 end
 
