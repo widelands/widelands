@@ -472,8 +472,8 @@ void Map::create_empty_map(const World& world,
 }
 
 // Made this a separate function to reduce compiler warnings
-static inline void clear_array(std::unique_ptr<Field[]>* fields, uint32_t size) {
-	memset(fields->get(), 0, sizeof(Field) * size);
+template <typename T = Field> static inline void clear_array(std::unique_ptr<T[]>* array, uint32_t size) {
+	memset(array->get(), 0, sizeof(T) * size);
 }
 
 void Map::set_origin(const Coords& new_origin) {
@@ -489,7 +489,7 @@ void Map::set_origin(const Coords& new_origin) {
 	}
 
 	std::unique_ptr<Field[]> new_field_order(new Field[field_size]);
-	clear_array(&new_field_order, field_size);
+	clear_array<>(&new_field_order, field_size);
 
 	// Rearrange The fields
 	// NOTE because of the triangle design, we have to take special care of cases
@@ -592,13 +592,12 @@ std::map<Coords, FieldData> Map::resize(EditorGameBase& egbase, const Coords spl
 	const uint32_t old_field_size = width_ * height_;
 
 	std::unique_ptr<Field[]> new_fields(new Field[field_size]);
-	clear_array(&new_fields, field_size);
+	clear_array<>(&new_fields, field_size);
 
 	// Take care of starting positions and port spaces
-	for (uint8_t i = get_nrplayers(); i;) {
-		--i;
-		if (starting_pos_[i]) {
-			starting_pos_[i] = transform_coords(starting_pos_[i], split, w, h, width_, height_);
+	for (uint8_t i = get_nrplayers(); i > 0; --i) {
+		if (starting_pos_[i - 1]) {
+			starting_pos_[i - 1] = transform_coords(starting_pos_[i - 1], split, w, h, width_, height_);
 		}
 	}
 
@@ -615,34 +614,17 @@ std::map<Coords, FieldData> Map::resize(EditorGameBase& egbase, const Coords spl
 	default_terrains.d = 0;
 
 	std::unique_ptr<bool[]> preserved_coords(new bool[old_field_size]);
-	memset(preserved_coords.get(), false, sizeof(bool) * old_field_size);
+	clear_array<bool>(&preserved_coords, old_field_size);
 
-	for (int16_t x = 0; x < w; ++x) {
-		for (int16_t y = 0; y < h; ++y) {
+	const int16_t w_max = w > width_ ? w : width_;
+	const int16_t h_max = h > height_ ? h : height_;
+	for (int16_t x = 0; x < w_max; ++x) {
+		for (int16_t y = 0; y < h_max; ++y) {
 			Coords c_new = Coords(x, y);
-			if (Coords c_old = transform_coords(c_new, split, width_, height_, w, h)) {
-				bool& entry = preserved_coords[get_index(c_old, width_)];
-				if (!entry) {
-					// Copy existing field
-					entry = true;
-					new_fields[get_index(c_new, w)] = operator[](c_old);
-					continue;
-				}
-			}
-			// Init new field
-			Field& field = new_fields[get_index(c_new, w)];
-			field.set_height(10);
-			field.set_terrains(default_terrains);
-		}
-	}
-
-	for (int16_t x = 0; x < width_; ++x) {
-		for (int16_t y = 0; y < height_; ++y) {
-			Coords c(x, y);
-			if (!preserved_coords[get_index(c, width_)]) {
+			if (x < width_ && y < height_ && !preserved_coords[get_index(c_new, width_)]) {
 				// Save the data of fields that will be deleted
-				Field& field = operator[](c);
-				deleted.emplace(c, FieldData(field));
+				Field& field = operator[](c_new);
+				deleted.insert(std::make_pair(c_new, FieldData(field)));
 				// ...and now we delete stuff that needs removing when the field is destroyed
 				if (BaseImmovable* imm = field.get_immovable()) {
 					imm->remove(egbase);
@@ -651,13 +633,28 @@ std::map<Coords, FieldData> Map::resize(EditorGameBase& egbase, const Coords spl
 					bob->remove(egbase);
 				}
 			}
+			if (x < w && y < h) {
+				if (Coords c_old = transform_coords(c_new, split, width_, height_, w, h)) {
+					bool& entry = preserved_coords[get_index(c_old, width_)];
+					if (!entry) {
+						// Copy existing field
+						entry = true;
+						new_fields[get_index(c_new, w)] = operator[](c_old);
+						continue;
+					}
+				}
+				// Init new field
+				Field& field = new_fields[get_index(c_new, w)];
+				field.set_height(10);
+				field.set_terrains(default_terrains);
+			}
 		}
 	}
 
 	// Replace all fields
 	fields_.reset(new Field[field_size]);
-	clear_array(&fields_, field_size);
-	for (size_t ind = 0; ind < field_size; ind++) {
+	clear_array<>(&fields_, field_size);
+	for (size_t ind = 0; ind < field_size; ++ind) {
 		fields_[ind] = new_fields[ind];
 	}
 	log("Resized map from (%d, %d) to (%u, %u) at (%d, %d)\n", width_, height_, w, h, split.x, split.y);
@@ -665,25 +662,23 @@ std::map<Coords, FieldData> Map::resize(EditorGameBase& egbase, const Coords spl
 	height_ = h;
 
 	// Inform immovables and bobs about their new position
-	for (int16_t x = 0; x < w; ++x) {
-		for (int16_t y = 0; y < h; ++y) {
-			FCoords f = get_fcoords(Coords(x, y));
-			if (upcast(Immovable, immovable, f.field->get_immovable())) {
-				immovable->position_ = f;
-			}
-			// Ensuring that all bob iterators are changed correctly is a bit hacky, but the more obvious
-			// solution of doing it like in set_origin() is highly problematic here, or so ASan tells me
-			std::vector<Bob*> bobs;
-			for (Bob* bob = f.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
-				bobs.push_back(bob);
-			}
-			f.field->bobs = nullptr;
-			for (Bob* bob : bobs) {
-				bob->position_.field = nullptr;
-				bob->linknext_ = nullptr;
-				bob->linkpprev_ = nullptr;
-				bob->set_position(egbase, f);
-			}
+	for (MapIndex idx = 0; idx < field_size; ++idx) {
+		Field& f = operator[](idx);
+		if (upcast(Immovable, immovable, f.get_immovable())) {
+			immovable->position_ = get_fcoords(f);
+		}
+		// Ensuring that all bob iterators are changed correctly is a bit hacky, but the more obvious
+		// solution of doing it like in set_origin() is highly problematic here, or so ASan tells me
+		std::vector<Bob*> bobs;
+		for (Bob* bob = f.get_first_bob(); bob; bob = bob->get_next_bob()) {
+			bobs.push_back(bob);
+		}
+		f.bobs = nullptr;
+		for (Bob* bob : bobs) {
+			bob->position_.field = nullptr;
+			bob->linknext_ = nullptr;
+			bob->linkpprev_ = nullptr;
+			bob->set_position(egbase, get_fcoords(f));
 		}
 	}
 
@@ -705,7 +700,7 @@ void Map::set_size(const uint32_t w, const uint32_t h) {
 	const uint32_t field_size = w * h;
 
 	fields_.reset(new Field[field_size]);
-	clear_array(&fields_, field_size);
+	clear_array<>(&fields_, field_size);
 
 	pathfieldmgr_->set_size(field_size);
 }

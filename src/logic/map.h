@@ -608,14 +608,18 @@ inline void Map::normalize_coords(Coords& c) const {
 }
 
 inline void Map::normalize_coords(Coords& c, int16_t w, int16_t h) {
-	while (c.x < 0)
+	while (c.x < 0) {
 		c.x += w;
-	while (c.x >= w)
+	}
+	while (c.x >= w) {
 		c.x -= w;
-	while (c.y < 0)
+	}
+	while (c.y < 0) {
 		c.y += h;
-	while (c.y >= h)
+	}
+	while (c.y >= h) {
 		c.y -= h;
+	}
 }
 
 /**

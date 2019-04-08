@@ -66,27 +66,27 @@ EditorToolMenu::EditorToolMenu(EditorInteractive& parent, UI::UniqueWindow::Regi
 	ADD_BUTTON("set_port_space", _("Set port space"));
 	ADD_BUTTON("set_origin", _("Set the position that will have the coordinates (0, 0). This will "
 	                           "be the top-left corner of a generated minimap."));
-	ADD_BUTTON("resize", _("Insert or delete rows and columns"));
+	ADD_BUTTON("resize", _("Change the map’s size"));
 
 	set_inner_size(offs.x + (width + spacing) * num_tools, offs.y + (height + spacing));
 
 	{
-		const EditorTool& current = parent.tools()->current();
-		radioselect_.set_state(&current == &parent.tools()->noise_height ?
+		const EditorTool* current = &parent.tools()->current();
+		radioselect_.set_state(current == &parent.tools()->noise_height ?
 		                          1 :
-		                          &current == &parent.tools()->set_terrain ?
+		                          current == &parent.tools()->set_terrain ?
 		                          2 :
-		                          &current == &parent.tools()->place_immovable ?
+		                          current == &parent.tools()->place_immovable ?
 		                          3 :
-		                          &current == &parent.tools()->place_critter ?
+		                          current == &parent.tools()->place_critter ?
 		                          4 :
-		                          &current == &parent.tools()->increase_resources ?
+		                          current == &parent.tools()->increase_resources ?
 		                          5 :
-		                          &current == &parent.tools()->set_port_space ?
+		                          current == &parent.tools()->set_port_space ?
 		                          6 :
-		                          &current == &parent.tools()->set_origin ?
+		                          current == &parent.tools()->set_origin ?
 		                          7 :
-		                          &current == &parent.tools()->resize ?
+		                          current == &parent.tools()->resize ?
 		                          8 : 0);
 	}
 

@@ -71,7 +71,7 @@ int32_t EditorResizeTool::handle_undo_impl(
 		f.field->set_terrains(data.terrains);
 		map->initialize_resources(f, data.resources, data.resource_amount);
 
-		if (data.immovable != "") {
+		if (!data.immovable.empty()) {
 			egbase.create_immovable_with_name(f, data.immovable,
 					Widelands::MapObjectDescr::OwnerType::kWorld, nullptr, nullptr);
 		}
