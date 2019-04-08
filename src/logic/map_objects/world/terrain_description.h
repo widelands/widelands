@@ -43,7 +43,7 @@ constexpr int kTextureSideLength = 64;
 
 class TerrainDescription {
 public:
-	enum Is {
+	enum class Is {
 		kArable = 0,
 		kWalkable = 1,
 		kWater = 2,
@@ -148,6 +148,14 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainDescription);
 };
+
+inline TerrainDescription::Is operator|(TerrainDescription::Is left, TerrainDescription::Is right) {
+	return TerrainDescription::Is(static_cast<int>(left) | static_cast<int>(right));
+}
+inline int operator&(TerrainDescription::Is left, TerrainDescription::Is right) {
+	return static_cast<int>(left) & static_cast<int>(right);
+}
+
 
 }  // namespace Widelands
 
