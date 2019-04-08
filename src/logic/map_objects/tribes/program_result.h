@@ -20,10 +20,25 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_PROGRAM_RESULT_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_PROGRAM_RESULT_H
 
+#include "base/macros.h"
+
 namespace Widelands {
-// Don't change this values, they are used as hardcoded array indices
-enum ProgramResult { None = 0, Failed = 1, Completed = 2, Skipped = 3 };
-enum ProgramResultHandlingMethod { Fail, Complete, Skip, Continue, Repeat };
+// Don't change these values, they are used as hardcoded array indices
+enum class ProgramResult { kNone = 0, kFailed = 1, kCompleted = 2, kSkipped = 3 };
+inline int program_result_index(ProgramResult result) {
+	switch (result) {
+	case ProgramResult::kFailed:
+		return 0;
+	case ProgramResult::kCompleted:
+		return 1;
+	case ProgramResult::kSkipped:
+		return 2;
+	case ProgramResult::kNone:
+		NEVER_HERE();
+	}
+}
+
+enum class ProgramResultHandlingMethod { kFail, kComplete, kSkip, kContinue, kRepeat };
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PROGRAM_RESULT_H

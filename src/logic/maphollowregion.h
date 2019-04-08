@@ -57,11 +57,11 @@ template <typename AreaType = Area<>> struct MapHollowRegion {
 
 private:
 	enum Phase {
-		None = 0,    // not initialized or completed
-		Top = 1,     // above the hole
-		Upper = 2,   // upper half
-		Lower = 4,   // lower half
-		Bottom = 8,  // below the hole
+		kNone = 0,    // not initialized or completed
+		kTop = 1,     // above the hole
+		kUpper = 2,   // upper half
+		kLower = 4,   // lower half
+		kBottom = 8,  // below the hole
 	};
 
 	HollowArea<AreaType> hollow_area_;
