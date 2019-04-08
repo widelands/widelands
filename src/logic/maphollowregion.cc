@@ -37,8 +37,9 @@ MapHollowRegion<Area<>>::MapHollowRegion(const Map& map, const HollowArea<Area<>
 }
 
 template <> bool MapHollowRegion<Area<>>::advance(const Map& map) {
-	if (phase_ == Phase::kNone)
+	if (phase_ == Phase::kNone) {
 		return false;
+	}
 	++rowpos_;
 	if (rowpos_ < rowwidth_) {
 		map.get_rn(hollow_area_, &hollow_area_);
@@ -51,8 +52,9 @@ template <> bool MapHollowRegion<Area<>>::advance(const Map& map) {
 		}
 	} else {
 		++row_;
-		if (phase_ == Phase::kTop && row_ == delta_radius_)
+		if (phase_ == Phase::kTop && row_ == delta_radius_) {
 			phase_ = Phase::kUpper;
+		}
 
 		// If we completed the widest, center line, switch into lower mode
 		// There are radius_+1 lines in the upper "half", because the upper
@@ -70,8 +72,9 @@ template <> bool MapHollowRegion<Area<>>::advance(const Map& map) {
 			if (row_ > hollow_area_.radius) {
 				phase_ = Phase::kNone;
 				return true;  // early out
-			} else if (phase_ == Phase::kLower && row_ > hollow_area_.hole_radius)
+			} else if (phase_ == Phase::kLower && row_ > hollow_area_.hole_radius) {
 				phase_ = Phase::kBottom;
+			}
 
 			map.get_brn(left_, &hollow_area_);
 			--rowwidth_;

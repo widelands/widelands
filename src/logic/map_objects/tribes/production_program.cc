@@ -559,7 +559,7 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 			                   .str();
 		} break;
 		case ProgramResult::kNone: {
-			// TODO(GunChleoc): Same as skipped - it this on purpose?
+			// TODO(GunChleoc): Same as skipped - is this on purpose?
 			result_string = (boost::format(_("Skipped %1$s because %2$s")) %
 			                 ps.top_state().program->descname() % condition_string)
 			                   .str();
