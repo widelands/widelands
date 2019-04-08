@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# GunChleoc, 2018
+# GunChleoc, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-15 11:14+0000\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: GunChleoc, 2018\n"
+"Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -699,7 +699,7 @@ msgid ""
 " start by producing a reasonable amount of wheat."
 msgstr ""
 "Nuair a bhios sinn air cruithneachd gu leòr a bhuan, ’s urrainn dhuinn an "
-"tuathanas a thoirt às a chèile agus faing a thogail a dhèanamh clò. An "
+"tuathanas a thoirt às a chèile agus faing a thogail a dhèanamh clòimhe. An "
 "uairsin, b’ urrainn dhuinn taigh nam beart a thogail air an aon bhad airson "
 "clò fhighe. Co-dhiù no co-dheth, tòisicheamaid le cuid reusanta a "
 "chruithneachd."
@@ -749,8 +749,8 @@ msgid ""
 "settings. We need to turn all the wheat into wool and then the all the wool "
 "into cloth."
 msgstr ""
-"Thoir an aire gun doir thu ùil air uiread-amais na clòimhe ’s a’ chlòtha  "
-"ann an roghainnean na h-eaconamaidh. Feumaidh sinn clò a dhèanamh dhen "
+"Thoir an aire gun doir thu ùil air uiread-amais na clòimhe ’s a’ chlòtha ann"
+" an roghainnean na h-eaconamaidh. Feumaidh sinn clò a dhèanamh dhen "
 "chruithneachd uile gu lèir agus clò dhen chlòimh an uairsin."
 
 #. TRANSLATORS: Amalea

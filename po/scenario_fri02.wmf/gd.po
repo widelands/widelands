@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-12 15:37+0000\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -107,7 +107,7 @@ msgstr "Cuir romhad an obraich thu còmhla ris an Impireachd gus nach obraich"
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
 msgstr ""
-"Cruinnich stòrasan ’nan tìodhlac no mill taigh-stòrais na h-Impireachd"
+"Cruinnich batharan ’nan tìodhlac no mill taigh-stòrais na h-Impireachd"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:63
 msgid ""
@@ -675,7 +675,7 @@ msgstr "Coigrich"
 #. TRANSLATORS: Reebaud – Supply Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:263
 msgid "…does anyone understand what he is saying?"
-msgstr "… a bheil duine a’ tuigsinn na cainnt aigesan?"
+msgstr "…a bheil duine a’ tuigsinn na cainnt aigesan?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3. This is a foreign language to
 #. Murilius, so he sounds very formal.
@@ -892,7 +892,7 @@ msgstr ""
 msgid "You are enemies of the Empire, and I shall treat you as such!"
 msgstr ""
 "’S e nàimhdean na h-Impireachd a th’ annaibh is làimhsichidh sinn dha rèir "
-"sibh."
+"sibh!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player built forbidden
 #. military buildings
@@ -953,7 +953,7 @@ msgid ""
 msgstr ""
 "A choigrichibh! Mhothaich mi gum b’ fhiach ur facal. Bheir an Impireachd "
 "duais do a caraidean agus le sin bheir mi càirdeas na h-Impireachd mar "
-"dhuais dhuibh! "
+"dhuais dhuibh!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the
 #. player as cannon fodder, while he himself only attacks when he has no
