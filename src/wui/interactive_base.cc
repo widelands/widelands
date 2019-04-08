@@ -1004,9 +1004,10 @@ void InteractiveBase::waterway_building_add_overlay() {
 
 		map.get_neighbour(endpos, dir, &neighb);
 		caps = egbase().player(waterway_build_player_).get_buildcaps(neighb);
+		bool reachable = Widelands::CheckStepFerry(egbase()).reachable_dest(map, neighb);
 
 		if (buildwaterway_->get_index(neighb) >= 0 || !neighb.field->is_interior(waterway_build_player_) ||
-				!Widelands::CheckStepFerry(egbase()).reachable_dest(map, neighb)) {
+				!reachable) {
 			continue;
 		}
 
@@ -1034,7 +1035,7 @@ void InteractiveBase::waterway_building_add_overlay() {
 				continue;
 			}
 		}
-		if (!has_flag && !(caps & Widelands::MOVECAPS_SWIM) && !(caps & Widelands::BUILDCAPS_FLAG)) {
+		if (!has_flag && !reachable && !(caps & Widelands::BUILDCAPS_FLAG)) {
 			continue;
 		}
 

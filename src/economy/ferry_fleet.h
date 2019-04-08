@@ -67,7 +67,7 @@ struct FerryFleet : MapObject {
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
-	void update(EditorGameBase&);
+	void update(EditorGameBase&, uint32_t tdelta = 100);
 
 	void add_ferry(EditorGameBase& egbase, Ferry* ferry);
 	void remove_ferry(EditorGameBase& egbase, Ferry* ferry);
@@ -75,7 +75,6 @@ struct FerryFleet : MapObject {
 	void log_general_info(const EditorGameBase&) const override;
 
 	uint32_t count_ferries() const;
-	bool get_act_pending() const;
 
 	void request_ferry(EditorGameBase& egbase, Waterway* waterway, int32_t gametime = -1);
 	void reroute_ferry_request(Game& game, Waterway* oldww, Waterway* newww);
