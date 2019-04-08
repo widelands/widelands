@@ -36,6 +36,7 @@ inline int program_result_index(ProgramResult result) {
 	case ProgramResult::kNone:
 		NEVER_HERE();
 	}
+	return 0;
 }
 
 enum class ProgramResultHandlingMethod { kFail, kComplete, kSkip, kContinue, kRepeat };
