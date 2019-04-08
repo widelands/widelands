@@ -226,8 +226,6 @@ function territory_game_over(fields, players, wc_descname, wc_version)
    calculate_territory_points(fields, players, wc_descname, wc_version)
 
    for idx, pl in ipairs(players) do
-      pl.see_all = 1
-
       local wonmsg = won_game_over.body .. game_status.body
       local lostmsg = lost_game_over.body .. game_status.body
       for i=1,#territory_points.points do
