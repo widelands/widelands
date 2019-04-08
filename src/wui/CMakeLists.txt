@@ -29,6 +29,7 @@ wl_library(wui_chat_ui
     graphic_text_layout
     logic
     profile
+    sound
     ui_basic
     wui
 )
@@ -272,6 +273,7 @@ wl_library(wui
     base_i18n
     base_log
     base_macros
+    base_math
     base_time_string
     chat
     economy

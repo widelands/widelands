@@ -5,6 +5,7 @@ wl_library(note_sound
   DEPENDS
     logic_widelands_geometry
     notifications
+    sound_constants
 )
 
 wl_library(sound_constants
@@ -30,6 +31,7 @@ wl_library(sound
     helper
     io_fileread
     io_filesystem
+    logic_exceptions
     profile
     random
     sound_constants

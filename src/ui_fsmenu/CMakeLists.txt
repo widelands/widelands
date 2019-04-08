@@ -166,6 +166,7 @@ wl_library(ui_fsmenu_network
     network
     profile
     random
+    sound
     ui_basic
     ui_fsmenu_base
     wui_chat_ui
