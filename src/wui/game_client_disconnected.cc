@@ -83,7 +83,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                        disconnected from a game */
                     _("AI for the disconnected player"),
                     UI::DropdownType::kPictorial,
-                    UI::PanelStyle::kWui),
+                    UI::PanelStyle::kWui, UI::ButtonStyle::kWuiMenu),
      exit_game_(&box_,
                 "exit_game",
                 0,

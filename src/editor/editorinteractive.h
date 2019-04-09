@@ -37,6 +37,7 @@
 #include "logic/map.h"
 #include "notifications/notifications.h"
 #include "ui_basic/button.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_base.h"
 
@@ -143,6 +144,17 @@ public:
 private:
 	friend struct EditorToolMenu;
 
+	enum class MainMenuEntry {
+		kNewMap,
+		kNewRandomMap,
+		kLoadMap,
+		kSaveMap,
+		kMapOptions,
+		kExitEditor,
+	};
+
+	void main_menu_selected(MainMenuEntry entry);
+
 	void on_buildhelp_changed(const bool value) override;
 
 	void toggle_resources();
@@ -158,7 +170,7 @@ private:
 
 	UI::UniqueWindow::Registry toolsizemenu_;
 	UI::UniqueWindow::Registry playermenu_;
-	UI::UniqueWindow::Registry mainmenu_;
+	UI::Dropdown<MainMenuEntry> mainmenu_;
 	UI::UniqueWindow::Registry heightmenu_;
 	UI::UniqueWindow::Registry noise_heightmenu_;
 	UI::UniqueWindow::Registry terrainmenu_;

@@ -106,7 +106,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                         24,
                         _("Language"),
                         UI::DropdownType::kTextual,
-                        UI::PanelStyle::kFsMenu),
+                        UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu),
      resolution_dropdown_(&box_interface_left_,
                           0,
                           0,
@@ -115,7 +115,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           24,
                           _("Window Size"),
                           UI::DropdownType::kTextual,
-                          UI::PanelStyle::kFsMenu),
+                          UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu),
 
      fullscreen_(&box_interface_left_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),

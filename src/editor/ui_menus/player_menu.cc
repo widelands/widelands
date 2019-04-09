@@ -129,7 +129,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
                     24,
                     _("Number of players"),
                     UI::DropdownType::kTextual,
-                    UI::PanelStyle::kWui) {
+                    UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary) {
 	box_.set_size(100, 100);  // Prevent assert failures
 	box_.add(&no_of_players_, UI::Box::Resizing::kFullSize);
 	box_.add_space(2 * kMargin);
@@ -171,7 +171,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		// Tribe
 		UI::Dropdown<std::string>* plr_tribe =
 		   new UI::Dropdown<std::string>(row, 0, 0, 50, 400, plr_name->get_h(), _("Tribe"),
-		                                 UI::DropdownType::kPictorial, UI::PanelStyle::kWui);
+		                                 UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
 		{
 			i18n::Textdomain td("tribes");
 			for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {

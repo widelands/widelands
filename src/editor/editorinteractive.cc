@@ -31,8 +31,10 @@
 #include "base/warning.h"
 #include "editor/tools/delete_immovable_tool.h"
 #include "editor/ui_menus/help.h"
-#include "editor/ui_menus/main_menu.h"
 #include "editor/ui_menus/main_menu_load_map.h"
+#include "editor/ui_menus/main_menu_map_options.h"
+#include "editor/ui_menus/main_menu_new_map.h"
+#include "editor/ui_menus/main_menu_random_map.h"
 #include "editor/ui_menus/main_menu_save_map.h"
 #include "editor/ui_menus/player_menu.h"
 #include "editor/ui_menus/tool_menu.h"
@@ -70,13 +72,19 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      need_save_(false),
      realtime_(SDL_GetTicks()),
      is_painting_(false),
+	 mainmenu_(
+		toolbar(), 0, 0, 34U, 300, 34U,
+		 /** TRANSLATORS: Title for the main menu button in the editor */
+		 _("Main Menu"),
+		 UI::DropdownType::kPictorialMenu,
+		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
      undo_(nullptr),
      redo_(nullptr),
      tools_(new Tools(e.map())),
      history_(nullptr)  // history needs the undo/redo buttons
 {
-	add_toolbar_button("wui/menus/menu_toggle_menu", "menu", _("Main menu"), &mainmenu_, true);
-	mainmenu_.open_window = [this] { new EditorMainMenu(*this, mainmenu_); };
+	mainmenu_.set_image(g_gr->images().get("images/wui/menus/menu_toggle_menu.png"));
+	toolbar()->add(&mainmenu_);
 
 	add_toolbar_button(
 	   "wui/editor/editor_menu_toggle_tool_menu", "tools", _("Tools"), &toolmenu_, true);
@@ -139,6 +147,20 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	helpmenu_.open_window = [this] { new EditorHelp(*this, helpmenu_, &egbase().lua()); };
 
 	adjust_toolbar_position();
+
+	/** TRANSLATORS: An entry in the editor's main menu */
+	mainmenu_.add(_("New Map"), MainMenuEntry::kNewMap);
+	/** TRANSLATORS: An entry in the editor's main menu */
+	mainmenu_.add(_("New Random Map"), MainMenuEntry::kNewRandomMap);
+	/** TRANSLATORS: An entry in the editor's main menu */
+	mainmenu_.add(_("Load Map"), MainMenuEntry::kLoadMap);
+	/** TRANSLATORS: An entry in the editor's main menu */
+	mainmenu_.add(_("Save Map"), MainMenuEntry::kSaveMap);
+	/** TRANSLATORS: An entry in the editor's main menu */
+	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions);
+	/** TRANSLATORS: An entry in the editor's main menu */
+	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor);
+	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
 
 #ifndef NDEBUG
 	set_display_flag(InteractiveBase::dfDebug, true);
@@ -403,6 +425,29 @@ void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
 
 void EditorInteractive::stop_painting() {
 	is_painting_ = false;
+}
+
+void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
+	switch (entry) {
+	case MainMenuEntry::kNewMap: {
+		new MainMenuNewMap(*this);
+	} break;
+	case MainMenuEntry::kNewRandomMap: {
+		new MainMenuNewRandomMap(*this);
+	} break;
+	case MainMenuEntry::kLoadMap: {
+		new MainMenuLoadMap(*this);
+	} break;
+	case MainMenuEntry::kSaveMap: {
+		new MainMenuSaveMap(*this);
+	} break;
+	case MainMenuEntry::kMapOptions: {
+		new MainMenuMapOptions(*this);
+	} break;
+	case MainMenuEntry::kExitEditor: {
+		exit();
+	}
+	}
 }
 
 void EditorInteractive::on_buildhelp_changed(const bool value) {

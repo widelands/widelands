@@ -55,11 +55,11 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                            int button_dimension,
                            const std::string& label,
                            const DropdownType type,
-                           UI::PanelStyle style)
+                           UI::PanelStyle style, ButtonStyle button_style)
    : UI::Panel(parent,
                x,
                y,
-               type == DropdownType::kPictorial ? button_dimension : w,
+               (type == DropdownType::kPictorial || type_ == DropdownType::kPictorialMenu) ? button_dimension : w,
                // Height only to fit the button, so we can use this in Box layout.
                base_height(button_dimension)),
      id_(next_id_++),
@@ -77,9 +77,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                                     0,
                                     button_dimension,
                                     get_h(),
-                                    style == UI::PanelStyle::kFsMenu ?
-                                       UI::ButtonStyle::kFsMenuMenu :
-                                       UI::ButtonStyle::kWuiSecondary,
+                                    button_style,
                                     g_gr->images().get("images/ui_basic/scrollbar_down.png")) :
                      nullptr),
      display_button_(&button_box_,
@@ -90,8 +88,10 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                         w - button_dimension :
                         type == DropdownType::kTextualNarrow ? w : button_dimension,
                      get_h(),
-                     style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
-                                                        UI::ButtonStyle::kWuiSecondary,
+					 type == DropdownType::kTextual ?
+						 (style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+															 UI::ButtonStyle::kWuiSecondary) :
+						 button_style,
                      label),
      label_(label),
      type_(type),
@@ -164,13 +164,13 @@ void BaseDropdown::set_max_items(int items) {
 
 void BaseDropdown::layout() {
 	const int base_h = base_height(button_dimension_);
-	const int w = type_ == DropdownType::kPictorial ? button_dimension_ : get_w();
+	const int w = (type_ == DropdownType::kPictorial || type_ == DropdownType::kPictorialMenu) ? button_dimension_ : get_w();
 	button_box_.set_size(w, base_h);
 	display_button_.set_desired_size(
 	   type_ == DropdownType::kTextual ? w - button_dimension_ : w, base_h);
 	int new_list_height =
 	   std::min(static_cast<int>(list_->size()) * list_->get_lineheight(), max_list_height_);
-	list_->set_size(type_ != DropdownType::kPictorial ? w : list_width_, new_list_height);
+	list_->set_size((type_ != DropdownType::kPictorial && type_ != DropdownType::kPictorialMenu) ? w : list_width_, new_list_height);
 	set_desired_size(w, base_h);
 
 	// Update list position. The list is hooked into the highest parent that we can get so that we
@@ -241,7 +241,7 @@ void BaseDropdown::select(uint32_t entry) {
 
 void BaseDropdown::set_label(const std::string& text) {
 	label_ = text;
-	if (type_ != DropdownType::kPictorial) {
+	if (type_ != DropdownType::kPictorial && type_ != DropdownType::kPictorialMenu) {
 		display_button_.set_title(label_);
 	}
 }
@@ -260,7 +260,7 @@ void BaseDropdown::set_tooltip(const std::string& text) {
 
 void BaseDropdown::set_errored(const std::string& error_message) {
 	set_tooltip((boost::format(_("%1%: %2%")) % _("Error") % error_message).str());
-	if (type_ != DropdownType::kPictorial) {
+	if (type_ != DropdownType::kPictorial && type_ != DropdownType::kPictorialMenu) {
 		set_label(_("Error"));
 	} else {
 		set_image(g_gr->images().get("images/ui_basic/different.png"));
@@ -314,6 +314,11 @@ uint32_t BaseDropdown::size() const {
 }
 
 void BaseDropdown::update() {
+	if (type_ == DropdownType::kPictorialMenu) {
+		// Menus never change their main image and text
+		return;
+	}
+
 	const std::string name = list_->has_selection() ?
 	                            list_->get_selected_name() :
 	                            /** TRANSLATORS: Selection in Dropdown menus. */
@@ -340,6 +345,30 @@ void BaseDropdown::set_value() {
 	update();
 	selected();
 	current_selection_ = list_->selection_index();
+}
+
+void BaseDropdown::toggle() {
+	if (!is_enabled_) {
+		list_->set_visible(false);
+		return;
+	}
+	list_->set_visible(!list_->is_visible());
+	if (list_->is_visible()) {
+		list_->move_to_top();
+		focus();
+		get_parent()->set_mouse_pos(
+					Vector2i(
+						display_button_.get_x() + (display_button_.get_w() * 3 / 5),
+						display_button_.get_y() + (display_button_.get_h() * 3 / 5)));
+		if (type_ == DropdownType::kPictorialMenu && !has_selection() && !list_->empty()) {
+			select(0);
+		}
+	}
+	if (type_ != DropdownType::kTextual) {
+		display_button_.set_perm_pressed(list_->is_visible());
+	}
+	// Make sure that the list covers and deactivates the elements below it
+	set_layout_toplevel(list_->is_visible());
 }
 
 void BaseDropdown::toggle_list() {

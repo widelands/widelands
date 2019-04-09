@@ -44,8 +44,9 @@ struct NoteDropdown {
 	}
 };
 
-/// The narrow textual dropdown omits the extra push button
-enum class DropdownType { kTextual, kTextualNarrow, kPictorial };
+/// The narrow textual dropdown omits the extra push button.
+/// Use kPictorialMenu if you want to trigger an action without changing the menu button.
+enum class DropdownType { kTextual, kTextualNarrow, kPictorial, kPictorialMenu };
 
 /// Implementation for a dropdown menu that lets the user select a value.
 class BaseDropdown : public Panel {
@@ -68,7 +69,8 @@ protected:
 	             int button_dimension,
 	             const std::string& label,
 	             const DropdownType type,
-	             PanelStyle style);
+	             PanelStyle style,
+				 ButtonStyle button_style);
 	~BaseDropdown() override;
 
 public:
@@ -125,6 +127,10 @@ public:
 	/// Set the number of items to fit in the list
 	void set_max_items(int items);
 
+	/// Toggle the list on and off and position the mouse on the button so that the dropdown won't close on us.
+	/// If this is a menu and nothing was selected yet, select the first item for easier keyboard navigation.
+	void toggle();
+
 protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry
@@ -161,7 +167,7 @@ private:
 
 	/// Updates the title and tooltip of the display button and triggers a 'selected' signal.
 	void set_value();
-	/// Toggles the dropdown list on and off.
+	/// Toggles the dropdown list on and off and sends a notification if the list is visible afterwards.
 	void toggle_list();
 	/// Toggle the list closed if the dropdown is currently expanded.
 	void close();
@@ -216,8 +222,9 @@ public:
 	         int button_dimension,
 	         const std::string& label,
 	         const DropdownType type,
-	         PanelStyle style)
-	   : BaseDropdown(parent, x, y, list_w, list_h, button_dimension, label, type, style) {
+	         PanelStyle style,
+			 ButtonStyle button_style)
+	   : BaseDropdown(parent, x, y, list_w, list_h, button_dimension, label, type, style, button_style) {
 	}
 	~Dropdown() {
 		entry_cache_.clear();

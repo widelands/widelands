@@ -49,8 +49,6 @@ wl_library(editor
     ui_menus/categorized_item_selection_menu.h
     ui_menus/help.cc
     ui_menus/help.h
-    ui_menus/main_menu.cc
-    ui_menus/main_menu.h
     ui_menus/main_menu_load_map.cc
     ui_menus/main_menu_load_map.h
     ui_menus/main_menu_load_or_save_map.cc

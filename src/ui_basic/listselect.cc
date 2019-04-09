@@ -275,7 +275,7 @@ const Image* BaseListselect::get_selected_image() const {
 }
 
 int BaseListselect::get_lineheight() const {
-	return lineheight_ + kMargin;
+	return lineheight_ + (selection_mode_ == ListselectLayout::kDropdown ? 2 * kMargin : kMargin);
 }
 
 uint32_t BaseListselect::get_eff_w() const {
@@ -380,7 +380,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		// Now draw pictures
 		if (er.pic) {
 			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
-			                  y + (get_lineheight() - er.pic->height()) / 2),
+			                  y + (lineheight_ - er.pic->height()) / 2),
 			         er.pic);
 		}
 

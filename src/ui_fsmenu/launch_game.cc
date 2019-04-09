@@ -54,7 +54,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              buth_,
                              "",
                              UI::DropdownType::kTextual,
-                             UI::PanelStyle::kFsMenu),
+                             UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu),
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels

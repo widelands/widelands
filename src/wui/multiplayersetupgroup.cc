@@ -57,7 +57,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                       GameSettingsProvider* const settings)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h, kPadding),
 	     slot_dropdown_(
-	        this, 0, 0, h, 200, h, _("Role"), UI::DropdownType::kPictorial, UI::PanelStyle::kFsMenu),
+	        this, 0, 0, h, 200, h, _("Role"), UI::DropdownType::kPictorial, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 	     // Name needs to be initialized after the dropdown, otherwise the layout function will
 	     // crash.
 	     name(this, 0, 0, w - h - UI::Scrollbar::kSize * 11 / 5, h),
@@ -196,7 +196,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                    h,
 	                    _("Type"),
 	                    UI::DropdownType::kPictorial,
-	                    UI::PanelStyle::kFsMenu),
+	                    UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 	     tribes_dropdown_(this,
 	                      0,
 	                      0,
@@ -205,7 +205,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                      h,
 	                      _("Tribe"),
 	                      UI::DropdownType::kPictorial,
-	                      UI::PanelStyle::kFsMenu),
+	                      UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 	     init_dropdown_(this,
 	                    0,
 	                    0,
@@ -214,9 +214,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                    h,
 	                    "",
 	                    UI::DropdownType::kTextualNarrow,
-	                    UI::PanelStyle::kFsMenu),
+	                    UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 	     team_dropdown_(
-	        this, 0, 0, h, 200, h, _("Team"), UI::DropdownType::kPictorial, UI::PanelStyle::kFsMenu),
+	        this, 0, 0, h, 200, h, _("Team"), UI::DropdownType::kPictorial, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 	     last_state_(PlayerSettings::State::kClosed),
 	     type_selection_locked_(false),
 	     tribe_selection_locked_(false),
