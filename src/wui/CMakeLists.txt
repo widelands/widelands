@@ -4,6 +4,7 @@ wl_library(wui_sound_options
     sound_options.h
   DEPENDS
     base_i18n
+    sound
     ui_basic
 )
 
