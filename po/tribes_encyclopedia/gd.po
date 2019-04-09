@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-29 07:26+0000\n"
-"PO-Revision-Date: 2019-03-30 10:22+0000\n"
+"POT-Creation-Date: 2019-04-05 04:54+0000\n"
+"PO-Revision-Date: 2019-04-05 07:57+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -732,7 +732,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "gold ore."
-msgstr "Togaidh a’ mhèinn seo a h-uile stòras gu ruige an doimhne as motha. Ach fiù ’s às dèidh seo a dhèanamh, bidh teans de %s aice fhathast gun lorg i barrachd cloiche-òir."
+msgstr "Togaidh a’ mhèinn seo a h-uile stòras gu ruige an doimhne as motha. Ach fiù ’s às dèidh seo a dhèanamh, bidh teans de %s aice fhathast gun lorg i barrachd cloich-òir."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
@@ -892,7 +892,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "iron ore."
-msgstr "Togaidh a’ mhèinn seo a h-uile stòras gu ruige an doimhne as motha. Ach fiù ’s às dèidh seo a dhèanamh, bidh teans de %s aice fhathast gun lorg i barrachd cloiche-iarainn."
+msgstr "Togaidh a’ mhèinn seo a h-uile stòras gu ruige an doimhne as motha. Ach fiù ’s às dèidh seo a dhèanamh, bidh teans de %s aice fhathast gun lorg i barrachd cloich-iarainn."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
@@ -1675,7 +1675,7 @@ msgctxt "building"
 msgid ""
 "Digs up mud from the ground and uses water to turn it into clay. Clay is "
 "used to make bricks, reinforce the charcoal kiln and to build ships."
-msgstr "Gearraidh e poll às an talamh airson criadh a dhèanamh dheth le uisge. Thèid criadh a chleachdadh airson breigichean a dhèanamh, na h-àthan-ghuail a dhèanamh nas seasmhaiche agus longan a thogail."
+msgstr "Gearraidh e poll às an talamh airson criadh a dhèanamh dheth le uisge. Thèid criadh a chleachdadh airson breigichean a dhèanamh, na slocan guail-fhiodha a dhèanamh nas seasmhaiche agus longan a thogail."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:21
@@ -1903,7 +1903,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "gold ore."
-msgstr "Togaidh a’ mhèinn seo a h-uile stòras gu ruige an doimhne as motha. Ach fiù ’s às dèidh seo a dhèanamh, bidh teans de %s aice fhathast gun lorg i barrachd cloiche-òir."
+msgstr "Togaidh a’ mhèinn seo a h-uile stòras gu ruige an doimhne as motha. Ach fiù ’s às dèidh seo a dhèanamh, bidh teans de %s aice fhathast gun lorg i barrachd cloich-òir."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:26
@@ -1975,7 +1975,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "iron ore."
-msgstr "Togaidh a’ mhèinn seo a h-uile stòras gu ruige an doimhne as motha. Ach fiù ’s às dèidh seo a dhèanamh, bidh teans de %s aice fhathast gun lorg i barrachd cloiche-iarainn."
+msgstr "Togaidh a’ mhèinn seo a h-uile stòras gu ruige an doimhne as motha. Ach fiù ’s às dèidh seo a dhèanamh, bidh teans de %s aice fhathast gun lorg i barrachd cloich-iarainn."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:26
