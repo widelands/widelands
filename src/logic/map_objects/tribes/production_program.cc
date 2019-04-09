@@ -633,7 +633,7 @@ ProductionProgram::ActCall::ActCall(char* parameters, const ProductionSiteDescr&
 }
 
 void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
-	ProgramResult const program_result = static_cast<ProgramResult>(ps.top_state().phase);
+	ProgramResult const program_result = ps.top_state().phase;
 
 	if (program_result == ProgramResult::kNone) {  //  The program has not yet been called.
 		return ps.program_start(game, program_->name());
@@ -647,7 +647,7 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 	case ProgramResultHandlingMethod::kContinue:
 		return ps.program_step(game);
 	case ProgramResultHandlingMethod::kRepeat:
-		ps.top_state().phase = static_cast<unsigned int>(ProgramResult::kNone);
+		ps.top_state().phase = ProgramResult::kNone;
 		ps.program_timer_ = true;
 		ps.program_time_ = ps.schedule_act(game, 10);
 		break;
@@ -698,9 +698,9 @@ bool ProductionProgram::ActCallWorker::get_building_work(Game& game,
                                                          ProductionSite& psite,
                                                          Worker& worker) const {
 	ProductionSite::State& state = psite.top_state();
-	if (state.phase == 0) {
+	if (state.phase == ProgramResult::kNone) {
 		worker.start_task_program(game, program());
-		++state.phase;
+		state.phase = ProgramResult::kFailed;
 		return true;
 	} else {
 		psite.program_step(game);
@@ -730,7 +730,7 @@ ProductionProgram::ActSleep::ActSleep(char* parameters) {
 }
 
 void ProductionProgram::ActSleep::execute(Game& game, ProductionSite& ps) const {
-	return ps.program_step(game, duration_ ? duration_ : ps.top_state().phase);
+	return ps.program_step(game, duration_ ? duration_ : 0, ps.top_state().phase);
 }
 
 ProductionProgram::ActCheckMap::ActCheckMap(char* parameters) {
@@ -788,7 +788,7 @@ ProductionProgram::ActAnimate::ActAnimate(char* parameters, ProductionSiteDescr*
 
 void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) const {
 	ps.start_animation(game, id_);
-	return ps.program_step(game, duration_ ? duration_ : ps.top_state().phase);
+	return ps.program_step(game, duration_ ? duration_ : 0, ps.top_state().phase);
 }
 
 ProductionProgram::ActConsume::ActConsume(char* parameters,
@@ -1551,7 +1551,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
                                                         ProductionSite& psite,
                                                         Worker& worker) const {
 	ProductionSite::State& state = psite.top_state();
-	if (state.phase >= 1) {
+	if (state.phase > ProgramResult::kNone) {
 		psite.program_step(game);
 		return false;
 	}
@@ -1597,7 +1597,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 	worker.top_state().objvar1 = construction;
 	worker.top_state().coords = state.coord;
 
-	state.phase = 1;
+	state.phase = ProgramResult::kFailed;
 	return true;
 }
 

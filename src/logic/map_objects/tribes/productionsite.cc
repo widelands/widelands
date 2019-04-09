@@ -874,7 +874,7 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 /**
  * Advance the program to the next step.
  */
-void ProductionSite::program_step(Game& game, uint32_t const delay, uint32_t const phase) {
+void ProductionSite::program_step(Game& game, uint32_t const delay, ProgramResult const phase) {
 	State& state = top_state();
 	++state.ip;
 	state.phase = phase;
@@ -890,7 +890,7 @@ void ProductionSite::program_start(Game& game, const std::string& program_name) 
 
 	state.program = descr().get_program(program_name);
 	state.ip = 0;
-	state.phase = 0;
+	state.phase = ProgramResult::kNone;
 
 	stack_.push_back(state);
 
@@ -919,7 +919,7 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 
 	stack_.pop_back();
 	if (!stack_.empty()) {
-		top_state().phase = static_cast<unsigned int>(result);
+		top_state().phase = result;
 	}
 
 	switch (result) {
