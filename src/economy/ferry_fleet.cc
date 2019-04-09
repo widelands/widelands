@@ -103,16 +103,13 @@ private:
  * of the same player.
  */
 bool FerryFleet::find_other_fleet(EditorGameBase& egbase) {
-log("\nNOCOM: FerryFleet::find_other_fleet for ferryfleet %u\n", serial());
 	StepEvalFindFerryFleet stepeval(egbase);
 	MapAStar<StepEvalFindFerryFleet> astar(*egbase.mutable_map(), stepeval, wwWORKER);
 	for (const Ferry* temp_ferry : ferries_) {
-log("NOCOM: Adding ferry %u location %3dx%3d\n", temp_ferry->serial(), temp_ferry->get_position().x, temp_ferry->get_position().y);
 		astar.push(temp_ferry->get_position());
 	}
 	for (const auto& temp_ww : pending_ferry_requests_) {
 		for (Coords& c : temp_ww.second->get_positions(egbase)) {
-log("NOCOM: Adding waterway %u location %3dx%3d\n", temp_ww.second->serial(), c.x, c.y);
 			astar.push(c);
 		}
 	}
@@ -120,13 +117,11 @@ log("NOCOM: Adding waterway %u location %3dx%3d\n", temp_ww.second->serial(), c.
 	int32_t cost;
 	FCoords cur;
 	while (astar.step(cur, cost)) {
-log("NOCOM: Step to %3dx%3d\n", cur.x, cur.y);
 		if (BaseImmovable* imm = cur.field->get_immovable()) {
 			const MapObjectType type = imm->descr().type();
 			if (type == MapObjectType::WATERWAY) {
 				upcast(Waterway, ww, imm);
 				if (ww->get_fleet() != this && ww->get_owner() == get_owner()) {
-log("NOCOM: New fleet is merging with fleet of waterway %u\n", ww->serial());
 					return ww->get_fleet()->merge(egbase, this);
 				}
 			}
@@ -138,14 +133,12 @@ log("NOCOM: New fleet is merging with fleet of waterway %u\n", ww->serial());
 				upcast(Ferry, ferry, bob);
 				if (ferry->get_fleet() != nullptr && ferry->get_fleet() != this &&
 					ferry->get_owner() == get_owner()) {
-log("NOCOM: New fleet is merging with fleet of ferry %u\n", ferry->serial());
 					return ferry->get_fleet()->merge(egbase, this);
 				}
 			}
 		}
 	}
 
-log("NOCOM: No other fleet found!!!\n");
 	if (active()) {
 		update(egbase);
 		return true;
@@ -174,8 +167,11 @@ bool FerryFleet::merge(EditorGameBase& egbase, FerryFleet* other) {
 
 	while (!other->pending_ferry_requests_.empty()) {
 		auto pair = other->pending_ferry_requests_.begin();
-		request_ferry(egbase, pair->second, pair->first);
-		// request_ferry() tells the associated waterway to remove this request from the other fleet
+		uint32_t time = pair->first;
+		Waterway* ww = pair->second;
+		// set_fleet() tells the associated waterway to remove this request from the other fleet
+		ww->set_fleet(this);
+		pending_ferry_requests_.emplace(time, ww);
 	}
 
 	other->remove(egbase);
@@ -231,14 +227,15 @@ void FerryFleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
 
 /**
  * Adds a request for a ferry. The request will be fulfilled as soon as possible
- * in the next call to act(). When a ferry is found, it will be passed to the
- * waterway's callback function.
+ * in the next call to act(). When a ferry is found, its destination will be set to the waterway.
  * Multiple requests will be treated first come first served.
  */
 void FerryFleet::request_ferry(EditorGameBase& egbase, Waterway* waterway, int32_t gametime) {
 	for (const auto& pair : pending_ferry_requests_) {
 		if (pair.second == waterway) {
-			waterway->set_fleet(this);
+			if (waterway->get_fleet() != this) {
+				waterway->set_fleet(this);
+			}
 			// One and the same request may be issued twice, e.g. when splitting a waterway – ignore
 			return;
 		}
@@ -256,6 +253,7 @@ void FerryFleet::cancel_ferry_request(Game& game, Waterway* waterway) {
 	}
 	for (auto it = pending_ferry_requests_.begin(); it != pending_ferry_requests_.end(); ++it) {
 		if (it->second == waterway) {
+
 			pending_ferry_requests_.erase(it);
 			if (empty()) {
 				// We're no longer needed, act() will destroy us soon
@@ -295,14 +293,13 @@ void FerryFleet::update(EditorGameBase& egbase, uint32_t tdelta) {
 	}
 
 	if (upcast(Game, game, &egbase)) {
-		uint32_t time = schedule_act(*game, tdelta);
-		log("NOCOM: FerryFleet %u scheduled an act for %u\n", serial(), time);
+		schedule_act(*game, tdelta);
 		act_pending_ = true;
 	}
 }
 
 /**
- * Act callback updates ship scheduling. All decisions about which ferry to assign to which waterway
+ * Act callback updates ferry assigning. All decisions about which ferry to assign to which waterway
  * are supposed to be made by this function.
  *
  * @note Do not call this directly; instead, trigger it via @ref update
@@ -318,8 +315,10 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 	}
 
 	if (!active()) {
-		// If we are here, most likely act() was called by a pending ferry request when there are no
-		// ferries yet. We can't handle it now, so we reschedule the act()
+		// If we are here, most likely update() was called by a pending ferry request
+		// when there are no ferries yet or by a new ferry when we can't offer
+		// employment yet. We can't handle it now, so we reschedule the act()
+		molog("FerryFleet::act: inactive, retry later\n");
 		return update(game, 5000);
 	}
 
@@ -375,6 +374,12 @@ void FerryFleet::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
 	molog("%" PRIuS " ferries and %" PRIuS " waterways\n", ferries_.size(), pending_ferry_requests_.size());
+	for (const Ferry* f : ferries_) {
+		molog("* Ferry %u\n", f->serial());
+	}
+	for (const auto& pair : pending_ferry_requests_) {
+		molog("* Waterway %u (requested at %u)\n", pair.second->serial(), pair.first);
+	}
 }
 
 constexpr uint8_t kCurrentPacketVersion = 1;

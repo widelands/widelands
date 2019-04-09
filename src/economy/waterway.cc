@@ -68,11 +68,13 @@ Waterway& Waterway::create(EditorGameBase& egbase, Flag& start, Flag& end, const
 	return waterway;
 }
 
-void Waterway::link_into_flags(EditorGameBase& egbase) {
+void Waterway::link_into_flags(EditorGameBase& egbase, bool loading) {
 	RoadBase::link_into_flags(egbase);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
-	if (upcast(Game, game, &egbase)) {
-		request_ferry(egbase);
+	if (!loading) {
+		if (upcast(Game, game, &egbase)) {
+			request_ferry(egbase);
+		}
 	}
 }
 
@@ -226,6 +228,13 @@ void Waterway::cleanup(EditorGameBase& egbase) {
 		}
 	}
 	RoadBase::cleanup(egbase);
+}
+
+void Waterway::log_general_info(const EditorGameBase& egbase) const {
+	MapObject::log_general_info(egbase);
+
+	molog("Ferry %u\n", ferry_ ? ferry_->serial() : 0);
+	molog("FerryFleet %u\n", fleet_ ? fleet_->serial() : 0);
 }
 
 }  // namespace Widelands

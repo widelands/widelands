@@ -113,7 +113,7 @@ void MapWaterwaydataPacket::read(FileSystem& fs,
 
 					//  Now that all rudimentary data is set, init this waterway. Then
 					//  overwrite the initialization values.
-					ww.link_into_flags(game);
+					ww.link_into_flags(game, true);
 
 					uint32_t fleet_serial = fr.unsigned_32();
 					uint32_t ferry_serial = fr.unsigned_32();

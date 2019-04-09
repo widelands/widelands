@@ -99,7 +99,7 @@ void Road::cleanup(EditorGameBase& egbase) {
 	RoadBase::cleanup(egbase);
 }
 
-void Road::link_into_flags(EditorGameBase& egbase) {
+void Road::link_into_flags(EditorGameBase& egbase, bool) {
 	RoadBase::link_into_flags(egbase);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWORKER);

@@ -63,6 +63,8 @@ struct Waterway : public RoadBase {
 
 	FerryFleet* get_fleet() const;
 
+	void log_general_info(const EditorGameBase&) const override;
+
 protected:
 	void cleanup(EditorGameBase&) override;
 
@@ -70,7 +72,7 @@ private:
 	friend struct FerryFleet;
 	void set_fleet(FerryFleet* fleet);
 
-	void link_into_flags(EditorGameBase&) override;
+	void link_into_flags(EditorGameBase&, bool = false) override;
 
 	void request_ferry(EditorGameBase& egbase);
 

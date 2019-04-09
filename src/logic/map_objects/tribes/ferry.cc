@@ -294,7 +294,7 @@ void Ferry::Loader::load(FileRead& fr) {
 			else {
 				ferry.destination_.reset(nullptr);
 			}
-			ferry.init_fleet();
+			ferry.fleet_ = nullptr;
 		} else {
 			throw UnhandledVersionError("Ferry", packet_version, kCurrentPacketVersion);
 		}

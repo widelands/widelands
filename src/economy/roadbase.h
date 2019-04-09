@@ -100,7 +100,7 @@ protected:
 	void mark_map(EditorGameBase&);
 	void unmark_map(EditorGameBase&);
 
-	virtual void link_into_flags(EditorGameBase&);
+	virtual void link_into_flags(EditorGameBase&, bool = false);
 
 	Flag* flags_[2];      ///< start and end flag
 	int32_t flagidx_[2];  ///< index of this road in the flag's road array
