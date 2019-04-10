@@ -22,5 +22,6 @@ tribes:new_worker_type {
       frisians_carrier = 1
    },
 
+   ware_hotspot = {0, 20},
    animations = animations,
 }

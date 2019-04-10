@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,7 +95,9 @@ void RoadProgram::add_road(const int renderbuffer_width,
 
 	vertices_.emplace_back(PerVertexData{
 	   start.surface_pixel.x - road_overshoot_x + road_thickness_x,
-	   start.surface_pixel.y - road_overshoot_y + road_thickness_y, texture_rect.x, texture_rect.y,
+	   start.surface_pixel.y - road_overshoot_y + road_thickness_y,
+	   texture_rect.x,
+	   texture_rect.y,
 	   start.brightness,
 	});
 	pixel_to_gl_renderbuffer(
@@ -103,16 +105,20 @@ void RoadProgram::add_road(const int renderbuffer_width,
 
 	vertices_.emplace_back(PerVertexData{
 	   start.surface_pixel.x - road_overshoot_x - road_thickness_x,
-	   start.surface_pixel.y - road_overshoot_y - road_thickness_y, texture_rect.x,
-	   texture_rect.y + texture_rect.h, start.brightness,
+	   start.surface_pixel.y - road_overshoot_y - road_thickness_y,
+	   texture_rect.x,
+	   texture_rect.y + texture_rect.h,
+	   start.brightness,
 	});
 	pixel_to_gl_renderbuffer(
 	   renderbuffer_width, renderbuffer_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
 
 	vertices_.emplace_back(PerVertexData{
 	   end.surface_pixel.x + road_overshoot_x + road_thickness_x,
-	   end.surface_pixel.y + road_overshoot_y + road_thickness_y, texture_rect.x + texture_rect.w,
-	   texture_rect.y, end.brightness,
+	   end.surface_pixel.y + road_overshoot_y + road_thickness_y,
+	   texture_rect.x + texture_rect.w,
+	   texture_rect.y,
+	   end.brightness,
 	});
 	pixel_to_gl_renderbuffer(
 	   renderbuffer_width, renderbuffer_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
@@ -126,8 +132,10 @@ void RoadProgram::add_road(const int renderbuffer_width,
 
 	vertices_.emplace_back(PerVertexData{
 	   end.surface_pixel.x + road_overshoot_x - road_thickness_x,
-	   end.surface_pixel.y + road_overshoot_y - road_thickness_y, texture_rect.x + texture_rect.w,
-	   texture_rect.y + texture_rect.h, end.brightness,
+	   end.surface_pixel.y + road_overshoot_y - road_thickness_y,
+	   texture_rect.x + texture_rect.w,
+	   texture_rect.y + texture_rect.h,
+	   end.brightness,
 	});
 	pixel_to_gl_renderbuffer(
 	   renderbuffer_width, renderbuffer_height, &vertices_.back().gl_x, &vertices_.back().gl_y);

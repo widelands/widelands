@@ -95,16 +95,16 @@ tribes:new_trainingsite_type {
          descname = _"sleeping",
          actions = {
             "sleep=5000",
-            "check_soldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
+            "checksoldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
          }
       },
       upgrade_soldier_attack_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
-            "check_soldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
+            "checksoldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
             "sleep=30000",
-            "check_soldier=soldier attack 0", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier attack 0", -- Because the soldier can be expelled by the player
             "consume=spear empire_bread fish,meat",
             "train=soldier attack 0 1"
          }
@@ -113,9 +113,9 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
-            "check_soldier=soldier attack 1",
+            "checksoldier=soldier attack 1",
             "sleep=30000",
-            "check_soldier=soldier attack 1",
+            "checksoldier=soldier attack 1",
             "consume=spear_advanced empire_bread fish,meat",
             "train=soldier attack 1 2"
          }
@@ -124,9 +124,9 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier attack from level 2 to level 3"),
          actions = {
-            "check_soldier=soldier attack 2",
+            "checksoldier=soldier attack 2",
             "sleep=30000",
-            "check_soldier=soldier attack 2",
+            "checksoldier=soldier attack 2",
             "consume=spear_heavy empire_bread fish,meat:2",
             "train=soldier attack 2 3"
          }
@@ -135,9 +135,9 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier attack from level 3 to level 4"),
          actions = {
-            "check_soldier=soldier attack 3",
+            "checksoldier=soldier attack 3",
             "sleep=30000",
-            "check_soldier=soldier attack 3",
+            "checksoldier=soldier attack 3",
             "consume=spear_war empire_bread:2 fish,meat",
             "train=soldier attack 3 4"
          }
@@ -146,9 +146,9 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier health from level 0 to level 1"),
          actions = {
-            "check_soldier=soldier health 0",
+            "checksoldier=soldier health 0",
             "sleep=30000",
-            "check_soldier=soldier health 0",
+            "checksoldier=soldier health 0",
             "consume=armor_helmet empire_bread,fish,meat",
             "train=soldier health 0 1"
          }
@@ -157,9 +157,9 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier health from level 1 to level 2"),
          actions = {
-            "check_soldier=soldier health 1",
+            "checksoldier=soldier health 1",
             "sleep=30000",
-            "check_soldier=soldier health 1",
+            "checksoldier=soldier health 1",
             "consume=armor empire_bread fish,meat",
             "train=soldier health 1 2"
          }
@@ -168,9 +168,9 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier health from level 2 to level 3"),
          actions = {
-            "check_soldier=soldier health 2",
+            "checksoldier=soldier health 2",
             "sleep=30000",
-            "check_soldier=soldier health 2",
+            "checksoldier=soldier health 2",
             "consume=armor_chain empire_bread:2 fish,meat:2",
             "train=soldier health 2 3"
          }
@@ -179,9 +179,9 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("empire_building", "upgrading soldier health from level 3 to level 4"),
          actions = {
-            "check_soldier=soldier health 3",
+            "checksoldier=soldier health 3",
             "sleep=30000",
-            "check_soldier=soldier health 3",
+            "checksoldier=soldier health 3",
             "consume=armor_gilded empire_bread:2 fish,meat:2",
             "train=soldier health 3 4"
          }

@@ -1,0 +1,147 @@
+{
+   glXCreateContextLeak
+   Memcheck:Leak
+   ...
+   fun:glXCreateContext
+   ...
+}
+{
+   libGLX_mesa4
+   Memcheck:Addr4
+   ...
+   obj:*libGLX_mesa.so*
+   ...
+}
+{
+   libGLX_mesa8
+   Memcheck:Addr8
+   ...
+   obj:*libGLX_mesa.so*
+   ...
+}
+{
+   glXCreateContextLeak
+   Memcheck:Leak
+   ...
+   fun:glXCreateContext
+   ...
+}
+{
+   glXCreateContext4
+   Memcheck:Addr4
+   ...
+   fun:glXCreateContext
+   ...
+}
+{
+   glXCreateContext8
+   Memcheck:Addr8
+   ...
+   fun:glXCreateContext
+   ...
+}
+{
+   driverLeak
+   Memcheck:Leak
+   ...
+   obj:*i965_dri.so
+   ...
+}
+{
+   driver1
+   Memcheck:Addr1
+   ...
+   obj:*965_dri.so
+   ...
+}
+{
+   driver2
+   Memcheck:Addr2
+   ...
+   obj:*i965_dri.so
+   ...
+}
+{
+   driver4
+   Memcheck:Addr4
+   ...
+   obj:*i965_dri.so
+   ...
+}
+{
+   driver8
+   Memcheck:Addr8
+   ...
+   obj:*i965_dri.so
+   ...
+}
+{
+   driver16
+   Memcheck:Addr16
+   ...
+   obj:*i965_dri.so
+   ...
+}
+{
+   SDL2Leak
+   Memcheck:Leak
+   ...
+   obj:*libSDL2*
+}
+{
+   GLibLeak
+   Memcheck:Leak
+   ...
+   obj:*libglib*
+   ...
+}
+{
+   X11Leak
+   Memcheck:Leak
+   ...
+   obj:*X11*
+   ...
+}
+{
+   LibsLeak
+   Memcheck:Leak
+   ...
+   obj:*linux-gnu/lib*
+   ...
+}
+{
+   ZipWriteValue8
+   Memcheck:Value8
+   ...
+   fun:zipWriteInFileInZip
+   ...
+}
+{
+   ZipWriteCond
+   Memcheck:Cond
+   ...
+   fun:zipWriteInFileInZip
+   ...
+}
+{
+   ZipCloseCond
+   Memcheck:Cond
+   ...
+   fun:zipCloseFileInZip
+   ...
+}
+{
+   ZipCloseParam
+   Memcheck:Param
+   write(buf)
+   ...
+   fun:zipCloseFileInZip
+   ...
+}
+{
+   ErisLeak
+   Memcheck:Leak
+   ...
+   fun:l_alloc
+   ...
+}

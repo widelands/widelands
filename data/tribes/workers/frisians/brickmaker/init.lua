@@ -23,5 +23,6 @@ tribes:new_worker_type {
       fire_tongs = 1
    },
 
+   ware_hotspot = {0, 20},
    animations = animations,
 }

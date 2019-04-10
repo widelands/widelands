@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #include "ui_basic/messagebox.h"
 
 #include "base/i18n.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "ui_basic/window.h"
 
@@ -48,7 +48,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	int width, height = 0;
 	{
 		std::shared_ptr<const UI::RenderedText> temp_rendered_text =
-		   g_fh1->render(as_uifont(text), maxwidth);
+		   g_fh->render(as_uifont(text), maxwidth);
 		width = temp_rendered_text->width();
 		height = temp_rendered_text->height();
 	}
@@ -56,7 +56,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	// Stupid heuristic to avoid excessively long lines
 	if (height < 2 * UI_FONT_SIZE_SMALL) {
 		std::shared_ptr<const UI::RenderedText> temp_rendered_text =
-		   g_fh1->render(as_uifont(text), maxwidth / 2);
+		   g_fh->render(as_uifont(text), maxwidth / 2);
 		width = temp_rendered_text->width();
 		height = temp_rendered_text->height();
 	}
@@ -82,13 +82,13 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	ok_button_.reset(new Button(this, "ok",
 	                            type_ == MBoxType::kOk ?
 	                               (width - button_w) / 2 :
-	                               UI::g_fh1->fontset()->is_rtl() ? left_button_x : right_button_x,
+	                               UI::g_fh->fontset()->is_rtl() ? left_button_x : right_button_x,
 	                            button_y, button_w, 0, UI::ButtonStyle::kWuiPrimary, _("OK")));
 	ok_button_->sigclicked.connect(boost::bind(&WLMessageBox::clicked_ok, boost::ref(*this)));
 
 	if (type_ == MBoxType::kOkCancel) {
 		cancel_button_.reset(
-		   new Button(this, "cancel", UI::g_fh1->fontset()->is_rtl() ? right_button_x : left_button_x,
+		   new Button(this, "cancel", UI::g_fh->fontset()->is_rtl() ? right_button_x : left_button_x,
 		              button_y, button_w, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")));
 		cancel_button_->sigclicked.connect(
 		   boost::bind(&WLMessageBox::clicked_back, boost::ref(*this)));
@@ -159,4 +159,4 @@ void WLMessageBox::clicked_back() {
 	if (is_modal())
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
-}
+}  // namespace UI

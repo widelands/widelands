@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2018 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,12 +35,12 @@ class InteractiveGameBase;
 namespace UI {
 class Panel;
 struct Radiogroup;
-}
+}  // namespace UI
 
 namespace Widelands {
 class Building;
 class InputQueue;
-}
+}  // namespace Widelands
 
 /**
  * This passive class displays the status of an InputQueue
@@ -56,7 +56,7 @@ public:
 	                  int32_t y,
 	                  InteractiveGameBase& igb,
 	                  Widelands::Building& building,
-	                  Widelands::InputQueue* queue,
+	                  const Widelands::InputQueue& queue,
 	                  bool = false);
 	~InputQueueDisplay() override;
 
@@ -66,7 +66,7 @@ public:
 private:
 	InteractiveGameBase& igb_;
 	Widelands::Building& building_;
-	Widelands::InputQueue* queue_;
+	const Widelands::InputQueue& queue_;
 	UI::Radiogroup* priority_radiogroup_;
 	UI::Button* increase_max_fill_;
 	UI::Button* decrease_max_fill_;

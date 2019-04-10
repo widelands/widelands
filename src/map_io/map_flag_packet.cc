@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+constexpr uint16_t kCurrentPacketVersion = 2;
 
 void MapFlagPacket::read(FileSystem& fs,
                          EditorGameBase& egbase,
@@ -62,6 +62,8 @@ void MapFlagPacket::read(FileSystem& fs,
 				if (!(0 < owner && owner <= nr_players)) {
 					throw GameDataError("Invalid player number: %i.", owner);
 				}
+
+				const Serial economy_serial = fr.unsigned_32();
 
 				Serial const serial = fr.unsigned_32();
 
@@ -94,13 +96,21 @@ void MapFlagPacket::read(FileSystem& fs,
 
 					//  No flag lives on more than one place.
 
+					// Get economy from serial
+					Player* player = egbase.get_player(owner);
+					Economy* economy = player->get_economy(economy_serial);
+					if (!economy) {
+						economy = player->create_economy(economy_serial);
+					}
+
 					//  Now, create this Flag. Directly create it, do not call
 					//  the player class since we recreate the data in another
 					//  packet. We always create this, no matter what skip is
 					//  since we have to read the data packets. We delete this
 					//  object later again, if it is not wanted.
-					mol.register_object<Flag>(
-					   serial, *new Flag(dynamic_cast<Game&>(egbase), egbase.get_player(owner), fc));
+					Flag* flag = new Flag(dynamic_cast<Game&>(egbase), player, fc, economy);
+					mol.register_object<Flag>(serial, *flag);
+
 				} catch (const WException& e) {
 					throw GameDataError(
 					   "%u (at (%i, %i), owned by player %u): %s", serial, fc.x, fc.y, owner, e.what());
@@ -133,10 +143,11 @@ void MapFlagPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver
 
 			fw.unsigned_8(1);
 			fw.unsigned_8(flag->owner().player_number());
+			fw.unsigned_32(flag->economy().serial());
 			fw.unsigned_32(mos.register_object(*flag));
 		} else  //  no existence, no owner
 			fw.unsigned_8(0);
 
 	fw.write(fs, "binary/flag");
 }
-}
+}  // namespace Widelands

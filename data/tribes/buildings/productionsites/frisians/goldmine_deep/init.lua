@@ -24,21 +24,21 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {27, 65},
+         hotspot = {39, 94},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {27, 66},
+         hotspot = {39, 94},
          fps = 10,
       },
       empty = {
-         pictures = path.list_files (dirname .. "empty_?.png"),
-         hotspot = {27, 48},
+         pictures = path.list_files (dirname .. "empty_??.png"),
+         hotspot = {39, 94},
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {27, 48},
+         hotspot = {39, 72},
       },
    },
 
@@ -63,15 +63,32 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _"mining gold",
          actions = {
-            "sleep=40000",
+            "sleep=5000",
             "return=skipped unless economy needs gold_ore",
             "consume=meal",
-            "animate=working 18000",
+            "sleep=34800",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "return=no_stats"
+         }
+      },
+      mine_produce = {
+         descname = _"mining gold",
+         actions = {
+            "animate=working 12200",
             "mine=gold 3 100 10 5",
-            "produce=gold_ore:2",
-            "animate=working 18000",
-            "mine=gold 3 100 10 5",
-            "produce=gold_ore:2"
+            "produce=gold_ore",
+         }
+      },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=meal",
+            "produce=gold_ore:5",
          }
       },
    },

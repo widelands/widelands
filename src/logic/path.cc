@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -198,4 +198,4 @@ void CoordPath::append(const CoordPath& tail) {
 	path_.insert(path_.end(), tail.path_.begin(), tail.path_.end());
 	coords_.insert(coords_.end(), tail.coords_.begin() + 1, tail.coords_.end());
 }
-}
+}  // namespace Widelands

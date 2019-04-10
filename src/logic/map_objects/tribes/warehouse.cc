@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -287,9 +287,9 @@ Warehouse Building
 */
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua
+ */
 WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                const LuaTable& table,
                                const EditorGameBase& egbase)
@@ -299,7 +299,7 @@ WarehouseDescr::WarehouseDescr(const std::string& init_descname,
 	heal_per_second_ = table.get_int("heal_per_second");
 	if (table.has_key("conquers")) {
 		conquers_ = table.get_int("conquers");
-		workarea_info_[conquers_].insert(descname() + " conquer");
+		workarea_info_[conquers_].insert(name() + " conquer");
 	}
 }
 
@@ -1072,7 +1072,7 @@ bool Warehouse::can_create_worker(Game&, DescriptionIndex const worker) const {
 			} else
 				throw wexception("worker type %s needs \"%s\" to be built but that is neither "
 				                 "a ware type nor a worker type defined in the tribe %s",
-				                 w_desc.descname().c_str(), input_name.c_str(),
+				                 w_desc.name().c_str(), input_name.c_str(),
 				                 owner().tribe().name().c_str());
 		}
 	}
@@ -1337,17 +1337,16 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	return portdock_->expedition_bootstrap()->inputqueue(index, type);
 }
 
-void Warehouse::log_general_info(const EditorGameBase& egbase) {
+void Warehouse::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
 	if (descr().get_isport()) {
-		PortDock* pd_tmp = portdock_;
-		if (pd_tmp) {
-			molog("Port dock: %u\n", pd_tmp->serial());
-			molog("port needs ship: %s\n", (pd_tmp->get_need_ship()) ? "true" : "false");
-			molog("wares and workers waiting: %u\n", pd_tmp->count_waiting());
-			molog("exped. in progr.: %s\n", (pd_tmp->expedition_started()) ? "true" : "false");
-			Fleet* fleet = pd_tmp->get_fleet();
+		if (portdock_) {
+			molog("Port dock: %u\n", portdock_->serial());
+			molog("port needs ship: %s\n", (portdock_->get_need_ship()) ? "true" : "false");
+			molog("wares and workers waiting: %u\n", portdock_->count_waiting());
+			molog("exped. in progr.: %s\n", (portdock_->expedition_started()) ? "true" : "false");
+			Fleet* fleet = portdock_->get_fleet();
 			if (fleet) {
 				molog("* fleet: %u\n", fleet->serial());
 				molog("  ships: %u, ports: %u\n", fleet->count_ships(), fleet->count_ports());
@@ -1360,4 +1359,4 @@ void Warehouse::log_general_info(const EditorGameBase& egbase) {
 		}
 	}
 }
-}
+}  // namespace Widelands

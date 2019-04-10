@@ -27,17 +27,17 @@ tribes:new_trainingsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {59, 73},
+         hotspot = {56, 91},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {59, 73},
+         hotspot = {56, 91},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {59, 62},
+         hotspot = {56, 69},
       },
    },
 
@@ -52,8 +52,8 @@ tribes:new_trainingsite_type {
    },
 
    inputs = {
-      { name = "bread_frisians", amount = 6 },
       { name = "beer", amount = 6 },
+      { name = "bread_frisians", amount = 6 },
       { name = "smoked_fish", amount = 6 },
       { name = "smoked_meat", amount = 6 },
       { name = "sword_long", amount = 2 },
@@ -87,8 +87,7 @@ tribes:new_trainingsite_type {
       min_level = 0,
       max_level = 0,
       food = {
-         {"bread_frisians"},
-         {"beer"},
+         {"bread_frisians", "beer"},
          {"smoked_fish", "smoked_meat"},
       },
       weapons = {
@@ -99,8 +98,7 @@ tribes:new_trainingsite_type {
       min_level = 0,
       max_level = 0,
       food = {
-         {"bread_frisians"},
-         {"beer"},
+         {"bread_frisians", "beer"},
          {"smoked_fish", "smoked_meat"},
       },
       weapons = {
@@ -114,16 +112,16 @@ tribes:new_trainingsite_type {
          descname = _"sleeping",
          actions = {
             "sleep=5000",
-            "check_soldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
+            "checksoldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
          }
       },
       upgrade_soldier_attack_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
-            "check_soldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
+            "checksoldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
             "animate=working 26400",
-            "check_soldier=soldier attack 0", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier attack 0", -- Because the soldier can be expelled by the player
             "consume=sword_long bread_frisians,beer,smoked_fish,smoked_meat",
             "train=soldier attack 0 1",
             "produce=scrap_iron"
@@ -133,9 +131,9 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
-            "check_soldier=soldier attack 1",
+            "checksoldier=soldier attack 1",
             "animate=working 22800",
-            "check_soldier=soldier attack 1",
+            "checksoldier=soldier attack 1",
             "consume=sword_broad bread_frisians beer smoked_fish,smoked_meat",
             "train=soldier attack 1 2",
             "produce=scrap_iron:2"
@@ -145,9 +143,9 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 2 to level 3"),
          actions = {
-            "check_soldier=soldier attack 2",
+            "checksoldier=soldier attack 2",
             "animate=working 22800",
-            "check_soldier=soldier attack 2",
+            "checksoldier=soldier attack 2",
             "consume=sword_double bread_frisians beer smoked_fish,smoked_meat",
             "train=soldier attack 2 3",
             "produce=scrap_iron scrap_metal_mixed"
@@ -157,9 +155,9 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier health from level 0 to level 1"),
          actions = {
-            "check_soldier=soldier health 0",
+            "checksoldier=soldier health 0",
             "animate=working 30000",
-            "check_soldier=soldier health 0",
+            "checksoldier=soldier health 0",
             "consume=helmet bread_frisians,beer smoked_fish,smoked_meat",
             "train=soldier health 0 1"
          }
@@ -168,9 +166,9 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext ("frisians_building", "upgrading soldier defense from level 0 to level 1"),
          actions = {
-            "check_soldier=soldier defense 0",
+            "checksoldier=soldier defense 0",
             "animate=working 26400",
-            "check_soldier=soldier defense 0",
+            "checksoldier=soldier defense 0",
             "consume=fur_garment_studded bread_frisians,beer smoked_fish,smoked_meat",
             "train=soldier defense 0 1",
             "produce=fur_garment_old"

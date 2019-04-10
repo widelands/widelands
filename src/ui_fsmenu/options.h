@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,7 +69,6 @@ public:
 
 		// Game options
 		bool auto_roadbuild_mode;
-		bool show_warea;
 		bool transparent_chat;
 		bool single_watchwin;
 
@@ -156,7 +155,6 @@ private:
 
 	// Game options
 	UI::Checkbox auto_roadbuild_mode_;
-	UI::Checkbox show_workarea_preview_;
 	UI::Checkbox transparent_chat_;
 	UI::Checkbox single_watchwin_;
 

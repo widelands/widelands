@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2018 by the Widelands Development Team
+ * Copyright (C) 2016-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,35 +34,6 @@
 #include "io/filesystem/layered_filesystem.h"
 
 // TODO(GunChleoc): Arabic: line height broken for descriptions for Arabic.
-namespace {
-// 'is_first' omits the vertical gap before the line.
-// 'noescape' is needed for error message formatting and does not call richtext_escape.
-std::string as_header_with_content(const std::string& header,
-                                   const std::string& content,
-                                   UI::PanelStyle style,
-                                   bool is_first = false,
-                                   bool noescape = false) {
-	switch (style) {
-	case UI::PanelStyle::kFsMenu:
-		return (boost::format(
-		           "<p><font size=%i bold=1 shadow=1>%s%s <font color=D1D1D1>%s</font></font></p>") %
-		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=9>") %
-		        (noescape ? header : richtext_escape(header)) %
-		        (noescape ? content : richtext_escape(content)))
-		   .str();
-	case UI::PanelStyle::kWui:
-		return (boost::format(
-		           "<p><font size=%i>%s<font bold=1 color=D1D1D1>%s</font> %s</font></p>") %
-		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=6>") %
-		        (noescape ? header : richtext_escape(header)) %
-		        (noescape ? content : richtext_escape(content)))
-		   .str();
-	}
-	NEVER_HERE();
-}
-
-}  // namespace
-
 SavegameData::SavegameData()
    : gametime(""),
      nrplayers("0"),
@@ -106,8 +77,6 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(this, 0, 0, 0, 0, nullptr),
      button_box_(new UI::Box(this, 0, 0, UI::Box::Vertical)) {
-	name_label_.force_new_renderer();
-	descr_.force_new_renderer();
 
 	add(&name_label_, UI::Box::Resizing::kFullSize);
 	add_space(padding_);
@@ -141,12 +110,10 @@ void GameDetails::update(const SavegameData& gamedata) {
 	if (gamedata.errormessage.empty()) {
 		if (gamedata.filename_list.empty()) {
 			name_label_.set_text(
-			   (boost::format("<rt>%s</rt>") %
-			    as_header_with_content(_("Map Name:"), gamedata.mapname, style_, true))
-			      .str());
+			   as_richtext(as_heading_with_content(_("Map Name:"), gamedata.mapname, style_, true)));
 
 			// Show game information
-			std::string description = as_header_with_content(
+			std::string description = as_heading_with_content(
 			   mode_ == Mode::kReplay ?
 			      /** TRANSLATORS: The time a replay starts. Shown in the replay loading screen*/
 			      _("Start of Replay:") :
@@ -156,15 +123,15 @@ void GameDetails::update(const SavegameData& gamedata) {
 			   gamedata.gametime, style_);
 
 			description = (boost::format("%s%s") % description %
-			               as_header_with_content(_("Players:"), gamedata.nrplayers, style_))
+			               as_heading_with_content(_("Players:"), gamedata.nrplayers, style_))
 			                 .str();
 
 			description = (boost::format("%s%s") % description %
-			               as_header_with_content(_("Widelands Version:"), gamedata.version, style_))
+			               as_heading_with_content(_("Widelands Version:"), gamedata.version, style_))
 			                 .str();
 
 			description = (boost::format("%s%s") % description %
-			               as_header_with_content(_("Win Condition:"), gamedata.wincondition, style_))
+			               as_heading_with_content(_("Win Condition:"), gamedata.wincondition, style_))
 			                 .str();
 
 			std::string filename = gamedata.filename;
@@ -173,11 +140,10 @@ void GameDetails::update(const SavegameData& gamedata) {
 			filename.erase(0, filename.find('/') + 1);
 			assert(!filename.empty());
 			description = (boost::format("%s%s") % description %
-			               as_header_with_content(_("Filename:"), filename, style_))
+			               as_heading_with_content(_("Filename:"), filename, style_))
 			                 .str();
 
-			description = (boost::format("<rt>%s</rt>") % description).str();
-			descr_.set_text(description);
+			descr_.set_text(as_richtext(description));
 
 			std::string minimap_path = gamedata.minimap_path;
 			if (!minimap_path.empty()) {
@@ -195,20 +161,16 @@ void GameDetails::update(const SavegameData& gamedata) {
 		} else {
 			std::string filename_list = richtext_escape(gamedata.filename_list);
 			boost::replace_all(filename_list, "\n", "<br> • ");
-			name_label_.set_text((boost::format("<rt>%s</rt>") %
-			                      as_header_with_content(gamedata.mapname, "", style_, true))
-			                        .str());
+			name_label_.set_text(
+			   as_richtext(as_heading_with_content(gamedata.mapname, "", style_, true)));
 
-			descr_.set_text((boost::format("<rt>%s</rt>") %
-			                 as_header_with_content("", filename_list, style_, true, true))
-			                   .str());
+			descr_.set_text(
+			   as_richtext(as_heading_with_content("", filename_list, style_, true, true)));
 			minimap_icon_.set_visible(false);
 		}
 	} else {
-		name_label_.set_text(
-		   (boost::format("<rt>%s</rt>") %
-		    as_header_with_content(_("Error:"), gamedata.errormessage, style_, true, true))
-		      .str());
+		name_label_.set_text(as_richtext(
+		   as_heading_with_content(_("Error:"), gamedata.errormessage, style_, true, true)));
 	}
 	layout();
 }

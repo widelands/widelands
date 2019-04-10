@@ -21,17 +21,17 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {40, 64},
+         hotspot = {49, 84},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {40, 64},
+         hotspot = {49, 84},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {40, 64},
+         hotspot = {49, 63},
       },
    },
 
@@ -59,9 +59,9 @@ tribes:new_productionsite_type {
          descname = _"making clay",
          actions = {
             "sleep=20000",
-            "return=skipped unless economy needs clay or site has water",
+            "return=skipped unless economy needs clay or economy needs fish", -- Fish-producing aqua farms can stop working if the clay pits do so
             "return=failed unless site has water",
-            "worker=dig",
+            "callworker=dig",
             "consume=water",
             "sleep=2000",
             "animate=working 17000",

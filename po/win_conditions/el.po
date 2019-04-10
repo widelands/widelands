@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # erimitis, 2018
@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-22 08:28+0000\n"
-"PO-Revision-Date: 2018-04-15 15:43+0000\n"
+"POT-Creation-Date: 2019-02-09 09:43+0000\n"
+"PO-Revision-Date: 2019-02-09 09:44+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -105,61 +105,29 @@ msgstr "Παίρνετε βαθμούς για πολύτιμα υλικά στ�
 msgid "Points"
 msgstr "Βαθμοί"
 
-#: ../../data/scripting/win_conditions/collectors.lua:126
+#: ../../data/scripting/win_conditions/collectors.lua:130
 #, lua-format
 msgid "Status for %s"
 msgstr "Κατάσταση του %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:139
+#: ../../data/scripting/win_conditions/collectors.lua:143
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s (%2$i Π) x %3$i = %4$i Π"
 
-#: ../../data/scripting/win_conditions/collectors.lua:143
+#: ../../data/scripting/win_conditions/collectors.lua:147
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Σύνολο: %i πόντος"
 msgstr[1] "Σύνολο: %i βαθμοί"
 
-#: ../../data/scripting/win_conditions/collectors.lua:156
-msgid "The game has ended."
-msgstr "Το παιχνίδι τελείωσε."
-
-#. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:163
-#, lua-format
-msgid "%i minute"
-msgid_plural "%i minutes"
-msgstr[0] "%i λεπτό"
-msgstr[1] "%i λεπτά"
-
-#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #: ../../data/scripting/win_conditions/collectors.lua:168
-msgid "%1% hour and %2%"
-msgid_plural "%1% hours and %2%"
-msgstr[0] "%1% ώρα και %2%"
-msgstr[1] "%1% ώρες και %2%"
-
-#. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/collectors.lua:171
-msgid "%1% hour"
-msgid_plural "%1% hours"
-msgstr[0] "%1% ώρα"
-msgstr[1] "%1% ώρες"
-
-#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:175
-#, lua-format
-msgid "The game will end in %s."
-msgstr "Το παιχνίδι θα τελειώσει σε %s."
-
-#: ../../data/scripting/win_conditions/collectors.lua:188
 #, lua-format
 msgid "Status for Team %d"
 msgstr "Κατάσταση Ομάδας %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:190
+#: ../../data/scripting/win_conditions/collectors.lua:170
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
@@ -190,55 +158,58 @@ msgstr "Αέναο Παιχνίδι (χωρίς ομίχλη)"
 msgid "This is an endless game without rules. Fog of war is disabled."
 msgstr "Αυτό είναι ένα αέναο παιχνίδι χωρίς κανόνες. Η ομίχλη πολέμου είναι απενεργοποιημένη."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:17
-msgid "Territorial Lord"
-msgstr "Περιφερειάρχης"
-
-#: ../../data/scripting/win_conditions/territorial_lord.lua:20
-msgid ""
-"Each player or team tries to obtain more than half of the map’s area. The "
-"winner will be the player or the team that is able to keep that area for at "
-"least 20 minutes."
-msgstr "Κάθε παίκτης ή ομάδα προσπαθεί να αποκτήσει περισσότερη από τη μισή έκταση του χάρτη. Νικητής θα είναι ο παίκτης ή η ομάδα που θα μπορέσει να διατηρήσει αυτήν την έκταση για τουλάχιστον 20 λεπτά."
-
-#: ../../data/scripting/win_conditions/territorial_lord.lua:155
-#: ../../data/scripting/win_conditions/territorial_time.lua:30
+#: ../../data/scripting/win_conditions/territorial_functions.lua:12
 #, lua-format
 msgid "Team %i"
 msgstr "Ομάδα %i"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:157
-#: ../../data/scripting/win_conditions/territorial_time.lua:205
-#, lua-format
-msgid "%s owns more than half of the map’s area."
-msgstr "Ο %s κατέχει περισσότερη από τη μισή έκταση του χάρτη."
+#: ../../data/scripting/win_conditions/territorial_functions.lua:13
+msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
+msgstr "Ο %1$s κατέχει %2$3.0f%% της γης (%3$i από %4$i)."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:158
-#: ../../data/scripting/win_conditions/territorial_time.lua:206
-#, lua-format
-msgid "You’ve still got %i minute to prevent a victory."
-msgid_plural "You’ve still got %i minutes to prevent a victory."
-msgstr[0] "Έχετε ακόμη %i λεπτό για να αποτρέψετε μια νίκη."
-msgstr[1] "Έχετε ακόμη %i λεπτά για να αποτρέψετε μια νίκη."
+#: ../../data/scripting/win_conditions/territorial_functions.lua:14
+msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
+msgstr "Ο %1$s κατείχε %2$3.0f%% της γης (%3$i από %4$i)."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:163
-#: ../../data/scripting/win_conditions/territorial_time.lua:212
+#: ../../data/scripting/win_conditions/territorial_functions.lua:232
 msgid "You own more than half of the map’s area."
 msgstr "Κατέχετε περισσότερο από το μισό της έκτασης του χάρτη."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:164
-#: ../../data/scripting/win_conditions/territorial_time.lua:213
+#: ../../data/scripting/win_conditions/territorial_functions.lua:233
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "Διατηρείστε το για %i ακόμη λεπτό, για να νικήσετε το παιχνίδι."
 msgstr[1] "Διατηρείστε το για %i ακόμη λεπτά, για να νικήσετε το παιχνίδι."
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:20
+#: ../../data/scripting/win_conditions/territorial_functions.lua:259
+#, lua-format
+msgid "%s owns more than half of the map’s area."
+msgstr "Ο %s κατέχει περισσότερη από τη μισή έκταση του χάρτη."
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:260
+#, lua-format
+msgid "You’ve still got %i minute to prevent a victory."
+msgid_plural "You’ve still got %i minutes to prevent a victory."
+msgstr[0] "Έχετε ακόμη %i λεπτό για να αποτρέψετε μια νίκη."
+msgstr[1] "Έχετε ακόμη %i λεπτά για να αποτρέψετε μια νίκη."
+
+#: ../../data/scripting/win_conditions/territorial_lord.lua:18
+msgid "Territorial Lord"
+msgstr "Περιφερειάρχης"
+
+#: ../../data/scripting/win_conditions/territorial_lord.lua:21
+msgid ""
+"Each player or team tries to obtain more than half of the map’s area. The "
+"winner will be the player or the team that is able to keep that area for at "
+"least 20 minutes."
+msgstr "Κάθε παίκτης ή ομάδα προσπαθεί να αποκτήσει περισσότερη από τη μισή έκταση του χάρτη. Νικητής θα είναι ο παίκτης ή η ομάδα που θα μπορέσει να διατηρήσει αυτήν την έκταση για τουλάχιστον 20 λεπτά."
+
+#: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
 msgstr "Χρόνος Περιφέρειας"
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:23
+#: ../../data/scripting/win_conditions/territorial_time.lua:24
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
@@ -246,30 +217,49 @@ msgid ""
 "whichever comes first."
 msgstr "Κάθε παίκτης ή ομάδα προσπαθεί να αποκτήσει περισσότερη από τη μισή έκταση του χάρτη. Νικητής θα είναι ο παίκτης ή η ομάδα που θα μπορέσει να διατηρήσει αυτήν την έκταση για τουλάχιστον 20 λεπτά, ή θα κατέχει την περισσότερη έκταση μετά από 4 ώρες, ό,τι συμβεί πρώτο."
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:28
-msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "Ο %1$s κατέχει %2$3.0f%% της γης (%3$i από %4$i)."
-
-#: ../../data/scripting/win_conditions/territorial_time.lua:29
-msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "Ο %1$s κατείχε %2$3.0f%% της γης (%3$i από %4$i)."
-
 #. TRANSLATORS: Refers to "You own more than half of the map’s area. Keep it
 #. for x more minute(s) to win the game."
-#: ../../data/scripting/win_conditions/territorial_time.lua:229
+#: ../../data/scripting/win_conditions/territorial_time.lua:60
 #, lua-format
 msgid "Otherwise the game will end in %i minute."
 msgid_plural "Otherwise the game will end in %i minutes."
 msgstr[0] "Διαφορετικά, το παιχνίδι θα τελειώσει σε %i λεπτό."
 msgstr[1] "Διαφορετικά, το παιχνίδι θα τελειώσει σε %i λεπτά."
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:234
-#: ../../data/scripting/win_conditions/wood_gnome.lua:92
+#: ../../data/scripting/win_conditions/territorial_time.lua:65
 #, lua-format
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."
 msgstr[0] "Το παιχνίδι θα τελειώσει σε %i λεπτό."
 msgstr[1] "Το παιχνίδι θα τελειώσει σε %i λεπτά."
+
+#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:261
+msgid "%1% hour and %2% minutes"
+msgid_plural "%1% hours and %2% minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#. TRANSLATORS: Context: 'The game will end in 30 minutes.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:264
+#, lua-format
+msgid "%i minute"
+msgid_plural "%i minutes"
+msgstr[0] "%i λεπτό"
+msgstr[1] "%i λεπτά"
+
+#. TRANSLATORS: Context: 'The game will end in 2 hours.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:267
+msgid "%1% hour"
+msgid_plural "%1% hours"
+msgstr[0] "%1% ώρα"
+msgstr[1] "%1% ώρες"
+
+#. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:270
+#, lua-format
+msgid "The game will end in %s."
+msgstr "Το παιχνίδι θα τελειώσει σε %s."
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:4
 msgid "Congratulations!"
@@ -330,8 +320,8 @@ msgid "Trees owned"
 msgstr "Δέντρα υπό κατοχή"
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:96
-#: ../../data/scripting/win_conditions/wood_gnome.lua:148
-#: ../../data/scripting/win_conditions/wood_gnome.lua:153
+#: ../../data/scripting/win_conditions/wood_gnome.lua:116
+#: ../../data/scripting/win_conditions/wood_gnome.lua:121
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
@@ -344,11 +334,11 @@ msgid "%1$s has %2$s at the moment."
 msgstr "Ο %1$s έχει %2$s επί του παρόντος."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:150
+#: ../../data/scripting/win_conditions/wood_gnome.lua:118
 msgid "%1$s had %2$s."
 msgstr "Ο %1$s είχε %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:156
+#: ../../data/scripting/win_conditions/wood_gnome.lua:124
 msgid "The winner is %1$s with %2$s."
 msgstr "Νικητής είναι ο %1$s με %2$s."

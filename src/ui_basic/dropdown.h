@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2018 by the Widelands Development Team
+ * Copyright (C) 2016-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -121,6 +121,9 @@ public:
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 	void set_height(int height);
+
+	/// Set the number of items to fit in the list
+	void set_max_items(int items);
 
 protected:
 	/// Add an element to the list

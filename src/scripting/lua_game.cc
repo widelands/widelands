@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -173,17 +173,7 @@ int LuaPlayer::get_objectives(lua_State* L) {
       (RO) :const:`true` if this player was defeated, :const:`false` otherwise
 */
 int LuaPlayer::get_defeated(lua_State* L) {
-	Player& p = get(L, get_egbase(L));
-	bool have_warehouses = false;
-
-	for (uint32_t economy_nr = 0; economy_nr < p.get_nr_economies(); economy_nr++) {
-		if (!p.get_economy_by_number(economy_nr)->warehouses().empty()) {
-			have_warehouses = true;
-			break;
-		}
-	}
-
-	lua_pushboolean(L, !have_warehouses);
+	lua_pushboolean(L, get(L, get_egbase(L)).is_defeated());
 	return 1;
 }
 
@@ -329,6 +319,7 @@ int LuaPlayer::send_message(lua_State* L) {
 	Coords c = Coords::null();
 	Message::Status st = Message::Status::kNew;
 	bool popup = false;
+	std::string sub_type = "";
 
 	Game& game = get_game(L);
 	Player& plr = get(L, game);
@@ -373,11 +364,19 @@ int LuaPlayer::send_message(lua_State* L) {
 				heading = s;
 			}
 		}
+		lua_getfield(L, 4, "sub_type");
+		if (!lua_isnil(L, -1)) {
+			const std::string s = luaL_checkstring(L, -1);
+			if (!s.empty()) {
+				sub_type = s;
+			}
+		}
 	}
 
 	MessageId const message = plr.add_message(
-	   game, std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(),
-	                                              title, icon, heading, body, c, 0, st)),
+	   game,
+	   std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(), title,
+	                                        icon, heading, body, c, 0, sub_type, st)),
 	   popup);
 
 	return to_lua<LuaMessage>(L, new LuaMessage(player_number(), message));
@@ -812,10 +811,8 @@ int LuaPlayer::allow_workers(lua_State* L) {
 					break;
 				}
 			}
-			for (uint32_t j = player.get_nr_economies(); j;) {
-				Economy& economy = *player.get_economy_by_number(--j);
-
-				for (Warehouse* warehouse : economy.warehouses()) {
+			for (const auto& economy : player.economies()) {
+				for (Warehouse* warehouse : economy.second->warehouses()) {
 					warehouse->enable_spawn(game, worker_types_without_cost_index);
 				}
 			}
@@ -845,7 +842,7 @@ int LuaPlayer::switchplayer(lua_State* L) {
 /* RST
    .. method:: produced_wares_count(what)
 
-      Returns count of wares produced byt the player up to now.
+      Returns count of wares produced by the player up to now.
       'what' can be either an "all" or single ware name or an array of names. If single
       ware name is given, integer is returned, otherwise the table is returned.
 */
@@ -946,7 +943,9 @@ Objective
 */
 const char LuaObjective::className[] = "Objective";
 const MethodType<LuaObjective> LuaObjective::Methods[] = {
-   METHOD(LuaObjective, remove), METHOD(LuaObjective, __eq), {nullptr, nullptr},
+   METHOD(LuaObjective, remove),
+   METHOD(LuaObjective, __eq),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaObjective> LuaObjective::Properties[] = {
    PROP_RO(LuaObjective, name),    PROP_RW(LuaObjective, title), PROP_RW(LuaObjective, body),
@@ -1108,7 +1107,8 @@ Message
 */
 const char LuaMessage::className[] = "Message";
 const MethodType<LuaMessage> LuaMessage::Methods[] = {
-   METHOD(LuaMessage, __eq), {nullptr, nullptr},
+   METHOD(LuaMessage, __eq),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaMessage> LuaMessage::Properties[] = {
    PROP_RO(LuaMessage, title),     PROP_RO(LuaMessage, body),   PROP_RO(LuaMessage, sent),
@@ -1320,4 +1320,4 @@ void luaopen_wlgame(lua_State* L) {
 	register_class<LuaObjective>(L, "game");
 	register_class<LuaMessage>(L, "game");
 }
-}
+}  // namespace LuaGame

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2018 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -130,8 +130,8 @@ namespace {
 	}
 
 // Try to find the file with newest fitting version number
-#define OPEN_INPUT_FILE_NEW_VERSION(filetype, file, filename, fileversion, filename_template,      \
-                                    version)                                                       \
+#define OPEN_INPUT_FILE_NEW_VERSION(                                                               \
+   filetype, file, filename, fileversion, filename_template, version)                              \
 	uint8_t fileversion = version;                                                                  \
 	filetype file;                                                                                  \
 	char(filename)[FILENAME_SIZE];                                                                  \
@@ -856,8 +856,8 @@ inline static void write_unseen_immovable(MapObjectData const* map_object_data,
 	else {
 		// We should never get here.. output some information about the situation.
 		log("\nwidelands_map_players_view_data_packet.cc::write_unseen_immovable(): ");
-		log("%s %s (%s) was not expected.\n", typeid(*map_object_descr).name(),
-		    map_object_descr->name().c_str(), map_object_descr->descname().c_str());
+		log("%s %s was not expected.\n", typeid(*map_object_descr).name(),
+		    map_object_descr->name().c_str());
 		NEVER_HERE();
 	}
 	immovable_kinds_file.unsigned_8(immovable_kind);
@@ -1045,4 +1045,4 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 		WRITE(border_file, BORDER_FILENAME_TEMPLATE, kCurrentPacketVersionBorder);
 	}
 }
-}
+}  // namespace Widelands

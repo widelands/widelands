@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -124,7 +124,7 @@ struct Road : public PlayerImmovable {
 	void remove_worker(Worker&) override;
 	void assign_carrier(Carrier&, uint8_t);
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 protected:
 	bool init(EditorGameBase&) override;
@@ -171,6 +171,6 @@ private:
 	using SlotVector = std::vector<CarrierSlot>;
 	SlotVector carrier_slots_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ROAD_H

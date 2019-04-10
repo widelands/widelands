@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1443,6 +1443,9 @@ public:
 			uint8_t p = a["padding"].get_int();
 			padding.left = padding.top = padding.right = padding.bottom = p;
 		}
+		// TODO(GunChleoc): padding_l and padding_r don't seem to produce balanced results.
+		// We ran into that with the game tips,
+		// using "<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>" there.
 		if (a.has("padding_r"))
 			padding.right = a["padding_r"].get_int();
 		if (a.has("padding_b"))
@@ -1731,4 +1734,4 @@ Renderer::render(const std::string& text, uint16_t width, const TagSet& allowed_
 	std::shared_ptr<RenderNode> node(layout(text, width, allowed_tags));
 	return std::shared_ptr<const UI::RenderedText>(node->render(texture_cache_));
 }
-}
+}  // namespace RT

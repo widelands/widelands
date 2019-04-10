@@ -30,16 +30,17 @@ tribes:new_worker_type {
    },
 
    programs = {
-      chop = {
-         "findobject attrib:tree radius:10",
-         "walk object",
-         "animation hacking 10000",
-         "object fall",
-         "animation idle 2000",
-         "createware log",
+      harvest = {
+         "findobject=attrib:tree radius:10",
+         "walk=object",
+         "animate=hacking 10000",
+         "callobject=fall",
+         "animate=idle 2000",
+         "createware=log",
          "return"
       }
    },
 
+   ware_hotspot = {0, 20},
    animations = animations,
 }

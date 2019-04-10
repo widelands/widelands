@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-07-06 13:28+0000\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-04-04 16:10+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -37,11 +37,11 @@ msgstr "Uplest! Wi hebben jüüst de eersten Stapp tum Sieg daan! Leste Nacht s�
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:23
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:25
 msgid "Capture the Ancient Castle"
-msgstr "Nehm dat steenolle Slott in"
+msgstr "Nehm dat steenolle Slött in"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:26
 msgid "Defeat Lanissa and capture the ancient castle."
-msgstr "Manntje Laniss' un nehm dat steenolle Slott in."
+msgstr "Manntje Laniss' un nehm dat steenolle Slött in."
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:32
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:34
@@ -52,7 +52,7 @@ msgstr "Manntje Erwin"
 msgid ""
 "Defeat Erwyn. He commands the strongest opposing military force left on this"
 " island."
-msgstr "Manntje Erwin. He hett de starkste Soldateree up düsse Insel."
+msgstr "Manntje Erwin. He hett de starkste Soldateree up deese Insel."
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:40
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:42
@@ -74,7 +74,7 @@ msgstr "Tweede körte Instruksje"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:66
 msgid "An Ancient Castle"
-msgstr "Een steenolles Slott"
+msgstr "Een steenolles Slött"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:67
 msgid ""
@@ -82,7 +82,7 @@ msgid ""
 "of the old plateau. The castle must be quite old and seems to have been "
 "built in a foreign style. It’s quite obvious that this is not barbarian "
 "craft."
-msgstr "Heer Gommes! Eener vun uns Bespejers hett een machtigs Slott in de Midde vun de Ollen Flackland funnen. Dat Slott mutt steenold wesen un is in butenlandsker Aard baut. Dat is wisse keene Wille Künst."
+msgstr "Bi de Gotten! Eener vun uns' Bespejers hett een machtigs Slött in de Midde vun de Ollen Flackland funnen. Dat Slött mutt steenold wesen un is in butenlandsker Aard baut. Dat is wisse keene Wille Künst."
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:68
 msgid ""
@@ -90,17 +90,17 @@ msgid ""
 "not discovered our movements yet. Perhaps we have a chance of conquering "
 "that mighty building without a bigger fight! However, it is essential that "
 "we capture it. It will be the key to our reign over this island!"
-msgstr "Hopentlik hett uns Laniss' – de Kummandantin, de dat Slott kuntrolleert – noch nich funnen. Villicht könen wi düssen gewaltigen Boo sünner grote Slachten innehmen! Wi mutten 't driest innehmen. 't is de Slötel tum Seggen över düsse Insel!"
+msgstr "Hopentlik hett uns Laniss' – de Kummandantin, de dat Slött kuntrolleert – noch nich funnen. Villicht könen wi deesen gewaltigen Boo sünner grote Slachten innehmen! Wi mutten 't driest innehmen. 't is de Slötel tum Seggen över deese Insel!"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:77
 msgid "Ancient Castle Captured"
-msgstr "Steenolles Slott innohmen"
+msgstr "Steenolles Slött innohmen"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:78
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
-msgstr "Hunnert! Uns Soldateree hett Laniss' un hör Soldaten ennelk manntjet. Dat steenolle Slott hört to uns!"
+msgstr "Hunnert! Uns' Soldateree hett Laniss' un hör Soldaten ennelk manntjet. Dat steenolle Slött hört to uns!"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:79
 msgid ""
@@ -113,7 +113,7 @@ msgid ""
 "commands the strongest warriors. In the south, we caught sight of some food "
 "infrastructures guarded by Jomo – a younger warlord – and we should take "
 "care of those infrastructures so we can cut off our enemies’ food supply."
-msgstr "'t is nich to glöven, wo wied man vun de höchsten Toorn im Slott sehn kann. Wi könen de ganze Insel sehn. Wunnerlik, dat Laniss' uns nich sehn un sük för uns rüst hett. Aber egaal, mennig Dingen blieven man unbegriepelk. Wichtig is blot, dat de övrigen Soldatereen noch daar sünd. Wi hebben im Noorden un Oosten vum Slott Stellungen vun Feinden unner Erwin funnen. He is een gewaltiger Kummandant un hett wiss de starksten Soldaten. Im Süden hebben wi de Spiesen-Wirtschaft vun Jomo – een junger Kummandant – funnen, um de wi uns kümmern mutten, um de Spiesen-Versörgung vun uns Feinden to unnerbreken."
+msgstr "'t is nich to glöven, wo wied man vun de hoogsten Toorn im Slött sehn kann. Wi könen de ganze Insel sehn. Wunnerlik, dat Laniss' uns nich sehn un sük för uns rüst hett. Aver egaal, mennig Dingen blieven man unbegriepelk. Wichtig is blot, dat de övrigen Soldatereen noch daar sünd. Wi hebben im Noorden un Oosten vum Slött Stellungen vun Feinden unner Erwin funnen. He is een gewaltiger Kummandant un hett wiss de starksten Soldaten. Im Süden hebben wi de Spiesen-Wirtschaft vun Jomo – een junger Kummandant – funnen, um de wi uns kümmern mutten, um de Spiesen-Versörgung vun uns' Feinden to unnerbreken."
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:84
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:93
@@ -158,4 +158,4 @@ msgstr "Uplest! De Insel hört uns all tosammen. Nu mutten wi se blot beter verd
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"
-msgstr "Glückwunsk! Du hest düsse Rutfödderung wunnen. Wenn du willt, dürst du wiederspölen!"
+msgstr "Glückwunsk! Du hest deese Rutfödderung wunnen. Wenn du willt, dürst du wiederspölen!"

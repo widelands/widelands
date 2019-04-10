@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,17 @@
 #ifdef USE_GLBINDING
 #include <glbinding/Binding.h>
 #include <glbinding/gl/gl.h>
+
+// testing for the presence of glbinding.h to determine whether we have a glbinding version newer
+// then 2.1.4
+#ifdef __has_include
+#if __has_include("glbinding/glbinding.h")
+#include <glbinding/ProcAddress.h>
+#include <glbinding/glbinding.h>
+#define GLBINDING3
+#endif
+#endif
+
 // This fakes that most other gl bindings define gl functions in the public namespace.
 CLANG_DIAG_OFF("-Wheader-hygiene")
 using namespace gl;

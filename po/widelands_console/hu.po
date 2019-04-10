@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-05 17:07+0000\n"
-"PO-Revision-Date: 2018-05-05 17:10+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-11-02 08:03+0000\n"
+"PO-Revision-Date: 2018-11-04 10:24+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +41,7 @@ msgstr " --<beállítás-neve>=érték felülírja bármelyik beállítást a be
 
 #: ../../src/wlapplication_messages.cc:46
 msgid "                      Note: New value will be written to config file"
-msgstr ""
+msgstr "                      Megjegyzés: Az új érték bele lesz írva a konfiguráció fájlba"
 
 #: ../../src/wlapplication_messages.cc:48
 msgid ""
@@ -105,17 +105,17 @@ msgstr " --rolling_autosave=[...]\n                      Ennyi fájl használata
 msgid ""
 " --metaserver=[...]\n"
 "                      Connect to a different metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserver=[...]\n                      Kapcsolódás egy másik metakiszolgálóhoz az internetes játékhoz."
 
 #: ../../src/wlapplication_messages.cc:84
 msgid ""
 " --metaserverport=[...]\n"
 "                      Port number of the metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserverport=[...]\n                      Az internetes játékhoz használt metakiszolgáló portja."
 
 #: ../../src/wlapplication_messages.cc:89
 msgid "Sound options:"
-msgstr "Hang opciók:"
+msgstr "Hangkapcsolók:"
 
 #: ../../src/wlapplication_messages.cc:90
 msgid " --nosound            Starts the game with sound disabled."
@@ -153,7 +153,7 @@ msgid ""
 "                      adjusting the game speed automatically,\n"
 "                      depending on FPS. Useful in conjunction with\n"
 "                      --ai_training."
-msgstr ""
+msgstr " --auto_speed         Csak a többjátékos játékokban, ez\n                      automatikusan állítja a játék sebességét,\n                      az FPS függvényében. Az --ai_training\n                      kapcsolóval együtt hasznos lehet."
 
 #: ../../src/wlapplication_messages.cc:109
 msgid ""
@@ -169,7 +169,7 @@ msgstr " --loadgame=FÁJLNÉV Közvetlenül betölti a FÁJLNÉV néven mentett 
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr " --script=FÁJLNÉV    A megadott Lua parancsfájl futtatása az inicializálás után.\n                      Csak --scenario, --loadgame vagy --editor esetén érvényes."
+msgstr " --script=FÁJLNÉV    A megadott Lua parancsfájl futtatása az előkészítés után.\n                      Csak --scenario, --loadgame vagy --editor esetén érvényes."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -185,7 +185,7 @@ msgstr " --auto_roadbuild_mode=[true|false]\n                      Automatikusan
 
 #: ../../src/wlapplication_messages.cc:125
 msgid "Graphic options:"
-msgstr "Grafikai beállítások:"
+msgstr "Grafikai kapcsolók:"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -200,15 +200,15 @@ msgstr " --fullscreen=[true|false]\n                      A teljes kijelző legy
 
 #: ../../src/wlapplication_messages.cc:133
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr "--xres=[...] Ablak szélessége pixelekkel megadva."
+msgstr " --xres=[…]         Az ablak szélessége képpontokban."
 
 #: ../../src/wlapplication_messages.cc:134
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr "--yres=[...] Ablak magassága pixelekkel megadva."
+msgstr " --yres=[…]         Az ablak magassága képpontokban."
 
 #: ../../src/wlapplication_messages.cc:135
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
-msgstr ""
+msgstr " --maxfps=[5 …]     A játék legmagasabb képfrissítési sebessége."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -216,7 +216,7 @@ msgstr ""
 #. textdomain
 #: ../../src/wlapplication_messages.cc:140
 msgid "Options for the internal window manager:"
-msgstr "Options for the internal window manager:"
+msgstr "Kapcsolók a belső ablakkezelőhöz:"
 
 #: ../../src/wlapplication_messages.cc:141
 msgid ""
@@ -274,4 +274,4 @@ msgid ""
 "        https://wl.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
+msgstr "Hibabejelentések? Javaslatok? Nézd meg a projekt weblapját:\n        https://wl.widelands.org/\n\nReméljük, hogy tetszett a játék!"

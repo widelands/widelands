@@ -434,7 +434,7 @@ amalea_6 = {
    title=_"Amalea Advises",
    body= amalea3(_"Amalea looks thoughtful…",
       -- TRANSLATORS: Amalea
-      _([[Salve Lutius. While talking to all our brave builders, they told me that they had to use up all our remaining gold for building the port. Now we don’t have any gold left.]])
+      _([[Salve Lutius. While talking to all our brave builders, they told me that they have to use all our remaining gold for building the port. So, we won’t have any gold left after our port is build.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[But the problem is that for sending out an expedition, we need some gold.]])
@@ -628,6 +628,7 @@ diary_page_5 = {
 }
 
 function diary_page_6(first_message, missing)
+   set_textdomain("scenario_emp03.wmf")
    local text = ""
    if first_message then
    -- TRANSLATORS: Lutius - Diary

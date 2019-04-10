@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -631,8 +631,8 @@ void Road::pay_for_building() {
 	// Don't bother with checks here, since the next ware will cause them anyway
 }
 
-void Road::log_general_info(const EditorGameBase& egbase) {
+void Road::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
-	molog("wallet_: %i\n", wallet_);
+	molog("wallet: %i\n", wallet_);
 }
 }  // namespace Widelands

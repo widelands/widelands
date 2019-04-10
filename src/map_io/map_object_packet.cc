@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2018 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -153,7 +153,7 @@ void MapObjectPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSav
 		if (!obj.has_new_save_support())
 			throw GameDataError("MO(%u of type %s) without new style save support not saved "
 			                    "explicitly",
-			                    obj.serial(), obj.descr().descname().c_str());
+			                    obj.serial(), obj.descr().name().c_str());
 
 		mos.register_object(obj);
 		obj.save(egbase, mos, fw);
@@ -164,4 +164,4 @@ void MapObjectPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSav
 
 	fw.write(fs, "binary/mapobjects");
 }
-}
+}  // namespace Widelands

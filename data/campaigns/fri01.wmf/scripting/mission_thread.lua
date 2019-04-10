@@ -418,16 +418,12 @@ function mission_thread()
 
    campaign_message_box(rising_water_3)
    campaign_message_box(rising_water_4)
-    -- Make the port space immediately accessible if it is blocked with trees etc
-    -- (but not buildings)
-   for i,f in ipairs(port_space:region(3)) do
-      if f.immovable and f.immovable.descr.type_name == "immovable" then
-         f.immovable:remove()
-      end
-   end
-   scroll_to_field(port_space)
+   scroll_to_field(map.player_slots[2].starting_field)
    p1:allow_buildings {"frisians_port", "frisians_weaving_mill", "frisians_shipyard"}
    o = add_campaign_objective(obj_escape)
+
+   sleep(30000)
+   campaign_message_box(rising_water_5)
 
    -- Wait until an expedition ship is ready
    local expedition_ready = false
@@ -442,8 +438,22 @@ function mission_thread()
    end
 
    -- We escaped!
-   scroll_to_field(p1:get_buildings("frisians_port")[1].fields[1])
+   local port = p1:get_buildings("frisians_port")[1]
+   scroll_to_field(port.fields[1])
    sleep(1000)
+   local persist = {}
+   for descr,n in pairs(port:get_soldiers("all")) do
+      persist[descr[1] .. descr[2] .. descr[3]] = n
+   end
+   -- We save a table of all soldiers we can take with us:
+   -- {
+   --    "262" = 5,
+   --    "120" = 2,
+   --    ...
+   -- }
+   -- means 5 soldiers with training levels health-2/attack-6/defense-2 and
+   -- 2 soldiers with health-1/attack-2/defense-0.
+   wl.Game():save_campaign_data("frisians", "fri01", persist)
    campaign_message_box(victory_1)
    p1:reveal_scenario("frisians01")
    -- END OF MISSION 1

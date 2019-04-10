@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,7 +67,7 @@ namespace {
 ///    bool const result = match(candidate, "return");
 /// now candidate points to "   75" and result is true
 bool match(char*& candidate, const char* pattern) {
-	for (char *p = candidate;; ++p, ++pattern)
+	for (char* p = candidate;; ++p, ++pattern)
 		if (!*pattern) {
 			candidate = p;
 			return true;
@@ -113,7 +113,7 @@ bool skip(char*& p, char const c = ' ') {
 ///    bool const result = match_force_skip(candidate, "return");
 /// throws WException
 bool match_force_skip(char*& candidate, const char* pattern) {
-	for (char *p = candidate;; ++p, ++pattern)
+	for (char* p = candidate;; ++p, ++pattern)
 		if (!*pattern) {
 			force_skip(p);
 			candidate = p;
@@ -467,9 +467,11 @@ ProductionProgram::ActReturn::ActReturn(char* parameters,
 			result_ = Completed;
 		else if (match(parameters, "skipped"))
 			result_ = Skipped;
+		else if (match(parameters, "no_stats"))
+			result_ = None;
 		else
-			throw GameDataError(
-			   "expected %s but found \"%s\"", "{\"failed\"|\"completed\"|\"skipped\"}", parameters);
+			throw GameDataError("expected %s but found \"%s\"",
+			                    "{\"failed\"|\"completed\"|\"skipped\"|\"no_stats\"}", parameters);
 
 		if (skip(parameters)) {
 			if (match_force_skip(parameters, "when")) {
@@ -573,7 +575,7 @@ ProductionProgram::ActCall::ActCall(char* parameters, const ProductionSiteDescr&
 			if (it == programs.end())
 				throw GameDataError("the program \"%s\" has not (yet) been declared in %s "
 				                    "(wrong declaration order?)",
-				                    program_name, descr.descname().c_str());
+				                    program_name, descr.name().c_str());
 			program_ = it->second.get();
 		}
 
@@ -581,7 +583,6 @@ ProductionProgram::ActCall::ActCall(char* parameters, const ProductionSiteDescr&
 		while (!reached_end) {
 			skip(parameters);
 			match_force_skip(parameters, "on");
-			log("found \"on \": parameters = \"%s\"\n", parameters);
 
 			ProgramResult result_to_set_method_for;
 			if (match_force_skip(parameters, "failure")) {
@@ -614,9 +615,6 @@ ProductionProgram::ActCall::ActCall(char* parameters, const ProductionSiteDescr&
 				                    "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}", parameters);
 			handling_methods_[result_to_set_method_for - 1] = handling_method;
 			reached_end = !*parameters;
-			log("read handling method for result %u: %u, parameters = \"%s\", "
-			    "reached_end = %u\n",
-			    result_to_set_method_for, handling_method, parameters, reached_end);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("call: %s", e.what());
@@ -645,10 +643,10 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 	}
 }
 
-ProductionProgram::ActWorker::ActWorker(char* parameters,
-                                        const std::string& production_program_name,
-                                        ProductionSiteDescr* descr,
-                                        const Tribes& tribes) {
+ProductionProgram::ActCallWorker::ActCallWorker(char* parameters,
+                                                const std::string& production_program_name,
+                                                ProductionSiteDescr* descr,
+                                                const Tribes& tribes) {
 	try {
 		program_ = parameters;
 
@@ -665,13 +663,13 @@ ProductionProgram::ActWorker::ActWorker(char* parameters,
 		for (const auto& area_info : worker_workarea_info) {
 			std::set<std::string>& building_radius_infos = descr->workarea_info_[area_info.first];
 
-			for (const std::string& worker_descname : area_info.second) {
-				std::string description = descr->descname();
+			for (const std::string& worker_name : area_info.second) {
+				std::string description = descr->name();
 				description += ' ';
 				description += production_program_name;
 				description += " worker ";
 				description += main_worker_descr.name();
-				description += worker_descname;
+				description += worker_name;
 				building_radius_infos.insert(description);
 			}
 		}
@@ -680,14 +678,14 @@ ProductionProgram::ActWorker::ActWorker(char* parameters,
 	}
 }
 
-void ProductionProgram::ActWorker::execute(Game& game, ProductionSite& ps) const {
+void ProductionProgram::ActCallWorker::execute(Game& game, ProductionSite& ps) const {
 	// Always main worker is doing stuff
 	ps.working_positions_[0].worker->update_task_buildingwork(game);
 }
 
-bool ProductionProgram::ActWorker::get_building_work(Game& game,
-                                                     ProductionSite& psite,
-                                                     Worker& worker) const {
+bool ProductionProgram::ActCallWorker::get_building_work(Game& game,
+                                                         ProductionSite& psite,
+                                                         Worker& worker) const {
 	ProductionSite::State& state = psite.top_state();
 	if (state.phase == 0) {
 		worker.start_task_program(game, program());
@@ -699,9 +697,9 @@ bool ProductionProgram::ActWorker::get_building_work(Game& game,
 	}
 }
 
-void ProductionProgram::ActWorker::building_work_failed(Game& game,
-                                                        ProductionSite& psite,
-                                                        Worker&) const {
+void ProductionProgram::ActCallWorker::building_work_failed(Game& game,
+                                                            ProductionSite& psite,
+                                                            Worker&) const {
 	psite.program_end(game, Failed);
 }
 
@@ -882,7 +880,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		const std::string is_missing_string =
 		   /** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
 		   /** TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
-		      */
+		    */
 		   (boost::format(ngettext("%s is missing", "%s are missing", nr_missing_groups)) %
 		    i18n::localize_list(group_list, i18n::ConcatenateWith::AND))
 		      .str();
@@ -895,7 +893,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		   /** TRANSLATORS: This appears in the hover text on buildings. Please test these in
 		      context*/
 		   /** TRANSLATORS: on a development build if you can, and let us know if there are any issues
-		      */
+		    */
 		   /** TRANSLATORS: we need to address for your language. */
 		   (boost::format(_("Did not start %1$s because %2$s")) % ps.top_state().program->descname() %
 		    is_missing_string)
@@ -1125,10 +1123,9 @@ ProductionProgram::ActMine::ActMine(char* parameters,
 			if (*endp || value < 1 || 100 < value)
 				throw GameDataError("expected %s but found \"%s\"", "percentage", parameters);
 		}
-		std::string description =
-		   (boost::format("%1$s %2$s mine %3$s") % descr->descname() % production_program_name %
-		    world.get_resource(resource_)->descname())
-		      .str();
+		std::string description = (boost::format("%1$s %2$s mine %3$s") % descr->name() %
+		                           production_program_name % world.get_resource(resource_)->name())
+		                             .str();
 
 		descr->workarea_info_[distance_].insert(description);
 	} catch (const WException& e) {
@@ -1161,10 +1158,11 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 			totalstart += start_amount;
 			totalchance += 8 * amount;
 
-			//  Add penalty for fields that are running out
+			// Add penalty for fields that are running out
+			// Except for totally depleted fields or wrong ressource fields
+			// if we already know there is no ressource (left) we won't mine there
 			if (amount == 0)
-				// we already know it's completely empty, so punish is less
-				totalchance += 1;
+				totalchance += 0;
 			else if (amount <= 2)
 				totalchance += 6;
 			else if (amount <= 4)
@@ -1270,7 +1268,7 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(char* parameters) {
 		if (*endp || level != value)
 			throw GameDataError("expected %s but found \"%s\"", "level", parameters);
 	} catch (const WException& e) {
-		throw GameDataError("check_soldier: %s", e.what());
+		throw GameDataError("checksoldier: %s", e.what());
 	}
 }
 
@@ -1426,7 +1424,7 @@ ProductionProgram::ActPlaySound::ActPlaySound(char* parameters) {
 
 		g_sound_handler.load_fx_if_needed(filepath, filename, name);
 	} catch (const WException& e) {
-		throw GameDataError("play_sound: %s", e.what());
+		throw GameDataError("playsound: %s", e.what());
 	}
 }
 
@@ -1638,25 +1636,25 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 		} else if (boost::iequals(parts[0], "recruit")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActRecruit(arguments.get(), *building, egbase.tribes())));
-		} else if (boost::iequals(parts[0], "worker")) {
+		} else if (boost::iequals(parts[0], "callworker")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActWorker(arguments.get(), name(), building, egbase.tribes())));
+			   new ActCallWorker(arguments.get(), name(), building, egbase.tribes())));
 		} else if (boost::iequals(parts[0], "mine")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActMine(arguments.get(), egbase.world(), name(), building)));
-		} else if (boost::iequals(parts[0], "check_soldier")) {
+		} else if (boost::iequals(parts[0], "checksoldier")) {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActCheckSoldier(arguments.get())));
 		} else if (boost::iequals(parts[0], "train")) {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActTrain(arguments.get())));
-		} else if (boost::iequals(parts[0], "play_sound")) {
+		} else if (boost::iequals(parts[0], "playsound")) {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(arguments.get())));
 		} else if (boost::iequals(parts[0], "construct")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActConstruct(arguments.get(), name(), building)));
-		} else if (boost::iequals(parts[0], "check_map")) {
+		} else if (boost::iequals(parts[0], "checkmap")) {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActCheckMap(arguments.get())));
 		} else {

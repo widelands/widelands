@@ -147,6 +147,7 @@ end
 --    :returns: The building created
 
 function place_building_in_region(plr, building, fields, gargs)
+   set_textdomain("widelands")
    local idx
    local f
    local args = gargs or {}

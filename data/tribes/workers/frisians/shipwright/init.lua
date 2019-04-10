@@ -34,14 +34,15 @@ tribes:new_worker_type {
 
    programs = {
       buildship = {
-         "walk object-or-coords",
-         "plant attrib:shipconstruction unless object",
-         "animation work 500",
+         "walk=object-or-coords",
+         "plant=attrib:shipconstruction unless object",
+         "animate=work 500",
          "construct",
-         "animation work 5000",
+         "animate=work 5000",
          "return"
       }
    },
 
+   ware_hotspot = {0, 20},
    animations = animations,
 }
