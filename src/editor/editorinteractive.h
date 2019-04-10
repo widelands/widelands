@@ -153,7 +153,21 @@ private:
 		kExitEditor,
 	};
 
+	enum class ToolMenuEntry {
+		kChangeHeight,
+		kRandomHeight,
+		kTerrain,
+		kImmovables,
+		kAnimals,
+		kResources,
+		kPortSpace,
+		kMapOrigin,
+		kMapSize,
+		kFieldInfo
+	};
+
 	void main_menu_selected(MainMenuEntry entry);
+	void tool_menu_selected(ToolMenuEntry entry);
 
 	void on_buildhelp_changed(const bool value) override;
 
@@ -166,11 +180,10 @@ private:
 	uint32_t realtime_;
 	bool is_painting_;
 
-	UI::UniqueWindow::Registry toolmenu_;
-
 	UI::UniqueWindow::Registry toolsizemenu_;
 	UI::UniqueWindow::Registry playermenu_;
 	UI::Dropdown<MainMenuEntry> mainmenu_;
+	UI::Dropdown<ToolMenuEntry> toolmenu_;
 	UI::UniqueWindow::Registry heightmenu_;
 	UI::UniqueWindow::Registry noise_heightmenu_;
 	UI::UniqueWindow::Registry terrainmenu_;

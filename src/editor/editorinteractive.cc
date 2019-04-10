@@ -29,7 +29,15 @@
 #include "base/i18n.h"
 #include "base/scoped_timer.h"
 #include "base/warning.h"
-#include "editor/tools/delete_immovable_tool.h"
+#include "editor/tools/decrease_height_tool.h"
+#include "editor/tools/decrease_resources_tool.h"
+#include "editor/tools/increase_height_tool.h"
+#include "editor/tools/increase_resources_tool.h"
+#include "editor/tools/noise_height_tool.h"
+#include "editor/tools/place_critter_tool.h"
+#include "editor/tools/place_immovable_tool.h"
+#include "editor/tools/set_port_space_tool.h"
+#include "editor/tools/set_terrain_tool.h"
 #include "editor/ui_menus/help.h"
 #include "editor/ui_menus/main_menu_load_map.h"
 #include "editor/ui_menus/main_menu_map_options.h"
@@ -37,7 +45,13 @@
 #include "editor/ui_menus/main_menu_random_map.h"
 #include "editor/ui_menus/main_menu_save_map.h"
 #include "editor/ui_menus/player_menu.h"
-#include "editor/ui_menus/tool_menu.h"
+#include "editor/ui_menus/tool_change_height_options_menu.h"
+#include "editor/ui_menus/tool_change_resources_options_menu.h"
+#include "editor/ui_menus/tool_noise_height_options_menu.h"
+#include "editor/ui_menus/tool_place_critter_options_menu.h"
+#include "editor/ui_menus/tool_place_immovable_options_menu.h"
+#include "editor/ui_menus/tool_resize_options_menu.h"
+#include "editor/ui_menus/tool_set_terrain_options_menu.h"
 #include "editor/ui_menus/toolsize_menu.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
@@ -78,6 +92,12 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 		 _("Main Menu"),
 		 UI::DropdownType::kPictorialMenu,
 		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
+	 toolmenu_(
+		toolbar(), 0, 0, 34U, 10, 34U,
+		 /** TRANSLATORS: Title for the tool menu button in the editor */
+		 _("Tools"),
+		 UI::DropdownType::kPictorialMenu,
+		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
      undo_(nullptr),
      redo_(nullptr),
      tools_(new Tools(e.map())),
@@ -86,9 +106,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	mainmenu_.set_image(g_gr->images().get("images/wui/menus/menu_toggle_menu.png"));
 	toolbar()->add(&mainmenu_);
 
-	add_toolbar_button(
-	   "wui/editor/editor_menu_toggle_tool_menu", "tools", _("Tools"), &toolmenu_, true);
-	toolmenu_.open_window = [this] { new EditorToolMenu(*this, toolmenu_); };
+	toolmenu_.set_image(g_gr->images().get("images/wui/editor/editor_menu_toggle_tool_menu.png"));
+	toolbar()->add(&toolmenu_);
 
 	add_toolbar_button(
 	   "wui/editor/editor_menu_set_toolsize_menu", "toolsize", _("Tool size"), &toolsizemenu_, true);
@@ -161,6 +180,43 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor);
 	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
+
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Change height"), ToolMenuEntry::kChangeHeight,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_height.png"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Random height"), ToolMenuEntry::kRandomHeight,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_noise_height.png"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Terrain"), ToolMenuEntry::kTerrain,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_set_terrain.png"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Immovables"), ToolMenuEntry::kImmovables,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_place_immovable.png"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Animals"), ToolMenuEntry::kAnimals,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_place_bob.png"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Resources"), ToolMenuEntry::kResources,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_resources.png"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Port spaces"), ToolMenuEntry::kPortSpace,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_set_port_space.png"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Map origin"), ToolMenuEntry::kMapOrigin,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_height.png"), false,
+				  /** TRANSLATORS: Tooltip for the map origin tool in the editor */
+				  _("Set the position that will have the coordinates (0, 0). This will be the top-left corner of a generated minimap."));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Map size"), ToolMenuEntry::kMapSize,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_resize.png"), false,
+				  /** TRANSLATORS: Tooltip for the map size tool in the editor */
+				  _("Change the map’s size"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Information"), ToolMenuEntry::kFieldInfo,
+				  g_gr->images().get("images/wui/editor/fsel_editor_info.png"));
+	toolmenu_.selected.connect([this] { tool_menu_selected(toolmenu_.get_selected()); });
+
 
 #ifndef NDEBUG
 	set_display_flag(InteractiveBase::dfDebug, true);
@@ -447,6 +503,99 @@ void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
 	case MainMenuEntry::kExitEditor: {
 		exit();
 	}
+	}
+}
+
+void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
+	EditorTool* current_tool_pointer = nullptr;
+	UI::UniqueWindow::Registry* current_registry_pointer = nullptr;
+
+	switch (entry) {
+	case ToolMenuEntry::kChangeHeight:
+		current_tool_pointer = &tools()->increase_height;
+		current_registry_pointer = &heightmenu_;
+		break;
+	case ToolMenuEntry::kRandomHeight:
+		current_tool_pointer = &tools()->noise_height;
+		current_registry_pointer = &noise_heightmenu_;
+		break;
+	case ToolMenuEntry::kTerrain:
+		current_tool_pointer = &tools()->set_terrain;
+		current_registry_pointer = &terrainmenu_;
+		break;
+	case ToolMenuEntry::kImmovables:
+		current_tool_pointer = &tools()->place_immovable;
+		current_registry_pointer = &immovablemenu_;
+		break;
+	case ToolMenuEntry::kAnimals:
+		current_tool_pointer = &tools()->place_critter;
+		current_registry_pointer = &crittermenu_;
+		break;
+	case ToolMenuEntry::kResources:
+		current_tool_pointer = &tools()->increase_resources;
+		current_registry_pointer = &resourcesmenu_;
+		break;
+	case ToolMenuEntry::kPortSpace:
+		current_tool_pointer = &tools()->set_port_space;
+		// No need for a window
+		break;
+	case ToolMenuEntry::kMapOrigin:
+		current_tool_pointer = &tools()->set_origin;
+		// No need for a window
+		break;
+	case ToolMenuEntry::kMapSize:
+		current_tool_pointer = &tools()->resize;
+		current_registry_pointer = &resizemenu_;
+		break;
+	case ToolMenuEntry::kFieldInfo:
+		current_tool_pointer = &tools()->info;
+		// No need for a window
+		break;
+	}
+
+	assert(current_tool_pointer != nullptr);
+	select_tool(*current_tool_pointer, EditorTool::First);
+
+	if (current_registry_pointer != nullptr) {
+		if (UI::Window* const window = current_registry_pointer->window) {
+			// There is already a window. If it is minimal, restore it.
+			if (window->is_minimal())
+				window->restore();
+			else
+				delete window;
+		} else
+			switch (entry) {  //  create window
+			case ToolMenuEntry::kChangeHeight:
+				new EditorToolChangeHeightOptionsMenu(
+				   *this, tools()->increase_height, *current_registry_pointer);
+				break;
+			case ToolMenuEntry::kRandomHeight:
+				new EditorToolNoiseHeightOptionsMenu(
+				   *this, tools()->noise_height, *current_registry_pointer);
+				break;
+			case ToolMenuEntry::kTerrain:
+				new EditorToolSetTerrainOptionsMenu(
+				   *this, tools()->set_terrain, *current_registry_pointer);
+				break;
+			case ToolMenuEntry::kImmovables:
+				new EditorToolPlaceImmovableOptionsMenu(
+				   *this, tools()->place_immovable, *current_registry_pointer);
+				break;
+			case ToolMenuEntry::kAnimals:
+				new EditorToolPlaceCritterOptionsMenu(
+				   *this, tools()->place_critter, *current_registry_pointer);
+				break;
+			case ToolMenuEntry::kResources:
+				new EditorToolChangeResourcesOptionsMenu(
+				   *this, tools()->increase_resources, *current_registry_pointer);
+				break;
+			case ToolMenuEntry::kMapSize:
+				new EditorToolResizeOptionsMenu(
+				   *this, tools()->resize, *current_registry_pointer);
+				break;
+			default:
+				NEVER_HERE();
+			}
 	}
 }
 
