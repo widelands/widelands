@@ -44,66 +44,63 @@ EditorToolResizeOptionsMenu::EditorToolResizeOptionsMenu(
                 0,
                 0,
                 get_inner_w() - 2 * hmargin(),
-                80,
-                0,
-                1,
-                1000,
-                UI::PanelStyle::kWui,
-                _("New width:"),
-                UI::SpinBox::Units::kNone,
-                UI::SpinBox::Type::kValueList),
+                200,
+                24,
+                _("New width"),
+                UI::DropdownType::kTextual,
+                UI::PanelStyle::kWui),
      new_height_(&box_,
-             0,
-             0,
-             get_inner_w() - 2 * hmargin(),
-             80,
-             0,
-             1,
-             1000,
-             UI::PanelStyle::kWui,
-             _("New height:"),
-             UI::SpinBox::Units::kNone,
-             UI::SpinBox::Type::kValueList) {
-	// Configure spin boxes
-	new_width_.set_value_list(Widelands::kMapDimensions);
-	new_height_.set_value_list(Widelands::kMapDimensions);
-	{
-		size_t width_index, height_index;
-		Widelands::Extent const map_extent = parent.egbase().map().extent();
-		for (width_index = 0; width_index < Widelands::kMapDimensions.size() &&
-		                      Widelands::kMapDimensions[width_index] < map_extent.w;
-		     ++width_index) {
-		}
-		new_width_.set_value(width_index);
+                0,
+                0,
+                get_inner_w() - 2 * hmargin(),
+                200,
+                24,
+                _("New height"),
+                UI::DropdownType::kTextual,
+                UI::PanelStyle::kWui),
+     text_area_(&box_,
+                0,
+                0,
+                get_inner_w() - 2 * hmargin(),
+                48,
+                UI::PanelStyle::kWui,
+                _("Select the new map size, then click the map to split it at the desired location."),
+                UI::Align::kCenter,
+                UI::MultilineTextarea::ScrollMode::kNoScrolling) {
 
-		for (height_index = 0; height_index < Widelands::kMapDimensions.size() &&
-		                       Widelands::kMapDimensions[height_index] < map_extent.h;
-		     ++height_index) {
-		}
-		new_height_.set_value(height_index);
+	for (const int32_t& i : Widelands::kMapDimensions) {
+		new_width_.add(std::to_string(i), i);
+		new_height_.add(std::to_string(i), i);
 	}
+	new_width_.select(parent.egbase().map().get_width());
+	new_height_.select(parent.egbase().map().get_height());
+	new_width_.set_max_items(8);
+	new_height_.set_max_items(8);
 
-	new_width_.changed.connect(
+	new_width_.selected.connect(
 	   boost::bind(&EditorToolResizeOptionsMenu::update_width, boost::ref(*this)));
-	new_height_.changed.connect(
+	new_height_.selected.connect(
 	   boost::bind(&EditorToolResizeOptionsMenu::update_height, boost::ref(*this)));
 
-	box_.add(&new_width_);
-	box_.add(&new_height_);
+	box_.add(&text_area_);
+	box_.set_size(100, 20); // Prevent assert failures
+	box_.add(&new_width_, UI::Box::Resizing::kFullSize);
+	box_.add(&new_height_, UI::Box::Resizing::kFullSize);
 
-	box_.set_size(get_inner_w() - 2 * hmargin(), new_width_.get_h() + new_height_.get_h() + vspacing());
+	box_.set_size(get_inner_w() - 2 * hmargin(),
+			new_width_.get_h() + new_height_.get_h() + text_area_.get_h() + 2 * vspacing());
 	set_inner_size(get_inner_w(), box_.get_h() + 1 * vmargin());
 }
 
 void EditorToolResizeOptionsMenu::update_width() {
-	int32_t w = new_width_.get_value();
+	int32_t w = new_width_.get_selected();
 	assert(w > 0);
 	resize_tool_.set_width(w);
 	select_correct_tool();
 }
 
 void EditorToolResizeOptionsMenu::update_height() {
-	int32_t h = new_height_.get_value();
+	int32_t h = new_height_.get_selected();
 	assert(h > 0);
 	resize_tool_.set_height(h);
 	select_correct_tool();
