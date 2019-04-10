@@ -183,25 +183,39 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Change height"), ToolMenuEntry::kChangeHeight,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_height.png"));
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_height.png"), false,
+				  /** TRANSLATORS: Tooltip for the change height tool in the editor */
+				  _("Change the terrain height"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Random height"), ToolMenuEntry::kRandomHeight,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_noise_height.png"));
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_noise_height.png"), false,
+				  /** TRANSLATORS: Tooltip for the random height tool in the editor */
+				  _("Set the terrain height to random values"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Terrain"), ToolMenuEntry::kTerrain,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_set_terrain.png"));
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_set_terrain.png"), false,
+				  /** TRANSLATORS: Tooltip for the terrain tool in the editor */
+				  _("Change the map’s terrain"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Immovables"), ToolMenuEntry::kImmovables,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_place_immovable.png"));
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_place_immovable.png"), false,
+				  /** TRANSLATORS: Tooltip for the immovables tool in the editor */
+				  _("Add or remove immovables"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Animals"), ToolMenuEntry::kAnimals,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_place_bob.png"));
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_place_bob.png"), false,
+				  /** TRANSLATORS: Tooltip for the animals tool in the editor */
+				  _("Add or remove animals"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Resources"), ToolMenuEntry::kResources,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_resources.png"));
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_resources.png"), false,
+				  /** TRANSLATORS: Tooltip for the resources tool in the editor */
+				  _("Set or change resources"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Port spaces"), ToolMenuEntry::kPortSpace,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_set_port_space.png"));
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_set_port_space.png"), false,
+				  /** TRANSLATORS: Tooltip for the port spaces tool in the editor */
+				  _("Add or remove port spaces"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Map origin"), ToolMenuEntry::kMapOrigin,
 				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_height.png"), false,
@@ -214,7 +228,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 				  _("Change the map’s size"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Information"), ToolMenuEntry::kFieldInfo,
-				  g_gr->images().get("images/wui/editor/fsel_editor_info.png"));
+				  g_gr->images().get("images/wui/editor/fsel_editor_info.png"), false,
+				  /** TRANSLATORS: Tooltip for the map information tool in the editor */
+				  _("Click on a field to show information about it"));
 	toolmenu_.selected.connect([this] { tool_menu_selected(toolmenu_.get_selected()); });
 
 
