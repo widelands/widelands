@@ -5455,8 +5455,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[14] = (bo.current_stats - 50) / 10;
 			inputs[15] = management_data.get_military_number_at(123) / 10;
 			inputs[16] = 0;
-			inputs[17] = (inputs_on_stock) ? 0 : -4;
+			// TODO(GunChleoc): This is overwritten below due to a typo
+			// inputs[17] = (inputs_on_stock) ? 0 : -2;
 			inputs[18] = (suppliers_exist) ? 0 : -3;
+			inputs[17] = (inputs_on_stock) ? 0 : -4;
 			// Nothing on inputs[19]
 			inputs[20] =
 			   (mines_per_type[bo.mines].in_construction + mines_per_type[bo.mines].finished == 1) ?
