@@ -175,7 +175,7 @@ void Statebox::handle_mousein(bool const inside) {
  */
 bool Statebox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && (flags_ & Is_Enabled)) {
-		clicked();
+		button_clicked();
 		return true;
 	}
 	return false;
@@ -188,7 +188,7 @@ bool Statebox::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_
 /**
  * Toggle the checkbox state
  */
-void Checkbox::clicked() {
+void Checkbox::button_clicked() {
 	clickedto(!get_state());
 	set_state(!get_state());
 	play_click();

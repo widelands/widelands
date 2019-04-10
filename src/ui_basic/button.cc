@@ -282,7 +282,6 @@ void Button::think() {
 				time_nextact_ = time;
 			play_click();
 			sigclicked();
-			clicked();
 			//  The button may not exist at this point (for example if the button
 			//  closed the dialog that it is part of). So member variables may no
 			//  longer be accessed.
@@ -336,7 +335,6 @@ bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 		if (highlighted_ && enabled_) {
 			play_click();
 			sigclicked();
-			clicked();
 			//  The button may not exist at this point (for example if the button
 			//  closed the dialog that it is part of). So member variables may no
 			//  longer be accessed.

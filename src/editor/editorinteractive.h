@@ -168,6 +168,8 @@ private:
 
 	void main_menu_selected(MainMenuEntry entry);
 	void tool_menu_selected(ToolMenuEntry entry);
+	template <class Menu, class Tool>
+	void open_tool_window(UI::UniqueWindow::Registry& registry, Tool& tool);
 
 	void on_buildhelp_changed(const bool value) override;
 

@@ -88,6 +88,7 @@ public:
 	      const std::string& tooltip_text = std::string());
 	virtual ~Panel();
 
+	boost::signals2::signal<void()> clicked;
 	boost::signals2::signal<void()> position_changed;
 
 	Panel* get_parent() const {

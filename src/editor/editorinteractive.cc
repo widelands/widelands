@@ -507,95 +507,52 @@ void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
 }
 
 void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
-	EditorTool* current_tool_pointer = nullptr;
-	UI::UniqueWindow::Registry* current_registry_pointer = nullptr;
-
 	switch (entry) {
 	case ToolMenuEntry::kChangeHeight:
-		current_tool_pointer = &tools()->increase_height;
-		current_registry_pointer = &heightmenu_;
+		open_tool_window<EditorToolChangeHeightOptionsMenu>(heightmenu_, tools()->increase_height);
 		break;
 	case ToolMenuEntry::kRandomHeight:
-		current_tool_pointer = &tools()->noise_height;
-		current_registry_pointer = &noise_heightmenu_;
+		open_tool_window<EditorToolNoiseHeightOptionsMenu>(noise_heightmenu_, tools()->noise_height);
 		break;
 	case ToolMenuEntry::kTerrain:
-		current_tool_pointer = &tools()->set_terrain;
-		current_registry_pointer = &terrainmenu_;
+		open_tool_window<EditorToolSetTerrainOptionsMenu>(terrainmenu_, tools()->set_terrain);
 		break;
 	case ToolMenuEntry::kImmovables:
-		current_tool_pointer = &tools()->place_immovable;
-		current_registry_pointer = &immovablemenu_;
+		open_tool_window<EditorToolPlaceImmovableOptionsMenu>(immovablemenu_, tools()->place_immovable);
 		break;
 	case ToolMenuEntry::kAnimals:
-		current_tool_pointer = &tools()->place_critter;
-		current_registry_pointer = &crittermenu_;
+		open_tool_window<EditorToolPlaceCritterOptionsMenu>(crittermenu_, tools()->place_critter);
 		break;
 	case ToolMenuEntry::kResources:
-		current_tool_pointer = &tools()->increase_resources;
-		current_registry_pointer = &resourcesmenu_;
+		open_tool_window<EditorToolChangeResourcesOptionsMenu>(resourcesmenu_, tools()->increase_resources);
 		break;
 	case ToolMenuEntry::kPortSpace:
-		current_tool_pointer = &tools()->set_port_space;
-		// No need for a window
+		select_tool(tools()->set_port_space, EditorTool::First);
 		break;
 	case ToolMenuEntry::kMapOrigin:
-		current_tool_pointer = &tools()->set_origin;
-		// No need for a window
+		select_tool(tools()->set_origin, EditorTool::First);
 		break;
 	case ToolMenuEntry::kMapSize:
-		current_tool_pointer = &tools()->resize;
-		current_registry_pointer = &resizemenu_;
+		open_tool_window<EditorToolResizeOptionsMenu>(resizemenu_, tools()->resize);
 		break;
 	case ToolMenuEntry::kFieldInfo:
-		current_tool_pointer = &tools()->info;
-		// No need for a window
+		select_tool(tools()->info, EditorTool::First);
 		break;
 	}
+}
 
-	assert(current_tool_pointer != nullptr);
-	select_tool(*current_tool_pointer, EditorTool::First);
-
-	if (current_registry_pointer != nullptr) {
-		if (UI::Window* const window = current_registry_pointer->window) {
-			// There is already a window. If it is minimal, restore it.
-			if (window->is_minimal())
-				window->restore();
-			else
-				delete window;
-		} else
-			switch (entry) {  //  create window
-			case ToolMenuEntry::kChangeHeight:
-				new EditorToolChangeHeightOptionsMenu(
-				   *this, tools()->increase_height, *current_registry_pointer);
-				break;
-			case ToolMenuEntry::kRandomHeight:
-				new EditorToolNoiseHeightOptionsMenu(
-				   *this, tools()->noise_height, *current_registry_pointer);
-				break;
-			case ToolMenuEntry::kTerrain:
-				new EditorToolSetTerrainOptionsMenu(
-				   *this, tools()->set_terrain, *current_registry_pointer);
-				break;
-			case ToolMenuEntry::kImmovables:
-				new EditorToolPlaceImmovableOptionsMenu(
-				   *this, tools()->place_immovable, *current_registry_pointer);
-				break;
-			case ToolMenuEntry::kAnimals:
-				new EditorToolPlaceCritterOptionsMenu(
-				   *this, tools()->place_critter, *current_registry_pointer);
-				break;
-			case ToolMenuEntry::kResources:
-				new EditorToolChangeResourcesOptionsMenu(
-				   *this, tools()->increase_resources, *current_registry_pointer);
-				break;
-			case ToolMenuEntry::kMapSize:
-				new EditorToolResizeOptionsMenu(
-				   *this, tools()->resize, *current_registry_pointer);
-				break;
-			default:
-				NEVER_HERE();
-			}
+template <class Menu, class Tool>
+void EditorInteractive::open_tool_window(UI::UniqueWindow::Registry& registry, Tool& tool) {
+	if (UI::Window* const window = registry.window) {
+		// There is already a window. If it is minimal, restore it.
+		if (window->is_minimal()) {
+			window->restore();
+		} else {
+			delete window;
+		}
+	} else {
+		//  Create window
+		new Menu(*this, tool, registry);
 	}
 }
 
