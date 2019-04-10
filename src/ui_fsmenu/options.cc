@@ -102,7 +102,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                         0,
                         0,
                         100,  // 100 is arbitrary, will be resized in layout().
-                        100,  // 100 is arbitrary, will be resized in layout().
+                        50,
                         24,
                         _("Language"),
                         UI::DropdownType::kTextual,
@@ -111,7 +111,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           0,
                           0,
                           100,  // 100 is arbitrary, will be resized in layout().
-                          100,  // 100 is arbitrary, will be resized in layout().
+                          50,
                           24,
                           _("Window Size"),
                           UI::DropdownType::kTextual,

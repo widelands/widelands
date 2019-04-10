@@ -39,7 +39,7 @@
 namespace {
 constexpr int kMargin = 4;
 // If this ever gets changed, don't forget to change the strings in the warning box as well.
-constexpr Widelands::PlayerNumber max_recommended_players = 8;
+constexpr Widelands::PlayerNumber kMaxRecommendedPlayers = 8;
 }  // namespace
 
 class EditorPlayerMenuWarningBox : public UI::Window {
@@ -125,7 +125,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
                     0,
                     0,
                     50,
-                    100,
+                    kMaxRecommendedPlayers,
                     24,
                     _("Number of players"),
                     UI::DropdownType::kTextual,
@@ -170,7 +170,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 
 		// Tribe
 		UI::Dropdown<std::string>* plr_tribe =
-		   new UI::Dropdown<std::string>(row, 0, 0, 50, 400, plr_name->get_h(), _("Tribe"),
+		   new UI::Dropdown<std::string>(row, 0, 0, 50, 16, plr_name->get_h(), _("Tribe"),
 		                                 UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
 		{
 			i18n::Textdomain td("tribes");
@@ -215,7 +215,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 	}
 
 	// Make room for 8 players
-	no_of_players_.set_max_items(max_recommended_players);
+	no_of_players_.set_max_items(kMaxRecommendedPlayers);
 	no_of_players_.select(nr_players);
 
 	// Init button states
@@ -244,13 +244,13 @@ void EditorPlayerMenu::no_of_players_clicked() {
 	}
 
 	// Display a warning if there are too many players
-	if (nr_players > max_recommended_players) {
+	if (nr_players > kMaxRecommendedPlayers) {
 		if (g_options.pull_section("global").get_bool(
 		       "editor_player_menu_warn_too_many_players", true)) {
 			EditorPlayerMenuWarningBox warning(get_parent());
 			if (warning.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 				// Abort setting of players
-				no_of_players_.select(std::min(old_nr_players, max_recommended_players));
+				no_of_players_.select(std::min(old_nr_players, kMaxRecommendedPlayers));
 			}
 		}
 	}

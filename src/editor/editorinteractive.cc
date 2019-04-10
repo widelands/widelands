@@ -73,7 +73,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      realtime_(SDL_GetTicks()),
      is_painting_(false),
 	 mainmenu_(
-		toolbar(), 0, 0, 34U, 300, 34U,
+		toolbar(), 0, 0, 34U, 10, 34U,
 		 /** TRANSLATORS: Title for the main menu button in the editor */
 		 _("Main Menu"),
 		 UI::DropdownType::kPictorialMenu,

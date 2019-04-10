@@ -50,7 +50,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              get_w() * 7 / 10,
                              get_h() * 4 / 10 + buth_,
                              butw_,
-                             get_h() - get_h() * 4 / 10 - buth_,
+                             10, // max number of items
                              buth_,
                              "",
                              UI::DropdownType::kTextual,

@@ -51,7 +51,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                            int32_t x,
                            int32_t y,
                            uint32_t w,
-                           uint32_t h,
+                           uint32_t max_list_items,
                            int button_dimension,
                            const std::string& label,
                            const DropdownType type,
@@ -63,13 +63,14 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                // Height only to fit the button, so we can use this in Box layout.
                base_height(button_dimension)),
      id_(next_id_++),
-     max_list_height_(h - 2 * get_h()),
+     max_list_items_(max_list_items),
+	 max_list_height_(std::numeric_limits<uint32_t>::max()),
      list_width_(w),
      list_offset_x_(0),
      list_offset_y_(0),
      button_dimension_(button_dimension),
      mouse_tolerance_(50),
-     button_box_(this, 0, 0, UI::Box::Horizontal, w, h),
+     button_box_(this, 0, 0, UI::Box::Horizontal, w, get_h()),
      push_button_(type == DropdownType::kTextual ?
                      new UI::Button(&button_box_,
                                     "dropdown_select",
@@ -109,7 +110,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 		}
 	});
 
-	assert(max_list_height_ > 0);
+	assert(max_list_items_ > 0);
 	// Hook into highest parent that we can get so that we can drop down outside the panel.
 	// Positioning breaks down with TabPanels, so we exclude them.
 	while (parent->get_parent() && !is_a(UI::TabPanel, parent->get_parent())) {
@@ -154,12 +155,13 @@ BaseDropdown::~BaseDropdown() {
 }
 
 void BaseDropdown::set_height(int height) {
+	assert (height > base_height(button_dimension_));
 	max_list_height_ = height - base_height(button_dimension_);
 	layout();
 }
 
 void BaseDropdown::set_max_items(int items) {
-	set_height(list_->get_lineheight() * items + base_height(button_dimension_));
+	max_list_items_ = items;
 }
 
 void BaseDropdown::layout() {
@@ -169,7 +171,7 @@ void BaseDropdown::layout() {
 	display_button_.set_desired_size(
 	   type_ == DropdownType::kTextual ? w - button_dimension_ : w, base_h);
 	int new_list_height =
-	   std::min(static_cast<int>(list_->size()) * list_->get_lineheight(), max_list_height_);
+	   std::min(max_list_height_ / list_->get_lineheight(), std::min(list_->size(), max_list_items_)) * list_->get_lineheight();
 	list_->set_size((type_ != DropdownType::kPictorial && type_ != DropdownType::kPictorialMenu) ? w : list_width_, new_list_height);
 	set_desired_size(w, base_h);
 

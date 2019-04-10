@@ -77,7 +77,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                     width - 50,  // x
                     0,           // y
                     60,          // width of selection box
-                    800,         // height of selection box, shrinks automatically
+                    16,          // maximum number of items in the selection box, shrinks automatically
                     35,          // width/height of button
                     /** TRANSLATORS: Dropdown tooltip to select the AI difficulty when a player has
                        disconnected from a game */

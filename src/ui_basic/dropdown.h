@@ -55,7 +55,7 @@ protected:
 	/// \param x                  the x-position within 'parent'
 	/// \param y                  the y-position within 'parent'
 	/// \param list_w             the dropdown's width
-	/// \param list_h             the maximum height for the dropdown list
+	/// \param max_list_items     the maximum number of items shown in the list before it starts using a scrollbar
 	/// \param button_dimension   the width of the push button in textual dropdowns. For pictorial
 	/// dropdowns, this is both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
@@ -65,7 +65,7 @@ protected:
 	             int32_t x,
 	             int32_t y,
 	             uint32_t list_w,
-	             uint32_t list_h,
+	             uint32_t max_list_items,
 	             int button_dimension,
 	             const std::string& label,
 	             const DropdownType type,
@@ -122,6 +122,7 @@ public:
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
 
+	/// Set maximum available height in the UI
 	void set_height(int height);
 
 	/// Set the number of items to fit in the list
@@ -181,7 +182,8 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteDropdown>> subscriber_;
 
 	// Dimensions
-	int max_list_height_;
+	unsigned int max_list_items_;
+	unsigned int max_list_height_;
 	int list_width_;
 	int list_offset_x_;
 	int list_offset_y_;
@@ -207,7 +209,7 @@ public:
 	/// \param x                  the x-position within 'parent'
 	/// \param y                  the y-position within 'parent'
 	/// \param list_w             the dropdown's width
-	/// \param list_h             the maximum height for the dropdown list
+	/// \param max_list_items     the maximum number of items shown in the list before it starts using a scrollbar
 	/// \param button_dimension   the width of the push button in textual dropdowns. For pictorial
 	/// dropdowns, this is both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
@@ -218,13 +220,13 @@ public:
 	         int32_t x,
 	         int32_t y,
 	         uint32_t list_w,
-	         uint32_t list_h,
+	         uint32_t max_list_items,
 	         int button_dimension,
 	         const std::string& label,
 	         const DropdownType type,
 	         PanelStyle style,
 			 ButtonStyle button_style)
-	   : BaseDropdown(parent, x, y, list_w, list_h, button_dimension, label, type, style, button_style) {
+	   : BaseDropdown(parent, x, y, list_w, max_list_items, button_dimension, label, type, style, button_style) {
 	}
 	~Dropdown() {
 		entry_cache_.clear();
