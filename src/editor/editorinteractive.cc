@@ -103,11 +103,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      tools_(new Tools(e.map())),
      history_(nullptr)  // history needs the undo/redo buttons
 {
-	mainmenu_.set_image(g_gr->images().get("images/wui/menus/menu_toggle_menu.png"));
-	toolbar()->add(&mainmenu_);
-
-	toolmenu_.set_image(g_gr->images().get("images/wui/editor/editor_menu_toggle_tool_menu.png"));
-	toolbar()->add(&toolmenu_);
+	add_main_menu();
+	add_tool_menu();
 
 	add_toolbar_button(
 	   "wui/editor/editor_menu_set_toolsize_menu", "toolsize", _("Tool size"), &toolsizemenu_, true);
@@ -166,73 +163,6 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	helpmenu_.open_window = [this] { new EditorHelp(*this, helpmenu_, &egbase().lua()); };
 
 	adjust_toolbar_position();
-
-	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(_("New Map"), MainMenuEntry::kNewMap);
-	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(_("New Random Map"), MainMenuEntry::kNewRandomMap);
-	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(_("Load Map"), MainMenuEntry::kLoadMap);
-	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(_("Save Map"), MainMenuEntry::kSaveMap);
-	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions);
-	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor);
-	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
-
-	/** TRANSLATORS: An entry in the editor's tool menu */
-	toolmenu_.add(_("Change height"), ToolMenuEntry::kChangeHeight,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_height.png"), false,
-				  /** TRANSLATORS: Tooltip for the change height tool in the editor */
-				  _("Change the terrain height"));
-	/** TRANSLATORS: An entry in the editor's tool menu */
-	toolmenu_.add(_("Random height"), ToolMenuEntry::kRandomHeight,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_noise_height.png"), false,
-				  /** TRANSLATORS: Tooltip for the random height tool in the editor */
-				  _("Set the terrain height to random values"));
-	/** TRANSLATORS: An entry in the editor's tool menu */
-	toolmenu_.add(_("Terrain"), ToolMenuEntry::kTerrain,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_set_terrain.png"), false,
-				  /** TRANSLATORS: Tooltip for the terrain tool in the editor */
-				  _("Change the map’s terrain"));
-	/** TRANSLATORS: An entry in the editor's tool menu */
-	toolmenu_.add(_("Immovables"), ToolMenuEntry::kImmovables,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_place_immovable.png"), false,
-				  /** TRANSLATORS: Tooltip for the immovables tool in the editor */
-				  _("Add or remove immovables"));
-	/** TRANSLATORS: An entry in the editor's tool menu */
-	toolmenu_.add(_("Animals"), ToolMenuEntry::kAnimals,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_place_bob.png"), false,
-				  /** TRANSLATORS: Tooltip for the animals tool in the editor */
-				  _("Add or remove animals"));
-	/** TRANSLATORS: An entry in the editor's tool menu */
-	toolmenu_.add(_("Resources"), ToolMenuEntry::kResources,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_resources.png"), false,
-				  /** TRANSLATORS: Tooltip for the resources tool in the editor */
-				  _("Set or change resources"));
-	/** TRANSLATORS: An entry in the editor's tool menu */
-	toolmenu_.add(_("Port spaces"), ToolMenuEntry::kPortSpace,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_set_port_space.png"), false,
-				  /** TRANSLATORS: Tooltip for the port spaces tool in the editor */
-				  _("Add or remove port spaces"));
-	/** TRANSLATORS: An entry in the editor's tool menu */
-	toolmenu_.add(_("Map origin"), ToolMenuEntry::kMapOrigin,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_height.png"), false,
-				  /** TRANSLATORS: Tooltip for the map origin tool in the editor */
-				  _("Set the position that will have the coordinates (0, 0). This will be the top-left corner of a generated minimap."));
-	/** TRANSLATORS: An entry in the editor's tool menu */
-	toolmenu_.add(_("Map size"), ToolMenuEntry::kMapSize,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_resize.png"), false,
-				  /** TRANSLATORS: Tooltip for the map size tool in the editor */
-				  _("Change the map’s size"));
-	/** TRANSLATORS: An entry in the editor's tool menu */
-	toolmenu_.add(_("Information"), ToolMenuEntry::kFieldInfo,
-				  g_gr->images().get("images/wui/editor/fsel_editor_info.png"), false,
-				  /** TRANSLATORS: Tooltip for the map information tool in the editor */
-				  _("Click on a field to show information about it"));
-	toolmenu_.selected.connect([this] { tool_menu_selected(toolmenu_.get_selected()); });
-
 
 #ifndef NDEBUG
 	set_display_flag(InteractiveBase::dfDebug, true);
@@ -499,7 +429,26 @@ void EditorInteractive::stop_painting() {
 	is_painting_ = false;
 }
 
+void EditorInteractive::add_main_menu() {
+	mainmenu_.set_image(g_gr->images().get("images/wui/menus/menu_toggle_menu.png"));
+	/** TRANSLATORS: An entry in the editor's main menu */
+	mainmenu_.add(_("New Map"), MainMenuEntry::kNewMap);
+	/** TRANSLATORS: An entry in the editor's main menu */
+	mainmenu_.add(_("New Random Map"), MainMenuEntry::kNewRandomMap);
+	/** TRANSLATORS: An entry in the editor's main menu */
+	mainmenu_.add(_("Load Map"), MainMenuEntry::kLoadMap);
+	/** TRANSLATORS: An entry in the editor's main menu */
+	mainmenu_.add(_("Save Map"), MainMenuEntry::kSaveMap);
+	/** TRANSLATORS: An entry in the editor's main menu */
+	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions);
+	/** TRANSLATORS: An entry in the editor's main menu */
+	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor);
+	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
+	toolbar()->add(&mainmenu_);
+}
+
 void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
+	// NOCOM Use the toggle design from Interactive Gamebase
 	switch (entry) {
 	case MainMenuEntry::kNewMap: {
 		new MainMenuNewMap(*this);
@@ -520,6 +469,62 @@ void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
 		exit();
 	}
 	}
+}
+
+void EditorInteractive::add_tool_menu() {
+	toolmenu_.set_image(g_gr->images().get("images/wui/editor/editor_menu_toggle_tool_menu.png"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Change height"), ToolMenuEntry::kChangeHeight,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_height.png"), false,
+				  /** TRANSLATORS: Tooltip for the change height tool in the editor */
+				  _("Change the terrain height"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Random height"), ToolMenuEntry::kRandomHeight,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_noise_height.png"), false,
+				  /** TRANSLATORS: Tooltip for the random height tool in the editor */
+				  _("Set the terrain height to random values"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Terrain"), ToolMenuEntry::kTerrain,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_set_terrain.png"), false,
+				  /** TRANSLATORS: Tooltip for the terrain tool in the editor */
+				  _("Change the map’s terrain"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Immovables"), ToolMenuEntry::kImmovables,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_place_immovable.png"), false,
+				  /** TRANSLATORS: Tooltip for the immovables tool in the editor */
+				  _("Add or remove immovables"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Animals"), ToolMenuEntry::kAnimals,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_place_bob.png"), false,
+				  /** TRANSLATORS: Tooltip for the animals tool in the editor */
+				  _("Add or remove animals"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Resources"), ToolMenuEntry::kResources,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_resources.png"), false,
+				  /** TRANSLATORS: Tooltip for the resources tool in the editor */
+				  _("Set or change resources"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Port spaces"), ToolMenuEntry::kPortSpace,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_set_port_space.png"), false,
+				  /** TRANSLATORS: Tooltip for the port spaces tool in the editor */
+				  _("Add or remove port spaces"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Map origin"), ToolMenuEntry::kMapOrigin,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_height.png"), false,
+				  /** TRANSLATORS: Tooltip for the map origin tool in the editor */
+				  _("Set the position that will have the coordinates (0, 0). This will be the top-left corner of a generated minimap."));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Map size"), ToolMenuEntry::kMapSize,
+				  g_gr->images().get("images/wui/editor/editor_menu_tool_resize.png"), false,
+				  /** TRANSLATORS: Tooltip for the map size tool in the editor */
+				  _("Change the map’s size"));
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Information"), ToolMenuEntry::kFieldInfo,
+				  g_gr->images().get("images/wui/editor/fsel_editor_info.png"), false,
+				  /** TRANSLATORS: Tooltip for the map information tool in the editor */
+				  _("Click on a field to show information about it"));
+	toolmenu_.selected.connect([this] { tool_menu_selected(toolmenu_.get_selected()); });
+	toolbar()->add(&toolmenu_);
 }
 
 void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
@@ -570,6 +575,11 @@ void EditorInteractive::open_tool_window(UI::UniqueWindow::Registry& registry, T
 		//  Create window
 		new Menu(*this, tool, registry);
 	}
+}
+
+void EditorInteractive::adjust_toolbar_menus() {
+	mainmenu_.layout();
+	toolmenu_.layout();
 }
 
 void EditorInteractive::on_buildhelp_changed(const bool value) {

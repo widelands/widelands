@@ -189,8 +189,6 @@ wl_library(wui
     game_message_menu.h
     game_objectives_menu.cc
     game_objectives_menu.h
-    game_options_menu.cc
-    game_options_menu.h
     game_options_sound_menu.cc
     game_options_sound_menu.h
     game_summary.cc

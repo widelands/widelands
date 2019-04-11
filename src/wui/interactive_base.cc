@@ -229,6 +229,12 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 	set_tooltip("");
 }
 
+void InteractiveBase::adjust_toolbar_position() {
+	toolbar_.set_pos(Vector2i((get_inner_w() - toolbar_.get_w()) >> 1, get_inner_h() - 34));
+	adjust_toolbar_menus();
+}
+
+
 /*
  * Set the current sel selection radius.
  */

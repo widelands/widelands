@@ -129,6 +129,8 @@ public:
 	/// If this is a menu and nothing was selected yet, select the first item for easier keyboard navigation.
 	void toggle();
 
+	void layout() override;
+
 protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry
@@ -158,8 +160,6 @@ protected:
 	void think() override;
 
 private:
-	void layout() override;
-
 	/// Updates the buttons
 	void update();
 

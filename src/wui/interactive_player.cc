@@ -48,7 +48,6 @@
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_message_menu.h"
 #include "wui/game_objectives_menu.h"
-#include "wui/game_options_menu.h"
 #include "wui/game_statistics_menu.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/seafaring_statistics_menu.h"
@@ -163,9 +162,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
    : InteractiveGameBase(g, global_s, NONE, multiplayer),
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
      flag_to_connect_(Widelands::Coords::null()) {
-	add_toolbar_button(
-	   "wui/menus/menu_options_menu", "options_menu", _("Main menu"), &options_, true);
-	options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
+	add_main_menu();
 
 	add_toolbar_button(
 	   "wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"), &statisticsmenu_, true);

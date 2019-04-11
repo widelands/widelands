@@ -30,7 +30,6 @@
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_main_menu_save_game.h"
-#include "wui/game_options_menu.h"
 #include "wui/general_statistics_menu.h"
 
 /**
@@ -40,22 +39,8 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
                                            Section& global_s,
                                            bool const multiplayer)
    : InteractiveGameBase(g, global_s, OBSERVER, multiplayer) {
-	if (is_multiplayer()) {
-		add_toolbar_button(
-		   "wui/menus/menu_options_menu", "options_menu", _("Main menu"), &options_, true);
-		options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
+	add_main_menu();
 
-	} else {
-		UI::Button* button =
-		   add_toolbar_button("wui/menus/menu_exit_game", "exit_replay", _("Exit replay"));
-		button->sigclicked.connect(boost::bind(&InteractiveSpectator::exit_btn, this));
-
-		add_toolbar_button(
-		   "wui/menus/menu_save_game", "save_game", _("Save game"), &main_windows_.savegame, true);
-		main_windows_.savegame.open_window = [this] {
-			new GameMainMenuSaveGame(*this, main_windows_.savegame);
-		};
-	}
 	add_toolbar_button("wui/menus/menu_general_stats", "general_stats", _("Statistics"),
 	                   &main_windows_.general_stats, true);
 	main_windows_.general_stats.open_window = [this] {

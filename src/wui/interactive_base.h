@@ -218,9 +218,8 @@ protected:
 	const Image* get_sel_picture() {
 		return sel_.pic;
 	}
-	void adjust_toolbar_position() {
-		toolbar_.set_pos(Vector2i((get_inner_w() - toolbar_.get_w()) >> 1, get_inner_h() - 34));
-	}
+	void adjust_toolbar_position();
+	virtual void adjust_toolbar_menus() = 0;
 
 	ChatOverlay* chat_overlay() {
 		return chat_overlay_;

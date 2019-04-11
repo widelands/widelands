@@ -84,7 +84,6 @@ private:
 	UI::Button* toggle_message_menu_;
 
 	UI::UniqueWindow::Registry chat_;
-	UI::UniqueWindow::Registry options_;
 	UI::UniqueWindow::Registry statisticsmenu_;
 	UI::UniqueWindow::Registry objectives_;
 	UI::UniqueWindow::Registry encyclopedia_;

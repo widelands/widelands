@@ -55,7 +55,6 @@ private:
 
 private:
 	UI::UniqueWindow::Registry chat_;
-	UI::UniqueWindow::Registry options_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_SPECTATOR_H

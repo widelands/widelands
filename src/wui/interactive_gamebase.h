@@ -25,6 +25,7 @@
 
 #include "logic/game.h"
 #include "profile/profile.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/unique_window.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/interactive_base.h"
@@ -36,12 +37,8 @@ enum PlayerType { NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED };
 class InteractiveGameBase : public InteractiveBase {
 public:
 	struct GameMainMenuWindows {
-		UI::UniqueWindow::Registry loadgame;
 		UI::UniqueWindow::Registry savegame;
-		UI::UniqueWindow::Registry readme;
-		UI::UniqueWindow::Registry keys;
 		UI::UniqueWindow::Registry help;
-		UI::UniqueWindow::Registry license;
 		UI::UniqueWindow::Registry sound_options;
 
 		UI::UniqueWindow::Registry building_stats;
@@ -102,6 +99,8 @@ public:
 	void start() override;
 
 protected:
+	void add_main_menu();
+
 	void draw_overlay(RenderTarget&) override;
 
 	GameMainMenuWindows main_windows_;
@@ -115,6 +114,16 @@ protected:
 	UI::Button* reset_zoom_;
 
 private:
+	enum class MainMenuEntry {
+		kOptions,
+		kSaveMap,
+		kExitGame
+	};
+
+	void main_menu_selected(MainMenuEntry entry);
+
+	void adjust_toolbar_menus() override;
+
 	void on_buildhelp_changed(const bool value) override;
 	struct WantedBuildingWindow {
 		explicit WantedBuildingWindow(const Vector2i& pos,
@@ -126,6 +135,9 @@ private:
 		const bool minimize;
 		const bool show_workarea;
 	};
+
+	UI::Dropdown<MainMenuEntry> mainmenu_;
+
 	// Building coordinates, window position, whether the window was minimized
 	std::map<uint32_t, std::unique_ptr<const WantedBuildingWindow>> wanted_building_windows_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;

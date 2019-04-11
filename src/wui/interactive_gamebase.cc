@@ -39,6 +39,9 @@
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
 #include "wui/game_client_disconnected.h"
+#include "wui/game_exit_confirm_box.h"
+#include "wui/game_main_menu_save_game.h"
+#include "wui/game_options_sound_menu.h"
 #include "wui/game_summary.h"
 #include "wui/militarysitewindow.h"
 #include "wui/productionsitewindow.h"
@@ -65,7 +68,13 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
    : InteractiveBase(g, global_s),
      chat_provider_(nullptr),
      multiplayer_(multiplayer),
-     playertype_(pt) {
+     playertype_(pt),
+	 mainmenu_(
+		toolbar(), 0, 0, 34U, 10, 34U,
+		 /** TRANSLATORS: Title for the main menu button in the game */
+		 _("Main Menu"),
+		 UI::DropdownType::kPictorialMenu,
+		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) {
 		   switch (note.action) {
@@ -91,6 +100,51 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 			   break;
 		   }
 	   });
+}
+
+void InteractiveGameBase::add_main_menu() {
+	main_windows_.sound_options.open_window = [this] {
+		new GameOptionsSoundMenu(*this, main_windows_.sound_options);
+	};
+	main_windows_.savegame.open_window = [this] {
+		new GameMainMenuSaveGame(*this, main_windows_.savegame);
+	};
+
+	mainmenu_.set_image(g_gr->images().get("images/wui/menus/menu_options_menu.png"));
+	toolbar()->add(&mainmenu_);
+
+	/** TRANSLATORS: An entry in the game's main menu */
+	mainmenu_.add(_("Sound Options"), MainMenuEntry::kOptions, nullptr, false,
+				  /** TRANSLATORS: Tooltip for Sound Options in the game's main menu */
+				  _("Set sound effect and music options"));
+	/** TRANSLATORS: An entry in the game's main menu */
+	mainmenu_.add(_("Save Game"), MainMenuEntry::kSaveMap, g_gr->images().get("images/wui/menus/menu_save_game.png"));
+	/** TRANSLATORS: An entry in the game's main menu */
+	mainmenu_.add(_("Exit Game"), MainMenuEntry::kExitGame, g_gr->images().get("images/wui/menus/menu_exit_game.png"));
+	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
+}
+
+void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
+	switch (entry) {
+	case MainMenuEntry::kOptions: {
+		main_windows_.sound_options.toggle();
+	} break;
+	case MainMenuEntry::kSaveMap: {
+		main_windows_.savegame.toggle();
+	} break;
+	case MainMenuEntry::kExitGame: {
+		if (SDL_GetModState() & KMOD_CTRL) {
+			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+		} else {
+			new GameExitConfirmBox(*this, *this);
+		}
+	} break;
+	}
+}
+
+
+void InteractiveGameBase::adjust_toolbar_menus() {
+	mainmenu_.layout();
 }
 
 /// \return a pointer to the running \ref Game instance.
