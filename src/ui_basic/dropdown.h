@@ -125,9 +125,6 @@ public:
 	/// Set maximum available height in the UI
 	void set_height(int height);
 
-	/// Set the number of items to fit in the list
-	void set_max_items(int items);
-
 	/// Toggle the list on and off and position the mouse on the button so that the dropdown won't close on us.
 	/// If this is a menu and nothing was selected yet, select the first item for easier keyboard navigation.
 	void toggle();

@@ -160,10 +160,6 @@ void BaseDropdown::set_height(int height) {
 	layout();
 }
 
-void BaseDropdown::set_max_items(int items) {
-	max_list_items_ = items;
-}
-
 void BaseDropdown::layout() {
 	const int base_h = base_height(button_dimension_);
 	const int w = (type_ == DropdownType::kPictorial || type_ == DropdownType::kPictorialMenu) ? button_dimension_ : get_w();

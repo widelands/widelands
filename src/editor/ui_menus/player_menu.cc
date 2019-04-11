@@ -38,6 +38,7 @@
 
 namespace {
 constexpr int kMargin = 4;
+// Make room for 8 players
 // If this ever gets changed, don't forget to change the strings in the warning box as well.
 constexpr Widelands::PlayerNumber kMaxRecommendedPlayers = 8;
 }  // namespace
@@ -153,7 +154,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 	iterate_player_numbers(p, kMaxPlayers) {
 		const bool map_has_player = p <= nr_players;
 
-		no_of_players_.add(boost::lexical_cast<std::string>(static_cast<unsigned int>(p)), p);
+		no_of_players_.add(boost::lexical_cast<std::string>(static_cast<unsigned int>(p)), p, nullptr, p == nr_players);
 		no_of_players_.selected.connect(
 		   boost::bind(&EditorPlayerMenu::no_of_players_clicked, boost::ref(*this)));
 
@@ -214,8 +215,6 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		   std::unique_ptr<PlayerEditRow>(new PlayerEditRow(row, plr_name, plr_position, plr_tribe)));
 	}
 
-	// Make room for 8 players
-	no_of_players_.set_max_items(kMaxRecommendedPlayers);
 	no_of_players_.select(nr_players);
 
 	// Init button states
