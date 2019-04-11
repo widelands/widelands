@@ -181,8 +181,6 @@ wl_library(wui
     game_debug_ui.h
     game_exit_confirm_box.cc
     game_exit_confirm_box.h
-    game_statistics_menu.cc
-    game_statistics_menu.h
     game_main_menu_save_game.cc
     game_main_menu_save_game.h
     game_message_menu.cc

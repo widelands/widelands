@@ -74,6 +74,19 @@ public:
 	void popup_message(Widelands::MessageId, const Widelands::Message&);
 
 private:
+	enum class StatisticsMenuEntry {
+		kGeneral,
+		kWare,
+		kBuildings,
+		kStock,
+		kSeafaring
+	};
+
+	void add_statistics_menu();
+	void statistics_menu_selected(StatisticsMenuEntry entry);
+
+	void adjust_toolbar_menus() override;
+
 	void cmdSwitchPlayer(const std::vector<std::string>& args);
 
 	Widelands::PlayerNumber player_number_;
@@ -83,8 +96,9 @@ private:
 	UI::Button* toggle_chat_;
 	UI::Button* toggle_message_menu_;
 
+
+	UI::Dropdown<StatisticsMenuEntry> statisticsmenu_;
 	UI::UniqueWindow::Registry chat_;
-	UI::UniqueWindow::Registry statisticsmenu_;
 	UI::UniqueWindow::Registry objectives_;
 	UI::UniqueWindow::Registry encyclopedia_;
 	UI::UniqueWindow::Registry message_menu_;

@@ -48,7 +48,6 @@
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_message_menu.h"
 #include "wui/game_objectives_menu.h"
-#include "wui/game_statistics_menu.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/seafaring_statistics_menu.h"
 #include "wui/stock_menu.h"
@@ -161,14 +160,15 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                                      bool const multiplayer)
    : InteractiveGameBase(g, global_s, NONE, multiplayer),
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
-     flag_to_connect_(Widelands::Coords::null()) {
+     flag_to_connect_(Widelands::Coords::null()),
+	 statisticsmenu_(
+		toolbar(), 0, 0, 34U, 10, 34U,
+		 /** TRANSLATORS: Title for the statistics menu button in the game */
+		 _("Statistics"),
+		 UI::DropdownType::kPictorialMenu,
+		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary) {
 	add_main_menu();
-
-	add_toolbar_button(
-	   "wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"), &statisticsmenu_, true);
-	statisticsmenu_.open_window = [this] {
-		new GameStatisticsMenu(*this, statisticsmenu_, main_windows_);
-	};
+	add_statistics_menu();
 
 	toolbar()->add_space(15);
 
@@ -215,12 +215,75 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	adjust_toolbar_position();
 
-	main_windows_.stock.open_window = [this] { new StockMenu(*this, main_windows_.stock); };
-
 #ifndef NDEBUG  //  only in debug builds
 	addCommand("switchplayer", boost::bind(&InteractivePlayer::cmdSwitchPlayer, this, _1));
 #endif
 }
+
+
+void InteractivePlayer::add_statistics_menu() {
+	statisticsmenu_.set_image(g_gr->images().get("images/wui/menus/menu_toggle_menu.png"));
+	toolbar()->add(&statisticsmenu_);
+
+	main_windows_.general_stats.open_window = [this] {
+		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
+	};
+	/** TRANSLATORS: An entry in the game's statistics menu */
+	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral, g_gr->images().get("images/wui/menus/menu_general_stats.png"));
+
+	main_windows_.ware_stats.open_window = [this] {
+		new WareStatisticsMenu(*this, main_windows_.ware_stats);
+	};
+	/** TRANSLATORS: An entry in the game's statistics menu */
+	statisticsmenu_.add(_("Wares"), StatisticsMenuEntry::kWare, g_gr->images().get("images/wui/menus/menu_ware_stats.png"));
+
+	main_windows_.building_stats.open_window = [this] {
+		new BuildingStatisticsMenu(*this, main_windows_.building_stats);
+	};
+	/** TRANSLATORS: An entry in the game's statistics menu */
+	statisticsmenu_.add(_("Buildings"), StatisticsMenuEntry::kBuildings, g_gr->images().get("images/wui/menus/menu_building_stats.png"));
+
+	main_windows_.stock.open_window = [this] { new StockMenu(*this, main_windows_.stock); };
+	/** TRANSLATORS: An entry in the game's statistics menu */
+	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock, g_gr->images().get("images/wui/menus/menu_stock.png"));
+
+	// NOCOM this is broken, because it gets checked before the map was loaded. We need to fix this to become dynamic
+	if (egbase().map().allows_seafaring()) {
+		main_windows_.seafaring_stats.open_window = [this] {
+			new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
+		};
+		/** TRANSLATORS: An entry in the game's statistics menu */
+		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring, g_gr->images().get("images/wui/menus/start_expedition.png"));
+	}
+
+	statisticsmenu_.selected.connect([this] { statistics_menu_selected(statisticsmenu_.get_selected()); });
+}
+
+void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
+	switch (entry) {
+	case StatisticsMenuEntry::kGeneral: {
+		main_windows_.general_stats.toggle();
+	} break;
+	case StatisticsMenuEntry::kWare: {
+		main_windows_.ware_stats.toggle();
+	} break;
+	case StatisticsMenuEntry::kBuildings: {
+		main_windows_.building_stats.toggle();
+	} break;
+	case StatisticsMenuEntry::kStock: {
+		main_windows_.stock.toggle();
+	} break;
+	case StatisticsMenuEntry::kSeafaring: {
+		main_windows_.seafaring_stats.toggle();
+	} break;
+	}
+}
+
+void InteractivePlayer::adjust_toolbar_menus() {
+	InteractiveGameBase::adjust_toolbar_menus();
+	statisticsmenu_.layout();
+}
+
 
 void InteractivePlayer::think() {
 	InteractiveBase::think();

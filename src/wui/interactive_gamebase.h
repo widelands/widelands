@@ -101,6 +101,8 @@ public:
 protected:
 	void add_main_menu();
 
+	void adjust_toolbar_menus() override;
+
 	void draw_overlay(RenderTarget&) override;
 
 	GameMainMenuWindows main_windows_;
@@ -121,8 +123,6 @@ private:
 	};
 
 	void main_menu_selected(MainMenuEntry entry);
-
-	void adjust_toolbar_menus() override;
 
 	void on_buildhelp_changed(const bool value) override;
 	struct WantedBuildingWindow {
