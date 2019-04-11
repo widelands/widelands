@@ -261,37 +261,81 @@ std::string FileSystem::get_homedir() {
 	return homedir;
 }
 
-std::string FileSystem::get_xdgdir() {
-	std::string xdgdir;
-	xdgdir = get_homedir();
+#ifdef USE_XDG
+/**
+ * Return $XDG_DATA_HOME/widelands. Falls back to $HOME/.local/share/widelands
+ * https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+ * Prioritises $HOME/.widelands in case of existance.
+ */
+std::string FileSystem::get_userdatadir() {
+	std::string userdatadir;
+	userdatadir = get_homedir();
 
 	// Use dotfolder for backwards compatibility if it exists.
-	RealFSImpl dot(xdgdir);
+	RealFSImpl dot(userdatadir);
 	if (dot.is_directory(".widelands")) {
-		xdgdir = xdgdir + "/.widelands";
+		userdatadir = userdatadir + "/.widelands";
 	}
 #ifdef HAS_GETENV
 	else {
 		if (char const* const x = getenv("XDG_DATA_HOME")) {
-			xdgdir = x;
-			xdgdir = xdgdir + "/widelands";
+			userdatadir = x;
+			userdatadir = userdatadir + "/widelands";
 		}
 		else {
 			// If XDG_DATA_HOME is not set, the default path is used.
-			xdgdir = xdgdir + "/.local/share/widelands";
+			userdatadir = userdatadir + "/.local/share/widelands";
 		}
 	}
 #else
 	else {
 		// Fallback to not dump all files into the current working dir.
-		xdgdir = xdgdir + "/.widelands";
+		userdatadir = userdatadir + "/.widelands";
 	}
 #endif
 
-	// Unlike the other function, this function returns the program name
-	// with. This is handled in 'src/wlapplication.cc'.
-	return xdgdir;
+	// Unlike the homedir function, this function includes the program name.
+	// This is handled in 'src/wlapplication.cc'.
+	return userdatadir;
 }
+
+/**
+ * Return $XDG_CONFIG_HOME/widelands. Falls back to $HOME/.config/widelands
+ * https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+ * Prioritises $HOME/.widelands in case of existance.
+ */
+std::string FileSystem::get_userconfigdir() {
+	std::string userconfigdir;
+	userconfigdir = get_homedir();
+
+	// Use dotfolder for backwards compatibility if it exists.
+	RealFSImpl dot(userconfigdir);
+	if (dot.is_directory(".widelands")) {
+		userconfigdir = userconfigdir + "/.widelands";
+	}
+#ifdef HAS_GETENV
+	else {
+		if (char const* const x = getenv("XDG_CONFIG_HOME")) {
+			userconfigdir = x;
+			userconfigdir = userconfigdir + "/widelands";
+		}
+		else {
+			// If XDG_CONFIG_HOME is not set, the default path is used.
+			userconfigdir = userconfigdir + "/.config/widelands";
+		}
+	}
+#else
+	else {
+		// Fallback to not dump all files into the current working dir.
+		userconfigdir = userconfigdir + "/.widelands";
+	}
+#endif
+
+	// Unlike the homedir function, this function includes the program name.
+	// This is handled in 'src/wlapplication.cc'.
+	return userconfigdir;
+}
+#endif
 
 /**
  * Split a string into components separated by a certain character.

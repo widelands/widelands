@@ -196,6 +196,13 @@ struct WLApplication {
 	void replay();
 	static void emergency_save(Widelands::Game&);
 
+#ifdef USE_XDG
+	// this is only for src/ui_fsmenu/options.cc
+	std::string get_userconfigdir() {
+		return userconfigdir_;
+	}
+#endif
+
 private:
 	WLApplication(int argc, char const* const* argv);
 
@@ -259,6 +266,9 @@ private:
 	bool should_die_;
 
 	std::string homedir_;
+#ifdef USE_XDG
+	std::string userconfigdir_;
+#endif
 
 	/// flag indicating if stdout and stderr have been redirected
 	bool redirected_stdio_;

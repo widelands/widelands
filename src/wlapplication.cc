@@ -307,7 +307,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 #elif USE_XDG
      // To enable backwards compatibility, the program name is passed with the
      // path.
-     homedir_(FileSystem::get_xdgdir()),
+     homedir_(FileSystem::get_userdatadir()),
+     userconfigdir_(FileSystem::get_userconfigdir()),
 #else
      homedir_(FileSystem::get_homedir() + "/.widelands"),
 #endif
@@ -731,9 +732,14 @@ void WLApplication::refresh_graphics() {
  * parameters sensible default values
  */
 bool WLApplication::init_settings() {
-
 	// Read in the configuration file
+#ifdef USE_XDG
+	RealFSImpl userconfigdir(userconfigdir_);
+	userconfigdir.ensure_directory_exists(".");
+	g_options.read(kConfigFile.c_str(), "global", userconfigdir);
+#else
 	g_options.read(kConfigFile.c_str(), "global");
+#endif
 	Section& s = g_options.pull_section("global");
 
 	// Then parse the commandline - overwrites conffile settings
@@ -816,7 +822,11 @@ bool WLApplication::init_settings() {
 	// Save configuration now. Otherwise, the UUID is not saved
 	// when the game crashes, loosing part of its advantage
 	try {
+#ifdef USE_XDG
+		g_options.write("config", false, userconfigdir);
+#else
 		g_options.write("config", false);
+#endif
 	} catch (const std::exception& e) {
 		log("WARNING: could not save configuration: %s\n", e.what());
 	} catch (...) {
@@ -852,7 +862,12 @@ void WLApplication::shutdown_settings() {
 	i18n::release_textdomain();
 
 	try {  //  overwrite the old config file
+#ifdef USE_XDG
+        RealFSImpl userconfigdir(userconfigdir_);
+		g_options.write(kConfigFile.c_str(), true, userconfigdir);
+#else
 		g_options.write(kConfigFile.c_str(), true);
+#endif
 	} catch (const std::exception& e) {
 		log("WARNING: could not save configuration: %s\n", e.what());
 	} catch (...) {

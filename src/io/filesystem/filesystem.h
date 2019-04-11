@@ -131,7 +131,13 @@ public:
 	/// Given a filename, return the name with any path or extension stripped off.
 	static std::string filename_without_ext(const char* n);
 	static std::string get_homedir();
-	static std::string get_xdgdir();
+
+#ifdef USE_XDG
+	// Get XDG dirs for Linux
+	// https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+	static std::string get_userdatadir();
+	static std::string get_userconfigdir();
+#endif
 
 	virtual unsigned long long disk_space() = 0;
 

@@ -30,8 +30,6 @@ print_help () {
     echo " "
     echo "-h or --help          Print this help."
     echo " "
-    echo "--with-xdg            Enable support for the XDG Base Directory Specification."
-    echo " "
     echo "Omission options:"
     echo " "
     echo "-w or --no-website    Omit building of website binaries."
@@ -42,6 +40,8 @@ print_help () {
     echo "-a or --no-asan       If in debug mode, switch off the AddressSanitizer."
     echo "                      Release builds are created without AddressSanitizer"
     echo "                      by default."
+    echo " "
+    echo "--with-xdg            Enable support for the XDG Base Directory Specification."
     echo " "
     echo "Compiler options:"
     echo " "
@@ -199,6 +199,8 @@ if [ $USE_XDG = "ON" ]; then
   echo "if no existing \$HOME/.widelands folder is found."
   echo "The widelands user data can be found in \$XDG_DATA_HOME/widelands"
   echo "and defaults to \$HOME/.local/share/widelands."
+  echo "The widelands user configuration can be found in \$XDG_CONFIG_HOME/widelands"
+  echo "and defaults to \$HOME/.config/widelands."
   echo "See https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
   echo "for more information."
   echo " "
@@ -355,7 +357,12 @@ if [ $BUILD_TRANSLATIONS = "ON" ]; then
 else
   echo "# - No translations                                       #"
 fi
-
+if [ $USE_XDG = "ON" ]; then
+  echo "# - With support for the XDG Base Directory Specification #"
+else
+  echo "# - Without support for the XDG Base Directory            #"
+  echo "#   Specification.                                        #"
+fi
 if [ $BUILD_WEBSITE = "ON" ]; then
   echo "# - Website-related executables                           #"
 else
