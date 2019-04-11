@@ -163,6 +163,13 @@ public:
 	// displayed at 'panel_pixel' unchanging, i.e. the center of the zoom.
 	void zoom_around(float new_zoom, const Vector2f& panel_pixel, const Transition& transition);
 
+	// Reset the zoom to 1.0f
+	void reset_zoom();
+	// Zoom in a bit
+	void increase_zoom();
+	// Zoom out a bit
+	void decrease_zoom();
+
 	// True if the user is currently dragging the map.
 	bool is_dragging() const;
 

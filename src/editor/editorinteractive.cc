@@ -137,15 +137,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	toolbar()->add_space(15);
 
-	add_toolbar_button(
-	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
-	minimap_registry().open_window = [this] { toggle_minimap(); };
-
-	auto zoom = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
-	zoom->sigclicked.connect([this] {
-		map_view()->zoom_around(
-		   1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
-	});
+	add_mapview_menu(MiniMapType::kStaticMap);
 
 	toolbar()->add_space(15);
 
@@ -173,8 +165,6 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		map_clicked(node_and_triangle, false);
 	});
-
-	minimap_registry().minimap_type = MiniMapType::kStaticMap;
 }
 
 void EditorInteractive::load(const std::string& filename) {
@@ -578,6 +568,7 @@ void EditorInteractive::open_tool_window(UI::UniqueWindow::Registry& registry, T
 }
 
 void EditorInteractive::adjust_toolbar_menus() {
+	InteractiveBase::adjust_toolbar_menus();
 	mainmenu_.layout();
 	toolmenu_.layout();
 }
@@ -691,10 +682,6 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_l:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				new MainMenuLoadMap(*this);
-			return true;
-
-		case SDLK_m:
-			minimap_registry().toggle();
 			return true;
 
 		case SDLK_p:

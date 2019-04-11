@@ -97,6 +97,12 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      // Initialize chatoveraly before the toolbar so it is below
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(this, 0, 0, UI::Box::Horizontal),
+	 mapviewmenu_(
+		toolbar(), 0, 0, 34U, 10, 34U,
+		 /** TRANSLATORS: Title for the map view menu button in the game */
+		 _("Map View"),
+		 UI::DropdownType::kPictorialMenu,
+		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
      quick_navigation_(&map_view_),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
@@ -109,7 +115,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      avg_usframetime_(0),
      buildroad_(nullptr),
      road_build_player_(0),
-     unique_window_handler_(new UniqueWindowHandler()),
+	 unique_window_handler_(new UniqueWindowHandler()),
      // Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
      workarea_pics_{g_gr->images().get("images/wui/overlays/workarea123.png"),
                     g_gr->images().get("images/wui/overlays/workarea23.png"),
@@ -193,6 +199,48 @@ InteractiveBase::~InteractiveBase() {
 	}
 }
 
+
+void InteractiveBase::add_mapview_menu(MiniMapType minimap_type) {
+	mapviewmenu_.set_image(g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"));
+	toolbar()->add(&mapviewmenu_);
+
+	minimap_registry_.open_window = [this] { toggle_minimap(); };
+	minimap_registry_.minimap_type = minimap_type;
+	/** TRANSLATORS: An entry in the game's map view menu */
+	mapviewmenu_.add(_("Minimap"), MapviewMenuEntry::kMinimap, g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"));
+
+	/** TRANSLATORS: An entry in the game's map view menu */
+	mapviewmenu_.add(_("Zoom +"), MapviewMenuEntry::kIncreaseZoom, g_gr->images().get("images/wui/menus/menu_increase_zoom.png"));
+
+	/** TRANSLATORS: An entry in the game's map view menu */
+	mapviewmenu_.add(_("Reset zoom"), MapviewMenuEntry::kResetZoom, g_gr->images().get("images/wui/menus/menu_reset_zoom.png"));
+
+	/** TRANSLATORS: An entry in the game's map view menu */
+	mapviewmenu_.add(_("Zoom -"), MapviewMenuEntry::kDecreaseZoom, g_gr->images().get("images/wui/menus/menu_decrease_zoom.png"));
+
+	mapviewmenu_.selected.connect([this] { mapview_menu_selected(mapviewmenu_.get_selected()); });
+
+}
+
+// NOCOM document all the new functions
+void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
+	switch (entry) {
+	case MapviewMenuEntry::kMinimap : {
+		minimap_registry_.toggle();
+	} break;
+	case MapviewMenuEntry::kDecreaseZoom : {
+		map_view()->decrease_zoom();
+	} break;
+	case MapviewMenuEntry::kIncreaseZoom : {
+		map_view()->increase_zoom();
+	} break;
+
+	case MapviewMenuEntry::kResetZoom : {
+		map_view()->reset_zoom();
+	} break;
+	}
+}
+
 const InteractiveBase::BuildhelpOverlay*
 InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
 	const int buildhelp_overlay_index = caps_to_buildhelp(caps);
@@ -232,6 +280,11 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 void InteractiveBase::adjust_toolbar_position() {
 	toolbar_.set_pos(Vector2i((get_inner_w() - toolbar_.get_w()) >> 1, get_inner_h() - 34));
 	adjust_toolbar_menus();
+}
+
+
+void InteractiveBase::adjust_toolbar_menus() {
+	mapviewmenu_.layout();
 }
 
 
@@ -524,17 +577,6 @@ void InteractiveBase::set_landmark(size_t key, const MapView::View& landmark_vie
  */
 void InteractiveBase::hide_minimap() {
 	minimap_registry_.destroy();
-}
-
-/**
-===========
-InteractiveBase::minimap_registry()
-
-Exposes the Registry object of the minimap to derived classes
-===========
-*/
-MiniMap::Registry& InteractiveBase::minimap_registry() {
-	return minimap_registry_;
 }
 
 /*
@@ -893,6 +935,9 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			   this, debugconsole_, *DebugConsole::get_chat_provider());
 			return true;
 #endif
+		case SDLK_m:
+			toggle_minimap();
+			return true;
 		default:
 			break;
 		}

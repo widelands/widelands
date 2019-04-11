@@ -40,6 +40,9 @@ constexpr int kNumKeyFrames = 102;
 // value is used for automatic movements and for user controlled zoom.
 constexpr float kMaxZoom = 4.f;
 
+// Step size for zooming by keypress or UI button
+constexpr float kZoomPercentPerKeyPress = 0.10f;
+
 // The time used for panning automated map movement only.
 constexpr float kShortAnimationMs = 500.f;
 
@@ -547,6 +550,19 @@ void MapView::zoom_around(float new_zoom,
 	NEVER_HERE();
 }
 
+
+void MapView::reset_zoom() {
+	zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+}
+void MapView::increase_zoom() {
+	zoom_around(animation_target_view().view.zoom - kZoomPercentPerKeyPress,
+				Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+}
+void MapView::decrease_zoom() {
+	zoom_around(animation_target_view().view.zoom + kZoomPercentPerKeyPress,
+				Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+}
+
 bool MapView::is_dragging() const {
 	return dragging_;
 }
@@ -571,18 +587,15 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 		return false;
 	}
 
-	constexpr float kPercentPerKeyPress = 0.10f;
 	switch (code.sym) {
 	case SDLK_PLUS:
-		zoom_around(animation_target_view().view.zoom - kPercentPerKeyPress,
-		            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+		increase_zoom();
 		return true;
 	case SDLK_MINUS:
-		zoom_around(animation_target_view().view.zoom + kPercentPerKeyPress,
-		            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+		decrease_zoom();
 		return true;
 	case SDLK_0:
-		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+		reset_zoom();
 		return true;
 	default:
 		return false;

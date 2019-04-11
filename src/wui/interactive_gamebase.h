@@ -113,7 +113,6 @@ protected:
 	UI::UniqueWindow::Registry game_summary_;
 	UI::UniqueWindow::Registry client_disconnected_;
 	UI::Button* toggle_buildhelp_;
-	UI::Button* reset_zoom_;
 
 private:
 	enum class MainMenuEntry {

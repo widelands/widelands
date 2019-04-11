@@ -49,19 +49,11 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 
 	toolbar()->add_space(15);
 
-	add_toolbar_button(
-	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
-	minimap_registry().open_window = [this] { toggle_minimap(); };
+	add_mapview_menu(MiniMapType::kStaticViewWindow);
 
 	toggle_buildhelp_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show building spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
-
-	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
-	reset_zoom_->sigclicked.connect([this] {
-		map_view()->zoom_around(
-		   1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
-	});
 
 	toolbar()->add_space(15);
 
@@ -208,10 +200,6 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
 		switch (code.sym) {
 		case SDLK_SPACE:
 			toggle_buildhelp();
-			return true;
-
-		case SDLK_m:
-			minimap_registry().toggle();
 			return true;
 
 		case SDLK_c:

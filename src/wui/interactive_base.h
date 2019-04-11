@@ -32,6 +32,7 @@
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/box.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/chat_overlay.h"
@@ -171,6 +172,16 @@ public:
 	}
 
 protected:
+	enum class MapviewMenuEntry {
+		kMinimap,
+		kIncreaseZoom,
+		kDecreaseZoom,
+		kResetZoom
+	};
+
+	void add_mapview_menu(MiniMapType minimap_type);
+	void mapview_menu_selected(MapviewMenuEntry entry);
+
 	/// Adds a toolbar button to the toolbar
 	/// \param image_basename:      File path for button image starting from 'images' and without
 	///                             file extension
@@ -188,8 +199,6 @@ protected:
 	virtual void on_buildhelp_changed(bool value);
 
 	void hide_minimap();
-
-	MiniMap::Registry& minimap_registry();
 
 	void mainview_move();
 
@@ -219,7 +228,7 @@ protected:
 		return sel_.pic;
 	}
 	void adjust_toolbar_position();
-	virtual void adjust_toolbar_menus() = 0;
+	virtual void adjust_toolbar_menus();
 
 	ChatOverlay* chat_overlay() {
 		return chat_overlay_;
@@ -277,6 +286,7 @@ private:
 	ChatOverlay* chat_overlay_;
 
 	UI::Box toolbar_;
+	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;
 	// No unique_ptr on purpose: 'minimap_' is a UniqueWindow, its parent will
 	// delete it.
 	MiniMap* minimap_;

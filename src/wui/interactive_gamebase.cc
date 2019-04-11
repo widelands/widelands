@@ -103,24 +103,26 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 }
 
 void InteractiveGameBase::add_main_menu() {
-	main_windows_.sound_options.open_window = [this] {
-		new GameOptionsSoundMenu(*this, main_windows_.sound_options);
-	};
-	main_windows_.savegame.open_window = [this] {
-		new GameMainMenuSaveGame(*this, main_windows_.savegame);
-	};
-
 	mainmenu_.set_image(g_gr->images().get("images/wui/menus/menu_options_menu.png"));
 	toolbar()->add(&mainmenu_);
 
+	main_windows_.sound_options.open_window = [this] {
+		new GameOptionsSoundMenu(*this, main_windows_.sound_options);
+	};
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Sound Options"), MainMenuEntry::kOptions, nullptr, false,
 				  /** TRANSLATORS: Tooltip for Sound Options in the game's main menu */
 				  _("Set sound effect and music options"));
+
+	main_windows_.savegame.open_window = [this] {
+		new GameMainMenuSaveGame(*this, main_windows_.savegame);
+	};
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Save Game"), MainMenuEntry::kSaveMap, g_gr->images().get("images/wui/menus/menu_save_game.png"));
+
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Exit Game"), MainMenuEntry::kExitGame, g_gr->images().get("images/wui/menus/menu_exit_game.png"));
+
 	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
 }
 
@@ -144,6 +146,7 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 
 
 void InteractiveGameBase::adjust_toolbar_menus() {
+	InteractiveBase::adjust_toolbar_menus();
 	mainmenu_.layout();
 }
 
