@@ -236,6 +236,10 @@ std::string as_content(const std::string& txt, UI::PanelStyle style) {
 	NEVER_HERE();
 }
 
+std::string as_text_with_hotkey(const std::string& text, const std::string& hotkey) {
+	return (boost::format("%1% <font bold=0 italic=1>(%2%)</font>") % text % hotkey).str();
+}
+
 std::shared_ptr<const UI::RenderedText>
 autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
 	std::shared_ptr<const UI::RenderedText> result =

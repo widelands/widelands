@@ -242,13 +242,13 @@ void InteractivePlayer::add_statistics_menu() {
 	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock, g_gr->images().get("images/wui/menus/menu_stock.png"));
 
 	// NOCOM this is broken, because it gets checked before the map was loaded. We need to fix this to become dynamic
-	if (egbase().map().allows_seafaring()) {
+	// if (egbase().map().allows_seafaring()) {
 		main_windows_.seafaring_stats.open_window = [this] {
 			new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
 		};
 		/** TRANSLATORS: An entry in the game's statistics menu */
-		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring, g_gr->images().get("images/wui/menus/start_expedition.png"));
-	}
+		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring, g_gr->images().get("images/wui/buildings/start_expedition.png"));
+	// }
 
 	statisticsmenu_.selected.connect([this] { statistics_menu_selected(statisticsmenu_.get_selected()); });
 }
@@ -268,7 +268,9 @@ void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
 		main_windows_.stock.toggle();
 	} break;
 	case StatisticsMenuEntry::kSeafaring: {
-		main_windows_.seafaring_stats.toggle();
+		if (egbase().map().allows_seafaring()) {
+			main_windows_.seafaring_stats.toggle();
+		}
 	} break;
 	}
 }

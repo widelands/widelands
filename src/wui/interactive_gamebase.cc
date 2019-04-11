@@ -102,6 +102,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 	   });
 }
 
+// NOCOM adjust tutorials to the new menus
 void InteractiveGameBase::add_main_menu() {
 	mainmenu_.set_image(g_gr->images().get("images/wui/menus/menu_options_menu.png"));
 	toolbar()->add(&mainmenu_);
