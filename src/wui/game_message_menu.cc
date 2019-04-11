@@ -131,7 +131,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	                  g_gr->images().get("images/wui/menus/menu_goto.png"),
 	                  as_text_with_hotkey(
 	                   /** TRANSLATORS: Tooltip in the messages window */
-	                   _("Center main mapview on location"), pgettext("hotkey", "g")));
+	                   _("Center main mapview on location"), "g"));
 	centerviewbtn_->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
 	centerviewbtn_->set_enabled(false);
 

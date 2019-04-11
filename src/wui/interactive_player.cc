@@ -235,11 +235,11 @@ void InteractivePlayer::add_statistics_menu() {
 		new BuildingStatisticsMenu(*this, main_windows_.building_stats);
 	};
 	/** TRANSLATORS: An entry in the game's statistics menu */
-	statisticsmenu_.add(_("Buildings"), StatisticsMenuEntry::kBuildings, g_gr->images().get("images/wui/menus/menu_building_stats.png"));
+	statisticsmenu_.add(as_text_with_hotkey(_("Buildings"), "b"), StatisticsMenuEntry::kBuildings, g_gr->images().get("images/wui/menus/menu_building_stats.png"));
 
 	main_windows_.stock.open_window = [this] { new StockMenu(*this, main_windows_.stock); };
 	/** TRANSLATORS: An entry in the game's statistics menu */
-	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock, g_gr->images().get("images/wui/menus/menu_stock.png"));
+	statisticsmenu_.add(as_text_with_hotkey(_("Stock"), "i"), StatisticsMenuEntry::kStock, g_gr->images().get("images/wui/menus/menu_stock.png"));
 
 	// NOCOM this is broken, because it gets checked before the map was loaded. We need to fix this to become dynamic
 	// if (egbase().map().allows_seafaring()) {
@@ -247,7 +247,7 @@ void InteractivePlayer::add_statistics_menu() {
 			new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
 		};
 		/** TRANSLATORS: An entry in the game's statistics menu */
-		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring, g_gr->images().get("images/wui/buildings/start_expedition.png"));
+		statisticsmenu_.add(as_text_with_hotkey(_("Seafaring"), "e"), StatisticsMenuEntry::kSeafaring, g_gr->images().get("images/wui/buildings/start_expedition.png"));
 	// }
 
 	statisticsmenu_.selected.connect([this] { statistics_menu_selected(statisticsmenu_.get_selected()); });

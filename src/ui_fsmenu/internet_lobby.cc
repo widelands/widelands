@@ -234,7 +234,7 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 			if (game.name == localservername) {
 				hostgame_.set_enabled(false);
 			}
-			opengames_list_.add(game.name, game, pic, false, game.build_id);
+			opengames_list_.add(richtext_escape(game.name), game, pic, false, game.build_id);
 		}
 	}
 }

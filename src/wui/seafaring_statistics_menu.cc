@@ -99,7 +99,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                UI::ButtonStyle::kWuiPrimary,
                g_gr->images().get("images/wui/menus/menu_watch_follow.png"),
                 /** TRANSLATORS: Tooltip in the seafaring statistics window */
-                as_text_with_hotkey(_("Watch the selected ship"), pgettext("hotkey", "w"))),
+                as_text_with_hotkey(_("Watch the selected ship"), "w")),
      openwindowbtn_(
         &navigation_box_,
         "seafaring_stats_watch_button",
@@ -112,7 +112,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
         (boost::format("%s<br>%s") %
 		  as_text_with_hotkey(
           /** TRANSLATORS: Tooltip in the seafaring statistics window */
-          _("Open the selected ship’s window"), pgettext("hotkey", "o")) %
+          _("Open the selected ship’s window"), "o") %
 		  as_text_with_hotkey(
           /** TRANSLATORS: Tooltip in the seafaring statistics window */
           _("Go to the selected ship and open its window"), pgettext("hotkey", "CTRL+o")))
@@ -127,7 +127,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
                     as_text_with_hotkey(
                      /** TRANSLATORS: Tooltip in the seafaring statistics window */
-                     _("Center the map on the selected ship"), pgettext("hotkey", "g"))),
+                     _("Center the map on the selected ship"), "g")),
      table_(&main_box_, 0, 0, get_inner_w() - 2 * kPadding, 100, UI::PanelStyle::kWui) {
 
 	const Widelands::TribeDescr& tribe = iplayer().player().tribe();
