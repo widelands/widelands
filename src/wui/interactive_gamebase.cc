@@ -110,7 +110,7 @@ void InteractiveGameBase::add_main_menu() {
 		new GameOptionsSoundMenu(*this, main_windows_.sound_options);
 	};
 	/** TRANSLATORS: An entry in the game's main menu */
-	mainmenu_.add(_("Sound Options"), MainMenuEntry::kOptions, nullptr, false,
+	mainmenu_.add(_("Sound Options"), MainMenuEntry::kOptions, g_gr->images().get("images/wui/menus/menu_sound_options.png"), false,
 				  /** TRANSLATORS: Tooltip for Sound Options in the game's main menu */
 				  _("Set sound effect and music options"));
 
