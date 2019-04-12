@@ -140,6 +140,7 @@ private:
 
 	void main_menu_selected(MainMenuEntry entry);
 	void showhide_menu_selected(ShowHideEntry entry);
+	void rebuild_showhide_menu() override;
 	void gamespeed_menu_selected(GameSpeedEntry entry);
 	void rebuild_gamespeed_menu();
 

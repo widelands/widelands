@@ -163,19 +163,28 @@ void InteractiveGameBase::add_showhide_menu() {
 	showhidemenu_.set_image(g_gr->images().get("images/wui/menus/toggle_buildhelp.png"));
 	toolbar()->add(&showhidemenu_);
 
-	showhidemenu_.add(_("Building Spaces"), ShowHideEntry::kBuildingSpaces, g_gr->images().get("images/wui/menus/toggle_buildhelp.png"), false,
-				  /** TRANSLATORS: Tooltip for Building Spaces in the game's show/hide menu */
-				  _("Show building spaces (on/off)"), pgettext("hotkey", "Space"));
-
-	showhidemenu_.add(_("Census"), ShowHideEntry::kCensus, g_gr->images().get("images/wui/menus/toggle_census.png"), false,
-				  /** TRANSLATORS: Tooltip for Census in the game's show/hide menu */
-				  _("Toggle building label display"), "c");
-
-	showhidemenu_.add(_("Statistics"), ShowHideEntry::kStatistics, g_gr->images().get("images/wui/menus/toggle_statistics.png"), false,
-				  /** TRANSLATORS: Tooltip for Census in the game's show/hide menu */
-				  _("Toggle building statistics display"), "s");
-
+	rebuild_showhide_menu();
 	showhidemenu_.selected.connect([this] { showhide_menu_selected(showhidemenu_.get_selected()); });
+}
+
+void InteractiveGameBase::rebuild_showhide_menu() {
+	showhidemenu_.clear();
+
+	// NOCOM change basic control tutorial
+	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building spaces are shown */
+	showhidemenu_.add(buildhelp() ? _("Hide Building Spaces") : _("Show Building Spaces"),
+					  ShowHideEntry::kBuildingSpaces, g_gr->images().get("images/wui/menus/toggle_buildhelp.png"),
+					  false, "", pgettext("hotkey", "Space"));
+
+	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building names are shown */
+	showhidemenu_.add(get_display_flag(dfShowCensus) ? _("Hide Census") : _("Show Census"),
+					  ShowHideEntry::kCensus, g_gr->images().get("images/wui/menus/toggle_census.png"),
+					  false, "", "c");
+
+	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building staristics are shown */
+	showhidemenu_.add(get_display_flag(dfShowStatistics) ? _("Hide Statistics") : _("Show Statistics"),
+					  ShowHideEntry::kStatistics, g_gr->images().get("images/wui/menus/toggle_statistics.png"),
+					  false, "", "s");
 }
 
 void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
@@ -190,6 +199,7 @@ void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
 		set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
 	} break;
 	}
+	rebuild_showhide_menu();
 }
 
 

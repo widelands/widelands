@@ -227,6 +227,7 @@ protected:
 	void adjust_toolbar_position();
 	virtual void adjust_toolbar_menus();
 
+
 	ChatOverlay* chat_overlay() {
 		return chat_overlay_;
 	}
@@ -259,6 +260,8 @@ private:
 	void roadb_remove_overlay();
 	void cmd_map_object(const std::vector<std::string>& args);
 	void cmd_lua(const std::vector<std::string>& args);
+
+	virtual void rebuild_showhide_menu() = 0;
 
 	struct SelData {
 		SelData(const bool Freeze = false,

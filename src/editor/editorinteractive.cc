@@ -310,24 +310,33 @@ void EditorInteractive::add_showhide_menu() {
 	showhidemenu_.set_image(g_gr->images().get("images/wui/menus/toggle_buildhelp.png"));
 	toolbar()->add(&showhidemenu_);
 
-	showhidemenu_.add(_("Building Spaces"), ShowHideEntry::kBuildingSpaces, g_gr->images().get("images/wui/menus/toggle_buildhelp.png"), false,
-				  /** TRANSLATORS: Tooltip for Building Spaces in the editor's show/hide menu */
-				  _("Show building spaces (on/off)"), pgettext("hotkey", "Space"));
-
-	showhidemenu_.add(_("Immovables"), ShowHideEntry::kImmovables, g_gr->images().get("images/wui/menus/toggle_immovables.png"), false,
-				  /** TRANSLATORS: Tooltip for Immovables in the editor's show/hide menu */
-				  _("Show immovables (on/off)"));
-
-	showhidemenu_.add(_("Animals"), ShowHideEntry::kAnimals, g_gr->images().get("images/wui/menus/toggle_bobs.png"), false,
-				  /** TRANSLATORS: Tooltip for Animals in the editor's show/hide menu */
-				  _("Show animals (on/off)"));
-
-	showhidemenu_.add(_("Resources"), ShowHideEntry::kResources, g_gr->images().get("images/wui/menus/toggle_resources.png"), false,
-				  /** TRANSLATORS: Tooltip for Resources in the editor's show/hide menu */
-				  _("Show resources (on/off)"));
+	rebuild_showhide_menu();
 
 	showhidemenu_.selected.connect([this] { showhide_menu_selected(showhidemenu_.get_selected()); });
 }
+
+void EditorInteractive::rebuild_showhide_menu() {
+	showhidemenu_.clear();
+
+	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether building spaces are shown */
+	showhidemenu_.add(buildhelp() ? _("Hide Building Spaces") : _("Show Building Spaces"),
+					  ShowHideEntry::kBuildingSpaces, g_gr->images().get("images/wui/menus/toggle_buildhelp.png"),
+					  false, "", pgettext("hotkey", "Space"));
+
+	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether immovables (trees, rocks etc.) are shown */
+	showhidemenu_.add(draw_immovables_ ? _("Hide Immovables") : _("Show Immovables"), ShowHideEntry::kImmovables,
+					  g_gr->images().get("images/wui/menus/toggle_immovables.png"));
+
+	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether animals are shown */
+	showhidemenu_.add(draw_bobs_ ? _("Hide Animals") : _("Show Animals"), ShowHideEntry::kAnimals,
+					  g_gr->images().get("images/wui/menus/toggle_bobs.png"));
+
+	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether resources are shown */
+	showhidemenu_.add(draw_resources_ ? _("Hide Resources") : _("Show Resources"), ShowHideEntry::kResources,
+					  g_gr->images().get("images/wui/menus/toggle_resources.png"));
+
+}
+
 void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 	switch (entry) {
 	case ShowHideEntry::kBuildingSpaces: {
@@ -343,6 +352,7 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 		toggle_resources();
 	} break;
 	}
+	rebuild_showhide_menu();
 }
 
 void EditorInteractive::adjust_toolbar_menus() {

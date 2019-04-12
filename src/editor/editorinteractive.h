@@ -178,6 +178,7 @@ private:
 	void add_tool_menu();
 	void tool_menu_selected(ToolMenuEntry entry);
 	void add_showhide_menu();
+	void rebuild_showhide_menu() override;
 	void showhide_menu_selected(ShowHideEntry entry);
 
 	template <class Menu, class Tool>

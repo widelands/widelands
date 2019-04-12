@@ -340,6 +340,7 @@ bool InteractiveBase::buildhelp() const {
 
 void InteractiveBase::show_buildhelp(bool t) {
 	buildhelp_ = t;
+	rebuild_showhide_menu();
 }
 
 void InteractiveBase::toggle_buildhelp() {
