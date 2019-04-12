@@ -101,8 +101,11 @@ public:
 protected:
 	void add_main_menu();
 	void add_showhide_menu();
+	void add_gamespeed_menu();
 
 	void adjust_toolbar_menus() override;
+
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 	void draw_overlay(RenderTarget&) override;
 
@@ -128,8 +131,21 @@ private:
 		kStatistics
 	};
 
+
+	enum class GameSpeedEntry {
+		kIncrease,
+		kDecrease,
+		kPause
+	};
+
 	void main_menu_selected(MainMenuEntry entry);
 	void showhide_menu_selected(ShowHideEntry entry);
+	void gamespeed_menu_selected(GameSpeedEntry entry);
+	void rebuild_gamespeed_menu();
+
+	void increase_gamespeed();
+	void decrease_gamespeed();
+	void toggle_game_paused();
 
 	struct WantedBuildingWindow {
 		explicit WantedBuildingWindow(const Vector2i& pos,
@@ -144,6 +160,7 @@ private:
 
 	UI::Dropdown<MainMenuEntry> mainmenu_;
 	UI::Dropdown<ShowHideEntry> showhidemenu_;
+	UI::Dropdown<GameSpeedEntry> gamespeedmenu_;
 
 	// Building coordinates, window position, whether the window was minimized
 	std::map<uint32_t, std::unique_ptr<const WantedBuildingWindow>> wanted_building_windows_;

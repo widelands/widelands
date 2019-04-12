@@ -100,7 +100,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
 	 showhidemenu_(
 		toolbar(), 0, 0, 34U, 10, 34U,
-		 /** TRANSLATORS: Title for a menu button in the editor. This menu sill show/hide building spaces, animals, immovables, resources */
+		 /** TRANSLATORS: Title for a menu button in the editor. This menu will show/hide building spaces, animals, immovables, resources */
 		 _("Show / Hide"),
 		 UI::DropdownType::kPictorialMenu,
 		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),

@@ -173,8 +173,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	toolbar()->add_space(15);
 
 	add_mapview_menu(MiniMapType::kStaticViewWindow);
-
 	add_showhide_menu();
+	add_gamespeed_menu();
 
 	toolbar()->add_space(15);
 	if (multiplayer) {

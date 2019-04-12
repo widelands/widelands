@@ -903,40 +903,6 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 
 	if (down) {
 		switch (code.sym) {
-		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_PAGEUP:
-			if (upcast(Game, game, &egbase_)) {
-				if (GameController* const ctrl = game->game_controller()) {
-					ctrl->set_desired_speed(ctrl->desired_speed() + 1000);
-				}
-			}
-			return true;
-
-		case SDLK_PAUSE:
-			if (upcast(Game, game, &egbase_)) {
-				if (GameController* const ctrl = game->game_controller()) {
-					ctrl->toggle_paused();
-				}
-			}
-			return true;
-
-		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_PAGEDOWN:
-			if (upcast(Widelands::Game, game, &egbase_)) {
-				if (GameController* const ctrl = game->game_controller()) {
-					uint32_t const speed = ctrl->desired_speed();
-					ctrl->set_desired_speed(1000 < speed ? speed - 1000 : 0);
-				}
-			}
-			return true;
 #ifndef NDEBUG  //  only in debug builds
 		case SDLK_F6:
 			GameChatMenu::create_script_console(

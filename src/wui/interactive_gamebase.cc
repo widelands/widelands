@@ -77,8 +77,14 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
 	 showhidemenu_(
 		toolbar(), 0, 0, 34U, 10, 34U,
-		 /** TRANSLATORS: Title for a menu button in the game. This menu sill show/hide building spaces, census, statistics */
+		 /** TRANSLATORS: Title for a menu button in the game. This menu will show/hide building spaces, census, statistics */
 		 _("Show / Hide"),
+		 UI::DropdownType::kPictorialMenu,
+		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
+	 gamespeedmenu_(
+		toolbar(), 0, 0, 34U, 10, 34U,
+		 /** TRANSLATORS: Title for a menu button in the game. This menu will show options o increase/decrease the gamespeed, and to pause the game */
+		 _("Game Speed"),
 		 UI::DropdownType::kPictorialMenu,
 		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
@@ -186,10 +192,116 @@ void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
 	}
 }
 
+
+void InteractiveGameBase::add_gamespeed_menu() {
+	gamespeedmenu_.set_image(g_gr->images().get("images/wui/menus/gamespeed.png"));
+	toolbar()->add(&gamespeedmenu_);
+	rebuild_gamespeed_menu();
+	gamespeedmenu_.selected.connect([this] { gamespeed_menu_selected(gamespeedmenu_.get_selected()); });
+}
+
+
+void InteractiveGameBase::rebuild_gamespeed_menu() {
+	gamespeedmenu_.clear();
+
+	gamespeedmenu_.add(_("Speed +"), GameSpeedEntry::kIncrease, g_gr->images().get("images/wui/menus/gamespeed_increase.png"), false,
+				  /** TRANSLATORS: Tooltip for Speed + in the game's game speed menu */
+				  _("Increase the game speed"), pgettext("hotkey", "Page Up"));
+
+	gamespeedmenu_.add(_("Speed -"), GameSpeedEntry::kDecrease, g_gr->images().get("images/wui/menus/gamespeed_decrease.png"), false,
+				  /** TRANSLATORS: Tooltip for Speed - in the game's game speed menu */
+				  _("Decrease the game speed"), pgettext("hotkey", "Page Down"));
+
+	if (get_game()->game_controller() && get_game()->game_controller()->is_paused()) {
+		gamespeedmenu_.add(_("Resume"), GameSpeedEntry::kPause, g_gr->images().get("images/wui/menus/gamespeed_resume.png"), false,
+					  /** TRANSLATORS: Tooltip for Pause in the game's game speed menu */
+					  _("Resume the Game"), pgettext("hotkey", "Pause"));
+	} else {
+		gamespeedmenu_.add(_("Pause"), GameSpeedEntry::kPause, g_gr->images().get("images/wui/menus/gamespeed_pause.png"), false,
+					  /** TRANSLATORS: Tooltip for Pause in the game's game speed menu */
+					  _("Pause the Game"), pgettext("hotkey", "Pause"));
+	}
+}
+
+void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
+	switch (entry) {
+	case GameSpeedEntry::kIncrease: {
+		increase_gamespeed();
+		// Keep the window open so that the player can click this multiple times
+		gamespeedmenu_.toggle();
+	} break;
+	case GameSpeedEntry::kDecrease: {
+		decrease_gamespeed();
+		// Keep the window open so that the player can click this multiple times
+		gamespeedmenu_.toggle();
+	} break;
+	case GameSpeedEntry::kPause: {
+		toggle_game_paused();
+	} break;
+	}
+}
+
 void InteractiveGameBase::adjust_toolbar_menus() {
 	InteractiveBase::adjust_toolbar_menus();
 	mainmenu_.layout();
 	showhidemenu_.layout();
+	gamespeedmenu_.layout();
+}
+
+void InteractiveGameBase::increase_gamespeed() {
+	if (GameController* const ctrl = get_game()->game_controller()) {
+		ctrl->set_desired_speed(ctrl->desired_speed() + 1000);
+	}
+}
+
+void InteractiveGameBase::decrease_gamespeed() {
+	if (GameController* const ctrl = get_game()->game_controller()) {
+		uint32_t const speed = ctrl->desired_speed();
+		ctrl->set_desired_speed(1000 < speed ? speed - 1000 : 0);
+	}
+}
+
+void InteractiveGameBase::toggle_game_paused() {
+	if (GameController* const ctrl = get_game()->game_controller()) {
+		ctrl->toggle_paused();
+		// Toggle Pause / Resume in the menu
+		rebuild_gamespeed_menu();
+	}
+}
+
+bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
+	if (InteractiveBase::handle_key(down, code)) {
+		return true;
+	}
+
+	if (down) {
+		switch (code.sym) {
+		case SDLK_KP_9:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_PAGEUP:
+			increase_gamespeed();
+			return true;
+
+		case SDLK_PAUSE:
+			toggle_game_paused();
+			return true;
+
+		case SDLK_KP_3:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_PAGEDOWN:
+			decrease_gamespeed();
+			return true;
+		default:
+			break;
+		}
+	}
+	return false;
 }
 
 /// \return a pointer to the running \ref Game instance.
