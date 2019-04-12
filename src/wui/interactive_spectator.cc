@@ -42,9 +42,9 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	add_main_menu();
 
 	add_toolbar_button("wui/menus/general_stats", "general_stats", _("Statistics"),
-	                   &main_windows_.general_stats, true);
-	main_windows_.general_stats.open_window = [this] {
-		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
+	                   &menu_windows_.stats_general, true);
+	menu_windows_.stats_general.open_window = [this] {
+		new GeneralStatisticsMenu(*this, menu_windows_.stats_general);
 	};
 
 	toolbar()->add_space(15);
@@ -206,7 +206,7 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				new GameMainMenuSaveGame(*this, main_windows_.savegame);
+				new GameMainMenuSaveGame(*this, menu_windows_.savegame);
 			} else
 				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
 			return true;

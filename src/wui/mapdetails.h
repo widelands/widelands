@@ -35,6 +35,9 @@ public:
 
 	void clear();
 	void update(const MapData& mapdata, bool localize_mapname);
+	std::string name() {
+		return name_;
+	}
 
 private:
 	void layout() override;
@@ -42,6 +45,7 @@ private:
 	const int padding_;
 
 	UI::Box main_box_;
+	std::string name_;
 	UI::MultilineTextarea name_label_;
 	UI::MultilineTextarea descr_;
 	UI::SuggestedTeamsBox* suggested_teams_box_;

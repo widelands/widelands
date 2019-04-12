@@ -46,8 +46,8 @@ constexpr uint8_t kMaxMapgenPlayers = 8;
 
 using namespace Widelands;
 
-MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
-   : UI::Window(&parent, "random_map_menu", 0, 0, 400, 500, _("New Random Map")),
+MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
+   : UI::UniqueWindow(&parent, "random_map_menu", &registry, 400, 500, _("New Random Map")),
      // UI elements
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),

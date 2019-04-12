@@ -195,19 +195,32 @@ private:
 	uint32_t realtime_;
 	bool is_painting_;
 
-	UI::UniqueWindow::Registry toolsizemenu_;
-	UI::UniqueWindow::Registry playermenu_;
+	struct EditorMenuWindows {
+		UI::UniqueWindow::Registry newmap;
+		UI::UniqueWindow::Registry newrandommap;
+		UI::UniqueWindow::Registry savemap;
+		UI::UniqueWindow::Registry loadmap;
+		UI::UniqueWindow::Registry mapoptions;
+
+		UI::UniqueWindow::Registry toolsize;
+		UI::UniqueWindow::Registry players;
+
+		UI::UniqueWindow::Registry help;
+	} menu_windows_;
+
+	struct EditorToolWindows {
+		UI::UniqueWindow::Registry height;
+		UI::UniqueWindow::Registry noiseheight;
+		UI::UniqueWindow::Registry terrain;
+		UI::UniqueWindow::Registry immovables;
+		UI::UniqueWindow::Registry critters;
+		UI::UniqueWindow::Registry resources;
+		UI::UniqueWindow::Registry resizemap;
+	} tool_windows_;
+
 	UI::Dropdown<MainMenuEntry> mainmenu_;
 	UI::Dropdown<ToolMenuEntry> toolmenu_;
 	UI::Dropdown<ShowHideEntry> showhidemenu_;
-	UI::UniqueWindow::Registry heightmenu_;
-	UI::UniqueWindow::Registry noise_heightmenu_;
-	UI::UniqueWindow::Registry terrainmenu_;
-	UI::UniqueWindow::Registry immovablemenu_;
-	UI::UniqueWindow::Registry crittermenu_;
-	UI::UniqueWindow::Registry resourcesmenu_;
-	UI::UniqueWindow::Registry resizemenu_;
-	UI::UniqueWindow::Registry helpmenu_;
 
 	UI::Button* undo_;
 	UI::Button* redo_;

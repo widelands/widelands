@@ -31,7 +31,6 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
-#include "editor/ui_menus/main_menu_map_options.h"
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -49,9 +48,9 @@ inline EditorInteractive& MainMenuSaveMap::eia() {
 }
 
 // TODO(GunChleoc): Arabic: Make directory dialog: buttons need more height for Arabic.
-MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
-   : MainMenuLoadOrSaveMap(parent, 3, "save_map_menu", _("Save Map"), "maps/My_Maps"),
-
+MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent, UI::UniqueWindow::Registry& registry, Registry& map_options_registry)
+   : MainMenuLoadOrSaveMap(parent, registry, 3, "save_map_menu", _("Save Map"), "maps/My_Maps"),
+	 map_options_registry_(map_options_registry),
      make_directory_(this,
                      "make_directory",
                      right_column_x_,
@@ -114,6 +113,10 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 	MapData mapdata(map, "", maptype, MapData::DisplayType::kMapnames);
 
 	map_details_.update(mapdata, false);
+
+	subscriber_ = Notifications::subscribe<NoteMapOptions>([this](const NoteMapOptions& note) {
+		update_map_options();
+	});
 }
 
 /**
@@ -196,24 +199,29 @@ void MainMenuSaveMap::clicked_make_directory() {
 }
 
 void MainMenuSaveMap::clicked_edit_options() {
-	MainMenuMapOptions mo(eia(), true);
-	if (mo.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-		const Widelands::Map& map = eia().egbase().map();
-		MapData::MapType maptype;
-
-		if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
-		    map.scenario_types() & Widelands::Map::SP_SCENARIO) {
-			maptype = MapData::MapType::kScenario;
-		} else {
-			maptype = MapData::MapType::kNormal;
-		}
-
-		MapData mapdata(map, editbox_->text(), maptype, MapData::DisplayType::kMapnames);
-
-		map_details_.update(mapdata, false);
-	}
+	map_options_registry_.create();
 }
 
+void MainMenuSaveMap::update_map_options() {
+	const Widelands::Map& map = eia().egbase().map();
+	MapData::MapType maptype;
+
+	const std::string old_name = map_details_.name();
+
+	if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
+		map.scenario_types() & Widelands::Map::SP_SCENARIO) {
+		maptype = MapData::MapType::kScenario;
+	} else {
+		maptype = MapData::MapType::kNormal;
+	}
+
+	MapData mapdata(map, editbox_->text(), maptype, MapData::DisplayType::kMapnames);
+
+	map_details_.update(mapdata, false);
+	if (old_name == editbox_->text()) {
+		editbox_->set_text(map_details_.name());
+	}
+}
 /**
  * called when an item was selected
  */

@@ -20,6 +20,8 @@
 #ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_MAP_OPTIONS_H
 #define WL_EDITOR_UI_MENUS_MAIN_MENU_MAP_OPTIONS_H
 
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -28,17 +30,24 @@
 #include "ui_basic/multilineeditbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
-#include "ui_basic/window.h"
+#include "ui_basic/unique_window.h"
 
 class EditorInteractive;
+
+
+struct NoteMapOptions {
+	CAN_BE_SENT_AS_NOTE(NoteId::MapOptions)
+
+	NoteMapOptions() = default;
+};
 
 /**
  * This is the Main Options Menu. Here, information
  * about the current map are displayed and you can change
  * author, name and description
  */
-struct MainMenuMapOptions : public UI::Window {
-	MainMenuMapOptions(EditorInteractive&, bool modal = false);
+struct MainMenuMapOptions : public UI::UniqueWindow {
+	MainMenuMapOptions(EditorInteractive&, UI::UniqueWindow::Registry& registry);
 
 private:
 	EditorInteractive& eia();
@@ -66,7 +75,7 @@ private:
 
 	// Tag, Checkbox
 	std::map<std::string, UI::Checkbox*> tags_checkboxes_;
-	bool modal_;
+	UI::UniqueWindow::Registry& registry_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_MAP_OPTIONS_H

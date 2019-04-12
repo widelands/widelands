@@ -41,8 +41,8 @@ inline EditorInteractive& MainMenuMapOptions::eia() {
 /**
  * Create all the buttons etc...
  */
-MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
-   : UI::Window(&parent, "map_options", 0, 0, 350, parent.get_inner_h() - 80, _("Map Options")),
+MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& registry)
+   : UI::UniqueWindow(&parent, "map_options", &registry, 350, parent.get_inner_h() - 80, _("Map Options")),
      padding_(4),
      indent_(10),
      labelh_(text_height() + 4),
@@ -79,7 +79,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
      teams_list_(
         &teams_box_, 0, 0, max_w_, 60, UI::PanelStyle::kWui, UI::ListselectLayout::kShowCheck),
 
-     modal_(modal) {
+	 registry_(registry) {
 
 	tab_box_.set_size(max_w_, get_inner_h() - labelh_ - 2 * padding_);
 	tabs_.set_size(max_w_, tab_box_.get_inner_h());
@@ -202,20 +202,12 @@ void MainMenuMapOptions::clicked_ok() {
 			eia().egbase().mutable_map()->add_tag(tag.first);
 		}
 	}
-
-	if (modal_) {
-		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
-	} else {
-		die();
-	}
+	Notifications::publish(NoteMapOptions());
+	registry_.destroy();
 }
 
 void MainMenuMapOptions::clicked_cancel() {
-	if (modal_) {
-		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
-	} else {
-		die();
-	}
+	registry_.destroy();
 }
 
 /*

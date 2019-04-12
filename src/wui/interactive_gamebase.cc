@@ -119,16 +119,16 @@ void InteractiveGameBase::add_main_menu() {
 	mainmenu_.set_image(g_gr->images().get("images/wui/menus/game_main_menu.png"));
 	toolbar()->add(&mainmenu_);
 
-	main_windows_.sound_options.open_window = [this] {
-		new GameOptionsSoundMenu(*this, main_windows_.sound_options);
+	menu_windows_.sound_options.open_window = [this] {
+		new GameOptionsSoundMenu(*this, menu_windows_.sound_options);
 	};
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Sound Options"), MainMenuEntry::kOptions, g_gr->images().get("images/wui/menus/options.png"), false,
 				  /** TRANSLATORS: Tooltip for Sound Options in the game's main menu */
 				  _("Set sound effect and music options"));
 
-	main_windows_.savegame.open_window = [this] {
-		new GameMainMenuSaveGame(*this, main_windows_.savegame);
+	menu_windows_.savegame.open_window = [this] {
+		new GameMainMenuSaveGame(*this, menu_windows_.savegame);
 	};
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Save Game"), MainMenuEntry::kSaveMap, g_gr->images().get("images/wui/menus/save_game.png"));
@@ -142,10 +142,10 @@ void InteractiveGameBase::add_main_menu() {
 void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 	switch (entry) {
 	case MainMenuEntry::kOptions: {
-		main_windows_.sound_options.toggle();
+		menu_windows_.sound_options.toggle();
 	} break;
 	case MainMenuEntry::kSaveMap: {
-		main_windows_.savegame.toggle();
+		menu_windows_.savegame.toggle();
 	} break;
 	case MainMenuEntry::kExitGame: {
 		if (SDL_GetModState() & KMOD_CTRL) {
@@ -158,7 +158,6 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 }
 
 void InteractiveGameBase::add_showhide_menu() {
-	// NOCOM make these dynamic according to what has been pressed
 	// NOCOM change basic control tutorial
 	showhidemenu_.set_image(g_gr->images().get("images/wui/menus/toggle_buildhelp.png"));
 	toolbar()->add(&showhidemenu_);

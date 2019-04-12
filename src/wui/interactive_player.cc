@@ -217,23 +217,23 @@ void InteractivePlayer::add_statistics_menu() {
 	statisticsmenu_.set_image(g_gr->images().get("images/wui/menus/statistics.png"));
 	toolbar()->add(&statisticsmenu_);
 
-	main_windows_.seafaring_stats.open_window = [this] {
-		new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
+	menu_windows_.stats_seafaring.open_window = [this] {
+		new SeafaringStatisticsMenu(*this, menu_windows_.stats_seafaring);
 	};
 
-	main_windows_.stock.open_window = [this] { new StockMenu(*this, main_windows_.stock); };
+	menu_windows_.stats_stock.open_window = [this] { new StockMenu(*this, menu_windows_.stats_stock); };
 
-	main_windows_.building_stats.open_window = [this] {
-		new BuildingStatisticsMenu(*this, main_windows_.building_stats);
+	menu_windows_.stats_buildings.open_window = [this] {
+		new BuildingStatisticsMenu(*this, menu_windows_.stats_buildings);
 	};
 
 
-	main_windows_.ware_stats.open_window = [this] {
-		new WareStatisticsMenu(*this, main_windows_.ware_stats);
+	menu_windows_.stats_wares.open_window = [this] {
+		new WareStatisticsMenu(*this, menu_windows_.stats_wares);
 	};
 
-	main_windows_.general_stats.open_window = [this] {
-		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
+	menu_windows_.stats_general.open_window = [this] {
+		new GeneralStatisticsMenu(*this, menu_windows_.stats_general);
 	};
 
 	rebuild_statistics_menu();
@@ -241,7 +241,6 @@ void InteractivePlayer::add_statistics_menu() {
 	statisticsmenu_.selected.connect([this] { statistics_menu_selected(statisticsmenu_.get_selected()); });
 }
 
-// NOCOM trigger this when seafaring changed
 void InteractivePlayer::rebuild_statistics_menu() {
 	statisticsmenu_.clear();
 
@@ -273,20 +272,20 @@ void InteractivePlayer::rebuild_statistics_menu() {
 void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
 	switch (entry) {
 	case StatisticsMenuEntry::kGeneral: {
-		main_windows_.general_stats.toggle();
+		menu_windows_.stats_general.toggle();
 	} break;
 	case StatisticsMenuEntry::kWare: {
-		main_windows_.ware_stats.toggle();
+		menu_windows_.stats_wares.toggle();
 	} break;
 	case StatisticsMenuEntry::kBuildings: {
-		main_windows_.building_stats.toggle();
+		menu_windows_.stats_buildings.toggle();
 	} break;
 	case StatisticsMenuEntry::kStock: {
-		main_windows_.stock.toggle();
+		menu_windows_.stats_stock.toggle();
 	} break;
 	case StatisticsMenuEntry::kSeafaring: {
 		if (egbase().map().allows_seafaring()) {
-			main_windows_.seafaring_stats.toggle();
+			menu_windows_.stats_seafaring.toggle();
 		}
 	} break;
 	}
@@ -499,7 +498,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_i:
-			main_windows_.stock.toggle();
+			menu_windows_.stats_stock.toggle();
 			return true;
 
 		case SDLK_n:
@@ -519,26 +518,26 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_b:
-			if (main_windows_.building_stats.window == nullptr) {
-				new BuildingStatisticsMenu(*this, main_windows_.building_stats);
+			if (menu_windows_.stats_buildings.window == nullptr) {
+				new BuildingStatisticsMenu(*this, menu_windows_.stats_buildings);
 			} else {
-				main_windows_.building_stats.toggle();
+				menu_windows_.stats_buildings.toggle();
 			}
 			return true;
 
 		case SDLK_e:
 			if (game().map().allows_seafaring()) {
-				if (main_windows_.seafaring_stats.window == nullptr) {
-					new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
+				if (menu_windows_.stats_seafaring.window == nullptr) {
+					new SeafaringStatisticsMenu(*this, menu_windows_.stats_seafaring);
 				} else {
-					main_windows_.seafaring_stats.toggle();
+					menu_windows_.stats_seafaring.toggle();
 				}
 			}
 			return true;
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				new GameMainMenuSaveGame(*this, main_windows_.savegame);
+				new GameMainMenuSaveGame(*this, menu_windows_.savegame);
 			else
 				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
 			return true;
@@ -605,7 +604,7 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 	   str(boost::format("Switching from #%1% to #%2%.") % static_cast<int>(player_number_) % n));
 	player_number_ = n;
 
-	if (UI::UniqueWindow* const building_statistics_window = main_windows_.building_stats.window) {
+	if (UI::UniqueWindow* const building_statistics_window = menu_windows_.stats_buildings.window) {
 		dynamic_cast<BuildingStatisticsMenu&>(*building_statistics_window).update();
 	}
 }

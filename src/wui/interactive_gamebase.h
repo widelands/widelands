@@ -36,18 +36,6 @@ enum PlayerType { NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED };
 
 class InteractiveGameBase : public InteractiveBase {
 public:
-	struct GameMainMenuWindows {
-		UI::UniqueWindow::Registry savegame;
-		UI::UniqueWindow::Registry help;
-		UI::UniqueWindow::Registry sound_options;
-
-		UI::UniqueWindow::Registry building_stats;
-		GeneralStatisticsMenu::Registry general_stats;
-		UI::UniqueWindow::Registry ware_stats;
-		UI::UniqueWindow::Registry stock;
-		UI::UniqueWindow::Registry seafaring_stats;
-	};
-
 	InteractiveGameBase(Widelands::Game&,
 	                    Section& global_s,
 	                    PlayerType pt = NONE,
@@ -109,7 +97,19 @@ protected:
 
 	void draw_overlay(RenderTarget&) override;
 
-	GameMainMenuWindows main_windows_;
+	struct GameMenuWindows {
+		UI::UniqueWindow::Registry sound_options;
+		UI::UniqueWindow::Registry savegame;
+
+		GeneralStatisticsMenu::Registry stats_general;
+		UI::UniqueWindow::Registry stats_wares;
+		UI::UniqueWindow::Registry stats_stock;
+		UI::UniqueWindow::Registry stats_buildings;
+		UI::UniqueWindow::Registry stats_seafaring;
+
+		UI::UniqueWindow::Registry help;
+	} menu_windows_;
+
 	ChatProvider* chat_provider_;
 	bool multiplayer_;
 	PlayerType playertype_;

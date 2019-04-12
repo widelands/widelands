@@ -113,14 +113,14 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	add_tool_menu();
 
 	add_toolbar_button(
-	   "wui/editor/editor_menu_set_toolsize_menu", "toolsize", _("Tool size"), &toolsizemenu_, true);
-	toolsizemenu_.open_window = [this] { new EditorToolsizeMenu(*this, toolsizemenu_); };
+	   "wui/editor/editor_menu_set_toolsize_menu", "toolsize", _("Tool size"), &menu_windows_.toolsize, true);
+	menu_windows_.toolsize.open_window = [this] { new EditorToolsizeMenu(*this, menu_windows_.toolsize); };
 
 	add_toolbar_button(
-	   "wui/editor/editor_menu_player_menu", "players", _("Players"), &playermenu_, true);
-	playermenu_.open_window = [this] {
+	   "wui/editor/editor_menu_player_menu", "players", _("Players"), &menu_windows_.players, true);
+	menu_windows_.players.open_window = [this] {
 		select_tool(tools_->set_starting_pos, EditorTool::First);
-		new EditorPlayerMenu(*this, playermenu_);
+		new EditorPlayerMenu(*this, menu_windows_.players);
 	};
 
 	toolbar()->add_space(15);
@@ -140,8 +140,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	toolbar()->add_space(15);
 
-	add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &helpmenu_, true);
-	helpmenu_.open_window = [this] { new EditorHelp(*this, helpmenu_, &egbase().lua()); };
+	add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &menu_windows_.help, true);
+	menu_windows_.help.open_window = [this] { new EditorHelp(*this, menu_windows_.help, &egbase().lua()); };
 
 	adjust_toolbar_position();
 
@@ -159,16 +159,37 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 void EditorInteractive::add_main_menu() {
 	mainmenu_.set_image(g_gr->images().get("images/wui/menus/editor_main_menu.png"));
+
+	menu_windows_.newmap.open_window = [this] {
+		new MainMenuNewMap(*this, menu_windows_.newmap);
+	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Map"), MainMenuEntry::kNewMap);
+
+	menu_windows_.newrandommap.open_window = [this] {
+		new MainMenuNewRandomMap(*this, menu_windows_.newrandommap);
+	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Random Map"), MainMenuEntry::kNewRandomMap);
+
+	menu_windows_.loadmap.open_window = [this] {
+		new MainMenuLoadMap(*this, menu_windows_.loadmap);
+	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Load Map"), MainMenuEntry::kLoadMap, nullptr, false, "", pgettext("hotkey", "Ctrl+l"));
+
+	menu_windows_.savemap.open_window = [this] {
+		new MainMenuSaveMap(*this, menu_windows_.savemap, menu_windows_.mapoptions);
+	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Save Map"), MainMenuEntry::kSaveMap, nullptr, false, "", pgettext("hotkey", "Ctrl+s"));
+
+	menu_windows_.mapoptions.open_window = [this] {
+		new MainMenuMapOptions(*this, menu_windows_.mapoptions);
+	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions);
+
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor);
 	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
@@ -176,22 +197,21 @@ void EditorInteractive::add_main_menu() {
 }
 
 void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
-	// NOCOM Use the toggle design from Interactive Gamebase
 	switch (entry) {
 	case MainMenuEntry::kNewMap: {
-		new MainMenuNewMap(*this);
+		menu_windows_.newmap.toggle();
 	} break;
 	case MainMenuEntry::kNewRandomMap: {
-		new MainMenuNewRandomMap(*this);
+		menu_windows_.newrandommap.toggle();
 	} break;
 	case MainMenuEntry::kLoadMap: {
-		new MainMenuLoadMap(*this);
+		menu_windows_.loadmap.toggle();
 	} break;
 	case MainMenuEntry::kSaveMap: {
-		new MainMenuSaveMap(*this);
+		menu_windows_.savemap.toggle();
 	} break;
 	case MainMenuEntry::kMapOptions: {
-		new MainMenuMapOptions(*this);
+		menu_windows_.mapoptions.toggle();
 	} break;
 	case MainMenuEntry::kExitEditor: {
 		exit();
@@ -259,22 +279,22 @@ void EditorInteractive::add_tool_menu() {
 void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 	switch (entry) {
 	case ToolMenuEntry::kChangeHeight:
-		open_tool_window<EditorToolChangeHeightOptionsMenu>(heightmenu_, tools()->increase_height);
+		open_tool_window<EditorToolChangeHeightOptionsMenu>(tool_windows_.height, tools()->increase_height);
 		break;
 	case ToolMenuEntry::kRandomHeight:
-		open_tool_window<EditorToolNoiseHeightOptionsMenu>(noise_heightmenu_, tools()->noise_height);
+		open_tool_window<EditorToolNoiseHeightOptionsMenu>(tool_windows_.noiseheight, tools()->noise_height);
 		break;
 	case ToolMenuEntry::kTerrain:
-		open_tool_window<EditorToolSetTerrainOptionsMenu>(terrainmenu_, tools()->set_terrain);
+		open_tool_window<EditorToolSetTerrainOptionsMenu>(tool_windows_.terrain, tools()->set_terrain);
 		break;
 	case ToolMenuEntry::kImmovables:
-		open_tool_window<EditorToolPlaceImmovableOptionsMenu>(immovablemenu_, tools()->place_immovable);
+		open_tool_window<EditorToolPlaceImmovableOptionsMenu>(tool_windows_.immovables, tools()->place_immovable);
 		break;
 	case ToolMenuEntry::kAnimals:
-		open_tool_window<EditorToolPlaceCritterOptionsMenu>(crittermenu_, tools()->place_critter);
+		open_tool_window<EditorToolPlaceCritterOptionsMenu>(tool_windows_.critters, tools()->place_critter);
 		break;
 	case ToolMenuEntry::kResources:
-		open_tool_window<EditorToolChangeResourcesOptionsMenu>(resourcesmenu_, tools()->increase_resources);
+		open_tool_window<EditorToolChangeResourcesOptionsMenu>(tool_windows_.resources, tools()->increase_resources);
 		break;
 	case ToolMenuEntry::kPortSpace:
 		select_tool(tools()->set_port_space, EditorTool::First);
@@ -283,7 +303,7 @@ void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 		select_tool(tools()->set_origin, EditorTool::First);
 		break;
 	case ToolMenuEntry::kMapSize:
-		open_tool_window<EditorToolResizeOptionsMenu>(resizemenu_, tools()->resize);
+		open_tool_window<EditorToolResizeOptionsMenu>(tool_windows_.resizemap, tools()->resize);
 		break;
 	case ToolMenuEntry::kFieldInfo:
 		select_tool(tools()->info, EditorTool::First);
@@ -603,7 +623,7 @@ void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
 		set_sel_radius(0);
 		return;
 	}
-	if (UI::UniqueWindow* const w = toolsizemenu_.window) {
+	if (UI::UniqueWindow* const w = menu_windows_.toolsize.window) {
 		dynamic_cast<EditorToolsizeMenu&>(*w).update(val);
 	} else {
 		set_sel_radius(val);
@@ -714,17 +734,19 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_l:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				new MainMenuLoadMap(*this);
+			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+				menu_windows_.loadmap.toggle();
+			}
 			return true;
 
 		case SDLK_p:
-			playermenu_.toggle();
+			menu_windows_.players.toggle();
 			return true;
 
 		case SDLK_s:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				new MainMenuSaveMap(*this);
+			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+				menu_windows_.savemap.toggle();
+			}
 			return true;
 
 		case SDLK_t:
@@ -744,7 +766,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_F1:
-			helpmenu_.toggle();
+			menu_windows_.help.toggle();
 			return true;
 
 		default:
@@ -775,12 +797,12 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 	if (which == EditorTool::First && &primary != tools_->current_pointer) {
 		if (primary.has_size_one()) {
 			set_sel_radius(0);
-			if (UI::UniqueWindow* const w = toolsizemenu_.window) {
+			if (UI::UniqueWindow* const w = menu_windows_.toolsize.window) {
 				EditorToolsizeMenu& toolsize_menu = dynamic_cast<EditorToolsizeMenu&>(*w);
 				toolsize_menu.set_buttons_enabled(false);
 			}
 		} else {
-			if (UI::UniqueWindow* const w = toolsizemenu_.window) {
+			if (UI::UniqueWindow* const w = menu_windows_.toolsize.window) {
 				EditorToolsizeMenu& toolsize_menu = dynamic_cast<EditorToolsizeMenu&>(*w);
 				toolsize_menu.update(toolsize_menu.value());
 			}
