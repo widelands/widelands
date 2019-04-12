@@ -104,7 +104,7 @@ public:
 	// Returns true if the buildhelp is currently displayed.
 	bool buildhelp() const;
 
-	// Sets if the buildhelp should be displayed. Will also call on_buildhelp_changed().
+	// Sets if the buildhelp should be displayed.
 	void show_buildhelp(bool t);
 
 	/**
@@ -194,9 +194,6 @@ protected:
 	                               const std::string& tooltip_text,
 	                               UI::UniqueWindow::Registry* window = nullptr,
 	                               bool bind_default_toggle = false);
-
-	// Will be called whenever the buildhelp is changed with the new 'value'.
-	virtual void on_buildhelp_changed(bool value);
 
 	void hide_minimap();
 

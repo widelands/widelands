@@ -340,7 +340,6 @@ bool InteractiveBase::buildhelp() const {
 
 void InteractiveBase::show_buildhelp(bool t) {
 	buildhelp_ = t;
-	on_buildhelp_changed(t);
 }
 
 void InteractiveBase::toggle_buildhelp() {
@@ -366,9 +365,6 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 		}
 	}
 	return button;
-}
-
-void InteractiveBase::on_buildhelp_changed(bool /* value */) {
 }
 
 // Show the given workareas at the given coords and returns the overlay job id associated

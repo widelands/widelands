@@ -174,9 +174,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	add_mapview_menu(MiniMapType::kStaticViewWindow);
 
-	toggle_buildhelp_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show building spaces (on/off)"));
-	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
+	add_showhide_menu();
 
 	toolbar()->add_space(15);
 	if (multiplayer) {

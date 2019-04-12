@@ -100,6 +100,7 @@ public:
 
 protected:
 	void add_main_menu();
+	void add_showhide_menu();
 
 	void adjust_toolbar_menus() override;
 
@@ -121,9 +122,15 @@ private:
 		kExitGame
 	};
 
-	void main_menu_selected(MainMenuEntry entry);
+	enum class ShowHideEntry {
+		kBuildingSpaces,
+		kCensus,
+		kStatistics
+	};
 
-	void on_buildhelp_changed(const bool value) override;
+	void main_menu_selected(MainMenuEntry entry);
+	void showhide_menu_selected(ShowHideEntry entry);
+
 	struct WantedBuildingWindow {
 		explicit WantedBuildingWindow(const Vector2i& pos,
 		                              bool was_minimized,
@@ -136,6 +143,7 @@ private:
 	};
 
 	UI::Dropdown<MainMenuEntry> mainmenu_;
+	UI::Dropdown<ShowHideEntry> showhidemenu_;
 
 	// Building coordinates, window position, whether the window was minimized
 	std::map<uint32_t, std::unique_ptr<const WantedBuildingWindow>> wanted_building_windows_;

@@ -166,16 +166,24 @@ private:
 		kFieldInfo
 	};
 
+	enum class ShowHideEntry {
+		kBuildingSpaces,
+		kAnimals,
+		kImmovables,
+		kResources
+	};
+
 	void add_main_menu();
 	void main_menu_selected(MainMenuEntry entry);
 	void add_tool_menu();
 	void tool_menu_selected(ToolMenuEntry entry);
+	void add_showhide_menu();
+	void showhide_menu_selected(ShowHideEntry entry);
+
 	template <class Menu, class Tool>
 	void open_tool_window(UI::UniqueWindow::Registry& registry, Tool& tool);
 
 	void adjust_toolbar_menus() override;
-
-	void on_buildhelp_changed(const bool value) override;
 
 	void toggle_resources();
 	void toggle_immovables();
@@ -190,6 +198,7 @@ private:
 	UI::UniqueWindow::Registry playermenu_;
 	UI::Dropdown<MainMenuEntry> mainmenu_;
 	UI::Dropdown<ToolMenuEntry> toolmenu_;
+	UI::Dropdown<ShowHideEntry> showhidemenu_;
 	UI::UniqueWindow::Registry heightmenu_;
 	UI::UniqueWindow::Registry noise_heightmenu_;
 	UI::UniqueWindow::Registry terrainmenu_;
@@ -199,10 +208,6 @@ private:
 	UI::UniqueWindow::Registry resizemenu_;
 	UI::UniqueWindow::Registry helpmenu_;
 
-	UI::Button* toggle_buildhelp_;
-	UI::Button* toggle_resources_;
-	UI::Button* toggle_immovables_;
-	UI::Button* toggle_bobs_;
 	UI::Button* undo_;
 	UI::Button* redo_;
 

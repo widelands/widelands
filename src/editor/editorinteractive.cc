@@ -98,6 +98,12 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 		 as_tooltip_text_with_hotkey(_("Tools"), "t"),
 		 UI::DropdownType::kPictorialMenu,
 		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
+	 showhidemenu_(
+		toolbar(), 0, 0, 34U, 10, 34U,
+		 /** TRANSLATORS: Title for a menu button in the editor. This menu sill show/hide building spaces, animals, immovables, resources */
+		 _("Show / Hide"),
+		 UI::DropdownType::kPictorialMenu,
+		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
      undo_(nullptr),
      redo_(nullptr),
      tools_(new Tools(e.map())),
@@ -119,25 +125,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	toolbar()->add_space(15);
 
-	toggle_buildhelp_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show building spaces (on/off)"));
-	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
-	toggle_immovables_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_immovables", "immovables", _("Show immovables (on/off)"));
-	toggle_immovables_->set_perm_pressed(true);
-	toggle_immovables_->sigclicked.connect([this]() { toggle_immovables(); });
-	toggle_bobs_ =
-	   add_toolbar_button("wui/menus/menu_toggle_bobs", "animals", _("Show animals (on/off)"));
-	toggle_bobs_->set_perm_pressed(true);
-	toggle_bobs_->sigclicked.connect([this]() { toggle_bobs(); });
-	toggle_resources_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_resources", "resources", _("Show resources (on/off)"));
-	toggle_resources_->set_perm_pressed(true);
-	toggle_resources_->sigclicked.connect([this]() { toggle_resources(); });
-
-	toolbar()->add_space(15);
-
 	add_mapview_menu(MiniMapType::kStaticMap);
+	add_showhide_menu();
 
 	toolbar()->add_space(15);
 
@@ -317,10 +306,50 @@ void EditorInteractive::open_tool_window(UI::UniqueWindow::Registry& registry, T
 	}
 }
 
+void EditorInteractive::add_showhide_menu() {
+	showhidemenu_.set_image(g_gr->images().get("images/wui/menus/menu_toggle_buildhelp.png"));
+	toolbar()->add(&showhidemenu_);
+
+	showhidemenu_.add(_("Building Spaces"), ShowHideEntry::kBuildingSpaces, g_gr->images().get("images/wui/menus/menu_toggle_buildhelp.png"), false,
+				  /** TRANSLATORS: Tooltip for Building Spaces in the editor's show/hide menu */
+				  _("Show building spaces (on/off)"), pgettext("hotkey", "Space"));
+
+	showhidemenu_.add(_("Immovables"), ShowHideEntry::kImmovables, g_gr->images().get("images/wui/menus/menu_toggle_immovables.png"), false,
+				  /** TRANSLATORS: Tooltip for Immovables in the editor's show/hide menu */
+				  _("Show immovables (on/off)"));
+
+	showhidemenu_.add(_("Animals"), ShowHideEntry::kAnimals, g_gr->images().get("images/wui/menus/menu_toggle_bobs.png"), false,
+				  /** TRANSLATORS: Tooltip for Animals in the editor's show/hide menu */
+				  _("Show animals (on/off)"));
+
+	showhidemenu_.add(_("Resources"), ShowHideEntry::kResources, g_gr->images().get("images/wui/menus/menu_toggle_resources.png"), false,
+				  /** TRANSLATORS: Tooltip for Resources in the editor's show/hide menu */
+				  _("Show resources (on/off)"));
+
+	showhidemenu_.selected.connect([this] { showhide_menu_selected(showhidemenu_.get_selected()); });
+}
+void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
+	switch (entry) {
+	case ShowHideEntry::kBuildingSpaces: {
+		toggle_buildhelp();
+	} break;
+	case ShowHideEntry::kImmovables: {
+		toggle_immovables();
+	} break;
+	case ShowHideEntry::kAnimals: {
+		toggle_bobs();
+	} break;
+	case ShowHideEntry::kResources: {
+		toggle_resources();
+	} break;
+	}
+}
+
 void EditorInteractive::adjust_toolbar_menus() {
 	InteractiveBase::adjust_toolbar_menus();
 	mainmenu_.layout();
 	toolmenu_.layout();
+	showhidemenu_.layout();
 }
 
 void EditorInteractive::load(const std::string& filename) {
@@ -575,23 +604,16 @@ void EditorInteractive::stop_painting() {
 	is_painting_ = false;
 }
 
-void EditorInteractive::on_buildhelp_changed(const bool value) {
-	toggle_buildhelp_->set_perm_pressed(value);
-}
-
 void EditorInteractive::toggle_resources() {
 	draw_resources_ = !draw_resources_;
-	toggle_resources_->set_perm_pressed(draw_resources_);
 }
 
 void EditorInteractive::toggle_immovables() {
 	draw_immovables_ = !draw_immovables_;
-	toggle_immovables_->set_perm_pressed(draw_immovables_);
 }
 
 void EditorInteractive::toggle_bobs() {
 	draw_bobs_ = !draw_bobs_;
-	toggle_bobs_->set_perm_pressed(draw_bobs_);
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {

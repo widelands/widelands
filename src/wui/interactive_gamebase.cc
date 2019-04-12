@@ -74,6 +74,12 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 		 /** TRANSLATORS: Title for the main menu button in the game */
 		 _("Main Menu"),
 		 UI::DropdownType::kPictorialMenu,
+		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
+	 showhidemenu_(
+		toolbar(), 0, 0, 34U, 10, 34U,
+		 /** TRANSLATORS: Title for a menu button in the game. This menu sill show/hide building spaces, census, statistics */
+		 _("Show / Hide"),
+		 UI::DropdownType::kPictorialMenu,
 		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) {
@@ -145,10 +151,45 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 	}
 }
 
+void InteractiveGameBase::add_showhide_menu() {
+	// NOCOM make these dynamic according to what has been pressed
+	// NOCOM change basic control tutorial
+	showhidemenu_.set_image(g_gr->images().get("images/wui/menus/menu_toggle_buildhelp.png"));
+	toolbar()->add(&showhidemenu_);
+
+	showhidemenu_.add(_("Building Spaces"), ShowHideEntry::kBuildingSpaces, g_gr->images().get("images/wui/menus/menu_toggle_buildhelp.png"), false,
+				  /** TRANSLATORS: Tooltip for Building Spaces in the game's show/hide menu */
+				  _("Show building spaces (on/off)"), pgettext("hotkey", "Space"));
+
+	showhidemenu_.add(_("Census"), ShowHideEntry::kCensus, g_gr->images().get("images/wui/menus/menu_show_census.png"), false,
+				  /** TRANSLATORS: Tooltip for Census in the game's show/hide menu */
+				  _("Toggle building label display"), "c");
+
+	showhidemenu_.add(_("Statistics"), ShowHideEntry::kStatistics, g_gr->images().get("images/wui/menus/menu_show_statistics.png"), false,
+				  /** TRANSLATORS: Tooltip for Census in the game's show/hide menu */
+				  _("Toggle building statistics display"), "s");
+
+	showhidemenu_.selected.connect([this] { showhide_menu_selected(showhidemenu_.get_selected()); });
+}
+
+void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
+	switch (entry) {
+	case ShowHideEntry::kBuildingSpaces: {
+		toggle_buildhelp();
+	} break;
+	case ShowHideEntry::kCensus: {
+		set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
+	} break;
+	case ShowHideEntry::kStatistics: {
+		set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+	} break;
+	}
+}
 
 void InteractiveGameBase::adjust_toolbar_menus() {
 	InteractiveBase::adjust_toolbar_menus();
 	mainmenu_.layout();
+	showhidemenu_.layout();
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -203,7 +244,6 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
  */
 void InteractiveGameBase::postload() {
 	show_buildhelp(false);
-	on_buildhelp_changed(buildhelp());
 
 	// Recalc whole map for changed owner stuff
 	egbase().mutable_map()->recalc_whole_map(egbase().world());
@@ -231,10 +271,6 @@ void InteractiveGameBase::start() {
 			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
 		}
 	}
-}
-
-void InteractiveGameBase::on_buildhelp_changed(const bool value) {
-	toggle_buildhelp_->set_perm_pressed(value);
 }
 
 void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords,

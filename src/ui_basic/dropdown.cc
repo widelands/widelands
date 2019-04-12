@@ -140,7 +140,6 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 		}
 		parent_window_candidate = parent_window_candidate->get_parent();
 	}
-
 	layout();
 }
 
