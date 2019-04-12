@@ -90,7 +90,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	bottom_box->add_space(PADDING);
 	stop_button_ =
 	   new UI::Button(bottom_box, "stop_button", 0, 0, 35, 35, UI::ButtonStyle::kWuiMenu,
-	                  g_gr->images().get("images/wui/menus/menu_exit_game.png"), _("Exit Game"));
+	                  g_gr->images().get("images/wui/menus/exit.png"), _("Exit Game"));
 	bottom_box->add(stop_button_);
 	bottom_box->add_space(PADDING);
 

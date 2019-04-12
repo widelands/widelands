@@ -178,7 +178,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	toolbar()->add_space(15);
 	if (multiplayer) {
-		toggle_chat_ = add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
+		toggle_chat_ = add_toolbar_button("wui/menus/chat", "chat", _("Chat"), &chat_, true);
 		chat_.open_window = [this] {
 			if (chat_provider_) {
 				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
@@ -188,11 +188,11 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	}
 
 	add_toolbar_button(
-	   "wui/menus/menu_objectives", "objectives", _("Objectives"), &objectives_, true);
+	   "wui/menus/objectives", "objectives", _("Objectives"), &objectives_, true);
 	objectives_.open_window = [this] { new GameObjectivesMenu(this, objectives_); };
 
 	toggle_message_menu_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_oldmessage_menu", "messages", _("Messages"), &message_menu_, true);
+	   "wui/menus/message_old", "messages", _("Messages"), &message_menu_, true);
 	message_menu_.open_window = [this] { new GameMessageMenu(*this, message_menu_); };
 
 	add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &encyclopedia_, true);
@@ -214,33 +214,33 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 
 void InteractivePlayer::add_statistics_menu() {
-	statisticsmenu_.set_image(g_gr->images().get("images/wui/menus/menu_toggle_menu.png"));
+	statisticsmenu_.set_image(g_gr->images().get("images/wui/menus/statistics.png"));
 	toolbar()->add(&statisticsmenu_);
 
 	main_windows_.general_stats.open_window = [this] {
 		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
 	};
 	/** TRANSLATORS: An entry in the game's statistics menu */
-	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral, g_gr->images().get("images/wui/menus/menu_general_stats.png"));
+	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral, g_gr->images().get("images/wui/menus/statistics_general.png"));
 
 	main_windows_.ware_stats.open_window = [this] {
 		new WareStatisticsMenu(*this, main_windows_.ware_stats);
 	};
 	/** TRANSLATORS: An entry in the game's statistics menu */
-	statisticsmenu_.add(_("Wares"), StatisticsMenuEntry::kWare, g_gr->images().get("images/wui/menus/menu_ware_stats.png"));
+	statisticsmenu_.add(_("Wares"), StatisticsMenuEntry::kWare, g_gr->images().get("images/wui/menus/statistics_wares.png"));
 
 	main_windows_.building_stats.open_window = [this] {
 		new BuildingStatisticsMenu(*this, main_windows_.building_stats);
 	};
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Buildings"), StatisticsMenuEntry::kBuildings,
-						g_gr->images().get("images/wui/menus/menu_building_stats.png"),
+						g_gr->images().get("images/wui/menus/statistics_buildings.png"),
 						false, "", "b");
 
 	main_windows_.stock.open_window = [this] { new StockMenu(*this, main_windows_.stock); };
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock,
-						g_gr->images().get("images/wui/menus/menu_stock.png"),
+						g_gr->images().get("images/wui/menus/statistics_stock.png"),
 						false, "", "i");
 
 	// NOCOM this is broken, because it gets checked before the map was loaded. We need to fix this to become dynamic
@@ -250,7 +250,7 @@ void InteractivePlayer::add_statistics_menu() {
 		};
 		/** TRANSLATORS: An entry in the game's statistics menu */
 		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring,
-							g_gr->images().get("images/wui/buildings/start_expedition.png"),
+							g_gr->images().get("images/wui/menus/statistics_seafaring.png"),
 							false, "", "e");
 	// }
 
@@ -314,11 +314,11 @@ void InteractivePlayer::think() {
 		toggle_chat_->set_enabled(chat_provider_);
 	}
 	{
-		char const* msg_icon = "images/wui/menus/menu_toggle_oldmessage_menu.png";
+		char const* msg_icon = "images/wui/menus/message_old.png";
 		std::string msg_tooltip = _("Messages");
 		if (uint32_t const nr_new_messages =
 		       player().messages().nr_messages(Widelands::Message::Status::kNew)) {
-			msg_icon = "images/wui/menus/menu_toggle_newmessage_menu.png";
+			msg_icon = "images/wui/menus/message_new.png";
 			msg_tooltip =
 			   (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) %
 			    nr_new_messages)

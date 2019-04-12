@@ -138,7 +138,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, players));
 
 	tab_box_.add(&tabs_, UI::Box::Resizing::kFullSize);
-	tabs_.add("main_map_options", g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
+	tabs_.add("main_map_options", g_gr->images().get("images/wui/menus/toggle_minimap.png"),
 	          &main_box_, _("Main Options"));
 	tabs_.add("map_tags", g_gr->images().get("images/ui_basic/checkbox_checked.png"), &tags_box_,
 	          _("Tags"));

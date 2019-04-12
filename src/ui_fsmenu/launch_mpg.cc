@@ -115,7 +115,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                          buth_,
                          buth_,
                          UI::ButtonStyle::kFsMenuSecondary,
-                         g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
+                         g_gr->images().get("images/wui/menus/toggle_minimap.png"),
                          _("Change map or saved game")),
      help_button_(this,
                   "help",

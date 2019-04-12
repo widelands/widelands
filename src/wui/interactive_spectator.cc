@@ -41,7 +41,7 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
    : InteractiveGameBase(g, global_s, OBSERVER, multiplayer) {
 	add_main_menu();
 
-	add_toolbar_button("wui/menus/menu_general_stats", "general_stats", _("Statistics"),
+	add_toolbar_button("wui/menus/general_stats", "general_stats", _("Statistics"),
 	                   &main_windows_.general_stats, true);
 	main_windows_.general_stats.open_window = [this] {
 		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
@@ -56,7 +56,7 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	toolbar()->add_space(15);
 
 	if (is_multiplayer()) {
-		add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
+		add_toolbar_button("wui/menus/chat", "chat", _("Chat"), &chat_, true);
 		chat_.open_window = [this] {
 			if (chat_provider_) {
 				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);

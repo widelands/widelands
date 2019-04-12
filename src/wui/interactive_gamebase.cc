@@ -116,14 +116,14 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 
 // NOCOM adjust tutorials to the new menus
 void InteractiveGameBase::add_main_menu() {
-	mainmenu_.set_image(g_gr->images().get("images/wui/menus/menu_options_menu.png"));
+	mainmenu_.set_image(g_gr->images().get("images/wui/menus/game_main_menu.png"));
 	toolbar()->add(&mainmenu_);
 
 	main_windows_.sound_options.open_window = [this] {
 		new GameOptionsSoundMenu(*this, main_windows_.sound_options);
 	};
 	/** TRANSLATORS: An entry in the game's main menu */
-	mainmenu_.add(_("Sound Options"), MainMenuEntry::kOptions, g_gr->images().get("images/wui/menus/menu_sound_options.png"), false,
+	mainmenu_.add(_("Sound Options"), MainMenuEntry::kOptions, g_gr->images().get("images/wui/menus/options.png"), false,
 				  /** TRANSLATORS: Tooltip for Sound Options in the game's main menu */
 				  _("Set sound effect and music options"));
 
@@ -131,10 +131,10 @@ void InteractiveGameBase::add_main_menu() {
 		new GameMainMenuSaveGame(*this, main_windows_.savegame);
 	};
 	/** TRANSLATORS: An entry in the game's main menu */
-	mainmenu_.add(_("Save Game"), MainMenuEntry::kSaveMap, g_gr->images().get("images/wui/menus/menu_save_game.png"));
+	mainmenu_.add(_("Save Game"), MainMenuEntry::kSaveMap, g_gr->images().get("images/wui/menus/save_game.png"));
 
 	/** TRANSLATORS: An entry in the game's main menu */
-	mainmenu_.add(_("Exit Game"), MainMenuEntry::kExitGame, g_gr->images().get("images/wui/menus/menu_exit_game.png"));
+	mainmenu_.add(_("Exit Game"), MainMenuEntry::kExitGame, g_gr->images().get("images/wui/menus/exit.png"));
 
 	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
 }
@@ -160,18 +160,18 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 void InteractiveGameBase::add_showhide_menu() {
 	// NOCOM make these dynamic according to what has been pressed
 	// NOCOM change basic control tutorial
-	showhidemenu_.set_image(g_gr->images().get("images/wui/menus/menu_toggle_buildhelp.png"));
+	showhidemenu_.set_image(g_gr->images().get("images/wui/menus/toggle_buildhelp.png"));
 	toolbar()->add(&showhidemenu_);
 
-	showhidemenu_.add(_("Building Spaces"), ShowHideEntry::kBuildingSpaces, g_gr->images().get("images/wui/menus/menu_toggle_buildhelp.png"), false,
+	showhidemenu_.add(_("Building Spaces"), ShowHideEntry::kBuildingSpaces, g_gr->images().get("images/wui/menus/toggle_buildhelp.png"), false,
 				  /** TRANSLATORS: Tooltip for Building Spaces in the game's show/hide menu */
 				  _("Show building spaces (on/off)"), pgettext("hotkey", "Space"));
 
-	showhidemenu_.add(_("Census"), ShowHideEntry::kCensus, g_gr->images().get("images/wui/menus/menu_show_census.png"), false,
+	showhidemenu_.add(_("Census"), ShowHideEntry::kCensus, g_gr->images().get("images/wui/menus/toggle_census.png"), false,
 				  /** TRANSLATORS: Tooltip for Census in the game's show/hide menu */
 				  _("Toggle building label display"), "c");
 
-	showhidemenu_.add(_("Statistics"), ShowHideEntry::kStatistics, g_gr->images().get("images/wui/menus/menu_show_statistics.png"), false,
+	showhidemenu_.add(_("Statistics"), ShowHideEntry::kStatistics, g_gr->images().get("images/wui/menus/toggle_statistics.png"), false,
 				  /** TRANSLATORS: Tooltip for Census in the game's show/hide menu */
 				  _("Toggle building statistics display"), "s");
 

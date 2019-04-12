@@ -158,7 +158,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 
 void EditorInteractive::add_main_menu() {
-	mainmenu_.set_image(g_gr->images().get("images/wui/menus/menu_toggle_menu.png"));
+	mainmenu_.set_image(g_gr->images().get("images/wui/menus/editor_main_menu.png"));
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Map"), MainMenuEntry::kNewMap);
 	/** TRANSLATORS: An entry in the editor's main menu */
@@ -307,22 +307,22 @@ void EditorInteractive::open_tool_window(UI::UniqueWindow::Registry& registry, T
 }
 
 void EditorInteractive::add_showhide_menu() {
-	showhidemenu_.set_image(g_gr->images().get("images/wui/menus/menu_toggle_buildhelp.png"));
+	showhidemenu_.set_image(g_gr->images().get("images/wui/menus/toggle_buildhelp.png"));
 	toolbar()->add(&showhidemenu_);
 
-	showhidemenu_.add(_("Building Spaces"), ShowHideEntry::kBuildingSpaces, g_gr->images().get("images/wui/menus/menu_toggle_buildhelp.png"), false,
+	showhidemenu_.add(_("Building Spaces"), ShowHideEntry::kBuildingSpaces, g_gr->images().get("images/wui/menus/toggle_buildhelp.png"), false,
 				  /** TRANSLATORS: Tooltip for Building Spaces in the editor's show/hide menu */
 				  _("Show building spaces (on/off)"), pgettext("hotkey", "Space"));
 
-	showhidemenu_.add(_("Immovables"), ShowHideEntry::kImmovables, g_gr->images().get("images/wui/menus/menu_toggle_immovables.png"), false,
+	showhidemenu_.add(_("Immovables"), ShowHideEntry::kImmovables, g_gr->images().get("images/wui/menus/toggle_immovables.png"), false,
 				  /** TRANSLATORS: Tooltip for Immovables in the editor's show/hide menu */
 				  _("Show immovables (on/off)"));
 
-	showhidemenu_.add(_("Animals"), ShowHideEntry::kAnimals, g_gr->images().get("images/wui/menus/menu_toggle_bobs.png"), false,
+	showhidemenu_.add(_("Animals"), ShowHideEntry::kAnimals, g_gr->images().get("images/wui/menus/toggle_bobs.png"), false,
 				  /** TRANSLATORS: Tooltip for Animals in the editor's show/hide menu */
 				  _("Show animals (on/off)"));
 
-	showhidemenu_.add(_("Resources"), ShowHideEntry::kResources, g_gr->images().get("images/wui/menus/menu_toggle_resources.png"), false,
+	showhidemenu_.add(_("Resources"), ShowHideEntry::kResources, g_gr->images().get("images/wui/menus/toggle_resources.png"), false,
 				  /** TRANSLATORS: Tooltip for Resources in the editor's show/hide menu */
 				  _("Show resources (on/off)"));
 
