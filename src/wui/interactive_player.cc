@@ -217,44 +217,57 @@ void InteractivePlayer::add_statistics_menu() {
 	statisticsmenu_.set_image(g_gr->images().get("images/wui/menus/statistics.png"));
 	toolbar()->add(&statisticsmenu_);
 
-	main_windows_.general_stats.open_window = [this] {
-		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
+	main_windows_.seafaring_stats.open_window = [this] {
+		new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
 	};
-	/** TRANSLATORS: An entry in the game's statistics menu */
-	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral, g_gr->images().get("images/wui/menus/statistics_general.png"));
 
-	main_windows_.ware_stats.open_window = [this] {
-		new WareStatisticsMenu(*this, main_windows_.ware_stats);
-	};
-	/** TRANSLATORS: An entry in the game's statistics menu */
-	statisticsmenu_.add(_("Wares"), StatisticsMenuEntry::kWare, g_gr->images().get("images/wui/menus/statistics_wares.png"));
+	main_windows_.stock.open_window = [this] { new StockMenu(*this, main_windows_.stock); };
 
 	main_windows_.building_stats.open_window = [this] {
 		new BuildingStatisticsMenu(*this, main_windows_.building_stats);
 	};
-	/** TRANSLATORS: An entry in the game's statistics menu */
-	statisticsmenu_.add(_("Buildings"), StatisticsMenuEntry::kBuildings,
-						g_gr->images().get("images/wui/menus/statistics_buildings.png"),
-						false, "", "b");
 
-	main_windows_.stock.open_window = [this] { new StockMenu(*this, main_windows_.stock); };
+
+	main_windows_.ware_stats.open_window = [this] {
+		new WareStatisticsMenu(*this, main_windows_.ware_stats);
+	};
+
+	main_windows_.general_stats.open_window = [this] {
+		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
+	};
+
+	rebuild_statistics_menu();
+
+	statisticsmenu_.selected.connect([this] { statistics_menu_selected(statisticsmenu_.get_selected()); });
+}
+
+// NOCOM trigger this when seafaring changed
+void InteractivePlayer::rebuild_statistics_menu() {
+	statisticsmenu_.clear();
+
+	if (egbase().map().allows_seafaring()) {
+		/** TRANSLATORS: An entry in the game's statistics menu */
+		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring,
+							g_gr->images().get("images/wui/menus/statistics_seafaring.png"),
+							false, "", "e");
+	}
+
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock,
 						g_gr->images().get("images/wui/menus/statistics_stock.png"),
 						false, "", "i");
 
-	// NOCOM this is broken, because it gets checked before the map was loaded. We need to fix this to become dynamic
-	// if (egbase().map().allows_seafaring()) {
-		main_windows_.seafaring_stats.open_window = [this] {
-			new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
-		};
-		/** TRANSLATORS: An entry in the game's statistics menu */
-		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring,
-							g_gr->images().get("images/wui/menus/statistics_seafaring.png"),
-							false, "", "e");
-	// }
+	/** TRANSLATORS: An entry in the game's statistics menu */
+	statisticsmenu_.add(_("Buildings"), StatisticsMenuEntry::kBuildings,
+						g_gr->images().get("images/wui/menus/statistics_buildings.png"),
+						false, "", "b");
 
-	statisticsmenu_.selected.connect([this] { statistics_menu_selected(statisticsmenu_.get_selected()); });
+	/** TRANSLATORS: An entry in the game's statistics menu */
+	statisticsmenu_.add(_("Wares"), StatisticsMenuEntry::kWare, g_gr->images().get("images/wui/menus/statistics_wares.png"));
+
+
+	/** TRANSLATORS: An entry in the game's statistics menu */
+	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral, g_gr->images().get("images/wui/menus/statistics_general.png"));
 }
 
 void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
@@ -569,6 +582,11 @@ void InteractivePlayer::set_player_number(uint32_t const n) {
  * while a game is currently playing.
  */
 void InteractivePlayer::cleanup_for_load() {
+}
+
+void InteractivePlayer::postload() {
+	InteractiveGameBase::postload();
+	rebuild_statistics_menu();
 }
 
 void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {

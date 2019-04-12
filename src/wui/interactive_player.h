@@ -64,6 +64,7 @@ public:
 
 	// For load
 	void cleanup_for_load() override;
+	void postload() override;
 	void think() override;
 	void draw(RenderTarget& dst) override;
 
@@ -83,6 +84,7 @@ private:
 	};
 
 	void add_statistics_menu();
+	void rebuild_statistics_menu();
 	void statistics_menu_selected(StatisticsMenuEntry entry);
 
 	void adjust_toolbar_menus() override;
