@@ -111,7 +111,6 @@ std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_fir
 std::string as_content(const std::string& txt, UI::PanelStyle style);
 
 std::string as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey);
-std::string as_menu_line_with_hotkey(const std::string& text, const std::string& hotkey);
 std::string as_listselect_item_font(const std::string& text);
 std::string as_listselect_hotkey_font(const std::string& text);
 
@@ -124,7 +123,7 @@ std::string as_listselect_hotkey_font(const std::string& text);
 std::shared_ptr<const UI::RenderedText> autofit_ui_text(const std::string& text,
                                                         int width = 0,
                                                         RGBColor color = UI_FONT_CLR_FG,
-                                                        int fontsize = UI_FONT_SIZE_SMALL);
+                                                        int fontsize = UI_FONT_SIZE_SMALL, bool without_escape = false);
 
 namespace UI {
 

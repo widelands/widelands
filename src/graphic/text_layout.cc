@@ -239,21 +239,13 @@ std::string as_content(const std::string& txt, UI::PanelStyle style) {
 std::string as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey) {
 	// UI Text is always bold due to historic reasons
 	static boost::format f(
-	   "<rt><p><font face=%s size=%i bold=1 shadow=1><font color=%s>%s</font> <font italic=1 color=%s>(%s)</font></font></p></rt>");
+	   "<rt><p><font face=%s size=%i bold=1 shadow=1><font color=%s>%s</font> <font color=%s>(%s)</font></font></p></rt>");
 	f % "sans";
 	f % UI_FONT_SIZE_SMALL;
 	f % UI_FONT_TOOLTIP_CLR.hex_value();
 	f % text;
 	f % RGBColor(127, 127, 127).hex_value();
 	f % hotkey;
-	return f.str();
-}
-
-std::string as_menu_line_with_hotkey(const std::string& text, const std::string& hotkey) {
-	// NOCOM get rid
-	static boost::format f("<rt><p>%s %s</p></rt>");
-	f % as_listselect_item_font(text);
-	f % as_listselect_hotkey_font(hotkey);
 	return f.str();
 }
 
@@ -268,7 +260,7 @@ std::string as_listselect_item_font(const std::string& text) {
 }
 std::string as_listselect_hotkey_font(const std::string& text) {
 	// UI Text is always bold due to historic reasons
-	static boost::format f("<font face=%s size=%i bold=1 shadow=1 italic=1 color=%s>%s</font>");
+	static boost::format f("<font face=%s size=%i bold=1 shadow=1 color=%s>%s</font>");
 	f % "sans";
 	f % UI_FONT_SIZE_SMALL;
 	f % RGBColor(127, 127, 127).hex_value();
@@ -277,13 +269,13 @@ std::string as_listselect_hotkey_font(const std::string& text) {
 }
 
 std::shared_ptr<const UI::RenderedText>
-autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
+autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize, bool without_escape) {
 	std::shared_ptr<const UI::RenderedText> result =
-	   UI::g_fh->render(as_uifont(richtext_escape(text), fontsize, color));
+	   UI::g_fh->render(as_uifont(without_escape ? text : richtext_escape(text), fontsize, color));
 	if (width > 0) {  // Autofit
 		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {
 			result = UI::g_fh->render(
-			   as_condensed(richtext_escape(text), UI::Align::kLeft, fontsize, color));
+			   as_condensed(without_escape ? text : richtext_escape(text), UI::Align::kLeft, fontsize, color));
 		}
 	}
 	return result;

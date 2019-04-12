@@ -128,22 +128,29 @@ private:
 		explicit EntryRecord(const std::string& init_name,
 							 uint32_t init_entry,
 							 const Image* init_pic,
-							 const std::string& tooltip_text, const std::string& hotkey_text) :
+							 const std::string& tooltip_text, const std::string& hotkey_text,
+							 Align talign, Align halign) :
 			name(init_name),
 			entry_(init_entry),
 			pic(init_pic),
 			tooltip(tooltip_text),
-			hotkey(hotkey_text) {}
+			hotkey(hotkey_text),
+			text_alignment(talign),
+			hotkey_alignment(halign) {}
 		const std::string name;
 		const uint32_t entry_;
 		const Image* pic;
 		const std::string tooltip;
 		const std::string hotkey;
+		const Align text_alignment;
+		const Align hotkey_alignment;
 	};
 	using EntryRecordDeque = std::deque<EntryRecord*>;
 
 	int max_pic_width_;
 	int lineheight_;
+	int widest_text_;
+	int widest_hotkey_;
 	EntryRecordDeque entry_records_;
 	Scrollbar scrollbar_;
 	uint32_t scrollpos_;  //  in pixels

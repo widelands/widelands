@@ -213,11 +213,11 @@ void Button::draw(RenderTarget& dst) {
 			}
 		}
 
-	} else if (title_.length()) {
+	} else if (!title_.empty()) {
 		//  Otherwise draw title string centered
 		std::shared_ptr<const UI::RenderedText> rendered_text =
 		   autofit_ui_text(title_, get_inner_w() - 2 * kButtonImageMargin,
-		                   is_monochrome ? UI_FONT_CLR_DISABLED : UI_FONT_CLR_FG);
+		                   is_monochrome ? UI_FONT_CLR_DISABLED : UI_FONT_CLR_FG, UI_FONT_SIZE_SMALL, true);
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2,
 		                                  (get_h() - rendered_text->height()) / 2));
