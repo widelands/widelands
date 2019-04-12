@@ -120,7 +120,7 @@ void BaseListselect::add(const std::string& name,
 
 	er->entry_ = entry;
 	er->pic = pic;
-	er->name = name;
+	er->name = is_richtext(name) ? name : as_uifont(name, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
 	er->tooltip = tooltip_text;
 	int entry_height = lineheight_;
 	if (pic) {
@@ -296,8 +296,7 @@ void BaseListselect::layout() {
 	if (selection_mode_ == ListselectLayout::kDropdown) {
 		for (size_t i = 0; i < entry_records_.size(); ++i) {
 			const EntryRecord& er = *entry_records_[i];
-			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
-			   as_uifont(er.name, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG));
+			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(er.name);
 			int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
 			int difference = rendered_text->width() + picw + 8 - get_eff_w();
 			if (difference > 0) {
@@ -341,8 +340,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		assert(eff_h < std::numeric_limits<int32_t>::max());
 
 		const EntryRecord& er = *entry_records_[idx];
-		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh->render(as_uifont(er.name, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG));
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(er.name);
 
 		int lineheight = std::max(get_lineheight(), rendered_text->height());
 

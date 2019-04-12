@@ -236,10 +236,31 @@ std::string as_content(const std::string& txt, UI::PanelStyle style) {
 	NEVER_HERE();
 }
 
-std::string as_text_with_hotkey(const std::string& text, const std::string& hotkey) {
-	return (boost::format("%1% <font bold=0 italic=1>(%2%)</font>") % text % hotkey).str();
+std::string as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey) {
+	// UI Text is always bold due to historic reasons
+	static boost::format f(
+	   "<rt><p><font face=%s size=%i bold=1 shadow=1><font color=%s>%s</font> <font italic=1 color=%s>(%s)</font></font></p></rt>");
+	f % "sans";
+	f % UI_FONT_SIZE_SMALL;
+	f % UI_FONT_TOOLTIP_CLR.hex_value();
+	f % text;
+	f % RGBColor(127, 127, 127).hex_value();
+	f % hotkey;
+	return f.str();
 }
 
+std::string as_menu_line_with_hotkey(const std::string& text, const std::string& hotkey) {
+	// UI Text is always bold due to historic reasons
+	static boost::format f(
+	   "<rt><p><font face=%s size=%i bold=1 shadow=1><font color=%s>%s</font> <font italic=1 color=%s>%s</font></font></p></rt>");
+	f % "sans";
+	f % UI_FONT_SIZE_SMALL;
+	f % UI_FONT_CLR_FG.hex_value();
+	f % text;
+	f % RGBColor(127, 127, 127).hex_value();
+	f % hotkey;
+	return f.str();
+}
 std::shared_ptr<const UI::RenderedText>
 autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
 	std::shared_ptr<const UI::RenderedText> result =

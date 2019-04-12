@@ -89,13 +89,13 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	 mainmenu_(
 		toolbar(), 0, 0, 34U, 10, 34U,
 		 /** TRANSLATORS: Title for the main menu button in the editor */
-		 as_text_with_hotkey(_("Main Menu"), "h"),
+		 as_tooltip_text_with_hotkey(_("Main Menu"), "h"),
 		 UI::DropdownType::kPictorialMenu,
 		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
 	 toolmenu_(
 		toolbar(), 0, 0, 34U, 10, 34U,
 		 /** TRANSLATORS: Title for the tool menu button in the editor */
-		 as_text_with_hotkey(_("Tools"), "t"),
+		 as_tooltip_text_with_hotkey(_("Tools"), "t"),
 		 UI::DropdownType::kPictorialMenu,
 		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
      undo_(nullptr),
@@ -175,9 +175,9 @@ void EditorInteractive::add_main_menu() {
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Random Map"), MainMenuEntry::kNewRandomMap);
 	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(as_text_with_hotkey(_("Load Map"), pgettext("hotkey", "Ctrl+l")), MainMenuEntry::kLoadMap);
+	mainmenu_.add(as_menu_line_with_hotkey(_("Load Map"), pgettext("hotkey", "Ctrl+l")), MainMenuEntry::kLoadMap);
 	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(as_text_with_hotkey(_("Save Map"), pgettext("hotkey", "Ctrl+s")), MainMenuEntry::kSaveMap);
+	mainmenu_.add(as_menu_line_with_hotkey(_("Save Map"), pgettext("hotkey", "Ctrl+s")), MainMenuEntry::kSaveMap);
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions);
 	/** TRANSLATORS: An entry in the editor's main menu */
@@ -259,7 +259,7 @@ void EditorInteractive::add_tool_menu() {
 				  /** TRANSLATORS: Tooltip for the map size tool in the editor */
 				  _("Change the map’s size"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
-	toolmenu_.add(as_text_with_hotkey(_("Information"), "i"), ToolMenuEntry::kFieldInfo,
+	toolmenu_.add(as_menu_line_with_hotkey(_("Information"), "i"), ToolMenuEntry::kFieldInfo,
 				  g_gr->images().get("images/wui/editor/fsel_editor_info.png"), false,
 				  /** TRANSLATORS: Tooltip for the map information tool in the editor */
 				  _("Click on a field to show information about it"));
