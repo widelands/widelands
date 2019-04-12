@@ -212,9 +212,9 @@ void BaseDropdown::add(const std::string& name,
                        const uint32_t value,
                        const Image* pic,
                        const bool select_this,
-                       const std::string& tooltip_text) {
+                       const std::string& tooltip_text, const std::string& hotkey = std::string()) {
 	assert(pic != nullptr || type_ != DropdownType::kPictorial);
-	list_->add(name, value, pic, select_this, tooltip_text);
+	list_->add(name, value, pic, select_this, tooltip_text, hotkey);
 	if (select_this) {
 		set_value();
 	}

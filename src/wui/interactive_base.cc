@@ -207,20 +207,28 @@ void InteractiveBase::add_mapview_menu(MiniMapType minimap_type) {
 	minimap_registry_.open_window = [this] { toggle_minimap(); };
 	minimap_registry_.minimap_type = minimap_type;
 	/** TRANSLATORS: An entry in the game's map view menu */
-	mapviewmenu_.add(as_menu_line_with_hotkey(_("Minimap"), "m"),
-					 MapviewMenuEntry::kMinimap, g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"));
+	mapviewmenu_.add(_("Minimap"),
+					 MapviewMenuEntry::kMinimap,
+					 g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
+					 false, "", "m");
 
 	/** TRANSLATORS: An entry in the game's map view menu */
-	mapviewmenu_.add(as_menu_line_with_hotkey(_("Zoom +"), pgettext("hotkey", "Ctrl++")),
-					 MapviewMenuEntry::kIncreaseZoom, g_gr->images().get("images/wui/menus/menu_increase_zoom.png"));
+	mapviewmenu_.add(_("Zoom +"),
+					 MapviewMenuEntry::kIncreaseZoom,
+					 g_gr->images().get("images/wui/menus/menu_increase_zoom.png"),
+					 false, "", pgettext("hotkey", "Ctrl++"));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
-	mapviewmenu_.add(as_menu_line_with_hotkey(_("Reset zoom"), pgettext("hotkey", "Ctrl+0")),
-					 MapviewMenuEntry::kResetZoom, g_gr->images().get("images/wui/menus/menu_reset_zoom.png"));
+	mapviewmenu_.add(_("Reset zoom"),
+					 MapviewMenuEntry::kResetZoom,
+					 g_gr->images().get("images/wui/menus/menu_reset_zoom.png"),
+					 false, "", pgettext("hotkey", "Ctrl+0"));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
-	mapviewmenu_.add(as_menu_line_with_hotkey(_("Zoom -"), pgettext("hotkey", "Ctrl+-")),
-					 MapviewMenuEntry::kDecreaseZoom, g_gr->images().get("images/wui/menus/menu_decrease_zoom.png"));
+	mapviewmenu_.add(_("Zoom -"),
+					 MapviewMenuEntry::kDecreaseZoom,
+					 g_gr->images().get("images/wui/menus/menu_decrease_zoom.png"),
+					 false, "", pgettext("hotkey", "Ctrl+-"));
 
 	mapviewmenu_.selected.connect([this] { mapview_menu_selected(mapviewmenu_.get_selected()); });
 

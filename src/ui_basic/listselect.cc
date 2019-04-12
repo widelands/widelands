@@ -115,13 +115,10 @@ void BaseListselect::add(const std::string& name,
                          uint32_t entry,
                          const Image* pic,
                          bool const sel,
-                         const std::string& tooltip_text) {
-	EntryRecord* er = new EntryRecord();
+                         const std::string& tooltip_text, const std::string& hotkey) {
+	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey);
 
-	er->entry_ = entry;
-	er->pic = pic;
-	er->name = is_richtext(name) ? name : as_uifont(name, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
-	er->tooltip = tooltip_text;
+	// NOCOM deal with this er->name = is_richtext(name) ? name : as_uifont(name, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
 	int entry_height = lineheight_;
 	if (pic) {
 		int w = pic->width();
@@ -140,41 +137,6 @@ void BaseListselect::add(const std::string& name,
 
 	if (sel)
 		select(entry_records_.size() - 1);
-}
-
-void BaseListselect::add_front(const std::string& name,
-                               const Image* pic,
-                               bool const sel,
-                               const std::string& tooltip_text) {
-	EntryRecord* er = new EntryRecord();
-
-	er->entry_ = 0;
-	for (EntryRecord* temp_entry : entry_records_) {
-		++(temp_entry)->entry_;
-	}
-
-	er->pic = pic;
-	er->name = name;
-	er->tooltip = tooltip_text;
-
-	int entry_height = lineheight_;
-	if (pic) {
-		int w = pic->width();
-		int h = pic->height();
-		entry_height = (h >= entry_height) ? h : entry_height;
-		if (max_pic_width_ < w)
-			max_pic_width_ = w;
-	}
-
-	if (entry_height > lineheight_)
-		lineheight_ = entry_height;
-
-	entry_records_.push_front(er);
-
-	layout();
-
-	if (sel)
-		select(0);
 }
 
 /**
@@ -296,7 +258,8 @@ void BaseListselect::layout() {
 	if (selection_mode_ == ListselectLayout::kDropdown) {
 		for (size_t i = 0; i < entry_records_.size(); ++i) {
 			const EntryRecord& er = *entry_records_[i];
-			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(er.name);
+			const std::string renderme = as_menu_line_with_hotkey(er.name, er.hotkey);
+			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(renderme);
 			int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
 			int difference = rendered_text->width() + picw + 8 - get_eff_w();
 			if (difference > 0) {
@@ -340,7 +303,9 @@ void BaseListselect::draw(RenderTarget& dst) {
 		assert(eff_h < std::numeric_limits<int32_t>::max());
 
 		const EntryRecord& er = *entry_records_[idx];
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(er.name);
+		// NOCOM split text from hotkey. Hotkeys should look like a table rather than just being right-aligned.
+		const std::string renderme = as_menu_line_with_hotkey(er.name, er.hotkey);
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(renderme);
 
 		int lineheight = std::max(get_lineheight(), rendered_text->height());
 

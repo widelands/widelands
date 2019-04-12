@@ -250,17 +250,32 @@ std::string as_tooltip_text_with_hotkey(const std::string& text, const std::stri
 }
 
 std::string as_menu_line_with_hotkey(const std::string& text, const std::string& hotkey) {
+	// NOCOM get rid
+	static boost::format f("<rt><p>%s %s</p></rt>");
+	f % as_listselect_item_font(text);
+	f % as_listselect_hotkey_font(hotkey);
+	return f.str();
+}
+
+std::string as_listselect_item_font(const std::string& text) {
 	// UI Text is always bold due to historic reasons
-	static boost::format f(
-	   "<rt><p><font face=%s size=%i bold=1 shadow=1><font color=%s>%s</font> <font italic=1 color=%s>%s</font></font></p></rt>");
+	static boost::format f("<font face=%s size=%i bold=1 shadow=1 color=%s>%s</font>");
 	f % "sans";
 	f % UI_FONT_SIZE_SMALL;
 	f % UI_FONT_CLR_FG.hex_value();
 	f % text;
-	f % RGBColor(127, 127, 127).hex_value();
-	f % hotkey;
 	return f.str();
 }
+std::string as_listselect_hotkey_font(const std::string& text) {
+	// UI Text is always bold due to historic reasons
+	static boost::format f("<font face=%s size=%i bold=1 shadow=1 italic=1 color=%s>%s</font>");
+	f % "sans";
+	f % UI_FONT_SIZE_SMALL;
+	f % RGBColor(127, 127, 127).hex_value();
+	f % text;
+	return f.str();
+}
+
 std::shared_ptr<const UI::RenderedText>
 autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
 	std::shared_ptr<const UI::RenderedText> result =

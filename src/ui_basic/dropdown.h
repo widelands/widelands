@@ -138,13 +138,14 @@ protected:
 	/// \param pic          an image to illustrate the entry. Can be nullptr for textual dropdowns.
 	/// \param select_this  whether this element should be selected
 	/// \param tooltip_text a tooltip for this entry
+	/// \param hotkey       a hotkey tip if any
 	///
 	/// Text conventions: Title Case for the 'name', Sentence case for the 'tooltip_text'
 	void add(const std::string& name,
 	         uint32_t value,
-	         const Image* pic = nullptr,
-	         const bool select_this = false,
-	         const std::string& tooltip_text = std::string());
+	         const Image* pic,
+	         const bool select_this,
+	         const std::string& tooltip_text, const std::string& hotkey);
 
 	/// \return the index of the selected element
 	uint32_t get_selected() const;
@@ -236,13 +237,14 @@ public:
 	/// only.
 	/// \param select_this  whether this element should be selected
 	/// \param tooltip_text a tooltip for this entry
+	/// \param hotkey       a hotkey tip if any
 	void add(const std::string& name,
 	         Entry value,
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
-	         const std::string& tooltip_text = std::string()) {
+	         const std::string& tooltip_text = std::string(), const std::string& hotkey = std::string()) {
 		entry_cache_.push_back(std::unique_ptr<Entry>(new Entry(value)));
-		BaseDropdown::add(name, size(), pic, select_this, tooltip_text);
+		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey);
 	}
 
 	/// \return the selected element

@@ -112,6 +112,8 @@ std::string as_content(const std::string& txt, UI::PanelStyle style);
 
 std::string as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey);
 std::string as_menu_line_with_hotkey(const std::string& text, const std::string& hotkey);
+std::string as_listselect_item_font(const std::string& text);
+std::string as_listselect_hotkey_font(const std::string& text);
 
 /**
  * Render 'text' as ui_font. If 'width' > 0 and the rendered image is too
