@@ -1,11 +1,11 @@
 dirname = path.dirname (__file__)
 
 -- Quick overview: We use 4 sets of animations here.
--- The default set (l__, "rookie") is for soldiers with no helmet and one sword.
--- The set prefixed "h" (l_h, "helm") is for soldiers with a helmet and one sword.
--- The set prefixed "s" (l_s, "sword") is for soldiers with no helmet and two swords.
--- The set prefixed "sh" (l_sh, "hero") is for soldiers with a helmet and two swords.
-
+-- The default set (fri_rookie, "rookie") is for soldiers with no helmet and one sword.
+-- The set prefixed "h" (fri_health, "helm") is for soldiers with a helmet and one sword.
+-- The set prefixed "s" (fri_attack, "sword") is for soldiers with no helmet and two swords.
+-- The set prefixed "sh" (fri_hero, "hero") is for soldiers with a helmet and two swords.
+--
 -- Side Note for the w/e naming scheme: 
 -- The attack and evade animation consider the soldier on the LEFT to be called E
 -- and the soldier on the RIGHT to be called W.
@@ -17,6 +17,9 @@ dirname = path.dirname (__file__)
 -- Confused?
 -- Oh, and by the way, the soldiers' swords are not long enough to touch the opponent if the
 -- hotspot is at the soldier's feet. That's why all battle hotspots are shifted by 3 pixels.
+--
+-- The above explanation refers only to frisian soldiers. Other tribes's soldiers
+-- may follow other conventions described in their appropriate init.lua's.
 
 animations = {
    -- normal
@@ -96,249 +99,249 @@ animations = {
       fps = 10
    },
    -- health upgrade only
-   h_idle = {
+   health_idle = {
       pictures = path.list_files (dirname .. "helm/idle_??.png"),
       hotspot = {20, 25},
       fps = 10
    },
-   h_atk_ok_1_e = {
+   health_atk_ok_1_e = {
       pictures = path.list_files (dirname .. "helm/atk_ok_1_e_??.png"),
       hotspot = {23, 24},
       fps = 10
    },
-   h_atk_fail_1_e = {
+   health_atk_fail_1_e = {
       pictures = path.list_files (dirname .. "helm/atk_fail_1_e_??.png"),
       hotspot = {23, 24},
       fps = 10
    },
-   h_atk_ok_1_w = {
+   health_atk_ok_1_w = {
       pictures = path.list_files (dirname .. "helm/atk_ok_1_w_??.png"),
       hotspot = {-1, 24},
       fps = 10
    },
-   h_atk_fail_1_w = {
+   health_atk_fail_1_w = {
       pictures = path.list_files (dirname .. "helm/atk_fail_1_w_??.png"),
       hotspot = {-1, 24},
       fps = 10
    },
-   h_atk_ok_2_e = {
+   health_atk_ok_2_e = {
       pictures = path.list_files (dirname .. "helm/atk_ok_2_e_??.png"),
       hotspot = {23, 24},
       fps = 10
    },
-   h_atk_fail_2_e = {
+   health_atk_fail_2_e = {
       pictures = path.list_files (dirname .. "helm/atk_fail_2_e_??.png"),
       hotspot = {23, 24},
       fps = 10
    },
-   h_atk_ok_2_w = {
+   health_atk_ok_2_w = {
       pictures = path.list_files (dirname .. "helm/atk_ok_2_w_??.png"),
       hotspot = {-1, 24},
       fps = 10
    },
-   h_atk_fail_2_w = {
+   health_atk_fail_2_w = {
       pictures = path.list_files (dirname .. "helm/atk_fail_2_w_??.png"),
       hotspot = {-1, 24},
       fps = 10
    },
-   h_eva_ok_e = {
+   health_eva_ok_e = {
       pictures = path.list_files (dirname .. "helm/eva_ok_e_??.png"),
       hotspot = {11, 24},
       fps = 10
    },
-   h_eva_fail_e = {
+   health_eva_fail_e = {
       pictures = path.list_files (dirname .. "helm/eva_fail_e_??.png"),
       hotspot = {12, 24},
       fps = 10
    },
-   h_eva_ok_w = {
+   health_eva_ok_w = {
       pictures = path.list_files (dirname .. "helm/eva_ok_w_??.png"),
       hotspot = {-1, 24},
       fps = 10
    },
-   h_eva_fail_w = {
+   health_eva_fail_w = {
       pictures = path.list_files (dirname .. "helm/eva_fail_w_??.png"),
       hotspot = {-1, 24},
       fps = 10
    },
-   h_die_f_w = {
+   health_die_f_w = {
       pictures = path.list_files (dirname .. "helm/die_f_w_??.png"),
       hotspot = {-1, 24},
       fps = 10
    },
-   h_die_f_e = {
+   health_die_f_e = {
       pictures = path.list_files (dirname .. "helm/die_f_e_??.png"),
       hotspot = {19, 24},
       fps = 10
    },
-   h_die_b_w = {
+   health_die_b_w = {
       pictures = path.list_files (dirname .. "helm/die_b_w_??.png"),
       hotspot = {15, 24},
       fps = 10
    },
-   h_die_b_e = {
+   health_die_b_e = {
       pictures = path.list_files (dirname .. "helm/die_b_e_??.png"),
       hotspot = {12, 24},
       fps = 10
    },
    -- health and attack upgrade
-   sh_idle = {
+   hero_idle = {
       pictures = path.list_files (dirname .. "hero/idle_??.png"),
       hotspot = {20, 25},
       fps = 10
    },
-   sh_atk_ok_1_e = {
+   hero_atk_ok_1_e = {
       pictures = path.list_files (dirname .. "hero/atk_ok_1_e_??.png"),
       hotspot = {23, 25},
       fps = 10
    },
-   sh_atk_fail_1_e = {
+   hero_atk_fail_1_e = {
       pictures = path.list_files (dirname .. "hero/atk_fail_1_e_??.png"),
       hotspot = {22, 25},
       fps = 10
    },
-   sh_atk_ok_1_w = {
+   hero_atk_ok_1_w = {
       pictures = path.list_files (dirname .. "hero/atk_ok_1_w_??.png"),
       hotspot = {0, 25},
       fps = 10
    },
-   sh_atk_fail_1_w = {
+   hero_atk_fail_1_w = {
       pictures = path.list_files (dirname .. "hero/atk_fail_1_w_??.png"),
       hotspot = {0, 25},
       fps = 10
    },
-   sh_atk_ok_2_e = {
+   hero_atk_ok_2_e = {
       pictures = path.list_files (dirname .. "hero/atk_ok_2_e_??.png"),
       hotspot = {23, 25},
       fps = 10
    },
-   sh_atk_fail_2_e = {
+   hero_atk_fail_2_e = {
       pictures = path.list_files (dirname .. "hero/atk_fail_2_e_??.png"),
       hotspot = {23, 25},
       fps = 10
    },
-   sh_atk_ok_2_w = {
+   hero_atk_ok_2_w = {
       pictures = path.list_files (dirname .. "hero/atk_ok_2_w_??.png"),
       hotspot = {0, 25},
       fps = 10
    },
-   sh_atk_fail_2_w = {
+   hero_atk_fail_2_w = {
       pictures = path.list_files (dirname .. "hero/atk_fail_2_w_??.png"),
       hotspot = {0, 25},
       fps = 10
    },
-   sh_eva_ok_e = {
+   hero_eva_ok_e = {
       pictures = path.list_files (dirname .. "hero/eva_ok_e_??.png"),
       hotspot = {13, 25},
       fps = 10
    },
-   sh_eva_fail_e = {
+   hero_eva_fail_e = {
       pictures = path.list_files (dirname .. "hero/eva_fail_e_??.png"),
       hotspot = {13, 25},
       fps = 10
    },
-   sh_eva_ok_w = {
+   hero_eva_ok_w = {
       pictures = path.list_files (dirname .. "hero/eva_ok_w_??.png"),
       hotspot = {0, 25},
       fps = 10
    },
-   sh_eva_fail_w = {
+   hero_eva_fail_w = {
       pictures = path.list_files (dirname .. "hero/eva_fail_w_??.png"),
       hotspot = {0, 25},
       fps = 10
    },
-   sh_die_w = {
+   hero_die_w = {
       pictures = path.list_files (dirname .. "hero/die_w_??.png"),
       hotspot = {-1, 24},
       fps = 10
    },
-   sh_die_e = {
+   hero_die_e = {
       pictures = path.list_files (dirname .. "hero/die_e_??.png"),
       hotspot = {19, 24},
       fps = 10
    },
    -- sword upgrade only
-   s_idle = {
+   attack_idle = {
       pictures = path.list_files (dirname .. "sword/idle_??.png"),
       hotspot = {20, 25},
       fps = 10
    },
-   s_atk_ok_1_e = {
+   attack_atk_ok_1_e = {
       pictures = path.list_files (dirname .. "sword/atk_ok_1_e_??.png"),
       hotspot = {23, 24},
       fps = 10
    },
-   s_atk_fail_1_e = {
+   attack_atk_fail_1_e = {
       pictures = path.list_files (dirname .. "sword/atk_fail_1_e_??.png"),
       hotspot = {23, 24},
       fps = 10
    },
-   s_atk_ok_1_w = {
+   attack_atk_ok_1_w = {
       pictures = path.list_files (dirname .. "sword/atk_ok_1_w_??.png"),
       hotspot = {0, 23},
       fps = 10
    },
-   s_atk_fail_1_w = {
+   attack_atk_fail_1_w = {
       pictures = path.list_files (dirname .. "sword/atk_fail_1_w_??.png"),
       hotspot = {0, 23},
       fps = 10
    },
-   s_atk_ok_2_e = {
+   attack_atk_ok_2_e = {
       pictures = path.list_files (dirname .. "sword/atk_ok_2_e_??.png"),
       hotspot = {23, 23},
       fps = 10
    },
-   s_atk_fail_2_e = {
+   attack_atk_fail_2_e = {
       pictures = path.list_files (dirname .. "sword/atk_fail_2_e_??.png"),
       hotspot = {23, 23},
       fps = 10
    },
-   s_atk_ok_2_w = {
+   attack_atk_ok_2_w = {
       pictures = path.list_files (dirname .. "sword/atk_ok_2_w_??.png"),
       hotspot = {0, 23},
       fps = 10
    },
-   s_atk_fail_2_w = {
+   attack_atk_fail_2_w = {
       pictures = path.list_files (dirname .. "sword/atk_fail_2_w_??.png"),
       hotspot = {0, 23},
       fps = 10
    },
-   s_eva_ok_e = {
+   attack_eva_ok_e = {
       pictures = path.list_files (dirname .. "sword/eva_ok_e_??.png"),
       hotspot = {13, 23},
       fps = 10
    },
-   s_eva_fail_e = {
+   attack_eva_fail_e = {
       pictures = path.list_files (dirname .. "sword/eva_fail_e_??.png"),
       hotspot = {13, 23},
       fps = 10
    },
-   s_eva_ok_w = {
+   attack_eva_ok_w = {
       pictures = path.list_files (dirname .. "sword/eva_ok_w_??.png"),
       hotspot = {0, 24},
       fps = 10
    },
-   s_eva_fail_w = {
+   attack_eva_fail_w = {
       pictures = path.list_files (dirname .. "sword/eva_fail_w_??.png"),
       hotspot = {0, 23},
       fps = 10
    },
-   s_die_f_w = {
+   attack_die_f_w = {
       pictures = path.list_files (dirname .. "sword/die_f_w_??.png"),
       hotspot = {-1, 21},
       fps = 10
    },
-   s_die_f_e = {
+   attack_die_f_e = {
       pictures = path.list_files (dirname .. "sword/die_f_e_??.png"),
       hotspot = {19, 22},
       fps = 10
    },
-   s_die_b_w = {
+   attack_die_b_w = {
       pictures = path.list_files (dirname .. "sword/die_b_w_??.png"),
       hotspot = {17, 25},
       fps = 10
    },
-   s_die_b_e = {
+   attack_die_b_e = {
       pictures = path.list_files (dirname .. "sword/die_b_e_??.png"),
       hotspot = {13, 23},
       fps = 10
@@ -350,7 +353,7 @@ add_walking_animations (animations, "s_walk", dirname, "sword/walk", {8, 24}, 15
 add_walking_animations (animations, "sh_walk", dirname, "hero/walk", {8, 25}, 15)
 
 -- convenience definitions so we don´t have to repeat this table for every single entry below
-l_h = {
+fri_health = {
    min_health = 1,
    min_attack = 0,
    min_defense = 0,
@@ -360,7 +363,7 @@ l_h = {
    max_defense = 2,
    max_evade = 0,
 }
-l_s = {
+fri_attack = {
    min_health = 0,
    min_attack = 4,
    min_defense = 0,
@@ -370,7 +373,7 @@ l_s = {
    max_defense = 2,
    max_evade = 0,
 }
-l_sh = {
+fri_hero = {
    min_health = 1,
    min_attack = 4,
    min_defense = 0,
@@ -380,7 +383,7 @@ l_sh = {
    max_defense = 2,
    max_evade = 0,
 }
-l__ = {
+fri_rookie = {
    min_health = 0,
    min_attack = 0,
    min_defense = 0,
@@ -433,126 +436,126 @@ tribes:new_soldier_type {
 
    -- Random animations for battle
    attack_success_e = {
-      atk_ok_1_w = l__,
-      atk_ok_2_w = l__,
-      h_atk_ok_1_w = l_h,
-      h_atk_ok_2_w = l_h,
-      s_atk_ok_1_w = l_s,
-      s_atk_ok_2_w = l_s,
-      sh_atk_ok_1_w = l_sh,
-      sh_atk_ok_2_w = l_sh,
+      atk_ok_1_w = fri_rookie,
+      atk_ok_2_w = fri_rookie,
+      health_atk_ok_1_w = fri_health,
+      health_atk_ok_2_w = fri_health,
+      attack_atk_ok_1_w = fri_attack,
+      attack_atk_ok_2_w = fri_attack,
+      hero_atk_ok_1_w = fri_hero,
+      hero_atk_ok_2_w = fri_hero,
    },
    attack_success_w = {
-      atk_ok_1_e = l__,
-      atk_ok_2_e = l__,
-      h_atk_ok_1_e = l_h,
-      h_atk_ok_2_e = l_h,
-      s_atk_ok_1_e = l_s,
-      s_atk_ok_2_e = l_s,
-      sh_atk_ok_1_e = l_sh,
-      sh_atk_ok_2_e = l_sh,
+      atk_ok_1_e = fri_rookie,
+      atk_ok_2_e = fri_rookie,
+      health_atk_ok_1_e = fri_health,
+      health_atk_ok_2_e = fri_health,
+      attack_atk_ok_1_e = fri_attack,
+      attack_atk_ok_2_e = fri_attack,
+      hero_atk_ok_1_e = fri_hero,
+      hero_atk_ok_2_e = fri_hero,
    },
    attack_failure_e = {
-      atk_fail_1_w = l__,
-      atk_fail_2_w = l__,
-      h_atk_fail_1_w = l_h,
-      h_atk_fail_2_w = l_h,
-      s_atk_fail_1_w = l_s,
-      s_atk_fail_2_w = l_s,
-      sh_atk_fail_1_w = l_sh,
-      sh_atk_fail_2_w = l_sh,
+      atk_fail_1_w = fri_rookie,
+      atk_fail_2_w = fri_rookie,
+      health_atk_fail_1_w = fri_health,
+      health_atk_fail_2_w = fri_health,
+      attack_atk_fail_1_w = fri_attack,
+      attack_atk_fail_2_w = fri_attack,
+      hero_atk_fail_1_w = fri_hero,
+      hero_atk_fail_2_w = fri_hero,
    },
    attack_failure_w = {
-      atk_fail_1_e = l__,
-      atk_fail_2_e = l__,
-      h_atk_fail_1_e = l_h,
-      h_atk_fail_2_e = l_h,
-      s_atk_fail_1_e = l_s,
-      s_atk_fail_2_e = l_s,
-      sh_atk_fail_1_e = l_sh,
-      sh_atk_fail_2_e = l_sh,
+      atk_fail_1_e = fri_rookie,
+      atk_fail_2_e = fri_rookie,
+      health_atk_fail_1_e = fri_health,
+      health_atk_fail_2_e = fri_health,
+      attack_atk_fail_1_e = fri_attack,
+      attack_atk_fail_2_e = fri_attack,
+      hero_atk_fail_1_e = fri_hero,
+      hero_atk_fail_2_e = fri_hero,
    },
    evade_failure_e = {
-      h_eva_fail_w = l_h,
-      sh_eva_fail_w = l_sh,
-      eva_fail_w = l__,
-      s_eva_fail_w = l_s,
+      health_eva_fail_w = fri_health,
+      hero_eva_fail_w = fri_hero,
+      eva_fail_w = fri_rookie,
+      attack_eva_fail_w = fri_attack,
    },
    evade_failure_w = {
-      h_eva_fail_e = l_h,
-      sh_eva_fail_e = l_sh,
-      eva_fail_e = l__,
-      s_eva_fail_e = l_s,
+      health_eva_fail_e = fri_health,
+      hero_eva_fail_e = fri_hero,
+      eva_fail_e = fri_rookie,
+      attack_eva_fail_e = fri_attack,
    },
    evade_success_e = {
-      h_eva_ok_w = l_h,
-      sh_eva_ok_w = l_sh,
-      eva_ok_w = l__,
-      s_eva_ok_w = l_s,
+      health_eva_ok_w = fri_health,
+      hero_eva_ok_w = fri_hero,
+      eva_ok_w = fri_rookie,
+      attack_eva_ok_w = fri_attack,
    },
    evade_success_w = {
-      h_eva_ok_e = l_h,
-      sh_eva_ok_e = l_sh,
-      eva_ok_e = l__,
-      s_eva_ok_e = l_s,
+      health_eva_ok_e = fri_health,
+      hero_eva_ok_e = fri_hero,
+      eva_ok_e = fri_rookie,
+      attack_eva_ok_e = fri_attack,
    },
    die_w = {
-      h_die_f_w = l_h,
-      h_die_b_w = l_h,
-      sh_die_w = l_sh,
-      die_w = l__,
-      s_die_f_w = l_s,
-      s_die_b_w = l_s,
+      health_die_f_w = fri_health,
+      health_die_b_w = fri_health,
+      hero_die_w = fri_hero,
+      die_w = fri_rookie,
+      attack_die_f_w = fri_attack,
+      attack_die_b_w = fri_attack,
    },
    die_e = {
-      h_die_f_e = l_h,
-      h_die_b_e = l_h,
-      sh_die_e = l_sh,
-      die_e = l__,
-      s_die_f_e = l_s,
-      s_die_b_e = l_s,
+      health_die_f_e = fri_health,
+      health_die_b_e = fri_health,
+      hero_die_e = fri_hero,
+      die_e = fri_rookie,
+      attack_die_f_e = fri_attack,
+      attack_die_b_e = fri_attack,
    },
    -- level-dependent walking and idle animations
    idle = {
-      h_idle = l_h,
-      sh_idle = l_sh,
-      idle = l__,
-      s_idle = l_s,
+      health_idle = fri_health,
+      hero_idle = fri_hero,
+      idle = fri_rookie,
+      attack_idle = fri_attack,
    },
    walk_sw = {
-      h_walk_sw = l_h,
-      sh_walk_sw = l_sh,
-      walk_sw = l__,
-      s_walk_sw = l_s,
+      health_walk_sw = fri_health,
+      hero_walk_sw = fri_hero,
+      walk_sw = fri_rookie,
+      attack_walk_sw = fri_attack,
    },
    walk_nw = {
-      h_walk_nw = l_h,
-      sh_walk_nw = l_sh,
-      walk_nw = l__,
-      s_walk_nw = l_s,
+      health_walk_nw = fri_health,
+      hero_walk_nw = fri_hero,
+      walk_nw = fri_rookie,
+      attack_walk_nw = fri_attack,
    },
    walk_w = {
-      h_walk_w = l_h,
-      sh_walk_w = l_sh,
-      walk_w = l__,
-      s_walk_w = l_s,
+      health_walk_w = fri_health,
+      hero_walk_w = fri_hero,
+      walk_w = fri_rookie,
+      attack_walk_w = fri_attack,
    },
    walk_se = {
-      h_walk_se = l_h,
-      sh_walk_se = l_sh,
-      walk_se = l__,
-      s_walk_se = l_s,
+      health_walk_se = fri_health,
+      hero_walk_se = fri_hero,
+      walk_se = fri_rookie,
+      attack_walk_se = fri_attack,
    },
    walk_ne = {
-      h_walk_ne = l_h,
-      sh_walk_ne = l_sh,
-      walk_ne = l__,
-      s_walk_ne = l_s,
+      health_walk_ne = fri_health,
+      hero_walk_ne = fri_hero,
+      walk_ne = fri_rookie,
+      attack_walk_ne = fri_attack,
    },
    walk_e = {
-      h_walk_e = l_h,
-      sh_walk_e = l_sh,
-      walk_e = l__,
-      s_walk_e = l_s,
+      health_walk_e = fri_health,
+      hero_walk_e = fri_hero,
+      walk_e = fri_rookie,
+      attack_walk_e = fri_attack,
    },
 }

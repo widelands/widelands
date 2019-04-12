@@ -73,7 +73,7 @@ animations = {
 }
 add_walking_animations(animations, "walk", dirname, "walk", {20, 34}, 10)
 
-l_all = {
+all_levels_atl = {
    min_health = 0,
    min_attack = 0,
    min_defense = 0,
@@ -271,54 +271,54 @@ tribes:new_soldier_type {
    -- Random animations for battle
    -- TODO(GunChleoc): Make more animations to use the random function
    attack_success_w = {
-      atk_ok_w = l_all,
+      atk_ok_w = all_levels_atl,
    },
    attack_success_e = {
-      atk_ok_e = l_all,
+      atk_ok_e = all_levels_atl,
    },
    attack_failure_w = {
-      atk_fail_w = l_all,
+      atk_fail_w = all_levels_atl,
    },
    attack_failure_e = {
-      atk_fail_e = l_all,
+      atk_fail_e = all_levels_atl,
    },
    evade_success_w = {
-      eva_ok_w = l_all,
+      eva_ok_w = all_levels_atl,
    },
    evade_success_e = {
-      eva_ok_e = l_all,
+      eva_ok_e = all_levels_atl,
    },
    evade_failure_w = {
-      eva_fail_w = l_all,
+      eva_fail_w = all_levels_atl,
    },
    evade_failure_e = {
-      eva_fail_e = l_all,
+      eva_fail_e = all_levels_atl,
    },
    die_w = {
-      die_w = l_all,
+      die_w = all_levels_atl,
    },
    die_e = {
-      die_e = l_all,
+      die_e = all_levels_atl,
    },
    idle = {
-      idle = l_all,
+      idle = all_levels_atl,
    },
    walk_e = {
-      walk_e = l_all,
+      walk_e = all_levels_atl,
    },
    walk_nw = {
-      walk_nw = l_all,
+      walk_nw = all_levels_atl,
    },
    walk_sw = {
-      walk_sw = l_all,
+      walk_sw = all_levels_atl,
    },
    walk_se = {
-      walk_se = l_all,
+      walk_se = all_levels_atl,
    },
    walk_ne = {
-      walk_ne = l_all,
+      walk_ne = all_levels_atl,
    },
    walk_w = {
-      walk_w = l_all,
+      walk_w = all_levels_atl,
    },
 }
