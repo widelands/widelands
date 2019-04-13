@@ -353,10 +353,10 @@ void BaseDropdown::toggle() {
 	if (list_->is_visible()) {
 		list_->move_to_top();
 		focus();
-		get_parent()->set_mouse_pos(
+		set_mouse_pos(
 					Vector2i(
 						display_button_.get_x() + (display_button_.get_w() * 3 / 5),
-						display_button_.get_y() + (display_button_.get_h() * 3 / 5)));
+						display_button_.get_y() + (display_button_.get_h() * 2 / 5)));
 		if (type_ == DropdownType::kPictorialMenu && !has_selection() && !list_->empty()) {
 			select(0);
 		}

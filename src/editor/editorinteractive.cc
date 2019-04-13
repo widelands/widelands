@@ -220,7 +220,6 @@ void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
 }
 
 void EditorInteractive::add_tool_menu() {
-	// NOCOM Hotkey mouse positioning is off
 	toolmenu_.set_image(g_gr->images().get("images/wui/editor/editor_menu_toggle_tool_menu.png"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Change height"), ToolMenuEntry::kChangeHeight,
