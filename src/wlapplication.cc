@@ -321,6 +321,11 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	if (commandline_.count("homedir")) {
 		log("Adding home directory: %s\n", commandline_["homedir"].c_str());
 		homedir_ = commandline_["homedir"];
+#ifdef USE_XDG
+		// This commandline option should probably also affect the
+		// configuration file.
+		userconfigdir_ = commandline_["homedir"];
+#endif
 		commandline_.erase("homedir");
 	}
 #ifdef REDIRECT_OUTPUT
