@@ -132,7 +132,6 @@ struct FieldData {
  */
 class Map : public ITransportCostCalculator {
 public:
-	friend class Editor;
 	friend class EditorGameBase;
 	friend class MapLoader;
 	friend class MapVersionPacket;

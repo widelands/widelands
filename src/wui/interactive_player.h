@@ -75,6 +75,7 @@ public:
 	void popup_message(Widelands::MessageId, const Widelands::Message&);
 
 private:
+	// For referencing the items in statisticsmenu_
 	enum class StatisticsMenuEntry {
 		kGeneral,
 		kWare,
@@ -83,10 +84,14 @@ private:
 		kSeafaring
 	};
 
+	// Adds the statisticsmenu_ to the toolbar
 	void add_statistics_menu();
+	// Rebuilds the statisticsmenu_ according to current map settings
 	void rebuild_statistics_menu();
+	// Takes the appropriate action when an item in the statisticsmenu_ is selected
 	void statistics_menu_selected(StatisticsMenuEntry entry);
 
+	// Relayouts al the dropdown menus attached to the toolbar. This needs to be done here because for efficiency reasons, UI::Box doesn't call layout() on its children when shifting position.
 	void adjust_toolbar_menus() override;
 
 	void cmdSwitchPlayer(const std::vector<std::string>& args);
@@ -98,7 +103,7 @@ private:
 	UI::Button* toggle_chat_;
 	UI::Button* toggle_message_menu_;
 
-
+	// Statistics menu on the toolbar
 	UI::Dropdown<StatisticsMenuEntry> statisticsmenu_;
 	UI::UniqueWindow::Registry chat_;
 	UI::UniqueWindow::Registry objectives_;

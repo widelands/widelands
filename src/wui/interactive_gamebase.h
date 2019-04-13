@@ -87,16 +87,21 @@ public:
 	void start() override;
 
 protected:
+	// Adds the mapviewmenu_ to the toolbar
 	void add_main_menu();
+	// Adds the showhidemenu_ to the toolbar
 	void add_showhide_menu();
+	// Adds the gamespeedmenu_ to the toolbar
 	void add_gamespeed_menu();
 
+	// Relayouts al the dropdown menus attached to the toolbar. This needs to be done here because for efficiency reasons, UI::Box doesn't call layout() on its children when shifting position.
 	void adjust_toolbar_menus() override;
 
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 	void draw_overlay(RenderTarget&) override;
 
+	// All unique menu windows
 	struct GameMenuWindows {
 		UI::UniqueWindow::Registry sound_options;
 		UI::UniqueWindow::Registry savegame;
@@ -116,36 +121,44 @@ protected:
 	UI::UniqueWindow::Registry fieldaction_;
 	UI::UniqueWindow::Registry game_summary_;
 	UI::UniqueWindow::Registry client_disconnected_;
-	UI::Button* toggle_buildhelp_;
 
 private:
+	// For referencing the items in mainmenu_
 	enum class MainMenuEntry {
 		kOptions,
 		kSaveMap,
 		kExitGame
 	};
 
+	// For referencing the items in showhidemenu_
 	enum class ShowHideEntry {
 		kBuildingSpaces,
 		kCensus,
 		kStatistics
 	};
 
-
+	// For referencing the items in gamespeedmenu_
 	enum class GameSpeedEntry {
 		kIncrease,
 		kDecrease,
 		kPause
 	};
 
+	// Takes the appropriate action when an item in the mainmenu_ is selected
 	void main_menu_selected(MainMenuEntry entry);
+	// Takes the appropriate action when an item in the showhidemenu_ is selected
 	void showhide_menu_selected(ShowHideEntry entry);
 	void rebuild_showhide_menu() override;
+	// Takes the appropriate action when an item in the gamespeedmenu_ is selected
 	void gamespeed_menu_selected(GameSpeedEntry entry);
+	// Rebuilds the gamespeedmenu_ according to current game settings
 	void rebuild_gamespeed_menu();
 
+	// Increases the gamespeed
 	void increase_gamespeed();
+	// Decreases the gamespeed
 	void decrease_gamespeed();
+	// Pauses / Unpauses the game and calls rebuild_gamespeed_menu
 	void toggle_game_paused();
 
 	struct WantedBuildingWindow {
@@ -159,8 +172,11 @@ private:
 		const bool show_workarea;
 	};
 
+	// Main menu on the toolbar
 	UI::Dropdown<MainMenuEntry> mainmenu_;
+	// Show / Hide menu on the toolbar
 	UI::Dropdown<ShowHideEntry> showhidemenu_;
+	// Game speed menu on the toolbar
 	UI::Dropdown<GameSpeedEntry> gamespeedmenu_;
 
 	// Building coordinates, window position, whether the window was minimized

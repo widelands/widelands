@@ -114,7 +114,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent, UI::UniqueWindow::Re
 
 	map_details_.update(mapdata, false);
 
-	subscriber_ = Notifications::subscribe<NoteMapOptions>([this](const NoteMapOptions& note) {
+	subscriber_ = Notifications::subscribe<NoteMapOptions>([this](const NoteMapOptions&) {
 		update_map_options();
 	});
 }

@@ -234,7 +234,6 @@ void InteractiveBase::add_mapview_menu(MiniMapType minimap_type) {
 
 }
 
-// NOCOM document all the new functions
 void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 	switch (entry) {
 	case MapviewMenuEntry::kMinimap : {
@@ -339,8 +338,11 @@ bool InteractiveBase::buildhelp() const {
 }
 
 void InteractiveBase::show_buildhelp(bool t) {
+	const bool old_value = buildhelp_;
 	buildhelp_ = t;
-	rebuild_showhide_menu();
+	if (old_value != t) {
+		rebuild_showhide_menu();
+	}
 }
 
 void InteractiveBase::toggle_buildhelp() {

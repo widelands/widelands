@@ -41,7 +41,6 @@
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_base.h"
 
-class Editor;
 class EditorTool;
 
 /**
@@ -139,11 +138,8 @@ public:
 	// Access to the tools.
 	Tools* tools();
 
-	UI::UniqueWindow::Registry window_help;
-
 private:
-	friend struct EditorToolMenu;
-
+	// For referencing the items in mainmenu_
 	enum class MainMenuEntry {
 		kNewMap,
 		kNewRandomMap,
@@ -153,6 +149,7 @@ private:
 		kExitEditor,
 	};
 
+	// For referencing the items in toolmenu_
 	enum class ToolMenuEntry {
 		kChangeHeight,
 		kRandomHeight,
@@ -166,6 +163,7 @@ private:
 		kFieldInfo
 	};
 
+	// For referencing the items in showhidemenu_
 	enum class ShowHideEntry {
 		kBuildingSpaces,
 		kAnimals,
@@ -173,21 +171,32 @@ private:
 		kResources
 	};
 
+	// Adds the mainmenu_ to the toolbar
 	void add_main_menu();
+	// Takes the appropriate action when an item in the mainmenu_ is selected
 	void main_menu_selected(MainMenuEntry entry);
+	// Adds the toolmenu_ to the toolbar
 	void add_tool_menu();
+	// Takes the appropriate action when an item in the toolmenu_ is selected
 	void tool_menu_selected(ToolMenuEntry entry);
-	void add_showhide_menu();
-	void rebuild_showhide_menu() override;
-	void showhide_menu_selected(ShowHideEntry entry);
-
+	// Helper function for tool_menu_selected
 	template <class Menu, class Tool>
 	void open_tool_window(UI::UniqueWindow::Registry& registry, Tool& tool);
 
+	// Adds the showhidemenu_ to the toolbar
+	void add_showhide_menu();
+	void rebuild_showhide_menu() override;
+	// Takes the appropriate action when an item in the showhidemenu_ is selected
+	void showhide_menu_selected(ShowHideEntry entry);
+
+	// Relayouts al the dropdown menus attached to the toolbar. This needs to be done here because for efficiency reasons, UI::Box doesn't call layout() on its children when shifting position.
 	void adjust_toolbar_menus() override;
 
+	// Show / hide the resources overlays in the mapview
 	void toggle_resources();
+	// Show / hide the immovables in the mapview
 	void toggle_immovables();
+	// Show / hide the bobs in the mapview
 	void toggle_bobs();
 
 	//  state variables
@@ -195,6 +204,7 @@ private:
 	uint32_t realtime_;
 	bool is_painting_;
 
+	// All unique menu windows
 	struct EditorMenuWindows {
 		UI::UniqueWindow::Registry newmap;
 		UI::UniqueWindow::Registry newrandommap;
@@ -208,6 +218,7 @@ private:
 		UI::UniqueWindow::Registry help;
 	} menu_windows_;
 
+	// All unique tool windows for those tools that have them
 	struct EditorToolWindows {
 		UI::UniqueWindow::Registry height;
 		UI::UniqueWindow::Registry noiseheight;
@@ -218,8 +229,11 @@ private:
 		UI::UniqueWindow::Registry resizemap;
 	} tool_windows_;
 
+	// Main menu on the toolbar
 	UI::Dropdown<MainMenuEntry> mainmenu_;
+	// Tools menu on the toolbar
 	UI::Dropdown<ToolMenuEntry> toolmenu_;
+	// Show / Hide menu on the toolbar
 	UI::Dropdown<ShowHideEntry> showhidemenu_;
 
 	UI::Button* undo_;

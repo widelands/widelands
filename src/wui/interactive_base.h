@@ -104,7 +104,7 @@ public:
 	// Returns true if the buildhelp is currently displayed.
 	bool buildhelp() const;
 
-	// Sets if the buildhelp should be displayed.
+	// Sets if the buildhelp should be displayed and then calls rebuild_showhide_menu
 	void show_buildhelp(bool t);
 
 	/**
@@ -159,6 +159,7 @@ public:
 	}
 
 	void toggle_minimap();
+	// Toggles the buildhelp and calls rebuild_showhide_menu
 	void toggle_buildhelp();
 
 	// Returns the list of landmarks that have been mapped to the keys 0-9
@@ -172,6 +173,7 @@ public:
 	}
 
 protected:
+	// For referencing the items in mapviewmenu_
 	enum class MapviewMenuEntry {
 		kMinimap,
 		kIncreaseZoom,
@@ -179,7 +181,9 @@ protected:
 		kResetZoom
 	};
 
+	// Adds the mapviewmenu_ to the toolbar
 	void add_mapview_menu(MiniMapType minimap_type);
+	// Takes the appropriate action when an item in the mapviewmenu_ is selected
 	void mapview_menu_selected(MapviewMenuEntry entry);
 
 	/// Adds a toolbar button to the toolbar
@@ -224,7 +228,9 @@ protected:
 	const Image* get_sel_picture() {
 		return sel_.pic;
 	}
+	// Sets the toolbar's position to the bottom middle and relayouts its menus
 	void adjust_toolbar_position();
+	// Relayouts al the dropdown menus attached to the toolbar. This needs to be done here because for efficiency reasons, UI::Box doesn't call layout() on its children when shifting position.
 	virtual void adjust_toolbar_menus();
 
 
@@ -261,6 +267,7 @@ private:
 	void cmd_map_object(const std::vector<std::string>& args);
 	void cmd_lua(const std::vector<std::string>& args);
 
+	// Rebuilds the subclass' showhidemenu_ according to current map settings
 	virtual void rebuild_showhide_menu() = 0;
 
 	struct SelData {
@@ -286,6 +293,7 @@ private:
 	ChatOverlay* chat_overlay_;
 
 	UI::Box toolbar_;
+	// Map View menu on the toolbar
 	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;
 	// No unique_ptr on purpose: 'minimap_' is a UniqueWindow, its parent will
 	// delete it.
