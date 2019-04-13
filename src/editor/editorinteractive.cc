@@ -374,13 +374,6 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 	rebuild_showhide_menu();
 }
 
-void EditorInteractive::adjust_toolbar_menus() {
-	InteractiveBase::adjust_toolbar_menus();
-	mainmenu_.layout();
-	toolmenu_.layout();
-	showhidemenu_.layout();
-}
-
 void EditorInteractive::load(const std::string& filename) {
 	assert(filename.size());
 

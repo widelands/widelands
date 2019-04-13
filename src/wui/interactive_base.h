@@ -228,11 +228,9 @@ protected:
 	const Image* get_sel_picture() {
 		return sel_.pic;
 	}
+
 	// Sets the toolbar's position to the bottom middle and relayouts its menus
 	void adjust_toolbar_position();
-	// Relayouts al the dropdown menus attached to the toolbar. This needs to be done here because for efficiency reasons, UI::Box doesn't call layout() on its children when shifting position.
-	virtual void adjust_toolbar_menus();
-
 
 	ChatOverlay* chat_overlay() {
 		return chat_overlay_;

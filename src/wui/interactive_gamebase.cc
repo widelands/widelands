@@ -250,13 +250,6 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	}
 }
 
-void InteractiveGameBase::adjust_toolbar_menus() {
-	InteractiveBase::adjust_toolbar_menus();
-	mainmenu_.layout();
-	showhidemenu_.layout();
-	gamespeedmenu_.layout();
-}
-
 void InteractiveGameBase::increase_gamespeed() {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		ctrl->set_desired_speed(ctrl->desired_speed() + 1000);

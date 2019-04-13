@@ -94,9 +94,6 @@ protected:
 	// Adds the gamespeedmenu_ to the toolbar
 	void add_gamespeed_menu();
 
-	// Relayouts al the dropdown menus attached to the toolbar. This needs to be done here because for efficiency reasons, UI::Box doesn't call layout() on its children when shifting position.
-	void adjust_toolbar_menus() override;
-
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 	void draw_overlay(RenderTarget&) override;

@@ -291,12 +291,6 @@ void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
 	}
 }
 
-void InteractivePlayer::adjust_toolbar_menus() {
-	InteractiveGameBase::adjust_toolbar_menus();
-	statisticsmenu_.layout();
-}
-
-
 void InteractivePlayer::think() {
 	InteractiveBase::think();
 

@@ -189,9 +189,6 @@ private:
 	// Takes the appropriate action when an item in the showhidemenu_ is selected
 	void showhide_menu_selected(ShowHideEntry entry);
 
-	// Relayouts al the dropdown menus attached to the toolbar. This needs to be done here because for efficiency reasons, UI::Box doesn't call layout() on its children when shifting position.
-	void adjust_toolbar_menus() override;
-
 	// Show / hide the resources overlays in the mapview
 	void toggle_resources();
 	// Show / hide the immovables in the mapview

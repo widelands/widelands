@@ -91,9 +91,6 @@ private:
 	// Takes the appropriate action when an item in the statisticsmenu_ is selected
 	void statistics_menu_selected(StatisticsMenuEntry entry);
 
-	// Relayouts al the dropdown menus attached to the toolbar. This needs to be done here because for efficiency reasons, UI::Box doesn't call layout() on its children when shifting position.
-	void adjust_toolbar_menus() override;
-
 	void cmdSwitchPlayer(const std::vector<std::string>& args);
 
 	Widelands::PlayerNumber player_number_;

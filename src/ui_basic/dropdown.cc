@@ -132,13 +132,10 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	set_can_focus(true);
 	set_value();
 
-	// Find parent windows so that we can move the list along with them
-	UI::Panel* parent_window_candidate = get_parent();
-	while (parent_window_candidate) {
-		if (upcast(UI::Window, window, parent_window_candidate)) {
-			window->position_changed.connect(boost::bind(&BaseDropdown::layout, this));
-		}
-		parent_window_candidate = parent_window_candidate->get_parent();
+	// Find parent windows, boxes etc. so that we can move the list along with them
+	UI::Panel* ancestor = this;
+	while ((ancestor = ancestor->get_parent()) != nullptr) {
+		ancestor->position_changed.connect([this] {layout(); });
 	}
 	layout();
 }
