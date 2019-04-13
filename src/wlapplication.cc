@@ -732,6 +732,7 @@ void WLApplication::refresh_graphics() {
  * parameters sensible default values
  */
 bool WLApplication::init_settings() {
+
 	// Read in the configuration file
 #ifdef USE_XDG
 	RealFSImpl userconfigdir(userconfigdir_);

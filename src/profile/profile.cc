@@ -747,6 +747,12 @@ void Profile::read(char const* const filename, char const* const global_section,
 		// It's no problem if the config file does not exist. (It'll get
 		// written on exit anyway)
 		log("There's no configuration file, using default values.\n");
+#ifdef USE_XDG
+	} catch (const FileError&) {
+		// It's no problem if the config file does not exist. (It'll get
+		// written on exit anyway)
+		log("There's no configuration file, using default values.\n");
+#endif
 	} catch (const std::exception& e) {
 		error("%s:%u: %s", filename, linenr, e.what());
 	}

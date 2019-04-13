@@ -30,6 +30,7 @@ print_help () {
     echo " "
     echo "-h or --help          Print this help."
     echo " "
+    echo " "
     echo "Omission options:"
     echo " "
     echo "-w or --no-website    Omit building of website binaries."
