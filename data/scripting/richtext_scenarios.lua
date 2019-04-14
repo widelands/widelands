@@ -87,5 +87,13 @@ function new_objectives(...)
       text = text .. obj.body
       sum = sum + obj.number
    end
-   return h1(ngettext("New Objective", "New Objectives", sum)) .. text
+   return
+      div("width=100%",
+         vspace(18) ..
+         div("float=left padding_r=6", p(img("images/wui/menus/objectives.png"))) ..
+         p_font("", "size=18 bold=1 color=D1D1D1",  vspace(6) .. ngettext("New Objective", "New Objectives", sum)) ..
+         vspace(1) .. text
+      )
+
+   -- return li_image("images/wui/menus/objectives.png", h1(ngettext("New Objective", "New Objectives", sum)) .. text)
 end

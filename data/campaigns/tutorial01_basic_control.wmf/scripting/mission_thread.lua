@@ -105,7 +105,8 @@ end
 
 function learn_to_move()
    -- Teaching the user how to scroll on the map
-   local o = message_box_objective(plr, inform_about_rocks)
+   campaign_message_box(tell_about_keyboard_move)
+   local o = add_campaign_objective(obj_moving_keyboard)
 
    function _wait_for_move()
       local center_map_pixel = wl.ui.MapView().center_map_pixel
@@ -118,12 +119,22 @@ function learn_to_move()
    _wait_for_move()
    set_objective_done(o)
 
-   o = message_box_objective(plr, tell_about_right_drag_move)
+   campaign_message_box(tell_about_right_drag_move)
+   o = add_campaign_objective(obj_moving_right_drag)
 
    _wait_for_move()
    set_objective_done(o)
--- NOCOm fix this
-   o = message_box_objective(plr, tell_about_minimap)
+
+   -- Teach the minimap
+   campaign_message_box(tell_about_minimap_1)
+   o = add_campaign_objective(obj_moving_minimap)
+
+   -- Open the minimap
+   wl.ui.MapView().dropdowns["dropdown_menu_mapview"]:open()
+   sleep(3000)
+   wl.ui.MapView().dropdowns["dropdown_menu_mapview"]:select_item(1)
+   sleep(3000)
+   campaign_message_box(tell_about_minimap_2)
 
    -- Wait until the minimap has been opened and closed again
    while not wl.ui.MapView().windows.minimap do sleep(100) end

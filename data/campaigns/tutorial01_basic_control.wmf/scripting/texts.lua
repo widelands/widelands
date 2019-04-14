@@ -8,6 +8,45 @@
 
 include "scripting/richtext_scenarios.lua"
 
+-- Objectives
+
+local moving_view_instructions =
+   h2(_"Moving Your View") ..
+   p(_[[Moving your view is essential to get a complete overview of your whole economy. There are three ways to move your view in Widelands.]]) ..
+   li_arrow(_[[The first one is to use the cursor keys on your keyboard.]]) ..
+   li_arrow(_[[The second one is the more common and faster one: press-and-hold the right mouse button anywhere on the map, then move your mouse around and you’ll see the view scroll.]]) ..
+   li_arrow(_[[The third one is to use the minimap. It is especially useful for traveling big distances.]])
+
+
+obj_moving_keyboard = {
+   name = "move_view_with_cursor_keys",
+   title=_"Move your view with the cursor keys",
+   number = 1,
+   body = objective_text(_"Move your view with the cursor keys",
+      li(_[[There are three ways to move your view. The first one is using the cursor keys on your keyboard. Go ahead and try this out.]]) .. moving_view_instructions
+   ),
+}
+
+obj_moving_right_drag = {
+   name = "move_view_with_mouse",
+   title=_"Move your view with the mouse",
+   number = 1,
+   body = objective_text(_"Move your view with the mouse",
+      li(_[[Simply right-click-and-hold anywhere on the map, then drag the mouse and instead of the cursor, the view will be moved. Try it.]]) .. moving_view_instructions
+   ),
+}
+
+obj_moving_minimap = {
+   name = "use_minimap",
+   title=_"Learn to use the minimap",
+   number = 1,
+   body = objective_text(_"Learn to use the minimap",
+      li(_[[Try moving around by clicking on the minimap]]) ..
+      li(_[[Play around a bit with the different overlays (roads, flags, etc.)]]) ..
+      li(_[[Close the minimap when you are ready to continue by selecting ‘Hide Minimap’ in the ‘Map View’ menu or by pressing ‘m’. Of course, a right-click also works.]]) .. moving_view_instructions
+   ),
+}
+
 -- =============
 -- Texts below
 -- =============
@@ -173,55 +212,55 @@ lumberjack_message_07 = {
    w = 350
 }
 
-inform_about_rocks = {
+tell_about_keyboard_move = {
    title = _"Some Rocks Were Found",
    body = (
       h1(_"Getting a Quarry Up") ..
-      p(_[[Granite can be mined in granite mines, but the easier way is to build a quarry next to some rocks lying around. As it happens, there is a pile of them just to the west (left) of your headquarters. I will teach you now how to move your view over there.]]) ..
-      li(_[[There are three ways to move your view. The first one is using the cursor keys on your keyboard. Go ahead and try this out.]]) ..
+      li_image("world/immovables/rocks/greenland_rocks6/idle.png",
+         _[[Granite can be mined in granite mines, but the easier way is to build a quarry next to some rocks lying around. As it happens, there is a pile of them just to the west (left) of your headquarters. I will teach you now how to move your view over there.]]) ..
+      new_objectives(obj_moving_keyboard) ..
       li(_[[Click the ‘OK’ button and then move the view using the cursor keys.]])
    ),
-   h = 350,
-   obj_name = "move_view_with_cursor_keys",
-   obj_title = _"Move your view with the cursor keys",
-   obj_body = (
-      h1(_"Moving Your View") ..
-      p(_[[Moving your view is essential to get a complete overview of your whole economy. There are three ways to move your view in Widelands.]]) ..
-      li(_[[The first one is to use the cursor keys on your keyboard.]]) ..
-      li(_[[The second one is the more common and faster one: press-and-hold the right mouse button anywhere on the map, then move your mouse around and you’ll see the view scroll.]]) ..
-      li(_[[The third one is to use the minimap. It is especially useful for traveling big distances.]])
-   )
+   h = 450,
 }
 
 tell_about_right_drag_move = {
-   title = _"Other Ways to Move the View",
+   title = _"Moving Your View",
    body = (
-      p(_[[Excellent. Now there is a faster way to move, using the mouse instead:]]) ..
-      li(_[[Simply right-click-and-hold anywhere on the map, then drag the mouse and instead of the cursor, the view will be moved. Try it.]])
+      h1(_"Other Ways to Move the View") ..
+      li_image("images/ui_basic/cursor_click.png",
+         _[[Excellent. Now there is a faster way to move, using the mouse instead.]]) ..
+      new_objectives(obj_moving_right_drag)
    ),
-   h = 300,
-   w = 350,
-   obj_name = "move_view_with_mouse",
-   obj_title = _"Move your view with the mouse",
-   obj_body = inform_about_rocks.obj_body,
+   h = 450,
 }
 
-tell_about_minimap = {
-   title = _"Use the minimap",
+tell_about_minimap_1 = {
+   title = _"Moving Your View",
    body = (
-      p(_[[Very good. And now about the minimap. You can open it by clicking on the]]) ..
-      li_image("images/wui/menus/toggle_minimap.png", _[[minimap button at the bottom of the screen or simply by using the keyboard shortcut ‘m’.]]) ..
-      p(_[[The minimap shows the complete map in miniature. You can directly jump to any field by left-clicking on it. You can also toggle buildings, roads, flags and player indicators on and off inside the minimap.]]) ..
-      li(_[[Try it out. Open the minimap, click on a few buttons and try moving around. Close it when you have experimented enough.]])
+      h1(_"Using the Minimap") ..
+      li_image("images/wui/menus/toggle_minimap.png",
+         _([[Very good. And now about the minimap. ]]
+         .. [[You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu at the bottom ]]
+         .. [[of the screen or simply by using the keyboard shortcut ‘m’.]])) ..
+      -- TRANSLATORS it = the minimap
+      li_arrow(_[[I will open it for you.]])
    ),
-   h = 350,
-   obj_name = "use_minimap",
-   obj_title = _"Learn to use the minimap",
-   obj_body = (
-      li(_[[Open the minimap by using the third button from the left on the bottom of your screen or the ‘m’ key.]]) ..
-      li(_[[Play around a bit with the different overlays (roads, flags, etc.)]]) ..
-      li(_[[Close the minimap when you are ready to continue by using the same button or ‘m’ again. Of course, a right-click also works.]])
-   )
+   w = 350,
+   h = 250,
+}
+
+tell_about_minimap_2 = {
+   title = _"Moving Your View",
+   body = (
+   h1(_"Using the Minimap") ..
+      li_image("images/wui/menus/toggle_minimap.png",
+         _([[The minimap shows the complete map in miniature. ]]
+         .. [[You can directly jump to any field by left-clicking on it. ]]
+         .. [[You can also toggle buildings, roads, flags and player indicators on and off inside the minimap.]])) ..
+      new_objectives(obj_moving_minimap)
+   ),
+   h = 450,
 }
 
 congratulate_and_on_to_quarry = {
@@ -479,7 +518,7 @@ conclude_tutorial = {
       p(_[[This concludes the first tutorial. In order to learn more about the game, I suggest to play one of the other tutorials. Each of them covers a different topic.]]) ..
       p(_[[However, since you now know how to control Widelands, you can also start a game (or continue this one) and discover more by yourself.]]) ..
       p(_[[To leave this game and return to the main menu, click on the]]) ..
-      li_image("images/wui/menus/game_main_menu.png", _[[‘Main Menu’ button on the very left at the bottom of the screen. Then click the]]) ..
+      li_image("images/wui/menus/main_menu.png", _[[‘Main Menu’ button on the very left at the bottom of the screen. Then click the]]) ..
       li_image("images/wui/menus/exit.png", _[[‘Exit Game’ button.]]) ..
       p(_[[Thanks for playing this tutorial. Enjoy Widelands and remember to visit us at]]) ..
       h1(p("align=center", u("widelands.org")))
