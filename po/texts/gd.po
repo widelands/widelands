@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-03 08:19+0000\n"
-"PO-Revision-Date: 2019-03-07 10:30+0000\n"
+"POT-Creation-Date: 2019-04-11 05:49+0000\n"
+"PO-Revision-Date: 2019-04-11 11:51+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -121,7 +121,7 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr "Tha sinn air cha mhòr a h-uile gleus a tha fainear dhuinn airson Widelands a chruthachadh is tha e tlachdmhor ri chluiche ’nad aonar no le daoine eile sa mhodh ioma-chluicheadair. Tha barrachd obrach ri dèanamh an-còmhnaidh co-dhiù sna h-uile roinn. Nam bu toigh leat taic a thoirt dhuinn – ge b’ e an dèan thu grafaigeachd, an càraich thu bugaichean, an cuir thu gleusan ùra ris, an eadar-theangaich thu dhan chànan agad fhèin e no an cruthaich thu mapaichean ùra – dèan conaltradh rinn air an làrach-lìn againn."
+msgstr "Tha sinn air cha mhòr a h-uile gleus a tha fainear dhuinn airson Widelands a chruthachadh is tha e tlachdmhor ri chluiche ’nad aonar no le daoine eile sa mhodh ioma-chluicheadair. Tha barrachd obrach ri dèanamh an-còmhnaidh co-dhiù sna h-uile roinn. Nam bu toigh leat taic a thoirt dhuinn – ge b’ e an dèan thu grafaigeachd, an càraich thu bugaichean, an cuir thu gleusan ùra ris, an eadar-theangaich thu an geama dhan chànan agad fhèin e no an cruthaich thu mapaichean ùra – dèan conaltradh rinn air an làrach-lìn againn."
 
 #: ../../data/txts/README.lua:16
 msgid "Widelands Help"
@@ -371,7 +371,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr "Clàraichidh Widelands na h-uile geama a chluicheas tu ann an dà fhaidhle. Tha leudachan .wrpl.wgf air an dàrna fear is thèid toiseach a’ gheama a shàbhaladh ann. Tha leudachan .wrpl air an fhear eile is tha na h-uile àithne a chuir gach cluicheadair seachad na bhroinn a leithid togail rathaid no ionnsaigh air an nàmhaid. Innsidh an corr dhe na h-ainmean faidhle dhut cuin a thòisich thu air a’ gheama."
+msgstr "Clàraichidh Widelands na h-uile geama a chluicheas tu ann an dà fhaidhle. Tha leudachan .wrpl.wgf air an dàrna fear is thèid toiseach a’ gheama a shàbhaladh ann. Tha leudachan .wrpl air an fhear eile is tha na h-uile àithne a chuir gach cluicheadair seachad na bhroinn a leithid togail rathaid no ionnsaigh air an nàmhaid. Innsidh an còrr dhe na h-ainmean faidhle dhut cuin a thòisich thu air a’ gheama."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -510,7 +510,7 @@ msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house. After fish "
 "resources are exhausted in their work area, the fish supply cannot be "
 "regenerated."
-msgstr "Cum sùil air na h-iasgairean agad agus tog ionad-àraich èisg. Nuair nach eil iasg san raointean-obrach aca tuilleadh, cha ghabh stòras nan iasg ath-ghintinn."
+msgstr "Cùm sùil air na h-iasgairean agad agus tog ionad-àraich èisg. Nuair nach eil iasg san raointean-obrach aca tuilleadh, cha ghabh stòras nan iasg ath-ghintinn."
 
 #: ../../data/txts/tips/atlanteans.lua:8
 msgid ""
@@ -528,7 +528,7 @@ msgstr "Feumaidh iomadh togalach nan Atlantach sìoda gus a thogail. Tog am bun-
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr "Cum sùil air na h-iasgairean agad. Sguiridh iad dhen iasgach nuair nach eil iasg san raon-obrach aca tuilleadh."
+msgstr "Cùm sùil air na h-iasgairean agad. Sguiridh iad dhen iasgach nuair nach eil iasg san raon-obrach aca tuilleadh."
 
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
@@ -619,7 +619,7 @@ msgstr "Tog taigh planntair-choille an-còmhnaidh ach nach ruith am fiodh ort."
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
-msgstr "Tha an Impireachd feumach air grunn marmoir. Cum a’ sireadh stòrasan marmoir."
+msgstr "Tha an Impireachd feumach air grunn marmoir. Cùm a’ sireadh stòrasan marmoir."
 
 #: ../../data/txts/tips/frisians.lua:4
 msgid ""
@@ -672,7 +672,7 @@ msgstr "A bheil ceist sam bith eile agad? Thoir sùil air na CÀBHA, an uicidh i
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware. Pressing Ctrl while clicking will adjust all wares at once."
-msgstr "Cleachd putanan a’ phrìomhachais ann an uinneag togalaich gus gleus a chur air lìbhrigeadh bathair shònraichte. Cum Ctrl sìos fhad ’s a bhios tu a’ briogadh gus a h-uile bathar a chur air gleus aig an aon àm."
+msgstr "Cleachd putanan a’ phrìomhachais ann an uinneag togalaich gus gleus a chur air lìbhrigeadh bathair shònraichte. Cùm Ctrl sìos fhad ’s a bhios tu a’ briogadh gus a h-uile bathar a chur air gleus aig an aon àm."
 
 #: ../../data/txts/tips/general_game.lua:35
 msgid ""
