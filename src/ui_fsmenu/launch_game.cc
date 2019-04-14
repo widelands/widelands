@@ -47,6 +47,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      buth_(get_h() * 9 / 200),
 
      win_condition_dropdown_(this,
+							 "dropdown_wincondition",
                              get_w() * 7 / 10,
                              get_h() * 4 / 10 + buth_,
                              butw_,

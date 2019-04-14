@@ -87,19 +87,19 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      realtime_(SDL_GetTicks()),
      is_painting_(false),
 	 mainmenu_(
-		toolbar(), 0, 0, 34U, 10, 34U,
+		toolbar(), "dropdown_menu_main", 0, 0, 34U, 10, 34U,
 		 /** TRANSLATORS: Title for the main menu button in the editor */
 		 as_tooltip_text_with_hotkey(_("Main Menu"), "h"),
 		 UI::DropdownType::kPictorialMenu,
 		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
 	 toolmenu_(
-		toolbar(), 0, 0, 34U, 10, 34U,
+		toolbar(), "dropdown_menu_tools", 0, 0, 34U, 10, 34U,
 		 /** TRANSLATORS: Title for the tool menu button in the editor */
 		 as_tooltip_text_with_hotkey(_("Tools"), "t"),
 		 UI::DropdownType::kPictorialMenu,
 		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
 	 showhidemenu_(
-		toolbar(), 0, 0, 34U, 10, 34U,
+		toolbar(), "dropdown_menu_showhide", 0, 0, 34U, 10, 34U,
 		 /** TRANSLATORS: Title for a menu button in the editor. This menu will show/hide building spaces, animals, immovables, resources */
 		 _("Show / Hide"),
 		 UI::DropdownType::kPictorialMenu,

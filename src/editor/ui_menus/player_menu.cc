@@ -123,6 +123,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
    : UI::UniqueWindow(&parent, "players_menu", &registry, 100, 100, _("Player Options")),
      box_(this, kMargin, kMargin, UI::Box::Vertical),
      no_of_players_(&box_,
+					"dropdown_map_players",
                     0,
                     0,
                     50,
@@ -171,7 +172,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 
 		// Tribe
 		UI::Dropdown<std::string>* plr_tribe =
-		   new UI::Dropdown<std::string>(row, 0, 0, 50, 16, plr_name->get_h(), _("Tribe"),
+		   new UI::Dropdown<std::string>(row, "dropdown_tribe" + static_cast<unsigned int>(p), 0, 0, 50, 16, plr_name->get_h(), _("Tribe"),
 		                                 UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
 		{
 			i18n::Textdomain td("tribes");

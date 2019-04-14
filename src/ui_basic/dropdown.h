@@ -49,9 +49,10 @@ struct NoteDropdown {
 enum class DropdownType { kTextual, kTextualNarrow, kPictorial, kPictorialMenu };
 
 /// Implementation for a dropdown menu that lets the user select a value.
-class BaseDropdown : public Panel {
+class BaseDropdown : public NamedPanel {
 protected:
 	/// \param parent             the parent panel
+	/// \param name               a name so that we can reference the dropdown via Lua
 	/// \param x                  the x-position within 'parent'
 	/// \param y                  the y-position within 'parent'
 	/// \param list_w             the dropdown's width
@@ -62,6 +63,7 @@ protected:
 	/// \param type               whether this is a textual or pictorial dropdown
 	/// \param style              the style used for buttons and background
 	BaseDropdown(Panel* parent,
+				 const std::string& name,
 	             int32_t x,
 	             int32_t y,
 	             uint32_t list_w,
@@ -204,6 +206,7 @@ private:
 template <typename Entry> class Dropdown : public BaseDropdown {
 public:
 	/// \param parent             the parent panel
+	/// \param name               a name so that we can reference the dropdown via Lua
 	/// \param x                  the x-position within 'parent'
 	/// \param y                  the y-position within 'parent'
 	/// \param list_w             the dropdown's width
@@ -215,6 +218,7 @@ public:
 	/// \param style              the style used for buttons and background
 	/// Text conventions: Title Case for all elements
 	Dropdown(Panel* parent,
+			 const std::string& name,
 	         int32_t x,
 	         int32_t y,
 	         uint32_t list_w,
@@ -224,7 +228,7 @@ public:
 	         const DropdownType type,
 	         PanelStyle style,
 			 ButtonStyle button_style)
-	   : BaseDropdown(parent, x, y, list_w, max_list_items, button_dimension, label, type, style, button_style) {
+	   : BaseDropdown(parent, name, x, y, list_w, max_list_items, button_dimension, label, type, style, button_style) {
 	}
 	~Dropdown() {
 		entry_cache_.clear();

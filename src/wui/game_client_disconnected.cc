@@ -74,6 +74,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                /** TRANSLATORS: Button tooltip */
                _("Replace the disconnected player with the selected AI and continue playing")),
      type_dropdown_(&box_h_,
+					"dropdown_ai",
                     width - 50,  // x
                     0,           // y
                     60,          // width of selection box

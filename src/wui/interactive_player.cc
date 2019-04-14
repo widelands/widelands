@@ -162,7 +162,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
      flag_to_connect_(Widelands::Coords::null()),
 	 statisticsmenu_(
-		toolbar(), 0, 0, 34U, 10, 34U,
+		toolbar(), "dropdown_menu_statistics", 0, 0, 34U, 10, 34U,
 		 /** TRANSLATORS: Title for the statistics menu button in the game */
 		 _("Statistics"),
 		 UI::DropdownType::kPictorialMenu,

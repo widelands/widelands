@@ -98,7 +98,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(this, 0, 0, UI::Box::Horizontal),
 	 mapviewmenu_(
-		toolbar(), 0, 0, 34U, 10, 34U,
+		toolbar(), "dropdown_menu_mapview", 0, 0, 34U, 10, 34U,
 		 /** TRANSLATORS: Title for the map view menu button in the game */
 		 _("Map View"),
 		 UI::DropdownType::kPictorialMenu,

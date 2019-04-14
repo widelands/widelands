@@ -47,7 +47,7 @@ namespace UI {
 
 int BaseDropdown::next_id_ = 0;
 
-BaseDropdown::BaseDropdown(UI::Panel* parent,
+BaseDropdown::BaseDropdown(UI::Panel* parent, const std::string& name,
                            int32_t x,
                            int32_t y,
                            uint32_t w,
@@ -56,7 +56,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                            const std::string& label,
                            const DropdownType type,
                            UI::PanelStyle style, ButtonStyle button_style)
-   : UI::Panel(parent,
+   : UI::NamedPanel(parent,
+					name,
                x,
                y,
                (type == DropdownType::kPictorial || type_ == DropdownType::kPictorialMenu) ? button_dimension : w,

@@ -57,7 +57,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                       GameSettingsProvider* const settings)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h, kPadding),
 	     slot_dropdown_(
-	        this, 0, 0, h, 16, h, _("Role"), UI::DropdownType::kPictorial, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
+	        this, "dropdown_slot" + static_cast<unsigned int>(id), 0, 0, h, 16, h, _("Role"), UI::DropdownType::kPictorial, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 	     // Name needs to be initialized after the dropdown, otherwise the layout function will
 	     // crash.
 	     name(this, 0, 0, w - h - UI::Scrollbar::kSize * 11 / 5, h),
@@ -189,6 +189,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	            (boost::format(_("Player %u")) % static_cast<unsigned int>(id_ + 1)).str(),
 	            UI::Button::VisualState::kFlat),
 	     type_dropdown_(this,
+						"dropdown_type" + static_cast<unsigned int>(id),
 	                    0,
 	                    0,
 	                    50,
@@ -198,6 +199,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                    UI::DropdownType::kPictorial,
 	                    UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 	     tribes_dropdown_(this,
+						  "dropdown_tribes" + static_cast<unsigned int>(id),
 	                      0,
 	                      0,
 	                      50,
@@ -207,6 +209,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                      UI::DropdownType::kPictorial,
 	                      UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 	     init_dropdown_(this,
+						"dropdown_init" + static_cast<unsigned int>(id),
 	                    0,
 	                    0,
 	                    w - 4 * h - 3 * kPadding,
@@ -216,7 +219,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                    UI::DropdownType::kTextualNarrow,
 	                    UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 	     team_dropdown_(
-	        this, 0, 0, h, 16, h, _("Team"), UI::DropdownType::kPictorial, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
+	        this, "dropdown_team" + static_cast<unsigned int>(id), 0, 0, h, 16, h, _("Team"), UI::DropdownType::kPictorial, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 	     last_state_(PlayerSettings::State::kClosed),
 	     type_selection_locked_(false),
 	     tribe_selection_locked_(false),
