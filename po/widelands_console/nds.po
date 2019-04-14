@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-18 09:59+0000\n"
-"PO-Revision-Date: 2019-03-22 11:27+0000\n"
+"POT-Creation-Date: 2019-04-05 04:54+0000\n"
+"PO-Revision-Date: 2019-04-08 12:42+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -29,15 +29,15 @@ msgstr "Gebruuk: widelands <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
-msgstr "Instellungen:"
+msgstr "Instellens:"
 
 #: ../../src/wlapplication_messages.cc:45
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr " --<config-entry-name>=Weert överschrifft de Instellung vun de Instellungen-Datei"
+msgstr " --<config-entry-name>=Weert överschrifft de Instellen vun de Instellens-Datei"
 
 #: ../../src/wlapplication_messages.cc:46
 msgid "                      Note: New value will be written to config file"
-msgstr "                      Wahrschau: De neje Weert staht dann in de Instellungen-Datei"
+msgstr "                      Wahrschau: De neje Weert staht dann in de Instellens-Datei"
 
 #: ../../src/wlapplication_messages.cc:48
 msgid ""
@@ -49,7 +49,7 @@ msgstr " --datadir=LISTNAAM   Bruuk deeses Verteeknis för de Widelands-Daten-Da
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr " --homedir=LISTNAME   Bruuk deeses Verteeknis för de Widelands Instellungen-Dateien, sekerte Speele un Uptekens"
+msgstr " --homedir=LISTNAME   Bruuk deeses Verteeknis för de Widelands Instellens-Dateien, sekerte Speele un Uptekens"
 
 #: ../../src/wlapplication_messages.cc:55
 msgid "                      Default is ~/.widelands"
@@ -111,7 +111,7 @@ msgstr " --metaserverport=[...]\n                      Port-Tahl för de Metaser
 
 #: ../../src/wlapplication_messages.cc:89
 msgid "Sound options:"
-msgstr "Gedrüüs-Instellungen:"
+msgstr "Gedrüüs-Instellens:"
 
 #: ../../src/wlapplication_messages.cc:90
 msgid " --nosound            Starts the game with sound disabled."
@@ -181,7 +181,7 @@ msgstr " --auto_roadbuild_mode=[jau|nee]\n                      Of man na de Set
 
 #: ../../src/wlapplication_messages.cc:125
 msgid "Graphic options:"
-msgstr "Biller-Instellungen:"
+msgstr "Biller-Instellens:"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -212,7 +212,7 @@ msgstr " --maxfps=[5 ...]     Hoogste Tahl vun tekenten Fensters pro Sekünne."
 #. textdomain
 #: ../../src/wlapplication_messages.cc:141
 msgid "Options for the internal window manager:"
-msgstr "Instellungen för de Fenster-Verwaltung im Speel:"
+msgstr "Instellens för de Fenster-Verwaltung im Speel:"
 
 #: ../../src/wlapplication_messages.cc:142
 msgid ""

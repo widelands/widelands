@@ -243,7 +243,7 @@ protected:
 	struct State {
 		const ProductionProgram* program;  ///< currently running program
 		size_t ip;                         ///< instruction pointer
-		uint32_t phase;                    ///< micro-step index (instruction dependent)
+		ProgramResult phase;               ///< micro-step index (instruction dependent)
 		uint32_t flags;                    ///< pfXXX flags
 
 		/**
@@ -254,7 +254,8 @@ protected:
 		Coords coord;
 		/*@}*/
 
-		State() : program(nullptr), ip(0), phase(0), flags(0), coord(Coords::null()) {
+		State()
+		   : program(nullptr), ip(0), phase(ProgramResult::kNone), flags(0), coord(Coords::null()) {
 		}
 	};
 
@@ -282,7 +283,7 @@ protected:
 	/// how long it should take to mine, given the particular circumstances,
 	/// and pass the result to the following animation command, to set the
 	/// duration.
-	void program_step(Game&, uint32_t delay = 10, uint32_t phase = 0);
+	void program_step(Game&, uint32_t delay = 10, ProgramResult phase = ProgramResult::kNone);
 
 	void program_start(Game&, const std::string& program_name);
 	virtual void program_end(Game&, ProgramResult);

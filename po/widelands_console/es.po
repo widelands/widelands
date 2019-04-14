@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
+# Facundo Gomez <facundogomez15@gmail.com>, 2019
 # G BR <gastbr@gmail.com>, 2016
 # Gontzal M. Pujana <juchuf@gmail.com>, 2018
 # Madkat Here, 2015
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-03 08:14+0000\n"
-"PO-Revision-Date: 2019-02-05 16:03+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-03-30 11:23+0000\n"
+"Last-Translator: Facundo Gomez <facundogomez15@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -104,13 +105,13 @@ msgstr " --rolling_autosave=[...]\n                      Utilice esta cantidad d
 msgid ""
 " --metaserver=[...]\n"
 "                      Connect to a different metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserver=[...]\n                      Conectarse a un metaserver diferente para jugar en línea."
 
 #: ../../src/wlapplication_messages.cc:84
 msgid ""
 " --metaserverport=[...]\n"
 "                      Port number of the metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserverport=[...]\n                      Número de puerto del metaserver para juego en linea."
 
 #: ../../src/wlapplication_messages.cc:89
 msgid "Sound options:"
@@ -144,7 +145,7 @@ msgid ""
 " --ai_training        Enables AI training mode. See\n"
 "                      https://wl.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
-msgstr ""
+msgstr " --ai_training        Habilitar el modo de entrenamiento de IA. Ver\n                      https://wl.widelands.org/wiki/Ai%20Training/\n                      para una descrpción completa de la lógica del entrenamiento con IA."
 
 #: ../../src/wlapplication_messages.cc:104
 msgid ""
@@ -152,7 +153,7 @@ msgid ""
 "                      adjusting the game speed automatically,\n"
 "                      depending on FPS. Useful in conjunction with\n"
 "                      --ai_training."
-msgstr ""
+msgstr " --auto_speed         En juegos de multijugador solamente, esto seguirá\n                      ajustando la velocidad del juego automáticamente,\n                      dependiendo de los CPS. Útil combinado con\n                      --entrenamiento_IA."
 
 #: ../../src/wlapplication_messages.cc:109
 msgid ""
@@ -207,7 +208,7 @@ msgstr " --yres=[...]         Alto de la ventana en píxeles."
 
 #: ../../src/wlapplication_messages.cc:136
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
-msgstr ""
+msgstr " --maxcps=[5 ...]     Máxima óptica de cuadros por segundo del juego."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -221,7 +222,7 @@ msgstr "Opciones para el gestor de ventanas internas:"
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
-msgstr ""
+msgstr " --animate_map_panning=[yes|no]\n                      Si los movimientos del mapa debieran ser animados."
 
 #: ../../src/wlapplication_messages.cc:145
 msgid ""

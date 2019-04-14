@@ -705,9 +705,9 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
 
 	molog("position: (%i, %i)\n", position_.x, position_.y);
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("flag: %p\n", flag_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 	molog("* position: (%i, %i)\n", flag_->get_position().x, flag_->get_position().y);
 
 	molog("anim: %s\n", descr().get_animation_name(anim_).c_str());
@@ -716,9 +716,9 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 	molog("leave_time: %i\n", leave_time_);
 
 	molog("leave_queue.size(): %" PRIuS "\n", leave_queue_.size());
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("leave_allow.get(): %p\n", leave_allow_.get(egbase));
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 }
 
 void Building::add_worker(Worker& worker) {

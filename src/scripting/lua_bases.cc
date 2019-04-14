@@ -572,7 +572,7 @@ void LuaPlayerBase::__persist(lua_State* L) {
 	PERS_UINT32("player", player_number_);
 }
 void LuaPlayerBase::__unpersist(lua_State* L) {
-	UNPERS_UINT32("player", player_number_);
+	UNPERS_UINT32("player", player_number_)
 }
 
 /*
