@@ -11,7 +11,7 @@ function starting_infos()
 
    message_box_objective(plr, initial_message_01)
    sleep(500)
-
+-- NOCOM fix this
    local o = message_box_objective(plr, initial_message_02)
 
    -- Wait for buildhelp to come on
@@ -122,7 +122,7 @@ function learn_to_move()
 
    _wait_for_move()
    set_objective_done(o)
-
+-- NOCOm fix this
    o = message_box_objective(plr, tell_about_minimap)
 
    -- Wait until the minimap has been opened and closed again
@@ -268,7 +268,7 @@ function second_quarry()
    register_immovable_as_allowed(cs)
 end
 
-
+-- NOCOM fix
 function census_and_statistics()
    sleep(15000)
 

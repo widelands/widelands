@@ -114,7 +114,6 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 	   });
 }
 
-// NOCOM adjust tutorials to the new menus
 void InteractiveGameBase::add_main_menu() {
 	mainmenu_.set_image(g_gr->images().get("images/wui/menus/game_main_menu.png"));
 	toolbar()->add(&mainmenu_);
@@ -158,7 +157,6 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 }
 
 void InteractiveGameBase::add_showhide_menu() {
-	// NOCOM change basic control tutorial
 	showhidemenu_.set_image(g_gr->images().get("images/wui/menus/toggle_buildhelp.png"));
 	toolbar()->add(&showhidemenu_);
 
@@ -169,7 +167,6 @@ void InteractiveGameBase::add_showhide_menu() {
 void InteractiveGameBase::rebuild_showhide_menu() {
 	showhidemenu_.clear();
 
-	// NOCOM change basic control tutorial
 	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building spaces are shown */
 	showhidemenu_.add(buildhelp() ? _("Hide Building Spaces") : _("Show Building Spaces"),
 					  ShowHideEntry::kBuildingSpaces, g_gr->images().get("images/wui/menus/toggle_buildhelp.png"),

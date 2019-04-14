@@ -23,7 +23,7 @@ intro1 = {
    ),
    h = 300
 }
-
+-- NOCOM check all Lua scripts for renamed icons
 intro2 = {
    position = "topright",
    field = field_near_border,
@@ -46,7 +46,7 @@ tavern_burnt_down = {
    w = 300,
    h = 250
 }
-
+-- NOCOM fix this
 building_stat = {
    position = "topright",
    title = _"Building statistics",
@@ -112,7 +112,7 @@ reopen_building_stat_obj = {
    ),
    h = 250
 }
-
+-- NOCOM
 inventory1 = {
    position = "topright",
    title = _"Stock",
@@ -282,6 +282,7 @@ building_priority_settings = {
    )
 }
 
+-- NOCOM
 ware_stats1 = {
    position = "top",
    title = _"Ware Statistics",
