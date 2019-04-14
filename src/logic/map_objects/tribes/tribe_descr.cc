@@ -64,8 +64,8 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		initializations_ = info.initializations;
 
 		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
-		frontier_animation_id_ = g_gr->animations().load(*items_table->get_table("frontier"));
-		flag_animation_id_ = g_gr->animations().load(*items_table->get_table("flag"));
+		frontier_animation_id_ = g_gr->animations().load(name_ + std::string("frontier"), *items_table->get_table("frontier"));
+		flag_animation_id_ = g_gr->animations().load(name_ + std::string("flag"), *items_table->get_table("flag"));
 
 		items_table = table.get_table("roads");
 		const auto load_roads = [&items_table](
@@ -174,7 +174,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 				throw GameDataError("Tribe has no indicators for resource %s.", resource.c_str());
 			}
 			resource_indicators_[resource] = resis;
-		};
+		}
 
 		ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
 

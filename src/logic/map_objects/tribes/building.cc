@@ -681,9 +681,9 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
 
 	molog("position: (%i, %i)\n", position_.x, position_.y);
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("flag: %p\n", flag_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 	molog("* position: (%i, %i)\n", flag_->get_position().x, flag_->get_position().y);
 
 	molog("anim: %s\n", descr().get_animation_name(anim_).c_str());
@@ -692,9 +692,9 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 	molog("leave_time: %i\n", leave_time_);
 
 	molog("leave_queue.size(): %" PRIuS "\n", leave_queue_.size());
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("leave_allow.get(): %p\n", leave_allow_.get(egbase));
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 }
 
 void Building::add_worker(Worker& worker) {
@@ -773,12 +773,10 @@ void Building::send_message(Game& game,
                             bool link_to_building_lifetime,
                             uint32_t throttle_time,
                             uint32_t throttle_radius) {
-	const std::string& img = descr().representative_image_filename();
-	const int width = descr().representative_image()->width();
 	const std::string rt_description =
-	   (boost::format("<div padding_r=10><p><img width=%d src=%s color=%s></p></div>"
+	   (boost::format("<div padding_r=10><p><img object=%s color=%s></p></div>"
 	                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-	    width % img % owner().get_playercolor().hex_value() % UI_FONT_SIZE_MESSAGE % description)
+	    descr().name() % owner().get_playercolor().hex_value() % UI_FONT_SIZE_MESSAGE % description)
 	      .str();
 
 	std::unique_ptr<Message> msg(new Message(msgtype, game.get_gametime(), title, icon_filename,

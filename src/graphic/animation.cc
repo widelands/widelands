@@ -61,7 +61,6 @@ public:
 	uint16_t nr_frames() const override;
 	uint32_t frametime() const override;
 	const Image* representative_image(const RGBColor* clr) const override;
-	const std::string& representative_image_filename() const override;
 	virtual void blit(uint32_t time,
 	                  const Rectf& source_rect,
 	                  const Rectf& destination_rect,
@@ -96,7 +95,7 @@ private:
 };
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
-   : frametime_(FRAME_LENGTH),
+   : Animation(table.has_key("representative_frame") ? table.get_int("representative_frame") : 0),
      hotspot_(table.get_vector<std::string, int>("hotspot")),
      hasplrclrs_(false),
      scale_(1),
@@ -145,6 +144,10 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 				                 "this animation is %s",
 				                 static_cast<double>(scale_), image_files_[0].c_str());
 			}
+		}
+
+		if (representative_frame_ < 0 || static_cast<unsigned int>(representative_frame_) > image_files_.size() - 1) {
+			throw wexception("Animation has %d as its representative frame, but the frame indices available are 0 - %" PRIuS, representative_frame_, image_files_.size() - 1);
 		}
 
 		assert(!image_files_.empty());
@@ -211,8 +214,8 @@ uint32_t NonPackedAnimation::frametime() const {
 
 const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 	assert(!image_files_.empty());
-	const Image* image = (hasplrclrs_ && clr) ? playercolor_image(*clr, image_files_[0]) :
-	                                            g_gr->images().get(image_files_[0]);
+	const Image* image = (hasplrclrs_ && clr) ? playercolor_image(*clr, image_files_[representative_frame_]) :
+	                                            g_gr->images().get(image_files_[representative_frame_]);
 
 	const int w = image->width();
 	const int h = image->height();
@@ -220,11 +223,6 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	rv->blit(
 	   Rectf(0.f, 0.f, w / scale_, h / scale_), *image, Rectf(0.f, 0.f, w, h), 1., BlendMode::Copy);
 	return rv;
-}
-
-// TODO(GunChleoc): This is only here for the font renderers.
-const std::string& NonPackedAnimation::representative_image_filename() const {
-	return image_files_[0];
 }
 
 uint32_t NonPackedAnimation::current_frame(uint32_t time) const {
@@ -314,6 +312,12 @@ uint32_t AnimationManager::load(const LuaTable& table) {
 	animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table)));
 	return animations_.size();
 }
+uint32_t AnimationManager::load(const std::string& map_object_name, const LuaTable& table) {
+	animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table)));
+	const size_t result = animations_.size();
+	representative_animations_by_map_object_name_.insert(std::make_pair(map_object_name, result));
+	return result;
+}
 
 const Animation& AnimationManager::get_animation(uint32_t id) const {
 	if (!id || id > animations_.size())
@@ -330,4 +334,12 @@ const Image* AnimationManager::get_representative_image(uint32_t id, const RGBCo
 		            std::move(g_gr->animations().get_animation(id).representative_image(clr)))));
 	}
 	return representative_images_.at(hash).get();
+}
+
+const Image* AnimationManager::get_representative_image(const std::string& map_object_name, const RGBColor* clr) {
+	if (representative_animations_by_map_object_name_.count(map_object_name) != 1) {
+		log("Warning: %s has no animation assigned for its representative image, or it's not a known map object\n", map_object_name.c_str());
+		return new Texture(0, 0);
+	}
+	return get_representative_image(representative_animations_by_map_object_name_.at(map_object_name), clr);
 }
