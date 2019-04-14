@@ -183,6 +183,8 @@ protected:
 
 	// Adds the mapviewmenu_ to the toolbar
 	void add_mapview_menu(MiniMapType minimap_type);
+	// Rebuilds the mapviewmenu_ according to current view settings
+	void rebuild_mapview_menu();
 	// Takes the appropriate action when an item in the mapviewmenu_ is selected
 	void mapview_menu_selected(MapviewMenuEntry entry);
 

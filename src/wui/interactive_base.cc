@@ -115,7 +115,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      avg_usframetime_(0),
      buildroad_(nullptr),
      road_build_player_(0),
-	 unique_window_handler_(new UniqueWindowHandler()),
+     unique_window_handler_(new UniqueWindowHandler()),
      // Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
      workarea_pics_{g_gr->images().get("images/wui/overlays/workarea123.png"),
                     g_gr->images().get("images/wui/overlays/workarea23.png"),
@@ -206,8 +206,16 @@ void InteractiveBase::add_mapview_menu(MiniMapType minimap_type) {
 
 	minimap_registry_.open_window = [this] { toggle_minimap(); };
 	minimap_registry_.minimap_type = minimap_type;
+
+	rebuild_mapview_menu();
+	mapviewmenu_.selected.connect([this] { mapview_menu_selected(mapviewmenu_.get_selected()); });
+}
+
+void InteractiveBase::rebuild_mapview_menu() {
+	mapviewmenu_.clear();
+
 	/** TRANSLATORS: An entry in the game's map view menu */
-	mapviewmenu_.add(_("Minimap"),
+	mapviewmenu_.add(minimap_registry_.window != nullptr ? _("Hide Minimap") : _("Show Minimap"),
 					 MapviewMenuEntry::kMinimap,
 					 g_gr->images().get("images/wui/menus/toggle_minimap.png"),
 					 false, "", "m");
@@ -229,25 +237,25 @@ void InteractiveBase::add_mapview_menu(MiniMapType minimap_type) {
 					 MapviewMenuEntry::kDecreaseZoom,
 					 g_gr->images().get("images/wui/menus/zoom_decrease.png"),
 					 false, "", pgettext("hotkey", "Ctrl+-"));
-
-	mapviewmenu_.selected.connect([this] { mapview_menu_selected(mapviewmenu_.get_selected()); });
-
 }
 
 void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 	switch (entry) {
 	case MapviewMenuEntry::kMinimap : {
-		minimap_registry_.toggle();
+		toggle_minimap();
 	} break;
 	case MapviewMenuEntry::kDecreaseZoom : {
 		map_view()->decrease_zoom();
+		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kIncreaseZoom : {
 		map_view()->increase_zoom();
+		mapviewmenu_.toggle();
 	} break;
 
 	case MapviewMenuEntry::kResetZoom : {
 		map_view()->reset_zoom();
+		mapviewmenu_.toggle();
 	} break;
 	}
 }
@@ -567,6 +575,7 @@ void InteractiveBase::toggle_minimap() {
 		});
 		mainview_move();
 	}
+	rebuild_mapview_menu();
 }
 
 const std::vector<QuickNavigation::Landmark>& InteractiveBase::landmarks() {

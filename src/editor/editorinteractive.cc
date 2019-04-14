@@ -308,6 +308,7 @@ void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 		select_tool(tools()->info, EditorTool::First);
 		break;
 	}
+	toolmenu_.toggle();
 }
 
 template <class Menu, class Tool>

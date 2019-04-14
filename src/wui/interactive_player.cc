@@ -289,6 +289,7 @@ void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
 		}
 	} break;
 	}
+	statisticsmenu_.toggle();
 }
 
 void InteractivePlayer::think() {
