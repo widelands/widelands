@@ -41,7 +41,7 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
    : InteractiveGameBase(g, global_s, OBSERVER, multiplayer) {
 	add_main_menu();
 
-	add_toolbar_button("wui/menus/general_stats", "general_stats", _("Statistics"),
+	add_toolbar_button("wui/menus/statistics_general", "general_stats", _("Statistics"),
 	                   &menu_windows_.stats_general, true);
 	menu_windows_.stats_general.open_window = [this] {
 		new GeneralStatisticsMenu(*this, menu_windows_.stats_general);

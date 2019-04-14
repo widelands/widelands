@@ -79,7 +79,7 @@ return {
          name = "terrains",
          -- TRANSLATORS Tab title: terrain help
          title = _"Terrains",
-         icon = "images/wui/editor/editor_menu_tool_set_terrain.png",
+         icon = "images/wui/editor/tools/terrain.png",
          entries = get_terrains()
       },
       {

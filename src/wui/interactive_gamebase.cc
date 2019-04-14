@@ -115,7 +115,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 }
 
 void InteractiveGameBase::add_main_menu() {
-	mainmenu_.set_image(g_gr->images().get("images/wui/menus/game_main_menu.png"));
+	mainmenu_.set_image(g_gr->images().get("images/wui/menus/main_menu.png"));
 	toolbar()->add(&mainmenu_);
 
 	menu_windows_.sound_options.open_window = [this] {

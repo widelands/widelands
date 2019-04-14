@@ -142,7 +142,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	          &main_box_, _("Main Options"));
 	tabs_.add("map_tags", g_gr->images().get("images/ui_basic/checkbox_checked.png"), &tags_box_,
 	          _("Tags"));
-	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/editor_menu_player_menu.png"),
+	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/menus/players.png"),
 	          &teams_box_, _("Teams"));
 
 	name_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));

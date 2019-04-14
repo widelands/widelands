@@ -113,11 +113,11 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	add_tool_menu();
 
 	add_toolbar_button(
-	   "wui/editor/editor_menu_set_toolsize_menu", "toolsize", _("Tool size"), &menu_windows_.toolsize, true);
+	   "wui/editor/menus/toolsize", "toolsize", _("Tool size"), &menu_windows_.toolsize, true);
 	menu_windows_.toolsize.open_window = [this] { new EditorToolsizeMenu(*this, menu_windows_.toolsize); };
 
 	add_toolbar_button(
-	   "wui/editor/editor_menu_player_menu", "players", _("Players"), &menu_windows_.players, true);
+	   "wui/editor/menus/players", "players", _("Players"), &menu_windows_.players, true);
 	menu_windows_.players.open_window = [this] {
 		select_tool(tools_->set_starting_pos, EditorTool::First);
 		new EditorPlayerMenu(*this, menu_windows_.players);
@@ -130,8 +130,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	toolbar()->add_space(15);
 
-	undo_ = add_toolbar_button("wui/editor/editor_undo", "undo", _("Undo"));
-	redo_ = add_toolbar_button("wui/editor/editor_redo", "redo", _("Redo"));
+	undo_ = add_toolbar_button("wui/editor/menus/undo", "undo", _("Undo"));
+	redo_ = add_toolbar_button("wui/editor/menus/redo", "redo", _("Redo"));
 
 	history_.reset(new EditorHistory(*undo_, *redo_));
 
@@ -158,40 +158,48 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 
 void EditorInteractive::add_main_menu() {
-	mainmenu_.set_image(g_gr->images().get("images/wui/menus/editor_main_menu.png"));
+	mainmenu_.set_image(g_gr->images().get("images/wui/editor/menus/main_menu.png"));
 
 	menu_windows_.newmap.open_window = [this] {
 		new MainMenuNewMap(*this, menu_windows_.newmap);
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(_("New Map"), MainMenuEntry::kNewMap);
+	mainmenu_.add(_("New Map"), MainMenuEntry::kNewMap,
+				  g_gr->images().get("images/wui/editor/menus/new_map.png"));
 
 	menu_windows_.newrandommap.open_window = [this] {
 		new MainMenuNewRandomMap(*this, menu_windows_.newrandommap);
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(_("New Random Map"), MainMenuEntry::kNewRandomMap);
+	mainmenu_.add(_("New Random Map"), MainMenuEntry::kNewRandomMap,
+				  g_gr->images().get("images/wui/editor/menus/new_random_map.png"));
 
 	menu_windows_.loadmap.open_window = [this] {
 		new MainMenuLoadMap(*this, menu_windows_.loadmap);
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(_("Load Map"), MainMenuEntry::kLoadMap, nullptr, false, "", pgettext("hotkey", "Ctrl+l"));
+	mainmenu_.add(_("Load Map"), MainMenuEntry::kLoadMap,
+				  g_gr->images().get("images/wui/editor/menus/load_map.png"),
+				  false, "", pgettext("hotkey", "Ctrl+l"));
 
 	menu_windows_.savemap.open_window = [this] {
 		new MainMenuSaveMap(*this, menu_windows_.savemap, menu_windows_.mapoptions);
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(_("Save Map"), MainMenuEntry::kSaveMap, nullptr, false, "", pgettext("hotkey", "Ctrl+s"));
+	mainmenu_.add(_("Save Map"), MainMenuEntry::kSaveMap,
+				  g_gr->images().get("images/wui/editor/menus/save_map.png"),
+				  false, "", pgettext("hotkey", "Ctrl+s"));
 
 	menu_windows_.mapoptions.open_window = [this] {
 		new MainMenuMapOptions(*this, menu_windows_.mapoptions);
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions);
+	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions,
+				  g_gr->images().get("images/wui/editor/menus/map_options.png"));
 
 	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor);
+	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor,
+				  g_gr->images().get("images/wui/menus/exit.png"));
 	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
 	toolbar()->add(&mainmenu_);
 }
@@ -220,50 +228,50 @@ void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
 }
 
 void EditorInteractive::add_tool_menu() {
-	toolmenu_.set_image(g_gr->images().get("images/wui/editor/editor_menu_toggle_tool_menu.png"));
+	toolmenu_.set_image(g_gr->images().get("images/wui/editor/menus/tools.png"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Change height"), ToolMenuEntry::kChangeHeight,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_height.png"), false,
+				  g_gr->images().get("images/wui/editor/tools/height.png"), false,
 				  /** TRANSLATORS: Tooltip for the change height tool in the editor */
 				  _("Change the terrain height"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Random height"), ToolMenuEntry::kRandomHeight,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_noise_height.png"), false,
+				  g_gr->images().get("images/wui/editor/tools/noise_height.png"), false,
 				  /** TRANSLATORS: Tooltip for the random height tool in the editor */
 				  _("Set the terrain height to random values"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Terrain"), ToolMenuEntry::kTerrain,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_set_terrain.png"), false,
+				  g_gr->images().get("images/wui/editor/tools/terrain.png"), false,
 				  /** TRANSLATORS: Tooltip for the terrain tool in the editor */
 				  _("Change the map’s terrain"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Immovables"), ToolMenuEntry::kImmovables,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_place_immovable.png"), false,
+				  g_gr->images().get("images/wui/editor/tools/immovables.png"), false,
 				  /** TRANSLATORS: Tooltip for the immovables tool in the editor */
 				  _("Add or remove immovables"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Animals"), ToolMenuEntry::kAnimals,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_place_bob.png"), false,
+				  g_gr->images().get("images/wui/editor/tools/critters.png"), false,
 				  /** TRANSLATORS: Tooltip for the animals tool in the editor */
 				  _("Add or remove animals"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Resources"), ToolMenuEntry::kResources,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_resources.png"), false,
+				  g_gr->images().get("images/wui/editor/tools/resources.png"), false,
 				  /** TRANSLATORS: Tooltip for the resources tool in the editor */
 				  _("Set or change resources"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Port spaces"), ToolMenuEntry::kPortSpace,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_set_port_space.png"), false,
+				  g_gr->images().get("images/wui/editor/tools/port_spaces.png"), false,
 				  /** TRANSLATORS: Tooltip for the port spaces tool in the editor */
 				  _("Add or remove port spaces"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Map origin"), ToolMenuEntry::kMapOrigin,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_change_height.png"), false,
+				  g_gr->images().get("images/wui/editor/tools/map_origin.png"), false,
 				  /** TRANSLATORS: Tooltip for the map origin tool in the editor */
 				  _("Set the position that will have the coordinates (0, 0). This will be the top-left corner of a generated minimap."));
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Map size"), ToolMenuEntry::kMapSize,
-				  g_gr->images().get("images/wui/editor/editor_menu_tool_resize.png"), false,
+				  g_gr->images().get("images/wui/editor/tools/resize_map.png"), false,
 				  /** TRANSLATORS: Tooltip for the map size tool in the editor */
 				  _("Change the map’s size"));
 	/** TRANSLATORS: An entry in the editor's tool menu */
