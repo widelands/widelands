@@ -57,7 +57,7 @@ public:
 	}
 
 	void __persist(lua_State* L) override {
-		report_error(L, "Trying to persist a User Interface Panel which is no supported!");
+		report_error(L, "Trying to persist a User Interface Panel which is not supported!");
 	}
 	void __unpersist(lua_State* L) override {
 		report_error(L, "Trying to unpersist a User Interface Panel which is "
