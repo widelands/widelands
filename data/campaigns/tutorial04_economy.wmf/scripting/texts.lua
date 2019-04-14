@@ -53,8 +53,8 @@ building_stat = {
    body = (
       h1(_[[Check out your taverns]]) ..
       p(_[[At first, we should find out how many taverns we currently have. Widelands offers you a window where you can easily check this.]]) ..
-      li_image("images/wui/menus/menu_toggle_menu.png", _[[First, you will have to open the statistics menu (you can find the corresponding button at the bottom). We will need this menu several times.]]) ..
-      li_image("images/wui/menus/menu_building_stats.png", _[[Afterwards, choose the ‘Building statistics’.]]) ..
+      li_image("images/wui/menus/statistics.png", _[[First, you will have to open the statistics menu (you can find the corresponding button at the bottom). We will need this menu several times.]]) ..
+      li_image("images/wui/menus/statistics_buildings.png", _[[Afterwards, choose the ‘Building statistics’.]]) ..
       li(_[[Open the building statistics window.]]) ..
       li_arrow(_[[You can also use the hotkey ‘b’.]])
    ),
@@ -62,7 +62,7 @@ building_stat = {
    obj_name = "open_building_stat",
    obj_title = _"Open the building statistics window",
    obj_body =
-      li_image("images/wui/menus/menu_building_stats.png", _[[The building statistics window gives you an overview over the buildings you have.]]) ..
+      li_image("images/wui/menus/statistics_buildings.png", _[[The building statistics window gives you an overview over the buildings you have.]]) ..
       -- TRANSLATORS: "it" refers to the building statistics window
       li(_[[Open it. You can access it from the statistics menu.]]) ..
       li_arrow(_[[The statistics menu is accessed via the second button at the bottom. It provides several windows that give you information about the game.]])
@@ -119,7 +119,7 @@ inventory1 = {
    body = (
       h1(_[[Check for rations]]) ..
       p(_[[OK. In the list, you’ve seen that you have no more taverns or inns. That means that you’re not producing any rations. But let’s see what we still have in stock.]]) ..
-      li_image("images/wui/menus/menu_stock.png", _[[Click on the ‘Stock’ button.]]) ..
+      li_image("images/wui/menus/statistics_stock.png", _[[Click on the ‘Stock’ button.]]) ..
       li_arrow(_[[You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window quickly.]])
    ),
    h = 300,
@@ -288,7 +288,7 @@ ware_stats1 = {
    title = _"Ware Statistics",
    body = (
       p(_[[In the statistics menu, there is also a]]) ..
-      li_image("images/wui/menus/menu_ware_stats.png", _[[‘Ware statistics’ button.]]) ..
+      li_image("images/wui/menus/statistics_wares.png", _[[‘Ware statistics’ button.]]) ..
       -- TRANSLATORS: "it" refers to the ware statistics button
       li(_[[Click on it.]])
    ),

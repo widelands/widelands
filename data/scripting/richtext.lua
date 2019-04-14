@@ -567,7 +567,7 @@ end
 --           h1("6699ff", _[[Colored header]]) ..
 --           p(_[[Normal paragraph, just with a bit more text to show how it looks like.]]) ..
 --           p("align=center", _[[A centered paragraph, just with a bit more text to show how it looks like.]]) ..
---           li_image("images/wui/menus/menu_toggle_menu.png", _[[An image with right aligned text. This is just text to show automatic line breaks and behavior in regard with images]]) ..
+--           li_image("images/wui/menus/statistics.png", _[[An image with right aligned text. This is just text to show automatic line breaks and behavior in regard with images]]) ..
 --           li(_[[A list item]]) ..
 --           li(font("color=6699ff bold=1", _[[Blue and bold]])) ..
 --           li_arrow(_[[A list item with an arrow]]) ..

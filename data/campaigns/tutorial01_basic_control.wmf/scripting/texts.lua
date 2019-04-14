@@ -42,7 +42,7 @@ initial_message_02 = {
       p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show building spaces’. There are two ways you can do this:]]) ..
       li_arrow(_[[Press the Space bar to toggle them, or]]) ..
       -- TRANSLATORS: List item. Has an image of the button next to it.
-      li_image("images/wui/menus/menu_toggle_buildhelp.png", _[[click the ‘Show building spaces’ button on the bottom of the screen.]]) ..
+      li_image("images/wui/menus/toggle_buildhelp.png", _[[click the ‘Show building spaces’ button on the bottom of the screen.]]) ..
       li(_[[Left-click the ‘OK’ button to close this box and then try it.]])
    ),
    obj_name = "enable_buildhelp",
@@ -52,7 +52,7 @@ initial_message_02 = {
       p(_[[It is easier to understand what type of buildings can be built on which field when the symbols for the building spaces are enabled.]]) ..
       li_arrow(_[[Press the Space bar to toggle them, or]]) ..
       -- TRANSLATORS: List item. Has an image of the button next to it.
-      li_image("images/wui/menus/menu_toggle_buildhelp.png", _[[click the ‘Show building spaces’ button on the bottom of the screen.]]) ..
+      li_image("images/wui/menus/toggle_buildhelp.png", _[[click the ‘Show building spaces’ button on the bottom of the screen.]]) ..
       li(_[[Right-click on this window now and then give it a try.]])
    )
 }
@@ -210,7 +210,7 @@ tell_about_minimap = {
    title = _"Use the minimap",
    body = (
       p(_[[Very good. And now about the minimap. You can open it by clicking on the]]) ..
-      li_image("images/wui/menus/menu_toggle_minimap.png", _[[minimap button at the bottom of the screen or simply by using the keyboard shortcut ‘m’.]]) ..
+      li_image("images/wui/menus/toggle_minimap.png", _[[minimap button at the bottom of the screen or simply by using the keyboard shortcut ‘m’.]]) ..
       p(_[[The minimap shows the complete map in miniature. You can directly jump to any field by left-clicking on it. You can also toggle buildings, roads, flags and player indicators on and off inside the minimap.]]) ..
       li(_[[Try it out. Open the minimap, click on a few buttons and try moving around. Close it when you have experimented enough.]])
    ),
@@ -471,7 +471,7 @@ military_building_finished = {
    h = 300,
    w = 350
 }
-
+-- NOCOM
 conclude_tutorial = {
    title = _"Conclusion",
    body = (
@@ -479,8 +479,8 @@ conclude_tutorial = {
       p(_[[This concludes the first tutorial. In order to learn more about the game, I suggest to play one of the other tutorials. Each of them covers a different topic.]]) ..
       p(_[[However, since you now know how to control Widelands, you can also start a game (or continue this one) and discover more by yourself.]]) ..
       p(_[[To leave this game and return to the main menu, click on the]]) ..
-      li_image("images/wui/menus/menu_options_menu.png", _[[‘Main Menu’ button on the very left at the bottom of the screen. Then click the]]) ..
-      li_image("images/wui/menus/menu_exit_game.png", _[[‘Exit Game’ button.]]) ..
+      li_image("images/wui/menus/game_main_menu.png", _[[‘Main Menu’ button on the very left at the bottom of the screen. Then click the]]) ..
+      li_image("images/wui/menus/exit.png", _[[‘Exit Game’ button.]]) ..
       p(_[[Thanks for playing this tutorial. Enjoy Widelands and remember to visit us at]]) ..
       h1(p("align=center", u("widelands.org")))
    ),
