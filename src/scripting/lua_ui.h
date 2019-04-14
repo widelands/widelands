@@ -68,6 +68,7 @@ public:
 	 * Properties
 	 */
 	int get_buttons(lua_State* L);
+	int get_dropdowns(lua_State* L);
 	int get_tabs(lua_State* L);
 	int get_windows(lua_State* L);
 	int get_width(lua_State* L);
@@ -120,6 +121,40 @@ public:
 		return static_cast<UI::Button*>(panel_);
 	}
 };
+
+
+class LuaDropdown : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaDropdown);
+
+	LuaDropdown() : LuaPanel() {
+	}
+	explicit LuaDropdown(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaDropdown(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaDropdown() override {
+	}
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int open(lua_State* L);
+	int select_item(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::BaseDropdown* get() {
+		return static_cast<UI::BaseDropdown*>(panel_);
+	}
+};
+
 
 class LuaTab : public LuaPanel {
 public:

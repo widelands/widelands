@@ -343,11 +343,15 @@ void BaseDropdown::set_value() {
 }
 
 void BaseDropdown::toggle() {
+	set_list_visibility(!list_->is_visible());
+}
+
+void BaseDropdown::set_list_visibility(bool open) {
 	if (!is_enabled_) {
 		list_->set_visible(false);
 		return;
 	}
-	list_->set_visible(!list_->is_visible());
+	list_->set_visible(open);
 	if (list_->is_visible()) {
 		list_->move_to_top();
 		focus();

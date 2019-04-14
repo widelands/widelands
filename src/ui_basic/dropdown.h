@@ -131,6 +131,11 @@ public:
 	/// If this is a menu and nothing was selected yet, select the first item for easier keyboard navigation.
 	void toggle();
 
+	/// Toggle the list on if 'open' off and position the mouse on the button so that the dropdown won't close on us.
+	/// If this is a menu and nothing was selected yet, select the first item for easier keyboard navigation.
+	/// Otherwise, close the list.
+	void set_list_visibility(bool open);
+
 	void layout() override;
 
 protected:
