@@ -424,7 +424,7 @@ function li_image(imagepath, text)
 end
 
 -- RST
--- .. function:: li_object(name, text)
+-- .. function:: li_object(name, text[, playercolor])
 --
 --    Places a paragraph of text to the right of an image representing the given map object
 --
@@ -434,12 +434,19 @@ end
 --    :arg text: the text to be placed next to the image
 --    :type text: :class:`string`
 --
+--    :arg playercolor: a playercolor to be applied to the image, in hex notation
+--    :type playercolor: :class:`string`
+--
 --    :returns: the text wrapped in a paragraph and placed next to the image, the outer tag is a div.
 
-function li_object(name, text)
+function li_object(name, text, playercolor)
+   local image = img_object(name)
+   if (playercolor ~= nil) then
+      image = img_object(name, "color=" .. playercolor)
+   end
    return
       div("width=100%",
-         div("float=left padding_r=6", p(img_object(name))) ..
+         div("float=left padding_r=6", p(image)) ..
          p(text)
       )
 end
