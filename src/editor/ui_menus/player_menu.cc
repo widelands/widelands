@@ -172,7 +172,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 
 		// Tribe
 		UI::Dropdown<std::string>* plr_tribe =
-		   new UI::Dropdown<std::string>(row, "dropdown_tribe" + static_cast<unsigned int>(p), 0, 0, 50, 16, plr_name->get_h(), _("Tribe"),
+		   new UI::Dropdown<std::string>(row, (boost::format("dropdown_tribe%d") % static_cast<unsigned int>(p)).str(), 0, 0, 50, 16, plr_name->get_h(), _("Tribe"),
 		                                 UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
 		{
 			i18n::Textdomain td("tribes");
