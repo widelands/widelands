@@ -16,8 +16,7 @@ function starting_infos()
    sleep(1000)
 
    -- Welcome and teach objectives
-   local o = campaign_message_with_objective(initial_message_01, obj_initial_close_objectives_window)
-   sleep(1000)
+   local o = campaign_message_with_objective(initial_message_01, obj_initial_close_objectives_window, 1000)
    wl.ui.MapView().buttons.objectives:click()
 
    while not wl.ui.MapView().windows.objectives do sleep(100) end
@@ -46,7 +45,7 @@ function build_lumberjack()
    -- We take control, everything that we build is legal
    immovable_is_legal = function(i) return true end
 
-   message_box_objective(plr, lumberjack_message_01)
+   campaign_message_box(lumberjack_message_01)
 
    local blocker = UserInputDisabler:new()
    close_windows()
@@ -54,7 +53,7 @@ function build_lumberjack()
    scroll_to_field(first_lumberjack_field)
    mouse_to_field(first_lumberjack_field)
    sleep(500)
-   message_box_objective(plr, lumberjack_message_02)
+   campaign_message_box(lumberjack_message_02)
    sleep(500)
 
    click_on_field(first_lumberjack_field)
@@ -64,16 +63,16 @@ function build_lumberjack()
    sleep(500)
 
    if wl.ui.MapView().is_building_road then
-      message_box_objective(plr, lumberjack_message_03a)
+      campaign_message_box(lumberjack_message_03a)
    else
       enter_road_building_mode(first_lumberjack_field.brn.immovable)
-      message_box_objective(plr, lumberjack_message_03b)
+      campaign_message_box(lumberjack_message_03b)
    end
    sleep(500)
 
    click_on_field(sf.brn)
 
-   message_box_objective(plr, lumberjack_message_04)
+   campaign_message_box(lumberjack_message_04)
 
    register_immovable_as_allowed(first_lumberjack_field.immovable) -- hut + flag
 
@@ -88,7 +87,7 @@ function build_lumberjack()
 
    if not (f.immovable and f.immovable.descr.type_name == "flag") then
       -- only show this if the user has not already built a flag
-      local o = message_box_objective(plr, lumberjack_message_05)
+      local o = campaign_message_with_objective(lumberjack_message_05, obj_lumberjack_place_flag)
 
       local blocker = UserInputDisabler:new()
       close_windows()
@@ -101,20 +100,26 @@ function build_lumberjack()
 
       -- Wait for flag
       while not (f.immovable and f.immovable.descr.type_name == "flag") do sleep(300) end
-      set_objective_done(o, 300)
-
-      message_box_objective(plr, lumberjack_message_06)
+      set_objective_done(o, 16 * 1000)
    else
       -- if the flag is already built, show the player a different message box
-      message_box_objective(plr, flag_built)
+      campaign_message_box(lumberjack_message_06, 3 * 1000)
    end
 
-   sleep(30*1000) -- let the player experiment a bit with the speed
-   message_box_objective(plr, construction_site_window)
+   local o = campaign_message_with_objective(lumberjack_message_07, obj_lumberjack_progress)
+
+   while not wl.ui.MapView().windows.building_window do sleep(100) end
+   while wl.ui.MapView().windows.building_window do sleep(100) end
+   set_objective_done(o)
+
+   campaign_message_box(lumberjack_message_08)
+   wl.ui.MapView().dropdowns["dropdown_menu_gamespeed"]:open()
+
+   sleep(20*1000) -- let the player experiment a bit with the window
 
    while #plr:get_buildings("barbarians_lumberjacks_hut") < 1 do sleep(300) end
 
-   campaign_message_box(lumberjack_message_07)
+   campaign_message_box(lumberjack_message_09)
 
    learn_to_move()
 end

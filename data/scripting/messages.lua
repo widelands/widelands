@@ -87,10 +87,57 @@ end
 --    :arg message: the message to be sent
 --    :arg sleeptime: ms spent sleeping after the message has been dismissed by the player
 --
+--    Besides the normal message arguments (see wl.Game.Player:message_box) the following ones can be used:
+--
+--    :arg position: A string that indicates at which border of the screen the message box shall appear. Can be "top", "bottom", "right", "left" or a combination (e.g. "topright"). Overrides posx and posy. Default: Center. If only one direction is indicated, the other one stays central.
+--    :arg scroll_back: If true, the view scrolls/jumps back to where it came from. If false, the new location stays on the screen when the message box is closed. Default: False.
+--    :arg show_instantly: If true, the message box is shown immediately. If false, this function will wait until the player leaves the roadbuilding mode. Use this with care because it can be very interruptive. Default: false.
+--
 function campaign_message_box(message, sleeptime)
-   if not message.h then message.h = 400 end
-   if not message.w then message.w = 450 end
-   message_box(wl.Game().players[1], message.title, message.body, message)
+   message.show_instantly = message.show_instantly or false
+   message.scroll_back = message.scroll_back or false
+   message.h = message.h or 400
+   message.w = message.w or 450
+
+   if message.position then
+      if string.find(message.position,"top") then
+         -- Set it a bit lover than 0 to prevent overlap with game speed text
+         message.posy = 25
+      elseif string.find(message.position,"bottom") then
+         message.posy = 10000
+      end
+      if string.find(message.position,"left") then
+         message.posx = 0
+      elseif string.find(message.position,"right") then
+         message.posx = 10000
+      end
+   end
+
+   local center_pixel
+
+   if message.field then
+      -- This is necessary. Otherwise, we would scroll and then wait until the road is finished.
+      -- In this time, could user can scroll elsewhere, giving weird results.
+      if not message.show_instantly then
+         wait_for_roadbuilding()
+      end
+      center_pixel = scroll_to_field(message.field);
+   end
+
+   if message.show_instantly then
+      -- message_box takes care of this, but player:message_box does not
+      local user_input = wl.ui.get_user_input_allowed()
+      wl.ui.set_user_input_allowed(true)
+      wl.Game().players[1]:message_box(message.title, rt(message.body), message)
+      wl.ui.set_user_input_allowed(user_input)
+   else
+      message_box(wl.Game().players[1], message.title, message.body, message)
+   end
+
+   if (message.field and message.scroll_back) then
+      scroll_to_map_pixel(center_pixel);
+   end
+
    if sleeptime then sleep(sleeptime) end
 end
 
@@ -128,6 +175,7 @@ end
 --
 --    :returns: The new objective.
 --
+-- TODO(wl-zocker): This function should be used by all tutorials, campaigns and scenario maps
 function campaign_message_with_objective(message, objective, sleeptime)
    campaign_message_box(message, sleeptime)
    return add_campaign_objective(objective)
@@ -155,6 +203,7 @@ end
 -- RST
 -- .. function:: message_box_objective(player, message)
 --
+--    DEPRECATED, use campaign_message_with_objective instead.
 --    Calls message_box(player, message.title, message.body, message). Also adds an objective defined in obj_name, obj_title and obj_body.
 --    This method should gather all options that are used often to avoid reimplementation in every single scenario script.
 --
@@ -168,9 +217,6 @@ end
 --    :arg show_instantly: If true, the message box is shown immediately. If false, this function calls message_box(), which waits until the player leaves the roadbuilding mode. Use this with care because it can be very interruptive. Default: false.
 --
 --    :returns: the objective if defined, nil otherwise
-
--- TODO(wl-zocker): This function should be used by all tutorials, campaigns and scenario maps
--- TODO GunChleoc): Move scrolling and waiting functionality over to campaign_message_box/campaign_message_with_objective and then get rid of this function
 function message_box_objective(player, message)
    message.show_instantly = message.show_instantly or false
    message.scroll_back = message.scroll_back or false
