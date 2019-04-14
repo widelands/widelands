@@ -60,29 +60,65 @@ scold_player = {
    show_instantly = true
 }
 
+-- Teaching basic UI controls
+
+obj_initial_close_story_window = {
+   name = "initial_close_story_window",
+   title=_"Close this window",
+   number = 1,
+   body = objective_text(_"Close this window",
+      li(_[[Dismiss this box by left-clicking on the button below.]])
+   )
+}
 initial_message_01 = {
    title = _"Welcome to the Widelands Tutorial!",
    body = (
       h1(_"Welcome to Widelands!") ..
-      p(_[[Widelands is a slow-paced build-up strategy game with an emphasis on construction rather than destruction. This tutorial will guide you through the basics of the game.]]) ..
-      li(_[[Dismiss this box by left-clicking on the button below.]])
-   ),
-   h = 300,
-   w = 400
+      li_image("images/logos/wl-ico-64.png",
+         _[[Widelands is a slow-paced build-up strategy game with an emphasis on construction rather than destruction. This tutorial will guide you through the basics of the game.]]) ..
+      li_arrow(_[[You will be guided through this tutorial by objectives]]) ..
+      li(_[[Follow the intructions in the objective below so that I can teach you more about them.]]) ..
+      new_objectives(obj_initial_close_story_window)
+   )
 }
+-- NOCOM add translators comments
+obj_initial_close_objectives_window = {
+   name = "obj_initial_close_objectives_window",
+   title=_"Close this window",
+   number = 1,
+   body = objective_text(_"Close this window",
+      p(_[[This is the ‘Objectives’ window. You can return to this window for instructions at any time.]]) ..
+      li_image("images/wui/menus/objectives.png", _[[ You can open and close this window by clicking on the ‘Objectives’ button in the toolbar on the bottom of the screen.]]) ..
+      li_arrow(_[[Like any other window, you can also close the ‘Objectives’ window by right-clicking on it.]]) ..
+      li(_[[Close the objectives window now.]])
+   )
+}
+
+obj_initial_toggle_building_spaces = {
+   name = "initial_toggle_building_spaces",
+   title=_"Show building spaces",
+   number = 1,
+   body = objective_text(_"Show building spaces",
+      p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show building spaces’. There are two ways you can do this:]]) ..
+      li_arrow(_[[Press the Space bar to toggle them, or]]) ..
+      -- TRANSLATORS: List item. Has an image of the button next to it.
+      li_image("images/wui/menus/showhide.png", _[[Select ‘Show Building Spaces’ in the ‘Show / Hide’ menu.]]) ..
+      li(_[[Show the building spaces now]])
+   )
+}
+
 initial_message_02 = {
-   title = _"Diving In",
+   title = _"Building Spaces",
    position = "topright",
    field = sf,
    body = (
       h1(_"Let’s dive right in!") ..
-      p(_[[There are three different tribes in Widelands: the Barbarians, the Empire and the Atlanteans. All tribes have a different economy, strength and weaknesses, but the general gameplay is the same for all. We will play the Barbarians for now.]]) ..
-      p(_[[You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters is a warehouse that stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the wares in the headquarters will not last forever, so you must make sure to replace them. The most important wares in the early game are the basic construction wares: logs and granite. Let’s make sure that we do not run out of logs. For this, we need a lumberjack and a hut for him to stay in.]]) ..
-      p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show building spaces’. There are two ways you can do this:]]) ..
-      li_arrow(_[[Press the Space bar to toggle them, or]]) ..
-      -- TRANSLATORS: List item. Has an image of the button next to it.
-      li_image("images/wui/menus/toggle_buildhelp.png", _[[click the ‘Show building spaces’ button on the bottom of the screen.]]) ..
-      li(_[[Left-click the ‘OK’ button to close this box and then try it.]])
+      li_image("tribes/images/barbarians/icon.png",
+         _[[There are three different tribes in Widelands: the Barbarians, the Empire and the Atlanteans. All tribes have a different economy, strength and weaknesses, but the general gameplay is the same for all. We will play the Barbarians for now.]]) ..
+      li_object("barbarians_headquarters", _[[You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters is a warehouse that stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the wares in the headquarters will not last forever, so you must make sure to replace them. The most important wares in the early game are the basic construction wares: logs and granite. Let’s make sure that we do not run out of logs. For this, we need a lumberjack and a hut for him to stay in.]], plr.color) ..
+      p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show building spaces’.]]) ..
+      li(_[[Left-click the ‘OK’ button to close this box so that I can show you how.]]) ..
+      li_arrow(_[[Note that you cannot close this window by right-clicking on it. I have blocked this so that you will not close it by accident and miss important information.]])
    ),
    obj_name = "enable_buildhelp",
    obj_title = _"Enable the showing of building spaces",
@@ -91,8 +127,18 @@ initial_message_02 = {
       p(_[[It is easier to understand what type of buildings can be built on which field when the symbols for the building spaces are enabled.]]) ..
       li_arrow(_[[Press the Space bar to toggle them, or]]) ..
       -- TRANSLATORS: List item. Has an image of the button next to it.
-      li_image("images/wui/menus/toggle_buildhelp.png", _[[click the ‘Show building spaces’ button on the bottom of the screen.]]) ..
+      li_image("images/wui/menus/showhide.png", _[[click the ‘Show building spaces’ button on the bottom of the screen.]]) ..
       li(_[[Right-click on this window now and then give it a try.]])
+   )
+}
+initial_message_03 = {
+   title = _"Building Spaces",
+   position = "topright",
+   field = sf,
+   body = (
+      h1(_"Let’s dive right in!") ..
+      li_object("barbarians_lumberjacks_hut", _[[Now that I have shown you how to show and hide the building spaces, please switch them on again so that we can place our first building.]], plr.color) ..
+      new_objectives(obj_initial_toggle_building_spaces)
    )
 }
 
@@ -216,7 +262,7 @@ tell_about_keyboard_move = {
    title = _"Some Rocks Were Found",
    body = (
       h1(_"Getting a Quarry Up") ..
-      li_image("world/immovables/rocks/greenland_rocks6/idle.png",
+      li_object("greenland_rocks6",
          _[[Granite can be mined in granite mines, but the easier way is to build a quarry next to some rocks lying around. As it happens, there is a pile of them just to the west (left) of your headquarters. I will teach you now how to move your view over there.]]) ..
       new_objectives(obj_moving_keyboard) ..
       li(_[[Click the ‘OK’ button and then move the view using the cursor keys.]])
@@ -265,7 +311,7 @@ tell_about_minimap_2 = {
 
 congratulate_and_on_to_quarry = {
    title = _"Onward to the Quarry",
-   body = p(_[[Great. Now about that quarry…]]),
+   body = li_object("greenland_rocks6",_[[Great. Now about that quarry…]]),
    h = 200,
    w = 250
 }

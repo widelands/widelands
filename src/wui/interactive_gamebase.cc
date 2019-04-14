@@ -157,7 +157,7 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 }
 
 void InteractiveGameBase::add_showhide_menu() {
-	showhidemenu_.set_image(g_gr->images().get("images/wui/menus/toggle_buildhelp.png"));
+	showhidemenu_.set_image(g_gr->images().get("images/wui/menus/showhide.png"));
 	toolbar()->add(&showhidemenu_);
 
 	rebuild_showhide_menu();

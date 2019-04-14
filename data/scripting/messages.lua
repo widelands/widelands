@@ -112,6 +112,28 @@ function add_campaign_objective(objective)
    end
 end
 
+
+-- RST
+-- .. function:: campaign_message_box(message, objective [,sleeptime])
+--
+--    Sets message.h and message.w if not set and calls
+--    message_box(player, title, body, parameters) for player 1.
+--
+--    Adds an objective to the scenario afterwards.
+--
+--
+--    :arg message: the message to be sent
+--    :arg objective: The objective to be added. If the variable obj_name exists, obj_name, obj_title and obj_body are used. Otherwise, it needs to have a name, title, and body.
+--    :arg sleeptime: ms spent sleeping after the message has been dismissed by the player
+--
+--    :returns: The new objective.
+--
+function campaign_message_with_objective(message, objective, sleeptime)
+   campaign_message_box(message, sleeptime)
+   return add_campaign_objective(objective)
+end
+
+
 -- RST
 -- .. function:: set_objective_done(objective[, sleeptime])
 --
@@ -148,6 +170,7 @@ end
 --    :returns: the objective if defined, nil otherwise
 
 -- TODO(wl-zocker): This function should be used by all tutorials, campaigns and scenario maps
+-- TODO GunChleoc): Move scrolling and waiting functionality over to campaign_message_box/campaign_message_with_objective and then get rid of this function
 function message_box_objective(player, message)
    message.show_instantly = message.show_instantly or false
    message.scroll_back = message.scroll_back or false
