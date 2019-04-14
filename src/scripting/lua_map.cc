@@ -545,10 +545,10 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 	lua_pushuint32(L, idx);                                                                         \
 	lua_pushuint32(L, i.first.name);                                                                \
 	lua_rawset(L, -3);
-			PUSHLEVEL(1, health);
-			PUSHLEVEL(2, attack);
-			PUSHLEVEL(3, defense);
-			PUSHLEVEL(4, evade);
+			PUSHLEVEL(1, health)
+			PUSHLEVEL(2, attack)
+			PUSHLEVEL(3, defense)
+			PUSHLEVEL(4, evade)
 #undef PUSHLEVEL
 
 			lua_pushuint32(L, i.second);
@@ -1539,7 +1539,7 @@ void LuaTribeDescription::__persist(lua_State* L) {
 
 void LuaTribeDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_tribe_index(name);
 	set_description_pointer(tribes.get_tribe_descr(idx));
@@ -1993,7 +1993,7 @@ void LuaImmovableDescription::__persist(lua_State* L) {
 
 void LuaImmovableDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const World& world = get_egbase(L).world();
 	DescriptionIndex idx = world.get_immovable_index(name);
 	if (idx != INVALID_INDEX) {
@@ -2215,7 +2215,7 @@ void LuaBuildingDescription::__persist(lua_State* L) {
 
 void LuaBuildingDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_building_index(name.c_str());
 	set_description_pointer(tribes.get_building_descr(idx));
@@ -3070,7 +3070,7 @@ void LuaWareDescription::__persist(lua_State* L) {
 
 void LuaWareDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_ware_index(name.c_str());
 	set_description_pointer(tribes.get_ware_descr(idx));
@@ -3188,7 +3188,7 @@ void LuaWorkerDescription::__persist(lua_State* L) {
 
 void LuaWorkerDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_worker_index(name.c_str());
 	set_description_pointer(tribes.get_worker_descr(idx));
@@ -3469,7 +3469,7 @@ void LuaResourceDescription::__persist(lua_State* L) {
 
 void LuaResourceDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const World& world = get_egbase(L).world();
 	const ResourceDescription* descr = world.get_resource(world.safe_resource_index(name.c_str()));
 	set_description_pointer(descr);
@@ -3590,7 +3590,7 @@ void LuaTerrainDescription::__persist(lua_State* L) {
 
 void LuaTerrainDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	set_description_pointer(get_egbase(L).world().terrain_descr(name));
 }
 
@@ -3776,8 +3776,8 @@ void LuaEconomy::__persist(lua_State* L) {
 void LuaEconomy::__unpersist(lua_State* L) {
 	Widelands::PlayerNumber player_number;
 	Widelands::Serial economy_serial;
-	UNPERS_UINT32("player", player_number);
-	UNPERS_UINT32("economy", economy_serial);
+	UNPERS_UINT32("player", player_number)
+	UNPERS_UINT32("economy", economy_serial)
 	const Widelands::Player& player = get_egbase(L).player(player_number);
 	set_economy_pointer(player.get_economy(economy_serial));
 }
@@ -3929,7 +3929,7 @@ void LuaMapObject::__persist(lua_State* L) {
 }
 void LuaMapObject::__unpersist(lua_State* L) {
 	uint32_t idx;
-	UNPERS_UINT32("file_index", idx);
+	UNPERS_UINT32("file_index", idx)
 
 	if (!idx)
 		ptr_ = nullptr;
@@ -6179,8 +6179,8 @@ void LuaField::__persist(lua_State* L) {
 }
 
 void LuaField::__unpersist(lua_State* L) {
-	UNPERS_INT32("x", coords_.x);
-	UNPERS_INT32("y", coords_.y);
+	UNPERS_INT32("x", coords_.x)
+	UNPERS_INT32("y", coords_.y)
 }
 
 /*
@@ -6727,7 +6727,7 @@ void LuaPlayerSlot::__persist(lua_State* L) {
 }
 
 void LuaPlayerSlot::__unpersist(lua_State* L) {
-	UNPERS_UINT32("player", player_number_);
+	UNPERS_UINT32("player", player_number_)
 }
 
 /*

@@ -112,7 +112,7 @@ void SoundHandler::init() {
 		nosound_ = true;
 	}
 
-	SDL_MIXER_VERSION(&sdl_version);
+	SDL_MIXER_VERSION(&sdl_version)
 	log("SDL_mixer version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
 	    static_cast<unsigned int>(sdl_version.minor), static_cast<unsigned int>(sdl_version.patch));
 

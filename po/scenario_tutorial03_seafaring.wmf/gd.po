@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-05 04:54+0000\n"
-"PO-Revision-Date: 2019-04-05 07:47+0000\n"
+"POT-Creation-Date: 2019-04-11 05:49+0000\n"
+"PO-Revision-Date: 2019-04-11 11:52+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -62,7 +62,7 @@ msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr "Ach chan eil mi airson greas a chur ort: tha thu dìreach air tighinn agus b’ fhearr leat sùil a thoirt air an tuineachadh agad gu socair. Gabhaidh mi fhìn fois agus bidh mi air ais an ceann greis."
+msgstr "Ach chan eil mi airson greas a chur ort: tha thu dìreach air tighinn agus b’ fheàrr leat sùil a thoirt air an tuineachadh agad gu socair. Gabhaidh mi fhìn fois agus bidh mi air ais an ceann greis."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:42
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:44
@@ -261,7 +261,7 @@ msgid ""
 "As you surely have already noticed, there is no iron in the mountain in the "
 "west. We have plenty of coal and gold ore, but without iron ore, we cannot "
 "produce any tools."
-msgstr "Mar a mhothaich thu gun teagamh mar-thà, chan eil iarann sam bith sa mhonadh gu siar. Tha torr guail agus cloich-òir againn ach chan urrainn dhuinn acainnean a dhèanamh às aonais cloich-iarainn."
+msgstr "Mar a mhothaich thu gun teagamh mar-thà, chan eil iarann sam bith sa mhonadh gu siar. Tha tòrr guail agus cloich-òir againn ach chan urrainn dhuinn acainnean a dhèanamh às aonais cloich-iarainn."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:120
 msgid ""
