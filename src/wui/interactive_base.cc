@@ -206,6 +206,7 @@ void InteractiveBase::add_mapview_menu(MiniMapType minimap_type) {
 
 	minimap_registry_.open_window = [this] { toggle_minimap(); };
 	minimap_registry_.minimap_type = minimap_type;
+	minimap_registry_.closed.connect([this] { rebuild_mapview_menu(); });
 
 	rebuild_mapview_menu();
 	mapviewmenu_.selected.connect([this] { mapview_menu_selected(mapviewmenu_.get_selected()); });

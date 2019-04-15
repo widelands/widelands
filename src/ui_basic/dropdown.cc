@@ -408,6 +408,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_RETURN:
 			if (list_->is_visible()) {
 				set_value();
+				return true;
 			}
 			break;
 		case SDLK_ESCAPE:
@@ -418,6 +419,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 			}
 			break;
 		case SDLK_DOWN:
+		case SDLK_UP:
 			if (!list_->is_visible() && !is_mouse_away()) {
 				toggle_list();
 				return true;

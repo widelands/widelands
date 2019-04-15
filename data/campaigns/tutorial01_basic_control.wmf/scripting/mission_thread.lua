@@ -3,10 +3,17 @@
 -- ================
 
 local function demonstrate_select_item_from_dropdown(name, item)
+   wl.ui.set_user_input_allowed(false)
+   local old_gamespeed = wl.Game().desired_speed
+   wl.Game().desired_speed = 1000
+
    wl.ui.MapView().dropdowns[name]:open()
    sleep(3000)
    wl.ui.MapView().dropdowns[name]:select_item(item)
    sleep(3000)
+
+   wl.Game().desired_speed = old_gamespeed
+   wl.ui.set_user_input_allowed(true)
 end
 
 local objective_to_explain_objectives = add_campaign_objective(obj_initial_close_objectives_window)
