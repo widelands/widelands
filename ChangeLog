@@ -1,4 +1,4 @@
-## Post Build 19 until bzr9033
+## Post Build 19 until bzr9046
 
 ### Animations, Icons and Overlays
 
@@ -559,7 +559,7 @@
 
   - Windows builds now have a unique app id for every build. This allows
     parallel installation of several versions.
-  - Added support for gcc7.
+  - Added support for gcc7 and llvm8.
   - Removed "redundant-decls" flag for Windows builds due to conflict between
     SDL and MinGW.
   - New Macro FALLS_THROUGH; for use in switch statements.
