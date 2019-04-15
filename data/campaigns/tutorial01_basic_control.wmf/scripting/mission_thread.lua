@@ -9,6 +9,8 @@ local function demonstrate_select_item_from_dropdown(name, item)
    sleep(3000)
 end
 
+local objective_to_explain_objectives = add_campaign_objective(obj_initial_close_objectives_window)
+
 function starting_infos()
    -- So that the player cannot build anything here
    map:place_immovable("debris00", second_quarry_field, "world")
@@ -16,18 +18,19 @@ function starting_infos()
    sleep(1000)
 
    -- Welcome and teach objectives
-   local o = campaign_message_with_objective(initial_message_01, obj_initial_close_objectives_window, 1000)
-   wl.ui.MapView().buttons.objectives:click()
+   local o = campaign_message_with_objective(initial_message_01, obj_initial_close_story_window)
+   set_objective_done(o, 100)
 
+   wl.ui.MapView().buttons.objectives:click()
    while not wl.ui.MapView().windows.objectives do sleep(100) end
    while wl.ui.MapView().windows.objectives do sleep(100) end
-   set_objective_done(o, 200)
+   sleep(500)
 
    -- Teach building spaces
-   campaign_message_box(initial_message_02)
+   campaign_message_box(initial_message_02, 200)
    demonstrate_select_item_from_dropdown("dropdown_menu_showhide", 1)
    demonstrate_select_item_from_dropdown("dropdown_menu_showhide", 1)
-   o = campaign_message_with_objective(initial_message_03, obj_initial_toggle_building_spaces)
+   local o = campaign_message_with_objective(initial_message_03, obj_initial_toggle_building_spaces)
 
    -- Wait for buildhelp to come on
    while not wl.ui.MapView().buildhelp do
@@ -107,6 +110,8 @@ function build_lumberjack()
    end
 
    local o = campaign_message_with_objective(lumberjack_message_07, obj_lumberjack_progress)
+   scroll_to_field(first_lumberjack_field)
+   mouse_to_field(first_lumberjack_field)
 
    while not wl.ui.MapView().windows.building_window do sleep(100) end
    while wl.ui.MapView().windows.building_window do sleep(100) end
@@ -126,7 +131,8 @@ end
 
 function learn_to_move()
    -- Teaching the user how to scroll on the map
-   local o = campaign_message_with_objective(tell_about_keyboard_move, obj_moving_keyboard)
+   campaign_message_box(tell_about_keyboard_move)
+   local o = add_campaign_objective(obj_moving_keyboard)
 
    function _wait_for_move()
       local center_map_pixel = wl.ui.MapView().center_map_pixel
@@ -145,11 +151,11 @@ function learn_to_move()
    set_objective_done(o)
 
    -- Teach the minimap
-   o = campaign_message_with_objective(tell_about_minimap_1, obj_moving_minimap)
+   campaign_message_box(tell_about_minimap_1)
 
    -- Open the minimap
    demonstrate_select_item_from_dropdown("dropdown_menu_mapview", 1)
-   campaign_message_box(tell_about_minimap_2)
+   o = campaign_message_with_objective(tell_about_minimap_2, obj_moving_minimap)
 
    -- Wait until the minimap has been opened and closed again
    while not wl.ui.MapView().windows.minimap do sleep(100) end
@@ -404,6 +410,8 @@ function expansion()
 end
 
 function conclusion()
+   set_objective_done(objective_to_explain_objectives)
+
    sleep(5000) -- to give the player time to see his expanded area
 
    -- Conclude the tutorial with final words and information

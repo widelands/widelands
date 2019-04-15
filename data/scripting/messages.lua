@@ -6,6 +6,7 @@
 
 include "scripting/coroutine.lua"
 include "scripting/richtext.lua"
+include "scripting/richtext_scenarios.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
 
@@ -177,6 +178,9 @@ end
 --
 -- TODO(wl-zocker): This function should be used by all tutorials, campaigns and scenario maps
 function campaign_message_with_objective(message, objective, sleeptime)
+   -- TODO(GunChleoc): Once everybody is using this function, move new_objectives over from
+   -- richtext_scenarios and add this file to utils/buildcat.py
+   message.body = message.body .. new_objectives(objective)
    campaign_message_box(message, sleeptime)
    return add_campaign_objective(objective)
 end
