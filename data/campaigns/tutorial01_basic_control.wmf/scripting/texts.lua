@@ -44,7 +44,7 @@ initial_message_01 = {
       li(_[[Follow the intructions in the objective below so that I can show you where to find them.]])
    )
 }
--- NOCOM add translators comments
+
 obj_initial_close_objectives_window = {
    name = "obj_initial_close_objectives_window",
    title=_"How to close this window",
@@ -62,11 +62,9 @@ obj_initial_toggle_building_spaces = {
    title=_"Show building spaces",
    number = 1,
    body = objective_text(_"Show building spaces",
-      p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show building spaces’. There are two ways you can do this:]]) ..
-      li_arrow(_[[Press the Space bar to toggle them, or]]) ..
-      -- TRANSLATORS: List item. Has an image of the button next to it.
-      li_image("images/wui/menus/showhide.png", _[[select ‘Show Building Spaces’ in the ‘Show / Hide’ menu.]]) ..
-      li(_[[Show the building spaces now]])
+      p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show Building Spaces’. There are two ways you can do this:]]) ..
+      li_image("images/wui/menus/showhide.png", _[[Press the Space bar to toggle them, or select ‘Show Building Spaces’ in the ‘Show / Hide’ menu.]]) ..
+      li(_[[Show the building spaces now.]])
    )
 }
 
@@ -79,7 +77,7 @@ initial_message_02 = {
       li_image("tribes/images/barbarians/icon.png",
          _[[There are four different tribes in Widelands: the Barbarians, the Empire, the Atlanteans and the Frisians. All tribes have a different economy, strength and weaknesses, but the general gameplay is the same for all. We will play the Barbarians for now.]]) ..
       li_object("barbarians_headquarters", _[[You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters is a warehouse that stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the wares in the headquarters will not last forever, so you must make sure to replace them. The most important wares in the early game are the basic construction wares: logs and granite. Let’s make sure that we do not run out of logs. For this, we need a lumberjack and a hut for him to stay in.]], plr.color) ..
-      p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show building spaces’.]]) ..
+      p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show Building Spaces’.]]) ..
       li(_[[Left-click the ‘OK’ button to close this window so that I can show you how.]]) ..
       li_arrow(_[[Note that you cannot close this window by right-clicking on it. I have blocked this so that you will not close it by accident and miss important information.]])
    )
@@ -265,9 +263,7 @@ tell_about_keyboard_move = {
    body = (
       h1(_"Getting a Quarry Up") ..
       li_object("greenland_rocks6",
-         _[[Granite can be mined in granite mines, but the easier way is to build a quarry next to some rocks lying around. As it happens, there is a pile of them just to the west (left) of your headquarters. I will teach you now how to move your view over there.]]) ..
-      new_objectives(obj_moving_keyboard) ..
-      li(_[[Click the ‘OK’ button and then move the view using the cursor keys.]])
+         _[[Granite can be mined in granite mines, but the easier way is to build a quarry next to some rocks lying around. As it happens, there is a pile of them just to the west (left) of your headquarters. I will teach you now how to move your view over there.]])
    ),
    h = 450,
 }
@@ -297,7 +293,7 @@ obj_moving_minimap = {
    body = objective_text(_"Learn to use the minimap",
       li(_[[Try moving around by clicking on the minimap]]) ..
       li(_[[Play around a bit with the different overlays (roads, flags, etc.)]]) ..
-      li(_[[Close the minimap when you are ready to continue by selecting ‘Hide Minimap’ in the ‘Map View’ menu or by pressing ‘m’. Of course, a right-click also works.]]) .. moving_view_instructions
+      li(_[[Close the minimap when you are ready to continue by selecting ‘Hide Minimap’ in the ‘Map View’ menu or by pressing ‘m’. Of course, a right-click also works.]])
    ),
 }
 tell_about_minimap_1 = {
@@ -322,8 +318,7 @@ tell_about_minimap_2 = {
       li_image("images/wui/menus/toggle_minimap.png",
          _([[The minimap shows the complete map in miniature. ]]
          .. [[You can directly jump to any field by left-clicking on it. ]]
-         .. [[You can also toggle buildings, roads, flags and player indicators on and off inside the minimap.]])) ..
-      new_objectives(obj_moving_minimap)
+         .. [[You can also toggle buildings, roads, flags and player indicators on and off inside the minimap.]]))
    ),
    h = 450,
 }
@@ -470,16 +465,43 @@ build_second_quarry = {
 census_and_statistics_00 = {
    title = _"Census and Statistics",
    body = (
-      p(_[[While we wait, I’ll quickly show you another useful feature. All construction sites look the same, and some buildings look alike. It is sometimes hard to tell them apart. Widelands offers a feature to show label texts over the buildings. They are called the ‘census’ and you can toggle them via the ‘c’ key or via the button on the ‘Watch’ tab of any field.]]) ..
-      p(_[[Similar to this are the building statistics, which are also toggled via a button on the ‘Watch’ tab of any field. The hotkey for it is ‘s’. This will display information about the productivity of buildings or the progress of construction sites.]]) ..
-      p(_[[Let me quickly enable these two for you. Remember: ‘c’ and ‘s’ are the keys. Alternatively, you can click on any field without a building on it, select the watch tab and then click on the corresponding buttons.]])
-   )
+      li_image("images/wui/menus/toggle_census.png", _[[While we wait, I’ll quickly show you another useful feature. All construction sites look the same, and some buildings look alike. It is sometimes hard to tell them apart. Widelands offers a feature to show label texts over the buildings. They are called the ‘census’.]]) ..
+      li_arrow(_[[In order to show or hide the building census labels, you can select the ‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the bottom, or press the ‘c’ key on the keyboard.]]) ..
+      p(_[[Let me enable the census for you.]])
+   ),
+   position = "topright",
+   h = 300,
+   w = 350
 }
 
+obj_show_statistics = {
+   name = "show_statistics",
+   title=_"Show the building statistics",
+   number = 1,
+   body = objective_text(_"Show the building statistics",
+      li(_[[Show the building statistics labels, so that we can check the progress of our quarry construction more easily.]]) ..
+      li_arrow(_[[In order to show or hide the building statistics labels, you can select the ‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press the ‘s’ key on the keyboard.]])
+   )
+}
 census_and_statistics_01 = {
    title = _"Census and Statistics",
-   body = (p(_[[Now we know what’s going on. Let’s wait for the quarries to finish.]])),
-   h = 200,
+   body = (
+      li_image("images/wui/menus/toggle_statistics.png",
+         p(_[[Now, wouldn’t it be nice to check on our quarries’ progress without having to open their windows?]]) ..
+         p(_[[In addition to the buildings’ census, you can also activate statictics labels on them. This will display information about the productivity of buildings or the progress of construction sites.]]))
+   ),
+   position = "topright",
+   h = 300,
+   w = 350
+}
+
+census_and_statistics_02 = {
+   title = _"Census and Statistics",
+   body = (
+      li_object("barbarians_quarry", _[[Now we know what’s going on. Let’s wait for the quarries to finish.]], plr.color)
+   ),
+   position = "topright",
+   h = 150,
    w = 250
 }
 
@@ -487,47 +509,50 @@ census_and_statistics_01 = {
 -- Messages
 -- ========
 
-teaching_about_messages = {
-   popup = true,
-   title = _"Messages",
-   heading = _"Introducing Messages",
-   body = (
-      p(_[[Hi, it’s me again! This time, I have sent you a message. Messages are sent to you by Widelands to inform you about important events: empty mines, attacks on your tribe, won or lost military buildings, resources found…]]) ..
-      p(_[[The message window can be toggled by the second button from the right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..
-      p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages: first, select the message that you wish to archive by clicking on it in the list. Then, click the]]) ..
-      li_image("images/wui/messages/message_archive.png", _[[‘Archive selected message’ button to move it into your archive.]]) ..
-      p(_[[Once you have archived a message, another message will be selected automatically from the list.]]) ..
-      li_arrow(_[[You can also hold down the Ctrl or Shift key to select multiple messages, or press Ctrl + A to select them all.]]) ..
-      li(_[[Archive all messages that you currently have in your inbox, including this one.]])
-   ),
-   obj_name = "archive_all_messages",
-   obj_title = _"Archive all messages in your inbox",
-   obj_body = (
-      h1(_"Archive Your Inbox Messages") ..
+obj_archive_all_messages = {
+   name = "archive_all_messages",
+   title=_"Archive all messages in your inbox",
+   number = 1,
+   body = objective_text(_"Archive Your Inbox Messages",
       p(_[[The message window is central to fully controlling your tribe’s fortune. However, you will get a lot of messages in a real game. To keep your head straight, you should try to keep the inbox empty.]]) ..
       li(_[[Archive all your messages in your inbox now.]]) ..
       li_arrow(_[[To do so, open the message window by pressing ‘n’ or clicking the second button from the right at the very bottom of the screen. The newest message will be marked for you automatically. Keep clicking the ‘Archive selected message’ button until all messages have been archived and the list is empty.]]) ..
       li_arrow(_[[You can also hold down the Ctrl or Shift key to select multiple messages, or press Ctrl + A to select them all.]])
    )
 }
+teaching_about_messages = {
+   popup = true,
+   title = _"Messages",
+   heading = _"Introducing Messages",
+   body = (
+      li_image("images/wui/menus/message_new.png",_[[Hi, it’s me again! This time, I have sent you a message. Messages are sent to you by Widelands to inform you about important events: empty mines, attacks on your tribe, won or lost military buildings, resources found…]]) ..
+      p(_[[The message window can be toggled by the second button from the right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..
+      p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages: first, select the message that you wish to archive by clicking on it in the list. Then, click the]]) ..
+      li_image("images/wui/messages/message_archive.png", _[[‘Archive selected message’ button to move it into your archive.]]) ..
+      p(_[[Once you have archived a message, another message will be selected automatically from the list.]]) ..
+      li_arrow(_[[You can also hold down the Ctrl or Shift key to select multiple messages, or press Ctrl + A to select them all.]]) ..
+      li(_[[Archive all messages that you currently have in your inbox, including this one.]])
+   )
+}
 
+obj_close_message_window = {
+   name = "close_message_window",
+   title=_"Close the messages window",
+   number = 1,
+   body = objective_text(_"Archive Your Inbox Messages",
+      p(_[[All windows in Widelands can be closed by right-clicking into them. Some windows can also be toggled with the buttons and menus at the very bottom of the screen.]]) ..
+      li(_[[Close the messages window now by right-clicking into it.]])
+   )
+}
 closing_msg_window_00 = {
    position = "topright",
    field = first_quarry_field,
    title = _"Closing Windows",
    body = (
-      p(_[[Excellent. Do you remember how to close windows? You simply have to right-click on them. This will work with all windows except for story message windows like this one. Go ahead and try it.]]) ..
-      li(_[[First, close this window by pressing the button below, then right-click into the messages window to close it.]])
+      li_image("images/wui/menus/message_old.png",_[[Excellent. Do you remember how to close windows? You simply have to right-click on them. This will work with all windows except for story message windows like this one. Go ahead and try it.]])
    ),
-   h = 300,
-   w = 350,
-   obj_name = "close_message_window",
-   obj_title = _"Close the messages window",
-   obj_body = (
-      h1(_"Close the Messages Window") ..
-      p(_[[All windows in Widelands can be closed by right-clicking into them. Some windows can also be toggled with the buttons at the very bottom of the screen.]]) ..
-      li(_[[Close the messages window now by right-clicking into it.]])
-   )
+   h = 400,
+   w = 350
 }
 
 closing_msg_window_01 = {
@@ -535,60 +560,66 @@ closing_msg_window_01 = {
    field = first_quarry_field,
    title = _"Closing Windows",
    body = (
-      p(_[[Well done! Let’s see how messages work in a real game, shall we? For this, I’ll take all rocks away from the poor stonemasons in the quarries. They will then send a message each that they can’t find any in their work areas the next time they try to do some work.]])
+      li_object("barbarians_quarry", _[[Well done! Let’s see how messages work in a real game, shall we? For this, I’ll take all rocks away from the poor stonemasons in the quarries. They will then send a message each that they can’t find any in their work areas the next time they try to do some work.]], plr.color)
    ),
-   h = 300,
+   h = 250,
    w = 350
 }
 
-destroy_quarries_message = {
-   position = "topright",
-   title = _"Messages Arrived!",
-   body = (
-      p(_[[You received some messages. See how the button at the bottom of the screen has changed appearance? You can destroy the quarries now as they are no longer of any use and just blocking space. To do so, there are two possibilities:]]) ..
-      li_image("images/wui/buildings/menu_bld_bulldoze.png", _[[Burning down the quarry: this is the fastest way of clearing the space. While the worker abandons the building, the wares are lost.]]) ..
-      li_image("images/wui/buildings/menu_bld_dismantle.png", _[[Dismantling the quarry: a builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction.]])
-   ),
-   h = 300,
-   obj_name = "destroy_quarries",
-   obj_title = _"Destroy the two quarries",
-   obj_body = (
+obj_destroy_quarries = {
+   name = "destroy_quarries",
+   title=_"Destroy the two quarries",
+   number = 1,
+   body = objective_text(_"Destroy the Quarries",
       p(_[[Since our quarries are useless now, you can destroy them and reuse the space later on.]]) ..
       li_arrow(_[[There are two different ways of destroying a building: burning down and dismantling. Try them both out on your quarries.]]) ..
       li_image("images/wui/buildings/menu_bld_bulldoze.png", _[[Burning down the quarry: This is the fastest way of clearing the space. While the worker abandons the building, the wares are lost.]]) ..
       li_image("images/wui/buildings/menu_bld_dismantle.png", _[[Dismantling the quarry: A builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction.]])
    )
 }
+destroy_quarries_message = {
+   position = "topright",
+   title = _"Messages Arrived!",
+   body = (
+      li_image("images/wui/menus/message_new.png", _[[You received some messages. See how the button at the bottom of the screen has changed appearance?]])
+   ),
+   h = 400,
+   w = 350
+}
+
 -- =========
 -- Expansion
 -- =========
 
-introduce_expansion = {
-   title = _"Expanding Your Territory!",
-   body = (
-      p(_[[There is one more thing I’d like to teach you now: Expanding your territory. The place that we started with around our headquarters is barely enough for a basic building infrastructure, and we do not have access to mountains, which we need to mine minerals and coal. So, we have to expand our territory.]]) ..
-      p(_[[Expanding is as simple as building a military building at the edge of your territory. The Barbarians have a selection of different military buildings: sentries, barriers, towers, fortresses and citadels. The bigger the building, the more expensive it is to build, but the more land it will conquer around itself and the more soldiers can be stationed there. The buildings also vary in their vision range: buildings with a tower see farther than others.]]) ..
-      p(_[[As soon as a military building is manned, it will extend your land. I will tell your more about military buildings in another tutorial.]]) ..
-      li(_[[Let’s try it out now: build a military building on your border.]]) ..
-      li_arrow(_[[The sentry is the only military site that fits on a small building plot. If your lumberjack has cleared enough space, you can also build another military building.]])
-   ),
-   obj_name = "expand_territory",
-   obj_title = _"Expand your territory",
-   obj_body = (
-      h1(_"Make your territory grow") ..
-      p(_[[In Widelands, it is necessary to build many buildings, which take up a lot of space. To expand your territory, you have to build military buildings next to your border. Every tribe has several military buildings.]]) ..
-      li(_[[The Barbarians have four different military buildings you can build: the sentry (small), the barrier and the tower (both medium) and the fortress (big). Just choose the one you like most.]]) ..
+obj_expand_territory = {
+   name = "expand_territory",
+   title=_"Expand your territory",
+   number = 1,
+   body = objective_text(_"Make your Territory Grow",
+      li(_[[Build a military building on your border.]]) ..
+      li_arrow(_[[In Widelands, it is necessary to build many buildings, which take up a lot of space. To expand your territory, you have to build military buildings next to your border. Every tribe has several military buildings.]]) ..
+      li_arrow(_[[The Barbarians have four different military buildings you can build: the sentry (small), the barrier and the tower (both medium) and the fortress (big). Just choose the one you like most.]]) ..
+      li_arrow(_[[The sentry is the only military site that fits on a small building plot. If your lumberjack has cleared enough space, you can also build another military building.]]) ..
       li_arrow(_[[Remember that big buildings (green icon) cannot be built on small (red) or medium (yellow) building plots, but buildings can be built on a building plot that provides more space than they need. You should always keep that in mind when you search for a suitable place.]])
    )
 }
-
+introduce_expansion = {
+   title = _"Expanding Your Territory!",
+   body = (
+      li_object("barbarians_sentry",
+         p(_[[There is one more thing I’d like to teach you now: Expanding your territory. The place that we started with around our headquarters is barely enough for a basic building infrastructure, and we do not have access to mountains, which we need to mine minerals and coal. So, we have to expand our territory.]]) ..
+         p(_[[Expanding is as simple as building a military building at the edge of your territory. The Barbarians have a selection of different military buildings: sentries, barriers, towers, fortresses and citadels. The bigger the building, the more expensive it is to build, but the more land it will conquer around itself and the more soldiers can be stationed there. The buildings also vary in their vision range: buildings with a tower see farther than others.]]) ..
+         p(_[[As soon as a military building is manned, it will extend your land. I will tell you more about military buildings in another tutorial.]]), plr.color)
+   )
+}
 
 military_building_finished = {
    title = _"Military Site Occupied",
    body = (
       h1(_"Your territory has just grown!") ..
-      p(_[[Great. Do you see how your territory has grown since your soldiers entered your new military building?]]) ..
-      p(_[[Every military building has a certain conquer area – the more expensive the building, the more land it conquers.]])
+      li_object("barbarians_tower",
+         p(_[[Great. Do you see how your territory has grown since your soldiers entered your new military building?]]) ..
+         p(_[[Every military building has a certain conquer area – the more expensive the building, the more land it conquers.]]), plr.color)
    ),
    h = 300,
    w = 350
@@ -602,8 +633,9 @@ conclude_tutorial = {
    title = _"Conclusion",
    body = (
       h1(_"Conclusion") ..
-      p(_[[This concludes the first tutorial. In order to learn more about the game, I suggest to play one of the other tutorials. Each of them covers a different topic.]]) ..
-      p(_[[However, since you now know how to control Widelands, you can also start a game (or continue this one) and discover more by yourself.]]) ..
+      li_image("images/logos/wl-ico-64.png",
+         p(_[[This concludes the first tutorial. In order to learn more about the game, I suggest to play one of the other tutorials. Each of them covers a different topic.]]) ..
+         p(_[[However, since you now know how to control Widelands, you can also start a game (or continue this one) and discover more by yourself.]])) ..
       p(_[[To leave this game and return to the main menu, click on the]]) ..
       li_image("images/wui/menus/main_menu.png", _[[‘Main Menu’ button on the very left at the bottom of the screen. Then click the]]) ..
       li_image("images/wui/menus/exit.png", _[[‘Exit Game’ button.]]) ..

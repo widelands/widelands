@@ -3,18 +3,14 @@
 -- ================
 
 local function demonstrate_select_item_from_dropdown(name, item)
-   local user_input = wl.ui.get_user_input_allowed()
-   wl.ui.set_user_input_allowed(false)
-   local old_gamespeed = wl.Game().desired_speed
-   wl.Game().desired_speed = 1000
+   local blocker = UserInputDisabler:new()
 
    wl.ui.MapView().dropdowns[name]:open()
    sleep(3000)
    wl.ui.MapView().dropdowns[name]:select_item(item)
    sleep(3000)
 
-   wl.Game().desired_speed = old_gamespeed
-   wl.ui.set_user_input_allowed(user_input)
+   blocker:lift_blocks()
 end
 
 local function wait_for_quarry_road_connection(field, cs)
@@ -90,8 +86,6 @@ function build_lumberjack()
 
    -- We take control, everything that we build is legal
    immovable_is_legal = function(i) return true end
-
-   build_a_quarry()
 
    campaign_message_box(lumberjack_message_01)
 
@@ -176,8 +170,7 @@ end
 
 function learn_to_move()
    -- Teaching the user how to scroll on the map
-   campaign_message_box(tell_about_keyboard_move)
-   local o = add_campaign_objective(obj_moving_keyboard)
+   local o = campaign_message_with_objective(tell_about_keyboard_move, obj_moving_keyboard)
 
    function _wait_for_move()
       local center_map_pixel = wl.ui.MapView().center_map_pixel
@@ -251,7 +244,7 @@ function build_a_quarry()
 
    immovable_is_legal = function() return true end
 
-   sleep(3000) -- give the game some time to enter road building mode
+   sleep(wl.Game().desired_speed) -- give the game some time to enter road building mode
    if wl.ui.MapView().is_building_road then
       campaign_message_box(talk_about_roadbuilding_00a)
    else
@@ -335,7 +328,6 @@ function second_quarry()
    set_objective_done(o, 0)
 end
 
--- NOCOM fix
 function census_and_statistics()
    sleep(15000)
 
@@ -347,19 +339,20 @@ function census_and_statistics()
 
    wl.ui.MapView():abort_road_building()
 
-   message_box_objective(plr, census_and_statistics_00)
+   campaign_message_box(census_and_statistics_00)
 
-   click_on_field(first_quarry_field.bln)
-   click_on_panel(wl.ui.MapView().windows.field_action.tabs.watch)
-   click_on_panel(wl.ui.MapView().windows.field_action.buttons.census)
-   sleep(300)
-   click_on_field(first_quarry_field.brn)
-   click_on_panel(wl.ui.MapView().windows.field_action.tabs.watch)
-   click_on_panel(wl.ui.MapView().windows.field_action.buttons.statistics)
-
-   message_box_objective(plr, census_and_statistics_01)
+   demonstrate_select_item_from_dropdown("dropdown_menu_showhide", 2)
+   sleep(200)
 
    blocker:lift_blocks()
+
+   local o = campaign_message_with_objective(census_and_statistics_01, obj_show_statistics)
+
+   -- Wait for statistics to come on
+   while not wl.ui.MapView().statistics do sleep(200) end
+   set_objective_done(o, 5 * wl.Game().desired_speed)
+
+   campaign_message_box(census_and_statistics_02, 200)
 end
 
 function messages()
@@ -367,20 +360,18 @@ function messages()
    sleep(10)
 
    send_message(plr, teaching_about_messages.title, teaching_about_messages.body, teaching_about_messages, {heading = teaching_about_messages.heading})
-   local o = add_campaign_objective(teaching_about_messages)
+   local o = add_campaign_objective(obj_archive_all_messages)
 
    while #plr.inbox > 0 do sleep(200) end
    set_objective_done(o, 500)
 
-   local o = message_box_objective(plr, closing_msg_window_00)
+   local o = campaign_message_with_objective(closing_msg_window_00, obj_close_message_window)
 
    -- Wait for messages window to close
    while wl.ui.MapView().windows.messages do sleep(300) end
-   set_objective_done(o, 0)
+   set_objective_done(o, 300)
 
-   message_box_objective(plr, closing_msg_window_01)
-
-   sleep(800)
+   campaign_message_box(closing_msg_window_01, 800)
 
    destroy_quarries()
 end
@@ -403,10 +394,7 @@ function destroy_quarries()
    -- Wait for messages to arrive
    while count_quarry_messages() < 2 do sleep(300) end
 
-   local o = message_box_objective(plr, destroy_quarries_message)
-
-   -- From now on, the player can build whatever he wants
-   terminate_bad_boy_sentinel = true
+   local o = campaign_message_with_objective(destroy_quarries_message, obj_destroy_quarries)
 
    while #plr:get_buildings("barbarians_quarry") > 0 do sleep(200) end
    set_objective_done(o)
@@ -418,7 +406,10 @@ function expansion()
    -- Teach about expanding the territory
    sleep(10)
 
-   local o = message_box_objective(plr, introduce_expansion)
+   -- From now on, the player can build whatever he wants
+   terminate_bad_boy_sentinel = true
+
+   local o = campaign_message_with_objective(introduce_expansion, obj_expand_territory)
 
    -- wait until there are soldiers inside so that the player sees the expansion
    local soldier_inside = false
@@ -438,8 +429,8 @@ function expansion()
       sleep(500)
    end
 
-   set_objective_done(o)
-   message_box_objective(plr, military_building_finished)
+   set_objective_done(o, 4 * wl.Game().desired_speed)
+   campaign_message_box(military_building_finished)
 
    conclusion()
 end
@@ -451,8 +442,7 @@ function conclusion()
 
    -- Conclude the tutorial with final words and information
    -- on how to quit
-   message_box_objective(plr, conclude_tutorial)
-
+   campaign_message_box(conclude_tutorial)
 end
 
 run(bad_boy_sentry)
