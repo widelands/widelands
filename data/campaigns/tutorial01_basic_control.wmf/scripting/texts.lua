@@ -84,6 +84,7 @@ initial_message_02 = {
       li_arrow(_[[Note that you cannot close this window by right-clicking on it. I have blocked this so that you will not close it by accident and miss important information.]])
    )
 }
+
 initial_message_03 = {
    title = _"Building Spaces",
    position = "topright",
@@ -159,7 +160,6 @@ lumberjack_message_04 = {
    w = 350
 }
 
-
 obj_lumberjack_place_flag = {
    name = "obj_lumberjack_place_flag",
    title=_"Build a flag to divide the road to the lumberjack",
@@ -218,7 +218,6 @@ lumberjack_message_07 = {
    w = 350
 }
 
-
 lumberjack_message_08 = {
    title = _"Waiting For the Hut to be Finished",
    position = "topright",
@@ -230,7 +229,6 @@ lumberjack_message_08 = {
    h = 200,
    w = 350
 }
-
 
 lumberjack_message_09 = {
    title = _"The Lumberjack’s Hut is Done",
@@ -341,42 +339,46 @@ congratulate_and_on_to_quarry = {
 -- Quarry
 -- ======
 
+obj_build_a_quarry = {
+   name = "build_a_quarry",
+   title=_"Build a quarry next to the rocks",
+   number = 1,
+   body = objective_text(_"Build a Quarry",
+      li(_[[There are some rocks to the west of your headquarters. Build a quarry right next to them.]]) ..
+      li_image("images/wui/overlays/small.png", _[[The quarry is a small building like the lumberjack’s hut. You can therefore build it on any field that shows a red, yellow or green house when the building spaces symbols are enabled (Press Space for that).]]) ..
+      li_arrow(_[[Just click on any house symbol next to the rocks, select the small buildings tab in the window that opens up, then click on the quarry symbol.]])
+   ),
+}
 order_quarry_recap_how_to_build = {
    field = first_quarry_field,
    position = "topright",
    title = _"How to Build a Quarry",
    body = (
-      p(_[[Build a quarry next to those rocks here. Remember how I did it earlier?]]) ..
-      p(_[[Make sure that you are showing the building spaces, then just click on the space where you want the building to be, choose it from the window that appears, and it is placed. Maybe this is a good time to explain about all those building space symbols we activated earlier.]]) ..
-      p(_[[You can build four things on fields in Widelands: flags, small houses, medium houses and big houses. But not every field can hold everything. The build space symbols ease recognition:]]) ..
+      li_object("barbarians_quarry",
+         p(_[[Build a quarry next to those rocks here. Remember how I did it earlier?]]) ..
+         p(_[[Make sure that you are showing the building spaces, then just click on the space where you want the building to be, choose it from the window that appears, and it is placed. Maybe this is a good time to explain about all those building space symbols we activated earlier.]]) ..
+         p(_[[You can build four things on fields in Widelands: flags, small houses, medium houses and big houses. But not every field can hold everything. The build space symbols ease recognition:]]), plr.color) ..
       li_image("images/wui/overlays/big.png", _[[Everything can be built on the green house symbol.]]) ..
       li_image("images/wui/overlays/medium.png", _[[Everything except for big buildings can be built on a yellow house symbol.]]) ..
       li_image("images/wui/overlays/small.png", _[[Red building symbols can only hold small buildings and flags.]]) ..
       li_image("images/wui/overlays/set_flag.png", _[[And finally, the yellow flag symbol only allows for flags.]]) ..
-      p(_[[If you place something on a field, the surrounding fields might have less space for holding buildings, so choose your fields wisely.]]) ..
-      li(_[[Now go ahead, try it. The quarry is a small building, so if you click on a medium or big building symbol, you will have to select the small buildings tab first to find it. Go on, check it out!]])
-   ),
-   obj_name = "build_a_quarry",
-   obj_title = _"Build a quarry next to the rocks",
-   obj_body = (
-      h1(_"Build a Quarry") ..
-      li(_[[There are some rocks to the west of your headquarters. Build a quarry right next to them.]]) ..
-      li(_[[The quarry is a small building like the lumberjack’s hut. You can therefore build it on any field that shows a red, yellow or green house when the building spaces symbols are enabled (Press Space for that).]]) ..
-      li(_[[Just click on any house symbol next to the rocks, select the small buildings tab in the window that opens up, then click on the quarry symbol.]])
+      p(_[[If you place something on a field, the surrounding fields might have less space for holding buildings, so choose your fields wisely.]])
    )
 }
+
+local explain_abort_roadbuilding = li_image("images/wui/menu_abort.png", _[[If you decide you do not want to build a road at this time, you can cancel road building by clicking on the starting flag of the road and selecting the abort symbol.]])
 
 talk_about_roadbuilding_00a = {
    position = "topright",
    field = wl.Game().map:get_field(9,12),
    title = _"Road Building",
    body = (
-      p(_[[Excellent! Directly after placing the building, you have been switched into road building mode. The new road will start at the flag in front of your newly placed construction site. You can enter road building mode for any flag by left-clicking on a flag and selecting]]) ..
-      li_image("images/wui/fieldaction/menu_build_way.png", _[[the road building symbol.]]) ..
-      p(_[[If you decide you do not want to build a road at this time, you can cancel road building by clicking on the starting flag of the road and selecting]]) ..
-      li_image("images/wui/menu_abort.png", _[[the abort symbol.]]) ..
+      li_image("images/wui/fieldaction/menu_tab_buildroad.png", _[[Excellent! Directly after placing the building, you have been switched into road building mode. The new road will start at the flag in front of your newly placed construction site.]]) ..
+      li_image("images/wui/fieldaction/menu_build_way.png", _[[You can enter road building mode for any flag by left-clicking on a flag and selecting the road building symbol.]]) ..
+      explain_abort_roadbuilding ..
       p(_[[Now, about this road. Remember: we are already in road building mode since you just ordered the quarry. You can either make it longer by one field at a time by left-clicking multiple times on neighboring fields for perfect control over the route the road takes, like so:]])
    ),
+   h = 300,
    show_instantly = true
 }
 
@@ -385,12 +387,11 @@ talk_about_roadbuilding_00b = {
    field = road_building_field,
    title = _"Road Building",
    body = (
-      p(_[[Excellent! To enter road building mode for any flag, left-click on a flag and select]]) ..
-      li_image("images/wui/fieldaction/menu_build_way.png", _[[the road building symbol.]]) ..
-      p(_[[If you decide that you do not want to build a road at this time, you can cancel road building by clicking on the starting flag of the road and selecting]]) ..
-      li_image("images/wui/menu_abort.png", _[[the abort symbol.]]) ..
+      li_image("images/wui/fieldaction/menu_build_way.png", _[[ Excellent! To enter road building mode for any flag, left-click on a flag and select the road building symbol.]]) ..
+      explain_abort_roadbuilding ..
       p(_[[Now, about this road. I’ll enter the road building mode and then make it longer by one field at a time by left-clicking multiple times on neighboring fields for perfect control over the route the road takes, like so:]])
    ),
+   h = 300,
    show_instantly = true
 }
 
@@ -398,38 +399,38 @@ talk_about_roadbuilding_01 = {
    position = "topright",
    field = road_building_field,
    title = _"Road Building",
-   body = p(_[[Or, you can directly click the flag where the road should end, like so:]]),
+   body = li_image("images/wui/fieldaction/menu_build_way.png", _[[Or, you can directly click the flag where the road should end, like so:]]),
    h = 200,
    w = 250
 }
 
+obj_build_road_to_quarry = {
+   name = "build_road_to_quarry",
+   title=_"Connect the quarry to the headquarters",
+   number = 1,
+   body = objective_text(_"Connect Your Construction Site",
+      li(_[[Connect your quarry construction site to your headquarters with a road. You would have been put directly into road building mode after ordering a new site. But now, you aren’t.]]) ..
+      li_arrow(_[[To build a completely new road, just click on the flag in front of your construction site, click on the build road icon and then click on the flag in front of your headquarters. Wait for the completion of the quarry.]]) ..
+      li_arrow(_[[If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed automatically.]])
+   ),
+}
 talk_about_roadbuilding_02 = {
    position = "topright",
    title = _"Road Building",
    body = (
-      p(_[[One more thing: around the field where your road would end, you can see different markers. They have the following meaning:]]) ..
+      li_image("images/wui/fieldaction/menu_tab_buildroad.png", _[[One more thing: around the field where your road would end, you can see different markers. They have the following meaning:]]) ..
       li_image("images/wui/overlays/roadb_green.png", _[[The terrain is flat here. Your carriers will be very swift on this terrain.]]) ..
       li_image("images/wui/overlays/roadb_yellow.png", _[[There is a small slope to climb to reach this field. This means that your workers will be faster walking downhill than they will be walking uphill.]]) ..
       li_image("images/wui/overlays/roadb_red.png", _[[The connection between the fields is extremely steep. The speed increase in one direction is huge while the slowdown in the other is also substantial.]]) ..
-      p(_[[Keep the slopes in mind while placing roads and use them to your advantage. Also, try to keep roads as short as possible and always remember to place as many flags as you can on road segments to share the load better.]]) ..
-      li_arrow(_[[If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed automatically.]]) ..
-      li(_[[Now please rebuild the road between your quarry and your headquarters.]])
+      p(_[[Keep the slopes in mind while placing roads and use them to your advantage. Also, try to keep roads as short as possible and always remember to place as many flags as you can on road segments to share the load better.]])
    ),
-   h = 450,
-   obj_name = "build_road_to_quarry",
-   obj_title = _"Connect the quarry to the headquarters",
-   obj_body = (
-      h1(_"Connect Your Construction Site") ..
-      p(_[[Connect your quarry construction site to your headquarters with a road. You would have been put directly into road building mode after ordering a new site. But now, you aren’t.]]) ..
-      li_arrow(_[[To build a completely new road, just click on the flag in front of your construction site, click on the build road icon and then click on the flag in front of your headquarters. Wait for the completion of the quarry.]]) ..
-      li_arrow(_[[If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed automatically.]])
-   )
+   h = 450
 }
 
 quarry_not_connected = {
    title = _"Quarry not Connected",
    body = (
-      p(_[[Your workers do not like to walk across country. You have to build a road from your headquarters to the construction site so that carriers can transport wares. The simplest way is to click on the construction site’s flag, choose ‘Build road’, and then click on the destination flag (the one in front of your headquarters), just like I’ve demonstrated.]])
+      li_object("barbarians_carrier", _[[Your workers do not like to walk across country. You have to build a road from your headquarters to the construction site so that carriers can transport wares. The simplest way is to click on the construction site’s flag, choose ‘Build road’, and then click on the destination flag (the one in front of your headquarters), just like I’ve demonstrated.]], plr.color)
    ),
    w = 350,
    h = 250
@@ -438,29 +439,33 @@ quarry_not_connected = {
 quarry_illegally_destroyed = {
    title = _"You Destroyed the Construction Site!",
    body = (
-      p(_[[It seems like you destroyed a construction site for a quarry we wanted to build. Since we need the granite, I suggest you reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]])
+      li_object("barbarians_quarry", _[[It seems like you destroyed a construction site for a quarry we wanted to build. Since we need the granite, I suggest you reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]], plr.color)
    ),
    w = 350,
    h = 250
 }
 
+obj_build_the_second_quarry = {
+   name = "build_the_second_quarry",
+   title=_"Build another quarry",
+   number = 1,
+   body = objective_text(_"Build another quarry",
+      li(_[[Build a second quarry near the rocks and connect it to your road network.]]) ..
+      li_arrow(_[[You can connect the new road to any flag of your existing road network. You can create junctions everywhere, not only in front of buildings.]])
+   ),
+}
 build_second_quarry = {
    position = "topright",
    title = _"Build a second quarry",
    body = (
-      p(_[[When there are many rocks, you can consider building another quarry. This will make the granite production faster.]]) ..
-      li(_[[Build a second quarry near the rocks and connect it to your road network.]])
+      li_object("barbarians_quarry", _[[When there are many rocks, you can consider building another quarry. This will make the granite production faster.]], plr.color)
    ),
-   obj_name = "build_the_second_quarry",
-   obj_title = _"Build another quarry",
-   obj_body = (
-      h1(_"Build another quarry") ..
-      p(_[[Build a second quarry next to the rocks. Do not forget to connect it to another flag.]]) ..
-      li(_[[You can connect the new road to any flag of your existing road network. You can create junctions everywhere, not only in front of buildings.]])
-   ),
-   h = 300,
-   w = 350
+   h = 300
 }
+
+-- ===================
+-- Census & Statistics
+-- ===================
 
 census_and_statistics_00 = {
    title = _"Census and Statistics",
@@ -477,6 +482,10 @@ census_and_statistics_01 = {
    h = 200,
    w = 250
 }
+
+-- ========
+-- Messages
+-- ========
 
 teaching_about_messages = {
    popup = true,
@@ -550,6 +559,9 @@ destroy_quarries_message = {
       li_image("images/wui/buildings/menu_bld_dismantle.png", _[[Dismantling the quarry: A builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction.]])
    )
 }
+-- =========
+-- Expansion
+-- =========
 
 introduce_expansion = {
    title = _"Expanding Your Territory!",
@@ -581,7 +593,11 @@ military_building_finished = {
    h = 300,
    w = 350
 }
--- NOCOM
+
+-- ==========
+-- Conclusion
+-- ==========
+
 conclude_tutorial = {
    title = _"Conclusion",
    body = (

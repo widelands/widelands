@@ -3,6 +3,7 @@
 -- ================
 
 local function demonstrate_select_item_from_dropdown(name, item)
+   local user_input = wl.ui.get_user_input_allowed()
    wl.ui.set_user_input_allowed(false)
    local old_gamespeed = wl.Game().desired_speed
    wl.Game().desired_speed = 1000
@@ -13,7 +14,42 @@ local function demonstrate_select_item_from_dropdown(name, item)
    sleep(3000)
 
    wl.Game().desired_speed = old_gamespeed
-   wl.ui.set_user_input_allowed(true)
+   wl.ui.set_user_input_allowed(user_input)
+end
+
+local function wait_for_quarry_road_connection(field, cs)
+   -- Wait till the construction site is connected to the headquarters
+   sleep(20*1000)
+   while not field.immovable or field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
+      if not field.immovable then
+         campaign_message_box(quarry_illegally_destroyed)
+
+         cs = nil
+         immovable_is_legal = function(i)
+            -- only allow quarry and flag at this position because the road building below relies on this
+            if (i.fields[1] == field) or (i.fields[1] == field.brn) then
+               cs = allow_constructionsite(i, {"barbarians_quarry"})
+               return cs
+            elseif(i.descr.type_name == "flag") or (i.descr.type_name == "road") then
+               register_immovable_as_allowed(i)
+               return true
+            else return false end
+         end
+
+         -- Wait for a new constructionsite to be placed
+         while not cs do sleep(200) end
+         --if (cs ~= nil) then
+            register_immovable_as_allowed(cs)
+         --end
+      else
+         campaign_message_box(quarry_not_connected)
+      end
+      sleep(60*1000)
+   end
+
+   if (cs ~= nil) then
+      register_immovable_as_allowed(cs)
+   end
 end
 
 local objective_to_explain_objectives = add_campaign_objective(obj_initial_close_objectives_window)
@@ -54,6 +90,8 @@ function build_lumberjack()
 
    -- We take control, everything that we build is legal
    immovable_is_legal = function(i) return true end
+
+   build_a_quarry()
 
    campaign_message_box(lumberjack_message_01)
 
@@ -170,7 +208,7 @@ function learn_to_move()
 
    set_objective_done(o, 500)
 
-   message_box_objective(plr, congratulate_and_on_to_quarry)
+   campaign_message_box(congratulate_and_on_to_quarry)
 
    build_a_quarry()
 end
@@ -179,7 +217,7 @@ function build_a_quarry()
    sleep(200)
 
    -- Teaching how to build a quarry and the nits and knacks of road building.
-   local o = message_box_objective(plr, order_quarry_recap_how_to_build)
+   local o = campaign_message_with_objective(order_quarry_recap_how_to_build, obj_build_a_quarry)
 
    local cs = nil
    immovable_is_legal = function(i)
@@ -215,10 +253,10 @@ function build_a_quarry()
 
    sleep(3000) -- give the game some time to enter road building mode
    if wl.ui.MapView().is_building_road then
-      message_box_objective(plr, talk_about_roadbuilding_00a)
+      campaign_message_box(talk_about_roadbuilding_00a)
    else
       -- show the user how to enter road building mode manually
-      message_box_objective(plr, talk_about_roadbuilding_00b)
+      campaign_message_box(talk_about_roadbuilding_00b)
       click_on_field(first_quarry_field.brn)
       click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_road, 300)
    end
@@ -234,7 +272,7 @@ function build_a_quarry()
 
    _rip_road()
 
-   message_box_objective(plr, talk_about_roadbuilding_01)
+   campaign_message_box(talk_about_roadbuilding_01)
    -- Showoff direct roadbuilding
    click_on_field(first_quarry_field.brn)
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_road, 300)
@@ -246,7 +284,7 @@ function build_a_quarry()
 
    blocker:lift_blocks()
 
-   local o = message_box_objective(plr, talk_about_roadbuilding_02)
+   local o = campaign_message_with_objective(talk_about_roadbuilding_02, obj_build_road_to_quarry)
 
    -- The player is allowed to build roads and flags at will
    immovable_is_legal = function(i)
@@ -256,13 +294,7 @@ function build_a_quarry()
       else return false end
    end
 
-   -- Wait till the construction site is connected to the headquarters
-   sleep(20*1000)
-   while first_quarry_field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
-      message_box_objective(plr,quarry_not_connected)
-      sleep(60*1000)
-      if not first_quarry_field.immovable then message_box_objective(plr,quarry_illegally_destroyed) return end
-   end
+   wait_for_quarry_road_connection(first_quarry_field, cs)
 
    second_quarry()
 
@@ -278,9 +310,11 @@ end
 function second_quarry()
    sleep(2000)
 
-   local o = message_box_objective(plr, build_second_quarry)
+   local o = campaign_message_with_objective(build_second_quarry, obj_build_the_second_quarry)
+   -- Remove this immovable (debris)
    second_quarry_field.immovable:remove()
-   -- remove this immovable (debris)
+   scroll_to_field(first_quarry_field)
+   mouse_to_field(second_quarry_field)
 
    local cs = nil
    immovable_is_legal = function(i)
@@ -296,15 +330,9 @@ function second_quarry()
    -- Wait for the constructionsite to be placed
    while not cs do sleep(200) end
 
-   sleep(60*1000)
-   while second_quarry_field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
-      message_box_objective(plr,quarry_not_connected)
-      sleep(60*1000)
-      if not second_quarry_field.immovable then message_box_objective(plr,quarry_illegally_destroyed) return end
-   end
+   wait_for_quarry_road_connection(second_quarry_field, cs)
 
    set_objective_done(o, 0)
-   register_immovable_as_allowed(cs)
 end
 
 -- NOCOM fix
