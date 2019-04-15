@@ -76,7 +76,7 @@ initial_message_02 = {
    body = (
       h1(_"Let’s dive right in!") ..
       li_image("tribes/images/barbarians/icon.png",
-         _[[There are three different tribes in Widelands: the Barbarians, the Empire and the Atlanteans. All tribes have a different economy, strength and weaknesses, but the general gameplay is the same for all. We will play the Barbarians for now.]]) ..
+         _[[There are four different tribes in Widelands: the Barbarians, the Empire, the Atlanteans and the Frisians. All tribes have a different economy, strength and weaknesses, but the general gameplay is the same for all. We will play the Barbarians for now.]]) ..
       li_object("barbarians_headquarters", _[[You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters is a warehouse that stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the wares in the headquarters will not last forever, so you must make sure to replace them. The most important wares in the early game are the basic construction wares: logs and granite. Let’s make sure that we do not run out of logs. For this, we need a lumberjack and a hut for him to stay in.]], plr.color) ..
       p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show building spaces’.]]) ..
       li(_[[Left-click the ‘OK’ button to close this window so that I can show you how.]]) ..
