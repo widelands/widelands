@@ -168,7 +168,6 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		 UI::DropdownType::kPictorialMenu,
 		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary) {
 	add_main_menu();
-	add_statistics_menu();
 
 	toolbar()->add_space(15);
 
@@ -187,6 +186,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		toolbar()->add_space(15);
 	}
 
+	add_statistics_menu();
+
 	add_toolbar_button(
 	   "wui/menus/objectives", "objectives", _("Objectives"), &objectives_, true);
 	objectives_.open_window = [this] { new GameObjectivesMenu(this, objectives_); };
@@ -194,6 +195,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	toggle_message_menu_ = add_toolbar_button(
 	   "wui/menus/message_old", "messages", _("Messages"), &message_menu_, true);
 	message_menu_.open_window = [this] { new GameMessageMenu(*this, message_menu_); };
+
+	toolbar()->add_space(15);
 
 	add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &encyclopedia_, true);
 	encyclopedia_.open_window = [this] {
