@@ -1,26 +1,27 @@
 local function open_and_close_sound_options(dropdown)
    sleep(100)
 
-   -- Validate selection in dropdown without opening it first
-   assert_error("selecting item 0 should have been out of range", function()
-      dropdown:select_item(0)
+   -- Test out-of-range selection in dropdown
+   assert_error("Highlighting item 0 should have been out of range", function()
+      dropdown:highlight_item(0)
    end)
-   assert_error("selecting item 2000 should have been out of range", function()
-      dropdown:select_item(2000)
+   assert_error("Highlighting item 2000 should have been out of range", function()
+      dropdown:highlight_item(2000)
    end)
 
-   dropdown:select_item(1)
+   -- Test selecting an item in the dropdown
+   dropdown:highlight_item(1)
+   assert_nil(wl.ui.MapView().windows.sound_options_menu, "Sound options window should not have been there yet")
+
+   dropdown:select()
    sleep(100)
 
-   local windows = wl.ui.MapView().windows
-   window = windows["sound_options_menu"]
+   window = wl.ui.MapView().windows.sound_options_menu
    assert_not_nil(window, "Failed to open sound options window")
-   sleep(100)
    window:close()
 
    sleep(100)
-   windows = wl.ui.MapView().windows
-   assert_nil(windows["sound_options_menu"], "Failed to close sound options window")
+   assert_nil(wl.ui.MapView().windows.sound_options_menu, "Failed to close sound options window")
 end
 
 run(function()
@@ -32,31 +33,42 @@ run(function()
       assert_equal(name, dropdown.name)
    end
 
-   -- Validate opening and selection
+   -- Validate dropdown functions
    local dropdown = dropdowns["dropdown_menu_main"]
    assert_not_nil(dropdown, "Failed to find main menu dropdown")
-   dropdown:open()
-   sleep(100)
 
-   open_and_close_sound_options(dropdown);
+   -- Selecting from closed dropdown should fail silently
+   dropdown:select()
 
    -- Validate selection without opening
    open_and_close_sound_options(dropdown);
 
-   print("# All Tests passed.")
+   -- Validate selection with opening
+   dropdown:open()
+   sleep(100)
+   open_and_close_sound_options(dropdown);
 
    -- Exit by dropdown
-   dropdown:select_item(3)
-   sleep(100)
+   local dropdown = dropdowns["dropdown_menu_main"]
+   dropdown:highlight_item(3)
+   dropdown:select()
 
    local message_box = wl.ui.MapView().windows["message_box"]
-   assert_not_nil(window, "Failed to exit confirm message box")
+   assert_not_nil(message_box, "Failed to find exit confirm message box")
    local ok_button = message_box.buttons["ok"]
    assert_not_nil(ok_button, "Exit confirm message box has no 'ok' button")
-   ok_button:click()
-   sleep(100)
 
+   -- We have to print this before closing the main view, otherwise the test suite
+   -- will fail this test, because printing to console won't work.
+   print("# All Tests passed.")
+
+   ok_button:click()
+
+   -- Give Widelands some time to close the map view
+   sleep(10000)
    assert_nil(wl.ui.MapView(), "Exiting by main menu did not close the map view")
 
-   wl.ui.MapView():close()
+   if (wl.ui.MapView() ~= nil) then
+      wl.ui.MapView():close()
+   end
 end)

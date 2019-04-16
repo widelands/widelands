@@ -94,6 +94,7 @@ static void put_all_visible_panels_into_table(lua_State* L, UI::Panel* g) {
 
 		if (upcast(P, specific_panel, child)) {
 			if (specific_panel->is_visible()) {
+				log("Have panel '%s'\n", specific_panel->get_name().c_str());
 				lua_pushstring(L, specific_panel->get_name());
 				to_lua<LuaP>(L, new LuaP(specific_panel));
 				lua_rawset(L, -3);
@@ -155,6 +156,7 @@ static void put_all_tabs_into_table(lua_State* L, UI::Panel* g) {
 
 		if (upcast(UI::TabPanel, t, f))
 			for (UI::Tab* tab : t->tabs()) {
+				log("Have tab '%s'\n", tab->get_name().c_str());
 				lua_pushstring(L, tab->get_name());
 				to_lua<LuaTab>(L, new LuaTab(tab));
 				lua_rawset(L, -3);
@@ -323,7 +325,7 @@ int LuaButton::get_name(lua_State* L) {
       event in tutorials
 */
 int LuaButton::press(lua_State* /* L */) {
-	log("Pressing button %s\n", get()->get_name().c_str());
+	log("Pressing button '%s'\n", get()->get_name().c_str());
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	return 0;
@@ -335,7 +337,7 @@ int LuaButton::press(lua_State* /* L */) {
       it.
 */
 int LuaButton::click(lua_State* /* L */) {
-	log("Clicking button %s\n", get()->get_name().c_str());
+	log("Clicking button '%s'\n", get()->get_name().c_str());
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	get()->handle_mouserelease(SDL_BUTTON_LEFT, 1, 1);
@@ -360,7 +362,8 @@ Dropdown
 const char LuaDropdown::className[] = "Dropdown";
 const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
    METHOD(LuaDropdown, open),
-   METHOD(LuaDropdown, select_item),
+   METHOD(LuaDropdown, highlight_item),
+   METHOD(LuaDropdown, select),
    {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
@@ -387,25 +390,25 @@ int LuaDropdown::get_name(lua_State* L) {
       Open this dropdown menu.
 */
 int LuaDropdown::open(lua_State* /* L */) {
-	log("Opening dropdown %s\n", get()->get_name().c_str());
+	log("Opening dropdown '%s'\n", get()->get_name().c_str());
 	get()->set_list_visibility(true);
 	return 0;
 }
 
 /* RST
-   .. method:: select_item(index)
+   .. method:: highlight_item(index)
 
-      :arg index: the index of the item to select, starting from ``1``
+      :arg index: the index of the item to highlight, starting from ``1``
       :type index: :class:`integer`
 
-      Select an item in this dropdown.
+      Highlights an item in this dropdown without triggering a selection.
 */
-int LuaDropdown::select_item(lua_State* L) {
+int LuaDropdown::highlight_item(lua_State* L) {
 	unsigned int desired_item = luaL_checkuint32(L, -1);
 	if (desired_item < 1 || desired_item > get()->size()) {
-		report_error(L, "Attempted to select item %d on dropdown %s. Avaliable range for this dropdown is 1-%d.", desired_item, get()->get_name().c_str(), get()->size());
+		report_error(L, "Attempted to highlight item %d on dropdown '%s'. Avaliable range for this dropdown is 1-%d.", desired_item, get()->get_name().c_str(), get()->size());
 	}
-	log("Selecting item %d in dropdown %s\n", desired_item, get()->get_name().c_str());
+	log("Highlighting item %d in dropdown '%s'\n", desired_item, get()->get_name().c_str());
 	// Open the dropdown
 	get()->set_list_visibility(true);
 	// Press arrow down until the desired item is highlighted
@@ -414,7 +417,17 @@ int LuaDropdown::select_item(lua_State* L) {
 	for (size_t i = 1; i < desired_item; ++i) {
 		get()->handle_key(true, code);
 	}
-	// Select it
+	return 0;
+}
+
+/* RST
+   .. method:: select()
+
+      Selects the currently highlighted item in this dropdown.
+*/
+int LuaDropdown::select(lua_State* /* L */) {
+	log("Selecting current item in dropdown '%s'\n", get()->get_name().c_str());
+	SDL_Keysym code;
 	code.sym = SDLK_RETURN;
 	get()->handle_key(true, code);
 	return 0;
@@ -474,7 +487,7 @@ int LuaTab::get_active(lua_State* L) {
       Click this tab making it the active one.
 */
 int LuaTab::click(lua_State* /* L */) {
-	log("Clicking tab %s\n", get()->get_name().c_str());
+	log("Clicking tab '%s'\n", get()->get_name().c_str());
 	get()->activate();
 	return 0;
 }
@@ -524,7 +537,7 @@ int LuaWindow::get_name(lua_State* L) {
       not use it any longer.
 */
 int LuaWindow::close(lua_State* /* L */) {
-	log("Closing window %s\n", get()->get_name().c_str());
+	log("Closing window '%s'\n", get()->get_name().c_str());
 	delete panel_;
 	panel_ = nullptr;
 	return 0;

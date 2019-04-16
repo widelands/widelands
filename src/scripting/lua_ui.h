@@ -145,7 +145,8 @@ public:
 	 * Lua Methods
 	 */
 	int open(lua_State* L);
-	int select_item(lua_State* L);
+	int highlight_item(lua_State* L);
+	int select(lua_State* L);
 
 	/*
 	 * C Methods
