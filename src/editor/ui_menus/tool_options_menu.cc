@@ -25,13 +25,12 @@ EditorToolOptionsMenu::EditorToolOptionsMenu(EditorInteractive& parent,
                                              uint32_t const height,
                                              const std::string& title, EditorTool& tool)
    : UI::UniqueWindow(&parent, "tool_options_menu", &registry, width, height, title),
+	 parent_(parent),
      current_tool_(tool) {
 	select_correct_tool();
 	clicked.connect([this] { select_correct_tool(); });
-	registry.opened.connect([this] { select_correct_tool(); });
 }
 
 void EditorToolOptionsMenu::select_correct_tool() {
-	dynamic_cast<EditorInteractive&>(*get_parent())
-	   .select_tool(current_tool_, EditorTool::First);
+	parent_.select_tool(current_tool_, EditorTool::First);
 }

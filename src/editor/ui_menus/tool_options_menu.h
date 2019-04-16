@@ -54,6 +54,7 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	}
 
 private:
+	EditorInteractive& parent_;
 	EditorTool& current_tool_;
 };
 

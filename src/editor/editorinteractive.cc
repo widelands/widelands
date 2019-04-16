@@ -93,7 +93,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 		 UI::DropdownType::kPictorialMenu,
 		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
 	 toolmenu_(
-		toolbar(), "dropdown_menu_tools", 0, 0, 34U, 10, 34U,
+		toolbar(), "dropdown_menu_tools", 0, 0, 34U, 12, 34U,
 		 /** TRANSLATORS: Title for the tool menu button in the editor */
 		 as_tooltip_text_with_hotkey(_("Tools"), "t"),
 		 UI::DropdownType::kPictorialMenu,
@@ -115,13 +115,6 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	add_toolbar_button(
 	   "wui/editor/menus/toolsize", "toolsize", _("Tool size"), &menu_windows_.toolsize, true);
 	menu_windows_.toolsize.open_window = [this] { new EditorToolsizeMenu(*this, menu_windows_.toolsize); };
-
-	add_toolbar_button(
-	   "wui/editor/menus/players", "players", _("Players"), &menu_windows_.players, true);
-	menu_windows_.players.open_window = [this] {
-		select_tool(tools_->set_starting_pos, EditorTool::First);
-		new EditorPlayerMenu(*this, menu_windows_.players);
-	};
 
 	toolbar()->add_space(15);
 
@@ -290,6 +283,15 @@ void EditorInteractive::add_tool_menu() {
 				  /** TRANSLATORS: Tooltip for the port spaces tool in the editor */
 				  _("Add or remove port spaces"));
 
+	tool_windows_.players.open_window = [this] {
+		new EditorPlayerMenu(*this, tools()->set_starting_pos, tool_windows_.players);
+	};
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Players"), ToolMenuEntry::kPlayers,
+				  g_gr->images().get("images/wui/editor/tools/players.png"), false,
+				  /** TRANSLATORS: Tooltip for the map size tool in the editor */
+				  _("Set number of players and their names, tribes and starting positions"), "p");
+
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Map origin"), ToolMenuEntry::kMapOrigin,
 				  g_gr->images().get("images/wui/editor/tools/map_origin.png"), false,
@@ -336,6 +338,9 @@ void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 		break;
 	case ToolMenuEntry::kPortSpace:
 		select_tool(tools()->set_port_space, EditorTool::First);
+		break;
+	case ToolMenuEntry::kPlayers:
+		tool_windows_.players.toggle();
 		break;
 	case ToolMenuEntry::kMapOrigin:
 		select_tool(tools()->set_origin, EditorTool::First);
@@ -757,7 +762,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_p:
-			menu_windows_.players.toggle();
+			tool_windows_.players.toggle();
 			return true;
 
 		case SDLK_s:

@@ -119,8 +119,8 @@ inline EditorInteractive& EditorPlayerMenu::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
-EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&parent, "players_menu", &registry, 100, 100, _("Player Options")),
+EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, EditorSetStartingPosTool& tool, UI::UniqueWindow::Registry& registry)
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Player Options"), tool),
      box_(this, kMargin, kMargin, UI::Box::Vertical),
      no_of_players_(&box_,
 					"dropdown_map_players",

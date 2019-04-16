@@ -158,6 +158,7 @@ private:
 		kAnimals,
 		kResources,
 		kPortSpace,
+		kPlayers,
 		kMapOrigin,
 		kMapSize,
 		kFieldInfo
@@ -207,7 +208,6 @@ private:
 		UI::UniqueWindow::Registry mapoptions;
 
 		UI::UniqueWindow::Registry toolsize;
-		UI::UniqueWindow::Registry players;
 
 		UI::UniqueWindow::Registry help;
 	} menu_windows_;
@@ -220,6 +220,7 @@ private:
 		UI::UniqueWindow::Registry immovables;
 		UI::UniqueWindow::Registry critters;
 		UI::UniqueWindow::Registry resources;
+		UI::UniqueWindow::Registry players;
 		UI::UniqueWindow::Registry resizemap;
 	} tool_windows_;
 
