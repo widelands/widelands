@@ -286,6 +286,7 @@ wl_library(logic
     graphic_surface
     graphic_text_constants
     graphic_text_layout
+    graphic_toolbar_imageset
     helper
     io_fileread
     io_filesystem

@@ -25,6 +25,7 @@
 
 #include <SDL_keycode.h>
 
+#include "graphic/toolbar_imageset.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "notifications/notifications.h"
@@ -259,6 +260,8 @@ protected:
 	/// Returns true if there is a workarea preview being shown at the given coordinates
 	bool has_workarea_preview(const Widelands::Coords& coords) const;
 
+	void set_toolbar_imageset(const ToolbarImageset& imageset);
+
 private:
 	int32_t stereo_position(Widelands::Coords position_map);
 	void resize_chat_overlay();
@@ -299,20 +302,13 @@ private:
 		/// Sets the actual size and position of the toolbar
 		void finalize();
 		void draw(RenderTarget& dst) override;
+		void change_imageset(const ToolbarImageset& images);
 
 		/// A row of buttons and dropdown menus
 		UI::Box box;
 	private:
-		/// Will be painted beyond the left corner of the box
-		const Image* left_corner;
-		/// Will be repeated between the left corner and the center
-		const Image* left;
-		/// Will be painted at the center
-		const Image* center;
-		/// Will be repeated between the right corner and the center
-		const Image* right;
-		/// Will be painted beyond the right corner of the box
-		const Image* right_corner;
+		/// The set of background images
+		ToolbarImageset imageset;
 		/// How often the left and right images get repeated, calculated from the width of the box
 		int repeat;
 	} toolbar_;

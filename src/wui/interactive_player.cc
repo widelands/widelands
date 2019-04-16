@@ -583,7 +583,13 @@ void InteractivePlayer::cleanup_for_load() {
 
 void InteractivePlayer::postload() {
 	InteractiveGameBase::postload();
-	rebuild_statistics_menu();
+
+	ToolbarImageset* imageset = player().tribe().toolbar_image_set();
+	if (imageset != nullptr) {
+		set_toolbar_imageset(*imageset);
+	} else {
+		rebuild_statistics_menu();
+	}
 }
 
 void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {

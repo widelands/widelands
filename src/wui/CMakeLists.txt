@@ -273,6 +273,7 @@ wl_library(wui
     graphic_text
     graphic_text_constants
     graphic_text_layout
+    graphic_toolbar_imageset
     io_fileread
     io_filesystem
     logic

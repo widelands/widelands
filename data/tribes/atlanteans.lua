@@ -47,6 +47,19 @@ dirname = path.dirname(__file__)
 --    **ship**: The internal name of the tribe's ship.
 --
 --    **port**: The internal name of the tribe's port building. This unit needs to be defined in the ``buildings`` table too.
+--
+--    **toolbar**: *Optional*. Replace the default toolbar images with these custom images. Example:
+--
+--    .. code-block:: lua
+--
+--       toolbar = {
+--          left_corner = dirname .. "images/atlanteans/toolbar_left_corner.png",
+--          left = dirname .. "images/atlanteans/toolbar_left.png", -- Will be tiled
+--          center = dirname .. "images/atlanteans/toolbar_center.png",
+--          right = dirname .. "images/atlanteans/toolbar_right.png", -- Will be tiled
+--          right_corner = dirname .. "images/atlanteans/toolbar_right_corner.png"
+--       }
+--
 tribes:new_tribe {
    name = "atlanteans",
 
@@ -380,4 +393,12 @@ tribes:new_tribe {
    rawlog = "log",
    refinedlog = "planks",
    granite = "granite",
+
+   toolbar = {
+      left_corner = dirname .. "images/atlanteans/toolbar_left_corner.png",
+      left = dirname .. "images/atlanteans/toolbar_left.png",
+      center = dirname .. "images/atlanteans/toolbar_center.png",
+      right = dirname .. "images/atlanteans/toolbar_right.png",
+      right_corner = dirname .. "images/atlanteans/toolbar_right_corner.png"
+   }
 }

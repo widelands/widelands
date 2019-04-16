@@ -91,13 +91,13 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 }  // namespace
 
 InteractiveBase::Toolbar::Toolbar(Panel* parent) : UI::Panel(parent, 0, 0, parent->get_inner_w(), parent->get_inner_h()), box(this, 0, 0, UI::Box::Horizontal),
-	left_corner(g_gr->images().get("images/wui/toolbar/left_corner.png")),
-	left(g_gr->images().get("images/wui/toolbar/left.png")),
-	center(g_gr->images().get("images/wui/toolbar/center.png")),
-	right(g_gr->images().get("images/wui/toolbar/right.png")),
-	right_corner(g_gr->images().get("images/wui/toolbar/right_corner.png")),
 	repeat(0)
 {
+}
+
+void InteractiveBase::Toolbar::change_imageset(const ToolbarImageset& images) {
+	imageset = images;
+	finalize();
 }
 
 void InteractiveBase::Toolbar::finalize() {
@@ -108,19 +108,19 @@ void InteractiveBase::Toolbar::finalize() {
 
 	// Calculate repetition and width
 	repeat = 1;
-	int width = left->width() + center->width() + right->width();
+	int width = imageset.left->width() + imageset.center->width() + imageset.right->width();
 	while (width < box.get_w()) {
 		++repeat;
-		width += left->width() + right->width();
+		width += imageset.left->width() + imageset.right->width();
 	}
-	width += left_corner->width() + right_corner->width();
+	width += imageset.left_corner->width() + imageset.right_corner->width();
 
 	// Find the highest image
-	height = std::max(height, left_corner->height());
-	height = std::max(height, left->height());
-	height = std::max(height, center->height());
-	height = std::max(height, right->height());
-	height = std::max(height, right_corner->height());
+	height = std::max(height, imageset.left_corner->height());
+	height = std::max(height, imageset.left->height());
+	height = std::max(height, imageset.center->height());
+	height = std::max(height, imageset.right->height());
+	height = std::max(height, imageset.right_corner->height());
 
 	// Set size and position
 	set_size(width, height);
@@ -133,19 +133,24 @@ void InteractiveBase::Toolbar::finalize() {
 
 void InteractiveBase::Toolbar::draw(RenderTarget& dst) {
 	int x = 0;
-	dst.blit(Vector2i(x, get_h() - left_corner->height()), left_corner);
-	x += left_corner->width();
+	// Left corner
+	dst.blit(Vector2i(x, get_h() - imageset.left_corner->height()), imageset.left_corner);
+	x += imageset.left_corner->width();
+	// Repeat left
 	for (int i = 0; i < repeat; ++i) {
-		dst.blit(Vector2i(x, get_h() - left->height()), left);
-		x += left->width();
+		dst.blit(Vector2i(x, get_h() - imageset.left->height()), imageset.left);
+		x += imageset.left->width();
 	}
-	dst.blit(Vector2i(x, get_h() - center->height()), center);
-	x += center->width();
+	// Center
+	dst.blit(Vector2i(x, get_h() - imageset.center->height()), imageset.center);
+	x += imageset.center->width();
+	// Repeat right
 	for (int i = 0; i < repeat; ++i) {
-		dst.blit(Vector2i(x, get_h() - right->height()), right);
-		x += right->width();
+		dst.blit(Vector2i(x, get_h() - imageset.right->height()), imageset.right);
+		x += imageset.right->width();
 	}
-	dst.blit(Vector2i(x, get_h() - right_corner->height()), right_corner);
+	// Right corner
+	dst.blit(Vector2i(x, get_h() - imageset.right_corner->height()), imageset.right_corner);
 }
 
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
@@ -330,6 +335,11 @@ InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
 
 bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords) const {
 	return workarea_previews_.count(coords) == 1;
+}
+
+
+void InteractiveBase::set_toolbar_imageset(const ToolbarImageset& imageset) {
+	toolbar_.change_imageset(imageset);
 }
 
 UniqueWindowHandler& InteractiveBase::unique_windows() {
