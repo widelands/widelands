@@ -2,23 +2,16 @@
 -- Mission thread
 -- ================
 
-local function demonstrate_select_item_from_dropdown(name, item)
-   local blocker = UserInputDisabler:new()
+local objective_to_explain_objectives = add_campaign_objective(obj_initial_close_objectives_window)
 
-   wl.ui.MapView().dropdowns[name]:highlight_item(item)
-   sleep(5000)
-   wl.ui.MapView().dropdowns[name]:select()
-   sleep(3000)
-
-   blocker:lift_blocks()
-end
-
-local function wait_for_quarry_road_connection(field, cs)
+local function wait_for_quarry_road_connection(field, cs, objective)
    -- Wait till the construction site is connected to the headquarters
-   sleep(20*1000)
+   sleep(10 * wl.Game().desired_speed)
    while not field.immovable or field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
       if not field.immovable then
          campaign_message_box(quarry_illegally_destroyed)
+         scroll_to_field(field)
+         mouse_to_field(field)
 
          cs = nil
          immovable_is_legal = function(i)
@@ -34,21 +27,16 @@ local function wait_for_quarry_road_connection(field, cs)
 
          -- Wait for a new constructionsite to be placed
          while not cs do sleep(200) end
-         --if (cs ~= nil) then
-            register_immovable_as_allowed(cs)
-         --end
+         register_immovable_as_allowed(cs)
       else
          campaign_message_box(quarry_not_connected)
       end
       sleep(60*1000)
    end
-
-   if (cs ~= nil) then
-      register_immovable_as_allowed(cs)
-   end
+   set_objective_done(objective, 0)
+   register_immovable_as_allowed(cs)
+   -- NOCOM this is still fragile. Do thorough debugging.
 end
-
-local objective_to_explain_objectives = add_campaign_objective(obj_initial_close_objectives_window)
 
 function starting_infos()
    -- So that the player cannot build anything here
@@ -67,8 +55,8 @@ function starting_infos()
 
    -- Teach building spaces
    campaign_message_box(initial_message_02, 200)
-   demonstrate_select_item_from_dropdown("dropdown_menu_showhide", 1)
-   demonstrate_select_item_from_dropdown("dropdown_menu_showhide", 1)
+   select_item_from_dropdown("dropdown_menu_showhide", 1)
+   select_item_from_dropdown("dropdown_menu_showhide", 1)
    local o = campaign_message_with_objective(initial_message_03, obj_initial_toggle_building_spaces)
 
    -- Wait for buildhelp to come on
@@ -192,7 +180,7 @@ function learn_to_move()
    campaign_message_box(tell_about_minimap_1)
 
    -- Open the minimap
-   demonstrate_select_item_from_dropdown("dropdown_menu_mapview", 1)
+   select_item_from_dropdown("dropdown_menu_mapview", 1)
    o = campaign_message_with_objective(tell_about_minimap_2, obj_moving_minimap)
 
    -- Wait until the minimap has been opened and closed again
@@ -287,7 +275,7 @@ function build_a_quarry()
       else return false end
    end
 
-   wait_for_quarry_road_connection(first_quarry_field, cs)
+   wait_for_quarry_road_connection(first_quarry_field, cs, o)
 
    second_quarry()
 
@@ -295,7 +283,6 @@ function build_a_quarry()
    census_and_statistics()
 
    while #plr:get_buildings("barbarians_quarry") < 2 do sleep(1400) end
-   set_objective_done(o, 0)
 
    messages()
 end
@@ -323,9 +310,7 @@ function second_quarry()
    -- Wait for the constructionsite to be placed
    while not cs do sleep(200) end
 
-   wait_for_quarry_road_connection(second_quarry_field, cs)
-
-   set_objective_done(o, 0)
+   wait_for_quarry_road_connection(second_quarry_field, cs, o)
 end
 
 function census_and_statistics()
@@ -341,7 +326,7 @@ function census_and_statistics()
 
    campaign_message_box(census_and_statistics_00)
 
-   demonstrate_select_item_from_dropdown("dropdown_menu_showhide", 2)
+   select_item_from_dropdown("dropdown_menu_showhide", 2)
    sleep(200)
 
    blocker:lift_blocks()
@@ -352,12 +337,16 @@ function census_and_statistics()
    while not wl.ui.MapView().statistics do sleep(200) end
    set_objective_done(o, 5 * wl.Game().desired_speed)
 
-   campaign_message_box(census_and_statistics_02, 200)
+   if (#plr:get_buildings("barbarians_quarry") < 2) then
+      campaign_message_box(census_and_statistics_02, 200)
+   end
 end
 
 function messages()
    -- Teach the player about receiving messages
    sleep(10)
+   local old_gamespeed = wl.Game().desired_speed
+   wl.Game().desired_speed = 1000
 
    send_message(plr, teaching_about_messages.title, teaching_about_messages.body, teaching_about_messages, {heading = teaching_about_messages.heading})
    local o = add_campaign_objective(obj_archive_all_messages)
@@ -372,6 +361,8 @@ function messages()
    set_objective_done(o, 300)
 
    campaign_message_box(closing_msg_window_01, 800)
+
+   if (wl.Game().desired_speed == 1000) then wl.Game().desired_speed = old_gamespeed end
 
    destroy_quarries()
 end

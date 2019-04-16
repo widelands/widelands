@@ -94,7 +94,6 @@ static void put_all_visible_panels_into_table(lua_State* L, UI::Panel* g) {
 
 		if (upcast(P, specific_panel, child)) {
 			if (specific_panel->is_visible()) {
-				log("Have panel '%s'\n", specific_panel->get_name().c_str());
 				lua_pushstring(L, specific_panel->get_name());
 				to_lua<LuaP>(L, new LuaP(specific_panel));
 				lua_rawset(L, -3);
@@ -156,7 +155,6 @@ static void put_all_tabs_into_table(lua_State* L, UI::Panel* g) {
 
 		if (upcast(UI::TabPanel, t, f))
 			for (UI::Tab* tab : t->tabs()) {
-				log("Have tab '%s'\n", tab->get_name().c_str());
 				lua_pushstring(L, tab->get_name());
 				to_lua<LuaTab>(L, new LuaTab(tab));
 				lua_rawset(L, -3);

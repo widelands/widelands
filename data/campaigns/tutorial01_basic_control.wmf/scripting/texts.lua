@@ -47,12 +47,13 @@ initial_message_01 = {
 
 obj_initial_close_objectives_window = {
    name = "obj_initial_close_objectives_window",
-   title=_"How to close this window",
+   title=_"Objectives and how to close this window",
    number = 1,
    body = objective_text(_"Closing this window",
       p(_[[This is the ‘Objectives’ window. You can return to this window for instructions at any time.]]) ..
       li_image("images/wui/menus/objectives.png", _[[ You can open and close this window by clicking on the ‘Objectives’ button in the toolbar on the bottom of the screen.]]) ..
       li_arrow(_[[Like any other window, you can also close the ‘Objectives’ window by right-clicking on it.]]) ..
+      li_arrow(_[[When you have accomplished an objective, it will disappear from the list above.]]) ..
       li(_[[Try it out.]])
    )
 }
@@ -182,7 +183,7 @@ lumberjack_message_05 = {
 }
 
 lumberjack_message_06 = {
-   title = _"Waiting for the Hut to be Finished",
+   title = _"Waiting for the Lumberjack to Go Up",
    position = "topright",
    body = (
       li_image("images/wui/fieldaction/menu_tab_buildroad.png",
@@ -190,7 +191,7 @@ lumberjack_message_06 = {
       p(_[[Now you have split the road in two parts with a carrier each. This means less work for him and higher efficiency for us. You should therefore always place as many flags as possible on your roads.]]) ..
       li(close_story_window_instructions)
    ),
-   h = 200,
+   h = 250,
    w = 350
 }
 
@@ -217,7 +218,7 @@ lumberjack_message_07 = {
 }
 
 lumberjack_message_08 = {
-   title = _"Waiting For the Hut to be Finished",
+   title = _"Waiting for the Lumberjack to Go Up",
    position = "topright",
    body = (
       p(_[[Well done! Let’s wait till the hut is finished.]]) ..
@@ -293,7 +294,7 @@ obj_moving_minimap = {
    body = objective_text(_"Learn to use the minimap",
       li(_[[Try moving around by clicking on the minimap]]) ..
       li(_[[Play around a bit with the different overlays (roads, flags, etc.)]]) ..
-      li(_[[Close the minimap when you are ready to continue by selecting ‘Hide Minimap’ in the ‘Map View’ menu or by pressing ‘m’. Of course, a right-click also works.]])
+      li(_[[When you are ready to continue, close the minimap by selecting ‘Hide Minimap’ in the ‘Map View’ menu or by pressing ‘m’. Of course, a right-click also works.]])
    ),
 }
 tell_about_minimap_1 = {
@@ -301,9 +302,9 @@ tell_about_minimap_1 = {
    body = (
       h1(_"Using the Minimap") ..
       li_image("images/wui/menus/toggle_minimap.png",
-         _([[Very good. And now about the minimap. ]]
-         .. [[You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu at the bottom ]]
-         .. [[of the screen or simply by using the keyboard shortcut ‘m’.]])) ..
+         p(_[[Very good. And now about the minimap. ]]) ..
+         -- TRANSLATORS it = the minimap
+         p(_[[You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu at the bottom of the screen or simply by using the keyboard shortcut ‘m’.]])) ..
       -- TRANSLATORS it = the minimap
       li_arrow(_[[I will open it for you.]])
    ),
@@ -394,7 +395,7 @@ talk_about_roadbuilding_01 = {
    position = "topright",
    field = road_building_field,
    title = _"Road Building",
-   body = li_image("images/wui/fieldaction/menu_build_way.png", _[[Or, you can directly click the flag where the road should end, like so:]]),
+   body = li_object("barbarians_flag", _[[Or, you can directly click the flag where the road should end, like so:]], plr.color),
    h = 200,
    w = 250
 }
@@ -434,7 +435,8 @@ quarry_not_connected = {
 quarry_illegally_destroyed = {
    title = _"You Destroyed the Construction Site!",
    body = (
-      li_object("barbarians_quarry", _[[It seems like you destroyed a construction site for a quarry we wanted to build. Since we need the granite, I suggest you reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]], plr.color)
+      li_object("barbarians_quarry", _[[It seems like you destroyed a construction site for a quarry we wanted to build. Luckily, we still have enough logs left this time, so you can simply build another one.]], plr.color) ..
+      li_arrow(_[[You can also reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you will have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]])
    ),
    w = 350,
    h = 250
@@ -491,7 +493,7 @@ census_and_statistics_01 = {
          p(_[[In addition to the buildings’ census, you can also activate statictics labels on them. This will display information about the productivity of buildings or the progress of construction sites.]]))
    ),
    position = "topright",
-   h = 300,
+   h = 400,
    w = 350
 }
 
@@ -514,10 +516,12 @@ obj_archive_all_messages = {
    title=_"Archive all messages in your inbox",
    number = 1,
    body = objective_text(_"Archive Your Inbox Messages",
-      p(_[[The message window is central to fully controlling your tribe’s fortune. However, you will get a lot of messages in a real game. To keep your head straight, you should try to keep the inbox empty.]]) ..
       li(_[[Archive all your messages in your inbox now.]]) ..
-      li_arrow(_[[To do so, open the message window by pressing ‘n’ or clicking the second button from the right at the very bottom of the screen. The newest message will be marked for you automatically. Keep clicking the ‘Archive selected message’ button until all messages have been archived and the list is empty.]]) ..
-      li_arrow(_[[You can also hold down the Ctrl or Shift key to select multiple messages, or press Ctrl + A to select them all.]])
+      li_image("images/wui/messages/message_archive.png", _[[Keep clicking the ‘Archive selected message’ button until all messages have been archived and the list is empty.]]) ..
+      li_arrow(_[[Once you have archived a message, another message will be selected automatically from the list.]]) ..
+      li_arrow(_[[You can also hold down the Ctrl or Shift key to select multiple messages, or press Ctrl + A to select them all.]]) ..
+      li_arrow(_[[You can toggle the message window by pressing ‘n’ or clicking the second button from the right at the very bottom of the screen. The newest message will be marked for you automatically.]]) ..
+      li_arrow(_[[The message window is central to fully controlling your tribe’s fortune. However, you will get a lot of messages in a real game. To keep your head straight, you should try to keep the inbox empty.]])
    )
 }
 teaching_about_messages = {
@@ -527,11 +531,8 @@ teaching_about_messages = {
    body = (
       li_image("images/wui/menus/message_new.png",_[[Hi, it’s me again! This time, I have sent you a message. Messages are sent to you by Widelands to inform you about important events: empty mines, attacks on your tribe, won or lost military buildings, resources found…]]) ..
       p(_[[The message window can be toggled by the second button from the right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..
-      p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages: first, select the message that you wish to archive by clicking on it in the list. Then, click the]]) ..
-      li_image("images/wui/messages/message_archive.png", _[[‘Archive selected message’ button to move it into your archive.]]) ..
-      p(_[[Once you have archived a message, another message will be selected automatically from the list.]]) ..
-      li_arrow(_[[You can also hold down the Ctrl or Shift key to select multiple messages, or press Ctrl + A to select them all.]]) ..
-      li(_[[Archive all messages that you currently have in your inbox, including this one.]])
+      p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages:]]) ..
+      new_objectives(obj_archive_all_messages)
    )
 }
 
@@ -539,7 +540,7 @@ obj_close_message_window = {
    name = "close_message_window",
    title=_"Close the messages window",
    number = 1,
-   body = objective_text(_"Archive Your Inbox Messages",
+   body = objective_text(_"Close the Messages Window",
       p(_[[All windows in Widelands can be closed by right-clicking into them. Some windows can also be toggled with the buttons and menus at the very bottom of the screen.]]) ..
       li(_[[Close the messages window now by right-clicking into it.]])
    )
@@ -571,8 +572,8 @@ obj_destroy_quarries = {
    title=_"Destroy the two quarries",
    number = 1,
    body = objective_text(_"Destroy the Quarries",
-      p(_[[Since our quarries are useless now, you can destroy them and reuse the space later on.]]) ..
-      li_arrow(_[[There are two different ways of destroying a building: burning down and dismantling. Try them both out on your quarries.]]) ..
+      li(_[[Since our quarries are useless now, you can destroy them and reuse the space later on.]]) ..
+      p(_[[There are two different ways of destroying a building: burning down and dismantling. Try them both out on your quarries.]]) ..
       li_image("images/wui/buildings/menu_bld_bulldoze.png", _[[Burning down the quarry: This is the fastest way of clearing the space. While the worker abandons the building, the wares are lost.]]) ..
       li_image("images/wui/buildings/menu_bld_dismantle.png", _[[Dismantling the quarry: A builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction.]])
    )
@@ -636,9 +637,9 @@ conclude_tutorial = {
       li_image("images/logos/wl-ico-64.png",
          p(_[[This concludes the first tutorial. In order to learn more about the game, I suggest to play one of the other tutorials. Each of them covers a different topic.]]) ..
          p(_[[However, since you now know how to control Widelands, you can also start a game (or continue this one) and discover more by yourself.]])) ..
-      p(_[[To leave this game and return to the main menu, click on the]]) ..
-      li_image("images/wui/menus/main_menu.png", _[[‘Main Menu’ button on the very left at the bottom of the screen. Then click the]]) ..
-      li_image("images/wui/menus/exit.png", _[[‘Exit Game’ button.]]) ..
+      p(_[[To leave this game and return to the main menu:]]) ..
+      li_image("images/wui/menus/main_menu.png", _[[Click on the ‘Main Menu’ button on the very left at the bottom of the screen.]]) ..
+      li_image("images/wui/menus/exit.png", _[[Then click on the ‘Exit Game’ entry.]]) ..
       p(_[[Thanks for playing this tutorial. Enjoy Widelands and remember to visit us at]]) ..
       h1(p("align=center", u("widelands.org")))
    ),
