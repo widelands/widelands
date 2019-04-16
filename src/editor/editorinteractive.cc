@@ -229,51 +229,82 @@ void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
 
 void EditorInteractive::add_tool_menu() {
 	toolmenu_.set_image(g_gr->images().get("images/wui/editor/menus/tools.png"));
+
+	tool_windows_.height.open_window = [this] {
+		new EditorToolChangeHeightOptionsMenu(*this, tools()->increase_height, tool_windows_.height);
+	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Change height"), ToolMenuEntry::kChangeHeight,
 				  g_gr->images().get("images/wui/editor/tools/height.png"), false,
 				  /** TRANSLATORS: Tooltip for the change height tool in the editor */
 				  _("Change the terrain height"));
+
+	tool_windows_.noiseheight.open_window = [this] {
+		new EditorToolNoiseHeightOptionsMenu(*this, tools()->noise_height, tool_windows_.noiseheight);
+	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Random height"), ToolMenuEntry::kRandomHeight,
 				  g_gr->images().get("images/wui/editor/tools/noise_height.png"), false,
 				  /** TRANSLATORS: Tooltip for the random height tool in the editor */
 				  _("Set the terrain height to random values"));
+
+	tool_windows_.terrain.open_window = [this] {
+		new EditorToolSetTerrainOptionsMenu(*this, tools()->set_terrain, tool_windows_.terrain);
+	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Terrain"), ToolMenuEntry::kTerrain,
 				  g_gr->images().get("images/wui/editor/tools/terrain.png"), false,
 				  /** TRANSLATORS: Tooltip for the terrain tool in the editor */
 				  _("Change the map’s terrain"));
+
+	tool_windows_.immovables.open_window = [this] {
+		new EditorToolPlaceImmovableOptionsMenu(*this, tools()->place_immovable, tool_windows_.immovables);
+	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Immovables"), ToolMenuEntry::kImmovables,
 				  g_gr->images().get("images/wui/editor/tools/immovables.png"), false,
 				  /** TRANSLATORS: Tooltip for the immovables tool in the editor */
 				  _("Add or remove immovables"));
+
+	tool_windows_.critters.open_window = [this] {
+		new EditorToolPlaceCritterOptionsMenu(*this, tools()->place_critter, tool_windows_.critters);
+	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Animals"), ToolMenuEntry::kAnimals,
 				  g_gr->images().get("images/wui/editor/tools/critters.png"), false,
 				  /** TRANSLATORS: Tooltip for the animals tool in the editor */
 				  _("Add or remove animals"));
+
+	tool_windows_.resources.open_window = [this] {
+		new EditorToolChangeResourcesOptionsMenu(*this, tools()->increase_resources, tool_windows_.resources);
+	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Resources"), ToolMenuEntry::kResources,
 				  g_gr->images().get("images/wui/editor/tools/resources.png"), false,
 				  /** TRANSLATORS: Tooltip for the resources tool in the editor */
 				  _("Set or change resources"));
+
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Port spaces"), ToolMenuEntry::kPortSpace,
 				  g_gr->images().get("images/wui/editor/tools/port_spaces.png"), false,
 				  /** TRANSLATORS: Tooltip for the port spaces tool in the editor */
 				  _("Add or remove port spaces"));
+
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Map origin"), ToolMenuEntry::kMapOrigin,
 				  g_gr->images().get("images/wui/editor/tools/map_origin.png"), false,
 				  /** TRANSLATORS: Tooltip for the map origin tool in the editor */
 				  _("Set the position that will have the coordinates (0, 0). This will be the top-left corner of a generated minimap."));
+
+	tool_windows_.resizemap.open_window = [this] {
+		new EditorToolResizeOptionsMenu(*this, tools()->resize, tool_windows_.resizemap);
+	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Map size"), ToolMenuEntry::kMapSize,
 				  g_gr->images().get("images/wui/editor/tools/resize_map.png"), false,
 				  /** TRANSLATORS: Tooltip for the map size tool in the editor */
 				  _("Change the map’s size"));
+
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Information"), ToolMenuEntry::kFieldInfo,
 				  g_gr->images().get("images/wui/editor/fsel_editor_info.png"), false,
@@ -286,22 +317,22 @@ void EditorInteractive::add_tool_menu() {
 void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 	switch (entry) {
 	case ToolMenuEntry::kChangeHeight:
-		open_tool_window<EditorToolChangeHeightOptionsMenu>(tool_windows_.height, tools()->increase_height);
+		tool_windows_.height.toggle();
 		break;
 	case ToolMenuEntry::kRandomHeight:
-		open_tool_window<EditorToolNoiseHeightOptionsMenu>(tool_windows_.noiseheight, tools()->noise_height);
+		tool_windows_.noiseheight.toggle();
 		break;
 	case ToolMenuEntry::kTerrain:
-		open_tool_window<EditorToolSetTerrainOptionsMenu>(tool_windows_.terrain, tools()->set_terrain);
+		tool_windows_.terrain.toggle();
 		break;
 	case ToolMenuEntry::kImmovables:
-		open_tool_window<EditorToolPlaceImmovableOptionsMenu>(tool_windows_.immovables, tools()->place_immovable);
+		tool_windows_.immovables.toggle();
 		break;
 	case ToolMenuEntry::kAnimals:
-		open_tool_window<EditorToolPlaceCritterOptionsMenu>(tool_windows_.critters, tools()->place_critter);
+		tool_windows_.critters.toggle();
 		break;
 	case ToolMenuEntry::kResources:
-		open_tool_window<EditorToolChangeResourcesOptionsMenu>(tool_windows_.resources, tools()->increase_resources);
+		tool_windows_.resources.toggle();
 		break;
 	case ToolMenuEntry::kPortSpace:
 		select_tool(tools()->set_port_space, EditorTool::First);
@@ -310,28 +341,13 @@ void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 		select_tool(tools()->set_origin, EditorTool::First);
 		break;
 	case ToolMenuEntry::kMapSize:
-		open_tool_window<EditorToolResizeOptionsMenu>(tool_windows_.resizemap, tools()->resize);
+		tool_windows_.resizemap.toggle();
 		break;
 	case ToolMenuEntry::kFieldInfo:
 		select_tool(tools()->info, EditorTool::First);
 		break;
 	}
 	toolmenu_.toggle();
-}
-
-template <class Menu, class Tool>
-void EditorInteractive::open_tool_window(UI::UniqueWindow::Registry& registry, Tool& tool) {
-	if (UI::Window* const window = registry.window) {
-		// There is already a window. If it is minimal, restore it.
-		if (window->is_minimal()) {
-			window->restore();
-		} else {
-			delete window;
-		}
-	} else {
-		//  Create window
-		new Menu(*this, tool, registry);
-	}
 }
 
 void EditorInteractive::add_showhide_menu() {

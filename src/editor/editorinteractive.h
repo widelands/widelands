@@ -179,9 +179,6 @@ private:
 	void add_tool_menu();
 	// Takes the appropriate action when an item in the toolmenu_ is selected
 	void tool_menu_selected(ToolMenuEntry entry);
-	// Helper function for tool_menu_selected
-	template <class Menu, class Tool>
-	void open_tool_window(UI::UniqueWindow::Registry& registry, Tool& tool);
 
 	// Adds the showhidemenu_ to the toolbar
 	void add_showhide_menu();

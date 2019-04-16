@@ -28,6 +28,7 @@ EditorToolOptionsMenu::EditorToolOptionsMenu(EditorInteractive& parent,
      current_tool_(tool) {
 	select_correct_tool();
 	clicked.connect([this] { select_correct_tool(); });
+	registry.opened.connect([this] { select_correct_tool(); });
 }
 
 void EditorToolOptionsMenu::select_correct_tool() {
