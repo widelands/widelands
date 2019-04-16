@@ -90,13 +90,71 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 
 }  // namespace
 
+InteractiveBase::Toolbar::Toolbar(Panel* parent) : UI::Panel(parent, 0, 0, parent->get_inner_w(), parent->get_inner_h()), box(this, 0, 0, UI::Box::Horizontal),
+	left_corner(g_gr->images().get("images/wui/toolbar/left_corner.png")),
+	left(g_gr->images().get("images/wui/toolbar/left.png")),
+	center(g_gr->images().get("images/wui/toolbar/center.png")),
+	right(g_gr->images().get("images/wui/toolbar/right.png")),
+	right_corner(g_gr->images().get("images/wui/toolbar/right_corner.png")),
+	repeat(0)
+{
+}
+
+void InteractiveBase::Toolbar::finalize() {
+	// Set box size and get minimum height
+	int box_width, height;
+	box.get_desired_size(&box_width, &height);
+	box.set_size(box_width, height);
+
+	// Calculate repetition and width
+	repeat = 1;
+	int width = left->width() + center->width() + right->width();
+	while (width < box.get_w()) {
+		++repeat;
+		width += left->width() + right->width();
+	}
+	width += left_corner->width() + right_corner->width();
+
+	// Find the highest image
+	height = std::max(height, left_corner->height());
+	height = std::max(height, left->height());
+	height = std::max(height, center->height());
+	height = std::max(height, right->height());
+	height = std::max(height, right_corner->height());
+
+	// Set size and position
+	set_size(width, height);
+	set_pos(Vector2i((get_parent()->get_inner_w() - width) >> 1, get_parent()->get_inner_h() - height));
+	box.set_pos(Vector2i((get_w() - box.get_w()) / 2, get_h() - box.get_h()));
+
+	// Notify dropdowns
+	box.position_changed();
+}
+
+void InteractiveBase::Toolbar::draw(RenderTarget& dst) {
+	int x = 0;
+	dst.blit(Vector2i(x, get_h() - left_corner->height()), left_corner);
+	x += left_corner->width();
+	for (int i = 0; i < repeat; ++i) {
+		dst.blit(Vector2i(x, get_h() - left->height()), left);
+		x += left->width();
+	}
+	dst.blit(Vector2i(x, get_h() - center->height()), center);
+	x += center->width();
+	for (int i = 0; i < repeat; ++i) {
+		dst.blit(Vector2i(x, get_h() - right->height()), right);
+		x += right->width();
+	}
+	dst.blit(Vector2i(x, get_h() - right_corner->height()), right_corner);
+}
+
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      buildhelp_(false),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoveraly before the toolbar so it is below
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
-     toolbar_(this, 0, 0, UI::Box::Horizontal),
+     toolbar_(this),
 	 mapviewmenu_(
 		toolbar(), "dropdown_menu_mapview", 0, 0, 34U, 10, 34U,
 		 /** TRANSLATORS: Title for the map view menu button in the game */
@@ -158,7 +216,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		   set_size(message.width, message.height);
 		   map_view_.set_size(message.width, message.height);
 		   resize_chat_overlay();
-		   adjust_toolbar_position();
+		   finalize_toolbar();
 	   });
 	sound_subscriber_ = Notifications::subscribe<NoteSound>([this](const NoteSound& note) {
 		if (note.stereo_position != std::numeric_limits<uint32_t>::max()) {
@@ -297,9 +355,8 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 	set_tooltip("");
 }
 
-void InteractiveBase::adjust_toolbar_position() {
-	toolbar_.set_pos(Vector2i((get_inner_w() - toolbar_.get_w()) >> 1, get_inner_h() - 34));
-	toolbar_.position_changed();
+void InteractiveBase::finalize_toolbar() {
+	toolbar_.finalize();
 }
 
 /*
@@ -358,9 +415,9 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
                                                 UI::UniqueWindow::Registry* window,
                                                 bool bind_default_toggle) {
 	UI::Button* button =
-	   new UI::Button(&toolbar_, name, 0, 0, 34U, 34U, UI::ButtonStyle::kWuiPrimary,
+	   new UI::Button(&toolbar_.box, name, 0, 0, 34U, 34U, UI::ButtonStyle::kWuiPrimary,
 	                  g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
-	toolbar_.add(button);
+	toolbar_.box.add(button);
 	if (window) {
 		window->opened.connect([button] { button->set_perm_pressed(true); });
 		window->closed.connect([button] { button->set_perm_pressed(false); });

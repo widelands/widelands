@@ -208,7 +208,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		node_action(node_and_triangle);
 	});
 
-	adjust_toolbar_position();
+	finalize_toolbar();
 
 #ifndef NDEBUG  //  only in debug builds
 	addCommand("switchplayer", boost::bind(&InteractivePlayer::cmdSwitchPlayer, this, _1));

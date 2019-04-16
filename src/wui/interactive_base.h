@@ -231,15 +231,15 @@ protected:
 		return sel_.pic;
 	}
 
-	// Sets the toolbar's position to the bottom middle and relayouts its menus
-	void adjust_toolbar_position();
+	// Sets the toolbar's position to the bottom middle and configures its background images
+	void finalize_toolbar();
 
 	ChatOverlay* chat_overlay() {
 		return chat_overlay_;
 	}
 
 	UI::Box* toolbar() {
-		return &toolbar_;
+		return &toolbar_.box;
 	}
 
 	// Returns the information which overlay text should currently be drawn.
@@ -292,7 +292,31 @@ private:
 	MapView map_view_;
 	ChatOverlay* chat_overlay_;
 
-	UI::Box toolbar_;
+	/// A horizontal menu bar embellished with background graphics
+	struct Toolbar : UI::Panel {
+		Toolbar(UI::Panel* parent);
+
+		/// Sets the actual size and position of the toolbar
+		void finalize();
+		void draw(RenderTarget& dst) override;
+
+		/// A row of buttons and dropdown menus
+		UI::Box box;
+	private:
+		/// Will be painted beyond the left corner of the box
+		const Image* left_corner;
+		/// Will be repeated between the left corner and the center
+		const Image* left;
+		/// Will be painted at the center
+		const Image* center;
+		/// Will be repeated between the right corner and the center
+		const Image* right;
+		/// Will be painted beyond the right corner of the box
+		const Image* right_corner;
+		/// How often the left and right images get repeated, calculated from the width of the box
+		int repeat;
+	} toolbar_;
+
 	// Map View menu on the toolbar
 	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;
 	// No unique_ptr on purpose: 'minimap_' is a UniqueWindow, its parent will
@@ -322,6 +346,7 @@ private:
 	UI::UniqueWindow::Registry debugconsole_;
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	std::vector<const Image*> workarea_pics_;
+
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
 };
 

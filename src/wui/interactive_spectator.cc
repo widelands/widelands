@@ -64,7 +64,7 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 		};
 	}
 
-	adjust_toolbar_position();
+	finalize_toolbar();
 
 	// Setup all screen elements
 	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
