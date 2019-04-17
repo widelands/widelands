@@ -24,6 +24,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h" // NOCOM
 #include "base/macros.h"
 #include "graphic/align.h"
 #include "graphic/font_handler.h"
@@ -35,14 +36,21 @@
 #include "ui_basic/window.h"
 
 namespace {
-int base_height(int button_dimension) {
-	return 12;
-	/* NOCOM fix this
-	return std::max(
+int base_height(int button_dimension, UI::PanelStyle style) {
+	// NOCOM return 12;
+	int result = std::max(
 	   button_dimension,
-	   UI::g_fh->render(as_uifont(UI::g_fh->fontset()->representative_character()))->height() + 2);
-	   */
+	   text_height(g_gr->styles().table_style(style).enabled()) + 2);
+	log("NOCOM dropdown base height: %d\n", result);
+	return result;
 }
+
+
+/*
+int BaseDropdown::base_height(int button_dimension) const {
+	return std::max(button_dimension, text_height(g_gr->styles().table_style(UI::PanelStyle::kWui).enabled()) + 2);
+}
+*/
 }  // namespace
 
 namespace UI {
@@ -63,13 +71,14 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                y,
                type == DropdownType::kPictorial ? button_dimension : w,
                // Height only to fit the button, so we can use this in Box layout.
-               base_height(button_dimension)),
+               base_height(button_dimension, style)),
      id_(next_id_++),
      max_list_height_(h - 2 * get_h()),
      list_width_(w),
      list_offset_x_(0),
      list_offset_y_(0),
      button_dimension_(button_dimension),
+	 base_height_(base_height(button_dimension, style)),
      mouse_tolerance_(50),
      button_box_(this, 0, 0, UI::Box::Horizontal, w, h),
      push_button_(type == DropdownType::kTextual ?
@@ -156,16 +165,16 @@ BaseDropdown::~BaseDropdown() {
 }
 
 void BaseDropdown::set_height(int height) {
-	max_list_height_ = height - base_height(button_dimension_);
+	max_list_height_ = height - base_height_;
 	layout();
 }
 
 void BaseDropdown::set_max_items(int items) {
-	set_height(list_->get_lineheight() * items + base_height(button_dimension_));
+	set_height(list_->get_lineheight() * items + base_height_);
 }
 
 void BaseDropdown::layout() {
-	const int base_h = base_height(button_dimension_);
+	const int base_h = base_height_;
 	const int w = type_ == DropdownType::kPictorial ? button_dimension_ : get_w();
 	button_box_.set_size(w, base_h);
 	display_button_.set_desired_size(
@@ -373,10 +382,6 @@ bool BaseDropdown::is_mouse_away() const {
 	       get_mouse_position().x > (list_offset_x_ + list_->get_w() + mouse_tolerance_) ||
 	       (get_mouse_position().y + mouse_tolerance_) < list_offset_y_ ||
 	       get_mouse_position().y > (list_offset_y_ + get_h() + list_->get_h() + mouse_tolerance_);
-}
-
-int BaseDropdown::base_height(int button_dimension) const {
-	return std::max(button_dimension, text_height(g_gr->styles().table_style(UI::PanelStyle::kWui).enabled()) + 2);
 }
 
 bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {

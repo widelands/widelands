@@ -178,7 +178,6 @@ void FontSet::set_font_group(const LuaTable& table,
  * If 'checkme' is not empty, mirror the alignment if the first 20 characters contain an RTL
  * character. Otherwise, mirror if the current fontset is RTL.
  */
-// NOCOM make this a static or free-standing function?
 Align FontSet::mirror_alignment(Align alignment, const std::string& checkme) const {
 	bool do_swap_alignment = checkme.empty() ? is_rtl() : i18n::has_rtl_character(checkme.c_str(), 20);
 	if (do_swap_alignment) {

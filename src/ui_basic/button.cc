@@ -57,7 +57,7 @@ Button::Button  //  Common constructor
      time_nextact_(0),
      title_(title_text),
      title_image_(title_image),
-     style_(g_gr->styles().button_style(init_style)) {
+     style_(&g_gr->styles().button_style(init_style)) {
 	set_thinks(false);
 	// Don't allow focus
 	assert(!get_can_focus());
@@ -169,7 +169,7 @@ void Button::draw(RenderTarget& dst) {
 	const bool is_monochrome =
 	   !enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome);
 
-	const UI::TextPanelStyleInfo& style = is_monochrome ? style_.disabled() : style_.enabled();
+	const UI::TextPanelStyleInfo& style = is_monochrome ? style_->disabled() : style_->enabled();
 
 	// Draw the background
 	draw_background(dst, style.background());
@@ -365,6 +365,10 @@ void Button::set_disable_style(UI::ButtonDisableStyle input_style) {
 void Button::set_perm_pressed(bool pressed) {
 	set_visual_state(pressed ? UI::Button::VisualState::kPermpressed :
 	                           UI::Button::VisualState::kRaised);
+}
+
+void Button::set_style(UI::ButtonStyle bstyle) {
+	style_ = &g_gr->styles().button_style(bstyle);
 }
 
 void Button::toggle() {

@@ -319,10 +319,10 @@ void EditorPlayerMenu::set_starting_pos_clicked(size_t row) {
 	// Signal player position states via button states
 	iterate_player_numbers(pn, map->get_nrplayers()) {
 		if (pn == row) {
-			// NOCOM rows_.at(pn - 1)->position->set_background_style(UI::ButtonStyle::kWuiPrimary);
+			rows_.at(pn - 1)->position->set_style(UI::ButtonStyle::kWuiPrimary);
 			rows_.at(pn - 1)->position->set_perm_pressed(true);
 		} else {
-			// NOCOM rows_.at(pn - 1)->position->set_background_style(UI::ButtonStyle::kWuiSecondary);
+			rows_.at(pn - 1)->position->set_style(UI::ButtonStyle::kWuiSecondary);
 			rows_.at(pn - 1)->position->set_perm_pressed(map->get_starting_pos(pn) !=
 			                                             Widelands::Coords::null());
 		}

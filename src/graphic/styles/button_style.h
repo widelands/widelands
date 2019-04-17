@@ -43,6 +43,10 @@ struct ButtonStyleInfo {
 		enabled_(init_enabled),
 		disabled_(init_disabled) {
 	}
+	ButtonStyleInfo(const ButtonStyleInfo& other) :
+		enabled_(new UI::TextPanelStyleInfo(other.enabled())),
+		disabled_(new UI::TextPanelStyleInfo(other.disabled())) {
+	}
 
 	const UI::TextPanelStyleInfo& enabled() const {
 		return *enabled_.get();
