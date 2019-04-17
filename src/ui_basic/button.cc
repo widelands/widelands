@@ -88,7 +88,7 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
             UI::Button::ImageMode::kShrink) {
 	// Automatically resize for font height and give it a margin.
 	if (h < 1) {
-		const int new_height = text_height(g_gr->styles().button_style(init_style).enabled.font()) + 4;
+		const int new_height = text_height(g_gr->styles().button_style(init_style).enabled().font()) + 4;
 		set_desired_size(w, new_height);
 		set_size(w, new_height);
 	}
@@ -169,10 +169,10 @@ void Button::draw(RenderTarget& dst) {
 	const bool is_monochrome =
 	   !enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome);
 
-	const UI::TextPanelStyleInfo& style = is_monochrome ? style_.disabled : style_.enabled;
+	const UI::TextPanelStyleInfo& style = is_monochrome ? style_.disabled() : style_.enabled();
 
 	// Draw the background
-	draw_background(dst, style.background);
+	draw_background(dst, style.background());
 
 	if (is_flat && highlighted_)
 		dst.brighten_rect(Recti(0, 0, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);

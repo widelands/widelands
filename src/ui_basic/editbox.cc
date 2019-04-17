@@ -350,7 +350,7 @@ bool EditBox::handle_textinput(const std::string& input_text) {
 }
 
 void EditBox::draw(RenderTarget& dst) {
-	draw_background(dst, m_->style.background);
+	draw_background(dst, m_->style.background());
 
 	// Draw border.
 	if (get_w() >= 2 && get_h() >= 2) {

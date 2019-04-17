@@ -414,7 +414,7 @@ void MultilineEditbox::focus(bool topcaller) {
  * Redraw the Editbox
  */
 void MultilineEditbox::draw(RenderTarget& dst) {
-	draw_background(dst, d_->style.background);
+	draw_background(dst, d_->style.background());
 
 	// Draw border.
 	if (get_w() >= 4 && get_h() >= 4) {

@@ -35,13 +35,22 @@ enum class TabPanelStyle { kFsMenu, kWuiLight, kWuiDark };
 
 struct PanelStyleInfo {
 	PanelStyleInfo(const Image* init_image, const RGBAColor& init_color)
-	   : image(init_image), color(init_color) {
+	   : image_(init_image), color_(init_color) {
 	}
-	PanelStyleInfo() : PanelStyleInfo(nullptr, RGBAColor(0, 0, 0, 0)) {
+	PanelStyleInfo(const PanelStyleInfo& other)
+	   : image_(other.image()), color_(other.color()) {
 	}
 
-	const Image* image;
-	RGBAColor color;
+	const RGBAColor& color() const {
+		return color_;
+	}
+	const Image* image() const {
+		return image_;
+	}
+
+private:
+	const Image* image_;
+	RGBAColor color_;
 };
 
 }  // namespace UI

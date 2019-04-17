@@ -66,8 +66,7 @@ UI::PanelStyleInfo* read_style(const LuaTable& table) {
 }
 
 UI::TextPanelStyleInfo* read_text_panel_style(const LuaTable& table) {
-	// NOCOM this line is leaking memory
-	return new UI::TextPanelStyleInfo(read_font_style(table, "font"), *read_style(*table.get_table("background")));
+	return new UI::TextPanelStyleInfo(read_font_style(table, "font"), read_style(*table.get_table("background")));
 }
 
 // Stupid completeness check - enum classes weren't meant for iterating, so we just compare the size
@@ -324,8 +323,8 @@ void StyleManager::add_button_style(UI::ButtonStyle style, const LuaTable& table
 					style,
 					std::unique_ptr<const UI::ButtonStyleInfo>(
 						new UI::ButtonStyleInfo(
-							*read_text_panel_style(*table.get_table("enabled")),
-							*read_text_panel_style(*table.get_table("disabled"))))));
+							read_text_panel_style(*table.get_table("enabled")),
+							read_text_panel_style(*table.get_table("disabled"))))));
 }
 
 void StyleManager::add_slider_style(UI::SliderStyle style, const LuaTable& table) {

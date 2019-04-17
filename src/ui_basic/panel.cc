@@ -456,12 +456,12 @@ void Panel::draw_background(RenderTarget& dst, const UI::PanelStyleInfo& info) {
 	draw_background(dst, Recti(0, 0, get_w(), get_h()), info);
 }
 void Panel::draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo& info) {
-	if (info.image != nullptr) {
+	if (info.image() != nullptr) {
 		dst.fill_rect(rect, RGBAColor(0, 0, 0, 255));
-		dst.tile(rect, info.image, Vector2i(get_x(), get_y()));
+		dst.tile(rect, info.image(), Vector2i(get_x(), get_y()));
 	}
-	if (info.color != RGBAColor(0, 0, 0, 0)) {
-		dst.fill_rect(rect, info.color, BlendMode::UseAlpha);
+	if (info.color() != RGBAColor(0, 0, 0, 0)) {
+		dst.fill_rect(rect, info.color(), BlendMode::UseAlpha);
 	}
 }
 

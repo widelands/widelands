@@ -30,12 +30,12 @@ namespace UI {
 enum class SliderStyle { kFsMenu, kWuiLight, kWuiDark };
 
 struct TextPanelStyleInfo {
-	explicit TextPanelStyleInfo(const UI::FontStyleInfo* init_font, const UI::PanelStyleInfo& init_background) :
-		background(init_background),
+	explicit TextPanelStyleInfo(const UI::FontStyleInfo* init_font, const UI::PanelStyleInfo* init_background) :
+		background_(init_background),
 		font_(init_font) {
 	}
 	explicit TextPanelStyleInfo(const TextPanelStyleInfo& other) :
-		background(other.background),
+		background_(new UI::PanelStyleInfo(other.background())),
 		font_(new UI::FontStyleInfo(other.font())) {
 	}
 	TextPanelStyleInfo& operator=(const TextPanelStyleInfo& other) = default;
@@ -47,9 +47,12 @@ struct TextPanelStyleInfo {
 		font_.reset(new UI::FontStyleInfo(new_font));
 	}
 
-	const UI::PanelStyleInfo background;
+	const UI::PanelStyleInfo& background() const {
+		return *background_.get();
+	}
 
 private:
+	std::unique_ptr<const UI::PanelStyleInfo> background_;
 	std::unique_ptr<const UI::FontStyleInfo> font_;
 };
 

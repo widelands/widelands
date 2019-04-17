@@ -20,6 +20,8 @@
 #ifndef WL_GRAPHIC_STYLES_BUTTON_STYLE_H
 #define WL_GRAPHIC_STYLES_BUTTON_STYLE_H
 
+#include <memory>
+
 #include "graphic/styles/font_style.h"
 #include "graphic/styles/panel_styles.h"
 #include "graphic/styles/text_panel_style.h"
@@ -37,13 +39,21 @@ enum class ButtonStyle {
 };
 
 struct ButtonStyleInfo {
-	ButtonStyleInfo(const UI::TextPanelStyleInfo& init_enabled, const UI::TextPanelStyleInfo& init_disabled) :
-		enabled(init_enabled),
-		disabled(init_disabled) {
+	ButtonStyleInfo(const UI::TextPanelStyleInfo* init_enabled, const UI::TextPanelStyleInfo* init_disabled) :
+		enabled_(init_enabled),
+		disabled_(init_disabled) {
 	}
 
-	const UI::TextPanelStyleInfo enabled;
-	const UI::TextPanelStyleInfo disabled;
+	const UI::TextPanelStyleInfo& enabled() const {
+		return *enabled_.get();
+	}
+	const UI::TextPanelStyleInfo& disabled() const {
+		return *disabled_.get();
+	}
+
+private:
+	std::unique_ptr<const UI::TextPanelStyleInfo> enabled_;
+	std::unique_ptr<const UI::TextPanelStyleInfo> disabled_;
 };
 
 }  // namespace UI
