@@ -6,14 +6,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018
+# Pedro Figliolia <pedroluizf@gmail.com>, 2019
 # Tiago Henrique <tiagohrm@gmail.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-11 09:31+0000\n"
-"PO-Revision-Date: 2019-02-12 19:44+0000\n"
-"Last-Translator: Tiago Henrique <tiagohrm@gmail.com>\n"
+"POT-Creation-Date: 2019-04-15 04:04+0000\n"
+"PO-Revision-Date: 2019-04-16 04:38+0000\n"
+"Last-Translator: Pedro Figliolia <pedroluizf@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1069,7 +1070,7 @@ msgstr "Moinho"
 msgid "grinding corn"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start grinding blackrootbecause ...
+#. TRANSLATORS: Completed/Skipped/Did not start grinding blackroot because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:78
 msgid "grinding blackroot"
 msgstr ""
@@ -1449,7 +1450,7 @@ msgid "Barracks"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:61
 msgctxt "barbarians_building"
 msgid "recruiting soldier"
 msgstr ""
@@ -3346,7 +3347,7 @@ msgstr ""
 #: ../../data/tribes/buildings/warehouses/frisians/port/init.lua:7
 msgctxt "frisians_building"
 msgid "Port"
-msgstr ""
+msgstr "Porto"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/frisians/warehouse/init.lua:7

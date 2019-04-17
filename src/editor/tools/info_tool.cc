@@ -75,7 +75,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	} break;
 	default:
 		break;
-	};
+	}
 
 	if (caps & Widelands::BUILDCAPS_FLAG) {
 		/** TRANSLATORS: Editor terrain property: space for a flag */
