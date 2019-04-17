@@ -24,7 +24,6 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "base/log.h" // NOCOM
 #include "base/macros.h"
 #include "graphic/align.h"
 #include "graphic/font_handler.h"
@@ -37,11 +36,9 @@
 
 namespace {
 int base_height(int button_dimension, UI::PanelStyle style) {
-	// NOCOM return 12;
 	int result = std::max(
 	   button_dimension,
 	   text_height(g_gr->styles().table_style(style).enabled()) + 2);
-	log("NOCOM dropdown base height: %d\n", result);
 	return result;
 }
 
