@@ -43,4 +43,27 @@ void correct_for_align(Align align, uint32_t w, Vector2i* pt) {
 void center_vertically(uint32_t h, Vector2i* pt) {
 	pt->y -= h / 2;
 }
+
+
+/**
+ * This mirrors the horizontal alignment for RTL languages.
+ *
+ * Do not store this value as it is based on the global font setting.
+ */
+Align mirror_alignment(Align alignment, bool is_rtl) {
+	if (is_rtl) {
+		switch (alignment) {
+		case Align::kLeft:
+			alignment = Align::kRight;
+			break;
+		case Align::kRight:
+			alignment = Align::kLeft;
+			break;
+		case Align::kCenter:
+			break;
+		}
+	}
+	return alignment;
+}
+
 } // namespace UI

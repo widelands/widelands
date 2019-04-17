@@ -61,7 +61,6 @@ struct FontSet {
 	// Returns true iff the fontset's script is written from right to left.
 	bool is_rtl() const;
 
-	Align mirror_alignment(Align alignment, const std::string& checkme = "") const;
 
 private:
 	/// Parses font information for the given fontset name from Lua.

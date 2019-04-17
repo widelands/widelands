@@ -239,7 +239,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
 			const Column& column = columns_[i];
 			const int curw = column.width;
-			Align alignment = UI::g_fh->fontset()->mirror_alignment(column.alignment);
+			Align alignment = mirror_alignment(column.alignment, g_fh->fontset()->is_rtl());
 
 			const Image* entry_picture = er.get_picture(i);
 			const std::string& entry_string = er.get_string(i);
@@ -308,7 +308,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 
 			// Fix text alignment for BiDi languages if the entry contains an RTL character. We want
 			// this always on, e.g. for mixed language savegame filenames.
-			alignment = UI::g_fh->fontset()->mirror_alignment(column.alignment, entry_string);
+			alignment = mirror_alignment(column.alignment, i18n::has_rtl_character(entry_string.c_str(), 20));
 
 			// Position the text according to alignment
 			switch (alignment) {

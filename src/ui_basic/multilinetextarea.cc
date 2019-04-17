@@ -25,6 +25,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 
@@ -146,7 +147,7 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 		return;
 	}
 	int anchor = 0;
-	Align alignment =g_fh->fontset()->mirror_alignment(align_, text_);
+	Align alignment = mirror_alignment(align_, i18n::has_rtl_character(text_.c_str(), 20));
 	switch (alignment) {
 	// TODO(Arty): We might want to revisit this after the font renderer can handle long strings
 	// without whitespaces differently.

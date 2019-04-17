@@ -116,7 +116,7 @@ std::string as_richtext_paragraph(const std::string& text, UI::FontStyle style, 
 std::string as_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style, UI::Align align) {
 	return as_richtext_paragraph(style.as_font_tag(text), align);
 }
-// NOCOM use FontStyle instead?
+
 std::string as_editor_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style) {
 	static boost::format f("<rt keep_spaces=1><p>%s</p></rt>");
 	f % style.as_font_tag(text);

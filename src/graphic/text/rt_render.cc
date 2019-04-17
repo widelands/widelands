@@ -36,7 +36,6 @@
 #include "base/vector.h"
 #include "base/wexception.h"
 #include "graphic/align.h"
-#include "graphic/font_handler.h" // NOCOM circular dependency
 #include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
@@ -103,6 +102,7 @@ struct NodeStyle {
 	uint8_t spacing;
 	UI::Align halign;
 	UI::Align valign;
+	const bool is_rtl;
 	std::string reference;
 };
 
@@ -1234,7 +1234,7 @@ public:
 				nodestyle_.halign = UI::Align::kLeft;
 			}
 		}
-		nodestyle_.halign = UI::g_fh->fontset()->mirror_alignment(nodestyle_.halign);
+		nodestyle_.halign = mirror_alignment(nodestyle_.halign, nodestyle_.is_rtl);
 		if (a.has("valign")) {
 			const std::string align = a["valign"].get_string();
 			if (align == "bottom") {
@@ -1707,7 +1707,7 @@ Renderer::~Renderer() {
 }
 
 std::shared_ptr<RenderNode>
-Renderer::layout(const std::string& text, uint16_t width, const TagSet& allowed_tags) {
+Renderer::layout(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags) {
 	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
 	if (!width) {
@@ -1727,6 +1727,7 @@ Renderer::layout(const std::string& text, uint16_t width, const TagSet& allowed_
 	                           0,
 	                           UI::Align::kLeft,
 	                           UI::Align::kTop,
+							   is_rtl,
 	                           ""};
 
 	RTTagHandler rtrn(
@@ -1741,8 +1742,8 @@ Renderer::layout(const std::string& text, uint16_t width, const TagSet& allowed_
 }
 
 std::shared_ptr<const UI::RenderedText>
-Renderer::render(const std::string& text, uint16_t width, const TagSet& allowed_tags) {
-	std::shared_ptr<RenderNode> node(layout(text, width, allowed_tags));
+Renderer::render(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags) {
+	std::shared_ptr<RenderNode> node(layout(text, width, is_rtl, allowed_tags));
 	return std::shared_ptr<const UI::RenderedText>(node->render(texture_cache_));
 }
 }  // namespace RT

@@ -22,6 +22,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text_layout.h"
 
 namespace UI {
@@ -123,7 +124,7 @@ void Textarea::set_fixed_width(int w) {
  */
 void Textarea::draw(RenderTarget& dst) {
 	if (!text_.empty()) {
-		Align alignment = g_fh->fontset()->mirror_alignment(align_, text_);
+		Align alignment = mirror_alignment(align_, i18n::has_rtl_character(text_.c_str(), 20));
 		Vector2i anchor((alignment == Align::kCenter) ?
 		                   get_w() / 2 :
 		                   (alignment == UI::Align::kRight) ? get_w() : 0,
