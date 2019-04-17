@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-15 04:04+0000\n"
-"PO-Revision-Date: 2019-04-16 04:38+0000\n"
+"POT-Creation-Date: 2019-04-16 08:31+0000\n"
+"PO-Revision-Date: 2019-04-16 11:33+0000\n"
 "Last-Translator: Pedro Figliolia <pedroluizf@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -237,7 +237,7 @@ msgstr "Cidadela"
 
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:49
 msgid "Your soldiers have occupied your citadel."
-msgstr ""
+msgstr "Suas tropas ocuparam sua cidadela."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:50
 msgid "Your citadel discovered an aggressor."
@@ -265,31 +265,31 @@ msgstr "Fortaleza"
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:52
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:50
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "Suas tropas ocuparam sua fortaleza."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:56
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:53
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:51
 msgid "Your fortress discovered an aggressor."
-msgstr ""
+msgstr "Sua fortaleza descobriu um agressor."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:57
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:54
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:52
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "Sua fortaleza está sendo atacada."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:58
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:55
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:53
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "O inimigo derrotou suas tropas na fortaleza."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:59
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:56
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:54
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr ""
+msgstr "Suas tropas derrotaram o inimigo na fortaleza."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:7
