@@ -21,6 +21,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/log.h"
 #include "base/wexception.h"
 
 namespace UI {
@@ -41,6 +42,16 @@ FontStyleInfo::FontStyleInfo(const FontStyleInfo::Face& init_face, const RGBColo
 	shadow(false) {
 
 }
+
+FontStyleInfo::FontStyleInfo(const FontStyleInfo& other) :
+	face(other.face),
+	color(other.color),
+	size(other.size),
+	bold(other.bold),
+	italic(other.italic),
+	underline(other.underline),
+	shadow(other.shadow)
+{}
 
 const std::string FontStyleInfo::face_to_string() const {
 	switch (face) {

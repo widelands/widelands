@@ -96,13 +96,13 @@ MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::TextPanelStyleInfo& 
         &o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), UI::PanelStyle::kWui),
 	  style(init_style),
      cursor_pos(0),
-     lineheight(text_height(style.font)),
+     lineheight(text_height(style.font())),
      maxbytes(std::min(g_gr->max_texture_size_for_font_rendering() *
                           g_gr->max_texture_size_for_font_rendering() /
-                          (text_height(style.font) * text_height(style.font)),
+                          (text_height(style.font()) * text_height(style.font())),
                        std::numeric_limits<int32_t>::max())),
      ww_valid(false),
-	  ww(style.font.size, style.font.color, o.get_w()),
+	  ww(style.font().size, style.font().color, o.get_w()),
      owner(o) {
 	scrollbar.moved.connect(boost::bind(&MultilineEditbox::scrollpos_changed, &o, _1));
 

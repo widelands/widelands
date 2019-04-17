@@ -20,21 +20,41 @@
 #ifndef WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
 #define WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
 
+#include <memory>
+
 #include "graphic/color.h"
 #include "graphic/styles/font_style.h"
 
 namespace UI {
 
 struct MapObjectStyleInfo {
-	UI::FontStyleInfo building_statistics_font;
-	UI::FontStyleInfo census_font;
-	UI::FontStyleInfo statistics_font;
+	explicit MapObjectStyleInfo(UI::FontStyleInfo* init_building_statistics,
+								UI::FontStyleInfo* init_census,
+								UI::FontStyleInfo* init_statistics) :
+		building_statistics_font_(init_building_statistics),
+		census_font_(init_census),
+		statistics_font_(init_statistics) {}
+
+	const UI::FontStyleInfo& building_statistics_font() const {
+		return *building_statistics_font_.get();
+	}
+	const UI::FontStyleInfo& census_font() const {
+		return *census_font_.get();
+	}
+	const UI::FontStyleInfo& statistics_font() const {
+		return *statistics_font_.get();
+	}
 
 	RGBColor construction_color;
 	RGBColor neutral_color;
 	RGBColor low_color;
 	RGBColor medium_color;
 	RGBColor high_color;
+
+private:
+	std::unique_ptr<const UI::FontStyleInfo> building_statistics_font_;
+	std::unique_ptr<const UI::FontStyleInfo> census_font_;
+	std::unique_ptr<const UI::FontStyleInfo> statistics_font_;
 };
 
 }  // namespace UI

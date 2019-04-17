@@ -41,7 +41,7 @@ struct PanelStyleInfo {
 	}
 
 	const Image* image;
-	const RGBAColor color;
+	RGBAColor color;
 };
 
 }  // namespace UI

@@ -20,16 +20,33 @@
 #ifndef WL_GRAPHIC_STYLES_PROGRESS_BAR_STYLE_H
 #define WL_GRAPHIC_STYLES_PROGRESS_BAR_STYLE_H
 
+#include <memory>
+
 #include "graphic/color.h"
 #include "graphic/styles/font_style.h"
 
 namespace UI {
 
 struct ProgressbarStyleInfo {
-	UI::FontStyleInfo font;
+	explicit ProgressbarStyleInfo(UI::FontStyleInfo* init_font) :
+		font_(init_font) {}
+	explicit ProgressbarStyleInfo(const ProgressbarStyleInfo& other) {
+		font_.reset(new UI::FontStyleInfo(other.font()));
+		low_color = other.low_color;
+		medium_color = other.medium_color;
+		high_color = other.high_color;
+	}
+
+	const UI::FontStyleInfo& font() const {
+		return *font_.get();
+	}
+
 	RGBColor low_color;
 	RGBColor medium_color;
 	RGBColor high_color;
+
+private:
+	std::unique_ptr<const UI::FontStyleInfo> font_;
 };
 
 }  // namespace UI

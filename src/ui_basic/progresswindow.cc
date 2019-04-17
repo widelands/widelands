@@ -59,7 +59,7 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	label_center_.x = get_w() / 2;
 	label_center_.y = get_h() * PROGRESS_LABEL_POSITION_Y / 100;
 
-	const uint32_t h = text_height(style_.font);
+	const uint32_t h = text_height(style_.font());
 
 	label_rectangle_.x = get_w() / 4;
 	label_rectangle_.w = get_w() / 2;
@@ -72,7 +72,7 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	border_rect.w += 2 * PROGRESS_STATUS_BORDER_X;
 	border_rect.h += 2 * PROGRESS_STATUS_BORDER_Y;
 
-	rt.draw_rect(border_rect, style_.font.color);
+	rt.draw_rect(border_rect, style_.font().color);
 	// TODO(GunChleoc): this should depend on actual progress. Add a total steps variable and reuse the Progressbar class.
 	rt.fill_rect(label_rectangle_, style_.medium_color);
 }
@@ -96,7 +96,7 @@ void ProgressWindow::step(const std::string& description) {
 	draw(rt);
 
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh->render(as_richtext_paragraph(description, style_.font));
+	   UI::g_fh->render(as_richtext_paragraph(description, style_.font()));
 	UI::center_vertically(rendered_text->height(), &label_center_);
 	rendered_text->draw(rt, label_center_, UI::Align::kCenter);
 

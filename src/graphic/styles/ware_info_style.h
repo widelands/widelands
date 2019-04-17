@@ -20,6 +20,8 @@
 #ifndef WL_GRAPHIC_STYLES_WARE_INFO_STYLE_H
 #define WL_GRAPHIC_STYLES_WARE_INFO_STYLE_H
 
+#include <memory>
+
 #include "graphic/color.h"
 #include "graphic/styles/font_style.h"
 #include "graphic/image.h"
@@ -32,12 +34,24 @@ enum class WareInfoStyle {
 };
 
 struct WareInfoStyleInfo {
-	UI::FontStyleInfo header_font;
-	UI::FontStyleInfo info_font;
+	explicit WareInfoStyleInfo(UI::FontStyleInfo* init_header_font, UI::FontStyleInfo* init_info_font) :
+		header_font_(init_header_font), info_font_(init_info_font) {}
+
+	const UI::FontStyleInfo& header_font() const {
+		return *header_font_.get();
+	}
+	const UI::FontStyleInfo& info_font() const {
+		return *info_font_.get();
+	}
+
 	const Image* icon_background_image;
 	RGBColor icon_frame;
 	RGBColor icon_background;
 	RGBColor info_background;
+
+private:
+	std::unique_ptr<const UI::FontStyleInfo> header_font_;
+	std::unique_ptr<const UI::FontStyleInfo> info_font_;
 };
 
 }  // namespace UI

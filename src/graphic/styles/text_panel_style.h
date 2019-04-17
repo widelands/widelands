@@ -20,6 +20,8 @@
 #ifndef WL_GRAPHIC_STYLES_TEXT_PANEL_STYLE_H
 #define WL_GRAPHIC_STYLES_TEXT_PANEL_STYLE_H
 
+#include <memory>
+
 #include "graphic/styles/font_style.h"
 #include "graphic/styles/panel_styles.h"
 
@@ -28,13 +30,27 @@ namespace UI {
 enum class SliderStyle { kFsMenu, kWuiLight, kWuiDark };
 
 struct TextPanelStyleInfo {
-	TextPanelStyleInfo(const UI::FontStyleInfo& init_font, const UI::PanelStyleInfo& init_background) :
-		font(init_font),
-		background(init_background) {
+	explicit TextPanelStyleInfo(const UI::FontStyleInfo* init_font, const UI::PanelStyleInfo& init_background) :
+		background(init_background),
+		font_(init_font) {
+	}
+	explicit TextPanelStyleInfo(const TextPanelStyleInfo& other) :
+		background(other.background),
+		font_(new UI::FontStyleInfo(other.font())) {
+	}
+	TextPanelStyleInfo& operator=(const TextPanelStyleInfo& other) = default;
+
+	const UI::FontStyleInfo& font() const {
+		return *font_.get();
+	}
+	void set_font(const UI::FontStyleInfo& new_font)  {
+		font_.reset(new UI::FontStyleInfo(new_font));
 	}
 
-	UI::FontStyleInfo font;
-	UI::PanelStyleInfo background;
+	const UI::PanelStyleInfo background;
+
+private:
+	std::unique_ptr<const UI::FontStyleInfo> font_;
 };
 
 }  // namespace UI

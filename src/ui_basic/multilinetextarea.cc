@@ -58,7 +58,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
 }
 
-void MultilineTextarea::set_style(UI::FontStyleInfo style) {
+void MultilineTextarea::set_style(const UI::FontStyleInfo& style) {
 	style_ = style;
 	recompute();
 }
@@ -199,7 +199,7 @@ std::string MultilineTextarea::make_richtext() {
 	boost::replace_all(temp, "\n\n", "<br>&nbsp;<br>");
 	boost::replace_all(temp, "\n", "<br>");
 
-	FontStyleInfo scaled_style = style_;
+	FontStyleInfo scaled_style(style_);
 	scaled_style.size = std::max(g_gr->styles().minimum_font_size(), static_cast<int>(std::ceil(scaled_style.size * font_scale_)));
 	return as_richtext_paragraph(temp, scaled_style, align_);
 }

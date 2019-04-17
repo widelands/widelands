@@ -38,28 +38,7 @@ RGBColor read_rgb_color(const LuaTable& table) {
 	return RGBColor(rgbcolor[0], rgbcolor[1], rgbcolor[2]);
 }
 
-UI::FontStyleInfo read_font_style(const LuaTable& parent_table, const std::string& table_key) {
-	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
-	UI::FontStyleInfo font(style_table->get_string("face"), read_rgb_color(*style_table->get_table("color")), style_table->get_int("size"));
-	if (font.size < 1) {
-		throw wexception("Font size too small for %s, must be at least 1!", table_key.c_str());
-	}
-	if (style_table->has_key("bold")) {
-		font.bold = style_table->get_bool("bold");
-	}
-	if (style_table->has_key("italic")) {
-		font.italic = style_table->get_bool("italic");
-	}
-	if (style_table->has_key("shadow")) {
-		font.shadow = style_table->get_bool("shadow");
-	}
-	if (style_table->has_key("underline")) {
-		font.underline = style_table->get_bool("underline");
-	}
-	return font;
-}
-// NOCOM code duplication to avoid memory leaks. Meh.
-UI::FontStyleInfo* read_font_style_to_pointer(const LuaTable& parent_table, const std::string& table_key) {
+UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::string& table_key) {
 	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
 	UI::FontStyleInfo* font = new UI::FontStyleInfo(style_table->get_string("face"), read_rgb_color(*style_table->get_table("color")), style_table->get_int("size"));
 	if (font->size < 1) {
@@ -92,6 +71,7 @@ UI::PanelStyleInfo* read_style(const LuaTable& table) {
 }
 
 UI::TextPanelStyleInfo* read_text_panel_style(const LuaTable& table) {
+	// NOCOM this line is leaking memory
 	return new UI::TextPanelStyleInfo(read_font_style(table, "font"), *read_style(*table.get_table("background")));
 }
 
@@ -180,12 +160,13 @@ void StyleManager::init() {
 	   "scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Building statistics etc. for map objects
-	UI::MapObjectStyleInfo* map_object_info = new UI::MapObjectStyleInfo();
-	// Fonts
 	element_table = table->get_table("map_object");
-	map_object_info->building_statistics_font = read_font_style(*element_table, "building_statistics_font");
-	map_object_info->census_font = read_font_style(*element_table, "census_font");
-	map_object_info->statistics_font = read_font_style(*element_table, "statistics_font");
+	// Fonts
+	UI::MapObjectStyleInfo* map_object_info =
+			new UI::MapObjectStyleInfo(
+				read_font_style(*element_table, "building_statistics_font"),
+				read_font_style(*element_table, "census_font"),
+				read_font_style(*element_table, "statistics_font"));
 
 	// Colors
 	style_table = element_table->get_table("colors");
@@ -211,15 +192,17 @@ void StyleManager::init() {
 	   "tables", table_styles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Statistics plot
-	UI::StatisticsPlotStyleInfo* statistics_plot_info = new UI::StatisticsPlotStyleInfo();
 	element_table = table->get_table("statistics_plot");
-	// Fonts
 	style_table = element_table->get_table("fonts");
-	statistics_plot_info->x_tick_font = read_font_style(*style_table, "x_tick");
-	statistics_plot_info->y_min_value_font = read_font_style(*style_table, "y_min_value");
-	statistics_plot_info->y_max_value_font = read_font_style(*style_table, "y_max_value");
-	style_table = element_table->get_table("colors");
+	// Fonts
+	UI::StatisticsPlotStyleInfo* statistics_plot_info =
+			new UI::StatisticsPlotStyleInfo(
+				read_font_style(*style_table, "x_tick"),
+				read_font_style(*style_table, "y_min_value"),
+				read_font_style(*style_table, "y_max_value"));
+
 	// Line colors
+	style_table = element_table->get_table("colors");
 	statistics_plot_info->axis_line_color = read_rgb_color(*style_table->get_table("axis_line"));
 	statistics_plot_info->zero_line_color = read_rgb_color(*style_table->get_table("zero_line"));
 	statistics_plot_style_.reset(std::move(statistics_plot_info));
@@ -367,8 +350,7 @@ void StyleManager::add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& t
 }
 
 void StyleManager::add_progressbar_style(UI::PanelStyle style, const LuaTable& table) {
-	UI::ProgressbarStyleInfo* progress_bar_style = new UI::ProgressbarStyleInfo();
-	progress_bar_style->font = read_font_style(table, "font");
+	UI::ProgressbarStyleInfo* progress_bar_style = new UI::ProgressbarStyleInfo(read_font_style(table, "font"));
 	std::unique_ptr<LuaTable> color_table = table.get_table("background_colors");
 	progress_bar_style->low_color = read_rgb_color(*color_table->get_table("low"));
 	progress_bar_style->medium_color = read_rgb_color(*color_table->get_table("medium"));
@@ -377,17 +359,18 @@ void StyleManager::add_progressbar_style(UI::PanelStyle style, const LuaTable& t
 }
 
 void StyleManager::add_table_style(UI::PanelStyle style, const LuaTable& table) {
-	UI::TableStyleInfo* table_style = new UI::TableStyleInfo();
-	table_style->enabled = read_font_style(table, "enabled");
-	table_style->disabled = read_font_style(table, "disabled");
-	table_styles_.insert(std::make_pair(style, std::unique_ptr<const UI::TableStyleInfo>(std::move(table_style))));
+	table_styles_.insert(std::make_pair(style,
+										std::unique_ptr<const UI::TableStyleInfo>(
+											new UI::TableStyleInfo(
+												read_font_style(table, "enabled"),
+												read_font_style(table, "disabled")))));
 }
 
 void StyleManager::add_ware_info_style(UI::WareInfoStyle style, const LuaTable& table) {
 	std::unique_ptr<LuaTable> element_table = table.get_table("fonts");
-	UI::WareInfoStyleInfo* ware_info_style = new UI::WareInfoStyleInfo();
-	ware_info_style->header_font = read_font_style(*element_table, "header");
-	ware_info_style->info_font = read_font_style(*element_table, "info");
+	UI::WareInfoStyleInfo* ware_info_style =
+			new UI::WareInfoStyleInfo(read_font_style(*element_table, "header"),
+									  read_font_style(*element_table, "info"));
 	ware_info_style->icon_background_image = g_gr->images().get(table.get_string("icon_background_image"));
 	element_table = table.get_table("colors");
 	ware_info_style->icon_frame = read_rgb_color(*element_table->get_table("icon_frame"));
@@ -401,5 +384,5 @@ void StyleManager::add_style(UI::PanelStyle style, const LuaTable& table, PanelS
 }
 
 void StyleManager::add_font_style(UI::FontStyle font_key, const LuaTable& table, const std::string& table_key) {
-	fontstyles_.emplace(std::make_pair(font_key, std::unique_ptr<UI::FontStyleInfo>(read_font_style_to_pointer(table, table_key))));
+	fontstyles_.emplace(std::make_pair(font_key, std::unique_ptr<UI::FontStyleInfo>(read_font_style(table, table_key))));
 }

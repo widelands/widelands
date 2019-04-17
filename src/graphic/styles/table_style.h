@@ -20,13 +20,26 @@
 #ifndef WL_GRAPHIC_STYLES_TABLE_STYLE_H
 #define WL_GRAPHIC_STYLES_TABLE_STYLE_H
 
+#include <memory>
+
 #include "graphic/styles/font_style.h"
 
 namespace UI {
 
 struct TableStyleInfo {
-	UI::FontStyleInfo enabled;
-	UI::FontStyleInfo disabled;
+	explicit TableStyleInfo(UI::FontStyleInfo* init_enabled, UI::FontStyleInfo* init_disabled) :
+		enabled_(init_enabled), disabled_(init_disabled) {}
+
+	const UI::FontStyleInfo& enabled() const {
+		return *enabled_.get();
+	}
+	const UI::FontStyleInfo& disabled() const {
+		return *disabled_.get();
+	}
+
+private:
+	std::unique_ptr<const UI::FontStyleInfo> enabled_;
+	std::unique_ptr<const UI::FontStyleInfo> disabled_;
 };
 
 }  // namespace UI

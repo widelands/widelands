@@ -92,7 +92,7 @@ void BuildGrid::add(Widelands::DescriptionIndex id) {
 
 	UI::IconGrid::add(descr.name(), descr.representative_image(&plr_->get_playercolor()),
 	                  reinterpret_cast<void*>(id),
-	                  descr.descname() + "<br>" + g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal).header_font.as_font_tag(_("Construction costs:")) +
+	                  descr.descname() + "<br>" + g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal).header_font().as_font_tag(_("Construction costs:")) +
 	                     "<br>" + waremap_to_richtext(plr_->tribe(), descr.buildcost()));
 }
 

@@ -59,7 +59,7 @@ std::string as_richtext_paragraph(const std::string& text, UI::Align align) {
 }  // namespace
 
 int text_width(const std::string& text, const UI::FontStyleInfo& style, float scale) {
-	UI::FontStyleInfo info = style;
+	UI::FontStyleInfo info(style);
 	info.size *= scale;
 	info.size -= UI::g_fh->fontset()->size_offset();
 	return UI::g_fh
@@ -74,7 +74,7 @@ void replace_entities(std::string* text) {
 }
 
 int text_height(const UI::FontStyleInfo& style, float scale) {
-	UI::FontStyleInfo info = style;
+	UI::FontStyleInfo info(style);
 	info.size *= scale;
 	info.size -= UI::g_fh->fontset()->size_offset();
 	return UI::g_fh
@@ -157,7 +157,7 @@ std::shared_ptr<const UI::RenderedText> autofit_text(const std::string& text,
 	if (width > 0 && rendered_text->width() > width) {
 		const int minimum_size = g_gr->styles().minimum_font_size();
 		// We take a copy, because we are changing values during the autofit.
-		UI::FontStyleInfo temp_font_info = font_info;
+		UI::FontStyleInfo temp_font_info(font_info);
 		temp_font_info.face = UI::FontStyleInfo::Face::kCondensed;
 		for (; rendered_text->width() > width && temp_font_info.size >= minimum_size; --temp_font_info.size) {
 			rendered_text = UI::g_fh->render(as_richtext_paragraph(text_to_render, temp_font_info));

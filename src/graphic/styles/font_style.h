@@ -57,6 +57,8 @@ struct FontStyleInfo {
 	FontStyleInfo();
 	explicit FontStyleInfo(const std::string& face, const RGBColor& color, int size);
 	explicit FontStyleInfo(const Face& face, const RGBColor& color, int size);
+	explicit FontStyleInfo(const FontStyleInfo& other);
+	FontStyleInfo& operator=(const FontStyleInfo& other) = default;
 
 	std::string as_font_tag(const std::string& text) const;
 

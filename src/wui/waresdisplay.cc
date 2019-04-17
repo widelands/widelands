@@ -334,7 +334,7 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 	              info_color_for_ware(id));
 
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh->render(as_richtext_paragraph(info_for_ware(id), style.info_font));
+	   UI::g_fh->render(as_richtext_paragraph(info_for_ware(id), style.info_font()));
 	rendered_text->draw(dst, Vector2i(p.x + w - rendered_text->width() - 1,
 	                                  p.y + WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 -
 	                                     rendered_text->height()));
@@ -444,7 +444,7 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 				       "<div width=26 background=" + style.icon_background.hex_value() + "><p align=center><img src=\"" +
 				       tribe.get_ware_descr(c->first)->icon_filename() +
 				       "\"></p></div><div width=26 background=" + style.info_background.hex_value() + "><p>" +
-				       style.info_font.as_font_tag(get_amount_string(c->second)) +
+				       style.info_font().as_font_tag(get_amount_string(c->second)) +
 				       "</p></div></p></div>";
 			}
 	return ret;

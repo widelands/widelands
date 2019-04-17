@@ -376,7 +376,7 @@ bool BaseDropdown::is_mouse_away() const {
 }
 
 int BaseDropdown::base_height(int button_dimension) const {
-	return std::max(button_dimension, text_height(g_gr->styles().table_style(UI::PanelStyle::kWui).enabled) + 2);
+	return std::max(button_dimension, text_height(g_gr->styles().table_style(UI::PanelStyle::kWui).enabled()) + 2);
 }
 
 bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {

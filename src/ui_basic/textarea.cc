@@ -82,7 +82,7 @@ void Textarea::update() {
 		collapse();  // collapse() implicitly updates the size and position
 	}
 
-	FontStyleInfo scaled_style = style_;
+	FontStyleInfo scaled_style(style_);
 	scaled_style.size = std::max(g_gr->styles().minimum_font_size(), static_cast<int>(std::ceil(scaled_style.size * font_scale_)));
 	rendered_text_ = autofit_text(text_, scaled_style, fixed_width_);
 

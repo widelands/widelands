@@ -255,7 +255,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				const Widelands::BuildingDescr& building_descr = *tribe.get_building_descr(enhancement);
 				std::string enhance_tooltip =
 				   (boost::format(_("Enhance to %s")) % building_descr.descname().c_str()).str() +
-				   "<br>" + g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal).header_font.as_font_tag(_("Construction costs:")) + "<br>" +
+				   "<br>" + g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal).header_font().as_font_tag(_("Construction costs:")) + "<br>" +
 				   waremap_to_richtext(tribe, building_descr.enhancement_cost());
 
 				UI::Button* enhancebtn =
@@ -293,7 +293,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				UI::Button* dismantlebtn =
 				   new UI::Button(capsbuttons, "dismantle", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 				                  g_gr->images().get(pic_dismantle),
-				                  std::string(_("Dismantle")) + "<br>" + g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal).header_font.as_font_tag(_("Returns:")) +
+				                  std::string(_("Dismantle")) + "<br>" + g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal).header_font().as_font_tag(_("Returns:")) +
 				                     "<br>" + waremap_to_richtext(owner.tribe(), wares));
 				dismantlebtn->sigclicked.connect(
 				   boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));

@@ -59,7 +59,7 @@ BaseListselect::BaseListselect(Panel* const parent,
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-	  font_style_(g_gr->styles().table_style(style).enabled),
+	  font_style_(g_gr->styles().table_style(style).enabled()),
      background_style_(selection_mode == ListselectLayout::kDropdown ?
                           g_gr->styles().dropdown_style(style) :
 								  nullptr),

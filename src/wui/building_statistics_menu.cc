@@ -58,7 +58,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                       100,
                       _("Building Statistics")),
 	  style_(g_gr->styles().map_object_style()),
-	  font_style_(style_.building_statistics_font),
+	  font_style_(style_.building_statistics_font()),
      tab_panel_(this, UI::TabPanelStyle::kWuiDark),
 	  navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
      building_name_(
@@ -766,7 +766,7 @@ void BuildingStatisticsMenu::update() {
 }
 
 void BuildingStatisticsMenu::set_labeltext(UI::Textarea* textarea, const std::string& text, const RGBColor& color) {
-	UI::FontStyleInfo style = font_style_;
+	UI::FontStyleInfo style(font_style_);
 	style.color = color;
 	textarea->set_style(style);
 	textarea->set_text(text);

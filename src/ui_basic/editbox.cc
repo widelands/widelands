@@ -87,7 +87,7 @@ EditBox::EditBox(Panel* const parent,
 	set_thinks(false);
 
 	if (get_h() == 0) {
-		set_size(get_w(), text_height(m_->style.font, m_->font_scale) + 2 * margin_y);
+		set_size(get_w(), text_height(m_->style.font(), m_->font_scale) + 2 * margin_y);
 	}
 
 	// Set alignment to the UI language's principal writing direction
@@ -144,7 +144,7 @@ void EditBox::set_text(const std::string& t) {
  */
 void EditBox::set_max_length(int const n) {
 	m_->maxLength =
-	   std::min(g_gr->max_texture_size_for_font_rendering() / text_height(m_->style.font), n);
+	   std::min(g_gr->max_texture_size_for_font_rendering() / text_height(m_->style.font()), n);
 
 	if (m_->text.size() > m_->maxLength) {
 		m_->text.erase(m_->text.begin() + m_->maxLength, m_->text.end());
@@ -160,7 +160,7 @@ void EditBox::set_font_scale(float scale) {
 }
 
 void EditBox::set_style(const UI::FontStyleInfo& style) {
-	m_->style.font = style;
+	m_->style.set_font(style);
 }
 
 
@@ -373,7 +373,7 @@ void EditBox::draw(RenderTarget& dst) {
 	}
 
 	const int max_width = get_w() - 2 * kMarginX;
-	FontStyleInfo scaled_style = m_->style.font;
+	FontStyleInfo scaled_style(m_->style.font());
 	scaled_style.size *= m_->font_scale;
 	std::shared_ptr<const UI::RenderedText> rendered_text =
 	   UI::g_fh->render(as_editor_richtext_paragraph(m_->text, scaled_style));
@@ -414,9 +414,9 @@ void EditBox::draw(RenderTarget& dst) {
 		// Draw the caret
 		std::string line_to_caret = m_->text.substr(0, m_->caret);
 		// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
-		int caret_x = text_width(line_to_caret, m_->style.font, m_->font_scale);
+		int caret_x = text_width(line_to_caret, m_->style.font(), m_->font_scale);
 
-		const uint16_t fontheight = text_height(m_->style.font, m_->font_scale);
+		const uint16_t fontheight = text_height(m_->style.font(), m_->font_scale);
 
 		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
 		Vector2i caretpt = Vector2i::zero();
@@ -432,8 +432,8 @@ void EditBox::draw(RenderTarget& dst) {
 void EditBox::check_caret() {
 	std::string leftstr(m_->text, 0, m_->caret);
 	std::string rightstr(m_->text, m_->caret, std::string::npos);
-	int32_t leftw = text_width(leftstr, m_->style.font, m_->font_scale);
-	int32_t rightw = text_width(rightstr, m_->style.font, m_->font_scale);
+	int32_t leftw = text_width(leftstr, m_->style.font(), m_->font_scale);
+	int32_t rightw = text_width(rightstr, m_->style.font(), m_->font_scale);
 
 	int32_t caretpos = 0;
 

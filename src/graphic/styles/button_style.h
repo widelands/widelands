@@ -42,8 +42,8 @@ struct ButtonStyleInfo {
 		disabled(init_disabled) {
 	}
 
-	UI::TextPanelStyleInfo enabled;
-	UI::TextPanelStyleInfo disabled;
+	const UI::TextPanelStyleInfo enabled;
+	const UI::TextPanelStyleInfo disabled;
 };
 
 }  // namespace UI
