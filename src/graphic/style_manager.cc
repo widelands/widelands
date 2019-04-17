@@ -116,16 +116,10 @@ void StyleManager::init() {
 	dropdownstyles_.clear();
 	scrollbarstyles_.clear();
 
-	log("Style Manager: Loading %sinit.lua ... ", kTemplateDir.c_str());
-
 	LuaInterface lua;
 	std::unique_ptr<LuaTable> table(lua.run_script(kTemplateDir + "init.lua"));
 
-	log("took %ums\n", timer.ms_since_last_query());
-	log("Style Manager: Reading button styles ... ");
-
 	// Buttons
-	log("Loading button styles...\n");
 	std::unique_ptr<LuaTable> element_table = table->get_table("buttons");
 	std::unique_ptr<LuaTable> style_table = element_table->get_table("fsmenu");
 	add_button_style(UI::ButtonStyle::kFsMenuMenu, *style_table->get_table("menu"));
@@ -140,11 +134,7 @@ void StyleManager::init() {
 	check_completeness(
 	   "buttons", buttonstyles_.size(), static_cast<size_t>(UI::ButtonStyle::kWuiBuildingStats));
 
-	log("took %ums\n", timer.ms_since_last_query());
-	log("Style Manager: Reading slider styles ... ");
-
 	// Sliders
-	log("Loading slider styles...\n");
 	element_table = table->get_table("sliders");
 	style_table = element_table->get_table("fsmenu");
 	add_slider_style(UI::SliderStyle::kFsMenu, *style_table->get_table("menu"));
@@ -154,11 +144,7 @@ void StyleManager::init() {
 	check_completeness(
 	   "sliders", sliderstyles_.size(), static_cast<size_t>(UI::SliderStyle::kWuiDark));
 
-	log("took %ums\n", timer.ms_since_last_query());
-	log("Style Manager: Reading tabpanel styles ... ");
-
 	// Tabpanels
-	log("Loading tabpanel styles...\n");
 	element_table = table->get_table("tabpanels");
 	style_table = element_table->get_table("fsmenu");
 	add_tabpanel_style(UI::TabPanelStyle::kFsMenu, *style_table->get_table("menu").get());
@@ -168,22 +154,14 @@ void StyleManager::init() {
 	check_completeness(
 	   "tabpanels", tabpanelstyles_.size(), static_cast<size_t>(UI::TabPanelStyle::kWuiDark));
 
-	log("took %ums\n", timer.ms_since_last_query());
-	log("Style Manager: Reading editbox styles ... ");
-
 	// Editboxes
-	log("Loading editbox styles...\n");
 	element_table = table->get_table("editboxes");
 	add_editbox_style(UI::PanelStyle::kFsMenu, *element_table->get_table("fsmenu"));
 	add_editbox_style(UI::PanelStyle::kWui, *element_table->get_table("wui"));
 	check_completeness(
 	   "editboxes", editboxstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
-	log("took %ums\n", timer.ms_since_last_query());
-	log("Style Manager: Reading dropdown styles ... ");
-
 	// Dropdowns
-	log("Loading dropdown styles...\n");
 	element_table = table->get_table("dropdowns");
 	style_table = element_table->get_table("fsmenu");
 	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu").get(), &dropdownstyles_);
@@ -192,11 +170,7 @@ void StyleManager::init() {
 	check_completeness(
 	   "dropdowns", dropdownstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
-	log("took %ums\n", timer.ms_since_last_query());
-	log("Style Manager: Reading scrollbar styles ... ");
-
 	// Scrollbars
-	log("Loading scrollbar styles...\n");
 	element_table = table->get_table("scrollbars");
 	style_table = element_table->get_table("fsmenu");
 	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu").get(), &scrollbarstyles_);
@@ -206,7 +180,6 @@ void StyleManager::init() {
 	   "scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Building statistics etc. for map objects
-	log("Loading map object styles...\n");
 	UI::MapObjectStyleInfo* map_object_info = new UI::MapObjectStyleInfo();
 	// Fonts
 	element_table = table->get_table("map_object");
@@ -215,7 +188,6 @@ void StyleManager::init() {
 	map_object_info->statistics_font = read_font_style(*element_table, "statistics_font");
 
 	// Colors
-	log("Loading style colors...\n");
 	style_table = element_table->get_table("colors");
 	map_object_info->construction_color = read_rgb_color(*style_table->get_table("construction"));
 	map_object_info->neutral_color = read_rgb_color(*style_table->get_table("neutral"));
@@ -225,7 +197,6 @@ void StyleManager::init() {
 	map_object_style_.reset(std::move(map_object_info));
 
 	// Progress bars
-	log("Loading progressbar styles...\n");
 	element_table = table->get_table("progressbar");
 	add_progressbar_style(UI::PanelStyle::kFsMenu, *element_table->get_table("fsmenu"));
 	add_progressbar_style(UI::PanelStyle::kWui, *element_table->get_table("wui"));
@@ -233,7 +204,6 @@ void StyleManager::init() {
 	   "progressbars", progressbar_styles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Table and listselect
-	log("Loading table styles...\n");
 	element_table = table->get_table("tables");
 	add_table_style(UI::PanelStyle::kFsMenu, *element_table->get_table("fsmenu"));
 	add_table_style(UI::PanelStyle::kWui, *element_table->get_table("wui"));
@@ -241,7 +211,6 @@ void StyleManager::init() {
 	   "tables", table_styles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Statistics plot
-	log("Loading statistics plot styles...\n");
 	UI::StatisticsPlotStyleInfo* statistics_plot_info = new UI::StatisticsPlotStyleInfo();
 	element_table = table->get_table("statistics_plot");
 	// Fonts
@@ -256,7 +225,6 @@ void StyleManager::init() {
 	statistics_plot_style_.reset(std::move(statistics_plot_info));
 
 	// Ware info in warehouses, construction actions etc.
-	log("Loading wareinfo styles...\n");
 	element_table = table->get_table("wareinfo");
 	add_ware_info_style(UI::WareInfoStyle::kNormal, *element_table->get_table("normal"));
 	add_ware_info_style(UI::WareInfoStyle::kHighlight, *element_table->get_table("highlight"));
@@ -264,7 +232,6 @@ void StyleManager::init() {
 	   "wareinfos", ware_info_styles_.size(), static_cast<size_t>(UI::WareInfoStyle::kHighlight));
 
 	// Special elements
-	log("Loading special style elements...\n");
 	minimum_font_size_ = table->get_int("minimum_font_size");
 	if (minimum_font_size_ < 1) {
 		throw wexception("Font size too small for minimum_font_size, must be at least 1!");
@@ -272,33 +239,31 @@ void StyleManager::init() {
 	minimap_icon_frame_ = read_rgb_color(*table->get_table("minimap_icon_frame"));
 
 	// Fonts
-	log("Loading font styles...\n");
 	element_table = table->get_table("fonts");
 	add_font_style(UI::FontStyle::kChatMessage, *element_table, "chat_message");
-   add_font_style(UI::FontStyle::kChatPlayername, *element_table, "chat_playername");
-   add_font_style(UI::FontStyle::kChatServer, *element_table, "chat_server");
-   add_font_style(UI::FontStyle::kChatTimestamp, *element_table, "chat_timestamp");
-   add_font_style(UI::FontStyle::kChatWhisper, *element_table, "chat_whisper");
-   add_font_style(UI::FontStyle::kFsGameSetupHeadings, *element_table, "fsmenu_game_setup_headings");
-   add_font_style(UI::FontStyle::kFsGameSetupIrcClient, *element_table, "fsmenu_game_setup_irc_client");
-   add_font_style(UI::FontStyle::kFsGameSetupMapname, *element_table, "fsmenu_game_setup_mapname");
-   add_font_style(UI::FontStyle::kFsMenuGameTip, *element_table, "fsmenu_gametip");
-   add_font_style(UI::FontStyle::kFsMenuInfoPanelHeading, *element_table, "fsmenu_info_panel_heading");
-   add_font_style(UI::FontStyle::kFsMenuInfoPanelParagraph, *element_table, "fsmenu_info_panel_paragraph");
-   add_font_style(UI::FontStyle::kFsMenuIntro, *element_table, "fsmenu_intro");
+	add_font_style(UI::FontStyle::kChatPlayername, *element_table, "chat_playername");
+	add_font_style(UI::FontStyle::kChatServer, *element_table, "chat_server");
+	add_font_style(UI::FontStyle::kChatTimestamp, *element_table, "chat_timestamp");
+	add_font_style(UI::FontStyle::kChatWhisper, *element_table, "chat_whisper");
+	add_font_style(UI::FontStyle::kFsGameSetupHeadings, *element_table, "fsmenu_game_setup_headings");
+	add_font_style(UI::FontStyle::kFsGameSetupIrcClient, *element_table, "fsmenu_game_setup_irc_client");
+	add_font_style(UI::FontStyle::kFsGameSetupMapname, *element_table, "fsmenu_game_setup_mapname");
+	add_font_style(UI::FontStyle::kFsMenuGameTip, *element_table, "fsmenu_gametip");
+	add_font_style(UI::FontStyle::kFsMenuInfoPanelHeading, *element_table, "fsmenu_info_panel_heading");
+	add_font_style(UI::FontStyle::kFsMenuInfoPanelParagraph, *element_table, "fsmenu_info_panel_paragraph");
+	add_font_style(UI::FontStyle::kFsMenuIntro, *element_table, "fsmenu_intro");
 	add_font_style(UI::FontStyle::kFsMenuTitle, *element_table, "fsmenu_title");
 	add_font_style(UI::FontStyle::kFsMenuTranslationInfo, *element_table, "fsmenu_translation_info");
-   add_font_style(UI::FontStyle::kLabel, *element_table, "label");
-   add_font_style(UI::FontStyle::kTooltip, *element_table, "tooltip");
-   add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
-   add_font_style(UI::FontStyle::kWuiGameSpeedAndCoordinates, *element_table, "wui_game_speed_and_coordinates");
-   add_font_style(UI::FontStyle::kWuiInfoPanelHeading, *element_table, "wui_info_panel_heading");
-   add_font_style(UI::FontStyle::kWuiInfoPanelParagraph, *element_table, "wui_info_panel_paragraph");
-   add_font_style(UI::FontStyle::kWuiMessageHeading, *element_table, "wui_message_heading");
-   add_font_style(UI::FontStyle::kWuiMessageParagraph, *element_table, "wui_message_paragraph");
-   add_font_style(UI::FontStyle::kWuiWindowTitle, *element_table, "wui_window_title");
+	add_font_style(UI::FontStyle::kLabel, *element_table, "label");
+	add_font_style(UI::FontStyle::kTooltip, *element_table, "tooltip");
+	add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
+	add_font_style(UI::FontStyle::kWuiGameSpeedAndCoordinates, *element_table, "wui_game_speed_and_coordinates");
+	add_font_style(UI::FontStyle::kWuiInfoPanelHeading, *element_table, "wui_info_panel_heading");
+	add_font_style(UI::FontStyle::kWuiInfoPanelParagraph, *element_table, "wui_info_panel_paragraph");
+	add_font_style(UI::FontStyle::kWuiMessageHeading, *element_table, "wui_message_heading");
+	add_font_style(UI::FontStyle::kWuiMessageParagraph, *element_table, "wui_message_paragraph");
+	add_font_style(UI::FontStyle::kWuiWindowTitle, *element_table, "wui_window_title");
 	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kWuiWindowTitle));
-	log("took %ums\n", timer.ms_since_last_query());
 }
 
 // Return functions for the styles
