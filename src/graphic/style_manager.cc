@@ -55,7 +55,7 @@ UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::stri
 }
 
 // Read image filename and RGBA color from LuaTable
-UI::PanelStyleInfo* read_style(const LuaTable& table) {
+UI::PanelStyleInfo* read_panel_style(const LuaTable& table) {
 	const std::string image = table.get_string("image");
 	std::vector<int> rgbcolor = table.get_table("color")->array_entries<int>();
 	if (rgbcolor.size() != 3) {
@@ -66,7 +66,7 @@ UI::PanelStyleInfo* read_style(const LuaTable& table) {
 }
 
 UI::TextPanelStyleInfo* read_text_panel_style(const LuaTable& table) {
-	return new UI::TextPanelStyleInfo(read_font_style(table, "font"), read_style(*table.get_table("background")));
+	return new UI::TextPanelStyleInfo(read_font_style(table, "font"), read_panel_style(*table.get_table("background")));
 }
 
 // Stupid completeness check - enum classes weren't meant for iterating, so we just compare the size
@@ -154,22 +154,7 @@ void StyleManager::init() {
 	   "scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Building statistics etc. for map objects
-	element_table = table->get_table("map_object");
-	// Fonts
-	UI::MapObjectStyleInfo* map_object_info =
-			new UI::MapObjectStyleInfo(
-				read_font_style(*element_table, "building_statistics_font"),
-				read_font_style(*element_table, "census_font"),
-				read_font_style(*element_table, "statistics_font"));
-
-	// Colors
-	style_table = element_table->get_table("colors");
-	map_object_info->construction_color = read_rgb_color(*style_table->get_table("construction"));
-	map_object_info->neutral_color = read_rgb_color(*style_table->get_table("neutral"));
-	map_object_info->low_color = read_rgb_color(*style_table->get_table("low"));
-	map_object_info->medium_color = read_rgb_color(*style_table->get_table("medium"));
-	map_object_info->high_color = read_rgb_color(*style_table->get_table("high"));
-	map_object_style_.reset(std::move(map_object_info));
+	set_mapobject_style(*table->get_table("map_object"));
 
 	// Progress bars
 	element_table = table->get_table("progressbar");
@@ -186,20 +171,7 @@ void StyleManager::init() {
 	   "tables", table_styles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Statistics plot
-	element_table = table->get_table("statistics_plot");
-	style_table = element_table->get_table("fonts");
-	// Fonts
-	UI::StatisticsPlotStyleInfo* statistics_plot_info =
-			new UI::StatisticsPlotStyleInfo(
-				read_font_style(*style_table, "x_tick"),
-				read_font_style(*style_table, "y_min_value"),
-				read_font_style(*style_table, "y_max_value"));
-
-	// Line colors
-	style_table = element_table->get_table("colors");
-	statistics_plot_info->axis_line_color = read_rgb_color(*style_table->get_table("axis_line"));
-	statistics_plot_info->zero_line_color = read_rgb_color(*style_table->get_table("zero_line"));
-	statistics_plot_style_.reset(std::move(statistics_plot_info));
+	set_statistics_plot_style(*table->get_table("statistics_plot"));
 
 	// Ware info in warehouses, construction actions etc.
 	element_table = table->get_table("wareinfo");
@@ -340,16 +312,19 @@ void StyleManager::add_editbox_style(UI::PanelStyle style, const LuaTable& table
 
 void StyleManager::add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table) {
 	tabpanelstyles_.insert(
-	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
+	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_panel_style(table))));
 }
 
 void StyleManager::add_progressbar_style(UI::PanelStyle style, const LuaTable& table) {
-	UI::ProgressbarStyleInfo* progress_bar_style = new UI::ProgressbarStyleInfo(read_font_style(table, "font"));
 	std::unique_ptr<LuaTable> color_table = table.get_table("background_colors");
-	progress_bar_style->low_color = read_rgb_color(*color_table->get_table("low"));
-	progress_bar_style->medium_color = read_rgb_color(*color_table->get_table("medium"));
-	progress_bar_style->high_color = read_rgb_color(*color_table->get_table("high"));
-	progressbar_styles_.insert(std::make_pair(style, std::unique_ptr<const UI::ProgressbarStyleInfo>(std::move(progress_bar_style))));
+	progressbar_styles_.insert(std::make_pair(
+								   style,
+								   std::unique_ptr<const UI::ProgressbarStyleInfo>(
+									   new UI::ProgressbarStyleInfo(
+										   read_font_style(table, "font"),
+										   read_rgb_color(*color_table->get_table("low")),
+										   read_rgb_color(*color_table->get_table("medium")),
+										   read_rgb_color(*color_table->get_table("high"))))));
 }
 
 void StyleManager::add_table_style(UI::PanelStyle style, const LuaTable& table) {
@@ -360,21 +335,47 @@ void StyleManager::add_table_style(UI::PanelStyle style, const LuaTable& table) 
 												read_font_style(table, "disabled")))));
 }
 
+void StyleManager::set_statistics_plot_style(const LuaTable& table) {
+	std::unique_ptr<LuaTable> fonts_table = table.get_table("fonts");
+	std::unique_ptr<LuaTable> colors_table = table.get_table("colors");
+	statistics_plot_style_.reset(new UI::StatisticsPlotStyleInfo(
+				read_font_style(*fonts_table, "x_tick"),
+				read_font_style(*fonts_table, "y_min_value"),
+				read_font_style(*fonts_table, "y_max_value"),
+				read_rgb_color(*colors_table->get_table("axis_line")),
+				read_rgb_color(*colors_table->get_table("zero_line"))));
+}
+
+void StyleManager::set_mapobject_style(const LuaTable& table) {
+	std::unique_ptr<LuaTable> colors_table = table.get_table("colors");
+	map_object_style_.reset(new UI::MapObjectStyleInfo(
+								read_font_style(table, "building_statistics_font"),
+								read_font_style(table, "census_font"),
+								read_font_style(table, "statistics_font"),
+								read_rgb_color(*colors_table->get_table("construction")),
+								read_rgb_color(*colors_table->get_table("neutral")),
+								read_rgb_color(*colors_table->get_table("low")),
+								read_rgb_color(*colors_table->get_table("medium")),
+								read_rgb_color(*colors_table->get_table("high"))));
+}
+
 void StyleManager::add_ware_info_style(UI::WareInfoStyle style, const LuaTable& table) {
-	std::unique_ptr<LuaTable> element_table = table.get_table("fonts");
-	UI::WareInfoStyleInfo* ware_info_style =
-			new UI::WareInfoStyleInfo(read_font_style(*element_table, "header"),
-									  read_font_style(*element_table, "info"));
-	ware_info_style->icon_background_image = g_gr->images().get(table.get_string("icon_background_image"));
-	element_table = table.get_table("colors");
-	ware_info_style->icon_frame = read_rgb_color(*element_table->get_table("icon_frame"));
-	ware_info_style->icon_background = read_rgb_color(*element_table->get_table("icon_background"));
-	ware_info_style->info_background = read_rgb_color(*element_table->get_table("info_background"));
-	ware_info_styles_.insert(std::make_pair(style, std::unique_ptr<const UI::WareInfoStyleInfo>(std::move(ware_info_style))));
+	std::unique_ptr<LuaTable> fonts_table = table.get_table("fonts");
+	std::unique_ptr<LuaTable> colors_table = table.get_table("colors");
+	ware_info_styles_.insert(
+				std::make_pair(style,
+							   std::unique_ptr<const UI::WareInfoStyleInfo>(
+								   new UI::WareInfoStyleInfo(
+									   read_font_style(*fonts_table, "header"),
+									   read_font_style(*fonts_table, "info"),
+									   g_gr->images().get(table.get_string("icon_background_image")),
+									   read_rgb_color(*colors_table->get_table("icon_frame")),
+									   read_rgb_color(*colors_table->get_table("icon_background")),
+									   read_rgb_color(*colors_table->get_table("info_background"))))));
 }
 
 void StyleManager::add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map) {
-	map->insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
+	map->insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_panel_style(table))));
 }
 
 void StyleManager::add_font_style(UI::FontStyle font_key, const LuaTable& table, const std::string& table_key) {

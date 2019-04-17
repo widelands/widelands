@@ -320,10 +320,10 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 				g_gr->styles().ware_info_style(UI::WareInfoStyle::kHighlight) :
 				g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal);
 
-	uint16_t w = style.icon_background_image->width();
+	uint16_t w = style.icon_background_image()->width();
 
 	const Vector2i p = ware_position(id);
-	dst.blit(p, style.icon_background_image);
+	dst.blit(p, style.icon_background_image());
 
 	const Image* icon = type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(id)->icon() :
 	                                                   tribe_.get_ware_descr(id)->icon();
@@ -380,7 +380,7 @@ WaresDisplay::WaresDisplay(UI::Panel* const parent,
 }
 
 RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::DescriptionIndex /* ware */) {
-	return g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal).info_background;
+	return g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal).info_background();
 }
 
 WaresDisplay::~WaresDisplay() {
@@ -441,9 +441,9 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 		for (j = i->begin(); j != i->end(); ++j)
 			if ((c = map.find(*j)) != map.end()) {
 				ret += "<div width=30 padding=2><p align=center>"
-				       "<div width=26 background=" + style.icon_background.hex_value() + "><p align=center><img src=\"" +
+				       "<div width=26 background=" + style.icon_background().hex_value() + "><p align=center><img src=\"" +
 				       tribe.get_ware_descr(c->first)->icon_filename() +
-				       "\"></p></div><div width=26 background=" + style.info_background.hex_value() + "><p>" +
+				       "\"></p></div><div width=26 background=" + style.info_background().hex_value() + "><p>" +
 				       style.info_font().as_font_tag(get_amount_string(c->second)) +
 				       "</p></div></p></div>";
 			}

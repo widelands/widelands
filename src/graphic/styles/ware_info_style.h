@@ -34,8 +34,18 @@ enum class WareInfoStyle {
 };
 
 struct WareInfoStyleInfo {
-	explicit WareInfoStyleInfo(UI::FontStyleInfo* init_header_font, UI::FontStyleInfo* init_info_font) :
-		header_font_(init_header_font), info_font_(init_info_font) {}
+	explicit WareInfoStyleInfo(UI::FontStyleInfo* init_header_font,
+							   UI::FontStyleInfo* init_info_font,
+							   const Image* init_icon_background_image,
+							   const RGBColor& init_icon_frame,
+							   const RGBColor& init_icon_background,
+							   const RGBColor& init_info_background) :
+		header_font_(init_header_font),
+		info_font_(init_info_font),
+		icon_background_image_(init_icon_background_image),
+		icon_frame_(init_icon_frame),
+		icon_background_(init_icon_background),
+		info_background_(init_info_background) {}
 
 	const UI::FontStyleInfo& header_font() const {
 		return *header_font_.get();
@@ -43,15 +53,26 @@ struct WareInfoStyleInfo {
 	const UI::FontStyleInfo& info_font() const {
 		return *info_font_.get();
 	}
-
-	const Image* icon_background_image;
-	RGBColor icon_frame;
-	RGBColor icon_background;
-	RGBColor info_background;
+	const Image* icon_background_image() const {
+		return icon_background_image_;
+	}
+	const RGBColor& icon_frame() const {
+		return icon_frame_;
+	}
+	const RGBColor& icon_background() const {
+		return icon_background_;
+	}
+	const RGBColor& info_background() const {
+		return info_background_;
+	}
 
 private:
 	std::unique_ptr<const UI::FontStyleInfo> header_font_;
 	std::unique_ptr<const UI::FontStyleInfo> info_font_;
+	const Image* icon_background_image_;
+	const RGBColor icon_frame_;
+	const RGBColor icon_background_;
+	const RGBColor info_background_;
 };
 
 }  // namespace UI

@@ -28,25 +28,40 @@
 namespace UI {
 
 struct ProgressbarStyleInfo {
-	explicit ProgressbarStyleInfo(UI::FontStyleInfo* init_font) :
-		font_(init_font) {}
-	explicit ProgressbarStyleInfo(const ProgressbarStyleInfo& other) {
-		font_.reset(new UI::FontStyleInfo(other.font()));
-		low_color = other.low_color;
-		medium_color = other.medium_color;
-		high_color = other.high_color;
+	explicit ProgressbarStyleInfo(UI::FontStyleInfo* init_font,
+								  const RGBColor& init_low_color,
+								  const RGBColor& init_medium_color,
+								  const RGBColor& init_high_color) :
+		font_(init_font),
+		low_color_(init_low_color),
+		medium_color_(init_medium_color),
+		high_color_(init_high_color) {}
+	explicit ProgressbarStyleInfo(const ProgressbarStyleInfo& other):
+		font_(new UI::FontStyleInfo(other.font())),
+		low_color_(other.low_color()),
+		medium_color_(other.medium_color()),
+		high_color_(other.high_color())
+	{
 	}
 
 	const UI::FontStyleInfo& font() const {
 		return *font_.get();
 	}
-
-	RGBColor low_color;
-	RGBColor medium_color;
-	RGBColor high_color;
+	const RGBColor& low_color() const {
+		return low_color_;
+	}
+	const RGBColor& medium_color() const {
+		return medium_color_;
+	}
+	const RGBColor& high_color() const {
+		return high_color_;
+	}
 
 private:
 	std::unique_ptr<const UI::FontStyleInfo> font_;
+	const RGBColor low_color_;
+	const RGBColor medium_color_;
+	const RGBColor high_color_;
 };
 
 }  // namespace UI

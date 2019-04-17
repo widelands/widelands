@@ -200,7 +200,7 @@ void draw_diagram(uint32_t time_ms,
                   const float xline_length,
                   RenderTarget& dst) {
 	const RGBColor& axis_line_color =
-	   g_gr->styles().statistics_plot_style().axis_line_color;
+	   g_gr->styles().statistics_plot_style().axis_line_color();
 
 	uint32_t how_many_ticks, max_x;
 
@@ -684,7 +684,7 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 	// draw zero line
 	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),
 	                     Vector2f(get_inner_w() - kSpaceRight - xline_length_, yoffset)},
-	                    g_gr->styles().statistics_plot_style().zero_line_color,
+	                    g_gr->styles().statistics_plot_style().zero_line_color(),
 	                    kPlotLinesWidth);
 
 	// Draw data and diagram

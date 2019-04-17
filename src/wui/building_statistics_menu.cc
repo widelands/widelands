@@ -673,12 +673,12 @@ void BuildingStatisticsMenu::update() {
 				   static_cast<int>(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
 
 				const RGBColor& color = (percent < low_production_) ?
-							style_.low_color :
+							style_.low_color() :
 							(percent < ((low_production_ < 50) ?
 												2 * low_production_ :
 												low_production_ + ((100 - low_production_) / 2))) ?
-								style_.medium_color :
-								style_.high_color;
+								style_.medium_color() :
+								style_.high_color();
 
 				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
 				/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
@@ -704,10 +704,10 @@ void BuildingStatisticsMenu::update() {
 		} else if (building.type() == MapObjectType::MILITARYSITE) {
 			if (nr_owned) {
 				const RGBColor& color =  (total_stationed_soldiers < total_soldier_capacity / 2) ?
-							style_.low_color :
+							style_.low_color() :
 							(total_stationed_soldiers < total_soldier_capacity) ?
-								style_.medium_color :
-								style_.high_color;
+								style_.medium_color() :
+								style_.high_color();
 				const std::string perc_str =
 				   (boost::format(_("%1%/%2%")) % total_stationed_soldiers % total_soldier_capacity)
 				      .str();

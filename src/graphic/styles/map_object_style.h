@@ -30,10 +30,20 @@ namespace UI {
 struct MapObjectStyleInfo {
 	explicit MapObjectStyleInfo(UI::FontStyleInfo* init_building_statistics,
 								UI::FontStyleInfo* init_census,
-								UI::FontStyleInfo* init_statistics) :
+								UI::FontStyleInfo* init_statistics,
+								const RGBColor& init_construction_color,
+								const RGBColor& init_neutral_color,
+								const RGBColor& init_low_color,
+								const RGBColor& init_medium_color,
+								const RGBColor& init_high_color) :
 		building_statistics_font_(init_building_statistics),
 		census_font_(init_census),
-		statistics_font_(init_statistics) {}
+		statistics_font_(init_statistics),
+		construction_color_(init_construction_color),
+		neutral_color_(init_neutral_color),
+		low_color_(init_low_color),
+		medium_color_(init_medium_color),
+		high_color_(init_high_color) {}
 
 	const UI::FontStyleInfo& building_statistics_font() const {
 		return *building_statistics_font_.get();
@@ -44,17 +54,31 @@ struct MapObjectStyleInfo {
 	const UI::FontStyleInfo& statistics_font() const {
 		return *statistics_font_.get();
 	}
-
-	RGBColor construction_color;
-	RGBColor neutral_color;
-	RGBColor low_color;
-	RGBColor medium_color;
-	RGBColor high_color;
+	const RGBColor& construction_color() const {
+		return construction_color_;
+	}
+	const RGBColor& neutral_color() const {
+		return neutral_color_;
+	}
+	const RGBColor& low_color() const {
+		return low_color_;
+	}
+	const RGBColor& medium_color() const {
+		return medium_color_;
+	}
+	const RGBColor& high_color() const {
+		return high_color_;
+	}
 
 private:
 	std::unique_ptr<const UI::FontStyleInfo> building_statistics_font_;
 	std::unique_ptr<const UI::FontStyleInfo> census_font_;
 	std::unique_ptr<const UI::FontStyleInfo> statistics_font_;
+	const RGBColor construction_color_;
+	const RGBColor neutral_color_;
+	const RGBColor low_color_;
+	const RGBColor medium_color_;
+	const RGBColor high_color_;
 };
 
 }  // namespace UI

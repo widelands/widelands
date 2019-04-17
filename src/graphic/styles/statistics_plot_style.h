@@ -30,10 +30,14 @@ namespace UI {
 struct StatisticsPlotStyleInfo {
 	explicit StatisticsPlotStyleInfo(UI::FontStyleInfo* init_x_tick_font,
 									 UI::FontStyleInfo* init_y_min_value_font,
-									 UI::FontStyleInfo* init_y_max_value_font) :
+									 UI::FontStyleInfo* init_y_max_value_font,
+									 const RGBColor& init_axis_line_color,
+									 const RGBColor& init_zero_line_color) :
 		x_tick_font_(init_x_tick_font),
 		y_min_value_font_(init_y_min_value_font),
-		y_max_value_font_(init_y_max_value_font) {}
+		y_max_value_font_(init_y_max_value_font),
+		axis_line_color_(init_axis_line_color),
+		zero_line_color_(init_zero_line_color) {}
 
 	const UI::FontStyleInfo& x_tick_font() const {
 		return *x_tick_font_.get();
@@ -44,14 +48,19 @@ struct StatisticsPlotStyleInfo {
 	const UI::FontStyleInfo& y_max_value_font() const {
 		return *y_max_value_font_.get();
 	}
-
-	RGBColor axis_line_color;
-	RGBColor zero_line_color;
+	const RGBColor& axis_line_color() const {
+		return axis_line_color_;
+	}
+	const RGBColor& zero_line_color() const {
+		return zero_line_color_;
+	}
 
 private:
 	std::unique_ptr<const UI::FontStyleInfo> x_tick_font_;
 	std::unique_ptr<const UI::FontStyleInfo> y_min_value_font_;
 	std::unique_ptr<const UI::FontStyleInfo> y_max_value_font_;
+	const RGBColor axis_line_color_;
+	const RGBColor zero_line_color_;
 };
 
 }  // namespace UI

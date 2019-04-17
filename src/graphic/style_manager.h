@@ -70,6 +70,8 @@ private:
 	void add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table);
 	void add_progressbar_style(UI::PanelStyle style, const LuaTable& table);
 	void add_table_style(UI::PanelStyle style, const LuaTable& table);
+	void set_statistics_plot_style(const LuaTable& table);
+	void set_mapobject_style(const LuaTable& table);
 	void add_ware_info_style(UI::WareInfoStyle style, const LuaTable& table);
 	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);
 	void add_font_style(UI::FontStyle font, const LuaTable& table, const std::string& key);
