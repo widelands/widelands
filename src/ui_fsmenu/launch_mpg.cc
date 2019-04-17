@@ -183,7 +183,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	players_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings));
 	map_.set_font_scale(scale_factor());
 	map_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings));
-	// NOCOM add to style wincondition_type_.set_color(RGBColor(0, 255, 0));
+	wincondition_type_.set_font_scale(scale_factor());
+	wincondition_type_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings));
 
 	mapname_.set_text(_("(no map)"));
 	map_info_.set_text(_("The host has not yet selected a map or saved game."));
