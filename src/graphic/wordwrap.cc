@@ -55,7 +55,7 @@ int text_width(const std::string& text, int ptsize) {
 
 int text_height(int ptsize) {
 	RGBColor font_color(0, 0, 0);
-	const UI::FontStyleInfo font_info("sans", font_color, ptsize);
+	const UI::FontStyleInfo font_info("sans", font_color, ptsize, false, false, false, false);
 	return UI::g_fh->render(as_richtext_paragraph(UI::g_fh->fontset()->representative_character(), font_info))->height();
 }
 } // namespace

@@ -33,7 +33,7 @@ namespace {
 std::string as_playercolor(const int16_t playern, const std::string& text) {
 	const RGBColor& playercolor = ((playern >= 0) && playern < kMaxPlayers) ?
 				kPlayerColors[playern] :
-				g_gr->styles().font_style(UI::FontStyle::kChatServer).color;
+				g_gr->styles().font_style(UI::FontStyle::kChatServer).color();
 	return g_gr->styles().font_style(UI::FontStyle::kChatPlayername).as_font_tag(g_gr->styles().color_tag(text, playercolor));
 }
 

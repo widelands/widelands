@@ -48,6 +48,7 @@ namespace UI {
  * the latter provides scrollbars.
  */
 struct Textarea : public Panel {
+public:
 	Textarea(Panel* parent,
 	         int32_t x,
 	         int32_t y,
@@ -84,9 +85,16 @@ protected:
 	void update_desired_size() override;
 
 private:
-	enum LayoutMode { AutoMove, Layouted, Static };
+	enum class LayoutMode { AutoMove, Layouted };
 
-	void init();
+	Textarea(Panel* const parent,
+	         int32_t x,
+	         int32_t y,
+	         uint32_t w,
+	         uint32_t h,
+	         const std::string& text,
+	         Align align, LayoutMode layout_mode);
+
 	void collapse();
 	void expand();
 	void update();
@@ -97,7 +105,7 @@ private:
 	std::string text_;
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
 
-	FontStyleInfo style_;
+	const FontStyleInfo* style_;
 	float font_scale_;
 	int fixed_width_;
 };

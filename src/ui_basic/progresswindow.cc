@@ -72,7 +72,7 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	border_rect.w += 2 * PROGRESS_STATUS_BORDER_X;
 	border_rect.h += 2 * PROGRESS_STATUS_BORDER_Y;
 
-	rt.draw_rect(border_rect, style_.font().color);
+	rt.draw_rect(border_rect, style_.font().color());
 	// TODO(GunChleoc): this should depend on actual progress. Add a total steps variable and reuse the Progressbar class.
 	rt.fill_rect(label_rectangle_, style_.medium_color);
 }

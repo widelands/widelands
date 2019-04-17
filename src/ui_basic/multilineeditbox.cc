@@ -102,7 +102,7 @@ MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::TextPanelStyleInfo& 
                           (text_height(style.font()) * text_height(style.font())),
                        std::numeric_limits<int32_t>::max())),
      ww_valid(false),
-	  ww(style.font().size, style.font().color, o.get_w()),
+	  ww(style.font().size(), style.font().color(), o.get_w()),
      owner(o) {
 	scrollbar.moved.connect(boost::bind(&MultilineEditbox::scrollpos_changed, &o, _1));
 

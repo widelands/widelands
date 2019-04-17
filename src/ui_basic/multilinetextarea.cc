@@ -44,7 +44,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      MultilineTextarea::ScrollMode scroll_mode)
    : Panel(parent, x, y, w, h),
      text_(text),
-	  style_(g_gr->styles().font_style(FontStyle::kLabel)),
+	  style_(&g_gr->styles().font_style(FontStyle::kLabel)),
 	  font_scale_(1.0f),
      align_(align),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
@@ -52,19 +52,19 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
-	scrollbar_.set_singlestepsize(text_height(style_, font_scale_));
+	scrollbar_.set_singlestepsize(text_height(*style_, font_scale_));
 	scrollbar_.set_steps(1);
 	set_scrollmode(scroll_mode);
 	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
 }
 
 void MultilineTextarea::set_style(const UI::FontStyleInfo& style) {
-	style_ = style;
+	style_ = &style;
 	recompute();
 }
 void MultilineTextarea::set_font_scale(float scale) {
 	font_scale_ = scale;
-	scrollbar_.set_singlestepsize(text_height(style_, font_scale_));
+	scrollbar_.set_singlestepsize(text_height(*style_, font_scale_));
 	recompute();
 }
 
@@ -135,7 +135,7 @@ void MultilineTextarea::layout() {
 	// Take care of the scrollbar
 	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 	scrollbar_.set_size(Scrollbar::kSize, get_h());
-	scrollbar_.set_pagesize(get_h() - 2 * style_.size * font_scale_);
+	scrollbar_.set_pagesize(get_h() - 2 * style_->size() * font_scale_);
 }
 
 /**
@@ -199,8 +199,8 @@ std::string MultilineTextarea::make_richtext() {
 	boost::replace_all(temp, "\n\n", "<br>&nbsp;<br>");
 	boost::replace_all(temp, "\n", "<br>");
 
-	FontStyleInfo scaled_style(style_);
-	scaled_style.size = std::max(g_gr->styles().minimum_font_size(), static_cast<int>(std::ceil(scaled_style.size * font_scale_)));
+	FontStyleInfo scaled_style(*style_);
+	scaled_style.set_size(std::max(g_gr->styles().minimum_font_size(), static_cast<int>(std::ceil(scaled_style.size() * font_scale_))));
 	return as_richtext_paragraph(temp, scaled_style, align_);
 }
 

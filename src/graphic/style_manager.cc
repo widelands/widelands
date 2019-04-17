@@ -40,23 +40,18 @@ RGBColor read_rgb_color(const LuaTable& table) {
 
 UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::string& table_key) {
 	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
-	UI::FontStyleInfo* font = new UI::FontStyleInfo(style_table->get_string("face"), read_rgb_color(*style_table->get_table("color")), style_table->get_int("size"));
-	if (font->size < 1) {
-		throw wexception("Font size too small for %s, must be at least 1!", table_key.c_str());
+	const int size = style_table->get_int("size");
+	if (size < 1) {
+		throw wexception("Font size %d too small for %s, must be at least 1!", size, table_key.c_str());
 	}
-	if (style_table->has_key("bold")) {
-		font->bold = style_table->get_bool("bold");
-	}
-	if (style_table->has_key("italic")) {
-		font->italic = style_table->get_bool("italic");
-	}
-	if (style_table->has_key("shadow")) {
-		font->shadow = style_table->get_bool("shadow");
-	}
-	if (style_table->has_key("underline")) {
-		font->underline = style_table->get_bool("underline");
-	}
-	return font;
+	return new UI::FontStyleInfo(
+				style_table->get_string("face"),
+				read_rgb_color(*style_table->get_table("color")),
+				size,
+				style_table->has_key<std::string>("bold") ? style_table->get_bool("bold") : false,
+				style_table->has_key<std::string>("italic") ? style_table->get_bool("italic") : false,
+				style_table->has_key<std::string>("underline") ? style_table->get_bool("underline") : false,
+				style_table->has_key<std::string>("shadow") ? style_table->get_bool("shadow") : false);
 }
 
 // Read image filename and RGBA color from LuaTable

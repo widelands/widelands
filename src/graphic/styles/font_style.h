@@ -54,26 +54,38 @@ enum class FontStyle {
 struct FontStyleInfo {
 	enum class Face { kSans, kSerif, kCondensed };
 
-	FontStyleInfo();
-	explicit FontStyleInfo(const std::string& face, const RGBColor& color, int size);
-	explicit FontStyleInfo(const Face& face, const RGBColor& color, int size);
+	explicit FontStyleInfo(const std::string& init_face, const RGBColor& init_color, int init_size,
+						   bool init_bold, bool init_italic, bool init_underline, bool init_shadow);
 	explicit FontStyleInfo(const FontStyleInfo& other);
 	FontStyleInfo& operator=(const FontStyleInfo& other) = default;
 
 	std::string as_font_tag(const std::string& text) const;
 
+	Face face() const;
+	void make_condensed();
+
+	const RGBColor& color() const;
+	void set_color(const RGBColor& new_color);
+
+	int size() const;
+	void set_size(int new_size);
+
+	bool bold() const;
+	bool italic() const;
+	bool underline() const;
+	bool shadow() const;
+
 private:
-	static Face string_to_face(const std::string& face);
+	static Face string_to_face(const std::string& face_);
 	const std::string face_to_string() const;
 
-public:
-	Face face;
-	RGBColor color;
-	int size;
-	bool bold;
-	bool italic;
-	bool underline;
-	bool shadow;
+	Face face_;
+	RGBColor color_;
+	int size_;
+	const bool bold_;
+	const bool italic_;
+	const bool underline_;
+	const bool shadow_;
 };
 
 }  // namespace UI

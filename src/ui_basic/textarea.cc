@@ -26,15 +26,29 @@
 
 namespace UI {
 
-Textarea::Textarea(Panel* parent, int32_t x, int32_t y, const std::string& text, Align align)
-   : Panel(parent, x, y, 0, 0), layoutmode_(AutoMove), align_(align) {
-	init();
+Textarea::Textarea(Panel* parent,
+                   int32_t x,
+                   int32_t y,
+                   uint32_t w,
+                   uint32_t h,
+                   const std::string& text,
+                   Align align, LayoutMode layout_mode)
+   : Panel(parent, x, y, w, h), layoutmode_(layout_mode), align_(align), style_(&g_gr->styles().font_style(FontStyle::kLabel)) {
+	fixed_width_ = 0;
+	set_handle_mouse(false);
+	set_thinks(false);
+	font_scale_ = 1.0f;
+	update();
 	set_text(text);
 }
 
+
+Textarea::Textarea(Panel* parent, int32_t x, int32_t y, const std::string& text, Align align)
+   : Textarea(parent, x, y, 0, 0, text, align, LayoutMode::AutoMove) {
+}
+
 Textarea::Textarea(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Align align)
-   : Panel(parent, x, y, w, h), layoutmode_(AutoMove), align_(align) {
-	init();
+   : Textarea(parent, x, y, w, h, "", align, LayoutMode::AutoMove) {
 }
 
 Textarea::Textarea(Panel* parent,
@@ -44,31 +58,15 @@ Textarea::Textarea(Panel* parent,
                    uint32_t h,
                    const std::string& text,
                    Align align)
-   : Panel(parent, x, y, w, h), layoutmode_(AutoMove), align_(align) {
-	init();
-	set_text(text);
+   : Textarea(parent, x, y, w, h, text, align, LayoutMode::AutoMove) {
 }
 
 Textarea::Textarea(Panel* parent, const std::string& text, Align align)
-   : Panel(parent, 0, 0, 0, 0), layoutmode_(Layouted), align_(align) {
-	init();
-	set_text(text);
-}
-
-/**
- * Initialization tasks that are common to all constructors.
- */
-void Textarea::init() {
-	fixed_width_ = 0;
-	set_handle_mouse(false);
-	set_thinks(false);
-	style_ = g_gr->styles().font_style(FontStyle::kLabel);
-	font_scale_ = 1.0f;
-	update();
+   : Textarea(parent, 0, 0, 0, 0, text, align, LayoutMode::Layouted) {
 }
 
 void Textarea::set_style(const FontStyleInfo& style) {
-	style_ = style;
+	style_ = &style;
 	update();
 }
 
@@ -78,17 +76,17 @@ void Textarea::set_font_scale(float scale) {
 }
 
 void Textarea::update() {
-	if (layoutmode_ == AutoMove) {
+	if (layoutmode_ == LayoutMode::AutoMove) {
 		collapse();  // collapse() implicitly updates the size and position
 	}
 
-	FontStyleInfo scaled_style(style_);
-	scaled_style.size = std::max(g_gr->styles().minimum_font_size(), static_cast<int>(std::ceil(scaled_style.size * font_scale_)));
+	FontStyleInfo scaled_style(*style_);
+	scaled_style.set_size(std::max(g_gr->styles().minimum_font_size(), static_cast<int>(std::ceil(scaled_style.size() * font_scale_))));
 	rendered_text_ = autofit_text(text_, scaled_style, fixed_width_);
 
-	if (layoutmode_ == AutoMove) {
+	if (layoutmode_ == LayoutMode::AutoMove) {
 		expand();
-	} else if (layoutmode_ == Layouted) {
+	} else if (layoutmode_ == LayoutMode::Layouted) {
 		update_desired_size();
 	}
 }
@@ -195,7 +193,7 @@ void Textarea::update_desired_size() {
 		h = rendered_text_->height();
 		// We want empty textareas to have height
 		if (text_.empty()) {
-			h = text_height(style_, font_scale_);
+			h = text_height(*style_, font_scale_);
 		}
 	}
 	set_desired_size(w, h);

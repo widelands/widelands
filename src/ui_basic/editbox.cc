@@ -374,7 +374,7 @@ void EditBox::draw(RenderTarget& dst) {
 
 	const int max_width = get_w() - 2 * kMarginX;
 	FontStyleInfo scaled_style(m_->style.font());
-	scaled_style.size *= m_->font_scale;
+	scaled_style.set_size(scaled_style.size() * m_->font_scale);
 	std::shared_ptr<const UI::RenderedText> rendered_text =
 	   UI::g_fh->render(as_editor_richtext_paragraph(m_->text, scaled_style));
 

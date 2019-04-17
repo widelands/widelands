@@ -60,8 +60,7 @@ std::string as_richtext_paragraph(const std::string& text, UI::Align align) {
 
 int text_width(const std::string& text, const UI::FontStyleInfo& style, float scale) {
 	UI::FontStyleInfo info(style);
-	info.size *= scale;
-	info.size -= UI::g_fh->fontset()->size_offset();
+	info.set_size(info.size() * scale - UI::g_fh->fontset()->size_offset());
 	return UI::g_fh
 	   ->render(as_editor_richtext_paragraph(text, info))->width();
 }
@@ -75,8 +74,7 @@ void replace_entities(std::string* text) {
 
 int text_height(const UI::FontStyleInfo& style, float scale) {
 	UI::FontStyleInfo info(style);
-	info.size *= scale;
-	info.size -= UI::g_fh->fontset()->size_offset();
+	info.set_size(info.size() * scale - UI::g_fh->fontset()->size_offset());
 	return UI::g_fh
 	   ->render(as_richtext_paragraph(UI::g_fh->fontset()->representative_character(), info))
 	   ->height();
@@ -101,7 +99,7 @@ std::string as_listitem(const std::string& txt, UI::FontStyle style) {
 	                       "width=*><p><font size=%d color=%s>%s<vspace "
 	                       "gap=6></font></p></div></div>");
 	const UI::FontStyleInfo& font_style = g_gr->styles().font_style(style);
-	f % font_style.size % font_style.color.hex_value() % font_style.size % font_style.color.hex_value() % txt;
+	f % font_style.size() % font_style.color().hex_value() % font_style.size() % font_style.color().hex_value() % txt;
 	return f.str();
 }
 
@@ -158,9 +156,10 @@ std::shared_ptr<const UI::RenderedText> autofit_text(const std::string& text,
 		const int minimum_size = g_gr->styles().minimum_font_size();
 		// We take a copy, because we are changing values during the autofit.
 		UI::FontStyleInfo temp_font_info(font_info);
-		temp_font_info.face = UI::FontStyleInfo::Face::kCondensed;
-		for (; rendered_text->width() > width && temp_font_info.size >= minimum_size; --temp_font_info.size) {
+		temp_font_info.make_condensed();
+		while (rendered_text->width() > width && temp_font_info.size() >= minimum_size) {
 			rendered_text = UI::g_fh->render(as_richtext_paragraph(text_to_render, temp_font_info));
+			temp_font_info.set_size(temp_font_info.size() - 1);
 		}
 	}
 	return rendered_text;

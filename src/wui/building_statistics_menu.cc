@@ -739,7 +739,7 @@ void BuildingStatisticsMenu::update() {
 		} else {
 			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % "–").str();
 		}
-		set_labeltext(owned_labels_[id], owned_text, font_style_.color);
+		set_labeltext(owned_labels_[id], owned_text, font_style_.color());
 		owned_labels_[id]->set_visible((nr_owned + nr_build) > 0);
 
 		building_buttons_[id]->set_enabled((nr_owned + nr_build) > 0);
@@ -767,7 +767,7 @@ void BuildingStatisticsMenu::update() {
 
 void BuildingStatisticsMenu::set_labeltext(UI::Textarea* textarea, const std::string& text, const RGBColor& color) {
 	UI::FontStyleInfo style(font_style_);
-	style.color = color;
+	style.set_color(color);
 	textarea->set_style(style);
 	textarea->set_text(text);
 	textarea->set_visible(true);

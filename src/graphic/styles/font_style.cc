@@ -25,36 +25,30 @@
 #include "base/wexception.h"
 
 namespace UI {
-FontStyleInfo::FontStyleInfo() : FontStyleInfo("sans", RGBColor(0, 0, 0), 14) {
-}
 
-FontStyleInfo::FontStyleInfo(const std::string& init_face, const RGBColor& init_color, int init_size) :
-	FontStyleInfo(string_to_face(init_face), init_color, init_size) {
-}
-
-FontStyleInfo::FontStyleInfo(const FontStyleInfo::Face& init_face, const RGBColor& init_color, int init_size) :
-	face(init_face),
-	color(init_color),
-	size(init_size),
-	bold(false),
-	italic(false),
-	underline(false),
-	shadow(false) {
-
+FontStyleInfo::FontStyleInfo(const std::string& init_face, const RGBColor& init_color, int init_size,
+							 bool init_bold, bool init_italic, bool init_underline, bool init_shadow) :
+	face_(string_to_face(init_face)),
+	color_(init_color),
+	size_(init_size),
+	bold_(init_bold),
+	italic_(init_italic),
+	underline_(init_underline),
+	shadow_(init_shadow) {
 }
 
 FontStyleInfo::FontStyleInfo(const FontStyleInfo& other) :
-	face(other.face),
-	color(other.color),
-	size(other.size),
-	bold(other.bold),
-	italic(other.italic),
-	underline(other.underline),
-	shadow(other.shadow)
+	face_(other.face()),
+	color_(other.color()),
+	size_(other.size()),
+	bold_(other.bold()),
+	italic_(other.italic()),
+	underline_(other.underline()),
+	shadow_(other.shadow())
 {}
 
 const std::string FontStyleInfo::face_to_string() const {
-	switch (face) {
+	switch (face_) {
 	case Face::kSans:
 		return "sans";
 	case Face::kSerif:
@@ -82,24 +76,55 @@ FontStyleInfo::Face FontStyleInfo::string_to_face(const std::string& init_face) 
 std::string FontStyleInfo::as_font_tag(const std::string& text) const {
 	static boost::format f("<font face=%s size=%d color=%s%s>%s</font>");
 	std::string optionals = "";
-	if (bold) {
+	if (bold_) {
 		optionals += " bold=1";
 	}
-	if (italic) {
+	if (italic_) {
 		optionals += " italic=1";
 	}
-	if (shadow) {
+	if (shadow_) {
 		optionals += " shadow=1";
 	}
-	if (underline) {
+	if (underline_) {
 		optionals += " underline=1";
 	}
 	f % face_to_string();
-	f % size;
-	f % color.hex_value();
+	f % size_;
+	f % color_.hex_value();
 	f % optionals;
 	f % text;
 	return f.str();
+}
+
+FontStyleInfo::Face FontStyleInfo::face() const {
+	return face_;
+}
+void FontStyleInfo::make_condensed() {
+	face_ = Face::kCondensed;
+}
+const RGBColor& FontStyleInfo::color() const {
+	return color_;
+}
+void FontStyleInfo::set_color(const RGBColor& new_color) {
+	color_ = new_color;
+}
+int FontStyleInfo::size() const {
+	return size_;
+}
+void FontStyleInfo::set_size(int new_size) {
+	size_ = new_size;
+}
+bool FontStyleInfo::bold() const {
+	return bold_;
+}
+bool FontStyleInfo::italic() const {
+	return italic_;
+}
+bool FontStyleInfo::underline() const {
+	return underline_;
+}
+bool FontStyleInfo::shadow() const {
+	return shadow_;
 }
 
 } // namespace UI
