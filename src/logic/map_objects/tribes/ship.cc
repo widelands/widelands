@@ -31,6 +31,7 @@
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/findbob.h"
@@ -1083,10 +1084,7 @@ void Ship::send_message(Game& game,
                         const std::string& description,
                         const std::string& picture) {
 	const std::string rt_description =
-	   (boost::format("<div padding_r=10><p><img src=%s></p></div>"
-	                  "<div width=*><p>%s</p></div>") %
-	    picture % g_gr->styles().font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(description))
-	      .str();
+			as_mapobject_message(picture, g_gr->images().get(picture)->width(), description);
 
 	get_owner()->add_message(game, std::unique_ptr<Message>(new Message(
 	                                  Message::Type::kSeafaring, game.get_gametime(), title, picture,

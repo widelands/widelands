@@ -33,6 +33,7 @@
 #include "economy/input_queue.h"
 #include "economy/request.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -772,13 +773,11 @@ void Building::send_message(Game& game,
                             bool link_to_building_lifetime,
                             uint32_t throttle_time,
                             uint32_t throttle_radius) {
-	const std::string& img = descr().representative_image_filename();
-	const int width = descr().representative_image()->width();
 	const std::string rt_description =
-	   (boost::format("<div padding_r=10><p><img width=%d src=%s color=%s></p></div>"
-	                  "<div width=*><p>%s</p></div>") %
-	    width % img % owner().get_playercolor().hex_value() % g_gr->styles().font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(description))
-	      .str();
+			as_mapobject_message(descr().representative_image_filename(),
+								 descr().representative_image()->width(),
+								 description,
+								 &owner().get_playercolor());
 
 	std::unique_ptr<Message> msg(new Message(msgtype, game.get_gametime(), title, icon_filename,
 	                                         heading, rt_description, get_position(),

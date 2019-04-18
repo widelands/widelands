@@ -75,6 +75,7 @@ std::string as_editor_richtext_paragraph(const std::string& text, const UI::Font
 std::string as_listitem(const std::string&, UI::FontStyle style);
 
 std::string as_game_tip(const std::string&);
+std::string as_mapobject_message(const std::string& image_filename, int width, const std::string& txt, const RGBColor* player_color = nullptr);
 std::string as_message(const std::string& heading, const std::string& body);
 
 /**

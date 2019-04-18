@@ -35,6 +35,7 @@
 #include "economy/transfer.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -970,14 +971,10 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 
 		// Geologist also sends a message notifying the player
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
-			const int width = g_gr->images().get(rdescr->representative_image())->width();
-			// NOCOM unify with building & Ship messages
-			const std::string message =
-			   (boost::format("<div padding_r=10><p><img width=%d src=%s></p></div>"
-			                  "<div width=*><p>%s</p></div>") %
-			    width % ri.descr().representative_image_filename() %
-				g_gr->styles().font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(_("A geologist found resources.")))
-			      .str();
+			const std::string rt_description =
+					as_mapobject_message(ri.descr().representative_image_filename(),
+										 g_gr->images().get(rdescr->representative_image())->width(),
+										 _("A geologist found resources."));
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
@@ -985,7 +982,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			   game,
 			   std::unique_ptr<Message>(new Message(Message::Type::kGeologists, game.get_gametime(),
 			                                        rdescr->descname(), rdescr->representative_image(),
-			                                        rdescr->descname(), message, position, serial_,
+			                                        rdescr->descname(), rt_description, position, serial_,
 			                                        rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
