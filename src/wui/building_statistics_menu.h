@@ -110,7 +110,6 @@ private:
 
 	/// Style
 	const UI::MapObjectStyleInfo&  style_;
-	const UI::FontStyleInfo& font_style_;
 
 	/// UI tabs
 	UI::TabPanel tab_panel_;

@@ -58,7 +58,6 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                       100,
                       _("Building Statistics")),
 	  style_(g_gr->styles().map_object_style()),
-	  font_style_(style_.building_statistics_font()),
      tab_panel_(this, UI::TabPanelStyle::kWuiDark),
 	  navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
      building_name_(
@@ -82,8 +81,6 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
         0,
         0,
         35,
-        kLabelHeight,
-        1,
         UI::PanelStyle::kWui),
      unproductive_label2_(
         &unproductive_box_,
@@ -124,13 +121,16 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	owned_labels_ = std::vector<UI::Textarea*>(nr_building_types_);
 	productivity_labels_ = std::vector<UI::Textarea*>(nr_building_types_);
 
-	owned_label_.set_style(font_style_);
-	construction_label_.set_style(font_style_);
-	unproductive_label_.set_style(font_style_);
-	unproductive_label2_.set_style(font_style_);
-	no_owned_label_.set_style(font_style_);
-	no_construction_label_.set_style(font_style_);
-	no_unproductive_label_.set_style(font_style_);
+	owned_label_.set_style(style_.building_statistics_details_font());
+	construction_label_.set_style(style_.building_statistics_details_font());
+	unproductive_label_.set_style(style_.building_statistics_details_font());
+
+	unproductive_percent_.set_font_style_and_margin(style_.building_statistics_details_font(), style_.editbox_margin());
+
+	unproductive_label2_.set_style(style_.building_statistics_details_font());
+	no_owned_label_.set_style(style_.building_statistics_details_font());
+	no_construction_label_.set_style(style_.building_statistics_details_font());
+	no_unproductive_label_.set_style(style_.building_statistics_details_font());
 	unproductive_label_.set_size(unproductive_label_.get_w(), kButtonRowHeight);
 	unproductive_percent_.set_text(std::to_string(low_production_));
 	unproductive_percent_.set_max_length(4);
@@ -411,13 +411,13 @@ void BuildingStatisticsMenu::add_button(DescriptionIndex id,
 
 	owned_labels_[id] =
 	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
-	owned_labels_[id]->set_style(font_style_);
+	owned_labels_[id]->set_style(style_.building_statistics_button_font());
 	owned_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(owned_labels_[id]);
 
 	productivity_labels_[id] =
 	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
-	productivity_labels_[id]->set_style(font_style_);
+	productivity_labels_[id]->set_style(style_.building_statistics_button_font());
 	productivity_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(productivity_labels_[id]);
 
@@ -739,7 +739,7 @@ void BuildingStatisticsMenu::update() {
 		} else {
 			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % "–").str();
 		}
-		set_labeltext(owned_labels_[id], owned_text, font_style_.color());
+		set_labeltext(owned_labels_[id], owned_text, style_.building_statistics_details_font().color());
 		owned_labels_[id]->set_visible((nr_owned + nr_build) > 0);
 
 		building_buttons_[id]->set_enabled((nr_owned + nr_build) > 0);
@@ -766,7 +766,7 @@ void BuildingStatisticsMenu::update() {
 }
 
 void BuildingStatisticsMenu::set_labeltext(UI::Textarea* textarea, const std::string& text, const RGBColor& color) {
-	UI::FontStyleInfo style(font_style_);
+	UI::FontStyleInfo style(style_.building_statistics_button_font());
 	style.set_color(color);
 	textarea->set_style(style);
 	textarea->set_text(text);

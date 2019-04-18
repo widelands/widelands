@@ -90,7 +90,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 
      // Edit boxes
      edit_servername_(
-        this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, buth_, 2, UI::PanelStyle::kFsMenu),
+        this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, UI::PanelStyle::kFsMenu),
 
      // List
      clientsonline_list_(

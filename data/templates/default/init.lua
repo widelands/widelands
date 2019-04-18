@@ -257,26 +257,28 @@ return {
          background = {
             image = fs_button,
             color = fs_green,
+            margin = 4
          },
          font = {
             color = fs_font_color,
             face = fs_font_face,
             size = fs_font_size,
             shadow = true
-         }
+         },
       },
       wui = {
          background = {
             image = wui_button,
             color = wui_brown,
+            margin = 2,
          },
          font = {
             color = wui_font_color,
             face = wui_font_face,
             size = wui_font_size,
             shadow = true
-         }
-      }
+         },
+      },
    },
    -- Background for dropdown menus
    dropdowns = {
@@ -338,12 +340,24 @@ return {
          shadow = true
       },
       -- Building statistics window
-      building_statistics_font = {
-         color = wui_font_color, -- Default color
-         face = "condensed",
-         size = 12, -- Do not make this bigger - the UI element size is still hard-coded.
-         bold = true,
-         shadow = true
+      building_statistics = {
+         fonts = {
+            button_font = {
+               color = wui_font_color, -- Default color
+               face = "condensed",
+               size = 12, -- Do not make this bigger - the UI element size is still hard-coded.
+               bold = true,
+               shadow = true
+            },
+            details_font = {
+               color = wui_font_color, -- Default color
+               face = "sans",
+               size = 12, -- Do not make this bigger - the UI element size is still hard-coded.
+               bold = true,
+               shadow = true
+            },
+         },
+         editbox_margin = 0
       },
       colors = {
          construction = { 163, 144, 19 },

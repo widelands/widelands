@@ -62,7 +62,8 @@ UI::PanelStyleInfo* read_panel_style(const LuaTable& table) {
 		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
 	}
 	return new UI::PanelStyleInfo(image.empty() ? nullptr : g_gr->images().get(image),
-	                              RGBAColor(rgbcolor[0], rgbcolor[1], rgbcolor[2], 0));
+	                              RGBAColor(rgbcolor[0], rgbcolor[1], rgbcolor[2], 0),
+			table.has_key<std::string>("margin") ? table.get_int("margin") : 0);
 }
 
 UI::TextPanelStyleInfo* read_text_panel_style(const LuaTable& table) {
@@ -347,9 +348,12 @@ void StyleManager::set_statistics_plot_style(const LuaTable& table) {
 }
 
 void StyleManager::set_mapobject_style(const LuaTable& table) {
+	std::unique_ptr<LuaTable> building_statistics_table = table.get_table("building_statistics");
 	std::unique_ptr<LuaTable> colors_table = table.get_table("colors");
 	map_object_style_.reset(new UI::MapObjectStyleInfo(
-								read_font_style(table, "building_statistics_font"),
+								read_font_style(*building_statistics_table->get_table("fonts"), "button_font"),
+								read_font_style(*building_statistics_table->get_table("fonts"), "details_font"),
+								building_statistics_table->get_int("editbox_margin"),
 								read_font_style(table, "census_font"),
 								read_font_style(table, "statistics_font"),
 								read_rgb_color(*colors_table->get_table("construction")),

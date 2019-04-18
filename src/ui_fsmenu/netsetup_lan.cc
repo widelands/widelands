@@ -82,15 +82,11 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
                 get_w() * 16 / 25,
                 get_h() * 3333 / 10000,
                 butw_,
-                buth_,
-                2,
                 UI::PanelStyle::kFsMenu),
      hostname(this,
               get_w() * 16 / 25,
               get_h() * 19 / 40,
               get_w() * 17 / 80,
-              buth_,
-              2,
               UI::PanelStyle::kFsMenu),
 
      // List

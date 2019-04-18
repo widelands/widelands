@@ -35,8 +35,8 @@ LoginBox::LoginBox(Panel& parent)
 
 	ta_nickname = new UI::Textarea(this, margin, margin, _("Nickname:"));
 	ta_password = new UI::Textarea(this, margin, 40, _("Password:"));
-	eb_nickname = new UI::EditBox(this, 150, margin, 330, 20, 2, UI::PanelStyle::kWui);
-	eb_password = new UI::EditBox(this, 150, 40, 330, 20, 2, UI::PanelStyle::kWui);
+	eb_nickname = new UI::EditBox(this, 150, margin, 330, UI::PanelStyle::kWui);
+	eb_password = new UI::EditBox(this, 150, 40, 330, UI::PanelStyle::kWui);
 
 	pwd_warning =
 	   new UI::MultilineTextarea(this, margin, 65, 505, 50, UI::PanelStyle::kWui,

@@ -47,12 +47,19 @@ constexpr int kLineMargin = 1;
 namespace UI {
 
 struct EditBoxImpl {
-	explicit EditBoxImpl(UI::PanelStyle init_style) :
-		style(g_gr->styles().editbox_style(init_style)), font_scale(1.0f) {
+	explicit EditBoxImpl(const UI::TextPanelStyleInfo& init_style) :
+		background_style(&init_style.background()), font_style(&init_style.font()),
+		margin(init_style.background().margin()), font_scale(1.0f) {
 	}
 
-	/// Background color and texture + font style
-	UI::TextPanelStyleInfo style;
+	/// Background color and texture
+	const UI::PanelStyleInfo* background_style;
+
+	/// Font style
+	const UI::FontStyleInfo* font_style;
+
+	/// Margin around the test
+	int margin;
 
 	/// Scale for font size
 	float font_scale;
@@ -77,18 +84,13 @@ EditBox::EditBox(Panel* const parent,
                  int32_t x,
                  int32_t y,
                  uint32_t w,
-                 uint32_t h,
-                 int margin_y,
                  UI::PanelStyle style)
-   : Panel(parent, x, y, w, h),
-     m_(new EditBoxImpl(style)),
+   : Panel(parent, x, y, w,
+		   text_height(g_gr->styles().editbox_style(style).font())
+		   + 2 * g_gr->styles().editbox_style(style).background().margin()),
+	 m_(new EditBoxImpl(g_gr->styles().editbox_style(style))),
      history_active_(false),
      history_position_(-1) {
-	set_thinks(false);
-
-	if (get_h() == 0) {
-		set_size(get_w(), text_height(m_->style.font(), m_->font_scale) + 2 * margin_y);
-	}
 
 	// Set alignment to the UI language's principal writing direction
 	m_->align = UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft;
@@ -97,6 +99,7 @@ EditBox::EditBox(Panel* const parent,
 	// yes, use *signed* max as maximum length; just a small safe-guard.
 	set_max_length(std::numeric_limits<int32_t>::max());
 
+	set_thinks(false);
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_handle_textinput();
@@ -144,7 +147,7 @@ void EditBox::set_text(const std::string& t) {
  */
 void EditBox::set_max_length(int const n) {
 	m_->maxLength =
-	   std::min(g_gr->max_texture_size_for_font_rendering() / text_height(m_->style.font()), n);
+	   std::min(g_gr->max_texture_size_for_font_rendering() / text_height(*m_->font_style), n);
 
 	if (m_->text.size() > m_->maxLength) {
 		m_->text.erase(m_->text.begin() + m_->maxLength, m_->text.end());
@@ -159,10 +162,17 @@ void EditBox::set_font_scale(float scale) {
 	m_->font_scale = scale;
 }
 
-void EditBox::set_style(const UI::FontStyleInfo& style) {
-	m_->style.set_font(style);
+void EditBox::set_font_style(const UI::FontStyleInfo& style) {
+	m_->font_style = &style;
+	const int new_height = text_height(style) + 2 * m_->margin;
+	set_size(get_w(), new_height);
+	set_desired_size(get_w(), new_height);
 }
 
+void EditBox::set_font_style_and_margin(const UI::FontStyleInfo& style, int margin) {
+	m_->margin = margin;
+	set_font_style(style);
+}
 
 /**
  * The mouse was clicked on this editbox
@@ -350,7 +360,7 @@ bool EditBox::handle_textinput(const std::string& input_text) {
 }
 
 void EditBox::draw(RenderTarget& dst) {
-	draw_background(dst, m_->style.background());
+	draw_background(dst, *m_->background_style);
 
 	// Draw border.
 	if (get_w() >= 2 && get_h() >= 2) {
@@ -373,7 +383,7 @@ void EditBox::draw(RenderTarget& dst) {
 	}
 
 	const int max_width = get_w() - 2 * kMarginX;
-	FontStyleInfo scaled_style(m_->style.font());
+	FontStyleInfo scaled_style(*m_->font_style);
 	scaled_style.set_size(scaled_style.size() * m_->font_scale);
 	std::shared_ptr<const UI::RenderedText> rendered_text =
 	   UI::g_fh->render(as_editor_richtext_paragraph(m_->text, scaled_style));
@@ -414,9 +424,9 @@ void EditBox::draw(RenderTarget& dst) {
 		// Draw the caret
 		std::string line_to_caret = m_->text.substr(0, m_->caret);
 		// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
-		int caret_x = text_width(line_to_caret, m_->style.font(), m_->font_scale);
+		int caret_x = text_width(line_to_caret, *m_->font_style, m_->font_scale);
 
-		const uint16_t fontheight = text_height(m_->style.font(), m_->font_scale);
+		const uint16_t fontheight = text_height(*m_->font_style, m_->font_scale);
 
 		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
 		Vector2i caretpt = Vector2i::zero();
@@ -432,8 +442,8 @@ void EditBox::draw(RenderTarget& dst) {
 void EditBox::check_caret() {
 	std::string leftstr(m_->text, 0, m_->caret);
 	std::string rightstr(m_->text, m_->caret, std::string::npos);
-	int32_t leftw = text_width(leftstr, m_->style.font(), m_->font_scale);
-	int32_t rightw = text_width(rightstr, m_->style.font(), m_->font_scale);
+	int32_t leftw = text_width(leftstr, *m_->font_style, m_->font_scale);
+	int32_t rightw = text_width(rightstr, *m_->font_style, m_->font_scale);
 
 	int32_t caretpos = 0;
 

@@ -45,7 +45,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              "",
              UI::Align::kLeft,
              UI::MultilineTextarea::ScrollMode::kScrollLogForced),
-     editbox(this, 0, h - 20, w, 20, 2, style),
+     editbox(this, 0, h - 20, w, style),
      chat_message_counter(0) {
 	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));

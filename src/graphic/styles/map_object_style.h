@@ -27,8 +27,12 @@
 
 namespace UI {
 
+// TODO(GunChleoc): Having the building statistics window stuff in here like thus is ugly.
+// Come up with a more generic design some time.
 struct MapObjectStyleInfo {
-	explicit MapObjectStyleInfo(UI::FontStyleInfo* init_building_statistics,
+	explicit MapObjectStyleInfo(UI::FontStyleInfo* init_building_statistics_button_font,
+								UI::FontStyleInfo* init_building_statistics_details_font,
+								int init_editbox_margin,
 								UI::FontStyleInfo* init_census,
 								UI::FontStyleInfo* init_statistics,
 								const RGBColor& init_construction_color,
@@ -36,7 +40,9 @@ struct MapObjectStyleInfo {
 								const RGBColor& init_low_color,
 								const RGBColor& init_medium_color,
 								const RGBColor& init_high_color) :
-		building_statistics_font_(init_building_statistics),
+		building_statistics_button_font_(init_building_statistics_button_font),
+		building_statistics_details_font_(init_building_statistics_details_font),
+		editbox_margin_(init_editbox_margin),
 		census_font_(init_census),
 		statistics_font_(init_statistics),
 		construction_color_(init_construction_color),
@@ -45,9 +51,16 @@ struct MapObjectStyleInfo {
 		medium_color_(init_medium_color),
 		high_color_(init_high_color) {}
 
-	const UI::FontStyleInfo& building_statistics_font() const {
-		return *building_statistics_font_.get();
+	const UI::FontStyleInfo& building_statistics_button_font() const {
+		return *building_statistics_button_font_.get();
 	}
+	const UI::FontStyleInfo& building_statistics_details_font() const {
+		return *building_statistics_details_font_.get();
+	}
+	int editbox_margin() const {
+		return editbox_margin_;
+	}
+
 	const UI::FontStyleInfo& census_font() const {
 		return *census_font_.get();
 	}
@@ -71,7 +84,9 @@ struct MapObjectStyleInfo {
 	}
 
 private:
-	std::unique_ptr<const UI::FontStyleInfo> building_statistics_font_;
+	std::unique_ptr<const UI::FontStyleInfo> building_statistics_button_font_;
+	std::unique_ptr<const UI::FontStyleInfo> building_statistics_details_font_;
+	int editbox_margin_;
 	std::unique_ptr<const UI::FontStyleInfo> census_font_;
 	std::unique_ptr<const UI::FontStyleInfo> statistics_font_;
 	const RGBColor construction_color_;

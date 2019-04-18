@@ -34,8 +34,8 @@ enum class PanelStyle { kFsMenu, kWui };
 enum class TabPanelStyle { kFsMenu, kWuiLight, kWuiDark };
 
 struct PanelStyleInfo {
-	PanelStyleInfo(const Image* init_image, const RGBAColor& init_color)
-	   : image_(init_image), color_(init_color) {
+	PanelStyleInfo(const Image* init_image, const RGBAColor& init_color, int init_margin)
+	   : margin_(init_margin), image_(init_image), color_(init_color) {
 	}
 	PanelStyleInfo(const PanelStyleInfo& other)
 	   : image_(other.image()), color_(other.color()) {
@@ -48,7 +48,12 @@ struct PanelStyleInfo {
 		return image_;
 	}
 
+	int margin() const {
+		return margin_;
+	}
+
 private:
+	int margin_;
 	const Image* image_;
 	RGBAColor color_;
 };

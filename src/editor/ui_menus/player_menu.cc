@@ -160,7 +160,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		UI::Box* row = new UI::Box(&box_, 0, 0, UI::Box::Horizontal);
 
 		// Name
-		UI::EditBox* plr_name = new UI::EditBox(row, 0, 0, 0, 0, kMargin, UI::PanelStyle::kWui);
+		UI::EditBox* plr_name = new UI::EditBox(row, 0, 0, 0, UI::PanelStyle::kWui);
 		if (map_has_player) {
 			plr_name->set_text(map.get_scenario_player_name(p));
 		}
@@ -202,7 +202,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		   boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 
 		// Add the elements to the row
-		row->add(plr_name, UI::Box::Resizing::kExpandBoth);
+		row->add(plr_name, UI::Box::Resizing::kFillSpace);
 		row->add_space(kMargin);
 
 		row->add(plr_tribe);

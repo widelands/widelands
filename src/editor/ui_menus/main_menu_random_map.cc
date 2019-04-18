@@ -40,7 +40,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 
-// NOCOM bottom buttons unreachable
 namespace {
 // The map generator can't find starting positions for too many players
 constexpr uint8_t kMaxMapgenPlayers = 8;
@@ -195,8 +194,6 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
                       0,
                       0,
                       box_width_ - 2 * margin_ - map_number_label_.get_w(),
-                      0,
-                      2,
                       UI::PanelStyle::kWui),
      map_id_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
      map_id_label_(&map_id_box_, 0, 0, _("Map ID:")),
@@ -204,8 +201,6 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
                   0,
                   0,
                   box_width_ - 2 * margin_ - map_id_label_.get_w(),
-                  0,
-                  2,
                   UI::PanelStyle::kWui),
      // Buttons
      button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),

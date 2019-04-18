@@ -49,8 +49,6 @@ struct EditBox : public Panel {
 	        int32_t x,
 	        int32_t y,
 	        uint32_t w,
-	        uint32_t h,
-	        int margin_y,
 	        UI::PanelStyle style);
 	~EditBox() override;
 
@@ -62,7 +60,8 @@ struct EditBox : public Panel {
 	void set_text(const std::string&);
 	void set_max_length(int);
 	void set_font_scale(float scale);
-	void set_style(const UI::FontStyleInfo& style);
+	void set_font_style(const UI::FontStyleInfo& style);
+	void set_font_style_and_margin(const UI::FontStyleInfo& style, int margin);
 
 	void activate_history(bool activate) {
 		history_active_ = activate;
