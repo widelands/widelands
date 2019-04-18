@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,25 +17,25 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_CAMPAIGN_SELECT_H
-#define WL_UI_FSMENU_CAMPAIGN_SELECT_H
+#ifndef WL_UI_FSMENU_SCENARIO_SELECT_H
+#define WL_UI_FSMENU_SCENARIO_SELECT_H
 
-#include <vector>
-
+#include "ui_basic/box.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/campaigndetails.h"
-#include "ui_fsmenu/campaigns.h"
 #include "ui_fsmenu/load_map_or_game.h"
+#include "ui_fsmenu/scenariodetails.h"
 
 /*
- * Fullscreen Menu for selecting a campaign
+ * Fullscreen Menu for selecting a campaign or tutorial scenario
  */
-class FullscreenMenuCampaignSelect : public FullscreenMenuLoadMapOrGame {
+class FullscreenMenuScenarioSelect : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuCampaignSelect(Campaigns* campvis);
+	// If camp is not set, we'll be loading the tutorials
+	explicit FullscreenMenuScenarioSelect(CampaignData* camp = nullptr);
 
-	size_t get_campaign_index() const;
+	std::string get_map();
 
 protected:
 	void clicked_ok() override;
@@ -48,14 +48,18 @@ private:
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
 
-	bool compare_difficulty(uint32_t, uint32_t);
-
+	bool is_tutorial_;
 	UI::Table<uintptr_t const> table_;
 
-	UI::Textarea title_;
-	CampaignDetails campaign_details_;
+	UI::Box header_box_;
 
-	Campaigns* campaigns_;
+	UI::Textarea title_;
+	UI::MultilineTextarea subtitle_;
+	ScenarioDetails scenario_details_;
+
+	CampaignData* campaign_;
+
+	std::vector<ScenarioData> scenarios_data_;
 };
 
-#endif  // end of include guard: WL_UI_FSMENU_CAMPAIGN_SELECT_H
+#endif  // end of include guard: WL_UI_FSMENU_SCENARIO_SELECT_H

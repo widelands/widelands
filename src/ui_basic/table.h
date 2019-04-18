@@ -88,7 +88,7 @@ public:
 	void remove(uint32_t);
 	void remove_entry(Entry);
 
-	EntryRecord& add(void* const entry, const bool select_this = false);
+	EntryRecord& add(void* const entry, bool const select_this = false);
 
 	uint32_t size() const;
 	bool empty() const;
@@ -145,6 +145,7 @@ public:
 		void set_font_style(const UI::FontStyleInfo& style) {
 			font_style_ = &style;
 		}
+
 		const UI::FontStyleInfo* font_style() const {
 			return font_style_;
 		}
@@ -153,7 +154,6 @@ public:
 		friend class Table<void*>;
 		void* entry_;
 		const UI::FontStyleInfo* font_style_;
-
 		struct Data {
 			const Image* d_picture;
 			std::string d_string;
@@ -210,7 +210,7 @@ public:
 	void remove(uint32_t);
 	void remove_entry(const void* const entry);
 
-	EntryRecord& add(void* entry = nullptr, bool select = false);
+	EntryRecord& add(void* entry = nullptr, bool const select_this = false);
 
 	uint32_t size() const {
 		return entry_records_.size();
@@ -303,8 +303,9 @@ private:
 	int total_width_;
 	int32_t lineheight_;
 	const uint32_t headerheight_;
-	UI::PanelStyle style_;
-	UI::ButtonStyle button_style_;
+	// NOCOM go through the codebase to see where we can have const references
+	const UI::PanelStyle& style_;
+	const UI::ButtonStyle button_style_;
 	Scrollbar* scrollbar_;
 	// A disabled button that will fill the space above the scroll bar
 	UI::Button* scrollbar_filler_button_;

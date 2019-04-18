@@ -99,9 +99,11 @@ std::string as_heading_with_content(const std::string& header,
                                     bool noescape = false);
 
 /**
+ * Heading in menu info texts
  * 'is_first' omits the vertical gap before the line.
  */
 std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_first = false);
+/// Paragraph in menu info texts
 std::string as_content(const std::string& txt, UI::PanelStyle style);
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_LAYOUT_H
