@@ -270,7 +270,7 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
      soldier_request_(nullptr),
      capacity_(descr().get_max_number_of_soldiers()),
      build_heroes_(false),
-     result_(Failed) {
+     result_(ProgramResult::kFailed) {
 	set_soldier_control(&soldier_control_);
 
 	// Initialize this in the constructor so that loading code may
@@ -543,7 +543,7 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
 	bool leftover_soldiers_check = true;
 
 	if (current_upgrade_) {
-		if (result_ == Completed) {
+		if (result_ == ProgramResult::kCompleted) {
 			drop_unupgradable_soldiers(game);
 			leftover_soldiers_check = false;
 			current_upgrade_->lastsuccess = true;
