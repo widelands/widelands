@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -174,7 +174,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 				throw GameDataError("Tribe has no indicators for resource %s.", resource.c_str());
 			}
 			resource_indicators_[resource] = resis;
-		};
+		}
 
 		ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
 

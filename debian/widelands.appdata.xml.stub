@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2016 The Widelands Development Team <widelands-dev_at_lists.launchpad.net> -->
 <component type="desktop-application">
-  <id>org.widelands.widelands.desktop</id>
+  <id>org.widelands.widelands</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <icon type="stock">widelands</icon>
   SUMMARY_DESCRIPTION_HOOK
   <screenshots>
     <screenshot type="default">
-      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Current%20Developments/To%20the%20sea.png</image>
-      <caption>Fleet of Ships</caption>
+      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2020/Four_Tribes_2.jpeg</image>
+      <caption>Seafaring of the Four Tribes</caption>
     </screenshot>
     <screenshot>
       <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2019/Dolomites.png</image>
@@ -30,6 +30,10 @@
   </screenshots>
   <url type="homepage">https://wl.widelands.org/</url>
   <update_contact>widelands-dev_at_lists.launchpad.net</update_contact>
+  <provides>
+    <binary>widelands</binary>
+  </provides>
+  <launchable type="desktop-id">org.widelands.widelands.desktop</launchable>
   <releases>
     <release date="2016-11-11" version="Build 19"/>
     <release date="2014-02-22" version="Build 18"/>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -138,15 +138,17 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 		totalchance += 8 * amount;
 
 		// Add penalty for fields that are running out
-		if (amount == 0)
-			// we already know it's completely empty, so punish is less
-			totalchance += 1;
-		else if (amount <= 2)
-			totalchance += 6;
-		else if (amount <= 4)
-			totalchance += 4;
-		else if (amount <= 6)
-			totalchance += 2;
+		// Except for totally depleted fields or wrong ressource fields
+		// if we already know there is no ressource (left) we won't mine there
+		if (amount > 0) {
+			if (amount <= 2) {
+				totalchance += 6;
+			} else if (amount <= 4) {
+				totalchance += 4;
+			} else if (amount <= 6) {
+				totalchance += 2;
+			}
+		}
 	} while (mr.advance(*map));
 
 	if (totalres == 0) {
@@ -1058,34 +1060,34 @@ void Worker::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	if (upcast(PlayerImmovable, loc, location_.get(egbase))) {
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* Owner: (%p)\n", &loc->owner());
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 		molog("** Owner (plrnr): %i\n", loc->owner().player_number());
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* Economy: %p\n", loc->get_economy());
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 	}
 
 	PlayerImmovable* imm = location_.get(egbase);
 	molog("location: %u\n", imm ? imm->serial() : 0);
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("Economy: %p\n", economy_);
 	molog("transfer: %p\n", transfer_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 
 	if (upcast(WareInstance, ware, carried_ware_.get(egbase))) {
 		molog("* carried_ware->get_ware() (id): %i\n", ware->descr_index());
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* carried_ware->get_economy() (): %p\n", ware->get_economy());
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 	}
 
 	molog("current_exp: %i / %i\n", current_exp_, descr().get_needed_experience());
 
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("supply: %p\n", supply_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 }
 
 /**
@@ -2051,9 +2053,18 @@ void Worker::dropoff_update(Game& game, State&) {
 
 	WareInstance* ware = get_carried_ware(game);
 	BaseImmovable* const location = game.map()[get_position()].get_immovable();
+
+	// If the building just got destroyed, pop the task
+	PlayerImmovable* current_location = get_location(game);
+	if (current_location == nullptr) {
+		molog("%s: Unable to dropoff ware in building at (%d,%d) - there is no building there\n",
+		      descr().name().c_str(), get_position().x, get_position().y);
+		return pop_task(game);
+	}
+
 #ifndef NDEBUG
-	Building& ploc = dynamic_cast<Building&>(*get_location(game));
-	assert(&ploc == location || &ploc.base_flag() == location);
+	Building* ploc = dynamic_cast<Building*>(current_location);
+	assert(ploc == location || &ploc->base_flag() == location);
 #endif
 
 	// Deliver the ware
@@ -2129,6 +2140,14 @@ void Worker::start_task_fetchfromflag(Game& game) {
 }
 
 void Worker::fetchfromflag_update(Game& game, State& state) {
+	std::string signal = get_signal();
+	if (signal.size()) {
+		if (signal == "location") {
+			molog("[fetchfromflag]: Building disappeared, become fugitive\n");
+			return pop_task(game);
+		}
+	}
+
 	PlayerImmovable& employer = *get_location(game);
 	PlayerImmovable* const location =
 	   dynamic_cast<PlayerImmovable*>(game.map().get_immovable(get_position()));
@@ -2651,7 +2670,7 @@ void Worker::prepare_scouts_worklist(const Map& map, const Coords& hutpos) {
 	}
 }
 
-/** Check if militray sites have becom visible by now.
+/** Check if militray sites have become visible by now.
  *
  * After the pop in prepare_scouts_worklist,
  * the latest entry of scouts_worklist is the next MS to visit (if known)
@@ -2684,7 +2703,7 @@ void Worker::add_sites(Game& game,
                        const Player& player,
                        std::vector<ImmovableFound>& found_sites) {
 
-	// If there are many enemy sites, push a random walk request into queue evry third finding.
+	// If there are many enemy sites, push a random walk request into queue every third finding.
 	uint32_t haveabreak = 3;
 
 	for (const ImmovableFound& vu : found_sites) {
@@ -2987,6 +3006,7 @@ void Worker::draw_inner(const EditorGameBase& game,
  * Draw the worker, taking the carried ware into account.
  */
 void Worker::draw(const EditorGameBase& egbase,
+                  const TextToDraw&,
                   const Vector2f& field_on_dst,
                   const float scale,
                   RenderTarget* dst) const {

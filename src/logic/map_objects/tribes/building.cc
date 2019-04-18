@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -463,20 +463,20 @@ void Building::destroy(EditorGameBase& egbase) {
 	}
 }
 
-std::string Building::info_string(const MapObject::InfoStringType format) {
+std::string Building::info_string(const InfoStringFormat& format) {
 	std::string result;
 	switch (format) {
-	case MapObject::InfoStringType::kCensus:
+	case InfoStringFormat::kCensus:
 		if (upcast(ConstructionSite const, constructionsite, this)) {
 			result = constructionsite->building().descname();
 		} else {
 			result = descr().descname();
 		}
 		break;
-	case MapObject::InfoStringType::kStatistics:
+	case InfoStringFormat::kStatistics:
 		result = update_and_get_statistics_string();
 		break;
-	case MapObject::InfoStringType::kTooltip:
+	case InfoStringFormat::kTooltip:
 		if (upcast(ProductionSite const, productionsite, this)) {
 			result = productionsite->production_result();
 		}
@@ -606,6 +606,7 @@ bool Building::fetch_from_flag(Game&) {
 }
 
 void Building::draw(uint32_t gametime,
+                    const TextToDraw draw_text,
                     const Vector2f& point_on_dst,
                     const float scale,
                     RenderTarget* dst) {
@@ -613,6 +614,26 @@ void Building::draw(uint32_t gametime,
 	   point_on_dst, scale, anim_, gametime - animstart_, get_owner()->get_playercolor());
 
 	//  door animation?
+
+	//  overlay strings (draw when enabled)
+	draw_info(draw_text, point_on_dst, scale, dst);
+}
+
+/*
+===============
+Draw overlay help strings when enabled.
+===============
+*/
+void Building::draw_info(const TextToDraw draw_text,
+                         const Vector2f& point_on_dst,
+                         const float scale,
+                         RenderTarget* dst) {
+	const std::string statistics_string =
+	   ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone) ?
+	      info_string(InfoStringFormat::kStatistics) :
+	      "";
+	do_draw_info(draw_text, info_string(InfoStringFormat::kCensus), statistics_string, point_on_dst,
+	             scale, dst);
 }
 
 int32_t
@@ -660,9 +681,9 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
 
 	molog("position: (%i, %i)\n", position_.x, position_.y);
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("flag: %p\n", flag_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 	molog("* position: (%i, %i)\n", flag_->get_position().x, flag_->get_position().y);
 
 	molog("anim: %s\n", descr().get_animation_name(anim_).c_str());
@@ -671,9 +692,9 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 	molog("leave_time: %i\n", leave_time_);
 
 	molog("leave_queue.size(): %" PRIuS "\n", leave_queue_.size());
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("leave_allow.get(): %p\n", leave_allow_.get(egbase));
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 }
 
 void Building::add_worker(Worker& worker) {

@@ -7,7 +7,6 @@ wl_library(logic_exceptions
     base_i18n
 )
 
-
 wl_library(logic_widelands_geometry
   SRCS
     widelands_geometry.cc
@@ -70,6 +69,7 @@ wl_library(logic_filesystem_constants
     filesystem_constants.h
     filesystem_constants.cc
 )
+
 wl_library(logic_tribe_basic_info
   SRCS
     map_objects/tribes/tribe_basic_info.cc
@@ -80,6 +80,18 @@ wl_library(logic_tribe_basic_info
     scripting_lua_table
     scripting_lua_interface
 
+)
+
+wl_library(logic_generic_save_handler
+  SRCS
+    generic_save_handler.h
+    generic_save_handler.cc
+  DEPENDS
+    base_i18n
+    base_log
+    base_time_string
+    io_filesystem
+    logic_filesystem_constants
 )
 
 wl_library(logic
@@ -163,6 +175,7 @@ wl_library(logic
     map_objects/buildcost.h
     map_objects/checkstep.cc
     map_objects/checkstep.h
+    map_objects/draw_text.h
     map_objects/immovable.cc
     map_objects/immovable.h
     map_objects/immovable_program.h
@@ -256,6 +269,7 @@ wl_library(logic
     game_io
     graphic
     graphic_color
+    graphic_fonthandler
     graphic_image_io
     graphic_playercolor
     graphic_surface
@@ -270,6 +284,7 @@ wl_library(logic
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_generic_save_handler
     logic_tribe_basic_info
     logic_widelands_geometry
     map_io

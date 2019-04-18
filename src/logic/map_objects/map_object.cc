@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,6 +29,7 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -49,6 +50,7 @@ CmdDestroyMapObject::CmdDestroyMapObject(uint32_t const t, MapObject& o)
 }
 
 void CmdDestroyMapObject::execute(Game& game) {
+	game.syncstream().unsigned_8(SyncEntry::kDestroyObject);
 	game.syncstream().unsigned_32(obj_serial);
 
 	if (MapObject* obj = game.objects().get_object(obj_serial))
@@ -94,10 +96,15 @@ CmdAct::CmdAct(uint32_t const t, MapObject& o, int32_t const a)
 }
 
 void CmdAct::execute(Game& game) {
+	game.syncstream().unsigned_8(SyncEntry::kCmdAct);
 	game.syncstream().unsigned_32(obj_serial);
 
-	if (MapObject* const obj = game.objects().get_object(obj_serial))
+	if (MapObject* const obj = game.objects().get_object(obj_serial)) {
+		game.syncstream().unsigned_8(static_cast<uint8_t>(obj->descr().type()));
 		obj->act(game, arg);
+	} else {
+		game.syncstream().unsigned_8(static_cast<uint8_t>(MapObjectType::MAPOBJECT));
+	}
 	// the object must queue the next CMD_ACT itself if necessary
 }
 
@@ -468,6 +475,40 @@ void MapObject::cleanup(EditorGameBase& egbase) {
 	egbase.objects().remove(*this);
 }
 
+void MapObject::do_draw_info(const TextToDraw& draw_text,
+                             const std::string& census,
+                             const std::string& statictics,
+                             const Vector2f& field_on_dst,
+                             float scale,
+                             RenderTarget* dst) const {
+	if (draw_text == TextToDraw::kNone) {
+		return;
+	}
+
+	// Rendering text is expensive, so let's just do it for only a few sizes.
+	// The formula is a bit fancy to avoid too much text overlap.
+	scale = std::round(2.f * (scale > 1.f ? std::sqrt(scale) : std::pow(scale, 2.f))) / 2.f;
+	if (scale < 1.f) {
+		return;
+	}
+	const int font_size = scale * UI_FONT_SIZE_SMALL;
+
+	// We always render this so we can have a stable position for the statistics string.
+	std::shared_ptr<const UI::RenderedText> rendered_census =
+	   UI::g_fh->render(as_condensed(census, UI::Align::kCenter, font_size), 120 * scale);
+	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
+	if ((draw_text & TextToDraw::kCensus) != TextToDraw::kNone) {
+		rendered_census->draw(*dst, position, UI::Align::kCenter);
+	}
+
+	if ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone && !statictics.empty()) {
+		std::shared_ptr<const UI::RenderedText> rendered_statistics =
+		   UI::g_fh->render(as_condensed(statictics, UI::Align::kCenter, font_size));
+		position.y += rendered_census->height() + text_height(font_size) / 4;
+		rendered_statistics->draw(*dst, position, UI::Align::kCenter);
+	}
+}
+
 const Image* MapObject::representative_image() const {
 	return descr().representative_image(get_owner() ? &get_owner()->get_playercolor() : nullptr);
 }
@@ -537,10 +578,6 @@ bool MapObject::is_reserved_by_worker() const {
 
 void MapObject::set_reserved_by_worker(bool reserve) {
 	reserved_by_worker_ = reserve;
-}
-
-std::string MapObject::info_string(const InfoStringType) {
-	return "";
 }
 
 constexpr uint8_t kCurrentPacketVersionMapObject = 2;

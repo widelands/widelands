@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -380,7 +380,7 @@ void Request::start_transfer(Game& game, Supply& supp) {
 	assert(is_open());
 
 	::StreamWrite& ss = game.syncstream();
-	ss.unsigned_32(0x01decafa);  // appears as facade01 in sync stream
+	ss.unsigned_8(SyncEntry::kStartTransfer);
 	ss.unsigned_32(target().serial());
 	ss.unsigned_32(supp.get_position(game)->serial());
 

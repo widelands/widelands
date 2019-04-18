@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -253,6 +253,15 @@ bool Player::is_hostile(const Player& other) const {
 	return &other != this && (!team_number_ || team_number_ != other.team_number_);
 }
 
+bool Player::is_defeated() const {
+	for (const auto& economy : economies()) {
+		if (!economy.second->warehouses().empty()) {
+			return false;
+		}
+	}
+	return true;
+}
+
 void Player::AiPersistentState::initialize() {
 	colony_scan_area = kColonyScanStartArea;
 	trees_around_cutters = 0;
@@ -320,8 +329,8 @@ void Player::play_message_sound(const Message::Type& msgtype) {
 	}
 
 	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
-		MAYBE_PLAY(Message::Type::kEconomySiteOccupied, "military/site_occupied");
-		MAYBE_PLAY(Message::Type::kWarfareUnderAttack, "military/under_attack");
+		MAYBE_PLAY(Message::Type::kEconomySiteOccupied, "military/site_occupied")
+		MAYBE_PLAY(Message::Type::kWarfareUnderAttack, "military/under_attack")
 		Notifications::publish(NoteSound("message", 200, PRIO_ALWAYS_PLAY));
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -757,6 +757,7 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw(const EditorGameBase& egbase,
+               const TextToDraw&,
                const Vector2f& field_on_dst,
                const float scale,
                RenderTarget* dst) const {
@@ -893,6 +894,7 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 	// randomly generated movements.
 	if (upcast(Game, game, &egbase)) {
 		StreamWrite& ss = game->syncstream();
+		ss.unsigned_8(SyncEntry::kBobSetPosition);
 		ss.unsigned_32(serial());
 		ss.signed_16(coords.x);
 		ss.signed_16(coords.y);
@@ -901,9 +903,9 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 
 /// Give debug information.
 void Bob::log_general_info(const EditorGameBase& egbase) const {
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("Owner: %p\n", owner_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 	molog("Postition: (%i, %i)\n", position_.x, position_.y);
 	molog("ActID: %i\n", actid_);
 	molog("ActScheduled: %s\n", actscheduled_ ? "true" : "false");
@@ -927,9 +929,9 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 		molog("* ivar2: %i\n", stack_[i].ivar2);
 		molog("* ivar3: %i\n", stack_[i].ivar3);
 
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* object pointer: %p\n", stack_[i].objvar1.get(egbase));
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 		molog("* svar1: %s\n", stack_[i].svar1.c_str());
 
 		molog("* coords: (%i, %i)\n", stack_[i].coords.x, stack_[i].coords.y);
@@ -937,9 +939,9 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			molog(" %d", stack_[i].diranims.get_animation(dir));
 		}
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("\n* path: %p\n", stack_[i].path);
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 		if (stack_[i].path) {
 			const Path& path = *stack_[i].path;
 			molog("** Path length: %" PRIuS "\n", path.get_nsteps());
@@ -951,10 +953,10 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 				molog("*  (%i, %i)\n", coords.x, coords.y);
 			}
 		}
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* route: %p\n", stack_[i].route);
 		molog("* program: %p\n", stack_[i].route);
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 	}
 }
 

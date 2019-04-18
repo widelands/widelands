@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2015-2018
+# Juanjo, 2015-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-27 09:36+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-02-15 11:14+0000\n"
+"PO-Revision-Date: 2019-02-15 17:27+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -437,7 +437,7 @@ msgstr "Construïu una pedrera aquí, al costat d'aquelles roques. Recordeu com 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
-"space were you want the building to be, choose it from the window that "
+"space where you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
 msgstr "Assegureu-vos que s'estan mostrant els espais per construir. Llavors cliqueu en el lloc on construir l'edifici. Després, escolliu el tipus d'edifici a la finestra que apareix. Ja està! Potser és un bon moment per explicar tot això dels «Símbols d'espais per construir-hi» que hem activat abans."

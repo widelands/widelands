@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -434,9 +434,9 @@ void Economy::remove_request(Request& req) {
 	RequestList::iterator const it = std::find(requests_.begin(), requests_.end(), &req);
 
 	if (it == requests_.end()) {
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		log("WARNING: remove_request(%p) not in list\n", &req);
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 		return;
 	}
 
@@ -711,6 +711,7 @@ void Economy::process_requests(Game& game, RSPairStruct* supply_pairs) {
 		// alerts, so add info to the sync stream here.
 		{
 			::StreamWrite& ss = game.syncstream();
+			ss.unsigned_8(SyncEntry::kProcessRequests);
 			ss.unsigned_8(req.get_type());
 			ss.unsigned_8(req.get_index());
 			ss.unsigned_32(req.target().serial());
@@ -1051,7 +1052,7 @@ void Economy::handle_active_supplies(Game& game) {
 	// to avoid potential future problems caused by the supplies_ changing
 	// under us in some way.
 	::StreamWrite& ss = game.syncstream();
-	ss.unsigned_32(0x02decafa);  // appears as facade02 in sync stream
+	ss.unsigned_8(SyncEntry::kHandleActiveSupplies);
 	ss.unsigned_32(assignments.size());
 
 	for (const auto& temp_assignment : assignments) {

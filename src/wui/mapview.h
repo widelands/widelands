@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,6 +73,17 @@ public:
 		View(Vector2f init_viewpoint, float init_zoom) : viewpoint(init_viewpoint), zoom(init_zoom) {
 		}
 		View() : View(Vector2f::zero(), 1.0f) {
+		}
+
+		bool zoom_near(float other_zoom) const {
+			constexpr float epsilon = 1e-5;
+			return std::abs(zoom - other_zoom) < epsilon;
+		}
+
+		bool view_near(const View& other) const {
+			constexpr float epsilon = 1e-5;
+			return zoom_near(other.zoom) && std::abs(viewpoint.x - other.viewpoint.x) < epsilon &&
+			       std::abs(viewpoint.y - other.viewpoint.y) < epsilon;
 		}
 
 		// Mappixel of top-left pixel of this MapView.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -111,6 +111,11 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                             kButtonHeight,
                             "",
                             UI::Align::kRight),
+     current_building_type_(INVALID_INDEX),
+     last_building_index_(0),
+     last_building_type_(INVALID_INDEX),
+     lastupdate_(0),
+     was_minimized_(false),
      low_production_(33),
      has_selection_(false),
      nr_building_types_(parent.egbase().tribes().nrbuildings()) {

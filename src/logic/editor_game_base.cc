@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -660,7 +660,6 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 	assert(0 < player_area.player_number);
 	assert(player_area.player_number <= map().get_nrplayers());
 	assert(preferred_player <= map().get_nrplayers());
-	assert(preferred_player != player_area.player_number);
 	assert(!conquer || !preferred_player);
 	Player* conquering_player = get_player(player_area.player_number);
 	MapRegion<Area<FCoords>> mr(map(), player_area);

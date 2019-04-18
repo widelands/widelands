@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -223,7 +223,7 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 				     player.is_hostile(*productionsite->get_owner())))
 					return set_tooltip("");
 			}
-			set_tooltip(productionsite->info_string(Widelands::MapObject::InfoStringType::kTooltip));
+			set_tooltip(productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
 			return;
 		}
 	set_tooltip("");

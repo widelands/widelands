@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -383,8 +383,9 @@ void LoadOrSaveGame::fill_table() {
 		SavegameData gamedata;
 
 		std::string savename = gamefilename;
-		if (filetype_ == FileType::kReplay)
+		if (filetype_ == FileType::kReplay) {
 			savename += kSavegameExtension;
+		}
 
 		if (!g_fs->file_exists(savename.c_str())) {
 			continue;
@@ -398,7 +399,8 @@ void LoadOrSaveGame::fill_table() {
 
 			gamedata.gametype = gpdp.get_gametype();
 
-			if (filetype_ != FileType::kReplay) {
+			// Skip singleplayer games in multiplayer mode and vice versa
+			if (filetype_ != FileType::kReplay && filetype_ != FileType::kShowAll) {
 				if (filetype_ == FileType::kGameMultiPlayer) {
 					if (gamedata.gametype == GameController::GameType::kSingleplayer) {
 						continue;

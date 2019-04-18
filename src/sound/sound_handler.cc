@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2018 by the Widelands Development Team
+ * Copyright (C) 2005-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -112,7 +112,7 @@ void SoundHandler::init() {
 		nosound_ = true;
 	}
 
-	SDL_MIXER_VERSION(&sdl_version);
+	SDL_MIXER_VERSION(&sdl_version)
 	log("SDL_mixer version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
 	    static_cast<unsigned int>(sdl_version.minor), static_cast<unsigned int>(sdl_version.patch));
 

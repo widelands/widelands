@@ -20,9 +20,14 @@ local wc_desc = _(
 [[your territory than any other player. The game will end after 4 hours of ]] ..
 [[playing. The one with the most trees at that point will win the game.]])
 local wc_trees_owned = _"Trees owned"
+
 return {
    name = wc_name,
    description = wc_desc,
+   init = function()
+      -- Calculate valuable fields
+      wl.Game().map:count_terrestrial_fields()
+   end,
    func = function()
    local plrs = wl.Game().players
    local game = wl.Game()
@@ -33,63 +38,21 @@ return {
    -- set the objective with the game type for all players
    broadcast_objective("win_condition", wc_descname, wc_desc)
 
-   -- Get all valueable fields of the map
-   local fields = {}
-   local map = wl.Game().map
-   for x=0,map.width-1 do
-      for y=0,map.height-1 do
-         local f = map:get_field(x,y)
-         if f then
-            -- add this field to the list as long as it has not movecaps swim
-            if not f:has_caps("swimmable") then
-               fields[#fields+1] = f
-            end
-         end
-      end
-   end
-
    -- The function to calculate the current points.
    local _last_time_calculated = -100000
-   local _plrpoints = {}
+   local playerpoints = {}
    local function _calc_points()
-      local game = wl.Game()
 
       if _last_time_calculated > game.time - 5000 then
-         return _plrpoints
+         return
       end
 
-      -- clear out the table. We count afresh.
-      for k,v in pairs(_plrpoints) do
-         _plrpoints[k] = 0
-      end
-
-      -- Insert all players who are still in the game.
-      for idx,plr in ipairs(plrs) do
-         _plrpoints[plr.number] = 0
-      end
-
-      for idf,f in ipairs(fields) do
-         -- check if field is owned by a player
-         local owner = f.owner
-         if owner and not owner.defeated then
-            owner = owner.number
-            -- check if field has an immovable
-            local imm = f.immovable
-            if imm then
-               -- check if immovable is a tree
-               if imm:has_attribute("tree") then
-                  _plrpoints[owner] = _plrpoints[owner] + 1
-               end
-            end
-         end
-      end
-
+      playerpoints = count_owned_valuable_fields_for_all_players(plrs, "tree")
       _last_time_calculated = game.time
-      return _plrpoints
    end
 
    local function _send_state(remaining_time, plrs, show_popup)
-      local playerpoints = _calc_points()
+      _calc_points()
       local msg = format_remaining_time(remaining_time) .. vspace(8) .. game_status.body
 
       for idx,plr in ipairs(plrs) do
@@ -103,7 +66,7 @@ return {
    end
 
    local function _game_over(plrs)
-      local playerpoints = _calc_points()
+      _calc_points()
       local points = {}
       for idx,plr in ipairs(plrs) do
          points[#points + 1] = { plr, playerpoints[plr.number] }
@@ -142,8 +105,8 @@ return {
       name = wc_trees_owned,
       pic = "images/wui/stats/genstats_trees.png",
       calculator = function(p)
-         local pts = _calc_points(p)
-         return pts[p.number]
+         _calc_points(p)
+         return playerpoints[p.number] or 0
       end,
    }
 

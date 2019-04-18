@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2018 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -208,7 +208,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_DELETE:
 			if (m_->caret < m_->text.size()) {
 				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
-				};
+				}
 				// Now fallthrough to handle it like Backspace
 			} else {
 				return true;
@@ -232,7 +232,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_LEFT:
 			if (m_->caret > 0) {
 				while ((m_->text[--m_->caret] & 0xc0) == 0x80) {
-				};
+				}
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 					for (uint32_t new_caret = m_->caret;; m_->caret = new_caret)
 						if (0 == new_caret || isspace(m_->text[--new_caret]))
@@ -250,7 +250,8 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RIGHT:
 			if (m_->caret < m_->text.size()) {
 				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
-				};
+					// We're just advancing the caret
+				}
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 					for (uint32_t new_caret = m_->caret;; ++new_caret)
 						if (new_caret == m_->text.size() || isspace(m_->text[new_caret - 1])) {

@@ -27,18 +27,19 @@ local wc_desc = _ (
    "after 4 hours, whichever comes first."
 )
 
+local fields = 0
 
 return {
    name = wc_name,
    description = wc_desc,
+   init = function()
+      fields = wl.Game().map:count_conquerable_fields()
+   end,
    func = function()
       local plrs = wl.Game().players
 
       -- set the objective with the game type for all players
       broadcast_objective("win_condition", wc_descname, wc_desc)
-
-      -- Get all valueable fields of the map
-      local fields = get_buildable_fields()
 
       -- variables to track the maximum 4 hours of gametime
       local remaining_max_time = 4 * 60 * 60 -- 4 hours

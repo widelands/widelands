@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -187,9 +187,9 @@ WareInstance::WareInstance(DescriptionIndex const i, const WareDescr* const ware
 
 WareInstance::~WareInstance() {
 	if (supply_) {
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("Ware %u still has supply %p\n", descr_index_, supply_);
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 		delete supply_;
 	}
 }

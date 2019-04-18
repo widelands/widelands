@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -207,7 +207,7 @@ void FullscreenMenuNetSetupLAN::update_game_info(
 		/** TRANSLATORS: The state of a LAN game can be open, closed or unknown */
 		er.set_string(2, pgettext("game_state", "Unknown"));
 		break;
-	};
+	}
 }
 
 void FullscreenMenuNetSetupLAN::game_opened(const NetOpenGame* game) {

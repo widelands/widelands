@@ -147,6 +147,38 @@ end
 
 
 -- RST
+-- .. function:: count_owned_valuable_fields_for_all_players(players[, attribute])
+--
+--    Counts all owned fields for each player.
+--
+--    :arg players: Table of all players
+--    :arg attribute: If this is set, only count fields that have an immovable with this attribute
+--
+--    :returns: a table with ``playernumber = count_of_owned_fields``  entries
+--
+function count_owned_valuable_fields_for_all_players(players, attribute)
+   attribute = attribute or ""
+
+   local owned_fields = {}
+
+   -- Get number of currently owned valuable fields per player.
+   -- This table can contain defeated players.
+   local all_plrpoints = wl.Game().map:count_owned_valuable_fields(attribute)
+
+   -- Insert points for all players who are still in the game, and 0 points for defeated players.
+   for idx,plr in ipairs(players) do
+      if (plr.defeated) then
+         owned_fields[plr.number] = 0
+      else
+         owned_fields[plr.number] = all_plrpoints[plr.number]
+      end
+   end
+   return owned_fields
+end
+
+
+
+-- RST
 -- .. function:: rank_players(all_player_points, plrs)
 --
 --    Rank the players and teams according to the highest points
@@ -200,7 +232,7 @@ function rank_players(all_player_points, plrs)
             team = 0,
             points = player_points,
             players = {
-               { number = player.number, points = player_points }
+               { number = player.number, name = player.name, points = player_points }
             }
          }
          table.insert(ranked_players_and_teams, team_table)
@@ -222,7 +254,7 @@ function rank_players(all_player_points, plrs)
       }
       for idx, player in ipairs(plrs) do
          if player.team == team then
-            table.insert(team_table.players, { number = player.number, points = all_player_points[player.number] })
+            table.insert(team_table.players, { number = player.number, name = player.name, points = all_player_points[player.number] })
          end
       end
       table.insert(ranked_players_and_teams, team_table)
@@ -258,7 +290,9 @@ function format_remaining_time(remaining_time)
 
    if ((h > 0) and (m > 0)) then
       -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-      time = (ngettext("%1% hour and %2% minutes", "%1% hours and %2% minutes", h, m)):bformat(h, m)
+      time = (ngettext("%i minute", "%i minutes", h, m)):bformat(m)
+      -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+      time = (ngettext("%1% hour and %2%", "%1% hours and %2%", h, m)):bformat(h, time)
    elseif m > 0 then
       -- TRANSLATORS: Context: 'The game will end in 30 minutes.'
       time = (ngettext("%i minute", "%i minutes", m)):format(m)

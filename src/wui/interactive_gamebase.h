@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -102,13 +102,6 @@ public:
 	void start() override;
 
 protected:
-	/// Draws census and statistics on screen for the listed mapobjects
-	void draw_mapobject_infotexts(
-	   RenderTarget* dst,
-	   float scale,
-	   const std::vector<std::pair<Vector2i, Widelands::MapObject*>>& mapobjects_to_draw_text_for,
-	   const TextToDraw text_to_draw,
-	   const Widelands::Player* plr) const;
 	void draw_overlay(RenderTarget&) override;
 
 	GameMainMenuWindows main_windows_;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -454,6 +454,7 @@ void Immovable::act(Game& game, uint32_t const data) {
 }
 
 void Immovable::draw(uint32_t gametime,
+                     const TextToDraw draw_text,
                      const Vector2f& point_on_dst,
                      float scale,
                      RenderTarget* dst) {
@@ -462,12 +463,16 @@ void Immovable::draw(uint32_t gametime,
 	}
 	if (!anim_construction_total_) {
 		dst->blit_animation(point_on_dst, scale, anim_, gametime - animstart_);
+		if (former_building_descr_) {
+			do_draw_info(draw_text, former_building_descr_->descname(), "", point_on_dst, scale, dst);
+		}
 	} else {
-		draw_construction(gametime, point_on_dst, scale, dst);
+		draw_construction(gametime, draw_text, point_on_dst, scale, dst);
 	}
 }
 
 void Immovable::draw_construction(const uint32_t gametime,
+                                  const TextToDraw draw_text,
                                   const Vector2f& point_on_dst,
                                   const float scale,
                                   RenderTarget* dst) {
@@ -506,6 +511,13 @@ void Immovable::draw_construction(const uint32_t gametime,
 
 	dst->blit_animation(
 	   point_on_dst, scale, anim_, current_frame * frametime, player_color, percent);
+
+	// Additionally, if statistics are enabled, draw a progression string
+	do_draw_info(draw_text, descr().descname(),
+	             (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
+	              (boost::format(_("%i%% built")) % (100 * done / total)).str())
+	                .str(),
+	             point_on_dst, scale, dst);
 }
 
 /**
@@ -515,36 +527,6 @@ void Immovable::draw_construction(const uint32_t gametime,
  */
 void Immovable::set_action_data(ImmovableActionData* data) {
 	action_data_.reset(data);
-}
-
-std::string Immovable::info_string(const MapObject::InfoStringType format) {
-	std::string result;
-	switch (format) {
-	case MapObject::InfoStringType::kCensus:
-		if (!anim_construction_total_) {
-			if (former_building_descr_) {
-				result = former_building_descr_->descname();
-			}
-		} else {
-			result = descr().descname();
-		}
-		break;
-	case MapObject::InfoStringType::kStatistics:
-		if (anim_construction_total_) {
-			result = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
-			          (boost::format(_("%i%% built")) %
-			           (100 * anim_construction_done_ / anim_construction_total_))
-			             .str())
-			            .str();
-		} else {
-			result = "";
-		}
-		break;
-	case MapObject::InfoStringType::kTooltip:
-		result = "";
-		break;
-	}
-	return result;
 }
 
 /*
@@ -1355,14 +1337,14 @@ void PlayerImmovable::receive_worker(Game&, Worker& worker) {
 void PlayerImmovable::log_general_info(const EditorGameBase& egbase) const {
 	BaseImmovable::log_general_info(egbase);
 
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("this: %p\n", this);
 	molog("owner_: %p\n", owner_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 	molog("player_number: %i\n", owner_->player_number());
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("economy_: %p\n", economy_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 }
 
 constexpr uint8_t kCurrentPacketVersionPlayerImmovable = 1;

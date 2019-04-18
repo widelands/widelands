@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -101,17 +101,17 @@ SDL_GLContext initialize(
 		glbinding::setAfterCallback([](const glbinding::FunctionCall& call) {
 			log("%s(", call.function->name());
 			for (size_t i = 0; i < call.parameters.size(); ++i) {
-				FORMAT_WARNINGS_OFF;
+				FORMAT_WARNINGS_OFF
 				log("%p", call.parameters[i].get());
-				FORMAT_WARNINGS_ON;
+				FORMAT_WARNINGS_ON
 				if (i < call.parameters.size() - 1)
 					log(", ");
 			}
 			log(")");
 			if (call.returnValue) {
-				FORMAT_WARNINGS_OFF;
+				FORMAT_WARNINGS_OFF
 				log(" -> %p", call.returnValue.get());
-				FORMAT_WARNINGS_ON;
+				FORMAT_WARNINGS_ON
 			}
 			const auto error = glGetError();
 			log(" [%s]\n", gl_error_to_string(error));
@@ -151,26 +151,26 @@ SDL_GLContext initialize(
 
 	LOG_SDL_GL_ATTRIBUTE(SDL_GL_RED_SIZE)
 	LOG_SDL_GL_ATTRIBUTE(SDL_GL_GREEN_SIZE)
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_BLUE_SIZE);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_ALPHA_SIZE);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_BUFFER_SIZE);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_DOUBLEBUFFER);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_DEPTH_SIZE);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_STENCIL_SIZE);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_ACCUM_RED_SIZE);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_ACCUM_GREEN_SIZE);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_ACCUM_BLUE_SIZE);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_ACCUM_ALPHA_SIZE);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_STEREO);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_MULTISAMPLEBUFFERS);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_MULTISAMPLESAMPLES);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_ACCELERATED_VISUAL);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_CONTEXT_MAJOR_VERSION);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_CONTEXT_MINOR_VERSION);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_CONTEXT_FLAGS);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_CONTEXT_PROFILE_MASK);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_SHARE_WITH_CURRENT_CONTEXT);
-	LOG_SDL_GL_ATTRIBUTE(SDL_GL_FRAMEBUFFER_SRGB_CAPABLE);
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_BLUE_SIZE)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_ALPHA_SIZE)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_BUFFER_SIZE)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_DOUBLEBUFFER)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_DEPTH_SIZE)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_STENCIL_SIZE)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_ACCUM_RED_SIZE)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_ACCUM_GREEN_SIZE)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_ACCUM_BLUE_SIZE)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_ACCUM_ALPHA_SIZE)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_STEREO)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_MULTISAMPLEBUFFERS)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_MULTISAMPLESAMPLES)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_ACCELERATED_VISUAL)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_CONTEXT_MAJOR_VERSION)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_CONTEXT_MINOR_VERSION)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_CONTEXT_FLAGS)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_CONTEXT_PROFILE_MASK)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_SHARE_WITH_CURRENT_CONTEXT)
+	LOG_SDL_GL_ATTRIBUTE(SDL_GL_FRAMEBUFFER_SRGB_CAPABLE)
 #undef LOG_SDL_GL_ATTRIBUTE
 
 	GLboolean glBool;
@@ -200,7 +200,7 @@ SDL_GLContext initialize(
 			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error",
 			                         "Widelands won’t work because your graphics driver is too old.\n"
 			                         "The shading language needs to be version 1.20 or newer.",
-			                         NULL);
+			                         nullptr);
 			exit(1);
 		}
 	} else {
@@ -215,7 +215,7 @@ SDL_GLContext initialize(
 				   SDL_MESSAGEBOX_ERROR, "OpenGL Error",
 				   "Widelands won’t work because your graphics driver is too old.\n"
 				   "The shading language needs to be version 1.20 or newer.",
-				   NULL);
+				   nullptr);
 				exit(1);
 			}
 		} else {
@@ -227,7 +227,7 @@ SDL_GLContext initialize(
 			   "Widelands won't work because we were unable to detect the shading "
 			   "language version.\nThere is an unknown problem with reading the "
 			   "information from the graphics driver.",
-			   NULL);
+			   nullptr);
 			exit(1);
 		}
 	}

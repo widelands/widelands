@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -666,7 +666,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 
 				productionsite.stack_[i].program = productionsite.descr().get_program(program_name);
 				productionsite.stack_[i].ip = fr.signed_32();
-				productionsite.stack_[i].phase = fr.signed_32();
+				productionsite.stack_[i].phase = static_cast<ProgramResult>(fr.signed_32());
 				productionsite.stack_[i].flags = fr.unsigned_32();
 
 				uint32_t serial = fr.unsigned_32();
@@ -1135,7 +1135,8 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	for (uint16_t i = 0; i < program_size; ++i) {
 		fw.string(productionsite.stack_[i].program->name());
 		fw.signed_32(productionsite.stack_[i].ip);
-		fw.signed_32(productionsite.stack_[i].phase);
+		// TODO(GunChleoc): If we ever change this packet, we can have an uint8 here.
+		fw.signed_32(static_cast<int>(productionsite.stack_[i].phase));
 		fw.unsigned_32(productionsite.stack_[i].flags);
 		fw.unsigned_32(mos.get_object_file_index_or_zero(productionsite.stack_[i].objvar.get(game)));
 		write_coords_32(&fw, productionsite.stack_[i].coord);
