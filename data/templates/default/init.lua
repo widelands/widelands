@@ -534,7 +534,7 @@ return {
       },
       -- Displayed in the loading screens
       fsmenu_gametip = {
-         color = { 0, 0, 0 },
+         color = { 33, 33, 27 },
          face = "serif",
          size = 16,
       },

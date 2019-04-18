@@ -125,8 +125,7 @@ std::string as_editor_richtext_paragraph(const std::string& text, const UI::Font
 
 
 std::string as_game_tip(const std::string& txt) {
-	static boost::format f("<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>"
-	                       "<p align=center>%s</p></rt>");
+	static boost::format f("<rt><p align=center>%s</p></rt>");
 	f % g_gr->styles().font_style(UI::FontStyle::kFsMenuGameTip).as_font_tag(txt);
 	return f.str();
 }

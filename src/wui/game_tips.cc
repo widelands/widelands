@@ -33,7 +33,7 @@
 #define BG_IMAGE "images/loadscreens/tips_bg.png"
 
 constexpr int kTextPadding = 48;
-// NOCOM style looks bad
+
 GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>& names)
    : lastUpdated_(0),
      updateAfter_(0),
