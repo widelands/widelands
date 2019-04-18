@@ -218,7 +218,7 @@ void FullscreenMenuScenarioSelect::fill_table() {
 		te.set_picture(
 		   1, g_gr->images().get("images/ui_basic/ls_wlmap.png"), scenario_data->descname);
 		if (!scenario_data->playable) {
-			// NOCOM te.set_color(UI_FONT_CLR_DISABLED);
+			te.set_font_style(g_gr->styles().table_style(UI::PanelStyle::kFsMenu).disabled());
 		}
 	}
 

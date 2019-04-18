@@ -128,8 +128,7 @@ void FullscreenMenuCampaignSelect::fill_table() {
 		tableEntry.set_string(1, campaign_data.tribename);
 		tableEntry.set_string(2, campaign_data.descname);
 		if (!campaign_data.visible) {
-			// NOCOM
-			// tableEntry.set_color(UI_FONT_CLR_DISABLED);
+			tableEntry.set_font_style(g_gr->styles().table_style(UI::PanelStyle::kFsMenu).disabled());
 		}
 	}
 
