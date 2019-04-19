@@ -164,9 +164,8 @@ std::string as_message(const std::string& heading, const std::string& body) {
 std::shared_ptr<const UI::RenderedText> autofit_text(const std::string& text,
 																	  const UI::FontStyleInfo& font_info,
 																	  int width) {
-	const std::string text_to_render = richtext_escape(text);
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh->render(as_richtext_paragraph(text_to_render, font_info));
+	   UI::g_fh->render(as_richtext_paragraph(text, font_info));
 
 	// Autoshrink if it doesn't fit
 	if (width > 0 && rendered_text->width() > width) {
@@ -175,7 +174,7 @@ std::shared_ptr<const UI::RenderedText> autofit_text(const std::string& text,
 		UI::FontStyleInfo temp_font_info(font_info);
 		temp_font_info.make_condensed();
 		while (rendered_text->width() > width && temp_font_info.size() >= minimum_size) {
-			rendered_text = UI::g_fh->render(as_richtext_paragraph(text_to_render, temp_font_info));
+			rendered_text = UI::g_fh->render(as_richtext_paragraph(text, temp_font_info));
 			temp_font_info.set_size(temp_font_info.size() - 1);
 		}
 	}

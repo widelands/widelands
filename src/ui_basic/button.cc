@@ -218,7 +218,7 @@ void Button::draw(RenderTarget& dst) {
 		//  Otherwise draw title string centered
 		std::shared_ptr<const UI::RenderedText> rendered_text =
 				autofit_text(
-					title_,
+					richtext_escape(title_),
 					style.font(),
 					get_inner_w() - 2 * kButtonImageMargin);
 
