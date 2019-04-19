@@ -60,7 +60,6 @@ Textarea::Textarea(Panel* parent, const std::string& text, Align align, const Fo
    : Textarea(parent, 0, 0, 0, 0, text, align, style, LayoutMode::Layouted) {
 }
 
-// NOCOM we have to set this because it'S not available in the constuctors. Not good.
 void Textarea::set_style(const FontStyleInfo& style) {
 	style_ = &style;
 	update();

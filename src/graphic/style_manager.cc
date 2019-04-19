@@ -350,9 +350,10 @@ void StyleManager::set_statistics_plot_style(const LuaTable& table) {
 void StyleManager::set_mapobject_style(const LuaTable& table) {
 	std::unique_ptr<LuaTable> building_statistics_table = table.get_table("building_statistics");
 	std::unique_ptr<LuaTable> colors_table = table.get_table("colors");
+	std::unique_ptr<LuaTable> fonts_table = building_statistics_table->get_table("fonts");
 	map_object_style_.reset(new UI::MapObjectStyleInfo(
-								read_font_style(*building_statistics_table->get_table("fonts"), "button_font"),
-								read_font_style(*building_statistics_table->get_table("fonts"), "details_font"),
+								read_font_style(*fonts_table, "button_font"),
+								read_font_style(*fonts_table, "details_font"),
 								building_statistics_table->get_int("editbox_margin"),
 								read_font_style(table, "census_font"),
 								read_font_style(table, "statistics_font"),
