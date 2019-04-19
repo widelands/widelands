@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2017
+# GunChleoc, 2015-2017,2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2015
 # GunChleoc, 2013-2015
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-11 05:49+0000\n"
-"PO-Revision-Date: 2019-04-11 11:47+0000\n"
+"POT-Creation-Date: 2019-04-18 12:41+0000\n"
+"PO-Revision-Date: 2019-04-19 09:54+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -445,7 +445,7 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr "Tha Boldrad ceart! Chan eil biadh gu leòr ann airson geamhraidh fhada fhuair. Bu chòir dhuinn tòiseachadh air tobar, bothan-iasgair is bothan-sealgair a thogail. Agus ma tha rùm gu leòr againn, bu chòir dhuinn tuathanas is taigh-fuine a thogail cuideachd! Tha coltas gu bheil aon dhe na tuathanaich againn glè sheòlta – chaidh leis barr a thogail san talamh fhuar seo mar-thà."
+msgstr "Tha Boldrad ceart! Chan eil biadh gu leòr ann airson geamhraidh fhada fhuair. Bu chòir dhuinn tòiseachadh air tobar, bothan-iasgair is bothan-sealgair a thogail. Agus ma tha rùm gu leòr againn, bu chòir dhuinn tuathanas is taigh-fuine a thogail cuideachd! Tha coltas gu bheil aon dhe na tuathanaich againn glè sheòlta – chaidh leis bàrr a thogail san talamh fhuar seo mar-thà."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:250
 msgid "Food Economy Completed"
