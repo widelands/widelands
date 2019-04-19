@@ -1,6 +1,6 @@
 function building_helptext_lore()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext("barbarians_building", "‘This stronghold made from hard wood and stones will be a hard nut to crack for them.’")
+   return pgettext("barbarians_building", "‘This stronghold made from blackwood and stones will be a hard nut to crack for them.’")
 end
 
 function building_helptext_lore_author()
