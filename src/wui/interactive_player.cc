@@ -68,7 +68,7 @@ float adjusted_field_brightness(const Widelands::FCoords& fcoords,
                                 const Widelands::Player::Field& pf) {
 	if (pf.vision == 0) {
 		return 0.;
-	};
+	}
 
 	uint32_t brightness = 144 + fcoords.field->get_brightness();
 	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);

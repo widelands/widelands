@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-29 07:26+0000\n"
-"PO-Revision-Date: 2019-04-02 12:26+0000\n"
+"POT-Creation-Date: 2019-04-09 07:53+0000\n"
+"PO-Revision-Date: 2019-04-10 18:25+0000\n"
 "Last-Translator: Tomasz Pudło <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -86,7 +86,7 @@ msgstr "Zwykle zaczynasz grę z jedną kwaterą główną. To ten duży budynek 
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show building spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Znajdźmy teraz dobre miejsce na chatę drwala. Przyda nam się do tego celu opcja \"Pokazuj miejsca na budowę\". Można ją włączyć na dwa sposoby:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
@@ -611,7 +611,7 @@ msgstr ""
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr ""
+msgstr "Jeśli przytrzymasz Ctrl lub Shift + Ctrl podczas kończenia drogi, flagi zostaną umieszczone automatycznie."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Now please rebuild the road between your quarry and your headquarters."
