@@ -127,9 +127,7 @@ void FullscreenMenuCampaignSelect::fill_table() {
 		tableEntry.set_picture(0, campaign_data.difficulty_image);
 		tableEntry.set_string(1, campaign_data.tribename);
 		tableEntry.set_string(2, campaign_data.descname);
-		if (!campaign_data.visible) {
-			tableEntry.set_font_style(g_gr->styles().table_style(UI::PanelStyle::kFsMenu).disabled());
-		}
+		tableEntry.set_disabled(!campaign_data.visible);
 	}
 
 	if (table_.size()) {

@@ -150,6 +150,13 @@ public:
 			return font_style_;
 		}
 
+		bool is_disabled() const {
+			return disabled_;
+		}
+		void set_disabled(bool disable) {
+			disabled_ = disable;
+		}
+
 	private:
 		friend class Table<void*>;
 		void* entry_;
@@ -159,6 +166,7 @@ public:
 			std::string d_string;
 		};
 		std::vector<Data> data_;
+		bool disabled_;
 	};
 
 	Table(Panel* parent,

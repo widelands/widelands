@@ -301,7 +301,12 @@ void Table<void*>::draw(RenderTarget& dst) {
 				continue;
 			}
 
-			const UI::FontStyleInfo& font_style = er.font_style() != nullptr ? *er.font_style() : g_gr->styles().table_style(style_).enabled();
+			const UI::FontStyleInfo& font_style =
+					er.font_style() != nullptr ?
+										   *er.font_style() :
+										   er.is_disabled() ?
+											   g_gr->styles().table_style(style_).disabled() :
+											   g_gr->styles().table_style(style_).enabled();
 			std::shared_ptr<const UI::RenderedText> rendered_text =
 			   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
 
@@ -720,7 +725,7 @@ bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t 
 	return ea.get_string(column) < eb.get_string(column);
 }
 
-Table<void*>::EntryRecord::EntryRecord(void* const e) : entry_(e), font_style_(nullptr) {
+Table<void*>::EntryRecord::EntryRecord(void* const e) : entry_(e), font_style_(nullptr), disabled_(false) {
 }
 
 void Table<void*>::EntryRecord::set_picture(uint8_t const col,

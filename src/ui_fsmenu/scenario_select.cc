@@ -219,9 +219,7 @@ void FullscreenMenuScenarioSelect::fill_table() {
 		te.set_string(0, (boost::format("%d") % (i + 1)).str());
 		te.set_picture(
 		   1, g_gr->images().get("images/ui_basic/ls_wlmap.png"), scenario_data->descname);
-		if (!scenario_data->playable) {
-			te.set_font_style(g_gr->styles().table_style(UI::PanelStyle::kFsMenu).disabled());
-		}
+		te.set_disabled(!scenario_data->playable);
 	}
 
 	if (!table_.empty()) {
