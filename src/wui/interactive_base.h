@@ -244,6 +244,7 @@ protected:
 	/// Returns true if there is a workarea preview being shown at the given coordinates
 	bool has_workarea_preview(const Widelands::Coords& coords) const;
 
+	/// Returns true if the current player is allowed to hear sounds from map objects on this field
 	virtual bool player_hears_field(const Widelands::Coords& coords) const = 0;
 
 private:

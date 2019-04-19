@@ -250,20 +250,6 @@ void SoundHandler::load_config() {
 	}
 }
 
-/**
- * Returns 'true' if the playing of sounds is disabled due to sound driver problems, or because disable_backend() was used.
- */
-bool SoundHandler::is_backend_disabled() {
-	return SoundHandler::backend_is_disabled_;
-}
-
-/**
- * Disables all sound.
- */
-void SoundHandler::disable_backend() {
-	SoundHandler::backend_is_disabled_ = true;
-}
-
 /** Register a sound effect. One sound effect can consist of several audio files
  * named EFFECT_XX.ogg, where XX is between 00 and 99.
  *
@@ -309,10 +295,7 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id,
 		return false;
 	}
 
-	switch (type) {
-	case SoundType::kAmbient:
-		break;
-	default:
+	if (type != SoundType::kAmbient) {
 		// We always play UI, chat and system sounds
 		return true;
 	}

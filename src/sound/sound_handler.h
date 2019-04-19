@@ -155,8 +155,21 @@ public:
 
 	void save_config();
 	void load_config();
-	static bool is_backend_disabled();
-	static void disable_backend();
+
+	/**
+	 * Returns 'true' if the playing of sounds is disabled due to sound driver problems, or because disable_backend() was used.
+	 */
+	inline static bool is_backend_disabled() {
+		return SoundHandler::backend_is_disabled_;
+	}
+
+	/**
+	 * Disables all sound.
+	 */
+	inline static void disable_backend() {
+		SoundHandler::backend_is_disabled_ = true;
+	}
+
 
 	// This is static so that we can load the tribes and world without instantiating the sound system
 	static FxId register_fx(SoundType type, const std::string& fx_path);
