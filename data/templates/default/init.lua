@@ -598,7 +598,13 @@ return {
       tooltip = {
          color = fs_font_color,
          face = fs_font_face,
-         size = fs_font_size,
+         size = 14,
+         bold = false,
+      },
+      tooltip_header = {
+         color = fs_font_color,
+         face = fs_font_face,
+         size = 16,
          bold = true,
       },
       warning = {

@@ -41,6 +41,7 @@ enum class FontStyle {
 	kFsMenuTitle,
 	kFsMenuTranslationInfo,
    kLabel,
+	kTooltipHeader,
    kTooltip,
    kWarning,
    kWuiGameSpeedAndCoordinates,

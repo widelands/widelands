@@ -205,6 +205,7 @@ void StyleManager::init() {
 	add_font_style(UI::FontStyle::kFsMenuTitle, *element_table, "fsmenu_title");
 	add_font_style(UI::FontStyle::kFsMenuTranslationInfo, *element_table, "fsmenu_translation_info");
 	add_font_style(UI::FontStyle::kLabel, *element_table, "label");
+	add_font_style(UI::FontStyle::kTooltipHeader, *element_table, "tooltip_header");
 	add_font_style(UI::FontStyle::kTooltip, *element_table, "tooltip");
 	add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
 	add_font_style(UI::FontStyle::kWuiGameSpeedAndCoordinates, *element_table, "wui_game_speed_and_coordinates");

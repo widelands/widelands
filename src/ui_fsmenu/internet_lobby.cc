@@ -134,16 +134,16 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	edit_servername_.changed.connect(
 	   boost::bind(&FullscreenMenuInternetLobby::change_servername, this));
 
-	// prepare the lists
-	// NOCOM make style
-	std::string t_tip =
-	   (boost::format("%s%s%s%s%s%s%s%s%s%s") %
-	    "<rt padding=2><p align=center spacing=3><font bold=yes underline=yes>" % _("User Status") %
-	    "</font></p>" % "<p valign=bottom><img src=images/wui/overlays/roadb_green.png> " %
-	    _("Administrator") % "<br><img src=images/wui/overlays/roadb_yellow.png> " %
-	    _("Registered") % "<br><img src=images/wui/overlays/roadb_red.png> " % _("Unregistered") %
-	    "</p></rt>")
-	      .str();
+	// Prepare the lists
+	const std::string t_tip =
+	   (boost::format("<rt padding=2><p align=center spacing=3>%s</p>"
+					  "<p valign=bottom><img src=images/wui/overlays/roadb_green.png> %s"
+					  "<br><img src=images/wui/overlays/roadb_yellow.png> %s"
+					  "<br><img src=images/wui/overlays/roadb_red.png> %s</p></rt>") %
+		g_gr->styles().font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("User Status")) %
+	    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Administrator")) %
+	    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Registered")) %
+		g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Unregistered"))).str();
 	clientsonline_list_.add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */
 	clientsonline_list_.add_column((lisw_ - 22) * 3 / 8, pgettext("player", "Name"));
