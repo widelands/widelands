@@ -57,7 +57,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                       kWindowWidth,
                       100,
                       _("Building Statistics")),
-	  style_(g_gr->styles().map_object_style()),
+	  style_(g_gr->styles().building_statistics_style()),
      tab_panel_(this, UI::TabPanelStyle::kWuiDark),
 	  navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
      building_name_(

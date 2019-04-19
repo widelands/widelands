@@ -493,7 +493,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 		return;
 	}
 
-	UI::FontStyleInfo census_font(g_gr->styles().map_object_style().census_font());
+	UI::FontStyleInfo census_font(g_gr->styles().building_statistics_style().census_font());
 	census_font.set_size(scale * census_font.size());
 
 	// We always render this so we can have a stable position for the statistics string.
@@ -505,7 +505,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	}
 
 	if ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone && !statictics.empty()) {
-		UI::FontStyleInfo statistics_font(g_gr->styles().map_object_style().statistics_font());
+		UI::FontStyleInfo statistics_font(g_gr->styles().building_statistics_style().statistics_font());
 		statistics_font.set_size(scale * statistics_font.size());
 
 		std::shared_ptr<const UI::RenderedText> rendered_statistics =

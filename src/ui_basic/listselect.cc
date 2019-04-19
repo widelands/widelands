@@ -59,11 +59,11 @@ BaseListselect::BaseListselect(Panel* const parent,
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-	  font_style_(g_gr->styles().table_style(style).enabled()),
+	  font_style_(&g_gr->styles().table_style(style).enabled()),
      background_style_(selection_mode == ListselectLayout::kDropdown ?
                           g_gr->styles().dropdown_style(style) :
 								  nullptr),
-	  lineheight_(text_height(font_style_) + kMargin) {
+	  lineheight_(text_height(*font_style_) + kMargin) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
@@ -297,7 +297,7 @@ void BaseListselect::layout() {
 		for (size_t i = 0; i < entry_records_.size(); ++i) {
 			const EntryRecord& er = *entry_records_[i];
 			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
-			   as_richtext_paragraph(richtext_escape(er.name), font_style_));
+			   as_richtext_paragraph(richtext_escape(er.name), *font_style_));
 			int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
 			int difference = rendered_text->width() + picw + 8 - get_eff_w();
 			if (difference > 0) {
@@ -342,7 +342,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		const EntryRecord& er = *entry_records_[idx];
 		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh->render(as_richtext_paragraph(richtext_escape(er.name), font_style_));
+		   UI::g_fh->render(as_richtext_paragraph(richtext_escape(er.name), *font_style_));
 
 		int lineheight = std::max(get_lineheight(), rendered_text->height());
 

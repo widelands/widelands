@@ -324,7 +324,8 @@ return {
       }
    },
 
-   map_object = {
+   -- Map census and statistics, and building statistics window
+   building_statistics = {
       census_font = {
          color = wui_font_color, -- Default color
          face = "condensed",
@@ -340,7 +341,7 @@ return {
          shadow = true
       },
       -- Building statistics window
-      building_statistics = {
+      statistics_window = {
          fonts = {
             button_font = {
                color = wui_font_color, -- Default color

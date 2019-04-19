@@ -1,9 +1,9 @@
 wl_library(graphic_styles
   SRCS
+    building_statistics_style.h
     button_style.h
     font_style.cc
     font_style.h
-    map_object_style.h
     panel_styles.h
     progress_bar_style.h
     text_panel_style.h

@@ -23,9 +23,9 @@
 #include <map>
 #include <memory>
 
+#include "graphic/styles/building_statistics_style.h"
 #include "graphic/styles/button_style.h"
 #include "graphic/styles/font_style.h"
-#include "graphic/styles/map_object_style.h"
 #include "graphic/styles/panel_styles.h"
 #include "graphic/styles/progress_bar_style.h"
 #include "graphic/styles/statistics_plot_style.h"
@@ -44,13 +44,13 @@ public:
 	// Late initialization, because Graphics needs to load the image files first.
 	void init();
 
+	const UI::BuildingStatisticsStyleInfo& building_statistics_style() const;
 	const UI::ButtonStyleInfo& button_style(UI::ButtonStyle) const;
 	const UI::TextPanelStyleInfo& slider_style(UI::SliderStyle) const;
 	const UI::PanelStyleInfo* tabpanel_style(UI::TabPanelStyle) const;
 	const UI::TextPanelStyleInfo& editbox_style(UI::PanelStyle) const;
 	const UI::PanelStyleInfo* dropdown_style(UI::PanelStyle) const;
 	const UI::PanelStyleInfo* scrollbar_style(UI::PanelStyle) const;
-	const UI::MapObjectStyleInfo& map_object_style() const;
 	const UI::ProgressbarStyleInfo& progressbar_style(UI::PanelStyle) const;
 	const UI::StatisticsPlotStyleInfo& statistics_plot_style() const;
 	const UI::TableStyleInfo& table_style(UI::PanelStyle) const;
@@ -71,7 +71,7 @@ private:
 	void add_progressbar_style(UI::PanelStyle style, const LuaTable& table);
 	void add_table_style(UI::PanelStyle style, const LuaTable& table);
 	void set_statistics_plot_style(const LuaTable& table);
-	void set_mapobject_style(const LuaTable& table);
+	void set_building_statistics_style(const LuaTable& table);
 	void add_ware_info_style(UI::WareInfoStyle style, const LuaTable& table);
 	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);
 	void add_font_style(UI::FontStyle font, const LuaTable& table, const std::string& key);
@@ -86,7 +86,7 @@ private:
 	int minimum_font_size_;
 	RGBColor minimap_icon_frame_;
 	std::map<UI::FontStyle, std::unique_ptr<const UI::FontStyleInfo>> fontstyles_;
-	std::unique_ptr<const UI::MapObjectStyleInfo> map_object_style_;
+	std::unique_ptr<const UI::BuildingStatisticsStyleInfo> building_statistics_style_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::ProgressbarStyleInfo>> progressbar_styles_;
 	std::unique_ptr<const UI::StatisticsPlotStyleInfo> statistics_plot_style_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::TableStyleInfo>> table_styles_;

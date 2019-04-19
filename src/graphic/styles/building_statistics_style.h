@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
-#define WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
+#ifndef WL_GRAPHIC_STYLES_BUILDING_STATISTICS_STYLE_H
+#define WL_GRAPHIC_STYLES_BUILDING_STATISTICS_STYLE_H
 
 #include <memory>
 
@@ -27,10 +27,8 @@
 
 namespace UI {
 
-// TODO(GunChleoc): Having the building statistics window stuff in here like thus is ugly.
-// Come up with a more generic design some time.
-struct MapObjectStyleInfo {
-	explicit MapObjectStyleInfo(UI::FontStyleInfo* init_building_statistics_button_font,
+struct BuildingStatisticsStyleInfo {
+	explicit BuildingStatisticsStyleInfo(UI::FontStyleInfo* init_building_statistics_button_font,
 								UI::FontStyleInfo* init_building_statistics_details_font,
 								int init_editbox_margin,
 								UI::FontStyleInfo* init_census,
@@ -98,4 +96,4 @@ private:
 
 }  // namespace UI
 
-#endif  // end of include guard: WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
+#endif  // end of include guard: WL_GRAPHIC_STYLES_BUILDING_STATISTICS_STYLE_H

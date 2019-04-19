@@ -395,7 +395,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	}
 	*s = g_gr->styles().color_tag(
 				// Line break to make Codecheck happy.
-				*s, g_gr->styles().map_object_style().medium_color());
+				*s, g_gr->styles().building_statistics_style().medium_color());
 }
 
 bool MilitarySite::init(EditorGameBase& egbase) {

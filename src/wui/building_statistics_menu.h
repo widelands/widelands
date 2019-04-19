@@ -109,7 +109,7 @@ private:
 	InteractivePlayer& iplayer() const;
 
 	/// Style
-	const UI::MapObjectStyleInfo&  style_;
+	const UI::BuildingStatisticsStyleInfo& style_;
 
 	/// UI tabs
 	UI::TabPanel tab_panel_;

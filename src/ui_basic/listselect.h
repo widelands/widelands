@@ -148,7 +148,7 @@ private:
 	uint32_t last_selection_;  // for double clicks
 	ListselectLayout selection_mode_;
 	const Image* check_pic_;
-	const FontStyleInfo font_style_; // Take a copy to avoid sigsev
+	const FontStyleInfo* font_style_;
 	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
 	int lineheight_;
 	std::string current_tooltip_;

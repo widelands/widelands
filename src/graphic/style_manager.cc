@@ -155,7 +155,7 @@ void StyleManager::init() {
 	   "scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Building statistics etc. for map objects
-	set_mapobject_style(*table->get_table("map_object"));
+	set_building_statistics_style(*table->get_table("building_statistics"));
 
 	// Progress bars
 	element_table = table->get_table("progressbar");
@@ -247,8 +247,8 @@ const UI::PanelStyleInfo* StyleManager::scrollbar_style(UI::PanelStyle style) co
 	return scrollbarstyles_.at(style).get();
 }
 
-const UI::MapObjectStyleInfo& StyleManager::map_object_style() const {
-	return *map_object_style_;
+const UI::BuildingStatisticsStyleInfo& StyleManager::building_statistics_style() const {
+	return *building_statistics_style_;
 }
 
 const UI::ProgressbarStyleInfo& StyleManager::progressbar_style(UI::PanelStyle style) const {
@@ -347,14 +347,14 @@ void StyleManager::set_statistics_plot_style(const LuaTable& table) {
 				read_rgb_color(*colors_table->get_table("zero_line"))));
 }
 
-void StyleManager::set_mapobject_style(const LuaTable& table) {
-	std::unique_ptr<LuaTable> building_statistics_table = table.get_table("building_statistics");
+void StyleManager::set_building_statistics_style(const LuaTable& table) {
+	std::unique_ptr<LuaTable> window_table = table.get_table("statistics_window");
 	std::unique_ptr<LuaTable> colors_table = table.get_table("colors");
-	std::unique_ptr<LuaTable> fonts_table = building_statistics_table->get_table("fonts");
-	map_object_style_.reset(new UI::MapObjectStyleInfo(
+	std::unique_ptr<LuaTable> fonts_table = window_table->get_table("fonts");
+	building_statistics_style_.reset(new UI::BuildingStatisticsStyleInfo(
 								read_font_style(*fonts_table, "button_font"),
 								read_font_style(*fonts_table, "details_font"),
-								building_statistics_table->get_int("editbox_margin"),
+								window_table->get_int("editbox_margin"),
 								read_font_style(table, "census_font"),
 								read_font_style(table, "statistics_font"),
 								read_rgb_color(*colors_table->get_table("construction")),
