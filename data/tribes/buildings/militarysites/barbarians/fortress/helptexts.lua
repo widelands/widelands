@@ -5,7 +5,7 @@ end
 
 function building_helptext_lore_author()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("barbarians_building", "Berthron,<br>chief military advisor of Chat’Karuth")
+   return pgettext("barbarians_building", "Berthron,<br>chief military adviser of Chat’Karuth")
 end
 
 function building_helptext_purpose()

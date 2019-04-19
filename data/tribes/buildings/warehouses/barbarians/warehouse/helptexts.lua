@@ -5,7 +5,7 @@ end
 
 function building_helptext_lore_author()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("barbarians_building", [[Berthron, chief military advisor of Chat’Karuth,<br>]] ..
+   return pgettext("barbarians_building", [[Berthron, chief military adviser of Chat’Karuth,<br>]] ..
             [[when they lost the headquarters in the battle around the heights of Kal’Megarath]])
 end
 
