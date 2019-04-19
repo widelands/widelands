@@ -150,8 +150,8 @@ bool CheckStepFerry::allowed(const Map& map,
 			break;
 	}
 	const World& world = egbase_.world();
-	return TerrainDescription::Is::kWater & world.terrain_descr(fd.field->terrain_d()).get_is() &
-			world.terrain_descr(fr.field->terrain_r()).get_is();
+	return (world.terrain_descr(fd.field->terrain_d()).get_is() & TerrainDescription::Is::kWater) &&
+			(world.terrain_descr(fr.field->terrain_r()).get_is() & TerrainDescription::Is::kWater);
 }
 
 bool CheckStepFerry::reachable_dest(const Map& map, const FCoords& dest) const {
