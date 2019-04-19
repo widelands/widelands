@@ -329,8 +329,8 @@ void Player::play_message_sound(const Message::Type& msgtype) {
 	}
 
 	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
-		MAYBE_PLAY(Message::Type::kEconomySiteOccupied, "military/site_occupied");
-		MAYBE_PLAY(Message::Type::kWarfareUnderAttack, "military/under_attack");
+		MAYBE_PLAY(Message::Type::kEconomySiteOccupied, "military/site_occupied")
+		MAYBE_PLAY(Message::Type::kWarfareUnderAttack, "military/under_attack")
 		Notifications::publish(NoteSound("message", 200, PRIO_ALWAYS_PLAY));
 	}
 }

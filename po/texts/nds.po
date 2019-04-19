@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-29 07:26+0000\n"
-"PO-Revision-Date: 2019-04-04 16:10+0000\n"
+"POT-Creation-Date: 2019-04-05 04:54+0000\n"
+"PO-Revision-Date: 2019-04-08 12:43+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -422,7 +422,7 @@ msgstr "Lütt Kaart wiesen oder verbargen"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
-msgstr "Instellungen för Speel för mennig Spelers"
+msgstr "Instellens för Speel för mennig Spelers"
 
 #: ../../data/txts/help/multiplayer_help.lua:8
 msgid "You are in the multiplayer launch game menu."
@@ -430,7 +430,7 @@ msgstr "Du büst im Menu för dat Begünnen vun eenem Speel för mennig Spelers.
 
 #: ../../data/txts/help/multiplayer_help.lua:10
 msgid "Client settings"
-msgstr "Gast-Instellungen"
+msgstr "Gast-Instellens"
 
 #: ../../data/txts/help/multiplayer_help.lua:11
 msgid ""
@@ -452,17 +452,17 @@ msgstr "»Tokieker«-Speelaard: Du kannst alles sehn, aver keenen Speler kuntrol
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid "Player settings"
-msgstr "Speler-Instellungen"
+msgstr "Speler-Instellens"
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr "In de Midde sünd de Instellungen för de Spelers. Um een Speel antofangen mutt för elkeen Speler eens vun deese Dingen gellen:"
+msgstr "In de Midde sünd de Instellens för de Spelers. Um een Speel antofangen mutt för elkeen Speler eens vun deese Dingen gellen:"
 
 #: ../../data/txts/help/multiplayer_help.lua:17
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr "Mit tominnst eenem Gast verbunnen (seh »Gast-Instellungen«)."
+msgstr "Mit tominnst eenem Gast verbunnen (seh »Gast-Instellens«)."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid ""
@@ -485,7 +485,7 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr "De lesten dree könen blot vun de Weert fastleggt worden, indeem he de »Aard«-Knoop vun eenem Speler mit de linken Muustaste anklickt. De Weert kann ok de Instellungen för elkeen Speler (de Husen, Waren un Arbeiders wat de Speler mit anfangt) un de Volk un Klottje för künstelke Spelers."
+msgstr "De lesten dree könen blot vun de Weert fastleggt worden, indeem he de »Aard«-Knoop vun eenem Speler mit de linken Muustaste anklickt. De Weert kann ok de Instellens för elkeen Speler (de Husen, Waren un Arbeiders wat de Speler mit anfangt) un de Volk un Klottje för künstelke Spelers."
 
 #: ../../data/txts/help/multiplayer_help.lua:22
 msgid ""
@@ -678,7 +678,7 @@ msgstr "Bruuk de Wichtigkeids-Knopen in eenem Huus-Fenster, um de Versörgung mi
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr "Bruuk de »Wirtschafts-Instellungen«-Menü, um de Enn-Tahlen för Waren fasttoleggen. Du kannst 't över dat Fahnen-Menü opendoon."
+msgstr "Bruuk dat Menü »Wirtschafts-Instellens, um de Enn-Tahlen för Waren fasttoleggen. Du kannst 't över dat Fahnen-Menü opendoon."
 
 #: ../../data/txts/tips/general_game.lua:39
 msgid ""
