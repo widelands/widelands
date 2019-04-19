@@ -33,8 +33,10 @@ Textarea::Textarea(Panel* parent,
                    uint32_t w,
                    uint32_t h,
                    const std::string& text,
-                   Align align, LayoutMode layout_mode)
-   : Panel(parent, x, y, w, h), layoutmode_(layout_mode), align_(align), style_(&g_gr->styles().font_style(FontStyle::kLabel)) {
+                   Align align,
+				   const UI::FontStyleInfo& style,
+				   LayoutMode layout_mode)
+   : Panel(parent, x, y, w, h), layoutmode_(layout_mode), align_(align), style_(&style) {
 	fixed_width_ = 0;
 	set_handle_mouse(false);
 	set_thinks(false);
@@ -43,27 +45,19 @@ Textarea::Textarea(Panel* parent,
 	set_text(text);
 }
 
-
-Textarea::Textarea(Panel* parent, int32_t x, int32_t y, const std::string& text, Align align)
-   : Textarea(parent, x, y, 0, 0, text, align, LayoutMode::AutoMove) {
-}
-
-Textarea::Textarea(Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Align align)
-   : Textarea(parent, x, y, w, h, "", align, LayoutMode::AutoMove) {
-}
-
 Textarea::Textarea(Panel* parent,
                    int32_t x,
                    int32_t y,
                    uint32_t w,
                    uint32_t h,
                    const std::string& text,
-                   Align align)
-   : Textarea(parent, x, y, w, h, text, align, LayoutMode::AutoMove) {
+                   Align align,
+				   const UI::FontStyleInfo& style)
+   : Textarea(parent, x, y, w, h, text, align, style, LayoutMode::AutoMove) {
 }
 
-Textarea::Textarea(Panel* parent, const std::string& text, Align align)
-   : Textarea(parent, 0, 0, 0, 0, text, align, LayoutMode::Layouted) {
+Textarea::Textarea(Panel* parent, const std::string& text, Align align, const FontStyleInfo& style)
+   : Textarea(parent, 0, 0, 0, 0, text, align, style, LayoutMode::Layouted) {
 }
 
 // NOCOM we have to set this because it'S not available in the constuctors. Not good.

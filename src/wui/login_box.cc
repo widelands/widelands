@@ -33,8 +33,8 @@ LoginBox::LoginBox(Panel& parent)
 
 	int32_t margin = 10;
 
-	ta_nickname = new UI::Textarea(this, margin, margin, _("Nickname:"));
-	ta_password = new UI::Textarea(this, margin, 40, _("Password:"));
+	ta_nickname = new UI::Textarea(this, margin, margin, 0, 0, _("Nickname:"));
+	ta_password = new UI::Textarea(this, margin, 40, 0, 0, _("Password:"));
 	eb_nickname = new UI::EditBox(this, 150, margin, 330, UI::PanelStyle::kWui);
 	eb_password = new UI::EditBox(this, 150, 40, 330, UI::PanelStyle::kWui);
 

@@ -40,12 +40,12 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
      table_(this, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Main Title
-     title_(this, 0, 0, _("Choose a campaign"), UI::Align::kCenter),
+     title_(this, 0, 0, 0, 0, _("Choose a campaign"), UI::Align::kCenter,
+			g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Campaign description
      campaign_details_(this),
      campaigns_(campvis) {
-	title_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle));
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
 

@@ -25,7 +25,7 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
    : FullscreenMenuMainMenu(),
 
      // Title
-     title(this, 0, 0, _("Single Player"), UI::Align::kCenter),
+     title(this, 0, 0, 0, 0, _("Single Player"), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Buttons
      new_game(&vbox_, "new_game", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("New Game")),
@@ -47,7 +47,6 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
 	   boost::bind(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kBack));
 
-	title.set_style(g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle));
 	title.set_font_scale(scale_factor());
 
 	vbox_.add(&new_game, UI::Box::Resizing::kFullSize);

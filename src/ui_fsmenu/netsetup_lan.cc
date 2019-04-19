@@ -36,11 +36,12 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
      listw_(get_w() * 9 / 16),
 
      // Text labels
-     title(this, get_w() / 2, get_h() / 10, _("Begin Network Game"), UI::Align::kCenter),
+     title(this, get_w() / 2, get_h() / 10, 0, 0, _("Begin Network Game"), UI::Align::kCenter,
+		   g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
      opengames_(
-        this, get_w() * 3 / 50, get_h() * 27 / 100, _("List of games in your local network:")),
-     playername_(this, get_w() * 16 / 25, get_h() * 27 / 100, _("Your nickname:")),
-     hostname_(this, get_w() * 16 / 25, get_h() * 17 / 40, _("Host to connect:")),
+        this, get_w() * 3 / 50, get_h() * 27 / 100, 0, 0, _("List of games in your local network:")),
+     playername_(this, get_w() * 16 / 25, get_h() * 27 / 100, 0, 0, _("Your nickname:")),
+     hostname_(this, get_w() * 16 / 25, get_h() * 17 / 40, 0, 0, _("Host to connect:")),
 
      // Buttons
      joingame(this,
@@ -110,7 +111,6 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 	playername.set_font_scale(scale_factor());
 	hostname.set_font_scale(scale_factor());
 
-	title.set_style(g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle));
 	hostname.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_hostname, this));
 	playername.set_text(s.get_string("nickname", (_("nobody"))));
 	playername.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_playername, this));

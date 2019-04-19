@@ -126,7 +126,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                   _("Show the help window")),
 
      // Text labels
-     mapname_(this, right_column_x_, get_h() * 3 / 20, std::string()),
+     mapname_(this, right_column_x_, get_h() * 3 / 20, 0, 0, std::string(), UI::Align::kLeft,
+			  g_gr->styles().font_style(UI::FontStyle::kFsGameSetupMapname)),
      clients_(this,
               // the width of the MultiPlayerSetupGroup is (get_w() * 53 / 80)
               get_w() * 3 / 80,
@@ -134,20 +135,26 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
               get_w() * 19 / 80,
               get_h() / 10,
               _("Clients"),
-              UI::Align::kCenter),
+              UI::Align::kCenter,
+			  g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
      players_(this,
               get_w() / 4,
               get_h() / 10,
               get_w() * 9 / 20,
               get_h() / 10,
               _("Players"),
-              UI::Align::kCenter),
-     map_(this, right_column_x_, get_h() / 10, butw_, get_h() / 10, _("Map"), UI::Align::kCenter),
+              UI::Align::kCenter,
+			  g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+     map_(this, right_column_x_, get_h() / 10, butw_, get_h() / 10, _("Map"), UI::Align::kCenter,
+		  g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
      wincondition_type_(this,
                         right_column_x_ + (butw_ / 2),
                         get_h() * 10 / 20 - 1.5 * label_height_,
+						0,
+						0,
                         _("Type of game"),
-                        UI::Align::kCenter),
+                        UI::Align::kCenter,
+						g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
 
      map_info_(this,
                right_column_x_,
@@ -176,15 +183,10 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	   boost::bind(&FullscreenMenuLaunchMPG::help_clicked, boost::ref(*this)));
 
 	mapname_.set_font_scale(scale_factor());
-	mapname_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupMapname));
 	clients_.set_font_scale(scale_factor());
-	clients_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings));
 	players_.set_font_scale(scale_factor());
-	players_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings));
 	map_.set_font_scale(scale_factor());
-	map_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings));
 	wincondition_type_.set_font_scale(scale_factor());
-	wincondition_type_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings));
 
 	mapname_.set_text(_("(no map)"));
 	map_info_.set_text(_("The host has not yet selected a map or saved game."));

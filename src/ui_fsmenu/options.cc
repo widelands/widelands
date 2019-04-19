@@ -78,7 +78,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      padding_(10),
 
      // Title
-     title_(this, 0, 0, _("Options"), UI::Align::kCenter),
+     title_(this, 0, 0, 0, 0, _("Options"), UI::Align::kCenter,
+			g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),
@@ -215,9 +216,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      single_watchwin_(&box_game_, Vector2i::zero(), _("Use single watchwindow mode")),
      os_(opt) {
 
-	// Set up UI Elements
-	title_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle));
-
 	// Buttons
 	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_);
 	button_box_.add_inf_space();
@@ -260,8 +258,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	if (g_sound_handler.is_backend_disabled()) {
 		UI::Textarea* sound_warning = new UI::Textarea(
-		   &box_sound_, 0, 0, _("Sound is disabled due to a problem with the sound driver"));
-		sound_warning->set_style(g_gr->styles().font_style(UI::FontStyle::kWarning));
+		   &box_sound_, 0, 0, 0, 0, _("Sound is disabled due to a problem with the sound driver"), UI::Align::kLeft,
+										  g_gr->styles().font_style(UI::FontStyle::kWarning));
 		box_sound_.add(sound_warning);
 	}
 

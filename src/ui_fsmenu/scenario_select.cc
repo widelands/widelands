@@ -50,8 +50,11 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
      title_(&header_box_,
             0,
             0,
+			0,
+			0,
             is_tutorial_ ? _("Choose a tutorial") : _("Choose a scenario"),
-            UI::Align::kCenter),
+            UI::Align::kCenter,
+			g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
      subtitle_(&header_box_,
                0,
                0,
@@ -63,7 +66,6 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
                UI::MultilineTextarea::ScrollMode::kNoScrolling),
      scenario_details_(this),
      campaign_(camp) {
-	title_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle));
 
 	// Set subtitle of the page
 	if (campaign_ == nullptr) {

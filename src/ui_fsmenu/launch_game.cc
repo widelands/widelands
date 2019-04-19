@@ -57,7 +57,8 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
-     title_(this, get_w() / 2, get_h() / 25, "", UI::Align::kCenter),
+     title_(this, get_w() / 2, get_h() / 25, 0, 0, "", UI::Align::kCenter,
+			g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
      // Variables and objects used in the menu
      settings_(settings),
      ctrl_(ctrl),
@@ -70,7 +71,6 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 
 	lua_ = new LuaInterface();
 
-	title_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle));
 	title_.set_font_scale(scale_factor());
 }
 

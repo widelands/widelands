@@ -74,8 +74,7 @@ std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box& parent,
 
 UI::Textarea&
 AttackBox::add_text(UI::Box& parent, std::string str, UI::Align alignment, const UI::FontStyleInfo& style) {
-	UI::Textarea& result = *new UI::Textarea(&parent, str.c_str());
-	result.set_style(style);
+	UI::Textarea& result = *new UI::Textarea(&parent, str.c_str(), UI::Align::kLeft, style);
 	parent.add(&result, UI::Box::Resizing::kAlign, alignment);
 	return result;
 }
