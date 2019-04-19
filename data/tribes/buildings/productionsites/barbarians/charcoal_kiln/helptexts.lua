@@ -3,14 +3,14 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext("barbarians_building", [[‘What's the work of a charcoal burner?<br>
-         He's the tribe's most plodding earner!<br>
-         Logs on logs he piles up high,<br>
-         Until the kiln reaches the sky.<br>
-         He sets the fire, sees it smolder<br>
-         The logs he carried on his shoulder.<br>
-         Burnt down to just one single coal<br>
-         This troubles much a burner's soul.’]])
+   return pgettext("barbarians_building", [[‘What’s the work of a charcoal burner?<br>]] ..
+         [[He’s the tribe’s most plodding earner!<br>]] ..
+         [[Logs on logs he piles up high,<br>]] ..
+         [[Until the kiln will reach the sky.<br>]] ..
+         [[He sets the fire, sees it smolder<br>]] ..
+         [[The logs he carried on his shoulder.<br>]] ..
+         [[Burnt down to just one single coal<br>]] ..
+         [[This troubles much a burner’s soul.’]])
 end
 
 function building_helptext_lore_author()

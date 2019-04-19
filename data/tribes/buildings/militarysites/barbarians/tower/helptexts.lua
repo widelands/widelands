@@ -1,7 +1,7 @@
 function building_helptext_lore()
    -- TRANSLATORS: Lore helptext for a building
    return pgettext("barbarians_building", [[‘From the height of our tower we could see far into enemy territory. ]] ..
-            [[The enemy was well prepared, but we also noticed some weak points in his defense.’]])
+            [[The enemy was well prepared, but we also noticed some weak points in their defense.’]])
 end
 
 function building_helptext_lore_author()

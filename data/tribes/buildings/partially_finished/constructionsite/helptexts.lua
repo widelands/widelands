@@ -5,7 +5,7 @@ end
 
 function building_helptext_lore_author()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("building", "Proverb widely used for under equipped tasks as well")
+   return pgettext("building", "Proverb widely used for impossible tasks of any kind")
 end
 
 function building_helptext_purpose()

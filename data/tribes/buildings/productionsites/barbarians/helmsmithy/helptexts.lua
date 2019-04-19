@@ -3,7 +3,7 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext("barbarians_building", [[‘The helmets forged by this smithy<br> Are widely known for looking pithy.’]])
+   return pgettext("barbarians_building", [[‘The helmets forgéd by this smithy<br>Are widely known for looking pithy.’]])
 end
 
 function building_helptext_lore_author()

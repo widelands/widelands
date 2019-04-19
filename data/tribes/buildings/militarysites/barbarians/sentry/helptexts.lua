@@ -6,7 +6,7 @@ end
 
 function building_helptext_lore_author()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("barbarians_building", "Boldreth,<br> about his time as young soldier")
+   return pgettext("barbarians_building", "Boldreth,<br>about his time as young soldier")
 end
 
 function building_helptext_purpose()

@@ -5,7 +5,7 @@ end
 
 function building_helptext_lore_author()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("barbarians_building", "Khantarakh, ‘The Modern Babarian Economy’,<br> 3rd cowhide ‘Craftsmanship and Trade’")
+   return pgettext("barbarians_building", "Khantarakh, ‘The Modern Babarian Economy’,<br>3ʳᵈ cowhide ‘Craftsmanship and Trade’")
 end
 
 function building_helptext_purpose()

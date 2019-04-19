@@ -8,7 +8,7 @@ end
 
 function building_helptext_lore_author()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("barbarians_building", "Chef's suggestion in ‘The Singing Master Miner’")
+   return pgettext("barbarians_building", "Chef’s recommendation in ‘The Singing Master Miner’")
 end
 
 function building_helptext_purpose()

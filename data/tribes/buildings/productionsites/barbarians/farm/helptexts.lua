@@ -1,7 +1,7 @@
 function building_helptext_lore()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext("barbarians_building", [[‘Look the crop fields from here to the horizons. They are a huge, heaving, golden sea.<br>
-            Oh wheat, source of wealth, soul of the beer, strength of our warriors.’]])
+   return pgettext("barbarians_building", [[‘See the crop fields from here to the horizons. They are a huge, heaving, golden sea.<br>]] ..
+            [[Oh wheat, source of wealth, soul of beer, strength of our warriors!’]])
 end
 
 function building_helptext_lore_author()

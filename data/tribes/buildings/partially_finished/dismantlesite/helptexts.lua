@@ -1,6 +1,6 @@
 function building_helptext_lore()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext("building", "‘New paths appear when you are willing to tear down the old.’")
+   return pgettext("building", "‘New paths will appear when you are willing to tear down the old.’")
 end
 
 function building_helptext_lore_author()
