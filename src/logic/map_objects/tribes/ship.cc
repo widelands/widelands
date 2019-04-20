@@ -979,10 +979,11 @@ void Ship::sink_ship(Game& game) {
 
 void Ship::draw(const EditorGameBase& egbase,
                 const TextToDraw& draw_text,
-                const Vector2f& field_on_dst,
+                const Vector2f& point_on_dst,
+				const Widelands::Coords& coords,
                 const float scale,
                 RenderTarget* dst) const {
-	Bob::draw(egbase, draw_text, field_on_dst, scale, dst);
+	Bob::draw(egbase, draw_text, point_on_dst, coords, scale, dst);
 
 	// Show ship name and current activity
 	std::string statistics_string;
@@ -1024,7 +1025,7 @@ void Ship::draw(const EditorGameBase& egbase,
 		                       .str();
 	}
 
-	do_draw_info(draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, scale),
+	do_draw_info(draw_text, shipname_, statistics_string, calc_drawpos(egbase, point_on_dst, scale),
 	             scale, dst);
 }
 

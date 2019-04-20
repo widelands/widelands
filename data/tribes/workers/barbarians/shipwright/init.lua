@@ -4,8 +4,8 @@ animations = {}
 add_animation(animations, "idle", dirname, "idle", {11, 23})
 add_animation(animations, "work", dirname, "work", {11, 26}, 10)
 animations["work"]["sound_effect"] = {
-   name = "hammering",
-   directory = "sound/hammering"
+   path = "sound/hammering/hammering",
+   priority = 64
 }
 add_walking_animations(animations, "walk", dirname, "walk", {9, 24}, 10)
 add_walking_animations(animations, "walkload", dirname, "walkload", {11, 22}, 10)
@@ -29,7 +29,7 @@ tribes:new_worker_type {
       buildship = {
          "walk=object-or-coords",
          "plant=attrib:shipconstruction unless object",
-         "playsound=sound/sawmill sawmill 230",
+         "playsound=sound/sawmill/sawmill 230",
          "animate=work 500",
          "construct",
          "animate=work 5000",

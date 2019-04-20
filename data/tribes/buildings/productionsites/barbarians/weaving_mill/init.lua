@@ -59,7 +59,7 @@ tribes:new_productionsite_type {
             "checkmap=seafaring",
             "return=skipped unless economy needs cloth",
             "consume=thatch_reed",
-            "playsound=sound/barbarians weaver 120",
+            "playsound=sound/barbarians/weaver 120",
             "animate=working 20000",
             "produce=cloth"
          }

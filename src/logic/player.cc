@@ -54,6 +54,7 @@
 #include "logic/playercommand.h"
 #include "scripting/lua_table.h"
 #include "sound/note_sound.h"
+#include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
 
 namespace {
@@ -143,7 +144,10 @@ Player::Player(EditorGameBase& the_egbase,
      current_consumed_statistics_(the_egbase.tribes().nrwares()),
      ware_productions_(the_egbase.tribes().nrwares()),
      ware_consumptions_(the_egbase.tribes().nrwares()),
-     ware_stocks_(the_egbase.tribes().nrwares()) {
+     ware_stocks_(the_egbase.tribes().nrwares()),
+     message_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/message")),
+     attack_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/under_attack")),
+     occupied_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/site_occupied")) {
 	set_name(name);
 
 	// Disallow workers that the player's tribe doesn't have.
@@ -321,17 +325,20 @@ void Player::update_team_players() {
  * Plays the corresponding sound when a message is received and if sound is
  * enabled.
  */
-void Player::play_message_sound(const Message::Type& msgtype) {
-#define MAYBE_PLAY(type, file)                                                                     \
-	if (msgtype == type) {                                                                          \
-		Notifications::publish(NoteSound(file, 200, PRIO_ALWAYS_PLAY));                              \
-		return;                                                                                      \
-	}
-
-	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
-		MAYBE_PLAY(Message::Type::kEconomySiteOccupied, "military/site_occupied")
-		MAYBE_PLAY(Message::Type::kWarfareUnderAttack, "military/under_attack")
-		Notifications::publish(NoteSound("message", 200, PRIO_ALWAYS_PLAY));
+void Player::play_message_sound(const Message* message) {
+	if (g_sh->is_sound_enabled(SoundType::kMessage)) {
+		FxId fx;
+		switch (message->type()) {
+			case Message::Type::kEconomySiteOccupied:
+			fx = occupied_fx_;
+			break;
+		case Message::Type::kWarfareUnderAttack:
+			fx = attack_fx_;
+			break;
+		default:
+			fx = message_fx_;
+		}
+		Notifications::publish(NoteSound(SoundType::kMessage, fx, message->position(), kFxPriorityAlwaysPlay));
 	}
 }
 
@@ -348,7 +355,7 @@ MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, 
 	// Sound & popup
 	if (InteractivePlayer* const iplayer = game.get_ipl()) {
 		if (&iplayer->player() == this) {
-			play_message_sound(message->type());
+			play_message_sound(message);
 			if (popup)
 				iplayer->popup_message(id, *message);
 		}

@@ -27,6 +27,7 @@
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
+#include "logic/widelands_geometry.h"
 
 class Animation;
 class Surface;
@@ -105,18 +106,15 @@ public:
 	// Draw the 'animation' as it should appear at 'time' in this target at
 	// 'dst'. Optionally, the animation is tinted with 'player_color' and
 	// cropped to 'source_rect'.
-	void blit_animation(const Vector2f& dst, float scale, uint32_t animation, uint32_t time);
+	// Any sound effects are played with stereo position according to 'coords'.
+	// If 'coords' == Widelands::Coords::null(), skip playing any sound effects.
 	void blit_animation(const Vector2f& dst,
-	                    float scale,
-	                    uint32_t animation,
-	                    uint32_t time,
-	                    const RGBColor& player_color);
-	void blit_animation(const Vector2f& dst,
-	                    float scale,
-	                    uint32_t animation,
-	                    uint32_t time,
-	                    const RGBColor& player_color,
-	                    const int percent_from_bottom);
+						const Widelands::Coords& coords,
+	                       const float scale,
+	                       uint32_t animation_id,
+	                       uint32_t time,
+	                       const RGBColor* player_color = nullptr,
+	                       const int percent_from_bottom = 100);
 
 	void reset();
 
@@ -133,14 +131,6 @@ public:
 protected:
 	bool clip(Rectf& r) const;
 	bool to_surface_geometry(Rectf* destination_rect, Rectf* source_rect) const;
-
-	// Does the actual blitting.
-	void do_blit_animation(const Vector2f& dst,
-	                       const float scale,
-	                       const Animation& animation,
-	                       uint32_t time,
-	                       const RGBColor* player_color,
-	                       const int percent_from_bottom = 100);
 
 	/// The target surface
 	Surface* const surface_;

@@ -53,7 +53,11 @@ public:
 
 	Building& create_object() const override;
 
+	FxId creation_fx() const;
+
 private:
+	const FxId creation_fx_;
+
 	DISALLOW_COPY_AND_ASSIGN(DismantleSiteDescr);
 };
 
@@ -90,6 +94,7 @@ protected:
 	void draw(uint32_t gametime,
 	          TextToDraw draw_text,
 	          const Vector2f& point_on_dst,
+			  const Widelands::Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
 };

@@ -25,7 +25,9 @@
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
+#include "base/log.h"
 #include "base/macros.h"
+#include "base/math.h"
 #include "base/time_string.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -46,6 +48,7 @@
 #include "logic/widelands_geometry.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
+#include "sound/sound_handler.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
@@ -155,11 +158,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		   adjust_toolbar_position();
 	   });
 	sound_subscriber_ = Notifications::subscribe<NoteSound>([this](const NoteSound& note) {
-		if (note.stereo_position != std::numeric_limits<uint32_t>::max()) {
-			g_sound_handler.play_fx(note.fx, note.stereo_position, note.priority);
-		} else if (note.coords != Widelands::Coords::null()) {
-			g_sound_handler.play_fx(note.fx, stereo_position(note.coords), note.priority);
-		}
+		play_sound_effect(note);
 	});
 
 	toolbar_.set_layout_toplevel(true);
@@ -729,25 +728,32 @@ void InteractiveBase::log_message(const std::string& message) const {
 	Notifications::publish(lm);
 }
 
-/** Calculate  the position of an effect in relation to the visible part of the
- * screen.
- * \param position  where the event happened (map coordinates)
- * \return position in widelands' game window: left=0, right=254, not in
- * viewport = -1
- * \note This function can also be used to check whether a logical coordinate is
- * visible at all
+/**
+ * Plays a sound effect positioned according to the map coordinates in the note.
  */
-int32_t InteractiveBase::stereo_position(Widelands::Coords const position_map) {
-	assert(position_map);
-
-	// Viewpoint is the point of the map in pixel which is shown in the upper
-	// left corner of window or fullscreen
-	const MapView::ViewArea area = map_view_.view_area();
-	if (!area.contains(position_map)) {
-		return -1;
+void InteractiveBase::play_sound_effect(const NoteSound& note) const {
+	if (!g_sh->is_sound_enabled(note.type)) {
+		return;
 	}
-	const Vector2f position_pix = area.move_inside(position_map);
-	return static_cast<int>((position_pix.x - area.rect().x) * 254 / area.rect().w);
+
+	if (note.coords != Widelands::Coords::null() && player_hears_field(note.coords)) {
+		constexpr int kSoundMaxDistance = 255;
+		constexpr float kSoundDistanceDivisor = 4.f;
+
+		// Viewpoint is the point of the map in pixel which is shown in the upper
+		// left corner of window or fullscreen
+		const MapView::ViewArea area = map_view_.view_area();
+		const Vector2f position_pix = area.find_pixel_for_coordinates(note.coords);
+		const int stereo_pos = static_cast<int>((position_pix.x - area.rect().x) * kStereoRight / area.rect().w);
+
+		int distance = MapviewPixelFunctions::calc_pix_distance(egbase().map(), area.rect().center(), position_pix) / kSoundDistanceDivisor;
+
+		distance = (note.priority == kFxPriorityAlwaysPlay) ? (math::clamp(distance, 0, kSoundMaxDistance) / 2) : distance;
+
+		if (distance < kSoundMaxDistance) {
+			g_sh->play_fx(note.type, note.fx, note.priority, math::clamp(stereo_pos, kStereoLeft, kStereoRight), distance);
+		}
+	}
 }
 
 // Repositions the chat overlay
