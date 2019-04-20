@@ -570,7 +570,7 @@ return {
       },
       -- List IRC clients in the internet lobby
       fsmenu_game_setup_irc_client = {
-         color = { 0, 255, 0 },
+         color = { 221, 221, 221  },
          face = fs_font_face,
          size = fs_font_size,
          bold = true,
