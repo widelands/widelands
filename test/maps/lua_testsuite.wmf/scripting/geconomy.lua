@@ -23,10 +23,10 @@ function economy_tests:test_ware_target_quantity()
    assert_error("Negative ware quantity",function() eco:set_target_quantity("log", -1) end)
 
    -- Now set and confirm ware quantity
-   quantity = eco:ware_target_quantity("log")
+   quantity = eco:target_quantity("log")
    quantity = quantity + 1
-   eco:set_ware_target_quantity("log", quantity)
-   assert_equal(quantity, eco:ware_target_quantity("log"))
+   eco:set_target_quantity("log", quantity)
+   assert_equal(quantity, eco:target_quantity("log"))
 
    hq_flag:remove()
 end
