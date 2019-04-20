@@ -173,17 +173,7 @@ int LuaPlayer::get_objectives(lua_State* L) {
       (RO) :const:`true` if this player was defeated, :const:`false` otherwise
 */
 int LuaPlayer::get_defeated(lua_State* L) {
-	Player& p = get(L, get_egbase(L));
-	bool is_defeated = true;
-
-	for (const auto& economy : p.economies()) {
-		if (!economy.second->warehouses().empty()) {
-			is_defeated = false;
-			break;
-		}
-	}
-
-	lua_pushboolean(L, is_defeated);
+	lua_pushboolean(L, get(L, get_egbase(L)).is_defeated());
 	return 1;
 }
 
@@ -445,10 +435,10 @@ int LuaPlayer::message_box(lua_State* L) {
 	lua_pop(L, 1);
 
 	if (lua_gettop(L) == 4) {
-		CHECK_UINT(posx);
-		CHECK_UINT(posy);
-		CHECK_UINT(w);
-		CHECK_UINT(h);
+		CHECK_UINT(posx)
+		CHECK_UINT(posy)
+		CHECK_UINT(w)
+		CHECK_UINT(h)
 
 		// If a field has been defined, read the coordinates to jump to.
 		lua_getfield(L, 4, "field");
@@ -969,7 +959,7 @@ void LuaObjective::__persist(lua_State* L) {
 	PERS_STRING("name", name_);
 }
 void LuaObjective::__unpersist(lua_State* L) {
-	UNPERS_STRING("name", name_);
+	UNPERS_STRING("name", name_)
 }
 
 /*
@@ -1136,9 +1126,9 @@ void LuaMessage::__persist(lua_State* L) {
 	PERS_UINT32("msg_idx", get_mos(L)->message_savers[player_number_ - 1][message_id_].value());
 }
 void LuaMessage::__unpersist(lua_State* L) {
-	UNPERS_UINT32("player", player_number_);
+	UNPERS_UINT32("player", player_number_)
 	uint32_t midx = 0;
-	UNPERS_UINT32("msg_idx", midx);
+	UNPERS_UINT32("msg_idx", midx)
 	message_id_ = MessageId(midx);
 }
 

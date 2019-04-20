@@ -114,7 +114,7 @@ template <typename CoordsType> struct MapTriangleRegion<TCoords<CoordsType>> {
 
 private:
 	const bool radius_is_odd_ = false;
-	enum { Top, Upper, Lower, Bottom } phase_ = Top;
+	enum class Phase { kTop, kUpper, kLower, kBottom } phase_ = Phase::kTop;
 	uint16_t remaining_rows_in_upper_phase_ = 0U;
 	uint16_t remaining_rows_in_lower_phase_ = 0U;
 	uint16_t row_length_, remaining_in_row_ = 0U;
