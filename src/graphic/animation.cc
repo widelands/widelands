@@ -96,6 +96,7 @@ private:
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
    : Animation(table.has_key("representative_frame") ? table.get_int("representative_frame") : 0),
+     frametime_(FRAME_LENGTH),
      hotspot_(table.get_vector<std::string, int>("hotspot")),
      hasplrclrs_(false),
      scale_(1),
