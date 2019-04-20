@@ -92,12 +92,13 @@ public:
 	int get_width(lua_State*);
 	int get_height(lua_State*);
 	int get_player_slots(lua_State*);
-	int get_conquerable_fields(lua_State*);
-	int get_terrestrial_fields(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
+	int count_conquerable_fields(lua_State*);
+	int count_terrestrial_fields(lua_State*);
+	int count_owned_valuable_fields(lua_State*);
 	int place_immovable(lua_State*);
 	int get_field(lua_State*);
 	int recalculate(lua_State*);
@@ -563,13 +564,13 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_consumers(lua_State*);
-	int get_producers(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
+	int consumers(lua_State*);
 	int is_construction_material(lua_State*);
+	int producers(lua_State*);
 
 	/*
 	 * C methods

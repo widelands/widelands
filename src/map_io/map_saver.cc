@@ -58,6 +58,7 @@
 #include "map_io/map_scripting_packet.h"
 #include "map_io/map_terrain_packet.h"
 #include "map_io/map_version_packet.h"
+#include "map_io/map_wincondition_packet.h"
 
 namespace Widelands {
 
@@ -220,6 +221,14 @@ void MapSaver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	if (is_game) {
+		// Map data used by win conditions
+		log("Writing Wincondition Data ... ");
+		{
+			MapWinconditionPacket p;
+			p.write(fs_, *egbase_.mutable_map(), *mos_);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
+
 		// DATA PACKETS
 		if (mos_->get_nr_flags()) {
 			log("Writing Flagdata Data ... ");

@@ -173,7 +173,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 				throw GameDataError("Tribe has no indicators for resource %s.", resource.c_str());
 			}
 			resource_indicators_[resource] = resis;
-		};
+		}
 
 		ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
 

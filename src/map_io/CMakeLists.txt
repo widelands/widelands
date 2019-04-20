@@ -90,6 +90,8 @@ wl_library(map_io
     map_terrain_packet.h
     map_version_packet.cc
     map_version_packet.h
+    map_wincondition_packet.cc
+    map_wincondition_packet.h
   DEPENDS
     base_exceptions
     base_log

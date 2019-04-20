@@ -23,15 +23,13 @@ local wc_desc = _ (
    "that area for at least 20 minutes."
 )
 
--- Table of fields that are worth conquering
-local fields = {}
+local fields = 0
 
 return {
    name = wc_name,
    description = wc_desc,
    init = function()
-      -- Get all valuable fields of the map
-      fields = wl.Game().map.conquerable_fields
+      fields = wl.Game().map:count_conquerable_fields()
    end,
    func = function()
       local plrs = wl.Game().players

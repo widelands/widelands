@@ -194,7 +194,8 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* ou
 			cr->push_arg(tribe.name());
 			cr->push_arg(ware.helptext_script());
 			cr->resume();
-			const std::string help_text = cr->pop_string();
+			std::string help_text = cr->pop_string();
+			boost::algorithm::trim(help_text);
 			json_ware->add_string("helptext", help_text);
 		} catch (LuaError& err) {
 			json_ware->add_string("helptext", err.what());

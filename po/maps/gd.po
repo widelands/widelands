@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2018
+# GunChleoc, 2015-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 06:56+0000\n"
-"PO-Revision-Date: 2018-09-10 12:39+0000\n"
+"POT-Creation-Date: 2019-04-05 04:54+0000\n"
+"PO-Revision-Date: 2019-04-05 07:48+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -148,7 +148,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr "’S e dùbhlan gun fhaochadh a th’ ann a bhith a’ faighinn beòlshlaint on chuan agus tha sin fìor do shluagh oirthir Cuan Tuathach nam Frìoslannach gu h-àraidh. Nach e a bha san tuil-ruadh mu dheireadh, seo am fear as miosa ann an cuimhne nan daoine, ach dùbhlan àbhaisteach eile ro na Frìoslannaich – no an e samhla o na diathan a bh’ ann gun robh aig treubh a bha dìreach air a thuineachadh an-seo ri dachaigh gu tur ùr a shireadh?"
+msgstr "’S e dùbhlan gun fhaochadh a th’ ann a bhith a’ faighinn beòshlaint on chuan agus tha sin fìor do shluagh oirthir Cuan Tuathach nam Frìoslannach gu h-àraidh. Nach e a bha san tuil-ruadh mu dheireadh, seo am fear as miosa ann an cuimhne nan daoine, ach dùbhlan àbhaisteach eile ro na Frìoslannaich – no an e samhla o na diathan a bh’ ann gun robh aig treubh a bha dìreach air a thuineachadh an-seo ri dachaigh gu tur ùr a shireadh?"
 
 #: ../../data/campaigns/campaigns.conf:86
 #: ../../data/campaigns/campaigns.conf:111
@@ -231,7 +231,7 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr "Sa bhliadhna 1362, bhris an tuile as miosa a-riamh a-steach air beatha sìtheil muinntir nan Eileanan Frìoslannach a Tuath: Sin tuile Naoimh Mharcellus. Nach e ach tuile àbhaisteach eile a th’ ann no an e samhla o na diathan a th’ ann nach eil coimhearsnachd nam Frìoslannach ga h-iarraidh air eilean Langeness?"
+msgstr "Sa bhliadhna 1362, bhris an tuil as miosa a-riamh a-steach air beatha sìtheil muinntir nan Eileanan Frìoslannach a Tuath: Sin tuile Naoimh Mharcellus. An e tuil àbhaisteach eile a th’ ann no seach samhla o na diathan a th’ ann nach eil coimhearsnachd nam Frìoslannach ga h-iarraidh air eilean Langeness?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
@@ -566,7 +566,7 @@ msgid ""
 "For centuries, you’ve lived peacefully side by side with the other tribe on "
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
-msgstr "Bhiodh sìth am measg an dà threubh san dà eilean fad linntean. Thàinig crìoch air a-nis a-rèir coltais ’s do nàbaidh a’ tòiseachadh air a ranntair a mheudachadh."
+msgstr "Bhiodh sìth am measg an dà threubh san dà eilean fad linntean. Thàinig crìoch air a-nis a-rèir coltais ’s do nàbaidh a’ tòiseachadh air a ranntair a leudachadh."
 
 #: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:8
 msgid "Kings and Queens"
@@ -686,7 +686,7 @@ msgid ""
 "building a single ship, players are advised to make ports and shipyards a "
 "priority – expeditions are universally useful and are often the fastest way "
 "to gold deposits."
-msgstr "Tha cnap-starra eadar-dhealaichte ro gach cluicheadair a chuireas bacadh air meudachadh ach tha iomadh dòigh ann gus faighinn seachad orra. Ged a ghabhas an IF a ruaig gun longan a thogail, mholamaid gun cuir thu prìomhachas air togail phort is dhocannan – bidh triallan gu feum dhut an-còmhnaidh agus iadsan an t-slighe as luaithe gus òr a lorg."
+msgstr "Tha cnap-starra eadar-dhealaichte ro gach cluicheadair a chuireas bacadh air leudachadh ach tha iomadh dòigh ann gus faighinn seachad orra. Ged a ghabhas an IF a ruaig gun longan a thogail, mholamaid gun cuir thu prìomhachas air togail phort is dhocannan – bidh triallan gu feum dhut an-còmhnaidh agus iadsan an t-slighe as luaithe gus òr a lorg."
 
 #: ../../data/maps/Riverlands.wmf/elemental:8
 msgid "Riverlands"
@@ -800,7 +800,7 @@ msgstr "Sholaireadh an abhainn biadh ’s conaltradh a-riamh ach nì ceithir imp
 msgid ""
 "Use the river wisely. Your opponents will do the same. You will find the "
 "main ore resources deep in the desert."
-msgstr "Cleachd an abhainn gu glic. Nì do cho-fharpaisich an dearbh rud. Lorgaidh tu prìomh-stòras na cloiche-mhèinneir fad air falbh san fhàsach."
+msgstr "Cleachd an abhainn gu glic. Nì do cho-fharpaisich an dearbh rud. Lorgaidh tu prìomh-stòras na cloich-mhèinneir fad air falbh san fhàsach."
 
 #: ../../data/maps/The_Oasis_Triangle.wmf/elemental:8
 msgid "The Oasis Triangle"
@@ -821,7 +821,7 @@ msgstr "Am bealach"
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr "Tha dà phrionnsa air tuineachadh san roinn seo. Tha iad a’ meudachadh an dùthchannan a-nis gun fhiosta air nach eil iad ’nan aonar!"
+msgstr "Tha dà phrionnsa air tuineachadh san roinn seo. Tha iad a’ leudachadh an ranntairean a-nis gun fhiosta air nach eil iad ’nan aonar!"
 
 #: ../../data/maps/The_Thaw.wmf/elemental:8
 msgid "The Thaw"
@@ -865,7 +865,7 @@ msgid ""
 "exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
-msgstr "Bhiodh na ceithir puirt mòra aig Eileanan a’ Ghiabain a’ malairt le chèile o chionn linntean. Bhiodh iad uile feumach air stòrasan nach fhaigheadh iad air an ranntair aca fhèin ’s thugadh iad stòrasan dhan fheadhainn nach b’ urrainn an dèanamh. Bhiodh malart càirdeil glè chumanta eadar na sluaghan a tha beò air Eileanan a’ Ghiabain – ach dh’aontaich dà phort dhiubh ri caidreachas malairt às-dùnach o chionn goirid a dh’èignich gun dèanadh an dà phort eile caidreachas mar an ceudna. Gu h-obann, tha coltas nach fhada gus an tòisich sabaid eadar na puirt a mhilleas am beatha sìtheil a mhair cho fada…"
+msgstr "Bhiodh na ceithir puirt mòra aig Eileanan a’ Ghiabain a’ malart le chèile o chionn linntean. Bhiodh iad uile feumach air stòrasan nach fhaigheadh iad air an ranntair aca fhèin ’s thugadh iad stòrasan dhan fheadhainn nach b’ urrainn an dèanamh. Bhiodh malart càirdeil glè chumanta eadar na sluaghan a tha beò air Eileanan a’ Ghiabain – ach dh’aontaich dà phort dhiubh ri caidreachas malairt às-dùnach o chionn goirid a dh’èignich gun dèanadh an dà phort eile caidreachas mar an ceudna. Gu h-obann, tha coltas nach fhada gus an tòisich sabaid eadar na puirt a mhilleas am beatha sìtheil a mhair cho fada…"
 
 #: ../../data/maps/Trident_of_Fire.wmf/elemental:8
 msgid "Trident of Fire"
@@ -957,4 +957,4 @@ msgid ""
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
 "against the other 4 (VERY difficult)."
-msgstr "Tha an cluicheadair dubh cuairtichte sa mheadhan gun stòrasan aige, mar sin tha trì dòighean ann gus am mapa seo a chleachdadh: gun chluicheadair dubh airson mapa àbhaisteach le 4 cluicheadairean, le IF dubh gus am meudachadh a dhèanamh nas toinnte dha na cluicheadairean eile no mar dhùbhlan leis a’ chluicheadair dhubh an aghaidh nan ceathrar eile (cianail fhèin doirbh)."
+msgstr "Tha an cluicheadair dubh cuairtichte sa mheadhan gun stòrasan aige, mar sin tha trì dòighean ann gus am mapa seo a chleachdadh: gun chluicheadair dubh airson mapa àbhaisteach le 4 cluicheadairean, le IF dubh gus an leudachadh a dhèanamh nas toinnte dha na cluicheadairean eile no mar dhùbhlan leis a’ chluicheadair dhubh an aghaidh nan ceathrar eile (cianail fhèin doirbh)."

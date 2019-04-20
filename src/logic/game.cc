@@ -232,7 +232,14 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	loader_ui.step(_("Creating players"));
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		add_player(p, 0, map().get_scenario_player_tribe(p), map().get_scenario_player_name(p));
+		// If tribe name is empty, pick a random tribe
+		std::string tribe = map().get_scenario_player_tribe(p);
+		if (tribe.empty()) {
+			log("Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
+			const DescriptionIndex random = std::rand() % tribes().nrtribes();
+			tribe = tribes().get_tribe_descr(random)->name();
+		}
+		add_player(p, 0, tribe, map().get_scenario_player_name(p));
 		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
 	win_condition_displayname_ = "Scenario";
@@ -314,29 +321,18 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 
 	// Check for win_conditions
 	if (!settings.scenario) {
-		win_condition_script_ = settings.win_condition_script;
-		std::unique_ptr<LuaTable> table(lua().run_script(win_condition_script_));
+		loader_ui->step(_("Initializing game…"));
+		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
-		// We run the actual win condition from InteractiveGameBase::start() to prevent a pure black
-		// screen while the game is being started - we can display a message there.
-	} else {
-		win_condition_displayname_ = "Scenario";
-	}
-}
-
-void Game::run_win_condition() {
-	if (!win_condition_script_.empty()) {
-		std::unique_ptr<LuaTable> table(lua().run_script(win_condition_script_));
-		table->do_not_warn_about_unaccessed_keys();
-		// Run separate initialization function if it is there.
 		if (table->has_key<std::string>("init")) {
 			std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("init");
 			cr->resume();
 		}
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
-		win_condition_script_ = "";
+	} else {
+		win_condition_displayname_ = "Scenario";
 	}
 }
 

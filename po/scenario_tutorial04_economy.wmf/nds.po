@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
-"PO-Revision-Date: 2018-11-26 08:46+0000\n"
+"POT-Creation-Date: 2019-04-05 04:54+0000\n"
+"PO-Revision-Date: 2019-04-08 12:42+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:17
 msgid "Your Economy and its Settings"
-msgstr "Diene Wirtschaft un hör Instellungen"
+msgstr "Diene Wirtschaft un hör Instellens"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:19
 msgid "Economy"
@@ -565,7 +565,7 @@ msgstr "Anners maak dat Fenster tum Naslaan bidde weer up un köör de tweden Li
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:273
 msgid "Priority Settings"
-msgstr "Wichtigkeids-Instellungen"
+msgstr "Wichtigkeids-Instellens"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:275
 msgid "Send the wares where they’re needed"
@@ -751,7 +751,7 @@ msgstr "Anners maak 't bidde weer up un köör de veerden Listenwessler ut."
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:414
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:426
 msgid "Economy options"
-msgstr "Wirtschaft-Instellungen"
+msgstr "Wirtschaft-Instellens"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:398
 msgid ""
@@ -764,7 +764,7 @@ msgid ""
 "Now I’ll tell you how you can determine how many wares you want to have. The"
 " menu window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
-msgstr "Nu segg ick di, wo du fastleggen kannst, wo völe Waren du hebben willt. Dat Fenster daarför kannst du vun elkeen Fahn opmaken un heet »Wirtschafts-Instellungen«."
+msgstr "Nu segg ick di, wo du fastleggen kannst, wo völe Waren du hebben willt. Dat Fenster daarför kannst du vun elkeen Fahn opmaken un heet »Wirtschafts-Instellens«."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:401
 msgid "This is the icon."
@@ -776,11 +776,11 @@ msgstr "Maak deeses Fenster up."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:406
 msgid "Open the ‘Configure economy’ window"
-msgstr "Maak dat Fenster för Wirtschafts-Instellungen up"
+msgstr "Maak dat Fenster för Wirtschafts-Instellens up"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:408
 msgid "Open the ‘Configure economy’ window."
-msgstr "Maak dat Fenster för Wirtschafts-Instellungen up."
+msgstr "Maak dat Fenster för Wirtschafts-Instellens up."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:409
 msgid "The window can be accessed by clicking on any flag you own."
@@ -833,7 +833,7 @@ msgstr "Indeem du de Ent-Tahl ännerst kannst du fastleggen, to wat för Waren o
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
-msgstr "Blot Husen, de Waren verbruuken, achten up deese Instellungen. Husen, de Waren umsünst produzeren (to 'n Bispööl Buurdereen oder Wellen) arbeiden alltied."
+msgstr "Blot Husen, de Waren verbruuken, achten up deese Instellens. Husen, de Waren umsünst produzeren (to 'n Bispööl Buurdereen oder Wellen) arbeiden alltied."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:430
 msgid ""
@@ -875,11 +875,11 @@ msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this menu "
 "window, you can decide how many wares of each type you wish to have in "
 "stock."
-msgstr "Daarto klickst du elkeen Fahn an un bruukst de Knoop »Wirtschafts-Instellungen«. In deesem Fenster kannst du fastleggen, wo völe Waren vun elkeen Aard du in Kraamhusen hebben willt."
+msgstr "Daarto klickst du elkeen Fahn an un bruukst de Knoop »Wirtschafts-Instellens«. In deesem Fenster kannst du fastleggen, wo völe Waren vun elkeen Aard du in Kraamhusen hebben willt."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:446
 msgid "Warehouse Preferences"
-msgstr "Kraamhuus-Instellungen"
+msgstr "Kraamhuus-Instellens"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:448
 msgid "Bring the marble columns to the front line"
@@ -958,7 +958,7 @@ msgid ""
 "understood a few concepts, you mustn’t give up. Try them out in some games, "
 "become familiar with them and experience the possibilities. Then, return to "
 "this tutorial and learn the rest!"
-msgstr "Ich hoop, dat ick di lehren kunn, wo du de Wirtschaft in Widelands kuntrolleren kannst. 't gifft mennig Instellungen un se könen toeerst elkeen rammdösig maken. Ok wenn du eerst een paar daarvun verstahn hest, dürst du nich upgeven. Versöök 't all in een paar Spelen, um 't to kennen to kriegen, un probeer de Kansen ut. Dann koom torügg to deese Inföhren un lehr de Rest!"
+msgstr "Ich hoop, dat ick di lehren kunn, wo du de Wirtschaft in Widelands kuntrolleren kannst. 't gifft mennig Instellens un se könen toeerst elkeen rammdösig maken. Ok wenn du eerst een paar daarvun verstahn hest, dürst du nich upgeven. Versöök 't all in een paar Spelen, um 't to kennen to kriegen, un probeer de Kansen ut. Dann koom torügg to deese Inföhren un lehr de Rest!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:473
 msgid ""
