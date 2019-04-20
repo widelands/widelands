@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-11 05:49+0000\n"
-"PO-Revision-Date: 2019-04-11 11:51+0000\n"
+"POT-Creation-Date: 2019-04-18 12:41+0000\n"
+"PO-Revision-Date: 2019-04-19 09:55+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -5101,7 +5101,7 @@ msgid ""
 "This is an advanced spear with a steel tip. It is produced in a weapon "
 "smithy and used in a training camp – together with food – to train soldiers "
 "from attack level 1 to level 2."
-msgstr "Seo sleagh leasaichte le barr stàilinn. Saothraichidh tu ann an ceàrdach arm i is thèid a cleachdadh sa champa oideachaidh – le biadh – gus ionnsaigh nan saighdearan oideachadh o leibheil 1 gu leibheil 2."
+msgstr "Seo sleagh leasaichte le bàrr stàilinn. Saothraichidh tu ann an ceàrdach arm i is thèid a cleachdadh sa champa oideachaidh – le biadh – gus ionnsaigh nan saighdearan oideachadh o leibheil 1 gu leibheil 2."
 
 #. TRANSLATORS: Helptext for a ware: Heavy Spear
 #: ../../data/tribes/wares/spear_heavy/helptexts.lua:4
@@ -5110,7 +5110,7 @@ msgid ""
 "This is a strong spear with a steel-tip and a little blade. It is produced "
 "in the weapon smithy and used in the training camp – together with food – "
 "train soldiers from attack level 2 to level 3."
-msgstr "Seo sleagh làidir le barr stàilinn is lann bheag. Saothraichidh tu ann an ceàrdach arm i is thèid a cleachdadh sa champa oideachaidh – le biadh – gus ionnsaigh nan saighdearan oideachadh o leibheil 2 gu leibheil 3."
+msgstr "Seo sleagh làidir le bàrr stàilinn is lann bheag. Saothraichidh tu ann an ceàrdach arm i is thèid a cleachdadh sa champa oideachaidh – le biadh – gus ionnsaigh nan saighdearan oideachadh o leibheil 2 gu leibheil 3."
 
 #. TRANSLATORS: Helptext for a ware: War Spear
 #: ../../data/tribes/wares/spear_war/helptexts.lua:4
