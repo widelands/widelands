@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-12 15:37+0000\n"
+"POT-Creation-Date: 2019-04-11 05:49+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -107,7 +107,7 @@ msgstr "Cuir romhad an obraich thu còmhla ris an Impireachd gus nach obraich"
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
 msgstr ""
-"Cruinnich stòrasan ’nan tìodhlac no mill taigh-stòrais na h-Impireachd"
+"Cruinnich batharan ’nan tìodhlac no mill taigh-stòrais na h-Impireachd"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:63
 msgid ""
@@ -595,7 +595,7 @@ msgid ""
 "times longer – ten times if it is a deep mine – to produce ores or coal. You"
 " probably want to prepare for the increasing demands of time and food."
 msgstr ""
-"’S urrainn dha na mèinnean beagan cloiche-mèinnir no guail fhaighinn às an "
+"’S urrainn dha na mèinnean beagan cloich-mhèinnir no guail fhaighinn às an "
 "talamh fhathast ach bheir iad mu fhichead uiread nas fhaide – no deich "
 "uiread mas e mèinn dhomhainn a th’ ann."
 
@@ -675,7 +675,7 @@ msgstr "Coigrich"
 #. TRANSLATORS: Reebaud – Supply Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:263
 msgid "…does anyone understand what he is saying?"
-msgstr "… a bheil duine a’ tuigsinn na cainnt aigesan?"
+msgstr "…a bheil duine a’ tuigsinn na cainnt aigesan?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3. This is a foreign language to
 #. Murilius, so he sounds very formal.
@@ -752,8 +752,8 @@ msgid ""
 " ingots, 20 lumps of gold ore, and 10 gold bars."
 msgstr ""
 "30 grunn fhiodha, 40 leac gaireil, 30 iasg, 30 muga de leann, 150 peile de "
-"dh’uisge, 40 greimeag, 10 miasan, 30 cnap guail, 40 cnap cloiche-iarainn, 20"
-" unga iarainn, 20 cnap cloich-òir ’s 10 bàraichean òir."
+"dh’uisge, 40 greimeag, 10 miasan, 30 cnap guail, 40 cnap cloich-iarainn, 20 "
+"unga iarainn, 20 cnap cloich-òir ’s 10 bàraichean òir."
 
 #. TRANSLATORS: Hauke – Supply Murilius 7
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:302
@@ -892,7 +892,7 @@ msgstr ""
 msgid "You are enemies of the Empire, and I shall treat you as such!"
 msgstr ""
 "’S e nàimhdean na h-Impireachd a th’ annaibh is làimhsichidh sinn dha rèir "
-"sibh."
+"sibh!"
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player built forbidden
 #. military buildings
@@ -953,7 +953,7 @@ msgid ""
 msgstr ""
 "A choigrichibh! Mhothaich mi gum b’ fhiach ur facal. Bheir an Impireachd "
 "duais do a caraidean agus le sin bheir mi càirdeas na h-Impireachd mar "
-"dhuais dhuibh! "
+"dhuais dhuibh!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the
 #. player as cannon fodder, while he himself only attacks when he has no

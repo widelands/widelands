@@ -6,10 +6,10 @@
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
 # Alexander Bikmeyev <bikmeyev@gmail.com>, 2016
 # Anton Khabarov <2233009@gmail.com>, 2015,2017
-# GunChleoc, 2016,2018
+# GunChleoc, 2016,2018-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # CupIvan <mail@cupivan.ru>, 2015
-# Viktor S <awsswa59@gmail.com>, 2018
+# Viktor S <awsswa59@gmail.com>, 2018-2019
 # Yuriy Sokolov <lention@mail.ru>, 2015,2019
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2017-2018
@@ -18,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-13 09:26+0000\n"
-"PO-Revision-Date: 2019-03-13 20:12+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-03-30 09:51+0000\n"
+"Last-Translator: Viktor S <awsswa59@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1614,7 +1614,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brewery needs %s on average to brew one mug of beer."
-msgstr "Пивовару нужно %1% в среднем, чтобы сварить кружку пива."
+msgstr "Пивовару нужно %s в среднем, чтобы сварить кружку пива."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:3
@@ -1934,7 +1934,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A trainer in conversation with a baker"
-msgstr ""
+msgstr "Тренер беседует с пекарем"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/helptexts.lua:16
@@ -2013,7 +2013,7 @@ msgid ""
 "Brews beer out of barley and water. It also brews mead, which is beer "
 "refined with honey. Mead is consumed by miners in deep mines and by "
 "experienced soldiers."
-msgstr ""
+msgstr "Варит пиво из ячменя и воды. Это также варит медовуху, который является очищенным пивом с медом. Медовуху потребляют шахтеры в глубоких шахтах и опытные солдаты."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:3
@@ -5066,7 +5066,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fish is smoked in a smokery. Smoked fish is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "Рыба копченая в коптильни. Затем копченая рыба потребляется солдатами на тренировках или превращается в пайки и обеды для шахтеров и разведчиков."
 
 #. TRANSLATORS: Helptext for a ware: Smoked Meat
 #: ../../data/tribes/wares/smoked_meat/helptexts.lua:4

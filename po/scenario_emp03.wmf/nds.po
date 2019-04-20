@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"POT-Creation-Date: 2019-04-05 04:54+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2019\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,14 +82,14 @@ msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr ""
-"Minner de Nafraag för Marmelpielers in de Wirtschafts-Instellungen to veer. "
+"Minner de Nafraag för Marmelpielers in de Wirtschafts-Instellens to veer. "
 "Dann blievt uns mehr Marmel för Husen över."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:78
 msgid ""
 "Remember that you can access the economy settings by clicking on any flag."
 msgstr ""
-"Du kannst de Wirtschafts-Instellungen openmaken, indeem du elkeen Fahn "
+"Du kannst de Wirtschafts-Instellens openmaken, indeem du elkeen Fahn "
 "anklickst."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:84
@@ -529,7 +529,7 @@ msgid ""
 msgstr ""
 "Ick bün wiss worden, dat uns' Flintslager nu ennelk anfangen hett, to "
 "arbeiden. He word so völe Marmelpielers sniddjen, as wi in uns' Wirtschafts-"
-"Instellungen hebben wullen."
+"Instellens hebben wullen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:311
@@ -540,8 +540,8 @@ msgid ""
 "sufficient for the moment being."
 msgstr ""
 "Aver dat is de anner Sied; wenn wi all uns' Marmel för Pielers verklüngeln, "
-"hebben wi bold keenen mehr. Wi sallen de Instellung för Marmelpielers in de "
-"Wirtschafts-Instellungen up eenen minneren Weert setten. Ick gloov, veer "
+"hebben wi bold keenen mehr. Wi sallen de Instellen för Marmelpielers in de "
+"Wirtschafts-Instellens up eenen minneren Weert setten. Ick gloov, veer "
 "Pielers up Lager sünd upstünds genoog."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:319
@@ -733,7 +733,7 @@ msgid ""
 "into cloth."
 msgstr ""
 "Vergeet nich, na de End-Tahlen för Wulle un Stoff in de Wirtschafts-"
-"Instellungen to kieken. Wi mutten all uns' Weit in Wulle umwanneln, un dann "
+"Instellens to kieken. Wi mutten all uns' Weit in Wulle umwanneln, un dann "
 "all de Wulle in Stoff."
 
 #. TRANSLATORS: Amalea
@@ -916,9 +916,9 @@ msgid ""
 "in the economy settings is reached."
 msgstr ""
 "Hunnert bit hier. Nu produzeren wi nich mehr Marmelpielers as wi bruken. Ick"
-" gloov, wi  bruken deese Wirtschafts-Instellungen würrelk mennigmaal, um "
-"uns' Wirtschaft beter to maken. Vergeet nich, uns' Husen arbeiden blot bit "
-"de End-Tahl in uns' Wirtschafts-Instellungen wunnen is."
+" gloov, wi  bruken deese Wirtschafts-Instellens würrelk mennigmaal, um uns' "
+"Wirtschaft beter to maken. Vergeet nich, uns' Husen arbeiden blot bit de "
+"End-Tahl in uns' Wirtschafts-Instellens wunnen is."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:488

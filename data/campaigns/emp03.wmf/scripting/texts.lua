@@ -628,6 +628,7 @@ diary_page_5 = {
 }
 
 function diary_page_6(first_message, missing)
+   set_textdomain("scenario_emp03.wmf")
    local text = ""
    if first_message then
    -- TRANSLATORS: Lutius - Diary

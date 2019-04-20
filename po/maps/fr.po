@@ -1,22 +1,22 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2015
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
 # GunChleoc, 2016-2018
-# Samuël Weber <samuel.weber@normalesup.org>, 2017
+# Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
 # Pierre Salagnac <pierre.salagnac@free.fr>, 2007
-# Renaud Bouchard, 2016-2018
+# Renaud Bouchard, 2016-2019
 # Tubuntu <tubuntu@testimonium.be>, 2015
 # zecas <jjorge@free.fr>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-25 11:08+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-04-04 08:01+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/elemental:9
 #: ../../data/campaigns/campaigns.conf:118
 msgid "From Nemesis to Genesis"
-msgstr "Du départ à la vengeance"
+msgstr "De la vengeance à la génèse"
 
 #: ../../data/campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -45,7 +45,7 @@ msgstr "Un endroit que l'on appellerai maison"
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr "Dans ce scénario, les constructions qui demandent d'importantes ressources, y compris minières seront introduites."
+msgstr "Dans ce scénario, les constructions supérieures incluant les mines seront introduites."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
 #: ../../data/campaigns/campaigns.conf:81
@@ -68,7 +68,7 @@ msgstr "Les Barbares"
 
 #: ../../data/campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr "Facile. Introduire les Barbares"
+msgstr "Facile. Présentation des Barbares"
 
 #: ../../data/campaigns/campaigns.conf:32
 msgid ""
@@ -85,7 +85,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr "Lorsque Chat'Karuth est mort, c'était un vieil homme, père de trois fils forts et ambitieux, et chef de guerre d'une armée qui pourrait s'opposer à un ennemi prêt à se soulever contre les forêts anciennes. Bien qu'à la fin de son règne glorieux, Chat'Karuth ait choisi son fils aîné, Thron, pour lui succéder comme chef de guerre de la tribu, cette décision a laissé ses deux frères insatisfait. L'ancien chef de guerre le savait. Comme son père lui a demandé, Thron quitta la capitale de Al'thunayan, la maison du Trône entre les arbres, et a retiré ses forces sur les hautes collines où il enterra le corps de son père. Il jura aux dieux et à l'esprit de son père qu'il reviendrait pour rétablir l'ordre. Tandis que ses frères ont engagé une guerre aveugle contre Thron et les quelques forces qu'il a laissé pour sécuriser les frontières de Al'thunayan, le jeune chef de guerre cherche à réunir ses frères ambitieux et forcer les tribus à marcher une fois de plus sous une bannière commune."
+msgstr "Lorsque Chat'Karuth est mort, c'était un vieil homme, père de trois fils forts et ambitieux, et chef de guerre d'une armée qui pourrait s'opposer à un ennemi prêt à se soulever contre les forêts anciennes. Bien qu'à la fin de son règne glorieux, Chat'Karuth ait choisi son fils aîné, Thron, pour lui succéder comme chef de guerre de la tribu – cette décision a laissé ses deux frères insatisfait. L'ancien chef de guerre le savait. Comme son père lui a demandé, Thron quitta la capitale de Al'thunran, la maison du Trône entre les arbres, et retira ses forces sur les hautes collines où il enterra le corps de son père. Il jura aux dieux et à l'esprit de son père qu'il reviendrait pour rétablir l'ordre. Tandis que ses frères ont engagé une guerre aveugle contre Thron et les quelques forces qu'il a laissé pour sécuriser les frontières de Al'thunran, le jeune chef de guerre cherche à réunir ses frères ambitieux et forcer les tribus à marcher une fois de plus sous une bannière commune."
 
 #: ../../data/campaigns/campaigns.conf:35
 msgid "The Months of Exile"
@@ -93,11 +93,11 @@ msgstr "Les mois d'exil"
 
 #: ../../data/campaigns/campaigns.conf:37
 msgid "Empire"
-msgstr "Empire"
+msgstr "L'Empire"
 
 #: ../../data/campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr "Facile. Introduire l'Empire"
+msgstr "Facile. Présentation de  l'Empire"
 
 #: ../../data/campaigns/campaigns.conf:40
 msgid ""
@@ -119,11 +119,11 @@ msgstr "La course pour le feu"
 
 #: ../../data/campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr "Atlantes"
+msgstr "Les Atlantes"
 
 #: ../../data/campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr "Défi. Introduire les Atlantes"
+msgstr "Difficile. Présentation des Atlantes"
 
 #: ../../data/campaigns/campaigns.conf:48
 msgid ""
@@ -132,7 +132,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr "Lorsque leur Dieu a perdu sa foi dans les Atlantes et noyé leur île, la lutte d'une femme pour la justice et une seconde chance pour son peuple deviendra l'étoffe des légendes. Dirigeant les Atlantes restants vers un nouvel avenir dans une nouvelle partie du monde, Jundlina est devenue la femme la plus puissante de son temps, mais à un coût élevé : son humanité et son âme."
+msgstr "Lorsque leur Dieu a perdu sa foi dans les Atlantes et noyé leur île, la lutte d'une femme pour la justice et une seconde chance pour son peuple deviendra légendaire. Dirigeant les Atlantes restants vers un nouvel avenir dans une nouvelle partie du monde, Jundlina est devenue la femme la plus puissante de son temps, mais à un coût élevé : son humanité et son âme."
 
 #: ../../data/campaigns/campaigns.conf:52
 msgid "From Water to Ice"
@@ -167,7 +167,7 @@ msgstr "Pas encore implémenté"
 #: ../../data/campaigns/campaigns.conf:91
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
-msgstr "Le rivage de Malac’ Mor"
+msgstr "Les rivages de Malac’ Mor"
 
 #: ../../data/campaigns/campaigns.conf:96
 #: ../../data/campaigns/emp02.wmf/elemental:9
@@ -215,7 +215,7 @@ msgid ""
 "quest to find a good place for a new beginning. Only a few days later, they "
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
-msgstr "Finalement, le navire fut réparé, ainsi Lutius et son peuple revinrent à leur quête d'un endroit accueillant pour un nouveau départ. Quelques jours plus tard seulement, ils accostèrent sur une île Méditerranéenne verdoyante, qui avait l'air du paradis. Fous de joie, ils débarquèrent pour explorer ce nouvel environnement."
+msgstr "Finalement, le navire fut réparé, ainsi Lutius et son peuple revinrent à leur quête d'un endroit accueillant pour un nouveau départ. Quelques jours plus tard seulement, ils accostèrent sur une île Méditerranéenne verdoyante, qui avait des airs de paradis. Fou de joie, ils débarquèrent pour explorer ce nouvel environnement."
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -286,7 +286,7 @@ msgstr "Navigation"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports."
-msgstr "Dans ce tutoriel, vous allez apprendre les secrets de la navigation et à utiliser les bateaux et les ports."
+msgstr "Dans ce tutoriel, vous allez apprendre les secrets de la navigation qui consiste à gérer les bateaux et les ports."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:27
@@ -312,7 +312,7 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr "Entre la Suisse et la Finlande réside la mer des archipels. Cet endroit d'une incroyable beauté n'est ni terre, ni mer, mais les deux. D'une centaine de kilomètres, il n'y a pas moins de 50 000 îles et îlots, dont certains ne font pas plus que quelques acres. Le climat est assez doux pour cette latitude; les fermes prospèrent, les baies sont abondantes, et le poisson foisonnent. La petite population humaine de cet endroit n'ont jamais connues la famine. Même en tant qu'ignoble seigneur de guerre, vous n'auriez pas pu laisser ce petit paradis en paix ?"
+msgstr "Entre la Suède et la Finlande réside la mer des archipels. Cet endroit d'une incroyable beauté n'est ni terre, ni mer, mais les deux. D'une centaine de kilomètres, il n'y a pas moins de 50 000 îles et îlots, dont certains ne font pas plus que quelques acres. Le climat est assez doux pour cette latitude; les fermes prospèrent, les baies sont abondantes, et le poisson foisonne. La petite population humaine de cet endroit n'a jamais connu la famine. Même en tant qu'ignoble seigneur de guerre, vous n'auriez pas pu laisser ce petit paradis en paix ?"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
@@ -367,7 +367,7 @@ msgid ""
 "came from the sky and touched down in its center. Is this a sign of the "
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
-msgstr "A quelques miles en face des côtes de Gerion siège une petite île sans nom. Jusqu'à présent, vous n'avez vu aucune raison de naviguer jusque là, mais hier une grande boule de feu traversa le ciel et s'est écrasée en son centre. Est ce un signe des dieux ? Vous le pensez et espérez que votre tribu trouve le trésor de cette île avant que d'autres tribus ne suivent."
+msgstr "A quelques miles en face des côtes de Gerion siège une petite île sans nom. Jusqu'à présent, vous n'aviez aucune raison de naviguer jusque là, mais hier une grande boule de feu traversa le ciel et s'est écrasée en son centre. Est ce un signe des dieux ? Vous le pensez et espérez que votre tribu trouve le trésor de cette île avant que d'autres tribus ne suivent."
 
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:11
 msgid ""
@@ -462,7 +462,7 @@ msgstr "Les Lacs Finlandais"
 msgid ""
 "These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
 "mountains. It is up to you to find a way through these lands."
-msgstr "Voici les magnifiques contrées Finlandaises, faites de lacs, de rivières, d'anciennes forêts et de montagnes. C'est à vous de trouver un chemin à travers ces terres."
+msgstr "Voici les magnifiques contrés Finlandaises, faites de lacs, de rivières, d'anciennes forêts et de montagnes. C'est à vous de trouver un chemin à travers ces terres."
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:11
 msgid ""
@@ -480,7 +480,7 @@ msgid ""
 "your tribe woke up on this island among fire and lava? Until now it seems as"
 " if you are alone, but no-one knows what might happen if you met an opposing"
 " tribe?"
-msgstr "Est-ce un test des Dieux ou un plan diabolique de quelqu'un d'autre, que de vous réveiller avec votre tribu sur cette île entourée par le feu et la lave ? Jusqu'à présent il semble que vous soyez seuls, mais qui sait, que se passerait-il si vous rencontriez une tribu ennemie ?"
+msgstr "Est-ce un test des Dieux ou un plan diabolique de quelqu'un d'autre, que de vous réveiller avec votre tribu sur cette île entourée par le feu et la lave ? Jusqu'à présent il semble que vous soyez seuls, mais qui sait se qu'il se passerait si vous rencontriez une tribu ennemie ?"
 
 #: ../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
@@ -572,7 +572,7 @@ msgid ""
 "For centuries, you’ve lived peacefully side by side with the other tribe on "
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
-msgstr "Depuis des siècles vous côtoyez pacifiquement la tribu de l'île voisine. Cette paix semble révolue, votre voisin commence à s'étendre."
+msgstr "Depuis des siècles vous côtoyez pacifiquement la tribu de l'île voisine. Cette paix semble révolue – votre voisin commence à s'étendre."
 
 #: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:8
 msgid "Kings and Queens"
@@ -645,7 +645,7 @@ msgstr "Un tournoi spécial de la culture Atlante est le renommé « Sautillemen
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr "Contrebande"
+msgstr "Contrebandiers"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:11
 msgid ""
