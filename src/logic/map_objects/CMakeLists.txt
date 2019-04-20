@@ -29,6 +29,7 @@ wl_library(logic_map_objects
     buildcost.h
     checkstep.cc
     checkstep.h
+    draw_text.h
     findbob.cc
     findbob.h
     findimmovable.cc
