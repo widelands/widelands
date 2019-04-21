@@ -182,15 +182,15 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 
 			// List files for the given scale, and if we have any, add a mipmap entry for them.
 			auto add_scale = [this, basename, directory](float scale_as_float, const std::string& scale_as_string) {
-				std::vector<std::string> filenames = g_fs->get_sequential_files(directory, basename + (scale_as_string.empty() ? "" : "_" + scale_as_string), "png");
+				std::vector<std::string> filenames = g_fs->get_sequential_files(directory, basename + scale_as_string, "png");
 				if (!filenames.empty()) {
 					mipmaps_.insert(std::make_pair(scale_as_float, std::unique_ptr<MipMapEntry>(new MipMapEntry(filenames))));
 				}
 			};
-			add_scale(0.5f, "0.5");
-			add_scale(1.0f, "1");
-			add_scale(2.0f, "2");
-			add_scale(4.0f, "4");
+			add_scale(0.5f, "_0.5");
+			add_scale(1.0f, "_1");
+			add_scale(2.0f, "_2");
+			add_scale(4.0f, "_4");
 
 			if (mipmaps_.count(1.0f) == 0) {
 				// There might be only 1 scale
