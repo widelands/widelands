@@ -281,10 +281,11 @@ void MapObjectDescr::add_animations(const LuaTable& table) {
 			const bool is_directional = anim->has_key<std::string>("directional") ? anim->get_bool("directional") : false;
 			if (is_directional) {
 				for (int dir = 1; dir <= 6; ++dir) {
-					const std::string directional_basename = basename + animation_direction_names[dir - 1];
-					if (is_animation_known(directional_basename)) {
-						throw GameDataError("Tried to add already existing directional animation '%s\'", directional_basename.c_str());
+					const std::string directional_animname = animname + animation_direction_names[dir - 1];
+					if (is_animation_known(directional_animname)) {
+						throw GameDataError("Tried to add already existing directional animation '%s\'", directional_animname.c_str());
 					}
+					const std::string directional_basename = basename + animation_direction_names[dir - 1];
 					anims_.insert(std::pair<std::string, uint32_t>(directional_basename, g_gr->animations().load(*anim, directional_basename)));
 				}
 			} else {
