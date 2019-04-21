@@ -28,7 +28,14 @@ are available, and what your image files need to look like:
             priority = 128
          },
       },
-      working = ...
+      walk = {
+         directory = path.dirname(__file__),
+         basename = "walk",
+         hotspot = { 5, 7 },
+         fps = 4,
+         directional = true
+      },
+      ...
    }
 
 Let's have a detailed look at the ``idle`` animation:
@@ -51,6 +58,9 @@ Let's have a detailed look at the ``idle`` animation:
    *DEPRECATED*. This is older code that is slowly being phased out - do not use this parameter.
    A table with full directory and file names.
 
+**directional**
+   *Optional*. If this is ``true``, indicates to the engine that this is a directional animation. In our example, the engine will create a set of 6 animations called ``"walk_ne"``, ``"walk_e"``, ``"walk_se"``, ``"walk_sw"``, ``"walk_w"``, and ``"walk_nw"``. See :ref:`animations_directional` below.
+
 **hotspot**
    *Mandatory*. Hotspots define a place on a graphic image through its *x* and *y* coordinates that can be used as a handle or reference point to provide control over positioning the image on the map. For example, hotspots help carriers stay on the road, and control the positioning of the wares they carry. Increase ``x`` to shift the animation to the left and ``y`` to shift it upwards.
 
@@ -64,6 +74,8 @@ Let's have a detailed look at the ``idle`` animation:
    * **128-254:** Probability between ``0.0`` and ``1.0``, many instances can be playing at any time
    * **255:** Always play
 
+
+.. _animations_directional:
 
 Directional Animations
 ----------------------
@@ -100,10 +112,10 @@ loading is started, so you won't need to include it again. Example:
    add_animation(animations, "idle", dirname, "idle", {16, 30}, 5)
 
    -- Add animations for the 6 directions with hotspot = {16, 30} and fps = 10
-   add_walking_animations(animations, "walk", dirname, "walk", {16, 30}, 10)
+   add_directional_animation(animations, "walk", dirname, "walk", {16, 30}, 10)
 
    -- Add a "walkload" animation. The animation hasn't been created yet in this example, so we reuse the files for the "walk" animation.
-   add_walking_animations(animations, "walkload", dirname, "walk", {16, 30}, 10)
+   add_directional_animation(animations, "walkload", dirname, "walk", {16, 30}, 10)
 
 
    tribes:new_worker_type {
@@ -149,7 +161,7 @@ When converting a simple file animation to a mipmap animation, follow these step
   MipmapMaker accepts high-resolution images as input files (they should be at least 4 times the in-game size)
   and creates correctly named mipmap images for all supported scales for each animation, e.g.:
 
-  java MipmapMaker ~/widelands/data/tribes/workers/fancytribe/diligentworker walk_se 2 true true true 4.0
+  ``java MipmapMaker ~/widelands/data/tribes/workers/fancytribe/diligentworker walk_se 2 true true true 4.0``
 
   MipmapMaker is documented in ``widelands-media/graphics/tools/Graphics Tools (Java)/Readme``.
 

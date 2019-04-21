@@ -117,11 +117,13 @@ public:
 	/**
 	 * Loads an animation, graphics sound and everything from a Lua table.
 	 *
+	 * The 'basename' is the filename prefix for loading the images, e.g. "idle" or "walk_ne".
+	 *
 	 * The Lua table must contain a table 'pictures' with image paths and a 'hotspot' table.
 	 *
 	 * Optional parameters in the Lua table are 'fps' and 'sound_effect'.
 	 */
-	uint32_t load(const LuaTable& table);
+	uint32_t load(const LuaTable& table, const std::string& basename);
 
 	/// Returns the animation with the given ID or throws an exception if it is
 	/// unknown.

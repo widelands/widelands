@@ -6,7 +6,7 @@
 --
 -- This file contains all the units for a tribe.
 
-dirname = path.dirname(__file__)
+animation_dirname = path.dirname(__file__) .. "images/atlanteans"
 
 -- RST
 -- .. function:: new_tribe{table}
@@ -53,12 +53,14 @@ tribes:new_tribe {
    animations = {
       -- Some blue fires would be fine, but just an idea
       frontier = {
-         pictures = path.list_files(dirname .. "images/atlanteans/frontier_??.png"),
+         directory = animation_dirname,
+         basename = "frontier",
          hotspot = { 3, 12 },
       },
       flag = {
          -- Not just a plain color, maybe a cross or some stripes
-         pictures = path.list_files(dirname .. "images/atlanteans/flag_??.png"),
+         directory = animation_dirname,
+         basename = "flag",
          hotspot = { 15, 35 },
          fps = 10
       }

@@ -1,4 +1,4 @@
-dirname = path.dirname(__file__)
+animation_dirname = path.dirname(__file__) .. "images/empire"
 
 tribes:new_tribe {
    name = "empire",
@@ -6,12 +6,14 @@ tribes:new_tribe {
    animations = {
       -- No idea for the frontier. Maybe some javelins?
       frontier = {
-         pictures = path.list_files(dirname .. "images/empire/frontier_??.png"),
+         directory = animation_dirname,
+         basename = "frontier",
          hotspot = { 1, 19 },
       },
       -- Not just a plain color, maybe a cross or some stripes
       flag = {
-         pictures = path.list_files(dirname .. "images/empire/flag_??.png"),
+         directory = animation_dirname,
+         basename = "flag",
          hotspot = { 14, 38 },
          fps = 10
       }

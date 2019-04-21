@@ -1,15 +1,17 @@
-dirname = path.dirname (__file__)
+animation_dirname = path.dirname(__file__) .. "images/frisians"
 
 tribes:new_tribe {
    name = "frisians",
 
    animations = {
       frontier = {
-         pictures = path.list_files (dirname .. "images/frisians/frontier_??.png"),
+         directory = animation_dirname,
+         basename = "frontier",
          hotspot = { 9, 26 },
       },
       flag = {
-         pictures = path.list_files (dirname .. "images/frisians/flag_??.png"),
+         directory = animation_dirname,
+         basename = "flag",
          hotspot = { 10, 39 },
          fps = 10,
       }

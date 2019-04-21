@@ -43,6 +43,10 @@
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
+namespace {
+char const* const animation_direction_names[6] = {"_ne", "_e", "_se", "_sw", "_w", "_nw"};
+} // namespace
+
 namespace Widelands {
 
 CmdDestroyMapObject::CmdDestroyMapObject(uint32_t const t, MapObject& o)
@@ -238,14 +242,7 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                     init_descname,
                     table.has_key("helptext_script") ? table.get_string("helptext_script") : "") {
 	if (table.has_key("animations")) {
-		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
-		for (const std::string& animation : anims->keys<std::string>()) {
-			try {
-				add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
-			} catch (const WException& e) {
-				throw GameDataError("Error loading '%s' animation for '%s': %s", animation.c_str(), init_name.c_str(), e.what());
-			}
-		}
+		add_animations(*table.get_table("animations"));
 		if (!is_animation_known("idle")) {
 			throw GameDataError(
 			   "Map object %s has animations but no idle animation", init_name.c_str());
@@ -273,20 +270,38 @@ bool MapObjectDescr::is_animation_known(const std::string& animname) const {
 }
 
 /**
- * Add this animation for this map object under this name
+ * Add all animations for this map object
  */
-void MapObjectDescr::add_animation(const std::string& animname, uint32_t const anim) {
-	if (is_animation_known(animname)) {
-		throw GameDataError("Tried to add already existing animation \"%s\"", animname.c_str());
-	} else {
-		anims_.insert(std::pair<std::string, uint32_t>(animname, anim));
+void MapObjectDescr::add_animations(const LuaTable& table) {
+	for (const std::string& animname : table.keys<std::string>()) {
+		try {
+			std::unique_ptr<LuaTable> anim = table.get_table(animname);
+			// TODO(GunChleoc): Require basename after conversion has been completed
+			const std::string basename = anim->has_key<std::string>("basename") ? anim->get_string("basename") : "";
+			const bool is_directional = anim->has_key<std::string>("directional") ? anim->get_bool("directional") : false;
+			if (is_directional) {
+				for (int dir = 1; dir <= 6; ++dir) {
+					const std::string directional_basename = basename + animation_direction_names[dir - 1];
+					if (is_animation_known(directional_basename)) {
+						throw GameDataError("Tried to add already existing directional animation '%s\'", directional_basename.c_str());
+					}
+					anims_.insert(std::pair<std::string, uint32_t>(directional_basename, g_gr->animations().load(*anim, directional_basename)));
+				}
+			} else {
+				if (is_animation_known(animname)) {
+					throw GameDataError("Tried to add already existing animation '%s'", animname.c_str());
+				}
+				anims_.insert(std::pair<std::string, uint32_t>(animname, g_gr->animations().load(*anim, basename)));
+			}
+		} catch (const std::exception& e) {
+			throw GameDataError("Error loading '%s' animation for map object '%s': %s", animname.c_str(), name().c_str(), e.what());
+		}
 	}
 }
 
-void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::string& prefix) {
-	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
+void MapObjectDescr::assign_directional_animation(DirAnimations* anims, const std::string& basename) {
 	for (int32_t dir = 1; dir <= 6; ++dir) {
-		const std::string anim_name = prefix + std::string("_") + dirstrings[dir - 1];
+		const std::string anim_name = basename + animation_direction_names[dir - 1];
 		try {
 			anims->set_animation(dir, get_animation(anim_name));
 		} catch (const GameDataError& e) {

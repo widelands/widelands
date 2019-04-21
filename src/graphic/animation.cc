@@ -71,7 +71,7 @@ public:
 
 	~NonPackedAnimation() override {
 	}
-	explicit NonPackedAnimation(const LuaTable& table);
+	explicit NonPackedAnimation(const LuaTable& table, const std::string& basename);
 
 	// Implements Animation.
 	float height() const override;
@@ -140,7 +140,7 @@ NonPackedAnimation::MipMapEntry::MipMapEntry(std::vector<std::string> files) : h
 	assert(playercolor_mask_image_files.size() == image_files.size() || playercolor_mask_image_files.empty());
 }
 
-NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
+NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string& basename)
    : frametime_(FRAME_LENGTH),
      hotspot_(table.get_vector<std::string, int>("hotspot")),
 	 sound_effect_(kNoSoundEffect),
@@ -174,10 +174,9 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 								1.0f,
 								std::unique_ptr<MipMapEntry>(new MipMapEntry(table.get_table("pictures")->array_entries<std::string>()))));
 		} else {
-			if (!table.has_key("basename") || !table.has_key("directory")) {
-				throw Widelands::GameDataError("Animation did not define both a directory and a basename for its image files");
+			if (basename.empty() || !table.has_key("directory")) {
+				throw Widelands::GameDataError("Animation did not define both a basename and a directory for its image files");
 			}
-			const std::string basename = table.get_string("basename");
 			const std::string directory = table.get_string("directory");
 
 			// List files for the given scale, and if we have any, add a mipmap entry for them.
@@ -415,9 +414,8 @@ AnimationManager IMPLEMENTATION
 
 ==============================================================================
 */
-
-uint32_t AnimationManager::load(const LuaTable& table) {
-	animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table)));
+uint32_t AnimationManager::load(const LuaTable& table, const std::string& basename) {
+	animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table, basename)));
 	return animations_.size();
 }
 
