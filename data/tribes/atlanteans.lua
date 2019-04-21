@@ -5,10 +5,7 @@
 -- ---------------------
 --
 -- This file contains all the units for a tribe.
-
-animation_dirname = path.dirname(__file__) .. "images/atlanteans"
-
--- RST
+--
 -- .. function:: new_tribe{table}
 --
 --    This function adds all units to a tribe.
@@ -47,33 +44,25 @@ animation_dirname = path.dirname(__file__) .. "images/atlanteans"
 --    **ship**: The internal name of the tribe's ship.
 --
 --    **port**: The internal name of the tribe's port building. This unit needs to be defined in the ``buildings`` table too.
+
+image_dirname = path.dirname(__file__) .. "images/atlanteans/"
+
+animations = {}
+add_animation(animations, "frontier", image_dirname, "frontier", {3, 12})
+add_animation(animations, "flag", image_dirname, "flag", {15, 35}, 10)
+
 tribes:new_tribe {
    name = "atlanteans",
-
-   animations = {
-      -- Some blue fires would be fine, but just an idea
-      frontier = {
-         directory = animation_dirname,
-         basename = "frontier",
-         hotspot = { 3, 12 },
-      },
-      flag = {
-         -- Not just a plain color, maybe a cross or some stripes
-         directory = animation_dirname,
-         basename = "flag",
-         hotspot = { 15, 35 },
-         fps = 10
-      }
-   },
+   animations = animations,
 
    -- Image file paths for this tribe's road textures
    roads = {
       busy = {
-         "tribes/images/atlanteans/roadt_busy.png",
+         image_dirname .. "roadt_busy.png",
       },
       normal = {
-         "tribes/images/atlanteans/roadt_normal_00.png",
-         "tribes/images/atlanteans/roadt_normal_01.png",
+         image_dirname .. "roadt_normal_00.png",
+         image_dirname .. "roadt_normal_01.png",
       },
    },
 
