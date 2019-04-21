@@ -71,7 +71,7 @@ animations = {
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {20, 34}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {20, 34}, 10)
 
 -- RST
 -- .. function:: new_soldier_type{table}

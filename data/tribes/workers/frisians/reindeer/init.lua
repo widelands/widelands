@@ -8,8 +8,8 @@ animations = {
    }
 }
 
-add_walking_animations (animations, "walk", dirname, "walk", {21, 43}, 20)
-add_walking_animations (animations, "walkload", dirname, "walk", {21, 43}, 20)
+add_directional_animation(animations, "walk", dirname, "walk", {21, 43}, 20)
+add_directional_animation(animations, "walkload", dirname, "walk", {21, 43}, 20)
 
 tribes:new_carrier_type {
    msgctxt = "frisians_worker",
