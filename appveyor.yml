@@ -47,7 +47,7 @@ on_success:
   - appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\Widelands-%APPVEYOR_BUILD_VERSION%-%CONFIGURATION%-%PLATFORM%.exe
 
 artifacts:
-  - path: Widelands-$(APPVEYOR_BUILD_VERSION)-$(CONFIGURATION)-$(PLATFORM).exe
+  - path: Widelands-Build20-rc1-$(PLATFORM).exe
     name: Widelands Setup
 
 platform:

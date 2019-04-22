@@ -26,8 +26,8 @@
 
 ;General String
 #define Publisher "Widelands Development Team"
-#define URL "http://www.widelands.org"
-#define HelpURL "http://wl.widelands.org/wiki/MainPage/"
+#define URL "widelands.org"
+#define HelpURL "widelands.org/wiki/MainPage/"
 #define ExeName "widelands.exe"
 #define UrlName "Widelands.url"
 #define HelpName "Widelands-Onlinehelp.url"
@@ -37,7 +37,7 @@
 ;Appveyor environment
 #define BuildFolder GetEnv("APPVEYOR_BUILD_FOLDER")
 #define DLLFolder GetEnv("MINGWPATH")
-#define Version GetEnv("APPVEYOR_BUILD_VERSION") + GetEnv("CONFIGURATION") + GetEnv("PLATFORM")
+#define Version "Build20-rc1-" + GetEnv("PLATFORM")
 
 [Setup]
 AppName={#Name}
