@@ -611,7 +611,7 @@ void Building::draw(uint32_t gametime,
                     const float scale,
                     RenderTarget* dst) {
 	dst->blit_animation(
-	   point_on_dst, scale, anim_, gametime - animstart_, get_owner()->get_playercolor());
+	   point_on_dst, scale, anim_, gametime - animstart_, &get_owner()->get_playercolor());
 
 	//  door animation?
 
