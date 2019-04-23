@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 05:57+0000\n"
+"POT-Creation-Date: 2018-09-28 05:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Basque (https://www.transifex.com/widelands/teams/35159/eu/)\n"
 "MIME-Version: 1.0\n"
@@ -514,8 +514,8 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:333
 msgid ""
-"Until we have found the plans, the only option for our farms is to dismantle"
-" them."
+"Until we have found the plans, the only option for our farms is to destroy "
+"them."
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:340

@@ -226,9 +226,9 @@ diary_page_4 = {
    title=_"The Battle is Won",
    body= lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
-      _([[Praise the gods, we have succeeded. We managed all the challenges that were imposed on us. We even expelled the Barbarians out of our country. However, our victory is only temporary, as this is still just the beginning of the war. Let’s see what the future still holds for us.]])
-      .. paragraphdivider() ..
-      _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
+      _([[Praise the gods, we have succeeded. We managed all the challenges that were imposed on us. We even expelled the Barbarians out of our country. However, our victory is only temporary, as this is still just the beginning of the war. Let’s see what the future still holds for us.]]))
+      .. objective_text(_"Victory",
+      _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
    posy=1,
 }
 
@@ -330,7 +330,7 @@ amalea_2 = {
       _([[So, we urgently need to recover the plans regarding the construction and operation of farms. One older constructor told me that they might have been concealed in a cave in the hills east of our border.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[Until we have found the plans, the only option for our farms is to dismantle them.]]))
+      _([[Until we have found the plans, the only option for our farms is to destroy them.]]))
       .. new_objectives(obj_find_farm_plans),
    posy=1,
    h=500,

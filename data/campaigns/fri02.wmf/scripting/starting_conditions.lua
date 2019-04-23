@@ -61,7 +61,50 @@ port1:set_workers {
    frisians_reindeer = 1,
    frisians_charcoal_burner = 3
 }
-port1:set_soldiers({0,0,0,0}, 25)
+
+local trained = 0
+for descr,n in pairs(campaign_data) do
+   if descr ~= "000" then
+      trained = trained + n
+   end
+end
+local soldiers = {}
+if trained > takeover_soldiers then
+   -- We have more soldiers than allowed, so pick 10 at random
+   local remaining = takeover_soldiers
+   repeat
+      local key1 = math.random(0, 2)
+      local key2 = math.random(0, 6)
+      local key3 = math.random(0, 2)
+      for descr,n in pairs(campaign_data) do
+         if descr == (key1 .. key2 .. key3) and n > 0 and not (key1 == 0 and key2 == 0 and key3 == 0) then
+            if n < remaining then
+               soldiers[{key1, key2, key3, 0}] = n
+               remaining = remaining - n
+            else
+               soldiers[{key1, key2, key3, 0}] = remaining
+               remaining = 0
+            end
+            campaign_data[descr] = nil
+            break
+         end
+      end
+   until remaining == 0
+   soldiers[{0, 0, 0, 0}] = total_soldiers - takeover_soldiers
+else
+   -- We have less than 10 soldiers, so take them all plus some new ones
+   for h=0,2 do
+      for a=0,6 do
+         for d=0,2 do
+            if not (h == 0 and a == 0 and d == 0) and campaign_data[h .. a .. d] and campaign_data[h .. a .. d] > 0 then
+               soldiers[{h, a, d, 0}] = campaign_data[h .. a .. d]
+            end
+         end
+      end
+   end
+   soldiers[{0, 0, 0, 0}] = total_soldiers - trained
+end
+port1:set_soldiers(soldiers)
 
 -- =======================================================================
 --                                 Player 2
@@ -157,7 +200,7 @@ hq2:set_workers {
    empire_weaponsmith = 1,
    empire_geologist = 2
 }
-hq2:set_soldiers({4,4,0,2}, 30)
+hq2:set_soldiers({4,4,0,2}, 40)
 
 -- =======================================================================
 --                                 Player 3
@@ -249,4 +292,4 @@ hq3:set_workers {
    barbarians_blacksmith_master = 1,
    barbarians_helmsmith = 1
 }
-hq3:set_soldiers({3,5,0,2}, 40)
+hq3:set_soldiers({3,5,0,2}, 50)

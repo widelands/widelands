@@ -1,20 +1,21 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008
-# Tomasz Pudło <wptom@wp.pl>, 2016,2018
+# Jakub Magnowski <qoiutek@gmail.com>, 2018
+# Tomasz Pudło <wptom@wp.pl>, 2016,2018-2019
 # Tomasz Pudło <wptom@wp.pl>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 18:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-04-02 12:10+0000\n"
+"Last-Translator: Tomasz Pudło <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -133,15 +134,15 @@ msgstr "Gdy bóg Atlantydów stracił w nich wiarę i zatopił ich wyspę, stara
 
 #: ../../data/campaigns/campaigns.conf:52
 msgid "From Water to Ice"
-msgstr ""
+msgstr "Przez Wodę w Lód"
 
 #: ../../data/campaigns/campaigns.conf:54
 msgid "Frisians"
-msgstr ""
+msgstr "Fryzjanie"
 
 #: ../../data/campaigns/campaigns.conf:56
 msgid "For advanced players. Introduces the Frisians"
-msgstr ""
+msgstr "Dla zaawansowanych graczy. Wprowadza Fryzjan"
 
 #: ../../data/campaigns/campaigns.conf:57
 msgid ""
@@ -151,7 +152,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "Życie nad oceanem to ciągła walka, a tym bardziej dla mieszkańców wybrzeża fryzyjskiego Morza Północnego. Czy ostatnia sztormowa, najbardziej niszczycielska w ludzkiej pamięci, była niczym innym, jak tylko kolejnym przykładem trudności, z jakimi zmagają się wszyscy Fryzianie – lub znakiem od bogów, że plemię, które dopiero tu osiedliło, musi szukać całkowicie nowego domu?"
 
 #: ../../data/campaigns/campaigns.conf:86
 #: ../../data/campaigns/campaigns.conf:111
@@ -183,11 +184,11 @@ msgstr "Niespodzianka, niespodzianka!"
 #: ../../data/campaigns/campaigns.conf:129
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr ""
+msgstr "Wielka Powódź"
 
 #: ../../data/campaigns/campaigns.conf:134
 msgid "Colder than Ice"
-msgstr ""
+msgstr "Zimniejszy niż lód"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
@@ -225,7 +226,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
-msgstr ""
+msgstr "Po powrocie do domu Lutius i jego drużyna stają w obliczu ekonomii w rozsypce. Znalezienie rozwiązania dla wąskich gardeł w gospodarce będzie miało ogromne znaczenie dla przywrócenia chwały imperium."
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -234,23 +235,23 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr ""
+msgstr "W 1362r. ciche, spokojne życie mieszkańców Wysp Północnofryzyjskich zostało przerwane przez jedną z największych powodzi w historii: Powódź Świętego Marcellusa. Czy to naprawdę nic innego jak kolejna burza, czy znak od bogów, że wspólnota fryzyjską na wyspie Langeness nie jest mile widziana?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
 "This scenario is set in a historical context, but most of the story line is "
 "fiction."
-msgstr ""
+msgstr "Ten scenariusz jest osadzony w kontekście historycznym, ale większość fabuły to fikcja."
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr ""
+msgstr "Lodowate powitanie"
 
 #: ../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr ""
+msgstr "Reebaud i jego plemię przybyli na Północ. Ale ich przybycie między zamarzniętymi stepami a pokrytymi śniegiem górami jest nie do przyjęcia…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15

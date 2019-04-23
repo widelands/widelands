@@ -1,5 +1,3 @@
--- TODO(GunChleoc): get resi_00.png from C++
-
 include "tribes/scripting/help/format_help.lua"
 
 -- RST
@@ -46,15 +44,24 @@ end
 --    :arg text: comment of the image.
 --    :returns: a row of pictures connected by arrows.
 --
-function dependencies_resi(resource, items, text)
+function dependencies_resi(tribename, resource, items, text)
    if not text then
       text = ""
    end
-   local items_with_resouce = { "tribes/immovables/" .. resource  .. "/idle_00.png" }
-   for count, item in pairs(items) do
-      table.insert(items_with_resouce, item.icon_name)
+   local tribe_descr = wl.Game():get_tribe_description(tribename)
+   local resi
+   local am = 0
+   for amount,name in pairs(tribe_descr.resource_indicators[resource]) do
+      if amount > am then
+         resi = name
+         am = amount
+      end
    end
-   return dependencies_basic(items_with_resouce, text)
+   local items_with_resource = { wl.Game():get_immovable_description(resi).representative_image }
+   for count, item in pairs(items) do
+      table.insert(items_with_resource, item.icon_name)
+   end
+   return dependencies_basic(items_with_resource, text)
 end
 
 
@@ -109,14 +116,15 @@ end
 --    Creates a dependencies line for any number of weapons.
 --
 --    :arg weapons: an array of weapon names
+--    :arg tribename: the name of the tribe for filtering the buildings
 --    :returns: a list weapons images with the producing and receiving building
 --
-function dependencies_training_weapons(weapons)
+function dependencies_training_weapons(weapons, tribename)
    local result = "";
    local producers = {};
    for count, weaponname in pairs(weapons) do
       local weapon_description = wl.Game():get_ware_description(weaponname)
-      for i, producer in ipairs(weapon_description.producers) do
+      for i, producer in ipairs(weapon_description:producers(tribename)) do
          if (producers[producer.name] == nil) then
             producers[producer.name] = {}
          end
@@ -263,13 +271,11 @@ function building_help_dependencies_production(tribe, building_description)
 
    for i, ware_description in ipairs(building_description.inputs) do
     hasinput = true
-      for j, producer in ipairs(ware_description.producers) do
-         if (tribe:has_building(producer.name)) then
-            result = result .. dependencies(
-               {producer, ware_description},
-               _"%1$s from: %2$s":bformat(ware_description.descname, producer.descname)
-            )
-         end
+      for j, producer in ipairs(ware_description:producers(tribe.name)) do
+         result = result .. dependencies(
+            {producer, ware_description},
+            _"%1$s from: %2$s":bformat(ware_description.descname, producer.descname)
+         )
       end
    end
    if (hasinput) then
@@ -301,8 +307,8 @@ function building_help_dependencies_production(tribe, building_description)
          elseif(resi_name == "quartz") then resi_name = "stones"
          elseif(resi_name == "marble") then resi_name = "stones"
          elseif(resi_name == "gold_ore") then resi_name = "gold" end
-         result = result .. dependencies_resi(
-            "resi_"..resi_name.."2",
+         result = result .. dependencies_resi(tribe.name,
+            resi_name,
             {building_description, ware_description},
             ware_description.descname
          )
@@ -334,7 +340,7 @@ function building_help_dependencies_production(tribe, building_description)
       end
 
       -- Normal buildings
-      for j, consumer in ipairs(ware_description.consumers) do
+      for j, consumer in ipairs(ware_description:consumers(tribe.name)) do
          if (tribe:has_building(consumer.name)) then
             outgoing = outgoing .. dependencies({ware_description, consumer}, consumer.descname)
          end
@@ -381,7 +387,7 @@ function building_help_dependencies_training(tribe, building_description)
             building_description.icon_name,
             "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. (building_description.max_health + 1) ..".png"})
       result = result .. dependencies_training_food(building_description.food_health)
-      result = result .. dependencies_training_weapons(building_description.weapons_health)
+      result = result .. dependencies_training_weapons(building_description.weapons_health, tribe.name)
    end
    if (building_description.max_attack and building_description.min_attack) then
       result = result .. h2(_"Attack Training")
@@ -394,7 +400,7 @@ function building_help_dependencies_training(tribe, building_description)
             building_description.icon_name,
             "tribes/workers/" .. tribe.name .. "/soldier/attack_level" .. (building_description.max_attack + 1) ..".png"})
       result = result .. dependencies_training_food(building_description.food_attack)
-      result = result .. dependencies_training_weapons(building_description.weapons_attack)
+      result = result .. dependencies_training_weapons(building_description.weapons_attack, tribe.name)
    end
    if (building_description.max_defense and building_description.min_defense) then
       result = result .. h2(_"Defense Training")
@@ -407,7 +413,7 @@ function building_help_dependencies_training(tribe, building_description)
             building_description.icon_name,
             "tribes/workers/" .. tribe.name .. "/soldier/defense_level" .. (building_description.max_defense + 1) ..".png"})
       result = result .. dependencies_training_food(building_description.food_defense)
-      result = result .. dependencies_training_weapons(building_description.weapons_defense)
+      result = result .. dependencies_training_weapons(building_description.weapons_defense, tribe.name)
    end
    if (building_description.max_evade and building_description.min_evade) then
       result = result .. h2(_"Evade Training")
@@ -420,7 +426,7 @@ function building_help_dependencies_training(tribe, building_description)
             building_description.icon_name,
             "tribes/workers/" .. tribe.name .. "/soldier/evade_level" .. (building_description.max_evade + 1) ..".png"})
       result = result .. dependencies_training_food(building_description.food_evade)
-      result = result .. dependencies_training_weapons(building_description.weapons_evade)
+      result = result .. dependencies_training_weapons(building_description.weapons_evade, tribe.name)
    end
    return result
 end
@@ -658,6 +664,9 @@ function building_help_crew_string(tribe, building_description)
             result = result .. h3(ngettext("Worker uses:","Workers use:", number_of_workers)) .. tool_string
          end
       end
+
+      worker_description = building_description.working_positions[1]
+      becomes_description = worker_description.becomes
 
       if (becomes_description) then
          result = result .. help_worker_experience(worker_description, becomes_description)

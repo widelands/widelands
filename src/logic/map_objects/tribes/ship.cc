@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2018 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -697,13 +697,14 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	}
 		FALLS_THROUGH;
 	case ShipStates::kExpeditionWaiting:
-	case ShipStates::kExpeditionPortspaceFound:
-	case ShipStates::kSinkRequest:
-	case ShipStates::kSinkAnimation: {
+	case ShipStates::kExpeditionPortspaceFound: {
 		// wait for input
 		start_task_idle(game, descr().main_animation(), 1500);
 		return;
 	}
+	case ShipStates::kSinkRequest:
+	case ShipStates::kSinkAnimation:
+		break;
 	}
 	NEVER_HERE();
 }
@@ -985,7 +986,7 @@ void Ship::draw(const EditorGameBase& egbase,
 
 	// Show ship name and current activity
 	std::string statistics_string;
-	if (draw_text & TextToDraw::kStatistics) {
+	if ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
 			if (destination_.is_set()) {
@@ -1031,20 +1032,19 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	molog("Ship belongs to fleet: %u\n destination: %s\n lastdock: %s\n",
-	      fleet_ ? fleet_->serial() : 0, (destination_.is_set()) ?
-	                                        (boost::format("%u (%d x %d)") % destination_.serial() %
-	                                         destination_.get(egbase)->get_positions(egbase)[0].x %
-	                                         destination_.get(egbase)->get_positions(egbase)[0].y)
-	                                           .str()
-	                                           .c_str() :
-	                                        "-",
-	      (lastdock_.is_set()) ?
-	         (boost::format("%u (%d x %d)") % lastdock_.serial() %
-	          lastdock_.get(egbase)->get_positions(egbase)[0].x %
-	          lastdock_.get(egbase)->get_positions(egbase)[0].y)
-	            .str()
-	            .c_str() :
-	         "-");
+	      fleet_ ? fleet_->serial() : 0,
+	      (destination_.is_set()) ? (boost::format("%u (%d x %d)") % destination_.serial() %
+	                                 destination_.get(egbase)->get_positions(egbase)[0].x %
+	                                 destination_.get(egbase)->get_positions(egbase)[0].y)
+	                                   .str()
+	                                   .c_str() :
+	                                "-",
+	      (lastdock_.is_set()) ? (boost::format("%u (%d x %d)") % lastdock_.serial() %
+	                              lastdock_.get(egbase)->get_positions(egbase)[0].x %
+	                              lastdock_.get(egbase)->get_positions(egbase)[0].y)
+	                                .str()
+	                                .c_str() :
+	                             "-");
 
 	molog("In state: %u (%s)\n", static_cast<unsigned int>(ship_state_),
 	      (expedition_) ? "expedition" : "transportation");

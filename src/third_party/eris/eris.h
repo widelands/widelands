@@ -150,4 +150,3 @@ LUA_API void eris_set_setting(lua_State *L, const char *name, int value);
 LUA_API int luaopen_eris(lua_State* L);
 
 #endif
-

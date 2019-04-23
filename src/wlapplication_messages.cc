@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2018 by the Widelands Development Team
+ * Copyright (C) 2012-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -122,7 +122,8 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	               "                      not connected to a road.")
 	          << endl
 	          << endl
-	          << _("Graphic options:") << endl
+	          << _("Graphic options:")
+	          << endl
 	          /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 	          /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands
 	             textdomain */

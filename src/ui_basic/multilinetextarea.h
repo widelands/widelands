@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,8 @@ struct MultilineTextarea : public Panel {
 	}
 
 	void set_text(const std::string&);
-	uint32_t get_eff_w() const {
+	// int instead of uint because of overflow situations
+	int32_t get_eff_w() const {
 		return scrollbar_.is_enabled() ? get_w() - Scrollbar::kSize : get_w();
 	}
 
@@ -96,6 +97,6 @@ private:
 	Scrollbar scrollbar_;
 	ScrollMode scrollmode_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_MULTILINETEXTAREA_H

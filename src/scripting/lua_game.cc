@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -173,17 +173,7 @@ int LuaPlayer::get_objectives(lua_State* L) {
       (RO) :const:`true` if this player was defeated, :const:`false` otherwise
 */
 int LuaPlayer::get_defeated(lua_State* L) {
-	Player& p = get(L, get_egbase(L));
-	bool is_defeated = true;
-
-	for (const auto& economy : p.economies()) {
-		if (!economy.second->warehouses().empty()) {
-			is_defeated = false;
-			break;
-		}
-	}
-
-	lua_pushboolean(L, is_defeated);
+	lua_pushboolean(L, get(L, get_egbase(L)).is_defeated());
 	return 1;
 }
 
@@ -384,8 +374,9 @@ int LuaPlayer::send_message(lua_State* L) {
 	}
 
 	MessageId const message = plr.add_message(
-	   game, std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(),
-	                                              title, icon, heading, body, c, 0, sub_type, st)),
+	   game,
+	   std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(), title,
+	                                        icon, heading, body, c, 0, sub_type, st)),
 	   popup);
 
 	return to_lua<LuaMessage>(L, new LuaMessage(player_number(), message));
@@ -444,10 +435,10 @@ int LuaPlayer::message_box(lua_State* L) {
 	lua_pop(L, 1);
 
 	if (lua_gettop(L) == 4) {
-		CHECK_UINT(posx);
-		CHECK_UINT(posy);
-		CHECK_UINT(w);
-		CHECK_UINT(h);
+		CHECK_UINT(posx)
+		CHECK_UINT(posy)
+		CHECK_UINT(w)
+		CHECK_UINT(h)
 
 		// If a field has been defined, read the coordinates to jump to.
 		lua_getfield(L, 4, "field");
@@ -851,7 +842,7 @@ int LuaPlayer::switchplayer(lua_State* L) {
 /* RST
    .. method:: produced_wares_count(what)
 
-      Returns count of wares produced byt the player up to now.
+      Returns count of wares produced by the player up to now.
       'what' can be either an "all" or single ware name or an array of names. If single
       ware name is given, integer is returned, otherwise the table is returned.
 */
@@ -952,7 +943,9 @@ Objective
 */
 const char LuaObjective::className[] = "Objective";
 const MethodType<LuaObjective> LuaObjective::Methods[] = {
-   METHOD(LuaObjective, remove), METHOD(LuaObjective, __eq), {nullptr, nullptr},
+   METHOD(LuaObjective, remove),
+   METHOD(LuaObjective, __eq),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaObjective> LuaObjective::Properties[] = {
    PROP_RO(LuaObjective, name),    PROP_RW(LuaObjective, title), PROP_RW(LuaObjective, body),
@@ -966,7 +959,7 @@ void LuaObjective::__persist(lua_State* L) {
 	PERS_STRING("name", name_);
 }
 void LuaObjective::__unpersist(lua_State* L) {
-	UNPERS_STRING("name", name_);
+	UNPERS_STRING("name", name_)
 }
 
 /*
@@ -1114,7 +1107,8 @@ Message
 */
 const char LuaMessage::className[] = "Message";
 const MethodType<LuaMessage> LuaMessage::Methods[] = {
-   METHOD(LuaMessage, __eq), {nullptr, nullptr},
+   METHOD(LuaMessage, __eq),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaMessage> LuaMessage::Properties[] = {
    PROP_RO(LuaMessage, title),     PROP_RO(LuaMessage, body),   PROP_RO(LuaMessage, sent),
@@ -1132,9 +1126,9 @@ void LuaMessage::__persist(lua_State* L) {
 	PERS_UINT32("msg_idx", get_mos(L)->message_savers[player_number_ - 1][message_id_].value());
 }
 void LuaMessage::__unpersist(lua_State* L) {
-	UNPERS_UINT32("player", player_number_);
+	UNPERS_UINT32("player", player_number_)
 	uint32_t midx = 0;
-	UNPERS_UINT32("msg_idx", midx);
+	UNPERS_UINT32("msg_idx", midx)
 	message_id_ = MessageId(midx);
 }
 
@@ -1326,4 +1320,4 @@ void luaopen_wlgame(lua_State* L) {
 	register_class<LuaObjective>(L, "game");
 	register_class<LuaMessage>(L, "game");
 }
-}
+}  // namespace LuaGame

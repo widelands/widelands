@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -123,7 +123,8 @@ void do_plan_map_transition(uint32_t start_time,
                             std::deque<MapView::TimestampedView>* plan) {
 	for (int i = 1; i < kNumKeyFrames - 2; i++) {
 		float dt = (duration_ms / kNumKeyFrames) * i;
-		const float zoom = zoom_t.value(dt);
+		// Using math::clamp as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		const float zoom = math::clamp(zoom_t.value(dt), 1.f / kMaxZoom, kMaxZoom);
 		const Vector2f center_point = center_point_t.value(dt);
 		const Vector2f viewpoint = center_point - Vector2f(width * zoom / 2.f, height * zoom / 2.f);
 		plan->push_back(MapView::TimestampedView{
@@ -351,11 +352,13 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase, Ren
 		}
 
 		// Linearly interpolate between the next and the last.
-		const float t = (now - plan[0].t) / static_cast<float>(plan[1].t - plan[0].t);
+		// Using std::max as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		const float t =
+		   (std::max(1U, now - plan[0].t)) / static_cast<float>(std::max(1U, plan[1].t - plan[0].t));
 		const View new_view = {
 		   mix(t, plan[0].view.viewpoint, plan[1].view.viewpoint),
-		   mix(t, plan[0].view.zoom, plan[1].view.zoom),
-		};
+		   // Using math::clamp as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		   math::clamp(mix(t, plan[0].view.zoom, plan[1].view.zoom), 1.f / kMaxZoom, kMaxZoom)};
 		set_view(new_view, Transition::Jump);
 		break;
 	}
@@ -387,13 +390,23 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 	const Transition transition = animate_map_panning_ ? passed_transition : Transition::Jump;
 	switch (transition) {
 	case Transition::Jump: {
+		if (view_.view_near(target_view)) {
+			// We're already there
+			return;
+		}
 		view_ = target_view;
+		// Using math::clamp as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		view_.zoom = math::clamp(view_.zoom, 1.f / kMaxZoom, kMaxZoom);
 		MapviewPixelFunctions::normalize_pix(map_, &view_.viewpoint);
 		changeview();
 		return;
 	}
 
 	case Transition::Smooth: {
+		if (!view_plans_.empty() && view_plans_.back().back().view.view_near(target_view)) {
+			// We're already there
+			return;
+		}
 		const TimestampedView current = animation_target_view();
 		const auto plan =
 		   plan_map_transition(current.t, map_, current.view, target_view, get_w(), get_h());
@@ -509,6 +522,10 @@ void MapView::zoom_around(float new_zoom,
 	const TimestampedView current = animation_target_view();
 	switch (transition) {
 	case Transition::Jump: {
+		if (view_.zoom_near(new_zoom)) {
+			// We're already there
+			return;
+		}
 		// Zoom around the current mouse position. See
 		// http://stackoverflow.com/questions/2916081/zoom-in-on-a-point-using-scale-and-translate
 		// for a good explanation of this math.
@@ -518,6 +535,10 @@ void MapView::zoom_around(float new_zoom,
 	}
 
 	case Transition::Smooth: {
+		if (!view_plans_.empty() && view_plans_.back().back().view.zoom_near(new_zoom)) {
+			// We're already there
+			return;
+		}
 		const int w = get_w();
 		const int h = get_h();
 		const auto plan = plan_zoom_transition(

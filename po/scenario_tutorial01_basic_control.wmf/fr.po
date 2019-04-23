@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # David D, 2018
@@ -9,15 +9,15 @@
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2015
 # nicolas jardin <niko472006@sfr.fr>, 2016
-# Renaud Bouchard, 2015-2018
+# Renaud Bouchard, 2015-2019
 # syl_, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-15 09:25+0000\n"
-"PO-Revision-Date: 2018-02-16 21:25+0000\n"
-"Last-Translator: David D\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-04-04 12:36+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -93,13 +93,13 @@ msgstr "Nous devons trouver un endroit approprié pour construire la cabane de b
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Press the Space bar to toggle them, or"
-msgstr "Presser la barre d'espace pour les basculer, ou"
+msgstr "Pressez la barre d'espace pour les basculer, ou"
 
 #. TRANSLATORS: List item. Has an image of the button next to it.
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:45
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "click the ‘Show building spaces’ button on the bottom of the screen."
-msgstr "cliquer sur le bouton \"Montrer les espaces de construction de bâtiments\" situé en bas de l'écran."
+msgstr "cliquer sur le bouton \"Montrer les espaces de construction\" au bas de l'écran."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -121,7 +121,7 @@ msgstr "Il est plus facile de comprendre quel type de construction peut être co
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid "Right-click on this window now and then give it a try."
-msgstr "Faites maintenant un clic droit sur cette fenêtre afin d'essayer."
+msgstr "Faites maintenant un Clic-droit sur cette fenêtre afin d'essayer."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 msgid "Lumberjack’s Spot"
@@ -250,7 +250,7 @@ msgstr "Si vous voulez aller plus vite, appuyez simplement sur la touche P. PRÉ
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:143
 msgid "Waiting for the Hut to be Finished"
-msgstr "Attends que la hutte soit finie."
+msgstr "Attends que la cabane soit finie."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:146
 msgid ""
@@ -445,7 +445,7 @@ msgstr "Construisez une carrière près de ces roches ici. Vous vous rappelez co
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
-"space were you want the building to be, choose it from the window that "
+"space where you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
 msgstr "Soyez sûr de voir les espaces de construction, appuyez alors sur ESPACE où vous voulez que soit votre construction, choisissez la à partir de la fenêtre qui apparait, et voilà. Peut être serait il temps de vous expliquer la signification de ces symboles de construction que nous avions activés plus tôt."
@@ -613,7 +613,7 @@ msgstr "Gardez les pentes à l'esprit lorsque vous placez vos routes et utilisez
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr "Si vous maintenez Ctrl ou Shift+Ctrl pendant que vous finissez la route, les drapeaux seront placés automatiquement."
+msgstr "Si vous maintenez Ctrl ou Ctrl + Shift pendant que vous finissez la route, les drapeaux seront placés automatiquement."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Now please rebuild the road between your quarry and your headquarters."

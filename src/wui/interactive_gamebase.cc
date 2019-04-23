@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2018 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,9 +34,11 @@
 #include "logic/map.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
+#include "network/gamehost.h"
 #include "profile/profile.h"
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
+#include "wui/game_client_disconnected.h"
 #include "wui/game_summary.h"
 #include "wui/militarysitewindow.h"
 #include "wui/productionsitewindow.h"
@@ -88,7 +90,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 		   default:
 			   break;
 		   }
-		});
+	   });
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -283,4 +285,15 @@ void InteractiveGameBase::show_game_summary() {
 		return;
 	}
 	new GameSummaryScreen(this, &game_summary_);
+}
+
+bool InteractiveGameBase::show_game_client_disconnected() {
+	assert(is_a(GameHost, get_game()->game_controller()));
+	if (!client_disconnected_.window) {
+		if (upcast(GameHost, host, get_game()->game_controller())) {
+			new GameClientDisconnected(this, client_disconnected_, host);
+			return true;
+		}
+	}
+	return false;
 }

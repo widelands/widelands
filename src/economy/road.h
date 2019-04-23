@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -113,7 +113,7 @@ struct Road : public PlayerImmovable {
 	void presplit(Game&, Coords split);
 	void postsplit(Game&, Flag&);
 
-	bool notify_ware(Game& game, Flag& flag);
+	bool notify_ware(Game& game, FlagId flagid);
 	void update_wallet_chargetime(Game& game);
 	void charge_wallet(Game& game);
 	int32_t wallet() const;
@@ -151,8 +151,8 @@ private:
 	uint8_t carriers_count() const;
 
 private:
-	/// Counter that is incremented for every ware served by this road
-	/// according to the delay of service and decremented over time.
+	/// Counter that is incremented when a ware does not get a carrier for this
+	/// road immediately and decremented over time.
 	int32_t wallet_;
 
 	/// holds the gametime when wallet_ was last charged
@@ -171,6 +171,6 @@ private:
 	using SlotVector = std::vector<CarrierSlot>;
 	SlotVector carrier_slots_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ROAD_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2018 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,7 +58,7 @@ struct GameChatPanel : public UI::Panel {
 	void unfocus_edit();
 
 private:
-	void recalculate();
+	void recalculate(bool has_new_message = false);
 	void key_enter();
 	void key_escape();
 

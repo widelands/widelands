@@ -97,15 +97,39 @@ end
 --
 function worker_help_employers_string(worker_description)
    local result = ""
-   local employers = worker_description.employers;
 
-   if (#employers > 0) then
-      -- TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker can work
+   if (#worker_description.employers > 0) then
+      local normal = {}
+      local additional = {}
+      -- TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker is needed to work at
       -- TRANSLATORS: You can also translate this as 'workplace(s)'
-      result = result .. h2(ngettext("Works at", "Works at", #employers))
+      result = result .. h2(ngettext("Works at", "Works at", #worker_description.employers))
       for i, building in ipairs(worker_description.employers) do
          result = result .. dependencies({worker_description, building}, building.descname)
+         normal[building.descname] = true
       end
+      building = worker_description.employers[1]
+         if #building.working_positions > 1 and worker_description.name ~= building.working_positions[1].name then
+            for i, build in ipairs(building.working_positions[1].employers) do
+               if not normal[build.descname] then
+                  table.insert(additional, build)
+               end
+            end
+            --[[ TODO(GunChleoc): Put this in after Build 20, activate the translators comments and also fix the plural above
+            if #additional == 1 then
+               -- #Translators: Worker Encyclopedia: Heading above a list of buildings where a worker may work instead of a less experienced worker
+               -- #TRANSLATORS: You can also translate this as 'additional workplace'
+               result = result .. h3(pgettext("workerhelp_one_building", "Can also work at"))
+            else
+               -- #Translators: Worker Encyclopedia: Heading above a list of buildings where a worker may work instead of a less experienced worker
+                  -- #TRANSLATORS: You can also translate this as 'additional workplaces'
+               result = result .. h3(ngettext("Can also work at", "Can also work at", #additional))
+            end
+            ]]
+            for i, build in ipairs(additional) do
+               result = result .. dependencies({worker_description, build}, build.descname)
+            end
+         end
    end
    return result
 end
@@ -129,7 +153,7 @@ function worker_help_string(tribe, worker_description)
    local result = h2(_"Purpose") ..
       li_image(worker_description.icon_name, worker_helptext())
 
-   if (worker_description.is_buildable) then
+   if (worker_description.buildable) then
       -- Get the tools for the workers.
       local toolnames = {}
       for j, buildcost in ipairs(worker_description.buildcost) do
