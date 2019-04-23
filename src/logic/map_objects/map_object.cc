@@ -295,7 +295,7 @@ void MapObjectDescr::add_animations(const LuaTable& table) {
 				anims_.insert(std::pair<std::string, uint32_t>(animname, g_gr->animations().load(*anim, basename)));
 			}
 		} catch (const std::exception& e) {
-			throw GameDataError("Error loading '%s' animation for map object '%s': %s", animname.c_str(), name().c_str(), e.what());
+			throw GameDataError("Error loading animation for map object '%s': %s", name().c_str(), e.what());
 		}
 	}
 }
