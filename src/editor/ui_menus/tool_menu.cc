@@ -57,13 +57,13 @@ EditorToolMenu::EditorToolMenu(EditorInteractive& parent, UI::UniqueWindow::Regi
 	   this, pos, g_gr->images().get("images/wui/editor/editor_menu_tool_" pic ".png"), tooltip);   \
 	pos.x += width + spacing;
 
-	ADD_BUTTON("change_height", _("Change height"));
-	ADD_BUTTON("noise_height", _("Random height"));
-	ADD_BUTTON("set_terrain", _("Terrain"));
-	ADD_BUTTON("place_immovable", _("Immovables"));
-	ADD_BUTTON("place_bob", _("Animals"));
-	ADD_BUTTON("change_resources", _("Resources"));
-	ADD_BUTTON("set_port_space", _("Set port space"));
+	ADD_BUTTON("change_height", _("Change height"))
+	ADD_BUTTON("noise_height", _("Random height"))
+	ADD_BUTTON("set_terrain", _("Terrain"))
+	ADD_BUTTON("place_immovable", _("Immovables"))
+	ADD_BUTTON("place_bob", _("Animals"))
+	ADD_BUTTON("change_resources", _("Resources"))
+	ADD_BUTTON("set_port_space", _("Set port space"))
 	ADD_BUTTON("set_origin", _("Set the position that will have the coordinates (0, 0). This will "
 	                           "be the top-left corner of a generated minimap."));
 	ADD_BUTTON("resize", _("Change the map’s size"));

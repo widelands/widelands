@@ -123,7 +123,8 @@ void do_plan_map_transition(uint32_t start_time,
                             std::deque<MapView::TimestampedView>* plan) {
 	for (int i = 1; i < kNumKeyFrames - 2; i++) {
 		float dt = (duration_ms / kNumKeyFrames) * i;
-		const float zoom = zoom_t.value(dt);
+		// Using math::clamp as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		const float zoom = math::clamp(zoom_t.value(dt), 1.f / kMaxZoom, kMaxZoom);
 		const Vector2f center_point = center_point_t.value(dt);
 		const Vector2f viewpoint = center_point - Vector2f(width * zoom / 2.f, height * zoom / 2.f);
 		plan->push_back(MapView::TimestampedView{
@@ -351,11 +352,13 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase, Ren
 		}
 
 		// Linearly interpolate between the next and the last.
-		const float t = (now - plan[0].t) / static_cast<float>(plan[1].t - plan[0].t);
+		// Using std::max as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		const float t =
+		   (std::max(1U, now - plan[0].t)) / static_cast<float>(std::max(1U, plan[1].t - plan[0].t));
 		const View new_view = {
 		   mix(t, plan[0].view.viewpoint, plan[1].view.viewpoint),
-		   mix(t, plan[0].view.zoom, plan[1].view.zoom),
-		};
+		   // Using math::clamp as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		   math::clamp(mix(t, plan[0].view.zoom, plan[1].view.zoom), 1.f / kMaxZoom, kMaxZoom)};
 		set_view(new_view, Transition::Jump);
 		break;
 	}
@@ -392,6 +395,8 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 			return;
 		}
 		view_ = target_view;
+		// Using math::clamp as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		view_.zoom = math::clamp(view_.zoom, 1.f / kMaxZoom, kMaxZoom);
 		MapviewPixelFunctions::normalize_pix(map_, &view_.viewpoint);
 		changeview();
 		return;
