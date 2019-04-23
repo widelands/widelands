@@ -16,19 +16,22 @@ function introduction()
    burn_tavern_down()
 end
 
--- NOCOM refactor
 function wait_for_window_and_tab_or_complain(
    window_name,
    tab_name,
-   objective, complain_msg
-)
+   complain_msg,
+   objective)
+
+   local obj_open_window = add_campaign_objective(objective)
+   obj_open_window.visible = false
+
    while true do
       -- This waits for the window to be opened.
       if not mv.windows[window_name] then
-         objective.visible = true
+         obj_open_window.visible = true
          campaign_message_box(complain_msg)
          while not mv.windows[window_name] do sleep(200) end
-         objective.visible = false
+         obj_open_window.visible = false
       end
 
       -- But it might be closed at any point in time. If it is open and the
@@ -40,6 +43,7 @@ function wait_for_window_and_tab_or_complain(
       end
       sleep(200)
    end
+   set_objective_done(obj_open_window)
 end
 
 function encyclopedia_tutorial()
@@ -49,12 +53,10 @@ function encyclopedia_tutorial()
    set_objective_done(o, wl.Game().real_speed)
 
    o = campaign_message_with_objective(explain_encyclopedia, obj_lookup_wares) -- what information is available
-   local o2 = add_campaign_objective(obj_reopen_encyclopedia)
-   o2.visible = false
    wait_for_window_and_tab_or_complain(
       "encyclopedia",
       "encyclopedia_wares",
-      o2, reopen_encyclopedia
+      reopen_encyclopedia, obj_reopen_encyclopedia
    )
    while mv.windows.encyclopedia do sleep(200) end
    set_objective_done(o, wl.Game().real_speed)
@@ -75,13 +77,10 @@ function burn_tavern_down()
    set_objective_done(o, wl.Game().real_speed)
 
    o = campaign_message_with_objective(explain_building_stats, obj_check_taverns)
-   -- We cannot create several objectives with the same name. Therefore, we create o2 here once and change its visibility
-   local o2 = add_campaign_objective(obj_reopen_building_stats)
-   o2.visible = false
    wait_for_window_and_tab_or_complain(
       "building_statistics",
       "building_stats_medium",
-      o2, reopen_building_stats
+      reopen_building_stats, obj_reopen_building_stats
    )
    while mv.windows.building_statistics do sleep(100) end
    set_objective_done(o, 0)
@@ -91,15 +90,10 @@ function burn_tavern_down()
    set_objective_done(o, wl.Game().real_speed)
 
    o = campaign_message_with_objective(inventory2, obj_switch_stock_tab)
-   -- We cannot create several objectives with the same name. Therefore, we
-   -- create o2 here once and change its visibility
-   o2 = add_campaign_objective(obj_reopen_stock_menu)
-   o2.visible = false
-
    wait_for_window_and_tab_or_complain(
       "stock_menu",
       "wares_in_warehouses",
-      o2, reopen_stock_menu
+      reopen_stock_menu, obj_reopen_stock_menu
    )
    set_objective_done(o, 0)
    campaign_message_box(inventory3)
@@ -124,24 +118,18 @@ function plan_the_future()
    set_objective_done(o, 0)
 
    o = campaign_message_with_objective(ware_stats2, obj_switch_ware_stats_tab_to_third)
-   local o2 = add_campaign_objective(obj_reopen_ware_stats1)
-   o2.visible = false
-
    wait_for_window_and_tab_or_complain(
       "ware_statistics",
       "economy_health",
-      o2, reopen_ware_stats1
+      reopen_ware_stats1, obj_reopen_ware_stats1
    )
    set_objective_done(o, 0)
 
    o = campaign_message_with_objective(ware_stats3, obj_switch_ware_stats_tab_to_fourth)
-   o2 = add_campaign_objective(obj_reopen_ware_stats2)
-   o2.visible = false
-
    wait_for_window_and_tab_or_complain(
       "ware_statistics",
       "stock",
-      o2, reopen_ware_stats2
+      reopen_ware_stats2, obj_reopen_ware_stats2
    )
    set_objective_done(o, 0)
 

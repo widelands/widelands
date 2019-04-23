@@ -38,9 +38,9 @@ intro2 = {
 
 tavern_burnt_down = {
    position = "topright",
-   title = _"The Tavern is Burning!",
+   title = _"An accident",
    body = (
-      h1(_[[An accident]]) ..
+      h1(_[[The Tavern is Burning!]]) ..
       li_object("destroyed_building",
          _[[Oh no, look at this: our tavern is burning! In all the hurry, our innkeeper accidentally dropped a torch. She is fine, but we could not extinguish the fire in time.]], plr.color)
    ),
@@ -74,7 +74,8 @@ obj_check_taverns = {
    number = 1,
    body = objective_text(_"Look up how many taverns you have",
       p(_[[We want to know whether we still have taverns.]]) ..
-      li(_[[Choose the ‘Medium buildings’ tab in the building statistics window.]]) ..
+      li_image("images/wui/fieldaction/menu_tab_buildmedium.png",
+         _[[Choose the ‘Medium buildings’ tab in the building statistics window.]]) ..
       li(_[[Look up how many taverns you have.]]) ..
       li_arrow(_[[Below every building, there are two lines. The first one shows the number of buildings you own and how many are under construction. The second line shows the average productivity if it is a production site or training site, or the stationed and desired soldiers in military buildings.]]) ..
       li(_[[Close the building statistics window when you are done.]])
@@ -144,9 +145,9 @@ inventory1 = {
 
 obj_switch_stock_tab = {
    name = "switch_stock_tab",
-   title=_"Switch to the third tab in the stock window",
+   title=_"Examine the first two tabs in the stock window",
    number = 1,
-   body = objective_text(_"Switch to the third tab in the stock window",
+   body = objective_text(_"Examine the first two tabs in the stock window",
       p(_[[Have a look at the first two tabs in the stock window. They show all the wares and workers you have.]]) ..
       li_image("images/wui/stats/menu_tab_wares_warehouse.png",
          _[[When you have seen enough, switch to the third tab (‘Wares in warehouses’).]])
@@ -326,11 +327,11 @@ ware_stats1 = {
 
 obj_switch_ware_stats_tab_to_third = {
    name = "switch_ware_stats_tab_to_third",
-   title = _"Switch to the third tab in the ware statistics window",
+   title = _"Examine your ware production and consumption",
    number = 1,
-   body = objective_text(_"Switch to the third tab in the ware statistics window",
+   body = objective_text(_"Examine your ware production and consumption",
       p(_[[The first two tabs show you the production and consumption of any ware. You can toggle them by simply clicking on them.]]) ..
-      li(_[[When you have seen enough, switch to the third tab.]])
+      li(_[[When you have seen enough, switch to the third tab (‘Economy health’).]])
    )
 }
 ware_stats2 = {
@@ -346,12 +347,12 @@ ware_stats2 = {
 
 obj_switch_ware_stats_tab_to_fourth = {
    name = "switch_ware_stats_tab_to_fourth",
-   title = _"Switch to the last tab in the ware statistics window",
+   title = _"Examine your economy’s health",
    number = 1,
-   body = objective_text(_"Switch to the last tab in the ware statistics window",
+   body = objective_text(_"Examine your economy’s health",
       p(_[[The third tab shows you the economy health of the ware. When the value is positive, this means your stock is growing.]]) ..
       p(_[[Now try this out. You can also compare it with the two previous tabs.]]) ..
-      li(_[[When you have seen enough, switch to the fourth tab.]])
+      li(_[[When you have seen enough, switch to the fourth tab (‘Stock’).]])
    )
 }
 ware_stats3 = {
@@ -367,9 +368,9 @@ ware_stats3 = {
 
 obj_close_ware_stats = {
    name = "close_ware_stats",
-   title = _"Close the ware statistics window",
+   title = _"Examine your stock",
    number = 1,
-   body = objective_text(_"Close the ware statistics window",
+   body = objective_text(_"Examine your stock",
       li_arrow(_[[The stock tab shows you how many wares you have. Compare the information from the four tabs to understand the correlation.]]) ..
       li(_[[When you have finished, close the ware statistics window.]])
    ),
