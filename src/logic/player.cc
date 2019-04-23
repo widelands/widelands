@@ -331,8 +331,8 @@ void Player::play_message_sound(const Message::Type& msgtype) {
 	}
 
 	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
-		MAYBE_PLAY(Message::Type::kEconomySiteOccupied, "military/site_occupied");
-		MAYBE_PLAY(Message::Type::kWarfareUnderAttack, "military/under_attack");
+		MAYBE_PLAY(Message::Type::kEconomySiteOccupied, "military/site_occupied")
+		MAYBE_PLAY(Message::Type::kWarfareUnderAttack, "military/under_attack")
 		Notifications::publish(NoteSound("message", 200, PRIO_ALWAYS_PLAY));
 	}
 }
@@ -548,8 +548,8 @@ Waterway* Player::build_waterway(const Path& path) {
 						return nullptr;
 					}
 				}
-				if (!map.can_reach_by_water(fc)) {
-					log("%i: building waterway aborted, unswimmable\n", player_number());
+				if (!CheckStepFerry(egbase()).reachable_dest(map, fc)) {
+					log("%i: building waterway aborted, unreachable for ferries\n", player_number());
 					return nullptr;
 				}
 			}

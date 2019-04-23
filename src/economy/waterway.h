@@ -29,7 +29,7 @@
 
 namespace Widelands {
 struct Ferry;
-struct Fleet;
+struct FerryFleet;
 class Request;
 
 class WaterwayDescr : public RoadBaseDescr {
@@ -61,21 +61,23 @@ struct Waterway : public RoadBase {
 	void remove_worker(Worker&) override;
 	void assign_carrier(Carrier&, uint8_t) override;
 
-	Fleet* get_fleet() const;
+	FerryFleet* get_fleet() const;
+
+	void log_general_info(const EditorGameBase&) const override;
 
 protected:
 	void cleanup(EditorGameBase&) override;
 
 private:
-	friend struct Fleet;
-	void set_fleet(Fleet* fleet);
+	friend struct FerryFleet;
+	void set_fleet(FerryFleet* fleet);
 
-	void link_into_flags(EditorGameBase&) override;
+	void link_into_flags(EditorGameBase&, bool = false) override;
 
-	void request_ferry(uint32_t gametime);
+	void request_ferry(EditorGameBase& egbase);
 
 	Ferry* ferry_;
-	Fleet* fleet_;
+	FerryFleet* fleet_;
 };
 }
 

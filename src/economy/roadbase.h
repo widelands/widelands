@@ -102,7 +102,7 @@ protected:
 	void mark_map(EditorGameBase&);
 	void unmark_map(EditorGameBase&);
 
-	virtual void link_into_flags(EditorGameBase&);
+	virtual void link_into_flags(EditorGameBase&, bool = false);
 
 	inline void set_roadtype(EditorGameBase& egbase, const FCoords curf, uint8_t dir, RoadType type) const;
 

@@ -1075,36 +1075,36 @@ void Worker::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	if (upcast(PlayerImmovable, loc, location_.get(egbase))) {
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* Owner: (%p)\n", &loc->owner());
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 		molog("** Owner (plrnr): %i\n", loc->owner().player_number());
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* WorkerEconomy: %p\n", loc->get_economy(wwWORKER));
 		molog("* WareEconomy: %p\n", loc->get_economy(wwWARE));
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 	}
 
 	PlayerImmovable* imm = location_.get(egbase);
 	molog("location: %u\n", imm ? imm->serial() : 0);
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("WorkerEconomy: %p\n", worker_economy_);
 	molog("WareEconomy: %p\n", ware_economy_);
 	molog("transfer: %p\n", transfer_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 
 	if (upcast(WareInstance, ware, carried_ware_.get(egbase))) {
 		molog("* carried_ware->get_ware() (id): %i\n", ware->descr_index());
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* carried_ware->get_economy() (): %p\n", ware->get_economy());
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 	}
 
 	molog("current_exp: %i / %i\n", current_exp_, descr().get_needed_experience());
 
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("supply: %p\n", supply_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 }
 
 /**
@@ -1184,13 +1184,13 @@ void Worker::set_economy(Economy* const economy, WareWorker type) {
 	case wwWORKER: {
 		worker_economy_ = economy;
 		if (old) {
-			old->remove_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
+			old->remove_wares_or_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
 		}
 		if (supply_) {
 			supply_->set_economy(worker_economy_);
 		}
 		if (worker_economy_) {
-			worker_economy_->add_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
+			worker_economy_->add_wares_or_workers(owner().tribe().worker_index(descr().name().c_str()), 1, ware_economy_);
 		}
 	} break;
 	}
@@ -1344,8 +1344,8 @@ DescriptionIndex Worker::level(Game& game) {
 	assert(t.has_worker(new_index));
 
 	// Inform the economy, that something has changed
-	worker_economy_->remove_workers(old_index, 1);
-	worker_economy_->add_workers(new_index, 1);
+	worker_economy_->remove_wares_or_workers(old_index, 1);
+	worker_economy_->add_wares_or_workers(new_index, 1, ware_economy_);
 
 	create_needed_experience(game);
 	return old_index;  //  So that the caller knows what to replace him with.

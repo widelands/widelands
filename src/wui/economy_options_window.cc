@@ -130,9 +130,7 @@ EconomyOptionsWindow::TargetWaresDisplay::info_for_ware(Widelands::DescriptionIn
 		die();
 		return *(new std::string());
 	}
-	return boost::lexical_cast<std::string>(get_type() == Widelands::wwWORKER ?
-	                                           economy->worker_target_quantity(ware).permanent :
-	                                           economy->ware_target_quantity(ware).permanent);
+	return boost::lexical_cast<std::string>(economy->target_quantity(ware).permanent);
 }
 
 /**
@@ -193,9 +191,7 @@ void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int amount) {
 	const auto& items = is_wares ? player_->tribe().wares() : player_->tribe().workers();
 	for (const Widelands::DescriptionIndex& index : items) {
 		if (display_.ware_selected(index)) {
-			const Widelands::Economy::TargetQuantity& tq = is_wares ?
-			                                                  economy->ware_target_quantity(index) :
-			                                                  economy->worker_target_quantity(index);
+			const Widelands::Economy::TargetQuantity& tq = economy->target_quantity(index);
 			// Don't allow negative new amount.
 			if (amount >= 0 || -amount <= static_cast<int>(tq.permanent)) {
 				if (is_wares) {

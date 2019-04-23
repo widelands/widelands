@@ -59,7 +59,8 @@ enum class MapObjectType : uint8_t {
 
 	WARE,  //  class WareInstance
 	BATTLE,
-	FLEET,
+	SHIP_FLEET,
+	FERRY_FLEET,
 
 	BOB = 10,  // Bob
 	CRITTER,   // Bob -- Critter
@@ -331,7 +332,8 @@ public:
 		HeaderWareInstance = 8,
 		HeaderShip = 9,
 		HeaderPortDock = 10,
-		HeaderFleet = 11,
+		HeaderShipFleet = 11,
+		HeaderFerryFleet = 12,
 	};
 
 	/**

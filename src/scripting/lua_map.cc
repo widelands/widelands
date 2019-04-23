@@ -550,10 +550,10 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 	lua_pushuint32(L, idx);                                                                         \
 	lua_pushuint32(L, i.first.name);                                                                \
 	lua_rawset(L, -3);
-			PUSHLEVEL(1, health);
-			PUSHLEVEL(2, attack);
-			PUSHLEVEL(3, defense);
-			PUSHLEVEL(4, evade);
+			PUSHLEVEL(1, health)
+			PUSHLEVEL(2, attack)
+			PUSHLEVEL(3, defense)
+			PUSHLEVEL(4, evade)
 #undef PUSHLEVEL
 
 			lua_pushuint32(L, i.second);
@@ -685,6 +685,14 @@ parse_wares_as_bill_of_material(lua_State* L, int table_index, const TribeDescr&
 	return result;
 }
 
+const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tribename) {
+	if (!Widelands::tribe_exists(tribename)) {
+		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
+	}
+	const Tribes& tribes = get_egbase(L).tribes();
+	return *tribes.get_tribe_descr(tribes.tribe_index(tribename));
+}
+
 }  // namespace
 
 /*
@@ -799,7 +807,8 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case MapObjectType::MAPOBJECT:
 	case MapObjectType::BATTLE:
 	case MapObjectType::BOB:
-	case MapObjectType::FLEET:
+	case MapObjectType::SHIP_FLEET:
+	case MapObjectType::FERRY_FLEET:
 	case MapObjectType::WARE:
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
 		                static_cast<int>(mo->descr().type()))
@@ -1547,7 +1556,7 @@ void LuaTribeDescription::__persist(lua_State* L) {
 
 void LuaTribeDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_tribe_index(name);
 	set_description_pointer(tribes.get_tribe_descr(idx));
@@ -2001,7 +2010,7 @@ void LuaImmovableDescription::__persist(lua_State* L) {
 
 void LuaImmovableDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const World& world = get_egbase(L).world();
 	DescriptionIndex idx = world.get_immovable_index(name);
 	if (idx != INVALID_INDEX) {
@@ -2223,7 +2232,7 @@ void LuaBuildingDescription::__persist(lua_State* L) {
 
 void LuaBuildingDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_building_index(name.c_str());
 	set_description_pointer(tribes.get_building_descr(idx));
@@ -3062,12 +3071,12 @@ WareDescription
 */
 const char LuaWareDescription::className[] = "WareDescription";
 const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
+   METHOD(LuaWareDescription, consumers),
    METHOD(LuaWareDescription, is_construction_material),
+   METHOD(LuaWareDescription, producers),
    {nullptr, nullptr},
 };
 const PropertyType<LuaWareDescription> LuaWareDescription::Properties[] = {
-   PROP_RO(LuaWareDescription, consumers),
-   PROP_RO(LuaWareDescription, producers),
    {nullptr, nullptr, nullptr},
 };
 
@@ -3078,7 +3087,7 @@ void LuaWareDescription::__persist(lua_State* L) {
 
 void LuaWareDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_ware_index(name.c_str());
 	set_description_pointer(tribes.get_ware_descr(idx));
@@ -3091,25 +3100,35 @@ void LuaWareDescription::__unpersist(lua_State* L) {
  */
 
 /* RST
-   .. attribute:: consumers
+   .. method:: consumers(tribename)
+
+      :arg tribename: the name of the tribe that this ware gets checked for
+      :type tribename: :class:`string`
 
       (RO) An array with :class:`LuaBuildingDescription` with buildings that
       need this ware for their production.
 */
-int LuaWareDescription::get_consumers(lua_State* L) {
+int LuaWareDescription::consumers(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	const Widelands::TribeDescr& tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
+
 	lua_newtable(L);
 	int index = 1;
 	for (const DescriptionIndex& building_index : get()->consumers()) {
-		lua_pushint32(L, index++);
-		upcasted_map_object_descr_to_lua(
-		   L, get_egbase(L).tribes().get_building_descr(building_index));
-		lua_rawset(L, -3);
+		if (tribe.has_building(building_index)) {
+			lua_pushint32(L, index++);
+			upcasted_map_object_descr_to_lua(
+			   L, get_egbase(L).tribes().get_building_descr(building_index));
+			lua_rawset(L, -3);
+		}
 	}
 	return 1;
 }
 
 /* RST
-   .. method:: is_construction_material
+   .. method:: is_construction_material(tribename)
 
       :arg tribename: the name of the tribe that this ware gets checked for
       :type tribename: :class:`string`
@@ -3130,19 +3149,29 @@ int LuaWareDescription::is_construction_material(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: producers
+   .. method:: producers(tribename)
+
+      :arg tribename: the name of the tribe that this ware gets checked for
+      :type tribename: :class:`string`
 
       (RO) An array with :class:`LuaBuildingDescription` with buildings that
       can procude this ware.
 */
-int LuaWareDescription::get_producers(lua_State* L) {
+int LuaWareDescription::producers(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	const Widelands::TribeDescr& tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
+
 	lua_newtable(L);
 	int index = 1;
 	for (const DescriptionIndex& building_index : get()->producers()) {
-		lua_pushint32(L, index++);
-		upcasted_map_object_descr_to_lua(
-		   L, get_egbase(L).tribes().get_building_descr(building_index));
-		lua_rawset(L, -3);
+		if (tribe.has_building(building_index)) {
+			lua_pushint32(L, index++);
+			upcasted_map_object_descr_to_lua(
+			   L, get_egbase(L).tribes().get_building_descr(building_index));
+			lua_rawset(L, -3);
+		}
 	}
 	return 1;
 }
@@ -3176,7 +3205,7 @@ void LuaWorkerDescription::__persist(lua_State* L) {
 
 void LuaWorkerDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_worker_index(name.c_str());
 	set_description_pointer(tribes.get_worker_descr(idx));
@@ -3457,7 +3486,7 @@ void LuaResourceDescription::__persist(lua_State* L) {
 
 void LuaResourceDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const World& world = get_egbase(L).world();
 	const ResourceDescription* descr = world.get_resource(world.safe_resource_index(name.c_str()));
 	set_description_pointer(descr);
@@ -3578,7 +3607,7 @@ void LuaTerrainDescription::__persist(lua_State* L) {
 
 void LuaTerrainDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	set_description_pointer(get_egbase(L).world().terrain_descr(name));
 }
 
@@ -3744,10 +3773,8 @@ Economy
 */
 const char LuaEconomy::className[] = "Economy";
 const MethodType<LuaEconomy> LuaEconomy::Methods[] = {
-   METHOD(LuaEconomy, ware_target_quantity),
-   METHOD(LuaEconomy, worker_target_quantity),
-   METHOD(LuaEconomy, set_ware_target_quantity),
-   METHOD(LuaEconomy, set_worker_target_quantity),
+   METHOD(LuaEconomy, target_quantity),
+   METHOD(LuaEconomy, set_target_quantity),
    {nullptr, nullptr},
 };
 const PropertyType<LuaEconomy> LuaEconomy::Properties[] = {
@@ -3764,94 +3791,57 @@ void LuaEconomy::__persist(lua_State* L) {
 void LuaEconomy::__unpersist(lua_State* L) {
 	Widelands::PlayerNumber player_number;
 	Widelands::Serial economy_serial;
-	UNPERS_UINT32("player", player_number);
-	UNPERS_UINT32("economy", economy_serial);
+	UNPERS_UINT32("player", player_number)
+	UNPERS_UINT32("economy", economy_serial)
 	const Widelands::Player& player = get_egbase(L).player(player_number);
 	set_economy_pointer(player.get_economy(economy_serial));
 }
 
 /* RST
-   .. method:: ware_target_quantity(warename)
+   .. method:: target_quantity(name)
 
-      Returns the amount of the given ware that should be kept in stock for this economy.
-
-      **Warning**: Since economies can disappear when a player merges them
-      through placing/deleting roads and flags, you must get a fresh economy
-      object every time you use this function.
-
-      :arg warename: the name of the ware.
-      :type warename: :class:`string`
-*/
-int LuaEconomy::ware_target_quantity(lua_State* L) {
-	const std::string warename = luaL_checkstring(L, 2);
-	const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(warename);
-	if (get_egbase(L).tribes().ware_exists(index)) {
-		const Widelands::Economy::TargetQuantity& quantity = get()->ware_target_quantity(index);
-		lua_pushinteger(L, quantity.permanent);
-	} else {
-		report_error(L, "There is no ware '%s'.", warename.c_str());
-	}
-	return 1;
-}
-
-/* RST
-   .. method:: worker_target_quantity(workername)
-
-      Returns the amount of the given worker that should be kept in stock for this economy.
+      Returns the amount of the given ware or worker that should be kept in stock for this economy.
+      Whether this works only for wares or only for workers is determined by the type of this economy.
 
       **Warning**: Since economies can disappear when a player merges them
       through placing/deleting roads and flags, you must get a fresh economy
       object every time you use this function.
 
-      :arg workername: the name of the worker.
-      :type workername: :class:`string`
+      :arg name: the name of the ware or worker.
+      :type name: :class:`string`
 */
-int LuaEconomy::worker_target_quantity(lua_State* L) {
-	const std::string workername = luaL_checkstring(L, 2);
-	const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(workername);
-	if (get_egbase(L).tribes().worker_exists(index)) {
-		const Widelands::Economy::TargetQuantity& quantity = get()->worker_target_quantity(index);
-		lua_pushinteger(L, quantity.permanent);
-	} else {
-		report_error(L, "There is no worker '%s'.", workername.c_str());
-	}
-	return 1;
-}
-
-/* RST
-   .. method:: set_ware_target_quantity(warename)
-
-      Sets the amount of the given ware type that should be kept in stock for this economy.
-
-      **Warning**: Since economies can disappear when a player merges them
-      through placing/deleting roads and flags, you must get a fresh economy
-      object every time you use this function.
-
-      :arg warename: the name of the ware type.
-      :type warename: :class:`string`
-
-      :arg amount: the new target amount for the ware. Needs to be >= 0.
-      :type amount: :class:`integer`
-*/
-int LuaEconomy::set_ware_target_quantity(lua_State* L) {
-	const std::string warename = luaL_checkstring(L, 2);
-	const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(warename);
-	if (get_egbase(L).tribes().ware_exists(index)) {
-		const int quantity = luaL_checkinteger(L, 3);
-		if (quantity < 0) {
-			report_error(L, "Target ware quantity needs to be >= 0 but was '%d'.", quantity);
+int LuaEconomy::target_quantity(lua_State* L) {
+	const std::string wname = luaL_checkstring(L, 2);
+	switch (get()->type()) {
+		case Widelands::wwWARE: {
+			const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(wname);
+			if (get_egbase(L).tribes().ware_exists(index)) {
+				const Widelands::Economy::TargetQuantity& quantity = get()->target_quantity(index);
+				lua_pushinteger(L, quantity.permanent);
+			} else {
+				report_error(L, "There is no ware '%s'.", wname.c_str());
+			}
+			break;
 		}
-		get()->set_ware_target_quantity(index, quantity, get_egbase(L).get_gametime());
-	} else {
-		report_error(L, "There is no ware '%s'.", warename.c_str());
+		case Widelands::wwWORKER: {
+			const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(wname);
+			if (get_egbase(L).tribes().worker_exists(index)) {
+				const Widelands::Economy::TargetQuantity& quantity = get()->target_quantity(index);
+				lua_pushinteger(L, quantity.permanent);
+			} else {
+				report_error(L, "There is no worker '%s'.", wname.c_str());
+			}
+			break;
+		}
 	}
 	return 1;
 }
 
 /* RST
-   .. method:: set_worker_target_quantity(workername)
+   .. method:: set_target_quantity(name)
 
-      Sets the amount of the given worker type that should be kept in stock for this economy.
+      Sets the amount of the given ware or worker type that should be kept in stock for this economy.
+      Whether this works only for wares or only for workers is determined by the type of this economy.
 
       **Warning**: Since economies can disappear when a player merges them
       through placing/deleting roads and flags, you must get a fresh economy
@@ -3863,17 +3853,35 @@ int LuaEconomy::set_ware_target_quantity(lua_State* L) {
       :arg amount: the new target amount for the worker. Needs to be >= 0.
       :type amount: :class:`integer`
 */
-int LuaEconomy::set_worker_target_quantity(lua_State* L) {
-	const std::string workername = luaL_checkstring(L, 2);
-	const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(workername);
-	if (get_egbase(L).tribes().worker_exists(index)) {
-		const int quantity = luaL_checkinteger(L, 3);
-		if (quantity < 0) {
-			report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
+int LuaEconomy::set_target_quantity(lua_State* L) {
+	const std::string wname = luaL_checkstring(L, 2);
+	switch (get()->type()) {
+		case Widelands::wwWARE: {
+			const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(wname);
+			if (get_egbase(L).tribes().ware_exists(index)) {
+				const int quantity = luaL_checkinteger(L, 3);
+				if (quantity < 0) {
+					report_error(L, "Target ware quantity needs to be >= 0 but was '%d'.", quantity);
+				}
+				get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+			} else {
+				report_error(L, "There is no ware '%s'.", wname.c_str());
+			}
+			break;
 		}
-		get()->set_worker_target_quantity(index, quantity, get_egbase(L).get_gametime());
-	} else {
-		report_error(L, "There is no worker '%s'.", workername.c_str());
+		case Widelands::wwWORKER: {
+			const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(wname);
+			if (get_egbase(L).tribes().worker_exists(index)) {
+				const int quantity = luaL_checkinteger(L, 3);
+				if (quantity < 0) {
+					report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
+				}
+				get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+			} else {
+				report_error(L, "There is no worker '%s'.", wname.c_str());
+			}
+			break;
+		}
 	}
 	return 1;
 }
@@ -3917,7 +3925,7 @@ void LuaMapObject::__persist(lua_State* L) {
 }
 void LuaMapObject::__unpersist(lua_State* L) {
 	uint32_t idx;
-	UNPERS_UINT32("file_index", idx);
+	UNPERS_UINT32("file_index", idx)
 
 	if (!idx)
 		ptr_ = nullptr;
@@ -3994,7 +4002,8 @@ int LuaMapObject::get_descr(lua_State* L) {
 	case MapObjectType::BATTLE:
 	case MapObjectType::BOB:
 	case MapObjectType::CRITTER:
-	case MapObjectType::FLEET:
+	case MapObjectType::FERRY_FLEET:
+	case MapObjectType::SHIP_FLEET:
 	case MapObjectType::SHIP:
 	case MapObjectType::FLAG:
 	case MapObjectType::ROAD:
@@ -6196,8 +6205,8 @@ void LuaField::__persist(lua_State* L) {
 }
 
 void LuaField::__unpersist(lua_State* L) {
-	UNPERS_INT32("x", coords_.x);
-	UNPERS_INT32("y", coords_.y);
+	UNPERS_INT32("x", coords_.x)
+	UNPERS_INT32("y", coords_.y)
 }
 
 /*
@@ -6744,7 +6753,7 @@ void LuaPlayerSlot::__persist(lua_State* L) {
 }
 
 void LuaPlayerSlot::__unpersist(lua_State* L) {
-	UNPERS_UINT32("player", player_number_);
+	UNPERS_UINT32("player", player_number_)
 }
 
 /*

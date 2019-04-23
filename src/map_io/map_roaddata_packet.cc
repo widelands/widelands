@@ -112,7 +112,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 
 					//  Now that all rudimentary data is set, init this road. Then
 					//  overwrite the initialization values.
-					road.link_into_flags(game);
+					road.link_into_flags(game, true);
 
 					uint32_t const count = fr.unsigned_32();
 					if (!count)

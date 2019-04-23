@@ -103,7 +103,8 @@ private:
 	uint32_t nr_wares_;
 	uint32_t nr_immovables_;
 	uint32_t nr_battles_;
-	uint32_t nr_fleets_;
+	uint32_t nr_ship_fleets_;
+	uint32_t nr_ferry_fleets_;
 	uint32_t nr_portdocks_;
 	uint32_t lastserial_;
 };

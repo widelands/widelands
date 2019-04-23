@@ -31,7 +31,7 @@
 namespace Widelands {
 
 class Economy;
-struct Fleet;
+struct ShipFleet;
 class PortDock;
 
 // This can't be part of the Ship class because of forward declaration in game.h
@@ -90,7 +90,7 @@ struct Ship : Bob {
 	~Ship() override;
 
 	// Returns the fleet the ship is a part of.
-	Fleet* get_fleet() const;
+	ShipFleet* get_fleet() const;
 
 	// Returns the current destination or nullptr if there is no current
 	// destination.
@@ -239,7 +239,7 @@ protected:
 	          RenderTarget* dst) const override;
 
 private:
-	friend struct Fleet;
+	friend struct ShipFleet;
 
 	void wakeup_neighbours(Game&);
 
@@ -255,7 +255,7 @@ private:
 	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
 
 	bool init_fleet(EditorGameBase&);
-	void set_fleet(Fleet* fleet);
+	void set_fleet(ShipFleet* fleet);
 
 	void send_message(Game& game,
 	                  const std::string& title,
@@ -263,7 +263,7 @@ private:
 	                  const std::string& description,
 	                  const std::string& picture);
 
-	Fleet* fleet_;
+	ShipFleet* fleet_;
 	Economy* ware_economy_;
 	Economy* worker_economy_;
 	OPtr<PortDock> lastdock_;

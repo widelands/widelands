@@ -149,6 +149,9 @@ void ExpeditionBootstrap::set_economy(Economy* new_economy, WareWorker type) {
 
 	// Transfer the wares and workers.
 	for (std::unique_ptr<InputQueue>& iq : queues_) {
+		if (type != iq->get_type()) {
+			continue;
+		}
 		if (Economy* e = type == wwWARE ? ware_economy_ : worker_economy_) {
 			iq->remove_from_economy(*e);
 		}

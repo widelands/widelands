@@ -1306,7 +1306,7 @@ CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(const uint32_t init_duetime,
 void CmdSetWareTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
 	if (player->has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
-		player->get_economy(economy())->set_ware_target_quantity(ware_type(), permanent_, duetime());
+		player->get_economy(economy())->set_target_quantity(ware_type(), permanent_, duetime());
 	}
 }
 
@@ -1357,7 +1357,7 @@ void CmdResetWareTargetQuantity::execute(Game& game) {
 	const TribeDescr& tribe = player->tribe();
 	if (player->has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
 		const int count = tribe.get_ware_descr(ware_type())->default_target_quantity(tribe.name());
-		player->get_economy(economy())->set_ware_target_quantity(ware_type(), count, duetime());
+		player->get_economy(economy())->set_target_quantity(ware_type(), count, duetime());
 	}
 }
 
@@ -1403,7 +1403,7 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const uint32_t init_dueti
 void CmdSetWorkerTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
 	if (player->has_economy(economy()) && game.tribes().worker_exists(ware_type())) {
-		player->get_economy(economy())->set_worker_target_quantity(
+		player->get_economy(economy())->set_target_quantity(
 		   ware_type(), permanent_, duetime());
 	}
 }
@@ -1455,7 +1455,7 @@ void CmdResetWorkerTargetQuantity::execute(Game& game) {
 	const TribeDescr& tribe = player->tribe();
 	if (player->has_economy(economy()) && game.tribes().worker_exists(ware_type())) {
 		const int count = tribe.get_worker_descr(ware_type())->default_target_quantity();
-		player->get_economy(economy())->set_worker_target_quantity(ware_type(), count, duetime());
+		player->get_economy(economy())->set_target_quantity(ware_type(), count, duetime());
 	}
 }
 

@@ -25,9 +25,9 @@
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
-#include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
+#include "economy/ship_fleet.h"
 #include "economy/transfer.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -187,9 +187,9 @@ WareInstance::WareInstance(DescriptionIndex const i, const WareDescr* const ware
 
 WareInstance::~WareInstance() {
 	if (supply_) {
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("Ware %u still has supply %p\n", descr_index_, supply_);
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 		delete supply_;
 	}
 }
@@ -221,14 +221,14 @@ void WareInstance::set_economy(Economy* const e) {
 		return;
 
 	if (economy_)
-		economy_->remove_wares(descr_index_, 1);
+		economy_->remove_wares_or_workers(descr_index_, 1);
 
 	economy_ = e;
 	if (supply_)
 		supply_->set_economy(e);
 
 	if (economy_)
-		economy_->add_wares(descr_index_, 1);
+		economy_->add_wares_or_workers(descr_index_, 1);
 }
 
 /**

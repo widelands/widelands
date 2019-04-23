@@ -48,12 +48,12 @@ template <typename AreaType = Area<>> struct MapDifferenceRegion {
 			map.neighbour_function(area_, &area_);                                                    \
 		break;
 
-			DIRECTION_CASE(WALK_NW, get_tln);
-			DIRECTION_CASE(WALK_NE, get_trn);
-			DIRECTION_CASE(WALK_E, get_rn);
-			DIRECTION_CASE(WALK_SE, get_brn);
-			DIRECTION_CASE(WALK_SW, get_bln);
-			DIRECTION_CASE(WALK_W, get_ln);
+			DIRECTION_CASE(WALK_NW, get_tln)
+			DIRECTION_CASE(WALK_NE, get_trn)
+			DIRECTION_CASE(WALK_E, get_rn)
+			DIRECTION_CASE(WALK_SE, get_brn)
+			DIRECTION_CASE(WALK_SW, get_bln)
+			DIRECTION_CASE(WALK_W, get_ln)
 #undef DIRECTION_CASE
 		}
 		--direction;

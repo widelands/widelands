@@ -567,13 +567,13 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_consumers(lua_State*);
-	int get_producers(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
+	int consumers(lua_State*);
 	int is_construction_material(lua_State*);
+	int producers(lua_State*);
 
 	/*
 	 * C methods
@@ -799,10 +799,8 @@ public:
 	/*
 	 * Lua methods
 	 */
-	int ware_target_quantity(lua_State*);
-	int worker_target_quantity(lua_State*);
-	int set_ware_target_quantity(lua_State*);
-	int set_worker_target_quantity(lua_State*);
+	int target_quantity(lua_State*);
+	int set_target_quantity(lua_State*);
 
 	/*
 	 * C methods

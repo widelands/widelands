@@ -244,7 +244,7 @@ bool RoadBase::init(EditorGameBase& egbase) {
  * we needed to have this road already registered
  * as Map Object, thats why this is moved
  */
-void RoadBase::link_into_flags(EditorGameBase& egbase) {
+void RoadBase::link_into_flags(EditorGameBase& egbase, bool) {
 	assert(path_.get_nsteps() >= 2);
 
 	// Link into the flags (this will also set our economy)

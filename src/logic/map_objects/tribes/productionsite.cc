@@ -690,7 +690,7 @@ void ProductionSite::act(Game& game, uint32_t const data) {
 
 		if (!can_start_working()) {
 			while (!stack_.empty())
-				program_end(game, Failed);
+				program_end(game, ProgramResult::kFailed);
 		} else {
 			if (stack_.empty()) {
 				working_positions_[0].worker->update_task_buildingwork(game);
@@ -699,7 +699,7 @@ void ProductionSite::act(Game& game, uint32_t const data) {
 
 			State& state = top_state();
 			if (state.program->size() <= state.ip)
-				return program_end(game, Completed);
+				return program_end(game, ProgramResult::kCompleted);
 
 			if (anim_ != descr().get_animation(default_anim_)) {
 				// Restart idle animation, which is the default
@@ -728,7 +728,7 @@ void ProductionSite::program_act(Game& game) {
 	// new productions cycle. Otherwise it can lead to consumption
 	// of input wares without producing anything
 	if (is_stopped_ && state.ip == 0) {
-		program_end(game, Failed);
+		program_end(game, ProgramResult::kFailed);
 		program_timer_ = true;
 		program_time_ = schedule_act(game, 20000);
 	} else
@@ -883,7 +883,7 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 /**
  * Advance the program to the next step.
  */
-void ProductionSite::program_step(Game& game, uint32_t const delay, uint32_t const phase) {
+void ProductionSite::program_step(Game& game, uint32_t const delay, ProgramResult const phase) {
 	State& state = top_state();
 	++state.ip;
 	state.phase = phase;
@@ -899,7 +899,7 @@ void ProductionSite::program_start(Game& game, const std::string& program_name) 
 
 	state.program = descr().get_program(program_name);
 	state.ip = 0;
-	state.phase = 0;
+	state.phase = ProgramResult::kNone;
 
 	stack_.push_back(state);
 
@@ -927,17 +927,18 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 	const std::string& program_name = top_state().program->name();
 
 	stack_.pop_back();
-	if (!stack_.empty())
+	if (!stack_.empty()) {
 		top_state().phase = result;
+	}
 
 	switch (result) {
-	case Failed:
+	case ProgramResult::kFailed:
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(false);
 		calc_statistics();
 		crude_percent_ = crude_percent_ * 8 / 10;
 		break;
-	case Completed:
+	case ProgramResult::kCompleted:
 		skipped_programs_.erase(program_name);
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(true);
@@ -945,11 +946,11 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		crude_percent_ = crude_percent_ * 8 / 10 + 1000000 * 2 / 10;
 		calc_statistics();
 		break;
-	case Skipped:
+	case ProgramResult::kSkipped:
 		skipped_programs_[program_name] = game.get_gametime();
 		crude_percent_ = crude_percent_ * 98 / 100;
 		break;
-	case None:
+	case ProgramResult::kNone:
 		skipped_programs_.erase(program_name);
 		break;
 	}

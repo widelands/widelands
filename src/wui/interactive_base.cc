@@ -810,7 +810,9 @@ bool InteractiveBase::append_build_waterway(Coords const field) {
 
 	{  //  find a path to the clicked-on node
 		Widelands::Path path;
-		Widelands::CheckStepRoad cstep(player, Widelands::MOVECAPS_SWIM);
+		Widelands::CheckStepAnd cstep;
+		cstep.add(Widelands::CheckStepFerry(egbase()));
+		cstep.add(Widelands::CheckStepRoad(player, Widelands::MOVECAPS_SWIM | Widelands::MOVECAPS_WALK));
 		if (map.findpath(buildwaterway_->get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0) {
 			return false;  //  could not find a path
 		}
@@ -820,14 +822,20 @@ bool InteractiveBase::append_build_waterway(Coords const field) {
 	{
 		//  Fix the waterway by finding an optimal path through the set of nodes
 		//  currently used by the waterway. This will not claim any new nodes.
+		//  Since waterways (unlike roads) are strictly limited by the terrain around the
+		//  edges, the path may be zigzagging around (that is, the path may contain two
+		//  neighbouring nodes but not the edge between them).
 		Widelands::Path path;
 		{
-			Widelands::CheckStepLimited cstep;
+			Widelands::CheckStepLimited clim;
 			{
 				for (const Coords& coord : buildwaterway_->get_coords()) {
-					cstep.add_allowed_location(coord);
+					clim.add_allowed_location(coord);
 				}
 			}
+			Widelands::CheckStepAnd cstep;
+			cstep.add(Widelands::CheckStepFerry(egbase()));
+			cstep.add(clim);
 			map.findpath(buildwaterway_->get_start(), field, 0, path, cstep, Map::fpBidiCost);
 		}
 		buildwaterway_->truncate(0);
@@ -1017,9 +1025,10 @@ void InteractiveBase::waterway_building_add_overlay() {
 
 		map.get_neighbour(endpos, dir, &neighb);
 		caps = egbase().player(waterway_build_player_).get_buildcaps(neighb);
+		bool reachable = Widelands::CheckStepFerry(egbase()).reachable_dest(map, neighb);
 
 		if (buildwaterway_->get_index(neighb) >= 0 || !neighb.field->is_interior(waterway_build_player_) ||
-				!map.can_reach_by_water(neighb)) {
+				!reachable) {
 			continue;
 		}
 
@@ -1047,7 +1056,7 @@ void InteractiveBase::waterway_building_add_overlay() {
 				continue;
 			}
 		}
-		if (!has_flag && !(caps & Widelands::MOVECAPS_SWIM) && !(caps & Widelands::BUILDCAPS_FLAG)) {
+		if (!has_flag && !reachable && !(caps & Widelands::BUILDCAPS_FLAG)) {
 			continue;
 		}
 

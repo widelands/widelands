@@ -94,7 +94,7 @@ struct Road : public RoadBase {
 private:
 	void cleanup(EditorGameBase&) override;
 
-	void link_into_flags(EditorGameBase&) override;
+	void link_into_flags(EditorGameBase&, bool = false) override;
 
 private:
 	/// Counter that is incremented when a ware does not get a carrier for this

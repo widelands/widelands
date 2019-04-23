@@ -1339,15 +1339,15 @@ void PlayerImmovable::receive_worker(Game&, Worker& worker) {
 void PlayerImmovable::log_general_info(const EditorGameBase& egbase) const {
 	BaseImmovable::log_general_info(egbase);
 
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("this: %p\n", this);
 	molog("owner_: %p\n", owner_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 	molog("player_number: %i\n", owner_->player_number());
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("ware_economy_: %p\n", ware_economy_);
 	molog("worker_economy_: %p\n", worker_economy_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 }
 
 constexpr uint8_t kCurrentPacketVersionPlayerImmovable = 1;

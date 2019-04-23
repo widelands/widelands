@@ -31,6 +31,7 @@
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -69,7 +70,7 @@ float adjusted_field_brightness(const Widelands::FCoords& fcoords,
                                 const Widelands::Player::Field& pf) {
 	if (pf.vision == 0) {
 		return 0.;
-	};
+	}
 
 	uint32_t brightness = 144 + fcoords.field->get_brightness();
 	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);
@@ -245,7 +246,14 @@ void InteractivePlayer::think() {
 					set_sel_pos(Widelands::NodeAndTriangle<>{
 					   flag_to_connect_,
 					   Widelands::TCoords<>(flag_to_connect_, Widelands::TriangleIndex::D)});
-					start_build_road(flag_to_connect_, field.get_owned_by());
+					const Widelands::Map& map = egbase().map();
+					if (map.get_waterway_max_length() >= 2 &&
+							Widelands::CheckStepFerry(egbase()).reachable_dest(
+									map, Widelands::FCoords(flag_to_connect_, &field))) {
+						show_field_action(this, get_player(), &fieldaction_);
+					} else {
+						start_build_road(flag_to_connect_, field.get_owned_by());
+					}
 				}
 			flag_to_connect_ = Widelands::Coords::null();
 		}

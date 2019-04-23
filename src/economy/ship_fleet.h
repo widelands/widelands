@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_ECONOMY_FLEET_H
-#define WL_ECONOMY_FLEET_H
+#ifndef WL_ECONOMY_SHIP_FLEET_H
+#define WL_ECONOMY_SHIP_FLEET_H
 
 #include <boost/shared_ptr.hpp>
 
@@ -33,23 +33,21 @@ struct Flag;
 class PortDock;
 struct RoutingNodeNeighbour;
 struct Ship;
-struct Ferry;
-struct Waterway;
 
-class FleetDescr : public MapObjectDescr {
+class ShipFleetDescr : public MapObjectDescr {
 public:
-	FleetDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::FLEET, init_name, init_descname, "") {
+	ShipFleetDescr(char const* const init_name, char const* const init_descname)
+	   : MapObjectDescr(MapObjectType::SHIP_FLEET, init_name, init_descname, "") {
 	}
-	~FleetDescr() override {
+	~ShipFleetDescr() override {
 	}
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(FleetDescr);
+	DISALLOW_COPY_AND_ASSIGN(ShipFleetDescr);
 };
 
 /**
- * Manage all ferries, ships and ports of a player that are connected
+ * Manage all ships and ports of a player that are connected
  * by ocean.
  *
  * That is, two ports belong to the same fleet if - and only if - ships can
@@ -59,14 +57,14 @@ private:
  *
  * @paragraph Lifetime
  *
- * Fleet objects are created on-the-fly by @ref Ship, @ref Ferry,
- * @ref PortDock and @ref Waterway, and destroy themselves when they become empty.
+ * Fleet objects are created on-the-fly by @ref Ship and @ref PortDock,
+ * and destroy themselves when they become empty.
  *
  * The intention is for fleet objects to merge automatically and separate
  * again in reaction to changes in the map. However, this may not work
  * properly at the moment.
  */
-struct Fleet : MapObject {
+struct ShipFleet : MapObject {
 	struct PortPath {
 		int32_t cost;
 		boost::shared_ptr<Path> path;
@@ -75,9 +73,9 @@ struct Fleet : MapObject {
 		}
 	};
 
-	const FleetDescr& descr() const;
+	const ShipFleetDescr& descr() const;
 
-	explicit Fleet(Player* player);
+	explicit ShipFleet(Player* player);
 
 	PortDock* get_dock(Flag& flag) const;
 	PortDock* get_dock(EditorGameBase&, Coords) const;
@@ -94,8 +92,6 @@ struct Fleet : MapObject {
 	void remove_ship(EditorGameBase& egbase, Ship* ship);
 	void add_port(EditorGameBase& egbase, PortDock* port);
 	void remove_port(EditorGameBase& egbase, PortDock* port);
-	void add_ferry(Ferry* ferry);
-	void remove_ferry(EditorGameBase& egbase, Ferry* ferry);
 	bool has_ports() const;
 
 	void log_general_info(const EditorGameBase&) const override;
@@ -104,14 +100,9 @@ struct Fleet : MapObject {
 	void add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& neighbours);
 
 	uint32_t count_ships() const;
-	uint32_t count_ferries() const;
 	uint32_t count_ships_heading_here(EditorGameBase& egbase, PortDock* port) const;
 	uint32_t count_ports() const;
 	bool get_act_pending() const;
-
-	void request_ferry(Waterway* waterway, uint32_t gametime);
-	void reroute_ferry_request(Game& game, Waterway* oldww, Waterway* newww);
-	void cancel_ferry_request(Game& game, Waterway* waterway);
 
 	bool empty() const;
 
@@ -120,7 +111,7 @@ protected:
 
 private:
 	bool find_other_fleet(EditorGameBase& egbase);
-	bool merge(EditorGameBase& egbase, Fleet* other);
+	bool merge(EditorGameBase& egbase, ShipFleet* other);
 	void check_merge_economy();
 	void connect_port(EditorGameBase& egbase, uint32_t idx);
 
@@ -131,8 +122,6 @@ private:
 
 	std::vector<Ship*> ships_;
 	std::vector<PortDock*> ports_;
-	std::vector<Ferry*> ferries_;
-	std::multimap<uint32_t, Waterway*> pending_ferry_requests_;
 
 	bool act_pending_;
 
@@ -156,8 +145,6 @@ protected:
 	private:
 		std::vector<uint32_t> ships_;
 		std::vector<uint32_t> ports_;
-		std::vector<uint32_t> ferries_;
-		std::multimap<uint32_t, uint32_t> pending_ferry_requests_;
 	};
 
 public:
@@ -171,4 +158,4 @@ public:
 
 }  // namespace Widelands
 
-#endif  // end of include guard: WL_ECONOMY_FLEET_H
+#endif  // end of include guard: WL_ECONOMY_SHIP_FLEET_H

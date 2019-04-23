@@ -676,8 +676,10 @@ std::string to_string(const MapObjectType type) {
 		return "ware";
 	case MapObjectType::BATTLE:
 		return "battle";
-	case MapObjectType::FLEET:
-		return "fleet";
+	case MapObjectType::SHIP_FLEET:
+		return "ship_fleet";
+	case MapObjectType::FERRY_FLEET:
+		return "ferry_fleet";
 	case MapObjectType::IMMOVABLE:
 		return "immovable";
 	case MapObjectType::FLAG:

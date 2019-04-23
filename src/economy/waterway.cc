@@ -21,8 +21,8 @@
 
 #include "base/macros.h"
 #include "economy/economy.h"
+#include "economy/ferry_fleet.h"
 #include "economy/flag.h"
-#include "economy/fleet.h"
 #include "economy/request.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -68,11 +68,13 @@ Waterway& Waterway::create(EditorGameBase& egbase, Flag& start, Flag& end, const
 	return waterway;
 }
 
-void Waterway::link_into_flags(EditorGameBase& egbase) {
+void Waterway::link_into_flags(EditorGameBase& egbase, bool loading) {
 	RoadBase::link_into_flags(egbase);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
-	if (upcast(Game, game, &egbase)) {
-		request_ferry(egbase.get_gametime());
+	if (!loading) {
+		if (upcast(Game, game, &egbase)) {
+			request_ferry(egbase);
+		}
 	}
 }
 
@@ -90,10 +92,10 @@ void Waterway::remove_worker(Worker& w) {
 	PlayerImmovable::remove_worker(w);
 }
 
-void Waterway::request_ferry(uint32_t gametime) {
-	Fleet* fleet = new Fleet(get_owner());
-	fleet->request_ferry(this, gametime);
-	fleet->init(get_owner()->egbase());
+void Waterway::request_ferry(EditorGameBase& egbase) {
+	FerryFleet* fleet = new FerryFleet(get_owner());
+	fleet->request_ferry(egbase, this);
+	fleet->init(egbase);
 }
 
 void Waterway::assign_carrier(Carrier& c, uint8_t) {
@@ -103,11 +105,11 @@ void Waterway::assign_carrier(Carrier& c, uint8_t) {
 	ferry_ = dynamic_cast<Ferry*>(&c);
 }
 
-Fleet* Waterway::get_fleet() const {
+FerryFleet* Waterway::get_fleet() const {
 	return fleet_;
 }
 
-void Waterway::set_fleet(Fleet* fleet) {
+void Waterway::set_fleet(FerryFleet* fleet) {
 	if (fleet_ == fleet) {
 		return;
 	}
@@ -179,9 +181,10 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 	newww.init(game);
 
 	if (ferry_) {
-		// We simply assign the ferry to the waterway part it currently is on
+		assert(ferry_->get_location(game) == this);
+		// We assign the ferry to the waterway part it currently is on
 		bool other = true;
-		const Coords pos(ferry_->get_position());
+		const Coords pos = ferry_->get_position();
 		Coords temp(flags_[FlagStart]->get_position());
 		for (uint32_t i = 0; i < path_.get_nsteps(); i++) {
 			if (temp == pos) {
@@ -194,18 +197,18 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 		if (other) {
 			molog("Assigning the ferry to the NEW waterway\n");
 			ferry_->set_destination(game, &newww);
-			request_ferry(game.get_gametime());
+			request_ferry(game);
 		}
 		else {
 			molog("Assigning the ferry to the OLD waterway\n");
 			ferry_->set_destination(game, this);
-			newww.request_ferry(game.get_gametime());
+			newww.request_ferry(game);
 		}
 	}
 	else {
 		// this is needed to make sure the ferry finds the way correctly
 		fleet_->reroute_ferry_request(game, this, this);
-		newww.request_ferry(game.get_gametime());
+		newww.request_ferry(game);
 	}
 
 	//  Make sure wares waiting on the original endpoint flags are dealt with.
@@ -216,15 +219,22 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 void Waterway::cleanup(EditorGameBase& egbase) {
 	Economy::check_split(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
 	if (upcast(Game, game, &egbase)) {
-		if (ferry_) {
+		if (ferry_ && egbase.objects().object_still_available(ferry_)) {
 			ferry_->set_destination(*game, nullptr);
 		}
-		if (fleet_) {
+		if (fleet_ && egbase.objects().object_still_available(fleet_)) {
 			// Always call this, in case the fleet can disband now
 			fleet_->cancel_ferry_request(*game, this);
 		}
 	}
 	RoadBase::cleanup(egbase);
+}
+
+void Waterway::log_general_info(const EditorGameBase& egbase) const {
+	MapObject::log_general_info(egbase);
+
+	molog("Ferry %u\n", ferry_ ? ferry_->serial() : 0);
+	molog("FerryFleet %u\n", fleet_ ? fleet_->serial() : 0);
 }
 
 }  // namespace Widelands
