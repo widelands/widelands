@@ -128,6 +128,7 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 	if (player_field.map_object_descr == nullptr) {
 		return;
 	}
+
 	if (player_field.constructionsite.becomes) {
 		assert(field.owner != nullptr);
 		player_field.constructionsite.draw(
@@ -137,18 +138,14 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 		assert(field.owner != nullptr);
 		// this is a building therefore we either draw unoccupied or idle animation
 		dst->blit_animation(field.rendertarget_pixel, scale, building->get_unoccupied_animation(), 0,
-		                    field.owner->get_playercolor());
+		                    &field.owner->get_playercolor());
 	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
 		assert(field.owner != nullptr);
 		dst->blit_animation(field.rendertarget_pixel, scale, field.owner->tribe().flag_animation(), 0,
-		                    field.owner->get_playercolor());
+		                    &field.owner->get_playercolor());
 	} else if (const uint32_t pic = player_field.map_object_descr->main_animation()) {
-		if (field.owner != nullptr) {
-			dst->blit_animation(
-			   field.rendertarget_pixel, scale, pic, 0, field.owner->get_playercolor());
-		} else {
-			dst->blit_animation(field.rendertarget_pixel, scale, pic, 0);
-		}
+		dst->blit_animation(field.rendertarget_pixel, scale, pic, 0,
+		                    (field.owner == nullptr) ? nullptr : &field.owner->get_playercolor());
 	}
 }
 

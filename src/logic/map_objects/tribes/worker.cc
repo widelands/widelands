@@ -2989,15 +2989,15 @@ void Worker::draw_inner(const EditorGameBase& game,
 	assert(get_owner() != nullptr);
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
-	dst->blit_animation(
-	   point_on_dst, scale, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
+	dst->blit_animation(point_on_dst, scale, get_current_anim(),
+	                    game.get_gametime() - get_animstart(), &player_color);
 
 	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
 		const Vector2f hotspot = descr().ware_hotspot().cast<float>();
 		const Vector2f location(
 		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
 		dst->blit_animation(
-		   location, scale, carried_ware->descr().get_animation("idle"), 0, player_color);
+		   location, scale, carried_ware->descr().get_animation("idle"), 0, &player_color);
 	}
 }
 
