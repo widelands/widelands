@@ -62,7 +62,7 @@ return {
       end
 
       -- here is the main loop!!!
-      while count_factions(plrs) > 1 or territory_points.remaining_time > 0 do
+      while count_factions(plrs) > 1 and territory_points.remaining_time > 0 do
          -- Sleep 1 second
          sleep(1000)
 
