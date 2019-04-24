@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -399,10 +399,10 @@ static void save_table_recursively(lua_State* L,
 
       Saves information that can be read by other scenarios.
 
-      If an array is used, the data will be saved in the correct order. Arrays may not contain nil values.
-      If the table is not an array, all keys have to be strings.
-      Tables may contain subtables of any depth. Cyclic dependencies will cause Widelands to crash.
-      Only tables/arrays, strings, integer numbers and booleans may be used as values.
+      If an array is used, the data will be saved in the correct order. Arrays may not contain nil
+      values. If the table is not an array, all keys have to be strings. Tables may contain
+      subtables of any depth. Cyclic dependencies will cause Widelands to crash. Only tables/arrays,
+      strings, integer numbers and booleans may be used as values.
 */
 int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 
@@ -563,14 +563,16 @@ const MethodType<LuaPlayerBase> LuaPlayerBase::Methods[] = {
    METHOD(LuaPlayerBase, place_ship),  {nullptr, nullptr},
 };
 const PropertyType<LuaPlayerBase> LuaPlayerBase::Properties[] = {
-   PROP_RO(LuaPlayerBase, number), PROP_RO(LuaPlayerBase, tribe_name), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaPlayerBase, number),
+   PROP_RO(LuaPlayerBase, tribe_name),
+   {nullptr, nullptr, nullptr},
 };
 
 void LuaPlayerBase::__persist(lua_State* L) {
 	PERS_UINT32("player", player_number_);
 }
 void LuaPlayerBase::__unpersist(lua_State* L) {
-	UNPERS_UINT32("player", player_number_);
+	UNPERS_UINT32("player", player_number_)
 }
 
 /*
@@ -940,4 +942,4 @@ void luaopen_wlbases(lua_State* const L) {
 	register_class<LuaEditorGameBase>(L, "bases");
 	register_class<LuaPlayerBase>(L, "bases");
 }
-}
+}  // namespace LuaBases

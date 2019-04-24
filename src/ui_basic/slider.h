@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,6 +105,7 @@ private:
 	void set_highlighted(bool highlighted);
 
 public:
+	boost::signals2::signal<void()> clicked;
 	boost::signals2::signal<void()> changed;
 	boost::signals2::signal<void(int32_t)> changedto;
 
@@ -240,6 +241,6 @@ protected:
 private:
 	std::vector<std::string> labels;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_SLIDER_H

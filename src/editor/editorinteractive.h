@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -140,6 +140,7 @@ public:
 private:
 	friend struct EditorToolMenu;
 
+	bool player_hears_field(const Widelands::Coords& coords) const override;
 	void on_buildhelp_changed(const bool value) override;
 
 	void toggle_resources();

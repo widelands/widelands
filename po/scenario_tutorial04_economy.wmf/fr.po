@@ -1,18 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # Jaypad <ju-ju@nataju.fr>, 2015
-# Renaud Bouchard, 2016-2018
+# Renaud Bouchard, 2016-2019
 # Tubuntu <tubuntu@testimonium.be>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-14 06:11+0000\n"
-"PO-Revision-Date: 2018-09-14 06:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-04-03 14:04+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,7 +49,7 @@ msgstr "C'est ce que je vais vous montrer dans ce tutoriel. Comment définir ces
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:30
 msgid "A Peaceful Land"
-msgstr "Une terre paisible"
+msgstr "Une contrée paisible"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:32
 msgid ""
@@ -421,7 +421,7 @@ msgstr "Comment obtenir de l'aide"
 msgid ""
 "Of course, it is difficult to remember all of my remarks and advice. For "
 "example, you might ask yourself: ‘Why do we need rations to get soldiers?’"
-msgstr "Bien sur, il est difficile de se souvenir de toutes les remarques et conseils. Par exemple, vous pourriez vous demander: \"Pourquoi aurions nous besoins de rations pour avoir des soldats ?\""
+msgstr "Bien sur, il est difficile de se souvenir de toutes mes remarques et conseils. Par exemple, vous pourriez vous demander: \"Pourquoi aurions nous besoins de rations pour avoir des soldats ?\""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:209
 msgid ""
@@ -461,7 +461,7 @@ msgstr "Autrement , vous pouvez y accéder directement avec la touche 'F1'."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:227
 msgid "Encyclopedia details"
-msgstr "*\nDétails de l'encyclopédie"
+msgstr "Détails de l'encyclopédie"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:229
 msgid "The Encyclopedia Categories"
@@ -469,7 +469,7 @@ msgstr "Les Catégories de l'encyclopédie"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid "The encyclopedia has five tabs:"
-msgstr "L'encyclopédie à 5 onglets:"
+msgstr "L'encyclopédie à cinq onglets :"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:231
 msgid ""
@@ -495,7 +495,7 @@ msgstr "L'onglet \"Travailleur\" montre des informations sur les travailleurs de
 msgid ""
 "The ‘Buildings’ tab contains all the necessary information about the "
 "buildings of your tribe."
-msgstr ""
+msgstr "L'onglet \"Constructions\" contient toutes les informations nécessaires concernant les bâtiments de votre tribu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:235
 msgid ""
@@ -527,7 +527,7 @@ msgstr "Choisissez l'onglet \"Marchandises\" dans la fenêtre de l’encyclopéd
 msgid ""
 "Look up what is needed to produce a helmet and what is needed to produce a "
 "wooden spear."
-msgstr "Cherchez les marchandises nécessaires à la production de casques ainsi que de lances en bois."
+msgstr "Cherchez ce qui est nécessaire pour produire un casque ainsi qu'une lance en bois."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:246
 msgid ""

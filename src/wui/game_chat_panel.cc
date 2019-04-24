@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2018 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include <limits>
 #include <string>
 
+#include "sound/sound_handler.h"
 #include "wui/chat_msg_layout.h"
 
 /**
@@ -46,7 +47,9 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              UI::Align::kLeft,
              UI::MultilineTextarea::ScrollMode::kScrollLogForced),
      editbox(this, 0, h - 20, w, 20, 2, style),
-     chat_message_counter(0) {
+     chat_message_counter(0),
+     chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
+
 	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));
 	editbox.activate_history(true);
@@ -55,14 +58,14 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 	set_can_focus(true);
 
 	chat_message_subscriber_ =
-	   Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recalculate(); });
+	   Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recalculate(true); });
 	recalculate();
 }
 
 /**
  * Updates the chat message area.
  */
-void GameChatPanel::recalculate() {
+void GameChatPanel::recalculate(bool has_new_message) {
 	const std::vector<ChatMessage> msgs = chat_.get_messages();
 
 	size_t msgs_size = msgs.size();
@@ -74,19 +77,17 @@ void GameChatPanel::recalculate() {
 
 	chatbox.set_text(str);
 
-	if (chat_message_counter < msgs_size) {  // are there new messages?
-		if (!chat_.sound_off()) {             // play a sound, if needed
-			for (size_t i = chat_message_counter; i < msgs_size; ++i) {
-				if (msgs[i].sender.empty()) {
-					continue;  // System message. Don't play a sound
-				}
+	// Play a sound if there is a new non-system message
+	if (!chat_.sound_off() && has_new_message) {
+		for (size_t i = chat_message_counter; i < msgs_size; ++i) {
+			if (!msgs[i].sender.empty()) {
 				// Got a message that is no system message. Beep
-				play_new_chat_message();
+				g_sh->play_fx(SoundType::kChat, chat_sound);
 				break;
 			}
 		}
-		chat_message_counter = msgs_size;
 	}
+	chat_message_counter = msgs_size;
 }
 
 /**

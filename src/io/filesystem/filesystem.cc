@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -209,7 +209,7 @@ std::string FileSystem::illegal_filename_tooltip() {
 
 	const std::string illegal(as_listitem(
 	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
-	         * %s is a list of illegal characters */
+	    * %s is a list of illegal characters */
 	   (boost::format(pgettext("illegal_filename_characters", "%s anywhere in the filename")) %
 	    richtext_escape(i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR)))
 	      .str(),
@@ -217,7 +217,7 @@ std::string FileSystem::illegal_filename_tooltip() {
 
 	return (boost::format("%s%s%s") %
 	        /** TRANSLATORS: Tooltip header for characters in illegal filenames.
-	              * This is followed by a list of bullet points */
+	         * This is followed by a list of bullet points */
 	        pgettext("illegal_filename_characters", "The following characters are not allowed:") %
 	        illegal_start % illegal)
 	   .str();
@@ -306,7 +306,7 @@ std::string FileSystem::canonicalize_name(std::string path) const {
 	std::list<std::string>::iterator i;
 
 #ifdef _WIN32
-	// remove all slashes with backslashes so following can work.
+	// replace all slashes with backslashes so following can work.
 	for (uint32_t j = 0; j < path.size(); ++j) {
 		if (path[j] == '/')
 			path[j] = '\\';
@@ -463,8 +463,8 @@ bool FileSystem::check_writeable_for_data(char const* const path) {
 		fs.ensure_directory_exists(".widelands");
 		fs.fs_unlink(".widelands");
 		return true;
-	} catch (...) {
-		log("Directory %s is not writeable - next try\n", path);
+	} catch (const FileError& e) {
+		log("Directory %s is not writeable - next try: %s\n", path, e.what());
 	}
 
 	return false;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -183,7 +183,12 @@ void FullscreenMenuNetSetupLAN::game_selected(uint32_t) {
 }
 
 void FullscreenMenuNetSetupLAN::game_doubleclicked(uint32_t) {
-	clicked_joingame();
+	assert(opengames.has_selection());
+	const NetOpenGame* const game = opengames.get_selected();
+	// Only join games that are open
+	if (game->info.state == LAN_GAME_OPEN) {
+		clicked_joingame();
+	}
 }
 
 void FullscreenMenuNetSetupLAN::update_game_info(
@@ -202,7 +207,7 @@ void FullscreenMenuNetSetupLAN::update_game_info(
 		/** TRANSLATORS: The state of a LAN game can be open, closed or unknown */
 		er.set_string(2, pgettext("game_state", "Unknown"));
 		break;
-	};
+	}
 }
 
 void FullscreenMenuNetSetupLAN::game_opened(const NetOpenGame* game) {

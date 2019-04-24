@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ class Panel;
 /**
  * Can only be created once, when it is requested to
  * open a second one, it will implicitly kill the old one
-*/
+ */
 struct UniqueWindow : public Window {
 	struct Registry {
 		UniqueWindow* window;
@@ -54,9 +54,6 @@ struct UniqueWindow : public Window {
 
 		int32_t x, y;
 		bool valid_pos;
-
-		Registry(const Registry&) = default;
-		Registry& operator=(const Registry&) = default;
 
 		Registry() : window(nullptr), x(0), y(0), valid_pos(false) {
 		}
@@ -79,6 +76,6 @@ private:
 	Registry* registry_;
 	bool usedefaultpos_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_UNIQUE_WINDOW_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,7 @@ int get_ip_version(const boost::asio::ip::udp& version) {
 		return 6;
 	}
 }
-}
+}  // namespace
 
 /*** class LanBase ***/
 /**
@@ -245,8 +245,8 @@ bool LanBase::send(void const* const buf, size_t const len, const NetAddress& ad
 
 bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const port) {
 
-	const auto do_broadcast = [this, buf, len, port](
-	   boost::asio::ip::udp::socket& socket, const std::string& address) -> bool {
+	const auto do_broadcast = [this, buf, len, port](boost::asio::ip::udp::socket& socket,
+	                                                 const std::string& address) -> bool {
 		if (socket.is_open()) {
 			boost::system::error_code ec;
 			boost::asio::ip::udp::endpoint destination(

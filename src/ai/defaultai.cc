@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -113,6 +113,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
      ts_in_const_count_(0),
      ts_without_trainers_(0),
      enemysites_check_delay_(30),
+     spots_(0),
      resource_necessity_water_needed_(false),
      highest_nonmil_prio_(0),
      expedition_ship_(kNoShip) {
@@ -126,7 +127,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
 		   if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
 			   unusable_fields.push_back(note.fc);
 		   }
-		});
+	   });
 
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
@@ -142,7 +143,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
 		   } else {
 			   lose_immovable(*note.pi);
 		   }
-		});
+	   });
 
 	// Subscribe to ProductionSiteOutOfResources.
 	outofresource_subscriber_ = Notifications::subscribe<NoteProductionSiteOutOfResources>(
@@ -152,8 +153,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
 		   }
 
 		   out_of_resources_site(*note.ps);
-
-		});
+	   });
 
 	// Subscribe to TrainingSiteSoldierTrained.
 	soldiertrained_subscriber_ = Notifications::subscribe<NoteTrainingSiteSoldierTrained>(
@@ -163,12 +163,10 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
 		   }
 
 		   soldier_trained(*note.ts);
-
-		});
+	   });
 
 	// Subscribe to ShipNotes.
 	shipnotes_subscriber_ = Notifications::subscribe<NoteShip>([this](const NoteShip& note) {
-
 		// in a short time between start and late_initialization the player
 		// can get notes that can not be processed.
 		// It seems that this causes no problem, at least no substantial
@@ -329,7 +327,7 @@ void DefaultAI::think() {
 		case SchedulerTaskId::kRoadCheck:
 			if (check_economies()) {  // is a must
 				return;
-			};
+			}
 			set_taskpool_task_time(gametime + 1000, SchedulerTaskId::kRoadCheck);
 			// testing 5 roads
 			{
@@ -339,7 +337,7 @@ void DefaultAI::think() {
 					if (improve_roads(gametime)) {
 						// if significant change takes place do not go on
 						break;
-					};
+					}
 				}
 			}
 			break;
@@ -382,7 +380,7 @@ void DefaultAI::think() {
 					if (check_productionsites(gametime)) {
 						// if significant change takes place do not go on
 						break;
-					};
+					}
 				}
 			}
 			break;
@@ -415,7 +413,7 @@ void DefaultAI::think() {
 					if (check_mines_(gametime)) {
 						// if significant change takes place do not go on
 						break;
-					};
+					}
 				}
 			}
 			break;
@@ -462,7 +460,7 @@ void DefaultAI::think() {
 					if (get_land_owner(game().map(), coords) == player_number()) {
 						++conquered_wh;
 					}
-				};
+				}
 				if (!basic_economy_established) {
 					assert(!persistent_data->remaining_basic_buildings.empty());
 					log("%2d: Basic economy not achieved, %" PRIuS " building(s) missing, f.e.: %s\n",
@@ -1755,29 +1753,23 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	const uint8_t score_parts_size = 69;
 	int32_t score_parts[score_parts_size] = {0};
 	if (field.enemy_owned_land_nearby) {
-		score_parts[0] = 3 *
-		                 management_data.neuron_pool[73].get_result_safe(
-		                    field.enemy_owned_land_nearby / 5, kAbsValue);
-		score_parts[1] =
-		   3 *
-		   management_data.neuron_pool[76].get_result_safe(field.enemy_owned_land_nearby, kAbsValue);
-		score_parts[2] = 3 *
-		                 management_data.neuron_pool[54].get_result_safe(
-		                    field.enemy_military_presence * 2, kAbsValue);
-		score_parts[3] = 3 *
-		                 management_data.neuron_pool[61].get_result_safe(
-		                    field.enemy_military_presence / 3, kAbsValue);
+		score_parts[0] = 3 * management_data.neuron_pool[73].get_result_safe(
+		                        field.enemy_owned_land_nearby / 5, kAbsValue);
+		score_parts[1] = 3 * management_data.neuron_pool[76].get_result_safe(
+		                        field.enemy_owned_land_nearby, kAbsValue);
+		score_parts[2] = 3 * management_data.neuron_pool[54].get_result_safe(
+		                        field.enemy_military_presence * 2, kAbsValue);
+		score_parts[3] = 3 * management_data.neuron_pool[61].get_result_safe(
+		                        field.enemy_military_presence / 3, kAbsValue);
 		score_parts[4] =
 		   (!field.enemy_accessible_) ? (-100 + management_data.get_military_number_at(55)) : 0;
-		score_parts[5] =
-		   2 *
-		   management_data.neuron_pool[50].get_result_safe(field.enemy_owned_land_nearby, kAbsValue);
+		score_parts[5] = 2 * management_data.neuron_pool[50].get_result_safe(
+		                        field.enemy_owned_land_nearby, kAbsValue);
 
 		score_parts[6] =
 		   field.enemy_military_sites * std::abs(management_data.get_military_number_at(67) / 2);
-		score_parts[7] =
-		   2 *
-		   management_data.neuron_pool[34].get_result_safe(field.enemy_military_sites * 2, kAbsValue);
+		score_parts[7] = 2 * management_data.neuron_pool[34].get_result_safe(
+		                        field.enemy_military_sites * 2, kAbsValue);
 		score_parts[8] = management_data.neuron_pool[56].get_result_safe(
 		   field.enemy_military_presence * 2, kAbsValue);
 
@@ -1786,13 +1778,11 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		score_parts[10] = (field.enemy_accessible_) ? management_data.get_military_number_at(80) : 0;
 
 		score_parts[11] =
-		   -3 *
-		   management_data.neuron_pool[8].get_result_safe(
-		      (field.military_in_constr_nearby + field.military_unstationed) * 3, kAbsValue);
+		   -3 * management_data.neuron_pool[8].get_result_safe(
+		           (field.military_in_constr_nearby + field.military_unstationed) * 3, kAbsValue);
 		score_parts[12] =
-		   -3 *
-		   management_data.neuron_pool[74].get_result_safe(
-		      (field.military_in_constr_nearby + field.military_unstationed) * 5, kAbsValue);
+		   -3 * management_data.neuron_pool[74].get_result_safe(
+		           (field.military_in_constr_nearby + field.military_unstationed) * 5, kAbsValue);
 		score_parts[13] = ((field.military_in_constr_nearby + field.military_unstationed) > 0) ?
 		                     -std::abs(management_data.get_military_number_at(32)) :
 		                     0;
@@ -1819,9 +1809,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		                     std::abs(management_data.get_military_number_at(58)) :
 		                     0;
 		if (expansion_type.get_expansion_type() == ExpansionMode::kResources) {
-			score_parts[23] = 2 *
-			                  management_data.neuron_pool[78].get_result_safe(
-			                     (field.unowned_mines_spots_nearby + 2) / 3, kAbsValue);
+			score_parts[23] = 2 * management_data.neuron_pool[78].get_result_safe(
+			                         (field.unowned_mines_spots_nearby + 2) / 3, kAbsValue);
 		}
 
 		score_parts[24] =
@@ -1850,22 +1839,19 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		   management_data.neuron_pool[10].get_result_safe(field.military_loneliness / 50, kAbsValue);
 
 		score_parts[30] =
-		   -10 *
-		   management_data.neuron_pool[8].get_result_safe(
-		      3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
+		   -10 * management_data.neuron_pool[8].get_result_safe(
+		            3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
 		score_parts[31] =
-		   -10 *
-		   management_data.neuron_pool[31].get_result_safe(
-		      3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
+		   -10 * management_data.neuron_pool[31].get_result_safe(
+		            3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
 		score_parts[32] = -4 * field.military_in_constr_nearby *
 		                  std::abs(management_data.get_military_number_at(82));
 		score_parts[33] = (field.military_in_constr_nearby > 0) ?
 		                     -5 * management_data.get_military_number_at(85) :
 		                     0;
 
-		score_parts[34] = -1 *
-		                  management_data.neuron_pool[4].get_result_safe(
-		                     (field.area_military_capacity + 4) / 5, kAbsValue);
+		score_parts[34] = -1 * management_data.neuron_pool[4].get_result_safe(
+		                          (field.area_military_capacity + 4) / 5, kAbsValue);
 		score_parts[35] = 3 * management_data.get_military_number_at(133);
 
 		if (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) {
@@ -1892,14 +1878,12 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		score_parts[41] = 3 * std::abs(management_data.get_military_number_at(93));
 	}
 
-	score_parts[42] =
-	   (field.unowned_land_nearby) ?
-	      management_data.neuron_pool[18].get_result_safe(field.own_non_military_nearby, kAbsValue) :
-	      0;
+	score_parts[42] = (field.unowned_land_nearby) ? management_data.neuron_pool[18].get_result_safe(
+	                                                   field.own_non_military_nearby, kAbsValue) :
+	                                                0;
 
-	score_parts[43] = 2 *
-	                  management_data.neuron_pool[11].get_result_safe(
-	                     field.unowned_buildable_spots_nearby, kAbsValue);
+	score_parts[43] = 2 * management_data.neuron_pool[11].get_result_safe(
+	                         field.unowned_buildable_spots_nearby, kAbsValue);
 	score_parts[44] =
 	   management_data.neuron_pool[12].get_result_safe(field.unowned_mines_spots_nearby, kAbsValue);
 	score_parts[45] =
@@ -1909,12 +1893,10 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	score_parts[46] =
 	   -1 * management_data.neuron_pool[55].get_result_safe(field.ally_military_presence, kAbsValue);
-	score_parts[47] =
-	   -1 *
-	   management_data.neuron_pool[53].get_result_safe(2 * field.ally_military_presence, kAbsValue);
-	score_parts[48] = -2 *
-	                  management_data.neuron_pool[4].get_result_safe(
-	                     (field.area_military_capacity + 4) / 5, kAbsValue);
+	score_parts[47] = -1 * management_data.neuron_pool[53].get_result_safe(
+	                          2 * field.ally_military_presence, kAbsValue);
+	score_parts[48] = -2 * management_data.neuron_pool[4].get_result_safe(
+	                          (field.area_military_capacity + 4) / 5, kAbsValue);
 	score_parts[49] = ((field.military_in_constr_nearby + field.military_unstationed) > 0) ?
 	                     -std::abs(management_data.get_military_number_at(81)) :
 	                     0;
@@ -1923,18 +1905,15 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	                     0;
 	score_parts[56] =
 	   (any_unconnected_imm) ? 2 * std::abs(management_data.get_military_number_at(23)) : 0;
-	score_parts[57] = 1 *
-	                  management_data.neuron_pool[18].get_result_safe(
-	                     2 * field.unowned_portspace_vicinity_nearby, kAbsValue);
-	score_parts[58] = 3 *
-	                  management_data.neuron_pool[19].get_result_safe(
-	                     5 * field.unowned_portspace_vicinity_nearby, kAbsValue);
+	score_parts[57] = 1 * management_data.neuron_pool[18].get_result_safe(
+	                         2 * field.unowned_portspace_vicinity_nearby, kAbsValue);
+	score_parts[58] = 3 * management_data.neuron_pool[19].get_result_safe(
+	                         5 * field.unowned_portspace_vicinity_nearby, kAbsValue);
 	score_parts[59] = (field.unowned_portspace_vicinity_nearby) ?
 	                     10 * std::abs(management_data.get_military_number_at(31)) :
 	                     0;
-	score_parts[60] = 3 *
-	                  management_data.neuron_pool[21].get_result_safe(
-	                     20 - field.nearest_buildable_spot_nearby, kAbsValue);
+	score_parts[60] = 3 * management_data.neuron_pool[21].get_result_safe(
+	                         20 - field.nearest_buildable_spot_nearby, kAbsValue);
 	score_parts[61] = (field.nearest_buildable_spot_nearby < 8) ?
 	                     std::abs(management_data.get_military_number_at(153) * 2) :
 	                     0;
@@ -2779,9 +2758,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio -= bf->collecting_producers_nearby.at(bo.collected_map_resource) * 20;
 					prio += bf->supporters_nearby.at(bo.collected_map_resource) * 20;
 
-					prio +=
-					   -5 +
-					   bf->fish_nearby * (1 + std::abs(management_data.get_military_number_at(63) / 15));
+					prio += -5 + bf->fish_nearby *
+					                (1 + std::abs(management_data.get_military_number_at(63) / 15));
 					if (resource_necessity_water_needed_) {
 						prio *= 3;
 					}
@@ -2834,9 +2812,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						// we dont like trees nearby
 						prio += 1 - bf->trees_nearby / 3;
 						// and be far from rangers
-						prio +=
-						   1 -
-						   bf->rangers_nearby * std::abs(management_data.get_military_number_at(102)) / 5;
+						prio += 1 - bf->rangers_nearby *
+						               std::abs(management_data.get_military_number_at(102)) / 5;
 
 						// This is for a special case this is also supporter, it considers
 						// producers nearby
@@ -2856,9 +2833,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						}
 
 						if (combined_stocklevel < 40) {
-							prio += 5 *
-							        management_data.neuron_pool[23].get_result_safe(
-							           (40 - combined_stocklevel) / 2, kAbsValue);
+							prio += 5 * management_data.neuron_pool[23].get_result_safe(
+							               (40 - combined_stocklevel) / 2, kAbsValue);
 						}
 
 						// taking into account the vicinity
@@ -2892,9 +2868,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						// we dont like trees nearby
 						prio += 1 - bf->trees_nearby / 4;
 						// and be far from rangers
-						prio +=
-						   1 -
-						   bf->rangers_nearby * std::abs(management_data.get_military_number_at(102)) / 5;
+						prio += 1 - bf->rangers_nearby *
+						               std::abs(management_data.get_military_number_at(102)) / 5;
 
 						// now we find out if the supporter is needed depending on stocklevel
 						const uint32_t current_stocklevel = (get_stocklevel(bo, gametime));
@@ -2905,9 +2880,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						}
 
 						if (current_stocklevel < 40) {
-							prio += 5 *
-							        management_data.neuron_pool[23].get_result_safe(
-							           (40 - current_stocklevel) / 2, kAbsValue);
+							prio += 5 * management_data.neuron_pool[23].get_result_safe(
+							               (40 - current_stocklevel) / 2, kAbsValue);
 						}
 						// taking into account the vicinity
 						for (auto ph : bo.production_hints) {
@@ -2953,9 +2927,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						}
 
 						if (current_stocklevel < 40) {
-							prio += 5 *
-							        management_data.neuron_pool[23].get_result_safe(
-							           (40 - current_stocklevel) / 2, kAbsValue);
+							prio += 5 * management_data.neuron_pool[23].get_result_safe(
+							               (40 - current_stocklevel) / 2, kAbsValue);
 						}
 
 						for (auto ph : bo.production_hints) {
@@ -3006,9 +2979,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							// we attempt to cluster space consumers together
 							prio += bf->space_consumers_nearby * 2;
 							// and be far from rangers
-							prio += 1 -
-							        bf->rangers_nearby *
-							           std::abs(management_data.get_military_number_at(102)) / 5;
+							prio += 1 - bf->rangers_nearby *
+							               std::abs(management_data.get_military_number_at(102)) / 5;
 						} else {
 							// leave some free space between them
 							prio -= bf->collecting_producers_nearby.at(bo.collected_map_resource) *
@@ -3051,9 +3023,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						continue;
 					}
 					if (current_stocklevel < 40) {
-						prio += 5 *
-						        management_data.neuron_pool[23].get_result_safe(
-						           (40 - current_stocklevel) / 2, kAbsValue);
+						prio += 5 * management_data.neuron_pool[23].get_result_safe(
+						               (40 - current_stocklevel) / 2, kAbsValue);
 					}
 					// This considers supporters nearby
 					for (auto ph : bo.outputs) {
@@ -3107,7 +3078,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				    (bf->military_in_constr_nearby + bf->military_unstationed) <
 				       concurent_ms_in_constr_no_enemy) {
 					// it will conquer new buildable spots for buildings or mines
-					;
 				} else if (bf->defense_msite_allowed &&
 				           (bf->military_in_constr_nearby + bf->military_unstationed) <
 				              concurent_ms_in_constr_enemy_nearby) {
@@ -3543,15 +3513,15 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	if (!has_building && flag.nr_of_roads() == 1) {
 		return false;
 	} else if (is_warehouse && flag.nr_of_roads() <= 3) {
-		;
+		// Do nothing
 	} else if (needs_warehouse) {
-		;
+		// Do nothing
 	} else if (flag.current_wares() > 5) {
-		;
+		// Do nothing
 	} else if (has_building && std::rand() % 3 == 0) {
-		;
+		// Do nothing
 	} else if (std::rand() % 10 == 0) {
-		;
+		// Do nothing
 	} else {
 		return false;
 	}
@@ -3584,19 +3554,18 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 	Flag& roadstartflag = road.get_flag(Road::FlagStart);
 	Flag& roadendflag = road.get_flag(Road::FlagEnd);
 
-	// Collecting full path (from crossing/building to another crossing/building)
+	// Calculating full road (from crossing/building to another crossing/building),
+	// this means we calculate vector of all flags of the "full road"
 	std::vector<Widelands::Flag*> full_road;
 	full_road.push_back(&roadstartflag);
 	full_road.push_back(&roadendflag);
 
-	// Making sure it starts with proper flag
 	uint16_t road_length = road.get_path().get_nsteps();
 
 	for (int j = 0; j < 2; ++j) {
 		bool new_road_found = true;
 		while (new_road_found && full_road.back()->nr_of_roads() <= 2 &&
 		       full_road.back()->get_building() == nullptr) {
-			const size_t full_road_size = full_road.size();
 			new_road_found = false;
 			for (uint8_t i = 1; i <= 6; ++i) {
 				Road* const near_road = full_road.back()->get_road(i);
@@ -3613,16 +3582,16 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 					other_end = &near_road->get_flag(Road::FlagStart);
 				}
 
-				if (other_end->get_position() == full_road[full_road_size - 2]->get_position()) {
-					continue;
+				// Have we already the end of road in our full_road?
+				if (std::find(full_road.begin(), full_road.end(), other_end) == full_road.end()) {
+					full_road.push_back(other_end);
+					road_length += near_road->get_path().get_nsteps();
+					new_road_found = true;
+					break;
 				}
-				full_road.push_back(other_end);
-				road_length += near_road->get_path().get_nsteps();
-				new_road_found = true;
-				break;
 			}
 		}
-		// we walked to one end, now let revert the concent of full_road and repeat in opposite
+		// we walked to one end, now let revert the content of full_road and repeat in opposite
 		// direction
 		std::reverse(full_road.begin(), full_road.end());
 	}
@@ -3666,9 +3635,8 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 
 	queue.push(NearFlag(full_road.front(), 0));
 	uint16_t alternative_path = std::numeric_limits<uint16_t>::max();
-	const uint8_t checkradius = 3 *
-	                            game().map().calc_distance(full_road.front()->get_position(),
-	                                                       full_road.back()->get_position());
+	const uint8_t checkradius = 3 * game().map().calc_distance(full_road.front()->get_position(),
+	                                                           full_road.back()->get_position());
 
 	// algorithm to walk on roads
 	while (!queue.empty()) {
@@ -3784,8 +3752,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		// if we are within grace time, it is OK, just go on
 		if (eco->dismantle_grace_time > gametime &&
 		    eco->dismantle_grace_time != std::numeric_limits<uint32_t>::max()) {
-			;
-
 			// if grace time is not set, this is probably first time without a warehouse and we must
 			// set it
 		} else if (eco->dismantle_grace_time == std::numeric_limits<uint32_t>::max()) {
@@ -3990,7 +3956,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		          const int32_t a_length = a.current_road_length / 50;
 		          const int32_t b_length = b.current_road_length / 50;
 		          return std::tie(b_length, a.air_distance) < std::tie(a_length, b.air_distance);
-		       });
+	          });
 
 	// Now we calculate roads from here to few best looking RoadCandidates....
 	uint32_t possible_roads_count = 0;
@@ -4279,6 +4245,20 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	// Barracks
 	if (site.bo->is(BuildingAttribute::kBarracks)) {
+		// If we somehow have more than one barracks we will dismantle current one
+		if (site.bo->total_count() > 1) {
+			log("%2d: We have %d barracks, that is not supported by AI and if caused by AI it is an "
+			    "error; dismantling the barracks at %3dx%3d\n",
+			    player_number(), site.bo->total_count(), site.site->get_position().x,
+			    site.site->get_position().y);
+			if (connected_to_wh) {
+				game().send_player_dismantle(*site.site);
+			} else {
+				game().send_player_bulldoze(*site.site);
+			}
+			return true;
+		}
+
 		assert(site.bo->total_count() == 1);
 		for (auto& queue : site.site->inputqueues()) {
 			if (queue->get_max_fill() > 4) {
@@ -4822,9 +4802,8 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 	}
 
 	// So now we know the warehouse here is needed.
-	bo.primary_priority = 1 +
-	                      (needed_count - numof_warehouses_) *
-	                         std::abs(management_data.get_military_number_at(22) * 20);
+	bo.primary_priority = 1 + (needed_count - numof_warehouses_) *
+	                             std::abs(management_data.get_military_number_at(22) * 20);
 	++bo.new_building_overdue;
 	bo.primary_priority +=
 	   bo.new_building_overdue * std::abs(management_data.get_military_number_at(16));
@@ -4916,9 +4895,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 		// We build one trainig site per X military sites
 		// with some variations, of course
-		int32_t target = 1 +
-		                 static_cast<int32_t>(militarysites.size() + productionsites.size()) /
-		                    (std::abs(management_data.get_military_number_at(113) / 2) + 1);
+		int32_t target = 1 + static_cast<int32_t>(militarysites.size() + productionsites.size()) /
+		                        (std::abs(management_data.get_military_number_at(113) / 2) + 1);
 		assert(target > 0 && target < 500);
 
 		uint16_t current_proportion = 0;
@@ -5477,10 +5455,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[14] = (bo.current_stats - 50) / 10;
 			inputs[15] = management_data.get_military_number_at(123) / 10;
 			inputs[16] = 0;
-			inputs[17] = (inputs_on_stock) ? 0 : -2;
+			// TODO(GunChleoc): This is overwritten below due to a typo
+			// inputs[17] = (inputs_on_stock) ? 0 : -2;
 			inputs[18] = (suppliers_exist) ? 0 : -3;
-			;
 			inputs[17] = (inputs_on_stock) ? 0 : -4;
+			// Nothing on inputs[19]
 			inputs[20] =
 			   (mines_per_type[bo.mines].in_construction + mines_per_type[bo.mines].finished == 1) ?
 			      3 :
@@ -6079,7 +6058,7 @@ void DefaultAI::lose_immovable(const PlayerImmovable& pi) {
 		// 2. in new flags to be processed yet
 		if (remove_from_dqueue<Widelands::Flag>(new_flags, flag)) {
 			return;
-		};
+		}
 
 		// 3. Or in neither of them
 	} else if (upcast(Road const, road, &pi)) {
@@ -6171,7 +6150,7 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 		// (used when testing possible port location)
 		if (f->nodecaps() & BUILDCAPS_MINE) {
 			mineable_fields_count += 1;
-		};
+		}
 
 		// add neighbours to a queue (duplicates are no problem)
 		// to relieve AI/CPU we skip every second field in each direction

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 
 #include "economy/economy.h"
 #include "economy/flag.h"
-#include "logic/campaign_visibility.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message.h"
@@ -93,8 +93,7 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, add_objective),
    METHOD(LuaPlayer, reveal_fields),
    METHOD(LuaPlayer, hide_fields),
-   METHOD(LuaPlayer, reveal_scenario),
-   METHOD(LuaPlayer, reveal_campaign),
+   METHOD(LuaPlayer, mark_scenario_as_solved),
    METHOD(LuaPlayer, get_ships),
    METHOD(LuaPlayer, get_buildings),
    METHOD(LuaPlayer, get_suitability),
@@ -173,17 +172,7 @@ int LuaPlayer::get_objectives(lua_State* L) {
       (RO) :const:`true` if this player was defeated, :const:`false` otherwise
 */
 int LuaPlayer::get_defeated(lua_State* L) {
-	Player& p = get(L, get_egbase(L));
-	bool is_defeated = true;
-
-	for (const auto& economy : p.economies()) {
-		if (!economy.second->warehouses().empty()) {
-			is_defeated = false;
-			break;
-		}
-	}
-
-	lua_pushboolean(L, is_defeated);
+	lua_pushboolean(L, get(L, get_egbase(L)).is_defeated());
 	return 1;
 }
 
@@ -384,8 +373,9 @@ int LuaPlayer::send_message(lua_State* L) {
 	}
 
 	MessageId const message = plr.add_message(
-	   game, std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(),
-	                                              title, icon, heading, body, c, 0, sub_type, st)),
+	   game,
+	   std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(), title,
+	                                        icon, heading, body, c, 0, sub_type, st)),
 	   popup);
 
 	return to_lua<LuaMessage>(L, new LuaMessage(player_number(), message));
@@ -444,10 +434,10 @@ int LuaPlayer::message_box(lua_State* L) {
 	lua_pop(L, 1);
 
 	if (lua_gettop(L) == 4) {
-		CHECK_UINT(posx);
-		CHECK_UINT(posy);
-		CHECK_UINT(w);
-		CHECK_UINT(h);
+		CHECK_UINT(posx)
+		CHECK_UINT(posy)
+		CHECK_UINT(w)
+		CHECK_UINT(h)
 
 		// If a field has been defined, read the coordinates to jump to.
 		lua_getfield(L, 4, "field");
@@ -632,42 +622,24 @@ int LuaPlayer::hide_fields(lua_State* L) {
 }
 
 /* RST
-   .. method:: reveal_scenario(name)
+   .. method:: mark_scenario_as_solved(name)
 
-      This reveals a scenario inside a campaign. This only works for the
-      interactive player and most likely also only in single player games.
+      Marks a campaign scenario as solved. Reads the scenario definition in
+      data/campaigns/campaigns.lua to check which scenario and/or campaign should be
+      revealed as a result. This only works for the interactive player and most likely
+      also only in single player games.
 
-      :arg name: name of the scenario to reveal
+      :arg name: name of the scenario to be marked as solved
       :type name: :class:`string`
 */
 // UNTESTED
-int LuaPlayer::reveal_scenario(lua_State* L) {
+int LuaPlayer::mark_scenario_as_solved(lua_State* L) {
 	if (get_game(L).get_ipl()->player_number() != player_number())
 		report_error(L, "Can only be called for interactive player!");
 
-	CampaignVisibilitySave cvs;
-	cvs.set_map_visibility(luaL_checkstring(L, 2), true);
-
-	return 0;
-}
-
-/* RST
-   .. method:: reveal_campaign(name)
-
-      This reveals a campaign. This only works for the
-      interactive player and most likely also only in single player games.
-
-      :arg name: name of the campaign to reveal
-      :type name: :class:`string`
-*/
-// UNTESTED
-int LuaPlayer::reveal_campaign(lua_State* L) {
-	if (get_game(L).get_ipl()->player_number() != player_number()) {
-		report_error(L, "Can only be called for interactive player!");
-	}
-
-	CampaignVisibilitySave cvs;
-	cvs.set_campaign_visibility(luaL_checkstring(L, 2), true);
+	Profile campvis(kCampVisFile.c_str());
+	campvis.pull_section("scenarios").set_bool(luaL_checkstring(L, 2), true);
+	campvis.write(kCampVisFile.c_str(), false);
 
 	return 0;
 }
@@ -952,7 +924,9 @@ Objective
 */
 const char LuaObjective::className[] = "Objective";
 const MethodType<LuaObjective> LuaObjective::Methods[] = {
-   METHOD(LuaObjective, remove), METHOD(LuaObjective, __eq), {nullptr, nullptr},
+   METHOD(LuaObjective, remove),
+   METHOD(LuaObjective, __eq),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaObjective> LuaObjective::Properties[] = {
    PROP_RO(LuaObjective, name),    PROP_RW(LuaObjective, title), PROP_RW(LuaObjective, body),
@@ -966,7 +940,7 @@ void LuaObjective::__persist(lua_State* L) {
 	PERS_STRING("name", name_);
 }
 void LuaObjective::__unpersist(lua_State* L) {
-	UNPERS_STRING("name", name_);
+	UNPERS_STRING("name", name_)
 }
 
 /*
@@ -1114,7 +1088,8 @@ Message
 */
 const char LuaMessage::className[] = "Message";
 const MethodType<LuaMessage> LuaMessage::Methods[] = {
-   METHOD(LuaMessage, __eq), {nullptr, nullptr},
+   METHOD(LuaMessage, __eq),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaMessage> LuaMessage::Properties[] = {
    PROP_RO(LuaMessage, title),     PROP_RO(LuaMessage, body),   PROP_RO(LuaMessage, sent),
@@ -1132,9 +1107,9 @@ void LuaMessage::__persist(lua_State* L) {
 	PERS_UINT32("msg_idx", get_mos(L)->message_savers[player_number_ - 1][message_id_].value());
 }
 void LuaMessage::__unpersist(lua_State* L) {
-	UNPERS_UINT32("player", player_number_);
+	UNPERS_UINT32("player", player_number_)
 	uint32_t midx = 0;
-	UNPERS_UINT32("msg_idx", midx);
+	UNPERS_UINT32("msg_idx", midx)
 	message_id_ = MessageId(midx);
 }
 
@@ -1326,4 +1301,4 @@ void luaopen_wlgame(lua_State* L) {
 	register_class<LuaObjective>(L, "game");
 	register_class<LuaMessage>(L, "game");
 }
-}
+}  // namespace LuaGame

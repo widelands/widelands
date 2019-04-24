@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,8 @@
 #define WL_LOGIC_PLAYER_H
 
 #include <memory>
-#include <unordered_set>
 #include <unordered_map>
+#include <unordered_set>
 
 #include "base/macros.h"
 #include "economy/economy.h"
@@ -37,6 +37,7 @@
 #include "logic/message_queue.h"
 #include "logic/see_unsee_node.h"
 #include "logic/widelands.h"
+#include "sound/constants.h"
 
 class Node;
 namespace Widelands {
@@ -147,6 +148,11 @@ public:
 	NodeCaps get_buildcaps(const FCoords&) const;
 
 	bool is_hostile(const Player&) const;
+
+	/**
+	 * Returns whether the player lost the last warehouse.
+	 */
+	bool is_defeated() const;
 
 	// For cheating
 	void set_see_all(bool const t) {
@@ -604,7 +610,7 @@ private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
 	void update_team_players();
-	void play_message_sound(const Message::Type& msgtype);
+	void play_message_sound(const Message* message);
 	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
@@ -677,12 +683,16 @@ private:
 
 	PlayerBuildingStats building_stats_;
 
+	FxId message_fx_;
+	FxId attack_fx_;
+	FxId occupied_fx_;
+
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };
 
 void find_former_buildings(const Tribes& tribes,
                            const DescriptionIndex bi,
                            Building::FormerBuildings* former_buildings);
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_H

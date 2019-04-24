@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,15 +56,15 @@ EditorToolMenu::EditorToolMenu(EditorInteractive& parent, UI::UniqueWindow::Regi
 	   this, pos, g_gr->images().get("images/wui/editor/editor_menu_tool_" pic ".png"), tooltip);   \
 	pos.x += width + spacing;
 
-	ADD_BUTTON("change_height", _("Change height"));
-	ADD_BUTTON("noise_height", _("Random height"));
-	ADD_BUTTON("set_terrain", _("Terrain"));
-	ADD_BUTTON("place_immovable", _("Immovables"));
-	ADD_BUTTON("place_bob", _("Animals"));
-	ADD_BUTTON("change_resources", _("Resources"));
-	ADD_BUTTON("set_port_space", _("Set port space"));
+	ADD_BUTTON("change_height", _("Change height"))
+	ADD_BUTTON("noise_height", _("Random height"))
+	ADD_BUTTON("set_terrain", _("Terrain"))
+	ADD_BUTTON("place_immovable", _("Immovables"))
+	ADD_BUTTON("place_bob", _("Animals"))
+	ADD_BUTTON("change_resources", _("Resources"))
+	ADD_BUTTON("set_port_space", _("Set port space"))
 	ADD_BUTTON("set_origin", _("Set the position that will have the coordinates (0, 0). This will "
-	                           "be the top-left corner of a generated minimap."));
+	                           "be the top-left corner of a generated minimap."))
 
 	set_inner_size(offs.x + (width + spacing) * num_tools, offs.y + (height + spacing));
 
@@ -94,7 +94,7 @@ EditorToolMenu::EditorToolMenu(EditorInteractive& parent, UI::UniqueWindow::Regi
 
 /**
  * Called when the radiogroup changes or is reclicked
-*/
+ */
 void EditorToolMenu::changed_to() {
 	const int32_t n = radioselect_.get_state();
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,6 +105,13 @@ struct InternetGaming : public ChatProvider {
 	 * @return The addresses.
 	 */
 	const std::pair<NetAddress, NetAddress>& ips();
+
+	/**
+	 * Blocks for some time until either the ips() method is able to return the IPs of the relay
+	 * or an error occurred or the timeout is met.
+	 * @return \c True iff ips() can return something.
+	 */
+	bool wait_for_ips();
 
 	/**
 	 * Returns the password required to connect to the relay server as host.

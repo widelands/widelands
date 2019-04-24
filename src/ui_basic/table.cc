@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ namespace UI {
  *       y
  *       w       dimensions, in pixels, of the Table
  *       h
-*/
+ */
 Table<void*>::Table(Panel* const parent,
                     int32_t x,
                     int32_t y,
@@ -80,7 +80,7 @@ Table<void*>::Table(Panel* const parent,
 
 /**
  * Free allocated resources
-*/
+ */
 Table<void*>::~Table() {
 	for (const EntryRecord* entry : entry_records_) {
 		delete entry;
@@ -179,7 +179,7 @@ void Table<void*>::header_button_clicked(Columns::size_type const n) {
 
 /**
  * Remove all entries from the table
-*/
+ */
 void Table<void*>::clear() {
 	for (const EntryRecord* entry : entry_records_) {
 		delete entry;
@@ -215,7 +215,7 @@ void Table<void*>::fit_height(uint32_t entries) {
 
 /**
  * Redraw the table
-*/
+ */
 void Table<void*>::draw(RenderTarget& dst) {
 	//  draw text lines
 	int32_t lineheight = get_lineheight();
@@ -300,8 +300,8 @@ void Table<void*>::draw(RenderTarget& dst) {
 				curx += curw;
 				continue;
 			}
-			std::shared_ptr<const UI::RenderedText> rendered_text =
-			   UI::g_fh->render(as_uifont(richtext_escape(entry_string)));
+			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
+			   as_uifont(richtext_escape(entry_string), UI_FONT_SIZE_SMALL, er.get_color()));
 
 			// Fix text alignment for BiDi languages if the entry contains an RTL character. We want
 			// this always on, e.g. for mixed language savegame filenames.
@@ -538,7 +538,7 @@ uint32_t Table<void*>::toggle_entry(uint32_t row) {
 
 /**
  * Add a new entry to the table.
-*/
+ */
 Table<void*>::EntryRecord& Table<void*>::add(void* const entry, const bool do_select) {
 	EntryRecord& result = *new EntryRecord(entry);
 	entry_records_.push_back(&result);
@@ -554,7 +554,7 @@ Table<void*>::EntryRecord& Table<void*>::add(void* const entry, const bool do_se
 
 /**
  * Scroll to the given position, in pixels.
-*/
+ */
 void Table<void*>::set_scrollpos(int32_t const i) {
 	scrollpos_ = i;
 }
@@ -718,7 +718,7 @@ bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t 
 	return ea.get_string(column) < eb.get_string(column);
 }
 
-Table<void*>::EntryRecord::EntryRecord(void* const e) : entry_(e) {
+Table<void*>::EntryRecord::EntryRecord(void* const e) : entry_(e), clr(UI_FONT_CLR_FG) {
 }
 
 void Table<void*>::EntryRecord::set_picture(uint8_t const col,
@@ -745,4 +745,4 @@ const std::string& Table<void*>::EntryRecord::get_string(uint8_t const col) cons
 
 	return data_.at(col).d_string;
 }
-}
+}  // namespace UI

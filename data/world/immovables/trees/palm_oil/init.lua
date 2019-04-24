@@ -2,9 +2,9 @@ dirname = path.dirname(__file__)
 
 terrain_affinity = {
    preferred_temperature = 150,
-   preferred_humidity = 0.55,
-   preferred_fertility = 0.5,
-   pickiness = 0.8,
+   preferred_humidity = 550,
+   preferred_fertility = 500,
+   pickiness = 80,
 }
 
 world:new_immovable_type{
@@ -104,8 +104,7 @@ world:new_immovable_type{
          hotspot = { 24, 60 },
          fps = 10,
          sound_effect = {
-            directory = "sound/animals",
-            name = "crickets2",
+            path = "sound/animals/crickets2",
          },
       },
    },

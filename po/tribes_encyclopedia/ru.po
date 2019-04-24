@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
 # Alexander Bikmeyev <bikmeyev@gmail.com>, 2016
 # Anton Khabarov <2233009@gmail.com>, 2015,2017
-# GunChleoc, 2016,2018
+# GunChleoc, 2016,2018-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # CupIvan <mail@cupivan.ru>, 2015
-# Viktor S <awsswa59@gmail.com>, 2018
-# Yuriy Sokolov <lention@mail.ru>, 2015
+# Viktor S <awsswa59@gmail.com>, 2018-2019
+# Yuriy Sokolov <lention@mail.ru>, 2015,2019
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2017-2018
 # Федор <Lunar-energy@ya.ru>, 2015
@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-25 18:23+0000\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-03-30 09:51+0000\n"
 "Last-Translator: Viktor S <awsswa59@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -324,6 +324,11 @@ msgid ""
 "between ports."
 msgstr "Стройте корабли для колонизации заморских территорий и обслуживания торговых путей между портами."
 
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. This include can be removed when all help texts have been defined.
+#. TRANSLATORS#: Lore helptext for a building
+#. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:16
@@ -374,6 +379,7 @@ msgstr "Плетёт шелк для зданий и корабельных па
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:13
 #: ../../data/tribes/buildings/productionsites/empire/well/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:13
 msgctxt "building"
 msgid "Draws water out of the deep."
 msgstr "Черпает воду из недр."
@@ -469,7 +475,7 @@ msgstr "Варварская топорная мастерская - проме�
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
 #: ../../data/tribes/scripting/help/global_helptexts.lua:69
@@ -1406,7 +1412,7 @@ msgctxt "frisians_building"
 msgid ""
 "Of course I could still forge short and long swords, but it is beneath my "
 "honor to bother with such basic equipment now."
-msgstr ""
+msgstr "Конечно, я все еще мог подделывать короткие и длинные мечи, но сейчас я не в силах позаботиться о таком базовом оборудовании."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:11
@@ -1440,7 +1446,7 @@ msgstr "Кузнец оказывает свое влияние на подго�
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:16
 msgctxt "building"
 msgid "Produces basic weapons and helmets for the soldiers."
-msgstr ""
+msgstr "Производит основное оружие и шлемы для солдат."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:3
@@ -1465,7 +1471,7 @@ msgstr "Печёт хлеб из ячменя и воды, чтобы накор
 #, lua-format
 msgctxt "frisians_building"
 msgid "The bakery needs %s on average to produce one loaf of bread."
-msgstr ""
+msgstr "В пекарня производит одну буханка хлеба, в среднем за %s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:3
@@ -1495,7 +1501,7 @@ msgstr "Снаряжает новобранцев и тренирует их д�
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks needs %s on average to recruit one soldier."
-msgstr ""
+msgstr "Казармы нуждаются %s в среднем чтобы нанять одного солдата."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:3
@@ -1503,7 +1509,7 @@ msgctxt "frisians_building"
 msgid ""
 "If my honey tastes bitter, I must have left some bee stings in it. There are"
 " never any bee stings in my honey, therefore, it is not bitter."
-msgstr ""
+msgstr "Если мой мед на вкус горький, я должно был оставить в нем немного пчелиного яда. В моем меду никогда нет яда пчел , поэтому он не горький."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:8
@@ -1537,33 +1543,33 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A berry farmer to a forester"
-msgstr ""
+msgstr "Сборщик ягод для лесника"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:13
 msgctxt "building"
 msgid "Plants berry bushes in the surrounding area."
-msgstr ""
+msgstr "Ягодно кустовидные растения в окрестностях."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:18
 msgctxt "frisians_building"
 msgid ""
 "The berry farm needs free space within the work area to plant the bushes."
-msgstr ""
+msgstr "Ягодной ферме требуется свободное пространство в рабочей области для выращивания кустарника."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The berry farmer pauses %s before going to work again."
-msgstr ""
+msgstr "Сборщик ягод делает паузу %s, прежде чем снова работать."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "If you don’t have iron, change your name from blacksmith to lacksmith!"
-msgstr ""
+msgstr "Если у вас нет железа, измените свое имя с кузнеца до отсутствие кузнеца!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:8
@@ -1575,14 +1581,14 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:13
 msgctxt "building"
 msgid "Forges tools to equip new workers."
-msgstr ""
+msgstr "Создает инструменты для оснащения новых рабочих."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The blacksmith needs %s on average to produce one tool."
-msgstr ""
+msgstr "Кузнец должен %s в среднем производить один инструмент."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/helptexts.lua:3
@@ -1608,7 +1614,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brewery needs %s on average to brew one mug of beer."
-msgstr ""
+msgstr "Пивовару нужно %s в среднем, чтобы сварить кружку пива."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:3
@@ -1637,7 +1643,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce two bricks."
-msgstr ""
+msgstr "Кирпичная печь нуждается %s в среднем для производства двух кирпичей."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:3
@@ -1657,7 +1663,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Угольная печь нуждается %s в среднем для производства одного угля."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:6
@@ -1669,7 +1675,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A clay digger arguing with a builder"
-msgstr ""
+msgstr "Копатель глины спорит с строителем"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:16
@@ -1695,7 +1701,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the coal mine can produce two pieces of coal "
 "in %s on average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, угольная шахта может производить два куска угля, в среднем, за %s."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:21
@@ -1714,7 +1720,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep coal mine can produce four pieces of "
 "coal in %s on average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, глубокая угольная шахта может производить четыре куска угля, в среднем за %s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:3
@@ -1732,7 +1738,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:13
 msgctxt "building"
 msgid "Collects berries from nearby bushes."
-msgstr ""
+msgstr "Собирает ягоды из близлежащих кустов."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:18
@@ -1745,7 +1751,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The fruit collector pauses %s before going to work again."
-msgstr ""
+msgstr "Сборщик фруктов приостанавливается %s прежде чем снова работать."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/helptexts.lua:6
@@ -1753,13 +1759,13 @@ msgctxt "frisians_building"
 msgid ""
 "All I need to be happy is a slice of honey bread with some smoked meat and a"
 " beer."
-msgstr ""
+msgstr "Все, что мне нужно для счастья - это кусок медового хлеба с копченым мясом и пивом."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A master miner to the landlady"
-msgstr ""
+msgstr "Мастер-шахтер для хозяйки"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/helptexts.lua:16
@@ -1815,20 +1821,20 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/helptexts.lua:13
 msgctxt "frisians_building"
 msgid "Fishes on the coast near the fisher’s house."
-msgstr ""
+msgstr "Рыба на побережье возле дома рыбака."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/helptexts.lua:18
 msgctxt "frisians_building"
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr ""
+msgstr "Дом рыбака должен быть полон водой, для рыбы в рабочей зоне."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The fisher pauses %s before going to work again."
-msgstr ""
+msgstr "Рыбак останавливается %s, прежде чем снова работать."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/helptexts.lua:3
@@ -1871,7 +1877,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "Slogan of the Smelters’ Guild"
-msgstr ""
+msgstr "Девиз гильдии литейщиков"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/helptexts.lua:16
@@ -1895,7 +1901,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the gold mine can produce one piece of gold "
 "ore in %s on average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, золотодобывающая шахта может производить один кусок золотой руды, в среднем за %s."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:21
@@ -1914,7 +1920,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep gold mine can produce two pieces of "
 "gold ore in %s on average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, глубокая золотодобывающая шахта может производить два куска золотой руды, в среднем за %s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/helptexts.lua:6
@@ -1928,7 +1934,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A trainer in conversation with a baker"
-msgstr ""
+msgstr "Тренер беседует с пекарем"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/helptexts.lua:16
@@ -1942,14 +1948,14 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:21
 msgctxt "frisians_building"
 msgid "The hunter’s house needs animals to hunt within the work area."
-msgstr ""
+msgstr "Для охоты нужно чтобы в рабочей области вокруг Домика охотника обитали животные."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:26
 #, lua-format
 msgctxt "frisians_building"
 msgid "The hunter pauses %s before going to work again."
-msgstr ""
+msgstr "Охотник делает перерыв в работе на %s."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:21
@@ -1958,7 +1964,7 @@ msgctxt "frisians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any iron ore."
-msgstr ""
+msgstr "Эта шахта вырабатывает только %s ресурса. Как следствие, шанс обнаружения дополнительной железной руды составит только 5%%."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:26
@@ -1967,7 +1973,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the iron mine can produce one piece of iron "
 "ore in %s on average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, железная рудник может производить один кусок железная руды, в среднем за %s."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:21
@@ -1977,7 +1983,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "iron ore."
-msgstr ""
+msgstr "Этот рудник выработал весь ресурс на самом глубоком уровне. Но и после этого, остается %s шанс найти еще немного железной руды."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:26
@@ -1986,13 +1992,13 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep iron mine can produce two pieces of "
 "iron ore in %s on average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, глубокий железный рудник может производить два куска железной руды, в среднем за %s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/helptexts.lua:6
 msgctxt "frisians_building"
 msgid "If you like beer, you’ve never tasted mead."
-msgstr ""
+msgstr "Если вам нравится пиво, вы просто никогда не пробовали медовуху."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/helptexts.lua:11
@@ -2007,7 +2013,7 @@ msgid ""
 "Brews beer out of barley and water. It also brews mead, which is beer "
 "refined with honey. Mead is consumed by miners in deep mines and by "
 "experienced soldiers."
-msgstr ""
+msgstr "Варит пиво из ячменя и воды. Это также варит медовуху, который является очищенным пивом с медом. Медовуху потребляют шахтеры в глубоких шахтах и опытные солдаты."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:3
@@ -2019,7 +2025,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A stonemason"
-msgstr ""
+msgstr "Каменщик"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:13
@@ -2061,7 +2067,7 @@ msgctxt "frisians_building"
 msgid ""
 "Recycles old armor and weapon parts that have been discarded by training "
 "sites into fur, iron and gold."
-msgstr ""
+msgstr "Перерабатывает старые доспехи и части оружия, которые были выкинуты с тренировочного участка в мех, железо и золото."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/helptexts.lua:6
@@ -2080,7 +2086,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/helptexts.lua:16
 msgctxt "frisians_building"
 msgid "Cultivates reed that serves three different purposes for the Frisians."
-msgstr ""
+msgstr "Культивирует тростник, который служит трем разным целям для Фризы."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/helptexts.lua:21
@@ -2119,7 +2125,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady, the reindeer farm produces one meat after producing"
 " three pieces of fur."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, оленеводческая ферма может производить один кусок мяса после производства трех кусков меха."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:16
@@ -2135,7 +2141,7 @@ msgctxt "frisians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any granite."
-msgstr ""
+msgstr "Эта шахта вырабатывает только %s ресурса. Как следствие, шанс обнаружения дополнительного гранита составит только 5%%."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:26
@@ -2186,7 +2192,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The scout pauses %s before going to work again."
-msgstr ""
+msgstr "Разведчик делает перерыв в работе на %s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/helptexts.lua:3
@@ -2194,7 +2200,7 @@ msgctxt "frisians_building"
 msgid ""
 "You soldiers think a good sword is everything, but where would you be if you"
 " had no garments?"
-msgstr ""
+msgstr "Вы, солдаты, думаете, что хороший меч - это все, но где бы вы были, если бы у вас не было одежды?"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/helptexts.lua:8
@@ -2273,7 +2279,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A trainer scolding a soldier"
-msgstr ""
+msgstr "Тренер ругает солдата"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/helptexts.lua:16
@@ -2344,7 +2350,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The well needs %s on average to produce one bucket of water."
@@ -2528,7 +2534,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A trainer training a soldier"
-msgstr ""
+msgstr "Тренер обучает солдата"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/helptexts.lua:16
@@ -2536,7 +2542,7 @@ msgctxt "frisians_building"
 msgid ""
 "Trains soldiers in Attack, Defense and Health to the final level. Equips the"
 " soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Тренирует солдат для Атаки, Защиты и Здоровья до последнего уровня. Оснащает солдат всем необходимым оружием и частями доспехов."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/helptexts.lua:21
@@ -2745,6 +2751,150 @@ msgstr "Этот тростник готов к сбору."
 #: ../../data/tribes/immovables/reed_tiny/helptexts.lua:4
 msgid "This reed has just been planted."
 msgstr "Тростник посажен."
+
+#. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
+#. script probably want to lose the blank space here.
+#: ../../data/tribes/immovables/resi/helptexts/coal_1.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/coal_2.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/gold_1.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/gold_2.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/iron_1.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/iron_2.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:8
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:13
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:18
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:8
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:13
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:18
+#: ../../data/tribes/scripting/help/immovable_help.lua:34
+#: ../../data/tribes/scripting/help/ware_help.lua:31
+#, lua-format
+msgctxt "sentence_separator"
+msgid "%s %s"
+msgstr "%s %s"
+
+#. TRANSLATORS: Helptext for a resource: Coal
+#: ../../data/tribes/immovables/resi/helptexts/coal_1.lua:5
+#: ../../data/tribes/immovables/resi/helptexts/coal_2.lua:5
+msgid "Coal veins contain coal that can be dug up by coal mines."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a resource: Coal
+#: ../../data/tribes/immovables/resi/helptexts/coal_1.lua:7
+msgid "There is only a little bit of coal here."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a resource: Coal
+#: ../../data/tribes/immovables/resi/helptexts/coal_2.lua:7
+msgid "There is a lot of coal here."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a resource: Gold
+#: ../../data/tribes/immovables/resi/helptexts/gold_1.lua:5
+#: ../../data/tribes/immovables/resi/helptexts/gold_2.lua:5
+msgid "Gold veins contain gold ore that can be dug up by gold mines."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a resource: Gold
+#: ../../data/tribes/immovables/resi/helptexts/gold_1.lua:7
+msgid "There is only a little bit of gold here."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a resource: Gold
+#: ../../data/tribes/immovables/resi/helptexts/gold_2.lua:7
+msgid "There is a lot of gold here."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a resource: Iron
+#: ../../data/tribes/immovables/resi/helptexts/iron_1.lua:5
+#: ../../data/tribes/immovables/resi/helptexts/iron_2.lua:5
+msgid "Iron veins contain iron ore that can be dug up by iron mines."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a resource: Iron
+#: ../../data/tribes/immovables/resi/helptexts/iron_1.lua:7
+msgid "There is only a little bit of iron here."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a resource: Iron
+#: ../../data/tribes/immovables/resi/helptexts/iron_2.lua:7
+msgid "There is a lot of iron here."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a resource: No resources
+#: ../../data/tribes/immovables/resi/helptexts/none.lua:4
+msgid "There are no resources in the ground here."
+msgstr ""
+
+#. TRANSLATORS: Helptext for an Atlantean resource: Stones
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:5
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:5
+msgid ""
+"Precious stones are used in the construction of big buildings. They can be "
+"dug up by a crystal mine. You will also get granite from the mine."
+msgstr ""
+
+#. TRANSLATORS: Helptext for an Atlantean resource: Stones
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:7
+msgid "There are only a few precious stones here."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a Barbarian resource: Stones
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:10
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:10
+msgid ""
+"Granite is a basic building material and can be dug up by a granite mine."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a Barbarian resource: Stones
+#. TRANSLATORS: Helptext for a Frisian resource: Stones
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:12
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:22
+msgid "There is only a little bit of granite here."
+msgstr ""
+
+#. TRANSLATORS: Helptext for an Empire resource: Stones
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:15
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:15
+msgid ""
+"Marble is a basic building material and can be dug up by a marble mine. You "
+"will also get granite from the mine."
+msgstr ""
+
+#. TRANSLATORS: Helptext for an Empire resource: Stones
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:17
+msgid "There is only a little bit of marble here."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a Frisian resource: Stones
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:20
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:20
+msgid "Granite is a basic building material and can be dug up by a rock mine."
+msgstr ""
+
+#. TRANSLATORS: Helptext for an Atlantean resource: Stones
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:7
+msgid "There are many precious stones here."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a Barbarian resource: Stones
+#. TRANSLATORS: Helptext for a Frisian resource: Stones
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:12
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:22
+msgid "There is a lot of granite here."
+msgstr ""
+
+#. TRANSLATORS: Helptext for an Empire resource: Stones
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:17
+msgid "There is a lot of marble here."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a resource: Water
+#: ../../data/tribes/immovables/resi/helptexts/water.lua:4
+msgid "There is water in the ground here that can be pulled up by a well."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ship construction site.
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/helptexts.lua:4
@@ -2978,11 +3128,11 @@ msgstr[1] "Работник использует:"
 msgstr[2] "Работник использует:"
 msgstr[3] "Работник использует:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:687
+#: ../../data/tribes/scripting/help/building_help.lua:690
 msgid "Production"
 msgstr "Продуктивность"
 
-#: ../../data/tribes/scripting/help/building_help.lua:688
+#: ../../data/tribes/scripting/help/building_help.lua:691
 msgid "Performance:"
 msgstr "Производительность:"
 
@@ -3357,15 +3507,15 @@ msgstr "Delete"
 #. TRANSLATORS: Heading in "Controls" help
 #: ../../data/tribes/scripting/help/controls.lua:109
 msgid "Ship Statistics"
-msgstr ""
+msgstr "Статистика судоходства"
 
 #: ../../data/tribes/scripting/help/controls.lua:112
 msgid "Show all ships"
-msgstr ""
+msgstr "Показать все корабли"
 
 #: ../../data/tribes/scripting/help/controls.lua:114
 msgid "Show idle ships"
-msgstr ""
+msgstr "Показать бездействующие корабли"
 
 #: ../../data/tribes/scripting/help/controls.lua:116
 msgid "Show ships shipping wares and workers"
@@ -3373,7 +3523,7 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/controls.lua:118
 msgid "Show waiting expeditions"
-msgstr ""
+msgstr "Показать ждущих экспедиции"
 
 #: ../../data/tribes/scripting/help/controls.lua:120
 msgid "Show scouting expeditions"
@@ -3491,15 +3641,6 @@ msgstr "Необходим расчет"
 msgid "%1% and %2%"
 msgstr "%1% и %2%"
 
-#. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
-#. script probably want to lose the blank space here.
-#: ../../data/tribes/scripting/help/immovable_help.lua:34
-#: ../../data/tribes/scripting/help/ware_help.lua:31
-#, lua-format
-msgctxt "sentence_separator"
-msgid "%s %s"
-msgstr "%s %s"
-
 #: ../../data/tribes/scripting/help/immovable_help.lua:48
 msgid "Requirements"
 msgstr "Требования"
@@ -3547,7 +3688,7 @@ msgstr "Империя"
 
 #: ../../data/tribes/scripting/help/tips.lua:63
 msgid "Frisians"
-msgstr ""
+msgstr "Фризы"
 
 #: ../../data/tribes/scripting/help/tips.lua:69
 msgid "Single Player"
@@ -3557,8 +3698,25 @@ msgstr "Один игрок"
 msgid "Multiplayer"
 msgstr "Многопользовательская игра"
 
+#. TRANSLATORS: You can also translate this as 'additional workplace'
+#. result = result .. h3(pgettext("workerhelp_one_building", "Can also work
+#. at"))
+#. else
+#. Translators: Worker Encyclopedia: Heading above a list of buildings where a
+#. worker may work instead of a less experienced worker
+#. TRANSLATORS: You can also translate this as 'additional workplaces'
+#. result = result .. h3(ngettext("Can also work at", "Can also work at",
+#. #additional))
+#. end
+#. RST
+#. .. function:: worker_help_string(worker_description)
+#. Displays the worker with a helptext, an image and the tool used
+#. :arg tribe: The :class:`LuaTribeDescription` for the tribe
+#. that we are displaying this help for.
+#. :arg worker_description: the worker_description from C++.
+#. :returns: Help string for the worker
 #: ../../data/tribes/scripting/help/ware_help.lua:34
-#: ../../data/tribes/scripting/help/worker_help.lua:129
+#: ../../data/tribes/scripting/help/worker_help.lua:153
 msgid "Purpose"
 msgstr "Назначение"
 
@@ -3597,10 +3755,10 @@ msgstr[1] "Работников нанято:"
 msgstr[2] "Работников нанято:"
 msgstr[3] "Работников нанято:"
 
-#. TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker can
-#. work
+#. TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker is
+#. needed to work at
 #. TRANSLATORS: You can also translate this as 'workplace(s)'
-#: ../../data/tribes/scripting/help/worker_help.lua:105
+#: ../../data/tribes/scripting/help/worker_help.lua:106
 msgid "Works at"
 msgid_plural "Works at"
 msgstr[0] "Работает в"
@@ -3609,27 +3767,27 @@ msgstr[2] "Работает в"
 msgstr[3] "Работает в"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
-#: ../../data/tribes/scripting/help/worker_help.lua:144
+#: ../../data/tribes/scripting/help/worker_help.lua:168
 msgid "Worker uses"
 msgstr "Работник использует"
 
 #. TRANSLATORS: Soldier levels
-#: ../../data/tribes/scripting/help/worker_help.lua:161
+#: ../../data/tribes/scripting/help/worker_help.lua:185
 msgid "Levels"
 msgstr "Уровни навыков"
 
-#: ../../data/tribes/scripting/help/worker_help.lua:163
+#: ../../data/tribes/scripting/help/worker_help.lua:187
 msgid "Health"
 msgstr "Здоровье"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
-#: ../../data/tribes/scripting/help/worker_help.lua:167
+#: ../../data/tribes/scripting/help/worker_help.lua:191
 msgid "Starts at %1% points."
 msgstr "Начинает с %1% очков."
 
 #. TRANSLATORS: Soldier health / attack defense / evade points
-#: ../../data/tribes/scripting/help/worker_help.lua:170
-#: ../../data/tribes/scripting/help/worker_help.lua:181
+#: ../../data/tribes/scripting/help/worker_help.lua:194
+#: ../../data/tribes/scripting/help/worker_help.lua:205
 msgid "Increased by %1% point for each level."
 msgid_plural "Increased by %1% points for each level."
 msgstr[0] "Повышается на %1% очко за каждый уровень."
@@ -3638,10 +3796,10 @@ msgstr[2] "Повышается на %1% очков за каждый урове
 msgstr[3] "Повышается на %1% очков за каждый уровень."
 
 #. TRANSLATORS: Soldier health / attack defense / evade level
-#: ../../data/tribes/scripting/help/worker_help.lua:173
-#: ../../data/tribes/scripting/help/worker_help.lua:183
-#: ../../data/tribes/scripting/help/worker_help.lua:193
-#: ../../data/tribes/scripting/help/worker_help.lua:208
+#: ../../data/tribes/scripting/help/worker_help.lua:197
+#: ../../data/tribes/scripting/help/worker_help.lua:207
+#: ../../data/tribes/scripting/help/worker_help.lua:217
+#: ../../data/tribes/scripting/help/worker_help.lua:232
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
 msgstr[0] "Максимальный уровень %1%."
@@ -3649,37 +3807,37 @@ msgstr[1] "Максимальный уровень %1%."
 msgstr[2] "Максимальный уровень %1%."
 msgstr[3] "Максимальный уровень %1%."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:175
+#: ../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Attack"
 msgstr "Атака"
 
 #. TRANSLATORS: Points are 4 digit numbers.
-#: ../../data/tribes/scripting/help/worker_help.lua:178
+#: ../../data/tribes/scripting/help/worker_help.lua:202
 msgid "A random value between %1% and %2% points is added to each attack."
 msgstr "К каждой атаке добавляется случайное значение между %1% и %2% очков."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:185
+#: ../../data/tribes/scripting/help/worker_help.lua:209
 msgid "Defense"
 msgstr "Защита"
 
-#: ../../data/tribes/scripting/help/worker_help.lua:189
-#: ../../data/tribes/scripting/help/worker_help.lua:197
-#: ../../data/tribes/scripting/help/worker_help.lua:204
+#: ../../data/tribes/scripting/help/worker_help.lua:213
+#: ../../data/tribes/scripting/help/worker_help.lua:221
+#: ../../data/tribes/scripting/help/worker_help.lua:228
 #, lua-format
 msgid "Starts at %d%%."
 msgstr "Начинает с %d%%."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:191
-#: ../../data/tribes/scripting/help/worker_help.lua:206
+#: ../../data/tribes/scripting/help/worker_help.lua:215
+#: ../../data/tribes/scripting/help/worker_help.lua:230
 #, lua-format
 msgid "Increased by %d%% for each level."
 msgstr "Повышается на %d%% с каждым уровнем."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:198
+#: ../../data/tribes/scripting/help/worker_help.lua:222
 msgid "This soldier cannot be trained in defense."
 msgstr "Этот солдат не может быть тренирован Защите."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:201
+#: ../../data/tribes/scripting/help/worker_help.lua:225
 msgid "Evade"
 msgstr "Уклонение"
 
@@ -3834,8 +3992,6 @@ msgid ""
 "inns to prepare meals."
 msgstr "Воины с арены поединков признают только это пиво. Некоторые даже считают, что в этом пиве кроется вся сила Варваров. Оно помогает тренировке солдат уклонению с 0 до 1 и до 2 уровней. Крепкое пиво также используется для приготовления обедов в гостиницах."
 
-#. TRANSLATORS: Note helptext for a building
-#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Helptext for a ware: Blackroot
 #: ../../data/tribes/wares/blackroot/helptexts.lua:4
 msgctxt "atlanteans_ware"
@@ -4128,7 +4284,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fish is a very important food resource for the Frisians. It is fished from "
 "the shore or reared in aqua farms."
-msgstr ""
+msgstr "Рыба - очень важный продовольственный ресурс для Фризы. Он ловится с берега или выращивается в аквафермах."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Net
 #: ../../data/tribes/wares/fishing_net/helptexts.lua:4
@@ -4300,7 +4456,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The Frisians produce granite blocks in quarries and rock mines. They can be "
 "refined in a brick kiln."
-msgstr ""
+msgstr "Фризы производят гранитные блоки в карьерах и горных рудниках. Они могут быть очищены в кирпичной печи."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:12
@@ -4910,7 +5066,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fish is smoked in a smokery. Smoked fish is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "Рыба копченая в коптильни. Затем копченая рыба потребляется солдатами на тренировках или превращается в пайки и обеды для шахтеров и разведчиков."
 
 #. TRANSLATORS: Helptext for a ware: Smoked Meat
 #: ../../data/tribes/wares/smoked_meat/helptexts.lua:4
@@ -5376,8 +5532,8 @@ msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners, soldiers and scouts."
 msgstr ""
 
-#. TRANSLATORS: Helptext for a worker: Blacksmith
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
+#. TRANSLATORS: Helptext for a worker: Blacksmith
 #: ../../data/tribes/workers/barbarians/blacksmith/helptexts.lua:3
 #: ../../data/tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"
@@ -5512,8 +5668,6 @@ msgctxt "barbarians_worker"
 msgid "Eager to become a soldier and defend his tribe!"
 msgstr "Жаждет стать солдатом и защищать свое племя!"
 
-#. TRANSLATORS: Note helptext for a building
-#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/barbarians/scout/helptexts.lua:3
 msgctxt "barbarians_worker"
@@ -5702,6 +5856,8 @@ msgctxt "empire_worker"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Работает на верфи и строит новые корабли."
 
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/empire/smelter/helptexts.lua:3
 msgctxt "empire_worker"

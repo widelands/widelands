@@ -18,5 +18,6 @@ tribes:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
+   ware_hotspot = {0, 20},
    animations = animations,
 }

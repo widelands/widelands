@@ -14,7 +14,6 @@ tribes:new_productionsite_type {
       granite = 1
    },
    return_on_dismantle_on_enhanced = {
-      planks = 0,
    },
 
    animations = {
@@ -54,7 +53,7 @@ tribes:new_productionsite_type {
             "sleep=30000",
             "return=skipped unless economy needs beer",
             "consume=water wheat",
-            "playsound=sound/empire beerbubble 180",
+            "playsound=sound/empire/beerbubble 180",
             "animate=working 30000",
             "produce=beer"
          }

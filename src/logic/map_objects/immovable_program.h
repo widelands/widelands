@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -133,10 +133,9 @@ struct ImmovableProgram {
 	/// Parameter syntax:
 	///    parameters ::= directory sound [priority]
 	/// Parameter semantics:
-	///    directory:
-	///       The directory of the sound files, relative to the datadir.
-	///    sound:
-	///       The base filename of a sound effect (relative to the directory).
+	///    path:
+	///       The directory of the sound files, relative to the datadir, followed
+	///       by the base filename of a sound effect (relative to the directory).
 	///    priority:
 	///       An integer. If omitted, 127 is used.
 	///
@@ -147,7 +146,7 @@ struct ImmovableProgram {
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		std::string name;
+		FxId fx;
 		uint8_t priority;
 	};
 
@@ -229,6 +228,6 @@ struct ImmovableActionData {
 
 	static ImmovableActionData* load(FileRead& fr, Immovable& imm, const std::string& name);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_IMMOVABLE_PROGRAM_H

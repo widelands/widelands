@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,8 @@
 #ifndef WL_NETWORK_CRYPTO_H
 #define WL_NETWORK_CRYPTO_H
 
-#include <string>
 #include <boost/version.hpp>
+#include <string>
 
 namespace crypto {
 
@@ -31,6 +31,6 @@ namespace crypto {
  @return The hash as hex-string.
  */
 std::string sha1(const std::string& input);
-}
+}  // namespace crypto
 
 #endif  // end of include guard: WL_NETWORK_CRYPTO_H

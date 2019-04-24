@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -503,7 +503,7 @@ struct ProductionProgram {
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
-		std::string name;
+		FxId fx;
 		uint8_t priority;
 	};
 
@@ -559,6 +559,6 @@ private:
 	Buildcost produced_wares_;
 	Buildcost recruited_workers_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTION_PROGRAM_H

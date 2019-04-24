@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-28 05:45+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018\n"
+"POT-Creation-Date: 2019-04-05 04:54+0000\n"
+"PO-Revision-Date: 2017-12-27 17:17+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2019\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +32,7 @@ msgid ""
 "Dismantle all unproductive small buildings to get some resources for new "
 "buildings."
 msgstr ""
-"Riet all unnützen lütten Husen platt, um Materialien för neie Husen to "
+"Riet all unnützen lütten Husen platt, um Materialien för neje Husen to "
 "kriegen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:49
@@ -122,12 +123,12 @@ msgstr "Verneei de ollen, unnützen Förster-Husen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:102
 msgid "Build Two New Forester’s Houses"
-msgstr "Bau twee neie Förster-Husen"
+msgstr "Bau twee neje Förster-Husen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:103
 msgid ""
 "Replace the two forester’s houses by new ones to increase productivity."
-msgstr "Wessel de twee Förster-Husen dör neie ut, um de Wöörde to verhogen."
+msgstr "Wessel de twee Förster-Husen dör neje ut, um de Wöörde to verhogen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:109
 msgid "Find the monastery in the north"
@@ -192,19 +193,19 @@ msgid ""
 "Remember that you can control the production amount in the economy settings."
 msgstr ""
 "Vergeet nich, dat du de Tahl vun Waren, de produzeert worden sallen, in de "
-"Wirtschafts-Instellungen stüren kannst."
+"Wirtschafts-Instellens stüren kannst."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:146
 msgid "Recruit new soldiers"
-msgstr "Hüür neie Soldaten an"
+msgstr "Hüür neje Soldaten an"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:148
 msgid "New Soldier Recruiting"
-msgstr "Neie Soldaten anhüren"
+msgstr "Neje Soldaten anhüren"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:149
 msgid "Recruit at least ten new soldiers in your barracks."
-msgstr "Hüür tominnst teihn neie Soldaten in diener Kasern an."
+msgstr "Hüür tominnst teihn neje Soldaten in diener Kasern an."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:150
 msgid "Don’t forget to forge weapons and armor for them."
@@ -337,7 +338,7 @@ msgid ""
 msgstr ""
 "De Gotten wees Pries, wi hebben wunnen. Wi hebben all de Rutföderungen "
 "överwunnen, de vör uns laggen. Wi hebben sogaar de Willen Lüü ur uns' Land "
-"dreven. Aber uns' Sieg is blot för körte Tied, denn dat is eerst de Anfang "
+"dreven. Aver uns' Sieg is blot för körte Tied, denn dat is eerst de Anfang "
 "vum Krieg. Laat uns wachten, wat de Tokunft för uns noch paraat hollt."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
@@ -396,7 +397,7 @@ msgid ""
 "seems to be very difficult."
 msgstr ""
 "Börgmester, wi mutten Ji danken för Jo Beswaren, uns' Stadt to schütten. Un "
-"wi wullen uns' Best doon, um dat Döranner to lösen. Aber dat sücht leider "
+"wi wullen uns' Best doon, um dat Döranner to lösen. Aver dat sücht leider "
 "leep slimm ut."
 
 #. TRANSLATORS: Lutius
@@ -451,6 +452,10 @@ msgid ""
 "delegated the authority of running the city to his former secretary and "
 "instated him as his surrogate around here."
 msgstr ""
+"Mienheer, ick will am Anfang begünnen. De König hett Freemilt vör langer "
+"Tied verlaten, um tegen de Willen Lüü to kämpen. Daar bruukde he siene hele "
+"Acht för, also hett he sienen ollen Macker mit sienen Upgaven as Börgmester "
+"betraut."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:284
 msgid ""
@@ -481,6 +486,9 @@ msgid ""
 "our homeland again. But on the other hand, I have the impression that "
 "something went deeply wrong here."
 msgstr ""
+"Ave, Saledus! Up de een Kant hets du Recht; 't is würrelk eene Freid, uns' "
+"Heimaadland weertosehn. Aver up de anner Kant hebb ick de Indruck, hier is "
+"wat ganz slimm ut de Spoor lopen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:300
@@ -489,14 +497,18 @@ msgid ""
 " managed our country while we were absent created utter chaos. I’m not quite"
 " sure how we can fix this, if at all possible."
 msgstr ""
+"Kiek blot de Wirtschaft an. 't gifft haast keene Wöörde. Well ok immer sük "
+"um uns' Land kümmert hett, as wi nich hier weren, hett 't heel un dall in "
+"een Kuddelmuddel verwannelt. Ick weet nich, wo wi dat ofhelpen könen, wenn "
+"dat överhoopt gaht."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:305
 msgid "Amalea Investigates"
-msgstr ""
+msgstr "Amalee' bekiekt 't genau"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:306
 msgid "Amalea is nodding thoughtfully…"
-msgstr ""
+msgstr "Amalee' sinnt un nickkoppt …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:308
@@ -531,11 +543,11 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:321
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:581
 msgid "Amalea has Bad News"
-msgstr ""
+msgstr "Amalee' hett slimme Narichten"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:322
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "Amalee' rekumdeert …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:324
@@ -569,11 +581,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:340
 msgid "Amalea Looks Confident"
-msgstr ""
+msgstr "Amalee' sücht getroost ut"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:341
 msgid "Amalea is more confident"
-msgstr ""
+msgstr "Amalee' is faster"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:343
@@ -599,11 +611,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:356
 msgid "Amalea is Somewhat Relieved"
-msgstr ""
+msgstr "Amalee' is wat verlichtert"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:357
 msgid "Amalea is giving a deep sigh…"
-msgstr ""
+msgstr "Amalee' sücht deep …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:359
@@ -627,11 +639,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:371
 msgid "Amalea has Good News"
-msgstr ""
+msgstr "Amalee' hett gode Narichten"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:372
 msgid "Amalea smiles for the first time in weeks…"
-msgstr ""
+msgstr "Amalee' is tum eersten Maal siet Weken munter …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:374
@@ -668,11 +680,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:393
 msgid "Amalea is Pleased"
-msgstr ""
+msgstr "Amalee' is tofree"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:394
 msgid "Amalea is nodding her head…"
-msgstr ""
+msgstr "Amalee' nickkoppt …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:396
@@ -688,7 +700,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:405
 msgid "Amalea Shakes Her Head"
-msgstr ""
+msgstr "Amalee' schüddekoppt …"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:406
 msgid "Amalea is getting fed up with all the problems in this economy…"
@@ -729,11 +741,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:424
 msgid "Amalea Laughs Sarcastically"
-msgstr ""
+msgstr "Amalee' lacht höhnsk"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:425
 msgid "Amalea is laughing sarcastically…"
-msgstr ""
+msgstr "Amalee' lacht höhnsk …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:427
@@ -750,11 +762,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:435
 msgid "Amalea Shrugs"
-msgstr ""
+msgstr "Amalee' tuckt de Achsels"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:436
 msgid "Amalea is getting used to bad news…"
-msgstr ""
+msgstr "Amalee' wennt sük an slimme Narichten …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:438
@@ -783,11 +795,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:451
 msgid "Amalea Looks Happy"
-msgstr ""
+msgstr "Amalee' is glückelk"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:452
 msgid "Amalea comes in…"
-msgstr ""
+msgstr "Amalee' kummt in …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:454
@@ -806,11 +818,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:463
 msgid "Amalea Looks Sad"
-msgstr ""
+msgstr "Amalee' sücht bedröövt ut"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:464
 msgid "Amalea is really sad…"
-msgstr ""
+msgstr "Amalee' is bannig trürig …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:466
@@ -830,11 +842,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:474
 msgid "Amalea is Very Content"
-msgstr ""
+msgstr "Amalee' is bannig tofree"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:475
 msgid "Amalea claps her hands…"
-msgstr ""
+msgstr "Amalee' hannenklappt …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:477
@@ -854,11 +866,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:485
 msgid "Amalea is Satisfied"
-msgstr ""
+msgstr "Amalee' is tofree"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:486
 msgid "Amalea is satisfied with the progress…"
-msgstr ""
+msgstr "Amalee' is mit de Wiederkomen tofree …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:488
@@ -888,11 +900,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:501
 msgid "Amalea has Some Advice"
-msgstr ""
+msgstr "Amalee' hett eenen Raad"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:502
 msgid "Amalea is providing economic advice…"
-msgstr ""
+msgstr "Amalee' raadt över de Wirtschaft …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:504
@@ -911,11 +923,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:514
 msgid "Amalea is in a Good Mood"
-msgstr ""
+msgstr "Amalee' hett gode Luun"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:515
 msgid "Amalea is celebrating success…"
-msgstr ""
+msgstr "Amalee' fiert de Erfolg …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:517
@@ -926,11 +938,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:522
 msgid "Amalea Looks Thoughtful"
-msgstr ""
+msgstr "Amalee' sinnt"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:523
 msgid "Amalea is sorrowful…"
-msgstr ""
+msgstr "Amalee' is besörgt …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:525
@@ -942,11 +954,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:530
 msgid "Amalea is Positively Surprised"
-msgstr ""
+msgstr "Amalee' is glückelk överrascht"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:531
 msgid "Amalea is celebrating a happy event…"
-msgstr ""
+msgstr "Amalee' fiert eenen goden Vörfall …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:533
@@ -958,11 +970,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:538
 msgid "Amalea Analyzes the Economy"
-msgstr ""
+msgstr "Amalee' sinnt över de Wirtschaft"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:539
 msgid "Amalea reminds Lutius of the farms…"
-msgstr ""
+msgstr "Amalee' mahnt Lutjus an de Buurdereen …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:541
@@ -981,11 +993,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:551
 msgid "Amalea’s Restrictions"
-msgstr ""
+msgstr "Amalee' bekört"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:552
 msgid "Amalea restricts the building possibilities…"
-msgstr ""
+msgstr "Amalee' minnerseert de kansen tum Bauen …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:554
@@ -1004,11 +1016,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:562
 msgid "Amalea Reminds to Clear Road Network"
-msgstr ""
+msgstr "Amalee' mahnt, dat Stratennett uptorümen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:563
 msgid "Amalea reminds Lutius of the scrambled road network…"
-msgstr ""
+msgstr "Amalee' mahnt Lutjus an dat bregenklöterge Stratennett …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:565
@@ -1028,12 +1040,12 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:573
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:592
 msgid "Defeated!"
-msgstr ""
+msgstr "Verloren!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:574
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:593
 msgid "Amalea reports our defeat…"
-msgstr ""
+msgstr "Amalee' vermellt uns' Nederlaag …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:576
@@ -1044,7 +1056,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:582
 msgid "Amalea reports our headquarters lost…"
-msgstr ""
+msgstr "Amalee' vermellt, dat uns' Raadhuus verloren is …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:584
@@ -1071,7 +1083,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:603
 msgid "Saledus looks very relaxed…"
-msgstr ""
+msgstr "Saledus sücht bannig entspannt ut …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:605
@@ -1083,11 +1095,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:610
 msgid "We Could Use The Military Instead"
-msgstr ""
+msgstr "Wi könen ok de Soldateree bruken"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:611
 msgid "Saledus raises his voice…"
-msgstr ""
+msgstr "Saledus heevt siene Stimme hoog…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:613
@@ -1105,11 +1117,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:623
 msgid "Easy Victory"
-msgstr ""
+msgstr "Lichter Sieg"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:624
 msgid "Saledus is cheering proudly…"
-msgstr ""
+msgstr "Saledus juchheit stolt …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:626
@@ -1120,12 +1132,12 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:631
 msgid "Defiance"
-msgstr ""
+msgstr "Trotz"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:632
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:640
 msgid "Saledus asserts his point…"
-msgstr ""
+msgstr "Saledus versekert sien Dünken …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:634
@@ -1138,7 +1150,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:639
 msgid "Pride"
-msgstr ""
+msgstr "Stolt"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:642
@@ -1151,7 +1163,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:649
 msgid "Saledus asks for a stronger army…"
-msgstr ""
+msgstr "Saledus will eene machtigere Soldateree …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:651
@@ -1177,11 +1189,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:664
 msgid "Training is Needed"
-msgstr ""
+msgstr "Wi mutten Öven"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:665
 msgid "Saledus still has security concerns…"
-msgstr ""
+msgstr "Saledus sörgt sük immer noch um de Sekerheid …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:667
@@ -1201,11 +1213,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:676
 msgid "Praise The Army of The Empire"
-msgstr ""
+msgstr "Pries un Loff de Rieks-Soldateree"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:677
 msgid "Saledus is happy…"
-msgstr ""
+msgstr "Saledus is glückelk …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:679
@@ -1223,11 +1235,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:688
 msgid "We Just Need Another Hero"
-msgstr ""
+msgstr "Wi bruken blot noch eenen Helden"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:689
 msgid "Saledus is in a good mood…"
-msgstr ""
+msgstr "Saledus hett gode Luun"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:691
@@ -1253,11 +1265,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:702
 msgid "We Should Expel The Barbarians"
-msgstr ""
+msgstr "Wi sallen de Willen Lüü utjagen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:703
 msgid "Saledus is excited…"
-msgstr ""
+msgstr "Saledus is wösig …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:705
@@ -1274,11 +1286,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:714
 msgid "Victory is Ours"
-msgstr ""
+msgstr "Uns' is de Sieg"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:715
 msgid "Saledus is cheering loudly…"
-msgstr ""
+msgstr "Saledus juchheit luudhals …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:717
@@ -1296,11 +1308,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:724
 msgid "The Enemy is Near"
-msgstr ""
+msgstr "De Feind is nah"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:725
 msgid "Saledus is alerted…"
-msgstr ""
+msgstr "Saledus sörgt sük …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:727
@@ -1317,11 +1329,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:740
 msgid "Worship to be Gifted"
-msgstr ""
+msgstr "Verehren un Beschenken"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:741
 msgid "Julia is demanding a sacrifice for Vesta…"
-msgstr ""
+msgstr "Julia verlangt een Opfer för Vesta …"
 
 #. TRANSLATORS: Julia - priestess of the goddess Vesta
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:743
@@ -1333,11 +1345,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:748
 msgid "May The Gods Bless You"
-msgstr ""
+msgstr "De Gotten sallen ji segen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:749
 msgid "Vesta is blessing us…"
-msgstr ""
+msgstr "Vesta segent uns …"
 
 #. TRANSLATORS: Julia - priestess of the goddess Vesta
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:751
@@ -1350,11 +1362,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:756
 msgid "Damned"
-msgstr ""
+msgstr "Verflöökt"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:757
 msgid "Vesta is cursing us…"
-msgstr ""
+msgstr "Vesta verdüvelt uns …"
 
 #. TRANSLATORS: Julia - priestess of the goddess Vesta
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:759
@@ -1367,10 +1379,10 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Neie Upgaav"
-msgstr[1] "Neie Upgaven"
+msgstr[0] "Neje Upgaav"
+msgstr[1] "Neje Upgaven"

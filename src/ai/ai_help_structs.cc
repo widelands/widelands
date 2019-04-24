@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2018 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1148,12 +1148,12 @@ void PlayersStrengths::add(Widelands::PlayerNumber pn,
 		if (this_player_team != mytn) {
 			log("%2d: Team changed %d -> %d\n", pn, this_player_team, mytn);
 			this_player_team = mytn;
-		};
+		}
 		if (all_stats[opn].team_number != pltn) {
 			log("%2d: Team changed for player %d: %d -> %d\n", pn, opn, all_stats[opn].team_number,
 			    pltn);
 			all_stats[opn].team_number = pltn;
-		};
+		}
 	}
 }
 
@@ -1248,7 +1248,7 @@ bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const uint
 uint32_t PlayersStrengths::get_player_power(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) > 0) {
 		return all_stats[pn].players_power;
-	};
+	}
 	return 0;
 }
 
@@ -1256,7 +1256,7 @@ uint32_t PlayersStrengths::get_player_power(Widelands::PlayerNumber pn) {
 uint32_t PlayersStrengths::get_player_land(Widelands::PlayerNumber pn) {
 	if (all_stats.count(pn) > 0) {
 		return all_stats[pn].players_land;
-	};
+	}
 	return 0;
 }
 

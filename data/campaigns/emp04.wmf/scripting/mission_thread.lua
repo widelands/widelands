@@ -389,8 +389,7 @@ function conquer()
    sleep(25000)
    campaign_message_box(diary_page_4)
 
-   p1:reveal_campaign("campsect2")
-   p1:reveal_scenario("empiretut04")
+   p1:mark_scenario_as_solved("emp04.wmf")
 end
 
 -- another production chain that is ineffective and needs to be corrected
