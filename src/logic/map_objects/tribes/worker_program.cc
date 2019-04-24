@@ -160,7 +160,7 @@ createware
       harvest = {
          "findobject=attrib:ripe_wheat radius:2",
          "walk=object",
-         "playsound=sound/farm scythe 220",
+         "playsound=sound/farm/scythe 220",
          "animate=harvesting 10000",
          "callobject=harvest",
          "animate=gathering 4000",
@@ -194,10 +194,10 @@ mine
       fish = {
          "findspace=size:any radius:7 resource:fish",
          "walk=coords",
-         "playsound=sound/fisher fisher_throw_net 192",
+         "playsound=sound/fisher/fisher_throw_net 192",
          "mine=fish 1", -- Remove a fish in an area of 1
          "animate=fishing 3000",
-         "playsound=sound/fisher fisher_pull_net 192",
+         "playsound=sound/fisher/fisher_pull_net 192",
          "createware=fish",
          "return"
       },
@@ -273,7 +273,7 @@ findobject
          "findobject=attrib:rocks radius:6", -- Find rocks on the map within a radius of 6 from your
          building
          "walk=object", -- Now walk to those rocks
-         "playsound=sound/atlanteans/cutting stonecutter 192",
+         "playsound=sound/atlanteans/cutting/stonecutter 192",
          "animate=hacking 12000",
          "callobject=shrink",
          "createware=granite",
@@ -515,7 +515,7 @@ walk
          "walk=object-or-coords", -- Walk to coordinates from 1. or to object from 2.
          -- 2. This will create an object for us if we don't have one yet
          "plant=attrib:shipconstruction unless object",
-         "playsound=sound/sawmill sawmill 230",
+         "playsound=sound/sawmill/sawmill 230",
          "animate=work 500",
          "construct", -- 1. This will find a space for us if no object has been planted yet
          "animate=work 5000",
@@ -618,9 +618,9 @@ callobject
       harvest = {
          "findobject=attrib:tree radius:10",
          "walk=object",
-         "playsound=sound/woodcutting fast_woodcutting 250",
+         "playsound=sound/woodcutting/fast_woodcutting 250",
          "animate=hacking 10000",
-         "playsound=sound/woodcutting tree-falling 130",
+         "playsound=sound/woodcutting/tree-falling 130",
          "callobject=fall", -- Cause the tree to fall
          "animate=idle 2000",
          "createware=log",
@@ -676,7 +676,7 @@ plant
          "walk=object-or-coords",
          -- Only create a shipconstruction if we don't already have one
          "plant=attrib:shipconstruction unless object",
-         "playsound=sound/sawmill sawmill 230",
+         "playsound=sound/sawmill/sawmill 230",
          "animate=work 500",
          "construct",
          "animate=work 5000",
@@ -830,7 +830,7 @@ findresources
       search = {
          "animate=hacking 5000",
          "animate=idle 2000",
-         "playsound=sound/hammering geologist_hammer 192",
+         "playsound=sound/hammering/geologist_hammer 192",
          "animate=hacking 3000",
          -- Plant a resource marker at the current location, according to what has been found.
          "findresources"
@@ -875,13 +875,13 @@ void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::stri
 /* RST
 playsound
 ^^^^^^^^^^
-.. function:: playsound=\<sound_dir\> \<sound_name\> [priority]
+.. function:: playsound=\<sound_dir/sound_name\> [priority]
 
-   :arg string sound_dir: The directory (folder) that the sound files are in,
-      relative to the data directory.
-   :arg string sound_name: The name of the particular sound to play.
+   :arg string sound_dir/sound_name: The directory (folder) that the sound files are in,
+      relative to the data directory, followed by the name of the particular sound to play.
       There can be multiple sound files to select from at random, e.g.
-      for `scythe`, we can have `scythe_00.ogg`, `scythe_01.ogg` ...
+      for `sound/farm/scythe`, we can have `sound/farm/scythe_00.ogg`, `sound/farm/scythe_01.ogg`
+...
 
    :arg int priority: The priority to give this sound. Maximum priority is 255.
 
@@ -890,7 +890,7 @@ playsound
       harvest = {
          "findobject=attrib:ripe_wheat radius:2",
          "walk=object",
-         "playsound=sound/farm scythe 220", -- Almost certainly play a swishy harvesting sound
+         "playsound=sound/farm/scythe 220", -- Almost certainly play a swishy harvesting sound
          "animate=harvesting 10000",
          "callobject=harvest",
          "animate=gathering 4000",
@@ -902,13 +902,14 @@ void WorkerProgram::parse_playsound(Worker::Action* act, const std::vector<std::
 	if (cmd.size() < 3 || cmd.size() > 4)
 		throw wexception("Usage: playsound <sound_dir> <sound_name> [priority]");
 
-	act->sparam1 = cmd[1] + "/" + cmd[2];
-
-	g_sound_handler.load_fx_if_needed(cmd[1], cmd[2], act->sparam1);
+	act->iparam2 = SoundHandler::register_fx(SoundType::kAmbient, cmd[1]);
 
 	act->function = &Worker::run_playsound;
-	act->iparam1 = cmd.size() == 3 ? 64 :  //  50% chance to play, only one instance at a time
-	                  atoi(cmd[3].c_str());
+	act->iparam1 = cmd.size() == 2 ? kFxPriorityMedium : atoi(cmd[2].c_str());
+	if (act->iparam1 < kFxPriorityLowest) {
+		throw GameDataError("Minmum priority for sounds is %d, but only %d was specified for %s",
+		                    kFxPriorityLowest, act->iparam1, cmd[1].c_str());
+	}
 }
 
 /* RST
@@ -923,7 +924,7 @@ construct
          "walk=object-or-coords", -- Walk to coordinates from 1. or to object from 2.
          -- 2. This will create an object for us if we don't have one yet
          "plant=attrib:shipconstruction unless object",
-         "playsound=sound/sawmill sawmill 230",
+         "playsound=sound/sawmill/sawmill 230",
          "animate=work 500",
          -- 1. Add the current ware to the shipconstruction. This will find a space for us if no
          -- shipconstruction object has been planted yet

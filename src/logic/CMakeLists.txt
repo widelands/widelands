@@ -299,6 +299,7 @@ wl_library(logic
     scripting_lua_interface
     scripting_lua_table
     sound
+    sound_constants
     ui_basic
     wui
     wui_mapview_pixelfunctions

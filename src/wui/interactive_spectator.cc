@@ -129,12 +129,12 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 
 		Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 		if (imm != nullptr && imm->get_positions(the_game).front() == field.fcoords) {
-			imm->draw(gametime, text_to_draw, field.rendertarget_pixel, scale, dst);
+			imm->draw(gametime, text_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
 		}
 
 		for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 		     bob = bob->get_next_bob()) {
-			bob->draw(the_game, text_to_draw, field.rendertarget_pixel, scale, dst);
+			bob->draw(the_game, text_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
 		}
 
 		// Draw work area previews.
@@ -177,6 +177,10 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
  */
 Widelands::Player* InteractiveSpectator::get_player() const {
 	return nullptr;
+}
+
+bool InteractiveSpectator::player_hears_field(const Widelands::Coords&) const {
+	return true;
 }
 
 // Toolbar button callback functions.
