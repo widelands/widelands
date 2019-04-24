@@ -54,24 +54,22 @@ void CampaignDetails::update(const CampaignData& campaigndata) {
 
 	if (campaigndata.visible) {
 		description = (boost::format("%s%s") %
-					   /** TRANSLATORS: Header for campaign tribe */
-					   as_heading(_("Tribe"), UI::PanelStyle::kFsMenu) %
+		               /** TRANSLATORS: Header for campaign tribe */
+		               as_heading(_("Tribe"), UI::PanelStyle::kFsMenu) %
 		               as_content(campaigndata.tribename, UI::PanelStyle::kFsMenu))
 		                 .str();
-		description =
-		   (boost::format("%s%s") % description %
-			/** TRANSLATORS: Header for campaign difficulty */
-		    as_heading(_("Difficulty"), UI::PanelStyle::kFsMenu))
-		      .str();
+		description = (boost::format("%s%s") % description %
+		               /** TRANSLATORS: Header for campaign difficulty */
+		               as_heading(_("Difficulty"), UI::PanelStyle::kFsMenu))
+		                 .str();
 		description = (boost::format("%s%s") % description %
 		               as_content(campaigndata.difficulty_description, UI::PanelStyle::kFsMenu))
 		                 .str();
 
-		description =
-		   (boost::format("%s%s") % description %
-			/** TRANSLATORS: Header for campaign description */
-		    as_heading(_("Description"), UI::PanelStyle::kFsMenu))
-		      .str();
+		description = (boost::format("%s%s") % description %
+		               /** TRANSLATORS: Header for campaign description */
+		               as_heading(_("Description"), UI::PanelStyle::kFsMenu))
+		                 .str();
 		description = (boost::format("%s%s") % description %
 		               as_content(campaigndata.description, UI::PanelStyle::kFsMenu))
 		                 .str();
