@@ -625,9 +625,9 @@ int LuaPlayer::hide_fields(lua_State* L) {
    .. method:: mark_scenario_as_solved(name)
 
       Marks a campaign scenario as solved. Reads the scenario definition in
-   data/campaigns/campaigns.lua to check which scenario and/or campaign should be revealed as a
-   result. This only works for the interactive player and most likely also only in single player
-   games.
+      data/campaigns/campaigns.lua to check which scenario and/or campaign should be
+      revealed as a result. This only works for the interactive player and most likely
+      also only in single player games.
 
       :arg name: name of the scenario to be marked as solved
       :type name: :class:`string`

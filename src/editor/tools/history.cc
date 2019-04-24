@@ -35,6 +35,7 @@ EditorActionArgs::EditorActionArgs(EditorInteractive& base)
      change_by(0),
      current_resource(0),
      set_to(0),
+     new_map_size(0, 0),
      interval(0, 0),
      refcount(0) {
 }
