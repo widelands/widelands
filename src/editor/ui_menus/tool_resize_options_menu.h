@@ -17,44 +17,30 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_NEW_MAP_H
-#define WL_EDITOR_UI_MENUS_MAIN_MENU_NEW_MAP_H
+#ifndef WL_EDITOR_UI_MENUS_TOOL_RESIZE_OPTIONS_MENU_H
+#define WL_EDITOR_UI_MENUS_TOOL_RESIZE_OPTIONS_MENU_H
 
-#include "logic/description_maintainer.h"
+#include "editor/ui_menus/tool_options_menu.h"
 #include "ui_basic/box.h"
-#include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/listselect.h"
-#include "ui_basic/window.h"
+#include "ui_basic/multilinetextarea.h"
 
 class EditorInteractive;
+struct EditorResizeTool;
 
-/**
- * This is the new map selection menu. It offers
- * the user to choose the new world and a few other
- * things like size, world ....
- */
-struct MainMenuNewMap : public UI::Window {
-	explicit MainMenuNewMap(EditorInteractive&);
+struct EditorToolResizeOptionsMenu : public EditorToolOptionsMenu {
+	EditorToolResizeOptionsMenu(EditorInteractive&, EditorResizeTool&, UI::UniqueWindow::Registry&);
 
 private:
 	EditorInteractive& eia();
-	void clicked_create_map();
-	void clicked_cancel();
-	void fill_list();
+	void update_width();
+	void update_height();
 
-	int32_t margin_;
-	int32_t box_width_;
+	EditorResizeTool& resize_tool_;
 	UI::Box box_;
-	UI::Dropdown<int32_t> width_;
-	UI::Dropdown<int32_t> height_;
-
-	// Terrains list
-	UI::Listselect<Widelands::DescriptionIndex> list_;
-
-	// Buttons
-	UI::Box button_box_;
-	UI::Button ok_button_, cancel_button_;
+	UI::Dropdown<int32_t> new_width_;
+	UI::Dropdown<int32_t> new_height_;
+	UI::MultilineTextarea text_area_;
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_NEW_MAP_H
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_RESIZE_OPTIONS_MENU_H
