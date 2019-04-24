@@ -20,6 +20,7 @@
 #include "wui/inputqueuedisplay.h"
 
 #include <algorithm>
+
 #include <boost/format.hpp>
 
 #include "economy/input_queue.h"
