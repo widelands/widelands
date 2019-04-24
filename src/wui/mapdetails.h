@@ -20,6 +20,7 @@
 #ifndef WL_WUI_MAPDETAILS_H
 #define WL_WUI_MAPDETAILS_H
 
+#include "graphic/text_layout.h"
 #include "ui_basic/box.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/panel.h"
