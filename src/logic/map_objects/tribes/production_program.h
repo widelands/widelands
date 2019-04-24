@@ -503,7 +503,7 @@ struct ProductionProgram {
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
-		std::string name;
+		FxId fx;
 		uint8_t priority;
 	};
 

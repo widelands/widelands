@@ -74,6 +74,8 @@ public:
 	void popup_message(Widelands::MessageId, const Widelands::Message&);
 
 private:
+	bool player_hears_field(const Widelands::Coords& coords) const override;
+
 	void cmdSwitchPlayer(const std::vector<std::string>& args);
 
 	Widelands::PlayerNumber player_number_;

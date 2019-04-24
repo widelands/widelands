@@ -366,27 +366,26 @@ void LoadOrSaveGame::fill_table() {
 
 	if (filetype_ == FileType::kReplay) {
 		gamefiles = filter(g_fs->list_directory(kReplayDir), [](const std::string& fn) {
-			return boost::ends_with(fn, kReplayExtension);
+			return boost::algorithm::ends_with(fn, kReplayExtension);
 		});
 		// Update description column title for replays
 		table_.set_column_tooltip(2, show_filenames_ ? _("Filename: Map name (start of replay)") :
 		                                               _("Map name (start of replay)"));
 	} else {
-		gamefiles = g_fs->list_directory(kSaveDir);
+		gamefiles = filter(g_fs->list_directory(kSaveDir), [](const std::string& fn) {
+			return boost::algorithm::ends_with(fn, kSavegameExtension);
+		});
 	}
 
 	Widelands::GamePreloadPacket gpdp;
 
 	for (const std::string& gamefilename : gamefiles) {
-		if (gamefilename == kCampVisFile || gamefilename == g_fs->fix_cross_file(kCampVisFile)) {
-			continue;
-		}
-
 		SavegameData gamedata;
 
 		std::string savename = gamefilename;
-		if (filetype_ == FileType::kReplay)
+		if (filetype_ == FileType::kReplay) {
 			savename += kSavegameExtension;
+		}
 
 		if (!g_fs->file_exists(savename.c_str())) {
 			continue;
@@ -400,7 +399,8 @@ void LoadOrSaveGame::fill_table() {
 
 			gamedata.gametype = gpdp.get_gametype();
 
-			if (filetype_ != FileType::kReplay) {
+			// Skip singleplayer games in multiplayer mode and vice versa
+			if (filetype_ != FileType::kReplay && filetype_ != FileType::kShowAll) {
 				if (filetype_ == FileType::kGameMultiPlayer) {
 					if (gamedata.gametype == GameController::GameType::kSingleplayer) {
 						continue;
