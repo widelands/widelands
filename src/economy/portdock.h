@@ -99,6 +99,7 @@ public:
 	void draw(uint32_t gametime,
 	          TextToDraw draw_text,
 	          const Vector2f& point_on_dst,
+	          const Coords&,
 	          float scale,
 	          RenderTarget* dst) override;
 

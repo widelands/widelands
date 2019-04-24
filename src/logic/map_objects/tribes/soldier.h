@@ -211,6 +211,7 @@ public:
 	void draw(const EditorGameBase&,
 	          const TextToDraw& draw_text,
 	          const Vector2f& point_on_dst,
+	          const Widelands::Coords& coords,
 	          float scale,
 	          RenderTarget* dst) const override;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,25 +14,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- *
  */
 
-#ifndef WL_LOGIC_CAMPAIGN_VISIBILITY_H
-#define WL_LOGIC_CAMPAIGN_VISIBILITY_H
+#ifndef WL_WUI_SOUND_OPTIONS_H
+#define WL_WUI_SOUND_OPTIONS_H
 
-#include <cstring>
-#include <string>
+#include "ui_basic/box.h"
 
-#include <stdint.h>
-
-struct CampaignVisibilitySave {
-	std::string get_path();
-	void set_campaign_visibility(const std::string&, bool);
-	void set_map_visibility(const std::string&, bool);
-
-private:
-	void make_campvis(const std::string&);
-	void update_campvis(const std::string&);
+/**
+ * A box with all sound options.
+ * All changes to the sound settings take effect immediately, but are not saved to config.
+ */
+struct SoundOptions : public UI::Box {
+	SoundOptions(UI::Panel& parent, UI::SliderStyle style);
 };
 
-#endif  // end of include guard: WL_LOGIC_CAMPAIGN_VISIBILITY_H
+#endif  // end of include guard: WL_WUI_SOUND_OPTIONS_H

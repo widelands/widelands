@@ -66,7 +66,7 @@ A program's actions consist of a sequence of commands. A command is written as `
          "return=skipped unless economy needs snack",
          "sleep=5000",
          "consume=barbarians_bread fish,meat beer",
-         "playsound=sound/barbarians/taverns inn 100",
+         "playsound=sound/barbarians/taverns/inn 100",
          "animate=working 22000",
          "sleep=10000",
          "produce=snack"
@@ -298,8 +298,8 @@ Parameter syntax::
 
 Parameter semantics:
 
-``soundFX``
-    The filename of a soundFX (relative to the productionsite's directory).
+``filepath``
+    The path/base_filename of a soundFX (relative to the data directory).
 ``priority``
     An integer. If omitted, 127 is used.
 

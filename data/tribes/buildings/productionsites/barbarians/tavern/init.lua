@@ -64,7 +64,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ration",
             "sleep=5000",
             "consume=barbarians_bread,fish,meat",
-            "playsound=sound/barbarians/taverns tavern 100",
+            "playsound=sound/barbarians/taverns/tavern 100",
             "animate=working 18000",
             "sleep=10000",
             "produce=ration"
