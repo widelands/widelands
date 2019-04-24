@@ -23,6 +23,8 @@ install:
   # Installed required libs
   - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image\""
   - cmd: "IF \"%PLATFORM%\" == \"x86\" (bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-glew\") ELSE (bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-glbinding\")"
+  # CMake can't find Boost 1.70 yet, so we have to downgrade
+  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-boost-1.69.0-2-any.pkg.tar.xz && pacman --noconfirm -U mingw-w64-%MINGWSUFFIX%-boost-1.69.0-2-any.pkg.tar.xz\""
 
 shallow_clone: true
 

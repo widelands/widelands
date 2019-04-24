@@ -37,6 +37,7 @@
 #include "graphic/playercolor.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/game_data_error.h"
 #include "scripting/lua_table.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
@@ -63,13 +64,17 @@ public:
 	const Image* representative_image(const RGBColor* clr) const override;
 	const std::string& representative_image_filename() const override;
 	virtual void blit(uint32_t time,
+	                  const Widelands::Coords& coords,
 	                  const Rectf& source_rect,
 	                  const Rectf& destination_rect,
 	                  const RGBColor* clr,
 	                  Surface* target) const override;
-	void trigger_sound(uint32_t framenumber, uint32_t stereo_position) const override;
 
 private:
+	// TODO(unknown): The chosen semantics of animation sound effects is problematic:
+	// What if the game runs very slowly or very quickly?
+	void trigger_sound(uint32_t framenumber, const Widelands::Coords& coords) const override;
+
 	// Loads the graphics if they are not yet loaded.
 	void ensure_graphics_are_loaded() const;
 
@@ -88,10 +93,9 @@ private:
 	std::vector<const Image*> frames_;
 	std::vector<const Image*> pcmasks_;
 
-	// name of sound effect that will be played at frame 0.
-	// TODO(sirver): this should be done using playsound in a program instead of
-	// binding it to the animation.
-	std::string sound_effect_;
+	// ID of sound effect that will be played at frame 0.
+	FxId sound_effect_;
+	int32_t sound_priority_;
 	bool play_once_;
 };
 
@@ -100,15 +104,24 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
      hotspot_(table.get_vector<std::string, int>("hotspot")),
      hasplrclrs_(false),
      scale_(1),
+     sound_effect_(kNoSoundEffect),
+     sound_priority_(kFxPriorityLowest),
      play_once_(false) {
 	try {
 		if (table.has_key("sound_effect")) {
 			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
+			sound_effect_ =
+			   SoundHandler::register_fx(SoundType::kAmbient, sound_effects->get_string("path"));
 
-			const std::string name = sound_effects->get_string("name");
-			const std::string directory = sound_effects->get_string("directory");
-			sound_effect_ = directory + g_fs->file_separator() + name;
-			g_sound_handler.load_fx_if_needed(directory, name, sound_effect_);
+			if (sound_effects->has_key<std::string>("priority")) {
+				sound_priority_ = sound_effects->get_int("priority");
+			}
+
+			if (sound_priority_ < kFxPriorityLowest) {
+				throw Widelands::GameDataError(
+				   "Minmum priority for sounds is %d, but only %d was specified for %s",
+				   kFxPriorityLowest, sound_priority_, sound_effects->get_string("path").c_str());
+			}
 		}
 
 		if (table.has_key("play_once")) {
@@ -236,15 +249,16 @@ uint32_t NonPackedAnimation::current_frame(uint32_t time) const {
 	return 0;
 }
 
-void NonPackedAnimation::trigger_sound(uint32_t time, uint32_t stereo_position) const {
-	if (sound_effect_.empty()) {
+void NonPackedAnimation::trigger_sound(uint32_t time, const Widelands::Coords& coords) const {
+	if (sound_effect_ == kNoSoundEffect || coords == Widelands::Coords::null()) {
 		return;
 	}
 
 	const uint32_t framenumber = current_frame(time);
 
 	if (framenumber == 0) {
-		Notifications::publish(NoteSound(sound_effect_, stereo_position, 1));
+		Notifications::publish(
+		   NoteSound(SoundType::kAmbient, sound_effect_, coords, sound_priority_));
 	}
 }
 
@@ -264,6 +278,7 @@ Rectf NonPackedAnimation::destination_rectangle(const Vector2f& position,
 }
 
 void NonPackedAnimation::blit(uint32_t time,
+                              const Widelands::Coords& coords,
                               const Rectf& source_rect,
                               const Rectf& destination_rect,
                               const RGBColor* clr,
@@ -278,8 +293,7 @@ void NonPackedAnimation::blit(uint32_t time,
 		target->blit_blended(
 		   destination_rect, *frames_.at(idx), *pcmasks_.at(idx), source_rect, *clr);
 	}
-	// TODO(GunChleoc): Stereo position would be nice.
-	trigger_sound(time, 128);
+	trigger_sound(time, coords);
 }
 
 }  // namespace

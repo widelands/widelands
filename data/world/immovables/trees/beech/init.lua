@@ -100,8 +100,7 @@ world:new_immovable_type{
          hotspot = { 24, 60 },
          fps = 10,
          sound_effect = {
-            directory = "sound/animals",
-            name = "bird6",
+            path = "sound/animals/bird6",
          },
       },
    },

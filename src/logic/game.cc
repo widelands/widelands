@@ -64,6 +64,7 @@
 #include "network/network.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
+#include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
@@ -548,7 +549,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 		;
 #endif
 
-	g_sound_handler.change_music("ingame", 1000, 0);
+	g_sh->change_music("ingame", 1000);
 
 	state_ = gs_running;
 
@@ -556,7 +557,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 
 	state_ = gs_ending;
 
-	g_sound_handler.change_music("menu", 1000, 0);
+	g_sh->change_music("menu", 1000);
 
 	cleanup_objects();
 	set_ibase(nullptr);
