@@ -30,7 +30,6 @@
 #include "notifications/notifications.h"
 #include "profile/profile.h"
 #include "sound/note_sound.h"
-#include "sound/sound_handler.h"
 #include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
@@ -53,8 +52,6 @@ class UniqueWindowHandler;
  */
 class InteractiveBase : public UI::Panel, public DebugConsole::Handler {
 public:
-	friend class SoundHandler;
-
 	enum {
 		dfShowCensus = 1,      ///< show census report on buildings
 		dfShowStatistics = 2,  ///< show statistics report on buildings
@@ -247,8 +244,11 @@ protected:
 	/// Returns true if there is a workarea preview being shown at the given coordinates
 	bool has_workarea_preview(const Widelands::Coords& coords) const;
 
+	/// Returns true if the current player is allowed to hear sounds from map objects on this field
+	virtual bool player_hears_field(const Widelands::Coords& coords) const = 0;
+
 private:
-	int32_t stereo_position(Widelands::Coords position_map);
+	void play_sound_effect(const NoteSound& note) const;
 	void resize_chat_overlay();
 	void roadb_add_overlay();
 	void roadb_remove_overlay();

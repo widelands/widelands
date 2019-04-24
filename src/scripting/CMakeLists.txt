@@ -109,7 +109,6 @@ wl_library(scripting_logic
     io_fileread
     io_filesystem
     logic
-    logic_campaign_visibility
     logic_constants
     logic_filesystem_constants
     logic_game_controller

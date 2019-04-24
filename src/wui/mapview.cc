@@ -246,7 +246,7 @@ bool MapView::ViewArea::contains(const Widelands::Coords& c) const {
 	return contains_map_pixel(MapviewPixelFunctions::to_map_pixel_with_normalization(map_, c));
 }
 
-Vector2f MapView::ViewArea::move_inside(const Widelands::Coords& c) const {
+Vector2f MapView::ViewArea::find_pixel_for_coordinates(const Widelands::Coords& c) const {
 	// We want to figure out to which pixel 'c' maps inside our rect_. Since
 	// Wideland's map is a torus, the current 'rect_' could span the origin.
 	// Without loss of generality we only discuss x - y follows accordingly.
@@ -258,8 +258,9 @@ Vector2f MapView::ViewArea::move_inside(const Widelands::Coords& c) const {
 	// that the point is contained inside of 'rect_'. If we now convert to
 	// panel pixels, we are guaranteed that the pixel we get back is inside the
 	// screen bounds.
+	// Also supports coordinates outside of the view area, for use by the sound system
 	Vector2f p = MapviewPixelFunctions::to_map_pixel_with_normalization(map_, c);
-	assert(contains_map_pixel(p));
+	assert(!contains(c) || contains_map_pixel(p));
 
 	const float w = MapviewPixelFunctions::get_map_end_screen_x(map_);
 	const float h = MapviewPixelFunctions::get_map_end_screen_y(map_);
@@ -316,7 +317,7 @@ void MapView::mouse_to_field(const Widelands::Coords& c, const Transition& trans
 	if (!area.contains(c)) {
 		return;
 	}
-	mouse_to_pixel(round(to_panel(area.move_inside(c))), transition);
+	mouse_to_pixel(round(to_panel(area.find_pixel_for_coordinates(c))), transition);
 }
 
 void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition) {
@@ -352,11 +353,13 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase, Ren
 		}
 
 		// Linearly interpolate between the next and the last.
-		const float t = (now - plan[0].t) / static_cast<float>(plan[1].t - plan[0].t);
+		// Using std::max as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		const float t =
+		   (std::max(1U, now - plan[0].t)) / static_cast<float>(std::max(1U, plan[1].t - plan[0].t));
 		const View new_view = {
 		   mix(t, plan[0].view.viewpoint, plan[1].view.viewpoint),
-		   mix(t, plan[0].view.zoom, plan[1].view.zoom),
-		};
+		   // Using math::clamp as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		   math::clamp(mix(t, plan[0].view.zoom, plan[1].view.zoom), 1.f / kMaxZoom, kMaxZoom)};
 		set_view(new_view, Transition::Jump);
 		break;
 	}

@@ -26,8 +26,8 @@
 
 ;General String
 #define Publisher "Widelands Development Team"
-#define URL "http://www.widelands.org"
-#define HelpURL "http://wl.widelands.org/wiki/MainPage/"
+#define URL "widelands.org"
+#define HelpURL "widelands.org/wiki/MainPage/"
 #define ExeName "widelands.exe"
 #define UrlName "Widelands.url"
 #define HelpName "Widelands-Onlinehelp.url"
@@ -106,7 +106,7 @@ Source: {#DLLFolder}\libopus-0.dll;                     DestDir: {app};         
 Source: {#DLLFolder}\libtermcap-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                        Components: "Widelands"
 Source: {#DLLFolder}\libgmodule-2.0-0.dll;                        DestDir: {app};            Flags: ignoreversion;                                             Components: "Widelands"
 Source: {#DLLFolder}\libreadline8.dll;                        DestDir: {app};            Flags: ignoreversion;                                                 Components: "Widelands"
-Source: {#DLLFolder}\libicuuc62.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#DLLFolder}\libicuuc64.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libbz2-1.dll;                      DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libfreetype-6.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 #if GetEnv("PLATFORM") == "x64"
@@ -118,7 +118,7 @@ Source: {#DLLFolder}\glew32.dll;                        DestDir: {app};         
 #endif
 Source: {#DLLFolder}\libglib-2.0-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libharfbuzz-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
-Source: {#DLLFolder}\libicudt62.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#DLLFolder}\libicudt64.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libjpeg-8.dll;                     DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\liblzma-5.dll;                     DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libogg-0.dll;                      DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
