@@ -32,6 +32,7 @@
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/surface.h"
+#include "logic/widelands_geometry.h"
 
 class Image;
 class LuaTable;
@@ -91,13 +92,17 @@ public:
 	/// in which case the neutral image will be blitted. The Surface is the 'target'
 	/// for the blit operation and must be non-null.
 	virtual void blit(uint32_t time,
+	                  const Widelands::Coords& coords,
 	                  const Rectf& source_rect,
 	                  const Rectf& destination_rect,
 	                  const RGBColor* clr,
 	                  Surface* target, float scale) const = 0;
 
+protected:
 	/// Play the sound effect associated with this animation at the given time.
-	virtual void trigger_sound(uint32_t time, uint32_t stereo_position) const = 0;
+	/// Any sound effects are played with stereo position according to 'coords'.
+	/// If 'coords' == Widelands::Coords::null(), skip playing any sound effects.
+	virtual void trigger_sound(uint32_t time, const Widelands::Coords& coords) const = 0;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);

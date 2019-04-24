@@ -327,8 +327,7 @@ function mission_complete_thread()
    end
 
    message_box_objective(plr, msg_mission_complete)
-   plr:reveal_scenario("barbariantut01")
-   plr:reveal_campaign("campsect1")
+   plr:mark_scenario_as_solved("bar01.wmf")
 end
 
 
