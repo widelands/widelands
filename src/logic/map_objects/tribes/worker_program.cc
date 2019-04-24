@@ -881,7 +881,7 @@ playsound
       relative to the data directory, followed by the name of the particular sound to play.
       There can be multiple sound files to select from at random, e.g.
       for `sound/farm/scythe`, we can have `sound/farm/scythe_00.ogg`, `sound/farm/scythe_01.ogg`
-...
+      ...
 
    :arg int priority: The priority to give this sound. Maximum priority is 255.
 
