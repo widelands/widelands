@@ -53,13 +53,14 @@ void CampaignDetails::update(const CampaignData& campaigndata) {
 	std::string description = "";
 
 	if (campaigndata.visible) {
-		/** TRANSLATORS: Header for campaign tribe */
-		description = (boost::format("%s%s") % as_heading(_("Tribe"), UI::PanelStyle::kFsMenu) %
+		description = (boost::format("%s%s") %
+					   /** TRANSLATORS: Header for campaign tribe */
+					   as_heading(_("Tribe"), UI::PanelStyle::kFsMenu) %
 		               as_content(campaigndata.tribename, UI::PanelStyle::kFsMenu))
 		                 .str();
 		description =
-		   /** TRANSLATORS: Header for campaign difficulty */
 		   (boost::format("%s%s") % description %
+			/** TRANSLATORS: Header for campaign difficulty */
 		    as_heading(_("Difficulty"), UI::PanelStyle::kFsMenu))
 		      .str();
 		description = (boost::format("%s%s") % description %
@@ -67,8 +68,8 @@ void CampaignDetails::update(const CampaignData& campaigndata) {
 		                 .str();
 
 		description =
-		   /** TRANSLATORS: Header for campaign description */
 		   (boost::format("%s%s") % description %
+			/** TRANSLATORS: Header for campaign description */
 		    as_heading(_("Description"), UI::PanelStyle::kFsMenu))
 		      .str();
 		description = (boost::format("%s%s") % description %

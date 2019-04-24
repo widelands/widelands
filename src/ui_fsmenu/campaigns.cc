@@ -125,7 +125,7 @@ void Campaigns::update_visibility_info() {
 			campaign->visible = true;
 		} else {
 			// A campaign is visible if one of its prerequisites has been fulfilled
-			for (const std::string prerequisite : campaign->prerequisites) {
+			for (const std::string& prerequisite : campaign->prerequisites) {
 				if (solved_scenarios_.count(prerequisite) == 1) {
 					campaign->visible = true;
 					break;
