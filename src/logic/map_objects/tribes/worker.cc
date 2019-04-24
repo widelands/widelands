@@ -3168,7 +3168,6 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
 		loader->load(fr);
 		return loader.release();
 	} catch (const std::exception& e) {
-		// NOCOM Game data error while map loading map objects: [../src/logic/map_objects/tribes/worker.cc:3171] loading worker: [../src/logic/map_objects/bob.cc:1049] loading bob: Unknown animation: walkload_sw for atlanteans_horse
 		throw wexception("loading worker: %s", e.what());
 	}
 }
