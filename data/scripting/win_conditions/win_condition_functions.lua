@@ -298,7 +298,7 @@ function format_remaining_time(remaining_time)
       time = (ngettext("%i minute", "%i minutes", m)):bformat(m)
    else
       -- TRANSLATORS: Context: 'The game will end in 2 hours.'
-      time = (ngettext("%i hour", "%i hours", h)):bformat(h)
+      time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
    end
    -- TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
    return p(_"The game will end in %s."):bformat(time)
