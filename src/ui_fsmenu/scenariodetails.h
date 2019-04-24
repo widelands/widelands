@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,35 +17,25 @@
  *
  */
 
-#ifndef WL_WUI_MAPDETAILS_H
-#define WL_WUI_MAPDETAILS_H
+#ifndef WL_UI_FSMENU_SCENARIODETAILS_H
+#define WL_UI_FSMENU_SCENARIODETAILS_H
 
-#include "graphic/text_layout.h"
 #include "ui_basic/box.h"
 #include "ui_basic/multilinetextarea.h"
-#include "ui_basic/panel.h"
-#include "wui/mapdata.h"
-#include "wui/suggested_teams_box.h"
+#include "ui_fsmenu/campaigns.h"
 
 /**
- * Show a Panel with information about a map.
+ * Show a Box with information about a campaign or tutorial scenario.
  */
-class MapDetails : public UI::Panel {
+class ScenarioDetails : public UI::Box {
 public:
-	MapDetails(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UI::PanelStyle style);
+	explicit ScenarioDetails(Panel* parent);
 
-	void clear();
-	void update(const MapData& mapdata, bool localize_mapname);
+	void update(const ScenarioData& scenariodata);
 
 private:
-	void layout() override;
-	const UI::PanelStyle style_;
-	const int padding_;
-
-	UI::Box main_box_;
 	UI::MultilineTextarea name_label_;
 	UI::MultilineTextarea descr_;
-	UI::SuggestedTeamsBox* suggested_teams_box_;
 };
 
-#endif  // end of include guard: WL_WUI_MAPDETAILS_H
+#endif  // end of include guard: WL_UI_FSMENU_SCENARIODETAILS_H

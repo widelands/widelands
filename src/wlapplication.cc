@@ -82,6 +82,7 @@
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/about.h"
 #include "ui_fsmenu/campaign_select.h"
+#include "ui_fsmenu/campaigns.h"
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
 #include "ui_fsmenu/launch_spg.h"
@@ -91,6 +92,7 @@
 #include "ui_fsmenu/multiplayer.h"
 #include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
+#include "ui_fsmenu/scenario_select.h"
 #include "ui_fsmenu/singleplayer.h"
 #include "wlapplication_messages.h"
 #include "wui/game_tips.h"
@@ -1141,8 +1143,7 @@ void WLApplication::mainmenu_tutorial() {
 	Widelands::Game game;
 	std::string filename;
 	//  Start UI for the tutorials.
-	FullscreenMenuCampaignMapSelect select_campaignmap(true);
-	select_campaignmap.set_campaign(0);
+	FullscreenMenuScenarioSelect select_campaignmap;
 	if (select_campaignmap.run<FullscreenMenuBase::MenuTarget>() ==
 	    FullscreenMenuBase::MenuTarget::kOk) {
 		filename = select_campaignmap.get_map();
@@ -1369,20 +1370,22 @@ bool WLApplication::campaign_game() {
 	Widelands::Game game;
 	std::string filename;
 	for (;;) {  // Campaign UI - Loop
-		int32_t campaign;
+		std::unique_ptr<Campaigns> campaign_visibility(new Campaigns());
+
+		size_t campaign_index;
 		{  //  First start UI for selecting the campaign.
-			FullscreenMenuCampaignSelect select_campaign;
+			FullscreenMenuCampaignSelect select_campaign(campaign_visibility.get());
 			if (select_campaign.run<FullscreenMenuBase::MenuTarget>() ==
-			    FullscreenMenuBase::MenuTarget::kOk)
-				campaign = select_campaign.get_campaign();
-			else {  //  back was pressed
+			    FullscreenMenuBase::MenuTarget::kOk) {
+				campaign_index = select_campaign.get_campaign_index();
+			} else {  //  back was pressed
 				filename = "";
 				break;
 			}
 		}
 		//  Then start UI for the selected campaign.
-		FullscreenMenuCampaignMapSelect select_campaignmap;
-		select_campaignmap.set_campaign(campaign);
+		CampaignData* campaign_data = campaign_visibility->get_campaign(campaign_index);
+		FullscreenMenuScenarioSelect select_campaignmap(campaign_data);
 		if (select_campaignmap.run<FullscreenMenuBase::MenuTarget>() ==
 		    FullscreenMenuBase::MenuTarget::kOk) {
 			filename = select_campaignmap.get_map();

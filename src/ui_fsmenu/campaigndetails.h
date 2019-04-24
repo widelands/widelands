@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2017 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,22 +17,25 @@
  *
  */
 
-#ifndef WL_LOGIC_CAMPAIGN_VISIBILITY_H
-#define WL_LOGIC_CAMPAIGN_VISIBILITY_H
+#ifndef WL_UI_FSMENU_CAMPAIGNDETAILS_H
+#define WL_UI_FSMENU_CAMPAIGNDETAILS_H
 
-#include <cstring>
-#include <string>
+#include "ui_basic/box.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_fsmenu/campaigns.h"
 
-#include <stdint.h>
+/**
+ * Show a Box with information about a campaign.
+ */
+class CampaignDetails : public UI::Box {
+public:
+	explicit CampaignDetails(Panel* parent);
 
-struct CampaignVisibilitySave {
-	std::string get_path();
-	void set_campaign_visibility(const std::string&, bool);
-	void set_map_visibility(const std::string&, bool);
+	void update(const CampaignData& campaigndata);
 
 private:
-	void make_campvis(const std::string&);
-	void update_campvis(const std::string&);
+	UI::MultilineTextarea name_label_;
+	UI::MultilineTextarea descr_;
 };
 
-#endif  // end of include guard: WL_LOGIC_CAMPAIGN_VISIBILITY_H
+#endif  // end of include guard: WL_UI_FSMENU_CAMPAIGNDETAILS_H

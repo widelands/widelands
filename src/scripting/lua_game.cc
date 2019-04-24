@@ -25,7 +25,7 @@
 
 #include "economy/economy.h"
 #include "economy/flag.h"
-#include "logic/campaign_visibility.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message.h"
@@ -93,8 +93,7 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, add_objective),
    METHOD(LuaPlayer, reveal_fields),
    METHOD(LuaPlayer, hide_fields),
-   METHOD(LuaPlayer, reveal_scenario),
-   METHOD(LuaPlayer, reveal_campaign),
+   METHOD(LuaPlayer, mark_scenario_as_solved),
    METHOD(LuaPlayer, get_ships),
    METHOD(LuaPlayer, get_buildings),
    METHOD(LuaPlayer, get_suitability),
@@ -623,42 +622,24 @@ int LuaPlayer::hide_fields(lua_State* L) {
 }
 
 /* RST
-   .. method:: reveal_scenario(name)
+   .. method:: mark_scenario_as_solved(name)
 
-      This reveals a scenario inside a campaign. This only works for the
-      interactive player and most likely also only in single player games.
+      Marks a campaign scenario as solved. Reads the scenario definition in
+   data/campaigns/campaigns.lua to check which scenario and/or campaign should be revealed as a
+   result. This only works for the interactive player and most likely also only in single player
+   games.
 
-      :arg name: name of the scenario to reveal
+      :arg name: name of the scenario to be marked as solved
       :type name: :class:`string`
 */
 // UNTESTED
-int LuaPlayer::reveal_scenario(lua_State* L) {
+int LuaPlayer::mark_scenario_as_solved(lua_State* L) {
 	if (get_game(L).get_ipl()->player_number() != player_number())
 		report_error(L, "Can only be called for interactive player!");
 
-	CampaignVisibilitySave cvs;
-	cvs.set_map_visibility(luaL_checkstring(L, 2), true);
-
-	return 0;
-}
-
-/* RST
-   .. method:: reveal_campaign(name)
-
-      This reveals a campaign. This only works for the
-      interactive player and most likely also only in single player games.
-
-      :arg name: name of the campaign to reveal
-      :type name: :class:`string`
-*/
-// UNTESTED
-int LuaPlayer::reveal_campaign(lua_State* L) {
-	if (get_game(L).get_ipl()->player_number() != player_number()) {
-		report_error(L, "Can only be called for interactive player!");
-	}
-
-	CampaignVisibilitySave cvs;
-	cvs.set_campaign_visibility(luaL_checkstring(L, 2), true);
+	Profile campvis(kCampVisFile.c_str());
+	campvis.pull_section("scenarios").set_bool(luaL_checkstring(L, 2), true);
+	campvis.write(kCampVisFile.c_str(), false);
 
 	return 0;
 }
