@@ -127,7 +127,7 @@ private:
 
 NonPackedAnimation::MipMapEntry::MipMapEntry(float scale, const LuaTable& table) : has_playercolor_masks(false) {
 	if (scale <= 0.0f) {
-		throw wexception("Animation scales must be positive numbers. Found %.2f", scale);
+		throw wexception("Animation scales must be positive numbers. Found %.2f", static_cast<double>(scale));
 	}
 
 	// TODO(GunChleoc): We want to rename these from "pictures" to "files", because we'll have spritesheets etc. in the future, and this naming will be clearer.
@@ -193,7 +193,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 						supported_scales = (boost::format("%s %.1f") % supported_scales % supported_scale).str();
 					}
 					throw wexception(
-						"Animation has unsupported scale '%.1f' in mipmap - supported scales are:%s", current_scale, supported_scales.c_str());
+						"Animation has unsupported scale '%.2f' in mipmap - supported scales are:%s", static_cast<double>(current_scale), supported_scales.c_str());
 				}
 				mipmaps_.insert(std::make_pair(current_scale, std::unique_ptr<MipMapEntry>(new MipMapEntry(current_scale, *current_scale_table))));
 			}
@@ -202,6 +202,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		}
 
 		// Frames
+		nr_frames_ = mipmaps_.begin()->second->image_files.size();
 		if (table.has_key("fps")) {
 			if (nr_frames_ == 1) {
 				throw wexception(
@@ -209,7 +210,6 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 			}
 			frametime_ = 1000 / get_positive_int(table, "fps");
 		}
-		nr_frames_ = mipmaps_.begin()->second->image_files.size();
 
 		// Perform some checks to make sure that the data is complete and consistent
 		const bool should_have_playercolor = mipmaps_.begin()->second->has_playercolor_masks;
@@ -218,12 +218,12 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 				throw wexception("Mismatched number of images for different scales in animation table: %" PRIuS " vs. %u at scale %.2f",
 									  mipmap.second->image_files.size(),
 									  nr_frames_,
-									  mipmap.first);
+									  static_cast<double>(mipmap.first));
 			}
 			if (mipmap.second->has_playercolor_masks != should_have_playercolor) {
 				throw wexception("Mismatched existence of player colors in animation table for scales %.2f and %.2f",
-									  mipmaps_.begin()->first,
-									  mipmap.first);
+									  static_cast<double>(mipmaps_.begin()->first),
+									  static_cast<double>(mipmap.first));
 			}
 		}
 		if (mipmaps_.count(1.0f) != 1) {
@@ -258,11 +258,11 @@ void NonPackedAnimation::load_graphics() {
 		MipMapEntry* mipmap = entry.second.get();
 
 		if (mipmap->image_files.empty()) {
-			throw wexception("animation without image files at promised scale %.2f.", entry.first);
+			throw wexception("animation without image files at promised scale %.2f.", static_cast<double>(entry.first));
 		}
 		if (mipmap->playercolor_mask_image_files.size() && mipmap->playercolor_mask_image_files.size() != mipmap->image_files.size()) {
 			throw wexception("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames for scale %.2f",
-								  mipmap->image_files.size(), mipmap->playercolor_mask_image_files.size(), entry.first);
+								  mipmap->image_files.size(), mipmap->playercolor_mask_image_files.size(), static_cast<double>(entry.first));
 		}
 
 		for (const std::string& filename : mipmap->image_files) {
