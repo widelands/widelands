@@ -87,6 +87,7 @@ public:
 	}
 
 	// TODO(Nordfriese): remove the default value; every call to this method should pass the appropriate Worker*
+	// NOCOM(codereview) Take care of it in this branch
 	virtual const DirAnimations& get_right_walk_anims(bool const carries_ware, const Worker* = nullptr) const {
 		return carries_ware ? walkload_anims_ : walk_anims_;
 	}

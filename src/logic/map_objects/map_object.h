@@ -125,8 +125,8 @@ struct MapObjectDescr {
 	}
 
 	// TODO(Nordfriese): remove the default values; every call to these methods should pass the appropriate MapObject*
-	virtual uint32_t get_animation(char const* const anim, const MapObject* mo = nullptr) const;
-	uint32_t get_animation(const std::string& animname, const MapObject* mo = nullptr) const;
+	// NOCOM(codereview): Take care of it in this branch
+	virtual uint32_t get_animation(const std::string& animname, const MapObject* mo = nullptr) const;
 	uint32_t main_animation() const;
 	std::string get_animation_name(uint32_t) const;  ///< needed for save, debug
 

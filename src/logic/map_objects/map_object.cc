@@ -296,16 +296,12 @@ void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::
 	}
 }
 
-uint32_t MapObjectDescr::get_animation(char const* const anim, const MapObject*) const {
-	std::map<std::string, uint32_t>::const_iterator it = anims_.find(anim);
+uint32_t MapObjectDescr::get_animation(const std::string& animname, const MapObject*) const {
+	std::map<std::string, uint32_t>::const_iterator it = anims_.find(animname);
 	if (it == anims_.end()) {
-		throw GameDataError("Unknown animation: %s for %s", anim, name().c_str());
+		throw GameDataError("Unknown animation: %s for %s", animname.c_str(), name().c_str());
 	}
 	return it->second;
-}
-
-uint32_t MapObjectDescr::get_animation(const std::string& animname, const MapObject* mo) const {
-	return get_animation(animname.c_str(), mo);
 }
 
 uint32_t MapObjectDescr::main_animation() const {

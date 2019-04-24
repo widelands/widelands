@@ -156,32 +156,33 @@ SoldierDescr::BattleAttribute::BattleAttribute(std::unique_ptr<LuaTable> table) 
 /**
  * Get random animation of specified type
  */
-uint32_t SoldierDescr::get_rand_anim(Game& game, const char* const animation_name, const Soldier* soldier) const {
+uint32_t SoldierDescr::get_rand_anim(Game& game, const std::string& animation_name, const Soldier* soldier) const {
 	std::string run = animation_name;
 
 	const SoldierAnimationsList* animations = nullptr;
-	if (strcmp(animation_name, "attack_success_w") == 0)
+	if (animation_name == "attack_success_w") {
 		animations = &attack_success_w_name_;
-	else if (strcmp(animation_name, "attack_success_e") == 0)
+	} else if (animation_name == "attack_success_e") {
 		animations = &attack_success_e_name_;
-	else if (strcmp(animation_name, "attack_failure_w") == 0)
+	} else if (animation_name == "attack_failure_w") {
 		animations = &attack_failure_w_name_;
-	else if (strcmp(animation_name, "attack_failure_e") == 0)
+	} else if (animation_name == "attack_failure_e") {
 		animations = &attack_failure_e_name_;
-	else if (strcmp(animation_name, "evade_success_w") == 0)
+	} else if (animation_name == "evade_success_w") {
 		animations = &evade_success_w_name_;
-	else if (strcmp(animation_name, "evade_success_e") == 0)
+	} else if (animation_name == "evade_success_e") {
 		animations = &evade_success_e_name_;
-	else if (strcmp(animation_name, "evade_failure_w") == 0)
+	} else if (animation_name == "evade_failure_w") {
 		animations = &evade_failure_w_name_;
-	else if (strcmp(animation_name, "evade_failure_e") == 0)
+	} else if (animation_name == "evade_failure_e") {
 		animations = &evade_failure_e_name_;
-	else if (strcmp(animation_name, "die_w") == 0)
+	} else if (animation_name == "die_w") {
 		animations = &die_w_name_;
-	else if (strcmp(animation_name, "die_e") == 0)
+	} else if (animation_name == "die_e") {
 		animations = &die_e_name_;
-	else
-		throw GameDataError("Unknown soldier battle animation: %s", animation_name);
+	} else {
+		throw GameDataError("Unknown soldier battle animation: %s", animation_name.c_str());
+	}
 
 	assert(!animations->empty());
 	uint32_t nr_animations = 0;
@@ -191,7 +192,7 @@ uint32_t SoldierDescr::get_rand_anim(Game& game, const char* const animation_nam
 		}
 	}
 	if (nr_animations < 1) {
-		throw GameDataError("No battle animations for %s found!", animation_name);
+		throw GameDataError("No battle animations for %s found!", animation_name.c_str());
 	}
 	uint32_t i = game.logic_rand() % nr_animations;
 	for (const std::pair<std::string, SoldierLevelRange>& pair : *animations) {
@@ -208,12 +209,12 @@ uint32_t SoldierDescr::get_rand_anim(Game& game, const char* const animation_nam
 		log("Missing animation '%s' for soldier %s. Reverting to idle.\n", run.c_str(), name().c_str());
 		run = "idle";
 	}
-	return get_animation(run.c_str(), soldier);
+	return get_animation(run, soldier);
 }
 
-uint32_t SoldierDescr::get_animation(char const* const anim, const MapObject* mo) const {
+uint32_t SoldierDescr::get_animation(const std::string& anim, const MapObject* mo) const {
 	const Soldier* soldier = dynamic_cast<const Soldier*>(mo);
-	if (!soldier || strcmp(anim, "idle") != 0) {
+	if (!soldier || anim == "idle") {
 		// We only need to check for a level-dependent idle animation.
 		// The walking anims can also be level-dependent,
 		// but that is taken care of by get_right_walk_anims().
@@ -223,7 +224,7 @@ uint32_t SoldierDescr::get_animation(char const* const anim, const MapObject* mo
 		if (pair.second.matches(soldier)) {
 			// Use the parent method here, so we don't end up in
 			// an endless loop if the idle anim is called "idle"
-			return WorkerDescr::get_animation(pair.first.c_str(), mo);
+			return WorkerDescr::get_animation(pair.first, mo);
 		}
 	}
 	throw GameDataError("This soldier does not have an idle animation for this training level!");
@@ -235,40 +236,40 @@ const DirAnimations& SoldierDescr::get_right_walk_anims(bool const ware, const W
 		return WorkerDescr::get_right_walk_anims(ware, worker);
 	}
 	DirAnimations* anim = new DirAnimations();
-
+	// NOCOM(#codereview) this is a lot of iteration. Can we have a container that has SoldierLevelRange as a key and then contains the animation types?
 	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_ne_name_) {
 		if (pair.second.matches(soldier)) {
-			anim->set_animation(WALK_NE, get_animation(pair.first.c_str(), worker));
+			anim->set_animation(WALK_NE, get_animation(pair.first, worker));
 			break;
 		}
 	}
 	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_e_name_) {
 		if (pair.second.matches(soldier)) {
-			anim->set_animation(WALK_E, get_animation(pair.first.c_str(), worker));
+			anim->set_animation(WALK_E, get_animation(pair.first, worker));
 			break;
 		}
 	}
 	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_se_name_) {
 		if (pair.second.matches(soldier)) {
-			anim->set_animation(WALK_SE, get_animation(pair.first.c_str(), worker));
+			anim->set_animation(WALK_SE, get_animation(pair.first, worker));
 			break;
 		}
 	}
 	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_sw_name_) {
 		if (pair.second.matches(soldier)) {
-			anim->set_animation(WALK_SW, get_animation(pair.first.c_str(), worker));
+			anim->set_animation(WALK_SW, get_animation(pair.first, worker));
 			break;
 		}
 	}
 	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_w_name_) {
 		if (pair.second.matches(soldier)) {
-			anim->set_animation(WALK_W, get_animation(pair.first.c_str(), worker));
+			anim->set_animation(WALK_W, get_animation(pair.first, worker));
 			break;
 		}
 	}
 	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_nw_name_) {
 		if (pair.second.matches(soldier)) {
-			anim->set_animation(WALK_NW, get_animation(pair.first.c_str(), worker));
+			anim->set_animation(WALK_NW, get_animation(pair.first, worker));
 			break;
 		}
 	}
@@ -676,9 +677,9 @@ void Soldier::pop_task_or_fight(Game& game) {
  *
  */
 void Soldier::start_animation(EditorGameBase& egbase,
-                              char const* const animname,
+                              const std::string& animname,
                               uint32_t const time) {
-	molog("[soldier] starting animation %s", animname);
+	molog("[soldier] starting animation %s", animname.c_str());
 	Game& game = dynamic_cast<Game&>(egbase);
 	return start_task_idle(game, descr().get_rand_anim(game, animname, this), time);
 }

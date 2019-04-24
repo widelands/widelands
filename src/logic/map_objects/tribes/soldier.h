@@ -120,10 +120,10 @@ public:
 		return evade_.images[level];
 	}
 
-	uint32_t get_rand_anim(Game& game, const char* const name, const Soldier* soldier) const;
+	uint32_t get_rand_anim(Game& game, const std::string& name, const Soldier* soldier) const;
 
 	const DirAnimations& get_right_walk_anims(bool const ware, const Worker* w = nullptr) const override;
-	uint32_t get_animation(char const* const anim, const MapObject* mo = nullptr) const override;
+	uint32_t get_animation(const std::string& anim, const MapObject* mo = nullptr) const override;
 
 protected:
 	Bob& create_object() const override;
@@ -282,7 +282,7 @@ public:
 	int32_t get_training_attribute(TrainingAttribute attr) const override;
 
 	/// Sets a random animation of desired type and start playing it.
-	void start_animation(EditorGameBase&, char const* animname, uint32_t time);
+	void start_animation(EditorGameBase&, const std::string& animname, uint32_t time);
 
 	/// Heal quantity of health points instantly
 	void heal(uint32_t);
