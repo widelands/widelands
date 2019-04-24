@@ -55,59 +55,26 @@ public:
 		explicit MipMapEntry(std::vector<std::string> files);
 
 		// Loads the graphics if they are not yet loaded.
-		void ensure_graphics_are_loaded() const {
-			if (frames.empty()) {
-				const_cast<MipMapEntry*>(this)->load_graphics();
-			}
-		}
+		void ensure_graphics_are_loaded() const;
 
 		// Load the needed graphics from disk.
-		void load_graphics() {
-			if (image_files.empty()) {
-				throw Widelands::GameDataError("animation without image files.");
-			}
-			if (playercolor_mask_image_files.size() && playercolor_mask_image_files.size() != image_files.size()) {
-				throw Widelands::GameDataError("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames. First image is %s",
-									  image_files.size(), playercolor_mask_image_files.size(), image_files.front().c_str());
-			}
+		void load_graphics();
 
-			for (const std::string& filename : image_files) {
-				const Image* image = g_gr->images().get(filename);
-				if (frames.size() &&
-					 (frames.front()->width() != image->width() || frames.front()->height() != image->height())) {
-					throw Widelands::GameDataError("wrong size: (%u, %u) for file %s, should be (%u, %u) like the first frame",
-										  image->width(), image->height(), filename.c_str(), frames.front()->width(),
-										  frames.front()->height());
-				}
-				frames.push_back(image);
-			}
-
-			for (const std::string& filename : playercolor_mask_image_files) {
-				// TODO(unknown): Do not load playercolor mask as opengl texture or use it as
-				//     opengl texture.
-				const Image* pc_image = g_gr->images().get(filename);
-				if (frames.front()->width() != pc_image->width() || frames.front()->height() != pc_image->height()) {
-					// TODO(unknown): see bug #1324642
-					throw Widelands::GameDataError("playercolor mask %s has wrong size: (%u, %u), should "
-										  "be (%u, %u) like the animation frame",
-										  filename.c_str(), pc_image->width(), pc_image->height(), frames.front()->width(),
-										  frames.front()->height());
-				}
-				playercolor_mask_frames.push_back(pc_image);
-			}
-		}
-
+		void blit(uint32_t idx, const Rectf& source_rect, const Rectf& destination_rect, const RGBColor* clr, Surface* target) const;
 
 		// Whether this image set has player color masks provided
 		bool has_playercolor_masks;
 
 		// Image files on disk
 		std::vector<std::string> image_files;
-		// Player color mask files on disk
-		std::vector<std::string> playercolor_mask_image_files;
 
 		// Loaded images for each frame
 		std::vector<const Image*> frames;
+
+	private:
+		// Player color mask files on disk
+		std::vector<std::string> playercolor_mask_image_files;
+
 		// Loaded player color mask images for each frame
 		std::vector<const Image*> playercolor_mask_frames;
 	};
@@ -158,6 +125,14 @@ private:
 	int32_t sound_priority_;
 	bool play_once_;
 };
+// NOCOM Atlantean carrier walk_sw has disappeared
+/*
+==============================================================================
+
+NonPackedAnimation::MipMapEntry IMPLEMENTATION
+
+==============================================================================
+*/
 
 NonPackedAnimation::MipMapEntry::MipMapEntry(std::vector<std::string> files) : has_playercolor_masks(false), image_files(files) {
 	if (image_files.empty()) {
@@ -178,6 +153,73 @@ NonPackedAnimation::MipMapEntry::MipMapEntry(std::vector<std::string> files) : h
 	assert(!image_files.empty());
 	assert(playercolor_mask_image_files.size() == image_files.size() || playercolor_mask_image_files.empty());
 }
+
+// Loads the graphics if they are not yet loaded.
+void NonPackedAnimation::MipMapEntry::ensure_graphics_are_loaded() const {
+	if (frames.empty()) {
+		const_cast<MipMapEntry*>(this)->load_graphics();
+	}
+}
+
+// Load the needed graphics from disk.
+void NonPackedAnimation::MipMapEntry::load_graphics() {
+	if (image_files.empty()) {
+		throw Widelands::GameDataError("animation without image files.");
+	}
+	if (playercolor_mask_image_files.size() && playercolor_mask_image_files.size() != image_files.size()) {
+		throw Widelands::GameDataError("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames. First image is %s",
+							  image_files.size(), playercolor_mask_image_files.size(), image_files.front().c_str());
+	}
+
+	for (const std::string& filename : image_files) {
+		const Image* image = g_gr->images().get(filename);
+		if (frames.size() &&
+			 (frames.front()->width() != image->width() || frames.front()->height() != image->height())) {
+			throw Widelands::GameDataError("wrong size: (%u, %u) for file %s, should be (%u, %u) like the first frame",
+								  image->width(), image->height(), filename.c_str(), frames.front()->width(),
+								  frames.front()->height());
+		}
+		frames.push_back(image);
+	}
+
+	for (const std::string& filename : playercolor_mask_image_files) {
+		// TODO(unknown): Do not load playercolor mask as opengl texture or use it as
+		//     opengl texture.
+		const Image* pc_image = g_gr->images().get(filename);
+		if (frames.front()->width() != pc_image->width() || frames.front()->height() != pc_image->height()) {
+			throw Widelands::GameDataError("playercolor mask %s has wrong size: (%u, %u), should "
+								  "be (%u, %u) like the animation frame",
+								  filename.c_str(), pc_image->width(), pc_image->height(), frames.front()->width(),
+								  frames.front()->height());
+		}
+		playercolor_mask_frames.push_back(pc_image);
+	}
+}
+
+void NonPackedAnimation::MipMapEntry::blit(uint32_t idx,
+										   const Rectf& source_rect,
+										   const Rectf& destination_rect,
+										   const RGBColor* clr,
+										   Surface* target) const {
+	assert(!frames.empty());
+	assert(target);
+	assert(idx < frames.size());
+
+	if (!has_playercolor_masks || clr == nullptr) {
+		target->blit(destination_rect, *frames.at(idx), source_rect, 1., BlendMode::UseAlpha);
+	} else {
+		target->blit_blended(
+		   destination_rect, *frames.at(idx), *playercolor_mask_frames.at(idx), source_rect, *clr);
+	}
+}
+
+/*
+==============================================================================
+
+NonPackedAnimation IMPLEMENTATION
+
+==============================================================================
+*/
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string& basename)
    : frametime_(FRAME_LENGTH),
@@ -367,20 +409,7 @@ void NonPackedAnimation::blit(uint32_t time,
                               const Rectf& destination_rect,
                               const RGBColor* clr,
                               Surface* target, float scale) const {
-	assert(target);
-	const uint32_t idx = current_frame(time);
-	assert(idx < nr_frames());
-
-	const MipMapEntry& mipmap = *mipmaps_.at(find_best_scale(scale));
-	mipmap.ensure_graphics_are_loaded();
-	// NOCOM make mipmaps blit themselves
-
-	if (!mipmap.has_playercolor_masks || clr == nullptr) {
-		target->blit(destination_rect, *mipmap.frames.at(idx), source_rect, 1., BlendMode::UseAlpha);
-	} else {
-		target->blit_blended(
-		   destination_rect, *mipmap.frames.at(idx), *mipmap.playercolor_mask_frames.at(idx), source_rect, *clr);
-	}
+	mipmaps_.at(find_best_scale(scale))->blit(current_frame(time), source_rect, destination_rect, clr, target);
 	trigger_sound(time, coords);
 }
 
