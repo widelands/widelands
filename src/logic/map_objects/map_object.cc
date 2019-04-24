@@ -336,6 +336,12 @@ std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 	NEVER_HERE();
 }
 
+void MapObjectDescr::load_graphics() const {
+	for (const auto& temp_anim : anims_) {
+		g_gr->animations().get_animation(temp_anim.second).load_default_scale();
+	}
+}
+
 const Image* MapObjectDescr::representative_image(const RGBColor* player_color) const {
 	if (is_animation_known("idle")) {
 		return g_gr->animations().get_representative_image(get_animation("idle"), player_color);
@@ -653,8 +659,12 @@ void MapObject::Loader::load_pointers() {
  * configured.
  *
  * Derived functions must call ancestor's function in the appropriate place.
+ *
+ * We also preload some animation graphics here to prevent jitter at game start.
  */
 void MapObject::Loader::load_finish() {
+	MapObject& mo = get<MapObject>();
+	mo.descr().load_graphics();
 }
 
 /**

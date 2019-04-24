@@ -131,6 +131,8 @@ public:
 	                  const Rectf& destination_rect,
 	                  const RGBColor* clr,
 	                  Surface* target, float scale) const override;
+	void load_default_scale() const override;
+
 private:
 	float find_best_scale(float scale) const;
 
@@ -353,7 +355,6 @@ Rectf NonPackedAnimation::source_rectangle(const int percent_from_bottom, float 
 Rectf NonPackedAnimation::destination_rectangle(const Vector2f& position,
                                                 const Rectf& source_rect,
                                                 const float scale) const {
-	// NOCOM ensure_graphics_are_loaded();
 	const float best_scale = find_best_scale(scale);
 	return Rectf(position.x - (hotspot_.x - source_rect.x / best_scale) * scale,
 	             position.y - (hotspot_.y - source_rect.y / best_scale) * scale,
@@ -372,6 +373,7 @@ void NonPackedAnimation::blit(uint32_t time,
 
 	const MipMapEntry& mipmap = *mipmaps_.at(find_best_scale(scale));
 	mipmap.ensure_graphics_are_loaded();
+	// NOCOM make mipmaps blit themselves
 
 	if (!mipmap.has_playercolor_masks || clr == nullptr) {
 		target->blit(destination_rect, *mipmap.frames.at(idx), source_rect, 1., BlendMode::UseAlpha);
@@ -380,6 +382,10 @@ void NonPackedAnimation::blit(uint32_t time,
 		   destination_rect, *mipmap.frames.at(idx), *mipmap.playercolor_mask_frames.at(idx), source_rect, *clr);
 	}
 	trigger_sound(time, coords);
+}
+
+void NonPackedAnimation::load_default_scale() const {
+	mipmaps_.at(1.0f)->ensure_graphics_are_loaded();
 }
 
 }  // namespace

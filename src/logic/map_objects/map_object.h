@@ -130,6 +130,9 @@ struct MapObjectDescr {
 
 	bool is_animation_known(const std::string& name) const;
 
+	/// Preload animation graphics at default scale
+	void load_graphics() const;
+
 	/// Returns the image for the first frame of the idle animation if the MapObject has animations,
 	/// nullptr otherwise
 	const Image* representative_image(const RGBColor* player_color = nullptr) const;

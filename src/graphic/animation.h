@@ -98,6 +98,9 @@ public:
 	                  const RGBColor* clr,
 	                  Surface* target, float scale) const = 0;
 
+	/// Load animation images into memory for default scale.
+	virtual void load_default_scale() const = 0;
+
 protected:
 	/// Play the sound effect associated with this animation at the given time.
 	/// Any sound effects are played with stereo position according to 'coords'.
