@@ -704,7 +704,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				res = "";
 				amount = 0;
 				break;
-			};
+			}
 
 			Widelands::DescriptionIndex nres = 0;
 			if (*res) {

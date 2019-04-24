@@ -140,6 +140,7 @@ public:
 private:
 	friend struct EditorToolMenu;
 
+	bool player_hears_field(const Widelands::Coords& coords) const override;
 	void on_buildhelp_changed(const bool value) override;
 
 	void toggle_resources();

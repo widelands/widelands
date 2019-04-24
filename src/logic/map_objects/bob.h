@@ -266,6 +266,7 @@ public:
 	virtual void draw(const EditorGameBase&,
 	                  const TextToDraw& draw_text,
 	                  const Vector2f& field_on_dst,
+	                  const Coords& coords,
 	                  float scale,
 	                  RenderTarget* dst) const;
 
