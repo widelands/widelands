@@ -31,7 +31,6 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
-#include "base/wexception.h"
 #include "graphic/diranimations.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
@@ -54,6 +53,50 @@ class NonPackedAnimation : public Animation {
 public:
 	struct MipMapEntry {
 		explicit MipMapEntry(std::vector<std::string> files);
+
+		// Loads the graphics if they are not yet loaded.
+		void ensure_graphics_are_loaded() const {
+			if (frames.empty()) {
+				const_cast<MipMapEntry*>(this)->load_graphics();
+			}
+		}
+
+		// Load the needed graphics from disk.
+		void load_graphics() {
+			if (image_files.empty()) {
+				throw Widelands::GameDataError("animation without image files.");
+			}
+			if (playercolor_mask_image_files.size() && playercolor_mask_image_files.size() != image_files.size()) {
+				throw Widelands::GameDataError("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames. First image is %s",
+									  image_files.size(), playercolor_mask_image_files.size(), image_files.front().c_str());
+			}
+
+			for (const std::string& filename : image_files) {
+				const Image* image = g_gr->images().get(filename);
+				if (frames.size() &&
+					 (frames.front()->width() != image->width() || frames.front()->height() != image->height())) {
+					throw Widelands::GameDataError("wrong size: (%u, %u) for file %s, should be (%u, %u) like the first frame",
+										  image->width(), image->height(), filename.c_str(), frames.front()->width(),
+										  frames.front()->height());
+				}
+				frames.push_back(image);
+			}
+
+			for (const std::string& filename : playercolor_mask_image_files) {
+				// TODO(unknown): Do not load playercolor mask as opengl texture or use it as
+				//     opengl texture.
+				const Image* pc_image = g_gr->images().get(filename);
+				if (frames.front()->width() != pc_image->width() || frames.front()->height() != pc_image->height()) {
+					// TODO(unknown): see bug #1324642
+					throw Widelands::GameDataError("playercolor mask %s has wrong size: (%u, %u), should "
+										  "be (%u, %u) like the animation frame",
+										  filename.c_str(), pc_image->width(), pc_image->height(), frames.front()->width(),
+										  frames.front()->height());
+				}
+				playercolor_mask_frames.push_back(pc_image);
+			}
+		}
+
 
 		// Whether this image set has player color masks provided
 		bool has_playercolor_masks;
@@ -94,12 +137,6 @@ private:
 	// TODO(unknown): The chosen semantics of animation sound effects is problematic:
 	// What if the game runs very slowly or very quickly?
 	void trigger_sound(uint32_t framenumber, const Widelands::Coords& coords) const override;
-
-	// Loads the graphics if they are not yet loaded.
-	void ensure_graphics_are_loaded() const;
-
-	// Load the needed graphics from disk.
-	void load_graphics();
 
 	uint32_t current_frame(uint32_t time) const;
 
@@ -205,8 +242,8 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 		// Frames
 		if (table.has_key("fps")) {
 			if (nr_frames_ == 1) {
-				throw wexception(
-					"Animation with one picture %s must not have 'fps'", mipmaps_.begin()->second->image_files[0].c_str());
+				throw Widelands::GameDataError(
+					"Animation with one picture %s must not have 'fps'", mipmaps_.begin()->second->image_files.front().c_str());
 			}
 			frametime_ = 1000 / get_positive_int(table, "fps");
 		}
@@ -216,22 +253,22 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 		const bool should_have_playercolor = mipmaps_.begin()->second->has_playercolor_masks;
 		for (const auto& mipmap : mipmaps_) {
 			if (mipmap.second->image_files.size() != nr_frames_) {
-				throw wexception("Mismatched number of images for different scales in animation table: %" PRIuS " vs. %u at scale %.2f",
+				throw Widelands::GameDataError("Mismatched number of images for different scales in animation table: %" PRIuS " vs. %u at scale %.2f",
 									  mipmap.second->image_files.size(),
 									  nr_frames_,
 									  mipmap.first);
 			}
 			if (mipmap.second->has_playercolor_masks != should_have_playercolor) {
-				throw wexception("Mismatched existence of player colors in animation table for scales %.2f and %.2f",
+				throw Widelands::GameDataError("Mismatched existence of player colors in animation table for scales %.2f and %.2f",
 									  mipmaps_.begin()->first,
 									  mipmap.first);
 			}
 		}
 		if (mipmaps_.count(1.0f) != 1) {
-			throw wexception("All animations must provide images for the neutral scale (1.0)");
+			throw Widelands::GameDataError("All animations must provide images for the neutral scale (1.0)");
 		}
 	} catch (const LuaError& e) {
-		throw wexception("Error in animation table: %s", e.what());
+		throw Widelands::GameDataError("Error in animation table: %s", e.what());
 	}
 }
 
@@ -248,54 +285,10 @@ float NonPackedAnimation::find_best_scale(float scale) const {
 	return result;
 }
 
-void NonPackedAnimation::ensure_graphics_are_loaded() const {
-	if (mipmaps_.begin()->second->frames.empty()) {
-		const_cast<NonPackedAnimation*>(this)->load_graphics();
-	}
-}
-
-void NonPackedAnimation::load_graphics() {
-	for (const auto& entry : mipmaps_) {
-		MipMapEntry* mipmap = entry.second.get();
-
-		if (mipmap->image_files.empty()) {
-			throw wexception("animation without image files at promised scale %.2f.", entry.first);
-		}
-		if (mipmap->playercolor_mask_image_files.size() && mipmap->playercolor_mask_image_files.size() != mipmap->image_files.size()) {
-			throw wexception("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames for scale %.2f",
-								  mipmap->image_files.size(), mipmap->playercolor_mask_image_files.size(), entry.first);
-		}
-
-		for (const std::string& filename : mipmap->image_files) {
-			const Image* image = g_gr->images().get(filename);
-			if (mipmap->frames.size() &&
-				 (mipmap->frames[0]->width() != image->width() || mipmap->frames[0]->height() != image->height())) {
-				throw wexception("wrong size: (%u, %u), should be (%u, %u) like the first frame",
-									  image->width(), image->height(), mipmap->frames[0]->width(),
-									  mipmap->frames[0]->height());
-			}
-			mipmap->frames.push_back(image);
-		}
-
-		for (const std::string& filename : mipmap->playercolor_mask_image_files) {
-			// TODO(unknown): Do not load playercolor mask as opengl texture or use it as
-			//     opengl texture.
-			const Image* pc_image = g_gr->images().get(filename);
-			if (mipmap->frames[0]->width() != pc_image->width() || mipmap->frames[0]->height() != pc_image->height()) {
-				// TODO(unknown): see bug #1324642
-				throw wexception("playercolor mask has wrong size: (%u, %u), should "
-									  "be (%u, %u) like the animation frame",
-									  pc_image->width(), pc_image->height(), mipmap->frames[0]->width(),
-									  mipmap->frames[0]->height());
-			}
-			mipmap->playercolor_mask_frames.push_back(pc_image);
-		}
-	}
-}
-
 float NonPackedAnimation::height() const {
-	ensure_graphics_are_loaded();
-	return mipmaps_.at(1.0f)->frames.at(0)->height();
+	const MipMapEntry& mipmap = *mipmaps_.at(1.0f);
+	mipmap.ensure_graphics_are_loaded();
+	return mipmap.frames.front()->height();
 }
 
 uint16_t NonPackedAnimation::nr_frames() const {
@@ -310,8 +303,8 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	const MipMapEntry& mipmap = *mipmaps_.at(1.0f);
 	std::vector<std::string> images = mipmap.image_files;
 	assert(!images.empty());
-	const Image* image = (mipmap.has_playercolor_masks && clr) ? playercolor_image(*clr, images[0]) :
-	                                            g_gr->images().get(images[0]);
+	const Image* image = (mipmap.has_playercolor_masks && clr) ? playercolor_image(*clr, images.front()) :
+	                                            g_gr->images().get(images.front());
 
 	const int w = image->width();
 	const int h = image->height();
@@ -349,8 +342,9 @@ void NonPackedAnimation::trigger_sound(uint32_t time, const Widelands::Coords& c
 }
 
 Rectf NonPackedAnimation::source_rectangle(const int percent_from_bottom, float scale) const {
-	ensure_graphics_are_loaded();
-	const Image* first_frame = mipmaps_.at(find_best_scale(scale))->frames.at(0);
+	const MipMapEntry& mipmap = *mipmaps_.at(find_best_scale(scale));
+	mipmap.ensure_graphics_are_loaded();
+	const Image* first_frame = mipmap.frames.front();
 	const float h = percent_from_bottom * first_frame->height() / 100;
 	// Using floor for pixel perfect positioning
 	return Rectf(0.f, std::floor(first_frame->height() - h), first_frame->width(), h);
@@ -359,7 +353,7 @@ Rectf NonPackedAnimation::source_rectangle(const int percent_from_bottom, float 
 Rectf NonPackedAnimation::destination_rectangle(const Vector2f& position,
                                                 const Rectf& source_rect,
                                                 const float scale) const {
-	ensure_graphics_are_loaded();
+	// NOCOM ensure_graphics_are_loaded();
 	const float best_scale = find_best_scale(scale);
 	return Rectf(position.x - (hotspot_.x - source_rect.x / best_scale) * scale,
 	             position.y - (hotspot_.y - source_rect.y / best_scale) * scale,
@@ -372,12 +366,13 @@ void NonPackedAnimation::blit(uint32_t time,
                               const Rectf& destination_rect,
                               const RGBColor* clr,
                               Surface* target, float scale) const {
-	ensure_graphics_are_loaded();
 	assert(target);
 	const uint32_t idx = current_frame(time);
 	assert(idx < nr_frames());
 
 	const MipMapEntry& mipmap = *mipmaps_.at(find_best_scale(scale));
+	mipmap.ensure_graphics_are_loaded();
+
 	if (!mipmap.has_playercolor_masks || clr == nullptr) {
 		target->blit(destination_rect, *mipmap.frames.at(idx), source_rect, 1., BlendMode::UseAlpha);
 	} else {
@@ -421,7 +416,7 @@ uint32_t AnimationManager::load(const LuaTable& table, const std::string& basena
 
 const Animation& AnimationManager::get_animation(uint32_t id) const {
 	if (!id || id > animations_.size())
-		throw wexception("Requested unknown animation with id: %i", id);
+		throw Widelands::GameDataError("Requested unknown animation with id: %i", id);
 
 	return *animations_[id - 1];
 }
