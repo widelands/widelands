@@ -259,8 +259,9 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 
 		case Program::kTerrainWorkarea: {
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
-			workarea_program_->draw(item.terrain_arguments.terrains->get(0).get_texture(0).blit_data().texture_id,
-					item.terrain_arguments.workareas, *item.terrain_arguments.fields_to_draw, item.z_value);
+			workarea_program_->draw(
+			   item.terrain_arguments.terrains->get(0).get_texture(0).blit_data().texture_id,
+			   item.terrain_arguments.workareas, *item.terrain_arguments.fields_to_draw, item.z_value);
 			++i;
 		} break;
 

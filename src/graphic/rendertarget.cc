@@ -296,10 +296,10 @@ void RenderTarget::blit_animation(const Vector2f& dst,
 	assert(percent_from_bottom <= 100);
 	if (percent_from_bottom > 0) {
 		// Scaling for zoom and animation image size, then fit screen edges.
-		Rectf srcrc = animation.source_rectangle(percent_from_bottom);
+		Rectf srcrc = animation.source_rectangle(percent_from_bottom, scale);
 		Rectf dstrc = animation.destination_rectangle(dst, srcrc, scale);
 		if (to_surface_geometry(&dstrc, &srcrc)) {
-			animation.blit(time, coords, srcrc, dstrc, player_color, surface_);
+			animation.blit(time, coords, srcrc, dstrc, player_color, surface_, scale);
 		}
 	}
 }

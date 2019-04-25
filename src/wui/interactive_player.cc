@@ -333,7 +333,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		// Draw work area markers.
 		if (has_workarea_preview(f->fcoords, &map)) {
 			blit_field_overlay(dst, *f, grid_marker_pic_,
-					Vector2i(grid_marker_pic_->width() / 2, grid_marker_pic_->height() / 2), scale);
+			                   Vector2i(grid_marker_pic_->width() / 2, grid_marker_pic_->height() / 2),
+			                   scale);
 		}
 
 		if (f->vision > 0) {

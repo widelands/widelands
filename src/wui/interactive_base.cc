@@ -193,7 +193,8 @@ InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
 	return nullptr;
 }
 
-bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords, const Widelands::Map* map) const {
+bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords,
+                                           const Widelands::Map* map) const {
 	if (!map) {
 		return workarea_previews_.count(coords) == 1;
 	}
@@ -322,10 +323,11 @@ void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info, Widelands
  */
 static uint8_t workarea_max(uint8_t a, uint8_t b, uint8_t c) {
 	// Whether all nodes are part of the inner circle
-	bool inner = (a == 0 || a == 3 || a == 5) && (b == 0 || b == 3 || b == 5) && (c == 0 || c == 3 || c == 5);
+	bool inner =
+	   (a == 0 || a == 3 || a == 5) && (b == 0 || b == 3 || b == 5) && (c == 0 || c == 3 || c == 5);
 	// Whether all nodes are part of the medium circle
 	bool medium = (a == 0 || a == 1 || a == 3 || a == 4) && (b == 0 || b == 1 || b == 3 || b == 4) &&
-			(c == 0 || c == 1 || c == 3 || c == 4);
+	              (c == 0 || c == 1 || c == 3 || c == 4);
 	// Whether all nodes are part of the outer circle
 	bool outer = a <= 2 && b <= 2 && c <= 2;
 
@@ -400,12 +402,12 @@ Workareas InteractiveBase::get_workarea_overlays(const Widelands::Map& map) cons
 			map.get_rn(pair.first, &c);
 			const auto rn = intermediate_result.find(c);
 			if (bln != intermediate_result.end()) {
-				result[TCoords<>(pair.first, Widelands::TriangleIndex::D)] = workarea_max(
-						pair.second, brn->second, bln->second);
+				result[TCoords<>(pair.first, Widelands::TriangleIndex::D)] =
+				   workarea_max(pair.second, brn->second, bln->second);
 			}
 			if (rn != intermediate_result.end()) {
-				result[TCoords<>(pair.first, Widelands::TriangleIndex::R)] = workarea_max(
-						pair.second, brn->second, rn->second);
+				result[TCoords<>(pair.first, Widelands::TriangleIndex::R)] =
+				   workarea_max(pair.second, brn->second, rn->second);
 			}
 		}
 		result_set.emplace(result);

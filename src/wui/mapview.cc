@@ -340,7 +340,9 @@ void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition
 }
 
 FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
-		Workareas workarea, bool grid, RenderTarget* dst) {
+                                    Workareas workarea,
+                                    bool grid,
+                                    RenderTarget* dst) {
 	uint32_t now = SDL_GetTicks();
 	while (!view_plans_.empty()) {
 		auto& plan = view_plans_.front();

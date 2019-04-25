@@ -37,8 +37,7 @@ void WorkareaProgram::gl_draw(int gl_texture, float z_value) {
 	glUseProgram(gl_program_.object());
 
 	auto& gl_state = Gl::State::instance();
-	gl_state.enable_vertex_attrib_array(
-	   {attr_position_, attr_overlay_});
+	gl_state.enable_vertex_attrib_array({attr_position_, attr_overlay_});
 
 	gl_array_buffer_.bind();
 	gl_array_buffer_.update(vertices_);
@@ -56,13 +55,13 @@ void WorkareaProgram::gl_draw(int gl_texture, float z_value) {
 }
 
 constexpr uint8_t kWorkareaTransparency = 127;
-static RGBAColor workarea_colors[] {
-	RGBAColor(63, 31, 127, kWorkareaTransparency), // All three circles
-	RGBAColor(127, 63, 0, kWorkareaTransparency),  // Medium and outer circle
-	RGBAColor(0, 127, 0, kWorkareaTransparency),   // Outer circle
-	RGBAColor(63, 0, 127, kWorkareaTransparency),  // Inner and medium circle
-	RGBAColor(127, 0, 0, kWorkareaTransparency),   // Medium circle
-	RGBAColor(0, 0, 127, kWorkareaTransparency),   // Inner circle
+static RGBAColor workarea_colors[]{
+   RGBAColor(63, 31, 127, kWorkareaTransparency),  // All three circles
+   RGBAColor(127, 63, 0, kWorkareaTransparency),   // Medium and outer circle
+   RGBAColor(0, 127, 0, kWorkareaTransparency),    // Outer circle
+   RGBAColor(63, 0, 127, kWorkareaTransparency),   // Inner and medium circle
+   RGBAColor(127, 0, 0, kWorkareaTransparency),    // Medium circle
+   RGBAColor(0, 0, 127, kWorkareaTransparency),    // Inner circle
 };
 static inline RGBAColor apply_color(RGBAColor c1, RGBAColor c2) {
 	uint8_t r = (c1.r * c1.a + c2.r * c2.a) / (c1.a + c2.a);
@@ -85,7 +84,7 @@ void WorkareaProgram::add_vertex(const FieldsToDraw::Field& field, RGBAColor ove
 }
 
 void WorkareaProgram::draw(uint32_t texture_id,
-             	           Workareas workarea,
+                           Workareas workarea,
                            const FieldsToDraw& fields_to_draw,
                            float z_value) {
 	vertices_.clear();
@@ -105,7 +104,8 @@ void WorkareaProgram::draw(uint32_t texture_id,
 		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
 			RGBAColor color(0, 0, 0, 0);
 			for (const std::map<Widelands::TCoords<>, uint8_t>& wa_map : workarea) {
-				const auto it = wa_map.find(Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D));
+				const auto it =
+				   wa_map.find(Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D));
 				if (it != wa_map.end()) {
 					color = apply_color(color, workarea_colors[it->second]);
 				}
@@ -119,7 +119,8 @@ void WorkareaProgram::draw(uint32_t texture_id,
 		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
 			RGBAColor color(0, 0, 0, 0);
 			for (const std::map<Widelands::TCoords<>, uint8_t>& wa_map : workarea) {
-				const auto it = wa_map.find(Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::R));
+				const auto it =
+				   wa_map.find(Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::R));
 				if (it != wa_map.end()) {
 					color = apply_color(color, workarea_colors[it->second]);
 				}
