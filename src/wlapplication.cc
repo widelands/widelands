@@ -826,12 +826,13 @@ bool WLApplication::init_settings() {
 	}
 
 	// Save configuration now. Otherwise, the UUID is not saved
-	// when the game crashes, loosing part of its advantage
+	// when the game crashes, losing part of its advantage
 	try {
+		// NOCOM We'll be getting more writing to config with the new sound handler, so we need to pull out the options stuff into a separate file.
 #ifdef USE_XDG
-		g_options.write("config", false, userconfigdir);
+		g_options.write(kConfigFile.c_str(), false, userconfigdir);
 #else
-		g_options.write("config", false);
+		g_options.write(kConfigFile.c_str(), false);
 #endif
 	} catch (const std::exception& e) {
 		log("WARNING: could not save configuration: %s\n", e.what());

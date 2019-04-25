@@ -265,11 +265,10 @@ std::string FileSystem::get_homedir() {
 /**
  * Return $XDG_DATA_HOME/widelands. Falls back to $HOME/.local/share/widelands
  * https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
- * Prioritises $HOME/.widelands in case of existance.
+ * Prioritises $HOME/.widelands if it exists.
  */
 std::string FileSystem::get_userdatadir() {
-	std::string userdatadir;
-	userdatadir = get_homedir();
+	std::string userdatadir = get_homedir();
 
 	// Use dotfolder for backwards compatibility if it exists.
 	RealFSImpl dot(userdatadir);
@@ -278,9 +277,8 @@ std::string FileSystem::get_userdatadir() {
 	}
 #ifdef HAS_GETENV
 	else {
-		if (char const* const x = getenv("XDG_DATA_HOME")) {
-			userdatadir = x;
-			userdatadir = userdatadir + "/widelands";
+		if (char const* const datahome = getenv("XDG_DATA_HOME")) {
+			userdatadir = std::string(datahome) + "/widelands";
 		}
 		else {
 			// If XDG_DATA_HOME is not set, the default path is used.
@@ -302,11 +300,10 @@ std::string FileSystem::get_userdatadir() {
 /**
  * Return $XDG_CONFIG_HOME/widelands. Falls back to $HOME/.config/widelands
  * https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
- * Prioritises $HOME/.widelands in case of existance.
+ * Prioritises $HOME/.widelands if it exists.
  */
 std::string FileSystem::get_userconfigdir() {
-	std::string userconfigdir;
-	userconfigdir = get_homedir();
+	std::string userconfigdir = get_homedir();
 
 	// Use dotfolder for backwards compatibility if it exists.
 	RealFSImpl dot(userconfigdir);
@@ -315,9 +312,8 @@ std::string FileSystem::get_userconfigdir() {
 	}
 #ifdef HAS_GETENV
 	else {
-		if (char const* const x = getenv("XDG_CONFIG_HOME")) {
-			userconfigdir = x;
-			userconfigdir = userconfigdir + "/widelands";
+		if (char const* const confighome = getenv("XDG_CONFIG_HOME")) {
+			userconfigdir = std::string(confighome) + "/widelands";
 		}
 		else {
 			// If XDG_CONFIG_HOME is not set, the default path is used.

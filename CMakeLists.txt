@@ -51,7 +51,7 @@ option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
 option(USE_XDG "Follow XDG-Basedir specification" OFF) # Disabled by default
 IF(USE_XDG AND NOT APPLE AND NOT WIN32)
   ADD_DEFINITIONS(-DUSE_XDG)
-  message(STATUS "Building with XDG support.")
+  message(STATUS "Building with XDG support")
 ENDIF(USE_XDG AND NOT APPLE AND NOT WIN32)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)

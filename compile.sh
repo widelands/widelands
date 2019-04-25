@@ -362,7 +362,7 @@ if [ $USE_XDG = "ON" ]; then
   echo "# - With support for the XDG Base Directory Specification #"
 else
   echo "# - Without support for the XDG Base Directory            #"
-  echo "#   Specification.                                        #"
+  echo "#   Specification                                         #"
 fi
 if [ $BUILD_WEBSITE = "ON" ]; then
   echo "# - Website-related executables                           #"
