@@ -1,0 +1,15 @@
+#version 120
+
+// Attributes.
+attribute vec2 attr_position;
+attribute vec4 attr_overlay;
+
+uniform float u_z_value;
+
+// Output of vertex shader.
+varying vec4 var_overlay;
+
+void main() {
+	var_overlay = attr_overlay;
+	gl_Position = vec4(attr_position, u_z_value, 1.);
+}

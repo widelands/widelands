@@ -21,6 +21,8 @@
 #define WL_LOGIC_WIDELANDS_GEOMETRY_H
 
 #include <cmath>
+#include <map>
+#include <set>
 #include <tuple>
 
 #include <stdint.h>
@@ -154,5 +156,7 @@ struct HeightInterval {
 	uint8_t min, max;
 };
 }  // namespace Widelands
+
+using Workareas = std::set<std::map<Widelands::TCoords<>, uint8_t>>;
 
 #endif  // end of include guard: WL_LOGIC_WIDELANDS_GEOMETRY_H
