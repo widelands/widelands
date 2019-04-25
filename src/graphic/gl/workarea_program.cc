@@ -55,15 +55,15 @@ void WorkareaProgram::gl_draw(int gl_texture, float z_value) {
 }
 
 constexpr uint8_t kWorkareaTransparency = 127;
-static RGBAColor workarea_colors[] // Comment to prevent clang-format from breaking codecheck
-{
-   RGBAColor(63, 31, 127, kWorkareaTransparency),  // All three circles
-   RGBAColor(127, 63, 0, kWorkareaTransparency),   // Medium and outer circle
-   RGBAColor(0, 127, 0, kWorkareaTransparency),    // Outer circle
-   RGBAColor(63, 0, 127, kWorkareaTransparency),   // Inner and medium circle
-   RGBAColor(127, 0, 0, kWorkareaTransparency),    // Medium circle
-   RGBAColor(0, 0, 127, kWorkareaTransparency),    // Inner circle
-};
+static RGBAColor workarea_colors[]  // Comment to prevent clang-format from breaking codecheck
+   {
+      RGBAColor(63, 31, 127, kWorkareaTransparency),  // All three circles
+      RGBAColor(127, 63, 0, kWorkareaTransparency),   // Medium and outer circle
+      RGBAColor(0, 127, 0, kWorkareaTransparency),    // Outer circle
+      RGBAColor(63, 0, 127, kWorkareaTransparency),   // Inner and medium circle
+      RGBAColor(127, 0, 0, kWorkareaTransparency),    // Medium circle
+      RGBAColor(0, 0, 127, kWorkareaTransparency),    // Inner circle
+   };
 static inline RGBAColor apply_color(RGBAColor c1, RGBAColor c2) {
 	uint8_t r = (c1.r * c1.a + c2.r * c2.a) / (c1.a + c2.a);
 	uint8_t g = (c1.g * c1.a + c2.g * c2.a) / (c1.a + c2.a);

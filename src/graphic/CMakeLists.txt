@@ -225,6 +225,8 @@ wl_library(graphic_fields_to_draw
 
 wl_library(graphic_terrain_programs
   SRCS
+    gl/grid_program.cc
+    gl/grid_program.h
     gl/road_program.cc
     gl/road_program.h
     gl/terrain_program.cc

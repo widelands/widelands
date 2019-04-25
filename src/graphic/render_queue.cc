@@ -28,6 +28,7 @@
 #include "graphic/gl/dither_program.h"
 #include "graphic/gl/draw_line_program.h"
 #include "graphic/gl/fill_rect_program.h"
+#include "graphic/gl/grid_program.h"
 #include "graphic/gl/road_program.h"
 #include "graphic/gl/terrain_program.h"
 #include "graphic/gl/workarea_program.h"
@@ -144,6 +145,7 @@ RenderQueue::RenderQueue()
      terrain_program_(new TerrainProgram()),
      dither_program_(new DitherProgram()),
      workarea_program_(new WorkareaProgram()),
+     grid_program_(new GridProgram()),
      road_program_(new RoadProgram()) {
 }
 
@@ -167,6 +169,7 @@ void RenderQueue::enqueue(const Item& given_item) {
 	case Program::kTerrainBase:
 	case Program::kTerrainDither:
 	case Program::kTerrainWorkarea:
+	case Program::kTerrainGrid:
 	case Program::kTerrainRoad:
 		/* all fallthroughs intended */
 		break;
@@ -259,6 +262,14 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			workarea_program_->draw(
 			   item.terrain_arguments.terrains->get(0).get_texture(0).blit_data().texture_id,
 			   item.terrain_arguments.workareas, *item.terrain_arguments.fields_to_draw, item.z_value);
+			++i;
+		} break;
+
+		case Program::kTerrainGrid: {
+			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
+			grid_program_->draw(
+			   item.terrain_arguments.terrains->get(0).get_texture(0).blit_data().texture_id,
+			   *item.terrain_arguments.fields_to_draw, item.z_value);
 			++i;
 		} break;
 
