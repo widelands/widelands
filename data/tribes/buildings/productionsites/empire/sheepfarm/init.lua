@@ -56,7 +56,7 @@ tribes:new_productionsite_type {
             "sleep=25000",
             "return=skipped unless economy needs wool",
             "consume=water wheat",
-            "playsound=sound/farm sheep 192",
+            "playsound=sound/farm/sheep 192",
             "animate=working 30000",
             "produce=wool"
          }

@@ -133,10 +133,9 @@ struct ImmovableProgram {
 	/// Parameter syntax:
 	///    parameters ::= directory sound [priority]
 	/// Parameter semantics:
-	///    directory:
-	///       The directory of the sound files, relative to the datadir.
-	///    sound:
-	///       The base filename of a sound effect (relative to the directory).
+	///    path:
+	///       The directory of the sound files, relative to the datadir, followed
+	///       by the base filename of a sound effect (relative to the directory).
 	///    priority:
 	///       An integer. If omitted, 127 is used.
 	///
@@ -147,7 +146,7 @@ struct ImmovableProgram {
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		std::string name;
+		FxId fx;
 		uint8_t priority;
 	};
 
