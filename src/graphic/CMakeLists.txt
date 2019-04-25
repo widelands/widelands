@@ -231,6 +231,8 @@ wl_library(graphic_terrain_programs
     gl/terrain_program.h
     gl/dither_program.cc
     gl/dither_program.h
+    gl/workarea_program.cc
+    gl/workarea_program.h
   DEPENDS
     base_exceptions
     base_geometry
