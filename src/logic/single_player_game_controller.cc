@@ -20,11 +20,11 @@
 #include "logic/single_player_game_controller.h"
 
 #include "ai/computer_player.h"
+#include "io/profile.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
-#include "profile/profile.h"
 
 SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
                                                        bool const useai,

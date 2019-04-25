@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_PROFILE_PROFILE_H
-#define WL_PROFILE_PROFILE_H
+#ifndef WL_IO_PROFILE_H
+#define WL_IO_PROFILE_H
 
 #include <cstring>
 #include <memory>
@@ -224,4 +224,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(Profile);
 };
 
-#endif  // end of include guard: WL_PROFILE_PROFILE_H
+#endif  // end of include guard: WL_IO_PROFILE_H

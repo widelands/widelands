@@ -17,7 +17,7 @@
  *
  */
 
-#include "profile/profile.h"
+#include "io/profile.h"
 
 #include <algorithm>
 #include <cctype>

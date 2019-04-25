@@ -27,8 +27,8 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
+#include "io/profile.h"
 #include "logic/filesystem_constants.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 

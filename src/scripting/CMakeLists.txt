@@ -108,6 +108,7 @@ wl_library(scripting_logic
     economy
     io_fileread
     io_filesystem
+    io_profile
     logic
     logic_constants
     logic_filesystem_constants
@@ -116,7 +117,6 @@ wl_library(scripting_logic
     logic_tribe_basic_info
     logic_widelands_geometry
     map_io
-    profile
     scripting_base
     scripting_coroutine
     scripting_errors

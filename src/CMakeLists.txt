@@ -73,7 +73,6 @@ add_subdirectory(logic)
 add_subdirectory(map_io)
 add_subdirectory(network)
 add_subdirectory(notifications)
-add_subdirectory(profile)
 add_subdirectory(random)
 add_subdirectory(scripting)
 add_subdirectory(sound)
@@ -110,6 +109,7 @@ wl_library(widelands_ball_of_mud
     graphic_text_constants
     helper
     io_filesystem
+    io_profile
     logic
     logic_exceptions
     logic_filesystem_constants
@@ -118,7 +118,6 @@ wl_library(widelands_ball_of_mud
     logic_single_player_game_settings
     map_io_map_loader
     network
-    profile
     random
     sound
     ui_basic

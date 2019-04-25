@@ -48,6 +48,7 @@ wl_library(network
     io_fileread
     io_filesystem
     io_stream
+    io_profile
     logic
     logic_constants
     logic_filesystem_constants
@@ -55,7 +56,6 @@ wl_library(network
     logic_game_settings
     logic_tribe_basic_info
     map_io_map_loader
-    profile
     random
     scripting_lua_interface
     scripting_lua_table

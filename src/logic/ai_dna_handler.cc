@@ -24,8 +24,8 @@
 #include "base/time_string.h"
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/profile.h"
 #include "logic/filesystem_constants.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 

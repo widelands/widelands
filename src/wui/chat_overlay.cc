@@ -27,7 +27,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/rt_errors.h"
-#include "profile/profile.h"
+#include "io/profile.h"
 #include "wui/chat_msg_layout.h"
 #include "wui/logmessage.h"
 

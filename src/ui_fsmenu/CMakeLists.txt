@@ -13,12 +13,12 @@ wl_library(ui_fsmenu_options
     graphic_text_layout
     helper
     io_filesystem
+    io_profile
     logic_filesystem_constants
     scripting_lua_interface
     scripting_lua_table
     ui_basic
     ui_fsmenu_base
-    profile
     sound
     widelands_ball_of_mud
     wui_sound_options
@@ -78,7 +78,7 @@ wl_library(ui_fsmenu_loading_common
     base_i18n
     graphic_text_constants
     io_filesystem
-    profile
+    io_profile
     network
     random
     ui_basic
@@ -106,12 +106,12 @@ wl_library(ui_fsmenu_gameloading
     graphic_text_constants
     helper
     io_filesystem
+    io_profile
     logic
     logic_game_controller
     logic_game_settings
     logic_tribe_basic_info
     map_io_map_loader
-    profile
     scripting_lua_interface
     scripting_lua_table
     ui_basic
@@ -148,12 +148,12 @@ wl_library(ui_fsmenu_maploading
     graphic_text_constants
     graphic_surface
     io_filesystem
+    io_profile
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
     logic_tribe_basic_info
     map_io_map_loader
-    profile
     scripting_lua_interface
     scripting_lua_table
     ui_basic
@@ -174,8 +174,8 @@ wl_library(ui_fsmenu_network
     base_macros
     graphic
     graphic_text_constants
+    io_profile
     network
-    profile
     random
     sound
     ui_basic

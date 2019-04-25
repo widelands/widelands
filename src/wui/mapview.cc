@@ -24,7 +24,7 @@
 #include "base/macros.h"
 #include "base/math.h"
 #include "graphic/rendertarget.h"
-#include "profile/profile.h"
+#include "io/profile.h"
 #include "wlapplication.h"
 #include "wui/mapviewpixelfunctions.h"
 

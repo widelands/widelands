@@ -31,8 +31,8 @@ wl_library(sound
     helper
     io_fileread
     io_filesystem
+    io_profile
     logic_exceptions
-    profile
     random
     sound_constants
 )

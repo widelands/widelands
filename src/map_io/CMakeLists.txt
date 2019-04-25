@@ -104,10 +104,10 @@ wl_library(map_io
     helper
     io_fileread
     io_filesystem
+    io_profile
     logic
     logic_constants
     logic_exceptions
     logic_widelands_geometry
-    profile
     scripting_logic
 )

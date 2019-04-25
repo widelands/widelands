@@ -22,7 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "profile/profile.h"
+#include "io/profile.h"
 #include "wui/gamedetails.h"
 
 FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,

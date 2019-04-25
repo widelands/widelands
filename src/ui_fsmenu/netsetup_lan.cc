@@ -23,9 +23,9 @@
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
+#include "io/profile.h"
 #include "network/constants.h"
 #include "network/network.h"
-#include "profile/profile.h"
 
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
    : FullscreenMenuBase(),

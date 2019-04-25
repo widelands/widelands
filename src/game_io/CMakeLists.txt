@@ -33,12 +33,12 @@ wl_library(game_io
     graphic_minimap_renderer
     io_fileread
     io_filesystem
+    io_profile
     logic
     logic_exceptions
     logic_game_controller
     map_io
     map_io_map_loader
-    profile
     scripting_lua_interface
     scripting_lua_table
     wui

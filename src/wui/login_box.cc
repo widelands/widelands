@@ -21,7 +21,7 @@
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
-#include "profile/profile.h"
+#include "io/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
 

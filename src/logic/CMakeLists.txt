@@ -48,10 +48,10 @@ wl_library(logic_game_controller
     single_player_game_controller.cc
   DEPENDS
     ai
+    io_profile
     logic
     logic_constants
     logic_game_settings
-    profile
     ui_basic
     wui
 )
@@ -278,6 +278,7 @@ wl_library(logic
     helper
     io_fileread
     io_filesystem
+    io_profile
     io_stream
     logic_constants
     logic_exceptions
@@ -292,7 +293,6 @@ wl_library(logic
     network
     note_sound
     notifications
-    profile
     random
     scripting_coroutine
     scripting_logic

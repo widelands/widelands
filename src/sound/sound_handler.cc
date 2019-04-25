@@ -30,7 +30,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "profile/profile.h"
+#include "io/profile.h"
 
 namespace {
 constexpr int kDefaultMusicVolume = 64;

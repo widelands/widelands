@@ -21,9 +21,9 @@
 
 #include "base/i18n.h"
 #include "graphic/text_constants.h"
+#include "io/profile.h"
 #include "network/crypto.h"
 #include "network/internet_gaming.h"
-#include "profile/profile.h"
 #include "random/random.h"
 #include "ui_basic/messagebox.h"
 #include "wui/login_box.h"

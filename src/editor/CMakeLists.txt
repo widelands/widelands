@@ -100,6 +100,7 @@ wl_library(editor
     graphic_surface
     graphic_text_layout
     io_filesystem
+    io_profile
     logic
     logic_constants
     logic_filesystem_constants
@@ -109,7 +110,6 @@ wl_library(editor
     map_io
     map_io_map_loader
     notifications
-    profile
     random
     scripting_coroutine
     scripting_lua_interface

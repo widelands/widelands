@@ -24,7 +24,7 @@
 #include <memory>
 
 #include "logic/game.h"
-#include "profile/profile.h"
+#include "io/profile.h"
 #include "ui_basic/unique_window.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/interactive_base.h"

@@ -28,8 +28,8 @@ wl_library(wui_chat_ui
     graphic_fonthandler
     graphic_text
     graphic_text_layout
+    io_profile
     logic
-    profile
     sound
     ui_basic
     wui
@@ -144,9 +144,9 @@ wl_library(wui_mapview
     graphic
     graphic_fields_to_draw
     graphic_game_renderer
+    io_profile
     logic
     logic_widelands_geometry
-    profile
     ui_basic
     widelands_ball_of_mud
     wui_mapview_pixelfunctions
@@ -292,6 +292,7 @@ wl_library(wui
     graphic_text_layout
     io_fileread
     io_filesystem
+    io_profile
     logic
     logic_constants
     logic_filesystem_constants
@@ -303,7 +304,6 @@ wl_library(wui
     network
     note_sound
     notifications
-    profile
     scripting_coroutine
     scripting_lua_interface
     scripting_lua_table

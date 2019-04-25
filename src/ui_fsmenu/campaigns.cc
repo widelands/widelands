@@ -25,9 +25,9 @@
 #include "base/log.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
+#include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 
 namespace {

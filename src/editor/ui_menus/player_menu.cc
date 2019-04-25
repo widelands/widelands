@@ -29,10 +29,10 @@
 #include "editor/tools/set_starting_pos_tool.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
+#include "io/profile.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/widelands.h"
-#include "profile/profile.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/multilinetextarea.h"
 
