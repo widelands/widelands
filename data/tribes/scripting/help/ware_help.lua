@@ -48,7 +48,7 @@ end
 --
 function ware_help_producers_string(tribe, ware_description)
    local result = ""
-   for i, building in ipairs(ware_description.producers) do
+   for i, building in ipairs(ware_description:producers(tribe.name)) do
       if (tribe:has_building(building.name)) then
          -- TRANSLATORS: Ware Encyclopedia: A building producing a ware
          result = result .. h2(_"Producer")
@@ -130,7 +130,7 @@ function ware_help_consumers_string(tribe, ware_description)
    local consumers_string = ""
    local consumers_amount = 0
 
-   for i, building in ipairs(ware_description.consumers) do
+   for i, building in ipairs(ware_description:consumers(tribe.name)) do
       if (tribe:has_building(building.name)) then
          consumers_string = consumers_string .. dependencies({ware_description, building}, building.descname)
          consumers_amount = consumers_amount + 1
