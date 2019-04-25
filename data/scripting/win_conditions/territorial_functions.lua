@@ -53,6 +53,19 @@ territory_points = {
    points = {}
 }
 
+-- variables for the territorial winconditions statsistics hook
+fields = 0
+statistics = {
+      -- TRANSLATORS: subtext of the territorial statistics hook. Keep it short and consistent with the translation of the Win condition.
+      name = _"Territory percentage",
+      pic = "images/wui/stats/genstats_territorial_small.png",
+      calculator = function(p)
+         local pts = count_owned_valuable_fields_for_all_players(wl.Game().players)
+         return (pts[p.number]*100//fields)
+      end,
+   }
+
+
 -- RST
 -- .. function:: calculate_territory_points(fields, players, wc_descname, wc_version)
 --
