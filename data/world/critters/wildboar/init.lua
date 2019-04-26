@@ -6,8 +6,7 @@ animations = {
       hotspot = { 10, 18 },
       fps = 20,
       sound_effect = {
-         directory = "sound/animals",
-         name = "boar",
+         path = "sound/animals/boar",
       },
    },
 }

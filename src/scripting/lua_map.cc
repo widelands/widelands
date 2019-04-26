@@ -545,10 +545,10 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 	lua_pushuint32(L, idx);                                                                         \
 	lua_pushuint32(L, i.first.name);                                                                \
 	lua_rawset(L, -3);
-			PUSHLEVEL(1, health);
-			PUSHLEVEL(2, attack);
-			PUSHLEVEL(3, defense);
-			PUSHLEVEL(4, evade);
+			PUSHLEVEL(1, health)
+			PUSHLEVEL(2, attack)
+			PUSHLEVEL(3, defense)
+			PUSHLEVEL(4, evade)
 #undef PUSHLEVEL
 
 			lua_pushuint32(L, i.second);
@@ -678,6 +678,14 @@ parse_wares_as_bill_of_material(lua_State* L, int table_index, const TribeDescr&
 		result.push_back(std::make_pair(pair.first.first, pair.second));
 	}
 	return result;
+}
+
+const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tribename) {
+	if (!Widelands::tribe_exists(tribename)) {
+		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
+	}
+	const Tribes& tribes = get_egbase(L).tribes();
+	return *tribes.get_tribe_descr(tribes.tribe_index(tribename));
 }
 
 }  // namespace
@@ -1186,19 +1194,20 @@ Map
 */
 const char LuaMap::className[] = "Map";
 const MethodType<LuaMap> LuaMap::Methods[] = {
-   METHOD(LuaMap, place_immovable), METHOD(LuaMap, get_field),
-   METHOD(LuaMap, recalculate),     METHOD(LuaMap, recalculate_seafaring),
-   METHOD(LuaMap, set_port_space),  {nullptr, nullptr},
+   METHOD(LuaMap, count_conquerable_fields),
+   METHOD(LuaMap, count_terrestrial_fields),
+   METHOD(LuaMap, count_owned_valuable_fields),
+   METHOD(LuaMap, place_immovable),
+   METHOD(LuaMap, get_field),
+   METHOD(LuaMap, recalculate),
+   METHOD(LuaMap, recalculate_seafaring),
+   METHOD(LuaMap, set_port_space),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaMap> LuaMap::Properties[] = {
-   PROP_RO(LuaMap, allows_seafaring),
-   PROP_RO(LuaMap, number_of_port_spaces),
-   PROP_RO(LuaMap, port_spaces),
-   PROP_RO(LuaMap, width),
-   PROP_RO(LuaMap, height),
-   PROP_RO(LuaMap, player_slots),
-   PROP_RO(LuaMap, conquerable_fields),
-   PROP_RO(LuaMap, terrestrial_fields),
+   PROP_RO(LuaMap, allows_seafaring), PROP_RO(LuaMap, number_of_port_spaces),
+   PROP_RO(LuaMap, port_spaces),      PROP_RO(LuaMap, width),
+   PROP_RO(LuaMap, height),           PROP_RO(LuaMap, player_slots),
    {nullptr, nullptr, nullptr},
 };
 
@@ -1299,47 +1308,66 @@ int LuaMap::get_player_slots(lua_State* L) {
 	return 1;
 }
 
-/* RST
-   .. attribute:: conquerable_fields
-
-      (RO) Calculates and returns all reachable fields that a player could build on.
-
-      **Note:** This function is expensive, so call it seldom.
-*/
-int LuaMap::get_conquerable_fields(lua_State* L) {
-	lua_newtable(L);
-	int counter = 0;
-	for (const Widelands::FCoords& fcoords :
-	     get_egbase(L).map().calculate_all_conquerable_fields()) {
-		lua_pushinteger(L, ++counter);
-		to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(fcoords));
-		lua_settable(L, -3);
-	}
-	return 1;
-}
-
-/* RST
-   .. attribute:: terrestrial_fields
-
-      (RO) Calculates and returns all fields that are not swimmable.
-*/
-int LuaMap::get_terrestrial_fields(lua_State* L) {
-	lua_newtable(L);
-	int counter = 0;
-	for (const Widelands::FCoords& fcoords :
-	     get_egbase(L).map().calculate_all_fields_excluding_caps(MOVECAPS_SWIM)) {
-		lua_pushinteger(L, ++counter);
-		to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(fcoords));
-		lua_settable(L, -3);
-	}
-	return 1;
-}
-
 /*
  ==========================================================
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+   .. method:: count_conquerable_fields()
+
+      (RO) Counts all reachable fields that a player could build on.
+
+      **Note:** The fields are only calculated afresh when this is called for the first time.
+
+     :returns: An integer with the amount of fields.
+*/
+int LuaMap::count_conquerable_fields(lua_State* L) {
+	lua_pushinteger(L, get_egbase(L).mutable_map()->count_all_conquerable_fields());
+	return 1;
+}
+
+/* RST
+   .. method:: count_terrestrial_fields()
+
+      (RO) Counts all fields that are not swimmable.
+
+     **Note:** The fields are only calculated afresh when this is called for the first time.
+
+     :returns: An integer with the amount of fields.
+*/
+int LuaMap::count_terrestrial_fields(lua_State* L) {
+	lua_pushinteger(L, get_egbase(L).mutable_map()->count_all_fields_excluding_caps(MOVECAPS_SWIM));
+	return 1;
+}
+
+/* RST
+   .. method:: count_owned_valuable_fields([immovable_attribute])
+
+      (RO) Counts the number of owned valuable fields for all players.
+
+      :arg name: *Optional*. If this is set, only count fields that have an
+        immovable with the given atttribute.
+      :type name: :class:`string`
+
+     :returns: A table mapping player numbers to their number of owned fields.
+*/
+int LuaMap::count_owned_valuable_fields(lua_State* L) {
+	if (lua_gettop(L) > 2) {
+		report_error(L, "Does not take more than one argument.");
+	}
+	const std::string attribute = lua_gettop(L) == 2 ? luaL_checkstring(L, -1) : "";
+
+	lua_newtable(L);
+	for (const auto& fieldinfo : get_egbase(L).map().count_owned_valuable_fields(attribute)) {
+		lua_pushinteger(L, fieldinfo.first);
+		lua_pushinteger(L, fieldinfo.second);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
 /* RST
    .. method:: place_immovable(name, field, from_where)
 
@@ -1511,7 +1539,7 @@ void LuaTribeDescription::__persist(lua_State* L) {
 
 void LuaTribeDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_tribe_index(name);
 	set_description_pointer(tribes.get_tribe_descr(idx));
@@ -1965,7 +1993,7 @@ void LuaImmovableDescription::__persist(lua_State* L) {
 
 void LuaImmovableDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const World& world = get_egbase(L).world();
 	DescriptionIndex idx = world.get_immovable_index(name);
 	if (idx != INVALID_INDEX) {
@@ -2187,7 +2215,7 @@ void LuaBuildingDescription::__persist(lua_State* L) {
 
 void LuaBuildingDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_building_index(name.c_str());
 	set_description_pointer(tribes.get_building_descr(idx));
@@ -3026,12 +3054,12 @@ WareDescription
 */
 const char LuaWareDescription::className[] = "WareDescription";
 const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
+   METHOD(LuaWareDescription, consumers),
    METHOD(LuaWareDescription, is_construction_material),
+   METHOD(LuaWareDescription, producers),
    {nullptr, nullptr},
 };
 const PropertyType<LuaWareDescription> LuaWareDescription::Properties[] = {
-   PROP_RO(LuaWareDescription, consumers),
-   PROP_RO(LuaWareDescription, producers),
    {nullptr, nullptr, nullptr},
 };
 
@@ -3042,7 +3070,7 @@ void LuaWareDescription::__persist(lua_State* L) {
 
 void LuaWareDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_ware_index(name.c_str());
 	set_description_pointer(tribes.get_ware_descr(idx));
@@ -3055,25 +3083,35 @@ void LuaWareDescription::__unpersist(lua_State* L) {
  */
 
 /* RST
-   .. attribute:: consumers
+   .. method:: consumers(tribename)
+
+      :arg tribename: the name of the tribe that this ware gets checked for
+      :type tribename: :class:`string`
 
       (RO) An array with :class:`LuaBuildingDescription` with buildings that
       need this ware for their production.
 */
-int LuaWareDescription::get_consumers(lua_State* L) {
+int LuaWareDescription::consumers(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	const Widelands::TribeDescr& tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
+
 	lua_newtable(L);
 	int index = 1;
 	for (const DescriptionIndex& building_index : get()->consumers()) {
-		lua_pushint32(L, index++);
-		upcasted_map_object_descr_to_lua(
-		   L, get_egbase(L).tribes().get_building_descr(building_index));
-		lua_rawset(L, -3);
+		if (tribe.has_building(building_index)) {
+			lua_pushint32(L, index++);
+			upcasted_map_object_descr_to_lua(
+			   L, get_egbase(L).tribes().get_building_descr(building_index));
+			lua_rawset(L, -3);
+		}
 	}
 	return 1;
 }
 
 /* RST
-   .. method:: is_construction_material
+   .. method:: is_construction_material(tribename)
 
       :arg tribename: the name of the tribe that this ware gets checked for
       :type tribename: :class:`string`
@@ -3094,19 +3132,29 @@ int LuaWareDescription::is_construction_material(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: producers
+   .. method:: producers(tribename)
+
+      :arg tribename: the name of the tribe that this ware gets checked for
+      :type tribename: :class:`string`
 
       (RO) An array with :class:`LuaBuildingDescription` with buildings that
       can procude this ware.
 */
-int LuaWareDescription::get_producers(lua_State* L) {
+int LuaWareDescription::producers(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	const Widelands::TribeDescr& tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
+
 	lua_newtable(L);
 	int index = 1;
 	for (const DescriptionIndex& building_index : get()->producers()) {
-		lua_pushint32(L, index++);
-		upcasted_map_object_descr_to_lua(
-		   L, get_egbase(L).tribes().get_building_descr(building_index));
-		lua_rawset(L, -3);
+		if (tribe.has_building(building_index)) {
+			lua_pushint32(L, index++);
+			upcasted_map_object_descr_to_lua(
+			   L, get_egbase(L).tribes().get_building_descr(building_index));
+			lua_rawset(L, -3);
+		}
 	}
 	return 1;
 }
@@ -3140,7 +3188,7 @@ void LuaWorkerDescription::__persist(lua_State* L) {
 
 void LuaWorkerDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_worker_index(name.c_str());
 	set_description_pointer(tribes.get_worker_descr(idx));
@@ -3421,7 +3469,7 @@ void LuaResourceDescription::__persist(lua_State* L) {
 
 void LuaResourceDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const World& world = get_egbase(L).world();
 	const ResourceDescription* descr = world.get_resource(world.safe_resource_index(name.c_str()));
 	set_description_pointer(descr);
@@ -3542,7 +3590,7 @@ void LuaTerrainDescription::__persist(lua_State* L) {
 
 void LuaTerrainDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	set_description_pointer(get_egbase(L).world().terrain_descr(name));
 }
 
@@ -3728,8 +3776,8 @@ void LuaEconomy::__persist(lua_State* L) {
 void LuaEconomy::__unpersist(lua_State* L) {
 	Widelands::PlayerNumber player_number;
 	Widelands::Serial economy_serial;
-	UNPERS_UINT32("player", player_number);
-	UNPERS_UINT32("economy", economy_serial);
+	UNPERS_UINT32("player", player_number)
+	UNPERS_UINT32("economy", economy_serial)
 	const Widelands::Player& player = get_egbase(L).player(player_number);
 	set_economy_pointer(player.get_economy(economy_serial));
 }
@@ -3881,7 +3929,7 @@ void LuaMapObject::__persist(lua_State* L) {
 }
 void LuaMapObject::__unpersist(lua_State* L) {
 	uint32_t idx;
-	UNPERS_UINT32("file_index", idx);
+	UNPERS_UINT32("file_index", idx)
 
 	if (!idx)
 		ptr_ = nullptr;
@@ -6131,8 +6179,8 @@ void LuaField::__persist(lua_State* L) {
 }
 
 void LuaField::__unpersist(lua_State* L) {
-	UNPERS_INT32("x", coords_.x);
-	UNPERS_INT32("y", coords_.y);
+	UNPERS_INT32("x", coords_.x)
+	UNPERS_INT32("y", coords_.y)
 }
 
 /*
@@ -6679,7 +6727,7 @@ void LuaPlayerSlot::__persist(lua_State* L) {
 }
 
 void LuaPlayerSlot::__unpersist(lua_State* L) {
-	UNPERS_UINT32("player", player_number_);
+	UNPERS_UINT32("player", player_number_)
 }
 
 /*

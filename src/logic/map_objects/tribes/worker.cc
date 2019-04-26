@@ -995,11 +995,12 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 }
 
 /**
- * Demand from the g_sound_handler to play a certain sound effect.
+ * Demand from the g_sh to play a certain sound effect.
  * Whether the effect actually gets played is decided only by the sound server.
  */
 bool Worker::run_playsound(Game& game, State& state, const Action& action) {
-	Notifications::publish(NoteSound(action.sparam1, get_position(), action.iparam1));
+	Notifications::publish(
+	   NoteSound(SoundType::kAmbient, action.iparam2, get_position(), action.iparam1));
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -1060,34 +1061,34 @@ void Worker::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	if (upcast(PlayerImmovable, loc, location_.get(egbase))) {
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* Owner: (%p)\n", &loc->owner());
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 		molog("** Owner (plrnr): %i\n", loc->owner().player_number());
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* Economy: %p\n", loc->get_economy());
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 	}
 
 	PlayerImmovable* imm = location_.get(egbase);
 	molog("location: %u\n", imm ? imm->serial() : 0);
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("Economy: %p\n", economy_);
 	molog("transfer: %p\n", transfer_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 
 	if (upcast(WareInstance, ware, carried_ware_.get(egbase))) {
 		molog("* carried_ware->get_ware() (id): %i\n", ware->descr_index());
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* carried_ware->get_economy() (): %p\n", ware->get_economy());
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 	}
 
 	molog("current_exp: %i / %i\n", current_exp_, descr().get_needed_experience());
 
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("supply: %p\n", supply_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 }
 
 /**
@@ -2140,6 +2141,14 @@ void Worker::start_task_fetchfromflag(Game& game) {
 }
 
 void Worker::fetchfromflag_update(Game& game, State& state) {
+	std::string signal = get_signal();
+	if (signal.size()) {
+		if (signal == "location") {
+			molog("[fetchfromflag]: Building disappeared, become fugitive\n");
+			return pop_task(game);
+		}
+	}
+
 	PlayerImmovable& employer = *get_location(game);
 	PlayerImmovable* const location =
 	   dynamic_cast<PlayerImmovable*>(game.map().get_immovable(get_position()));
@@ -2977,20 +2986,21 @@ void Worker::scout_update(Game& game, State& state) {
 
 void Worker::draw_inner(const EditorGameBase& game,
                         const Vector2f& point_on_dst,
+                        const Coords& coords,
                         const float scale,
                         RenderTarget* dst) const {
 	assert(get_owner() != nullptr);
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
-	dst->blit_animation(
-	   point_on_dst, scale, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
+	dst->blit_animation(point_on_dst, coords, scale, get_current_anim(),
+	                    game.get_gametime() - get_animstart(), &player_color);
 
 	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
 		const Vector2f hotspot = descr().ware_hotspot().cast<float>();
 		const Vector2f location(
 		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
-		dst->blit_animation(
-		   location, scale, carried_ware->descr().get_animation("idle"), 0, player_color);
+		dst->blit_animation(location, Widelands::Coords::null(), scale,
+		                    carried_ware->descr().get_animation("idle"), 0, &player_color);
 	}
 }
 
@@ -3000,12 +3010,13 @@ void Worker::draw_inner(const EditorGameBase& game,
 void Worker::draw(const EditorGameBase& egbase,
                   const TextToDraw&,
                   const Vector2f& field_on_dst,
+                  const Widelands::Coords& coords,
                   const float scale,
                   RenderTarget* dst) const {
 	if (!get_current_anim()) {
 		return;
 	}
-	draw_inner(egbase, calc_drawpos(egbase, field_on_dst, scale), scale, dst);
+	draw_inner(egbase, calc_drawpos(egbase, field_on_dst, scale), coords, scale, dst);
 }
 
 /*

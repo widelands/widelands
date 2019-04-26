@@ -53,6 +53,7 @@
 #include "map_io/map_saver.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
+#include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wui/interactive_base.h"
 #include "wui/interactive_gamebase.h"
@@ -78,6 +79,9 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
 
 EditorGameBase::~EditorGameBase() {
 	delete_tempfile();
+	if (g_sh != nullptr) {
+		g_sh->remove_fx_set(SoundType::kAmbient);
+	}
 }
 
 /**
@@ -660,7 +664,6 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 	assert(0 < player_area.player_number);
 	assert(player_area.player_number <= map().get_nrplayers());
 	assert(preferred_player <= map().get_nrplayers());
-	assert(preferred_player != player_area.player_number);
 	assert(!conquer || !preferred_player);
 	Player* conquering_player = get_player(player_area.player_number);
 	MapRegion<Area<FCoords>> mr(map(), player_area);

@@ -147,6 +147,38 @@ end
 
 
 -- RST
+-- .. function:: count_owned_valuable_fields_for_all_players(players[, attribute])
+--
+--    Counts all owned fields for each player.
+--
+--    :arg players: Table of all players
+--    :arg attribute: If this is set, only count fields that have an immovable with this attribute
+--
+--    :returns: a table with ``playernumber = count_of_owned_fields``  entries
+--
+function count_owned_valuable_fields_for_all_players(players, attribute)
+   attribute = attribute or ""
+
+   local owned_fields = {}
+
+   -- Get number of currently owned valuable fields per player.
+   -- This table can contain defeated players.
+   local all_plrpoints = wl.Game().map:count_owned_valuable_fields(attribute)
+
+   -- Insert points for all players who are still in the game, and 0 points for defeated players.
+   for idx,plr in ipairs(players) do
+      if (plr.defeated) then
+         owned_fields[plr.number] = 0
+      else
+         owned_fields[plr.number] = all_plrpoints[plr.number]
+      end
+   end
+   return owned_fields
+end
+
+
+
+-- RST
 -- .. function:: rank_players(all_player_points, plrs)
 --
 --    Rank the players and teams according to the highest points
@@ -263,13 +295,13 @@ function format_remaining_time(remaining_time)
       time = (ngettext("%1% hour and %2%", "%1% hours and %2%", h, m)):bformat(h, time)
    elseif m > 0 then
       -- TRANSLATORS: Context: 'The game will end in 30 minutes.'
-      time = (ngettext("%i minute", "%i minutes", m)):format(m)
+      time = (ngettext("%i minute", "%i minutes", m)):bformat(m)
    else
       -- TRANSLATORS: Context: 'The game will end in 2 hours.'
       time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
    end
    -- TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-   return p(_"The game will end in %s."):format(time)
+   return p(_"The game will end in %s."):bformat(time)
 end
 
 -- RST
@@ -280,7 +312,7 @@ end
 --    Returns the remaining time and whether the notification should popup.
 --
 --    To be used when sending status messages.
---    Status messages are to be send every 30 minutes and every 5 during the last 30 minutes,
+--    Status messages are to be sent every 30 minutes and every 5 during the last 30 minutes,
 --    the message window pops up ever hour, 30, 20 & 10 minutes before the game ends.
 --
 --    :arg max_time:    The time maximum game time in minutes
