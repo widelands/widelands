@@ -88,6 +88,8 @@ protected:
 	GameSettingsProvider* settings_;
 	GameController* ctrl_;
 
+	bool peaceful_mode_forbidden_;
+
 	Widelands::PlayerNumber nr_players_;
 };
 

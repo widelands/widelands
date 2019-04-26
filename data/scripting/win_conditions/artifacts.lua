@@ -22,6 +22,7 @@ local artifact_fields = {}
 return {
    name = wc_name,
    description = wc_desc,
+   peaceful_mode_allowed = true,
    map_tags = { "artifacts" }, -- Map tags needed so that this win condition will be available only for suitable maps
    init = function()
       -- Find all artifacts

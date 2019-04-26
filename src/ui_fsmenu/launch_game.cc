@@ -59,8 +59,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      peaceful_(this,
                Vector2i(get_w() * 7 / 10,
                get_h() * 19 / 40 + buth_),
-               _("Peaceful mode"),
-               _("Forbid fighting between players")),
+               _("Peaceful mode")),
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
@@ -68,6 +67,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      // Variables and objects used in the menu
      settings_(settings),
      ctrl_(ctrl),
+     peaceful_mode_forbidden_(false),
      nr_players_(0) {
 	win_condition_dropdown_.selected.connect(
 	   boost::bind(&FullscreenMenuLaunchGame::win_condition_selected, this));
@@ -87,10 +87,19 @@ FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
 }
 
 void FullscreenMenuLaunchGame::update_peaceful_mode() {
-	bool scenario_or_savegame = settings_->settings().scenario || settings_->settings().savegame;
-	peaceful_.set_enabled(!scenario_or_savegame && settings_->can_change_map());
-	if (scenario_or_savegame) {
+	bool forbidden = peaceful_mode_forbidden_ || settings_->settings().scenario || settings_->settings().savegame;
+	peaceful_.set_enabled(!forbidden && settings_->can_change_map());
+	if (forbidden) {
 		peaceful_.set_state(false);
+	}
+	if (settings_->settings().scenario) {
+		peaceful_.set_tooltip(_("The relations between players are set by the scenario."));
+	} else if (settings_->settings().savegame) {
+		peaceful_.set_tooltip(_("The game is a saved game – whether the peaceful mode is used was decided before."));
+	} else if (peaceful_mode_forbidden_) {
+		peaceful_.set_tooltip(_("The selected win condition does not allow peaceful matches."));
+	} else {
+		peaceful_.set_tooltip(_("Forbid fighting between players"));
 	}
 }
 

@@ -241,6 +241,11 @@ void FullscreenMenuLaunchMPG::win_condition_selected() {
 	if (settings_->can_change_map() && win_condition_dropdown_.has_selection()) {
 		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
 		last_win_condition_ = win_condition_dropdown_.get_selected();
+
+		std::unique_ptr<LuaTable> t = lua_->run_script(last_win_condition_);
+		t->do_not_warn_about_unaccessed_keys();
+		peaceful_mode_forbidden_ = !t->get_bool("peaceful_mode_allowed");
+		update_peaceful_mode();
 	}
 }
 
