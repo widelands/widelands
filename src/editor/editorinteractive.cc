@@ -120,10 +120,6 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	add_mapview_menu(MiniMapType::kStaticMap);
 	add_showhide_menu();
-	// NOCOM add to showhide menu
-	toggle_grid_ = add_toolbar_button("wui/menus/menu_toggle_grid", "grid", _("Show grid (on/off)"));
-	toggle_grid_->set_perm_pressed(true);
-	toggle_grid_->sigclicked.connect([this]() { toggle_grid(); });
 
 	toolbar()->add_space(15);
 
@@ -376,6 +372,11 @@ void EditorInteractive::rebuild_showhide_menu() {
 					  ShowHideEntry::kBuildingSpaces, g_gr->images().get("images/wui/menus/toggle_buildhelp.png"),
 					  false, "", pgettext("hotkey", "Space"));
 
+	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map grid is shown */
+	showhidemenu_.add(draw_grid_ ? _("Hide Grid") : _("Show Grid"),
+					  ShowHideEntry::kGrid, g_gr->images().get("images/wui/menus/menu_toggle_grid.png"),
+					  false, "", "G");
+
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether immovables (trees, rocks etc.) are shown */
 	showhidemenu_.add(draw_immovables_ ? _("Hide Immovables") : _("Show Immovables"), ShowHideEntry::kImmovables,
 					  g_gr->images().get("images/wui/menus/toggle_immovables.png"));
@@ -394,6 +395,9 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 	switch (entry) {
 	case ShowHideEntry::kBuildingSpaces: {
 		toggle_buildhelp();
+	} break;
+	case ShowHideEntry::kGrid: {
+		toggle_grid();
 	} break;
 	case ShowHideEntry::kImmovables: {
 		toggle_immovables();
@@ -680,7 +684,6 @@ void EditorInteractive::toggle_bobs() {
 
 void EditorInteractive::toggle_grid() {
 	draw_grid_ = !draw_grid_;
-	toggle_grid_->set_perm_pressed(draw_grid_);
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {

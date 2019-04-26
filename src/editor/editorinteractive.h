@@ -167,6 +167,7 @@ private:
 	// For referencing the items in showhidemenu_
 	enum class ShowHideEntry {
 		kBuildingSpaces,
+		kGrid,
 		kAnimals,
 		kImmovables,
 		kResources
@@ -234,8 +235,6 @@ private:
 	// Show / Hide menu on the toolbar
 	UI::Dropdown<ShowHideEntry> showhidemenu_;
 
-	// NOCOM add to menu
-	UI::Button* toggle_grid_;
 	UI::Button* undo_;
 	UI::Button* redo_;
 
