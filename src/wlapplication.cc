@@ -997,6 +997,16 @@ void WLApplication::handle_commandline_parameters() {
 		datadir_ = is_absolute_path(INSTALL_DATADIR) ?
 		              INSTALL_DATADIR :
 		              get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
+#ifdef USE_XDG
+		// Overwrite with first folder found in XDG_DATA_DIRS
+		for (const auto& datadir: FileSystem::get_xdgdatadirs()) {
+			RealFSImpl dir(datadir);
+			if (dir.is_directory(datadir + "/widelands")) {
+				datadir_ = datadir + "/widelands";
+				break;
+			}
+		}
+#endif
 	}
 	if (!is_absolute_path(datadir_)) {
 		try {

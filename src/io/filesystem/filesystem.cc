@@ -331,6 +331,33 @@ std::string FileSystem::get_userconfigdir() {
 	// This is handled in 'src/wlapplication.cc'.
 	return userconfigdir;
 }
+
+/**
+ * Return $XDG_DATA_DIRS. Falls back to /usr/local/share:/usr/share
+ * https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+ */
+std::vector<std::string> FileSystem::get_xdgdatadirs() {
+	std::vector<std::string> xdgdatadirs;
+	std::string environment;
+#ifdef HAS_GETENV
+	environment = getenv("XDG_DATA_DIRS");
+#endif
+	if (environment.empty()) {
+		environment = "/usr/local/share:/usr/share";
+	}
+
+	// https://stackoverflow.com/a/14266139
+	std::string token;
+	std::string delimiter = ":";
+	size_t pos = 0;
+	while ((pos = environment.find(delimiter)) != std::string::npos) {
+		token = environment.substr(0, pos);
+		xdgdatadirs.push_back(token);
+		environment.erase(0, pos + delimiter.length());
+	}
+	xdgdatadirs.push_back(environment);
+	return xdgdatadirs;
+}
 #endif
 
 /**

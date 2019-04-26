@@ -137,6 +137,7 @@ public:
 	// https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
 	static std::string get_userdatadir();
 	static std::string get_userconfigdir();
+	static std::vector<std::string> get_xdgdatadirs();
 #endif
 
 	virtual unsigned long long disk_space() = 0;
