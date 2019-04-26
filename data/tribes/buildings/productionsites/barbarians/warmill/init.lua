@@ -87,9 +87,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ax",
             "consume=coal iron",
             "sleep=26000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 22000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax"
          }
@@ -102,9 +102,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ax_sharp",
             "consume=coal iron:2",
             "sleep=26000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 22000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_sharp"
          }
@@ -117,9 +117,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ax_broad",
             "consume=coal:2 iron:2",
             "sleep=26000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 22000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_broad"
          }
@@ -132,9 +132,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ax_bronze",
             "consume=coal:2 iron:2",
             "sleep=26000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 22000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_bronze"
          }
@@ -147,9 +147,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ax_battle",
             "consume=coal gold iron:2",
             "sleep=26000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 22000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_battle"
          }
@@ -162,9 +162,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ax_warriors",
             "consume=coal:2 gold:2 iron:2",
             "sleep=26000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 22000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_warriors"
          }

@@ -53,6 +53,7 @@
 #include "map_io/map_saver.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
+#include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wui/interactive_base.h"
 #include "wui/interactive_gamebase.h"
@@ -78,6 +79,9 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
 
 EditorGameBase::~EditorGameBase() {
 	delete_tempfile();
+	if (g_sh != nullptr) {
+		g_sh->remove_fx_set(SoundType::kAmbient);
+	}
 }
 
 /**

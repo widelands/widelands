@@ -232,8 +232,7 @@ function check_for_ships()
 
    -- Success
    msg_boxes(scenario_won)
-   p1:reveal_scenario("atlanteans01")
-   p1:reveal_campaign("campsect3")
+   p1:mark_scenario_as_solved("atl01.wmf")
 end
 
 
