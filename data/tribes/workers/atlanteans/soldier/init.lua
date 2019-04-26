@@ -222,6 +222,21 @@ all_levels_atl = {
 --
 --    Each animation will be used only for soldiers whose current training matches these limitations.
 --
+--    Walking animations have a special syntax:
+--
+--       walk = {
+--          {
+--             range = {…},
+--             sw = walk_sw,
+--             se = walk_se,
+--             nw = walk_nw,
+--             ne = walk_ne,
+--             w = walk_w,
+--             e = walk_e,
+--          },
+--          …
+--       },
+--
 --    NOTE: You must make sure that each animation type has at least one member for every possible
 --    combination of training levels. Furthermore, there must be one and only one walk animation of
 --    each type and idle animation for each level combination.

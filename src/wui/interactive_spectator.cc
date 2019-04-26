@@ -116,12 +116,12 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 
 	const Widelands::Game& the_game = game();
 	const Widelands::Map& map = the_game.map();
-	auto* fields_to_draw = given_map_view->draw_terrain(the_game, dst);
+	auto* fields_to_draw =
+	   given_map_view->draw_terrain(the_game, get_workarea_overlays(map), false, dst);
 	const float scale = 1.f / given_map_view->view().zoom;
 	const uint32_t gametime = the_game.get_gametime();
 
 	const auto text_to_draw = get_text_to_draw();
-	const std::map<Widelands::Coords, const Image*> workarea_overlays = get_workarea_overlays(map);
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 
@@ -135,13 +135,6 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 		for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 		     bob = bob->get_next_bob()) {
 			bob->draw(the_game, text_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
-		}
-
-		// Draw work area previews.
-		const auto it = workarea_overlays.find(field.fcoords);
-		if (it != workarea_overlays.end()) {
-			const Image* pic = it->second;
-			blit_field_overlay(dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 		}
 
 		// Draw build help.

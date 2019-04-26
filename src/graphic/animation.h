@@ -63,7 +63,7 @@ public:
 
 	/// The size of the animation source images in pixels. Use 'percent_from_bottom' to crop the
 	/// animation.
-	virtual Rectf source_rectangle(int percent_from_bottom) const = 0;
+	virtual Rectf source_rectangle(int percent_from_bottom, float scale) const = 0;
 
 	/// Calculates the destination rectangle for blitting the animation in pixels.
 	/// 'position' is where the top left corner of the animation will end up,
@@ -96,7 +96,8 @@ public:
 	                  const Rectf& source_rect,
 	                  const Rectf& destination_rect,
 	                  const RGBColor* clr,
-	                  Surface* target) const = 0;
+	                  Surface* target,
+	                  float scale) const = 0;
 
 protected:
 	/// Play the sound effect associated with this animation at the given time.

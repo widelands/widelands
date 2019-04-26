@@ -72,7 +72,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      is_painting_(false),
      undo_(nullptr),
      redo_(nullptr),
-     tools_(new Tools()),
+     tools_(new Tools(e.map())),
      history_(nullptr)  // history needs the undo/redo buttons
 {
 	add_toolbar_button("wui/menus/menu_toggle_menu", "menu", _("Main menu"), &mainmenu_, true);
@@ -98,6 +98,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toggle_buildhelp_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show building spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
+	toggle_grid_ = add_toolbar_button("wui/menus/menu_toggle_grid", "grid", _("Show grid (on/off)"));
+	toggle_grid_->set_perm_pressed(true);
+	toggle_grid_->sigclicked.connect([this]() { toggle_grid(); });
 	toggle_immovables_ = add_toolbar_button(
 	   "wui/menus/menu_toggle_immovables", "immovables", _("Show immovables (on/off)"));
 	toggle_immovables_->set_perm_pressed(true);
@@ -262,7 +265,7 @@ bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 
 void EditorInteractive::draw(RenderTarget& dst) {
 	const auto& ebase = egbase();
-	auto* fields_to_draw = map_view()->draw_terrain(ebase, &dst);
+	auto* fields_to_draw = map_view()->draw_terrain(ebase, Workareas(), draw_grid_, &dst);
 
 	const float scale = 1.f / map_view()->view().zoom;
 	const uint32_t gametime = ebase.get_gametime();
@@ -430,6 +433,11 @@ void EditorInteractive::toggle_bobs() {
 	toggle_bobs_->set_perm_pressed(draw_bobs_);
 }
 
+void EditorInteractive::toggle_grid() {
+	draw_grid_ = !draw_grid_;
+	toggle_grid_->set_perm_pressed(draw_grid_);
+}
+
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
@@ -502,6 +510,10 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_SPACE:
 			toggle_buildhelp();
+			return true;
+
+		case SDLK_g:
+			toggle_grid();
 			return true;
 
 		case SDLK_c:
@@ -658,7 +670,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 		undo_->set_enabled(false);
 		redo_->set_enabled(false);
 
-		tools_.reset(new Tools());
+		tools_.reset(new Tools(egbase().map()));
 		select_tool(tools_->info, EditorTool::First);
 		set_sel_radius(0);
 

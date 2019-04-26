@@ -160,7 +160,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                                      bool const multiplayer)
    : InteractiveGameBase(g, global_s, NONE, multiplayer),
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
-     flag_to_connect_(Widelands::Coords::null()) {
+     flag_to_connect_(Widelands::Coords::null()),
+     grid_marker_pic_(g_gr->images().get("images/wui/overlays/grid_marker.png")) {
 	add_toolbar_button(
 	   "wui/menus/menu_options_menu", "options_menu", _("Main menu"), &options_, true);
 	options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
@@ -286,9 +287,9 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	const Widelands::Map& map = gbase.map();
 	const uint32_t gametime = gbase.get_gametime();
 
-	auto* fields_to_draw = given_map_view->draw_terrain(gbase, dst);
+	Workareas workareas = get_workarea_overlays(map);
+	auto* fields_to_draw = given_map_view->draw_terrain(gbase, workareas, false, dst);
 	const auto& road_building = road_building_overlays();
-	const std::map<Widelands::Coords, const Image*> workarea_overlays = get_workarea_overlays(map);
 
 	const float scale = 1.f / given_map_view->view().zoom;
 
@@ -329,13 +330,11 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			}
 		}
 
-		// Draw work area previews.
-		{
-			const auto it = workarea_overlays.find(f->fcoords);
-			if (it != workarea_overlays.end()) {
-				blit_field_overlay(dst, *f, it->second,
-				                   Vector2i(it->second->width() / 2, it->second->height() / 2), scale);
-			}
+		// Draw work area markers.
+		if (has_workarea_preview(f->fcoords, &map)) {
+			blit_field_overlay(dst, *f, grid_marker_pic_,
+			                   Vector2i(grid_marker_pic_->width() / 2, grid_marker_pic_->height() / 2),
+			                   scale);
 		}
 
 		if (f->vision > 0) {
