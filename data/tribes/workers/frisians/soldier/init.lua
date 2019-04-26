@@ -19,7 +19,7 @@ dirname = path.dirname (__file__)
 -- hotspot is at the soldier's feet. That's why all battle hotspots are shifted by 3 pixels.
 --
 -- The above explanation refers only to frisian soldiers. Other tribes's soldiers
--- may follow other conventions described in their appropriate init.lua's.
+-- may follow other conventions described in their respective init.lua's.
 
 animations = {
    -- normal
@@ -522,40 +522,42 @@ tribes:new_soldier_type {
       idle = fri_rookie,
       attack_idle = fri_attack,
    },
-   walk_sw = {
-      health_walk_sw = fri_health,
-      hero_walk_sw = fri_hero,
-      walk_sw = fri_rookie,
-      attack_walk_sw = fri_attack,
-   },
-   walk_nw = {
-      health_walk_nw = fri_health,
-      hero_walk_nw = fri_hero,
-      walk_nw = fri_rookie,
-      attack_walk_nw = fri_attack,
-   },
-   walk_w = {
-      health_walk_w = fri_health,
-      hero_walk_w = fri_hero,
-      walk_w = fri_rookie,
-      attack_walk_w = fri_attack,
-   },
-   walk_se = {
-      health_walk_se = fri_health,
-      hero_walk_se = fri_hero,
-      walk_se = fri_rookie,
-      attack_walk_se = fri_attack,
-   },
-   walk_ne = {
-      health_walk_ne = fri_health,
-      hero_walk_ne = fri_hero,
-      walk_ne = fri_rookie,
-      attack_walk_ne = fri_attack,
-   },
-   walk_e = {
-      health_walk_e = fri_health,
-      hero_walk_e = fri_hero,
-      walk_e = fri_rookie,
-      attack_walk_e = fri_attack,
+   walk = {
+      {
+         range = fri_rookie,
+         sw = walk_sw,
+         se = walk_se,
+         nw = walk_nw,
+         ne = walk_ne,
+         w = walk_w,
+         e = walk_e,
+      },
+      {
+         range = fri_attack,
+         sw = attack_walk_sw,
+         se = attack_walk_se,
+         nw = attack_walk_nw,
+         ne = attack_walk_ne,
+         w = attack_walk_w,
+         e = attack_walk_e,
+      },
+      {
+         range = fri_health,
+         sw = health_walk_sw,
+         se = health_walk_se,
+         nw = health_walk_nw,
+         ne = health_walk_ne,
+         w = health_walk_w,
+         e = health_walk_e,
+      },
+      {
+         range = fri_hero,
+         sw = hero_walk_sw,
+         se = hero_walk_se,
+         nw = hero_walk_nw,
+         ne = hero_walk_ne,
+         w = hero_walk_w,
+         e = hero_walk_e,
+      },
    },
 }

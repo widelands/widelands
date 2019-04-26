@@ -150,6 +150,7 @@ Soldiers
 ^^^^^^^^
 
 Soldiers have the same animations as workers, plus additional non-directional battle animations. There can be multiple animations for each action in battle to be selected at random.
+Each animation for a soldier requires a range of training levels to be specified. An animation will be used only for soldiers within the chosen range. Refer to ` `Tribes.new_soldier_type`` for details on the syntax.
 For example, attacking towards the west can be defined like this::
 
    dirname = path.dirname(__file__)
@@ -170,8 +171,8 @@ For example, attacking towards the west can be defined like this::
    },
 
    attack_success_w = {
-      "atk_ok_w1",
-      "atk_ok_w2"
+      "atk_ok_w1" = levels,
+      "atk_ok_w2" = levels
    },
 
 The battle animations are:

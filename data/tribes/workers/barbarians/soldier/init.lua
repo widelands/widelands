@@ -59,7 +59,7 @@ animations = {
 }
 add_walking_animations(animations, "walk", dirname, "walk", {16, 31}, 10)
 
-l_all = {
+all_levels_bar = {
    min_health = 0,
    min_attack = 0,
    min_defense = 0,
@@ -112,54 +112,47 @@ tribes:new_soldier_type {
 
    -- Random animations for battle
    attack_success_w = {
-      atk_ok_w = l_all,
+      atk_ok_w = all_levels_bar,
    },
    attack_success_e = {
-      atk_ok_e = l_all,
+      atk_ok_e = all_levels_bar,
    },
    attack_failure_w = {
-      atk_fail_w = l_all,
+      atk_fail_w = all_levels_bar,
    },
    attack_failure_e = {
-      atk_fail_e = l_all,
+      atk_fail_e = all_levels_bar,
    },
    evade_success_w = {
-      eva_ok_w = l_all,
+      eva_ok_w = all_levels_bar,
    },
    evade_success_e = {
-      eva_ok_e = l_all,
+      eva_ok_e = all_levels_bar,
    },
    evade_failure_w = {
-      eva_fail_w = l_all,
+      eva_fail_w = all_levels_bar,
    },
    evade_failure_e = {
-      eva_fail_e = l_all,
+      eva_fail_e = all_levels_bar,
    },
    die_w = {
-      die_w = l_all,
+      die_w = all_levels_bar,
    },
    die_e = {
-      die_e = l_all,
+      die_e = all_levels_bar,
    },
    idle = {
-      idle = l_all,
+      idle = all_levels_bar,
    },
-   walk_se = {
-      walk_se = l_all,
-   },
-   walk_ne = {
-      walk_ne = l_all,
-   },
-   walk_e = {
-      walk_e = l_all,
-   },
-   walk_sw = {
-      walk_sw = l_all,
-   },
-   walk_nw = {
-      walk_nw = l_all,
-   },
-   walk_w = {
-      walk_w = l_all,
+   walk = {
+      {
+         range = all_levels_bar,
+         sw = walk_sw,
+         se = walk_se,
+         nw = walk_nw,
+         ne = walk_ne,
+         w = walk_w,
+         e = walk_e,
+      },
    },
 }

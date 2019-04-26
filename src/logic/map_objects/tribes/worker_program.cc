@@ -576,7 +576,10 @@ void WorkerProgram::parse_animate(Worker::Action* act, const std::vector<std::st
 	}
 
 	act->function = &Worker::run_animate;
-	act->iparam1 = worker_.get_animation(cmd[1]);
+	// If the second parameter to MapObjectDescr::get_animation is ever used for anything other than
+	// level-dependent soldier animations, or we want to write a worker program for a soldier,
+	// we will need to store the animation name as a string in an iparam
+	act->iparam1 = worker_.get_animation(cmd[1], nullptr);
 
 	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
 	if (*endp)

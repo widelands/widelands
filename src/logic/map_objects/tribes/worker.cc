@@ -3000,7 +3000,7 @@ void Worker::draw_inner(const EditorGameBase& game,
 		const Vector2f location(
 		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
 		dst->blit_animation(location, Widelands::Coords::null(), scale,
-		                    carried_ware->descr().get_animation("idle"), 0, &player_color);
+		                    carried_ware->descr().get_animation("idle", this), 0, &player_color);
 	}
 }
 

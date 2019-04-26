@@ -86,9 +86,7 @@ public:
 			default_target_quantity_ = 1;
 	}
 
-	// TODO(Nordfriese): remove the default value; every call to this method should pass the appropriate Worker*
-	// NOCOM(codereview) Take care of it in this branch
-	virtual const DirAnimations& get_right_walk_anims(bool const carries_ware, const Worker* = nullptr) const {
+	virtual const DirAnimations& get_right_walk_anims(bool const carries_ware, const Worker*) const {
 		return carries_ware ? walkload_anims_ : walk_anims_;
 	}
 	WorkerProgram const* get_program(const std::string&) const;

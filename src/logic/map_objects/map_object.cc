@@ -247,7 +247,7 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 			   "Map object %s has animations but no idle animation", init_name.c_str());
 		}
 		representative_image_filename_ =
-		   g_gr->animations().get_animation(get_animation("idle")).representative_image_filename();
+		   g_gr->animations().get_animation(get_animation("idle", nullptr)).representative_image_filename();
 	}
 	if (table.has_key("icon")) {
 		icon_filename_ = table.get_string("icon");
@@ -289,7 +289,7 @@ void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		const std::string anim_name = prefix + std::string("_") + dirstrings[dir - 1];
 		try {
-			anims->set_animation(dir, get_animation(anim_name));
+			anims->set_animation(dir, get_animation(anim_name, nullptr));
 		} catch (const GameDataError& e) {
 			throw GameDataError("MO: Missing directional animation: %s", e.what());
 		}
@@ -319,7 +319,7 @@ std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 
 const Image* MapObjectDescr::representative_image(const RGBColor* player_color) const {
 	if (is_animation_known("idle")) {
-		return g_gr->animations().get_representative_image(get_animation("idle"), player_color);
+		return g_gr->animations().get_representative_image(get_animation("idle", nullptr), player_color);
 	}
 	return nullptr;
 }

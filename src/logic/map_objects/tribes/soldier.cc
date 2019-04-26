@@ -61,18 +61,29 @@ namespace {
 constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 }  // namespace
 
-SoldierLevelRange::SoldierLevelRange(std::unique_ptr<LuaTable> t) {
-	min_health = t->get_int("min_health");
-	min_attack = t->get_int("min_attack");
-	min_defense = t->get_int("min_defense");
-	min_evade = t->get_int("min_evade");
-	max_health = t->get_int("max_health");
-	max_attack = t->get_int("max_attack");
-	max_defense = t->get_int("max_defense");
-	max_evade = t->get_int("max_evade");
+SoldierLevelRange::SoldierLevelRange()
+	: min_health(-1),
+	  min_attack(-1),
+	  min_defense(-1),
+	  min_evade(-1),
+	  max_health(-1),
+	  max_attack(-1),
+	  max_defense(-1),
+	  max_evade(-1) {
 }
 
-bool SoldierLevelRange::matches(uint32_t health, uint32_t attack, uint32_t defense, uint32_t evade) const {
+SoldierLevelRange::SoldierLevelRange(const LuaTable& t) {
+	min_health = t.get_int("min_health");
+	min_attack = t.get_int("min_attack");
+	min_defense = t.get_int("min_defense");
+	min_evade = t.get_int("min_evade");
+	max_health = t.get_int("max_health");
+	max_attack = t.get_int("max_attack");
+	max_defense = t.get_int("max_defense");
+	max_evade = t.get_int("max_evade");
+}
+
+bool SoldierLevelRange::matches(int32_t health, int32_t attack, int32_t defense, int32_t evade) const {
 	return (health >= min_health && health <= max_health &&
 			attack >= min_attack && attack <= max_attack &&
 			defense >= min_defense && defense <= max_defense &&
@@ -117,12 +128,40 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 
 	// per-level walking and idle animations
 	add_battle_animation(table.get_table("idle"), &idle_name_);
-	add_battle_animation(table.get_table("walk_ne"), &walk_ne_name_);
-	add_battle_animation(table.get_table("walk_e"), &walk_e_name_);
-	add_battle_animation(table.get_table("walk_se"), &walk_se_name_);
-	add_battle_animation(table.get_table("walk_sw"), &walk_sw_name_);
-	add_battle_animation(table.get_table("walk_w"), &walk_w_name_);
-	add_battle_animation(table.get_table("walk_nw"), &walk_nw_name_);
+	{
+		std::unique_ptr<LuaTable> walk_table = table.get_table("walk");
+		for (const auto& entry : walk_table->keys<int>()) {
+			std::unique_ptr<LuaTable> range_table = walk_table->get_table(entry);
+			// I would prefer to use the SoldierLevelRange as key in the table,
+			// but LuaTable can handle only string keys :(
+			SoldierLevelRange range(*range_table->get_table("range"));
+			for (const std::string& dir_name : range_table->keys<std::string>()) {
+				uint8_t dir;
+				if (dir_name == "range") {
+					continue;
+				} else if (dir_name == "sw") {
+					dir = WALK_SW;
+				} else if (dir_name == "se") {
+					dir = WALK_SE;
+				} else if (dir_name == "nw") {
+					dir = WALK_NW;
+				} else if (dir_name == "ne") {
+					dir = WALK_NE;
+				} else if (dir_name == "e") {
+					dir = WALK_E;
+				} else if (dir_name == "w") {
+					dir = WALK_W;
+				} else {
+					throw GameDataError("Invalid walking direction: %s", dir_name.c_str());
+				}
+				const std::string anim_name = range_table->get_string(dir_name);
+				if (!is_animation_known(anim_name)) {
+					throw GameDataError("Trying to add unknown soldier walking animation: %s", anim_name.c_str());
+				}
+				walk_name_[range][dir] = anim_name;
+			}
+		}
+	}
 }
 
 SoldierDescr::BattleAttribute::BattleAttribute(std::unique_ptr<LuaTable> table) {
@@ -214,10 +253,11 @@ uint32_t SoldierDescr::get_rand_anim(Game& game, const std::string& animation_na
 
 uint32_t SoldierDescr::get_animation(const std::string& anim, const MapObject* mo) const {
 	const Soldier* soldier = dynamic_cast<const Soldier*>(mo);
-	if (!soldier || anim == "idle") {
+	if (!soldier || anim != "idle") {
 		// We only need to check for a level-dependent idle animation.
 		// The walking anims can also be level-dependent,
 		// but that is taken care of by get_right_walk_anims().
+		// For battle animations, the level is already taken into account by the random selector.
 		return WorkerDescr::get_animation(anim, mo);
 	}
 	for (const std::pair<std::string, SoldierLevelRange>& pair : idle_name_) {
@@ -236,45 +276,15 @@ const DirAnimations& SoldierDescr::get_right_walk_anims(bool const ware, const W
 		return WorkerDescr::get_right_walk_anims(ware, worker);
 	}
 	DirAnimations* anim = new DirAnimations();
-	// NOCOM(#codereview) this is a lot of iteration. Can we have a container that has SoldierLevelRange as a key and then contains the animation types?
-	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_ne_name_) {
-		if (pair.second.matches(soldier)) {
-			anim->set_animation(WALK_NE, get_animation(pair.first, worker));
-			break;
+	for (const auto& pair : walk_name_) {
+		if (pair.first.matches(soldier)) {
+			for (uint8_t dir = 1; dir <= 6; ++dir) {
+				anim->set_animation(dir, get_animation(pair.second.at(dir), worker));
+			}
+			return *anim;
 		}
 	}
-	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_e_name_) {
-		if (pair.second.matches(soldier)) {
-			anim->set_animation(WALK_E, get_animation(pair.first, worker));
-			break;
-		}
-	}
-	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_se_name_) {
-		if (pair.second.matches(soldier)) {
-			anim->set_animation(WALK_SE, get_animation(pair.first, worker));
-			break;
-		}
-	}
-	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_sw_name_) {
-		if (pair.second.matches(soldier)) {
-			anim->set_animation(WALK_SW, get_animation(pair.first, worker));
-			break;
-		}
-	}
-	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_w_name_) {
-		if (pair.second.matches(soldier)) {
-			anim->set_animation(WALK_W, get_animation(pair.first, worker));
-			break;
-		}
-	}
-	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_nw_name_) {
-		if (pair.second.matches(soldier)) {
-			anim->set_animation(WALK_NW, get_animation(pair.first, worker));
-			break;
-		}
-	}
-
-	return *anim;
+	throw wexception("Soldier %s does not have walking animations for his level!", name().c_str());
 }
 
 /**
@@ -289,7 +299,7 @@ void SoldierDescr::add_battle_animation(std::unique_ptr<LuaTable> table, Soldier
 		if (!is_animation_known(anim_name)) {
 			throw GameDataError("Trying to add unknown battle animation: %s", anim_name.c_str());
 		}
-		result->emplace(anim_name, SoldierLevelRange(table->get_table(anim_name)));
+		result->emplace(anim_name, SoldierLevelRange(*table->get_table(anim_name)));
 	}
 }
 
