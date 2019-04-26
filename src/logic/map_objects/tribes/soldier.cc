@@ -134,10 +134,12 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 			std::unique_ptr<LuaTable> range_table = walk_table->get_table(entry);
 			// I would prefer to use the SoldierLevelRange as key in the table,
 			// but LuaTable can handle only string keys :(
-			SoldierLevelRange range(*range_table->get_table("range"));
+			SoldierLevelRange range;
+			std::map<uint8_t, std::string> map;
 			for (const std::string& dir_name : range_table->keys<std::string>()) {
 				uint8_t dir;
 				if (dir_name == "range") {
+					range = SoldierLevelRange(*range_table->get_table(dir_name));
 					continue;
 				} else if (dir_name == "sw") {
 					dir = WALK_SW;
@@ -158,8 +160,9 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 				if (!is_animation_known(anim_name)) {
 					throw GameDataError("Trying to add unknown soldier walking animation: %s", anim_name.c_str());
 				}
-				walk_name_[range][dir] = anim_name;
+				map.emplace(dir, anim_name);
 			}
+			walk_name_.emplace(range, map);
 		}
 	}
 }
@@ -284,7 +287,7 @@ const DirAnimations& SoldierDescr::get_right_walk_anims(bool const ware, const W
 			return *anim;
 		}
 	}
-	throw wexception("Soldier %s does not have walking animations for his level!", name().c_str());
+	throw GameDataError("Soldier %s does not have walking animations for his level!", name().c_str());
 }
 
 /**

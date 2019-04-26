@@ -227,12 +227,12 @@ all_levels_atl = {
 --       walk = {
 --          {
 --             range = {…},
---             sw = walk_sw,
---             se = walk_se,
---             nw = walk_nw,
---             ne = walk_ne,
---             w = walk_w,
---             e = walk_e,
+--             sw = "walk_sw",
+--             se = "walk_se",
+--             nw = "walk_nw",
+--             ne = "walk_ne",
+--             w = "walk_w",
+--             e = "walk_e",
 --          },
 --          …
 --       },
@@ -321,12 +321,12 @@ tribes:new_soldier_type {
    walk = {
       {
          range = all_levels_atl,
-         sw = walk_sw,
-         se = walk_se,
-         nw = walk_nw,
-         ne = walk_ne,
-         w = walk_w,
-         e = walk_e,
+         sw = "walk_sw",
+         se = "walk_se",
+         nw = "walk_nw",
+         ne = "walk_ne",
+         w = "walk_w",
+         e = "walk_e",
       },
    },
 }

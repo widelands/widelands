@@ -348,9 +348,9 @@ animations = {
    },
 }
 add_walking_animations (animations, "walk", dirname, "rookie/walk", {7, 24}, 15)
-add_walking_animations (animations, "h_walk", dirname, "helm/walk", {7, 25}, 15)
-add_walking_animations (animations, "s_walk", dirname, "sword/walk", {8, 24}, 15)
-add_walking_animations (animations, "sh_walk", dirname, "hero/walk", {8, 25}, 15)
+add_walking_animations (animations, "health_walk", dirname, "helm/walk", {7, 25}, 15)
+add_walking_animations (animations, "attack_walk", dirname, "sword/walk", {8, 24}, 15)
+add_walking_animations (animations, "hero_walk", dirname, "hero/walk", {8, 25}, 15)
 
 -- convenience definitions so we don´t have to repeat this table for every single entry below
 fri_health = {
@@ -525,39 +525,39 @@ tribes:new_soldier_type {
    walk = {
       {
          range = fri_rookie,
-         sw = walk_sw,
-         se = walk_se,
-         nw = walk_nw,
-         ne = walk_ne,
-         w = walk_w,
-         e = walk_e,
+         sw = "walk_sw",
+         se = "walk_se",
+         nw = "walk_nw",
+         ne = "walk_ne",
+         w = "walk_w",
+         e = "walk_e",
       },
       {
          range = fri_attack,
-         sw = attack_walk_sw,
-         se = attack_walk_se,
-         nw = attack_walk_nw,
-         ne = attack_walk_ne,
-         w = attack_walk_w,
-         e = attack_walk_e,
+         sw = "attack_walk_sw",
+         se = "attack_walk_se",
+         nw = "attack_walk_nw",
+         ne = "attack_walk_ne",
+         w = "attack_walk_w",
+         e = "attack_walk_e",
       },
       {
          range = fri_health,
-         sw = health_walk_sw,
-         se = health_walk_se,
-         nw = health_walk_nw,
-         ne = health_walk_ne,
-         w = health_walk_w,
-         e = health_walk_e,
+         sw = "health_walk_sw",
+         se = "health_walk_se",
+         nw = "health_walk_nw",
+         ne = "health_walk_ne",
+         w = "health_walk_w",
+         e = "health_walk_e",
       },
       {
          range = fri_hero,
-         sw = hero_walk_sw,
-         se = hero_walk_se,
-         nw = hero_walk_nw,
-         ne = hero_walk_ne,
-         w = hero_walk_w,
-         e = hero_walk_e,
+         sw = "hero_walk_sw",
+         se = "hero_walk_se",
+         nw = "hero_walk_nw",
+         ne = "hero_walk_ne",
+         w = "hero_walk_w",
+         e = "hero_walk_e",
       },
    },
 }

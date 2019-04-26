@@ -147,12 +147,12 @@ tribes:new_soldier_type {
    walk = {
       {
          range = all_levels_bar,
-         sw = walk_sw,
-         se = walk_se,
-         nw = walk_nw,
-         ne = walk_ne,
-         w = walk_w,
-         e = walk_e,
+         sw = "walk_sw",
+         se = "walk_se",
+         nw = "walk_nw",
+         ne = "walk_ne",
+         w = "walk_w",
+         e = "walk_e",
       },
    },
 }
