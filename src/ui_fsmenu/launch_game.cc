@@ -93,11 +93,11 @@ void FullscreenMenuLaunchGame::update_peaceful_mode() {
 		peaceful_.set_state(false);
 	}
 	if (settings_->settings().scenario) {
-		peaceful_.set_tooltip(_("The relations between players are set by the scenario."));
+		peaceful_.set_tooltip(_("The relations between players are set by the scenario"));
 	} else if (settings_->settings().savegame) {
-		peaceful_.set_tooltip(_("The game is a saved game – whether the peaceful mode is used was decided before."));
+		peaceful_.set_tooltip(_("The relations between players are set by the saved game"));
 	} else if (peaceful_mode_forbidden_) {
-		peaceful_.set_tooltip(_("The selected win condition does not allow peaceful matches."));
+		peaceful_.set_tooltip(_("The selected win condition does not allow peaceful matches"));
 	} else {
 		peaceful_.set_tooltip(_("Forbid fighting between players"));
 	}
