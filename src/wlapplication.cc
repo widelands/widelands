@@ -897,7 +897,7 @@ void WLApplication::shutdown_settings() {
 
 	try {  //  overwrite the old config file
 #ifdef USE_XDG
-        RealFSImpl userconfigdir(userconfigdir_);
+		RealFSImpl userconfigdir(userconfigdir_);
 		g_options.write(kConfigFile.c_str(), true, userconfigdir);
 #else
 		g_options.write(kConfigFile.c_str(), true);
