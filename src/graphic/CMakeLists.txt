@@ -225,12 +225,16 @@ wl_library(graphic_fields_to_draw
 
 wl_library(graphic_terrain_programs
   SRCS
+    gl/grid_program.cc
+    gl/grid_program.h
     gl/road_program.cc
     gl/road_program.h
     gl/terrain_program.cc
     gl/terrain_program.h
     gl/dither_program.cc
     gl/dither_program.h
+    gl/workarea_program.cc
+    gl/workarea_program.h
   DEPENDS
     base_exceptions
     base_geometry
@@ -334,6 +338,8 @@ wl_library(graphic
     io_filesystem
     io_stream
     logic_constants
+    logic_exceptions
+    logic_widelands_geometry
     note_sound
     notifications
     scripting_lua_interface

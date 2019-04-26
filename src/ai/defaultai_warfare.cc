@@ -266,7 +266,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[3] = (is_warehouse) ? 2 : 0;
 				inputs[4] = (site->second.attack_soldiers_competency > 15) ? 2 : 0;
 				inputs[5] = (site->second.attack_soldiers_competency > 25) ? 4 : 0;
-				;
 				inputs[6] =
 				   (2 * site->second.defenders_strength > 3 * site->second.attack_soldiers_strength) ?
 				      2 :

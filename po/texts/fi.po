@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-01 12:45+0000\n"
-"PO-Revision-Date: 2019-03-02 20:29+0000\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-03-30 17:05+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -244,7 +244,7 @@ msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Flatpak"
-msgstr ""
+msgstr "Flatpak"
 
 #: ../../data/txts/developers.lua:3
 msgid "Former Elders"
@@ -328,7 +328,7 @@ msgstr "ja paljon monia muita (kiitos kaikesta mitä olette tehneet)"
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
-msgstr ""
+msgstr "vacant"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"

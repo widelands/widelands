@@ -87,7 +87,8 @@ private:
 	void increase_max_fill_clicked();
 	void radiogroup_changed(int32_t);
 	void radiogroup_clicked();
-	void update_siblings(int32_t);
+	void update_siblings_priority(int32_t);
+	void update_siblings_fill(int32_t);
 
 	void compute_max_fill_buttons_enabled_state();
 };

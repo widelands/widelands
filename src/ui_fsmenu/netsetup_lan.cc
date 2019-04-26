@@ -207,7 +207,7 @@ void FullscreenMenuNetSetupLAN::update_game_info(
 		/** TRANSLATORS: The state of a LAN game can be open, closed or unknown */
 		er.set_string(2, pgettext("game_state", "Unknown"));
 		break;
-	};
+	}
 }
 
 void FullscreenMenuNetSetupLAN::game_opened(const NetOpenGame* game) {

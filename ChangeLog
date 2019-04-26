@@ -1,4 +1,4 @@
-## Post Build 19 until bzr9007
+## Build 20-rc1
 
 ### Animations, Icons and Overlays
 
@@ -116,6 +116,7 @@
   - Fixed bug in Crossing the Horizon map where an artifact couldn't be
     conquered by a player
   - Fixed desyncs in Smugglers scenario
+  - Allow random player tribes in scenarios
 
 
 ### Saveloading
@@ -152,6 +153,9 @@
   - Remove superfluous "postload" call from replay
   - Added validity checks for S2 map headers to avoid crashes when preloading
     invalid S2 map files
+  - Shift calculation of map fields relevant to win conditions from Lua to C++.
+    This gives us a huge performance boost during saveloading those win
+    conditions.
   - Fixed bug #1678987: Endless autosave cycles when a save takes longer than
                         the autosave interval, and inefficient statistics saving
   - Fixed bug #1746270: Unable to rename rolling autosave
@@ -268,6 +272,8 @@
   - Reset economy serial in Game constructor. This fixes desyncs in replays.
   - Stop ware dropoff when the target building has been destroyed. This fixes a
     crash when the enemy conquers a militarysite near a warehouse.
+  - Cancel Worker::fetchfromflag when the building is destroyed/dismantled/
+    enhanced to prevent crashes
   - Fixed bug  #963799: shortsighted shipwright (ship in pond)
   - Fixed bug #1611323: ships can be built in non-floating spaces (shipyard)
   - Fixed bug #1636966: Segfault in battle
@@ -445,6 +451,7 @@
     built
   - Documented metaserver command line options
   - Added lua_path.cc to the documentation
+  - Add tribe-specific ware purpose texts to web encyclopedia
   - Fixed bug #1792297: Advanced buildings report wrong worker experience in the
     encyclopedia
 
@@ -464,6 +471,9 @@
   - Map Editors now can choose "Random" tribe in the player menu
   - Converted editor infotool to new font renderer and added some layout tweaks
   - Enable OK button in map options when tags have changed.
+  - Use temporary container in cleanup_port_spaces to prevent invalid iterators
+  - Limited the editor undo stack to 500 items to prevent boundless growth of
+    memory use
   - Fixed bug #1627537: Release mouse button does not work when placing things
                         and mouse gets under a window
   - Fixed bug #1738641: Resources can be replaced only once in editor
@@ -549,7 +559,7 @@
 
   - Windows builds now have a unique app id for every build. This allows
     parallel installation of several versions.
-  - Added support for gcc7.
+  - Added support for gcc7 and llvm8.
   - Removed "redundant-decls" flag for Windows builds due to conflict between
     SDL and MinGW.
   - New Macro FALLS_THROUGH; for use in switch statements.
@@ -580,6 +590,8 @@
       the SDK10.7 is installed or not and uses the latest installed version if
       it cannot find the old one.
     - Choose between compiler clang or gcc, specify build type: debug or release
+    - Set build target to 10.9 if macOS 10.9 or newer is found
+    - Append macOS target version to dmg filename
   - Fixes for Debian-based software centers:
     - Add stock icon to appdata.xml
       (c.f. https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=857644)
@@ -631,6 +643,8 @@
   - Refactor website binaries to use a real tree data structure for writing JSON
   - Print more information in syncstreams. Create additional smaller syncstream
     files containing the last few seconds leading to a desync.
+  - Added a suppressions file for Valgrind to mask memory errors caused by
+    backend libraries
   - Fixed bug #1648178: Fatal Exception: Bad Cast
   - Fixed bug #1743086: ASAN memcopy overlap on Ubuntu Budgie from libSDL
                         2.0.6+dfsg1 by disabling sound as a workaround to a bug

@@ -15,6 +15,7 @@ local wc_name = "Artifacts"
 local wc_descname = _("Artifacts")
 local wc_version = 1
 local wc_desc = _ "Search for ancient artifacts. Once all of them are found, the team who owns most of them will win the game."
+local wc_artifacts = _"Artifacts owned"
 
 -- Table of all artifacts to conquer
 local artifact_fields = {}
@@ -51,7 +52,22 @@ return {
          end
       end
 
+      local artifacts_owner = {}
       local plrs = wl.Game().players
+
+      -- statistic variables and functions
+      -- initializing artifacts owned table
+      local artifacts_per_player = {}
+      -- funtion to calculate actual number of owned artifacts per player
+      local function _calcowned()
+         for idx, plr in ipairs(wl.Game().players) do
+            artifacts_per_player[plr.number] = 0
+         end
+         for idx, plr in pairs(artifacts_owner) do
+         artifacts_per_player[plr.number] = artifacts_per_player[plr.number] + 1
+         end
+      end
+
       if #artifact_fields == 0 then
          for idx, plr in ipairs(plrs) do
             send_message(plr, _"No Artifacts", p(_"There are no artifacts on this map. This should not happen. Please file a bug report on %s and specify your Widelands version and the map you tried to load."):bformat("https://wl.widelands.org/wiki/ReportingBugs/"), {popup = true})
@@ -87,10 +103,21 @@ return {
          end
       end
 
+
+      -- Install statistics hook
+      hooks.custom_statistic = {
+         name = wc_artifacts,
+         pic = "images/wui/stats/genstats_artifacts.png",
+         calculator = function(p)
+            _calcowned(p)
+            return artifacts_per_player[p.number] or 0
+         end,
+      }
+
       -- Iterate all players, if one is defeated, remove him
       -- from the list, send him a defeated message and give him full vision
       -- Check if all artifacts have been found (i.e. controlled by a player)
-      local artifacts_owner = {}
+
       repeat
          sleep(1000)
          check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
@@ -116,7 +143,7 @@ return {
 
       -- All artifacts are found, the game is over.
       local artifacts_per_team = {}
-      for idx, plr in ipairs(plrs) do
+      for idx, plr in ipairs(wl.Game().players) do
          artifacts_per_team[_getkey(plr)] = 0
       end
 
@@ -165,7 +192,6 @@ return {
          msg = msg .. p((_"Team %1$i (%2$s) owns %3$s."):bformat(t[1].team, members, artifacts))
       end
 
-
       for idx, plr in ipairs(plrs) do
          local key = _getkey(plr)
          -- If two or more teams have the same amount of artifacts, they are all considered winners.
@@ -178,4 +204,5 @@ return {
          end
       end
    end,
+
 }

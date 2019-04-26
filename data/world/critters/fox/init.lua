@@ -5,8 +5,7 @@ animations = {
       pictures = path.list_files(dirname .. "idle_??.png"),
       sound_effect = {
          -- Sound files with numbers starting for 10 are generating silence. Remove when we move the sound triggering to programs
-         directory = "sound/animals",
-         name = "coyote",
+         path = "sound/animals/coyote",
       },
       hotspot = { 10, 13 },
       fps = 10,
