@@ -1,3 +1,13 @@
+wl_library(wui_sound_options
+  SRCS
+    sound_options.cc
+    sound_options.h
+  DEPENDS
+    base_i18n
+    sound
+    ui_basic
+)
+
 wl_library(wui_chat_ui
   SRCS
     chat_overlay.cc
@@ -20,6 +30,7 @@ wl_library(wui_chat_ui
     graphic_text_layout
     logic
     profile
+    sound
     ui_basic
     wui
 )
@@ -89,6 +100,7 @@ wl_library(wui_common_gamedetails
 
 wl_library(wui_common_mapdetails
   SRCS
+    mapauthordata.h
     mapdetails.cc
     mapdetails.h
     mapdata.cc
@@ -104,6 +116,7 @@ wl_library(wui_common_mapdetails
     graphic
     graphic_fonthandler
     graphic_text_constants
+    graphic_text_layout
     io_filesystem
     logic
     logic_constants
@@ -268,6 +281,7 @@ wl_library(wui
     base_i18n
     base_log
     base_macros
+    base_math
     base_time_string
     chat
     economy
@@ -310,5 +324,6 @@ wl_library(wui
     wui_mapview
     wui_mapview_pixelfunctions
     wui_quicknavigation
+    wui_sound_options
     wui_waresdisplay
 )

@@ -37,6 +37,7 @@
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "scripting/lua_table.h"
+#include "sound/constants.h"
 
 namespace Widelands {
 
@@ -504,7 +505,7 @@ struct ProductionProgram {
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
-		std::string name;
+		FxId fx;
 		uint8_t priority;
 	};
 

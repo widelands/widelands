@@ -759,6 +759,7 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 void Bob::draw(const EditorGameBase& egbase,
                const TextToDraw&,
                const Vector2f& field_on_dst,
+               const Widelands::Coords& coords,
                const float scale,
                RenderTarget* dst) const {
 	if (!anim_) {
@@ -767,12 +768,8 @@ void Bob::draw(const EditorGameBase& egbase,
 
 	auto* const bob_owner = get_owner();
 	const Vector2f point_on_dst = calc_drawpos(egbase, field_on_dst, scale);
-	if (bob_owner != nullptr) {
-		dst->blit_animation(point_on_dst, scale, anim_, egbase.get_gametime() - animstart_,
-		                    bob_owner->get_playercolor());
-	} else {
-		dst->blit_animation(point_on_dst, scale, anim_, egbase.get_gametime() - animstart_);
-	}
+	dst->blit_animation(point_on_dst, coords, scale, anim_, egbase.get_gametime() - animstart_,
+	                    (bob_owner == nullptr) ? nullptr : &bob_owner->get_playercolor());
 }
 
 /**

@@ -23,8 +23,8 @@
 #include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/listselect.h"
-#include "ui_basic/spinbox.h"
 #include "ui_basic/window.h"
 
 class EditorInteractive;
@@ -46,8 +46,8 @@ private:
 	int32_t margin_;
 	int32_t box_width_;
 	UI::Box box_;
-	UI::SpinBox width_;
-	UI::SpinBox height_;
+	UI::Dropdown<int32_t> width_;
+	UI::Dropdown<int32_t> height_;
 
 	// Terrains list
 	UI::Listselect<Widelands::DescriptionIndex> list_;

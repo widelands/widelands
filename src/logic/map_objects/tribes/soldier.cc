@@ -441,7 +441,8 @@ Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
 void Soldier::draw(const EditorGameBase& game,
                    const TextToDraw&,
                    const Vector2f& field_on_dst,
-                   const float scale,
+                   const Coords& coords,
+                   float scale,
                    RenderTarget* dst) const {
 	const uint32_t anim = get_current_anim();
 	if (!anim) {
@@ -453,7 +454,7 @@ void Soldier::draw(const EditorGameBase& game,
 	   point_on_dst.cast<int>() -
 	      Vector2i(0, (g_gr->animations().get_animation(get_current_anim()).height() - 7) * scale),
 	   scale, true, dst);
-	draw_inner(game, point_on_dst, scale, dst);
+	draw_inner(game, point_on_dst, coords, scale, dst);
 }
 
 /**

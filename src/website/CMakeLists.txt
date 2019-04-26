@@ -10,7 +10,6 @@ wl_library(website_common
     base_i18n
     graphic
     io_filesystem
-    sound
 )
 
 

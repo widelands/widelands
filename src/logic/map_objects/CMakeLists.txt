@@ -143,6 +143,7 @@ wl_library(logic_map_objects
     notifications
     scripting_lua_interface
     scripting_lua_table
+    sound_constants
     sound
     ui_basic
     wui_mapview_pixelfunctions
