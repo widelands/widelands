@@ -55,10 +55,10 @@
 namespace Widelands {
 
 FieldData::FieldData(const Field& field)
-		: height(field.get_height()),
-		resources(field.get_resources()),
-		resource_amount(field.get_initial_res_amount()),
-		terrains(field.get_terrains()) {
+   : height(field.get_height()),
+     resources(field.get_resources()),
+     resource_amount(field.get_initial_res_amount()),
+     terrains(field.get_terrains()) {
 	if (const BaseImmovable* imm = field.get_immovable()) {
 		immovable = imm->descr().name();
 	} else {
@@ -472,7 +472,8 @@ void Map::create_empty_map(const World& world,
 }
 
 // Made this a separate function to reduce compiler warnings
-template <typename T = Field> static inline void clear_array(std::unique_ptr<T[]>* array, uint32_t size) {
+template <typename T = Field>
+static inline void clear_array(std::unique_ptr<T[]>* array, uint32_t size) {
 	memset(array->get(), 0, sizeof(T) * size);
 }
 
@@ -545,10 +546,15 @@ void Map::set_origin(const Coords& new_origin) {
 }
 
 /* Helper function for resize():
- * Calculates the coords of 'c' after resizing the map from the given old size to the given new size at 'split'.
+ * Calculates the coords of 'c' after resizing the map from the given old size to the given new size
+ * at 'split'.
  */
-static Coords transform_coords(const Coords& c, const Coords& split,
-		int16_t w_new, int16_t h_new, int16_t w_old, int16_t h_old) {
+static Coords transform_coords(const Coords& c,
+                               const Coords& split,
+                               int16_t w_new,
+                               int16_t h_new,
+                               int16_t w_old,
+                               int16_t h_old) {
 	const int16_t delta_w = w_new - w_old;
 	const int16_t delta_h = h_new - h_old;
 	if (c.x < split.x && c.y < split.y) {
@@ -557,7 +563,7 @@ static Coords transform_coords(const Coords& c, const Coords& split,
 		Map::normalize_coords(result, w_new, h_new);
 		return result;
 	} else if ((w_new < w_old && c.x >= split.x && c.x < split.x - delta_w) ||
-			(h_new < h_old && c.y >= split.y && c.y < split.y - delta_h)) {
+	           (h_new < h_old && c.y >= split.y && c.y < split.y - delta_h)) {
 		// Field removed
 		return Coords::null();
 	}
@@ -572,14 +578,15 @@ static Coords transform_coords(const Coords& c, const Coords& split,
 	return result;
 }
 
-/* Change the size of the (already initialized) map to 'w'×'h' by inserting/deleting fields south and east of 'split'.
- * Returns the data of fields that were deleted during resizing.
- * This function will notify all players of the change in map size, but not of anything else. This is because
- * the editor may want to do some post-resize cleanup first, and this function is intended to be used only
- * by the editor anyway.
- * You should call recalc_whole_map() afterwards to resolve height differences etc.
+/* Change the size of the (already initialized) map to 'w'×'h' by inserting/deleting fields south
+ * and east of 'split'. Returns the data of fields that were deleted during resizing. This function
+ * will notify all players of the change in map size, but not of anything else. This is because the
+ * editor may want to do some post-resize cleanup first, and this function is intended to be used
+ * only by the editor anyway. You should call recalc_whole_map() afterwards to resolve height
+ * differences etc.
  */
-std::map<Coords, FieldData> Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {
+std::map<Coords, FieldData>
+Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {
 	assert(w > 0);
 	assert(h > 0);
 
@@ -597,7 +604,8 @@ std::map<Coords, FieldData> Map::resize(EditorGameBase& egbase, const Coords spl
 	// Take care of starting positions and port spaces
 	for (uint8_t i = get_nrplayers(); i > 0; --i) {
 		if (starting_pos_[i - 1]) {
-			starting_pos_[i - 1] = transform_coords(starting_pos_[i - 1], split, w, h, width_, height_);
+			starting_pos_[i - 1] =
+			   transform_coords(starting_pos_[i - 1], split, w, h, width_, height_);
 		}
 	}
 
@@ -657,7 +665,8 @@ std::map<Coords, FieldData> Map::resize(EditorGameBase& egbase, const Coords spl
 	for (size_t ind = 0; ind < field_size; ++ind) {
 		fields_[ind] = new_fields[ind];
 	}
-	log("Resized map from (%d, %d) to (%u, %u) at (%d, %d)\n", width_, height_, w, h, split.x, split.y);
+	log("Resized map from (%d, %d) to (%u, %u) at (%d, %d)\n", width_, height_, w, h, split.x,
+	    split.y);
 	width_ = w;
 	height_ = h;
 

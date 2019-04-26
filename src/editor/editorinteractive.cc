@@ -120,6 +120,10 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	add_mapview_menu(MiniMapType::kStaticMap);
 	add_showhide_menu();
+	// NOCOM add to showhide menu
+	toggle_grid_ = add_toolbar_button("wui/menus/menu_toggle_grid", "grid", _("Show grid (on/off)"));
+	toggle_grid_->set_perm_pressed(true);
+	toggle_grid_->sigclicked.connect([this]() { toggle_grid(); });
 
 	toolbar()->add_space(15);
 
@@ -513,7 +517,7 @@ bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 
 void EditorInteractive::draw(RenderTarget& dst) {
 	const auto& ebase = egbase();
-	auto* fields_to_draw = map_view()->draw_terrain(ebase, &dst);
+	auto* fields_to_draw = map_view()->draw_terrain(ebase, Workareas(), draw_grid_, &dst);
 
 	const float scale = 1.f / map_view()->view().zoom;
 	const uint32_t gametime = ebase.get_gametime();
@@ -551,14 +555,16 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		if (draw_immovables_) {
 			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 			if (imm != nullptr && imm->get_positions(ebase).front() == field.fcoords) {
-				imm->draw(gametime, TextToDraw::kNone, field.rendertarget_pixel, scale, &dst);
+				imm->draw(
+				   gametime, TextToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
 			}
 		}
 
 		if (draw_bobs_) {
 			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 			     bob = bob->get_next_bob()) {
-				bob->draw(ebase, TextToDraw::kNone, field.rendertarget_pixel, scale, &dst);
+				bob->draw(
+				   ebase, TextToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
 			}
 		}
 
@@ -656,6 +662,10 @@ void EditorInteractive::stop_painting() {
 	is_painting_ = false;
 }
 
+bool EditorInteractive::player_hears_field(const Widelands::Coords&) const {
+	return true;
+}
+
 void EditorInteractive::toggle_resources() {
 	draw_resources_ = !draw_resources_;
 }
@@ -666,6 +676,11 @@ void EditorInteractive::toggle_immovables() {
 
 void EditorInteractive::toggle_bobs() {
 	draw_bobs_ = !draw_bobs_;
+}
+
+void EditorInteractive::toggle_grid() {
+	draw_grid_ = !draw_grid_;
+	toggle_grid_->set_perm_pressed(draw_grid_);
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
@@ -740,6 +755,10 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_SPACE:
 			toggle_buildhelp();
+			return true;
+
+		case SDLK_g:
+			toggle_grid();
 			return true;
 
 		case SDLK_c:

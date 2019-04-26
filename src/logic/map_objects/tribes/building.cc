@@ -608,10 +608,11 @@ bool Building::fetch_from_flag(Game&) {
 void Building::draw(uint32_t gametime,
                     const TextToDraw draw_text,
                     const Vector2f& point_on_dst,
+                    const Widelands::Coords& coords,
                     const float scale,
                     RenderTarget* dst) {
 	dst->blit_animation(
-	   point_on_dst, scale, anim_, gametime - animstart_, &get_owner()->get_playercolor());
+	   point_on_dst, coords, scale, anim_, gametime - animstart_, &get_owner()->get_playercolor());
 
 	//  door animation?
 

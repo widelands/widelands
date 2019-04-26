@@ -187,12 +187,15 @@ private:
 	// Takes the appropriate action when an item in the showhidemenu_ is selected
 	void showhide_menu_selected(ShowHideEntry entry);
 
+	bool player_hears_field(const Widelands::Coords& coords) const override;
+
 	// Show / hide the resources overlays in the mapview
 	void toggle_resources();
 	// Show / hide the immovables in the mapview
 	void toggle_immovables();
 	// Show / hide the bobs in the mapview
 	void toggle_bobs();
+	void toggle_grid();
 
 	//  state variables
 	bool need_save_;
@@ -231,6 +234,8 @@ private:
 	// Show / Hide menu on the toolbar
 	UI::Dropdown<ShowHideEntry> showhidemenu_;
 
+	// NOCOM add to menu
+	UI::Button* toggle_grid_;
 	UI::Button* undo_;
 	UI::Button* redo_;
 
@@ -240,6 +245,7 @@ private:
 	bool draw_resources_ = true;
 	bool draw_immovables_ = true;
 	bool draw_bobs_ = true;
+	bool draw_grid_ = true;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

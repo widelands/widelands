@@ -511,7 +511,8 @@ public:
 	void set_size(uint32_t w, uint32_t h);
 
 	// Change the map size
-	std::map<Coords, FieldData> resize(EditorGameBase& egbase, const Coords coords, int32_t w, int32_t h);
+	std::map<Coords, FieldData>
+	resize(EditorGameBase& egbase, const Coords coords, int32_t w, int32_t h);
 
 private:
 	void recalc_border(const FCoords&);

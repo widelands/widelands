@@ -22,16 +22,14 @@
 
 #include "editor/ui_menus/tool_options_menu.h"
 #include "ui_basic/box.h"
-#include "ui_basic/spinbox.h"
-#include "ui_basic/textarea.h"
+#include "ui_basic/dropdown.h"
+#include "ui_basic/multilinetextarea.h"
 
 class EditorInteractive;
 struct EditorResizeTool;
 
 struct EditorToolResizeOptionsMenu : public EditorToolOptionsMenu {
-	EditorToolResizeOptionsMenu(EditorInteractive&,
-	                                     EditorResizeTool&,
-	                                     UI::UniqueWindow::Registry&);
+	EditorToolResizeOptionsMenu(EditorInteractive&, EditorResizeTool&, UI::UniqueWindow::Registry&);
 
 private:
 	EditorInteractive& eia();
@@ -40,8 +38,9 @@ private:
 
 	EditorResizeTool& resize_tool_;
 	UI::Box box_;
-	UI::SpinBox new_width_;
-	UI::SpinBox new_height_;
+	UI::Dropdown<int32_t> new_width_;
+	UI::Dropdown<int32_t> new_height_;
+	UI::MultilineTextarea text_area_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_RESIZE_OPTIONS_MENU_H

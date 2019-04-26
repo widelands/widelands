@@ -56,17 +56,6 @@ wl_library(logic_game_controller
     wui
 )
 
-wl_library(logic_campaign_visibility
-  SRCS
-    campaign_visibility.cc
-    campaign_visibility.h
-  DEPENDS
-    base_exceptions
-    io_filesystem
-    logic_filesystem_constants
-    profile
-)
-
 wl_library(logic_constants
   SRCS
     widelands.cc
@@ -311,6 +300,7 @@ wl_library(logic
     scripting_lua_interface
     scripting_lua_table
     sound
+    sound_constants
     ui_basic
     wui
     wui_mapview_pixelfunctions

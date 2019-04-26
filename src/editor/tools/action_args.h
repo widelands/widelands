@@ -56,7 +56,7 @@ struct EditorActionArgs {
 	std::list<Widelands::Field::Height> original_heights;  // change height tool
 	Widelands::DescriptionIndex current_resource;          // resources change tools
 	Widelands::ResourceAmount set_to;                      // resources change tools
-	Widelands::Extent new_map_size;                                   // resize tool
+	Widelands::Extent new_map_size;                        // resize tool
 
 	struct ResourceState {
 		Widelands::FCoords location;
@@ -76,7 +76,7 @@ struct EditorActionArgs {
 	std::list<Widelands::DescriptionIndex> new_immovable_types;        // immovable change tools
 	Widelands::HeightInterval interval;                                // noise height tool
 	std::list<Widelands::DescriptionIndex> terrain_type, original_terrain_type;  // set terrain tool
-	ResizeHistory resized;                                             // resize tool
+	ResizeHistory resized;                                                       // resize tool
 
 	std::list<EditorToolAction*> draw_actions;  // draw tool
 

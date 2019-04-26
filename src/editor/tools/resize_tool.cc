@@ -24,10 +24,10 @@
 #include "logic/widelands_geometry.h"
 
 int32_t EditorResizeTool::handle_click_impl(const Widelands::World& world,
-                                                  const Widelands::NodeAndTriangle<>& center,
-                                                  EditorInteractive& parent,
-                                                  EditorActionArgs* args,
-                                                  Widelands::Map* map) {
+                                            const Widelands::NodeAndTriangle<>& center,
+                                            EditorInteractive& parent,
+                                            EditorActionArgs* args,
+                                            Widelands::Map* map) {
 	Widelands::EditorGameBase& egbase = parent.egbase();
 
 	args->resized.old_map_size = map->extent();
@@ -40,18 +40,19 @@ int32_t EditorResizeTool::handle_click_impl(const Widelands::World& world,
 		args->resized.starting_positions.push_back(map->get_starting_pos(i));
 	}
 
-	args->resized.deleted_fields = map->resize(egbase, center.node, args->new_map_size.w, args->new_map_size.h);
+	args->resized.deleted_fields =
+	   map->resize(egbase, center.node, args->new_map_size.w, args->new_map_size.h);
 
 	map->recalc_whole_map(world);
 	return 0;
 }
 
-int32_t EditorResizeTool::handle_undo_impl(
-   const Widelands::World& world,
-   const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-   EditorInteractive& parent,
-   EditorActionArgs* args,
-   Widelands::Map* map) {
+int32_t
+EditorResizeTool::handle_undo_impl(const Widelands::World& world,
+                                   const Widelands::NodeAndTriangle<Widelands::Coords>& center,
+                                   EditorInteractive& parent,
+                                   EditorActionArgs* args,
+                                   Widelands::Map* map) {
 	Widelands::EditorGameBase& egbase = parent.egbase();
 
 	map->resize(egbase, center.node, args->resized.old_map_size.w, args->resized.old_map_size.h);
@@ -72,8 +73,8 @@ int32_t EditorResizeTool::handle_undo_impl(
 		map->initialize_resources(f, data.resources, data.resource_amount);
 
 		if (!data.immovable.empty()) {
-			egbase.create_immovable_with_name(f, data.immovable,
-					Widelands::MapObjectDescr::OwnerType::kWorld, nullptr, nullptr);
+			egbase.create_immovable_with_name(
+			   f, data.immovable, Widelands::MapObjectDescr::OwnerType::kWorld, nullptr, nullptr);
 		}
 		for (const std::string& bob : data.bobs) {
 			egbase.create_critter(f, bob);
@@ -96,4 +97,3 @@ EditorActionArgs EditorResizeTool::format_args_impl(EditorInteractive& parent) {
 	a.new_map_size = Widelands::Extent(width_, height_);
 	return a;
 }
-

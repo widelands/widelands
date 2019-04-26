@@ -24,7 +24,8 @@
 
 ///  Resize the map
 struct EditorResizeTool : public EditorTool {
-	EditorResizeTool(int16_t width, int16_t height) : EditorTool(*this, *this), width_(width), height_(height) {
+	EditorResizeTool(int16_t width, int16_t height)
+	   : EditorTool(*this, *this), width_(width), height_(height) {
 	}
 
 	/**
