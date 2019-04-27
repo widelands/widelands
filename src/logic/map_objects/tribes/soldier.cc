@@ -228,7 +228,7 @@ uint32_t SoldierDescr::get_rand_anim(Game& game, const std::string& animation_na
 
 	assert(!animations->empty());
 	uint32_t nr_animations = 0;
-	for (const std::pair<std::string, SoldierLevelRange>& pair : *animations) {
+	for (const auto& pair : *animations) {
 		if (pair.second.matches(soldier)) {
 			nr_animations++;
 		}
@@ -237,7 +237,7 @@ uint32_t SoldierDescr::get_rand_anim(Game& game, const std::string& animation_na
 		throw GameDataError("No battle animations for %s found!", animation_name.c_str());
 	}
 	uint32_t i = game.logic_rand() % nr_animations;
-	for (const std::pair<std::string, SoldierLevelRange>& pair : *animations) {
+	for (const auto& pair : *animations) {
 		if (pair.second.matches(soldier)) {
 			if (i == 0) {
 				run = pair.first;
@@ -263,7 +263,7 @@ uint32_t SoldierDescr::get_animation(const std::string& anim, const MapObject* m
 		// For battle animations, the level is already taken into account by the random selector.
 		return WorkerDescr::get_animation(anim, mo);
 	}
-	for (const std::pair<std::string, SoldierLevelRange>& pair : idle_name_) {
+	for (const auto& pair : idle_name_) {
 		if (pair.second.matches(soldier)) {
 			// Use the parent method here, so we don't end up in
 			// an endless loop if the idle anim is called "idle"
