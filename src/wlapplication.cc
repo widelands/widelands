@@ -771,6 +771,7 @@ bool WLApplication::init_settings() {
 #ifdef USE_XDG
 	RealFSImpl userconfigdir(userconfigdir_);
 	userconfigdir.ensure_directory_exists(".");
+	log("Set configuration: %s/%s\n", userconfigdir_.c_str(), kConfigFile.c_str());
 	g_options.read(kConfigFile.c_str(), "global", userconfigdir);
 #else
 	g_options.read(kConfigFile.c_str(), "global");
