@@ -101,6 +101,7 @@ return {
          },
          scenarios = {
             "atl01.wmf",
+            "atl02.wmf",
             "dummy.wmf"
          }
       },
