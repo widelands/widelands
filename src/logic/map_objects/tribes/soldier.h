@@ -40,6 +40,9 @@ class Battle;
 struct SoldierLevelRange {
 	SoldierLevelRange();
 	SoldierLevelRange(const LuaTable&);
+	SoldierLevelRange(const SoldierLevelRange&) = default;
+	SoldierLevelRange& operator=(const SoldierLevelRange& other) = default;
+
 	bool matches(const Soldier* soldier) const;
 	bool matches(int32_t health, int32_t attack, int32_t defense, int32_t evade) const;
 
@@ -53,22 +56,12 @@ struct SoldierLevelRange {
 		       max_defense == other.max_defense &&
 		       max_evade == other.max_evade;
 	}
+	// Dummy to make std::map happy. DO NOT USE.
 	bool operator<(const SoldierLevelRange& other) const {
 		return max_health < other.min_health &&
 		       max_attack < other.min_attack &&
 		       max_defense < other.min_defense &&
 		       max_evade < other.min_evade;
-	}
-	SoldierLevelRange& operator=(const SoldierLevelRange& other) {
-		min_health = other.min_health;
-		min_attack = other.min_attack;
-		min_defense = other.min_defense;
-		min_evade = other.min_evade;
-		max_health = other.max_health;
-		max_attack = other.max_attack;
-		max_defense = other.max_defense;
-		max_evade = other.max_evade;
-		return *this;
 	}
 
 	int32_t min_health;
