@@ -254,7 +254,8 @@ void Player::set_team_number(TeamNumber team) {
  * each other.
  */
 bool Player::is_hostile(const Player& other) const {
-	return &other != this && (!team_number_ || team_number_ != other.team_number_);
+	return &other != this && (!team_number_ || team_number_ != other.team_number_) &&
+	       !is_attack_forbidden(other.player_number());
 }
 
 bool Player::is_defeated() const {
@@ -1332,6 +1333,21 @@ void Player::set_ai(const std::string& ai) {
 
 const std::string& Player::get_ai() const {
 	return ai_;
+}
+
+bool Player::is_attack_forbidden(PlayerNumber who) const {
+	return forbid_attack_.find(who) != forbid_attack_.end();
+}
+
+void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
+	const auto it = forbid_attack_.find(who);
+	if (forbid ^ (it == forbid_attack_.end())) {
+		return;
+	} else if (forbid) {
+		forbid_attack_.emplace(who);
+	} else {
+		forbid_attack_.erase(it);
+	}
 }
 
 /**

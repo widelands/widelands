@@ -203,6 +203,13 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		host_->set_win_condition_script(wc);
 	}
 
+	void set_peaceful_mode(bool peace) override {
+		host_->set_peaceful_mode(peace);
+	}
+	bool is_peaceful_mode() override {
+		return host_->settings().peaceful;
+	}
+
 private:
 	GameHost* host_;
 	std::vector<std::string> wincondition_scripts_;
@@ -1368,6 +1375,16 @@ void GameHost::set_win_condition_script(const std::string& wc) {
 	broadcast(packet);
 }
 
+void GameHost::set_peaceful_mode(bool peace) {
+	d->settings.peaceful = peace;
+
+	// Broadcast changes
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_PEACEFUL_MODE);
+	packet.unsigned_8(peace ? 1 : 0);
+	broadcast(packet);
+}
+
 void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 	if (number < d->settings.players.size() &&
 	    (d->settings.players.at(number).state != PlayerSettings::State::kOpen &&
@@ -1674,6 +1691,11 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	packet.reset();
 	packet.unsigned_8(NETCMD_WIN_CONDITION);
 	packet.string(d->settings.win_condition_script);
+	d->net->send(client.sock_id, packet);
+
+	packet.reset();
+	packet.unsigned_8(NETCMD_PEACEFUL_MODE);
+	packet.unsigned_8(d->settings.peaceful ? 1 : 0);
 	d->net->send(client.sock_id, packet);
 
 	// Broadcast new information about the player to everybody
@@ -2138,6 +2160,12 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 		break;
 
 	case NETCMD_WIN_CONDITION:
+		if (!d->game) {
+			throw DisconnectException("NO_ACCESS_TO_SERVER");
+		}
+		break;
+
+	case NETCMD_PEACEFUL_MODE:
 		if (!d->game) {
 			throw DisconnectException("NO_ACCESS_TO_SERVER");
 		}
