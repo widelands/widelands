@@ -1,0 +1,22 @@
+# Automatically created by Widelands master-4587_Release_x64 (Release)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Scenario player"
+tribe="atlanteans"
+ai=
+closeable="false"
+
+[player_2]
+name="Maletus"
+tribe="empire"
+ai="normal"
+closeable="false"
+
+[player_3]
+name="Kalitath"
+tribe="barbarians"
+ai="normal"
+closeable="false"
