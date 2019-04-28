@@ -20,6 +20,8 @@
 #ifndef WL_NETWORK_GAMECLIENT_H
 #define WL_NETWORK_GAMECLIENT_H
 
+#include <memory>
+
 #include "chat/chat.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -120,7 +122,7 @@ private:
 	                bool sendreason = true,
 	                bool showmsg = true);
 
-	NetTransferFile* file_;
+	std::unique_ptr<NetTransferFile> file_;
 	GameClientImpl* d;
 	bool internet_;
 };
