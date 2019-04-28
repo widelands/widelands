@@ -1415,6 +1415,8 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 		throw wexception("Fail training soldier!!");
 	}
 	ps.molog("  Training done!\n");
+	/** TRANSLATORS: Success message of a trainingsite ‘%s’ stands for the description of the training program*/ 
+	/**  e.g. Completed upgrading soldier evade from level 0 to level 1 */
 	ps.set_production_result((boost::format(_("Completed %s")) % ps.top_state().program->descname()).str());
 
 	upcast(TrainingSite, ts, &ps);
