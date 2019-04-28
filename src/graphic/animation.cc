@@ -132,7 +132,6 @@ private:
 	bool play_once_;
 };
 
-// NOCOM Atlantean carrier walk_sw has disappeared
 /*
 ==============================================================================
 
