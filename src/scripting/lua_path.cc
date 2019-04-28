@@ -30,6 +30,8 @@
 namespace {
 
 /// A class that makes iteration over filename_?.png templates easy.
+/// TODO(GunChleoc): Code duplication with g_fs->get_sequential_files.
+/// Get rid of this and list_files when conversion to spritemaps has been done.
 class NumberGlob {
 public:
 	explicit NumberGlob(const std::string& file_template);
@@ -148,6 +150,7 @@ static int L_list_files(lua_State* L) {
 
 	NumberGlob glob(filename_template);
 	std::string filename;
+
 	lua_newtable(L);
 	int idx = 1;
 
@@ -165,7 +168,7 @@ static int L_list_files(lua_State* L) {
 /* RST
 .. function:: list_directory(filename)
 
-   **DEPRECATED**. Returns all file names contained in the given directory.
+   Returns all file names contained in the given directory.
    Lua Tables need lots of memory, so only use this when you have to.
 
    :type filename: class:`string`
