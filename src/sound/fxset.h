@@ -64,9 +64,10 @@ private:
 	uint32_t last_used_;
 
 	/**
-	* Filename paths for the physical sound files
-	* This will be cleared when the effects have been loaded into memory by \ref get_fx on first play.
-	*/
+	 * Filename paths for the physical sound files
+	 * This will be cleared when the effects have been loaded into memory by \ref get_fx on first
+	 * play.
+	 */
 	std::vector<std::string> paths_;
 
 	/// The collection of sound effects, to be loaded on demand

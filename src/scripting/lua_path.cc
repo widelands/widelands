@@ -150,7 +150,6 @@ static int L_list_files(lua_State* L) {
 
 	NumberGlob glob(filename_template);
 	std::string filename;
-
 	lua_newtable(L);
 	int idx = 1;
 

@@ -308,12 +308,12 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 				throw Widelands::GameDataError("Mismatched number of images for different scales in animation table: %" PRIuS " vs. %u at scale %.2f",
 									  mipmap.second->image_files.size(),
 									  nr_frames_,
-									  mipmap.first);
+									  static_cast<double>(mipmap.first));
 			}
 			if (mipmap.second->has_playercolor_masks != should_have_playercolor) {
 				throw Widelands::GameDataError("Mismatched existence of player colors in animation table for scales %.2f and %.2f",
-									  mipmaps_.begin()->first,
-									  mipmap.first);
+									  static_cast<double>(mipmaps_.begin()->first),
+									  static_cast<double>(mipmap.first));
 			}
 		}
 		if (mipmaps_.count(1.0f) != 1) {

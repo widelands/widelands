@@ -36,7 +36,6 @@ using FilenameSet = std::set<std::string>;
 class StreamRead;
 class StreamWrite;
 
-
 /**
  * FileSystem is an abstract base class representing certain filesystem
  * operations.

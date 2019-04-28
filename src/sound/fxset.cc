@@ -42,8 +42,9 @@ FXset::FXset(const std::string& path, uint32_t random) : last_used_(random % 200
 
 	// Ensure that we have at least 1 file
 	if (paths_.empty()) {
-		throw Widelands::GameDataError("FXset: No files matching the pattern '%s_<numbers>.ogg' found in directory %s\n",
-							basename.c_str(), dirname.c_str());
+		throw Widelands::GameDataError(
+		   "FXset: No files matching the pattern '%s_<numbers>.ogg' found in directory %s\n",
+		   basename.c_str(), dirname.c_str());
 	}
 
 #ifndef NDEBUG
@@ -107,7 +108,6 @@ void FXset::load_sound_file(const std::string& path) {
 		assert(m);
 		fxs_.push_back(m);
 	} else {
-		log("FXset: loading sound effect file \"%s\" failed: %s\n",
-		    path.c_str(), Mix_GetError());
+		log("FXset: loading sound effect file \"%s\" failed: %s\n", path.c_str(), Mix_GetError());
 	}
 }
