@@ -604,6 +604,9 @@ public:
 		further_initializations_.push_back(init);
 	}
 
+	void set_attack_forbidden(PlayerNumber who, bool forbid);
+	bool is_attack_forbidden(PlayerNumber who) const;
+
 	const std::string pick_shipname();
 
 private:
@@ -680,6 +683,8 @@ private:
 	 * ware_stocks_[ware_id][time_index]
 	 */
 	std::vector<std::vector<uint32_t>> ware_stocks_;
+
+	std::set<PlayerNumber> forbid_attack_;
 
 	PlayerBuildingStats building_stats_;
 
