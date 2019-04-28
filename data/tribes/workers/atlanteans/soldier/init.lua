@@ -192,7 +192,7 @@ all_levels_atl = {
 --       * die_w
 --       * die_e
 --
---      As well as custom walking and idle animations:
+--    As well as custom walking and idle animations:
 --       * idle
 --       * walk_ne
 --       * walk_e
