@@ -74,9 +74,7 @@ Let's have a detailed look at the ``idle`` animation:
    * **128-254:** Probability between ``0.0`` and ``1.0``, many instances can be playing at any time
    * **255:** Always play
 
-
 .. _animations_directional:
-
 Directional Animations
 ----------------------
 

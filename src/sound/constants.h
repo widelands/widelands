@@ -54,12 +54,6 @@ using FxId = uint16_t;
 constexpr FxId kNoSoundEffect = std::numeric_limits<uint16_t>::max();
 
 /// Categorize sound effects and music to control their volume etc.
-enum class SoundType {
-	kUI,
-	kMessage,
-	kChat,
-	kAmbient,
-	kMusic
-};
+enum class SoundType { kUI, kMessage, kChat, kAmbient, kMusic };
 
 #endif  // end of include guard: WL_SOUND_CONSTANTS_H

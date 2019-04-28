@@ -105,8 +105,7 @@ protected:
 	/// Play the sound effect associated with this animation at the given time.
 	/// Any sound effects are played with stereo position according to 'coords'.
 	/// If 'coords' == Widelands::Coords::null(), skip playing any sound effects.
-	virtual void trigger_sound(uint32_t time,
-							   const Widelands::Coords& coords) const = 0;
+	virtual void trigger_sound(uint32_t time, const Widelands::Coords& coords) const = 0;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);

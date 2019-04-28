@@ -1439,7 +1439,7 @@ ProductionProgram::ActPlaySound::ActPlaySound(char* parameters) {
 		}
 		if (priority < kFxPriorityLowest) {
 			throw GameDataError("Minmum priority for sounds is %d, but only %d was specified for %s",
-								kFxPriorityLowest, priority, name);
+			                    kFxPriorityLowest, priority, name);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("playsound: %s", e.what());

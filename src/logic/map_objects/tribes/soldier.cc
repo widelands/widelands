@@ -440,7 +440,8 @@ Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
  */
 void Soldier::draw(const EditorGameBase& game,
                    const TextToDraw&,
-                   const Vector2f& field_on_dst, const Coords& coords,
+                   const Vector2f& field_on_dst,
+                   const Coords& coords,
                    float scale,
                    RenderTarget* dst) const {
 	const uint32_t anim = get_current_anim();

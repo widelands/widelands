@@ -880,7 +880,8 @@ playsound
    :arg string sound_dir/sound_name: The directory (folder) that the sound files are in,
       relative to the data directory, followed by the name of the particular sound to play.
       There can be multiple sound files to select from at random, e.g.
-      for `sound/farm/scythe`, we can have `sound/farm/scythe_00.ogg`, `sound/farm/scythe_01.ogg` ...
+      for `sound/farm/scythe`, we can have `sound/farm/scythe_00.ogg`, `sound/farm/scythe_01.ogg`
+      ...
 
    :arg int priority: The priority to give this sound. Maximum priority is 255.
 
@@ -907,7 +908,7 @@ void WorkerProgram::parse_playsound(Worker::Action* act, const std::vector<std::
 	act->iparam1 = cmd.size() == 2 ? kFxPriorityMedium : atoi(cmd[2].c_str());
 	if (act->iparam1 < kFxPriorityLowest) {
 		throw GameDataError("Minmum priority for sounds is %d, but only %d was specified for %s",
-							kFxPriorityLowest, act->iparam1, cmd[1].c_str());
+		                    kFxPriorityLowest, act->iparam1, cmd[1].c_str());
 	}
 }
 

@@ -36,22 +36,34 @@ private:
 	static constexpr int kSpacing = 16;
 
 public:
-/**
+	/**
 	 * @brief SoundControl Creates a new sound control box
 	 * @param parent The parent panel
 	 * @param title The localized test label to display
 	 * @param type The type of sound to set the properties for
 	 * @param style The User interface style for the slider
 	 */
-	SoundControl(UI::Box* parent, UI::SliderStyle style, const std::string& title, SoundType type, FxId representative_fx = kNoSoundEffect)
+	SoundControl(UI::Box* parent,
+	             UI::SliderStyle style,
+	             const std::string& title,
+	             SoundType type,
+	             FxId representative_fx = kNoSoundEffect)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal),
-		 enable_(this, Vector2i::zero(), title),
-		 volume_(this, 0, 0, kSliderWidth, enable_.get_h(),
-				 0, g_sh->get_max_volume(), g_sh->get_volume(type), style,
-				 /** TRANSLATORS: Tooltip for volume slider in sound options */
-				 _("Changes the volume. Click to hear a sample."), kCursorWidth),
-		 type_(type),
-	fx_(representative_fx) {
+	     enable_(this, Vector2i::zero(), title),
+	     volume_(this,
+	             0,
+	             0,
+	             kSliderWidth,
+	             enable_.get_h(),
+	             0,
+	             g_sh->get_max_volume(),
+	             g_sh->get_volume(type),
+	             style,
+	             /** TRANSLATORS: Tooltip for volume slider in sound options */
+	             _("Changes the volume. Click to hear a sample."),
+	             kCursorWidth),
+	     type_(type),
+	     fx_(representative_fx) {
 		set_inner_spacing(kSpacing);
 		add(&volume_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		add(&enable_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -63,8 +75,8 @@ public:
 			enable_.set_state(g_sh->is_sound_enabled(type));
 			volume_.set_enabled(g_sh->is_sound_enabled(type));
 
-			enable_.changedto.connect([this] (bool on) { enable_changed(on); });
-			volume_.changedto.connect([this] (int32_t value) { volume_changed(value); });
+			enable_.changedto.connect([this](bool on) { enable_changed(on); });
+			volume_.changedto.connect([this](int32_t value) { volume_changed(value); });
 			volume_.clicked.connect([this] { play_sound_sample(); });
 		}
 		set_thinks(false);
@@ -78,7 +90,8 @@ private:
 		}
 	}
 
-	/// Sets new enable/disable value in the sound handler for the sound type and enables/disables the volume slider accordingly
+	/// Sets new enable/disable value in the sound handler for the sound type and enables/disables
+	/// the volume slider accordingly
 	void enable_changed(bool on) {
 		enable_.set_state(on);
 		volume_.set_enabled(on);
@@ -102,7 +115,7 @@ private:
 
 constexpr int kSpacing = 12;
 
-} // namespace
+}  // namespace
 
 SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
    : UI::Box(&parent, 0, 0, UI::Box::Vertical) {
@@ -112,24 +125,29 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 	add(new SoundControl(this, style, pgettext("sound_options", "Music"), SoundType::kMusic));
 
 	add(new SoundControl(this, style, pgettext("sound_options", "Chat Messages"), SoundType::kChat,
-						 g_sh->register_fx(SoundType::kChat, "sound/lobby_chat")));
+	                     g_sh->register_fx(SoundType::kChat, "sound/lobby_chat")));
 
-	add(new SoundControl(this, style, pgettext("sound_options", "Game Messages"), SoundType::kMessage,
-						 g_sh->register_fx(SoundType::kMessage, "sound/message")));
+	add(new SoundControl(this, style, pgettext("sound_options", "Game Messages"),
+	                     SoundType::kMessage,
+	                     g_sh->register_fx(SoundType::kMessage, "sound/message")));
 
 	add(new SoundControl(this, style, pgettext("sound_options", "User Interface"), SoundType::kUI));
 
-	add(new SoundControl(this, style, pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient,
-						 g_sh->register_fx(SoundType::kAmbient, "sound/create_construction_site")));
+	add(new SoundControl(this, style, pgettext("sound_options", "Ambient Sounds"),
+	                     SoundType::kAmbient,
+	                     g_sh->register_fx(SoundType::kAmbient, "sound/create_construction_site")));
 
-	// TODO(GunChleoc): There's a bug (probably somewhere in Box, triggered in combination with Window::set_center_panel) that will hide the bottom SoundControl in GameOptionsSoundMenu if the MultilineTextarea is not added to the Box. So, we create and add it even if its text is empty.
-	UI::MultilineTextarea* sound_warning = new UI::MultilineTextarea(
-	   this, 0, 0, 100, 0, UI::PanelStyle::kWui,
-	   "", UI::Align::kLeft,
-	   UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	// TODO(GunChleoc): There's a bug (probably somewhere in Box, triggered in combination with
+	// Window::set_center_panel) that will hide the bottom SoundControl in GameOptionsSoundMenu if
+	// the MultilineTextarea is not added to the Box. So, we create and add it even if its text is
+	// empty.
+	UI::MultilineTextarea* sound_warning =
+	   new UI::MultilineTextarea(this, 0, 0, 100, 0, UI::PanelStyle::kWui, "", UI::Align::kLeft,
+	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	add(sound_warning, UI::Box::Resizing::kExpandBoth);
 
 	if (SoundHandler::is_backend_disabled()) {
-		sound_warning->set_text(_("Sound is disabled either due to a problem with the sound driver, or because it was switched off at the command line."));
+		sound_warning->set_text(_("Sound is disabled either due to a problem with the sound driver, "
+		                          "or because it was switched off at the command line."));
 	}
 }

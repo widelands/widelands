@@ -23,12 +23,11 @@
 
 namespace {
 constexpr int kMargin = 12;
-} // namespace
+}  // namespace
 
-GameOptionsSoundMenu::GameOptionsSoundMenu(Panel& parent,
-                                           UI::UniqueWindow::Registry& registry)
+GameOptionsSoundMenu::GameOptionsSoundMenu(Panel& parent, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent, "sound_options_menu", &registry, 100, 100, _("Sound Options")),
-	 sound_options_(*this, UI::SliderStyle::kWuiLight) {
+     sound_options_(*this, UI::SliderStyle::kWuiLight) {
 	sound_options_.set_border(kMargin, kMargin, kMargin, kMargin);
 
 	set_center_panel(&sound_options_);
@@ -37,7 +36,6 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(Panel& parent,
 		center_to_parent();
 	}
 }
-
 
 GameOptionsSoundMenu::~GameOptionsSoundMenu() {
 	g_sh->save_config();

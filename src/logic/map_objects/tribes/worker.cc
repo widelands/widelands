@@ -999,7 +999,8 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
  * Whether the effect actually gets played is decided only by the sound server.
  */
 bool Worker::run_playsound(Game& game, State& state, const Action& action) {
-	Notifications::publish(NoteSound(SoundType::kAmbient, action.iparam2, get_position(), action.iparam1));
+	Notifications::publish(
+	   NoteSound(SoundType::kAmbient, action.iparam2, get_position(), action.iparam1));
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -2984,21 +2985,22 @@ void Worker::scout_update(Game& game, State& state) {
 }
 
 void Worker::draw_inner(const EditorGameBase& game,
-                        const Vector2f& point_on_dst, const Coords& coords,
+                        const Vector2f& point_on_dst,
+                        const Coords& coords,
                         const float scale,
                         RenderTarget* dst) const {
 	assert(get_owner() != nullptr);
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
-	dst->blit_animation(
-	   point_on_dst, coords, scale, get_current_anim(), game.get_gametime() - get_animstart(), &player_color);
+	dst->blit_animation(point_on_dst, coords, scale, get_current_anim(),
+	                    game.get_gametime() - get_animstart(), &player_color);
 
 	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
 		const Vector2f hotspot = descr().ware_hotspot().cast<float>();
 		const Vector2f location(
 		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
-		dst->blit_animation(
-		   location, Widelands::Coords::null(), scale, carried_ware->descr().get_animation("idle"), 0, &player_color);
+		dst->blit_animation(location, Widelands::Coords::null(), scale,
+		                    carried_ware->descr().get_animation("idle"), 0, &player_color);
 	}
 }
 
@@ -3008,7 +3010,7 @@ void Worker::draw_inner(const EditorGameBase& game,
 void Worker::draw(const EditorGameBase& egbase,
                   const TextToDraw&,
                   const Vector2f& field_on_dst,
-				  const Widelands::Coords& coords,
+                  const Widelands::Coords& coords,
                   const float scale,
                   RenderTarget* dst) const {
 	if (!get_current_anim()) {

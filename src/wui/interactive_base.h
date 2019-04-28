@@ -231,7 +231,7 @@ protected:
 	TextToDraw get_text_to_draw() const;
 
 	// Returns the current overlays for the work area previews.
-	std::map<Widelands::Coords, const Image*> get_workarea_overlays(const Widelands::Map& map) const;
+	Workareas get_workarea_overlays(const Widelands::Map& map) const;
 
 	// Returns the 'BuildhelpOverlay' for 'caps' or nullptr if there is no help
 	// to be displayed on this field.
@@ -241,8 +241,11 @@ protected:
 		return road_building_overlays_;
 	}
 
-	/// Returns true if there is a workarea preview being shown at the given coordinates
-	bool has_workarea_preview(const Widelands::Coords& coords) const;
+	/// Returns true if there is a workarea preview being shown at the given coordinates.
+	/// If 'map' is 0, checks only if the given coords are the center of a workarea;
+	/// otherwise checks if the coords are within any workarea.
+	bool has_workarea_preview(const Widelands::Coords& coords,
+	                          const Widelands::Map* map = nullptr) const;
 
 	/// Returns true if the current player is allowed to hear sounds from map objects on this field
 	virtual bool player_hears_field(const Widelands::Coords& coords) const = 0;
@@ -304,7 +307,6 @@ private:
 
 	UI::UniqueWindow::Registry debugconsole_;
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
-	std::vector<const Image*> workarea_pics_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
 };
 

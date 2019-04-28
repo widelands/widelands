@@ -608,7 +608,7 @@ bool Building::fetch_from_flag(Game&) {
 void Building::draw(uint32_t gametime,
                     const TextToDraw draw_text,
                     const Vector2f& point_on_dst,
-					const Widelands::Coords& coords,
+                    const Widelands::Coords& coords,
                     const float scale,
                     RenderTarget* dst) {
 	dst->blit_animation(

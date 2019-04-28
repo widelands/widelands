@@ -286,12 +286,12 @@ void RenderTarget::tile(const Recti& rect,
 }
 
 void RenderTarget::blit_animation(const Vector2f& dst,
-								  const Widelands::Coords& coords,
-                                     const float scale,
-                                     uint32_t animation_id,
-                                     uint32_t time,
-                                     const RGBColor* player_color,
-                                     const int percent_from_bottom) {
+                                  const Widelands::Coords& coords,
+                                  const float scale,
+                                  uint32_t animation_id,
+                                  uint32_t time,
+                                  const RGBColor* player_color,
+                                  const int percent_from_bottom) {
 	const Animation& animation = g_gr->animations().get_animation(animation_id);
 	assert(percent_from_bottom <= 100);
 	if (percent_from_bottom > 0) {

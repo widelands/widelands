@@ -58,7 +58,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
      lisw_(get_w() * 623 / 1000),
      fs_(fs_small()),
      prev_clientlist_len_(1000),
-	 new_client_fx_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_freshmen")),
+     new_client_fx_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_freshmen")),
 
      // Text labels
      title(this, get_w() / 2, get_h() / 20, _("Metaserver Lobby"), UI::Align::kCenter),

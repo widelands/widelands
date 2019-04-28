@@ -45,6 +45,10 @@
 #include "sound/sound_handler.h"
 
 namespace {
+// The mipmap scales supported by the engine.
+// Ensure that this always matches supported_scales in data/scripting/mapobjects.lua.
+const std::set<float> kSupportedScales{0.5, 1, 2, 4};
+
 /**
  * Implements the Animation interface for an animation that is unpacked on disk, that
  * is every frame and every pc color frame is an singular file on disk.
@@ -93,7 +97,8 @@ public:
 	uint32_t frametime() const override;
 	const Image* representative_image(const RGBColor* clr) const override;
 	const std::string& representative_image_filename() const override;
-	virtual void blit(uint32_t time, const Widelands::Coords& coords,
+	virtual void blit(uint32_t time,
+	                  const Widelands::Coords& coords,
 	                  const Rectf& source_rect,
 	                  const Rectf& destination_rect,
 	                  const RGBColor* clr,
@@ -115,8 +120,9 @@ private:
 	Vector2i hotspot_;
 
 	struct MipMapCompare {
-	  bool operator() (const float lhs, const float rhs) const
-	  {return lhs > rhs;}
+		bool operator()(const float lhs, const float rhs) const {
+			return lhs > rhs;
+		}
 	};
 	std::map<float, std::unique_ptr<MipMapEntry>, MipMapCompare> mipmaps_;
 
@@ -125,6 +131,7 @@ private:
 	int32_t sound_priority_;
 	bool play_once_;
 };
+
 // NOCOM Atlantean carrier walk_sw has disappeared
 /*
 ==============================================================================
@@ -224,22 +231,24 @@ NonPackedAnimation IMPLEMENTATION
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string& basename)
    : frametime_(FRAME_LENGTH),
      hotspot_(table.get_vector<std::string, int>("hotspot")),
-	 sound_effect_(kNoSoundEffect),
-	 sound_priority_(kFxPriorityLowest),
+     sound_effect_(kNoSoundEffect),
+     sound_priority_(kFxPriorityLowest),
      play_once_(false) {
 	try {
 		// Sound
 		if (table.has_key("sound_effect")) {
 			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
-			sound_effect_ = SoundHandler::register_fx(SoundType::kAmbient, sound_effects->get_string("path"));
+			sound_effect_ =
+			   SoundHandler::register_fx(SoundType::kAmbient, sound_effects->get_string("path"));
 
 			if (sound_effects->has_key<std::string>("priority")) {
 				sound_priority_ = sound_effects->get_int("priority");
 			}
 
 			if (sound_priority_ < kFxPriorityLowest) {
-				throw Widelands::GameDataError("Minmum priority for sounds is %d, but only %d was specified for %s",
-									kFxPriorityLowest, sound_priority_, sound_effects->get_string("path").c_str());
+				throw Widelands::GameDataError(
+				   "Minmum priority for sounds is %d, but only %d was specified for %s",
+				   kFxPriorityLowest, sound_priority_, sound_effects->get_string("path").c_str());
 			}
 		}
 
@@ -283,7 +292,8 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 			}
 		}
 
-		// Frames
+		// Frames and FPS
+		nr_frames_ = mipmaps_.begin()->second->image_files.size();
 		if (table.has_key("fps")) {
 			if (nr_frames_ == 1) {
 				throw Widelands::GameDataError(
@@ -291,7 +301,6 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 			}
 			frametime_ = 1000 / get_positive_int(table, "fps");
 		}
-		nr_frames_ = mipmaps_.begin()->second->image_files.size();
 
 		// Perform some checks to make sure that the data is complete and consistent
 		const bool should_have_playercolor = mipmaps_.begin()->second->has_playercolor_masks;
@@ -354,8 +363,7 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	const int h = image->height();
 
 	Texture* rv = new Texture(w, h);
-	rv->blit(
-	   Rectf(0.f, 0.f, w, h), *image, Rectf(0.f, 0.f, w, h), 1., BlendMode::Copy);
+	rv->blit(Rectf(0.f, 0.f, w, h), *image, Rectf(0.f, 0.f, w, h), 1., BlendMode::Copy);
 	return rv;
 }
 
@@ -381,7 +389,8 @@ void NonPackedAnimation::trigger_sound(uint32_t time, const Widelands::Coords& c
 	const uint32_t framenumber = current_frame(time);
 
 	if (framenumber == 0) {
-		Notifications::publish(NoteSound(SoundType::kAmbient, sound_effect_, coords, sound_priority_));
+		Notifications::publish(
+		   NoteSound(SoundType::kAmbient, sound_effect_, coords, sound_priority_));
 	}
 }
 
@@ -404,7 +413,7 @@ Rectf NonPackedAnimation::destination_rectangle(const Vector2f& position,
 }
 
 void NonPackedAnimation::blit(uint32_t time,
-							  const Widelands::Coords& coords,
+                              const Widelands::Coords& coords,
                               const Rectf& source_rect,
                               const Rectf& destination_rect,
                               const RGBColor* clr,

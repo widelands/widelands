@@ -48,7 +48,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              UI::MultilineTextarea::ScrollMode::kScrollLogForced),
      editbox(this, 0, h - 20, w, 20, 2, style),
      chat_message_counter(0),
-	 chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
+     chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 
 	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));

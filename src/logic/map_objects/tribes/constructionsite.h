@@ -38,7 +38,8 @@ struct ConstructionsiteInformation {
 	}
 
 	/// Draw the partly finished constructionsite
-	void draw(const Vector2f& point_on_dst, const Coords& coords,
+	void draw(const Vector2f& point_on_dst,
+	          const Coords& coords,
 	          float scale,
 	          const RGBColor& player_color,
 	          RenderTarget* dst) const;
@@ -126,7 +127,8 @@ protected:
 
 	void draw(uint32_t gametime,
 	          TextToDraw draw_text,
-	          const Vector2f& point_on_dst, const Coords& coords,
+	          const Vector2f& point_on_dst,
+	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
 

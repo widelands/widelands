@@ -456,7 +456,7 @@ void Immovable::act(Game& game, uint32_t const data) {
 void Immovable::draw(uint32_t gametime,
                      const TextToDraw draw_text,
                      const Vector2f& point_on_dst,
-					 const Widelands::Coords& coords,
+                     const Widelands::Coords& coords,
                      float scale,
                      RenderTarget* dst) {
 	if (!anim_) {
@@ -475,7 +475,7 @@ void Immovable::draw(uint32_t gametime,
 void Immovable::draw_construction(const uint32_t gametime,
                                   const TextToDraw draw_text,
                                   const Vector2f& point_on_dst,
-								  const Widelands::Coords& coords,
+                                  const Widelands::Coords& coords,
                                   const float scale,
                                   RenderTarget* dst) {
 	const ImmovableProgram::ActConstruct* constructionact = nullptr;
@@ -505,8 +505,8 @@ void Immovable::draw_construction(const uint32_t gametime,
 	const RGBColor& player_color = get_owner()->get_playercolor();
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
-		dst->blit_animation(
-		   point_on_dst, Widelands::Coords::null(), scale, anim_, (current_frame - 1) * frametime, &player_color);
+		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_,
+		                    (current_frame - 1) * frametime, &player_color);
 	}
 
 	const int percent = ((done % units_per_frame) * 100) / units_per_frame;

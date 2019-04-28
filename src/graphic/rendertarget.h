@@ -109,12 +109,12 @@ public:
 	// Any sound effects are played with stereo position according to 'coords'.
 	// If 'coords' == Widelands::Coords::null(), skip playing any sound effects.
 	void blit_animation(const Vector2f& dst,
-						const Widelands::Coords& coords,
-	                       const float scale,
-	                       uint32_t animation_id,
-	                       uint32_t time,
-	                       const RGBColor* player_color = nullptr,
-	                       const int percent_from_bottom = 100);
+	                    const Widelands::Coords& coords,
+	                    const float scale,
+	                    uint32_t animation_id,
+	                    uint32_t time,
+	                    const RGBColor* player_color = nullptr,
+	                    const int percent_from_bottom = 100);
 
 	void reset();
 

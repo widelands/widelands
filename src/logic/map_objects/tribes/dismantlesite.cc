@@ -48,7 +48,8 @@ DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
                                        const EditorGameBase& egbase)
    : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, egbase),
-	 creation_fx_(SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
+     creation_fx_(
+        SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE);  // Yep, this is correct.
 }
 
@@ -113,7 +114,8 @@ Initialize the construction site by starting orders
 ===============
 */
 bool DismantleSite::init(EditorGameBase& egbase) {
-	Notifications::publish(NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxPriorityAlwaysPlay));
+	Notifications::publish(
+	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxPriorityAlwaysPlay));
 
 	PartiallyFinishedBuilding::init(egbase);
 
@@ -228,7 +230,7 @@ Draw it.
 void DismantleSite::draw(uint32_t gametime,
                          const TextToDraw draw_text,
                          const Vector2f& point_on_dst,
-						 const Widelands::Coords& coords,
+                         const Widelands::Coords& coords,
                          float scale,
                          RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;

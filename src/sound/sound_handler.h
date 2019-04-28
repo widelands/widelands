@@ -33,8 +33,8 @@
 #include <SDL_mutex.h>
 
 #include "random/random.h"
-#include "sound/fxset.h"
 #include "sound/constants.h"
+#include "sound/fxset.h"
 #include "sound/songset.h"
 
 /** The 'sound server' for Widelands.
@@ -72,10 +72,11 @@
  * \par Sound effects
  *
  * Use register_fx() to record the file locations for each sound effect, to be loaded on first play.
- * Sound effects are kept in memory at all times once they have been loaded, to avoid delays from disk access.
- * You can use \ref remove_fx_set to deregister and unload sound effects from memory though.
- * The file naming scheme is the same as for the songs, and if there are multiple files for an effect, they are picked at random too.
- * Sound effects are categorized into multiple SoundType categories, so that the user can control which type of sounds to hear.
+ * Sound effects are kept in memory at all times once they have been loaded, to avoid delays from
+ * disk access. You can use \ref remove_fx_set to deregister and unload sound effects from memory
+ * though. The file naming scheme is the same as for the songs, and if there are multiple files for
+ * an effect, they are picked at random too. Sound effects are categorized into multiple SoundType
+ * categories, so that the user can control which type of sounds to hear.
  *
  * For map objects, the abovementioned sound effects are synchronized with a work program or a
  * building/immovable/worker animation. For more information about this, look at the
@@ -157,7 +158,8 @@ public:
 	void load_config();
 
 	/**
-	 * Returns 'true' if the playing of sounds is disabled due to sound driver problems, or because disable_backend() was used.
+	 * Returns 'true' if the playing of sounds is disabled due to sound driver problems, or because
+	 * disable_backend() was used.
 	 */
 	inline static bool is_backend_disabled() {
 		return SoundHandler::backend_is_disabled_;
@@ -170,13 +172,14 @@ public:
 		SoundHandler::backend_is_disabled_ = true;
 	}
 
-
 	// This is static so that we can load the tribes and world without instantiating the sound system
 	static FxId register_fx(SoundType type, const std::string& fx_path);
 
-	void play_fx(SoundType type, FxId fx_id,
+	void play_fx(SoundType type,
+	             FxId fx_id,
 	             uint8_t priority = kFxPriorityAlwaysPlay,
-	             int32_t stereo_position = kStereoCenter, int distance = 0);
+	             int32_t stereo_position = kStereoCenter,
+	             int distance = 0);
 	void remove_fx_set(SoundType type);
 
 	void register_songs(const std::string& dir, const std::string& basename);
@@ -211,7 +214,8 @@ private:
 
 	/// Contains options for a sound type or the music
 	struct SoundOptions {
-		explicit SoundOptions(int vol, const std::string& savename) : enabled(true), volume(vol), name(savename) {
+		explicit SoundOptions(int vol, const std::string& savename)
+		   : enabled(true), volume(vol), name(savename) {
 			assert(!savename.empty());
 			assert(vol >= 0);
 			assert(vol <= MIX_MAX_VOLUME);
@@ -257,8 +261,8 @@ private:
 
 	/**
 	 * Can sounds be played?
-	 * true = they mustn't be played, e.g. because hardware is missing or disable_backend() was called.
-	 * false = can be played
+	 * true = they mustn't be played, e.g. because hardware is missing or disable_backend() was
+	 * called. false = can be played
 	 */
 	static bool backend_is_disabled_;
 };

@@ -339,7 +339,10 @@ void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition
 	NEVER_HERE();
 }
 
-FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase, RenderTarget* dst) {
+FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
+                                    Workareas workarea,
+                                    bool grid,
+                                    RenderTarget* dst) {
 	uint32_t now = SDL_GetTicks();
 	while (!view_plans_.empty()) {
 		auto& plan = view_plans_.front();
@@ -353,11 +356,13 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase, Ren
 		}
 
 		// Linearly interpolate between the next and the last.
-		const float t = (now - plan[0].t) / static_cast<float>(plan[1].t - plan[0].t);
+		// Using std::max as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		const float t =
+		   (std::max(1U, now - plan[0].t)) / static_cast<float>(std::max(1U, plan[1].t - plan[0].t));
 		const View new_view = {
 		   mix(t, plan[0].view.viewpoint, plan[1].view.viewpoint),
-		   mix(t, plan[0].view.zoom, plan[1].view.zoom),
-		};
+		   // Using math::clamp as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		   math::clamp(mix(t, plan[0].view.zoom, plan[1].view.zoom), 1.f / kMaxZoom, kMaxZoom)};
 		set_view(new_view, Transition::Jump);
 		break;
 	}
@@ -381,7 +386,7 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase, Ren
 
 	fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
 	const float scale = 1.f / view_.zoom;
-	::draw_terrain(egbase, fields_to_draw_, scale, dst);
+	::draw_terrain(egbase, fields_to_draw_, scale, workarea, grid, dst);
 	return &fields_to_draw_;
 }
 

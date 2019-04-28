@@ -718,8 +718,9 @@ void Panel::play_click() {
 }
 
 /**
- * This needs to be called once after g_soundhandler has been instantiated and before play_click() is called.
- * We do it this way so that we don't have to register the same sound every time we create a new panel.
+ * This needs to be called once after g_soundhandler has been instantiated and before play_click()
+ * is called. We do it this way so that we don't have to register the same sound every time we
+ * create a new panel.
  */
 void Panel::register_click() {
 	click_fx_ = SoundHandler::register_fx(SoundType::kUI, "sound/click");

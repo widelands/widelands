@@ -38,22 +38,21 @@ constexpr int kDefaultFxVolume = 128;
 constexpr int kNumMixingChannels = 32;
 }  // namespace
 
-
 /// The global \ref SoundHandler object
 SoundHandler* g_sh;
 
 bool SoundHandler::backend_is_disabled_ = false;
 
 /**
- * Initialize our data structures, and if SoundHandler::is_backend_disabled() is false, initialize the SDL sound system and configure everything.
+ * Initialize our data structures, and if SoundHandler::is_backend_disabled() is false, initialize
+ * the SDL sound system and configure everything.
  */
 SoundHandler::SoundHandler()
-   : sound_options_{
-{SoundType::kUI, SoundOptions(kDefaultFxVolume, "ui")},
-{SoundType::kMessage, SoundOptions(kDefaultFxVolume, "message")},
-{SoundType::kChat, SoundOptions(kDefaultFxVolume, "chat")},
-{SoundType::kAmbient, SoundOptions(kDefaultFxVolume, "ambient")},
-{SoundType::kMusic, SoundOptions(kDefaultMusicVolume, "music")}},
+   : sound_options_{{SoundType::kUI, SoundOptions(kDefaultFxVolume, "ui")},
+                    {SoundType::kMessage, SoundOptions(kDefaultFxVolume, "message")},
+                    {SoundType::kChat, SoundOptions(kDefaultFxVolume, "chat")},
+                    {SoundType::kAmbient, SoundOptions(kDefaultFxVolume, "ambient")},
+                    {SoundType::kMusic, SoundOptions(kDefaultMusicVolume, "music")}},
      fx_lock_(nullptr) {
 	// Ensure that we don't lose our config for when we start with sound the next time
 	read_config();
@@ -131,8 +130,9 @@ SoundHandler::SoundHandler()
 }
 
 /**
- * Housekeeping: unset hooks, clear the mutex and all data structures and shut down the sound system.
- * Audio data will be freed automagically by the \ref Songset and \ref FXset destructors, but not the {song|fx}sets themselves.
+ * Housekeeping: unset hooks, clear the mutex and all data structures and shut down the sound
+ * system. Audio data will be freed automagically by the \ref Songset and \ref FXset destructors,
+ * but not the {song|fx}sets themselves.
  */
 SoundHandler::~SoundHandler() {
 	if (SDL_WasInit(SDL_INIT_AUDIO) == 0) {
@@ -148,9 +148,8 @@ SoundHandler::~SoundHandler() {
 	int numtimesopened, frequency, channels;
 	uint16_t format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
-	log("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n",
-		numtimesopened, numtimesopened == 1 ? "" : "s",
-		frequency, format, channels, channels == 1 ? "" : "s");
+	log("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n", numtimesopened,
+	    numtimesopened == 1 ? "" : "s", frequency, format, channels, channels == 1 ? "" : "s");
 
 	if (numtimesopened == 0) {
 		return;
@@ -191,10 +190,12 @@ void SoundHandler::initialization_error(const char* const msg, bool quit_sdl) {
 }
 
 /**
- * Load the sound options from g_options. If an option is not available, use the defaults set by the constructor.
+ * Load the sound options from g_options. If an option is not available, use the defaults set by the
+ * constructor.
  */
 void SoundHandler::read_config() {
-	// TODO(GunChleoc): Compatibility code to avoid getting bug reports about unread sections. Remove after Build 21.
+	// TODO(GunChleoc): Compatibility code to avoid getting bug reports about unread sections. Remove
+	// after Build 21.
 	if (g_options.get_section("sound") == nullptr) {
 		Section& global = g_options.pull_section("global");
 
@@ -220,8 +221,10 @@ void SoundHandler::read_config() {
 	// This is the code that we want to keep
 	Section& sound = g_options.pull_section("sound");
 	for (auto& option : sound_options_) {
-		option.second.volume = sound.get_int(("volume_" + option.second.name).c_str(), option.second.volume);
-		option.second.enabled = sound.get_bool(("enable_" + option.second.name).c_str(), option.second.enabled);
+		option.second.volume =
+		   sound.get_int(("volume_" + option.second.name).c_str(), option.second.volume);
+		option.second.enabled =
+		   sound.get_bool(("enable_" + option.second.name).c_str(), option.second.enabled);
 	}
 }
 
@@ -257,8 +260,9 @@ void SoundHandler::load_config() {
  *
  * \param type       The category of the FxSet to create
  * \param fx_path    The relative path and base filename from which filenames will be formed
- *                   (<datadir>/fx_path_XX.ogg). If an effect with the same 'type' and 'fx_path' already exists, we assume that it is already registered and skip it.
- * \returns  An ID for the effect that can be used to identify it in \ref play_fx.
+ *                   (<datadir>/fx_path_XX.ogg). If an effect with the same 'type' and 'fx_path'
+ * already exists, we assume that it is already registered and skip it. \returns  An ID for the
+ * effect that can be used to identify it in \ref play_fx.
  */
 
 FxId SoundHandler::register_fx(SoundType type, const std::string& fx_path) {
@@ -274,7 +278,8 @@ FxId SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
 	if (fx_ids_[type].count(fx_path) == 0) {
 		const FxId new_id = fxs_[type].size();
 		fx_ids_[type].insert(std::make_pair(fx_path, new_id));
-		fxs_[type].insert(std::make_pair(new_id, std::unique_ptr<FXset>(new FXset(fx_path, rng_.rand()))));
+		fxs_[type].insert(
+		   std::make_pair(new_id, std::unique_ptr<FXset>(new FXset(fx_path, rng_.rand()))));
 		return new_id;
 	} else {
 		return fx_ids_[type].at(fx_path);
@@ -286,8 +291,7 @@ FxId SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
  * (to avoid "sonic overload"). Based on priority and on when it was last played.
  * System sounds and sounds with priority "kFxPriorityAlwaysPlay" always return 'true'.
  */
-bool SoundHandler::play_or_not(SoundType type, const FxId fx_id,
-                               uint8_t const priority) {
+bool SoundHandler::play_or_not(SoundType type, const FxId fx_id, uint8_t const priority) {
 	assert(!SoundHandler::is_backend_disabled() && is_sound_enabled(type));
 	assert(priority >= kFxPriorityLowest);
 
@@ -332,12 +336,13 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id,
 
 	// Weighted total probability that this fx gets played; initially set according to priority
 	//  float division! not integer
-	float probability = (priority % kFxPriorityAllowMultiple) / static_cast<float>(kFxPriorityAllowMultiple);
+	float probability =
+	   (priority % kFxPriorityAllowMultiple) / static_cast<float>(kFxPriorityAllowMultiple);
 
 	// How many milliseconds in the past to consider
 	constexpr uint32_t kSlidingWindowSize = 20000;
 
-	if (ticks_since_last_play > kSlidingWindowSize) { //  reward an fx for being silent
+	if (ticks_since_last_play > kSlidingWindowSize) {  //  reward an fx for being silent
 		const float evaluation = 1.0f;  //  arbitrary value; 0 -> no change, 1 -> probability = 1
 
 		//  "decrease improbability"
@@ -349,7 +354,8 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id,
 
 	// finally: the decision
 	// float division! not integer
-	return (rng_.rand() % kFxPriorityAlwaysPlay) / static_cast<float>(kFxPriorityAlwaysPlay) <= probability;
+	return (rng_.rand() % kFxPriorityAlwaysPlay) / static_cast<float>(kFxPriorityAlwaysPlay) <=
+	       probability;
 }
 
 /**
@@ -360,8 +366,9 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id,
  * \param stereo_position  Position in widelands' game window
  * \param distance         Distance in widelands' game window
  */
-void SoundHandler::play_fx(SoundType type, const FxId fx_id,
-						   uint8_t const priority,
+void SoundHandler::play_fx(SoundType type,
+                           const FxId fx_id,
+                           uint8_t const priority,
                            int32_t const stereo_pos,
                            int distance) {
 	if (SoundHandler::is_backend_disabled() || !is_sound_enabled(type)) {
@@ -372,7 +379,8 @@ void SoundHandler::play_fx(SoundType type, const FxId fx_id,
 	assert(stereo_pos <= kStereoRight);
 
 	if (fx_id == kNoSoundEffect) {
-		throw wexception("SoundHandler: Trying to play sound effect that was never registered. Maybe you registered it before instantiating g_sh?\n");
+		throw wexception("SoundHandler: Trying to play sound effect that was never registered. Maybe "
+		                 "you registered it before instantiating g_sh?\n");
 	}
 
 	if (fxs_[type].count(fx_id) == 0) {
@@ -433,8 +441,8 @@ void SoundHandler::register_songs(const std::string& dir, const std::string& bas
 /**
  * Start playing a songset.
  * \param songset_name  The songset to play a song from.
- * \note When calling start_music() while music is still fading out from \ref stop_music() or \ref change_music(),
- * this function will block until the fadeout is complete
+ * \note When calling start_music() while music is still fading out from \ref stop_music() or \ref
+ * change_music(), this function will block until the fadeout is complete
  */
 void SoundHandler::start_music(const std::string& songset_name) {
 	if (SoundHandler::is_backend_disabled() || !is_sound_enabled(SoundType::kMusic)) {
@@ -481,8 +489,7 @@ void SoundHandler::stop_music(int fadeout_ms) {
  * If songset_name is empty, another song from the currently active songset will
  * be selected
  */
-void SoundHandler::change_music(const std::string& songset_name,
-                                int const fadeout_ms) {
+void SoundHandler::change_music(const std::string& songset_name, int const fadeout_ms) {
 	if (SoundHandler::is_backend_disabled()) {
 		return;
 	}
@@ -516,7 +523,8 @@ int32_t SoundHandler::get_volume(SoundType type) const {
 }
 
 /**
- * Sets that we want to / don't want to hear the given 'type' of sounds. If the type is \ref SoundType::kMusic, start/stop the music as well.
+ * Sets that we want to / don't want to hear the given 'type' of sounds. If the type is \ref
+ * SoundType::kMusic, start/stop the music as well.
  */
 void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
 	if (SoundHandler::is_backend_disabled()) {
@@ -544,7 +552,8 @@ void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
 }
 
 /**
- * Sets the music or sound 'volume' for the given 'type' between 0 (muted) and \ref get_max_volume().
+ * Sets the music or sound 'volume' for the given 'type' between 0 (muted) and \ref
+ * get_max_volume().
  */
 void SoundHandler::set_volume(SoundType type, int32_t volume) {
 	if (SoundHandler::is_backend_disabled()) {
@@ -604,7 +613,8 @@ void SoundHandler::fx_finished_callback(int32_t const channel) {
 	g_sh->release_fx_lock();
 }
 
-/// Lock the SDL mutex. Access to 'active_fx_' is protected by mutex because it can be accessed both from callbacks or from the main thread.
+/// Lock the SDL mutex. Access to 'active_fx_' is protected by mutex because it can be accessed both
+/// from callbacks or from the main thread.
 void SoundHandler::lock_fx() {
 	if (fx_lock_) {
 		SDL_LockMutex(fx_lock_);

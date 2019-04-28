@@ -34,11 +34,11 @@ struct NoteSound {
 	const Widelands::Coords coords;
 	const uint8_t priority;
 
-	NoteSound(SoundType init_type, FxId init_fx, Widelands::Coords init_coords, uint8_t init_priority)
-	   : type(init_type),
-		 fx(init_fx),
-	     coords(init_coords),
-	     priority(init_priority) {
+	NoteSound(SoundType init_type,
+	          FxId init_fx,
+	          Widelands::Coords init_coords,
+	          uint8_t init_priority)
+	   : type(init_type), fx(init_fx), coords(init_coords), priority(init_priority) {
 	}
 };
 

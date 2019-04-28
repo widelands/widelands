@@ -42,7 +42,7 @@
 namespace Widelands {
 
 void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
-									   const Widelands::Coords& coords,
+                                       const Widelands::Coords& coords,
                                        float scale,
                                        const RGBColor& player_color,
                                        RenderTarget* dst) const {
@@ -58,12 +58,13 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 
 	if (cur_frame) {  //  not the first pic
 		// Draw the complete prev pic , so we won't run into trouble if images have different sizes
-		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_idx, anim_time - FRAME_LENGTH, &player_color);
+		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_idx,
+		                    anim_time - FRAME_LENGTH, &player_color);
 	} else if (was) {
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
-		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, was->get_unoccupied_animation(),
-		                    anim_time - FRAME_LENGTH, &player_color);
+		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
+		                    was->get_unoccupied_animation(), anim_time - FRAME_LENGTH, &player_color);
 	}
 	// Now blit a segment of the current construction phase from the bottom.
 	int percent = 100 * completedtime * nr_frames;
@@ -82,7 +83,8 @@ ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
                                              const EditorGameBase& egbase)
    : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, egbase),
-	 creation_fx_(SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
+     creation_fx_(
+        SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 	add_attribute(MapObject::CONSTRUCTIONSITE);
 }
 
@@ -151,7 +153,8 @@ Initialize the construction site by starting orders
 ===============
 */
 bool ConstructionSite::init(EditorGameBase& egbase) {
-	Notifications::publish(NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxPriorityAlwaysPlay));
+	Notifications::publish(
+	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxPriorityAlwaysPlay));
 	PartiallyFinishedBuilding::init(egbase);
 
 	const std::map<DescriptionIndex, uint8_t>* buildcost;
@@ -348,7 +351,7 @@ Draw the construction site.
 void ConstructionSite::draw(uint32_t gametime,
                             TextToDraw draw_text,
                             const Vector2f& point_on_dst,
-							const Widelands::Coords& coords,
+                            const Widelands::Coords& coords,
                             float scale,
                             RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;

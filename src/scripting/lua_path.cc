@@ -30,8 +30,8 @@
 namespace {
 
 /// A class that makes iteration over filename_?.png templates easy.
-/// TODO(GunChleoc): Code duplication with g_fs->get_sequential_files.
-/// Get rid of this and list_files when conversion to spritemaps has been done.
+// TODO(GunChleoc): Code duplication with g_fs->get_sequential_files.
+// Get rid of this and list_files when conversion to spritemaps has been done.
 class NumberGlob {
 public:
 	explicit NumberGlob(const std::string& file_template);
