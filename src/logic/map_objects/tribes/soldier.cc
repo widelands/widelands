@@ -162,7 +162,7 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 				}
 				map.emplace(dir, anim_name);
 			}
-			walk_name_.emplace(range, map);
+			walk_name_.emplace(std::unique_ptr<SoldierLevelRange>(&range), map);
 		}
 	}
 }
@@ -280,7 +280,7 @@ const DirAnimations& SoldierDescr::get_right_walk_anims(bool const ware, const W
 	}
 	DirAnimations* anim = new DirAnimations();
 	for (const auto& pair : walk_name_) {
-		if (pair.first.matches(soldier)) {
+		if (pair.first->matches(soldier)) {
 			for (uint8_t dir = 1; dir <= 6; ++dir) {
 				anim->set_animation(dir, get_animation(pair.second.at(dir), worker));
 			}

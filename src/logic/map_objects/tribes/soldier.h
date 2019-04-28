@@ -56,13 +56,6 @@ struct SoldierLevelRange {
 		       max_defense == other.max_defense &&
 		       max_evade == other.max_evade;
 	}
-	// Dummy to make std::map happy. DO NOT USE.
-	bool operator<(const SoldierLevelRange& other) const {
-		return max_health < other.min_health &&
-		       max_attack < other.min_attack &&
-		       max_defense < other.min_defense &&
-		       max_evade < other.min_evade;
-	}
 
 	int32_t min_health;
 	int32_t min_attack;
@@ -184,7 +177,7 @@ private:
 	// NOTE: I expect no soldier will ever agree to carry a ware, so we don't provide animations for that.
 	// NOTE: All walking animations are expected to have the same set of ranges.
 	SoldierAnimationsList idle_name_;
-	std::map<SoldierLevelRange, std::map<uint8_t, std::string>> walk_name_;
+	std::unordered_map<std::unique_ptr<SoldierLevelRange>, std::map<uint8_t, std::string>> walk_name_;
 
 	// Reads list of animation names from the table and pushes them into result.
 	void add_battle_animation(std::unique_ptr<LuaTable> table, SoldierAnimationsList* result);
