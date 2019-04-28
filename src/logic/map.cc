@@ -2387,4 +2387,30 @@ MilitaryInfluence Map::calc_influence(Coords const a, Area<> const area) const {
 	return influence;
 }
 
+std::set<Coords> Map::to_set(Area<Coords> area) const {
+	std::set<Coords> result;
+	MapRegion<Area<Coords>> mr(*this, area);
+	do {
+		result.insert(mr.location());
+	} while (mr.advance(*this));
+	return result;
+}
+
+// Returns all triangles whose corners are all in the given area
+std::set<TCoords<Coords>> Map::triangles_in_region(std::set<Coords> area) const {
+	std::set<TCoords<Coords>> result;
+	for (const Coords& c : area) {
+		if (!area.count(br_n(c))) {
+			continue;
+		}
+		if (area.count(r_n(c))) {
+			result.insert(TCoords<Coords>(c, TriangleIndex::R));
+		}
+		if (area.count(bl_n(c))) {
+			result.insert(TCoords<Coords>(c, TriangleIndex::D));
+		}
+	}
+	return result;
+}
+
 }  // namespace Widelands

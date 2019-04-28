@@ -425,4 +425,13 @@ void Tribes::postload_calculate_trainingsites_proportions() {
 	}
 }
 
+uint32_t Tribes::get_largest_workarea() const {
+	uint32_t largest = 0;
+	for (DescriptionIndex di = 0; di < buildings_->size(); ++di) {
+		for (const auto& pair : buildings_->get(di).workarea_info()) {
+			largest = std::max(largest, pair.first);
+		}
+	}
+	return largest;
+}
 }  // namespace Widelands

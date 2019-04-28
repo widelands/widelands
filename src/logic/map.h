@@ -333,6 +333,7 @@ public:
 
 	// Field logic
 	static MapIndex get_index(const Coords&, int16_t width);
+	MapIndex get_index(const Coords&) const;
 	MapIndex max_index() const {
 		return width_ * height_;
 	}
@@ -381,6 +382,9 @@ public:
 	void get_neighbour(const Coords&, Direction dir, Coords*) const;
 	void get_neighbour(const FCoords&, Direction dir, FCoords*) const;
 	FCoords get_neighbour(const FCoords&, Direction dir) const;
+
+	std::set<Coords> to_set(Area<Coords> area) const;
+	std::set<TCoords<Coords>> triangles_in_region(std::set<Coords> area) const;
 
 	// Pathfinding
 	int32_t findpath(Coords instart,
@@ -591,6 +595,10 @@ inline MapIndex Map::get_index(const Coords& c, int16_t const width) {
 	assert(c.x < width);
 	assert(0 <= c.y);
 	return c.y * width + c.x;
+}
+
+inline MapIndex Map::get_index(const Coords& c) const {
+	return get_index(c, width_);
 }
 
 inline Field& Map::operator[](MapIndex const i) const {
