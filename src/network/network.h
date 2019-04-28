@@ -183,9 +183,8 @@ struct FilePart {
 struct NetTransferFile {
 	NetTransferFile() : bytes(0), filename(""), md5sum("") {
 	}
-	~NetTransferFile() {
-		parts.clear();
-	}
+	~NetTransferFile() = default;
+
 	uint32_t bytes;
 	std::string filename;
 	std::string md5sum;
