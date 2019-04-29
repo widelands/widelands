@@ -304,6 +304,28 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 void InteractiveBase::on_buildhelp_changed(bool /* value */) {
 }
 
+void InteractiveBase::show_expedition_port_space(Widelands::Ship* ship, const Widelands::Coords& coords) {
+	expedition_port_spaces_.emplace(std::make_pair(ship, coords));
+}
+
+void InteractiveBase::hide_expedition_port_space(Widelands::Ship* ship) {
+	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end(); ++it) {
+		if (it->first == ship) {
+			expedition_port_spaces_.erase(it);
+			return;
+		}
+	}
+}
+
+bool InteractiveBase::has_expedition_port_space(const Widelands::Coords& coords) const {
+	for (const auto& pair : expedition_port_spaces_) {
+		if (pair.second == coords) {
+			return true;
+		}
+	}
+	return false;
+}
+
 // Show the given workareas at the given coords and returns the overlay job id associated
 void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords) {
 	workarea_previews_[coords] = &workarea_info;

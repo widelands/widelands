@@ -86,6 +86,10 @@ public:
 	void show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords);
 	void hide_workarea(const Widelands::Coords& coords);
 
+	void show_expedition_port_space(Widelands::Ship*, const Widelands::Coords&);
+	void hide_expedition_port_space(Widelands::Ship*);
+	bool has_expedition_port_space(const Widelands::Coords&) const;
+
 	//  point of view for drawing
 	virtual Widelands::Player* get_player() const = 0;
 
@@ -290,6 +294,8 @@ private:
 	// The currently enabled work area previews. They are keyed by the
 	// coordinate that the building that shows the work area is positioned.
 	std::map<Widelands::Coords, const WorkareaInfo*> workarea_previews_;
+
+	std::map<Widelands::Ship*, Widelands::Coords> expedition_port_spaces_;
 
 	RoadBuildingOverlays road_building_overlays_;
 

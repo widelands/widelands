@@ -339,8 +339,10 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		if (f->vision > 0) {
 			// Draw build help.
-			if (buildhelp()) {
-				const auto* overlay = get_buildhelp_overlay(plr.get_buildcaps(f->fcoords));
+			bool show_port_space = has_expedition_port_space(f->fcoords);
+			if (show_port_space || buildhelp()) {
+				const auto* overlay = get_buildhelp_overlay(show_port_space ?
+						f->fcoords.field->maxcaps() : plr.get_buildcaps(f->fcoords));
 				if (overlay != nullptr) {
 					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale);
 				}
