@@ -100,7 +100,8 @@ void WorkareaProgram::draw(uint32_t texture_id,
 	vertices_.clear();
 	vertices_.reserve(fields_to_draw.size() * 3);
 
-	auto emplace_triangle = [this](const FieldsToDraw::Field& field, Widelands::TriangleIndex triangle_index) {
+	auto emplace_triangle = [this, workarea, fields_to_draw]
+	(const FieldsToDraw::Field& field, Widelands::TriangleIndex triangle_index) {
 		RGBAColor color(0, 0, 0, 0);
 		for (const WorkareasEntry& wa_map : workarea) {
 			for (const WorkareaPreviewData& data : wa_map) {
@@ -114,12 +115,12 @@ void WorkareaProgram::draw(uint32_t texture_id,
 			}
 		}
 		if (color.a > 0) {
-			add_vertex(fields_to_draw.at(current_index), color);
+			add_vertex(field, color);
 			add_vertex(fields_to_draw.at(field.brn_index), color);
 			add_vertex(fields_to_draw.at(triangle_index == Widelands::TriangleIndex::D ?
 					field.bln_index : field.rn_index), color);
 		}
-	}
+	};
 
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
