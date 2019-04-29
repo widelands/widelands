@@ -34,7 +34,8 @@ Tribes::Tribes()
      ships_(new DescriptionMaintainer<ShipDescr>()),
      wares_(new DescriptionMaintainer<WareDescr>()),
      workers_(new DescriptionMaintainer<WorkerDescr>()),
-     tribes_(new DescriptionMaintainer<TribeDescr>()) {
+     tribes_(new DescriptionMaintainer<TribeDescr>()),
+     largest_workarea_(0) {
 }
 
 void Tribes::add_constructionsite_type(const LuaTable& table, const EditorGameBase& egbase) {
@@ -314,8 +315,14 @@ void Tribes::load_graphics() {
 }
 
 void Tribes::postload() {
+	largest_workarea_ = 0;
 	for (DescriptionIndex i = 0; i < buildings_->size(); ++i) {
 		BuildingDescr& building_descr = *buildings_->get_mutable(i);
+
+		// Calculate largest possible workarea radius
+		for (const auto& pair : building_descr.workarea_info()) {
+			largest_workarea_ = std::max(largest_workarea_, pair.first);
+		}
 
 		// Add consumers and producers to wares.
 		if (upcast(ProductionSiteDescr, de, &building_descr)) {
@@ -426,12 +433,6 @@ void Tribes::postload_calculate_trainingsites_proportions() {
 }
 
 uint32_t Tribes::get_largest_workarea() const {
-	uint32_t largest = 0;
-	for (DescriptionIndex di = 0; di < buildings_->size(); ++di) {
-		for (const auto& pair : buildings_->get(di).workarea_info()) {
-			largest = std::max(largest, pair.first);
-		}
-	}
-	return largest;
+	return largest_workarea_;
 }
 }  // namespace Widelands

@@ -155,6 +155,8 @@ private:
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
 	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
 
+	uint32_t largest_workarea_;
+
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };
 

@@ -100,55 +100,35 @@ void WorkareaProgram::draw(uint32_t texture_id,
 	vertices_.clear();
 	vertices_.reserve(fields_to_draw.size() * 3);
 
+	auto emplace_triangle = [this](const FieldsToDraw::Field& field, Widelands::TriangleIndex triangle_index) {
+		RGBAColor color(0, 0, 0, 0);
+		for (const WorkareasEntry& wa_map : workarea) {
+			for (const WorkareaPreviewData& data : wa_map) {
+				if (data.coords == Widelands::TCoords<>(field.fcoords, triangle_index)) {
+					RGBAColor color_to_apply = workarea_colors[data.index];
+					if (data.use_special_coloring) {
+						color_to_apply = apply_color_special(color_to_apply, RGBAColor(data.special_coloring));
+					}
+					color = apply_color(color, color_to_apply);
+				}
+			}
+		}
+		if (color.a > 0) {
+			add_vertex(fields_to_draw.at(current_index), color);
+			add_vertex(fields_to_draw.at(field.brn_index), color);
+			add_vertex(fields_to_draw.at(triangle_index == Widelands::TriangleIndex::D ?
+					field.bln_index : field.rn_index), color);
+		}
+	}
+
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
-
-		// The bottom right neighbor fields_to_draw is needed for both triangles
-		// associated with this field. If it is not in fields_to_draw, there is no need to
-		// draw any triangles.
-		if (field.brn_index == FieldsToDraw::kInvalidIndex) {
-			continue;
-		}
-
-		// Down triangle.
-		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
-			RGBAColor color(0, 0, 0, 0);
-			for (const WorkareasEntry& wa_map : workarea) {
-				for (const WorkareaPreviewData& data : wa_map) {
-					if (data.coords == Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D)) {
-						RGBAColor color_to_apply = workarea_colors[data.index];
-						if (data.use_special_coloring) {
-							color_to_apply = apply_color_special(color_to_apply, RGBAColor(data.special_coloring));
-						}
-						color = apply_color(color, color_to_apply);
-					}
-				}
+		if (field.brn_index != FieldsToDraw::kInvalidIndex) {
+			if (field.bln_index != FieldsToDraw::kInvalidIndex) {
+				emplace_triangle(field, Widelands::TriangleIndex::D);
 			}
-			if (color.a > 0) {
-				add_vertex(fields_to_draw.at(current_index), color);
-				add_vertex(fields_to_draw.at(field.bln_index), color);
-				add_vertex(fields_to_draw.at(field.brn_index), color);
-			}
-		}
-
-		// Right triangle.
-		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
-			RGBAColor color(0, 0, 0, 0);
-			for (const WorkareasEntry& wa_map : workarea) {
-				for (const WorkareaPreviewData& data : wa_map) {
-					if (data.coords == Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::R)) {
-						RGBAColor color_to_apply = workarea_colors[data.index];
-						if (data.use_special_coloring) {
-							color_to_apply = apply_color_special(color_to_apply, RGBAColor(data.special_coloring));
-						}
-						color = apply_color(color, color_to_apply);
-					}
-				}
-			}
-			if (color.a > 0) {
-				add_vertex(fields_to_draw.at(current_index), color);
-				add_vertex(fields_to_draw.at(field.brn_index), color);
-				add_vertex(fields_to_draw.at(field.rn_index), color);
+			if (field.rn_index != FieldsToDraw::kInvalidIndex) {
+				emplace_triangle(field, Widelands::TriangleIndex::R);
 			}
 		}
 	}

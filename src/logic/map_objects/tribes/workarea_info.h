@@ -59,8 +59,12 @@ struct WorkareaPreviewData {
 	WorkareaPreviewData(const WorkareaPreviewData& other) = default;
 	WorkareaPreviewData& operator=(const WorkareaPreviewData&) = default;
 
+	// The triangle this data is applied to
 	Widelands::TCoords<> coords;
+	// The underlying workarea color
 	uint8_t index;
+	// If a "special coloring" is specified, its RGB will be overlayed over the base color as strongly as if it
+	// had full alpha, and the final transparency of the entire triangle will be set to this color's alpha
 	bool use_special_coloring;
 	uint32_t special_coloring;
 };
