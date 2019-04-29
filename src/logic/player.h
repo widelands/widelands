@@ -37,6 +37,7 @@
 #include "logic/message_queue.h"
 #include "logic/see_unsee_node.h"
 #include "logic/widelands.h"
+#include "sound/constants.h"
 
 class Node;
 namespace Widelands {
@@ -616,13 +617,16 @@ public:
 		further_initializations_.push_back(init);
 	}
 
+	void set_attack_forbidden(PlayerNumber who, bool forbid);
+	bool is_attack_forbidden(PlayerNumber who) const;
+
 	const std::string pick_shipname();
 
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
 	void update_team_players();
-	void play_message_sound(const Message::Type& msgtype);
+	void play_message_sound(const Message* message);
 	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
@@ -693,7 +697,13 @@ private:
 	 */
 	std::vector<std::vector<uint32_t>> ware_stocks_;
 
+	std::set<PlayerNumber> forbid_attack_;
+
 	PlayerBuildingStats building_stats_;
+
+	FxId message_fx_;
+	FxId attack_fx_;
+	FxId occupied_fx_;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };

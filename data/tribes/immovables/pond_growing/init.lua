@@ -19,7 +19,6 @@ tribes:new_immovable_type {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
          hotspot = { 8, 5 },
-         scale = 2.5
       },
    }
 }

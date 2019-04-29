@@ -25,6 +25,7 @@
 #include "base/macros.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/spinbox.h"
 #include "ui_basic/textarea.h"
@@ -81,9 +82,6 @@ private:
 
 	void set_map_info(Widelands::UniqueRandomMapInfo& map_info) const;
 
-	// Helper function to find a map dimension in the global list of available dimensions.
-	size_t find_dimension_index(int32_t value);
-
 	// UI elements
 	int32_t margin_;
 	int32_t box_width_;
@@ -91,8 +89,8 @@ private:
 	UI::Box box_;
 
 	// Size
-	UI::SpinBox width_;
-	UI::SpinBox height_;
+	UI::Dropdown<int32_t> width_;
+	UI::Dropdown<int32_t> height_;
 
 	uint8_t max_players_;
 	UI::SpinBox players_;

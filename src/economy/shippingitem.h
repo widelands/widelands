@@ -53,7 +53,7 @@ struct ShippingItem {
 	void get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const;
 
 	void set_economy(Game&, Economy* e, WareWorker);
-	PortDock* get_destination(Game&);
+	const PortDock* get_destination(Game&) const;
 
 	void remove(EditorGameBase&);
 

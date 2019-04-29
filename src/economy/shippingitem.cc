@@ -107,7 +107,7 @@ void ShippingItem::end_shipping(Game& game) {
 		worker->end_shipping(game);
 }
 
-PortDock* ShippingItem::get_destination(Game& game) {
+const PortDock* ShippingItem::get_destination(Game& game) const {
 	return destination_dock_.get(game);
 }
 
