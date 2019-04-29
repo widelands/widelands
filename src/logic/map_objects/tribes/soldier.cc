@@ -134,12 +134,12 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 			std::unique_ptr<LuaTable> range_table = walk_table->get_table(entry);
 			// I would prefer to use the SoldierLevelRange as key in the table,
 			// but LuaTable can handle only string keys :(
-			SoldierLevelRange range;
+			SoldierLevelRange* range = nullptr;
 			std::map<uint8_t, std::string> map;
 			for (const std::string& dir_name : range_table->keys<std::string>()) {
 				uint8_t dir;
 				if (dir_name == "range") {
-					range = SoldierLevelRange(*range_table->get_table(dir_name));
+					range = new SoldierLevelRange(*range_table->get_table(dir_name));
 					continue;
 				} else if (dir_name == "sw") {
 					dir = WALK_SW;
@@ -162,7 +162,7 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 				}
 				map.emplace(dir, anim_name);
 			}
-			walk_name_.emplace(std::shared_ptr<SoldierLevelRange>(&range), map);
+			walk_name_.emplace(std::move(range), map);
 		}
 	}
 }
