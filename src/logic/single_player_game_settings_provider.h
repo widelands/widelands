@@ -62,6 +62,9 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	std::string get_win_condition_script() override;
 	void set_win_condition_script(const std::string& wc) override;
 
+	void set_peaceful_mode(bool peace) override;
+	bool is_peaceful_mode() override;
+
 private:
 	GameSettings s;
 };

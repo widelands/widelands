@@ -64,6 +64,7 @@
 #include "network/network.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
+#include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
@@ -322,6 +323,19 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 	// Check for win_conditions
 	if (!settings.scenario) {
 		loader_ui->step(_("Initializing game…"));
+		if (settings.peaceful) {
+			for (uint32_t i = 1; i < settings.players.size(); ++i) {
+				if (Player* p1 = get_player(i)) {
+					for (uint32_t j = i + 1; j <= settings.players.size(); ++j) {
+						if (Player* p2 = get_player(j)) {
+							p1->set_attack_forbidden(j, true);
+							p2->set_attack_forbidden(i, true);
+						}
+					}
+				}
+			}
+		}
+
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
@@ -548,7 +562,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 		;
 #endif
 
-	g_sound_handler.change_music("ingame", 1000, 0);
+	g_sh->change_music("ingame", 1000);
 
 	state_ = gs_running;
 
@@ -556,7 +570,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 
 	state_ = gs_ending;
 
-	g_sound_handler.change_music("menu", 1000, 0);
+	g_sh->change_music("menu", 1000);
 
 	cleanup_objects();
 	set_ibase(nullptr);

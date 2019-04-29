@@ -56,6 +56,7 @@
 #include "logic/roadtype.h"
 #include "scripting/lua_table.h"
 #include "sound/note_sound.h"
+#include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
 
 namespace {
@@ -145,7 +146,10 @@ Player::Player(EditorGameBase& the_egbase,
      current_consumed_statistics_(the_egbase.tribes().nrwares()),
      ware_productions_(the_egbase.tribes().nrwares()),
      ware_consumptions_(the_egbase.tribes().nrwares()),
-     ware_stocks_(the_egbase.tribes().nrwares()) {
+     ware_stocks_(the_egbase.tribes().nrwares()),
+     message_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/message")),
+     attack_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/under_attack")),
+     occupied_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/site_occupied")) {
 	set_name(name);
 
 	// Disallow workers that the player's tribe doesn't have.
@@ -252,7 +256,8 @@ void Player::set_team_number(TeamNumber team) {
  * each other.
  */
 bool Player::is_hostile(const Player& other) const {
-	return &other != this && (!team_number_ || team_number_ != other.team_number_);
+	return &other != this && (!team_number_ || team_number_ != other.team_number_) &&
+	       !is_attack_forbidden(other.player_number());
 }
 
 bool Player::is_defeated() const {
@@ -323,17 +328,21 @@ void Player::update_team_players() {
  * Plays the corresponding sound when a message is received and if sound is
  * enabled.
  */
-void Player::play_message_sound(const Message::Type& msgtype) {
-#define MAYBE_PLAY(type, file)                                                                     \
-	if (msgtype == type) {                                                                          \
-		Notifications::publish(NoteSound(file, 200, PRIO_ALWAYS_PLAY));                              \
-		return;                                                                                      \
-	}
-
-	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
-		MAYBE_PLAY(Message::Type::kEconomySiteOccupied, "military/site_occupied")
-		MAYBE_PLAY(Message::Type::kWarfareUnderAttack, "military/under_attack")
-		Notifications::publish(NoteSound("message", 200, PRIO_ALWAYS_PLAY));
+void Player::play_message_sound(const Message* message) {
+	if (g_sh->is_sound_enabled(SoundType::kMessage)) {
+		FxId fx;
+		switch (message->type()) {
+		case Message::Type::kEconomySiteOccupied:
+			fx = occupied_fx_;
+			break;
+		case Message::Type::kWarfareUnderAttack:
+			fx = attack_fx_;
+			break;
+		default:
+			fx = message_fx_;
+		}
+		Notifications::publish(
+		   NoteSound(SoundType::kMessage, fx, message->position(), kFxPriorityAlwaysPlay));
 	}
 }
 
@@ -350,7 +359,7 @@ MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, 
 	// Sound & popup
 	if (InteractivePlayer* const iplayer = game.get_ipl()) {
 		if (&iplayer->player() == this) {
-			play_message_sound(message->type());
+			play_message_sound(message);
 			if (popup)
 				iplayer->popup_message(id, *message);
 		}
@@ -1388,6 +1397,21 @@ void Player::set_ai(const std::string& ai) {
 
 const std::string& Player::get_ai() const {
 	return ai_;
+}
+
+bool Player::is_attack_forbidden(PlayerNumber who) const {
+	return forbid_attack_.find(who) != forbid_attack_.end();
+}
+
+void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
+	const auto it = forbid_attack_.find(who);
+	if (forbid ^ (it == forbid_attack_.end())) {
+		return;
+	} else if (forbid) {
+		forbid_attack_.emplace(who);
+	} else {
+		forbid_attack_.erase(it);
+	}
 }
 
 /**

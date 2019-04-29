@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-05 04:54+0000\n"
-"PO-Revision-Date: 2019-04-07 09:56+0000\n"
+"POT-Creation-Date: 2019-04-20 05:45+0000\n"
+"PO-Revision-Date: 2019-04-22 01:30+0000\n"
 "Last-Translator: stdh\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -174,7 +174,7 @@ msgstr "De Wraak van Neptunus"
 #: ../../data/campaigns/campaigns.conf:106
 #: ../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
-msgstr ""
+msgstr "Wat een Verrassing!"
 
 #: ../../data/campaigns/campaigns.conf:129
 #: ../../data/campaigns/fri01.wmf/elemental:8
@@ -221,7 +221,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
-msgstr ""
+msgstr "Na hun thuiskomst worden Lutius en zijn compagnie geconfronteerd met een economie in duigen. De moeilijkheden in de verschillende productiesystemen oplossen zal van het grootste belang zijn om de glorie van het Imperium te herstellen."
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""

@@ -95,6 +95,9 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	void set_win_condition_script(const std::string&) override;
 	std::string get_win_condition_script() override;
 
+	void set_peaceful_mode(bool peace) override;
+	bool is_peaceful_mode() override;
+
 	// ChatProvider interface
 	void send(const std::string& msg) override;
 	const std::vector<ChatMessage>& get_messages() const override;

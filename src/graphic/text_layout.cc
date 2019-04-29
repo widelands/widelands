@@ -222,6 +222,7 @@ std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_fir
 	}
 	NEVER_HERE();
 }
+
 std::string as_content(const std::string& txt, UI::PanelStyle style) {
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:

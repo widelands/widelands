@@ -66,6 +66,7 @@ private:
 	UI::MultilineTextarea chatbox;
 	UI::EditBox editbox;
 	size_t chat_message_counter;
+	FxId chat_sound;
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
 };
 

@@ -8,8 +8,8 @@ animations = {
    work = {
       pictures = path.list_files(dirname .. "work_??.png"),
       sound_effect = {
-            directory = "sound/hammering",
-            name = "hammering",
+         path = "sound/hammering/hammering",
+         priority = 64
       },
       hotspot = { 12, 27 },
       fps = 10
@@ -37,7 +37,7 @@ tribes:new_worker_type {
       buildship = {
          "walk=object-or-coords",
          "plant=attrib:shipconstruction unless object",
-         "playsound=sound/sawmill sawmill 230",
+         "playsound=sound/sawmill/sawmill 230",
          "animate=work 500",
          "construct",
          "animate=work 5000",
