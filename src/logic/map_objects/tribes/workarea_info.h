@@ -44,4 +44,27 @@
 
 using WorkareaInfo = std::map<uint32_t, std::set<std::string>>;
 
+// Visualization-related structs
+struct WorkareaPreviewData {
+	WorkareaPreviewData(Widelands::TCoords<> c, uint8_t i)
+		: coords(c), index(i), use_special_coloring(false), special_coloring(0) {
+	}
+	WorkareaPreviewData(Widelands::TCoords<> c, uint8_t i, uint32_t col)
+		: coords(c), index(i), use_special_coloring(true), special_coloring(col) {
+	}
+	WorkareaPreviewData()
+		: coords(Widelands::TCoords<>(Widelands::Coords::null(), Widelands::TriangleIndex::D)),
+		  index(0), use_special_coloring(false), special_coloring(0) {
+	}
+	WorkareaPreviewData(const WorkareaPreviewData& other) = default;
+	WorkareaPreviewData& operator=(const WorkareaPreviewData&) = default;
+
+	Widelands::TCoords<> coords;
+	uint8_t index;
+	bool use_special_coloring;
+	uint32_t special_coloring;
+};
+using WorkareasEntry = std::vector<WorkareaPreviewData>;
+using Workareas = std::vector<WorkareasEntry>;
+
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKAREA_INFO_H
