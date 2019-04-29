@@ -211,14 +211,14 @@ all_levels_atl = {
 --
 --    With "die_w_0" and "die_w_1" being members of the "animations" table.
 --    Each animation name is mapped to a table with the following entries:
---     * min_health
---     * min_attack
---     * min_defense
---     * min_evade
---     * max_health
---     * max_attack
---     * max_defense
---     * max_evade
+--       * min_health
+--       * min_attack
+--       * min_defense
+--       * min_evade
+--       * max_health
+--       * max_attack
+--       * max_defense
+--       * max_evade
 --
 --    Each animation will be used only for soldiers whose current training matches these limitations.
 --

@@ -177,7 +177,7 @@ private:
 	// NOTE: I expect no soldier will ever agree to carry a ware, so we don't provide animations for that.
 	// NOTE: All walking animations are expected to have the same set of ranges.
 	SoldierAnimationsList idle_name_;
-	std::unordered_map<std::unique_ptr<SoldierLevelRange>, std::map<uint8_t, std::string>> walk_name_;
+	std::unordered_map<std::shared_ptr<SoldierLevelRange>, std::map<uint8_t, std::string>> walk_name_;
 
 	// Reads list of animation names from the table and pushes them into result.
 	void add_battle_animation(std::unique_ptr<LuaTable> table, SoldierAnimationsList* result);

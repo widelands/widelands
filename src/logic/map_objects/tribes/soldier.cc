@@ -162,7 +162,7 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 				}
 				map.emplace(dir, anim_name);
 			}
-			walk_name_.emplace(std::unique_ptr<SoldierLevelRange>(&range), map);
+			walk_name_.emplace(std::shared_ptr<SoldierLevelRange>(&range), map);
 		}
 	}
 }
