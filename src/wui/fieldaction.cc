@@ -741,7 +741,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 								imm_type != Widelands::MapObjectType::MILITARYSITE &&
 								imm_type != Widelands::MapObjectType::WAREHOUSE)) {
 							continue;
-						}						
+						}
 					} else if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
 						if (imm_type != Widelands::MapObjectType::PRODUCTIONSITE || imm->get_owner() != player_) {
 							continue;
