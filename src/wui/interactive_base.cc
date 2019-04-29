@@ -197,19 +197,19 @@ InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
 bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords,
                                            const Widelands::Map* map) const {
 	if (!map) {
-		for (const auto& it : workarea_previews_) {
-			if (it->coords == coords) {
+		for (const auto& preview : workarea_previews_) {
+			if (preview->coords == coords) {
 				return true;
 			}
 		}
 		return false;
 	}
-	for (const auto& it : workarea_previews_) {
+	for (const auto& preview : workarea_previews_) {
 		uint32_t radius = 0;
-		for (const auto& wa : *it->info) {
+		for (const auto& wa : *preview->info) {
 			radius = std::max(radius, wa.first);
 		}
-		if (map->calc_distance(coords, it->coords) <= radius) {
+		if (map->calc_distance(coords, preview->coords) <= radius) {
 			return true;
 		}
 	}
@@ -367,8 +367,8 @@ static uint8_t workarea_max(uint8_t a, uint8_t b, uint8_t c) {
 Workareas InteractiveBase::get_workarea_overlays(const Widelands::Map& map) {
 	if (!workareas_cache_) {
 		workareas_cache_.reset(new Workareas());
-		for (const auto& it : workarea_previews_) {
-			workareas_cache_->push_back(get_workarea_overlay(map, *it));
+		for (const auto& preview : workarea_previews_) {
+			workareas_cache_->push_back(get_workarea_overlay(map, *preview));
 		}
 	}
 	return Workareas(*workareas_cache_);

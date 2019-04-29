@@ -731,33 +731,26 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						continue;
 					}
 					const Widelands::BuildingDescr* d = nullptr;
-					if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
-						if (imm->get_owner() != player_) {
+					if (imm_type == Widelands::MapObjectType::CONSTRUCTIONSITE) {
+						upcast(Widelands::ConstructionSite, cs, imm);
+						d = cs->get_info().becomes;
+						if ((descr.type() == Widelands::MapObjectType::PRODUCTIONSITE &&
+								d->type() != Widelands::MapObjectType::PRODUCTIONSITE) ||
+								((descr.type() == Widelands::MapObjectType::MILITARYSITE ||
+								descr.type() == Widelands::MapObjectType::WAREHOUSE) &&
+								imm_type != Widelands::MapObjectType::MILITARYSITE &&
+								imm_type != Widelands::MapObjectType::WAREHOUSE)) {
 							continue;
-						}
-						if (imm_type != Widelands::MapObjectType::PRODUCTIONSITE) {
-							if (imm_type != Widelands::MapObjectType::CONSTRUCTIONSITE) {
-								continue;
-							}
-							upcast(Widelands::ConstructionSite, cs, imm);
-							d = cs->get_info().becomes;
-							if (d->type() != Widelands::MapObjectType::PRODUCTIONSITE) {
-								continue;
-							}
+						}						
+					} else if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+						if (imm_type != Widelands::MapObjectType::PRODUCTIONSITE || imm->get_owner() != player_) {
+							continue;
 						}
 					} else if (descr.type() == Widelands::MapObjectType::WAREHOUSE ||
 							descr.type() == Widelands::MapObjectType::MILITARYSITE) {
 						if (imm_type != Widelands::MapObjectType::MILITARYSITE &&
 								imm_type != Widelands::MapObjectType::WAREHOUSE) {
-							if (imm_type != Widelands::MapObjectType::CONSTRUCTIONSITE) {
-								continue;
-							}
-							upcast(Widelands::ConstructionSite, cs, imm);
-							d = cs->get_info().becomes;
-							if (d->type() != Widelands::MapObjectType::WAREHOUSE &&
-									d->type() != Widelands::MapObjectType::MILITARYSITE) {
-								continue;
-							}
+							continue;
 						}
 					}
 					upcast(Widelands::Building, bld, imm);
