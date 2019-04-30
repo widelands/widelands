@@ -915,8 +915,9 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		   (boost::format(_("Did not start %1$s because %2$s")) % ps.top_state().program->descname() %
 		    is_missing_string)
 		      .str();
-
-		ps.set_production_result(result_string);
+		if ( ps.production_result() != ps.descr().out_of_resource_heading()) {
+			ps.set_production_result(result_string);
+		}
 		return ps.program_end(game, ProgramResult::kFailed);
 	} else {  //  we fulfilled all consumption requirements
 		for (size_t i = 0; i < inputqueues.size(); ++i) {
