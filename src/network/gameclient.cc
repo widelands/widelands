@@ -586,8 +586,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		    d->settings.mapfilename.c_str());
 
 		// New map was set, so we clean up the buffer of a previously requested file
-		if (file_)
-			delete file_;
+		file_.reset(nullptr);
 		break;
 	}
 
@@ -637,10 +636,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		s.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
 		d->net->send(s);
 
-		if (file_)
-			delete file_;
-
-		file_ = new NetTransferFile();
+		file_.reset(new NetTransferFile());
 		file_->bytes = bytes;
 		file_->filename = path;
 		file_->md5sum = md5;
