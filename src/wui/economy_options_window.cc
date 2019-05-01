@@ -99,8 +99,7 @@ EconomyOptionsWindow::TargetWaresDisplay::TargetWaresDisplay(UI::Panel* const pa
                                                              bool selectable)
    : AbstractWaresDisplay(parent, x, y, player->tribe(), type, selectable),
      serial_(serial),
-     player_(player),
-     type_(type) {
+     player_(player) {
 	const Widelands::TribeDescr& owner_tribe = player->tribe();
 	if (type == Widelands::wwWORKER) {
 		for (const Widelands::DescriptionIndex& worker_index : owner_tribe.workers()) {
@@ -146,7 +145,7 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
      player_(player),
      type_(type),
      can_act_(can_act),
-     display_(this, 0, 0, serial_, player_, type_, can_act_) {
+     display_(this, 0, 0, serial_, player_, type, can_act_) {
 	add(&display_, UI::Box::Resizing::kFullSize);
 
 	if (!can_act_) {

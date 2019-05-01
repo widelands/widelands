@@ -53,7 +53,6 @@ private:
 	private:
 		Widelands::Serial serial_;
 		Widelands::Player* player_;
-		Widelands::WareWorker type_;
 	};
 
 	/**

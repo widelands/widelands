@@ -873,9 +873,9 @@ void show_field_action(InteractiveBase* const ibase,
 		// Did he click on a flag or a road where a flag can be built?
 		if (upcast(const Widelands::PlayerImmovable, i, map.get_immovable(target))) {
 			bool finish = false;
-			if (upcast(const Widelands::Flag, flag, i)) {
+			if (is_a(Widelands::Flag, i)) {
 				finish = true;
-			} else if (upcast(const Widelands::RoadBase, road, i)) {
+			} else if (is_a(Widelands::RoadBase, i)) {
 				if (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) {
 					upcast(Game, game, &player->egbase());
 					game->send_player_build_flag(player->player_number(), target);
