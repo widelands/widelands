@@ -1507,7 +1507,7 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 			return start_task_move(
 			   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware()), true);
 		} else if (upcast(Flag, nextflag, nextstep)) {  //  Flag to Flag
-			RoadBase& road = *flag->get_roadbase(*nextflag);
+			RoadBase& road = *flag->get_roadbase(*nextflag, MapObjectType::ROAD);
 
 			Path path(road.get_path());
 

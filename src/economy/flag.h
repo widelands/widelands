@@ -132,7 +132,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void attach_road(int32_t dir, RoadBase*);
 	void detach_road(int32_t dir);
 
-	RoadBase* get_roadbase(Flag&);
+	RoadBase* get_roadbase(Flag&, MapObjectType*);
 
 	bool is_dead_end() const;
 
