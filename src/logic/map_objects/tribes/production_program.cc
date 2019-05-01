@@ -565,8 +565,10 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 			                   .str();
 		}
 		}
-
-		ps.set_production_result(result_string);
+		if (ps.production_result() != ps.descr().out_of_resource_heading() ||
+		    ps.descr().out_of_resource_heading().empty()) {
+			ps.set_production_result(result_string);
+		}
 	}
 	return ps.program_end(game, result_);
 }
@@ -916,7 +918,10 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		    is_missing_string)
 		      .str();
 
-		ps.set_production_result(result_string);
+		if (ps.production_result() != ps.descr().out_of_resource_heading() ||
+		    ps.descr().out_of_resource_heading().empty()) {
+			ps.set_production_result(result_string);
+		}
 		return ps.program_end(game, ProgramResult::kFailed);
 	} else {  //  we fulfilled all consumption requirements
 		for (size_t i = 0; i < inputqueues.size(); ++i) {
@@ -1006,7 +1011,10 @@ void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) cons
 	   /** TRANSLATORS: %s is a list of wares. String is fetched according to total amount of
 	      wares. */
 	   (boost::format(ngettext("Produced %s", "Produced %s", count)) % ware_list).str();
-	ps.set_production_result(result_string);
+	if (ps.production_result() != ps.descr().out_of_resource_heading() ||
+	    ps.descr().out_of_resource_heading().empty()) {
+		ps.set_production_result(result_string);
+	}
 }
 
 bool ProductionProgram::ActProduce::get_building_work(Game& game,
