@@ -917,12 +917,12 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		      .str();
 
 		std::string production_result_ = ps.production_result();
-		std::string out_of_resource_heading_ = ps.descr().out_of_resource_heading();
+		std::string out_of_resource_ = ps.descr().out_of_resource_heading();
 		
 		log("Production Result (%s)\n", production_result_.c_str());
-		log("Out of Resource  (%s)\n", out_of_resource_heading_.c_str());
+		log("Out of Resource  (%s)\n", out_of_resource_.c_str());
 		
-		if ( production_result_.compare(out_of_resource_heading_) != 0) {
+		if ((production_result_.compare(out_of_resource_) != 0) || out_of_resource_.empty()) {
 			ps.set_production_result(result_string);
 		}
 
