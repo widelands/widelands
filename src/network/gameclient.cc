@@ -142,7 +142,7 @@ bool GameClientImpl::run_map_menu(GameClient* This, bool internet) {
 }
 
 /**
- * Show Pogressdialog and load map or saved game.
+ * Show progress dialog and load map or saved game.
  */
 InteractiveGameBase* GameClientImpl::init_game(GameClient* This, UI::ProgressWindow* loader) {
 	modal = loader;
@@ -162,10 +162,11 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* This, UI::ProgressWin
 	game->save_handler().set_autosave_filename(
 					(boost::format("%s_netclient%u") % kAutosavePrefix % static_cast<unsigned int>(pn)).str());
 	InteractiveGameBase* igb;
-	if (pn > 0)
+	if (pn > 0) {
 		igb = new InteractivePlayer(*game, g_options.pull_section("global"), pn, true);
-	else
+	} else {
 		igb = new InteractiveSpectator(*game, g_options.pull_section("global"), true);
+	}
 	game -> set_ibase(igb);
 	igb->set_chat_provider(*This);
 	if (settings.savegame) {  //  new map
@@ -194,8 +195,9 @@ void GameClientImpl::run_game(InteractiveGameBase* igb, UI::ProgressWindow* load
 			 "", false, (boost::format("netclient_%d") % static_cast<int>(settings.usernum)).str());
 
 	// if this is an internet game, tell the metaserver that the game is done.
-	if (internet)
+	if (internet) {
 		InternetGaming::ref().set_game_done();
+	}
 	modal = nullptr;
 	game = nullptr;
 }
@@ -258,14 +260,15 @@ void GameClient::run() {
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 
-	if (d->run_map_menu(this, internet_))
+	if (d->run_map_menu(this, internet_)) {
 	    return; // did not select a Map ...
+	}
 
 	d->server_is_waiting = true;
 
-	bool writeSyncStreams = g_options.pull_section("global").get_bool("write_syncstreams", true);
+	bool write_sync_streams = g_options.pull_section("global").get_bool("write_syncstreams", true);
 	Widelands::Game game;
-	game.set_write_syncstream(writeSyncStreams);
+	game.set_write_syncstream(write_sync_streams);
 
 	try {
 		std::unique_ptr<UI::ProgressWindow> loader_ui(new UI::ProgressWindow());
@@ -638,7 +641,7 @@ void GameClient::handle_ping(RecvPacket&) {
 }
 
 /**
- * New Map name was send.
+ * New Map name was sent.
  */
 void GameClient::handle_setting_map(RecvPacket& packet) {
 	d->settings.mapname = packet.string();
@@ -663,16 +666,16 @@ void GameClient::handle_new_file(RecvPacket& packet) {
 	// Check whether the file or a file with that name already exists
 	if (g_fs->file_exists(path)) {
 		// If the file is a directory, we have to rename the file and replace it with the version
-		// of thehost. If it is a ziped file, we can check, whether the host and the client have
+		// of the host. If it is a zipped file, we can check, whether the host and the client have
 		// got the same file.
 		if (!g_fs->is_directory(path)) {
 			FileRead fr;
 			fr.open(*g_fs, path);
 			if (bytes == fr.get_size()) {
 				std::unique_ptr<char[]> complete(new char[bytes]);
-				if (!complete)
+				if (!complete) {
 					throw wexception("Out of memory");
-
+				}
 				fr.data_complete(complete.get(), bytes);
 				// TODO(Klaus Halfmann): compute MD5 on the fly in FileRead...
 				SimpleMD5Checksum md5sum;
