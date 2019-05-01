@@ -6544,7 +6544,7 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 			const uint16_t new_target = std::max<uint16_t>(default_target * multiplier / 10, 3);
 			assert(new_target > 1);
 
-			game().send_player_command(*new Widelands::CmdSetWareTargetQuantity(
+			game().send_player_command(new Widelands::CmdSetWareTargetQuantity(
 			   gametime, player_number(), observer->economy.serial(), id, new_target));
 		}
 	}
