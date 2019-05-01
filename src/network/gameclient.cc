@@ -327,7 +327,7 @@ void GameClient::send_player_command(Widelands::PlayerCommand* pc) {
 		d->lasttimestamp = d->game->get_gametime();
 		d->lasttimestamp_realtime = SDL_GetTicks();
 	} else {
-		log("[Client]: Playercommand is not for curret player? %i\n", pc -> sender());
+		log("[Client]: Playercommand is not for current player? %i\n", pc -> sender());
 	}
 
 	delete pc;
