@@ -43,21 +43,21 @@ public:
 
 	/**
 	 * Returns whether the client is connected.
-     +
+	 *
 	 * \return \c true if the connection is open, \c false otherwise.
 	 */
 	virtual bool is_connected() const = 0;
 
 	/**
 	 * Closes the connection.
-     *
+	 *
 	 * If you want to send a goodbye-message to the host, do so before calling this.
 	 */
 	virtual void close() = 0;
 
 	/**
 	 * Tries to receive a packet.
-     *
+	 *
 	 * \return A pointer to a packet if one packet is available, an invalid pointer otherwise.
 	 *   Calling this on a closed connection will return an invalid pointer.
 	 */
@@ -65,7 +65,7 @@ public:
 
 	/**
 	 * Sends a packet.
-     *
+	 *
 	 * Calling this on a closed connection will silently fail.
 	 * \param packet The packet to send.
 	 */
