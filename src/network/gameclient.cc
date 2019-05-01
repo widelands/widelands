@@ -941,23 +941,17 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		case NETCMD_HELLO:
 			return handle_hello(packet);
 		case NETCMD_PING:
-			handle_ping(packet);
-			break;
+			return handle_ping(packet);
 		case NETCMD_SETTING_MAP:
-			handle_setting_map(packet);
-			break;
+			return handle_setting_map(packet);
 		case NETCMD_NEW_FILE_AVAILABLE:
-			handle_new_file(packet);
-			break;
+			return handle_new_file(packet);
 		case NETCMD_FILE_PART:
-			handle_file_part(packet);
-			break;
+			return handle_file_part(packet);
 		case NETCMD_SETTING_TRIBES:
-			handle_setting_tribes(packet);
-			break;
+			return handle_setting_tribes(packet);
 		case NETCMD_SETTING_ALLPLAYERS:
-			handle_setting_allplayers(packet);
-			break;
+			return handle_setting_allplayers(packet);
 		case NETCMD_SETTING_PLAYER: {
 			uint8_t player = packet.unsigned_8();
 			receive_one_player(player, packet);
@@ -1004,20 +998,15 @@ void GameClient::handle_packet(RecvPacket& packet) {
 			d->server_is_waiting = true;
 			break;
 		case NETCMD_PLAYERCOMMAND:
-			handle_playercommand(packet);
-			break;
+			return handle_playercommand(packet);
 		case NETCMD_SYNCREQUEST:
-			handle_syncrequest(packet);
-			break;
+			return handle_syncrequest(packet);
 		case NETCMD_CHAT:
-			handle_chat(packet);
-			break;
+			return handle_chat(packet);
 		case NETCMD_SYSTEM_MESSAGE_CODE:
-			handle_system_message(packet);
-			break;
+			return handle_system_message(packet);
 		case NETCMD_INFO_DESYNC:
-			handle_desync(packet);
-			break;
+			return handle_desync(packet);
 		default:
 			throw ProtocolException(cmd);
 	}
