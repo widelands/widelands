@@ -39,9 +39,9 @@
 namespace {
 
 // Constants for convert_clienttype() / compare_clienttype()
-const uint8_t kClientUnregistered = 0;
+const uint8_t kClientSuperuser = 0;
 const uint8_t kClientRegistered = 1;
-const uint8_t kClientSuperuser = 2;
+const uint8_t kClientUnregistered = 2;
 // 3 was INTERNET_CLIENT_BOT which is not used
 const uint8_t kClientIRC = 4;
 }  // namespace

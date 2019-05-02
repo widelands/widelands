@@ -527,8 +527,8 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			// Client received the new list of clients
 			uint8_t number = boost::lexical_cast<int>(packet.string()) & 0xff;
 			std::vector<InternetClient> old = clientlist_;
-			// Push IRC users to a second list and add them to the back
-			std::vector<InternetClient> irc;
+			// Push admins/registred/IRC users to a temporary list and add them back later
+			std::vector<InternetClient> irc, registered, superuser ;
 			clientlist_.clear();
 			log("InternetGaming: Received a client list update with %u items.\n", number);
 			InternetClient inc;
@@ -537,13 +537,18 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				inc.build_id = packet.string();
 				inc.game = packet.string();
 				inc.type = packet.string();
+
 				if (inc.type == INTERNET_CLIENT_IRC) {
 					irc.push_back(inc);
 					// No "join" or "left" messages for IRC users
 					continue;
+				} else if (inc.type == INTERNET_CLIENT_SUPERUSER) {
+					superuser.push_back(inc);
+				} else if (inc.type == INTERNET_CLIENT_REGISTERED){
+					registered.push_back(inc);
+				} else {
+					clientlist_.push_back(inc);
 				}
-				// No IRC client
-				clientlist_.push_back(inc);
 
 				bool found =
 				   old.empty();  // do not show all clients, if this instance is the actual change
@@ -558,7 +563,15 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 					format_and_add_chat(
 					   "", "", true, (boost::format(_("%s joined the lobby")) % inc.name).str());
 			}
+
+			// The final list looks like this:
+			// SUPERUSER
+			// REGISTERED
+			// UNREGISTERED
+			// IRC
 			clientlist_.insert(clientlist_.end(), irc.begin(), irc.end());
+			clientlist_.insert(clientlist_.begin(), registered.begin(), registered.end());
+			clientlist_.insert(clientlist_.begin(), superuser.begin(), superuser.end());
 
 			for (InternetClient& client : old) {
 				if (client.name.size() && client.type != INTERNET_CLIENT_IRC) {
