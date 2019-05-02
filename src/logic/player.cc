@@ -749,7 +749,7 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 
 			if (recurse) {
 				// Destroy all roads and waterways between the flags, not just selected
-				while (RoadBase* const r = start.get_roadbase(end, nullptr))
+				while (RoadBase* const r = start.get_roadbase(end))
 					r->destroy(egbase());
 
 				OPtr<Flag> endcopy = &end;
