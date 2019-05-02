@@ -2538,7 +2538,7 @@ msgid "Clients online:"
 msgstr "Klienti online:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:64
-msgid "List of games:"
+msgid "List of open games:"
 msgstr "Zoznam hier:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:65

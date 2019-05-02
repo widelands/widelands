@@ -63,7 +63,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
      // Text labels
      title(this, get_w() / 2, get_h() / 20, _("Metaserver Lobby"), UI::Align::kCenter),
      clients_(this, get_w() * 4 / 125, get_h() * 15 / 100, _("Clients online:")),
-     opengames_(this, get_w() * 17 / 25, get_h() * 15 / 100, _("List of games:")),
+     opengames_(this, get_w() * 17 / 25, get_h() * 15 / 100, _("List of open games:")),
      servername_(this, get_w() * 17 / 25, get_h() * 63 / 100, _("Name of your server:")),
 
      // Buttons
@@ -218,18 +218,20 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 	hostgame_.set_enabled(true);
 	joingame_.set_enabled(false);
 	std::string localservername = edit_servername_.text();
+	std::string localbuildid = build_id();
 
 	if (games != nullptr) {  // If no communication error occurred, fill the list.
 		for (const InternetGame& game : *games) {
 			const Image* pic;
-			if (game.connectable) {
-				if (game.build_id == build_id())
-					pic = g_gr->images().get("images/ui_basic/continue.png");
-				else {
+			if (game.connectable == INTERNET_GAME_SETUP && game.build_id == localbuildid) {
+				// only clients with the same build number are displayed
+				pic = g_gr->images().get("images/ui_basic/continue.png");
+				opengames_list_.add(game.name, game, pic, false, game.build_id);
+			} else if (game.connectable == INTERNET_GAME_SETUP && 
+				game.build_id.compare(0,6,"build-") != 0 && localbuildid.compare(0,6,"build-") != 0) {
+					// only development clients are allowed to see games openend by such
 					pic = g_gr->images().get("images/ui_basic/different.png");
-				}
-			} else {
-				pic = g_gr->images().get("images/ui_basic/stop.png");
+					opengames_list_.add(game.name, game, pic, false, game.build_id);
 			}
 			// If one of the servers has the same name as the local name of the
 			// clients server, we disable the 'hostgame' button to avoid having more
@@ -237,7 +239,6 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 			if (game.name == localservername) {
 				hostgame_.set_enabled(false);
 			}
-			opengames_list_.add(game.name, game, pic, false, game.build_id);
 		}
 	}
 }
@@ -332,10 +333,8 @@ void FullscreenMenuInternetLobby::client_doubleclicked(uint32_t i) {
 void FullscreenMenuInternetLobby::server_selected() {
 	if (opengames_list_.has_selection()) {
 		const InternetGame* game = &opengames_list_.get_selected();
-		if (game->connectable)
+		if (game->connectable == INTERNET_GAME_SETUP)
 			joingame_.set_enabled(true);
-		else
-			joingame_.set_enabled(false);
 	}
 }
 
@@ -344,7 +343,7 @@ void FullscreenMenuInternetLobby::server_doubleclicked() {
 	// if the game is open try to connect it, if not do nothing.
 	if (opengames_list_.has_selection()) {
 		const InternetGame* game = &opengames_list_.get_selected();
-		if (game->connectable)
+		if (game->connectable == INTERNET_GAME_SETUP)
 			clicked_joingame();
 	}
 }

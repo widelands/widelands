@@ -43,7 +43,7 @@ struct InternetClient {
 struct InternetGame {
 	std::string name;
 	std::string build_id;
-	bool connectable;
+	std::string connectable;
 };
 
 /**
