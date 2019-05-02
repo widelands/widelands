@@ -1,4 +1,4 @@
-## Build 20-rc1
+## Build 20
 
 ### Animations, Icons and Overlays
 
@@ -548,6 +548,8 @@
     - Handle error message when trying to join a non-existing game
     - Avoid hanging client even after being notified about the non-existing game
     - Removed no longer needed error messages
+  - Fix crash in NetClient when host changes their mind about a custom map in
+    mid-transfer
   - Fixed bug #1691335: Multiplayer client crashes when the host hasn't selected
                         a map yet
   - Fixed bug #1794339: Segfault joining game
@@ -592,6 +594,7 @@
     - Choose between compiler clang or gcc, specify build type: debug or release
     - Set build target to 10.9 if macOS 10.9 or newer is found
     - Append macOS target version to dmg filename
+    - Fix the dependency fixer to not be confused by library id's
   - Fixes for Debian-based software centers:
     - Add stock icon to appdata.xml
       (c.f. https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=857644)

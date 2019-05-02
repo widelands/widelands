@@ -35,6 +35,7 @@
   </provides>
   <launchable type="desktop-id">org.widelands.widelands.desktop</launchable>
   <releases>
+    <release date="2019-05-02" version="Build 20"/>
     <release date="2016-11-11" version="Build 19"/>
     <release date="2014-02-22" version="Build 18"/>
     <release date="2012-04-23" version="Build 17"/>
