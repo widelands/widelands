@@ -538,17 +538,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				inc.game = packet.string();
 				inc.type = packet.string();
 
-				if (inc.type == INTERNET_CLIENT_IRC) {
-					irc.push_back(inc);
-					// No "join" or "left" messages for IRC users
-					continue;
-				} else if (inc.type == INTERNET_CLIENT_SUPERUSER) {
-					superuser.push_back(inc);
-				} else if (inc.type == INTERNET_CLIENT_REGISTERED){
-					registered.push_back(inc);
-				} else {
-					clientlist_.push_back(inc);
-				}
+				clientlist_.push_back(inc);
 
 				bool found =
 				   old.empty();  // do not show all clients, if this instance is the actual change
@@ -564,14 +554,9 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 					   "", "", true, (boost::format(_("%s joined the lobby")) % inc.name).str());
 			}
 
-			// The final list looks like this:
-			// SUPERUSER
-			// REGISTERED
-			// UNREGISTERED
-			// IRC
-			clientlist_.insert(clientlist_.end(), irc.begin(), irc.end());
-			clientlist_.insert(clientlist_.begin(), registered.begin(), registered.end());
-			clientlist_.insert(clientlist_.begin(), superuser.begin(), superuser.end());
+			std::sort(clientlist_.begin(), clientlist_.end(),
+						[]( const InternetClient &left, const InternetClient &right )
+						{ return ( left.name < right.name ); } );
 
 			for (InternetClient& client : old) {
 				if (client.name.size() && client.type != INTERNET_CLIENT_IRC) {
