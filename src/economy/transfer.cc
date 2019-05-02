@@ -163,7 +163,7 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 	if (route_.get_nrsteps() >= 1) {
 		Flag& curflag(route_.get_flag(game_, 0));
 		Flag& nextflag(route_.get_flag(game_, 1));
-		if (!curflag.get_roadbase(nextflag, request_->get_type() == wwWORKER ? MapObjectType::ROAD : nullptr)) {
+		if (!request_->get_type() == wwWORKER ? curflag.get_road(nextflag) : curflag.get_roadbase(nextflag)) {
 			upcast(Warehouse, wh, curflag.get_building());
 			assert(wh);
 
@@ -181,7 +181,8 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 
 		if (ware_ && location == &curflag && route_.get_nrsteps() >= 2) {
 			Flag& nextnextflag(route_.get_flag(game_, 2));
-			if (!nextflag.get_roadbase(nextnextflag, request_->get_type() == wwWORKER ? MapObjectType::ROAD : nullptr)) {
+			if (!(request_->get_type() == wwWORKER ?
+					nextflag.get_road(nextnextflag) : nextflag.get_roadbase(nextnextflag))) {
 				upcast(Warehouse, wh, nextflag.get_building());
 				assert(wh);
 

@@ -315,11 +315,20 @@ void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
 /**
  * \return the road that leads to the given flag.
  */
-RoadBase* Flag::get_roadbase(Flag& flag, MapObjectType* filter) {
+RoadBase* Flag::get_roadbase(Flag& flag) {
 	for (int8_t i = 0; i < 6; ++i) {
 		if (RoadBase* const road = roads_[i]) {
-			if ((!filter || road->descr().type() == *filter) &&
-					(&road->get_flag(RoadBase::FlagStart) == &flag || &road->get_flag(RoadBase::FlagEnd) == &flag)) {
+			if (&road->get_flag(RoadBase::FlagStart) == &flag || &road->get_flag(RoadBase::FlagEnd) == &flag) {
+				return road;
+			}
+		}
+	}
+	return nullptr;
+}
+Road* Flag::get_road(Flag& flag) {
+	for (int8_t i = 0; i < 6; ++i) {
+		if (Road* const road = get_road(i)) {
+			if (&road->get_flag(RoadBase::FlagStart) == &flag || &road->get_flag(RoadBase::FlagEnd) == &flag) {
 				return road;
 			}
 		}
