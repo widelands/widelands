@@ -87,6 +87,9 @@ public:
 	void hide_workarea(const Widelands::Coords& coords);
 
 	bool has_expedition_port_space(const Widelands::Coords&) const;
+	std::map<Widelands::Ship*, Widelands::Coords>& get_expedition_port_spaces() {
+		return expedition_port_spaces_;
+	}
 
 	//  point of view for drawing
 	virtual Widelands::Player* get_player() const = 0;
