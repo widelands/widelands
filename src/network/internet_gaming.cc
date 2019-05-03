@@ -528,7 +528,6 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			uint8_t number = boost::lexical_cast<int>(packet.string()) & 0xff;
 			std::vector<InternetClient> old = clientlist_;
 			// Push admins/registred/IRC users to a temporary list and add them back later
-			std::vector<InternetClient> irc, registered, superuser ;
 			clientlist_.clear();
 			log("InternetGaming: Received a client list update with %u items.\n", number);
 			InternetClient inc;
