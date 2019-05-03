@@ -543,7 +543,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				bool found =
 				   old.empty();  // do not show all clients, if this instance is the actual change
 				for (InternetClient& client : old) {
-					if (client.name == inc.name) {
+					if (client.name == inc.name && client.type == inc.type) {
 						found = true;
 						client.name = "";
 						break;
