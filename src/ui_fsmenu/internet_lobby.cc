@@ -238,6 +238,9 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 			// than one server with the same name.
 			if (game.name == localservername) {
 				hostgame_.set_enabled(false);
+				InternetGaming::ref().format_and_add_chat("", "", true,
+				(boost::format(_("A game named %s is already running. Please choose a different name."))
+					% game.name).str());
 			}
 		}
 	}
