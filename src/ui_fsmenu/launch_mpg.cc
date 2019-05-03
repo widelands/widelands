@@ -159,7 +159,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                UI::PanelStyle::kFsMenu),
      client_info_(this,
                   right_column_x_,
-                  get_h() * 13 / 20 - 2 * label_height_,
+                  get_h() * 15 / 20 - 2 * label_height_,
                   butw_,
                   get_h(),
                   UI::PanelStyle::kFsMenu),
@@ -167,7 +167,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 
      // Variables and objects used in the menu
      chat_(nullptr) {
-	ok_.set_pos(Vector2i(right_column_x_, get_h() * 12 / 20 - 2 * label_height_));
+	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 25 / 40 - 2 * label_height_));
+	ok_.set_pos(Vector2i(right_column_x_, get_h() * 14 / 20 - 2 * label_height_));
 	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
 	win_condition_dropdown_.set_pos(
 	   Vector2i(right_column_x_, get_h() * 11 / 20 - 2 * label_height_));
@@ -240,6 +241,11 @@ void FullscreenMenuLaunchMPG::win_condition_selected() {
 	if (settings_->can_change_map() && win_condition_dropdown_.has_selection()) {
 		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
 		last_win_condition_ = win_condition_dropdown_.get_selected();
+
+		std::unique_ptr<LuaTable> t = lua_->run_script(last_win_condition_);
+		t->do_not_warn_about_unaccessed_keys();
+		peaceful_mode_forbidden_ = !t->get_bool("peaceful_mode_allowed");
+		update_peaceful_mode();
 	}
 }
 
@@ -421,6 +427,9 @@ void FullscreenMenuLaunchMPG::refresh() {
 
 	change_map_or_save_.set_enabled(settings_->can_change_map());
 	change_map_or_save_.set_visible(settings_->can_change_map());
+
+	update_peaceful_mode();
+	peaceful_.set_state(settings_->is_peaceful_mode());
 
 	if (!settings_->can_change_map() && !init_win_condition_label()) {
 		try {
