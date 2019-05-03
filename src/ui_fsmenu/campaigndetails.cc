@@ -30,7 +30,7 @@ CampaignDetails::CampaignDetails(Panel* parent)
                  0,
                  UI::Scrollbar::kSize,
                  0,
-				 UI::PanelStyle::kFsMenu,
+                 UI::PanelStyle::kFsMenu,
                  "",
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
@@ -52,28 +52,30 @@ void CampaignDetails::update(const CampaignData& campaigndata) {
 	std::string description = "";
 
 	if (campaigndata.visible) {
-		/** TRANSLATORS: Header for campaign tribe */
-		description = (boost::format("%s%s") % as_heading(_("Tribe"), UI::PanelStyle::kFsMenu) %
+		description = (boost::format("%s%s") %
+		               /** TRANSLATORS: Header for campaign tribe */
+		               as_heading(_("Tribe"), UI::PanelStyle::kFsMenu) %
 		               as_content(campaigndata.tribename, UI::PanelStyle::kFsMenu))
 		                 .str();
-		description =
-		   /** TRANSLATORS: Header for campaign difficulty */
-		   (boost::format("%s%s") % description % as_heading(_("Difficulty"), UI::PanelStyle::kFsMenu)).str();
+		description = (boost::format("%s%s") % description %
+		               /** TRANSLATORS: Header for campaign difficulty */
+		               as_heading(_("Difficulty"), UI::PanelStyle::kFsMenu))
+		                 .str();
 		description = (boost::format("%s%s") % description %
 		               as_content(campaigndata.difficulty_description, UI::PanelStyle::kFsMenu))
 		                 .str();
 
-		description =
-		   /** TRANSLATORS: Header for campaign description */
-		   (boost::format("%s%s") % description % as_heading(_("Description"), UI::PanelStyle::kFsMenu))
-		      .str();
+		description = (boost::format("%s%s") % description %
+		               /** TRANSLATORS: Header for campaign description */
+		               as_heading(_("Description"), UI::PanelStyle::kFsMenu))
+		                 .str();
 		description = (boost::format("%s%s") % description %
 		               as_content(campaigndata.description, UI::PanelStyle::kFsMenu))
 		                 .str();
 	}
-	description =
-	   (boost::format("%s%s") % description % as_content(campaigndata.description, UI::PanelStyle::kFsMenu))
-	      .str();
+	description = (boost::format("%s%s") % description %
+	               as_content(campaigndata.description, UI::PanelStyle::kFsMenu))
+	                 .str();
 
 	description = (boost::format("<rt>%s</rt>") % description).str();
 	descr_.set_text(description);

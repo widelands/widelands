@@ -341,6 +341,9 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 			return true;
 		}
 		if (action.sparam1 == "immovable") {
+			if (upcast(ProductionSite, productionsite, get_location(game))) {
+				productionsite->unnotify_player();
+			}
 			std::vector<ImmovableFound> list;
 			if (action.iparam2 < 0)
 				map.find_reachable_immovables(area, &list, cstep);
@@ -993,11 +996,12 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 }
 
 /**
- * Demand from the g_sound_handler to play a certain sound effect.
+ * Demand from the g_sh to play a certain sound effect.
  * Whether the effect actually gets played is decided only by the sound server.
  */
 bool Worker::run_playsound(Game& game, State& state, const Action& action) {
-	Notifications::publish(NoteSound(action.sparam1, get_position(), action.iparam1));
+	Notifications::publish(
+	   NoteSound(SoundType::kAmbient, action.iparam2, get_position(), action.iparam1));
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -2636,7 +2640,9 @@ const Bob::Task Worker::taskScout = {
  */
 bool Worker::run_scout(Game& game, State& state, const Action& action) {
 	molog("  Try scouting for %i ms with search in radius of %i\n", action.iparam2, action.iparam1);
-
+	if (upcast(ProductionSite, productionsite, get_location(game))) {
+		productionsite->unnotify_player();
+	}
 	++state.ivar1;
 	start_task_scout(game, action.iparam1, action.iparam2);
 	// state reference may be invalid now
@@ -2983,20 +2989,21 @@ void Worker::scout_update(Game& game, State& state) {
 
 void Worker::draw_inner(const EditorGameBase& game,
                         const Vector2f& point_on_dst,
+                        const Coords& coords,
                         const float scale,
                         RenderTarget* dst) const {
 	assert(get_owner() != nullptr);
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
-	dst->blit_animation(
-	   point_on_dst, scale, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
+	dst->blit_animation(point_on_dst, coords, scale, get_current_anim(),
+	                    game.get_gametime() - get_animstart(), &player_color);
 
 	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
 		const Vector2f hotspot = descr().ware_hotspot().cast<float>();
 		const Vector2f location(
 		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
-		dst->blit_animation(
-		   location, scale, carried_ware->descr().get_animation("idle"), 0, player_color);
+		dst->blit_animation(location, Widelands::Coords::null(), scale,
+		                    carried_ware->descr().get_animation("idle"), 0, &player_color);
 	}
 }
 
@@ -3006,12 +3013,13 @@ void Worker::draw_inner(const EditorGameBase& game,
 void Worker::draw(const EditorGameBase& egbase,
                   const TextToDraw&,
                   const Vector2f& field_on_dst,
+                  const Widelands::Coords& coords,
                   const float scale,
                   RenderTarget* dst) const {
 	if (!get_current_anim()) {
 		return;
 	}
-	draw_inner(egbase, calc_drawpos(egbase, field_on_dst, scale), scale, dst);
+	draw_inner(egbase, calc_drawpos(egbase, field_on_dst, scale), coords, scale, dst);
 }
 
 /*

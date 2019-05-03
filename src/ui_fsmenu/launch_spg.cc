@@ -176,6 +176,11 @@ void FullscreenMenuLaunchSPG::clicked_back() {
 void FullscreenMenuLaunchSPG::win_condition_selected() {
 	if (win_condition_dropdown_.has_selection()) {
 		last_win_condition_ = win_condition_dropdown_.get_selected();
+
+		std::unique_ptr<LuaTable> t = lua_->run_script(last_win_condition_);
+		t->do_not_warn_about_unaccessed_keys();
+		peaceful_mode_forbidden_ = !t->get_bool("peaceful_mode_allowed");
+		update_peaceful_mode();
 	}
 }
 
@@ -227,6 +232,8 @@ void FullscreenMenuLaunchSPG::update(bool map_was_changed) {
 		select_map_.set_visible(settings_->can_change_map());
 		select_map_.set_enabled(settings_->can_change_map());
 
+		peaceful_.set_state(settings_->is_peaceful_mode());
+
 		set_player_names_and_tribes();
 	}
 
@@ -272,6 +279,7 @@ bool FullscreenMenuLaunchSPG::select_map() {
 	safe_place_for_host(nr_players_);
 	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
 	update_win_conditions();
+	update_peaceful_mode();
 	update(true);
 	return true;
 }

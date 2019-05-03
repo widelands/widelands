@@ -247,7 +247,7 @@ void draw_diagram(uint32_t time_ms,
 	   axis_line_color, kAxisLinesWidth);
 
 	//  Y Axis
-	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight, kSpacing),
+	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight, kSpacing * 3),
 	                     Vector2f(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
 	                    axis_line_color, kAxisLinesWidth);
 	//  No Arrow here, since this doesn't continue.
@@ -262,7 +262,7 @@ void draw_diagram(uint32_t time_ms,
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
-		if (how_many_ticks != 0) {
+		if (how_many_ticks != 0 && i != 0) {
 			std::shared_ptr<const UI::RenderedText> xtick = UI::g_fh->render(
 			   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
 			Vector2i pos(posx, inner_h - kSpaceBottom + 10);
@@ -273,14 +273,37 @@ void draw_diagram(uint32_t time_ms,
 		posx -= sub;
 	}
 
-	//  draw yticks, one at full, one at half
+	//  draw yticks, one at full, one at three-quarter, one at half, one at quarter & 0
+	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight + 3, kSpacing * 3),
+	                     Vector2f(inner_w - kSpaceRight - 3, kSpacing * 3)},
+	                    axis_line_color, kAxisLinesWidth);
+
 	dst.draw_line_strip(
-	   {Vector2f(inner_w - kSpaceRight, kSpacing), Vector2f(inner_w - kSpaceRight - 3, kSpacing)},
+	   {Vector2f(
+	       inner_w - kSpaceRight + 2,
+	       kSpacing * 3 + ((((inner_h - kSpaceBottom) + kSpacing * 3) / 2) - kSpacing * 3) / 2),
+	    Vector2f(
+	       inner_w - kSpaceRight,
+	       kSpacing * 3 + ((((inner_h - kSpaceBottom) + kSpacing * 3) / 2) - kSpacing * 3) / 2)},
 	   axis_line_color, kAxisLinesWidth);
+
 	dst.draw_line_strip(
-	   {Vector2f(inner_w - kSpaceRight, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2),
-	    Vector2f(inner_w - kSpaceRight - 3, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2)},
+	   {Vector2f(inner_w - kSpaceRight + 3, ((inner_h - kSpaceBottom) + kSpacing * 3) / 2),
+	    Vector2f(inner_w - kSpaceRight, ((inner_h - kSpaceBottom) + kSpacing * 3) / 2)},
 	   axis_line_color, kAxisLinesWidth);
+
+	dst.draw_line_strip(
+	   {Vector2f(inner_w - kSpaceRight + 2,
+	             inner_h - kSpaceBottom -
+	                (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + kSpacing * 3) / 2) / 2),
+	    Vector2f(inner_w - kSpaceRight,
+	             inner_h - kSpaceBottom -
+	                (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + kSpacing * 3) / 2) / 2)},
+	   axis_line_color, kAxisLinesWidth);
+
+	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight + 3, inner_h - kSpaceBottom),
+	                     Vector2f(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
+	                    axis_line_color, kAxisLinesWidth);
 
 	//  print the used unit
 	std::shared_ptr<const UI::RenderedText> xtick =
@@ -305,7 +328,7 @@ WuiPlotArea::WuiPlotArea(UI::Panel* const parent,
      needs_update_(true),
      lastupdate_(0),
      xline_length_(get_inner_w() - kSpaceRight - kSpacing),
-     yline_length_(get_inner_h() - kSpaceBottom - kSpacing),
+     yline_length_(get_inner_h() - kSpaceBottom - kSpacing * 3),
      time_ms_(0),
      highest_scale_(0),
      sub_(0),
@@ -465,6 +488,9 @@ void WuiPlotArea::draw(RenderTarget& dst) {
 	dst.tile(Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), g_gr->images().get(BG_PIC),
 	         Vector2i::zero());
 	draw_plot(dst, get_inner_h() - kSpaceBottom, std::to_string(highest_scale_), highest_scale_);
+	// Print the 0
+	draw_value((boost::format("%u") % (0)).str(), g_gr->styles().statistics_plot_style().x_tick_font(),
+	           Vector2i(get_inner_w() - kSpaceRight + 3, get_inner_h() - kSpaceBottom + 10), dst);
 }
 
 void WuiPlotArea::draw_plot(RenderTarget& dst,
@@ -486,7 +512,7 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 
 	//  print the maximal value into the top right corner
 	draw_value(yscale_label, g_gr->styles().statistics_plot_style().y_max_value_font(),
-	           Vector2i(get_inner_w() - kSpaceRight - 3, kSpacing + 2), dst);
+	           Vector2i(get_inner_w() - kSpaceRight + 3, kSpacing + 2), dst);
 }
 
 /**
@@ -679,7 +705,7 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 	         Vector2i::zero());
 
 	// yoffset of the zero line
-	float const yoffset = kSpacing + ((get_inner_h() - kSpaceBottom) - kSpacing) / 2;
+	float const yoffset = ((get_inner_h() - kSpaceBottom) + kSpacing * 3) / 2;
 
 	// draw zero line
 	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),
@@ -692,7 +718,7 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 	// Print the min value
 	draw_value((boost::format("-%u") % (highest_scale_)).str(),
 	           g_gr->styles().statistics_plot_style().y_min_value_font(),
-	           Vector2i(get_inner_w() - kSpaceRight - 3, get_inner_h() - kSpacing - 23), dst);
+	           Vector2i(get_inner_w() - kSpaceRight + 3, get_inner_h() - kSpaceBottom + 10), dst);
 }
 
 /**

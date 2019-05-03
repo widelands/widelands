@@ -36,8 +36,10 @@
 #include "logic/map_objects/world/terrain_description.h"
 
 class DitherProgram;
+class GridProgram;
 class RoadProgram;
 class TerrainProgram;
+class WorkareaProgram;
 
 // The RenderQueue is a singleton implementing the concept of deferred
 // rendering: Every rendering call that pretends to draw onto the screen will
@@ -82,6 +84,8 @@ public:
 	enum Program {
 		kTerrainBase,
 		kTerrainDither,
+		kTerrainWorkarea,
+		kTerrainGrid,
 		kTerrainRoad,
 		kBlit,
 		kRect,
@@ -119,6 +123,7 @@ public:
 		int renderbuffer_height = 0;
 		const DescriptionMaintainer<Widelands::TerrainDescription>* terrains = nullptr;
 		const FieldsToDraw* fields_to_draw = nullptr;
+		Workareas workareas;
 		float scale = 1.f;
 		Rectf destination_rect = Rectf(0.f, 0.f, 0.f, 0.f);
 	};
@@ -178,6 +183,8 @@ private:
 
 	std::unique_ptr<TerrainProgram> terrain_program_;
 	std::unique_ptr<DitherProgram> dither_program_;
+	std::unique_ptr<WorkareaProgram> workarea_program_;
+	std::unique_ptr<GridProgram> grid_program_;
 	std::unique_ptr<RoadProgram> road_program_;
 
 	std::vector<Item> blended_items_;

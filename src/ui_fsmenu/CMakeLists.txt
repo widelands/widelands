@@ -20,6 +20,7 @@ wl_library(ui_fsmenu_options
     profile
     sound
     widelands_ball_of_mud
+    wui_sound_options
 )
 
 wl_library(ui_fsmenu_base
@@ -171,6 +172,7 @@ wl_library(ui_fsmenu_network
     network
     profile
     random
+    sound
     ui_basic
     ui_fsmenu_base
     wui_chat_ui

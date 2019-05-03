@@ -60,7 +60,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
                0,
                UI::Scrollbar::kSize,
                0,
-			   UI::PanelStyle::kFsMenu,
+               UI::PanelStyle::kFsMenu,
                "",
                UI::Align::kCenter,
                UI::MultilineTextarea::ScrollMode::kNoScrolling),

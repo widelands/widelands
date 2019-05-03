@@ -75,7 +75,7 @@ Campaigns::Campaigns() {
 		campaign_data->description = _(campaign_table->get_string("description"));
 		if (campaign_table->has_key("prerequisites")) {
 			for (const std::string& prerequisite :
-				 campaign_table->get_table("prerequisites")->array_entries<std::string>()) {
+			     campaign_table->get_table("prerequisites")->array_entries<std::string>()) {
 				campaign_data->prerequisites.insert(prerequisite);
 			}
 		}
@@ -125,7 +125,7 @@ void Campaigns::update_visibility_info() {
 			campaign->visible = true;
 		} else {
 			// A campaign is visible if one of its prerequisites has been fulfilled
-			for (const std::string prerequisite : campaign->prerequisites) {
+			for (const std::string& prerequisite : campaign->prerequisites) {
 				if (solved_scenarios_.count(prerequisite) == 1) {
 					campaign->visible = true;
 					break;

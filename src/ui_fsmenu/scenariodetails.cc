@@ -30,7 +30,7 @@ ScenarioDetails::ScenarioDetails(Panel* parent)
                  0,
                  UI::Scrollbar::kSize,
                  0,
-				 UI::PanelStyle::kFsMenu,
+                 UI::PanelStyle::kFsMenu,
                  "",
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
@@ -43,23 +43,23 @@ ScenarioDetails::ScenarioDetails(Panel* parent)
 }
 
 void ScenarioDetails::update(const ScenarioData& scenariodata) {
-	name_label_.set_text(
-	   (boost::format("<rt>%s%s</rt>") %
-	    as_heading(scenariodata.is_tutorial ? _("Tutorial") : _("Scenario"), UI::PanelStyle::kFsMenu, true) %
-	    as_content(scenariodata.descname, UI::PanelStyle::kFsMenu))
-	      .str());
+	name_label_.set_text((boost::format("<rt>%s%s</rt>") %
+	                      as_heading(scenariodata.is_tutorial ? _("Tutorial") : _("Scenario"),
+	                                 UI::PanelStyle::kFsMenu, true) %
+	                      as_content(scenariodata.descname, UI::PanelStyle::kFsMenu))
+	                        .str());
 
 	if (scenariodata.playable) {
 		std::string description =
 		   (boost::format("%s%s") %
-		    as_heading(
-		       ngettext("Author", "Authors", scenariodata.authors.get_number()), UI::PanelStyle::kFsMenu) %
+		    as_heading(ngettext("Author", "Authors", scenariodata.authors.get_number()),
+		               UI::PanelStyle::kFsMenu) %
 		    as_content(scenariodata.authors.get_names(), UI::PanelStyle::kFsMenu))
 		      .str();
 
-		description =
-		   (boost::format("%s%s") % description % as_heading(_("Description"), UI::PanelStyle::kFsMenu))
-		      .str();
+		description = (boost::format("%s%s") % description %
+		               as_heading(_("Description"), UI::PanelStyle::kFsMenu))
+		                 .str();
 		description = (boost::format("%s%s") % description %
 		               as_content(scenariodata.description, UI::PanelStyle::kFsMenu))
 		                 .str();

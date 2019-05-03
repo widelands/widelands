@@ -22,6 +22,7 @@
 #include <limits>
 #include <string>
 
+#include "sound/sound_handler.h"
 #include "wui/chat_msg_layout.h"
 
 /**
@@ -46,7 +47,9 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              UI::Align::kLeft,
              UI::MultilineTextarea::ScrollMode::kScrollLogForced),
      editbox(this, 0, h - 20, w, style),
-     chat_message_counter(0) {
+     chat_message_counter(0),
+     chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
+
 	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));
 	editbox.activate_history(true);
@@ -79,7 +82,7 @@ void GameChatPanel::recalculate(bool has_new_message) {
 		for (size_t i = chat_message_counter; i < msgs_size; ++i) {
 			if (!msgs[i].sender.empty()) {
 				// Got a message that is no system message. Beep
-				play_new_chat_message();
+				g_sh->play_fx(SoundType::kChat, chat_sound);
 				break;
 			}
 		}

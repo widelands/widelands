@@ -295,13 +295,13 @@ function format_remaining_time(remaining_time)
       time = (ngettext("%1% hour and %2%", "%1% hours and %2%", h, m)):bformat(h, time)
    elseif m > 0 then
       -- TRANSLATORS: Context: 'The game will end in 30 minutes.'
-      time = (ngettext("%i minute", "%i minutes", m)):format(m)
+      time = (ngettext("%i minute", "%i minutes", m)):bformat(m)
    else
       -- TRANSLATORS: Context: 'The game will end in 2 hours.'
       time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
    end
    -- TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-   return p(_"The game will end in %s."):format(time)
+   return p(_"The game will end in %s."):bformat(time)
 end
 
 -- RST
@@ -312,7 +312,7 @@ end
 --    Returns the remaining time and whether the notification should popup.
 --
 --    To be used when sending status messages.
---    Status messages are to be send every 30 minutes and every 5 during the last 30 minutes,
+--    Status messages are to be sent every 30 minutes and every 5 during the last 30 minutes,
 --    the message window pops up ever hour, 30, 20 & 10 minutes before the game ends.
 --
 --    :arg max_time:    The time maximum game time in minutes
