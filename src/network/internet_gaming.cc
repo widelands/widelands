@@ -497,7 +497,8 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 						break;
 					}
 				}
-				if (!found && ing->connectable != INTERNET_GAME_RUNNING){
+				if (!found && ing->connectable != INTERNET_GAME_RUNNING && (ing->build_id == build_id() ||
+                        ing->build_id.compare(0,6,"build-") != 0 && build_id().compare(0,6,"build-") != 0)) {
 					format_and_add_chat(
 						"", "", true,
 						(boost::format(_("The game %s is now available")) % ing->name).str());
