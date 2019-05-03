@@ -153,12 +153,10 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 	const std::string& tribename = parent->get_players_tribe();
 	assert(Widelands::tribe_exists(tribename));
 
-	std::vector<std::string> tipstext(256);
+	std::vector<std::string> tipstext(300); // Found 259 via debugging
 	tipstext.push_back("general_game");
 	tipstext.push_back("multiplayer");
 	tipstext.push_back(tribename);
-
-	log("[Client Debug]: number of tips %lu\n", tipstext.size());
 
 	modal = loader;
 	GameTips tips(*loader, tipstext);
@@ -630,7 +628,7 @@ void GameClient::handle_disconnect(RecvPacket& packet) {
  * Hello from the other side
  */
 void GameClient::handle_hello(RecvPacket& packet) {
-	if (d->settings.usernum == -2) // TODO(Klaus Hallfmann): if the host is the client ?.
+	if (d->settings.usernum != -2) // TODO(Klaus Halfmann): if the host is the client ?.
 		throw ProtocolException(NETCMD_HELLO); // I am talkimg with myself? Bad idea
 	uint8_t const version = packet.unsigned_8();
 	if (version != NETWORK_PROTOCOL_VERSION)
