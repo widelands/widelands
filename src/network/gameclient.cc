@@ -153,7 +153,7 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 	const std::string& tribename = parent->get_players_tribe();
 	assert(Widelands::tribe_exists(tribename));
 
-	std::vector<std::string> tipstext(300); // Found 259 via debugging
+	std::vector<std::string> tipstext; 
 	tipstext.push_back("general_game");
 	tipstext.push_back("multiplayer");
 	tipstext.push_back(tribename);
