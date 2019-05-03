@@ -32,12 +32,6 @@
 #include "graphic/text/font_set.h"
 
 /**
- * This function replaces some HTML entities in strings, e.g. %nbsp;.
- * It is used by the renderers after the tags have been parsed.
- */
-void replace_entities(std::string* text);
-
-/**
   * Returns the exact width of the text rendered as editorfont for the given font size.
   * This function is inefficient; only call when we need the exact width.
   */

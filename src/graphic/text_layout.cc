@@ -65,13 +65,6 @@ int text_width(const std::string& text, const UI::FontStyleInfo& style, float sc
 	   ->render(as_editor_richtext_paragraph(text, info))->width();
 }
 
-void replace_entities(std::string* text) {
-	boost::replace_all(*text, "&gt;", ">");
-	boost::replace_all(*text, "&lt;", "<");
-	boost::replace_all(*text, "&nbsp;", " ");
-	boost::replace_all(*text, "&amp;", "&");  // Must be performed last
-}
-
 int text_height(const UI::FontStyleInfo& style, float scale) {
 	UI::FontStyleInfo info(style);
 	info.set_size(info.size() * scale - UI::g_fh->fontset()->size_offset());

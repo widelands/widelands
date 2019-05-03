@@ -56,7 +56,7 @@ namespace RT {
 static const uint16_t INFINITE_WIDTH = 65535;  // 2^16-1
 
 /**
- * This function replaces some HTML entities in strings, e.g. %nbsp;.
+ * This function replaces some HTML entities in strings, e.g. &nbsp;.
  * It is used by the renderer after the tags have been parsed.
  */
 void replace_entities(std::string* text) {

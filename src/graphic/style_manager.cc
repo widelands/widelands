@@ -38,6 +38,7 @@ RGBColor read_rgb_color(const LuaTable& table) {
 	return RGBColor(rgbcolor[0], rgbcolor[1], rgbcolor[2]);
 }
 
+// Read font style from LuaTable
 UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::string& table_key) {
 	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
 	const int size = style_table->get_int("size");
@@ -66,6 +67,7 @@ UI::PanelStyleInfo* read_panel_style(const LuaTable& table) {
 			table.has_key<std::string>("margin") ? table.get_int("margin") : 0);
 }
 
+// Read text panel style from LuaTable
 UI::TextPanelStyleInfo* read_text_panel_style(const LuaTable& table) {
 	return new UI::TextPanelStyleInfo(read_font_style(table, "font"), read_panel_style(*table.get_table("background")));
 }
@@ -272,6 +274,7 @@ const UI::WareInfoStyleInfo& StyleManager::ware_info_style(UI::WareInfoStyle sty
 }
 
 const UI::FontStyleInfo& StyleManager::font_style(UI::FontStyle style) const {
+	assert(fontstyles_.count(style) == 1);
 	return *fontstyles_.at(style);
 }
 
