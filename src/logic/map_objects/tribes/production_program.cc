@@ -304,7 +304,7 @@ bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate(const ProductionSi
 std::string
 ProductionProgram::ActReturn::EconomyNeedsWare::description(const Tribes& tribes) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware
-	 * ‘%s’*/
+	 * '%s' */
 	std::string result = (boost::format(_("the economy needs the ware ‘%s’")) %
 	                      tribes.get_ware_descr(ware_type)->descname())
 	                        .str();
@@ -312,8 +312,8 @@ ProductionProgram::ActReturn::EconomyNeedsWare::description(const Tribes& tribes
 }
 std::string
 ProductionProgram::ActReturn::EconomyNeedsWare::description_negation(const Tribes& tribes) const {
-	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the
-	 * ware ‘%s’*/
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn't need the
+	 * ware '%s' */
 	std::string result = (boost::format(_("the economy doesn’t need the ware ‘%s’")) %
 	                      tribes.get_ware_descr(ware_type)->descname())
 	                        .str();
@@ -326,7 +326,7 @@ bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate(const Production
 std::string
 ProductionProgram::ActReturn::EconomyNeedsWorker::description(const Tribes& tribes) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker
-	 * ‘%s’*/
+	 * '%s' */
 	std::string result = (boost::format(_("the economy needs the worker ‘%s’")) %
 	                      tribes.get_worker_descr(worker_type)->descname())
 	                        .str();
@@ -335,8 +335,8 @@ ProductionProgram::ActReturn::EconomyNeedsWorker::description(const Tribes& trib
 
 std::string
 ProductionProgram::ActReturn::EconomyNeedsWorker::description_negation(const Tribes& tribes) const {
-	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ...*/
-	/** TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’*/
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... */
+	/** TRANSLATORS:      ... because the economy doesn’t need the worker '%s' */
 	std::string result = (boost::format(_("the economy doesn’t need the worker ‘%s’")) %
 	                      tribes.get_worker_descr(worker_type)->descname())
 	                        .str();
@@ -541,19 +541,19 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 		std::string result_string;
 		switch (result_) {
 		case ProgramResult::kFailed: {
-			/** TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’" */
+			/** TRANSLATORS: "Did not start working because the economy needs the ware '%s'" */
 			result_string = (boost::format(_("Did not start %1$s because %2$s")) %
 			                 ps.top_state().program->descname() % condition_string)
 			                   .str();
 		} break;
 		case ProgramResult::kCompleted: {
-			/** TRANSLATORS: "Completed working because the economy needs the ware ‘%s’" */
+			/** TRANSLATORS: "Completed working because the economy needs the ware '%s'" */
 			result_string = (boost::format(_("Completed %1$s because %2$s")) %
 			                 ps.top_state().program->descname() % condition_string)
 			                   .str();
 		} break;
 		case ProgramResult::kSkipped: {
-			/** TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’" */
+			/** TRANSLATORS: "Skipped working because the economy needs the ware '%s'" */
 			result_string = (boost::format(_("Skipped %1$s because %2$s")) %
 			                 ps.top_state().program->descname() % condition_string)
 			                   .str();
@@ -1423,11 +1423,10 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 		throw wexception("Fail training soldier!!");
 	}
 	ps.molog("  Training done!\n");
-	/** TRANSLATORS: Success message of a trainingsite ‘%s’ stands for the description of the
-	 * training program */
-	/**  e.g. Completed upgrading soldier evade from level 0 to level 1 */
 	ps.set_production_result(
-	   (boost::format(_("Completed %s")) % ps.top_state().program->descname()).str());
+				/** TRANSLATORS: Success message of a trainingsite '%s' stands for the description of the
+				 * training program, e.g. Completed upgrading soldier evade from level 0 to level 1 */
+				(boost::format(_("Completed %s")) % ps.top_state().program->descname()).str());
 
 	upcast(TrainingSite, ts, &ps);
 	ts->training_successful(attribute, level);
