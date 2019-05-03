@@ -63,7 +63,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
      // Text labels
      title(this, get_w() / 2, get_h() / 20, _("Metaserver Lobby"), UI::Align::kCenter),
      clients_(this, get_w() * 4 / 125, get_h() * 15 / 100, _("Clients online:")),
-     opengames_(this, get_w() * 17 / 25, get_h() * 15 / 100, _("List of open games:")),
+     opengames_(this, get_w() * 17 / 25, get_h() * 15 / 100, _("Open Games:")),
      servername_(this, get_w() * 17 / 25, get_h() * 63 / 100, _("Name of your server:")),
 
      // Buttons
