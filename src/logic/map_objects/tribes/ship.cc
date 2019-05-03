@@ -48,7 +48,6 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "wui/interactive_base.h"
 
 namespace Widelands {
 
@@ -434,16 +433,6 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 			send_message(game, _("Port Space"), _("Port Space Found"),
 			             _("An expedition ship found a new port build space."),
 			             "images/wui/editor/fsel_editor_set_port_space.png");
-		}
-	}
-
-	if (InteractiveBase* ibase = game.get_ibase()) {
-		if (ibase->get_player() == get_owner()) {
-			if (ship_state_ == ShipStates::kExpeditionPortspaceFound) {
-				ibase->show_expedition_port_space(this, expedition_->seen_port_buildspaces.front());
-			} else {
-				ibase->hide_expedition_port_space(this);
-			}
 		}
 	}
 }
