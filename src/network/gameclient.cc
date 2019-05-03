@@ -58,6 +58,8 @@
 #include "wui/interactive_spectator.h"
 
 struct GameClientImpl {
+	bool internet_;
+
 	GameSettings settings;
 
 	std::string localplayername;
@@ -92,14 +94,16 @@ struct GameClientImpl {
 	/// Backlog of chat messages
 	std::vector<ChatMessage> chatmessages;
 
+	/** File that is eventually transferred via the network if not found at the other side */
+	std::unique_ptr<NetTransferFile> file_;
 
 	void send_hello();
 	void send_player_command(Widelands::PlayerCommand*);
 
-	bool run_map_menu(GameClient* This, bool internet);
-	void run_game(InteractiveGameBase* igb, UI::ProgressWindow*, bool internet);
+	bool run_map_menu(GameClient* parent);
+	void run_game(InteractiveGameBase* igb, UI::ProgressWindow*);
 
-	InteractiveGameBase* init_game(GameClient* This, UI::ProgressWindow*);
+	InteractiveGameBase* init_game(GameClient* parent, UI::ProgressWindow*);
 
 };
 
@@ -125,15 +129,15 @@ void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) {
  *
  *  @return true to indicate that run is done.
  */
-bool GameClientImpl::run_map_menu(GameClient* This, bool internet) {
-	FullscreenMenuLaunchMPG lgm(This, This);
-	lgm.set_chat_provider(*This);
+bool GameClientImpl::run_map_menu(GameClient* parent) {
+	FullscreenMenuLaunchMPG lgm(parent, parent);
+	lgm.set_chat_provider(*parent);
 	modal = &lgm;
 	FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
 	modal = nullptr;
 	if (code == FullscreenMenuBase::MenuTarget::kBack) {
 		// if this is an internet game, tell the metaserver that client is back in the lobby.
-		if (internet) {
+		if (internet_) {
 			InternetGaming::ref().set_game_done();
 		}
 		return true;
@@ -144,20 +148,24 @@ bool GameClientImpl::run_map_menu(GameClient* This, bool internet) {
 /**
  * Show progress dialog and load map or saved game.
  */
-InteractiveGameBase* GameClientImpl::init_game(GameClient* This, UI::ProgressWindow* loader) {
-	modal = loader;
-	std::vector<std::string> tipstext;
+InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressWindow* loader) {
+
+	const std::string& tribename = parent->get_players_tribe();
+	assert(Widelands::tribe_exists(tribename));
+
+	std::vector<std::string> tipstext(256);
 	tipstext.push_back("general_game");
 	tipstext.push_back("multiplayer");
-	try {
-		tipstext.push_back(This->get_players_tribe());
-	} catch (GameClient::NoTribe) {
-	}
+	tipstext.push_back(tribename);
+
+	log("[Client Debug]: number of tips %lu\n", tipstext.size());
+
+	modal = loader;
 	GameTips tips(*loader, tipstext);
 
 	loader->step(_("Preparing game"));
 
-	game->set_game_controller(This);
+	game->set_game_controller(parent);
 	uint8_t const pn = settings.playernum + 1;
 	game->save_handler().set_autosave_filename(
 					(boost::format("%s_netclient%u") % kAutosavePrefix % static_cast<unsigned int>(pn)).str());
@@ -168,7 +176,7 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* This, UI::ProgressWin
 		igb = new InteractiveSpectator(*game, g_options.pull_section("global"), true);
 	}
 	game -> set_ibase(igb);
-	igb->set_chat_provider(*This);
+	igb->set_chat_provider(*parent);
 	if (settings.savegame) {  //  new map
 		game->init_newgame(loader, settings);
 	} else {  // savegame
@@ -181,7 +189,7 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* This, UI::ProgressWin
 /**
  * Run the actual game and cleanup when done.
  */
-void GameClientImpl::run_game(InteractiveGameBase* igb, UI::ProgressWindow* loader, bool internet) {
+void GameClientImpl::run_game(InteractiveGameBase* igb, UI::ProgressWindow* loader) {
 	time.reset(game->get_gametime());
 	lasttimestamp = game->get_gametime();
 	lasttimestamp_realtime = SDL_GetTicks();
@@ -195,7 +203,7 @@ void GameClientImpl::run_game(InteractiveGameBase* igb, UI::ProgressWindow* load
 			 "", false, (boost::format("netclient_%d") % static_cast<int>(settings.usernum)).str());
 
 	// if this is an internet game, tell the metaserver that the game is done.
-	if (internet) {
+	if (internet_) {
 		InternetGaming::ref().set_game_done();
 	}
 	modal = nullptr;
@@ -206,7 +214,9 @@ GameClient::GameClient(const std::pair<NetAddress, NetAddress>& host,
                        const std::string& playername,
                        bool internet,
                        const std::string& gamename)
-   : d(new GameClientImpl), internet_(internet) {
+   : d(new GameClientImpl) {
+
+	d->internet_ = internet;
 
 	if (internet) {
 		assert(!gamename.empty());
@@ -236,7 +246,7 @@ GameClient::GameClient(const std::pair<NetAddress, NetAddress>& host,
 	d->game = nullptr;
 	d->realspeed = 0;
 	d->desiredspeed = 1000;
-	file_ = nullptr;
+	d->file_ = nullptr;
 
 	// Get the default win condition script
 	d->settings.win_condition_script = d->settings.win_condition_scripts.front();
@@ -260,7 +270,7 @@ void GameClient::run() {
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 
-	if (d->run_map_menu(this, internet_)) {
+	if (d->run_map_menu(this)) {
 	    return; // did not select a Map ...
 	}
 
@@ -275,14 +285,14 @@ void GameClient::run() {
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui.get());
-		d->run_game(igb, loader_ui.get(), internet_);
+		d->run_game(igb, loader_ui.get());
 
 	} catch (...) {
 		WLApplication::emergency_save(game);
 		d->game = nullptr;
 		disconnect("CLIENT_CRASHED");
 		// We will bounce back to the main menu, so we better log out
-		if (internet_) {
+		if (d->internet_) {
 			InternetGaming::ref().logout("CLIENT_CRASHED");
 		}
 		d->modal = nullptr;
@@ -620,12 +630,12 @@ void GameClient::handle_disconnect(RecvPacket& packet) {
  * Hello from the other side
  */
 void GameClient::handle_hello(RecvPacket& packet) {
-	if (d->settings.usernum == -2) // TODDO(Klaus Halfmann): what magic number is this?
-		throw ProtocolException(NETCMD_HELLO);
+	if (d->settings.usernum == -2) // TODO(Klaus Hallfmann): if the host is the client ?.
+		throw ProtocolException(NETCMD_HELLO); // I am talkimg with myself? Bad idea
 	uint8_t const version = packet.unsigned_8();
 	if (version != NETWORK_PROTOCOL_VERSION)
 		throw DisconnectException("DIFFERENT_PROTOCOL_VERS");
-	d->settings.usernum = packet.unsigned_32();
+	d->settings.usernum = packet.unsigned_32(); // TODO(Klaus Halfmann): usernum is int8_t.
 	d->settings.playernum = -1;
 }
 
@@ -652,12 +662,13 @@ void GameClient::handle_setting_map(RecvPacket& packet) {
 		d->settings.mapfilename.c_str());
 
 	// New map was set, so we clean up the buffer of a previously requested file
-	file_.reset(nullptr);
+	d->file_.reset(nullptr);
 }
 
 /**
  *
  */
+// TODO(Klaus Halfmann): refactor this until it can be understood, move into impl.
 void GameClient::handle_new_file(RecvPacket& packet) {
 	std::string path = g_fs->FileSystem::fix_cross_file(packet.string());
 	uint32_t bytes = packet.unsigned_32();
@@ -704,10 +715,10 @@ void GameClient::handle_new_file(RecvPacket& packet) {
 	s.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
 	d->net->send(s);
 
-	file_.reset(new NetTransferFile());
-	file_->bytes = bytes;
-	file_->filename = path;
-	file_->md5sum = md5;
+	d->file_.reset(new NetTransferFile());
+	d->file_->bytes = bytes;
+	d->file_->filename = path;
+	d->file_->md5sum = md5;
 	size_t position = path.rfind(g_fs->file_separator(), path.size() - 2);
 	if (position != std::string::npos) {
 		path.resize(position);
@@ -718,11 +729,12 @@ void GameClient::handle_new_file(RecvPacket& packet) {
 /**
  *
  */
+// TODO(Klaus Halfmann): refactor this until it can be understood, move into impl.
 void GameClient::handle_file_part(RecvPacket& packet) {
 	// Only go on, if we are waiting for a file part at the moment. It can happen, that an
 	// "unrequested" part is send by the server if the map was changed just a moment ago
 	// and there was an outstanding request from the client.
-	if (!file_)
+	if (!d->file_)
 		return;  // silently ignore
 
 	uint32_t part = packet.unsigned_32();
@@ -732,7 +744,7 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 	SendPacket s;
 	s.unsigned_8(NETCMD_FILE_PART);
 	s.unsigned_32(part);
-	s.string(file_->md5sum);
+	s.string(d->file_->md5sum);
 	d->net->send(s);
 
 	FilePart fp;
@@ -744,36 +756,36 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 	if (packet.data(buf, size) != size)
 		log("Readproblem. Will try to go on anyways\n");
 	memcpy(fp.part, &buf[0], size);
-	file_->parts.push_back(fp);
+	d->file_->parts.push_back(fp);
 
 	// Write file to disk as soon as all parts arrived
-	uint32_t left = (file_->bytes - NETFILEPARTSIZE * part);
+	uint32_t left = (d->file_->bytes - NETFILEPARTSIZE * part);
 	if (left <= NETFILEPARTSIZE) {
 		FileWrite fw;
-		left = file_->bytes;
+		left = d->file_->bytes;
 		uint32_t i = 0;
 		// Put all data together
 		while (left > 0) {
 			uint32_t writeout = (left > NETFILEPARTSIZE) ? NETFILEPARTSIZE : left;
-			fw.data(file_->parts[i].part, writeout, FileWrite::Pos::null());
+			fw.data(d->file_->parts[i].part, writeout, FileWrite::Pos::null());
 			left -= writeout;
 			++i;
 		}
 		// Now really write the file
-		fw.write(*g_fs, file_->filename.c_str());
+		fw.write(*g_fs, d->file_->filename.c_str());
 
 		// Check for consistence
 		FileRead fr;
-		fr.open(*g_fs, file_->filename);
+		fr.open(*g_fs, d->file_->filename);
 
-		std::unique_ptr<char[]> complete(new char[file_->bytes]);
+		std::unique_ptr<char[]> complete(new char[d->file_->bytes]);
 
-		fr.data_complete(complete.get(), file_->bytes);
+		fr.data_complete(complete.get(), d->file_->bytes);
 		SimpleMD5Checksum md5sum;
-		md5sum.data(complete.get(), file_->bytes);
+		md5sum.data(complete.get(), d->file_->bytes);
 		md5sum.finish_checksum();
 		std::string localmd5 = md5sum.get_checksum().str();
-		if (localmd5 != file_->md5sum) {
+		if (localmd5 != d->file_->md5sum) {
 			// Something went wrong! We have to rerequest the file.
 			s.reset();
 			s.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
@@ -784,7 +796,7 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 			s.string(_("/me 's file failed md5 checksumming."));
 			d->net->send(s);
 			try {
-				g_fs->fs_unlink(file_->filename);
+				g_fs->fs_unlink(d->file_->filename);
 			} catch (const FileError& e) {
 				log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
 					"%s\n",
@@ -797,27 +809,27 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 			// Saved game check - does Widelands recognize the file as saved game?
 			Widelands::Game game;
 			try {
-				Widelands::GameLoader gl(file_->filename, game);
+				Widelands::GameLoader gl(d->file_->filename, game);
 			} catch (...) {
 				invalid = true;
 			}
 		} else {
 			// Map check - does Widelands recognize the file as map?
 			Widelands::Map map;
-			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(file_->filename);
-			if (!ml)
+			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(d->file_->filename);
+			if (!ml) {
 				invalid = true;
+			}
 		}
 		if (invalid) {
 			try {
-				g_fs->fs_unlink(file_->filename);
+				g_fs->fs_unlink(d->file_->filename);
 				// Restore original file, if there was one before
-				if (g_fs->file_exists(backup_file_name(file_->filename)))
-					g_fs->fs_rename(backup_file_name(file_->filename), file_->filename);
+				if (g_fs->file_exists(backup_file_name(d->file_->filename)))
+					g_fs->fs_rename(backup_file_name(d->file_->filename), d->file_->filename);
 			} catch (const FileError& e) {
 				log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
-					"%s\n",
-					e.what());
+					"%s\n", e.what());
 			}
 			s.reset();
 			s.unsigned_8(NETCMD_CHAT);
@@ -1020,7 +1032,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
  */
 void GameClient::handle_network() {
 	// if this is an internet game, handle the metaserver network
-	if (internet_)
+	if (d->internet_)
 		InternetGaming::ref().handle_metaserver_communication();
 	try {
 		assert(d->net != nullptr);

@@ -144,9 +144,6 @@ private:
 
 	GameClientImpl* d;
 
-	/** File that is eventually transferred via the network if not found at the other side */
-	std::unique_ptr<NetTransferFile> file_;
-	bool internet_;
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMECLIENT_H
