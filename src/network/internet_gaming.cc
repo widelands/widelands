@@ -19,6 +19,7 @@
 
 #include "network/internet_gaming.h"
 
+#include <algorithm>
 #include <memory>
 #include <thread>
 
@@ -554,8 +555,8 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			}
 
 			std::sort(clientlist_.begin(), clientlist_.end(),
-						[]( const InternetClient &left, const InternetClient &right )
-						{ return ( left.name < right.name ); } );
+						[](const InternetClient &left, const InternetClient &right)
+						{return (left.name < right.name);});
 
 			for (InternetClient& client : old) {
 				if (client.name.size() && client.type != INTERNET_CLIENT_IRC) {
