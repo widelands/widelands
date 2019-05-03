@@ -2540,7 +2540,7 @@ msgid "Clients online:"
 msgstr "Cliantan air loidhne:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:64
-msgid "List of open games:"
+msgid "List of games:"
 msgstr "Liosta dhe na geamannan:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:65

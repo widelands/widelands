@@ -2487,7 +2487,7 @@ msgid "Clients online:"
 msgstr "접속 중인 클라이언트:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:64
-msgid "List of open games:"
+msgid "List of games:"
 msgstr "게임 목록:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:65
