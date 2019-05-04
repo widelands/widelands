@@ -19,6 +19,8 @@
 
 #include "wui/economy_options_window.h"
 
+#include <memory>
+
 #include <boost/lexical_cast.hpp>
 
 #include "graphic/graphic.h"
@@ -30,6 +32,9 @@
 #include "logic/playercommand.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/table.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
@@ -38,16 +43,56 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
                                            Widelands::Economy* economy,
                                            bool can_act)
    : UI::Window(parent, "economy_options", 0, 0, 0, 0, _("Economy options")),
+     main_box_(this, 0, 0, UI::Box::Vertical),
      serial_(economy->serial()),
      player_(&economy->owner()),
      tabpanel_(this, UI::TabPanelStyle::kWuiDark),
      ware_panel_(new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWARE)),
      worker_panel_(
-        new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWORKER)) {
-	set_center_panel(&tabpanel_);
+        new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWORKER)),
+     dropdown_box_(this, 0, 0, UI::Box::Horizontal),
+     dropdown_(&dropdown_box_, 0, 0, 140, 200, 34, "", UI::DropdownType::kTextual, UI::PanelStyle::kWui) {
+	set_center_panel(&main_box_);
 
 	tabpanel_.add("wares", g_gr->images().get(pic_tab_wares), ware_panel_, _("Wares"));
 	tabpanel_.add("workers", g_gr->images().get(pic_tab_workers), worker_panel_, _("Workers"));
+
+	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+	UI::Button* b = new UI::Button(buttons, "decrease_target", 0, 0, 34, 34,
+	                               UI::ButtonStyle::kWuiMenu, "-", _("Decrease target"));
+	b->sigclicked.connect(boost::bind(&EconomyOptionsWindow::change_target, this, -1));
+	buttons->add(b);
+	b->set_repeating(true);
+	buttons->add_space(34);
+
+	b = new UI::Button(buttons, "increase_target", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "+",
+	                   _("Increase target"));
+	b->sigclicked.connect(boost::bind(&EconomyOptionsWindow::change_target, this, 1));
+	buttons->add(b);
+	b->set_repeating(true);
+
+	dropdown_.set_tooltip(_("Profile to apply"));
+	dropdown_box_.set_size(40, 20);  // Prevent assert failures
+	dropdown_box_.add(&dropdown_, UI::Box::Resizing::kFullSize);
+
+	b = new UI::Button(&dropdown_box_, "apply_defaults", 0, 0, 60, 34,
+			UI::ButtonStyle::kWuiMenu, _("Apply"), _("Use the chosen profile for the selected items"));
+	b->sigclicked.connect(boost::bind(&EconomyOptionsWindow::reset_target, this));
+	dropdown_box_.add_space(8);
+	dropdown_box_.add(b);
+
+	b = new UI::Button(&dropdown_box_, "save_targets", 0, 0, 60, 34,
+			UI::ButtonStyle::kWuiMenu, _("Save…"), _("Save target settings"));
+	b->sigclicked.connect(boost::bind(&EconomyOptionsWindow::create_target, this));
+	dropdown_box_.add_space(8);
+	dropdown_box_.add(b);
+
+	main_box_.add(&tabpanel_);
+	main_box_.add_space(8);
+	main_box_.add(buttons, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	main_box_.add_space(8);
+	main_box_.add(&dropdown_box_);
+
 	economy->set_has_window(true);
 	economynotes_subscriber_ = Notifications::subscribe<Widelands::NoteEconomy>(
 	   [this](const Widelands::NoteEconomy& note) { on_economy_note(note); });
@@ -144,51 +189,33 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
      type_(type),
      can_act_(can_act),
      display_(this, 0, 0, serial_, player_, type_, can_act_),
-     economy_options_window_(eco_window),
-     dropdown_box_(this, 0, 0, UI::Box::Horizontal),
-     dropdown_(&dropdown_box_, 0, 0, 160, 200, 34, "", UI::DropdownType::kTextual, UI::PanelStyle::kWui) {
+     economy_options_window_(eco_window) {
 	add(&display_, UI::Box::Resizing::kFullSize);
 
 	if (!can_act_) {
 		return;
 	}
-	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	add(buttons);
-
-	UI::Button* b = new UI::Button(buttons, "decrease_target", 0, 0, 34, 34,
-	                               UI::ButtonStyle::kWuiMenu, "-", _("Decrease target"));
-	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::change_target, this, -1));
-	buttons->add(b);
-	b->set_repeating(true);
-	buttons->add_space(8);
-
-	b = new UI::Button(buttons, "increase_target", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "+",
-	                   _("Increase target"));
-	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::change_target, this, 1));
-	buttons->add(b);
-	b->set_repeating(true);
-	buttons->add_space(8);
-
-	b = new UI::Button(
-	   buttons, "reset_target", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "R", _("Reset to chosen default"));
-	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::reset_target, this));
-	buttons->add(b);
-	buttons->add_space(8);
-
-	b = new UI::Button(
-	   buttons, "save_targets", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "S", _("Save target settings"));
-	b->sigclicked.connect(boost::bind(&EconomyOptionsWindow::create_target, eco_window));
-	buttons->add(b);
-
-	dropdown_.set_tooltip(_("Profile to apply when clicking Reset"));
-	add(&dropdown_box_, UI::Box::Resizing::kFullSize);
-	dropdown_box_.set_size(40, 20);  // Prevent assert failures
-	dropdown_box_.add(&dropdown_, UI::Box::Resizing::kFullSize);
 }
 
 void EconomyOptionsWindow::EconomyOptionsPanel::set_economy(Widelands::Serial serial) {
 	serial_ = serial;
 	display_.set_economy(serial);
+}
+
+void EconomyOptionsWindow::change_target(int amount) {
+	if (tabpanel_.active() == 0) {
+		ware_panel_->change_target(amount);
+	} else {
+		worker_panel_->change_target(amount);
+	}
+}
+
+void EconomyOptionsWindow::reset_target() {
+	if (tabpanel_.active() == 0) {
+		ware_panel_->reset_target();
+	} else {
+		worker_panel_->reset_target();
+	}
 }
 
 void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int amount) {
@@ -225,7 +252,7 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 	Widelands::Game& game = dynamic_cast<Widelands::Game&>(player_->egbase());
 	const bool is_wares = type_ == Widelands::wwWARE;
 	const auto& items = is_wares ? player_->tribe().wares() : player_->tribe().workers();
-	const PredefinedTargets settings = economy_options_window_->get_predefined_targets().at(dropdown_.get_selected());
+	const PredefinedTargets settings = economy_options_window_->get_selected_target();
 	for (const Widelands::DescriptionIndex& index : items) {
 		if (display_.ware_selected(index)) {
 			if (is_wares) {
@@ -280,30 +307,151 @@ void EconomyOptionsWindow::read_targets(const std::string& select) {
 		predefined_targets_.emplace(std::string(section->get_name()), t);
 	}
 
-	ware_panel_->update_profiles(select);
-	worker_panel_->update_profiles(select);
+	update_profiles(select);
 }
 
-void EconomyOptionsWindow::EconomyOptionsPanel::update_profiles(const std::string& select) {
+void EconomyOptionsWindow::update_profiles(const std::string& select) {
 	dropdown_.clear();
-	for (const auto& pair : economy_options_window_->get_predefined_targets()) {
+	for (const auto& pair : predefined_targets_) {
 		dropdown_.add(_(pair.first), pair.first, nullptr, pair.first == select);
 	}
 }
 
+struct SaveProfileWindow : public UI::Window {
+	void update_save_enabled() {
+		const std::string& text = profile_name_.text();
+		if (text.empty() || text == kDefaultEconomyProfile) {
+			save_.set_enabled(false);
+			save_.set_tooltip(text.empty() ? _("The profile name cannot be empty") :
+					_("The default profile cannot be overwritten"));
+		} else {
+			save_.set_enabled(true);
+			save_.set_tooltip(_("Save the profile under this name"));
+		}
+	}
+
+	void table_selection_changed() {
+		if (!table_.has_selection()) {
+			delete_.set_enabled(false);
+			delete_.set_tooltip("");
+			return;
+		}
+		const std::string& sel = table_[table_.selection_index()];
+		if (sel == kDefaultEconomyProfile) {
+			delete_.set_tooltip(_("The default profile cannot be deleted"));
+			delete_.set_enabled(false);
+		} else {
+			delete_.set_tooltip(_("Delete the selected profiles"));
+			delete_.set_enabled(true);
+		}
+		profile_name_.set_text(sel);
+		update_save_enabled();
+	}
+
+	void close(bool ok) {
+		end_modal(ok ? UI::Panel::Returncodes::kOk : UI::Panel::Returncodes::kBack);
+		die();
+	}
+
+	void update_table() {
+		table_.clear();
+		for (const auto& pair : economy_options_->get_predefined_targets()) {
+			table_.add(pair.first).set_string(0, _(pair.first));
+		}
+		layout();
+	}
+
+	void save() {
+		const std::string name = profile_name_.text();
+		assert(!name.empty());
+		assert(name != kDefaultEconomyProfile);
+		for (const auto& pair : economy_options_->get_predefined_targets()) {
+			if (pair.first == name) {
+				UI::WLMessageBox m(this, _("Overwrite?"),
+						_("A profile with this name already exists.\nDo you wish to replace it?"),
+						UI::WLMessageBox::MBoxType::kOkCancel);
+				if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+					return;
+				}
+				break;
+			}
+		}
+		economy_options_->do_create_target(name);
+		close(true);
+	}
+
+	void delete_selected() {
+		assert(table_.has_selection());
+		auto& map = economy_options_->get_predefined_targets();
+		const std::string& name = table_[table_.selection_index()];
+		assert(name != kDefaultEconomyProfile);
+		for (auto it = map.begin(); it != map.end(); ++it) {
+			if (it->first == name) {
+				map.erase(it);
+				break;
+			}
+		}
+		economy_options_->save_targets();
+		update_table();
+	}
+
+	explicit SaveProfileWindow(UI::Panel* parent, EconomyOptionsWindow* eco)
+	   : UI::Window(parent, "save_economy_options_profile", 0, 0, 0, 0, _("Save Profile")),
+	     economy_options_(eco),
+	     main_box_(this, 0, 0, UI::Box::Vertical),
+	     table_box_(&main_box_, 0, 0, UI::Box::Vertical),
+	     table_(&table_box_, 0, 0, 460, 120, UI::PanelStyle::kWui),
+	     buttons_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+	     profile_name_(&buttons_box_, 0, 0, 240, 0, 0, UI::PanelStyle::kWui),
+	     save_(&buttons_box_, "save", 0, 0, 80, 34, UI::ButtonStyle::kWuiPrimary, _("Save")),
+	     cancel_(&buttons_box_, "cancel", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
+	     delete_(&buttons_box_, "delete", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Delete")) {
+		table_.add_column(200, _("Existing Profiles"));
+		update_table();
+
+		table_.selected.connect(boost::bind(&SaveProfileWindow::table_selection_changed, this));
+		profile_name_.changed.connect(boost::bind(&SaveProfileWindow::update_save_enabled, this));
+		profile_name_.ok.connect(boost::bind(&SaveProfileWindow::save, this));
+		profile_name_.cancel.connect(boost::bind(&SaveProfileWindow::close, this, false));
+		save_.sigclicked.connect(boost::bind(&SaveProfileWindow::save, this));
+		cancel_.sigclicked.connect(boost::bind(&SaveProfileWindow::close, this, false));
+		delete_.sigclicked.connect(boost::bind(&SaveProfileWindow::delete_selected, this));
+
+		table_box_.add(&table_, UI::Box::Resizing::kFullSize);
+		buttons_box_.add(&profile_name_, UI::Box::Resizing::kFullSize);
+		buttons_box_.add(&save_);
+		buttons_box_.add(&cancel_);
+		buttons_box_.add(&delete_);
+		main_box_.add(&table_box_, UI::Box::Resizing::kFullSize);
+		main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
+		set_center_panel(&main_box_);
+
+		table_selection_changed();
+		update_save_enabled();
+	}
+	~SaveProfileWindow() {
+	}
+
+private:
+	EconomyOptionsWindow* economy_options_;
+	UI::Box main_box_;
+	UI::Box table_box_;
+	UI::Table<const std::string&> table_;
+	UI::Box buttons_box_;
+	UI::EditBox profile_name_;
+	UI::Button save_;
+	UI::Button cancel_;
+	UI::Button delete_;
+};
+
 void EconomyOptionsWindow::create_target() {
-	/* Show a dialog similar to the savegame dialog:
-	 * The main part of the window is a Table listing all current profiles.
-	 * Below is a Textbox for the name.
-	 * The "Delete" button removes the selected profile(s) from the list.
-	 * The "Save" button checks whether a profile will be overwritten; if so, a confirm box pops up.
-	 * The profile kDefaultEconomyProfile cannot be deleted or overwritten.
-	 */
+	std::unique_ptr<SaveProfileWindow> s (new SaveProfileWindow(get_parent(), this));
+	s->run<UI::Panel::Returncodes>();
+}
 
-
-
-	std::string name = "CustomSettings" + std::to_string(predefined_targets_.size());
-	log("NOCOM: EconomyOptionsWindow::create_target(): not yet implemented, saving current settings as \"%s\"\n", name.c_str());
+void EconomyOptionsWindow::do_create_target(const std::string& name) {
+	assert(!name.empty());
+	assert(name != kDefaultEconomyProfile);
 	const Widelands::Tribes& tribes = player_->egbase().tribes();
 	const Widelands::TribeDescr& tribe = player_->tribe();
 	Widelands::Economy* economy = player_->get_economy(serial_);
@@ -320,14 +468,10 @@ void EconomyOptionsWindow::create_target() {
 	}
 	predefined_targets_[name] = t;
 
-
-
 	save_targets();
-	ware_panel_->update_profiles(name);
-	worker_panel_->update_profiles(name);
+	update_profiles(name);
 }
 
-// Write all predefined settings (except the defaults) to file
 void EconomyOptionsWindow::save_targets() {
 	const Widelands::Tribes& tribes = player_->egbase().tribes();
 	Profile profile;

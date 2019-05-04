@@ -46,11 +46,19 @@ struct EconomyOptionsWindow : public UI::Window {
 	};
 
 	void create_target();
+	void do_create_target(const std::string&);
 	void save_targets();
 	void read_targets(const std::string& = kDefaultEconomyProfile);
-	const std::map<std::string, PredefinedTargets>& get_predefined_targets() const {
+	void update_profiles(const std::string&);
+	std::map<std::string, PredefinedTargets>& get_predefined_targets() {
 		return predefined_targets_;
 	}
+	const PredefinedTargets& get_selected_target() const {
+		return predefined_targets_.at(dropdown_.get_selected());
+	}
+
+	void change_target(int amount);
+	void reset_target();
 
 private:
 	struct TargetWaresDisplay : public AbstractWaresDisplay {
@@ -86,7 +94,6 @@ private:
 		void set_economy(Widelands::Serial serial);
 		void change_target(int amount);
 		void reset_target();
-		void update_profiles(const std::string&);
 
 	private:
 		Widelands::Serial serial_;
@@ -95,13 +102,12 @@ private:
 		bool can_act_;
 		TargetWaresDisplay display_;
 		EconomyOptionsWindow* economy_options_window_;
-		UI::Box dropdown_box_;
-		UI::Dropdown<std::string> dropdown_;
 	};
 
 	/// Actions performed when a NoteEconomyWindow is received.
 	void on_economy_note(const Widelands::NoteEconomy& note);
 
+	UI::Box main_box_;
 	Widelands::Serial serial_;
 	Widelands::Player* player_;
 	UI::TabPanel tabpanel_;
@@ -110,6 +116,8 @@ private:
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEconomy>> economynotes_subscriber_;
 
 	std::map<std::string, PredefinedTargets> predefined_targets_;
+	UI::Box dropdown_box_;
+	UI::Dropdown<std::string> dropdown_;
 };
 
 #endif  // end of include guard: WL_WUI_ECONOMY_OPTIONS_WINDOW_H
