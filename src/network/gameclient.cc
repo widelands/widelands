@@ -152,14 +152,9 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 
 	const std::string& tribename = parent->get_players_tribe();
 	assert(Widelands::tribe_exists(tribename));
-
-	std::vector<std::string> tipstext; 
-	tipstext.push_back("general_game");
-	tipstext.push_back("multiplayer");
-	tipstext.push_back(tribename);
+	GameTips tips(*loader, {"general_game", "multiplayer", tribename});
 
 	modal = loader;
-	GameTips tips(*loader, tipstext);
 
 	loader->step(_("Preparing game"));
 
@@ -193,9 +188,7 @@ void GameClientImpl::run_game(InteractiveGameBase* igb, UI::ProgressWindow* load
 	lasttimestamp_realtime = SDL_GetTicks();
 
 	modal = igb;
-	game->run(
-			 loader,
-			 settings.savegame ?
+	game->run(loader, settings.savegame ?
 			 Widelands::Game::Loaded :
 			 settings.scenario ? Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
 			 "", false, (boost::format("netclient_%d") % static_cast<int>(settings.usernum)).str());
@@ -1078,7 +1071,7 @@ void GameClient::disconnect(const std::string& reason,
 
 	bool const trysave = showmsg && d->game;
 
-	if (showmsg) {
+	if (showmsg && d->modal) { // can only show a message with a valid modal parent window
 		std::string msg;
 		if (arg.empty())
 			msg = NetworkGamingMessages::get_message(reason);
@@ -1098,6 +1091,7 @@ void GameClient::disconnect(const std::string& reason,
 	if (trysave)
 		WLApplication::emergency_save(*d->game);
 
+	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a double free.
 	if (d->modal) {
 		d->modal->end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
 		d->modal = nullptr;
