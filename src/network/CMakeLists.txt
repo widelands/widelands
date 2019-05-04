@@ -53,7 +53,6 @@ wl_library(network
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
-    logic_map_objects
     logic_tribe_basic_info
     map_io_map_loader
     profile

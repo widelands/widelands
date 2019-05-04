@@ -45,6 +45,5 @@ wl_binary(wl_map_object_info
     logic
     logic_map_objects
     logic_tribe_basic_info
-    sound
     website_common
 )

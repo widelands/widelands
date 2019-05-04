@@ -133,9 +133,11 @@ wl_library(logic_map_objects
     logic # TODO(GunChleoc): Circular dependency
     logic_commands # TODO(GunChleoc): Circular dependency
     logic_constants
+    logic_exceptions
     logic_game_controller
     logic_map # TODO(GunChleoc): Circular dependency
     logic_map_objects_description_maintainer
+    logic_tribe_basic_info
     logic_widelands_geometry
     logic_widelands_geometry_io
     map_io

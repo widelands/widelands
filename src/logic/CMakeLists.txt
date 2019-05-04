@@ -33,7 +33,6 @@ wl_library(logic_game_settings
     io_filesystem
     logic_constants
     logic_tribe_basic_info
-    logic_map_objects
     notifications
     scripting_lua_interface
     scripting_lua_table
@@ -48,7 +47,6 @@ wl_library(logic_single_player_game_settings
     base_exceptions
     base_i18n
     logic_game_settings
-    logic_map_objects
     logic_tribe_basic_info
 )
 
@@ -63,7 +61,6 @@ wl_library(logic_game_controller
     ai
     logic
     logic_commands
-    logic_constants
     logic_game_settings
     profile
     ui_basic
@@ -127,16 +124,18 @@ wl_library(logic_map
     base_i18n
     base_log
     base_macros
+    base_scoped_timer
     build_info
     economy
-    editor # TODO(GunChleoc): Circular dependency
     graphic_playercolor
     io_fileread
     io_filesystem
     logic # TODO(GunChleoc): Circular
     logic_constants
+    logic_exceptions
     logic_filesystem_constants
     logic_map_objects
+    logic_tribe_basic_info
     logic_widelands_geometry
     logic_widelands_geometry_io
     map_io_map_loader
@@ -170,9 +169,11 @@ wl_library(logic_commands
     base_log
     base_macros
     economy # TODO(GunChleoc): Circular dependency
+    graphic_text_layout
     io_fileread
     io_stream
     logic # TODO(GunChleoc): Circular dependency
+    logic_exceptions
     logic_game_controller
     logic_map
     logic_map_objects
@@ -216,12 +217,11 @@ wl_library(logic
     base_md5
     base_scoped_timer
     base_time_string
+    build_info
     economy
     game_io
     graphic
     graphic_color
-    graphic_fonthandler
-    graphic_image_io
     graphic_playercolor
     io_fileread
     io_filesystem
@@ -237,6 +237,7 @@ wl_library(logic
     logic_map_objects
     logic_tribe_basic_info
     logic_widelands_geometry
+    map_io
     map_io_map_loader
     network # TODO(GunChleoc): Circular dependency
     note_sound

@@ -92,6 +92,7 @@ wl_library(wui_common_gamedetails
     graphic_text_constants
     io_filesystem
     logic
+    logic_constants
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
@@ -118,9 +119,6 @@ wl_library(wui_common_mapdetails
     graphic_text_constants
     graphic_text_layout
     io_filesystem
-    logic
-    logic_constants
-    logic_filesystem_constants
     logic_game_controller
     logic_game_settings
     logic_map
