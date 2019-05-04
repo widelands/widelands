@@ -58,7 +58,13 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	tabpanel_.add("workers", g_gr->images().get(pic_tab_workers), worker_panel_, _("Workers"));
 
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	UI::Button* b = new UI::Button(buttons, "decrease_target", 0, 0, 34, 34,
+	UI::Button* b = new UI::Button(buttons, "decrease_target_fast", 0, 0, 34, 34,
+	                               UI::ButtonStyle::kWuiMenu, "--", _("Decrease target by 10"));
+	b->sigclicked.connect(boost::bind(&EconomyOptionsWindow::change_target, this, -10));
+	buttons->add(b);
+	b->set_repeating(true);
+	buttons->add_space(8);
+	b = new UI::Button(buttons, "decrease_target", 0, 0, 34, 34,
 	                               UI::ButtonStyle::kWuiMenu, "-", _("Decrease target"));
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWindow::change_target, this, -1));
 	buttons->add(b);
@@ -68,6 +74,12 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	b = new UI::Button(buttons, "increase_target", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "+",
 	                   _("Increase target"));
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWindow::change_target, this, 1));
+	buttons->add(b);
+	b->set_repeating(true);
+	buttons->add_space(8);
+	b = new UI::Button(buttons, "increase_target_fast", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "++",
+	                   _("Increase target by 10"));
+	b->sigclicked.connect(boost::bind(&EconomyOptionsWindow::change_target, this, 10));
 	buttons->add(b);
 	b->set_repeating(true);
 
@@ -87,11 +99,11 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	dropdown_box_.add_space(8);
 	dropdown_box_.add(b);
 
-	main_box_.add(&tabpanel_);
+	main_box_.add(&tabpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	main_box_.add_space(8);
 	main_box_.add(buttons, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	main_box_.add_space(8);
-	main_box_.add(&dropdown_box_);
+	main_box_.add(&dropdown_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	economy->set_has_window(true);
 	economynotes_subscriber_ = Notifications::subscribe<Widelands::NoteEconomy>(
@@ -218,7 +230,10 @@ void EconomyOptionsWindow::reset_target() {
 	}
 }
 
-void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int amount) {
+void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int delta) {
+	if (delta == 0) {
+		return;
+	}
 	Widelands::Economy* economy = player_->get_economy(serial_);
 	if (economy == nullptr) {
 		die();
@@ -232,17 +247,18 @@ void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int amount) {
 			const Widelands::Economy::TargetQuantity& tq = is_wares ?
 			                                                  economy->ware_target_quantity(index) :
 			                                                  economy->worker_target_quantity(index);
-			// Don't allow negative new amount.
-			if (amount >= 0 || -amount <= static_cast<int>(tq.permanent)) {
-				if (is_wares) {
-					game.send_player_command(*new Widelands::CmdSetWareTargetQuantity(
-					   game.get_gametime(), player_->player_number(), serial_, index,
-					   tq.permanent + amount));
-				} else {
-					game.send_player_command(*new Widelands::CmdSetWorkerTargetQuantity(
-					   game.get_gametime(), player_->player_number(), serial_, index,
-					   tq.permanent + amount));
-				}
+			// Don't allow negative new amount
+			const int old_amount = static_cast<int>(tq.permanent);
+			const int new_amount = std::max(0, old_amount + delta);
+			if (new_amount == old_amount) {
+				continue;
+			}
+			if (is_wares) {
+				game.send_player_command(*new Widelands::CmdSetWareTargetQuantity(
+				   game.get_gametime(), player_->player_number(), serial_, index, new_amount));
+			} else {
+				game.send_player_command(*new Widelands::CmdSetWorkerTargetQuantity(
+				   game.get_gametime(), player_->player_number(), serial_, index, new_amount));
 			}
 		}
 	}
