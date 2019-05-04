@@ -120,6 +120,7 @@ return {
          scenarios = {
             "fri01.wmf",
             "fri02.wmf",
+            "fri03.wmf",
             "dummy.wmf"
          }
       }

@@ -14,10 +14,10 @@ tribes:new_ware_type {
       empire = 20
    },
    preciousness = {
-      atlanteans = 1,
-      barbarians = 1,
-      frisians = 6,
-      empire = 1
+      atlanteans = 10,
+      barbarians = 20,
+      frisians = 40,
+      empire = 10
    },
 
    animations = {
