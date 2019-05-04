@@ -36,6 +36,7 @@
 #include "base/vector.h"
 #include "base/wexception.h"
 #include "graphic/align.h"
+#include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
@@ -981,6 +982,16 @@ public:
 		check_size();
 	}
 
+	ImgRenderNode(NodeStyle& ns, const Image* image)
+	   : RenderNode(ns),
+	     image_(image),
+	     filename_(""),
+	     scale_(1.0f),
+	     color_(RGBColor(0, 0, 0)),
+	     use_playercolor_(false) {
+		check_size();
+	}
+
 	std::string debug_info() const override {
 		return "img";
 	}
@@ -1000,14 +1011,14 @@ private:
 	const Image* image_;
 	const std::string filename_;
 	const double scale_;
-	const RGBColor& color_;
+	const RGBColor color_;
 	bool use_playercolor_;
 };
 
 std::shared_ptr<UI::RenderedText> ImgRenderNode::render(TextureCache* texture_cache) {
 	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 
-	if (scale_ == 1.0) {
+	if (scale_ == 1.0 || filename_.empty()) {
 		// Image can be used as is, and has already been cached in g_gr->images()
 		assert(image_ != nullptr);
 		rendered_text->rects.push_back(
@@ -1278,28 +1289,36 @@ public:
 		const AttrMap& a = tag_.attrs();
 		RGBColor color;
 		bool use_playercolor = false;
-		const std::string image_filename = a["src"].get_string();
 		double scale = 1.0;
 
 		if (a.has("color")) {
 			color = a["color"].get_color();
 			use_playercolor = true;
 		}
-		if (a.has("width")) {
-			int width = a["width"].get_int();
-			if (width > renderer_style_.overall_width) {
-				log("WARNING: Font renderer: Specified image width of %d exceeds the overall available "
-				    "width of %d. Setting width to %d.\n",
-				    width, renderer_style_.overall_width, renderer_style_.overall_width);
-				width = renderer_style_.overall_width;
+		if (a.has("object")) {
+			const Image* representative_image = g_gr->animations().get_representative_image(
+			   a["object"].get_string(), use_playercolor ? &color : nullptr);
+			render_node_.reset(new ImgRenderNode(nodestyle_, representative_image));
+		} else {
+			const std::string image_filename = a["src"].get_string();
+
+			if (a.has("width")) {
+				int width = a["width"].get_int();
+				if (width > renderer_style_.overall_width) {
+					log("WARNING: Font renderer: Specified image width of %d exceeds the overall "
+					    "available "
+					    "width of %d. Setting width to %d.\n",
+					    width, renderer_style_.overall_width, renderer_style_.overall_width);
+					width = renderer_style_.overall_width;
+				}
+				const int image_width = image_cache_->get(image_filename)->width();
+				if (width < image_width) {
+					scale = static_cast<double>(width) / image_width;
+				}
 			}
-			const int image_width = image_cache_->get(image_filename)->width();
-			if (width < image_width) {
-				scale = static_cast<double>(width) / image_width;
-			}
+			render_node_.reset(
+			   new ImgRenderNode(nodestyle_, image_filename, scale, color, use_playercolor));
 		}
-		render_node_.reset(
-		   new ImgRenderNode(nodestyle_, image_filename, scale, color, use_playercolor));
 	}
 	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		nodes.push_back(render_node_);

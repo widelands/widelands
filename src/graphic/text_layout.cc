@@ -122,20 +122,25 @@ std::string as_game_tip(const std::string& txt) {
 	return f.str();
 }
 
-std::string as_mapobject_message(const std::string& image_filename, int width, const std::string& txt, const RGBColor* player_color) {
-	static boost::format f_color("<div padding_r=10><p><img width=%d src=%s color=%s></p></div>"
+std::string as_mapobject_message(const std::string& image, int width, const std::string& txt, const RGBColor* player_color) {
+	assert(!image.empty());
+	assert(!txt.empty());
+	const std::string image_type = g_gr->images().has(image) ? "src" : "object";
+	static boost::format f_color("<div padding_r=10><p><img width=%d %s=%s color=%s></p></div>"
 						   "<div width=*><p>%s</p></div>");
-	static boost::format f_nocolor("<div padding_r=10><p><img width=%d src=%s></p></div>"
+	static boost::format f_nocolor("<div padding_r=10><p><img width=%d %s=%s></p></div>"
 						   "<div width=*><p>%s</p></div>");
 	if (player_color != nullptr) {
 		f_color % width;
-		f_color % image_filename;
+		f_color % image_type;
+		f_color % image;
 		f_color % player_color->hex_value();
 		f_color % g_gr->styles().font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(txt);
 		return f_color.str();
 	} else {
 		f_nocolor % width;
-		f_nocolor % image_filename;
+		f_nocolor % image_type;
+		f_nocolor % image;
 		f_nocolor % g_gr->styles().font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(txt);
 		return f_nocolor.str();
 	}

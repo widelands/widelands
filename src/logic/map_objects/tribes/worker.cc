@@ -973,9 +973,10 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 		   MapObjectDescr::OwnerType::kTribe, get_owner());
 
 		// Geologist also sends a message notifying the player
+		// TODO(GunChleoc): We keep formatting this even when timeout has not elapsed
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
 			const std::string rt_description =
-					as_mapobject_message(ri.descr().representative_image_filename(),
+					as_mapobject_message(ri.descr().name(),
 										 g_gr->images().get(rdescr->representative_image())->width(),
 										 _("A geologist found resources."));
 

@@ -775,7 +775,7 @@ void Building::send_message(Game& game,
                             uint32_t throttle_time,
                             uint32_t throttle_radius) {
 	const std::string rt_description =
-			as_mapobject_message(descr().representative_image_filename(),
+			as_mapobject_message(descr().name(),
 								 descr().representative_image()->width(),
 								 description,
 								 &owner().get_playercolor());
