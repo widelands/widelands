@@ -35,7 +35,6 @@ local function wait_for_quarry_road_connection(field, cs, objective)
    end
    set_objective_done(objective, 0)
    register_immovable_as_allowed(cs)
-   -- NOCOM this is still fragile. Do thorough debugging.
 end
 
 function starting_infos()
