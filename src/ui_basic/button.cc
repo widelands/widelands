@@ -169,10 +169,10 @@ void Button::draw(RenderTarget& dst) {
 	const bool is_monochrome =
 	   !enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome);
 
-	const UI::TextPanelStyleInfo& style = is_monochrome ? style_->disabled() : style_->enabled();
+	const UI::TextPanelStyleInfo& style_to_use = is_monochrome ? style_->disabled() : style_->enabled();
 
 	// Draw the background
-	draw_background(dst, style.background());
+	draw_background(dst, style_to_use.background());
 
 	if (is_flat && highlighted_)
 		dst.brighten_rect(Recti(0, 0, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
@@ -219,7 +219,7 @@ void Button::draw(RenderTarget& dst) {
 		std::shared_ptr<const UI::RenderedText> rendered_text =
 				autofit_text(
 					richtext_escape(title_),
-					style.font(),
+					style_to_use.font(),
 					get_inner_w() - 2 * kButtonImageMargin);
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
