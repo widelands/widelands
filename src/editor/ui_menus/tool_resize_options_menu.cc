@@ -40,29 +40,8 @@ EditorToolResizeOptionsMenu::EditorToolResizeOptionsMenu(
    : EditorToolOptionsMenu(parent, registry, 260, 200, _("Resize"), resize_tool),
      resize_tool_(resize_tool),
      box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
-	 new_width_(&box_,
-			"new_map_width",
-            0,
-            0,
-            get_inner_w() - 2 * hmargin(),
-            12,
-            24,
-            _("Width"),
-            UI::DropdownType::kTextual,
-            UI::PanelStyle::kWui,
-            UI::ButtonStyle::kWuiPrimary),
-     new_height_(&box_,
-			 "new_map_height",
-             0,
-             0,
-             get_inner_w() - 2 * hmargin(),
-             12,
-             24,
-             _("Height"),
-             UI::DropdownType::kTextual,
-             UI::PanelStyle::kWui,
-             UI::ButtonStyle::kWuiPrimary),
-			text_area_(
+     map_size_box_(box_, "tool_resize_map", 4, parent.egbase().map().get_width(), parent.egbase().map().get_height()),
+     text_area_(
 			   &box_,
 			   0,
 			   0,
@@ -72,37 +51,21 @@ EditorToolResizeOptionsMenu::EditorToolResizeOptionsMenu(
 			   _("Select the new map size, then click the map to split it at the desired location."),
 			   UI::Align::kCenter,
 			   UI::MultilineTextarea::ScrollMode::kNoScrolling) {
-	for (const int32_t& i : Widelands::kMapDimensions) {
-		new_width_.add(std::to_string(i), i);
-		new_height_.add(std::to_string(i), i);
-	}
-	new_width_.select(parent.egbase().map().get_width());
-	new_height_.select(parent.egbase().map().get_height());
 
-	new_width_.selected.connect(
-	   boost::bind(&EditorToolResizeOptionsMenu::update_width, boost::ref(*this)));
-	new_height_.selected.connect(
-	   boost::bind(&EditorToolResizeOptionsMenu::update_height, boost::ref(*this)));
+	map_size_box_.set_selection_function([this] { update_dimensions(); });
 
-	box_.add(&new_width_);
-	box_.add(&new_height_);
-	box_.add(&text_area_);
+	box_.add(&map_size_box_, UI::Box::Resizing::kExpandBoth);
+	box_.add(&text_area_, UI::Box::Resizing::kFullSize);
 
-	box_.set_size(get_inner_w() - 2 * hmargin(),
-	              new_width_.get_h() + new_height_.get_h() + text_area_.get_h() + 2 * vspacing());
-	set_inner_size(get_inner_w(), box_.get_h() + 1 * vmargin());
+	set_center_panel(&box_);
 }
 
-void EditorToolResizeOptionsMenu::update_width() {
-	const int32_t w = new_width_.get_selected();
+void EditorToolResizeOptionsMenu::update_dimensions() {
+	const int32_t w = map_size_box_.selected_width();
+	const int32_t h = map_size_box_.selected_height();
 	assert(w > 0);
-	resize_tool_.set_width(w);
-	select_correct_tool();
-}
-
-void EditorToolResizeOptionsMenu::update_height() {
-	const int32_t h = new_height_.get_selected();
 	assert(h > 0);
+	resize_tool_.set_width(w);
 	resize_tool_.set_height(h);
 	select_correct_tool();
 }
