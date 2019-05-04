@@ -1424,9 +1424,9 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	}
 	ps.molog("  Training done!\n");
 	ps.set_production_result(
-				/** TRANSLATORS: Success message of a trainingsite '%s' stands for the description of the
-				 * training program, e.g. Completed upgrading soldier evade from level 0 to level 1 */
-				(boost::format(_("Completed %s")) % ps.top_state().program->descname()).str());
+	   /** TRANSLATORS: Success message of a trainingsite '%s' stands for the description of the
+	    * training program, e.g. Completed upgrading soldier evade from level 0 to level 1 */
+	   (boost::format(_("Completed %s")) % ps.top_state().program->descname()).str());
 
 	upcast(TrainingSite, ts, &ps);
 	ts->training_successful(attribute, level);
