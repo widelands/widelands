@@ -241,7 +241,8 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
 		for (const std::string& animation : anims->keys<std::string>()) {
 			if (animation == "idle") {
-				add_animation(animation, g_gr->animations().load(init_name, *anims->get_table(animation)));
+				add_animation(
+				   animation, g_gr->animations().load(init_name, *anims->get_table(animation)));
 			} else {
 				add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 			}

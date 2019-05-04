@@ -340,6 +340,9 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 			return true;
 		}
 		if (action.sparam1 == "immovable") {
+			if (upcast(ProductionSite, productionsite, get_location(game))) {
+				productionsite->unnotify_player();
+			}
 			std::vector<ImmovableFound> list;
 			if (action.iparam2 < 0)
 				map.find_reachable_immovables(area, &list, cstep);
@@ -973,8 +976,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			const std::string message =
 			   (boost::format("<div padding_r=10><p><img object=%s></p></div>"
 			                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-			    ri.descr().name() % UI_FONT_SIZE_MESSAGE %
-			    _("A geologist found resources."))
+			    ri.descr().name() % UI_FONT_SIZE_MESSAGE % _("A geologist found resources."))
 			      .str();
 
 			//  We should add a message to the player's message queue - but only,
@@ -2638,7 +2640,9 @@ const Bob::Task Worker::taskScout = {
  */
 bool Worker::run_scout(Game& game, State& state, const Action& action) {
 	molog("  Try scouting for %i ms with search in radius of %i\n", action.iparam2, action.iparam1);
-
+	if (upcast(ProductionSite, productionsite, get_location(game))) {
+		productionsite->unnotify_player();
+	}
 	++state.ivar1;
 	start_task_scout(game, action.iparam1, action.iparam2);
 	// state reference may be invalid now

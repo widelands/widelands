@@ -24,6 +24,7 @@ local wc_points = _"Points"
 return {
    name = wc_name,
    description = wc_desc,
+   peaceful_mode_allowed = true,
    func = function()
 
    -- set the objective with the game type for all players

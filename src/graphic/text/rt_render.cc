@@ -971,8 +971,7 @@ public:
 		check_size();
 	}
 
-	ImgRenderNode(NodeStyle& ns,
-	              const Image* image)
+	ImgRenderNode(NodeStyle& ns, const Image* image)
 	   : RenderNode(ns),
 	     image_(image),
 	     filename_(""),
@@ -1286,7 +1285,8 @@ public:
 			use_playercolor = true;
 		}
 		if (a.has("object")) {
-			const Image* representative_image = g_gr->animations().get_representative_image(a["object"].get_string(), use_playercolor ? &color : nullptr);
+			const Image* representative_image = g_gr->animations().get_representative_image(
+			   a["object"].get_string(), use_playercolor ? &color : nullptr);
 			render_node_.reset(new ImgRenderNode(nodestyle_, representative_image));
 		} else {
 			const std::string image_filename = a["src"].get_string();
@@ -1294,9 +1294,10 @@ public:
 			if (a.has("width")) {
 				int width = a["width"].get_int();
 				if (width > renderer_style_.overall_width) {
-					log("WARNING: Font renderer: Specified image width of %d exceeds the overall available "
-						"width of %d. Setting width to %d.\n",
-						width, renderer_style_.overall_width, renderer_style_.overall_width);
+					log("WARNING: Font renderer: Specified image width of %d exceeds the overall "
+					    "available "
+					    "width of %d. Setting width to %d.\n",
+					    width, renderer_style_.overall_width, renderer_style_.overall_width);
 					width = renderer_style_.overall_width;
 				}
 				const int image_width = image_cache_->get(image_filename)->width();

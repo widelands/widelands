@@ -1799,12 +1799,9 @@ const MethodType<LuaMapObjectDescription> LuaMapObjectDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[] = {
-   PROP_RO(LuaMapObjectDescription, descname),
-   PROP_RO(LuaMapObjectDescription, helptext_script),
-   PROP_RO(LuaMapObjectDescription, icon_name),
-   PROP_RO(LuaMapObjectDescription, name),
-   PROP_RO(LuaMapObjectDescription, type_name),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMapObjectDescription, descname),  PROP_RO(LuaMapObjectDescription, helptext_script),
+   PROP_RO(LuaMapObjectDescription, icon_name), PROP_RO(LuaMapObjectDescription, name),
+   PROP_RO(LuaMapObjectDescription, type_name), {nullptr, nullptr, nullptr},
 };
 
 // Only base classes can be persisted.

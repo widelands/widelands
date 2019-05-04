@@ -172,7 +172,7 @@ private:
 	Anims anims_;
 	static uint32_t dyn_attribhigh_;  ///< highest attribute ID used
 	static AttribMap dyn_attribs_;
-	std::string icon_filename_;                  // Filename for the menu icon
+	std::string icon_filename_;  // Filename for the menu icon
 
 	DISALLOW_COPY_AND_ASSIGN(MapObjectDescr);
 };

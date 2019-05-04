@@ -123,7 +123,8 @@ public:
 	 * Optional parameters in the Lua table are 'fps' and 'sound_effect'.
 	 */
 	uint32_t load(const LuaTable& table);
-	/// Same as above, but this animation will be used for getting a representative image by map object name
+	/// Same as above, but this animation will be used for getting a representative image by map
+	/// object name
 	uint32_t load(const std::string& map_object_name, const LuaTable& table);
 
 	/// Returns the animation with the given ID or throws an exception if it is
@@ -134,7 +135,8 @@ public:
 	/// If this image has been generated before, it is pulled from the cache using
 	/// the clr argument that was used previously.
 	const Image* get_representative_image(uint32_t id, const RGBColor* clr = nullptr);
-	const Image* get_representative_image(const std::string& map_object_name, const RGBColor* clr = nullptr);
+	const Image* get_representative_image(const std::string& map_object_name,
+	                                      const RGBColor* clr = nullptr);
 
 private:
 	std::vector<std::unique_ptr<Animation>> animations_;

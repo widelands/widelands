@@ -225,7 +225,9 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		}
 
 		if (representative_frame_ < 0 || representative_frame_ > nr_frames_ - 1) {
-			throw wexception("Animation has %d as its representative frame, but the frame indices available are 0 - %d", representative_frame_, nr_frames_ - 1);
+			throw wexception("Animation has %d as its representative frame, but the frame indices "
+			                 "available are 0 - %d",
+			                 representative_frame_, nr_frames_ - 1);
 		}
 
 		// Perform some checks to make sure that the data is complete and consistent
@@ -331,8 +333,9 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	const MipMapEntry& mipmap = *mipmaps_.at(1.0f);
 	std::vector<std::string> images = mipmap.image_files;
 	assert(!images.empty());
-	const Image* image = (mipmap.has_playercolor_masks && clr) ? playercolor_image(*clr, images[representative_frame_]) :
-	                                                             g_gr->images().get(images[representative_frame_]);
+	const Image* image = (mipmap.has_playercolor_masks && clr) ?
+	                        playercolor_image(*clr, images[representative_frame_]) :
+	                        g_gr->images().get(images[representative_frame_]);
 
 	const int w = image->width();
 	const int h = image->height();
@@ -460,10 +463,14 @@ const Image* AnimationManager::get_representative_image(uint32_t id, const RGBCo
 	return representative_images_.at(hash).get();
 }
 
-const Image* AnimationManager::get_representative_image(const std::string& map_object_name, const RGBColor* clr) {
+const Image* AnimationManager::get_representative_image(const std::string& map_object_name,
+                                                        const RGBColor* clr) {
 	if (representative_animations_by_map_object_name_.count(map_object_name) != 1) {
-		log("Warning: %s has no animation assigned for its representative image, or it's not a known map object\n", map_object_name.c_str());
+		log("Warning: %s has no animation assigned for its representative image, or it's not a known "
+		    "map object\n",
+		    map_object_name.c_str());
 		return new Texture(0, 0);
 	}
-	return get_representative_image(representative_animations_by_map_object_name_.at(map_object_name), clr);
+	return get_representative_image(
+	   representative_animations_by_map_object_name_.at(map_object_name), clr);
 }
