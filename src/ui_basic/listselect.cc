@@ -251,6 +251,45 @@ uint32_t BaseListselect::get_eff_w() const {
 	return scrollbar_.is_enabled() ? get_w() - scrollbar_.get_w() : get_w();
 }
 
+int BaseListselect::calculate_desired_width() {
+	if (entry_records_.empty()) {
+		return 0;
+	}
+	// Make enough room for all texts + hotkeys in tabular format
+	widest_text_ = 0;
+	widest_hotkey_ = 0;
+	size_t entry_with_widest_text = 0;
+	size_t entry_with_widest_hotkey = 0;
+
+	for (size_t i = 0; i < entry_records_.size(); ++i) {
+		const EntryRecord& er = *entry_records_[i];
+		const int current_text_width = er.name.empty() ? 0 : UI::g_fh->render(as_richtext(er.name))->width();
+		if (current_text_width > widest_text_) {
+			widest_text_ = current_text_width;
+			entry_with_widest_text = i;
+		}
+		const int current_hotkey_width = er.hotkey.empty() ? 0 : UI::g_fh->render(as_richtext(er.hotkey))->width();
+		if (current_hotkey_width > widest_hotkey_) {
+			widest_hotkey_ = current_hotkey_width;
+			entry_with_widest_hotkey = i;
+		}
+	}
+
+	// Now resize it
+	int text_width;
+	if (widest_hotkey_ > 0) {
+		text_width = kHotkeyGap;
+		text_width += UI::g_fh->render(as_richtext(entry_records_[entry_with_widest_text]->name))->width();
+		text_width += UI::g_fh->render(as_richtext(entry_records_[entry_with_widest_hotkey]->hotkey))->width();
+	} else {
+		text_width = UI::g_fh->render(as_richtext(entry_records_[entry_with_widest_text]->name))->width();
+	}
+
+	const int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
+	const int old_width = get_w();
+	return text_width + picw + 8 +old_width - get_eff_w();
+}
+
 void BaseListselect::layout() {
 	scrollbar_.set_size(scrollbar_.get_w(), get_h());
 	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
@@ -263,43 +302,9 @@ void BaseListselect::layout() {
 	}
 	// For dropdowns, autoincrease width
 	if (selection_mode_ == ListselectLayout::kDropdown) {
-		if (entry_records_.empty()) {
-			return;
-		}
-		// Make enough room for all texts + hotkeys in tabular format
-		widest_text_ = 0;
-		widest_hotkey_ = 0;
-		size_t entry_with_widest_text = 0;
-		size_t entry_with_widest_hotkey = 0;
-
-		for (size_t i = 0; i < entry_records_.size(); ++i) {
-			const EntryRecord& er = *entry_records_[i];
-			const int current_text_width = er.name.empty() ? 0 : UI::g_fh->render(as_richtext(er.name))->width();
-			if (current_text_width > widest_text_) {
-				widest_text_ = current_text_width;
-				entry_with_widest_text = i;
-			}
-			const int current_hotkey_width = er.hotkey.empty() ? 0 : UI::g_fh->render(as_richtext(er.hotkey))->width();
-			if (current_hotkey_width > widest_hotkey_) {
-				widest_hotkey_ = current_hotkey_width;
-				entry_with_widest_hotkey = i;
-			}
-		}
-
-		// Now resize it
-		int text_width;
-		if (widest_hotkey_ > 0) {
-			text_width = kHotkeyGap;
-			text_width += UI::g_fh->render(as_richtext(entry_records_[entry_with_widest_text]->name))->width();
-			text_width += UI::g_fh->render(as_richtext(entry_records_[entry_with_widest_hotkey]->hotkey))->width();
-		} else {
-			text_width = UI::g_fh->render(as_richtext(entry_records_[entry_with_widest_text]->name))->width();
-		}
-
-		const int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
-		const int difference = text_width + picw + 8 - get_eff_w();
-		if (difference > 0) {
-			set_size(get_w() + difference, get_h());
+		const int new_width = calculate_desired_width();
+		if (new_width > get_w()) {
+			set_size(new_width, get_h());
 		}
 	}
 }

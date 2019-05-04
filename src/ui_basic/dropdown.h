@@ -25,6 +25,7 @@
 
 #include <boost/signals2.hpp>
 
+#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
@@ -136,7 +137,8 @@ public:
 	/// Otherwise, close the list.
 	void set_list_visibility(bool open);
 
-	void layout() override;
+	void set_size(int nw, int nh) override;
+	void set_desired_size(int w, int h) override;
 
 protected:
 	/// Add an element to the list
@@ -168,6 +170,8 @@ protected:
 	void think() override;
 
 private:
+	void layout() override;
+
 	/// Updates the buttons
 	void update();
 
@@ -184,12 +188,12 @@ private:
 	/// Give each dropdown a unique ID
 	static int next_id_;
 	const int id_;
-	std::unique_ptr<Notifications::Subscriber<NoteDropdown>> subscriber_;
+	std::unique_ptr<Notifications::Subscriber<NoteDropdown>> dropdown_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>> graphic_resolution_changed_subscriber_;
 
 	// Dimensions
 	unsigned int max_list_items_;
 	unsigned int max_list_height_;
-	int list_width_;
 	int list_offset_x_;
 	int list_offset_y_;
 	int button_dimension_;

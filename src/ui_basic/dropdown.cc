@@ -27,7 +27,6 @@
 #include "base/macros.h"
 #include "graphic/align.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/tabpanel.h"
@@ -66,7 +65,6 @@ BaseDropdown::BaseDropdown(UI::Panel* parent, const std::string& name,
      id_(next_id_++),
      max_list_items_(max_list_items),
 	 max_list_height_(std::numeric_limits<uint32_t>::max()),
-     list_width_(w),
      list_offset_x_(0),
      list_offset_y_(0),
      button_dimension_(button_dimension),
@@ -105,26 +103,30 @@ BaseDropdown::BaseDropdown(UI::Panel* parent, const std::string& name,
 	}
 
 	// Close whenever another dropdown is opened
-	subscriber_ = Notifications::subscribe<NoteDropdown>([this](const NoteDropdown& note) {
+	dropdown_subscriber_ = Notifications::subscribe<NoteDropdown>([this](const NoteDropdown& note) {
 		if (id_ != note.id) {
 			close();
 		}
 	});
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged&) {
+		layout();
+	});
 
 	assert(max_list_items_ > 0);
 	// Hook into highest parent that we can get so that we can drop down outside the panel.
-	// Positioning breaks down with TabPanels, so we exclude them.
-	while (parent->get_parent() && !is_a(UI::TabPanel, parent->get_parent())) {
-		parent = parent->get_parent();
+	UI::Panel* list_parent = &display_button_;
+	while (list_parent->get_parent()) {
+		list_parent = list_parent->get_parent();
 	}
-	list_ = new UI::Listselect<uintptr_t>(parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
+	list_ = new UI::Listselect<uintptr_t>(list_parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
 
 	list_->set_visible(false);
-	button_box_.add(&display_button_);
+	button_box_.add(&display_button_, UI::Box::Resizing::kExpandBoth);
 	display_button_.sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	if (push_button_ != nullptr) {
 		display_button_.set_perm_pressed(true);
-		button_box_.add(push_button_);
+		button_box_.add(push_button_, UI::Box::Resizing::kFullSize);
 		push_button_->sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	}
 	button_box_.set_size(w, get_h());
@@ -158,25 +160,23 @@ void BaseDropdown::set_height(int height) {
 }
 
 void BaseDropdown::layout() {
-	const int base_h = base_height(button_dimension_);
-	const int w = (type_ == DropdownType::kPictorial || type_ == DropdownType::kPictorialMenu) ? button_dimension_ : get_w();
-	button_box_.set_size(w, base_h);
-	display_button_.set_desired_size(
-	   type_ == DropdownType::kTextual ? w - button_dimension_ : w, base_h);
-	int new_list_height =
+	int list_width = list_->calculate_desired_width();
+
+	const int new_list_height =
 	   std::min(max_list_height_ / list_->get_lineheight(), std::min(list_->size(), max_list_items_)) * list_->get_lineheight();
-	list_->set_size((type_ != DropdownType::kPictorial && type_ != DropdownType::kPictorialMenu) ? w : list_width_, new_list_height);
-	set_desired_size(w, base_h);
+	list_->set_size(std::max(list_width, button_box_.get_w()), new_list_height);
 
 	// Update list position. The list is hooked into the highest parent that we can get so that we
-	// can drop down outside the panel. Positioning breaks down with TabPanels, so we exclude them.
-	UI::Panel* parent = get_parent();
-	int new_list_x = get_x() + parent->get_x() + parent->get_lborder();
-	int new_list_y = get_y() + parent->get_y() + parent->get_tborder();
-	while (parent->get_parent() && !is_a(UI::TabPanel, parent->get_parent())) {
+	// can drop down outside the panel.
+	UI::Panel* parent = &display_button_;
+	int new_list_x = display_button_.get_x();
+	int new_list_y = display_button_.get_y();
+	int parent_counter = 0;
+	while (parent->get_parent()) {
 		parent = parent->get_parent();
 		new_list_x += parent->get_x() + parent->get_lborder();
 		new_list_y += parent->get_y() + parent->get_tborder();
+		++parent_counter;
 	}
 
 	// Drop up instead of down if it doesn't fit
@@ -203,6 +203,17 @@ void BaseDropdown::layout() {
 	if (list_->is_visible()) {
 		list_->move_to_top();
 	}
+}
+
+void BaseDropdown::set_size(int nw, int nh) {
+	button_box_.set_size(nw, nh);
+	Panel::set_size(nw, nh);
+	layout();
+}
+void BaseDropdown::set_desired_size(int nw, int nh) {
+	button_box_.set_desired_size(nw, nh);
+	Panel::set_desired_size(nw, nh);
+	layout();
 }
 
 void BaseDropdown::add(const std::string& name,
@@ -283,7 +294,7 @@ bool BaseDropdown::is_expanded() const {
 
 void BaseDropdown::set_pos(Vector2i point) {
 	UI::Panel::set_pos(point);
-	list_->set_pos(Vector2i(point.x, point.y + get_h()));
+	layout();
 }
 
 void BaseDropdown::clear() {

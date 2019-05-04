@@ -106,6 +106,8 @@ struct BaseListselect : public Panel {
 
 	uint32_t get_eff_w() const;
 
+	int calculate_desired_width();
+
 	void layout() override;
 
 	// Drawing and event handling
