@@ -267,6 +267,7 @@ p2:forbid_buildings {
    "empire_lumberjacks_house",
    "empire_port",
    "empire_shipyard",
+   "empire_marblemine",
 }
 
 hq = p2:place_building("HQ_atterdag", map.player_slots [2].starting_field, false, true)
@@ -326,8 +327,8 @@ hq:set_soldiers {
    [{2,2,0,0}] = 80,
    [{4,4,0,2}] = 40,
 }
--- p2:place_building("empire_blockhouse", map:get_field(102, 36), true, true)
--- p2:place_building("empire_tower", map:get_field(113, 30), true, true)
+
+
 
 -- =======================================================================
 --                                 Player 3
@@ -348,6 +349,7 @@ p4:forbid_buildings {
    "barbarians_quarry",
    "barbarians_rangers_hut",
    "barbarians_lumberjacks_hut",
+   "barbarians_inn",
    "barbarians_port",
    "barbarians_shipyard",
 }
@@ -402,5 +404,5 @@ hq:set_soldiers {
    [{3,5,0,0}] = 80,
    [{3,5,0,2}] = 40,
 }
--- p4:place_building("barbarians_fortress", map:get_field(369, 128), true, true)
+
 
