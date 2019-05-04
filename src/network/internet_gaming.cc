@@ -549,9 +549,10 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 						break;
 					}
 				}
-				if (!found)
+				if (!found) {
 					format_and_add_chat(
 					   "", "", true, (boost::format(_("%s joined the lobby")) % inc.name).str());
+				}
 			}
 
 			std::sort(clientlist_.begin(), clientlist_.end(),
@@ -559,7 +560,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 						{return (left.name < right.name);});
 
 			for (InternetClient& client : old) {
-				if (client.name.size() && client.type != INTERNET_CLIENT_IRC) {
+				if (client.name.size()) {
 					format_and_add_chat(
 					   "", "", true, (boost::format(_("%s left the lobby")) % client.name).str());
 				}
