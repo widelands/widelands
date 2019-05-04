@@ -27,6 +27,7 @@ are available, and what your image files need to look like:
             path = "sound/foo/bar",
             priority = 128
          },
+         representative_frame = 3,
       },
       walk = {
          directory = path.dirname(__file__),
@@ -74,7 +75,62 @@ Let's have a detailed look at the ``idle`` animation:
    * **128-254:** Probability between ``0.0`` and ``1.0``, many instances can be playing at any time
    * **255:** Always play
 
+<<<<<<< TREE
 .. _animations_directional:
+=======
+
+Mipmaps
+-------
+
+We support mipmaps for animations. They allow us to provide the same image in different
+resolutions for optimum rendering quality. Let's look at an example with a mipmap ``idle`` animation and a normal ``build`` animation:
+
+.. code-block:: lua
+
+   animations = {
+      idle = {
+         mipmap = {
+            {
+               scale = 0.5,
+               files = path.list_files(dirname .. "idle_0.5_??.png"),
+            },
+            {
+               scale = 1,
+               files = path.list_files(dirname .. "idle_1_??.png"),
+            },
+            {
+               scale = 2,
+               files = path.list_files(dirname .. "idle_2_??.png"),
+            },
+            {
+               scale = 4,
+               files = path.list_files(dirname .. "idle_4_??.png"),
+            }
+         },
+         hotspot = { 5, 7 },
+         fps = 4,
+         sound_effect = {
+            directory = "sound/foo",
+            name = "bar",
+         },
+      },
+      build = {
+         files = path.list_files(dirname .. "build_??.png"),
+         hotspot = { 5, 7 },
+      }
+   },
+
+The scale of ``1`` is mandatory, and other supported scales are ``0.5``, ``2``
+and ``4``.
+The base table should no longer contain the ``files`` entry
+when you're using a mipmap.
+Each mimap entry must define the ``files`` and the ``scale``.
+See also :ref:`animations_converting_formats`.
+
+**representative_frame**
+   *Optional*. Choose the animation frame that will be displayed in messages and in the encyclopedia as a representative image. Default is 0.
+
+>>>>>>> MERGE-SOURCE
 Directional Animations
 ----------------------
 

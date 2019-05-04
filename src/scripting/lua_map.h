@@ -198,7 +198,6 @@ public:
 	int get_helptext_script(lua_State*);
 	int get_name(lua_State*);
 	int get_type_name(lua_State*);
-	int get_representative_image(lua_State*);
 
 	/*
 	 * Lua methods

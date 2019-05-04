@@ -20,6 +20,8 @@
 #ifndef WL_NETWORK_GAMEHOST_H
 #define WL_NETWORK_GAMEHOST_H
 
+#include <memory>
+
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/player_end_result.h"
@@ -157,7 +159,7 @@ private:
 	                       const std::string& arg = "");
 	void reaper();
 
-	NetTransferFile* file_;
+	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;
 	bool internet_;
 	bool forced_pause_;

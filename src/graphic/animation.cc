@@ -96,7 +96,6 @@ public:
 	uint16_t nr_frames() const override;
 	uint32_t frametime() const override;
 	const Image* representative_image(const RGBColor* clr) const override;
-	const std::string& representative_image_filename() const override;
 	virtual void blit(uint32_t time,
 	                  const Widelands::Coords& coords,
 	                  const Rectf& source_rect,
@@ -228,7 +227,8 @@ NonPackedAnimation IMPLEMENTATION
 */
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string& basename)
-   : frametime_(FRAME_LENGTH),
+   : Animation(table.has_key("representative_frame") ? table.get_int("representative_frame") : 0),
+			   frametime_(FRAME_LENGTH),
      hotspot_(table.get_vector<std::string, int>("hotspot")),
      sound_effect_(kNoSoundEffect),
      sound_priority_(kFxPriorityLowest),
@@ -301,6 +301,12 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 			frametime_ = 1000 / get_positive_int(table, "fps");
 		}
 
+		if (representative_frame_ < 0 || representative_frame_ > nr_frames_ - 1) {
+			throw wexception("Animation has %d as its representative frame, but the frame indices "
+			                 "available are 0 - %d",
+			                 representative_frame_, nr_frames_ - 1);
+		}
+
 		// Perform some checks to make sure that the data is complete and consistent
 		const bool should_have_playercolor = mipmaps_.begin()->second->has_playercolor_masks;
 		for (const auto& mipmap : mipmaps_) {
@@ -355,8 +361,9 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	const MipMapEntry& mipmap = *mipmaps_.at(1.0f);
 	std::vector<std::string> images = mipmap.image_files;
 	assert(!images.empty());
-	const Image* image = (mipmap.has_playercolor_masks && clr) ? playercolor_image(*clr, images.front()) :
-	                                            g_gr->images().get(images.front());
+	const Image* image = (mipmap.has_playercolor_masks && clr) ?
+	                        playercolor_image(*clr, images[representative_frame_]) :
+	                        g_gr->images().get(images[representative_frame_]);
 
 	const int w = image->width();
 	const int h = image->height();
@@ -364,11 +371,6 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	Texture* rv = new Texture(w, h);
 	rv->blit(Rectf(0.f, 0.f, w, h), *image, Rectf(0.f, 0.f, w, h), 1., BlendMode::Copy);
 	return rv;
-}
-
-// TODO(GunChleoc): This is only here for the font renderers.
-const std::string& NonPackedAnimation::representative_image_filename() const {
-	return mipmaps_.at(1.0f)->image_files[0];
 }
 
 uint32_t NonPackedAnimation::current_frame(uint32_t time) const {
@@ -456,6 +458,12 @@ uint32_t AnimationManager::load(const LuaTable& table, const std::string& basena
 	animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table, basename)));
 	return animations_.size();
 }
+uint32_t AnimationManager::load(const std::string& map_object_name, const LuaTable& table, const std::string& basename) {
+	animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table, basename)));
+	const size_t result = animations_.size();
+	representative_animations_by_map_object_name_.insert(std::make_pair(map_object_name, result));
+	return result;
+}
 
 const Animation& AnimationManager::get_animation(uint32_t id) const {
 	if (!id || id > animations_.size())
@@ -472,4 +480,16 @@ const Image* AnimationManager::get_representative_image(uint32_t id, const RGBCo
 		            std::move(g_gr->animations().get_animation(id).representative_image(clr)))));
 	}
 	return representative_images_.at(hash).get();
+}
+
+const Image* AnimationManager::get_representative_image(const std::string& map_object_name,
+                                                        const RGBColor* clr) {
+	if (representative_animations_by_map_object_name_.count(map_object_name) != 1) {
+		log("Warning: %s has no animation assigned for its representative image, or it's not a known "
+		    "map object\n",
+		    map_object_name.c_str());
+		return new Texture(0, 0);
+	}
+	return get_representative_image(
+	   representative_animations_by_map_object_name_.at(map_object_name), clr);
 }

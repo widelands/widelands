@@ -920,11 +920,13 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 	get_owner()->force_csite(c, get_owner()->tribe().port());
 
 	// Make sure that we have space to squeeze in a lumberjack
-	std::vector<ImmovableFound> trees;
-	game.map().find_immovables(Area<FCoords>(game.map().get_fcoords(c), 2), &trees,
+	std::vector<ImmovableFound> trees_rocks;
+	game.map().find_immovables(Area<FCoords>(game.map().get_fcoords(c), 3), &trees_rocks,
 	                           FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
-	for (auto& tree : trees) {
-		tree.object->remove(game);
+	game.map().find_immovables(Area<FCoords>(game.map().get_fcoords(c), 3), &trees_rocks,
+	                           FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks")));
+	for (auto& immo : trees_rocks) {
+		immo.object->remove(game);
 	}
 	set_ship_state_and_notify(
 	   ShipStates::kExpeditionColonizing, NoteShip::Action::kDestinationChanged);

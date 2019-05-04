@@ -53,7 +53,7 @@ constexpr int FRAME_LENGTH = 250;
  */
 class Animation {
 public:
-	Animation() {
+	Animation(int representative_frame) : representative_frame_(representative_frame) {
 	}
 	virtual ~Animation() {
 	}
@@ -82,8 +82,6 @@ public:
 	/// The 'clr' is the player color used for blending - the parameter can be
 	/// 'nullptr', in which case the neutral image will be returned.
 	virtual const Image* representative_image(const RGBColor* clr) const = 0;
-	/// The filename of the image used for the first frame, without player color.
-	virtual const std::string& representative_image_filename() const = 0;
 
 	/// Blit the animation frame that should be displayed at the given time index
 	/// into the given 'destination_rect'.
@@ -107,6 +105,9 @@ protected:
 	/// If 'coords' == Widelands::Coords::null(), skip playing any sound effects.
 	virtual void trigger_sound(uint32_t time, const Widelands::Coords& coords) const = 0;
 
+protected:
+	int representative_frame_;
+
 private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);
 };
@@ -126,6 +127,9 @@ public:
 	 * Optional parameters in the Lua table are 'fps' and 'sound_effect'.
 	 */
 	uint32_t load(const LuaTable& table, const std::string& basename);
+	/// Same as above, but this animation will be used for getting a representative image by map
+	/// object name
+	uint32_t load(const std::string& map_object_name, const LuaTable& table, const std::string& basename);
 
 	/// Returns the animation with the given ID or throws an exception if it is
 	/// unknown.
@@ -135,11 +139,14 @@ public:
 	/// If this image has been generated before, it is pulled from the cache using
 	/// the clr argument that was used previously.
 	const Image* get_representative_image(uint32_t id, const RGBColor* clr = nullptr);
+	const Image* get_representative_image(const std::string& map_object_name,
+	                                      const RGBColor* clr = nullptr);
 
 private:
 	std::vector<std::unique_ptr<Animation>> animations_;
 	std::map<std::pair<uint32_t, const RGBColor*>, std::unique_ptr<const Image>>
 	   representative_images_;
+	std::map<std::string, uint32_t> representative_animations_by_map_object_name_;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_H
