@@ -164,10 +164,6 @@ function mission_thread()
    })
    scroll_to_field(map.player_slots[1].starting_field)
 
-   -- We need to gc faster than usual because our AI is a bit memory-hungry. I'm sorry :(
-   -- collectgarbage("setpause", 100)
-   -- run(ai, p2)
-   -- run(ai, p4)
 
 -- NOCOM
 p1.see_all = true

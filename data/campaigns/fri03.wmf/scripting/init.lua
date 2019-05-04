@@ -37,5 +37,4 @@ p3_start = {
 }
 
 include "map:scripting/texts.lua"
---include "map:scripting/ai.lua"
 include "map:scripting/mission_thread.lua"
