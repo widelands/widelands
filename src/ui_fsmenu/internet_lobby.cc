@@ -162,6 +162,9 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	// try to connect to the metaserver
 	if (!InternetGaming::ref().error() && !InternetGaming::ref().logged_in())
 		connect_to_metaserver();
+	
+	// set focus to chat input
+	chat.focus_edit();
 }
 
 void FullscreenMenuInternetLobby::layout() {
@@ -325,7 +328,7 @@ void FullscreenMenuInternetLobby::client_doubleclicked(uint32_t i) {
 
 		temp += text;
 		chat.set_edit_text(temp);
-		chat.focus();
+		chat.focus_edit();
 	}
 }
 
