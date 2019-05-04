@@ -1632,8 +1632,10 @@ bool Map::set_port_space(
 		success = force || is_port_space_allowed(world, get_fcoords(c));
 		if (success) {
 			port_spaces_.insert(c);
+			recalculate_seafaring &= !allows_seafaring();
 		}
 	} else {
+		recalculate_seafaring &= allows_seafaring();
 		port_spaces_.erase(c);
 		success = true;
 	}

@@ -70,7 +70,7 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
 		JSON::Object* json_building = json_buildings_array->add_object();
 		json_building->add_string("name", building.name());
 		json_building->add_string("descname", building.descname());
-		json_building->add_string("icon", building.representative_image_filename());
+		json_building->add_string("icon", building.icon_filename());
 
 		// Buildcost
 		if (building.is_buildable()) {
