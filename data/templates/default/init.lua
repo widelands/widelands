@@ -1,8 +1,15 @@
 -- This script defines a GUI style for Widelands. At the moment, we only
 -- support the default template.
--- NOCOM update documentation
--- So far, only background textures and colors can be defined, and they all have
--- the format { image = filename, color = {r, g, b } }.
+
+-- Background textures and colors have the format { image = filename, color = {r, g, b } }.
+
+-- Required parameters for font styles are:
+-- * face: string
+-- * color: table with r, g, b values as int
+-- * size: positive int
+-- Optional bools are: bold, italic, underline, shadow
+
+-- Some elements carry custom parameters like e.g. "margin" that should be expanded upon in the future.
 
 dirname = path.dirname(__file__)
 
@@ -483,7 +490,7 @@ return {
    -- Font styles. Required parameters are:
    -- * face: string
    -- * color: table with r, g, b values as int
-   -- * size; int
+   -- * size: positive int
    -- Optional bools are: bold, italic, underline, shadow
    fonts = {
       -- Basic chat message text color

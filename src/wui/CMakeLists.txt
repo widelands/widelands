@@ -4,6 +4,7 @@ wl_library(wui_sound_options
     sound_options.h
   DEPENDS
     base_i18n
+    graphic_styles
     sound
     ui_basic
 )
@@ -114,7 +115,6 @@ wl_library(wui_common_mapdetails
     base_i18n
     base_log
     graphic
-    graphic_fonthandler
     graphic_text_layout
     io_filesystem
     logic

@@ -36,7 +36,6 @@ wl_library(graphic_text
     graphic
     graphic_align
     graphic_color
-    graphic_fonthandler
     graphic_image_cache
     graphic_image_io
     graphic_playercolor
