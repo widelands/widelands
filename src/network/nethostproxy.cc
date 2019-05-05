@@ -256,7 +256,7 @@ void NetHostProxy::receive_commands() {
 			conn_->receive(&cmd);
 			uint8_t id;
 			conn_->receive(&id);
-			assert(clients_.count(id));
+			assert(clients_.count(id)); // TODO(Klaus Halfmann): As of a race condition this may not always hold.
 			clients_.at(id).state_ = Client::State::kDisconnected;
 		}
 		break;
