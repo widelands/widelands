@@ -44,6 +44,7 @@ wl_library(wui_economy_options
     graphic
     logic
     notifications
+    profile
     ui_basic
     wui_waresdisplay
 )
