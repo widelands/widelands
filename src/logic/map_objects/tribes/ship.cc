@@ -788,7 +788,8 @@ bool Ship::withdraw_item(Game& game, PortDock& pd) {
 void Ship::unload_unfit_items(Game& game, PortDock& here, const PortDock& nextdest) {
 	size_t dst = 0;
 	for (ShippingItem& si : items_) {
-		if (fleet_->is_path_favourable(here, nextdest, *si.get_destination(game))) {
+		const PortDock* dest = si.get_destination(game);
+		if (dest && fleet_->is_path_favourable(here, nextdest, *dest)) {
 			items_[dst++] = si;
 		} else {
 			here.shipping_item_returned(game, si);
