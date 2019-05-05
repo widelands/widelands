@@ -4222,11 +4222,11 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		    (en_bo.cnt_under_construction + en_bo.unoccupied_count) == 0) {
 
 			// forcing first upgrade
-			if (en_bo.total_count() == 0 && site.bo->cnt_built > 1 || site.bo->is(BuildingAttribute::kUpgradeSubstitutes)) {
+			if (en_bo.total_count() == 0 && (site.bo->cnt_built > 1 || site.bo->is(BuildingAttribute::kUpgradeSubstitutes))) {
 				doing_upgrade = true;
 			}
 
-			if (en_bo.total_count() == 1) {
+			if (en_bo.total_count() == 1 && (site.bo->cnt_built > 1 || site.bo->is(BuildingAttribute::kUpgradeSubstitutes))) {
 				if (en_bo.current_stats > 55) {
 					doing_upgrade = true;
 				}
