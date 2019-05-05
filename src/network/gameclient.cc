@@ -170,10 +170,10 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 	}
 	game -> set_ibase(igb);
 	igb->set_chat_provider(*parent);
-	if (settings.savegame) {  //  new map
-		game->init_newgame(loader, settings);
-	} else {  // savegame
+	if (settings.savegame) {  // savegame
 		game->init_savegame(loader, settings);
+	} else {                  //  new map
+		game->init_newgame(loader, settings);
 	}
 	return igb;
 }
