@@ -2,9 +2,9 @@ dirname = path.dirname(__file__)
 
 terrain_affinity = {
    preferred_temperature = 110,
-   preferred_humidity = 0.55,
-   preferred_fertility = 0.8,
-   pickiness = 0.8,
+   preferred_humidity = 550,
+   preferred_fertility = 800,
+   pickiness = 80,
 }
 
 world:new_immovable_type{
@@ -80,6 +80,7 @@ world:new_immovable_type{
    name = "maple_winter_old",
    descname = _ "Maple (Old)",
    species = _ "Maple",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },
@@ -100,8 +101,7 @@ world:new_immovable_type{
          hotspot = { 23, 59 },
          fps = 10,
          sound_effect = {
-            directory = "sound/animals",
-            name = "bird4",
+            path = "sound/animals/bird4",
          },
       },
    },

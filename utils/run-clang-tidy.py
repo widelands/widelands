@@ -340,5 +340,6 @@ def main():
         shutil.rmtree(tmpdir)
     sys.exit(return_code)
 
+
 if __name__ == '__main__':
     main()

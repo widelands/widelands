@@ -3,7 +3,13 @@
 -- ===============
 
 function introduction()
+   init_player()
+   fields = get_sees_fields(plr)
+   reveal_randomly(plr, fields, 2000)
+   remaining_roads()
+
    sleep(1000)
+
    message_box_objective(plr, intro1)
    message_box_objective(plr, intro2)
 
@@ -33,6 +39,24 @@ function wait_for_window_and_tab_or_complain(
       end
       sleep(200)
    end
+end
+
+function encyclopedia_tutorial()
+   sleep(100*1000)
+   local o = message_box_objective(plr, ware_encyclopedia) -- where to get help
+   while not mv.windows.encyclopedia do sleep(200) end
+   set_objective_done(o, wl.Game().real_speed)
+
+   o = message_box_objective(plr, explain_encyclopedia) -- what information is available
+   local o2 = add_campaign_objective(reopen_encyclopedia_obj)
+   o2.visible = false
+   wait_for_window_and_tab_or_complain(
+      "encyclopedia",
+      "encyclopedia_wares",
+      o2, reopen_encyclopedia
+   )
+   while mv.windows.encyclopedia do sleep(200) end
+   set_objective_done(o, wl.Game().real_speed)
 end
 
 function burn_tavern_down()
@@ -80,8 +104,7 @@ function burn_tavern_down()
    sleep(2000)
    o = message_box_objective(plr, build_taverns)
 
-   sleep(100*1000)
-   message_box_objective(plr, ware_encyclopedia) -- a small insert
+   encyclopedia_tutorial()
 
    while #plr:get_buildings("empire_tavern") < 2 do sleep(500) end
    set_objective_done(o, 0)
@@ -129,11 +152,13 @@ function plan_the_future()
    message_box_objective(plr, economy_settings2)
    o = message_box_objective(plr, economy_settings3)
 
-   while sf.immovable:get_wares("marble_column") < 12 do sleep(500) end
+   while sf.brn.immovable.economy:ware_target_quantity("marble_column") ~= 20 do
+      sleep(200)
+   end
    -- wait that the player has really changed the target quantity
+   set_objective_done(o)
 
-   o.visible = false
-   -- just forget about the old objective, the new one includes the old one
+   -- new objective all has to be transported to the front
    o = message_box_objective(plr, warehouse_preference_settings)
 
    local enough_wares = false
@@ -156,6 +181,4 @@ function conclude()
    message_box_objective(plr, conclusion)
 end
 
-
-run(init_player)
 run(introduction)

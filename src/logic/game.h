@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,6 +43,8 @@ namespace Widelands {
 
 /// How often are statistics to be sampled.
 constexpr uint32_t kStatisticsSampleTime = 30000;
+// See forester_cache_
+constexpr int16_t kInvalidForesterEntry = -1;
 
 struct Flag;
 struct Path;
@@ -55,16 +57,59 @@ struct PlayerEndStatus;
 class TrainingSite;
 class MilitarySite;
 
-/** class Game
- *
- * This class manages the entire lifetime of a game session, from creating the
- * game and setting options, selecting maps to the actual playing phase and the
- * final statistics screen(s).
- */
 enum {
 	gs_notrunning = 0,  // game is being prepared
 	gs_running,         // game was fully prepared at some point and is now in-game
 	gs_ending
+};
+
+// The entry types that are written to the syncstream
+// The IDs are a number in the higher 4 bits and the length in bytes in the lower 4 bits
+// Keep this synchronized with utils/syncstream/syncexcerpt-to-text.py
+enum SyncEntry : uint8_t {
+	// Used in:
+	// game.cc Game::report_desync()
+	// Parameters:
+	// s32 id of desynced user, -1 when written on client
+	kDesync = 0x14,
+	// map_object.cc CmdDestroyMapObject::execute()
+	// u32 object serial
+	kDestroyObject = 0x24,
+	// economy.cc Economy::process_requests()
+	// u8 request type
+	// u8 request index
+	// u32 target serial
+	kProcessRequests = 0x36,
+	// economy.cc Economy::handle_active_supplies()
+	// u32 assignments size
+	kHandleActiveSupplies = 0x44,
+	// request.cc Request::start_transfer()
+	// u32 target serial
+	// u32 source(?) serial
+	kStartTransfer = 0x58,
+	// cmd_queue.cc CmdQueue::run_queue()
+	// u32 duetime
+	// u32 command id
+	kRunQueue = 0x68,
+	// game.h Game::logic_rand_seed()
+	// u32 random seed
+	kRandomSeed = 0x74,
+	// game.cc Game::logic_rand()
+	// u32 random value
+	kRandom = 0x84,
+	// map_object.cc CmdAct::execute()
+	// u32 object serial
+	// u8 object type (see map_object.h MapObjectType)
+	kCmdAct = 0x95,
+	// battle.cc Battle::Battle()
+	// u32 first soldier serial
+	// u32 second soldier serial
+	kBattle = 0xA8,
+	// bob.cc Bob::set_position()
+	// u32 bob serial
+	// s16 position x
+	// s16 position y
+	kBobSetPosition = 0xB8
 };
 
 class Player;
@@ -72,6 +117,13 @@ class MapLoader;
 class PlayerCommand;
 class ReplayReader;
 class ReplayWriter;
+
+/** class Game
+ *
+ * This class manages the entire lifetime of a game session, from creating the
+ * game and setting options, selecting maps to the actual playing phase and the
+ * final statistics screen(s).
+ */
 
 class Game : public EditorGameBase {
 public:
@@ -98,8 +150,23 @@ public:
 	friend struct GamePlayerInfoPacket;
 	friend struct GameLoader;
 
+	// TODO(kxq): The lifetime of game-instance is okay for this, but is this the right spot?
+	// TODO(kxq): I should find the place where LUA changes map, and clear this whenever that
+	// happens.
+	// TODO(kxq): When done, the x_check in worker.cc could be removed (or made more rare, and put
+	// under an assert as then mismatch would indicate the presence of a bug).
+	// TODO(k.halfmann): this shoud perhpas better be a map, it will be quite sparse?
+
+	/** Qualitity of terrain for tree planting normalized to int16.
+	 *
+	 *  Indexed by MapIndex. -1  is an ivalid entry. Shared between all tribes (on the same server)
+	 *  will be cleared when diffrences are detected. Presently, that can only happen if terrain
+	 *  is changed (lua scripting). The map is sparse, lookups are fast.
+	 */
+	std::vector<int16_t> forester_cache_;
+
 	Game();
-	~Game();
+	~Game() override;
 
 	// life cycle
 	void set_game_controller(GameController*);
@@ -109,6 +176,7 @@ public:
 	void save_syncstream(bool save);
 	void init_newgame(UI::ProgressWindow* loader_ui, const GameSettings&);
 	void init_savegame(UI::ProgressWindow* loader_ui, const GameSettings&);
+
 	enum StartGameType { NewSPScenario, NewNonScenario, Loaded, NewMPScenario };
 
 	bool run(UI::ProgressWindow* loader_ui,
@@ -169,9 +237,13 @@ public:
 
 	void logic_rand_seed(uint32_t const seed) {
 		rng().seed(seed);
+		syncstream().unsigned_8(SyncEntry::kRandomSeed);
+		syncstream().unsigned_32(seed);
 	}
 
 	StreamWrite& syncstream();
+	void report_sync_request();
+	void report_desync(int32_t playernumber);
 	Md5Checksum get_sync_hash() const;
 
 	void enqueue_command(Command* const);
@@ -226,9 +298,8 @@ public:
 
 	void sample_statistics();
 
-	const std::string& get_win_condition_displayname() {
-		return win_condition_displayname_;
-	}
+	const std::string& get_win_condition_displayname() const;
+	void set_win_condition_displayname(const std::string& name);
 
 	bool is_replay() const {
 		return replay_;
@@ -262,10 +333,11 @@ private:
 		     target_(target),
 		     counter_(0),
 		     next_diskspacecheck_(0),
-		     syncstreamsave_(false) {
+		     syncstreamsave_(false),
+		     current_excerpt_id_(0) {
 		}
 
-		~SyncWrapper();
+		~SyncWrapper() override;
 
 		/// Start dumping the entire syncstream into a file.
 		///
@@ -287,6 +359,17 @@ private:
 		std::unique_ptr<StreamWrite> dump_;
 		std::string dumpfname_;
 		bool syncstreamsave_;
+		// Use a cyclic buffer for storing parts of the syncstream
+		// Currently used buffer
+		size_t current_excerpt_id_;
+		// (Arbitrary) count of buffers
+		// Syncreports seem to be requested from the network clients every game second so this
+		// buffer should be big enough to store the last 32 seconds of the game actions leading
+		// up to the desync
+		static constexpr size_t kExcerptSize = 32;
+		// Array of byte buffers
+		// std::string is used as a binary buffer here
+		std::string excerpts_buffer_[kExcerptSize];
 	} syncwrapper_;
 
 	GameController* ctrl_;
@@ -330,9 +413,6 @@ inline Coords Game::random_location(Coords location, uint8_t radius) {
 	location.y += logic_rand() % s - radius;
 	return location;
 }
-
-// Returns a value between [0., 1].
-double logic_rand_as_double(Game* game);
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_GAME_H

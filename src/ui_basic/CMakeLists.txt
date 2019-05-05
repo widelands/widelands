@@ -64,7 +64,7 @@ wl_library(ui_basic
     graphic_align
     graphic_color
     graphic_fonthandler
-    graphic_fonthandler_legacy
+    graphic_styles
     graphic_surface
     graphic_text
     graphic_text_constants
@@ -76,5 +76,6 @@ wl_library(ui_basic
     scripting_lua_interface
     scripting_lua_table
     sound
+    sound_constants
     widelands_ball_of_mud
 )

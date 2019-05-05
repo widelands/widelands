@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,9 +68,9 @@ public:
 	}
 
 	/**
-	  * Get the maximum amount of wares or workers which should be stored here.
-	  * This is a value which can be influenced by the player with the provided buttons.
-	  * @return The maximum number of wares or workers which should be here.
+	 * Get the maximum amount of wares or workers which should be stored here.
+	 * This is a value which can be influenced by the player with the provided buttons.
+	 * @return The maximum number of wares or workers which should be here.
 	 */
 	Quantity get_max_fill() const {
 		return max_fill_;
@@ -99,6 +99,14 @@ public:
 	 * @return The amount at this moment.
 	 */
 	virtual Quantity get_filled() const = 0;
+
+	/**
+	 * The amount of missing wares or workers which have been requested
+	 * but are not yet being transported to this building.
+	 * This will never be larger than (get_max_fill()-get_filled()).
+	 * @return The amount at this moment.
+	 */
+	uint32_t get_missing() const;
 
 	/**
 	 * Clear the queue appropriately.
@@ -159,14 +167,14 @@ public:
 	 *
 	 * This interval is merely a hint for the Supply/Request balancing code.
 	 * @param i The interval in ms.
-	*/
+	 */
 	void set_consume_interval(uint32_t i);
 
 	/**
 	 * Returns the player owning the building containing this queue.
 	 * @return A reference to the owning player.
 	 */
-	Player& owner() const {
+	const Player& owner() const {
 		return owner_.owner();
 	}
 
@@ -193,8 +201,16 @@ protected:
 	 * @param index The index of the ware or worker that will be stored.
 	 * @param max_size The maximum amount that can be stored.
 	 * @param type Whether wares or workers are stored in this queue.
-	*/
+	 */
 	InputQueue(PlayerImmovable& owner, DescriptionIndex index, uint8_t max_size, WareWorker type);
+
+	/**
+	 * Returns the mutable player owning the building containing this queue.
+	 * @return A pointer to the owning player.
+	 */
+	Player* get_owner() const {
+		return owner_.get_owner();
+	}
 
 	/**
 	 * Called when an item arrives at the owning building.
@@ -211,7 +227,7 @@ protected:
 	/**
 	 * Updates the request.
 	 * You must call this after every call to set_*().
-	*/
+	 */
 	void update();
 
 	/**
@@ -262,6 +278,6 @@ protected:
 	/// Unspecified data to pass to function.
 	void* callback_data_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_INPUT_QUEUE_H

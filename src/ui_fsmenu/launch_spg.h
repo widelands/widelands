@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,10 +24,9 @@
 #include <string>
 
 #include "graphic/playercolor.h"
+#include "logic/game_settings.h"
 #include "logic/map.h"
 #include "ui_basic/button.h"
-#include "ui_basic/dropdown.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/launch_game.h"
 
@@ -50,10 +49,9 @@ class LuaInterface;
 class FullscreenMenuLaunchSPG : public FullscreenMenuLaunchGame {
 public:
 	FullscreenMenuLaunchSPG(GameSettingsProvider*, GameController* = nullptr);
-	~FullscreenMenuLaunchSPG();
+	~FullscreenMenuLaunchSPG() override;
 
 	void start() override;
-	void refresh() override;
 
 protected:
 	void clicked_ok() override;
@@ -61,10 +59,11 @@ protected:
 
 private:
 	void layout() override;
+	void update(bool map_was_changed);
 
-	void select_map();
+	bool select_map();
 	void win_condition_selected() override;
-	void set_scenario_values();
+	void set_player_names_and_tribes();
 	void switch_to_position(uint8_t);
 	void safe_place_for_host(uint8_t);
 
@@ -78,6 +77,7 @@ private:
 	std::string player_save_name_[kMaxPlayers];
 	std::string player_save_tribe_[kMaxPlayers];
 	bool is_scenario_;
+	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H

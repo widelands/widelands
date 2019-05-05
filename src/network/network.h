@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -171,6 +171,7 @@ public:
 
 private:
 	friend class Deserializer;
+	friend class NetRelayConnection;
 	std::vector<uint8_t> buffer;
 	size_t index_ = 0U;
 };
@@ -180,6 +181,10 @@ struct FilePart {
 };
 
 struct NetTransferFile {
+	NetTransferFile() : bytes(0), filename(""), md5sum("") {
+	}
+	~NetTransferFile() = default;
+
 	uint32_t bytes;
 	std::string filename;
 	std::string md5sum;

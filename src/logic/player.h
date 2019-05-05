@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,10 +21,11 @@
 #define WL_LOGIC_PLAYER_H
 
 #include <memory>
-#include <unordered_set>
 #include <unordered_map>
+#include <unordered_set>
 
 #include "base/macros.h"
+#include "economy/economy.h"
 #include "graphic/color.h"
 #include "graphic/playercolor.h"
 #include "logic/editor_game_base.h"
@@ -34,12 +35,13 @@
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
+#include "logic/see_unsee_node.h"
 #include "logic/widelands.h"
+#include "sound/constants.h"
 
 class Node;
 namespace Widelands {
 
-class Economy;
 struct Path;
 struct PlayerImmovable;
 class Soldier;
@@ -87,8 +89,8 @@ public:
 	const MessageQueue& messages() const {
 		return messages_;
 	}
-	MessageQueue& messages() {
-		return messages_;
+	MessageQueue* get_messages() {
+		return &messages_;
 	}
 
 	/// Adds the message to the queue.
@@ -107,8 +109,12 @@ public:
 	void message_object_removed(MessageId mid) const;
 
 	void set_message_status(const MessageId& id, Message::Status const status) {
-		messages().set_message_status(id, status);
+		get_messages()->set_message_status(id, status);
 	}
+
+	const std::set<Serial>& ships() const;
+	void add_ship(Serial ship);
+	void remove_ship(Serial ship);
 
 	const EditorGameBase& egbase() const {
 		return egbase_;
@@ -143,10 +149,14 @@ public:
 
 	bool is_hostile(const Player&) const;
 
+	/**
+	 * Returns whether the player lost the last warehouse.
+	 */
+	bool is_defeated() const;
+
 	// For cheating
 	void set_see_all(bool const t) {
 		see_all_ = t;
-		view_changed_ = true;
 	}
 	bool see_all() const {
 		return see_all_;
@@ -156,7 +166,7 @@ public:
 	/// data
 	struct AiPersistentState {
 		// TODO(tiborb): this should be replaced by command line switch
-		static constexpr size_t kMagicNumbersSize = 150;
+		static constexpr size_t kMagicNumbersSize = 200;
 		static constexpr size_t kNeuronPoolSize = 80;
 		static constexpr size_t kFNeuronPoolSize = 60;
 
@@ -433,37 +443,25 @@ public:
 		return (see_all_ ? 2 : 0) + fields_[i].vision;
 	}
 
-	bool has_view_changed() {
-		bool t = view_changed_;
-		view_changed_ = false;
-		return t;
-	}
-
 	/**
 	 * Update this player's information about this node and the surrounding
 	 * triangles and edges.
 	 */
-	void see_node(const Map&,
-	              const Widelands::Field& first_map_field,
-	              const FCoords&,
-	              const Time,
-	              const bool forward = false);
+	Vision see_node(const Map&, const FCoords&, const Time, const bool forward = false);
 
 	/// Decrement this player's vision for a node.
-	enum class UnseeNodeMode { kUnsee, kUnexplore };
-	void
-	unsee_node(MapIndex, Time, UnseeNodeMode mode = UnseeNodeMode::kUnsee, bool forward = false);
+
+	Vision
+	unsee_node(MapIndex, Time, SeeUnseeNode mode = SeeUnseeNode::kUnsee, bool forward = false);
 
 	/// Call see_node for each node in the area.
 	void see_area(const Area<FCoords>& area) {
 		const Time gametime = egbase().get_gametime();
 		const Map& map = egbase().map();
-		const Widelands::Field& first_map_field = map[0];
 		MapRegion<Area<FCoords>> mr(map, area);
 		do {
-			see_node(map, first_map_field, mr.location(), gametime);
+			see_node(map, mr.location(), gametime);
 		} while (mr.advance(map));
-		view_changed_ = true;
 	}
 
 	/// Decrement this player's vision for each node in an area.
@@ -475,8 +473,14 @@ public:
 		do
 			unsee_node(mr.location().field - &first_map_field, gametime);
 		while (mr.advance(map));
-		view_changed_ = true;
 	}
+
+	/// Explicitly hide or reveal the field at 'c'. The modes are as follows:
+	/// - kUnsee:     Decrement the field's vision
+	/// - kUnexplore: Set the field's vision to 0
+	/// - kReveal:    If the field was hidden previously, restore the vision to the value it had
+	///               at the time of hiding. Otherwise, increment the vision.
+	void hide_or_reveal_field(const uint32_t gametime, const Coords& c, SeeUnseeNode mode);
 
 	MilitaryInfluence military_influence(MapIndex const i) const {
 		return fields_[i].military_influence;
@@ -517,18 +521,12 @@ public:
 	void enhance_building(Building*, DescriptionIndex index_of_new_building);
 	void dismantle_building(Building*);
 
-	// Economy stuff
-	void add_economy(Economy&);
-	void remove_economy(Economy&);
-	bool has_economy(Economy&) const;
-	using Economies = std::vector<Economy*>;
-	Economies::size_type get_economy_number(Economy const*) const;
-	Economy* get_economy_by_number(Economies::size_type const i) const {
-		return economies_[i];
-	}
-	uint32_t get_nr_economies() const {
-		return economies_.size();
-	}
+	Economy* create_economy();
+	Economy* create_economy(Serial serial);  // For saveloading only
+	void remove_economy(Serial serial);
+	const std::map<Serial, std::unique_ptr<Economy>>& economies() const;
+	Economy* get_economy(Widelands::Serial serial) const;
+	bool has_economy(Widelands::Serial serial) const;
 
 	uint32_t get_current_produced_statistics(uint8_t);
 
@@ -587,7 +585,7 @@ public:
 
 	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex const) const;
 
-	void read_statistics(FileRead&);
+	void read_statistics(FileRead&, uint16_t packet_version);
 	void write_statistics(FileWrite&) const;
 	void read_remaining_shipnames(FileRead&);
 	void write_remaining_shipnames(FileWrite&) const;
@@ -606,19 +604,22 @@ public:
 		further_initializations_.push_back(init);
 	}
 
+	void set_attack_forbidden(PlayerNumber who, bool forbid);
+	bool is_attack_forbidden(PlayerNumber who) const;
+
 	const std::string pick_shipname();
 
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
 	void update_team_players();
-	void play_message_sound(const Message::Type& msgtype);
+	void play_message_sound(const Message* message);
 	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
 	// those of the 6 surrounding edges/triangles that are not seen from another
 	// node.
-	void rediscover_node(const Map&, const Widelands::Field&, const FCoords&);
+	void rediscover_node(const Map&, const FCoords&);
 
 	std::unique_ptr<Notifications::Subscriber<NoteImmovable>> immovable_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<NoteFieldTerrainChanged>>
@@ -634,20 +635,25 @@ private:
 	std::vector<Player*> team_player_;
 	bool team_player_uptodate_;
 	bool see_all_;
-	bool view_changed_;
 	const PlayerNumber player_number_;
 	const TribeDescr& tribe_;  // buildings, wares, workers, sciences
 	uint32_t casualties_, kills_;
 	uint32_t msites_lost_, msites_defeated_;
 	uint32_t civil_blds_lost_, civil_blds_defeated_;
 	std::unordered_set<std::string> remaining_shipnames_;
+	// If we run out of ship names, we'll want to continue with unique numbers
+	uint32_t ship_name_counter_;
 
 	Field* fields_;
 	std::vector<bool> allowed_worker_types_;
 	std::vector<bool> allowed_building_types_;
-	Economies economies_;
+	std::map<Serial, std::unique_ptr<Economy>> economies_;
+	std::set<Serial> ships_;
 	std::string name_;  // Player name
 	std::string ai_;    /**< Name of preferred AI implementation */
+
+	// Fields that were explicitly hidden, with their vision at the time of hiding
+	std::map<MapIndex, Widelands::Vision> hidden_fields_;
 
 	/**
 	 * Wares produced (by ware id) since the last call to @ref sample_statistics
@@ -678,7 +684,13 @@ private:
 	 */
 	std::vector<std::vector<uint32_t>> ware_stocks_;
 
+	std::set<PlayerNumber> forbid_attack_;
+
 	PlayerBuildingStats building_stats_;
+
+	FxId message_fx_;
+	FxId attack_fx_;
+	FxId occupied_fx_;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };
@@ -686,6 +698,6 @@ private:
 void find_former_buildings(const Tribes& tribes,
                            const DescriptionIndex bi,
                            Building::FormerBuildings* former_buildings);
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_H

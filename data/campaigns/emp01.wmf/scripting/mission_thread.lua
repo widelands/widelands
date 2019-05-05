@@ -1,30 +1,34 @@
 include "scripting/messages.lua"
 include "map:scripting/helper_functions.lua"
+include "scripting/field_animations.lua"
 
 function mission_thread()
    sleep(1000)
 
    -- Initial messages
    local sea = wl.Game().map:get_field(50,25)
+   local ship = p1:place_ship(sea)
+   p1:hide_fields(sea:region(6),true)
    scroll_to_field(sea,0)
 
    campaign_message_box(diary_page_1)
    sleep(200)
 
    -- Show the sea
-   p1:reveal_fields(sea:region(6))
-   local ship = p1:place_ship(sea)
+   reveal_concentric(p1, sea, 5)
    sleep(1000)
    campaign_message_box(diary_page_2)
-   -- Hide the sea after 2 seconds
-   run(function() sleep(2000) p1:hide_fields(sea:region(6), true) end)
+   sleep(500)
+   hide_concentric(p1, sea, 5)
+   ship:remove()
 
    -- Back home
    include "map:scripting/starting_conditions.lua"
+   p1:hide_fields(wl.Game().map.player_slots[1].starting_field:region(13),true)
    scroll_to_field(wl.Game().map.player_slots[1].starting_field)
    campaign_message_box(diary_page_3)
-   ship:remove()
-
+   sleep(1000)
+   reveal_concentric(p1, wl.Game().map.player_slots[1].starting_field, 13)
    sleep(400)
 
    -- Check for trees and remove them
@@ -85,7 +89,7 @@ function mission_thread()
    sleep(25000) -- Sleep a while
 
    campaign_message_box(diary_page_4)
-   p1:reveal_scenario("empiretut01")
+   p1:mark_scenario_as_solved("emp01.wmf")
 end
 
 -- Show a funny message when the player has build 10 blockhouses

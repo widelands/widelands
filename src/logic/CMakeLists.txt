@@ -32,7 +32,7 @@ wl_library(logic_game_settings
   DEPENDS
     io_filesystem
     logic_constants
-    logic_map_objects
+    logic_tribe_basic_info
     notifications
     scripting_lua_interface
     scripting_lua_table
@@ -45,8 +45,9 @@ wl_library(logic_single_player_game_settings
   DEPENDS
     ai
     base_exceptions
+    base_i18n
     logic_game_settings
-    logic_map_objects
+    logic_tribe_basic_info
 )
 
 wl_library(logic_game_controller
@@ -60,22 +61,10 @@ wl_library(logic_game_controller
     ai
     logic
     logic_commands
-    logic_constants
     logic_game_settings
     profile
     ui_basic
     wui
-)
-
-wl_library(logic_campaign_visibility
-  SRCS
-    campaign_visibility.cc
-    campaign_visibility.h
-  DEPENDS
-    base_exceptions
-    io_filesystem
-    logic_filesystem_constants
-    profile
 )
 
 wl_library(logic_constants
@@ -99,6 +88,19 @@ wl_library(logic_objectives
     objective.h
   DEPENDS
     base_i18n
+)
+
+
+wl_library(logic_generic_save_handler
+  SRCS
+    generic_save_handler.h
+    generic_save_handler.cc
+  DEPENDS
+    base_i18n
+    base_log
+    base_time_string
+    io_filesystem
+    logic_filesystem_constants
 )
 
 wl_library(logic_map
@@ -131,6 +133,7 @@ wl_library(logic_map
     base_i18n
     base_log
     base_macros
+    base_scoped_timer
     build_info
     economy
     graphic_playercolor
@@ -141,6 +144,7 @@ wl_library(logic_map
     logic_filesystem_constants
     logic_map_objects
     logic_objectives
+    logic_tribe_basic_info
     logic_widelands_geometry
     logic_widelands_geometry_io
     map_io_map_loader
@@ -174,6 +178,7 @@ wl_library(logic_commands
     base_log
     base_macros
     economy # TODO(GunChleoc): Circular dependency
+    graphic_text_layout
     io_fileread
     io_stream
     logic # TODO(GunChleoc): Circular dependency
@@ -208,8 +213,9 @@ wl_library(logic
     replay.h
     save_handler.cc
     save_handler.h
+    see_unsee_node.h
     trade_agreement.h
-  # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack in game.h.
+  # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
   USES_SDL2
   DEPENDS
     base_exceptions
@@ -219,6 +225,7 @@ wl_library(logic
     base_md5
     base_scoped_timer
     base_time_string
+    build_info
     economy
     game_io
     graphic
@@ -233,16 +240,22 @@ wl_library(logic
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_generic_save_handler
     logic_map
     logic_map_objects
+    logic_tribe_basic_info
     logic_widelands_geometry
+    map_io
     map_io_map_loader
     note_sound
     notifications
+    profile
     random
     scripting_logic # TODO(GunChleoc): Circular dependency
     scripting_lua_interface
     scripting_lua_table
+    sound
+    sound_constants
     ui_basic
     wui # TODO(GunChleoc): Circular dependency
 )

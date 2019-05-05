@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,7 @@
 #include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/soldier.h"
@@ -83,17 +84,24 @@ ProductionSite BUILDING
 */
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua
+ */
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const std::string& msgctxt,
                                          MapObjectType init_type,
                                          const LuaTable& table,
                                          const Tribes& tribes,
-													  const World& world)
+                                         const World& world)
    : BuildingDescr(init_descname, init_type, table, tribes),
      out_of_resource_productivity_threshold_(100) {
+	if (msgctxt.empty()) {
+		throw Widelands::GameDataError(
+		   "Productionsite '%s' has empty Gettext msgctxt", name().c_str());
+	}
+	// Let's convert this only once, it's cheaper
+	const char* msgctxt_char = msgctxt.c_str();
+
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
 
@@ -102,7 +110,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		out_of_resource_title_ = _(items_table->get_string("title"));
 		out_of_resource_heading_ = _(items_table->get_string("heading"));
 		out_of_resource_message_ =
-		   pgettext_expr(msgctxt.c_str(), items_table->get_string("message").c_str());
+		   pgettext_expr(msgctxt_char, items_table->get_string("message").c_str());
 		if (items_table->has_key("productivity_threshold")) {
 			out_of_resource_productivity_threshold_ = items_table->get_int("productivity_threshold");
 		}
@@ -191,12 +199,28 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			const std::string program_descname_unlocalized = program_table->get_string("descname");
 			std::string program_descname = _(program_descname_unlocalized);
 			if (program_descname == program_descname_unlocalized) {
-				program_descname = pgettext_expr(msgctxt.c_str(), program_descname_unlocalized.c_str());
+				program_descname = pgettext_expr(msgctxt_char, program_descname_unlocalized.c_str());
 			}
-			programs_[program_name] = std::unique_ptr<ProductionProgram>(new ProductionProgram(
-			  program_name, program_descname, program_table->get_table("actions"), tribes, world, this));
+			programs_[program_name] = std::unique_ptr<ProductionProgram>(
+			   new ProductionProgram(program_name, program_descname,
+			                         program_table->get_table("actions"), tribes, world, this));
 		} catch (const std::exception& e) {
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
+		}
+	}
+
+	// Verify that any map resource collected is valid
+	if (!hints().collects_ware_from_map().empty()) {
+		if (!(tribes.ware_exists(hints().collects_ware_from_map()))) {
+			throw GameDataError("ai_hints for building %s collects nonexistent ware %s from map",
+			                    name().c_str(), hints().collects_ware_from_map().c_str());
+		}
+		const DescriptionIndex collects_index =
+		   tribes.safe_ware_index(hints().collects_ware_from_map());
+		if (!is_output_ware_type(collects_index)) {
+			throw GameDataError("ai_hints for building %s collects ware %s from map, but it's not "
+			                    "listed in the building's output",
+			                    name().c_str(), hints().collects_ware_from_map().c_str());
 		}
 	}
 }
@@ -204,8 +228,10 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const std::string& msgctxt,
                                          const LuaTable& table,
-                                         const Tribes& tribes, const World& world)
-   : ProductionSiteDescr(init_descname, msgctxt, MapObjectType::PRODUCTIONSITE, table, tribes, world) {
+                                         const Tribes& tribes,
+                                         const World& world)
+   : ProductionSiteDescr(
+        init_descname, msgctxt, MapObjectType::PRODUCTIONSITE, table, tribes, world) {
 }
 
 /**
@@ -515,7 +541,7 @@ int ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes)
 			continue;
 
 		// Okay, space is free and worker is fitting. Let's create him
-		Worker& worker = wdes.create(egbase, owner(), this, get_position());
+		Worker& worker = wdes.create(egbase, get_owner(), this, get_position());
 
 		if (upcast(Game, game, &egbase))
 			worker.start_task_idle(*game, 0, -1);
@@ -537,7 +563,7 @@ int ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes)
  * Intercept remove_worker() calls to unassign our worker, if necessary.
  */
 void ProductionSite::remove_worker(Worker& w) {
-	molog("%s leaving\n", w.descr().descname().c_str());
+	molog("%s leaving\n", w.descr().name().c_str());
 	WorkingPosition* wp = working_positions_;
 
 	for (const auto& temp_wp : descr().working_positions()) {
@@ -635,8 +661,8 @@ void ProductionSite::request_worker_callback(
 			if (current == nuwo)
 				throw wexception(
 				   "Something went wrong! No fitting place for worker %s in %s at (%u, %u) found!",
-				   w->descr().descname().c_str(), psite.descr().descname().c_str(),
-				   psite.get_position().x, psite.get_position().y);
+				   w->descr().name().c_str(), psite.descr().name().c_str(), psite.get_position().x,
+				   psite.get_position().y);
 		}
 	}
 
@@ -660,7 +686,7 @@ void ProductionSite::act(Game& game, uint32_t const data) {
 
 		if (!can_start_working()) {
 			while (!stack_.empty())
-				program_end(game, Failed);
+				program_end(game, ProgramResult::kFailed);
 		} else {
 			if (stack_.empty()) {
 				working_positions_[0].worker->update_task_buildingwork(game);
@@ -669,7 +695,7 @@ void ProductionSite::act(Game& game, uint32_t const data) {
 
 			State& state = top_state();
 			if (state.program->size() <= state.ip)
-				return program_end(game, Completed);
+				return program_end(game, ProgramResult::kCompleted);
 
 			if (anim_ != descr().get_animation(default_anim_)) {
 				// Restart idle animation, which is the default
@@ -698,7 +724,7 @@ void ProductionSite::program_act(Game& game) {
 	// new productions cycle. Otherwise it can lead to consumption
 	// of input wares without producing anything
 	if (is_stopped_ && state.ip == 0) {
-		program_end(game, Failed);
+		program_end(game, ProgramResult::kFailed);
 		program_timer_ = true;
 		program_time_ = schedule_act(game, 20000);
 	} else
@@ -717,7 +743,7 @@ bool ProductionSite::fetch_from_flag(Game& game) {
 	return true;
 }
 
-void ProductionSite::log_general_info(const EditorGameBase& egbase) {
+void ProductionSite::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
 	molog("is_stopped: %u\n", is_stopped_);
@@ -789,7 +815,7 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 				ware.init(game);
 				worker.start_task_dropoff(game, ware);
 			}
-			owner().ware_produced(ware_index);  //  for statistics
+			get_owner()->ware_produced(ware_index);  //  for statistics
 		}
 		assert(ware_type_with_count.second);
 		if (--ware_type_with_count.second == 0)
@@ -806,7 +832,7 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 			   *owner().tribe().get_worker_descr(worker_type_with_count.first);
 			{
 				Worker& recruit = dynamic_cast<Worker&>(worker_descr.create_object());
-				recruit.set_owner(&worker.owner());
+				recruit.set_owner(worker.get_owner());
 				recruit.set_position(game, worker.get_position());
 				recruit.init(game);
 				recruit.set_location(this);
@@ -852,7 +878,7 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 /**
  * Advance the program to the next step.
  */
-void ProductionSite::program_step(Game& game, uint32_t const delay, uint32_t const phase) {
+void ProductionSite::program_step(Game& game, uint32_t const delay, ProgramResult const phase) {
 	State& state = top_state();
 	++state.ip;
 	state.phase = phase;
@@ -868,7 +894,7 @@ void ProductionSite::program_start(Game& game, const std::string& program_name) 
 
 	state.program = descr().get_program(program_name);
 	state.ip = 0;
-	state.phase = 0;
+	state.phase = ProgramResult::kNone;
 
 	stack_.push_back(state);
 
@@ -896,17 +922,18 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 	const std::string& program_name = top_state().program->name();
 
 	stack_.pop_back();
-	if (!stack_.empty())
+	if (!stack_.empty()) {
 		top_state().phase = result;
+	}
 
 	switch (result) {
-	case Failed:
+	case ProgramResult::kFailed:
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(false);
 		calc_statistics();
 		crude_percent_ = crude_percent_ * 8 / 10;
 		break;
-	case Completed:
+	case ProgramResult::kCompleted:
 		skipped_programs_.erase(program_name);
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(true);
@@ -914,11 +941,12 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		crude_percent_ = crude_percent_ * 8 / 10 + 1000000 * 2 / 10;
 		calc_statistics();
 		break;
-	case Skipped:
+	case ProgramResult::kSkipped:
 		skipped_programs_[program_name] = game.get_gametime();
 		crude_percent_ = crude_percent_ * 98 / 100;
 		break;
-	case None:
+	case ProgramResult::kNone:
+		skipped_programs_.erase(program_name);
 		break;
 	}
 
@@ -976,4 +1004,4 @@ void ProductionSite::set_default_anim(std::string anim) {
 
 	default_anim_ = anim;
 }
-}
+}  // namespace Widelands

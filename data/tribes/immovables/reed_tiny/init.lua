@@ -5,8 +5,9 @@ tribes:new_immovable_type {
    name = "reed_tiny",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Reed (tiny)"),
+   helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "field" },
+   attributes = { "field", "seed_reed" },
    programs = {
       program = {
          "animate=idle 22000",

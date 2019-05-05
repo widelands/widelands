@@ -188,6 +188,12 @@ return {
       font = "default"
    },
 
+   ig = {
+      name = "Igbo",
+      sort_name = "Igbo",
+      font = "default"
+   },
+
    it = {
       name = "Italiano",
       sort_name = "Italiano",
@@ -243,9 +249,9 @@ return {
    },
 
    ms = {
-      name = "بهاس ملايو",
+      name = "Bahasa Melayu",
       sort_name = "Melayu",
-      font = "arabic"
+      font = "default"
    },
 
    my = {
@@ -261,8 +267,8 @@ return {
    },
 
    nds = {
-      name = "Plattdütsch",
-      sort_name = "Plattdutsch",
+      name = "Plattdüütsch",
+      sort_name = "Plattduutsch",
       font = "default"
    },
 

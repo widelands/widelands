@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -99,11 +99,13 @@ private:
  * can be either checked (on) or unchecked (off)
  * A checkbox only differs from a Statebox in that clicking on it toggles the
  * state
-*/
+ */
 struct Checkbox : public Statebox {
 
 	/**
 	 * Pictorial Checkbox
+	 *
+	 * Text conventions: Sentence case for the 'tooltip_text'
 	 */
 	Checkbox(Panel* const parent,
 	         Vector2i const p,
@@ -116,6 +118,9 @@ struct Checkbox : public Statebox {
 	 * Textual Checkbox
 	 * If width is set to 0, the checkbox will set its width automatically.
 	 * Otherwise, it will take up multiple lines if necessary (automatic height).
+	 *
+	 *
+	 * Text conventions: Sentence case both for the 'label_text' and the 'tooltip_text'
 	 */
 	Checkbox(Panel* const parent,
 	         Vector2i const p,
@@ -128,6 +133,6 @@ struct Checkbox : public Statebox {
 private:
 	void clicked() override;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_CHECKBOX_H

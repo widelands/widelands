@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,13 +27,7 @@
 #include "logic/message_id.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
 #include "wui/interactive_gamebase.h"
-
-namespace UI {
-struct MultilineTextarea;
-struct Textarea;
-}
 
 /**
  * This is the interactive player. this one is
@@ -57,7 +51,7 @@ public:
 
 	bool handle_key(bool down, SDL_Keysym) override;
 
-	Widelands::Player& player() const {
+	const Widelands::Player& player() const {
 		return game().player(player_number_);
 	}
 	Widelands::Player* get_player() const override {
@@ -80,6 +74,8 @@ public:
 	void popup_message(Widelands::MessageId, const Widelands::Message&);
 
 private:
+	bool player_hears_field(const Widelands::Coords& coords) const override;
+
 	void cmdSwitchPlayer(const std::vector<std::string>& args);
 
 	Widelands::PlayerNumber player_number_;
@@ -95,6 +91,8 @@ private:
 	UI::UniqueWindow::Registry objectives_;
 	UI::UniqueWindow::Registry encyclopedia_;
 	UI::UniqueWindow::Registry message_menu_;
+
+	const Image* grid_marker_pic_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_PLAYER_H

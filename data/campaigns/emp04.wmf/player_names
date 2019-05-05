@@ -1,0 +1,22 @@
+# Automatically created by Widelands master-2813_Debug_x64 (Debug)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Lutius"
+tribe="empire"
+ai=
+closeable="false"
+
+[player_2]
+name="Runeth"
+tribe="barbarians"
+ai="normal"
+closeable="false"
+
+[player_3]
+name="Vesta"
+tribe="empire"
+ai="empty"
+closeable="false"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,7 +46,7 @@
 class LayeredFileSystem : public FileSystem {
 public:
 	LayeredFileSystem();
-	virtual ~LayeredFileSystem();
+	~LayeredFileSystem() override;
 
 	// Add a new filesystem to the top of the stack. Take ownership of the given
 	// filesystem.
@@ -58,8 +58,6 @@ public:
 
 	std::set<std::string> list_directory(const std::string& path) override;
 
-	/// Returns true if the filename is legal in all operating systems
-	static bool is_legal_filename(const std::string& filename);
 	bool is_writable() const override;
 	bool file_exists(const std::string& path) override;
 	bool is_directory(const std::string& path) override;

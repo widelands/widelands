@@ -7,6 +7,18 @@ wl_library(logic_map_objects_description_maintainer
     logic_constants
 )
 
+wl_library(logic_tribe_basic_info
+  SRCS
+    tribes/tribe_basic_info.cc
+    tribes/tribe_basic_info.h
+  DEPENDS
+    base_i18n
+    logic_exceptions
+    scripting_lua_table
+    scripting_lua_interface
+
+)
+
 wl_library(logic_map_objects
   SRCS
     backtrace.cc
@@ -66,8 +78,6 @@ wl_library(logic_map_objects
     tribes/training_attribute.h
     tribes/trainingsite.cc
     tribes/trainingsite.h
-    tribes/tribe_basic_info.cc
-    tribes/tribe_basic_info.h
     tribes/tribe_descr.cc
     tribes/tribe_descr.h
     tribes/tribes.cc
@@ -127,6 +137,7 @@ wl_library(logic_map_objects
     logic_game_controller
     logic_map # TODO(GunChleoc): Circular dependency
     logic_map_objects_description_maintainer
+    logic_tribe_basic_info
     logic_widelands_geometry
     logic_widelands_geometry_io
     map_io
@@ -134,6 +145,7 @@ wl_library(logic_map_objects
     notifications
     scripting_lua_interface
     scripting_lua_table
+    sound_constants
     sound
     ui_basic
     wui_mapview_pixelfunctions

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -77,6 +77,7 @@ struct ImmovableFound {
 FindImmovable
 FindBob
 FindNode
+FindResource
 CheckStep
 
 Predicates used in path finding and find functions.
@@ -98,8 +99,20 @@ struct FindBobAlwaysTrue : public FindBob {
 	bool accept(Bob*) const override {
 		return true;
 	}
-	virtual ~FindBobAlwaysTrue() {
+	~FindBobAlwaysTrue() override {
 	}  // make gcc shut up
+};
+
+// Helper struct to save certain elemental data of a field without an actual instance of Field
+struct FieldData {
+	FieldData(const Field& f);
+
+	std::string immovable;
+	std::list<std::string> bobs;
+	uint8_t height;
+	DescriptionIndex resources;
+	uint8_t resource_amount;
+	Field::Terrains terrains;
 };
 
 /** class Map
@@ -131,9 +144,6 @@ public:
 
 	using PortSpacesSet = std::set<Coords>;
 	using Objectives = std::map<std::string, std::unique_ptr<Objective>>;
-	using SuggestedTeam = std::vector<PlayerNumber>;  // Players in a team
-	using SuggestedTeamLineup =
-	   std::vector<SuggestedTeam>;  // Recommended teams to play against each other
 
 	enum {  // flags for findpath()
 
@@ -147,7 +157,7 @@ public:
 	enum { NO_SCENARIO = 0, SP_SCENARIO = 1, MP_SCENARIO = 2 };
 
 	Map();
-	virtual ~Map();
+	~Map() override;
 
 	/// Returns the correct initialized loader for the given mapfile
 	std::unique_ptr<MapLoader> get_correct_loader(const std::string& filename);
@@ -165,6 +175,27 @@ public:
 
 	void recalc_whole_map(const World& world);
 	void recalc_for_field_area(const World& world, Area<FCoords>);
+
+	/**
+	 *  If the valuable fields are empty, calculates all fields that could be conquered by a player
+	 * throughout a game. Useful for territorial win conditions. Returns the amount of valuable
+	 * fields.
+	 */
+	size_t count_all_conquerable_fields();
+
+	/**
+	 *  If the valuable fields are empty, calculates which fields do not have the given caps and adds
+	 * the to the list of valuable fields. Useful for win conditions. Returns the amount of valuable
+	 * fields.
+	 */
+	size_t count_all_fields_excluding_caps(NodeCaps caps);
+
+	/**
+	 * Counts the valuable fields that are owned by each player. Only players that currently own a
+	 * field are added. Returns a map of <player number, number of owned fields>.
+	 */
+	std::map<PlayerNumber, size_t>
+	count_owned_valuable_fields(const std::string& immovable_attribute) const;
 
 	/***
 	 * Ensures that resources match their adjacent terrains.
@@ -269,8 +300,8 @@ public:
 	void set_scenario_player_ai(PlayerNumber, const std::string&);
 	void set_scenario_player_closeable(PlayerNumber, bool);
 
-	/// \returns the maximum theoretical possible nodecaps (no blocking bobs, etc.)
-	NodeCaps get_max_nodecaps(const World& world, const FCoords&);
+	/// \returns the maximum theoretical possible nodecaps (no blocking bobs, immovables etc.)
+	NodeCaps get_max_nodecaps(const World& world, const FCoords&) const;
 
 	BaseImmovable* get_immovable(const Coords&) const;
 	uint32_t find_bobs(const Area<FCoords>,
@@ -307,6 +338,7 @@ public:
 	Field& operator[](MapIndex) const;
 	Field& operator[](const Coords&) const;
 	FCoords get_fcoords(const Coords&) const;
+	static void normalize_coords(Coords&, int16_t, int16_t);
 	void normalize_coords(Coords&) const;
 	FCoords get_fcoords(Field&) const;
 	void get_coords(Field& f, Coords& c) const;
@@ -355,7 +387,8 @@ public:
 	                 const int32_t persist,
 	                 Path&,
 	                 const CheckStep&,
-	                 const uint32_t flags = 0) const;
+	                 const uint32_t flags = 0,
+	                 const uint32_t caps_sensitivity = 0) const;
 
 	/**
 	 * We can reach a field by water either if it has MOVECAPS_SWIM or if it has
@@ -408,7 +441,8 @@ public:
 	/***
 	 * Changes the given triangle's terrain. This happens in the editor and might
 	 * happen in the game too if some kind of land increasement is implemented (like
-	 * drying swamps). The nodecaps need to be recalculated
+	 * drying swamps). The nodecaps need to be recalculated. If terrain was changed from
+	 * or to water, we need to recalculate_allows_seafaring too, depending on the situation.
 	 *
 	 * @return the radius of changes.
 	 */
@@ -431,20 +465,44 @@ public:
 		return &objectives_;
 	}
 
+	std::set<FCoords>* mutable_valuable_fields() {
+		return &valuable_fields_;
+	}
+
 	/// Returns the military influence on a location from an area.
 	MilitaryInfluence calc_influence(Coords, Area<>) const;
 
 	/// Translate the whole map so that the given point becomes the new origin.
 	void set_origin(const Coords&);
 
-	/// Port space specific functions
+	// Port space specific functions
+
+	/// Checks whether the maximum theoretical possible NodeCap of the field is big,
+	/// and there is room for a port space
+	bool is_port_space_allowed(const World& world, const FCoords& fc) const;
 	bool is_port_space(const Coords& c) const;
-	void set_port_space(Coords c, bool allowed);
+
+	/// If 'set', set the space at 'c' as port space, otherwise unset.
+	/// 'force' sets the port space even if it isn't viable, and is to be used for map loading only.
+	/// Returns whether the port space was set/unset successfully.
+	bool set_port_space(const World& world,
+	                    const Widelands::Coords& c,
+	                    bool set,
+	                    bool force = false,
+	                    bool recalculate_seafaring = false);
 	const PortSpacesSet& get_port_spaces() const {
 		return port_spaces_;
 	}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
-	bool allows_seafaring();
+
+	/// Return true if there are at least 2 port spaces that can be reached from each other by water
+	bool allows_seafaring() const;
+	/// Calculate whether there are at least 2 port spaces that can be reached from each other by
+	/// water and set the allows_seafaring property
+	void recalculate_allows_seafaring();
+	/// Remove all port spaces that are not valid (Buildcap < big or not enough space for a
+	/// portdock).
+	void cleanup_port_spaces(const World& world);
 
 	/// Checks whether there are any artifacts on the map
 	bool has_artifacts();
@@ -452,24 +510,29 @@ public:
 	// Visible for testing.
 	void set_size(uint32_t w, uint32_t h);
 
+	// Change the map size
+	std::map<Coords, FieldData>
+	resize(EditorGameBase& egbase, const Coords coords, int32_t w, int32_t h);
+
 private:
 	void recalc_border(const FCoords&);
 	void recalc_brightness(const FCoords&);
 	void recalc_nodecaps_pass1(const World& world, const FCoords&);
 	void recalc_nodecaps_pass2(const World& world, const FCoords& f);
-	NodeCaps calc_nodecaps_pass1(const World& world, const FCoords&, bool consider_mobs = true);
+	NodeCaps
+	calc_nodecaps_pass1(const World& world, const FCoords&, bool consider_mobs = true) const;
 	NodeCaps calc_nodecaps_pass2(const World& world,
 	                             const FCoords&,
 	                             bool consider_mobs = true,
-	                             NodeCaps initcaps = CAPS_NONE);
+	                             NodeCaps initcaps = CAPS_NONE) const;
 	void check_neighbour_heights(FCoords, uint32_t& radius);
 	int calc_buildsize(const World& world,
 	                   const FCoords& f,
 	                   bool avoidnature,
 	                   bool* ismine = nullptr,
 	                   bool consider_mobs = true,
-	                   NodeCaps initcaps = CAPS_NONE);
-	bool is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs);
+	                   NodeCaps initcaps = CAPS_NONE) const;
+	bool is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs) const;
 	template <typename functorT>
 	void find_reachable(const Area<FCoords>&, const CheckStep&, functorT&) const;
 	template <typename functorT> void find(const Area<FCoords>&, functorT&) const;
@@ -503,7 +566,12 @@ private:
 	std::unique_ptr<FileSystem> filesystem_;
 
 	PortSpacesSet port_spaces_;
+	bool allows_seafaring_;
+
 	Objectives objectives_;
+
+	// Fields that are important for the player to own in a win condition
+	std::set<FCoords> valuable_fields_;
 
 	MapVersion map_version_;
 };
@@ -536,14 +604,22 @@ inline FCoords Map::get_fcoords(const Coords& c) const {
 }
 
 inline void Map::normalize_coords(Coords& c) const {
-	while (c.x < 0)
-		c.x += width_;
-	while (c.x >= width_)
-		c.x -= width_;
-	while (c.y < 0)
-		c.y += height_;
-	while (c.y >= height_)
-		c.y -= height_;
+	normalize_coords(c, width_, height_);
+}
+
+inline void Map::normalize_coords(Coords& c, int16_t w, int16_t h) {
+	while (c.x < 0) {
+		c.x += w;
+	}
+	while (c.x >= w) {
+		c.x -= w;
+	}
+	while (c.y < 0) {
+		c.y += h;
+	}
+	while (c.y >= h) {
+		c.y -= h;
+	}
 }
 
 /**
@@ -1137,6 +1213,6 @@ inline void move_r(int16_t const mapwidth, FCoords& f, MapIndex& i) {
 	for (Widelands::FCoords fc = (map).get_fcoords(Widelands::Coords(0, 0));                        \
 	     fc.y < static_cast<int16_t>(extent.h); ++fc.y)                                             \
 		for (fc.x = 0; fc.x < static_cast<int16_t>(extent.w); ++fc.x, ++fc.field)
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_H

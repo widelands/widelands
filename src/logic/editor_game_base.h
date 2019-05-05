@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,6 @@
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/player_area.h"
-#include "logic/widelands.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_interface.h"
 
@@ -109,7 +108,7 @@ public:
 	                   const std::string& name,
 	                   TeamNumber team = 0);
 	Player* get_player(int32_t n) const;
-	Player& player(int32_t n) const;
+	const Player& player(int32_t n) const;
 	virtual Player* get_safe_player(PlayerNumber);
 
 	// loading stuff
@@ -256,6 +255,15 @@ private:
 	std::unique_ptr<InteractiveBase> ibase_;
 	Map map_;
 
+	/// Even after a map is fully loaded, some static data (images, scripts)
+	/// will still be read from a filesystem whenever a map/game is saved.
+	/// To avoid potential filesystem conflicts when (pre)loading/saving/deleting
+	/// map/game files (and to avoid having to deal with this in many different places)
+	/// a temporary file (in a special dir) is created for such data.
+	std::unique_ptr<FileSystem> tmp_fs_;
+	void delete_tempfile();
+	void create_tempfile_and_save_mapdata(FileSystem::Type type);
+
 	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
 };
 
@@ -269,6 +277,6 @@ private:
 #define iterate_players_existing_const(p, nr_players, egbase, player)                              \
 	iterate_player_numbers(                                                                         \
 	   p, nr_players) if (Widelands::Player const* const player = (egbase).get_player(p))
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_EDITOR_GAME_BASE_H

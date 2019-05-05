@@ -1,3 +1,5 @@
+include "scripting/richtext.lua"
+
 set_textdomain("texts")
 tips = {
    {
@@ -21,12 +23,13 @@ tips = {
       seconds = 6
    },
    {
-      text = _"Any further questions? Our FAQ, the wiki and of course our community forums can be found at www.widelands.org.",
+      -- TRANSLATORS: %s = URL to the Widelands website
+      text = (_"Any further questions? Our FAQ, the wiki and of course our community forums can be found online at %s."):bformat(u("widelands.org")),
       seconds = 6
    },
    {
-      text = _"Use the priority buttons in building windows to adjust delivery of a specific ware.",
-      seconds = 5
+      text = _"Use the priority buttons in building windows to adjust delivery of a specific ware. Pressing Ctrl while clicking will adjust all wares at once.",
+      seconds = 7
    },
    {
       text = _"Use the ‘configure economy’ menu to adjust the target quantity of wares. It can be accessed via the flag menu.",

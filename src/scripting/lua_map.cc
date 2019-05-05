@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,6 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/input_queue.h"
-#include "graphic/graphic.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/immovable.h"
@@ -36,6 +35,7 @@
 #include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/map_objects/world/editor_category.h"
@@ -45,7 +45,6 @@
 #include "logic/maphollowregion.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
-#include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 #include "scripting/factory.h"
 #include "scripting/globals.h"
@@ -71,6 +70,39 @@ namespace LuaMaps {
 */
 
 namespace {
+
+// Checks if a field has the desired caps
+bool check_has_caps(lua_State* L,
+                    const std::string& query,
+                    const FCoords& f,
+                    const NodeCaps& caps,
+                    const Widelands::Map& map) {
+	if (query == "walkable") {
+		return caps & MOVECAPS_WALK;
+	}
+	if (query == "swimmable") {
+		return caps & MOVECAPS_SWIM;
+	}
+	if (query == "small") {
+		return caps & BUILDCAPS_SMALL;
+	}
+	if (query == "medium") {
+		return caps & BUILDCAPS_MEDIUM;
+	}
+	if (query == "big") {
+		return (caps & BUILDCAPS_BIG) == BUILDCAPS_BIG;
+	}
+	if (query == "port") {
+		return (caps & BUILDCAPS_PORT) && map.is_port_space(f);
+	}
+	if (query == "mine") {
+		return caps & BUILDCAPS_MINE;
+	}
+	if (query == "flag") {
+		return caps & BUILDCAPS_FLAG;
+	}
+	report_error(L, "Unknown caps queried: %s!", query.c_str());
+}
 
 // Pushes a lua table with (name, count) pairs for the given 'ware_amount_container' on the
 // stack. The 'type' needs to be WARE or WORKER. Returns 1.
@@ -370,25 +402,33 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 	WaresWorkersMap c_workers;
 	for (const Worker* w : pi->get_workers()) {
 		DescriptionIndex i = tribe.worker_index(w->descr().name());
-		if (!c_workers.count(i))
+		if (!valid_workers.count(i)) {
+			// Ignore workers that will be consumed as inputs
+			continue;
+		}
+		if (!c_workers.count(i)) {
 			c_workers.insert(WorkerAmount(i, 1));
-		else
+		} else {
 			c_workers[i] += 1;
-		if (!setpoints.count(std::make_pair(i, Widelands::WareWorker::wwWORKER)))
+		}
+		if (!setpoints.count(std::make_pair(i, Widelands::WareWorker::wwWORKER))) {
 			setpoints.insert(std::make_pair(std::make_pair(i, Widelands::WareWorker::wwWORKER), 0));
+		}
 	}
 
 	// The idea is to change as little as possible
 	for (const auto& sp : setpoints) {
 		const Widelands::DescriptionIndex& index = sp.first.first;
 		const WorkerDescr* wdes = tribe.get_worker_descr(index);
-		if (sp.second != 0 && !valid_workers.count(index))
+		if (sp.second != 0 && !valid_workers.count(index)) {
 			report_error(L, "<%s> can't be employed here!", wdes->name().c_str());
+		}
 
 		Widelands::Quantity cur = 0;
 		WaresWorkersMap::iterator i = c_workers.find(index);
-		if (i != c_workers.end())
+		if (i != c_workers.end()) {
 			cur = i->second;
+		}
 
 		int d = sp.second - cur;
 		if (d < 0) {
@@ -402,9 +442,11 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 				}
 			}
 		} else if (d > 0) {
-			for (; d; --d)
-				if (T::create_new_worker(*pi, egbase, wdes))
+			for (; d; --d) {
+				if (T::create_new_worker(*pi, egbase, wdes)) {
 					report_error(L, "No space left for this worker");
+				}
+			}
 		}
 	}
 	return 0;
@@ -503,10 +545,10 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 	lua_pushuint32(L, idx);                                                                         \
 	lua_pushuint32(L, i.first.name);                                                                \
 	lua_rawset(L, -3);
-			PUSHLEVEL(1, health);
-			PUSHLEVEL(2, attack);
-			PUSHLEVEL(3, defense);
-			PUSHLEVEL(4, evade);
+			PUSHLEVEL(1, health)
+			PUSHLEVEL(2, attack)
+			PUSHLEVEL(3, defense)
+			PUSHLEVEL(4, evade)
 #undef PUSHLEVEL
 
 			lua_pushuint32(L, i.second);
@@ -585,7 +627,7 @@ int do_set_soldiers(lua_State* L,
 		} else if (d > 0) {
 			for (; d; --d) {
 				Soldier& soldier = dynamic_cast<Soldier&>(
-				   soldier_descr.create(egbase, *owner, nullptr, building_position));
+				   soldier_descr.create(egbase, owner, nullptr, building_position));
 				soldier.set_level(sp.first.health, sp.first.attack, sp.first.defense, sp.first.evade);
 				if (sc->incorporate_soldier(egbase, soldier)) {
 					soldier.remove(egbase);
@@ -636,6 +678,14 @@ parse_wares_as_bill_of_material(lua_State* L, int table_index, const TribeDescr&
 		result.push_back(std::make_pair(pair.first.first, pair.second));
 	}
 	return result;
+}
+
+const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tribename) {
+	if (!Widelands::tribe_exists(tribename)) {
+		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
+	}
+	const Tribes& tribes = get_egbase(L).tribes();
+	return *tribes.get_tribe_descr(tribes.tribe_index(tribename));
 }
 
 }  // namespace
@@ -1139,20 +1189,25 @@ Map
 
 .. class:: Map
 
-   Access to the map and it's objects. You cannot instantiate this directly,
+   Access to the map and its objects. You cannot instantiate this directly,
    instead access it via :attr:`wl.Game.map`.
 */
 const char LuaMap::className[] = "Map";
 const MethodType<LuaMap> LuaMap::Methods[] = {
+   METHOD(LuaMap, count_conquerable_fields),
+   METHOD(LuaMap, count_terrestrial_fields),
+   METHOD(LuaMap, count_owned_valuable_fields),
    METHOD(LuaMap, place_immovable),
    METHOD(LuaMap, get_field),
    METHOD(LuaMap, recalculate),
+   METHOD(LuaMap, recalculate_seafaring),
+   METHOD(LuaMap, set_port_space),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMap> LuaMap::Properties[] = {
-   PROP_RO(LuaMap, width),
-   PROP_RO(LuaMap, height),
-   PROP_RO(LuaMap, player_slots),
+   PROP_RO(LuaMap, allows_seafaring), PROP_RO(LuaMap, number_of_port_spaces),
+   PROP_RO(LuaMap, port_spaces),      PROP_RO(LuaMap, width),
+   PROP_RO(LuaMap, height),           PROP_RO(LuaMap, player_slots),
    {nullptr, nullptr, nullptr},
 };
 
@@ -1167,6 +1222,54 @@ void LuaMap::__unpersist(lua_State* /* L */) {
  PROPERTIES
  ==========================================================
  */
+/* RST
+   .. attribute:: allows_seafaring
+
+      (RO) Whether the map currently allows seafaring.
+
+      :returns: True if there are at least two port spaces that can be reached from each other.
+*/
+int LuaMap::get_allows_seafaring(lua_State* L) {
+	lua_pushboolean(L, get_egbase(L).map().allows_seafaring());
+	return 1;
+}
+/* RST
+   .. attribute:: number_of_port_spaces
+
+      (RO) The amount of port spaces on the map.
+
+      :returns: An integer with the number of port spaces.
+*/
+int LuaMap::get_number_of_port_spaces(lua_State* L) {
+	lua_pushuint32(L, get_egbase(L).map().get_port_spaces().size());
+	return 1;
+}
+
+/* RST
+   .. attribute:: port_spaces
+
+      (RO) A list of coordinates for all port spaces on the map.
+
+      :returns: A table of port space coordinates,
+        like this: ``{{x = 0, y = 2}, {x = 54, y = 23}}``.
+*/
+int LuaMap::get_port_spaces(lua_State* L) {
+	lua_newtable(L);
+	int counter = 0;
+	for (const Coords& space : get_egbase(L).map().get_port_spaces()) {
+		lua_pushinteger(L, ++counter);
+		lua_newtable(L);
+		lua_pushstring(L, "x");
+		lua_pushint32(L, space.x);
+		lua_settable(L, -3);
+		lua_pushstring(L, "y");
+		lua_pushint32(L, space.y);
+		lua_settable(L, -3);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
 /* RST
    .. attribute:: width
 
@@ -1210,6 +1313,61 @@ int LuaMap::get_player_slots(lua_State* L) {
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+   .. method:: count_conquerable_fields()
+
+      (RO) Counts all reachable fields that a player could build on.
+
+      **Note:** The fields are only calculated afresh when this is called for the first time.
+
+     :returns: An integer with the amount of fields.
+*/
+int LuaMap::count_conquerable_fields(lua_State* L) {
+	lua_pushinteger(L, get_egbase(L).mutable_map()->count_all_conquerable_fields());
+	return 1;
+}
+
+/* RST
+   .. method:: count_terrestrial_fields()
+
+      (RO) Counts all fields that are not swimmable.
+
+     **Note:** The fields are only calculated afresh when this is called for the first time.
+
+     :returns: An integer with the amount of fields.
+*/
+int LuaMap::count_terrestrial_fields(lua_State* L) {
+	lua_pushinteger(L, get_egbase(L).mutable_map()->count_all_fields_excluding_caps(MOVECAPS_SWIM));
+	return 1;
+}
+
+/* RST
+   .. method:: count_owned_valuable_fields([immovable_attribute])
+
+      (RO) Counts the number of owned valuable fields for all players.
+
+      :arg name: *Optional*. If this is set, only count fields that have an
+        immovable with the given atttribute.
+      :type name: :class:`string`
+
+     :returns: A table mapping player numbers to their number of owned fields.
+*/
+int LuaMap::count_owned_valuable_fields(lua_State* L) {
+	if (lua_gettop(L) > 2) {
+		report_error(L, "Does not take more than one argument.");
+	}
+	const std::string attribute = lua_gettop(L) == 2 ? luaL_checkstring(L, -1) : "";
+
+	lua_newtable(L);
+	for (const auto& fieldinfo : get_egbase(L).map().count_owned_valuable_fields(attribute)) {
+		lua_pushinteger(L, fieldinfo.first);
+		lua_pushinteger(L, fieldinfo.second);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
 /* RST
    .. method:: place_immovable(name, field, from_where)
 
@@ -1287,15 +1445,53 @@ int LuaMap::get_field(lua_State* L) {
 /* RST
    .. method:: recalculate()
 
-      This map recalculates the whole map state: height of fields, buildcaps
-      and so on. You only need to call this function if you changed
-      Field.raw_height in any way.
+      This map recalculates the whole map state: height of fields, buildcaps,
+      whether the map allows seafaring and so on. You only need to call this
+      function if you changed :any:`raw_height` in any way.
 */
 // TODO(unknown): do we really want this function?
 int LuaMap::recalculate(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	egbase.mutable_map()->recalc_whole_map(egbase.world());
 	return 0;
+}
+
+/* RST
+   .. method:: recalculate_seafaring()
+
+      This method recalculates whether the map allows seafaring.
+      You only need to call this function if you have been changing terrains to/from
+      water and wanted to defer recalculating whether the map allows seafaring.
+*/
+int LuaMap::recalculate_seafaring(lua_State* L) {
+	get_egbase(L).mutable_map()->recalculate_allows_seafaring();
+	return 0;
+}
+
+/* RST
+   .. method:: set_port_space(x, y, allowed)
+
+      Sets whether a port space is allowed at the coordinates (x, y).
+      Returns false if the port space couldn't be set.
+
+      :arg x: The x coordinate of the port space to set/unset.
+      :type x: :class:`int`
+      :arg y: The y coordinate of the port space to set/unset.
+      :type y: :class:`int`
+      :arg allowed: Whether building a port will be allowed here.
+      :type allowed: :class:`bool`
+
+      :returns: :const:`true` on success, or :const:`false` otherwise
+      :rtype: :class:`bool`
+*/
+int LuaMap::set_port_space(lua_State* L) {
+	const int x = luaL_checkint32(L, 2);
+	const int y = luaL_checkint32(L, 3);
+	const bool allowed = luaL_checkboolean(L, 4);
+	const bool success = get_egbase(L).mutable_map()->set_port_space(
+	   get_egbase(L).world(), Widelands::Coords(x, y), allowed, false, true);
+	lua_pushboolean(L, success);
+	return 1;
 }
 
 /*
@@ -1325,7 +1521,8 @@ const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, carrier2),
    PROP_RO(LuaTribeDescription, descname),
    PROP_RO(LuaTribeDescription, geologist),
-   PROP_RO(LuaTribeDescription, headquarters),
+   PROP_RO(LuaTribeDescription, immovables),
+   PROP_RO(LuaTribeDescription, resource_indicators),
    PROP_RO(LuaTribeDescription, name),
    PROP_RO(LuaTribeDescription, port),
    PROP_RO(LuaTribeDescription, ship),
@@ -1342,7 +1539,7 @@ void LuaTribeDescription::__persist(lua_State* L) {
 
 void LuaTribeDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_tribe_index(name);
 	set_description_pointer(tribes.get_tribe_descr(idx));
@@ -1357,8 +1554,8 @@ void LuaTribeDescription::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: buildings
 
-      (RO) an array of :class:`LuaBuildingDescription` with all the buildings that the tribe can use,
-      casted to their appropriate subclasses.
+      (RO) an array of :class:`LuaBuildingDescription` with all the buildings that the tribe can
+      use, casted to their appropriate subclasses.
 */
 int LuaTribeDescription::get_buildings(lua_State* L) {
 	const TribeDescr& tribe = *get();
@@ -1418,13 +1615,44 @@ int LuaTribeDescription::get_geologist(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: headquarters
+   .. attribute:: immovables
 
-         (RO) the :class:`string` internal name of the default headquarters type that this tribe uses
+      (RO) an array of :class:`LuaImmovableDescription` with all the immovables that the tribe can
+      use.
 */
+int LuaTribeDescription::get_immovables(lua_State* L) {
+	const TribeDescr& tribe = *get();
+	lua_newtable(L);
+	int counter = 0;
+	for (DescriptionIndex immovable : tribe.immovables()) {
+		lua_pushinteger(L, ++counter);
+		to_lua<LuaImmovableDescription>(
+		   L, new LuaImmovableDescription(tribe.get_immovable_descr(immovable)));
+		lua_settable(L, -3);
+	}
+	return 1;
+}
 
-int LuaTribeDescription::get_headquarters(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).tribes().get_building_descr(get()->headquarters())->name());
+/* RST
+   .. attribute:: resource_indicators
+
+      (RO) the table `resource_indicators` as defined in the tribe's `tribename.lua`.
+      See `data/tribes/atlanteans.lua` for more information on the table structure.
+*/
+int LuaTribeDescription::get_resource_indicators(lua_State* L) {
+	const TribeDescr& tribe = *get();
+	lua_newtable(L);
+	const ResourceIndicatorSet resis = tribe.resource_indicators();
+	for (const auto& resilist : resis) {
+		lua_pushstring(L, resilist.first);
+		lua_newtable(L);
+		for (const auto& resi : resilist.second) {
+			lua_pushinteger(L, resi.first);
+			lua_pushstring(L, tribe.get_immovable_descr(resi.second)->name());
+			lua_settable(L, -3);
+		}
+		lua_settable(L, -3);
+	}
 	return 1;
 }
 
@@ -1558,25 +1786,22 @@ MapObjectDescription
 
 .. class:: MapObjectDescription
 
-	A static description of a tribe's map object, so it can be used in help files
-	without having to access an actual object on the map.
-	This class contains the properties that are common to all map objects such as buildings or wares.
+   A static description of a tribe's map object, so it can be used in help files
+   without having to access an actual object on the map.
+   This class contains the properties that are common to all map objects such as buildings or wares.
 
-	The dynamic MapObject class corresponding to this class is the base class for all Objects in widelands,
-	including immovables and Bobs. This class can't be instantiated directly, but provides the base
-	for all others.
+   The dynamic MapObject class corresponding to this class is the base class for all Objects in
+   widelands, including immovables and Bobs. This class can't be instantiated directly, but provides
+   the base for all others.
 */
 const char LuaMapObjectDescription::className[] = "MapObjectDescription";
 const MethodType<LuaMapObjectDescription> LuaMapObjectDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[] = {
-   PROP_RO(LuaMapObjectDescription, descname),
-   PROP_RO(LuaMapObjectDescription, icon_name),
-   PROP_RO(LuaMapObjectDescription, name),
-   PROP_RO(LuaMapObjectDescription, type_name),
-   PROP_RO(LuaMapObjectDescription, representative_image),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMapObjectDescription, descname),  PROP_RO(LuaMapObjectDescription, helptext_script),
+   PROP_RO(LuaMapObjectDescription, icon_name), PROP_RO(LuaMapObjectDescription, name),
+   PROP_RO(LuaMapObjectDescription, type_name), {nullptr, nullptr, nullptr},
 };
 
 // Only base classes can be persisted.
@@ -1606,6 +1831,16 @@ int LuaMapObjectDescription::get_descname(lua_State* L) {
 }
 
 /* RST
+   .. attribute:: helptext_script
+
+         (RO) The path and filename to the helptext script. Can be empty.
+*/
+int LuaMapObjectDescription::get_helptext_script(lua_State* L) {
+	lua_pushstring(L, get()->helptext_script());
+	return 1;
+}
+
+/* RST
    .. attribute:: icon_name
 
          (RO) the filename for the menu icon.
@@ -1623,17 +1858,6 @@ int LuaMapObjectDescription::get_icon_name(lua_State* L) {
 
 int LuaMapObjectDescription::get_name(lua_State* L) {
 	lua_pushstring(L, get()->name());
-	return 1;
-}
-
-/* RST
-   .. attribute:: representative_image
-
-         (RO) a :class:`string` with the file path to the representative image
-         of the map object's idle animation
-*/
-int LuaMapObjectDescription::get_representative_image(lua_State* L) {
-	lua_pushstring(L, get()->representative_image_filename());
 	return 1;
 }
 
@@ -1706,7 +1930,8 @@ int LuaMapObjectDescription::get_representative_image(lua_State* L) {
                workers. A portdock is invisible to the player and one is
                automatically placed next to each port building.
 
-         * **Abstract:** These types are abstract map objects that are used by the engine and are not visible on the map.
+         * **Abstract:** These types are abstract map objects that are used by the engine and are
+           not visible on the map.
 
            * :class:`battle <BattleDescription>`, holds information
              about two soldiers in a fight,
@@ -1726,9 +1951,9 @@ ImmovableDescription
 
    Child of: :class:`MapObjectDescription`
 
-   A static description of a :class:`base immovable <BaseImmovable>`, so it can be used in help files
-   without having to access an actual immovable on the map.
-   See also :class:`MapObjectDescription` for more properties.
+   A static description of a :class:`base immovable <BaseImmovable>`, so it can be used in help
+   files without having to access an actual immovable on the map. See also
+   :class:`MapObjectDescription` for more properties.
 */
 const char LuaImmovableDescription::className[] = "ImmovableDescription";
 const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
@@ -1738,7 +1963,7 @@ const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
 };
 const PropertyType<LuaImmovableDescription> LuaImmovableDescription::Properties[] = {
    PROP_RO(LuaImmovableDescription, species),
-   PROP_RO(LuaImmovableDescription, build_cost),
+   PROP_RO(LuaImmovableDescription, buildcost),
    PROP_RO(LuaImmovableDescription, editor_category),
    PROP_RO(LuaImmovableDescription, terrain_affinity),
    PROP_RO(LuaImmovableDescription, owner_type),
@@ -1753,13 +1978,16 @@ void LuaImmovableDescription::__persist(lua_State* L) {
 
 void LuaImmovableDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const World& world = get_egbase(L).world();
 	DescriptionIndex idx = world.get_immovable_index(name);
-	if (idx == INVALID_INDEX) {
-		throw LuaError((boost::format("Immovable '%s' doesn't exist.") % name).str());
+	if (idx != INVALID_INDEX) {
+		set_description_pointer(world.get_immovable_descr(idx));
+	} else {
+		const Tribes& tribes = get_egbase(L).tribes();
+		idx = tribes.safe_immovable_index(name);
+		set_description_pointer(tribes.get_immovable_descr(idx));
 	}
-	set_description_pointer(world.get_immovable_descr(idx));
 }
 
 /* RST
@@ -1775,12 +2003,12 @@ int LuaImmovableDescription::get_species(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: build_cost
+   .. attribute:: buildcost
 
          (RO) a table of ware-to-count pairs, describing the build cost for the
          immovable.
 */
-int LuaImmovableDescription::get_build_cost(lua_State* L) {
+int LuaImmovableDescription::get_buildcost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->buildcost(), MapObjectType::WARE);
 }
 
@@ -1789,7 +2017,8 @@ int LuaImmovableDescription::get_build_cost(lua_State* L) {
 
          the name and descname of the editor category of this immovable
 
-         (RO) a table with "name" and "descname" entries for the editor category, or nil if it has none.
+         (RO) a table with "name" and "descname" entries for the editor category, or nil if it has
+         none.
 */
 int LuaImmovableDescription::get_editor_category(lua_State* L) {
 	const EditorCategory* editor_category = get()->editor_category();
@@ -1812,8 +2041,8 @@ int LuaImmovableDescription::get_editor_category(lua_State* L) {
 
          returns the terrain affinity values for this immovable
 
-         (RO) a table containing numbers labeled as pickiness (double), preferred_fertility (double),
-         preferred_humidity (double), and preferred_temperature (uint),
+         (RO) a table containing numbers labeled as pickiness (uint), preferred_fertility (uint),
+         preferred_humidity (uint), and preferred_temperature (uint),
          or nil if the immovable has no terrain affinity.
 */
 int LuaImmovableDescription::get_terrain_affinity(lua_State* L) {
@@ -1821,13 +2050,13 @@ int LuaImmovableDescription::get_terrain_affinity(lua_State* L) {
 		const TerrainAffinity& affinity = get()->terrain_affinity();
 		lua_newtable(L);
 		lua_pushstring(L, "pickiness");
-		lua_pushdouble(L, affinity.pickiness());
+		lua_pushuint32(L, affinity.pickiness());
 		lua_settable(L, -3);
 		lua_pushstring(L, "preferred_fertility");
-		lua_pushdouble(L, affinity.preferred_fertility());
+		lua_pushuint32(L, affinity.preferred_fertility());
 		lua_settable(L, -3);
 		lua_pushstring(L, "preferred_humidity");
-		lua_pushdouble(L, affinity.preferred_humidity());
+		lua_pushuint32(L, affinity.preferred_humidity());
 		lua_settable(L, -3);
 		lua_pushstring(L, "preferred_temperature");
 		lua_pushuint32(L, affinity.preferred_temperature());
@@ -1919,7 +2148,8 @@ int LuaImmovableDescription::probability_to_grow(lua_State* L) {
 	if (get()->has_terrain_affinity()) {
 		const TerrainDescription* terrain =
 		   (*get_user_class<LuaMaps::LuaTerrainDescription>(L, 2))->get();
-		lua_pushdouble(L, Widelands::probability_to_grow(get()->terrain_affinity(), *terrain));
+		lua_pushdouble(L, Widelands::probability_to_grow(get()->terrain_affinity(), *terrain) /
+		                     static_cast<double>(Widelands::TerrainAffinity::kPrecisionFactor));
 	} else {
 		lua_pushnil(L);
 	}
@@ -1945,11 +2175,10 @@ const MethodType<LuaBuildingDescription> LuaBuildingDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaBuildingDescription> LuaBuildingDescription::Properties[] = {
-   PROP_RO(LuaBuildingDescription, build_cost),
+   PROP_RO(LuaBuildingDescription, buildcost),
    PROP_RO(LuaBuildingDescription, buildable),
    PROP_RO(LuaBuildingDescription, conquers),
    PROP_RO(LuaBuildingDescription, destructible),
-   PROP_RO(LuaBuildingDescription, helptext_script),
    PROP_RO(LuaBuildingDescription, enhanced),
    PROP_RO(LuaBuildingDescription, enhanced_from),
    PROP_RO(LuaBuildingDescription, enhancement_cost),
@@ -1971,7 +2200,7 @@ void LuaBuildingDescription::__persist(lua_State* L) {
 
 void LuaBuildingDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_building_index(name.c_str());
 	set_description_pointer(tribes.get_building_descr(idx));
@@ -1984,11 +2213,11 @@ void LuaBuildingDescription::__unpersist(lua_State* L) {
  */
 
 /* RST
-   .. attribute:: build_cost
+   .. attribute:: buildcost
 
          (RO) a list of ware build cost for the building.
 */
-int LuaBuildingDescription::get_build_cost(lua_State* L) {
+int LuaBuildingDescription::get_buildcost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->buildcost(), MapObjectType::WARE);
 }
 
@@ -2023,16 +2252,6 @@ int LuaBuildingDescription::get_destructible(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: helptext_script
-
-         (RO) The path and filename to the building's helptext script
-*/
-int LuaBuildingDescription::get_helptext_script(lua_State* L) {
-	lua_pushstring(L, get()->helptext_script());
-	return 1;
-}
-
-/* RST
    .. attribute:: enhanced
 
          (RO) true if the building is enhanced from another building.
@@ -2045,7 +2264,8 @@ int LuaBuildingDescription::get_enhanced(lua_State* L) {
 /* RST
    .. attribute:: enhanced_from
 
-         (RO) returns the building that this was enhanced from, or nil if this isn't an enhanced building.
+         (RO) returns the building that this was enhanced from, or nil if this isn't an enhanced
+         building.
 */
 int LuaBuildingDescription::get_enhanced_from(lua_State* L) {
 	if (get()->is_enhanced()) {
@@ -2170,7 +2390,8 @@ ConstructionSiteDescription
 
 .. class:: ConstructionSiteDescription
 
-   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
+   :class:`BuildingDescription`
 
    A static description of a tribe's constructionsite, so it can be used in help files
    without having to access an actual building on the map.
@@ -2190,7 +2411,8 @@ DismantleSiteDescription
 
 .. class:: DismantleSiteDescription
 
-   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
+   :class:`BuildingDescription`
 
    A static description of a tribe's dismantlesite, so it can be used in help files
    without having to access an actual building on the map.
@@ -2210,7 +2432,8 @@ ProductionSiteDescription
 
 .. class:: ProductionSiteDescription
 
-   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
+   :class:`BuildingDescription`
 
    A static description of a tribe's productionsite, so it can be used in help files
    without having to access an actual building on the map.
@@ -2338,11 +2561,11 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 /* RST
    .. attribute:: consumed_wares_workers
 
-      :arg program_name: the name of the production program that we want to get the consumed wares for
-      :type tribename: :class:`string`
+      :arg program_name: the name of the production program that we want to get the consumed wares
+         for :type tribename: :class:`string`
 
-      (RO) Returns a table of {{ware name}, ware amount} for the wares consumed by this production program.
-      Multiple entries in {ware name} are alternatives (OR logic)).
+      (RO) Returns a table of {{ware name}, ware amount} for the wares consumed by this production
+      program. Multiple entries in {ware name} are alternatives (OR logic)).
 */
 int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
@@ -2372,10 +2595,11 @@ int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 /* RST
    .. attribute:: produced_wares
 
-      :arg program_name: the name of the production program that we want to get the produced wares for
-      :type tribename: :class:`string`
+      :arg program_name: the name of the production program that we want to get the produced wares
+         for :type tribename: :class:`string`
 
-         (RO) Returns a table of {ware name, ware amount} for the wares produced by this production program
+         (RO) Returns a table of {ware name, ware amount} for the wares produced by this production
+         program
 */
 int LuaProductionSiteDescription::produced_wares(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
@@ -2390,8 +2614,8 @@ int LuaProductionSiteDescription::produced_wares(lua_State* L) {
 /* RST
    .. attribute:: recruited_workers
 
-      :arg program_name: the name of the production program that we want to get the recruited workers for
-      :type tribename: :class:`string`
+      :arg program_name: the name of the production program that we want to get the recruited
+         workers for :type tribename: :class:`string`
 
          (RO) Returns a table of {worker name, worker amount} for the workers recruited
          by this production program
@@ -2412,7 +2636,8 @@ MilitarySiteDescription
 
 .. class:: MilitarySiteDescription
 
-   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
+   :class:`BuildingDescription`
 
    A static description of a tribe's militarysite, so it can be used in help files
    without having to access an actual building on the map.
@@ -2463,12 +2688,13 @@ TrainingSiteDescription
 
 .. class:: TrainingSiteDescription
 
-   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`, :class:`ProductionSiteDescription`
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
+   :class:`BuildingDescription`, :class:`ProductionSiteDescription`
 
    A static description of a tribe's trainingsite, so it can be used in help files
    without having to access an actual building on the map.
-   A training site can train some or all of a soldier's properties (Attack, Defense, Evade and Health).
-   See the parent classes for more properties.
+   A training site can train some or all of a soldier's properties (Attack, Defense, Evade and
+   Health). See the parent classes for more properties.
 */
 const char LuaTrainingSiteDescription::className[] = "TrainingSiteDescription";
 const MethodType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Methods[] = {
@@ -2734,7 +2960,8 @@ WarehouseDescription
 
 .. class:: WarehouseDescription
 
-   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
+   :class:`BuildingDescription`
 
    A static description of a tribe's warehouse, so it can be used in help files
    without having to access an actual building on the map.
@@ -2747,7 +2974,8 @@ const MethodType<LuaWarehouseDescription> LuaWarehouseDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaWarehouseDescription> LuaWarehouseDescription::Properties[] = {
-   PROP_RO(LuaWarehouseDescription, heal_per_second), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWarehouseDescription, heal_per_second),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -2773,7 +3001,8 @@ MarketDescription
 
 .. class:: MarketDescription
 
-   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`, :class:`BuildingDescription`
+   Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
+   :class:`BuildingDescription`
 
    A static description of a tribe's market, so it can be used in help files
    without having to access an actual building on the map. A Market is used for
@@ -2810,12 +3039,12 @@ WareDescription
 */
 const char LuaWareDescription::className[] = "WareDescription";
 const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
-   METHOD(LuaWareDescription, is_construction_material), {nullptr, nullptr},
+   METHOD(LuaWareDescription, consumers),
+   METHOD(LuaWareDescription, is_construction_material),
+   METHOD(LuaWareDescription, producers),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaWareDescription> LuaWareDescription::Properties[] = {
-   PROP_RO(LuaWareDescription, consumers),
-   PROP_RO(LuaWareDescription, helptext_script),
-   PROP_RO(LuaWareDescription, producers),
    {nullptr, nullptr, nullptr},
 };
 
@@ -2826,7 +3055,7 @@ void LuaWareDescription::__persist(lua_State* L) {
 
 void LuaWareDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_ware_index(name.c_str());
 	set_description_pointer(tribes.get_ware_descr(idx));
@@ -2839,35 +3068,35 @@ void LuaWareDescription::__unpersist(lua_State* L) {
  */
 
 /* RST
-   .. attribute:: consumers
+   .. method:: consumers(tribename)
+
+      :arg tribename: the name of the tribe that this ware gets checked for
+      :type tribename: :class:`string`
 
       (RO) An array with :class:`LuaBuildingDescription` with buildings that
       need this ware for their production.
 */
-int LuaWareDescription::get_consumers(lua_State* L) {
+int LuaWareDescription::consumers(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	const Widelands::TribeDescr& tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
+
 	lua_newtable(L);
 	int index = 1;
 	for (const DescriptionIndex& building_index : get()->consumers()) {
-		lua_pushint32(L, index++);
-		upcasted_map_object_descr_to_lua(
-		   L, get_egbase(L).tribes().get_building_descr(building_index));
-		lua_rawset(L, -3);
+		if (tribe.has_building(building_index)) {
+			lua_pushint32(L, index++);
+			upcasted_map_object_descr_to_lua(
+			   L, get_egbase(L).tribes().get_building_descr(building_index));
+			lua_rawset(L, -3);
+		}
 	}
 	return 1;
 }
 
 /* RST
-   .. attribute:: helptext_script
-
-         (RO) The path and filename to the ware's helptext script
-*/
-int LuaWareDescription::get_helptext_script(lua_State* L) {
-	lua_pushstring(L, get()->helptext_script());
-	return 1;
-}
-
-/* RST
-   .. method:: is_construction_material
+   .. method:: is_construction_material(tribename)
 
       :arg tribename: the name of the tribe that this ware gets checked for
       :type tribename: :class:`string`
@@ -2888,19 +3117,29 @@ int LuaWareDescription::is_construction_material(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: producers
+   .. method:: producers(tribename)
+
+      :arg tribename: the name of the tribe that this ware gets checked for
+      :type tribename: :class:`string`
 
       (RO) An array with :class:`LuaBuildingDescription` with buildings that
       can procude this ware.
 */
-int LuaWareDescription::get_producers(lua_State* L) {
+int LuaWareDescription::producers(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	const Widelands::TribeDescr& tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
+
 	lua_newtable(L);
 	int index = 1;
 	for (const DescriptionIndex& building_index : get()->producers()) {
-		lua_pushint32(L, index++);
-		upcasted_map_object_descr_to_lua(
-		   L, get_egbase(L).tribes().get_building_descr(building_index));
-		lua_rawset(L, -3);
+		if (tribe.has_building(building_index)) {
+			lua_pushint32(L, index++);
+			upcasted_map_object_descr_to_lua(
+			   L, get_egbase(L).tribes().get_building_descr(building_index));
+			lua_rawset(L, -3);
+		}
 	}
 	return 1;
 }
@@ -2922,13 +3161,9 @@ const MethodType<LuaWorkerDescription> LuaWorkerDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaWorkerDescription> LuaWorkerDescription::Properties[] = {
-   PROP_RO(LuaWorkerDescription, becomes),
-   PROP_RO(LuaWorkerDescription, buildcost),
-   PROP_RO(LuaWorkerDescription, employers),
-   PROP_RO(LuaWorkerDescription, helptext_script),
-   PROP_RO(LuaWorkerDescription, is_buildable),
-   PROP_RO(LuaWorkerDescription, needed_experience),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWorkerDescription, becomes),           PROP_RO(LuaWorkerDescription, buildcost),
+   PROP_RO(LuaWorkerDescription, employers),         PROP_RO(LuaWorkerDescription, buildable),
+   PROP_RO(LuaWorkerDescription, needed_experience), {nullptr, nullptr, nullptr},
 };
 
 void LuaWorkerDescription::__persist(lua_State* L) {
@@ -2938,7 +3173,7 @@ void LuaWorkerDescription::__persist(lua_State* L) {
 
 void LuaWorkerDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const Tribes& tribes = get_egbase(L).tribes();
 	DescriptionIndex idx = tribes.safe_worker_index(name.c_str());
 	set_description_pointer(tribes.get_worker_descr(idx));
@@ -3003,21 +3238,11 @@ int LuaWorkerDescription::get_employers(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: helptext_script
-
-         (RO) The path and filename to the worker's helptext script
-*/
-int LuaWorkerDescription::get_helptext_script(lua_State* L) {
-	lua_pushstring(L, get()->helptext_script());
-	return 1;
-}
-
-/* RST
-   .. attribute:: is_buildable
+   .. attribute:: buildable
 
       (RO) returns true if this worker is buildable
 */
-int LuaWorkerDescription::get_is_buildable(lua_State* L) {
+int LuaWorkerDescription::get_buildable(lua_State* L) {
 	lua_pushboolean(L, get()->is_buildable());
 	return 1;
 }
@@ -3210,7 +3435,8 @@ ResourceDescription
 */
 const char LuaResourceDescription::className[] = "ResourceDescription";
 const MethodType<LuaResourceDescription> LuaResourceDescription::Methods[] = {
-   METHOD(LuaResourceDescription, editor_image), {nullptr, nullptr},
+   METHOD(LuaResourceDescription, editor_image),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaResourceDescription> LuaResourceDescription::Properties[] = {
    PROP_RO(LuaResourceDescription, name),
@@ -3228,7 +3454,7 @@ void LuaResourceDescription::__persist(lua_State* L) {
 
 void LuaResourceDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	const World& world = get_egbase(L).world();
 	const ResourceDescription* descr = world.get_resource(world.safe_resource_index(name.c_str()));
 	set_description_pointer(descr);
@@ -3305,7 +3531,8 @@ int LuaResourceDescription::get_representative_image(lua_State* L) {
 
       :arg amount: The amount of the resource what we want an overlay image for
 
-         (RO) the :class:`string` path to the image representing the specified amount of this resource
+         (RO) the :class:`string` path to the image representing the specified amount of this
+         resource
 */
 int LuaResourceDescription::editor_image(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -3348,7 +3575,7 @@ void LuaTerrainDescription::__persist(lua_State* L) {
 
 void LuaTerrainDescription::__unpersist(lua_State* L) {
 	std::string name;
-	UNPERS_STRING("name", name);
+	UNPERS_STRING("name", name)
 	set_description_pointer(get_egbase(L).world().terrain_descr(name));
 }
 
@@ -3383,8 +3610,8 @@ int LuaTerrainDescription::get_descname(lua_State* L) {
 /* RST
    .. attribute:: get_default_resource
 
-         (RO) the :class:`wl.map.ResourceDescription` for the default resource provided by this terrain, or
-         nil if the terrain has no default resource.
+         (RO) the :class:`wl.map.ResourceDescription` for the default resource provided by this
+         terrain, or nil if the terrain has no default resource.
 */
 
 int LuaTerrainDescription::get_default_resource(lua_State* L) {
@@ -3413,7 +3640,8 @@ int LuaTerrainDescription::get_default_resource_amount(lua_State* L) {
 /* RST
    .. attribute:: the name and descname of the editor category of this terrain
 
-      (RO) a table with "name" and "descname" entries for the editor category, or nil if it has none.
+      (RO) a table with "name" and "descname" entries for the editor category, or nil if it has
+      none.
 */
 int LuaTerrainDescription::get_editor_category(lua_State* L) {
 	const EditorCategory* editor_category = get()->editor_category();
@@ -3434,22 +3662,22 @@ int LuaTerrainDescription::get_editor_category(lua_State* L) {
 /* RST
    .. attribute:: fertility
 
-         (RO) the :class:`double` fertility value for this terrain
+         (RO) the :class:`uint` fertility value for this terrain
 */
 
 int LuaTerrainDescription::get_fertility(lua_State* L) {
-	lua_pushdouble(L, get()->fertility());
+	lua_pushuint32(L, get()->fertility());
 	return 1;
 }
 
 /* RST
    .. attribute:: humidity
 
-         (RO) the :class:`double` humidity value for this terrain
+         (RO) the :class:`uint` humidity value for this terrain
 */
 
 int LuaTerrainDescription::get_humidity(lua_State* L) {
-	lua_pushdouble(L, get()->humidity());
+	lua_pushuint32(L, get()->humidity());
 	return 1;
 }
 
@@ -3458,7 +3686,6 @@ int LuaTerrainDescription::get_humidity(lua_State* L) {
 
          (RO) the :class:`string` file path to a representative image
 */
-
 int LuaTerrainDescription::get_representative_image(lua_State* L) {
 	lua_pushstring(L, get()->texture_paths().front());
 	return 1;
@@ -3478,7 +3705,8 @@ int LuaTerrainDescription::get_temperature(lua_State* L) {
 /* RST
    .. attribute:: valid_resources
 
-         (RO) a list of :class:`wl.map.ResourceDescription` with all valid resources for this terrain.
+         (RO) a list of :class:`wl.map.ResourceDescription` with all valid resources for this
+         terrain.
 */
 
 int LuaTerrainDescription::get_valid_resources(lua_State* L) {
@@ -3526,22 +3754,26 @@ void LuaEconomy::__persist(lua_State* L) {
 	const Widelands::Economy* economy = get();
 	const Widelands::Player& player = economy->owner();
 	PERS_UINT32("player", player.player_number());
-	PERS_UINT32("economy", player.get_economy_number(economy));
+	PERS_UINT32("economy", economy->serial());
 }
 
 void LuaEconomy::__unpersist(lua_State* L) {
 	Widelands::PlayerNumber player_number;
-	size_t economy_number;
-	UNPERS_UINT32("player", player_number);
-	UNPERS_UINT32("economy", economy_number);
+	Widelands::Serial economy_serial;
+	UNPERS_UINT32("player", player_number)
+	UNPERS_UINT32("economy", economy_serial)
 	const Widelands::Player& player = get_egbase(L).player(player_number);
-	set_economy_pointer(player.get_economy_by_number(economy_number));
+	set_economy_pointer(player.get_economy(economy_serial));
 }
 
 /* RST
    .. method:: ware_target_quantity(warename)
 
       Returns the amount of the given ware that should be kept in stock for this economy.
+
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you must get a fresh economy
+      object every time you use this function.
 
       :arg warename: the name of the ware.
       :type warename: :class:`string`
@@ -3563,6 +3795,10 @@ int LuaEconomy::ware_target_quantity(lua_State* L) {
 
       Returns the amount of the given worker that should be kept in stock for this economy.
 
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you must get a fresh economy
+      object every time you use this function.
+
       :arg workername: the name of the worker.
       :type workername: :class:`string`
 */
@@ -3582,6 +3818,10 @@ int LuaEconomy::worker_target_quantity(lua_State* L) {
    .. method:: set_ware_target_quantity(warename)
 
       Sets the amount of the given ware type that should be kept in stock for this economy.
+
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you must get a fresh economy
+      object every time you use this function.
 
       :arg warename: the name of the ware type.
       :type warename: :class:`string`
@@ -3608,6 +3848,10 @@ int LuaEconomy::set_ware_target_quantity(lua_State* L) {
    .. method:: set_worker_target_quantity(workername)
 
       Sets the amount of the given worker type that should be kept in stock for this economy.
+
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you must get a fresh economy
+      object every time you use this function.
 
       :arg workername: the name of the worker type.
       :type workername: :class:`string`
@@ -3669,7 +3913,7 @@ void LuaMapObject::__persist(lua_State* L) {
 }
 void LuaMapObject::__unpersist(lua_State* L) {
 	uint32_t idx;
-	UNPERS_UINT32("file_index", idx);
+	UNPERS_UINT32("file_index", idx)
 
 	if (!idx)
 		ptr_ = nullptr;
@@ -3684,7 +3928,11 @@ void LuaMapObject::__unpersist(lua_State* L) {
  PROPERTIES
  ==========================================================
  */
-// Hash is used to identify a class in a Set
+/* RST
+   .. attribute:: __hash
+
+      (RO) The map object's serial. Used to identify a class in a Set.
+*/
 int LuaMapObject::get___hash(lua_State* L) {
 	lua_pushuint32(L, get(L, get_egbase(L))->serial());
 	return 1;
@@ -3867,7 +4115,8 @@ const MethodType<LuaBaseImmovable> LuaBaseImmovable::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaBaseImmovable> LuaBaseImmovable::Properties[] = {
-   PROP_RO(LuaBaseImmovable, fields), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaBaseImmovable, fields),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -3982,7 +4231,9 @@ Flag
 */
 const char LuaFlag::className[] = "Flag";
 const MethodType<LuaFlag> LuaFlag::Methods[] = {
-   METHOD(LuaFlag, set_wares), METHOD(LuaFlag, get_wares), {nullptr, nullptr},
+   METHOD(LuaFlag, set_wares),
+   METHOD(LuaFlag, get_wares),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
    PROP_RO(LuaFlag, economy),
@@ -4000,6 +4251,10 @@ const PropertyType<LuaFlag> LuaFlag::Properties[] = {
    .. attribute:: economy
 
       (RO) Returns the economy that this flag belongs to.
+
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you must get a fresh economy
+      object every time you call another function on the resulting economy object.
 
       :returns: The :class:`Economy` associated with the flag.
 */
@@ -4187,7 +4442,9 @@ Road
 */
 const char LuaRoad::className[] = "Road";
 const MethodType<LuaRoad> LuaRoad::Methods[] = {
-   METHOD(LuaRoad, get_workers), METHOD(LuaRoad, set_workers), {nullptr, nullptr},
+   METHOD(LuaRoad, get_workers),
+   METHOD(LuaRoad, set_workers),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaRoad> LuaRoad::Properties[] = {
    PROP_RO(LuaRoad, length),        PROP_RO(LuaRoad, start_flag), PROP_RO(LuaRoad, end_flag),
@@ -4294,7 +4551,8 @@ int LuaRoad::create_new_worker(PlayerImmovable& pi,
 	for (Path::StepVector::size_type i = 0; i < idle_index; ++i)
 		egbase.map().get_neighbour(idle_position, path[i], &idle_position);
 
-	Carrier& carrier = dynamic_cast<Carrier&>(wdes->create(egbase, r.owner(), &r, idle_position));
+	Carrier& carrier =
+	   dynamic_cast<Carrier&>(wdes->create(egbase, r.get_owner(), &r, idle_position));
 
 	if (upcast(Game, game, &egbase)) {
 		carrier.start_task_road(*game);
@@ -4364,7 +4622,8 @@ const MethodType<LuaBuilding> LuaBuilding::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaBuilding> LuaBuilding::Properties[] = {
-   PROP_RO(LuaBuilding, flag), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaBuilding, flag),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -4415,7 +4674,8 @@ const MethodType<LuaConstructionSite> LuaConstructionSite::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaConstructionSite> LuaConstructionSite::Properties[] = {
-   PROP_RO(LuaConstructionSite, building), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaConstructionSite, building),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -4506,7 +4766,7 @@ int LuaWarehouse::get_expedition_in_progress(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 
 	if (is_a(Game, &egbase)) {
-		PortDock* pd = get(L, egbase)->get_portdock();
+		const PortDock* pd = get(L, egbase)->get_portdock();
 		if (pd) {
 			if (pd->expedition_started()) {
 				return 1;
@@ -4869,7 +5129,7 @@ int LuaWarehouse::start_expedition(lua_State* L) {
 	}
 
 	if (upcast(Game, game, &egbase)) {
-		PortDock* pd = wh->get_portdock();
+		const PortDock* pd = wh->get_portdock();
 		if (!pd) {
 			return 0;
 		}
@@ -4900,7 +5160,7 @@ int LuaWarehouse::cancel_expedition(lua_State* L) {
 	}
 
 	if (upcast(Game, game, &egbase)) {
-		PortDock* pd = wh->get_portdock();
+		const PortDock* pd = wh->get_portdock();
 		if (!pd) {
 			return 0;
 		}
@@ -4938,11 +5198,14 @@ const MethodType<LuaProductionSite> LuaProductionSite::Methods[] = {
    METHOD(LuaProductionSite, get_inputs),
    METHOD(LuaProductionSite, get_workers),
    METHOD(LuaProductionSite, set_workers),
+   METHOD(LuaProductionSite, toggle_start_stop),
+
    {nullptr, nullptr},
 };
 const PropertyType<LuaProductionSite> LuaProductionSite::Properties[] = {
    PROP_RO(LuaProductionSite, valid_workers),
    PROP_RO(LuaProductionSite, valid_inputs),
+   PROP_RO(LuaProductionSite, is_stopped),
    {nullptr, nullptr, nullptr},
 };
 
@@ -4976,6 +5239,20 @@ int LuaProductionSite::get_valid_inputs(lua_State* L) {
 int LuaProductionSite::get_valid_workers(lua_State* L) {
 	ProductionSite* ps = get(L, get_egbase(L));
 	return workers_map_to_lua(L, get_valid_workers_for(*ps));
+}
+
+/* RST
+   .. attribute:: is_stopped
+
+      (RO) Returns whether this productionsite is currently active or stopped
+
+      :returns: true if the productionsite has been started,
+         false if it has been stopped.
+*/
+int LuaProductionSite::get_is_stopped(lua_State* L) {
+	ProductionSite* ps = get(L, get_egbase(L));
+	lua_pushboolean(L, ps->is_stopped());
+	return 1;
 }
 
 /*
@@ -5075,6 +5352,19 @@ int LuaProductionSite::set_workers(lua_State* L) {
 	return do_set_workers<LuaProductionSite>(L, ps, get_valid_workers_for(*ps));
 }
 
+/* RST
+   .. method:: toggle_start_stop()
+
+      If :any:`ProductionSite.is_stopped`, sends a command to start this productionsite.
+      Otherwise, sends a command to stop this productionsite.
+*/
+int LuaProductionSite::toggle_start_stop(lua_State* L) {
+	Game& game = get_game(L);
+	ProductionSite* ps = get(L, game);
+	game.send_player_start_stop_building(*ps);
+	return 1;
+}
+
 /*
  ==========================================================
  C METHODS
@@ -5096,7 +5386,7 @@ Market
 
    Child of: :class:`Building`, :class:`HasWares`, :class:`HasWorkers`
 
-	A Market used for trading with other players.
+   A Market used for trading with other players.
 
    More properties are available through this object's
    :class:`MarketDescription`, which you can access via :any:`MapObject.descr`.
@@ -5178,10 +5468,13 @@ MilitarySite
 */
 const char LuaMilitarySite::className[] = "MilitarySite";
 const MethodType<LuaMilitarySite> LuaMilitarySite::Methods[] = {
-   METHOD(LuaMilitarySite, get_soldiers), METHOD(LuaMilitarySite, set_soldiers), {nullptr, nullptr},
+   METHOD(LuaMilitarySite, get_soldiers),
+   METHOD(LuaMilitarySite, set_soldiers),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaMilitarySite> LuaMilitarySite::Properties[] = {
-   PROP_RO(LuaMilitarySite, max_soldiers), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMilitarySite, max_soldiers),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5235,10 +5528,13 @@ TrainingSite
 */
 const char LuaTrainingSite::className[] = "TrainingSite";
 const MethodType<LuaTrainingSite> LuaTrainingSite::Methods[] = {
-   METHOD(LuaTrainingSite, get_soldiers), METHOD(LuaTrainingSite, set_soldiers), {nullptr, nullptr},
+   METHOD(LuaTrainingSite, get_soldiers),
+   METHOD(LuaTrainingSite, set_soldiers),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaTrainingSite> LuaTrainingSite::Properties[] = {
-   PROP_RO(LuaTrainingSite, max_soldiers), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaTrainingSite, max_soldiers),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5292,10 +5588,12 @@ Bob
 */
 const char LuaBob::className[] = "Bob";
 const MethodType<LuaBob> LuaBob::Methods[] = {
-   METHOD(LuaBob, has_caps), {nullptr, nullptr},
+   METHOD(LuaBob, has_caps),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaBob> LuaBob::Properties[] = {
-   PROP_RO(LuaBob, field), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaBob, field),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5677,7 +5975,9 @@ const MethodType<LuaWorker> LuaWorker::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaWorker> LuaWorker::Properties[] = {
-   PROP_RO(LuaWorker, owner), PROP_RO(LuaWorker, location), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWorker, owner),
+   PROP_RO(LuaWorker, location),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5827,8 +6127,8 @@ Field
 
 const char LuaField::className[] = "Field";
 const MethodType<LuaField> LuaField::Methods[] = {
-   METHOD(LuaField, __eq),     METHOD(LuaField, __tostring), METHOD(LuaField, region),
-   METHOD(LuaField, has_caps), {nullptr, nullptr},
+   METHOD(LuaField, __eq),     METHOD(LuaField, __tostring),   METHOD(LuaField, region),
+   METHOD(LuaField, has_caps), METHOD(LuaField, has_max_caps), {nullptr, nullptr},
 };
 const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RO(LuaField, __hash),
@@ -5853,6 +6153,7 @@ const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RO(LuaField, initial_resource_amount),
    PROP_RO(LuaField, claimers),
    PROP_RO(LuaField, owner),
+   PROP_RO(LuaField, buildable),
    {nullptr, nullptr, nullptr},
 };
 
@@ -5862,8 +6163,8 @@ void LuaField::__persist(lua_State* L) {
 }
 
 void LuaField::__unpersist(lua_State* L) {
-	UNPERS_INT32("x", coords_.x);
-	UNPERS_INT32("y", coords_.y);
+	UNPERS_INT32("x", coords_.x)
+	UNPERS_INT32("y", coords_.y)
 }
 
 /*
@@ -5871,10 +6172,13 @@ void LuaField::__unpersist(lua_State* L) {
  PROPERTIES
  ==========================================================
  */
-// Hash is used to identify a class in a Set
+/* RST
+   .. attribute:: __hash
+
+      (RO) The hashed coordinates of the field's position. Used to identify a class in a Set.
+*/
 int LuaField::get___hash(lua_State* L) {
-	const std::string pushme = (boost::format("%i_%i") % coords_.x % coords_.y).str();
-	lua_pushstring(L, pushme.c_str());
+	lua_pushuint32(L, coords_.hash());
 	return 1;
 }
 
@@ -5898,7 +6202,9 @@ int LuaField::get_y(lua_State* L) {
       (RW) The height of this field. The default height is 10, you can increase
       or decrease this value to build mountains. Note though that if you change
       this value too much, all surrounding fields will also change their
-      heights because the slope is constrained.
+      heights because the slope is constrained. If you are changing the height
+      of many terrains at once, use :attr:`raw_height` instead and then call
+      :any:`recalculate` afterwards.
 */
 int LuaField::get_height(lua_State* L) {
 	lua_pushuint32(L, fcoords(L).field->get_height());
@@ -5923,10 +6229,10 @@ int LuaField::set_height(lua_State* L) {
 /* RST
    .. attribute:: raw_height
 
-      (RW The same as :attr:`height`, but setting this will not trigger a
+      (RW) The same as :attr:`height`, but setting this will not trigger a
       recalculation of the surrounding fields. You can use this field to
       change the height of many fields on a map quickly, then use
-      :func:`wl.map.recalculate()` to make sure that everything is in order.
+      :any:`recalculate` to make sure that everything is in order.
 */
 // UNTESTED
 int LuaField::get_raw_height(lua_State* L) {
@@ -6085,7 +6391,11 @@ int LuaField::get_bobs(lua_State* L) {
       (RW) The terrain of the right/down triangle. This is a string value
       containing the name of the terrain as it is defined in the world
       configuration. You can change the terrain by simply assigning another
-      valid name to these variables.
+      valid name to these variables. If you are changing the terrain from or to
+      water, the map will not recalculate whether it allows seafaring, because
+      this recalculation can take up a lot of performance. If you need this
+      recalculated, you can do so by calling :any:`recalculate_seafaring` after
+      you're done changing terrains.
 */
 int LuaField::get_terr(lua_State* L) {
 	TerrainDescription& td = get_egbase(L).world().terrain_descr(fcoords(L).field->terrain_r());
@@ -6097,7 +6407,7 @@ int LuaField::set_terr(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	const World& world = egbase.world();
 	const DescriptionIndex td = world.terrains().get_index(name);
-	if (td == static_cast<DescriptionIndex>(-1))
+	if (td == static_cast<DescriptionIndex>(Widelands::INVALID_INDEX))
 		report_error(L, "Unknown terrain '%s'", name);
 
 	egbase.mutable_map()->change_terrain(world, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);
@@ -6171,6 +6481,21 @@ int LuaField::get_owner(lua_State* L) {
 		return 1;
 	}
 	return 0;
+}
+
+/* RST
+   .. attribute:: buildable
+
+      (RO) Returns :const:`true` if a flag or building could be built on this field,
+      independently of whether anybody currently owns this field.
+*/
+int LuaField::get_buildable(lua_State* L) {
+	const NodeCaps caps = fcoords(L).field->nodecaps();
+	const bool is_buildable = (caps & BUILDCAPS_FLAG) || (caps & BUILDCAPS_SMALL) ||
+	                          (caps & BUILDCAPS_MEDIUM) || (caps & BUILDCAPS_BIG) ||
+	                          (caps & BUILDCAPS_MINE);
+	lua_pushboolean(L, is_buildable);
+	return 1;
 }
 
 /* RST
@@ -6270,42 +6595,49 @@ int LuaField::region(lua_State* L) {
 
       Returns :const:`true` if the field has this caps associated
       with it, otherwise returns false.
+      Note: Immovables will hide the caps. If you want to have the caps
+      without immovables use has_max_caps instead
 
       :arg capname: can be either of
 
-      * :const:`small`: Can a small building be build here?
-      * :const:`medium`: Can a medium building be build here?
-      * :const:`big`: Can a big building be build here?
-      * :const:`mine`: Can a mine be build here?
-      * :const:`port`: Can a port be build here?
-      * :const:`flag`: Can a flag be build here?
+      * :const:`small`: Can a small building be built here?
+      * :const:`medium`: Can a medium building be built here?
+      * :const:`big`: Can a big building be built here?
+      * :const:`mine`: Can a mine be built here?
+      * :const:`port`: Can a port be built here?
+      * :const:`flag`: Can a flag be built here?
       * :const:`walkable`: Is this field passable for walking bobs?
-		* :const:`swimmable`: Is this field passable for swimming bobs?
+      * :const:`swimmable`: Is this field passable for swimming bobs?
 */
 int LuaField::has_caps(lua_State* L) {
-	FCoords f = fcoords(L);
+	const FCoords& f = fcoords(L);
 	std::string query = luaL_checkstring(L, 2);
+	lua_pushboolean(L, check_has_caps(L, query, f, f.field->nodecaps(), get_egbase(L).map()));
+	return 1;
+}
 
-	if (query == "walkable")
-		lua_pushboolean(L, f.field->nodecaps() & MOVECAPS_WALK);
-	else if (query == "swimmable")
-		lua_pushboolean(L, f.field->nodecaps() & MOVECAPS_SWIM);
-	else if (query == "small")
-		lua_pushboolean(L, f.field->nodecaps() & BUILDCAPS_SMALL);
-	else if (query == "medium")
-		lua_pushboolean(L, f.field->nodecaps() & BUILDCAPS_MEDIUM);
-	else if (query == "big")
-		lua_pushboolean(L, (f.field->nodecaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG);
-	else if (query == "port") {
-		lua_pushboolean(
-		   L, (f.field->nodecaps() & BUILDCAPS_PORT) && get_egbase(L).map().is_port_space(f));
-	} else if (query == "mine")
-		lua_pushboolean(L, f.field->nodecaps() & BUILDCAPS_MINE);
-	else if (query == "flag")
-		lua_pushboolean(L, f.field->nodecaps() & BUILDCAPS_FLAG);
-	else
-		report_error(L, "Unknown caps queried: %s!", query.c_str());
+/* RST
+   .. method:: has_max_caps(capname)
 
+      Returns :const:`true` if the field has this maximum caps (not taking immovables into account)
+      associated with it, otherwise returns false.
+
+      :arg capname: can be either of
+
+      * :const:`small`: Can a small building be built here?
+      * :const:`medium`: Can a medium building be built here?
+      * :const:`big`: Can a big building be built here?
+      * :const:`mine`: Can a mine be built here?
+      * :const:`port`: Can a port be built here?
+      * :const:`flag`: Can a flag be built here?
+      * :const:`walkable`: Is this field passable for walking bobs?
+      * :const:`swimmable`: Is this field passable for swimming bobs?
+*/
+int LuaField::has_max_caps(lua_State* L) {
+	const FCoords& f = fcoords(L);
+	std::string query = luaL_checkstring(L, 2);
+	lua_pushboolean(
+	   L, check_has_caps(L, luaL_checkstring(L, 2), f, f.field->maxcaps(), get_egbase(L).map()));
 	return 1;
 }
 
@@ -6379,7 +6711,7 @@ void LuaPlayerSlot::__persist(lua_State* L) {
 }
 
 void LuaPlayerSlot::__unpersist(lua_State* L) {
-	UNPERS_UINT32("player", player_number_);
+	UNPERS_UINT32("player", player_number_)
 }
 
 /*
@@ -6612,4 +6944,4 @@ void luaopen_wlmap(lua_State* L) {
 	add_parent<LuaTrainingSite, LuaMapObject>(L);
 	lua_pop(L, 1);  // Pop the meta table
 }
-}
+}  // namespace LuaMaps

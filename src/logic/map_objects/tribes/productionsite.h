@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,8 @@ public:
 	                    const std::string& msgctxt,
 	                    MapObjectType type,
 	                    const LuaTable& t,
-	                    const Tribes& tribes, const World& world);
+	                    const Tribes& tribes,
+	                    const World& world);
 	ProductionSiteDescr(const std::string& init_descname,
 	                    const std::string& msgctxt,
 	                    const LuaTable& t,
@@ -148,7 +149,7 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActReturn;
 	friend struct ProductionProgram::ActReturn::WorkersNeedExperience;
 	friend struct ProductionProgram::ActCall;
-	friend struct ProductionProgram::ActWorker;
+	friend struct ProductionProgram::ActCallWorker;
 	friend struct ProductionProgram::ActSleep;
 	friend struct ProductionProgram::ActCheckMap;
 	friend struct ProductionProgram::ActAnimate;
@@ -164,9 +165,9 @@ class ProductionSite : public Building {
 
 public:
 	explicit ProductionSite(const ProductionSiteDescr& descr);
-	virtual ~ProductionSite();
+	~ProductionSite() override;
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	bool is_stopped() const {
 		return is_stopped_;
@@ -244,7 +245,7 @@ protected:
 	struct State {
 		const ProductionProgram* program;  ///< currently running program
 		size_t ip;                         ///< instruction pointer
-		uint32_t phase;                    ///< micro-step index (instruction dependent)
+		ProgramResult phase;               ///< micro-step index (instruction dependent)
 		uint32_t flags;                    ///< pfXXX flags
 
 		/**
@@ -255,7 +256,8 @@ protected:
 		Coords coord;
 		/*@}*/
 
-		State() : program(nullptr), ip(0), phase(0), flags(0), coord(Coords::null()) {
+		State()
+		   : program(nullptr), ip(0), phase(ProgramResult::kNone), flags(0), coord(Coords::null()) {
 		}
 	};
 
@@ -283,7 +285,7 @@ protected:
 	/// how long it should take to mine, given the particular circumstances,
 	/// and pass the result to the following animation command, to set the
 	/// duration.
-	void program_step(Game&, uint32_t delay = 10, uint32_t phase = 0);
+	void program_step(Game&, uint32_t delay = 10, ProgramResult phase = ProgramResult::kNone);
 
 	void program_start(Game&, const std::string& program_name);
 	virtual void program_end(Game&, ProgramResult);
@@ -339,7 +341,7 @@ private:
  *
  * This class will be extended to support ordering of certain wares directly or
  * releasing some wares out of a building
-*/
+ */
 struct Input {
 	Input(const DescriptionIndex& Ware, uint8_t const Max) : ware_(Ware), max_(Max) {
 	}

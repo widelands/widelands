@@ -59,7 +59,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=produce_ration",
             "call=produce_snack",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_ration = {
@@ -70,7 +70,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ration",
             "sleep=5000",
             "consume=barbarians_bread,fish,meat",
-            "play_sound=sound/barbarians/taverns inn 100",
+            "playsound=sound/barbarians/taverns/inn 100",
             "animate=working 18000",
             "sleep=10000",
             "produce=ration"
@@ -82,10 +82,9 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 37
             "return=skipped unless economy needs snack",
-            "sleep=5000",
             "consume=barbarians_bread fish,meat beer",
-            "play_sound=sound/barbarians/taverns inn 100",
-            "animate=working 22000",
+            "playsound=sound/barbarians/taverns/inn 100",
+            "animate=working 27000",
             "sleep=10000",
             "produce=snack"
          }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,16 +36,13 @@ class World;
 
 // I assume elsewhere, that enum SoldierPreference fits to uint8_t.
 enum class SoldierPreference : uint8_t {
-	kNotSet,  // For savegame compatibility only.
 	kRookies,
 	kHeroes,
 };
 
 class MilitarySiteDescr : public BuildingDescr {
 public:
-	MilitarySiteDescr(const std::string& init_descname,
-	                  const LuaTable& t,
-	                  const Tribes& tribes);
+	MilitarySiteDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
 	~MilitarySiteDescr() override {
 	}
 
@@ -81,7 +78,7 @@ class MilitarySite : public Building {
 
 public:
 	explicit MilitarySite(const MilitarySiteDescr&);
-	virtual ~MilitarySite();
+	~MilitarySite() override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
@@ -190,6 +187,6 @@ private:
 	bool soldier_upgrade_try_;  // optimization -- if everybody is zero-level, do not downgrade
 	bool doing_upgrade_request_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_MILITARYSITE_H

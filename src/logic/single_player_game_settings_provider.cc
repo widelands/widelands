@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2017 by the Widelands Development Team
+ * Copyright (C) 2015-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,8 +22,9 @@
 #include <boost/format.hpp>
 
 #include "ai/computer_player.h"
+#include "base/i18n.h"
 #include "base/wexception.h"
-#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 
 SinglePlayerGameSettingsProvider::SinglePlayerGameSettingsProvider() {
 	s.tribes = Widelands::get_all_tribeinfos();
@@ -66,6 +67,14 @@ bool SinglePlayerGameSettingsProvider::can_launch() {
 
 std::string SinglePlayerGameSettingsProvider::get_map() {
 	return s.mapfilename;
+}
+
+bool SinglePlayerGameSettingsProvider::is_peaceful_mode() {
+	return s.peaceful;
+}
+
+void SinglePlayerGameSettingsProvider::set_peaceful_mode(bool peace) {
+	s.peaceful = peace;
 }
 
 void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
@@ -167,7 +176,7 @@ void SinglePlayerGameSettingsProvider::set_player_tribe(uint8_t const number,
 		actual_tribe = s.tribes.at(random).name;
 	}
 
-	for (const TribeBasicInfo& tmp_tribe : s.tribes) {
+	for (const Widelands::TribeBasicInfo& tmp_tribe : s.tribes) {
 		if (tmp_tribe.name == player.tribe) {
 			s.players[number].tribe = actual_tribe;
 			if (tmp_tribe.initializations.size() <= player.initialization_index) {
@@ -181,7 +190,7 @@ void SinglePlayerGameSettingsProvider::set_player_init(uint8_t const number, uin
 	if (number >= s.players.size())
 		return;
 
-	for (const TribeBasicInfo& tmp_tribe : s.tribes) {
+	for (const Widelands::TribeBasicInfo& tmp_tribe : s.tribes) {
 		if (tmp_tribe.name == s.players[number].tribe) {
 			if (index < tmp_tribe.initializations.size())
 				s.players[number].initialization_index = index;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,8 +28,7 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "editor/editorinteractive.h"
-#include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
+#include "graphic/font_handler.h"
 #include "graphic/image.h"
 #include "graphic/texture.h"
 #include "logic/editor_game_base.h"
@@ -52,26 +51,20 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
             0,
             box_width_,
             box_width_ / 3,
-            0,
-            0,
-            0,
-            _("Width:"),
-            UI::SpinBox::Units::kNone,
-            g_gr->images().get("images/ui_basic/but1.png"),
-            UI::SpinBox::Type::kValueList),
+            24,
+            _("Width"),
+            UI::DropdownType::kTextual,
+            UI::PanelStyle::kWui),
      height_(&box_,
              0,
              0,
              box_width_,
              box_width_ / 3,
-             0,
-             0,
-             0,
-             _("Height:"),
-             UI::SpinBox::Units::kNone,
-             g_gr->images().get("images/ui_basic/but1.png"),
-             UI::SpinBox::Type::kValueList),
-     list_(&box_, 0, 0, box_width_, 330),
+             24,
+             _("Height"),
+             UI::DropdownType::kTextual,
+             UI::PanelStyle::kWui),
+     list_(&box_, 0, 0, box_width_, 330, UI::PanelStyle::kWui),
      // Buttons
      button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
      ok_button_(&button_box_,
@@ -80,7 +73,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
                 0,
                 box_width_ / 2 - margin_,
                 0,
-                g_gr->images().get("images/ui_basic/but5.png"),
+                UI::ButtonStyle::kWuiPrimary,
                 _("Create Map")),
      cancel_button_(&button_box_,
                     "generate_map",
@@ -88,27 +81,19 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
                     0,
                     box_width_ / 2 - margin_,
                     0,
-                    g_gr->images().get("images/ui_basic/but1.png"),
+                    UI::ButtonStyle::kWuiSecondary,
                     _("Cancel")) {
-	width_.set_value_list(Widelands::kMapDimensions);
-	height_.set_value_list(Widelands::kMapDimensions);
 
-	{
-		size_t width_index, height_index;
-		Widelands::Extent const map_extent = parent.egbase().map().extent();
-		for (width_index = 0; width_index < Widelands::kMapDimensions.size() &&
-		                      Widelands::kMapDimensions[width_index] < map_extent.w;
-		     ++width_index) {
-		}
-		width_.set_value(width_index);
-
-		for (height_index = 0; height_index < Widelands::kMapDimensions.size() &&
-		                       Widelands::kMapDimensions[height_index] < map_extent.h;
-		     ++height_index) {
-		}
-		height_.set_value(height_index);
+	for (const int32_t& i : Widelands::kMapDimensions) {
+		width_.add(std::to_string(i), i);
+		height_.add(std::to_string(i), i);
 	}
+	width_.select(parent.egbase().map().get_width());
+	height_.select(parent.egbase().map().get_height());
+	width_.set_max_items(12);
+	height_.set_max_items(12);
 
+	box_.set_size(100, 20);  // Prevent assert failures
 	box_.add(&width_);
 	box_.add(&height_);
 	box_.add_space(margin_);
@@ -119,7 +104,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
 
 	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_cancel, this));
 	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_create_map, this));
-	if (UI::g_fh1->fontset()->is_rtl()) {
+	if (UI::g_fh->fontset()->is_rtl()) {
 		button_box_.add(&ok_button_);
 		button_box_.add(&cancel_button_);
 	} else {
@@ -146,8 +131,9 @@ void MainMenuNewMap::clicked_create_map() {
 	parent.cleanup_for_load();
 
 	map->create_empty_map(
-	   egbase.world(), width_.get_value() > 0 ? width_.get_value() : Widelands::kMapDimensions[0],
-	   height_.get_value() > 0 ? height_.get_value() : Widelands::kMapDimensions[0],
+	   egbase.world(),
+	   width_.get_selected() > 0 ? width_.get_selected() : Widelands::kMapDimensions[0],
+	   height_.get_selected() > 0 ? height_.get_selected() : Widelands::kMapDimensions[0],
 	   list_.get_selected(), _("No Name"),
 	   g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")));
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,6 @@
 #include <boost/signals2.hpp>
 
 #include "base/rect.h"
-#include "graphic/graphic.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -31,7 +30,7 @@ namespace UI {
  * This class provides a scrollbar
  */
 struct Scrollbar : public Panel {
-	enum Area { None, Minus, Plus, Knob, MinusPage, PlusPage };
+	enum class Area { None, Minus, Plus, Knob, MinusPage, PlusPage };
 
 	/// default width for vertical scrollbars,
 	/// or height for horizontal scrollbars
@@ -43,7 +42,7 @@ public:
 	          int32_t y,
 	          uint32_t w,
 	          uint32_t h,
-	          const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	          UI::PanelStyle style,
 	          bool horiz = false);
 
 	boost::signals2::signal<void(int32_t)> moved;
@@ -67,6 +66,7 @@ public:
 
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousewheel(uint32_t, int32_t, int32_t y) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 	void set_force_draw(bool const t) {
 		force_draw_ = t;
@@ -91,7 +91,6 @@ private:
 	bool
 	handle_mousemove(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
 
-private:
 	bool horizontal_;
 	bool force_draw_;  // draw this scrollbar, even if it can't do anything
 
@@ -105,10 +104,10 @@ private:
 	uint32_t time_nextact_;
 	int32_t knob_grabdelta_;  ///< only while pressed_ == Knob
 
-	const Image* pic_minus_;  ///< left/up
-	const Image* pic_plus_;   ///< right/down
-	const Image* pic_buttons_;
+	const Image* pic_minus_;                  ///< left/up
+	const Image* pic_plus_;                   ///< right/down
+	const UI::PanelStyleInfo* button_style_;  // Background color and texture. Not owned.
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_SCROLLBAR_H

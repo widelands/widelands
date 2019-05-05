@@ -30,6 +30,8 @@ wl_library(editor
     tools/place_critter_tool.h
     tools/place_immovable_tool.cc
     tools/place_immovable_tool.h
+    tools/resize_tool.cc
+    tools/resize_tool.h
     tools/set_height_tool.cc
     tools/set_height_tool.h
     tools/set_origin_tool.cc
@@ -79,6 +81,8 @@ wl_library(editor
     ui_menus/tool_place_critter_options_menu.h
     ui_menus/tool_place_immovable_options_menu.cc
     ui_menus/tool_place_immovable_options_menu.h
+    ui_menus/tool_resize_options_menu.cc
+    ui_menus/tool_resize_options_menu.h
     ui_menus/tool_set_terrain_options_menu.cc
     ui_menus/tool_set_terrain_options_menu.h
     ui_menus/toolsize_menu.cc
@@ -94,23 +98,27 @@ wl_library(editor
     graphic_fonthandler
     graphic_playercolor
     graphic_surface
+    graphic_text_layout
     io_filesystem
     logic
     logic_constants
     logic_filesystem_constants
+    logic_generic_save_handler
     logic_map
     logic_map_objects
     logic_map_objects_description_maintainer
+    logic_tribe_basic_info
     logic_widelands_geometry
     map_io
     map_io_map_loader
     notifications
+    profile
     random
     scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
     ui_basic
     wui
-    wui_common
+    wui_common_mapdetails
     wui_mapview_pixelfunctions
 )

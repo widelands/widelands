@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,17 +25,15 @@
 
 #include <SDL_keycode.h>
 
-#include "graphic/graphic.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "notifications/notifications.h"
 #include "profile/profile.h"
 #include "sound/note_sound.h"
-#include "sound/sound_handler.h"
 #include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-#include "wui/chatoverlay.h"
+#include "wui/chat_overlay.h"
 #include "wui/debugconsole.h"
 #include "wui/mapview.h"
 #include "wui/minimap.h"
@@ -54,8 +52,6 @@ class UniqueWindowHandler;
  */
 class InteractiveBase : public UI::Panel, public DebugConsole::Handler {
 public:
-	friend class SoundHandler;
-
 	enum {
 		dfShowCensus = 1,      ///< show census report on buildings
 		dfShowStatistics = 2,  ///< show statistics report on buildings
@@ -81,16 +77,19 @@ public:
 	UniqueWindowHandler& unique_windows();
 
 	InteractiveBase(Widelands::EditorGameBase&, Section& global_s);
-	virtual ~InteractiveBase();
+	~InteractiveBase() override;
 
 	Widelands::EditorGameBase& egbase() const {
 		return egbase_;
 	}
 
-	// TODO(sirver): This should be private.
-	bool show_workarea_preview_;
-	void show_work_area(const WorkareaInfo& workarea_info, Widelands::Coords coords);
-	void hide_work_area(const Widelands::Coords& coords);
+	void show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords);
+	void hide_workarea(const Widelands::Coords& coords);
+
+	bool has_expedition_port_space(const Widelands::Coords&) const;
+	std::map<Widelands::Ship*, Widelands::Coords>& get_expedition_port_spaces() {
+		return expedition_port_spaces_;
+	}
 
 	//  point of view for drawing
 	virtual Widelands::Player* get_player() const = 0;
@@ -197,6 +196,24 @@ protected:
 	void mainview_move();
 
 	void draw_overlay(RenderTarget&) override;
+	/**
+	 * Will blit the 'image' on the given 'pos', offset by 'hotspot' and scaled according to the
+	 * given zoom 'scale'.
+	 * */
+	void blit_overlay(RenderTarget* dst,
+	                  const Vector2i& pos,
+	                  const Image* image,
+	                  const Vector2i& hotspot,
+	                  float scale);
+	/**
+	 * Will blit the 'image' on the given 'field', offset by 'hotspot' and scaled according to the
+	 * given zoom 'scale'.
+	 * */
+	void blit_field_overlay(RenderTarget* dst,
+	                        const FieldsToDraw::Field& field,
+	                        const Image* image,
+	                        const Vector2i& hotspot,
+	                        float scale);
 
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
@@ -219,8 +236,7 @@ protected:
 	TextToDraw get_text_to_draw() const;
 
 	// Returns the current overlays for the work area previews.
-	std::map<Widelands::Coords, const Image*>
-	get_work_area_overlays(const Widelands::Map& map) const;
+	Workareas get_workarea_overlays(const Widelands::Map& map) const;
 
 	// Returns the 'BuildhelpOverlay' for 'caps' or nullptr if there is no help
 	// to be displayed on this field.
@@ -230,8 +246,17 @@ protected:
 		return road_building_overlays_;
 	}
 
+	/// Returns true if there is a workarea preview being shown at the given coordinates.
+	/// If 'map' is 0, checks only if the given coords are the center of a workarea;
+	/// otherwise checks if the coords are within any workarea.
+	bool has_workarea_preview(const Widelands::Coords& coords,
+	                          const Widelands::Map* map = nullptr) const;
+
+	/// Returns true if the current player is allowed to hear sounds from map objects on this field
+	virtual bool player_hears_field(const Widelands::Coords& coords) const = 0;
+
 private:
-	int32_t stereo_position(Widelands::Coords position_map);
+	void play_sound_effect(const NoteSound& note) const;
 	void resize_chat_overlay();
 	void roadb_add_overlay();
 	void roadb_remove_overlay();
@@ -260,10 +285,6 @@ private:
 	MapView map_view_;
 	ChatOverlay* chat_overlay_;
 
-	// These get collected by add_toolbar_button
-	// so we can call unassign_toggle_button on them in the destructor.
-	std::vector<UI::UniqueWindow::Registry> registries_;
-
 	UI::Box toolbar_;
 	// No unique_ptr on purpose: 'minimap_' is a UniqueWindow, its parent will
 	// delete it.
@@ -273,13 +294,16 @@ private:
 
 	// The currently enabled work area previews. They are keyed by the
 	// coordinate that the building that shows the work area is positioned.
-	std::map<Widelands::Coords, const WorkareaInfo*> work_area_previews_;
+	std::map<Widelands::Coords, const WorkareaInfo*> workarea_previews_;
+
+	std::map<Widelands::Ship*, Widelands::Coords> expedition_port_spaces_;
 
 	RoadBuildingOverlays road_building_overlays_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;
 	uint32_t lastframe_;        //  system time (milliseconds)
@@ -291,7 +315,6 @@ private:
 
 	UI::UniqueWindow::Registry debugconsole_;
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
-	std::vector<const Image*> workarea_pics_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
 };
 

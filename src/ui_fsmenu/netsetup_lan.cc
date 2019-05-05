@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
               get_h() * 5333 / 10000,
               butw_,
               buth_,
-              g_gr->images().get("images/ui_basic/but1.png"),
+              UI::ButtonStyle::kFsMenuSecondary,
               _("Join this game")),
      hostgame(this,
               "host_game",
@@ -58,7 +58,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
               get_h() * 6083 / 10000,
               butw_,
               buth_,
-              g_gr->images().get("images/ui_basic/but1.png"),
+              UI::ButtonStyle::kFsMenuSecondary,
               _("Host a new game")),
      back(this,
           "back",
@@ -66,7 +66,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
           get_h() * 8333 / 10000,
           butw_,
           buth_,
-          g_gr->images().get("images/ui_basic/but0.png"),
+          UI::ButtonStyle::kFsMenuSecondary,
           _("Back")),
      loadlasthost(this,
                   "load_previous_host",
@@ -74,7 +74,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
                   get_h() * 19 / 40,
                   buth_,
                   buth_,
-                  g_gr->images().get("images/ui_basic/but1.png"),
+                  UI::ButtonStyle::kFsMenuSecondary,
                   g_gr->images().get("images/ui_fsmenu/menu_load_game.png"),
                   _("Load previous host")),
 
@@ -85,7 +85,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
                 butw_,
                 buth_,
                 2,
-                g_gr->images().get("images/ui_basic/but2.png"),
+                UI::PanelStyle::kFsMenu,
                 fs_small()),
      hostname(this,
               get_w() * 16 / 25,
@@ -93,11 +93,16 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
               get_w() * 17 / 80,
               buth_,
               2,
-              g_gr->images().get("images/ui_basic/but2.png"),
+              UI::PanelStyle::kFsMenu,
               fs_small()),
 
      // List
-     opengames(this, get_w() * 3 / 50, get_h() * 3333 / 10000, listw_, get_h() * 5433 / 10000) {
+     opengames(this,
+               get_w() * 3 / 50,
+               get_h() * 3333 / 10000,
+               listw_,
+               get_h() * 5433 / 10000,
+               UI::PanelStyle::kFsMenu) {
 	joingame.sigclicked.connect(
 	   boost::bind(&FullscreenMenuNetSetupLAN::clicked_joingame, boost::ref(*this)));
 	hostgame.sigclicked.connect(
@@ -149,9 +154,9 @@ bool FullscreenMenuNetSetupLAN::get_host_address(NetAddress* addr) {
 	}
 
 	// The user probably entered a hostname on his own. Try to resolve it
-	if (NetAddress::resolve_to_v6(addr, host, WIDELANDS_PORT))
+	if (NetAddress::resolve_to_v6(addr, host, kWidelandsLanPort))
 		return true;
-	if (NetAddress::resolve_to_v4(addr, host, WIDELANDS_PORT))
+	if (NetAddress::resolve_to_v4(addr, host, kWidelandsLanPort))
 		return true;
 	return false;
 }
@@ -178,7 +183,12 @@ void FullscreenMenuNetSetupLAN::game_selected(uint32_t) {
 }
 
 void FullscreenMenuNetSetupLAN::game_doubleclicked(uint32_t) {
-	clicked_joingame();
+	assert(opengames.has_selection());
+	const NetOpenGame* const game = opengames.get_selected();
+	// Only join games that are open
+	if (game->info.state == LAN_GAME_OPEN) {
+		clicked_joingame();
+	}
 }
 
 void FullscreenMenuNetSetupLAN::update_game_info(
@@ -193,11 +203,11 @@ void FullscreenMenuNetSetupLAN::update_game_info(
 	case LAN_GAME_CLOSED:
 		er.set_string(2, _("Closed"));
 		break;
-	/** TRANSLATORS: The state of a LAN game can be open, closed or unknown */
 	default:
+		/** TRANSLATORS: The state of a LAN game can be open, closed or unknown */
 		er.set_string(2, pgettext("game_state", "Unknown"));
 		break;
-	};
+	}
 }
 
 void FullscreenMenuNetSetupLAN::game_opened(const NetOpenGame* game) {

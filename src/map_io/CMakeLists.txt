@@ -14,7 +14,6 @@ wl_library(map_io_map_loader
     io_fileread
     io_filesystem
     logic
-    logic_constants
     logic_filesystem_constants
     logic_map
     logic_map_objects
@@ -90,6 +89,8 @@ wl_library(map_io
     map_terrain_packet.h
     map_version_packet.cc
     map_version_packet.h
+    map_wincondition_packet.cc
+    map_wincondition_packet.h
   DEPENDS
     base_exceptions
     base_log
