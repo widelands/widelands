@@ -373,6 +373,11 @@ void FullscreenMenuLaunchMPG::think() {
 		ctrl_->think();
 	}
 	refresh();
+
+	// unfocus chat window when other UI element has focus
+	if (!chat_->has_focus()) {
+		chat_->unfocus_edit();
+	}
 }
 
 /**

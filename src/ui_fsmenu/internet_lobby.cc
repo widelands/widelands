@@ -194,6 +194,10 @@ void FullscreenMenuInternetLobby::think() {
 	if (InternetGaming::ref().update_for_games()) {
 		fill_games_list(InternetGaming::ref().games());
 	}
+	// unfocus chat window when other UI element has focus
+	if (!chat.has_focus()) {
+		chat.unfocus_edit();
+	}
 }
 
 void FullscreenMenuInternetLobby::clicked_ok() {
@@ -334,6 +338,7 @@ void FullscreenMenuInternetLobby::client_doubleclicked(uint32_t i) {
 
 /// called when an entry of the server list was selected
 void FullscreenMenuInternetLobby::server_selected() {
+	// remove focus from chat
 	if (opengames_list_.has_selection()) {
 		const InternetGame* game = &opengames_list_.get_selected();
 		if (game->connectable)
