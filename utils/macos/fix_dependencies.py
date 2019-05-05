@@ -14,10 +14,8 @@ import shutil
 import subprocess
 import hashlib
 
-
 def hash_file(fn):
-    return hashlib.sha1(open(fn, 'rb').read()).hexdigest()
-
+    return hashlib.sha1(open(fn,'rb').read()).hexdigest()
 
 def get_dependencies(loading_binary):
     out = subprocess.check_output(['/usr/bin/otool', '-L', loading_binary])
@@ -90,7 +88,7 @@ def main():
 
     for binary in to_fix:
         print('Fixing binary: %s' % binary)
-        if binary.endswith('.dylib'):
+        if binary.endswith(".dylib"):
             change_id(binary)
         for (dep_name, dep_path) in all_dependencies.items():
             subprocess.check_call(['/usr/bin/install_name_tool', '-change',
