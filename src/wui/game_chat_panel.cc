@@ -56,7 +56,6 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 
 	set_handle_mouse(true);
 	set_can_focus(true);
-	set_thinks(false);
 
 	chat_message_subscriber_ =
 	   Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recalculate(true); });
