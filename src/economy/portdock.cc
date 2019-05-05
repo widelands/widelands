@@ -383,6 +383,7 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 	for (auto si_it = waiting_.begin(); si_it != waiting_.end(); ++si_it) {
 		if (!si_it->get_destination(game)) {
 			// Invalid destination. Carry the item back into the warehouse
+			// TODO(Nordfriese): This readds the invalid item to the list
 			si_it->set_location(game, warehouse_);
 			si_it->end_shipping(game);
 			si_it = waiting_.erase(si_it);
