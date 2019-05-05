@@ -52,55 +52,50 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
      player_(&economy->owner()),
      tabpanel_(this, UI::TabPanelStyle::kWuiDark),
      ware_panel_(new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWARE,
-     		calc_hgap(player_->tribe().wares_order().size(), 276))),
+     		0 /* calc_hgap(player_->tribe().wares_order().size(), 276) */ )),
      worker_panel_(
         new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWORKER,
-	     		calc_hgap(player_->tribe().workers_order().size(), 276))),
+	     		0 /* calc_hgap(player_->tribe().wares_order().size(), 276) */ )),
      dropdown_box_(this, 0, 0, UI::Box::Horizontal),
-     dropdown_(&dropdown_box_, 0, 0, 140, 200, 34, "", UI::DropdownType::kTextual, UI::PanelStyle::kWui) {
+     dropdown_(&dropdown_box_, 0, 0, 174, 200, 34, "", UI::DropdownType::kTextual, UI::PanelStyle::kWui) {
 	set_center_panel(&main_box_);
 
 	tabpanel_.add("wares", g_gr->images().get(pic_tab_wares), ware_panel_, _("Wares"));
 	tabpanel_.add("workers", g_gr->images().get(pic_tab_workers), worker_panel_, _("Workers"));
 
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	UI::Button* b = new UI::Button(buttons, "decrease_target_fast", 0, 0, 48, 34, UI::ButtonStyle::kWuiSecondary,
-			g_gr->images().get("images/ui_basic/scrollbar_left_fast.png"), _("Decrease target by 10"));
+	UI::Button* b = new UI::Button(buttons, "decrease_target_fast", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
+			g_gr->images().get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease target by 10"));
 	b->sigclicked.connect([this] { change_target(-10); });
 	buttons->add(b);
 	b->set_repeating(true);
 	buttons->add_space(8);
-	b = new UI::Button(buttons, "decrease_target", 0, 0, 48, 34, UI::ButtonStyle::kWuiSecondary,
-			g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Decrease target"));
+	b = new UI::Button(buttons, "decrease_target", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
+			g_gr->images().get("images/ui_basic/scrollbar_down.png"), _("Decrease target"));
 	b->sigclicked.connect([this] { change_target(-1); });
 	buttons->add(b);
 	b->set_repeating(true);
-	buttons->add_space(48);
+	buttons->add_space(24);
 
-	b = new UI::Button(buttons, "increase_target", 0, 0, 48, 34, UI::ButtonStyle::kWuiSecondary,
-			g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Increase target"));
+	b = new UI::Button(buttons, "increase_target", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
+			g_gr->images().get("images/ui_basic/scrollbar_up.png"), _("Increase target"));
 	b->sigclicked.connect([this] { change_target(1); });
 	buttons->add(b);
 	b->set_repeating(true);
 	buttons->add_space(8);
-	b = new UI::Button(buttons, "increase_target_fast", 0, 0, 48, 34, UI::ButtonStyle::kWuiSecondary,
-	                   g_gr->images().get("images/ui_basic/scrollbar_right_fast.png"), _("Increase target by 10"));
+	b = new UI::Button(buttons, "increase_target_fast", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
+	                   g_gr->images().get("images/ui_basic/scrollbar_up_fast.png"), _("Increase target by 10"));
 	b->sigclicked.connect([this] { change_target(10); });
 	buttons->add(b);
 	b->set_repeating(true);
 
-	dropdown_.set_tooltip(_("Profile to apply"));
+	dropdown_.set_tooltip(_("Profile to apply to the selected items"));
 	dropdown_box_.set_size(40, 20);  // Prevent assert failures
 	dropdown_box_.add(&dropdown_, UI::Box::Resizing::kFullSize);
+	dropdown_.selected.connect([this] { reset_target(); });
 
-	b = new UI::Button(&dropdown_box_, "apply_defaults", 0, 0, 60, 34,
-			UI::ButtonStyle::kWuiMenu, _("Apply"), _("Use the chosen profile for the selected items"));
-	b->sigclicked.connect([this] { reset_target(); });
-	dropdown_box_.add_space(8);
-	dropdown_box_.add(b);
-
-	b = new UI::Button(&dropdown_box_, "save_targets", 0, 0, 60, 34,
-			UI::ButtonStyle::kWuiMenu, _("Save…"), _("Save target settings"));
+	b = new UI::Button(&dropdown_box_, "save_targets", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			g_gr->images().get("images/wui/menus/menu_save_game.png"), _("Save target settings"));
 	b->sigclicked.connect([this] { create_target(); });
 	dropdown_box_.add_space(8);
 	dropdown_box_.add(b);
