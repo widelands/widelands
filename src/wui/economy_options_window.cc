@@ -64,27 +64,27 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	tabpanel_.add("workers", g_gr->images().get(pic_tab_workers), worker_panel_, _("Workers"));
 
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	UI::Button* b = new UI::Button(buttons, "decrease_target_fast", 0, 0, 34, 34,
-	                               UI::ButtonStyle::kWuiMenu, "--", _("Decrease target by 10"));
+	UI::Button* b = new UI::Button(buttons, "decrease_target_fast", 0, 0, 48, 34, UI::ButtonStyle::kWuiSecondary,
+			g_gr->images().get("images/ui_basic/scrollbar_left_fast.png"), _("Decrease target by 10"));
 	b->sigclicked.connect([this] { change_target(-10); });
 	buttons->add(b);
 	b->set_repeating(true);
 	buttons->add_space(8);
-	b = new UI::Button(buttons, "decrease_target", 0, 0, 34, 34,
-	                               UI::ButtonStyle::kWuiMenu, "-", _("Decrease target"));
+	b = new UI::Button(buttons, "decrease_target", 0, 0, 48, 34, UI::ButtonStyle::kWuiSecondary,
+			g_gr->images().get("images/ui_basic/scrollbar_left.png"), _("Decrease target"));
 	b->sigclicked.connect([this] { change_target(-1); });
 	buttons->add(b);
 	b->set_repeating(true);
-	buttons->add_space(34);
+	buttons->add_space(48);
 
-	b = new UI::Button(buttons, "increase_target", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "+",
-	                   _("Increase target"));
+	b = new UI::Button(buttons, "increase_target", 0, 0, 48, 34, UI::ButtonStyle::kWuiSecondary,
+			g_gr->images().get("images/ui_basic/scrollbar_right.png"), _("Increase target"));
 	b->sigclicked.connect([this] { change_target(1); });
 	buttons->add(b);
 	b->set_repeating(true);
 	buttons->add_space(8);
-	b = new UI::Button(buttons, "increase_target_fast", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "++",
-	                   _("Increase target by 10"));
+	b = new UI::Button(buttons, "increase_target_fast", 0, 0, 48, 34, UI::ButtonStyle::kWuiSecondary,
+	                   g_gr->images().get("images/ui_basic/scrollbar_right_fast.png"), _("Increase target by 10"));
 	b->sigclicked.connect([this] { change_target(10); });
 	buttons->add(b);
 	b->set_repeating(true);
