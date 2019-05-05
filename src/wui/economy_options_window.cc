@@ -40,7 +40,7 @@ static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
 
 static inline int32_t calc_hgap(int32_t columns, int32_t total_w) {
-	return (total_w - columns * (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X)) / columns;
+	return (total_w - columns * WARE_MENU_PIC_WIDTH - (columns + 1) * WARE_MENU_PIC_PAD_X) / (columns - 1);
 }
 
 EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,

@@ -288,11 +288,11 @@ const Widelands::TribeDescr::WaresOrderCoords& AbstractWaresDisplay::icons_order
 Vector2i AbstractWaresDisplay::ware_position(Widelands::DescriptionIndex id) const {
 	Vector2i p(2, 2);
 	if (horizontal_) {
-		p.x += icons_order_coords()[id].second * (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X + hgap_);
+		p.x += icons_order_coords()[id].second * (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
 		p.y += icons_order_coords()[id].first *
 		       (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + vgap_ + WARE_MENU_INFO_SIZE);
 	} else {
-		p.x += icons_order_coords()[id].first * (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X + hgap_);
+		p.x += icons_order_coords()[id].first * (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
 		p.y += icons_order_coords()[id].second *
 		       (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + vgap_ + WARE_MENU_INFO_SIZE);
 	}
