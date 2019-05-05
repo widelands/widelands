@@ -54,7 +54,9 @@ public:
 	   CLANG_DIAG_OFF("-Wunknown-pragmas") CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
 	      boost::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
 	   CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
-	      CLANG_DIAG_ON("-Wunknown-pragmas") bool horizontal = false);
+	      CLANG_DIAG_ON("-Wunknown-pragmas") bool horizontal = false,
+	   int32_t hgap = 0,
+	   int32_t vgap = 0);
 
 	bool
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
@@ -72,6 +74,19 @@ public:
 	Widelands::DescriptionIndex ware_at_point(int32_t x, int32_t y) const;
 	Widelands::WareWorker get_type() const {
 		return type_;
+	}
+
+	void set_hgap(int32_t gap) {
+		hgap_ = gap;
+	}
+	void set_vgap(int32_t gap) {
+		vgap_ = gap;
+	}
+	int32_t get_hgap() {
+		return hgap_;
+	}
+	int32_t get_vgap() {
+		return vgap_;
 	}
 
 protected:
@@ -110,6 +125,8 @@ private:
 	WareListSelectionType in_selection_;  // Wares in temporary anchored selection
 	bool selectable_;
 	bool horizontal_;
+	int32_t hgap_;
+	int32_t vgap_;
 
 	/**
 	 * The ware on which the mouse press has been performed.

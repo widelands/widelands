@@ -1,6 +1,10 @@
 # Automatically created by Widelands bzr9094[economy-target-profiles] (Debug)
 
-[Efficiency]
+[Default]
+0=_"Efficiency"
+1=_"Stockpile"
+
+[0]
 ax="1"
 ax_battle="0"
 ax_broad="0"
@@ -38,7 +42,7 @@ snack="0"
 barbarians_ox="1"
 barbarians_soldier="10"
 
-[Stockpile]
+[1]
 ax="30"
 ax_battle="1"
 ax_broad="1"

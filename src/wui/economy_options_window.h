@@ -68,7 +68,8 @@ private:
 		                   Widelands::Serial serial,
 		                   Widelands::Player* player,
 		                   Widelands::WareWorker type,
-		                   bool selectable);
+		                   bool selectable,
+		                   int32_t hgap);
 
 		void set_economy(Widelands::Serial serial);
 
@@ -89,7 +90,8 @@ private:
 		                    Widelands::Serial serial,
 		                    Widelands::Player* player,
 		                    bool can_act,
-		                    Widelands::WareWorker type);
+		                    Widelands::WareWorker type,
+		                    int32_t hgap);
 
 		void set_economy(Widelands::Serial serial);
 		void change_target(int amount);

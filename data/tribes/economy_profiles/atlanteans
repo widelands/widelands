@@ -1,6 +1,10 @@
 # Automatically created by Widelands bzr9094[economy-target-profiles] (Debug)
 
-[Efficiency]
+[Default]
+0=_"Efficiency"
+1=_"Stockpile"
+
+[0]
 blackroot_flour="1"
 atlanteans_bread="20"
 bread_paddle="0"
@@ -42,7 +46,7 @@ trident_steel="0"
 atlanteans_horse="1"
 atlanteans_soldier="10"
 
-[Stockpile]
+[1]
 blackroot_flour="20"
 atlanteans_bread="30"
 bread_paddle="1"

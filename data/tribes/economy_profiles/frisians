@@ -1,6 +1,10 @@
 # Automatically created by Widelands bzr9093[economy-target-profiles] (Debug)
 
-[Efficiency]
+[Default]
+0=_"Efficiency"
+1=_"Stockpile"
+
+[0]
 clay="30"
 brick="40"
 bread_frisians="20"
@@ -44,7 +48,7 @@ smoked_meat="10"
 frisians_reindeer="1"
 frisians_soldier="10"
 
-[Stockpile]
+[1]
 clay="35"
 brick="50"
 bread_frisians="30"

@@ -1,6 +1,10 @@
 # Automatically created by Widelands bzr9094[economy-target-profiles] (Debug)
 
-[Efficiency]
+[Default]
+0=_"Efficiency"
+1=_"Stockpile"
+
+[0]
 armor="1"
 armor_chain="1"
 armor_gilded="1"
@@ -42,7 +46,7 @@ wool="10"
 empire_donkey="1"
 empire_soldier="10"
 
-[Stockpile]
+[1]
 armor="1"
 armor_chain="1"
 armor_gilded="1"
