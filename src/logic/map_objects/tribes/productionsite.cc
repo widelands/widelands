@@ -288,10 +288,6 @@ ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
      is_stopped_(false),
      default_anim_("idle") {
 	calc_statistics();
-	// Double-check that the economy demand checks have been processed during postload
-	// NOCOM this fails when loading savegame
-	assert(ps_descr.ware_demand_checks() == nullptr);
-	assert(ps_descr.worker_demand_checks() == nullptr);
 }
 
 ProductionSite::~ProductionSite() {

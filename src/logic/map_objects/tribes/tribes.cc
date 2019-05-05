@@ -358,7 +358,6 @@ void Tribes::postload() {
 /// Register wares and workers that have economy demand checks for a building
 void Tribes::postload_register_economy_demand_checks(BuildingDescr& building_descr, const TribeDescr& tribe_descr)
 {
-	// NOCOM shift this to TribeDescr constructor
 	if (upcast(ProductionSiteDescr, prodsite, &building_descr)) {
 		for (const DescriptionIndex ware_index : *prodsite->ware_demand_checks()) {
 			if (!tribe_descr.has_ware(ware_index)) {
