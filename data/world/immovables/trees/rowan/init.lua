@@ -83,6 +83,7 @@ world:new_immovable_type{
    name = "rowan_summer_old",
    descname = _ "Rowan (Old)",
    species = _ "Rowan",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },
@@ -103,8 +104,7 @@ world:new_immovable_type{
          hotspot = { 23, 59 },
          fps = 10,
          sound_effect = {
-            directory = "sound/animals",
-            name = "bird6",
+            path = "sound/animals/bird6",
          },
       },
    },

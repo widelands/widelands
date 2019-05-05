@@ -25,6 +25,7 @@
 #include <vector>
 
 #include "logic/widelands.h"
+#include "sound/constants.h"
 
 namespace Widelands {
 
@@ -32,7 +33,7 @@ struct MapObjectDescr;
 
 /// Superclass for Worker, immovable and productionsite programs. Includes a program name and diverse parsing convenience functions. The creation and execution of program actions is left to the sub-classes.
 struct MapObjectProgram {
-	std::string name() const;
+	const std::string& name() const;
 
 	explicit MapObjectProgram(const std::string& init_name);
 	virtual ~MapObjectProgram() = default;
@@ -81,8 +82,8 @@ protected:
 
 	/// Sound effect information
 	struct PlaySoundParameters {
-		/// Sound effect string ID
-		std::string name;
+		/// Sound effect ID
+		FxId fx;
 		/// Sound effect priority
 		uint8_t priority = 0;
 	};

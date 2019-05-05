@@ -24,6 +24,7 @@
 
 #include "base/macros.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/map_object_program.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/workarea_info.h"
 #include "logic/map_objects/tribes/worker.h"

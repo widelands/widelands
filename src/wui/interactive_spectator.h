@@ -47,13 +47,14 @@ struct InteractiveSpectator : public InteractiveGameBase {
 	void draw_map_view(MapView* given_map_view, RenderTarget* dst) override;
 
 private:
+	bool player_hears_field(const Widelands::Coords& coords) const override;
+
 	void exit_btn();
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;
 	Widelands::PlayerNumber player_number() const override;
 	void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) override;
 
-private:
 	UI::UniqueWindow::Registry chat_;
 	UI::UniqueWindow::Registry options_;
 };

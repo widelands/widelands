@@ -34,6 +34,8 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "sound/note_sound.h"
+#include "sound/sound_handler.h"
 
 namespace Widelands {
 
@@ -44,13 +46,19 @@ namespace Widelands {
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
-                                       const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, egbase) {
+                                       const Tribes& tribes)
+   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, tribes),
+     creation_fx_(
+        SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE);  // Yep, this is correct.
 }
 
 Building& DismantleSiteDescr::create_object() const {
 	return *new DismantleSite(*this);
+}
+
+FxId DismantleSiteDescr::creation_fx() const {
+	return creation_fx_;
 }
 
 /*
@@ -106,6 +114,9 @@ Initialize the construction site by starting orders
 ===============
 */
 bool DismantleSite::init(EditorGameBase& egbase) {
+	Notifications::publish(
+	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxPriorityAlwaysPlay));
+
 	PartiallyFinishedBuilding::init(egbase);
 
 	for (const auto& ware : count_returned_wares(this)) {
@@ -219,17 +230,18 @@ Draw it.
 void DismantleSite::draw(uint32_t gametime,
                          const TextToDraw draw_text,
                          const Vector2f& point_on_dst,
+                         const Widelands::Coords& coords,
                          float scale,
                          RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
 	// Draw the construction site marker
-	dst->blit_animation(point_on_dst, scale, anim_, tanim, player_color);
+	dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
 
 	// Blit bottom part of the animation according to dismantle progress
-	dst->blit_animation(point_on_dst, scale, building_->get_unoccupied_animation(), tanim,
-	                    player_color, 100 - ((get_built_per64k() * 100) >> 16));
+	dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,
+	                    &player_color, 100 - ((get_built_per64k() * 100) >> 16));
 
 	// Draw help strings
 	draw_info(draw_text, point_on_dst, scale, dst);

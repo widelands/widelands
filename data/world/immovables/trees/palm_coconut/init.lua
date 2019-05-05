@@ -80,6 +80,7 @@ world:new_immovable_type{
    name = "palm_coconut_desert_old",
    descname = _ "Coconut Palm (Old)",
    species = _ "Coconut Palm",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_palm",
    size = "small",
    attributes = { "tree" },
@@ -100,8 +101,7 @@ world:new_immovable_type{
          hotspot = { 24, 59 },
          fps = 10,
          sound_effect = {
-            directory = "sound/animals",
-            name = "bird3",
+            path = "sound/animals/bird3",
          },
       },
    },

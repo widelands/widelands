@@ -88,14 +88,14 @@ void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) con
 }
 
 ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments) {
-	parameters = MapObjectProgram::parse_act_play_sound(arguments, 127);
+	parameters = MapObjectProgram::parse_act_play_sound(arguments, kFxPriorityAllowMultiple - 1);
 }
 
 /** Demand from the g_sound_handler to play a certain sound effect.
  * Whether the effect actually gets played
  * is decided only by the sound server*/
 void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) const {
-	Notifications::publish(NoteSound(parameters.name, immovable.get_position(), parameters.priority));
+	Notifications::publish(NoteSound(SoundType::kAmbient, parameters.fx, immovable.get_position(), parameters.priority));
 	immovable.program_step(game);
 }
 

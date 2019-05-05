@@ -2,13 +2,13 @@
 include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore()
-   -- TRANSLATORS#: Lore helptext for a building
-   return no_lore_text_yet()
+   -- TRANSLATORS: Lore helptext for a building
+   return pgettext("barbarians_building", "‘Miner’s Delight: Pitta bread with fish or meat, comes with one beer.’")
 end
 
 function building_helptext_lore_author()
-   -- TRANSLATORS#: Lore author helptext for a building
-   return no_lore_author_text_yet()
+   -- TRANSLATORS: Lore author helptext for a building
+   return pgettext("barbarians_building", "Chef’s recommendation in ‘The Singing Master Miner’")
 end
 
 function building_helptext_purpose()

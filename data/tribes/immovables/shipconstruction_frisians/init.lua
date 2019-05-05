@@ -7,7 +7,6 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Ship Under Construction"),
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
-   representative_image = dirname .. "build_03.png",
    attributes = { "shipconstruction" },
    programs = {
       program = {
@@ -25,7 +24,8 @@ tribes:new_immovable_type {
       idle = {
          pictures = path.list_files (dirname .. "build_??.png"),
          hotspot = { 75, 141 },
-         fps = 1
+         fps = 1,
+         representative_frame = 3
       },
    }
 }

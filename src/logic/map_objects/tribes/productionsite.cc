@@ -53,7 +53,7 @@ constexpr size_t STATISTICS_VECTOR_LENGTH = 20;
 // Parses the descriptions of the working positions from 'items_table' and
 // fills in 'working_positions'. Throws an error if the table contains invalid
 // values.
-void parse_working_positions(const EditorGameBase& egbase,
+void parse_working_positions(const Tribes& tribes,
                              LuaTable* items_table,
                              BillOfMaterials* working_positions) {
 	for (const std::string& worker_name : items_table->keys<std::string>()) {
@@ -62,8 +62,8 @@ void parse_working_positions(const EditorGameBase& egbase,
 			if (amount < 1 || 255 < amount) {
 				throw wexception("count is out of range 1 .. 255");
 			}
-			DescriptionIndex const woi = egbase.tribes().worker_index(worker_name);
-			if (!egbase.tribes().worker_exists(woi)) {
+			DescriptionIndex const woi = tribes.worker_index(worker_name);
+			if (!tribes.worker_exists(woi)) {
 				throw wexception("invalid");
 			}
 			working_positions->push_back(std::pair<DescriptionIndex, uint32_t>(woi, amount));
@@ -91,8 +91,9 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const std::string& msgctxt,
                                          MapObjectType init_type,
                                          const LuaTable& table,
-                                         const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, init_type, table, egbase),
+										 const Tribes& tribes,
+                                         const World& world)
+   : BuildingDescr(init_descname, init_type, table, tribes),
 	 ware_demand_checks_(new std::set<DescriptionIndex>()),
 	 worker_demand_checks_(new std::set<DescriptionIndex>()),
      out_of_resource_productivity_threshold_(100) {
@@ -123,15 +124,15 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	if (table.has_key("outputs")) {
 		for (const std::string& output : table.get_table("outputs")->array_entries<std::string>()) {
 			try {
-				DescriptionIndex idx = egbase.tribes().ware_index(output);
-				if (egbase.tribes().ware_exists(idx)) {
+				DescriptionIndex idx = tribes.ware_index(output);
+				if (tribes.ware_exists(idx)) {
 					if (output_ware_types_.count(idx)) {
 						throw wexception("this ware type has already been declared as an output");
 					}
 					output_ware_types_.insert(idx);
 				} else {
-					idx = egbase.tribes().worker_index(output);
-					if (egbase.tribes().worker_exists(idx)) {
+					idx = tribes.worker_index(output);
+					if (tribes.worker_exists(idx)) {
 						if (output_worker_types_.count(idx)) {
 							throw wexception("this worker type has already been declared as an output");
 						}
@@ -156,8 +157,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 				if (amount < 1 || 255 < amount) {
 					throw wexception("amount is out of range 1 .. 255");
 				}
-				DescriptionIndex idx = egbase.tribes().ware_index(ware_name);
-				if (egbase.tribes().ware_exists(idx)) {
+				DescriptionIndex idx = tribes.ware_index(ware_name);
+				if (tribes.ware_exists(idx)) {
 					for (const auto& temp_inputs : input_wares()) {
 						if (temp_inputs.first == idx) {
 							throw wexception("duplicated");
@@ -165,8 +166,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 					}
 					input_wares_.push_back(WareAmount(idx, amount));
 				} else {
-					idx = egbase.tribes().worker_index(ware_name);
-					if (egbase.tribes().worker_exists(idx)) {
+					idx = tribes.worker_index(ware_name);
+					if (tribes.worker_exists(idx)) {
 						for (const auto& temp_inputs : input_workers()) {
 							if (temp_inputs.first == idx) {
 								throw wexception("duplicated");
@@ -183,7 +184,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		}
 	}
 
-	parse_working_positions(egbase, table.get_table("working_positions").get(), &working_positions_);
+	parse_working_positions(tribes, table.get_table("working_positions").get(), &working_positions_);
 
 	// Get programs
 	items_table = table.get_table("programs");
@@ -203,8 +204,9 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			if (program_descname == program_descname_unlocalized) {
 				program_descname = pgettext_expr(msgctxt_char, program_descname_unlocalized.c_str());
 			}
-			programs_[program_name] = std::unique_ptr<ProductionProgram>(new ProductionProgram(
-			   program_name, program_descname, program_table->get_table("actions"), egbase, this));
+			programs_[program_name] = std::unique_ptr<ProductionProgram>(
+			   new ProductionProgram(program_name, program_descname,
+			                         program_table->get_table("actions"), tribes, world, this));
 		} catch (const std::exception& e) {
 			throw GameDataError("%s: Error in productionsite program %s: %s", name().c_str(), program_name.c_str(), e.what());
 		}
@@ -212,12 +214,12 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 
 	// Verify that any map resource collected is valid
 	if (!hints().collects_ware_from_map().empty()) {
-		if (!(egbase_.tribes().ware_exists(hints().collects_ware_from_map()))) {
+		if (!(tribes.ware_exists(hints().collects_ware_from_map()))) {
 			throw GameDataError("ai_hints for building %s collects nonexistent ware %s from map",
 			                    name().c_str(), hints().collects_ware_from_map().c_str());
 		}
 		const DescriptionIndex collects_index =
-		   egbase_.tribes().safe_ware_index(hints().collects_ware_from_map());
+		   tribes.safe_ware_index(hints().collects_ware_from_map());
 		if (!is_output_ware_type(collects_index)) {
 			throw GameDataError("ai_hints for building %s collects ware %s from map, but it's not "
 			                    "listed in the building's output",
@@ -229,8 +231,10 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const std::string& msgctxt,
                                          const LuaTable& table,
-                                         const EditorGameBase& egbase)
-   : ProductionSiteDescr(init_descname, msgctxt, MapObjectType::PRODUCTIONSITE, table, egbase) {
+                                         const Tribes& tribes,
+                                         const World& world)
+   : ProductionSiteDescr(
+        init_descname, msgctxt, MapObjectType::PRODUCTIONSITE, table, tribes, world) {
 }
 
 /**
@@ -285,6 +289,7 @@ ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
      default_anim_("idle") {
 	calc_statistics();
 	// Double-check that the economy demand checks have been processed during postload
+	// NOCOM this fails when loading savegame
 	assert(ps_descr.ware_demand_checks() == nullptr);
 	assert(ps_descr.worker_demand_checks() == nullptr);
 }
@@ -701,7 +706,7 @@ void ProductionSite::act(Game& game, uint32_t const data) {
 
 		if (!can_start_working()) {
 			while (!stack_.empty())
-				program_end(game, Failed);
+				program_end(game, ProgramResult::kFailed);
 		} else {
 			if (stack_.empty()) {
 				working_positions_[0].worker->update_task_buildingwork(game);
@@ -710,7 +715,7 @@ void ProductionSite::act(Game& game, uint32_t const data) {
 
 			State& state = top_state();
 			if (state.program->size() <= state.ip)
-				return program_end(game, Completed);
+				return program_end(game, ProgramResult::kCompleted);
 
 			if (anim_ != descr().get_animation(default_anim_)) {
 				// Restart idle animation, which is the default
@@ -739,7 +744,7 @@ void ProductionSite::program_act(Game& game) {
 	// new productions cycle. Otherwise it can lead to consumption
 	// of input wares without producing anything
 	if (is_stopped_ && state.ip == 0) {
-		program_end(game, Failed);
+		program_end(game, ProgramResult::kFailed);
 		program_timer_ = true;
 		program_time_ = schedule_act(game, 20000);
 	} else
@@ -893,7 +898,7 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 /**
  * Advance the program to the next step.
  */
-void ProductionSite::program_step(Game& game, uint32_t const delay, uint32_t const phase) {
+void ProductionSite::program_step(Game& game, uint32_t const delay, ProgramResult const phase) {
 	State& state = top_state();
 	++state.ip;
 	state.phase = phase;
@@ -909,7 +914,7 @@ void ProductionSite::program_start(Game& game, const std::string& program_name) 
 
 	state.program = descr().get_program(program_name);
 	state.ip = 0;
-	state.phase = 0;
+	state.phase = ProgramResult::kNone;
 
 	stack_.push_back(state);
 
@@ -937,17 +942,18 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 	const std::string& program_name = top_state().program->name();
 
 	stack_.pop_back();
-	if (!stack_.empty())
+	if (!stack_.empty()) {
 		top_state().phase = result;
+	}
 
 	switch (result) {
-	case Failed:
+	case ProgramResult::kFailed:
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(false);
 		calc_statistics();
 		crude_percent_ = crude_percent_ * 8 / 10;
 		break;
-	case Completed:
+	case ProgramResult::kCompleted:
 		skipped_programs_.erase(program_name);
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(true);
@@ -955,11 +961,11 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		crude_percent_ = crude_percent_ * 8 / 10 + 1000000 * 2 / 10;
 		calc_statistics();
 		break;
-	case Skipped:
+	case ProgramResult::kSkipped:
 		skipped_programs_[program_name] = game.get_gametime();
 		crude_percent_ = crude_percent_ * 98 / 100;
 		break;
-	case None:
+	case ProgramResult::kNone:
 		skipped_programs_.erase(program_name);
 		break;
 	}

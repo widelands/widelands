@@ -28,7 +28,7 @@ namespace Widelands {
 
 MapObjectProgram::MapObjectProgram(const std::string& init_name) : name_ (init_name) {}
 
-std::string MapObjectProgram::name() const {
+const std::string& MapObjectProgram::name() const {
 	return name_;
 }
 
@@ -112,11 +112,13 @@ MapObjectProgram::PlaySoundParameters MapObjectProgram::parse_act_play_sound(con
 		throw GameDataError("Usage: playsound <sound_dir> <sound_name> [priority]");
 	}
 	PlaySoundParameters result;
-	result.name = arguments.at(0)+ g_fs->file_separator() + arguments.at(1);
+	result.fx = SoundHandler::register_fx(SoundType::kAmbient, arguments.at(0));
 
-	g_sound_handler.load_fx_if_needed(arguments.at(0), arguments.at(1), result.name);
-
-	result.priority = arguments.size() == 3 ? read_positive(arguments.at(2)) : default_priority;
+	result.priority = arguments.size() == 2 ? read_positive(arguments.at(1)) : default_priority;
+	if (result.priority < kFxPriorityLowest) {
+		throw GameDataError("Minmum priority for sounds is %d, but only %d was specified for %s",
+		                    kFxPriorityLowest, result.priority, arguments.at(0).c_str());
+	}
 	return result;
 }
 

@@ -29,11 +29,11 @@
 #include "economy/flag.h"
 #include "economy/input_queue.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/findimmovable.h"
-#include "logic/findnode.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findimmovable.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
@@ -51,7 +51,6 @@
 namespace Widelands {
 
 namespace {
-
 /// If the iterator contents match the string, increment the iterator. Returns whether it matched.
 bool match_and_skip(std::vector<std::string>::const_iterator& it, const std::string& matchme) {
 	bool result = *it == matchme;
@@ -74,7 +73,6 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(const std::str
 		throw GameDataError("Expected ware or worker type but found '%s'", item.c_str());
 	}
 }
-
 }  // namespace
 
 ProductionProgram::Action::~Action() {
@@ -205,7 +203,7 @@ bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate(const ProductionSi
 std::string
 ProductionProgram::ActReturn::EconomyNeedsWare::description(const Tribes& tribes) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware
-	 * ‘%s’*/
+	 * '%s' */
 	std::string result = (boost::format(_("the economy needs the ware ‘%s’")) %
 	                      tribes.get_ware_descr(ware_type)->descname())
 	                        .str();
@@ -213,8 +211,8 @@ ProductionProgram::ActReturn::EconomyNeedsWare::description(const Tribes& tribes
 }
 std::string
 ProductionProgram::ActReturn::EconomyNeedsWare::description_negation(const Tribes& tribes) const {
-	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the
-	 * ware ‘%s’*/
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn't need the
+	 * ware '%s' */
 	std::string result = (boost::format(_("the economy doesn’t need the ware ‘%s’")) %
 	                      tribes.get_ware_descr(ware_type)->descname())
 	                        .str();
@@ -227,7 +225,7 @@ bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate(const Production
 std::string
 ProductionProgram::ActReturn::EconomyNeedsWorker::description(const Tribes& tribes) const {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker
-	 * ‘%s’*/
+	 * '%s' */
 	std::string result = (boost::format(_("the economy needs the worker ‘%s’")) %
 	                      tribes.get_worker_descr(worker_type)->descname())
 	                        .str();
@@ -236,8 +234,8 @@ ProductionProgram::ActReturn::EconomyNeedsWorker::description(const Tribes& trib
 
 std::string
 ProductionProgram::ActReturn::EconomyNeedsWorker::description_negation(const Tribes& tribes) const {
-	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ...*/
-	/** TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’*/
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... */
+	/** TRANSLATORS:      ... because the economy doesn’t need the worker '%s' */
 	std::string result = (boost::format(_("the economy doesn’t need the worker ‘%s’")) %
 	                      tribes.get_worker_descr(worker_type)->descname())
 	                        .str();
@@ -384,13 +382,13 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 	auto begin = arguments.begin();
 
 	if (match_and_skip(begin, "failed")) {
-		result_ = Failed;
+		result_ = ProgramResult::kFailed;
 	} else if (match_and_skip(begin, "completed")) {
-		result_ = Completed;
+		result_ = ProgramResult::kCompleted;
 	} else if (match_and_skip(begin, "skipped")) {
-		result_ = Skipped;
+		result_ = ProgramResult::kSkipped;
 	} else if (match_and_skip(begin, "no_stats")) {
-		result_ = None;
+		result_ = ProgramResult::kNone;
 	} else {
 		throw GameDataError("Usage: return=failed|completed|skipped|no_stats [when|unless <conditions>]");
 	}
@@ -453,23 +451,36 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 		   i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 
 		std::string result_string;
-		if (result_ == Failed) {
-			/** TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’" */
+		switch (result_) {
+		case ProgramResult::kFailed: {
+			/** TRANSLATORS: "Did not start working because the economy needs the ware '%s'" */
 			result_string = (boost::format(_("Did not start %1$s because %2$s")) %
 			                 ps.top_state().program->descname() % condition_string)
 			                   .str();
-		} else if (result_ == Completed) {
-			/** TRANSLATORS: "Completed working because the economy needs the ware ‘%s’" */
+		} break;
+		case ProgramResult::kCompleted: {
+			/** TRANSLATORS: "Completed working because the economy needs the ware '%s'" */
 			result_string = (boost::format(_("Completed %1$s because %2$s")) %
 			                 ps.top_state().program->descname() % condition_string)
 			                   .str();
-		} else {
-			/** TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’" */
+		} break;
+		case ProgramResult::kSkipped: {
+			/** TRANSLATORS: "Skipped working because the economy needs the ware '%s'" */
+			result_string = (boost::format(_("Skipped %1$s because %2$s")) %
+			                 ps.top_state().program->descname() % condition_string)
+			                   .str();
+		} break;
+		case ProgramResult::kNone: {
+			// TODO(GunChleoc): Same as skipped - is this on purpose?
 			result_string = (boost::format(_("Skipped %1$s because %2$s")) %
 			                 ps.top_state().program->descname() % condition_string)
 			                   .str();
 		}
-		ps.set_production_result(result_string);
+		}
+		if (ps.production_result() != ps.descr().out_of_resource_heading() ||
+		    ps.descr().out_of_resource_heading().empty()) {
+			ps.set_production_result(result_string);
+		}
 	}
 	return ps.program_end(game, result_);
 }
@@ -480,9 +491,12 @@ ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments, c
 	}
 
 	//  Initialize with default handling methods.
-	handling_methods_[Failed - 1] = Continue;
-	handling_methods_[Completed - 1] = Continue;
-	handling_methods_[Skipped - 1] = Continue;
+	handling_methods_[program_result_index(ProgramResult::kFailed)] =
+	   ProgramResultHandlingMethod::kContinue;
+	handling_methods_[program_result_index(ProgramResult::kCompleted)] =
+	   ProgramResultHandlingMethod::kContinue;
+	handling_methods_[program_result_index(ProgramResult::kSkipped)] =
+	   ProgramResultHandlingMethod::kContinue;
 
 	// Fetch program to call
 	const std::string& program_name = arguments.front();
@@ -503,11 +517,23 @@ ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments, c
 
 		ProgramResult result_to_set_method_for;
 		if (arguments.at(2) == "failure") {
-			result_to_set_method_for = Failed;
+			if (handling_methods_[program_result_index(ProgramResult::kFailed)] !=
+				ProgramResultHandlingMethod::kContinue) {
+				throw GameDataError("%s handling method already defined", "failure");
+			}
+			result_to_set_method_for = ProgramResult::kFailed;
 		} else if (arguments.at(2) == "completion") {
-			result_to_set_method_for = Completed;
+			if (handling_methods_[program_result_index(ProgramResult::kCompleted)] !=
+				ProgramResultHandlingMethod::kContinue) {
+				throw GameDataError("%s handling method already defined", "completion");
+			}
+			result_to_set_method_for = ProgramResult::kCompleted;
 		} else if (arguments.at(2) == "skip") {
-			result_to_set_method_for = Skipped;
+			if (handling_methods_[program_result_index(ProgramResult::kSkipped)] !=
+				ProgramResultHandlingMethod::kContinue) {
+				throw GameDataError("%s handling method already defined", "skip");
+			}
+			result_to_set_method_for = ProgramResult::kSkipped;
 		} else {
 			throw GameDataError(
 			   "Expected failure|completion|skip after 'on' but found '%s'", arguments.at(2).c_str());
@@ -515,36 +541,36 @@ ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments, c
 
 		ProgramResultHandlingMethod handling_method;
 		if (arguments.at(3) == "fail") {
-			handling_method = Fail;
+			handling_method = ProgramResultHandlingMethod::kFail;
 		} else if (arguments.at(3) == "complete") {
-			handling_method = Complete;
+			handling_method = ProgramResultHandlingMethod::kComplete;
 		} else if (arguments.at(3) == "skip") {
-			handling_method = Skip;
+			handling_method = ProgramResultHandlingMethod::kSkip;
 		} else if (arguments.at(3) == "repeat") {
-			handling_method = Repeat;
+			handling_method = ProgramResultHandlingMethod::kRepeat;
 		} else {
 			throw GameDataError("Expected fail|complete|skip|repeat in final position but found '%s'", arguments.at(3).c_str());
 		}
-		handling_methods_[result_to_set_method_for - 1] = handling_method;
+		handling_methods_[program_result_index(result_to_set_method_for)] = handling_method;
 	}
 }
 
 void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
-	ProgramResult const program_result = static_cast<ProgramResult>(ps.top_state().phase);
+	ProgramResult const program_result = ps.top_state().phase;
 
-	if (program_result == None) {  //  The program has not yet been called.
+	if (program_result == ProgramResult::kNone) {  //  The program has not yet been called.
 		return ps.program_start(game, program_->name());
 	}
 
-	switch (handling_methods_[program_result - 1]) {
-	case Fail:
-	case Complete:
-	case Skip:
-		return ps.program_end(game, None);
-	case Continue:
+	switch (handling_methods_[program_result_index(program_result)]) {
+	case ProgramResultHandlingMethod::kFail:
+	case ProgramResultHandlingMethod::kComplete:
+	case ProgramResultHandlingMethod::kSkip:
+		return ps.program_end(game, ProgramResult::kNone);
+	case ProgramResultHandlingMethod::kContinue:
 		return ps.program_step(game);
-	case Repeat:
-		ps.top_state().phase = None;
+	case ProgramResultHandlingMethod::kRepeat:
+		ps.top_state().phase = ProgramResult::kNone;
 		ps.program_timer_ = true;
 		ps.program_time_ = ps.schedule_act(game, 10);
 		break;
@@ -595,9 +621,9 @@ bool ProductionProgram::ActCallWorker::get_building_work(Game& game,
                                                          ProductionSite& psite,
                                                          Worker& worker) const {
 	ProductionSite::State& state = psite.top_state();
-	if (state.phase == 0) {
+	if (state.phase == ProgramResult::kNone) {
 		worker.start_task_program(game, program());
-		++state.phase;
+		state.phase = ProgramResult::kFailed;
 		return true;
 	} else {
 		psite.program_step(game);
@@ -608,7 +634,7 @@ bool ProductionProgram::ActCallWorker::get_building_work(Game& game,
 void ProductionProgram::ActCallWorker::building_work_failed(Game& game,
                                                             ProductionSite& psite,
                                                             Worker&) const {
-	psite.program_end(game, Failed);
+	psite.program_end(game, ProgramResult::kFailed);
 }
 
 ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments) {
@@ -619,7 +645,7 @@ ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments)
 }
 
 void ProductionProgram::ActSleep::execute(Game& game, ProductionSite& ps) const {
-	return ps.program_step(game, duration_ ? duration_ : ps.top_state().phase);
+	return ps.program_step(game, duration_ ? duration_ : 0, ps.top_state().phase);
 }
 
 ProductionProgram::ActCheckMap::ActCheckMap(const std::vector<std::string>& arguments) {
@@ -636,7 +662,7 @@ void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) con
 			return ps.program_step(game, 0);
 		} else {
 			ps.set_production_result(_("No use for ships on this map!"));
-			return ps.program_end(game, Failed);
+			return ps.program_end(game, ProgramResult::kFailed);
 		}
 	}
 	default:
@@ -650,7 +676,7 @@ ProductionProgram::ActAnimate::ActAnimate(const std::vector<std::string>& argume
 
 void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) const {
 	ps.start_animation(game, parameters.animation);
-	return ps.program_step(game, parameters.duration ? parameters.duration : ps.top_state().phase);
+	return ps.program_step(game, parameters.duration ? parameters.duration : 0, ps.top_state().phase);
 }
 
 ProductionProgram::ActConsume::ActConsume(const std::vector<std::string>& arguments,
@@ -761,8 +787,11 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		    is_missing_string)
 		      .str();
 
-		ps.set_production_result(result_string);
-		return ps.program_end(game, Failed);
+		if (ps.production_result() != ps.descr().out_of_resource_heading() ||
+		    ps.descr().out_of_resource_heading().empty()) {
+			ps.set_production_result(result_string);
+		}
+		return ps.program_end(game, ProgramResult::kFailed);
 	} else {  //  we fulfilled all consumption requirements
 		for (size_t i = 0; i < inputqueues.size(); ++i) {
 			if (uint8_t const q = consumption_quantities[i]) {
@@ -817,7 +846,10 @@ void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) cons
 	   /** TRANSLATORS: %s is a list of wares. String is fetched according to total amount of
 	      wares. */
 	   (boost::format(ngettext("Produced %s", "Produced %s", count)) % ware_list).str();
-	ps.set_production_result(result_string);
+	if (ps.production_result() != ps.descr().out_of_resource_heading() ||
+	    ps.descr().out_of_resource_heading().empty()) {
+		ps.set_production_result(result_string);
+	}
 }
 
 bool ProductionProgram::ActProduce::get_building_work(Game& game,
@@ -945,7 +977,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 	if (digged_percentage < max_) {
 		//  mine can produce normally
 		if (totalres == 0)
-			return ps.program_end(game, Failed);
+			return ps.program_end(game, ProgramResult::kFailed);
 
 		//  second pass through nodes
 		assert(totalchance);
@@ -973,7 +1005,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		}
 
 		if (pick >= 0) {
-			return ps.program_end(game, Failed);
+			return ps.program_end(game, ProgramResult::kFailed);
 		}
 
 	} else {
@@ -996,7 +1028,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 			if (training_ >= game.logic_rand() % 100) {
 				ps.train_workers(game);
 			}
-			return ps.program_end(game, Failed);
+			return ps.program_end(game, ProgramResult::kFailed);
 		}
 	}
 
@@ -1036,7 +1068,7 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
 	if (soldiers.empty()) {
 		ps.set_production_result(_("No soldier to train!"));
-		return ps.program_end(game, Skipped);
+		return ps.program_end(game, ProgramResult::kSkipped);
 	}
 	ps.molog("  Checking soldier (%u) level %d)\n", static_cast<unsigned int>(attribute_),
 	         static_cast<unsigned int>(level_));
@@ -1045,7 +1077,7 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 	for (std::vector<Soldier*>::const_iterator it = soldiers.begin();; ++it) {
 		if (it == soldiers_end) {
 			ps.set_production_result(_("No soldier found for this training level!"));
-			return ps.program_end(game, Skipped);
+			return ps.program_end(game, ProgramResult::kSkipped);
 		}
 		if (attribute_ == TrainingAttribute::kHealth) {
 			if ((*it)->get_health_level() == level_)
@@ -1097,7 +1129,6 @@ ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments)
 
 void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const {
 	const SoldierControl* ctrl = ps.soldier_control();
-	;
 	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
 	std::vector<Soldier*>::const_iterator it = soldiers.begin();
@@ -1108,7 +1139,7 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	for (;; ++it) {
 		if (it == soldiers_end) {
 			ps.set_production_result(_("No soldier found for this training level!"));
-			return ps.program_end(game, Skipped);
+			return ps.program_end(game, ProgramResult::kSkipped);
 		}
 		if (attribute_ == TrainingAttribute::kHealth) {
 			if ((*it)->get_health_level() == level_)
@@ -1142,6 +1173,10 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 		throw wexception("Fail training soldier!!");
 	}
 	ps.molog("  Training done!\n");
+	ps.set_production_result(
+	   /** TRANSLATORS: Success message of a trainingsite '%s' stands for the description of the
+	    * training program, e.g. Completed upgrading soldier evade from level 0 to level 1 */
+	   (boost::format(_("Completed %s")) % ps.top_state().program->descname()).str());
 
 	upcast(TrainingSite, ts, &ps);
 	ts->training_successful(attribute_, level_);
@@ -1150,11 +1185,11 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 }
 
 ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments) {
-	parameters = MapObjectProgram::parse_act_play_sound(arguments, 127);
+	parameters = MapObjectProgram::parse_act_play_sound(arguments, kFxPriorityAllowMultiple - 1);
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
-	Notifications::publish(NoteSound(parameters.name, ps.position_, parameters.priority));
+	Notifications::publish(NoteSound(SoundType::kAmbient, parameters.fx, ps.position_, parameters.priority));
 	return ps.program_step(game);
 }
 
@@ -1197,7 +1232,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	}
 
 	if (available_resource == INVALID_INDEX) {
-		psite.program_end(game, Failed);
+		psite.program_end(game, ProgramResult::kFailed);
 		return;
 	}
 
@@ -1250,14 +1285,14 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	}
 
 	psite.molog("construct: no object or buildable field\n");
-	psite.program_end(game, Failed);
+	psite.program_end(game, ProgramResult::kFailed);
 }
 
 bool ProductionProgram::ActConstruct::get_building_work(Game& game,
                                                         ProductionSite& psite,
                                                         Worker& worker) const {
 	ProductionSite::State& state = psite.top_state();
-	if (state.phase >= 1) {
+	if (state.phase > ProgramResult::kNone) {
 		psite.program_step(game);
 		return false;
 	}
@@ -1270,7 +1305,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 	if (construction) {
 		if (!construction->construct_remaining_buildcost(game, &remaining)) {
 			psite.molog("construct: immovable %u not under construction", construction->serial());
-			psite.program_end(game, Failed);
+			psite.program_end(game, ProgramResult::kFailed);
 			return false;
 		}
 	} else {
@@ -1287,7 +1322,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 	}
 
 	if (!wq) {
-		psite.program_end(game, Failed);
+		psite.program_end(game, ProgramResult::kFailed);
 		return false;
 	}
 
@@ -1303,20 +1338,21 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 	worker.top_state().objvar1 = construction;
 	worker.top_state().coords = state.coord;
 
-	state.phase = 1;
+	state.phase = ProgramResult::kFailed;
 	return true;
 }
 
 void ProductionProgram::ActConstruct::building_work_failed(Game& game,
                                                            ProductionSite& psite,
                                                            Worker&) const {
-	psite.program_end(game, Failed);
+	psite.program_end(game, ProgramResult::kFailed);
 }
 
 ProductionProgram::ProductionProgram(const std::string& init_name,
                                      const std::string& init_descname,
                                      std::unique_ptr<LuaTable> actions_table,
-                                     const EditorGameBase& egbase,
+                                     const Tribes& tribes,
+                                     const World& world,
                                      ProductionSiteDescr* building)
    : MapObjectProgram(init_name), descname_(init_descname) {
 
@@ -1329,7 +1365,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 
 			if (parseinput.name == "return") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActReturn(parseinput.arguments, *building, egbase.tribes())));
+				   new ActReturn(parseinput.arguments, *building, tribes)));
 			} else if (parseinput.name == "call") {
 				actions_.push_back(
 				   std::unique_ptr<ProductionProgram::Action>(new ActCall(parseinput.arguments, *building)));
@@ -1341,19 +1377,19 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				   std::unique_ptr<ProductionProgram::Action>(new ActAnimate(parseinput.arguments, building)));
 			} else if (parseinput.name =="consume") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActConsume(parseinput.arguments, *building, egbase.tribes())));
+				   new ActConsume(parseinput.arguments, *building, tribes)));
 			} else if (parseinput.name == "produce") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActProduce(parseinput.arguments, *building, egbase.tribes())));
+				   new ActProduce(parseinput.arguments, *building, tribes)));
 			} else if (parseinput.name == "recruit") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActRecruit(parseinput.arguments, *building, egbase.tribes())));
+				   new ActRecruit(parseinput.arguments, *building, tribes)));
 			} else if (parseinput.name =="callworker") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActCallWorker(parseinput.arguments, name(), building, egbase.tribes())));
+				   new ActCallWorker(parseinput.arguments, name(), building, tribes)));
 			} else if (parseinput.name == "mine") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActMine(parseinput.arguments, egbase.world(), name(), building)));
+				   new ActMine(parseinput.arguments, world, name(), building)));
 			} else if (parseinput.name == "checksoldier") {
 				actions_.push_back(
 				   std::unique_ptr<ProductionProgram::Action>(new ActCheckSoldier(parseinput.arguments)));

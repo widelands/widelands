@@ -203,6 +203,13 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		host_->set_win_condition_script(wc);
 	}
 
+	void set_peaceful_mode(bool peace) override {
+		host_->set_peaceful_mode(peace);
+	}
+	bool is_peaceful_mode() override {
+		return host_->settings().peaceful;
+	}
+
 private:
 	GameHost* host_;
 	std::vector<std::string> wincondition_scripts_;
@@ -524,7 +531,7 @@ GameHost::GameHost(const std::string& playername, bool internet)
 	hostuser.position = UserSettings::none();
 	hostuser.ready = true;
 	d->settings.users.push_back(hostuser);
-	file_ = nullptr;  //  Initialize as 0 pointer - unfortunately needed in struct.
+	file_.reset(nullptr);  //  Initialize as 0 pointer - unfortunately needed in struct.
 }
 
 GameHost::~GameHost() {
@@ -539,7 +546,6 @@ GameHost::~GameHost() {
 	d->net.reset();
 	d->promoter.reset();
 	delete d;
-	delete file_;
 }
 
 const std::string& GameHost::get_local_playername() const {
@@ -1076,9 +1082,7 @@ void GameHost::set_map(const std::string& mapname,
 		// Read in the file
 		FileRead fr;
 		fr.open(*g_fs, mapfilename);
-		if (file_)
-			delete file_;
-		file_ = new NetTransferFile();
+		file_.reset(new NetTransferFile());
 		file_->filename = mapfilename;
 		uint32_t leftparts = file_->bytes = fr.get_size();
 		while (leftparts > 0) {
@@ -1097,10 +1101,7 @@ void GameHost::set_map(const std::string& mapname,
 		file_->md5sum = md5sum.get_checksum().str();
 	} else {
 		// reset previously offered map / saved game
-		if (file_) {
-			delete file_;
-			file_ = nullptr;
-		}
+		file_.reset(nullptr);
 	}
 
 	packet.reset();
@@ -1365,6 +1366,16 @@ void GameHost::set_win_condition_script(const std::string& wc) {
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_WIN_CONDITION);
 	packet.string(wc);
+	broadcast(packet);
+}
+
+void GameHost::set_peaceful_mode(bool peace) {
+	d->settings.peaceful = peace;
+
+	// Broadcast changes
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_PEACEFUL_MODE);
+	packet.unsigned_8(peace ? 1 : 0);
 	broadcast(packet);
 }
 
@@ -1674,6 +1685,11 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	packet.reset();
 	packet.unsigned_8(NETCMD_WIN_CONDITION);
 	packet.string(d->settings.win_condition_script);
+	d->net->send(client.sock_id, packet);
+
+	packet.reset();
+	packet.unsigned_8(NETCMD_PEACEFUL_MODE);
+	packet.unsigned_8(d->settings.peaceful ? 1 : 0);
 	d->net->send(client.sock_id, packet);
 
 	// Broadcast new information about the player to everybody
@@ -2138,6 +2154,12 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 		break;
 
 	case NETCMD_WIN_CONDITION:
+		if (!d->game) {
+			throw DisconnectException("NO_ACCESS_TO_SERVER");
+		}
+		break;
+
+	case NETCMD_PEACEFUL_MODE:
 		if (!d->game) {
 			throw DisconnectException("NO_ACCESS_TO_SERVER");
 		}

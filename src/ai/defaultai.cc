@@ -35,10 +35,10 @@
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/road.h"
-#include "logic/findbob.h"
-#include "logic/findimmovable.h"
-#include "logic/findnode.h"
 #include "logic/map.h"
+#include "logic/map_objects/findbob.h"
+#include "logic/map_objects/findimmovable.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
@@ -327,7 +327,7 @@ void DefaultAI::think() {
 		case SchedulerTaskId::kRoadCheck:
 			if (check_economies()) {  // is a must
 				return;
-			};
+			}
 			set_taskpool_task_time(gametime + 1000, SchedulerTaskId::kRoadCheck);
 			// testing 5 roads
 			{
@@ -337,7 +337,7 @@ void DefaultAI::think() {
 					if (improve_roads(gametime)) {
 						// if significant change takes place do not go on
 						break;
-					};
+					}
 				}
 			}
 			break;
@@ -380,7 +380,7 @@ void DefaultAI::think() {
 					if (check_productionsites(gametime)) {
 						// if significant change takes place do not go on
 						break;
-					};
+					}
 				}
 			}
 			break;
@@ -413,7 +413,7 @@ void DefaultAI::think() {
 					if (check_mines_(gametime)) {
 						// if significant change takes place do not go on
 						break;
-					};
+					}
 				}
 			}
 			break;
@@ -460,7 +460,7 @@ void DefaultAI::think() {
 					if (get_land_owner(game().map(), coords) == player_number()) {
 						++conquered_wh;
 					}
-				};
+				}
 				if (!basic_economy_established) {
 					assert(!persistent_data->remaining_basic_buildings.empty());
 					log("%2d: Basic economy not achieved, %" PRIuS " building(s) missing, f.e.: %s\n",
@@ -3078,7 +3078,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				    (bf->military_in_constr_nearby + bf->military_unstationed) <
 				       concurent_ms_in_constr_no_enemy) {
 					// it will conquer new buildable spots for buildings or mines
-					;
 				} else if (bf->defense_msite_allowed &&
 				           (bf->military_in_constr_nearby + bf->military_unstationed) <
 				              concurent_ms_in_constr_enemy_nearby) {
@@ -3514,15 +3513,15 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	if (!has_building && flag.nr_of_roads() == 1) {
 		return false;
 	} else if (is_warehouse && flag.nr_of_roads() <= 3) {
-		;
+		// Do nothing
 	} else if (needs_warehouse) {
-		;
+		// Do nothing
 	} else if (flag.current_wares() > 5) {
-		;
+		// Do nothing
 	} else if (has_building && std::rand() % 3 == 0) {
-		;
+		// Do nothing
 	} else if (std::rand() % 10 == 0) {
-		;
+		// Do nothing
 	} else {
 		return false;
 	}
@@ -3753,8 +3752,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		// if we are within grace time, it is OK, just go on
 		if (eco->dismantle_grace_time > gametime &&
 		    eco->dismantle_grace_time != std::numeric_limits<uint32_t>::max()) {
-			;
-
 			// if grace time is not set, this is probably first time without a warehouse and we must
 			// set it
 		} else if (eco->dismantle_grace_time == std::numeric_limits<uint32_t>::max()) {
@@ -5458,10 +5455,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[14] = (bo.current_stats - 50) / 10;
 			inputs[15] = management_data.get_military_number_at(123) / 10;
 			inputs[16] = 0;
-			inputs[17] = (inputs_on_stock) ? 0 : -2;
+			// TODO(GunChleoc): This is overwritten below due to a typo
+			// inputs[17] = (inputs_on_stock) ? 0 : -2;
 			inputs[18] = (suppliers_exist) ? 0 : -3;
-			;
 			inputs[17] = (inputs_on_stock) ? 0 : -4;
+			// Nothing on inputs[19]
 			inputs[20] =
 			   (mines_per_type[bo.mines].in_construction + mines_per_type[bo.mines].finished == 1) ?
 			      3 :
@@ -6060,7 +6058,7 @@ void DefaultAI::lose_immovable(const PlayerImmovable& pi) {
 		// 2. in new flags to be processed yet
 		if (remove_from_dqueue<Widelands::Flag>(new_flags, flag)) {
 			return;
-		};
+		}
 
 		// 3. Or in neither of them
 	} else if (upcast(Road const, road, &pi)) {
@@ -6152,7 +6150,7 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 		// (used when testing possible port location)
 		if (f->nodecaps() & BUILDCAPS_MINE) {
 			mineable_fields_count += 1;
-		};
+		}
 
 		// add neighbours to a queue (duplicates are no problem)
 		// to relieve AI/CPU we skip every second field in each direction

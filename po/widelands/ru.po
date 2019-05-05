@@ -8,7 +8,7 @@
 # Максим Дронь <dronmax@gmail.com>, 2015
 # GunChleoc, 2016,2018
 # George Matsune <georg29387878@gmail.com>, 2017
-# Viktor S <awsswa59@gmail.com>, 2018
+# Viktor S <awsswa59@gmail.com>, 2018-2019
 # Yuriy Sokolov <lention@mail.ru>, 2015,2017
 # Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-03 08:19+0000\n"
-"PO-Revision-Date: 2019-03-03 08:20+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-03-30 06:48+0000\n"
+"Last-Translator: Viktor S <awsswa59@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,7 +81,7 @@ msgstr "%1$s и %2$s"
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1062
+#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1052
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -250,7 +250,7 @@ msgid "Dec"
 msgstr "Дек"
 
 #: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:222
-#: ../../src/logic/game.cc:275
+#: ../../src/logic/game.cc:282
 msgid "Loading tribes"
 msgstr "Загружаем племена"
 
@@ -329,7 +329,7 @@ msgid ""
 msgstr "Не удается загрузить файл «%s». Возможно формат файла несовместим."
 
 #: ../../src/editor/editorinteractive.cc:181 ../../src/logic/game.cc:232
-#: ../../src/logic/game.cc:282
+#: ../../src/logic/game.cc:289
 msgid "Creating players"
 msgstr "Создание игроков"
 
@@ -884,13 +884,13 @@ msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Файл с названием «%s» уже существует. Перезаписать?"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:298
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:340
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:341
 msgid "Error Saving Map!"
 msgstr "Ошибка сохранения карты!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:335
 msgid "Map saved"
-msgstr ""
+msgstr "Карта сохранена"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
 msgid "Enter Directory Name:"
@@ -1131,48 +1131,48 @@ msgstr "Загрузка графики"
 msgid "Not set"
 msgstr "Не заданы"
 
-#: ../../src/logic/game.cc:214 ../../src/logic/game.cc:266
-#: ../../src/logic/game.cc:337 ../../src/logic/game.cc:372
+#: ../../src/logic/game.cc:214 ../../src/logic/game.cc:273
+#: ../../src/logic/game.cc:348 ../../src/logic/game.cc:383
 msgid "Preloading map"
 msgstr "Предзагрузка карты"
 
-#: ../../src/logic/game.cc:220 ../../src/logic/game.cc:272
+#: ../../src/logic/game.cc:220 ../../src/logic/game.cc:279
 msgid "Loading world"
 msgstr "Загрузка мира"
 
-#: ../../src/logic/game.cc:242 ../../src/logic/game.cc:310
+#: ../../src/logic/game.cc:249 ../../src/logic/game.cc:317
 msgid "Loading map…"
 msgstr "Загрузка карты..."
 
-#: ../../src/logic/game.cc:318
+#: ../../src/logic/game.cc:324
 msgid "Initializing game…"
-msgstr ""
+msgstr "Инициализация игры…"
 
-#: ../../src/logic/game.cc:350 ../../src/logic/game.cc:389
+#: ../../src/logic/game.cc:361 ../../src/logic/game.cc:400
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1424
 msgid "Loading…"
 msgstr "Загрузка..."
 
-#: ../../src/logic/game.cc:452
+#: ../../src/logic/game.cc:463
 msgid "Creating player infrastructure"
 msgstr "Создание инфрастуктуры игрока"
 
-#: ../../src/logic/game.cc:463 ../../src/logic/player.cc:222
+#: ../../src/logic/game.cc:474 ../../src/logic/player.cc:222
 msgid "Missing starting position"
 msgstr "Отсутствует стартовая позиция"
 
-#: ../../src/logic/game.cc:464 ../../src/logic/player.cc:223
+#: ../../src/logic/game.cc:475 ../../src/logic/player.cc:223
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Игра не может начаться, так как у игрока %u не выбрана стартовая позиция. Чтобы решить проблему, вы можете вручную добавить стартовую позицию в редакторе Widelands."
 
-#: ../../src/logic/game.cc:854
+#: ../../src/logic/game.cc:865
 msgid "Trade Offer"
 msgstr "Предложение обмена"
 
-#: ../../src/logic/game.cc:856
+#: ../../src/logic/game.cc:867
 msgid "This market has received a new trade offer."
 msgstr "Этот магазин получил новое торговое предложение."
 
@@ -1185,22 +1185,22 @@ msgstr "Эта игра была сохранена, используя стар
 #: ../../src/logic/generic_save_handler.cc:237
 #: ../../src/logic/generic_save_handler.cc:241
 msgid "File successfully saved!"
-msgstr ""
+msgstr "Файл успешно сохранен!"
 
 #: ../../src/logic/generic_save_handler.cc:242
 #, c-format
 msgid "Backup file ‘%s’ could not be deleted."
-msgstr ""
+msgstr "Резервный файл ‘%s’  не может быть удален."
 
 #: ../../src/logic/generic_save_handler.cc:246
 #, c-format
 msgid "Directory ‘%s’ could not be created!"
-msgstr ""
+msgstr "Каталог ‘%s’ не может быть создан!"
 
 #: ../../src/logic/generic_save_handler.cc:250
 #, c-format
 msgid "File ‘%s’ could not be removed!"
-msgstr ""
+msgstr "Файл ‘%s’ не может быть удален!"
 
 #: ../../src/logic/generic_save_handler.cc:252
 msgid "Try saving under a different name!"
@@ -1209,30 +1209,30 @@ msgstr "Попробуйте сохранить под другим именем
 #: ../../src/logic/generic_save_handler.cc:258
 #, c-format
 msgid "Error writing data to file ‘%s’!"
-msgstr ""
+msgstr "Ошибка записи данных в файл ‘%s’!"
 
 #: ../../src/logic/generic_save_handler.cc:265
 msgid "Saved file may be corrupt!"
-msgstr ""
+msgstr "Сохраненный файл может быть поврежден!"
 
 #: ../../src/logic/generic_save_handler.cc:273
 #, c-format
 msgid "File ‘%s’ could not be restored!"
-msgstr ""
+msgstr "Файл ‘%s’ не может быть восстановлен!"
 
 #: ../../src/logic/generic_save_handler.cc:275
 #, c-format
 msgid "Backup file ‘%s’ will be available for some time."
-msgstr ""
+msgstr "Резервный файл ‘%s’ будет доступен в течение некоторого времени."
 
 #: ../../src/logic/generic_save_handler.cc:286
 #, c-format
 msgid "File ‘%s’ was restored from backup."
-msgstr ""
+msgstr "Файл ‘%s’ был восстановлен из резервной копии."
 
 #: ../../src/logic/generic_save_handler.cc:294
 msgid "An unexpected error occurred:"
-msgstr ""
+msgstr "Произошла непредвиденная ошибка:"
 
 #: ../../src/logic/map.h:163
 msgid "No description defined"
@@ -1500,7 +1500,7 @@ msgstr "(остановлено)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../src/logic/map_objects/tribes/productionsite.cc:407
-#: ../../src/wui/building_statistics_menu.cc:683
+#: ../../src/wui/building_statistics_menu.cc:688
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -1708,7 +1708,7 @@ msgstr "непроходимая"
 msgid "This objective has no description."
 msgstr "Эта задача без описания."
 
-#: ../../src/logic/player.cc:1336
+#: ../../src/logic/player.cc:1345
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -3203,7 +3203,7 @@ msgstr "Строится:"
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window - 'Low Productivity <input>%:'
 #: ../../src/wui/building_statistics_menu.cc:78
-#: ../../src/wui/building_statistics_menu.cc:695
+#: ../../src/wui/building_statistics_menu.cc:700
 msgid "Low Productivity"
 msgstr "Производство ниже"
 
@@ -3213,50 +3213,50 @@ msgstr "Производство ниже"
 msgid "%:"
 msgstr "%:"
 
-#: ../../src/wui/building_statistics_menu.cc:145
-#: ../../src/wui/building_statistics_menu.cc:155
-#: ../../src/wui/building_statistics_menu.cc:165
-msgid "Show previous building"
-msgstr "Показать предыдущее здание"
-
 #: ../../src/wui/building_statistics_menu.cc:150
 #: ../../src/wui/building_statistics_menu.cc:160
 #: ../../src/wui/building_statistics_menu.cc:170
+msgid "Show previous building"
+msgstr "Показать предыдущее здание"
+
+#: ../../src/wui/building_statistics_menu.cc:155
+#: ../../src/wui/building_statistics_menu.cc:165
+#: ../../src/wui/building_statistics_menu.cc:175
 msgid "Show next building"
 msgstr "Показать следующее здание"
 
-#: ../../src/wui/building_statistics_menu.cc:303
+#: ../../src/wui/building_statistics_menu.cc:308
 msgid "Small buildings"
 msgstr "Малые здания"
 
-#: ../../src/wui/building_statistics_menu.cc:305
+#: ../../src/wui/building_statistics_menu.cc:310
 msgid "Medium buildings"
 msgstr "Средние здания"
 
-#: ../../src/wui/building_statistics_menu.cc:307
+#: ../../src/wui/building_statistics_menu.cc:312
 msgid "Big buildings"
 msgstr "Большие здания"
 
-#: ../../src/wui/building_statistics_menu.cc:309
+#: ../../src/wui/building_statistics_menu.cc:314
 msgid "Mines"
 msgstr "Шахты"
 
-#: ../../src/wui/building_statistics_menu.cc:311
+#: ../../src/wui/building_statistics_menu.cc:316
 msgid "Ports"
 msgstr "Порты"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../src/wui/building_statistics_menu.cc:713
-#: ../../src/wui/building_statistics_menu.cc:739
-#: ../../src/wui/building_statistics_menu.cc:741
+#: ../../src/wui/building_statistics_menu.cc:718
+#: ../../src/wui/building_statistics_menu.cc:744
+#: ../../src/wui/building_statistics_menu.cc:746
 #: ../../src/wui/productionsitewindow.cc:177
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:727
+#: ../../src/wui/building_statistics_menu.cc:732
 msgid "Lacking Soldiers:"
 msgstr "Недостаточно солдат:"
 
@@ -3300,19 +3300,19 @@ msgstr "Показать окно отладки"
 msgid "Center view on this"
 msgstr "Центрировать вид на это здание"
 
-#: ../../src/wui/buildingwindow.cc:525
+#: ../../src/wui/buildingwindow.cc:528
 msgid "Hide work area"
 msgstr "Скрыть рабочую область"
 
-#: ../../src/wui/buildingwindow.cc:528
+#: ../../src/wui/buildingwindow.cc:531
 msgid "Show work area"
 msgstr "Показать рабочую область"
 
-#: ../../src/wui/buildingwindow.cc:561
+#: ../../src/wui/buildingwindow.cc:564
 msgid "Start an expedition"
 msgstr "Начать экспедицию"
 
-#: ../../src/wui/buildingwindow.cc:565
+#: ../../src/wui/buildingwindow.cc:568
 msgid "Cancel the expedition"
 msgstr "Отменить экспедицию"
 
@@ -3509,7 +3509,7 @@ msgstr "Сохранить игру"
 #: ../../src/wui/game_main_menu_save_game.cc:230
 #: ../../src/wui/game_main_menu_save_game.cc:258
 msgid "Error Saving Game!"
-msgstr ""
+msgstr "Ошибка при сохранении игры!"
 
 #: ../../src/wui/game_message_menu.cc:51
 #: ../../src/wui/game_message_menu.cc:601
@@ -4092,10 +4092,10 @@ msgstr "Не удалось удалить повтор."
 #, c-format
 msgid "%d replay could not be deleted."
 msgid_plural "%d replays could not be deleted."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d повтор не может быть удален."
+msgstr[1] "%d повторы не могут быть удалены."
+msgstr[2] "%d  повторы не могут быть удалены."
+msgstr[3] "%d повторы не могут быть удалены."
 
 #: ../../src/wui/load_or_save_game.cc:325
 msgid "The game could not be deleted."
@@ -4105,10 +4105,10 @@ msgstr "Не удалось удалить игру."
 #, c-format
 msgid "%d game could not be deleted."
 msgid_plural "%d games could not be deleted."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d игра не может быть удалена."
+msgstr[1] "%d игры не могут быть удалены."
+msgstr[2] "%d игры не могут быть удалены."
+msgstr[3] "%d игры не могут быть удалены."
 
 #: ../../src/wui/load_or_save_game.cc:372
 msgid "Filename: Map name (start of replay)"

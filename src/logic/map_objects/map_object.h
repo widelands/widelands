@@ -137,9 +137,6 @@ struct MapObjectDescr {
 	/// Returns the image for the first frame of the idle animation if the MapObject has animations,
 	/// nullptr otherwise
 	const Image* representative_image(const RGBColor* player_color = nullptr) const;
-	/// Returns the image fileneme for first frame of the idle animation if the MapObject has
-	/// animations, is empty otherwise
-	const std::string& representative_image_filename() const;
 
 	/// Returns the menu image if the MapObject has one, nullptr otherwise
 	const Image* icon() const;
@@ -174,8 +171,7 @@ private:
 	Anims anims_;
 	static uint32_t dyn_attribhigh_;  ///< highest attribute ID used
 	static AttribMap dyn_attribs_;
-	std::string representative_image_filename_;  // Image for big represenations, e.g. on buttons
-	std::string icon_filename_;                  // Filename for the menu icon
+	std::string icon_filename_;  // Filename for the menu icon
 
 	DISALLOW_COPY_AND_ASSIGN(MapObjectDescr);
 };

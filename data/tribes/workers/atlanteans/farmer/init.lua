@@ -51,7 +51,7 @@ tribes:new_worker_type {
       harvest = {
          "findobject=attrib:ripe_corn radius:2",
          "walk=object",
-         "playsound=sound/farm scythe 220",
+         "playsound=sound/farm/scythe 220",
          "animate=harvesting 10000",
          "callobject=harvest",
          "animate=gathering 4000",

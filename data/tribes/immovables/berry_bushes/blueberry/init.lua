@@ -9,6 +9,9 @@ terrain_affinity = {
    pickiness = 15,             -- Lower means it is less picky, i.e. it can deal better.
 }
 
+animations = {}
+add_animation(animations, "idle", dirname, "tiny/idle", { 6, 7 })
+
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_blueberry_tiny",
@@ -24,14 +27,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_blueberry_small",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "tiny/idle_?.png"),
-         hotspot = {6, 7},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname, "small/idle", { 12, 13 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -48,14 +48,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_blueberry_medium",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "small/idle_?.png"),
-         hotspot = {12, 13},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname, "medium/idle", { 15, 16 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -72,14 +69,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_blueberry_ripe",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "medium/idle_?.png"),
-         hotspot = {15, 16},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname, "ripe/idle", { 15, 16 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -98,11 +92,5 @@ tribes:new_immovable_type {
          "remove=",
       }
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "ripe/idle_?.png"),
-         hotspot = {15, 16},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }
