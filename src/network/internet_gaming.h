@@ -177,7 +177,7 @@ struct InternetGaming : public ChatProvider {
 	bool has_been_set() const override {
 		return true;
 	}
-	
+
 	void format_and_add_chat(const std::string& from,
 	                         const std::string& to,
 	                         bool system,
