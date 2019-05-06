@@ -54,6 +54,7 @@ struct GameChatPanel : public UI::Panel {
 		editbox.set_text(text);
 	}
 
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	void focus_edit();
 	void unfocus_edit();
 
