@@ -40,7 +40,7 @@ static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
 
 static inline int32_t calc_hgap(int32_t columns, int32_t total_w) {
-	return (total_w - columns * WARE_MENU_PIC_WIDTH - (columns + 1) * WARE_MENU_PIC_PAD_X) / (columns - 1);
+	return (total_w - columns * kWareMenuPicWidth) / (columns - 1);
 }
 
 EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
@@ -51,11 +51,9 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
      serial_(economy->serial()),
      player_(&economy->owner()),
      tabpanel_(this, UI::TabPanelStyle::kWuiDark),
-     ware_panel_(new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWARE,
-     		0 /* calc_hgap(player_->tribe().wares_order().size(), 276) */ )),
+     ware_panel_(new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWARE, 276)),
      worker_panel_(
-        new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWORKER,
-	     		0 /* calc_hgap(player_->tribe().wares_order().size(), 276) */ )),
+        new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWORKER, 276)),
      dropdown_box_(this, 0, 0, UI::Box::Horizontal),
      dropdown_(&dropdown_box_, 0, 0, 174, 200, 34, "", UI::DropdownType::kTextual, UI::PanelStyle::kWui) {
 	set_center_panel(&main_box_);
@@ -149,9 +147,8 @@ EconomyOptionsWindow::TargetWaresDisplay::TargetWaresDisplay(UI::Panel* const pa
                                                              Widelands::Serial serial,
                                                              Widelands::Player* player,
                                                              Widelands::WareWorker type,
-                                                             bool selectable,
-                                                             int32_t const hgap)
-   : AbstractWaresDisplay(parent, x, y, player->tribe(), type, selectable, 0, false, hgap, 0),
+                                                             bool selectable)
+   : AbstractWaresDisplay(parent, x, y, player->tribe(), type, selectable),
      serial_(serial),
      player_(player) {
 	const Widelands::TribeDescr& owner_tribe = player->tribe();
@@ -197,15 +194,20 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
                                                                Widelands::Player* player,
                                                                bool can_act,
                                                                Widelands::WareWorker type,
-                                                               int32_t hgap)
+                                                               int32_t min_w)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      serial_(serial),
      player_(player),
      type_(type),
      can_act_(can_act),
-     display_(this, 0, 0, serial_, player_, type_, can_act_, hgap),
+     display_(this, 0, 0, serial_, player_, type_, can_act_),
      economy_options_window_(eco_window) {
 	add(&display_, UI::Box::Resizing::kFullSize);
+
+	const int32_t hgap = calc_hgap(display_.get_extent().w, min_w);
+	if (hgap > 0) {
+		display_.set_hgap(hgap);
+	}
 
 	if (!can_act_) {
 		return;

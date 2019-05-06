@@ -43,6 +43,7 @@ wl_library(wui_economy_options
     economy
     graphic
     logic
+    logic_filesystem_constants
     notifications
     profile
     ui_basic

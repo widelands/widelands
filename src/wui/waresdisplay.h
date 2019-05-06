@@ -20,6 +20,7 @@
 #ifndef WL_WUI_WARESDISPLAY_H
 #define WL_WUI_WARESDISPLAY_H
 
+#include <memory>
 #include <vector>
 
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -35,6 +36,8 @@ namespace Widelands {
 class TribeDescr;
 struct WareList;
 }  // namespace Widelands
+
+using WaresOrderCoords = std::map<Widelands::DescriptionIndex, Widelands::Coords>;
 
 /**
  * Display wares or workers together with some string (typically a number)
@@ -55,8 +58,8 @@ public:
 	      boost::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
 	   CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 	      CLANG_DIAG_ON("-Wunknown-pragmas") bool horizontal = false,
-	   int32_t hgap = 0,
-	   int32_t vgap = 0);
+	   int32_t hgap = 3,
+	   int32_t vgap = 4);
 
 	bool
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
@@ -76,18 +79,18 @@ public:
 		return type_;
 	}
 
-	void set_hgap(int32_t gap) {
-		hgap_ = gap;
-	}
-	void set_vgap(int32_t gap) {
-		vgap_ = gap;
-	}
 	int32_t get_hgap() {
 		return hgap_;
 	}
 	int32_t get_vgap() {
 		return vgap_;
 	}
+	void set_hgap(int32_t);
+	void set_vgap(int32_t);
+
+	Widelands::Extent get_extent() const;
+
+	const WaresOrderCoords& icons_order_coords() const;
 
 protected:
 	void layout() override;
@@ -97,7 +100,6 @@ protected:
 	virtual RGBColor info_color_for_ware(Widelands::DescriptionIndex);
 
 	const Widelands::TribeDescr::WaresOrder& icons_order() const;
-	const Widelands::TribeDescr::WaresOrderCoords& icons_order_coords() const;
 	virtual Vector2i ware_position(Widelands::DescriptionIndex) const;
 	void draw(RenderTarget&) override;
 	virtual void draw_ware(RenderTarget&, Widelands::DescriptionIndex);
@@ -128,12 +130,19 @@ private:
 	int32_t hgap_;
 	int32_t vgap_;
 
+	WaresOrderCoords order_coords_;
+
+	void relayout_icons_order_coords();
+	void recalc_desired_size(bool);
+
 	/**
 	 * The ware on which the mouse press has been performed.
 	 * It is not selected directly, but will be on mouse release.
 	 */
 	Widelands::DescriptionIndex selection_anchor_;
 	boost::function<void(Widelands::DescriptionIndex, bool)> callback_function_;
+
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>> graphic_resolution_changed_subscriber_;
 };
 
 /*

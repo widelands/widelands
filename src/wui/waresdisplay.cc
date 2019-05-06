@@ -35,8 +35,9 @@
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
+#include "ui_basic/window.h"
 
-const int WARE_MENU_INFO_SIZE = 12;
+constexpr int kWareMenuInfoSize = 12;
 
 AbstractWaresDisplay::AbstractWaresDisplay(
    UI::Panel* const parent,
@@ -71,22 +72,65 @@ AbstractWaresDisplay::AbstractWaresDisplay(
 
 	curware_.set_text(_("Stock"));
 
-	// Find out geometry from icons_order
-	unsigned int columns = icons_order().size();
-	unsigned int rows = 0;
-	for (unsigned int i = 0; i < icons_order().size(); i++)
-		if (icons_order()[i].size() > rows)
-			rows = icons_order()[i].size();
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+		[this](const GraphicResolutionChanged&) {
+			recalc_desired_size(true);
+		});
+
+	recalc_desired_size(false);
+}
+
+Widelands::Extent AbstractWaresDisplay::get_extent() const {
+	int16_t columns = 0;
+	int16_t rows = 0;
+	for (const auto& pair : icons_order_coords()) {
+		columns = std::max(columns, pair.second.x);
+		rows = std::max(rows, pair.second.y);
+	}
+	// We cound from 0 up
+	++columns;
+	++rows;
+
 	if (horizontal_) {
-		unsigned int s = columns;
+		const int16_t s = columns;
 		columns = rows;
 		rows = s;
 	}
+	return Widelands::Extent(columns, rows);
+}
+
+void AbstractWaresDisplay::set_hgap(int32_t gap) {
+	hgap_ = gap;
+	recalc_desired_size(true);
+}
+
+void AbstractWaresDisplay::set_vgap(int32_t gap) {
+	vgap_ = gap;
+	recalc_desired_size(true);
+}
+
+void AbstractWaresDisplay::recalc_desired_size(bool relayout) {
+	relayout_icons_order_coords();
+
+	// Find out geometry from icons_order
+	const Widelands::Extent size = get_extent();
 
 	// 25 is height of curware_ text
 	set_desired_size(
-	   columns * (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X + hgap_) + 1,
-	   rows * (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y + vgap_) + 1 + 25);
+	   size.w * (kWareMenuPicWidth + hgap_) + 1,
+	   size.h * (kWareMenuPicHeight + kWareMenuInfoSize + vgap_) + 1 + 25);
+
+	if (relayout) {
+		// Since we are usually stacked deep within other panels, we need to tell our highest parent window to relayout
+		UI::Panel* p = this;
+		while (p->get_parent()) {
+			p = p->get_parent();
+			if (dynamic_cast<UI::Window*>(p)) {
+				p->layout();
+				return;
+			}
+		}
+	}
 }
 
 bool AbstractWaresDisplay::handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t, int32_t) {
@@ -169,8 +213,8 @@ Widelands::DescriptionIndex AbstractWaresDisplay::ware_at_point(int32_t x, int32
 	if (x < 0 || y < 0)
 		return Widelands::INVALID_INDEX;
 
-	unsigned int i = x / (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X + hgap_);
-	unsigned int j = y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y + vgap_);
+	unsigned int i = x / (kWareMenuPicWidth + hgap_);
+	unsigned int j = y / (kWareMenuPicHeight + kWareMenuInfoSize + vgap_);
 	if (horizontal_) {
 		unsigned int s = i;
 		i = j;
@@ -203,15 +247,13 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y) {
 	Vector2i anchor_pos = ware_position(selection_anchor_);
 	// Add an offset to make sure the anchor line and column will be
 	// selected when selecting in topleft direction
-	int32_t anchor_x = anchor_pos.x + WARE_MENU_PIC_WIDTH / 2;
-	int32_t anchor_y = anchor_pos.y + WARE_MENU_PIC_HEIGHT / 2;
+	int32_t anchor_x = anchor_pos.x + kWareMenuPicWidth / 2;
+	int32_t anchor_y = anchor_pos.y + kWareMenuPicHeight / 2;
 
-	unsigned int left_ware_idx = anchor_x / (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X + hgap_);
-	unsigned int top_ware_idx =
-	   anchor_y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y + vgap_);
-	unsigned int right_ware_idx = x / (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X + hgap_);
-	unsigned int bottoware_idx_ =
-	   y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y + vgap_);
+	unsigned int left_ware_idx = anchor_x / (kWareMenuPicWidth + hgap_);
+	unsigned int top_ware_idx = anchor_y / (kWareMenuPicHeight + kWareMenuInfoSize + vgap_);
+	unsigned int right_ware_idx = x / (kWareMenuPicWidth + hgap_);
+	unsigned int bottoware_idx_ = y / (kWareMenuPicHeight + kWareMenuInfoSize + vgap_);
 	unsigned int tmp;
 
 	// Reverse col/row and anchor/endpoint if needed
@@ -275,29 +317,44 @@ const Widelands::TribeDescr::WaresOrder& AbstractWaresDisplay::icons_order() con
 	NEVER_HERE();
 }
 
-const Widelands::TribeDescr::WaresOrderCoords& AbstractWaresDisplay::icons_order_coords() const {
-	switch (type_) {
-	case Widelands::wwWARE:
-		return tribe_.wares_order_coords();
-	case Widelands::wwWORKER:
-		return tribe_.workers_order_coords();
+const WaresOrderCoords& AbstractWaresDisplay::icons_order_coords() const {
+	assert(!order_coords_.empty());
+	return order_coords_;
+}
+
+void AbstractWaresDisplay::relayout_icons_order_coords() {
+	order_coords_.clear();
+	const int column_number = icons_order().size();
+	const int column_max_size = (g_gr->get_yres() - 290) / (kWareMenuPicHeight + vgap_ + kWareMenuInfoSize);
+
+	int16_t column_index_to_apply = 0;
+	for (int16_t column_index = 0; column_index < column_number; ++column_index) {
+		const std::vector<Widelands::DescriptionIndex>& column = icons_order().at(column_index);
+		const int row_number = column.size();
+		int16_t row_index_to_apply = 0;
+		for (int16_t row_index = 0; row_index < row_number; ++row_index) {
+			order_coords_.emplace(column.at(row_index), Widelands::Coords(column_index_to_apply, row_index_to_apply));
+			++row_index_to_apply;
+			if (row_index_to_apply > column_max_size) {
+				row_index_to_apply = 0;
+				++column_index_to_apply;
+			}
+		}
+		if (row_index_to_apply > 0) {
+			++column_index_to_apply;
+		}
 	}
-	NEVER_HERE();
 }
 
 Vector2i AbstractWaresDisplay::ware_position(Widelands::DescriptionIndex id) const {
 	Vector2i p(2, 2);
 	if (horizontal_) {
-		p.x += icons_order_coords()[id].second * (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
-		p.y += icons_order_coords()[id].first *
-		       (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + vgap_ + WARE_MENU_INFO_SIZE);
+		p.x += icons_order_coords().at(id).y * (kWareMenuPicWidth + hgap_);
+		p.y += icons_order_coords().at(id).x * (kWareMenuPicHeight + vgap_ + kWareMenuInfoSize);
 	} else {
-		p.x += icons_order_coords()[id].first * (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
-		p.y += icons_order_coords()[id].second *
-		       (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + vgap_ + WARE_MENU_INFO_SIZE);
+		p.x += icons_order_coords().at(id).x * (kWareMenuPicWidth + hgap_);
+		p.y += icons_order_coords().at(id).y * (kWareMenuPicHeight + vgap_ + kWareMenuInfoSize);
 	}
-	p.x += hgap_ * icons_order_coords()[id].first;
-	p.y += vgap_ * icons_order_coords()[id].second;
 	return p;
 }
 
@@ -332,15 +389,15 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 	const Image* icon = type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(id)->icon() :
 	                                                   tribe_.get_ware_descr(id)->icon();
 
-	dst.blit(p + Vector2i((w - WARE_MENU_PIC_WIDTH) / 2, 1), icon);
+	dst.blit(p + Vector2i((w - kWareMenuPicWidth) / 2, 1), icon);
 
-	dst.fill_rect(Recti(p + Vector2i(0, WARE_MENU_PIC_HEIGHT), w, WARE_MENU_INFO_SIZE),
+	dst.fill_rect(Recti(p + Vector2i(0, kWareMenuPicHeight), w, kWareMenuInfoSize),
 	              info_color_for_ware(id));
 
 	std::shared_ptr<const UI::RenderedText> rendered_text =
 	   UI::g_fh->render(as_waresinfo(info_for_ware(id)));
 	rendered_text->draw(dst, Vector2i(p.x + w - rendered_text->width() - 1,
-	                                  p.y + WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 -
+	                                  p.y + kWareMenuPicHeight + kWareMenuInfoSize + 1 -
 	                                     rendered_text->height()));
 }
 
