@@ -15,6 +15,8 @@ wl_library(map_io_map_loader
     io_filesystem
     logic
     logic_filesystem_constants
+    logic_map
+    logic_map_objects
     map_io
     scripting_lua_interface
 )
@@ -107,7 +109,10 @@ wl_library(map_io
     logic
     logic_constants
     logic_exceptions
+    logic_map
+    logic_map_objects
     logic_widelands_geometry
+    logic_widelands_geometry_io
     profile
     scripting_logic
 )

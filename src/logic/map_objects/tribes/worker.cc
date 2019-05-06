@@ -39,13 +39,13 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_incorporate.h"
-#include "logic/findbob.h"
-#include "logic/findimmovable.h"
-#include "logic/findnode.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findbob.h"
+#include "logic/map_objects/findimmovable.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/terrain_affinity.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
@@ -973,12 +973,10 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 
 		// Geologist also sends a message notifying the player
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
-			const int width = g_gr->images().get(rdescr->representative_image())->width();
 			const std::string message =
-			   (boost::format("<div padding_r=10><p><img width=%d src=%s></p></div>"
+			   (boost::format("<div padding_r=10><p><img object=%s></p></div>"
 			                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-			    width % ri.descr().representative_image_filename() % UI_FONT_SIZE_MESSAGE %
-			    _("A geologist found resources."))
+			    ri.descr().name() % UI_FONT_SIZE_MESSAGE % _("A geologist found resources."))
 			      .str();
 
 			//  We should add a message to the player's message queue - but only,

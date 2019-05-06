@@ -45,9 +45,7 @@ class DismantleSite;
 
 class DismantleSiteDescr : public BuildingDescr {
 public:
-	DismantleSiteDescr(const std::string& init_descname,
-	                   const LuaTable& t,
-	                   const EditorGameBase& egbase);
+	DismantleSiteDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
 	~DismantleSiteDescr() override {
 	}
 

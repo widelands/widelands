@@ -36,13 +36,13 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
-#include "logic/findbob.h"
-#include "logic/findimmovable.h"
-#include "logic/findnode.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findbob.h"
+#include "logic/map_objects/findimmovable.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/militarysite.h"
@@ -63,8 +63,8 @@ constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 
 SoldierDescr::SoldierDescr(const std::string& init_descname,
                            const LuaTable& table,
-                           const EditorGameBase& egbase)
-   : WorkerDescr(init_descname, MapObjectType::SOLDIER, table, egbase),
+                           const Tribes& tribes)
+   : WorkerDescr(init_descname, MapObjectType::SOLDIER, table, tribes),
      health_(table.get_table("health")),
      attack_(table.get_table("attack")),
      defense_(table.get_table("defense")),

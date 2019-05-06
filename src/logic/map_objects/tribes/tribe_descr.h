@@ -26,8 +26,6 @@
 
 #include "base/macros.h"
 #include "graphic/animation.h"
-#include "logic/description_maintainer.h"
-#include "logic/editor_game_base.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/road_textures.h"
@@ -36,10 +34,10 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 
-class EditorGameBase;
 class ResourceDescription;
 class WareDescr;
 class Warehouse;

@@ -36,7 +36,6 @@
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/map_objects/tribes/workarea_info.h"
 #include "logic/message.h"
-#include "logic/widelands.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_table.h"
 
@@ -66,7 +65,7 @@ public:
 	BuildingDescr(const std::string& init_descname,
 	              MapObjectType type,
 	              const LuaTable& t,
-	              const EditorGameBase& egbase);
+	              const Tribes& tribes);
 	~BuildingDescr() override {
 	}
 
@@ -172,9 +171,9 @@ public:
 protected:
 	virtual Building& create_object() const = 0;
 	Building& create_constructionsite() const;
-	const EditorGameBase& egbase_;
 
 private:
+	const Tribes& tribes_;
 	const bool buildable_;          // the player can build this himself
 	const bool can_be_dismantled_;  // the player can dismantle this building
 	const bool destructible_;       // the player can destruct this himself

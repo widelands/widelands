@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_FINDNODE_H
-#define WL_LOGIC_FINDNODE_H
+#ifndef WL_LOGIC_MAP_OBJECTS_FINDNODE_H
+#define WL_LOGIC_MAP_OBJECTS_FINDNODE_H
 
 #include <vector>
 
