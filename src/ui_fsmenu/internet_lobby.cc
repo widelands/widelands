@@ -217,6 +217,7 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 	opengames_list_.clear();
 	hostgame_.set_enabled(true);
 	edit_servername_.set_tooltip("");
+	edit_servername_.set_warning(false);
 	joingame_.set_enabled(false);
 	std::string localservername = edit_servername_.text();
 	std::string localbuildid = build_id();
@@ -240,6 +241,7 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 			// than one server with the same name.
 			if (game.name == localservername) {
 				hostgame_.set_enabled(false);
+				edit_servername_.set_warning(true);
             edit_servername_.set_tooltip(
                (boost::format("%s%s%s%s%s%s%s%s") % _("The game ") % "<font bold=yes color="
                % UI_FONT_CLR_WARNING.hex_value() % ">" % game.name % "</font>"
@@ -359,6 +361,7 @@ void FullscreenMenuInternetLobby::change_servername() {
 	// Allow client to enter a servername manually
 	hostgame_.set_enabled(true);
 	edit_servername_.set_tooltip("");
+	edit_servername_.set_warning(false);
 	// Check whether a server of that name is already open.
 	// And disable 'hostgame' button if yes.
 	const std::vector<InternetGame>* games = InternetGaming::ref().games();
@@ -366,6 +369,7 @@ void FullscreenMenuInternetLobby::change_servername() {
 		for (const InternetGame& game : *games) {
 			if (game.name == edit_servername_.text()) {
 				hostgame_.set_enabled(false);
+				edit_servername_.set_warning(true);
 				edit_servername_.set_tooltip(
 				   (boost::format("%s%s%s%s%s%s%s%s") % _("The game ") % "<font bold=yes color="
 					% UI_FONT_CLR_WARNING.hex_value() % ">" % game.name % "</font>"
