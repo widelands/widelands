@@ -39,6 +39,8 @@
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
 
+constexpr int kDesiredWidth = 216;
+
 static inline int32_t calc_hgap(int32_t columns, int32_t total_w) {
 	return (total_w - columns * kWareMenuPicWidth) / (columns - 1);
 }
@@ -51,9 +53,9 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
      serial_(economy->serial()),
      player_(&economy->owner()),
      tabpanel_(this, UI::TabPanelStyle::kWuiDark),
-     ware_panel_(new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWARE, 276)),
+     ware_panel_(new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWARE, kDesiredWidth)),
      worker_panel_(
-        new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWORKER, 276)),
+        new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWORKER, kDesiredWidth)),
      dropdown_box_(this, 0, 0, UI::Box::Horizontal),
      dropdown_(&dropdown_box_, 0, 0, 174, 200, 34, "", UI::DropdownType::kTextual, UI::PanelStyle::kWui) {
 	set_center_panel(&main_box_);
@@ -141,6 +143,20 @@ void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
 	}
 }
 
+void EconomyOptionsWindow::layout() {
+	int w, h;
+	tabpanel_.get_desired_size(&w, &h);
+	main_box_.set_desired_size(w, h + 78);
+	update_desired_size();
+	UI::Window::layout();
+}
+
+void EconomyOptionsWindow::EconomyOptionsPanel::update_desired_size() {
+	display_.set_hgap(std::max(3, calc_hgap(display_.get_extent().w, kDesiredWidth)));
+	Box::update_desired_size();
+	get_parent()->layout();
+}
+
 EconomyOptionsWindow::TargetWaresDisplay::TargetWaresDisplay(UI::Panel* const parent,
                                                              int32_t const x,
                                                              int32_t const y,
@@ -204,10 +220,7 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
      economy_options_window_(eco_window) {
 	add(&display_, UI::Box::Resizing::kFullSize);
 
-	const int32_t hgap = calc_hgap(display_.get_extent().w, min_w);
-	if (hgap > 0) {
-		display_.set_hgap(hgap);
-	}
+	display_.set_hgap(std::max(3, calc_hgap(display_.get_extent().w, min_w)));
 
 	if (!can_act_) {
 		return;

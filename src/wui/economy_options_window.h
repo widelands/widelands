@@ -60,6 +60,8 @@ struct EconomyOptionsWindow : public UI::Window {
 	void change_target(int amount);
 	void reset_target();
 
+	void layout() override;
+
 private:
 	struct TargetWaresDisplay : public AbstractWaresDisplay {
 		TargetWaresDisplay(UI::Panel* const parent,
@@ -95,6 +97,7 @@ private:
 		void set_economy(Widelands::Serial serial);
 		void change_target(int amount);
 		void reset_target();
+		void update_desired_size() override;
 
 	private:
 		Widelands::Serial serial_;

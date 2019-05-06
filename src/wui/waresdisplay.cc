@@ -210,21 +210,33 @@ bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y
  * DescriptionIndex::null() if the given point is outside the range.
  */
 Widelands::DescriptionIndex AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) const {
-	if (x < 0 || y < 0)
-		return Widelands::INVALID_INDEX;
+	// Graphical offset
+	x -= 2;
+	y -= 2;
 
-	unsigned int i = x / (kWareMenuPicWidth + hgap_);
-	unsigned int j = y / (kWareMenuPicHeight + kWareMenuInfoSize + vgap_);
+	if (x < 0 || y < 0) {
+		return Widelands::INVALID_INDEX;
+	}
+
+	int i = x / (kWareMenuPicWidth + hgap_);
+	int j = y / (kWareMenuPicHeight + kWareMenuInfoSize + vgap_);
+	if (kWareMenuPicWidth * (i + 1) + hgap_ * i < x ||
+			(kWareMenuPicHeight + kWareMenuInfoSize) * (j + 1) + vgap_ * j < y) {
+		// Not on the ware, but on the space between
+		return Widelands::INVALID_INDEX;
+	}
 	if (horizontal_) {
-		unsigned int s = i;
+		int s = i;
 		i = j;
 		j = s;
 	}
-	if (i < icons_order().size() && j < icons_order()[i].size()) {
-		const Widelands::DescriptionIndex& ware = icons_order()[i][j];
-		assert(hidden_.count(ware) == 1);
-		if (!(hidden_.find(ware)->second)) {
-			return ware;
+	for (const auto& pair : icons_order_coords()) {
+		if (pair.second.x == i && pair.second.y == j) {
+			assert(hidden_.count(pair.first) == 1);
+			if (!(hidden_.find(pair.first)->second)) {
+				return pair.first;
+			}
+			break;
 		}
 	}
 
