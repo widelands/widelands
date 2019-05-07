@@ -821,10 +821,11 @@ void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 
 void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
-                                       uint32_t const num_soldiers) {
+                                       const std::vector<Serial>& soldiers) {
 	if (1 < player(who_attacks)
-	           .vision(Map::get_index(flag.get_building()->get_position(), map().get_width())))
-		send_player_command(*new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, num_soldiers));
+	           .vision(Map::get_index(flag.get_building()->get_position(), map().get_width()))) {
+		send_player_command(*new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
+	}
 }
 
 void Game::send_player_ship_scouting_direction(Ship& ship, WalkingDir direction) {
