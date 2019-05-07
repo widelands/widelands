@@ -17,7 +17,7 @@
  *
  */
 
-#include "logic/findbob.h"
+#include "logic/map_objects/findbob.h"
 
 #include "base/macros.h"
 #include "logic/map_objects/tribes/soldier.h"
