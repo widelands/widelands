@@ -26,7 +26,7 @@
 #include "ui_basic/messagebox.h"
 
 LoginBox::LoginBox(Panel& parent)
-   : Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login")) {
+   : Window(&parent, "login_box", 0, 0, 500, 260, _("Metaserver login")) {
 	center_to_parent();
 
 	int32_t margin = 10;
@@ -36,23 +36,21 @@ LoginBox::LoginBox(Panel& parent)
 	eb_nickname = new UI::EditBox(this, 150, margin, 330, 20, 2, UI::PanelStyle::kWui);
 	eb_password = new UI::EditBox(this, 150, 40, 330, 20, 2, UI::PanelStyle::kWui);
 
-	pwd_warning =
-	   new UI::MultilineTextarea(this, margin, 65, 505, 50, UI::PanelStyle::kWui,
-	                             _("WARNING: Password will be shown and saved readable!"));
-
-	cb_register = new UI::Checkbox(this, Vector2i(margin, 110), _("Log in to a registered account"),
+	cb_register = new UI::Checkbox(this, Vector2i(margin, 70), _("Log in to a registered account"),
 	                               "", get_inner_w() - 2 * margin);
-	cb_auto_log = new UI::Checkbox(this, Vector2i(margin, 135),
-	                               _("Automatically use this login information from now on."), "",
-	                               get_inner_w() - 2 * margin);
+	register_account = new UI::MultilineTextarea(this, margin, 105, 470, 140, UI::PanelStyle::kWui,
+			_("To register an account, please visit our website: \n\n"
+				"https://widelands.org/accounts/register/ \n\n"
+				"Login to your newly created account and set an \n"
+				"online gaming password on your profile page."));
 
-	UI::Button* loginbtn = new UI::Button(
+	loginbtn = new UI::Button(
 	   this, "login",
 	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 :
 	                                   (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
 	   get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kWuiPrimary, _("Login"));
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
-	UI::Button* cancelbtn = new UI::Button(
+	cancelbtn = new UI::Button(
 	   this, "cancel",
 	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
 	                                   (get_inner_w() / 2 - 200) / 2,
@@ -65,30 +63,15 @@ LoginBox::LoginBox(Panel& parent)
 	eb_nickname->focus();
 }
 
+/// think function of the UI (main loop)
+void LoginBox::think() {
+	verify_input();
+}
+
 /**
  * called, if "login" is pressed.
  */
 void LoginBox::clicked_ok() {
-	// Check if all needed input fields are valid
-	if (eb_nickname->text().empty()) {
-		UI::WLMessageBox mb(
-		   this, _("Empty Nickname"), _("Please enter a nickname!"), UI::WLMessageBox::MBoxType::kOk);
-		mb.run<UI::Panel::Returncodes>();
-		return;
-	}
-	if (eb_nickname->text().find(' ') <= eb_nickname->text().size()) {
-		UI::WLMessageBox mb(this, _("Space in Nickname"),
-		                    _("Sorry, but spaces are not allowed in nicknames!"),
-		                    UI::WLMessageBox::MBoxType::kOk);
-		mb.run<UI::Panel::Returncodes>();
-		return;
-	}
-	if (eb_password->text().empty() && cb_register->get_state()) {
-		UI::WLMessageBox mb(this, _("Empty Password"), _("Please enter your password!"),
-		                    UI::WLMessageBox::MBoxType::kOk);
-		mb.run<UI::Panel::Returncodes>();
-		return;
-	}
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 }
 
@@ -112,4 +95,33 @@ bool LoginBox::handle_key(bool down, SDL_Keysym code) {
 		}
 	}
 	return UI::Panel::handle_key(down, code);
+}
+
+void LoginBox::verify_input() {
+	// Check if all needed input fields are valid
+	loginbtn->set_enabled(true);
+	eb_nickname->set_tooltip("");
+	eb_password->set_tooltip("");
+	eb_nickname->set_warning(false);
+	eb_password->set_warning(false);
+
+	if (eb_nickname->text().empty()) {
+		eb_nickname->set_warning(true);
+		eb_nickname->set_tooltip(_("Please enter a nickname!"));
+		loginbtn->set_enabled(false);
+	}
+
+	if (eb_nickname->text().find_first_not_of("abcdefghijklmnopqrstuvwxyz"
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= eb_nickname->text().size()) {
+			eb_nickname->set_warning(true);
+			eb_nickname->set_tooltip(_("Enter a valid nickname. This value may contain only "
+													  "English letters, numbers, and @ . + - _ characters."));
+			loginbtn->set_enabled(false);
+
+		}
+	if (eb_password->text().empty() && cb_register->get_state()) {
+			eb_password->set_warning(true);
+			eb_password->set_tooltip(_("Please enter your password!"));
+			loginbtn->set_enabled(false);
+		}
 }

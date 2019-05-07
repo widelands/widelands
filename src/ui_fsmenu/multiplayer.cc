@@ -117,7 +117,7 @@ void FullscreenMenuMultiPlayer::internet_login() {
 			register_ = lb.registered();
 
 			s.set_bool("registered", lb.registered());
-			s.set_bool("auto_log", lb.set_automaticlog());
+			//s.set_bool("auto_log", lb.set_automaticlog());
 		} else {
 			return;
 		}
