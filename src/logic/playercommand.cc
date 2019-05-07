@@ -1626,7 +1626,7 @@ void CmdEnemyFlagAction::serialize(StreamWrite& ser) {
 	ser.unsigned_8(1);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(sender());
-	ser.unsigned_8(soldiers.size());
+	ser.unsigned_32(soldiers.size());
 	for (Serial s : soldiers) {
 		ser.unsigned_32(s);
 	}
