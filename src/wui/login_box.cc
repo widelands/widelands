@@ -38,10 +38,11 @@ LoginBox::LoginBox(Panel& parent)
 
 	cb_register = new UI::Checkbox(this, Vector2i(margin, 70), _("Log in to a registered account"),
 	                               "", get_inner_w() - 2 * margin);
+
 	register_account = new UI::MultilineTextarea(this, margin, 105, 470, 140, UI::PanelStyle::kWui,
 			_("To register an account, please visit our website: \n\n"
 				"https://widelands.org/accounts/register/ \n\n"
-				"Login to your newly created account and set an \n"
+				"Log in to your newly created account and set an \n"
 				"online gaming password on your profile page."));
 
 	loginbtn = new UI::Button(
@@ -49,17 +50,26 @@ LoginBox::LoginBox(Panel& parent)
 	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 :
 	                                   (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
 	   get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kWuiPrimary, _("Login"));
-	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
+
 	cancelbtn = new UI::Button(
 	   this, "cancel",
 	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
 	                                   (get_inner_w() / 2 - 200) / 2,
 	   loginbtn->get_y(), 200, 20, UI::ButtonStyle::kWuiSecondary, _("Cancel"));
+
+	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
 	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
 
 	Section& s = g_options.pull_section("global");
 	eb_nickname->set_text(s.get_string("nickname", _("nobody")));
 	cb_register->set_state(s.get_bool("registered", false));
+
+	if (registered()) {
+		eb_password->set_text("*****");
+	} else {
+		eb_password->set_can_focus(false);
+	}
+
 	eb_nickname->focus();
 }
 
@@ -118,10 +128,17 @@ void LoginBox::verify_input() {
 													  "English letters, numbers, and @ . + - _ characters."));
 			loginbtn->set_enabled(false);
 
-		}
+	}
+
 	if (eb_password->text().empty() && cb_register->get_state()) {
-			eb_password->set_warning(true);
-			eb_password->set_tooltip(_("Please enter your password!"));
-			loginbtn->set_enabled(false);
-		}
+		eb_password->set_warning(true);
+		eb_password->set_tooltip(_("Please enter your password!"));
+		eb_password->focus();
+		loginbtn->set_enabled(false);
+	}
+
+	if (!eb_password->text().empty() && !cb_register->get_state()) {
+		eb_password->set_text("");
+		eb_password->set_can_focus(false);
+	}
 }
