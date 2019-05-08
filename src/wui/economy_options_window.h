@@ -48,8 +48,8 @@ struct EconomyOptionsWindow : public UI::Window {
 	void create_target();
 	void do_create_target(const std::string&);
 	void save_targets();
-	void read_targets(const std::string& = kDefaultEconomyProfile);
-	void update_profiles(const std::string&);
+	void read_targets();
+	void update_profiles();
 	std::map<std::string, PredefinedTargets>& get_predefined_targets() {
 		return predefined_targets_;
 	}
@@ -122,6 +122,11 @@ private:
 	std::map<std::string, PredefinedTargets> predefined_targets_;
 	UI::Box dropdown_box_;
 	UI::Dropdown<std::string> dropdown_;
+
+	std::string applicable_target();
+	std::set<std::string> last_added_to_dropdown_;
+	void think() override;
+	uint32_t time_last_thought_;
 };
 
 #endif  // end of include guard: WL_WUI_ECONOMY_OPTIONS_WINDOW_H

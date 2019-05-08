@@ -57,7 +57,8 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
      worker_panel_(
         new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWORKER, kDesiredWidth)),
      dropdown_box_(this, 0, 0, UI::Box::Horizontal),
-     dropdown_(&dropdown_box_, 0, 0, 174, 200, 34, "", UI::DropdownType::kTextual, UI::PanelStyle::kWui) {
+     dropdown_(&dropdown_box_, 0, 0, 174, 200, 34, "", UI::DropdownType::kTextual, UI::PanelStyle::kWui),
+     time_last_thought_(0) {
 	set_center_panel(&main_box_);
 
 	tabpanel_.add("wares", g_gr->images().get(pic_tab_wares), ware_panel_, _("Wares"));
@@ -241,6 +242,9 @@ void EconomyOptionsWindow::change_target(int amount) {
 }
 
 void EconomyOptionsWindow::reset_target() {
+	if (dropdown_.get_selected().empty()) {
+		return;
+	}
 	if (tabpanel_.active() == 0) {
 		ware_panel_->reset_target();
 	} else {
@@ -287,8 +291,14 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 	const bool is_wares = type_ == Widelands::wwWARE;
 	const auto& items = is_wares ? player_->tribe().wares() : player_->tribe().workers();
 	const PredefinedTargets settings = economy_options_window_->get_selected_target();
+
+	bool anything_selected = false;
+	bool second_phase = false;
+
+run_second_phase:
 	for (const Widelands::DescriptionIndex& index : items) {
-		if (display_.ware_selected(index)) {
+		if (display_.ware_selected(index) || (second_phase && !display_.is_ware_hidden(index))) {
+			anything_selected = true;
 			if (is_wares) {
 				game.send_player_command(*new Widelands::CmdSetWareTargetQuantity(
 						game.get_gametime(), player_->player_number(), serial_, index, settings.wares.at(index)));
@@ -298,12 +308,92 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 			}
 		}
 	}
+
+	if (!second_phase && !anything_selected) {
+		// Nothing was selected, now go through the loop again and change everything
+		second_phase = true;
+		goto run_second_phase;
+	}
 }
 
-void EconomyOptionsWindow::update_profiles(const std::string& select) {
-	dropdown_.clear();
+constexpr unsigned kThinkInterval = 200;
+
+void EconomyOptionsWindow::think() {
+	const uint32_t time = player_->egbase().get_gametime();
+	if (time - time_last_thought_ < kThinkInterval) {
+		return;
+	}
+	time_last_thought_ = time;
+	update_profiles();
+}
+
+std::string EconomyOptionsWindow::applicable_target() {
+	const Widelands::Economy* eco = player_->get_economy(serial_);
 	for (const auto& pair : predefined_targets_) {
-		dropdown_.add(_(pair.first), pair.first, nullptr, pair.first == select);
+		bool matches = true;
+		if (tabpanel_.active() == 0) {
+			for (const Widelands::DescriptionIndex& index : player_->tribe().wares()) {
+				const auto it = pair.second.wares.find(index);
+				if (it != pair.second.wares.end() && eco->ware_target_quantity(index).permanent != it->second) {
+					matches = false;
+					break;
+				}
+			}
+		} else {
+			for (const Widelands::DescriptionIndex& index : player_->tribe().workers()) {
+				const auto it = pair.second.workers.find(index);
+				if (it != pair.second.workers.end() && eco->worker_target_quantity(index).permanent != it->second) {
+					matches = false;
+					break;
+				}
+			}
+		}
+		if (matches) {
+			return pair.first;
+		}
+	}
+	return "";
+}
+
+void EconomyOptionsWindow::update_profiles() {
+	const std::string current_profile = applicable_target();
+
+	for (const auto& pair : predefined_targets_) {
+		if (last_added_to_dropdown_.count(pair.first) == 0) {
+			goto update_needed;
+		}
+	}
+	for (const auto& string : last_added_to_dropdown_) {
+		if (!string.empty() && predefined_targets_.find(string) == predefined_targets_.end()) {
+			goto update_needed;
+		}
+	}
+	if (last_added_to_dropdown_.count("") == (current_profile.empty() ? 0 : 1)) {
+		goto update_needed;
+	}
+	goto do_select;
+
+update_needed:
+	dropdown_.clear();
+	last_added_to_dropdown_.clear();
+	for (const auto& pair : predefined_targets_) {
+		dropdown_.add(_(pair.first), pair.first);
+		last_added_to_dropdown_.insert(pair.first);
+	}
+
+	if (current_profile.empty()) {
+		// Nothing selected
+		dropdown_.add("", "");
+		last_added_to_dropdown_.insert("");
+	}
+
+do_select:
+	if (dropdown_.is_expanded()) {
+		return;
+	}
+	const std::string select = _(current_profile);
+	if (!dropdown_.has_selection() || dropdown_.get_selected() != select) {
+		dropdown_.select(select);
 	}
 }
 
@@ -382,6 +472,7 @@ struct SaveProfileWindow : public UI::Window {
 			}
 		}
 		economy_options_->save_targets();
+		economy_options_->update_profiles();
 		update_table();
 	}
 
@@ -459,7 +550,7 @@ void EconomyOptionsWindow::do_create_target(const std::string& name) {
 	predefined_targets_[name] = t;
 
 	save_targets();
-	update_profiles(name);
+	update_profiles();
 }
 
 void EconomyOptionsWindow::save_targets() {
@@ -495,7 +586,7 @@ void EconomyOptionsWindow::save_targets() {
 	profile.write(complete_filename.c_str(), false);
 }
 
-void EconomyOptionsWindow::read_targets(const std::string& select) {
+void EconomyOptionsWindow::read_targets() {
 	predefined_targets_.clear();
 	const Widelands::Tribes& tribes = player_->egbase().tribes();
 	const Widelands::TribeDescr& tribe = player_->tribe();
@@ -546,5 +637,5 @@ void EconomyOptionsWindow::read_targets(const std::string& select) {
 		}
 	}
 
-	update_profiles(select);
+	update_profiles();
 }

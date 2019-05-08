@@ -73,6 +73,7 @@ public:
 
 	// Wares may be hidden
 	void hide_ware(Widelands::DescriptionIndex);
+	bool is_ware_hidden(Widelands::DescriptionIndex) const;
 
 	Widelands::DescriptionIndex ware_at_point(int32_t x, int32_t y) const;
 	Widelands::WareWorker get_type() const {
@@ -91,6 +92,8 @@ public:
 	Widelands::Extent get_extent() const;
 
 	const WaresOrderCoords& icons_order_coords() const;
+	Widelands::DescriptionIndex ware_at_coords(int16_t x, int16_t y) const;
+	uint16_t column_length(int16_t) const;
 
 protected:
 	void layout() override;

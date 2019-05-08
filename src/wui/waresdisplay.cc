@@ -243,6 +243,25 @@ Widelands::DescriptionIndex AbstractWaresDisplay::ware_at_point(int32_t x, int32
 	return Widelands::INVALID_INDEX;
 }
 
+Widelands::DescriptionIndex AbstractWaresDisplay::ware_at_coords(int16_t x, int16_t y) const {
+	for (const auto& pair : icons_order_coords()) {
+		if (pair.second.x == x && pair.second.y == y) {
+			return pair.first;
+		}
+	}
+	return Widelands::INVALID_INDEX;
+}
+
+uint16_t AbstractWaresDisplay::column_length(int16_t x) const {
+	uint16_t l = 0;
+	for (const auto& pair : icons_order_coords()) {
+		if (pair.second.x == x) {
+			l = std::max(l, static_cast<uint16_t>(pair.second.y + 1));
+		}
+	}
+	return l;
+}
+
 // Update the anchored selection. An anchor has been created by mouse
 // press. Mouse move call this function with the current mouse position.
 // This function will temporary store all wares in the rectangle between anchor
@@ -289,10 +308,10 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y) {
 	}
 
 	for (unsigned int cur_ware_x = left_ware_idx; cur_ware_x <= right_ware_idx; cur_ware_x++) {
-		if (cur_ware_x < icons_order().size()) {
+		if (cur_ware_x < icons_order_coords().size()) {
 			for (unsigned cur_ware_y = top_ware_idx; cur_ware_y <= bottoware_idx_; cur_ware_y++) {
-				if (cur_ware_y < icons_order()[cur_ware_x].size()) {
-					Widelands::DescriptionIndex ware = icons_order()[cur_ware_x][cur_ware_y];
+				if (cur_ware_y < static_cast<unsigned>(column_length(cur_ware_x))) {
+					Widelands::DescriptionIndex ware = ware_at_coords(cur_ware_x, cur_ware_y);
 					if (!hidden_[ware]) {
 						in_selection_[ware] = true;
 					}
@@ -441,6 +460,10 @@ void AbstractWaresDisplay::hide_ware(Widelands::DescriptionIndex ware) {
 	if (hidden_[ware])
 		return;
 	hidden_[ware] = true;
+}
+
+bool AbstractWaresDisplay::is_ware_hidden(Widelands::DescriptionIndex ware) const {
+	return hidden_.at(ware);
 }
 
 WaresDisplay::WaresDisplay(UI::Panel* const parent,
