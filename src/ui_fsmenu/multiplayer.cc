@@ -116,11 +116,11 @@ void FullscreenMenuMultiPlayer::show_internet_login() {
 void FullscreenMenuMultiPlayer::internet_login() {
 	Section& s = g_options.pull_section("global");
 
-	nickname_ = s.get_string("nickname", _("nobody"));
+	nickname_ = s.get_string("nickname", _(" "));
 	password_ = s.get_string("password_sha1", "nobody");
 	register_ = s.get_bool("registered", false);
 
-	if (nickname_ == "nobody") {
+	if (nickname_ == " ") {
 		show_internet_login();
 		return;
 	}
