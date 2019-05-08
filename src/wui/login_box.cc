@@ -59,6 +59,7 @@ LoginBox::LoginBox(Panel& parent)
 
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
 	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
+	eb_nickname->changed.connect(boost::bind(&LoginBox::change_playername, this));
 
 	Section& s = g_options.pull_section("global");
 	eb_nickname->set_text(s.get_string("nickname", _("nobody")));
@@ -88,6 +89,11 @@ void LoginBox::clicked_ok() {
 /// Called if "cancel" was pressed
 void LoginBox::clicked_back() {
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+}
+
+/// Calles when nickname was changed
+void LoginBox::change_playername() {
+	cb_register->set_state(false);
 }
 
 bool LoginBox::handle_key(bool down, SDL_Keysym code) {
@@ -142,7 +148,7 @@ void LoginBox::verify_input() {
 		eb_password->set_can_focus(false);
 	}
 
-	if (eb_password->has_focus() && eb_password->text() == "*****"){
+	if (eb_password->has_focus() && eb_password->text() == "*****") {
 		eb_password->set_text("");
 	}
 }

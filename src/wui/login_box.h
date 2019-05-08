@@ -49,6 +49,7 @@ struct LoginBox : public UI::Window {
 private:
 	void clicked_back();
 	void clicked_ok();
+	void change_playername();
 
 	UI::Button* loginbtn;
 	UI::Button* cancelbtn;
