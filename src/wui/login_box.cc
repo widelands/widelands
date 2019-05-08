@@ -141,4 +141,8 @@ void LoginBox::verify_input() {
 		eb_password->set_text("");
 		eb_password->set_can_focus(false);
 	}
+
+	if (eb_password->has_focus() && eb_password->text() == "*****"){
+		eb_password->set_text("");
+	}
 }
