@@ -120,7 +120,8 @@ void FullscreenMenuMultiPlayer::internet_login() {
 	password_ = s.get_string("password_sha1", "nobody");
 	register_ = s.get_bool("registered", false);
 
-	if (nickname_ == " ") {
+	if (nickname_ == " " || nickname_.find_first_not_of("abcdefghijklmnopqrstuvwxyz"
+			"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= nickname_.size()) {
 		show_internet_login();
 		return;
 	}
