@@ -205,9 +205,11 @@ void AttackBox::init() {
 	   columnbox, 100, 10, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));
 
 	attacking_soldiers_.reset(new ListOfSoldiers(&mainbox, this, 0, 0, 30, 30,
-			_("Remove this soldier from the list of attackers<br>Hold down Ctrl to remove all soldiers from the list")));
+			(boost::format("%s<br>%s") % _("Remove this soldier from the list of attackers") %
+					_("Hold down Ctrl to remove all soldiers from the list")).str()));
 	remaining_soldiers_.reset(new ListOfSoldiers(&mainbox, this, 0, 0, 30, 30,
-			_("Add this soldier to the list of attackers<br>Hold down Ctrl to add all soldiers to the list")));
+			(boost::format("%s<br>%s") % _("Add this soldier to the list of attackers") %
+					_("Hold down Ctrl to add all soldiers to the list")).str()));
 	attacking_soldiers_->set_complement(remaining_soldiers_.get());
 	remaining_soldiers_->set_complement(attacking_soldiers_.get());
 
