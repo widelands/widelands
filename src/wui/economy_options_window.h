@@ -28,7 +28,10 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "notifications/notifications.h"
 #include "ui_basic/box.h"
+#include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/table.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
 #include "wui/waresdisplay.h"
@@ -37,7 +40,7 @@ const std::string kDefaultEconomyProfile = "Default";
 
 struct EconomyOptionsWindow : public UI::Window {
 	EconomyOptionsWindow(UI::Panel* parent, Widelands::Economy* economy, bool can_act);
-	~EconomyOptionsWindow();
+	~EconomyOptionsWindow() override;
 
 	struct PredefinedTargets {
 		using Targets = std::map<Widelands::DescriptionIndex, uint32_t>;
@@ -61,6 +64,8 @@ struct EconomyOptionsWindow : public UI::Window {
 	void reset_target();
 
 	void layout() override;
+
+	void close_save_profile_window();
 
 private:
 	struct TargetWaresDisplay : public AbstractWaresDisplay {
@@ -127,6 +132,32 @@ private:
 	std::set<std::string> last_added_to_dropdown_;
 	void think() override;
 	uint32_t time_last_thought_;
+
+	struct SaveProfileWindow : public UI::Window {
+		SaveProfileWindow(UI::Panel* parent, EconomyOptionsWindow* eco);
+		~SaveProfileWindow() override;
+
+		void update_save_enabled();
+		void table_selection_changed();
+		void update_table();
+		void save();
+		void delete_selected();
+
+		void unset_parent();
+
+	private:
+		EconomyOptionsWindow* economy_options_;
+		UI::Box main_box_;
+		UI::Box table_box_;
+		UI::Table<const std::string&> table_;
+		UI::Box buttons_box_;
+		UI::EditBox profile_name_;
+		UI::Button save_;
+		UI::Button cancel_;
+		UI::Button delete_;
+	};
+
+	SaveProfileWindow* save_profile_dialog_;
 };
 
 #endif  // end of include guard: WL_WUI_ECONOMY_OPTIONS_WINDOW_H

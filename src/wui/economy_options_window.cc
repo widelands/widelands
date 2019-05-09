@@ -31,10 +31,7 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "profile/profile.h"
-#include "ui_basic/button.h"
-#include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
-#include "ui_basic/table.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
@@ -58,7 +55,8 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
         new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWORKER, kDesiredWidth)),
      dropdown_box_(this, 0, 0, UI::Box::Horizontal),
      dropdown_(&dropdown_box_, 0, 0, 174, 200, 34, "", UI::DropdownType::kTextual, UI::PanelStyle::kWui),
-     time_last_thought_(0) {
+     time_last_thought_(0),
+     save_profile_dialog_(nullptr) {
 	set_center_panel(&main_box_);
 
 	tabpanel_.add("wares", g_gr->images().get(pic_tab_wares), ware_panel_, _("Wares"));
@@ -118,6 +116,9 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 	Widelands::Economy* economy = player_->get_economy(serial_);
 	if (economy != nullptr) {
 		economy->set_has_window(false);
+	}
+	if (save_profile_dialog_) {
+		save_profile_dialog_->unset_parent();
 	}
 }
 
@@ -320,7 +321,8 @@ constexpr unsigned kThinkInterval = 200;
 
 void EconomyOptionsWindow::think() {
 	const uint32_t time = player_->egbase().get_gametime();
-	if (time - time_last_thought_ < kThinkInterval) {
+	if (time - time_last_thought_ < kThinkInterval || !player_->get_economy(serial_)) {
+		// If our economy has been deleted, die() was already called, no need to do anything
 		return;
 	}
 	time_last_thought_ = time;
@@ -397,137 +399,136 @@ do_select:
 	}
 }
 
-struct SaveProfileWindow : public UI::Window {
-	void update_save_enabled() {
-		const std::string& text = profile_name_.text();
-		if (text.empty() || text == kDefaultEconomyProfile) {
-			save_.set_enabled(false);
-			save_.set_tooltip(text.empty() ? _("The profile name cannot be empty") :
-					_("The default profile cannot be overwritten"));
-		} else {
-			save_.set_enabled(true);
-			save_.set_tooltip(_("Save the profile under this name"));
-		}
+void EconomyOptionsWindow::SaveProfileWindow::update_save_enabled() {
+	const std::string& text = profile_name_.text();
+	if (text.empty() || text == kDefaultEconomyProfile) {
+		save_.set_enabled(false);
+		save_.set_tooltip(text.empty() ? _("The profile name cannot be empty") :
+				_("The default profile cannot be overwritten"));
+	} else {
+		save_.set_enabled(true);
+		save_.set_tooltip(_("Save the profile under this name"));
 	}
+}
 
-	void table_selection_changed() {
-		if (!table_.has_selection()) {
-			delete_.set_enabled(false);
-			delete_.set_tooltip("");
-			return;
-		}
-		const std::string& sel = table_[table_.selection_index()];
-		if (sel == kDefaultEconomyProfile) {
-			delete_.set_tooltip(_("The default profile cannot be deleted"));
-			delete_.set_enabled(false);
-		} else {
-			delete_.set_tooltip(_("Delete the selected profiles"));
-			delete_.set_enabled(true);
-		}
-		profile_name_.set_text(sel);
-		update_save_enabled();
+void EconomyOptionsWindow::SaveProfileWindow::table_selection_changed() {
+	if (!table_.has_selection()) {
+		delete_.set_enabled(false);
+		delete_.set_tooltip("");
+		return;
 	}
-
-	void close(bool ok) {
-		end_modal(ok ? UI::Panel::Returncodes::kOk : UI::Panel::Returncodes::kBack);
-		die();
+	const std::string& sel = table_[table_.selection_index()];
+	if (sel == kDefaultEconomyProfile) {
+		delete_.set_tooltip(_("The default profile cannot be deleted"));
+		delete_.set_enabled(false);
+	} else {
+		delete_.set_tooltip(_("Delete the selected profiles"));
+		delete_.set_enabled(true);
 	}
+	profile_name_.set_text(sel);
+	update_save_enabled();
+}
 
-	void update_table() {
-		table_.clear();
-		for (const auto& pair : economy_options_->get_predefined_targets()) {
-			table_.add(pair.first).set_string(0, _(pair.first));
-		}
-		layout();
+void EconomyOptionsWindow::SaveProfileWindow::update_table() {
+	table_.clear();
+	for (const auto& pair : economy_options_->get_predefined_targets()) {
+		table_.add(pair.first).set_string(0, _(pair.first));
 	}
+	layout();
+}
 
-	void save() {
-		const std::string name = profile_name_.text();
-		assert(!name.empty());
-		assert(name != kDefaultEconomyProfile);
-		for (const auto& pair : economy_options_->get_predefined_targets()) {
-			if (pair.first == name) {
-				UI::WLMessageBox m(this, _("Overwrite?"),
-						_("A profile with this name already exists.\nDo you wish to replace it?"),
-						UI::WLMessageBox::MBoxType::kOkCancel);
-				if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
-					return;
-				}
-				break;
+void EconomyOptionsWindow::SaveProfileWindow::save() {
+	const std::string name = profile_name_.text();
+	assert(!name.empty());
+	assert(name != kDefaultEconomyProfile);
+	for (const auto& pair : economy_options_->get_predefined_targets()) {
+		if (pair.first == name) {
+			UI::WLMessageBox m(this, _("Overwrite?"),
+					_("A profile with this name already exists.\nDo you wish to replace it?"),
+					UI::WLMessageBox::MBoxType::kOkCancel);
+			if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+				return;
 			}
+			break;
 		}
-		economy_options_->do_create_target(name);
-		close(true);
 	}
+	economy_options_->do_create_target(name);
+	die();
+}
 
-	void delete_selected() {
-		assert(table_.has_selection());
-		auto& map = economy_options_->get_predefined_targets();
-		const std::string& name = table_[table_.selection_index()];
-		assert(name != kDefaultEconomyProfile);
-		for (auto it = map.begin(); it != map.end(); ++it) {
-			if (it->first == name) {
-				map.erase(it);
-				break;
-			}
+void EconomyOptionsWindow::SaveProfileWindow::delete_selected() {
+	assert(table_.has_selection());
+	auto& map = economy_options_->get_predefined_targets();
+	const std::string& name = table_[table_.selection_index()];
+	assert(name != kDefaultEconomyProfile);
+	for (auto it = map.begin(); it != map.end(); ++it) {
+		if (it->first == name) {
+			map.erase(it);
+			break;
 		}
-		economy_options_->save_targets();
-		economy_options_->update_profiles();
-		update_table();
 	}
+	economy_options_->save_targets();
+	economy_options_->update_profiles();
+	update_table();
+}
 
-	explicit SaveProfileWindow(UI::Panel* parent, EconomyOptionsWindow* eco)
-	   : UI::Window(parent, "save_economy_options_profile", 0, 0, 0, 0, _("Save Profile")),
-	     economy_options_(eco),
-	     main_box_(this, 0, 0, UI::Box::Vertical),
-	     table_box_(&main_box_, 0, 0, UI::Box::Vertical),
-	     table_(&table_box_, 0, 0, 460, 120, UI::PanelStyle::kWui),
-	     buttons_box_(&main_box_, 0, 0, UI::Box::Horizontal),
-	     profile_name_(&buttons_box_, 0, 0, 240, 0, 0, UI::PanelStyle::kWui),
-	     save_(&buttons_box_, "save", 0, 0, 80, 34, UI::ButtonStyle::kWuiPrimary, _("Save")),
-	     cancel_(&buttons_box_, "cancel", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
-	     delete_(&buttons_box_, "delete", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Delete")) {
-		table_.add_column(200, _("Existing Profiles"));
-		update_table();
+void EconomyOptionsWindow::SaveProfileWindow::unset_parent() {
+	economy_options_ = nullptr;
+	die();
+}
 
-		table_.selected.connect([this](uint32_t) { table_selection_changed(); });
-		profile_name_.changed.connect([this] { update_save_enabled(); });
-		profile_name_.ok.connect([this] { save(); });
-		profile_name_.cancel.connect([this] { close(false); });
-		save_.sigclicked.connect([this] { save(); });
-		cancel_.sigclicked.connect([this] { close(false); });
-		delete_.sigclicked.connect([this] { delete_selected(); });
+EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent, EconomyOptionsWindow* eco)
+   : UI::Window(parent, "save_economy_options_profile", 0, 0, 0, 0, _("Save Profile")),
+     economy_options_(eco),
+     main_box_(this, 0, 0, UI::Box::Vertical),
+     table_box_(&main_box_, 0, 0, UI::Box::Vertical),
+     table_(&table_box_, 0, 0, 460, 120, UI::PanelStyle::kWui),
+     buttons_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     profile_name_(&buttons_box_, 0, 0, 240, 0, 0, UI::PanelStyle::kWui),
+     save_(&buttons_box_, "save", 0, 0, 80, 34, UI::ButtonStyle::kWuiPrimary, _("Save")),
+     cancel_(&buttons_box_, "cancel", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
+     delete_(&buttons_box_, "delete", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Delete")) {
+	table_.add_column(200, _("Existing Profiles"));
+	update_table();
 
-		table_box_.add(&table_, UI::Box::Resizing::kFullSize);
-		buttons_box_.add(&profile_name_, UI::Box::Resizing::kFullSize);
-		buttons_box_.add(&save_);
-		buttons_box_.add(&cancel_);
-		buttons_box_.add(&delete_);
-		main_box_.add(&table_box_, UI::Box::Resizing::kFullSize);
-		main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
-		set_center_panel(&main_box_);
+	table_.selected.connect([this](uint32_t) { table_selection_changed(); });
+	profile_name_.changed.connect([this] { update_save_enabled(); });
+	profile_name_.ok.connect([this] { save(); });
+	profile_name_.cancel.connect([this] { die(); });
+	save_.sigclicked.connect([this] { save(); });
+	cancel_.sigclicked.connect([this] { die(); });
+	delete_.sigclicked.connect([this] { delete_selected(); });
 
-		table_selection_changed();
-		update_save_enabled();
+	table_box_.add(&table_, UI::Box::Resizing::kFullSize);
+	buttons_box_.add(&profile_name_, UI::Box::Resizing::kFullSize);
+	buttons_box_.add(&save_);
+	buttons_box_.add(&cancel_);
+	buttons_box_.add(&delete_);
+	main_box_.add(&table_box_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
+	set_center_panel(&main_box_);
+
+	table_selection_changed();
+	update_save_enabled();
+}
+
+EconomyOptionsWindow::SaveProfileWindow::~SaveProfileWindow() {
+	if (economy_options_) {
+		economy_options_->close_save_profile_window();
 	}
-	~SaveProfileWindow() {
-	}
-
-private:
-	EconomyOptionsWindow* economy_options_;
-	UI::Box main_box_;
-	UI::Box table_box_;
-	UI::Table<const std::string&> table_;
-	UI::Box buttons_box_;
-	UI::EditBox profile_name_;
-	UI::Button save_;
-	UI::Button cancel_;
-	UI::Button delete_;
-};
+}
 
 void EconomyOptionsWindow::create_target() {
-	std::unique_ptr<SaveProfileWindow> s (new SaveProfileWindow(get_parent(), this));
-	s->run<UI::Panel::Returncodes>();
+	if (save_profile_dialog_) {
+		// Already open
+		return;
+	}
+	save_profile_dialog_ = new SaveProfileWindow(get_parent(), this);
+}
+
+void EconomyOptionsWindow::close_save_profile_window() {
+	assert(save_profile_dialog_);
+	save_profile_dialog_ = nullptr;
 }
 
 void EconomyOptionsWindow::do_create_target(const std::string& name) {
