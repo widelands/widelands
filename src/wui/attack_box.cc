@@ -200,7 +200,7 @@ void AttackBox::init() {
 			UI::Align::kCenter, UI_FONT_SIZE_ULTRASMALL));
 
 	soldiers_slider_ = add_slider(
-	   columnbox, 242, 17, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));
+	   columnbox, 210, 17, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));
 	soldiers_slider_->changed.connect([this]() { update_attack(false); });
 
 	more_soldiers_ = add_button(linebox, std::to_string(max_attackers), &AttackBox::send_more_soldiers,
