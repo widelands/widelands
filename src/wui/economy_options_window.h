@@ -38,6 +38,14 @@
 
 const std::string kDefaultEconomyProfile = "Default";
 
+// Used to indicate that a profile has been saved or deleted, so all open windows can update it
+struct NoteEconomyProfile {
+	NoteEconomyProfile(Widelands::Serial s) : serial(s) {
+	}
+	Widelands::Serial serial;
+	CAN_BE_SENT_AS_NOTE(NoteId::EconomyProfile)
+};
+
 struct EconomyOptionsWindow : public UI::Window {
 	EconomyOptionsWindow(UI::Panel* parent, Widelands::Economy* economy, bool can_act);
 	~EconomyOptionsWindow() override;
@@ -123,6 +131,7 @@ private:
 	EconomyOptionsPanel* ware_panel_;
 	EconomyOptionsPanel* worker_panel_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEconomy>> economynotes_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<NoteEconomyProfile>> profilenotes_subscriber_;
 
 	std::map<std::string, PredefinedTargets> predefined_targets_;
 	UI::Box dropdown_box_;
@@ -144,6 +153,8 @@ private:
 		void delete_selected();
 
 		void unset_parent();
+
+		void think() override;
 
 	private:
 		EconomyOptionsWindow* economy_options_;

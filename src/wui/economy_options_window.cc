@@ -108,6 +108,17 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	economy->set_has_window(true);
 	economynotes_subscriber_ = Notifications::subscribe<Widelands::NoteEconomy>(
 	   [this](const Widelands::NoteEconomy& note) { on_economy_note(note); });
+	profilenotes_subscriber_ = Notifications::subscribe<NoteEconomyProfile>(
+	   [this](const NoteEconomyProfile& n) {
+			if (n.serial == serial_) {
+				// We already updated ourself before we changed something
+				return;
+			}
+			read_targets();
+			if (save_profile_dialog_) {
+				save_profile_dialog_->update_table();
+			}
+	   });
 
 	read_targets();
 }
@@ -477,6 +488,13 @@ void EconomyOptionsWindow::SaveProfileWindow::unset_parent() {
 	die();
 }
 
+void EconomyOptionsWindow::SaveProfileWindow::think() {
+	if (!economy_options_) {
+		die();
+	}
+	UI::Window::think();
+}
+
 EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent, EconomyOptionsWindow* eco)
    : UI::Window(parent, "save_economy_options_profile", 0, 0, 0, 0, _("Save Profile")),
      economy_options_(eco),
@@ -585,6 +603,9 @@ void EconomyOptionsWindow::save_targets() {
 	g_fs->ensure_directory_exists(kEconomyProfilesDir);
 	std::string complete_filename = kEconomyProfilesDir + g_fs->file_separator() + player_->tribe().name();
 	profile.write(complete_filename.c_str(), false);
+
+	// Inform the windows of other economies of new and deleted profiles
+	Notifications::publish(NoteEconomyProfile(serial_));
 }
 
 void EconomyOptionsWindow::read_targets() {
