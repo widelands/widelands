@@ -232,7 +232,6 @@ static const char* const pic_abort = "images/wui/menu_abort.png";
 static const char* const pic_geologist = "images/wui/fieldaction/menu_geologist.png";
 
 static const char* const pic_tab_attack = "images/wui/fieldaction/menu_tab_attack.png";
-static const char* const pic_attack = "images/wui/buildings/menu_attack.png";
 
 /*
 ===============

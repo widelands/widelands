@@ -200,11 +200,12 @@ void AttackBox::init() {
 			UI::Align::kCenter, UI_FONT_SIZE_ULTRASMALL));
 
 	soldiers_slider_ = add_slider(
-	   columnbox, 250, 20, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));
+	   columnbox, 242, 17, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));
 	soldiers_slider_->changed.connect([this]() { update_attack(false); });
 
 	more_soldiers_ = add_button(linebox, std::to_string(max_attackers), &AttackBox::send_more_soldiers,
 			_("Send more soldiers. Hold down Ctrl to send as many soldiers as possible"));
+	linebox.add_space(8);
 
 	attack_button_.reset(new UI::Button(&linebox, "attack", 8, 8, 34, 34, UI::ButtonStyle::kWuiPrimary,
 			g_gr->images().get("images/wui/buildings/menu_attack.png"), _("Start attack")));
@@ -265,8 +266,8 @@ std::vector<Widelands::Serial> AttackBox::soldiers() const {
 	return result;
 }
 
-constexpr int kSoldierIconWidth = 30;
-constexpr int kSoldierIconHeight = 29;
+constexpr int kSoldierIconWidth = 32;
+constexpr int kSoldierIconHeight = 30;
 
 AttackBox::ListOfSoldiers::ListOfSoldiers(UI::Panel* const parent,
 	           AttackBox* parent_box,
