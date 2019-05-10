@@ -382,8 +382,9 @@ void FieldActionWindow::add_buttons_attack() {
 				attack_box_ = new AttackBox(&a_box, player_, &node_, 0, 0);
 				a_box.add(attack_box_);
 
-				set_fastclick_panel(&add_button(
-				   &a_box, "attack", pic_attack, &FieldActionWindow::act_attack, _("Start attack")));
+				UI::Button* attack_button = attack_box_->get_attack_button();
+				attack_button->sigclicked.connect(boost::bind(&FieldActionWindow::act_attack, this));
+				set_fastclick_panel(attack_button);
 			}
 		}
 	}

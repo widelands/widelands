@@ -55,6 +55,13 @@ struct AttackBox : public UI::Box {
 
 	size_t count_soldiers() const;
 	std::vector<Widelands::Serial> soldiers() const;
+	void set_soldier_info_text(std::string text = "") {
+		current_soldier_stats_->set_text(text);
+	}
+
+	UI::Button* get_attack_button() const {
+		return attack_button_.get();
+	}
 
 private:
 	std::vector<Widelands::Soldier*> get_max_attackers();
@@ -100,10 +107,11 @@ private:
 		               int const w,
 		               int const h,
 	                   const std::string& tooltip,
-		               int16_t max_size = 8,
 		               bool restrict_rows = false);
 
 		bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+		void handle_mousein(bool) override;
+		bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
 		const Widelands::Soldier* soldier_at(int32_t x, int32_t y) const;
 		void add(const Widelands::Soldier*);
@@ -131,12 +139,6 @@ private:
 		bool row_number_restricted() const {
 			return restricted_row_number_;
 		}
-		int16_t size_restriction() const {
-			return size_restriction_;
-		}
-		void set_size_restriction(int16_t r) {
-			size_restriction_ = r;
-		}
 		void set_row_number_restricted(bool r) {
 			restricted_row_number_ = r;
 		}
@@ -148,8 +150,8 @@ private:
 		}
 
 	private:
-		int16_t size_restriction_; // Highest number of rows or columns
 		bool restricted_row_number_;
+		uint16_t current_size_; // Current number of rows or columns
 		std::vector<const Widelands::Soldier*> soldiers_;
 
 		ListOfSoldiers* other_;
@@ -160,6 +162,8 @@ private:
 
 	std::unique_ptr<ListOfSoldiers> attacking_soldiers_;
 	std::unique_ptr<ListOfSoldiers> remaining_soldiers_;
+	std::unique_ptr<UI::Textarea> current_soldier_stats_;
+	std::unique_ptr<UI::Button> attack_button_;
 
 	/// The last time the information in this Panel got updated
 	uint32_t lastupdate_;
