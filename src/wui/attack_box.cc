@@ -224,7 +224,7 @@ void AttackBox::init() {
 		// Needed so we can get tooltips
 		txt.set_handle_mouse(true);
 		txt.set_tooltip((tooltip_format
-				% _("Remove this soldier from the list of attackers")
+				% _("Click on a soldier to remove him from the list of attackers")
 				% UI_FONT_SIZE_MESSAGE
 				% _("Hold down Ctrl to remove all soldiers from the list")
 				% _("Hold down Shift to remove all soldiers up to the one you're pointing at"))
@@ -236,7 +236,7 @@ void AttackBox::init() {
 		UI::Textarea& txt = add_text(mainbox, _("Not attacking:"));
 		txt.set_handle_mouse(true);
 		txt.set_tooltip((tooltip_format
-				% _("Add this soldier to the list of attackers")
+				% _("Click on a soldier to add him to the list of attackers")
 				% UI_FONT_SIZE_MESSAGE
 				% _("Hold down Ctrl to add all soldiers to the list")
 				% _("Hold down Shift to add all soldiers up to the one you're pointing at"))
