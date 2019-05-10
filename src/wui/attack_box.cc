@@ -106,7 +106,7 @@ void AttackBox::think() {
 	}
 }
 
-static std::string slider_heading(uint32_t num_attackers, uint32_t max_attackers) {
+static inline std::string slider_heading(uint32_t num_attackers, uint32_t max_attackers) {
 	/** TRANSLATORS: %1% of %2% soldiers. Used in Attack box. */
 	return (boost::format(_("%1% / %2% soldiers")) % num_attackers % max_attackers).str();
 }
