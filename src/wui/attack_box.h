@@ -106,7 +106,6 @@ private:
 		               int32_t const y,
 		               int const w,
 		               int const h,
-	                   const std::string& tooltip,
 		               bool restrict_rows = false);
 
 		bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;

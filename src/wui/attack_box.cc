@@ -192,7 +192,6 @@ void AttackBox::init() {
 	less_soldiers_ = add_button(linebox, "0", &AttackBox::send_less_soldiers,
 			_("Send less soldiers. Hold down Ctrl to send no soldiers"));
 
-	//  Spliter of soldiers
 	UI::Box& columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
 	linebox.add(&columnbox);
 
@@ -211,31 +210,39 @@ void AttackBox::init() {
 			g_gr->images().get("images/wui/buildings/menu_attack.png"), _("Start attack")));
 	linebox.add(attack_button_.get());
 
-	boost::format tooltip_format("%s<br><p><font size=%d bold=0>%s<br>%s</font></p>");
-	remaining_soldiers_.reset(new ListOfSoldiers(&mainbox, this, 0, 0, 30, 30,
-			(tooltip_format
-			% _("Add this soldier to the list of attackers") %
-			UI_FONT_SIZE_MESSAGE
-			% _("Hold down Ctrl to add all soldiers to the list")
-			% _("Hold down Shift to add all soldiers up to the one you're pointing at"))
-			.str()));
-	attacking_soldiers_.reset(new ListOfSoldiers(&mainbox, this, 0, 0, 30, 30,
-			(tooltip_format
-			% _("Remove this soldier from the list of attackers") %
-			UI_FONT_SIZE_MESSAGE
-			% _("Hold down Ctrl to remove all soldiers from the list")
-			% _("Hold down Shift to remove all soldiers up to the one you're pointing at"))
-			.str()));
+	attacking_soldiers_.reset(new ListOfSoldiers(&mainbox, this, 0, 0, 30, 30));
+	remaining_soldiers_.reset(new ListOfSoldiers(&mainbox, this, 0, 0, 30, 30));
 	attacking_soldiers_->set_complement(remaining_soldiers_.get());
 	remaining_soldiers_->set_complement(attacking_soldiers_.get());
 	for (const auto& s : all_attackers) {
 		remaining_soldiers_->add(s);
 	}
 
-	add_text(mainbox, _("Attackers:"));
-	mainbox.add(attacking_soldiers_.get(), UI::Box::Resizing::kFullSize);
-	add_text(mainbox, _("Not attacking:"));
-	mainbox.add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
+	boost::format tooltip_format("%s<br><p><font size=%d bold=0>%s<br>%s</font></p>");
+	{
+		UI::Textarea& txt = add_text(mainbox, _("Attackers:"));
+		// Needed so we can get tooltips
+		txt.set_handle_mouse(true);
+		txt.set_tooltip((tooltip_format
+				% _("Remove this soldier from the list of attackers")
+				% UI_FONT_SIZE_MESSAGE
+				% _("Hold down Ctrl to remove all soldiers from the list")
+				% _("Hold down Shift to remove all soldiers up to the one you're pointing at"))
+				.str());
+		mainbox.add(attacking_soldiers_.get(), UI::Box::Resizing::kFullSize);
+	}
+
+	{
+		UI::Textarea& txt = add_text(mainbox, _("Not attacking:"));
+		txt.set_handle_mouse(true);
+		txt.set_tooltip((tooltip_format
+				% _("Add this soldier to the list of attackers")
+				% UI_FONT_SIZE_MESSAGE
+				% _("Hold down Ctrl to add all soldiers to the list")
+				% _("Hold down Shift to add all soldiers up to the one you're pointing at"))
+				.str());
+		mainbox.add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
+	}
 
 	current_soldier_stats_.reset(new UI::Textarea(&mainbox, "", UI::Align::kCenter));
 	mainbox.add(current_soldier_stats_.get(), UI::Box::Resizing::kFullSize, UI::Align::kCenter);
@@ -275,9 +282,8 @@ AttackBox::ListOfSoldiers::ListOfSoldiers(UI::Panel* const parent,
 	           int32_t const y,
 	           int const w,
 	           int const h,
-               const std::string& tooltip,
                bool restrict_rows)
-   : UI::Panel(parent, x, y, w, h, tooltip),
+   : UI::Panel(parent, x, y, w, h),
      restricted_row_number_(restrict_rows),
      attack_box_(parent_box) {
 	update_desired_size();
