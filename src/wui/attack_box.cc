@@ -107,8 +107,8 @@ void AttackBox::think() {
 }
 
 static inline std::string slider_heading(uint32_t num_attackers, uint32_t max_attackers) {
-	/** TRANSLATORS: %1% of %2% soldiers. Used in Attack box. */
-	return (boost::format(_("%1% / %2% soldiers")) % num_attackers % max_attackers).str();
+	/** TRANSLATORS: Number of soldiers that should attack. Used in Attack box. */
+	return (boost::format(ngettext("%u soldier", "%u soldiers", num_attackers)) % num_attackers).str();
 }
 
 void AttackBox::update_attack(bool action_on_panel) {
@@ -227,7 +227,7 @@ void AttackBox::init() {
 				% _("Click on a soldier to remove him from the list of attackers")
 				% UI_FONT_SIZE_MESSAGE
 				% _("Hold down Ctrl to remove all soldiers from the list")
-				% _("Hold down Shift to remove all soldiers up to the one you're pointing at"))
+				% _("Hold down Shift to remove all soldiers up to the one you’re pointing at"))
 				.str());
 		mainbox.add(attacking_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
@@ -239,7 +239,7 @@ void AttackBox::init() {
 				% _("Click on a soldier to add him to the list of attackers")
 				% UI_FONT_SIZE_MESSAGE
 				% _("Hold down Ctrl to add all soldiers to the list")
-				% _("Hold down Shift to add all soldiers up to the one you're pointing at"))
+				% _("Hold down Shift to add all soldiers up to the one you’re pointing at"))
 				.str());
 		mainbox.add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
