@@ -106,7 +106,7 @@ void AttackBox::think() {
 	}
 }
 
-static inline std::string slider_heading(uint32_t num_attackers, uint32_t max_attackers) {
+static inline std::string slider_heading(uint32_t num_attackers) {
 	/** TRANSLATORS: Number of soldiers that should attack. Used in Attack box. */
 	return (boost::format(ngettext("%u soldier", "%u soldiers", num_attackers)) % num_attackers).str();
 }
@@ -172,7 +172,7 @@ void AttackBox::update_attack(bool action_on_panel) {
 	more_soldiers_->set_enabled(max_attackers > soldiers_slider_->get_value());
 	less_soldiers_->set_enabled(soldiers_slider_->get_value() > 0);
 
-	soldiers_text_->set_text(slider_heading(soldiers_slider_->get_value(), max_attackers));
+	soldiers_text_->set_text(slider_heading(soldiers_slider_->get_value()));
 
 	more_soldiers_->set_title(std::to_string(max_attackers));
 }
@@ -195,7 +195,7 @@ void AttackBox::init() {
 	UI::Box& columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
 	linebox.add(&columnbox);
 
-	soldiers_text_.reset(&add_text(columnbox, slider_heading(max_attackers > 0 ? 1 : 0, max_attackers),
+	soldiers_text_.reset(&add_text(columnbox, slider_heading(max_attackers > 0 ? 1 : 0),
 			UI::Align::kCenter, UI_FONT_SIZE_ULTRASMALL));
 
 	soldiers_slider_ = add_slider(
