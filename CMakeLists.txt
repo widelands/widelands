@@ -3,6 +3,8 @@ project (widelands)
 cmake_minimum_required (VERSION 2.8.7)
 cmake_policy(VERSION 2.8.7)
 
+include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
+
 # This policy is not known to versions prior 3.1 and would result in errors,
 # if set on such systems. This can be removed when cmake_minimum_required is set
 # to 3.1 or newer by using:
@@ -16,32 +18,29 @@ endif(POLICY CMP0054)
 # to 3.11 or newer  by using:
 # cmake_policy(VERSION 3.11)
 if(POLICY CMP0072)
-   cmake_policy(SET CMP0072 NEW)
+  cmake_policy(SET CMP0072 NEW)
 
-   # On Ubuntu 18.10 we need to set this policy to OLD when GCC is used.
-   #
-   #TODO(stonerl): Check on later Ubuntu releases whether workaround this is
-   # still needed or not.
-   if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
-       find_program(LSB_RELEASE_EXEC lsb_release)
-       execute_process(COMMAND ${LSB_RELEASE_EXEC} -is
-           OUTPUT_VARIABLE LSB_RELEASE_ID_SHORT
-           OUTPUT_STRIP_TRAILING_WHITESPACE
-       )
-       execute_process(COMMAND ${LSB_RELEASE_EXEC} -cs
-           OUTPUT_VARIABLE RELEASE_CODENAME
-           OUTPUT_STRIP_TRAILING_WHITESPACE
-       )
-   endif()
-
-   if (LSB_RELEASE_ID_SHORT STREQUAL "Ubuntu" AND
-       RELEASE_CODENAME STREQUAL "cosmic" AND
-       CMAKE_CXX_COMPILER_ID STREQUAL "GNU"
-   )
-       cmake_policy(SET CMP0072 OLD)
-   endif()
-
+  # TODO(stonerl): Check on later Ubuntu releases whether this workaround is
+  # still needed or not.
+  if (CMAKE_SYSTEM MATCHES "Linux")
+    distro_name (DISTRO_NAME)
+    # DISTRO_NAME is different on the build-servers.
+    if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic"
+         OR DISTRO_NAME MATCHES "Ubuntu 19.04" OR DISTRO_NAME MATCHES "Disco"
+         OR DISTRO_NAME MATCHES "Ubuntu 19.10" OR DISTRO_NAME MATCHES "Eoan")
+        AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+      cmake_policy(SET CMP0072 OLD)
+    endif()
+  endif()
 endif(POLICY CMP0072)
+
+# This policy is not known to versions prior 3.12 and would result in errors,
+# if set on such systems. This can be removed when cmake_minimum_required is set
+# to 3.12 or newer  by using:
+# cmake_policy(VERSION 3.12)
+if(POLICY CMP0074)
+  cmake_policy(SET CMP0074 NEW)
+endif(POLICY CMP0074)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
@@ -82,7 +81,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Mod
 
 if (WIN32)
   set (Boost_USE_STATIC_LIBS  ON)
-  link_libraries(wsock32 ws2_32)
+  link_libraries(wsock32 ws2_32 bcrypt)
 else()
   set (Boost_USE_STATIC_LIBS  OFF)
 endif()
@@ -294,7 +293,7 @@ if (NOT DEFINED WL_VERSION)
 else (NOT DEFINED WL_VERSION)
   add_custom_target (
     InputRevision ALL
-    COMMAND ${CMAKE_COMMAND -DWL_INSTALL_BASEDIR=${WL_INSTALL_BASEDIR} -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/InputRevision.cmake
+    COMMAND ${CMAKE_COMMAND} -DWL_INSTALL_BASEDIR=${WL_INSTALL_BASEDIR} -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/InputRevision.cmake
   )
 endif (NOT DEFINED WL_VERSION)
 

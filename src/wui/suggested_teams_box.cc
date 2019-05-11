@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2018 by the Widelands Development Team
+ * Copyright (C) 2015-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -136,4 +136,4 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::SuggestedTeamLineup>& 
 		set_size(get_w(), teamlist_offset + lineup_counter * (label_height_));
 	}
 }
-}
+}  // namespace UI

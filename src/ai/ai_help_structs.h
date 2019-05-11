@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2018 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,10 +28,10 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "logic/ai_dna_handler.h"
-#include "logic/findnode.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/world/terrain_description.h"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2018 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -266,7 +266,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[3] = (is_warehouse) ? 2 : 0;
 				inputs[4] = (site->second.attack_soldiers_competency > 15) ? 2 : 0;
 				inputs[5] = (site->second.attack_soldiers_competency > 25) ? 4 : 0;
-				;
 				inputs[6] =
 				   (2 * site->second.defenders_strength > 3 * site->second.attack_soldiers_strength) ?
 				      2 :

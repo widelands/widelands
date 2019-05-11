@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,7 @@
 #include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
@@ -137,9 +138,6 @@ struct MapObjectDescr {
 	/// Returns the image for the first frame of the idle animation if the MapObject has animations,
 	/// nullptr otherwise
 	const Image* representative_image(const RGBColor* player_color = nullptr) const;
-	/// Returns the image fileneme for first frame of the idle animation if the MapObject has
-	/// animations, is empty otherwise
-	const std::string& representative_image_filename() const;
 
 	/// Returns the menu image if the MapObject has one, nullptr otherwise
 	const Image* icon() const;
@@ -174,8 +172,7 @@ private:
 	Anims anims_;
 	static uint32_t dyn_attribhigh_;  ///< highest attribute ID used
 	static AttribMap dyn_attribs_;
-	std::string representative_image_filename_;  // Image for big represenations, e.g. on buttons
-	std::string icon_filename_;                  // Filename for the menu icon
+	std::string icon_filename_;  // Filename for the menu icon
 
 	DISALLOW_COPY_AND_ASSIGN(MapObjectDescr);
 };
@@ -208,7 +205,7 @@ private:
  * potentially set it up by calling basic functions like set_position(), etc.
  * and then call init(). After that, the object is supposed to
  * be fully created.
-*/
+ */
 
 /// If you find a better way to do this that doesn't cost a virtual function
 /// or additional member variable, go ahead
@@ -339,12 +336,6 @@ public:
 	 */
 	void set_reserved_by_worker(bool reserve);
 
-	enum class InfoStringType { kCensus, kStatistics, kTooltip };
-	/**
-	 * Returns a census, statistics or tooltip string to be shown for this object on the map
-	 */
-	virtual std::string info_string(InfoStringType);
-
 	/**
 	 * Static load functions of derived classes will return a pointer to
 	 * a Loader class. The caller needs to call the virtual functions
@@ -410,6 +401,14 @@ protected:
 	virtual bool init(EditorGameBase&);
 
 	virtual void cleanup(EditorGameBase&);
+
+	/// Draws census and statistics on screen
+	void do_draw_info(const TextToDraw& draw_text,
+	                  const std::string& census,
+	                  const std::string& statictics,
+	                  const Vector2f& field_on_dst,
+	                  const float scale,
+	                  RenderTarget* dst) const;
 
 #ifdef _WIN32
 	void molog(char const* fmt, ...) const __attribute__((format(gnu_printf, 2, 3)));
@@ -603,6 +602,6 @@ private:
 	Serial obj_serial;
 	int32_t arg;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H

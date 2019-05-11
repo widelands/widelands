@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,6 +42,7 @@ Panel* Panel::mousein_ = nullptr;
 bool Panel::allow_user_input_ = true;
 const Image* Panel::default_cursor_ = nullptr;
 const Image* Panel::default_cursor_click_ = nullptr;
+FxId Panel::click_fx_ = kNoSoundEffect;
 
 /**
  * Initialize a panel, link it into the parent's queue.
@@ -446,7 +447,7 @@ void Panel::draw_border(RenderTarget&) {
 /**
  * Draw overlays that appear over all child panels.
  * This can be used e.g. for debug information.
-*/
+ */
 void Panel::draw_overlay(RenderTarget&) {
 }
 
@@ -487,7 +488,7 @@ void Panel::do_think() {
 
 /**
  * Get mouse position relative to this panel
-*/
+ */
 Vector2i Panel::get_mouse_position() const {
 	return (parent_ ? parent_->get_mouse_position() : WLApplication::get()->get_mouse_position()) -
 	       Vector2i(get_x() + get_lborder(), get_y() + get_tborder());
@@ -495,7 +496,7 @@ Vector2i Panel::get_mouse_position() const {
 
 /**
  * Set mouse position relative to this panel
-*/
+ */
 void Panel::set_mouse_pos(const Vector2i p) {
 	const Vector2i relative_p = p + Vector2i(get_x() + get_lborder(), get_y() + get_tborder());
 	if (parent_)
@@ -506,7 +507,7 @@ void Panel::set_mouse_pos(const Vector2i p) {
 
 /**
  * Center the mouse on this panel.
-*/
+ */
 void Panel::center_mouse() {
 	set_mouse_pos(Vector2i(get_w() / 2, get_h() / 2));
 }
@@ -528,7 +529,7 @@ void Panel::handle_mousein(bool) {
  * \return true if the mouseclick was processed, false otherwise
  */
 bool Panel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
-	if (btn == SDL_BUTTON_LEFT) {
+	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
 	}
 	return false;
@@ -641,7 +642,7 @@ void Panel::grab_mouse(bool const grab) {
 
 /**
  * Set if this panel can receive the keyboard focus
-*/
+ */
 void Panel::set_can_focus(bool const yes) {
 
 	if (yes)
@@ -713,13 +714,16 @@ void Panel::die() {
  * sound_handler.h in every UI subclass just for playing a 'click'
  */
 void Panel::play_click() {
-	g_sound_handler.play_fx("click", 128, PRIO_ALWAYS_PLAY);
+	g_sh->play_fx(SoundType::kUI, click_fx_);
 }
-void Panel::play_new_chat_message() {
-	g_sound_handler.play_fx("lobby_chat", 128, PRIO_ALWAYS_PLAY);
-}
-void Panel::play_new_chat_member() {
-	g_sound_handler.play_fx("lobby_freshmen", 128, PRIO_ALWAYS_PLAY);
+
+/**
+ * This needs to be called once after g_soundhandler has been instantiated and before play_click()
+ * is called. We do it this way so that we don't have to register the same sound every time we
+ * create a new panel.
+ */
+void Panel::register_click() {
+	click_fx_ = SoundHandler::register_fx(SoundType::kUI, "sound/click");
 }
 
 /**
@@ -764,7 +768,7 @@ void Panel::do_draw_inner(RenderTarget& dst) {
  * Draw tooltip if required.
  *
  * \param dst RenderTarget for the parent Panel
-*/
+ */
 void Panel::do_draw(RenderTarget& dst) {
 	if (!is_visible())
 		return;
@@ -858,9 +862,9 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mou
 			continue;
 		}
 		// Found a child at the position
-		if (child->do_mousewheel(
-		       which, x, y, rel_mouse_pos - Vector2i(child->get_x() + child->get_lborder(),
-		                                             child->get_y() + child->get_tborder()))) {
+		if (child->do_mousewheel(which, x, y,
+		                         rel_mouse_pos - Vector2i(child->get_x() + child->get_lborder(),
+		                                                  child->get_y() + child->get_tborder()))) {
 			return true;
 		}
 	}
@@ -977,7 +981,7 @@ Panel* Panel::ui_trackmouse(int32_t& x, int32_t& y) {
 /**
  * Input callback function. Pass the mouseclick event to the currently modal
  * panel.
-*/
+ */
 bool Panel::ui_mousepress(const uint8_t button, int32_t x, int32_t y) {
 	if (!allow_user_input_) {
 		return true;
@@ -1005,7 +1009,7 @@ bool Panel::ui_mouserelease(const uint8_t button, int32_t x, int32_t y) {
 /**
  * Input callback function. Pass the mousemove event to the currently modal
  * panel.
-*/
+ */
 bool Panel::ui_mousemove(
    uint8_t const state, int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff) {
 	if (!allow_user_input_) {
@@ -1026,7 +1030,7 @@ bool Panel::ui_mousemove(
 /**
  * Input callback function. Pass the mousewheel event to the currently modal
  * panel.
-*/
+ */
 bool Panel::ui_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	if (!allow_user_input_) {
 		return true;
@@ -1104,4 +1108,4 @@ bool Panel::draw_tooltip(const std::string& text) {
 	rendered_text->draw(dst, r.origin() + Vector2i(2, 2));
 	return true;
 }
-}
+}  // namespace UI

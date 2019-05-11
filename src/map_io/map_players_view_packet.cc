@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2018 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -130,8 +130,8 @@ namespace {
 	}
 
 // Try to find the file with newest fitting version number
-#define OPEN_INPUT_FILE_NEW_VERSION(filetype, file, filename, fileversion, filename_template,      \
-                                    version)                                                       \
+#define OPEN_INPUT_FILE_NEW_VERSION(                                                               \
+   filetype, file, filename, fileversion, filename_template, version)                              \
 	uint8_t fileversion = version;                                                                  \
 	filetype file;                                                                                  \
 	char(filename)[FILENAME_SIZE];                                                                  \
@@ -434,47 +434,47 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 		OPEN_INPUT_FILE_NEW_VERSION(FileRead, node_immovable_kinds_file,
 		                            node_immovable_kinds_filename, node_immovable_kinds_file_version,
 		                            NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
-		                            kCurrentPacketVersionImmovableKinds);
+		                            kCurrentPacketVersionImmovableKinds)
 
 		OPEN_INPUT_FILE_NEW_VERSION(FileRead, node_immovables_file, node_immovables_filename,
 		                            node_immovables_file_version, NODE_IMMOVABLES_FILENAME_TEMPLATE,
-		                            kCurrentPacketVersionImmovables);
+		                            kCurrentPacketVersionImmovables)
 
 		OPEN_INPUT_FILE_NEW_VERSION(FileRead, roads_file, roads_filename, road_file_version,
-		                            ROADS_FILENAME_TEMPLATE, kCurrentPacketVersionRoads);
+		                            ROADS_FILENAME_TEMPLATE, kCurrentPacketVersionRoads)
 
 		OPEN_INPUT_FILE_NEW_VERSION(FileRead, terrains_file, terrains_filename, terrains_file_version,
-		                            TERRAINS_FILENAME_TEMPLATE, kCurrentPacketVersionTerrains);
+		                            TERRAINS_FILENAME_TEMPLATE, kCurrentPacketVersionTerrains)
 
 		OPEN_INPUT_FILE_NEW_VERSION(
 		   FileRead, triangle_immovable_kinds_file, triangle_immovable_kinds_filename,
 		   triangle_immovable_kinds_file_version, TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
-		   kCurrentPacketVersionImmovableKinds);
+		   kCurrentPacketVersionImmovableKinds)
 
 		OPEN_INPUT_FILE_NEW_VERSION(FileRead, triangle_immovables_file, triangle_immovables_filename,
 		                            triangle_immovables_file_version,
 		                            TRIANGLE_IMMOVABLES_FILENAME_TEMPLATE,
-		                            kCurrentPacketVersionImmovables);
+		                            kCurrentPacketVersionImmovables)
 
 		OPEN_INPUT_FILE(FileRead, owners_file, owners_filename, OWNERS_FILENAME_TEMPLATE,
-		                kCurrentPacketVersionOwners);
+		                kCurrentPacketVersionOwners)
 
 		OPEN_INPUT_FILE_NEW_VERSION(FileRead, surveys_file, surveys_filename, surveys_file_version,
-		                            SURVEYS_FILENAME_TEMPLATE, kCurrentPacketVersionSurveys);
+		                            SURVEYS_FILENAME_TEMPLATE, kCurrentPacketVersionSurveys)
 
 		OPEN_INPUT_FILE_NEW_VERSION(FileRead, survey_amounts_file, survey_amounts_filename,
 		                            survey_amounts_file_version, SURVEY_AMOUNTS_FILENAME_TEMPLATE,
-		                            kCurrentPacketVersionSurveyAmounts);
+		                            kCurrentPacketVersionSurveyAmounts)
 
 		OPEN_INPUT_FILE(FileRead, survey_times_file, survey_times_filename,
-		                SURVEY_TIMES_FILENAME_TEMPLATE, kCurrentPacketVersionSurveyTimes);
+		                SURVEY_TIMES_FILENAME_TEMPLATE, kCurrentPacketVersionSurveyTimes)
 
 		OPEN_INPUT_FILE_NEW_VERSION(FileRead, border_file, border_filename, border_file_version,
-		                            BORDER_FILENAME_TEMPLATE, kCurrentPacketVersionBorder);
+		                            BORDER_FILENAME_TEMPLATE, kCurrentPacketVersionBorder)
 
 		OPEN_INPUT_FILE_NEW_VERSION_SILENT(FileRead, hidden_file, hidden_filename,
 		                                   hidden_file_version, HIDDEN_FILENAME_TEMPLATE,
-		                                   kCurrentPacketVersionHidden);
+		                                   kCurrentPacketVersionHidden)
 
 		for (FCoords first_in_row(Coords(0, 0), &first_field); first_in_row.y < mapheight;
 		     ++first_in_row.y, first_in_row.field += mapwidth) {
@@ -801,19 +801,19 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 			                            hidden_file_version, kCurrentPacketVersionHidden);
 		}
 
-		CHECK_TRAILING_BYTES(unseen_times_file, unseen_times_filename);
-		CHECK_TRAILING_BYTES(node_immovable_kinds_file, node_immovable_kinds_filename);
-		CHECK_TRAILING_BYTES(node_immovables_file, node_immovables_filename);
-		CHECK_TRAILING_BYTES(roads_file, roads_filename);
-		CHECK_TRAILING_BYTES(terrains_file, terrains_filename);
-		CHECK_TRAILING_BYTES(triangle_immovable_kinds_file, triangle_immovable_kinds_filename);
-		CHECK_TRAILING_BYTES(triangle_immovables_file, triangle_immovables_filename);
-		CHECK_TRAILING_BYTES(owners_file, owners_filename);
-		CHECK_TRAILING_BYTES(surveys_file, surveys_filename);
-		CHECK_TRAILING_BYTES(survey_amounts_file, survey_amounts_filename);
-		CHECK_TRAILING_BYTES(survey_times_file, survey_times_filename);
-		CHECK_TRAILING_BYTES(border_file, border_filename);
-		CHECK_TRAILING_BYTES(hidden_file, hidden_filename);
+		CHECK_TRAILING_BYTES(unseen_times_file, unseen_times_filename)
+		CHECK_TRAILING_BYTES(node_immovable_kinds_file, node_immovable_kinds_filename)
+		CHECK_TRAILING_BYTES(node_immovables_file, node_immovables_filename)
+		CHECK_TRAILING_BYTES(roads_file, roads_filename)
+		CHECK_TRAILING_BYTES(terrains_file, terrains_filename)
+		CHECK_TRAILING_BYTES(triangle_immovable_kinds_file, triangle_immovable_kinds_filename)
+		CHECK_TRAILING_BYTES(triangle_immovables_file, triangle_immovables_filename)
+		CHECK_TRAILING_BYTES(owners_file, owners_filename)
+		CHECK_TRAILING_BYTES(surveys_file, surveys_filename)
+		CHECK_TRAILING_BYTES(survey_amounts_file, survey_amounts_filename)
+		CHECK_TRAILING_BYTES(survey_times_file, survey_times_filename)
+		CHECK_TRAILING_BYTES(border_file, border_filename)
+		CHECK_TRAILING_BYTES(hidden_file, hidden_filename)
 	}
 }
 
@@ -856,8 +856,8 @@ inline static void write_unseen_immovable(MapObjectData const* map_object_data,
 	else {
 		// We should never get here.. output some information about the situation.
 		log("\nwidelands_map_players_view_data_packet.cc::write_unseen_immovable(): ");
-		log("%s %s (%s) was not expected.\n", typeid(*map_object_descr).name(),
-		    map_object_descr->name().c_str(), map_object_descr->descname().c_str());
+		log("%s %s was not expected.\n", typeid(*map_object_descr).name(),
+		    map_object_descr->name().c_str());
 		NEVER_HERE();
 	}
 	immovable_kinds_file.unsigned_8(immovable_kind);
@@ -1011,38 +1011,38 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 		fs.ensure_directory_exists(
 		   (boost::format(DIRNAME_TEMPLATE) % static_cast<unsigned int>(plnum)).str());
 
-		WRITE(unseen_times_file, UNSEEN_TIMES_FILENAME_TEMPLATE, kCurrentPacketVersionUnseenTimes);
+		WRITE(unseen_times_file, UNSEEN_TIMES_FILENAME_TEMPLATE, kCurrentPacketVersionUnseenTimes)
 
 		WRITE(node_immovable_kinds_file, NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
-		      kCurrentPacketVersionImmovableKinds);
+		      kCurrentPacketVersionImmovableKinds)
 
 		WRITE(
-		   node_immovables_file, NODE_IMMOVABLES_FILENAME_TEMPLATE, kCurrentPacketVersionImmovables);
+		   node_immovables_file, NODE_IMMOVABLES_FILENAME_TEMPLATE, kCurrentPacketVersionImmovables)
 
-		WRITE(roads_file, ROADS_FILENAME_TEMPLATE, kCurrentPacketVersionRoads);
+		WRITE(roads_file, ROADS_FILENAME_TEMPLATE, kCurrentPacketVersionRoads)
 
-		WRITE(terrains_file, TERRAINS_FILENAME_TEMPLATE, kCurrentPacketVersionTerrains);
+		WRITE(terrains_file, TERRAINS_FILENAME_TEMPLATE, kCurrentPacketVersionTerrains)
 
 		WRITE(triangle_immovable_kinds_file, TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
-		      kCurrentPacketVersionImmovableKinds);
+		      kCurrentPacketVersionImmovableKinds)
 
 		WRITE(triangle_immovables_file, TRIANGLE_IMMOVABLES_FILENAME_TEMPLATE,
-		      kCurrentPacketVersionImmovables);
+		      kCurrentPacketVersionImmovables)
 
-		WRITE(owners_file, OWNERS_FILENAME_TEMPLATE, kCurrentPacketVersionOwners);
+		WRITE(owners_file, OWNERS_FILENAME_TEMPLATE, kCurrentPacketVersionOwners)
 
-		WRITE(surveys_file, SURVEYS_FILENAME_TEMPLATE, kCurrentPacketVersionSurveys);
+		WRITE(surveys_file, SURVEYS_FILENAME_TEMPLATE, kCurrentPacketVersionSurveys)
 
 		WRITE(
-		   survey_amounts_file, SURVEY_AMOUNTS_FILENAME_TEMPLATE, kCurrentPacketVersionSurveyAmounts);
+		   survey_amounts_file, SURVEY_AMOUNTS_FILENAME_TEMPLATE, kCurrentPacketVersionSurveyAmounts)
 
-		WRITE(survey_times_file, SURVEY_TIMES_FILENAME_TEMPLATE, kCurrentPacketVersionSurveyTimes);
+		WRITE(survey_times_file, SURVEY_TIMES_FILENAME_TEMPLATE, kCurrentPacketVersionSurveyTimes)
 
-		WRITE(hidden_file, HIDDEN_FILENAME_TEMPLATE, kCurrentPacketVersionHidden);
+		WRITE(hidden_file, HIDDEN_FILENAME_TEMPLATE, kCurrentPacketVersionHidden)
 
-		WRITE(vision_file, VISION_FILENAME_TEMPLATE, kCurrentPacketVersionVision);
+		WRITE(vision_file, VISION_FILENAME_TEMPLATE, kCurrentPacketVersionVision)
 
-		WRITE(border_file, BORDER_FILENAME_TEMPLATE, kCurrentPacketVersionBorder);
+		WRITE(border_file, BORDER_FILENAME_TEMPLATE, kCurrentPacketVersionBorder)
 	}
 }
-}
+}  // namespace Widelands

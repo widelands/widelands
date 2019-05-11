@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,7 @@
 #include "editor/ui_menus/tool_noise_height_options_menu.h"
 #include "editor/ui_menus/tool_place_critter_options_menu.h"
 #include "editor/ui_menus/tool_place_immovable_options_menu.h"
+#include "editor/ui_menus/tool_resize_options_menu.h"
 #include "editor/ui_menus/tool_set_terrain_options_menu.h"
 #include "graphic/graphic.h"
 #include "ui_basic/radiobutton.h"
@@ -50,39 +51,42 @@ EditorToolMenu::EditorToolMenu(EditorInteractive& parent, UI::UniqueWindow::Regi
 	int32_t const width = 34;
 	int32_t const height = 34;
 
-	int32_t const num_tools = 8;
+	int32_t const num_tools = 9;
 #define ADD_BUTTON(pic, tooltip)                                                                   \
 	radioselect_.add_button(                                                                        \
 	   this, pos, g_gr->images().get("images/wui/editor/editor_menu_tool_" pic ".png"), tooltip);   \
 	pos.x += width + spacing;
 
-	ADD_BUTTON("change_height", _("Change height"));
-	ADD_BUTTON("noise_height", _("Random height"));
-	ADD_BUTTON("set_terrain", _("Terrain"));
-	ADD_BUTTON("place_immovable", _("Immovables"));
-	ADD_BUTTON("place_bob", _("Animals"));
-	ADD_BUTTON("change_resources", _("Resources"));
-	ADD_BUTTON("set_port_space", _("Set port space"));
+	ADD_BUTTON("change_height", _("Change height"))
+	ADD_BUTTON("noise_height", _("Random height"))
+	ADD_BUTTON("set_terrain", _("Terrain"))
+	ADD_BUTTON("place_immovable", _("Immovables"))
+	ADD_BUTTON("place_bob", _("Animals"))
+	ADD_BUTTON("change_resources", _("Resources"))
+	ADD_BUTTON("set_port_space", _("Set port space"))
 	ADD_BUTTON("set_origin", _("Set the position that will have the coordinates (0, 0). This will "
 	                           "be the top-left corner of a generated minimap."));
+	ADD_BUTTON("resize", _("Change the map’s size"));
 
 	set_inner_size(offs.x + (width + spacing) * num_tools, offs.y + (height + spacing));
 
 	{
-		const EditorTool& current = parent.tools()->current();
-		radioselect_.set_state(&current == &parent.tools()->noise_height ?
+		const EditorTool* current = &parent.tools()->current();
+		radioselect_.set_state(current == &parent.tools()->noise_height ?
 		                          1 :
-		                          &current == &parent.tools()->set_terrain ?
+		                          current == &parent.tools()->set_terrain ?
 		                          2 :
-		                          &current == &parent.tools()->place_immovable ?
+		                          current == &parent.tools()->place_immovable ?
 		                          3 :
-		                          &current == &parent.tools()->place_critter ?
+		                          current == &parent.tools()->place_critter ?
 		                          4 :
-		                          &current == &parent.tools()->increase_resources ?
+		                          current == &parent.tools()->increase_resources ?
 		                          5 :
-		                          &current == &parent.tools()->set_port_space ?
+		                          current == &parent.tools()->set_port_space ?
 		                          6 :
-		                          &current == &parent.tools()->set_origin ? 7 : 0);
+		                          current == &parent.tools()->set_origin ?
+		                          7 :
+		                          current == &parent.tools()->resize ? 8 : 0);
 	}
 
 	radioselect_.changed.connect(boost::bind(&EditorToolMenu::changed_to, this));
@@ -94,7 +98,7 @@ EditorToolMenu::EditorToolMenu(EditorInteractive& parent, UI::UniqueWindow::Regi
 
 /**
  * Called when the radiogroup changes or is reclicked
-*/
+ */
 void EditorToolMenu::changed_to() {
 	const int32_t n = radioselect_.get_state();
 
@@ -135,6 +139,10 @@ void EditorToolMenu::changed_to() {
 		current_tool_pointer = &parent.tools()->set_origin;
 		current_registry_pointer = nullptr;  // no need for a window
 		break;
+	case 8:
+		current_tool_pointer = &parent.tools()->resize;
+		current_registry_pointer = &parent.resizemenu_;
+		break;
 	default:
 		NEVER_HERE();
 	}
@@ -173,6 +181,10 @@ void EditorToolMenu::changed_to() {
 			case 5:
 				new EditorToolChangeResourcesOptionsMenu(
 				   parent, parent.tools()->increase_resources, *current_registry_pointer);
+				break;
+			case 8:
+				new EditorToolResizeOptionsMenu(
+				   parent, parent.tools()->resize, *current_registry_pointer);
 				break;
 			default:
 				NEVER_HERE();

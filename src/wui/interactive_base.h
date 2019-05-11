@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,6 @@
 #include "notifications/notifications.h"
 #include "profile/profile.h"
 #include "sound/note_sound.h"
-#include "sound/sound_handler.h"
 #include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
@@ -47,24 +46,12 @@ struct CoordPath;
 class EdgeOverlayManager;
 class UniqueWindowHandler;
 
-enum TextToDraw {
-	kNone = 0,
-	kCensus = 1,
-	kStatistics = 2,
-};
-
-inline TextToDraw operator|(TextToDraw a, TextToDraw b) {
-	return static_cast<TextToDraw>(static_cast<int>(a) | static_cast<int>(b));
-}
-
 /**
  * This is used to represent the code that InteractivePlayer and
  * EditorInteractive share.
  */
 class InteractiveBase : public UI::Panel, public DebugConsole::Handler {
 public:
-	friend class SoundHandler;
-
 	enum {
 		dfShowCensus = 1,      ///< show census report on buildings
 		dfShowStatistics = 2,  ///< show statistics report on buildings
@@ -98,6 +85,11 @@ public:
 
 	void show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords);
 	void hide_workarea(const Widelands::Coords& coords);
+
+	bool has_expedition_port_space(const Widelands::Coords&) const;
+	std::map<Widelands::Ship*, Widelands::Coords>& get_expedition_port_spaces() {
+		return expedition_port_spaces_;
+	}
 
 	//  point of view for drawing
 	virtual Widelands::Player* get_player() const = 0;
@@ -244,7 +236,7 @@ protected:
 	TextToDraw get_text_to_draw() const;
 
 	// Returns the current overlays for the work area previews.
-	std::map<Widelands::Coords, const Image*> get_workarea_overlays(const Widelands::Map& map) const;
+	Workareas get_workarea_overlays(const Widelands::Map& map) const;
 
 	// Returns the 'BuildhelpOverlay' for 'caps' or nullptr if there is no help
 	// to be displayed on this field.
@@ -254,11 +246,17 @@ protected:
 		return road_building_overlays_;
 	}
 
-	/// Returns true if there is a workarea preview being shown at the given coordinates
-	bool has_workarea_preview(const Widelands::Coords& coords) const;
+	/// Returns true if there is a workarea preview being shown at the given coordinates.
+	/// If 'map' is 0, checks only if the given coords are the center of a workarea;
+	/// otherwise checks if the coords are within any workarea.
+	bool has_workarea_preview(const Widelands::Coords& coords,
+	                          const Widelands::Map* map = nullptr) const;
+
+	/// Returns true if the current player is allowed to hear sounds from map objects on this field
+	virtual bool player_hears_field(const Widelands::Coords& coords) const = 0;
 
 private:
-	int32_t stereo_position(Widelands::Coords position_map);
+	void play_sound_effect(const NoteSound& note) const;
 	void resize_chat_overlay();
 	void roadb_add_overlay();
 	void roadb_remove_overlay();
@@ -298,11 +296,14 @@ private:
 	// coordinate that the building that shows the work area is positioned.
 	std::map<Widelands::Coords, const WorkareaInfo*> workarea_previews_;
 
+	std::map<Widelands::Ship*, Widelands::Coords> expedition_port_spaces_;
+
 	RoadBuildingOverlays road_building_overlays_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;
 	uint32_t lastframe_;        //  system time (milliseconds)
@@ -314,7 +315,6 @@ private:
 
 	UI::UniqueWindow::Registry debugconsole_;
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
-	std::vector<const Image*> workarea_pics_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
 };
 

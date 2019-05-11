@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -220,7 +220,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 					      if (canceled.bootstrap == pd->expedition_bootstrap()) {
 						      update_expedition_button(true);
 					      }
-					   });
+				      });
 			}
 		} else if (upcast(const Widelands::ProductionSite, productionsite, building)) {
 			if (!is_a(Widelands::MilitarySite, productionsite)) {
@@ -282,14 +282,18 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		}
 
 		if (capscache_ & Widelands::Building::PCap_Dismantle) {
-			const Widelands::Buildcost wares =
-			   Widelands::DismantleSite::count_returned_wares(building);
-			if (!wares.empty()) {
+			if (building->descr().can_be_dismantled()) {
+				const Widelands::Buildcost wares =
+				   Widelands::DismantleSite::count_returned_wares(building);
+
+				const std::string dismantle_text =
+				   (wares.empty() ? _("Dismantle") :
+				                    std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") +
+				                       "</font><br>" + waremap_to_richtext(owner.tribe(), wares));
+
 				UI::Button* dismantlebtn =
 				   new UI::Button(capsbuttons, "dismantle", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				                  g_gr->images().get(pic_dismantle),
-				                  std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") +
-				                     "</font><br>" + waremap_to_richtext(owner.tribe(), wares));
+				                  g_gr->images().get(pic_dismantle), dismantle_text);
 				dismantlebtn->sigclicked.connect(
 				   boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
 				capsbuttons->add(dismantlebtn);
@@ -316,7 +320,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (!wa_info->empty()) {
 			toggle_workarea_ =
 			   new UI::Button(capsbuttons, "workarea", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_gr->images().get("images/wui/overlays/workarea123.png"));
+			                  g_gr->images().get("images/wui/buildings/toggle_workarea.png"));
 			toggle_workarea_->sigclicked.connect(
 			   boost::bind(&BuildingWindow::toggle_workarea, boost::ref(*this)));
 
@@ -352,12 +356,15 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		UI::UniqueWindow::Registry& registry =
 		   igbase()->unique_windows().get_registry(building_descr_for_help_.name() + "_help");
 		registry.open_window = [this, &registry] {
-			Widelands::Building* building_in_lambda = building_.get(parent_->egbase());
-			if (building_in_lambda == nullptr) {
-				return;
+			if (parent_ != nullptr) {
+				Widelands::Building* building_in_lambda = building_.get(parent_->egbase());
+				if (building_in_lambda == nullptr) {
+					return;
+				}
+				new UI::BuildingHelpWindow(igbase(), registry, building_descr_for_help_,
+				                           building_in_lambda->owner().tribe(),
+				                           &parent_->egbase().lua());
 			}
-			new UI::BuildingHelpWindow(igbase(), registry, building_descr_for_help_,
-			                           building_in_lambda->owner().tribe(), &parent_->egbase().lua());
 		};
 
 		helpbtn->sigclicked.connect(

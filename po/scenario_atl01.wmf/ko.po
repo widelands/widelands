@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # ks k, 2018
-# ks k, 2018
+# ks k, 2018-2019
+# TaeMin An, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-20 07:33+0000\n"
-"PO-Revision-Date: 2018-07-21 14:55+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2019-04-22 05:17+0000\n"
+"PO-Revision-Date: 2019-05-05 11:37+0000\n"
+"Last-Translator: TaeMin An\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,15 +21,15 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:31
 msgid "Ensure the supply of building wares"
-msgstr "건물 상품의  공급을 확보하십시오."
+msgstr "건축 자재 공급 체제를 정비하십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:33
 msgid "Supply Building Wares"
-msgstr ""
+msgstr "건축 자재 공급"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Supply basic building material for your economy:"
-msgstr ""
+msgstr "경제를 위한 기초 건축자재 공급:"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Build a quarry"
@@ -36,11 +37,11 @@ msgstr "채석장을 지으십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build two woodcutter’s houses"
-msgstr "두곳의 나무꾼의 집을 지으십시오."
+msgstr "벌목꾼의 집 두 곳을 지으십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two forester’s houses"
-msgstr ""
+msgstr "두곳의 숲 지킴이의 집을 지으십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:38
 msgid "Build a sawmill"
@@ -48,11 +49,11 @@ msgstr "제제소를 지으십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "Expand your territory and explore"
-msgstr ""
+msgstr "영역을 확장하고 탐색하십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:46
 msgid "Expand and Explore"
-msgstr ""
+msgstr "확장과 탐색"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:47
 msgid ""
@@ -63,15 +64,15 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:48
 msgid "Build military sites to expand your territory"
-msgstr ""
+msgstr "영토 확장을 위한 군사기지를 지으십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:54
 msgid "Establish a solid food production"
-msgstr ""
+msgstr "식량 생산 체제를 확보하십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid "Food Production"
-msgstr ""
+msgstr "식량 생산"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid ""
@@ -101,19 +102,19 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a well"
-msgstr ""
+msgstr "우물을 지으십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr ""
+msgstr "옥수수 밭, 검은 뿌리 및 물로 빵을 굽기위한 제과점을 지으십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a hunter’s house to get raw meat"
-msgstr ""
+msgstr "날고기를 얻기위해 사냥꾼의 집을 지으십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a fisher’s house close to water to get raw fish"
-msgstr ""
+msgstr "날 물고기를 얻기위해 물고기 잡이의 집을 물가 가까운곳에 지으십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:65
 msgid ""
@@ -127,11 +128,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:72
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "거미 농장과 방직 공장 짓기"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:74
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "거미줄 천 생산"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:75
 msgid ""
@@ -144,7 +145,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:76
 msgid "Build a weaving mill"
-msgstr ""
+msgstr "방직 공장 짓기"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a spider farm"
@@ -152,7 +153,7 @@ msgstr "거미 농장 짓기"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:78
 msgid "Build a gold spinning mill"
-msgstr "황금 방적 공장 짓기"
+msgstr "금실 방적 공장 짓기"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:84
 msgid "Build industry and mines"
@@ -185,24 +186,24 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid "Build a smelting works"
-msgstr ""
+msgstr "제련소 짓기"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:91
 msgid "Build an armor smithy and a weapon smithy"
-msgstr ""
+msgstr "갑옷 대장간과 무기 대장간을 지으십시오."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:92
 msgid "Build a toolsmithy"
-msgstr ""
+msgstr "도구 대장간 짓기"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:102
 msgid "Build a barracks"
-msgstr ""
+msgstr "병영 짓기"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:100
 msgid "Recruiting new soldiers"
-msgstr ""
+msgstr "신병을 모집하는중"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:101
 msgid ""
@@ -214,11 +215,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:108
 msgid "Build training sites for soldiers"
-msgstr ""
+msgstr "군인 훈련소 짓기"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:110
 msgid "Soldier Training Sites"
-msgstr ""
+msgstr "군인 훈련소"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:111
 msgid ""
@@ -230,15 +231,15 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:112
 msgid "Build a dungeon and a labyrinth"
-msgstr ""
+msgstr "지하감옥과 미로 짓기"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:118
 msgid "Build a warehouse and a horse farm"
-msgstr ""
+msgstr "창고와 말 농장 짓기"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Warehouse and Horse Farm"
-msgstr ""
+msgstr "창고와 말 농장"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:121
 msgid ""
@@ -250,19 +251,19 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:122
 msgid "Build a warehouse"
-msgstr ""
+msgstr "창고 짓기"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:123
 msgid "Build a horse farm"
-msgstr ""
+msgstr "말 농장 짓기"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:129
 msgid "Build 3 ships to escape from the island"
-msgstr ""
+msgstr "섬에서 탈출할 배 3척을 건조하기"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:131
 msgid "Escape From the Island"
-msgstr ""
+msgstr "섬에서 탈출하기"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:132
 msgid ""
@@ -273,7 +274,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:133
 msgid "Build a shipyard close to the lake to start building ships"
-msgstr ""
+msgstr "호숫가에 조선소를 건설하여 선박 건조 착수하십시오"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:144
 msgid "Proud to the Death"

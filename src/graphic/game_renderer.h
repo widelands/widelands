@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2018 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,8 @@
 #ifndef WL_GRAPHIC_GAME_RENDERER_H
 #define WL_GRAPHIC_GAME_RENDERER_H
 
-#include <memory>
 #include <map>
+#include <memory>
 
 #include "base/macros.h"
 #include "base/vector.h"
@@ -33,6 +33,8 @@
 void draw_terrain(const Widelands::EditorGameBase& egbase,
                   const FieldsToDraw& fields_to_draw,
                   const float scale,
+                  Workareas workarea,
+                  bool grid,
                   RenderTarget* dst);
 
 // Draw the border stones for 'field' if it is a border and 'visibility' is

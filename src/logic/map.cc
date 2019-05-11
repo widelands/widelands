@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,28 +28,46 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "logic/findimmovable.h"
-#include "logic/findnode.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findimmovable.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
+#include "logic/maphollowregion.h"
+#include "logic/mapregion.h"
 #include "logic/objective.h"
 #include "logic/pathfield.h"
-#include "logic/player.h"
 #include "map_io/s2map.h"
 #include "map_io/widelands_map_loader.h"
 #include "notifications/notifications.h"
 
 namespace Widelands {
+
+FieldData::FieldData(const Field& field)
+   : height(field.get_height()),
+     resources(field.get_resources()),
+     resource_amount(field.get_initial_res_amount()),
+     terrains(field.get_terrains()) {
+	if (const BaseImmovable* imm = field.get_immovable()) {
+		immovable = imm->descr().name();
+	} else {
+		immovable = "";
+	}
+	for (Bob* bob = field.get_first_bob(); bob; bob = bob->get_next_bob()) {
+		bobs.push_back(bob->descr().name());
+	}
+}
 
 /*
 ==============================================================================
@@ -254,6 +272,137 @@ void Map::recalc_default_resources(const World& world) {
 		}
 }
 
+size_t Map::count_all_conquerable_fields() {
+	if (!valuable_fields_.empty()) {
+		// Already calculated
+		return valuable_fields_.size();
+	}
+
+	std::set<FCoords> coords_to_check;
+
+	log("Collecting valuable fields ... ");
+	ScopedTimer timer("took %ums");
+
+	// If we don't have the given coordinates yet, walk the map and collect conquerable fields,
+	// initialized with the given radius around the coordinates
+	const auto walk_starting_coords = [this, &coords_to_check](const Coords& coords, int radius) {
+		FCoords fcoords = get_fcoords(coords);
+
+		// We already have these coordinates
+		if (valuable_fields_.count(fcoords) == 1) {
+			return;
+		}
+
+		// Add starting field
+		valuable_fields_.insert(fcoords);
+
+		// Add outer land coordinates around the starting field for the given radius
+		std::unique_ptr<Widelands::HollowArea<>> hollow_area(
+		   new Widelands::HollowArea<>(Widelands::Area<>(fcoords, radius), 2));
+		std::unique_ptr<Widelands::MapHollowRegion<>> map_region(
+		   new Widelands::MapHollowRegion<>(*this, *hollow_area));
+		do {
+			coords_to_check.insert(get_fcoords(map_region->location()));
+		} while (map_region->advance(*this));
+
+		// Walk the map
+		while (!coords_to_check.empty()) {
+			// Get some coordinates to check
+			const auto coords_it = coords_to_check.begin();
+			fcoords = *coords_it;
+
+			// Get region according to buildcaps
+			radius = 0;
+			int inner_radius = 2;
+			if ((fcoords.field->maxcaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG) {
+				radius = 9;
+				inner_radius = 7;
+			} else if (fcoords.field->maxcaps() & BUILDCAPS_MEDIUM) {
+				radius = 7;
+				inner_radius = 5;
+			} else if (fcoords.field->maxcaps() & BUILDCAPS_SMALL) {
+				radius = 5;
+			}
+
+			// Check region and add walkable fields
+			if (radius > 0) {
+				hollow_area.reset(
+				   new Widelands::HollowArea<>(Widelands::Area<>(fcoords, radius), inner_radius));
+				map_region.reset(new Widelands::MapHollowRegion<>(*this, *hollow_area));
+				do {
+					fcoords = get_fcoords(map_region->location());
+
+					// We do the caps check first, because the comparison is faster than the container
+					// check
+					if ((fcoords.field->maxcaps() & MOVECAPS_WALK) &&
+					    (valuable_fields_.count(fcoords) == 0)) {
+						valuable_fields_.insert(fcoords);
+						coords_to_check.insert(fcoords);
+					}
+				} while (map_region->advance(*this));
+			}
+
+			// These coordinates are done. We do not keep track of visited coordinates that didn't make
+			// the result, because the container insert operations are more expensive than the checks
+			coords_to_check.erase(coords_it);
+		}
+	};
+
+	// Walk the map from the starting field of each player
+	for (const Coords& coords : starting_pos_) {
+		walk_starting_coords(coords, 9);
+	}
+
+	// Walk the map from port spaces
+	if (allows_seafaring()) {
+		for (const Coords& coords : get_port_spaces()) {
+			walk_starting_coords(coords, 5);
+		}
+	}
+
+	log("%" PRIuS " found ... ", valuable_fields_.size());
+	return valuable_fields_.size();
+}
+
+size_t Map::count_all_fields_excluding_caps(NodeCaps caps) {
+	if (!valuable_fields_.empty()) {
+		// Already calculated
+		return valuable_fields_.size();
+	}
+
+	log("Collecting valuable fields ... ");
+	ScopedTimer timer("took %ums");
+
+	for (MapIndex i = 0; i < max_index(); ++i) {
+		Field& field = fields_[i];
+		if (!(field.nodecaps() & caps)) {
+			valuable_fields_.insert(get_fcoords(field));
+		}
+	}
+
+	log("%" PRIuS " found ... ", valuable_fields_.size());
+	return valuable_fields_.size();
+}
+
+std::map<PlayerNumber, size_t>
+Map::count_owned_valuable_fields(const std::string& immovable_attribute) const {
+	std::map<PlayerNumber, size_t> result;
+	const bool use_attribute = !immovable_attribute.empty();
+	const uint32_t attribute_id =
+	   use_attribute ? MapObjectDescr::get_attribute_id(immovable_attribute) : 0U;
+	for (const FCoords& fcoords : valuable_fields_) {
+		if (use_attribute) {
+			const BaseImmovable* imm = fcoords.field->get_immovable();
+			if (imm != nullptr && imm->has_attribute(attribute_id)) {
+				result[fcoords.field->get_owned_by()] += 1;
+			}
+		} else {
+			result[fcoords.field->get_owned_by()] += 1;
+		}
+	}
+	return result;
+}
+
 /*
 ===============
 remove your world, remove your data
@@ -277,7 +426,6 @@ void Map::cleanup() {
 	background_ = std::string();
 
 	objectives_.clear();
-
 	port_spaces_.clear();
 	allows_seafaring_ = false;
 
@@ -323,66 +471,228 @@ void Map::create_empty_map(const World& world,
 	filesystem_.reset(nullptr);
 }
 
+// Made this a separate function to reduce compiler warnings
+template <typename T = Field>
+static inline void clear_array(std::unique_ptr<T[]>* array, uint32_t size) {
+	memset(array->get(), 0, sizeof(T) * size);
+}
+
 void Map::set_origin(const Coords& new_origin) {
 	assert(0 <= new_origin.x);
 	assert(new_origin.x < width_);
 	assert(0 <= new_origin.y);
 	assert(new_origin.y < height_);
 
+	const size_t field_size = width_ * height_;
+
 	for (uint8_t i = get_nrplayers(); i;) {
 		starting_pos_[--i].reorigin(new_origin, extent());
 	}
 
-	std::unique_ptr<Field[]> new_field_order(new Field[width_ * height_]);
-	memset(new_field_order.get(), 0, sizeof(Field) * width_ * height_);
+	std::unique_ptr<Field[]> new_field_order(new Field[field_size]);
+	clear_array<>(&new_field_order, field_size);
 
 	// Rearrange The fields
-	// NOTE because of the triangle design, we have to take special care about cases
+	// NOTE because of the triangle design, we have to take special care of cases
 	// NOTE where y is changed by an odd number
 	bool yisodd = (new_origin.y % 2) != 0;
 	for (Coords c(Coords(0, 0)); c.y < height_; ++c.y) {
 		bool cyisodd = (c.y % 2) != 0;
 		for (c.x = 0; c.x < width_; ++c.x) {
 			Coords temp;
-			if (yisodd && cyisodd)
+			if (yisodd && cyisodd) {
 				temp = Coords(c.x + new_origin.x + 1, c.y + new_origin.y);
-			else
+			} else {
 				temp = Coords(c.x + new_origin.x, c.y + new_origin.y);
+			}
 			normalize_coords(temp);
 			new_field_order[get_index(c, width_)] = operator[](temp);
 		}
 	}
 	// Now that we restructured the fields, we just overwrite the old order
-	for (decltype(width_) ind = 0; ind < width_ * height_; ind++) {
+	for (size_t ind = 0; ind < field_size; ind++) {
 		fields_[ind] = new_field_order[ind];
 	}
 
 	//  Inform immovables and bobs about their new coordinates.
-	for (FCoords c(Coords(0, 0), fields_.get()); c.y < height_; ++c.y)
+	for (FCoords c(Coords(0, 0), fields_.get()); c.y < height_; ++c.y) {
 		for (c.x = 0; c.x < width_; ++c.x, ++c.field) {
 			assert(c.field == &operator[](c));
-			if (upcast(Immovable, immovable, c.field->get_immovable()))
+			if (upcast(Immovable, immovable, c.field->get_immovable())) {
 				immovable->position_ = c;
+			}
 			for (Bob* bob = c.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
 				bob->position_.x = c.x;
 				bob->position_.y = c.y;
 				bob->position_.field = c.field;
 			}
 		}
+	}
 
-	// Take care about port spaces
+	// Take care of port spaces
 	PortSpacesSet new_port_spaces;
 	for (PortSpacesSet::iterator it = port_spaces_.begin(); it != port_spaces_.end(); ++it) {
 		Coords temp;
-		if (yisodd && ((it->y % 2) == 0))
+		if (yisodd && ((it->y % 2) == 0)) {
 			temp = Coords(it->x - new_origin.x - 1, it->y - new_origin.y);
-		else
+		} else {
 			temp = Coords(it->x - new_origin.x, it->y - new_origin.y);
+		}
 		normalize_coords(temp);
-		log("(%i,%i) -> (%i,%i)\n", it->x, it->y, temp.x, temp.y);
 		new_port_spaces.insert(temp);
 	}
 	port_spaces_ = new_port_spaces;
+	log("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
+}
+
+/* Helper function for resize():
+ * Calculates the coords of 'c' after resizing the map from the given old size to the given new size
+ * at 'split'.
+ */
+static Coords transform_coords(const Coords& c,
+                               const Coords& split,
+                               int16_t w_new,
+                               int16_t h_new,
+                               int16_t w_old,
+                               int16_t h_old) {
+	const int16_t delta_w = w_new - w_old;
+	const int16_t delta_h = h_new - h_old;
+	if (c.x < split.x && c.y < split.y) {
+		// Nothing to shift
+		Coords result(c);
+		Map::normalize_coords(result, w_new, h_new);
+		return result;
+	} else if ((w_new < w_old && c.x >= split.x && c.x < split.x - delta_w) ||
+	           (h_new < h_old && c.y >= split.y && c.y < split.y - delta_h)) {
+		// Field removed
+		return Coords::null();
+	}
+	Coords result(c.x, c.y);
+	if (c.x >= split.x) {
+		result.x += delta_w;
+	}
+	if (c.y >= split.y) {
+		result.y += delta_h;
+	}
+	Map::normalize_coords(result, w_new, h_new);
+	return result;
+}
+
+/* Change the size of the (already initialized) map to 'w'×'h' by inserting/deleting fields south
+ * and east of 'split'. Returns the data of fields that were deleted during resizing. This function
+ * will notify all players of the change in map size, but not of anything else. This is because the
+ * editor may want to do some post-resize cleanup first, and this function is intended to be used
+ * only by the editor anyway. You should call recalc_whole_map() afterwards to resolve height
+ * differences etc.
+ */
+std::map<Coords, FieldData>
+Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {
+	assert(w > 0);
+	assert(h > 0);
+
+	std::map<Coords, FieldData> deleted;
+	if (w == width_ && h == height_) {
+		return deleted;
+	}
+
+	const uint32_t field_size = w * h;
+	const uint32_t old_field_size = width_ * height_;
+
+	std::unique_ptr<Field[]> new_fields(new Field[field_size]);
+	clear_array<>(&new_fields, field_size);
+
+	// Take care of starting positions and port spaces
+	for (uint8_t i = get_nrplayers(); i > 0; --i) {
+		if (starting_pos_[i - 1]) {
+			starting_pos_[i - 1] =
+			   transform_coords(starting_pos_[i - 1], split, w, h, width_, height_);
+		}
+	}
+
+	PortSpacesSet new_port_spaces;
+	for (Coords it : port_spaces_) {
+		if (Coords c = transform_coords(it, split, w, h, width_, height_)) {
+			new_port_spaces.insert(c);
+		}
+	}
+	port_spaces_ = new_port_spaces;
+
+	Field::Terrains default_terrains;
+	default_terrains.r = 0;
+	default_terrains.d = 0;
+
+	std::unique_ptr<bool[]> preserved_coords(new bool[old_field_size]);
+	clear_array<bool>(&preserved_coords, old_field_size);
+
+	const int16_t w_max = w > width_ ? w : width_;
+	const int16_t h_max = h > height_ ? h : height_;
+	for (int16_t x = 0; x < w_max; ++x) {
+		for (int16_t y = 0; y < h_max; ++y) {
+			Coords c_new = Coords(x, y);
+			if (x < width_ && y < height_ && !preserved_coords[get_index(c_new, width_)]) {
+				// Save the data of fields that will be deleted
+				Field& field = operator[](c_new);
+				deleted.insert(std::make_pair(c_new, FieldData(field)));
+				// ...and now we delete stuff that needs removing when the field is destroyed
+				if (BaseImmovable* imm = field.get_immovable()) {
+					imm->remove(egbase);
+				}
+				while (Bob* bob = field.get_first_bob()) {
+					bob->remove(egbase);
+				}
+			}
+			if (x < w && y < h) {
+				if (Coords c_old = transform_coords(c_new, split, width_, height_, w, h)) {
+					bool& entry = preserved_coords[get_index(c_old, width_)];
+					if (!entry) {
+						// Copy existing field
+						entry = true;
+						new_fields[get_index(c_new, w)] = operator[](c_old);
+						continue;
+					}
+				}
+				// Init new field
+				Field& field = new_fields[get_index(c_new, w)];
+				field.set_height(10);
+				field.set_terrains(default_terrains);
+			}
+		}
+	}
+
+	// Replace all fields
+	fields_.reset(new Field[field_size]);
+	clear_array<>(&fields_, field_size);
+	for (size_t ind = 0; ind < field_size; ++ind) {
+		fields_[ind] = new_fields[ind];
+	}
+	log("Resized map from (%d, %d) to (%u, %u) at (%d, %d)\n", width_, height_, w, h, split.x,
+	    split.y);
+	width_ = w;
+	height_ = h;
+
+	// Inform immovables and bobs about their new position
+	for (MapIndex idx = 0; idx < field_size; ++idx) {
+		Field& f = operator[](idx);
+		if (upcast(Immovable, immovable, f.get_immovable())) {
+			immovable->position_ = get_fcoords(f);
+		}
+		// Ensuring that all bob iterators are changed correctly is a bit hacky, but the more obvious
+		// solution of doing it like in set_origin() is highly problematic here, or so ASan tells me
+		std::vector<Bob*> bobs;
+		for (Bob* bob = f.get_first_bob(); bob; bob = bob->get_next_bob()) {
+			bobs.push_back(bob);
+		}
+		f.bobs = nullptr;
+		for (Bob* bob : bobs) {
+			bob->position_.field = nullptr;
+			bob->linknext_ = nullptr;
+			bob->linkpprev_ = nullptr;
+			bob->set_position(egbase, get_fcoords(f));
+		}
+	}
+
+	egbase.allocate_player_maps();
+	return deleted;
 }
 
 /*
@@ -396,10 +706,12 @@ void Map::set_size(const uint32_t w, const uint32_t h) {
 	width_ = w;
 	height_ = h;
 
-	fields_.reset(new Field[w * h]);
-	memset(fields_.get(), 0, sizeof(Field) * w * h);
+	const uint32_t field_size = w * h;
 
-	pathfieldmgr_->set_size(w * h);
+	fields_.reset(new Field[field_size]);
+	clear_array<>(&fields_, field_size);
+
+	pathfieldmgr_->set_size(field_size);
 }
 
 /*
@@ -543,9 +855,9 @@ void Map::delete_tag(const std::string& tag) {
 }
 
 NodeCaps Map::get_max_nodecaps(const World& world, const FCoords& fc) const {
-	NodeCaps caps = calc_nodecaps_pass1(world, fc, false);
-	caps = calc_nodecaps_pass2(world, fc, false, caps);
-	return caps;
+	NodeCaps max_caps = calc_nodecaps_pass1(world, fc, false);
+	max_caps = calc_nodecaps_pass2(world, fc, false, max_caps);
+	return static_cast<NodeCaps>(max_caps);
 }
 
 /// \returns the immovable at the given coordinate
@@ -931,6 +1243,7 @@ above recalc_brightness.
 */
 void Map::recalc_nodecaps_pass1(const World& world, const FCoords& f) {
 	f.field->caps = calc_nodecaps_pass1(world, f, true);
+	f.field->max_caps = calc_nodecaps_pass1(world, f, false);
 }
 
 NodeCaps Map::calc_nodecaps_pass1(const World& world, const FCoords& f, bool consider_mobs) const {
@@ -1049,6 +1362,8 @@ Important: flag buildability has already been checked in the first pass.
 */
 void Map::recalc_nodecaps_pass2(const World& world, const FCoords& f) {
 	f.field->caps = calc_nodecaps_pass2(world, f, true);
+	f.field->max_caps =
+	   calc_nodecaps_pass2(world, f, false, static_cast<NodeCaps>(f.field->max_caps));
 }
 
 NodeCaps Map::calc_nodecaps_pass2(const World& world,
@@ -1317,8 +1632,10 @@ bool Map::set_port_space(
 		success = force || is_port_space_allowed(world, get_fcoords(c));
 		if (success) {
 			port_spaces_.insert(c);
+			recalculate_seafaring &= !allows_seafaring();
 		}
 	} else {
+		recalculate_seafaring &= allows_seafaring();
 		port_spaces_.erase(c);
 		success = true;
 	}
@@ -1566,16 +1883,18 @@ std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) 
 	std::string lower_filename = filename;
 	boost::algorithm::to_lower(lower_filename);
 
-	if (boost::algorithm::ends_with(lower_filename, kWidelandsMapExtension)) {
-		try {
+	try {
+		if (boost::algorithm::ends_with(lower_filename, kWidelandsMapExtension)) {
 			result.reset(new WidelandsMapLoader(g_fs->make_sub_file_system(filename), this));
-		} catch (...) {
-			//  If this fails, it is an illegal file.
-			//  TODO(unknown): catchall hides real errors! Replace with more specific code
+		} else if (boost::algorithm::ends_with(lower_filename, kS2MapExtension1) ||
+		           boost::algorithm::ends_with(lower_filename, kS2MapExtension2)) {
+			result.reset(new S2MapLoader(filename, *this));
 		}
-	} else if (boost::algorithm::ends_with(lower_filename, kS2MapExtension1) ||
-	           boost::algorithm::ends_with(lower_filename, kS2MapExtension2)) {
-		result.reset(new S2MapLoader(filename, *this));
+	} catch (const FileError& e) {
+		// file might not have existed
+		log("Map::get_correct_loader: File error: %s\n", e.what());
+	} catch (std::exception& e) {
+		log("Map::get_correct_loader: Unknown error: %s\n", e.what());
 	}
 	return result;
 }
@@ -1684,10 +2003,10 @@ int32_t Map::findpath(Coords instart,
 				continue;
 
 			// Check passability
-			if (!checkstep.allowed(
-			       *this, cur, neighb, *direction, neighb == end ? CheckStep::stepLast : cur == start ?
-			                                                       CheckStep::stepFirst :
-			                                                       CheckStep::stepNormal))
+			if (!checkstep.allowed(*this, cur, neighb, *direction,
+			                       neighb == end ?
+			                          CheckStep::stepLast :
+			                          cur == start ? CheckStep::stepFirst : CheckStep::stepNormal))
 				continue;
 
 			// Calculate cost
@@ -2030,11 +2349,15 @@ void Map::recalculate_allows_seafaring() {
 }
 
 void Map::cleanup_port_spaces(const World& world) {
+	// Temporary set to avoid problems with concurrent container operations
+	PortSpacesSet clean_me_up;
 	for (const Coords& c : get_port_spaces()) {
 		if (!is_port_space_allowed(world, get_fcoords(c))) {
-			set_port_space(world, c, false);
-			continue;
+			clean_me_up.insert(c);
 		}
+	}
+	for (const Coords& c : clean_me_up) {
+		set_port_space(world, c, false);
 	}
 	recalculate_allows_seafaring();
 }

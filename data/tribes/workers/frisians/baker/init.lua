@@ -26,5 +26,6 @@ tribes:new_worker_type {
    experience = 13,
    becomes = "frisians_baker_master",
 
+   ware_hotspot = {0, 20},
    animations = animations,
 }

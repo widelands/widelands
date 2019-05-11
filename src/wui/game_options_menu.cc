@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 
 #include "base/i18n.h"
 #include "graphic/graphic.h"
-#include "sound/sound_handler.h"
 #include "wui/game_exit_confirm_box.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2016 The Widelands Development Team <widelands-dev_at_lists.launchpad.net> -->
 <component type="desktop-application">
-  <id>org.widelands.widelands.desktop</id>
+  <id>org.widelands.widelands</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <icon type="stock">widelands</icon>
@@ -21,12 +21,13 @@
   <summary xml:lang="fy">In strategysk bouwspultsje mei rinnende tiid</summary>
   <summary xml:lang="gd">Geama ro-innleachd togail fìor-ama</summary>
   <summary xml:lang="hu">Egy valós idejű, építkezős stratégiai játék</summary>
+  <summary xml:lang="id">Sebuah permainan pembangunan strategi dalam waktu nyata</summary>
   <summary xml:lang="it">Un gioco di costruzione e strategia in tempo reale</summary>
   <summary xml:lang="ja">リアルタイム発展型ストラテジーゲーム</summary>
   <summary xml:lang="ko">실시간 건설 전략 게임</summary>
   <summary xml:lang="la">Ludus strategicae exstructionis in tempore vero</summary>
   <summary xml:lang="ms">Permainan strategi pembinaan masa-nyata</summary>
-  <summary xml:lang="nds">Een taktisk Speel övers Upbauen in Echt-Tied</summary>
+  <summary xml:lang="nds">Een taktisk Speel över 't Upbauen in Echt-Tied</summary>
   <summary xml:lang="nl">Een realtime opbouwend strategiespel</summary>
   <summary xml:lang="pl">Strategia czasu rzeczywistego skupiona na rozbudowie</summary>
   <summary xml:lang="pt">Um jogo de construção estratégica em tempo real</summary>
@@ -36,6 +37,7 @@
   <summary xml:lang="sk">Budovateľská stretegická hra v reálnom čase</summary>
   <summary xml:lang="sr">Graditeljska strateška igra u realnom vremenu</summary>
   <summary xml:lang="sv">Ett uppbyggnadsstrategispel i realtid</summary>
+  <summary xml:lang="tr">Gerçek zamanlı inşa strateji oyunu</summary>
   <summary xml:lang="uk">Стратегічна гра у режимі реального часу</summary>
   <summary xml:lang="zh_TW">一款即時演變的策略遊戲</summary>
   <description>
@@ -165,6 +167,12 @@
     <p xml:lang="la">
       Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
     </p>
+    <p xml:lang="lt">
+      Jūs esate mažo klano valdovas. Jūsų užduotis yra statyti nuolat besiplečiančią gyvenvietę. Tuo tarpu, kiekvienas klano narys darys viską, kas jos ar jo galioje, kad  pagamintų kuo daugiau resursų ir pagreitintų jos augimą.
+    </p>
+    <p xml:lang="lt">
+      Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
+    </p>
     <p xml:lang="ms">
       Anda merupakan pemangku raja di sebuah puak kecil. Anda ditugaskan untuk membangunkan penempatan yang sedang membesar. Setiap ahli puak anda akan berperanan membantu dalam pembangunan puak ini.
     </p>
@@ -175,7 +183,7 @@
       Du büst de Baas vun eenem lütten Volk. Dien Upgaav is, een Dörp zu bauen un stadig to vergrotern. Elkeen Minsk in dienem Volk sett sien beste Been vör, um mehr Waren un Mineraale to produzeren un dat Wassdoom widertodrieven.
     </p>
     <p xml:lang="nds">
-      Widelands is för eenen Speler gadelk un hett Rutfödderungs-Riege, de de Histoorje vun de Völker un hör Leven in de Welt vun Widelands vertellen. Dat Spölen fangt aber eerst dann würrelk an, wenn du mit dienen Frünnen övers Internett oder LAN tosammen neie Rieken baust – oder hör nanner in gewaltigen Slachten verneelt. Widelands hett ok eenen künstelk Speler, tegen hüm du antreden kannst.
+      Widelands is för eenen Speler gadelk un hett Rutfödderungs-Riege, de de Histoorje vun de Völker un hör Leven in de Welt vun Widelands vertellen. Dat Spölen fangt aver eerst dann würrelk an, wenn du mit dienen Frünnen över 't Internett oder LAN tosammen neje Rieken baust – oder hör nanner in gewaltigen Slachten verneelt. Widelands hett ok eenen künstelk Speler, tegen hüm du antreden kannst.
     </p>
     <p xml:lang="nl">
       Je bent de leider van een kleine stam.  Het is jouw taak een bloeiende nederzetting uit te bouwen.  Elk stamlid zal daarbij haar of zijn steentje bijdragen door het produceren van meer grondstoffen.
@@ -231,6 +239,13 @@
     <p xml:lang="sv">
       Widelands erbjuder ett enspelarläge med fälttåg som berättar historier om stammarna och deras kamp i Widelands värld. Bosättandet börjar på riktigt när du slår dig samman med vänner över internet eller LAN för att bygga nya imperium tillsammans – eller för att krossa varandra i krigets damm. Widelands erbjuder också artificiell intelligens för att utmana dig.
     </p>
+    <p xml:lang="tr">
+      Küçük bir klanın yetkili vekilisiniz. Göreviniz sürekli büyüyecek bir yerleşim kurmak. Klanınızın her üyesi bu uğurda daha fazla kaynak üreterek üzerine düşen görevi yapacak. 
+    </p>
+    <p xml:lang="tr">
+      Widelands size tek oyunculu mod ile kabilelerin hikayelerini ve Widelands evreninde çektikleri zorlukları anlatan hikayeleri sunar. Fakat yerleşim tam olarak arkadaşlarınla Internet üzerinden ya da LAN ile bağlanıp beraber yeni imparatorluklar kurduğunda başlar - ya da birbirinizi savaşın tozlu ortamında ezdiğinizde.
+Widelands ayrıca size yapay zeka ile meydan okur.
+    </p>
     <p xml:lang="uk">
       Ви є регентом маленького клану.  Ваше завдання полягає у створенні постійно зростаючого поселення. Кожен член вашого клану буде робити свою частину, щоб виробити більше ресурсів для подальшого росту.
     </p>
@@ -240,8 +255,8 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Current%20Developments/To%20the%20sea.png</image>
-      <caption>Fleet of Ships</caption>
+      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2020/Four_Tribes_2.jpeg</image>
+      <caption>Seafaring of the Four Tribes</caption>
     </screenshot>
     <screenshot>
       <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2019/Dolomites.png</image>
@@ -260,7 +275,14 @@
       <caption>Map Selection Screen</caption>
     </screenshot>
   </screenshots>
+  <url type="homepage">https://wl.widelands.org/</url>
+  <update_contact>widelands-dev_at_lists.launchpad.net</update_contact>
+  <provides>
+    <binary>widelands</binary>
+  </provides>
+  <launchable type="desktop-id">org.widelands.widelands.desktop</launchable>
   <releases>
+    <release date="2019-05-02" version="Build 20"/>
     <release date="2016-11-11" version="Build 19"/>
     <release date="2014-02-22" version="Build 18"/>
     <release date="2012-04-23" version="Build 17"/>
@@ -339,6 +361,7 @@
     <lang>sk</lang>
     <lang>sl</lang>
     <lang>sr</lang>
+    <lang>sr_RS</lang>
     <lang>sv</lang>
     <lang>tr</lang>
     <lang>uk</lang>
@@ -346,39 +369,37 @@
     <lang>zh_CN</lang>
     <lang>zh_TW</lang>
   </languages>
+  <translation type="gettext">scenario_bar01.wmf</translation>
+  <translation type="gettext">mp_scenario_island_hopping.wmf</translation>
+  <translation type="gettext">scenario_emp03.wmf</translation>
+  <translation type="gettext">maps</translation>
+  <translation type="gettext">scenario_emp04.wmf</translation>
+  <translation type="gettext">tribes_encyclopedia</translation>
+  <translation type="gettext">scenario_fri01.wmf</translation>
+  <translation type="gettext">widelands</translation>
+  <translation type="gettext">scenario_atl01.wmf</translation>
+  <translation type="gettext">world</translation>
+  <translation type="gettext">map_the_green_plateau.wmf</translation>
+  <translation type="gettext">scenario_bar02.wmf</translation>
+  <translation type="gettext">widelands_editor</translation>
+  <translation type="gettext">scenario_tutorial03_seafaring.wmf</translation>
+  <translation type="gettext">scenario_tutorial04_economy.wmf</translation>
+  <translation type="gettext">scenario_emp01.wmf</translation>
   <translation type="gettext">win_conditions</translation>
   <translation type="gettext">scenario_dummy.wmf</translation>
-  <translation type="gettext">mp_scenario_island_hopping.wmf</translation>
-  <translation type="gettext">scenario_bar01.wmf</translation>
-  <translation type="gettext">maps</translation>
-  <translation type="gettext">scenario_emp03.wmf</translation>
-  <translation type="gettext">widelands</translation>
-  <translation type="gettext">scenario_tutorial03_seafaring.wmf</translation>
-  <translation type="gettext">tribes</translation>
-  <translation type="gettext">scenario_emp04.wmf</translation>
   <translation type="gettext">scenario_emp02.wmf</translation>
   <translation type="gettext">texts</translation>
-  <translation type="gettext">scenario_tutorial01_basic_control.wmf</translation>
-  <translation type="gettext">scenario_fri02.wmf</translation>
-  <translation type="gettext">scenario_tutorial04_economy.wmf</translation>
-  <translation type="gettext">tribes_encyclopedia</translation>
-  <translation type="gettext">scenario_bar02.wmf</translation>
-  <translation type="gettext">world</translation>
-  <translation type="gettext">scenario_emp01.wmf</translation>
-  <translation type="gettext">scenario_atl01.wmf</translation>
-  <translation type="gettext">widelands_console</translation>
-  <translation type="gettext">scenario_fri01.wmf</translation>
-  <translation type="gettext">widelands_editor</translation>
   <translation type="gettext">scenario_tutorial02_warfare.wmf</translation>
+  <translation type="gettext">widelands_console</translation>
+  <translation type="gettext">scenario_tutorial01_basic_control.wmf</translation>
+  <translation type="gettext">tribes</translation>
   <translation type="gettext">mp_scenario_smugglers.wmf</translation>
-  <translation type="gettext">map_the_green_plateau.wmf</translation>
-  <url type="homepage">https://wl.widelands.org/</url>
+  <translation type="gettext">scenario_fri02.wmf</translation>
   <url type="bugtracker">https://bugs.launchpad.net/widelands</url>
   <url type="donation">https://wl.widelands.org/wiki/The%20Widelands%20Project/</url>
   <url type="help">https://wl.widelands.org/wiki/Game%20Manual/</url>
   <url type="translate">https://wl.widelands.org/wiki/TranslatingWidelands/</url>
   <developer_name>The Widelands Development Team</developer_name>
-  <update_contact>widelands-dev_at_lists.launchpad.net</update_contact>
   <content_rating type="oars-1.0">
     <content_attribute id="violence-cartoon">moderate</content_attribute>
     <content_attribute id="violence-fantasy">none</content_attribute>

@@ -15,9 +15,6 @@ tribes:new_productionsite_type {
       marble = 1
    },
    return_on_dismantle_on_enhanced = {
-      log = 0,
-      granite = 0,
-      marble = 0
    },
 
    animations = {
@@ -54,7 +51,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "return=skipped unless economy needs flour",
             "consume=wheat",
-            "playsound=sound/mill mill_turning 240",
+            "playsound=sound/mill/mill_turning 240",
             "animate=working 10000",
             "produce=flour"
          }

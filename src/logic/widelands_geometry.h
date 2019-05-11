@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,8 @@
 #define WL_LOGIC_WIDELANDS_GEOMETRY_H
 
 #include <cmath>
+#include <map>
+#include <set>
 #include <tuple>
 
 #include <stdint.h>
@@ -153,6 +155,8 @@ struct HeightInterval {
 
 	uint8_t min, max;
 };
-}
+}  // namespace Widelands
+
+using Workareas = std::set<std::map<Widelands::TCoords<>, uint8_t>>;
 
 #endif  // end of include guard: WL_LOGIC_WIDELANDS_GEOMETRY_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -125,9 +125,12 @@ void Textarea::set_fixed_width(int w) {
  */
 void Textarea::draw(RenderTarget& dst) {
 	if (!text_.empty()) {
-		Vector2i anchor(
-		   (align_ == Align::kCenter) ? get_w() / 2 : (align_ == UI::Align::kRight) ? get_w() : 0, 0);
-		rendered_text_->draw(dst, anchor, align_);
+		Align alignment = mirror_alignment(align_, text_);
+		Vector2i anchor((alignment == Align::kCenter) ?
+		                   get_w() / 2 :
+		                   (alignment == UI::Align::kRight) ? get_w() : 0,
+		                0);
+		rendered_text_->draw(dst, anchor, alignment);
 	}
 }
 
@@ -197,4 +200,4 @@ void Textarea::update_desired_size() {
 	}
 	set_desired_size(w, h);
 }
-}
+}  // namespace UI

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2018 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #ifndef WL_ECONOMY_PORTDOCK_H
 #define WL_ECONOMY_PORTDOCK_H
 
+#include <list>
 #include <memory>
 
 #include "base/macros.h"
@@ -85,9 +86,7 @@ public:
 		return fleet_;
 	}
 	PortDock* get_dock(Flag& flag) const;
-	bool get_need_ship() const {
-		return need_ship_ || expedition_ready_;
-	}
+	uint32_t get_need_ship() const;
 
 	void set_economy(Economy*) override;
 
@@ -96,8 +95,12 @@ public:
 
 	Flag& base_flag() override;
 	PositionList get_positions(const EditorGameBase&) const override;
-	void
-	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
+	void draw(uint32_t gametime,
+	          TextToDraw draw_text,
+	          const Vector2f& point_on_dst,
+	          const Coords&,
+	          float scale,
+	          RenderTarget* dst) override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
@@ -110,6 +113,9 @@ public:
 	void add_shippingitem(Game&, Worker&);
 	void update_shippingitem(Game&, Worker&);
 
+	void shipping_item_arrived(Game&, ShippingItem&);
+	void shipping_item_returned(Game&, ShippingItem&);
+	void ship_coming(bool affirmative);
 	void ship_arrived(Game&, Ship&);
 
 	void log_general_info(const EditorGameBase&) const override;
@@ -136,14 +142,14 @@ private:
 
 	void init_fleet(EditorGameBase& egbase);
 	void set_fleet(Fleet* fleet);
-	void update_shippingitem(Game&, std::vector<ShippingItem>::iterator);
+	void update_shippingitem(Game&, std::list<ShippingItem>::iterator);
 	void set_need_ship(Game&, bool need);
 
 	Fleet* fleet_;
 	Warehouse* warehouse_;
 	PositionList dockpoints_;
-	std::vector<ShippingItem> waiting_;
-	bool need_ship_;
+	std::list<ShippingItem> waiting_;
+	uint8_t ships_coming_;
 	bool expedition_ready_;
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
@@ -154,7 +160,7 @@ protected:
 	public:
 		Loader();
 
-		void load(FileRead&);
+		void load(FileRead&, uint8_t packet_version);
 		void load_pointers() override;
 		void load_finish() override;
 

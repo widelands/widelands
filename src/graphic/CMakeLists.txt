@@ -178,7 +178,8 @@ wl_library(graphic_render_queue
     graphic_draw_programs
     graphic_fields_to_draw
     graphic_terrain_programs
-    logic
+    logic_map_objects
+    logic_map_objects_description_maintainer
 )
 
 wl_library(graphic_game_renderer
@@ -194,6 +195,7 @@ wl_library(graphic_game_renderer
     graphic_render_queue
     graphic_surface
     logic
+    logic_map_objects
     wui
     wui_mapview_pixelfunctions
 )
@@ -208,6 +210,8 @@ wl_library(graphic_minimap_renderer
     economy
     graphic_surface
     logic
+    logic_map
+    logic_map_objects
     wui_mapview_pixelfunctions
 )
 
@@ -220,19 +224,23 @@ wl_library(graphic_fields_to_draw
     graphic
     graphic_gl_utils
     logic
-    logic_constants
+    logic_map_objects
     logic_widelands_geometry
     wui_mapview_pixelfunctions
 )
 
 wl_library(graphic_terrain_programs
   SRCS
+    gl/grid_program.cc
+    gl/grid_program.h
     gl/road_program.cc
     gl/road_program.h
     gl/terrain_program.cc
     gl/terrain_program.h
     gl/dither_program.cc
     gl/dither_program.h
+    gl/workarea_program.cc
+    gl/workarea_program.h
   DEPENDS
     base_exceptions
     base_geometry
@@ -244,6 +252,9 @@ wl_library(graphic_terrain_programs
     graphic_surface
     io_filesystem
     logic
+    logic_constants
+    logic_map_objects
+    logic_map_objects_description_maintainer
 )
 
 
@@ -336,6 +347,8 @@ wl_library(graphic
     io_filesystem
     io_stream
     logic_constants
+    logic_exceptions
+    logic_widelands_geometry
     note_sound
     notifications
     scripting_lua_interface

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 
 #include "base/macros.h"
 #include "economy/routing_node.h"
+#include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/walkingdir.h"
 
@@ -46,10 +47,6 @@ public:
 private:
 	DISALLOW_COPY_AND_ASSIGN(FlagDescr);
 };
-
-constexpr bool kPendingOnly = true;           // ignore non-pending wares
-constexpr int32_t kNotFoundAppropriate = -1;  // no ware appropiate for carrying
-constexpr int32_t kDenyDrop = -2;             // flag is full and no ware appropiate for swapping
 
 /**
  * Flag represents a flag as you see it on the map.
@@ -125,15 +122,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	bool is_dead_end() const;
 
-	struct PendingWare {
-		WareInstance* ware;              ///< the ware itself
-		bool pending;                    ///< if the ware is pending
-		int32_t priority;                ///< carrier prefers the ware with highest priority
-		OPtr<PlayerImmovable> nextstep;  ///< next step that this ware is sent to
-	};
-
 	bool has_capacity() const;
-	bool has_capacity_for_ware(WareInstance&) const;
 	uint32_t total_capacity() {
 		return ware_capacity_;
 	}
@@ -143,14 +132,10 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void wait_for_capacity(Game&, Worker&);
 	void skip_wait_for_capacity(Game&, Worker&);
 	void add_ware(EditorGameBase&, WareInstance&);
-	void init_ware(EditorGameBase&, WareInstance&, PendingWare&);
-	PendingWare* get_ware_for_flag(Flag&, bool pending_only = false);
+	bool has_pending_ware(Game&, Flag& destflag);
+	bool ack_pickup(Game&, Flag& destflag);
 	bool cancel_pickup(Game&, Flag& destflag);
-	void ware_departing(Game&);
-	bool allow_ware_from_flag(WareInstance&, Flag&);
-	int32_t find_swappable_ware(WareInstance&, Flag&);
-	int32_t find_pending_ware(PlayerImmovable&);
-	WareInstance* fetch_pending_ware(Game&, int32_t);
+	WareInstance* fetch_pending_ware(Game&, PlayerImmovable& dest);
 	void propagate_promoted_road(Road* promoted_road);
 	Wares get_wares();
 	uint8_t count_wares_in_queue(PlayerImmovable& dest) const;
@@ -168,8 +153,14 @@ protected:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
-	void
-	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
+	void draw(uint32_t gametime,
+	          TextToDraw draw_text,
+	          const Vector2f& point_on_dst,
+	          const Coords& coords,
+	          float scale,
+	          RenderTarget* dst) override;
+
+	void wake_up_capacity_queue(Game&);
 
 	static void
 	flag_job_request_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
@@ -177,7 +168,12 @@ protected:
 	void set_flag_position(Coords coords);
 
 private:
-	bool update_ware_from_flag(Game&, PendingWare&, Road&, Flag&);
+	struct PendingWare {
+		WareInstance* ware;              ///< the ware itself
+		bool pending;                    ///< if the ware is pending
+		int32_t priority;                ///< carrier prefers the ware with highest priority
+		OPtr<PlayerImmovable> nextstep;  ///< next step that this ware is sent to
+	};
 
 	struct FlagJob {
 		Request* request;
@@ -206,6 +202,6 @@ private:
 };
 
 extern FlagDescr g_flag_descr;
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_FLAG_H

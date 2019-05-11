@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,21 +70,21 @@ private:
 
 /**
  * Initialize the Supply and update the economy.
-*/
+ */
 IdleWareSupply::IdleWareSupply(WareInstance& ware) : ware_(ware), economy_(nullptr) {
 	set_economy(ware.get_economy());
 }
 
 /**
  * Cleanup.
-*/
+ */
 IdleWareSupply::~IdleWareSupply() {
 	set_economy(nullptr);
 }
 
 /**
  * Add/remove self from economies as necessary.
-*/
+ */
 void IdleWareSupply::set_economy(Economy* const e) {
 	if (economy_ != e) {
 		if (economy_)
@@ -151,7 +151,7 @@ uint32_t IdleWareSupply::nr_supplies(const Game&, const Request& req) const {
 
 /**
  * The ware is already "launched", so we only need to return it.
-*/
+ */
 WareInstance& IdleWareSupply::launch_ware(Game&, const Request& req) {
 	if (req.get_type() != wwWARE)
 		throw wexception("IdleWareSupply::launch_ware : called for non-ware request");
@@ -187,9 +187,9 @@ WareInstance::WareInstance(DescriptionIndex const i, const WareDescr* const ware
 
 WareInstance::~WareInstance() {
 	if (supply_) {
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("Ware %u still has supply %p\n", descr_index_, supply_);
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 		delete supply_;
 	}
 }
@@ -214,7 +214,7 @@ void WareInstance::cleanup(EditorGameBase& egbase) {
 
 /**
  * Ware accounting
-*/
+ */
 void WareInstance::set_economy(Economy* const e) {
 	if (descr_index_ == INVALID_INDEX || economy_ == e)
 		return;
@@ -234,7 +234,7 @@ void WareInstance::set_economy(Economy* const e) {
  * Change the current location.
  * Once you've assigned a ware to its new location, you usually have to call
  * \ref update() as well.
-*/
+ */
 void WareInstance::set_location(EditorGameBase& egbase, MapObject* const location) {
 	MapObject* const oldlocation = location_.get(egbase);
 
@@ -351,10 +351,11 @@ void WareInstance::update(Game& game) {
 		}
 
 		if (upcast(Flag, flag, location)) {
-			flag->call_carrier(game, *this, dynamic_cast<Building const*>(nextstep) &&
-			                                      &nextstep->base_flag() != location ?
-			                                   &nextstep->base_flag() :
-			                                   nextstep);
+			flag->call_carrier(
+			   game, *this,
+			   dynamic_cast<Building const*>(nextstep) && &nextstep->base_flag() != location ?
+			      &nextstep->base_flag() :
+			      nextstep);
 		} else if (upcast(PortDock, pd, location)) {
 			pd->update_shippingitem(game, *this);
 		} else {
@@ -465,7 +466,7 @@ void WareInstance::set_transfer(Game& game, Transfer& t) {
 
 /**
  * The transfer has been cancelled, just stop moving.
-*/
+ */
 void WareInstance::cancel_transfer(Game& game) {
 	transfer_ = nullptr;
 	transfer_nextstep_ = nullptr;
@@ -475,7 +476,7 @@ void WareInstance::cancel_transfer(Game& game) {
 
 /**
  * We are moving when there's a transfer, it's that simple.
-*/
+ */
 bool WareInstance::is_moving() const {
 	return transfer_;
 }
@@ -483,7 +484,7 @@ bool WareInstance::is_moving() const {
 /**
  * Call this function if movement + potential request need to be cancelled for
  * whatever reason.
-*/
+ */
 void WareInstance::cancel_moving() {
 	molog("cancel_moving\n");
 
@@ -497,7 +498,7 @@ void WareInstance::cancel_moving() {
 /**
  * Return the next flag we should be moving to, or the final target if the route
  * has been completed successfully.
-*/
+ */
 PlayerImmovable* WareInstance::get_next_move_step(Game& game) {
 	return transfer_ ? dynamic_cast<PlayerImmovable*>(transfer_nextstep_.get(game)) : nullptr;
 }
@@ -604,4 +605,4 @@ MapObject::Loader* WareInstance::load(EditorGameBase& egbase,
 	}
 	NEVER_HERE();
 }
-}
+}  // namespace Widelands

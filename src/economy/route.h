@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,6 +72,6 @@ private:
 	int32_t totalcost_;
 	std::vector<OPtr<Flag>> route_;  ///< includes start and end flags
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ROUTE_H

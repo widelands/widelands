@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,13 +39,13 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_incorporate.h"
-#include "logic/findbob.h"
-#include "logic/findimmovable.h"
-#include "logic/findnode.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findbob.h"
+#include "logic/map_objects/findimmovable.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/terrain_affinity.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
@@ -137,17 +137,18 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 		totalres += amount;
 		totalchance += 8 * amount;
 
-		//  Add penalty for fields that are running out
-		//  Except for totally depleted fields or wrong ressource fields
-		//  if we already know there is no ressource (left) we won't mine there
-		if (amount == 0)
-			totalchance += 0;
-		else if (amount <= 2)
-			totalchance += 6;
-		else if (amount <= 4)
-			totalchance += 4;
-		else if (amount <= 6)
-			totalchance += 2;
+		// Add penalty for fields that are running out
+		// Except for totally depleted fields or wrong ressource fields
+		// if we already know there is no ressource (left) we won't mine there
+		if (amount > 0) {
+			if (amount <= 2) {
+				totalchance += 6;
+			} else if (amount <= 4) {
+				totalchance += 4;
+			} else if (amount <= 6) {
+				totalchance += 2;
+			}
+		}
 	} while (mr.advance(*map));
 
 	if (totalres == 0) {
@@ -339,6 +340,9 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 			return true;
 		}
 		if (action.sparam1 == "immovable") {
+			if (upcast(ProductionSite, productionsite, get_location(game))) {
+				productionsite->unnotify_player();
+			}
 			std::vector<ImmovableFound> list;
 			if (action.iparam2 < 0)
 				map.find_reachable_immovables(area, &list, cstep);
@@ -452,11 +456,11 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 	const uint32_t attribute_id = ImmovableDescr::get_attribute_id("tree_sapling");
 
 	const DescriptionMaintainer<TerrainDescription>& terrains = game.world().terrains();
-	double best = 0.0;
+	int best = 0;
 	for (DescriptionIndex i = 0; i < immovables.size(); ++i) {
 		const ImmovableDescr& immovable_descr = immovables.get(i);
 		if (immovable_descr.has_attribute(attribute_id) && immovable_descr.has_terrain_affinity()) {
-			double probability =
+			int probability =
 			   probability_to_grow(immovable_descr.terrain_affinity(), fpos, map, terrains);
 			if (probability > best) {
 				best = probability;
@@ -464,7 +468,8 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 		}
 	}
 	// normalize value to int16 range
-	const int16_t correct_val = (std::numeric_limits<int16_t>::max() - 1) * best;
+	const int16_t correct_val = (std::numeric_limits<int16_t>::max() - 1) *
+	                            (static_cast<double>(best) / TerrainAffinity::kPrecisionFactor);
 
 	if (x_check && (correct_val != cache_entry)) {
 		forester_cache.clear();
@@ -798,18 +803,19 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// affinity). We will pick one of them at random later. The container is
 	// picked to be a stable sorting one, so that no deyncs happen in
 	// multiplayer.
-	std::set<std::tuple<double, DescriptionIndex, MapObjectDescr::OwnerType>>
+	std::set<std::tuple<int, DescriptionIndex, MapObjectDescr::OwnerType>>
 	   best_suited_immovables_index;
 
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume
 	// it to be 1 (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
-	   const uint32_t attribute_id, const DescriptionIndex index,
-	   const ImmovableDescr& immovable_description, MapObjectDescr::OwnerType owner_type) {
+	                                 const uint32_t attribute_id, const DescriptionIndex index,
+	                                 const ImmovableDescr& immovable_description,
+	                                 MapObjectDescr::OwnerType owner_type) {
 		if (!immovable_description.has_attribute(attribute_id)) {
 			return;
 		}
-		double p = 1.;
+		int p = TerrainAffinity::kPrecisionFactor;
 		if (immovable_description.has_terrain_affinity()) {
 			p = probability_to_grow(
 			   immovable_description.terrain_affinity(), fpos, map, game.world().terrains());
@@ -856,18 +862,18 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// Randomly pick one of the immovables to be planted.
 
 	// Each candidate is weighted by its probability to grow.
-	double total_weight = 0.0;
+	int total_weight = 0;
 	for (const auto& bsii : best_suited_immovables_index) {
-		double weight = std::get<0>(bsii);
-		total_weight += weight * weight;
+		const int weight = std::get<0>(bsii);
+		total_weight += weight;
 	}
 
-	double choice = logic_rand_as_double(&game) * total_weight;
+	int choice = game.logic_rand() % total_weight;
 	for (const auto& bsii : best_suited_immovables_index) {
-		double weight = std::get<0>(bsii);
+		const int weight = std::get<0>(bsii);
 		state.ivar2 = std::get<1>(bsii);
 		state.ivar3 = static_cast<int>(std::get<2>(bsii));
-		choice -= weight * weight;
+		choice -= weight;
 		if (0 > choice) {
 			break;
 		}
@@ -967,21 +973,20 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 
 		// Geologist also sends a message notifying the player
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
-			const int width = g_gr->images().get(rdescr->representative_image())->width();
 			const std::string message =
-			   (boost::format("<div padding_r=10><p><img width=%d src=%s></p></div>"
+			   (boost::format("<div padding_r=10><p><img object=%s></p></div>"
 			                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-			    width % ri.descr().representative_image_filename() % UI_FONT_SIZE_MESSAGE %
-			    _("A geologist found resources."))
+			    ri.descr().name() % UI_FONT_SIZE_MESSAGE % _("A geologist found resources."))
 			      .str();
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
 			get_owner()->add_message_with_timeout(
-			   game, std::unique_ptr<Message>(
-			            new Message(Message::Type::kGeologists, game.get_gametime(),
-			                        rdescr->descname(), rdescr->representative_image(),
-			                        rdescr->descname(), message, position, serial_, rdescr->name())),
+			   game,
+			   std::unique_ptr<Message>(new Message(Message::Type::kGeologists, game.get_gametime(),
+			                                        rdescr->descname(), rdescr->representative_image(),
+			                                        rdescr->descname(), message, position, serial_,
+			                                        rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
 	}
@@ -991,11 +996,12 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 }
 
 /**
- * Demand from the g_sound_handler to play a certain sound effect.
+ * Demand from the g_sh to play a certain sound effect.
  * Whether the effect actually gets played is decided only by the sound server.
  */
 bool Worker::run_playsound(Game& game, State& state, const Action& action) {
-	Notifications::publish(NoteSound(action.sparam1, get_position(), action.iparam1));
+	Notifications::publish(
+	   NoteSound(SoundType::kAmbient, action.iparam2, get_position(), action.iparam1));
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -1056,34 +1062,34 @@ void Worker::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	if (upcast(PlayerImmovable, loc, location_.get(egbase))) {
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* Owner: (%p)\n", &loc->owner());
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 		molog("** Owner (plrnr): %i\n", loc->owner().player_number());
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* Economy: %p\n", loc->get_economy());
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 	}
 
 	PlayerImmovable* imm = location_.get(egbase);
 	molog("location: %u\n", imm ? imm->serial() : 0);
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("Economy: %p\n", economy_);
 	molog("transfer: %p\n", transfer_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 
 	if (upcast(WareInstance, ware, carried_ware_.get(egbase))) {
 		molog("* carried_ware->get_ware() (id): %i\n", ware->descr_index());
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* carried_ware->get_economy() (): %p\n", ware->get_economy());
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 	}
 
 	molog("current_exp: %i / %i\n", current_exp_, descr().get_needed_experience());
 
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("supply: %p\n", supply_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 }
 
 /**
@@ -1819,11 +1825,12 @@ void Worker::return_update(Game& game, State& state) {
 		if (upcast(Flag, flag, pos)) {
 			// Is this "our" flag?
 			if (flag->get_building() == location) {
-				WareInstance* const ware = get_carried_ware(game);
-				if (state.ivar1 && ware && flag->has_capacity_for_ware(*ware)) {
-					flag->add_ware(game, *fetch_carried_ware(game));
-					set_animation(game, descr().get_animation("idle"));
-					return schedule_act(game, 20);  //  rest a while
+				if (state.ivar1 && flag->has_capacity()) {
+					if (WareInstance* const ware = fetch_carried_ware(game)) {
+						flag->add_ware(game, *ware);
+						set_animation(game, descr().get_animation("idle"));
+						return schedule_act(game, 20);  //  rest a while
+					}
 				}
 
 				// Don't try to enter building if it is a dismantle site
@@ -1851,9 +1858,10 @@ void Worker::return_update(Game& game, State& state) {
 		      .str();
 
 		get_owner()->add_message(
-		   game, std::unique_ptr<Message>(new Message(
-		            Message::Type::kGameLogic, game.get_gametime(), _("Worker"),
-		            "images/ui_basic/menu_help.png", _("Worker got lost!"), message, get_position())),
+		   game,
+		   std::unique_ptr<Message>(new Message(Message::Type::kGameLogic, game.get_gametime(),
+		                                        _("Worker"), "images/ui_basic/menu_help.png",
+		                                        _("Worker got lost!"), message, get_position())),
 		   serial_);
 		set_location(nullptr);
 		return pop_task(game);
@@ -2047,27 +2055,34 @@ void Worker::dropoff_update(Game& game, State&) {
 
 	WareInstance* ware = get_carried_ware(game);
 	BaseImmovable* const location = game.map()[get_position()].get_immovable();
+
+	// If the building just got destroyed, pop the task
+	PlayerImmovable* current_location = get_location(game);
+	if (current_location == nullptr) {
+		molog("%s: Unable to dropoff ware in building at (%d,%d) - there is no building there\n",
+		      descr().name().c_str(), get_position().x, get_position().y);
+		return pop_task(game);
+	}
+
 #ifndef NDEBUG
-	Building& ploc = dynamic_cast<Building&>(*get_location(game));
-	assert(&ploc == location || &ploc.base_flag() == location);
+	Building* ploc = dynamic_cast<Building*>(current_location);
+	assert(ploc == location || &ploc->base_flag() == location);
 #endif
 
 	// Deliver the ware
 	if (ware) {
 		// We're in the building, walk onto the flag
 		if (upcast(Building, building, location)) {
-			Flag& baseflag = building->base_flag();
-			if (baseflag.has_capacity_for_ware(*ware)) {
-				start_task_leavebuilding(game, false);  //  exit throttle
-			} else {
-				start_task_waitforcapacity(game, baseflag);
+			if (start_task_waitforcapacity(game, building->base_flag())) {
+				return;
 			}
-			return;
+
+			return start_task_leavebuilding(game, false);  //  exit throttle
 		}
 
 		// We're on the flag, drop the ware and pause a little
 		if (upcast(Flag, flag, location)) {
-			if (flag->has_capacity_for_ware(*ware)) {
+			if (flag->has_capacity()) {
 				flag->add_ware(game, *fetch_carried_ware(game));
 
 				set_animation(game, descr().get_animation("idle"));
@@ -2101,7 +2116,7 @@ void Worker::dropoff_update(Game& game, State&) {
 /// Give the recruit his diploma and say farwell to him.
 void Worker::start_task_releaserecruit(Game& game, Worker& recruit) {
 	push_task(game, taskReleaserecruit);
-	molog("Starting to release %s %u...\n", recruit.descr().descname().c_str(), recruit.serial());
+	molog("Starting to release %s %u...\n", recruit.descr().name().c_str(), recruit.serial());
 	return schedule_act(game, 5000);
 }
 
@@ -2127,6 +2142,14 @@ void Worker::start_task_fetchfromflag(Game& game) {
 }
 
 void Worker::fetchfromflag_update(Game& game, State& state) {
+	std::string signal = get_signal();
+	if (signal.size()) {
+		if (signal == "location") {
+			molog("[fetchfromflag]: Building disappeared, become fugitive\n");
+			return pop_task(game);
+		}
+	}
+
 	PlayerImmovable& employer = *get_location(game);
 	PlayerImmovable* const location =
 	   dynamic_cast<PlayerImmovable*>(game.map().get_immovable(get_position()));
@@ -2147,11 +2170,9 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 
 		// The ware has decided that it doesn't want to go to us after all
 		// In order to return to the warehouse, we're switching to State_DropOff
-		Flag& flag = dynamic_cast<Flag&>(*location);
 		if (WareInstance* const ware =
-		       flag.fetch_pending_ware(game, flag.find_pending_ware(employer))) {
+		       dynamic_cast<Flag&>(*location).fetch_pending_ware(game, employer)) {
 			set_carried_ware(game, ware);
-			flag.ware_departing(game);
 		}
 
 		set_animation(game, descr().get_animation("idle"));
@@ -2214,15 +2235,25 @@ const Bob::Task Worker::taskWaitforcapacity = {
    static_cast<Bob::Ptr>(&Worker::waitforcapacity_pop), true};
 
 /**
- * Pushes a wait task and
- * adds the worker to the flag's wait queue.
+ * Checks the capacity of the flag.
+ *
+ * If there is none, a wait task is pushed, and the worker is added to the
+ * flag's wait queue. The function returns true in this case.
+ * If the flag still has capacity, the function returns false and doesn't
+ * act at all.
  */
-void Worker::start_task_waitforcapacity(Game& game, Flag& flag) {
+bool Worker::start_task_waitforcapacity(Game& game, Flag& flag) {
+	if (flag.has_capacity()) {
+		return false;
+	}
+
 	push_task(game, taskWaitforcapacity);
 
 	top_state().objvar1 = &flag;
 
 	flag.wait_for_capacity(game, *this);
+
+	return true;
 }
 
 void Worker::waitforcapacity_update(Game& game, State&) {
@@ -2609,7 +2640,9 @@ const Bob::Task Worker::taskScout = {
  */
 bool Worker::run_scout(Game& game, State& state, const Action& action) {
 	molog("  Try scouting for %i ms with search in radius of %i\n", action.iparam2, action.iparam1);
-
+	if (upcast(ProductionSite, productionsite, get_location(game))) {
+		productionsite->unnotify_player();
+	}
 	++state.ivar1;
 	start_task_scout(game, action.iparam1, action.iparam2);
 	// state reference may be invalid now
@@ -2641,7 +2674,7 @@ void Worker::prepare_scouts_worklist(const Map& map, const Coords& hutpos) {
 	}
 }
 
-/** Check if militray sites have becom visible by now.
+/** Check if militray sites have become visible by now.
  *
  * After the pop in prepare_scouts_worklist,
  * the latest entry of scouts_worklist is the next MS to visit (if known)
@@ -2674,7 +2707,7 @@ void Worker::add_sites(Game& game,
                        const Player& player,
                        std::vector<ImmovableFound>& found_sites) {
 
-	// If there are many enemy sites, push a random walk request into queue evry third finding.
+	// If there are many enemy sites, push a random walk request into queue every third finding.
 	uint32_t haveabreak = 3;
 
 	for (const ImmovableFound& vu : found_sites) {
@@ -2956,20 +2989,21 @@ void Worker::scout_update(Game& game, State& state) {
 
 void Worker::draw_inner(const EditorGameBase& game,
                         const Vector2f& point_on_dst,
+                        const Coords& coords,
                         const float scale,
                         RenderTarget* dst) const {
 	assert(get_owner() != nullptr);
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
-	dst->blit_animation(
-	   point_on_dst, scale, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
+	dst->blit_animation(point_on_dst, coords, scale, get_current_anim(),
+	                    game.get_gametime() - get_animstart(), &player_color);
 
 	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
 		const Vector2f hotspot = descr().ware_hotspot().cast<float>();
 		const Vector2f location(
 		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
-		dst->blit_animation(
-		   location, scale, carried_ware->descr().get_animation("idle"), 0, player_color);
+		dst->blit_animation(location, Widelands::Coords::null(), scale,
+		                    carried_ware->descr().get_animation("idle"), 0, &player_color);
 	}
 }
 
@@ -2977,13 +3011,15 @@ void Worker::draw_inner(const EditorGameBase& game,
  * Draw the worker, taking the carried ware into account.
  */
 void Worker::draw(const EditorGameBase& egbase,
+                  const TextToDraw&,
                   const Vector2f& field_on_dst,
+                  const Widelands::Coords& coords,
                   const float scale,
                   RenderTarget* dst) const {
 	if (!get_current_anim()) {
 		return;
 	}
-	draw_inner(egbase, calc_drawpos(egbase, field_on_dst, scale), scale, dst);
+	draw_inner(egbase, calc_drawpos(egbase, field_on_dst, scale), coords, scale, dst);
 }
 
 /*
@@ -3188,4 +3224,4 @@ void Worker::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 		}
 	}
 }
-}
+}  // namespace Widelands

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -184,7 +184,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		}
 
 		plr_tribe->select(
-		   (p < map.get_nrplayers() && Widelands::tribe_exists(map.get_scenario_player_tribe(p))) ?
+		   (p <= map.get_nrplayers() && Widelands::tribe_exists(map.get_scenario_player_tribe(p))) ?
 		      map.get_scenario_player_tribe(p) :
 		      "");
 		plr_tribe->selected.connect(
@@ -323,8 +323,8 @@ void EditorPlayerMenu::set_starting_pos_clicked(size_t row) {
 			rows_.at(pn - 1)->position->set_perm_pressed(true);
 		} else {
 			rows_.at(pn - 1)->position->set_background_style(UI::ButtonStyle::kWuiSecondary);
-			rows_.at(pn - 1)
-			   ->position->set_perm_pressed(map->get_starting_pos(pn) != Widelands::Coords::null());
+			rows_.at(pn - 1)->position->set_perm_pressed(map->get_starting_pos(pn) !=
+			                                             Widelands::Coords::null());
 		}
 	}
 }

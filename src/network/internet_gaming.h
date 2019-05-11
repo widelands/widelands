@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ struct InternetClient {
 struct InternetGame {
 	std::string name;
 	std::string build_id;
-	bool connectable;
+	std::string connectable;
 };
 
 /**
@@ -105,6 +105,13 @@ struct InternetGaming : public ChatProvider {
 	 * @return The addresses.
 	 */
 	const std::pair<NetAddress, NetAddress>& ips();
+
+	/**
+	 * Blocks for some time until either the ips() method is able to return the IPs of the relay
+	 * or an error occurred or the timeout is met.
+	 * @return \c True iff ips() can return something.
+	 */
+	bool wait_for_ips();
 
 	/**
 	 * Returns the password required to connect to the relay server as host.
@@ -171,6 +178,11 @@ struct InternetGaming : public ChatProvider {
 		return true;
 	}
 
+	void format_and_add_chat(const std::string& from,
+	                         const std::string& to,
+	                         bool system,
+	                         const std::string& msg);
+
 private:
 	InternetGaming();
 
@@ -194,11 +206,6 @@ private:
 	// conversion functions
 	bool str2bool(std::string);
 	std::string bool2str(bool);
-
-	void format_and_add_chat(const std::string& from,
-	                         const std::string& to,
-	                         bool system,
-	                         const std::string& msg);
 
 	/**
 	 * Does the real work of the login.

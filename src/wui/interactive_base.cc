@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,9 @@
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
+#include "base/log.h"
 #include "base/macros.h"
+#include "base/math.h"
 #include "base/time_string.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -46,6 +48,7 @@
 #include "logic/widelands_geometry.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
+#include "sound/sound_handler.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
@@ -109,14 +112,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      avg_usframetime_(0),
      buildroad_(nullptr),
      road_build_player_(0),
-     unique_window_handler_(new UniqueWindowHandler()),
-     // Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
-     workarea_pics_{g_gr->images().get("images/wui/overlays/workarea123.png"),
-                    g_gr->images().get("images/wui/overlays/workarea23.png"),
-                    g_gr->images().get("images/wui/overlays/workarea3.png"),
-                    g_gr->images().get("images/wui/overlays/workarea12.png"),
-                    g_gr->images().get("images/wui/overlays/workarea2.png"),
-                    g_gr->images().get("images/wui/overlays/workarea1.png")} {
+     unique_window_handler_(new UniqueWindowHandler()) {
 
 	// Load the buildhelp icons.
 	{
@@ -153,14 +149,17 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		   map_view_.set_size(message.width, message.height);
 		   resize_chat_overlay();
 		   adjust_toolbar_position();
-		});
-	sound_subscriber_ = Notifications::subscribe<NoteSound>([this](const NoteSound& note) {
-		if (note.stereo_position != std::numeric_limits<uint32_t>::max()) {
-			g_sound_handler.play_fx(note.fx, note.stereo_position, note.priority);
-		} else if (note.coords != Widelands::Coords::null()) {
-			g_sound_handler.play_fx(note.fx, stereo_position(note.coords), note.priority);
-		}
-	});
+	   });
+	sound_subscriber_ = Notifications::subscribe<NoteSound>(
+	   [this](const NoteSound& note) { play_sound_effect(note); });
+	shipnotes_subscriber_ =
+	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
+		   if (note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
+		       note.ship->get_ship_state() ==
+		          Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+			   expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
+		   }
+	   });
 
 	toolbar_.set_layout_toplevel(true);
 	map_view_.changeview.connect([this] { mainview_move(); });
@@ -202,8 +201,21 @@ InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
 	return nullptr;
 }
 
-bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords) const {
-	return workarea_previews_.count(coords) == 1;
+bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords,
+                                           const Widelands::Map* map) const {
+	if (!map) {
+		return workarea_previews_.count(coords) == 1;
+	}
+	for (const auto& pair : workarea_previews_) {
+		uint32_t radius = 0;
+		for (const auto& p : *pair.second) {
+			radius = std::max(radius, p.first);
+		}
+		if (map->calc_distance(coords, pair.first) <= radius) {
+			return true;
+		}
+	}
+	return false;
 }
 
 UniqueWindowHandler& InteractiveBase::unique_windows() {
@@ -223,7 +235,7 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 				     player.is_hostile(*productionsite->get_owner())))
 					return set_tooltip("");
 			}
-			set_tooltip(productionsite->info_string(Widelands::MapObject::InfoStringType::kTooltip));
+			set_tooltip(productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
 			return;
 		}
 	set_tooltip("");
@@ -300,17 +312,68 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 void InteractiveBase::on_buildhelp_changed(bool /* value */) {
 }
 
+bool InteractiveBase::has_expedition_port_space(const Widelands::Coords& coords) const {
+	for (const auto& pair : expedition_port_spaces_) {
+		if (pair.second == coords) {
+			return true;
+		}
+	}
+	return false;
+}
+
 // Show the given workareas at the given coords and returns the overlay job id associated
 void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords) {
 	workarea_previews_[coords] = &workarea_info;
 }
 
-std::map<Coords, const Image*>
-InteractiveBase::get_workarea_overlays(const Widelands::Map& map) const {
-	std::map<Coords, const Image*> result;
-	for (const auto& pair : workarea_previews_) {
-		const Coords& coords = pair.first;
-		const WorkareaInfo* workarea_info = pair.second;
+/* Helper function to get the correct index for graphic/gl/workarea_program.cc::workarea_colors .
+ * a, b, c are the indices for the three nodes bordering this triangle.
+ * This function returns the biggest workarea type that matches all three corners.
+ * The indices stand for:
+ * 0 – all three circles
+ * 1 – medium and outer circle
+ * 2 – outer circle
+ * 3 – inner and medium circle
+ * 4 – medium circle
+ * 5 – inner circle
+ * We currently assume that no building will have more than three workarea circles.
+ */
+static uint8_t workarea_max(uint8_t a, uint8_t b, uint8_t c) {
+	// Whether all nodes are part of the inner circle
+	bool inner =
+	   (a == 0 || a == 3 || a == 5) && (b == 0 || b == 3 || b == 5) && (c == 0 || c == 3 || c == 5);
+	// Whether all nodes are part of the medium circle
+	bool medium = (a == 0 || a == 1 || a == 3 || a == 4) && (b == 0 || b == 1 || b == 3 || b == 4) &&
+	              (c == 0 || c == 1 || c == 3 || c == 4);
+	// Whether all nodes are part of the outer circle
+	bool outer = a <= 2 && b <= 2 && c <= 2;
+
+	if (medium) {
+		if (outer && inner) {
+			return 0;
+		} else if (inner) {
+			return 3;
+		} else if (outer) {
+			return 1;
+		} else {
+			return 4;
+		}
+	} else if (outer) {
+		assert(!inner);
+		return 2;
+	} else {
+		assert(inner);
+		return 5;
+	}
+}
+
+Workareas InteractiveBase::get_workarea_overlays(const Widelands::Map& map) const {
+	Workareas result_set;
+	for (const auto& wa_pair : workarea_previews_) {
+		std::map<Coords, uint8_t> intermediate_result;
+		const Coords& coords = wa_pair.first;
+		const WorkareaInfo* workarea_info = wa_pair.second;
+		intermediate_result[coords] = 0;
 		WorkareaInfo::size_type wa_index;
 		switch (workarea_info->size()) {
 		case 0:
@@ -337,13 +400,36 @@ InteractiveBase::get_workarea_overlays(const Widelands::Map& map) const {
 			hollow_area.radius = it->first;
 			Widelands::MapHollowRegion<> mr(map, hollow_area);
 			do {
-				result[mr.location()] = workarea_pics_[wa_index];
+				intermediate_result[mr.location()] = wa_index;
 			} while (mr.advance(map));
 			wa_index++;
 			hollow_area.hole_radius = hollow_area.radius;
 		}
+
+		std::map<TCoords<>, uint8_t> result;
+		for (const auto& pair : intermediate_result) {
+			Coords c;
+			map.get_brn(pair.first, &c);
+			const auto brn = intermediate_result.find(c);
+			if (brn == intermediate_result.end()) {
+				continue;
+			}
+			map.get_bln(pair.first, &c);
+			const auto bln = intermediate_result.find(c);
+			map.get_rn(pair.first, &c);
+			const auto rn = intermediate_result.find(c);
+			if (bln != intermediate_result.end()) {
+				result[TCoords<>(pair.first, Widelands::TriangleIndex::D)] =
+				   workarea_max(pair.second, brn->second, bln->second);
+			}
+			if (rn != intermediate_result.end()) {
+				result[TCoords<>(pair.first, Widelands::TriangleIndex::R)] =
+				   workarea_max(pair.second, brn->second, rn->second);
+			}
+		}
+		result_set.emplace(result);
 	}
-	return result;
+	return result_set;
 }
 
 void InteractiveBase::hide_workarea(const Widelands::Coords& coords) {
@@ -387,6 +473,16 @@ void InteractiveBase::think() {
 		}
 	}
 	egbase().think();  // Call game logic here. The game advances.
+
+	// Cleanup found port spaces if the ship sailed on or was destroyed
+	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end(); ++it) {
+		if (!egbase().objects().object_still_available(it->first) ||
+		    it->first->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+			expedition_port_spaces_.erase(it);
+			// If another port space also needs removing, we'll take care of it in the next frame
+			return;
+		}
+	}
 
 	UI::Panel::think();
 }
@@ -729,25 +825,38 @@ void InteractiveBase::log_message(const std::string& message) const {
 	Notifications::publish(lm);
 }
 
-/** Calculate  the position of an effect in relation to the visible part of the
- * screen.
- * \param position  where the event happened (map coordinates)
- * \return position in widelands' game window: left=0, right=254, not in
- * viewport = -1
- * \note This function can also be used to check whether a logical coordinate is
- * visible at all
-*/
-int32_t InteractiveBase::stereo_position(Widelands::Coords const position_map) {
-	assert(position_map);
-
-	// Viewpoint is the point of the map in pixel which is shown in the upper
-	// left corner of window or fullscreen
-	const MapView::ViewArea area = map_view_.view_area();
-	if (!area.contains(position_map)) {
-		return -1;
+/**
+ * Plays a sound effect positioned according to the map coordinates in the note.
+ */
+void InteractiveBase::play_sound_effect(const NoteSound& note) const {
+	if (!g_sh->is_sound_enabled(note.type)) {
+		return;
 	}
-	const Vector2f position_pix = area.move_inside(position_map);
-	return static_cast<int>((position_pix.x - area.rect().x) * 254 / area.rect().w);
+
+	if (note.coords != Widelands::Coords::null() && player_hears_field(note.coords)) {
+		constexpr int kSoundMaxDistance = 255;
+		constexpr float kSoundDistanceDivisor = 4.f;
+
+		// Viewpoint is the point of the map in pixel which is shown in the upper
+		// left corner of window or fullscreen
+		const MapView::ViewArea area = map_view_.view_area();
+		const Vector2f position_pix = area.find_pixel_for_coordinates(note.coords);
+		const int stereo_pos =
+		   static_cast<int>((position_pix.x - area.rect().x) * kStereoRight / area.rect().w);
+
+		int distance = MapviewPixelFunctions::calc_pix_distance(
+		                  egbase().map(), area.rect().center(), position_pix) /
+		               kSoundDistanceDivisor;
+
+		distance = (note.priority == kFxPriorityAlwaysPlay) ?
+		              (math::clamp(distance, 0, kSoundMaxDistance) / 2) :
+		              distance;
+
+		if (distance < kSoundMaxDistance) {
+			g_sh->play_fx(note.type, note.fx, note.priority,
+			              math::clamp(stereo_pos, kStereoLeft, kStereoRight), distance);
+		}
+	}
 }
 
 // Repositions the chat overlay

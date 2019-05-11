@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015-2018
+# Juanjo, 2015-2019
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-05 17:07+0000\n"
-"PO-Revision-Date: 2018-05-06 10:04+0000\n"
+"POT-Creation-Date: 2019-03-01 12:45+0000\n"
+"PO-Revision-Date: 2019-03-01 17:50+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -35,56 +35,57 @@ msgstr "Llicència"
 msgid "Licensing information for Widelands"
 msgstr "Informació de la llicència del Widelands"
 
-#: ../../data/txts/LICENSE.lua:9
-msgid "Copyright 2002 - 2018 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2018 de l'equip de desenvolupament del Widelands."
+#. TRANSLATORS: Placeholder is copyright end year
+#: ../../data/txts/LICENSE.lua:10
+msgid "Copyright 2002 - %1% by the Widelands Development Team."
+msgstr "Copyright 2002 - %1% de l'equip de desenvolupament del Widelands."
 
-#: ../../data/txts/LICENSE.lua:11
+#: ../../data/txts/LICENSE.lua:12
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Aquest joc és lliure i de codi obert (FOSS, Free and Open Source), distribuït sota llicència pública general (GPL) GNU v2.0."
 
-#: ../../data/txts/LICENSE.lua:13
+#: ../../data/txts/LICENSE.lua:14
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Podeu trobar més informació de FOSS i de la GPL visitant la següent pàgina web (en anglès): %s"
 
-#: ../../data/txts/LICENSE.lua:15
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Podeu trobar-hi el text complet de la llicència, així com més informació sobre la filosofia i les condicions legals."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "També distribuïm la GPL com a un document de text junt amb el Widelands."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "En Linux, podreu trobar un arxiu anomenat «COPYING» en l'arrel del codi o del paquet binari de la instal·lació, o també en el directori de la instal·lació (com ara «%1%»)."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "En Windows, podreu trobar l'arxiu anomenat «COPYING.txt» en el directori d'instal·lació. El menú d'inici del Widelands també disposa d'un enllaç a aquest arxiu."
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:21
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "En MacOS, podreu trobar l'arxiu «COPYING» en l'arxiu que us vau baixar del lloc web."
 
-#: ../../data/txts/LICENSE.lua:22
+#: ../../data/txts/LICENSE.lua:23
 msgid "This game comes as-is and without any warranty."
 msgstr "El programa s'ofereix tal qual i sense garantia."
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
@@ -239,6 +240,10 @@ msgid "Fedora Linux"
 msgstr "Fedora"
 
 #: ../../data/txts/developers.lua:3
+msgid "Flatpak"
+msgstr "Flatpak"
+
+#: ../../data/txts/developers.lua:3
 msgid "Former Elders"
 msgstr "Primers ancians"
 
@@ -313,6 +318,14 @@ msgstr "Windows"
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
 msgstr "ZetaOS"
+
+#: ../../data/txts/developers.lua:3
+msgid "and many, many more (thank you for everything you've done)"
+msgstr "i molts, molts més (gràcies a tots per la feina que heu fet)"
+
+#: ../../data/txts/developers.lua:3
+msgid "vacant"
+msgstr "vacant"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"

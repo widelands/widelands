@@ -109,11 +109,14 @@ wl_library(scripting_logic
     io_fileread
     io_filesystem
     logic
-    logic_campaign_visibility
+    logic_commands
     logic_constants
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_map
+    logic_map_objects
+    logic_objectives
     logic_tribe_basic_info
     logic_widelands_geometry
     map_io

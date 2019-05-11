@@ -1,3 +1,13 @@
+wl_library(wui_sound_options
+  SRCS
+    sound_options.cc
+    sound_options.h
+  DEPENDS
+    base_i18n
+    sound
+    ui_basic
+)
+
 wl_library(wui_chat_ui
   SRCS
     chat_overlay.cc
@@ -20,6 +30,7 @@ wl_library(wui_chat_ui
     graphic_text_layout
     logic
     profile
+    sound
     ui_basic
     wui
 )
@@ -32,6 +43,8 @@ wl_library(wui_economy_options
     economy
     graphic
     logic
+    logic_commands
+    logic_map_objects
     notifications
     ui_basic
     wui_waresdisplay
@@ -45,7 +58,7 @@ wl_library(wui_mapview_pixelfunctions
     mapviewpixelfunctions.h
   DEPENDS
     base_geometry
-    logic
+    logic_map
     logic_widelands_geometry
 )
 
@@ -79,6 +92,7 @@ wl_library(wui_common_gamedetails
     graphic_text_constants
     io_filesystem
     logic
+    logic_constants
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
@@ -87,6 +101,7 @@ wl_library(wui_common_gamedetails
 
 wl_library(wui_common_mapdetails
   SRCS
+    mapauthordata.h
     mapdetails.cc
     mapdetails.h
     mapdata.cc
@@ -102,11 +117,11 @@ wl_library(wui_common_mapdetails
     graphic
     graphic_fonthandler
     graphic_text_constants
+    graphic_text_layout
     io_filesystem
-    logic
-    logic_constants
     logic_game_controller
     logic_game_settings
+    logic_map
     map_io_map_loader
     ui_basic
     wui_common_suggested_teams
@@ -132,7 +147,7 @@ wl_library(wui_mapview
     graphic
     graphic_fields_to_draw
     graphic_game_renderer
-    logic
+    logic_map
     logic_widelands_geometry
     profile
     ui_basic
@@ -151,6 +166,7 @@ wl_library(wui_waresdisplay
     graphic_fonthandler
     graphic_text_layout
     logic
+    logic_map_objects
     ui_basic
 )
 
@@ -263,6 +279,7 @@ wl_library(wui
     base_i18n
     base_log
     base_macros
+    base_math
     base_time_string
     chat
     economy
@@ -281,9 +298,14 @@ wl_library(wui
     io_filesystem
     logic
     logic_constants
+    logic_commands
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_generic_save_handler
+    logic_map
+    logic_map_objects
+    logic_objectives
     logic_tribe_basic_info
     logic_widelands_geometry
     network
@@ -301,5 +323,6 @@ wl_library(wui
     wui_mapview
     wui_mapview_pixelfunctions
     wui_quicknavigation
+    wui_sound_options
     wui_waresdisplay
 )

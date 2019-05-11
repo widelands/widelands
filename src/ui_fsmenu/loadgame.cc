@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -158,7 +158,8 @@ void FullscreenMenuLoadGame::entry_selected() {
 }
 
 void FullscreenMenuLoadGame::fill_table() {
-	load_or_save_.fill_table(showing_filenames_);
+	load_or_save_.set_show_filenames(showing_filenames_);
+	load_or_save_.fill_table();
 }
 
 const std::string& FullscreenMenuLoadGame::filename() const {

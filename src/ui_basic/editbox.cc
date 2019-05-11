@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2018 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,7 +85,8 @@ EditBox::EditBox(Panel* const parent,
    : Panel(parent, x, y, w, h > 0 ? h : text_height(font_size) + 2 * margin_y),
      m_(new EditBoxImpl),
      history_active_(false),
-     history_position_(-1) {
+     history_position_(-1),
+     warning_(false) {
 	set_thinks(false);
 
 	m_->background_style = g_gr->styles().editbox_style(style);
@@ -159,7 +160,7 @@ void EditBox::set_max_length(uint32_t const n) {
 
 /**
  * The mouse was clicked on this editbox
-*/
+ */
 bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
@@ -208,7 +209,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_DELETE:
 			if (m_->caret < m_->text.size()) {
 				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
-				};
+				}
 				// Now fallthrough to handle it like Backspace
 			} else {
 				return true;
@@ -232,7 +233,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_LEFT:
 			if (m_->caret > 0) {
 				while ((m_->text[--m_->caret] & 0xc0) == 0x80) {
-				};
+				}
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 					for (uint32_t new_caret = m_->caret;; m_->caret = new_caret)
 						if (0 == new_caret || isspace(m_->text[--new_caret]))
@@ -250,7 +251,8 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RIGHT:
 			if (m_->caret < m_->text.size()) {
 				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
-				};
+					// We're just advancing the caret
+				}
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 					for (uint32_t new_caret = m_->caret;; ++new_caret)
 						if (new_caret == m_->text.size() || isspace(m_->text[new_caret - 1])) {
@@ -345,7 +347,7 @@ void EditBox::draw(RenderTarget& dst) {
 	draw_background(dst, *m_->background_style);
 
 	// Draw border.
-	if (get_w() >= 2 && get_h() >= 2) {
+	if (get_w() >= 2 && get_h() >= 2 && !warning_) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
@@ -358,6 +360,25 @@ void EditBox::draw(RenderTarget& dst) {
 		// left edge
 		dst.fill_rect(Recti(0, 0, 1, get_h() - 1), black);
 		dst.fill_rect(Recti(1, 0, 1, get_h() - 2), black);
+
+	} else {
+		// Draw a red border for warnings.
+		static const RGBColor red(255, 22, 22);
+
+		// bottom edge
+		dst.fill_rect(Recti(0, get_h() - 2, get_w(), 2), red);
+		// right edge
+		dst.fill_rect(Recti(get_w() - 2, 0, 2, get_h() - 2), red);
+		// top edge
+		dst.fill_rect(Recti(0, 0, get_w() - 1, 1), red);
+		dst.fill_rect(Recti(0, 1, get_w() - 2, 1), red);
+		dst.brighten_rect(Recti(0, 0, get_w() - 1, 1), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, 1, get_w() - 2, 1), BUTTON_EDGE_BRIGHT_FACTOR);
+		// left edge
+		dst.fill_rect(Recti(0, 0, 1, get_h() - 1), red);
+		dst.fill_rect(Recti(1, 0, 1, get_h() - 2), red);
+		dst.brighten_rect(Recti(0, 0, 1, get_h() - 1), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(1, 0, 1, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 	}
 
 	if (has_focus()) {
@@ -450,4 +471,4 @@ void EditBox::check_caret() {
 			m_->scrolloffset = 0;
 	}
 }
-}
+}  // namespace UI

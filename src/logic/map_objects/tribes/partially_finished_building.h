@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,6 +83,6 @@ protected:
 	uint32_t work_completed_;  // how many steps have we done so far?
 	uint32_t work_steps_;      // how many steps (= wares) until we're done?
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PARTIALLY_FINISHED_BUILDING_H

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-25 13:50+0000\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2018-11-01 16:29+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -112,7 +112,7 @@ msgstr "Klick an"
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr "Sett neie Dingen up de Kaart oder verhoogt Kaart-Elementen um de »Verhoge/Minnere«-Weert"
+msgstr "Sett neje Dingen up de Kaart oder verhoogt Kaart-Elementen um de »Verhoge/Minnere«-Weert"
 
 #: ../../data/scripting/editor/editor_controls.lua:45
 msgid ""
@@ -182,7 +182,7 @@ msgstr "Du süchst, dat deese Bewarker noch entwickelt word. As de Bewarker bete
 
 #: ../../data/scripting/editor/editor_introduction.lua:17
 msgid "The wiki also includes a short tutorial on how to build a map."
-msgstr "De Wiki hett een luttje Inföhren, wo dat Kaarten-Maken gaht."
+msgstr "De Wiki hett eene lütte Inföhren, wo dat Kaarten-Maken gaht."
 
 #: ../../data/scripting/editor/terrain_help.lua:21
 msgid "Resources"

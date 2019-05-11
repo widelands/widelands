@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ class LoadOrSaveGame {
 
 protected:
 	/// Choose which type of files to show
-	enum class FileType { kReplay, kGame, kGameMultiPlayer, kGameSinglePlayer };
+	enum class FileType { kShowAll, kGameMultiPlayer, kGameSinglePlayer, kReplay };
 
 	/// A table of savegame/replay files and a game details panel.
 	LoadOrSaveGame(UI::Panel* parent,
@@ -57,7 +57,10 @@ protected:
 	void select_by_name(const std::string& name);
 
 	/// Read savegame/replay files and fill the table and games data.
-	void fill_table(bool show_filenames = false);
+	void fill_table();
+
+	/// Set whether to show filenames. Has only an effect for Replays.
+	void set_show_filenames(bool);
 
 	/// The table panel
 	UI::Table<uintptr_t const>& table();
@@ -80,6 +83,8 @@ private:
 
 	/// Formats the current table selection as a list of filenames with savedate information.
 	const std::string filename_list_string() const;
+	/// Formats a given table selection as a list of filenames with savedate information.
+	const std::string filename_list_string(const std::set<uint32_t>& selections) const;
 
 	/// Reverse default sort order for save date column
 	bool compare_date_descending(uint32_t, uint32_t) const;
@@ -88,6 +93,7 @@ private:
 	UI::Box* table_box_;
 	UI::Table<uintptr_t const> table_;
 	FileType filetype_;
+	bool show_filenames_;
 	bool localize_autosave_;
 	std::vector<SavegameData> games_data_;
 	GameDetails game_details_;

@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
+# Zlatko Savich <zlajonja@gmail.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2015-02-03 15:17+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-04-22 05:17+0000\n"
+"PO-Revision-Date: 2019-04-26 21:00+0000\n"
+"Last-Translator: Zlatko Savich <zlajonja@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/widelands/widelands/language/sr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,22 +17,22 @@ msgstr ""
 "Language: sr\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../../data/campaigns/dummy.wmf/scripting/init.lua:11
-msgid "Not yet implemented"
-msgstr ""
-
 #: ../../data/campaigns/dummy.wmf/scripting/init.lua:12
-msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgid "Not yet implemented"
+msgstr "Još uvek nije implementirano."
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/campaigns/dummy.wmf/scripting/init.lua:13
+msgid "Sorry, this map is not yet implemented."
+msgstr "Žao nam je, ova mapa još uvek nije implementirana."
+
+#: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nov cilj"
+msgstr[1] "Novi ciljevi"
+msgstr[2] "Novi ciljevi"

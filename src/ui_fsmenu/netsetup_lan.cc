@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -136,6 +136,7 @@ void FullscreenMenuNetSetupLAN::layout() {
 
 void FullscreenMenuNetSetupLAN::think() {
 	FullscreenMenuBase::think();
+	change_playername();
 
 	discovery.run();
 }
@@ -183,7 +184,12 @@ void FullscreenMenuNetSetupLAN::game_selected(uint32_t) {
 }
 
 void FullscreenMenuNetSetupLAN::game_doubleclicked(uint32_t) {
-	clicked_joingame();
+	assert(opengames.has_selection());
+	const NetOpenGame* const game = opengames.get_selected();
+	// Only join games that are open
+	if (game->info.state == LAN_GAME_OPEN || !playername.has_warning()) {
+		clicked_joingame();
+	}
 }
 
 void FullscreenMenuNetSetupLAN::update_game_info(
@@ -202,7 +208,7 @@ void FullscreenMenuNetSetupLAN::update_game_info(
 		/** TRANSLATORS: The state of a LAN game can be open, closed or unknown */
 		er.set_string(2, pgettext("game_state", "Unknown"));
 		break;
-	};
+	}
 }
 
 void FullscreenMenuNetSetupLAN::game_opened(const NetOpenGame* game) {
@@ -242,6 +248,25 @@ void FullscreenMenuNetSetupLAN::change_hostname() {
 }
 
 void FullscreenMenuNetSetupLAN::change_playername() {
+	playername.set_warning(false);
+	playername.set_tooltip("");
+	hostgame.set_enabled(true);
+
+	if (playername.text().find_first_not_of("abcdefghijklmnopqrstuvwxyz"
+	                                        "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <=
+	       playername.text().size() ||
+	    playername.text().empty()) {
+		playername.set_warning(true);
+		playername.set_tooltip(_("Enter a valid nickname. This value may contain only "
+		                         "English letters, numbers, and @ . + - _ characters."));
+		joingame.set_enabled(false);
+		hostgame.set_enabled(false);
+		return;
+	}
+	if (!hostname.text().empty()) {
+		joingame.set_enabled(true);
+	}
+
 	g_options.pull_section("global").set_string("nickname", playername.text());
 }
 

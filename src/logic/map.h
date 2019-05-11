@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,14 +29,13 @@
 
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
-#include "logic/description_maintainer.h"
 #include "logic/field.h"
-#include "logic/findimmovable.h"
+#include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/walkingdir.h"
 #include "logic/map_revision.h"
 #include "logic/objective.h"
-#include "logic/widelands_geometry.h"
 #include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 #include "random/random.h"
@@ -104,6 +103,18 @@ struct FindBobAlwaysTrue : public FindBob {
 	}  // make gcc shut up
 };
 
+// Helper struct to save certain elemental data of a field without an actual instance of Field
+struct FieldData {
+	FieldData(const Field& f);
+
+	std::string immovable;
+	std::list<std::string> bobs;
+	uint8_t height;
+	DescriptionIndex resources;
+	uint8_t resource_amount;
+	Field::Terrains terrains;
+};
+
 /** class Map
  *
  * This really identifies a map like it is in the game
@@ -164,6 +175,27 @@ public:
 
 	void recalc_whole_map(const World& world);
 	void recalc_for_field_area(const World& world, Area<FCoords>);
+
+	/**
+	 *  If the valuable fields are empty, calculates all fields that could be conquered by a player
+	 * throughout a game. Useful for territorial win conditions. Returns the amount of valuable
+	 * fields.
+	 */
+	size_t count_all_conquerable_fields();
+
+	/**
+	 *  If the valuable fields are empty, calculates which fields do not have the given caps and adds
+	 * the to the list of valuable fields. Useful for win conditions. Returns the amount of valuable
+	 * fields.
+	 */
+	size_t count_all_fields_excluding_caps(NodeCaps caps);
+
+	/**
+	 * Counts the valuable fields that are owned by each player. Only players that currently own a
+	 * field are added. Returns a map of <player number, number of owned fields>.
+	 */
+	std::map<PlayerNumber, size_t>
+	count_owned_valuable_fields(const std::string& immovable_attribute) const;
 
 	/***
 	 * Ensures that resources match their adjacent terrains.
@@ -306,6 +338,7 @@ public:
 	Field& operator[](MapIndex) const;
 	Field& operator[](const Coords&) const;
 	FCoords get_fcoords(const Coords&) const;
+	static void normalize_coords(Coords&, int16_t, int16_t);
 	void normalize_coords(Coords&) const;
 	FCoords get_fcoords(Field&) const;
 	void get_coords(Field& f, Coords& c) const;
@@ -432,6 +465,10 @@ public:
 		return &objectives_;
 	}
 
+	std::set<FCoords>* mutable_valuable_fields() {
+		return &valuable_fields_;
+	}
+
 	/// Returns the military influence on a location from an area.
 	MilitaryInfluence calc_influence(Coords, Area<>) const;
 
@@ -472,6 +509,10 @@ public:
 
 	// Visible for testing.
 	void set_size(uint32_t w, uint32_t h);
+
+	// Change the map size
+	std::map<Coords, FieldData>
+	resize(EditorGameBase& egbase, const Coords coords, int32_t w, int32_t h);
 
 private:
 	void recalc_border(const FCoords&);
@@ -529,6 +570,9 @@ private:
 
 	Objectives objectives_;
 
+	// Fields that are important for the player to own in a win condition
+	std::set<FCoords> valuable_fields_;
+
 	MapVersion map_version_;
 };
 
@@ -560,14 +604,22 @@ inline FCoords Map::get_fcoords(const Coords& c) const {
 }
 
 inline void Map::normalize_coords(Coords& c) const {
-	while (c.x < 0)
-		c.x += width_;
-	while (c.x >= width_)
-		c.x -= width_;
-	while (c.y < 0)
-		c.y += height_;
-	while (c.y >= height_)
-		c.y -= height_;
+	normalize_coords(c, width_, height_);
+}
+
+inline void Map::normalize_coords(Coords& c, int16_t w, int16_t h) {
+	while (c.x < 0) {
+		c.x += w;
+	}
+	while (c.x >= w) {
+		c.x -= w;
+	}
+	while (c.y < 0) {
+		c.y += h;
+	}
+	while (c.y >= h) {
+		c.y -= h;
+	}
 }
 
 /**
@@ -1161,6 +1213,6 @@ inline void move_r(int16_t const mapwidth, FCoords& f, MapIndex& i) {
 	for (Widelands::FCoords fc = (map).get_fcoords(Widelands::Coords(0, 0));                        \
 	     fc.y < static_cast<int16_t>(extent.h); ++fc.y)                                             \
 		for (fc.x = 0; fc.x < static_cast<int16_t>(extent.w); ++fc.x, ++fc.field)
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_H

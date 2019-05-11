@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,8 +48,8 @@ public:
 	WorkerDescr(const std::string& init_descname,
 	            MapObjectType type,
 	            const LuaTable& table,
-	            const EditorGameBase& egbase);
-	WorkerDescr(const std::string& init_descname, const LuaTable& t, const EditorGameBase& egbase);
+	            const Tribes& tribes);
+	WorkerDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
 	~WorkerDescr() override;
 
 	Bob& create_object() const override;
@@ -144,10 +144,10 @@ private:
 	/// Buildings where this worker can work
 	std::set<DescriptionIndex> employers_;
 
-	const EditorGameBase& egbase_;
-
+private:
+	const Tribes& tribes_;
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_DESCR_H

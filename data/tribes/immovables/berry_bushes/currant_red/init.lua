@@ -2,10 +2,13 @@ dirname = path.dirname (__file__)
 
 terrain_affinity = {
    preferred_temperature = 95,
-   preferred_humidity = 0.55,
-   preferred_fertility = 0.45,
-   pickiness = 0.4,
+   preferred_humidity = 550,
+   preferred_fertility = 450,
+   pickiness = 40,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname, "tiny/idle", { 4, 10 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -22,14 +25,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_currant_red_small",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "tiny/idle_?.png"),
-         hotspot = {4, 10},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname, "small/idle", { 8, 20 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -46,14 +46,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_currant_red_medium",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "small/idle_?.png"),
-         hotspot = {8, 20},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname, "medium/idle", { 13, 33 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -70,14 +67,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_currant_red_ripe",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "medium/idle_?.png"),
-         hotspot = {13, 33},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname, "ripe/idle", { 13, 33 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -96,11 +90,5 @@ tribes:new_immovable_type {
          "remove=",
       }
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "ripe/idle_?.png"),
-         hotspot = {13, 33},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }

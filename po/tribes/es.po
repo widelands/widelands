@@ -1,9 +1,10 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
-# Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
+# Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016,2019
+# Facundo Gomez <facundogomez15@gmail.com>, 2019
 # GunChleoc, 2016
 # Gontzal M. Pujana <juchuf@gmail.com>, 2018
 # Javier Mora <morehash@gmail.com>, 2015
@@ -19,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-26 19:53+0000\n"
-"Last-Translator: Gontzal M. Pujana <juchuf@gmail.com>\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-03-30 19:20+0000\n"
+"Last-Translator: Facundo Gomez <facundogomez15@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -553,7 +554,7 @@ msgstr "Taller de Armaduras"
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:65
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:61
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:58
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:48
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:67
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:60
@@ -993,7 +994,7 @@ msgstr "cazando"
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:65
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:69
 msgid "No Game"
 msgstr "Sin Presas"
 
@@ -1001,7 +1002,7 @@ msgstr "Sin Presas"
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:55
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:66
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:55
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:67
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:71
 msgid "Out of Game"
 msgstr "Sin caza"
 
@@ -1077,7 +1078,7 @@ msgstr "Molino"
 msgid "grinding corn"
 msgstr "moliendo maíz"
 
-#. TRANSLATORS: Completed/Skipped/Did not start grinding blackrootbecause ...
+#. TRANSLATORS: Completed/Skipped/Did not start grinding blackroot because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:78
 msgid "grinding blackroot"
 msgstr "moliendo raíz negra"
@@ -1359,21 +1360,21 @@ msgctxt "atlanteans_building"
 msgid "Well"
 msgstr "Pozo"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:59
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:62
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:59
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:62
 msgid "No Water"
 msgstr "Sin Agua"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:60
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:61
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:63
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:60
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:63
 msgid "Out of Water"
 msgstr "Sin Agua"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:61
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:62
 msgctxt "atlanteans_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "El transportista trabajando en este pozo no puede encontrar agua en su pozo."
@@ -1457,7 +1458,7 @@ msgid "Barracks"
 msgstr "Barracones"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:61
 msgctxt "barbarians_building"
 msgid "recruiting soldier"
 msgstr "reclutando soldado"
@@ -2740,7 +2741,7 @@ msgid "Hunter’s House"
 msgstr "Casa del Cazador"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:69
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:73
 msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -2920,58 +2921,58 @@ msgstr "Tienda del Sastre"
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:71
 msgid "sewing studded fur garment"
-msgstr ""
+msgstr "cosiendo prendas de piel tachonadas"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing golden fur garment
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:83
 msgid "sewing golden fur garment"
-msgstr ""
+msgstr "cosiendo prendas de piel doradas"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:7
 msgctxt "frisians_building"
 msgid "Tavern"
-msgstr ""
+msgstr "Taberna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:74
 msgid "preparing only one ration"
-msgstr ""
+msgstr "preparando sólo una ración"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:88
 msgid "preparing rations"
-msgstr ""
+msgstr "preparando raciones"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:7
 msgctxt "frisians_building"
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Fábrica de Tejido"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:62
 msgid "weaving cloth"
-msgstr ""
+msgstr "tejiendo tela"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:7
 msgctxt "frisians_building"
 msgid "Well"
-msgstr ""
+msgstr "Pozo"
 
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:64
 msgctxt "frisians_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr ""
+msgstr "El transportista trabajando en este pozo no puede encontrar agua en su pozo."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Casa del Leñador"
 
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:60
 msgctxt "frisians_building"
@@ -2979,7 +2980,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr ""
+msgstr "El leñador que trabaja en esta casa del leñador no puede encontrar ningún árbol en su área de trabajo. Deberías considerar desmantelar o destruir el edificio o construir una casa del silvicultor."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:84
@@ -3215,73 +3216,73 @@ msgstr "mejorando vida de soldado de nivel 3 a nivel 4"
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:7
 msgctxt "frisians_building"
 msgid "Training Arena"
-msgstr ""
+msgstr "Arena de Entrenamiento"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:121
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "mejorando ataque de soldado de nivel 3 a nivel 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:132
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr ""
+msgstr "mejorando ataque de soldado de nivel 4 a nivel 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:144
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
-msgstr ""
+msgstr "mejorando ataque de soldado de nivel 5 a nivel 6"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:156
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "mejorando defensa de soldado de nivel 1 a nivel 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:168
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "mejorando vida de soldado de nivel 1 a nivel 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:7
 msgctxt "frisians_building"
 msgid "Training Camp"
-msgstr ""
+msgstr "Campo de Entrenamiento"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:120
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "mejorando ataque de soldado de nivel 0 a nivel 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:132
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "mejorando ataque de soldado de nivel 1 a nivel 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:144
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "mejorando ataque de soldado de nivel 2 a nivel 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:156
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "mejorando vida de soldado de nivel 0 a nivel 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:167
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "mejorando defensa de soldado de nivel 0 a nivel 1"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:47
@@ -3348,19 +3349,19 @@ msgstr "Almacén"
 #: ../../data/tribes/buildings/warehouses/frisians/headquarters/init.lua:7
 msgctxt "frisians_building"
 msgid "Headquarters"
-msgstr ""
+msgstr "Cuartel General"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/frisians/port/init.lua:7
 msgctxt "frisians_building"
 msgid "Port"
-msgstr ""
+msgstr "Puerto"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/frisians/warehouse/init.lua:7
 msgctxt "frisians_building"
 msgid "Warehouse"
-msgstr ""
+msgstr "Almacén"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/ashes/init.lua:42
@@ -3372,159 +3373,159 @@ msgstr "Cenizas"
 #: ../../data/tribes/immovables/barleyfield_harvested/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (harvested)"
-msgstr ""
+msgstr "Campo de Cebada (cosechado)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield_medium/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (medium)"
-msgstr ""
+msgstr "Campo de Cebada (mediano)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield_ripe/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (ripe)"
-msgstr ""
+msgstr "Campo de Cebada (maduro)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield_small/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (small)"
-msgstr ""
+msgstr "Campo de Cebada (pequeño)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (tiny)"
-msgstr ""
+msgstr "Campo de Cebada (minúsculo)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:15
 msgid "Blueberry Bush (tiny)"
-msgstr ""
+msgstr "Mata de Arándanos (minúscula)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:37
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:39
 msgid "Blueberry Bush (small)"
-msgstr ""
+msgstr "Mata de Arándanos (pequeña)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:63
 msgid "Blueberry Bush (medium)"
-msgstr ""
+msgstr "Mata de Arándanos (mediana)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:87
 msgid "Blueberry Bush (ripe)"
-msgstr ""
+msgstr "Mata de Arándanos (madura)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:13
 msgid "Black Currant (tiny)"
-msgstr ""
+msgstr "Grosella Negra (minúscula)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:37
 msgid "Black Currant (small)"
-msgstr ""
+msgstr "Grosella Negra (pequeña)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:61
 msgid "Black Currant (medium)"
-msgstr ""
+msgstr "Grosella Negra (mediana)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:85
 msgid "Black Currant (ripe)"
-msgstr ""
+msgstr "Grosella Negra (madura)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:13
 msgid "Red Currant (tiny)"
-msgstr ""
+msgstr "Grosella Roja (minúscula)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:37
 msgid "Red Currant (small)"
-msgstr ""
+msgstr "Grosella Roja (pequeña)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:61
 msgid "Red Currant (medium)"
-msgstr ""
+msgstr "Grosella Roja (mediana)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:85
 msgid "Red Currant (ripe)"
-msgstr ""
+msgstr "Grosella Roja (madura)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:13
 msgid "Desert Hackberry (tiny)"
-msgstr ""
+msgstr "Tala (minúscula)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:37
 msgid "Desert Hackberry (small)"
-msgstr ""
+msgstr "Tala (pequeña)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:61
 msgid "Desert Hackberry (medium)"
-msgstr ""
+msgstr "Tala (mediana)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:85
 msgid "Desert Hackberry (ripe)"
-msgstr ""
+msgstr "Tala (madura)"
 
 #: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:13
 msgid "Juniper (tiny)"
-msgstr ""
+msgstr "Enebro (minúsculo)"
 
 #: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:37
 msgid "Juniper (small)"
-msgstr ""
+msgstr "Enebro (pequeño)"
 
 #: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:61
 msgid "Juniper (medium)"
-msgstr ""
+msgstr "Enebro (mediano)"
 
 #: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:85
 msgid "Juniper (ripe)"
-msgstr ""
+msgstr "Enebro (maduro)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:13
 msgid "Raspberry Bush (tiny)"
-msgstr ""
+msgstr "Arbusto de Frambuesas (minúsculo)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:37
 msgid "Raspberry Bush (small)"
-msgstr ""
+msgstr "Arbusto de Frambuesas (pequeño)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:61
 msgid "Raspberry Bush (medium)"
-msgstr ""
+msgstr "Arbusto de Frambuesas (mediano)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:85
 msgid "Raspberry Bush (ripe)"
-msgstr ""
+msgstr "Arbusto de Frambuesas (maduro)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:13
 msgid "Sea Buckthorn (tiny)"
-msgstr ""
+msgstr "Espino Amarillo (minúsculo)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:37
 msgid "Sea Buckthorn (small)"
-msgstr ""
+msgstr "Espino Amarillo (pequeño)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:61
 msgid "Sea Buckthorn (medium)"
-msgstr ""
+msgstr "Espino Amarillo (mediano)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:85
 msgid "Sea Buckthorn (ripe)"
-msgstr ""
+msgstr "Espino Amarillo (maduro)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
 msgid "Strawberries (tiny)"
-msgstr ""
+msgstr "Fresas (minúsculas)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:37
 msgid "Strawberries (small)"
-msgstr ""
+msgstr "Fresas (pequeñas)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:61
 msgid "Strawberries (medium)"
-msgstr ""
+msgstr "Fresas (medianas)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:85
 msgid "Strawberries (ripe)"
-msgstr ""
+msgstr "Fresas (maduras)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield_harvested/init.lua:7
@@ -3650,19 +3651,19 @@ msgstr "Vid (minúsculo)"
 #: ../../data/tribes/immovables/pond_dry/init.lua:7
 msgctxt "immovable"
 msgid "Dry Pond"
-msgstr ""
+msgstr "Pozo Seco"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond_growing/init.lua:7
 msgctxt "immovable"
 msgid "Pond With Fish Spawn"
-msgstr ""
+msgstr "Estanque Con Generación de Peces"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond_mature/init.lua:7
 msgctxt "immovable"
 msgid "Pond With Fish"
-msgstr ""
+msgstr "Estanque Con Peces"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reed_medium/init.lua:7
@@ -3695,7 +3696,7 @@ msgstr "Caña (diminuta)"
 #: ../../data/tribes/immovables/resi/frisians/init.lua:7
 msgctxt "immovable"
 msgid "Resources: None"
-msgstr ""
+msgstr "Recursos: Ninguno"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:29
@@ -3704,7 +3705,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:29
 msgctxt "immovable"
 msgid "Resources: Water Vein"
-msgstr ""
+msgstr "Recursos: veta de agua"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:52
@@ -3713,7 +3714,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:52
 msgctxt "immovable"
 msgid "Resources: Coal Vein"
-msgstr ""
+msgstr "Recursos: Veta de Carbón"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:75
@@ -3722,7 +3723,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:75
 msgctxt "immovable"
 msgid "Resources: Gold Vein"
-msgstr ""
+msgstr "Recursos: Veta de Oro"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:98
@@ -3731,7 +3732,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:98
 msgctxt "immovable"
 msgid "Resources: Iron Vein"
-msgstr ""
+msgstr "Recursos: Veta de Hierro"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:121
@@ -3740,7 +3741,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:121
 msgctxt "immovable"
 msgid "Resources: Some Stones"
-msgstr ""
+msgstr "Recursos: Algunas Piedras"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:144
@@ -3749,7 +3750,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:144
 msgctxt "immovable"
 msgid "Resources: Main Coal Vein"
-msgstr ""
+msgstr "Recursos: Veta de Carbón Principal"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:167
@@ -3758,7 +3759,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:167
 msgctxt "immovable"
 msgid "Resources: Main Gold Vein"
-msgstr ""
+msgstr "Recursos: veta de oro principal"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:190
@@ -3767,7 +3768,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:190
 msgctxt "immovable"
 msgid "Resources: Main Iron Vein"
-msgstr ""
+msgstr "Recursos: veta de hierro principal"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:213
@@ -3776,7 +3777,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/init.lua:213
 msgctxt "immovable"
 msgid "Resources: A Lot of Stones"
-msgstr ""
+msgstr "Recursos: Muchas Piedras"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/init.lua:7
@@ -3824,13 +3825,13 @@ msgstr "Esta tribu es conocida desde los cuentos más antiguos. Los hijos e hija
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/preload.lua:68
 msgid "Frisians (experimental)"
-msgstr ""
+msgstr "Frisones (experimental)"
 
 #: ../../data/tribes/preload.lua:69
 msgid ""
 "The inhabitants of the rough North Sea shore. This tribe is still under "
 "development."
-msgstr ""
+msgstr "Los pobladores de la dura costa del Mar del Norte. Esta tribu esta todavía en desarrollo."
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
@@ -3866,7 +3867,7 @@ msgstr "Construcciones"
 
 #: ../../data/tribes/scripting/help/init.lua:106
 msgid "Immovables"
-msgstr ""
+msgstr "Inmóvil"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
@@ -3926,7 +3927,7 @@ msgstr "Si este jugador se queda sin mercancías importantes, estas serán reemp
 #: ../../data/tribes/scripting/starting_conditions/empire/village.lua:11
 #: ../../data/tribes/scripting/starting_conditions/frisians/village.lua:11
 msgid "Village"
-msgstr ""
+msgstr "Pueblo"
 
 #. TRANSLATORS: This is the tooltip for the "Village" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/village.lua:13
@@ -3934,7 +3935,7 @@ msgstr ""
 #: ../../data/tribes/scripting/starting_conditions/empire/village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/frisians/village.lua:13
 msgid "Start the game with a peaceful village"
-msgstr ""
+msgstr "Inicia el juego con un pueblo pacífico"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:55
@@ -4008,7 +4009,7 @@ msgstr "Hacha de Guerrero"
 #: ../../data/tribes/wares/barley/init.lua:7
 msgctxt "ware"
 msgid "Barley"
-msgstr ""
+msgstr "Cebada"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/basket/init.lua:7
@@ -4068,7 +4069,7 @@ msgstr "Pan"
 #: ../../data/tribes/wares/bread_frisians/init.lua:7
 msgctxt "frisians_ware"
 msgid "Bread"
-msgstr ""
+msgstr "Pan"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_paddle/init.lua:7
@@ -4080,7 +4081,7 @@ msgstr "Rodillo para Pan"
 #: ../../data/tribes/wares/brick/init.lua:7
 msgctxt "ware"
 msgid "Brick"
-msgstr ""
+msgstr "Ladrillo"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/buckets/init.lua:7
@@ -4092,7 +4093,7 @@ msgstr "Cubos"
 #: ../../data/tribes/wares/clay/init.lua:7
 msgctxt "ware"
 msgid "Clay"
-msgstr ""
+msgstr "Arcilla"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/cloth/init.lua:7
@@ -4164,37 +4165,37 @@ msgstr "Harina"
 #: ../../data/tribes/wares/fruit/init.lua:7
 msgctxt "ware"
 msgid "Fruit"
-msgstr ""
+msgstr "Fruta"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fur/init.lua:7
 msgctxt "ware"
 msgid "Fur"
-msgstr ""
+msgstr "Piel"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fur_garment/init.lua:7
 msgctxt "ware"
 msgid "Fur Garment"
-msgstr ""
+msgstr "Prenda de Pieles"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fur_garment_golden/init.lua:7
 msgctxt "ware"
 msgid "Golden Fur Garment"
-msgstr ""
+msgstr "Prenda de Pieles Dorado"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fur_garment_old/init.lua:7
 msgctxt "ware"
 msgid "Old Fur Garment"
-msgstr ""
+msgstr "Vieja Prenda de Pieles"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fur_garment_studded/init.lua:7
 msgctxt "ware"
 msgid "Studded Fur Garment"
-msgstr ""
+msgstr "Prenda de piel con tachas"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/gold/init.lua:7
@@ -4242,13 +4243,13 @@ msgstr "Martillo"
 #: ../../data/tribes/wares/helmet/init.lua:7
 msgctxt "ware"
 msgid "Helmet"
-msgstr ""
+msgstr "Casco"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/helmet_golden/init.lua:7
 msgctxt "frisians_ware"
 msgid "Golden Helmet"
-msgstr ""
+msgstr "Casco Dorado"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/helmet_mask/init.lua:7
@@ -4266,13 +4267,13 @@ msgstr "Yelmo de guerra"
 #: ../../data/tribes/wares/honey/init.lua:7
 msgctxt "ware"
 msgid "Honey"
-msgstr ""
+msgstr "Miel"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/honey_bread/init.lua:7
 msgctxt "frisians_ware"
 msgid "Honey Bread"
-msgstr ""
+msgstr "Pan de miel"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/hook_pole/init.lua:7
@@ -4332,7 +4333,7 @@ msgstr "Columna de marmol"
 #: ../../data/tribes/wares/mead/init.lua:7
 msgctxt "ware"
 msgid "Mead"
-msgstr ""
+msgstr "Aguamiel"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/meal/init.lua:7
@@ -4356,7 +4357,7 @@ msgstr "Pinzas de ordeñar"
 #: ../../data/tribes/wares/needles/init.lua:7
 msgctxt "ware"
 msgid "Needles"
-msgstr ""
+msgstr "Agujas"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/pick/init.lua:7
@@ -4392,13 +4393,13 @@ msgstr "Sierra"
 #: ../../data/tribes/wares/scrap_iron/init.lua:7
 msgctxt "ware"
 msgid "Scrap Iron"
-msgstr ""
+msgstr "Chatarra de hierro"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/scrap_metal_mixed/init.lua:7
 msgctxt "ware"
 msgid "Mixed Scrap Metal"
-msgstr ""
+msgstr "Chatarra de metales mezclados"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/scythe/init.lua:7
@@ -4488,25 +4489,25 @@ msgstr "Tela de araña"
 #: ../../data/tribes/wares/sword_broad/init.lua:7
 msgctxt "ware"
 msgid "Broadsword"
-msgstr ""
+msgstr "Sable"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/sword_double/init.lua:7
 msgctxt "ware"
 msgid "Double-edged Sword"
-msgstr ""
+msgstr "Espada de doble filo"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/sword_long/init.lua:7
 msgctxt "ware"
 msgid "Long Sword"
-msgstr ""
+msgstr "Espada Larga"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/sword_short/init.lua:7
 msgctxt "ware"
 msgid "Short Sword"
-msgstr ""
+msgstr "Espada Corta"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/tabard/init.lua:7
@@ -4605,7 +4606,7 @@ msgid "Builder"
 msgstr "Constructor"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/carrier/init.lua:49
+#: ../../data/tribes/workers/atlanteans/carrier/init.lua:41
 msgctxt "atlanteans_worker"
 msgid "Carrier"
 msgstr "Porteador"
@@ -5154,91 +5155,91 @@ msgstr "Tejedor"
 #: ../../data/tribes/workers/frisians/baker/init.lua:16
 msgctxt "frisians_worker"
 msgid "Baker"
-msgstr ""
+msgstr "Panadero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/baker_master/init.lua:16
 msgctxt "frisians_worker"
 msgid "Master Baker"
-msgstr ""
+msgstr "Maestro Panadero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/beekeeper/init.lua:21
 msgctxt "frisians_worker"
 msgid "Beekeeper"
-msgstr ""
+msgstr "Apicultor"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/berry_farmer/init.lua:30
 msgctxt "frisians_worker"
 msgid "Berry Farmer"
-msgstr ""
+msgstr "Cultivador de Bayas"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/blacksmith/init.lua:16
 msgctxt "frisians_worker"
 msgid "Blacksmith"
-msgstr ""
+msgstr "Herrero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/blacksmith_master/init.lua:16
 msgctxt "frisians_worker"
 msgid "Master Blacksmith"
-msgstr ""
+msgstr "Maestro Herrero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/brewer/init.lua:16
 msgctxt "frisians_worker"
 msgid "Brewer"
-msgstr ""
+msgstr "Cervecero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/brewer_master/init.lua:16
 msgctxt "frisians_worker"
 msgid "Master Brewer"
-msgstr ""
+msgstr "Maestro Cervecero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/brickmaker/init.lua:16
 msgctxt "frisians_worker"
 msgid "Brickmaker"
-msgstr ""
+msgstr "Ladrillero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/builder/init.lua:26
 msgctxt "frisians_worker"
 msgid "Builder"
-msgstr ""
+msgstr "Constructor"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/carrier/init.lua:17
 msgctxt "frisians_worker"
 msgid "Carrier"
-msgstr ""
+msgstr "Transportista"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/charcoal_burner/init.lua:16
 msgctxt "frisians_worker"
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Quemador de carbón"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/claydigger/init.lua:21
 msgctxt "frisians_worker"
 msgid "Clay Digger"
-msgstr ""
+msgstr "Excavador de arcilla"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/farmer/init.lua:31
 msgctxt "frisians_worker"
 msgid "Farmer"
-msgstr ""
+msgstr "Granjero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/fisher/init.lua:26
 msgctxt "frisians_worker"
 msgid "Fisher"
-msgstr ""
+msgstr "Pescador"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/forester/init.lua:30
@@ -5250,19 +5251,19 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/fruit_collector/init.lua:22
 msgctxt "frisians_worker"
 msgid "Fruit Collector"
-msgstr ""
+msgstr "Recolector de Fruta"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/geologist/init.lua:21
 msgctxt "frisians_worker"
 msgid "Geologist"
-msgstr ""
+msgstr "Geólogo"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/hunter/init.lua:17
 msgctxt "frisians_worker"
 msgid "Hunter"
-msgstr ""
+msgstr "Cazador"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/landlady/init.lua:16
@@ -5274,13 +5275,13 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/miner/init.lua:16
 msgctxt "frisians_worker"
 msgid "Miner"
-msgstr ""
+msgstr "Minero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/miner_master/init.lua:16
 msgctxt "frisians_worker"
 msgid "Master Miner"
-msgstr ""
+msgstr "Maestro Minero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/reed_farmer/init.lua:31
@@ -5304,7 +5305,7 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/scout/init.lua:16
 msgctxt "frisians_worker"
 msgid "Scout"
-msgstr ""
+msgstr "Explorador"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/seamstress/init.lua:16
@@ -5328,34 +5329,34 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/smelter/init.lua:16
 msgctxt "frisians_worker"
 msgid "Smelter"
-msgstr ""
+msgstr "Forjador"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/smoker/init.lua:16
 msgctxt "frisians_worker"
 msgid "Smoker"
-msgstr ""
+msgstr "Ahumador"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/soldier/init.lua:76
 msgctxt "frisians_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "Soldado"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/stonemason/init.lua:21
 msgctxt "frisians_worker"
 msgid "Stonemason"
-msgstr ""
+msgstr "Mampostero"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/trainer/init.lua:16
 msgctxt "frisians_worker"
 msgid "Trainer"
-msgstr ""
+msgstr "Entrenador"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/woodcutter/init.lua:22
 msgctxt "frisians_worker"
 msgid "Woodcutter"
-msgstr ""
+msgstr "Talador"

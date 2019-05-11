@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,9 +37,9 @@
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
 #include "logic/editor_game_base.h"
-#include "logic/findbob.h"
-#include "logic/findnode.h"
 #include "logic/game.h"
+#include "logic/map_objects/findbob.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/requirements.h"
@@ -287,19 +287,19 @@ Warehouse Building
 */
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua
+ */
 WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                const LuaTable& table,
-                               const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, egbase),
+                               const Tribes& tribes)
+   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, tribes),
      conquers_(0),
      heal_per_second_(0) {
 	heal_per_second_ = table.get_int("heal_per_second");
 	if (table.has_key("conquers")) {
 		conquers_ = table.get_int("conquers");
-		workarea_info_[conquers_].insert(descname() + " conquer");
+		workarea_info_[conquers_].insert(name() + " conquer");
 	}
 }
 
@@ -1072,7 +1072,7 @@ bool Warehouse::can_create_worker(Game&, DescriptionIndex const worker) const {
 			} else
 				throw wexception("worker type %s needs \"%s\" to be built but that is neither "
 				                 "a ware type nor a worker type defined in the tribe %s",
-				                 w_desc.descname().c_str(), input_name.c_str(),
+				                 w_desc.name().c_str(), input_name.c_str(),
 				                 owner().tribe().name().c_str());
 		}
 	}
@@ -1359,4 +1359,4 @@ void Warehouse::log_general_info(const EditorGameBase& egbase) const {
 		}
 	}
 }
-}
+}  // namespace Widelands

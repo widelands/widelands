@@ -1,11 +1,11 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Wuzzy <almikes@aol.com>, 2018
 # GunChleoc, 2015
-# Elisabeth Jäger, 2016-2018
-# GunChleoc, 2015-2016
+# Elisabeth Jäger, 2016-2019
+# GunChleoc, 2015-2016,2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # FIRST AUTHOR <nasenbaer_peter@sourceforge.net>, 2008
 # Jonas Richardsen <jonas.richardsen@isdas.de>, 2017
@@ -13,19 +13,19 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2019
 # Venatrix, 2015
 # Elisabeth Jäger, 2015-2016
-# you <ovvv@web.de>, 2015
+# ‮ <ovvv@web.de>, 2015
 # wl-zocker, 2015
 # wl-zocker, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-14 06:11+0000\n"
-"PO-Revision-Date: 2018-09-14 12:48+0000\n"
-"Last-Translator: Elisabeth Jäger\n"
+"POT-Creation-Date: 2019-04-22 05:17+0000\n"
+"PO-Revision-Date: 2019-05-02 05:38+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -329,6 +329,11 @@ msgid ""
 "between ports."
 msgstr "Baut Schiffe zur Kolonisierung anderer Länder und zum Warentransport zwischen den Häfen."
 
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. This include can be removed when all help texts have been defined.
+#. TRANSLATORS#: Lore helptext for a building
+#. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:16
@@ -379,6 +384,7 @@ msgstr "Webt Spinnenstoff für Gebäude und Schiffssegel und stellt Wappenröcke
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:13
 #: ../../data/tribes/buildings/productionsites/empire/well/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:13
 msgctxt "building"
 msgid "Draws water out of the deep."
 msgstr "Holt Wasser aus der Tiefe."
@@ -474,7 +480,7 @@ msgstr "Die Axtschmiede der Barbaren ist die mittlere Produktionsstätte in eine
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
 #: ../../data/tribes/scripting/help/global_helptexts.lua:69
@@ -852,7 +858,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘I look at my own pick wearing away day by day and I realize why my work is "
 "important.’"
-msgstr "„Ich schaue Tag für Tag auf das, was ich herausschlage, und verstehe, warum meine Arbeit wichtig ist.“"
+msgstr "„Wenn ich sehe, wie sich meine eigene Spitzhacke tagtäglich weiter abnutzt, verstehe ich, warum meine Arbeit wichtig ist.“"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:8
@@ -1889,7 +1895,7 @@ msgctxt "frisians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any gold ore."
-msgstr "Diese Mine baut nur %s derRohstoffe ab. Von da an hat sie nur eine 5%%-Chance, noch mehr Golderz zu finden."
+msgstr "Diese Mine baut nur %s der Rohstoffe ab. Von da an hat sie nur eine 5%%-Chance, noch mehr Golderz zu finden."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:26
@@ -2347,7 +2353,7 @@ msgid ""
 msgstr "Die Antwort von Häuptling Arldor auf die Frage, warum sein Stamm nicht Salzwasser trinken kann"
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The well needs %s on average to produce one bucket of water."
@@ -2749,22 +2755,20 @@ msgstr "Dieser Reet wurde eben erst angepflanzt."
 
 #. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably want to lose the blank space here.
-#. TRANSLATORS: Note helptext for a building
-#. TRANSLATORS: Performance helptext for a building
-#. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
-#. script probably want to lose the blank space here.
-#: ../../data/tribes/immovables/resi_coal1/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_coal2/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_gold1/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_gold2/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_iron1/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_iron2/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:8
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:13
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:8
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:13
+#: ../../data/tribes/immovables/resi/helptexts/coal_1.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/coal_2.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/gold_1.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/gold_2.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/iron_1.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/iron_2.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:8
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:13
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:18
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:3
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:8
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:13
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:18
 #: ../../data/tribes/scripting/help/immovable_help.lua:34
 #: ../../data/tribes/scripting/help/ware_help.lua:31
 #, lua-format
@@ -2773,115 +2777,125 @@ msgid "%s %s"
 msgstr "%s %s"
 
 #. TRANSLATORS: Helptext for a resource: Coal
-#: ../../data/tribes/immovables/resi_coal1/helptexts.lua:5
-#: ../../data/tribes/immovables/resi_coal2/helptexts.lua:5
+#: ../../data/tribes/immovables/resi/helptexts/coal_1.lua:5
+#: ../../data/tribes/immovables/resi/helptexts/coal_2.lua:5
 msgid "Coal veins contain coal that can be dug up by coal mines."
 msgstr "Kohleadern enthalten Kohle, die von Kohleminen gefördert werden kann."
 
 #. TRANSLATORS: Helptext for a resource: Coal
-#: ../../data/tribes/immovables/resi_coal1/helptexts.lua:7
+#: ../../data/tribes/immovables/resi/helptexts/coal_1.lua:7
 msgid "There is only a little bit of coal here."
 msgstr "Hier gibt es nur wenig Kohle."
 
 #. TRANSLATORS: Helptext for a resource: Coal
-#: ../../data/tribes/immovables/resi_coal2/helptexts.lua:7
+#: ../../data/tribes/immovables/resi/helptexts/coal_2.lua:7
 msgid "There is a lot of coal here."
 msgstr "Hier gibt es viel Kohle."
 
 #. TRANSLATORS: Helptext for a resource: Gold
-#: ../../data/tribes/immovables/resi_gold1/helptexts.lua:5
-#: ../../data/tribes/immovables/resi_gold2/helptexts.lua:5
+#: ../../data/tribes/immovables/resi/helptexts/gold_1.lua:5
+#: ../../data/tribes/immovables/resi/helptexts/gold_2.lua:5
 msgid "Gold veins contain gold ore that can be dug up by gold mines."
 msgstr "Goldadern enthalten Golderz, das von Goldminen gefördert werden kann."
 
 #. TRANSLATORS: Helptext for a resource: Gold
-#: ../../data/tribes/immovables/resi_gold1/helptexts.lua:7
+#: ../../data/tribes/immovables/resi/helptexts/gold_1.lua:7
 msgid "There is only a little bit of gold here."
 msgstr "Hier gibt es nur wenig Gold."
 
 #. TRANSLATORS: Helptext for a resource: Gold
-#: ../../data/tribes/immovables/resi_gold2/helptexts.lua:7
+#: ../../data/tribes/immovables/resi/helptexts/gold_2.lua:7
 msgid "There is a lot of gold here."
 msgstr "Hier gibt es viel Gold."
 
 #. TRANSLATORS: Helptext for a resource: Iron
-#: ../../data/tribes/immovables/resi_iron1/helptexts.lua:5
-#: ../../data/tribes/immovables/resi_iron2/helptexts.lua:5
+#: ../../data/tribes/immovables/resi/helptexts/iron_1.lua:5
+#: ../../data/tribes/immovables/resi/helptexts/iron_2.lua:5
 msgid "Iron veins contain iron ore that can be dug up by iron mines."
 msgstr "Eisenadern enthalten Eisenerz, das von Eisenminen gefördert werden kann."
 
 #. TRANSLATORS: Helptext for a resource: Iron
-#: ../../data/tribes/immovables/resi_iron1/helptexts.lua:7
+#: ../../data/tribes/immovables/resi/helptexts/iron_1.lua:7
 msgid "There is only a little bit of iron here."
 msgstr "Hier gibt es nur wenig Eisen."
 
 #. TRANSLATORS: Helptext for a resource: Iron
-#: ../../data/tribes/immovables/resi_iron2/helptexts.lua:7
+#: ../../data/tribes/immovables/resi/helptexts/iron_2.lua:7
 msgid "There is a lot of iron here."
 msgstr "Hier gibt es viel Eisen."
 
 #. TRANSLATORS: Helptext for a resource: No resources
-#: ../../data/tribes/immovables/resi_none/helptexts.lua:4
+#: ../../data/tribes/immovables/resi/helptexts/none.lua:4
 msgid "There are no resources in the ground here."
 msgstr "Hier gibt es keine Rohstoffe im Boden."
 
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:5
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:5
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:5
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:5
 msgid ""
 "Precious stones are used in the construction of big buildings. They can be "
 "dug up by a crystal mine. You will also get granite from the mine."
 msgstr "Wertvolles Gestein wird beim Bauen großer Gebäude benötigt. Dieses kann von einer Kristallmine gefördert werden. Ebenso fördert diese Mine Stein."
 
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:7
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:7
 msgid "There are only a few precious stones here."
 msgstr "Hier gibt es nur wenig wertvolles Gestein."
 
 #. TRANSLATORS: Helptext for a Barbarian resource: Stones
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:10
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:10
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:10
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:10
 msgid ""
 "Granite is a basic building material and can be dug up by a granite mine."
 msgstr "Stein ist ein grundlegendes Baumaterial und kann von einer Granitmine gefördert werden."
 
 #. TRANSLATORS: Helptext for a Barbarian resource: Stones
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:12
+#. TRANSLATORS: Helptext for a Frisian resource: Stones
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:12
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:22
 msgid "There is only a little bit of granite here."
 msgstr "Hier gibt es nur wenig Stein."
 
 #. TRANSLATORS: Helptext for an Empire resource: Stones
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:15
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:15
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:15
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:15
 msgid ""
 "Marble is a basic building material and can be dug up by a marble mine. You "
 "will also get granite from the mine."
 msgstr "Marmor ist ein grundlegendes Baumaterial und kann von einer Marmormine gefördert werden. Ebenso fördert diese Mine Stein."
 
 #. TRANSLATORS: Helptext for an Empire resource: Stones
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:17
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:17
 msgid "There is only a little bit of marble here."
 msgstr "Hier gibt es nur wenig Marmor."
 
+#. TRANSLATORS: Helptext for a Frisian resource: Stones
+#: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:20
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:20
+msgid "Granite is a basic building material and can be dug up by a rock mine."
+msgstr "Stein ist ein grundlegendes Baumaterial und kann von einer Felsmine gefördert werden."
+
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:7
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:7
 msgid "There are many precious stones here."
 msgstr "Hier gibt es viel wertvolles Gestein."
 
 #. TRANSLATORS: Helptext for a Barbarian resource: Stones
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:12
+#. TRANSLATORS: Helptext for a Frisian resource: Stones
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:12
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:22
 msgid "There is a lot of granite here."
 msgstr "Hier gibt es viel Stein."
 
 #. TRANSLATORS: Helptext for an Empire resource: Stones
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:17
+#: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:17
 msgid "There is a lot of marble here."
 msgstr "Hier gibt es viel Marmor."
 
 #. TRANSLATORS: Helptext for a resource: Water
-#: ../../data/tribes/immovables/resi_water1/helptexts.lua:4
+#: ../../data/tribes/immovables/resi/helptexts/water.lua:4
 msgid "There is water in the ground here that can be pulled up by a well."
-msgstr "Hier gibt es Wasser im Boden, dass von einem Brunnen hochgeholt werden kann."
+msgstr "Hier gibt es Wasser im Boden, das von einem Brunnen hochgeholt werden kann."
 
 #. TRANSLATORS: Helptext for a ship construction site.
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/helptexts.lua:4
@@ -2891,231 +2905,231 @@ msgstr "Hier gibt es Wasser im Boden, dass von einem Brunnen hochgeholt werden k
 msgid "A ship is being constructed at this site."
 msgstr "Hier wird ein Schiff gebaut."
 
-#: ../../data/tribes/scripting/help/building_help.lua:86
+#: ../../data/tribes/scripting/help/building_help.lua:93
 #: ../../data/tribes/scripting/help/format_help.lua:232
 #, lua-format
 msgid "%s and"
 msgstr "%s und"
 
-#: ../../data/tribes/scripting/help/building_help.lua:100
+#: ../../data/tribes/scripting/help/building_help.lua:107
 msgid "Food:"
 msgstr "Nahrung:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:150
+#: ../../data/tribes/scripting/help/building_help.lua:158
 msgid "Equipment:"
 msgstr "Ausrüstung:"
 
 #. TRANSLATORS: Heading for a flavour text in the building help.
-#: ../../data/tribes/scripting/help/building_help.lua:173
+#: ../../data/tribes/scripting/help/building_help.lua:181
 msgid "Lore"
 msgstr "Weisheit"
 
-#: ../../data/tribes/scripting/help/building_help.lua:194
+#: ../../data/tribes/scripting/help/building_help.lua:202
 #: ../../data/tribes/scripting/help/init.lua:59
 #: ../../data/tribes/scripting/help/tips.lua:49
 msgid "General"
 msgstr "Allgemein"
 
-#: ../../data/tribes/scripting/help/building_help.lua:195
+#: ../../data/tribes/scripting/help/building_help.lua:203
 msgid "Purpose:"
 msgstr "Zweck:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:223
-#: ../../data/tribes/scripting/help/building_help.lua:456
+#: ../../data/tribes/scripting/help/building_help.lua:231
+#: ../../data/tribes/scripting/help/building_help.lua:462
 msgid "Note:"
 msgstr "Hinweis:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:228
+#: ../../data/tribes/scripting/help/building_help.lua:236
 msgid "Work area radius:"
 msgstr "Radius des Arbeitsbereichs:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:232
-#: ../../data/tribes/scripting/help/building_help.lua:237
+#: ../../data/tribes/scripting/help/building_help.lua:240
+#: ../../data/tribes/scripting/help/building_help.lua:245
 msgid "Healing:"
 msgstr "Heilung:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:233
-#: ../../data/tribes/scripting/help/building_help.lua:238
+#: ../../data/tribes/scripting/help/building_help.lua:241
+#: ../../data/tribes/scripting/help/building_help.lua:246
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
 msgstr[0] "Hier stationierte Soldaten werden um %d Lebenspunkt pro Sekunde geheilt."
 msgstr[1] "Hier stationierte Soldaten werden um %d Lebenspunkte pro Sekunde geheilt."
 
-#: ../../data/tribes/scripting/help/building_help.lua:234
-#: ../../data/tribes/scripting/help/building_help.lua:240
+#: ../../data/tribes/scripting/help/building_help.lua:242
+#: ../../data/tribes/scripting/help/building_help.lua:248
 msgid "Conquer range:"
 msgstr "Eroberungsradius:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:239
-#: ../../data/tribes/scripting/help/building_help.lua:243
+#: ../../data/tribes/scripting/help/building_help.lua:247
+#: ../../data/tribes/scripting/help/building_help.lua:251
 msgid "Capacity:"
 msgstr "Kapazität:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:245
+#: ../../data/tribes/scripting/help/building_help.lua:253
 msgid "Vision range:"
 msgstr "Sichtweite:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:270
+#: ../../data/tribes/scripting/help/building_help.lua:277
 msgid "%1$s from: %2$s"
 msgstr "%1$s von: %2$s"
 
 #. TRANSLATORS: Heading in the building help for wares that a building accepts
 #. (e.g. wheat for a mill).
-#: ../../data/tribes/scripting/help/building_help.lua:277
+#: ../../data/tribes/scripting/help/building_help.lua:283
 msgid "Incoming:"
 msgstr "Eingehend:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:281
+#: ../../data/tribes/scripting/help/building_help.lua:287
 msgid "Collects:"
 msgstr "Sammelt:"
 
 #. TRANSLATORS: This is a verb (The miner mines)
-#: ../../data/tribes/scripting/help/building_help.lua:293
+#: ../../data/tribes/scripting/help/building_help.lua:299
 msgid "Mines:"
 msgstr "Baut ab:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:313
+#: ../../data/tribes/scripting/help/building_help.lua:319
 msgid "Produces:"
 msgstr "Produziert:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:355
+#: ../../data/tribes/scripting/help/building_help.lua:361
 msgid "Outgoing:"
 msgstr "Ausgehend:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:357
+#: ../../data/tribes/scripting/help/building_help.lua:363
 msgid "None"
 msgstr "Keine"
 
-#: ../../data/tribes/scripting/help/building_help.lua:358
+#: ../../data/tribes/scripting/help/building_help.lua:364
 msgid "Dependencies"
 msgstr "Abhängigkeiten"
 
-#: ../../data/tribes/scripting/help/building_help.lua:374
+#: ../../data/tribes/scripting/help/building_help.lua:380
 msgid "Health Training"
 msgstr "Lebenspunktetraining"
 
-#: ../../data/tribes/scripting/help/building_help.lua:375
+#: ../../data/tribes/scripting/help/building_help.lua:381
 msgid "Trains ‘Health’ from %1% up to %2%"
 msgstr "Trainiert „Lebenspunkte“ von %1% auf %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:377
-#: ../../data/tribes/scripting/help/building_help.lua:391
-#: ../../data/tribes/scripting/help/building_help.lua:403
-#: ../../data/tribes/scripting/help/building_help.lua:416
+#: ../../data/tribes/scripting/help/building_help.lua:383
+#: ../../data/tribes/scripting/help/building_help.lua:397
+#: ../../data/tribes/scripting/help/building_help.lua:409
+#: ../../data/tribes/scripting/help/building_help.lua:422
 msgid "Soldiers:"
 msgstr "Soldaten:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:387
+#: ../../data/tribes/scripting/help/building_help.lua:393
 msgid "Attack Training"
 msgstr "Angriffstraining"
 
 #. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
 #. numbers.
-#: ../../data/tribes/scripting/help/building_help.lua:389
+#: ../../data/tribes/scripting/help/building_help.lua:395
 msgid "Trains ‘Attack’ from %1% up to %2%"
 msgstr "Trainiert „Angriff“ von %1% auf %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:400
+#: ../../data/tribes/scripting/help/building_help.lua:406
 msgid "Defense Training"
 msgstr "Verteidigungstraining"
 
-#: ../../data/tribes/scripting/help/building_help.lua:401
+#: ../../data/tribes/scripting/help/building_help.lua:407
 msgid "Trains ‘Defense’ from %1% up to %2%"
 msgstr "Trainiert „Verteidigung“ von %1% auf %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:413
+#: ../../data/tribes/scripting/help/building_help.lua:419
 msgid "Evade Training"
 msgstr "Ausweichtraining"
 
-#: ../../data/tribes/scripting/help/building_help.lua:414
+#: ../../data/tribes/scripting/help/building_help.lua:420
 msgid "Trains ‘Evade’ from %1% up to %2%"
 msgstr "Trainiert „Ausweichen“ von %1% auf %2%"
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.
-#: ../../data/tribes/scripting/help/building_help.lua:441
+#: ../../data/tribes/scripting/help/building_help.lua:447
 msgid "Building"
 msgstr "Gebäude"
 
-#: ../../data/tribes/scripting/help/building_help.lua:457
+#: ../../data/tribes/scripting/help/building_help.lua:463
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr "Dieses Gebäude kann entweder direkt gebaut oder durch das Erweitern eines anderen Gebäudes erhalten werden."
 
-#: ../../data/tribes/scripting/help/building_help.lua:463
+#: ../../data/tribes/scripting/help/building_help.lua:469
 msgid "Direct build cost:"
 msgstr "Kosten für das direkte Bauen:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:465
+#: ../../data/tribes/scripting/help/building_help.lua:471
 #: ../../data/tribes/scripting/help/immovable_help.lua:50
 msgid "Build cost:"
 msgstr "Baukosten:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:476
+#: ../../data/tribes/scripting/help/building_help.lua:482
 msgid "Or enhanced from:"
 msgstr "Oder durch Erweitern von:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:478
+#: ../../data/tribes/scripting/help/building_help.lua:484
 msgid "Enhanced from:"
 msgstr "Durch Erweitern von:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:487
+#: ../../data/tribes/scripting/help/building_help.lua:493
 msgid "Cumulative cost:"
 msgstr "Gesamtkosten:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:532
-#: ../../data/tribes/scripting/help/building_help.lua:581
+#: ../../data/tribes/scripting/help/building_help.lua:538
+#: ../../data/tribes/scripting/help/building_help.lua:587
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: ../../data/tribes/scripting/help/building_help.lua:537
+#: ../../data/tribes/scripting/help/building_help.lua:543
 msgid "If built directly, dismantle yields:"
 msgstr "Beim Abreißen zurückgewonnene Rohstoffe, wenn direkt gebaut:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:542
+#: ../../data/tribes/scripting/help/building_help.lua:548
 msgid "If enhanced, dismantle yields:"
 msgstr "Beim Abreißen zurückgewonnene Rohstoffe, wenn erweitert:"
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
-#: ../../data/tribes/scripting/help/building_help.lua:545
-#: ../../data/tribes/scripting/help/building_help.lua:586
+#: ../../data/tribes/scripting/help/building_help.lua:551
+#: ../../data/tribes/scripting/help/building_help.lua:592
 msgid "Dismantle yields:"
 msgstr "Beim Abreißen zurückgewonnene Rohstoffe:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:595
+#: ../../data/tribes/scripting/help/building_help.lua:601
 msgid "Can be enhanced to:"
 msgstr "Kann erweitert werden zu:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:625
+#: ../../data/tribes/scripting/help/building_help.lua:631
 msgid "Crew required:"
 msgstr "Benötigte Arbeiter:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:625
+#: ../../data/tribes/scripting/help/building_help.lua:631
 #: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "Arbeiter"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-#: ../../data/tribes/scripting/help/building_help.lua:647
+#: ../../data/tribes/scripting/help/building_help.lua:653
 #, lua-format
 msgid "%s or better"
 msgstr "%s oder besser"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-#: ../../data/tribes/scripting/help/building_help.lua:658
+#: ../../data/tribes/scripting/help/building_help.lua:664
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "Arbeiter benutzt:"
 msgstr[1] "Arbeiter benutzen:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:680
+#: ../../data/tribes/scripting/help/building_help.lua:689
 msgid "Production"
 msgstr "Produktion"
 
-#: ../../data/tribes/scripting/help/building_help.lua:681
+#: ../../data/tribes/scripting/help/building_help.lua:690
 msgid "Performance:"
 msgstr "Leistung:"
 
@@ -3681,8 +3695,25 @@ msgstr "Einzelspieler"
 msgid "Multiplayer"
 msgstr "Mehrspieler"
 
+#. TRANSLATORS: You can also translate this as 'additional workplace'
+#. result = result .. h3(pgettext("workerhelp_one_building", "Can also work
+#. at"))
+#. else
+#. Translators: Worker Encyclopedia: Heading above a list of buildings where a
+#. worker may work instead of a less experienced worker
+#. TRANSLATORS: You can also translate this as 'additional workplaces'
+#. result = result .. h3(ngettext("Can also work at", "Can also work at",
+#. #additional))
+#. end
+#. RST
+#. .. function:: worker_help_string(worker_description)
+#. Displays the worker with a helptext, an image and the tool used
+#. :arg tribe: The :class:`LuaTribeDescription` for the tribe
+#. that we are displaying this help for.
+#. :arg worker_description: the worker_description from C++.
+#. :returns: Help string for the worker
 #: ../../data/tribes/scripting/help/ware_help.lua:34
-#: ../../data/tribes/scripting/help/worker_help.lua:129
+#: ../../data/tribes/scripting/help/worker_help.lua:153
 msgid "Purpose"
 msgstr "Zweck"
 
@@ -3715,83 +3746,83 @@ msgid_plural "Workers recruited:"
 msgstr[0] "Ausgebildeter Arbeiter:"
 msgstr[1] "Ausgebildete Arbeiter:"
 
-#. TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker can
-#. work
+#. TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker is
+#. needed to work at
 #. TRANSLATORS: You can also translate this as 'workplace(s)'
-#: ../../data/tribes/scripting/help/worker_help.lua:105
+#: ../../data/tribes/scripting/help/worker_help.lua:106
 msgid "Works at"
 msgid_plural "Works at"
 msgstr[0] "Arbeitsplatz"
 msgstr[1] "Arbeitsplätze"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
-#: ../../data/tribes/scripting/help/worker_help.lua:144
+#: ../../data/tribes/scripting/help/worker_help.lua:168
 msgid "Worker uses"
 msgstr "Arbeiter benutzt"
 
 #. TRANSLATORS: Soldier levels
-#: ../../data/tribes/scripting/help/worker_help.lua:161
+#: ../../data/tribes/scripting/help/worker_help.lua:185
 msgid "Levels"
 msgstr "Stufen"
 
-#: ../../data/tribes/scripting/help/worker_help.lua:163
+#: ../../data/tribes/scripting/help/worker_help.lua:187
 msgid "Health"
 msgstr "Lebenspunkte"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
-#: ../../data/tribes/scripting/help/worker_help.lua:167
+#: ../../data/tribes/scripting/help/worker_help.lua:191
 msgid "Starts at %1% points."
 msgstr "Beginnt mit %1% Punkten."
 
 #. TRANSLATORS: Soldier health / attack defense / evade points
-#: ../../data/tribes/scripting/help/worker_help.lua:170
-#: ../../data/tribes/scripting/help/worker_help.lua:181
+#: ../../data/tribes/scripting/help/worker_help.lua:194
+#: ../../data/tribes/scripting/help/worker_help.lua:205
 msgid "Increased by %1% point for each level."
 msgid_plural "Increased by %1% points for each level."
 msgstr[0] "Erhöht sich um %1% Punkt pro Stufe."
 msgstr[1] "Erhöht sich um %1% Punkte pro Stufe."
 
 #. TRANSLATORS: Soldier health / attack defense / evade level
-#: ../../data/tribes/scripting/help/worker_help.lua:173
-#: ../../data/tribes/scripting/help/worker_help.lua:183
-#: ../../data/tribes/scripting/help/worker_help.lua:193
-#: ../../data/tribes/scripting/help/worker_help.lua:208
+#: ../../data/tribes/scripting/help/worker_help.lua:197
+#: ../../data/tribes/scripting/help/worker_help.lua:207
+#: ../../data/tribes/scripting/help/worker_help.lua:217
+#: ../../data/tribes/scripting/help/worker_help.lua:232
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
 msgstr[0] "Die höchste Stufe ist %1%."
 msgstr[1] "Die höchste Stufe ist %1%."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:175
+#: ../../data/tribes/scripting/help/worker_help.lua:199
 msgid "Attack"
 msgstr "Angriff"
 
 #. TRANSLATORS: Points are 4 digit numbers.
-#: ../../data/tribes/scripting/help/worker_help.lua:178
+#: ../../data/tribes/scripting/help/worker_help.lua:202
 msgid "A random value between %1% and %2% points is added to each attack."
 msgstr "Ein Zufallswert zwischen %1% und %2% Punkten wird zu jedem Angriff hinzugefügt."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:185
+#: ../../data/tribes/scripting/help/worker_help.lua:209
 msgid "Defense"
 msgstr "Verteidigung"
 
-#: ../../data/tribes/scripting/help/worker_help.lua:189
-#: ../../data/tribes/scripting/help/worker_help.lua:197
-#: ../../data/tribes/scripting/help/worker_help.lua:204
+#: ../../data/tribes/scripting/help/worker_help.lua:213
+#: ../../data/tribes/scripting/help/worker_help.lua:221
+#: ../../data/tribes/scripting/help/worker_help.lua:228
 #, lua-format
 msgid "Starts at %d%%."
 msgstr "Beginnt mit %d%%."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:191
-#: ../../data/tribes/scripting/help/worker_help.lua:206
+#: ../../data/tribes/scripting/help/worker_help.lua:215
+#: ../../data/tribes/scripting/help/worker_help.lua:230
 #, lua-format
 msgid "Increased by %d%% for each level."
 msgstr "Erhöht sich um %d%% pro Stufe."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:198
+#: ../../data/tribes/scripting/help/worker_help.lua:222
 msgid "This soldier cannot be trained in defense."
 msgstr "Dieser Soldat kann nicht in Verteidigung trainiert werden."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:201
+#: ../../data/tribes/scripting/help/worker_help.lua:225
 msgid "Evade"
 msgstr "Ausweichen"
 
@@ -5622,8 +5653,6 @@ msgctxt "barbarians_worker"
 msgid "Eager to become a soldier and defend his tribe!"
 msgstr "Begierig, ein Krieger zu werden und seinen Stamm zu verteidigen!"
 
-#. TRANSLATORS: Note helptext for a building
-#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/barbarians/scout/helptexts.lua:3
 msgctxt "barbarians_worker"
@@ -5812,6 +5841,8 @@ msgctxt "empire_worker"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Arbeitet in der Werft und baut neue Schiffe."
 
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/empire/smelter/helptexts.lua:3
 msgctxt "empire_worker"

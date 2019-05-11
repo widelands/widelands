@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,6 +34,7 @@
 #include "graphic/align.h"
 #include "graphic/font_handler.h"
 #include "graphic/panel_styles.h"
+#include "sound/constants.h"
 
 class RenderTarget;
 class Image;
@@ -263,8 +264,7 @@ public:
 		return flags_ & pf_can_focus;
 	}
 	bool has_focus() const {
-		assert(get_can_focus());
-		return (parent_->focus_ == this);
+		return (get_can_focus() && parent_->focus_ == this);
 	}
 	virtual void focus(bool topcaller = true);
 
@@ -293,6 +293,7 @@ public:
 	}
 
 	virtual void die();
+	static void register_click();
 
 protected:
 	// This panel will never receive keypresses (do_key), instead
@@ -311,8 +312,6 @@ protected:
 	virtual void update_desired_size();
 
 	static void play_click();
-	static void play_new_chat_member();
-	static void play_new_chat_message();
 
 	static bool draw_tooltip(const std::string& text);
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
@@ -387,6 +386,8 @@ private:
 	static Panel* mousein_;
 	static bool allow_user_input_;
 
+	static FxId click_fx_;
+
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };
 
@@ -422,6 +423,6 @@ struct NamedPanel : public Panel {
 private:
 	std::string name_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_PANEL_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2018 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
@@ -32,6 +33,7 @@
 #include "game_io/game_loader.h"
 #include "helper.h"
 #include "io/fileread.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/filewrite.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
@@ -171,8 +173,8 @@ void GameClient::run() {
 	game.set_write_syncstream(g_options.pull_section("global").get_bool("write_syncstreams", true));
 
 	try {
-		UI::ProgressWindow* loader_ui = new UI::ProgressWindow("images/loadscreens/progress.png");
-		d->modal = loader_ui;
+		std::unique_ptr<UI::ProgressWindow> loader_ui(new UI::ProgressWindow());
+		d->modal = loader_ui.get();
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
@@ -180,7 +182,7 @@ void GameClient::run() {
 			tipstext.push_back(get_players_tribe());
 		} catch (NoTribe) {
 		}
-		GameTips tips(*loader_ui, tipstext);
+		GameTips tips(*loader_ui.get(), tipstext);
 
 		loader_ui->step(_("Preparing game"));
 
@@ -197,20 +199,21 @@ void GameClient::run() {
 		game.set_ibase(igb);
 		igb->set_chat_provider(*this);
 		if (!d->settings.savegame) {  //  new map
-			game.init_newgame(loader_ui, d->settings);
+			game.init_newgame(loader_ui.get(), d->settings);
 		} else {  // savegame
-			game.init_savegame(loader_ui, d->settings);
+			game.init_savegame(loader_ui.get(), d->settings);
 		}
 		d->time.reset(game.get_gametime());
 		d->lasttimestamp = game.get_gametime();
 		d->lasttimestamp_realtime = SDL_GetTicks();
 
 		d->modal = igb;
-		game.run(loader_ui, d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
-		                                           Widelands::Game::NewMPScenario :
-		                                           Widelands::Game::NewNonScenario,
-		         "", false,
-		         (boost::format("netclient_%d") % static_cast<int>(d->settings.usernum)).str());
+		game.run(
+		   loader_ui.get(),
+		   d->settings.savegame ?
+		      Widelands::Game::Loaded :
+		      d->settings.scenario ? Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
+		   "", false, (boost::format("netclient_%d") % static_cast<int>(d->settings.usernum)).str());
 
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (internet_)
@@ -402,6 +405,14 @@ void GameClient::set_player(uint8_t, const PlayerSettings&) {
 	// set_player_number(uint8_t) to the host.
 }
 
+void GameClient::set_peaceful_mode(bool peace) {
+	d->settings.peaceful = peace;
+}
+
+bool GameClient::is_peaceful_mode() {
+	return d->settings.peaceful;
+}
+
 std::string GameClient::get_win_condition_script() {
 	return d->settings.win_condition_script;
 }
@@ -583,8 +594,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		    d->settings.mapfilename.c_str());
 
 		// New map was set, so we clean up the buffer of a previously requested file
-		if (file_)
-			delete file_;
+		file_.reset(nullptr);
 		break;
 	}
 
@@ -618,7 +628,15 @@ void GameClient::handle_packet(RecvPacket& packet) {
 				}
 			}
 			// Don't overwrite the file, better rename the original one
-			g_fs->fs_rename(path, backup_file_name(path));
+			try {
+				g_fs->fs_rename(path, backup_file_name(path));
+			} catch (const FileError& e) {
+				log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
+				    "%s\n",
+				    e.what());
+				// TODO(Arty): What now? It just means the next step will fail
+				// or possibly result in some corrupt file
+			}
 		}
 
 		// Yes we need the file!
@@ -626,10 +644,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		s.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
 		d->net->send(s);
 
-		if (file_)
-			delete file_;
-
-		file_ = new NetTransferFile();
+		file_.reset(new NetTransferFile());
 		file_->bytes = bytes;
 		file_->filename = path;
 		file_->md5sum = md5;
@@ -707,7 +722,13 @@ void GameClient::handle_packet(RecvPacket& packet) {
 				s.unsigned_8(NETCMD_CHAT);
 				s.string(_("/me 's file failed md5 checksumming."));
 				d->net->send(s);
-				g_fs->fs_unlink(file_->filename);
+				try {
+					g_fs->fs_unlink(file_->filename);
+				} catch (const FileError& e) {
+					log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
+					    "%s\n",
+					    e.what());
+				}
 			}
 			// Check file for validity
 			bool invalid = false;
@@ -727,10 +748,16 @@ void GameClient::handle_packet(RecvPacket& packet) {
 					invalid = true;
 			}
 			if (invalid) {
-				g_fs->fs_unlink(file_->filename);
-				// Restore original file, if there was one before
-				if (g_fs->file_exists(backup_file_name(file_->filename)))
-					g_fs->fs_rename(backup_file_name(file_->filename), file_->filename);
+				try {
+					g_fs->fs_unlink(file_->filename);
+					// Restore original file, if there was one before
+					if (g_fs->file_exists(backup_file_name(file_->filename)))
+						g_fs->fs_rename(backup_file_name(file_->filename), file_->filename);
+				} catch (const FileError& e) {
+					log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
+					    "%s\n",
+					    e.what());
+				}
 				s.reset();
 				s.unsigned_8(NETCMD_CHAT);
 				s.string(_("/me checked the received file. Although md5 check summing succeeded, "
@@ -796,6 +823,10 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		d->settings.win_condition_script = g_fs->FileSystem::fix_cross_file(packet.string());
 		break;
 	}
+	case NETCMD_PEACEFUL_MODE: {
+		d->settings.peaceful = packet.unsigned_8();
+		break;
+	}
 
 	case NETCMD_LAUNCH: {
 		if (!d->modal || d->game) {
@@ -837,6 +868,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		int32_t const time = packet.signed_32();
 		d->time.receive(time);
 		d->game->enqueue_command(new CmdNetCheckSync(time, [this] { sync_report_callback(); }));
+		d->game->report_sync_request();
 		break;
 	}
 
@@ -868,8 +900,11 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	case NETCMD_INFO_DESYNC:
 		log("[Client] received NETCMD_INFO_DESYNC. Trying to salvage some "
 		    "information for debugging.\n");
-		if (d->game)
+		if (d->game) {
 			d->game->save_syncstream(true);
+			// We don't know our playernumber, so report as -1
+			d->game->report_desync(-1);
+		}
 		break;
 
 	default:

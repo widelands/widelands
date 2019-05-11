@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2018 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,12 +35,12 @@ class InteractiveGameBase;
 namespace UI {
 class Panel;
 struct Radiogroup;
-}
+}  // namespace UI
 
 namespace Widelands {
 class Building;
 class InputQueue;
-}
+}  // namespace Widelands
 
 /**
  * This passive class displays the status of an InputQueue
@@ -87,7 +87,8 @@ private:
 	void increase_max_fill_clicked();
 	void radiogroup_changed(int32_t);
 	void radiogroup_clicked();
-	void update_siblings(int32_t);
+	void update_siblings_priority(int32_t);
+	void update_siblings_fill(int32_t);
 
 	void compute_max_fill_buttons_enabled_state();
 };

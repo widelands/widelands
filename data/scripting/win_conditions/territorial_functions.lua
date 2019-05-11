@@ -7,71 +7,16 @@
 set_textdomain("win_conditions")
 
 include "scripting/richtext.lua"
+include "scripting/win_conditions/win_condition_functions.lua"
 include "scripting/win_conditions/win_condition_texts.lua"
 
 local team_str = _"Team %i"
 local wc_has_territory = _"%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
 local wc_had_territory = _"%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 
--- RST
--- .. function:: get_buildable_fields()
---
---    Collects all fields that are buildable
---
---    :returns: a table with the map's buildable fields
---
-function get_buildable_fields()
-   local fields = {}
-   local map = wl.Game().map
-   for x=0, map.width-1 do
-      for y=0, map.height-1 do
-         local f = map:get_field(x,y)
-         if f.buildable then
-            table.insert(fields, f)
-         end
-      end
-   end
-   return fields
-end
-
--- RST
--- .. function:: count_owned_fields_for_all_players(fields, players)
---
---    Counts all owned fields for each player.
---
---    :arg fields: Table of all buildable fields
---    :arg players: Table of all players
---
---    :returns: a table with ``playernumber = count_of_owned_fields``  entries
---
-local function count_owned_fields_for_all_players(fields, players)
-   local owned_fields = {}
-   -- init the landsizes for each player
-   for idx,plr in ipairs(players) do
-      owned_fields[plr.number] = 0
-   end
-
-   for idx,f in ipairs(fields) do
-      -- check if field is owned by a player
-      local owner = f.owner
-      if owner then
-         local owner_number = owner.number
-         if owned_fields[owner_number] == nil then
-            -- In case player was defeated and lost all their warehouses, make sure they don't count
-            owned_fields[owner_number] = -1
-         elseif owned_fields[owner_number] >= 0 then
-            owned_fields[owner_number] = owned_fields[owner_number] + 1
-         end
-      end
-   end
-   return owned_fields
-end
-
-
 -- Used by calculate_territory_points keep track of when the winner changes
 local winning_players = {}
 local winning_teams = {}
-
 
 -- RST
 -- .. data:: territory_points
@@ -86,6 +31,8 @@ local winning_teams = {}
 --          last_winning_team = -1,
 --          -- The currently winning player, if any. -1 means that no player is currently winning.
 --          last_winning_player = -1,
+--          -- The name of the currently winning player, if any. Empty means that no player is currently winning.
+--          last_winning_player_name = "",
 --          -- Remaining time in secs for victory by > 50% territory. Default value is also used to calculate whether to send a report to players.
 --          remaining_time = 10,
 --          -- Points by player
@@ -98,10 +45,26 @@ territory_points = {
    -- TODO(GunChleoc): We want to be able to list multiple winners in case of a draw.
    last_winning_team = -1,
    last_winning_player = -1,
-   remaining_time = 10,
+   -- We record the last winning player name here to prevent crashes with retrieving
+   -- the player name when the player was just defeated a few ms ago
+   last_winning_player_name = "",
+   remaining_time = 1201,
    all_player_points = {},
    points = {}
 }
+
+-- variables for the territorial winconditions statsistics hook
+fields = 0
+statistics = {
+      -- TRANSLATORS: subtext of the territorial statistics hook. Keep it short and consistent with the translation of the Win condition.
+      name = _"Territory percentage",
+      pic = "images/wui/stats/genstats_territorial_small.png",
+      calculator = function(p)
+         local pts = count_owned_valuable_fields_for_all_players(wl.Game().players)
+         return (pts[p.number]*100//fields)
+      end,
+   }
+
 
 -- RST
 -- .. function:: calculate_territory_points(fields, players, wc_descname, wc_version)
@@ -109,24 +72,21 @@ territory_points = {
 --    First checks if a player was defeated, then fills the ``territory_points`` table
 --    with current data.
 --
---    :arg fields: Table of all buildable fields
+--    :arg fields: Number of all valuable fields
 --    :arg players: Table of all players
 --    :arg wc_descname: String with the win condition's descname
 --    :arg wc_version: Number with the win condition's descname
 --
-function calculate_territory_points(fields, players, wc_descname, wc_version)
-   -- A player might have been defeated since the last calculation
-   check_player_defeated(players, lost_game.title, lost_game.body, wc_descname, wc_version)
-
+function calculate_territory_points(fields, players)
    local points = {} -- tracking points of teams and players without teams
    local territory_was_kept = false
 
-   territory_points.all_player_points = count_owned_fields_for_all_players(fields, players)
+   territory_points.all_player_points = count_owned_valuable_fields_for_all_players(players)
    local ranked_players = rank_players(territory_points.all_player_points, players)
 
    -- Check if we have a winner. The table was sorted, so we can simply grab the first entry.
    local winning_points = -1
-   if ranked_players[1].points > ( #fields / 2 ) then
+   if ranked_players[1].points > ( fields / 2 ) then
       winning_points = ranked_players[1].points
    end
 
@@ -140,6 +100,7 @@ function calculate_territory_points(fields, players, wc_descname, wc_version)
             winning_teams[teaminfo.team] = true
             territory_points.last_winning_team = teaminfo.team
             territory_points.last_winning_player = -1
+            territory_points.last_winning_player_name = ""
          else
             winning_teams[teaminfo.team] = nil
          end
@@ -150,12 +111,13 @@ function calculate_territory_points(fields, players, wc_descname, wc_version)
             territory_was_kept = winning_players[playerinfo.number] ~= nil
             winning_players[playerinfo.number] = true
             territory_points.last_winning_player = playerinfo.number
+            territory_points.last_winning_player_name = playerinfo.name
             territory_points.last_winning_team = -1
          else
             winning_players[playerinfo.number] = nil
          end
-         if teaminfo.team == 0 and players[playerinfo.number] ~= nil then
-            points[#points + 1] = { players[playerinfo.number].name, playerinfo.points }
+         if teaminfo.team == 0 then
+            points[#points + 1] = { playerinfo.name, playerinfo.points }
          end
       end
    end
@@ -163,10 +125,15 @@ function calculate_territory_points(fields, players, wc_descname, wc_version)
    -- Set the remaining time according to whether the winner is still the same
    if territory_was_kept then
       -- Still the same winner
-      territory_points.remaining_time = territory_points.remaining_time - 30
+      territory_points.remaining_time = territory_points.remaining_time - 1
    elseif winning_points == -1 then
       -- No winner. This value is used to calculate whether to send a report to players.
-      territory_points.remaining_time = 10
+      if territory_points.remaining_time == 1800 then
+         territory_points.remaining_time = 1201
+      elseif territory_points.remaining_time ~= 1201 then
+         territory_points.remaining_time = 1800
+      end
+
    else
       -- Winner changed
       territory_points.remaining_time = 20 * 60 -- 20 minutes
@@ -180,7 +147,7 @@ end
 --    Returns a string containing the current land percentages of players/teams
 --    for messages to the players
 --
---    :arg fields: Table of all buildable fields
+--    :arg fields: Number of all valuable fields
 --    :arg has_had: Use "has" for an interim message, "had" for a game over message.
 --
 --    :returns: a richtext-formatted string with information on current points for each player/team
@@ -197,17 +164,17 @@ function territory_status(fields, has_had)
             li(
                (wc_has_territory):bformat(
                   territory_points.points[i][1],
-                  _percent(territory_points.points[i][2], #fields),
+                  _percent(territory_points.points[i][2], fields),
                   territory_points.points[i][2],
-                  #fields))
+                  fields))
       else
          msg = msg ..
             li(
                (wc_had_territory):bformat(
                   territory_points.points[i][1],
-                  _percent(territory_points.points[i][2], #fields),
+                  _percent(territory_points.points[i][2], fields),
                   territory_points.points[i][2],
-                  #fields))
+                  fields))
       end
 
    end
@@ -248,7 +215,7 @@ function losing_status_header(players)
    if territory_points.last_winning_team >= 0 then
       winner_name = team_str:format(territory_points.last_winning_team)
    elseif territory_points.last_winning_player >= 0 then
-      winner_name = players[territory_points.last_winning_player].name
+      winner_name = territory_points.last_winning_player_name
    end
    local remaining_minutes = math.max(0, math.floor(territory_points.remaining_time / 60))
 
@@ -265,15 +232,13 @@ end
 --
 --    Updates the territory points and sends game over reports
 --
---    :arg fields: Table of all buildable fields
+--    :arg fields: Number of all valuable fields
 --    :arg players: Table of all players
 --
 function territory_game_over(fields, players, wc_descname, wc_version)
    calculate_territory_points(fields, players, wc_descname, wc_version)
 
    for idx, pl in ipairs(players) do
-      pl.see_all = 1
-
       local wonmsg = won_game_over.body .. game_status.body
       local lostmsg = lost_game_over.body .. game_status.body
       for i=1,#territory_points.points do

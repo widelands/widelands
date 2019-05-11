@@ -6,6 +6,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("immovable", "Resources: None"),
    helptext_script = dirname .. "../helptexts/none.lua",
+   icon = dirname .. "pics/none_0.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -28,6 +29,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("immovable", "Resources: Water Vein"),
    helptext_script = dirname .. "../helptexts/water.lua",
+   icon = dirname .. "pics/water_0.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -51,6 +53,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("immovable", "Resources: Coal Vein"),
    helptext_script = dirname .. "../helptexts/coal_1.lua",
+   icon = dirname .. "pics/coal_1_0.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -74,6 +77,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("immovable", "Resources: Gold Vein"),
    helptext_script = dirname .. "../helptexts/gold_1.lua",
+   icon = dirname .. "pics/gold_1_0.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -97,6 +101,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("immovable", "Resources: Iron Vein"),
    helptext_script = dirname .. "../helptexts/iron_1.lua",
+   icon = dirname .. "pics/iron_1_0.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -120,6 +125,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("immovable", "Resources: Some Stones"),
    helptext_script = dirname .. "../helptexts/stones_1.lua",
+   icon = dirname .. "pics/stones_1_0.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -143,6 +149,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("immovable", "Resources: Main Coal Vein"),
    helptext_script = dirname .. "../helptexts/coal_2.lua",
+   icon = dirname .. "pics/coal_2_0.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -166,6 +173,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("immovable", "Resources: Main Gold Vein"),
    helptext_script = dirname .. "../helptexts/gold_2.lua",
+   icon = dirname .. "pics/gold_2_0.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -189,6 +197,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("immovable", "Resources: Main Iron Vein"),
    helptext_script = dirname .. "../helptexts/iron_2.lua",
+   icon = dirname .. "pics/iron_2_0.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -212,6 +221,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("immovable", "Resources: A Lot of Stones"),
    helptext_script = dirname .. "../helptexts/stones_2.lua",
+   icon = dirname .. "pics/stones_2_0.png",
    attributes = { "resi" },
    programs = {
       program = {

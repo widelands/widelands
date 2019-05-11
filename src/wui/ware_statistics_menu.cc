@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@
 #include "wui/plot_area.h"
 #include "wui/waresdisplay.h"
 
-constexpr int kPlotHeight = 130;
+constexpr int kPlotHeight = 145;
 constexpr int kPlotWidth = 250;
 constexpr int kSpacing = 5;
 
@@ -172,9 +172,10 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 		   cur_ware, parent.get_player()->get_ware_consumption_statistics(
 		                Widelands::DescriptionIndex(cur_ware)));
 
-		plot_stock_->register_plot_data(cur_ware, parent.get_player()->get_ware_stock_statistics(
-		                                             Widelands::DescriptionIndex(cur_ware)),
-		                                colors[kInactiveColorIndex]);
+		plot_stock_->register_plot_data(
+		   cur_ware,
+		   parent.get_player()->get_ware_stock_statistics(Widelands::DescriptionIndex(cur_ware)),
+		   colors[kInactiveColorIndex]);
 	}
 
 	box->add(new StatisticWaresDisplay(

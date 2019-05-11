@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,6 @@ namespace Widelands {
 
 void read_objective_data(FileSystem&, EditorGameBase&);
 void write_objective_data(FileSystem&, EditorGameBase&);
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_OBJECTIVE_PACKET_H

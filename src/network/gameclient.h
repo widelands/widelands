@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2018 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,8 @@
 
 #ifndef WL_NETWORK_GAMECLIENT_H
 #define WL_NETWORK_GAMECLIENT_H
+
+#include <memory>
 
 #include "chat/chat.h"
 #include "logic/game_controller.h"
@@ -95,6 +97,9 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	void set_win_condition_script(const std::string&) override;
 	std::string get_win_condition_script() override;
 
+	void set_peaceful_mode(bool peace) override;
+	bool is_peaceful_mode() override;
+
 	// ChatProvider interface
 	void send(const std::string& msg) override;
 	const std::vector<ChatMessage>& get_messages() const override;
@@ -120,7 +125,7 @@ private:
 	                bool sendreason = true,
 	                bool showmsg = true);
 
-	NetTransferFile* file_;
+	std::unique_ptr<NetTransferFile> file_;
 	GameClientImpl* d;
 	bool internet_;
 };

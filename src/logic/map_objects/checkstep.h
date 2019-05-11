@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2018 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -191,6 +191,6 @@ private:
 	// The only thing that matters is whether a location is in the set.
 	std::set<Coords> allowed_locations_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_CHECKSTEP_H

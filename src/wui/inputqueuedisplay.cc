@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,8 @@
 #include "wui/inputqueuedisplay.h"
 
 #include <algorithm>
+
+#include <boost/format.hpp>
 
 #include "economy/input_queue.h"
 #include "economy/request.h"
@@ -240,18 +242,37 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	uint32_t x = Border;
 	uint32_t y = Border + (total_height_ - 2 * Border - WARE_MENU_PIC_WIDTH) / 2;
 
+	boost::format tooltip_format("%s<br><p><font size=%d bold=0>%s<br>%s</font></p>");
+
 	decrease_max_fill_ = new UI::Button(
 	   this, "decrease_max_fill", x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
 	   UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_left.png"),
-	   _("Decrease the number of wares you want to be stored here."));
+	   (tooltip_format
+	    /** TRANSLATORS: Button tooltip in in a building's wares input queue */
+	    % _("Decrease the number of wares you want to be stored here") %
+	    UI_FONT_SIZE_MESSAGE
+	    /** TRANSLATORS: Button tooltip in in a building's wares input queue - option explanation */
+	    % _("Hold down Shift to decrease all ware types at the same time")
+	    /** TRANSLATORS: Button tooltip in in a building's wares input queue - option explanation */
+	    % _("Hold down Ctrl to allow none of this ware"))
+	      .str());
 	decrease_max_fill_->sigclicked.connect(
 	   boost::bind(&InputQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
 
 	x = Border + (cache_size_ + 1) * (CellWidth + CellSpacing);
+
 	increase_max_fill_ = new UI::Button(
 	   this, "increase_max_fill", x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
 	   UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_right.png"),
-	   _("Increase the number of wares you want to be stored here."));
+	   (tooltip_format
+	    /** TRANSLATORS: Button tooltip in a building's wares input queue */
+	    % _("Increase the number of wares you want to be stored here") %
+	    UI_FONT_SIZE_MESSAGE
+	    /** TRANSLATORS: Button tooltip in in a building's wares input queue - option explanation */
+	    % _("Hold down Shift to increase all ware types at the same time")
+	    /** TRANSLATORS: Button tooltip in in a building's wares input queue - option explanation */
+	    % _("Hold down Ctrl to allow all of this ware"))
+	      .str());
 	increase_max_fill_->sigclicked.connect(
 	   boost::bind(&InputQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));
 
@@ -285,7 +306,7 @@ void InputQueueDisplay::radiogroup_changed(int32_t state) {
 		return;
 	}
 	if (SDL_GetModState() & KMOD_CTRL) {
-		update_siblings(state);
+		update_siblings_priority(state);
 	}
 	igb_.game().send_player_set_ware_priority(building_, type_, index_, priority);
 }
@@ -294,11 +315,11 @@ void InputQueueDisplay::radiogroup_clicked() {
 	// Already set option has been clicked again
 	// Unimportant for this queue, but update other queues
 	if (SDL_GetModState() & KMOD_CTRL) {
-		update_siblings(priority_radiogroup_->get_state());
+		update_siblings_priority(priority_radiogroup_->get_state());
 	}
 }
 
-void InputQueueDisplay::update_siblings(int32_t state) {
+void InputQueueDisplay::update_siblings_priority(int32_t state) {
 	// "Release" the CTRL key to avoid recursion
 	const SDL_Keymod old_modifiers = SDL_GetModState();
 	SDL_SetModState(KMOD_NONE);
@@ -340,19 +361,63 @@ void InputQueueDisplay::update_siblings(int32_t state) {
  * stored here has been clicked
  */
 void InputQueueDisplay::decrease_max_fill_clicked() {
-	assert(cache_max_fill_ > 0);
 	if (!igb_.can_act(building_.owner().player_number())) {
 		return;
 	}
-	igb_.game().send_player_set_input_max_fill(building_, index_, type_, cache_max_fill_ - 1);
+
+	// Update the value of this queue if required
+	if (cache_max_fill_ > 0) {
+		igb_.game().send_player_set_input_max_fill(
+		   building_, index_, type_, ((SDL_GetModState() & KMOD_CTRL) ? 0 : cache_max_fill_ - 1));
+	}
+
+	// Update other queues of this building
+	if (SDL_GetModState() & KMOD_SHIFT) {
+		// Using int16_t instead of int32_t on purpose to avoid over-/underflows
+		update_siblings_fill(
+		   ((SDL_GetModState() & KMOD_CTRL) ? std::numeric_limits<int16_t>::min() : -1));
+	}
 }
 
 void InputQueueDisplay::increase_max_fill_clicked() {
-	assert(cache_max_fill_ < queue_.get_max_size());
 	if (!igb_.can_act(building_.owner().player_number())) {
 		return;
 	}
-	igb_.game().send_player_set_input_max_fill(building_, index_, type_, cache_max_fill_ + 1);
+
+	if (cache_max_fill_ < cache_size_) {
+		igb_.game().send_player_set_input_max_fill(
+		   building_, index_, type_,
+		   ((SDL_GetModState() & KMOD_CTRL) ? cache_size_ : cache_max_fill_ + 1));
+	}
+
+	if (SDL_GetModState() & KMOD_SHIFT) {
+		update_siblings_fill(
+		   ((SDL_GetModState() & KMOD_CTRL) ? std::numeric_limits<int16_t>::max() : 1));
+	}
+}
+
+void InputQueueDisplay::update_siblings_fill(int32_t delta) {
+	Panel* sibling = get_parent()->get_first_child();
+	// Well, at least we should be a child of our parent
+	assert(sibling != nullptr);
+	do {
+		if (sibling == this) {
+			// We already have been set
+			continue;
+		}
+		InputQueueDisplay* display = dynamic_cast<InputQueueDisplay*>(sibling);
+		if (display == nullptr) {
+			// Cast failed. Sibling is no InputQueueDisplay
+			continue;
+		}
+		uint32_t new_fill =
+		   std::max(0, std::min<int32_t>(static_cast<int32_t>(display->cache_max_fill_) + delta,
+		                                 display->cache_size_));
+		if (new_fill != display->cache_max_fill_) {
+			igb_.game().send_player_set_input_max_fill(
+			   building_, display->index_, display->type_, new_fill);
+		}
+	} while ((sibling = sibling->get_next_sibling()));
 }
 
 void InputQueueDisplay::compute_max_fill_buttons_enabled_state() {
@@ -364,11 +429,5 @@ void InputQueueDisplay::compute_max_fill_buttons_enabled_state() {
 			increase_max_fill_->set_enabled(false);
 		if (decrease_max_fill_)
 			decrease_max_fill_->set_enabled(false);
-	} else {
-
-		if (decrease_max_fill_)
-			decrease_max_fill_->set_enabled(cache_max_fill_ > 0);
-		if (increase_max_fill_)
-			increase_max_fill_->set_enabled(cache_max_fill_ < queue_.get_max_size());
 	}
 }

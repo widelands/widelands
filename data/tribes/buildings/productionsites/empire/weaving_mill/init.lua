@@ -63,7 +63,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs cloth",
             "consume=wool",
             "sleep=15000",
-            "playsound=sound/mill weaving 120",
+            "playsound=sound/mill/weaving 120",
             "animate=working 15000", -- Unsure of balancing CW
             "sleep=5000",
             "produce=cloth"

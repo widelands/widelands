@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,14 +30,14 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 22;
+constexpr uint16_t kCurrentPacketVersion = 23;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/player_info");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 22) {
 			uint32_t const max_players = fr.unsigned_16();
 			for (uint32_t i = 1; i < max_players + 1; ++i) {
 				game.remove_player(i);
@@ -59,6 +59,15 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 					player->set_see_all(see_all);
 
 					player->set_ai(fr.c_string());
+
+					if (packet_version == kCurrentPacketVersion) {
+						player->forbid_attack_.clear();
+						uint8_t size = fr.unsigned_8();
+						for (uint8_t j = 0; j < size; ++j) {
+							player->forbid_attack_.emplace(fr.unsigned_8());
+						}
+					}
+
 					player->read_statistics(fr, packet_version);
 					player->read_remaining_shipnames(fr);
 
@@ -118,6 +127,11 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
 		fw.c_string(plr->name_.c_str());
 		fw.c_string(plr->ai_.c_str());
 
+		fw.unsigned_8(plr->forbid_attack_.size());
+		for (const auto& it : plr->forbid_attack_) {
+			fw.unsigned_8(it);
+		}
+
 		plr->write_statistics(fw);
 		plr->write_remaining_shipnames(fw);
 		fw.unsigned_32(plr->casualties());
@@ -146,4 +160,4 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
 
 	fw.write(fs, "binary/player_info");
 }
-}
+}  // namespace Widelands

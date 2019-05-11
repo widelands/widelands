@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,55 +37,55 @@ Tribes::Tribes()
      tribes_(new DescriptionMaintainer<TribeDescr>()) {
 }
 
-void Tribes::add_constructionsite_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_constructionsite_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	buildings_->add(new ConstructionSiteDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
-void Tribes::add_dismantlesite_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_dismantlesite_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	buildings_->add(new DismantleSiteDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
-void Tribes::add_militarysite_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_militarysite_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	buildings_->add(new MilitarySiteDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
-void Tribes::add_productionsite_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_productionsite_type(const LuaTable& table, const World& world) {
 	i18n::Textdomain td("tribes");
 	const std::string msgctxt = table.get_string("msgctxt");
 	buildings_->add(
 	   new ProductionSiteDescr(pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str()),
-	                           msgctxt, table, egbase));
+	                           msgctxt, table, *this, world));
 }
 
-void Tribes::add_trainingsite_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_trainingsite_type(const LuaTable& table, const World& world) {
 	i18n::Textdomain td("tribes");
 	const std::string msgctxt = table.get_string("msgctxt");
 	buildings_->add(
 	   new TrainingSiteDescr(pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str()),
-	                         msgctxt, table, egbase));
+	                         msgctxt, table, *this, world));
 }
 
-void Tribes::add_warehouse_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_warehouse_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	buildings_->add(new WarehouseDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
-void Tribes::add_market_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_market_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	buildings_->add(new MarketDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
 void Tribes::add_immovable_type(const LuaTable& table) {
@@ -107,31 +107,31 @@ void Tribes::add_ware_type(const LuaTable& table) {
 	   table));
 }
 
-void Tribes::add_carrier_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_carrier_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	workers_->add(new CarrierDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
-void Tribes::add_soldier_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_soldier_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	workers_->add(new SoldierDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
-void Tribes::add_worker_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_worker_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	workers_->add(new WorkerDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
-void Tribes::add_tribe(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_tribe(const LuaTable& table) {
 	const std::string name = table.get_string("name");
 	if (Widelands::tribe_exists(name)) {
-		tribes_->add(new TribeDescr(table, Widelands::get_tribeinfo(name), egbase.tribes()));
+		tribes_->add(new TribeDescr(table, Widelands::get_tribeinfo(name), *this));
 	} else {
 		throw GameDataError("The tribe '%s'' has no preload file.", name.c_str());
 	}

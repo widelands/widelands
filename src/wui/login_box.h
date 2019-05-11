@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,6 +29,10 @@
 struct LoginBox : public UI::Window {
 	explicit LoginBox(UI::Panel&);
 
+	void think() override;
+
+	void verify_input();
+
 	std::string get_nickname() {
 		return eb_nickname->text();
 	}
@@ -38,9 +42,6 @@ struct LoginBox : public UI::Window {
 	bool registered() {
 		return cb_register->get_state();
 	}
-	bool set_automaticlog() {
-		return cb_auto_log->get_state();
-	}
 
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
@@ -48,14 +49,16 @@ struct LoginBox : public UI::Window {
 private:
 	void clicked_back();
 	void clicked_ok();
+	void change_playername();
 
+	UI::Button* loginbtn;
+	UI::Button* cancelbtn;
 	UI::EditBox* eb_nickname;
 	UI::EditBox* eb_password;
 	UI::Checkbox* cb_register;
-	UI::Checkbox* cb_auto_log;
 	UI::Textarea* ta_nickname;
 	UI::Textarea* ta_password;
-	UI::MultilineTextarea* pwd_warning;
+	UI::MultilineTextarea* register_account;
 };
 
 #endif  // end of include guard: WL_WUI_LOGIN_BOX_H

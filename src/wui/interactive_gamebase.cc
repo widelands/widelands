@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2018 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,10 +28,10 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
-#include "logic/findbob.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/map.h"
+#include "logic/map_objects/findbob.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "network/gamehost.h"
@@ -54,46 +54,6 @@ std::string speed_string(int const speed) {
 		return (boost::format("%u.%ux") % (speed / 1000) % (speed / 100 % 10)).str();
 	}
 	return _("PAUSE");
-}
-
-// Draws census and statistics on screen for the given map object
-void draw_mapobject_infotext(RenderTarget* dst,
-                             const Vector2i& init_position,
-                             float scale,
-                             Widelands::MapObject* mapobject,
-                             const TextToDraw text_to_draw) {
-	const std::string census_string =
-	   mapobject->info_string(Widelands::MapObject::InfoStringType::kCensus);
-	if (census_string.empty()) {
-		// If there is no census available for the map object, we also won't have any statistics.
-		return;
-	}
-
-	const std::string statistics_string =
-	   (text_to_draw & TextToDraw::kStatistics) ?
-	      mapobject->info_string(Widelands::MapObject::InfoStringType::kStatistics) :
-	      "";
-	if (census_string.empty() && statistics_string.empty()) {
-		// Nothing to do
-		return;
-	}
-
-	const int font_size = scale * UI_FONT_SIZE_SMALL;
-
-	// We always render this so we can have a stable position for the statistics string.
-	std::shared_ptr<const UI::RenderedText> rendered_census =
-	   UI::g_fh->render(as_condensed(census_string, UI::Align::kCenter, font_size), 120 * scale);
-	Vector2i position = init_position - Vector2i(0, 48) * scale;
-	if (text_to_draw & TextToDraw::kCensus) {
-		rendered_census->draw(*dst, position, UI::Align::kCenter);
-	}
-
-	if (!statistics_string.empty()) {
-		std::shared_ptr<const UI::RenderedText> rendered_statistics =
-		   UI::g_fh->render(as_condensed(statistics_string, UI::Align::kCenter, font_size));
-		position.y += rendered_census->height() + text_height(font_size) / 4;
-		rendered_statistics->draw(*dst, position, UI::Align::kCenter);
-	}
 }
 
 }  // namespace
@@ -130,7 +90,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 		   default:
 			   break;
 		   }
-		});
+	   });
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -175,34 +135,6 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 		if (!game_speed.empty()) {
 			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(game_speed);
 			rendered_text->draw(dst, Vector2i(get_w() - 5, 5), UI::Align::kRight);
-		}
-	}
-}
-
-void InteractiveGameBase::draw_mapobject_infotexts(
-   RenderTarget* dst,
-   float scale,
-   const std::vector<std::pair<Vector2i, Widelands::MapObject*>>& mapobjects_to_draw_text_for,
-   const TextToDraw text_to_draw,
-   const Widelands::Player* plr) const {
-	// Rendering text is expensive, so let's just do it for only a few sizes.
-	// The formula is a bit fancy to avoid too much text overlap.
-	const float scale_for_text =
-	   std::round(2.f * (scale > 1.f ? std::sqrt(scale) : std::pow(scale, 2.f))) / 2.f;
-	if (scale_for_text < 1.f) {
-		return;
-	}
-
-	for (const auto& draw_my_text : mapobjects_to_draw_text_for) {
-		TextToDraw draw_text_for_this_mapobject = text_to_draw;
-		const Widelands::Player* owner = draw_my_text.second->get_owner();
-		if (owner != nullptr && plr != nullptr && !plr->see_all() && plr->is_hostile(*owner)) {
-			draw_text_for_this_mapobject =
-			   static_cast<TextToDraw>(draw_text_for_this_mapobject & ~TextToDraw::kStatistics);
-		}
-		if (draw_text_for_this_mapobject != TextToDraw::kNone) {
-			draw_mapobject_infotext(dst, draw_my_text.first, scale_for_text, draw_my_text.second,
-			                        draw_text_for_this_mapobject);
 		}
 	}
 }

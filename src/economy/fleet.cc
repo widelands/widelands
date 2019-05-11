@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2018 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -258,7 +258,12 @@ void Fleet::cleanup(EditorGameBase& egbase) {
 	portpaths_.clear();
 
 	while (!ships_.empty()) {
-		ships_.back()->set_fleet(nullptr);
+		Ship* ship = ships_.back();
+		// Check if the ship still exists to avoid heap-use-after-free when ship has already been
+		// deleted while processing EditorGameBase::cleanup_objects()
+		if (egbase.objects().object_still_available(ship)) {
+			ship->set_fleet(nullptr);
+		}
 		ships_.pop_back();
 	}
 
@@ -300,7 +305,7 @@ const Fleet::PortPath& Fleet::portpath_bidir(uint32_t i, uint32_t j, bool& rever
  *
  * @return true if successful, or false if the docks are not actually part of the fleet.
  */
-bool Fleet::get_path(PortDock& start, PortDock& end, Path& path) {
+bool Fleet::get_path(const PortDock& start, const PortDock& end, Path& path) {
 	uint32_t startidx = std::find(ports_.begin(), ports_.end(), &start) - ports_.begin();
 	uint32_t endidx = std::find(ports_.begin(), ports_.end(), &end) - ports_.begin();
 
@@ -396,6 +401,7 @@ void Fleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
 		ship->set_economy(*game, nullptr);
 
 	if (ship->get_destination(egbase)) {
+		ship->get_destination(egbase)->ship_coming(false);
 		update(egbase);
 	}
 
@@ -628,8 +634,7 @@ void Fleet::update(EditorGameBase& egbase) {
 }
 
 /**
- * Act callback updates ship scheduling. All decisions about where transport ships
- * are supposed to go are made via this function.
+ * Act callback updates ship scheduling of idle ships.
  *
  * @note Do not call this directly; instead, trigger it via @ref update
  */
@@ -637,230 +642,209 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 	act_pending_ = false;
 
 	if (!active()) {
-		// If we are here, most likely act() was called by a port with waiting wares or an expedition
-		// ready
-		// although there are still no ships. We can't handle it now, so we reschedule the act()
-		schedule_act(game, 5000);  // retry in the next time
+		// If we are here, most likely act() was called by a port with waiting wares or
+		// with an expedition ready, although there are still no ships.
+		// We can't handle it now, so we reschedule the act()
+		schedule_act(game, kFleetInterval);  // retry in the next time
 		act_pending_ = true;
 		return;
 	}
 
 	molog("Fleet::act\n");
 
-	// we need to calculate what ship is to be send to which port
-	// for this we will have temporary data structure with format
-	// <<ship,port>,score>
-	// where ship and port are not objects but positions in ports_ and ships_
-	// this is to allow native hashing
-	std::map<std::pair<uint16_t, uint16_t>, uint16_t> scores;
-
-	// so we will identify all pairs: idle ship : ports, and score all such
-	// pairs. We consider
-	// - count of wares onboard, first ware (oldest) is counted as 8 (prioritization)
-	//   (counting wares for particular port only)
-	// - count wares waiting at the port/3
-	// - distance between ship and a port (0-10 points, the closer the more points)
-	// - is another ship heading there right now?
-
-	// at the end we must know if requrests of all ports asking for ship were addressed
-	// if any unsatisfied, we must schedule new run of this function
-	// when we send a ship there, the port is removed from list
-	std::list<uint16_t> waiting_ports;
-
-	// this is just helper - first member of scores map
-	std::pair<uint16_t, uint16_t> mapping;  // ship number, port number
-
-	// first we go over ships - idle ones (=without destination)
-	// then over wares on these ships and create first ship-port
-	// pairs with score
-	for (uint16_t s = 0; s < ships_.size(); s += 1) {
-		if (ships_[s]->get_destination(game)) {
-			continue;
-		}
-		if (ships_[s]->get_ship_state() != Ship::ShipStates::kTransport) {
-			continue;  // in expedition obviously
-		}
-
-		for (uint16_t i = 0; i < ships_[s]->get_nritems(); i += 1) {
-			PortDock* dst = ships_[s]->items_[i].get_destination(game);
-			if (!dst) {
-				// if wares without destination on ship without destination
-				// such ship can be send to any port, and should be sent
-				// to some port, so we add 1 point to score for each port
-				for (uint16_t p = 0; p < ports_.size(); p += 1) {
-					mapping.first = s;
-					mapping.second = p;
-					scores[mapping] += 1;
-				}
-				continue;
-			}
-
-			bool destination_found = false;  // Just a functional check
-			for (uint16_t p = 0; p < ports_.size(); p += 1) {
-				if (ports_[p] == ships_[s]->items_[i].get_destination(game)) {
-					mapping.first = s;
-					mapping.second = p;
-					scores[mapping] += (i == 0) ? 8 : 1;
-					destination_found = true;
-				}
-			}
-			if (!destination_found) {
-				// Perhaps the throw here is too strong
-				// we can still remove it before stable release if it proves too much
-				// during my testing this situation never happened
-				throw wexception("A ware with destination that does not match any of player's"
-				                 " ports, ship %u, ware's destination: %u",
-				                 ships_[s]->serial(),
-				                 ships_[s]->items_[i].get_destination(game)->serial());
-			}
-		}
-	}
-
-	// now opposite aproach - we go over ports to find out those that have wares
-	// waiting for ship then find candidate ships to satisfy the requests
-	for (uint16_t p = 0; p < ports_.size(); p += 1) {
-		PortDock& pd = *ports_[p];
-		if (!pd.get_need_ship()) {
+	// For each waiting port, try to find idle ships and send to it the closest one.
+	uint16_t waiting_ports = ports_.size();
+	for (PortDock* p : ports_) {
+		if (p->get_need_ship() == 0) {
+			--waiting_ports;
 			continue;
 		}
 
-		// general stategy is "one ship for port is enough", but sometimes
-		// amount of ware waiting for ship is too high
-		if (count_ships_heading_here(game, &pd) * 25 > pd.count_waiting()) {
-			continue;
-		}
+		Ship* closest_ship = nullptr;
+		uint32_t shortest_dist = kRouteNotCalculated;
+		bool waiting = true;
 
-		waiting_ports.push_back(p);
-
-		// scoring and entering the pair into scores (or increasing existing
-		// score if the pair is already there)
-		for (uint16_t s = 0; s < ships_.size(); s += 1) {
-
-			if (ships_[s]->get_destination(game)) {
-				continue;  // already has destination
+		for (Ship* s : ships_) {
+			if (s->get_destination(game)) {
+				if (s->get_destination(game) == p) {
+					waiting = false;
+					--waiting_ports;
+					break;
+				}
+				continue;  // The ship already has a destination
+			}
+			if (s->get_ship_state() != Ship::ShipStates::kTransport) {
+				continue;  // Ship is not available, e.g. in expedition
 			}
 
-			if (ships_[s]->get_ship_state() != Ship::ShipStates::kTransport) {
-				continue;  // in expedition obviously
-			}
+			// Here we get distance ship->port
+			uint32_t route_length = kRouteNotCalculated;
 
-			mapping.first = s;
-			mapping.second = p;
-			// following aproximately considers free capacity of a ship
-			scores[mapping] += ((ships_[s]->get_nritems() > 15) ? 1 : 3) +
-			                   std::min(ships_[s]->descr().get_capacity() - ships_[s]->get_nritems(),
-			                            ports_[p]->count_waiting()) /
-			                      3;
-		}
-	}
-
-	// Now adding score for distance
-	for (auto ship_port_relation : scores) {
-
-		// here we get distance ship->port
-		// possibilities are:
-		// - we are in port and it is the same as target port
-		// - we are in other port, then we use get_dock() function to fetch precalculated path
-		// - if above fails, we calculate path "manually"
-		int16_t route_length = -1;
-
-		PortDock* current_portdock =
-		   get_dock(game, ships_[ship_port_relation.first.first]->get_position());
-
-		if (current_portdock) {  // we try to use precalculated paths of game
-
-			// we are in the same portdock
-			if (current_portdock == ports_[ship_port_relation.first.second]) {
-				route_length = 0;
-			} else {  // it is different portdock then
-				Path tmp_path;
-				if (get_path(*current_portdock, *ports_[ship_port_relation.first.second], tmp_path)) {
-					route_length = tmp_path.get_nsteps();
+			// Get precalculated distance for ships available at ports
+			{
+				PortDock* cur_port = get_dock(game, s->get_position());
+				if (cur_port) {          // Ship is at a port
+					if (cur_port == p) {  // Same port
+						route_length = 0;
+					} else {  // Different port
+						Path precalculated_path;
+						if (get_path(*cur_port, *p, precalculated_path)) {
+							route_length = precalculated_path.get_nsteps();
+						}
+					}
 				}
 			}
+
+			// Get distance for ships available but not at a port (should not happen frequently)
+			if (route_length == kRouteNotCalculated) {
+				route_length = s->calculate_sea_route(game, *p);
+			}
+
+			if (route_length < shortest_dist) {
+				shortest_dist = route_length;
+				closest_ship = s;
+			}
 		}
 
-		// most probably the ship is not in a portdock (should not happen frequently)
-		if (route_length == -1) {
-			route_length = ships_[ship_port_relation.first.first]->calculate_sea_route(
-			   game, *ports_[ship_port_relation.first.second]);
+		if (waiting && closest_ship) {
+			--waiting_ports;
+			closest_ship->set_destination(p);
+			closest_ship->send_signal(game, "wakeup");
 		}
-
-		// now we have length of route, so we need to calculate score
-		int16_t score_for_distance = 0;
-		if (route_length < 3) {
-			score_for_distance = 10;
-		} else {
-			score_for_distance = 8 - route_length / 50;
-		}
-		// must not be negative
-		score_for_distance = (score_for_distance < 0) ? 0 : score_for_distance;
-
-		scores[ship_port_relation.first] += score_for_distance;
 	}
 
-	// looking for best scores and sending ships accordingly
-	uint16_t best_ship = 0;
-	uint16_t best_port = 0;
-
-	// after sending a ship we will remove one or more items from scores
-	while (!scores.empty()) {
-		uint16_t best_score = 0;
-
-		// searching for combination with highest score
-		for (const auto& combination : scores) {
-			if (combination.second > best_score) {
-				best_score = combination.second;
-				best_ship = combination.first.first;
-				best_port = combination.first.second;
-			}
-		}
-		if (best_score == 0) {
-			// this is check of correctnes of this algorithm, this should not happen
-			throw wexception("Fleet::act(): No port-destination pair selected or its score is zero");
-		}
-
-		// making sure the winner has no destination set
-		assert(!ships_[best_ship]->get_destination(game));
-
-		// now actual setting destination for "best ship"
-		ships_[best_ship]->set_destination(game, *ports_[best_port]);
-		molog("... ship %u sent to port %u, wares onboard: %2d, the port is asking for a ship: %s\n",
-		      ships_[best_ship]->serial(), ports_[best_port]->serial(),
-		      ships_[best_ship]->get_nritems(), (ports_[best_port]->get_need_ship()) ? "yes" : "no");
-
-		// pruning the scores table
-		// the ship that was just sent somewhere cannot be send elsewhere :)
-		for (auto it = scores.cbegin(); it != scores.cend();) {
-
-			// decreasing score for target port as there was a ship just sent there
-			if (it->first.second == best_port) {
-				mapping.first = it->first.first;
-				mapping.second = it->first.second;
-				scores[mapping] /= 2;
-				// just make sure it is nonzero
-				scores[mapping] = (scores[mapping] == 0) ? 1 : scores[mapping];
-			}
-
-			// but removing all pairs where best ship is participating as it is not available anymore
-			// (because it was sent to "best port")
-			if (it->first.first == best_ship) {
-				scores.erase(it++);
-			} else {
-				++it;
-			}
-		}
-
-		// also removing the port from waiting_ports
-		waiting_ports.remove(best_port);
-	}
-
-	if (!waiting_ports.empty()) {
-		molog("... there are %" PRIuS " ports requesting ship(s) we cannot satisfy yet\n",
-		      waiting_ports.size());
-		schedule_act(game, 5000);  // retry next time
+	if (waiting_ports > 0) {
+		molog("... there are %u ports requesting ship(s) we cannot satisfy yet\n", waiting_ports);
+		schedule_act(game, kFleetInterval);  // retry next time
 		act_pending_ = true;
 	}
+
+	// Deal with edge-case of losing destination before reaching it
+	for (Ship* s : ships_) {
+		if (s->get_destination(game)) {
+			continue;  // The ship has a destination
+		}
+		if (s->get_ship_state() != Ship::ShipStates::kTransport) {
+			continue;  // Ship is not available, e.g. in expedition
+		}
+		if (s->items_.empty()) {
+			continue;  // No pending wares/workers
+		}
+
+		// Send ship to the closest port
+		PortDock* closest_port = nullptr;
+		uint32_t shortest_dist = kRouteNotCalculated;
+
+		for (PortDock* p : ports_) {
+			uint32_t route_length = s->calculate_sea_route(game, *p);
+			if (route_length < shortest_dist) {
+				shortest_dist = route_length;
+				closest_port = p;
+			}
+		}
+
+		if (closest_port) {
+			s->set_destination(closest_port);
+			s->send_signal(game, "wakeup");
+		}
+	}
+}
+
+/**
+ * For the given three consecutive ports, decide if their path is favourable or not.
+ * \return true if the path from start to finish >= the path from middle to finish
+ */
+bool Fleet::is_path_favourable(const PortDock& start,
+                               const PortDock& middle,
+                               const PortDock& finish) {
+	if (&middle != &finish) {
+		Path path_start_to_finish;
+		Path path_middle_to_finish;
+#ifndef NDEBUG
+		assert(get_path(start, finish, path_start_to_finish));
+#else
+		get_path(start, finish, path_start_to_finish);
+#endif
+		if (get_path(middle, finish, path_middle_to_finish)) {
+			if (path_middle_to_finish.get_nsteps() > path_start_to_finish.get_nsteps()) {
+				return false;
+			}
+		}
+	}
+	return true;  // default
+}
+
+/**
+ * For the given ship, go through all ports of this fleet
+ * and find the one with the best score.
+ * \return that port
+ */
+PortDock* Fleet::find_next_dest(Game& game, const Ship& ship, const PortDock& from_port) {
+	PortDock* best_port = nullptr;
+	float best_score = 0.0f;
+
+	for (PortDock* p : ports_) {
+		if (p == &from_port) {
+			continue;  // same port
+		}
+
+		float score = 0.0f;
+		WareInstance* ware;
+		Worker* worker;
+
+		// Score for wares/workers onboard that ship for that port
+		for (const ShippingItem& si : ship.items_) {
+			if (si.get_destination(game) == p) {
+				si.get(game, &ware, &worker);
+				if (ware) {
+					score += 1;  // TODO(ypopezios): increase by ware's importance
+				} else {        // worker
+					score += 4;
+				}
+			}
+		}
+
+		// Score for wares/workers waiting at that port
+		for (const ShippingItem& si : from_port.waiting_) {
+			if (si.get_destination(game) == p) {
+				si.get(game, &ware, &worker);
+				if (ware) {
+					score += 1;  // TODO(ypopezios): increase by ware's importance
+				} else {        // worker
+					score += 4;
+				}
+			}
+		}
+
+		if (score == 0.0f && p->get_need_ship() == 0) {
+			continue;  // empty ship to empty port
+		}
+
+		// Here we get distance ship->port
+		uint32_t route_length = kRouteNotCalculated;
+
+		// Get precalculated distance if the ship is at a port
+		{
+			Path precalculated_path;
+			if (get_path(from_port, *p, precalculated_path)) {  // try to use precalculated path
+				route_length = precalculated_path.get_nsteps();
+			}
+		}
+
+		// Get distance for when the ship is not at a port (should not happen frequently)
+		if (route_length == kRouteNotCalculated) {
+			route_length = ship.calculate_sea_route(game, *p);
+		}
+
+		score = (score + 1.0f) * (score + p->get_need_ship());
+		score = score * (1.0f - route_length / (score + route_length));
+		if (score > best_score) {
+			best_score = score;
+			best_port = p;
+		}
+	}
+
+	return best_port;
 }
 
 void Fleet::log_general_info(const EditorGameBase& egbase) const {
