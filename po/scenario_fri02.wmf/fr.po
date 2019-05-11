@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"POT-Creation-Date: 2019-04-22 05:17+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Renaud Bouchard, 2019\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -214,7 +214,7 @@ msgstr "Combien de lieux où trainent les soldats,"
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:94
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:338
 msgid "How many sites where thou hold’st sway,"
-msgstr "Combien de lieux où ils tiennent bon,"
+msgstr "Combien de lieux où tu as tenu bon,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:95

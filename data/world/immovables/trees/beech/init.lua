@@ -80,6 +80,7 @@ world:new_immovable_type{
    name = "beech_summer_old",
    descname = _ "Beech (Old)",
    species = _ "Beech",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },

@@ -537,7 +537,7 @@ public:
 	uint32_t find_attack_soldiers(Flag&,
 	                              std::vector<Soldier*>* soldiers = nullptr,
 	                              uint32_t max = std::numeric_limits<uint32_t>::max());
-	void enemyflagaction(Flag&, PlayerNumber attacker, uint32_t count);
+	void enemyflagaction(Flag&, PlayerNumber attacker, const std::vector<Widelands::Soldier*>&);
 
 	uint32_t casualties() const {
 		return casualties_;
