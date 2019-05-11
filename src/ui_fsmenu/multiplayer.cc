@@ -116,11 +116,11 @@ void FullscreenMenuMultiPlayer::show_internet_login() {
 void FullscreenMenuMultiPlayer::internet_login() {
 	Section& s = g_options.pull_section("global");
 
-	nickname_ = s.get_string("nickname", _(" "));
+	nickname_ = s.get_string("nickname", "");
 	password_ = s.get_string("password_sha1", "nobody");
 	register_ = s.get_bool("registered", false);
 
-	if (nickname_ == " " || nickname_.find_first_not_of(
+	if (nickname_.empty() || nickname_.find_first_not_of(
 	                           "abcdefghijklmnopqrstuvwxyz"
 	                           "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= nickname_.size()) {
 		show_internet_login();
