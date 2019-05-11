@@ -4116,7 +4116,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	// do not dismantle or upgrade the same type of building too soon - to give some time to update
 	// statistics
-	if (site.bo->last_dismantle_time > game().get_gametime() - 30 * 1000) {
+	if (site.bo->last_dismantle_time > game().get_gametime() -
+		    (std::abs(management_data.get_military_number_at(164))/25+1) * 60 * 1000) {
 		return false;
 	}
 
@@ -4453,7 +4454,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 		// if we have more buildings then target
 		if ((site.bo->cnt_built - site.bo->unconnected_count) > site.bo->cnt_target &&
-		    site.unoccupied_till + 10 * 60 * 1000 < gametime && site.site->can_start_working()) {
+		    site.unoccupied_till + (std::abs(management_data.get_military_number_at(166))/5+1)* 60 *
+		    1000 < gametime && site.site->can_start_working()) {
 
 			if (site.site->get_statistics_percent() < 30 && get_stocklevel(*site.bo, gametime) > 100) {
 				site.bo->last_dismantle_time = game().get_gametime();
@@ -4468,7 +4470,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 		// a building can be dismanteld if it performs too bad, if it is not the last one
 		if (site.site->get_statistics_percent() <= 10 && site.bo->cnt_built > 1 &&
-		    site.unoccupied_till + 10 * 60 * 1000 < gametime && site.site->can_start_working()) {
+		    site.unoccupied_till + (std::abs(management_data.get_military_number_at(167))/5+1) * 60 *
+		    1000 < gametime && site.site->can_start_working() && get_stocklevel(*site.bo, gametime) >
+		    get_stocklevel(*site.bo, gametime) > (std::abs(management_data.get_military_number_at(168))/10)) {
 
 			if (connected_to_wh) {
 				game().send_player_dismantle(*site.site);
@@ -4495,7 +4499,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	    site.site->can_start_working() &&
 	    check_building_necessity(*site.bo, PerfEvaluation::kForDismantle, gametime) ==
 	       BuildingNecessity::kNotNeeded &&
-	    gametime - site.bo->last_dismantle_time > 5 * 60 * 1000 &&
+	    gametime - site.bo->last_dismantle_time >
+	        (std::abs(management_data.get_military_number_at(169)) / 10 + 1) * 60 * 1000 &&
 
 	    site.bo->current_stats > site.site->get_statistics_percent() &&  // underperformer
 	    (game().get_gametime() - site.unoccupied_till) > 10 * 60 * 1000) {
