@@ -4472,7 +4472,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		if (site.site->get_statistics_percent() <= 10 && site.bo->cnt_built > 1 &&
 		    site.unoccupied_till + (std::abs(management_data.get_military_number_at(167))/5+1) * 60 *
 		    1000 < gametime && site.site->can_start_working() && get_stocklevel(*site.bo, gametime) >
-		    get_stocklevel(*site.bo, gametime) > (std::abs(management_data.get_military_number_at(168))/10)) {
+		    (std::abs(management_data.get_military_number_at(168))/10)) {
 
 			if (connected_to_wh) {
 				game().send_player_dismantle(*site.site);
