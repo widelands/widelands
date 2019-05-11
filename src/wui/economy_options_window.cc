@@ -429,8 +429,8 @@ void EconomyOptionsWindow::SaveProfileWindow::table_selection_changed() {
 		return;
 	}
 	const std::string& sel = table_[table_.selection_index()];
-	if (sel == kDefaultEconomyProfile) {
-		delete_.set_tooltip(_("The default profile cannot be deleted"));
+	if (economy_options_->get_predefined_targets().at(sel).undeletable) {
+		delete_.set_tooltip(_("The predefined profiles cannot be deleted"));
 		delete_.set_enabled(false);
 	} else {
 		delete_.set_tooltip(_("Delete the selected profiles"));
@@ -469,15 +469,17 @@ void EconomyOptionsWindow::SaveProfileWindow::save() {
 
 void EconomyOptionsWindow::SaveProfileWindow::delete_selected() {
 	assert(table_.has_selection());
+
 	auto& map = economy_options_->get_predefined_targets();
 	const std::string& name = table_[table_.selection_index()];
+
 	assert(name != kDefaultEconomyProfile);
-	for (auto it = map.begin(); it != map.end(); ++it) {
-		if (it->first == name) {
-			map.erase(it);
-			break;
-		}
-	}
+	assert(!map.at(name).undeletable);
+
+	auto it = map.find(name);
+	assert(it != map.end());
+	map.erase(it);
+
 	economy_options_->save_targets();
 	economy_options_->update_profiles();
 	update_table();
@@ -600,6 +602,13 @@ void EconomyOptionsWindow::save_targets() {
 		}
 	}
 
+	Section& section = profile.create_section("undeletable");
+	for (const auto& pair : predefined_targets_) {
+		if (pair.first != kDefaultEconomyProfile) {
+			section.set_bool(std::to_string(serials.at(pair.first)).c_str(), pair.second.undeletable);
+		}
+	}
+
 	g_fs->ensure_directory_exists(kEconomyProfilesDir);
 	std::string complete_filename = kEconomyProfilesDir + g_fs->file_separator() + player_->tribe().name();
 	profile.write(complete_filename.c_str(), false);
@@ -615,6 +624,7 @@ void EconomyOptionsWindow::read_targets() {
 
 	{
 		PredefinedTargets t;
+		t.undeletable = true;
 		for (Widelands::DescriptionIndex di : tribe.wares()) {
 			const Widelands::WareDescr* descr = tribes.get_ware_descr(di);
 			if (descr->has_demand_check(tribe.name())) {
@@ -656,6 +666,12 @@ void EconomyOptionsWindow::read_targets() {
 				}
 			}
 			predefined_targets_.emplace(pair.second, t);
+		}
+
+		if (Section* section = profile.get_section("undeletable")) {
+			while (Section::Value* v = section->get_next_val()) {
+				predefined_targets_.at(serials.at(std::string(v->get_name()))).undeletable = v->get_bool();
+			}
 		}
 	}
 

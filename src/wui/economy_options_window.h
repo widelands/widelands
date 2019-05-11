@@ -54,6 +54,7 @@ struct EconomyOptionsWindow : public UI::Window {
 		using Targets = std::map<Widelands::DescriptionIndex, uint32_t>;
 		Targets wares;
 		Targets workers;
+		bool undeletable = false;
 	};
 
 	void create_target();

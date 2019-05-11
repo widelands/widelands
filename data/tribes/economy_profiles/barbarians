@@ -4,6 +4,10 @@
 0=_"Efficiency"
 1=_"Stockpile"
 
+[undeletable]
+0="true"
+1="true"
+
 [0]
 ax="1"
 ax_battle="0"
