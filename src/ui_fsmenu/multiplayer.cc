@@ -58,46 +58,21 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 	vbox_.add_inf_space();
 	vbox_.add(&back, UI::Box::Resizing::kFullSize);
 
-	showloginbox =
-	   new UI::Button(this, "login_dialog", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
-	                  g_gr->images().get("images/ui_basic/continue.png"), _("Show login dialog"));
-	showloginbox->sigclicked.connect(
-	   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
+	Section& s = g_options.pull_section("global");
+	auto_log_ = s.get_bool("auto_log", false);
+	if (auto_log_) {
+		showloginbox =
+		   new UI::Button(this, "login_dialog", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
+		                  g_gr->images().get("images/ui_basic/continue.png"), _("Show login dialog"));
+		showloginbox->sigclicked.connect(
+		   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
+	}
 	layout();
 }
 
 /// called if the showloginbox button was pressed
 void FullscreenMenuMultiPlayer::show_internet_login() {
-	Section& s = g_options.pull_section("global");
-	LoginBox lb(*this);
-	if (lb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-		nickname_ = lb.get_nickname();
-		s.set_string("nickname", nickname_);
-		/// NOTE: The password is only stored (in memory and on disk) and transmitted (over the
-		/// network
-		/// to the metaserver) as cryptographic hash. This does NOT mean that the password is
-		/// stored
-		/// securely on the local disk. While the password should be secure while transmitted to
-		/// the
-		/// metaserver (no-one can use the transmitted data to log in as the user) this is not the
-		/// case
-		/// for local storage. The stored hash of the password makes it hard to look at the
-		/// configuration
-		/// file and figure out the plaintext password to, e.g., log in on the forum. However, the
-		/// stored hash can be copied to another system and used to log in as the user on the
-		/// metaserver.
-		// Further note: SHA-1 is considered broken and shouldn't be used anymore. But since the
-		// passwords on the server are protected by SHA-1 we have to use it here, too
-		if (lb.get_password() != "*****") {
-			password_ = crypto::sha1(lb.get_password());
-			s.set_string("password_sha1", password_);
-		}
-
-		register_ = lb.registered();
-		s.set_bool("registered", lb.registered());
-	} else {
-		return;
-	}
+	auto_log_ = false;
 	internet_login();
 }
 
@@ -115,16 +90,37 @@ void FullscreenMenuMultiPlayer::show_internet_login() {
  */
 void FullscreenMenuMultiPlayer::internet_login() {
 	Section& s = g_options.pull_section("global");
+	if (auto_log_) {
+		nickname_ = s.get_string("nickname", _("nobody"));
+		password_ = s.get_string("password_sha1", "nobody");
+		register_ = s.get_bool("registered", false);
+	} else {
+		LoginBox lb(*this);
+		if (lb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+			nickname_ = lb.get_nickname();
+			/// NOTE: The password is only stored (in memory and on disk) and transmitted (over the
+			/// network
+			/// to the metaserver) as cryptographic hash. This does NOT mean that the password is
+			/// stored
+			/// securely on the local disk. While the password should be secure while transmitted to
+			/// the
+			/// metaserver (no-one can use the transmitted data to log in as the user) this is not the
+			/// case
+			/// for local storage. The stored hash of the password makes it hard to look at the
+			/// configuration
+			/// file and figure out the plaintext password to, e.g., log in on the forum. However, the
+			/// stored hash can be copied to another system and used to log in as the user on the
+			/// metaserver.
+			// Further note: SHA-1 is considered broken and shouldn't be used anymore. But since the
+			// passwords on the server are protected by SHA-1 we have to use it here, too
+			password_ = crypto::sha1(lb.get_password());
+			register_ = lb.registered();
 
-	nickname_ = s.get_string("nickname", "");
-	password_ = s.get_string("password_sha1", "nobody");
-	register_ = s.get_bool("registered", false);
-
-	if (nickname_.empty() || nickname_.find_first_not_of(
-	                            "abcdefghijklmnopqrstuvwxyz"
-	                            "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= nickname_.size()) {
-		show_internet_login();
-		return;
+			s.set_bool("registered", lb.registered());
+			s.set_bool("auto_log", lb.set_automaticlog());
+		} else {
+			return;
+		}
 	}
 
 	// Try to connect to the metaserver
