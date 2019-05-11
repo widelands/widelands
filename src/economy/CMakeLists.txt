@@ -52,9 +52,13 @@ wl_library(economy
     base_macros
     io_fileread
     logic
+    logic_commands
     logic_constants
     logic_exceptions
+    logic_map
+    logic_map_objects
     logic_widelands_geometry
+    logic_widelands_geometry_io
     map_io
     notifications
 )

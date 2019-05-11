@@ -176,7 +176,8 @@ wl_library(graphic_render_queue
     graphic_draw_programs
     graphic_fields_to_draw
     graphic_terrain_programs
-    logic
+    logic_map_objects
+    logic_map_objects_description_maintainer
 )
 
 wl_library(graphic_game_renderer
@@ -192,6 +193,7 @@ wl_library(graphic_game_renderer
     graphic_render_queue
     graphic_surface
     logic
+    logic_map_objects
     wui
     wui_mapview_pixelfunctions
 )
@@ -206,6 +208,8 @@ wl_library(graphic_minimap_renderer
     economy
     graphic_surface
     logic
+    logic_map
+    logic_map_objects
     wui_mapview_pixelfunctions
 )
 
@@ -218,7 +222,7 @@ wl_library(graphic_fields_to_draw
     graphic
     graphic_gl_utils
     logic
-    logic_constants
+    logic_map_objects
     logic_widelands_geometry
     wui_mapview_pixelfunctions
 )
@@ -246,6 +250,9 @@ wl_library(graphic_terrain_programs
     graphic_surface
     io_filesystem
     logic
+    logic_constants
+    logic_map_objects
+    logic_map_objects_description_maintainer
 )
 
 

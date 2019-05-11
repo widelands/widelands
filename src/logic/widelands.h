@@ -63,7 +63,7 @@ using TeamNumber = uint8_t;
  */
 using DescriptionIndex = uint8_t;
 
-constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
+constexpr DescriptionIndex INVALID_INDEX = std::numeric_limits<uint8_t>::max();
 constexpr DescriptionIndex kInvalidWare = INVALID_INDEX - 1;
 constexpr DescriptionIndex kNoResource = INVALID_INDEX - 1;
 
