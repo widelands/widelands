@@ -21,7 +21,6 @@
 #define WL_NETWORK_NETWORK_PLAYER_SETTINGS_BACKEND_H
 
 #include "logic/game_settings.h"
-#include "logic/widelands.h"
 
 struct NetworkPlayerSettingsBackend {
 

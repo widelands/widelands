@@ -24,8 +24,8 @@
 
 #include "base/log.h"
 #include "helper.h"
-#include "logic/findnode.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/findnode.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {

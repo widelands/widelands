@@ -26,6 +26,7 @@ are available, and what your image files need to look like:
             path = "sound/foo/bar",
             priority = 128
          },
+         representative_frame = 3,
       },
       working = ...
    }
@@ -103,6 +104,8 @@ when you're using a mipmap.
 Each mimap entry must define the ``files`` and the ``scale``.
 See also :ref:`animations_converting_formats`.
 
+**representative_frame**
+   *Optional*. Choose the animation frame that will be displayed in messages and in the encyclopedia as a representative image. Default is 0.
 
 Directional Animations
 ----------------------

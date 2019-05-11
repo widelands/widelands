@@ -96,6 +96,8 @@ public:
 	int allow_workers(lua_State* L);
 	int switchplayer(lua_State* L);
 	int get_produced_wares_count(lua_State* L);
+	int set_attack_forbidden(lua_State* L);
+	int is_attack_forbidden(lua_State* L);
 
 	/*
 	 * C methods

@@ -61,7 +61,6 @@
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
 #include "map_io/widelands_map_loader.h"
-#include "network/network.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -323,6 +322,19 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 	// Check for win_conditions
 	if (!settings.scenario) {
 		loader_ui->step(_("Initializing game…"));
+		if (settings.peaceful) {
+			for (uint32_t i = 1; i < settings.players.size(); ++i) {
+				if (Player* p1 = get_player(i)) {
+					for (uint32_t j = i + 1; j <= settings.players.size(); ++j) {
+						if (Player* p2 = get_player(j)) {
+							p1->set_attack_forbidden(j, true);
+							p2->set_attack_forbidden(i, true);
+						}
+					}
+				}
+			}
+		}
+
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
