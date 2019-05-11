@@ -121,8 +121,8 @@ void FullscreenMenuMultiPlayer::internet_login() {
 	register_ = s.get_bool("registered", false);
 
 	if (nickname_.empty() || nickname_.find_first_not_of(
-	                           "abcdefghijklmnopqrstuvwxyz"
-	                           "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= nickname_.size()) {
+	                            "abcdefghijklmnopqrstuvwxyz"
+	                            "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= nickname_.size()) {
 		show_internet_login();
 		return;
 	}
