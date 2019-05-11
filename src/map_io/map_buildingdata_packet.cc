@@ -65,7 +65,7 @@ constexpr uint16_t kCurrentPacketPFBuilding = 1;
 // Responsible for warehouses and expedition bootstraps
 constexpr uint16_t kCurrentPacketVersionWarehouse = 7;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
-constexpr uint16_t kCurrentPacketVersionProductionsite = 6;
+constexpr uint16_t kCurrentPacketVersionProductionsite = 7;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;
 
 void MapBuildingdataPacket::read(FileSystem& fs,
@@ -710,6 +710,12 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				productionsite.statistics_[i] = fr.unsigned_8();
 			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
 			productionsite.production_result_ = fr.c_string();
+
+			if (kCurrentPacketVersionProductionsite >= 7) {
+				productionsite.main_worker_ = fr.signed_32();
+			} else {
+				productionsite.main_worker_ = productionsite.working_positions_[0].worker ? 0 : -1;
+			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Productionsite", packet_version,
 			                            kCurrentPacketVersionProductionsite);
@@ -1173,6 +1179,8 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 		fw.unsigned_8(productionsite.statistics_[i]);
 	fw.string(productionsite.statistics_string_on_changed_statistics_);
 	fw.string(productionsite.production_result());
+
+	fw.signed_32(productionsite.main_worker_);
 }
 
 /*
