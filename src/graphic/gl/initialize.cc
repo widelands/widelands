@@ -24,6 +24,7 @@
 
 #include <SDL.h>
 #include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 #include <boost/regex.hpp>
 
 #include "base/i18n.h"
@@ -215,9 +216,11 @@ SDL_GLContext initialize(
 		    (major_shading_language_version == 1 && minor_shading_language_version < 20)) {
 			show_opengl_error_and_exit("Widelands won’t work because your graphics driver is too old.\n"
 									   "The shading language needs to be version 1.20 or newer.",
+									   (boost::format("%s\n%s") %
 									   /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font support is limited here, so do not use advanced typography **/
-									   _("Widelands won’t work because your graphics driver is too old.\n"
-										 "The shading language needs to be version 1.20 or newer."));
+									   _("Widelands won’t work because your graphics driver is too old.") %
+										/** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font support is limited here, so do not use advanced typography **/
+										_("The shading language needs to be version 1.20 or newer.")).str());
 
 		}
 	} else {
@@ -229,9 +232,11 @@ SDL_GLContext initialize(
 			if (major_shading_language_version < 2) {
 				show_opengl_error_and_exit("Widelands won’t work because your graphics driver is too old.\n"
 										   "The shading language needs to be version 1.20 or newer.",
+										   (boost::format("%s\n%s") %
 										   /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font support is limited here, so do not use advanced typography **/
-										   _("Widelands won’t work because your graphics driver is too old.\n"
-											 "The shading language needs to be version 1.20 or newer."));
+										   _("Widelands won’t work because your graphics driver is too old.") %
+											/** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font support is limited here, so do not use advanced typography **/
+											_("The shading language needs to be version 1.20 or newer.")).str());
 
 			}
 		} else {
@@ -239,9 +244,11 @@ SDL_GLContext initialize(
 			// communicating with the graphics adapter.
 			show_opengl_error_and_exit("Widelands won't work because we were unable to detect the shading language version.\n"
 									   "There is an unknown problem with reading the information from the graphics driver.",
-									   /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font support is limited here, so do not use advanced typography **/
-									   _("Widelands won't work because we were unable to detect the shading language version.\n"
-										 "There is an unknown problem with reading the information from the graphics driver."));
+									   (boost::format("%s\n%s") %
+										/** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font support is limited here, so do not use advanced typography **/
+										_("Widelands won't work because we were unable to detect the shading language version.") %
+										/** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font support is limited here, so do not use advanced typography **/
+										 _("There is an unknown problem with reading the information from the graphics driver.")).str());
 
 		}
 	}
