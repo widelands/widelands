@@ -167,7 +167,6 @@ function ware_help_consumers_string(tribe, ware_description)
 
    -- Now show consumers (buildings + workers)
    if (consumers_amount > 0) then
-
       if (consumers_amount == 1) then
          -- TRANSLATORS: Ware Encyclopedia: Heading for 1 building and / or worker that consumes a ware
          result = result .. h2(_"Consumer")

@@ -660,7 +660,6 @@ function building_help_crew_string(tribe, building_description)
       if (number_of_workers > 0) then
          local tool_string = help_tool_string(tribe, toolnames, number_of_workers)
          if (tool_string ~= "") then
-
             if (number_of_workers == 1) then
                -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
                result = result .. h3(_"Worker uses:")
