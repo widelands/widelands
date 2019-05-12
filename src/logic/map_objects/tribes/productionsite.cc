@@ -566,17 +566,18 @@ int ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes)
 void ProductionSite::remove_worker(Worker& w) {
 	molog("%s leaving\n", w.descr().name().c_str());
 	WorkingPosition* wp = working_positions_;
+	int32_t wp_index = 0;
 
 	for (const auto& temp_wp : descr().working_positions()) {
 		DescriptionIndex const worker_index = temp_wp.first;
-		for (uint32_t j = temp_wp.second; j; --j, ++wp) {
+		for (uint32_t j = temp_wp.second; j; --j, ++wp, ++wp_index) {
 			Worker* const worker = wp->worker;
 			if (worker && worker == &w) {
 				// do not request the type of worker that is currently assigned - maybe a trained worker
 				// was
 				// evicted to make place for a level 0 worker.
 				// Therefore we again request the worker from the WorkingPosition of descr()
-				if (main_worker_ == worker_index) {
+				if (main_worker_ == wp_index) {
 					main_worker_ = -1;
 				}
 				*wp = WorkingPosition(&request_worker(worker_index), nullptr);
