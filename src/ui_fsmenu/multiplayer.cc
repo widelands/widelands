@@ -73,19 +73,11 @@ void FullscreenMenuMultiPlayer::show_internet_login() {
 	if (lb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		nickname_ = lb.get_nickname();
 		s.set_string("nickname", nickname_);
-		/// NOTE: The password is only stored (in memory and on disk) and transmitted (over the
-		/// network
-		/// to the metaserver) as cryptographic hash. This does NOT mean that the password is
-		/// stored
-		/// securely on the local disk. While the password should be secure while transmitted to
-		/// the
-		/// metaserver (no-one can use the transmitted data to log in as the user) this is not the
-		/// case
-		/// for local storage. The stored hash of the password makes it hard to look at the
-		/// configuration
-		/// file and figure out the plaintext password to, e.g., log in on the forum. However, the
-		/// stored hash can be copied to another system and used to log in as the user on the
-		/// metaserver.
+		// NOTE: The password is only stored (in memory and on disk) and transmitted (over the network to the metaserver) as cryptographic hash.
+		// This does NOT mean that the password is stored securely on the local disk.
+		// While the password should be secure while transmitted to the metaserver (no-one can use the transmitted data to log in as the user) this is not the case for local storage.
+		// The stored hash of the password makes it hard to look at the configuration file and figure out the plaintext password to, e.g., log in on the forum.
+		// However, the stored hash can be copied to another system and used to log in as the user on the metaserver.
 		// Further note: SHA-1 is considered broken and shouldn't be used anymore. But since the
 		// passwords on the server are protected by SHA-1 we have to use it here, too
 		if (lb.get_password() != "*****") {
