@@ -552,6 +552,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
                                                 MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
+		// TODO(GunChleoc): Savegame compatibility, remove after Build 21.
 		if (packet_version >= 5 && packet_version <= kCurrentPacketVersionProductionsite) {
 			ProductionSite::WorkingPosition& wp_begin = *productionsite.working_positions_;
 			const ProductionSiteDescr& pr_descr = productionsite.descr();
@@ -711,6 +712,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
 			productionsite.production_result_ = fr.c_string();
 
+			// TODO(GunChleoc): Savegame compatibility, remove after Build 21.
 			if (kCurrentPacketVersionProductionsite >= 7) {
 				productionsite.main_worker_ = fr.signed_32();
 			} else {
