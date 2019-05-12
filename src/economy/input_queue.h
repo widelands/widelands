@@ -24,7 +24,6 @@
 
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/wareworker.h"
-#include "logic/widelands.h"
 
 namespace Widelands {
 

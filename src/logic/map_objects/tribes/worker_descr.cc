@@ -37,7 +37,7 @@ namespace Widelands {
 WorkerDescr::WorkerDescr(const std::string& init_descname,
                          MapObjectType init_type,
                          const LuaTable& table,
-                         const EditorGameBase& egbase)
+                         const Tribes& tribes)
    : BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table),
      ware_hotspot_(table.has_key("ware_hotspot") ?
                       table.get_vector<std::string, int>("ware_hotspot") :
@@ -49,11 +49,10 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
      // Read what the worker can become and the needed experience. If one of the keys is there, the
      // other key must be there too. So, we cross the checks to trigger an exception if this is
      // violated.
-     becomes_(table.has_key("experience") ?
-                 egbase.tribes().safe_worker_index(table.get_string("becomes")) :
-                 INVALID_INDEX),
+     becomes_(table.has_key("experience") ? tribes.safe_worker_index(table.get_string("becomes")) :
+                                            INVALID_INDEX),
      needed_experience_(table.has_key("becomes") ? table.get_int("experience") : INVALID_INDEX),
-     egbase_(egbase) {
+     tribes_(tribes) {
 	if (helptext_script().empty()) {
 		throw GameDataError("Worker %s has no helptext script", name().c_str());
 	}
@@ -64,7 +63,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	std::unique_ptr<LuaTable> items_table;
 
 	if (table.has_key("buildcost")) {
-		const Tribes& tribes = egbase_.tribes();
 		items_table = table.get_table("buildcost");
 		for (const std::string& key : items_table->keys<std::string>()) {
 			try {
@@ -112,8 +110,8 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 				if (programs_.count(program_name))
 					throw wexception("this program has already been declared");
 
-				programs_[program_name] = std::unique_ptr<WorkerProgram>(
-				   new WorkerProgram(program_name, *this, egbase_.tribes()));
+				programs_[program_name] =
+				   std::unique_ptr<WorkerProgram>(new WorkerProgram(program_name, *this, tribes_));
 				programs_[program_name]->parse(*programs_table->get_table(program_name));
 			} catch (const std::exception& e) {
 				throw wexception("program %s: %s", program_name.c_str(), e.what());
@@ -124,8 +122,8 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 
 WorkerDescr::WorkerDescr(const std::string& init_descname,
                          const LuaTable& table,
-                         const EditorGameBase& egbase)
-   : WorkerDescr(init_descname, MapObjectType::WORKER, table, egbase) {
+                         const Tribes& tribes)
+   : WorkerDescr(init_descname, MapObjectType::WORKER, table, tribes) {
 }
 
 WorkerDescr::~WorkerDescr() {
@@ -173,19 +171,19 @@ Bob& WorkerDescr::create_object() const {
  * check if worker can be substitute for a requested worker type
  */
 bool WorkerDescr::can_act_as(DescriptionIndex const index) const {
-	assert(egbase_.tribes().worker_exists(index));
+	assert(tribes_.worker_exists(index));
 	if (index == worker_index()) {
 		return true;
 	}
 
 	// if requested worker type can be promoted, compare with that type
-	const WorkerDescr& descr = *egbase_.tribes().get_worker_descr(index);
+	const WorkerDescr& descr = *tribes_.get_worker_descr(index);
 	DescriptionIndex const becomes_index = descr.becomes();
 	return becomes_index != INVALID_INDEX ? can_act_as(becomes_index) : false;
 }
 
 DescriptionIndex WorkerDescr::worker_index() const {
-	return egbase_.tribes().worker_index(name());
+	return tribes_.worker_index(name());
 }
 
 void WorkerDescr::add_employer(const DescriptionIndex& building_index) {

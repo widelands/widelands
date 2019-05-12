@@ -48,8 +48,8 @@ public:
 	WorkerDescr(const std::string& init_descname,
 	            MapObjectType type,
 	            const LuaTable& table,
-	            const EditorGameBase& egbase);
-	WorkerDescr(const std::string& init_descname, const LuaTable& t, const EditorGameBase& egbase);
+	            const Tribes& tribes);
+	WorkerDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
 	~WorkerDescr() override;
 
 	Bob& create_object() const override;
@@ -144,8 +144,8 @@ private:
 	/// Buildings where this worker can work
 	std::set<DescriptionIndex> employers_;
 
-	const EditorGameBase& egbase_;
-
+private:
+	const Tribes& tribes_;
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);
 };
 }  // namespace Widelands

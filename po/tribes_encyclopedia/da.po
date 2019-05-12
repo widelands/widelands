@@ -4,15 +4,15 @@
 # Translators:
 # Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007
 # GunChleoc, 2016
-# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2017
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2017,2019
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-03 08:14+0000\n"
-"PO-Revision-Date: 2019-02-03 08:20+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-04-22 05:17+0000\n"
+"PO-Revision-Date: 2019-04-26 09:56+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -94,7 +94,7 @@ msgid ""
 "A building is being dismantled at this dismantle site, returning some of the"
 " resources that were used during this building’s construction to your "
 "tribe’s stores."
-msgstr ""
+msgstr "En bygning er ved at blive taget ned på denne byggeplads. Det returnerer nogle af de ressourser, der blev brugt under bygningen til din stammes lagre."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/helptexts.lua:16
@@ -371,6 +371,7 @@ msgstr "Væver silkeklæde til bygninger og til skibssejl, og våbenkjortler til
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:13
 #: ../../data/tribes/buildings/productionsites/empire/well/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:13
 msgctxt "building"
 msgid "Draws water out of the deep."
 msgstr "Trækker vand ud af undergrunden."
@@ -466,7 +467,7 @@ msgstr "Barbarernes økseværksted er det mellemste niveau i en serie af tre byg
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
 #: ../../data/tribes/scripting/help/global_helptexts.lua:69
@@ -555,7 +556,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Ages ago, the Barbarians learned to delve into mountainsides for that black "
 "material that feeds their furnaces."
-msgstr ""
+msgstr "For mange år siden lærte barbarerne sig at grave sig dybt ned i bjergsiderne efter det sorte kul som føder deres ovne."
 
 #. TRANSLATORS: Lore helptext for a coal mine building, part 2
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:6
@@ -565,7 +566,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Wood may serve for a household fire and to keep you warm, but when it comes "
 "to working with iron or gold, there is no way around coal."
-msgstr ""
+msgstr "Træ kan bruges til hjemmenes ild og til at holde dig varm, men når det kommer til arbejde med jern eller guld, er der ingen vej uden om kul."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:22
@@ -752,7 +753,7 @@ msgid ""
 "This phrase was the reply Rimbert the miner – later known as Rimbert the "
 "loner – gave, when he was asked to remain seated on an emergency meeting at "
 "Stonford in the year of the great flood."
-msgstr ""
+msgstr "Denne frase var svaret Rimbert Minearbejder - senere kendt som Rimbert den Ensomme - gav, da han blev bedt om at blive siddende på et krisemøde i Stonford i året for den store oversvømmelse."
 
 #. TRANSLATORS: Lore author helptext for a granite mine building, part 2
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:12
@@ -760,7 +761,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The same man had all the 244 granite blocks ready only a week later, and "
 "they still fortify the city’s levee."
-msgstr ""
+msgstr "Den samme mand havde alle de 244 granitblokke klar en uge senere, og de befæster stadig byens dæmning."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:18
@@ -1162,7 +1163,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Song written by Sigurd the Bard when the first rain fell after the Great "
 "Drought in the 21st year of Chat’Karuth’s reign."
-msgstr ""
+msgstr "Sang skrevet af Sigurd the Bardda den første regn faldt efter Den Store Tørke i det 21. år i Chat'Karuths rige."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
@@ -1373,19 +1374,19 @@ msgstr "Fremstiller vin."
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/helptexts.lua:6
 msgctxt "frisians_building"
 msgid "Why on earth shouldn’t we be able to catch fish even in the desert?"
-msgstr ""
+msgstr "Hvorfor i alverden skulle vi ikke kunne fange fisk i ørkenen?"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "The fisherman who invented aqua farming"
-msgstr ""
+msgstr "Fiskeren der opfandt vandlandbrug"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/helptexts.lua:16
 msgctxt "building"
 msgid "Breeds fish as food for soldiers and miners."
-msgstr ""
+msgstr "Avler fisk som fødekilde for soldater og minearbejdere."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/helptexts.lua:21
@@ -1393,7 +1394,7 @@ msgctxt "building"
 msgid ""
 "The aqua farm needs holes in the ground that were dug by a clay pit’s worker"
 " nearby to use as fishing ponds."
-msgstr ""
+msgstr "Vandlandbruget kræver huller i jorden, gravet af en lerkassearbejder i nærheden for at bruge fiskedamme."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:6
@@ -1447,7 +1448,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A baker"
-msgstr ""
+msgstr "En bager"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:13
@@ -1570,7 +1571,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:13
 msgctxt "building"
 msgid "Forges tools to equip new workers."
-msgstr ""
+msgstr "Fremstiller værktøj til nye arbejdere."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:23
@@ -2014,19 +2015,19 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A stonemason"
-msgstr ""
+msgstr "En stenhugger"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:13
 msgctxt "frisians_building"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Udskærer rå stykker af granit fra sten i nærheden."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:18
 msgctxt "frisians_building"
 msgid "The quarry needs rocks to cut within the work area."
-msgstr ""
+msgstr "Stenbruddet kræver sten indenfor sin arbejdsradius."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:23
@@ -2339,7 +2340,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The well needs %s on average to produce one bucket of water."
@@ -2792,7 +2793,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a resource: Gold
 #: ../../data/tribes/immovables/resi/helptexts/gold_2.lua:7
 msgid "There is a lot of gold here."
-msgstr ""
+msgstr "Der er en masse guld her."
 
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi/helptexts/iron_1.lua:5
@@ -2803,17 +2804,17 @@ msgstr ""
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi/helptexts/iron_1.lua:7
 msgid "There is only a little bit of iron here."
-msgstr ""
+msgstr "Der er kun en smule jern her."
 
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi/helptexts/iron_2.lua:7
 msgid "There is a lot of iron here."
-msgstr ""
+msgstr "Der er en masse jern her."
 
 #. TRANSLATORS: Helptext for a resource: No resources
 #: ../../data/tribes/immovables/resi/helptexts/none.lua:4
 msgid "There are no resources in the ground here."
-msgstr ""
+msgstr "Der er ingen ressourcer i jorden her."
 
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:5
@@ -2901,58 +2902,58 @@ msgstr "%s og"
 msgid "Food:"
 msgstr "Mad:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:157
+#: ../../data/tribes/scripting/help/building_help.lua:158
 msgid "Equipment:"
 msgstr "Udstyr:"
 
 #. TRANSLATORS: Heading for a flavour text in the building help.
-#: ../../data/tribes/scripting/help/building_help.lua:180
+#: ../../data/tribes/scripting/help/building_help.lua:181
 msgid "Lore"
 msgstr "Folkeminde"
 
-#: ../../data/tribes/scripting/help/building_help.lua:201
+#: ../../data/tribes/scripting/help/building_help.lua:202
 #: ../../data/tribes/scripting/help/init.lua:59
 #: ../../data/tribes/scripting/help/tips.lua:49
 msgid "General"
 msgstr "Generelt"
 
-#: ../../data/tribes/scripting/help/building_help.lua:202
+#: ../../data/tribes/scripting/help/building_help.lua:203
 msgid "Purpose:"
 msgstr "Formål:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:230
-#: ../../data/tribes/scripting/help/building_help.lua:463
+#: ../../data/tribes/scripting/help/building_help.lua:231
+#: ../../data/tribes/scripting/help/building_help.lua:462
 msgid "Note:"
 msgstr "Note:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:235
+#: ../../data/tribes/scripting/help/building_help.lua:236
 msgid "Work area radius:"
 msgstr "Arbejdsradius:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:239
-#: ../../data/tribes/scripting/help/building_help.lua:244
+#: ../../data/tribes/scripting/help/building_help.lua:240
+#: ../../data/tribes/scripting/help/building_help.lua:245
 msgid "Healing:"
 msgstr "Helbredstræning:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:240
-#: ../../data/tribes/scripting/help/building_help.lua:245
+#: ../../data/tribes/scripting/help/building_help.lua:241
+#: ../../data/tribes/scripting/help/building_help.lua:246
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
 msgstr[0] "Garnisonssoldater heler med %d point per sekund."
 msgstr[1] "Garnisonssoldater heler med %d point per sekund."
 
-#: ../../data/tribes/scripting/help/building_help.lua:241
-#: ../../data/tribes/scripting/help/building_help.lua:247
+#: ../../data/tribes/scripting/help/building_help.lua:242
+#: ../../data/tribes/scripting/help/building_help.lua:248
 msgid "Conquer range:"
 msgstr "Erobringsafstand:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:246
-#: ../../data/tribes/scripting/help/building_help.lua:250
+#: ../../data/tribes/scripting/help/building_help.lua:247
+#: ../../data/tribes/scripting/help/building_help.lua:251
 msgid "Capacity:"
 msgstr "Kapacitet:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:252
+#: ../../data/tribes/scripting/help/building_help.lua:253
 msgid "Vision range:"
 msgstr "Synsfelt:"
 
@@ -2962,160 +2963,160 @@ msgstr "%1$s fra: %2$s"
 
 #. TRANSLATORS: Heading in the building help for wares that a building accepts
 #. (e.g. wheat for a mill).
-#: ../../data/tribes/scripting/help/building_help.lua:284
+#: ../../data/tribes/scripting/help/building_help.lua:283
 msgid "Incoming:"
 msgstr "Indgående:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:288
+#: ../../data/tribes/scripting/help/building_help.lua:287
 msgid "Collects:"
 msgstr "Indsamlinger:"
 
 #. TRANSLATORS: This is a verb (The miner mines)
-#: ../../data/tribes/scripting/help/building_help.lua:300
+#: ../../data/tribes/scripting/help/building_help.lua:299
 msgid "Mines:"
 msgstr "Miner:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:320
+#: ../../data/tribes/scripting/help/building_help.lua:319
 msgid "Produces:"
 msgstr "Fremstiller:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:362
+#: ../../data/tribes/scripting/help/building_help.lua:361
 msgid "Outgoing:"
 msgstr "Udgående:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:364
+#: ../../data/tribes/scripting/help/building_help.lua:363
 msgid "None"
 msgstr "Intet"
 
-#: ../../data/tribes/scripting/help/building_help.lua:365
+#: ../../data/tribes/scripting/help/building_help.lua:364
 msgid "Dependencies"
 msgstr "Afhængigheder"
 
-#: ../../data/tribes/scripting/help/building_help.lua:381
+#: ../../data/tribes/scripting/help/building_help.lua:380
 msgid "Health Training"
 msgstr "Helbredstræning"
 
-#: ../../data/tribes/scripting/help/building_help.lua:382
+#: ../../data/tribes/scripting/help/building_help.lua:381
 msgid "Trains ‘Health’ from %1% up to %2%"
 msgstr "Træner helbred fra %1% op til %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:384
-#: ../../data/tribes/scripting/help/building_help.lua:398
-#: ../../data/tribes/scripting/help/building_help.lua:410
-#: ../../data/tribes/scripting/help/building_help.lua:423
+#: ../../data/tribes/scripting/help/building_help.lua:383
+#: ../../data/tribes/scripting/help/building_help.lua:397
+#: ../../data/tribes/scripting/help/building_help.lua:409
+#: ../../data/tribes/scripting/help/building_help.lua:422
 msgid "Soldiers:"
 msgstr "Soldater:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:394
+#: ../../data/tribes/scripting/help/building_help.lua:393
 msgid "Attack Training"
 msgstr "Angrebstræning"
 
 #. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
 #. numbers.
-#: ../../data/tribes/scripting/help/building_help.lua:396
+#: ../../data/tribes/scripting/help/building_help.lua:395
 msgid "Trains ‘Attack’ from %1% up to %2%"
 msgstr "Træner angreb fra %1% op til %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:407
+#: ../../data/tribes/scripting/help/building_help.lua:406
 msgid "Defense Training"
 msgstr "Forsvarstræning"
 
-#: ../../data/tribes/scripting/help/building_help.lua:408
+#: ../../data/tribes/scripting/help/building_help.lua:407
 msgid "Trains ‘Defense’ from %1% up to %2%"
 msgstr "Træner forsvar fra %1% op til %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:420
+#: ../../data/tribes/scripting/help/building_help.lua:419
 msgid "Evade Training"
 msgstr "Undvigelsestræning"
 
-#: ../../data/tribes/scripting/help/building_help.lua:421
+#: ../../data/tribes/scripting/help/building_help.lua:420
 msgid "Trains ‘Evade’ from %1% up to %2%"
 msgstr "Træner undvigelse fra %1% op til %2%"
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.
-#: ../../data/tribes/scripting/help/building_help.lua:448
+#: ../../data/tribes/scripting/help/building_help.lua:447
 msgid "Building"
 msgstr "Bygning"
 
-#: ../../data/tribes/scripting/help/building_help.lua:464
+#: ../../data/tribes/scripting/help/building_help.lua:463
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr "Denne bygning kan enten bygges direkte eller dannes ved at forbedre en anden bygning."
 
-#: ../../data/tribes/scripting/help/building_help.lua:470
+#: ../../data/tribes/scripting/help/building_help.lua:469
 msgid "Direct build cost:"
 msgstr "Direkte byggepris:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:472
+#: ../../data/tribes/scripting/help/building_help.lua:471
 #: ../../data/tribes/scripting/help/immovable_help.lua:50
 msgid "Build cost:"
 msgstr "Byggepris:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:483
+#: ../../data/tribes/scripting/help/building_help.lua:482
 msgid "Or enhanced from:"
 msgstr "Eller forbedret fra:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:485
+#: ../../data/tribes/scripting/help/building_help.lua:484
 msgid "Enhanced from:"
 msgstr "Forbedret fra:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:494
+#: ../../data/tribes/scripting/help/building_help.lua:493
 msgid "Cumulative cost:"
 msgstr "Samlet omkostning:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:539
-#: ../../data/tribes/scripting/help/building_help.lua:588
+#: ../../data/tribes/scripting/help/building_help.lua:538
+#: ../../data/tribes/scripting/help/building_help.lua:587
 msgid "Unknown"
 msgstr "Ukendt"
 
-#: ../../data/tribes/scripting/help/building_help.lua:544
+#: ../../data/tribes/scripting/help/building_help.lua:543
 msgid "If built directly, dismantle yields:"
 msgstr "Hvis bygget direkte giver nedrivning:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:549
+#: ../../data/tribes/scripting/help/building_help.lua:548
 msgid "If enhanced, dismantle yields:"
 msgstr "Hvis forbedret giver nedrivning:"
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
-#: ../../data/tribes/scripting/help/building_help.lua:552
-#: ../../data/tribes/scripting/help/building_help.lua:593
+#: ../../data/tribes/scripting/help/building_help.lua:551
+#: ../../data/tribes/scripting/help/building_help.lua:592
 msgid "Dismantle yields:"
 msgstr "Nedrivning giver:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:602
+#: ../../data/tribes/scripting/help/building_help.lua:601
 msgid "Can be enhanced to:"
 msgstr "Kan forbedres til:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:632
+#: ../../data/tribes/scripting/help/building_help.lua:631
 msgid "Crew required:"
 msgstr "Bemanding krævet:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:632
+#: ../../data/tribes/scripting/help/building_help.lua:631
 #: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "Arbejdere"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-#: ../../data/tribes/scripting/help/building_help.lua:654
+#: ../../data/tribes/scripting/help/building_help.lua:653
 #, lua-format
 msgid "%s or better"
 msgstr "%s eller bedre"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-#: ../../data/tribes/scripting/help/building_help.lua:665
+#: ../../data/tribes/scripting/help/building_help.lua:664
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "Arbejder bruger:"
 msgstr[1] "Arbejdere bruger:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:690
+#: ../../data/tribes/scripting/help/building_help.lua:689
 msgid "Production"
 msgstr "Produktion"
 
-#: ../../data/tribes/scripting/help/building_help.lua:691
+#: ../../data/tribes/scripting/help/building_help.lua:690
 msgid "Performance:"
 msgstr "Ydelse:"
 
@@ -3490,27 +3491,27 @@ msgstr "Slet"
 #. TRANSLATORS: Heading in "Controls" help
 #: ../../data/tribes/scripting/help/controls.lua:109
 msgid "Ship Statistics"
-msgstr ""
+msgstr "Skibstatistik"
 
 #: ../../data/tribes/scripting/help/controls.lua:112
 msgid "Show all ships"
-msgstr ""
+msgstr "Vis alle skibe"
 
 #: ../../data/tribes/scripting/help/controls.lua:114
 msgid "Show idle ships"
-msgstr ""
+msgstr "Vis ledige skibe"
 
 #: ../../data/tribes/scripting/help/controls.lua:116
 msgid "Show ships shipping wares and workers"
-msgstr ""
+msgstr "Vis skibe med varer og arbejdere"
 
 #: ../../data/tribes/scripting/help/controls.lua:118
 msgid "Show waiting expeditions"
-msgstr ""
+msgstr "Vis afventende ekspeditioner"
 
 #: ../../data/tribes/scripting/help/controls.lua:120
 msgid "Show scouting expeditions"
-msgstr ""
+msgstr "Vis spejderekspeditioner"
 
 #: ../../data/tribes/scripting/help/controls.lua:122
 msgid "Show expeditions that have found a port space or are founding a colony"
@@ -3519,22 +3520,22 @@ msgstr ""
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:124
 msgid "Center the map on the selected ship"
-msgstr ""
+msgstr "Centrer kortet på det valgte skib"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:126
 msgid "Open the selected ship’s window"
-msgstr ""
+msgstr "Åbn det valgte skibs vindue"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:128
 msgid "Go to the selected ship and open its window"
-msgstr ""
+msgstr "Gå til det valgte skib og åbn dets vindue"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:130
 msgid "Watch the selected ship"
-msgstr ""
+msgstr "Overvåg det valgte skib"
 
 #. TRANSLATORS: Space on the map required for building a building there
 #: ../../data/tribes/scripting/help/format_help.lua:54
@@ -3626,11 +3627,11 @@ msgstr "%1% og %2%"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:48
 msgid "Requirements"
-msgstr ""
+msgstr "Krav"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:59
 msgid "Preferred Terrains"
-msgstr ""
+msgstr "Foretrukne terræner"
 
 #: ../../data/tribes/scripting/help/init.lua:64
 msgid "Introduction"
@@ -3651,7 +3652,7 @@ msgstr "Bygninger"
 
 #: ../../data/tribes/scripting/help/init.lua:106
 msgid "Immovables"
-msgstr ""
+msgstr "Faste"
 
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
@@ -3671,7 +3672,7 @@ msgstr "Imperiet"
 
 #: ../../data/tribes/scripting/help/tips.lua:63
 msgid "Frisians"
-msgstr ""
+msgstr "Friserne"
 
 #: ../../data/tribes/scripting/help/tips.lua:69
 msgid "Single Player"
@@ -5986,25 +5987,25 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/fruit_collector/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Gathers berries."
-msgstr ""
+msgstr "Samler bær."
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/frisians/geologist/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Opdager ressourcer der kan graves op."
 
 #. TRANSLATORS: Helptext for a worker: Hunter
 #: ../../data/tribes/workers/frisians/hunter/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
-msgstr ""
+msgstr "Jægeren skaffer frisk råt kød til kolonisterne."
 
 #. TRANSLATORS: Helptext for a worker: Landlady
 #: ../../data/tribes/workers/frisians/landlady/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Prepares rations and meals for miners and scouts."
-msgstr ""
+msgstr "Tilbereder rationer til minearbejdere og spejdere."
 
 #. TRANSLATORS: Helptext for a worker: Miner
 #. TRANSLATORS: Helptext for a worker: Master Miner
@@ -6012,13 +6013,13 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/miner_master/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or granite."
-msgstr ""
+msgstr "Arbejder dybt i minerne for at grave kul, jern, guld og granit op."
 
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../data/tribes/workers/frisians/reed_farmer/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Grows thatch reed."
-msgstr ""
+msgstr "Avler strå."
 
 #. TRANSLATORS: Helptext for a worker: Reindeer
 #: ../../data/tribes/workers/frisians/reindeer/helptexts.lua:3
