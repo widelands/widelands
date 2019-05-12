@@ -38,7 +38,6 @@ constexpr int kColumns = 5;
 constexpr int kButtonHeight = 20;
 constexpr int kButtonRowHeight = kButtonHeight + kMargin;
 constexpr int kLabelHeight = 18;
-constexpr int kTabHeight = 35 + 5 * (kBuildGridCellHeight + kLabelHeight + kLabelHeight);
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellWidth;
 
 constexpr int32_t kUpdateTimeInGametimeMs = 1000;  //  1 second, gametime

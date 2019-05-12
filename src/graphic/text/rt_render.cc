@@ -52,10 +52,7 @@
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 
-namespace RT {
-
-static const uint16_t INFINITE_WIDTH = 65535;  // 2^16-1
-
+namespace {
 /**
  * This function replaces some HTML entities in strings, e.g. &nbsp;.
  * It is used by the renderer after the tags have been parsed.
@@ -66,6 +63,11 @@ void replace_entities(std::string* text) {
 	boost::replace_all(*text, "&nbsp;", " ");
 	boost::replace_all(*text, "&amp;", "&");  // Must be performed last
 }
+} // namespace
+
+namespace RT {
+
+static const uint16_t INFINITE_WIDTH = 65535;  // 2^16-1
 
 // Helper Stuff
 struct Borders {
@@ -986,7 +988,7 @@ public:
 	   : RenderNode(ns),
 	     image_(image),
 	     filename_(""),
-	     scale_(1.0f),
+	     scale_(1.0),
 	     color_(RGBColor(0, 0, 0)),
 	     use_playercolor_(false) {
 		check_size();
@@ -1117,7 +1119,7 @@ void TagHandler::make_text_nodes(const std::string& txt,
 			word = ts.till_any_or_end(" \t\n\r");
 			ns.fontset = i18n::find_fontset(word.c_str(), fontsets_);
 			if (!word.empty()) {
-				RT::replace_entities(&word);
+				replace_entities(&word);
 				bool word_is_bidi = i18n::has_rtl_character(word.c_str());
 				word = i18n::make_ligatures(word.c_str());
 				if (word_is_bidi || i18n::has_rtl_character(previous_word.c_str())) {
@@ -1160,7 +1162,7 @@ void TagHandler::make_text_nodes(const std::string& txt,
 			word = ts.till_any_or_end(" \t\n\r");
 			ns.fontset = i18n::find_fontset(word.c_str(), fontsets_);
 			if (!word.empty()) {
-				RT::replace_entities(&word);
+				replace_entities(&word);
 				word = i18n::make_ligatures(word.c_str());
 				if (i18n::has_script_character(word.c_str(), UI::FontSets::Selector::kCJK)) {
 					std::vector<std::string> units = i18n::split_cjk_word(word.c_str());
