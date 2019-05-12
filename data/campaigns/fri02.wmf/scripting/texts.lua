@@ -243,7 +243,7 @@ aqua_farm_4 = {
    title =_ "Recruiting",
    body=reebaud(_"Our economy is complete",
       -- TRANSLATORS: Reebaud – Aqua Farms 4
-      _([[You are right – we should build more berry farms, collector’s houses and taverns as well as a drinking hall, and advanced bakeries and breweries.]])
+      _([[You are right – we should build more berry farms, fruit collector’s houses and taverns as well as a drinking hall, and advanced bakeries and breweries.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Aqua Farms 4
       _([[However, we can already start focusing on recruiting and training soldiers. We can now afford to use metal for weapons, helmets and garments. I propose building armor smithies, a barracks, a training arena and a tailor’s shop now.]])),

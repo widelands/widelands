@@ -231,7 +231,7 @@ food_2 = {
       _([[Well done. The miners are satisfied and have started working again.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – better food
-      _([[But when the mines will have to be expanded, rations won’t keep the miners happy. Better take precautions – build a second tavern, then consider enhancing one to a drinking hall.]])
+      _([[But when the mines will have to be enhanced, rations won’t keep the miners happy. Better take precautions – build a second tavern, then consider enhancing one to a drinking hall.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – better food
       _([[A drinking hall needs better food. Build a bakery, a brewery, and two or three farms to start growing barley. Keep in mind that barley grows very slowly; therefore, these few farms won’t suffice when we actually need the bread and beer. We should keep expanding quickly to have more space for farming.]])
