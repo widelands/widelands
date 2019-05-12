@@ -38,9 +38,9 @@
 namespace {
 
 // Constants for convert_clienttype() / compare_clienttype()
-const uint8_t kClientUnregistered = 0;
+const uint8_t kClientSuperuser = 0;
 const uint8_t kClientRegistered = 1;
-const uint8_t kClientSuperuser = 2;
+const uint8_t kClientUnregistered = 2;
 // 3 was INTERNET_CLIENT_BOT which is not used
 const uint8_t kClientIRC = 4;
 }  // namespace
@@ -165,6 +165,9 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	// try to connect to the metaserver
 	if (!InternetGaming::ref().error() && !InternetGaming::ref().logged_in())
 		connect_to_metaserver();
+
+	// set focus to chat input
+	chat.focus_edit();
 }
 
 void FullscreenMenuInternetLobby::layout() {
@@ -193,6 +196,10 @@ void FullscreenMenuInternetLobby::think() {
 
 	if (InternetGaming::ref().update_for_games()) {
 		fill_games_list(InternetGaming::ref().games());
+	}
+	// unfocus chat window when other UI element has focus
+	if (!chat.has_focus()) {
+		chat.unfocus_edit();
 	}
 }
 
@@ -305,6 +312,7 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 		}
 		prev_clientlist_len_ = clients->size();
 	}
+	clientsonline_list_.sort();
 }
 
 /// called when an entry of the client list was doubleclicked
@@ -327,12 +335,13 @@ void FullscreenMenuInternetLobby::client_doubleclicked(uint32_t i) {
 
 		temp += text;
 		chat.set_edit_text(temp);
-		chat.focus();
+		chat.focus_edit();
 	}
 }
 
 /// called when an entry of the server list was selected
 void FullscreenMenuInternetLobby::server_selected() {
+	// remove focus from chat
 	if (opengames_list_.has_selection()) {
 		const InternetGame* game = &opengames_list_.get_selected();
 		if (game->connectable)

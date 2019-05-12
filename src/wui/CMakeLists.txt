@@ -45,6 +45,8 @@ wl_library(wui_economy_options
     economy
     graphic
     logic
+    logic_commands
+    logic_map_objects
     notifications
     ui_basic
     wui_waresdisplay
@@ -58,7 +60,7 @@ wl_library(wui_mapview_pixelfunctions
     mapviewpixelfunctions.h
   DEPENDS
     base_geometry
-    logic
+    logic_map
     logic_widelands_geometry
 )
 
@@ -93,6 +95,7 @@ wl_library(wui_common_gamedetails
     graphic_text_layout
     io_filesystem
     logic
+    logic_constants
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
@@ -117,9 +120,9 @@ wl_library(wui_common_mapdetails
     graphic
     graphic_text_layout
     io_filesystem
-    logic
     logic_game_controller
     logic_game_settings
+    logic_map
     map_io_map_loader
     ui_basic
     wui_common_suggested_teams
@@ -145,7 +148,7 @@ wl_library(wui_mapview
     graphic
     graphic_fields_to_draw
     graphic_game_renderer
-    logic
+    logic_map
     logic_widelands_geometry
     profile
     ui_basic
@@ -164,6 +167,7 @@ wl_library(wui_waresdisplay
     graphic_fonthandler
     graphic_text_layout
     logic
+    logic_map_objects
     ui_basic
 )
 
@@ -294,10 +298,14 @@ wl_library(wui
     io_filesystem
     logic
     logic_constants
+    logic_commands
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
     logic_generic_save_handler
+    logic_map
+    logic_map_objects
+    logic_objectives
     logic_tribe_basic_info
     logic_widelands_geometry
     network

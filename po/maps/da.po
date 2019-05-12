@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
-# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2018
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2019
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-03-30 06:58+0000\n"
-"PO-Revision-Date: 2018-04-02 20:13+0000\n"
+"POT-Creation-Date: 2019-04-22 05:17+0000\n"
+"PO-Revision-Date: 2019-04-25 11:39+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -148,7 +148,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "At leve af havet er en konstant kamp, og endnu mere for indbyggerne på Den Frisiske Nordsøs kyst. Var den sidste oversvømmelse, den mest ødelæggende i menneskenes hukommelse, virkelig ikke andet end endnu et eksempel på de svære tider for alle frisiere - eller et tegn fra guderne om at en stamme som netop har slået sig ned her må finde et helt andet hjem?"
 
 #: ../../data/campaigns/campaigns.conf:86
 #: ../../data/campaigns/campaigns.conf:111
@@ -175,16 +175,16 @@ msgstr "Neptuns hævn"
 #: ../../data/campaigns/campaigns.conf:106
 #: ../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
-msgstr ""
+msgstr "Overraskelse!"
 
 #: ../../data/campaigns/campaigns.conf:129
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr ""
+msgstr "Den store oversvømmelse"
 
 #: ../../data/campaigns/campaigns.conf:134
 msgid "Colder than Ice"
-msgstr ""
+msgstr "Koldere end is"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
@@ -222,7 +222,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
-msgstr ""
+msgstr "Efter at være kommet retur står Lutius og hans mandskab over for en økonomi i ruiner. Løsning af flaskehalsene i økonomien vil være af yderste vigtighed for en tilbagevenden til imperiets storhed."
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -231,23 +231,23 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr ""
+msgstr "I 1362, blev det stille og fredelige liv for indbyggerne i De Nordlige Frisiske Øer afbrudt af en af de største oversvømmelser i menneskets erindring: Sankt Marcellus' oversvømmelse. Er det ikke andet end endnu en storm, eller et tegn fra guderne om at det frisiske samfund på Langeness-øerne ikke er velkomne."
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
 "This scenario is set in a historical context, but most of the story line is "
 "fiction."
-msgstr ""
+msgstr "Dette scenarie befinder sig i en historisk kontekst, men det meste af historielinjen er fiktion."
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr ""
+msgstr "En isvelkomst"
 
 #: ../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr ""
+msgstr "Reebaud og hans stamme er ankommet i Norden. Men deres ankomst mellem de frosne stepper og de sneklædte bjerge er mindre end velkommen ..."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15

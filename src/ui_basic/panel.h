@@ -264,8 +264,7 @@ public:
 		return flags_ & pf_can_focus;
 	}
 	bool has_focus() const {
-		assert(get_can_focus());
-		return (parent_->focus_ == this);
+		return (get_can_focus() && parent_->focus_ == this);
 	}
 	virtual void focus(bool topcaller = true);
 

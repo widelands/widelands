@@ -210,6 +210,7 @@ void StyleManager::init() {
 	add_font_style(UI::FontStyle::kTooltipHeader, *element_table, "tooltip_header");
 	add_font_style(UI::FontStyle::kTooltip, *element_table, "tooltip");
 	add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
+	add_font_style(UI::FontStyle::kWuiAttackBoxSliderLabel, *element_table, "wui_attack_box_slider_label");
 	add_font_style(UI::FontStyle::kWuiGameSpeedAndCoordinates, *element_table, "wui_game_speed_and_coordinates");
 	add_font_style(UI::FontStyle::kWuiInfoPanelHeading, *element_table, "wui_info_panel_heading");
 	add_font_style(UI::FontStyle::kWuiInfoPanelParagraph, *element_table, "wui_info_panel_paragraph");

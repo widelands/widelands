@@ -31,8 +31,8 @@
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "logic/editor_game_base.h"
-#include "logic/findbob.h"
 #include "logic/game.h"
+#include "logic/map_objects/findbob.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -294,8 +294,8 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
  */
 MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
-                                     const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, egbase),
+                                     const Tribes& tribes)
+   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, tribes),
      conquer_radius_(0),
      num_soldiers_(0),
      heal_per_second_(0) {
@@ -373,6 +373,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			      stationed % (capacity_ - stationed))
 			        .str();
 		} else {
+			/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
 			*s = (boost::format(ngettext("%u soldier", "%u soldiers", stationed)) % stationed).str();
 		}
 	} else {

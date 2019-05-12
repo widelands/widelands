@@ -119,3 +119,15 @@ void GameChatPanel::key_escape() {
 	editbox.set_text("");
 	aborted();
 }
+
+/**
+ * The mouse was clicked on this chatbox
+ */
+bool GameChatPanel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
+		focus_edit();
+		return true;
+	}
+
+	return false;
+}

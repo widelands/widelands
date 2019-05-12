@@ -622,6 +622,13 @@ return {
          shadow = true
       },
 
+      wui_attack_box_slider_label = {
+         color = wui_font_color,
+         face = wui_font_face,
+         size = 10,
+         bold = true,
+         shadow = true
+      },
       wui_info_panel_heading = {
          color = { 209, 209, 209 },
          face = wui_font_face,

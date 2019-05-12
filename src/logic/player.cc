@@ -39,10 +39,10 @@
 #include "io/filewrite.h"
 #include "logic/cmd_delete_message.h"
 #include "logic/cmd_luacoroutine.h"
-#include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/militarysite.h"
@@ -950,20 +950,18 @@ Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32
 
 // TODO(unknown): Clean this mess up. The only action we really have right now is
 // to attack, so pretending we have more types is pointless.
-void Player::enemyflagaction(Flag& flag, PlayerNumber const attacker, uint32_t const count) {
-	if (attacker != player_number())
+void Player::enemyflagaction(Flag& flag,
+                             PlayerNumber const attacker,
+                             const std::vector<Widelands::Soldier*>& soldiers) {
+	if (attacker != player_number()) {
 		log("Player (%d) is not the sender of an attack (%d)\n", attacker, player_number());
-	else if (count == 0)
-		log("enemyflagaction: count is 0\n");
-	else if (is_hostile(flag.owner())) {
+	} else if (soldiers.empty()) {
+		log("enemyflagaction: no soldiers given\n");
+	} else if (is_hostile(flag.owner())) {
 		if (Building* const building = flag.get_building()) {
 			if (const AttackTarget* attack_target = building->attack_target()) {
 				if (attack_target->can_be_attacked()) {
-					std::vector<Soldier*> attackers;
-					find_attack_soldiers(flag, &attackers, count);
-					assert(attackers.size() <= count);
-
-					for (Soldier* temp_attacker : attackers) {
+					for (Soldier* temp_attacker : soldiers) {
 						upcast(MilitarySite, ms, temp_attacker->get_location(egbase()));
 						ms->send_attacker(*temp_attacker, *building);
 					}
