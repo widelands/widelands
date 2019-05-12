@@ -5721,9 +5721,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[108] = std::abs(management_data.get_military_number_at(191)) - get_stocklevel(bo, gametime);
 			inputs[109] = (!bo.inputs.empty() && gametime > 50 * 60 * 1000 && bo.total_count() <= 1) ?
 			                 std::abs(management_data.get_military_number_at(163)) / 10 : 0;
-			// inputs[110] = (bo.outputs.size() == 1) ?
-			                 // (tribe_->get_ware_descr(bo.outputs.at(1))->default_target_quantity(tribe_->name()) -
-			                 // get_stocklevel(bo, gametime)) * std::abs(management_data.get_military_number_at(165)) / 20 : 0;
+			inputs[110] = (bo.outputs.size() == 1) ?
+			                 (tribe_->get_ware_descr(bo.outputs.at(0))->default_target_quantity(tribe_->name()) -
+			                 get_stocklevel(bo, gametime)) * std::abs(management_data.get_military_number_at(165)) / 20 : 0;
 			inputs[111] = bo.current_stats / (bo.outputs.size() + 1);
 
 			int16_t tmp_score = 0;
