@@ -36,13 +36,12 @@ Textarea::Textarea(Panel* parent,
                    Align align,
 				   const UI::FontStyleInfo& style,
 				   LayoutMode layout_mode)
-   : Panel(parent, x, y, w, h), layoutmode_(layout_mode), align_(align), style_(&style) {
+   : Panel(parent, x, y, w, h), layoutmode_(layout_mode), align_(align), text_(text), style_(&style) {
 	fixed_width_ = 0;
 	set_handle_mouse(false);
 	set_thinks(false);
 	font_scale_ = 1.0f;
 	update();
-	set_text(text);
 }
 
 Textarea::Textarea(Panel* parent,

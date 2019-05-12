@@ -629,9 +629,9 @@ void BuildingStatisticsMenu::update() {
 		uint32_t nr_unproductive = 0;
 
 		for (uint32_t l = 0; l < stats_vector.size(); ++l) {
-			if (stats_vector[l].is_constructionsite)
+			if (stats_vector[l].is_constructionsite) {
 				++nr_build;
-			else {
+			} else {
 				++nr_owned;
 				BaseImmovable& immovable = *iplayer().game().map()[stats_vector[l].pos].get_immovable();
 				if (building.type() == MapObjectType::PRODUCTIONSITE ||
@@ -656,7 +656,6 @@ void BuildingStatisticsMenu::update() {
 			}
 		}
 
-		productivity_labels_[id]->set_text(" ");
 		productivity_labels_[id]->set_visible(false);
 
 		if (building.type() == MapObjectType::PRODUCTIONSITE ||

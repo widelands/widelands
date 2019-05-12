@@ -50,7 +50,7 @@ namespace UI {
  */
 struct Textarea : public Panel {
 public:
-	Textarea(Panel* const parent,
+	explicit Textarea(Panel* const parent,
 	         int32_t x,
 	         int32_t y,
 	         uint32_t w,
@@ -58,7 +58,7 @@ public:
 	         const std::string& text = std::string(),
 	         Align align = UI::Align::kLeft,
 			 const UI::FontStyleInfo& style = g_gr->styles().font_style(FontStyle::kLabel));
-	Textarea(Panel* parent, const std::string& text = std::string(), Align align = UI::Align::kLeft,
+	explicit Textarea(Panel* parent, const std::string& text = std::string(), Align align = UI::Align::kLeft,
 			 const UI::FontStyleInfo& style = g_gr->styles().font_style(FontStyle::kLabel));
 
 	/**
