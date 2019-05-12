@@ -48,6 +48,9 @@ struct FXset {
 	 */
 	Mix_Chunk* get_fx(uint32_t random);
 
+	/// Load the sound files into memory
+	void load_sound_files();
+
 private:
 	/** Load an audio file into memory.
 	 * \param path      the effect to be loaded

@@ -342,7 +342,7 @@ std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 
 void MapObjectDescr::load_graphics() const {
 	for (const auto& temp_anim : anims_) {
-		g_gr->animations().get_animation(temp_anim.second).load_default_scale();
+		g_gr->animations().get_animation(temp_anim.second).load_default_scale_and_sounds();
 	}
 }
 

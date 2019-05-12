@@ -102,7 +102,7 @@ public:
 	                  const Rectf& destination_rect,
 	                  const RGBColor* clr,
 	                  Surface* target, float scale) const override;
-	void load_default_scale() const override;
+	void load_default_scale_and_sounds() const override;
 
 private:
 	float find_best_scale(float scale) const;
@@ -423,8 +423,11 @@ void NonPackedAnimation::blit(uint32_t time,
 	trigger_sound(time, coords);
 }
 
-void NonPackedAnimation::load_default_scale() const {
+void NonPackedAnimation::load_default_scale_and_sounds() const {
 	mipmaps_.at(1.0f)->ensure_graphics_are_loaded();
+	if (sound_effect_ != kNoSoundEffect && !SoundHandler::is_backend_disabled()) {
+		g_sh->load_fx(SoundType::kAmbient, sound_effect_);
+	}
 }
 
 }  // namespace

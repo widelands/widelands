@@ -97,7 +97,7 @@ public:
 	                  Surface* target, float scale) const = 0;
 
 	/// Load animation images into memory for default scale.
-	virtual void load_default_scale() const = 0;
+	virtual void load_default_scale_and_sounds() const = 0;
 
 protected:
 	/// Play the sound effect associated with this animation at the given time.
