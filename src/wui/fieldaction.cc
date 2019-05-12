@@ -773,7 +773,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						std::map<Widelands::TCoords<>, uint32_t> colors;
 						for (const Widelands::TCoords<>& t : map.triangles_in_region(
 								map.to_set(Widelands::Area<>(mr.location(), wa_radius)))) {
-							colors[t] = main_region.count(t) ? 0xbf7f0000 : 0x3fffffff;
+							colors[t] = main_region.count(t) ? 0xffbf3f3f : 0x7fffffff;
 						}
 						ibase().show_workarea(wa, mr.location(), colors);
 						overlapping_workareas_.insert(mr.location());
