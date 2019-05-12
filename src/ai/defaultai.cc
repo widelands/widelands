@@ -2458,9 +2458,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 		if (!bo.buildable(*player_)) {
 			bo.new_building = BuildingNecessity::kNotNeeded;
-			// TODO Hessenfarmer: Add the buildings if they are allowed again
+			// TODO(Hessenfarmer): Add the buildings if they are allowed again
 			// This line removes buildings from basic econmy if they are not allowed for the player
-			// this should only happen by scripting. 
+			// this should only happen by scripting.
 			if (bo.basic_amount) {
 				persistent_data->remaining_basic_buildings.erase(bo.id);
 			}
