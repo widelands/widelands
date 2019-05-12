@@ -147,7 +147,7 @@ public:
 		return result;
 	}
 
-	/// Returns all files in the given 'directory' that match 'basename[_\d{1,3}].extension'
+	/// Returns all files in the given 'directory' that match 'basename' followed by 1-3 numbers, followed by '.', followed by 'extension'
 	std::vector<std::string> get_sequential_files(const std::string& directory, const std::string& basename, const std::string& extension) const;
 
 	virtual unsigned long long disk_space() = 0;
