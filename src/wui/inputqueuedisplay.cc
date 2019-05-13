@@ -205,13 +205,13 @@ void InputQueueDisplay::update_priority_buttons() {
 
 	int32_t priority = building_.get_priority(type_, index_, false);
 	switch (priority) {
-	case HIGH_PRIORITY:
+	case Widelands::kPriorityHigh:
 		priority_radiogroup_->set_state(0);
 		break;
-	case DEFAULT_PRIORITY:
+	case Widelands::kPriorityNormal:
 		priority_radiogroup_->set_state(1);
 		break;
-	case LOW_PRIORITY:
+	case Widelands::kPriorityLow:
 		priority_radiogroup_->set_state(2);
 		break;
 	default:
@@ -294,13 +294,13 @@ void InputQueueDisplay::radiogroup_changed(int32_t state) {
 
 	switch (state) {
 	case 0:
-		priority = HIGH_PRIORITY;
+		priority = Widelands::kPriorityHigh;
 		break;
 	case 1:
-		priority = DEFAULT_PRIORITY;
+		priority = Widelands::kPriorityNormal;
 		break;
 	case 2:
-		priority = LOW_PRIORITY;
+		priority = Widelands::kPriorityLow;
 		break;
 	default:
 		return;

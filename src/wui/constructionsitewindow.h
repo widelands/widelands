@@ -20,8 +20,14 @@
 #ifndef WL_WUI_CONSTRUCTIONSITEWINDOW_H
 #define WL_WUI_CONSTRUCTIONSITEWINDOW_H
 
+#include <vector>
+
 #include "logic/map_objects/tribes/constructionsite.h"
+#include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/progressbar.h"
+#include "ui_basic/spinbox.h"
+#include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
 
 /**
@@ -40,8 +46,71 @@ protected:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 
 private:
+	struct FakeInputQueue : UI::Box {
+		FakeInputQueue(Panel* parent,
+			           int32_t x,
+			           int32_t y,
+			           bool can_act,
+			           Widelands::ConstructionSite& cs,
+			           Widelands::WareWorker ww,
+			           Widelands::DescriptionIndex di);
+
+		void draw(RenderTarget& dst) override;
+		void think() override;
+
+		const Widelands::ProductionsiteSettings::InputQueueSetting& get_settings() const;
+
+	private:
+		Widelands::ConstructionSite& constructionsite_;
+		Widelands::ProductionsiteSettings& settings_;
+		Widelands::WareWorker type_;
+		Widelands::DescriptionIndex index_;
+
+		void change_fill(bool);
+		void change_priority(int32_t);
+
+		uint32_t max_fill_;
+		const Image* icon_;
+		const Image* max_fill_indicator_;
+
+		UI::Button* priority_high_;
+		UI::Button* priority_normal_;
+		UI::Button* priority_low_;
+	};
+
+	class FakeWaresDisplay : public WaresDisplay {
+	public:
+		FakeWaresDisplay(UI::Panel* parent,
+		                  bool can_act,
+		                  Widelands::ConstructionSite& cs,
+		                  Widelands::WareWorker type);
+
+	protected:
+		void draw_ware(RenderTarget& dst, Widelands::DescriptionIndex ware) override;
+
+	private:
+		Widelands::WarehouseSettings& settings_;
+	};
+
 	Widelands::OPtr<Widelands::ConstructionSite> construction_site_;
 	UI::ProgressBar* progress_;
+
+	// ConstructionsiteSettings-related UI elements
+	UI::Button* cs_enhance_;
+	UI::Checkbox* cs_launch_expedition_;
+	UI::Checkbox* cs_prefer_heroes_;
+	UI::SpinBox* cs_soldier_capacity_;
+	std::vector<FakeInputQueue*> cs_ware_queues_;
+	std::vector<FakeInputQueue*> cs_worker_queues_;
+	FakeWaresDisplay* cs_warehouse_wares_;
+	FakeWaresDisplay* cs_warehouse_workers_;
+	UI::Button* cs_warehouse_stock_policy_normal_;
+	UI::Button* cs_warehouse_stock_policy_prefer_;
+	UI::Button* cs_warehouse_stock_policy_dontstock_;
+	UI::Button* cs_warehouse_stock_policy_remove_;
+	UI::TabPanel* cs_warehouse_tabs_;
+	void change_policy(Widelands::StockPolicy);
+
 	DISALLOW_COPY_AND_ASSIGN(ConstructionSiteWindow);
 };
 

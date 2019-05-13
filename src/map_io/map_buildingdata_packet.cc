@@ -60,7 +60,7 @@ constexpr uint16_t kCurrentPacketVersion = 4;
 
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
-constexpr uint16_t kCurrentPacketVersionConstructionsite = 3;
+constexpr uint16_t kCurrentPacketVersionConstructionsite = 4;
 constexpr uint16_t kCurrentPacketPFBuilding = 1;
 // Responsible for warehouses and expedition bootstraps
 constexpr uint16_t kCurrentPacketVersionWarehouse = 7;
@@ -269,7 +269,7 @@ void MapBuildingdataPacket::read_constructionsite(ConstructionSite& construction
                                                   MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version >= kCurrentPacketVersionConstructionsite) {
+		if (packet_version >= 3 && packet_version <= kCurrentPacketVersionConstructionsite) {
 			read_partially_finished_building(constructionsite, fr, game, mol);
 
 			for (ConstructionSite::Wares::iterator wares_iter = constructionsite.wares_.begin();
@@ -279,6 +279,13 @@ void MapBuildingdataPacket::read_constructionsite(ConstructionSite& construction
 			}
 
 			constructionsite.fetchfromflag_ = fr.signed_32();
+
+			if (fr.unsigned_8()) {
+				constructionsite.settings_.reset(ConstructionsiteSettings::load(game,
+						constructionsite.owner().tribe(), fr));
+			} else {
+				constructionsite.settings_.reset(nullptr);
+			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Constructionsite", packet_version,
 			                            kCurrentPacketVersionConstructionsite);
@@ -321,7 +328,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			while (fr.unsigned_8()) {
 				const DescriptionIndex& id = tribe.ware_index(fr.c_string());
 				Quantity amount = fr.unsigned_32();
-				Warehouse::StockPolicy policy = static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
+				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
 				if (game.tribes().ware_exists(id)) {
 					warehouse.insert_wares(id, amount);
@@ -331,7 +338,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			while (fr.unsigned_8()) {
 				const DescriptionIndex& id = tribe.worker_index(fr.c_string());
 				uint32_t amount = fr.unsigned_32();
-				Warehouse::StockPolicy policy = static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
+				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
 				if (game.tribes().worker_exists(id)) {
 					warehouse.insert_workers(id, amount);
@@ -953,6 +960,12 @@ void MapBuildingdataPacket::write_constructionsite(const ConstructionSite& const
 	write_partially_finished_building(constructionsite, fw, game, mos);
 
 	fw.signed_32(constructionsite.fetchfromflag_);
+
+	if (constructionsite.settings_) {
+		constructionsite.settings_->save(game, fw);
+	} else {
+		fw.unsigned_8(0);
+	}
 }
 
 void MapBuildingdataPacket::write_dismantlesite(const DismantleSite& dms,

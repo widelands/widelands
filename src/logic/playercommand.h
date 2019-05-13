@@ -24,6 +24,7 @@
 
 #include "economy/flag.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/trainingsite.h"
@@ -823,7 +824,7 @@ struct CmdSetStockPolicy : PlayerCommand {
 	                  Warehouse& wh,
 	                  bool isworker,
 	                  DescriptionIndex ware,
-	                  Warehouse::StockPolicy policy);
+	                  StockPolicy policy);
 
 	QueueCommandTypes id() const override {
 		return QueueCommandTypes::kSetStockPolicy;
@@ -844,7 +845,7 @@ private:
 	Serial warehouse_;
 	bool isworker_;
 	DescriptionIndex ware_;
-	Warehouse::StockPolicy policy_;
+	StockPolicy policy_;
 };
 
 struct CmdProposeTrade : PlayerCommand {
@@ -868,6 +869,199 @@ struct CmdProposeTrade : PlayerCommand {
 private:
 	Trade trade_;
 };
+
+struct CmdConstructionsiteSoldierCapacity : PlayerCommand {
+	CmdConstructionsiteSoldierCapacity(uint32_t time,
+	                  PlayerNumber p,
+	                  ConstructionSite&,
+	                  uint32_t);
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kConstructionSiteSoldierCapacity;
+	}
+
+	void execute(Game& game) override;
+
+	// Network (de-)serialization
+	explicit CmdConstructionsiteSoldierCapacity(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	// Savegame functions
+	CmdConstructionsiteSoldierCapacity();
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Serial constructionsite_;
+	uint32_t capacity_;
+};
+
+struct CmdConstructionsitePreferHeroes : PlayerCommand {
+	CmdConstructionsitePreferHeroes(uint32_t time,
+	                  PlayerNumber p,
+	                  ConstructionSite&,
+	                  bool);
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kConstructionSitePreferHeroes;
+	}
+
+	void execute(Game& game) override;
+
+	// Network (de-)serialization
+	explicit CmdConstructionsitePreferHeroes(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	// Savegame functions
+	CmdConstructionsitePreferHeroes();
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Serial constructionsite_;
+	bool heroes_;
+};
+
+struct CmdConstructionsiteLaunchExpedition : PlayerCommand {
+	CmdConstructionsiteLaunchExpedition(uint32_t time,
+	                  PlayerNumber p,
+	                  ConstructionSite&,
+	                  bool);
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kConstructionSiteLaunchExpedition;
+	}
+
+	void execute(Game& game) override;
+
+	// Network (de-)serialization
+	explicit CmdConstructionsiteLaunchExpedition(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	// Savegame functions
+	CmdConstructionsiteLaunchExpedition();
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Serial constructionsite_;
+	bool launch_;
+};
+
+struct CmdConstructionsiteStockPolicy : PlayerCommand {
+	CmdConstructionsiteStockPolicy(uint32_t time,
+	                  PlayerNumber p,
+	                  ConstructionSite&,
+	                  WareWorker,
+	                  DescriptionIndex,
+	                  StockPolicy);
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kConstructionSiteStockPolicy;
+	}
+
+	void execute(Game& game) override;
+
+	// Network (de-)serialization
+	explicit CmdConstructionsiteStockPolicy(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	// Savegame functions
+	CmdConstructionsiteStockPolicy();
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Serial constructionsite_;
+	WareWorker wwtype_;
+	DescriptionIndex index_;
+	StockPolicy policy_;
+};
+
+struct CmdConstructionsiteInputQueuePriority : PlayerCommand {
+	CmdConstructionsiteInputQueuePriority(uint32_t time,
+	                  PlayerNumber p,
+	                  ConstructionSite&,
+	                  WareWorker,
+	                  DescriptionIndex,
+	                  int32_t);
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kConstructionSiteInputQueuePriority;
+	}
+
+	void execute(Game& game) override;
+
+	// Network (de-)serialization
+	explicit CmdConstructionsiteInputQueuePriority(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	// Savegame functions
+	CmdConstructionsiteInputQueuePriority();
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Serial constructionsite_;
+	WareWorker wwtype_;
+	DescriptionIndex index_;
+	int32_t priority_;
+};
+
+struct CmdConstructionsiteInputQueueMaxFill : PlayerCommand {
+	CmdConstructionsiteInputQueueMaxFill(uint32_t time,
+	                  PlayerNumber p,
+	                  ConstructionSite&,
+	                  WareWorker,
+	                  DescriptionIndex,
+	                  uint32_t);
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kConstructionSiteInputQueueMaxFill;
+	}
+
+	void execute(Game& game) override;
+
+	// Network (de-)serialization
+	explicit CmdConstructionsiteInputQueueMaxFill(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	// Savegame functions
+	CmdConstructionsiteInputQueueMaxFill();
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Serial constructionsite_;
+	WareWorker wwtype_;
+	DescriptionIndex index_;
+	uint32_t max_fill_;
+};
+
+struct CmdConstructionsiteEnhance : PlayerCommand {
+	CmdConstructionsiteEnhance(uint32_t time,
+	                  PlayerNumber p,
+	                  ConstructionSite&);
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kConstructionSiteEnhance;
+	}
+
+	void execute(Game& game) override;
+
+	// Network (de-)serialization
+	explicit CmdConstructionsiteEnhance(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	// Savegame functions
+	CmdConstructionsiteEnhance();
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Serial constructionsite_;
+};
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYERCOMMAND_H

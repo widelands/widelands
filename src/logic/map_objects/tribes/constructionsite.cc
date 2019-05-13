@@ -33,6 +33,11 @@
 #include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/partially_finished_building.h"
+#include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "sound/note_sound.h"
@@ -75,6 +80,265 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	dst->blit_animation(point_on_dst, coords, scale, anim_idx, anim_time, &player_color, percent);
 }
 
+ProductionsiteSettings::ProductionsiteSettings(const ProductionSiteDescr& descr)
+		: ConstructionsiteSettings(descr.name()) {
+	for (WareRange i(descr.input_wares()); i; ++i) {
+		ware_queues.push_back(std::make_pair(i.current->first,
+				InputQueueSetting{i.current->second, i.current->second, kPriorityNormal}));
+	}
+	for (WareRange i(descr.input_workers()); i; ++i) {
+		worker_queues.push_back(std::make_pair(i.current->first,
+				InputQueueSetting{i.current->second, i.current->second, kPriorityNormal}));
+	}
+}
+
+MilitarysiteSettings::MilitarysiteSettings(const MilitarySiteDescr& descr)
+		: ConstructionsiteSettings(descr.name()),
+	  max_capacity(descr.get_max_number_of_soldiers()),
+	  desired_capacity(descr.get_max_number_of_soldiers()),
+	  prefer_heroes(descr.prefers_heroes_at_start_) {
+}
+
+TrainingsiteSettings::TrainingsiteSettings(const TrainingSiteDescr& descr)
+	: ProductionsiteSettings(descr),
+	  max_capacity(descr.get_max_number_of_soldiers()),
+	  desired_capacity(descr.get_max_number_of_soldiers()) {
+}
+
+WarehouseSettings::WarehouseSettings(const WarehouseDescr& wh, const TribeDescr& tribe)
+		: ConstructionsiteSettings(wh.name()), launch_expedition(false) {
+	for (const DescriptionIndex di : tribe.wares()) {
+		ware_preferences.emplace(di, StockPolicy::kNormal);
+	}
+	for (const DescriptionIndex di : tribe.workers()) {
+		worker_preferences.emplace(di, StockPolicy::kNormal);
+	}
+	for (const DescriptionIndex di : tribe.worker_types_without_cost()) {
+		worker_preferences.erase(di);
+	}
+}
+
+constexpr uint8_t kCurrentPacketVersion = 1;
+constexpr uint8_t kCurrentPacketVersionConstructionsite = 1;
+constexpr uint8_t kCurrentPacketVersionMilitarysite = 1;
+constexpr uint8_t kCurrentPacketVersionProductionsite = 1;
+constexpr uint8_t kCurrentPacketVersionTrainingsite = 1;
+constexpr uint8_t kCurrentPacketVersionWarehouse = 1;
+
+enum BuildingType : uint8_t {
+	kTrainingsite = 1,
+	kProductionsite = 2,
+	kMilitarysite = 3,
+	kWarehouse = 4,
+};
+
+// static
+ConstructionsiteSettings* ConstructionsiteSettings::load(const Game& game, const TribeDescr& tribe, FileRead& fr) {
+	try {
+		const uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersion) {
+			const std::string name(fr.c_string());
+			const DescriptionIndex index = game.tribes().building_index(name);
+			const uint8_t type = fr.unsigned_8();
+			ConstructionsiteSettings* result = nullptr;
+			switch (type) {
+				case kTrainingsite: {
+					result = new TrainingsiteSettings(*dynamic_cast<const TrainingSiteDescr*>(
+							game.tribes().get_building_descr(index)));
+					break;
+				}
+				case kProductionsite: {
+					result = new ProductionsiteSettings(*dynamic_cast<const ProductionSiteDescr*>(
+							game.tribes().get_building_descr(index)));
+					break;
+				}
+				case kMilitarysite: {
+					result = new MilitarysiteSettings(*dynamic_cast<const MilitarySiteDescr*>(
+							game.tribes().get_building_descr(index)));
+					break;
+				}
+				case kWarehouse: {
+					result = new WarehouseSettings(*dynamic_cast<const WarehouseDescr*>(
+							game.tribes().get_building_descr(index)), tribe);
+					break;
+				}
+				default:
+					throw wexception("Unknown building category %u (%s)", type, name.c_str());
+			}
+			result->read(game, fr);
+			return result;
+		} else {
+			throw UnhandledVersionError(
+			   "ConstructionsiteSettings_load", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("ConstructionsiteSettings_load: %s", e.what());
+	}
+}
+
+void ConstructionsiteSettings::read(const Game&, FileRead& fr) {
+	try {
+		const uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionConstructionsite) {
+			// Nothing to do here
+		} else {
+			throw UnhandledVersionError(
+			   "ConstructionsiteSettings", packet_version, kCurrentPacketVersionConstructionsite);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("ConstructionsiteSettings: %s", e.what());
+	}
+}
+
+void ConstructionsiteSettings::save(const Game&, FileWrite& fw) const {
+	fw.unsigned_8(kCurrentPacketVersion);
+	fw.c_string(descr_.c_str());
+	fw.unsigned_8(kCurrentPacketVersionConstructionsite);
+}
+
+void MilitarysiteSettings::read(const Game& game, FileRead& fr) {
+	ConstructionsiteSettings::read(game, fr);
+	try {
+		const uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionMilitarysite) {
+			desired_capacity = fr.unsigned_32();
+			prefer_heroes = fr.unsigned_8();
+		} else {
+			throw UnhandledVersionError(
+			   "MilitarysiteSettings", packet_version, kCurrentPacketVersionMilitarysite);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("MilitarysiteSettings: %s", e.what());
+	}
+}
+
+void MilitarysiteSettings::save(const Game& game, FileWrite& fw) const {
+	ConstructionsiteSettings::save(game, fw);
+	fw.unsigned_8(kTrainingsite);
+	fw.unsigned_8(kCurrentPacketVersionMilitarysite);
+
+	fw.unsigned_32(desired_capacity);
+	fw.unsigned_8(prefer_heroes ? 1 : 0);
+}
+
+void ProductionsiteSettings::read(const Game& game, FileRead& fr) {
+	ConstructionsiteSettings::read(game, fr);
+	try {
+		const uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionProductionsite) {
+			const uint32_t nr_wares = fr.unsigned_32();
+			const uint32_t nr_workers = fr.unsigned_32();
+			for (uint32_t i = 0; i < nr_wares; ++i) {
+				const DescriptionIndex di = fr.unsigned_32();
+				const uint32_t fill = fr.unsigned_32();
+				const int32_t priority = fr.signed_32();
+				ware_queues.at(i).first = di;
+				ware_queues.at(i).second.desired_fill = fill;
+				ware_queues.at(i).second.priority = priority;
+			}
+			for (uint32_t i = 0; i < nr_workers; ++i) {
+				const DescriptionIndex di = fr.unsigned_32();
+				const uint32_t fill = fr.unsigned_32();
+				const int32_t priority = fr.signed_32();
+				worker_queues.at(i).first = di;
+				worker_queues.at(i).second.desired_fill = fill;
+				worker_queues.at(i).second.priority = priority;
+			}
+		} else {
+			throw UnhandledVersionError(
+			   "ProductionsiteSettings", packet_version, kCurrentPacketVersionProductionsite);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("ProductionsiteSettings: %s", e.what());
+	}
+}
+
+void ProductionsiteSettings::save(const Game& game, FileWrite& fw) const {
+	ConstructionsiteSettings::save(game, fw);
+	fw.unsigned_8(kProductionsite);
+	fw.unsigned_8(kCurrentPacketVersionProductionsite);
+
+	fw.unsigned_32(ware_queues.size());
+	fw.unsigned_32(worker_queues.size());
+	for (const auto& pair : ware_queues) {
+		fw.unsigned_32(pair.first);
+		fw.unsigned_32(pair.second.desired_fill);
+		fw.signed_32(pair.second.priority);
+	}
+	for (const auto& pair : worker_queues) {
+		fw.unsigned_32(pair.first);
+		fw.unsigned_32(pair.second.desired_fill);
+		fw.signed_32(pair.second.priority);
+	}
+}
+
+void TrainingsiteSettings::read(const Game& game, FileRead& fr) {
+	ProductionsiteSettings::read(game, fr);
+	try {
+		const uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionTrainingsite) {
+			desired_capacity = fr.unsigned_32();
+		} else {
+			throw UnhandledVersionError(
+			   "TrainingsiteSettings", packet_version, kCurrentPacketVersionTrainingsite);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("TrainingsiteSettings: %s", e.what());
+	}
+}
+
+void TrainingsiteSettings::save(const Game& game, FileWrite& fw) const {
+	ProductionsiteSettings::save(game, fw);
+	fw.unsigned_8(kTrainingsite);
+	fw.unsigned_8(kCurrentPacketVersionTrainingsite);
+	fw.unsigned_32(desired_capacity);
+}
+
+void WarehouseSettings::read(const Game& game, FileRead& fr) {
+	ConstructionsiteSettings::read(game, fr);
+	try {
+		const uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionWarehouse) {
+			launch_expedition = fr.unsigned_8();
+			const uint32_t nr_wares = fr.unsigned_32();
+			const uint32_t nr_workers = fr.unsigned_32();
+			for (uint32_t i = 0; i < nr_wares; ++i) {
+				const DescriptionIndex di = fr.unsigned_32();
+				const uint8_t pref = fr.unsigned_8();
+				ware_preferences[di] = static_cast<StockPolicy>(pref);
+			}
+			for (uint32_t i = 0; i < nr_workers; ++i) {
+				const DescriptionIndex di = fr.unsigned_32();
+				const uint8_t pref = fr.unsigned_8();
+				worker_preferences[di] = static_cast<StockPolicy>(pref);
+			}
+		} else {
+			throw UnhandledVersionError(
+			   "WarehouseSettings", packet_version, kCurrentPacketVersionWarehouse);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("WarehouseSettings: %s", e.what());
+	}
+}
+
+void WarehouseSettings::save(const Game& game, FileWrite& fw) const {
+	ConstructionsiteSettings::save(game, fw);
+	fw.unsigned_8(kWarehouse);
+	fw.unsigned_8(kCurrentPacketVersionWarehouse);
+
+	fw.unsigned_8(launch_expedition ? 1 : 0);
+	fw.unsigned_32(ware_preferences.size());
+	fw.unsigned_32(worker_preferences.size());
+	for (const auto& pair : ware_preferences) {
+		fw.unsigned_32(pair.first);
+		fw.unsigned_8(static_cast<uint8_t>(pair.second));
+	}
+	for (const auto& pair : worker_preferences) {
+		fw.unsigned_32(pair.first);
+		fw.unsigned_8(static_cast<uint8_t>(pair.second));
+	}
+}
+
 /**
  * The contents of 'table' are documented in
  * /data/tribes/buildings/partially_finished/constructionsite/init.lua
@@ -105,7 +369,7 @@ IMPLEMENTATION
 */
 
 ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
-   : PartiallyFinishedBuilding(cs_descr), fetchfromflag_(0), builder_idle_(false) {
+   : PartiallyFinishedBuilding(cs_descr), fetchfromflag_(0), builder_idle_(false), settings_(nullptr) {
 }
 
 void ConstructionSite::update_statistics_string(std::string* s) {
@@ -183,6 +447,22 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 
 		work_steps_ += it->second;
 	}
+
+	assert(!settings_);
+	if (upcast(const WarehouseDescr, wd, building_)) {
+		settings_.reset(new WarehouseSettings(*wd, owner().tribe()));
+	} else if (upcast(const TrainingSiteDescr, td, building_)) {
+		settings_.reset(new TrainingsiteSettings(*td));
+	} else if (upcast(const ProductionSiteDescr, pd, building_)) {
+		settings_.reset(new ProductionsiteSettings(*pd));
+	} else if (upcast(const MilitarySiteDescr, md, building_)) {
+		settings_.reset(new MilitarysiteSettings(*md));
+	} else {
+		// TODO(Nordfriese): Add support for markets when trading is implemented
+		log("WARNING: Created constructionsite for a %s, which is not of any known building type\n",
+				building_->name().c_str());
+	}
+
 	return true;
 }
 
@@ -209,6 +489,47 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 			builder->reset_tasks(dynamic_cast<Game&>(egbase));
 			builder->set_location(&b);
 		}
+
+		// Apply settings
+		if (settings_) {
+			if (upcast(ProductionsiteSettings, ps, settings_.get())) {
+				for (const auto& pair : ps->ware_queues) {
+					b.inputqueue(pair.first, wwWARE).set_max_fill(pair.second.desired_fill);
+					b.set_priority(wwWARE, pair.first, pair.second.priority);
+				}
+				for (const auto& pair : ps->worker_queues) {
+					b.inputqueue(pair.first, wwWORKER).set_max_fill(pair.second.desired_fill);
+					b.set_priority(wwWORKER, pair.first, pair.second.priority);
+				}
+				if (upcast(TrainingsiteSettings, ts, ps)) {
+					assert(b.soldier_control());
+					assert(ts->desired_capacity >= b.soldier_control()->min_soldier_capacity());
+					assert(ts->desired_capacity <= b.soldier_control()->max_soldier_capacity());
+					b.mutable_soldier_control()->set_soldier_capacity(ts->desired_capacity);
+				}
+			} else if (upcast(MilitarysiteSettings, ms, settings_.get())) {
+				assert(b.soldier_control());
+				assert(ms->desired_capacity >= b.soldier_control()->min_soldier_capacity());
+				assert(ms->desired_capacity <= b.soldier_control()->max_soldier_capacity());
+				b.mutable_soldier_control()->set_soldier_capacity(ms->desired_capacity);
+				dynamic_cast<MilitarySite&>(b).set_soldier_preference(ms->prefer_heroes ?
+						SoldierPreference::kHeroes : SoldierPreference::kRookies);
+			} else if (upcast(WarehouseSettings, ws, settings_.get())) {
+				Warehouse& site = dynamic_cast<Warehouse&>(b);
+				for (const auto& pair : ws->ware_preferences) {
+					site.set_ware_policy(pair.first, pair.second);
+				}
+				for (const auto& pair : ws->worker_preferences) {
+					site.set_worker_policy(pair.first, pair.second);
+				}
+				if (ws->launch_expedition) {
+					get_owner()->start_or_cancel_expedition(site);
+				}
+			} else {
+				NEVER_HERE();
+			}
+		}
+
 		// Open the new building window if needed
 		Notifications::publish(NoteBuilding(b.serial(), NoteBuilding::Action::kFinishWarp));
 	}

@@ -51,9 +51,9 @@ class InputQueue;
 
 class Building;
 
-#define LOW_PRIORITY 2
-#define DEFAULT_PRIORITY 4
-#define HIGH_PRIORITY 8
+constexpr int32_t kPriorityLow = 2;
+constexpr int32_t kPriorityNormal = 4;
+constexpr int32_t kPriorityHigh = 8;
 
 /*
  * Common to all buildings!
@@ -266,8 +266,8 @@ public:
 
 	// Get/Set the priority for this waretype for this building. 'type' defines
 	// if this is for a worker or a ware, 'index' is the type of worker or ware.
-	// If 'adjust' is false, the three possible states HIGH_PRIORITY,
-	// DEFAULT_PRIORITY and LOW_PRIORITY are returned, otherwise numerical
+	// If 'adjust' is false, the three possible states kPriorityHigh,
+	// kPriorityNormal and kPriorityLow are returned, otherwise numerical
 	// values adjusted to the preciousness of the ware in general are returned.
 	virtual int32_t get_priority(WareWorker type, DescriptionIndex, bool adjust = true) const;
 	void set_priority(int32_t type, DescriptionIndex ware_index, int32_t new_priority);

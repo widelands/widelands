@@ -80,6 +80,20 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdMilitarySiteSetSoldierPreference();
 	case QueueCommandTypes::kProposeTrade:
 		return *new CmdProposeTrade();
+	case QueueCommandTypes::kConstructionSiteSoldierCapacity:
+		return *new CmdConstructionsiteSoldierCapacity();
+	case QueueCommandTypes::kConstructionSitePreferHeroes:
+		return *new CmdConstructionsitePreferHeroes();
+	case QueueCommandTypes::kConstructionSiteLaunchExpedition:
+		return *new CmdConstructionsiteLaunchExpedition();
+	case QueueCommandTypes::kConstructionSiteStockPolicy:
+		return *new CmdConstructionsiteStockPolicy();
+	case QueueCommandTypes::kConstructionSiteInputQueuePriority:
+		return *new CmdConstructionsiteInputQueuePriority();
+	case QueueCommandTypes::kConstructionSiteInputQueueMaxFill:
+		return *new CmdConstructionsiteInputQueueMaxFill();
+	case QueueCommandTypes::kConstructionSiteEnhance:
+		return *new CmdConstructionsiteEnhance();
 	case QueueCommandTypes::kSinkShip:
 		return *new CmdShipSink();
 	case QueueCommandTypes::kShipCancelExpedition:

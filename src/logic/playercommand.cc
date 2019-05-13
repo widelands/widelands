@@ -108,6 +108,13 @@ enum {
 	PLCMD_SHIP_SINK = 29,
 	PLCMD_SHIP_CANCELEXPEDITION = 30,
 	PLCMD_PROPOSE_TRADE = 31,
+	PLCMD_CONSTRUCTIONSITE_SOLDIERCAPACITY = 32,
+	PLCMD_CONSTRUCTIONSITE_PREFERHEROES = 33,
+	PLCMD_CONSTRUCTIONSITE_INPUTQUEUE_PRIORITY = 34,
+	PLCMD_CONSTRUCTIONSITE_INPUTQUEUE_MAXFILL = 35,
+	PLCMD_CONSTRUCTIONSITE_STOCKPOLICY = 36,
+	PLCMD_CONSTRUCTIONSITE_LAUNCHEXPEDITION = 37,
+	PLCMD_CONSTRUCTIONSITE_ENHANCE = 38,
 };
 
 /*** class PlayerCommand ***/
@@ -176,6 +183,18 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdEvictWorker(des);
 	case PLCMD_MILITARYSITESETSOLDIERPREFERENCE:
 		return new CmdMilitarySiteSetSoldierPreference(des);
+	case PLCMD_CONSTRUCTIONSITE_SOLDIERCAPACITY:
+		return new CmdConstructionsiteSoldierCapacity(des);
+	case PLCMD_CONSTRUCTIONSITE_PREFERHEROES:
+		return new CmdConstructionsitePreferHeroes(des);
+	case PLCMD_CONSTRUCTIONSITE_INPUTQUEUE_PRIORITY:
+		return new CmdConstructionsiteInputQueuePriority(des);
+	case PLCMD_CONSTRUCTIONSITE_INPUTQUEUE_MAXFILL:
+		return new CmdConstructionsiteInputQueueMaxFill(des);
+	case PLCMD_CONSTRUCTIONSITE_STOCKPOLICY:
+		return new CmdConstructionsiteStockPolicy(des);
+	case PLCMD_CONSTRUCTIONSITE_LAUNCHEXPEDITION:
+		return new CmdConstructionsiteLaunchExpedition(des);
 	default:
 		throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
 	}
@@ -1719,7 +1738,7 @@ CmdSetStockPolicy::CmdSetStockPolicy(uint32_t time,
                                      Warehouse& wh,
                                      bool isworker,
                                      DescriptionIndex ware,
-                                     Warehouse::StockPolicy policy)
+                                     StockPolicy policy)
    : PlayerCommand(time, p) {
 	warehouse_ = wh.serial();
 	isworker_ = isworker;
@@ -1762,7 +1781,7 @@ CmdSetStockPolicy::CmdSetStockPolicy(StreamRead& des) : PlayerCommand(0, des.uns
 	warehouse_ = des.unsigned_32();
 	isworker_ = des.unsigned_8();
 	ware_ = DescriptionIndex(des.unsigned_8());
-	policy_ = static_cast<Warehouse::StockPolicy>(des.unsigned_8());
+	policy_ = static_cast<StockPolicy>(des.unsigned_8());
 }
 
 void CmdSetStockPolicy::serialize(StreamWrite& ser) {
@@ -1784,7 +1803,7 @@ void CmdSetStockPolicy::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoad
 			warehouse_ = fr.unsigned_32();
 			isworker_ = fr.unsigned_8();
 			ware_ = DescriptionIndex(fr.unsigned_8());
-			policy_ = static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
+			policy_ = static_cast<StockPolicy>(fr.unsigned_8());
 		} else {
 			throw UnhandledVersionError(
 			   "CmdSetStockPolicy", packet_version, kCurrentPacketVersionCmdSetStockPolicy);
@@ -1872,4 +1891,536 @@ void CmdProposeTrade::write(FileWrite& /* fw */,
 	// TODO(sirver,trading): Implement this.
 	NEVER_HERE();
 }
+
+
+/*** struct CmdConstructionsiteSoldierCapacity ***/
+CmdConstructionsiteSoldierCapacity::CmdConstructionsiteSoldierCapacity(uint32_t time,
+                                     PlayerNumber p,
+                                     ConstructionSite& cs,
+                                     uint32_t cap)
+   : PlayerCommand(time, p), constructionsite_(cs.serial()), capacity_(cap) {
+}
+
+CmdConstructionsiteSoldierCapacity::CmdConstructionsiteSoldierCapacity()
+   : PlayerCommand(), constructionsite_(0), capacity_(0) {
+}
+
+void CmdConstructionsiteSoldierCapacity::execute(Game& game) {
+	if (Player* plr = game.get_player(sender())) {
+		if (upcast(ConstructionSite, cs, game.objects().get_object(constructionsite_))) {
+			if (cs->get_owner() != plr) {
+				log("CmdConstructionsiteSoldierCapacity: sender %u, but site owner %u\n", sender(),
+				    cs->owner().player_number());
+				return;
+			}
+			if (upcast(MilitarysiteSettings, ms, cs->get_settings())) {
+				assert(ms->max_capacity >= capacity_);
+				ms->desired_capacity = capacity_;
+			} else if (upcast(TrainingsiteSettings, ts, cs->get_settings())) {
+				assert(ts->max_capacity >= capacity_);
+				ts->desired_capacity = capacity_;
+			}
+		}
+	}
+}
+
+CmdConstructionsiteSoldierCapacity::CmdConstructionsiteSoldierCapacity(StreamRead& des)
+		: PlayerCommand(0, des.unsigned_8()) {
+	constructionsite_ = des.unsigned_32();
+	capacity_ = des.unsigned_32();
+}
+
+void CmdConstructionsiteSoldierCapacity::serialize(StreamWrite& ser) {
+	ser.unsigned_8(PLCMD_CONSTRUCTIONSITE_SOLDIERCAPACITY);
+	ser.unsigned_8(sender());
+	ser.unsigned_32(constructionsite_);
+	ser.unsigned_32(capacity_);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdConstructionsiteSoldierCapacity = 1;
+
+void CmdConstructionsiteSoldierCapacity::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdConstructionsiteSoldierCapacity) {
+			PlayerCommand::read(fr, egbase, mol);
+			constructionsite_ = fr.unsigned_32();
+			capacity_ = fr.unsigned_32();
+		} else {
+			throw UnhandledVersionError("CmdConstructionsiteSoldierCapacity", packet_version,
+					kCurrentPacketVersionCmdConstructionsiteSoldierCapacity);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("CmdConstructionsiteSoldierCapacity: %s", e.what());
+	}
+}
+
+void CmdConstructionsiteSoldierCapacity::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdConstructionsiteSoldierCapacity);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(constructionsite_);
+	fw.unsigned_32(capacity_);
+}
+
+/*** struct CmdConstructionsitePreferHeroes ***/
+CmdConstructionsitePreferHeroes::CmdConstructionsitePreferHeroes(uint32_t time,
+                                     PlayerNumber p,
+                                     ConstructionSite& cs,
+                                     bool h)
+   : PlayerCommand(time, p), constructionsite_(cs.serial()), heroes_(h) {
+}
+
+CmdConstructionsitePreferHeroes::CmdConstructionsitePreferHeroes()
+   : PlayerCommand(), constructionsite_(0), heroes_(false) {
+}
+
+void CmdConstructionsitePreferHeroes::execute(Game& game) {
+	if (Player* plr = game.get_player(sender())) {
+		if (upcast(ConstructionSite, cs, game.objects().get_object(constructionsite_))) {
+			if (cs->get_owner() != plr) {
+				log("CmdConstructionsitePreferHeroes: sender %u, but site owner %u\n", sender(),
+				    cs->owner().player_number());
+				return;
+			}
+			if (upcast(MilitarysiteSettings, s, cs->get_settings())) {
+				s->prefer_heroes = heroes_;
+			}
+		}
+	}
+}
+
+CmdConstructionsitePreferHeroes::CmdConstructionsitePreferHeroes(StreamRead& des)
+		: PlayerCommand(0, des.unsigned_8()) {
+	constructionsite_ = des.unsigned_32();
+	heroes_ = des.unsigned_8();
+}
+
+void CmdConstructionsitePreferHeroes::serialize(StreamWrite& ser) {
+	ser.unsigned_8(PLCMD_CONSTRUCTIONSITE_PREFERHEROES);
+	ser.unsigned_8(sender());
+	ser.unsigned_32(constructionsite_);
+	ser.unsigned_8(heroes_ ? 1 : 0);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdConstructionsitePreferHeroes = 1;
+
+void CmdConstructionsitePreferHeroes::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdConstructionsitePreferHeroes) {
+			PlayerCommand::read(fr, egbase, mol);
+			constructionsite_ = fr.unsigned_32();
+			heroes_ = fr.unsigned_8();
+		} else {
+			throw UnhandledVersionError("CmdConstructionsitePreferHeroes", packet_version,
+					kCurrentPacketVersionCmdConstructionsitePreferHeroes);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("CmdConstructionsitePreferHeroes: %s", e.what());
+	}
+}
+
+void CmdConstructionsitePreferHeroes::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdConstructionsitePreferHeroes);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(constructionsite_);
+	fw.unsigned_8(heroes_ ? 1 : 0);
+}
+
+/*** struct CmdConstructionsiteLaunchExpedition ***/
+CmdConstructionsiteLaunchExpedition::CmdConstructionsiteLaunchExpedition(uint32_t time,
+                                     PlayerNumber p,
+                                     ConstructionSite& cs,
+                                     bool l)
+   : PlayerCommand(time, p), constructionsite_(cs.serial()), launch_(l) {
+}
+
+CmdConstructionsiteLaunchExpedition::CmdConstructionsiteLaunchExpedition()
+   : PlayerCommand(), constructionsite_(0), launch_(false) {
+}
+
+void CmdConstructionsiteLaunchExpedition::execute(Game& game) {
+	if (Player* plr = game.get_player(sender())) {
+		if (upcast(ConstructionSite, cs, game.objects().get_object(constructionsite_))) {
+			if (cs->get_owner() != plr) {
+				log("CmdConstructionsiteLaunchExpedition: sender %u, but site owner %u\n", sender(),
+				    cs->owner().player_number());
+				return;
+			}
+			if (upcast(WarehouseSettings, s, cs->get_settings())) {
+				s->launch_expedition = launch_;
+			}
+		}
+	}
+}
+
+CmdConstructionsiteLaunchExpedition::CmdConstructionsiteLaunchExpedition(StreamRead& des)
+		: PlayerCommand(0, des.unsigned_8()) {
+	constructionsite_ = des.unsigned_32();
+	launch_ = des.unsigned_8();
+}
+
+void CmdConstructionsiteLaunchExpedition::serialize(StreamWrite& ser) {
+	ser.unsigned_8(PLCMD_CONSTRUCTIONSITE_LAUNCHEXPEDITION);
+	ser.unsigned_8(sender());
+	ser.unsigned_32(constructionsite_);
+	ser.unsigned_8(launch_ ? 1 : 0);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdConstructionsiteLaunchExpedition = 1;
+
+void CmdConstructionsiteLaunchExpedition::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdConstructionsiteLaunchExpedition) {
+			PlayerCommand::read(fr, egbase, mol);
+			constructionsite_ = fr.unsigned_32();
+			launch_ = fr.unsigned_8();
+		} else {
+			throw UnhandledVersionError("CmdConstructionsiteLaunchExpedition", packet_version,
+					kCurrentPacketVersionCmdConstructionsiteLaunchExpedition);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("CmdConstructionsiteLaunchExpedition: %s", e.what());
+	}
+}
+
+void CmdConstructionsiteLaunchExpedition::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdConstructionsiteLaunchExpedition);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(constructionsite_);
+	fw.unsigned_8(launch_ ? 1 : 0);
+}
+
+/*** struct CmdConstructionsiteStockPolicy ***/
+CmdConstructionsiteStockPolicy::CmdConstructionsiteStockPolicy(uint32_t time,
+                                     PlayerNumber p,
+                                     ConstructionSite& cs,
+                                     WareWorker ww,
+                                     DescriptionIndex di,
+                                     StockPolicy pol)
+   : PlayerCommand(time, p), constructionsite_(cs.serial()), wwtype_(ww), index_(di), policy_(pol) {
+}
+
+CmdConstructionsiteStockPolicy::CmdConstructionsiteStockPolicy()
+   : PlayerCommand(), constructionsite_(0), wwtype_(wwWARE), index_(INVALID_INDEX), policy_() {
+}
+
+void CmdConstructionsiteStockPolicy::execute(Game& game) {
+	if (Player* plr = game.get_player(sender())) {
+		if (upcast(ConstructionSite, cs, game.objects().get_object(constructionsite_))) {
+			if (cs->get_owner() != plr) {
+				log("CmdConstructionsiteStockPolicy: sender %u, but site owner %u\n", sender(),
+				    cs->owner().player_number());
+				return;
+			}
+			if (upcast(WarehouseSettings, s, cs->get_settings())) {
+				switch (wwtype_) {
+					case wwWARE:
+						s->ware_preferences[index_] = policy_;
+						break;
+					case wwWORKER:
+						s->worker_preferences[index_] = policy_;
+						break;
+					NEVER_HERE();
+				}
+			}
+		}
+	}
+}
+
+CmdConstructionsiteStockPolicy::CmdConstructionsiteStockPolicy(StreamRead& des)
+		: PlayerCommand(0, des.unsigned_8()) {
+	constructionsite_ = des.unsigned_32();
+	wwtype_ = des.unsigned_8() == 0 ? wwWARE : wwWORKER;
+	index_ = des.unsigned_32();
+	policy_ = static_cast<StockPolicy>(des.unsigned_8());
+}
+
+void CmdConstructionsiteStockPolicy::serialize(StreamWrite& ser) {
+	ser.unsigned_8(PLCMD_CONSTRUCTIONSITE_STOCKPOLICY);
+	ser.unsigned_8(sender());
+	ser.unsigned_32(constructionsite_);
+	ser.unsigned_8(wwtype_ == wwWARE ? 0 : 1);
+	ser.unsigned_32(index_);
+	ser.unsigned_8(static_cast<uint8_t>(policy_));
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdConstructionsiteStockPolicy = 1;
+
+void CmdConstructionsiteStockPolicy::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdConstructionsiteStockPolicy) {
+			PlayerCommand::read(fr, egbase, mol);
+			constructionsite_ = fr.unsigned_32();
+			wwtype_ = fr.unsigned_8() == 0 ? wwWARE : wwWORKER;
+			index_ = fr.unsigned_32();
+			policy_ = static_cast<StockPolicy>(fr.unsigned_8());
+		} else {
+			throw UnhandledVersionError("CmdConstructionsiteStockPolicy", packet_version,
+					kCurrentPacketVersionCmdConstructionsiteStockPolicy);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("CmdConstructionsiteStockPolicy: %s", e.what());
+	}
+}
+
+void CmdConstructionsiteStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdConstructionsiteStockPolicy);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(constructionsite_);
+	fw.unsigned_8(wwtype_ == wwWARE ? 0 : 1);
+	fw.unsigned_32(index_);
+	fw.unsigned_8(static_cast<uint8_t>(policy_));
+}
+
+/*** struct CmdConstructionsiteInputQueuePriority ***/
+CmdConstructionsiteInputQueuePriority::CmdConstructionsiteInputQueuePriority(uint32_t time,
+                                     PlayerNumber p,
+                                     ConstructionSite& cs,
+                                     WareWorker ww,
+                                     DescriptionIndex di,
+                                     int32_t prio)
+   : PlayerCommand(time, p), constructionsite_(cs.serial()), wwtype_(ww), index_(di), priority_(prio) {
+}
+
+CmdConstructionsiteInputQueuePriority::CmdConstructionsiteInputQueuePriority()
+   : PlayerCommand(), constructionsite_(0), wwtype_(wwWARE), index_(INVALID_INDEX), priority_(0) {
+}
+
+void CmdConstructionsiteInputQueuePriority::execute(Game& game) {
+	if (Player* plr = game.get_player(sender())) {
+		if (upcast(ConstructionSite, cs, game.objects().get_object(constructionsite_))) {
+			if (cs->get_owner() != plr) {
+				log("CmdConstructionsiteInputQueuePriority: sender %u, but site owner %u\n", sender(),
+				    cs->owner().player_number());
+				return;
+			}
+			if (upcast(ProductionsiteSettings, s, cs->get_settings())) {
+				switch (wwtype_) {
+					case wwWARE:
+						for (auto& pair : s->ware_queues) {
+							if (pair.first == index_) {
+								pair.second.priority = priority_;
+								return;
+							}
+						}
+						NEVER_HERE();
+					case wwWORKER:
+						for (auto& pair : s->worker_queues) {
+							if (pair.first == index_) {
+								pair.second.priority = priority_;
+								return;
+							}
+						}
+						NEVER_HERE();
+					default:
+						NEVER_HERE();
+				}
+			}
+		}
+	}
+}
+
+CmdConstructionsiteInputQueuePriority::CmdConstructionsiteInputQueuePriority(StreamRead& des)
+		: PlayerCommand(0, des.unsigned_8()) {
+	constructionsite_ = des.unsigned_32();
+	wwtype_ = des.unsigned_8() == 0 ? wwWARE : wwWORKER;
+	index_ = des.unsigned_32();
+	priority_ = des.signed_32();
+}
+
+void CmdConstructionsiteInputQueuePriority::serialize(StreamWrite& ser) {
+	ser.unsigned_8(PLCMD_CONSTRUCTIONSITE_INPUTQUEUE_PRIORITY);
+	ser.unsigned_8(sender());
+	ser.unsigned_32(constructionsite_);
+	ser.unsigned_8(wwtype_ == wwWARE ? 0 : 1);
+	ser.unsigned_32(index_);
+	ser.signed_32(priority_);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdConstructionsiteInputQueuePriority = 1;
+
+void CmdConstructionsiteInputQueuePriority::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdConstructionsiteInputQueuePriority) {
+			PlayerCommand::read(fr, egbase, mol);
+			constructionsite_ = fr.unsigned_32();
+			wwtype_ = fr.unsigned_8() == 0 ? wwWARE : wwWORKER;
+			index_ = fr.unsigned_32();
+			priority_ = fr.signed_32();
+		} else {
+			throw UnhandledVersionError("CmdConstructionsiteInputQueuePriority", packet_version,
+					kCurrentPacketVersionCmdConstructionsiteInputQueuePriority);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("CmdConstructionsiteInputQueuePriority: %s", e.what());
+	}
+}
+
+void CmdConstructionsiteInputQueuePriority::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdConstructionsiteInputQueuePriority);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(constructionsite_);
+	fw.unsigned_8(wwtype_ == wwWARE ? 0 : 1);
+	fw.unsigned_32(index_);
+	fw.signed_32(priority_);
+}
+
+/*** struct CmdConstructionsiteInputQueueMaxFill ***/
+CmdConstructionsiteInputQueueMaxFill::CmdConstructionsiteInputQueueMaxFill(uint32_t time,
+                                     PlayerNumber p,
+                                     ConstructionSite& cs,
+                                     WareWorker ww,
+                                     DescriptionIndex di,
+                                     uint32_t max)
+   : PlayerCommand(time, p), constructionsite_(cs.serial()), wwtype_(ww), index_(di), max_fill_(max) {
+}
+
+CmdConstructionsiteInputQueueMaxFill::CmdConstructionsiteInputQueueMaxFill()
+   : PlayerCommand(), constructionsite_(0), wwtype_(wwWARE), index_(INVALID_INDEX), max_fill_(0) {
+}
+
+void CmdConstructionsiteInputQueueMaxFill::execute(Game& game) {
+	if (Player* plr = game.get_player(sender())) {
+		if (upcast(ConstructionSite, cs, game.objects().get_object(constructionsite_))) {
+			if (cs->get_owner() != plr) {
+				log("CmdConstructionsiteInputQueueMaxFill: sender %u, but site owner %u\n", sender(),
+				    cs->owner().player_number());
+				return;
+			}
+			if (upcast(ProductionsiteSettings, s, cs->get_settings())) {
+				switch (wwtype_) {
+					case wwWARE:
+						for (auto& pair : s->ware_queues) {
+							if (pair.first == index_) {
+								assert(pair.second.max_fill >= max_fill_);
+								pair.second.desired_fill = max_fill_;
+								return;
+							}
+						}
+						NEVER_HERE();
+					case wwWORKER:
+						for (auto& pair : s->worker_queues) {
+							if (pair.first == index_) {
+								assert(pair.second.max_fill >= max_fill_);
+								pair.second.desired_fill = max_fill_;
+								return;
+							}
+						}
+						NEVER_HERE();
+					default:
+						NEVER_HERE();
+				}
+			}
+		}
+	}
+}
+
+CmdConstructionsiteInputQueueMaxFill::CmdConstructionsiteInputQueueMaxFill(StreamRead& des)
+		: PlayerCommand(0, des.unsigned_8()) {
+	constructionsite_ = des.unsigned_32();
+	wwtype_ = des.unsigned_8() == 0 ? wwWARE : wwWORKER;
+	index_ = des.unsigned_32();
+	max_fill_ = des.unsigned_32();
+}
+
+void CmdConstructionsiteInputQueueMaxFill::serialize(StreamWrite& ser) {
+	ser.unsigned_8(PLCMD_CONSTRUCTIONSITE_INPUTQUEUE_MAXFILL);
+	ser.unsigned_8(sender());
+	ser.unsigned_32(constructionsite_);
+	ser.unsigned_8(wwtype_ == wwWARE ? 0 : 1);
+	ser.unsigned_32(index_);
+	ser.unsigned_32(max_fill_);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdConstructionsiteInputQueueMaxFill = 1;
+
+void CmdConstructionsiteInputQueueMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdConstructionsiteInputQueueMaxFill) {
+			PlayerCommand::read(fr, egbase, mol);
+			constructionsite_ = fr.unsigned_32();
+			wwtype_ = fr.unsigned_8() == 0 ? wwWARE : wwWORKER;
+			index_ = fr.unsigned_32();
+			max_fill_ = fr.unsigned_32();
+		} else {
+			throw UnhandledVersionError("CmdConstructionsiteInputQueueMaxFill", packet_version,
+					kCurrentPacketVersionCmdConstructionsiteInputQueueMaxFill);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("CmdConstructionsiteInputQueueMaxFill: %s", e.what());
+	}
+}
+
+void CmdConstructionsiteInputQueueMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdConstructionsiteInputQueueMaxFill);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(constructionsite_);
+	fw.unsigned_8(wwtype_ == wwWARE ? 0 : 1);
+	fw.unsigned_32(index_);
+	fw.unsigned_32(max_fill_);
+}
+
+/*** struct CmdConstructionsiteEnhance ***/
+CmdConstructionsiteEnhance::CmdConstructionsiteEnhance(uint32_t time,
+                                     PlayerNumber p,
+                                     ConstructionSite& cs)
+   : PlayerCommand(time, p), constructionsite_(cs.serial()) {
+}
+
+CmdConstructionsiteEnhance::CmdConstructionsiteEnhance()
+   : PlayerCommand(), constructionsite_(0) {
+}
+
+void CmdConstructionsiteEnhance::execute(Game& game) {
+	if (Player* plr = game.get_player(sender())) {
+		if (upcast(ConstructionSite, cs, game.objects().get_object(constructionsite_))) {
+			if (cs->get_owner() != plr) {
+				log("CmdConstructionsiteEnhance: sender %u, but site owner %u\n", sender(),
+				    cs->owner().player_number());
+				return;
+			}
+			log("NOCOM: CmdConstructionsiteEnhance is not supported yet!!\n");
+		}
+	}
+}
+
+CmdConstructionsiteEnhance::CmdConstructionsiteEnhance(StreamRead& des)
+		: PlayerCommand(0, des.unsigned_8()) {
+	constructionsite_ = des.unsigned_32();
+}
+
+void CmdConstructionsiteEnhance::serialize(StreamWrite& ser) {
+	ser.unsigned_8(PLCMD_CONSTRUCTIONSITE_ENHANCE);
+	ser.unsigned_8(sender());
+	ser.unsigned_32(constructionsite_);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdConstructionsiteEnhance = 1;
+
+void CmdConstructionsiteEnhance::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdConstructionsiteEnhance) {
+			PlayerCommand::read(fr, egbase, mol);
+			constructionsite_ = fr.unsigned_32();
+		} else {
+			throw UnhandledVersionError("CmdConstructionsiteEnhance", packet_version,
+					kCurrentPacketVersionCmdConstructionsiteEnhance);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("CmdConstructionsiteEnhance: %s", e.what());
+	}
+}
+
+void CmdConstructionsiteEnhance::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdConstructionsiteEnhance);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(constructionsite_);
+}
+
 }  // namespace Widelands

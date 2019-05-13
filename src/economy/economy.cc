@@ -971,7 +971,7 @@ void Economy::create_requested_workers(Game& game) {
 static bool accept_warehouse_if_policy(Warehouse& wh,
                                        WareWorker type,
                                        DescriptionIndex ware,
-                                       Warehouse::StockPolicy policy) {
+                                       StockPolicy policy) {
 	return wh.get_stock_policy(type, ware) == policy;
 }
 
@@ -1005,8 +1005,8 @@ void Economy::handle_active_supplies(Game& game) {
 
 		for (uint32_t nwh = 0; nwh < warehouses_.size(); ++nwh) {
 			Warehouse* wh = warehouses_[nwh];
-			Warehouse::StockPolicy policy = wh->get_stock_policy(type, ware);
-			if (policy == Warehouse::StockPolicy::kPrefer) {
+			StockPolicy policy = wh->get_stock_policy(type, ware);
+			if (policy == StockPolicy::kPrefer) {
 				haveprefer = true;
 
 				// Getting count of worker/ware
@@ -1022,7 +1022,7 @@ void Economy::handle_active_supplies(Game& game) {
 					preferred_wh_stock = current_stock;
 				}
 			}
-			if (policy == Warehouse::StockPolicy::kNormal)
+			if (policy == StockPolicy::kNormal)
 				havenormal = true;
 		}
 		if (!havenormal && !haveprefer && type == wwWARE)
@@ -1037,7 +1037,7 @@ void Economy::handle_active_supplies(Game& game) {
 			                            (!havenormal) ?
 			                               WarehouseAcceptFn() :
 			                               boost::bind(&accept_warehouse_if_policy, _1, type, ware,
-			                                           Warehouse::StockPolicy::kNormal));
+			                                           StockPolicy::kNormal));
 		}
 		if (!wh) {
 			log("Warning: Economy::handle_active_supplies "

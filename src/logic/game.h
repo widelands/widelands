@@ -46,6 +46,7 @@ constexpr uint32_t kStatisticsSampleTime = 30000;
 // See forester_cache_
 constexpr int16_t kInvalidForesterEntry = -1;
 
+class ConstructionSite;
 struct Flag;
 struct Path;
 struct PlayerImmovable;
@@ -56,6 +57,7 @@ struct Ship;
 struct PlayerEndStatus;
 class TrainingSite;
 class MilitarySite;
+enum class StockPolicy;
 
 enum {
 	gs_notrunning = 0,  // game is being prepared
@@ -281,6 +283,15 @@ public:
 	void send_player_sink_ship(Ship&);
 	void send_player_cancel_expedition_ship(Ship&);
 	void send_player_propose_trade(const Trade& trade);
+
+	void send_player_constructionsite_soldier_capacity(ConstructionSite&, uint32_t);
+	void send_player_constructionsite_prefer_heroes(ConstructionSite&, bool);
+	void send_player_constructionsite_launch_expedition(ConstructionSite&, bool);
+	void send_player_constructionsite_stock_policy(
+			ConstructionSite&, WareWorker, DescriptionIndex, StockPolicy);
+	void send_player_constructionsite_input_queue_priority(ConstructionSite&, WareWorker, DescriptionIndex, int32_t);
+	void send_player_constructionsite_input_queue_max_fill(ConstructionSite&, WareWorker, DescriptionIndex, uint32_t);
+	void send_player_constructionsite_enhance(ConstructionSite&);
 
 	InteractivePlayer* get_ipl();
 

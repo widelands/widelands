@@ -262,7 +262,7 @@ int32_t Request::get_required_time() const {
 int32_t Request::get_priority(int32_t cost) const {
 	int MAX_IDLE_PRIORITY = 100;
 	bool is_construction_site = false;
-	int32_t modifier = DEFAULT_PRIORITY;
+	int32_t modifier = kPriorityNormal;
 
 	if (target_building_) {
 		modifier = target_building_->get_priority(get_type(), get_index());
