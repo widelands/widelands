@@ -76,9 +76,9 @@ return {
          -- If `prerequisites` is present, the campaign is greyed out by default.
          -- The campaign will become unlocked when any of the referenced scenarios
          -- have been solved.
-         prerequisites = {
-            "bar01.wmf",
-         },
+         -- prerequisites = {
+         --    "bar01.wmf",
+         -- },
          scenarios = {
             "emp01.wmf",
             "emp02.wmf",
@@ -96,9 +96,6 @@ return {
          difficulty = { level=3, description=_"Introduces the Atlanteans." },
          -- TRANSLATORS: A long description of a campign
          description = _"When their God lost faith in the Atlanteans and drowned their island, one woman’s struggle for justice and a second chance for her people would become the stuff of legends. Leading the remaining Atlanteans into a new future in a new part of the World, Jundlina became the most powerful human of her time, but at a high cost: her humanity and soul.",
-         prerequisites = {
-            "emp02.wmf",
-         },
          scenarios = {
             "atl01.wmf",
             "dummy.wmf"
@@ -113,10 +110,6 @@ return {
          difficulty = { level=4, description=_"Introduces the Frisians." },
          -- TRANSLATORS: A long description of a campign
          description = _"Living off the ocean is a constant struggle, and even more so for the inhabitants of the Frisian North Sea shore. Was the last storm flood, the most devastating one in human memory, really nothing more than yet another example for the hardships all Frisians have to face – or a sign from the gods that a tribe that only just settled here must seek out an entirely new home?",
-         prerequisites = {
-            "emp04.wmf",
-            "atl01.wmf",
-         },
          scenarios = {
             "fri01.wmf",
             "fri02.wmf",
