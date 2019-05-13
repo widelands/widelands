@@ -521,7 +521,6 @@ return {
          face = "serif",
          size = fs_font_size,
          bold = true,
-         underline = true,
          shadow = true,
       },
       -- Chat log messages color. Also doubles as spectator playercolor for chat messages.
