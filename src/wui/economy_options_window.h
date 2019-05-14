@@ -169,6 +169,10 @@ private:
 		UI::Button delete_;
 	};
 
+	// Helper functions for update_profiles()
+	void update_profiles_needed(const std::string&);
+	void update_profiles_select(const std::string&);
+
 	SaveProfileWindow* save_profile_dialog_;
 };
 

@@ -373,34 +373,37 @@ void EconomyOptionsWindow::update_profiles() {
 
 	for (const auto& pair : predefined_targets_) {
 		if (last_added_to_dropdown_.count(pair.first) == 0) {
-			goto update_needed;
+			return update_profiles_needed(current_profile);
 		}
 	}
 	for (const auto& string : last_added_to_dropdown_) {
 		if (!string.empty() && predefined_targets_.find(string) == predefined_targets_.end()) {
-			goto update_needed;
+			return update_profiles_needed(current_profile);
 		}
 	}
 	if (last_added_to_dropdown_.count("") == (current_profile.empty() ? 0 : 1)) {
-		goto update_needed;
+		return update_profiles_needed(current_profile);
 	}
-	goto do_select;
 
-update_needed:
+	update_profiles_select(current_profile);
+}
+
+void EconomyOptionsWindow::update_profiles_needed(const std::string& current_profile) {
 	dropdown_.clear();
 	last_added_to_dropdown_.clear();
 	for (const auto& pair : predefined_targets_) {
 		dropdown_.add(_(pair.first), pair.first);
 		last_added_to_dropdown_.insert(pair.first);
 	}
-
 	if (current_profile.empty()) {
 		// Nothing selected
 		dropdown_.add("", "");
 		last_added_to_dropdown_.insert("");
 	}
+	update_profiles_select(current_profile);
+}
 
-do_select:
+void EconomyOptionsWindow::update_profiles_select(const std::string& current_profile) {
 	if (dropdown_.is_expanded()) {
 		return;
 	}
@@ -408,6 +411,7 @@ do_select:
 	if (!dropdown_.has_selection() || dropdown_.get_selected() != select) {
 		dropdown_.select(select);
 	}
+	assert(dropdown_.has_selection());
 }
 
 void EconomyOptionsWindow::SaveProfileWindow::update_save_enabled() {
