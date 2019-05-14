@@ -19,7 +19,9 @@
 
 #include "ui_basic/editbox.h"
 
+#include <algorithm>
 #include <limits>
+#include <string>
 
 #include <SDL_keycode.h>
 #include <boost/format.hpp>
@@ -86,7 +88,8 @@ EditBox::EditBox(Panel* const parent,
      m_(new EditBoxImpl),
      history_active_(false),
      history_position_(-1),
-     warning_(false) {
+	  password_(false),
+	  warning_(false) {
 	set_thinks(false);
 
 	m_->background_style = g_gr->styles().editbox_style(style);
@@ -388,7 +391,8 @@ void EditBox::draw(RenderTarget& dst) {
 	const int max_width = get_w() - 2 * kMarginX;
 
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh->render(as_editorfont(m_->text, m_->fontsize));
+		UI::g_fh->render(as_editorfont(m_->text, m_->fontsize));
+
 
 	const int linewidth = rendered_text->width();
 	const int lineheight = m_->text.empty() ? text_height(m_->fontsize) : rendered_text->height();
@@ -400,26 +404,36 @@ void EditBox::draw(RenderTarget& dst) {
 	UI::center_vertically(lineheight, &point);
 
 	// Crop to max_width while blitting
-	if (max_width < linewidth) {
-		// Fix positioning for BiDi languages.
-		if (UI::g_fh->fontset()->is_rtl()) {
-			point.x = 0.f;
-		}
-		// We want this always on, e.g. for mixed language savegame filenames
-		if (i18n::has_rtl_character(m_->text.c_str(), 100)) {  // Restrict check for efficiency
-			// TODO(GunChleoc): Arabic: Fix scrolloffset
-			rendered_text->draw(dst, point, Recti(linewidth - max_width, 0, linewidth, lineheight));
-		} else {
-			if (m_->align == UI::Align::kRight) {
-				// TODO(GunChleoc): Arabic: Fix scrolloffset
-				rendered_text->draw(
-				   dst, point, Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
-			} else {
-				rendered_text->draw(dst, point, Recti(-m_->scrolloffset, 0, max_width, lineheight));
+	if (!password_) {
+		if (max_width < linewidth) {
+			// Fix positioning for BiDi languages.
+			if (UI::g_fh->fontset()->is_rtl()) {
+				point.x = 0.f;
 			}
+			// We want this always on, e.g. for mixed language savegame filenames
+			if (i18n::has_rtl_character(m_->text.c_str(), 100)) {  // Restrict check for efficiency
+				// TODO(GunChleoc): Arabic: Fix scrolloffset
+				rendered_text->draw(dst, point, Recti(linewidth - max_width, 0, linewidth, lineheight));
+			} else {
+				if (m_->align == UI::Align::kRight) {
+					// TODO(GunChleoc): Arabic: Fix scrolloffset
+					rendered_text->draw(
+					   dst, point, Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
+				} else {
+					rendered_text->draw(dst, point, Recti(-m_->scrolloffset, 0, max_width, lineheight));
+				}
+			}
+		} else {
+			rendered_text->draw(dst, point, Recti(0, 0, max_width, lineheight));
 		}
 	} else {
-		rendered_text->draw(dst, point, Recti(0, 0, max_width, lineheight));
+		std::string pw;
+		for (int i = 0; i < int (m_->text.size()); i++) {
+			pw.append("*");
+		}
+		std::shared_ptr<const UI::RenderedText> password_text =
+			UI::g_fh->render(as_editorfont(pw, m_->fontsize));
+		password_text->draw(dst, point, Recti(0, 0, max_width, lineheight));
 	}
 
 	if (has_focus()) {

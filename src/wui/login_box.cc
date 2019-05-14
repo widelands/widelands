@@ -66,9 +66,10 @@ LoginBox::LoginBox(Panel& parent)
 	Section& s = g_options.pull_section("global");
 	eb_nickname->set_text(s.get_string("nickname", _("nobody")));
 	cb_register->set_state(s.get_bool("registered", false));
+	eb_password->set_password(true);
 
 	if (registered()) {
-		eb_password->set_text("*****");
+		eb_password->set_text(s.get_string("password_sha1", ""));
 	} else {
 		eb_password->set_can_focus(false);
 		ta_password->set_color(UI_FONT_CLR_DISABLED);
@@ -124,12 +125,11 @@ void LoginBox::clicked_register() {
 	} else {
 		ta_password->set_color(UI_FONT_CLR_FG);
 		eb_password->set_can_focus(true);
-		eb_password->focus();
 	}
 }
 
 void LoginBox::verify_input() {
-	// Check if all needed input fields are valid
+	// Check if all neccessary input fields are valid
 	loginbtn->set_enabled(true);
 	eb_nickname->set_tooltip("");
 	eb_password->set_tooltip("");
@@ -150,9 +150,11 @@ void LoginBox::verify_input() {
 	if (eb_password->text().empty() && cb_register->get_state()) {
 		eb_password->set_tooltip(_("Please enter your password!"));
 		loginbtn->set_enabled(false);
+		eb_password->focus();
 	}
 
-	if (eb_password->has_focus() && eb_password->text() == "*****") {
+	Section& s = g_options.pull_section("global");
+	if (eb_password->has_focus() && eb_password->text() == s.get_string("password_sha1", "")) {
 		eb_password->set_text("");
 	}
 }

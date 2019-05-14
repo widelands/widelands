@@ -80,7 +80,7 @@ void FullscreenMenuMultiPlayer::show_internet_login() {
 		// However, the stored hash can be copied to another system and used to log in as the user on the metaserver.
 		// Further note: SHA-1 is considered broken and shouldn't be used anymore. But since the
 		// passwords on the server are protected by SHA-1 we have to use it here, too
-		if (lb.get_password() != "*****") {
+		if (lb.get_password() != s.get_string("password_sha1", "")) {
 			password_ = crypto::sha1(lb.get_password());
 			s.set_string("password_sha1", password_);
 		}
