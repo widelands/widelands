@@ -60,7 +60,8 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 
 	showloginbox =
 		   new UI::Button(this, "login_dialog", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
-		                  g_gr->images().get("images/ui_basic/continue.png"), _("Show login dialog"));
+								g_gr->images().get("images/wui/menus/menu_toggle_newmessage_menu.png"),
+								_("Show login dialog"));
 	showloginbox->sigclicked.connect(
 		   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
 	layout();
