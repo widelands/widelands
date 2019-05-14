@@ -252,9 +252,7 @@ void FullscreenMenuNetSetupLAN::change_playername() {
 	playername.set_tooltip("");
 	hostgame.set_enabled(true);
 
-	if (playername.text().find_first_not_of("abcdefghijklmnopqrstuvwxyz"
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= playername.text().size()
-		|| playername.text().empty()) {
+	if (!playername.valid_username()) {
 			playername.set_warning(true);
 			playername.set_tooltip(_("Enter a valid nickname. This value may contain only "
 													  "English letters, numbers, and @ . + - _ characters."));
