@@ -72,6 +72,10 @@ struct EditBox : public Panel {
 
 	void draw(RenderTarget&) override;
 
+	void set_password(bool pass) {
+		password_ = pass;
+	}
+
 	void set_warning(bool warn) {
 		warning_ = warn;
 	}
@@ -79,6 +83,12 @@ struct EditBox : public Panel {
 	bool has_warning() {
 		return warning_;
 	}
+
+	bool is_password() {
+		return password_;
+	}
+
+	bool valid_username();
 
 private:
 	std::unique_ptr<EditBoxImpl> m_;
@@ -88,6 +98,7 @@ private:
 	bool history_active_;
 	int16_t history_position_;
 	std::string history_[CHAT_HISTORY_SIZE];
+	bool password_;
 	bool warning_;
 };
 }  // namespace UI

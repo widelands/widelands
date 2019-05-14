@@ -40,8 +40,9 @@ LoginBox::LoginBox(Panel& parent)
 	                               "", get_inner_w() - 2 * margin);
 
 	register_account = new UI::MultilineTextarea(this, margin, 105, 470, 140, UI::PanelStyle::kWui,
-			(boost::format(_("You need an account on the widelands website, to use a registered "
-				"account. Please visit: %s Log in to your newly created account and set an online "
+			(boost::format(_("In order to use a registered "
+				"account, you need an account on the widelands website. "
+				"Please log in at %s and set an online "
 				"gaming password on your profile page."))
 				% "\n\nhttps://widelands.org/accounts/register/\n\n").str());
 
@@ -65,9 +66,10 @@ LoginBox::LoginBox(Panel& parent)
 	Section& s = g_options.pull_section("global");
 	eb_nickname->set_text(s.get_string("nickname", _("nobody")));
 	cb_register->set_state(s.get_bool("registered", false));
+	eb_password->set_password(true);
 
 	if (registered()) {
-		eb_password->set_text("*****");
+		eb_password->set_text(s.get_string("password_sha1", ""));
 	} else {
 		eb_password->set_can_focus(false);
 		ta_password->set_color(UI_FONT_CLR_DISABLED);
@@ -96,6 +98,8 @@ void LoginBox::clicked_back() {
 /// Calles when nickname was changed
 void LoginBox::change_playername() {
 	cb_register->set_state(false);
+	eb_password->set_text("");
+	eb_password->set_can_focus(false);
 }
 
 bool LoginBox::handle_key(bool down, SDL_Keysym code) {
@@ -123,12 +127,11 @@ void LoginBox::clicked_register() {
 	} else {
 		ta_password->set_color(UI_FONT_CLR_FG);
 		eb_password->set_can_focus(true);
-		eb_password->focus();
 	}
 }
 
 void LoginBox::verify_input() {
-	// Check if all needed input fields are valid
+	// Check if all neccessary input fields are valid
 	loginbtn->set_enabled(true);
 	eb_nickname->set_tooltip("");
 	eb_password->set_tooltip("");
@@ -138,8 +141,7 @@ void LoginBox::verify_input() {
 		eb_nickname->set_warning(true);
 		eb_nickname->set_tooltip(_("Please enter a nickname!"));
 		loginbtn->set_enabled(false);
-	} else if (eb_nickname->text().find_first_not_of("abcdefghijklmnopqrstuvwxyz"
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= eb_nickname->text().size()) {
+	} else if (!eb_nickname->valid_username()) {
 			eb_nickname->set_warning(true);
 			eb_nickname->set_tooltip(_("Enter a valid nickname. This value may contain only "
 													  "English letters, numbers, and @ . + - _ characters."));
@@ -149,9 +151,11 @@ void LoginBox::verify_input() {
 	if (eb_password->text().empty() && cb_register->get_state()) {
 		eb_password->set_tooltip(_("Please enter your password!"));
 		loginbtn->set_enabled(false);
+		eb_password->focus();
 	}
 
-	if (eb_password->has_focus() && eb_password->text() == "*****") {
+	Section& s = g_options.pull_section("global");
+	if (eb_password->has_focus() && eb_password->text() == s.get_string("password_sha1", "")) {
 		eb_password->set_text("");
 	}
 }
