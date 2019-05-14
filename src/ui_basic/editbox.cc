@@ -427,18 +427,21 @@ void EditBox::draw(RenderTarget& dst) {
 			rendered_text->draw(dst, point, Recti(0, 0, max_width, lineheight));
 		}
 	} else {
-		std::string pw;
-		for (int i = 0; i < int (m_->text.size()); i++) {
-			pw.append("*");
-		}
 		std::shared_ptr<const UI::RenderedText> password_text =
-			UI::g_fh->render(as_editorfont(pw, m_->fontsize));
+			UI::g_fh->render(as_editorfont(text_to_asterisk(), m_->fontsize));
 		password_text->draw(dst, point, Recti(0, 0, max_width, lineheight));
 	}
 
 	if (has_focus()) {
 		// Draw the caret
-		std::string line_to_caret = m_->text.substr(0, m_->caret);
+		std::string line_to_caret;
+
+		if (password_) {
+			line_to_caret = text_to_asterisk().substr(0, m_->caret);
+		} else {
+			line_to_caret = m_->text.substr(0, m_->caret);
+		}
+
 		// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
 		int caret_x = text_width(line_to_caret, m_->fontsize);
 
@@ -495,5 +498,16 @@ bool EditBox::valid_username() {
 				return false;
 	}
 	return true;
+}
+
+/**
+ * Return text as asterisks.
+ */
+std::string EditBox::text_to_asterisk() {
+	std::string asterisk;
+	for (int i = 0; i < int (m_->text.size()); i++) {
+		asterisk.append("*");
+	}
+	return asterisk;
 }
 }  // namespace UI

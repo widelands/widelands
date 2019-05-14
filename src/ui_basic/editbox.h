@@ -94,6 +94,7 @@ private:
 	std::unique_ptr<EditBoxImpl> m_;
 
 	void check_caret();
+	std::string text_to_asterisk();
 
 	bool history_active_;
 	int16_t history_position_;
