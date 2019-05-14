@@ -156,7 +156,7 @@ void FullscreenMenuMultiPlayer::layout() {
 	title.set_pos(Vector2i(0, title_y_));
 
 	metaserver.set_size(butw_, buth_);
-	showloginbox.set_size(buth_, buth_);
+	showloginbox.set_size(butw_, buth_);
 	metaserver.set_desired_size(butw_, buth_);
 	lan.set_desired_size(butw_, buth_);
 	back.set_desired_size(butw_, buth_);
