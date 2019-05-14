@@ -281,7 +281,12 @@ void MapBuildingdataPacket::read_constructionsite(ConstructionSite& construction
 			constructionsite.fetchfromflag_ = fr.signed_32();
 
 			if (packet_version >= 4) {
-				constructionsite.settings_.reset(ConstructionsiteSettings::load(game,
+				const uint32_t intermediates = fr.unsigned_32();
+				for (uint32_t i = 0; i < intermediates; ++i) {
+					constructionsite.info_.intermediates.push_back(game.tribes().get_building_descr(
+							game.tribes().building_index(fr.c_string())));
+				}
+				constructionsite.settings_.reset(BuildingSettings::load(game,
 						constructionsite.owner().tribe(), fr));
 			} else {
 				constructionsite.settings_.reset(nullptr);
@@ -960,6 +965,11 @@ void MapBuildingdataPacket::write_constructionsite(const ConstructionSite& const
 	write_partially_finished_building(constructionsite, fw, game, mos);
 
 	fw.signed_32(constructionsite.fetchfromflag_);
+
+	fw.unsigned_32(constructionsite.info_.intermediates.size());
+	for (const BuildingDescr* d : constructionsite.info_.intermediates) {
+		fw.c_string(d->name().c_str());
+	}
 
 	assert(constructionsite.settings_);
 	constructionsite.settings_->save(game, fw);

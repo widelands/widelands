@@ -525,6 +525,31 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 	}
 }
 
+const BuildingSettings* TrainingSite::create_building_settings() const {
+	TrainingsiteSettings* settings = new TrainingsiteSettings(descr());
+	settings->desired_capacity = std::min(settings->max_capacity, soldier_control_.soldier_capacity());
+	settings->stopped = is_stopped_;
+	for (auto& pair : settings->ware_queues) {
+		pair.second.priority = get_priority(wwWARE, pair.first, false);
+		for (const auto& queue : input_queues_) {
+			if (queue->get_type() == wwWARE && queue->get_index() == pair.first) {
+				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());
+				break;
+			}
+		}
+	}
+	for (auto& pair : settings->worker_queues) {
+		pair.second.priority = get_priority(wwWORKER, pair.first, false);
+		for (const auto& queue : input_queues_) {
+			if (queue->get_type() == wwWORKER && queue->get_index() == pair.first) {
+				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());
+				break;
+			}
+		}
+	}
+	return settings;
+}
+
 /**
  * In addition to advancing the program, update soldier status.
  */

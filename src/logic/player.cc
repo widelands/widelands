@@ -760,6 +760,7 @@ void Player::enhance_or_dismantle(Building* building,
 		} else {
 			workers = building->get_workers();
 		}
+		const BuildingSettings* settings = building->create_building_settings();
 
 		if (index_of_new_building != INVALID_INDEX) {
 			// For enhancing, register whether the window was open
@@ -770,7 +771,7 @@ void Player::enhance_or_dismantle(Building* building,
 		//  pointer.
 		if (index_of_new_building != INVALID_INDEX)
 			building = &egbase().warp_constructionsite(
-			   position, player_number_, index_of_new_building, false, former_buildings);
+			   position, player_number_, index_of_new_building, false, former_buildings, settings);
 		else
 			building = &egbase().warp_dismantlesite(position, player_number_, false, former_buildings);
 

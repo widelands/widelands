@@ -209,6 +209,8 @@ public:
 		return portdock_;
 	}
 
+	const BuildingSettings* create_building_settings() const override;
+
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.
 	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;

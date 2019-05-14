@@ -1337,6 +1337,18 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	return portdock_->expedition_bootstrap()->inputqueue(index, type);
 }
 
+const BuildingSettings* Warehouse::create_building_settings() const {
+	WarehouseSettings* settings = new WarehouseSettings(descr(), owner().tribe());
+	for (auto& pair : settings->ware_preferences) {
+		pair.second = get_ware_policy(pair.first);
+	}
+	for (auto& pair : settings->worker_preferences) {
+		pair.second = get_worker_policy(pair.first);
+	}
+	settings->launch_expedition = portdock_ && portdock_->expedition_started();
+	return settings;
+}
+
 void Warehouse::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 

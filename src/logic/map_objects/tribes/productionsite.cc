@@ -994,6 +994,30 @@ void ProductionSite::unnotify_player() {
 	set_production_result("");
 }
 
+const BuildingSettings* ProductionSite::create_building_settings() const {
+	ProductionsiteSettings* settings = new ProductionsiteSettings(descr());
+	settings->stopped = is_stopped_;
+	for (auto& pair : settings->ware_queues) {
+		pair.second.priority = get_priority(wwWARE, pair.first, false);
+		for (const auto& queue : input_queues_) {
+			if (queue->get_type() == wwWARE && queue->get_index() == pair.first) {
+				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());
+				break;
+			}
+		}
+	}
+	for (auto& pair : settings->worker_queues) {
+		pair.second.priority = get_priority(wwWORKER, pair.first, false);
+		for (const auto& queue : input_queues_) {
+			if (queue->get_type() == wwWORKER && queue->get_index() == pair.first) {
+				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());
+				break;
+			}
+		}
+	}
+	return settings;
+}
+
 /// Changes the default anim string to \li anim
 void ProductionSite::set_default_anim(std::string anim) {
 	if (default_anim_ == anim)

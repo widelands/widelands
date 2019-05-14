@@ -24,6 +24,7 @@
 #include <vector>
 
 #include "base/macros.h"
+#include "logic/map_objects/tribes/building_settings.h"
 #include "logic/map_objects/tribes/partially_finished_building.h"
 #include "scripting/lua_table.h"
 
@@ -59,63 +60,6 @@ struct ConstructionsiteInformation {
 	std::vector<const BuildingDescr*> intermediates; // If we enhance a building while it's still under construction
 	uint32_t totaltime;
 	uint32_t completedtime;
-};
-
-// Allows the player to define settings for the building which a Constructionsite will become when completed
-struct ConstructionsiteSettings {
-	ConstructionsiteSettings(const std::string& name) : descr_(name) {
-	}
-	static ConstructionsiteSettings* load(const Game&, const TribeDescr&, FileRead&);
-
-	virtual void save(const Game&, FileWrite&) const;
-	virtual void read(const Game&, FileRead&);
-
-private:
-	const std::string descr_;
-};
-
-struct ProductionsiteSettings : public ConstructionsiteSettings {
-	ProductionsiteSettings(const ProductionSiteDescr& descr);
-	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
-
-	struct InputQueueSetting {
-		const uint32_t max_fill;
-		uint32_t desired_fill;
-		int32_t priority;
-	};
-	std::vector<std::pair<DescriptionIndex, InputQueueSetting>> ware_queues;
-	std::vector<std::pair<DescriptionIndex, InputQueueSetting>> worker_queues;
-	bool stopped;
-};
-
-struct MilitarysiteSettings : public ConstructionsiteSettings {
-	MilitarysiteSettings(const MilitarySiteDescr&);
-	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
-
-	const uint32_t max_capacity;
-	uint32_t desired_capacity;
-	bool prefer_heroes;
-};
-
-struct TrainingsiteSettings : public ProductionsiteSettings {
-	TrainingsiteSettings(const TrainingSiteDescr&);
-	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
-
-	const uint32_t max_capacity;
-	uint32_t desired_capacity;
-};
-
-struct WarehouseSettings : public ConstructionsiteSettings {
-	WarehouseSettings(const WarehouseDescr&, const TribeDescr&);
-	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
-
-	std::map<DescriptionIndex, StockPolicy> ware_preferences;
-	std::map<DescriptionIndex, StockPolicy> worker_preferences;
-	bool launch_expedition;
 };
 
 /*
@@ -181,9 +125,10 @@ public:
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
 
-	ConstructionsiteSettings* get_settings() const {
+	BuildingSettings* get_settings() const {
 		return settings_.get();
 	}
+	void apply_settings(const BuildingSettings&);
 
 	void enhance(Game&);
 
@@ -209,7 +154,7 @@ private:
 	bool builder_idle_;                 // used to determine whether the builder is idle
 	ConstructionsiteInformation info_;  // asked for by player point of view for the gameview
 
-	std::unique_ptr<ConstructionsiteSettings> settings_;
+	std::unique_ptr<BuildingSettings> settings_;
 };
 }  // namespace Widelands
 

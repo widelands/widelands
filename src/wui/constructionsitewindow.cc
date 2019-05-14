@@ -359,8 +359,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				igbase()->game().send_player_constructionsite_startstop(
 						*construction_site_.get(igbase()->egbase()), cs_stopped_->get_state());
 			});
-			settings_box.add_space(8);
 			settings_box.add(cs_stopped_, UI::Box::Resizing::kFullSize);
+			settings_box.add_space(8);
 			cs_stopped_->set_enabled(can_act);
 		} else if (upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings())) {
 			cs_soldier_capacity_ = new UI::SpinBox(&settings_box, 0, 0, 300, 100,
@@ -434,8 +434,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 					igbase()->game().send_player_constructionsite_launch_expedition(
 							*construction_site_.get(igbase()->egbase()), cs_launch_expedition_->get_state());
 				});
-				settings_box.add_space(8);
 				settings_box.add(cs_launch_expedition_, UI::Box::Resizing::kFullSize);
+				settings_box.add_space(8);
 				cs_launch_expedition_->set_enabled(can_act);
 			}
 		} else {
@@ -459,8 +459,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 						*construction_site, construction_site->get_info().becomes->enhancement(), true);
 				}
 			});
-			settings_box.add_space(8);
 			settings_box.add(cs_enhance_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+			settings_box.add_space(8);
 		}
 		if (settings_box.get_nritems()) {
 			get_tabs()->add("settings", g_gr->images().get(pic_tab_settings),

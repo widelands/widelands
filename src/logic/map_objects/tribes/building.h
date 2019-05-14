@@ -31,6 +31,7 @@
 #include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/attack_target.h"
+#include "logic/map_objects/tribes/building_settings.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"
@@ -300,6 +301,10 @@ public:
 
 	void add_worker(Worker&) override;
 	void remove_worker(Worker&) override;
+
+	virtual const BuildingSettings* create_building_settings() const {
+		return nullptr;
+	}
 
 	// AttackTarget object associated with this building. If the building can
 	// never be attacked (for example productionsites) this will be nullptr.

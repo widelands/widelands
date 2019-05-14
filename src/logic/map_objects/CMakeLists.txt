@@ -49,6 +49,8 @@ wl_library(logic_map_objects
     tribes/bill_of_materials.h
     tribes/building.cc
     tribes/building.h
+    tribes/building_settings.cc
+    tribes/building_settings.h
     tribes/carrier.cc
     tribes/carrier.h
     tribes/constructionsite.cc

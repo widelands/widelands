@@ -95,7 +95,7 @@ private:
 	Widelands::OPtr<Widelands::ConstructionSite> construction_site_;
 	UI::ProgressBar* progress_;
 
-	// ConstructionsiteSettings-related UI elements
+	// BuildingSettings-related UI elements
 	UI::Button* cs_enhance_;
 	UI::Checkbox* cs_launch_expedition_;
 	UI::Checkbox* cs_prefer_heroes_;
