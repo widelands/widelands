@@ -503,7 +503,7 @@ bool EditBox::valid_username() {
 /**
  * Return text as asterisks.
  */
-const std::string& EditBox::text_to_asterisk() const {
+std::string EditBox::text_to_asterisk() {
 	std::string asterisk;
 	for (int i = 0; i < int (m_->text.size()); i++) {
 		asterisk.append("*");

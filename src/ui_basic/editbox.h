@@ -59,7 +59,6 @@ struct EditBox : public Panel {
 	boost::signals2::signal<void()> cancel;
 
 	const std::string& text() const;
-	const std::string& text_to_asterisk() const;
 	void set_text(const std::string&);
 	void set_max_length(uint32_t);
 
@@ -91,6 +90,7 @@ private:
 	std::unique_ptr<EditBoxImpl> m_;
 
 	void check_caret();
+	std::string text_to_asterisk();
 
 	bool history_active_;
 	int16_t history_position_;
