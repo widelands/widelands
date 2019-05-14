@@ -37,11 +37,16 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
      // Buttons
      metaserver(
         &vbox_, "metaserver", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Internet game")),
-     showloginbox(nullptr),
+     showloginbox(&vbox_, "showloginbox", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu,
+	  				_("Show login dialog")),
      lan(&vbox_, "lan", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("LAN / Direct IP")),
      back(&vbox_, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Back")) {
 	metaserver.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMultiPlayer::internet_login, boost::ref(*this)));
+
+	showloginbox.sigclicked.connect(
+		   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
+	layout();
 
 	lan.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMultiPlayer::end_modal<FullscreenMenuBase::MenuTarget>,
@@ -54,17 +59,13 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 	title.set_fontsize(fs_big());
 
 	vbox_.add(&metaserver, UI::Box::Resizing::kFullSize);
+	vbox_.add(&showloginbox, UI::Box::Resizing::kFullSize);
+	vbox_.add_inf_space();
 	vbox_.add(&lan, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
 	vbox_.add(&back, UI::Box::Resizing::kFullSize);
 
-	showloginbox =
-		   new UI::Button(this, "login_dialog", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
-								g_gr->images().get("images/wui/menus/menu_toggle_newmessage_menu.png"),
-								_("Show login dialog"));
-	showloginbox->sigclicked.connect(
-		   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
-	layout();
+
 }
 
 /// called if the showloginbox button was pressed
@@ -155,10 +156,7 @@ void FullscreenMenuMultiPlayer::layout() {
 	title.set_pos(Vector2i(0, title_y_));
 
 	metaserver.set_size(butw_, buth_);
-	if (showloginbox) {
-		showloginbox->set_pos(Vector2i(box_x_ + butw_ + padding_ / 2, box_y_));
-		showloginbox->set_size(buth_, buth_);
-	}
+	showloginbox.set_size(buth_, buth_);
 	metaserver.set_desired_size(butw_, buth_);
 	lan.set_desired_size(butw_, buth_);
 	back.set_desired_size(butw_, buth_);
