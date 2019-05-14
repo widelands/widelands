@@ -485,4 +485,15 @@ void EditBox::check_caret() {
 			m_->scrolloffset = 0;
 	}
 }
+
+/**
+ * Check for vaild username characters.
+ */
+bool EditBox::valid_username() {
+	if (m_->text.empty() || m_->text.find_first_not_of("abcdefghijklmnopqrstuvwxyz"
+			"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= m_->text.size()) {
+				return false;
+	}
+	return true;
+}
 }  // namespace UI

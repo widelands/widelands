@@ -139,8 +139,7 @@ void LoginBox::verify_input() {
 		eb_nickname->set_warning(true);
 		eb_nickname->set_tooltip(_("Please enter a nickname!"));
 		loginbtn->set_enabled(false);
-	} else if (eb_nickname->text().find_first_not_of("abcdefghijklmnopqrstuvwxyz"
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= eb_nickname->text().size()) {
+	} else if (!eb_nickname->valid_username()) {
 			eb_nickname->set_warning(true);
 			eb_nickname->set_tooltip(_("Enter a valid nickname. This value may contain only "
 													  "English letters, numbers, and @ . + - _ characters."));
