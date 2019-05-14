@@ -79,7 +79,8 @@ enum class QueueCommandTypes {
 	kConstructionSiteLaunchExpedition,
 	kConstructionSiteInputQueuePriority,
 	kConstructionSiteInputQueueMaxFill,
-	kConstructionSiteEnhance, // 34
+	kConstructionSiteEnhance,
+	kConstructionSiteStartStop, // 35
 
 	kSinkShip = 121,
 	kShipCancelExpedition,

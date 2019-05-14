@@ -94,6 +94,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdConstructionsiteInputQueueMaxFill();
 	case QueueCommandTypes::kConstructionSiteEnhance:
 		return *new CmdConstructionsiteEnhance();
+	case QueueCommandTypes::kConstructionSiteStartStop:
+		return *new CmdConstructionsiteStartStop();
 	case QueueCommandTypes::kSinkShip:
 		return *new CmdShipSink();
 	case QueueCommandTypes::kShipCancelExpedition:

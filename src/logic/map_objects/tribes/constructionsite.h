@@ -56,6 +56,7 @@ struct ConstructionsiteInformation {
 	const BuildingDescr*
 	   becomes;  // Also works as a marker telling whether there is a construction site.
 	const BuildingDescr* was;  // only valid if "becomes" is an enhanced building.
+	std::vector<const BuildingDescr*> intermediates; // If we enhance a building while it's still under construction
 	uint32_t totaltime;
 	uint32_t completedtime;
 };
@@ -85,6 +86,7 @@ struct ProductionsiteSettings : public ConstructionsiteSettings {
 	};
 	std::vector<std::pair<DescriptionIndex, InputQueueSetting>> ware_queues;
 	std::vector<std::pair<DescriptionIndex, InputQueueSetting>> worker_queues;
+	bool stopped;
 };
 
 struct MilitarysiteSettings : public ConstructionsiteSettings {
@@ -182,6 +184,8 @@ public:
 	ConstructionsiteSettings* get_settings() const {
 		return settings_.get();
 	}
+
+	void enhance(Game&);
 
 protected:
 	void update_statistics_string(std::string* statistics_string) override;

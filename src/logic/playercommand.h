@@ -948,6 +948,32 @@ private:
 	bool launch_;
 };
 
+struct CmdConstructionsiteStartStop : PlayerCommand {
+	CmdConstructionsiteStartStop(uint32_t time,
+	                  PlayerNumber p,
+	                  ConstructionSite&,
+	                  bool stop);
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kConstructionSiteStartStop;
+	}
+
+	void execute(Game& game) override;
+
+	// Network (de-)serialization
+	explicit CmdConstructionsiteStartStop(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	// Savegame functions
+	CmdConstructionsiteStartStop();
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Serial constructionsite_;
+	bool stopped_;
+};
+
 struct CmdConstructionsiteStockPolicy : PlayerCommand {
 	CmdConstructionsiteStockPolicy(uint32_t time,
 	                  PlayerNumber p,

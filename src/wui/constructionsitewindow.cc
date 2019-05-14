@@ -22,7 +22,9 @@
 #include <boost/format.hpp>
 
 #include "graphic/graphic.h"
+#include "wui/actionconfirm.h"
 #include "wui/inputqueuedisplay.h"
+#include "wui/interactive_player.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
@@ -283,6 +285,7 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
 		cs_launch_expedition_(nullptr),
 		cs_prefer_heroes_(nullptr),
 		cs_soldier_capacity_(nullptr),
+		cs_stopped_(nullptr),
 		cs_warehouse_wares_(nullptr),
 		cs_warehouse_workers_(nullptr),
 		cs_warehouse_stock_policy_normal_(nullptr),
@@ -349,6 +352,16 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 					b->set_enabled(can_act);
 				}
 			}
+			cs_stopped_ = new UI::Checkbox(&settings_box, Vector2i::zero(),
+				 _("Stopped"),
+				 _("Stop this building’s work after completion"));
+			cs_stopped_->changed.connect([this]() {
+				igbase()->game().send_player_constructionsite_startstop(
+						*construction_site_.get(igbase()->egbase()), cs_stopped_->get_state());
+			});
+			settings_box.add_space(8);
+			settings_box.add(cs_stopped_, UI::Box::Resizing::kFullSize);
+			cs_stopped_->set_enabled(can_act);
 		} else if (upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings())) {
 			cs_soldier_capacity_ = new UI::SpinBox(&settings_box, 0, 0, 300, 100,
 					ms->desired_capacity, 1, ms->max_capacity, UI::PanelStyle::kWui, _("Soldier capacity:"));
@@ -439,13 +452,20 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_enhance_ = new UI::Button(&settings_box, "enhance", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                  building_descr.icon(), enhance_tooltip);
 			cs_enhance_->sigclicked.connect([this, construction_site] {
-				igbase()->game().send_player_constructionsite_enhance(*construction_site);
+				if (SDL_GetModState() & KMOD_CTRL) {
+					igbase()->game().send_player_constructionsite_enhance(*construction_site);
+				} else {
+				show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()),
+						*construction_site, construction_site->get_info().becomes->enhancement(), true);
+				}
 			});
 			settings_box.add_space(8);
 			settings_box.add(cs_enhance_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		}
-		get_tabs()->add("settings", g_gr->images().get(pic_tab_settings),
-				&settings_box, _("Settings to apply after construction"));
+		if (settings_box.get_nritems()) {
+			get_tabs()->add("settings", g_gr->images().get(pic_tab_settings),
+					&settings_box, _("Settings to apply after construction"));
+		}
 	}
 
 	set_title((boost::format("(%s)") % construction_site->building().descname()).str());
@@ -488,9 +508,14 @@ void ConstructionSiteWindow::think() {
 	if (construction_site == nullptr) {
 		return;
 	}
+
 	progress_->set_state(construction_site->get_built_per64k());
 
 	// FakeInputQueue and FakeWaresDisplay update themselves – we need to refresh the other settings
+	if (upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings())) {
+		assert(cs_stopped_);
+		cs_stopped_->set_state(ps->stopped);
+	}
 	if (upcast(Widelands::TrainingsiteSettings, ts, construction_site->get_settings())) {
 		assert(cs_soldier_capacity_);
 		cs_soldier_capacity_->set_value(ts->desired_capacity);

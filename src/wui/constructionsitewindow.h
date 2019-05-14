@@ -102,6 +102,7 @@ private:
 	UI::SpinBox* cs_soldier_capacity_;
 	std::vector<FakeInputQueue*> cs_ware_queues_;
 	std::vector<FakeInputQueue*> cs_worker_queues_;
+	UI::Checkbox* cs_stopped_;
 	FakeWaresDisplay* cs_warehouse_wares_;
 	FakeWaresDisplay* cs_warehouse_workers_;
 	UI::Button* cs_warehouse_stock_policy_normal_;

@@ -115,6 +115,7 @@ enum {
 	PLCMD_CONSTRUCTIONSITE_STOCKPOLICY = 36,
 	PLCMD_CONSTRUCTIONSITE_LAUNCHEXPEDITION = 37,
 	PLCMD_CONSTRUCTIONSITE_ENHANCE = 38,
+	PLCMD_CONSTRUCTIONSITE_STARTSTOP = 39,
 };
 
 /*** class PlayerCommand ***/
@@ -195,6 +196,10 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdConstructionsiteStockPolicy(des);
 	case PLCMD_CONSTRUCTIONSITE_LAUNCHEXPEDITION:
 		return new CmdConstructionsiteLaunchExpedition(des);
+	case PLCMD_CONSTRUCTIONSITE_ENHANCE:
+		return new CmdConstructionsiteEnhance(des);
+	case PLCMD_CONSTRUCTIONSITE_STARTSTOP:
+		return new CmdConstructionsiteStartStop(des);
 	default:
 		throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
 	}
@@ -2092,6 +2097,71 @@ void CmdConstructionsiteLaunchExpedition::write(FileWrite& fw, EditorGameBase& e
 	fw.unsigned_8(launch_ ? 1 : 0);
 }
 
+/*** struct CmdConstructionsiteStartStop ***/
+CmdConstructionsiteStartStop::CmdConstructionsiteStartStop(uint32_t time,
+                                     PlayerNumber p,
+                                     ConstructionSite& cs,
+                                     bool stop)
+   : PlayerCommand(time, p), constructionsite_(cs.serial()), stopped_(stop) {
+}
+
+CmdConstructionsiteStartStop::CmdConstructionsiteStartStop()
+   : PlayerCommand(), constructionsite_(0), stopped_(false) {
+}
+
+void CmdConstructionsiteStartStop::execute(Game& game) {
+	if (Player* plr = game.get_player(sender())) {
+		if (upcast(ConstructionSite, cs, game.objects().get_object(constructionsite_))) {
+			if (cs->get_owner() != plr) {
+				log("CmdConstructionsiteStartStop: sender %u, but site owner %u\n", sender(),
+				    cs->owner().player_number());
+				return;
+			}
+			if (upcast(ProductionsiteSettings, s, cs->get_settings())) {
+				s->stopped = stopped_;
+			}
+		}
+	}
+}
+
+CmdConstructionsiteStartStop::CmdConstructionsiteStartStop(StreamRead& des)
+		: PlayerCommand(0, des.unsigned_8()) {
+	constructionsite_ = des.unsigned_32();
+	stopped_ = des.unsigned_8();
+}
+
+void CmdConstructionsiteStartStop::serialize(StreamWrite& ser) {
+	ser.unsigned_8(PLCMD_CONSTRUCTIONSITE_STARTSTOP);
+	ser.unsigned_8(sender());
+	ser.unsigned_32(constructionsite_);
+	ser.unsigned_8(stopped_ ? 1 : 0);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdConstructionsiteStartStop = 1;
+
+void CmdConstructionsiteStartStop::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdConstructionsiteStartStop) {
+			PlayerCommand::read(fr, egbase, mol);
+			constructionsite_ = fr.unsigned_32();
+			stopped_ = fr.unsigned_8();
+		} else {
+			throw UnhandledVersionError("CmdConstructionsiteStartStop", packet_version,
+					kCurrentPacketVersionCmdConstructionsiteStartStop);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("CmdConstructionsiteStartStop: %s", e.what());
+	}
+}
+
+void CmdConstructionsiteStartStop::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdConstructionsiteStartStop);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(constructionsite_);
+	fw.unsigned_8(stopped_ ? 1 : 0);
+}
+
 /*** struct CmdConstructionsiteStockPolicy ***/
 CmdConstructionsiteStockPolicy::CmdConstructionsiteStockPolicy(uint32_t time,
                                      PlayerNumber p,
@@ -2384,7 +2454,7 @@ void CmdConstructionsiteEnhance::execute(Game& game) {
 				    cs->owner().player_number());
 				return;
 			}
-			log("NOCOM: CmdConstructionsiteEnhance is not supported yet!!\n");
+			cs->enhance(game);
 		}
 	}
 }

@@ -896,6 +896,10 @@ void Game::send_player_constructionsite_enhance(ConstructionSite& cs) {
 	send_player_command(*new CmdConstructionsiteEnhance(get_gametime(), cs.get_owner()->player_number(), cs));
 }
 
+void Game::send_player_constructionsite_startstop(ConstructionSite& cs, bool stop) {
+	send_player_command(*new CmdConstructionsiteStartStop(get_gametime(), cs.get_owner()->player_number(), cs, stop));
+}
+
 int Game::propose_trade(const Trade& trade) {
 	// TODO(sirver,trading): Check if a trade is possible (i.e. if there is a
 	// path between the two markets);

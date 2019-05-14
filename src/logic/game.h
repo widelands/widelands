@@ -292,6 +292,7 @@ public:
 	void send_player_constructionsite_input_queue_priority(ConstructionSite&, WareWorker, DescriptionIndex, int32_t);
 	void send_player_constructionsite_input_queue_max_fill(ConstructionSite&, WareWorker, DescriptionIndex, uint32_t);
 	void send_player_constructionsite_enhance(ConstructionSite&);
+	void send_player_constructionsite_startstop(ConstructionSite&, bool);
 
 	InteractivePlayer* get_ipl();
 

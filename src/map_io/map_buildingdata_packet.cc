@@ -280,7 +280,7 @@ void MapBuildingdataPacket::read_constructionsite(ConstructionSite& construction
 
 			constructionsite.fetchfromflag_ = fr.signed_32();
 
-			if (fr.unsigned_8()) {
+			if (packet_version >= 4) {
 				constructionsite.settings_.reset(ConstructionsiteSettings::load(game,
 						constructionsite.owner().tribe(), fr));
 			} else {
@@ -961,11 +961,8 @@ void MapBuildingdataPacket::write_constructionsite(const ConstructionSite& const
 
 	fw.signed_32(constructionsite.fetchfromflag_);
 
-	if (constructionsite.settings_) {
-		constructionsite.settings_->save(game, fw);
-	} else {
-		fw.unsigned_8(0);
-	}
+	assert(constructionsite.settings_);
+	constructionsite.settings_->save(game, fw);
 }
 
 void MapBuildingdataPacket::write_dismantlesite(const DismantleSite& dms,
