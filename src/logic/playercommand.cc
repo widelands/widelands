@@ -2285,9 +2285,8 @@ void CmdConstructionsiteInputQueuePriority::execute(Game& game) {
 							}
 						}
 						NEVER_HERE();
-					default:
-						NEVER_HERE();
 				}
+				NEVER_HERE();
 			}
 		}
 	}
@@ -2381,9 +2380,8 @@ void CmdConstructionsiteInputQueueMaxFill::execute(Game& game) {
 							}
 						}
 						NEVER_HERE();
-					default:
-						NEVER_HERE();
 				}
+				NEVER_HERE();
 			}
 		}
 	}

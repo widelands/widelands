@@ -173,8 +173,9 @@ BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tri
 							game.tribes().get_building_descr(index)), tribe);
 					break;
 				}
-				default:
-					throw wexception("Unknown building category %u (%s)", static_cast<uint8_t>(type), name.c_str());
+			}
+			if (!result) {
+				throw wexception("Unknown building category %u (%s)", static_cast<uint8_t>(type), name.c_str());
 			}
 			result->read(game, fr);
 			return result;

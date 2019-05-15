@@ -20,6 +20,7 @@
 #ifndef WL_WUI_CONSTRUCTIONSITEWINDOW_H
 #define WL_WUI_CONSTRUCTIONSITEWINDOW_H
 
+#include <memory>
 #include <vector>
 
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -47,7 +48,7 @@ protected:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 
 private:
-	struct FakeInputQueue : UI::Box {
+	struct FakeInputQueue : UI::Panel {
 		FakeInputQueue(Panel* parent,
 			           int32_t x,
 			           int32_t y,
@@ -68,12 +69,13 @@ private:
 		Widelands::DescriptionIndex index_;
 
 		void change_fill(bool);
+		void update_desired_size() override;
 
 		uint32_t max_fill_;
 		const Image* icon_;
 		const Image* max_fill_indicator_;
 
-		UI::Radiogroup* priority_group_;
+		std::unique_ptr<UI::Radiogroup> priority_group_;
 	};
 
 	class FakeWaresDisplay : public WaresDisplay {
@@ -96,7 +98,7 @@ private:
 	// BuildingSettings-related UI elements
 	UI::Button* cs_enhance_;
 	UI::Checkbox* cs_launch_expedition_;
-	UI::Radiogroup* cs_prefer_heroes_rookies_;
+	std::unique_ptr<UI::Radiogroup> cs_prefer_heroes_rookies_;
 	UI::Button* cs_soldier_capacity_decrease_;
 	UI::Button* cs_soldier_capacity_increase_;
 	UI::Textarea* cs_soldier_capacity_display_;

@@ -46,6 +46,7 @@ static const char pic_increase_capacity[] = "images/wui/buildings/menu_up_train.
 constexpr uint32_t kPriorityButtonSize = 10;
 constexpr uint32_t kFakeInputQueueWareWidth = WARE_MENU_PIC_WIDTH + 2;
 constexpr uint32_t kFakeInputQueueWareHeight = 3 * kPriorityButtonSize;
+constexpr uint32_t kFakeInputQueueButtonSize = 24;
 
 ConstructionSiteWindow::FakeInputQueue::FakeInputQueue(Panel* parent,
                int32_t x,
@@ -54,7 +55,7 @@ ConstructionSiteWindow::FakeInputQueue::FakeInputQueue(Panel* parent,
                Widelands::ConstructionSite& cs,
                Widelands::WareWorker ww,
                Widelands::DescriptionIndex di)
-		: UI::Box(parent, x, y, UI::Box::Horizontal),
+		: UI::Panel(parent, x, y, 0, 0),
 		constructionsite_(cs),
 		settings_(*dynamic_cast<Widelands::ProductionsiteSettings*>(cs.get_settings())),
 		type_(ww),
@@ -75,24 +76,23 @@ ConstructionSiteWindow::FakeInputQueue::FakeInputQueue(Panel* parent,
 	icon_ = w_descr->icon();
 
 	UI::Button& decrease = *new UI::Button(
-			this, "decrease_max_fill", 0, 0, kFakeInputQueueWareWidth, kFakeInputQueueWareHeight,
+			this, "decrease_max_fill", 0, (kFakeInputQueueWareHeight - kFakeInputQueueButtonSize) / 2,
+			kFakeInputQueueButtonSize, kFakeInputQueueButtonSize,
 			UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_left.png"),
 			_("Decrease the number of items to initially store here"));
 	UI::Button& increase = *new UI::Button(
-			this, "increase_max_fill", 0, 0, kFakeInputQueueWareWidth, kFakeInputQueueWareHeight,
-			UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_right.png"),
+			this, "increase_max_fill", kFakeInputQueueButtonSize + kFakeInputQueueWareWidth * max_fill_ + 8,
+			(kFakeInputQueueWareHeight - kFakeInputQueueButtonSize) / 2,
+			kFakeInputQueueButtonSize, kFakeInputQueueButtonSize, UI::ButtonStyle::kWuiMenu,
+			g_gr->images().get("images/ui_basic/scrollbar_right.png"),
 			_("Increase the number of items to initially store here"));
 	decrease.sigclicked.connect(boost::bind(&ConstructionSiteWindow::FakeInputQueue::change_fill, this, true));
 	increase.sigclicked.connect(boost::bind(&ConstructionSiteWindow::FakeInputQueue::change_fill, this, false));
 	decrease.set_repeating(true);
 	increase.set_repeating(true);
-	add(&decrease);
-	add_space(kFakeInputQueueWareWidth * max_fill_);
-	add(&increase);
 	if (type_ == Widelands::wwWARE) {
-		add_space(kPriorityButtonSize + 4);
-		priority_group_ = new UI::Radiogroup();
-		Vector2i pos(kFakeInputQueueWareWidth * (max_fill_ + 2) + 2, 0);
+		priority_group_.reset(new UI::Radiogroup());
+		Vector2i pos(kFakeInputQueueWareWidth * max_fill_ + 2 * kFakeInputQueueButtonSize + 10, 0);
 		priority_group_->add_button(
 		   this, pos, g_gr->images().get(pic_priority_high), _("Highest priority"));
 		pos.y += kPriorityButtonSize;
@@ -136,6 +136,12 @@ ConstructionSiteWindow::FakeInputQueue::FakeInputQueue(Panel* parent,
 	}
 	decrease.set_enabled(can_act);
 	increase.set_enabled(can_act);
+	update_desired_size();
+}
+
+void ConstructionSiteWindow::FakeInputQueue::update_desired_size() {
+	set_desired_size(kFakeInputQueueWareWidth * max_fill_ + 2 * kFakeInputQueueButtonSize + kPriorityButtonSize + 12,
+			3 * kPriorityButtonSize);
 }
 
 void ConstructionSiteWindow::FakeInputQueue::change_fill(bool lower) {
@@ -194,13 +200,12 @@ const Widelands::ProductionsiteSettings::InputQueueSetting& ConstructionSiteWind
 				}
 			}
 			NEVER_HERE();
-		default:
-			NEVER_HERE();
 	}
+	NEVER_HERE();
 }
 
 void ConstructionSiteWindow::FakeInputQueue::think() {
-	UI::Box::think();
+	UI::Panel::think();
 	if (priority_group_) {
 		switch (get_settings().priority) {
 			case Widelands::kPriorityHigh:
@@ -219,10 +224,10 @@ void ConstructionSiteWindow::FakeInputQueue::think() {
 }
 
 void ConstructionSiteWindow::FakeInputQueue::draw(RenderTarget& dst) {
-	UI::Box::draw(dst);
+	UI::Panel::draw(dst);
 
 	Vector2i point = Vector2i::zero();
-	point.x = kFakeInputQueueWareWidth + 4;
+	point.x = kFakeInputQueueButtonSize + 4;
 	point.y = (kFakeInputQueueWareHeight - icon_->height()) / 2;
 
 	const uint32_t fill = get_settings().desired_fill;
@@ -425,7 +430,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 
 			UI::Box& soldier_preference_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
 			settings_box.add(&soldier_preference_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-			cs_prefer_heroes_rookies_ = new UI::Radiogroup();
+			cs_prefer_heroes_rookies_.reset(new UI::Radiogroup());
 			cs_prefer_heroes_rookies_->add_button(&soldier_preference_box, Vector2i::zero(),
 					g_gr->images().get("images/wui/buildings/prefer_rookies.png"),
 					_("Prefer rookies"));
