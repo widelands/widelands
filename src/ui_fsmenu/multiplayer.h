@@ -53,7 +53,7 @@ private:
 
 	UI::Textarea title;
 	UI::Button metaserver;
-	UI::Button showloginbox;
+	UI::Button* showloginbox;
 	UI::Button lan;
 	UI::Button back;
 
