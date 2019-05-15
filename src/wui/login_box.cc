@@ -76,7 +76,12 @@ LoginBox::LoginBox(Panel& parent)
 		ta_password->set_color(UI_FONT_CLR_DISABLED);
 	}
 
-	eb_nickname->focus();
+	if (eb_nickname->text().empty()) {
+		eb_nickname->focus();
+	} else {
+		loginbtn->focus();
+	}
+
 }
 
 /// think function of the UI (main loop)
