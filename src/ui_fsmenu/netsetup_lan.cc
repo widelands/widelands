@@ -24,6 +24,7 @@
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "network/constants.h"
+#include "network/internet_gaming.h"
 #include "network/network.h"
 #include "profile/profile.h"
 
@@ -252,7 +253,7 @@ void FullscreenMenuNetSetupLAN::change_playername() {
 	playername.set_tooltip("");
 	hostgame.set_enabled(true);
 
-	if (!playername.valid_username()) {
+	if (!InternetGaming::ref().valid_username(playername.text())) {
 			playername.set_warning(true);
 			playername.set_tooltip(_("Enter a valid nickname. This value may contain only "
 													  "English letters, numbers, and @ . + - _ characters."));
