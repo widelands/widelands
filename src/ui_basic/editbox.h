@@ -84,8 +84,6 @@ struct EditBox : public Panel {
 		return password_;
 	}
 
-	bool valid_username();
-
 private:
 	std::unique_ptr<EditBoxImpl> m_;
 

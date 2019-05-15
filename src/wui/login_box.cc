@@ -21,6 +21,7 @@
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
+#include "network/internet_gaming.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
@@ -141,7 +142,7 @@ void LoginBox::verify_input() {
 		eb_nickname->set_warning(true);
 		eb_nickname->set_tooltip(_("Please enter a nickname!"));
 		loginbtn->set_enabled(false);
-	} else if (!eb_nickname->valid_username()) {
+	} else if (!InternetGaming::ref().valid_username(eb_nickname->text())) {
 			eb_nickname->set_warning(true);
 			eb_nickname->set_tooltip(_("Enter a valid nickname. This value may contain only "
 													  "English letters, numbers, and @ . + - _ characters."));

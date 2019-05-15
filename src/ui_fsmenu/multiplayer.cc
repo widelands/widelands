@@ -115,8 +115,7 @@ void FullscreenMenuMultiPlayer::internet_login() {
 
 	// Checks can be done directly in editbox' by using valid_username().
 	// This is just to be on the safe side, in case the user changed the password in the config file.
-	if (nickname_.empty() || nickname_.find_first_not_of("abcdefghijklmnopqrstuvwxyz"
-			"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= nickname_.size()) {
+	if (!InternetGaming::ref().valid_username(nickname_)) {
 		show_internet_login();
 		return;
 	}
