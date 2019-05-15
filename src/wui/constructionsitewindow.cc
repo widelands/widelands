@@ -590,7 +590,7 @@ void ConstructionSiteWindow::think() {
 		assert(cs_prefer_heroes_rookies_);
 		cs_soldier_capacity_display_->set_text((boost::format(ngettext("%u soldier", "%u soldiers",
 				ms->desired_capacity)) % ms->desired_capacity).str());
-		cs_soldier_capacity_decrease_->set_enabled(can_act && ms->desired_capacity > 0);
+		cs_soldier_capacity_decrease_->set_enabled(can_act && ms->desired_capacity > 1);
 		cs_soldier_capacity_increase_->set_enabled(can_act && ms->desired_capacity < ms->max_capacity);
 		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 1 : 0);
 	} else if (upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings())) {
