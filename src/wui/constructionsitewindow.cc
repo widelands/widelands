@@ -103,6 +103,9 @@ ConstructionSiteWindow::FakeInputQueue::FakeInputQueue(Panel* parent,
 		   this, pos, g_gr->images().get(pic_priority_low), _("Lowest priority"));
 		if (can_act) {
 			priority_group_->clicked.connect([this]() {
+				if (!(SDL_GetModState() & KMOD_CTRL)) {
+					return;
+				}
 				Widelands::Game& game = dynamic_cast<Widelands::Game&>(constructionsite_.get_owner()->egbase());
 				int32_t priority;
 				switch (priority_group_->get_state()) {
@@ -118,18 +121,13 @@ ConstructionSiteWindow::FakeInputQueue::FakeInputQueue(Panel* parent,
 					default:
 						return;
 				}
-				if (SDL_GetModState() & KMOD_CTRL) {
-					for (const auto& pair : settings_.ware_queues) {
-						game.send_player_constructionsite_input_queue_priority(constructionsite_,
-								Widelands::wwWARE, pair.first, priority);
-					}
-					for (const auto& pair : settings_.worker_queues) {
-						game.send_player_constructionsite_input_queue_priority(constructionsite_,
-								Widelands::wwWORKER, pair.first, priority);
-					}
-				} else {
+				for (const auto& pair : settings_.ware_queues) {
 					game.send_player_constructionsite_input_queue_priority(constructionsite_,
-							type_, index_, priority);
+							Widelands::wwWARE, pair.first, priority);
+				}
+				for (const auto& pair : settings_.worker_queues) {
+					game.send_player_constructionsite_input_queue_priority(constructionsite_,
+							Widelands::wwWORKER, pair.first, priority);
 				}
 			});
 		}
@@ -351,7 +349,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			}
 			if (upcast(Widelands::TrainingsiteSettings, ts, ps)) {
 				UI::Box& soldier_capacity_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
-				settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kFullSize);
+				settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 				cs_soldier_capacity_decrease_ = new UI::Button(&soldier_capacity_box,
 						"decrease", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
 						g_gr->images().get(pic_decrease_capacity),
@@ -375,7 +373,9 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 							SDL_GetModState() & KMOD_CTRL ? ts->max_capacity : ts->desired_capacity + 1);
 					});
 				soldier_capacity_box.add(cs_soldier_capacity_decrease_);
+				soldier_capacity_box.add_space(8);
 				soldier_capacity_box.add(cs_soldier_capacity_display_, UI::Box::Resizing::kFullSize);
+				soldier_capacity_box.add_space(8);
 				soldier_capacity_box.add(cs_soldier_capacity_increase_);
 				settings_box.add_space(8);
 			}
@@ -391,7 +391,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_stopped_->set_enabled(can_act);
 		} else if (upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings())) {
 			UI::Box& soldier_capacity_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
-			settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kFullSize);
+			settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			cs_soldier_capacity_decrease_ = new UI::Button(&soldier_capacity_box,
 					"decrease", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
 					g_gr->images().get(pic_decrease_capacity),
@@ -415,7 +415,9 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 						SDL_GetModState() & KMOD_CTRL ? ms->max_capacity : ms->desired_capacity + 1);
 				});
 			soldier_capacity_box.add(cs_soldier_capacity_decrease_);
+			soldier_capacity_box.add_space(8);
 			soldier_capacity_box.add(cs_soldier_capacity_display_, UI::Box::Resizing::kFullSize);
+			soldier_capacity_box.add_space(8);
 			soldier_capacity_box.add(cs_soldier_capacity_increase_);
 			settings_box.add_space(8);
 
