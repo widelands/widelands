@@ -53,13 +53,13 @@ private:
 
 	UI::Textarea title;
 	UI::Button metaserver;
-	UI::Button* showloginbox;
 	UI::Button lan;
 	UI::Button back;
 
 	// Values from internet login window
 	std::string nickname_;
 	std::string password_;
+	bool auto_log_;
 	bool register_;
 };
 

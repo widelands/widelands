@@ -99,8 +99,6 @@ void LoginBox::clicked_back() {
 /// Calles when nickname was changed
 void LoginBox::change_playername() {
 	cb_register->set_state(false);
-	eb_password->set_text("");
-	eb_password->set_can_focus(false);
 }
 
 bool LoginBox::handle_key(bool down, SDL_Keysym code) {

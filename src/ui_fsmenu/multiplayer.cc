@@ -37,7 +37,6 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
      // Buttons
      metaserver(
         &vbox_, "metaserver", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Internet game")),
-     showloginbox(nullptr),
      lan(&vbox_, "lan", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("LAN / Direct IP")),
      back(&vbox_, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Back")) {
 	metaserver.sigclicked.connect(
@@ -58,16 +57,10 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 	vbox_.add_inf_space();
 	vbox_.add(&back, UI::Box::Resizing::kFullSize);
 
-	showloginbox =
-		   new UI::Button(this, "login_dialog", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
-								g_gr->images().get("images/wui/menus/menu_toggle_newmessage_menu.png"),
-								_("Show login dialog"));
-	showloginbox->sigclicked.connect(
-		   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
 	layout();
 }
 
-/// called if the showloginbox button was pressed
+/// called if the user is not registered
 void FullscreenMenuMultiPlayer::show_internet_login() {
 	Section& s = g_options.pull_section("global");
 	LoginBox lb(*this);
@@ -88,6 +81,7 @@ void FullscreenMenuMultiPlayer::show_internet_login() {
 
 		register_ = lb.registered();
 		s.set_bool("registered", lb.registered());
+		s.set_bool("auto_log", true);
 	} else {
 		return;
 	}
@@ -110,12 +104,20 @@ void FullscreenMenuMultiPlayer::internet_login() {
 	Section& s = g_options.pull_section("global");
 
 	nickname_ = s.get_string("nickname", "");
-	password_ = s.get_string("password_sha1", "nobody");
+	password_ = s.get_string("password_sha1", "");
 	register_ = s.get_bool("registered", false);
+	auto_log_ = s.get_bool("auto_log", false);
 
 	// Checks can be done directly in editbox' by using valid_username().
 	// This is just to be on the safe side, in case the user changed the password in the config file.
 	if (!InternetGaming::ref().valid_username(nickname_)) {
+		show_internet_login();
+		return;
+	}
+
+	if (auto_log_ && !register_) {
+		s.set_bool("auto_log", false);
+	} else if (!auto_log_) {
 		show_internet_login();
 		return;
 	}
@@ -154,10 +156,6 @@ void FullscreenMenuMultiPlayer::layout() {
 	title.set_pos(Vector2i(0, title_y_));
 
 	metaserver.set_size(butw_, buth_);
-	if (showloginbox) {
-		showloginbox->set_pos(Vector2i(box_x_ + butw_ + padding_ / 2, box_y_));
-		showloginbox->set_size(buth_, buth_);
-	}
 	metaserver.set_desired_size(butw_, buth_);
 	lan.set_desired_size(butw_, buth_);
 	back.set_desired_size(butw_, buth_);
