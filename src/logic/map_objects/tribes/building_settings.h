@@ -42,6 +42,9 @@ class WarehouseDescr;
 struct BuildingSettings {
 	BuildingSettings(const std::string& name) : descr_(name) {
 	}
+	virtual ~BuildingSettings() {
+	}
+
 	static BuildingSettings* load(const Game&, const TribeDescr&, FileRead&);
 
 	virtual void save(const Game&, FileWrite&) const;
@@ -56,6 +59,8 @@ private:
 
 struct ProductionsiteSettings : public BuildingSettings {
 	ProductionsiteSettings(const ProductionSiteDescr& descr);
+	~ProductionsiteSettings() override {
+	}
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
@@ -73,6 +78,8 @@ struct ProductionsiteSettings : public BuildingSettings {
 
 struct MilitarysiteSettings : public BuildingSettings {
 	MilitarysiteSettings(const MilitarySiteDescr&);
+	~MilitarysiteSettings() override {
+	}
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
@@ -85,6 +92,8 @@ struct MilitarysiteSettings : public BuildingSettings {
 
 struct TrainingsiteSettings : public ProductionsiteSettings {
 	TrainingsiteSettings(const TrainingSiteDescr&);
+	~TrainingsiteSettings() override {
+	}
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
@@ -96,6 +105,8 @@ struct TrainingsiteSettings : public ProductionsiteSettings {
 
 struct WarehouseSettings : public BuildingSettings {
 	WarehouseSettings(const WarehouseDescr&, const TribeDescr&);
+	~WarehouseSettings() override {
+	}
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
