@@ -151,7 +151,7 @@ private:
 
 	private:
 		bool restricted_row_number_;
-		uint16_t current_size_; // Current number of rows or columns
+		uint16_t current_size_;  // Current number of rows or columns
 		std::vector<const Widelands::Soldier*> soldiers_;
 
 		ListOfSoldiers* other_;

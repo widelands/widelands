@@ -722,7 +722,8 @@ void FieldActionWindow::act_attack() {
 	if (upcast(Building, building, game->map().get_immovable(node_)))
 		if (attack_box_->count_soldiers() > 0) {
 			upcast(InteractivePlayer const, iaplayer, &ibase());
-			game->send_player_enemyflagaction(building->base_flag(), iaplayer->player_number(), attack_box_->soldiers());
+			game->send_player_enemyflagaction(
+			   building->base_flag(), iaplayer->player_number(), attack_box_->soldiers());
 		}
 	reset_mouse_and_die();
 }

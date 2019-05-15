@@ -487,7 +487,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				InternetGame* ing = new InternetGame();
 				ing->name = packet.string();
 				ing->build_id = packet.string();
-				ing->connectable = (packet.string() == INTERNET_GAME_SETUP);
+				ing->connectable = packet.string();
 				gamelist_.push_back(*ing);
 
 				bool found = false;
@@ -498,10 +498,13 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 						break;
 					}
 				}
-				if (!found)
+				if (!found && ing->connectable != INTERNET_GAME_RUNNING &&
+				    (ing->build_id == build_id() || (ing->build_id.compare(0, 6, "build-") != 0 &&
+				                                     build_id().compare(0, 6, "build-") != 0))) {
 					format_and_add_chat(
 					   "", "", true,
 					   (boost::format(_("The game %s is now available")) % ing->name).str());
+				}
 
 				delete ing;
 				ing = nullptr;

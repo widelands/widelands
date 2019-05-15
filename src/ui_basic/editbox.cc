@@ -85,7 +85,8 @@ EditBox::EditBox(Panel* const parent,
    : Panel(parent, x, y, w, h > 0 ? h : text_height(font_size) + 2 * margin_y),
      m_(new EditBoxImpl),
      history_active_(false),
-     history_position_(-1) {
+     history_position_(-1),
+     warning_(false) {
 	set_thinks(false);
 
 	m_->background_style = g_gr->styles().editbox_style(style);
@@ -346,7 +347,7 @@ void EditBox::draw(RenderTarget& dst) {
 	draw_background(dst, *m_->background_style);
 
 	// Draw border.
-	if (get_w() >= 2 && get_h() >= 2) {
+	if (get_w() >= 2 && get_h() >= 2 && !warning_) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
@@ -359,6 +360,25 @@ void EditBox::draw(RenderTarget& dst) {
 		// left edge
 		dst.fill_rect(Recti(0, 0, 1, get_h() - 1), black);
 		dst.fill_rect(Recti(1, 0, 1, get_h() - 2), black);
+
+	} else {
+		// Draw a red border for warnings.
+		static const RGBColor red(255, 22, 22);
+
+		// bottom edge
+		dst.fill_rect(Recti(0, get_h() - 2, get_w(), 2), red);
+		// right edge
+		dst.fill_rect(Recti(get_w() - 2, 0, 2, get_h() - 2), red);
+		// top edge
+		dst.fill_rect(Recti(0, 0, get_w() - 1, 1), red);
+		dst.fill_rect(Recti(0, 1, get_w() - 2, 1), red);
+		dst.brighten_rect(Recti(0, 0, get_w() - 1, 1), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, 1, get_w() - 2, 1), BUTTON_EDGE_BRIGHT_FACTOR);
+		// left edge
+		dst.fill_rect(Recti(0, 0, 1, get_h() - 1), red);
+		dst.fill_rect(Recti(1, 0, 1, get_h() - 2), red);
+		dst.brighten_rect(Recti(0, 0, 1, get_h() - 1), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(1, 0, 1, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 	}
 
 	if (has_focus()) {

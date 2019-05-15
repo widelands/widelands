@@ -950,8 +950,9 @@ Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32
 
 // TODO(unknown): Clean this mess up. The only action we really have right now is
 // to attack, so pretending we have more types is pointless.
-void Player::enemyflagaction(Flag& flag, PlayerNumber const attacker,
-		const std::vector<Widelands::Soldier*>& soldiers) {
+void Player::enemyflagaction(Flag& flag,
+                             PlayerNumber const attacker,
+                             const std::vector<Widelands::Soldier*>& soldiers) {
 	if (attacker != player_number()) {
 		log("Player (%d) is not the sender of an attack (%d)\n", attacker, player_number());
 	} else if (soldiers.empty()) {

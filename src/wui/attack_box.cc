@@ -108,7 +108,8 @@ void AttackBox::think() {
 
 static inline std::string slider_heading(uint32_t num_attackers) {
 	/** TRANSLATORS: Number of soldiers that should attack. Used in Attack box. */
-	return (boost::format(ngettext("%u soldier", "%u soldiers", num_attackers)) % num_attackers).str();
+	return (boost::format(ngettext("%u soldier", "%u soldiers", num_attackers)) % num_attackers)
+	   .str();
 }
 
 void AttackBox::update_attack(bool action_on_panel) {
@@ -150,7 +151,8 @@ void AttackBox::update_attack(bool action_on_panel) {
 		// The player clicked on soldiers in the list – update slider
 		soldiers_slider_->set_value(attacking_soldiers_->count_soldiers());
 	} else {
-		// The slider was moved or we were called from think() – shift lacking/extra soldiers between the lists
+		// The slider was moved or we were called from think() – shift lacking/extra soldiers between
+		// the lists
 		const int32_t lacking = soldiers_slider_->get_value() - attacking_soldiers_->count_soldiers();
 		if (lacking > 0) {
 			for (int32_t i = 0; i < lacking; ++i) {
@@ -190,24 +192,26 @@ void AttackBox::init() {
 	mainbox.add(&linebox);
 
 	less_soldiers_ = add_button(linebox, "0", &AttackBox::send_less_soldiers,
-			_("Send less soldiers. Hold down Ctrl to send no soldiers"));
+	                            _("Send less soldiers. Hold down Ctrl to send no soldiers"));
 
 	UI::Box& columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
 	linebox.add(&columnbox);
 
 	soldiers_text_.reset(&add_text(columnbox, slider_heading(max_attackers > 0 ? 1 : 0),
-			UI::Align::kCenter, UI_FONT_SIZE_ULTRASMALL));
+	                               UI::Align::kCenter, UI_FONT_SIZE_ULTRASMALL));
 
 	soldiers_slider_ = add_slider(
 	   columnbox, 210, 17, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));
 	soldiers_slider_->changed.connect([this]() { update_attack(false); });
 
-	more_soldiers_ = add_button(linebox, std::to_string(max_attackers), &AttackBox::send_more_soldiers,
-			_("Send more soldiers. Hold down Ctrl to send as many soldiers as possible"));
+	more_soldiers_ =
+	   add_button(linebox, std::to_string(max_attackers), &AttackBox::send_more_soldiers,
+	              _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible"));
 	linebox.add_space(8);
 
-	attack_button_.reset(new UI::Button(&linebox, "attack", 8, 8, 34, 34, UI::ButtonStyle::kWuiPrimary,
-			g_gr->images().get("images/wui/buildings/menu_attack.png"), _("Start attack")));
+	attack_button_.reset(new UI::Button(
+	   &linebox, "attack", 8, 8, 34, 34, UI::ButtonStyle::kWuiPrimary,
+	   g_gr->images().get("images/wui/buildings/menu_attack.png"), _("Start attack")));
 	linebox.add(attack_button_.get());
 
 	attacking_soldiers_.reset(new ListOfSoldiers(&mainbox, this, 0, 0, 30, 30));
@@ -223,24 +227,22 @@ void AttackBox::init() {
 		UI::Textarea& txt = add_text(mainbox, _("Attackers:"));
 		// Needed so we can get tooltips
 		txt.set_handle_mouse(true);
-		txt.set_tooltip((tooltip_format
-				% _("Click on a soldier to remove him from the list of attackers")
-				% UI_FONT_SIZE_MESSAGE
-				% _("Hold down Ctrl to remove all soldiers from the list")
-				% _("Hold down Shift to remove all soldiers up to the one you’re pointing at"))
-				.str());
+		txt.set_tooltip(
+		   (tooltip_format % _("Click on a soldier to remove him from the list of attackers") %
+		    UI_FONT_SIZE_MESSAGE % _("Hold down Ctrl to remove all soldiers from the list") %
+		    _("Hold down Shift to remove all soldiers up to the one you’re pointing at"))
+		      .str());
 		mainbox.add(attacking_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
 
 	{
 		UI::Textarea& txt = add_text(mainbox, _("Not attacking:"));
 		txt.set_handle_mouse(true);
-		txt.set_tooltip((tooltip_format
-				% _("Click on a soldier to add him to the list of attackers")
-				% UI_FONT_SIZE_MESSAGE
-				% _("Hold down Ctrl to add all soldiers to the list")
-				% _("Hold down Shift to add all soldiers up to the one you’re pointing at"))
-				.str());
+		txt.set_tooltip(
+		   (tooltip_format % _("Click on a soldier to add him to the list of attackers") %
+		    UI_FONT_SIZE_MESSAGE % _("Hold down Ctrl to add all soldiers to the list") %
+		    _("Hold down Shift to add all soldiers up to the one you’re pointing at"))
+		      .str());
 		mainbox.add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
 
@@ -254,12 +256,13 @@ void AttackBox::init() {
 
 void AttackBox::send_less_soldiers() {
 	assert(soldiers_slider_.get());
-	soldiers_slider_->set_value((SDL_GetModState() & KMOD_CTRL) ? 0 : soldiers_slider_->get_value() - 1);
+	soldiers_slider_->set_value((SDL_GetModState() & KMOD_CTRL) ? 0 :
+	                                                              soldiers_slider_->get_value() - 1);
 }
 
 void AttackBox::send_more_soldiers() {
 	soldiers_slider_->set_value((SDL_GetModState() & KMOD_CTRL) ? soldiers_slider_->get_max_value() :
-			soldiers_slider_->get_value() + 1);
+	                                                              soldiers_slider_->get_value() + 1);
 }
 
 size_t AttackBox::count_soldiers() const {
@@ -278,15 +281,13 @@ constexpr int kSoldierIconWidth = 32;
 constexpr int kSoldierIconHeight = 30;
 
 AttackBox::ListOfSoldiers::ListOfSoldiers(UI::Panel* const parent,
-	           AttackBox* parent_box,
-	           int32_t const x,
-	           int32_t const y,
-	           int const w,
-	           int const h,
-               bool restrict_rows)
-   : UI::Panel(parent, x, y, w, h),
-     restricted_row_number_(restrict_rows),
-     attack_box_(parent_box) {
+                                          AttackBox* parent_box,
+                                          int32_t const x,
+                                          int32_t const y,
+                                          int const w,
+                                          int const h,
+                                          bool restrict_rows)
+   : UI::Panel(parent, x, y, w, h), restricted_row_number_(restrict_rows), attack_box_(parent_box) {
 	update_desired_size();
 }
 
@@ -328,12 +329,12 @@ void AttackBox::ListOfSoldiers::handle_mousein(bool) {
 bool AttackBox::ListOfSoldiers::handle_mousemove(uint8_t, int32_t x, int32_t y, int32_t, int32_t) {
 	if (const Widelands::Soldier* soldier = soldier_at(x, y)) {
 		attack_box_->set_soldier_info_text(
-				(boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
-				soldier->get_health_level() % soldier->descr().get_max_health_level() %
-				soldier->get_attack_level() % soldier->descr().get_max_attack_level() %
-				soldier->get_defense_level() % soldier->descr().get_max_defense_level() %
-				soldier->get_evade_level() % soldier->descr().get_max_evade_level())
-				.str());
+		   (boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
+		    soldier->get_health_level() % soldier->descr().get_max_health_level() %
+		    soldier->get_attack_level() % soldier->descr().get_max_attack_level() %
+		    soldier->get_defense_level() % soldier->descr().get_max_defense_level() %
+		    soldier->get_evade_level() % soldier->descr().get_max_evade_level())
+		      .str());
 	} else {
 		attack_box_->set_soldier_info_text();
 	}
@@ -354,7 +355,8 @@ Widelands::Extent AttackBox::ListOfSoldiers::size() const {
 }
 
 void AttackBox::ListOfSoldiers::update_desired_size() {
-	current_size_ = std::max(1, restricted_row_number_ ? get_h() / kSoldierIconHeight : get_w() / kSoldierIconWidth);
+	current_size_ = std::max(
+	   1, restricted_row_number_ ? get_h() / kSoldierIconHeight : get_w() / kSoldierIconWidth);
 	const Widelands::Extent e = size();
 	set_desired_size(e.w * kSoldierIconWidth, e.h * kSoldierIconHeight);
 }
@@ -409,4 +411,3 @@ void AttackBox::ListOfSoldiers::draw(RenderTarget& dst) {
 		}
 	}
 }
-
