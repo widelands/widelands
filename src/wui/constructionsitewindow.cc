@@ -102,13 +102,10 @@ ConstructionSiteWindow::FakeInputQueue::FakeInputQueue(Panel* parent,
 		priority_group_->add_button(
 		   this, pos, g_gr->images().get(pic_priority_low), _("Lowest priority"));
 		if (can_act) {
-			priority_group_->clicked.connect([this]() {
-				if (!(SDL_GetModState() & KMOD_CTRL)) {
-					return;
-				}
+			priority_group_->changedto.connect([this](uint32_t state) {
 				Widelands::Game& game = dynamic_cast<Widelands::Game&>(constructionsite_.get_owner()->egbase());
 				int32_t priority;
-				switch (priority_group_->get_state()) {
+				switch (state) {
 					case 0:
 						priority = Widelands::kPriorityHigh;
 						break;
@@ -121,13 +118,18 @@ ConstructionSiteWindow::FakeInputQueue::FakeInputQueue(Panel* parent,
 					default:
 						return;
 				}
-				for (const auto& pair : settings_.ware_queues) {
+				if (SDL_GetModState() & KMOD_CTRL) {
+					for (const auto& pair : settings_.ware_queues) {
+						game.send_player_constructionsite_input_queue_priority(constructionsite_,
+								Widelands::wwWARE, pair.first, priority);
+					}
+					for (const auto& pair : settings_.worker_queues) {
+						game.send_player_constructionsite_input_queue_priority(constructionsite_,
+								Widelands::wwWORKER, pair.first, priority);
+					}
+				} else {
 					game.send_player_constructionsite_input_queue_priority(constructionsite_,
-							Widelands::wwWARE, pair.first, priority);
-				}
-				for (const auto& pair : settings_.worker_queues) {
-					game.send_player_constructionsite_input_queue_priority(constructionsite_,
-							Widelands::wwWORKER, pair.first, priority);
+								type_, index_, priority);
 				}
 			});
 		}
@@ -374,7 +376,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 					});
 				soldier_capacity_box.add(cs_soldier_capacity_decrease_);
 				soldier_capacity_box.add_space(8);
-				soldier_capacity_box.add(cs_soldier_capacity_display_, UI::Box::Resizing::kFullSize);
+				soldier_capacity_box.add(cs_soldier_capacity_display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 				soldier_capacity_box.add_space(8);
 				soldier_capacity_box.add(cs_soldier_capacity_increase_);
 				settings_box.add_space(8);
@@ -416,7 +418,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				});
 			soldier_capacity_box.add(cs_soldier_capacity_decrease_);
 			soldier_capacity_box.add_space(8);
-			soldier_capacity_box.add(cs_soldier_capacity_display_, UI::Box::Resizing::kFullSize);
+			soldier_capacity_box.add(cs_soldier_capacity_display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			soldier_capacity_box.add_space(8);
 			soldier_capacity_box.add(cs_soldier_capacity_increase_);
 			settings_box.add_space(8);
