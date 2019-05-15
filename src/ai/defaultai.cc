@@ -2957,6 +2957,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 
 				} else if (bo.is(BuildingAttribute::kRecruitment)) {
+					bo.max_needed_preciousness = 2;
 					prio += bo.primary_priority;
 					prio -= bf->unowned_land_nearby * 2;
 					prio -= (bf->enemy_nearby) * 100;
@@ -4500,7 +4501,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	    check_building_necessity(*site.bo, PerfEvaluation::kForDismantle, gametime) ==
 	       BuildingNecessity::kNotNeeded &&
 	    gametime - site.bo->last_dismantle_time >
-	        (std::abs(management_data.get_military_number_at(169)) / 10 + 1) * 60 * 1000 &&
+	        (std::abs(management_data.get_military_number_at(169)) / 5 + 1) * 60 * 1000 &&
 
 	    site.bo->current_stats > site.site->get_statistics_percent() &&  // underperformer
 	    (game().get_gametime() - site.unoccupied_till) > 10 * 60 * 1000) {
@@ -4951,11 +4952,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		if (!basic_economy_established) {
 			return BuildingNecessity::kForbidden;
 		}
-		const uint16_t min_roads_count = 20 + std::abs(management_data.get_military_number_at(33))/2;
-		if (roads.size() < min_roads_count) {
+		const uint16_t min_roads_count = 40 + std::abs(management_data.get_military_number_at(33))/2;
+		if (roads.size() < min_roads_count * (1 + bo.total_count())) {
 			return BuildingNecessity::kForbidden;
 		}
-		bo.primary_priority = (roads.size() - min_roads_count) *
+		bo.primary_priority += (roads.size() - min_roads_count * (1 + bo.total_count())) *
 		                      (2 + std::abs(management_data.get_military_number_at(143)) / 5);
 		return BuildingNecessity::kNeeded;
 	}
@@ -5801,7 +5802,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kNeeded;
 		} else if (bo.max_preciousness >= 10 && bo.total_count() == 2) {
 			return BuildingNecessity::kNeeded;
-		} else if (!bo.outputs.empty() && bo.current_stats > (10 + 70 / bo.outputs.size()) / 2) {
+		} else if (!bo.outputs.empty() && bo.current_stats > (10 + 60 / bo.outputs.size()) / 2) {
+			return BuildingNecessity::kNeeded;
+		} else if (bo.inputs.size() == 1 && calculate_stocklevel(static_cast<size_t>(bo.inputs.at(0))) > std::abs(management_data.get_military_number_at(171))) {
 			return BuildingNecessity::kNeeded;
 		} else {
 			return BuildingNecessity::kNotNeeded;

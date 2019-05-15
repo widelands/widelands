@@ -354,7 +354,7 @@ p4:forbid_buildings {
    "barbarians_shipyard",
 }
 
-hq = p4:place_building("barbarians_headquarters", map.player_slots [4].starting_field, false, true)
+hq = p4:place_building("HQ_ravenstrupp", map.player_slots [4].starting_field, false, true)
 hq:set_wares {
    ax = 5,
    bread_paddle = 2,
