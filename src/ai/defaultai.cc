@@ -2456,10 +2456,15 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	for (uint32_t j = 0; j < buildings_.size(); ++j) {
 		BuildingObserver& bo = buildings_.at(j);
 
+		// we check if a previously not buildable Building of the basic economy is buildable again
+		// If so and we don't have basic economy achieved we add readd it to basic buildings list
+		// This should only happen in scenarios via scripting
+		if (!basic_economy_established && bo.basic_amount > static_cast<uint32_t>(bo.total_count()) && bo.buildable(*player_)) {
+			persistent_data->remaining_basic_buildings.emplace(std::make_pair(bo.id, bo.basic_amount));
+		}
 		if (!bo.buildable(*player_)) {
 			bo.new_building = BuildingNecessity::kNotNeeded;
-			// TODO(Hessenfarmer): Add the buildings if they are allowed again
-			// This line removes buildings from basic econmy if they are not allowed for the player
+			// This line removes buildings from basic economy if they are not allowed for the player
 			// this should only happen by scripting.
 			if (bo.basic_amount) {
 				persistent_data->remaining_basic_buildings.erase(bo.id);
@@ -3760,14 +3765,11 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			}
 		}
 
-		// if we are within grace time, it is OK, just go on
-		if (eco->dismantle_grace_time > gametime &&
-		    eco->dismantle_grace_time != std::numeric_limits<uint32_t>::max()) {
-			;
+		// check if we are within grace time, if not or gracetime unset we need to do something
+		// if we are within gracetime we do nothing (this loop is skipped)
 
-			// if grace time is not set, this is probably first time without a warehouse and we must
-			// set it
-		} else if (eco->dismantle_grace_time == std::numeric_limits<uint32_t>::max()) {
+		// if grace time is not set, this is probably first time without a warehouse and we must set it
+		if (eco->dismantle_grace_time == std::numeric_limits<uint32_t>::max()) {
 
 			// constructionsites
 			if (upcast(ConstructionSite const, constructionsite, flag.get_building())) {
@@ -3797,7 +3799,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			}
 
 			// we have passed grace_time - it is time to dismantle
-		} else {
+		} else if (eco->dismantle_grace_time <= gametime){
 			last_attempt_ = true;
 			// we increase a check radius in last attempt
 			checkradius += 2;
@@ -4501,7 +4503,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	    check_building_necessity(*site.bo, PerfEvaluation::kForDismantle, gametime) ==
 	       BuildingNecessity::kNotNeeded &&
 	    gametime - site.bo->last_dismantle_time >
-	        (std::abs(management_data.get_military_number_at(169)) / 5 + 1) * 60 * 1000 &&
+	        static_cast<uint32_t>((std::abs(management_data.get_military_number_at(169)) / 5 + 1) * 60 * 1000) &&
 
 	    site.bo->current_stats > site.site->get_statistics_percent() &&  // underperformer
 	    (game().get_gametime() - site.unoccupied_till) > 10 * 60 * 1000) {
@@ -4952,8 +4954,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		if (!basic_economy_established) {
 			return BuildingNecessity::kForbidden;
 		}
-		const uint16_t min_roads_count = 40 + std::abs(management_data.get_military_number_at(33))/2;
-		if (roads.size() < min_roads_count * (1 + bo.total_count())) {
+		const uint16_t min_roads_count = 40 + std::abs(management_data.get_military_number_at(33)) / 2;
+		if (roads.size() < static_cast<size_t>(min_roads_count * (1 + bo.total_count()))) {
 			return BuildingNecessity::kForbidden;
 		}
 		bo.primary_priority += (roads.size() - min_roads_count * (1 + bo.total_count())) *
@@ -4988,8 +4990,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			if (calculate_stocklevel(wt) < target ||
 			    site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) {
-				if (bo.max_needed_preciousness < 2 * preciousness) {
-					bo.max_needed_preciousness = 2 * preciousness;
+				if (bo.max_needed_preciousness < preciousness) {
+					bo.max_needed_preciousness = preciousness;
 				}
 				if (site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) {
 					bo.max_needed_preciousness +=
@@ -5531,7 +5533,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[0] = (bo.total_count() <= 1) ?
 			               std::abs(management_data.get_military_number_at(110)) / 10 :
 			               0;
-			inputs[1] = -4 * bo.total_count() + 2 * bo.total_count() + bo.total_count() / 2;
+			inputs[1] = bo.total_count() * -3 / 2;
 			inputs[2] =
 			   (bo.total_count() == 0) ? std::abs(management_data.get_military_number_at(0)) / 10 : 0;
 			inputs[3] = (gametime >= 25 * 60 * 1000 && bo.inputs.empty()) ?
