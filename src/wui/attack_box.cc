@@ -244,7 +244,8 @@ void AttackBox::init() {
 		mainbox.add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
 
-	current_soldier_stats_.reset(new UI::Textarea(&mainbox, "", UI::Align::kCenter));
+	current_soldier_stats_.reset(new UI::MultilineTextarea(&mainbox, 0, 0, 0, 0, UI::PanelStyle::kWui,
+			"", UI::Align::kCenter, UI::MultilineTextarea::ScrollMode::kNoScrolling));
 	mainbox.add(current_soldier_stats_.get(), UI::Box::Resizing::kFullSize, UI::Align::kCenter);
 
 	soldiers_slider_->set_enabled(max_attackers > 0);

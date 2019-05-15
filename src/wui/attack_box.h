@@ -33,6 +33,7 @@
 #include "logic/player.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
 
@@ -161,7 +162,7 @@ private:
 
 	std::unique_ptr<ListOfSoldiers> attacking_soldiers_;
 	std::unique_ptr<ListOfSoldiers> remaining_soldiers_;
-	std::unique_ptr<UI::Textarea> current_soldier_stats_;
+	std::unique_ptr<UI::MultilineTextarea> current_soldier_stats_;
 	std::unique_ptr<UI::Button> attack_button_;
 
 	/// The last time the information in this Panel got updated
