@@ -26,8 +26,9 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/progressbar.h"
-#include "ui_basic/spinbox.h"
+#include "ui_basic/radiobutton.h"
 #include "ui_basic/tabpanel.h"
+#include "ui_basic/textarea.h"
 #include "wui/buildingwindow.h"
 
 /**
@@ -67,15 +68,12 @@ private:
 		Widelands::DescriptionIndex index_;
 
 		void change_fill(bool);
-		void change_priority(int32_t);
 
 		uint32_t max_fill_;
 		const Image* icon_;
 		const Image* max_fill_indicator_;
 
-		UI::Button* priority_high_;
-		UI::Button* priority_normal_;
-		UI::Button* priority_low_;
+		UI::Radiogroup* priority_group_;
 	};
 
 	class FakeWaresDisplay : public WaresDisplay {
@@ -98,8 +96,10 @@ private:
 	// BuildingSettings-related UI elements
 	UI::Button* cs_enhance_;
 	UI::Checkbox* cs_launch_expedition_;
-	UI::Checkbox* cs_prefer_heroes_;
-	UI::SpinBox* cs_soldier_capacity_;
+	UI::Radiogroup* cs_prefer_heroes_rookies_;
+	UI::Button* cs_soldier_capacity_decrease_;
+	UI::Button* cs_soldier_capacity_increase_;
+	UI::Textarea* cs_soldier_capacity_display_;
 	std::vector<FakeInputQueue*> cs_ware_queues_;
 	std::vector<FakeInputQueue*> cs_worker_queues_;
 	UI::Checkbox* cs_stopped_;

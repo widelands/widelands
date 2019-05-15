@@ -40,9 +40,12 @@ static const char pic_stock_policy_button_normal[] = "images/wui/buildings/stock
 static const char pic_stock_policy_button_prefer[] = "images/wui/buildings/stock_policy_button_prefer.png";
 static const char pic_stock_policy_button_dontstock[] = "images/wui/buildings/stock_policy_button_dontstock.png";
 static const char pic_stock_policy_button_remove[] = "images/wui/buildings/stock_policy_button_remove.png";
+static const char pic_decrease_capacity[] = "images/wui/buildings/menu_down_train.png";
+static const char pic_increase_capacity[] = "images/wui/buildings/menu_up_train.png";
 
+constexpr uint32_t kPriorityButtonSize = 10;
 constexpr uint32_t kFakeInputQueueWareWidth = WARE_MENU_PIC_WIDTH + 2;
-constexpr uint32_t kFakeInputQueueWareHeight = WARE_MENU_PIC_HEIGHT + 4;
+constexpr uint32_t kFakeInputQueueWareHeight = 3 * kPriorityButtonSize;
 
 ConstructionSiteWindow::FakeInputQueue::FakeInputQueue(Panel* parent,
                int32_t x,
@@ -56,7 +59,8 @@ ConstructionSiteWindow::FakeInputQueue::FakeInputQueue(Panel* parent,
 		settings_(*dynamic_cast<Widelands::ProductionsiteSettings*>(cs.get_settings())),
 		type_(ww),
 		index_(di),
-		max_fill_indicator_(g_gr->images().get(pic_max_fill_indicator)) {
+		max_fill_indicator_(g_gr->images().get(pic_max_fill_indicator)),
+		priority_group_(nullptr) {
 	max_fill_ = get_settings().max_fill;
 
 	const Widelands::Tribes& tribes = cs.owner().egbase().tribes();
@@ -83,52 +87,55 @@ ConstructionSiteWindow::FakeInputQueue::FakeInputQueue(Panel* parent,
 	decrease.set_repeating(true);
 	increase.set_repeating(true);
 	add(&decrease);
-	add_space(kFakeInputQueueWareWidth * max_fill_ + 8);
+	add_space(kFakeInputQueueWareWidth * max_fill_);
 	add(&increase);
 	if (type_ == Widelands::wwWARE) {
-		priority_low_ = new UI::Button(this, "priority_low", 0, 0,
-				kFakeInputQueueWareWidth, kFakeInputQueueWareHeight,
-				UI::ButtonStyle::kWuiMenu, g_gr->images().get(pic_priority_low),
-				_("Lowest priority"));
-		priority_normal_ = new UI::Button(this, "priority_normal", 0, 0,
-				kFakeInputQueueWareWidth, kFakeInputQueueWareHeight,
-				UI::ButtonStyle::kWuiMenu, g_gr->images().get(pic_priority_normal),
-				_("Normal priority"));
-		priority_high_ = new UI::Button(this, "priority_high", 0, 0,
-				kFakeInputQueueWareWidth, kFakeInputQueueWareHeight,
-				UI::ButtonStyle::kWuiMenu, g_gr->images().get(pic_priority_high),
-				_("Highest priority"));
-		add_space(8);
-		add(priority_low_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		add(priority_normal_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		add(priority_high_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		add_space(kPriorityButtonSize + 4);
+		priority_group_ = new UI::Radiogroup();
+		Vector2i pos(kFakeInputQueueWareWidth * (max_fill_ + 2) + 2, 0);
+		priority_group_->add_button(
+		   this, pos, g_gr->images().get(pic_priority_high), _("Highest priority"));
+		pos.y += kPriorityButtonSize;
+		priority_group_->add_button(
+		   this, pos, g_gr->images().get(pic_priority_normal), _("Normal priority"));
+		pos.y += kPriorityButtonSize;
+		priority_group_->add_button(
+		   this, pos, g_gr->images().get(pic_priority_low), _("Lowest priority"));
 		if (can_act) {
-			priority_low_->sigclicked.connect(boost::bind(&ConstructionSiteWindow::FakeInputQueue::change_priority,
-					this, Widelands::kPriorityLow));
-			priority_normal_->sigclicked.connect(boost::bind(&ConstructionSiteWindow::FakeInputQueue::change_priority,
-					this, Widelands::kPriorityNormal));
-			priority_high_->sigclicked.connect(boost::bind(&ConstructionSiteWindow::FakeInputQueue::change_priority,
-					this, Widelands::kPriorityHigh));
+			priority_group_->clicked.connect([this]() {
+				Widelands::Game& game = dynamic_cast<Widelands::Game&>(constructionsite_.get_owner()->egbase());
+				int32_t priority;
+				switch (priority_group_->get_state()) {
+					case 0:
+						priority = Widelands::kPriorityHigh;
+						break;
+					case 1:
+						priority = Widelands::kPriorityNormal;
+						break;
+					case 2:
+						priority = Widelands::kPriorityLow;
+						break;
+					default:
+						return;
+				}
+				if (SDL_GetModState() & KMOD_CTRL) {
+					for (const auto& pair : settings_.ware_queues) {
+						game.send_player_constructionsite_input_queue_priority(constructionsite_,
+								Widelands::wwWARE, pair.first, priority);
+					}
+					for (const auto& pair : settings_.worker_queues) {
+						game.send_player_constructionsite_input_queue_priority(constructionsite_,
+								Widelands::wwWORKER, pair.first, priority);
+					}
+				} else {
+					game.send_player_constructionsite_input_queue_priority(constructionsite_,
+							type_, index_, priority);
+				}
+			});
 		}
 	}
 	decrease.set_enabled(can_act);
 	increase.set_enabled(can_act);
-}
-
-void ConstructionSiteWindow::FakeInputQueue::change_priority(int32_t p) {
-	Widelands::Game& game = dynamic_cast<Widelands::Game&>(constructionsite_.get_owner()->egbase());
-	if (SDL_GetModState() & KMOD_CTRL) {
-		for (const auto& pair : settings_.ware_queues) {
-			game.send_player_constructionsite_input_queue_priority(constructionsite_,
-					Widelands::wwWARE, pair.first, p);
-		}
-		for (const auto& pair : settings_.worker_queues) {
-			game.send_player_constructionsite_input_queue_priority(constructionsite_,
-					Widelands::wwWORKER, pair.first, p);
-		}
-	} else {
-		game.send_player_constructionsite_input_queue_priority(constructionsite_, type_, index_, p);
-	}
 }
 
 void ConstructionSiteWindow::FakeInputQueue::change_fill(bool lower) {
@@ -194,20 +201,21 @@ const Widelands::ProductionsiteSettings::InputQueueSetting& ConstructionSiteWind
 
 void ConstructionSiteWindow::FakeInputQueue::think() {
 	UI::Box::think();
-	if (priority_normal_) {
-		assert(priority_high_);
-		assert(priority_low_);
-		const int32_t priority = get_settings().priority;
-		priority_high_->set_enabled(priority != Widelands::kPriorityHigh);
-		priority_normal_->set_enabled(priority != Widelands::kPriorityNormal);
-		priority_low_->set_enabled(priority != Widelands::kPriorityLow);
+	if (priority_group_) {
+		switch (get_settings().priority) {
+			case Widelands::kPriorityHigh:
+				priority_group_->set_state(0);
+				break;
+			case Widelands::kPriorityNormal:
+				priority_group_->set_state(1);
+				break;
+			case Widelands::kPriorityLow:
+				priority_group_->set_state(2);
+				break;
+			default:
+				NEVER_HERE();
+		}
 	}
-#ifndef NDEBUG
-	else {
-		assert(!priority_high_);
-		assert(!priority_low_);
-	}
-#endif
 }
 
 void ConstructionSiteWindow::FakeInputQueue::draw(RenderTarget& dst) {
@@ -283,8 +291,10 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
      progress_(nullptr),
 		cs_enhance_(nullptr),
 		cs_launch_expedition_(nullptr),
-		cs_prefer_heroes_(nullptr),
-		cs_soldier_capacity_(nullptr),
+		cs_prefer_heroes_rookies_(nullptr),
+		cs_soldier_capacity_decrease_(nullptr),
+		cs_soldier_capacity_increase_(nullptr),
+		cs_soldier_capacity_display_(nullptr),
 		cs_stopped_(nullptr),
 		cs_warehouse_wares_(nullptr),
 		cs_warehouse_workers_(nullptr),
@@ -340,17 +350,34 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				cs_ware_queues_.push_back(queue);
 			}
 			if (upcast(Widelands::TrainingsiteSettings, ts, ps)) {
-				cs_soldier_capacity_ = new UI::SpinBox(&settings_box, 0, 0, 300, 100,
-						ts->desired_capacity, 0, ts->max_capacity, UI::PanelStyle::kWui, _("Soldier capacity:"));
-				settings_box.add(cs_soldier_capacity_);
-				settings_box.add_space(8);
-				cs_soldier_capacity_->changed.connect([this]() {
+				UI::Box& soldier_capacity_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
+				settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kFullSize);
+				cs_soldier_capacity_decrease_ = new UI::Button(&soldier_capacity_box,
+						"decrease", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
+						g_gr->images().get(pic_decrease_capacity),
+						_("Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"));
+				cs_soldier_capacity_increase_ = new UI::Button(&soldier_capacity_box,
+						"increase", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
+						g_gr->images().get(pic_increase_capacity),
+						_("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
+				cs_soldier_capacity_display_ = new UI::Textarea(&soldier_capacity_box,
+						"", UI::Align::kCenter);
+				cs_soldier_capacity_decrease_->set_enabled(can_act);
+				cs_soldier_capacity_increase_->set_enabled(can_act);
+				cs_soldier_capacity_decrease_->sigclicked.connect([this, ts]() {
 					igbase()->game().send_player_constructionsite_soldier_capacity(
-							*construction_site_.get(igbase()->egbase()), cs_soldier_capacity_->get_value());
-				});
-				for (UI::Button* b : cs_soldier_capacity_->get_buttons()) {
-					b->set_enabled(can_act);
-				}
+							*construction_site_.get(igbase()->egbase()),
+							SDL_GetModState() & KMOD_CTRL ? 0 : ts->desired_capacity - 1);
+					});
+				cs_soldier_capacity_increase_->sigclicked.connect([this, ts]() {
+					igbase()->game().send_player_constructionsite_soldier_capacity(
+							*construction_site_.get(igbase()->egbase()),
+							SDL_GetModState() & KMOD_CTRL ? ts->max_capacity : ts->desired_capacity + 1);
+					});
+				soldier_capacity_box.add(cs_soldier_capacity_decrease_);
+				soldier_capacity_box.add(cs_soldier_capacity_display_, UI::Box::Resizing::kFullSize);
+				soldier_capacity_box.add(cs_soldier_capacity_increase_);
+				settings_box.add_space(8);
 			}
 			cs_stopped_ = new UI::Checkbox(&settings_box, Vector2i::zero(),
 				 _("Stopped"),
@@ -363,26 +390,50 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			settings_box.add_space(8);
 			cs_stopped_->set_enabled(can_act);
 		} else if (upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings())) {
-			cs_soldier_capacity_ = new UI::SpinBox(&settings_box, 0, 0, 300, 100,
-					ms->desired_capacity, 1, ms->max_capacity, UI::PanelStyle::kWui, _("Soldier capacity:"));
-			settings_box.add(cs_soldier_capacity_);
+			UI::Box& soldier_capacity_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
+			settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kFullSize);
+			cs_soldier_capacity_decrease_ = new UI::Button(&soldier_capacity_box,
+					"decrease", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
+					g_gr->images().get(pic_decrease_capacity),
+					_("Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"));
+			cs_soldier_capacity_increase_ = new UI::Button(&soldier_capacity_box,
+					"increase", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
+					g_gr->images().get(pic_increase_capacity),
+					_("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
+			cs_soldier_capacity_display_ = new UI::Textarea(&soldier_capacity_box,
+					"", UI::Align::kCenter);
+			cs_soldier_capacity_decrease_->set_enabled(can_act);
+			cs_soldier_capacity_increase_->set_enabled(can_act);
+			cs_soldier_capacity_decrease_->sigclicked.connect([this, ms]() {
+				igbase()->game().send_player_constructionsite_soldier_capacity(
+						*construction_site_.get(igbase()->egbase()),
+						SDL_GetModState() & KMOD_CTRL ? 0 : ms->desired_capacity - 1);
+				});
+			cs_soldier_capacity_increase_->sigclicked.connect([this, ms]() {
+				igbase()->game().send_player_constructionsite_soldier_capacity(
+						*construction_site_.get(igbase()->egbase()),
+						SDL_GetModState() & KMOD_CTRL ? ms->max_capacity : ms->desired_capacity + 1);
+				});
+			soldier_capacity_box.add(cs_soldier_capacity_decrease_);
+			soldier_capacity_box.add(cs_soldier_capacity_display_, UI::Box::Resizing::kFullSize);
+			soldier_capacity_box.add(cs_soldier_capacity_increase_);
 			settings_box.add_space(8);
-			cs_soldier_capacity_->changed.connect([this]() {
-				igbase()->game().send_player_constructionsite_soldier_capacity(*construction_site_.get(igbase()->egbase()),
-						cs_soldier_capacity_->get_value());
-			});
-			for (UI::Button* b : cs_soldier_capacity_->get_buttons()) {
-				b->set_enabled(can_act);
+
+			UI::Box& soldier_preference_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
+			settings_box.add(&soldier_preference_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+			cs_prefer_heroes_rookies_ = new UI::Radiogroup();
+			cs_prefer_heroes_rookies_->add_button(&soldier_preference_box, Vector2i::zero(),
+					g_gr->images().get("images/wui/buildings/prefer_rookies.png"),
+					_("Prefer rookies"));
+			cs_prefer_heroes_rookies_->add_button(&soldier_preference_box, Vector2i(32, 0),
+					g_gr->images().get("images/wui/buildings/prefer_heroes.png"),
+					_("Prefer heroes"));
+			if (can_act) {
+				cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
+					igbase()->game().send_player_constructionsite_prefer_heroes(
+							*construction_site_.get(igbase()->egbase()), state);
+				});
 			}
-			cs_prefer_heroes_ = new UI::Checkbox(&settings_box, Vector2i::zero(),
-				 _("Prefer heroes"),
-				 _("Prefer heroes over rookies"));
-			cs_prefer_heroes_->changed.connect([this]() {
-				igbase()->game().send_player_constructionsite_prefer_heroes(*construction_site_.get(igbase()->egbase()),
-						cs_prefer_heroes_->get_state());
-			});
-			cs_prefer_heroes_->set_enabled(can_act);
-			settings_box.add(cs_prefer_heroes_, UI::Box::Resizing::kFullSize);
 			settings_box.add_space(8);
 		} else if (upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings())) {
 			cs_warehouse_tabs_ = new UI::TabPanel(&settings_box, UI::TabPanelStyle::kWuiLight);
@@ -462,10 +513,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			settings_box.add(cs_enhance_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			settings_box.add_space(8);
 		}
-		if (settings_box.get_nritems()) {
-			get_tabs()->add("settings", g_gr->images().get(pic_tab_settings),
-					&settings_box, _("Settings to apply after construction"));
-		}
+		get_tabs()->add("settings", g_gr->images().get(pic_tab_settings),
+				&settings_box, _("Settings to apply after construction"));
 	}
 
 	set_title((boost::format("(%s)") % construction_site->building().descname()).str());
@@ -511,19 +560,30 @@ void ConstructionSiteWindow::think() {
 
 	progress_->set_state(construction_site->get_built_per64k());
 
+	const bool can_act = igbase()->can_act(construction_site->owner().player_number());
 	// FakeInputQueue and FakeWaresDisplay update themselves – we need to refresh the other settings
 	if (upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings())) {
 		assert(cs_stopped_);
 		cs_stopped_->set_state(ps->stopped);
 	}
 	if (upcast(Widelands::TrainingsiteSettings, ts, construction_site->get_settings())) {
-		assert(cs_soldier_capacity_);
-		cs_soldier_capacity_->set_value(ts->desired_capacity);
+		assert(cs_soldier_capacity_decrease_);
+		assert(cs_soldier_capacity_increase_);
+		assert(cs_soldier_capacity_display_);
+		cs_soldier_capacity_display_->set_text((boost::format(ngettext("%u soldier", "%u soldiers",
+				ts->desired_capacity)) % ts->desired_capacity).str());
+		cs_soldier_capacity_decrease_->set_enabled(can_act && ts->desired_capacity > 0);
+		cs_soldier_capacity_increase_->set_enabled(can_act && ts->desired_capacity < ts->max_capacity);
 	} else if (upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings())) {
-		assert(cs_soldier_capacity_);
-		assert(cs_prefer_heroes_);
-		cs_soldier_capacity_->set_value(ms->desired_capacity);
-		cs_prefer_heroes_->set_state(ms->prefer_heroes);
+		assert(cs_soldier_capacity_decrease_);
+		assert(cs_soldier_capacity_increase_);
+		assert(cs_soldier_capacity_display_);
+		assert(cs_prefer_heroes_rookies_);
+		cs_soldier_capacity_display_->set_text((boost::format(ngettext("%u soldier", "%u soldiers",
+				ms->desired_capacity)) % ms->desired_capacity).str());
+		cs_soldier_capacity_decrease_->set_enabled(can_act && ms->desired_capacity > 0);
+		cs_soldier_capacity_increase_->set_enabled(can_act && ms->desired_capacity < ms->max_capacity);
+		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 1 : 0);
 	} else if (upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings())) {
 		if (cs_launch_expedition_) {
 			cs_launch_expedition_->set_state(ws->launch_expedition);
