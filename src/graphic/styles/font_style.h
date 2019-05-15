@@ -33,6 +33,7 @@ enum class FontStyle {
    kChatWhisper,
    kFsGameSetupHeadings,
    kFsGameSetupIrcClient,
+	kFsGameSetupSuperuser,
    kFsGameSetupMapname,
    kFsMenuGameTip,
    kFsMenuInfoPanelHeading,

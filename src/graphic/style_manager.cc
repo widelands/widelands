@@ -198,6 +198,7 @@ void StyleManager::init() {
 	add_font_style(UI::FontStyle::kChatTimestamp, *element_table, "chat_timestamp");
 	add_font_style(UI::FontStyle::kChatWhisper, *element_table, "chat_whisper");
 	add_font_style(UI::FontStyle::kFsGameSetupHeadings, *element_table, "fsmenu_game_setup_headings");
+	add_font_style(UI::FontStyle::kFsGameSetupSuperuser, *element_table, "fsmenu_game_setup_superuser");
 	add_font_style(UI::FontStyle::kFsGameSetupIrcClient, *element_table, "fsmenu_game_setup_irc_client");
 	add_font_style(UI::FontStyle::kFsGameSetupMapname, *element_table, "fsmenu_game_setup_mapname");
 	add_font_style(UI::FontStyle::kFsMenuGameTip, *element_table, "fsmenu_gametip");

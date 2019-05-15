@@ -295,6 +295,7 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 				break;
 			case kClientSuperuser:
 				pic = g_gr->images().get("images/wui/overlays/roadb_green.png");
+				er.set_font_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupSuperuser));
 				er.set_picture(0, pic);
 				break;
 			case kClientIRC:

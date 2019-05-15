@@ -574,9 +574,17 @@ return {
          bold = true,
          shadow = true
       },
+      -- List admin in the internet lobby
+      fsmenu_game_setup_superuser = {
+         color = { 0, 255, 0 },
+         face = fs_font_face,
+         size = fs_font_size,
+         bold = true,
+         shadow = true
+      },
       -- List IRC clients in the internet lobby
       fsmenu_game_setup_irc_client = {
-         color = { 221, 221, 221  },
+         color = { 221, 221, 221 },
          face = fs_font_face,
          size = fs_font_size,
          bold = true,
