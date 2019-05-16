@@ -370,32 +370,40 @@ std::string EconomyOptionsWindow::applicable_target() {
 
 void EconomyOptionsWindow::update_profiles() {
 	const std::string current_profile = applicable_target();
+log("NOCOM: EconomyOptionsWindow::update_profiles, applicable »%s«\n", current_profile.c_str());
 
 	for (const auto& pair : predefined_targets_) {
 		if (last_added_to_dropdown_.count(pair.first) == 0) {
+log("       Profile %s was not added to dropdown yet\n", pair.first.c_str());
 			return update_profiles_needed(current_profile);
 		}
 	}
 	for (const auto& string : last_added_to_dropdown_) {
 		if (!string.empty() && predefined_targets_.find(string) == predefined_targets_.end()) {
+log("       Dropdown contains deleted profile %s\n", string.c_str());
 			return update_profiles_needed(current_profile);
 		}
 	}
 	if (last_added_to_dropdown_.count("") == (current_profile.empty() ? 0 : 1)) {
+log("       Desired and actual state of the empty »« profile don´t match\n");
 		return update_profiles_needed(current_profile);
 	}
 
+log("       Dropdown is up to date, jumping to selection update...\n");
 	update_profiles_select(current_profile);
 }
 
 void EconomyOptionsWindow::update_profiles_needed(const std::string& current_profile) {
+log("NOCOM: EconomyOptionsWindow::update_profiles_needed(%s)\n", current_profile.c_str());
 	dropdown_.clear();
 	last_added_to_dropdown_.clear();
 	for (const auto& pair : predefined_targets_) {
 		dropdown_.add(_(pair.first), pair.first);
 		last_added_to_dropdown_.insert(pair.first);
+log("       Added %s\n", pair.first.c_str());
 	}
 	if (current_profile.empty()) {
+log("       Added the empty profile\n");
 		// Nothing selected
 		dropdown_.add("", "");
 		last_added_to_dropdown_.insert("");
@@ -404,13 +412,18 @@ void EconomyOptionsWindow::update_profiles_needed(const std::string& current_pro
 }
 
 void EconomyOptionsWindow::update_profiles_select(const std::string& current_profile) {
+log("NOCOM: EconomyOptionsWindow::update_profiles_select(%s)\n", current_profile.c_str());
 	if (dropdown_.is_expanded()) {
+log("       Dropdown is expanded, cancel\n");
 		return;
 	}
 	const std::string select = _(current_profile);
+log("       Planning to select »%s«\n", select.c_str());
 	if (!dropdown_.has_selection() || dropdown_.get_selected() != select) {
 		dropdown_.select(select);
+log("       Selected it!\n");
 	}
+else log("       Did not select it because it is already selected\n");
 	assert(dropdown_.has_selection());
 }
 
@@ -479,7 +492,7 @@ void EconomyOptionsWindow::SaveProfileWindow::delete_selected() {
 
 	assert(name != kDefaultEconomyProfile);
 	assert(!map.at(name).undeletable);
-
+log("NOCOM: SaveProfileWindow::delete_selected %s\n", name.c_str());
 	auto it = map.find(name);
 	assert(it != map.end());
 	map.erase(it);
@@ -490,6 +503,7 @@ void EconomyOptionsWindow::SaveProfileWindow::delete_selected() {
 }
 
 void EconomyOptionsWindow::SaveProfileWindow::unset_parent() {
+log("NOCOM: SaveProfileWindow::unset_parent()\n");
 	economy_options_ = nullptr;
 	die();
 }
@@ -551,6 +565,7 @@ void EconomyOptionsWindow::create_target() {
 }
 
 void EconomyOptionsWindow::close_save_profile_window() {
+log("NOCOM: EconomyOptionsWindow::close_save_profile_window()\n");
 	assert(save_profile_dialog_);
 	save_profile_dialog_ = nullptr;
 }
@@ -579,6 +594,9 @@ void EconomyOptionsWindow::do_create_target(const std::string& name) {
 }
 
 void EconomyOptionsWindow::save_targets() {
+log("NOCOM: EconomyOptionsWindow::save_targets()\n");
+log("       %" PRIuS " target(s):\n", predefined_targets_.size());
+for (const auto& pair : predefined_targets_) log("       · %s\n", pair.first.c_str());
 	const Widelands::Tribes& tribes = player_->egbase().tribes();
 	Profile profile;
 
@@ -622,6 +640,7 @@ void EconomyOptionsWindow::save_targets() {
 }
 
 void EconomyOptionsWindow::read_targets() {
+log("NOCOM: EconomyOptionsWindow::read_targets() ...\n");
 	predefined_targets_.clear();
 	const Widelands::Tribes& tribes = player_->egbase().tribes();
 	const Widelands::TribeDescr& tribe = player_->tribe();
@@ -678,6 +697,8 @@ void EconomyOptionsWindow::read_targets() {
 			}
 		}
 	}
+log("       %" PRIuS " target(s):\n", predefined_targets_.size());
+for (const auto& pair : predefined_targets_) log("       · %s\n", pair.first.c_str());
 
 	update_profiles();
 }
