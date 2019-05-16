@@ -77,7 +77,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		animations.push_back(std::make_pair(anim_idx, nrframes));
 	}
 
-	uint32_t frame_index = totaltime ? std::min(completedtime * total_frames / totaltime, total_frames) : 0;
+	uint32_t frame_index = totaltime ? std::min(completedtime * total_frames / totaltime, total_frames - 1) : 0;
 	uint32_t animation_index = 0;
 	while (frame_index >= animations[animation_index].second) {
 		frame_index -= animations[animation_index].second;
