@@ -235,7 +235,6 @@ static const char* const pic_abort = "images/wui/menu_abort.png";
 static const char* const pic_geologist = "images/wui/fieldaction/menu_geologist.png";
 
 static const char* const pic_tab_attack = "images/wui/fieldaction/menu_tab_attack.png";
-static const char* const pic_attack = "images/wui/buildings/menu_attack.png";
 
 /*
 ===============
@@ -394,8 +393,9 @@ void FieldActionWindow::add_buttons_attack() {
 				attack_box_ = new AttackBox(&a_box, player_, &node_, 0, 0);
 				a_box.add(attack_box_);
 
-				set_fastclick_panel(&add_button(
-				   &a_box, "attack", pic_attack, &FieldActionWindow::act_attack, _("Start attack")));
+				UI::Button* attack_button = attack_box_->get_attack_button();
+				attack_button->sigclicked.connect(boost::bind(&FieldActionWindow::act_attack, this));
+				set_fastclick_panel(attack_button);
 			}
 		}
 	}
@@ -807,10 +807,10 @@ void FieldActionWindow::act_attack() {
 	assert(attack_box_);
 	upcast(Game, game, &ibase().egbase());
 	if (upcast(Building, building, game->map().get_immovable(node_)))
-		if (attack_box_->soldiers() > 0) {
+		if (attack_box_->count_soldiers() > 0) {
 			upcast(InteractivePlayer const, iaplayer, &ibase());
-			game->send_player_enemyflagaction(building->base_flag(), iaplayer->player_number(),
-			                                  attack_box_->soldiers() /*  number of soldiers */);
+			game->send_player_enemyflagaction(
+			   building->base_flag(), iaplayer->player_number(), attack_box_->soldiers());
 		}
 	reset_mouse_and_die();
 }

@@ -27,8 +27,8 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/input_queue.h"
-#include "logic/findimmovable.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/terrain_affinity.h"
 #include "logic/map_objects/tribes/carrier.h"
@@ -1799,13 +1799,9 @@ const MethodType<LuaMapObjectDescription> LuaMapObjectDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[] = {
-   PROP_RO(LuaMapObjectDescription, descname),
-   PROP_RO(LuaMapObjectDescription, helptext_script),
-   PROP_RO(LuaMapObjectDescription, icon_name),
-   PROP_RO(LuaMapObjectDescription, name),
-   PROP_RO(LuaMapObjectDescription, type_name),
-   PROP_RO(LuaMapObjectDescription, representative_image),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMapObjectDescription, descname),  PROP_RO(LuaMapObjectDescription, helptext_script),
+   PROP_RO(LuaMapObjectDescription, icon_name), PROP_RO(LuaMapObjectDescription, name),
+   PROP_RO(LuaMapObjectDescription, type_name), {nullptr, nullptr, nullptr},
 };
 
 // Only base classes can be persisted.
@@ -1862,17 +1858,6 @@ int LuaMapObjectDescription::get_icon_name(lua_State* L) {
 
 int LuaMapObjectDescription::get_name(lua_State* L) {
 	lua_pushstring(L, get()->name());
-	return 1;
-}
-
-/* RST
-   .. attribute:: representative_image
-
-         (RO) a :class:`string` with the file path to the representative image
-         of the map object's idle animation
-*/
-int LuaMapObjectDescription::get_representative_image(lua_State* L) {
-	lua_pushstring(L, get()->representative_image_filename());
 	return 1;
 }
 
@@ -3701,7 +3686,6 @@ int LuaTerrainDescription::get_humidity(lua_State* L) {
 
          (RO) the :class:`string` file path to a representative image
 */
-
 int LuaTerrainDescription::get_representative_image(lua_State* L) {
 	lua_pushstring(L, get()->texture_paths().front());
 	return 1;

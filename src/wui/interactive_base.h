@@ -95,6 +95,11 @@ public:
 	                   std::map<Widelands::TCoords<>, uint32_t>& extra_data);
 	void hide_workarea(const Widelands::Coords& coords, bool is_additional);
 
+	bool has_expedition_port_space(const Widelands::Coords&) const;
+	std::map<Widelands::Ship*, Widelands::Coords>& get_expedition_port_spaces() {
+		return expedition_port_spaces_;
+	}
+
 	//  point of view for drawing
 	virtual Widelands::Player* get_player() const = 0;
 
@@ -301,11 +306,14 @@ private:
 	std::unordered_set<std::unique_ptr<WorkareaPreview>> workarea_previews_;
 	std::unique_ptr<Workareas> workareas_cache_;
 
+	std::map<Widelands::Ship*, Widelands::Coords> expedition_port_spaces_;
+
 	RoadBuildingOverlays road_building_overlays_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<NoteSound>> sound_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 	Widelands::EditorGameBase& egbase_;
 	uint32_t display_flags_;
 	uint32_t lastframe_;        //  system time (milliseconds)

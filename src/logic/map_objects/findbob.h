@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_FINDBOB_H
-#define WL_LOGIC_FINDBOB_H
+#ifndef WL_LOGIC_MAP_OBJECTS_FINDBOB_H
+#define WL_LOGIC_MAP_OBJECTS_FINDBOB_H
 
 #include "logic/map.h"
 
@@ -60,4 +60,4 @@ struct FindBobCritter : FindBob {
 
 }  // namespace Widelands
 
-#endif  // end of include guard: WL_LOGIC_FINDBOB_H
+#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_FINDBOB_H

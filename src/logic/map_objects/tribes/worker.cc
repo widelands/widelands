@@ -39,13 +39,13 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_incorporate.h"
-#include "logic/findbob.h"
-#include "logic/findimmovable.h"
-#include "logic/findnode.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findbob.h"
+#include "logic/map_objects/findimmovable.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/terrain_affinity.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
@@ -340,6 +340,9 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 			return true;
 		}
 		if (action.sparam1 == "immovable") {
+			if (upcast(ProductionSite, productionsite, get_location(game))) {
+				productionsite->unnotify_player();
+			}
 			std::vector<ImmovableFound> list;
 			if (action.iparam2 < 0)
 				map.find_reachable_immovables(area, &list, cstep);
@@ -970,12 +973,10 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 
 		// Geologist also sends a message notifying the player
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
-			const int width = g_gr->images().get(rdescr->representative_image())->width();
 			const std::string message =
-			   (boost::format("<div padding_r=10><p><img width=%d src=%s></p></div>"
+			   (boost::format("<div padding_r=10><p><img object=%s></p></div>"
 			                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-			    width % ri.descr().representative_image_filename() % UI_FONT_SIZE_MESSAGE %
-			    _("A geologist found resources."))
+			    ri.descr().name() % UI_FONT_SIZE_MESSAGE % _("A geologist found resources."))
 			      .str();
 
 			//  We should add a message to the player's message queue - but only,
@@ -1638,7 +1639,15 @@ void Worker::buildingwork_update(Game& game, State& state) {
 	// Reset any signals that are not related to location
 	std::string signal = get_signal();
 	signal_handled();
+
+	upcast(Building, building, get_location(game));
+
 	if (signal == "evict") {
+		if (building) {
+			// If the building was working, we do not tell it to cancel – it'll notice by itself soon –
+			// but we already change the animation so it won't look strange
+			building->start_animation(game, building->descr().get_unoccupied_animation());
+		}
 		return pop_task(game);
 	}
 
@@ -1646,7 +1655,6 @@ void Worker::buildingwork_update(Game& game, State& state) {
 		state.ivar1 = (signal == "fail") * 2;
 
 	// Return to building, if necessary
-	upcast(Building, building, get_location(game));
 	if (!building)
 		return pop_task(game);
 
@@ -2639,7 +2647,9 @@ const Bob::Task Worker::taskScout = {
  */
 bool Worker::run_scout(Game& game, State& state, const Action& action) {
 	molog("  Try scouting for %i ms with search in radius of %i\n", action.iparam2, action.iparam1);
-
+	if (upcast(ProductionSite, productionsite, get_location(game))) {
+		productionsite->unnotify_player();
+	}
 	++state.ivar1;
 	start_task_scout(game, action.iparam1, action.iparam2);
 	// state reference may be invalid now

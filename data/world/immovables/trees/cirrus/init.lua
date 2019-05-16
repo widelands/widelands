@@ -85,6 +85,7 @@ world:new_immovable_type{
    descname = _ "Cirrus Tree (Old)",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    species = _ "Cirrus Tree",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_wasteland",
    size = "small",
    attributes = { "tree" },

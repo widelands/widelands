@@ -32,7 +32,7 @@
 #include "graphic/color.h"
 #include "graphic/gl/draw_line_program.h"
 #include "graphic/gl/fields_to_draw.h"
-#include "logic/description_maintainer.h"
+#include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/world/terrain_description.h"
 
 class DitherProgram;
@@ -121,7 +121,7 @@ public:
 		int gametime = 0;
 		int renderbuffer_width = 0;
 		int renderbuffer_height = 0;
-		const DescriptionMaintainer<Widelands::TerrainDescription>* terrains = nullptr;
+		const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>* terrains = nullptr;
 		const FieldsToDraw* fields_to_draw = nullptr;
 		Workareas workareas;
 		float scale = 1.f;

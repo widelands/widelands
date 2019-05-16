@@ -63,11 +63,13 @@ public:
 	                    const std::string& msgctxt,
 	                    MapObjectType type,
 	                    const LuaTable& t,
-	                    const EditorGameBase& egbase);
+	                    const Tribes& tribes,
+	                    const World& world);
 	ProductionSiteDescr(const std::string& init_descname,
 	                    const std::string& msgctxt,
 	                    const LuaTable& t,
-	                    const EditorGameBase& egbase);
+	                    const Tribes& tribes,
+	                    const World& world);
 
 	Building& create_object() const override;
 
@@ -330,6 +332,8 @@ private:
 	Trend trend_;
 	std::string statistics_string_on_changed_statistics_;
 	std::string production_result_;  // hover tooltip text
+
+	int32_t main_worker_;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSite);
 };
