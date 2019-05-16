@@ -281,14 +281,18 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 					assert(b.soldier_control());
 					assert(ts->desired_capacity >= b.soldier_control()->min_soldier_capacity());
 					assert(ts->desired_capacity <= b.soldier_control()->max_soldier_capacity());
-					b.mutable_soldier_control()->set_soldier_capacity(ts->desired_capacity);
+					if (ts->desired_capacity != b.mutable_soldier_control()->soldier_capacity()) {
+						b.mutable_soldier_control()->set_soldier_capacity(ts->desired_capacity);
+					}
 				}
 				dynamic_cast<ProductionSite&>(b).set_stopped(ps->stopped);
 			} else if (upcast(MilitarysiteSettings, ms, settings_.get())) {
 				assert(b.soldier_control());
 				assert(ms->desired_capacity >= b.soldier_control()->min_soldier_capacity());
 				assert(ms->desired_capacity <= b.soldier_control()->max_soldier_capacity());
-				b.mutable_soldier_control()->set_soldier_capacity(ms->desired_capacity);
+				if (ms->desired_capacity != b.mutable_soldier_control()->soldier_capacity()) {
+					b.mutable_soldier_control()->set_soldier_capacity(ms->desired_capacity);
+				}
 				dynamic_cast<MilitarySite&>(b).set_soldier_preference(ms->prefer_heroes ?
 						SoldierPreference::kHeroes : SoldierPreference::kRookies);
 			} else if (upcast(WarehouseSettings, ws, settings_.get())) {
