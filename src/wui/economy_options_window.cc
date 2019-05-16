@@ -417,7 +417,7 @@ log("NOCOM: EconomyOptionsWindow::update_profiles_select(%s)\n", current_profile
 log("       Dropdown is expanded, cancel\n");
 		return;
 	}
-	const std::string select = _(current_profile);
+	const std::string select = current_profile.empty() ? "" : _(current_profile);
 log("       Planning to select »%s«\n", select.c_str());
 	if (!dropdown_.has_selection() || dropdown_.get_selected() != select) {
 		dropdown_.select(select);
