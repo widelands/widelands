@@ -27,7 +27,7 @@
 #include "ui_basic/messagebox.h"
 
 LoginBox::LoginBox(Panel& parent)
-   : Window(&parent, "login_box", 0, 0, 500, 280, _("Metaserver login")) {
+   : Window(&parent, "login_box", 0, 0, 500, 280, _("Login settings")) {
 	center_to_parent();
 
 	int32_t margin = 10;
@@ -51,7 +51,7 @@ LoginBox::LoginBox(Panel& parent)
 	   this, "login",
 	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 :
 	                                   (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
-	   get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kWuiPrimary, _("Login"));
+	   get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kWuiPrimary, _("Save"));
 
 	cancelbtn = new UI::Button(
 	   this, "cancel",
@@ -76,11 +76,7 @@ LoginBox::LoginBox(Panel& parent)
 		ta_password->set_color(UI_FONT_CLR_DISABLED);
 	}
 
-	if (eb_nickname->text().empty()) {
-		eb_nickname->focus();
-	} else {
-		loginbtn->focus();
-	}
+	eb_nickname->focus();
 
 }
 
@@ -104,6 +100,8 @@ void LoginBox::clicked_back() {
 /// Calles when nickname was changed
 void LoginBox::change_playername() {
 	cb_register->set_state(false);
+	eb_password->set_can_focus(false);
+	eb_password->set_text("");
 }
 
 bool LoginBox::handle_key(bool down, SDL_Keysym code) {

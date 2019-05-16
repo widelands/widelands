@@ -55,7 +55,7 @@ private:
 	FxId new_client_fx_;
 	UI::Textarea title, clients_, opengames_;
 	UI::Textarea servername_;
-	UI::Button joingame_, hostgame_, logout_, back_;
+	UI::Button joingame_, hostgame_, back_;
 	UI::EditBox edit_servername_;
 	UI::Table<const InternetClient* const> clientsonline_list_;
 	UI::Listselect<InternetGame> opengames_list_;
@@ -79,7 +79,6 @@ private:
 	bool wait_for_ip();
 	void clicked_joingame();
 	void clicked_hostgame();
-	void clicked_logout();
 
 	uint8_t convert_clienttype(const std::string&);
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);

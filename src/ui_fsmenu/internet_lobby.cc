@@ -83,14 +83,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                buth_,
                UI::ButtonStyle::kFsMenuSecondary,
                _("Open a new game")),
-     logout_(this,
-               "host_game",
-               get_w() * 17 / 25,
-               get_h() * 82 / 100,
-               butw_,
-               buth_,
-               UI::ButtonStyle::kFsMenuSecondary,
-                _("Log out")),
      back_(this,
            "back",
            get_w() * 17 / 25,
@@ -128,8 +120,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	   boost::bind(&FullscreenMenuInternetLobby::clicked_joingame, boost::ref(*this)));
 	hostgame_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuInternetLobby::clicked_hostgame, boost::ref(*this)));
-	logout_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuInternetLobby::clicked_logout, boost::ref(*this)));
 	back_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuInternetLobby::clicked_back, boost::ref(*this)));
 
@@ -176,10 +166,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	// set focus to chat input
 	chat.focus_edit();
 
-	// Disable 'Log out' button when user isn't logged in
-	if (!g_options.pull_section("global").get_bool("registered", false)) {
-		logout_.set_enabled(false);
-	}
 }
 
 void FullscreenMenuInternetLobby::layout() {
@@ -476,14 +462,4 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 		InternetGaming::ref().logout("SERVER_CRASHED");
 		throw;
 	}
-}
-
-/// called when the 'Log out' button was clicked
-void FullscreenMenuInternetLobby::clicked_logout() {
-	Section& s = g_options.pull_section("global");
-	s.set_bool("registered", false);
-	s.set_bool("auto_log", false);
-	s.set_string("password_sha1", "");
-	s.set_string("nickname", "");
-	clicked_back();
 }
