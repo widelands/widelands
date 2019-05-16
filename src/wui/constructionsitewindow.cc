@@ -430,11 +430,13 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 
 			UI::Box& soldier_preference_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
 			settings_box.add(&soldier_preference_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+			UI::Panel& soldier_preference_panel = *new UI::Panel(&soldier_preference_box, 0, 0, 64, 32);
+			soldier_preference_box.add(&soldier_preference_panel);
 			cs_prefer_heroes_rookies_.reset(new UI::Radiogroup());
-			cs_prefer_heroes_rookies_->add_button(&soldier_preference_box, Vector2i::zero(),
+			cs_prefer_heroes_rookies_->add_button(&soldier_preference_panel, Vector2i::zero(),
 					g_gr->images().get("images/wui/buildings/prefer_rookies.png"),
 					_("Prefer rookies"));
-			cs_prefer_heroes_rookies_->add_button(&soldier_preference_box, Vector2i(32, 0),
+			cs_prefer_heroes_rookies_->add_button(&soldier_preference_panel, Vector2i(32, 0),
 					g_gr->images().get("images/wui/buildings/prefer_heroes.png"),
 					_("Prefer heroes"));
 			if (can_act) {
