@@ -155,6 +155,7 @@ private:
 	ConstructionsiteInformation info_;  // asked for by player point of view for the gameview
 
 	std::unique_ptr<BuildingSettings> settings_;
+	void init_settings();
 };
 }  // namespace Widelands
 

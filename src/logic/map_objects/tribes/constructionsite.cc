@@ -224,6 +224,13 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 		work_steps_ += it->second;
 	}
 
+	init_settings();
+
+	return true;
+}
+
+void ConstructionSite::init_settings() {
+	assert(building_);
 	assert(!settings_);
 	if (upcast(const WarehouseDescr, wd, building_)) {
 		settings_.reset(new WarehouseSettings(*wd, owner().tribe()));
@@ -238,8 +245,6 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 		log("WARNING: Created constructionsite for a %s, which is not of any known building type\n",
 				building_->name().c_str());
 	}
-
-	return true;
 }
 
 /*

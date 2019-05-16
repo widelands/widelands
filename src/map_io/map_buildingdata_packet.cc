@@ -289,7 +289,7 @@ void MapBuildingdataPacket::read_constructionsite(ConstructionSite& construction
 				constructionsite.settings_.reset(BuildingSettings::load(game,
 						constructionsite.owner().tribe(), fr));
 			} else {
-				constructionsite.settings_.reset(nullptr);
+				constructionsite.init_settings();
 			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Constructionsite", packet_version,
