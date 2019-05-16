@@ -326,7 +326,7 @@ RoadBase* Flag::get_roadbase(Flag& flag) {
 	return nullptr;
 }
 Road* Flag::get_road(Flag& flag) {
-	for (int8_t i = 0; i < 6; ++i) {
+	for (int8_t i = 1; i <= 6; ++i) {
 		if (Road* const road = get_road(i)) {
 			if (&road->get_flag(RoadBase::FlagStart) == &flag || &road->get_flag(RoadBase::FlagEnd) == &flag) {
 				return road;
