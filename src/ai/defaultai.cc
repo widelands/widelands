@@ -3799,7 +3799,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			}
 
 			// we have passed grace_time - it is time to dismantle
-		} else if (eco->dismantle_grace_time <= gametime){
+		} else if (eco->dismantle_grace_time <= gametime) {
 			last_attempt_ = true;
 			// we increase a check radius in last attempt
 			checkradius += 2;
