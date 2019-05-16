@@ -62,6 +62,8 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 	vbox_.add_inf_space();
 	vbox_.add(&showloginbox, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
+	vbox_.add_inf_space();
+	vbox_.add_inf_space();
 	vbox_.add(&back, UI::Box::Resizing::kFullSize);
 
 	layout();
