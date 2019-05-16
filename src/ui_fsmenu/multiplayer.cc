@@ -66,6 +66,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 	vbox_.add_inf_space();
 	vbox_.add(&back, UI::Box::Resizing::kFullSize);
 
+	auto_log_ = false;
 	layout();
 }
 
@@ -93,6 +94,10 @@ void FullscreenMenuMultiPlayer::show_internet_login() {
 	} else {
 		return;
 	}
+	if (auto_log_) {
+		auto_log_ = false;
+		internet_login();
+	}
 }
 
 /**
@@ -117,6 +122,7 @@ void FullscreenMenuMultiPlayer::internet_login() {
 	// Checks can be done directly in editbox' by using valid_username().
 	// This is just to be on the safe side, in case the user changed the password in the config file.
 	if (!InternetGaming::ref().valid_username(nickname_)) {
+		auto_log_ = true;
 		show_internet_login();
 		return;
 	}
@@ -140,6 +146,7 @@ void FullscreenMenuMultiPlayer::internet_login() {
 		// Reset InternetGaming and passwort and show internet login again
 		InternetGaming::ref().reset();
 		s.set_string("password_sha1", "");
+		auto_log_ = true;
 		show_internet_login();
 	}
 }
