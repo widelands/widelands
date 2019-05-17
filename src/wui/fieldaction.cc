@@ -193,6 +193,8 @@ private:
 	                       bool repeating = false);
 	void reset_mouse_and_die();
 
+	void clear_overlapping_workareas();
+
 	Widelands::Player* player_;
 	const Widelands::Map& map_;
 
@@ -202,6 +204,7 @@ private:
 	bool fastclick_;  // if true, put the mouse over first button in first tab
 	uint32_t best_tab_;
 	bool showing_workarea_preview_;
+	std::set<Widelands::Coords> overlapping_workareas_;
 
 	/// Variables to use with attack dialog.
 	AttackBox* attack_box_;
@@ -255,8 +258,10 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
 }
 
 FieldActionWindow::~FieldActionWindow() {
-	if (showing_workarea_preview_)
-		ibase().hide_workarea(node_);
+	if (showing_workarea_preview_) {
+		ibase().hide_workarea(node_, false);
+	}
+	clear_overlapping_workareas();
 	ibase().set_sel_freeze(false);
 	delete attack_box_;
 }
@@ -265,6 +270,13 @@ void FieldActionWindow::think() {
 	if (player_ && player_->vision(node_.field - &ibase().egbase().map()[0]) <= 1 &&
 	    !player_->see_all())
 		die();
+}
+
+void FieldActionWindow::clear_overlapping_workareas() {
+	for (const Widelands::Coords& c : overlapping_workareas_) {
+		ibase().hide_workarea(c, true);
+	}
+	overlapping_workareas_.clear();
 }
 
 /*
@@ -683,17 +695,94 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx) {
 
 void FieldActionWindow::building_icon_mouse_out(Widelands::DescriptionIndex) {
 	if (showing_workarea_preview_) {
-		ibase().hide_workarea(node_);
+		ibase().hide_workarea(node_, false);
+		clear_overlapping_workareas();
 		showing_workarea_preview_ = false;
 	}
 }
 
 void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex idx) {
 	if (!showing_workarea_preview_) {
-		const WorkareaInfo& workarea_info =
-		   player_->tribe().get_building_descr(Widelands::DescriptionIndex(idx))->workarea_info();
+		assert(overlapping_workareas_.empty());
+		const Widelands::BuildingDescr& descr = *player_->tribe().get_building_descr(idx);
+		const WorkareaInfo& workarea_info = descr.workarea_info();
 		ibase().show_workarea(workarea_info, node_);
 		showing_workarea_preview_ = true;
+
+		const Widelands::Map& map = ibase().egbase().map();
+		uint32_t workarea_radius = 0;
+		for (const auto& pair : workarea_info) {
+			workarea_radius = std::max(workarea_radius, pair.first);
+		}
+		if (workarea_radius == 0) {
+			return;
+		}
+		std::set<Widelands::TCoords<>> main_region =
+		   map.triangles_in_region(map.to_set(Widelands::Area<>(node_, workarea_radius)));
+
+		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+		   map, Widelands::Area<Widelands::FCoords>(
+		           node_, workarea_radius + ibase().egbase().tribes().get_largest_workarea()));
+		do {
+			if (player_->vision(map.get_index(mr.location())) > 1) {
+				if (Widelands::BaseImmovable* imm = mr.location().field->get_immovable()) {
+					const Widelands::MapObjectType imm_type = imm->descr().type();
+					if (imm_type < Widelands::MapObjectType::BUILDING) {
+						// We are not interested in trees and pebbles
+						continue;
+					}
+					const Widelands::BuildingDescr* d = nullptr;
+					if (imm_type == Widelands::MapObjectType::CONSTRUCTIONSITE) {
+						upcast(Widelands::ConstructionSite, cs, imm);
+						d = cs->get_info().becomes;
+						if ((descr.type() == Widelands::MapObjectType::PRODUCTIONSITE &&
+						     d->type() != Widelands::MapObjectType::PRODUCTIONSITE) ||
+						    ((descr.type() == Widelands::MapObjectType::MILITARYSITE ||
+						      descr.type() == Widelands::MapObjectType::WAREHOUSE) &&
+						     imm_type != Widelands::MapObjectType::MILITARYSITE &&
+						     imm_type != Widelands::MapObjectType::WAREHOUSE)) {
+							continue;
+						}
+					} else if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+						if (imm_type != Widelands::MapObjectType::PRODUCTIONSITE ||
+						    imm->get_owner() != player_) {
+							continue;
+						}
+					} else if (descr.type() == Widelands::MapObjectType::WAREHOUSE ||
+					           descr.type() == Widelands::MapObjectType::MILITARYSITE) {
+						if (imm_type != Widelands::MapObjectType::MILITARYSITE &&
+						    imm_type != Widelands::MapObjectType::WAREHOUSE) {
+							continue;
+						}
+					}
+					upcast(Widelands::Building, bld, imm);
+					if (bld->get_position() != mr.location()) {
+						// Don't count big buildings more than once
+						continue;
+					}
+					if (!d) {
+						d = &bld->descr();
+					}
+					const WorkareaInfo& wa = d->workarea_info();
+					uint32_t wa_radius = 0;
+					for (const auto& pair : wa) {
+						wa_radius = std::max(wa_radius, pair.first);
+					}
+					if (wa_radius == 0) {
+						continue;
+					}
+					if (map.calc_distance(node_, mr.location()) <= workarea_radius + wa_radius) {
+						std::map<Widelands::TCoords<>, uint32_t> colors;
+						for (const Widelands::TCoords<>& t : map.triangles_in_region(
+						        map.to_set(Widelands::Area<>(mr.location(), wa_radius)))) {
+							colors[t] = main_region.count(t) ? 0xffbf3f3f : 0x7fffffff;
+						}
+						ibase().show_workarea(wa, mr.location(), colors);
+						overlapping_workareas_.insert(mr.location());
+					}
+				}
+			}
+		} while (mr.advance(map));
 	}
 }
 
