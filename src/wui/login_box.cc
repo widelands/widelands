@@ -27,7 +27,7 @@
 #include "ui_basic/messagebox.h"
 
 LoginBox::LoginBox(Panel& parent)
-   : Window(&parent, "login_box", 0, 0, 500, 280, _("Login settings")) {
+   : Window(&parent, "login_box", 0, 0, 500, 280, _("Online game Settings")) {
 	center_to_parent();
 
 	int32_t margin = 10;

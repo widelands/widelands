@@ -36,10 +36,10 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 
      // Buttons
      metaserver(
-        &vbox_, "metaserver", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Internet game")),
+        &vbox_, "metaserver", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Online game")),
      lan(&vbox_, "lan", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("LAN / Direct IP")),
 	  showloginbox(
-		  &vbox_, "lan", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Login settings")),
+		  &vbox_, "lan", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Online game Settings")),
      back(&vbox_, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Back")) {
 	metaserver.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMultiPlayer::internet_login, boost::ref(*this)));
@@ -58,9 +58,9 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 	title.set_fontsize(fs_big());
 
 	vbox_.add(&metaserver, UI::Box::Resizing::kFullSize);
-	vbox_.add(&lan, UI::Box::Resizing::kFullSize);
-	vbox_.add_inf_space();
 	vbox_.add(&showloginbox, UI::Box::Resizing::kFullSize);
+	vbox_.add_inf_space();
+	vbox_.add(&lan, UI::Box::Resizing::kFullSize);
 	vbox_.add_inf_space();
 	vbox_.add_inf_space();
 	vbox_.add_inf_space();
@@ -162,8 +162,8 @@ void FullscreenMenuMultiPlayer::layout() {
 	title.set_pos(Vector2i(0, title_y_));
 
 	metaserver.set_desired_size(butw_, buth_);
-	lan.set_desired_size(butw_, buth_);
 	showloginbox.set_desired_size(butw_, buth_);
+	lan.set_desired_size(butw_, buth_);
 	back.set_desired_size(butw_, buth_);
 
 	vbox_.set_pos(Vector2i(box_x_, box_y_));
