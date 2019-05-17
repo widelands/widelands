@@ -80,6 +80,7 @@ world:new_immovable_type{
    name = "palm_borassus_desert_old",
    descname = _ "Borassus Palm (Old)",
    species = _ "Borassus Palm",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_palm",
    size = "small",
    attributes = { "tree" },
@@ -100,8 +101,7 @@ world:new_immovable_type{
          hotspot = { 24, 60 },
          fps = 10,
          sound_effect = {
-            directory = "sound/animals",
-            name = "crickets1",
+            path = "sound/animals/crickets1",
          },
       },
    },

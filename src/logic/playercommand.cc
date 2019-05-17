@@ -450,14 +450,17 @@ void CmdFlagAction::serialize(StreamWrite& ser) {
 	ser.unsigned_32(serial);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdFlagAction = 1;
+constexpr uint16_t kCurrentPacketVersionCmdFlagAction = 2;
 
 void CmdFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdFlagAction) {
+		// TODO(GunChleoc): Savegame compatibility, remove after Build 21
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionCmdFlagAction) {
 			PlayerCommand::read(fr, egbase, mol);
-			fr.unsigned_8();
+			if (packet_version == 1) {
+				fr.unsigned_8();
+			}
 			serial = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
 		} else {
 			throw UnhandledVersionError(
@@ -472,9 +475,6 @@ void CmdFlagAction::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver&
 	fw.unsigned_16(kCurrentPacketVersionCmdFlagAction);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
-	// Now action
-	fw.unsigned_8(0);
-
 	// Now serial
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 }
@@ -1589,7 +1589,11 @@ CmdEnemyFlagAction::CmdEnemyFlagAction(StreamRead& des) : PlayerCommand(0, des.u
 	des.unsigned_8();
 	serial = des.unsigned_32();
 	des.unsigned_8();
-	number = des.unsigned_8();
+	const uint32_t number = des.unsigned_32();
+	soldiers.clear();
+	for (uint32_t i = 0; i < number; ++i) {
+		soldiers.push_back(des.unsigned_32());
+	}
 }
 
 void CmdEnemyFlagAction::execute(Game& game) {
@@ -1597,16 +1601,21 @@ void CmdEnemyFlagAction::execute(Game& game) {
 
 	if (upcast(Flag, flag, game.objects().get_object(serial))) {
 		log("Cmd_EnemyFlagAction::execute player(%u): flag->owner(%d) "
-		    "number=%u\n",
-		    player->player_number(), flag->owner().player_number(), number);
+		    "number=%" PRIuS "\n",
+		    player->player_number(), flag->owner().player_number(), soldiers.size());
 
 		if (const Building* const building = flag->get_building()) {
 			if (player->is_hostile(flag->owner()) &&
-			    1 < player->vision(Map::get_index(building->get_position(), game.map().get_width())))
-				player->enemyflagaction(*flag, sender(), number);
-			else
+			    1 < player->vision(Map::get_index(building->get_position(), game.map().get_width()))) {
+				std::vector<Soldier*> result;
+				for (Serial s : soldiers) {
+					result.push_back(dynamic_cast<Soldier*>(game.objects().get_object(s)));
+				}
+				player->enemyflagaction(*flag, sender(), result);
+			} else {
 				log("Cmd_EnemyFlagAction::execute: ERROR: wrong player target not "
 				    "seen or not hostile.\n");
+			}
 		}
 	}
 }
@@ -1617,20 +1626,40 @@ void CmdEnemyFlagAction::serialize(StreamWrite& ser) {
 	ser.unsigned_8(1);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(sender());
-	ser.unsigned_8(number);
+	ser.unsigned_32(soldiers.size());
+	for (Serial s : soldiers) {
+		ser.unsigned_32(s);
+	}
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdEnemyFlagAction = 3;
+constexpr uint16_t kCurrentPacketVersionCmdEnemyFlagAction = 4;
 
 void CmdEnemyFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdEnemyFlagAction) {
+		if (packet_version <= kCurrentPacketVersionCmdEnemyFlagAction && packet_version >= 3) {
 			PlayerCommand::read(fr, egbase, mol);
 			fr.unsigned_8();
 			serial = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
 			fr.unsigned_8();
-			number = fr.unsigned_8();
+
+			soldiers.clear();
+			if (packet_version == kCurrentPacketVersionCmdEnemyFlagAction) {
+				const uint32_t number = fr.unsigned_32();
+				for (uint32_t i = 0; i < number; ++i) {
+					soldiers.push_back(mol.get<Soldier>(fr.unsigned_32()).serial());
+				}
+			} else {
+				const uint8_t number = fr.unsigned_8();
+				upcast(Flag, flag, egbase.objects().get_object(serial));
+				assert(flag);
+				std::vector<Soldier*> result;
+				egbase.get_player(sender())->find_attack_soldiers(*flag, &result, number);
+				assert(result.size() == number);
+				for (const auto& s : result) {
+					soldiers.push_back(s->serial());
+				}
+			}
 		} else {
 			throw UnhandledVersionError(
 			   "CmdEnemyFlagAction", packet_version, kCurrentPacketVersionCmdEnemyFlagAction);
@@ -1653,7 +1682,10 @@ void CmdEnemyFlagAction::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 
 	// Now param
 	fw.unsigned_8(sender());
-	fw.unsigned_8(number);
+	fw.unsigned_32(soldiers.size());
+	for (Serial s : soldiers) {
+		fw.unsigned_32(mos.get_object_file_index(*egbase.objects().get_object(s)));
+	}
 }
 
 /*** struct PlayerMessageCommand ***/

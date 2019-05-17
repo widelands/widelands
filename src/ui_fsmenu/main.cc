@@ -113,7 +113,7 @@ FullscreenMenuMain::FullscreenMenuMain()
 }
 
 void FullscreenMenuMain::clicked_ok() {
-	;  // do nothing
+	// do nothing
 }
 
 void FullscreenMenuMain::layout() {

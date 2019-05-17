@@ -405,6 +405,14 @@ void GameClient::set_player(uint8_t, const PlayerSettings&) {
 	// set_player_number(uint8_t) to the host.
 }
 
+void GameClient::set_peaceful_mode(bool peace) {
+	d->settings.peaceful = peace;
+}
+
+bool GameClient::is_peaceful_mode() {
+	return d->settings.peaceful;
+}
+
 std::string GameClient::get_win_condition_script() {
 	return d->settings.win_condition_script;
 }
@@ -586,8 +594,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		    d->settings.mapfilename.c_str());
 
 		// New map was set, so we clean up the buffer of a previously requested file
-		if (file_)
-			delete file_;
+		file_.reset(nullptr);
 		break;
 	}
 
@@ -637,10 +644,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		s.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
 		d->net->send(s);
 
-		if (file_)
-			delete file_;
-
-		file_ = new NetTransferFile();
+		file_.reset(new NetTransferFile());
 		file_->bytes = bytes;
 		file_->filename = path;
 		file_->md5sum = md5;
@@ -817,6 +821,10 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	}
 	case NETCMD_WIN_CONDITION: {
 		d->settings.win_condition_script = g_fs->FileSystem::fix_cross_file(packet.string());
+		break;
+	}
+	case NETCMD_PEACEFUL_MODE: {
+		d->settings.peaceful = packet.unsigned_8();
 		break;
 	}
 

@@ -69,6 +69,14 @@ std::string SinglePlayerGameSettingsProvider::get_map() {
 	return s.mapfilename;
 }
 
+bool SinglePlayerGameSettingsProvider::is_peaceful_mode() {
+	return s.peaceful;
+}
+
+void SinglePlayerGameSettingsProvider::set_peaceful_mode(bool peace) {
+	s.peaceful = peace;
+}
+
 void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
                                                const std::string& mapfilename,
                                                uint32_t const maxplayers,

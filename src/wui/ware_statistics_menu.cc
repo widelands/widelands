@@ -34,7 +34,7 @@
 #include "wui/plot_area.h"
 #include "wui/waresdisplay.h"
 
-constexpr int kPlotHeight = 130;
+constexpr int kPlotHeight = 145;
 constexpr int kPlotWidth = 250;
 constexpr int kSpacing = 5;
 

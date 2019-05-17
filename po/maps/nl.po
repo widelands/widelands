@@ -1,15 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
+# Nora Ghaoui, 2016
 # Nora Ghaoui, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 18:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-04-20 05:45+0000\n"
+"PO-Revision-Date: 2019-04-22 01:30+0000\n"
+"Last-Translator: stdh\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -168,12 +169,12 @@ msgstr "Een Voorpost van Ballingschap"
 
 #: ../../data/campaigns/campaigns.conf:101
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "De Wraak van Neptunus"
 
 #: ../../data/campaigns/campaigns.conf:106
 #: ../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
-msgstr ""
+msgstr "Wat een Verrassing!"
 
 #: ../../data/campaigns/campaigns.conf:129
 #: ../../data/campaigns/fri01.wmf/elemental:8
@@ -213,14 +214,14 @@ msgstr "Eindelijk was het schip gerepareerd, en Lutius en zijn mensen vervolgden
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
-msgstr ""
+msgstr "Op weg naar huis om het Imperium te verdedigen werd Lutius' bemanning verrast door de wil van de goden."
 
 #: ../../data/campaigns/emp04.wmf/elemental:10
 msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
-msgstr ""
+msgstr "Na hun thuiskomst worden Lutius en zijn compagnie geconfronteerd met een economie in duigen. De moeilijkheden in de verschillende productiesystemen oplossen zal van het grootste belang zijn om de glorie van het Imperium te herstellen."
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""

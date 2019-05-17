@@ -18,7 +18,7 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS#: Note helptext for a building
-   return ""
+   return pgettext("atlanteans_building", "When no cornmeal is required, the mill will try to produce blackroot flour even when there is no demand for it.")
 end
 
 function building_helptext_performance()

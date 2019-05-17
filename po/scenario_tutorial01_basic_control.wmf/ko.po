@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # ks k, 2018
 # ks k, 2018
-# TaeMin An <kavern02@gmail.com>, 2017
+# TaeMin An, 2017,2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-20 07:33+0000\n"
-"PO-Revision-Date: 2018-07-21 14:50+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2019-04-22 05:17+0000\n"
+"PO-Revision-Date: 2019-05-05 11:53+0000\n"
+"Last-Translator: TaeMin An\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -439,10 +439,10 @@ msgstr "여기 바위들 옆에 채석장을 건설합니다. 전에 했던 것�
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
-"space were you want the building to be, choose it from the window that "
+"space where you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
-msgstr "건설 공간을 확인하고, 건물이 지어질 공간을 클릭하고, 나타난 창에서 건물을 고르면, 설치가 된다는 것을 명심하십시오. 아마 지금이 우리가 이전에 활성화했던 건설 공간 기호들에 대해 설명할 좋은 시간일 겁니다."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:241
 msgid ""
@@ -967,7 +967,7 @@ msgid ""
 "The Barbarians have four different military buildings you can build: the "
 "sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
-msgstr "야만인들은 건설할 수 있는 네 가지 다른 군사 건물들을 갖습니다: 초소 (소형), 방벽과 탑 (둘 다 중형) 그리고 요새 (대형). 가장 좋아하는 하나를 선택하십시오."
+msgstr "야만인들은 건설할 수 있는 네 가지 다른 군사 건물들을 갖습니다: 초소 (소형), 장벽과 탑 (둘 다 중형) 그리고 요새 (대형). 가장 좋아하는 하나를 선택하십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:459
 msgid ""

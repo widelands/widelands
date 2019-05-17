@@ -222,6 +222,16 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 		   table.get_table("attributes")->array_entries<std::string>();
 		add_attributes(attributes, {MapObject::Attribute::RESI});
 
+		// All resource indicators must have a menu icon
+		for (const std::string& attribute : attributes) {
+			if (attribute == "resi") {
+				if (icon_filename().empty()) {
+					throw GameDataError("Resource indicator %s has no menu icon", name().c_str());
+				}
+				break;
+			}
+		}
+
 		// Old trees get an extra species name so we can use it in help lists.
 		bool is_tree = false;
 		for (const std::string& attribute : attributes) {
@@ -456,24 +466,26 @@ void Immovable::act(Game& game, uint32_t const data) {
 void Immovable::draw(uint32_t gametime,
                      const TextToDraw draw_text,
                      const Vector2f& point_on_dst,
+                     const Widelands::Coords& coords,
                      float scale,
                      RenderTarget* dst) {
 	if (!anim_) {
 		return;
 	}
 	if (!anim_construction_total_) {
-		dst->blit_animation(point_on_dst, scale, anim_, gametime - animstart_);
+		dst->blit_animation(point_on_dst, coords, scale, anim_, gametime - animstart_);
 		if (former_building_descr_) {
 			do_draw_info(draw_text, former_building_descr_->descname(), "", point_on_dst, scale, dst);
 		}
 	} else {
-		draw_construction(gametime, draw_text, point_on_dst, scale, dst);
+		draw_construction(gametime, draw_text, point_on_dst, coords, scale, dst);
 	}
 }
 
 void Immovable::draw_construction(const uint32_t gametime,
                                   const TextToDraw draw_text,
                                   const Vector2f& point_on_dst,
+                                  const Widelands::Coords& coords,
                                   const float scale,
                                   RenderTarget* dst) {
 	const ImmovableProgram::ActConstruct* constructionact = nullptr;
@@ -503,14 +515,14 @@ void Immovable::draw_construction(const uint32_t gametime,
 	const RGBColor& player_color = get_owner()->get_playercolor();
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
-		dst->blit_animation(
-		   point_on_dst, scale, anim_, (current_frame - 1) * frametime, player_color);
+		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_,
+		                    (current_frame - 1) * frametime, &player_color);
 	}
 
 	const int percent = ((done % units_per_frame) * 100) / units_per_frame;
 
 	dst->blit_animation(
-	   point_on_dst, scale, anim_, current_frame * frametime, player_color, percent);
+	   point_on_dst, coords, scale, anim_, current_frame * frametime, &player_color, percent);
 
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(draw_text, descr().descname(),
@@ -791,7 +803,7 @@ void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) con
 ImmovableProgram::ActPlaySound::ActPlaySound(char* parameters, const ImmovableDescr&) {
 	try {
 		bool reached_end;
-		name = next_word(parameters, reached_end);
+		std::string name = next_word(parameters, reached_end);
 
 		if (!reached_end) {
 			char* endp;
@@ -802,8 +814,7 @@ ImmovableProgram::ActPlaySound::ActPlaySound(char* parameters, const ImmovableDe
 		} else
 			priority = 127;
 
-		g_sound_handler.load_fx_if_needed(
-		   FileSystem::fs_dirname(name), FileSystem::fs_filename(name.c_str()), name);
+		fx = g_sh->register_fx(SoundType::kAmbient, name);
 	} catch (const WException& e) {
 		throw GameDataError("playsound: %s", e.what());
 	}
@@ -813,7 +824,7 @@ ImmovableProgram::ActPlaySound::ActPlaySound(char* parameters, const ImmovableDe
  * Whether the effect actually gets played
  * is decided only by the sound server*/
 void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) const {
-	Notifications::publish(NoteSound(name, immovable.get_position(), priority));
+	Notifications::publish(NoteSound(SoundType::kAmbient, fx, immovable.get_position(), priority));
 	immovable.program_step(game);
 }
 
@@ -1337,14 +1348,14 @@ void PlayerImmovable::receive_worker(Game&, Worker& worker) {
 void PlayerImmovable::log_general_info(const EditorGameBase& egbase) const {
 	BaseImmovable::log_general_info(egbase);
 
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("this: %p\n", this);
 	molog("owner_: %p\n", owner_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 	molog("player_number: %i\n", owner_->player_number());
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("economy_: %p\n", economy_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 }
 
 constexpr uint8_t kCurrentPacketVersionPlayerImmovable = 1;

@@ -402,7 +402,6 @@ function li_arrow(text)
    return li("→", text)
 end
 
-
 -- RST
 -- .. function:: li_image(imagepath, text)
 --
@@ -424,6 +423,26 @@ function li_image(imagepath, text)
       )
 end
 
+-- RST
+-- .. function:: li_object(name, text)
+--
+--    Places a paragraph of text to the right of an image representing the given map object
+--
+--    :arg name: the name of the map object to be represented by an image
+--    :type name: :class:`string`
+--
+--    :arg text: the text to be placed next to the image
+--    :type text: :class:`string`
+--
+--    :returns: the text wrapped in a paragraph and placed next to the image, the outer tag is a div.
+
+function li_object(name, text)
+   return
+      div("width=100%",
+         div("float=left padding_r=6", p(img_object(name))) ..
+         p(text)
+      )
+end
 
 -- RST
 -- :ref:`Return to index<richtext.lua>`
@@ -452,6 +471,27 @@ function img(src, attributes)
       return "<img src=" .. src .." " .. attributes .. ">"
    else
       return "<img src=" .. src .. ">"
+   end
+end
+
+-- RST
+-- .. function:: img_object(object[, attributes = nil])
+--
+--    Creates a richtest image tag for the given map object type. See also :any:`li_object`.
+--
+--    :arg name: the name of the map object.
+--    :type name: :class:`string`
+--    :arg attributes: see the :ref:`img tag's documentation <rt_tags_img>`
+--                     for a list of attributes and their descriptions.
+--    :type attributes: :class:`string`
+--
+--    :returns: the img tag.
+
+function img_object(name, attributes)
+   if attributes then
+      return "<img object=" .. name .. " " .. attributes .. ">"
+   else
+      return "<img object=" .. name .. ">"
    end
 end
 

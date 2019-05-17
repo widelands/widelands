@@ -18,6 +18,7 @@ local wc_desc = _"This is an endless game without rules."
 return {
    name = wc_name,
    description = wc_desc,
+   peaceful_mode_allowed = true,
    func = function()
       local plrs = wl.Game().players
 

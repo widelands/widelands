@@ -48,6 +48,13 @@
    ...
 }
 {
+   driver1
+   Memcheck:Addr1
+   ...
+   obj:*965_dri.so
+   ...
+}
+{
    driver2
    Memcheck:Addr2
    ...
@@ -64,6 +71,13 @@
 {
    driver8
    Memcheck:Addr8
+   ...
+   obj:*i965_dri.so
+   ...
+}
+{
+   driver16
+   Memcheck:Addr16
    ...
    obj:*i965_dri.so
    ...
@@ -93,5 +107,41 @@
    Memcheck:Leak
    ...
    obj:*linux-gnu/lib*
+   ...
+}
+{
+   ZipWriteValue8
+   Memcheck:Value8
+   ...
+   fun:zipWriteInFileInZip
+   ...
+}
+{
+   ZipWriteCond
+   Memcheck:Cond
+   ...
+   fun:zipWriteInFileInZip
+   ...
+}
+{
+   ZipCloseCond
+   Memcheck:Cond
+   ...
+   fun:zipCloseFileInZip
+   ...
+}
+{
+   ZipCloseParam
+   Memcheck:Param
+   write(buf)
+   ...
+   fun:zipCloseFileInZip
+   ...
+}
+{
+   ErisLeak
+   Memcheck:Leak
+   ...
+   fun:l_alloc
    ...
 }

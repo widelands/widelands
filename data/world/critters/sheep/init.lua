@@ -4,8 +4,7 @@ animations = {
    idle = {
       pictures = path.list_files(dirname .. "idle_??.png"),
       sound_effect = {
-         directory = "sound/farm",
-         name = "sheep",
+         path = "sound/farm/sheep",
       },
       hotspot = { 8, 16 },
       fps = 20,
