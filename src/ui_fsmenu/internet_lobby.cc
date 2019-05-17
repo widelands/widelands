@@ -90,7 +90,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
            butw_,
            buth_,
            UI::ButtonStyle::kFsMenuSecondary,
-           _("Log out")),
+           _("Leave Lobby")),
 
      // Edit boxes
      edit_servername_(
