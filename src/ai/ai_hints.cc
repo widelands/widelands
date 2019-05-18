@@ -274,3 +274,23 @@ int16_t BuildingHints::get_ai_limit(const Widelands::AiType ai_type) const {
 	}
 	NEVER_HERE();
 }
+
+
+// TODO(GunChleoc): WareDescr has a bare "preciousness" table that should be moved below a new "aihints" table.
+void WareWorkerHints::read_preciousness(const LuaTable& table) {
+	for (const std::string& key : table.keys<std::string>()) {
+		preciousnesses_.insert(std::make_pair(key, table.get_int(key)));
+	}
+}
+
+/// Returns the preciousness of the ware, or kInvalidWare if the tribe doesn't use the ware.
+int WareWorkerHints::preciousness(const std::string& tribename) const {
+	if (preciousnesses_.count(tribename) > 0) {
+		return preciousnesses_.at(tribename);
+	}
+	return Widelands::kInvalidWare;
+}
+
+WareHints::WareHints(const LuaTable& table) {
+	read_preciousness(table);
+}

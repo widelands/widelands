@@ -23,9 +23,11 @@
 #include <memory>
 #include <stdint.h>
 #include <string>
+#include <unordered_map>
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "logic/widelands.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -129,6 +131,31 @@ private:
 	std::set<std::string> supported_production_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
+};
+
+/// Hints common to wares and workers
+struct WareWorkerHints {
+	WareWorkerHints() = default;
+
+	/// Returns the preciousness of the ware/worker, or kInvalidWare if the tribe doesn't use the ware/worker or the worker has no preciousness defined for the tribe.
+	int preciousness(const std::string& tribename) const;
+
+protected:
+	void read_preciousness(const LuaTable& table);
+
+private:
+	// tribename, preciousness. No default.
+	std::unordered_map<std::string, int> preciousnesses_;
+};
+
+/// Hints for wares
+struct WareHints : WareWorkerHints {
+	explicit WareHints(const LuaTable& table);
+};
+
+/// Hints for workers
+struct WorkerHints : WareWorkerHints {
+
 };
 
 #endif  // end of include guard: WL_AI_AI_HINTS_H

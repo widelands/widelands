@@ -517,7 +517,7 @@ void DefaultAI::late_initialization() {
 	for (DescriptionIndex i = 0; i < static_cast<DescriptionIndex>(game().tribes().nrwares()); ++i) {
 		wares.at(i).producers = 0;
 		wares.at(i).consumers = 0;
-		wares.at(i).preciousness = game().tribes().get_ware_descr(i)->preciousness(tribe_->name());
+		wares.at(i).preciousness = game().tribes().get_ware_descr(i)->ai_hints().preciousness(tribe_->name());
 	}
 
 	const DescriptionIndex& nr_buildings = game().tribes().nrbuildings();
@@ -4487,7 +4487,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		       gametime &&
 		    site.site->can_start_working() &&
 		    get_stocklevel(*site.bo, gametime) >
-		       (std::abs(management_data.get_military_number_at(168)) / 5)) {
+		      static_cast<unsigned int>((std::abs(management_data.get_military_number_at(168)) / 5))) {
 
 			if (connected_to_wh) {
 				game().send_player_dismantle(*site.site);
@@ -5829,7 +5829,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kNeeded;
 		} else if (bo.inputs.size() == 1 &&
 		           calculate_stocklevel(static_cast<size_t>(bo.inputs.at(0))) >
-		              std::abs(management_data.get_military_number_at(171))) {
+		              static_cast<unsigned int>(std::abs(management_data.get_military_number_at(171)))) {
 			return BuildingNecessity::kNeeded;
 		} else {
 			return BuildingNecessity::kNotNeeded;
