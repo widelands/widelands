@@ -305,6 +305,7 @@ wl_library(wui
     logic_generic_save_handler
     logic_map
     logic_map_objects
+    logic_objectives
     logic_tribe_basic_info
     logic_widelands_geometry
     network

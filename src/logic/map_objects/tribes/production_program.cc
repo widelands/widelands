@@ -614,7 +614,7 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 
 void ProductionProgram::ActCallWorker::execute(Game& game, ProductionSite& ps) const {
 	// Always main worker is doing stuff
-	ps.working_positions_[0].worker->update_task_buildingwork(game);
+	ps.working_positions_[ps.main_worker_].worker->update_task_buildingwork(game);
 }
 
 bool ProductionProgram::ActCallWorker::get_building_work(Game& game,
@@ -820,7 +820,7 @@ ProductionProgram::ActProduce::ActProduce(const std::vector<std::string>& argume
 void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) const {
 	assert(ps.produced_wares_.empty());
 	ps.produced_wares_ = produced_wares_;
-	ps.working_positions_[0].worker->update_task_buildingwork(game);
+	ps.working_positions_[ps.main_worker_].worker->update_task_buildingwork(game);
 
 	const TribeDescr& tribe = ps.owner().tribe();
 	assert(produced_wares_.size());
@@ -872,7 +872,7 @@ ProductionProgram::ActRecruit::ActRecruit(const std::vector<std::string>& argume
 void ProductionProgram::ActRecruit::execute(Game& game, ProductionSite& ps) const {
 	assert(ps.recruited_workers_.empty());
 	ps.recruited_workers_ = recruited_workers_;
-	ps.working_positions_[0].worker->update_task_buildingwork(game);
+	ps.working_positions_[ps.main_worker_].worker->update_task_buildingwork(game);
 
 	const TribeDescr& tribe = ps.owner().tribe();
 	assert(recruited_workers_.size());
@@ -1244,7 +1244,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	if (map.find_reachable_immovables(area, &immovables, cstep, FindImmovableByDescr(descr))) {
 		state.objvar = immovables[0].object;
 
-		psite.working_positions_[0].worker->update_task_buildingwork(game);
+		psite.working_positions_[psite.main_worker_].worker->update_task_buildingwork(game);
 		return;
 	}
 
@@ -1280,7 +1280,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 
 		state.coord = best_coords;
 
-		psite.working_positions_[0].worker->update_task_buildingwork(game);
+		psite.working_positions_[psite.main_worker_].worker->update_task_buildingwork(game);
 		return;
 	}
 

@@ -51,7 +51,6 @@
 #include "sound/sound_handler.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
-#include "wui/interactive_player.h"
 #include "wui/logmessage.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -101,6 +100,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
      toolbar_(this, 0, 0, UI::Box::Horizontal),
      quick_navigation_(&map_view_),
+     workareas_cache_(nullptr),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
      display_flags_(dfDebug),
@@ -204,14 +204,19 @@ InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
 bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords,
                                            const Widelands::Map* map) const {
 	if (!map) {
-		return workarea_previews_.count(coords) == 1;
-	}
-	for (const auto& pair : workarea_previews_) {
-		uint32_t radius = 0;
-		for (const auto& p : *pair.second) {
-			radius = std::max(radius, p.first);
+		for (const auto& preview : workarea_previews_) {
+			if (preview->coords == coords) {
+				return true;
+			}
 		}
-		if (map->calc_distance(coords, pair.first) <= radius) {
+		return false;
+	}
+	for (const auto& preview : workarea_previews_) {
+		uint32_t radius = 0;
+		for (const auto& wa : *preview->info) {
+			radius = std::max(radius, wa.first);
+		}
+		if (map->calc_distance(coords, preview->coords) <= radius) {
 			return true;
 		}
 	}
@@ -223,22 +228,7 @@ UniqueWindowHandler& InteractiveBase::unique_windows() {
 }
 
 void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
-	const Map& map = egbase().map();
 	sel_.pos = center;
-
-	if (upcast(InteractiveGameBase const, igbase, this))
-		if (upcast(Widelands::ProductionSite, productionsite, map[center.node].get_immovable())) {
-			if (upcast(InteractivePlayer const, iplayer, igbase)) {
-				const Widelands::Player& player = iplayer->player();
-				if (!player.see_all() &&
-				    (1 >= player.vision(Widelands::Map::get_index(center.node, map.get_width())) ||
-				     player.is_hostile(*productionsite->get_owner())))
-					return set_tooltip("");
-			}
-			set_tooltip(productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
-			return;
-		}
-	set_tooltip("");
 }
 
 /*
@@ -321,9 +311,18 @@ bool InteractiveBase::has_expedition_port_space(const Widelands::Coords& coords)
 	return false;
 }
 
-// Show the given workareas at the given coords and returns the overlay job id associated
+// Show the given workareas at the given coords
+void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info,
+                                    Widelands::Coords coords,
+                                    std::map<Widelands::TCoords<>, uint32_t>& extra_data) {
+	workarea_previews_.insert(
+	   std::unique_ptr<WorkareaPreview>(new WorkareaPreview{coords, &workarea_info, extra_data}));
+	workareas_cache_.reset(nullptr);
+}
+
 void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords) {
-	workarea_previews_[coords] = &workarea_info;
+	std::map<Widelands::TCoords<>, uint32_t> empty;
+	show_workarea(workarea_info, coords, empty);
 }
 
 /* Helper function to get the correct index for graphic/gl/workarea_program.cc::workarea_colors .
@@ -367,73 +366,101 @@ static uint8_t workarea_max(uint8_t a, uint8_t b, uint8_t c) {
 	}
 }
 
-Workareas InteractiveBase::get_workarea_overlays(const Widelands::Map& map) const {
-	Workareas result_set;
-	for (const auto& wa_pair : workarea_previews_) {
-		std::map<Coords, uint8_t> intermediate_result;
-		const Coords& coords = wa_pair.first;
-		const WorkareaInfo* workarea_info = wa_pair.second;
-		intermediate_result[coords] = 0;
-		WorkareaInfo::size_type wa_index;
-		switch (workarea_info->size()) {
-		case 0:
-			continue;  // no workarea
-		case 1:
-			wa_index = 5;
-			break;
-		case 2:
-			wa_index = 3;
-			break;
-		case 3:
-			wa_index = 0;
-			break;
-		default:
-			throw wexception(
-			   "Encountered unexpected WorkareaInfo size %i", static_cast<int>(workarea_info->size()));
+Workareas InteractiveBase::get_workarea_overlays(const Widelands::Map& map) {
+	if (!workareas_cache_) {
+		workareas_cache_.reset(new Workareas());
+		for (const auto& preview : workarea_previews_) {
+			workareas_cache_->push_back(get_workarea_overlay(map, *preview));
 		}
-
-		Widelands::HollowArea<> hollow_area(Widelands::Area<>(coords, 0), 0);
-
-		// Iterate through the work areas, from building to its enhancement
-		WorkareaInfo::const_iterator it = workarea_info->begin();
-		for (; it != workarea_info->end(); ++it) {
-			hollow_area.radius = it->first;
-			Widelands::MapHollowRegion<> mr(map, hollow_area);
-			do {
-				intermediate_result[mr.location()] = wa_index;
-			} while (mr.advance(map));
-			wa_index++;
-			hollow_area.hole_radius = hollow_area.radius;
-		}
-
-		std::map<TCoords<>, uint8_t> result;
-		for (const auto& pair : intermediate_result) {
-			Coords c;
-			map.get_brn(pair.first, &c);
-			const auto brn = intermediate_result.find(c);
-			if (brn == intermediate_result.end()) {
-				continue;
-			}
-			map.get_bln(pair.first, &c);
-			const auto bln = intermediate_result.find(c);
-			map.get_rn(pair.first, &c);
-			const auto rn = intermediate_result.find(c);
-			if (bln != intermediate_result.end()) {
-				result[TCoords<>(pair.first, Widelands::TriangleIndex::D)] =
-				   workarea_max(pair.second, brn->second, bln->second);
-			}
-			if (rn != intermediate_result.end()) {
-				result[TCoords<>(pair.first, Widelands::TriangleIndex::R)] =
-				   workarea_max(pair.second, brn->second, rn->second);
-			}
-		}
-		result_set.emplace(result);
 	}
-	return result_set;
+	return Workareas(*workareas_cache_);
 }
 
-void InteractiveBase::hide_workarea(const Widelands::Coords& coords) {
-	workarea_previews_.erase(coords);
+// static
+WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
+                                                     const WorkareaPreview& workarea) {
+	std::map<Coords, uint8_t> intermediate_result;
+	const Coords& coords = workarea.coords;
+	const WorkareaInfo* workarea_info = workarea.info;
+	intermediate_result[coords] = 0;
+	WorkareaInfo::size_type wa_index;
+	switch (workarea_info->size()) {
+	case 0:
+		return WorkareasEntry();  // no workarea
+	case 1:
+		wa_index = 5;
+		break;
+	case 2:
+		wa_index = 3;
+		break;
+	case 3:
+		wa_index = 0;
+		break;
+	default:
+		throw wexception(
+		   "Encountered unexpected WorkareaInfo size %i", static_cast<int>(workarea_info->size()));
+	}
+
+	Widelands::HollowArea<> hollow_area(Widelands::Area<>(coords, 0), 0);
+
+	// Iterate through the work areas, from building to its enhancement
+	WorkareaInfo::const_iterator it = workarea_info->begin();
+	for (; it != workarea_info->end(); ++it) {
+		hollow_area.radius = it->first;
+		Widelands::MapHollowRegion<> mr(map, hollow_area);
+		do {
+			intermediate_result[mr.location()] = wa_index;
+		} while (mr.advance(map));
+		wa_index++;
+		hollow_area.hole_radius = hollow_area.radius;
+	}
+
+	WorkareasEntry result;
+	for (const auto& pair : intermediate_result) {
+		Coords c;
+		map.get_brn(pair.first, &c);
+		const auto brn = intermediate_result.find(c);
+		if (brn == intermediate_result.end()) {
+			continue;
+		}
+		map.get_bln(pair.first, &c);
+		const auto bln = intermediate_result.find(c);
+		map.get_rn(pair.first, &c);
+		const auto rn = intermediate_result.find(c);
+		if (bln != intermediate_result.end()) {
+			TCoords<> tc(pair.first, Widelands::TriangleIndex::D);
+			WorkareaPreviewData wd(tc, workarea_max(pair.second, brn->second, bln->second));
+			for (const auto& p : workarea.data) {
+				if (p.first == tc) {
+					wd = WorkareaPreviewData(tc, wd.index, p.second);
+					break;
+				}
+			}
+			result.push_back(wd);
+		}
+		if (rn != intermediate_result.end()) {
+			TCoords<> tc(pair.first, Widelands::TriangleIndex::R);
+			WorkareaPreviewData wd(tc, workarea_max(pair.second, brn->second, rn->second));
+			for (const auto& p : workarea.data) {
+				if (p.first == tc) {
+					wd = WorkareaPreviewData(tc, wd.index, p.second);
+					break;
+				}
+			}
+			result.push_back(wd);
+		}
+	}
+	return result;
+}
+
+void InteractiveBase::hide_workarea(const Widelands::Coords& coords, bool is_additional) {
+	for (auto it = workarea_previews_.begin(); it != workarea_previews_.end(); ++it) {
+		if (it->get()->coords == coords && (is_additional ^ it->get()->data.empty())) {
+			workarea_previews_.erase(it);
+			workareas_cache_.reset(nullptr);
+			return;
+		}
+	}
 }
 
 /**
