@@ -212,7 +212,6 @@ private:
 
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(Widelands::BuildingObserver&, uint32_t, WareWorker = WareWorker::kWare);
-	uint32_t calculate_stocklevel(Widelands::BuildingObserver&, WareWorker = WareWorker::kWare);
 	uint32_t calculate_stocklevel(Widelands::DescriptionIndex,
 	                              WareWorker = WareWorker::kWare);  // count all direct outputs_
 

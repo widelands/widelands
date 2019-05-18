@@ -198,6 +198,9 @@ void FullscreenMenuInternetLobby::think() {
 	if (!chat.has_focus()) {
 		chat.unfocus_edit();
 	}
+	if (edit_servername_.has_focus()) {
+		change_servername();
+	}
 }
 
 void FullscreenMenuInternetLobby::clicked_ok() {
@@ -223,8 +226,6 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 	// List and button cleanup
 	opengames_list_.clear();
 	hostgame_.set_enabled(true);
-	edit_servername_.set_tooltip("");
-	edit_servername_.set_warning(false);
 	joingame_.set_enabled(false);
 	std::string localservername = edit_servername_.text();
 	std::string localbuildid = build_id();
@@ -242,18 +243,6 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 				// only development clients are allowed to see games openend by such
 				pic = g_gr->images().get("images/ui_basic/different.png");
 				opengames_list_.add(game.name, game, pic, false, game.build_id);
-			}
-			// If one of the servers has the same name as the local name of the
-			// clients server, we disable the 'hostgame' button to avoid having more
-			// than one server with the same name.
-			if (game.name == localservername) {
-				hostgame_.set_enabled(false);
-				edit_servername_.set_warning(true);
-				edit_servername_.set_tooltip(
-				   (boost::format("%s%s%s%s%s%s%s%s") % _("The game ") % "<font bold=yes color=" %
-				    UI_FONT_CLR_WARNING.hex_value() % ">" % game.name % "</font>" %
-				    _(" is already running. ") % _("Please choose a different name."))
-				      .str());
 			}
 		}
 	}
@@ -381,9 +370,10 @@ void FullscreenMenuInternetLobby::change_servername() {
 				hostgame_.set_enabled(false);
 				edit_servername_.set_warning(true);
 				edit_servername_.set_tooltip(
-				   (boost::format("%s%s%s%s%s%s%s%s") % _("The game ") % "<font bold=yes color=" %
-				    UI_FONT_CLR_WARNING.hex_value() % ">" % game.name % "</font>" %
-				    _(" is already running. ") % _("Please choose a different name."))
+				   (boost::format(
+				       _("The game %s is already running. Please choose a different name.")) %
+				    (boost::format("%s%s%s%s%s") % "<font bold=1 color=" %
+				     UI_FONT_CLR_WARNING.hex_value() % ">" % game.name % "</font>"))
 				      .str());
 			}
 		}
@@ -430,10 +420,22 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 	// Save selected servername as default for next time and during that take care that the name is
 	// not empty.
 	std::string servername_ui = edit_servername_.text();
-	if (servername_ui.empty()) {
-		/** TRANSLATORS: This is shown for multiplayer games when no host */
-		/** TRANSLATORS: server to connect to has been specified yet. */
-		servername_ui = pgettext("server_name", "unnamed");
+
+	const std::vector<InternetGame>* games = InternetGaming::ref().games();
+	if (games != nullptr) {
+		for (const InternetGame& game : *games) {
+			if (servername_ui.empty()) {
+				uint32_t i = 1;
+				do {
+					/** TRANSLATORS: This is shown for multiplayer games when no host */
+					/** TRANSLATORS: server to connect to has been specified yet. */
+					servername_ui = (boost::format(_("unnamed %u")) % i++).str();
+				} while (servername_ui == game.name);
+			} else if (game.name == servername_ui) {
+				change_servername();
+				return;
+			}
+		}
 	}
 
 	g_options.pull_section("global").set_string("servername", servername_ui);

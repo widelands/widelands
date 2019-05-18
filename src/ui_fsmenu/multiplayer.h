@@ -61,6 +61,7 @@ private:
 	std::string nickname_;
 	std::string password_;
 	bool register_;
+	bool auto_log_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MULTIPLAYER_H

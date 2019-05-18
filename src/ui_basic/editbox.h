@@ -76,10 +76,6 @@ struct EditBox : public Panel {
 		warning_ = warn;
 	}
 
-	bool has_warning() {
-		return warning_;
-	}
-
 private:
 	std::unique_ptr<EditBoxImpl> m_;
 

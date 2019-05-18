@@ -985,7 +985,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			   game,
 			   std::unique_ptr<Message>(new Message(Message::Type::kGeologists, game.get_gametime(),
 			                                        rdescr->descname(), rdescr->representative_image(),
-			                                        rdescr->descname(), message, position, serial_,
+			                                        ri.descr().descname(), message, position, serial_,
 			                                        rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
@@ -1639,7 +1639,15 @@ void Worker::buildingwork_update(Game& game, State& state) {
 	// Reset any signals that are not related to location
 	std::string signal = get_signal();
 	signal_handled();
+
+	upcast(Building, building, get_location(game));
+
 	if (signal == "evict") {
+		if (building) {
+			// If the building was working, we do not tell it to cancel – it'll notice by itself soon –
+			// but we already change the animation so it won't look strange
+			building->start_animation(game, building->descr().get_unoccupied_animation());
+		}
 		return pop_task(game);
 	}
 
@@ -1647,7 +1655,6 @@ void Worker::buildingwork_update(Game& game, State& state) {
 		state.ivar1 = (signal == "fail") * 2;
 
 	// Return to building, if necessary
-	upcast(Building, building, get_location(game));
 	if (!building)
 		return pop_task(game);
 

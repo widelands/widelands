@@ -374,6 +374,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			      stationed % (capacity_ - stationed))
 			        .str();
 		} else {
+			/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
 			*s = (boost::format(ngettext("%u soldier", "%u soldiers", stationed)) % stationed).str();
 		}
 	} else {
