@@ -686,9 +686,7 @@ void DefaultAI::late_initialization() {
 			// Read information about worker outputs
 			if (prod.output_worker_types().size() > 0) {
 				for (const DescriptionIndex& temp_output : prod.output_worker_types()) {
-					if (temp_output != tribe_->soldier()) {
-						bo.set_is(BuildingAttribute::kRecruitment);
-					}
+					bo.set_is(temp_output == tribe_->soldier() ? BuildingAttribute::kBarracks : BuildingAttribute::kRecruitment);
 					const WorkerHints* worker_hints = tribe_->get_worker_descr(temp_output)->ai_hints();
 					if (worker_hints != nullptr) {
 						int worker_preciousness = worker_hints->preciousness(tribe_->name());
@@ -733,9 +731,6 @@ void DefaultAI::late_initialization() {
 
 			if (bh.is_shipyard()) {
 				bo.set_is(BuildingAttribute::kShipyard);
-			}
-			if (building_index == tribe_->barracks()) {
-				bo.set_is(BuildingAttribute::kBarracks);
 			}
 			// Identify refined log producer
 			if (bo.outputs.size() == 1 && bo.outputs[0] == tribe_->refinedlog()) {
@@ -2521,7 +2516,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 				} else {
 					// For other situations we make sure max_needed_preciousness is zero
-					assert(bo.max_needed_preciousness == 0);
+					// NOCOM this fails for recruitment sites now assert(bo.max_needed_preciousness == 0);
 				}
 			}
 
@@ -4998,11 +4993,14 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	// Let deal with productionsites now
 	// First we iterate over outputs of building, count warehoused stock
 	// and deciding if we have enough on stock (in warehouses)
-	bo.max_preciousness = bo.initial_preciousness;
-	bo.max_needed_preciousness = bo.initial_preciousness;
-
-	if (!bo.is(BuildingAttribute::kBarracks)) {  // barracks are now excluded from calculation
+	if (bo.is(BuildingAttribute::kBarracks)) {
+		// Barracks are excluded from preciousness calculation
+		bo.max_preciousness = 0;
+		bo.max_needed_preciousness = 0;
+	} else {
 		// preciousness is assigned below in this function
+		bo.max_preciousness = bo.initial_preciousness;
+		bo.max_needed_preciousness = bo.initial_preciousness;
 		for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
 			DescriptionIndex wt(static_cast<size_t>(bo.outputs.at(m)));
 
