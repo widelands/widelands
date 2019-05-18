@@ -223,7 +223,6 @@ Production Sites
 BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
    : mines_(table->has_key("mines") ? table->get_string("mines") : ""),
      needs_water_(table->has_key("needs_water") ? table->get_bool("needs_water") : false),
-     recruitment_(table->has_key("recruitment") ? table->get_bool("recruitment") : false),
      space_consumer_(table->has_key("space_consumer") ? table->get_bool("space_consumer") : false),
      expansion_(table->has_key("expansion") ? table->get_bool("expansion") : false),
      fighting_(table->has_key("fighting") ? table->get_bool("fighting") : false),
@@ -291,6 +290,11 @@ int WareWorkerHints::preciousness(const std::string& tribename) const {
 	return Widelands::kInvalidWare;
 }
 
-WareHints::WareHints(const LuaTable& table) {
+WareHints::WareHints(const LuaTable& table) : WareWorkerHints() {
 	read_preciousness(table);
+}
+
+
+WorkerHints::WorkerHints(const LuaTable& table) : WareWorkerHints() {
+	read_preciousness(*table.get_table("preciousness"));
 }
