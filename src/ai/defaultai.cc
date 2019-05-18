@@ -1326,13 +1326,19 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	field.nearest_buildable_spot_nearby = std::numeric_limits<uint16_t>::max();
 	field.unowned_buildable_spots_nearby = 0;
 	field.unowned_portspace_vicinity_nearby = 0;
-	if (field.unowned_land_nearby > 0) {
+	if (field.unowned_land_nearby > 0 ||
+	    (field.enemy_owned_land_nearby > 0 &&
+	     field.enemy_military_presence <
+	        std::abs(management_data.get_military_number_at(174)) / 10)) {
 		std::vector<Coords> found_buildable_fields;
 
 		// first looking for unowned buildable spots
 		field.unowned_buildable_spots_nearby =
 		   map.find_fields(Area<FCoords>(field.coords, kBuildableSpotsCheckArea),
 		                   &found_buildable_fields, find_unowned_buildable);
+		field.unowned_buildable_spots_nearby +=
+		   map.find_fields(Area<FCoords>(field.coords, kBuildableSpotsCheckArea),
+		                   &found_buildable_fields, find_enemy_owned_walkable);
 		// Now iterate over fields to collect statistics
 		for (auto& coords : found_buildable_fields) {
 			// We are not interested in blocked fields
@@ -2452,8 +2458,20 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	for (uint32_t j = 0; j < buildings_.size(); ++j) {
 		BuildingObserver& bo = buildings_.at(j);
 
+		// we check if a previously not buildable Building of the basic economy is buildable again
+		// If so and we don't have basic economy achieved we add readd it to basic buildings list
+		// This should only happen in scenarios via scripting
+		if (!basic_economy_established && bo.basic_amount > static_cast<uint32_t>(bo.total_count()) &&
+		    bo.buildable(*player_)) {
+			persistent_data->remaining_basic_buildings.emplace(std::make_pair(bo.id, bo.basic_amount));
+		}
 		if (!bo.buildable(*player_)) {
 			bo.new_building = BuildingNecessity::kNotNeeded;
+			// This line removes buildings from basic economy if they are not allowed for the player
+			// this should only happen by scripting.
+			if (bo.basic_amount) {
+				persistent_data->remaining_basic_buildings.erase(bo.id);
+			}
 		} else if (bo.type == BuildingObserver::Type::kProductionsite ||
 		           bo.type == BuildingObserver::Type::kMine) {
 
@@ -2947,6 +2965,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 
 				} else if (bo.is(BuildingAttribute::kRecruitment)) {
+					bo.max_needed_preciousness = 2;
 					prio += bo.primary_priority;
 					prio -= bf->unowned_land_nearby * 2;
 					prio -= (bf->enemy_nearby) * 100;
@@ -3749,12 +3768,12 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			}
 		}
 
-		// if we are within grace time, it is OK, just go on
-		if (eco->dismantle_grace_time > gametime &&
-		    eco->dismantle_grace_time != std::numeric_limits<uint32_t>::max()) {
-			// if grace time is not set, this is probably first time without a warehouse and we must
-			// set it
-		} else if (eco->dismantle_grace_time == std::numeric_limits<uint32_t>::max()) {
+		// check if we are within grace time, if not or gracetime unset we need to do something
+		// if we are within gracetime we do nothing (this loop is skipped)
+
+		// if grace time is not set, this is probably first time without a warehouse and we must set
+		// it
+		if (eco->dismantle_grace_time == std::numeric_limits<uint32_t>::max()) {
 
 			// constructionsites
 			if (upcast(ConstructionSite const, constructionsite, flag.get_building())) {
@@ -3784,7 +3803,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			}
 
 			// we have passed grace_time - it is time to dismantle
-		} else {
+		} else if (eco->dismantle_grace_time <= gametime) {
 			last_attempt_ = true;
 			// we increase a check radius in last attempt
 			checkradius += 2;
@@ -4104,7 +4123,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	// do not dismantle or upgrade the same type of building too soon - to give some time to update
 	// statistics
-	if (site.bo->last_dismantle_time > game().get_gametime() - 30 * 1000) {
+	if (site.bo->last_dismantle_time >
+	    game().get_gametime() -
+	       (std::abs(management_data.get_military_number_at(164)) / 25 + 1) * 60 * 1000) {
 		return false;
 	}
 
@@ -4210,11 +4231,13 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		    (en_bo.cnt_under_construction + en_bo.unoccupied_count) == 0) {
 
 			// forcing first upgrade
-			if (en_bo.total_count() == 0) {
+			if (en_bo.total_count() == 0 &&
+			    (site.bo->cnt_built > 1 || site.bo->is(BuildingAttribute::kUpgradeSubstitutes))) {
 				doing_upgrade = true;
 			}
 
-			if (en_bo.total_count() == 1) {
+			if (en_bo.total_count() == 1 &&
+			    (site.bo->cnt_built > 1 || site.bo->is(BuildingAttribute::kUpgradeSubstitutes))) {
 				if (en_bo.current_stats > 55) {
 					doing_upgrade = true;
 				}
@@ -4441,7 +4464,10 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 		// if we have more buildings then target
 		if ((site.bo->cnt_built - site.bo->unconnected_count) > site.bo->cnt_target &&
-		    site.unoccupied_till + 10 * 60 * 1000 < gametime && site.site->can_start_working()) {
+		    site.unoccupied_till +
+		          (std::abs(management_data.get_military_number_at(166)) / 5 + 1) * 60 * 1000 <
+		       gametime &&
+		    site.site->can_start_working()) {
 
 			if (site.site->get_statistics_percent() < 30 && get_stocklevel(*site.bo, gametime) > 100) {
 				site.bo->last_dismantle_time = game().get_gametime();
@@ -4456,7 +4482,12 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 		// a building can be dismanteld if it performs too bad, if it is not the last one
 		if (site.site->get_statistics_percent() <= 10 && site.bo->cnt_built > 1 &&
-		    site.unoccupied_till + 10 * 60 * 1000 < gametime && site.site->can_start_working()) {
+		    site.unoccupied_till +
+		          (std::abs(management_data.get_military_number_at(167)) / 5 + 1) * 60 * 1000 <
+		       gametime &&
+		    site.site->can_start_working() &&
+		    get_stocklevel(*site.bo, gametime) >
+		       (std::abs(management_data.get_military_number_at(168)) / 5)) {
 
 			if (connected_to_wh) {
 				game().send_player_dismantle(*site.site);
@@ -4483,7 +4514,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	    site.site->can_start_working() &&
 	    check_building_necessity(*site.bo, PerfEvaluation::kForDismantle, gametime) ==
 	       BuildingNecessity::kNotNeeded &&
-	    gametime - site.bo->last_dismantle_time > 5 * 60 * 1000 &&
+	    gametime - site.bo->last_dismantle_time >
+	       static_cast<uint32_t>((std::abs(management_data.get_military_number_at(169)) / 5 + 1) *
+	                             60 * 1000) &&
 
 	    site.bo->current_stats > site.site->get_statistics_percent() &&  // underperformer
 	    (game().get_gametime() - site.unoccupied_till) > 10 * 60 * 1000) {
@@ -4821,7 +4854,6 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
                                                       const PerfEvaluation purpose,
                                                       const uint32_t gametime) {
-
 	bo.primary_priority = 0;
 
 	static BasicEconomyBuildingStatus site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
@@ -4935,12 +4967,13 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		if (!basic_economy_established) {
 			return BuildingNecessity::kForbidden;
 		}
-		const uint16_t min_roads_count = 50 + std::abs(management_data.get_military_number_at(33));
-		if (roads.size() < min_roads_count) {
+		const uint16_t min_roads_count =
+		   40 + std::abs(management_data.get_military_number_at(33)) / 2;
+		if (roads.size() < static_cast<size_t>(min_roads_count * (1 + bo.total_count()))) {
 			return BuildingNecessity::kForbidden;
 		}
-		bo.primary_priority = (roads.size() - min_roads_count) *
-		                      (2 + std::abs(management_data.get_military_number_at(143)) / 5);
+		bo.primary_priority += (roads.size() - min_roads_count * (1 + bo.total_count())) *
+		                       (2 + std::abs(management_data.get_military_number_at(143)) / 5);
 		return BuildingNecessity::kNeeded;
 	}
 
@@ -5054,7 +5087,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		   get_building_observer(tribe_->get_building_descr(enhancement)->name().c_str());
 		if ((gametime > 30 * 60 * 1000 && en_bo.total_count() == 0) || gametime > 90 * 60 * 1000) {
 			// We fake this
-			bo.max_needed_preciousness = bo.max_preciousness;
+			bo.max_needed_preciousness = bo.max_preciousness * 2;
 			needs_second_for_upgrade = true;
 		}
 	}
@@ -5103,9 +5136,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[8] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? +3 : 0;
 			inputs[9] = (expansion_type.get_expansion_type() == ExpansionMode::kBoth) ? +1 : 0;
 			inputs[10] = (expansion_type.get_expansion_type() == ExpansionMode::kBoth) ? +1 : 0;
-			inputs[11] = (bo.last_building_built + 5 * 60 * 100 > gametime) ? +1 : 0;
-			inputs[12] = (bo.last_building_built + 10 * 60 * 100 > gametime) ? +1 : 0;
-			inputs[13] = (bo.last_building_built + 20 * 60 * 100 > gametime) ? +1 : 0;
+			inputs[11] = (bo.last_building_built + 5 * 60 * 100 < gametime) ? +1 : 0;
+			inputs[12] = (bo.last_building_built + 10 * 60 * 100 < gametime) ? +1 : 0;
+			inputs[13] = (bo.last_building_built + 20 * 60 * 100 < gametime) ? +1 : 0;
 			inputs[14] = (bo.total_count() >= bo.cnt_target) ? -1 : 0;
 			inputs[15] = (bo.total_count() >= bo.cnt_target) ? -2 : 0;
 			inputs[16] = (bo.total_count() < bo.cnt_target) ? -1 : 0;
@@ -5150,7 +5183,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (bo.total_count() > 1 && (bo.cnt_under_construction + bo.unoccupied_count > 0)) {
 				return BuildingNecessity::kForbidden;
 			}
-			bo.cnt_target = 3;
+			bo.cnt_target = 2;
 			// adjusting/decreasing based on cnt_limit_by_aimode
 			bo.cnt_target = std::min(bo.cnt_target, bo.cnt_limit_by_aimode);
 
@@ -5173,8 +5206,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		} else if (bo.is(BuildingAttribute::kRanger)) {
 
 			// making sure we have one completed lumberjack
-			if (bo.total_count() > 0 &&
-			    get_building_observer(BuildingAttribute::kLumberjack).cnt_built < 1) {
+			if (get_building_observer(BuildingAttribute::kLumberjack).cnt_built < 1) {
 				return BuildingNecessity::kForbidden;
 			}
 
@@ -5455,11 +5487,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[14] = (bo.current_stats - 50) / 10;
 			inputs[15] = management_data.get_military_number_at(123) / 10;
 			inputs[16] = 0;
-			// TODO(GunChleoc): This is overwritten below due to a typo
-			// inputs[17] = (inputs_on_stock) ? 0 : -2;
+			inputs[17] = (inputs_on_stock) ? 0 : -2;
 			inputs[18] = (suppliers_exist) ? 0 : -3;
-			inputs[17] = (inputs_on_stock) ? 0 : -4;
-			// Nothing on inputs[19]
+			;
+			inputs[19] = (inputs_on_stock) ? 0 : -4;
 			inputs[20] =
 			   (mines_per_type[bo.mines].in_construction + mines_per_type[bo.mines].finished == 1) ?
 			      3 :
@@ -5516,7 +5547,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[0] = (bo.total_count() <= 1) ?
 			               std::abs(management_data.get_military_number_at(110)) / 10 :
 			               0;
-			inputs[1] = -2 * bo.total_count();
+			inputs[1] = bo.total_count() * -3 / 2;
 			inputs[2] =
 			   (bo.total_count() == 0) ? std::abs(management_data.get_military_number_at(0)) / 10 : 0;
 			inputs[3] = (gametime >= 25 * 60 * 1000 && bo.inputs.empty()) ?
@@ -5529,11 +5560,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			               management_data.get_military_number_at(3) / 10 :
 			               0;
 			inputs[6] = (needs_second_for_upgrade) ?
-			               std::abs(management_data.get_military_number_at(4)) / 10 :
+			               std::abs(management_data.get_military_number_at(4)) / 5 :
 			               0;
 			inputs[7] = (bo.cnt_under_construction + bo.unoccupied_count) * -1 *
 			            std::abs(management_data.get_military_number_at(9)) / 5;
-			inputs[8] = (!bo.outputs.empty() && bo.current_stats > 30 + 70 / bo.outputs.size()) ?
+			inputs[8] = (!bo.outputs.empty() && bo.current_stats > 25 + 70 / bo.outputs.size()) ?
 			               management_data.get_military_number_at(7) / 8 :
 			               0;
 			inputs[9] = (bo.is(BuildingAttribute::kBuildingMatProducer)) ?
@@ -5559,7 +5590,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			                management_data.get_military_number_at(97) / 10 :
 			                0;
 			inputs[17] =
-			   (spots_ > kSpotsEnough) ? std::abs(management_data.get_military_number_at(74)) / 10 : 0;
+			   (spots_ > kSpotsEnough) ? std::abs(management_data.get_military_number_at(74)) / 8 : 0;
 			inputs[18] = management_data.get_military_number_at(98) / 10;
 			inputs[19] = (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) ?
 			                -1 * std::abs(management_data.get_military_number_at(40)) / 10 :
@@ -5592,7 +5623,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[32] = bo.max_needed_preciousness / 2;
 			inputs[33] = -(bo.cnt_under_construction + bo.unoccupied_count) * 4;
 			if (bo.cnt_built > 0 && !bo.outputs.empty() && !bo.inputs.empty()) {
-				inputs[34] += bo.current_stats / 10;
+				inputs[34] +=
+				   bo.current_stats / std::abs(management_data.get_military_number_at(192)) * 10;
 			}
 			inputs[35] = (!bo.outputs.empty() && !bo.inputs.empty() &&
 			              bo.current_stats > 10 + 70 / bo.outputs.size()) ?
@@ -5703,6 +5735,20 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				inputs[105] = -2;
 				inputs[106] = -2;
 			}
+			inputs[107] =
+			   std::abs(management_data.get_military_number_at(194)) - get_stocklevel(bo, gametime);
+			inputs[108] =
+			   std::abs(management_data.get_military_number_at(191)) - get_stocklevel(bo, gametime);
+			inputs[109] = (!bo.inputs.empty() && gametime > 50 * 60 * 1000 && bo.total_count() <= 1) ?
+			                 std::abs(management_data.get_military_number_at(163)) / 10 :
+			                 0;
+			inputs[110] =
+			   (bo.outputs.size() == 1) ?
+			      (tribe_->get_ware_descr(bo.outputs.at(0))->default_target_quantity(tribe_->name()) -
+			       get_stocklevel(bo, gametime)) *
+			         std::abs(management_data.get_military_number_at(165)) / 20 :
+			      0;
+			inputs[111] = bo.current_stats / (bo.outputs.size() + 1);
 
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
@@ -5779,7 +5825,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kNeeded;
 		} else if (bo.max_preciousness >= 10 && bo.total_count() == 2) {
 			return BuildingNecessity::kNeeded;
-		} else if (!bo.outputs.empty() && bo.current_stats > (10 + 70 / bo.outputs.size()) / 2) {
+		} else if (!bo.outputs.empty() && bo.current_stats > (10 + 60 / bo.outputs.size()) / 2) {
+			return BuildingNecessity::kNeeded;
+		} else if (bo.inputs.size() == 1 &&
+		           calculate_stocklevel(static_cast<size_t>(bo.inputs.at(0))) >
+		              std::abs(management_data.get_military_number_at(171))) {
 			return BuildingNecessity::kNeeded;
 		} else {
 			return BuildingNecessity::kNotNeeded;
