@@ -985,7 +985,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			   game,
 			   std::unique_ptr<Message>(new Message(Message::Type::kGeologists, game.get_gametime(),
 			                                        rdescr->descname(), rdescr->representative_image(),
-			                                        rdescr->descname(), message, position, serial_,
+			                                        ri.descr().descname(), message, position, serial_,
 			                                        rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}

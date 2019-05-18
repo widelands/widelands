@@ -303,7 +303,12 @@ void ProductionSite::update_statistics_string(std::string* s) {
 
 	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
 		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() %
-		      ngettext("Worker missing", "Workers missing", nr_requests))
+		      (nr_requests == 1 ?
+		          /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
+		          _("Worker missing") :
+		          /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
+		             missing. If you need plural forms here, please let us know. */
+		          _("Workers missing")))
 		        .str();
 		return;
 	}

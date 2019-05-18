@@ -51,7 +51,6 @@
 #include "sound/sound_handler.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
-#include "wui/interactive_player.h"
 #include "wui/logmessage.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -229,22 +228,7 @@ UniqueWindowHandler& InteractiveBase::unique_windows() {
 }
 
 void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
-	const Map& map = egbase().map();
 	sel_.pos = center;
-
-	if (upcast(InteractiveGameBase const, igbase, this))
-		if (upcast(Widelands::ProductionSite, productionsite, map[center.node].get_immovable())) {
-			if (upcast(InteractivePlayer const, iplayer, igbase)) {
-				const Widelands::Player& player = iplayer->player();
-				if (!player.see_all() &&
-				    (1 >= player.vision(Widelands::Map::get_index(center.node, map.get_width())) ||
-				     player.is_hostile(*productionsite->get_owner())))
-					return set_tooltip("");
-			}
-			set_tooltip(productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
-			return;
-		}
-	set_tooltip("");
 }
 
 /*
