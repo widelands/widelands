@@ -2502,22 +2502,21 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 			if (bo.new_building == BuildingNecessity::kForbidden) {
 				bo.max_needed_preciousness = 0;
-			} else {
-				bo.max_needed_preciousness = std::max(bo.max_needed_preciousness, bo.initial_preciousness);
-				bo.max_preciousness = std::max(bo.max_preciousness, bo.initial_preciousness);
-				if ((bo.new_building == BuildingNecessity::kNeeded ||
+			} else if ((bo.new_building == BuildingNecessity::kNeeded ||
 					 bo.new_building == BuildingNecessity::kForced ||
 					 bo.new_building == BuildingNecessity::kAllowed ||
 					 bo.new_building == BuildingNecessity::kNeededPending) &&
-					(!bo.outputs.empty() || bo.is(BuildingAttribute::kBarracks))) {
-					if (bo.max_needed_preciousness <= 0) {
-						throw wexception("AI: Max presciousness must not be <= 0 for building: %s",
-										 bo.desc->name().c_str());
-					}
-				} else {
-					// For other situations we make sure max_needed_preciousness is zero
-					// NOCOM this fails for recruitment sites now assert(bo.max_needed_preciousness == 0);
+					(!bo.outputs.empty() || bo.is(BuildingAttribute::kBarracks) || bo.is(BuildingAttribute::kRecruitment))) {
+				bo.max_needed_preciousness = std::max(bo.max_needed_preciousness, bo.initial_preciousness);
+				bo.max_preciousness = std::max(bo.max_preciousness, bo.initial_preciousness);
+
+				if (bo.max_needed_preciousness <= 0) {
+					throw wexception("AI: Max presciousness must not be <= 0 for building: %s",
+									 bo.desc->name().c_str());
 				}
+			} else {
+				// For other situations we make sure max_needed_preciousness is zero
+				assert(bo.max_needed_preciousness == 0);
 			}
 
 			// Positive max_needed_preciousness says a building type is needed
