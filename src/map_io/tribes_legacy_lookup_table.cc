@@ -19,7 +19,6 @@
 
 #include "map_io/tribes_legacy_lookup_table.h"
 // Whenever we break savegame compatibility, we can empty these maps
-// NOCOM(GunChleoc): Since we now have a unified tribe, no need to have the tribe as key for fetching
 TribesLegacyLookupTable::TribesLegacyLookupTable()
    :  // Workers
      workers_{},
@@ -34,7 +33,7 @@ TribesLegacyLookupTable::TribesLegacyLookupTable()
 		  {"field_tiny", "wheatfield_tiny"},
 		  {"field_ripe", "wheatfield_ripe"},
 		  {"field_harvested", "wheatfield_harvested"},
-		  {"reed_medium", "reed_medium"},
+		  {"reed_medium", "reedfield_medium"},
 		  {"reed_small", "reedfield_small"},
 		  {"reed_tiny", "reedfield_tiny"},
 		  {"reed_tiny", "reedfield_ripe"},

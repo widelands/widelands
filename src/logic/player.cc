@@ -1387,7 +1387,7 @@ void Player::read_remaining_shipnames(FileRead& fr) {
  *
  * \param fr source stream
  */
-void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
+void Player::read_statistics(FileRead& fr, const uint16_t packet_version, const TribesLegacyLookupTable& lookup_table) {
 	uint16_t nr_wares = fr.unsigned_16();
 	size_t nr_entries = fr.unsigned_16();
 
@@ -1417,7 +1417,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 		ware_productions_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = fr.c_string();
+		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u statistics: unknown ware name %s", player_number(), name.c_str());
@@ -1442,7 +1442,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 		ware_consumptions_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = fr.c_string();
+		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u consumption statistics: unknown ware name %s", player_number(),
@@ -1469,7 +1469,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 		ware_stocks_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = fr.c_string();
+		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u stock statistics: unknown ware name %s", player_number(), name.c_str());
