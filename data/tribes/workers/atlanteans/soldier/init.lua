@@ -231,6 +231,12 @@ tribes:new_soldier_type {
       pictures = path.list_files(dirname .. "evade_level?.png"),
    },
 
+   aihints = {
+      preciousness = {
+         atlanteans = 5
+      },
+   },
+
    -- Random animations for battle
    -- TODO(GunChleoc): Make more animations to use the random function
    attack_success_w = {
