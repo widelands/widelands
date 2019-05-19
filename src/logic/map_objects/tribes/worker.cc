@@ -3168,15 +3168,11 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
                                 uint8_t packet_version) {
 	try {
 		// header has already been read by caller
-		std::string name = fr.c_string();
 		// Some maps contain worker info, so we need compatibility here.
 		if (packet_version == 1) {
-			if (!Widelands::tribe_exists(name)) {
-				throw GameDataError("unknown tribe '%s'", name.c_str());
-			}
-			name = fr.c_string();
+			fr.c_string(); // Consume tribe name
 		}
-		name = lookup_table.lookup_worker(name);
+		const std::string name = lookup_table.lookup_worker(fr.c_string());
 
 		const WorkerDescr* descr =
 		   egbase.tribes().get_worker_descr(egbase.tribes().safe_worker_index(name));
