@@ -108,7 +108,7 @@ struct Message {
 	const std::string& body() const {
 		return body_;
 	}
-	Widelands::Coords position() const {
+	const Widelands::Coords& position() const {
 		return position_;
 	}
 	Widelands::Serial serial() const {

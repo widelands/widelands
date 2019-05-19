@@ -27,9 +27,7 @@ namespace Widelands {
 
 class CarrierDescr : public WorkerDescr {
 public:
-	CarrierDescr(const std::string& init_descname,
-	             const LuaTable& table,
-	             const EditorGameBase& egbase);
+	CarrierDescr(const std::string& init_descname, const LuaTable& table, const Tribes& tribes);
 	~CarrierDescr() override {
 	}
 

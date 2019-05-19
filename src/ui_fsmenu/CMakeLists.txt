@@ -21,6 +21,7 @@ wl_library(ui_fsmenu_options
     profile
     sound
     widelands_ball_of_mud
+    wui_sound_options
 )
 
 wl_library(ui_fsmenu_base
@@ -108,6 +109,8 @@ wl_library(ui_fsmenu_gameloading
     logic
     logic_game_controller
     logic_game_settings
+    logic_map
+    logic_map_objects
     logic_tribe_basic_info
     map_io_map_loader
     profile
@@ -126,10 +129,18 @@ wl_library(ui_fsmenu_gameloading
 
 wl_library(ui_fsmenu_maploading
   SRCS
+    campaigndetails.cc
+    campaigndetails.h
+    campaigns.cc
+    campaigns.h
     campaign_select.cc
     campaign_select.h
     mapselect.cc
     mapselect.h
+    scenariodetails.cc
+    scenariodetails.h
+    scenario_select.cc
+    scenario_select.h
   DEPENDS
     base_exceptions
     base_i18n
@@ -137,13 +148,16 @@ wl_library(ui_fsmenu_maploading
     graphic
     graphic_fonthandler
     graphic_text_constants
+    graphic_surface
     io_filesystem
-    logic_campaign_visibility
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_tribe_basic_info
     map_io_map_loader
     profile
+    scripting_lua_interface
+    scripting_lua_table
     ui_basic
     ui_fsmenu_base
     ui_fsmenu_loading_common
@@ -165,6 +179,7 @@ wl_library(ui_fsmenu_network
     network
     profile
     random
+    sound
     ui_basic
     ui_fsmenu_base
     wui_chat_ui

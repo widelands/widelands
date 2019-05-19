@@ -36,23 +36,38 @@
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "logic/findimmovable.h"
-#include "logic/findnode.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findimmovable.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
 #include "logic/maphollowregion.h"
+#include "logic/mapregion.h"
 #include "logic/objective.h"
 #include "logic/pathfield.h"
-#include "logic/player.h"
 #include "map_io/s2map.h"
 #include "map_io/widelands_map_loader.h"
 #include "notifications/notifications.h"
 
 namespace Widelands {
+
+FieldData::FieldData(const Field& field)
+   : height(field.get_height()),
+     resources(field.get_resources()),
+     resource_amount(field.get_initial_res_amount()),
+     terrains(field.get_terrains()) {
+	if (const BaseImmovable* imm = field.get_immovable()) {
+		immovable = imm->descr().name();
+	} else {
+		immovable = "";
+	}
+	for (Bob* bob = field.get_first_bob(); bob; bob = bob->get_next_bob()) {
+		bobs.push_back(bob->descr().name());
+	}
+}
 
 /*
 ==============================================================================
@@ -411,7 +426,6 @@ void Map::cleanup() {
 	background_ = std::string();
 
 	objectives_.clear();
-
 	port_spaces_.clear();
 	allows_seafaring_ = false;
 
@@ -457,6 +471,12 @@ void Map::create_empty_map(const World& world,
 	filesystem_.reset(nullptr);
 }
 
+// Made this a separate function to reduce compiler warnings
+template <typename T = Field>
+static inline void clear_array(std::unique_ptr<T[]>* array, uint32_t size) {
+	memset(array->get(), 0, sizeof(T) * size);
+}
+
 void Map::set_origin(const Coords& new_origin) {
 	assert(0 <= new_origin.x);
 	assert(new_origin.x < width_);
@@ -470,7 +490,7 @@ void Map::set_origin(const Coords& new_origin) {
 	}
 
 	std::unique_ptr<Field[]> new_field_order(new Field[field_size]);
-	memset(new_field_order.get(), 0, sizeof(Field) * field_size);
+	clear_array<>(&new_field_order, field_size);
 
 	// Rearrange The fields
 	// NOTE because of the triangle design, we have to take special care of cases
@@ -525,6 +545,156 @@ void Map::set_origin(const Coords& new_origin) {
 	log("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
 }
 
+/* Helper function for resize():
+ * Calculates the coords of 'c' after resizing the map from the given old size to the given new size
+ * at 'split'.
+ */
+static Coords transform_coords(const Coords& c,
+                               const Coords& split,
+                               int16_t w_new,
+                               int16_t h_new,
+                               int16_t w_old,
+                               int16_t h_old) {
+	const int16_t delta_w = w_new - w_old;
+	const int16_t delta_h = h_new - h_old;
+	if (c.x < split.x && c.y < split.y) {
+		// Nothing to shift
+		Coords result(c);
+		Map::normalize_coords(result, w_new, h_new);
+		return result;
+	} else if ((w_new < w_old && c.x >= split.x && c.x < split.x - delta_w) ||
+	           (h_new < h_old && c.y >= split.y && c.y < split.y - delta_h)) {
+		// Field removed
+		return Coords::null();
+	}
+	Coords result(c.x, c.y);
+	if (c.x >= split.x) {
+		result.x += delta_w;
+	}
+	if (c.y >= split.y) {
+		result.y += delta_h;
+	}
+	Map::normalize_coords(result, w_new, h_new);
+	return result;
+}
+
+/* Change the size of the (already initialized) map to 'w'×'h' by inserting/deleting fields south
+ * and east of 'split'. Returns the data of fields that were deleted during resizing. This function
+ * will notify all players of the change in map size, but not of anything else. This is because the
+ * editor may want to do some post-resize cleanup first, and this function is intended to be used
+ * only by the editor anyway. You should call recalc_whole_map() afterwards to resolve height
+ * differences etc.
+ */
+std::map<Coords, FieldData>
+Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {
+	assert(w > 0);
+	assert(h > 0);
+
+	std::map<Coords, FieldData> deleted;
+	if (w == width_ && h == height_) {
+		return deleted;
+	}
+
+	const uint32_t field_size = w * h;
+	const uint32_t old_field_size = width_ * height_;
+
+	std::unique_ptr<Field[]> new_fields(new Field[field_size]);
+	clear_array<>(&new_fields, field_size);
+
+	// Take care of starting positions and port spaces
+	for (uint8_t i = get_nrplayers(); i > 0; --i) {
+		if (starting_pos_[i - 1]) {
+			starting_pos_[i - 1] =
+			   transform_coords(starting_pos_[i - 1], split, w, h, width_, height_);
+		}
+	}
+
+	PortSpacesSet new_port_spaces;
+	for (Coords it : port_spaces_) {
+		if (Coords c = transform_coords(it, split, w, h, width_, height_)) {
+			new_port_spaces.insert(c);
+		}
+	}
+	port_spaces_ = new_port_spaces;
+
+	Field::Terrains default_terrains;
+	default_terrains.r = 0;
+	default_terrains.d = 0;
+
+	std::unique_ptr<bool[]> preserved_coords(new bool[old_field_size]);
+	clear_array<bool>(&preserved_coords, old_field_size);
+
+	const int16_t w_max = w > width_ ? w : width_;
+	const int16_t h_max = h > height_ ? h : height_;
+	for (int16_t x = 0; x < w_max; ++x) {
+		for (int16_t y = 0; y < h_max; ++y) {
+			Coords c_new = Coords(x, y);
+			if (x < width_ && y < height_ && !preserved_coords[get_index(c_new, width_)]) {
+				// Save the data of fields that will be deleted
+				Field& field = operator[](c_new);
+				deleted.insert(std::make_pair(c_new, FieldData(field)));
+				// ...and now we delete stuff that needs removing when the field is destroyed
+				if (BaseImmovable* imm = field.get_immovable()) {
+					imm->remove(egbase);
+				}
+				while (Bob* bob = field.get_first_bob()) {
+					bob->remove(egbase);
+				}
+			}
+			if (x < w && y < h) {
+				if (Coords c_old = transform_coords(c_new, split, width_, height_, w, h)) {
+					bool& entry = preserved_coords[get_index(c_old, width_)];
+					if (!entry) {
+						// Copy existing field
+						entry = true;
+						new_fields[get_index(c_new, w)] = operator[](c_old);
+						continue;
+					}
+				}
+				// Init new field
+				Field& field = new_fields[get_index(c_new, w)];
+				field.set_height(10);
+				field.set_terrains(default_terrains);
+			}
+		}
+	}
+
+	// Replace all fields
+	fields_.reset(new Field[field_size]);
+	clear_array<>(&fields_, field_size);
+	for (size_t ind = 0; ind < field_size; ++ind) {
+		fields_[ind] = new_fields[ind];
+	}
+	log("Resized map from (%d, %d) to (%u, %u) at (%d, %d)\n", width_, height_, w, h, split.x,
+	    split.y);
+	width_ = w;
+	height_ = h;
+
+	// Inform immovables and bobs about their new position
+	for (MapIndex idx = 0; idx < field_size; ++idx) {
+		Field& f = operator[](idx);
+		if (upcast(Immovable, immovable, f.get_immovable())) {
+			immovable->position_ = get_fcoords(f);
+		}
+		// Ensuring that all bob iterators are changed correctly is a bit hacky, but the more obvious
+		// solution of doing it like in set_origin() is highly problematic here, or so ASan tells me
+		std::vector<Bob*> bobs;
+		for (Bob* bob = f.get_first_bob(); bob; bob = bob->get_next_bob()) {
+			bobs.push_back(bob);
+		}
+		f.bobs = nullptr;
+		for (Bob* bob : bobs) {
+			bob->position_.field = nullptr;
+			bob->linknext_ = nullptr;
+			bob->linkpprev_ = nullptr;
+			bob->set_position(egbase, get_fcoords(f));
+		}
+	}
+
+	egbase.allocate_player_maps();
+	return deleted;
+}
+
 /*
 ===============
 Set the size of the map. This should only happen once during initial load.
@@ -536,10 +706,12 @@ void Map::set_size(const uint32_t w, const uint32_t h) {
 	width_ = w;
 	height_ = h;
 
-	fields_.reset(new Field[w * h]);
-	memset(fields_.get(), 0, sizeof(Field) * w * h);
+	const uint32_t field_size = w * h;
 
-	pathfieldmgr_->set_size(w * h);
+	fields_.reset(new Field[field_size]);
+	clear_array<>(&fields_, field_size);
+
+	pathfieldmgr_->set_size(field_size);
 }
 
 /*
@@ -1460,8 +1632,10 @@ bool Map::set_port_space(
 		success = force || is_port_space_allowed(world, get_fcoords(c));
 		if (success) {
 			port_spaces_.insert(c);
+			recalculate_seafaring &= !allows_seafaring();
 		}
 	} else {
+		recalculate_seafaring &= allows_seafaring();
 		port_spaces_.erase(c);
 		success = true;
 	}
@@ -2175,11 +2349,15 @@ void Map::recalculate_allows_seafaring() {
 }
 
 void Map::cleanup_port_spaces(const World& world) {
+	// Temporary set to avoid problems with concurrent container operations
+	PortSpacesSet clean_me_up;
 	for (const Coords& c : get_port_spaces()) {
 		if (!is_port_space_allowed(world, get_fcoords(c))) {
-			set_port_space(world, c, false);
-			continue;
+			clean_me_up.insert(c);
 		}
+	}
+	for (const Coords& c : clean_me_up) {
+		set_port_space(world, c, false);
 	}
 	recalculate_allows_seafaring();
 }
@@ -2207,6 +2385,32 @@ MilitaryInfluence Map::calc_influence(Coords const a, Area<> const area) const {
 	influence *= influence;
 
 	return influence;
+}
+
+std::set<Coords> Map::to_set(Area<Coords> area) const {
+	std::set<Coords> result;
+	MapRegion<Area<Coords>> mr(*this, area);
+	do {
+		result.insert(mr.location());
+	} while (mr.advance(*this));
+	return result;
+}
+
+// Returns all triangles whose corners are all in the given area
+std::set<TCoords<Coords>> Map::triangles_in_region(std::set<Coords> area) const {
+	std::set<TCoords<Coords>> result;
+	for (const Coords& c : area) {
+		if (!area.count(br_n(c))) {
+			continue;
+		}
+		if (area.count(r_n(c))) {
+			result.insert(TCoords<Coords>(c, TriangleIndex::R));
+		}
+		if (area.count(bl_n(c))) {
+			result.insert(TCoords<Coords>(c, TriangleIndex::D));
+		}
+	}
+	return result;
 }
 
 }  // namespace Widelands

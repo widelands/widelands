@@ -21,7 +21,6 @@
 #define WL_EDITOR_TOOLS_SET_ORIGIN_TOOL_H
 
 #include "editor/tools/tool.h"
-#include "logic/widelands.h"
 
 /// Sets the starting position of players.
 struct EditorSetOriginTool : public EditorTool {

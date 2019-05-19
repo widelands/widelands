@@ -61,9 +61,9 @@
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
 #include "map_io/widelands_map_loader.h"
-#include "network/network.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
+#include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
@@ -232,7 +232,14 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	loader_ui.step(_("Creating players"));
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		add_player(p, 0, map().get_scenario_player_tribe(p), map().get_scenario_player_name(p));
+		// If tribe name is empty, pick a random tribe
+		std::string tribe = map().get_scenario_player_tribe(p);
+		if (tribe.empty()) {
+			log("Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
+			const DescriptionIndex random = std::rand() % tribes().nrtribes();
+			tribe = tribes().get_tribe_descr(random)->name();
+		}
+		add_player(p, 0, tribe, map().get_scenario_player_name(p));
 		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
 	win_condition_displayname_ = "Scenario";
@@ -315,6 +322,19 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 	// Check for win_conditions
 	if (!settings.scenario) {
 		loader_ui->step(_("Initializing game…"));
+		if (settings.peaceful) {
+			for (uint32_t i = 1; i < settings.players.size(); ++i) {
+				if (Player* p1 = get_player(i)) {
+					for (uint32_t j = i + 1; j <= settings.players.size(); ++j) {
+						if (Player* p2 = get_player(j)) {
+							p1->set_attack_forbidden(j, true);
+							p2->set_attack_forbidden(i, true);
+						}
+					}
+				}
+			}
+		}
+
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
@@ -541,7 +561,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 		;
 #endif
 
-	g_sound_handler.change_music("ingame", 1000, 0);
+	g_sh->change_music("ingame", 1000);
 
 	state_ = gs_running;
 
@@ -549,7 +569,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 
 	state_ = gs_ending;
 
-	g_sound_handler.change_music("menu", 1000, 0);
+	g_sh->change_music("menu", 1000);
 
 	cleanup_objects();
 	set_ibase(nullptr);
@@ -800,10 +820,11 @@ void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 
 void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
-                                       uint32_t const num_soldiers) {
+                                       const std::vector<Serial>& soldiers) {
 	if (1 < player(who_attacks)
-	           .vision(Map::get_index(flag.get_building()->get_position(), map().get_width())))
-		send_player_command(*new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, num_soldiers));
+	           .vision(Map::get_index(flag.get_building()->get_position(), map().get_width()))) {
+		send_player_command(*new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
+	}
 }
 
 void Game::send_player_ship_scouting_direction(Ship& ship, WalkingDir direction) {

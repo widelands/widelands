@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-03 08:19+0000\n"
-"PO-Revision-Date: 2019-03-03 08:20+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-04-05 04:54+0000\n"
+"PO-Revision-Date: 2019-04-07 09:58+0000\n"
+"Last-Translator: stdh\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,7 +74,7 @@ msgstr "%1$s en %2$s"
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1062
+#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1052
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -243,7 +243,7 @@ msgid "Dec"
 msgstr "dec."
 
 #: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:222
-#: ../../src/logic/game.cc:275
+#: ../../src/logic/game.cc:282
 msgid "Loading tribes"
 msgstr "Stammen laden…"
 
@@ -322,7 +322,7 @@ msgid ""
 msgstr "Widelands kon het bestand \"%s\" niet laden. Het bestandsformaat lijkt niet compatibel te zijn."
 
 #: ../../src/editor/editorinteractive.cc:181 ../../src/logic/game.cc:232
-#: ../../src/logic/game.cc:282
+#: ../../src/logic/game.cc:289
 msgid "Creating players"
 msgstr "Spelers aanmaken…"
 
@@ -875,13 +875,13 @@ msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Een bestand met de naam '%s' bestaat al. Overschrijven?"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:298
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:340
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:341
 msgid "Error Saving Map!"
 msgstr "Fout bij het opslaan van de kaart!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:335
 msgid "Map saved"
-msgstr ""
+msgstr "De kaart is opgeslagen"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
 msgid "Enter Directory Name:"
@@ -1122,48 +1122,48 @@ msgstr "Beelden laden…"
 msgid "Not set"
 msgstr "Niet ingesteld"
 
-#: ../../src/logic/game.cc:214 ../../src/logic/game.cc:266
-#: ../../src/logic/game.cc:337 ../../src/logic/game.cc:372
+#: ../../src/logic/game.cc:214 ../../src/logic/game.cc:273
+#: ../../src/logic/game.cc:348 ../../src/logic/game.cc:383
 msgid "Preloading map"
 msgstr "Kaart voorladen…"
 
-#: ../../src/logic/game.cc:220 ../../src/logic/game.cc:272
+#: ../../src/logic/game.cc:220 ../../src/logic/game.cc:279
 msgid "Loading world"
 msgstr "Wereld laden…"
 
-#: ../../src/logic/game.cc:242 ../../src/logic/game.cc:310
+#: ../../src/logic/game.cc:249 ../../src/logic/game.cc:317
 msgid "Loading map…"
 msgstr "Kaart laden…"
 
-#: ../../src/logic/game.cc:318
+#: ../../src/logic/game.cc:324
 msgid "Initializing game…"
-msgstr ""
+msgstr "Spel initialiseren…"
 
-#: ../../src/logic/game.cc:350 ../../src/logic/game.cc:389
+#: ../../src/logic/game.cc:361 ../../src/logic/game.cc:400
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1424
 msgid "Loading…"
 msgstr "Laden…"
 
-#: ../../src/logic/game.cc:452
+#: ../../src/logic/game.cc:463
 msgid "Creating player infrastructure"
 msgstr "Spelersinfrastructuur aanmaken…"
 
-#: ../../src/logic/game.cc:463 ../../src/logic/player.cc:222
+#: ../../src/logic/game.cc:474 ../../src/logic/player.cc:222
 msgid "Missing starting position"
 msgstr "Ontbrekende startpositie"
 
-#: ../../src/logic/game.cc:464 ../../src/logic/player.cc:223
+#: ../../src/logic/game.cc:475 ../../src/logic/player.cc:223
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands kon het spel niet starten omdat speler %u geen startpositie heeft.\nJe kunt handmatig een startpositie toevoegen met de Widelands Editor om dit probleem op te lossen."
 
-#: ../../src/logic/game.cc:854
+#: ../../src/logic/game.cc:865
 msgid "Trade Offer"
 msgstr "Handelsvoorstel"
 
-#: ../../src/logic/game.cc:856
+#: ../../src/logic/game.cc:867
 msgid "This market has received a new trade offer."
 msgstr "Deze markt heeft een nieuw handelsvoorstel gekregen."
 
@@ -1176,22 +1176,22 @@ msgstr "Dit spel werd opgeslagen met een oudere versie van Widelands en kan niet
 #: ../../src/logic/generic_save_handler.cc:237
 #: ../../src/logic/generic_save_handler.cc:241
 msgid "File successfully saved!"
-msgstr ""
+msgstr "Bestand met succes opgeslagen!"
 
 #: ../../src/logic/generic_save_handler.cc:242
 #, c-format
 msgid "Backup file ‘%s’ could not be deleted."
-msgstr ""
+msgstr "Kon backupbestand ‘%s’ niet verwijderen."
 
 #: ../../src/logic/generic_save_handler.cc:246
 #, c-format
 msgid "Directory ‘%s’ could not be created!"
-msgstr ""
+msgstr "Kon bestandsmap ‘%s’ niet aanmaken."
 
 #: ../../src/logic/generic_save_handler.cc:250
 #, c-format
 msgid "File ‘%s’ could not be removed!"
-msgstr ""
+msgstr "Kon bestand ‘%s’ niet verwijderen."
 
 #: ../../src/logic/generic_save_handler.cc:252
 msgid "Try saving under a different name!"
@@ -1200,30 +1200,30 @@ msgstr "Probeer met een andere naam op te slaan!"
 #: ../../src/logic/generic_save_handler.cc:258
 #, c-format
 msgid "Error writing data to file ‘%s’!"
-msgstr ""
+msgstr "Fout bij het schrijven van gegevens naar bestand ‘%s’!"
 
 #: ../../src/logic/generic_save_handler.cc:265
 msgid "Saved file may be corrupt!"
-msgstr ""
+msgstr "Opgeslagen bestand is mogelijk onbruikbaar!"
 
 #: ../../src/logic/generic_save_handler.cc:273
 #, c-format
 msgid "File ‘%s’ could not be restored!"
-msgstr ""
+msgstr "Kon bestand ‘%s’ niet terugplaatsen!"
 
 #: ../../src/logic/generic_save_handler.cc:275
 #, c-format
 msgid "Backup file ‘%s’ will be available for some time."
-msgstr ""
+msgstr "Backupbestand ‘%s’ zal nog enige tijd beschikbaar blijven."
 
 #: ../../src/logic/generic_save_handler.cc:286
 #, c-format
 msgid "File ‘%s’ was restored from backup."
-msgstr ""
+msgstr "Bestand ‘%s’ werd hersteld vanuit een backup."
 
 #: ../../src/logic/generic_save_handler.cc:294
 msgid "An unexpected error occurred:"
-msgstr ""
+msgstr "Er trad een overwachtte fout op:"
 
 #: ../../src/logic/map.h:163
 msgid "No description defined"
@@ -1475,7 +1475,7 @@ msgstr "(gestopt)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../src/logic/map_objects/tribes/productionsite.cc:407
-#: ../../src/wui/building_statistics_menu.cc:683
+#: ../../src/wui/building_statistics_menu.cc:688
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -1681,7 +1681,7 @@ msgstr "onbegaanbaar"
 msgid "This objective has no description."
 msgstr "Deze doelstelling heeft geen beschrijving."
 
-#: ../../src/logic/player.cc:1336
+#: ../../src/logic/player.cc:1345
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -3162,7 +3162,7 @@ msgstr "In aanbouw:"
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window - 'Low Productivity <input>%:'
 #: ../../src/wui/building_statistics_menu.cc:78
-#: ../../src/wui/building_statistics_menu.cc:695
+#: ../../src/wui/building_statistics_menu.cc:700
 msgid "Low Productivity"
 msgstr "Lage Productiviteit"
 
@@ -3172,50 +3172,50 @@ msgstr "Lage Productiviteit"
 msgid "%:"
 msgstr "%:"
 
-#: ../../src/wui/building_statistics_menu.cc:145
-#: ../../src/wui/building_statistics_menu.cc:155
-#: ../../src/wui/building_statistics_menu.cc:165
-msgid "Show previous building"
-msgstr "Toon vorig gebouw"
-
 #: ../../src/wui/building_statistics_menu.cc:150
 #: ../../src/wui/building_statistics_menu.cc:160
 #: ../../src/wui/building_statistics_menu.cc:170
+msgid "Show previous building"
+msgstr "Toon vorig gebouw"
+
+#: ../../src/wui/building_statistics_menu.cc:155
+#: ../../src/wui/building_statistics_menu.cc:165
+#: ../../src/wui/building_statistics_menu.cc:175
 msgid "Show next building"
 msgstr "Toon volgend gebouw"
 
-#: ../../src/wui/building_statistics_menu.cc:303
+#: ../../src/wui/building_statistics_menu.cc:308
 msgid "Small buildings"
 msgstr "Kleine gebouwen"
 
-#: ../../src/wui/building_statistics_menu.cc:305
+#: ../../src/wui/building_statistics_menu.cc:310
 msgid "Medium buildings"
 msgstr "Middelgrote gebouwen"
 
-#: ../../src/wui/building_statistics_menu.cc:307
+#: ../../src/wui/building_statistics_menu.cc:312
 msgid "Big buildings"
 msgstr "Grote gebouwen"
 
-#: ../../src/wui/building_statistics_menu.cc:309
+#: ../../src/wui/building_statistics_menu.cc:314
 msgid "Mines"
 msgstr "Mijnen"
 
-#: ../../src/wui/building_statistics_menu.cc:311
+#: ../../src/wui/building_statistics_menu.cc:316
 msgid "Ports"
 msgstr "Havens"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../src/wui/building_statistics_menu.cc:713
-#: ../../src/wui/building_statistics_menu.cc:739
-#: ../../src/wui/building_statistics_menu.cc:741
+#: ../../src/wui/building_statistics_menu.cc:718
+#: ../../src/wui/building_statistics_menu.cc:744
+#: ../../src/wui/building_statistics_menu.cc:746
 #: ../../src/wui/productionsitewindow.cc:177
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:727
+#: ../../src/wui/building_statistics_menu.cc:732
 msgid "Lacking Soldiers:"
 msgstr "Zonder soldaten:"
 
@@ -3259,19 +3259,19 @@ msgstr "Toon Debugvenster"
 msgid "Center view on this"
 msgstr "Beeld centreren"
 
-#: ../../src/wui/buildingwindow.cc:525
+#: ../../src/wui/buildingwindow.cc:528
 msgid "Hide work area"
 msgstr "Verberg werkgebied"
 
-#: ../../src/wui/buildingwindow.cc:528
+#: ../../src/wui/buildingwindow.cc:531
 msgid "Show work area"
 msgstr "Toon werkgebied"
 
-#: ../../src/wui/buildingwindow.cc:561
+#: ../../src/wui/buildingwindow.cc:564
 msgid "Start an expedition"
 msgstr "Begin een expeditie"
 
-#: ../../src/wui/buildingwindow.cc:565
+#: ../../src/wui/buildingwindow.cc:568
 msgid "Cancel the expedition"
 msgstr "Annuleer de expeditie"
 
@@ -3468,7 +3468,7 @@ msgstr "Sla spel op"
 #: ../../src/wui/game_main_menu_save_game.cc:230
 #: ../../src/wui/game_main_menu_save_game.cc:258
 msgid "Error Saving Game!"
-msgstr ""
+msgstr "Fout bij het opslaan van het spel!"
 
 #: ../../src/wui/game_message_menu.cc:51
 #: ../../src/wui/game_message_menu.cc:601
@@ -4064,42 +4064,42 @@ msgstr "Kaartnaam (begin van herhaling)"
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:441
+#: ../../src/wui/load_or_save_game.cc:443
 msgid "Today, %1%:%2%"
 msgstr "Vandaag, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:445
+#: ../../src/wui/load_or_save_game.cc:447
 msgid "saved today at %1%:%2%"
 msgstr "vandaag opgeslagen om  %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:458
+#: ../../src/wui/load_or_save_game.cc:460
 msgid "Yesterday, %1%:%2%"
 msgstr "Gisteren, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:462
+#: ../../src/wui/load_or_save_game.cc:464
 msgid "saved yesterday at %1%:%2%"
 msgstr "gisteren opgeslagen om  %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year
-#: ../../src/wui/load_or_save_game.cc:468
+#: ../../src/wui/load_or_save_game.cc:470
 msgid "%1% %2%, %3%"
 msgstr "%2% %1% %3%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month (short name) day (number), year (number). This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:474
+#: ../../src/wui/load_or_save_game.cc:476
 msgid "saved on %1% %2%, %3%"
 msgstr "opgeslagen op %2% %1% %3%"
 
@@ -4108,7 +4108,7 @@ msgstr "opgeslagen op %2% %1% %3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/wui/load_or_save_game.cc:495
+#: ../../src/wui/load_or_save_game.cc:497
 msgid "SP"
 msgstr "AS"
 
@@ -4118,7 +4118,7 @@ msgstr "AS"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:503
+#: ../../src/wui/load_or_save_game.cc:505
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
@@ -4128,31 +4128,31 @@ msgstr "H (%1%)"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:511
+#: ../../src/wui/load_or_save_game.cc:513
 msgid "MP (%1%)"
 msgstr "MP (%1%)"
 
-#: ../../src/wui/load_or_save_game.cc:525
+#: ../../src/wui/load_or_save_game.cc:527
 msgctxt "mapname_gametime"
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/wui/load_or_save_game.cc:541
+#: ../../src/wui/load_or_save_game.cc:543
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Dit bestand heeft het verkeerde formaat en kan niet geladen worden.  Misschien is het aangemaakt met een oudere versie van Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wui/load_or_save_game.cc:544
+#: ../../src/wui/load_or_save_game.cc:546
 msgid "Error message:"
 msgstr "Foutboodschap:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/wui/load_or_save_game.cc:555
 #: ../../src/wui/load_or_save_game.cc:557
+#: ../../src/wui/load_or_save_game.cc:559
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Incompatibel: %s"

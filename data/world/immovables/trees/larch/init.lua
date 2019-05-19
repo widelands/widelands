@@ -80,6 +80,7 @@ world:new_immovable_type{
    name = "larch_summer_old",
    descname = _ "Larch (Old)",
    species = _ "Larch",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_coniferous",
    size = "small",
    attributes = { "tree" },
@@ -100,8 +101,7 @@ world:new_immovable_type{
          hotspot = { 15, 59 },
          fps = 10,
          sound_effect = {
-            directory = "sound/animals",
-            name = "bird6",
+            path = "sound/animals/bird6",
          },
       },
    },

@@ -198,7 +198,6 @@ public:
 	int get_helptext_script(lua_State*);
 	int get_name(lua_State*);
 	int get_type_name(lua_State*);
-	int get_representative_image(lua_State*);
 
 	/*
 	 * Lua methods
@@ -564,13 +563,13 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_consumers(lua_State*);
-	int get_producers(lua_State*);
 
 	/*
 	 * Lua methods
 	 */
+	int consumers(lua_State*);
 	int is_construction_material(lua_State*);
+	int producers(lua_State*);
 
 	/*
 	 * C methods

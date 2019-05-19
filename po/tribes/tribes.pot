@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-22 18:47+0000\n"
+"POT-Creation-Date: 2019-05-10 07:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -546,8 +546,8 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:44
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:63
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:81
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:52
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:70
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:50
@@ -1129,7 +1129,7 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:73
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:72
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:72
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:66
 msgid "constructing a ship"
@@ -1820,7 +1820,7 @@ msgid "Scout’s Hut"
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:7
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:13
 msgctxt "barbarians_building"
 msgid "Shipyard"
 msgstr ""
@@ -3249,7 +3249,7 @@ msgid "Port"
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/init.lua:7
+#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/init.lua:11
 msgctxt "barbarians_building"
 msgid "Warehouse"
 msgstr ""
@@ -3332,7 +3332,7 @@ msgctxt "immovable"
 msgid "Barley Field (tiny)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:15
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:18
 msgid "Blueberry Bush (tiny)"
 msgstr ""
 
@@ -3340,15 +3340,15 @@ msgstr ""
 msgid "Blueberry Bush (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:63
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:60
 msgid "Blueberry Bush (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:87
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:81
 msgid "Blueberry Bush (ripe)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:16
 msgid "Black Currant (tiny)"
 msgstr ""
 
@@ -3356,15 +3356,15 @@ msgstr ""
 msgid "Black Currant (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:58
 msgid "Black Currant (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:79
 msgid "Black Currant (ripe)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:16
 msgid "Red Currant (tiny)"
 msgstr ""
 
@@ -3372,15 +3372,15 @@ msgstr ""
 msgid "Red Currant (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:58
 msgid "Red Currant (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:79
 msgid "Red Currant (ripe)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:16
 msgid "Desert Hackberry (tiny)"
 msgstr ""
 
@@ -3388,15 +3388,15 @@ msgstr ""
 msgid "Desert Hackberry (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:58
 msgid "Desert Hackberry (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:79
 msgid "Desert Hackberry (ripe)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:16
 msgid "Juniper (tiny)"
 msgstr ""
 
@@ -3404,15 +3404,15 @@ msgstr ""
 msgid "Juniper (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:58
 msgid "Juniper (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:79
 msgid "Juniper (ripe)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:16
 msgid "Raspberry Bush (tiny)"
 msgstr ""
 
@@ -3420,15 +3420,15 @@ msgstr ""
 msgid "Raspberry Bush (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:58
 msgid "Raspberry Bush (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:79
 msgid "Raspberry Bush (ripe)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:16
 msgid "Sea Buckthorn (tiny)"
 msgstr ""
 
@@ -3436,15 +3436,15 @@ msgstr ""
 msgid "Sea Buckthorn (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:58
 msgid "Sea Buckthorn (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:79
 msgid "Sea Buckthorn (ripe)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:16
 msgid "Strawberries (tiny)"
 msgstr ""
 
@@ -3452,11 +3452,11 @@ msgstr ""
 msgid "Strawberries (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:58
 msgid "Strawberries (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:79
 msgid "Strawberries (ripe)"
 msgstr ""
 
@@ -3632,82 +3632,82 @@ msgid "Resources: None"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:29
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:29
-#: ../../data/tribes/immovables/resi/empire/init.lua:29
-#: ../../data/tribes/immovables/resi/frisians/init.lua:29
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:30
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:30
+#: ../../data/tribes/immovables/resi/empire/init.lua:30
+#: ../../data/tribes/immovables/resi/frisians/init.lua:30
 msgctxt "immovable"
 msgid "Resources: Water Vein"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:52
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:51
-#: ../../data/tribes/immovables/resi/empire/init.lua:51
-#: ../../data/tribes/immovables/resi/frisians/init.lua:52
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:54
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:53
+#: ../../data/tribes/immovables/resi/empire/init.lua:53
+#: ../../data/tribes/immovables/resi/frisians/init.lua:54
 msgctxt "immovable"
 msgid "Resources: Coal Vein"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:75
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:73
-#: ../../data/tribes/immovables/resi/empire/init.lua:73
-#: ../../data/tribes/immovables/resi/frisians/init.lua:75
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:78
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:76
+#: ../../data/tribes/immovables/resi/empire/init.lua:76
+#: ../../data/tribes/immovables/resi/frisians/init.lua:78
 msgctxt "immovable"
 msgid "Resources: Gold Vein"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:98
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:95
-#: ../../data/tribes/immovables/resi/empire/init.lua:95
-#: ../../data/tribes/immovables/resi/frisians/init.lua:98
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:102
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:99
+#: ../../data/tribes/immovables/resi/empire/init.lua:99
+#: ../../data/tribes/immovables/resi/frisians/init.lua:102
 msgctxt "immovable"
 msgid "Resources: Iron Vein"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:121
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:117
-#: ../../data/tribes/immovables/resi/empire/init.lua:117
-#: ../../data/tribes/immovables/resi/frisians/init.lua:121
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:126
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:122
+#: ../../data/tribes/immovables/resi/empire/init.lua:122
+#: ../../data/tribes/immovables/resi/frisians/init.lua:126
 msgctxt "immovable"
 msgid "Resources: Some Stones"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:144
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:139
-#: ../../data/tribes/immovables/resi/empire/init.lua:139
-#: ../../data/tribes/immovables/resi/frisians/init.lua:144
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:150
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:145
+#: ../../data/tribes/immovables/resi/empire/init.lua:145
+#: ../../data/tribes/immovables/resi/frisians/init.lua:150
 msgctxt "immovable"
 msgid "Resources: Main Coal Vein"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:167
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:161
-#: ../../data/tribes/immovables/resi/empire/init.lua:161
-#: ../../data/tribes/immovables/resi/frisians/init.lua:167
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:174
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:168
+#: ../../data/tribes/immovables/resi/empire/init.lua:168
+#: ../../data/tribes/immovables/resi/frisians/init.lua:174
 msgctxt "immovable"
 msgid "Resources: Main Gold Vein"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:190
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:183
-#: ../../data/tribes/immovables/resi/empire/init.lua:183
-#: ../../data/tribes/immovables/resi/frisians/init.lua:190
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:198
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:191
+#: ../../data/tribes/immovables/resi/empire/init.lua:191
+#: ../../data/tribes/immovables/resi/frisians/init.lua:198
 msgctxt "immovable"
 msgid "Resources: Main Iron Vein"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:213
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:205
-#: ../../data/tribes/immovables/resi/empire/init.lua:205
-#: ../../data/tribes/immovables/resi/frisians/init.lua:213
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:222
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:214
+#: ../../data/tribes/immovables/resi/empire/init.lua:214
+#: ../../data/tribes/immovables/resi/frisians/init.lua:222
 msgctxt "immovable"
 msgid "Resources: A Lot of Stones"
 msgstr ""
@@ -4722,7 +4722,7 @@ msgid "Master Brewer"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/builder/init.lua:27
+#: ../../data/tribes/workers/barbarians/builder/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Builder"
 msgstr ""
@@ -4836,7 +4836,7 @@ msgid "Ranger"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/recruit/init.lua:17
+#: ../../data/tribes/workers/barbarians/recruit/init.lua:12
 msgctxt "barbarians_worker"
 msgid "Recruit"
 msgstr ""
@@ -4848,7 +4848,7 @@ msgid "Scout"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/shipwright/init.lua:26
+#: ../../data/tribes/workers/barbarians/shipwright/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Shipwright"
 msgstr ""

@@ -68,7 +68,7 @@ float adjusted_field_brightness(const Widelands::FCoords& fcoords,
                                 const Widelands::Player::Field& pf) {
 	if (pf.vision == 0) {
 		return 0.;
-	};
+	}
 
 	uint32_t brightness = 144 + fcoords.field->get_brightness();
 	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);
@@ -106,7 +106,7 @@ void draw_immovable_for_visible_field(const Widelands::EditorGameBase& egbase,
 	Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 	if (imm != nullptr && imm->get_positions(egbase).front() == field.fcoords) {
 		imm->draw(egbase.get_gametime(), filter_text_to_draw(text_to_draw, imm, player),
-		          field.rendertarget_pixel, scale, dst);
+		          field.rendertarget_pixel, field.fcoords, scale, dst);
 	}
 }
 
@@ -119,7 +119,7 @@ void draw_bobs_for_visible_field(const Widelands::EditorGameBase& egbase,
 	for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 	     bob = bob->get_next_bob()) {
 		bob->draw(egbase, filter_text_to_draw(text_to_draw, bob, player), field.rendertarget_pixel,
-		          scale, dst);
+		          field.fcoords, scale, dst);
 	}
 }
 
@@ -130,27 +130,25 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 	if (player_field.map_object_descr == nullptr) {
 		return;
 	}
+
 	if (player_field.constructionsite.becomes) {
 		assert(field.owner != nullptr);
 		player_field.constructionsite.draw(
-		   field.rendertarget_pixel, scale, field.owner->get_playercolor(), dst);
+		   field.rendertarget_pixel, field.fcoords, scale, field.owner->get_playercolor(), dst);
 
 	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
 		assert(field.owner != nullptr);
 		// this is a building therefore we either draw unoccupied or idle animation
-		dst->blit_animation(field.rendertarget_pixel, scale, building->get_unoccupied_animation(), 0,
-		                    field.owner->get_playercolor());
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+		                    building->get_unoccupied_animation(), 0, &field.owner->get_playercolor());
 	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
 		assert(field.owner != nullptr);
-		dst->blit_animation(field.rendertarget_pixel, scale, field.owner->tribe().flag_animation(), 0,
-		                    field.owner->get_playercolor());
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+		                    field.owner->tribe().flag_animation(), 0,
+		                    &field.owner->get_playercolor());
 	} else if (const uint32_t pic = player_field.map_object_descr->main_animation()) {
-		if (field.owner != nullptr) {
-			dst->blit_animation(
-			   field.rendertarget_pixel, scale, pic, 0, field.owner->get_playercolor());
-		} else {
-			dst->blit_animation(field.rendertarget_pixel, scale, pic, 0);
-		}
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, pic, 0,
+		                    (field.owner == nullptr) ? nullptr : &field.owner->get_playercolor());
 	}
 }
 
@@ -162,7 +160,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                                      bool const multiplayer)
    : InteractiveGameBase(g, global_s, NONE, multiplayer),
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
-     flag_to_connect_(Widelands::Coords::null()) {
+     flag_to_connect_(Widelands::Coords::null()),
+     grid_marker_pic_(g_gr->images().get("images/wui/overlays/grid_marker.png")) {
 	add_toolbar_button(
 	   "wui/menus/menu_options_menu", "options_menu", _("Main menu"), &options_, true);
 	options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
@@ -288,9 +287,9 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	const Widelands::Map& map = gbase.map();
 	const uint32_t gametime = gbase.get_gametime();
 
-	auto* fields_to_draw = given_map_view->draw_terrain(gbase, dst);
+	Workareas workareas = get_workarea_overlays(map);
+	auto* fields_to_draw = given_map_view->draw_terrain(gbase, workareas, false, dst);
 	const auto& road_building = road_building_overlays();
-	const std::map<Widelands::Coords, const Image*> workarea_overlays = get_workarea_overlays(map);
 
 	const float scale = 1.f / given_map_view->view().zoom;
 
@@ -331,19 +330,19 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			}
 		}
 
-		// Draw work area previews.
-		{
-			const auto it = workarea_overlays.find(f->fcoords);
-			if (it != workarea_overlays.end()) {
-				blit_field_overlay(dst, *f, it->second,
-				                   Vector2i(it->second->width() / 2, it->second->height() / 2), scale);
-			}
+		// Draw work area markers.
+		if (has_workarea_preview(f->fcoords, &map)) {
+			blit_field_overlay(dst, *f, grid_marker_pic_,
+			                   Vector2i(grid_marker_pic_->width() / 2, grid_marker_pic_->height() / 2),
+			                   scale);
 		}
 
 		if (f->vision > 0) {
 			// Draw build help.
-			if (buildhelp()) {
-				const auto* overlay = get_buildhelp_overlay(plr.get_buildcaps(f->fcoords));
+			bool show_port_space = has_expedition_port_space(f->fcoords);
+			if (show_port_space || buildhelp()) {
+				const auto* overlay = get_buildhelp_overlay(
+				   show_port_space ? f->fcoords.field->maxcaps() : plr.get_buildcaps(f->fcoords));
 				if (overlay != nullptr) {
 					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale);
 				}
@@ -513,6 +512,18 @@ void InteractivePlayer::set_player_number(uint32_t const n) {
  * while a game is currently playing.
  */
 void InteractivePlayer::cleanup_for_load() {
+}
+
+bool InteractivePlayer::player_hears_field(const Widelands::Coords& coords) const {
+	const Widelands::Player& plr = player();
+	if (plr.see_all()) {
+		return true;
+	}
+
+	const Widelands::Map& map = egbase().map();
+	const Widelands::Player::Field& player_field =
+	   plr.fields()[map.get_index(coords, map.get_width())];
+	return (player_field.vision > 1);
 }
 
 void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
