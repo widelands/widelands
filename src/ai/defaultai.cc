@@ -686,7 +686,9 @@ void DefaultAI::late_initialization() {
 			// Read information about worker outputs
 			if (prod.output_worker_types().size() > 0) {
 				for (const DescriptionIndex& temp_output : prod.output_worker_types()) {
-					bo.set_is(temp_output == tribe_->soldier() ? BuildingAttribute::kBarracks : BuildingAttribute::kRecruitment);
+					if (temp_output == tribe_->soldier()) {
+						bo.set_is(BuildingAttribute::kBarracks);
+					}
 					const WorkerHints* worker_hints = tribe_->get_worker_descr(temp_output)->ai_hints();
 					if (worker_hints != nullptr) {
 						const int worker_preciousness = worker_hints->preciousness(tribe_->name());
@@ -694,6 +696,9 @@ void DefaultAI::late_initialization() {
 							bo.initial_preciousness += worker_preciousness;
 						}
 					}
+				}
+				if (!bo.is(BuildingAttribute::kBarracks) && bo.outputs.empty()) {
+					bo.set_is(BuildingAttribute::kRecruitment);
 				}
 			}
 
