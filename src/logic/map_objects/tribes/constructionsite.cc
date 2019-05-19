@@ -48,7 +48,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
                                        RenderTarget* dst) const {
 	// Draw the construction site marker
 	const uint32_t anim_idx = becomes->is_animation_known("build") ?
-	                             becomes->get_animation("build") :
+	                             becomes->get_animation("build", nullptr) :
 	                             becomes->get_unoccupied_animation();
 
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);
@@ -260,8 +260,8 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 	// Check if one step has completed
 	if (working_) {
 		if (static_cast<int32_t>(game.get_gametime() - work_steptime_) < 0) {
-			worker.start_task_idle(
-			   game, worker.descr().get_animation("work"), work_steptime_ - game.get_gametime());
+			worker.start_task_idle(game, worker.descr().get_animation("work", &worker),
+			                       work_steptime_ - game.get_gametime());
 			builder_idle_ = false;
 			return true;
 		} else {
@@ -315,14 +315,14 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 			work_steptime_ = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
 
 			worker.start_task_idle(
-			   game, worker.descr().get_animation("work"), CONSTRUCTIONSITE_STEP_TIME);
+			   game, worker.descr().get_animation("work", &worker), CONSTRUCTIONSITE_STEP_TIME);
 			builder_idle_ = false;
 			return true;
 		}
 	}
 	// The only work we have got for you, is to run around to look cute ;)
 	if (!builder_idle_) {
-		worker.set_animation(game, worker.descr().get_animation("idle"));
+		worker.set_animation(game, worker.descr().get_animation("idle", &worker));
 		builder_idle_ = true;
 	}
 	worker.schedule_act(game, 2000);

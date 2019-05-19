@@ -358,7 +358,7 @@ struct ProductionProgram {
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
-		uint32_t id_;
+		std::string animation_name_;
 		Duration duration_;
 	};
 
