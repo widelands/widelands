@@ -3174,8 +3174,9 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
 			if (!Widelands::tribe_exists(name)) {
 				throw GameDataError("unknown tribe '%s'", name.c_str());
 			}
-			name = lookup_table.lookup_worker(name, fr.c_string());
+			name = fr.c_string();
 		}
+		name = lookup_table.lookup_worker(name);
 
 		const WorkerDescr* descr =
 		   egbase.tribes().get_worker_descr(egbase.tribes().safe_worker_index(name));

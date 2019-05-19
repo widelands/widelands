@@ -35,7 +35,7 @@ tribes:new_productionsite_type {
    },
 
    outputs = {
-      "thatch_reed"
+      "reed"
    },
 
    programs = {

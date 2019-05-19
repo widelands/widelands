@@ -22,92 +22,41 @@
 // NOCOM(GunChleoc): Since we now have a unified tribe, no need to have the tribe as key for fetching
 TribesLegacyLookupTable::TribesLegacyLookupTable()
    :  // Workers
-     workers_{
-        std::make_pair("atlanteans",
-                       std::map<std::string, std::string>{
-                       }),
-        std::make_pair("barbarians",
-                       std::map<std::string, std::string>{
-                       }),
-        std::make_pair("empire",
-                       std::map<std::string, std::string>{
-                       }),
-     },
+     workers_{},
      // Wares
      wares_{
-        std::make_pair("atlanteans",
-                       std::map<std::string, std::string>{
-                       }),
-        std::make_pair("barbarians",
-                       std::map<std::string, std::string>{
-                       }),
-        std::make_pair("empire",
-                       std::map<std::string, std::string>{
-                       }),
-     },
+		{"thatch_reed", "reed"},
+	},
      // Immovables
      immovables_{
-        std::make_pair("atlanteans",
-                       std::map<std::string, std::string>{
-                       }),
-        std::make_pair("barbarians",
-                       std::map<std::string, std::string>{
-                          {"field_medium", "wheatfield_medium"},
-                          {"field_small", "wheatfield_small"},
-                          {"field_tiny", "wheatfield_tiny"},
-                          {"field_ripe", "wheatfield_ripe"},
-                          {"field_harvested", "wheatfield_harvested"},
-                          {"reed_medium", "reed_medium"},
-                          {"reed_small", "reedfield_small"},
-                          {"reed_tiny", "reedfield_tiny"},
-                          {"reed_tiny", "reedfield_ripe"},
-                       }),
-        std::make_pair("empire",
-                       std::map<std::string, std::string>{
-                          {"field_medium", "wheatfield_medium"},
-                          {"field_small", "wheatfield_small"},
-                          {"field_tiny", "wheatfield_tiny"},
-                          {"field_ripe", "wheatfield_ripe"},
-                          {"field_harvested", "wheatfield_harvested"},
-                       }),
-        std::make_pair("frisians",
-                       std::map<std::string, std::string>{
-                       }),
+		  {"field_medium", "wheatfield_medium"},
+		  {"field_small", "wheatfield_small"},
+		  {"field_tiny", "wheatfield_tiny"},
+		  {"field_ripe", "wheatfield_ripe"},
+		  {"field_harvested", "wheatfield_harvested"},
+		  {"reed_medium", "reed_medium"},
+		  {"reed_small", "reedfield_small"},
+		  {"reed_tiny", "reedfield_tiny"},
+		  {"reed_tiny", "reedfield_ripe"},
      } {
 }
 
-const std::string& TribesLegacyLookupTable::lookup_worker(const std::string& tribe,
-                                                          const std::string& worker) const {
-	if (workers_.count(tribe)) {
-		const std::map<std::string, std::string>& tribe_workers = workers_.at(tribe);
-		const auto& i = tribe_workers.find(worker);
-		if (i != tribe_workers.end()) {
-			return i->second;
-		}
-	}
-	return worker;
+const std::string& TribesLegacyLookupTable::lookup_worker(const std::string& worker) const {
+	return lookup_entry(worker, workers_);
 }
 
-const std::string& TribesLegacyLookupTable::lookup_ware(const std::string& tribe,
-                                                        const std::string& ware) const {
-	if (wares_.count(tribe)) {
-		const std::map<std::string, std::string>& tribe_wares = wares_.at(tribe);
-		const auto& i = tribe_wares.find(ware);
-		if (i != tribe_wares.end()) {
-			return i->second;
-		}
-	}
-	return ware;
+const std::string& TribesLegacyLookupTable::lookup_ware(const std::string& ware) const {
+	return lookup_entry(ware, wares_);
 }
 
-const std::string& TribesLegacyLookupTable::lookup_immovable(const std::string& tribe,
-                                                             const std::string& immovable) const {
-	if (immovables_.count(tribe)) {
-		const std::map<std::string, std::string>& tribe_immovables = immovables_.at(tribe);
-		const auto& i = tribe_immovables.find(immovable);
-		if (i != tribe_immovables.end()) {
-			return i->second;
-		}
+const std::string& TribesLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
+	return lookup_entry(immovable, immovables_);
+}
+
+const std::string& TribesLegacyLookupTable::lookup_entry(const std::string& entry, const std::map<std::string, std::string>& table) const {
+	const auto& i = table.find(entry);
+	if (i != table.end()) {
+		return i->second;
 	}
-	return immovable;
+	return entry;
 }

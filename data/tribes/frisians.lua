@@ -61,7 +61,7 @@ tribes:new_tribe {
          "granite",
          "clay",
          "brick",
-         "thatch_reed",
+         "reed",
          "fur",
          "cloth"
       },

@@ -133,7 +133,7 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/spider_silk/init.lua"
       include "tribes/wares/tabard/init.lua"
       include "tribes/wares/tabard_golden/init.lua"
-      include "tribes/wares/thatch_reed/init.lua"
+      include "tribes/wares/reed/init.lua"
       include "tribes/wares/trident_double/init.lua"
       include "tribes/wares/trident_heavy_double/init.lua"
       include "tribes/wares/trident_light/init.lua"

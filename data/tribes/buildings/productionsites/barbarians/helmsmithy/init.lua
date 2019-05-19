@@ -14,13 +14,13 @@ tribes:new_productionsite_type {
       blackwood = 1,
       granite = 2,
       grout = 2,
-      thatch_reed = 3
+      reed = 3
    },
    return_on_dismantle = {
       log = 1,
       granite = 2,
       grout = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {

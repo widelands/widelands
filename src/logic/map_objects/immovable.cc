@@ -736,7 +736,7 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 			if (owner_type != "world") {  //  It is a tribe immovable.
 				// Needed for map compatibility
 				if (packet_version < 7) {
-					name = tribes_lookup_table.lookup_immovable(owner_type, name);
+					name = tribes_lookup_table.lookup_immovable(name);
 				}
 				const DescriptionIndex idx = egbase.tribes().immovable_index(name);
 				if (idx != Widelands::INVALID_INDEX) {

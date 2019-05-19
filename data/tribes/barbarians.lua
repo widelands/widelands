@@ -61,7 +61,7 @@ tribes:new_tribe {
          "log",
          "blackwood",
          "grout",
-         "thatch_reed",
+         "reed",
          "cloth"
       },
       {
