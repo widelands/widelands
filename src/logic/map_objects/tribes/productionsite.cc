@@ -1039,14 +1039,14 @@ void ProductionSite::set_default_anim(std::string anim) {
 }
 
 void ProductionSite::update_crude_statistics(uint32_t duration, const bool produced) {
-	static const uint32_t duration_cap = 90 * 1000; //This is highest allowed program duration
+	static const uint32_t duration_cap = 180 * 1000; //This is highest allowed program duration
 	// just for case something went very wrong...
-	static const uint32_t entire_duration = 5 * 60 *1000;
+	static const uint32_t entire_duration = 10 * 60 *1000;
 	if (duration > duration_cap) {
 		duration = duration_cap;
 	};
-	const uint32_t old_duration = entire_duration - duration;
-	crude_percent_ = (crude_percent_ * old_duration + produced * duration * 10000) / entire_duration;
+	const uint32_t past_duration = entire_duration - duration;
+	crude_percent_ = (crude_percent_ * past_duration + produced * duration * 10000) / entire_duration;
 	assert(crude_percent_ <= 10000); //be sure we do not go above 100 %
 	}
 

@@ -327,8 +327,8 @@ protected:  // TrainingSite must have access to this stuff
 	std::vector<bool> statistics_;
 	uint8_t last_stat_percent_;
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:
-	// 0-10)
-	uint32_t crude_percent_; // basically it is percent * 100 to avoid floats
+	// 0-100)
+	uint32_t crude_percent_; // basically this is percent * 100 to avoid floats
 	uint32_t last_program_end_time;
 	bool is_stopped_;
 	std::string default_anim_;  // normally "idle", "empty", if empty mine.
