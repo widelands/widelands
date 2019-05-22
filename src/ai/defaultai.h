@@ -148,6 +148,7 @@ private:
 	static constexpr int32_t kSpotsTooLittle = 15;
 	static constexpr int kManagementUpdateInterval = 10 * 60 * 1000;
 	static constexpr int kStatUpdateInterval = 60 * 1000;
+	static constexpr int kFlagWarehouseUpdInterval = 30 * 1000;
 
 	// For vision and scheduling
 	static constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
@@ -203,6 +204,9 @@ private:
 	// trying to identify roads that might be removed
 	bool dispensable_road_test(const Widelands::Road&);
 	bool dismantle_dead_ends();
+	// calculating distances from local warehouse to flags
+	void check_flag_distances(uint32_t);
+	Widelands::FlagWarehouseDistances flag_warehouse_distance;
 
 	bool check_economies();
 	bool check_productionsites(uint32_t);
@@ -271,6 +275,7 @@ private:
 	bool marine_main_decisions(uint32_t);
 	bool check_ships(uint32_t);
 	bool attempt_escape(Widelands::ShipObserver& so);
+
 
 	// finding and owner
 	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, uint32_t);

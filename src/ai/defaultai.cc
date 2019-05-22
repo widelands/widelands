@@ -486,6 +486,10 @@ void DefaultAI::think() {
 			update_player_stat(gametime);
 			set_taskpool_task_time(gametime + kStatUpdateInterval, SchedulerTaskId::kUpdateStats);
 			break;
+		case SchedulerTaskId::kWarehouseFlagDist:
+			check_flag_distances(gametime);
+			set_taskpool_task_time(gametime + kFlagWarehouseUpdInterval, SchedulerTaskId::kWarehouseFlagDist);
+			break;
 		case SchedulerTaskId::kUnset:
 			NEVER_HERE();
 		}
@@ -957,6 +961,9 @@ void DefaultAI::late_initialization() {
 	                                 SchedulerTaskId::kUpdateStats, 6, "update player stats"));
 	taskPool.push_back(SchedulerTask(
 	   std::max<uint32_t>(gametime, 10 * 1000), SchedulerTaskId::kUpdateStats, 15, "review"));
+
+	taskPool.push_back(SchedulerTask(
+	   std::max<uint32_t>(gametime, 10 * 1000), SchedulerTaskId::kWarehouseFlagDist, 5, "Flag-Warehouse Update"));
 
 	const Map& map = game().map();
 
@@ -3420,6 +3427,68 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	}
 
 	return true;
+}
+
+
+// Re-calculating warehouse to flag distances NOCOM
+void DefaultAI::check_flag_distances(const uint32_t gametime){
+	printf ("Check flag distance called\n");
+	for (WarehouseSiteObserver& wh_obs : warehousesites) {
+		if (gametime > wh_obs.flag_distances_last_update + 60 *1000) {
+			printf("Updating flags for warehouse at %3dx%3d\n", wh_obs.site->get_position().x,
+			 wh_obs.site->get_position().y);
+			wh_obs.flag_distances_last_update = gametime;
+
+
+			std::queue<Widelands::Flag*> remaining_flags;  // only used to collect flags reachable walk over roads
+			remaining_flags.push(&wh_obs.site->base_flag());
+			const bool distance_set = flag_warehouse_distance.set_distance(wh_obs.site->base_flag().get_position().hash(), 0, gametime);
+			printf ("Distance %s set, actually: %d\n", (distance_set) ? "":"not",
+				flag_warehouse_distance.get_distance(wh_obs.site->base_flag().get_position().hash(), gametime));
+			assert(flag_warehouse_distance.get_distance(wh_obs.site->base_flag().get_position().hash(), gametime) == 0);
+
+			// Algorithm to walk on roads
+			// All nodes are marked as to_be_checked == true first and once the node is checked it is changed
+			// to false. Under some conditions, the same node can be checked twice, the to_be_checked can
+			// be set back to true. Because less hoops (fewer flag-to-flag roads) does not always mean
+			// shortest
+			// road.
+			while (not remaining_flags.empty()) {
+				// looking for a node with shortest existing road distance from starting flag and one that has
+				// to be checked
+				// Now going over roads leading from this flag
+				const uint16_t current_flag_distance = flag_warehouse_distance.get_distance(remaining_flags.front()->get_position().hash(), gametime);
+				for (uint8_t i = 1; i <= 6; ++i) {
+					Road* const road = remaining_flags.front()->get_road(i);
+
+					if (!road) {
+						continue;
+					}
+
+					Flag* endflag = &road->get_flag(Road::FlagStart);
+
+					if (endflag == remaining_flags.front()) {
+						endflag = &road->get_flag(Road::FlagEnd);
+					}
+					const uint16_t steps_count = road->get_path().get_nsteps();
+
+
+					bool const updated = flag_warehouse_distance.set_distance(
+					endflag->get_position().hash(), current_flag_distance + steps_count, gametime);
+
+					printf ("New Flag %3dx%3d was %s updated with distance: %d\n",
+					endflag->get_position().x, endflag->get_position().y,(updated) ? "":"not", current_flag_distance + steps_count);
+
+					if (updated == true) {
+						remaining_flags.push(endflag);
+					}
+				}
+				remaining_flags.pop();
+			}
+
+
+		}
+	}
 }
 
 // Here we pick about 25 roads and investigate them. If it is a dead end we dismantle it

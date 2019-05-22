@@ -107,6 +107,7 @@ enum class SchedulerTaskId : uint8_t {
 	kCheckEnemySites,
 	kManagementUpdate,
 	kUpdateStats,
+	kWarehouseFlagDist,
 	kUnset
 };
 
@@ -122,6 +123,7 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 // TODO(tiborb): this should be replaced by command line switch
 constexpr int kFNeuronBitSize = 32;
 constexpr int kMutationRatePosition = 42;
+const int kFlagDistanceExpirationPeriod = 120 * 1000;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -527,8 +529,11 @@ struct TrainingSiteObserver {
 };
 
 struct WarehouseSiteObserver {
+
+	//WarehouseSiteObserver(uint32_t x = 0): flag_distances_last_update(x) {};
 	Widelands::Warehouse* site;
 	BuildingObserver* bo;
+	uint32_t flag_distances_last_update;
 };
 
 struct ShipObserver {
@@ -890,6 +895,26 @@ private:
 	uint32_t update_time;
 	PlayerNumber this_player_number;
 	PlayerNumber this_player_team;
+};
+
+// This is a wrapper around map of <Flag coords hash:distance from flag to nearest warehouse>
+struct FlagWarehouseDistances{
+private:
+    struct FlagInfo {
+        FlagInfo();
+        FlagInfo(uint32_t, uint16_t);
+        uint32_t expiry_time;
+        uint16_t distance;
+
+        bool update(uint32_t, uint16_t);
+        uint16_t get(uint32_t) const;
+    };
+  std::map<uint32_t, FlagInfo> flags_map;
+public:
+  bool set_distance(uint32_t, uint16_t, uint32_t);
+  int16_t get_distance(uint32_t, uint32_t);
+
+
 };
 }  // namespace Widelands
 

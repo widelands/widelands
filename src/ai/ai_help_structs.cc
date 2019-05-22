@@ -1417,4 +1417,54 @@ uint32_t PlayersStrengths::get_update_time() {
 	return update_time;
 }
 
+FlagWarehouseDistances::FlagInfo::FlagInfo(const uint32_t gametime, const uint16_t dist){
+	     expiry_time = gametime + kFlagDistanceExpirationPeriod;
+        distance = dist;
+	}
+FlagWarehouseDistances::FlagInfo::FlagInfo(){
+	     expiry_time = 0;
+        distance = 1000;
+	}
+
+
+bool FlagWarehouseDistances::FlagInfo::update(const uint32_t gametime, const uint16_t new_distance) {
+            if (gametime > expiry_time) {
+                distance = new_distance;
+                expiry_time = gametime + kFlagDistanceExpirationPeriod;
+                return true;
+            } else if (new_distance < distance) {
+                expiry_time = gametime + kFlagDistanceExpirationPeriod;
+                distance = new_distance;
+                return true;
+            }
+            return false;
+        }
+
+
+uint16_t FlagWarehouseDistances::FlagInfo::get(const uint32_t gametime) const {
+            if (gametime > expiry_time){
+                return distance;
+            }
+            return 1000;
+        }
+
+bool FlagWarehouseDistances::set_distance(const uint32_t flag_coords, const uint16_t distance, uint32_t const gametime){
+      if (flags_map.count(flag_coords) == 0){
+          flags_map[flag_coords] = FlagWarehouseDistances::FlagInfo(gametime, distance);
+          return true;
+
+	  }
+      return flags_map[flag_coords].update(gametime, distance);
+
+  }
+
+int16_t FlagWarehouseDistances::get_distance(const uint32_t flag_coords, uint32_t gametime) {
+      if (flags_map.count(flag_coords) == 0){
+         return 1000;
+      } else {
+          return flags_map[flag_coords].get(gametime);
+      }
+
+  }
+
 }  // namespace Widelands
