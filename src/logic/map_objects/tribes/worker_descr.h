@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "ai/ai_hints.h"
 #include "base/macros.h"
 #include "graphic/diranimations.h"
 #include "logic/map_objects/bob.h"
@@ -116,6 +117,11 @@ public:
 		return programs_;
 	}
 
+	/// AI hints for this worker type. Can be nullptr.
+	const WorkerHints* ai_hints() const {
+		return ai_hints_.get();
+	}
+
 protected:
 	Programs programs_;
 
@@ -145,6 +151,9 @@ private:
 	std::set<DescriptionIndex> employers_;
 
 private:
+	// Hints for the AI
+	std::unique_ptr<WorkerHints> ai_hints_;
+
 	const Tribes& tribes_;
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);
 };

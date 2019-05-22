@@ -434,6 +434,12 @@ tribes:new_soldier_type {
       pictures = path.list_files (dirname .. "evade_level?.png"),
    },
 
+   aihints = {
+      preciousness = {
+         frisians = 5
+      },
+   },
+
    -- Random animations for battle
    attack_success_e = {
       atk_ok_1_w = fri_rookie,
