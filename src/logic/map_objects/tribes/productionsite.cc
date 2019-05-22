@@ -269,6 +269,7 @@ ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
      statistics_(STATISTICS_VECTOR_LENGTH, false),
      last_stat_percent_(0),
      crude_percent_(0),
+     last_program_end_time(0),
      is_stopped_(false),
      default_anim_("idle"),
      main_worker_(-1) {
@@ -954,24 +955,28 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		top_state().phase = result;
 	}
 
+	const uint32_t current_duration = game.get_gametime() - last_program_end_time;
+	assert(game.get_gametime() >= last_program_end_time);
+	last_program_end_time = game.get_gametime();
+
 	switch (result) {
 	case ProgramResult::kFailed:
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(false);
 		calc_statistics();
-		crude_percent_ = crude_percent_ * 8 / 10;
+		update_crude_statistics(current_duration, false);
 		break;
 	case ProgramResult::kCompleted:
 		skipped_programs_.erase(program_name);
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(true);
 		train_workers(game);
-		crude_percent_ = crude_percent_ * 8 / 10 + 1000000 * 2 / 10;
+		update_crude_statistics(current_duration, true);
 		calc_statistics();
 		break;
 	case ProgramResult::kSkipped:
 		skipped_programs_[program_name] = game.get_gametime();
-		crude_percent_ = crude_percent_ * 98 / 100;
+		update_crude_statistics(current_duration, false);
 		break;
 	case ProgramResult::kNone:
 		skipped_programs_.erase(program_name);
@@ -1032,4 +1037,18 @@ void ProductionSite::set_default_anim(std::string anim) {
 
 	default_anim_ = anim;
 }
+
+void ProductionSite::update_crude_statistics(uint32_t duration, const bool produced) {
+	static const uint32_t duration_cap = 180 * 1000;  // This is highest allowed program duration
+	// just for case something went very wrong...
+	static const uint32_t entire_duration = 10 * 60 * 1000;
+	if (duration > duration_cap) {
+		duration = duration_cap;
+	};
+	const uint32_t past_duration = entire_duration - duration;
+	crude_percent_ =
+	   (crude_percent_ * past_duration + produced * duration * 10000) / entire_duration;
+	assert(crude_percent_ <= 10000);  // be sure we do not go above 100 %
+}
+
 }  // namespace Widelands
