@@ -92,20 +92,14 @@ void LoginBox::think() {
  */
 void LoginBox::clicked_ok() {
 	Section& s = g_options.pull_section("global");
-	s.set_string("nickname", eb_nickname->text());
-
-	// NOTE: The password is only stored (in memory and on disk) and transmitted (over the network to the metaserver) as cryptographic hash.
-	// This does NOT mean that the password is stored securely on the local disk.
-	// While the password should be secure while transmitted to the metaserver (no-one can use the transmitted data to log in as the user) this is not the case for local storage.
-	// The stored hash of the password makes it hard to look at the configuration file and figure out the plaintext password to, e.g., log in on the forum.
-	// However, the stored hash can be copied to another system and used to log in as the user on the metaserver.
-	// Further note: SHA-1 is considered broken and shouldn't be used anymore. But since the
-	// passwords on the server are protected by SHA-1 we have to use it here, too
 	if (cb_register->get_state()) {
 		if (check_password()) {
+			s.set_string("nickname", eb_nickname->text());
+			s.set_bool("registered", true);
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 		}
 	} else {
+		s.set_string("nickname", eb_nickname->text());
 		s.set_bool("registered", false);
 		s.set_string("password_sha1", "");
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
@@ -206,7 +200,13 @@ bool LoginBox::check_password() {
 		eb_password->focus();
 		return false;
 	}
-	s.set_bool("registered", true);
+	// NOTE: The password is only stored (in memory and on disk) and transmitted (over the network to the metaserver) as cryptographic hash.
+	// This does NOT mean that the password is stored securely on the local disk.
+	// While the password should be secure while transmitted to the metaserver (no-one can use the transmitted data to log in as the user) this is not the case for local storage.
+	// The stored hash of the password makes it hard to look at the configuration file and figure out the plaintext password to, e.g., log in on the forum.
+	// However, the stored hash can be copied to another system and used to log in as the user on the metaserver.
+	// Further note: SHA-1 is considered broken and shouldn't be used anymore. But since the
+	// passwords on the server are protected by SHA-1 we have to use it here, too
 	s.set_string("password_sha1", password);
 	InternetGaming::ref().logout();
 	return true;
