@@ -93,6 +93,7 @@ void LoginBox::think() {
 void LoginBox::clicked_ok() {
 	Section& s = g_options.pull_section("global");
 	s.set_string("nickname", eb_nickname->text());
+	s.set_bool("registered", cb_register->get_state());
 
 	// NOTE: The password is only stored (in memory and on disk) and transmitted (over the network to the metaserver) as cryptographic hash.
 	// This does NOT mean that the password is stored securely on the local disk.
@@ -106,7 +107,6 @@ void LoginBox::clicked_ok() {
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 		}
 	} else {
-		s.set_bool("registered", false);
 		s.set_string("password_sha1", "");
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 	}
@@ -206,7 +206,6 @@ bool LoginBox::check_password() {
 		eb_password->focus();
 		return false;
 	}
-	s.set_bool("registered", cb_register->get_state());
 	s.set_string("password_sha1", password);
 	InternetGaming::ref().logout();
 	return true;
