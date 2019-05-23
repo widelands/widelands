@@ -902,17 +902,18 @@ struct FlagWarehouseDistances{
 private:
     struct FlagInfo {
         FlagInfo();
-        FlagInfo(uint32_t, uint16_t);
+        FlagInfo(uint32_t, uint16_t, uint32_t);
         uint32_t expiry_time;
         uint16_t distance;
+        uint32_t nearest_warehouse;
 
-        bool update(uint32_t, uint16_t);
-        uint16_t get(uint32_t) const;
+        bool update(uint32_t, uint16_t, uint32_t);
+        uint16_t get(uint32_t, uint32_t*) const;
     };
   std::map<uint32_t, FlagInfo> flags_map;
 public:
-  bool set_distance(uint32_t, uint16_t, uint32_t);
-  int16_t get_distance(uint32_t, uint32_t);
+  bool set_distance(uint32_t, uint16_t, uint32_t, uint32_t);
+  int16_t get_distance(uint32_t, uint32_t, uint32_t*);
 
 
 };

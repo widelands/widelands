@@ -1417,9 +1417,10 @@ uint32_t PlayersStrengths::get_update_time() {
 	return update_time;
 }
 
-FlagWarehouseDistances::FlagInfo::FlagInfo(const uint32_t gametime, const uint16_t dist){
+FlagWarehouseDistances::FlagInfo::FlagInfo(const uint32_t gametime, const uint16_t dist, const uint32_t wh){
 	     expiry_time = gametime + kFlagDistanceExpirationPeriod;
         distance = dist;
+        nearest_warehouse = wh;
 	}
 FlagWarehouseDistances::FlagInfo::FlagInfo(){
 	     expiry_time = 0;
@@ -1427,42 +1428,53 @@ FlagWarehouseDistances::FlagInfo::FlagInfo(){
 	}
 
 
-bool FlagWarehouseDistances::FlagInfo::update(const uint32_t gametime, const uint16_t new_distance) {
-            if (gametime > expiry_time) {
-                distance = new_distance;
-                expiry_time = gametime + kFlagDistanceExpirationPeriod;
-                return true;
-            } else if (new_distance < distance) {
-                expiry_time = gametime + kFlagDistanceExpirationPeriod;
-                distance = new_distance;
-                return true;
-            }
-            return false;
-        }
+bool FlagWarehouseDistances::FlagInfo::update(const uint32_t gametime, const uint16_t new_distance, const uint32_t nearest_wh) {
+	const uint32_t new_expiry_time = gametime + kFlagDistanceExpirationPeriod;
+
+	if (gametime > expiry_time) {
+		distance = new_distance;
+		expiry_time = new_expiry_time;
+		nearest_warehouse = nearest_wh;
+		return true;
+	} else if (new_distance < distance) {
+		distance = new_distance;
+		expiry_time = gametime + kFlagDistanceExpirationPeriod;
+		nearest_warehouse = nearest_wh;
+		return true;
+	} else if (new_distance == distance && new_expiry_time > expiry_time){
+			expiry_time = new_expiry_time;
+			nearest_warehouse = nearest_wh;
+			return true;
+	}
+	return false;
+}
 
 
-uint16_t FlagWarehouseDistances::FlagInfo::get(const uint32_t gametime) const {
-            if (gametime > expiry_time){
+uint16_t FlagWarehouseDistances::FlagInfo::get(const uint32_t gametime, uint32_t* nw) const {
+			*nw = nearest_warehouse;
+            if (gametime <= expiry_time){
                 return distance;
             }
             return 1000;
         }
 
-bool FlagWarehouseDistances::set_distance(const uint32_t flag_coords, const uint16_t distance, uint32_t const gametime){
+bool FlagWarehouseDistances::set_distance(const uint32_t flag_coords, const uint16_t distance,
+	uint32_t const gametime, uint32_t const nearest_warehouse){
       if (flags_map.count(flag_coords) == 0){
-          flags_map[flag_coords] = FlagWarehouseDistances::FlagInfo(gametime, distance);
+          flags_map[flag_coords] = FlagWarehouseDistances::FlagInfo(gametime, distance, nearest_warehouse);
           return true;
 
 	  }
-      return flags_map[flag_coords].update(gametime, distance);
+      return flags_map[flag_coords].update(gametime, distance, nearest_warehouse);
 
   }
 
-int16_t FlagWarehouseDistances::get_distance(const uint32_t flag_coords, uint32_t gametime) {
+int16_t FlagWarehouseDistances::get_distance(const uint32_t flag_coords, uint32_t gametime, uint32_t* nw) {
       if (flags_map.count(flag_coords) == 0){
+		  *nw = 0;
          return 1000;
       } else {
-          return flags_map[flag_coords].get(gametime);
+          return flags_map[flag_coords].get(gametime, nw);
       }
 
   }
