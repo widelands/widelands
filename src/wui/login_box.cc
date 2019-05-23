@@ -21,6 +21,7 @@
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
+#include "network/crypto.h"
 #include "network/internet_gaming.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
@@ -71,6 +72,7 @@ LoginBox::LoginBox(Panel& parent)
 
 	if (registered()) {
 		eb_password->set_text(s.get_string("password_sha1", ""));
+		loginbtn->set_enabled(false);
 	} else {
 		eb_password->set_can_focus(false);
 		ta_password->set_color(UI_FONT_CLR_DISABLED);
@@ -89,7 +91,25 @@ void LoginBox::think() {
  * called, if "login" is pressed.
  */
 void LoginBox::clicked_ok() {
-	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+	Section& s = g_options.pull_section("global");
+	s.set_string("nickname", eb_nickname->text());
+	s.set_bool("registered", cb_register->get_state());
+
+	// NOTE: The password is only stored (in memory and on disk) and transmitted (over the network to the metaserver) as cryptographic hash.
+	// This does NOT mean that the password is stored securely on the local disk.
+	// While the password should be secure while transmitted to the metaserver (no-one can use the transmitted data to log in as the user) this is not the case for local storage.
+	// The stored hash of the password makes it hard to look at the configuration file and figure out the plaintext password to, e.g., log in on the forum.
+	// However, the stored hash can be copied to another system and used to log in as the user on the metaserver.
+	// Further note: SHA-1 is considered broken and shouldn't be used anymore. But since the
+	// passwords on the server are protected by SHA-1 we have to use it here, too
+	if (cb_register->get_state()) {
+		if (check_password()) {
+			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+		}
+	} else {
+		s.set_string("password_sha1", "");
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+	}
 }
 
 /// Called if "cancel" was pressed
@@ -97,7 +117,7 @@ void LoginBox::clicked_back() {
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
-/// Calles when nickname was changed
+/// Called when nickname was changed
 void LoginBox::change_playername() {
 	cb_register->set_state(false);
 	eb_password->set_can_focus(false);
@@ -160,4 +180,33 @@ void LoginBox::verify_input() {
 	if (eb_password->has_focus() && eb_password->text() == s.get_string("password_sha1", "")) {
 		eb_password->set_text("");
 	}
+	
+	if (eb_password->text() == s.get_string("password_sha1", "")) {
+		loginbtn->set_enabled(false);
+	}
+}
+
+/// Check password against metaserver
+bool LoginBox::check_password() {
+	// Try to connect to the metaserver
+	Section& s = g_options.pull_section("global");
+	const std::string& meta = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+	uint32_t port = s.get_natural("metaserverport", kInternetGamingPort);
+	std::string password = crypto::sha1(eb_password->text());
+	InternetGaming::ref().login(get_nickname(), password, true, meta, port);
+
+	if (!InternetGaming::ref().logged_in()) {
+		// something went wrong -> show the error message
+		// idealy it is about the wrong password
+		ChatMessage msg = InternetGaming::ref().get_messages().back();
+		UI::WLMessageBox wmb(this, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
+		wmb.run<UI::Panel::Returncodes>();
+		InternetGaming::ref().reset();
+		eb_password->set_text("");
+		eb_password->focus();
+		return false;
+	}
+	s.set_string("password_sha1", password);
+	InternetGaming::ref().logout();
+	return true;
 }
