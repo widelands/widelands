@@ -32,8 +32,8 @@
 #include "economy/request.h"
 #include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
-#include "logic/findbob.h"
 #include "logic/game.h"
+#include "logic/map_objects/findbob.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -127,7 +127,8 @@ int MilitarySite::SoldierControl::incorporate_soldier(EditorGameBase& egbase, So
 	if (!military_site_->didconquer_) {
 		military_site_->conquer_area(egbase);
 		// Building is now occupied - idle animation should be played
-		military_site_->start_animation(egbase, military_site_->descr().get_animation("idle"));
+		military_site_->start_animation(
+		   egbase, military_site_->descr().get_animation("idle", military_site_));
 
 		if (upcast(Game, game, &egbase)) {
 			military_site_->send_message(
@@ -295,8 +296,8 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
  */
 MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
-                                     const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, egbase),
+                                     const Tribes& tribes)
+   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, tribes),
      conquer_radius_(0),
      num_soldiers_(0),
      heal_per_second_(0) {
@@ -374,6 +375,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			      stationed % (capacity_ - stationed))
 			        .str();
 		} else {
+			/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
 			*s = (boost::format(ngettext("%u soldier", "%u soldiers", stationed)) % stationed).str();
 		}
 	} else {
@@ -830,7 +832,7 @@ void MilitarySite::reinit_after_conqueration(Game& game) {
 	clear_requirements();
 	conquer_area(game);
 	update_soldier_request();
-	start_animation(game, descr().get_animation("idle"));
+	start_animation(game, descr().get_animation("idle", this));
 
 	// feature request 1247384 in launchpad bugs: Conquered buildings tend to
 	// be in a hostile area; typically players want heroes there.

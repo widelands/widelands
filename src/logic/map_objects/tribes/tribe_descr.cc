@@ -31,7 +31,6 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/immovable.h"
@@ -64,8 +63,10 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		initializations_ = info.initializations;
 
 		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
-		frontier_animation_id_ = g_gr->animations().load(*items_table->get_table("frontier"));
-		flag_animation_id_ = g_gr->animations().load(*items_table->get_table("flag"));
+		frontier_animation_id_ = g_gr->animations().load(
+		   name_ + std::string("_frontier"), *items_table->get_table("frontier"));
+		flag_animation_id_ =
+		   g_gr->animations().load(name_ + std::string("_flag"), *items_table->get_table("flag"));
 
 		items_table = table.get_table("roads");
 		const auto load_roads = [&items_table](
@@ -200,7 +201,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		}
 
 		port_ = add_special_building(table.get_string("port"));
-		barracks_ = add_special_building(table.get_string("barracks"));
 
 		ironore_ = add_special_ware(table.get_string("ironore"));
 		rawlog_ = add_special_ware(table.get_string("rawlog"));
@@ -332,10 +332,6 @@ DescriptionIndex TribeDescr::port() const {
 DescriptionIndex TribeDescr::ferry() const {
 	assert(tribes_.worker_exists(ferry_));
 	return ferry_;
-}
-DescriptionIndex TribeDescr::barracks() const {
-	assert(tribes_.building_exists(barracks_));
-	return barracks_;
 }
 DescriptionIndex TribeDescr::ironore() const {
 	assert(tribes_.ware_exists(ironore_));

@@ -37,9 +37,9 @@
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
 #include "logic/editor_game_base.h"
-#include "logic/findbob.h"
-#include "logic/findnode.h"
 #include "logic/game.h"
+#include "logic/map_objects/findbob.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/requirements.h"
@@ -322,8 +322,8 @@ Warehouse Building
  */
 WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                const LuaTable& table,
-                               const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, egbase),
+                               const Tribes& tribes)
+   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, tribes),
      conquers_(0),
      heal_per_second_(0) {
 	heal_per_second_ = table.get_int("heal_per_second");

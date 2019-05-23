@@ -46,8 +46,8 @@ namespace Widelands {
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
-                                       const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, egbase),
+                                       const Tribes& tribes)
+   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, tribes),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE);  // Yep, this is correct.
@@ -211,11 +211,13 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 
 		worker.pop_task(game);
 		// No more building, so move to the flag
-		worker.start_task_move(game, WALK_SE, worker.descr().get_right_walk_anims(false), true);
+		worker.start_task_move(
+		   game, WALK_SE, worker.descr().get_right_walk_anims(false, &worker), true);
 		worker.set_location(nullptr);
 	} else if (!working_) {
 		work_steptime_ = game.get_gametime() + DISMANTLESITE_STEP_TIME;
-		worker.start_task_idle(game, worker.descr().get_animation("work"), DISMANTLESITE_STEP_TIME);
+		worker.start_task_idle(
+		   game, worker.descr().get_animation("work", &worker), DISMANTLESITE_STEP_TIME);
 
 		working_ = true;
 	}
