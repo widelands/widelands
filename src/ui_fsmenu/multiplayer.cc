@@ -21,7 +21,6 @@
 
 #include "base/i18n.h"
 #include "graphic/text_constants.h"
-#include "network/crypto.h"
 #include "network/internet_gaming.h"
 #include "profile/profile.h"
 #include "random/random.h"
@@ -72,51 +71,28 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 
 /// called if the user is not registered
 void FullscreenMenuMultiPlayer::show_internet_login() {
-	Section& s = g_options.pull_section("global");
 	LoginBox lb(*this);
-	if (lb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-		nickname_ = lb.get_nickname();
-		s.set_string("nickname", nickname_);
-		// NOTE: The password is only stored (in memory and on disk) and transmitted (over the network to the metaserver) as cryptographic hash.
-		// This does NOT mean that the password is stored securely on the local disk.
-		// While the password should be secure while transmitted to the metaserver (no-one can use the transmitted data to log in as the user) this is not the case for local storage.
-		// The stored hash of the password makes it hard to look at the configuration file and figure out the plaintext password to, e.g., log in on the forum.
-		// However, the stored hash can be copied to another system and used to log in as the user on the metaserver.
-		// Further note: SHA-1 is considered broken and shouldn't be used anymore. But since the
-		// passwords on the server are protected by SHA-1 we have to use it here, too
-		if (lb.get_password() != s.get_string("password_sha1", "")) {
-			password_ = crypto::sha1(lb.get_password());
-			s.set_string("password_sha1", password_);
-		}
-
-		register_ = lb.registered();
-		s.set_bool("registered", lb.registered());
-	} else {
-		return;
-	}
-	if (auto_log_) {
+	if (lb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk && auto_log_) {
 		auto_log_ = false;
 		internet_login();
 	}
 }
 
 /**
- * Called if "Internet" button was pressed.
+ * Called if "Online Game" button was pressed.
  *
- * IF autologin is not set, a LoginBox is shown and, if the user clicks on
- * 'login' in it's menu, the data is read from the LoginBox and saved in 'this'
- * so wlapplication can read it.
+ * IF no nickname or a nickname with invalid characters is set, the Online Game Settings
+ * are opened.
  *
- * IF autologin is set, all data is read from the config file and saved.
- * That data will be used for login to the metaserver.
+ * IF at least a name is set, all data is read from the config file
  *
- * In both cases this fullscreen menu ends it's modality.
+ * This fullscreen menu ends it's modality.
  */
 void FullscreenMenuMultiPlayer::internet_login() {
 	Section& s = g_options.pull_section("global");
 
 	nickname_ = s.get_string("nickname", "");
-	password_ = s.get_string("password_sha1", "");
+	password_ = s.get_string("password_sha1", "no_password_set");
 	register_ = s.get_bool("registered", false);
 
 	// Checks can be done directly in editbox' by using valid_username().
@@ -145,7 +121,7 @@ void FullscreenMenuMultiPlayer::internet_login() {
 
 		// Reset InternetGaming and passwort and show internet login again
 		InternetGaming::ref().reset();
-		s.set_string("password_sha1", "");
+		s.set_string("password_sha1", "no_password_set");
 		auto_log_ = true;
 		show_internet_login();
 	}

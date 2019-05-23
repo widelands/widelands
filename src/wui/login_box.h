@@ -50,6 +50,7 @@ private:
 	void clicked_ok();
 	void clicked_register();
 	void verify_input();
+	bool check_password();
 
 	UI::Button* loginbtn;
 	UI::Button* cancelbtn;
