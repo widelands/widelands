@@ -180,8 +180,8 @@ void LoginBox::verify_input() {
 	if (eb_password->has_focus() && eb_password->text() == s.get_string("password_sha1", "")) {
 		eb_password->set_text("");
 	}
-	
-	if (eb_password->text() == s.get_string("password_sha1", "")) {
+
+	if (cb_register->get_state() && eb_password->text() == s.get_string("password_sha1", "")) {
 		loginbtn->set_enabled(false);
 	}
 }
