@@ -962,8 +962,16 @@ void Player::enemyflagaction(Flag& flag,
 			if (const AttackTarget* attack_target = building->attack_target()) {
 				if (attack_target->can_be_attacked()) {
 					for (Soldier* temp_attacker : soldiers) {
-						upcast(MilitarySite, ms, temp_attacker->get_location(egbase()));
-						ms->send_attacker(*temp_attacker, *building);
+						assert(temp_attacker->get_owner() == this);
+						if (upcast(MilitarySite, ms, temp_attacker->get_location(egbase()))) {
+							assert(ms->get_owner() == this);
+							ms->send_attacker(*temp_attacker, *building);
+						} else {
+							// The soldier may not be in a militarysite anymore if he was kicked out
+							// in the short delay between sending and executing a playercommand
+							log("Player(%u)::enemyflagaction: Not sending soldier %u because he deserted\n",
+									player_number(), temp_attacker->serial());
+						}
 					}
 				}
 			}
