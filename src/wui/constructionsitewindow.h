@@ -107,12 +107,7 @@ private:
 	UI::Checkbox* cs_stopped_;
 	FakeWaresDisplay* cs_warehouse_wares_;
 	FakeWaresDisplay* cs_warehouse_workers_;
-	UI::Button* cs_warehouse_stock_policy_normal_;
-	UI::Button* cs_warehouse_stock_policy_prefer_;
-	UI::Button* cs_warehouse_stock_policy_dontstock_;
-	UI::Button* cs_warehouse_stock_policy_remove_;
-	UI::TabPanel* cs_warehouse_tabs_;
-	void change_policy(Widelands::StockPolicy);
+	void change_policy(Widelands::WareWorker, Widelands::StockPolicy);
 
 	DISALLOW_COPY_AND_ASSIGN(ConstructionSiteWindow);
 };

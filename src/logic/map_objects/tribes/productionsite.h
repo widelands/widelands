@@ -335,6 +335,8 @@ private:
 	std::string statistics_string_on_changed_statistics_;
 	std::string production_result_;  // hover tooltip text
 
+	int32_t main_worker_;
+
 	DISALLOW_COPY_AND_ASSIGN(ProductionSite);
 };
 

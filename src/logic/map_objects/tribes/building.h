@@ -331,13 +331,13 @@ public:
 	                  uint32_t throttle_time = 0,
 	                  uint32_t throttle_radius = 0);
 
+	void start_animation(EditorGameBase&, uint32_t anim);
+
 protected:
 	// Updates 'statistics_string' with the string that should be displayed for
 	// this building right now. Overwritten by child classes.
 	virtual void update_statistics_string(std::string*) {
 	}
-
-	void start_animation(EditorGameBase&, uint32_t anim);
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
