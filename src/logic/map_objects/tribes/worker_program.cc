@@ -539,6 +539,9 @@ void WorkerProgram::parse_animate(Worker::Action* act, const std::vector<std::st
 	AnimationParameters parameters = MapObjectProgram::parse_act_animate(cmd, worker_, true);
 
 	act->function = &Worker::run_animate;
+	// If the second parameter to MapObjectDescr::get_animation is ever used for anything other than
+	// level-dependent soldier animations, or we want to write a worker program for a soldier,
+	// we will need to store the animation name as a string in an sparam
 	act->iparam1 = parameters.animation;
 	act->iparam2 = parameters.duration;
 }

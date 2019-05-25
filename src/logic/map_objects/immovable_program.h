@@ -63,6 +63,10 @@ struct ImmovableProgram : public MapObjectProgram {
 	struct ActAnimate : public Action {
 		ActAnimate(const std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
+		uint32_t animation() const {
+			return parameters.animation;
+		}
+
 	private:
 		AnimationParameters parameters;
 	};
@@ -166,7 +170,7 @@ struct ImmovableProgram : public MapObjectProgram {
 		}
 
 	private:
-		uint32_t animid_;
+		std::string animation_name_;
 		Duration buildtime_;
 		Duration decaytime_;
 	};

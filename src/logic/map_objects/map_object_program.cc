@@ -99,7 +99,7 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(const 
 	if (!descr.is_animation_known(animation_name)) {
 		throw GameDataError("Unknown animation '%s'", animation_name.c_str());
 	}
-	result.animation = descr.get_animation(animation_name);
+	result.animation = descr.get_animation(animation_name, nullptr);
 
 	if (arguments.size() == 2) {
 		result.duration = read_positive(arguments.at(1));

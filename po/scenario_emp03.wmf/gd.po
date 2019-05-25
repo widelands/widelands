@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-11 05:49+0000\n"
+"POT-Creation-Date: 2019-05-10 07:32+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -1272,6 +1272,10 @@ msgstr ""
 "romhainn. Gidheadh, tha an cianalas orm. Bheir sinn an cuan oirnn cho luath "
 "’s a ghabhas ach an dìonamaid ar n-Impireachd an aghaidh treubh nan "
 "Tùsanach."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:624
+msgid "Victory"
+msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:625
 msgid ""

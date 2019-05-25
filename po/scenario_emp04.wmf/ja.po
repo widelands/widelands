@@ -1,15 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # tamanegi, 2018
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-28 05:45+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2019-05-10 07:32+0000\n"
+"PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Japanese (https://www.transifex.com/widelands/teams/35159/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -309,6 +310,10 @@ msgid ""
 "war. Let’s see what the future still holds for us."
 msgstr ""
 "神々よ、我々はやり遂げました。与えられた全ての試練を突破し、さらには我々の国より野蛮人を排除したのです。しかし、この勝利も一時のものでしかありません。戦争はまだ始まったばかりなのですから。我々を待つ未来が何であれ、力を尽くして乗り越えてみせましょう。"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:230
+msgid "Victory"
+msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
 msgid ""

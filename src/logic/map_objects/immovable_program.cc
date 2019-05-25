@@ -240,12 +240,11 @@ ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments
 		throw GameDataError("Usage: construct=<animation> <build duration> <decay duration>");
 	}
 	try {
-		const std::string animation_name = arguments[0];
-		if (!descr.is_animation_known(animation_name)) {
+		animation_name_ = arguments[0];
+		if (!descr.is_animation_known(animation_name_)) {
 			throw GameDataError("Unknown animation '%s' in immovable program for immovable '%s'",
-			                    animation_name.c_str(), descr.name().c_str());
+			                    animation_name_.c_str(), descr.name().c_str());
 		}
-		animid_ = descr.get_animation(animation_name);
 
 		buildtime_ = read_positive(arguments[1]);
 		decaytime_ = read_positive(arguments[2]);
@@ -293,7 +292,7 @@ void ImmovableProgram::ActConstruct::execute(Game& g, Immovable& imm) const {
 		d = new ActConstructData;
 		imm.set_action_data(d);
 
-		imm.start_animation(g, animid_);
+		imm.start_animation(g, imm.descr().get_animation(animation_name_, &imm));
 		imm.anim_construction_total_ = imm.descr().buildcost().total();
 	} else {
 		// Perhaps we are called due to the construction timeout of the last construction step

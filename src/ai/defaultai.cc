@@ -52,7 +52,7 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 
-// following is in miliseconds (widelands counts time in ms)
+// following is in milliseconds (widelands counts time in ms)
 constexpr int kFieldInfoExpiration = 12 * 1000;
 constexpr int kMineFieldInfoExpiration = 20 * 1000;
 constexpr int kNewMineConstInterval = 19000;
@@ -517,7 +517,8 @@ void DefaultAI::late_initialization() {
 	for (DescriptionIndex i = 0; i < static_cast<DescriptionIndex>(game().tribes().nrwares()); ++i) {
 		wares.at(i).producers = 0;
 		wares.at(i).consumers = 0;
-		wares.at(i).preciousness = game().tribes().get_ware_descr(i)->preciousness(tribe_->name());
+		wares.at(i).preciousness =
+		   game().tribes().get_ware_descr(i)->ai_hints().preciousness(tribe_->name());
 	}
 
 	const DescriptionIndex& nr_buildings = game().tribes().nrbuildings();
@@ -637,9 +638,6 @@ void DefaultAI::late_initialization() {
 		if (bh.is_space_consumer()) {
 			bo.set_is(BuildingAttribute::kSpaceConsumer);
 		}
-		if (bh.for_recruitment()) {
-			bo.set_is(BuildingAttribute::kRecruitment);
-		}
 		bo.expansion_type = bh.is_expansion_type();
 		bo.fighting_type = bh.is_fighting_type();
 		bo.mountain_conqueror = bh.is_mountain_conqueror();
@@ -658,6 +656,7 @@ void DefaultAI::late_initialization() {
 			bo.set_is(BuildingAttribute::kPort);
 		}
 		bo.max_trainingsites_proportion = 100;
+		bo.initial_preciousness = 0;
 		bo.max_preciousness = 0;
 		bo.max_needed_preciousness = 0;
 
@@ -684,6 +683,26 @@ void DefaultAI::late_initialization() {
 			for (const DescriptionIndex& temp_output : prod.output_ware_types()) {
 				bo.outputs.push_back(temp_output);
 			}
+
+			// Read information about worker outputs
+			if (prod.output_worker_types().size() > 0) {
+				for (const DescriptionIndex& temp_output : prod.output_worker_types()) {
+					if (temp_output == tribe_->soldier()) {
+						bo.set_is(BuildingAttribute::kBarracks);
+					}
+					const WorkerHints* worker_hints = tribe_->get_worker_descr(temp_output)->ai_hints();
+					if (worker_hints != nullptr) {
+						const int worker_preciousness = worker_hints->preciousness(tribe_->name());
+						if (worker_preciousness != Widelands::kInvalidWare) {
+							bo.initial_preciousness += worker_preciousness;
+						}
+					}
+				}
+				if (!bo.is(BuildingAttribute::kBarracks) && bo.outputs.empty()) {
+					bo.set_is(BuildingAttribute::kRecruitment);
+				}
+			}
+
 			for (const auto& temp_position : prod.working_positions()) {
 				bo.positions.push_back(temp_position.first);
 			}
@@ -718,9 +737,6 @@ void DefaultAI::late_initialization() {
 
 			if (bh.is_shipyard()) {
 				bo.set_is(BuildingAttribute::kShipyard);
-			}
-			if (building_index == tribe_->barracks()) {
-				bo.set_is(BuildingAttribute::kBarracks);
 			}
 			// Identify refined log producer
 			if (bo.outputs.size() == 1 && bo.outputs[0] == tribe_->refinedlog()) {
@@ -2489,20 +2505,26 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 			// Now verifying that all 'buildable' buildings has positive max_needed_preciousness
 			// if they have outputs, all other must have zero max_needed_preciousness
-			if ((bo.new_building == BuildingNecessity::kNeeded ||
-			     bo.new_building == BuildingNecessity::kForced ||
-			     bo.new_building == BuildingNecessity::kAllowed ||
-			     bo.new_building == BuildingNecessity::kNeededPending) &&
-			    (!bo.outputs.empty() || bo.is(BuildingAttribute::kBarracks))) {
+
+			if (bo.new_building == BuildingNecessity::kForbidden) {
+				bo.max_needed_preciousness = 0;
+			} else if ((bo.new_building == BuildingNecessity::kNeeded ||
+			            bo.new_building == BuildingNecessity::kForced ||
+			            bo.new_building == BuildingNecessity::kAllowed ||
+			            bo.new_building == BuildingNecessity::kNeededPending) &&
+			           (!bo.outputs.empty() ||
+			            bo.initial_preciousness >
+			               0)) {  // bo.initial_preciousness signals that we have a worker output
+				bo.max_needed_preciousness =
+				   std::max(bo.max_needed_preciousness, bo.initial_preciousness);
+				bo.max_preciousness = std::max(bo.max_preciousness, bo.initial_preciousness);
+
 				if (bo.max_needed_preciousness <= 0) {
-					throw wexception("AI: Max presciousness must not be <= 0 for building: %s",
+					throw wexception("AI: Max preciousness must not be <= 0 for building: %s",
 					                 bo.desc->name().c_str());
 				}
-			} else if (bo.new_building == BuildingNecessity::kForbidden) {
-				bo.max_needed_preciousness = 0;
 			} else {
 				// For other situations we make sure max_needed_preciousness is zero
-
 				assert(bo.max_needed_preciousness == 0);
 			}
 
@@ -2965,7 +2987,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 
 				} else if (bo.is(BuildingAttribute::kRecruitment)) {
-					bo.max_needed_preciousness = 2;
 					prio += bo.primary_priority;
 					prio -= bf->unowned_land_nearby * 2;
 					prio -= (bf->enemy_nearby) * 100;
@@ -4487,7 +4508,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		       gametime &&
 		    site.site->can_start_working() &&
 		    get_stocklevel(*site.bo, gametime) >
-		       (std::abs(management_data.get_military_number_at(168)) / 5)) {
+		       static_cast<unsigned int>(
+		          (std::abs(management_data.get_military_number_at(168)) / 5))) {
 
 			if (connected_to_wh) {
 				game().send_player_dismantle(*site.site);
@@ -4980,42 +5002,41 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	// Let deal with productionsites now
 	// First we iterate over outputs of building, count warehoused stock
 	// and deciding if we have enough on stock (in warehouses)
-	bo.max_preciousness = 0;
-	bo.max_needed_preciousness = 0;
 
-	if (!bo.is(BuildingAttribute::kBarracks)) {  // barracks are now excluded from calculation
-		// preciousness is assigned below in this fuction
-		for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
-			DescriptionIndex wt(static_cast<size_t>(bo.outputs.at(m)));
+	// Calulate preciousness
+	bo.max_preciousness = bo.initial_preciousness;
+	bo.max_needed_preciousness = bo.initial_preciousness;
+	for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
+		DescriptionIndex wt(static_cast<size_t>(bo.outputs.at(m)));
 
-			uint16_t target = tribe_->get_ware_descr(wt)->default_target_quantity(tribe_->name());
-			if (target == Widelands::kInvalidWare) {
-				target = kTargetQuantCap;
+		uint16_t target = tribe_->get_ware_descr(wt)->default_target_quantity(tribe_->name());
+		if (target == Widelands::kInvalidWare) {
+			target = kTargetQuantCap;
+		}
+		target /= 3;
+
+		// at least  1
+		target = std::max<uint16_t>(target, 1);
+
+		// it seems there are wares with 0 preciousness (no entry in init files?), but we need
+		// positive value here.
+		// TODO(GunChleoc): Since we require in Tribes::postload() that this is set for all wares used
+		// by a tribe, something seems to be wrong here. It should always be > 0.
+		const uint16_t preciousness = std::max<uint16_t>(wares.at(bo.outputs.at(m)).preciousness, 1);
+
+		if (calculate_stocklevel(wt) < target ||
+		    site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) {
+			if (bo.max_needed_preciousness < preciousness) {
+				bo.max_needed_preciousness = preciousness;
 			}
-			target /= 3;
-
-			// at least  1
-			target = std::max<uint16_t>(target, 1);
-
-			// it seems there are wares with 0 preciousness (no entry in init files?), but we need
-			// positive value here.
-			const uint16_t preciousness =
-			   std::max<uint16_t>(wares.at(bo.outputs.at(m)).preciousness, 1);
-
-			if (calculate_stocklevel(wt) < target ||
-			    site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) {
-				if (bo.max_needed_preciousness < preciousness) {
-					bo.max_needed_preciousness = preciousness;
-				}
-				if (site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) {
-					bo.max_needed_preciousness +=
-					   std::abs(management_data.get_military_number_at(144)) / 10;
-				}
+			if (site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) {
+				bo.max_needed_preciousness +=
+				   std::abs(management_data.get_military_number_at(144)) / 10;
 			}
+		}
 
-			if (bo.max_preciousness < preciousness) {
-				bo.max_preciousness = preciousness;
-			}
+		if (bo.max_preciousness < preciousness) {
+			bo.max_preciousness = preciousness;
 		}
 	}
 
@@ -5102,12 +5123,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		}
 
 		if (bo.forced_after < gametime && bo.total_count() == 0 && !has_substitution_building) {
-			if (!bo.is(BuildingAttribute::kBarracks)) {
-				bo.max_needed_preciousness = bo.max_preciousness;
-			} else {
-				// barracks has no genuine preciousness as of now
-				bo.max_needed_preciousness = 5;
-			}
+			bo.max_needed_preciousness = bo.max_preciousness;
 			return BuildingNecessity::kForced;
 		} else if (bo.prohibited_till > gametime) {
 			return BuildingNecessity::kForbidden;
@@ -5417,7 +5433,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				bo.max_preciousness = bo.max_needed_preciousness;
 				return BuildingNecessity::kNeeded;
 			} else {
-				assert(bo.max_needed_preciousness == 0);
+				bo.max_needed_preciousness = 0;
+				bo.max_preciousness = 0;
 				return BuildingNecessity::kForbidden;
 			}
 		} else if (bo.type == BuildingObserver::Type::kMine) {
@@ -5829,7 +5846,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kNeeded;
 		} else if (bo.inputs.size() == 1 &&
 		           calculate_stocklevel(static_cast<size_t>(bo.inputs.at(0))) >
-		              std::abs(management_data.get_military_number_at(171))) {
+		              static_cast<unsigned int>(
+		                 std::abs(management_data.get_military_number_at(171)))) {
 			return BuildingNecessity::kNeeded;
 		} else {
 			return BuildingNecessity::kNotNeeded;

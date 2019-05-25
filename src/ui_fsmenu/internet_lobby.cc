@@ -78,7 +78,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
      hostgame_(this,
                "host_game",
                get_w() * 17 / 25,
-               get_h() * 81 / 100,
+               get_h() * 73 / 100,
                butw_,
                buth_,
                UI::ButtonStyle::kFsMenuSecondary,
@@ -90,7 +90,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
            butw_,
            buth_,
            UI::ButtonStyle::kFsMenuSecondary,
-           _("Back")),
+           _("Leave Lobby")),
 
      // Edit boxes
      edit_servername_(
