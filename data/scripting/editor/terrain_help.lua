@@ -20,9 +20,14 @@ return {
       if (#valid_resources > 0) then
          result = result .. h2(_"Resources")
          if (#valid_resources > 0) then
-            -- TRANSLATORS: A header in the editor help
-            result = result .. h3(ngettext(
-               "Valid Resource:", "Valid Resources:", #valid_resources))
+            if (#valid_resources == 1) then
+               -- TRANSLATORS: A header in the editor help if there is 1 valid resource
+               result = result .. h3(_"Valid Resource:")
+            else
+               -- TRANSLATORS: A header in the editor help if there is more than 1 valid resource
+               result = result .. h3(_"Valid Resources:")
+            end
+
             for count, resource in pairs(valid_resources) do
                result = result .. li_image(
                   resource.representative_image, resource.descname)

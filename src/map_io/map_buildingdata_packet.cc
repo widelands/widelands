@@ -93,9 +93,9 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 					if (fr.unsigned_8()) {
 						char const* const animation_name = fr.c_string();
 						try {
-							building.anim_ = building.descr().get_animation(animation_name);
+							building.anim_ = building.descr().get_animation(animation_name, &building);
 						} catch (const GameDataError& e) {
-							building.anim_ = building.descr().get_animation("idle");
+							building.anim_ = building.descr().get_animation("idle", &building);
 							log("Warning: Tribe %s building: %s, using animation %s instead.\n",
 							    building.owner().tribe().name().c_str(), e.what(),
 							    building.descr().get_animation_name(building.anim_).c_str());

@@ -19,7 +19,9 @@
 
 #include "ui_basic/editbox.h"
 
+#include <algorithm>
 #include <limits>
+#include <string>
 
 #include <SDL_keycode.h>
 #include <boost/format.hpp>
@@ -91,6 +93,7 @@ EditBox::EditBox(Panel* const parent,
 	 m_(new EditBoxImpl(g_gr->styles().editbox_style(style))),
      history_active_(false),
      history_position_(-1),
+     password_(false),
      warning_(false) {
 	set_thinks(false);
 
@@ -407,7 +410,7 @@ void EditBox::draw(RenderTarget& dst) {
 	FontStyleInfo scaled_style(*m_->font_style);
 	scaled_style.set_size(scaled_style.size() * m_->font_scale);
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh->render(as_editor_richtext_paragraph(m_->text, scaled_style));
+	   UI::g_fh->render(as_editor_richtext_paragraph(password_ ? text_to_asterisk() : m_->text, scaled_style));
 
 	const int linewidth = rendered_text->width();
 	const int lineheight = m_->text.empty() ? text_height(scaled_style) : rendered_text->height();
@@ -432,7 +435,8 @@ void EditBox::draw(RenderTarget& dst) {
 			if (m_->align == UI::Align::kRight) {
 				// TODO(GunChleoc): Arabic: Fix scrolloffset
 				rendered_text->draw(
-				   dst, point, Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
+				   dst, point,
+				   Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
 			} else {
 				rendered_text->draw(dst, point, Recti(-m_->scrolloffset, 0, max_width, lineheight));
 			}
@@ -443,7 +447,14 @@ void EditBox::draw(RenderTarget& dst) {
 
 	if (has_focus()) {
 		// Draw the caret
-		std::string line_to_caret = m_->text.substr(0, m_->caret);
+		std::string line_to_caret;
+
+		if (password_) {
+			line_to_caret = text_to_asterisk().substr(0, m_->caret);
+		} else {
+			line_to_caret = m_->text.substr(0, m_->caret);
+		}
+
 		// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
 		int caret_x = text_width(line_to_caret, *m_->font_style, m_->font_scale);
 
@@ -489,5 +500,16 @@ void EditBox::check_caret() {
 		if (m_->scrolloffset < 0)
 			m_->scrolloffset = 0;
 	}
+}
+
+/**
+ * Return text as asterisks.
+ */
+std::string EditBox::text_to_asterisk() {
+	std::string asterisk;
+	for (int i = 0; i < int(m_->text.size()); i++) {
+		asterisk.append("*");
+	}
+	return asterisk;
 }
 }  // namespace UI

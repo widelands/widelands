@@ -25,4 +25,10 @@ tribes:new_carrier_type {
    ware_hotspot = { -2, 13 },
 
    animations = animations,
+
+   aihints = {
+      preciousness = {
+         barbarians = 2
+      },
+   }
 }

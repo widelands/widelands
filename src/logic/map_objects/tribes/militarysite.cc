@@ -126,7 +126,8 @@ int MilitarySite::SoldierControl::incorporate_soldier(EditorGameBase& egbase, So
 	if (!military_site_->didconquer_) {
 		military_site_->conquer_area(egbase);
 		// Building is now occupied - idle animation should be played
-		military_site_->start_animation(egbase, military_site_->descr().get_animation("idle"));
+		military_site_->start_animation(
+		   egbase, military_site_->descr().get_animation("idle", military_site_));
 
 		if (upcast(Game, game, &egbase)) {
 			military_site_->send_message(
@@ -829,7 +830,7 @@ void MilitarySite::reinit_after_conqueration(Game& game) {
 	clear_requirements();
 	conquer_area(game);
 	update_soldier_request();
-	start_animation(game, descr().get_animation("idle"));
+	start_animation(game, descr().get_animation("idle", this));
 
 	// feature request 1247384 in launchpad bugs: Conquered buildings tend to
 	// be in a hostile area; typically players want heroes there.

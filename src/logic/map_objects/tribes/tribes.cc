@@ -34,7 +34,8 @@ Tribes::Tribes()
      ships_(new DescriptionMaintainer<ShipDescr>()),
      wares_(new DescriptionMaintainer<WareDescr>()),
      workers_(new DescriptionMaintainer<WorkerDescr>()),
-     tribes_(new DescriptionMaintainer<TribeDescr>()) {
+     tribes_(new DescriptionMaintainer<TribeDescr>()),
+     largest_workarea_(0) {
 }
 
 void Tribes::add_constructionsite_type(const LuaTable& table) {
@@ -314,8 +315,14 @@ void Tribes::load_graphics() {
 }
 
 void Tribes::postload() {
+	largest_workarea_ = 0;
 	for (DescriptionIndex i = 0; i < buildings_->size(); ++i) {
 		BuildingDescr& building_descr = *buildings_->get_mutable(i);
+
+		// Calculate largest possible workarea radius
+		for (const auto& pair : building_descr.workarea_info()) {
+			largest_workarea_ = std::max(largest_workarea_, pair.first);
+		}
 
 		// Add consumers and producers to wares.
 		if (upcast(ProductionSiteDescr, de, &building_descr)) {
@@ -350,7 +357,8 @@ void Tribes::postload() {
 
 		// Verify that the preciousness has been set for all of the tribe's wares
 		for (const DescriptionIndex wi : tribe_descr->wares()) {
-			if (tribe_descr->get_ware_descr(wi)->preciousness(tribe_descr->name()) == kInvalidWare) {
+			if (tribe_descr->get_ware_descr(wi)->ai_hints().preciousness(tribe_descr->name()) ==
+			    kInvalidWare) {
 				throw GameDataError("The ware '%s' needs to define a preciousness for tribe '%s'",
 				                    tribe_descr->get_ware_descr(wi)->name().c_str(),
 				                    tribe_descr->name().c_str());
@@ -425,4 +433,7 @@ void Tribes::postload_calculate_trainingsites_proportions() {
 	}
 }
 
+uint32_t Tribes::get_largest_workarea() const {
+	return largest_workarea_;
+}
 }  // namespace Widelands
