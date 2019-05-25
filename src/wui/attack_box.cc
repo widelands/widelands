@@ -246,9 +246,6 @@ void AttackBox::init() {
 		mainbox.add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
 
-	current_soldier_stats_.reset(new UI::Textarea(&mainbox, "", UI::Align::kCenter));
-	mainbox.add(current_soldier_stats_.get(), UI::Box::Resizing::kFullSize, UI::Align::kCenter);
-
 	soldiers_slider_->set_enabled(max_attackers > 0);
 	more_soldiers_->set_enabled(max_attackers > 0);
 }
@@ -322,20 +319,19 @@ bool AttackBox::ListOfSoldiers::handle_mousepress(uint8_t btn, int32_t x, int32_
 }
 
 void AttackBox::ListOfSoldiers::handle_mousein(bool) {
-	attack_box_->set_soldier_info_text();
+	set_tooltip(std::string());
 }
 
 bool AttackBox::ListOfSoldiers::handle_mousemove(uint8_t, int32_t x, int32_t y, int32_t, int32_t) {
 	if (const Widelands::Soldier* soldier = soldier_at(x, y)) {
-		attack_box_->set_soldier_info_text(
-		   (boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
-		    soldier->get_health_level() % soldier->descr().get_max_health_level() %
-		    soldier->get_attack_level() % soldier->descr().get_max_attack_level() %
-		    soldier->get_defense_level() % soldier->descr().get_max_defense_level() %
-		    soldier->get_evade_level() % soldier->descr().get_max_evade_level())
-		      .str());
+		set_tooltip((boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
+		             soldier->get_health_level() % soldier->descr().get_max_health_level() %
+		             soldier->get_attack_level() % soldier->descr().get_max_attack_level() %
+		             soldier->get_defense_level() % soldier->descr().get_max_defense_level() %
+		             soldier->get_evade_level() % soldier->descr().get_max_evade_level())
+		               .str());
 	} else {
-		attack_box_->set_soldier_info_text();
+		set_tooltip(std::string());
 	}
 	return true;
 }

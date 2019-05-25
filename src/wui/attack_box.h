@@ -55,9 +55,6 @@ struct AttackBox : public UI::Box {
 
 	size_t count_soldiers() const;
 	std::vector<Widelands::Serial> soldiers() const;
-	void set_soldier_info_text(std::string text = "") {
-		current_soldier_stats_->set_text(text);
-	}
 
 	UI::Button* get_attack_button() const {
 		return attack_button_.get();
@@ -161,7 +158,6 @@ private:
 
 	std::unique_ptr<ListOfSoldiers> attacking_soldiers_;
 	std::unique_ptr<ListOfSoldiers> remaining_soldiers_;
-	std::unique_ptr<UI::Textarea> current_soldier_stats_;
 	std::unique_ptr<UI::Button> attack_button_;
 
 	/// The last time the information in this Panel got updated
