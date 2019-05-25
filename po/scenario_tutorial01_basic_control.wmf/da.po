@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
-# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017
+# Joe Hansen <joedalton2@yahoo.dk>, 2015-2017,2019
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:29+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-04-22 05:17+0000\n"
+"PO-Revision-Date: 2019-04-24 21:04+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,18 +82,18 @@ msgstr "Du starter normalt spillet med et hovedkvarter. Dette er den store bygni
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show building spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Vi skal bruge et godt sted til skovhuggerhytten. For at gøre det nemmere kan vi aktivere »Vis byggepladser«. Der er to måder, du kan udføre dette på:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Press the Space bar to toggle them, or"
-msgstr ""
+msgstr "Tryk på mellemrum for at aktivere, eller"
 
 #. TRANSLATORS: List item. Has an image of the button next to it.
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:45
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "click the ‘Show building spaces’ button on the bottom of the screen."
-msgstr ""
+msgstr "klik på knappen »Vis byggepladser« i bunden af skærmen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -115,7 +115,7 @@ msgstr "Det er nemmere at forstå hvilke bygningstyper, der kan bygges på hvilk
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid "Right-click on this window now and then give it a try."
-msgstr ""
+msgstr "Højreklik på dette vindue nu og prøv det."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 msgid "Lumberjack’s Spot"
@@ -276,7 +276,7 @@ msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr ""
+msgstr "Hvis du klikker på byggepladsen, bliver et vindue åbnet. Du kan se varerne, som stadig mangler, med gråt. Du kan også se status for denne byggeplads."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:160
 msgid ""
@@ -439,10 +439,10 @@ msgstr "Byg et stenbrud ved siden af disse sten. Kan du huske hvordan jeg gjorde
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
-"space were you want the building to be, choose it from the window that "
+"space where you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
-msgstr "Sikr dig at du har vist byggepladserne, så klikker du bare på et punkt, hvor du ønsker bygningen skal være, vælg den fra vinduet som kommer frem og bygningen er placeret. Måske er dette et godt tidspunkt at forklare lidt om alle disse bygningssymboler vi aktiverede tidligere."
+msgstr "Sikr dig, at du har vist byggepladserne, så klikker du bare på et punkt, hvor du ønsker bygningen skal være, vælg den fra vinduet som kommer frem og bygningen er placeret. Måske er dette et godt tidspunkt at forklare lidt om alle disse bygningssymboler vi aktiverede tidligere."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:241
 msgid ""
@@ -600,14 +600,14 @@ msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as"
 " many flags as you can on road segments to share the load better."
-msgstr ""
+msgstr "Husk på hældningerne når du placerer veje og brug dem til din fordel. Prøv desuden at holde vejene så korte som muligt og husk altid at placere så mange flag som du kan på vejsegmenterne for at fordele belastningen bedre."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:305
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:315
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr ""
+msgstr "Hvis du holder Ctrl eller Skift+Ctrl ned mens du gør vejen færdig, bliver flagene placeret automatisk."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Now please rebuild the road between your quarry and your headquarters."

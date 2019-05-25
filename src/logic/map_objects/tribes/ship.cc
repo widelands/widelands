@@ -34,10 +34,10 @@
 #include "graphic/text_constants.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/findbob.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/map_objects/findbob.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -275,7 +275,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 	case ShipStates::kSinkRequest:
 		if (descr().is_animation_known("sinking")) {
 			ship_state_ = ShipStates::kSinkAnimation;
-			start_task_idle(game, descr().get_animation("sinking"), 3000);
+			start_task_idle(game, descr().get_animation("sinking", this), 3000);
 			return;
 		}
 		log("Oh no... this ship has no sinking animation :(!\n");

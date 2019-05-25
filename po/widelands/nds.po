@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-05 04:54+0000\n"
-"PO-Revision-Date: 2019-04-08 12:42+0000\n"
+"POT-Creation-Date: 2019-04-22 05:17+0000\n"
+"PO-Revision-Date: 2019-04-29 17:58+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -1111,7 +1111,7 @@ msgstr "Enerwaar in de Naam vun de Datei staht %s"
 #: ../../src/io/filesystem/filesystem.cc:221
 msgctxt "illegal_filename_characters"
 msgid "The following characters are not allowed:"
-msgstr "Disse Bookstaven sünd nich verlövt:"
+msgstr "Deese Bookstaven sünd nich verlöövt:"
 
 #: ../../src/logic/editor_game_base.cc:318
 msgid "Loading graphics"
@@ -1352,9 +1352,9 @@ msgstr "de Wirtschaft bruukt de Arbeider »%s« nich"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/map_objects/tribes/production_program.cc:387
 #: ../../src/logic/map_objects/tribes/production_program.cc:413
-#: ../../src/logic/map_objects/tribes/production_program.cc:874
-#: ../../src/logic/map_objects/tribes/production_program.cc:980
-#: ../../src/logic/map_objects/tribes/production_program.cc:1062
+#: ../../src/logic/map_objects/tribes/production_program.cc:891
+#: ../../src/logic/map_objects/tribes/production_program.cc:997
+#: ../../src/logic/map_objects/tribes/production_program.cc:1079
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$i×%2$s"
@@ -1396,25 +1396,26 @@ msgstr "de Arbeiders bruken keene Erfahrung"
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:544
-#: ../../src/logic/map_objects/tribes/production_program.cc:898
+#: ../../src/logic/map_objects/tribes/production_program.cc:545
+#: ../../src/logic/map_objects/tribes/production_program.cc:915
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Hett nich begunnen, %1$s, denn %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:549
+#: ../../src/logic/map_objects/tribes/production_program.cc:551
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "Hett %1$s daankregen, denn %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:554
+#: ../../src/logic/map_objects/tribes/production_program.cc:557
+#: ../../src/logic/map_objects/tribes/production_program.cc:563
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "Hett %1$s översprungen, denn %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:745
+#: ../../src/logic/map_objects/tribes/production_program.cc:762
 msgid "No use for ships on this map!"
 msgstr "Up deese Kaart bruukt man keene Schippen!"
 
@@ -1422,7 +1423,7 @@ msgstr "Up deese Kaart bruukt man keene Schippen!"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:884
+#: ../../src/logic/map_objects/tribes/production_program.cc:901
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1432,7 +1433,7 @@ msgstr[1] "dat hapert an %s"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:991
+#: ../../src/logic/map_objects/tribes/production_program.cc:1008
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1442,19 +1443,19 @@ msgstr[1] "%s sünd produzeert worden"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1073
+#: ../../src/logic/map_objects/tribes/production_program.cc:1090
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "%s is anhüürt worden"
 msgstr[1] "%s sünd anhüürt worden"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1280
+#: ../../src/logic/map_objects/tribes/production_program.cc:1297
 msgid "No soldier to train!"
 msgstr "Keen Soldat tum utbilden!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1289
-#: ../../src/logic/map_objects/tribes/production_program.cc:1367
+#: ../../src/logic/map_objects/tribes/production_program.cc:1306
+#: ../../src/logic/map_objects/tribes/production_program.cc:1383
 msgid "No soldier found for this training level!"
 msgstr "Keen Soldat för deese Lehre is funden worden!"
 
@@ -1480,7 +1481,7 @@ msgstr "(stoppt)"
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:969
+#: ../../src/logic/map_objects/tribes/productionsite.cc:970
 msgid "Can’t find any more resources!"
 msgstr "Kann keene Mineraale mehr finnen!"
 
@@ -1754,12 +1755,12 @@ msgstr "Vum Weert trennt"
 
 #: ../../src/network/gamehost.cc:258
 msgid "Available host commands are:"
-msgstr "Disse Befehlen kannst du de Weert geven:"
+msgstr "Deese Befehlen kannst du de Weert geven:"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:260
 msgid "/help  -  Shows this help"
-msgstr "/help – Wiest disse Hülp"
+msgstr "/help – Wiest deese Hülp"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:262
@@ -2150,7 +2151,7 @@ msgstr "De Server bruukt eene annere Versioon vun de Protokoll"
 #: ../../src/network/network_gaming_messages.cc:142
 #, c-format
 msgid "Received command number %s, which is not allowed in this state."
-msgstr "Hebb Befehl Nummer %s kregen, wat in disse Tostand nich verlöövt is."
+msgstr "Hebb Befehl Nummer %s kregen, wat in deesem Tostand nich verlöövt is."
 
 #: ../../src/network/network_gaming_messages.cc:145
 msgid "Client reports time to host that is running backwards."

@@ -72,6 +72,10 @@ struct EditBox : public Panel {
 
 	void draw(RenderTarget&) override;
 
+	void set_warning(bool warn) {
+		warning_ = warn;
+	}
+
 private:
 	std::unique_ptr<EditBoxImpl> m_;
 
@@ -80,6 +84,7 @@ private:
 	bool history_active_;
 	int16_t history_position_;
 	std::string history_[CHAT_HISTORY_SIZE];
+	bool warning_;
 };
 }  // namespace UI
 
