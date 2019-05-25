@@ -286,7 +286,6 @@ void GameClient::run() {
 		if (d->internet_) {
 			InternetGaming::ref().logout("CLIENT_CRASHED");
 		}
-		d->modal = nullptr;
 		throw;
 	}
 }
@@ -1094,6 +1093,6 @@ void GameClient::disconnect(const std::string& reason,
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a double free.
 	if (d->modal) {
 		d->modal->end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
-		d->modal = nullptr;
 	}
+	d->modal = nullptr;
 }
