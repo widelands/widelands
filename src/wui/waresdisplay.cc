@@ -99,14 +99,14 @@ Widelands::Extent AbstractWaresDisplay::get_extent() const {
 	return Widelands::Extent(columns, rows);
 }
 
-void AbstractWaresDisplay::set_hgap(int32_t gap) {
+void AbstractWaresDisplay::set_hgap(int32_t gap, bool relayout) {
 	hgap_ = gap;
-	recalc_desired_size(true);
+	recalc_desired_size(relayout);
 }
 
-void AbstractWaresDisplay::set_vgap(int32_t gap) {
+void AbstractWaresDisplay::set_vgap(int32_t gap, bool relayout) {
 	vgap_ = gap;
-	recalc_desired_size(true);
+	recalc_desired_size(relayout);
 }
 
 void AbstractWaresDisplay::recalc_desired_size(bool relayout) {
@@ -117,8 +117,8 @@ void AbstractWaresDisplay::recalc_desired_size(bool relayout) {
 
 	// 25 is height of curware_ text
 	set_desired_size(
-	   size.w * (kWareMenuPicWidth + hgap_) + 1,
-	   size.h * (kWareMenuPicHeight + kWareMenuInfoSize + vgap_) + 1 + 25);
+	   size.w * (kWareMenuPicWidth + hgap_) - hgap_ + 5,
+	   size.h * (kWareMenuPicHeight + kWareMenuInfoSize + vgap_) - vgap_ + 1 + 25);
 
 	if (relayout) {
 		// Since we are usually stacked deep within other panels, we need to tell our highest parent window to relayout

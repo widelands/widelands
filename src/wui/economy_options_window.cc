@@ -38,10 +38,6 @@ static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png
 
 constexpr int kDesiredWidth = 216;
 
-static inline int32_t calc_hgap(int32_t columns, int32_t total_w) {
-	return (total_w - columns * kWareMenuPicWidth) / (columns - 1);
-}
-
 EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
                                            Widelands::Economy* economy,
                                            bool can_act)
@@ -165,7 +161,7 @@ void EconomyOptionsWindow::layout() {
 }
 
 void EconomyOptionsWindow::EconomyOptionsPanel::update_desired_size() {
-	display_.set_hgap(std::max(3, calc_hgap(display_.get_extent().w, kDesiredWidth)));
+	display_.set_hgap(AbstractWaresDisplay::calc_hgap(display_.get_extent().w, kDesiredWidth));
 	Box::update_desired_size();
 	get_parent()->layout();
 }
@@ -233,7 +229,7 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
      economy_options_window_(eco_window) {
 	add(&display_, UI::Box::Resizing::kFullSize);
 
-	display_.set_hgap(std::max(3, calc_hgap(display_.get_extent().w, min_w)));
+	display_.set_hgap(AbstractWaresDisplay::calc_hgap(display_.get_extent().w, min_w));
 
 	if (!can_act_) {
 		return;

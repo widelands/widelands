@@ -86,14 +86,18 @@ public:
 	int32_t get_vgap() {
 		return vgap_;
 	}
-	void set_hgap(int32_t);
-	void set_vgap(int32_t);
+	void set_hgap(int32_t, bool = true);
+	void set_vgap(int32_t, bool = true);
 
 	Widelands::Extent get_extent() const;
 
 	const WaresOrderCoords& icons_order_coords() const;
 	Widelands::DescriptionIndex ware_at_coords(int16_t x, int16_t y) const;
 	uint16_t column_length(int16_t) const;
+
+	static inline int32_t calc_hgap(int32_t columns, int32_t total_w, int32_t min = 3) {
+		return std::max(min, (total_w - columns * kWareMenuPicWidth) / (columns - 1));
+	}
 
 protected:
 	void layout() override;
