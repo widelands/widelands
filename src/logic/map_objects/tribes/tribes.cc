@@ -367,6 +367,18 @@ void Tribes::postload() {
 void Tribes::postload_register_economy_demand_checks(BuildingDescr& building_descr, const TribeDescr& tribe_descr)
 {
 	if (upcast(ProductionSiteDescr, prodsite, &building_descr)) {
+		// NOCOM
+		/*
+		 * ==13563==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000018 (pc 0x560937711e91 bp 0x7ffebb10c970 sp 0x7ffebb10c8e0 T0)
+==13563==The signal is caused by a READ memory access.
+==13563==Hint: address points to the zero page.
+    #0 0x560937711e90 in std::_Rb_tree<unsigned char, unsigned char, std::_Identity<unsigned char>, std::less<unsigned char>, std::allocator<unsigned char> >::begin() const /usr/include/c++/7/bits/stl_tree.h:965
+    #1 0x56093770d6c5 in std::set<unsigned char, std::less<unsigned char>, std::allocator<unsigned char> >::begin() const /usr/include/c++/7/bits/stl_set.h:335
+    #2 0x560937e6cae4 in Widelands::Tribes::postload_register_economy_demand_checks(Widelands::BuildingDescr&, Widelands::TribeDescr const&) ../src/logic/map_objects/tribes/tribes.cc:370
+    #3 0x560937e6c56e in Widelands::Tribes::postload() ../src/logic/map_objects/tribes/tribes.cc:351
+    #4 0x5609376e303b in Widelands::EditorGameBase::postload() ../src/logic/editor_game_base.cc:295
+    #5 0x560937529543 in MainMenuNewRandomMap::clicked_create_map() ../src/editor/ui_menus/main_menu_random_map.cc:562
+  */
 		for (const DescriptionIndex ware_index : *prodsite->ware_demand_checks()) {
 			if (!tribe_descr.has_ware(ware_index)) {
 				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check for ware '%s', but the tribe does not use this ware",
