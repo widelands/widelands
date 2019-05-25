@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-11 05:49+0000\n"
+"POT-Creation-Date: 2019-05-10 07:32+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -347,6 +347,10 @@ msgstr ""
 "dùbhlan uile a chaidh a chur romhainn. Fhuadaich sinn fiù ’s na Tùsanaich às"
 " ar dùthaich. Gidheadh, chan e ach buaidh shealadach a tha sin o nach eil an"
 " cogadh ach dìreach air a thòiseachadh. Chì sinn na bhios romhainn fhathast."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:230
+msgid "Victory"
+msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
 msgid ""
