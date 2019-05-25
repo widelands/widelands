@@ -63,7 +63,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
      // Text labels
      title(this, get_w() / 2, get_h() / 20, _("Metaserver Lobby"), UI::Align::kCenter),
      clients_(this, get_w() * 4 / 125, get_h() * 15 / 100, _("Clients online:")),
-     opengames_(this, get_w() * 17 / 25, get_h() * 15 / 100, _("List of games:")),
+     opengames_(this, get_w() * 17 / 25, get_h() * 15 / 100, _("Open Games:")),
      servername_(this, get_w() * 17 / 25, get_h() * 63 / 100, _("Name of your server:")),
 
      // Buttons
@@ -78,7 +78,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
      hostgame_(this,
                "host_game",
                get_w() * 17 / 25,
-               get_h() * 81 / 100,
+               get_h() * 73 / 100,
                butw_,
                buth_,
                UI::ButtonStyle::kFsMenuSecondary,
@@ -90,7 +90,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
            butw_,
            buth_,
            UI::ButtonStyle::kFsMenuSecondary,
-           _("Back")),
+           _("Leave Lobby")),
 
      // Edit boxes
      edit_servername_(
@@ -198,6 +198,9 @@ void FullscreenMenuInternetLobby::think() {
 	if (!chat.has_focus()) {
 		chat.unfocus_edit();
 	}
+	if (edit_servername_.has_focus()) {
+		change_servername();
+	}
 }
 
 void FullscreenMenuInternetLobby::clicked_ok() {
@@ -225,26 +228,22 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 	hostgame_.set_enabled(true);
 	joingame_.set_enabled(false);
 	std::string localservername = edit_servername_.text();
+	std::string localbuildid = build_id();
 
 	if (games != nullptr) {  // If no communication error occurred, fill the list.
 		for (const InternetGame& game : *games) {
 			const Image* pic;
-			if (game.connectable) {
-				if (game.build_id == build_id())
-					pic = g_gr->images().get("images/ui_basic/continue.png");
-				else {
-					pic = g_gr->images().get("images/ui_basic/different.png");
-				}
-			} else {
-				pic = g_gr->images().get("images/ui_basic/stop.png");
+			if (game.connectable == INTERNET_GAME_SETUP && game.build_id == localbuildid) {
+				// only clients with the same build number are displayed
+				pic = g_gr->images().get("images/ui_basic/continue.png");
+				opengames_list_.add(game.name, game, pic, false, game.build_id);
+			} else if (game.connectable == INTERNET_GAME_SETUP &&
+			           game.build_id.compare(0, 6, "build-") != 0 &&
+			           localbuildid.compare(0, 6, "build-") != 0) {
+				// only development clients are allowed to see games openend by such
+				pic = g_gr->images().get("images/ui_basic/different.png");
+				opengames_list_.add(game.name, game, pic, false, game.build_id);
 			}
-			// If one of the servers has the same name as the local name of the
-			// clients server, we disable the 'hostgame' button to avoid having more
-			// than one server with the same name.
-			if (game.name == localservername) {
-				hostgame_.set_enabled(false);
-			}
-			opengames_list_.add(game.name, game, pic, false, game.build_id);
 		}
 	}
 }
@@ -341,10 +340,8 @@ void FullscreenMenuInternetLobby::server_selected() {
 	// remove focus from chat
 	if (opengames_list_.has_selection()) {
 		const InternetGame* game = &opengames_list_.get_selected();
-		if (game->connectable)
+		if (game->connectable == INTERNET_GAME_SETUP)
 			joingame_.set_enabled(true);
-		else
-			joingame_.set_enabled(false);
 	}
 }
 
@@ -353,7 +350,7 @@ void FullscreenMenuInternetLobby::server_doubleclicked() {
 	// if the game is open try to connect it, if not do nothing.
 	if (opengames_list_.has_selection()) {
 		const InternetGame* game = &opengames_list_.get_selected();
-		if (game->connectable)
+		if (game->connectable == INTERNET_GAME_SETUP)
 			clicked_joingame();
 	}
 }
@@ -362,7 +359,8 @@ void FullscreenMenuInternetLobby::server_doubleclicked() {
 void FullscreenMenuInternetLobby::change_servername() {
 	// Allow client to enter a servername manually
 	hostgame_.set_enabled(true);
-
+	edit_servername_.set_tooltip("");
+	edit_servername_.set_warning(false);
 	// Check whether a server of that name is already open.
 	// And disable 'hostgame' button if yes.
 	const std::vector<InternetGame>* games = InternetGaming::ref().games();
@@ -370,6 +368,13 @@ void FullscreenMenuInternetLobby::change_servername() {
 		for (const InternetGame& game : *games) {
 			if (game.name == edit_servername_.text()) {
 				hostgame_.set_enabled(false);
+				edit_servername_.set_warning(true);
+				edit_servername_.set_tooltip(
+				   (boost::format(
+				       _("The game %s is already running. Please choose a different name.")) %
+				    (boost::format("%s%s%s%s%s") % "<font bold=1 color=" %
+				     UI_FONT_CLR_WARNING.hex_value() % ">" % game.name % "</font>"))
+				      .str());
 			}
 		}
 	}
@@ -415,10 +420,22 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 	// Save selected servername as default for next time and during that take care that the name is
 	// not empty.
 	std::string servername_ui = edit_servername_.text();
-	if (servername_ui.empty()) {
-		/** TRANSLATORS: This is shown for multiplayer games when no host */
-		/** TRANSLATORS: server to connect to has been specified yet. */
-		servername_ui = pgettext("server_name", "unnamed");
+
+	const std::vector<InternetGame>* games = InternetGaming::ref().games();
+	if (games != nullptr) {
+		for (const InternetGame& game : *games) {
+			if (servername_ui.empty()) {
+				uint32_t i = 1;
+				do {
+					/** TRANSLATORS: This is shown for multiplayer games when no host */
+					/** TRANSLATORS: server to connect to has been specified yet. */
+					servername_ui = (boost::format(_("unnamed %u")) % i++).str();
+				} while (servername_ui == game.name);
+			} else if (game.name == servername_ui) {
+				change_servername();
+				return;
+			}
+		}
 	}
 
 	g_options.pull_section("global").set_string("servername", servername_ui);

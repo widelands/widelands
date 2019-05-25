@@ -116,7 +116,6 @@ public:
 	DescriptionIndex soldier() const;
 	DescriptionIndex ship() const;
 	DescriptionIndex port() const;
-	DescriptionIndex barracks() const;
 	DescriptionIndex ironore() const;
 	DescriptionIndex rawlog() const;
 	DescriptionIndex refinedlog() const;
@@ -206,7 +205,6 @@ private:
 	DescriptionIndex soldier_;     // The soldier that this tribe uses
 	DescriptionIndex ship_;        // The ship that this tribe uses
 	DescriptionIndex port_;        // The port that this tribe uses
-	DescriptionIndex barracks_;    // The barracks to create soldiers
 	DescriptionIndex ironore_;     // Iron ore
 	DescriptionIndex rawlog_;      // Simple log
 	DescriptionIndex refinedlog_;  // Refined log, e.g. wood or blackwood

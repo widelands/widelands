@@ -201,7 +201,7 @@ void BuildingDescr::set_hints_trainingsites_max_percent(int percent) {
 }
 
 uint32_t BuildingDescr::get_unoccupied_animation() const {
-	return get_animation(is_animation_known("unoccupied") ? "unoccupied" : "idle");
+	return get_animation(is_animation_known("unoccupied") ? "unoccupied" : "idle", nullptr);
 }
 
 /**

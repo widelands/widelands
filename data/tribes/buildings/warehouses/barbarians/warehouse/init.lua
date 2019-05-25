@@ -18,7 +18,7 @@ tribes:new_warehouse_type {
       blackwood = 2,
       granite = 2,
       grout = 3,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       log = 1,

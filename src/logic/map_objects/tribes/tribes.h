@@ -143,6 +143,8 @@ public:
 	/// Complete the Description objects' information with data from other Description objects.
 	void postload();
 
+	uint32_t get_largest_workarea() const;
+
 private:
 	void postload_calculate_trainingsites_proportions();
 
@@ -152,6 +154,8 @@ private:
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
 	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
+
+	uint32_t largest_workarea_;
 
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };

@@ -37,6 +37,33 @@ namespace Widelands {
 class EditorGameBase;
 class Battle;
 
+struct SoldierLevelRange {
+	SoldierLevelRange();
+	SoldierLevelRange(const LuaTable&);
+	SoldierLevelRange(const SoldierLevelRange&) = default;
+	SoldierLevelRange& operator=(const SoldierLevelRange& other) = default;
+
+	bool matches(const Soldier* soldier) const;
+	bool matches(int32_t health, int32_t attack, int32_t defense, int32_t evade) const;
+
+	bool operator==(const SoldierLevelRange& other) const {
+		return min_health == other.min_health && min_attack == other.min_attack &&
+		       min_defense == other.min_defense && min_evade == other.min_evade &&
+		       max_health == other.max_health && max_attack == other.max_attack &&
+		       max_defense == other.max_defense && max_evade == other.max_evade;
+	}
+
+	int32_t min_health;
+	int32_t min_attack;
+	int32_t min_defense;
+	int32_t min_evade;
+	int32_t max_health;
+	int32_t max_attack;
+	int32_t max_defense;
+	int32_t max_evade;
+};
+using SoldierAnimationsList = std::map<std::string, SoldierLevelRange>;
+
 class SoldierDescr : public WorkerDescr {
 public:
 	friend class Economy;
@@ -104,7 +131,10 @@ public:
 		return evade_.images[level];
 	}
 
-	uint32_t get_rand_anim(Game& game, const char* const name) const;
+	uint32_t get_rand_anim(Game& game, const std::string& name, const Soldier* soldier) const;
+
+	const DirAnimations& get_right_walk_anims(bool const ware, const Worker* w) const override;
+	uint32_t get_animation(const std::string& anim, const MapObject* mo = nullptr) const override;
 
 protected:
 	Bob& create_object() const override;
@@ -127,20 +157,27 @@ private:
 	BattleAttribute evade_;
 
 	// Battle animation names
-	std::vector<std::string> attack_success_w_name_;
-	std::vector<std::string> attack_failure_w_name_;
-	std::vector<std::string> evade_success_w_name_;
-	std::vector<std::string> evade_failure_w_name_;
-	std::vector<std::string> die_w_name_;
+	SoldierAnimationsList attack_success_w_name_;
+	SoldierAnimationsList attack_failure_w_name_;
+	SoldierAnimationsList evade_success_w_name_;
+	SoldierAnimationsList evade_failure_w_name_;
+	SoldierAnimationsList die_w_name_;
 
-	std::vector<std::string> attack_success_e_name_;
-	std::vector<std::string> attack_failure_e_name_;
-	std::vector<std::string> evade_success_e_name_;
-	std::vector<std::string> evade_failure_e_name_;
-	std::vector<std::string> die_e_name_;
+	SoldierAnimationsList attack_success_e_name_;
+	SoldierAnimationsList attack_failure_e_name_;
+	SoldierAnimationsList evade_success_e_name_;
+	SoldierAnimationsList evade_failure_e_name_;
+	SoldierAnimationsList die_e_name_;
+
+	// We can have per-level walking and idle anims
+	// NOTE: I expect no soldier will ever agree to carry a ware, so we don't provide animations for
+	// that. NOTE: All walking animations are expected to have the same set of ranges.
+	SoldierAnimationsList idle_name_;
+	std::unordered_map<std::unique_ptr<SoldierLevelRange>, std::map<uint8_t, std::string>>
+	   walk_name_;
 
 	// Reads list of animation names from the table and pushes them into result.
-	void add_battle_animation(std::unique_ptr<LuaTable> table, std::vector<std::string>* result);
+	void add_battle_animation(std::unique_ptr<LuaTable> table, SoldierAnimationsList* result);
 
 	DISALLOW_COPY_AND_ASSIGN(SoldierDescr);
 };
@@ -253,7 +290,7 @@ public:
 	int32_t get_training_attribute(TrainingAttribute attr) const override;
 
 	/// Sets a random animation of desired type and start playing it.
-	void start_animation(EditorGameBase&, char const* animname, uint32_t time);
+	void start_animation(EditorGameBase&, const std::string& animname, uint32_t time);
 
 	/// Heal quantity of health points instantly
 	void heal(uint32_t);

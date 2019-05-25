@@ -269,8 +269,10 @@ ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
      statistics_(STATISTICS_VECTOR_LENGTH, false),
      last_stat_percent_(0),
      crude_percent_(0),
+     last_program_end_time(0),
      is_stopped_(false),
-     default_anim_("idle") {
+     default_anim_("idle"),
+     main_worker_(-1) {
 	calc_statistics();
 }
 
@@ -302,7 +304,12 @@ void ProductionSite::update_statistics_string(std::string* s) {
 
 	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
 		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() %
-		      ngettext("Worker missing", "Workers missing", nr_requests))
+		      (nr_requests == 1 ?
+		          /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
+		          _("Worker missing") :
+		          /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
+		             missing. If you need plural forms here, please let us know. */
+		          _("Workers missing")))
 		        .str();
 		return;
 	}
@@ -565,16 +572,20 @@ int ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes)
 void ProductionSite::remove_worker(Worker& w) {
 	molog("%s leaving\n", w.descr().name().c_str());
 	WorkingPosition* wp = working_positions_;
+	int32_t wp_index = 0;
 
 	for (const auto& temp_wp : descr().working_positions()) {
 		DescriptionIndex const worker_index = temp_wp.first;
-		for (uint32_t j = temp_wp.second; j; --j, ++wp) {
+		for (uint32_t j = temp_wp.second; j; --j, ++wp, ++wp_index) {
 			Worker* const worker = wp->worker;
 			if (worker && worker == &w) {
 				// do not request the type of worker that is currently assigned - maybe a trained worker
 				// was
 				// evicted to make place for a level 0 worker.
 				// Therefore we again request the worker from the WorkingPosition of descr()
+				if (main_worker_ == wp_index) {
+					main_worker_ = -1;
+				}
 				*wp = WorkingPosition(&request_worker(worker_index), nullptr);
 				Building::remove_worker(w);
 				return;
@@ -685,11 +696,14 @@ void ProductionSite::act(Game& game, uint32_t const data) {
 		program_timer_ = false;
 
 		if (!can_start_working()) {
-			while (!stack_.empty())
+			start_animation(game, descr().get_unoccupied_animation());
+			while (!stack_.empty()) {
 				program_end(game, ProgramResult::kFailed);
+			}
 		} else {
+			assert(main_worker_ >= 0);
 			if (stack_.empty()) {
-				working_positions_[0].worker->update_task_buildingwork(game);
+				working_positions_[main_worker_].worker->update_task_buildingwork(game);
 				return;
 			}
 
@@ -697,9 +711,9 @@ void ProductionSite::act(Game& game, uint32_t const data) {
 			if (state.program->size() <= state.ip)
 				return program_end(game, ProgramResult::kCompleted);
 
-			if (anim_ != descr().get_animation(default_anim_)) {
+			if (anim_ != descr().get_animation(default_anim_, this)) {
 				// Restart idle animation, which is the default
-				start_animation(game, descr().get_animation(default_anim_));
+				start_animation(game, descr().get_animation(default_anim_, this));
 			}
 
 			return program_act(game);
@@ -737,8 +751,10 @@ void ProductionSite::program_act(Game& game) {
 bool ProductionSite::fetch_from_flag(Game& game) {
 	++fetchfromflag_;
 
-	if (can_start_working())
-		working_positions_[0].worker->update_task_buildingwork(game);
+	if (main_worker_ >= 0) {
+		assert(working_positions_[main_worker_].worker);
+		working_positions_[main_worker_].worker->update_task_buildingwork(game);
+	}
 
 	return true;
 }
@@ -767,10 +783,19 @@ bool ProductionSite::can_start_working() const {
 }
 
 void ProductionSite::try_start_working(Game& game) {
-	if (can_start_working() && descr().working_positions().size()) {
-		Worker& main_worker = *working_positions_[0].worker;
-		main_worker.reset_tasks(game);
-		main_worker.start_task_buildingwork(game);
+	if (main_worker_ >= 0) {
+		return;
+	}
+	const size_t nr_workers = descr().working_positions().size();
+	for (uint32_t i = 0; i < nr_workers; ++i) {
+		if (Worker* worker = working_positions_[i].worker) {
+			// We may start even if can_start_working() returns false, because basic actions
+			// like unloading extra wares should take place anyway
+			main_worker_ = i;
+			worker->reset_tasks(game);
+			worker->start_task_buildingwork(game);
+			return;
+		}
 	}
 }
 
@@ -781,7 +806,8 @@ void ProductionSite::try_start_working(Game& game) {
  */
 bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const success) {
 	assert(descr().working_positions().size());
-	assert(&worker == working_positions_[0].worker);
+	assert(main_worker_ >= 0);
+	assert(&worker == working_positions_[main_worker_].worker);
 
 	// If unsuccessful: Check if we need to abort current program
 	if (!success) {
@@ -860,8 +886,11 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 	}
 
 	// Check if all workers are there
-	if (!can_start_working())
-		return false;
+	if (!can_start_working()) {
+		// Try again a bit later
+		worker.start_task_idle(game, 0, 3000);
+		return true;
+	}
 
 	// Start program if we haven't already done so
 	State* state = get_state();
@@ -926,24 +955,28 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		top_state().phase = result;
 	}
 
+	const uint32_t current_duration = game.get_gametime() - last_program_end_time;
+	assert(game.get_gametime() >= last_program_end_time);
+	last_program_end_time = game.get_gametime();
+
 	switch (result) {
 	case ProgramResult::kFailed:
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(false);
 		calc_statistics();
-		crude_percent_ = crude_percent_ * 8 / 10;
+		update_crude_statistics(current_duration, false);
 		break;
 	case ProgramResult::kCompleted:
 		skipped_programs_.erase(program_name);
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(true);
 		train_workers(game);
-		crude_percent_ = crude_percent_ * 8 / 10 + 1000000 * 2 / 10;
+		update_crude_statistics(current_duration, true);
 		calc_statistics();
 		break;
 	case ProgramResult::kSkipped:
 		skipped_programs_[program_name] = game.get_gametime();
-		crude_percent_ = crude_percent_ * 98 / 100;
+		update_crude_statistics(current_duration, false);
 		break;
 	case ProgramResult::kNone:
 		skipped_programs_.erase(program_name);
@@ -1004,4 +1037,18 @@ void ProductionSite::set_default_anim(std::string anim) {
 
 	default_anim_ = anim;
 }
+
+void ProductionSite::update_crude_statistics(uint32_t duration, const bool produced) {
+	static const uint32_t duration_cap = 180 * 1000;  // This is highest allowed program duration
+	// just for case something went very wrong...
+	static const uint32_t entire_duration = 10 * 60 * 1000;
+	if (duration > duration_cap) {
+		duration = duration_cap;
+	};
+	const uint32_t past_duration = entire_duration - duration;
+	crude_percent_ =
+	   (crude_percent_ * past_duration + produced * duration * 10000) / entire_duration;
+	assert(crude_percent_ <= 10000);  // be sure we do not go above 100 %
+}
+
 }  // namespace Widelands
