@@ -43,7 +43,6 @@ public:
 
 protected:
 	void layout() override;
-	void update_desired_size() override;
 
 private:
 	UI::Box* main_box_;

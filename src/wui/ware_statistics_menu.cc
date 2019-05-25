@@ -186,6 +186,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	            main_box_, 0, 0, parent.get_player()->tribe(),
 	            [this](const int ware_index, const bool what) { cb_changed_to(ware_index, what); },
 	            color_map_);
+	display_->set_min_free_vertical_space(400);
 	main_box_->add(display_, UI::Box::Resizing::kFullSize);
 
 	slider_ = new WuiPlotAreaSlider(this, *plot_production_, 0, 0, kPlotWidth, 45);
@@ -232,35 +233,25 @@ void WareStatisticsMenu::cb_changed_to(Widelands::DescriptionIndex id, bool what
 	plot_stock_->show_plot(static_cast<size_t>(id), what);
 }
 
+static bool layouting = false;
 void WareStatisticsMenu::layout() {
-	int w1, h1, w2, h2, w3, h3;
-	tab_panel_->get_desired_size(&w1, &h1);
-	display_->get_desired_size(&w2, &h2);
-	slider_->get_desired_size(&w3, &h3);
-	int max_w = std::max(w1, std::max(w2, w3));
-	main_box_->set_desired_size(max_w, h1 + h2 + h3 + UI_FONT_SIZE_SMALL);
-	update_desired_size();
-	UI::UniqueWindow::layout();
-}
-
-void WareStatisticsMenu::update_desired_size() {
-	if (!main_box_ || !tab_panel_ || !display_ || !slider_) {
-		// Not initialized yet
+	if (layouting || !tab_panel_ || !display_ || !slider_ || !main_box_) {
 		return;
 	}
+	layouting = true;
+
+	display_->set_hgap(3, false);
 	int w1, h1, w2, h2, w3, h3;
 	tab_panel_->get_desired_size(&w1, &h1);
 	display_->get_desired_size(&w2, &h2);
 	slider_->get_desired_size(&w3, &h3);
-	int max_w = std::max(w1, w3);
-	int hgap = AbstractWaresDisplay::calc_hgap(display_->get_extent().w, max_w - 2 * kSpacing, 0);
-	if (hgap < 3) {
-		// The wares display is the deciding factor for the width
-		max_w = std::max(w2, max_w);
-		hgap = AbstractWaresDisplay::calc_hgap(display_->get_extent().w, max_w - 2 * kSpacing);
-	}
-	display_->set_hgap(hgap, false);
-	UI::UniqueWindow::update_desired_size();
+
+	display_->set_hgap(std::max(3, AbstractWaresDisplay::calc_hgap(display_->get_extent().w, kPlotWidth)), false);
+	display_->get_desired_size(&w2, &h2);
+
+	main_box_->set_desired_size(std::max(w2, kPlotWidth) + 2 * kSpacing, h1 + h2 + h3 + UI_FONT_SIZE_SMALL);
+	UI::UniqueWindow::layout();
+	layouting = false;
 }
 
 /**

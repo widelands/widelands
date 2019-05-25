@@ -63,7 +63,8 @@ AbstractWaresDisplay::AbstractWaresDisplay(
      hgap_(hgap),
      vgap_(vgap),
      selection_anchor_(Widelands::INVALID_INDEX),
-     callback_function_(callback_function) {
+     callback_function_(callback_function),
+     min_free_vertical_space_(290) {
 	for (const Widelands::DescriptionIndex& index : indices_) {
 		selected_.insert(std::make_pair(index, false));
 		hidden_.insert(std::make_pair(index, false));
@@ -356,7 +357,8 @@ const WaresOrderCoords& AbstractWaresDisplay::icons_order_coords() const {
 void AbstractWaresDisplay::relayout_icons_order_coords() {
 	order_coords_.clear();
 	const int column_number = icons_order().size();
-	const int column_max_size = (g_gr->get_yres() - 290) / (kWareMenuPicHeight + vgap_ + kWareMenuInfoSize);
+	const int column_max_size = std::max(1, (g_gr->get_yres() - min_free_vertical_space_) /
+			(kWareMenuPicHeight + vgap_ + kWareMenuInfoSize));
 
 	int16_t column_index_to_apply = 0;
 	for (int16_t column_index = 0; column_index < column_number; ++column_index) {
@@ -366,7 +368,7 @@ void AbstractWaresDisplay::relayout_icons_order_coords() {
 		for (int16_t row_index = 0; row_index < row_number; ++row_index) {
 			order_coords_.emplace(column.at(row_index), Widelands::Coords(column_index_to_apply, row_index_to_apply));
 			++row_index_to_apply;
-			if (row_index_to_apply > column_max_size) {
+			if (row_index_to_apply >= column_max_size) {
 				row_index_to_apply = 0;
 				++column_index_to_apply;
 			}

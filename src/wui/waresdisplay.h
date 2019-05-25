@@ -95,6 +95,13 @@ public:
 	Widelands::DescriptionIndex ware_at_coords(int16_t x, int16_t y) const;
 	uint16_t column_length(int16_t) const;
 
+	void set_min_free_vertical_space(int32_t s) {
+		min_free_vertical_space_ = s;
+	}
+	int32_t get_min_free_vertical_space() const {
+		return min_free_vertical_space_;
+	}
+
 	static inline int32_t calc_hgap(int32_t columns, int32_t total_w, int32_t min = 3) {
 		return std::max(min, (total_w - columns * kWareMenuPicWidth) / (columns - 1));
 	}
@@ -150,6 +157,7 @@ private:
 	boost::function<void(Widelands::DescriptionIndex, bool)> callback_function_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>> graphic_resolution_changed_subscriber_;
+	int32_t min_free_vertical_space_;
 };
 
 /*
