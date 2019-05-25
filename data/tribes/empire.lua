@@ -341,7 +341,6 @@ tribes:new_tribe {
    soldier = "empire_soldier",
    ship = "empire_ship",
    port = "empire_port",
-   barracks = "empire_barracks",
    ironore = "iron_ore",
    rawlog = "log",
    refinedlog = "planks",

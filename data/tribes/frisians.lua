@@ -342,7 +342,6 @@ tribes:new_tribe {
    soldier = "frisians_soldier",
    ship = "frisians_ship",
    port = "frisians_port",
-   barracks = "frisians_barracks",
    ironore = "iron_ore",
    rawlog = "log",
    refinedlog = "brick",

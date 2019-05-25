@@ -120,11 +120,12 @@ Bob::~Bob() {
 bool Bob::init(EditorGameBase& egbase) {
 	MapObject::init(egbase);
 
-	if (upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase)) {
 		schedule_act(*game, 1);
-	else
+	} else {
 		// In editor: play idle task forever
-		set_animation(egbase, descr().get_animation("idle"));
+		set_animation(egbase, descr().get_animation("idle", this));
+	}
 	return true;
 }
 
@@ -994,7 +995,7 @@ void Bob::Loader::load(FileRead& fr) {
 			bob.set_position(egbase(), read_coords_32(&fr));
 
 			std::string animname = fr.c_string();
-			bob.anim_ = animname.size() ? bob.descr().get_animation(animname) : 0;
+			bob.anim_ = animname.size() ? bob.descr().get_animation(animname, &bob) : 0;
 			bob.animstart_ = fr.signed_32();
 			bob.walking_ = static_cast<WalkingDir>(read_direction_8_allow_null(&fr));
 			if (bob.walking_) {
@@ -1023,7 +1024,7 @@ void Bob::Loader::load(FileRead& fr) {
 				if (fr.unsigned_8()) {
 					uint32_t anims[6];
 					for (int j = 0; j < 6; ++j)
-						anims[j] = bob.descr().get_animation(fr.c_string());
+						anims[j] = bob.descr().get_animation(fr.c_string(), &bob);
 					state.diranims =
 					   DirAnimations(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
 				}

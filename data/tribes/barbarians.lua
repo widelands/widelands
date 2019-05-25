@@ -301,7 +301,6 @@ tribes:new_tribe {
    soldier = "barbarians_soldier",
    ship = "barbarians_ship",
    port = "barbarians_port",
-   barracks = "barbarians_barracks",
    ironore = "iron_ore",
    rawlog = "log",
    refinedlog = "blackwood",

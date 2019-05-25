@@ -477,6 +477,7 @@ struct BuildingObserver {
 	bool requires_supporters;
 
 	// information needed for decision on new building construction
+	int16_t initial_preciousness;
 	int16_t max_preciousness;
 	int16_t max_needed_preciousness;
 
