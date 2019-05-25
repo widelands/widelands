@@ -31,8 +31,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      recruitment = true,
-      prohibited_till = 610
+      prohibited_till = 610,
    },
 
    working_positions = {

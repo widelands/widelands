@@ -512,7 +512,7 @@ void BuildingWindow::hide_workarea(bool configure_button) {
 		return;  // already hidden, nothing to be done
 	}
 
-	igbase()->hide_workarea(building_position_);
+	igbase()->hide_workarea(building_position_, false);
 	showing_workarea_ = false;
 	if (configure_button) {
 		configure_workarea_button();

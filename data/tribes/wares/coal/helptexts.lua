@@ -9,7 +9,7 @@ function ware_helptext(tribe)
       -- TRANSLATORS: Helptext for a ware: Coal
       empire = pgettext("empire_ware", "The fires of the Empire smelting works, armor smithies and weapon smithies are usually fed with coal."),
       -- TRANSLATORS: Helptext for a ware: Coal
-      frisians = pgettext("frisians_ware", "The fires of the furnaces and armor smithies are fed with coal.")
+      frisians = pgettext("frisians_ware", "The fires of the brick kilns, furnaces and armor smithies are fed with coal.")
    }
    local result = ""
    if tribe then

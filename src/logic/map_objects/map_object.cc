@@ -289,23 +289,19 @@ void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		const std::string anim_name = prefix + std::string("_") + dirstrings[dir - 1];
 		try {
-			anims->set_animation(dir, get_animation(anim_name));
+			anims->set_animation(dir, get_animation(anim_name, nullptr));
 		} catch (const GameDataError& e) {
 			throw GameDataError("MO: Missing directional animation: %s", e.what());
 		}
 	}
 }
 
-uint32_t MapObjectDescr::get_animation(char const* const anim) const {
-	std::map<std::string, uint32_t>::const_iterator it = anims_.find(anim);
+uint32_t MapObjectDescr::get_animation(const std::string& animname, const MapObject*) const {
+	std::map<std::string, uint32_t>::const_iterator it = anims_.find(animname);
 	if (it == anims_.end()) {
-		throw GameDataError("Unknown animation: %s for %s", anim, name().c_str());
+		throw GameDataError("Unknown animation: %s for %s", animname.c_str(), name().c_str());
 	}
 	return it->second;
-}
-
-uint32_t MapObjectDescr::get_animation(const std::string& animname) const {
-	return get_animation(animname.c_str());
 }
 
 uint32_t MapObjectDescr::main_animation() const {
@@ -323,7 +319,8 @@ std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 
 const Image* MapObjectDescr::representative_image(const RGBColor* player_color) const {
 	if (is_animation_known("idle")) {
-		return g_gr->animations().get_representative_image(get_animation("idle"), player_color);
+		return g_gr->animations().get_representative_image(
+		   get_animation("idle", nullptr), player_color);
 	}
 	return nullptr;
 }
