@@ -105,8 +105,6 @@ void FXset::load_sound_file(const std::string& path) {
 		return;
 	}
 
-	log("NOCOM loading sound effect: %s\n", path.c_str());
-
 	if (Mix_Chunk* const m =
 	       Mix_LoadWAV_RW(SDL_RWFromMem(fr.data(fr.get_size(), 0), fr.get_size()), 1)) {
 		// Append a sound effect to the end of the fxset
