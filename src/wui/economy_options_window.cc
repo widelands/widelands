@@ -307,25 +307,25 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 	bool anything_selected = false;
 	bool second_phase = false;
 
-run_second_phase:
-	for (const Widelands::DescriptionIndex& index : items) {
-		if (display_.ware_selected(index) || (second_phase && !display_.is_ware_hidden(index))) {
-			anything_selected = true;
-			if (is_wares) {
-				game.send_player_command(*new Widelands::CmdSetWareTargetQuantity(
-						game.get_gametime(), player_->player_number(), serial_, index, settings.wares.at(index)));
-			} else {
-				game.send_player_command(*new Widelands::CmdSetWorkerTargetQuantity(
-						game.get_gametime(), player_->player_number(), serial_, index, settings.workers.at(index)));
+	do {
+		for (const Widelands::DescriptionIndex& index : items) {
+			if (display_.ware_selected(index) || (second_phase && !display_.is_ware_hidden(index))) {
+				anything_selected = true;
+				if (is_wares) {
+					game.send_player_command(*new Widelands::CmdSetWareTargetQuantity(
+							game.get_gametime(), player_->player_number(), serial_, index, settings.wares.at(index)));
+				} else {
+					game.send_player_command(*new Widelands::CmdSetWorkerTargetQuantity(
+							game.get_gametime(), player_->player_number(), serial_, index, settings.workers.at(index)));
+				}
 			}
 		}
-	}
-
-	if (!second_phase && !anything_selected) {
+		if (anything_selected) {
+			return;
+		}
 		// Nothing was selected, now go through the loop again and change everything
 		second_phase = true;
-		goto run_second_phase;
-	}
+	} while (!second_phase);
 }
 
 constexpr unsigned kThinkInterval = 200;
@@ -407,9 +407,8 @@ void EconomyOptionsWindow::update_profiles_select(const std::string& current_pro
 	if (dropdown_.is_expanded()) {
 		return;
 	}
-	const std::string select = current_profile.empty() ? "" : _(current_profile);
-	if (!dropdown_.has_selection() || dropdown_.get_selected() != select) {
-		dropdown_.select(select);
+	if (!dropdown_.has_selection() || dropdown_.get_selected() != current_profile) {
+		dropdown_.select(current_profile);
 	}
 	assert(dropdown_.has_selection());
 }
@@ -459,7 +458,7 @@ void EconomyOptionsWindow::SaveProfileWindow::save() {
 	for (const auto& pair : economy_options_->get_predefined_targets()) {
 		if (pair.first == name) {
 			UI::WLMessageBox m(this, _("Overwrite?"),
-					_("A profile with this name already exists.\nDo you wish to replace it?"),
+					_("A profile with this name already exists. Do you wish to replace it?"),
 					UI::WLMessageBox::MBoxType::kOkCancel);
 			if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
