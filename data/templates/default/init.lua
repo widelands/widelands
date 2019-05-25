@@ -628,6 +628,13 @@ return {
          bold = true,
          shadow = true
       },
+      disabled = {
+         color = {127, 127, 127},
+         face = fs_font_face,
+         size = fs_font_size,
+         bold = true,
+         shadow = true
+      },
 
       wui_attack_box_slider_label = {
          color = wui_font_color,

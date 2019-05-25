@@ -77,7 +77,7 @@ LoginBox::LoginBox(Panel& parent)
 		loginbtn->set_enabled(false);
 	} else {
 		eb_password->set_can_focus(false);
-		ta_password->set_style(g_gr->styles().font_style(UI::FontStyle::kWarning)); // NOCOM we want disabled here
+		ta_password->set_style(g_gr->styles().font_style(UI::FontStyle::kDisabled));
 	}
 
 	eb_nickname->focus();
@@ -138,7 +138,7 @@ bool LoginBox::handle_key(bool down, SDL_Keysym code) {
 
 void LoginBox::clicked_register() {
 	if (cb_register->get_state()) {
-		ta_password->set_style(g_gr->styles().font_style(UI::FontStyle::kWarning)); // NOCOM we want disabled here
+		ta_password->set_style(g_gr->styles().font_style(UI::FontStyle::kDisabled));
 		eb_password->set_can_focus(false);
 		eb_password->set_text("");
 	} else {
