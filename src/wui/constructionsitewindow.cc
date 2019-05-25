@@ -310,6 +310,7 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
 void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	Widelands::ConstructionSite* construction_site = construction_site_.get(igbase()->egbase());
 	assert(construction_site != nullptr);
+	set_building_descr_for_help(construction_site->buiding());
 
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
@@ -495,7 +496,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			add_tab(Widelands::wwWORKER, &cs_warehouse_workers_);
 			if (construction_site->get_info().becomes->get_isport()) {
 				cs_launch_expedition_ = new UI::Checkbox(&settings_box, Vector2i::zero(),
-					 _("Launch expedition"),
+					 _("Start an expedition"),
 					 _("Start an expedition from this port after completion"));
 				cs_launch_expedition_->changed.connect([this]() {
 					igbase()->game().send_player_constructionsite_launch_expedition(

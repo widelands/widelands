@@ -61,7 +61,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 				d->get_unoccupied_animation();
 		// If there is no build animation, we use only the first frame or we
 		// would get many build steps with almost the same image...
-		const uint32_t nrframes = known ? g_gr->animations().get_animation(anim_idx, nullptr).nr_frames() : 1;
+		const uint32_t nrframes = known ? g_gr->animations().get_animation(anim_idx).nr_frames() : 1;
 		assert(nrframes);
 		total_frames += nrframes;
 		animations.push_back(std::make_pair(anim_idx, nrframes));
@@ -71,7 +71,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		const uint32_t anim_idx = known ?
 				becomes->get_animation("build", nullptr) :
 				becomes->get_unoccupied_animation();
-		const uint32_t nrframes = known ? g_gr->animations().get_animation(anim_idx, nullptr).nr_frames() : 1;
+		const uint32_t nrframes = known ? g_gr->animations().get_animation(anim_idx).nr_frames() : 1;
 		assert(nrframes);
 		total_frames += nrframes;
 		animations.push_back(std::make_pair(anim_idx, nrframes));
@@ -100,7 +100,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		//  get its most fitting picture and draw it instead
 		const uint32_t unocc = was->get_unoccupied_animation();
 		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, unocc,
-				FRAME_LENGTH * (g_gr->animations().get_animation(unocc, nullptr).nr_frames() - 1),
+				FRAME_LENGTH * (g_gr->animations().get_animation(unocc).nr_frames() - 1),
 				&player_color);
 	}
 	// Now blit a segment of the current construction phase from the bottom.
@@ -590,6 +590,7 @@ Overwrite as many values of the current settings with those of the given setting
 void ConstructionSite::apply_settings(const BuildingSettings& cs) {
 	assert(settings_);
 	settings_->apply(cs);
+	delete &cs;
 }
 
 /*

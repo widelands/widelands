@@ -95,6 +95,10 @@ protected:
 
 	bool is_dying_;
 
+	void set_building_descr_for_help(const Widelands::BuildingDescr& d) {
+		building_descr_for_help_ = d;
+	}
+
 private:
 	void create_capsbuttons(UI::Box* buttons, Widelands::Building* building);
 
