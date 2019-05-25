@@ -183,6 +183,8 @@ struct InternetGaming : public ChatProvider {
 	                         bool system,
 	                         const std::string& msg);
 
+	bool valid_username(std::string);
+
 private:
 	InternetGaming();
 

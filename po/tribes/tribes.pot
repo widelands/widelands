@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -950,7 +950,7 @@ msgid "Horse Farm"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:53
+#: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:52
 msgctxt "atlanteans_building"
 msgid "breeding horses"
 msgstr ""
@@ -1422,7 +1422,7 @@ msgid "Barracks"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:61
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:60
 msgctxt "barbarians_building"
 msgid "recruiting soldier"
 msgstr ""
@@ -1474,7 +1474,7 @@ msgid "Cattle Farm"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:53
+#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:52
 msgctxt "barbarians_building"
 msgid "rearing cattle"
 msgstr ""
@@ -1983,7 +1983,7 @@ msgid "Donkey Farm"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
-#: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:53
+#: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:52
 msgctxt "empire_building"
 msgid "rearing donkeys"
 msgstr ""
@@ -3627,8 +3627,8 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:7
 #: ../../data/tribes/immovables/resi/empire/init.lua:7
 #: ../../data/tribes/immovables/resi/frisians/init.lua:7
-msgctxt "immovable"
-msgid "Resources: None"
+msgctxt "resource_indicator"
+msgid "No Resources"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
@@ -3636,8 +3636,8 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:30
 #: ../../data/tribes/immovables/resi/empire/init.lua:30
 #: ../../data/tribes/immovables/resi/frisians/init.lua:30
-msgctxt "immovable"
-msgid "Resources: Water Vein"
+msgctxt "resource_indicator"
+msgid "Water"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
@@ -3645,8 +3645,8 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:53
 #: ../../data/tribes/immovables/resi/empire/init.lua:53
 #: ../../data/tribes/immovables/resi/frisians/init.lua:54
-msgctxt "immovable"
-msgid "Resources: Coal Vein"
+msgctxt "resource_indicator"
+msgid "Some Coal"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
@@ -3654,8 +3654,8 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:76
 #: ../../data/tribes/immovables/resi/empire/init.lua:76
 #: ../../data/tribes/immovables/resi/frisians/init.lua:78
-msgctxt "immovable"
-msgid "Resources: Gold Vein"
+msgctxt "resource_indicator"
+msgid "Some Gold"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
@@ -3663,17 +3663,14 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:99
 #: ../../data/tribes/immovables/resi/empire/init.lua:99
 #: ../../data/tribes/immovables/resi/frisians/init.lua:102
-msgctxt "immovable"
-msgid "Resources: Iron Vein"
+msgctxt "resource_indicator"
+msgid "Some Iron"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:126
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:122
-#: ../../data/tribes/immovables/resi/empire/init.lua:122
-#: ../../data/tribes/immovables/resi/frisians/init.lua:126
-msgctxt "immovable"
-msgid "Resources: Some Stones"
+msgctxt "resource_indicator"
+msgid "Some Precious Stones"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
@@ -3681,8 +3678,8 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:145
 #: ../../data/tribes/immovables/resi/empire/init.lua:145
 #: ../../data/tribes/immovables/resi/frisians/init.lua:150
-msgctxt "immovable"
-msgid "Resources: Main Coal Vein"
+msgctxt "resource_indicator"
+msgid "A Lot of Coal"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
@@ -3690,8 +3687,8 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:168
 #: ../../data/tribes/immovables/resi/empire/init.lua:168
 #: ../../data/tribes/immovables/resi/frisians/init.lua:174
-msgctxt "immovable"
-msgid "Resources: Main Gold Vein"
+msgctxt "resource_indicator"
+msgid "A Lot of Gold"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
@@ -3699,17 +3696,40 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:191
 #: ../../data/tribes/immovables/resi/empire/init.lua:191
 #: ../../data/tribes/immovables/resi/frisians/init.lua:198
-msgctxt "immovable"
-msgid "Resources: Main Iron Vein"
+msgctxt "resource_indicator"
+msgid "A Lot of Iron"
 msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:222
+msgctxt "resource_indicator"
+msgid "A Lot of Precious Stones"
+msgstr ""
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:122
+#: ../../data/tribes/immovables/resi/frisians/init.lua:126
+msgctxt "resource_indicator"
+msgid "Some Granite"
+msgstr ""
+
+#. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:214
-#: ../../data/tribes/immovables/resi/empire/init.lua:214
 #: ../../data/tribes/immovables/resi/frisians/init.lua:222
-msgctxt "immovable"
-msgid "Resources: A Lot of Stones"
+msgctxt "resource_indicator"
+msgid "A Lot of Granite"
+msgstr ""
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/empire/init.lua:122
+msgctxt "resource_indicator"
+msgid "Some Marble"
+msgstr ""
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/empire/init.lua:214
+msgctxt "resource_indicator"
+msgid "A Lot of Marble"
 msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
@@ -4644,7 +4664,7 @@ msgid "Smoker"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/soldier/init.lua:198
+#: ../../data/tribes/workers/atlanteans/soldier/init.lua:251
 msgctxt "atlanteans_worker"
 msgid "Soldier"
 msgstr ""
@@ -4860,7 +4880,7 @@ msgid "Smelter"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/soldier/init.lua:67
+#: ../../data/tribes/workers/barbarians/soldier/init.lua:77
 msgctxt "barbarians_worker"
 msgid "Soldier"
 msgstr ""
@@ -5034,7 +5054,7 @@ msgid "Smelter"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/soldier/init.lua:67
+#: ../../data/tribes/workers/empire/soldier/init.lua:77
 msgctxt "empire_worker"
 msgid "Soldier"
 msgstr ""
@@ -5268,7 +5288,7 @@ msgid "Smoker"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/frisians/soldier/init.lua:76
+#: ../../data/tribes/workers/frisians/soldier/init.lua:401
 msgctxt "frisians_worker"
 msgid "Soldier"
 msgstr ""

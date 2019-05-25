@@ -452,12 +452,12 @@ end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal("Thatch Reed", egbase:get_ware_description("thatch_reed").descname)
+   assert_equal("Thatch Reed", egbase:get_ware_description("reed").descname)
 end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_name()
-   assert_equal("thatch_reed", egbase:get_ware_description("thatch_reed").name)
+   assert_equal("reed", egbase:get_ware_description("reed").name)
 end
 
 function test_descr:test_consumers()
