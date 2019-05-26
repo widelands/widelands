@@ -559,8 +559,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	gen.create_random_map();
 
-	egbase.postload();
-	egbase.load_graphics(loader_ui);
+	egbase.create_tempfile_and_save_mapdata(FileSystem::ZIP);
 
 	map->recalc_whole_map(egbase.world());
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);

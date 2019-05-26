@@ -190,8 +190,7 @@ void EditorInteractive::load(const std::string& filename) {
 	}
 
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
-	egbase().postload();
-	egbase().load_graphics(loader_ui);
+	egbase().create_tempfile_and_save_mapdata(FileSystem::ZIP);
 	map_changed(MapWas::kReplaced);
 }
 
