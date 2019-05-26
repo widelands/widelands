@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Tomasz Pudło <wptom@wp.pl>, 2019
+# tombox <wptom@wp.pl>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-12 07:02+0000\n"
+"POT-Creation-Date: 2019-05-10 07:32+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Tomasz Pudło <wptom@wp.pl>, 2019\n"
+"Last-Translator: tombox <wptom@wp.pl>, 2019\n"
 "Language-Team: Polish (https://www.transifex.com/widelands/teams/35159/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1028,6 +1028,10 @@ msgid ""
 "Yes my fellow soldiers, we have done it! We have met all the challenges that"
 " were put in front of us. But my heart is still with our home. We shall set "
 "sail as soon as possible to help defend the Empire from the Barbarian tribe."
+msgstr ""
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:624
+msgid "Victory"
 msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:625

@@ -12,7 +12,7 @@ tribes:new_productionsite_type {
    buildcost = {
       log = 3,
       grout = 2,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle = {
       log = 2,

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-22 05:17+0000\n"
+"POT-Creation-Date: 2019-05-10 07:32+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: TaeMin An, 2019\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -1107,6 +1107,10 @@ msgid ""
 msgstr ""
 "동료 군인들이여, 우리가 해냈다! 우리는 우리 앞에 놓인 모든 어려움을 이겨냈다. 하지만 내 심장은 이미 고향에 가 있다. 우리는 제국을"
 " 야만인 부족으로부터 방위하기 위해 가능한 한 빨리 항해를 시작할 것이다."
+
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:624
+msgid "Victory"
+msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:625
 msgid ""
