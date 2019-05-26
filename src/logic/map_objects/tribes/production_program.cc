@@ -34,11 +34,11 @@
 #include "economy/input_queue.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/findimmovable.h"
-#include "logic/findnode.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findimmovable.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
@@ -699,7 +699,7 @@ ProductionProgram::ActCallWorker::ActCallWorker(char* parameters,
 
 void ProductionProgram::ActCallWorker::execute(Game& game, ProductionSite& ps) const {
 	// Always main worker is doing stuff
-	ps.working_positions_[0].worker->update_task_buildingwork(game);
+	ps.working_positions_[ps.main_worker_].worker->update_task_buildingwork(game);
 }
 
 bool ProductionProgram::ActCallWorker::get_building_work(Game& game,
@@ -773,13 +773,12 @@ void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) con
 ProductionProgram::ActAnimate::ActAnimate(char* parameters, ProductionSiteDescr* descr) {
 	try {
 		bool reached_end;
-		char* const animation_name = next_word(parameters, reached_end);
-		if (!strcmp(animation_name, "idle"))
+		animation_name_ = std::string(next_word(parameters, reached_end));
+		if (animation_name_ == "idle") {
 			throw GameDataError("idle animation is default; calling is not allowed");
-		if (descr->is_animation_known(animation_name))
-			id_ = descr->get_animation(animation_name);
-		else {
-			throw GameDataError("Unknown animation '%s'", animation_name);
+		}
+		if (!descr->is_animation_known(animation_name_)) {
+			throw GameDataError("Unknown animation '%s'", animation_name_.c_str());
 		}
 		if (!reached_end) {  //  The next parameter is the duration.
 			char* endp;
@@ -795,7 +794,7 @@ ProductionProgram::ActAnimate::ActAnimate(char* parameters, ProductionSiteDescr*
 }
 
 void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) const {
-	ps.start_animation(game, id_);
+	ps.start_animation(game, ps.descr().get_animation(animation_name_, &ps));
 	return ps.program_step(game, duration_ ? duration_ : 0, ps.top_state().phase);
 }
 
@@ -985,7 +984,7 @@ ProductionProgram::ActProduce::ActProduce(char* parameters,
 void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) const {
 	assert(ps.produced_wares_.empty());
 	ps.produced_wares_ = produced_wares_;
-	ps.working_positions_[0].worker->update_task_buildingwork(game);
+	ps.working_positions_[ps.main_worker_].worker->update_task_buildingwork(game);
 
 	const TribeDescr& tribe = ps.owner().tribe();
 	assert(produced_wares_.size());
@@ -1071,7 +1070,7 @@ ProductionProgram::ActRecruit::ActRecruit(char* parameters,
 void ProductionProgram::ActRecruit::execute(Game& game, ProductionSite& ps) const {
 	assert(ps.recruited_workers_.empty());
 	ps.recruited_workers_ = recruited_workers_;
-	ps.working_positions_[0].worker->update_task_buildingwork(game);
+	ps.working_positions_[ps.main_worker_].worker->update_task_buildingwork(game);
 
 	const TribeDescr& tribe = ps.owner().tribe();
 	assert(recruited_workers_.size());
@@ -1523,7 +1522,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	if (map.find_reachable_immovables(area, &immovables, cstep, FindImmovableByDescr(descr))) {
 		state.objvar = immovables[0].object;
 
-		psite.working_positions_[0].worker->update_task_buildingwork(game);
+		psite.working_positions_[psite.main_worker_].worker->update_task_buildingwork(game);
 		return;
 	}
 
@@ -1559,7 +1558,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 
 		state.coord = best_coords;
 
-		psite.working_positions_[0].worker->update_task_buildingwork(game);
+		psite.working_positions_[psite.main_worker_].worker->update_task_buildingwork(game);
 		return;
 	}
 
@@ -1630,7 +1629,8 @@ void ProductionProgram::ActConstruct::building_work_failed(Game& game,
 ProductionProgram::ProductionProgram(const std::string& init_name,
                                      const std::string& init_descname,
                                      std::unique_ptr<LuaTable> actions_table,
-                                     const EditorGameBase& egbase,
+                                     const Tribes& tribes,
+                                     const World& world,
                                      ProductionSiteDescr* building)
    : name_(init_name), descname_(init_descname) {
 
@@ -1647,7 +1647,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 
 		if (boost::iequals(parts[0], "return")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActReturn(arguments.get(), *building, egbase.tribes())));
+			   new ActReturn(arguments.get(), *building, tribes)));
 		} else if (boost::iequals(parts[0], "call")) {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActCall(arguments.get(), *building)));
@@ -1659,19 +1659,19 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			   std::unique_ptr<ProductionProgram::Action>(new ActAnimate(arguments.get(), building)));
 		} else if (boost::iequals(parts[0], "consume")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActConsume(arguments.get(), *building, egbase.tribes())));
+			   new ActConsume(arguments.get(), *building, tribes)));
 		} else if (boost::iequals(parts[0], "produce")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActProduce(arguments.get(), *building, egbase.tribes())));
+			   new ActProduce(arguments.get(), *building, tribes)));
 		} else if (boost::iequals(parts[0], "recruit")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActRecruit(arguments.get(), *building, egbase.tribes())));
+			   new ActRecruit(arguments.get(), *building, tribes)));
 		} else if (boost::iequals(parts[0], "callworker")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActCallWorker(arguments.get(), name(), building, egbase.tribes())));
+			   new ActCallWorker(arguments.get(), name(), building, tribes)));
 		} else if (boost::iequals(parts[0], "mine")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActMine(arguments.get(), egbase.world(), name(), building)));
+			   new ActMine(arguments.get(), world, name(), building)));
 		} else if (boost::iequals(parts[0], "checksoldier")) {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActCheckSoldier(arguments.get())));

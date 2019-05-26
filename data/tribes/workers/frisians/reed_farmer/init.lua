@@ -53,7 +53,7 @@ tribes:new_worker_type {
          "animate=harvesting 12000",
          "callobject=harvest",
          "animate=harvesting 1",
-         "createware=thatch_reed",
+         "createware=reed",
          "return"
       },
    },

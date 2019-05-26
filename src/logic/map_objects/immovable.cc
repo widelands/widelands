@@ -422,7 +422,7 @@ bool Immovable::init(EditorGameBase& egbase) {
 		assert(prog != nullptr);
 	}
 	if (upcast(ImmovableProgram::ActAnimate const, act_animate, &(*prog)[program_ptr_]))
-		start_animation(egbase, act_animate->animation());
+		start_animation(egbase, descr().get_animation(act_animate->animation(), this));
 
 	if (upcast(Game, game, &egbase)) {
 		switch_program(*game, "program");
@@ -590,7 +590,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	// Animation
 	char const* const animname = fr.c_string();
 	try {
-		imm.anim_ = imm.descr().get_animation(animname);
+		imm.anim_ = imm.descr().get_animation(animname, &imm);
 	} catch (const GameDataError& e) {
 		imm.anim_ = imm.descr().main_animation();
 		log("Warning: Immovable: %s, using animation %s instead.\n", e.what(),
@@ -730,14 +730,10 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersionImmovable) {
 
 			const std::string owner_type = fr.c_string();
-			std::string name = fr.c_string();
 			Immovable* imm = nullptr;
 
 			if (owner_type != "world") {  //  It is a tribe immovable.
-				// Needed for map compatibility
-				if (packet_version < 7) {
-					name = tribes_lookup_table.lookup_immovable(owner_type, name);
-				}
+				const std::string name = tribes_lookup_table.lookup_immovable(fr.c_string());
 				const DescriptionIndex idx = egbase.tribes().immovable_index(name);
 				if (idx != Widelands::INVALID_INDEX) {
 					imm = new Immovable(*egbase.tribes().get_immovable_descr(idx));
@@ -746,7 +742,7 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 				}
 			} else {  //  world immovable
 				const World& world = egbase.world();
-				name = world_lookup_table.lookup_immovable(name);
+				const std::string name = world_lookup_table.lookup_immovable(fr.c_string());
 				const DescriptionIndex idx = world.get_immovable_index(name.c_str());
 				if (idx == Widelands::INVALID_INDEX) {
 					throw GameDataError("world does not define immovable type \"%s\"", name.c_str());
@@ -772,11 +768,10 @@ ImmovableProgram::Action::~Action() {
 ImmovableProgram::ActAnimate::ActAnimate(char* parameters, ImmovableDescr& descr) {
 	try {
 		bool reached_end;
-		char* const animation_name = next_word(parameters, reached_end);
-		if (!descr.is_animation_known(animation_name)) {
-			throw GameDataError("Unknown animation: %s.", animation_name);
+		animation_name_ = std::string(next_word(parameters, reached_end));
+		if (!descr.is_animation_known(animation_name_)) {
+			throw GameDataError("Unknown animation: %s.", animation_name_.c_str());
 		}
-		id_ = descr.get_animation(animation_name);
 
 		if (!reached_end) {  //  The next parameter is the duration.
 			char* endp;
@@ -795,7 +790,7 @@ ImmovableProgram::ActAnimate::ActAnimate(char* parameters, ImmovableDescr& descr
 /// Use convolutuion to make the animation time a random variable with binomial
 /// distribution and the configured time as the expected value.
 void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) const {
-	immovable.start_animation(game, id_);
+	immovable.start_animation(game, immovable.descr().get_animation(animation_name_, &immovable));
 	immovable.program_step(
 	   game, duration_ ? 1 + game.logic_rand() % duration_ + game.logic_rand() % duration_ : 0);
 }
@@ -1064,13 +1059,11 @@ ImmovableProgram::ActConstruct::ActConstruct(char* parameters, ImmovableDescr& d
 		buildtime_ = atoi(params[1].c_str());
 		decaytime_ = atoi(params[2].c_str());
 
-		std::string animation_name = params[0];
-		if (!descr.is_animation_known(animation_name)) {
+		animation_name_ = params[0];
+		if (!descr.is_animation_known(animation_name_)) {
 			throw GameDataError("unknown animation \"%s\" in immovable program for immovable \"%s\"",
-			                    animation_name.c_str(), descr.name().c_str());
+			                    animation_name_.c_str(), descr.name().c_str());
 		}
-		animid_ = descr.get_animation(animation_name);
-
 	} catch (const WException& e) {
 		throw GameDataError("construct: %s", e.what());
 	}
@@ -1117,7 +1110,7 @@ void ImmovableProgram::ActConstruct::execute(Game& g, Immovable& imm) const {
 		d = new ActConstructData;
 		imm.set_action_data(d);
 
-		imm.start_animation(g, animid_);
+		imm.start_animation(g, imm.descr().get_animation(animation_name_, &imm));
 		imm.anim_construction_total_ = imm.descr().buildcost().total();
 	} else {
 		// Perhaps we are called due to the construction timeout of the last construction step

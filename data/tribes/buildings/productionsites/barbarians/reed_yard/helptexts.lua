@@ -15,10 +15,10 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("barbarians_building", "Thatch reed is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails.")
+   return pgettext("barbarians_building", "Reed is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails.")
 end
 
 function building_helptext_performance()
    -- TRANSLATORS: Performance helptext for a building
-   return pgettext("barbarians_building", "A reed yard can produce a sheaf of thatch reed in about %s on average."):bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
+   return pgettext("barbarians_building", "A reed yard can produce a sheaf of reed in about %s on average."):bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
 end

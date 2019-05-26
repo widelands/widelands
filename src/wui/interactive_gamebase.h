@@ -74,6 +74,8 @@ public:
 	// 'map_views', hence this function.
 	virtual void draw_map_view(MapView* given_map_view, RenderTarget* dst) = 0;
 
+	void set_sel_pos(Widelands::NodeAndTriangle<> const center) override;
+
 	virtual void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) = 0;
 	const PlayerType& get_playertype() const {
 		return playertype_;

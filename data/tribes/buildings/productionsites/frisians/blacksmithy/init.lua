@@ -13,12 +13,12 @@ tribes:new_productionsite_type {
       brick = 2,
       granite = 1,
       log = 1,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle = {
       brick = 1,
       granite = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
@@ -52,7 +52,7 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "iron", amount = 7 },
       { name = "log", amount = 7 },
-      { name = "thatch_reed", amount = 7 }
+      { name = "reed", amount = 7 }
    },
    outputs = {
       "felling_ax",
@@ -138,7 +138,7 @@ tribes:new_productionsite_type {
          descname = _"making a basket",
          actions = {
             "return=skipped unless economy needs basket",
-            "consume=thatch_reed log",
+            "consume=reed log",
             "sleep=32000",
             "animate=working 35000",
             "produce=basket"
@@ -160,7 +160,7 @@ tribes:new_productionsite_type {
          descname = _"making a fishing net",
          actions = {
             "return=skipped unless economy needs fishing_net",
-            "consume=thatch_reed:2",
+            "consume=reed:2",
             "sleep=32000",
             "animate=working 35000",
             "produce=fishing_net"

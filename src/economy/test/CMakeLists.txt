@@ -9,5 +9,6 @@ wl_test(test_economy
     economy
     io_filesystem
     logic
+    logic_map_objects
     logic_widelands_geometry
 )
