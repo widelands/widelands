@@ -49,7 +49,7 @@ obj_gather_materials = {
       li(_"10 × Clay") ..
       li(_"40 × Brick") ..
       li(_"20 × Coal") ..
-      li(_"30 × Thatch Reed") ..
+      li(_"30 × Reed") ..
       p(_([[Remember that you can set target quantities for most of these wares in your economy settings.]]))
    ),
 }
@@ -154,7 +154,7 @@ intro_3 = {
       _([[We should start by taking care of our wood production. Trees don’t seem to grow well on this island; better build at least two houses for foresters and one for a woodcutter.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Introduction 3
-      _([[Also, we had better build a reed farm soon. Even reed farms need reed to be built, so we must take care not to run short before we can grow our own. Reed is easily cultivated, so the reed farmer doesn’t need anything more to start growing thatch reed.]]))
+      _([[Also, we had better build a reed farm soon. Even reed farms need reed to be built, so we must take care not to run short before we can grow our own. Reed is easily cultivated, so the reed farmer doesn’t need anything more to start growing reed fields.]]))
       .. new_objectives(obj_build_wood_economy),
 }
 intro_4 = {
@@ -186,7 +186,7 @@ warning_no_reed = {
    body=hauke(_"Build another reed farm",
       -- TRANSLATORS: Hauke – no reed
       _([[I noticed we have been short of reed for a while now. Our buildings seem to need quite a lot of it. We should build another reed farm or two. Reed is also used for making fishing nets and other tools; therefore, resolving this shortage should be a priority.]]))
-      .. li_arrow (_([[You should assign the new reed farm the highest priority for thatch reed in the construction site window.]])),
+      .. li_arrow (_([[You should assign the new reed farm the highest priority for reed in the construction site window.]])),
 }
 warning_no_clay = {
    title =_ "Clay Shortages",

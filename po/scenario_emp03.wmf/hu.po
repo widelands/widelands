@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-05 04:54+0000\n"
+"POT-Creation-Date: 2019-05-10 07:32+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Kristof Szoke <kszoke@gmail.com>, 2019\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
@@ -233,7 +233,7 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:209
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:389
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:621
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:649
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:650
 msgid "Diary of Lutius"
 msgstr ""
 
@@ -1023,6 +1023,10 @@ msgid ""
 "sail as soon as possible to help defend the Empire from the Barbarian tribe."
 msgstr ""
 
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:624
+msgid "Victory"
+msgstr ""
+
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:625
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
@@ -1030,17 +1034,17 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:634
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:635
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
 msgstr ""
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:637
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:638
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
 msgstr ""
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:642
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:643
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
@@ -1048,13 +1052,13 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:645
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:646
 msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
 msgstr ""
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:649
 msgid "Artifact Found"
 msgstr ""
 

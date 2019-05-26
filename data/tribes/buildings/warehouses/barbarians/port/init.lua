@@ -16,7 +16,7 @@ tribes:new_warehouse_type {
       granite = 5,
       grout = 2,
       iron = 2,
-      thatch_reed = 4,
+      reed = 4,
       gold = 2
    },
    return_on_dismantle = {
@@ -25,7 +25,7 @@ tribes:new_warehouse_type {
       granite = 3,
       grout = 1,
       iron = 1,
-      thatch_reed = 1,
+      reed = 1,
       gold = 1
    },
 

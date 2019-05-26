@@ -16,7 +16,7 @@ function check_materials()
       count("coal") < 20 or
       count("brick") < 40 or
       count("clay") < 10 or
-      count("thatch_reed") < 30
+      count("reed") < 30
    ) do sleep(8731) end
    set_objective_done(o)
    done_gather_materials = true
@@ -59,7 +59,7 @@ function warning_reed()
    local ready = 0
    while show_warning_reed do
       sleep(10000)
-      if count("thatch_reed") < 4 then
+      if count("reed") < 4 then
          if ready > 8 then
             if #p1:get_buildings("frisians_reed_farm") < 3 then
                campaign_message_box(warning_no_reed)

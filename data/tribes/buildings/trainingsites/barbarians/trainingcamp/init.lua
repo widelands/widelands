@@ -14,7 +14,7 @@ tribes:new_trainingsite_type {
       granite = 4,
       grout = 6,
       gold = 4,
-      thatch_reed = 3
+      reed = 3
    },
    return_on_dismantle = {
       log = 3,

@@ -2,26 +2,23 @@ dirname = path.dirname(__file__)
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
-   name = "reed_ripe",
+   name = "reedfield_tiny",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
-   descname = pgettext("immovable", "Reed (ripe)"),
+   descname = pgettext("immovable", "Reed Field (tiny)"),
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "ripe_reed", "field" },
+   attributes = { "field", "seed_reed" },
    programs = {
       program = {
-         "animate=idle 500000",
-         "remove=",
-      },
-      harvest = {
-         "remove=",
+         "animate=idle 22000",
+         "transform=reedfield_small",
       }
    },
 
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 13, 18 },
+         hotspot = { 12, 8 },
       },
    }
 }

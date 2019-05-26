@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2016
+# GunChleoc, 2015-2016,2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2015
 # GunChleoc, 2013-2015
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-11 05:49+0000\n"
-"PO-Revision-Date: 2019-04-11 11:47+0000\n"
+"POT-Creation-Date: 2019-05-10 07:32+0000\n"
+"PO-Revision-Date: 2019-05-12 06:52+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -323,7 +323,7 @@ msgstr "Toiseach na sgeulachd"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:144
 msgid "Thron sighs…"
-msgstr "Tha Tron ag osnachadh…"
+msgstr "Tha Tron a’ leigeil osna…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:146
