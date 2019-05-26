@@ -936,9 +936,8 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 	chance_ = read_positive(arguments.at(3));
 	training_ = read_positive(arguments.at(4));
 
-	const std::string description = (boost::format("%s %s mine %s") % descr->name() %
-							   production_program_name % world.get_resource(resource_)->name())
-								 .str();
+	const std::string description = descr->name() + " " +
+							   production_program_name + " mine " +  world.get_resource(resource_)->name();
 	descr->workarea_info_[distance_].insert(description);
 }
 
@@ -1129,13 +1128,12 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	const SoldierControl* ctrl = ps.soldier_control();
 	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
-	std::vector<Soldier*>::const_iterator it = soldiers.begin();
 
 	ps.molog("  Training soldier's %u (%d to %d)", static_cast<unsigned int>(attribute_),
 	         static_cast<unsigned int>(level_), static_cast<unsigned int>(target_level_));
 
 	bool training_done = false;
-	for (; !training_done; ++it) {
+	for (auto it = soldiers.begin(); !training_done; ++it) {
 		if (it == soldiers_end) {
 			ps.set_production_result(_("No soldier found for this training level!"));
 			return ps.program_end(game, ProgramResult::kSkipped);
