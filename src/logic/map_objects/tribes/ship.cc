@@ -31,7 +31,7 @@
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
@@ -1061,9 +1061,8 @@ void Ship::draw(const EditorGameBase& egbase,
 		case (ShipStates::kSinkAnimation):
 			break;
 		}
-		statistics_string = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_OK.hex_value() %
-		                     statistics_string)
-		                       .str();
+		statistics_string = g_gr->styles().color_tag(
+		   statistics_string, g_gr->styles().building_statistics_style().medium_color());
 	}
 
 	do_draw_info(draw_text, shipname_, statistics_string, calc_drawpos(egbase, point_on_dst, scale),
@@ -1128,10 +1127,7 @@ void Ship::send_message(Game& game,
                         const std::string& description,
                         const std::string& picture) {
 	const std::string rt_description =
-	   (boost::format("<div padding_r=10><p><img src=%s></p></div>"
-	                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-	    picture % UI_FONT_SIZE_MESSAGE % description)
-	      .str();
+	   as_mapobject_message(picture, g_gr->images().get(picture)->width(), description);
 
 	get_owner()->add_message(game, std::unique_ptr<Message>(new Message(
 	                                  Message::Type::kSeafaring, game.get_gametime(), title, picture,

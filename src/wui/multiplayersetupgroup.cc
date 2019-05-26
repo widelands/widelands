@@ -32,7 +32,6 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
-#include "graphic/text_constants.h"
 #include "logic/game.h"
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"

@@ -205,7 +205,7 @@ std::string FileSystem::illegal_filename_tooltip() {
 	   (boost::format(pgettext("illegal_filename_characters", "%s at the start of the filename")) %
 	    richtext_escape(i18n::localize_list(starting_characters, i18n::ConcatenateWith::OR)))
 	      .str(),
-	   UI_FONT_SIZE_MESSAGE));
+	   UI::FontStyle::kWuiMessageParagraph));
 
 	const std::string illegal(as_listitem(
 	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
@@ -213,7 +213,7 @@ std::string FileSystem::illegal_filename_tooltip() {
 	   (boost::format(pgettext("illegal_filename_characters", "%s anywhere in the filename")) %
 	    richtext_escape(i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR)))
 	      .str(),
-	   UI_FONT_SIZE_MESSAGE));
+	   UI::FontStyle::kWuiMessageParagraph));
 
 	return (boost::format("%s%s%s") %
 	        /** TRANSLATORS: Tooltip header for characters in illegal filenames.

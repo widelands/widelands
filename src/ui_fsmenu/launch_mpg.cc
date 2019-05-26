@@ -27,7 +27,6 @@
 #include "base/warning.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
-#include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -99,7 +98,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                                                  GameController* const ctrl)
    : FullscreenMenuLaunchGame(settings, ctrl),
      // Values for alignment and size
-     fs_(fs_small()),
      // TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
      // so we can have the SuggestedTeamsBox
      padding_(4),
@@ -128,7 +126,14 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                   _("Show the help window")),
 
      // Text labels
-     mapname_(this, right_column_x_, get_h() * 3 / 20, std::string()),
+     mapname_(this,
+              right_column_x_,
+              get_h() * 3 / 20,
+              0,
+              0,
+              std::string(),
+              UI::Align::kLeft,
+              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupMapname)),
      clients_(this,
               // the width of the MultiPlayerSetupGroup is (get_w() * 53 / 80)
               get_w() * 3 / 80,
@@ -136,20 +141,32 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
               get_w() * 19 / 80,
               get_h() / 10,
               _("Clients"),
-              UI::Align::kCenter),
+              UI::Align::kCenter,
+              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
      players_(this,
               get_w() / 4,
               get_h() / 10,
               get_w() * 9 / 20,
               get_h() / 10,
               _("Players"),
-              UI::Align::kCenter),
-     map_(this, right_column_x_, get_h() / 10, butw_, get_h() / 10, _("Map"), UI::Align::kCenter),
+              UI::Align::kCenter,
+              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+     map_(this,
+          right_column_x_,
+          get_h() / 10,
+          butw_,
+          get_h() / 10,
+          _("Map"),
+          UI::Align::kCenter,
+          g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
      wincondition_type_(this,
                         right_column_x_ + (butw_ / 2),
                         get_h() * 10 / 20 - 1.5 * label_height_,
+                        0,
+                        0,
                         _("Type of game"),
-                        UI::Align::kCenter),
+                        UI::Align::kCenter,
+                        g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
 
      map_info_(this,
                right_column_x_,
@@ -178,15 +195,11 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	help_button_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchMPG::help_clicked, boost::ref(*this)));
 
-	mapname_.set_fontsize(fs_);
-	mapname_.set_color(RGBColor(255, 255, 127));
-	clients_.set_fontsize(fs_);
-	clients_.set_color(RGBColor(0, 255, 0));
-	players_.set_fontsize(fs_);
-	players_.set_color(RGBColor(0, 255, 0));
-	map_.set_fontsize(fs_);
-	map_.set_color(RGBColor(0, 255, 0));
-	wincondition_type_.set_color(RGBColor(0, 255, 0));
+	mapname_.set_font_scale(scale_factor());
+	clients_.set_font_scale(scale_factor());
+	players_.set_font_scale(scale_factor());
+	map_.set_font_scale(scale_factor());
+	wincondition_type_.set_font_scale(scale_factor());
 
 	mapname_.set_text(_("(no map)"));
 	map_info_.set_text(_("The host has not yet selected a map or saved game."));
@@ -391,13 +404,13 @@ void FullscreenMenuLaunchMPG::refresh() {
 
 	if (settings.mapfilename != filename_proof_) {
 		if (!g_fs->file_exists(settings.mapfilename)) {
-			client_info_.set_color(UI_FONT_CLR_WARNING);
+			client_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kWarning));
 			client_info_.set_text(
 			   _("The selected file can not be found. If it is not automatically "
 			     "transferred to you, please write to the host about this problem."));
 		} else {
 			// Reset font color
-			client_info_.set_color(UI_FONT_CLR_FG);
+			client_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kLabel));
 
 			// Update local nr of players - needed for the client UI
 			nr_players_ = settings.players.size();
