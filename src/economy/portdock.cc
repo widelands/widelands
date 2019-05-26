@@ -375,8 +375,9 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 		ship.unload_unfit_items(game, *this, *next_port);
 	}
 #ifndef NDEBUG
-	else
+	else {
 		assert(ship.get_nritems() == 0);
+	}
 #endif
 
 	// Check for items with invalid destination. TODO(ypopezios): Prevent invalid destinations
