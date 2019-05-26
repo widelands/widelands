@@ -681,7 +681,7 @@ void DefaultAI::late_initialization() {
 				bo.inputs.push_back(temp_input.first);
 			}
 			for (const DescriptionIndex& temp_output : prod.output_ware_types()) {
-				bo.outputs.push_back(temp_output);
+				bo.ware_outputs.push_back(temp_output);
 			}
 
 			// Read information about worker outputs
@@ -698,7 +698,7 @@ void DefaultAI::late_initialization() {
 						}
 					}
 				}
-				if (!bo.is(BuildingAttribute::kBarracks) && bo.outputs.empty()) {
+				if (!bo.is(BuildingAttribute::kBarracks) && bo.ware_outputs.empty()) {
 					bo.set_is(BuildingAttribute::kRecruitment);
 				}
 			}
@@ -708,7 +708,7 @@ void DefaultAI::late_initialization() {
 			}
 
 			// If this is a producer, does it act also as supporter?
-			if (!bo.outputs.empty() && !bo.production_hints.empty()) {
+			if (!bo.ware_outputs.empty() && !bo.production_hints.empty()) {
 				bo.set_is(BuildingAttribute::kSupportingProducer);
 			}
 
@@ -728,7 +728,7 @@ void DefaultAI::late_initialization() {
 					mines_per_type[bo.mines] = MineTypesObserver();
 				}
 				// Identify iron mines based on output
-				if (bo.outputs[0] == tribe_->ironore()) {
+				if (bo.ware_outputs[0] == tribe_->ironore()) {
 					bo.set_is(BuildingAttribute::kIronMine);
 					mines_per_type[bo.mines].is_critical = true;
 					mine_fields_stat.add_critical_ore(bo.mines);
@@ -739,7 +739,7 @@ void DefaultAI::late_initialization() {
 				bo.set_is(BuildingAttribute::kShipyard);
 			}
 			// Identify refined log producer
-			if (bo.outputs.size() == 1 && bo.outputs[0] == tribe_->refinedlog()) {
+			if (bo.ware_outputs.size() == 1 && bo.ware_outputs[0] == tribe_->refinedlog()) {
 				bo.set_is(BuildingAttribute::kLogRefiner);
 			}
 
@@ -758,7 +758,7 @@ void DefaultAI::late_initialization() {
 				// now testing outputs of current building
 				// and comparing
 				bo.set_is(BuildingAttribute::kUpgradeSubstitutes);
-				for (DescriptionIndex ware : bo.outputs) {
+				for (DescriptionIndex ware : bo.ware_outputs) {
 					if (enh_outputs.count(ware) == 0) {
 						bo.unset_is(BuildingAttribute::kUpgradeSubstitutes);
 						break;
@@ -767,7 +767,7 @@ void DefaultAI::late_initialization() {
 
 				std::unordered_set<DescriptionIndex> cur_outputs;
 				// collecting wares that are produced in enhanced building
-				for (const DescriptionIndex& ware : bo.outputs) {
+				for (const DescriptionIndex& ware : bo.ware_outputs) {
 					cur_outputs.insert(ware);
 				}
 				// Does upgraded building produce any different outputs?
@@ -780,7 +780,7 @@ void DefaultAI::late_initialization() {
 			}
 
 			// now we identify producers of critical build materials
-			for (DescriptionIndex ware : bo.outputs) {
+			for (DescriptionIndex ware : bo.ware_outputs) {
 				// building material except for trivial material
 				if (tribe_->is_construction_material(ware) &&
 				    !(ware == tribe_->rawlog() || ware == tribe_->granite())) {
@@ -2512,7 +2512,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			            bo.new_building == BuildingNecessity::kForced ||
 			            bo.new_building == BuildingNecessity::kAllowed ||
 			            bo.new_building == BuildingNecessity::kNeededPending) &&
-			           (!bo.outputs.empty() ||
+			           (!bo.ware_outputs.empty() ||
 			            bo.initial_preciousness >
 			               0)) {  // bo.initial_preciousness signals that we have a worker output
 				bo.max_needed_preciousness =
@@ -2672,7 +2672,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				// Some productionsites strictly require supporting sites nearby
 				if (bo.requires_supporters) {
 					uint16_t supporters_nearby = 0;
-					for (auto output : bo.outputs) {
+					for (auto output : bo.ware_outputs) {
 						supporters_nearby += bf->supporters_nearby.at(output);
 					}
 					if (supporters_nearby == 0) {
@@ -3067,7 +3067,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						               (40 - current_stocklevel) / 2, kAbsValue);
 					}
 					// This considers supporters nearby
-					for (auto ph : bo.outputs) {
+					for (auto ph : bo.ware_outputs) {
 						prio += management_data.neuron_pool[52].get_result_safe(
 						           bf->supporters_nearby.at(ph) * 5, kAbsValue) /
 						        2;
@@ -3089,8 +3089,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// +1 if any consumers_ are nearby
 					consumers_nearby_count = 0;
 
-					for (size_t k = 0; k < bo.outputs.size(); ++k)
-						consumers_nearby_count += bf->consumers_nearby.at(bo.outputs.at(k));
+					for (size_t k = 0; k < bo.ware_outputs.size(); ++k)
+						consumers_nearby_count += bf->consumers_nearby.at(bo.ware_outputs.at(k));
 
 					if (consumers_nearby_count > 0) {
 						prio += std::abs(management_data.get_military_number_at(107)) / 3;
@@ -5006,8 +5006,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	// Calulate preciousness
 	bo.max_preciousness = bo.initial_preciousness;
 	bo.max_needed_preciousness = bo.initial_preciousness;
-	for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
-		DescriptionIndex wt(static_cast<size_t>(bo.outputs.at(m)));
+	for (uint32_t m = 0; m < bo.ware_outputs.size(); ++m) {
+		DescriptionIndex wt(static_cast<size_t>(bo.ware_outputs.at(m)));
 
 		uint16_t target = tribe_->get_ware_descr(wt)->default_target_quantity(tribe_->name());
 		if (target == Widelands::kInvalidWare) {
@@ -5022,7 +5022,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		// positive value here.
 		// TODO(GunChleoc): Since we require in Tribes::postload() that this is set for all wares used
 		// by a tribe, something seems to be wrong here. It should always be > 0.
-		const uint16_t preciousness = std::max<uint16_t>(wares.at(bo.outputs.at(m)).preciousness, 1);
+		const uint16_t preciousness =
+		   std::max<uint16_t>(wares.at(bo.ware_outputs.at(m)).preciousness, 1);
 
 		if (calculate_stocklevel(wt) < target ||
 		    site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) {
@@ -5067,7 +5068,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	// Do we have suppliers productionsites?
 	const bool suppliers_exist = check_supply(bo);
 
-	if (!bo.outputs.empty()) {
+	if (!bo.ware_outputs.empty()) {
 		assert(bo.max_preciousness > 0);
 	}
 
@@ -5573,17 +5574,19 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[4] = (bo.max_needed_preciousness >= 10) ?
 			               std::abs(management_data.get_military_number_at(2)) / 10 :
 			               0;
-			inputs[5] = (!bo.outputs.empty() && bo.current_stats > 10 + 70 / bo.outputs.size()) ?
-			               management_data.get_military_number_at(3) / 10 :
-			               0;
+			inputs[5] =
+			   (!bo.ware_outputs.empty() && bo.current_stats > 10 + 70 / bo.ware_outputs.size()) ?
+			      management_data.get_military_number_at(3) / 10 :
+			      0;
 			inputs[6] = (needs_second_for_upgrade) ?
 			               std::abs(management_data.get_military_number_at(4)) / 5 :
 			               0;
 			inputs[7] = (bo.cnt_under_construction + bo.unoccupied_count) * -1 *
 			            std::abs(management_data.get_military_number_at(9)) / 5;
-			inputs[8] = (!bo.outputs.empty() && bo.current_stats > 25 + 70 / bo.outputs.size()) ?
-			               management_data.get_military_number_at(7) / 8 :
-			               0;
+			inputs[8] =
+			   (!bo.ware_outputs.empty() && bo.current_stats > 25 + 70 / bo.ware_outputs.size()) ?
+			      management_data.get_military_number_at(7) / 8 :
+			      0;
 			inputs[9] = (bo.is(BuildingAttribute::kBuildingMatProducer)) ?
 			               std::abs(management_data.get_military_number_at(10)) / 10 :
 			               0;
@@ -5621,7 +5624,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			                0;
 			inputs[22] =
 			   (bo.total_count() == 0 && bo.is(BuildingAttribute::kBuildingMatProducer)) ? 3 : 0;
-			if (bo.cnt_built > 0 && !bo.outputs.empty()) {
+			if (bo.cnt_built > 0 && !bo.ware_outputs.empty()) {
 				inputs[22] += bo.current_stats / 10;
 			}
 			inputs[23] = (!player_statistics.strong_enough(player_number())) ? 5 : 0;
@@ -5639,24 +5642,24 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[31] = ((bo.cnt_under_construction + bo.unoccupied_count) > 0) ? -5 : 0;
 			inputs[32] = bo.max_needed_preciousness / 2;
 			inputs[33] = -(bo.cnt_under_construction + bo.unoccupied_count) * 4;
-			if (bo.cnt_built > 0 && !bo.outputs.empty() && !bo.inputs.empty()) {
+			if (bo.cnt_built > 0 && !bo.ware_outputs.empty() && !bo.inputs.empty()) {
 				inputs[34] +=
 				   bo.current_stats / std::abs(management_data.get_military_number_at(192)) * 10;
 			}
-			inputs[35] = (!bo.outputs.empty() && !bo.inputs.empty() &&
-			              bo.current_stats > 10 + 70 / bo.outputs.size()) ?
+			inputs[35] = (!bo.ware_outputs.empty() && !bo.inputs.empty() &&
+			              bo.current_stats > 10 + 70 / bo.ware_outputs.size()) ?
 			                2 :
 			                0;
-			inputs[36] = (!bo.outputs.empty() && !bo.inputs.empty() &&
+			inputs[36] = (!bo.ware_outputs.empty() && !bo.inputs.empty() &&
 			              bo.cnt_under_construction + bo.unoccupied_count == 0) ?
 			                bo.current_stats / 12 :
 			                0;
-			if (bo.cnt_built > 0 && !bo.inputs.empty() && !bo.outputs.empty() &&
+			if (bo.cnt_built > 0 && !bo.inputs.empty() && !bo.ware_outputs.empty() &&
 			    bo.current_stats < 20) {
 				inputs[37] = -5;
 			}
 			inputs[38] = (bo.cnt_under_construction + bo.unoccupied_count > 0) ? -10 : 0;
-			if (bo.cnt_built > 0 && !bo.outputs.empty() && bo.current_stats < 15) {
+			if (bo.cnt_built > 0 && !bo.ware_outputs.empty() && bo.current_stats < 15) {
 				inputs[39] = -10;
 			}
 			inputs[40] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? 3 : 0;
@@ -5666,8 +5669,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[44] = (bo.inputs.empty() && bo.max_needed_preciousness >= 10) ? 3 : 0;
 			inputs[45] = bo.max_needed_preciousness / 2;
 			inputs[46] =
-			   (!bo.outputs.empty() && bo.current_stats > 10 + 70 / bo.outputs.size()) ? 4 : 0;
-			inputs[47] = (!bo.outputs.empty() && bo.current_stats > 85) ? 4 : 0;
+			   (!bo.ware_outputs.empty() && bo.current_stats > 10 + 70 / bo.ware_outputs.size()) ? 4 :
+			                                                                                       0;
+			inputs[47] = (!bo.ware_outputs.empty() && bo.current_stats > 85) ? 4 : 0;
 			inputs[48] = (bo.max_needed_preciousness >= 10 &&
 			              (bo.cnt_under_construction + bo.unoccupied_count) == 1) ?
 			                5 :
@@ -5692,7 +5696,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			              bo.cnt_under_construction + bo.unoccupied_count == 0) ?
 			                6 :
 			                0;
-			inputs[63] = (!bo.outputs.empty() && !bo.inputs.empty()) ? bo.current_stats / 10 : 0;
+			inputs[63] = (!bo.ware_outputs.empty() && !bo.inputs.empty()) ? bo.current_stats / 10 : 0;
 			inputs[64] = (gametime > 20 * 60 * 1000 && bo.total_count() == 0) ? 3 : 0;
 			inputs[65] = (gametime > 45 * 60 * 1000 && bo.total_count() == 0) ? 3 : 0;
 			inputs[66] = (gametime > 60 * 60 * 1000 && bo.total_count() <= 1) ? 3 : 0;
@@ -5759,13 +5763,13 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[109] = (!bo.inputs.empty() && gametime > 50 * 60 * 1000 && bo.total_count() <= 1) ?
 			                 std::abs(management_data.get_military_number_at(163)) / 10 :
 			                 0;
-			inputs[110] =
-			   (bo.outputs.size() == 1) ?
-			      (tribe_->get_ware_descr(bo.outputs.at(0))->default_target_quantity(tribe_->name()) -
-			       get_stocklevel(bo, gametime)) *
-			         std::abs(management_data.get_military_number_at(165)) / 20 :
-			      0;
-			inputs[111] = bo.current_stats / (bo.outputs.size() + 1);
+			inputs[110] = (bo.ware_outputs.size() == 1) ?
+			                 (tribe_->get_ware_descr(bo.ware_outputs.at(0))
+			                     ->default_target_quantity(tribe_->name()) -
+			                  get_stocklevel(bo, gametime)) *
+			                    std::abs(management_data.get_military_number_at(165)) / 20 :
+			                 0;
+			inputs[111] = bo.current_stats / (bo.ware_outputs.size() + 1);
 
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
@@ -5842,7 +5846,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kNeeded;
 		} else if (bo.max_preciousness >= 10 && bo.total_count() == 2) {
 			return BuildingNecessity::kNeeded;
-		} else if (!bo.outputs.empty() && bo.current_stats > (10 + 60 / bo.outputs.size()) / 2) {
+		} else if (!bo.ware_outputs.empty() &&
+		           bo.current_stats > (10 + 60 / bo.ware_outputs.size()) / 2) {
 			return BuildingNecessity::kNeeded;
 		} else if (bo.inputs.size() == 1 &&
 		           calculate_stocklevel(static_cast<size_t>(bo.inputs.at(0))) >
@@ -5878,7 +5883,7 @@ uint32_t DefaultAI::calculate_stocklevel(Widelands::DescriptionIndex wt, const W
 uint32_t
 DefaultAI::get_stocklevel(BuildingObserver& bo, const uint32_t gametime, const WareWorker what) {
 	if (bo.stocklevel_time < gametime - 5 * 1000) {
-		if (what == WareWorker::kWare && (!bo.production_hints.empty() || !bo.outputs.empty())) {
+		if (what == WareWorker::kWare && (!bo.production_hints.empty() || !bo.ware_outputs.empty())) {
 			// looking for smallest value
 			bo.stocklevel_count = std::numeric_limits<uint32_t>::max();
 			for (auto ph : bo.production_hints) {
@@ -5887,7 +5892,7 @@ DefaultAI::get_stocklevel(BuildingObserver& bo, const uint32_t gametime, const W
 					bo.stocklevel_count = res;
 				}
 			}
-			for (auto ph : bo.outputs) {
+			for (auto ph : bo.ware_outputs) {
 				const uint32_t res = calculate_stocklevel(static_cast<size_t>(ph), what);
 				if (res < bo.stocklevel_count) {
 					bo.stocklevel_count = res;
@@ -5965,8 +5970,8 @@ void DefaultAI::consider_productionsite_influence(BuildableField& field,
 		++field.consumers_nearby.at(bo.inputs.at(i));
 	}
 
-	for (size_t i = 0; i < bo.outputs.size(); ++i) {
-		++field.producers_nearby.at(bo.outputs.at(i));
+	for (size_t i = 0; i < bo.ware_outputs.size(); ++i) {
+		++field.producers_nearby.at(bo.ware_outputs.at(i));
 	}
 	if (bo.collected_map_resource != INVALID_INDEX) {
 		++field.collecting_producers_nearby.at(bo.collected_map_resource);
@@ -6299,8 +6304,8 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 				++fishers_count_;
 			}
 
-			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
-				++wares.at(bo.outputs.at(i)).producers;
+			for (uint32_t i = 0; i < bo.ware_outputs.size(); ++i)
+				++wares.at(bo.ware_outputs.at(i)).producers;
 
 			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
 				++wares.at(bo.inputs.at(i)).consumers;
@@ -6314,8 +6319,8 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			assert(mines_.back().dismantle_pending_since == kNever);
 			mines_.back().bo->unoccupied_count += 1;
 
-			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
-				++wares.at(bo.outputs.at(i)).producers;
+			for (uint32_t i = 0; i < bo.ware_outputs.size(); ++i)
+				++wares.at(bo.ware_outputs.at(i)).producers;
 
 			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
 				++wares.at(bo.inputs.at(i)).consumers;
@@ -6418,8 +6423,8 @@ void DefaultAI::lose_building(const Building& b) {
 					break;
 				}
 
-			for (uint32_t i = 0; i < bo.outputs.size(); ++i) {
-				--wares.at(bo.outputs.at(i)).producers;
+			for (uint32_t i = 0; i < bo.ware_outputs.size(); ++i) {
+				--wares.at(bo.ware_outputs.at(i)).producers;
 			}
 
 			for (uint32_t i = 0; i < bo.inputs.size(); ++i) {
@@ -6439,8 +6444,8 @@ void DefaultAI::lose_building(const Building& b) {
 				}
 			}
 
-			for (uint32_t i = 0; i < bo.outputs.size(); ++i) {
-				--wares.at(bo.outputs.at(i)).producers;
+			for (uint32_t i = 0; i < bo.ware_outputs.size(); ++i) {
+				--wares.at(bo.ware_outputs.at(i)).producers;
 			}
 
 			for (uint32_t i = 0; i < bo.inputs.size(); ++i) {
@@ -6502,8 +6507,8 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	for (const Widelands::DescriptionIndex& temp_inputs : bo.inputs) {
 		for (const BuildingObserver& temp_building : buildings_) {
 			if (temp_building.cnt_built &&
-			    std::find(temp_building.outputs.begin(), temp_building.outputs.end(), temp_inputs) !=
-			       temp_building.outputs.end() &&
+			    std::find(temp_building.ware_outputs.begin(), temp_building.ware_outputs.end(),
+			              temp_inputs) != temp_building.ware_outputs.end() &&
 			    check_supply(temp_building)) {
 				++supplied;
 				break;
