@@ -35,7 +35,7 @@ function init_player()
             gold = 10,
             grout = 30,
             granite = 30,
-            thatch_reed = 40,
+            reed = 40,
 
             -- wares for training
             ax_sharp = 20,

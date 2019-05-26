@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-05 04:54+0000\n"
+"POT-Creation-Date: 2019-05-10 07:32+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2019\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -340,6 +340,10 @@ msgstr ""
 "överwunnen, de vör uns laggen. Wi hebben sogaar de Willen Lüü ur uns' Land "
 "dreven. Aver uns' Sieg is blot för körte Tied, denn dat is eerst de Anfang "
 "vum Krieg. Laat uns wachten, wat de Tokunft för uns noch paraat hollt."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:230
+msgid "Victory"
+msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
 msgid ""

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-13 09:26+0000\n"
+"POT-Creation-Date: 2019-05-10 07:32+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2019\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
@@ -344,6 +344,10 @@ msgstr ""
 "возложены на нас. Мы даже изгнали варваров из нашей страны. Однако наша "
 "победа носит временный характер, т.к. это только начало войны. Посмотрим, "
 "что ждет нас в будущем."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:230
+msgid "Victory"
+msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
 msgid ""

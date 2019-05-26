@@ -28,10 +28,10 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "logic/ai_dna_handler.h"
-#include "logic/findnode.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/world/terrain_description.h"
@@ -463,7 +463,7 @@ struct BuildingObserver {
 	uint32_t basic_amount;  // basic amount for basic economy as defined in init.lua
 
 	std::vector<Widelands::DescriptionIndex> inputs;
-	std::vector<Widelands::DescriptionIndex> outputs;
+	std::vector<Widelands::DescriptionIndex> ware_outputs;
 	std::vector<Widelands::DescriptionIndex> positions;
 	std::vector<Widelands::DescriptionIndex> critical_building_material;
 
@@ -478,6 +478,7 @@ struct BuildingObserver {
 	bool requires_supporters;
 
 	// information needed for decision on new building construction
+	int16_t initial_preciousness;
 	int16_t max_preciousness;
 	int16_t max_needed_preciousness;
 

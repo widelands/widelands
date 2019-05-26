@@ -31,8 +31,8 @@ namespace Widelands {
 
 FerryDescr::FerryDescr(const std::string& init_descname,
                            const LuaTable& table,
-                           const EditorGameBase& egbase)
-   : CarrierDescr(init_descname, table, egbase, MapObjectType::FERRY) {
+                           const Tribes& tribes)
+   : CarrierDescr(init_descname, table, tribes, MapObjectType::FERRY) {
 }
 
 // When pathfinding, we _always_ use a CheckStepFerry to account for our very special movement rules.
@@ -85,7 +85,7 @@ void Ferry::unemployed_update(Game& game, State&) {
 			if (flag->has_capacity()) {
 				molog("[unemployed]: dropping ware here\n");
 				flag->add_ware(game, *fetch_carried_ware(game));
-				return start_task_idle(game, descr().get_animation("idle"), 50);
+				return start_task_idle(game, descr().get_animation("idle", this), 50);
 			}
 		}
 		molog("[unemployed]: trying to find a flag\n");
@@ -104,10 +104,10 @@ void Ferry::unemployed_update(Game& game, State&) {
 							Path path(pos);
 							if (map.findpath(pos, flag->get_position(), 0, path, CheckStepFerry(game))) {
 								molog("[unemployed]: moving to nearby flag\n");
-								return start_task_movepath(game, path, descr().get_right_walk_anims(true));
+								return start_task_movepath(game, path, descr().get_right_walk_anims(true, this));
 							}
 							molog("[unemployed]: unable to row to reachable flag!\n");
-							return start_task_idle(game, descr().get_animation("idle"), 50);
+							return start_task_idle(game, descr().get_animation("idle", this), 50);
 						}
 					}
 				}
@@ -135,14 +135,14 @@ void Ferry::unemployed_update(Game& game, State&) {
 		Path path(pos);
 		for (uint8_t i = 0; i < 5; i++) {
 			if (map.findpath(pos, game.random_location(pos, 2), 0, path, CheckStepFerry(game))) {
-				return start_task_movepath(game, path, descr().get_right_walk_anims(does_carry_ware()));
+				return start_task_movepath(game, path, descr().get_right_walk_anims(does_carry_ware(), this));
 			}
 		}
 		molog("[unemployed]: no suitable locations to row to found\n");
-		return start_task_idle(game, descr().get_animation("idle"), 50);
+		return start_task_idle(game, descr().get_animation("idle", this), 50);
 	}
 
-	return start_task_idle(game, descr().get_animation("idle"), 500);
+	return start_task_idle(game, descr().get_animation("idle", this), 500);
 }
 
 bool Ferry::unemployed() {
@@ -173,7 +173,7 @@ void Ferry::row_update(Game& game, State&) {
 		} else if (signal == "blocked") {
 			molog("[row]: Blocked by a battle\n");
 			signal_handled();
-			return start_task_idle(game, descr().get_animation("idle"), 900);
+			return start_task_idle(game, descr().get_animation("idle", this), 900);
 		} else {
 			molog("[row]: Cancel due to signal '%s'\n", signal.c_str());
 			return pop_task(game);
@@ -203,7 +203,7 @@ void Ferry::row_update(Game& game, State&) {
 		// try again later
 		return schedule_act(game, 50);
 	}
-	return start_task_movepath(game, path, descr().get_right_walk_anims(does_carry_ware()));
+	return start_task_movepath(game, path, descr().get_right_walk_anims(does_carry_ware(), this));
 }
 
 void Ferry::init_auto_task(Game& game) {

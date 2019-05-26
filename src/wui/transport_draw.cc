@@ -50,7 +50,8 @@ void Flag::draw(uint32_t gametime,
 			warepos.y -= (6.f + (i - 8.f) * 3.f) * scale;
 		}
 		dst->blit_animation(warepos, Widelands::Coords::null(), scale,
-		                    wares_[i].ware->descr().get_animation("idle"), 0, &player_color);
+		                    wares_[i].ware->descr().get_animation("idle", wares_[i].ware), 0,
+		                    &player_color);
 	}
 }
 

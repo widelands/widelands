@@ -550,7 +550,7 @@ public:
 	uint32_t find_attack_soldiers(Flag&,
 	                              std::vector<Soldier*>* soldiers = nullptr,
 	                              uint32_t max = std::numeric_limits<uint32_t>::max());
-	void enemyflagaction(Flag&, PlayerNumber attacker, uint32_t count);
+	void enemyflagaction(Flag&, PlayerNumber attacker, const std::vector<Widelands::Soldier*>&);
 
 	uint32_t casualties() const {
 		return casualties_;
@@ -598,7 +598,8 @@ public:
 
 	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex const) const;
 
-	void read_statistics(FileRead&, uint16_t packet_version);
+	void
+	read_statistics(FileRead&, uint16_t packet_version, const TribesLegacyLookupTable& lookup_table);
 	void write_statistics(FileWrite&) const;
 	void read_remaining_shipnames(FileRead&);
 	void write_remaining_shipnames(FileWrite&) const;

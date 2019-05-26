@@ -35,7 +35,7 @@ class FerryDescr : public CarrierDescr {
 public:
 	FerryDescr(const std::string& init_descname,
 	             const LuaTable& table,
-	             const EditorGameBase& egbase);
+	             const Tribes& tribes);
 	~FerryDescr() override {
 	}
 

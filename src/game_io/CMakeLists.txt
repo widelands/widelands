@@ -34,8 +34,12 @@ wl_library(game_io
     io_fileread
     io_filesystem
     logic
+    logic_commands
     logic_exceptions
     logic_game_controller
+    logic_map
+    logic_map_objects
+    logic_widelands_geometry_io
     map_io
     map_io_map_loader
     profile

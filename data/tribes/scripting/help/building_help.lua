@@ -57,7 +57,7 @@ function dependencies_resi(tribename, resource, items, text)
          am = amount
       end
    end
-   local items_with_resource = { wl.Game():get_immovable_description(resi).representative_image }
+   local items_with_resource = { wl.Game():get_immovable_description(resi).icon_name }
    for count, item in pairs(items) do
       table.insert(items_with_resource, item.icon_name)
    end
@@ -181,13 +181,13 @@ function building_help_general_string(tribe, building_description)
    local result = h2(_"Lore")
    local lore_text = building_helptext_lore()
    if type(lore_text) == "table" then
-      result = result .. li_image(building_description.representative_image, lore_text[1])
+      result = result .. li_object(building_description.name, lore_text[1])
       for k,v in ipairs({table.unpack(lore_text, 2)}) do
          result = result .. p(v)
       end
    else
     result = result ..
-      li_image(building_description.representative_image, lore_text)
+      li_object(building_description.name, lore_text)
    end
 
    local lore_author = building_helptext_lore_author()
@@ -660,8 +660,14 @@ function building_help_crew_string(tribe, building_description)
       if (number_of_workers > 0) then
          local tool_string = help_tool_string(tribe, toolnames, number_of_workers)
          if (tool_string ~= "") then
-            -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-            result = result .. h3(ngettext("Worker uses:","Workers use:", number_of_workers)) .. tool_string
+            if (number_of_workers == 1) then
+               -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
+               result = result .. h3(_"Worker uses:")
+            else
+               -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker uses
+               result = result .. h3(_"Workers use:")
+            end
+            result = result .. tool_string
          end
       end
 

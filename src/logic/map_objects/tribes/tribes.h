@@ -24,7 +24,7 @@
 
 #include "base/macros.h"
 #include "graphic/texture.h"
-#include "logic/description_maintainer.h"
+#include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -54,25 +54,25 @@ public:
 	}
 
 	/// Adds this building type to the tribe description.
-	void add_constructionsite_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_constructionsite_type(const LuaTable& table);
 
 	/// Adds this building type to the tribe description.
-	void add_dismantlesite_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_dismantlesite_type(const LuaTable& table);
 
 	/// Adds this building type to the tribe description.
-	void add_militarysite_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_militarysite_type(const LuaTable& table);
 
 	/// Adds this building type to the tribe description.
-	void add_productionsite_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_productionsite_type(const LuaTable& table, const World& world);
 
 	/// Adds this building type to the tribe description.
-	void add_trainingsite_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_trainingsite_type(const LuaTable& table, const World& world);
 
 	/// Adds this building type to the tribe description.
-	void add_warehouse_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_warehouse_type(const LuaTable& table);
 
 	/// Adds this building type to the tribe description.
-	void add_market_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_market_type(const LuaTable& table);
 
 	/// Adds this immovable type to the tribe description.
 	void add_immovable_type(const LuaTable& table);
@@ -84,19 +84,19 @@ public:
 	void add_ware_type(const LuaTable& table);
 
 	/// Adds this worker type to the tribe description.
-	void add_carrier_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_carrier_type(const LuaTable& table);
 
 	/// Adds this worker type to the tribe description.
-	void add_ferry_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_soldier_type(const LuaTable& table);
 
 	/// Adds this worker type to the tribe description.
-	void add_soldier_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_ferry_type(const LuaTable& table);
 
 	/// Adds this worker type to the tribe description.
-	void add_worker_type(const LuaTable& table, const EditorGameBase& egbase);
+	void add_worker_type(const LuaTable& table);
 
 	/// Adds a specific tribe's configuration.
-	void add_tribe(const LuaTable& table, const EditorGameBase& egbase);
+	void add_tribe(const LuaTable& table);
 
 	void add_custom_building(const LuaTable& table);
 
@@ -147,6 +147,8 @@ public:
 	/// Complete the Description objects' information with data from other Description objects.
 	void postload();
 
+	uint32_t get_largest_workarea() const;
+
 private:
 	void postload_calculate_trainingsites_proportions();
 
@@ -156,6 +158,8 @@ private:
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
 	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
+
+	uint32_t largest_workarea_;
 
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };

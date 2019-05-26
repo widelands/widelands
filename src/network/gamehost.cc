@@ -531,7 +531,7 @@ GameHost::GameHost(const std::string& playername, bool internet)
 	hostuser.position = UserSettings::none();
 	hostuser.ready = true;
 	d->settings.users.push_back(hostuser);
-	file_ = nullptr;  //  Initialize as 0 pointer - unfortunately needed in struct.
+	file_.reset(nullptr);  //  Initialize as 0 pointer - unfortunately needed in struct.
 }
 
 GameHost::~GameHost() {
@@ -546,7 +546,6 @@ GameHost::~GameHost() {
 	d->net.reset();
 	d->promoter.reset();
 	delete d;
-	delete file_;
 }
 
 const std::string& GameHost::get_local_playername() const {
@@ -1083,9 +1082,7 @@ void GameHost::set_map(const std::string& mapname,
 		// Read in the file
 		FileRead fr;
 		fr.open(*g_fs, mapfilename);
-		if (file_)
-			delete file_;
-		file_ = new NetTransferFile();
+		file_.reset(new NetTransferFile());
 		file_->filename = mapfilename;
 		uint32_t leftparts = file_->bytes = fr.get_size();
 		while (leftparts > 0) {
@@ -1104,10 +1101,7 @@ void GameHost::set_map(const std::string& mapname,
 		file_->md5sum = md5sum.get_checksum().str();
 	} else {
 		// reset previously offered map / saved game
-		if (file_) {
-			delete file_;
-			file_ = nullptr;
-		}
+		file_.reset(nullptr);
 	}
 
 	packet.reset();
@@ -1627,13 +1621,13 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 
 	// Assign the player a name, preferably the name chosen by the client
 	if (playername.empty())  // Make sure there is at least a name base.
-		playername = _("Player");
+		playername = "Player";
 	std::string effective_name = playername;
 
 	if (has_user_name(effective_name, client.usernum)) {
-		uint32_t i = 2;
+		uint32_t i = 1;
 		do {
-			effective_name = (boost::format(_("Player %u")) % i++).str();
+			effective_name = (boost::format("%s%u") % playername % i++).str();
 		} while (has_user_name(effective_name, client.usernum));
 	}
 
