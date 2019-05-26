@@ -79,7 +79,7 @@ ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& argumen
 	parameters = MapObjectProgram::parse_act_animate(arguments, descr, true);
 }
 
-/// Use convolutuion to make the animation time a random variable with binomial
+/// Use convolution to make the animation time a random variable with binomial
 /// distribution and the configured time as the expected value.
 void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) const {
 	immovable.start_animation(game, parameters.animation);
@@ -91,9 +91,10 @@ ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arg
 	parameters = MapObjectProgram::parse_act_play_sound(arguments, kFxPriorityAllowMultiple - 1);
 }
 
-/** Demand from the g_sound_handler to play a certain sound effect.
- * Whether the effect actually gets played
- * is decided only by the sound server*/
+/**
+ * Send request to the g_sound_handler to play a certain sound effect.
+ * Whether the effect actually gets played is decided by the sound server itself.
+ */
 void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) const {
 	Notifications::publish(NoteSound(SoundType::kAmbient, parameters.fx, immovable.get_position(), parameters.priority));
 	immovable.program_step(game);
@@ -107,14 +108,14 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 		bob = false;
 		probability = 0;
 
-		for (uint32_t i = 0; i < arguments.size(); ++i) {
-			if (arguments[i] == "bob") {
+		for (const std::string& argument : arguments) {
+			if (argument == "bob") {
 				bob = true;
-			} else if (arguments[i][0] >= '0' && arguments[i][0] <= '9') {
-				probability = read_positive(arguments[i], 254);
+			} else if (argument[0] >= '0' && argument[0] <= '9') {
+				probability = read_positive(argument, 254);
 			} else {
 				// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load order. Maybe in postload() one day.
-				type_name = arguments[i];
+				type_name = argument;
 			}
 		}
 		if (type_name == descr.name()) {
@@ -183,10 +184,11 @@ ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments) {
 }
 
 void ImmovableProgram::ActRemove::execute(Game& game, Immovable& immovable) const {
-	if (probability == 0 || game.logic_rand() % 256 < probability)
+	if (probability == 0 || game.logic_rand() % 256 < probability) {
 		immovable.remove(game);  //  Now immovable is a dangling reference!
-	else
+	} else {
 		immovable.program_step(game);
+	}
 }
 
 ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments, const ImmovableDescr& descr) {
@@ -305,8 +307,9 @@ void ImmovableProgram::ActConstruct::execute(Game& g, Immovable& imm) const {
 
 		// Otherwise, this is a decay timeout
 		uint32_t totaldelivered = 0;
-		for (Buildcost::const_iterator it = d->delivered.begin(); it != d->delivered.end(); ++it)
-			totaldelivered += it->second;
+		for (const auto& addme : d->delivered) {
+			totaldelivered += addme.second;
+		}
 
 		if (!totaldelivered) {
 			imm.remove(g);
@@ -314,13 +317,11 @@ void ImmovableProgram::ActConstruct::execute(Game& g, Immovable& imm) const {
 		}
 
 		uint32_t randdecay = g.logic_rand() % totaldelivered;
-		for (Buildcost::iterator it = d->delivered.begin(); it != d->delivered.end(); ++it) {
-			if (randdecay < it->second) {
-				it->second--;
+		for (const auto& subtractme : d->delivered) {
+			if (randdecay < subtractme.second) {
 				break;
 			}
-
-			randdecay -= it->second;
+			randdecay -= subtractme.second;
 		}
 
 		imm.anim_construction_done_ = d->delivered.total();
@@ -331,10 +332,9 @@ void ImmovableProgram::ActConstruct::execute(Game& g, Immovable& imm) const {
 
 ImmovableActionData*
 ImmovableActionData::load(FileRead& fr, Immovable& imm, const std::string& name) {
-	// TODO(GunChleoc): Use "construct" only after Build 20
-	if (name == "construction" || name == "construct")
+	if (name == "construct") {
 		return ActConstructData::load(fr, imm);
-	else {
+	} else {
 		log("ImmovableActionData::load: type %s not known", name.c_str());
 		return nullptr;
 	}

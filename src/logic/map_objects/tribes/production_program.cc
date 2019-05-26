@@ -73,6 +73,20 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(const std::str
 		throw GameDataError("Expected ware or worker type but found '%s'", item.c_str());
 	}
 }
+
+TrainingAttribute parse_training_attribute(const std::string& argument) {
+	if (argument == "health") {
+		return TrainingAttribute::kHealth;
+	} else if (argument == "attack") {
+		return TrainingAttribute::kAttack;
+	} else if (argument == "defense") {
+		return TrainingAttribute::kDefense;
+	} else if (argument == "evade") {
+		return TrainingAttribute::kEvade;
+	} else {
+		throw GameDataError("Expected health|attack|defense|evade after 'soldier' but found '%s'", argument.c_str());
+	}
+}
 }  // namespace
 
 ProductionProgram::Action::~Action() {
@@ -141,9 +155,9 @@ ProductionProgram::Groups ProductionProgram::parse_ware_type_groups(std::vector<
 
 
 BillOfMaterials ProductionProgram::parse_bill_of_materials(const std::vector<std::string>& arguments,
-																  WareWorker ww,
-																  const ProductionSiteDescr& descr,
-																  const Tribes& tribes) {
+														WareWorker ww,
+														const ProductionSiteDescr& descr,
+														const Tribes& tribes) {
 	BillOfMaterials result;
 	for (const std::string& argument : arguments) {
 		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "1");
@@ -652,12 +666,12 @@ ProductionProgram::ActCheckMap::ActCheckMap(const std::vector<std::string>& argu
 	if (arguments.size() != 1 || arguments.front() != "seafaring") {
 		throw GameDataError("Usage: checkmap=seafaring");
 	}
-	feature_ = SEAFARING;
+	feature_ = Feature::kSeafaring;
 }
 
 void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) const {
 	switch (feature_) {
-	case SEAFARING: {
+	case Feature::kSeafaring: {
 		if (game.map().allows_seafaring()) {
 			return ps.program_step(game, 0);
 		} else {
@@ -922,7 +936,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 	chance_ = read_positive(arguments.at(3));
 	training_ = read_positive(arguments.at(4));
 
-	const std::string description = (boost::format("%1$s %2$s mine %3$s") % descr->name() %
+	const std::string description = (boost::format("%s %s mine %s") % descr->name() %
 							   production_program_name % world.get_resource(resource_)->name())
 								 .str();
 	descr->workarea_info_[distance_].insert(description);
@@ -1047,18 +1061,7 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::strin
 	if (arguments.front() != "soldier") {
 		throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
 	}
-
-	if (arguments.at(1) == "health") {
-		attribute_ = TrainingAttribute::kHealth;
-	} else if (arguments.at(1) == "attack") {
-		attribute_ = TrainingAttribute::kAttack;
-	} else if (arguments.at(1) == "defense") {
-		attribute_ = TrainingAttribute::kDefense;
-	} else if (arguments.at(1) == "evade") {
-		attribute_ = TrainingAttribute::kEvade;
-	} else {
-		throw GameDataError("Expected health|attack|defense|evade after 'soldier' but found '%s'", arguments.at(1).c_str());
-	}
+	attribute_ = parse_training_attribute(arguments.at(1));
 	level_ = read_int(arguments.at(2), 0);
 }
 
@@ -1079,18 +1082,23 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 			ps.set_production_result(_("No soldier found for this training level!"));
 			return ps.program_end(game, ProgramResult::kSkipped);
 		}
+
 		if (attribute_ == TrainingAttribute::kHealth) {
-			if ((*it)->get_health_level() == level_)
+			if ((*it)->get_health_level() == level_) {
 				break;
+			}
 		} else if (attribute_ == TrainingAttribute::kAttack) {
-			if ((*it)->get_attack_level() == level_)
+			if ((*it)->get_attack_level() == level_) {
 				break;
+			}
 		} else if (attribute_ == TrainingAttribute::kDefense) {
-			if ((*it)->get_defense_level() == level_)
+			if ((*it)->get_defense_level() == level_) {
 				break;
+			}
 		} else if (attribute_ == TrainingAttribute::kEvade) {
-			if ((*it)->get_evade_level() == level_)
+			if ((*it)->get_evade_level() == level_) {
 				break;
+			}
 		}
 	}
 	ps.molog("    okay\n");  // okay, do nothing
@@ -1112,17 +1120,7 @@ ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments)
 		throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
 	}
 
-	if (arguments.at(1) == "health") {
-		attribute_ = TrainingAttribute::kHealth;
-	} else if (arguments.at(1) == "attack") {
-		attribute_ = TrainingAttribute::kAttack;
-	} else if (arguments.at(1) == "defense") {
-		attribute_ = TrainingAttribute::kDefense;
-	} else if (arguments.at(1) == "evade") {
-		attribute_ = TrainingAttribute::kEvade;
-	} else {
-		throw GameDataError("Expected health|attack|defense|evade after 'soldier' but found '%s'", arguments.at(1).c_str());
-	}
+	attribute_ = parse_training_attribute(arguments.at(1));
 	level_ = read_int(arguments.at(2), 0);
 	target_level_ = read_positive(arguments.at(3));
 }
@@ -1136,42 +1134,42 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	ps.molog("  Training soldier's %u (%d to %d)", static_cast<unsigned int>(attribute_),
 	         static_cast<unsigned int>(level_), static_cast<unsigned int>(target_level_));
 
-	for (;; ++it) {
+	bool training_done = false;
+	for (; !training_done; ++it) {
 		if (it == soldiers_end) {
 			ps.set_production_result(_("No soldier found for this training level!"));
 			return ps.program_end(game, ProgramResult::kSkipped);
 		}
-		if (attribute_ == TrainingAttribute::kHealth) {
-			if ((*it)->get_health_level() == level_)
-				break;
-		} else if (attribute_ == TrainingAttribute::kAttack) {
-			if ((*it)->get_attack_level() == level_)
-				break;
-		} else if (attribute_ == TrainingAttribute::kDefense) {
-			if ((*it)->get_defense_level() == level_)
-				break;
-		} else if (attribute_ == TrainingAttribute::kEvade) {
-			if ((*it)->get_evade_level() == level_)
-				break;
+		try {
+			switch (attribute_) {
+			case TrainingAttribute::kHealth:
+				if ((*it)->get_health_level() == level_) {
+					(*it)->set_health_level(target_level_);
+					training_done = true;
+				} break;
+			case TrainingAttribute::kAttack:
+				if ((*it)->get_attack_level() == level_) {
+					(*it)->set_attack_level(target_level_);
+					training_done = true;
+				} break;
+			case TrainingAttribute::kDefense:
+				if ((*it)->get_defense_level() == level_) {
+					(*it)->set_defense_level(target_level_);
+					training_done = true;
+				} break;
+			case TrainingAttribute::kEvade:
+				if ((*it)->get_evade_level() == level_) {
+					(*it)->set_evade_level(target_level_);
+					training_done = true;
+				} break;
+			default:
+				throw wexception("Unknown training attribute index %d", static_cast<unsigned int>(attribute_));
+			}
+		} catch (...) {
+			throw wexception("Fail training soldier!!");
 		}
 	}
-	ps.molog("    okay\n");  // okay, do nothing
 
-	try {
-		if (attribute_ == TrainingAttribute::kHealth)
-			(*it)->set_health_level(target_level_);
-		else if (attribute_ == TrainingAttribute::kAttack)
-			(*it)->set_attack_level(target_level_);
-
-		else if (attribute_ == TrainingAttribute::kDefense)
-			(*it)->set_defense_level(target_level_);
-
-		else if (attribute_ == TrainingAttribute::kEvade)
-			(*it)->set_evade_level(target_level_);
-
-	} catch (...) {
-		throw wexception("Fail training soldier!!");
-	}
 	ps.molog("  Training done!\n");
 	ps.set_production_result(
 	   /** TRANSLATORS: Success message of a trainingsite '%s' stands for the description of the

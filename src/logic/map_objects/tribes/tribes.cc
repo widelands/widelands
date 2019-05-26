@@ -369,7 +369,7 @@ void Tribes::postload_register_economy_demand_checks(BuildingDescr& building_des
 	if (upcast(ProductionSiteDescr, prodsite, &building_descr)) {
 		// This function can be called only once per loading of tribes
 		assert(prodsite->ware_demand_checks() != nullptr);
-		// NOCOM
+
 		for (const DescriptionIndex ware_index : *prodsite->ware_demand_checks()) {
 			if (!tribe_descr.has_ware(ware_index)) {
 				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check for ware '%s', but the tribe does not use this ware",

@@ -119,7 +119,6 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 
 	// save map data to temporary file and reassign map fs
 	try {
-
 		g_fs->ensure_directory_exists(kTempFileDir);
 
 		std::string filename = kTempFileDir + g_fs->file_separator() + timestring() + "_mapdata";

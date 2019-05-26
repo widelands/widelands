@@ -331,8 +331,8 @@ struct ProductionProgram : public MapObjectProgram {
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
-		enum { SEAFARING = 1 };
-		uint8_t feature_;
+		enum class Feature { kSeafaring = 1 };
+		Feature feature_;
 	};
 
 	/// Runs an animation.

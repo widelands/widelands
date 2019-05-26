@@ -91,7 +91,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const std::string& msgctxt,
                                          MapObjectType init_type,
                                          const LuaTable& table,
-										 const Tribes& tribes,
+                                         const Tribes& tribes,
                                          const World& world)
    : BuildingDescr(init_descname, init_type, table, tribes),
 	 ware_demand_checks_(new std::set<DescriptionIndex>()),

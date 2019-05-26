@@ -44,7 +44,7 @@ std::vector<std::string> MapObjectProgram::split_string(const std::string& s, co
 
 
 unsigned int MapObjectProgram::read_int(const std::string& input, int min_value, int max_value) {
-	unsigned int  result = 0U;
+	unsigned int result = 0U;
 	char* endp;
 	long int const value = strtol(input.c_str(), &endp, 0);
 	result = value;
@@ -87,11 +87,11 @@ const std::pair<std::string, std::string> MapObjectProgram::read_key_value_pair(
 
 MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {
 	if (arguments.size() < 1 || arguments.size() > 2) {
-		throw GameDataError("Usage: animate=<name> <duration>");
+		throw GameDataError("Usage: animate=<name> [<duration>]");
 	}
 
 	AnimationParameters result;
-	const std::string animation_name = arguments.at(0);
+	const std::string& animation_name = arguments.at(0);
 
 	if (!is_idle_allowed && animation_name == "idle") {
 		throw GameDataError("'idle' animation is default; calling is not allowed");
@@ -108,8 +108,8 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(const 
 }
 
 MapObjectProgram::PlaySoundParameters MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments, uint8_t default_priority) {
-	if (arguments.size() < 2 || arguments.size() > 3) {
-		throw GameDataError("Usage: playsound <sound_dir> <sound_name> [priority]");
+	if (arguments.size() < 1 || arguments.size() > 2) {
+		throw GameDataError("Usage: playsound=<sound_dir/sound_name> [priority]");
 	}
 	PlaySoundParameters result;
 	result.fx = SoundHandler::register_fx(SoundType::kAmbient, arguments.at(0));

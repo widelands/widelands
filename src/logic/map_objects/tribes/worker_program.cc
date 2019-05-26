@@ -815,8 +815,8 @@ void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::stri
 		throw GameDataError("Usage: scout=<radius> <time>");
 	}
 
-	act->iparam1 = atoi(cmd[0].c_str());
-	act->iparam2 = atoi(cmd[1].c_str());
+	act->iparam1 = read_positive(cmd[0]);
+	act->iparam2 = read_positive(cmd[1]);
 	act->function = &Worker::run_scout;
 }
 

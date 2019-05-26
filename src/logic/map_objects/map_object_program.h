@@ -31,7 +31,7 @@ namespace Widelands {
 
 struct MapObjectDescr;
 
-/// Superclass for Worker, immovable and productionsite programs. Includes a program name and diverse parsing convenience functions. The creation and execution of program actions is left to the sub-classes.
+/// Superclass for Worker, Immovable and Productionsite programs. Includes a program name and diverse parsing convenience functions. The creation and execution of program actions is left to the sub-classes.
 struct MapObjectProgram {
 	const std::string& name() const;
 
@@ -87,7 +87,7 @@ protected:
 		/// Sound effect priority
 		uint8_t priority = 0;
 	};
-	/// Parses the arguments for a play_sound action, e.g. { "sound/smiths", "sharpening", "120" }
+	/// Parses the arguments for a play_sound action, e.g. { "sound/smiths/sharpening", "120" }
 	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments, uint8_t default_priority);
 
 private:
