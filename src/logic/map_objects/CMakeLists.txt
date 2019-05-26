@@ -130,7 +130,6 @@ wl_library(logic_map_objects
     graphic_surface
     graphic_text_constants
     graphic_text_layout
-    helper
     io_fileread
     io_filesystem
     logic # TODO(GunChleoc): Circular dependency

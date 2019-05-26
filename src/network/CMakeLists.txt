@@ -44,7 +44,6 @@ wl_library(network
     build_info
     chat
     game_io
-    helper
     io_fileread
     io_filesystem
     io_stream

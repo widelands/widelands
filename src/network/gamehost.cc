@@ -40,7 +40,6 @@
 #include "chat/chat.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"

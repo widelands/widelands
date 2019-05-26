@@ -11,7 +11,6 @@ wl_library(ui_fsmenu_options
     graphic_text
     graphic_text_constants
     graphic_text_layout
-    helper
     io_filesystem
     logic_filesystem_constants
     scripting_lua_interface
@@ -104,7 +103,6 @@ wl_library(ui_fsmenu_gameloading
     graphic
     graphic_playercolor
     graphic_text_constants
-    helper
     io_filesystem
     logic
     logic_game_controller

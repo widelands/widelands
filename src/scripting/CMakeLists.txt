@@ -70,7 +70,6 @@ wl_library(scripting_lua_interface
     base_i18n
     base_macros
     build_info
-    helper
     io_filesystem
     scripting_base
     scripting_errors

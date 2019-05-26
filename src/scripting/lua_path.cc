@@ -24,7 +24,6 @@
 #include <boost/lexical_cast.hpp>
 
 #include "base/macros.h"
-#include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 
 namespace {

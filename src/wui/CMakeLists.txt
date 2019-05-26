@@ -84,7 +84,6 @@ wl_library(wui_common_gamedetails
     base_i18n
     base_log
     base_time_string
-    helper
     game_io
     graphic_fonthandler
     graphic_image_io

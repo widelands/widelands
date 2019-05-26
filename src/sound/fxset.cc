@@ -25,7 +25,6 @@
 #include <boost/regex.hpp>
 
 #include "base/log.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
