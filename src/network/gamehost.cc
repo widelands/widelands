@@ -761,15 +761,15 @@ void GameHost::think() {
 	}
 }
 
-void GameHost::send_player_command(Widelands::PlayerCommand& pc) {
-	pc.set_duetime(d->committed_networktime + 1);
+void GameHost::send_player_command(Widelands::PlayerCommand* pc) {
+	pc->set_duetime(d->committed_networktime + 1);
 
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_PLAYERCOMMAND);
-	packet.signed_32(pc.duetime());
-	pc.serialize(packet);
+	packet.signed_32(pc->duetime());
+	pc->serialize(packet);
 	broadcast(packet);
-	d->game->enqueue_command(&pc);
+	d->game->enqueue_command(pc);
 
 	committed_network_time(d->committed_networktime + 1);
 }
@@ -2181,11 +2181,11 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 		if (!d->game)
 			throw DisconnectException("PLAYERCMD_WO_GAME");
 		int32_t time = r.signed_32();
-		Widelands::PlayerCommand& plcmd = *Widelands::PlayerCommand::deserialize(r);
+		Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
 		log("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n", i, client.playernum,
-		    static_cast<unsigned int>(plcmd.id()), plcmd.sender(), time);
+		    static_cast<unsigned int>(plcmd->id()), plcmd->sender(), time);
 		receive_client_time(i, time);
-		if (plcmd.sender() != client.playernum + 1)
+		if (plcmd->sender() != client.playernum + 1)
 			throw DisconnectException("PLAYERCMD_FOR_OTHER");
 		send_player_command(plcmd);
 	} break;
