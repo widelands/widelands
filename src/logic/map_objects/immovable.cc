@@ -727,14 +727,10 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersionImmovable) {
 
 			const std::string owner_type = fr.c_string();
-			std::string name = fr.c_string();
 			Immovable* imm = nullptr;
 
 			if (owner_type != "world") {  //  It is a tribe immovable.
-				// Needed for map compatibility
-				if (packet_version < 7) {
-					name = tribes_lookup_table.lookup_immovable(owner_type, name);
-				}
+				const std::string name = tribes_lookup_table.lookup_immovable(fr.c_string());
 				const DescriptionIndex idx = egbase.tribes().immovable_index(name);
 				if (idx != Widelands::INVALID_INDEX) {
 					imm = new Immovable(*egbase.tribes().get_immovable_descr(idx));
@@ -743,7 +739,7 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 				}
 			} else {  //  world immovable
 				const World& world = egbase.world();
-				name = world_lookup_table.lookup_immovable(name);
+				const std::string name = world_lookup_table.lookup_immovable(fr.c_string());
 				const DescriptionIndex idx = world.get_immovable_index(name.c_str());
 				if (idx == Widelands::INVALID_INDEX) {
 					throw GameDataError("world does not define immovable type \"%s\"", name.c_str());

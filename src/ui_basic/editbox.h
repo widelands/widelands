@@ -81,6 +81,10 @@ struct EditBox : public Panel {
 		warning_ = warn;
 	}
 
+	bool has_warning() {
+		return warning_;
+	}
+
 	bool is_password() {
 		return password_;
 	}
