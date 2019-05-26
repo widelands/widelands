@@ -164,9 +164,9 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
 
 void FullscreenMenuInternetLobby::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
-	// NOCOM Join this game, open a new game not visible
 
 	butw_ = get_w() - right_column_x_ - right_column_margin_;
+	buth_ = labelh_* get_h() / 600;
 	tabley_ = tabley_ / 2;
 	tableh_ += tabley_;
 
@@ -187,10 +187,9 @@ void FullscreenMenuInternetLobby::layout() {
 	opengames_list_.set_desired_size(opengames_list_.get_w(), clientsonline_table_.get_h());
 
 	// Buttons
-	log("NOCOM button dimensions: %d x %d", butw_, buth_);
-	joingame_.set_desired_size(2 * butw_, buth_);
-	hostgame_.set_desired_size(2 * butw_, buth_);
-	back_.set_desired_size(2 * butw_, buth_);
+	joingame_.set_size(butw_, buth_);
+	hostgame_.set_size(butw_, buth_);
+	back_.set_size(butw_, buth_);
 }
 
 /// think function of the UI (main loop)
