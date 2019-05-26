@@ -36,18 +36,18 @@
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "logic/findimmovable.h"
-#include "logic/findnode.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findimmovable.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
 #include "logic/maphollowregion.h"
+#include "logic/mapregion.h"
 #include "logic/objective.h"
 #include "logic/pathfield.h"
-#include "logic/player.h"
 #include "map_io/s2map.h"
 #include "map_io/widelands_map_loader.h"
 #include "notifications/notifications.h"
@@ -2385,6 +2385,32 @@ MilitaryInfluence Map::calc_influence(Coords const a, Area<> const area) const {
 	influence *= influence;
 
 	return influence;
+}
+
+std::set<Coords> Map::to_set(Area<Coords> area) const {
+	std::set<Coords> result;
+	MapRegion<Area<Coords>> mr(*this, area);
+	do {
+		result.insert(mr.location());
+	} while (mr.advance(*this));
+	return result;
+}
+
+// Returns all triangles whose corners are all in the given area
+std::set<TCoords<Coords>> Map::triangles_in_region(std::set<Coords> area) const {
+	std::set<TCoords<Coords>> result;
+	for (const Coords& c : area) {
+		if (!area.count(br_n(c))) {
+			continue;
+		}
+		if (area.count(r_n(c))) {
+			result.insert(TCoords<Coords>(c, TriangleIndex::R));
+		}
+		if (area.count(bl_n(c))) {
+			result.insert(TCoords<Coords>(c, TriangleIndex::D));
+		}
+	}
+	return result;
 }
 
 }  // namespace Widelands

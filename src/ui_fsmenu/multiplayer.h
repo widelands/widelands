@@ -53,15 +53,15 @@ private:
 
 	UI::Textarea title;
 	UI::Button metaserver;
-	UI::Button* showloginbox;
 	UI::Button lan;
+	UI::Button showloginbox;
 	UI::Button back;
 
 	// Values from internet login window
 	std::string nickname_;
 	std::string password_;
-	bool register_;
 	bool auto_log_;
+	bool register_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MULTIPLAYER_H

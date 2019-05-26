@@ -28,10 +28,10 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
-#include "logic/findbob.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/map.h"
+#include "logic/map_objects/findbob.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "network/gamehost.h"
@@ -43,6 +43,7 @@
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"
 #include "wui/game_summary.h"
+#include "wui/interactive_player.h"
 #include "wui/militarysitewindow.h"
 #include "wui/productionsitewindow.h"
 #include "wui/shipwindow.h"
@@ -347,6 +348,40 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 			rendered_text->draw(dst, Vector2i(get_w() - 5, 5), UI::Align::kRight);
 		}
 	}
+}
+
+void InteractiveGameBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
+	InteractiveBase::set_sel_pos(center);
+
+	const Widelands::Map& map = egbase().map();
+
+	// If we have an immovable, we might want to show a tooltip
+	Widelands::BaseImmovable* imm = map[center.node].get_immovable();
+	if (imm == nullptr) {
+		return set_tooltip("");
+	}
+
+	// If we have a player, only show tooltips if he sees the field
+	const Widelands::Player* player = nullptr;
+	if (upcast(InteractivePlayer, iplayer, this)) {
+		player = iplayer->get_player();
+		if (player != nullptr && !player->see_all() &&
+		    (1 >= player->vision(Widelands::Map::get_index(center.node, map.get_width())))) {
+			return set_tooltip("");
+		}
+	}
+
+	if (imm->descr().type() == Widelands::MapObjectType::IMMOVABLE) {
+		// Trees, Resource Indicators, fields ...
+		return set_tooltip(imm->descr().descname());
+	} else if (upcast(Widelands::ProductionSite, productionsite, imm)) {
+		// No productionsite tips for hostile players
+		if (player == nullptr || !player->is_hostile(*productionsite->get_owner())) {
+			return set_tooltip(
+			   productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
+		}
+	}
+	set_tooltip("");
 }
 
 /**

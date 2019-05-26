@@ -27,8 +27,6 @@
 #include "base/macros.h"
 #include "graphic/animation.h"
 #include "graphic/toolbar_imageset.h"
-#include "logic/description_maintainer.h"
-#include "logic/editor_game_base.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/road_textures.h"
@@ -37,10 +35,10 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 
-class EditorGameBase;
 class ResourceDescription;
 class WareDescr;
 class Warehouse;
@@ -119,7 +117,6 @@ public:
 	DescriptionIndex soldier() const;
 	DescriptionIndex ship() const;
 	DescriptionIndex port() const;
-	DescriptionIndex barracks() const;
 	DescriptionIndex ironore() const;
 	DescriptionIndex rawlog() const;
 	DescriptionIndex refinedlog() const;
@@ -212,7 +209,6 @@ private:
 	DescriptionIndex soldier_;     // The soldier that this tribe uses
 	DescriptionIndex ship_;        // The ship that this tribe uses
 	DescriptionIndex port_;        // The port that this tribe uses
-	DescriptionIndex barracks_;    // The barracks to create soldiers
 	DescriptionIndex ironore_;     // Iron ore
 	DescriptionIndex rawlog_;      // Simple log
 	DescriptionIndex refinedlog_;  // Refined log, e.g. wood or blackwood
