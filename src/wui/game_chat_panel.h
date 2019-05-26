@@ -50,6 +50,7 @@ struct GameChatPanel : public UI::Panel {
 		editbox.set_text(text);
 	}
 
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	void focus_edit();
 	void unfocus_edit();
 
@@ -64,6 +65,7 @@ private:
 	UI::MultilineTextarea chatbox;
 	UI::EditBox editbox;
 	size_t chat_message_counter;
+	FxId chat_sound;
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
 };
 

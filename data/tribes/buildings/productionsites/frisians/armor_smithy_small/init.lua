@@ -14,12 +14,12 @@ tribes:new_productionsite_type {
       brick = 3,
       granite = 1,
       log = 2,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle = {
       brick = 2,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
@@ -77,9 +77,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs sword_short",
             "consume=coal iron",
             "sleep=24000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 24000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=sword_short"
          },
@@ -92,9 +92,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs sword_long",
             "consume=coal iron:2",
             "sleep=24000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 24000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=sword_long"
          },
@@ -107,7 +107,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs helmet",
             "consume=coal iron",
             "sleep=30000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 37000",
             "produce=helmet"
          },

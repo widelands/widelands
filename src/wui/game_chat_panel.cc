@@ -22,6 +22,7 @@
 #include <limits>
 #include <string>
 
+#include "sound/sound_handler.h"
 #include "wui/chat_msg_layout.h"
 
 /**
@@ -53,7 +54,8 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              text_height() + 4,
              2,
              style),
-     chat_message_counter(0) {
+     chat_message_counter(0),
+	 chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 
 	box_.add(&chatbox, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(4);
@@ -95,7 +97,7 @@ void GameChatPanel::recalculate(bool has_new_message) {
 		for (size_t i = chat_message_counter; i < msgs_size; ++i) {
 			if (!msgs[i].sender.empty()) {
 				// Got a message that is no system message. Beep
-				play_new_chat_message();
+				g_sh->play_fx(SoundType::kChat, chat_sound);
 				break;
 			}
 		}
@@ -131,4 +133,16 @@ void GameChatPanel::key_enter() {
 void GameChatPanel::key_escape() {
 	editbox.set_text("");
 	aborted();
+}
+
+/**
+ * The mouse was clicked on this chatbox
+ */
+bool GameChatPanel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
+		focus_edit();
+		return true;
+	}
+
+	return false;
 }

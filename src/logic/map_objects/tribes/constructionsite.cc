@@ -35,17 +35,20 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "sound/note_sound.h"
+#include "sound/sound_handler.h"
 #include "ui_basic/window.h"
 
 namespace Widelands {
 
 void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
+                                       const Widelands::Coords& coords,
                                        float scale,
                                        const RGBColor& player_color,
                                        RenderTarget* dst) const {
 	// Draw the construction site marker
 	const uint32_t anim_idx = becomes->is_animation_known("build") ?
-	                             becomes->get_animation("build") :
+	                             becomes->get_animation("build", nullptr) :
 	                             becomes->get_unoccupied_animation();
 
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);
@@ -55,12 +58,13 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 
 	if (cur_frame) {  //  not the first pic
 		// Draw the complete prev pic , so we won't run into trouble if images have different sizes
-		dst->blit_animation(point_on_dst, scale, anim_idx, anim_time - FRAME_LENGTH, player_color);
+		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_idx,
+		                    anim_time - FRAME_LENGTH, &player_color);
 	} else if (was) {
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
-		dst->blit_animation(point_on_dst, scale, was->get_unoccupied_animation(),
-		                    anim_time - FRAME_LENGTH, player_color);
+		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
+		                    was->get_unoccupied_animation(), anim_time - FRAME_LENGTH, &player_color);
 	}
 	// Now blit a segment of the current construction phase from the bottom.
 	int percent = 100 * completedtime * nr_frames;
@@ -68,7 +72,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		percent /= totaltime;
 	}
 	percent -= 100 * cur_frame;
-	dst->blit_animation(point_on_dst, scale, anim_idx, anim_time, player_color, percent);
+	dst->blit_animation(point_on_dst, coords, scale, anim_idx, anim_time, &player_color, percent);
 }
 
 /**
@@ -77,13 +81,19 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
  */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
-                                             const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, egbase) {
+                                             const Tribes& tribes)
+   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, tribes),
+     creation_fx_(
+        SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 	add_attribute(MapObject::CONSTRUCTIONSITE);
 }
 
 Building& ConstructionSiteDescr::create_object() const {
 	return *new ConstructionSite(*this);
+}
+
+FxId ConstructionSiteDescr::creation_fx() const {
+	return creation_fx_;
 }
 
 /*
@@ -143,6 +153,8 @@ Initialize the construction site by starting orders
 ===============
 */
 bool ConstructionSite::init(EditorGameBase& egbase) {
+	Notifications::publish(
+	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxPriorityAlwaysPlay));
 	PartiallyFinishedBuilding::init(egbase);
 
 	const std::map<DescriptionIndex, uint8_t>* buildcost;
@@ -248,8 +260,8 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 	// Check if one step has completed
 	if (working_) {
 		if (static_cast<int32_t>(game.get_gametime() - work_steptime_) < 0) {
-			worker.start_task_idle(
-			   game, worker.descr().get_animation("work"), work_steptime_ - game.get_gametime());
+			worker.start_task_idle(game, worker.descr().get_animation("work", &worker),
+			                       work_steptime_ - game.get_gametime());
 			builder_idle_ = false;
 			return true;
 		} else {
@@ -303,14 +315,14 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 			work_steptime_ = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
 
 			worker.start_task_idle(
-			   game, worker.descr().get_animation("work"), CONSTRUCTIONSITE_STEP_TIME);
+			   game, worker.descr().get_animation("work", &worker), CONSTRUCTIONSITE_STEP_TIME);
 			builder_idle_ = false;
 			return true;
 		}
 	}
 	// The only work we have got for you, is to run around to look cute ;)
 	if (!builder_idle_) {
-		worker.set_animation(game, worker.descr().get_animation("idle"));
+		worker.set_animation(game, worker.descr().get_animation("idle", &worker));
 		builder_idle_ = true;
 	}
 	worker.schedule_act(game, 2000);
@@ -339,12 +351,13 @@ Draw the construction site.
 void ConstructionSite::draw(uint32_t gametime,
                             TextToDraw draw_text,
                             const Vector2f& point_on_dst,
+                            const Widelands::Coords& coords,
                             float scale,
                             RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;
 	// Draw the construction site marker
 	const RGBColor& player_color = get_owner()->get_playercolor();
-	dst->blit_animation(point_on_dst, scale, anim_, tanim, player_color);
+	dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
 
 	// Draw the partially finished building
 
@@ -358,7 +371,7 @@ void ConstructionSite::draw(uint32_t gametime,
 		info_.completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - work_steptime_;
 	}
 
-	info_.draw(point_on_dst, scale, player_color, dst);
+	info_.draw(point_on_dst, coords, scale, player_color, dst);
 
 	// Draw help strings
 	draw_info(draw_text, point_on_dst, scale, dst);

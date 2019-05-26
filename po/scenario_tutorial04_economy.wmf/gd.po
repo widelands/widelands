@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2018
+# GunChleoc, 2015-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2015
 # GunChleoc, 2013-2015
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-14 06:11+0000\n"
-"PO-Revision-Date: 2018-09-14 06:15+0000\n"
+"POT-Creation-Date: 2019-04-22 05:17+0000\n"
+"PO-Revision-Date: 2019-04-23 13:23+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgstr "Tìr shìtheil"
 msgid ""
 "Now about the map: you have settled in a nice valley between two mountains, "
 "rich in marble, iron ore and coal. All were hoping for a peaceful life."
-msgstr "Nise, mu dhèidhinn a’ mapa: thuinich thu ann an gleann àlainn eadar dà bheinn sa bheil beartas marmoir, cloiche-iarainn agus guail. Bha a h-uile duine an dùil ’s an dòchas air beatha shìtheil."
+msgstr "Nise, mu dhèidhinn a’ mapa: thuinich thu ann an gleann àlainn eadar dà bheinn sa bheil beartas marmoir, cloich-iarainn agus guail. Bha a h-uile duine an dùil ’s an dòchas air beatha shìtheil."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:33
 msgid ""
@@ -239,7 +239,7 @@ msgid ""
 "You have closed the building statistics window. I didn’t notice that you "
 "switched to the medium buildings to look up the number of taverns. Would you"
 " please be so nice and show it to me?"
-msgstr "Tha thu air uinneag stadastaireachd nan togalach a dhùnadh. Cha ro mhothaich mi gun do dh’atharraich thu dha na togalaichean meadhanach gus sùil a thoirt air uiread nan taighean-tàirn. Nach seall thu dhomh e?"
+msgstr "Tha thu air uinneag stadastaireachd nan togalach a dhùnadh. Cha do mhothaich mi gun do dh’atharraich thu dha na togalaichean meadhanach gus sùil a thoirt air uiread nan taighean-tàirn. Nach seall thu dhomh e?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:107
 msgid "Open the building statistics window again"
@@ -407,11 +407,11 @@ msgstr "Tog taighean-tàirn ùra"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:199
 msgid "To make our mines work, we need rations again – the more, the better."
-msgstr "Bidh feum againn air greimeagan a-rithist ach an obraich na mèinnean againn – mar as motha dhiubh ’s ann nas fhearr."
+msgstr "Bidh feum againn air greimeagan a-rithist ach an obraich na mèinnean againn – mar as motha dhiubh ’s ann nas fheàrr."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:205
 msgid "Encyclopedia"
-msgstr "Leabhar mòr-eòlais"
+msgstr "Leabhar-eòlais"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:207
 msgid "How to get help"
@@ -830,7 +830,7 @@ msgid ""
 "your resources (in this case: iron) should be turned into or whether you "
 "would like to save your iron and wait until you know what you will need it "
 "for."
-msgstr "Nuair a shuidhicheas tu an t-uiread-amais, cuiridh tu romhad dè am bathar/na h-acainnean a thèid a dhèanamh dhen stòras a th’ agad (iarainn sa bhall-eisimpleir seo) no am b’ fhearr leat an t-iarann a ghlèidheadh gus am bi fios agad air dè nì thu leis."
+msgstr "Nuair a shuidhicheas tu an t-uiread-amais, cuiridh tu romhad dè am bathar/na h-acainnean a thèid a dhèanamh dhen stòras a th’ agad (iarainn sa bhall-eisimpleir seo) no am b’ fheàrr leat an t-iarann a ghlèidheadh gus am bi fios agad air dè nì thu leis."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:429
 msgid ""
@@ -899,7 +899,7 @@ msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
-msgstr "Mar as trice, thèid bathar ’ga ghiùlan dhan taigh-stòrais as fhaisge mur eil feum aige àite sam bith eile. San t-suidheachadh seo, is ciall dha seo am prìomh-àras againn. Ach b’ fhearr leinn gum biodh iad san taigh-stòrais faisg air na dùin againn."
+msgstr "Mar as trice, thèid bathar ’ga ghiùlan dhan taigh-stòrais as fhaisge mur eil feum aige àite sam bith eile. San t-suidheachadh seo, is ciall dha seo am prìomh-àras againn. Ach b’ fheàrr leinn gum biodh iad san taigh-stòrais faisg air na dùin againn."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:451
 msgid ""
@@ -920,7 +920,7 @@ msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
-msgstr "Gus seo a choileanadh, feumaidh tu dà rud a dhèanamh. An toiseach, suidhich gum b’ fhearr leat colbhan marmoir san taigh-stòrais a thogras sinn. Thèid gach colbh marmoir a nithear san àm ri teachd a chur an-siud ma ghabhas seo dèanamh."
+msgstr "Gus seo a choileanadh, feumaidh tu dà rud a dhèanamh. An toiseach, suidhich gum b’ fheàrr leat colbhan marmoir san taigh-stòrais a thogras sinn. Thèid gach colbh marmoir a nithear san àm ri teachd a chur an-siud ma ghabhas seo dèanamh."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:454
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:462
@@ -961,7 +961,7 @@ msgid ""
 "understood a few concepts, you mustn’t give up. Try them out in some games, "
 "become familiar with them and experience the possibilities. Then, return to "
 "this tutorial and learn the rest!"
-msgstr "Tha mi ’n dòchas gun deach leam ionnsachadh dhut mar a stiùiricheas tu eaconamaidh Widelands. Tha iomadh roghainn ann agus ma dh’fhaoidte gun cuir iad ’nad bhrochan thu an toiseach. Ach cum ort fiù ’s mura tuig thu ach beachd no dhà dheth. Feuch ris ann an geama no dhà gus am faigh thu barrachd eòlais air agus faigh a-mach na ghabhas dèanamh. Till dhan oideachadh seo an uairsin gus an corr ionnsachadh!"
+msgstr "Tha mi ’n dòchas gun deach leam ionnsachadh dhut mar a stiùiricheas tu eaconamaidh Widelands. Tha iomadh roghainn ann agus ma dh’fhaoidte gun cuir iad ’nad bhrochan thu an toiseach. Ach cùm ort fiù ’s mura tuig thu ach beachd no dhà dheth. Feuch ris ann an geama no dhà gus am faigh thu barrachd eòlais air agus faigh a-mach na ghabhas dèanamh. Till dhan oideachadh seo an uairsin gus an còrr ionnsachadh!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:473
 msgid ""

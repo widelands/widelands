@@ -19,6 +19,7 @@
 
 #include "network/internet_gaming.h"
 
+#include <algorithm>
 #include <memory>
 #include <thread>
 
@@ -486,7 +487,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				InternetGame* ing = new InternetGame();
 				ing->name = packet.string();
 				ing->build_id = packet.string();
-				ing->connectable = (packet.string() == INTERNET_GAME_SETUP);
+				ing->connectable = packet.string();
 				gamelist_.push_back(*ing);
 
 				bool found = false;
@@ -497,10 +498,13 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 						break;
 					}
 				}
-				if (!found)
+				if (!found && ing->connectable != INTERNET_GAME_RUNNING &&
+				    (ing->build_id == build_id() || (ing->build_id.compare(0, 6, "build-") != 0 &&
+				                                     build_id().compare(0, 6, "build-") != 0))) {
 					format_and_add_chat(
 					   "", "", true,
 					   (boost::format(_("The game %s is now available")) % ing->name).str());
+				}
 
 				delete ing;
 				ing = nullptr;
@@ -527,8 +531,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			// Client received the new list of clients
 			uint8_t number = boost::lexical_cast<int>(packet.string()) & 0xff;
 			std::vector<InternetClient> old = clientlist_;
-			// Push IRC users to a second list and add them to the back
-			std::vector<InternetClient> irc;
+			// Push admins/registred/IRC users to a temporary list and add them back later
 			clientlist_.clear();
 			log("InternetGaming: Received a client list update with %u items.\n", number);
 			InternetClient inc;
@@ -537,31 +540,31 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				inc.build_id = packet.string();
 				inc.game = packet.string();
 				inc.type = packet.string();
-				if (inc.type == INTERNET_CLIENT_IRC) {
-					irc.push_back(inc);
-					// No "join" or "left" messages for IRC users
-					continue;
-				}
-				// No IRC client
+
 				clientlist_.push_back(inc);
 
 				bool found =
 				   old.empty();  // do not show all clients, if this instance is the actual change
 				for (InternetClient& client : old) {
-					if (client.name == inc.name) {
+					if (client.name == inc.name && client.type == inc.type) {
 						found = true;
 						client.name = "";
 						break;
 					}
 				}
-				if (!found)
+				if (!found) {
 					format_and_add_chat(
 					   "", "", true, (boost::format(_("%s joined the lobby")) % inc.name).str());
+				}
 			}
-			clientlist_.insert(clientlist_.end(), irc.begin(), irc.end());
+
+			std::sort(clientlist_.begin(), clientlist_.end(),
+			          [](const InternetClient& left, const InternetClient& right) {
+				          return (left.name < right.name);
+			          });
 
 			for (InternetClient& client : old) {
-				if (client.name.size() && client.type != INTERNET_CLIENT_IRC) {
+				if (client.name.size()) {
 					format_and_add_chat(
 					   "", "", true, (boost::format(_("%s left the lobby")) % client.name).str());
 				}
@@ -943,4 +946,16 @@ void InternetGaming::format_and_add_chat(const std::string& from,
 		c.msg = "METASERVER: " + msg;
 		ingame_system_chat_.push_back(c);
 	}
+}
+
+/**
+ * Check for vaild username characters.
+ */
+bool InternetGaming::valid_username(std::string username) {
+	if (username.empty() ||
+	    username.find_first_not_of("abcdefghijklmnopqrstuvwxyz"
+	                               "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= username.size()) {
+		return false;
+	}
+	return true;
 }

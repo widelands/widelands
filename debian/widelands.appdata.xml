@@ -37,6 +37,7 @@
   <summary xml:lang="sk">Budovateľská stretegická hra v reálnom čase</summary>
   <summary xml:lang="sr">Graditeljska strateška igra u realnom vremenu</summary>
   <summary xml:lang="sv">Ett uppbyggnadsstrategispel i realtid</summary>
+  <summary xml:lang="tr">Gerçek zamanlı inşa strateji oyunu</summary>
   <summary xml:lang="uk">Стратегічна гра у режимі реального часу</summary>
   <summary xml:lang="zh_TW">一款即時演變的策略遊戲</summary>
   <description>
@@ -238,6 +239,13 @@
     <p xml:lang="sv">
       Widelands erbjuder ett enspelarläge med fälttåg som berättar historier om stammarna och deras kamp i Widelands värld. Bosättandet börjar på riktigt när du slår dig samman med vänner över internet eller LAN för att bygga nya imperium tillsammans – eller för att krossa varandra i krigets damm. Widelands erbjuder också artificiell intelligens för att utmana dig.
     </p>
+    <p xml:lang="tr">
+      Küçük bir klanın yetkili vekilisiniz. Göreviniz sürekli büyüyecek bir yerleşim kurmak. Klanınızın her üyesi bu uğurda daha fazla kaynak üreterek üzerine düşen görevi yapacak. 
+    </p>
+    <p xml:lang="tr">
+      Widelands size tek oyunculu mod ile kabilelerin hikayelerini ve Widelands evreninde çektikleri zorlukları anlatan hikayeleri sunar. Fakat yerleşim tam olarak arkadaşlarınla Internet üzerinden ya da LAN ile bağlanıp beraber yeni imparatorluklar kurduğunda başlar - ya da birbirinizi savaşın tozlu ortamında ezdiğinizde.
+Widelands ayrıca size yapay zeka ile meydan okur.
+    </p>
     <p xml:lang="uk">
       Ви є регентом маленького клану.  Ваше завдання полягає у створенні постійно зростаючого поселення. Кожен член вашого клану буде робити свою частину, щоб виробити більше ресурсів для подальшого росту.
     </p>
@@ -247,8 +255,8 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Current%20Developments/To%20the%20sea.png</image>
-      <caption>Fleet of Ships</caption>
+      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2020/Four_Tribes_2.jpeg</image>
+      <caption>Seafaring of the Four Tribes</caption>
     </screenshot>
     <screenshot>
       <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2019/Dolomites.png</image>
@@ -274,6 +282,7 @@
   </provides>
   <launchable type="desktop-id">org.widelands.widelands.desktop</launchable>
   <releases>
+    <release date="2019-05-02" version="Build 20"/>
     <release date="2016-11-11" version="Build 19"/>
     <release date="2014-02-22" version="Build 18"/>
     <release date="2012-04-23" version="Build 17"/>
@@ -352,6 +361,7 @@
     <lang>sk</lang>
     <lang>sl</lang>
     <lang>sr</lang>
+    <lang>sr_RS</lang>
     <lang>sv</lang>
     <lang>tr</lang>
     <lang>uk</lang>

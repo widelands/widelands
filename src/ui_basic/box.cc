@@ -426,6 +426,6 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 
 	case Item::ItemSpace:
 		break;  //  no need to do anything
-	};
+	}
 }
 }  // namespace UI

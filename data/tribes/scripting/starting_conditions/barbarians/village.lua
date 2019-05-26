@@ -48,7 +48,7 @@ return {
          scythe = 6,
          shovel = 4,
          snack = 3,
-         thatch_reed = 24,
+         reed = 24,
          log = 80,
          },
          workers = {

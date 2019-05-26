@@ -65,9 +65,9 @@ private:
 	uint8_t convert_clienttype(const std::string&);
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
 
-	uint32_t prev_clientlist_len_;  // NOCOM get rid?
-
 	const int labelh_;
+	uint32_t butw_;
+	uint32_t buth_;
 
 	UI::Textarea title_;
 
@@ -85,6 +85,9 @@ private:
 	UI::Textarea servername_label_;
 	UI::EditBox servername_;
 	UI::Button hostgame_;
+
+	uint32_t prev_clientlist_len_;
+	FxId new_client_fx_;
 
 	// Login information
 	const std::string nickname_;

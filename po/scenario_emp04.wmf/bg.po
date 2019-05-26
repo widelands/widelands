@@ -1,18 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# GunChleoc, 2017
-# Любомир Василев, 2018
+# GunChleoc, 2018
+# Любомир Василев, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"POT-Creation-Date: 2019-05-10 07:32+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Любомир Василев, 2018\n"
+"Last-Translator: Любомир Василев, 2019\n"
 "Language-Team: Bulgarian (https://www.transifex.com/widelands/teams/35159/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -345,6 +345,10 @@ msgstr ""
 "временна, тъй като това все още е само началото на войната. Тепърва предстои"
 " да видим какво ни чака занапред."
 
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:230
+msgid "Victory"
+msgstr "Победа"
+
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
@@ -576,6 +580,8 @@ msgid ""
 "Brother, I'm really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
+"Братко, страхувам се, че отново имам лоши новини. Както виждаш, фермите ни "
+"не произвеждат нищо, а не можем да ги демонтираме."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:327
@@ -605,6 +611,8 @@ msgid ""
 "Until we have found the plans, the only option for our farms is to destroy "
 "them."
 msgstr ""
+"Докато не открием плановете, единственият вариант за фермите е да ги "
+"разрушим."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:340
 msgid "Amalea Looks Confident"
@@ -667,6 +675,9 @@ msgid ""
 " desperately. Furthermore, the plans have enabled us to upgrade our old "
 "farms to get to work again."
 msgstr ""
+"Сега вече можем да започнем да строим ферми и да произвеждаме бирата, от "
+"която миньорите ни се нуждаят. Освен това, плановете ни позволяват да "
+"надградим старите си ферми и те отново да заработят."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:365
@@ -905,6 +916,10 @@ msgid ""
 "breweries with the improved technology, we will never know if and how Vesta "
 "and her priestesses could have helped us against the Barbarians."
 msgstr ""
+"Не знам дали това беше правилното решение. Да, получихме плановете. Но "
+"въпреки, че вече можем да строим и надграждаме мелниците и пивоварните с "
+"подобрената технология, ние никога няма да разберем дали Веста и жриците ѝ "
+"нямаше да ни помогнат срещу варварите."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:469
@@ -930,6 +945,9 @@ msgid ""
 "wheat. Furthermore, the plans enable us to upgrade our current mill and "
 "brewery with the improved technology."
 msgstr ""
+"Добра работа. Сега вече ще можем да строим по-ефективни сгради и да подобрим"
+" пшеницата си. Освен това, плановете ни позволяват да надградим сегашната си"
+" мелница и пивоварна с подобрената технология."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:480
@@ -938,6 +956,9 @@ msgid ""
 "water, flour and beer. Now I really think that nothing can prevent us from "
 "getting stronger and taking back our homeland."
 msgstr ""
+"И, което е най-хубавото, имаме нов съюзник, който ни даде много вода, брашно"
+" и бира. Сега вече мисля, че нищо не може да ни спре да ставаме все по-силни"
+" и да си върнем земите."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:485
 msgid "Amalea is Satisfied"
@@ -1156,12 +1177,12 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:573
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:592
 msgid "Defeated!"
-msgstr ""
+msgstr "Загуба!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:574
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:593
 msgid "Amalea reports our defeat…"
-msgstr ""
+msgstr "Амалея докладва за загубата ни…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:576
@@ -1169,10 +1190,12 @@ msgid ""
 "Oh no Lutius, I don't know how this could have happened, but the Barbarians "
 "have sacked our headquarters. So, we have lost this battle and our empire!"
 msgstr ""
+"О, не! Луций, не знам се случи това, но варварите опустошиха щаба ни. "
+"Загубихме битката и империята си!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:582
 msgid "Amalea reports our headquarters lost…"
-msgstr ""
+msgstr "Амалея докладва за загубата на щаба ни…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:584
@@ -1181,6 +1204,8 @@ msgid ""
 "have destroyed our headquarters. So, we can't deliver the wares to Julia "
 "anymore."
 msgstr ""
+"О, не! Луций, не знам се случи това, но варварите разрушиха щаба ни. Вече не"
+" можем да доставим стоките на Юлия."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:587
@@ -1188,6 +1213,8 @@ msgid ""
 "Now we need to try to fulfil our duties without their technology. But this "
 "will not be an easy task at all."
 msgstr ""
+"Сега ще трябва да се опитаме да изпълним задълженията си без тяхната "
+"технология. Но това изобщо няма да бъде лесна задача."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:595
@@ -1196,6 +1223,8 @@ msgid ""
 "have destroyed our last warehouse. So, we have lost this battle and our "
 "empire!"
 msgstr ""
+"О, не! Луций, не знам се случи това, но варварите разрушиха последния ни "
+"склад. Загубихме битката и империята си!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:603
 msgid "Saledus looks very relaxed…"
@@ -1272,6 +1301,10 @@ msgid ""
 "deals with the Barbarians, so, we better keep our soldiers in a good mood "
 "and train them adequately."
 msgstr ""
+"Ваше величество, знам, че това беше добра сделка, въпреки че можехме да "
+"вземем плановете много по-рано. Е, няма да можем да правим сделки с "
+"варварите, така че по-добре да поддържаме войниците с в добро настроение и "
+"да ги тренираме както трябва."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:639
 msgid "Pride"
@@ -1285,6 +1318,10 @@ msgid ""
 "make any deals with the Barbarians either, so, we better keep our soldiers "
 "in good mood and train them adequately."
 msgstr ""
+"Ваше величество, признавам, че може би предизвикахме боговете, но във военно"
+" време причината може да оправдае средствата. А и няма да можем да правим "
+"сделки с варварите, така че по-добре да поддържаме войниците с в добро "
+"настроение и да ги тренираме както трябва."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:649
 msgid "Saledus asks for a stronger army…"

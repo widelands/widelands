@@ -13,7 +13,7 @@ tribes:new_productionsite_type {
       log = 2,
       blackwood = 2,
       granite = 2,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle = {
       log = 1,

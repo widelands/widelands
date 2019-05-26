@@ -15,7 +15,7 @@ tribes:new_productionsite_type {
       blackwood = 1,
       granite = 2,
       grout = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle_on_enhanced = {
       blackwood = 1,
@@ -80,9 +80,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ax",
             "consume=coal iron",
             "sleep=26000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 22000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax"
          }
@@ -95,9 +95,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ax_sharp",
             "consume=coal iron:2",
             "sleep=26000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 22000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_sharp"
          }
@@ -110,9 +110,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ax_broad",
             "consume=coal:2 iron:2",
             "sleep=26000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 22000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_broad"
          }

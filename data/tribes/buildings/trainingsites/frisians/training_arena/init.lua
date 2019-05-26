@@ -14,14 +14,14 @@ tribes:new_trainingsite_type {
       granite = 3,
       log = 4,
       gold = 3,
-      thatch_reed = 4
+      reed = 4
    },
    return_on_dismantle = {
       brick = 3,
       granite = 2,
       log = 2,
       gold = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {

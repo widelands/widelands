@@ -24,6 +24,7 @@ local wc_trees_owned = _"Trees owned"
 return {
    name = wc_name,
    description = wc_desc,
+   peaceful_mode_allowed = true,
    init = function()
       -- Calculate valuable fields
       wl.Game().map:count_terrestrial_fields()
