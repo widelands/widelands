@@ -84,6 +84,7 @@ world:new_immovable_type{
    name = "palm_oil_desert_old",
    descname = _ "Oil Palm (Old)",
    species = _ "Oil Palm",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_palm",
    size = "small",
    attributes = { "tree" },
@@ -104,8 +105,7 @@ world:new_immovable_type{
          hotspot = { 24, 60 },
          fps = 10,
          sound_effect = {
-            directory = "sound/animals",
-            name = "crickets2",
+            path = "sound/animals/crickets2",
          },
       },
    },

@@ -33,6 +33,8 @@
 void draw_terrain(const Widelands::EditorGameBase& egbase,
                   const FieldsToDraw& fields_to_draw,
                   const float scale,
+                  Workareas workarea,
+                  bool grid,
                   RenderTarget* dst);
 
 // Draw the border stones for 'field' if it is a border and 'visibility' is

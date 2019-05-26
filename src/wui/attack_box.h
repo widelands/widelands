@@ -22,6 +22,8 @@
 
 #include <list>
 #include <memory>
+#include <set>
+#include <vector>
 
 #include "graphic/font_handler.h"
 #include "graphic/text/font_set.h"
@@ -51,10 +53,15 @@ struct AttackBox : public UI::Box {
 
 	void init();
 
-	uint32_t soldiers() const;
+	size_t count_soldiers() const;
+	std::vector<Widelands::Serial> soldiers() const;
+
+	UI::Button* get_attack_button() const {
+		return attack_button_.get();
+	}
 
 private:
-	uint32_t get_max_attackers();
+	std::vector<Widelands::Soldier*> get_max_attackers();
 	std::unique_ptr<UI::HorizontalSlider> add_slider(UI::Box& parent,
 	                                                 uint32_t width,
 	                                                 uint32_t height,
@@ -73,7 +80,7 @@ private:
 	                                       const std::string& tooltip_text);
 
 	void think() override;
-	void update_attack();
+	void update_attack(bool);
 	void send_less_soldiers();
 	void send_more_soldiers();
 
@@ -87,6 +94,71 @@ private:
 
 	std::unique_ptr<UI::Button> less_soldiers_;
 	std::unique_ptr<UI::Button> more_soldiers_;
+
+	// A SoldierPanel is not applicable here as it's keyed to a building and thinks too much
+	struct ListOfSoldiers : public UI::Panel {
+		ListOfSoldiers(UI::Panel* const parent,
+		               AttackBox* parent_box,
+		               int32_t const x,
+		               int32_t const y,
+		               int const w,
+		               int const h,
+		               bool restrict_rows = false);
+
+		bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+		void handle_mousein(bool) override;
+		bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
+
+		const Widelands::Soldier* soldier_at(int32_t x, int32_t y) const;
+		void add(const Widelands::Soldier*);
+		void remove(const Widelands::Soldier*);
+		bool contains(const Widelands::Soldier* soldier) const {
+			for (const auto& s : soldiers_) {
+				if (s == soldier) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		std::vector<const Widelands::Soldier*> get_soldiers() const {
+			return soldiers_;
+		}
+		const Widelands::Soldier* get_soldier() const {
+			return soldiers_.back();
+		}
+
+		size_t count_soldiers() const {
+			return soldiers_.size();
+		}
+		Widelands::Extent size() const;
+		bool row_number_restricted() const {
+			return restricted_row_number_;
+		}
+		void set_row_number_restricted(bool r) {
+			restricted_row_number_ = r;
+		}
+
+		void draw(RenderTarget& dst) override;
+
+		void set_complement(ListOfSoldiers* o) {
+			other_ = o;
+		}
+
+	private:
+		bool restricted_row_number_;
+		uint16_t current_size_;  // Current number of rows or columns
+		std::vector<const Widelands::Soldier*> soldiers_;
+
+		ListOfSoldiers* other_;
+		AttackBox* attack_box_;
+
+		void update_desired_size() override;
+	};
+
+	std::unique_ptr<ListOfSoldiers> attacking_soldiers_;
+	std::unique_ptr<ListOfSoldiers> remaining_soldiers_;
+	std::unique_ptr<UI::Button> attack_button_;
 
 	/// The last time the information in this Panel got updated
 	uint32_t lastupdate_;

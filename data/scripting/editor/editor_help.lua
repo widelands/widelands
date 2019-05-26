@@ -32,7 +32,7 @@ function get_trees()
          result[counter] = {
             name = immovable.name,
             title = immovable.species,
-            icon = immovable.representative_image,
+            icon = immovable.icon_name,
             script = "scripting/editor/tree_help.lua",
             script_parameters = {[1] = immovable.name}
          }

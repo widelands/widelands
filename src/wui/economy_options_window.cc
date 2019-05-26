@@ -189,11 +189,11 @@ void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int amount) {
 			// Don't allow negative new amount.
 			if (amount >= 0 || -amount <= static_cast<int>(tq.permanent)) {
 				if (is_wares) {
-					game.send_player_command(*new Widelands::CmdSetWareTargetQuantity(
+					game.send_player_command(new Widelands::CmdSetWareTargetQuantity(
 					   game.get_gametime(), player_->player_number(), serial_, index,
 					   tq.permanent + amount));
 				} else {
-					game.send_player_command(*new Widelands::CmdSetWorkerTargetQuantity(
+					game.send_player_command(new Widelands::CmdSetWorkerTargetQuantity(
 					   game.get_gametime(), player_->player_number(), serial_, index,
 					   tq.permanent + amount));
 				}
@@ -209,10 +209,10 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 	for (const Widelands::DescriptionIndex& index : items) {
 		if (display_.ware_selected(index)) {
 			if (is_wares) {
-				game.send_player_command(*new Widelands::CmdResetWareTargetQuantity(
+				game.send_player_command(new Widelands::CmdResetWareTargetQuantity(
 				   game.get_gametime(), player_->player_number(), serial_, index));
 			} else {
-				game.send_player_command(*new Widelands::CmdResetWorkerTargetQuantity(
+				game.send_player_command(new Widelands::CmdResetWorkerTargetQuantity(
 				   game.get_gametime(), player_->player_number(), serial_, index));
 			}
 		}

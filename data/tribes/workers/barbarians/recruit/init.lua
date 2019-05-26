@@ -1,12 +1,7 @@
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 16, 30 },
-      fps = 5
-   }
-}
+animations = {}
+add_animation(animations, "idle", dirname, "idle", {16, 30}, 5)
 add_walking_animations(animations, "walk", dirname, "walk", {16, 30}, 10)
 
 

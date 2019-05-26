@@ -88,7 +88,7 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	// Show directory information
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
 		name_label_.set_text(
-		   (boost::format("<rt>%s%s</rt>") % as_heading(_("Directory:"), style_, true) %
+		   (boost::format("<rt>%s%s</rt>") % as_heading(_("Directory"), style_, true) %
 		    as_content(mapdata.localized_name, style_))
 		      .str());
 		main_box_.set_size(main_box_.get_w(), get_h());
@@ -96,7 +96,7 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	} else {  // Show map information
 		name_label_.set_text(
 		   (boost::format("<rt>%s%s</rt>") %
-		    as_heading(mapdata.maptype == MapData::MapType::kScenario ? _("Scenario:") : _("Map:"),
+		    as_heading(mapdata.maptype == MapData::MapType::kScenario ? _("Scenario") : _("Map"),
 		               style_, true) %
 		    as_content(localize_mapname ? mapdata.localized_name : mapdata.name, style_))
 		      .str());
@@ -122,8 +122,14 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		}
 
 		// Show map information
-		std::string description =
-		   as_heading(ngettext("Author:", "Authors:", mapdata.authors.get_number()), style_);
+		const std::string authors_heading =
+		   (mapdata.authors.get_number() == 1) ?
+		      /** TRANSLATORS: Label in map details if there is 1 author */
+		      _("Author") :
+		      /** TRANSLATORS: Label in map details if there is more than 1 author. If you need plural
+		         forms here, please let us know. */
+		      _("Authors");
+		std::string description = as_heading(authors_heading, style_);
 		description =
 		   (boost::format("%s%s") % description % as_content(mapdata.authors.get_names(), style_))
 		      .str();
@@ -133,19 +139,19 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 			tags.push_back(localize_tag(tag));
 		}
 		std::sort(tags.begin(), tags.end());
-		description = (boost::format("%s%s") % description % as_heading(_("Tags:"), style_)).str();
+		description = (boost::format("%s%s") % description % as_heading(_("Tags"), style_)).str();
 		description = (boost::format("%s%s") % description %
 		               as_content(i18n::localize_list(tags, i18n::ConcatenateWith::COMMA), style_))
 		                 .str();
 
 		description =
-		   (boost::format("%s%s") % description % as_heading(_("Description:"), style_)).str();
+		   (boost::format("%s%s") % description % as_heading(_("Description"), style_)).str();
 		description =
 		   (boost::format("%s%s") % description % as_content(mapdata.description, style_)).str();
 
 		if (!mapdata.hint.empty()) {
 			/** TRANSLATORS: Map hint header when selecting a map. */
-			description = (boost::format("%s%s") % description % as_heading(_("Hint:"), style_)).str();
+			description = (boost::format("%s%s") % description % as_heading(_("Hint"), style_)).str();
 			description =
 			   (boost::format("%s%s") % description % as_content(mapdata.hint, style_)).str();
 		}

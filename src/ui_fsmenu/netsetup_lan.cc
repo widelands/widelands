@@ -25,6 +25,7 @@
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "network/constants.h"
+#include "network/internet_gaming.h"
 #include "network/network.h"
 #include "profile/profile.h"
 
@@ -157,6 +158,7 @@ void FullscreenMenuNetSetupLAN::layout() {
 
 void FullscreenMenuNetSetupLAN::think() {
 	FullscreenMenuBase::think();
+	change_playername();
 
 	discovery_.run();
 }
@@ -206,7 +208,7 @@ void FullscreenMenuNetSetupLAN::game_doubleclicked(uint32_t) {
 	assert(table_.has_selection());
 	const NetOpenGame* const game = table_.get_selected();
 	// Only join games that are open
-	if (game->info.state == LAN_GAME_OPEN) {
+	if (game->info.state == LAN_GAME_OPEN || !playername_.has_warning()) {
 		clicked_joingame();
 	}
 }
@@ -227,7 +229,7 @@ void FullscreenMenuNetSetupLAN::update_game_info(
 		/** TRANSLATORS: The state of a LAN game can be open, closed or unknown */
 		er.set_string(2, pgettext("game_state", "Unknown"));
 		break;
-	};
+	}
 }
 
 void FullscreenMenuNetSetupLAN::game_opened(const NetOpenGame* game) {
@@ -267,6 +269,22 @@ void FullscreenMenuNetSetupLAN::change_hostname() {
 }
 
 void FullscreenMenuNetSetupLAN::change_playername() {
+	playername_.set_warning(false);
+	playername_.set_tooltip("");
+	hostgame_.set_enabled(true);
+
+	if (!InternetGaming::ref().valid_username(playername_.text())) {
+		playername_.set_warning(true);
+		playername_.set_tooltip(_("Enter a valid nickname. This value may contain only "
+		                         "English letters, numbers, and @ . + - _ characters."));
+		joingame_.set_enabled(false);
+		hostgame_.set_enabled(false);
+		return;
+	}
+	if (!hostname_.text().empty()) {
+		joingame_.set_enabled(true);
+	}
+
 	g_options.pull_section("global").set_string("nickname", playername_.text());
 }
 

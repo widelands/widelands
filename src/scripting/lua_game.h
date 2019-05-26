@@ -89,14 +89,15 @@ public:
 	int add_objective(lua_State* L);
 	int reveal_fields(lua_State* L);
 	int hide_fields(lua_State* L);
-	int reveal_scenario(lua_State* L);
-	int reveal_campaign(lua_State* L);
+	int mark_scenario_as_solved(lua_State* L);
 	int get_ships(lua_State* L);
 	int get_buildings(lua_State* L);
 	int get_suitability(lua_State* L);
 	int allow_workers(lua_State* L);
 	int switchplayer(lua_State* L);
 	int get_produced_wares_count(lua_State* L);
+	int set_attack_forbidden(lua_State* L);
+	int is_attack_forbidden(lua_State* L);
 
 	/*
 	 * C methods

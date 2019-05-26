@@ -22,6 +22,7 @@
 
 #include <cmath>
 #include <tuple>
+#include <vector>
 
 #include <stdint.h>
 

@@ -88,7 +88,7 @@ public:
 	void remove(uint32_t);
 	void remove_entry(Entry);
 
-	EntryRecord& add(void* const entry, const bool select_this = false);
+	EntryRecord& add(void* const entry, bool const select_this = false);
 
 	uint32_t size() const;
 	bool empty() const;
@@ -142,12 +142,7 @@ public:
 			return entry_;
 		}
 		void set_color(const RGBColor& c) {
-			use_clr = true;
 			clr = c;
-		}
-
-		bool use_color() const {
-			return use_clr;
 		}
 		RGBColor get_color() const {
 			return clr;
@@ -156,7 +151,6 @@ public:
 	private:
 		friend class Table<void*>;
 		void* entry_;
-		bool use_clr;
 		RGBColor clr;
 		struct Data {
 			const Image* d_picture;
@@ -214,7 +208,7 @@ public:
 	void remove(uint32_t);
 	void remove_entry(const void* const entry);
 
-	EntryRecord& add(void* entry = nullptr, bool select = false);
+	EntryRecord& add(void* entry = nullptr, bool const select_this = false);
 
 	uint32_t size() const {
 		return entry_records_.size();

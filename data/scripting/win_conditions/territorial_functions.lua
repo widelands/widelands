@@ -48,10 +48,23 @@ territory_points = {
    -- We record the last winning player name here to prevent crashes with retrieving
    -- the player name when the player was just defeated a few ms ago
    last_winning_player_name = "",
-   remaining_time = 10,
+   remaining_time = 1201,
    all_player_points = {},
    points = {}
 }
+
+-- variables for the territorial winconditions statsistics hook
+fields = 0
+statistics = {
+      -- TRANSLATORS: subtext of the territorial statistics hook. Keep it short and consistent with the translation of the Win condition.
+      name = _"Territory percentage",
+      pic = "images/wui/stats/genstats_territorial_small.png",
+      calculator = function(p)
+         local pts = count_owned_valuable_fields_for_all_players(wl.Game().players)
+         return (pts[p.number]*100//fields)
+      end,
+   }
+
 
 -- RST
 -- .. function:: calculate_territory_points(fields, players, wc_descname, wc_version)
@@ -112,10 +125,15 @@ function calculate_territory_points(fields, players)
    -- Set the remaining time according to whether the winner is still the same
    if territory_was_kept then
       -- Still the same winner
-      territory_points.remaining_time = territory_points.remaining_time - 30
+      territory_points.remaining_time = territory_points.remaining_time - 1
    elseif winning_points == -1 then
       -- No winner. This value is used to calculate whether to send a report to players.
-      territory_points.remaining_time = 10
+      if territory_points.remaining_time == 1800 then
+         territory_points.remaining_time = 1201
+      elseif territory_points.remaining_time ~= 1201 then
+         territory_points.remaining_time = 1800
+      end
+
    else
       -- Winner changed
       territory_points.remaining_time = 20 * 60 -- 20 minutes
@@ -221,8 +239,6 @@ function territory_game_over(fields, players, wc_descname, wc_version)
    calculate_territory_points(fields, players, wc_descname, wc_version)
 
    for idx, pl in ipairs(players) do
-      pl.see_all = 1
-
       local wonmsg = won_game_over.body .. game_status.body
       local lostmsg = lost_game_over.body .. game_status.body
       for i=1,#territory_points.points do
