@@ -313,7 +313,7 @@ public:
 	void start_task_die(Game&);
 
 	std::pair<std::unique_ptr<SoldierLevelRange>, std::unique_ptr<DirAnimations>>& get_walking_animations_cache() {
-		return cache_walking_animations_;
+		return walking_animations_cache_;
 	}
 
 private:
@@ -367,7 +367,7 @@ private:
 	 */
 	Battle* battle_;
 
-	std::pair<std::unique_ptr<SoldierLevelRange>, std::unique_ptr<DirAnimations>> cache_walking_animations_;
+	std::pair<std::unique_ptr<SoldierLevelRange>, std::unique_ptr<DirAnimations>> walking_animations_cache_;
 
 	static constexpr uint8_t kSoldierHealthBarWidth = 13;
 
