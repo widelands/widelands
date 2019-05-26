@@ -105,6 +105,7 @@ struct BaseImmovable : public MapObject {
 	virtual void draw(uint32_t gametime,
 	                  InfoToDraw info_to_draw,
 	                  const Vector2f& point_on_dst,
+	                  const Coords& coords,
 	                  float scale,
 	                  RenderTarget* dst) = 0;
 
@@ -230,6 +231,7 @@ public:
 	void draw(uint32_t gametime,
 	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
+	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
 
@@ -316,6 +318,7 @@ private:
 	void draw_construction(uint32_t gametime,
 	                       InfoToDraw info_to_draw,
 	                       const Vector2f& point_on_dst,
+	                       const Widelands::Coords& coords,
 	                       float scale,
 	                       RenderTarget* dst);
 };

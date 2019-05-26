@@ -187,9 +187,9 @@ WareInstance::WareInstance(DescriptionIndex const i, const WareDescr* const ware
 
 WareInstance::~WareInstance() {
 	if (supply_) {
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("Ware %u still has supply %p\n", descr_index_, supply_);
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 		delete supply_;
 	}
 }
@@ -584,10 +584,10 @@ MapObject::Loader* WareInstance::load(EditorGameBase& egbase,
 
 		// Some maps may contain ware info, so we need compatibility here.
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
-			std::string warename = fr.c_string();
 			if (packet_version == 1) {
-				warename = lookup_table.lookup_ware(warename, fr.c_string());
+				fr.c_string();  // Consume tribe name
 			}
+			const std::string warename = lookup_table.lookup_ware(fr.c_string());
 
 			DescriptionIndex wareindex = egbase.tribes().ware_index(warename);
 			const WareDescr* descr = egbase.tribes().get_ware_descr(wareindex);

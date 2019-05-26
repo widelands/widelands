@@ -20,6 +20,7 @@
 #ifndef WL_ECONOMY_PORTDOCK_H
 #define WL_ECONOMY_PORTDOCK_H
 
+#include <list>
 #include <memory>
 
 #include "base/macros.h"
@@ -85,9 +86,7 @@ public:
 		return fleet_;
 	}
 	PortDock* get_dock(Flag& flag) const;
-	bool get_need_ship() const {
-		return need_ship_ || expedition_ready_;
-	}
+	uint32_t get_need_ship() const;
 
 	void set_economy(Economy*) override;
 
@@ -99,6 +98,7 @@ public:
 	void draw(uint32_t gametime,
 	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
+	          const Coords&,
 	          float scale,
 	          RenderTarget* dst) override;
 
@@ -113,6 +113,9 @@ public:
 	void add_shippingitem(Game&, Worker&);
 	void update_shippingitem(Game&, Worker&);
 
+	void shipping_item_arrived(Game&, ShippingItem&);
+	void shipping_item_returned(Game&, ShippingItem&);
+	void ship_coming(bool affirmative);
 	void ship_arrived(Game&, Ship&);
 
 	void log_general_info(const EditorGameBase&) const override;
@@ -139,14 +142,14 @@ private:
 
 	void init_fleet(EditorGameBase& egbase);
 	void set_fleet(Fleet* fleet);
-	void update_shippingitem(Game&, std::vector<ShippingItem>::iterator);
+	void update_shippingitem(Game&, std::list<ShippingItem>::iterator);
 	void set_need_ship(Game&, bool need);
 
 	Fleet* fleet_;
 	Warehouse* warehouse_;
 	PositionList dockpoints_;
-	std::vector<ShippingItem> waiting_;
-	bool need_ship_;
+	std::list<ShippingItem> waiting_;
+	uint8_t ships_coming_;
 	bool expedition_ready_;
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
@@ -157,7 +160,7 @@ protected:
 	public:
 		Loader();
 
-		void load(FileRead&);
+		void load(FileRead&, uint8_t packet_version);
 		void load_pointers() override;
 		void load_finish() override;
 

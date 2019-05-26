@@ -87,5 +87,9 @@ function new_objectives(...)
       text = text .. obj.body
       sum = sum + obj.number
    end
-   return h1(ngettext("New Objective", "New Objectives", sum)) .. text
+      local objectives_header = _"New Objective"
+   if (sum > 1) then
+      objectives_header = _"New Objectives"
+   end
+   return h1(objectives_header) .. text
 end

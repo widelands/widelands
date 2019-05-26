@@ -78,6 +78,8 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
 
+constexpr int32_t kShipInterval = 1500;
+
 /**
  * Ships belong to a player and to an economy. The usually are in a (unique)
  * fleet for a player, but only if they are on standard duty. Exploration ships
@@ -104,7 +106,7 @@ struct Ship : Bob {
 		return economy_;
 	}
 	void set_economy(Game&, Economy* e);
-	void set_destination(Game&, PortDock&);
+	void set_destination(PortDock*);
 
 	void init_auto_task(Game&) override;
 
@@ -126,8 +128,9 @@ struct Ship : Bob {
 		return items_[idx];
 	}
 
-	void withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& items);
-	void add_item(Game&, const ShippingItem& item);
+	void add_item(Game&, const ShippingItem&);
+	bool withdraw_item(Game&, PortDock&);
+	void unload_unfit_items(Game&, PortDock& here, const PortDock& nextdest);
 
 	// A ship with task expedition can be in four states: kExpeditionWaiting, kExpeditionScouting,
 	// kExpeditionPortspaceFound or kExpeditionColonizing in the first states, the owning player of
@@ -234,7 +237,8 @@ struct Ship : Bob {
 protected:
 	void draw(const EditorGameBase&,
 	          const InfoToDraw& info_to_draw,
-	          const Vector2f& field_on_dst,
+	          const Vector2f& point_on_dst,
+	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) const override;
 

@@ -23,8 +23,7 @@
 #include <memory>
 
 #include "base/macros.h"
-#include "logic/description_maintainer.h"
-#include "logic/widelands.h"
+#include "logic/map_objects/description_maintainer.h"
 
 class LuaInterface;
 class LuaTable;
@@ -33,7 +32,6 @@ namespace Widelands {
 
 struct CritterDescr;
 class EditorCategory;
-class EditorGameBase;
 class ImmovableDescr;
 class ResourceDescription;
 class TerrainDescription;

@@ -1,7 +1,7 @@
 function ware_helptext(tribe)
    local helptext = {
       -- TRANSLATORS: Helptext for a ware: Fruit
-      frisians = pgettext("frisians_ware", "Fruit are berries gathered from berry bushes by a fruit collector. They are used for rations and meals.")
+      frisians = pgettext("frisians_ware", "Fruit are berries gathered from berry bushes by a fruit collector. They are used for rations and for feeding the fish at the aqua farms.")
    }
    local result = ""
    if tribe then

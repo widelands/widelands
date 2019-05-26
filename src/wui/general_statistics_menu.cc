@@ -42,7 +42,7 @@
 
 using namespace Widelands;
 
-#define PLOT_HEIGHT 130
+#define PLOT_HEIGHT 145
 #define NR_BASE_DATASETS 11
 
 GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,

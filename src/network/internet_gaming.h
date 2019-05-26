@@ -43,7 +43,7 @@ struct InternetClient {
 struct InternetGame {
 	std::string name;
 	std::string build_id;
-	bool connectable;
+	std::string connectable;
 };
 
 /**
@@ -178,6 +178,13 @@ struct InternetGaming : public ChatProvider {
 		return true;
 	}
 
+	void format_and_add_chat(const std::string& from,
+	                         const std::string& to,
+	                         bool system,
+	                         const std::string& msg);
+
+	bool valid_username(std::string);
+
 private:
 	InternetGaming();
 
@@ -201,11 +208,6 @@ private:
 	// conversion functions
 	bool str2bool(std::string);
 	std::string bool2str(bool);
-
-	void format_and_add_chat(const std::string& from,
-	                         const std::string& to,
-	                         bool system,
-	                         const std::string& msg);
 
 	/**
 	 * Does the real work of the login.

@@ -45,15 +45,17 @@ class DismantleSite;
 
 class DismantleSiteDescr : public BuildingDescr {
 public:
-	DismantleSiteDescr(const std::string& init_descname,
-	                   const LuaTable& t,
-	                   const EditorGameBase& egbase);
+	DismantleSiteDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
 	~DismantleSiteDescr() override {
 	}
 
 	Building& create_object() const override;
 
+	FxId creation_fx() const;
+
 private:
+	const FxId creation_fx_;
+
 	DISALLOW_COPY_AND_ASSIGN(DismantleSiteDescr);
 };
 
@@ -90,6 +92,7 @@ protected:
 	void draw(uint32_t gametime,
 	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
+	          const Widelands::Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
 };

@@ -32,11 +32,11 @@
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/backtrace.h"
-#include "logic/findbob.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/backtrace.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findbob.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -120,11 +120,12 @@ Bob::~Bob() {
 bool Bob::init(EditorGameBase& egbase) {
 	MapObject::init(egbase);
 
-	if (upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase)) {
 		schedule_act(*game, 1);
-	else
+	} else {
 		// In editor: play idle task forever
-		set_animation(egbase, descr().get_animation("idle"));
+		set_animation(egbase, descr().get_animation("idle", this));
+	}
 	return true;
 }
 
@@ -759,6 +760,7 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 void Bob::draw(const EditorGameBase& egbase,
                const InfoToDraw&,
                const Vector2f& field_on_dst,
+               const Widelands::Coords& coords,
                const float scale,
                RenderTarget* dst) const {
 	if (!anim_) {
@@ -767,12 +769,8 @@ void Bob::draw(const EditorGameBase& egbase,
 
 	auto* const bob_owner = get_owner();
 	const Vector2f point_on_dst = calc_drawpos(egbase, field_on_dst, scale);
-	if (bob_owner != nullptr) {
-		dst->blit_animation(point_on_dst, scale, anim_, egbase.get_gametime() - animstart_,
-		                    bob_owner->get_playercolor());
-	} else {
-		dst->blit_animation(point_on_dst, scale, anim_, egbase.get_gametime() - animstart_);
-	}
+	dst->blit_animation(point_on_dst, coords, scale, anim_, egbase.get_gametime() - animstart_,
+	                    (bob_owner == nullptr) ? nullptr : &bob_owner->get_playercolor());
 }
 
 /**
@@ -903,9 +901,9 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 
 /// Give debug information.
 void Bob::log_general_info(const EditorGameBase& egbase) const {
-	FORMAT_WARNINGS_OFF;
+	FORMAT_WARNINGS_OFF
 	molog("Owner: %p\n", owner_);
-	FORMAT_WARNINGS_ON;
+	FORMAT_WARNINGS_ON
 	molog("Postition: (%i, %i)\n", position_.x, position_.y);
 	molog("ActID: %i\n", actid_);
 	molog("ActScheduled: %s\n", actscheduled_ ? "true" : "false");
@@ -929,9 +927,9 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 		molog("* ivar2: %i\n", stack_[i].ivar2);
 		molog("* ivar3: %i\n", stack_[i].ivar3);
 
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* object pointer: %p\n", stack_[i].objvar1.get(egbase));
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 		molog("* svar1: %s\n", stack_[i].svar1.c_str());
 
 		molog("* coords: (%i, %i)\n", stack_[i].coords.x, stack_[i].coords.y);
@@ -939,9 +937,9 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			molog(" %d", stack_[i].diranims.get_animation(dir));
 		}
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("\n* path: %p\n", stack_[i].path);
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 		if (stack_[i].path) {
 			const Path& path = *stack_[i].path;
 			molog("** Path length: %" PRIuS "\n", path.get_nsteps());
@@ -953,10 +951,10 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 				molog("*  (%i, %i)\n", coords.x, coords.y);
 			}
 		}
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		molog("* route: %p\n", stack_[i].route);
 		molog("* program: %p\n", stack_[i].route);
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 	}
 }
 
@@ -997,7 +995,7 @@ void Bob::Loader::load(FileRead& fr) {
 			bob.set_position(egbase(), read_coords_32(&fr));
 
 			std::string animname = fr.c_string();
-			bob.anim_ = animname.size() ? bob.descr().get_animation(animname) : 0;
+			bob.anim_ = animname.size() ? bob.descr().get_animation(animname, &bob) : 0;
 			bob.animstart_ = fr.signed_32();
 			bob.walking_ = static_cast<WalkingDir>(read_direction_8_allow_null(&fr));
 			if (bob.walking_) {
@@ -1026,7 +1024,7 @@ void Bob::Loader::load(FileRead& fr) {
 				if (fr.unsigned_8()) {
 					uint32_t anims[6];
 					for (int j = 0; j < 6; ++j)
-						anims[j] = bob.descr().get_animation(fr.c_string());
+						anims[j] = bob.descr().get_animation(fr.c_string(), &bob);
 					state.diranims =
 					   DirAnimations(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
 				}

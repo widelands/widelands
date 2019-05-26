@@ -39,6 +39,7 @@ struct ConstructionsiteInformation {
 
 	/// Draw the partly finished constructionsite
 	void draw(const Vector2f& point_on_dst,
+	          const Coords& coords,
 	          float scale,
 	          const RGBColor& player_color,
 	          RenderTarget* dst) const;
@@ -70,15 +71,17 @@ The ConstructionSite's idling animation is the basic construction site marker.
 */
 class ConstructionSiteDescr : public BuildingDescr {
 public:
-	ConstructionSiteDescr(const std::string& init_descname,
-	                      const LuaTable& t,
-	                      const EditorGameBase& egbase);
+	ConstructionSiteDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
 	~ConstructionSiteDescr() override {
 	}
 
 	Building& create_object() const override;
 
+	FxId creation_fx() const;
+
 private:
+	const FxId creation_fx_;
+
 	DISALLOW_COPY_AND_ASSIGN(ConstructionSiteDescr);
 };
 
@@ -123,6 +126,7 @@ protected:
 	void draw(uint32_t gametime,
 	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
+	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
 

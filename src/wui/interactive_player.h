@@ -75,6 +75,8 @@ public:
 	void popup_message(Widelands::MessageId, const Widelands::Message&);
 
 private:
+	bool player_hears_field(const Widelands::Coords& coords) const override;
+
 	void cmdSwitchPlayer(const std::vector<std::string>& args);
 
 	Widelands::PlayerNumber player_number_;
@@ -88,6 +90,8 @@ private:
 	UI::UniqueWindow::Registry objectives_;
 	UI::UniqueWindow::Registry encyclopedia_;
 	UI::UniqueWindow::Registry message_menu_;
+
+	const Image* grid_marker_pic_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_PLAYER_H

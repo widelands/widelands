@@ -24,4 +24,10 @@ tribes:new_carrier_type {
    ware_hotspot = { 0, 18 },
 
    animations = animations,
+
+   aihints = {
+      preciousness = {
+         frisians = 2
+      },
+   }
 }

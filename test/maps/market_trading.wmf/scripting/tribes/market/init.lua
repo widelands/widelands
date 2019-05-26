@@ -22,7 +22,7 @@ tribes:new_market_type {
       granite = 4,
       grout = 3,
       iron = 1,
-      thatch_reed = 4,
+      reed = 4,
       gold = 2,
    },
    return_on_dismantle = {
@@ -31,7 +31,7 @@ tribes:new_market_type {
       granite = 3,
       grout = 1,
       iron = 1,
-      thatch_reed = 2,
+      reed = 2,
       gold = 1,
    },
 
