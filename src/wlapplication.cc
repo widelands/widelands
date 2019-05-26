@@ -867,7 +867,7 @@ void WLApplication::init_language() {
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
 
-	i18n::set_localedir(datadir_ + "/locale");
+	i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/locale"));
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
