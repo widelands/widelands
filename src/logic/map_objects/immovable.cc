@@ -353,8 +353,8 @@ bool Immovable::init(EditorGameBase& egbase) {
 	ImmovableProgram const* prog = program_;
 	if (!prog) {
 		prog = descr().get_program("program");
-		assert(prog != nullptr);
 	}
+	assert(prog != nullptr);
 
 	if (upcast(ImmovableProgram::ActAnimate const, act_animate, &(*prog)[program_ptr_])) {
 		start_animation(egbase, act_animate->animation());
