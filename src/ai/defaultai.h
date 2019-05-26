@@ -204,6 +204,7 @@ private:
 	// trying to identify roads that might be removed
 	bool dispensable_road_test(const Widelands::Road&);
 	bool dismantle_dead_ends();
+	void collect_nearflags(std::map<uint32_t, Widelands::NearFlag> &, const Widelands::Flag&, const uint16_t);
 	// calculating distances from local warehouse to flags
 	void check_flag_distances(uint32_t);
 	Widelands::FlagWarehouseDistances flag_warehouse_distance;

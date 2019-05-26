@@ -771,52 +771,52 @@ private:
 	std::map<uint32_t, uint32_t> blocked_fields_;
 };
 
-// list of candidate flags to build roads, with some additional logic
-struct FlagsForRoads {
+//// list of candidate flags to build roads, with some additional logic
+//struct FlagsForRoads {
 
-	explicit FlagsForRoads(int32_t mr) : min_reduction(mr) {
-	}
+	//explicit FlagsForRoads(int32_t mr) : min_reduction(mr) {
+	//}
 
-	struct Candidate {
-		Candidate();
-		Candidate(uint32_t coords, int32_t distance, bool different_economy);
+	//struct Candidate {
+		//Candidate();
+		//Candidate(uint32_t coords, int32_t distance, bool different_economy);
 
-		uint32_t coords_hash;
-		int32_t new_road_length;
-		int32_t current_road_length;
-		int32_t air_distance;
+		//uint32_t coords_hash;
+		//int32_t new_road_length;
+		//int32_t current_road_length;
+		//int32_t air_distance;
 
-		bool new_road_possible;
+		//bool new_road_possible;
 
-		bool operator<(const Candidate& other) const;
-		bool operator==(const Candidate& other) const;
-		int32_t reduction_score() const;
-	};
+		//bool operator<(const Candidate& other) const;
+		//bool operator==(const Candidate& other) const;
+		//int32_t reduction_score() const;
+	//};
 
-	int32_t min_reduction;
-	// This is the core of this object - candidate flags to be ordered by air_distance
-	std::deque<Candidate> flags_queue;
+	//int32_t min_reduction;
+	//// This is the core of this object - candidate flags to be ordered by air_distance
+	//std::deque<Candidate> flags_queue;
 
-	void add_flag(Widelands::Coords coords, int32_t air_dist, bool different_economy) {
-		flags_queue.push_back(Candidate(coords.hash(), air_dist, different_economy));
-	}
+	//void add_flag(Widelands::Coords coords, int32_t air_dist, bool different_economy) {
+		//flags_queue.push_back(Candidate(coords.hash(), air_dist, different_economy));
+	//}
 
-	uint32_t count() {
-		return flags_queue.size();
-	}
-	bool has_candidate(uint32_t hash);
+	//uint32_t count() {
+		//return flags_queue.size();
+	//}
+	//bool has_candidate(uint32_t hash);
 
-	// This is for debugging and development purposes
-	void print();
-	// during processing we need to pick first one uprocessed flag (with best score so far)
-	bool get_best_uncalculated(uint32_t* winner);
-	// When we test candidate flag if road can be built to it, there are two possible outcomes:
-	void road_possible(Widelands::Coords coords, uint32_t new_road);
-	// Updating walking distance over existing roads
-	void set_cur_road_distance(Widelands::Coords coords, int32_t cur_distance);
-	// Finally we query the flag that we will build a road to
-	bool get_winner(uint32_t* winner_hash);
-};
+	//// This is for debugging and development purposes
+	//void print();
+	//// during processing we need to pick first one uprocessed flag (with best score so far)
+	//bool get_best_uncalculated(uint32_t* winner);
+	//// When we test candidate flag if road can be built to it, there are two possible outcomes:
+	//void road_possible(Widelands::Coords coords, uint32_t new_road);
+	//// Updating walking distance over existing roads
+	//void set_cur_road_distance(Widelands::Coords coords, int32_t cur_distance);
+	//// Finally we query the flag that we will build a road to
+	//bool get_winner(uint32_t* winner_hash);
+//};
 
 // This is a struct that stores strength of players, info on teams and provides some outputs from
 // these data
@@ -914,6 +914,44 @@ private:
 public:
   bool set_distance(uint32_t, uint16_t, uint32_t, uint32_t);
   int16_t get_distance(uint32_t, uint32_t, uint32_t*);
+
+
+};
+struct FlagCandidates{
+
+    explicit FlagCandidates(uint16_t wd) : distance_to_wh(wd) {}
+
+      struct Candidate{
+        Candidate() = delete;
+        Candidate(uint32_t, bool different_economy, uint16_t start_flag_dist_to_wh);
+        uint32_t coords_hash;
+        bool different_economy;
+        uint16_t start_flag_dist_to_wh;
+        uint16_t road_distance;
+        uint16_t possible_road_distance;
+        uint16_t distance_to_wh;
+        int16_t score() const;
+        bool is_buildable() {return possible_road_distance > 0;}
+         bool operator<(const Candidate& other) const {
+                   return score() > other.score();
+        }
+        void print(){
+            printf  (" This flag %3dx%3d: curr dist. to wh %3d, distance from target flag: %3d, new road dist: %3d, score: %3d\n",
+                   Coords::unhash(coords_hash).x, Coords::unhash(coords_hash).y,
+                     distance_to_wh, start_flag_dist_to_wh, possible_road_distance, score());
+        }
+    };
+
+    std::vector<Candidate> flags;
+    uint16_t distance_to_wh;
+
+    bool has_candidate(uint32_t);
+    void add_flag(uint32_t, bool );
+    bool set_cur_road_distance(uint32_t, uint16_t );
+    bool set_road_possible(uint32_t, uint16_t );
+    void sort();
+    uint32_t count() {return flags.size();}
+    FlagCandidates::Candidate* get_winner();
 
 
 };

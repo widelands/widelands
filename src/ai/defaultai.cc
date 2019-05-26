@@ -3834,319 +3834,350 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
                                      int16_t min_reduction,
                                      uint32_t gametime) {
 
-	// Increasing the failed_connection_tries counter
-	// At the same time it indicates a time an economy is without a warehouse
-	EconomyObserver* eco = get_economy_observer(flag.economy());
-	// if we passed grace time this will be last attempt and if it fails
-	// building is destroyes
-	bool last_attempt_ = false;
+    // Increasing the failed_connection_tries counter
+    // At the same time it indicates a time an economy is without a warehouse
+    EconomyObserver* eco = get_economy_observer(flag.economy());
+    // if we passed grace time this will be last attempt and if it fails
+    // building is destroyes
+    bool last_attempt_ = false;
 
-	// this should not happen, but if the economy has a warehouse and a dismantle
-	// grace time set, we must 'zero' the dismantle grace time
-	if (!flag.get_economy()->warehouses().empty() &&
-	    eco->dismantle_grace_time != std::numeric_limits<uint32_t>::max()) {
-		eco->dismantle_grace_time = std::numeric_limits<uint32_t>::max();
-	}
+    // this should not happen, but if the economy has a warehouse and a dismantle
+    // grace time set, we must 'zero' the dismantle grace time
+    if (!flag.get_economy()->warehouses().empty() &&
+        eco->dismantle_grace_time != std::numeric_limits<uint32_t>::max()) {
+        eco->dismantle_grace_time = std::numeric_limits<uint32_t>::max();
+    }
 
-	// first we deal with situations when this is economy with no warehouses
-	// and this is a flag belonging to a building/constructionsite
-	// such economy must get dismantle grace time (if not set yet)
-	// end sometimes extended checkradius
-	if (flag.get_economy()->warehouses().empty() && flag.get_building()) {
+    // first we deal with situations when this is economy with no warehouses
+    // and this is a flag belonging to a building/constructionsite
+    // such economy must get dismantle grace time (if not set yet)
+    // end sometimes extended checkradius
+    if (flag.get_economy()->warehouses().empty() && flag.get_building()) {
 
-		// occupied military buildings get special treatment
-		// (extended grace time + longer radius)
-		bool occupied_military_ = false;
-		Building* b = flag.get_building();
-		if (upcast(MilitarySite, militb, b)) {
-			if (militb->soldier_control()->stationed_soldiers().size() > 0) {
-				occupied_military_ = true;
-			}
-		}
+        // occupied military buildings get special treatment
+        // (extended grace time + longer radius)
+        bool occupied_military_ = false;
+        Building* b = flag.get_building();
+        if (upcast(MilitarySite, militb, b)) {
+            if (militb->soldier_control()->stationed_soldiers().size() > 0) {
+                occupied_military_ = true;
+            }
+        }
 
-		// check if we are within grace time, if not or gracetime unset we need to do something
-		// if we are within gracetime we do nothing (this loop is skipped)
+        // check if we are within grace time, if not or gracetime unset we need to do something
+        // if we are within gracetime we do nothing (this loop is skipped)
 
-		// if grace time is not set, this is probably first time without a warehouse and we must set
-		// it
-		if (eco->dismantle_grace_time == std::numeric_limits<uint32_t>::max()) {
+        // if grace time is not set, this is probably first time without a warehouse and we must set
+        // it
+        if (eco->dismantle_grace_time == std::numeric_limits<uint32_t>::max()) {
 
-			// constructionsites
-			if (upcast(ConstructionSite const, constructionsite, flag.get_building())) {
-				BuildingObserver& bo =
-				   get_building_observer(constructionsite->building().name().c_str());
-				// first very special case - a port (in the phase of constructionsite)
-				// this might be a new colonization port
-				if (bo.is(BuildingAttribute::kPort)) {
-					eco->dismantle_grace_time = gametime + 60 * 60 * 1000;  // one hour should be enough
-				} else {  // other constructionsites, usually new (standalone) constructionsites
-					eco->dismantle_grace_time =
-					   gametime + 30 * 1000 +            // very shot time is enough
-					   (eco->flags.size() * 30 * 1000);  // + 30 seconds for every flag in economy
-				}
+            // constructionsites
+            if (upcast(ConstructionSite const, constructionsite, flag.get_building())) {
+                BuildingObserver& bo =
+                   get_building_observer(constructionsite->building().name().c_str());
+                // first very special case - a port (in the phase of constructionsite)
+                // this might be a new colonization port
+                if (bo.is(BuildingAttribute::kPort)) {
+                    eco->dismantle_grace_time = gametime + 60 * 60 * 1000;  // one hour should be enough
+                } else {  // other constructionsites, usually new (standalone) constructionsites
+                    eco->dismantle_grace_time =
+                       gametime + 30 * 1000 +            // very shot time is enough
+                       (eco->flags.size() * 30 * 1000);  // + 30 seconds for every flag in economy
+                }
 
-				// buildings
-			} else {
+                // buildings
+            } else {
 
-				if (occupied_military_) {
-					eco->dismantle_grace_time =
-					   (gametime + 90 * 60 * 1000) + (eco->flags.size() * 20 * 1000);
+                if (occupied_military_) {
+                    eco->dismantle_grace_time =
+                       (gametime + 90 * 60 * 1000) + (eco->flags.size() * 20 * 1000);
 
-				} else {  // for other normal buildings
-					eco->dismantle_grace_time =
-					   gametime + (45 * 60 * 1000) + (eco->flags.size() * 20 * 1000);
-				}
-			}
+                } else {  // for other normal buildings
+                    eco->dismantle_grace_time =
+                       gametime + (45 * 60 * 1000) + (eco->flags.size() * 20 * 1000);
+                }
+            }
 
-			// we have passed grace_time - it is time to dismantle
-		} else if (eco->dismantle_grace_time <= gametime) {
-			last_attempt_ = true;
-			// we increase a check radius in last attempt
-			checkradius += 2;
-		}
+            // we have passed grace_time - it is time to dismantle
+        } else if (eco->dismantle_grace_time <= gametime) {
+            last_attempt_ = true;
+            // we increase a check radius in last attempt
+            checkradius += 2;
+        }
 
-		// and bonus for occupied military buildings:
-		if (occupied_military_) {
-			checkradius += 4;
-		}
+        // and bonus for occupied military buildings:
+        if (occupied_military_) {
+            checkradius += 4;
+        }
 
-		// and generally increase radius for unconnected buildings
-		checkradius += 2;
-	}
+        // and generally increase radius for unconnected buildings
+        checkradius += 2;
+    }
 
-	// Now own roadfinding stuff
+    // Now own roadfinding stuff
+    const Map& map = game().map();
+
+    // initializing new object of FlagsForRoads, we will push there all candidate flags
+    // First we dont even know if a road can be built there (from current flag)
+    // NOCOM adding also distance of this flag to nearest wh
+    uint32_t tmp_wh; // NOCOM
+    const uint32_t current_flag_dist_to_wh = flag_warehouse_distance.
+            get_distance(flag.get_position().hash(), gametime, &tmp_wh);
+    printf ("* Distance to wh from tested flag %dx%d: %d, checkradius: %d\n",
+     flag.get_position().x, flag.get_position().y, current_flag_dist_to_wh, checkradius);
+
+    FlagCandidates flag_candidates(min_reduction);
+
+    FindNodeWithFlagOrRoad functor;
+    CheckStepRoadAI check(player_, MOVECAPS_WALK, true);
+
+    // get all flags within radius
+    std::vector<Coords> reachable;
+    map.find_reachable_fields(
+       Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius), &reachable, check, functor);
+
+    for (const Coords& reachable_coords : reachable) {
+
+        // ignore starting flag, of course
+        if (reachable_coords == flag.get_position()) {
+            continue;
+        }
+
+        // first make sure there is an immovable (should be, but still)
+        if (upcast(PlayerImmovable const, player_immovable, map[reachable_coords].get_immovable())) {
+
+            // if it is the road, make a flag there
+            if (dynamic_cast<const Road*>(map[reachable_coords].get_immovable())) {
+                game().send_player_build_flag(player_number(), reachable_coords);
+            }
+
+            // do not go on if it is not a flag
+            if (!dynamic_cast<const Flag*>(map[reachable_coords].get_immovable())) {
+                continue;
+            }
+
+            // testing if a flag/road's economy has a warehouse, if not we are not
+            // interested to connect to it
+            if (player_immovable->economy().warehouses().size() == 0) {
+                continue;
+            }
+
+            // This is a candidate, sending all necessary info to RoadCandidates
+            const bool different_economy = (player_immovable->get_economy() != flag.get_economy());
+            //const int32_t air_distance = map.calc_distance(flag.get_position(), reachable_coords);
+            printf("flag here\n");
+            if (!flag_candidates.has_candidate(reachable_coords.hash())) {
+				printf ("....Adding %dx%d\n", reachable_coords.x, reachable_coords.y);
+                flag_candidates.add_flag(reachable_coords.hash(), different_economy);
+            }
+        }
+    }
+
+    // now we walk over roads and if field is reachable by roads, we change the distance assigned
+    // above
+    std::map<uint32_t, NearFlag> nearflags;  // only used to collect flags reachable walk over roads
+    nearflags[flag.get_position().hash()] = NearFlag(&flag, 0);
+
+    collect_nearflags(nearflags, flag, checkradius);
+
+
+
+    // Sending calculated walking costs from nearflags to RoadCandidates to update info on
+    // Candidate flags/roads
+    for (auto& nf_walk : nearflags) {
+        // NearFlag contains also flags beyond check radius, these are not relevent for us
+        if (flag_candidates.has_candidate(nf_walk.second.flag->get_position().hash())) {
+            flag_candidates.set_cur_road_distance(
+               nf_walk.second.flag->get_position(), nf_walk.second.current_road_distance);
+        }
+    }
+
+    // Here we must consider how much are buildable fields lacking
+    // the number will be transformed to a weight passed to findpath function
+    int32_t fields_necessity = 0;
+    if (spots_ < kSpotsTooLittle) {
+        fields_necessity += 10;
+    }
+    if (map_allows_seafaring_ && num_ports == 0) {
+        fields_necessity += 10;
+    }
+    if (num_ports < 4) {
+        fields_necessity += 5;
+    }
+    if (spots_ < kSpotsEnough) {
+        fields_necessity += 5;
+    }
+
+    fields_necessity *= std::abs(management_data.get_military_number_at(64)) * 5;
+
+    // We need to sort these flags somehow, because we are not going to investigate all of them
+    // so sorting first by current road length (that might contain fake values for flags that were
+    // not reached over roads) and secondary by air_distance (nearer flags first)
+    //std::sort(std::begin(RoadCandidates.flags_queue), std::end(RoadCandidates.flags_queue),
+    //         [](const FlagsForRoads::Candidate& a, const FlagsForRoads::Candidate& b) {
+    //              // Here we are doing a kind of bucketing
+    //              const int32_t a_length = a.current_road_length / 50;
+    //              const int32_t b_length = b.current_road_length / 50;
+    //              return std::tie(b_length, a.air_distance) < std::tie(a_length, b.air_distance);
+    //          });
+    flag_candidates.sort();
+
+    // Now we calculate roads from here to few best looking RoadCandidates....
+    uint32_t possible_roads_count = 0;
+    //uint32_t current = 0;  // hash of flag that we are going to calculate in the iteration
+    for (auto &flag_candidate : flag_candidates.flags){
+        if (possible_roads_count > 5) {break;}
+        const Widelands::Coords coords = Coords::unhash(flag_candidate.coords_hash);
+        Path path;
+
+        // value of pathcost is not important, it just indicates, that the path can be built
+        // We send this information to RoadCandidates, with length of possible road if applicable
+        const int32_t pathcost =
+           map.findpath(flag.get_position(), coords, 0, path, check, 0, fields_necessity);
+        printf ("  pathcosts %d\n", pathcost);
+        if (pathcost >= 0) {
+            flag_candidates.set_road_possible(flag_candidate.coords_hash, path.get_nsteps());
+            possible_roads_count += 1;
+        }
+    }
+
+    // re-sorting again // ???? now by reduction score (custom operator specified in .h file)
+    flag_candidates.sort();
+
+    printf ("Candidates (%d)for flag at %3dx%3d:\n", flag_candidates.count(), flag.get_position(). x,flag.get_position().y);
+    for (auto& item : flag_candidates.flags){
+        item.print();
+    }
+
+    // Well and finally building the winning road (if any)
+    //uint32_t winner_hash = 0;
+    FlagCandidates::Candidate* winner = flag_candidates.get_winner();
+    if (winner) {
+        const Widelands::Coords target_coords = Coords::unhash(winner->coords_hash);
+        printf("Winner to built: "); //without new line
+        winner->print();
+        Path& path = *new Path();
+#ifndef NDEBUG
+        const int32_t pathcost =
+           map.findpath(flag.get_position(), target_coords, 0, path, check, 0, fields_necessity);
+        assert(pathcost >= 0);
+#else
+        map.findpath(flag.get_position(), target_coords, 0, path, check, 0, fields_necessity);
+#endif
+        game().send_player_build_road(player_number(), path);
+        return true;
+    }
+    // We can't build a road so let's block the vicinity as an indication this area is not
+    // connectible
+    // Usually we block for 2 minutes, but if it is a last attempt we block for 10 minutes
+    // Note: we block the vicinity only if this economy (usually a sole flag with a building) is not
+    // connected to a warehouse
+    if (flag.get_economy()->warehouses().empty()) {
+
+        // blocking only if latest block was less then 60 seconds ago or it is last attempt
+        if (eco->fields_block_last_time + 60000 < gametime || last_attempt_) {
+            eco->fields_block_last_time = gametime;
+
+            const uint32_t block_time = last_attempt_ ? 10 * 60 * 1000 : 2 * 60 * 1000;
+
+            FindNodeAcceptAll buildable_functor;
+            CheckStepOwnTerritory check_own(player_, MOVECAPS_WALK, true);
+
+            // get all flags within radius
+            std::vector<Coords> reachable_to_block;
+            map.find_reachable_fields(Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius),
+                                      &reachable_to_block, check_own, buildable_functor);
+
+            for (auto coords : reachable_to_block) {
+                blocked_fields.add(coords, game().get_gametime() + block_time);
+            }
+        }
+
+        // If it last attempt we also destroy the flag (with a building if any attached)
+        if (last_attempt_) {
+            remove_from_dqueue<Widelands::Flag>(eco->flags, &flag);
+            game().send_player_bulldoze(*const_cast<Flag*>(&flag));
+            dead_ends_check_ = true;
+            return true;
+        }
+    }
+    return false;
+}
+
+void DefaultAI::collect_nearflags(std::map<uint32_t, NearFlag> &nearflags, const Flag& flag, const uint16_t checkradius) {
+    // Algorithm to walk on roads
+    // All nodes are marked as to_be_checked == true first and once the node is checked it is changed
+    // to false. Under some conditions, the same node can be checked twice, the to_be_checked can
+    // be set back to true. Because less hoops (fewer flag-to-flag roads) does not always mean
+    // shortest
+    // road.
+
 	const Map& map = game().map();
 
-	// initializing new object of FlagsForRoads, we will push there all candidate flags
-	// First we dont even know if a road can be built there (from current flag)
-	Widelands::FlagsForRoads RoadCandidates(min_reduction);
+    for (;;) {
+        // looking for a node with shortest existing road distance from starting flag and one that has
+        // to be checked
+        uint32_t start_field = std::numeric_limits<uint32_t>::max();
+        uint32_t nearest_distance = 10000;
+        for (auto item : nearflags) {
+            if (item.second.current_road_distance < nearest_distance && item.second.to_be_checked) {
+                nearest_distance = item.second.current_road_distance;
+                start_field = item.first;
+            }
+        }
+        // OK, we failed to find a NearFlag where to_be_checked == true, so quitting the loop now
+        if (start_field == std::numeric_limits<uint32_t>::max()) {
+            break;
+        }
 
-	FindNodeWithFlagOrRoad functor;
-	CheckStepRoadAI check(player_, MOVECAPS_WALK, true);
+        nearflags[start_field].to_be_checked = false;
 
-	// get all flags within radius
-	std::vector<Coords> reachable;
-	map.find_reachable_fields(
-	   Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius), &reachable, check, functor);
+        // Now going over roads leading from this flag
+        for (uint8_t i = 1; i <= 6; ++i) {
+            Road* const road = nearflags[start_field].flag->get_road(i);
 
-	for (const Coords& reachable_coords : reachable) {
+            if (!road) {
+                continue;
+            }
 
-		// ignore starting flag, of course
-		if (reachable_coords == flag.get_position()) {
-			continue;
-		}
+            Flag* endflag = &road->get_flag(Road::FlagStart);
 
-		// first make sure there is an immovable (should be, but still)
-		if (upcast(PlayerImmovable const, player_immovable, map[reachable_coords].get_immovable())) {
+            if (endflag == nearflags[start_field].flag) {
+                endflag = &road->get_flag(Road::FlagEnd);
+            }
 
-			// if it is the road, make a flag there
-			if (dynamic_cast<const Road*>(map[reachable_coords].get_immovable())) {
-				game().send_player_build_flag(player_number(), reachable_coords);
-			}
+            const uint32_t endflag_hash = endflag->get_position().hash();
 
-			// do not go on if it is not a flag
-			if (!dynamic_cast<const Flag*>(map[reachable_coords].get_immovable())) {
-				continue;
-			}
+            const int32_t dist = map.calc_distance(flag.get_position(), endflag->get_position());
 
-			// testing if a flag/road's economy has a warehouse, if not we are not
-			// interested to connect to it
-			if (player_immovable->economy().warehouses().size() == 0) {
-				continue;
-			}
+            if (dist > checkradius + 2) {  //  Testing bigger vicinity then checkradius....
+                continue;
+            }
 
-			// This is a candidate, sending all necessary info to RoadCandidates
-			const bool different_economy = (player_immovable->get_economy() != flag.get_economy());
-			const int32_t air_distance = map.calc_distance(flag.get_position(), reachable_coords);
-			if (!RoadCandidates.has_candidate(reachable_coords.hash())) {
-				RoadCandidates.add_flag(reachable_coords, air_distance, different_economy);
-			}
-		}
-	}
+            // There is few scenarios for this neighbour flag
+            //uint32_t tmp_wh;
+            if (nearflags.count(endflag_hash) == 0) {
+                // This is brand new flag
+                //calculating diff how much closer we will get to the flag
+                nearflags[endflag_hash] =
+                   NearFlag(endflag, nearflags[start_field].current_road_distance +
+                                        road->get_path().get_nsteps());
+                        // NOCOM adding distance to wh
+            } else {
+                // We know about this flag already
+                if (nearflags[endflag_hash].current_road_distance >
+                    nearflags[start_field].current_road_distance + road->get_path().get_nsteps()) {
+                    // ..but this current connection is shorter than one found before
+                    nearflags[endflag_hash].current_road_distance =
+                       nearflags[start_field].current_road_distance + road->get_path().get_nsteps();
+                    // So let re-check neighbours once more
+                    nearflags[endflag_hash].to_be_checked = true;
+                }
+            }
+        }
+    }
 
-	// now we walk over roads and if field is reachable by roads, we change the distance assigned
-	// above
-	std::map<uint32_t, NearFlag> nearflags;  // only used to collect flags reachable walk over roads
-	nearflags[flag.get_position().hash()] = NearFlag(&flag, 0);
-
-	// Algorithm to walk on roads
-	// All nodes are marked as to_be_checked == true first and once the node is checked it is changed
-	// to false. Under some conditions, the same node can be checked twice, the to_be_checked can
-	// be set back to true. Because less hoops (fewer flag-to-flag roads) does not always mean
-	// shortest
-	// road.
-	for (;;) {
-		// looking for a node with shortest existing road distance from starting flag and one that has
-		// to be checked
-		uint32_t start_field = std::numeric_limits<uint32_t>::max();
-		uint32_t nearest_distance = 10000;
-		for (auto item : nearflags) {
-			if (item.second.current_road_distance < nearest_distance && item.second.to_be_checked) {
-				nearest_distance = item.second.current_road_distance;
-				start_field = item.first;
-			}
-		}
-		// OK, we failed to find a NearFlag where to_be_checked == true, so quitting the loop now
-		if (start_field == std::numeric_limits<uint32_t>::max()) {
-			break;
-		}
-
-		nearflags[start_field].to_be_checked = false;
-
-		// Now going over roads leading from this flag
-		for (uint8_t i = 1; i <= 6; ++i) {
-			Road* const road = nearflags[start_field].flag->get_road(i);
-
-			if (!road) {
-				continue;
-			}
-
-			Flag* endflag = &road->get_flag(Road::FlagStart);
-
-			if (endflag == nearflags[start_field].flag) {
-				endflag = &road->get_flag(Road::FlagEnd);
-			}
-
-			const uint32_t endflag_hash = endflag->get_position().hash();
-
-			const int32_t dist = map.calc_distance(flag.get_position(), endflag->get_position());
-
-			if (dist > checkradius + 2) {  //  Testing bigger vicinity then checkradius....
-				continue;
-			}
-
-			// There is few scenarios for this neighbour flag
-			if (nearflags.count(endflag_hash) == 0) {
-				// This is brand new flag
-				nearflags[endflag_hash] =
-				   NearFlag(endflag, nearflags[start_field].current_road_distance +
-				                        road->get_path().get_nsteps());
-			} else {
-				// We know about this flag already
-				if (nearflags[endflag_hash].current_road_distance >
-				    nearflags[start_field].current_road_distance + road->get_path().get_nsteps()) {
-					// ..but this current connection is shorter than one found before
-					nearflags[endflag_hash].current_road_distance =
-					   nearflags[start_field].current_road_distance + road->get_path().get_nsteps();
-					// So let re-check neighbours once more
-					nearflags[endflag_hash].to_be_checked = true;
-				}
-			}
-		}
-	}
-
-	// Sending calculated walking costs from nearflags to RoadCandidates to update info on
-	// Candidate flags/roads
-	for (auto& nf_walk : nearflags) {
-		// NearFlag contains also flags beyond check radius, these are not relevent for us
-		if (RoadCandidates.has_candidate(nf_walk.second.flag->get_position().hash())) {
-			RoadCandidates.set_cur_road_distance(
-			   nf_walk.second.flag->get_position(), nf_walk.second.current_road_distance);
-		}
-	}
-
-	// Here we must consider how much are buildable fields lacking
-	// the number will be transformed to a weight passed to findpath function
-	int32_t fields_necessity = 0;
-	if (spots_ < kSpotsTooLittle) {
-		fields_necessity += 10;
-	}
-	if (map_allows_seafaring_ && num_ports == 0) {
-		fields_necessity += 10;
-	}
-	if (num_ports < 4) {
-		fields_necessity += 5;
-	}
-	if (spots_ < kSpotsEnough) {
-		fields_necessity += 5;
-	}
-	fields_necessity *= std::abs(management_data.get_military_number_at(64)) * 5;
-
-	// We need to sort these flags somehow, because we are not going to investigate all of them
-	// so sorting first by current road length (that might contain fake values for flags that were
-	// not reached over roads) and secondary by air_distance (nearer flags first)
-	std::sort(std::begin(RoadCandidates.flags_queue), std::end(RoadCandidates.flags_queue),
-	          [](const FlagsForRoads::Candidate& a, const FlagsForRoads::Candidate& b) {
-		          // Here we are doing a kind of bucketing
-		          const int32_t a_length = a.current_road_length / 50;
-		          const int32_t b_length = b.current_road_length / 50;
-		          return std::tie(b_length, a.air_distance) < std::tie(a_length, b.air_distance);
-	          });
-
-	// Now we calculate roads from here to few best looking RoadCandidates....
-	uint32_t possible_roads_count = 0;
-	uint32_t current = 0;  // hash of flag that we are going to calculate in the iteration
-	while (possible_roads_count < 5 && RoadCandidates.get_best_uncalculated(&current)) {
-		const Widelands::Coords coords = Coords::unhash(current);
-		Path path;
-
-		// value of pathcost is not important, it just indicates, that the path can be built
-		// We send this information to RoadCandidates, with length of possible road if applicable
-		const int32_t pathcost =
-		   map.findpath(flag.get_position(), coords, 0, path, check, 0, fields_necessity);
-		if (pathcost >= 0) {
-			RoadCandidates.road_possible(coords, path.get_nsteps());
-			possible_roads_count += 1;
-		}
-	}
-
-	// re-sorting again, now by reduction score (custom operator specified in .h file)
-	std::sort(std::begin(RoadCandidates.flags_queue), std::end(RoadCandidates.flags_queue));
-
-	// Well and finally building the winning road (if any)
-	uint32_t winner_hash = 0;
-	if (RoadCandidates.get_winner(&winner_hash)) {
-		const Widelands::Coords target_coords = Coords::unhash(winner_hash);
-		uint32_t nearest_wh;
-		printf("Building road: current distance to wh %d, distance on target flag: %d\n",
-		flag_warehouse_distance.get_distance(flag.get_position().hash(), gametime, &nearest_wh),
-		flag_warehouse_distance.get_distance(winner_hash, gametime, &nearest_wh));
-		Path& path = *new Path();
-#ifndef NDEBUG
-		const int32_t pathcost =
-		   map.findpath(flag.get_position(), target_coords, 0, path, check, 0, fields_necessity);
-		assert(pathcost >= 0);
-#else
-		map.findpath(flag.get_position(), target_coords, 0, path, check, 0, fields_necessity);
-#endif
-		game().send_player_build_road(player_number(), path);
-		return true;
-	}
-	// We can't build a road so let's block the vicinity as an indication this area is not
-	// connectible
-	// Usually we block for 2 minutes, but if it is a last attempt we block for 10 minutes
-	// Note: we block the vicinity only if this economy (usually a sole flag with a building) is not
-	// connected to a warehouse
-	if (flag.get_economy()->warehouses().empty()) {
-
-		// blocking only if latest block was less then 60 seconds ago or it is last attempt
-		if (eco->fields_block_last_time + 60000 < gametime || last_attempt_) {
-			eco->fields_block_last_time = gametime;
-
-			const uint32_t block_time = last_attempt_ ? 10 * 60 * 1000 : 2 * 60 * 1000;
-
-			FindNodeAcceptAll buildable_functor;
-			CheckStepOwnTerritory check_own(player_, MOVECAPS_WALK, true);
-
-			// get all flags within radius
-			std::vector<Coords> reachable_to_block;
-			map.find_reachable_fields(Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius),
-			                          &reachable_to_block, check_own, buildable_functor);
-
-			for (auto coords : reachable_to_block) {
-				blocked_fields.add(coords, game().get_gametime() + block_time);
-			}
-		}
-
-		// If it last attempt we also destroy the flag (with a building if any attached)
-		if (last_attempt_) {
-			remove_from_dqueue<Widelands::Flag>(eco->flags, &flag);
-			game().send_player_bulldoze(*const_cast<Flag*>(&flag));
-			dead_ends_check_ = true;
-			return true;
-		}
-	}
-	return false;
+    printf ("Collected nearflags: %lu\n", nearflags.size());
 }
 
 /**
