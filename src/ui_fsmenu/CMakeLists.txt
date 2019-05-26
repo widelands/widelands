@@ -75,6 +75,7 @@ wl_library(ui_fsmenu_loading_common
     singleplayer.h
   DEPENDS
     base_i18n
+    graphic
     io_filesystem
     profile
     network

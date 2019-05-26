@@ -231,8 +231,6 @@ wl_library(logic
     graphic
     graphic_color
     graphic_playercolor
-    graphic_surface
-    graphic_text_layout
     io_fileread
     io_filesystem
     io_stream
