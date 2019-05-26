@@ -192,17 +192,17 @@ struct BuildingNonexistent : public FileRead::DataError {
 };
 
 // reads an immovable depending on whether it is a tribe or world immovable
-const ImmovableDescr& read_immovable_type(StreamRead* fr, const EditorGameBase& egbase) {
+const ImmovableDescr& read_immovable_type(StreamRead* fr, const EditorGameBase& egbase, const TribesLegacyLookupTable& tribes_lookup_table, const WorldLegacyLookupTable& world_lookup_table) {
 	uint8_t owner = fr->unsigned_8();
 	char const* const name = fr->c_string();
 	if (owner == static_cast<uint8_t>(MapObjectDescr::OwnerType::kWorld)) {
-		DescriptionIndex const index = egbase.world().get_immovable_index(name);
+		DescriptionIndex const index = egbase.world().get_immovable_index(world_lookup_table.lookup_immovable(name));
 		if (index == Widelands::INVALID_INDEX)
 			throw WorldImmovableNonexistent(name);
 		return *egbase.world().get_immovable_descr(index);
 	} else {
 		assert(owner == static_cast<uint8_t>(MapObjectDescr::OwnerType::kTribe));
-		DescriptionIndex const index = egbase.tribes().immovable_index(name);
+		DescriptionIndex const index = egbase.tribes().immovable_index(tribes_lookup_table.lookup_immovable(name));
 		if (index == Widelands::INVALID_INDEX)
 			throw TribeImmovableNonexistent(name);
 		return *egbase.tribes().get_immovable_descr(index);
@@ -238,7 +238,7 @@ void write_building_type(StreamWrite* wr, const BuildingDescr& building) {
 
 inline static MapObjectData read_unseen_immovable(const EditorGameBase& egbase,
                                                   uint8_t& immovable_kind,
-                                                  FileRead& immovables_file,
+                                                  FileRead& immovables_file, const TribesLegacyLookupTable& tribes_lookup_table, const WorldLegacyLookupTable& world_lookup_table,
                                                   uint8_t& version) {
 	MapObjectData m;
 	try {
@@ -247,7 +247,7 @@ inline static MapObjectData read_unseen_immovable(const EditorGameBase& egbase,
 			m.map_object_descr = nullptr;
 			break;
 		case UNSEEN_TRIBEORWORLD:  //  The player sees a tribe or world immovable.
-			m.map_object_descr = &read_immovable_type(&immovables_file, egbase);
+			m.map_object_descr = &read_immovable_type(&immovables_file, egbase, tribes_lookup_table, world_lookup_table);
 			break;
 		case UNSEEN_FLAG:  //  The player sees a flag.
 			m.map_object_descr = &g_flag_descr;
@@ -284,7 +284,7 @@ inline static MapObjectData read_unseen_immovable(const EditorGameBase& egbase,
 void MapPlayersViewPacket::read(FileSystem& fs,
                                 EditorGameBase& egbase,
                                 bool const skip,
-                                MapObjectLoader&)
+                                MapObjectLoader&, const TribesLegacyLookupTable& tribes_lookup_table, const WorldLegacyLookupTable& world_lookup_table)
 
 {
 	if (skip)
@@ -559,7 +559,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						                            kCurrentPacketVersionImmovableKinds);
 					}
 					MapObjectData mod = read_unseen_immovable(
-					   egbase, imm_kind, node_immovables_file, node_immovables_file_version);
+					   egbase, imm_kind, node_immovables_file, tribes_lookup_table, world_lookup_table, node_immovables_file_version);
 					f_player_field.map_object_descr = mod.map_object_descr;
 					f_player_field.constructionsite = mod.csi;
 
@@ -633,7 +633,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					// TODO(sirver): Remove this logic the next time we break
 					// savegame compatibility.
 					read_unseen_immovable(
-					   egbase, im_kind, triangle_immovables_file, triangle_immovables_file_version);
+					   egbase, im_kind, triangle_immovables_file, tribes_lookup_table, world_lookup_table, triangle_immovables_file_version);
 				}
 				if (f_seen | br_seen | r_seen) {
 					//  The player currently sees the R triangle. Therefore his
@@ -662,7 +662,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					// suporting immovables on the triangles instead as on the
 					// nodes.
 					read_unseen_immovable(
-					   egbase, im_kind, triangle_immovables_file, triangle_immovables_file_version);
+					   egbase, im_kind, triangle_immovables_file, tribes_lookup_table, world_lookup_table, triangle_immovables_file_version);
 				}
 
 				{  //  edges
