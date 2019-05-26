@@ -20,17 +20,4 @@
 #ifndef WL_HELPER_H
 #define WL_HELPER_H
 
-// A functional container filtering (by copying the values). Returns a new
-// ContainerType that  contains all values where 'test' returned true.
-template <typename ContainerType, class UnaryPredicate>
-ContainerType filter(const ContainerType& container, UnaryPredicate test) {
-	ContainerType filtered;
-	for (const auto& entry : container) {
-		if (!test(entry)) {
-			continue;
-		}
-		filtered.insert(entry);
-	}
-	return filtered;
-}
 #endif  // end of include guard: WL_HELPER_H

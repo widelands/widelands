@@ -114,7 +114,7 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
 	i18n::Textdomain td("tribes");
 
 	// Read the sailing animations
-	add_directional_animation(&sail_anims_, "sail");
+	assign_directional_animation(&sail_anims_, "sail");
 
 	capacity_ = table.has_key("capacity") ? table.get_int("capacity") : 20;
 }

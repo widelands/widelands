@@ -24,7 +24,6 @@
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "base/macros.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -43,7 +42,7 @@ constexpr uint32_t kCurrentPacketVersion = 4;
 void write_lua_dir(FileSystem& target_fs, FileSystem* map_fs, const std::string& path) {
 	assert(map_fs);
 	target_fs.ensure_directory_exists(path);
-	for (const std::string& script : filter(map_fs->list_directory(path), [](const std::string& fn) {
+	for (const std::string& script : map_fs->filter_directory(path, [](const std::string& fn) {
 		     return boost::ends_with(fn, ".lua");
 	     })) {
 		size_t length;
