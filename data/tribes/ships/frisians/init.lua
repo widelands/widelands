@@ -12,7 +12,7 @@ animations = {
       fps = 7
    }
 }
-add_walking_animations (animations, "sail", dirname, "sail", {146, 153}, 10)
+add_directional_animation(animations, "sail", dirname, "sail", {146, 153}, 10)
 
 tribes:new_ship_type {
    name = "frisians_ship",

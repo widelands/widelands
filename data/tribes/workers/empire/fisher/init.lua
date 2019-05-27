@@ -11,8 +11,8 @@ animations = {
       fps = 10,
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {10, 38}, 20)
-add_walking_animations(animations, "walkload", dirname, "walk", {10, 38}, 20)
+add_directional_animation(animations, "walk", dirname, "walk", {10, 38}, 20)
+add_directional_animation(animations, "walkload", dirname, "walk", {10, 38}, 20)
 
 
 tribes:new_worker_type {

@@ -154,7 +154,7 @@ bool ZipFilesystem::is_writable() const {
  * pathname) in the results. There doesn't seem to be an even remotely
  * cross-platform way of doing this
  */
-std::set<std::string> ZipFilesystem::list_directory(const std::string& path_in) {
+FilenameSet ZipFilesystem::list_directory(const std::string& path_in) const {
 	assert(path_in.size());  //  prevent invalid read below
 
 	std::string path = basedir_in_zip_file_;
@@ -197,7 +197,7 @@ std::set<std::string> ZipFilesystem::list_directory(const std::string& path_in) 
  * Returns true if the given file exists, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
-bool ZipFilesystem::file_exists(const std::string& path) {
+bool ZipFilesystem::file_exists(const std::string& path) const {
 	try {
 		unzGoToFirstFile(zip_file_->read_handle());
 	} catch (...) {
