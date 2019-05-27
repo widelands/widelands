@@ -49,24 +49,20 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
 														 std::string& pwd,
                                                          bool registered)
    : FullscreenMenuLoadMapOrGame(),
-
-     // Values for alignment and size
-     labelh_(text_height() + 8),
-
      // Main title
-     title_(this, 0, 0, _("Metaserver Lobby"), UI::Align::kCenter),
+     title_(this, 0, 0, 0, 0, _("Metaserver Lobby"), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Boxes
      left_column_(this, 0, 0, UI::Box::Vertical),
      right_column_(this, 0, 0, UI::Box::Vertical),
 
      // Left column content
-     label_clients_online_(&left_column_, 0, 0, _("Clients online:")),
+     label_clients_online_(&left_column_, 0, 0, 0, 0, _("Clients online:")),
      clientsonline_table_(&left_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      chat_(&left_column_, 0, 0, 0, 0, InternetGaming::ref(), UI::PanelStyle::kFsMenu),
 
      // Right column content
-     label_opengames_(&right_column_, 0, 0, _("Open Games:")),
+     label_opengames_(&right_column_, 0, 0, 0, 0, _("Open Games:")),
      opengames_list_(&right_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      joingame_(&right_column_,
                "join_game",
@@ -76,9 +72,9 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
                0,
                UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
-     servername_label_(&right_column_, 0, 0, _("Name of your server:")),
+     servername_label_(&right_column_, 0, 0, 0, 0, _("Name of your server:")),
      servername_(
-        &right_column_, 0, 0, 0, labelh_, 2, UI::PanelStyle::kFsMenu),
+        &right_column_, 0, 0, 0, UI::PanelStyle::kFsMenu),
      hostgame_(&right_column_,
                "host_game",
                0,
@@ -123,19 +119,20 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
 
 	// Set the texts and style of UI elements
 	Section& s = g_options.pull_section("global");  //  for playername
-
 	std::string server = s.get_string("servername", "");
 	servername_.set_text(server);
 	servername_.changed.connect(boost::bind(&FullscreenMenuInternetLobby::change_servername, this));
 
-	// prepare the lists
-	std::string t_tip =
-	   (boost::format("%s%s%s%s%s%s%s%s%s%s") %
-	    "<rt padding=2><p align=center spacing=3><font bold=yes underline=yes>" % _("User Status") %
-	    "</font></p>" % "<p valign=bottom><img src=images/wui/overlays/roadb_green.png> " %
-	    _("Administrator") % "<br><img src=images/wui/overlays/roadb_yellow.png> " %
-	    _("Registered") % "<br><img src=images/wui/overlays/roadb_red.png> " % _("Unregistered") %
-	    "</p></rt>")
+	// Prepare the lists
+	const std::string t_tip =
+	   (boost::format("<rt padding=2><p align=center spacing=3>%s</p>"
+	                  "<p valign=bottom><img src=images/wui/overlays/roadb_green.png> %s"
+	                  "<br><img src=images/wui/overlays/roadb_yellow.png> %s"
+	                  "<br><img src=images/wui/overlays/roadb_red.png> %s</p></rt>") %
+	    g_gr->styles().font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("User Status")) %
+	    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Administrator")) %
+	    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Registered")) %
+	    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Unregistered")))
 	      .str();
 	clientsonline_table_.add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */
@@ -165,19 +162,24 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
 void FullscreenMenuInternetLobby::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
 
-	butw_ = get_w() - right_column_x_ - right_column_margin_;
-	buth_ = labelh_* get_h() / 600;
+	title_.set_font_scale(scale_factor());
+	label_opengames_.set_font_scale(scale_factor());
+	label_clients_online_.set_font_scale(scale_factor());
+	servername_label_.set_font_scale(scale_factor());
+
+	uint32_t butw = get_w() - right_column_x_ - right_column_margin_;
+	uint32_t buth = (text_height(UI::FontStyle::kLabel) + 8) * scale_factor();
+
 	tabley_ = tabley_ / 2;
 	tableh_ += tabley_;
 
-	title_.set_fontsize(fs_big());
 	title_.set_size(get_w(), title_.get_h());
 	title_.set_pos(Vector2i(0, tabley_ / 3));
 
 	left_column_.set_size(tablew_, tableh_);
 	left_column_.set_pos(Vector2i(tablex_, tabley_));
 
-	right_column_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
+	right_column_.set_size(get_right_column_w(right_column_x_), tableh_ - buth - 4 * padding_);
 	right_column_.set_pos(Vector2i(right_column_x_, tabley_));
 
 	// Chat
@@ -187,9 +189,9 @@ void FullscreenMenuInternetLobby::layout() {
 	opengames_list_.set_desired_size(opengames_list_.get_w(), clientsonline_table_.get_h());
 
 	// Buttons
-	joingame_.set_size(butw_, buth_);
-	hostgame_.set_size(butw_, buth_);
-	back_.set_size(butw_, buth_);
+	joingame_.set_size(butw, buth);
+	hostgame_.set_size(butw, buth);
+	back_.set_size(butw, buth);
 }
 
 /// think function of the UI (main loop)
@@ -313,11 +315,12 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 				break;
 			case kClientSuperuser:
 				pic = g_gr->images().get("images/wui/overlays/roadb_green.png");
-				er.set_color(RGBColor(0, 255, 0));
+				er.set_font_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupSuperuser));
 				er.set_picture(0, pic);
 				break;
 			case kClientIRC:
 				// No icon for IRC users
+				er.set_font_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupIrcClient));
 				continue;
 			default:
 				continue;
@@ -393,8 +396,7 @@ void FullscreenMenuInternetLobby::change_servername() {
 				servername_.set_tooltip(
 				   (boost::format(
 				       _("The game %s is already running. Please choose a different name.")) %
-				    (boost::format("%s%s%s%s%s") % "<font bold=1 color=" %
-				     UI_FONT_CLR_WARNING.hex_value() % ">" % game.name % "</font>"))
+				    g_gr->styles().font_style(UI::FontStyle::kWarning).as_font_tag(game.name))
 				      .str());
 			}
 		}

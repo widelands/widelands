@@ -47,13 +47,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              "",
              UI::Align::kLeft,
              UI::MultilineTextarea::ScrollMode::kScrollLogForced),
-     editbox(&box_,
-             0,
-             0,
-             0,
-             text_height() + 4,
-             2,
-             style),
+     editbox(this, 0, 0, w, style),
      chat_message_counter(0),
 	 chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 
@@ -83,7 +77,7 @@ void GameChatPanel::layout() {
 void GameChatPanel::recalculate(bool has_new_message) {
 	const std::vector<ChatMessage> msgs = chat_.get_messages();
 
-	size_t msgs_size = msgs.size();
+	const size_t msgs_size = msgs.size();
 	std::string str = "<rt>";
 	for (uint32_t i = 0; i < msgs_size; ++i) {
 		str += format_as_richtext(msgs[i]);

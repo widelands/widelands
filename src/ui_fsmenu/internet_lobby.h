@@ -65,10 +65,6 @@ private:
 	uint8_t convert_clienttype(const std::string&);
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
 
-	const int labelh_;
-	uint32_t butw_;
-	uint32_t buth_;
-
 	UI::Textarea title_;
 
 	UI::Box left_column_, right_column_;
