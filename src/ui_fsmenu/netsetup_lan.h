@@ -77,9 +77,6 @@ private:
 	void clicked_hostgame();
 	void clicked_lasthost();
 
-
-	const int labelh_;
-
 	UI::Textarea title_;
 
 	UI::Box left_column_, right_column_;

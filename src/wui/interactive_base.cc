@@ -34,7 +34,6 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
@@ -566,8 +565,8 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y).str();
 	}
 	if (!node_text.empty()) {
-		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh->render(as_condensed(node_text));
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
+		   as_richtext_paragraph(node_text, UI::FontStyle::kWuiGameSpeedAndCoordinates));
 		rendered_text->draw(
 		   dst, Vector2i(get_w() - 5, get_h() - rendered_text->height() - 5), UI::Align::kRight);
 	}
@@ -576,15 +575,16 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	if (game != nullptr) {
 		// Blit in-game clock
 		const std::string gametime(gametimestring(egbase().get_gametime(), true));
-		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh->render(as_condensed(gametime));
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
+		   as_richtext_paragraph(gametime, UI::FontStyle::kWuiGameSpeedAndCoordinates));
 		rendered_text->draw(dst, Vector2i(5, 5));
 
 		// Blit FPS when playing a game in debug mode
 		if (get_display_flag(dfDebug)) {
 			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-			rendered_text = UI::g_fh->render(as_condensed(
-			   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
+			rendered_text = UI::g_fh->render(as_richtext_paragraph(
+			   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str(),
+			   UI::FontStyle::kWuiGameSpeedAndCoordinates));
 			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
 		}
 	}

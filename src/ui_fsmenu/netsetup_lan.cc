@@ -22,8 +22,6 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
-#include "graphic/text_constants.h"
-#include "graphic/text_layout.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/network.h"
@@ -31,37 +29,34 @@
 
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
    : FullscreenMenuLoadMapOrGame(),
-     labelh_(text_height() + 8),
-
      // Main title
-     title_(this, 0, 0, _("Begin Network Game"), UI::Align::kCenter),
+     title_(this, 0, 0, 0, 0, _("Begin Network Game"), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Boxes
      left_column_(this, 0, 0, UI::Box::Vertical),
      right_column_(this, 0, 0, UI::Box::Vertical),
 
      // Left column content
-     label_opengames_(&left_column_, 0, 0, _("List of games in your local network:")),
+     label_opengames_(&left_column_, 0, 0, 0, 0, _("List of games in your local network:")),
      table_(&left_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Right column content
-     label_playername_(&right_column_, 0, 0, _("Your nickname:")),
+     label_playername_(&right_column_, 0, 0, 0, 0, _("Your nickname:")),
      playername_(
-        &right_column_, 0, 0, 0, labelh_, 2, UI::PanelStyle::kFsMenu),
-     label_hostname_(&right_column_, 0, 0, _("Host to connect:")),
+        &right_column_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     label_hostname_(&right_column_, 0, 0, 0, 0, _("Host to connect:")),
 
      host_box_(&right_column_, 0, 0, UI::Box::Horizontal),
-     hostname_(&host_box_, 0, 0, 0, labelh_, 2, UI::PanelStyle::kFsMenu),
+     hostname_(&host_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
      loadlasthost_(&host_box_,
                    "load_previous_host",
                    0,
                    0,
-                   labelh_,
-                   labelh_,
+                   hostname_.get_h(),
+                   hostname_.get_h(),
                    UI::ButtonStyle::kFsMenuSecondary,
                    g_gr->images().get("images/ui_fsmenu/menu_load_game.png"),
                    _("Load previous host")),
-
      // Buttons
      joingame_(&right_column_,
                "join_game",
@@ -116,7 +111,6 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 
 	Section& s = g_options.pull_section("global");  //  for playername
 
-	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	hostname_.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_hostname, this));
 	playername_.set_text(s.get_string("nickname", (_("nobody"))));
 	playername_.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_playername, this));
@@ -139,6 +133,7 @@ void FullscreenMenuNetSetupLAN::layout() {
 	const int colum_header_h = label_opengames_.get_h() + padding_;
 
 	title_.set_size(get_w(), title_.get_h());
+	title_.set_font_scale(scale_factor());
 	title_.set_pos(Vector2i(0, (tabley_ - colum_header_h) / 3));
 
 	left_column_.set_size(tablew_, tableh_ + colum_header_h);
@@ -148,9 +143,16 @@ void FullscreenMenuNetSetupLAN::layout() {
 	   get_right_column_w(right_column_x_), tableh_ + colum_header_h - buth_ - 4 * padding_);
 	right_column_.set_pos(Vector2i(right_column_x_, tabley_ - colum_header_h));
 
+	playername_.set_size(playername_.get_w(), buth_);
+	playername_.set_font_scale(scale_factor());
+	hostname_.set_size(hostname_.get_w(), buth_);
+	hostname_.set_font_scale(scale_factor());
+	host_box_.set_size(host_box_.get_w(), buth_);
+
 	// Buttons
 	joingame_.set_desired_size(butw_, buth_);
 	hostgame_.set_desired_size(butw_, buth_);
+	loadlasthost_.set_size(buth_, buth_);
 
 	back_.set_size(butw_, buth_);
 	back_.set_pos(Vector2i(right_column_x_, buty_));

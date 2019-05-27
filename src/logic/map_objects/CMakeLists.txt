@@ -125,7 +125,6 @@ wl_library(logic_map_objects
     graphic_fonthandler
     graphic_image_io
     graphic_surface
-    graphic_text_constants
     graphic_text_layout
     helper
     io_fileread
