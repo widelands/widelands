@@ -63,7 +63,7 @@ private:
 
 	bool select_map();
 	void win_condition_selected() override;
-	void set_player_names_and_tribes();
+	void set_player_names_and_tribes_and_teams_dropdown();
 	void switch_to_position(uint8_t);
 	void safe_place_for_host(uint8_t);
 

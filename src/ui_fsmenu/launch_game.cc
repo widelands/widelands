@@ -56,6 +56,12 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              UI::PanelStyle::kFsMenu),
 
      peaceful_(this, Vector2i(get_w() * 7 / 10, get_h() * 19 / 40 + buth_), _("Peaceful mode")),
+	 suggested_teams_dropdown_(this,
+							   0,
+							   0,
+							   butw_,
+							   get_h() - get_h() * 4 / 10 - buth_,
+							   buth_),
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
@@ -75,6 +81,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 	win_condition_dropdown_.selected.connect(
 	   boost::bind(&FullscreenMenuLaunchGame::win_condition_selected, this));
 	peaceful_.changed.connect(boost::bind(&FullscreenMenuLaunchGame::toggle_peaceful, this));
+	suggested_teams_dropdown_.selected.connect([this] { select_teams(); });
 	back_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchGame::clicked_back, boost::ref(*this)));
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchGame::clicked_ok, boost::ref(*this)));
@@ -221,6 +228,30 @@ FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_conditio
 void FullscreenMenuLaunchGame::toggle_peaceful() {
 	settings_->set_peaceful_mode(peaceful_.get_state());
 }
+
+void FullscreenMenuLaunchGame::select_teams() {
+	// NOCOM call this when a slot opens
+	// NOCOM block for scenarios
+	const Widelands::SuggestedTeamLineup* lineup = suggested_teams_dropdown_.get_lineup(suggested_teams_dropdown_.get_selected());
+
+	std::vector<uint8_t> teams_to_set(settings_->settings().players.size(), 0);
+
+	if (lineup != nullptr) {
+		for (size_t i = 0; i < lineup->size(); ++i) {
+			for (Widelands::PlayerNumber pl : lineup->at(i)) {
+				teams_to_set.at(pl) = i + 1;
+			}
+		}
+	}
+
+	for (size_t i = 0; i < teams_to_set.size(); ++i) {
+		uint8_t new_team = teams_to_set.at(i);
+		if (new_team != settings_->settings().players.at(i).team) {
+			settings_->set_player_team(i, new_team);
+		}
+	}
+}
+
 
 // Implemented by subclasses
 void FullscreenMenuLaunchGame::clicked_ok() {

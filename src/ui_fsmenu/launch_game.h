@@ -30,6 +30,7 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
+#include "wui/suggested_teams_box.h"
 
 struct ChatProvider;
 class GameController;
@@ -76,12 +77,14 @@ protected:
 	                                                 std::set<std::string> tags) const;
 
 	void toggle_peaceful();
+	void select_teams();
 
 	uint32_t butw_;
 	uint32_t buth_;
 
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::Checkbox peaceful_;
+	SuggestedTeamsDropdown suggested_teams_dropdown_;
 	std::string last_win_condition_;
 	UI::Button ok_, back_;
 	UI::Textarea title_;

@@ -26,7 +26,6 @@
 #include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "logic/game_settings.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "ui_basic/button.h"
@@ -84,6 +83,13 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* const parent,
 	                  UI::ButtonStyle::kFsMenuSecondary, "", _("Initialization"));
 	d->btnPlayerInit->sigclicked.connect(
 	   boost::bind(&PlayerDescriptionGroup::toggle_playerinit, boost::ref(*this)));
+
+	subscriber_ =
+	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
+		if (note.position == d->plnum) {
+			update();
+		}
+	});
 
 	update();
 }

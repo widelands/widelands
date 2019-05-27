@@ -114,6 +114,10 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 	ok_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 9 / 10));
 	back_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 17 / 20));
 	win_condition_dropdown_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 4 / 10 + buth_));
+	suggested_teams_dropdown_.set_pos(
+	   Vector2i(peaceful_.get_x(),
+	            peaceful_.get_y() + peaceful_.get_h() + 4));
+
 	title_.set_text(_("Launch Game"));
 	select_map_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchSPG::select_map, boost::ref(*this)));
@@ -238,7 +242,7 @@ void FullscreenMenuLaunchSPG::update(bool map_was_changed) {
 
 		peaceful_.set_state(settings_->is_peaceful_mode());
 
-		set_player_names_and_tribes();
+		set_player_names_and_tribes_and_teams_dropdown();
 	}
 
 	// "Choose Position" Buttons in front of PlayerDescriptionGroups
@@ -293,7 +297,7 @@ bool FullscreenMenuLaunchSPG::select_map() {
  * player names and player tribes and take care about visibility
  * and usability of all the parts of the UI.
  */
-void FullscreenMenuLaunchSPG::set_player_names_and_tribes() {
+void FullscreenMenuLaunchSPG::set_player_names_and_tribes_and_teams_dropdown() {
 	if (settings_->settings().mapfilename.empty()) {
 		throw wexception("settings()->scenario was set to true, but no map is available");
 	}
@@ -314,6 +318,7 @@ void FullscreenMenuLaunchSPG::set_player_names_and_tribes() {
 			settings_->set_player_tribe(i, playertribe);
 		}
 	}
+	suggested_teams_dropdown_.rebuild(map.get_suggested_teams());
 }
 
 /**

@@ -29,7 +29,6 @@
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/helpwindow.h"
 #include "ui_fsmenu/launch_game.h"
-#include "wui/suggested_teams_box.h"
 
 struct ChatProvider;
 struct GameChatPanel;
@@ -68,7 +67,6 @@ private:
 	void load_previous_playerdata();
 	void load_map_info();
 	void help_clicked();
-	void select_teams();
 
 	// TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
 	// so we can have the SuggestedTeamsBox
@@ -85,9 +83,6 @@ private:
 	GameChatPanel* chat_;
 	MultiPlayerSetupGroup* mpsg_;
 	std::string filename_proof_;  // local variable to check state
-
-	// NOCOM shift to superclass?
-	SuggestedTeamsDropdown suggested_teams_dropdown_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_MPG_H

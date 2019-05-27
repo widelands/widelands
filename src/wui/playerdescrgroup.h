@@ -21,8 +21,10 @@
 #define WL_WUI_PLAYERDESCRGROUP_H
 
 #include <map>
+#include <memory>
 #include <string>
 
+#include "logic/game_settings.h"
 #include "ui_basic/panel.h"
 
 struct GameSettingsProvider;
@@ -54,6 +56,7 @@ private:
 
 	PlayerDescriptionGroupImpl* d;
 	std::map<std::string, std::string> tribenames_;
+	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_PLAYERDESCRGROUP_H
