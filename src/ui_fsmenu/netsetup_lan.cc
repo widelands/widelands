@@ -87,8 +87,9 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 	right_column_.add_inf_space();
 	right_column_.add(&label_hostname_, UI::Box::Resizing::kFullSize);
 	right_column_.add(&host_box_, UI::Box::Resizing::kFullSize);
-	right_column_.add_space(0);
+	right_column_.add_space(padding_);
 	right_column_.add(&joingame_, UI::Box::Resizing::kFullSize);
+	right_column_.add_inf_space();
 	right_column_.add_inf_space();
 	right_column_.add(&hostgame_, UI::Box::Resizing::kFullSize);
 	right_column_.add_inf_space();
@@ -96,7 +97,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 	right_column_.add_inf_space();
 	right_column_.add_inf_space();
 
-	host_box_.add(&hostname_, UI::Box::Resizing::kFillSpace);
+	host_box_.add(&hostname_, UI::Box::Resizing::kExpandBoth);
 	host_box_.add_space(padding_);
 	host_box_.add(&loadlasthost_);
 
@@ -132,8 +133,8 @@ void FullscreenMenuNetSetupLAN::layout() {
 	butw_ = get_w() - right_column_x_ - right_column_margin_;
 	const int colum_header_h = label_opengames_.get_h() + padding_;
 
-	title_.set_size(get_w(), title_.get_h());
 	title_.set_font_scale(scale_factor());
+	title_.set_size(get_w(), title_.get_h());
 	title_.set_pos(Vector2i(0, (tabley_ - colum_header_h) / 3));
 
 	left_column_.set_size(tablew_, tableh_ + colum_header_h);
@@ -143,16 +144,9 @@ void FullscreenMenuNetSetupLAN::layout() {
 	   get_right_column_w(right_column_x_), tableh_ + colum_header_h - buth_ - 4 * padding_);
 	right_column_.set_pos(Vector2i(right_column_x_, tabley_ - colum_header_h));
 
-	playername_.set_size(playername_.get_w(), buth_);
-	playername_.set_font_scale(scale_factor());
-	hostname_.set_size(hostname_.get_w(), buth_);
-	hostname_.set_font_scale(scale_factor());
-	host_box_.set_size(host_box_.get_w(), buth_);
-
 	// Buttons
 	joingame_.set_desired_size(butw_, buth_);
 	hostgame_.set_desired_size(butw_, buth_);
-	loadlasthost_.set_size(buth_, buth_);
 
 	back_.set_size(butw_, buth_);
 	back_.set_pos(Vector2i(right_column_x_, buty_));
