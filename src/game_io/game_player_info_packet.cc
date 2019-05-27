@@ -19,6 +19,8 @@
 
 #include "game_io/game_player_info_packet.h"
 
+#include <memory>
+
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
@@ -26,6 +28,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
+#include "map_io/tribes_legacy_lookup_table.h"
 #include "wui/interactive_player.h"
 
 namespace Widelands {
@@ -34,6 +37,7 @@ constexpr uint16_t kCurrentPacketVersion = 23;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
+		std::unique_ptr<TribesLegacyLookupTable> tribe_lookup_table(new TribesLegacyLookupTable());
 		FileRead fr;
 		fr.open(fs, "binary/player_info");
 		uint16_t const packet_version = fr.unsigned_16();
@@ -68,7 +72,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 						}
 					}
 
-					player->read_statistics(fr, packet_version);
+					player->read_statistics(fr, packet_version, *tribe_lookup_table.get());
 					player->read_remaining_shipnames(fr);
 
 					player->casualties_ = fr.unsigned_32();

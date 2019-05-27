@@ -336,7 +336,7 @@ void GameMessageMenu::selected(uint32_t const t) {
 			//  Maybe the message was removed since think?
 			if (message->status() == Message::Status::kNew) {
 				Widelands::Game& game = iplayer().game();
-				game.send_player_command(*new Widelands::CmdMessageSetStatusRead(
+				game.send_player_command(new Widelands::CmdMessageSetStatusRead(
 				   game.get_gametime(), player.player_number(), id));
 			}
 			centerviewbtn_->set_enabled(message->position());
@@ -439,12 +439,12 @@ void GameMessageMenu::archive_or_restore() {
 		switch (mode) {
 		case Inbox:
 			// Archive highlighted message
-			game.send_player_command(*new Widelands::CmdMessageSetStatusArchived(
+			game.send_player_command(new Widelands::CmdMessageSetStatusArchived(
 			   game.get_gametime(), plnum, MessageId(selected_record)));
 			break;
 		case Archive:
 			// Restore highlighted message
-			game.send_player_command(*new Widelands::CmdMessageSetStatusRead(
+			game.send_player_command(new Widelands::CmdMessageSetStatusRead(
 			   game.get_gametime(), plnum, MessageId(selected_record)));
 			break;
 		}

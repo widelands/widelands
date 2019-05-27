@@ -24,4 +24,10 @@ tribes:new_carrier_type {
    ware_hotspot =  { -2, 8 },
 
    animations = animations,
+
+   aihints = {
+      preciousness = {
+         empire = 2
+      },
+   }
 }

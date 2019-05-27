@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Любомир Василев, 2015
-# Любомир Василев, 2016-2018
+# Любомир Василев, 2016-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-14 06:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-05-10 07:32+0000\n"
+"PO-Revision-Date: 2019-05-10 10:51+0000\n"
+"Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -493,17 +493,17 @@ msgstr "Разделът „Работници“ показва информа�
 msgid ""
 "The ‘Buildings’ tab contains all the necessary information about the "
 "buildings of your tribe."
-msgstr ""
+msgstr "Разделът „Сгради“ съдържа цялата необходима информация за сградите на племето Ви."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:235
 msgid ""
 "Finally, the ‘Immovables’ tab shows information about the specific "
 "immovables that your tribe’s workers can place on the map."
-msgstr ""
+msgstr "Разделът „Неподвижни“ показва информация относно неподвижните обекти, които работниците на племето Ви могат да поставят на картата."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:236
 msgid "Now use the encyclopedia to find out how to create new soldiers."
-msgstr ""
+msgstr "Сега използвайте енциклопедията, за да разберете как да създавате нови войници."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
 msgid ""
@@ -511,31 +511,31 @@ msgid ""
 "search backwards to find the wares and the buildings you need to supply your"
 " barracks where the soldier is recruited. When you are finished, just close "
 "the encyclopedia window."
-msgstr ""
+msgstr "Всеки войник се нуждае от дървено копие и шлем. Започвайки от тях, може да потърсите на обратно и да разберете от кои стоки и сгради се нуждаете, за да захраните казармата, където се обучава войникът. Когато разучите всичко, просто затворете прозореца на енциклопедията."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:242
 msgid "Look up which wares are needed to recruit soldiers"
-msgstr ""
+msgstr "Вижте кои стоки са необходими за набирането на войници"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:244
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
-msgstr ""
+msgstr "Изберете раздела „Стоки“ в прозореца на енциклопедията."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:245
 msgid ""
 "Look up what is needed to produce a helmet and what is needed to produce a "
 "wooden spear."
-msgstr ""
+msgstr "Вижте какво е нужно за производството на шлем, и какво – за дървено копие."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:246
 msgid ""
 "If you want, you may further look up what is needed to produce the wares you"
 " just looked up."
-msgstr ""
+msgstr "Ако искате, можете да разгледате и какво е нужно за производството на стоките, които видяхте."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:247
 msgid "Close the encyclopedia window when you are done."
-msgstr ""
+msgstr "Затворете прозореца на енциклопедията, когато сте готови."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:252
 msgid "You closed the encyclopedia!"
@@ -644,7 +644,7 @@ msgstr "третия раздел („Здраве на икономиката�
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:313
 msgid "Switch to the third tab in the ware statistics menu window"
-msgstr ""
+msgstr "Превключете към третия раздел в прозореца със статистиките за стоките"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:315
 msgid ""
@@ -670,7 +670,7 @@ msgstr "Когато сте готови да продължите, избере
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:330
 msgid "Switch to the last tab in the ware statistics menu window"
-msgstr ""
+msgstr "Превключете към последния раздел в прозореца със статистиките за стоките"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:332
 msgid ""
@@ -701,7 +701,7 @@ msgstr "Затворете този прозорец, когато сте гот
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:347
 msgid "Close the ware statistics window"
-msgstr ""
+msgstr "Затворете прозореца със статистиките за стоките"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:349
 msgid ""
@@ -727,7 +727,7 @@ msgstr "Вие затворихте прозореца със статистик
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:366
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:386
 msgid "Open the ware statistics window again"
-msgstr ""
+msgstr "Отворете отново прозореца със статистиките за стоките"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:368
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:388
@@ -777,7 +777,7 @@ msgstr "Отворете този прозорец."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:406
 msgid "Open the ‘Configure economy’ window"
-msgstr ""
+msgstr "Отворете прозореца „Настройки на икономиката“"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:408
 msgid "Open the ‘Configure economy’ window."
@@ -851,7 +851,7 @@ msgstr "Задайте целевото количество на мраморн
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:434
 msgid "Produce 20 marble columns"
-msgstr ""
+msgstr "Произведете 20 мраморни колони"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:436
 msgid ""
@@ -910,7 +910,7 @@ msgstr "Всеки склад има четири бутона за задава
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:460
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
-msgstr ""
+msgstr "Доставете всичките 20 мраморни колони в склада, който е близо до фронта."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:453
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:461
@@ -929,7 +929,7 @@ msgstr "След това, за да преместите мраморните �
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:457
 msgid "Bring 20 marble columns to the front line"
-msgstr ""
+msgstr "Доставете 20 мраморни колони до фронта"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:459
 msgid ""

@@ -30,7 +30,10 @@ namespace UI {
  * bigger than the icon, the image will be scaled to fit.
  */
 struct Icon : public Panel {
+	/// Create a new icon with the given dimensions and position offset
 	Icon(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, const Image* picture_id);
+	/// Create a new icon with no offset. Dimentions are taken from 'picture_id'.
+	Icon(Panel* parent, const Image* picture_id);
 
 	void set_icon(const Image* picture_id);
 	const Image* icon() const {

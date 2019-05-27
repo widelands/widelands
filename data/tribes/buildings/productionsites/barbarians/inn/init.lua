@@ -13,7 +13,7 @@ tribes:new_productionsite_type {
    enhancement_cost = {
       log = 2,
       grout = 2,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle_on_enhanced = {
       log = 1,
