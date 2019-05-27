@@ -296,8 +296,9 @@ void BaseListselect::layout() {
 	if (selection_mode_ == ListselectLayout::kDropdown) {
 		for (size_t i = 0; i < entry_records_.size(); ++i) {
 			const EntryRecord& er = *entry_records_[i];
+			// NOCOM make sure that anything that has user input / is configured by Lua calls richtext_escape
 			std::shared_ptr<const UI::RenderedText> rendered_text =
-			   UI::g_fh->render(as_richtext_paragraph(richtext_escape(er.name), *font_style_));
+			   UI::g_fh->render(as_richtext_paragraph(er.name, *font_style_));
 			int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
 			int difference = rendered_text->width() + picw + 8 - get_eff_w();
 			if (difference > 0) {
@@ -342,7 +343,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		const EntryRecord& er = *entry_records_[idx];
 		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh->render(as_richtext_paragraph(richtext_escape(er.name), *font_style_));
+		   UI::g_fh->render(as_richtext_paragraph(er.name, *font_style_));
 
 		int lineheight = std::max(get_lineheight(), rendered_text->height());
 

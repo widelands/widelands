@@ -85,7 +85,8 @@ private:
 	MultiPlayerSetupGroup* mpsg_;
 	std::string filename_proof_;  // local variable to check state
 
-	UI::SuggestedTeamsBox* suggested_teams_box_;
+	// NOCOM shift to superclass?
+	SuggestedTeamsDropdown suggested_teams_dropdown_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_MPG_H

@@ -183,12 +183,24 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
      help_(nullptr),
 
      // Variables and objects used in the menu
-     chat_(nullptr) {
-	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 25 / 40 - 2 * label_height_));
+     chat_(nullptr),
+	 suggested_teams_dropdown_(this,
+							   0,
+							   0,
+							   butw_,
+							   get_h() - get_h() * 4 / 10 - buth_,
+							   buth_) {
 	ok_.set_pos(Vector2i(right_column_x_, get_h() * 14 / 20 - 2 * label_height_));
 	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
 	win_condition_dropdown_.set_pos(
 	   Vector2i(right_column_x_, get_h() * 11 / 20 - 2 * label_height_));
+
+	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 25 / 40 - 2 * label_height_));
+	suggested_teams_dropdown_.set_pos(
+	   Vector2i(peaceful_.get_x(),
+	            peaceful_.get_y() + peaceful_.get_h() + padding_));
+	// NOCOM fix position of start game button
+
 	title_.set_text(_("Multiplayer Game Setup"));
 	change_map_or_save_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchMPG::change_map_or_save, boost::ref(*this)));
@@ -216,11 +228,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 			settings_->set_player_number(0);
 		}
 	}
-
-	// Y coordinate will be set later, when we know how high this box will get.
-	suggested_teams_box_ =
-	   new UI::SuggestedTeamsBox(this, right_column_x_, 0, UI::Box::Vertical, padding_, indent_,
-	                             get_w() - right_column_x_, 4 * label_height_);
 }
 
 FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
@@ -631,11 +638,8 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 	map_info_.set_text(infotext);
 	filename_proof_ = settings_->settings().mapfilename;
 
-	suggested_teams_box_->hide();
-	suggested_teams_box_->show(map.get_suggested_teams());
-	suggested_teams_box_->set_pos(
-	   Vector2i(suggested_teams_box_->get_x(),
-	            back_.get_y() - padding_ - suggested_teams_box_->get_h() - padding_));
+	suggested_teams_dropdown_.rebuild(map.get_suggested_teams());
+
 }
 
 /// Show help

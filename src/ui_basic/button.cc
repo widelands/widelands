@@ -217,9 +217,10 @@ void Button::draw(RenderTarget& dst) {
 		}
 
 	} else if (title_.length()) {
+		// NOCOM make sure that anything that has user input / is configured by Lua calls richtext_escape
 		//  Otherwise draw title string centered
 		std::shared_ptr<const UI::RenderedText> rendered_text = autofit_text(
-		   richtext_escape(title_), style_to_use.font(), get_inner_w() - 2 * kButtonImageMargin);
+		   title_, style_to_use.font(), get_inner_w() - 2 * kButtonImageMargin);
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2,

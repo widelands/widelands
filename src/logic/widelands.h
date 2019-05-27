@@ -107,6 +107,7 @@ struct SoldierStrength {
 using SuggestedTeam = std::vector<PlayerNumber>;  // Players in a team
 // Recommended teams to play against each other
 using SuggestedTeamLineup = std::vector<SuggestedTeam>;
+constexpr size_t kNoSuggestedTeam = std::numeric_limits<size_t>::max();
 
 }  // namespace Widelands
 

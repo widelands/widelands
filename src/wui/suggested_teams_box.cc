@@ -25,6 +25,48 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
+#include "logic/widelands.h"
+
+SuggestedTeamsDropdown::SuggestedTeamsDropdown(UI::Panel* parent, int32_t x, int32_t y, uint32_t list_w, uint32_t list_h, int button_dimension) :
+	UI::Dropdown<size_t>(parent,
+	         x,
+	         y,
+	         list_w,
+	         list_h,
+	         button_dimension,
+	         "",
+	         UI::DropdownType::kTextual,
+	         UI::PanelStyle::kFsMenu) {
+	set_visible(false);
+}
+
+void SuggestedTeamsDropdown::rebuild(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams) {
+	set_visible(false);
+	clear();
+	suggested_teams_ = suggested_teams;
+	if (!suggested_teams_.empty()) {
+		add(_("Suggested Teams"), Widelands::kNoSuggestedTeam, nullptr, true);
+
+		for (size_t i = 0; i < suggested_teams_.size(); ++i) {
+			const Widelands::SuggestedTeamLineup& lineup = suggested_teams_.at(i);
+			std::string entry_label = "";
+			bool is_first = true;
+			for (const Widelands::SuggestedTeam& team : lineup) {
+				if (!is_first) {
+					entry_label += " x ";
+				}
+				is_first = false;
+
+				for (Widelands::PlayerNumber player : team) {
+					assert(player < kMaxPlayers);
+					entry_label += "<img src=images/players/player_position_menu.png color=" + kPlayerColors[player].hex_value() + ">";
+				}  // Players in team
+			}     // Teams in lineup
+			add(entry_label, i);
+		}  // All lineups
+		set_visible(true);
+	}
+}
 
 namespace UI {
 

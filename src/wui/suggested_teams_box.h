@@ -25,11 +25,26 @@
 
 #include "logic/widelands.h"
 #include "ui_basic/box.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/textarea.h"
 
+
+// NOCOM the only remaining class should be the new dropdown. Thename the file when we're done.
+
+class SuggestedTeamsDropdown : public UI::Dropdown<size_t> {
+public:
+	explicit SuggestedTeamsDropdown(UI::Panel* parent,
+									int32_t x,
+									int32_t y,
+									uint32_t list_w,
+									uint32_t list_h,
+									int button_dimension);
+	void rebuild(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams);
+	std::vector<Widelands::SuggestedTeamLineup> suggested_teams_;
+};
+
 namespace UI {
-struct Box;
 
 struct SuggestedTeamsBox : public UI::Box {
 	SuggestedTeamsBox(Panel* parent,
