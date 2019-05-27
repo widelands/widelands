@@ -115,7 +115,7 @@ public:
 
 	void shipping_item_arrived(Game&, ShippingItem&);
 	void shipping_item_returned(Game&, ShippingItem&);
-	void ship_coming(bool affirmative);
+	void ship_coming(Ship&, bool affirmative);
 	void ship_arrived(Game&, Ship&);
 
 	void log_general_info(const EditorGameBase&) const override;
@@ -149,7 +149,7 @@ private:
 	Warehouse* warehouse_;
 	PositionList dockpoints_;
 	std::list<ShippingItem> waiting_;
-	uint8_t ships_coming_;
+	std::set<Ship*> ships_coming_;
 	bool expedition_ready_;
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;

@@ -155,7 +155,6 @@ public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 
 	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
-	bool is_path_favourable(const PortDock& start, const PortDock& middle, const PortDock& finish);
 	PortDock* find_next_dest(Game&, const Ship&, const PortDock& from_port);
 };
 

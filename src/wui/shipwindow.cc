@@ -233,7 +233,7 @@ void ShipWindow::think() {
 	}
 	bool can_act = igbase_.can_act(ship->owner().player_number());
 
-	btn_destination_->set_enabled(ship->get_destination(igbase_.egbase()));
+	btn_destination_->set_enabled(ship->get_current_destination(igbase_.egbase()));
 	btn_sink_->set_enabled(can_act);
 
 	display_->clear();
@@ -311,7 +311,7 @@ void ShipWindow::act_destination() {
 	if (ship == nullptr) {
 		return;
 	}
-	if (PortDock* destination = ship->get_destination(igbase_.egbase())) {
+	if (PortDock* destination = ship->get_current_destination(igbase_.egbase())) {
 		igbase_.map_view()->scroll_to_field(
 		   destination->get_warehouse()->get_position(), MapView::Transition::Smooth);
 	}
