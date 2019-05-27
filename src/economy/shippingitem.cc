@@ -165,7 +165,7 @@ ShippingItem ShippingItem::Loader::get(MapObjectLoader& mol) {
 	ShippingItem it;
 	if (serial_ != 0) {
 		it.object_ = &mol.get<MapObject>(serial_);
-		it.destination_dock_ = &mol.get<PortDock>(destination_serial_);
+		it.destination_dock_ = destination_serial_ ? &mol.get<PortDock>(destination_serial_) : nullptr;
 	}
 	return it;
 }
