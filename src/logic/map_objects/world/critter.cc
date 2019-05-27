@@ -248,7 +248,7 @@ void Critter::roam_update(Game& game, State& state) {
 	}
 	state.ivar1 = 1;
 	return start_task_idle(
-	   game, descr().get_animation("idle"), idle_time_min + game.logic_rand() % idle_time_rnd);
+	   game, descr().get_animation("idle", this), idle_time_min + game.logic_rand() % idle_time_rnd);
 }
 
 void Critter::init_auto_task(Game& game) {

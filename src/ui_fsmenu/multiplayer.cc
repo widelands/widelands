@@ -21,7 +21,6 @@
 
 #include "base/i18n.h"
 #include "graphic/text_constants.h"
-#include "network/crypto.h"
 #include "network/internet_gaming.h"
 #include "profile/profile.h"
 #include "random/random.h"
@@ -36,9 +35,10 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 
      // Buttons
      metaserver(
-        &vbox_, "metaserver", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Internet game")),
-     showloginbox(nullptr),
+        &vbox_, "metaserver", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Online Game")),
      lan(&vbox_, "lan", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("LAN / Direct IP")),
+     showloginbox(
+        &vbox_, "lan", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Online Game Settings")),
      back(&vbox_, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Back")) {
 	metaserver.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMultiPlayer::internet_login, boost::ref(*this)));
@@ -47,6 +47,9 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 	   boost::bind(&FullscreenMenuMultiPlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kLan));
 
+	showloginbox.sigclicked.connect(
+	   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
+
 	back.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMultiPlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kBack));
@@ -54,73 +57,50 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 	title.set_fontsize(fs_big());
 
 	vbox_.add(&metaserver, UI::Box::Resizing::kFullSize);
+	vbox_.add(&showloginbox, UI::Box::Resizing::kFullSize);
+	vbox_.add_inf_space();
 	vbox_.add(&lan, UI::Box::Resizing::kFullSize);
+	vbox_.add_inf_space();
+	vbox_.add_inf_space();
 	vbox_.add_inf_space();
 	vbox_.add(&back, UI::Box::Resizing::kFullSize);
 
-	Section& s = g_options.pull_section("global");
-	auto_log_ = s.get_bool("auto_log", false);
-	if (auto_log_) {
-		showloginbox =
-		   new UI::Button(this, "login_dialog", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
-		                  g_gr->images().get("images/ui_basic/continue.png"), _("Show login dialog"));
-		showloginbox->sigclicked.connect(
-		   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
-	}
+	auto_log_ = false;
 	layout();
 }
 
-/// called if the showloginbox button was pressed
+/// called if the user is not registered
 void FullscreenMenuMultiPlayer::show_internet_login() {
-	auto_log_ = false;
-	internet_login();
+	LoginBox lb(*this);
+	if (lb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk && auto_log_) {
+		auto_log_ = false;
+		internet_login();
+	}
 }
 
 /**
- * Called if "Internet" button was pressed.
+ * Called if "Online Game" button was pressed.
  *
- * IF autologin is not set, a LoginBox is shown and, if the user clicks on
- * 'login' in it's menu, the data is read from the LoginBox and saved in 'this'
- * so wlapplication can read it.
+ * IF no nickname or a nickname with invalid characters is set, the Online Game Settings
+ * are opened.
  *
- * IF autologin is set, all data is read from the config file and saved.
- * That data will be used for login to the metaserver.
+ * IF at least a name is set, all data is read from the config file
  *
- * In both cases this fullscreen menu ends it's modality.
+ * This fullscreen menu ends it's modality.
  */
 void FullscreenMenuMultiPlayer::internet_login() {
 	Section& s = g_options.pull_section("global");
-	if (auto_log_) {
-		nickname_ = s.get_string("nickname", _("nobody"));
-		password_ = s.get_string("password_sha1", "nobody");
-		register_ = s.get_bool("registered", false);
-	} else {
-		LoginBox lb(*this);
-		if (lb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-			nickname_ = lb.get_nickname();
-			/// NOTE: The password is only stored (in memory and on disk) and transmitted (over the
-			/// network
-			/// to the metaserver) as cryptographic hash. This does NOT mean that the password is
-			/// stored
-			/// securely on the local disk. While the password should be secure while transmitted to
-			/// the
-			/// metaserver (no-one can use the transmitted data to log in as the user) this is not the
-			/// case
-			/// for local storage. The stored hash of the password makes it hard to look at the
-			/// configuration
-			/// file and figure out the plaintext password to, e.g., log in on the forum. However, the
-			/// stored hash can be copied to another system and used to log in as the user on the
-			/// metaserver.
-			// Further note: SHA-1 is considered broken and shouldn't be used anymore. But since the
-			// passwords on the server are protected by SHA-1 we have to use it here, too
-			password_ = crypto::sha1(lb.get_password());
-			register_ = lb.registered();
 
-			s.set_bool("registered", lb.registered());
-			s.set_bool("auto_log", lb.set_automaticlog());
-		} else {
-			return;
-		}
+	nickname_ = s.get_string("nickname", "");
+	password_ = s.get_string("password_sha1", "no_password_set");
+	register_ = s.get_bool("registered", false);
+
+	// Checks can be done directly in editbox' by using valid_username().
+	// This is just to be on the safe side, in case the user changed the password in the config file.
+	if (!InternetGaming::ref().valid_username(nickname_)) {
+		auto_log_ = true;
+		show_internet_login();
+		return;
 	}
 
 	// Try to connect to the metaserver
@@ -141,7 +121,8 @@ void FullscreenMenuMultiPlayer::internet_login() {
 
 		// Reset InternetGaming and passwort and show internet login again
 		InternetGaming::ref().reset();
-		s.set_string("password_sha1", "");
+		s.set_string("password_sha1", "no_password_set");
+		auto_log_ = true;
 		show_internet_login();
 	}
 }
@@ -156,12 +137,8 @@ void FullscreenMenuMultiPlayer::layout() {
 
 	title.set_pos(Vector2i(0, title_y_));
 
-	metaserver.set_size(butw_, buth_);
-	if (showloginbox) {
-		showloginbox->set_pos(Vector2i(box_x_ + butw_ + padding_ / 2, box_y_));
-		showloginbox->set_size(buth_, buth_);
-	}
 	metaserver.set_desired_size(butw_, buth_);
+	showloginbox.set_desired_size(butw_, buth_);
 	lan.set_desired_size(butw_, buth_);
 	back.set_desired_size(butw_, buth_);
 

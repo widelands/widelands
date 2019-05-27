@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
-"PO-Revision-Date: 2018-11-26 08:46+0000\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-04-04 16:09+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -212,7 +212,7 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr "Nu dat wi Wapen smeden könen, könen wi neje Soldaten anhüren. Daarto mutten wi Lütte Dreespitzen un Kluften to de Kasern levern. Lehrwichter komen vun eenem Kraamhuus un kriegen eens vun jede un eene Inföhren tum Fechten, un so worden se Soldaten."
+msgstr "Nu dat wi Wapen smeden könen, könen wi neje Soldaten anhüren. Daarto mutten wi Lütte Dreespitzen un Kluften to de Kasern levern. Lehrwichter komen vun eenem Kraamhuus un kriegen eens vun elkeen daarvun un eene Inföhren tum Fechten, un so worden se Soldaten."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:108
 msgid "Build training sites for soldiers"

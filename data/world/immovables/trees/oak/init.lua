@@ -80,6 +80,7 @@ world:new_immovable_type{
    name = "oak_summer_old",
    descname = _ "Oak (Old)",
    species = _ "Oak",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },
@@ -101,8 +102,7 @@ world:new_immovable_type{
          hotspot = { 24, 60 },
          fps = 10,
          sound_effect = {
-            directory = "sound/animals",
-            name = "bird2",
+            path = "sound/animals/bird2",
          },
       },
       falling = {

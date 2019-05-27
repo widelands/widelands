@@ -300,7 +300,7 @@ void Road::cleanup(EditorGameBase& egbase) {
 }
 
 /** The road is drawn by the terrain renderer via marked fields. */
-void Road::draw(uint32_t, const TextToDraw, const Vector2f&, float, RenderTarget*) {
+void Road::draw(uint32_t, const TextToDraw, const Vector2f&, const Coords&, float, RenderTarget*) {
 }
 
 /**

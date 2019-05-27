@@ -7,14 +7,14 @@
 # GunChleoc, 2018
 # ks k, 2017
 # ks k, 2017-2018
-# TaeMin An <kavern02@gmail.com>, 2017
+# TaeMin An, 2017,2019
 # tamanegi, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-03 08:14+0000\n"
-"PO-Revision-Date: 2019-02-03 08:20+0000\n"
+"POT-Creation-Date: 2019-05-10 07:32+0000\n"
+"PO-Revision-Date: 2019-05-10 07:33+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -30,11 +30,11 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/helptexts.lua:16
-#: ../../data/tribes/buildings/militarysites/barbarians/barrier/helptexts.lua:16
-#: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:16
-#: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:16
-#: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:16
-#: ../../data/tribes/buildings/militarysites/barbarians/tower/helptexts.lua:16
+#: ../../data/tribes/buildings/militarysites/barbarians/barrier/helptexts.lua:13
+#: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:14
+#: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:13
+#: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:14
+#: ../../data/tribes/buildings/militarysites/barbarians/tower/helptexts.lua:14
 #: ../../data/tribes/buildings/militarysites/empire/barrier/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/empire/castle/helptexts.lua:16
@@ -59,11 +59,11 @@ msgstr "영토를 넓히려면 군인을 주둔시키십시오."
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/helptexts.lua:21
-#: ../../data/tribes/buildings/militarysites/barbarians/barrier/helptexts.lua:21
-#: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:21
-#: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:21
-#: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:21
-#: ../../data/tribes/buildings/militarysites/barbarians/tower/helptexts.lua:21
+#: ../../data/tribes/buildings/militarysites/barbarians/barrier/helptexts.lua:18
+#: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:19
+#: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:18
+#: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:19
+#: ../../data/tribes/buildings/militarysites/barbarians/tower/helptexts.lua:19
 #: ../../data/tribes/buildings/militarysites/empire/barrier/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/empire/castle/helptexts.lua:21
@@ -84,14 +84,108 @@ msgid ""
 "send him away."
 msgstr "새로운 군사 지역을 차지할 군인이 부족하다면, 화살표 아래 버튼을 이용해서 주둔 군인 수를 줄이십시오. 또한 군인을 클릭해서 다른 곳으로 발령낼 수 있습니다."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/barrier/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘When we looked down to the valley from our newly established barrier, we "
+"felt that the spirit of our fathers was with us.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/barrier/helptexts.lua:8
+#: ../../data/tribes/buildings/militarysites/barbarians/tower/helptexts.lua:9
+#: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid "Ballad ‘The Battle of Kal’mavrath’ by Hakhor the Bard"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘The Citadel of Adlen surely is the finest masterpiece of Barbarian "
+"craftsmanship. Nothing as strong and big and beautiful has ever been built "
+"in such a short time.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:9
+msgctxt "barbarians_building"
+msgid ""
+"Colintan, chief planner of the Citadel of Adlen,<br>at its opening ceremony"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘This stronghold made from blackwood and stones will be a hard nut to crack "
+"for them.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid "Berthron,<br>chief military adviser of Chat’Karuth"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘The log cabin was so small that two men could hardly live there. But we "
+"were young and carefree. We just relished our freedom and the responsibility"
+" as an outpost.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:9
+msgctxt "barbarians_building"
+msgid "Boldreth,<br>about his time as young soldier"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/tower/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘From the height of our tower we could see far into enemy territory. The "
+"enemy was well prepared, but we also noticed some weak points in their "
+"defense.’"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:3
+msgctxt "building"
+msgid "‘Don’t swear at the builder who is short of building materials.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:8
+msgctxt "building"
+msgid "Proverb widely used for impossible tasks of any kind"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:16
+#: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:13
 msgctxt "building"
 msgid "A new building is being built at this construction site."
 msgstr "새로운 건물이 해당 건설현장에서 건설되고 있습니다."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:3
+msgctxt "building"
+msgid "‘New paths will appear when you are willing to tear down the old.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:8
+msgctxt "building"
+msgid "Proverb"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:16
+#: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:13
 msgctxt "building"
 msgid ""
 "A building is being dismantled at this dismantle site, returning some of the"
@@ -137,7 +231,7 @@ msgstr "검은뿌리 농부는 한 다발의 검은뿌리를 심고 수확하는
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/helptexts.lua:16
-#: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:13
 msgctxt "building"
@@ -175,8 +269,23 @@ msgctxt "atlanteans_building"
 msgid "The farmer needs %1% on average to sow and harvest a sheaf of corn."
 msgstr "농부는 옥수수를 심고 수확하는데 평균적으로 %1% 가 필요합니다."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:6
+msgctxt "atlanteans_building"
+msgid ""
+"‘‘Only after the last duck has been shot down<br>Only after the last deer "
+"has been put to death<br>Only after the last fish has been caught<br>Then "
+"will you find that spiders are not to be eaten.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:14
+msgctxt "atlanteans_building"
+msgid "Prophecy of the fishbreeders"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:19
 msgctxt "building"
 msgid "Breeds fish."
 msgstr "물고기를 양식하십시오."
@@ -280,6 +389,13 @@ msgid ""
 "respectively."
 msgstr "검은뿌리와 옥수수를 각각 갈아내어 검은뿌리가루와 옥수수가루를 만드십시오."
 
+#: ../../data/tribes/buildings/productionsites/atlanteans/mill/helptexts.lua:21
+msgctxt "atlanteans_building"
+msgid ""
+"When no cornmeal is required, the mill will try to produce blackroot flour "
+"even when there is no demand for it."
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:16
 msgctxt "atlanteans_building"
@@ -301,7 +417,7 @@ msgstr "널빤지를 만들도록 통나무를 톱질하십시오."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/helptexts.lua:16
-#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:17
 #: ../../data/tribes/buildings/productionsites/empire/scouts_house/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:13
 msgctxt "building"
@@ -310,7 +426,7 @@ msgstr "알려지지 않은 지역을 탐험하십시오."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/helptexts.lua:16
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:18
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/helptexts.lua:16
 msgctxt "building"
@@ -326,7 +442,7 @@ msgstr "해외 식민지와 항구 간 교역에 사용될 배를 만드십시�
 #. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/helptexts.lua:16
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:17
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/helptexts.lua:16
 msgctxt "building"
 msgid "Smelts iron ore into iron and gold ore into gold."
@@ -374,6 +490,7 @@ msgstr "건물과 배의 돛, 그리고 군인들을 무장시키고 훈련시�
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:13
 #: ../../data/tribes/buildings/productionsites/empire/well/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:13
 msgctxt "building"
 msgid "Draws water out of the deep."
 msgstr "심층에서 물을 끌어내십시오."
@@ -391,11 +508,11 @@ msgstr "주변 지역에서 나무를 베어 통나무로 만드십시오."
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/helptexts.lua:21
 msgctxt "atlanteans_building"
 msgid "The woodcutter’s house needs trees to fell within the work area."
-msgstr "나무꾼의 집은 작업 영역 내에 베어낼 나무가 필요합니다."
+msgstr "벌목꾼의 집은 작업 영역 내에 베어낼 나무가 필요합니다."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:6
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
@@ -404,7 +521,7 @@ msgstr "‘새로운 전사의 도끼는 소유자를 최고로 만들거나 만
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:11
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid ""
 "An old Barbarian proverb<br> meaning that you need to take some risks "
@@ -427,8 +544,8 @@ msgid ""
 msgstr "야만족의 도끼 제작소는 3곳의 연속된 건물들 중 중간 단계의 생산 기지입니다. 이는 금속 제작소에서 향상되지만 추가적인 일꾼을 필요로 하지는 않습니다."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
-#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:31
@@ -438,10 +555,10 @@ msgstr "야만족의 도끼 제작소는 3곳의 연속된 건물들 중 중간 
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:24
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:27
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:24
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:23
@@ -469,7 +586,7 @@ msgstr "야만족의 도끼 제작소는 3곳의 연속된 건물들 중 중간 
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
 #: ../../data/tribes/scripting/help/global_helptexts.lua:69
@@ -488,7 +605,7 @@ msgstr "모든 3개의 무기들은 만드는데 같은 시간을 소모하지�
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:27
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:24
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -496,14 +613,30 @@ msgid ""
 "type of ax in about %s on average."
 msgstr "모든 용품들이 제 시간 내에 도착한다면, 이 건물은 각 종류의 도끼를 평균적으로 %s 내에 만들어 냅니다."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘He who has enough bread will never be too tired to dig the ore and wield "
+"the ax.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid ""
+"Khantarakh, ‘The Modern Barbarian Economy’,<br>3ʳᵈ cowhide ‘Craftsmanship "
+"and Trade’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Bakes pitta bread for soldiers and miners alike."
 msgstr "군인들과 광부들 둘 모두를 위해 피타 빵을 구우십시오."
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -512,42 +645,115 @@ msgid ""
 msgstr "모든 용품들이 제 시간 내에 도착한다면, 이 건물은 피타 빵을 평균적으로 %s 내에 구워냅니다."
 
 #. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘Don't ask what your tribe can do for you, ask what you can do for your "
+"tribe!’"
+msgstr ""
+
 #. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:11
+msgctxt "barbarians_building"
+msgid "Famous barbarian recruitment poster"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Equips recruits and trains them as soldiers."
 msgstr "신병들을 무장시키고 군사 훈련을 시키십시오."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘Seasonal fish and game specialties served with pitta bread.<br>Choose from "
+"a prime selection of regional craft beer brands.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:12
+msgctxt "barbarians_building"
+msgid "Menu of ‘The Laughing Barbarian’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:17
 msgctxt "barbarians_building"
 msgid ""
 "Prepares rations for scouts and rations, snacks and meals to feed all "
 "miners."
 msgstr "정찰병을 위해 배급을, 모든 광부들을 먹이기 위해 배급, 간식 그리고 식사를 준비하십시오."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘When the Barbarian was created,<br>this was the first thing that he "
+"stated:<br>“You want me fighting without fear?<br>Then you should create "
+"some beer!”’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:14
+msgctxt "barbarians_building"
+msgid "First verse of the drinking song ‘Way of the Barbarian’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:19
 #: ../../data/tribes/buildings/productionsites/empire/brewery/helptexts.lua:16
 msgctxt "building"
 msgid "Produces beer to keep the miners strong and happy."
 msgstr "광부들을 힘쎄고 행복하게 해줄 맥주를 만드십시오."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘The smart leader builds roads, while the really wise leader breeds cattle.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid ""
+"Khantarakh, ‘The Modern Barbarian Economy’,<br> 5ᵗʰ cowhide ‘Traffic and "
+"Logistics’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Breeds strong oxen for adding them to the transportation system."
 msgstr "힘센 황소를 사육해서 수송 체제에 추가하십시오."
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce an ox "
 "in %s on average."
 msgstr "모든 용품들이 제 시간 내에 도착한다면, 이 건물은 황소를 평균적으로 %s 내에 사육합니다."
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘What’s the work of a charcoal burner?<br>He’s the tribe’s most plodding "
+"earner!<br>Logs on logs he piles up high,<br>Until the kiln will reach the "
+"sky.<br>He sets the fire, sees it smolder<br>The logs he carried on his "
+"shoulder.<br>Burnt down to just one single coal<br>This troubles much a "
+"burner’s soul.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:18
+msgctxt "barbarians_building"
+msgid "Song of the charcoal burners"
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a coal mine building, part 1
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:4
@@ -613,15 +819,30 @@ msgid ""
 "average."
 msgstr "음식 공급이 일정하다면, 이 광산은 석탄을 일반적으로 14.4초 만에 채취합니다."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘See the crop fields from here to the horizons. They are a huge, heaving, "
+"golden sea.<br>Oh wheat, source of wealth, soul of beer, strength of our "
+"warriors!’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:9
+msgctxt "barbarians_building"
+msgid "Line from the harvesting song ‘The Wealth of the Fields’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:14
 #: ../../data/tribes/buildings/productionsites/empire/farm/helptexts.lua:16
 msgctxt "building"
 msgid "Sows and harvests wheat."
 msgstr "밀을 심고 수확하십시오."
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:24
 msgctxt "barbarians_building"
 msgid "The farmer needs %1% on average to sow and harvest a sheaf of wheat."
 msgstr "농부는 한 다발의 밀을 심고 수확하는데 평균적으로 %1% 가 필요합니다."
@@ -631,6 +852,14 @@ msgstr "농부는 한 다발의 밀을 심고 수확하는데 평균적으로 %1
 msgctxt "barbarians_building"
 msgid "‘What do you mean, my fish ain’t fresh?!’"
 msgstr "‘뭔 소리야, 내 물고기가 신선하지 않다고?!’"
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid ""
+"Frequent response of a barbarian fisherman,<br>often followed by an "
+"enjoyable brawl"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
@@ -795,6 +1024,19 @@ msgid ""
 "average."
 msgstr "음식 공급이 일정하다면, 이 광산은 화강암을 일반적으로 %s 만에 채취합니다."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘The helmets forgéd by this smithy<br>Are widely known for looking pithy.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:11
+msgctxt "barbarians_building"
+msgid "Slogan of ‘Harrath’s Handsome Helmets’ in Al’thunran"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:16
 msgctxt "barbarians_building"
@@ -829,6 +1071,18 @@ msgstr "사냥꾼의 오두막은 작업 영역 내에 사냥할 동물들을 �
 msgctxt "barbarians_building"
 msgid "The hunter pauses %s before going to work again."
 msgstr "사냥꾼은 다시 일하러 가기 전에 %s 를 쉽니다."
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid "‘Miner’s Delight: Pitta bread with fish or meat, comes with one beer.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:11
+msgctxt "barbarians_building"
+msgid "Chef’s recommendation in ‘The Singing Master Miner’"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:16
@@ -1033,20 +1287,32 @@ msgid ""
 " about %s on average."
 msgstr "모든 용품들이 제 시간 내에 도착한다면, 이 건물은 맥주를 평균적으로 %s 내에 양조합니다."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid "‘We open up roads and make houses from mountains.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid "Slogan of the stonemasons’ guild"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
 msgstr "노천 바위에서 화강암 조각들을 잘라내십시오."
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:21
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid "The quarry needs rocks to cut within the work area."
 msgstr "채석장은 작업 영역 내에 잘라낼 바위가 필요합니다."
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The stonemason pauses %s before going back to work again."
@@ -1116,6 +1382,62 @@ msgctxt "barbarians_building"
 msgid "A reed yard can produce a sheaf of thatch reed in about %s on average."
 msgstr "갈대 뜰은 한 다발의 억새풀을 엮어내는데 평균적으로 %s 를 필요로 한다."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘Behind the next hill there might be wealth and happiness but also hostility"
+" and doom.<br>He who will not explore it commits the crime of stupidity.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:12
+msgctxt "barbarians_building"
+msgid "Chat’Karuth<br>at the oath taking ceremony of the first scout troupe"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘When I saw the Saxnot for the first time, her majestic dragon head already "
+"looked up to the skies and the master was about to install the square "
+"sail.<br>It was the most noble ship I ever saw.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:13
+#: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid "Captain Thanlas the Elder,<br>Explorer"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘From inferior looking rubble they form shiny gold and gleaming iron.<br>The"
+" smelters are real magicians among our craftsmen.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:12
+msgctxt "barbarians_building"
+msgid "Chat’Karuth<br>at the 5ᵗʰ conference of master craftsmen"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid "‘Fresh from the countryside: Bread, fish or game to go.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:11
+msgctxt "barbarians_building"
+msgid "Menu of the tavern ‘Ye Ol’ Bronze Axe’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:13
@@ -1124,28 +1446,44 @@ msgid "Prepares rations to feed the scouts and miners."
 msgstr "정찰병과 광부들을 먹일 급식을 준비하십시오."
 
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Produces all the axes that the Barbarians use for warfare."
 msgstr "야만족들이 전투에 사용할 모든 도끼들을 제작하십시오."
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:21
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
 "As such you will need to enhance an ax workshop in order to get one."
 msgstr "야만족 전쟁 공장은 가장 발전된 무기 생산지입니다. 따라서 그것을 얻기 위해서는 도끼 작업장을 향상시켜야합니다."
 
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:29
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:26
 msgctxt "barbarians_building"
 msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
 msgstr "모든 무기들은 만드는데 같은 시간을 소모하지만, 재료 소모량은 무기 단계별로 증가합니다. 마지막 둘은 금이 필요합니다."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘Fine cloth and jewelry mean nothing to a true Barbarian.<br>But a noble "
+"sail in the wind will please his eyes.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:12
+msgctxt "barbarians_building"
+msgid ""
+"Khantarakh, ‘The Modern Barbarian Economy’,<br>9ᵗʰ cowhide ‘Seafaring and "
+"Conquest’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:17
 msgctxt "barbarians_building"
 msgid "Weaves cloth out of thatch reed."
 msgstr "억새풀로 옷감을 직조하십시오."
@@ -1173,8 +1511,24 @@ msgctxt "barbarians_building"
 msgid "The carrier needs %s to get one bucket full of water."
 msgstr "짐꾼은 한 양동이의 물을 길어오는데 %s 가 필요합니다."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘Then he hit the door with his ax and, behold,<br>the door only trembled, "
+"but the shaft of the ax burst into a thousand pieces.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:12
+msgctxt "barbarians_building"
+msgid ""
+"Legend about a quarrel between the brothers Harthor and Manthor,<br>Manthor "
+"is said to be the inventor of blackwood"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid ""
 "Hardens logs by fire into blackwood, which is used to construct robust "
@@ -1270,7 +1624,7 @@ msgid ""
 "The innkeeper needs %1% on average to prepare a ration and a meal. If the "
 "economy doesn’t need both, the innkeeper needs %2% on average to prepare one"
 " ration or one meal."
-msgstr "여관주인은 급식과 식사를 준비하는데 평균적으로 %1% 이 필요합니다. 경제가 둘 모두를 필요로 하지 않는다면, 여관주인은 하나의 급식 혹은 하나의 식사를 준비하는데 평균적으로 %2% 이 필요합니다."
+msgstr "여관주인은 야전식량과 식사를 준비하는데 평균적으로 %1% 이 필요합니다. 경제가 둘 모두를 필요로 하지 않는다면, 여관주인은 하나의 급식 혹은 하나의 식사를 준비하는데 평균적으로 %2% 이 필요합니다."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/helptexts.lua:21
@@ -1343,7 +1697,7 @@ msgstr "정찰병과 광부들을 먹일 급식을 준비하십시오."
 #: ../../data/tribes/buildings/productionsites/empire/tavern/helptexts.lua:26
 msgctxt "empire_building"
 msgid "The innkeeper needs %1% on average to prepare a ration."
-msgstr "여관주인은 급식을 준비하는데 평균적으로 %1% 이 필요합니다."
+msgstr "여관주인은 야전식량을 준비하는데 평균적으로 %1% 이 필요합니다."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/helptexts.lua:16
@@ -1462,7 +1816,7 @@ msgstr "보리와 물로 빵을 구워 광부와 군인들에게 먹이십시오
 #, lua-format
 msgctxt "frisians_building"
 msgid "The bakery needs %s on average to produce one loaf of bread."
-msgstr "빵집은 빵 한 덩어리를 만드는 평균적으로 %s 이(가) 필요합니다."
+msgstr "제과점은 빵 한 덩어리를 만드는 평균적으로 %s 이(가) 필요합니다."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:3
@@ -1995,7 +2349,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "Slogan over a mead brewery"
-msgstr "벌꿀 맥주 위에 놓인 구호"
+msgstr "벌꿀술 위에 놓인 구호"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/helptexts.lua:16
@@ -2341,7 +2695,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The well needs %s on average to produce one bucket of water."
@@ -2586,7 +2940,7 @@ msgstr "해외 식민지와 무역의 기지로 운용됩니다. 또한 당신�
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/atlanteans/warehouse/helptexts.lua:16
-#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:16
+#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:14
 #: ../../data/tribes/buildings/warehouses/empire/warehouse/helptexts.lua:16
 #: ../../data/tribes/buildings/warehouses/frisians/warehouse/helptexts.lua:16
 msgctxt "building"
@@ -2595,27 +2949,57 @@ msgid ""
 " tools."
 msgstr "당신의 일꾼들과 군인들이 여기서 거주할 것입니다. 또한 당신의 용품들과 도구들을 저장합니다."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘Steep like the slopes of Kal’mavrath, shiny like the most delicate armor "
+"and strong like our ancestors, that’s how the headquarters of Chat’Karuth "
+"presented itself to us.’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:16
+#: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:13
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters_interim/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Accommodation for your people. Also stores your wares and tools."
 msgstr "당신의 사람들을 수용합니다. 또한 당신의 용품들과 도구들을 저장합니다."
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:22
+#: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:19
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters_interim/helptexts.lua:22
 msgctxt "barbarians_building"
 msgid "The headquarters is your main building."
 msgstr "본부는 핵심 건물입니다."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘I prefer the planks of a ship to any fortress, no matter how strong it is.’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:16
+#: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr "해외 식민지와 무역의 기지로 운용됩니다. 또한 당신의 군인들, 용품들 그리고 도구들을 저장합니다."
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid "‘Who still owns a warehouse is not yet defeated!’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid ""
+"Berthron, chief military adviser of Chat’Karuth,<br>when they lost the "
+"headquarters in the battle around the heights of Kal’Megarath"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/empire/headquarters/helptexts.lua:16
@@ -2902,57 +3286,57 @@ msgstr "%s 그리고"
 msgid "Food:"
 msgstr "음식:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:157
+#: ../../data/tribes/scripting/help/building_help.lua:158
 msgid "Equipment:"
 msgstr "장비:"
 
 #. TRANSLATORS: Heading for a flavour text in the building help.
-#: ../../data/tribes/scripting/help/building_help.lua:180
+#: ../../data/tribes/scripting/help/building_help.lua:181
 msgid "Lore"
 msgstr "이야기"
 
-#: ../../data/tribes/scripting/help/building_help.lua:201
+#: ../../data/tribes/scripting/help/building_help.lua:202
 #: ../../data/tribes/scripting/help/init.lua:59
 #: ../../data/tribes/scripting/help/tips.lua:49
 msgid "General"
 msgstr "일반"
 
-#: ../../data/tribes/scripting/help/building_help.lua:202
+#: ../../data/tribes/scripting/help/building_help.lua:203
 msgid "Purpose:"
 msgstr "목적:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:230
-#: ../../data/tribes/scripting/help/building_help.lua:463
+#: ../../data/tribes/scripting/help/building_help.lua:231
+#: ../../data/tribes/scripting/help/building_help.lua:462
 msgid "Note:"
 msgstr "참고:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:235
+#: ../../data/tribes/scripting/help/building_help.lua:236
 msgid "Work area radius:"
 msgstr "작업 영역 범위:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:239
-#: ../../data/tribes/scripting/help/building_help.lua:244
+#: ../../data/tribes/scripting/help/building_help.lua:240
+#: ../../data/tribes/scripting/help/building_help.lua:245
 msgid "Healing:"
 msgstr "치료:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:240
-#: ../../data/tribes/scripting/help/building_help.lua:245
+#: ../../data/tribes/scripting/help/building_help.lua:241
+#: ../../data/tribes/scripting/help/building_help.lua:246
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
 msgstr[0] "주둔하는 군인들은 초당 %d 체력을 회복합니다."
 
-#: ../../data/tribes/scripting/help/building_help.lua:241
-#: ../../data/tribes/scripting/help/building_help.lua:247
+#: ../../data/tribes/scripting/help/building_help.lua:242
+#: ../../data/tribes/scripting/help/building_help.lua:248
 msgid "Conquer range:"
 msgstr "정복 범위:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:246
-#: ../../data/tribes/scripting/help/building_help.lua:250
+#: ../../data/tribes/scripting/help/building_help.lua:247
+#: ../../data/tribes/scripting/help/building_help.lua:251
 msgid "Capacity:"
 msgstr "주둔 수:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:252
+#: ../../data/tribes/scripting/help/building_help.lua:253
 msgid "Vision range:"
 msgstr "시야 범위:"
 
@@ -2962,159 +3346,159 @@ msgstr "%1$s 로부터: %2$s"
 
 #. TRANSLATORS: Heading in the building help for wares that a building accepts
 #. (e.g. wheat for a mill).
-#: ../../data/tribes/scripting/help/building_help.lua:284
+#: ../../data/tribes/scripting/help/building_help.lua:283
 msgid "Incoming:"
 msgstr "투입:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:288
+#: ../../data/tribes/scripting/help/building_help.lua:287
 msgid "Collects:"
 msgstr "수집:"
 
 #. TRANSLATORS: This is a verb (The miner mines)
-#: ../../data/tribes/scripting/help/building_help.lua:300
+#: ../../data/tribes/scripting/help/building_help.lua:299
 msgid "Mines:"
 msgstr "??광산 채굴:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:320
+#: ../../data/tribes/scripting/help/building_help.lua:319
 msgid "Produces:"
 msgstr "생산:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:362
+#: ../../data/tribes/scripting/help/building_help.lua:361
 msgid "Outgoing:"
 msgstr "산출:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:364
+#: ../../data/tribes/scripting/help/building_help.lua:363
 msgid "None"
 msgstr "없음"
 
-#: ../../data/tribes/scripting/help/building_help.lua:365
+#: ../../data/tribes/scripting/help/building_help.lua:364
 msgid "Dependencies"
 msgstr "종속 관계"
 
-#: ../../data/tribes/scripting/help/building_help.lua:381
+#: ../../data/tribes/scripting/help/building_help.lua:380
 msgid "Health Training"
 msgstr "체력 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:382
+#: ../../data/tribes/scripting/help/building_help.lua:381
 msgid "Trains ‘Health’ from %1% up to %2%"
 msgstr "‘체력’ 수준을 %1% → %2% 로 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:384
-#: ../../data/tribes/scripting/help/building_help.lua:398
-#: ../../data/tribes/scripting/help/building_help.lua:410
-#: ../../data/tribes/scripting/help/building_help.lua:423
+#: ../../data/tribes/scripting/help/building_help.lua:383
+#: ../../data/tribes/scripting/help/building_help.lua:397
+#: ../../data/tribes/scripting/help/building_help.lua:409
+#: ../../data/tribes/scripting/help/building_help.lua:422
 msgid "Soldiers:"
 msgstr "군인:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:394
+#: ../../data/tribes/scripting/help/building_help.lua:393
 msgid "Attack Training"
 msgstr "공격력 훈련"
 
 #. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
 #. numbers.
-#: ../../data/tribes/scripting/help/building_help.lua:396
+#: ../../data/tribes/scripting/help/building_help.lua:395
 msgid "Trains ‘Attack’ from %1% up to %2%"
 msgstr "‘공격력’ 을 %1% → %2% 로 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:407
+#: ../../data/tribes/scripting/help/building_help.lua:406
 msgid "Defense Training"
 msgstr "방어력 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:408
+#: ../../data/tribes/scripting/help/building_help.lua:407
 msgid "Trains ‘Defense’ from %1% up to %2%"
 msgstr "‘방어력’ 을 %1% → %2% 로 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:420
+#: ../../data/tribes/scripting/help/building_help.lua:419
 msgid "Evade Training"
 msgstr "회피력 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:421
+#: ../../data/tribes/scripting/help/building_help.lua:420
 msgid "Trains ‘Evade’ from %1% up to %2%"
 msgstr "‘회피력’ 을 %1% → %2% 로 훈련"
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.
-#: ../../data/tribes/scripting/help/building_help.lua:448
+#: ../../data/tribes/scripting/help/building_help.lua:447
 msgid "Building"
 msgstr "건설"
 
-#: ../../data/tribes/scripting/help/building_help.lua:464
+#: ../../data/tribes/scripting/help/building_help.lua:463
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr "이 건물은 직접적으로 건설거나 다른 건물을 향상시켜 얻을 수 있습니다."
 
-#: ../../data/tribes/scripting/help/building_help.lua:470
+#: ../../data/tribes/scripting/help/building_help.lua:469
 msgid "Direct build cost:"
 msgstr "직접 건설 비용:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:472
+#: ../../data/tribes/scripting/help/building_help.lua:471
 #: ../../data/tribes/scripting/help/immovable_help.lua:50
 msgid "Build cost:"
 msgstr "건설 비용:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:483
+#: ../../data/tribes/scripting/help/building_help.lua:482
 msgid "Or enhanced from:"
 msgstr "또는 향상 비용:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:485
+#: ../../data/tribes/scripting/help/building_help.lua:484
 msgid "Enhanced from:"
 msgstr "향상 비용:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:494
+#: ../../data/tribes/scripting/help/building_help.lua:493
 msgid "Cumulative cost:"
 msgstr "누적 비용:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:539
-#: ../../data/tribes/scripting/help/building_help.lua:588
+#: ../../data/tribes/scripting/help/building_help.lua:538
+#: ../../data/tribes/scripting/help/building_help.lua:587
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: ../../data/tribes/scripting/help/building_help.lua:544
+#: ../../data/tribes/scripting/help/building_help.lua:543
 msgid "If built directly, dismantle yields:"
 msgstr "직접 건설시, 해체 수익:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:549
+#: ../../data/tribes/scripting/help/building_help.lua:548
 msgid "If enhanced, dismantle yields:"
 msgstr "향상시, 해체 수익:"
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
-#: ../../data/tribes/scripting/help/building_help.lua:552
-#: ../../data/tribes/scripting/help/building_help.lua:593
+#: ../../data/tribes/scripting/help/building_help.lua:551
+#: ../../data/tribes/scripting/help/building_help.lua:592
 msgid "Dismantle yields:"
 msgstr "해체 수익:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:602
+#: ../../data/tribes/scripting/help/building_help.lua:601
 msgid "Can be enhanced to:"
 msgstr "향상 가능한 건물:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:632
+#: ../../data/tribes/scripting/help/building_help.lua:631
 msgid "Crew required:"
 msgstr "필요한 일꾼:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:632
+#: ../../data/tribes/scripting/help/building_help.lua:631
 #: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "일꾼"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-#: ../../data/tribes/scripting/help/building_help.lua:654
+#: ../../data/tribes/scripting/help/building_help.lua:653
 #, lua-format
 msgid "%s or better"
 msgstr "%s 또는 그 이상"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-#: ../../data/tribes/scripting/help/building_help.lua:665
+#: ../../data/tribes/scripting/help/building_help.lua:664
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "사용 도구:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:690
+#: ../../data/tribes/scripting/help/building_help.lua:689
 msgid "Production"
 msgstr "생산"
 
-#: ../../data/tribes/scripting/help/building_help.lua:691
+#: ../../data/tribes/scripting/help/building_help.lua:690
 msgid "Performance:"
 msgstr "성능:"
 
@@ -4910,7 +5294,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "The saw is needed by the sawyer, the woodcutter and the toolsmith. It is "
 "produced by the toolsmith."
-msgstr "톱은 제재공, 벌목공과 도구 장인이 필요로 합니다. 도구 장인이 생산합니다."
+msgstr "톱은 제재공, 벌목꾼과 도구 장인이 필요로 합니다. 도구 장인이 생산합니다."
 
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../data/tribes/wares/saw/helptexts.lua:6
@@ -5055,7 +5439,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
-msgstr "배급보다 더 큰 덩어리를 깊은 광산의 광부들에게 제공합니다. 물고기/고기, 피타 빵과 맥주를 이용해 여관이나 큰 여관에서 생산합니다."
+msgstr "야전식량보다 더 큰 덩어리를 깊은 광산의 광부들에게 제공합니다. 물고기/고기, 피타 빵과 맥주를 이용해 여관이나 큰 여관에서 생산합니다."
 
 #. TRANSLATORS: Helptext for a ware: Spear
 #: ../../data/tribes/wares/spear/helptexts.lua:4
@@ -5266,7 +5650,7 @@ msgctxt "empire_ware"
 msgid ""
 "Water is used in the bakery and the brewery. The donkey farm, the sheep farm"
 " and the piggery also need to be supplied with water."
-msgstr "물은 제과점과 양조장에서 사용합니다. 당나귀 농장, 양 농장과 돼지 농장도 또한 물 공급이 필요합니다."
+msgstr "물은 제과점과 양조장에서 사용합니다. 당나귀 목장, 양 목장과 돼지 사육장도 또한 물 공급이 필요합니다."
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../data/tribes/wares/wheat/helptexts.lua:4

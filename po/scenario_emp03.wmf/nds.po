@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"POT-Creation-Date: 2019-05-10 07:32+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2019\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,14 +82,14 @@ msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr ""
-"Minner de Nafraag för Marmelpielers in de Wirtschafts-Instellungen to veer. "
+"Minner de Nafraag för Marmelpielers in de Wirtschafts-Instellens to veer. "
 "Dann blievt uns mehr Marmel för Husen över."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:78
 msgid ""
 "Remember that you can access the economy settings by clicking on any flag."
 msgstr ""
-"Du kannst de Wirtschafts-Instellungen openmaken, indeem du elkeen Fahn "
+"Du kannst de Wirtschafts-Instellens openmaken, indeem du elkeen Fahn "
 "anklickst."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:84
@@ -258,7 +258,7 @@ msgstr "De Fahrt na Huus"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:209
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:389
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:621
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:649
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:650
 msgid "Diary of Lutius"
 msgstr "Markbook vun Lutjus"
 
@@ -529,7 +529,7 @@ msgid ""
 msgstr ""
 "Ick bün wiss worden, dat uns' Flintslager nu ennelk anfangen hett, to "
 "arbeiden. He word so völe Marmelpielers sniddjen, as wi in uns' Wirtschafts-"
-"Instellungen hebben wullen."
+"Instellens hebben wullen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:311
@@ -540,8 +540,8 @@ msgid ""
 "sufficient for the moment being."
 msgstr ""
 "Aver dat is de anner Sied; wenn wi all uns' Marmel för Pielers verklüngeln, "
-"hebben wi bold keenen mehr. Wi sallen de Instellung för Marmelpielers in de "
-"Wirtschafts-Instellungen up eenen minneren Weert setten. Ick gloov, veer "
+"hebben wi bold keenen mehr. Wi sallen de Instellen för Marmelpielers in de "
+"Wirtschafts-Instellens up eenen minneren Weert setten. Ick gloov, veer "
 "Pielers up Lager sünd upstünds genoog."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:319
@@ -733,7 +733,7 @@ msgid ""
 "into cloth."
 msgstr ""
 "Vergeet nich, na de End-Tahlen för Wulle un Stoff in de Wirtschafts-"
-"Instellungen to kieken. Wi mutten all uns' Weit in Wulle umwanneln, un dann "
+"Instellens to kieken. Wi mutten all uns' Weit in Wulle umwanneln, un dann "
 "all de Wulle in Stoff."
 
 #. TRANSLATORS: Amalea
@@ -916,9 +916,9 @@ msgid ""
 "in the economy settings is reached."
 msgstr ""
 "Hunnert bit hier. Nu produzeren wi nich mehr Marmelpielers as wi bruken. Ick"
-" gloov, wi  bruken deese Wirtschafts-Instellungen würrelk mennigmaal, um "
-"uns' Wirtschaft beter to maken. Vergeet nich, uns' Husen arbeiden blot bit "
-"de End-Tahl in uns' Wirtschafts-Instellungen wunnen is."
+" gloov, wi  bruken deese Wirtschafts-Instellens würrelk mennigmaal, um uns' "
+"Wirtschaft beter to maken. Vergeet nich, uns' Husen arbeiden blot bit de "
+"End-Tahl in uns' Wirtschafts-Instellens wunnen is."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:488
@@ -1244,6 +1244,10 @@ msgstr ""
 " Wi sallen tur See fahren, sobold wi nu könen, um dat Riek tegen dat Wille "
 "Volk mit to verteidigen."
 
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:624
+msgid "Victory"
+msgstr "Sieg"
+
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:625
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
@@ -1253,17 +1257,17 @@ msgstr ""
 "anners de token Rutfödderung anfangen."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:634
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:635
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
 msgstr "Ennelk hebben wi een Deel vun uns' Altar funnen. Neptun wees Pries!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:637
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:638
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
 msgstr "Wi hebben noch een Stück vun uns' Altar funnen. Neptun wees Pries!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:642
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:643
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
@@ -1271,7 +1275,7 @@ msgstr[0] "Wi mutten noch %d Deel vun uns' Altar finnen."
 msgstr[1] "Wi mutten noch %d Delen vun uns' Altar finnen."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:645
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:646
 msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
@@ -1279,7 +1283,7 @@ msgstr ""
 "Uplest hebben wi dat leste Deel vun uns' Altar funnen. Nu könen wi 't weer "
 "tosammendoon, um uns' Gott hoogtoachten. Neptun wees Pries!"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:649
 msgid "Artifact Found"
 msgstr "Künstelk Schatten funnen"
 

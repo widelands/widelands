@@ -13,13 +13,13 @@ tribes:new_warehouse_type {
       brick = 5,
       granite = 2,
       log = 2,
-      thatch_reed = 3
+      reed = 3
    },
    return_on_dismantle = {
       brick = 3,
       granite = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
