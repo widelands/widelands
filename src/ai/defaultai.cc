@@ -3492,7 +3492,7 @@ void DefaultAI::check_flag_distances(const uint32_t gametime){
 				remaining_flags.pop();
 			}
 
-			printf("Checked flags: %d, warehouses: %lu\n", checked_flags, warehousesites.size());
+			printf("==Checked flags: %d, warehouses: %lu, time: %d s\n", checked_flags, warehousesites.size(), gametime / 1000);
 		}
 	}
 }
@@ -3965,10 +3965,9 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
             // This is a candidate, sending all necessary info to RoadCandidates
             const bool different_economy = (player_immovable->get_economy() != flag.get_economy());
             //const int32_t air_distance = map.calc_distance(flag.get_position(), reachable_coords);
-            printf("flag here\n");
             if (!flag_candidates.has_candidate(reachable_coords.hash())) {
-				printf ("....Adding %dx%d\n", reachable_coords.x, reachable_coords.y);
-                flag_candidates.add_flag(reachable_coords.hash(), different_economy);
+                flag_candidates.add_flag(reachable_coords.hash(), different_economy,
+                flag_warehouse_distance.get_distance(reachable_coords.hash(), gametime, &tmp_wh)); //NOCOM
             }
         }
     }
@@ -4034,7 +4033,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
         // We send this information to RoadCandidates, with length of possible road if applicable
         const int32_t pathcost =
            map.findpath(flag.get_position(), coords, 0, path, check, 0, fields_necessity);
-        printf ("  pathcosts %d\n", pathcost);
         if (pathcost >= 0) {
             flag_candidates.set_road_possible(flag_candidate.coords_hash, path.get_nsteps());
             possible_roads_count += 1;
@@ -4044,7 +4042,8 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     // re-sorting again // ???? now by reduction score (custom operator specified in .h file)
     flag_candidates.sort();
 
-    printf ("Candidates (%d)for flag at %3dx%3d:\n", flag_candidates.count(), flag.get_position(). x,flag.get_position().y);
+    printf ("Candidates (%d) for flag at %3dx%3d: (Field necessity %d)\n",
+     flag_candidates.count(), flag.get_position(). x,flag.get_position().y, fields_necessity);
     for (auto& item : flag_candidates.flags){
         item.print();
     }
@@ -4055,6 +4054,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     if (winner) {
         const Widelands::Coords target_coords = Coords::unhash(winner->coords_hash);
         printf("Winner to built: "); //without new line
+        flag_candidates.set_last_road_build(target_coords, gametime);
         winner->print();
         Path& path = *new Path();
 #ifndef NDEBUG

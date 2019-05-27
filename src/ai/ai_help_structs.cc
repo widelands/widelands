@@ -1419,6 +1419,7 @@ uint32_t PlayersStrengths::get_update_time() {
 
 FlagWarehouseDistances::FlagInfo::FlagInfo(const uint32_t gametime, const uint16_t dist, const uint32_t wh){
 	     expiry_time = gametime + kFlagDistanceExpirationPeriod;
+	     soft_expiry_time = gametime + kFlagDistanceExpirationPeriod / 2;
         distance = dist;
         nearest_warehouse = wh;
 	}
@@ -1431,9 +1432,10 @@ FlagWarehouseDistances::FlagInfo::FlagInfo(){
 bool FlagWarehouseDistances::FlagInfo::update(const uint32_t gametime, const uint16_t new_distance, const uint32_t nearest_wh) {
 	const uint32_t new_expiry_time = gametime + kFlagDistanceExpirationPeriod;
 
-	if (gametime > expiry_time) {
+	if (gametime > soft_expiry_time) {
 		distance = new_distance;
 		expiry_time = new_expiry_time;
+		soft_expiry_time = gametime + kFlagDistanceExpirationPeriod / 2;
 		nearest_warehouse = nearest_wh;
 		return true;
 	} else if (new_distance < distance) {
@@ -1441,10 +1443,10 @@ bool FlagWarehouseDistances::FlagInfo::update(const uint32_t gametime, const uin
 		expiry_time = gametime + kFlagDistanceExpirationPeriod;
 		nearest_warehouse = nearest_wh;
 		return true;
-	} else if (new_distance == distance && new_expiry_time > expiry_time){
-			expiry_time = new_expiry_time;
-			nearest_warehouse = nearest_wh;
-			return true;
+	//} else if (new_distance == distance && new_expiry_time > expiry_time){
+	//		expiry_time = new_expiry_time;
+	//		nearest_warehouse = nearest_wh;
+	//		return true;
 	}
 	return false;
 }
@@ -1472,7 +1474,7 @@ bool FlagWarehouseDistances::set_distance(const uint32_t flag_coords, const uint
 int16_t FlagWarehouseDistances::get_distance(const uint32_t flag_coords, uint32_t gametime, uint32_t* nw) {
       if (flags_map.count(flag_coords) == 0){
 		  *nw = 0;
-         return 1000;
+         return 1000; // this is to discourage to build second road from brand new flag...
       } else {
           return flags_map[flag_coords].get(gametime, nw);
       }
@@ -1485,11 +1487,24 @@ FlagCandidates::Candidate* FlagCandidates::get_winner(){
     if (!flags[0].is_buildable()) {return nullptr;}
     return &flags[0];
 }
+
+void FlagCandidates::Candidate::set_last_road_build(const uint32_t built_time){
+    last_road_built = built_time;
+}
+
+void FlagCandidates::set_last_road_build(const uint32_t coords_hash, const uint32_t built_time){
+    for (auto& item :flags){
+          if (item.coords_hash == coords_hash) {item.last_road_built = built_time;}
+    }
+    printf ("ERROR [set_last_road_build] - no such flag\n");
+    //return false;
+}
+
 bool FlagCandidates::set_road_possible(const uint32_t coords_hash, const uint16_t steps){
     for (auto& item :flags){
           if (item.coords_hash == coords_hash) {item.possible_road_distance = steps; return true;}
     }
-    printf ("ERROR [set_road_possible] - no such flag");
+    printf ("ERROR [set_road_possible] - no such flag\n");
     return false;
 }
 
@@ -1497,23 +1512,24 @@ bool FlagCandidates::set_cur_road_distance(const uint32_t coords, uint16_t dist)
    for (auto& item :flags){
        if (item.coords_hash == coords) {item.road_distance = dist; return true;}
    }
-    printf ("ERROR [set_cur_road_distance] - no such flag");
+    //printf ("ERROR [set_cur_road_distance] - no such flag");
    return false;
 }
 void FlagCandidates::sort(){
     std::sort(flags.begin(), flags.end());
 }
-void FlagCandidates::add_flag(const uint32_t coords, const bool different_economy){
-    flags.push_back(Candidate(coords, different_economy, distance_to_wh));
+void FlagCandidates::add_flag(const uint32_t coords, const bool different_economy, const uint16_t act_dist_to_wh){
+    flags.push_back(Candidate(coords, different_economy, distance_to_wh, act_dist_to_wh));
 }
-FlagCandidates::Candidate::Candidate(const uint32_t ch, bool de, uint16_t start_f_dist){
-	printf ("    initializing new candidate for %dx%d (%d)\n", Coords::unhash(ch).x, Coords::unhash(ch).y, ch);
+FlagCandidates::Candidate::Candidate(const uint32_t ch, bool de, uint16_t start_f_dist, uint16_t act_dist_to_wh){
+	printf ("    initializing new candidate for %dx%d (%d), with actual distance to wh: %d\n",
+	Coords::unhash(ch).x, Coords::unhash(ch).y, ch, act_dist_to_wh);
     coords_hash = ch;
     different_economy = de;
     start_flag_dist_to_wh = start_f_dist;
     road_distance = 0;
     possible_road_distance = 1000;
-    distance_to_wh = 0;
+    distance_to_wh = act_dist_to_wh;
 }
 
 
@@ -1527,7 +1543,7 @@ bool FlagCandidates::has_candidate(const uint32_t coords_hash){
     return false;
 }
 int16_t FlagCandidates::Candidate::score() const{
-    return different_economy * 100 + distance_to_wh - start_flag_dist_to_wh  - possible_road_distance + road_distance;
+    return different_economy * 1000 + distance_to_wh - start_flag_dist_to_wh  - possible_road_distance + road_distance;
 }
 
 

@@ -904,6 +904,7 @@ private:
         FlagInfo();
         FlagInfo(uint32_t, uint16_t, uint32_t);
         uint32_t expiry_time;
+        uint32_t soft_expiry_time;
         uint16_t distance;
         uint32_t nearest_warehouse;
 
@@ -923,22 +924,25 @@ struct FlagCandidates{
 
       struct Candidate{
         Candidate() = delete;
-        Candidate(uint32_t, bool different_economy, uint16_t start_flag_dist_to_wh);
+        Candidate(uint32_t, bool, uint16_t, uint16_t );
         uint32_t coords_hash;
         bool different_economy;
         uint16_t start_flag_dist_to_wh;
         uint16_t road_distance;
         uint16_t possible_road_distance;
         uint16_t distance_to_wh;
+        uint32_t last_road_built;
         int16_t score() const;
+        void set_last_road_build(uint32_t);
         bool is_buildable() {return possible_road_distance > 0;}
          bool operator<(const Candidate& other) const {
                    return score() > other.score();
         }
         void print(){
-            printf  (" This flag %3dx%3d: curr dist. to wh %3d, distance from target flag: %3d, new road dist: %3d, score: %3d\n",
+            printf  (" Candidate flag at %3dx%3d: dist. to wh %3d, distance from target flag: %3d, poss. road length: %3d, score: %3d, Different ec: %s\n",
                    Coords::unhash(coords_hash).x, Coords::unhash(coords_hash).y,
-                     distance_to_wh, start_flag_dist_to_wh, possible_road_distance, score());
+                     distance_to_wh, start_flag_dist_to_wh, possible_road_distance, score(),
+                     (different_economy)? "Y": "N");
         }
     };
 
@@ -946,9 +950,10 @@ struct FlagCandidates{
     uint16_t distance_to_wh;
 
     bool has_candidate(uint32_t);
-    void add_flag(uint32_t, bool );
+    void add_flag(uint32_t, bool, uint16_t );
     bool set_cur_road_distance(uint32_t, uint16_t );
     bool set_road_possible(uint32_t, uint16_t );
+    void set_last_road_build(uint32_t, uint32_t);
     void sort();
     uint32_t count() {return flags.size();}
     FlagCandidates::Candidate* get_winner();
