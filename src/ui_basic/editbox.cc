@@ -19,7 +19,9 @@
 
 #include "ui_basic/editbox.h"
 
+#include <algorithm>
 #include <limits>
+#include <string>
 
 #include <SDL_keycode.h>
 #include <boost/format.hpp>
@@ -85,7 +87,9 @@ EditBox::EditBox(Panel* const parent,
    : Panel(parent, x, y, w, h > 0 ? h : text_height(font_size) + 2 * margin_y),
      m_(new EditBoxImpl),
      history_active_(false),
-     history_position_(-1) {
+     history_position_(-1),
+     password_(false),
+     warning_(false) {
 	set_thinks(false);
 
 	m_->background_style = g_gr->styles().editbox_style(style);
@@ -208,7 +212,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_DELETE:
 			if (m_->caret < m_->text.size()) {
 				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
-				};
+				}
 				// Now fallthrough to handle it like Backspace
 			} else {
 				return true;
@@ -232,7 +236,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_LEFT:
 			if (m_->caret > 0) {
 				while ((m_->text[--m_->caret] & 0xc0) == 0x80) {
-				};
+				}
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 					for (uint32_t new_caret = m_->caret;; m_->caret = new_caret)
 						if (0 == new_caret || isspace(m_->text[--new_caret]))
@@ -250,7 +254,8 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RIGHT:
 			if (m_->caret < m_->text.size()) {
 				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
-				};
+					// We're just advancing the caret
+				}
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 					for (uint32_t new_caret = m_->caret;; ++new_caret)
 						if (new_caret == m_->text.size() || isspace(m_->text[new_caret - 1])) {
@@ -345,7 +350,7 @@ void EditBox::draw(RenderTarget& dst) {
 	draw_background(dst, *m_->background_style);
 
 	// Draw border.
-	if (get_w() >= 2 && get_h() >= 2) {
+	if (get_w() >= 2 && get_h() >= 2 && !warning_) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
@@ -358,6 +363,25 @@ void EditBox::draw(RenderTarget& dst) {
 		// left edge
 		dst.fill_rect(Recti(0, 0, 1, get_h() - 1), black);
 		dst.fill_rect(Recti(1, 0, 1, get_h() - 2), black);
+
+	} else {
+		// Draw a red border for warnings.
+		static const RGBColor red(255, 22, 22);
+
+		// bottom edge
+		dst.fill_rect(Recti(0, get_h() - 2, get_w(), 2), red);
+		// right edge
+		dst.fill_rect(Recti(get_w() - 2, 0, 2, get_h() - 2), red);
+		// top edge
+		dst.fill_rect(Recti(0, 0, get_w() - 1, 1), red);
+		dst.fill_rect(Recti(0, 1, get_w() - 2, 1), red);
+		dst.brighten_rect(Recti(0, 0, get_w() - 1, 1), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, 1, get_w() - 2, 1), BUTTON_EDGE_BRIGHT_FACTOR);
+		// left edge
+		dst.fill_rect(Recti(0, 0, 1, get_h() - 1), red);
+		dst.fill_rect(Recti(1, 0, 1, get_h() - 2), red);
+		dst.brighten_rect(Recti(0, 0, 1, get_h() - 1), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(1, 0, 1, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 	}
 
 	if (has_focus()) {
@@ -379,31 +403,45 @@ void EditBox::draw(RenderTarget& dst) {
 	UI::center_vertically(lineheight, &point);
 
 	// Crop to max_width while blitting
-	if (max_width < linewidth) {
-		// Fix positioning for BiDi languages.
-		if (UI::g_fh->fontset()->is_rtl()) {
-			point.x = 0.f;
-		}
-		// We want this always on, e.g. for mixed language savegame filenames
-		if (i18n::has_rtl_character(m_->text.c_str(), 100)) {  // Restrict check for efficiency
-			// TODO(GunChleoc): Arabic: Fix scrolloffset
-			rendered_text->draw(dst, point, Recti(linewidth - max_width, 0, linewidth, lineheight));
-		} else {
-			if (m_->align == UI::Align::kRight) {
-				// TODO(GunChleoc): Arabic: Fix scrolloffset
-				rendered_text->draw(
-				   dst, point, Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
-			} else {
-				rendered_text->draw(dst, point, Recti(-m_->scrolloffset, 0, max_width, lineheight));
+	if (!password_) {
+		if (max_width < linewidth) {
+			// Fix positioning for BiDi languages.
+			if (UI::g_fh->fontset()->is_rtl()) {
+				point.x = 0.f;
 			}
+			// We want this always on, e.g. for mixed language savegame filenames
+			if (i18n::has_rtl_character(m_->text.c_str(), 100)) {  // Restrict check for efficiency
+				// TODO(GunChleoc): Arabic: Fix scrolloffset
+				rendered_text->draw(dst, point, Recti(linewidth - max_width, 0, linewidth, lineheight));
+			} else {
+				if (m_->align == UI::Align::kRight) {
+					// TODO(GunChleoc): Arabic: Fix scrolloffset
+					rendered_text->draw(
+					   dst, point,
+					   Recti(point.x + m_->scrolloffset + kMarginX, 0, max_width, lineheight));
+				} else {
+					rendered_text->draw(dst, point, Recti(-m_->scrolloffset, 0, max_width, lineheight));
+				}
+			}
+		} else {
+			rendered_text->draw(dst, point, Recti(0, 0, max_width, lineheight));
 		}
 	} else {
-		rendered_text->draw(dst, point, Recti(0, 0, max_width, lineheight));
+		std::shared_ptr<const UI::RenderedText> password_text =
+		   UI::g_fh->render(as_editorfont(text_to_asterisk(), m_->fontsize));
+		password_text->draw(dst, point, Recti(0, 0, max_width, lineheight));
 	}
 
 	if (has_focus()) {
 		// Draw the caret
-		std::string line_to_caret = m_->text.substr(0, m_->caret);
+		std::string line_to_caret;
+
+		if (password_) {
+			line_to_caret = text_to_asterisk().substr(0, m_->caret);
+		} else {
+			line_to_caret = m_->text.substr(0, m_->caret);
+		}
+
 		// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
 		int caret_x = text_width(line_to_caret, m_->fontsize);
 
@@ -449,5 +487,16 @@ void EditBox::check_caret() {
 		if (m_->scrolloffset < 0)
 			m_->scrolloffset = 0;
 	}
+}
+
+/**
+ * Return text as asterisks.
+ */
+std::string EditBox::text_to_asterisk() {
+	std::string asterisk;
+	for (int i = 0; i < int(m_->text.size()); i++) {
+		asterisk.append("*");
+	}
+	return asterisk;
 }
 }  // namespace UI

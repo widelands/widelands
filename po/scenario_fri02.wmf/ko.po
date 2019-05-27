@@ -1,13 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# TaeMin An, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2019-04-22 05:17+0000\n"
+"PO-Revision-Date: 2018-03-24 18:16+0000\n"
+"Last-Translator: TaeMin An, 2019\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -117,7 +121,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:69
 msgid "40 × Ration"
-msgstr ""
+msgstr "40 × 야전식량"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:70
 msgid "10 × Meal"

@@ -65,7 +65,7 @@ constexpr uint16_t kCurrentPacketPFBuilding = 1;
 // Responsible for warehouses and expedition bootstraps
 constexpr uint16_t kCurrentPacketVersionWarehouse = 7;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
-constexpr uint16_t kCurrentPacketVersionProductionsite = 6;
+constexpr uint16_t kCurrentPacketVersionProductionsite = 7;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;
 
 void MapBuildingdataPacket::read(FileSystem& fs,
@@ -93,9 +93,9 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 					if (fr.unsigned_8()) {
 						char const* const animation_name = fr.c_string();
 						try {
-							building.anim_ = building.descr().get_animation(animation_name);
+							building.anim_ = building.descr().get_animation(animation_name, &building);
 						} catch (const GameDataError& e) {
-							building.anim_ = building.descr().get_animation("idle");
+							building.anim_ = building.descr().get_animation("idle", &building);
 							log("Warning: Tribe %s building: %s, using animation %s instead.\n",
 							    building.owner().tribe().name().c_str(), e.what(),
 							    building.descr().get_animation_name(building.anim_).c_str());
@@ -552,6 +552,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
                                                 MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
+		// TODO(GunChleoc): Savegame compatibility, remove after Build 21.
 		if (packet_version >= 5 && packet_version <= kCurrentPacketVersionProductionsite) {
 			ProductionSite::WorkingPosition& wp_begin = *productionsite.working_positions_;
 			const ProductionSiteDescr& pr_descr = productionsite.descr();
@@ -666,7 +667,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 
 				productionsite.stack_[i].program = productionsite.descr().get_program(program_name);
 				productionsite.stack_[i].ip = fr.signed_32();
-				productionsite.stack_[i].phase = fr.signed_32();
+				productionsite.stack_[i].phase = static_cast<ProgramResult>(fr.signed_32());
 				productionsite.stack_[i].flags = fr.unsigned_32();
 
 				uint32_t serial = fr.unsigned_32();
@@ -710,6 +711,13 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				productionsite.statistics_[i] = fr.unsigned_8();
 			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
 			productionsite.production_result_ = fr.c_string();
+
+			// TODO(GunChleoc): Savegame compatibility, remove after Build 21.
+			if (kCurrentPacketVersionProductionsite >= 7) {
+				productionsite.main_worker_ = fr.signed_32();
+			} else {
+				productionsite.main_worker_ = productionsite.working_positions_[0].worker ? 0 : -1;
+			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Productionsite", packet_version,
 			                            kCurrentPacketVersionProductionsite);
@@ -1135,7 +1143,8 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	for (uint16_t i = 0; i < program_size; ++i) {
 		fw.string(productionsite.stack_[i].program->name());
 		fw.signed_32(productionsite.stack_[i].ip);
-		fw.signed_32(productionsite.stack_[i].phase);
+		// TODO(GunChleoc): If we ever change this packet, we can have an uint8 here.
+		fw.signed_32(static_cast<int>(productionsite.stack_[i].phase));
 		fw.unsigned_32(productionsite.stack_[i].flags);
 		fw.unsigned_32(mos.get_object_file_index_or_zero(productionsite.stack_[i].objvar.get(game)));
 		write_coords_32(&fw, productionsite.stack_[i].coord);
@@ -1172,6 +1181,8 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 		fw.unsigned_8(productionsite.statistics_[i]);
 	fw.string(productionsite.statistics_string_on_changed_statistics_);
 	fw.string(productionsite.production_result());
+
+	fw.signed_32(productionsite.main_worker_);
 }
 
 /*

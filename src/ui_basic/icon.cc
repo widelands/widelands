@@ -35,6 +35,10 @@ Icon::Icon(Panel* const parent,
 	set_thinks(false);
 }
 
+Icon::Icon(Panel* const parent, const Image* picture_id)
+   : Icon(parent, 0, 0, picture_id->width(), picture_id->height(), picture_id) {
+}
+
 void Icon::set_icon(const Image* picture_id) {
 	pic_ = picture_id;
 }
