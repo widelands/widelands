@@ -30,7 +30,7 @@
 #include "ui_basic/textarea.h"
 
 
-// NOCOM the only remaining class should be the new dropdown. Thename the file when we're done.
+// NOCOM the only remaining class should be the new dropdown. Rename the file when we're done.
 
 class SuggestedTeamsDropdown : public UI::Dropdown<size_t> {
 public:
@@ -41,6 +41,8 @@ public:
 									uint32_t list_h,
 									int button_dimension);
 	void rebuild(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams);
+	const Widelands::SuggestedTeamLineup* get_lineup(size_t index) const;
+private:
 	std::vector<Widelands::SuggestedTeamLineup> suggested_teams_;
 };
 

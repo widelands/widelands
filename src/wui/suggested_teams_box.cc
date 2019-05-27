@@ -45,7 +45,7 @@ void SuggestedTeamsDropdown::rebuild(const std::vector<Widelands::SuggestedTeamL
 	clear();
 	suggested_teams_ = suggested_teams;
 	if (!suggested_teams_.empty()) {
-		add(_("Suggested Teams"), Widelands::kNoSuggestedTeam, nullptr, true);
+		add(_("No Teams"), Widelands::kNoSuggestedTeam, nullptr, true);
 
 		for (size_t i = 0; i < suggested_teams_.size(); ++i) {
 			const Widelands::SuggestedTeamLineup& lineup = suggested_teams_.at(i);
@@ -60,11 +60,20 @@ void SuggestedTeamsDropdown::rebuild(const std::vector<Widelands::SuggestedTeamL
 				for (Widelands::PlayerNumber player : team) {
 					assert(player < kMaxPlayers);
 					entry_label += "<img src=images/players/player_position_menu.png color=" + kPlayerColors[player].hex_value() + ">";
-				}  // Players in team
-			}     // Teams in lineup
+				}
+			}
 			add(entry_label, i);
-		}  // All lineups
+		}
 		set_visible(true);
+	}
+}
+
+const Widelands::SuggestedTeamLineup* SuggestedTeamsDropdown::get_lineup(size_t index) const {
+	if (index == Widelands::kNoSuggestedTeam) {
+		return nullptr;
+	} else {
+		assert(index < suggested_teams_.size());
+		return (&suggested_teams_.at(index));
 	}
 }
 

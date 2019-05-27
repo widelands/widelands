@@ -206,6 +206,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	   boost::bind(&FullscreenMenuLaunchMPG::change_map_or_save, boost::ref(*this)));
 	help_button_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchMPG::help_clicked, boost::ref(*this)));
+	suggested_teams_dropdown_.selected.connect([this] { select_teams(); });
 
 	mapname_.set_font_scale(scale_factor());
 	clients_.set_font_scale(scale_factor());
@@ -651,5 +652,26 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 		   new UI::FullscreenHelpWindow(this, lua_, "txts/help/multiplayer_help.lua",
 		                                /** TRANSLATORS: This is a heading for a help window */
 		                                _("Multiplayer Game Setup")));
+	}
+}
+
+void FullscreenMenuLaunchMPG::select_teams() {
+	const Widelands::SuggestedTeamLineup* lineup = suggested_teams_dropdown_.get_lineup(suggested_teams_dropdown_.get_selected());
+
+	std::vector<uint8_t> teams_to_set(settings_->settings().players.size(), 0);
+
+	if (lineup != nullptr) {
+		for (size_t i = 0; i < lineup->size(); ++i) {
+			for (Widelands::PlayerNumber pl : lineup->at(i)) {
+				teams_to_set.at(pl) = i + 1;
+			}
+		}
+	}
+
+	for (size_t i = 0; i < teams_to_set.size(); ++i) {
+		uint8_t new_team = teams_to_set.at(i);
+		if (new_team != settings_->settings().players.at(i).team) {
+			settings_->set_player_team(i, new_team);
+		}
 	}
 }

@@ -68,6 +68,7 @@ private:
 	void load_previous_playerdata();
 	void load_map_info();
 	void help_clicked();
+	void select_teams();
 
 	// TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
 	// so we can have the SuggestedTeamsBox
