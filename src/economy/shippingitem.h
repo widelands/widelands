@@ -63,11 +63,13 @@ struct ShippingItem {
 
 	private:
 		uint32_t serial_ = 0U;
+		uint32_t destination_serial_ = 0U;
 	};
 
 	void save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw);
 
 private:
+	friend struct Fleet;
 	friend class PortDock;
 	friend struct Ship;
 

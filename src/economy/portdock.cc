@@ -203,7 +203,9 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 			shipping_item.remove(*game);
 		}
 		for (Ship* s : ships_coming_) {
-			s->pop_destination(*game, *this);
+			if (egbase.objects().object_still_available(s)) {
+				s->pop_destination(*game, *this);
+			}
 		}
 	}
 
@@ -370,42 +372,52 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 		}
 	}
 
+log("Port %u: Ship %s arrived, %lu items waiting\n", serial(), ship.get_shipname().c_str(), waiting_.size()); // NOCOM
 	ship.pop_destination(game, *this);
-	PortDock* next_port = fleet_->find_next_dest(game, ship, *this);
-	if (next_port) {
+	fleet_->push_next_destinations(game, ship, *this);
+	if (ship.get_current_destination(game)) {
+log("       : Ship now going to port %u\n", ship.get_current_destination(game)->serial());
 		uint32_t free_capacity = ship.descr().get_capacity() - ship.get_nritems();
+log("       : Ship has capacity %u\n", free_capacity);
 		for (auto it = waiting_.begin(); it != waiting_.end();) {
 			if (free_capacity == 0) {
 				break;
 			}
 			const PortDock* dest = it->get_destination(game);
+log("       : Shipping item %u(%s) heading to %u\n", it->object_.serial(), it->object_.get(game) ? it->object_.get(game)->descr().name().c_str() : "nullptr", dest ? dest->serial() : 0);
 			assert(dest != this);
 			if (!dest) {
+log("       : Erasing from list of waiting items!\n");
 				it->set_location(game, warehouse_);
 				it->end_shipping(game);
 				it = waiting_.erase(it);
 			} else {
 				// Decide whether to load this item
 				int32_t time = ship.estimated_arrival_time(game, *dest);
-				assert(time >= 0);
-				for (Ship* s : ships_coming_) {
-					int32_t t = s->estimated_arrival_time(game, *dest, this);
-					if (t >= 0 && t < time) {
-						// A ship is coming that is planning to visit the ware's destination sooner than this one
-						time = -1;
-						break;
+log("       : estimated_arrival_time %i\n", time);
+				if (time >= 0) {
+					for (Ship* s : ships_coming_) {
+						int32_t t = s->estimated_arrival_time(game, *dest, this);
+						if (t >= 0 && t < time) {
+							// A ship is coming that is planning to visit the ware's destination sooner than this one
+log("       : %s will get there sooner\n", s->get_shipname().c_str());
+							time = -1;
+							break;
+						}
 					}
 				}
 				if (time < 0) {
+log("       : not loading\n");
 					++it;
 				} else {
+log("       : loading!\n");
 					ship.add_item(game, *it);
 					it = waiting_.erase(it);
 					--free_capacity;
 				}
 			}
 		}
-		ship.push_destination(game, *next_port);
+log("       : loading complete!\n");
 	}
 #ifndef NDEBUG
 	else {
@@ -413,6 +425,7 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 	}
 #endif
 
+log("       : %lu items remaining\n", waiting_.size());
 	set_need_ship(game, !waiting_.empty());
 }
 
@@ -522,16 +535,19 @@ void PortDock::Loader::load(FileRead& fr, uint8_t packet_version) {
 		pd.set_position(egbase(), pd.dockpoints_[i]);
 	}
 
-	if (packet_version < 5) {
-		// TODO(Nordfriese): Remove when we break savegame compatibility
+	if (packet_version >= 5) {
+		const uint32_t ships = fr.unsigned_32();
+		for (uint32_t i = 0; i < ships; ++i) {
+			ships_coming_.insert(fr.unsigned_32());
+		}
+	} else {
+		// TODO(GunChleoc): Savegame compatibility Build 20
 		fr.unsigned_8();
-	}
-
-	pd.ships_coming_.clear();
-	for (const Serial ship_serial : pd.owner().ships()) {
-		Ship* ship = dynamic_cast<Ship*>(egbase().objects().get_object(ship_serial));
-		if (ship->has_destination(egbase(), pd)) {
-			pd.ships_coming_.insert(ship);
+		for (const Serial ship_serial : pd.owner().ships()) {
+			Ship* ship = dynamic_cast<Ship*>(egbase().objects().get_object(ship_serial));
+			if (ship->has_destination(egbase(), pd)) {
+				ships_coming_.insert(ship_serial);
+			}
 		}
 	}
 
@@ -553,6 +569,9 @@ void PortDock::Loader::load_pointers() {
 	PortDock& pd = get<PortDock>();
 	pd.warehouse_ = &mol().get<Warehouse>(warehouse_);
 
+	for (Serial s : ships_coming_) {
+		pd.ships_coming_.insert(&mol().get<Ship>(s));
+	}
 	for (uint32_t i = 0; i < waiting_.size(); ++i) {
 		pd.waiting_.push_back(waiting_[i].get(mol()));
 	}
@@ -606,6 +625,11 @@ void PortDock::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) 
 	fw.unsigned_16(dockpoints_.size());
 	for (const Coords& coords : dockpoints_) {
 		write_coords_32(&fw, coords);
+	}
+
+	fw.unsigned_32(ships_coming_.size());
+	for (Ship* s : ships_coming_) {
+		fw.unsigned_32(mos.get_object_file_index(*s));
 	}
 
 	fw.unsigned_32(waiting_.size());

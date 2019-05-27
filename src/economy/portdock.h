@@ -167,6 +167,7 @@ protected:
 	private:
 		uint32_t warehouse_;
 		std::vector<ShippingItem::Loader> waiting_;
+		std::set<Serial> ships_coming_;
 	};
 
 public:

@@ -797,22 +797,28 @@ static inline float prioritised_distance(Path& path, uint32_t priority, uint32_t
 }
 using DestinationsQueue = std::vector<std::pair<PortDock*, uint32_t>>;
 static std::pair<DestinationsQueue, float> shortest_order(Game& game,
-                                                           Fleet& fleet,
-                                                           bool is_on_dock,
-                                                           void* start,
-                                                           const DestinationsQueue& remaining_to_visit,
-                                                           const std::map<PortDock*, uint32_t> shipping_items) {
+                                                          Fleet& fleet,
+                                                          bool is_on_dock,
+                                                          void* start,
+                                                          const DestinationsQueue& remaining_to_visit,
+                                                          const std::map<PortDock*, uint32_t> shipping_items) {
 	const size_t nr_dests = remaining_to_visit.size();
+log("NOCOM: shortest_order recursion call from %s to these %lu destinations:\n", is_on_dock ? "a dock" : "the open sea", nr_dests);
+for (const auto& pair : remaining_to_visit) log("     : – %u (priority %u)\n", pair.first->serial(), pair.second);
 	assert(nr_dests > 0);
 	if (nr_dests == 1) {
 		// Recursion break: Only one portdock left
 		Path path;
 		if (is_on_dock) {
-			fleet.get_path(*static_cast<PortDock*>(start), *remaining_to_visit[0].first, path);
+			PortDock* p = static_cast<PortDock*>(start);
+			if (p != remaining_to_visit[0].first) {
+				fleet.get_path(*p, *remaining_to_visit[0].first, path);
+			}
 		} else {
 			static_cast<Ship*>(start)->calculate_sea_route(game, *remaining_to_visit[0].first, &path);
 		}
-		return std::pair<DestinationsQueue, float>(DestinationsQueue(), prioritised_distance(
+log("     : Recursion break, returning queue with this one element\n");
+		return std::pair<DestinationsQueue, float>(remaining_to_visit, prioritised_distance(
 				path, remaining_to_visit[0].second, shipping_items.at(remaining_to_visit[0].first)));
 	}
 
@@ -829,7 +835,10 @@ static std::pair<DestinationsQueue, float> shortest_order(Game& game,
 		result.first.emplace(result.first.begin(), pair);
 		Path path;
 		if (is_on_dock) {
-			fleet.get_path(*static_cast<PortDock*>(start), *pair.first, path);
+			PortDock* p = static_cast<PortDock*>(start);
+			if (p != remaining_to_visit[0].first) {
+				fleet.get_path(*static_cast<PortDock*>(start), *pair.first, path);
+			}
 		} else {
 			static_cast<Ship*>(start)->calculate_sea_route(game, *pair.first, &path);
 		}
@@ -840,7 +849,9 @@ static std::pair<DestinationsQueue, float> shortest_order(Game& game,
 		}
 	}
 	assert(best_result.second < std::numeric_limits<float>::max());
-	assert(nr_dests == best_result.first.size() + 1);
+	assert(best_result.first.size() == nr_dests);
+log("     : returning the %lu destinations in this order:\n", nr_dests);
+for (const auto& pair : best_result.first) log("     : – %u (priority %u)\n", pair.first->serial(), pair.second);
 	return best_result;
 }
 
@@ -880,7 +891,8 @@ void Ship::reorder_destinations(Game& game) {
 		uint32_t priority = pair.second;
 		size_t old_index = 0;
 		for (;; ++old_index) {
-			if (destinations_[old_index].first == optr) {
+			assert(old_index < nr_dests);
+			if (old_destinations[old_index].first == optr) {
 				break;
 			}
 		}
@@ -1229,20 +1241,20 @@ void Ship::draw(const EditorGameBase& egbase,
 void Ship::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
-	molog("Ship belongs to fleet: %u\n destination: %s\n lastdock: %s\n",
+	molog("Ship belongs to fleet %u\nlastdock: %s\n",
 	      fleet_ ? fleet_->serial() : 0,
-	      (!destinations_.empty()) ? (boost::format("%u (%d x %d)") % destinations_.front().first.serial() %
-	                                 destinations_.front().first.get(egbase)->get_positions(egbase)[0].x %
-	                                 destinations_.front().first.get(egbase)->get_positions(egbase)[0].y)
-	                                   .str()
-	                                   .c_str() :
-	                                "-",
 	      (lastdock_.is_set()) ? (boost::format("%u (%d x %d)") % lastdock_.serial() %
 	                              lastdock_.get(egbase)->get_positions(egbase)[0].x %
 	                              lastdock_.get(egbase)->get_positions(egbase)[0].y)
 	                                .str()
 	                                .c_str() :
 	                             "-");
+	molog("Has %" PRIuS " destination(s):\n", destinations_.size());
+	for (const auto& pair : destinations_) {
+		molog("    · %u (%3dx%3d) (priority %u)\n",
+				pair.first.serial(), pair.first.get(egbase)->get_positions(egbase)[0].x,
+				pair.first.get(egbase)->get_positions(egbase)[0].y, pair.second);
+	}
 
 	molog("In state: %u (%s)\n", static_cast<unsigned int>(ship_state_),
 	      (expedition_) ? "expedition" : "transportation");
