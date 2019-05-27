@@ -255,17 +255,16 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	          /** TRANSLATORS: Button tooltip in in a building's wares input queue */
 	          _("Decrease the number of wares you want to be stored here"))
 
-	    % as_listitem(
-	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
-	            explanation */
-	         _("Hold down Shift to decrease all ware types at the same time"),
-	         UI::FontStyle::kTooltip)
+	    %
+	    as_listitem(
+	       /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+	          explanation */
+	       _("Hold down Shift to decrease all ware types at the same time"), UI::FontStyle::kTooltip)
 
 	    % as_listitem(
 	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
 	            explanation */
-	         _("Hold down Ctrl to allow none of this ware"),
-	         UI::FontStyle::kTooltip))
+	         _("Hold down Ctrl to allow none of this ware"), UI::FontStyle::kTooltip))
 	      .str());
 	decrease_max_fill_->sigclicked.connect(
 	   boost::bind(&InputQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
@@ -283,17 +282,16 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	            /** TRANSLATORS: Button tooltip in a building's wares input queue */
 	            _("Increase the number of wares you want to be stored here"))
 
-	    % as_listitem(
-	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
-	            explanation */
-	         _("Hold down Shift to increase all ware types at the same time"),
-	         UI::FontStyle::kTooltip)
+	    %
+	    as_listitem(
+	       /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+	          explanation */
+	       _("Hold down Shift to increase all ware types at the same time"), UI::FontStyle::kTooltip)
 
 	    % as_listitem(
 	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
 	            explanation */
-	         _("Hold down Ctrl to allow all of this ware"),
-	         UI::FontStyle::kTooltip))
+	         _("Hold down Ctrl to allow all of this ware"), UI::FontStyle::kTooltip))
 	      .str());
 	increase_max_fill_->sigclicked.connect(
 	   boost::bind(&InputQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));
