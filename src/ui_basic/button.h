@@ -25,7 +25,7 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/color.h"
-#include "graphic/text_layout.h"
+#include "graphic/styles/button_style.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -146,7 +146,7 @@ public:
 	void set_perm_pressed(bool pressed);
 
 	/// Change the background style of the button.
-	void set_background_style(UI::ButtonStyle bstyle);
+	void set_style(UI::ButtonStyle bstyle);
 
 	/// Convenience function. Toggles between raised and permpressed style
 	void toggle();
@@ -172,7 +172,7 @@ protected:
 	std::string title_;         //  title string used when title_image_ == nullptr
 	const Image* title_image_;  //  custom icon on the button
 
-	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
+	const UI::ButtonStyleInfo* style_;  // Background color and texture. Not owned.
 };
 
 }  // namespace UI

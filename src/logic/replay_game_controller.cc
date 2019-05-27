@@ -60,7 +60,7 @@ void ReplayGameController::think() {
 	}
 }
 
-void ReplayGameController::send_player_command(Widelands::PlayerCommand&) {
+void ReplayGameController::send_player_command(Widelands::PlayerCommand*) {
 	throw wexception("Trying to send a player command during replay");
 }
 

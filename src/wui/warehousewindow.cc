@@ -160,7 +160,7 @@ void WarehouseWaresPanel::set_policy(Widelands::Warehouse::StockPolicy newpolicy
 
 		for (const Widelands::DescriptionIndex& index : indices) {
 			if (display_.ware_selected(index)) {
-				gb_.game().send_player_command(*new Widelands::CmdSetStockPolicy(
+				gb_.game().send_player_command(new Widelands::CmdSetStockPolicy(
 				   gb_.game().get_gametime(), wh_.owner().player_number(), wh_, is_workers, index,
 				   newpolicy));
 			}

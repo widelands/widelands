@@ -32,7 +32,6 @@
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
 #include "economy/workers_queue.h"
-#include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -296,28 +295,26 @@ void ProductionSite::update_statistics_string(std::string* s) {
 		nr_workers += working_positions_[--i].worker ? 1 : 0;
 
 	if (nr_workers == 0) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() %
-		      _("(not occupied)"))
-		        .str();
+		*s = g_gr->styles().color_tag(
+		   _("(not occupied)"), g_gr->styles().building_statistics_style().low_color());
 		return;
 	}
 
 	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() %
-		      (nr_requests == 1 ?
-		          /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
-		          _("Worker missing") :
-		          /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
-		             missing. If you need plural forms here, please let us know. */
-		          _("Workers missing")))
-		        .str();
+		*s = g_gr->styles().color_tag(
+		   (nr_requests == 1 ?
+		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
+		       _("Worker missing") :
+		       /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
+		          missing. If you need plural forms here, please let us know. */
+		       _("Workers missing")),
+		   g_gr->styles().building_statistics_style().low_color());
 		return;
 	}
 
 	if (is_stopped_) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT.hex_value() %
-		      _("(stopped)"))
-		        .str();
+		*s = g_gr->styles().color_tag(
+		   _("(stopped)"), g_gr->styles().building_statistics_style().neutral_color());
 		return;
 	}
 	*s = statistics_string_on_changed_statistics_;
@@ -407,34 +404,32 @@ void ProductionSite::calc_statistics() {
 
 	const unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
-	std::string color;
-	if (percOk < 33)
-		color = UI_FONT_CLR_BAD.hex_value();
-	else if (percOk < 66)
-		color = UI_FONT_CLR_OK.hex_value();
-	else
-		color = UI_FONT_CLR_GOOD.hex_value();
-	const std::string perc_str =
-	   (boost::format("<font color=%s>%s</font>") % color % (boost::format(_("%i%%")) % percOk))
-	      .str();
-
-	std::string trend;
-	if (lastPercOk > percOk) {
-		trend_ = Trend::kRising;
-		color = UI_FONT_CLR_GOOD.hex_value();
-		trend = "+";
-	} else if (lastPercOk < percOk) {
-		trend_ = Trend::kFalling;
-		color = UI_FONT_CLR_BAD.hex_value();
-		trend = "-";
-	} else {
-		trend_ = Trend::kUnchanged;
-		color = UI_FONT_CLR_BRIGHT.hex_value();
-		trend = "=";
-	}
-	const std::string trend_str = (boost::format("<font color=%s>%s</font>") % color % trend).str();
+	const std::string perc_str = g_gr->styles().color_tag(
+	   (boost::format(_("%i%%")) % percOk).str(),
+	   (percOk < 33) ? g_gr->styles().building_statistics_style().low_color() :
+	                   (percOk < 66) ? g_gr->styles().building_statistics_style().medium_color() :
+	                                   g_gr->styles().building_statistics_style().high_color());
 
 	if (0 < percOk && percOk < 100) {
+		RGBColor color = g_gr->styles().building_statistics_style().high_color();
+		std::string trend;
+		if (lastPercOk > percOk) {
+			trend_ = Trend::kRising;
+			color = g_gr->styles().building_statistics_style().high_color();
+			trend = "+";
+		} else if (lastPercOk < percOk) {
+			trend_ = Trend::kFalling;
+			color = g_gr->styles().building_statistics_style().low_color();
+			trend = "-";
+		} else {
+			trend_ = Trend::kUnchanged;
+			color = g_gr->styles().building_statistics_style().neutral_color();
+			trend = "=";
+		}
+
+		const std::string trend_str =
+		   g_gr->styles().color_tag((boost::format(_("%i%%")) % trend).str(), color);
+
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
 		statistics_string_on_changed_statistics_ =
 		   (boost::format("%s\u2009%s") % perc_str % trend_str).str();

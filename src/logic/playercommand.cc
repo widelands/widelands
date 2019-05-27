@@ -1609,7 +1609,9 @@ void CmdEnemyFlagAction::execute(Game& game) {
 			    1 < player->vision(Map::get_index(building->get_position(), game.map().get_width()))) {
 				std::vector<Soldier*> result;
 				for (Serial s : soldiers) {
-					result.push_back(dynamic_cast<Soldier*>(game.objects().get_object(s)));
+					if (Soldier* soldier = dynamic_cast<Soldier*>(game.objects().get_object(s))) {
+						result.push_back(soldier);
+					}
 				}
 				player->enemyflagaction(*flag, sender(), result);
 			} else {

@@ -70,11 +70,11 @@ public:
 	// Render the given string in the given width. Restricts the allowed tags to
 	// the ones in TagSet.
 	std::shared_ptr<const UI::RenderedText>
-	render(const std::string&, uint16_t width, const TagSet& tagset = TagSet());
+	render(const std::string&, uint16_t width, bool is_rtl, const TagSet& tagset = TagSet());
 
 private:
 	std::shared_ptr<RenderNode>
-	layout(const std::string& text, uint16_t width, const TagSet& allowed_tags);
+	layout(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags);
 
 	std::unique_ptr<FontCache> font_cache_;
 	std::unique_ptr<Parser> parser_;

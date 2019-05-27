@@ -32,6 +32,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -510,20 +511,26 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	if (scale < 1.f) {
 		return;
 	}
-	const int font_size = scale * UI_FONT_SIZE_SMALL;
+
+	UI::FontStyleInfo census_font(g_gr->styles().building_statistics_style().census_font());
+	census_font.set_size(scale * census_font.size());
 
 	// We always render this so we can have a stable position for the statistics string.
 	std::shared_ptr<const UI::RenderedText> rendered_census =
-	   UI::g_fh->render(as_condensed(census, UI::Align::kCenter, font_size), 120 * scale);
+	   UI::g_fh->render(as_richtext_paragraph(census, census_font, UI::Align::kCenter), 120 * scale);
 	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
 	if ((draw_text & TextToDraw::kCensus) != TextToDraw::kNone) {
 		rendered_census->draw(*dst, position, UI::Align::kCenter);
 	}
 
 	if ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone && !statictics.empty()) {
+		UI::FontStyleInfo statistics_font(
+		   g_gr->styles().building_statistics_style().statistics_font());
+		statistics_font.set_size(scale * statistics_font.size());
+
 		std::shared_ptr<const UI::RenderedText> rendered_statistics =
-		   UI::g_fh->render(as_condensed(statictics, UI::Align::kCenter, font_size));
-		position.y += rendered_census->height() + text_height(font_size) / 4;
+		   UI::g_fh->render(as_richtext_paragraph(statictics, statistics_font, UI::Align::kCenter));
+		position.y += rendered_census->height() + text_height(statistics_font) / 4;
 		rendered_statistics->draw(*dst, position, UI::Align::kCenter);
 	}
 }
