@@ -196,7 +196,8 @@ private:
 	unsigned int max_list_height_;
 	int list_offset_x_;
 	int list_offset_y_;
-	int button_dimension_;
+	const int button_dimension_;
+	const int base_height_;
 	const int mouse_tolerance_;  // Allow mouse outside the panel a bit before autocollapse
 	UI::Box button_box_;
 	UI::Button* push_button_;  // Only used in textual dropdowns

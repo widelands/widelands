@@ -32,6 +32,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/map_generator.h"
 #include "graphic/font_handler.h"
+#include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"
@@ -51,7 +52,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent, UI::Unique
      // UI elements
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),
-     label_height_(text_height() + 2),
+     label_height_(text_height(UI::FontStyle::kLabel) + 2),
      box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
      // Size
 	 map_size_box_(box_, "random_map_menu", 4, parent.egbase().map().get_width(), parent.egbase().map().get_height()),
@@ -91,8 +92,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent, UI::Unique
      resource_amount_(2),
      world_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
      resources_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
-     world_label_(&world_box_, 0, 0, _("Climate:")),
-     resources_label_(&resources_box_, 0, 0, _("Resources:")),
+     world_label_(&world_box_, 0, 0, 0, 0, _("Climate:")),
+     resources_label_(&resources_box_, 0, 0, 0, 0, _("Resources:")),
      world_(&world_box_,
             "world",
             0,
@@ -154,7 +155,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent, UI::Unique
                 UI::SpinBox::Type::kSmall,
                 5),
      mountains_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
-     mountains_label_(&mountains_box_, 0, 0, _("Mountains:")),
+     mountains_label_(&mountains_box_, 0, 0, 0, 0, _("Mountains:")),
      mountains_(&mountains_box_,
                 0,
                 0,
@@ -165,23 +166,16 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent, UI::Unique
      island_mode_(&box_, Vector2i::zero(), _("Island mode")),
      // Geeky stuff
      map_number_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
-     map_number_label_(&map_number_box_, 0, 0, _("Random number:")),
+     map_number_label_(&map_number_box_, 0, 0, 0, 0, _("Random number:")),
      map_number_edit_(&map_number_box_,
                       0,
                       0,
                       box_width_ - 2 * margin_ - map_number_label_.get_w(),
-                      0,
-                      2,
                       UI::PanelStyle::kWui),
      map_id_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
-     map_id_label_(&map_id_box_, 0, 0, _("Map ID:")),
-     map_id_edit_(&map_id_box_,
-                  0,
-                  0,
-                  box_width_ - 2 * margin_ - map_id_label_.get_w(),
-                  0,
-                  2,
-                  UI::PanelStyle::kWui),
+     map_id_label_(&map_id_box_, 0, 0, 0, 0, _("Map ID:")),
+     map_id_edit_(
+        &map_id_box_, 0, 0, box_width_ - 2 * margin_ - map_id_label_.get_w(), UI::PanelStyle::kWui),
      // Buttons
      button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
      ok_button_(&button_box_,

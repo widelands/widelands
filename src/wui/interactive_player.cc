@@ -218,7 +218,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 void InteractivePlayer::add_statistics_menu() {
 	statisticsmenu_.set_image(g_gr->images().get("images/wui/menus/statistics.png"));
 	toolbar()->add(&statisticsmenu_);
-
+// NOCOM seafaring statistics entry is missing
 	menu_windows_.stats_seafaring.open_window = [this] {
 		new SeafaringStatisticsMenu(*this, menu_windows_.stats_seafaring);
 	};

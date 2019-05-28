@@ -26,6 +26,7 @@
 
 #include "economy/fleet.h"
 #include "graphic/graphic.h"
+#include "graphic/text_layout.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"

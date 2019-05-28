@@ -162,13 +162,11 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, EditorSetStartingP
 		UI::Box* row = new UI::Box(&box_, 0, 0, UI::Box::Horizontal);
 
 		// Name
-		UI::EditBox* plr_name = new UI::EditBox(row, 0, 0, 0, 0, kMargin, UI::PanelStyle::kWui);
+		UI::EditBox* plr_name = new UI::EditBox(row, 0, 0, 0, UI::PanelStyle::kWui);
 		if (map_has_player) {
 			plr_name->set_text(map.get_scenario_player_name(p));
 		}
 		plr_name->changed.connect(boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
-		row->add(plr_name, UI::Box::Resizing::kFillSpace);
-		row->add_space(kMargin);
 
 		// Tribe
 		UI::Dropdown<std::string>* plr_tribe =
@@ -191,8 +189,6 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, EditorSetStartingP
 		      "");
 		plr_tribe->selected.connect(
 		   boost::bind(&EditorPlayerMenu::player_tribe_clicked, boost::ref(*this), p - 1));
-		row->add(plr_tribe);
-		row->add_space(kMargin);
 
 		// Starting position
 		const Image* player_image =
@@ -206,8 +202,17 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, EditorSetStartingP
 		   player_image, _("Set this player’s starting position"));
 		plr_position->sigclicked.connect(
 		   boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
+
+		// Add the elements to the row
+		row->add(plr_name, UI::Box::Resizing::kFillSpace);
+		row->add_space(kMargin);
+
+		row->add(plr_tribe);
+		row->add_space(kMargin);
+
 		row->add(plr_position);
 
+		// Add the row itself
 		box_.add(row, UI::Box::Resizing::kFullSize);
 		box_.add_space(kMargin);
 		row->set_visible(map_has_player);
@@ -227,7 +232,7 @@ void EditorPlayerMenu::layout() {
 	assert(!rows_.empty());
 	const Widelands::PlayerNumber nr_players = eia().egbase().map().get_nrplayers();
 	box_.set_size(310, no_of_players_.get_h() + kMargin +
-	                      nr_players * (rows_.front()->tribe->get_h() + kMargin));
+	                      nr_players * (rows_.front()->name->get_h() + kMargin));
 	set_inner_size(box_.get_w() + 2 * kMargin, box_.get_h() + 2 * kMargin);
 }
 
@@ -319,10 +324,10 @@ void EditorPlayerMenu::set_starting_pos_clicked(size_t row) {
 	// Signal player position states via button states
 	iterate_player_numbers(pn, map->get_nrplayers()) {
 		if (pn == row) {
-			rows_.at(pn - 1)->position->set_background_style(UI::ButtonStyle::kWuiPrimary);
+			rows_.at(pn - 1)->position->set_style(UI::ButtonStyle::kWuiPrimary);
 			rows_.at(pn - 1)->position->set_perm_pressed(true);
 		} else {
-			rows_.at(pn - 1)->position->set_background_style(UI::ButtonStyle::kWuiSecondary);
+			rows_.at(pn - 1)->position->set_style(UI::ButtonStyle::kWuiSecondary);
 			rows_.at(pn - 1)->position->set_perm_pressed(map->get_starting_pos(pn) !=
 			                                             Widelands::Coords::null());
 		}

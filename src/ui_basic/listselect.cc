@@ -30,7 +30,6 @@
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 
@@ -55,7 +54,6 @@ BaseListselect::BaseListselect(Panel* const parent,
                                UI::PanelStyle style,
                                const ListselectLayout selection_mode)
    : Panel(parent, x, y, w, h),
-     lineheight_(text_height() + kMargin),
 	 widest_text_(0),
 	 widest_hotkey_(0),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style),
@@ -64,9 +62,11 @@ BaseListselect::BaseListselect(Panel* const parent,
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
+     font_style_(&g_gr->styles().table_style(style).enabled()),
      background_style_(selection_mode == ListselectLayout::kDropdown ?
                           g_gr->styles().dropdown_style(style) :
-                          nullptr) {
+                          nullptr),
+	 lineheight_(text_height(*font_style_) + kMargin) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
@@ -119,10 +119,11 @@ void BaseListselect::add(const std::string& name,
                          const Image* pic,
                          bool const sel,
                          const std::string& tooltip_text, const std::string& hotkey) {
+	// NOCOM create styles. Color for hotkey is RGBColor(127, 127, 127)
 	EntryRecord* er = new EntryRecord(
-						  name.empty() ? name : as_listselect_item_font(name),
+						  name.empty() ? name : g_gr->styles().font_style(UI::FontStyle::kLabel).as_font_tag(name),
 						  entry, pic, tooltip_text,
-						  hotkey.empty() ? hotkey : as_listselect_hotkey_font(hotkey),
+						  hotkey.empty() ? hotkey : g_gr->styles().font_style(UI::FontStyle::kLabel).as_font_tag(hotkey),
 						  i18n::has_rtl_character(name.c_str(), 20) ? Align::kRight : Align::kLeft,
 						  i18n::has_rtl_character(hotkey.c_str(), 20) ? Align::kRight : Align::kLeft);
 
@@ -343,8 +344,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 		assert(eff_h < std::numeric_limits<int32_t>::max());
 
 		const EntryRecord& er = *entry_records_[idx];
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(as_richtext(er.name));
-		std::shared_ptr<const UI::RenderedText> rendered_hotkey = UI::g_fh->render(as_richtext(er.hotkey));
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(as_richtext_paragraph(er.name, *font_style_));
+		std::shared_ptr<const UI::RenderedText> rendered_hotkey = UI::g_fh->render(as_richtext_paragraph(er.hotkey, *font_style_));
 		const int text_height = std::max(rendered_text->height(), rendered_hotkey->height());
 
 		int lineheight = std::max(get_lineheight(), text_height);
