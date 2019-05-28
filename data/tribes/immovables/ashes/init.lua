@@ -42,6 +42,7 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Ashes"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
+   size = "small",
    programs = {
       program = {
          "animate=idle 45000",

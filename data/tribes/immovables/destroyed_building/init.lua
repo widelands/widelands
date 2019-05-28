@@ -7,6 +7,7 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Destroyed building"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
+   size = "big",
    programs = {
       program = {
          "animate=idle 30000",
