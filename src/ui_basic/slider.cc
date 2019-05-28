@@ -72,7 +72,7 @@ Slider::Slider(Panel* const parent,
      highlighted_(false),
      pressed_(false),
      enabled_(enabled),
-     cursor_style_(g_gr->styles().slider_style(style)),
+     cursor_style_(&g_gr->styles().slider_style(style).background()),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),
@@ -487,22 +487,23 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
                                const uint32_t w,
                                const uint32_t h,
                                const std::vector<std::string>& labels_in,
-                               uint32_t value_,
-                               SliderStyle style,
+                               uint32_t init_value,
+                               SliderStyle init_style,
                                const std::string& tooltip_text,
                                const uint32_t cursor_size,
                                const bool enabled)
    : Panel(parent, x, y, w, h, tooltip_text),
+     style(g_gr->styles().slider_style(init_style)),
      slider(this,
             // here, we take into account the h_gap introduced by HorizontalSlider
             w / (2 * labels_in.size()) - cursor_size / 2,
             0,
             w - (w / labels_in.size()) + cursor_size,
-            h - text_height(UI_FONT_SIZE_SMALL - 2, UI::FontSet::Face::kCondensed) - 2,
+            h - text_height(style.font()) - 2,
             0,
             labels_in.size() - 1,
-            value_,
-            style,
+            init_value,
+            init_style,
             tooltip_text,
             cursor_size,
             enabled),
@@ -524,7 +525,7 @@ void DiscreteSlider::draw(RenderTarget& dst) {
 
 	for (uint32_t i = 0; i < labels.size(); i++) {
 		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh->render(as_condensed(labels[i], UI::Align::kCenter, UI_FONT_SIZE_SMALL - 2));
+		   UI::g_fh->render(as_richtext_paragraph(labels[i], style.font()));
 		rendered_text->draw(
 		   dst, Vector2i(gap_1 + i * gap_n, get_h() - rendered_text->height()), UI::Align::kCenter);
 	}
@@ -541,8 +542,8 @@ void DiscreteSlider::layout() {
 	uint32_t h = get_h();
 	assert(labels.size());
 	slider.set_pos(Vector2i(w / (2 * labels.size()) - slider.cursor_size_ / 2, 0));
-	slider.set_size(w - (w / labels.size()) + slider.cursor_size_,
-	                h - text_height(UI_FONT_SIZE_SMALL - 2, UI::FontSet::Face::kCondensed) + 2);
+	slider.set_size(
+	   w - (w / labels.size()) + slider.cursor_size_, h - text_height(style.font()) + 2);
 	Panel::layout();
 }
 }  // namespace UI

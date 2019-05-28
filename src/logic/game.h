@@ -250,7 +250,7 @@ public:
 
 	void enqueue_command(Command* const);
 
-	void send_player_command(Widelands::PlayerCommand&);
+	void send_player_command(Widelands::PlayerCommand*);
 
 	void send_player_bulldoze(PlayerImmovable&, bool recurse = false);
 	void send_player_dismantle(PlayerImmovable&);

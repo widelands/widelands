@@ -1,14 +1,9 @@
 dirname = path.dirname (__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files (dirname .. "idle_???.png"),
-      hotspot = {17, 18},
-      fps = 10
-   },
-}
-add_walking_animations (animations, "walk", dirname, "walk", {10, 23}, 15)
-add_walking_animations (animations, "walkload", dirname, "walkload", {10, 26}, 15)
+animations = {}
+add_animation(animations, "idle", dirname, "idle", {17, 18}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {10, 23}, 15)
+add_directional_animation(animations, "walkload", dirname, "walkload", {10, 26}, 15)
 
 tribes:new_carrier_type {
    msgctxt = "frisians_worker",

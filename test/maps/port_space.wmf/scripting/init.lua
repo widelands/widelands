@@ -52,7 +52,7 @@ function create_infrastructure(tower_x, tower_y)
             grout = 100,
             iron = 100,
             granite = 100,
-            thatch_reed = 100,
+            reed = 100,
             log = 100,
          },
          workers = {
@@ -65,7 +65,7 @@ function create_infrastructure(tower_x, tower_y)
             grout = 100,
             iron = 100,
             granite = 100,
-            thatch_reed = 100,
+            reed = 100,
             log = 100,
             gold = 100,
          },

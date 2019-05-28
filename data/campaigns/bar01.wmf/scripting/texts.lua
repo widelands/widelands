@@ -120,7 +120,7 @@ obj_better_material_3 = {
    title = _"Build a reed yard",
    number = 1,
    body = objective_text(_"Build a reed yard",
-      p(_([[The third material necessary for improved buildings is thatch reed, used to cover roofs. Thatch reed is planted by a gardener around his building, the reed yard.]])) ..
+      p(_([[The third material necessary for improved buildings is reed, used to cover roofs. Reed fields are planted by a gardener around his building, the reed yard.]])) ..
       li(_"Build a reed yard"))
 }
 

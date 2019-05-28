@@ -29,12 +29,12 @@
 
 #include "graphic/align.h"
 #include "graphic/color.h"
+#include "graphic/styles/font_style.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
+#include "ui_basic/scrollbar.h"
 
 namespace UI {
-struct Scrollbar;
-struct Button;
 
 enum class TableRows { kSingle, kMulti, kSingleDescending, kMultiDescending };
 enum class TableColumnType { kFixed, kFlexible };
@@ -141,22 +141,32 @@ public:
 		void* entry() const {
 			return entry_;
 		}
-		void set_color(const RGBColor& c) {
-			clr = c;
+
+		void set_font_style(const UI::FontStyleInfo& style) {
+			font_style_ = &style;
 		}
-		RGBColor get_color() const {
-			return clr;
+
+		const UI::FontStyleInfo* font_style() const {
+			return font_style_;
+		}
+
+		bool is_disabled() const {
+			return disabled_;
+		}
+		void set_disabled(bool disable) {
+			disabled_ = disable;
 		}
 
 	private:
 		friend class Table<void*>;
 		void* entry_;
-		RGBColor clr;
+		const UI::FontStyleInfo* font_style_;
 		struct Data {
 			const Image* d_picture;
 			std::string d_string;
 		};
 		std::vector<Data> data_;
+		bool disabled_;
 	};
 
 	Table(Panel* parent,
@@ -299,9 +309,10 @@ private:
 
 	Columns columns_;
 	int total_width_;
-	const uint32_t headerheight_;
 	int32_t lineheight_;
-	UI::ButtonStyle button_style_;
+	const uint32_t headerheight_;
+	const UI::PanelStyle style_;
+	const UI::ButtonStyle button_style_;
 	Scrollbar* scrollbar_;
 	// A disabled button that will fill the space above the scroll bar
 	UI::Button* scrollbar_filler_button_;

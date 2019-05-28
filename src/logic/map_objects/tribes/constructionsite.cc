@@ -30,7 +30,6 @@
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -150,9 +149,8 @@ ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
 
 void ConstructionSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
-	      (boost::format(_("%i%% built")) % percent))
-	        .str();
+	*s = g_gr->styles().color_tag((boost::format(_("%i%% built")) % percent).str(),
+	                              g_gr->styles().building_statistics_style().construction_color());
 }
 
 /*
