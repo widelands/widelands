@@ -92,13 +92,13 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	}
 
 	// Read the walking animations
-	add_directional_animation(&walk_anims_, "walk");
+	assign_directional_animation(&walk_anims_, "walk");
 
 	// Many workers don't carry wares, so they have no walkload animation.
 	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
 	anims->do_not_warn_about_unaccessed_keys();
-	if (anims->has_key("walkload_e")) {
-		add_directional_animation(&walkload_anims_, "walkload");
+	if (is_animation_known("walkload_e")) {
+		assign_directional_animation(&walkload_anims_, "walkload");
 	}
 
 	// Read programs

@@ -1,28 +1,21 @@
-dirname = path.dirname (__file__)
+image_dirname = path.dirname(__file__) .. "images/frisians/"
+
+animations = {}
+add_animation(animations, "frontier", image_dirname, "frontier", {9, 26})
+add_animation(animations, "flag", image_dirname, "flag", {10, 39}, 10)
 
 tribes:new_tribe {
    name = "frisians",
-
-   animations = {
-      frontier = {
-         pictures = path.list_files (dirname .. "images/frisians/frontier_??.png"),
-         hotspot = { 9, 26 },
-      },
-      flag = {
-         pictures = path.list_files (dirname .. "images/frisians/flag_??.png"),
-         hotspot = { 10, 39 },
-         fps = 10,
-      }
-   },
+   animations = animations,
 
    -- Image file paths for this tribe's road textures
    roads = {
       busy = {
-         "tribes/images/frisians/roadt_busy.png",
+         image_dirname .. "roadt_busy.png",
       },
       normal = {
-         "tribes/images/frisians/roadt_normal_00.png",
-         "tribes/images/frisians/roadt_normal_01.png",
+         image_dirname .. "roadt_normal_00.png",
+         image_dirname .. "roadt_normal_01.png",
       },
    },
 

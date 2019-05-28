@@ -25,14 +25,13 @@
 #include <string>
 
 #include "base/macros.h"
+#include "graphic/align.h"
 #include "scripting/lua_table.h"
 
 namespace UI {
 
 // Contains font information for a locale
 struct FontSet {
-
-	enum class Face { kSans, kSerif, kCondensed };
 
 	static constexpr const char* kFallbackFont = "DejaVu/DejaVuSans.ttf";
 

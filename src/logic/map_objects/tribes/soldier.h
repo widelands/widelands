@@ -133,7 +133,7 @@ public:
 
 	uint32_t get_rand_anim(Game& game, const std::string& name, const Soldier* soldier) const;
 
-	const DirAnimations& get_right_walk_anims(bool const ware, const Worker* w) const override;
+	const DirAnimations& get_right_walk_anims(bool const ware, Worker* w) const override;
 	uint32_t get_animation(const std::string& anim, const MapObject* mo = nullptr) const override;
 
 protected:
@@ -312,6 +312,11 @@ public:
 	void start_task_move_in_battle(Game&, CombatWalkingDir);
 	void start_task_die(Game&);
 
+	std::pair<std::unique_ptr<SoldierLevelRange>, std::unique_ptr<DirAnimations>>&
+	get_walking_animations_cache() {
+		return walking_animations_cache_;
+	}
+
 private:
 	void attack_update(Game&, State&);
 	void attack_pop(Game&, State&);
@@ -362,6 +367,9 @@ private:
 	 * object.
 	 */
 	Battle* battle_;
+
+	std::pair<std::unique_ptr<SoldierLevelRange>, std::unique_ptr<DirAnimations>>
+	   walking_animations_cache_;
 
 	static constexpr uint8_t kSoldierHealthBarWidth = 13;
 

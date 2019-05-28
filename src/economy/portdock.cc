@@ -372,52 +372,46 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 		}
 	}
 
-log("Port %u: Ship %s arrived, %lu items waiting\n", serial(), ship.get_shipname().c_str(), waiting_.size()); // NOCOM
 	ship.pop_destination(game, *this);
 	fleet_->push_next_destinations(game, ship, *this);
 	if (ship.get_current_destination(game)) {
-log("       : Ship now going to port %u\n", ship.get_current_destination(game)->serial());
 		uint32_t free_capacity = ship.descr().get_capacity() - ship.get_nritems();
-log("       : Ship has capacity %u\n", free_capacity);
-		for (auto it = waiting_.begin(); it != waiting_.end();) {
-			if (free_capacity == 0) {
-				break;
-			}
+		for (auto it = waiting_.begin(); it != waiting_.end() && free_capacity;) {
 			const PortDock* dest = it->get_destination(game);
-log("       : Shipping item %u(%s) heading to %u\n", it->object_.serial(), it->object_.get(game) ? it->object_.get(game)->descr().name().c_str() : "nullptr", dest ? dest->serial() : 0);
+			assert(dest);
 			assert(dest != this);
-			if (!dest) {
-log("       : Erasing from list of waiting items!\n");
-				it->set_location(game, warehouse_);
-				it->end_shipping(game);
-				it = waiting_.erase(it);
-			} else {
-				// Decide whether to load this item
-				int32_t time = ship.estimated_arrival_time(game, *dest);
-log("       : estimated_arrival_time %i\n", time);
-				if (time >= 0) {
-					for (Ship* s : ships_coming_) {
-						int32_t t = s->estimated_arrival_time(game, *dest, this);
-						if (t >= 0 && t < time) {
-							// A ship is coming that is planning to visit the ware's destination sooner than this one
-log("       : %s will get there sooner\n", s->get_shipname().c_str());
-							time = -1;
-							break;
-						}
+			// Decide whether to load this item
+			int32_t time = ship.estimated_arrival_time(game, *dest);
+			Path direct_route;
+			fleet_->get_path(*this, *dest, direct_route);
+			if (time < 0) {
+				time = direct_route.get_nsteps();
+			}
+			for (Ship* s : ships_coming_) {
+				int32_t t = s->estimated_arrival_time(game, *dest, this);
+				if (t < 0) {
+					// The ship is not planning to go there yet, perhaps we can ask for a detour?
+					t = s->estimated_arrival_time(game, *this);
+					assert(t >= 0);
+					assert(s->count_destinations() >= 1);
+					if (time > t + static_cast<int32_t>(direct_route.get_nsteps() * s->count_destinations())) {
+						time = -1;
+						break;
 					}
+				} else if (t < time) {
+					// A ship is coming that is planning to visit the ware's destination sooner than this one
+					time = -1;
+					break;
 				}
-				if (time < 0) {
-log("       : not loading\n");
-					++it;
-				} else {
-log("       : loading!\n");
-					ship.add_item(game, *it);
-					it = waiting_.erase(it);
-					--free_capacity;
-				}
+			}
+			if (time < 0) {
+				++it;
+			} else {
+				ship.add_item(game, *it);
+				it = waiting_.erase(it);
+				--free_capacity;
 			}
 		}
-log("       : loading complete!\n");
 	}
 #ifndef NDEBUG
 	else {
@@ -425,13 +419,11 @@ log("       : loading complete!\n");
 	}
 #endif
 
-log("       : %lu items remaining\n", waiting_.size());
 	set_need_ship(game, !waiting_.empty());
 }
 
 void PortDock::set_need_ship(Game& game, bool need) {
 	if (need && fleet_) {
-		molog("trigger fleet update\n");
 		fleet_->update(game);
 	}
 }

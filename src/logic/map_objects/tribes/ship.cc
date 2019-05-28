@@ -31,7 +31,7 @@
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
@@ -114,7 +114,7 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
 	i18n::Textdomain td("tribes");
 
 	// Read the sailing animations
-	add_directional_animation(&sail_anims_, "sail");
+	assign_directional_animation(&sail_anims_, "sail");
 
 	capacity_ = table.has_key("capacity") ? table.get_int("capacity") : 20;
 }
@@ -803,8 +803,6 @@ static std::pair<DestinationsQueue, float> shortest_order(Game& game,
                                                           const DestinationsQueue& remaining_to_visit,
                                                           const std::map<PortDock*, uint32_t> shipping_items) {
 	const size_t nr_dests = remaining_to_visit.size();
-log("NOCOM: shortest_order recursion call from %s to these %lu destinations:\n", is_on_dock ? "a dock" : "the open sea", nr_dests);
-for (const auto& pair : remaining_to_visit) log("     : – %u (priority %u)\n", pair.first->serial(), pair.second);
 	assert(nr_dests > 0);
 	if (nr_dests == 1) {
 		// Recursion break: Only one portdock left
@@ -817,7 +815,6 @@ for (const auto& pair : remaining_to_visit) log("     : – %u (priority %u)\n",
 		} else {
 			static_cast<Ship*>(start)->calculate_sea_route(game, *remaining_to_visit[0].first, &path);
 		}
-log("     : Recursion break, returning queue with this one element\n");
 		return std::pair<DestinationsQueue, float>(remaining_to_visit, prioritised_distance(
 				path, remaining_to_visit[0].second, shipping_items.at(remaining_to_visit[0].first)));
 	}
@@ -850,8 +847,6 @@ log("     : Recursion break, returning queue with this one element\n");
 	}
 	assert(best_result.second < std::numeric_limits<float>::max());
 	assert(best_result.first.size() == nr_dests);
-log("     : returning the %lu destinations in this order:\n", nr_dests);
-for (const auto& pair : best_result.first) log("     : – %u (priority %u)\n", pair.first->serial(), pair.second);
 	return best_result;
 }
 
@@ -862,18 +857,25 @@ void Ship::reorder_destinations(Game& game) {
 	for (const auto& pair : destinations_) {
 		PortDock* pd = pair.first.get(game);
 		assert(pd);
-		old_dq.push_back(std::make_pair(pd, pair.second));
-		++nr_dests;
 		uint32_t nr_items = 0;
 		for (const auto& si : items_) {
 			if (si.get_destination(game) == pd) {
 				++nr_items;
 			}
 		}
+		if (nr_items == 0 && pd->count_waiting() == 0 && !pd->expedition_started()) {
+			// We don't need to go there anymore
+			continue;
+		}
+		old_dq.push_back(std::make_pair(pd, pair.second));
+		++nr_dests;
 		shipping_items[pd] = nr_items;
 	}
 	if (nr_dests <= 1) {
-		// Nothing to do
+		destinations_.clear();
+		if (nr_dests > 0) {
+			destinations_.push_back(old_dq[0]);
+		}
 		return;
 	}
 
@@ -1229,9 +1231,8 @@ void Ship::draw(const EditorGameBase& egbase,
 		case (ShipStates::kSinkAnimation):
 			break;
 		}
-		statistics_string = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_OK.hex_value() %
-		                     statistics_string)
-		                       .str();
+		statistics_string = g_gr->styles().color_tag(
+		   statistics_string, g_gr->styles().building_statistics_style().medium_color());
 	}
 
 	do_draw_info(draw_text, shipname_, statistics_string, calc_drawpos(egbase, point_on_dst, scale),
@@ -1296,10 +1297,7 @@ void Ship::send_message(Game& game,
                         const std::string& description,
                         const std::string& picture) {
 	const std::string rt_description =
-	   (boost::format("<div padding_r=10><p><img src=%s></p></div>"
-	                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-	    picture % UI_FONT_SIZE_MESSAGE % description)
-	      .str();
+	   as_mapobject_message(picture, g_gr->images().get(picture)->width(), description);
 
 	get_owner()->add_message(game, std::unique_ptr<Message>(new Message(
 	                                  Message::Type::kSeafaring, game.get_gametime(), title, picture,

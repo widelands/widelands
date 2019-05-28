@@ -702,7 +702,6 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 			}
 			if (fallback) {
 				// This ship is employed transporting wares, lower its priority drastically
-log("NOCOM: Fleet::act found FALLBACK %s for portdock %u\n", s->get_shipname().c_str(), p->serial());
 				const uint32_t real_length = route_length;
 				uint32_t malus = 1;
 				uint32_t index = 0;
@@ -735,7 +734,6 @@ log("NOCOM: Fleet::act found FALLBACK %s for portdock %u\n", s->get_shipname().c
 					++index;
 				}
 				route_length += shortest_detour * best_index;
-log("     : shortest_detour %u (best_index %u), malus %u, route_length with detour %u (real_length %u)\n", shortest_detour, best_index, malus, route_length, real_length);
 				if (route_length + shortest_detour > real_length * malus) {
 					// Unreasonably long detour
 					continue;
@@ -820,7 +818,6 @@ void Fleet::push_next_destinations(Game& game, Ship& ship, const PortDock& from_
 			}
 		}
 	}
-log("NOCOM: Fleet::push_next_destinations\n");
 	assert(waiting_items <= total_items);
 	if (waiting_items == 0) {
 		// Nothing to do
@@ -871,12 +868,9 @@ log("NOCOM: Fleet::push_next_destinations\n");
 				++index;
 			}
 		}
-log("     : Consideration: direct_route %u, shortest_detour %u, destpair.second %u, total_items %u, malus %u, best_index %u\n", direct_route, shortest_detour, destpair.second, total_items, malus, best_index);
 		if (shortest_detour * malus * best_index <= direct_route * destpair.second * total_items) {
-log("     : Pushing %u\n", destpair.first->serial());
 			ship.push_destination(game, *destpair.first);
 		}
-else log("     : SKIPPING %u\n", destpair.first->serial());
 	}
 }
 
