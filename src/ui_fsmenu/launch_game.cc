@@ -28,7 +28,6 @@
 #include "base/wexception.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
-#include "logic/game_settings.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
@@ -62,6 +61,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 							   butw_,
 							   get_h() - get_h() * 4 / 10 - buth_,
 							   buth_),
+	 selected_lineup_(nullptr),
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
@@ -89,6 +89,20 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 	lua_ = new LuaInterface();
 
 	title_.set_font_scale(scale_factor());
+
+
+	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
+		switch (note.action) {
+		case NoteGameSettings::Action::kUser:
+			update_team(note.position);
+			break;
+		case NoteGameSettings::Action::kPlayer:
+			check_teams();
+			break;
+		default:
+			break;
+		}
+	});
 }
 
 FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
@@ -229,16 +243,39 @@ void FullscreenMenuLaunchGame::toggle_peaceful() {
 	settings_->set_peaceful_mode(peaceful_.get_state());
 }
 
+
+void FullscreenMenuLaunchGame::reset_teams(const Widelands::Map& map) {
+	selected_lineup_ = nullptr;
+	suggested_teams_dropdown_.rebuild(map.get_suggested_teams());
+	suggested_teams_dropdown_.set_enabled(settings_->can_change_map());
+
+	if (settings_->can_change_map()) {
+		// Reset teams and slot state
+		for (size_t i = 0; i < settings_->settings().players.size(); ++i) {
+			settings_->set_player_team(i, 0);
+			if (settings_->settings().players.at(i).state == PlayerSettings::State::kClosed) {
+				settings_->set_player_state(i, PlayerSettings::State::kOpen);
+			}
+		}
+
+		// If it is a scenario, auto-set the teams if there is only 1
+		if (settings_->settings().scenario && map.get_suggested_teams().size() == 1) {
+			suggested_teams_dropdown_.select(0);
+			select_teams();
+			suggested_teams_dropdown_.set_enabled(false);
+		}
+	}
+}
+
 void FullscreenMenuLaunchGame::select_teams() {
-	// NOCOM call this when a slot opens
-	// NOCOM block for scenarios
-	const Widelands::SuggestedTeamLineup* lineup = suggested_teams_dropdown_.get_lineup(suggested_teams_dropdown_.get_selected());
+	const size_t sel = suggested_teams_dropdown_.get_selected();
+	selected_lineup_ = suggested_teams_dropdown_.get_lineup(sel);
 
 	std::vector<uint8_t> teams_to_set(settings_->settings().players.size(), 0);
 
-	if (lineup != nullptr) {
-		for (size_t i = 0; i < lineup->size(); ++i) {
-			for (Widelands::PlayerNumber pl : lineup->at(i)) {
+	if (selected_lineup_ != nullptr) {
+		for (size_t i = 0; i < selected_lineup_->size(); ++i) {
+			for (PlayerSlot pl : selected_lineup_->at(i)) {
 				teams_to_set.at(pl) = i + 1;
 			}
 		}
@@ -246,8 +283,35 @@ void FullscreenMenuLaunchGame::select_teams() {
 
 	for (size_t i = 0; i < teams_to_set.size(); ++i) {
 		uint8_t new_team = teams_to_set.at(i);
+		// Set team if it has changed
 		if (new_team != settings_->settings().players.at(i).team) {
 			settings_->set_player_team(i, new_team);
+		}
+		// Automatically open/close slots according to selected teams
+		if (sel != Widelands::kNoSuggestedTeam && new_team == 0) {
+			settings_->set_player_state(i, PlayerSettings::State::kClosed);
+		} else if (settings_->settings().players.at(i).state == PlayerSettings::State::kClosed) {
+			settings_->set_player_state(i, PlayerSettings::State::kOpen);
+		}
+	}
+	// NOCOM in single player mode, bump player to nearest available slot
+}
+
+void FullscreenMenuLaunchGame::check_teams() {
+ // NOCOM check whether selected_lineup_ is still valid:
+ // NOCOM set selected to nullptr if a player changes their team
+}
+
+void FullscreenMenuLaunchGame::update_team(PlayerSlot pos) {
+	if (selected_lineup_ != nullptr && pos < settings_->settings().players.size()) {
+		assert(suggested_teams_dropdown_.is_visible());
+		for (size_t i = 0; i < selected_lineup_->size(); ++i) {
+			for (PlayerSlot pl : selected_lineup_->at(i)) {
+				if (pl == pos) {
+					settings_->set_player_team(pos, i + 1);
+					break;
+				}
+			}
 		}
 	}
 }

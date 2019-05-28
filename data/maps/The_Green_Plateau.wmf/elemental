@@ -14,3 +14,7 @@ tags="1v1,artifacts,official"
 [teams00]
 team1="0"
 team2="2"
+
+[teams01]
+team1="1"
+team2="2"

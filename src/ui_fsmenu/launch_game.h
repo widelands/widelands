@@ -24,6 +24,7 @@
 #include <string>
 
 #include "graphic/playercolor.h"
+#include "logic/game_settings.h"
 #include "logic/map.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -77,7 +78,10 @@ protected:
 	                                                 std::set<std::string> tags) const;
 
 	void toggle_peaceful();
+	void reset_teams(const Widelands::Map& map);
 	void select_teams();
+	void check_teams();
+	void update_team(PlayerSlot pos);
 
 	uint32_t butw_;
 	uint32_t buth_;
@@ -85,6 +89,7 @@ protected:
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::Checkbox peaceful_;
 	SuggestedTeamsDropdown suggested_teams_dropdown_;
+	const Widelands::SuggestedTeamLineup* selected_lineup_;
 	std::string last_win_condition_;
 	UI::Button ok_, back_;
 	UI::Textarea title_;
@@ -94,6 +99,8 @@ protected:
 	bool peaceful_mode_forbidden_;
 
 	Widelands::PlayerNumber nr_players_;
+
+	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_GAME_H

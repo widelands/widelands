@@ -318,7 +318,8 @@ void FullscreenMenuLaunchSPG::set_player_names_and_tribes_and_teams_dropdown() {
 			settings_->set_player_tribe(i, playertribe);
 		}
 	}
-	suggested_teams_dropdown_.rebuild(map.get_suggested_teams());
+
+	reset_teams(map);
 }
 
 /**
