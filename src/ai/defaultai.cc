@@ -4054,7 +4054,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     if (winner) {
         const Widelands::Coords target_coords = Coords::unhash(winner->coords_hash);
         printf("Winner to built: "); //without new line
-        flag_candidates.set_last_road_build(target_coords, gametime);
+        flag_warehouse_distance.set_road_built(winner->coords_hash, gametime);
         winner->print();
         Path& path = *new Path();
 #ifndef NDEBUG

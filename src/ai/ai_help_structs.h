@@ -907,14 +907,20 @@ private:
         uint32_t soft_expiry_time;
         uint16_t distance;
         uint32_t nearest_warehouse;
+        uint32_t last_road_built;
 
         bool update(uint32_t, uint16_t, uint32_t);
+        void road_built(uint32_t);
+        bool road_prohibited(uint32_t) const;
+
         uint16_t get(uint32_t, uint32_t*) const;
     };
   std::map<uint32_t, FlagInfo> flags_map;
 public:
   bool set_distance(uint32_t, uint16_t, uint32_t, uint32_t);
   int16_t get_distance(uint32_t, uint32_t, uint32_t*);
+  void set_road_built(uint32_t, uint32_t);
+  bool get_road_prohibited(uint32_t, uint32_t);
 
 
 };
@@ -931,9 +937,7 @@ struct FlagCandidates{
         uint16_t road_distance;
         uint16_t possible_road_distance;
         uint16_t distance_to_wh;
-        uint32_t last_road_built;
         int16_t score() const;
-        void set_last_road_build(uint32_t);
         bool is_buildable() {return possible_road_distance > 0;}
          bool operator<(const Candidate& other) const {
                    return score() > other.score();
@@ -953,7 +957,6 @@ struct FlagCandidates{
     void add_flag(uint32_t, bool, uint16_t );
     bool set_cur_road_distance(uint32_t, uint16_t );
     bool set_road_possible(uint32_t, uint16_t );
-    void set_last_road_build(uint32_t, uint32_t);
     void sort();
     uint32_t count() {return flags.size();}
     FlagCandidates::Candidate* get_winner();
