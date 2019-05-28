@@ -1430,6 +1430,8 @@ FlagWarehouseDistances::FlagInfo::FlagInfo(){
 
 
 bool FlagWarehouseDistances::FlagInfo::update(const uint32_t gametime, const uint16_t new_distance, const uint32_t nearest_wh) {
+
+	printf ("Updating nearest wh in update() %d  %d  %d\n",nearest_wh, gametime, soft_expiry_time);
 	const uint32_t new_expiry_time = gametime + kFlagDistanceExpirationPeriod;
 
 	if (gametime > soft_expiry_time) {
@@ -1438,7 +1440,7 @@ bool FlagWarehouseDistances::FlagInfo::update(const uint32_t gametime, const uin
 		soft_expiry_time = gametime + kFlagDistanceExpirationPeriod / 2;
 		nearest_warehouse = nearest_wh;
 		return true;
-	} else if (new_distance < distance) {
+	} else if (new_distance <= distance) {
 		distance = new_distance;
 		expiry_time = gametime + kFlagDistanceExpirationPeriod;
 		nearest_warehouse = nearest_wh;
@@ -1470,6 +1472,7 @@ bool FlagWarehouseDistances::FlagInfo::road_prohibited(const uint32_t gametime) 
 
 bool FlagWarehouseDistances::set_distance(const uint32_t flag_coords, const uint16_t distance,
 	uint32_t const gametime, uint32_t const nearest_warehouse){
+		printf ("nearest wh in set distance(): %d\n", nearest_warehouse);
       if (flags_map.count(flag_coords) == 0){
           flags_map[flag_coords] = FlagWarehouseDistances::FlagInfo(gametime, distance, nearest_warehouse);
           return true;

@@ -3965,7 +3965,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
             // This is a candidate, sending all necessary info to RoadCandidates
             const bool different_economy = (player_immovable->get_economy() != flag.get_economy());
             //const int32_t air_distance = map.calc_distance(flag.get_position(), reachable_coords);
-            if (!flag_candidates.has_candidate(reachable_coords.hash())) {
+            if (!flag_candidates.has_candidate(reachable_coords.hash()) && !flag_warehouse_distance.get_road_prohibited(reachable_coords.hash(), gametime)) {
                 flag_candidates.add_flag(reachable_coords.hash(), different_economy,
                 flag_warehouse_distance.get_distance(reachable_coords.hash(), gametime, &tmp_wh)); //NOCOM
             }
