@@ -24,7 +24,8 @@
 #include "graphic/gl/utils.h"
 #include "graphic/texture.h"
 
-WorkareaProgram::WorkareaProgram() {
+WorkareaProgram::WorkareaProgram()
+	: cache_(nullptr) {
 	gl_program_.build("workarea");
 
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
@@ -107,17 +108,26 @@ void WorkareaProgram::draw(uint32_t texture_id,
                            Workareas workarea,
                            const FieldsToDraw& fields_to_draw,
                            float z_value) {
+	const FieldsToDraw::Field& topleft = fields_to_draw.at(0);
+	if (cache_ && cache_->fcoords == topleft.fcoords && cache_->surface_pixel == topleft.surface_pixel &&
+			cache_->workareas == workarea) {
+		return gl_draw(texture_id, z_value);
+	}
+	cache_.reset(new WorkareasCache(workarea, topleft.fcoords, topleft.surface_pixel));
+
 	vertices_.clear();
-	vertices_.reserve(fields_to_draw.size() * 3);
 	outer_vertices_.clear();
 	{
-		size_t estimate = 0;
+		size_t estimate_inner = 0;
+		size_t estimate_outer = 0;
 		for (const WorkareasEntry& wa_map : workarea) {
+			estimate_inner += 3 * wa_map.first.size();
 			for (const auto& vector : wa_map.second) {
-				estimate += 2 * vector.size();
+				estimate_outer += 2 * vector.size();
 			}
 		}
-		outer_vertices_.reserve(estimate);
+		vertices_.reserve(estimate_inner);
+		outer_vertices_.reserve(estimate_outer);
 	}
 
 	auto emplace_triangle = [this, workarea, fields_to_draw](

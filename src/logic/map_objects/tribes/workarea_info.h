@@ -61,6 +61,11 @@ struct WorkareaPreviewData {
 	WorkareaPreviewData(const WorkareaPreviewData& other) = default;
 	WorkareaPreviewData& operator=(const WorkareaPreviewData&) = default;
 
+	bool operator==(const WorkareaPreviewData& d) const {
+		return index == d.index && coords == d.coords && use_special_coloring == d.use_special_coloring &&
+				(!use_special_coloring || special_coloring == d.special_coloring);
+	}
+
 	// The triangle this data is applied to
 	Widelands::TCoords<> coords;
 	// The underlying workarea color

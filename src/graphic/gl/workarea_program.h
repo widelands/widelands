@@ -20,6 +20,7 @@
 #ifndef WL_GRAPHIC_GL_WORKAREA_PROGRAM_H
 #define WL_GRAPHIC_GL_WORKAREA_PROGRAM_H
 
+#include <memory>
 #include <vector>
 
 #include "base/vector.h"
@@ -71,6 +72,19 @@ private:
 	// They could theoretically also be recreated.
 	std::vector<PerVertexData> vertices_;
 	std::vector<PerVertexData> outer_vertices_;
+
+	// Calculating the workareas is a bit slow, so we only recalculate when we have to
+	struct WorkareasCache {
+		WorkareasCache(const Workareas& wa, const Widelands::FCoords f, const Vector2f v)
+			: workareas(wa), fcoords(f), surface_pixel(v) {
+		}
+
+		const Workareas workareas;
+		// Viewpoint data
+		const Widelands::FCoords fcoords;
+		const Vector2f surface_pixel;
+	};
+	std::unique_ptr<WorkareasCache> cache_;
 
 	DISALLOW_COPY_AND_ASSIGN(WorkareaProgram);
 };
