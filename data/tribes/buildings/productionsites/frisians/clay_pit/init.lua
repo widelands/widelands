@@ -61,10 +61,9 @@ tribes:new_productionsite_type {
 
             "return=skipped unless economy needs clay or economy needs fish", -- Fish-producing aqua farms can stop working if the clay pits do so
             "return=failed unless site has water",
-            "consume=water",
-            "sleep=20000",
             "callworker=dig",
-            "sleep=2000",
+            "consume=water",
+            "sleep=22000",
             "animate=working 17000",
             "sleep=1000",
             "produce=clay"
