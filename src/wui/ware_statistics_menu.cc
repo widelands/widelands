@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/player.h"
@@ -249,7 +250,7 @@ void WareStatisticsMenu::layout() {
 	display_->set_hgap(std::max(3, AbstractWaresDisplay::calc_hgap(display_->get_extent().w, kPlotWidth)), false);
 	display_->get_desired_size(&w2, &h2);
 
-	main_box_->set_desired_size(std::max(w2, kPlotWidth) + 2 * kSpacing, h1 + h2 + h3 + UI_FONT_SIZE_SMALL);
+	main_box_->set_desired_size(std::max(w2, kPlotWidth) + 2 * kSpacing, h1 + h2 + h3 + text_height(UI::FontStyle::kLabel));
 	UI::UniqueWindow::layout();
 	layouting = false;
 }

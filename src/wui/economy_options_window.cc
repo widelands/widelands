@@ -284,10 +284,10 @@ void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int delta) {
 				continue;
 			}
 			if (is_wares) {
-				game.send_player_command(*new Widelands::CmdSetWareTargetQuantity(
+				game.send_player_command(new Widelands::CmdSetWareTargetQuantity(
 				   game.get_gametime(), player_->player_number(), serial_, index, new_amount));
 			} else {
-				game.send_player_command(*new Widelands::CmdSetWorkerTargetQuantity(
+				game.send_player_command(new Widelands::CmdSetWorkerTargetQuantity(
 				   game.get_gametime(), player_->player_number(), serial_, index, new_amount));
 			}
 		}
@@ -308,10 +308,10 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 			if (display_.ware_selected(index) || (second_phase && !display_.is_ware_hidden(index))) {
 				anything_selected = true;
 				if (is_wares) {
-					game.send_player_command(*new Widelands::CmdSetWareTargetQuantity(
+					game.send_player_command(new Widelands::CmdSetWareTargetQuantity(
 							game.get_gametime(), player_->player_number(), serial_, index, settings.wares.at(index)));
 				} else {
-					game.send_player_command(*new Widelands::CmdSetWorkerTargetQuantity(
+					game.send_player_command(new Widelands::CmdSetWorkerTargetQuantity(
 							game.get_gametime(), player_->player_number(), serial_, index, settings.workers.at(index)));
 				}
 			}
@@ -502,7 +502,7 @@ EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent, Ec
      table_box_(&main_box_, 0, 0, UI::Box::Vertical),
      table_(&table_box_, 0, 0, 460, 120, UI::PanelStyle::kWui),
      buttons_box_(&main_box_, 0, 0, UI::Box::Horizontal),
-     profile_name_(&buttons_box_, 0, 0, 240, 0, 0, UI::PanelStyle::kWui),
+     profile_name_(&buttons_box_, 0, 0, 240, UI::PanelStyle::kWui),
      save_(&buttons_box_, "save", 0, 0, 80, 34, UI::ButtonStyle::kWuiPrimary, _("Save")),
      cancel_(&buttons_box_, "cancel", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
      delete_(&buttons_box_, "delete", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Delete")) {
@@ -579,7 +579,7 @@ void EconomyOptionsWindow::save_targets() {
 	std::map<std::string, uint32_t> serials;
 	for (const auto& pair : predefined_targets_) {
 		if (pair.first != kDefaultEconomyProfile) {
-			serials.emplace(pair.first, serials.size());
+			serials.insert(std::make_pair(pair.first, serials.size()));
 		}
 	}
 	Section& global_section = profile.create_section(kDefaultEconomyProfile.c_str());
@@ -626,16 +626,16 @@ void EconomyOptionsWindow::read_targets() {
 		for (Widelands::DescriptionIndex di : tribe.wares()) {
 			const Widelands::WareDescr* descr = tribes.get_ware_descr(di);
 			if (descr->has_demand_check(tribe.name())) {
-				t.wares.emplace(di, descr->default_target_quantity(tribe.name()));
+				t.wares.insert(std::make_pair(di, descr->default_target_quantity(tribe.name())));
 			}
 		}
 		for (Widelands::DescriptionIndex di : tribe.workers()) {
 			const Widelands::WorkerDescr* descr = tribes.get_worker_descr(di);
 			if (descr->has_demand_check()) {
-				t.workers.emplace(di, descr->default_target_quantity());
+				t.workers.insert(std::make_pair(di, descr->default_target_quantity()));
 			}
 		}
-		predefined_targets_.emplace(kDefaultEconomyProfile, t);
+		predefined_targets_.insert(std::make_pair(kDefaultEconomyProfile, t));
 	}
 
 	std::string complete_filename = kEconomyProfilesDir + g_fs->file_separator() + player_->tribe().name();
@@ -646,24 +646,24 @@ void EconomyOptionsWindow::read_targets() {
 	if (global_section) {
 		std::map<std::string, std::string> serials;
 		while (Section::Value* v = global_section->get_next_val()) {
-			serials.emplace(std::string(v->get_name()), v->get_string());
+			serials.insert(std::make_pair(v->get_name(), v->get_string()));
 		}
 
 		for (const auto& pair : serials) {
 			Section* section = profile.get_section(pair.first);
 			PredefinedTargets t;
 			while (Section::Value* v = section->get_next_val()) {
-				const std::string name = std::string(v->get_name());
+				const std::string name(v->get_name());
 				Widelands::DescriptionIndex di = tribes.ware_index(name);
 				if (di == Widelands::INVALID_INDEX) {
 					di = tribes.worker_index(name);
 					assert(di != Widelands::INVALID_INDEX);
-					t.workers.emplace(di, v->get_natural());
+					t.workers.insert(std::make_pair(di, v->get_natural()));
 				} else {
-					t.wares.emplace(di, v->get_natural());
+					t.wares.insert(std::make_pair(di, v->get_natural()));
 				}
 			}
-			predefined_targets_.emplace(pair.second, t);
+			predefined_targets_.insert(std::make_pair(pair.second, t));
 		}
 
 		if (Section* section = profile.get_section("undeletable")) {
