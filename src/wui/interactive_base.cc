@@ -383,7 +383,8 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 	const WorkareaInfo* workarea_info = workarea.info;
 	intermediate_result[coords] = 0;
 	WorkareaInfo::size_type wa_index;
-	switch (workarea_info->size()) {
+	const size_t workarea_size = workarea_info->size();
+	switch (workarea_size) {
 	case 0:
 		return WorkareasEntry();  // no workarea
 	case 1:
@@ -435,7 +436,7 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 					break;
 				}
 			}
-			result.push_back(wd);
+			result.first.push_back(wd);
 		}
 		if (rn != intermediate_result.end()) {
 			TCoords<> tc(pair.first, Widelands::TriangleIndex::R);
@@ -446,8 +447,40 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 					break;
 				}
 			}
-			result.push_back(wd);
+			result.first.push_back(wd);
 		}
+	}
+	for (const auto& pair : *workarea_info) {
+		std::vector<Coords> border;
+		Coords c = coords;
+		for (uint32_t i = pair.first; i > 0; --i) {
+			map.get_tln(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_rn(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_brn(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_bln(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_ln(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_tln(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_trn(c, &c);
+		}
+		result.second.push_back(border);
 	}
 	return result;
 }

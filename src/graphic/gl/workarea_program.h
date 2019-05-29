@@ -52,7 +52,7 @@ private:
 
 	// Adds a vertex to the end of vertices with data from 'field' in order to apply the specified
 	// 'overlay'.
-	void add_vertex(const FieldsToDraw::Field& field, RGBAColor overlay);
+	void add_vertex(const FieldsToDraw::Field& field, RGBAColor overlay, std::vector<PerVertexData>*);
 
 	// The program used for drawing the workarea overlay.
 	Gl::Program gl_program_;
@@ -70,6 +70,7 @@ private:
 	// Objects below are kept around to avoid memory allocations on each frame.
 	// They could theoretically also be recreated.
 	std::vector<PerVertexData> vertices_;
+	std::vector<PerVertexData> outer_vertices_;
 
 	DISALLOW_COPY_AND_ASSIGN(WorkareaProgram);
 };

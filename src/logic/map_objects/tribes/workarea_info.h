@@ -71,7 +71,8 @@ struct WorkareaPreviewData {
 	bool use_special_coloring;
 	uint32_t special_coloring;
 };
-using WorkareasEntry = std::vector<WorkareaPreviewData>;
+// Pair of interior information and a per-circle list of border coords
+using WorkareasEntry = std::pair<std::vector<WorkareaPreviewData>, std::vector<std::vector<Widelands::Coords>>>;
 using Workareas = std::vector<WorkareasEntry>;
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKAREA_INFO_H

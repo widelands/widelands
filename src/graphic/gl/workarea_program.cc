@@ -36,22 +36,32 @@ WorkareaProgram::WorkareaProgram() {
 void WorkareaProgram::gl_draw(int gl_texture, float z_value) {
 	glUseProgram(gl_program_.object());
 
-	auto& gl_state = Gl::State::instance();
-	gl_state.enable_vertex_attrib_array({attr_position_, attr_overlay_});
-
-	gl_array_buffer_.bind();
-	gl_array_buffer_.update(vertices_);
-
-	Gl::vertex_attrib_pointer(
-	   attr_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
-	Gl::vertex_attrib_pointer(
-	   attr_overlay_, 4, sizeof(PerVertexData), offsetof(PerVertexData, overlay_r));
-
-	gl_state.bind(GL_TEXTURE0, gl_texture);
-
-	glUniform1f(u_z_value_, z_value);
-
-	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
+	{
+		auto& gl_state = Gl::State::instance();
+		gl_state.enable_vertex_attrib_array({attr_position_, attr_overlay_});
+		gl_array_buffer_.bind();
+		gl_array_buffer_.update(vertices_);
+		Gl::vertex_attrib_pointer(
+		   attr_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+		Gl::vertex_attrib_pointer(
+		   attr_overlay_, 4, sizeof(PerVertexData), offsetof(PerVertexData, overlay_r));
+		gl_state.bind(GL_TEXTURE0, gl_texture);
+		glUniform1f(u_z_value_, z_value);
+		glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
+	}
+	{
+		auto& gl_state = Gl::State::instance();
+		gl_state.enable_vertex_attrib_array({attr_position_, attr_overlay_});
+		gl_array_buffer_.bind();
+		gl_array_buffer_.update(outer_vertices_);
+		Gl::vertex_attrib_pointer(
+		   attr_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+		Gl::vertex_attrib_pointer(
+		   attr_overlay_, 4, sizeof(PerVertexData), offsetof(PerVertexData, overlay_r));
+		gl_state.bind(GL_TEXTURE0, gl_texture);
+		glUniform1f(u_z_value_, z_value);
+		glDrawArrays(GL_LINES, 0, outer_vertices_.size());
+	}
 }
 
 constexpr uint8_t kWorkareaTransparency = 127;
@@ -81,9 +91,9 @@ static inline RGBAColor apply_color_special(RGBAColor base, RGBAColor special) {
 	return RGBAColor(r, g, b, special.a);
 }
 
-void WorkareaProgram::add_vertex(const FieldsToDraw::Field& field, RGBAColor overlay) {
-	vertices_.emplace_back();
-	PerVertexData& back = vertices_.back();
+void WorkareaProgram::add_vertex(const FieldsToDraw::Field& field, RGBAColor overlay, std::vector<PerVertexData>* v) {
+	v->emplace_back();
+	PerVertexData& back = v->back();
 
 	back.gl_x = field.gl_position.x;
 	back.gl_y = field.gl_position.y;
@@ -99,13 +109,23 @@ void WorkareaProgram::draw(uint32_t texture_id,
                            float z_value) {
 	vertices_.clear();
 	vertices_.reserve(fields_to_draw.size() * 3);
+	outer_vertices_.clear();
+	{
+		size_t estimate = 0;
+		for (const WorkareasEntry& wa_map : workarea) {
+			for (const auto& vector : wa_map.second) {
+				estimate += 2 * vector.size();
+			}
+		}
+		outer_vertices_.reserve(estimate);
+	}
 
 	auto emplace_triangle = [this, workarea, fields_to_draw](
 	                           const FieldsToDraw::Field& field,
 	                           Widelands::TriangleIndex triangle_index) {
 		RGBAColor color(0, 0, 0, 0);
 		for (const WorkareasEntry& wa_map : workarea) {
-			for (const WorkareaPreviewData& data : wa_map) {
+			for (const WorkareaPreviewData& data : wa_map.first) {
 				if (data.coords == Widelands::TCoords<>(field.fcoords, triangle_index)) {
 					RGBAColor color_to_apply = workarea_colors[data.index];
 					if (data.use_special_coloring) {
@@ -117,12 +137,12 @@ void WorkareaProgram::draw(uint32_t texture_id,
 			}
 		}
 		if (color.a > 0) {
-			add_vertex(field, color);
-			add_vertex(fields_to_draw.at(field.brn_index), color);
+			add_vertex(field, color, &vertices_);
+			add_vertex(fields_to_draw.at(field.brn_index), color, &vertices_);
 			add_vertex(
 			   fields_to_draw.at(triangle_index == Widelands::TriangleIndex::D ? field.bln_index :
 			                                                                     field.rn_index),
-			   color);
+			   color, &vertices_);
 		}
 	};
 
@@ -134,6 +154,42 @@ void WorkareaProgram::draw(uint32_t texture_id,
 			}
 			if (field.rn_index != FieldsToDraw::kInvalidIndex) {
 				emplace_triangle(field, Widelands::TriangleIndex::R);
+			}
+		}
+	}
+
+	{
+		for (const WorkareasEntry& wa_map : workarea) {
+			int32_t index = 5;
+			for (const auto& border : wa_map.second) {
+				assert(index == 5 || index == 4 || index == 2);
+				for (auto it = border.begin(); it != border.end(); ++it) {
+					int f1 = fields_to_draw.calculate_index(it->x, it->y);
+					if (f1 == FieldsToDraw::kInvalidIndex) {
+						continue;
+					}
+					int f2;
+					if (it + 1 == border.end()) {
+						f2 = fields_to_draw.calculate_index(border.begin()->x, border.begin()->y);
+					} else {
+						f2 = fields_to_draw.calculate_index((it + 1)->x, (it + 1)->y);
+					}
+					if (f2 != FieldsToDraw::kInvalidIndex) {
+						add_vertex(fields_to_draw.at(f1), workarea_colors[index], &outer_vertices_);
+						add_vertex(fields_to_draw.at(f2), workarea_colors[index], &outer_vertices_);
+					}
+				}
+				switch (index) {
+					case 5:
+						index = 4;
+						break;
+					case 4:
+						index = 2;
+						break;
+					default:
+						index = -1;
+						break;
+				}
 			}
 		}
 	}
