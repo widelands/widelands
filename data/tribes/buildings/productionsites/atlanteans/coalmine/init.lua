@@ -58,10 +58,9 @@ tribes:new_productionsite_type {
          descname = _"mining coal",
          actions = {
             -- time total: 105 + 7 x 3.6
-            "sleep=5000",
             "return=skipped unless economy needs coal",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=30000",
+            "sleep=35000",
             -- after having the food the miners are working 7 times
             -- each cycle lasts 10 seconds for mining and producing coal
             -- and 3.6 seconds to deliver the coal to the flag
