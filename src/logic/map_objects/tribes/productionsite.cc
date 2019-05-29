@@ -427,12 +427,9 @@ void ProductionSite::calc_statistics() {
 			trend = "=";
 		}
 
-		const std::string trend_str =
-		   g_gr->styles().color_tag((boost::format(_("%i")) % trend).str(), color);
-
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
 		statistics_string_on_changed_statistics_ =
-		   (boost::format("%s\u2009%s") % perc_str % trend_str).str();
+		   (boost::format("%s\u2009%s") % perc_str % g_gr->styles().color_tag(trend, color)).str();
 	} else {
 		statistics_string_on_changed_statistics_ = perc_str;
 	}
