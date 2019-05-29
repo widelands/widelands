@@ -393,8 +393,7 @@ void EconomyOptionsWindow::update_profiles_needed(const std::string& current_pro
 	}
 	if (current_profile.empty()) {
 		// Nothing selected
-		/** TRANSLATORS: Dropdown label to indicate that nothing is selected */
-		dropdown_.add(_("–"), "");
+		dropdown_.add("–", "");
 		last_added_to_dropdown_.insert("");
 	}
 	update_profiles_select(current_profile);
