@@ -42,8 +42,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
          descname = _"felling trees",
          actions = {
-            "callworker=harvest"
-            "sleep=30000", -- Barbarian lumberjack sleeps 25000
+            "callworker=harvest",
+            "sleep=30000" -- Barbarian lumberjack sleeps 25000
          }
       },
    },

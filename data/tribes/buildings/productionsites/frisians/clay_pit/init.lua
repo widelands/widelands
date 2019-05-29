@@ -60,6 +60,7 @@ tribes:new_productionsite_type {
          actions = {
 
             "return=skipped unless economy needs clay or economy needs fish", -- Fish-producing aqua farms can stop working if the clay pits do so
+            "return=failed unless site has water",
             "consume=water",
             "sleep=20000",
             "callworker=dig",

@@ -64,6 +64,8 @@ tribes:new_productionsite_type {
          descname = _"breeding fish",
          actions = {
             "return=skipped unless economy needs fish",
+            "return=failed unless site has water:2",
+            "return=failed unless site has fruit",
             "consume=fruit water:2",
             "sleep=23000",
             "callworker=breed_in_pond",
