@@ -37,6 +37,7 @@
 #include "profile/profile.h"
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
+#include "wui/game_chat_menu.h"
 #include "wui/game_client_disconnected.h"
 #include "wui/game_exit_confirm_box.h"
 #include "wui/game_main_menu_save_game.h"
@@ -118,6 +119,13 @@ void InteractiveGameBase::add_main_menu() {
 	mainmenu_.set_image(g_gr->images().get("images/wui/menus/main_menu.png"));
 	toolbar()->add(&mainmenu_);
 
+#ifndef NDEBUG  //  only in debug builds
+	/** TRANSLATORS: An entry in the game's main menu */
+	mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole, g_gr->images().get("images/wui/menus/lua.png"), false,
+				  /** TRANSLATORS: Tooltip for Script Console in the game's main menu */
+				  "", pgettext("hotkey", "F6"));
+#endif
+
 	menu_windows_.sound_options.open_window = [this] {
 		new GameOptionsSoundMenu(*this, menu_windows_.sound_options);
 	};
@@ -140,6 +148,12 @@ void InteractiveGameBase::add_main_menu() {
 
 void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 	switch (entry) {
+#ifndef NDEBUG  //  only in debug builds
+	case MainMenuEntry::kScriptConsole: {
+		GameChatMenu::create_script_console(
+		   this, debugconsole_, *DebugConsole::get_chat_provider());
+	} break;
+#endif
 	case MainMenuEntry::kOptions: {
 		menu_windows_.sound_options.toggle();
 	} break;

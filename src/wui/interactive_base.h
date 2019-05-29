@@ -280,6 +280,10 @@ protected:
 
 	void set_toolbar_imageset(const ToolbarImageset& imageset);
 
+#ifndef NDEBUG  //  only in debug builds
+	UI::UniqueWindow::Registry debugconsole_;
+#endif
+
 private:
 	void play_sound_effect(const NoteSound& note) const;
 	void resize_chat_overlay();
@@ -360,7 +364,6 @@ private:
 	Widelands::CoordPath* buildroad_;  //  path for the new road
 	Widelands::PlayerNumber road_build_player_;
 
-	UI::UniqueWindow::Registry debugconsole_;
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
 };
