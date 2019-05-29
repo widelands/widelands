@@ -35,10 +35,8 @@
 class Image;
 class LuaTable;
 
-#define WARE_MENU_PIC_WIDTH 24   //!< Default width for ware's menu icons
-#define WARE_MENU_PIC_HEIGHT 24  //!< Default height for ware's menu icons
-#define WARE_MENU_PIC_PAD_X 3    //!< Default padding between menu icons
-#define WARE_MENU_PIC_PAD_Y 4    //!< Default padding between menu icons
+constexpr int kWareMenuPicWidth = 24;   //!< Default width for ware's menu icons
+constexpr int kWareMenuPicHeight = 24;  //!< Default height for ware's menu icons
 
 namespace Widelands {
 
