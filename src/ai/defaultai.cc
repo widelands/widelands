@@ -3492,7 +3492,7 @@ void DefaultAI::check_flag_distances(const uint32_t gametime){
 				remaining_flags.pop();
 			}
 
-			printf("==Checked flags: %d, warehouses: %lu, time: %d s\n", checked_flags, warehousesites.size(), gametime / 1000);
+			printf("%d: Checked flags: %d, warehouses: %lu, time: %d s\n", player_number(), checked_flags, warehousesites.size(), gametime / 1000);
 		}
 	}
 }
@@ -3926,7 +3926,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     printf ("* Distance to wh from tested flag %dx%d: %d, checkradius: %d\n",
      flag.get_position().x, flag.get_position().y, current_flag_dist_to_wh, checkradius);
 
-    FlagCandidates flag_candidates(min_reduction);
+    FlagCandidates flag_candidates(current_flag_dist_to_wh);
 
     FindNodeWithFlagOrRoad functor;
     CheckStepRoadAI check(player_, MOVECAPS_WALK, true);

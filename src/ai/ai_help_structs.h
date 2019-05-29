@@ -926,7 +926,7 @@ public:
 };
 struct FlagCandidates{
 
-    explicit FlagCandidates(uint16_t wd) : distance_to_wh(wd) {}
+    explicit FlagCandidates(uint16_t wd) : start_flag_dist_to_wh(wd) {}
 
       struct Candidate{
         Candidate() = delete;
@@ -934,9 +934,9 @@ struct FlagCandidates{
         uint32_t coords_hash;
         bool different_economy;
         uint16_t start_flag_dist_to_wh;
-        uint16_t road_distance;
+        uint16_t flag_to_flag_road_distance;
         uint16_t possible_road_distance;
-        uint16_t distance_to_wh;
+        uint16_t cand_flag_distance_to_wh;
         int16_t score() const;
         bool is_buildable() {return possible_road_distance > 0;}
          bool operator<(const Candidate& other) const {
@@ -945,13 +945,13 @@ struct FlagCandidates{
         void print(){
             printf  (" Candidate flag at %3dx%3d: dist. to wh %3d, distance from target flag: %3d, poss. road length: %3d, score: %3d, Different ec: %s\n",
                    Coords::unhash(coords_hash).x, Coords::unhash(coords_hash).y,
-                     distance_to_wh, start_flag_dist_to_wh, possible_road_distance, score(),
+                     cand_flag_distance_to_wh, start_flag_dist_to_wh, possible_road_distance, score(),
                      (different_economy)? "Y": "N");
         }
     };
 
     std::vector<Candidate> flags;
-    uint16_t distance_to_wh;
+    uint16_t start_flag_dist_to_wh;
 
     bool has_candidate(uint32_t);
     void add_flag(uint32_t, bool, uint16_t );

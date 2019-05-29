@@ -1,4 +1,4 @@
-  /*
+/*
    * Copyright (C) 2007-2019 by the Widelands Development Team
    *
    * This program is free software; you can redistribute it and/or
@@ -106,12 +106,15 @@ BOOST_AUTO_TEST_CASE(flag_distance_expiration_extension)
     FlagWarehouseDistances fw;
     uint32_t tmp_wh;
     BOOST_CHECK_EQUAL( fw.set_distance(1,2,0,3), true);
+    BOOST_CHECK_EQUAL( fw.set_distance(1,2,0,3), false); // cannot reset the same distance in the same time
     //get_distance(const uint32_t flag_coords, uint32_t gametime, uint32_t* nw)
 
     // Now we are after expiration time
     BOOST_CHECK_EQUAL( fw.get_distance(1,kFlagDistanceExpirationPeriod + 3,&tmp_wh), 1000);
 
     //setting distance 2 time shortly one after another
+    //set_distance(const uint32_t flag_coords, const uint16_t distance,
+    //	uint32_t const gametime, uint32_t const nearest_warehouse)
     BOOST_CHECK_EQUAL( fw.set_distance(1,2,kFlagDistanceExpirationPeriod + 3,5), true);
     BOOST_CHECK_EQUAL( fw.set_distance(1,2,kFlagDistanceExpirationPeriod + 10,5), true);
     // current expiry_time should be 2*kFlagDistanceExpirationPeriod + 10
@@ -150,23 +153,54 @@ BOOST_AUTO_TEST_CASE(flag_candidate_init)
     BOOST_CHECK_EQUAL( fc.count(), 0);
 }
 BOOST_AUTO_TEST_CASE(flag_candidate_winner_score)
-/* setting the same distance restart the expiry_period */
 {
-    FlagCandidates fc = FlagCandidates(10);
-    fc.add_flag(11,false,10);
-    BOOST_CHECK_EQUAL(fc.set_cur_road_distance(11,25), true);
+    const uint16_t kCurFlDistToWh = 25;
+    const uint16_t kStartFlagToWh = 10;
+
+    const uint16_t kPosRoadDist = 5;
+    const uint16_t kCurRoadDistFlToFl = 17;
+
+    const uint32_t kTestedCoords = 11;
+
+    FlagCandidates fc = FlagCandidates(kStartFlagToWh);
+
+
+    // coord, different economy, distance to wh
+    fc.add_flag(kTestedCoords, false, kCurFlDistToWh);
+    // setting coords, dist
+    BOOST_CHECK_EQUAL(fc.set_cur_road_distance(kTestedCoords,kCurRoadDistFlToFl), true);
     BOOST_CHECK_EQUAL(fc.set_cur_road_distance(1,5), false); //we cannot set distance to unknown flag
     BOOST_CHECK_EQUAL(fc.get_winner(), nullptr); // road not possible
-    BOOST_CHECK_EQUAL(fc.set_road_possible(11,5), true);
-    BOOST_VERIFY(fc.get_winner()); // now it is possible
-    BOOST_CHECK_EQUAL(fc.get_winner()->coords_hash, 11); // now it is possible
-    BOOST_CHECK_EQUAL(fc.get_winner()->start_flag_dist_to_wh, 11); // now it is possible
-    BOOST_CHECK_EQUAL(fc.get_winner()->distance_to_wh, 11);
-    BOOST_CHECK_EQUAL(fc.get_winner()->road_distance, 10);
-    BOOST_CHECK_EQUAL(fc.get_winner()->possible_road_distance, 10);
-    BOOST_CHECK_EQUAL(fc.get_winner()->different_economy, true);
-    BOOST_CHECK_EQUAL(fc.get_winner()->score(), 10); // now it is possible
+    // set length of possible road
+    BOOST_CHECK_EQUAL(fc.set_road_possible(kTestedCoords,kPosRoadDist), true);
+    BOOST_VERIFY(fc.get_winner());
+    BOOST_CHECK_EQUAL(fc.get_winner()->start_flag_dist_to_wh, kStartFlagToWh);
+    BOOST_CHECK_EQUAL(fc.get_winner()->cand_flag_distance_to_wh, kCurFlDistToWh);
+    BOOST_CHECK_EQUAL(fc.get_winner()->flag_to_flag_road_distance, kCurRoadDistFlToFl);
+    BOOST_CHECK_EQUAL(fc.get_winner()->possible_road_distance, kPosRoadDist);
+    BOOST_CHECK_EQUAL(fc.get_winner()->coords_hash, kTestedCoords);
+    BOOST_CHECK_EQUAL(fc.get_winner()->different_economy, false);
+
+    BOOST_CHECK_EQUAL(fc.get_winner()->score(),
+                      kCurFlDistToWh - kStartFlagToWh - kPosRoadDist + kCurRoadDistFlToFl);
 
 }
+BOOST_AUTO_TEST_CASE(flag_candidates_sorting)
+{
+    FlagCandidates fc = FlagCandidates(10);
+
+    fc.add_flag(0,false,10);
+    fc.add_flag(1,false,10);
+    fc.add_flag(2,false,10);
+    BOOST_CHECK_EQUAL(fc.set_cur_road_distance(0, 5), true);
+    BOOST_CHECK_EQUAL(fc.set_cur_road_distance(1, 5), true);
+    BOOST_CHECK_EQUAL(fc.set_cur_road_distance(2, 5), true);
+    BOOST_CHECK_EQUAL(fc.set_road_possible(0,4), true);
+    BOOST_CHECK_EQUAL(fc.set_road_possible(1,2), true);
+    BOOST_CHECK_EQUAL(fc.set_road_possible(2,3), true);
+    BOOST_CHECK_EQUAL(fc.get_winner()->coords_hash, 1); // sorted done automatically
+    BOOST_CHECK_EQUAL(fc.count(), 3);
+}
+
 
 BOOST_AUTO_TEST_SUITE_END()
