@@ -15,7 +15,7 @@ tribes:new_productionsite_type {
       blackwood = 1,
       granite = 2,
       grout = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       blackwood = 1,

@@ -248,7 +248,7 @@ public:
 
 	void enqueue_command(Command* const);
 
-	void send_player_command(Widelands::PlayerCommand&);
+	void send_player_command(Widelands::PlayerCommand*);
 
 	void send_player_bulldoze(PlayerImmovable&, bool recurse = false);
 	void send_player_dismantle(PlayerImmovable&);
@@ -273,7 +273,7 @@ public:
 	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);
 	void send_player_drop_soldier(Building&, int32_t);
 	void send_player_change_soldier_capacity(Building&, int32_t);
-	void send_player_enemyflagaction(const Flag&, PlayerNumber, uint32_t count);
+	void send_player_enemyflagaction(const Flag&, PlayerNumber, const std::vector<Serial>&);
 
 	void send_player_ship_scouting_direction(Ship&, WalkingDir);
 	void send_player_ship_construct_port(Ship&, Coords);

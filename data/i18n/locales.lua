@@ -345,7 +345,13 @@ return {
    },
 
    sr = {
-      name = "српски",
+      name = "Srpski",
+      sort_name = "Srpski",
+      font = "default"
+   },
+
+   sr_RS = {
+      name = "Српски",
       sort_name = "Srpski",
       font = "default"
    },

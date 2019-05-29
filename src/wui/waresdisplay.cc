@@ -412,12 +412,14 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 	}
 
 	//  draw a background
-	const Image* bgpic = g_gr->images().get(draw_selected ? "images/wui/ware_list_bg_selected.png" :
-	                                                        "images/wui/ware_list_bg.png");
-	uint16_t w = bgpic->width();
+	const UI::WareInfoStyleInfo& style =
+	   draw_selected ? g_gr->styles().ware_info_style(UI::WareInfoStyle::kHighlight) :
+	                   g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal);
+
+	uint16_t w = style.icon_background_image()->width();
 
 	const Vector2i p = ware_position(id);
-	dst.blit(p, bgpic);
+	dst.blit(p, style.icon_background_image());
 
 	const Image* icon = type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(id)->icon() :
 	                                                   tribe_.get_ware_descr(id)->icon();
@@ -428,7 +430,7 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 	              info_color_for_ware(id));
 
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh->render(as_waresinfo(info_for_ware(id)));
+	   UI::g_fh->render(as_richtext_paragraph(info_for_ware(id), style.info_font()));
 	rendered_text->draw(dst, Vector2i(p.x + w - rendered_text->width() - 1,
 	                                  p.y + kWareMenuPicHeight + kWareMenuInfoSize + 1 -
 	                                     rendered_text->height()));
@@ -478,7 +480,7 @@ WaresDisplay::WaresDisplay(UI::Panel* const parent,
 }
 
 RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::DescriptionIndex /* ware */) {
-	return RGBColor(0, 0, 0);
+	return g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal).info_background();
 }
 
 WaresDisplay::~WaresDisplay() {
@@ -533,14 +535,18 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 	std::vector<Widelands::DescriptionIndex>::iterator j;
 	Widelands::TribeDescr::WaresOrder order = tribe.wares_order();
 
+	const UI::WareInfoStyleInfo& style = g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal);
+
 	for (i = order.begin(); i != order.end(); ++i)
 		for (j = i->begin(); j != i->end(); ++j)
 			if ((c = map.find(*j)) != map.end()) {
 				ret += "<div width=30 padding=2><p align=center>"
-				       "<div width=26 background=454545><p align=center><img src=\"" +
+				       "<div width=26 background=" +
+				       style.icon_background().hex_value() + "><p align=center><img src=\"" +
 				       tribe.get_ware_descr(c->first)->icon_filename() +
-				       "\"></p></div><div width=26 background=000000><p><font size=9>" +
-				       get_amount_string(c->second) + "</font></p></div></p></div>";
+				       "\"></p></div><div width=26 background=" + style.info_background().hex_value() +
+				       "><p>" + style.info_font().as_font_tag(get_amount_string(c->second)) +
+				       "</p></div></p></div>";
 			}
 	return ret;
 }

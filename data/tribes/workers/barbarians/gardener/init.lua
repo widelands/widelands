@@ -16,8 +16,8 @@ animations = {
       fps = 5
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {8, 23}, 10)
-add_walking_animations(animations, "walkload", dirname, "walkload", {7, 23}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {8, 23}, 10)
+add_directional_animation(animations, "walkload", dirname, "walkload", {7, 23}, 10)
 
 
 tribes:new_worker_type {
@@ -49,7 +49,7 @@ tribes:new_worker_type {
          "animate=harvesting 12000",
          "callobject=harvest",
          "animate=harvesting 1",
-         "createware=thatch_reed",
+         "createware=reed",
          "return"
       },
    },

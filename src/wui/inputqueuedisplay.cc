@@ -27,6 +27,7 @@
 #include "economy/request.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "logic/player.h"
 #include "wui/interactive_gamebase.h"
 
@@ -242,19 +243,28 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	uint32_t x = Border;
 	uint32_t y = Border + (total_height_ - 2 * Border - kWareMenuPicWidth) / 2;
 
-	boost::format tooltip_format("%s<br><p><font size=%d bold=0>%s<br>%s</font></p>");
+	boost::format tooltip_format("<p>%s%s%s</p>");
 
 	decrease_max_fill_ = new UI::Button(
 	   this, "decrease_max_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
 	   UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_left.png"),
-	   (tooltip_format
-	    /** TRANSLATORS: Button tooltip in in a building's wares input queue */
-	    % _("Decrease the number of wares you want to be stored here") %
-	    UI_FONT_SIZE_MESSAGE
-	    /** TRANSLATORS: Button tooltip in in a building's wares input queue - option explanation */
-	    % _("Hold down Shift to decrease all ware types at the same time")
-	    /** TRANSLATORS: Button tooltip in in a building's wares input queue - option explanation */
-	    % _("Hold down Ctrl to allow none of this ware"))
+	   (tooltip_format %
+	    g_gr->styles()
+	       .font_style(UI::FontStyle::kTooltipHeader)
+	       .as_font_tag(
+	          /** TRANSLATORS: Button tooltip in in a building's wares input queue */
+	          _("Decrease the number of wares you want to be stored here"))
+
+	    %
+	    as_listitem(
+	       /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+	          explanation */
+	       _("Hold down Shift to decrease all ware types at the same time"), UI::FontStyle::kTooltip)
+
+	    % as_listitem(
+	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+	            explanation */
+	         _("Hold down Ctrl to allow none of this ware"), UI::FontStyle::kTooltip))
 	      .str());
 	decrease_max_fill_->sigclicked.connect(
 	   boost::bind(&InputQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
@@ -265,13 +275,23 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	   this, "increase_max_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
 	   UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_right.png"),
 	   (tooltip_format
-	    /** TRANSLATORS: Button tooltip in a building's wares input queue */
-	    % _("Increase the number of wares you want to be stored here") %
-	    UI_FONT_SIZE_MESSAGE
-	    /** TRANSLATORS: Button tooltip in in a building's wares input queue - option explanation */
-	    % _("Hold down Shift to increase all ware types at the same time")
-	    /** TRANSLATORS: Button tooltip in in a building's wares input queue - option explanation */
-	    % _("Hold down Ctrl to allow all of this ware"))
+
+	    % g_gr->styles()
+	         .font_style(UI::FontStyle::kTooltipHeader)
+	         .as_font_tag(
+	            /** TRANSLATORS: Button tooltip in a building's wares input queue */
+	            _("Increase the number of wares you want to be stored here"))
+
+	    %
+	    as_listitem(
+	       /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+	          explanation */
+	       _("Hold down Shift to increase all ware types at the same time"), UI::FontStyle::kTooltip)
+
+	    % as_listitem(
+	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+	            explanation */
+	         _("Hold down Ctrl to allow all of this ware"), UI::FontStyle::kTooltip))
 	      .str());
 	increase_max_fill_->sigclicked.connect(
 	   boost::bind(&InputQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));

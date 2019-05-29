@@ -29,14 +29,17 @@
 #include "network/netclient_interface.h"
 
 struct GameClientImpl;
+class InteractiveGameBase;
 
-// TODO(unknown): Use composition instead of inheritance
 /**
  * GameClient manages the lifetime of a network game in which this computer
  * participates as a client.
  *
  * This includes running the game setup screen and the actual game after
  * launch, as well as dealing with the actual network protocol.
+ *
+ * @param internet TODO(Klaus Halfmann): true: coonnect into the open internet via proxy, false
+ * connect locally / via IP.
  */
 struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
 	GameClient(const std::pair<NetAddress, NetAddress>& host,
@@ -50,7 +53,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	// GameController interface
 	void think() override;
-	void send_player_command(Widelands::PlayerCommand&) override;
+	void send_player_command(Widelands::PlayerCommand*) override;
 	int32_t get_frametime() override;
 	GameController::GameType get_game_type() override;
 
@@ -115,7 +118,21 @@ private:
 
 	void sync_report_callback();
 
-	void handle_packet(RecvPacket&);
+	void handle_hello(RecvPacket& packet);
+	void handle_disconnect(RecvPacket& packet);
+	void handle_ping(RecvPacket& packet);
+	void handle_new_file(RecvPacket& packet);
+	void handle_syncrequest(RecvPacket& packet);
+	void handle_setting_map(RecvPacket& packet);
+	void handle_file_part(RecvPacket& packet);
+	void handle_setting_tribes(RecvPacket& packet);
+	void handle_setting_allplayers(RecvPacket& packet);
+	void handle_playercommand(RecvPacket& packet);
+	void handle_chat(RecvPacket& packet);
+	void handle_system_message(RecvPacket& packet);
+	void handle_desync(RecvPacket& packet);
+	void handle_packet(RecvPacket& packet);
+
 	void handle_network();
 	void send_time();
 	void receive_one_player(uint8_t number, StreamRead&);
@@ -125,9 +142,7 @@ private:
 	                bool sendreason = true,
 	                bool showmsg = true);
 
-	std::unique_ptr<NetTransferFile> file_;
 	GameClientImpl* d;
-	bool internet_;
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMECLIENT_H

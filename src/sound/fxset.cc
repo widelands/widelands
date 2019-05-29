@@ -36,25 +36,15 @@
  * \param random: Randomize the time last played a bit to prevent sound onslaught at game start
  */
 FXset::FXset(const std::string& path, uint32_t random) : last_used_(random % 2000) {
-	// Check directory
-	std::string directory = FileSystem::fs_dirname(path);
-	if (!g_fs->is_directory(directory)) {
-		throw Widelands::GameDataError(
-		   "SoundHandler: Can't load files from %s, not a directory!", directory.c_str());
-	}
-
-	// Find files
-	std::string base_filename = FileSystem::fs_filename(path.c_str());
-	boost::regex re(base_filename + "_\\d+\\.ogg");
-	paths_ = filter(g_fs->list_directory(directory), [&re](const std::string& fn) {
-		return boost::regex_match(FileSystem::fs_filename(fn.c_str()), re);
-	});
+	const std::string dirname = FileSystem::fs_dirname(path.c_str());
+	const std::string basename = FileSystem::fs_filename(path.c_str());
+	paths_ = g_fs->get_sequential_files(dirname, basename, "ogg");
 
 	// Ensure that we have at least 1 file
 	if (paths_.empty()) {
 		throw Widelands::GameDataError(
 		   "FXset: No files matching the pattern '%s_<numbers>.ogg' found in directory %s\n",
-		   base_filename.c_str(), directory.c_str());
+		   basename.c_str(), dirname.c_str());
 	}
 
 #ifndef NDEBUG
@@ -81,7 +71,7 @@ uint32_t FXset::ticks_since_last_play() const {
 	return SDL_GetTicks() - last_used_;
 }
 
-Mix_Chunk* FXset::get_fx(uint32_t random) {
+void FXset::load_sound_files() {
 	if (!paths_.empty()) {
 		// Load sounds from paths if this FX hasn't been played yet
 		for (const std::string& path : paths_) {
@@ -91,8 +81,11 @@ Mix_Chunk* FXset::get_fx(uint32_t random) {
 		// We don't need the paths any more
 		paths_.clear();
 	}
-
 	assert(paths_.empty());
+}
+
+Mix_Chunk* FXset::get_fx(uint32_t random) {
+	load_sound_files();
 
 	if (fxs_.empty()) {
 		return nullptr;

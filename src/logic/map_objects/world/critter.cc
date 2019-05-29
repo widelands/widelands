@@ -101,7 +101,7 @@ CritterDescr::CritterDescr(const std::string& init_descname,
                            const World& world)
    : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table),
      editor_category_(nullptr) {
-	add_directional_animation(&walk_anims_, "walk");
+	assign_directional_animation(&walk_anims_, "walk");
 
 	add_attributes(
 	   table.get_table("attributes")->array_entries<std::string>(), std::set<uint32_t>());
@@ -248,7 +248,7 @@ void Critter::roam_update(Game& game, State& state) {
 	}
 	state.ivar1 = 1;
 	return start_task_idle(
-	   game, descr().get_animation("idle"), idle_time_min + game.logic_rand() % idle_time_rnd);
+	   game, descr().get_animation("idle", this), idle_time_min + game.logic_rand() % idle_time_rnd);
 }
 
 void Critter::init_auto_task(Game& game) {
