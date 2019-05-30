@@ -23,6 +23,7 @@
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "graphic/texture.h"
+#include "wui/mapviewpixelconstants.h"
 
 WorkareaProgram::WorkareaProgram()
 	: cache_(nullptr) {
@@ -61,7 +62,7 @@ void WorkareaProgram::gl_draw(int gl_texture, float z_value) {
 		   attr_overlay_, 4, sizeof(PerVertexData), offsetof(PerVertexData, overlay_r));
 		gl_state.bind(GL_TEXTURE0, gl_texture);
 		glUniform1f(u_z_value_, z_value);
-		glDrawArrays(GL_LINES, 0, outer_vertices_.size());
+		glDrawArrays(GL_TRIANGLES, 0, outer_vertices_.size());
 	}
 }
 
@@ -92,22 +93,77 @@ static inline RGBAColor apply_color_special(RGBAColor base, RGBAColor special) {
 	return RGBAColor(r, g, b, special.a);
 }
 
-void WorkareaProgram::add_vertex(const FieldsToDraw::Field& field, RGBAColor overlay, std::vector<PerVertexData>* v) {
+void WorkareaProgram::add_vertex(const FieldsToDraw::Field& field, RGBAColor overlay,
+		std::vector<PerVertexData>* v, Vector2f offset, Vector2f viewport) {
 	v->emplace_back();
 	PerVertexData& back = v->back();
 
-	back.gl_x = field.gl_position.x;
-	back.gl_y = field.gl_position.y;
+	if (offset.x == 0 && offset.y == 0) {
+		back.gl_x = field.gl_position.x;
+		back.gl_y = field.gl_position.y;
+	} else {
+		back.gl_x = field.surface_pixel.x + offset.x;
+		back.gl_y = field.surface_pixel.y + offset.y;
+		pixel_to_gl_renderbuffer(viewport.x, viewport.y, &back.gl_x, &back.gl_y);
+	}
 	back.overlay_r = overlay.r / 255.f;
 	back.overlay_g = overlay.g / 255.f;
 	back.overlay_b = overlay.b / 255.f;
 	back.overlay_a = overlay.a / 255.f;
 }
 
+constexpr float kBorderStrength = 2.8f;
+
+// Helper functions to get the border thickness right
+constexpr float kOffsetFactor = static_cast<float>(std::sqrt(kBorderStrength * kBorderStrength /
+		(kTriangleWidth * kTriangleWidth + kTriangleHeight * kTriangleHeight)));
+static Vector2f offset(size_t radius, size_t pos) {
+	if (pos % radius == 0) {
+		switch (pos / radius) {
+			case 0: // North/Northwest
+				return Vector2f(-kTriangleWidth * (2 * kOffsetFactor -
+						kBorderStrength / kTriangleHeight), -kBorderStrength);
+			case 1: // North/Northeast
+				return Vector2f(kTriangleWidth * (2 * kOffsetFactor -
+						kBorderStrength / kTriangleHeight), -kBorderStrength);
+			case 2: // Northeast/Southeast
+				return Vector2f(kBorderStrength, 0);
+			case 3: // Southeast/South
+				return Vector2f(kTriangleWidth * (2 * kOffsetFactor -
+						kBorderStrength / kTriangleHeight), kBorderStrength);
+			case 4: // South/Southwest
+				return Vector2f(-kTriangleWidth * (2 * kOffsetFactor -
+						kBorderStrength / kTriangleHeight), kBorderStrength);
+			case 5: // Southwest/Northwest
+				return Vector2f(-kBorderStrength, 0);
+			default:
+				NEVER_HERE();
+		}
+	} else {
+		switch (pos / radius) {
+			case 0: // North
+				return Vector2f(0, -kBorderStrength);
+			case 1: // Northeast
+				return Vector2f(kOffsetFactor * kTriangleWidth, -kOffsetFactor * kTriangleHeight);
+			case 2: // Southeast
+				return Vector2f(kOffsetFactor * kTriangleWidth, kOffsetFactor * kTriangleHeight);
+			case 3: // South
+				return Vector2f(0, kBorderStrength);
+			case 4: // Southwest
+				return Vector2f(-kOffsetFactor * kTriangleWidth, kOffsetFactor * kTriangleHeight);
+			case 5: // Northwest
+				return Vector2f(-kOffsetFactor * kTriangleWidth, -kOffsetFactor * kTriangleHeight);
+			default:
+				NEVER_HERE();
+		}
+	}
+}
+
 void WorkareaProgram::draw(uint32_t texture_id,
                            Workareas workarea,
                            const FieldsToDraw& fields_to_draw,
-                           float z_value) {
+                           float z_value,
+                           Vector2f rendertarget_dimension) {
 	const FieldsToDraw::Field& topleft = fields_to_draw.at(0);
 	if (cache_ && cache_->fcoords == topleft.fcoords && cache_->surface_pixel == topleft.surface_pixel &&
 			cache_->workareas == workarea) {
@@ -121,9 +177,9 @@ void WorkareaProgram::draw(uint32_t texture_id,
 		size_t estimate_inner = 0;
 		size_t estimate_outer = 0;
 		for (const WorkareasEntry& wa_map : workarea) {
-			estimate_inner += 3 * wa_map.first.size();
+			estimate_inner += 3 * wa_map.first.size(); // One triangle per entry
 			for (const auto& vector : wa_map.second) {
-				estimate_outer += 2 * vector.size();
+				estimate_outer += 6 * vector.size(); // Two triangles per border segment
 			}
 		}
 		vertices_.reserve(estimate_inner);
@@ -169,11 +225,18 @@ void WorkareaProgram::draw(uint32_t texture_id,
 	}
 
 	{
+		// Draw the border. Since a basic line is too narrow to be properly visible,
+		// we draw two triangles to give the line some thickness.
 		for (const WorkareasEntry& wa_map : workarea) {
 			int32_t index = 5;
 			for (const auto& border : wa_map.second) {
 				assert(index == 5 || index == 4 || index == 2);
-				for (auto it = border.begin(); it != border.end(); ++it) {
+				RGBAColor& color = workarea_colors[index];
+				const size_t nr_border_coords = border.size();
+				const size_t radius = nr_border_coords / 6;
+				assert(radius * 6 == nr_border_coords);
+				size_t border_pos = 0;
+				for (auto it = border.begin(); it != border.end(); ++it, ++border_pos) {
 					int f1 = fields_to_draw.calculate_index(it->x, it->y);
 					if (f1 == FieldsToDraw::kInvalidIndex) {
 						continue;
@@ -185,8 +248,16 @@ void WorkareaProgram::draw(uint32_t texture_id,
 						f2 = fields_to_draw.calculate_index((it + 1)->x, (it + 1)->y);
 					}
 					if (f2 != FieldsToDraw::kInvalidIndex) {
-						add_vertex(fields_to_draw.at(f1), workarea_colors[index], &outer_vertices_);
-						add_vertex(fields_to_draw.at(f2), workarea_colors[index], &outer_vertices_);
+						const FieldsToDraw::Field& field1 = fields_to_draw.at(f1);
+						const FieldsToDraw::Field& field2 = fields_to_draw.at(f2);
+						Vector2f off1 = offset(radius, border_pos);
+						Vector2f off2 = offset(radius, (border_pos + 1) % nr_border_coords);
+						add_vertex(field1, color, &outer_vertices_);
+						add_vertex(field1, color, &outer_vertices_, off1, rendertarget_dimension);
+						add_vertex(field2, color, &outer_vertices_, off2, rendertarget_dimension);
+						add_vertex(field1, color, &outer_vertices_);
+						add_vertex(field2, color, &outer_vertices_);
+						add_vertex(field2, color, &outer_vertices_, off2, rendertarget_dimension);
 					}
 				}
 				switch (index) {
