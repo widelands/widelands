@@ -376,40 +376,49 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 	fleet_->push_next_destinations(game, ship, *this);
 	if (ship.get_current_destination(game)) {
 		uint32_t free_capacity = ship.descr().get_capacity() - ship.get_nritems();
+		std::unordered_map<const PortDock*, bool> destination_check;
 		for (auto it = waiting_.begin(); it != waiting_.end() && free_capacity;) {
 			const PortDock* dest = it->get_destination(game);
 			assert(dest);
 			assert(dest != this);
 			// Decide whether to load this item
-			int32_t time = ship.estimated_arrival_time(game, *dest);
-			Path direct_route;
-			fleet_->get_path(*this, *dest, direct_route);
-			if (time < 0) {
-				time = direct_route.get_nsteps();
-			}
-			for (Ship* s : ships_coming_) {
-				int32_t t = s->estimated_arrival_time(game, *dest, this);
-				if (t < 0) {
-					// The ship is not planning to go there yet, perhaps we can ask for a detour?
-					t = s->estimated_arrival_time(game, *this);
-					assert(t >= 0);
-					assert(s->count_destinations() >= 1);
-					if (time > t + static_cast<int32_t>(direct_route.get_nsteps() * s->count_destinations())) {
+			bool load;
+			auto dc = destination_check.find(dest);
+			if (dc != destination_check.end()) {
+				load = dc->second;
+			} else {
+				int32_t time = ship.estimated_arrival_time(game, *dest);
+				Path direct_route;
+				fleet_->get_path(*this, *dest, direct_route);
+				if (time < 0) {
+					time = direct_route.get_nsteps();
+				}
+				for (Ship* s : ships_coming_) {
+					int32_t t = s->estimated_arrival_time(game, *dest, this);
+					if (t < 0) {
+						// The ship is not planning to go there yet, perhaps we can ask for a detour?
+						t = s->estimated_arrival_time(game, *this);
+						assert(t >= 0);
+						assert(s->count_destinations() >= 1);
+						if (time > t + static_cast<int32_t>(direct_route.get_nsteps() * s->count_destinations())) {
+							time = -1;
+							break;
+						}
+					} else if (t < time) {
+						// A ship is coming that is planning to visit the ware's destination sooner than this one
 						time = -1;
 						break;
 					}
-				} else if (t < time) {
-					// A ship is coming that is planning to visit the ware's destination sooner than this one
-					time = -1;
-					break;
 				}
+				load = time >= 0;
+				destination_check.emplace(dest, load);
 			}
-			if (time < 0) {
-				++it;
-			} else {
+			if (load) {
 				ship.add_item(game, *it);
 				it = waiting_.erase(it);
 				--free_capacity;
+			} else {
+				++it;
 			}
 		}
 	}
@@ -453,8 +462,18 @@ uint32_t PortDock::count_waiting(WareWorker waretype, DescriptionIndex wareindex
 
 /**
  * Return the number of wares or workers waiting at the dock.
+ * If a destination dock is specified, count only items heading for this destination.
  */
-uint32_t PortDock::count_waiting() const {
+uint32_t PortDock::count_waiting(const PortDock* dest) const {
+	if (dest) {
+		uint32_t w = 0;
+		for (const ShippingItem& si : waiting_) {
+			if (si.destination_dock_.serial() == dest->serial()) {
+				++w;
+			}
+		}
+		return w;
+	}
 	return waiting_.size();
 }
 

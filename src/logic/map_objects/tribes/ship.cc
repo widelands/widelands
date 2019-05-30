@@ -851,25 +851,26 @@ static std::pair<DestinationsQueue, float> shortest_order(Game& game,
 }
 
 void Ship::reorder_destinations(Game& game) {
+	upcast(PortDock, pd, get_position().field->get_immovable());
 	size_t nr_dests = 0;
 	DestinationsQueue old_dq;
 	std::map<PortDock*, uint32_t> shipping_items;
 	for (const auto& pair : destinations_) {
-		PortDock* pd = pair.first.get(game);
-		assert(pd);
+		PortDock* p = pair.first.get(game);
+		assert(p);
 		uint32_t nr_items = 0;
 		for (const auto& si : items_) {
-			if (si.get_destination(game) == pd) {
+			if (si.get_destination(game) == p) {
 				++nr_items;
 			}
 		}
-		if (nr_items == 0 && pd->count_waiting() == 0 && !pd->expedition_started()) {
+		if (nr_items == 0 && p->count_waiting() == 0 && !p->expedition_started() && (!pd || pd->count_waiting(p) == 0)) {
 			// We don't need to go there anymore
 			continue;
 		}
-		old_dq.push_back(std::make_pair(pd, pair.second));
+		old_dq.push_back(std::make_pair(p, pair.second));
 		++nr_dests;
-		shipping_items[pd] = nr_items;
+		shipping_items[p] = nr_items;
 	}
 	if (nr_dests <= 1) {
 		destinations_.clear();
@@ -880,7 +881,6 @@ void Ship::reorder_destinations(Game& game) {
 	}
 
 	const OPtr<PortDock> old_dest = destinations_.front().first;
-	upcast(PortDock, pd, get_position().field->get_immovable());
 	DestinationsQueue dq = shortest_order(game, *fleet_, pd,
 			pd ? static_cast<void*>(pd) : static_cast<void*>(this), old_dq, shipping_items).first;
 	assert(dq.size() == nr_dests);

@@ -121,7 +121,7 @@ public:
 	void log_general_info(const EditorGameBase&) const override;
 
 	uint32_t count_waiting(WareWorker waretype, DescriptionIndex wareindex) const;
-	uint32_t count_waiting() const;
+	uint32_t count_waiting(const PortDock* = nullptr) const;
 
 	// Returns true if a expedition is started or ready to be send out.
 	bool expedition_started() const;
