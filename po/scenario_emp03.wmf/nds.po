@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2019\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -246,8 +246,8 @@ msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train your"
 " soldiers."
 msgstr ""
-"Bau een Övens-Lager, eene Kasern un eenen Ring oder Groten Ring, um Soldaten"
-" uttobilden."
+"Bau een Övens-Lager, eene Kasern un eenen Ring of Groten Ring, um Soldaten "
+"uttobilden."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:184
 msgid "The Journey Home"
@@ -438,8 +438,7 @@ msgid ""
 msgstr ""
 "Dat is wull een goder Stapp vöran, aver ick seh heel minn Rüümte för Husen. "
 "De hele Insel is vull mit Stenen. Wo könen wi jemaals een nejes Schipp bauen"
-" oder blot eene eenfache Wirtschaft hebben, um uns' Levens liedsamer to "
-"maken?"
+" of blot eene eenfache Wirtschaft hebben, um uns' Levens liedsamer to maken?"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:271
 msgid "Amalea’s Plan"
@@ -743,7 +742,7 @@ msgid ""
 "have some cloth available in order to not waste any logs or planks."
 msgstr ""
 "Villicht is 't eene gode Idee, de Warft antohollen, bit wi genoog Stoff "
-"hebben, daarmit se keene Boomstammen oder Planken verplempert."
+"hebben, daarmit se keene Boomstammen of Planken verplempert."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:414
 msgid "We Should Explore the Islands"
@@ -837,7 +836,7 @@ msgid ""
 msgstr ""
 "Ick raad absolut an, eene Wirschaft för 't Ofboen un Smelten vun Gold to "
 "bauen. Ick gloov, wi bruken eene Wienplanteree, eene Wienmakeree, eene "
-"Kneipe, eene Fiskeree oder een Jaggthuus un een Smeltwark. Un natürelk de "
+"Kneipe, eene Fiskeree of een Jaggthuus un een Smeltwark. Un natürelk de "
 "Bargwarken sülvst."
 
 #. TRANSLATORS: Amalea
@@ -851,8 +850,8 @@ msgstr ""
 "Wenn 't nich gaht, all de nödigen Husen to bauen, mutten wi över dat "
 "nadenken, wat wi bit nu lehrt hebben. Wi könen all de Stenen ofslagen. Wi "
 "könen villicht uns' Stratennett verbetern, um wat Rüümte för Husen freei to "
-"maken, oder ok een paar Soldateree-Boen plattrieten, um mehr Rüümte för uns'"
-" Wirtschaft to kriegen."
+"maken, of ok een paar Soldateree-Boen plattrieten, um mehr Rüümte för uns' "
+"Wirtschaft to kriegen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:457
 msgid "We Should Conquer All the Islands"
@@ -897,7 +896,7 @@ msgid ""
 "building an arena and other buildings to train our soldiers."
 msgstr ""
 "Blot Spaaß. Natürelk mutten wi so vööl Gold as wi könen upheven, um eenen "
-"Ring uns annere Boen, um uns' Soldaten uttobilden, to bauen."
+"Ring uns anner Boen, um uns' Soldaten uttobilden, to bauen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:482
 msgid "Amalea is Pleased"
@@ -961,7 +960,7 @@ msgstr ""
 "Du sallst würrelk de meesten daarvun plattrieten, um daar Husen för uns' "
 "Wirtschaft to bauen. Ick gloov nich, dat 't up deeser Insel völe Gefahren "
 "gifft, aver wenn du vörsichtig wesen willt, kannst du een paar Wachters-"
-"Kamers oder Wachters-Kamerkes an de Küst stahn laten."
+"Kamers of Wachters-Kamerkes an de Küst stahn laten."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:503
@@ -1000,8 +999,8 @@ msgid ""
 "It would be especially helpful to find more marble, either within fields of "
 "rock or in the mountains to mine it."
 msgstr ""
-"'t is besünners good, wenn wi mehr Marmel finnen, of as Felden vun Stenen "
-"oder tum Ofboen in Bargen."
+"'t is besünners good, wenn wi mehr Marmel finnen, of as Felden vun Stenen of"
+" tum Ofboen in Bargen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:526
 msgid "Amalea is Very Content"
@@ -1059,7 +1058,7 @@ msgstr ""
 "Ick raad daarum an, dat wi faaktied na uns' Bestand an Stoff sehn, daarmit "
 "wi alltied genoog Stoff över hebben, um tominnst een paar Söken klaar to "
 "maken. Eene Söke bruukt dree Ballen Stoff, also gloov ick, sess to negen "
-"Ballen up Lager för twee oder dree Söken is genoog."
+"Ballen up Lager för twee of dree Söken is genoog."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:548
 msgid "Victory is Ours"
@@ -1225,7 +1224,7 @@ msgid ""
 " or a colosseum."
 msgstr ""
 "Daarum mutten wi eene hele Övens-Wirtschaft bauen, ok wenn wi so minn Rüümte"
-" hebben. Wi bruken eene Kasern, een Övens-Lager un eenen Ring oder Groten "
+" hebben. Wi bruken eene Kasern, een Övens-Lager un eenen Ring of Groten "
 "Ring."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:620
@@ -1286,14 +1285,3 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:649
 msgid "Artifact Found"
 msgstr "Künstelk Schatten funnen"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neje Upgaav"
-msgstr[1] "Neje Upgaven"

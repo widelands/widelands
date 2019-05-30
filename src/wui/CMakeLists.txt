@@ -46,8 +46,10 @@ wl_library(wui_economy_options
     graphic
     logic
     logic_commands
+    logic_filesystem_constants
     logic_map_objects
     notifications
+    profile
     ui_basic
     wui_waresdisplay
 )
