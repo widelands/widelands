@@ -1,13 +1,13 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2015-02-03 15:15+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 10:11+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: English (Canada) (http://www.transifex.com/widelands/widelands/language/en_CA/)\n"
 "MIME-Version: 1.0\n"
@@ -16,21 +16,10 @@ msgstr ""
 "Language: en_CA\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/campaigns/dummy.wmf/scripting/init.lua:11
+#: ../../data/campaigns/dummy.wmf/scripting/init.lua:12
 msgid "Not yet implemented"
 msgstr ""
 
-#: ../../data/campaigns/dummy.wmf/scripting/init.lua:12
+#: ../../data/campaigns/dummy.wmf/scripting/init.lua:13
 msgid "Sorry, this map is not yet implemented."
 msgstr ""
-
-#: ../../data/scripting/format_scenario.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr ""
-
-#: ../../data/scripting/format_scenario.lua:96
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
