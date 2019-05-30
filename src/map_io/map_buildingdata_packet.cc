@@ -646,13 +646,13 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				if (pr_descr.programs().count(program_name)) {
 					uint32_t const skip_time = fr.unsigned_32();
 					if (gametime < skip_time)
-						throw GameDataError("program %s was skipped at time %u, but time is only "
+						throw GameDataError("program %s failed/was skipped at time %u, but time is only "
 						                    "%u",
 						                    program_name, skip_time, gametime);
-					productionsite.skipped_programs_[program_name] = skip_time;
+					productionsite.failed_skipped_programs_[program_name] = skip_time;
 				} else {
 					fr.unsigned_32();  // eat skip time
-					log("WARNING: productionsite has skipped program \"%s\", which "
+					log("WARNING: productionsite has failed/skipped program \"%s\", which "
 					    "does not exist\n",
 					    program_name);
 				}
@@ -1129,10 +1129,10 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	fw.signed_32(productionsite.fetchfromflag_);
 
 	//  skipped programs
-	assert(productionsite.skipped_programs_.size() <= std::numeric_limits<uint8_t>::max());
-	fw.unsigned_8(productionsite.skipped_programs_.size());
+	assert(productionsite.failed_skipped_programs_.size() <= std::numeric_limits<uint8_t>::max());
+	fw.unsigned_8(productionsite.failed_skipped_programs_.size());
 
-	for (const auto& temp_program : productionsite.skipped_programs_) {
+	for (const auto& temp_program : productionsite.failed_skipped_programs_) {
 		fw.string(temp_program.first);
 		fw.unsigned_32(temp_program.second);
 	}
