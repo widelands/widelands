@@ -148,7 +148,7 @@ private:
 	static constexpr int32_t kSpotsTooLittle = 15;
 	static constexpr int kManagementUpdateInterval = 10 * 60 * 1000;
 	static constexpr int kStatUpdateInterval = 60 * 1000;
-	static constexpr int kFlagWarehouseUpdInterval = 30 * 1000;
+	static constexpr int kFlagWarehouseUpdInterval = 15 * 1000;
 
 	// For vision and scheduling
 	static constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();

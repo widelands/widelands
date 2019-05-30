@@ -1422,10 +1422,12 @@ FlagWarehouseDistances::FlagInfo::FlagInfo(const uint32_t gametime, const uint16
 	     soft_expiry_time = gametime + kFlagDistanceExpirationPeriod / 2;
         distance = dist;
         nearest_warehouse = wh;
+        new_road_prohibited_till = 0;
 	}
 FlagWarehouseDistances::FlagInfo::FlagInfo(){
 	     expiry_time = 0;
         distance = 1000;
+        new_road_prohibited_till = 0;
 	}
 
 
@@ -1463,11 +1465,11 @@ uint16_t FlagWarehouseDistances::FlagInfo::get(const uint32_t gametime, uint32_t
         }
 
 void FlagWarehouseDistances::FlagInfo::road_built(const uint32_t gametime) {
-			last_road_built = gametime;
+			new_road_prohibited_till = gametime + 60 * 1000;
         }
 
 bool FlagWarehouseDistances::FlagInfo::road_prohibited(const uint32_t gametime) const {
-           return last_road_built + 60 * 1000 > gametime;
+           return new_road_prohibited_till > gametime;
         }
 
 bool FlagWarehouseDistances::set_distance(const uint32_t flag_coords, const uint16_t distance,
@@ -1481,6 +1483,10 @@ bool FlagWarehouseDistances::set_distance(const uint32_t flag_coords, const uint
       return flags_map[flag_coords].update(gametime, distance, nearest_warehouse);
 
   }
+
+uint16_t FlagWarehouseDistances::count() const {
+	return flags_map.size();
+}
 
 int16_t FlagWarehouseDistances::get_distance(const uint32_t flag_coords, uint32_t gametime, uint32_t* nw) {
       if (flags_map.count(flag_coords) == 0){
@@ -1517,7 +1523,7 @@ FlagCandidates::Candidate* FlagCandidates::get_winner(){
 }
 
 FlagCandidates::Candidate::Candidate(const uint32_t ch, bool de, uint16_t start_f_dist, uint16_t act_dist_to_wh){
-	printf ("    initializing new candidate for %dx%d (%d), with actual distance to wh: %d\n",
+	printf ("    initializing new candidate for %3dx%3d (%8d), with actual distance to wh: %2d\n",
 	Coords::unhash(ch).x, Coords::unhash(ch).y, ch, act_dist_to_wh);
     coords_hash = ch;
     different_economy = de;
@@ -1527,8 +1533,8 @@ FlagCandidates::Candidate::Candidate(const uint32_t ch, bool de, uint16_t start_
     cand_flag_distance_to_wh = act_dist_to_wh;
 }
 
-int16_t FlagCandidates::Candidate::score() const{
-    return different_economy * 1000 + cand_flag_distance_to_wh - start_flag_dist_to_wh  - possible_road_distance + flag_to_flag_road_distance;
+int16_t FlagCandidates::Candidate::score() const{    //NOCOM
+    return different_economy * 2000 + (start_flag_dist_to_wh - cand_flag_distance_to_wh) + (flag_to_flag_road_distance - 2 * possible_road_distance) ;
 }
 
 

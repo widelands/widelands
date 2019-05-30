@@ -146,15 +146,27 @@ BOOST_AUTO_TEST_CASE(flag_distance_road_builtexpiration_extension)
     BOOST_CHECK_EQUAL( fw.get_road_prohibited(2,60001), false);
 }
 
+BOOST_AUTO_TEST_CASE(new_flag_road_not_prohibited)
+/* setting the same distance restart the expiry_period */
+{
+    FlagWarehouseDistances fw;
+    // let fw knows about it
+    BOOST_CHECK_EQUAL( fw.count(), 0);
+    fw.set_distance(1,2,0,3);
+    BOOST_CHECK_EQUAL( fw.count(), 1);
+    BOOST_CHECK_EQUAL( fw.get_road_prohibited(1,1), false);
+}
+
 BOOST_AUTO_TEST_CASE(flag_candidate_init)
 /* setting the same distance restart the expiry_period */
 {
     FlagCandidates fc = FlagCandidates(10);
     BOOST_CHECK_EQUAL( fc.count(), 0);
 }
+
 BOOST_AUTO_TEST_CASE(flag_candidate_winner_score)
 {
-    const uint16_t kCurFlDistToWh = 25;
+    const uint16_t kCurFlDistToWh = 3;
     const uint16_t kStartFlagToWh = 10;
 
     const uint16_t kPosRoadDist = 5;
@@ -182,7 +194,7 @@ BOOST_AUTO_TEST_CASE(flag_candidate_winner_score)
     BOOST_CHECK_EQUAL(fc.get_winner()->different_economy, false);
 
     BOOST_CHECK_EQUAL(fc.get_winner()->score(),
-                      kCurFlDistToWh - kStartFlagToWh - kPosRoadDist + kCurRoadDistFlToFl);
+                      + (kStartFlagToWh - kCurFlDistToWh) + (kCurRoadDistFlToFl - 2 * kPosRoadDist));
 
 }
 BOOST_AUTO_TEST_CASE(flag_candidates_sorting)

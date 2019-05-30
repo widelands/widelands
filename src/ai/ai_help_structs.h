@@ -907,7 +907,7 @@ private:
         uint32_t soft_expiry_time;
         uint16_t distance;
         uint32_t nearest_warehouse;
-        uint32_t last_road_built;
+        uint32_t new_road_prohibited_till;
 
         bool update(uint32_t, uint16_t, uint32_t);
         void road_built(uint32_t);
@@ -921,6 +921,7 @@ public:
   int16_t get_distance(uint32_t, uint32_t, uint32_t*);
   void set_road_built(uint32_t, uint32_t);
   bool get_road_prohibited(uint32_t, uint32_t);
+  uint16_t count() const;
 
 
 };
@@ -943,10 +944,10 @@ struct FlagCandidates{
                    return score() > other.score();
         }
         void print(){
-            printf  (" Candidate flag at %3dx%3d: dist. to wh %3d, distance from target flag: %3d, poss. road length: %3d, score: %3d, Different ec: %s\n",
+            printf  (" Candidate flag at %3dx%3d: dist. to wh %4d, cur. road length: %2d, poss. road length: %3d,Different ec: %s, score: %3d, \n",
                    Coords::unhash(coords_hash).x, Coords::unhash(coords_hash).y,
-                     cand_flag_distance_to_wh, start_flag_dist_to_wh, possible_road_distance, score(),
-                     (different_economy)? "Y": "N");
+                     cand_flag_distance_to_wh, flag_to_flag_road_distance, possible_road_distance,
+                     (different_economy)? "Y": "N", score());
         }
     };
 

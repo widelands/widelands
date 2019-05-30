@@ -3434,12 +3434,13 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 void DefaultAI::check_flag_distances(const uint32_t gametime){
 	//printf ("Check flag distance called\n");
 	for (WarehouseSiteObserver& wh_obs : warehousesites) {
-		if (gametime > wh_obs.flag_distances_last_update + 60 *1000) {
-			printf("Updating flags for warehouse at %3dx%3d\n", wh_obs.site->get_position().x,
-			 wh_obs.site->get_position().y);
+		//if (gametime > wh_obs.flag_distances_last_update + 60 *1000) {
+			//printf("Updating flags for warehouse at %3dx%3d\n", wh_obs.site->get_position().x,
+			// wh_obs.site->get_position().y);
 			wh_obs.flag_distances_last_update = gametime;
 			uint16_t checked_flags = 0;
 			const uint32_t this_wh_hash = wh_obs.site->get_position().hash();
+			uint32_t highest_distance_set = 0;
 
 
 			std::queue<Widelands::Flag*> remaining_flags;  // only used to collect flags reachable walk over roads
@@ -3482,6 +3483,10 @@ void DefaultAI::check_flag_distances(const uint32_t gametime){
 					bool const updated = flag_warehouse_distance.set_distance(
 					endflag->get_position().hash(), current_flag_distance + steps_count, gametime, this_wh_hash);
 
+					if (highest_distance_set < current_flag_distance + steps_count){
+							highest_distance_set = current_flag_distance + steps_count;
+						}
+
 					//printf ("New Flag %3dx%3d was %s updated with distance: %d\n",
 					//endflag->get_position().x, endflag->get_position().y,(updated) ? "":"not", current_flag_distance + steps_count);
 
@@ -3492,8 +3497,9 @@ void DefaultAI::check_flag_distances(const uint32_t gametime){
 				remaining_flags.pop();
 			}
 
-			printf("%d: Checked flags: %d, warehouses: %lu, time: %d s\n", player_number(), checked_flags, warehousesites.size(), gametime / 1000);
-		}
+			printf("%d: Checked flags: %2d, highest distance: %5d, warehouses: %lu, time: %d s\n",
+			 player_number(), checked_flags, highest_distance_set, warehousesites.size(), gametime / 1000);
+		//}
 	}
 }
 
@@ -3965,6 +3971,10 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
             // This is a candidate, sending all necessary info to RoadCandidates
             const bool different_economy = (player_immovable->get_economy() != flag.get_economy());
             //const int32_t air_distance = map.calc_distance(flag.get_position(), reachable_coords);
+
+            //if (flag_warehouse_distance.get_road_prohibited(reachable_coords.hash(), gametime)) {
+			//	printf ("Flag prohibited
+
             if (!flag_candidates.has_candidate(reachable_coords.hash()) && !flag_warehouse_distance.get_road_prohibited(reachable_coords.hash(), gametime)) {
                 flag_candidates.add_flag(reachable_coords.hash(), different_economy,
                 flag_warehouse_distance.get_distance(reachable_coords.hash(), gametime, &tmp_wh)); //NOCOM
@@ -4042,8 +4052,8 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     // re-sorting again // ???? now by reduction score (custom operator specified in .h file)
     flag_candidates.sort();
 
-    printf ("Candidates (%d) for flag at %3dx%3d: (Field necessity %d)\n",
-     flag_candidates.count(), flag.get_position(). x,flag.get_position().y, fields_necessity);
+    printf ("Candidates (%d) for flag at %3dx%3d: (Field necessity %d, dist. to wh: %4d)\n",
+     flag_candidates.count(), flag.get_position(). x,flag.get_position().y, fields_necessity, current_flag_dist_to_wh);
     for (auto& item : flag_candidates.flags){
         item.print();
     }
@@ -4054,8 +4064,18 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     if (winner) {
         const Widelands::Coords target_coords = Coords::unhash(winner->coords_hash);
         printf("Winner to built: "); //without new line
-        flag_warehouse_distance.set_road_built(winner->coords_hash, gametime);
         winner->print();
+
+		//This is to prohibit the flag for some time but with exemption of warehouse
+		if (flag_warehouse_distance.get_distance(winner->coords_hash, gametime, &tmp_wh) > 0) {
+			flag_warehouse_distance.set_road_built(winner->coords_hash, gametime);
+		}
+		//and we stright away set distance of future flag
+		//set_distance(const uint32_t flag_coords, const uint16_t distance,
+		//uint32_t const gametime, uint32_t const nearest_warehouse){
+		flag_warehouse_distance.set_distance(flag.get_position().hash(), winner->start_flag_dist_to_wh + winner->possible_road_distance,
+		gametime, 0); // faking the warehouse
+
         Path& path = *new Path();
 #ifndef NDEBUG
         const int32_t pathcost =
