@@ -69,8 +69,6 @@ private:
 	void load_map_info();
 	void help_clicked();
 
-	uint32_t fs_;
-
 	// TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
 	// so we can have the SuggestedTeamsBox
 	int32_t const padding_;  // Common padding between panels

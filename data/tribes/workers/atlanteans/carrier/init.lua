@@ -15,15 +15,10 @@
 
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 13, 24 },
-      fps=10,
-   }
-}
-add_walking_animations(animations, "walk", dirname, "walk", {8, 25}, 10)
-add_walking_animations(animations, "walkload", dirname, "walkload", {8, 25}, 10)
+animations = {}
+add_animation(animations, "idle", dirname, "idle", {13, 24}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {8, 25}, 10)
+add_directional_animation(animations, "walkload", dirname, "walkload", {8, 25}, 10)
 
 -- RST
 -- .. function:: new_carrier_type{table}

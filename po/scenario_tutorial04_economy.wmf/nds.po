@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-05 04:54+0000\n"
-"PO-Revision-Date: 2019-04-08 12:42+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 12:38+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -221,7 +221,7 @@ msgid ""
 " buildings you own and how many are under construction. The second line "
 "shows the average productivity if it is a production site or training site, "
 "or the stationed and desired soldiers in military buildings."
-msgstr "Unner elkeen Huus sünd twee Riegen. De eerste wiest de Tahl vun Husen, wat du hest un wat baut word. De twede wiest de Wöörde vun all deese Husen dör de Bank, wenn 't een normaales Huus oder een Övens-Boo is, oder de Tahl vun Soldaten, de daar sünd un de sien sallen, wenn 't een Soldateree-Boo is."
+msgstr "Unner elkeen Huus sünd twee Riegen. De eerste wiest de Tahl vun Husen, wat du hest un wat baut word. De twede wiest de Wöörde vun all deese Husen dör de Bank, wenn 't een normaales Huus of een Övens-Boo is, of de Tahl vun Soldaten, de daar sünd un de sien sallen, wenn 't een Soldateree-Boo is."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:91
 msgid "Close the building statistics window when you are done."
@@ -268,7 +268,7 @@ msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
-msgstr "Hunnert. Du hest in de List sehn dat du keene Kneipen oder Weertskuppen mehr hest. Dat heet, dat du keene Happen produzeerst. Laat uns nakieken, wat du noch im Bestand hest."
+msgstr "Hunnert. Du hest in de List sehn dat du keene Kneipen of Weertskuppen mehr hest. Dat heet, dat du keene Happen produzeerst. Laat uns nakieken, wat du noch im Bestand hest."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:122
 msgid "Click on the ‘Stock’ button."
@@ -295,7 +295,7 @@ msgid ""
 "The stock menu window has four tabs. The first (and currently selected) one "
 "shows you all your current wares, including those on roads, at flags and "
 "inside buildings waiting for processing."
-msgstr "Dat Bestand-Fenster hett veer Listenwesslers. De eerste (de jüüst utköört is) wiest all Waren de du hest, ok de, de up Straten un Fahnen sünd oder in Husen wachten, bit se bruukt worden."
+msgstr "Dat Bestand-Fenster hett veer Listenwesslers. De eerste (de jüüst utköört is) wiest all Waren de du hest, ok de, de up Straten un Fahnen sünd of in Husen wachten, bit se bruukt worden."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:140
 msgid ""
@@ -391,7 +391,7 @@ msgid ""
 "than one tavern – two or three are better. Remember: as long as we don’t "
 "produce rations, our miners won’t dig for ore. And without iron, we cannot "
 "forge a single helm."
-msgstr "Nu dat du 't all weetst sallst du wat doon. Wi sallen lever mehr as eene Kneipe bauen – twee oder dree sünd beter. Vergeet nich: Wenn wi keene Happen produzeren, graven uns' Bargwarkskeerls nich na Kluut. Un sünner Iesen könen wi keene Helms smeden."
+msgstr "Nu dat du 't all weetst sallst du wat doon. Wi sallen lever mehr as eene Kneipe bauen – twee of dree sünd beter. Vergeet nich: Wenn wi keene Happen produzeren, graven uns' Bargwarkskeerls nich na Kluut. Un sünner Iesen könen wi keene Helms smeden."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:193
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:200
@@ -426,7 +426,7 @@ msgid ""
 " then or if you’re unsure about your tribe’s needs and abilities and how its"
 " buildings and workers operate, you can look it up easily in our tribe-"
 "specific in-game help and encyclopedia."
-msgstr "Wenn du vööl spöölt hest, weetst du all dat utwennig. Bit dann kannst du heel licht in de Hülp im Speel naslaan, wenn du nich wiss büst, wat dien Volk kann un bruukt oder wo de Husen un Arbeiders warken."
+msgstr "Wenn du vööl spöölt hest, weetst du all dat utwennig. Bit dann kannst du heel licht in de Hülp im Speel naslaan, wenn du nich wiss büst, wat dien Volk kann un bruukt of wo de Husen un Arbeiders warken."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:210
 msgid ""
@@ -480,7 +480,7 @@ msgid ""
 "The ‘Wares’ tab shows information about the wares that your tribe needs, "
 "including a short help text, a list of buildings that produce each ware, the"
 " needed wares to produce it and where the ware is consumed."
-msgstr "De Listenwessler »Waren« hett Informationen över all de Waren, de dien Volk bruukt. För elkeen Waar gifft 't een körte Text un Listen mit all Husen, de deese Waar produzeren oder bruken."
+msgstr "De Listenwessler »Waren« hett Informationen över all de Waren, de dien Volk bruukt. För elkeen Waar gifft 't een körte Text un Listen mit all Husen, de deese Waar produzeren of bruken."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:233
 msgid ""
@@ -649,7 +649,7 @@ msgstr "Köör de darden Listenwessler im Fenster för Tahlen över Waren ut"
 msgid ""
 "The first two tabs show you the production and consumption of any ware. You "
 "can toggle them by simply clicking on them."
-msgstr "De eersten twee Listenwessler wiesen, waar vööl vun elkeen Waar produzeert un verbruukt word. Du kannst se wiesen oder verbargen, indeem du se anklickst."
+msgstr "De eersten twee Listenwessler wiesen, waar vööl vun elkeen Waar produzeert un verbruukt word. Du kannst se wiesen of verbargen, indeem du se anklickst."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:323
 msgid ""
@@ -657,7 +657,7 @@ msgid ""
 "called ‘economy health’. You can see at one glance which one of those two is"
 " higher for the selected ware, that means whether the amount increases or "
 "decreases."
-msgstr "Deese Listenwessler wiest de Ofstand tüsken dat, wat produzeert word, un dat, wat verbruukt word. Dat heet »Wirtschafts-Utglekenheid«. Du kannst stracks sehn, welkes vun beiden för de utköörte Waar hoger is, also of de Bestand verhoogt oder minnert word."
+msgstr "Deese Listenwessler wiest de Ofstand tüsken dat, wat produzeert word, un dat, wat verbruukt word. Dat heet »Wirtschafts-Utglekenheid«. Du kannst stracks sehn, welkes vun beiden för de utköörte Waar hoger is, also of de Bestand verhoogt of minnert word."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:324
 msgid "Now try this out. You can also compare it with the two previous tabs."
@@ -819,7 +819,7 @@ msgid ""
 " second farm will have to wait for its worker, who will lack a scythe. If "
 "you had set the target quantity to 2 before, two scythes would have been "
 "available and both farms would have been able to start working right away."
-msgstr "Wenn du twee Buurdereen baust, kann blot eene stracks anfangen to arbeiden. De annere mutt eerst up eenen Arbeider wachten, wiel för hüm keene Sichte daar is. Wenn du vörher de End-Tahl to 2 settst, sünd twee Sichten paraat un beide Buurdereen könen stracks anfangen to warken."
+msgstr "Wenn du twee Buurdereen baust, kann blot eene stracks anfangen to arbeiden. De anner mutt eerst up eenen Arbeider wachten, wiel för hüm keene Sichte daar is. Wenn du vörher de End-Tahl to 2 settst, sünd twee Sichten paraat un beide Buurdereen könen stracks anfangen to warken."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:428
 msgid ""
@@ -827,13 +827,13 @@ msgid ""
 "your resources (in this case: iron) should be turned into or whether you "
 "would like to save your iron and wait until you know what you will need it "
 "for."
-msgstr "Indeem du de Ent-Tahl ännerst kannst du fastleggen, to wat för Waren oder Warktüüg diene Mineraale (im Bispööl Iesen) verarbeidt worden sallen oder of du se lever behollst, bit du weetst, för wat du se bruukst."
+msgstr "Indeem du de Ent-Tahl ännerst kannst du fastleggen, to wat för Waren of Warktüüg diene Mineraale (im Bispööl Iesen) verarbeidt worden sallen of of du se lever behollst, bit du weetst, för wat du se bruukst."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:429
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
-msgstr "Blot Husen, de Waren verbruuken, achten up deese Instellens. Husen, de Waren umsünst produzeren (to 'n Bispööl Buurdereen oder Wellen) arbeiden alltied."
+msgstr "Blot Husen, de Waren verbruuken, achten up deese Instellens. Husen, de Waren umsünst produzeren (to 'n Bispööl Buurdereen of Wellen) arbeiden alltied."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:430
 msgid ""
@@ -968,14 +968,3 @@ msgid ""
 "If you have still questions, the Widelands community will surely help you. "
 "You can find it at:"
 msgstr "Dat is de leste Inföhren, de ick för di maakt hebb. Ick hebb di nu all lehrt, wat ick weet. 't gifft noch alltied Geheimnissen in deese Welt, de ok ick nich kenn. Ick söök nu eene moje Stee tum verpuusten. Wenn du noch Fragen hest, helpt du wiss de Widelands-Gemeenskupp. Du finnst se unner:"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neje Upgaav"
-msgstr[1] "Neje Upgaven"

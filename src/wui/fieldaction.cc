@@ -92,13 +92,14 @@ void BuildGrid::add(Widelands::DescriptionIndex id) {
 	const Widelands::BuildingDescr& descr =
 	   *plr_->tribe().get_building_descr(Widelands::DescriptionIndex(id));
 
-	// TODO(sirver): change this to take a Button subclass instead of
-	// parameters. This will allow overriding the way it is rendered
-	// to bring back player colors.
 	UI::IconGrid::add(descr.name(), descr.representative_image(&plr_->get_playercolor()),
 	                  reinterpret_cast<void*>(id),
-	                  descr.descname() + "<br><font size=11>" + _("Construction costs:") +
-	                     "</font><br>" + waremap_to_richtext(plr_->tribe(), descr.buildcost()));
+	                  descr.descname() + "<br>" +
+	                     g_gr->styles()
+	                        .ware_info_style(UI::WareInfoStyle::kNormal)
+	                        .header_font()
+	                        .as_font_tag(_("Construction costs:")) +
+	                     "<br>" + waremap_to_richtext(plr_->tribe(), descr.buildcost()));
 }
 
 /*
@@ -641,12 +642,10 @@ void FieldActionWindow::act_configure_economy() {
 		Widelands::Economy* ware_economy = flag->get_economy(Widelands::wwWARE);
 		Widelands::Economy* worker_economy = flag->get_economy(Widelands::wwWORKER);
 		if (!ware_economy->has_window() && !worker_economy->has_window()) {
-			bool can_act_ware =
+			bool can_act =
 			   dynamic_cast<InteractiveGameBase&>(ibase()).can_act(ware_economy->owner().player_number());
-			bool can_act_worker =
-			   dynamic_cast<InteractiveGameBase&>(ibase()).can_act(worker_economy->owner().player_number());
 			new EconomyOptionsWindow(dynamic_cast<UI::Panel*>(&ibase()), ware_economy,
-					worker_economy, can_act_ware, can_act_worker);
+					worker_economy, can_act);
 		}
 	}
 	die();

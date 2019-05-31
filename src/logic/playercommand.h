@@ -606,6 +606,8 @@ private:
 	uint32_t permanent_;
 };
 
+// TODO(Nordfriese): CmdResetWareTargetQuantity can be removed when we next break savegame
+// compatibility
 struct CmdResetWareTargetQuantity : public CmdChangeTargetQuantity {
 	CmdResetWareTargetQuantity() : CmdChangeTargetQuantity() {
 	}
@@ -654,6 +656,8 @@ private:
 	uint32_t permanent_;
 };
 
+// TODO(Nordfriese): CmdResetWorkerTargetQuantity can be removed when we next break savegame
+// compatibility
 struct CmdResetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 	CmdResetWorkerTargetQuantity() : CmdChangeTargetQuantity() {
 	}

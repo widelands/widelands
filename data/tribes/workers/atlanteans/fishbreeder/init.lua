@@ -11,7 +11,7 @@ animations = {
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {11, 23}, 20)
+add_directional_animation(animations, "walk", dirname, "walk", {11, 23}, 20)
 
 tribes:new_worker_type {
    msgctxt = "atlanteans_worker",

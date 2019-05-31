@@ -21,7 +21,6 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "graphic/text_constants.h"
 #include "ui_basic/scrollbar.h"
 
 ScenarioDetails::ScenarioDetails(Panel* parent)

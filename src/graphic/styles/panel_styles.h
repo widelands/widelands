@@ -17,41 +17,46 @@
  *
  */
 
-#ifndef WL_GRAPHIC_PANEL_STYLES_H
-#define WL_GRAPHIC_PANEL_STYLES_H
+#ifndef WL_GRAPHIC_STYLES_PANEL_STYLES_H
+#define WL_GRAPHIC_STYLES_PANEL_STYLES_H
+
+#include <map>
+#include <memory>
 
 #include "graphic/color.h"
 #include "graphic/image.h"
+#include "graphic/styles/font_style.h"
 
 namespace UI {
-
-// Buttons
-enum class ButtonStyle {
-	kFsMenuMenu,
-	kFsMenuPrimary,
-	kFsMenuSecondary,
-	kWuiMenu,
-	kWuiPrimary,
-	kWuiSecondary,
-	kWuiBuildingStats
-};
-enum class SliderStyle { kFsMenu, kWuiLight, kWuiDark };
 
 // Backgrounds
 enum class PanelStyle { kFsMenu, kWui };
 enum class TabPanelStyle { kFsMenu, kWuiLight, kWuiDark };
 
 struct PanelStyleInfo {
-	PanelStyleInfo(const Image* init_image, const RGBAColor& init_color)
-	   : image(init_image), color(init_color) {
+	PanelStyleInfo(const Image* init_image, const RGBAColor& init_color, int init_margin)
+	   : margin_(init_margin), image_(init_image), color_(init_color) {
 	}
-	PanelStyleInfo() : PanelStyleInfo(nullptr, RGBAColor(0, 0, 0, 0)) {
+	PanelStyleInfo(const PanelStyleInfo& other) : image_(other.image()), color_(other.color()) {
 	}
 
-	const Image* image;
-	const RGBAColor color;
+	const RGBAColor& color() const {
+		return color_;
+	}
+	const Image* image() const {
+		return image_;
+	}
+
+	int margin() const {
+		return margin_;
+	}
+
+private:
+	int margin_;
+	const Image* image_;
+	RGBAColor color_;
 };
 
 }  // namespace UI
 
-#endif  // end of include guard: WL_GRAPHIC_PANEL_STYLES_H
+#endif  // end of include guard: WL_GRAPHIC_STYLES_PANEL_STYLES_H

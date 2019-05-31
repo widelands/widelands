@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-11 05:49+0000\n"
-"PO-Revision-Date: 2019-04-11 11:51+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 10:12+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -554,8 +554,8 @@ msgstr "Ceàrdach armachd"
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:44
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:63
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:81
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:52
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:70
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:50
@@ -962,7 +962,7 @@ msgid "Horse Farm"
 msgstr "Stàball"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:53
+#: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:52
 msgctxt "atlanteans_building"
 msgid "breeding horses"
 msgstr "each àrachadh"
@@ -1143,7 +1143,7 @@ msgstr "Doca"
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:73
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:72
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:72
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:66
 msgid "constructing a ship"
@@ -1448,7 +1448,7 @@ msgid "Barracks"
 msgstr "Taigh-feachd"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:61
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:60
 msgctxt "barbarians_building"
 msgid "recruiting soldier"
 msgstr "saighdear a thrusadh"
@@ -1501,7 +1501,7 @@ msgid "Cattle Farm"
 msgstr "Taigh-buaile"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:53
+#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:52
 msgctxt "barbarians_building"
 msgid "rearing cattle"
 msgstr "crodh àrachadh"
@@ -1852,7 +1852,7 @@ msgid "Scout’s Hut"
 msgstr "Bothan-rabhadair"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:7
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:13
 msgctxt "barbarians_building"
 msgid "Shipyard"
 msgstr "Doca"
@@ -2021,7 +2021,7 @@ msgid "Donkey Farm"
 msgstr "Stàball"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
-#: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:53
+#: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:52
 msgctxt "empire_building"
 msgid "rearing donkeys"
 msgstr "asal àrachadh"
@@ -3306,7 +3306,7 @@ msgid "Port"
 msgstr "Port"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/init.lua:7
+#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/init.lua:11
 msgctxt "barbarians_building"
 msgid "Warehouse"
 msgstr "Taigh-stòrais"
@@ -3389,7 +3389,7 @@ msgctxt "immovable"
 msgid "Barley Field (tiny)"
 msgstr "Achadh eòrna (beag bìodach)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:15
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:18
 msgid "Blueberry Bush (tiny)"
 msgstr "Preas dhearcan-gorma (beag bìodach)"
 
@@ -3397,15 +3397,15 @@ msgstr "Preas dhearcan-gorma (beag bìodach)"
 msgid "Blueberry Bush (small)"
 msgstr "Preas dhearcan-gorma (beag)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:63
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:60
 msgid "Blueberry Bush (medium)"
 msgstr "Preas dhearcan-gorma (meadhanach)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:87
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:81
 msgid "Blueberry Bush (ripe)"
 msgstr "Preas dhearcan-gorma (abaich)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:16
 msgid "Black Currant (tiny)"
 msgstr "Preas dhearcan-dubha (beag bìodach)"
 
@@ -3413,15 +3413,15 @@ msgstr "Preas dhearcan-dubha (beag bìodach)"
 msgid "Black Currant (small)"
 msgstr "Preas dhearcan-dubha (beag)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:58
 msgid "Black Currant (medium)"
 msgstr "Preas dhearcan-dubha (meadhanach)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:79
 msgid "Black Currant (ripe)"
 msgstr "Preas dhearcan-dubha (abaich)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:16
 msgid "Red Currant (tiny)"
 msgstr "Preas dhearcan-dearga (beag bìodach)"
 
@@ -3429,15 +3429,15 @@ msgstr "Preas dhearcan-dearga (beag bìodach)"
 msgid "Red Currant (small)"
 msgstr "Preas dhearcan-dearga (beag)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:58
 msgid "Red Currant (medium)"
 msgstr "Preas dhearcan-dearga (meadhanach)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:79
 msgid "Red Currant (ripe)"
 msgstr "Preas dhearcan-dearga (abaich)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:16
 msgid "Desert Hackberry (tiny)"
 msgstr "Preas dhearcan-fhàsaich (beag bìodach)"
 
@@ -3445,15 +3445,15 @@ msgstr "Preas dhearcan-fhàsaich (beag bìodach)"
 msgid "Desert Hackberry (small)"
 msgstr "Preas dhearcan-fhàsaich (beag)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:58
 msgid "Desert Hackberry (medium)"
 msgstr "Preas dhearcan-fhàsaich (meadhanach)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:79
 msgid "Desert Hackberry (ripe)"
 msgstr "Preas dhearcan-fhàsaich (abaich)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:16
 msgid "Juniper (tiny)"
 msgstr "Aiteann (beag bìodach)"
 
@@ -3461,15 +3461,15 @@ msgstr "Aiteann (beag bìodach)"
 msgid "Juniper (small)"
 msgstr "Aiteann (beag)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:58
 msgid "Juniper (medium)"
 msgstr "Aiteann (meadhanach)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:79
 msgid "Juniper (ripe)"
 msgstr "Aiteann (abaich)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:16
 msgid "Raspberry Bush (tiny)"
 msgstr "Preas-shuibheag (beag bìodach)"
 
@@ -3477,15 +3477,15 @@ msgstr "Preas-shuibheag (beag bìodach)"
 msgid "Raspberry Bush (small)"
 msgstr "Preas-shuibheag (beag)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:58
 msgid "Raspberry Bush (medium)"
 msgstr "Preas-shuibheag (meadhanach)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:79
 msgid "Raspberry Bush (ripe)"
 msgstr "Preas-shuibheag (abaich)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:16
 msgid "Sea Buckthorn (tiny)"
 msgstr "Preas ràmh-dhroighinn (beag bìodach)"
 
@@ -3493,15 +3493,15 @@ msgstr "Preas ràmh-dhroighinn (beag bìodach)"
 msgid "Sea Buckthorn (small)"
 msgstr "Preas ràmh-dhroighinn (beag)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:58
 msgid "Sea Buckthorn (medium)"
 msgstr "Preas ràmh-dhroighinn (meadhanach)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:79
 msgid "Sea Buckthorn (ripe)"
 msgstr "Preas ràmh-dhroighinn (abaich)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:16
 msgid "Strawberries (tiny)"
 msgstr "Sùbhan-làir (beag bìodach)"
 
@@ -3509,11 +3509,11 @@ msgstr "Sùbhan-làir (beag bìodach)"
 msgid "Strawberries (small)"
 msgstr "Sùbhan-làir (beag)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:58
 msgid "Strawberries (medium)"
 msgstr "Sùbhan-làir (meadhanach)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:79
 msgid "Strawberries (ripe)"
 msgstr "Sùbhan-làir (abaich)"
 
@@ -3684,90 +3684,110 @@ msgstr "Feur (beag bìodach)"
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:7
 #: ../../data/tribes/immovables/resi/empire/init.lua:7
 #: ../../data/tribes/immovables/resi/frisians/init.lua:7
-msgctxt "immovable"
-msgid "Resources: None"
-msgstr "Gun stòras"
+msgctxt "resource_indicator"
+msgid "No Resources"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:29
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:29
-#: ../../data/tribes/immovables/resi/empire/init.lua:29
-#: ../../data/tribes/immovables/resi/frisians/init.lua:29
-msgctxt "immovable"
-msgid "Resources: Water Vein"
-msgstr "Stòras: Cuisle uisge"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:30
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:30
+#: ../../data/tribes/immovables/resi/empire/init.lua:30
+#: ../../data/tribes/immovables/resi/frisians/init.lua:30
+msgctxt "resource_indicator"
+msgid "Water"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:52
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:51
-#: ../../data/tribes/immovables/resi/empire/init.lua:51
-#: ../../data/tribes/immovables/resi/frisians/init.lua:52
-msgctxt "immovable"
-msgid "Resources: Coal Vein"
-msgstr "Stòras: Cuisle guail"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:54
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:53
+#: ../../data/tribes/immovables/resi/empire/init.lua:53
+#: ../../data/tribes/immovables/resi/frisians/init.lua:54
+msgctxt "resource_indicator"
+msgid "Some Coal"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:75
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:73
-#: ../../data/tribes/immovables/resi/empire/init.lua:73
-#: ../../data/tribes/immovables/resi/frisians/init.lua:75
-msgctxt "immovable"
-msgid "Resources: Gold Vein"
-msgstr "Stòras: Cuisle òir"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:78
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:76
+#: ../../data/tribes/immovables/resi/empire/init.lua:76
+#: ../../data/tribes/immovables/resi/frisians/init.lua:78
+msgctxt "resource_indicator"
+msgid "Some Gold"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:98
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:95
-#: ../../data/tribes/immovables/resi/empire/init.lua:95
-#: ../../data/tribes/immovables/resi/frisians/init.lua:98
-msgctxt "immovable"
-msgid "Resources: Iron Vein"
-msgstr "Stòras: Cuisle iarainn"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:102
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:99
+#: ../../data/tribes/immovables/resi/empire/init.lua:99
+#: ../../data/tribes/immovables/resi/frisians/init.lua:102
+msgctxt "resource_indicator"
+msgid "Some Iron"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:121
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:117
-#: ../../data/tribes/immovables/resi/empire/init.lua:117
-#: ../../data/tribes/immovables/resi/frisians/init.lua:121
-msgctxt "immovable"
-msgid "Resources: Some Stones"
-msgstr "Stòras: Beagan chlachan"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:126
+msgctxt "resource_indicator"
+msgid "Some Precious Stones"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:144
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:139
-#: ../../data/tribes/immovables/resi/empire/init.lua:139
-#: ../../data/tribes/immovables/resi/frisians/init.lua:144
-msgctxt "immovable"
-msgid "Resources: Main Coal Vein"
-msgstr "Stòras: Prìomh-chuisle guail"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:150
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:145
+#: ../../data/tribes/immovables/resi/empire/init.lua:145
+#: ../../data/tribes/immovables/resi/frisians/init.lua:150
+msgctxt "resource_indicator"
+msgid "A Lot of Coal"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:167
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:161
-#: ../../data/tribes/immovables/resi/empire/init.lua:161
-#: ../../data/tribes/immovables/resi/frisians/init.lua:167
-msgctxt "immovable"
-msgid "Resources: Main Gold Vein"
-msgstr "Stòras: Prìomh-chuisle òir"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:174
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:168
+#: ../../data/tribes/immovables/resi/empire/init.lua:168
+#: ../../data/tribes/immovables/resi/frisians/init.lua:174
+msgctxt "resource_indicator"
+msgid "A Lot of Gold"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:190
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:183
-#: ../../data/tribes/immovables/resi/empire/init.lua:183
-#: ../../data/tribes/immovables/resi/frisians/init.lua:190
-msgctxt "immovable"
-msgid "Resources: Main Iron Vein"
-msgstr "Stòras: Prìomh-chuisle iarainn"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:198
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:191
+#: ../../data/tribes/immovables/resi/empire/init.lua:191
+#: ../../data/tribes/immovables/resi/frisians/init.lua:198
+msgctxt "resource_indicator"
+msgid "A Lot of Iron"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:213
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:205
-#: ../../data/tribes/immovables/resi/empire/init.lua:205
-#: ../../data/tribes/immovables/resi/frisians/init.lua:213
-msgctxt "immovable"
-msgid "Resources: A Lot of Stones"
-msgstr "Stòras: Torr chlachan"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:222
+msgctxt "resource_indicator"
+msgid "A Lot of Precious Stones"
+msgstr ""
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:122
+#: ../../data/tribes/immovables/resi/frisians/init.lua:126
+msgctxt "resource_indicator"
+msgid "Some Granite"
+msgstr ""
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:214
+#: ../../data/tribes/immovables/resi/frisians/init.lua:222
+msgctxt "resource_indicator"
+msgid "A Lot of Granite"
+msgstr ""
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/empire/init.lua:122
+msgctxt "resource_indicator"
+msgid "Some Marble"
+msgstr ""
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/empire/init.lua:214
+msgctxt "resource_indicator"
+msgid "A Lot of Marble"
+msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/init.lua:7
@@ -4704,7 +4724,7 @@ msgid "Smoker"
 msgstr "Toitear"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/soldier/init.lua:198
+#: ../../data/tribes/workers/atlanteans/soldier/init.lua:251
 msgctxt "atlanteans_worker"
 msgid "Soldier"
 msgstr "Saighdear"
@@ -4782,7 +4802,7 @@ msgid "Master Brewer"
 msgstr "Sàr-leannair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/builder/init.lua:27
+#: ../../data/tribes/workers/barbarians/builder/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Builder"
 msgstr "Fear-togail"
@@ -4896,7 +4916,7 @@ msgid "Ranger"
 msgstr "Maor-coille"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/recruit/init.lua:17
+#: ../../data/tribes/workers/barbarians/recruit/init.lua:12
 msgctxt "barbarians_worker"
 msgid "Recruit"
 msgstr "Glas-laoch"
@@ -4908,7 +4928,7 @@ msgid "Scout"
 msgstr "Rabhadair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/shipwright/init.lua:26
+#: ../../data/tribes/workers/barbarians/shipwright/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Shipwright"
 msgstr "Saor-luinge"
@@ -4920,7 +4940,7 @@ msgid "Smelter"
 msgstr "Leaghadair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/soldier/init.lua:67
+#: ../../data/tribes/workers/barbarians/soldier/init.lua:77
 msgctxt "barbarians_worker"
 msgid "Soldier"
 msgstr "Saighdear"
@@ -5094,7 +5114,7 @@ msgid "Smelter"
 msgstr "Leaghadair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/soldier/init.lua:67
+#: ../../data/tribes/workers/empire/soldier/init.lua:77
 msgctxt "empire_worker"
 msgid "Soldier"
 msgstr "Saighdear"
@@ -5328,7 +5348,7 @@ msgid "Smoker"
 msgstr "Toitear"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/frisians/soldier/init.lua:76
+#: ../../data/tribes/workers/frisians/soldier/init.lua:401
 msgctxt "frisians_worker"
 msgid "Soldier"
 msgstr "Saighdear"

@@ -32,6 +32,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -42,6 +43,10 @@
 #include "logic/queue_cmd_ids.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
+
+namespace {
+char const* const animation_direction_names[6] = {"_ne", "_e", "_se", "_sw", "_w", "_nw"};
+}  // namespace
 
 namespace Widelands {
 
@@ -238,15 +243,7 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                     init_descname,
                     table.has_key("helptext_script") ? table.get_string("helptext_script") : "") {
 	if (table.has_key("animations")) {
-		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
-		for (const std::string& animation : anims->keys<std::string>()) {
-			if (animation == "idle") {
-				add_animation(
-				   animation, g_gr->animations().load(init_name, *anims->get_table(animation)));
-			} else {
-				add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
-			}
-		}
+		add_animations(*table.get_table("animations"));
 		if (!is_animation_known("idle")) {
 			throw GameDataError(
 			   "Map object %s has animations but no idle animation", init_name.c_str());
@@ -274,20 +271,54 @@ bool MapObjectDescr::is_animation_known(const std::string& animname) const {
 }
 
 /**
- * Add this animation for this map object under this name
+ * Add all animations for this map object
  */
-void MapObjectDescr::add_animation(const std::string& animname, uint32_t const anim) {
-	if (is_animation_known(animname)) {
-		throw GameDataError("Tried to add already existing animation \"%s\"", animname.c_str());
-	} else {
-		anims_.insert(std::pair<std::string, uint32_t>(animname, anim));
+void MapObjectDescr::add_animations(const LuaTable& table) {
+	for (const std::string& animname : table.keys<std::string>()) {
+		try {
+			std::unique_ptr<LuaTable> anim = table.get_table(animname);
+			// TODO(GunChleoc): Require basename after conversion has been completed
+			const std::string basename =
+			   anim->has_key<std::string>("basename") ? anim->get_string("basename") : "";
+			const bool is_directional =
+			   anim->has_key<std::string>("directional") ? anim->get_bool("directional") : false;
+			if (is_directional) {
+				for (int dir = 1; dir <= 6; ++dir) {
+					const std::string directional_animname =
+					   animname + animation_direction_names[dir - 1];
+					if (is_animation_known(directional_animname)) {
+						throw GameDataError("Tried to add already existing directional animation '%s\'",
+						                    directional_animname.c_str());
+					}
+					const std::string directional_basename =
+					   basename + animation_direction_names[dir - 1];
+					anims_.insert(std::pair<std::string, uint32_t>(
+					   directional_animname, g_gr->animations().load(*anim, directional_basename)));
+				}
+			} else {
+				if (is_animation_known(animname)) {
+					throw GameDataError(
+					   "Tried to add already existing animation '%s'", animname.c_str());
+				}
+				if (animname == "idle") {
+					anims_.insert(std::pair<std::string, uint32_t>(
+					   animname, g_gr->animations().load(name_, *anim, basename)));
+				} else {
+					anims_.insert(std::pair<std::string, uint32_t>(
+					   animname, g_gr->animations().load(*anim, basename)));
+				}
+			}
+		} catch (const std::exception& e) {
+			throw GameDataError(
+			   "Error loading animation for map object '%s': %s", name().c_str(), e.what());
+		}
 	}
 }
 
-void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::string& prefix) {
-	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
+void MapObjectDescr::assign_directional_animation(DirAnimations* anims,
+                                                  const std::string& basename) {
 	for (int32_t dir = 1; dir <= 6; ++dir) {
-		const std::string anim_name = prefix + std::string("_") + dirstrings[dir - 1];
+		const std::string anim_name = basename + animation_direction_names[dir - 1];
 		try {
 			anims->set_animation(dir, get_animation(anim_name, nullptr));
 		} catch (const GameDataError& e) {
@@ -315,6 +346,12 @@ std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 		}
 	}
 	NEVER_HERE();
+}
+
+void MapObjectDescr::load_graphics() const {
+	for (const auto& temp_anim : anims_) {
+		g_gr->animations().get_animation(temp_anim.second).load_default_scale_and_sounds();
+	}
 }
 
 const Image* MapObjectDescr::representative_image(const RGBColor* player_color) const {
@@ -485,20 +522,26 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	if (scale < 1.f) {
 		return;
 	}
-	const int font_size = scale * UI_FONT_SIZE_SMALL;
+
+	UI::FontStyleInfo census_font(g_gr->styles().building_statistics_style().census_font());
+	census_font.set_size(scale * census_font.size());
 
 	// We always render this so we can have a stable position for the statistics string.
 	std::shared_ptr<const UI::RenderedText> rendered_census =
-	   UI::g_fh->render(as_condensed(census, UI::Align::kCenter, font_size), 120 * scale);
+	   UI::g_fh->render(as_richtext_paragraph(census, census_font, UI::Align::kCenter), 120 * scale);
 	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
 	if ((draw_text & TextToDraw::kCensus) != TextToDraw::kNone) {
 		rendered_census->draw(*dst, position, UI::Align::kCenter);
 	}
 
 	if ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone && !statictics.empty()) {
+		UI::FontStyleInfo statistics_font(
+		   g_gr->styles().building_statistics_style().statistics_font());
+		statistics_font.set_size(scale * statistics_font.size());
+
 		std::shared_ptr<const UI::RenderedText> rendered_statistics =
-		   UI::g_fh->render(as_condensed(statictics, UI::Align::kCenter, font_size));
-		position.y += rendered_census->height() + text_height(font_size) / 4;
+		   UI::g_fh->render(as_richtext_paragraph(statictics, statistics_font, UI::Align::kCenter));
+		position.y += rendered_census->height() + text_height(statistics_font) / 4;
 		rendered_statistics->draw(*dst, position, UI::Align::kCenter);
 	}
 }
@@ -632,8 +675,12 @@ void MapObject::Loader::load_pointers() {
  * configured.
  *
  * Derived functions must call ancestor's function in the appropriate place.
+ *
+ * We also preload some animation graphics here to prevent jitter at game start.
  */
 void MapObject::Loader::load_finish() {
+	MapObject& mo = get<MapObject>();
+	mo.descr().load_graphics();
 }
 
 /**
