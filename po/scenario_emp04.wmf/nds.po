@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2019\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -152,15 +152,15 @@ msgstr "Hannel mit Julia, um de Technik to kriegen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:120
 msgid "Diplomacy: Trade or War"
-msgstr "Hannel oder Krieg"
+msgstr "Hannel of Krieg"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:121
 msgid ""
 "Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the "
 "goddess in your headquarters or conquer the monastery."
 msgstr ""
-"Reselveer: Of sammelst du 35 Ähren Weit un 15 Potten Wien för de Gottheid in"
-" dienem Raadhuus, of du manntjest dat Klooster."
+"Reselveer: Oder sammelst du 35 Ähren Weit un 15 Potten Wien för de Gottheid "
+"in dienem Raadhuus, of du manntjest dat Klooster."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:127
 msgid "Train at least 3 heroes"
@@ -1379,14 +1379,3 @@ msgid ""
 " life and your land be cursed and may the wrath of the goddess scourge your "
 "family from the face of the earth!"
 msgstr ""
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neje Upgaav"
-msgstr[1] "Neje Upgaven"

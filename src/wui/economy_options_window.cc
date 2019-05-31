@@ -46,11 +46,13 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
      serial_(economy->serial()),
      player_(&economy->owner()),
      tabpanel_(this, UI::TabPanelStyle::kWuiDark),
-     ware_panel_(new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWARE, kDesiredWidth)),
-     worker_panel_(
-        new EconomyOptionsPanel(&tabpanel_, this, serial_, player_, can_act, Widelands::wwWORKER, kDesiredWidth)),
+     ware_panel_(new EconomyOptionsPanel(
+        &tabpanel_, this, serial_, player_, can_act, Widelands::wwWARE, kDesiredWidth)),
+     worker_panel_(new EconomyOptionsPanel(
+        &tabpanel_, this, serial_, player_, can_act, Widelands::wwWORKER, kDesiredWidth)),
      dropdown_box_(this, 0, 0, UI::Box::Horizontal),
-     dropdown_(&dropdown_box_, 0, 0, 174, 200, 34, "", UI::DropdownType::kTextual, UI::PanelStyle::kWui),
+     dropdown_(
+        &dropdown_box_, 0, 0, 174, 200, 34, "", UI::DropdownType::kTextual, UI::PanelStyle::kWui),
      time_last_thought_(0),
      save_profile_dialog_(nullptr) {
 	set_center_panel(&main_box_);
@@ -59,27 +61,30 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	tabpanel_.add("workers", g_gr->images().get(pic_tab_workers), worker_panel_, _("Workers"));
 
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	UI::Button* b = new UI::Button(buttons, "decrease_target_fast", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
-			g_gr->images().get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease target by 10"));
+	UI::Button* b = new UI::Button(
+	   buttons, "decrease_target_fast", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
+	   g_gr->images().get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease target by 10"));
 	b->sigclicked.connect([this] { change_target(-10); });
 	buttons->add(b);
 	b->set_repeating(true);
 	buttons->add_space(8);
 	b = new UI::Button(buttons, "decrease_target", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
-			g_gr->images().get("images/ui_basic/scrollbar_down.png"), _("Decrease target"));
+	                   g_gr->images().get("images/ui_basic/scrollbar_down.png"),
+	                   _("Decrease target"));
 	b->sigclicked.connect([this] { change_target(-1); });
 	buttons->add(b);
 	b->set_repeating(true);
 	buttons->add_space(24);
 
 	b = new UI::Button(buttons, "increase_target", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
-			g_gr->images().get("images/ui_basic/scrollbar_up.png"), _("Increase target"));
+	                   g_gr->images().get("images/ui_basic/scrollbar_up.png"), _("Increase target"));
 	b->sigclicked.connect([this] { change_target(1); });
 	buttons->add(b);
 	b->set_repeating(true);
 	buttons->add_space(8);
 	b = new UI::Button(buttons, "increase_target_fast", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
-	                   g_gr->images().get("images/ui_basic/scrollbar_up_fast.png"), _("Increase target by 10"));
+	                   g_gr->images().get("images/ui_basic/scrollbar_up_fast.png"),
+	                   _("Increase target by 10"));
 	b->sigclicked.connect([this] { change_target(10); });
 	buttons->add(b);
 	b->set_repeating(true);
@@ -90,7 +95,8 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	dropdown_.selected.connect([this] { reset_target(); });
 
 	b = new UI::Button(&dropdown_box_, "save_targets", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			g_gr->images().get("images/wui/menus/menu_save_game.png"), _("Save target settings"));
+	                   g_gr->images().get("images/wui/menus/menu_save_game.png"),
+	                   _("Save target settings"));
 	b->sigclicked.connect([this] { create_target(); });
 	dropdown_box_.add_space(8);
 	dropdown_box_.add(b);
@@ -104,16 +110,16 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	economy->set_has_window(true);
 	economynotes_subscriber_ = Notifications::subscribe<Widelands::NoteEconomy>(
 	   [this](const Widelands::NoteEconomy& note) { on_economy_note(note); });
-	profilenotes_subscriber_ = Notifications::subscribe<NoteEconomyProfile>(
-	   [this](const NoteEconomyProfile& n) {
-			if (n.serial == serial_) {
-				// We already updated ourself before we changed something
-				return;
-			}
-			read_targets();
-			if (save_profile_dialog_) {
-				save_profile_dialog_->update_table();
-			}
+	profilenotes_subscriber_ =
+	   Notifications::subscribe<NoteEconomyProfile>([this](const NoteEconomyProfile& n) {
+		   if (n.serial == serial_) {
+			   // We already updated ourself before we changed something
+			   return;
+		   }
+		   read_targets();
+		   if (save_profile_dialog_) {
+			   save_profile_dialog_->update_table();
+		   }
 	   });
 
 	read_targets();
@@ -214,7 +220,7 @@ EconomyOptionsWindow::TargetWaresDisplay::info_for_ware(Widelands::DescriptionIn
  * Wraps the wares/workers display together with some buttons
  */
 EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent,
-		                    								   EconomyOptionsWindow* eco_window,
+                                                               EconomyOptionsWindow* eco_window,
                                                                Widelands::Serial serial,
                                                                Widelands::Player* player,
                                                                bool can_act,
@@ -309,10 +315,12 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 				anything_selected = true;
 				if (is_wares) {
 					game.send_player_command(new Widelands::CmdSetWareTargetQuantity(
-							game.get_gametime(), player_->player_number(), serial_, index, settings.wares.at(index)));
+					   game.get_gametime(), player_->player_number(), serial_, index,
+					   settings.wares.at(index)));
 				} else {
 					game.send_player_command(new Widelands::CmdSetWorkerTargetQuantity(
-							game.get_gametime(), player_->player_number(), serial_, index, settings.workers.at(index)));
+					   game.get_gametime(), player_->player_number(), serial_, index,
+					   settings.workers.at(index)));
 				}
 			}
 		}
@@ -343,7 +351,8 @@ std::string EconomyOptionsWindow::applicable_target() {
 		if (tabpanel_.active() == 0) {
 			for (const Widelands::DescriptionIndex& index : player_->tribe().wares()) {
 				const auto it = pair.second.wares.find(index);
-				if (it != pair.second.wares.end() && eco->ware_target_quantity(index).permanent != it->second) {
+				if (it != pair.second.wares.end() &&
+				    eco->ware_target_quantity(index).permanent != it->second) {
 					matches = false;
 					break;
 				}
@@ -351,7 +360,8 @@ std::string EconomyOptionsWindow::applicable_target() {
 		} else {
 			for (const Widelands::DescriptionIndex& index : player_->tribe().workers()) {
 				const auto it = pair.second.workers.find(index);
-				if (it != pair.second.workers.end() && eco->worker_target_quantity(index).permanent != it->second) {
+				if (it != pair.second.workers.end() &&
+				    eco->worker_target_quantity(index).permanent != it->second) {
 					matches = false;
 					break;
 				}
@@ -414,7 +424,7 @@ void EconomyOptionsWindow::SaveProfileWindow::update_save_enabled() {
 	if (text.empty() || text == kDefaultEconomyProfile) {
 		save_.set_enabled(false);
 		save_.set_tooltip(text.empty() ? _("The profile name cannot be empty") :
-				_("The default profile cannot be overwritten"));
+		                                 _("The default profile cannot be overwritten"));
 	} else {
 		save_.set_enabled(true);
 		save_.set_tooltip(_("Save the profile under this name"));
@@ -453,9 +463,10 @@ void EconomyOptionsWindow::SaveProfileWindow::save() {
 	assert(name != kDefaultEconomyProfile);
 	for (const auto& pair : economy_options_->get_predefined_targets()) {
 		if (pair.first == name) {
-			UI::WLMessageBox m(this, _("Overwrite?"),
-					_("A profile with this name already exists. Do you wish to replace it?"),
-					UI::WLMessageBox::MBoxType::kOkCancel);
+			UI::WLMessageBox m(
+			   this, _("Overwrite?"),
+			   _("A profile with this name already exists. Do you wish to replace it?"),
+			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
 			}
@@ -495,7 +506,8 @@ void EconomyOptionsWindow::SaveProfileWindow::think() {
 	UI::Window::think();
 }
 
-EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent, EconomyOptionsWindow* eco)
+EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent,
+                                                           EconomyOptionsWindow* eco)
    : UI::Window(parent, "save_economy_options_profile", 0, 0, 0, 0, _("Save Profile")),
      economy_options_(eco),
      main_box_(this, 0, 0, UI::Box::Vertical),
@@ -596,7 +608,8 @@ void EconomyOptionsWindow::save_targets() {
 			section.set_natural(tribes.get_ware_descr(setting.first)->name().c_str(), setting.second);
 		}
 		for (const auto& setting : pair.second.workers) {
-			section.set_natural(tribes.get_worker_descr(setting.first)->name().c_str(), setting.second);
+			section.set_natural(
+			   tribes.get_worker_descr(setting.first)->name().c_str(), setting.second);
 		}
 	}
 
@@ -608,7 +621,8 @@ void EconomyOptionsWindow::save_targets() {
 	}
 
 	g_fs->ensure_directory_exists(kEconomyProfilesDir);
-	std::string complete_filename = kEconomyProfilesDir + g_fs->file_separator() + player_->tribe().name();
+	std::string complete_filename =
+	   kEconomyProfilesDir + g_fs->file_separator() + player_->tribe().name();
 	profile.write(complete_filename.c_str(), false);
 
 	// Inform the windows of other economies of new and deleted profiles
@@ -638,7 +652,8 @@ void EconomyOptionsWindow::read_targets() {
 		predefined_targets_.insert(std::make_pair(kDefaultEconomyProfile, t));
 	}
 
-	std::string complete_filename = kEconomyProfilesDir + g_fs->file_separator() + player_->tribe().name();
+	std::string complete_filename =
+	   kEconomyProfilesDir + g_fs->file_separator() + player_->tribe().name();
 	Profile profile;
 	profile.read(complete_filename.c_str());
 
@@ -668,7 +683,8 @@ void EconomyOptionsWindow::read_targets() {
 
 		if (Section* section = profile.get_section("undeletable")) {
 			while (Section::Value* v = section->get_next_val()) {
-				predefined_targets_.at(serials.at(std::string(v->get_name()))).undeletable = v->get_bool();
+				predefined_targets_.at(serials.at(std::string(v->get_name()))).undeletable =
+				   v->get_bool();
 			}
 		}
 	}

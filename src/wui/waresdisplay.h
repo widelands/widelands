@@ -156,7 +156,8 @@ private:
 	Widelands::DescriptionIndex selection_anchor_;
 	boost::function<void(Widelands::DescriptionIndex, bool)> callback_function_;
 
-	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>> graphic_resolution_changed_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 	int32_t min_free_vertical_space_;
 };
 

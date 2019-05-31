@@ -32,9 +32,9 @@ struct WuiPlotArea;
 struct StatisticWaresDisplay;
 struct WuiPlotAreaSlider;
 namespace UI {
-	struct Box;
-	struct TabPanel;
-}
+struct Box;
+struct TabPanel;
+}  // namespace UI
 
 struct WareStatisticsMenu : public UI::UniqueWindow {
 public:

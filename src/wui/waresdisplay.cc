@@ -74,9 +74,7 @@ AbstractWaresDisplay::AbstractWaresDisplay(
 	curware_.set_text(_("Stock"));
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-		[this](const GraphicResolutionChanged&) {
-			recalc_desired_size(true);
-		});
+	   [this](const GraphicResolutionChanged&) { recalc_desired_size(true); });
 
 	recalc_desired_size(false);
 }
@@ -117,12 +115,12 @@ void AbstractWaresDisplay::recalc_desired_size(bool relayout) {
 	const Widelands::Extent size = get_extent();
 
 	// 25 is height of curware_ text
-	set_desired_size(
-	   size.w * (kWareMenuPicWidth + hgap_) - hgap_ + 5,
-	   size.h * (kWareMenuPicHeight + kWareMenuInfoSize + vgap_) - vgap_ + 1 + 25);
+	set_desired_size(size.w * (kWareMenuPicWidth + hgap_) - hgap_ + 5,
+	                 size.h * (kWareMenuPicHeight + kWareMenuInfoSize + vgap_) - vgap_ + 1 + 25);
 
 	if (relayout) {
-		// Since we are usually stacked deep within other panels, we need to tell our highest parent window to relayout
+		// Since we are usually stacked deep within other panels, we need to tell our highest parent
+		// window to relayout
 		UI::Panel* p = this;
 		while (p->get_parent()) {
 			p = p->get_parent();
@@ -222,7 +220,7 @@ Widelands::DescriptionIndex AbstractWaresDisplay::ware_at_point(int32_t x, int32
 	int i = x / (kWareMenuPicWidth + hgap_);
 	int j = y / (kWareMenuPicHeight + kWareMenuInfoSize + vgap_);
 	if (kWareMenuPicWidth * (i + 1) + hgap_ * i < x ||
-			(kWareMenuPicHeight + kWareMenuInfoSize) * (j + 1) + vgap_ * j < y) {
+	    (kWareMenuPicHeight + kWareMenuInfoSize) * (j + 1) + vgap_ * j < y) {
 		// Not on the ware, but on the space between
 		return Widelands::INVALID_INDEX;
 	}
@@ -358,7 +356,7 @@ void AbstractWaresDisplay::relayout_icons_order_coords() {
 	order_coords_.clear();
 	const int column_number = icons_order().size();
 	const int column_max_size = std::max(1, (g_gr->get_yres() - min_free_vertical_space_) /
-			(kWareMenuPicHeight + vgap_ + kWareMenuInfoSize));
+	                                           (kWareMenuPicHeight + vgap_ + kWareMenuInfoSize));
 
 	int16_t column_index_to_apply = 0;
 	for (int16_t column_index = 0; column_index < column_number; ++column_index) {
@@ -366,7 +364,8 @@ void AbstractWaresDisplay::relayout_icons_order_coords() {
 		const int row_number = column.size();
 		int16_t row_index_to_apply = 0;
 		for (int16_t row_index = 0; row_index < row_number; ++row_index) {
-			order_coords_.emplace(column.at(row_index), Widelands::Coords(column_index_to_apply, row_index_to_apply));
+			order_coords_.emplace(
+			   column.at(row_index), Widelands::Coords(column_index_to_apply, row_index_to_apply));
 			++row_index_to_apply;
 			if (row_index_to_apply >= column_max_size) {
 				row_index_to_apply = 0;
@@ -426,14 +425,14 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 
 	dst.blit(p + Vector2i((w - kWareMenuPicWidth) / 2, 1), icon);
 
-	dst.fill_rect(Recti(p + Vector2i(0, kWareMenuPicHeight), w, kWareMenuInfoSize),
-	              info_color_for_ware(id));
+	dst.fill_rect(
+	   Recti(p + Vector2i(0, kWareMenuPicHeight), w, kWareMenuInfoSize), info_color_for_ware(id));
 
 	std::shared_ptr<const UI::RenderedText> rendered_text =
 	   UI::g_fh->render(as_richtext_paragraph(info_for_ware(id), style.info_font()));
-	rendered_text->draw(dst, Vector2i(p.x + w - rendered_text->width() - 1,
-	                                  p.y + kWareMenuPicHeight + kWareMenuInfoSize + 1 -
-	                                     rendered_text->height()));
+	rendered_text->draw(
+	   dst, Vector2i(p.x + w - rendered_text->width() - 1,
+	                 p.y + kWareMenuPicHeight + kWareMenuInfoSize + 1 - rendered_text->height()));
 }
 
 // Wares highlighting/selecting

@@ -103,10 +103,10 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
                       kPlotWidth + 2 * kSpacing,
                       270,
                       _("Ware Statistics")),
-		main_box_(nullptr),
-		tab_panel_(nullptr),
-		display_(nullptr),
-		slider_(nullptr) {
+     main_box_(nullptr),
+     tab_panel_(nullptr),
+     display_(nullptr),
+     slider_(nullptr) {
 	uint8_t const nr_wares = parent.get_player()->egbase().tribes().nrwares();
 
 	// Init color sets
@@ -184,9 +184,9 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	}
 
 	display_ = new StatisticWaresDisplay(
-	            main_box_, 0, 0, parent.get_player()->tribe(),
-	            [this](const int ware_index, const bool what) { cb_changed_to(ware_index, what); },
-	            color_map_);
+	   main_box_, 0, 0, parent.get_player()->tribe(),
+	   [this](const int ware_index, const bool what) { cb_changed_to(ware_index, what); },
+	   color_map_);
 	display_->set_min_free_vertical_space(400);
 	main_box_->add(display_, UI::Box::Resizing::kFullSize);
 
@@ -247,10 +247,12 @@ void WareStatisticsMenu::layout() {
 	display_->get_desired_size(&w2, &h2);
 	slider_->get_desired_size(&w3, &h3);
 
-	display_->set_hgap(std::max(3, AbstractWaresDisplay::calc_hgap(display_->get_extent().w, kPlotWidth)), false);
+	display_->set_hgap(
+	   std::max(3, AbstractWaresDisplay::calc_hgap(display_->get_extent().w, kPlotWidth)), false);
 	display_->get_desired_size(&w2, &h2);
 
-	main_box_->set_desired_size(std::max(w2, kPlotWidth) + 2 * kSpacing, h1 + h2 + h3 + text_height(UI::FontStyle::kLabel));
+	main_box_->set_desired_size(
+	   std::max(w2, kPlotWidth) + 2 * kSpacing, h1 + h2 + h3 + text_height(UI::FontStyle::kLabel));
 	UI::UniqueWindow::layout();
 	layouting = false;
 }
