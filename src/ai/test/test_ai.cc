@@ -214,5 +214,26 @@ BOOST_AUTO_TEST_CASE(flag_candidates_sorting)
     BOOST_CHECK_EQUAL(fc.count(), 3);
 }
 
+BOOST_AUTO_TEST_CASE(flag_sort_by_air_distance)
+{
+    FlagCandidates fc = FlagCandidates(10);
+
+    fc.add_flag(0,false,10,4);
+    fc.add_flag(1,false,10,1);
+    fc.add_flag(2,false,10,2);
+    fc.sort_by_air_distance();
+    BOOST_CHECK_EQUAL(fc.flags[0].air_distance, 1);
+}
+
+BOOST_AUTO_TEST_CASE(flag_has_candidate)
+{
+    FlagCandidates fc = FlagCandidates(10);
+
+    fc.add_flag(0,false,10,4);
+    fc.add_flag(1,false,10,1);
+    fc.add_flag(2,false,10,2);
+    BOOST_CHECK_EQUAL(fc.has_candidate(1), true);
+    BOOST_CHECK_EQUAL(fc.has_candidate(3), false);
+}
 
 BOOST_AUTO_TEST_SUITE_END()

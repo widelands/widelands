@@ -4000,7 +4000,10 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
         if (flag_candidates.has_candidate(nf_walk.second.flag->get_position().hash())) {
             flag_candidates.set_cur_road_distance(
                nf_walk.second.flag->get_position(), nf_walk.second.current_road_distance);
-        }
+        } else {
+			printf ("flag connected by road at %3dx%3d not in candidates\n",
+			nf_walk.second.flag->get_position().x, nf_walk.second.flag->get_position().y);
+			}
     }
 
     // Here we must consider how much are buildable fields lacking
@@ -4031,9 +4034,9 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     //              const int32_t b_length = b.current_road_length / 50;
     //              return std::tie(b_length, a.air_distance) < std::tie(a_length, b.air_distance);
     //          });
-    flag_candidates.sort();
 
     // Now we calculate roads from here to few best looking RoadCandidates....
+    flag_candidates.sort_by_air_distance();
     uint32_t possible_roads_count = 0;
     //uint32_t current = 0;  // hash of flag that we are going to calculate in the iteration
     for (auto &flag_candidate : flag_candidates.flags){

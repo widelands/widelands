@@ -945,10 +945,10 @@ struct FlagCandidates{
                    return score() > other.score();
         }
         void print(){
-            printf  (" Candidate flag at %3dx%3d: dist. to wh %4d, cur. road length: %2d, poss. road length: %3d,Different ec: %s, score: %3d, \n",
+            printf  (" Candidate flag at %3dx%3d: dist. to wh %4d, cur. road length: %2d, poss. road length: %3d, air dist.: %2d, different ec: %s, score: %3d, \n",
                    Coords::unhash(coords_hash).x, Coords::unhash(coords_hash).y,
                      cand_flag_distance_to_wh, flag_to_flag_road_distance, possible_road_distance,
-                     (different_economy)? "Y": "N", score());
+                     air_distance, (different_economy)? "Y": "N", score());
         }
     };
 
@@ -960,6 +960,7 @@ struct FlagCandidates{
     bool set_cur_road_distance(uint32_t, uint16_t );
     bool set_road_possible(uint32_t, uint16_t );
     void sort();
+    void sort_by_air_distance();
     uint32_t count() {return flags.size();}
     FlagCandidates::Candidate* get_winner();
 

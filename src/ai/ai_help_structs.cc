@@ -1557,6 +1557,13 @@ bool FlagCandidates::set_cur_road_distance(const uint32_t coords, uint16_t dist)
 void FlagCandidates::sort(){
     std::sort(flags.begin(), flags.end());
 }
+
+void FlagCandidates::sort_by_air_distance(){
+    std::sort(flags.begin( ), flags.end( ), [ ]( const FlagCandidates::Candidate& lf, const FlagCandidates::Candidate& rf ) {
+		return lf.air_distance < rf.air_distance;
+    });
+}
+
 void FlagCandidates::add_flag(const uint32_t coords, const bool different_economy, const uint16_t act_dist_to_wh, const uint16_t air_distance){
     flags.push_back(Candidate(coords, different_economy, start_flag_dist_to_wh, act_dist_to_wh, air_distance));
 }
