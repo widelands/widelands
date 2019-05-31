@@ -51,7 +51,7 @@ tribes:new_productionsite_type {
          descname = _"fishing",
          actions = {
             "callworker=fish",
-            "sleep=16000"
+            "sleep=16000" -- TODO(stonerl): reduce to 3000 and move 13000 to the worker
          }
       },
    },

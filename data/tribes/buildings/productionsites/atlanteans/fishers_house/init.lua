@@ -47,7 +47,7 @@ tribes:new_productionsite_type {
          descname = _"fishing",
          actions = {
             "callworker=fish",
-            "sleep=16000"
+            "sleep=3000"
          }
       },
 
