@@ -866,6 +866,7 @@ void Ship::reorder_destinations(Game& game) {
 		}
 		if (nr_items == 0 && p->count_waiting() == 0 && !p->expedition_started() && (!pd || pd->count_waiting(p) == 0)) {
 			// We don't need to go there anymore
+			p->ship_coming(*this, false);
 			continue;
 		}
 		old_dq.push_back(std::make_pair(p, pair.second));
