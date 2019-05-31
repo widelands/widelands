@@ -95,7 +95,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	dropdown_.selected.connect([this] { reset_target(); });
 
 	b = new UI::Button(&dropdown_box_, "save_targets", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-	                   g_gr->images().get("images/wui/menus/menu_save_game.png"),
+	                   g_gr->images().get("images/wui/menus/save_game.png"),
 	                   _("Save target settings"));
 	b->sigclicked.connect([this] { create_target(); });
 	dropdown_box_.add_space(8);

@@ -154,7 +154,7 @@ BaseDropdown::~BaseDropdown() {
 	// The list needs to be able to drop outside of windows, so it won't close with the window.
 	// Deleting here leads to conflict with who gets to delete it, so we hide it instead.
 	// TODO(GunChleoc): Investigate whether we can find a better solution for this
-	if (list_) {
+	if (list_ != nullptr) {
 		list_->clear();
 		list_->set_visible(false);
 	}

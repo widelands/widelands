@@ -123,8 +123,10 @@ void Panel::free_children() {
 	// Scan-build claims this results in double free.
 	// This is a false positive.
 	// See https://bugs.launchpad.net/widelands/+bug/1198928
-	while (first_child_)
+	while (first_child_) {
 		delete first_child_;
+		first_child_ = nullptr;
+	}
 }
 
 /**
@@ -736,10 +738,12 @@ void Panel::check_child_death() {
 		Panel* p = next;
 		next = p->next_;
 
-		if (p->flags_ & pf_die)
+		if (p->flags_ & pf_die) {
 			delete p;
-		else if (p->flags_ & pf_child_die)
+			p = nullptr;
+		} else if (p->flags_ & pf_child_die) {
 			p->check_child_death();
+		}
 	}
 
 	flags_ &= ~pf_child_die;
