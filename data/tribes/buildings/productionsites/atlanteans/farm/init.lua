@@ -61,7 +61,7 @@ tribes:new_productionsite_type {
          descname = _"planting corn",
          actions = {
             "callworker=plant",
-            "sleep=14000"
+            "sleep=10000"
          }
       },
       harvest = {

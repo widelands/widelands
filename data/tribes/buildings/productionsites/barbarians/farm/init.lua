@@ -59,8 +59,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=plant",
             "call=harvest",
+            "call=plant",
             "return=no_stats"
          }
       },
@@ -69,7 +69,8 @@ tribes:new_productionsite_type {
          descname = _"planting wheat",
          actions = {
             "callworker=plant",
-            "sleep=14000"
+            "animate=working 7000",
+            "sleep=3000"
          }
       },
       harvest = {
@@ -77,8 +78,8 @@ tribes:new_productionsite_type {
          descname = _"harvesting wheat",
          actions = {
             "callworker=harvest",
-            "animate=working 30000",
-            "sleep=4000"
+            "animate=working 17000",
+            "sleep=3000"
          }
       },
    },
