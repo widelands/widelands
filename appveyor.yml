@@ -20,6 +20,10 @@ install:
   # Update msys2 system (twice, first run does system packages)
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   - cmd: "bash --login -c \"pacman -Suuyy --nodeps --noconfirm\""
+  # we need to revert the update from ncurses /termcap to pdcurses forced by MSYS2
+  - cmd: "bash --login -c \"pacman -Rdd --noconfirm mingw-w64-%MINGWSUFFIX%-pdcurses\""
+  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-ncurses-6.1.20180908-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-ncurses-6.1.20180908-1-any.pkg.tar.xz\""
+  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-termcap-1.3.1-3-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-termcap-1.3.1-3-any.pkg.tar.xz\""
   # Installed required libs
   - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glew\""
   #- cmd: "IF \"%PLATFORM%\" == \"x86\" (bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-glew\") ELSE (bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-glbinding\")"
