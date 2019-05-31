@@ -929,9 +929,10 @@ struct FlagCandidates{
 
     explicit FlagCandidates(uint16_t wd) : start_flag_dist_to_wh(wd) {}
 
-      struct Candidate{
+     struct Candidate{
         Candidate() = delete;
-        Candidate(uint32_t, bool, uint16_t, uint16_t );
+        Candidate(uint32_t, bool, uint16_t, uint16_t, uint16_t );
+        uint16_t air_distance;
         uint32_t coords_hash;
         bool different_economy;
         uint16_t start_flag_dist_to_wh;
@@ -955,7 +956,7 @@ struct FlagCandidates{
     uint16_t start_flag_dist_to_wh;
 
     bool has_candidate(uint32_t);
-    void add_flag(uint32_t, bool, uint16_t );
+    void add_flag(uint32_t, bool, uint16_t, uint16_t );
     bool set_cur_road_distance(uint32_t, uint16_t );
     bool set_road_possible(uint32_t, uint16_t );
     void sort();

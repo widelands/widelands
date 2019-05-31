@@ -178,7 +178,7 @@ BOOST_AUTO_TEST_CASE(flag_candidate_winner_score)
 
 
     // coord, different economy, distance to wh
-    fc.add_flag(kTestedCoords, false, kCurFlDistToWh);
+    fc.add_flag(kTestedCoords, false, kCurFlDistToWh,1);
     // setting coords, dist
     BOOST_CHECK_EQUAL(fc.set_cur_road_distance(kTestedCoords,kCurRoadDistFlToFl), true);
     BOOST_CHECK_EQUAL(fc.set_cur_road_distance(1,5), false); //we cannot set distance to unknown flag
@@ -201,9 +201,9 @@ BOOST_AUTO_TEST_CASE(flag_candidates_sorting)
 {
     FlagCandidates fc = FlagCandidates(10);
 
-    fc.add_flag(0,false,10);
-    fc.add_flag(1,false,10);
-    fc.add_flag(2,false,10);
+    fc.add_flag(0,false,10,1);
+    fc.add_flag(1,false,10,1);
+    fc.add_flag(2,false,10,1);
     BOOST_CHECK_EQUAL(fc.set_cur_road_distance(0, 5), true);
     BOOST_CHECK_EQUAL(fc.set_cur_road_distance(1, 5), true);
     BOOST_CHECK_EQUAL(fc.set_cur_road_distance(2, 5), true);

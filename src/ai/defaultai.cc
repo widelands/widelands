@@ -3975,9 +3975,11 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
             //if (flag_warehouse_distance.get_road_prohibited(reachable_coords.hash(), gametime)) {
 			//	printf ("Flag prohibited
 
+			const uint16_t air_distance = map.calc_distance(flag.get_position(), reachable_coords);
+
             if (!flag_candidates.has_candidate(reachable_coords.hash()) && !flag_warehouse_distance.get_road_prohibited(reachable_coords.hash(), gametime)) {
                 flag_candidates.add_flag(reachable_coords.hash(), different_economy,
-                flag_warehouse_distance.get_distance(reachable_coords.hash(), gametime, &tmp_wh)); //NOCOM
+                flag_warehouse_distance.get_distance(reachable_coords.hash(), gametime, &tmp_wh), air_distance); //NOCOM
             }
         }
     }
@@ -4035,7 +4037,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     uint32_t possible_roads_count = 0;
     //uint32_t current = 0;  // hash of flag that we are going to calculate in the iteration
     for (auto &flag_candidate : flag_candidates.flags){
-        if (possible_roads_count > 5) {break;}
+        if (possible_roads_count > 10) {break;}
         const Widelands::Coords coords = Coords::unhash(flag_candidate.coords_hash);
         Path path;
 
@@ -4182,7 +4184,6 @@ void DefaultAI::collect_nearflags(std::map<uint32_t, NearFlag> &nearflags, const
                 nearflags[endflag_hash] =
                    NearFlag(endflag, nearflags[start_field].current_road_distance +
                                         road->get_path().get_nsteps());
-                        // NOCOM adding distance to wh
             } else {
                 // We know about this flag already
                 if (nearflags[endflag_hash].current_road_distance >

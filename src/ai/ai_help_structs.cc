@@ -1522,7 +1522,7 @@ FlagCandidates::Candidate* FlagCandidates::get_winner(){
     return &flags[0];
 }
 
-FlagCandidates::Candidate::Candidate(const uint32_t ch, bool de, uint16_t start_f_dist, uint16_t act_dist_to_wh){
+FlagCandidates::Candidate::Candidate(const uint32_t ch, bool de, uint16_t start_f_dist, uint16_t act_dist_to_wh, uint16_t air_dst){
 	printf ("    initializing new candidate for %3dx%3d (%8d), with actual distance to wh: %2d\n",
 	Coords::unhash(ch).x, Coords::unhash(ch).y, ch, act_dist_to_wh);
     coords_hash = ch;
@@ -1531,6 +1531,7 @@ FlagCandidates::Candidate::Candidate(const uint32_t ch, bool de, uint16_t start_
     flag_to_flag_road_distance = 0;
     possible_road_distance = 1000;
     cand_flag_distance_to_wh = act_dist_to_wh;
+    air_distance = air_dst;
 }
 
 int16_t FlagCandidates::Candidate::score() const{    //NOCOM
@@ -1556,8 +1557,8 @@ bool FlagCandidates::set_cur_road_distance(const uint32_t coords, uint16_t dist)
 void FlagCandidates::sort(){
     std::sort(flags.begin(), flags.end());
 }
-void FlagCandidates::add_flag(const uint32_t coords, const bool different_economy, const uint16_t act_dist_to_wh){
-    flags.push_back(Candidate(coords, different_economy, start_flag_dist_to_wh, act_dist_to_wh));
+void FlagCandidates::add_flag(const uint32_t coords, const bool different_economy, const uint16_t act_dist_to_wh, const uint16_t air_distance){
+    flags.push_back(Candidate(coords, different_economy, start_flag_dist_to_wh, act_dist_to_wh, air_distance));
 }
 
 
