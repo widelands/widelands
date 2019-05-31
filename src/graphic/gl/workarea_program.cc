@@ -98,13 +98,13 @@ void WorkareaProgram::add_vertex(const FieldsToDraw::Field& field, RGBAColor ove
 	v->emplace_back();
 	PerVertexData& back = v->back();
 
-	if (offset.x == 0 && offset.y == 0) {
-		back.gl_x = field.gl_position.x;
-		back.gl_y = field.gl_position.y;
-	} else {
+	if (offset.x > 0 || offset.x < 0 || offset.y > 0 || offset.y < 0) {
 		back.gl_x = field.surface_pixel.x + offset.x;
 		back.gl_y = field.surface_pixel.y + offset.y;
 		pixel_to_gl_renderbuffer(viewport.x, viewport.y, &back.gl_x, &back.gl_y);
+	} else {
+		back.gl_x = field.gl_position.x;
+		back.gl_y = field.gl_position.y;
 	}
 	back.overlay_r = overlay.r / 255.f;
 	back.overlay_g = overlay.g / 255.f;
@@ -114,8 +114,8 @@ void WorkareaProgram::add_vertex(const FieldsToDraw::Field& field, RGBAColor ove
 
 constexpr float kBorderStrength = 2.8f;
 
-// Helper functions to get the border thickness right
-constexpr float kOffsetFactor = static_cast<float>(std::sqrt(kBorderStrength * kBorderStrength /
+// Helper functions for calculating the border thickness
+const static float kOffsetFactor = static_cast<float>(std::sqrt(kBorderStrength * kBorderStrength /
 		(kTriangleWidth * kTriangleWidth + kTriangleHeight * kTriangleHeight)));
 static Vector2f offset(size_t radius, size_t pos) {
 	if (pos % radius == 0) {
@@ -165,8 +165,11 @@ void WorkareaProgram::draw(uint32_t texture_id,
                            float z_value,
                            Vector2f rendertarget_dimension) {
 	const FieldsToDraw::Field& topleft = fields_to_draw.at(0);
-	if (cache_ && cache_->fcoords == topleft.fcoords && cache_->surface_pixel == topleft.surface_pixel &&
-			cache_->workareas == workarea) {
+	if (cache_ && cache_->fcoords == topleft.fcoords && !(
+			cache_->surface_pixel.x > topleft.surface_pixel.x ||
+			cache_->surface_pixel.x < topleft.surface_pixel.x ||
+			cache_->surface_pixel.y > topleft.surface_pixel.y ||
+			cache_->surface_pixel.y < topleft.surface_pixel.y) && cache_->workareas == workarea) {
 		return gl_draw(texture_id, z_value);
 	}
 	cache_.reset(new WorkareasCache(workarea, topleft.fcoords, topleft.surface_pixel));
