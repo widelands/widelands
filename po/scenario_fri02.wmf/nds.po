@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2019\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -106,7 +106,7 @@ msgstr "Entschee di, of du mit de Latiensken Riek tosammenarbeiden willt"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
-msgstr "Sammel Waren as Gaven oder verneel dat Rieks-Kraamhuus"
+msgstr "Sammel Waren as Gaven of verneel dat Rieks-Kraamhuus"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:63
 msgid ""
@@ -588,7 +588,7 @@ msgid ""
 " probably want to prepare for the increasing demands of time and food."
 msgstr ""
 "De Bargwarken könen dann noch produzeren, aver 't düürt sowat twintig maal "
-"langer – teihn maal, wenn 't een deeps Bargwark is – Kluten oder Köhl to "
+"langer – teihn maal, wenn 't een deeps Bargwark is – Kluten of Köhl to "
 "produzeren. Du willt wull all daarför klaarmaken, dat 't dann langer düürt "
 "un mehr Spiesen bruukt."
 
@@ -603,8 +603,8 @@ msgstr "Uns' Wirtschaft is kumpleet"
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:246
 msgid ""
-"You are right – we should build more berry farms, collector’s houses and "
-"taverns as well as a drinking hall, and advanced bakeries and breweries."
+"You are right – we should build more berry farms, fruit collector’s houses "
+"and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
 "Du hest recht – wi sallen mehr Buskenplantereen, Früchtenpottjereen un "
 "Kneipen bauen, un daarto eene Weertskupp un betere Backereen un Broereen."
@@ -684,13 +684,13 @@ msgstr ""
 "Frömde! Ick, Murilius, Prokonsul vun de Noordlannen, eene Provinz vum "
 "Latiensken Riek, will weten, well ji west un wat ji in deesen Landen doot!"
 
-#. TRANSLATORS: Reebaud – Supply Murilius 4
+#. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
+#. frisian greeting, nothing more.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:278
 msgid ""
-"Greetings, representative of the Empire! I am Reebaud, the chieftain of this"
-" tribe. All we want is to settle down here, build our home and live our "
-"lives in peace. We do not seek trouble, but we aren’t afraid to fight, "
-"either."
+"Peace, representative of the Empire! I am Reebaud, the chieftain of this "
+"tribe. All we want is to settle down here, build our home and live our lives"
+" in peace. We do not seek trouble, but we aren’t afraid to fight, either."
 msgstr ""
 "Free, Vertreder vum Riek! Ick bün Reebaud, de Anföhrer vun deesem Volk. Wi "
 "willen nix anners, as uns hier daaltolaten, eene Heimaad to bauen, un in "
@@ -1033,21 +1033,10 @@ msgid ""
 "We have defeated all our enemies! Now no other tribe will ever dare settle "
 "here again. We are safe, and we can finally live our lives in peace."
 msgstr ""
-"Wi hebben all uns' Feinde manntjet! Nu kann keen anneres Volk 't jemaals "
+"Wi hebben all uns' Feinde manntjet! Nu kann keen anner Volk 't jemaals "
 "wagen, sük hier daaltolaten. Wi sünd seker un könen uplest uns' Levens in "
 "Ruh un Free leven."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:416
 msgid "Congratulations"
 msgstr "Glückwunsk"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neje Upgaav"
-msgstr[1] "Neje Upgaven"

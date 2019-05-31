@@ -3,16 +3,16 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
-# Gonta Ultra (Ulgon), 2016
+# Gonta Ultra, 2016
 # satow yoshi <yoshiyuki.sato.rabbit@gmail.com>, 2017
 # tamanegi, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-15 11:14+0000\n"
-"PO-Revision-Date: 2019-02-22 13:36+0000\n"
-"Last-Translator: tamanegi\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 10:12+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1035,13 +1035,3 @@ msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
 msgstr "このチュートリアルをプレイしてくれてありがとうございます。Widelandsを楽しんでください。それと、我々のサイトにも色々な情報があるのでぜひ訪れてみてください。"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "『%s』"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "新しい目的"

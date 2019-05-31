@@ -144,6 +144,7 @@ void LoginBox::clicked_register() {
 	} else {
 		ta_password->set_style(g_gr->styles().font_style(UI::FontStyle::kLabel));
 		eb_password->set_can_focus(true);
+		eb_password->focus();
 	}
 }
 
@@ -168,7 +169,6 @@ void LoginBox::verify_input() {
 	if (eb_password->text().empty() && cb_register->get_state()) {
 		eb_password->set_tooltip(_("Please enter your password!"));
 		loginbtn->set_enabled(false);
-		eb_password->focus();
 	}
 
 	Section& s = g_options.pull_section("global");

@@ -148,22 +148,13 @@ public:
 	}
 
 	using WaresOrder = std::vector<std::vector<Widelands::DescriptionIndex>>;
-	using WaresOrderCoords = std::vector<std::pair<uint32_t, uint32_t>>;
 	const WaresOrder& wares_order() const {
 		return wares_order_;
-	}
-	const WaresOrderCoords& wares_order_coords() const {
-		return wares_order_coords_;
 	}
 
 	const WaresOrder& workers_order() const {
 		return workers_order_;
 	}
-	const WaresOrderCoords& workers_order_coords() const {
-		return workers_order_coords_;
-	}
-
-	void resize_ware_orders(size_t maxLength);
 
 	const std::vector<std::string>& get_ship_names() const {
 		return ship_names_;
@@ -213,9 +204,7 @@ private:
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display
 	WaresOrder wares_order_;
-	WaresOrderCoords wares_order_coords_;
 	WaresOrder workers_order_;
-	WaresOrderCoords workers_order_coords_;
 
 	std::vector<Widelands::TribeBasicInfo::Initialization> initializations_;
 

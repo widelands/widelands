@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
-"PO-Revision-Date: 2018-11-30 08:53+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 12:36+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -24,8 +24,8 @@ msgstr "Smuggelt Waren"
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:101
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:104
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:103
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:136
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:198
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:134
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:195
 #, lua-format
 msgid "%i point"
 msgid_plural "%i points"
@@ -37,9 +37,9 @@ msgstr[1] "%i Punkten"
 msgid "Rules"
 msgstr "Regels"
 
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:201
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:204
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:207
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:210
 msgid "Status"
 msgstr "Tostand"
 
@@ -68,7 +68,7 @@ msgstr "Um een Smuggel-Padd intorichten, mutt du up eenem Enn vun eenem Tunnel e
 msgid ""
 "For harder to defend smuggling routes, you get 2 or 3 points per ware "
 "smuggled. The first team to collect %s wins."
-msgstr "För Smuggel-Padden, de swaar to verdedigen sünd, kriggst du 2 oder 3 Punkten för elkeen smuggelt Waar. De eerste Klottje, de %s sammelt, winnt."
+msgstr "För Smuggel-Padden, de swaar to verdedigen sünd, kriggst du 2 of 3 Punkten för elkeen smuggelt Waar. De eerste Klottje, de %s sammelt, winnt."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:13
 msgid "A sending spot"
