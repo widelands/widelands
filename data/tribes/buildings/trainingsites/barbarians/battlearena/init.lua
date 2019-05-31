@@ -90,7 +90,7 @@ tribes:new_trainingsite_type {
          descname = pgettext("barbarians_building", "upgrading soldier evade from level 0 to level 1"),
          actions = {
             "checksoldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
-            "return=failed unless site has barbarians_bread:2",
+            "return=failed unless site has barbarians_bread",
             "return=failed unless site has fish,meat",
             "return=failed unless site has beer_strong",
             "animate=working 30000",
