@@ -466,7 +466,7 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 			return false;
 		play_click();
 		select(y);
-		clicked(selection_);
+		clicked();
 
 		if  //  check if doubleclicked
 		   (time - real_last_click_time < DOUBLE_CLICK_INTERVAL && last_selection_ == selection_ &&

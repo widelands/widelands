@@ -56,7 +56,6 @@ struct BaseListselect : public Panel {
 	~BaseListselect() override;
 
 	boost::signals2::signal<void(uint32_t)> selected;
-	boost::signals2::signal<void(uint32_t)> clicked;
 	boost::signals2::signal<void(uint32_t)> double_clicked;
 
 	void clear();
