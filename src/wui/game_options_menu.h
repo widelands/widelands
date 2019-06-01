@@ -32,7 +32,12 @@ struct GameOptionsMenu : public UI::UniqueWindow {
 	GameOptionsMenu(InteractiveGameBase&,
 	                UI::UniqueWindow::Registry&,
 	                InteractiveGameBase::GameMainMenuWindows&);
+
+	bool handle_key(bool down, SDL_Keysym code) override;
+
+
 	~GameOptionsMenu();
+
 
 private:
 	InteractiveGameBase& igb_;

@@ -101,6 +101,24 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
 		center_to_parent();
 }
 
+bool GameOptionsMenu::handle_key(bool down, SDL_Keysym code) {
+	log("GameOptionsMenu\n");
+	if (down) {
+		switch (code.sym) {
+			case SDLK_ESCAPE:
+				die();
+				return true;
+			case SDLK_RETURN:
+				new GameExitConfirmBox(*get_parent(), igb_);
+				die();
+				return true;
+			default:
+				break;
+		}
+	}
+	return UI::Window::handle_key(down, code);
+}
+
 GameOptionsMenu::~GameOptionsMenu() {
 }
 
