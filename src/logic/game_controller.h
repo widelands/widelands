@@ -46,7 +46,9 @@ public:
 	}
 
 	virtual void think() = 0;
-	virtual void send_player_command(Widelands::PlayerCommand&) = 0;
+
+	// TODO(Klaus Halfmann): Command must be deleted once it was handled.
+	virtual void send_player_command(Widelands::PlayerCommand*) = 0;
 	virtual int32_t get_frametime() = 0;
 	virtual GameType get_game_type() = 0;
 

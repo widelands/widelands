@@ -465,7 +465,7 @@ struct BuildingObserver {
 	uint32_t basic_amount;  // basic amount for basic economy as defined in init.lua
 
 	std::vector<Widelands::DescriptionIndex> inputs;
-	std::vector<Widelands::DescriptionIndex> outputs;
+	std::vector<Widelands::DescriptionIndex> ware_outputs;
 	std::vector<Widelands::DescriptionIndex> positions;
 	std::vector<Widelands::DescriptionIndex> critical_building_material;
 

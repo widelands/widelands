@@ -14,7 +14,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("barbarians_building", "Weaves cloth out of thatch reed.")
+   return pgettext("barbarians_building", "Weaves cloth out of reed.")
 end
 
 function building_helptext_note()

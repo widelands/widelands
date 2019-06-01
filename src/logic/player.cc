@@ -962,8 +962,18 @@ void Player::enemyflagaction(Flag& flag,
 			if (const AttackTarget* attack_target = building->attack_target()) {
 				if (attack_target->can_be_attacked()) {
 					for (Soldier* temp_attacker : soldiers) {
-						upcast(MilitarySite, ms, temp_attacker->get_location(egbase()));
-						ms->send_attacker(*temp_attacker, *building);
+						assert(temp_attacker);
+						assert(temp_attacker->get_owner() == this);
+						if (upcast(MilitarySite, ms, temp_attacker->get_location(egbase()))) {
+							assert(ms->get_owner() == this);
+							ms->send_attacker(*temp_attacker, *building);
+						} else {
+							// The soldier may not be in a militarysite anymore if he was kicked out
+							// in the short delay between sending and executing a playercommand
+							log("Player(%u)::enemyflagaction: Not sending soldier %u because he left the "
+							    "building\n",
+							    player_number(), temp_attacker->serial());
+						}
 					}
 				}
 			}
@@ -1387,7 +1397,9 @@ void Player::read_remaining_shipnames(FileRead& fr) {
  *
  * \param fr source stream
  */
-void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
+void Player::read_statistics(FileRead& fr,
+                             const uint16_t packet_version,
+                             const TribesLegacyLookupTable& lookup_table) {
 	uint16_t nr_wares = fr.unsigned_16();
 	size_t nr_entries = fr.unsigned_16();
 
@@ -1417,7 +1429,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 		ware_productions_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = fr.c_string();
+		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u statistics: unknown ware name %s", player_number(), name.c_str());
@@ -1442,7 +1454,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 		ware_consumptions_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = fr.c_string();
+		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u consumption statistics: unknown ware name %s", player_number(),
@@ -1469,7 +1481,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 		ware_stocks_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = fr.c_string();
+		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u stock statistics: unknown ware name %s", player_number(), name.c_str());

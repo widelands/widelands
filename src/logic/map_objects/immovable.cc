@@ -32,7 +32,6 @@
 #include "config.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -525,11 +524,11 @@ void Immovable::draw_construction(const uint32_t gametime,
 	   point_on_dst, coords, scale, anim_, current_frame * frametime, &player_color, percent);
 
 	// Additionally, if statistics are enabled, draw a progression string
-	do_draw_info(draw_text, descr().descname(),
-	             (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
-	              (boost::format(_("%i%% built")) % (100 * done / total)).str())
-	                .str(),
-	             point_on_dst, scale, dst);
+	do_draw_info(
+	   draw_text, descr().descname(),
+	   g_gr->styles().color_tag((boost::format(_("%i%% built")) % (100 * done / total)).str(),
+	                            g_gr->styles().building_statistics_style().construction_color()),
+	   point_on_dst, scale, dst);
 }
 
 /**
@@ -730,14 +729,10 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersionImmovable) {
 
 			const std::string owner_type = fr.c_string();
-			std::string name = fr.c_string();
 			Immovable* imm = nullptr;
 
 			if (owner_type != "world") {  //  It is a tribe immovable.
-				// Needed for map compatibility
-				if (packet_version < 7) {
-					name = tribes_lookup_table.lookup_immovable(owner_type, name);
-				}
+				const std::string name = tribes_lookup_table.lookup_immovable(fr.c_string());
 				const DescriptionIndex idx = egbase.tribes().immovable_index(name);
 				if (idx != Widelands::INVALID_INDEX) {
 					imm = new Immovable(*egbase.tribes().get_immovable_descr(idx));
@@ -746,7 +741,7 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 				}
 			} else {  //  world immovable
 				const World& world = egbase.world();
-				name = world_lookup_table.lookup_immovable(name);
+				const std::string name = world_lookup_table.lookup_immovable(fr.c_string());
 				const DescriptionIndex idx = world.get_immovable_index(name.c_str());
 				if (idx == Widelands::INVALID_INDEX) {
 					throw GameDataError("world does not define immovable type \"%s\"", name.c_str());
