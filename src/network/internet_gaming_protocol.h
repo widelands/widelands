@@ -199,7 +199,7 @@ static const std::string IGPCMD_LOGIN = "LOGIN";
  * \li string:    client name. Will be the same as sent before.
  * \li string:    clients rights (see client rights section above)
  *
- * If the password is wrong or some other error occurres, \ref IGPCMD_ERROR is returned.
+ * If the password is wrong or some other error occurred, \ref IGPCMD_ERROR is returned.
  */
 static const std::string IGPCMD_CHECK_PWD = "CHECK_PWD";
 static const std::string IGPCMD_PWD_OK = "PWD_OK";

@@ -454,7 +454,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 
 		} else if (cmd == IGPCMD_PWD_OK) {
 			const time_t now = time(nullptr);
-			log("InternetGaming: Password check successfully at UTC %s", asctime(gmtime(&now)));
+			log("InternetGaming: Password check successful at UTC %s", asctime(gmtime(&now)));
 			state_ = LOBBY;
 			return;
 
