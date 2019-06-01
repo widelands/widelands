@@ -124,9 +124,11 @@ void Panel::free_children() {
 	// This is a false positive.
 	// See https://bugs.launchpad.net/widelands/+bug/1198928
 	while (first_child_) {
+		Panel* next_child = first_child_->next_;
 		delete first_child_;
-		first_child_ = nullptr;
+		first_child_ = next_child;
 	}
+	first_child_ = nullptr;
 }
 
 /**
