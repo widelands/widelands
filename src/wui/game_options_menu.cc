@@ -102,14 +102,18 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
 }
 
 bool GameOptionsMenu::handle_key(bool down, SDL_Keysym code) {
-	log("GameOptionsMenu\n");
 	if (down) {
 		switch (code.sym) {
 			case SDLK_ESCAPE:
 				die();
 				return true;
 			case SDLK_RETURN:
-				new GameExitConfirmBox(*get_parent(), igb_);
+				if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL))) {
+					igb_.end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+					return true;
+				}
+				else
+					new GameExitConfirmBox(*get_parent(), igb_);
 				die();
 				return true;
 			default:
