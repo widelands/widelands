@@ -98,6 +98,7 @@ public:
 	handle_mousemove(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_tooltip() override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 protected:
 	void die() override;
