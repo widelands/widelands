@@ -33,10 +33,10 @@ install:
   - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/i686/mingw-w64-i686-gcc-objc-7.4.0-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-i686-gcc-objc-7.4.0-1-any.pkg.tar.xz\""
   - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/i686/mingw-w64-i686-gcc-libs-7.4.0-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-i686-gcc-libs-7.4.0-1-any.pkg.tar.xz\""
 
-  - cmd: "bash --login -c \"pacman -Rdd --noconfirm mingw-w64-%MINGWSUFFIX%-pdcurses\""
-  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-ncurses-6.1.20180908-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-ncurses-6.1.20180908-1-any.pkg.tar.xz\""
-  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-termcap-1.3.1-3-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-termcap-1.3.1-3-any.pkg.tar.xz\""
-  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-readline-8.0.000-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-readline-8.0.000-2-any.pkg.tar.xz\""
+  # - cmd: "bash --login -c \"pacman -Rdd --noconfirm mingw-w64-%MINGWSUFFIX%-pdcurses\""
+  # - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-ncurses-6.1.20180908-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-ncurses-6.1.20180908-1-any.pkg.tar.xz\""
+  # - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-termcap-1.3.1-3-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-termcap-1.3.1-3-any.pkg.tar.xz\""
+  # - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-readline-8.0.000-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-readline-8.0.000-2-any.pkg.tar.xz\""
   # - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-gdb-8.3-3-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-gdb-8.3-3-any.pkg.tar.xz\""
   # - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-python3-3.7.3-3-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-python3-3.7.3-3-any.pkg.tar.xz\""
  
