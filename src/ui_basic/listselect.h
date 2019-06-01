@@ -26,7 +26,7 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/color.h"
-#include "graphic/styles/font_style.h"
+#include "graphic/styles/table_style.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
@@ -121,40 +121,32 @@ struct BaseListselect : public Panel {
 
 private:
 	static const int32_t DOUBLE_CLICK_INTERVAL = 500;  // half a second
+	static const int32_t ms_darken_value = -20;
 
 	void set_scrollpos(int32_t);
-
-private:
-	static const int32_t ms_darken_value = -20;
 
 	struct EntryRecord {
 		explicit EntryRecord(const std::string& init_name,
 							 uint32_t init_entry,
 							 const Image* init_pic,
 							 const std::string& tooltip_text, const std::string& hotkey_text,
-							 Align talign, Align halign) :
-			name(init_name),
-			entry_(init_entry),
-			pic(init_pic),
-			tooltip(tooltip_text),
-			hotkey(hotkey_text),
-			text_alignment(talign),
-			hotkey_alignment(halign) {}
+							 const UI::TableStyleInfo& style);
+
 		const std::string name;
 		const uint32_t entry_;
 		const Image* pic;
 		const std::string tooltip;
-		const std::string hotkey;
-		const Align text_alignment;
+		const Align name_alignment;
 		const Align hotkey_alignment;
+		std::shared_ptr<const UI::RenderedText> rendered_name;
+		std::shared_ptr<const UI::RenderedText> rendered_hotkey;
 	};
-	using EntryRecordDeque = std::deque<EntryRecord*>;
 
 	int max_pic_width_;
 	int widest_text_;
 	int widest_hotkey_;
 
-	EntryRecordDeque entry_records_;
+	std::deque<EntryRecord*> entry_records_;
 	Scrollbar scrollbar_;
 	uint32_t scrollpos_;  //  in pixels
 	uint32_t selection_;
@@ -162,7 +154,7 @@ private:
 	uint32_t last_selection_;  // for double clicks
 	ListselectLayout selection_mode_;
 	const Image* check_pic_;
-	const FontStyleInfo* font_style_;
+	const UI::TableStyleInfo& table_style_;
 	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
 	int lineheight_;
 	std::string current_tooltip_;

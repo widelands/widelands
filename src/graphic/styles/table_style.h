@@ -27,8 +27,8 @@
 namespace UI {
 
 struct TableStyleInfo {
-	explicit TableStyleInfo(UI::FontStyleInfo* init_enabled, UI::FontStyleInfo* init_disabled)
-	   : enabled_(init_enabled), disabled_(init_disabled) {
+	explicit TableStyleInfo(UI::FontStyleInfo* init_enabled, UI::FontStyleInfo* init_disabled, UI::FontStyleInfo* init_hotkey)
+	   : enabled_(init_enabled), disabled_(init_disabled), hotkey_(init_hotkey) {
 	}
 
 	const UI::FontStyleInfo& enabled() const {
@@ -37,10 +37,14 @@ struct TableStyleInfo {
 	const UI::FontStyleInfo& disabled() const {
 		return *disabled_.get();
 	}
+	const UI::FontStyleInfo& hotkey() const {
+		return *hotkey_.get();
+	}
 
 private:
 	std::unique_ptr<const UI::FontStyleInfo> enabled_;
 	std::unique_ptr<const UI::FontStyleInfo> disabled_;
+	std::unique_ptr<const UI::FontStyleInfo> hotkey_;
 };
 
 }  // namespace UI
