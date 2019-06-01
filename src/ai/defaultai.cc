@@ -3497,10 +3497,13 @@ void DefaultAI::check_flag_distances(const uint32_t gametime){
 				remaining_flags.pop();
 			}
 
-			printf("%d: Checked flags: %2d, highest distance: %5d, warehouses: %lu, time: %d s\n",
+			printf("%d: Checked flags: %3d, highest distance: %5d, warehouses: %lu, time: %d s\n",
 			 player_number(), checked_flags, highest_distance_set, warehousesites.size(), gametime / 1000);
 		//}
 	}
+	
+	// Now let do some lazy prunning - remove the flags that were not updated for long
+	if (flag_warehouse_distance.remove_old_flag(gametime) == true){printf ("one flag removed\n");}
 }
 
 // Here we pick about 25 roads and investigate them. If it is a dead end we dismantle it
@@ -3929,8 +3932,8 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     uint32_t tmp_wh; // NOCOM
     const uint32_t current_flag_dist_to_wh = flag_warehouse_distance.
             get_distance(flag.get_position().hash(), gametime, &tmp_wh);
-    printf ("* Distance to wh from tested flag %dx%d: %d, checkradius: %d\n",
-     flag.get_position().x, flag.get_position().y, current_flag_dist_to_wh, checkradius);
+    //printf ("* Distance to wh from tested flag %dx%d: %d, checkradius: %d\n",
+    // flag.get_position().x, flag.get_position().y, current_flag_dist_to_wh, checkradius);
 
     FlagCandidates flag_candidates(current_flag_dist_to_wh);
 
@@ -3948,6 +3951,8 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
         if (reachable_coords == flag.get_position()) {
             continue;
         }
+        
+        const uint32_t reachable_coords_hash = reachable_coords.hash();
 
         // first make sure there is an immovable (should be, but still)
         if (upcast(PlayerImmovable const, player_immovable, map[reachable_coords].get_immovable())) {
@@ -3977,9 +3982,9 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 			const uint16_t air_distance = map.calc_distance(flag.get_position(), reachable_coords);
 
-            if (!flag_candidates.has_candidate(reachable_coords.hash()) && !flag_warehouse_distance.get_road_prohibited(reachable_coords.hash(), gametime)) {
-                flag_candidates.add_flag(reachable_coords.hash(), different_economy,
-                flag_warehouse_distance.get_distance(reachable_coords.hash(), gametime, &tmp_wh), air_distance); //NOCOM
+            if (!flag_candidates.has_candidate(reachable_coords_hash) && !flag_warehouse_distance.get_road_prohibited(reachable_coords_hash, gametime)) {
+                flag_candidates.add_flag(reachable_coords_hash, different_economy,
+                flag_warehouse_distance.get_distance(reachable_coords_hash, gametime, &tmp_wh), air_distance); //NOCOM
             }
         }
     }
@@ -3996,14 +4001,16 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     // Sending calculated walking costs from nearflags to RoadCandidates to update info on
     // Candidate flags/roads
     for (auto& nf_walk : nearflags) {
+		const uint32_t nf_hash = nf_walk.second.flag->get_position().hash();
         // NearFlag contains also flags beyond check radius, these are not relevent for us
-        if (flag_candidates.has_candidate(nf_walk.second.flag->get_position().hash())) {
+        if (flag_candidates.has_candidate(nf_hash)) {
             flag_candidates.set_cur_road_distance(
-               nf_walk.second.flag->get_position(), nf_walk.second.current_road_distance);
-        } else {
-			printf ("flag connected by road at %3dx%3d not in candidates\n",
-			nf_walk.second.flag->get_position().x, nf_walk.second.flag->get_position().y);
-			}
+               nf_hash, nf_walk.second.current_road_distance);
+        } //else {
+		//	printf ("    flag connected by road at %3dx%3d not in candidates, prohibited: %s\n",
+		//	nf_walk.second.flag->get_position().x, nf_walk.second.flag->get_position().y,
+		//	(flag_warehouse_distance.get_road_prohibited(nf_hash, gametime))?"Y":"N");
+		//	}
     }
 
     // Here we must consider how much are buildable fields lacking
@@ -4039,7 +4046,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     flag_candidates.sort_by_air_distance();
     uint32_t possible_roads_count = 0;
     //uint32_t current = 0;  // hash of flag that we are going to calculate in the iteration
-    for (auto &flag_candidate : flag_candidates.flags){
+    for (const auto &flag_candidate : flag_candidates.flags()){
         if (possible_roads_count > 10) {break;}
         const Widelands::Coords coords = Coords::unhash(flag_candidate.coords_hash);
         Path path;
@@ -4057,18 +4064,19 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     // re-sorting again // ???? now by reduction score (custom operator specified in .h file)
     flag_candidates.sort();
 
-    printf ("Candidates (%d) for flag at %3dx%3d: (Field necessity %d, dist. to wh: %4d)\n",
-     flag_candidates.count(), flag.get_position(). x,flag.get_position().y, fields_necessity, current_flag_dist_to_wh);
-    for (auto& item : flag_candidates.flags){
-        item.print();
-    }
+    //printf ("Candidates (%d) for flag at %3dx%3d: (Field necessity %d, dist. to wh: %4d)\n",
+    // flag_candidates.count(), flag.get_position(). x,flag.get_position().y, fields_necessity, current_flag_dist_to_wh);
+    //for (auto& item : flag_candidates.flags){
+    //    item.print();
+    //}
 
     // Well and finally building the winning road (if any)
-    //uint32_t winner_hash = 0;
-    FlagCandidates::Candidate* winner = flag_candidates.get_winner();
+    const int32_t winner_min_score = (spots_ < kSpotsTooLittle) ? 50 : 25;
+    
+    FlagCandidates::Candidate* winner = flag_candidates.get_winner(winner_min_score);
     if (winner) {
         const Widelands::Coords target_coords = Coords::unhash(winner->coords_hash);
-        printf("Winner to built: "); //without new line
+        printf("Winner to connect to %3dx%3d: ",flag.get_position(). x,flag.get_position().y); //without new line
         winner->print();
 
 		//This is to prohibit the flag for some time but with exemption of warehouse
@@ -4201,7 +4209,7 @@ void DefaultAI::collect_nearflags(std::map<uint32_t, NearFlag> &nearflags, const
         }
     }
 
-    printf ("Collected nearflags: %lu\n", nearflags.size());
+    //printf ("Collected nearflags: %lu\n", nearflags.size());
 }
 
 /**

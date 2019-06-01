@@ -123,7 +123,8 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 // TODO(tiborb): this should be replaced by command line switch
 constexpr int kFNeuronBitSize = 32;
 constexpr int kMutationRatePosition = 42;
-const int kFlagDistanceExpirationPeriod = 120 * 1000;
+constexpr int kFlagDistanceExpirationPeriod = 120 * 1000;
+constexpr int kOldFlagRemoveTime = 5 * 60 * 1000;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
@@ -922,6 +923,7 @@ public:
   void set_road_built(uint32_t, uint32_t);
   bool get_road_prohibited(uint32_t, uint32_t);
   uint16_t count() const;
+  bool remove_old_flag(uint32_t); // NOCOM add to tests
 
 
 };
@@ -945,24 +947,29 @@ struct FlagCandidates{
                    return score() > other.score();
         }
         void print(){
-            printf  (" Candidate flag at %3dx%3d: dist. to wh %4d, cur. road length: %2d, poss. road length: %3d, air dist.: %2d, different ec: %s, score: %3d, \n",
+            printf  (" Candidate flag at %3dx%3d: dist. to wh %4d, cur. road length: %2d, poss. road length: %3d, air dist.: %2d, different ec: %s, score: %4d, \n",
                    Coords::unhash(coords_hash).x, Coords::unhash(coords_hash).y,
                      cand_flag_distance_to_wh, flag_to_flag_road_distance, possible_road_distance,
                      air_distance, (different_economy)? "Y": "N", score());
         }
     };
 
-    std::vector<Candidate> flags;
+    private:
+    std::vector<Candidate> flags_;
     uint16_t start_flag_dist_to_wh;
 
+
+	public:
+	//std::vector<Candidate>*  flags() {return &flags_;} - working
+	const std::vector<Candidate>& flags() const {return flags_;}
     bool has_candidate(uint32_t);
     void add_flag(uint32_t, bool, uint16_t, uint16_t );
     bool set_cur_road_distance(uint32_t, uint16_t );
     bool set_road_possible(uint32_t, uint16_t );
     void sort();
     void sort_by_air_distance();
-    uint32_t count() {return flags.size();}
-    FlagCandidates::Candidate* get_winner();
+    uint32_t count() {return flags_.size();}
+    FlagCandidates::Candidate* get_winner(const int16_t = 0);
 
 
 };

@@ -146,6 +146,18 @@ BOOST_AUTO_TEST_CASE(flag_distance_road_builtexpiration_extension)
     BOOST_CHECK_EQUAL( fw.get_road_prohibited(2,60001), false);
 }
 
+BOOST_AUTO_TEST_CASE(flag_distance_old_removal)
+/* setting the same distance restart the expiry_period */
+{
+    FlagWarehouseDistances fw;
+    fw.set_distance(1,2,0,3);
+    BOOST_CHECK_EQUAL(fw.count(), 1);
+    BOOST_CHECK_EQUAL(fw.remove_old_flag(kOldFlagRemoveTime + kFlagDistanceExpirationPeriod), false);
+    BOOST_CHECK_EQUAL(fw.count(), 1);
+    BOOST_CHECK_EQUAL(fw.remove_old_flag(kOldFlagRemoveTime+ kFlagDistanceExpirationPeriod + 2), true);
+    BOOST_CHECK_EQUAL(fw.count(), 0);
+}
+
 BOOST_AUTO_TEST_CASE(new_flag_road_not_prohibited)
 /* setting the same distance restart the expiry_period */
 {
@@ -222,7 +234,7 @@ BOOST_AUTO_TEST_CASE(flag_sort_by_air_distance)
     fc.add_flag(1,false,10,1);
     fc.add_flag(2,false,10,2);
     fc.sort_by_air_distance();
-    BOOST_CHECK_EQUAL(fc.flags[0].air_distance, 1);
+    BOOST_CHECK_EQUAL(fc.flags()[0].air_distance, 1);
 }
 
 BOOST_AUTO_TEST_CASE(flag_has_candidate)
