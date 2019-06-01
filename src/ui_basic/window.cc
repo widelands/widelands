@@ -101,6 +101,7 @@ Window::Window(Panel* const parent,
 	   VT_B_PIXMAP_THICKNESS, VT_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
 	set_top_on_click(true);
 	set_layout_toplevel(true);
+	focus();
 }
 
 /**
