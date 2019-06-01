@@ -23,16 +23,17 @@
 #include "ui_basic/messagebox.h"
 #include "wui/interactive_gamebase.h"
 
-/**
- Simple ok/abort box asking whether the game really should be exited.
- */
-class GameExitConfirmBox : public UI::WLMessageBox {
-public:
-	GameExitConfirmBox(UI::Panel& parent, InteractiveGameBase& gb);
+// The GameOptionsMenu is a rather dumb window with lots of buttons
+struct GameOptionsMenu : public UI::UniqueWindow {
+	GameOptionsMenu(InteractiveGameBase&,
+	                UI::UniqueWindow::Registry&,
+	                InteractiveGameBase::GameMainMenuWindows&);
 
-	void clicked_ok() override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
-	void clicked_back() override;
+
+	~GameOptionsMenu();
+
 
 private:
 	InteractiveGameBase& igb_;
