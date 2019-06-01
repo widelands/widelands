@@ -21,6 +21,18 @@ install:
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   - cmd: "bash --login -c \"pacman -Suuyy --nodeps --noconfirm\""
   # we need to revert the update from ncurses /termcap to pdcurses forced by MSYS2
+  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-gcc-8.3.0-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-x86_64-gcc-8.3.0-2-any.pkg.tar.xz\""
+  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-gcc-libgfortran-8.3.0-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-x86_64-gcc-libgfortran-8.3.0-2-any.pkg.tar.xz\""
+  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-gcc-fortran-8.3.0-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-x86_64-gcc-fortran-8.3.0-2-any.pkg.tar.xz\""
+  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-gcc-objc-8.3.0-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-x86_64-gcc-objc-8.3.0-2-any.pkg.tar.xz\""
+  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-gcc-libs-8.3.0-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-x86_64-gcc-libs-8.3.0-2-any.pkg.tar.xz\""
+
+  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/i686/mingw-w64-i686-gcc-7.4.0-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-i686-gcc-7.4.0-1-any.pkg.tar.xz\""
+  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/i686/mingw-w64-i686-gcc-libgfortran-7.4.0-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-i686-gcc-libgfortran-7.4.0-1-any.pkg.tar.xz\""
+  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/i686/mingw-w64-i686-gcc-fortran-7.4.0-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-i686-gcc-fortran-7.4.0-1-any.pkg.tar.xz\""
+  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/i686/mingw-w64-i686-gcc-objc-7.4.0-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-i686-gcc-objc-7.4.0-1-any.pkg.tar.xz\""
+  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/i686/mingw-w64-i686-gcc-libs-7.4.0-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-i686-gcc-libs-7.4.0-1-any.pkg.tar.xz\""
+
   - cmd: "bash --login -c \"pacman -Rdd --noconfirm mingw-w64-%MINGWSUFFIX%-pdcurses\""
   - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-ncurses-6.1.20180908-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-ncurses-6.1.20180908-1-any.pkg.tar.xz\""
   - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-termcap-1.3.1-3-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-termcap-1.3.1-3-any.pkg.tar.xz\""
