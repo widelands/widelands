@@ -275,6 +275,7 @@ int BaseListselect::calculate_desired_width() {
 	size_t entry_with_widest_text = 0;
 	size_t entry_with_widest_hotkey = 0;
 
+	// Find the widest entries
 	for (size_t i = 0; i < entry_records_.size(); ++i) {
 		const EntryRecord& er = *entry_records_[i];
 		const int current_text_width = er.rendered_name->width();
@@ -289,7 +290,7 @@ int BaseListselect::calculate_desired_width() {
 		}
 	}
 
-	// Now resize it
+	// Add up the width
 	int text_width = entry_records_[entry_with_widest_text]->rendered_name->width();
 	if (widest_hotkey_ > 0) {
 		text_width += kHotkeyGap;
@@ -298,7 +299,7 @@ int BaseListselect::calculate_desired_width() {
 
 	const int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
 	const int old_width = get_w();
-	return text_width + picw + 8 +old_width - get_eff_w();
+	return text_width + picw + 8 + old_width - get_eff_w();
 }
 
 void BaseListselect::layout() {
