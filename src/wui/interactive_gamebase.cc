@@ -70,16 +70,16 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
      chat_provider_(nullptr),
      multiplayer_(multiplayer),
      playertype_(pt),
-	 mainmenu_(
-		toolbar(), "dropdown_menu_main", 0, 0, 34U, 10, 34U,
-		 /** TRANSLATORS: Title for the main menu button in the game */
-		 _("Main Menu"),
-		 UI::DropdownType::kPictorialMenu,
-		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
 	 showhidemenu_(
 		toolbar(), "dropdown_menu_showhide", 0, 0, 34U, 10, 34U,
 		 /** TRANSLATORS: Title for a menu button in the game. This menu will show/hide building spaces, census, statistics */
 		 _("Show / Hide"),
+		 UI::DropdownType::kPictorialMenu,
+		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
+	 mainmenu_(
+		toolbar(), "dropdown_menu_main", 0, 0, 34U, 10, 34U,
+		 /** TRANSLATORS: Title for the main menu button in the game */
+		 _("Main Menu"),
 		 UI::DropdownType::kPictorialMenu,
 		 UI::PanelStyle::kWui, UI::ButtonStyle::kWuiPrimary),
 	 gamespeedmenu_(
@@ -207,6 +207,9 @@ void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
 	} break;
 	case ShowHideEntry::kStatistics: {
 		set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+	} break;
+	case ShowHideEntry::kWorkareaOverlap: {
+		set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
 	} break;
 	}
 	rebuild_showhide_menu();

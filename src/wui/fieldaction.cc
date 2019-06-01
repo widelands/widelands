@@ -163,7 +163,6 @@ public:
 	void add_buttons_attack();
 
 	void act_watch();
-	void act_show_workarea_overlap();
 	void act_debug();
 	void act_buildflag();
 	void act_configure_economy();
@@ -229,9 +228,6 @@ static const char* const pic_remroad = "images/wui/fieldaction/menu_rem_way.png"
 static const char* const pic_buildflag = "images/wui/fieldaction/menu_build_flag.png";
 static const char* const pic_ripflag = "images/wui/fieldaction/menu_rip_flag.png";
 static const char* const pic_watchfield = "images/wui/fieldaction/menu_watch_field.png";
-// NOCOM move to toolbar
-static const char* const pic_showworkareaoverlap =
-   "images/wui/fieldaction/menu_show_workarea_overlap.png";
 static const char* const pic_debug = "images/wui/fieldaction/menu_debug.png";
 static const char* const pic_abort = "images/wui/menu_abort.png";
 static const char* const pic_geologist = "images/wui/fieldaction/menu_geologist.png";
@@ -383,13 +379,6 @@ void FieldActionWindow::add_buttons_auto() {
 	if (dynamic_cast<const Game*>(&ibase().egbase())) {
 		add_button(&watchbox, "watch", pic_watchfield, &FieldActionWindow::act_watch,
 		           _("Watch field in a separate window"));
-	}
-// NOCOM move to toolbar
-	if (is_a(InteractivePlayer, &ibase())) {
-		add_button(
-		   &watchbox, "workarea_overlap", pic_showworkareaoverlap,
-		   &FieldActionWindow::act_show_workarea_overlap,
-		   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"));
 	}
 
 	if (ibase().get_display_flag(InteractiveBase::dfDebug))
@@ -569,13 +558,6 @@ Open a watch window for the given field and delete self.
 void FieldActionWindow::act_watch() {
 	upcast(InteractiveGameBase, igbase, &ibase());
 	show_watch_window(*igbase, node_);
-	reset_mouse_and_die();
-}
-
-// NOCOM move to toolbar menus
-void FieldActionWindow::act_show_workarea_overlap() {
-	ibase().set_display_flag(InteractiveBase::dfShowWorkareaOverlap,
-	                         !ibase().get_display_flag(InteractiveBase::dfShowWorkareaOverlap));
 	reset_mouse_and_die();
 }
 

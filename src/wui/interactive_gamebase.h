@@ -89,10 +89,19 @@ public:
 	void start() override;
 
 protected:
+	// For referencing the items in showhidemenu_
+	enum class ShowHideEntry {
+		kBuildingSpaces,
+		kCensus,
+		kStatistics,
+		kWorkareaOverlap
+	};
+
 	// Adds the mapviewmenu_ to the toolbar
 	void add_main_menu();
 	// Adds the showhidemenu_ to the toolbar
 	void add_showhide_menu();
+	void rebuild_showhide_menu() override;
 	// Adds the gamespeedmenu_ to the toolbar
 	void add_gamespeed_menu();
 
@@ -117,6 +126,10 @@ protected:
 	ChatProvider* chat_provider_;
 	bool multiplayer_;
 	PlayerType playertype_;
+
+	// Show / Hide menu on the toolbar
+	UI::Dropdown<ShowHideEntry> showhidemenu_;
+
 	UI::UniqueWindow::Registry fieldaction_;
 	UI::UniqueWindow::Registry game_summary_;
 	UI::UniqueWindow::Registry client_disconnected_;
@@ -132,13 +145,6 @@ private:
 		kExitGame
 	};
 
-	// For referencing the items in showhidemenu_
-	enum class ShowHideEntry {
-		kBuildingSpaces,
-		kCensus,
-		kStatistics
-	};
-
 	// For referencing the items in gamespeedmenu_
 	enum class GameSpeedEntry {
 		kIncrease,
@@ -150,7 +156,6 @@ private:
 	void main_menu_selected(MainMenuEntry entry);
 	// Takes the appropriate action when an item in the showhidemenu_ is selected
 	void showhide_menu_selected(ShowHideEntry entry);
-	void rebuild_showhide_menu() override;
 	// Takes the appropriate action when an item in the gamespeedmenu_ is selected
 	void gamespeed_menu_selected(GameSpeedEntry entry);
 	// Rebuilds the gamespeedmenu_ according to current game settings
@@ -176,8 +181,6 @@ private:
 
 	// Main menu on the toolbar
 	UI::Dropdown<MainMenuEntry> mainmenu_;
-	// Show / Hide menu on the toolbar
-	UI::Dropdown<ShowHideEntry> showhidemenu_;
 	// Game speed menu on the toolbar
 	UI::Dropdown<GameSpeedEntry> gamespeedmenu_;
 
