@@ -46,6 +46,7 @@
 #include "logic/mapfringeregion.h"
 #include "logic/maphollowregion.h"
 #include "logic/mapregion.h"
+#include "logic/note_map_options.h"
 #include "logic/objective.h"
 #include "logic/pathfield.h"
 #include "map_io/s2map.h"
@@ -2299,6 +2300,7 @@ void Map::recalculate_allows_seafaring() {
 	// There need to be at least 2 port spaces for seafaring to make sense
 	if (get_port_spaces().size() < 2) {
 		allows_seafaring_ = false;
+		Notifications::publish(NoteMapOptions());
 		return;
 	}
 
@@ -2324,6 +2326,7 @@ void Map::recalculate_allows_seafaring() {
 			// Found one
 			if (reachable_from_previous_ports.count(current_position) > 0) {
 				allows_seafaring_ = true;
+				Notifications::publish(NoteMapOptions());
 				return;
 			}
 
@@ -2346,6 +2349,7 @@ void Map::recalculate_allows_seafaring() {
 		}
 	}
 	allows_seafaring_ = false;
+	Notifications::publish(NoteMapOptions());
 }
 
 void Map::cleanup_port_spaces(const World& world) {

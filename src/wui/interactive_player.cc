@@ -212,13 +212,18 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 #ifndef NDEBUG  //  only in debug builds
 	addCommand("switchplayer", boost::bind(&InteractivePlayer::cmdSwitchPlayer, this, _1));
 #endif
+
+	map_options_subscriber_ =
+	   Notifications::subscribe<NoteMapOptions>([this](const NoteMapOptions&) {
+		   rebuild_statistics_menu();
+	   });
 }
 
 
 void InteractivePlayer::add_statistics_menu() {
 	statisticsmenu_.set_image(g_gr->images().get("images/wui/menus/statistics.png"));
 	toolbar()->add(&statisticsmenu_);
-// NOCOM seafaring statistics entry is missing
+
 	menu_windows_.stats_seafaring.open_window = [this] {
 		new SeafaringStatisticsMenu(*this, menu_windows_.stats_seafaring);
 	};
@@ -238,7 +243,7 @@ void InteractivePlayer::add_statistics_menu() {
 		new GeneralStatisticsMenu(*this, menu_windows_.stats_general);
 	};
 
-	rebuild_statistics_menu();
+	// NoteMapOptions takes care of the rebuilding
 
 	statisticsmenu_.selected.connect([this] { statistics_menu_selected(statisticsmenu_.get_selected()); });
 }
@@ -586,8 +591,6 @@ void InteractivePlayer::postload() {
 	ToolbarImageset* imageset = player().tribe().toolbar_image_set();
 	if (imageset != nullptr) {
 		set_toolbar_imageset(*imageset);
-	} else {
-		rebuild_statistics_menu();
 	}
 }
 

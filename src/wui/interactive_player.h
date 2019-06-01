@@ -20,11 +20,13 @@
 #ifndef WL_WUI_INTERACTIVE_PLAYER_H
 #define WL_WUI_INTERACTIVE_PLAYER_H
 
+#include <memory>
 #include <vector>
 
 #include <SDL_keyboard.h>
 
 #include "logic/message_id.h"
+#include "logic/note_map_options.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "wui/interactive_gamebase.h"
@@ -110,6 +112,8 @@ private:
 	UI::UniqueWindow::Registry message_menu_;
 
 	const Image* grid_marker_pic_;
+
+	std::unique_ptr<Notifications::Subscriber<NoteMapOptions>> map_options_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_PLAYER_H

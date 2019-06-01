@@ -20,8 +20,7 @@
 #ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_MAP_OPTIONS_H
 #define WL_EDITOR_UI_MENUS_MAIN_MENU_MAP_OPTIONS_H
 
-#include "notifications/note_ids.h"
-#include "notifications/notifications.h"
+#include "logic/note_map_options.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -33,13 +32,6 @@
 #include "ui_basic/unique_window.h"
 
 class EditorInteractive;
-
-
-struct NoteMapOptions {
-	CAN_BE_SENT_AS_NOTE(NoteId::MapOptions)
-
-	NoteMapOptions() = default;
-};
 
 /**
  * This is the Main Options Menu. Here, information
