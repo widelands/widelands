@@ -174,12 +174,10 @@ void BaseDropdown::layout() {
 	UI::Panel* parent = &display_button_;
 	int new_list_x = display_button_.get_x();
 	int new_list_y = display_button_.get_y();
-	int parent_counter = 0;
 	while (parent->get_parent()) {
 		parent = parent->get_parent();
 		new_list_x += parent->get_x() + parent->get_lborder();
 		new_list_y += parent->get_y() + parent->get_tborder();
-		++parent_counter;
 	}
 
 	// Drop up instead of down if it doesn't fit

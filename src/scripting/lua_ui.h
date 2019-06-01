@@ -23,6 +23,7 @@
 #include "scripting/lua.h"
 #include "scripting/luna.h"
 #include "ui_basic/button.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_base.h"
