@@ -105,23 +105,25 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      // Interface options
      language_dropdown_(&box_interface_left_,
+						"dropdown_language",
                         0,
                         0,
                         100,  // 100 is arbitrary, will be resized in layout().
-                        100,  // 100 is arbitrary, will be resized in layout().
+                        50,
                         24,
                         _("Language"),
                         UI::DropdownType::kTextual,
-                        UI::PanelStyle::kFsMenu),
+                        UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu),
      resolution_dropdown_(&box_interface_left_,
+						  "dropdown_resolution",
                           0,
                           0,
                           100,  // 100 is arbitrary, will be resized in layout().
-                          100,  // 100 is arbitrary, will be resized in layout().
+                          50,
                           24,
                           _("Window Size"),
                           UI::DropdownType::kTextual,
-                          UI::PanelStyle::kFsMenu),
+                          UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu),
 
      fullscreen_(&box_interface_left_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),

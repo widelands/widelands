@@ -216,10 +216,10 @@ void Button::draw(RenderTarget& dst) {
 			}
 		}
 
-	} else if (title_.length()) {
+	} else if (!title_.empty()) {
 		//  Otherwise draw title string centered
 		std::shared_ptr<const UI::RenderedText> rendered_text = autofit_text(
-		   richtext_escape(title_), style_to_use.font(), get_inner_w() - 2 * kButtonImageMargin);
+		   title_, style_to_use.font(), get_inner_w() - 2 * kButtonImageMargin);
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2,
@@ -285,7 +285,6 @@ void Button::think() {
 				time_nextact_ = time;
 			play_click();
 			sigclicked();
-			clicked();
 			//  The button may not exist at this point (for example if the button
 			//  closed the dialog that it is part of). So member variables may no
 			//  longer be accessed.
@@ -339,7 +338,6 @@ bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 		if (highlighted_ && enabled_) {
 			play_click();
 			sigclicked();
-			clicked();
 			//  The button may not exist at this point (for example if the button
 			//  closed the dialog that it is part of). So member variables may no
 			//  longer be accessed.

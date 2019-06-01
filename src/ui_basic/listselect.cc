@@ -34,6 +34,7 @@
 #include "ui_basic/mouse_constants.h"
 
 constexpr int kMargin = 2;
+constexpr int kHotkeyGap = 16;
 
 namespace UI {
 /**
@@ -53,6 +54,8 @@ BaseListselect::BaseListselect(Panel* const parent,
                                UI::PanelStyle style,
                                const ListselectLayout selection_mode)
    : Panel(parent, x, y, w, h),
+	 widest_text_(0),
+	 widest_hotkey_(0),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style),
      scrollpos_(0),
      selection_(no_selection_index()),
@@ -63,7 +66,7 @@ BaseListselect::BaseListselect(Panel* const parent,
      background_style_(selection_mode == ListselectLayout::kDropdown ?
                           g_gr->styles().dropdown_style(style) :
                           nullptr),
-     lineheight_(text_height(*font_style_) + kMargin) {
+	 lineheight_(text_height(*font_style_) + kMargin) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
@@ -115,13 +118,15 @@ void BaseListselect::add(const std::string& name,
                          uint32_t entry,
                          const Image* pic,
                          bool const sel,
-                         const std::string& tooltip_text) {
-	EntryRecord* er = new EntryRecord();
+                         const std::string& tooltip_text, const std::string& hotkey) {
+	// NOCOM create styles. Color for hotkey is RGBColor(127, 127, 127)
+	EntryRecord* er = new EntryRecord(
+						  name.empty() ? name : g_gr->styles().font_style(UI::FontStyle::kLabel).as_font_tag(name),
+						  entry, pic, tooltip_text,
+						  hotkey.empty() ? hotkey : g_gr->styles().font_style(UI::FontStyle::kLabel).as_font_tag(hotkey),
+						  i18n::has_rtl_character(name.c_str(), 20) ? Align::kRight : Align::kLeft,
+						  i18n::has_rtl_character(hotkey.c_str(), 20) ? Align::kRight : Align::kLeft);
 
-	er->entry_ = entry;
-	er->pic = pic;
-	er->name = name;
-	er->tooltip = tooltip_text;
 	int entry_height = lineheight_;
 	if (pic) {
 		int w = pic->width();
@@ -140,41 +145,6 @@ void BaseListselect::add(const std::string& name,
 
 	if (sel)
 		select(entry_records_.size() - 1);
-}
-
-void BaseListselect::add_front(const std::string& name,
-                               const Image* pic,
-                               bool const sel,
-                               const std::string& tooltip_text) {
-	EntryRecord* er = new EntryRecord();
-
-	er->entry_ = 0;
-	for (EntryRecord* temp_entry : entry_records_) {
-		++(temp_entry)->entry_;
-	}
-
-	er->pic = pic;
-	er->name = name;
-	er->tooltip = tooltip_text;
-
-	int entry_height = lineheight_;
-	if (pic) {
-		int w = pic->width();
-		int h = pic->height();
-		entry_height = (h >= entry_height) ? h : entry_height;
-		if (max_pic_width_ < w)
-			max_pic_width_ = w;
-	}
-
-	if (entry_height > lineheight_)
-		lineheight_ = entry_height;
-
-	entry_records_.push_front(er);
-
-	layout();
-
-	if (sel)
-		select(0);
 }
 
 /**
@@ -275,11 +245,50 @@ const Image* BaseListselect::get_selected_image() const {
 }
 
 int BaseListselect::get_lineheight() const {
-	return lineheight_ + kMargin;
+	return lineheight_ + (selection_mode_ == ListselectLayout::kDropdown ? 2 * kMargin : kMargin);
 }
 
 uint32_t BaseListselect::get_eff_w() const {
 	return scrollbar_.is_enabled() ? get_w() - scrollbar_.get_w() : get_w();
+}
+
+int BaseListselect::calculate_desired_width() {
+	if (entry_records_.empty()) {
+		return 0;
+	}
+	// Make enough room for all texts + hotkeys in tabular format
+	widest_text_ = 0;
+	widest_hotkey_ = 0;
+	size_t entry_with_widest_text = 0;
+	size_t entry_with_widest_hotkey = 0;
+
+	for (size_t i = 0; i < entry_records_.size(); ++i) {
+		const EntryRecord& er = *entry_records_[i];
+		const int current_text_width = er.name.empty() ? 0 : UI::g_fh->render(as_richtext(er.name))->width();
+		if (current_text_width > widest_text_) {
+			widest_text_ = current_text_width;
+			entry_with_widest_text = i;
+		}
+		const int current_hotkey_width = er.hotkey.empty() ? 0 : UI::g_fh->render(as_richtext(er.hotkey))->width();
+		if (current_hotkey_width > widest_hotkey_) {
+			widest_hotkey_ = current_hotkey_width;
+			entry_with_widest_hotkey = i;
+		}
+	}
+
+	// Now resize it
+	int text_width;
+	if (widest_hotkey_ > 0) {
+		text_width = kHotkeyGap;
+		text_width += UI::g_fh->render(as_richtext(entry_records_[entry_with_widest_text]->name))->width();
+		text_width += UI::g_fh->render(as_richtext(entry_records_[entry_with_widest_hotkey]->hotkey))->width();
+	} else {
+		text_width = UI::g_fh->render(as_richtext(entry_records_[entry_with_widest_text]->name))->width();
+	}
+
+	const int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
+	const int old_width = get_w();
+	return text_width + picw + 8 +old_width - get_eff_w();
 }
 
 void BaseListselect::layout() {
@@ -294,15 +303,9 @@ void BaseListselect::layout() {
 	}
 	// For dropdowns, autoincrease width
 	if (selection_mode_ == ListselectLayout::kDropdown) {
-		for (size_t i = 0; i < entry_records_.size(); ++i) {
-			const EntryRecord& er = *entry_records_[i];
-			std::shared_ptr<const UI::RenderedText> rendered_text =
-			   UI::g_fh->render(as_richtext_paragraph(richtext_escape(er.name), *font_style_));
-			int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
-			int difference = rendered_text->width() + picw + 8 - get_eff_w();
-			if (difference > 0) {
-				set_size(get_w() + difference, get_h());
-			}
+		const int new_width = calculate_desired_width();
+		if (new_width > get_w()) {
+			set_size(new_width, get_h());
 		}
 	}
 }
@@ -341,10 +344,11 @@ void BaseListselect::draw(RenderTarget& dst) {
 		assert(eff_h < std::numeric_limits<int32_t>::max());
 
 		const EntryRecord& er = *entry_records_[idx];
-		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh->render(as_richtext_paragraph(richtext_escape(er.name), *font_style_));
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(as_richtext_paragraph(er.name, *font_style_));
+		std::shared_ptr<const UI::RenderedText> rendered_hotkey = UI::g_fh->render(as_richtext_paragraph(er.hotkey, *font_style_));
+		const int text_height = std::max(rendered_text->height(), rendered_hotkey->height());
 
-		int lineheight = std::max(get_lineheight(), rendered_text->height());
+		int lineheight = std::max(get_lineheight(), text_height);
 
 		// Don't draw over the bottom edge
 		lineheight = std::min(eff_h - y, lineheight);
@@ -380,26 +384,15 @@ void BaseListselect::draw(RenderTarget& dst) {
 		// Now draw pictures
 		if (er.pic) {
 			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
-			                  y + (get_lineheight() - er.pic->height()) / 2),
+			                  y + (lineheight_ - er.pic->height()) / 2),
 			         er.pic);
 		}
 
-		// Position the text according to alignment
-		Align alignment = i18n::has_rtl_character(er.name.c_str(), 20) ? Align::kRight : Align::kLeft;
-		if (alignment == UI::Align::kRight) {
-			point.x += maxw - picw;
-		}
-
-		// Shift for image width
-		if (!UI::g_fh->fontset()->is_rtl()) {
-			point.x += picw;
-		}
-
 		// Fix vertical position for mixed font heights
-		if (get_lineheight() > rendered_text->height()) {
-			point.y += (lineheight_ - rendered_text->height()) / 2;
+		if (get_lineheight() > text_height) {
+			point.y += (lineheight_ - text_height) / 2;
 		} else {
-			point.y -= (rendered_text->height() - lineheight_) / 2;
+			point.y -= (text_height - lineheight_) / 2;
 		}
 
 		// Don't draw over the bottom edge
@@ -407,8 +400,35 @@ void BaseListselect::draw(RenderTarget& dst) {
 		if (lineheight < 0) {
 			break;
 		}
+
+		// Tabular layout for hotkeys + shift for image width
+		Vector2i text_point(point);
+		Vector2i hotkey_point(point);
+		if (UI::g_fh->fontset()->is_rtl()) {
+			if (er.text_alignment == UI::Align::kRight) {
+				text_point.x = maxw - widest_text_ - picw;
+			} else if (widest_hotkey_ > 0) {
+				text_point.x += widest_hotkey_ + kHotkeyGap;
+			}
+		} else {
+			hotkey_point.x = maxw - widest_hotkey_;
+			text_point.x += picw;
+		}
+
+		// Position the text and hotkey according to their alignment
+		if (er.text_alignment == UI::Align::kRight) {
+			text_point.x += widest_text_ - rendered_text->width();
+		}
+		if (er.hotkey_alignment == UI::Align::kRight) {
+			hotkey_point.x += widest_hotkey_ - rendered_hotkey->width();
+		}
+
 		rendered_text->draw(
-		   dst, point, Recti(0, 0, maxw, lineheight), alignment, RenderedText::CropMode::kSelf);
+		   dst, text_point, Recti(0, 0, maxw - widest_hotkey_, lineheight), UI::Align::kLeft, RenderedText::CropMode::kSelf);
+		if (rendered_hotkey->width() > 0) {
+			rendered_hotkey->draw(
+			   dst, hotkey_point, Recti(0, 0, maxw - widest_text_, lineheight), UI::Align::kLeft, RenderedText::CropMode::kSelf);
+		}
 		y += get_lineheight();
 		++idx;
 	}

@@ -38,8 +38,9 @@
 
 namespace {
 constexpr int kMargin = 4;
+// Make room for 8 players
 // If this ever gets changed, don't forget to change the strings in the warning box as well.
-constexpr Widelands::PlayerNumber max_recommended_players = 8;
+constexpr Widelands::PlayerNumber kMaxRecommendedPlayers = 8;
 }  // namespace
 
 class EditorPlayerMenuWarningBox : public UI::Window {
@@ -122,14 +123,15 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
    : UI::UniqueWindow(&parent, "players_menu", &registry, 100, 100, _("Player Options")),
      box_(this, kMargin, kMargin, UI::Box::Vertical),
      no_of_players_(&box_,
+					"dropdown_map_players",
                     0,
                     0,
                     50,
-                    100,
+                    kMaxRecommendedPlayers,
                     24,
                     _("Number of players"),
                     UI::DropdownType::kTextual,
-                    UI::PanelStyle::kWui) {
+                    UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary) {
 	box_.set_size(100, 100);  // Prevent assert failures
 	box_.add(&no_of_players_, UI::Box::Resizing::kFullSize);
 	box_.add_space(2 * kMargin);
@@ -153,7 +155,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 	iterate_player_numbers(p, kMaxPlayers) {
 		const bool map_has_player = p <= nr_players;
 
-		no_of_players_.add(boost::lexical_cast<std::string>(static_cast<unsigned int>(p)), p);
+		no_of_players_.add(boost::lexical_cast<std::string>(static_cast<unsigned int>(p)), p, nullptr, p == nr_players);
 		no_of_players_.selected.connect(
 		   boost::bind(&EditorPlayerMenu::no_of_players_clicked, boost::ref(*this)));
 
@@ -168,8 +170,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 
 		// Tribe
 		UI::Dropdown<std::string>* plr_tribe =
-		   new UI::Dropdown<std::string>(row, 0, 0, 50, 400, plr_name->get_h(), _("Tribe"),
-		                                 UI::DropdownType::kPictorial, UI::PanelStyle::kWui);
+		   new UI::Dropdown<std::string>(row, (boost::format("dropdown_tribe%d") % static_cast<unsigned int>(p)).str(), 0, 0, 50, 16, plr_name->get_h(), _("Tribe"),
+		                                 UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
 		{
 			i18n::Textdomain td("tribes");
 			for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
@@ -219,8 +221,6 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		   std::unique_ptr<PlayerEditRow>(new PlayerEditRow(row, plr_name, plr_position, plr_tribe)));
 	}
 
-	// Make room for 8 players
-	no_of_players_.set_max_items(max_recommended_players);
 	no_of_players_.select(nr_players);
 
 	// Init button states
@@ -249,13 +249,13 @@ void EditorPlayerMenu::no_of_players_clicked() {
 	}
 
 	// Display a warning if there are too many players
-	if (nr_players > max_recommended_players) {
+	if (nr_players > kMaxRecommendedPlayers) {
 		if (g_options.pull_section("global").get_bool(
 		       "editor_player_menu_warn_too_many_players", true)) {
 			EditorPlayerMenuWarningBox warning(get_parent());
 			if (warning.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 				// Abort setting of players
-				no_of_players_.select(std::min(old_nr_players, max_recommended_players));
+				no_of_players_.select(std::min(old_nr_players, kMaxRecommendedPlayers));
 			}
 		}
 	}

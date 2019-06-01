@@ -66,16 +66,10 @@ struct BaseListselect : public Panel {
 	 */
 	void add(const std::string& name,
 	         uint32_t value,
-	         const Image* pic = nullptr,
-	         const bool select_this = false,
-	         const std::string& tooltip_text = std::string());
-	/**
-	 * Text conventions: Title Case for the 'name', Sentence case for the 'tooltip_text'
-	 */
-	void add_front(const std::string& name,
-	               const Image* pic = nullptr,
-	               const bool select_this = false,
-	               const std::string& tooltip_text = std::string());
+	         const Image* pic,
+	         const bool select_this,
+	         const std::string& tooltip_text, const std::string& hotkey);
+
 	void remove(uint32_t);
 	void remove(const char* name);
 
@@ -113,6 +107,8 @@ struct BaseListselect : public Panel {
 
 	uint32_t get_eff_w() const;
 
+	int calculate_desired_width();
+
 	void layout() override;
 
 	// Drawing and event handling
@@ -132,14 +128,32 @@ private:
 	static const int32_t ms_darken_value = -20;
 
 	struct EntryRecord {
-		uint32_t entry_;
+		explicit EntryRecord(const std::string& init_name,
+							 uint32_t init_entry,
+							 const Image* init_pic,
+							 const std::string& tooltip_text, const std::string& hotkey_text,
+							 Align talign, Align halign) :
+			name(init_name),
+			entry_(init_entry),
+			pic(init_pic),
+			tooltip(tooltip_text),
+			hotkey(hotkey_text),
+			text_alignment(talign),
+			hotkey_alignment(halign) {}
+		const std::string name;
+		const uint32_t entry_;
 		const Image* pic;
-		std::string name;
-		std::string tooltip;
+		const std::string tooltip;
+		const std::string hotkey;
+		const Align text_alignment;
+		const Align hotkey_alignment;
 	};
 	using EntryRecordDeque = std::deque<EntryRecord*>;
 
 	int max_pic_width_;
+	int widest_text_;
+	int widest_hotkey_;
+
 	EntryRecordDeque entry_records_;
 	Scrollbar scrollbar_;
 	uint32_t scrollpos_;  //  in pixels
@@ -169,17 +183,9 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	         Entry value,
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
-	         const std::string& tooltip_text = std::string()) {
+	         const std::string& tooltip_text = std::string(), const std::string& hotkey = std::string()) {
 		entry_cache_.push_back(value);
-		BaseListselect::add(name, entry_cache_.size() - 1, pic, select_this, tooltip_text);
-	}
-	void add_front(const std::string& name,
-	               Entry value,
-	               const Image* pic = nullptr,
-	               const bool select_this = false,
-	               const std::string& tooltip_text = std::string()) {
-		entry_cache_.push_front(value);
-		BaseListselect::add_front(name, pic, select_this, tooltip_text);
+		BaseListselect::add(name, entry_cache_.size() - 1, pic, select_this, tooltip_text, hotkey);
 	}
 
 	const Entry& operator[](uint32_t const i) const {
@@ -218,15 +224,8 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 	         Entry& value,
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
-	         const std::string& tooltip_text = std::string()) {
-		Base::add(name, &value, pic, select_this, tooltip_text);
-	}
-	void add_front(const std::string& name,
-	               Entry& value,
-	               const Image* pic = nullptr,
-	               const bool select_this = false,
-	               const std::string& tooltip_text = std::string()) {
-		Base::add_front(name, &value, pic, select_this, tooltip_text);
+	         const std::string& tooltip_text = std::string(), const std::string& hotkey = std::string()) {
+		Base::add(name, &value, pic, select_this, tooltip_text, hotkey);
 	}
 
 	Entry& operator[](uint32_t const i) const {
