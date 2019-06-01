@@ -214,6 +214,7 @@ void StyleManager::init() {
 	add_font_style(UI::FontStyle::kDisabled, *element_table, "disabled");
 	add_font_style(UI::FontStyle::kLabel, *element_table, "label");
 	add_font_style(UI::FontStyle::kTooltipHeader, *element_table, "tooltip_header");
+	add_font_style(UI::FontStyle::kTooltipHotkey, *element_table, "tooltip_hotkey");
 	add_font_style(UI::FontStyle::kTooltip, *element_table, "tooltip");
 	add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
 	add_font_style(
@@ -339,7 +340,7 @@ void StyleManager::add_progressbar_style(UI::PanelStyle style, const LuaTable& t
 void StyleManager::add_table_style(UI::PanelStyle style, const LuaTable& table) {
 	table_styles_.insert(std::make_pair(
 	   style, std::unique_ptr<const UI::TableStyleInfo>(new UI::TableStyleInfo(
-	             read_font_style(table, "enabled"), read_font_style(table, "disabled")))));
+	             read_font_style(table, "enabled"), read_font_style(table, "disabled"), read_font_style(table, "hotkey")))));
 }
 
 void StyleManager::set_statistics_plot_style(const LuaTable& table) {
