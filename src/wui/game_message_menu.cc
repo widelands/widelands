@@ -360,9 +360,10 @@ void GameMessageMenu::double_clicked(uint32_t const /* t */) {
  * Handle message menu hotkeys.
  */
 bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
+	//Special ESCAPE handling
+	//When ESCAPE is pressed down is false
 	if (code.sym == SDLK_ESCAPE)
-		down = true;
-	
+		return UI::Window::handle_key(true, code);
 	if (down) {
 		switch (code.sym) {
 		// Don't forget to change the tooltips if any of these get reassigned
@@ -414,8 +415,6 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 			// (if not handled here then handling is passed down to the table 'list',
 			// but tables pass tab key handling back to their parents)
 			return UI::Panel::handle_key(down, code);
-		case SDLK_ESCAPE:
-			return UI::Window::handle_key(down, code);
 		case SDL_SCANCODE_KP_PERIOD:
 		case SDLK_KP_PERIOD:
 			if (code.mod & KMOD_NUM) {
