@@ -168,6 +168,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	 grid_marker_pic_(g_gr->images().get("images/wui/overlays/grid_marker.png")) {
 	add_main_menu();
 
+	set_display_flag(InteractiveBase::dfShowWorkareaOverlap, true);  // enable by default
+
 	toolbar()->add_space(15);
 
 	add_mapview_menu(MiniMapType::kStaticViewWindow);
@@ -542,6 +544,10 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				new GameMainMenuSaveGame(*this, menu_windows_.savegame);
 			else
 				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+			return true;
+
+		case SDLK_w:
+			set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
 			return true;
 
 		case SDLK_KP_7:
