@@ -20,7 +20,7 @@ install:
   # Update msys2 system (twice, first run does system packages)
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   - cmd: "bash --login -c \"pacman -Suuyy --nodeps --noconfirm\""
-  # we need to revert the update from ncurses /termcap to pdcurses forced by MSYS2
+  # we need to downgrade GCC to the last working version
   - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-gcc-8.3.0-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-x86_64-gcc-8.3.0-2-any.pkg.tar.xz\""
   - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-gcc-libgfortran-8.3.0-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-x86_64-gcc-libgfortran-8.3.0-2-any.pkg.tar.xz\""
   - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-gcc-fortran-8.3.0-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-x86_64-gcc-fortran-8.3.0-2-any.pkg.tar.xz\""
@@ -33,18 +33,8 @@ install:
   - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/i686/mingw-w64-i686-gcc-objc-7.4.0-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-i686-gcc-objc-7.4.0-1-any.pkg.tar.xz\""
   - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/i686/mingw-w64-i686-gcc-libs-7.4.0-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-i686-gcc-libs-7.4.0-1-any.pkg.tar.xz\""
 
-  # - cmd: "bash --login -c \"pacman -Rdd --noconfirm mingw-w64-%MINGWSUFFIX%-pdcurses\""
-  # - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-ncurses-6.1.20180908-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-ncurses-6.1.20180908-1-any.pkg.tar.xz\""
-  # - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-termcap-1.3.1-3-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-termcap-1.3.1-3-any.pkg.tar.xz\""
-  # - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-readline-8.0.000-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-readline-8.0.000-2-any.pkg.tar.xz\""
-  # - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-gdb-8.3-3-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-gdb-8.3-3-any.pkg.tar.xz\""
-  # - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-python3-3.7.3-3-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-%MINGWSUFFIX%-python3-3.7.3-3-any.pkg.tar.xz\""
- 
   # Installed required libs
   - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glew\""
-  #- cmd: "IF \"%PLATFORM%\" == \"x86\" (bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-glew\") ELSE (bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-glbinding\")"
-  # CMake can't find Boost 1.70 yet, so we have to downgrade
-  # - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-boost-1.69.0-2-any.pkg.tar.xz && pacman --noconfirm -U mingw-w64-%MINGWSUFFIX%-boost-1.69.0-2-any.pkg.tar.xz\""
 
 shallow_clone: true
 
@@ -53,7 +43,7 @@ branches:
     - _widelands_dev_widelands_trunk
 
 build_script:
-  # copy modified libintl.h to solve an issue with boost 1.69
+  # copy modified libintl.h to solve an issue with boost
   - cmd: patch %MINGWINCLUDE%\libintl.h %APPVEYOR_BUILD_FOLDER%\utils\appveyor\libintl.patch
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - cmd: md build
