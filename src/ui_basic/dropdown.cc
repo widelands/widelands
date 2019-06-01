@@ -65,7 +65,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent, const std::string& name,
 					name,
                x,
                y,
-               (type == DropdownType::kPictorial || type_ == DropdownType::kPictorialMenu) ? button_dimension : w,
+               (type == DropdownType::kPictorial || type == DropdownType::kPictorialMenu) ? button_dimension : w,
                // Height only to fit the button, so we can use this in Box layout.
                base_height(button_dimension, style)),
      id_(next_id_++),
