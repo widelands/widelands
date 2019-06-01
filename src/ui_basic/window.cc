@@ -411,6 +411,21 @@ bool Window::handle_mousewheel(uint32_t, int32_t, int32_t) {
 	return true;
 }
 
+bool Window::handle_key(bool down, SDL_Keysym code) {
+	// Handles a key input and event and will close when pressing ESC
+
+	if (down) {
+		switch (code.sym) {
+			case SDLK_ESCAPE:
+				die();
+				return true;
+			default:
+				break;
+		}
+	}
+	return UI::Panel::handle_key(down, code);
+}
+
 /**
  * Close the window. Overwrite this virtual method if you want
  * to take some action before the window is destroyed, or to
