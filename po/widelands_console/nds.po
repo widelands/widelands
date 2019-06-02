@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-10 07:33+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 12:37+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -153,7 +153,7 @@ msgstr " --loadgame=DATEINAAM Stracks dat sekerte Speel DATEINAAM laden."
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr " --script=DATEINAAM   Bruukt dat angeven Lua-Skript na de Begünn.\n                      Verloovt blot mit --scenario, --loadgame oder --editor."
+msgstr " --script=DATEINAAM   Bruukt dat angeven Lua-Skript na de Begünn.\n                      Verloovt blot mit --scenario, --loadgame of --editor."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -165,7 +165,7 @@ msgid ""
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
-msgstr " --auto_roadbuild_mode=[jau|nee]\n                      Of man na de Setten vun eener Straat, wat\n                      nich an dat Stratennett ansluten is, automatisk\n                      klaar tum Stratenbauen wesen sall."
+msgstr " --auto_roadbuild_mode=[jau|nee]\n                      Oder man na de Setten vun eener Straat, wat\n                      nich an dat Stratennett ansluten is, automatisk\n                      klaar tum Stratenbauen wesen sall."
 
 #: ../../src/wlapplication_messages.cc:121
 msgid "Graphic options:"
@@ -180,7 +180,7 @@ msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr " --fullscreen=[jau|nee]\n                      Of de hele Billschirm bruukt worden sall."
+msgstr " --fullscreen=[jau|nee]\n                      Oder de hele Billschirm bruukt worden sall."
 
 #: ../../src/wlapplication_messages.cc:130
 msgid " --xres=[...]         Width of the window in pixel."
@@ -206,7 +206,7 @@ msgstr "Instellens för de Fenster-Verwaltung im Speel:"
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
-msgstr " --animate_map_panning=[jau|nee]\n                      Of automatiske Kaart-Bewegens spöölt worden."
+msgstr " --animate_map_panning=[jau|nee]\n                      Oder automatiske Kaart-Bewegens spöölt worden."
 
 #: ../../src/wlapplication_messages.cc:141
 msgid ""

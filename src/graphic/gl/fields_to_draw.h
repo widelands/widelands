@@ -96,7 +96,6 @@ public:
 		return &fields_[index];
 	}
 
-private:
 	// Calculates the index of the given field with ('fx', 'fy') being geometric
 	// coordinates in the map. Returns INVALID_INDEX if this field is not in the
 	// fields_to_draw.
@@ -112,6 +111,7 @@ private:
 		return yidx * w_ + xidx;
 	}
 
+private:
 	// Minimum and maximum field coordinates (geometric) to render. Can be negative.
 	int min_fx_ = 0;
 	int max_fx_ = 0;

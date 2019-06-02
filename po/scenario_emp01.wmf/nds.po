@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
-"PO-Revision-Date: 2018-11-26 08:46+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 12:38+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -266,7 +266,7 @@ msgstr "Moin Lutjus! Ick hebb jüüst Saledus buten Döör truffen."
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr "He hett mi vun de Wachters-Kamerke vertellt. Nu, ick glööv nich, dat wi noch mehr Wachters-Kamerkes bruuken – wi könen uns nu um annere Dingen kümmern."
+msgstr "He hett mi vun de Wachters-Kamerke vertellt. Nu, ick glööv nich, dat wi noch mehr Wachters-Kamerkes bruuken – wi könen uns nu um anner Dingen kümmern."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:161
@@ -287,7 +287,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he has cleared enough space "
 "for constructing two more lumberjack’s houses, so that we can harvest the "
 "logs faster."
-msgstr "Ick bün jüüst wiesworden, dat uns' Boomhauer nu arbeidt. Wi sallen nu wachten, bit he genoog Rüümte freeimaakt hett, dat wi noch twee annere Boomhauereen bauen könen, daarmit wi de Bomen fixer arnten könen."
+msgstr "Ick bün jüüst wiesworden, dat uns' Boomhauer nu arbeidt. Wi sallen nu wachten, bit he genoog Rüümte freeimaakt hett, dat wi noch twee anner Boomhauereen bauen könen, daarmit wi de Bomen fixer arnten könen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:173
@@ -425,14 +425,3 @@ msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
 msgstr "Mienheer, deese Uthamm is nu bannig seker. Nu maak aver wieder!"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neje Upgaav"
-msgstr[1] "Neje Upgaven"
