@@ -68,13 +68,6 @@ private:
 	void load_map_info();
 	void help_clicked();
 
-	// TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
-	// so we can have the SuggestedTeamsBox NOCOM
-	int32_t const padding_;  // Common padding between panels
-	int32_t const indent_;   // Indent for elements below labels
-	int32_t const label_height_;
-	int32_t const right_column_x_;
-
 	UI::Button change_map_or_save_;
 	UI::Button help_button_;
 	UI::Textarea mapname_, clients_, players_, map_, wincondition_type_;

@@ -97,14 +97,6 @@ private:
 FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const settings,
                                                  GameController* const ctrl)
    : FullscreenMenuLaunchGame(settings, ctrl),
-     // Values for alignment and size
-     // TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
-     // so we can have the SuggestedTeamsBox NOCOM
-     padding_(4),
-     indent_(10),
-     label_height_(20),
-     right_column_x_(get_w() * 57 / 80),
-
      // Buttons
      change_map_or_save_(this,
                          "change_map_or_save",
@@ -184,16 +176,16 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 
      // Variables and objects used in the menu
      chat_(nullptr) {
-	ok_.set_pos(Vector2i(right_column_x_, get_h() * 14 / 20 - 2 * label_height_));
-	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
+
 	win_condition_dropdown_.set_pos(
 	   Vector2i(right_column_x_, get_h() * 11 / 20 - 2 * label_height_));
 
 	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 25 / 40 - 2 * label_height_));
 	suggested_teams_dropdown_.set_pos(
-	   Vector2i(peaceful_.get_x(),
-	            peaceful_.get_y() + peaceful_.get_h() + padding_));
-	// NOCOM fix position of start game button
+	   Vector2i(right_column_x_, peaceful_.get_y() + peaceful_.get_h() + padding_));
+	client_info_.set_pos(
+				Vector2i(right_column_x_, peaceful_.get_y() + 2 * (win_condition_dropdown_.get_h() + padding_)));
+	client_info_.set_size(client_info_.get_x(), ok_.get_y() - client_info_.get_y() - padding_);
 
 	title_.set_text(_("Multiplayer Game Setup"));
 	change_map_or_save_.sigclicked.connect(
@@ -240,8 +232,9 @@ void FullscreenMenuLaunchMPG::layout() {
  */
 void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider& chat) {
 	delete chat_;
-	chat_ = new GameChatPanel(this, get_w() * 3 / 80, get_h() * 17 / 30 + 0.5 * label_height_,
-	                          get_w() * 53 / 80, get_h() * 11 / 30, chat, UI::PanelStyle::kFsMenu);
+	const int chat_y = get_h() * 17 / 30 + 0.5 * label_height_;
+	chat_ = new GameChatPanel(this, get_w() * 3 / 80, chat_y,
+	                          get_w() * 53 / 80, ok_.get_y() + ok_.get_h() - chat_y, chat, UI::PanelStyle::kFsMenu);
 	chat_->focus_edit();
 }
 

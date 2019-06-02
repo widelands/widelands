@@ -86,6 +86,10 @@ protected:
 	uint32_t butw_;
 	uint32_t buth_;
 
+	int32_t const padding_;  // Common padding between panels
+	int32_t const label_height_;
+	int32_t const right_column_x_;
+
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::Checkbox peaceful_;
 	SuggestedTeamsDropdown suggested_teams_dropdown_;

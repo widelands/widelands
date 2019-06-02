@@ -46,7 +46,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
      // Buttons
      select_map_(this,
                  "select_map",
-                 get_w() * 7 / 10,
+                 right_column_x_,
                  get_h() * 3 / 10,
                  butw_,
                  buth_,
@@ -55,7 +55,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 
      // Text labels
      mapname_(this,
-              get_w() * 7 / 10 + butw_ / 2,
+              right_column_x_ + butw_ / 2,
               get_h() * 53 / 200 - 15,
               0,
               0,
@@ -88,7 +88,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
            0,
            _("Start type")),
      wincondition_type_(this,
-                        get_w() * 7 / 10 + (butw_ / 2),
+                        right_column_x_ + butw_ / 2,
                         get_h() * 7 / 20 + buth_,
                         0,
                         0,
@@ -111,9 +111,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 		}
 	});
 
-	ok_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 9 / 10));
-	back_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 17 / 20));
-	win_condition_dropdown_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 4 / 10 + buth_));
+	win_condition_dropdown_.set_pos(Vector2i(right_column_x_, get_h() * 4 / 10 + buth_));
 	suggested_teams_dropdown_.set_pos(
 	   Vector2i(peaceful_.get_x(),
 	            peaceful_.get_y() + peaceful_.get_h() + 4));

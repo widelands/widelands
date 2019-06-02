@@ -43,9 +43,12 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      // Values for alignment and size
      butw_(get_w() / 4),
      buth_(get_h() * 9 / 200),
+	 padding_(4),
+     label_height_(20),
+     right_column_x_(get_w() * 57 / 80),
 
      win_condition_dropdown_(this,
-                             get_w() * 7 / 10,
+                             right_column_x_,
                              get_h() * 4 / 10 + buth_,
                              butw_,
                              get_h() - get_h() * 4 / 10 - buth_,
@@ -54,7 +57,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              UI::DropdownType::kTextual,
                              UI::PanelStyle::kFsMenu),
 
-     peaceful_(this, Vector2i(get_w() * 7 / 10, get_h() * 19 / 40 + buth_), _("Peaceful mode")),
+     peaceful_(this, Vector2i(right_column_x_, get_h() * 19 / 40 + buth_), _("Peaceful mode")),
 	 suggested_teams_dropdown_(this,
 							   0,
 							   0,
@@ -62,8 +65,8 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 							   get_h() - get_h() * 4 / 10 - buth_,
 							   buth_),
 	 selected_lineup_(nullptr),
-     ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
-     back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
+     ok_(this, "ok", right_column_x_, get_h() * 9 / 10, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
+     back_(this, "back", right_column_x_, get_h() * 17 / 20, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
      title_(this,
             get_w() / 2,
@@ -78,6 +81,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      ctrl_(ctrl),
      peaceful_mode_forbidden_(false),
      nr_players_(0) {
+
 	win_condition_dropdown_.selected.connect(
 	   boost::bind(&FullscreenMenuLaunchGame::win_condition_selected, this));
 	peaceful_.changed.connect(boost::bind(&FullscreenMenuLaunchGame::toggle_peaceful, this));
