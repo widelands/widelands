@@ -50,7 +50,7 @@ tribes:new_productionsite_type {
          descname = _"felling trees",
          actions = {
             "callworker=harvest",
-            "sleep=25000" -- Sleeps shorter than any other tribes.
+            "sleep=20000"
          }
       },
    },

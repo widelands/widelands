@@ -49,7 +49,7 @@ tribes:new_productionsite_type {
          descname = _"felling trees",
          actions = {
             "callworker=harvest",
-            "sleep=30000"
+            "sleep=20000"
          }
       },
    },
