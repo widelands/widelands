@@ -49,8 +49,8 @@ BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
 	tooltip(tooltip_text),
 	name_alignment(i18n::has_rtl_character(init_name.c_str(), 20) ? Align::kRight : Align::kLeft),
 	hotkey_alignment(i18n::has_rtl_character(hotkey_text.c_str(), 20) ? Align::kRight : Align::kLeft) {
-	rendered_name = UI::g_fh->render(as_richtext_paragraph(name, style.enabled()));
-	rendered_hotkey = UI::g_fh->render(as_richtext_paragraph(hotkey_text, style.hotkey()));
+	rendered_name = UI::g_fh->render(as_richtext_paragraph(richtext_escape(name), style.enabled()));
+	rendered_hotkey = UI::g_fh->render(as_richtext_paragraph(richtext_escape(hotkey_text), style.hotkey()));
 }
 
 /**
