@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-10 07:33+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-30 18:29+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -179,7 +179,7 @@ msgstr ""
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:8
 msgctxt "building"
 msgid "Proverb"
-msgstr ""
+msgstr "Proverbi"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:13
@@ -2354,9 +2354,8 @@ msgstr "Cartell d'una cerveseria d'aiguamel"
 msgctxt "building"
 msgid ""
 "Brews beer out of barley and water. It also brews mead, which is beer "
-"refined with honey. Mead is consumed by miners in deep mines and by "
-"experienced soldiers."
-msgstr "Fermenta cervesa a partir de civada i aigua. També fermenta aiguamel, cervesa refinada amb mel. L'aiguamel la consumeixen els miners que treballen en mines profundes i per soldats amb experiència."
+"refined with honey. Mead is consumed by experienced soldiers."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:3
@@ -3488,18 +3487,22 @@ msgstr "Treballadors"
 msgid "%s or better"
 msgstr "%s o millor"
 
-#. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-#: ../../data/tribes/scripting/help/building_help.lua:664
+#. TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
+#: ../../data/tribes/scripting/help/building_help.lua:665
 msgid "Worker uses:"
-msgid_plural "Workers use:"
-msgstr[0] "El treballador empra:"
-msgstr[1] "Els treballadors empren:"
+msgstr "Eines que necessita:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:689
+#. TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker
+#. uses
+#: ../../data/tribes/scripting/help/building_help.lua:668
+msgid "Workers use:"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/building_help.lua:695
 msgid "Production"
 msgstr "Producció"
 
-#: ../../data/tribes/scripting/help/building_help.lua:690
+#: ../../data/tribes/scripting/help/building_help.lua:696
 msgid "Performance:"
 msgstr "Rendiment:"
 
@@ -4065,25 +4068,8 @@ msgstr "Un jugador"
 msgid "Multiplayer"
 msgstr "Multijugador"
 
-#. TRANSLATORS: You can also translate this as 'additional workplace'
-#. result = result .. h3(pgettext("workerhelp_one_building", "Can also work
-#. at"))
-#. else
-#. Translators: Worker Encyclopedia: Heading above a list of buildings where a
-#. worker may work instead of a less experienced worker
-#. TRANSLATORS: You can also translate this as 'additional workplaces'
-#. result = result .. h3(ngettext("Can also work at", "Can also work at",
-#. #additional))
-#. end
-#. RST
-#. .. function:: worker_help_string(worker_description)
-#. Displays the worker with a helptext, an image and the tool used
-#. :arg tribe: The :class:`LuaTribeDescription` for the tribe
-#. that we are displaying this help for.
-#. :arg worker_description: the worker_description from C++.
-#. :returns: Help string for the worker
 #: ../../data/tribes/scripting/help/ware_help.lua:34
-#: ../../data/tribes/scripting/help/worker_help.lua:153
+#: ../../data/tribes/scripting/help/worker_help.lua:162
 msgid "Purpose"
 msgstr "Finalitat:"
 
@@ -4094,105 +4080,136 @@ msgstr "Finalitat:"
 msgid "Producer"
 msgstr "Es produeix a:"
 
-#. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
+#. TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
 #: ../../data/tribes/scripting/help/ware_help.lua:107
 msgid "Ware produced:"
-msgid_plural "Wares produced:"
-msgstr[0] "Bé produït:"
-msgstr[1] "Béns produïts:"
+msgstr "Bé produït:"
+
+#. TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a
+#. productionsite
+#: ../../data/tribes/scripting/help/ware_help.lua:110
+msgid "Wares produced:"
+msgstr ""
+
+#. TRANSLATORS: Ware Encyclopedia: Heading for 1 building and / or worker that
+#. consumes a ware
+#: ../../data/tribes/scripting/help/ware_help.lua:172
+msgid "Consumer"
+msgstr "Utilitza aquest bé:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:167
-msgid "Consumer"
-msgid_plural "Consumers"
-msgstr[0] "Utilitza aquest bé:"
-msgstr[1] "Utilitzen aquest bé:"
+#: ../../data/tribes/scripting/help/ware_help.lua:175
+msgid "Consumers"
+msgstr ""
 
-#. TRANSLATORS: Worker Encyclopedia: Workers recruited by a productionsite
+#. TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:79
 msgid "Worker recruited:"
-msgid_plural "Workers recruited:"
-msgstr[0] "Treballador contractat:"
-msgstr[1] "Treballadors contractats:"
+msgstr "Treballador contractat:"
 
-#. TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker is
-#. needed to work at
-#. TRANSLATORS: You can also translate this as 'workplace(s)'
-#: ../../data/tribes/scripting/help/worker_help.lua:106
+#. TRANSLATORS: Worker Encyclopedia: More than 1 worker recruited by a
+#. productionsite
+#: ../../data/tribes/scripting/help/worker_help.lua:82
+msgid "Workers recruited:"
+msgstr "Treballadors contractats:"
+
+#. TRANSLATORS: Worker Encyclopedia: Heading for 1 building where a worker can
+#. work
+#. TRANSLATORS: You can also translate this as 'workplace'
+#: ../../data/tribes/scripting/help/worker_help.lua:112
+msgctxt "workerhelp_one_building"
 msgid "Works at"
-msgid_plural "Works at"
-msgstr[0] "Edifici on treballa:"
-msgstr[1] "Edificis on treballa:"
+msgstr "Edificis on treballa:"
+
+#. TRANSLATORS: Worker Encyclopedia: A list of more than 1 building where a
+#. worker can work
+#. TRANSLATORS: You can also translate this as 'workplaces'
+#: ../../data/tribes/scripting/help/worker_help.lua:116
+msgctxt "workerhelp_multiple_buildings"
+msgid "Works at"
+msgstr ""
+
+#. TRANSLATORS: You can also translate this as 'additional workplace'
+#: ../../data/tribes/scripting/help/worker_help.lua:132
+msgctxt "workerhelp_one_building"
+msgid "Can also work at"
+msgstr "També pot treballar en"
+
+#. TRANSLATORS: You can also translate this as 'additional workplaces'
+#: ../../data/tribes/scripting/help/worker_help.lua:136
+msgctxt "workerhelp_multiple_buildings"
+msgid "Can also work at"
+msgstr "També pot treballar en"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
-#: ../../data/tribes/scripting/help/worker_help.lua:168
+#: ../../data/tribes/scripting/help/worker_help.lua:177
 msgid "Worker uses"
 msgstr "Eines que necessita:"
 
 #. TRANSLATORS: Soldier levels
-#: ../../data/tribes/scripting/help/worker_help.lua:185
+#: ../../data/tribes/scripting/help/worker_help.lua:194
 msgid "Levels"
 msgstr "Nivells"
 
-#: ../../data/tribes/scripting/help/worker_help.lua:187
+#: ../../data/tribes/scripting/help/worker_help.lua:196
 msgid "Health"
 msgstr "Salut"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
-#: ../../data/tribes/scripting/help/worker_help.lua:191
+#: ../../data/tribes/scripting/help/worker_help.lua:200
 msgid "Starts at %1% points."
 msgstr "Comença en %1% punts."
 
 #. TRANSLATORS: Soldier health / attack defense / evade points
-#: ../../data/tribes/scripting/help/worker_help.lua:194
-#: ../../data/tribes/scripting/help/worker_help.lua:205
+#: ../../data/tribes/scripting/help/worker_help.lua:203
+#: ../../data/tribes/scripting/help/worker_help.lua:214
 msgid "Increased by %1% point for each level."
 msgid_plural "Increased by %1% points for each level."
 msgstr[0] "Incrementa %1% punt per cada nivell."
 msgstr[1] "Incrementa %1% punts per cada nivell."
 
 #. TRANSLATORS: Soldier health / attack defense / evade level
-#: ../../data/tribes/scripting/help/worker_help.lua:197
-#: ../../data/tribes/scripting/help/worker_help.lua:207
-#: ../../data/tribes/scripting/help/worker_help.lua:217
-#: ../../data/tribes/scripting/help/worker_help.lua:232
+#: ../../data/tribes/scripting/help/worker_help.lua:206
+#: ../../data/tribes/scripting/help/worker_help.lua:216
+#: ../../data/tribes/scripting/help/worker_help.lua:226
+#: ../../data/tribes/scripting/help/worker_help.lua:241
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
 msgstr[0] "El nivell màxim és %1%."
 msgstr[1] "El nivell màxim és %1%."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:199
+#: ../../data/tribes/scripting/help/worker_help.lua:208
 msgid "Attack"
 msgstr "Atac"
 
 #. TRANSLATORS: Points are 4 digit numbers.
-#: ../../data/tribes/scripting/help/worker_help.lua:202
+#: ../../data/tribes/scripting/help/worker_help.lua:211
 msgid "A random value between %1% and %2% points is added to each attack."
 msgstr "A cada atac, s'afegeix un nombre aleatori entre %1% i %2%."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:209
+#: ../../data/tribes/scripting/help/worker_help.lua:218
 msgid "Defense"
 msgstr "Defensa"
 
-#: ../../data/tribes/scripting/help/worker_help.lua:213
-#: ../../data/tribes/scripting/help/worker_help.lua:221
-#: ../../data/tribes/scripting/help/worker_help.lua:228
+#: ../../data/tribes/scripting/help/worker_help.lua:222
+#: ../../data/tribes/scripting/help/worker_help.lua:230
+#: ../../data/tribes/scripting/help/worker_help.lua:237
 #, lua-format
 msgid "Starts at %d%%."
 msgstr "Comença a %d%%."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:215
-#: ../../data/tribes/scripting/help/worker_help.lua:230
+#: ../../data/tribes/scripting/help/worker_help.lua:224
+#: ../../data/tribes/scripting/help/worker_help.lua:239
 #, lua-format
 msgid "Increased by %d%% for each level."
 msgstr "Incrementa un %d%% per cada nivell."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:222
+#: ../../data/tribes/scripting/help/worker_help.lua:231
 msgid "This soldier cannot be trained in defense."
 msgstr "Aquest soldat no pot entrenar-se en defensa."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:225
+#: ../../data/tribes/scripting/help/worker_help.lua:234
 msgid "Evade"
 msgstr "Evasió"
 
@@ -4404,9 +4421,9 @@ msgstr "Els flequers de l'Imperi fan pa molt gustós amb farina de blat i aigua.
 #: ../../data/tribes/wares/bread_frisians/helptexts.lua:4
 msgctxt "frisians_ware"
 msgid ""
-"Bread is made out of barley and water and is used in the taverns and "
-"drinking halls to prepare rations. It is also consumed by training soldiers."
-msgstr "El pa es cou un cop s'ha obtingut la massa barrejant civada i aigua i es consumeix a les tavernes i sales de begudes per fer-ne racions. També en mengen els soldats quan s'entrenen."
+"Bread is made out of barley and water and is used in the taverns to prepare "
+"rations. It is also consumed by training soldiers."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:4
@@ -4446,8 +4463,8 @@ msgstr "Les pales de forner les produeix el fabricant d'eines."
 msgctxt "frisians_ware"
 msgid ""
 "Bricks are the best and most important building material. They are made out "
-"of clay and granite."
-msgstr "El maó és el millor i més important material de construcció. S'obté a partir d'argila i granit."
+"of a mix of clay and granite dried in a coal fire."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Buckets
 #: ../../data/tribes/wares/buckets/helptexts.lua:4
@@ -4520,8 +4537,9 @@ msgstr "Els focs de les forges imperials i els tallers d'armes i armadures s'ali
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../data/tribes/wares/coal/helptexts.lua:12
 msgctxt "frisians_ware"
-msgid "The fires of the furnaces and armor smithies are fed with coal."
-msgstr "El foc de les fargues i dels tallers d'armadures s'alimenten de carbó."
+msgid ""
+"The fires of the brick kilns, furnaces and armor smithies are fed with coal."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Corn
 #: ../../data/tribes/wares/corn/helptexts.lua:4
@@ -4551,61 +4569,64 @@ msgstr "Aquests meravellosos diamants s'utilitzen en la construcció d'alguns ed
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:4
 msgctxt "ware"
-msgid "The felling ax is the tool of the lumberjack to chop down trees."
-msgstr "La destral per talar arbres és l'eina del llenyataire."
+msgid "The felling ax is the tool to chop down trees."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:6
 msgctxt "barbarians_ware"
 msgid ""
-"Felling axes are produced in the metal workshop (but cease to be produced by"
-" the building if it is enhanced to an ax workshop and war mill)."
-msgstr "Les destrals per talar arbres es fabriquen al taller de metall (però no se'n faran més a l'edifici si s'amplia a taller de destrals o de guerra)."
+"Felling axes are used by lumberjacks and produced in the metal workshop (but"
+" cease to be produced by the building if it is enhanced to an ax workshop "
+"and war mill)."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:8
 msgctxt "frisians_ware"
-msgid "Felling axes are produced by the blacksmithy."
-msgstr "Les destrals per talar arbres es produeixen a la forja."
+msgid "Felling axes are used by woodcutters and produced by the blacksmithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:10
 msgctxt "empire_ware"
-msgid "Felling axes are produced by the toolsmith."
-msgstr "Les destrals per talar arbres les fabriquen els fabricants d'eines."
+msgid "Felling axes are used by lumberjacks and produced by the toolsmithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:4
 msgctxt "ware"
-msgid ""
-"Fire tongs are the tools of the smelter, who works in the smelting works."
-msgstr "Les tenalles són les eines del fonedor, que treballa al forn de metalls. Les produeix el fabricant d'eines."
+msgid "Fire tongs are the tools for smelting ores."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:6
 msgctxt "atlanteans_ware_fire_tongs"
-msgid "They are produced by the toolsmith."
-msgstr "Les produeixen els fabricants d'eines."
+msgid "They are used in the smelting works and produced by the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:8
 msgctxt "frisians_ware"
-msgid "They are produced by the blacksmithy."
-msgstr "Es produeixen a la forja."
+msgid ""
+"They are used in the furnace and the brick kiln and produced by the "
+"blacksmithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:10
 msgctxt "barbarians_ware"
 msgid ""
-"Produced by the metal workshop (but they cease to be produced by the "
-"building if it is enhanced to an ax workshop and war mill)."
-msgstr "Es fabriquen al taller de metall (però no se'n faran més a l'edifici si s'amplia a taller de destrals o de guerra)."
+"They are used in the smelting works and produced by the metal workshop (but "
+"they cease to be produced by the building if it is enhanced to an ax "
+"workshop and war mill)."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:12
 msgctxt "empire_ware_fire_tongs"
-msgid "They are produced by the toolsmith."
-msgstr "Les produeixen els fabricants d'eines."
+msgid "They are used in the smelting works and produced by the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:4
@@ -4687,8 +4708,8 @@ msgstr "La farina de negrarrel es produeix en molins a partir de negrarrel. S'em
 msgctxt "frisians_ware"
 msgid ""
 "Fruit are berries gathered from berry bushes by a fruit collector. They are "
-"used for rations and meals."
-msgstr "Les fruites recollides dels arbustos de baies pels recol·lectors de fruita s'empren per fer racions i àpats."
+"used for rations and for feeding the fish at the aqua farms."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fur
 #: ../../data/tribes/wares/fur/helptexts.lua:4
@@ -4732,52 +4753,81 @@ msgstr "Els vestits de pell ordinaris es poden decorar amb ferro per donar-los-h
 #: ../../data/tribes/wares/gold/helptexts.lua:4
 msgctxt "ware"
 msgid ""
-"Gold is the most valuable of all metals, and it is obtained out of gold ore "
-"in a smelting works."
-msgstr "L'or és el metall més valuós. S'obté en forma de lingots a partir de mineral d'or en el forn de metalls."
+"Gold is the most valuable of all metals, and it is smelted out of gold ore."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid ""
-"Gold is used by the armor smithy, the weapon smithy and the gold spinning "
-"mill."
-msgstr "Els lingots d'or s'empren als tallers d'armes i armadures i a la filadora d'or."
+"It is produced by the smelting works and used by the armor smithy, the "
+"weapon smithy and the gold spinning mill."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:8
 msgctxt "barbarians_ware"
 msgid ""
-"Only very important things are embellished with gold. It is used as a "
-"precious building material and to produce different axes (in the war mill) "
-"and different parts of armor (in the helm smithy)."
-msgstr "Només les peces més importants s'engalanen amb or. S'empra com a un preciós material de construcció i per produir diferents tipus de destrals (als tallers de destrals i de guerra) i diferents armadures (al taller d'armadures)."
+"Only very important things are embellished with gold. It is produced by the "
+"smelting works and used as a precious building material and to produce "
+"different axes (in the war mill) and different parts of armor (in the helm "
+"smithy)."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:10
 msgctxt "frisians_ware"
 msgid ""
-"Only very important things are embellished with gold. It is used to produce "
-"better swords and the best helmets. The best armor is also decorated with "
-"gold."
-msgstr "Només els objectes més importants s'embelleixen amb or. Les millors espases i cascos en porten una mica, però la millor armadura fins i tot es decora amb or."
+"Only very important things are embellished with gold. It is produced by the "
+"furnace and is used to produce better swords and the best helmets. The best "
+"armor is also decorated with gold."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:12
 msgctxt "empire_ware"
 msgid ""
-"Armor and weapons are embellished with gold in the armor smithy and the "
-"weapon smithy."
-msgstr "Les armes i armadures s'engalanen amb or als tallers d'armes i d'armadures."
+"It is produced by the smelting works. Armor and weapons are embellished with"
+" gold in the armor smithy and the weapon smithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../data/tribes/wares/gold_ore/helptexts.lua:4
 msgctxt "ware"
+msgid "Gold ore is mined in a gold mine."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Gold Ore
+#: ../../data/tribes/wares/gold_ore/helptexts.lua:6
+msgctxt "atlanteans_ware"
 msgid ""
-"Gold ore is mined in a gold mine. Smelted in a smelting works, it turns into"
-" gold which is used as a precious building material and to produce weapons "
-"and armor."
-msgstr "El mineral d'or s'obté a les mines d'or. Es redueix i se'n preparen lingots al forn de metalls. Després, aquests lingots d'or es podran usar com a material de construcció o per produir armes i armadures."
+"Smelted in a smelting works, it turns into gold which is used as a precious "
+"building material and to produce weapons and armor."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Gold Ore
+#: ../../data/tribes/wares/gold_ore/helptexts.lua:8
+msgctxt "barbarians_ware"
+msgid ""
+"Smelted in a smelting works, it turns into gold which is used as a precious "
+"building material and to produce weapons and armor."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Gold Ore
+#: ../../data/tribes/wares/gold_ore/helptexts.lua:10
+msgctxt "frisians_ware"
+msgid ""
+"Smelted in a furnace, it turns into gold which is used as a precious "
+"building material and to produce weapons and armor."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Gold Ore
+#: ../../data/tribes/wares/gold_ore/helptexts.lua:12
+msgctxt "empire_ware"
+msgid ""
+"Smelted in a smelting works, it turns into gold which is used as a precious "
+"building material and to produce weapons and armor."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Gold Thread
 #: ../../data/tribes/wares/gold_thread/helptexts.lua:4
@@ -4980,44 +5030,70 @@ msgstr "Les produeixen els fabricants d'eines."
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:4
 msgctxt "ware"
-msgid "Iron is extracted from iron ore in the smelting works."
-msgstr "El ferro s'obté en forma de lingots a partir de mineral de ferro en el forn de metalls."
+msgid "Iron is smelted out of iron ores."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:6
 msgctxt "atlanteans_ware"
-msgid "It is used in the toolsmithy, armor smithy and weapon smithy."
-msgstr "S'empra als tallers d'eines, armes i armadures."
+msgid ""
+"It is produced by the smelting works and used in the toolsmithy, armor "
+"smithy and weapon smithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:8
 msgctxt "barbarians_ware"
 msgid ""
-"It is used to produce weapons and tools in the metal workshop, ax workshop, "
-"war mill and helm smithy."
-msgstr "S'usa per produir armes i eines als tallers de metall, de destrals, de guerra i de cascos."
+"It is produced by the smelting works and used to produce weapons and tools "
+"in the metal workshop, ax workshop, war mill and helm smithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:10
 msgctxt "empire_ware"
-msgid "Weapons, armor and tools are made of iron."
-msgstr "Les eines, armes i armadures es fabriquen amb ferro."
+msgid ""
+"It is produced by the smelting works. Weapons, armor and tools are made of "
+"iron."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:12
 msgctxt "frisians_ware"
 msgid ""
-"Tools and weapons are made of iron. It is also used as jewellery for fur "
-"garment armor to give it a silver shine."
-msgstr "Les eines i les armes es fabriquen amb ferro. També s'empra com a bijuteria per als vestits de pell, de manera que l'armadura no només protegeix sinó que a més a més té un toc platejat."
+"It is produced by the furnace. Tools and weapons are made of iron. It is "
+"also used as jewellery for fur garment armor to give it a silver shine."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Iron Ore
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:4
 msgctxt "default_ware"
-msgid ""
-"Iron ore is mined in iron mines. It is smelted in a smelting works to "
-"retrieve the iron."
-msgstr "El mineral de ferro s'extreu de les mines de ferro. Es transforma en ferro quan es redueix al forn de metalls."
+msgid "Iron ore is mined in iron mines."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Iron Ore
+#: ../../data/tribes/wares/iron_ore/helptexts.lua:6
+msgctxt "atlanteans_ware"
+msgid "It is smelted in a smelting works to retrieve the iron."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Iron Ore
+#: ../../data/tribes/wares/iron_ore/helptexts.lua:8
+msgctxt "barbarians_ware"
+msgid "It is smelted in a smelting works to retrieve the iron."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Iron Ore
+#: ../../data/tribes/wares/iron_ore/helptexts.lua:10
+msgctxt "frisians_ware"
+msgid "It is smelted in a furnace to retrieve the iron."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Iron Ore
+#: ../../data/tribes/wares/iron_ore/helptexts.lua:12
+msgctxt "empire_ware"
+msgid "It is smelted in a smelting works to retrieve the iron."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:4
@@ -5112,9 +5188,9 @@ msgstr "Les columnes de marbre representen l'elevada cultura de l'Imperi i es ne
 #: ../../data/tribes/wares/mead/helptexts.lua:4
 msgctxt "frisians_ware"
 msgid ""
-"Mead is produced by mead breweries and used in drinking halls for producing "
-"meals. Soldiers drink mead during advanced training."
-msgstr "L'aiguamel es produeix a les cerveseries d'aiguamel i s'empra a les sales de begudes per produir àpats. Els soldats també en beuen durant entrenaments avançats."
+"Mead is produced by mead breweries. Soldiers drink mead during advanced "
+"training."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../data/tribes/wares/meal/helptexts.lua:4

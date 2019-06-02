@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-05 04:54+0000\n"
-"PO-Revision-Date: 2019-04-08 12:42+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 12:38+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -62,7 +62,7 @@ msgid ""
 "and the Atlanteans. All tribes have a different economy, strength and "
 "weaknesses, but the general gameplay is the same for all. We will play the "
 "Barbarians for now."
-msgstr "In Widelands gifft 't veer Völker: de Willen Lüü, dat Latienske Riek, de Atlantinger un de Fresen. All Völker hebben eene annere Wirtschaft un hör Starkten un Swackten, aver in ’t Geheel is dat Speel för all gliek. Nu spölen wi de Wille Lüü."
+msgstr "In Widelands gifft 't veer Völker: de Willen Lüü, dat Latienske Riek, de Atlantinger un de Fresen. All Völker hebben eene anner Wirtschaft un hör Starkten un Swackten, aver in ’t Geheel is dat Speel för all gliek. Nu spölen wi de Wille Lüü."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
@@ -74,7 +74,7 @@ msgid ""
 "The most important wares in the early game are the basic construction wares:"
 " logs and granite. Let’s make sure that we do not run out of logs. For this,"
 " we need a lumberjack and a hut for him to stay in."
-msgstr "För gewöhnelk begünnst du dat Speel mit eenem Raadhuus. Dat is dat grote Huus mit de blauen Fahn vör’m Ingang. Dat Raadhuus is een Kraamhuus, wat Waren, Arbeiders un Soldaten unnerbrengt. Eenige Waren bruukt man, um Husen to bauen, annere, um annere Waren to produzeren. De Waren im Raadhuus langen natürelk nich ewich, also mutt du alls klaarmaken, um se uttowesseln. De wichtigsten Waren im frohen Speel sünd de wesentliken Baumaterialien: Boomstammen un Flint. Laat uns sekerstellen, dat uns de Boomstammen nich utgahn. Daarför bruken wi eenen Boomhauer un een Huus, waar he wohnen kann."
+msgstr "För gewöhnelk begünnst du dat Speel mit eenem Raadhuus. Dat is dat grote Huus mit de blauen Fahn vör’m Ingang. Dat Raadhuus is een Kraamhuus, wat Waren, Arbeiders un Soldaten unnerbrengt. Eenige Waren bruukt man, um Husen to bauen, anner, um anner Waren to produzeren. De Waren im Raadhuus langen natürelk nich ewich, also mutt du alls klaarmaken, um se uttowesseln. De wichtigsten Waren im frohen Speel sünd de wesentliken Baumaterialien: Boomstammen un Flint. Laat uns sekerstellen, dat uns de Boomstammen nich utgahn. Daarför bruken wi eenen Boomhauer un een Huus, waar he wohnen kann."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
@@ -85,7 +85,7 @@ msgstr "Wi mutten eene moje Stee finnen, waar wi dat Boomhauer-Huus bauen könen
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Press the Space bar to toggle them, or"
-msgstr "Drück de lege Tast, um 't umtoschalten, oder"
+msgstr "Drück de lege Tast, um 't umtoschalten, of"
 
 #. TRANSLATORS: List item. Has an image of the button next to it.
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:45
@@ -382,7 +382,7 @@ msgstr "Hunnert. Un nu de Lütte Kaart. Du kannst se openkriegen, indeem du de"
 msgid ""
 "minimap button at the bottom of the screen or simply by using the keyboard "
 "shortcut ‘m’."
-msgstr "»Lütt Kaart«-Knoop am unnern Rand vum Billschirm drückst oder de Handigtaste »M« bruukst."
+msgstr "»Lütt Kaart«-Knoop am unnern Rand vum Billschirm drückst of de Handigtaste »M« bruukst."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:214
 msgid ""
@@ -405,7 +405,7 @@ msgstr "Lehr de Lütte Kaart to bruken"
 msgid ""
 "Open the minimap by using the third button from the left on the bottom of "
 "your screen or the ‘m’ key."
-msgstr "Maak de Lütt Kaart open, indeem du de darden Knoop vun links an de unnern Rand vum Billschirm oder de Taste »M« drückst."
+msgstr "Maak de Lütt Kaart open, indeem du de darden Knoop vun links an de unnern Rand vum Billschirm of de Taste »M« drückst."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:222
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
@@ -415,7 +415,7 @@ msgstr "Probeer de verschedenen Wieser (Straten, Fahnen, …) ut"
 msgid ""
 "Close the minimap when you are ready to continue by using the same button or"
 " ‘m’ again. Of course, a right-click also works."
-msgstr "Sluut de Lütt Kaart, wenn du klaar tum Wiedermaken büst, indeem du desülvig Knoop oder »M« weer drückst. Oder bruuk de rechte Muustaste."
+msgstr "Sluut de Lütt Kaart, wenn du klaar tum Wiedermaken büst, indeem du desülvig Knoop of »M« weer drückst. Oder bruuk de rechte Muustaste."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:228
 msgid "Onward to the Quarry"
@@ -477,7 +477,7 @@ msgid ""
 "Now go ahead, try it. The quarry is a small building, so if you click on a "
 "medium or big building symbol, you will have to select the small buildings "
 "tab first to find it. Go on, check it out!"
-msgstr "Nu versöök 't. Dat Flintslagerhuus is een lüttes Huus; wenn du up een Teken för middelmatig oder grote Husen klickst, mutt du eerst de Listenwessler för lütte Husen utkören, um 't to finnen. Probeer 't!"
+msgstr "Nu versöök 't. Dat Flintslagerhuus is een lüttes Huus; wenn du up een Teken för middelmatig of grote Husen klickst, mutt du eerst de Listenwessler för lütte Husen utkören, um 't to finnen. Probeer 't!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
 msgid "Build a quarry next to the rocks"
@@ -498,7 +498,7 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press Space for that)."
-msgstr "Dat Flintslagerhuus is as de Boomhauer-Huus een lüttes Huus. Du kannst 't also up elkeen Feld bauen, dat een rodes, geles oder grönes Huus-Teken hett wenn de Tekens för Rüümte tum Bauen wesen worden (drück daarför de lege Tast)."
+msgstr "Dat Flintslagerhuus is as de Boomhauer-Huus een lüttes Huus. Du kannst 't also up elkeen Feld bauen, dat een rodes, geles of grönes Huus-Teken hett wenn de Tekens för Rüümte tum Bauen wesen worden (drück daarför de lege Tast)."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:255
 msgid ""
@@ -605,7 +605,7 @@ msgstr "Denk an de Schüünten wenn du Straten baust un bruuk se tu dienem Vörd
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr "Wenn du bi’m Daankriegen vun eener Straat de Strg-Taste oder de Umschalt- un de Strg-Taste drückst, worden automatisk Fahnen upstellt."
+msgstr "Wenn du bi’m Daankriegen vun eener Straat de Strg-Taste of de Umschalt- un de Strg-Taste drückst, worden automatisk Fahnen upstellt."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Now please rebuild the road between your quarry and your headquarters."
@@ -703,7 +703,7 @@ msgid ""
 "sometimes hard to tell them apart. Widelands offers a feature to show label "
 "texts over the buildings. They are called the ‘census’ and you can toggle "
 "them via the ‘c’ key or via the button on the ‘Watch’ tab of any field."
-msgstr "Indes wi wachten wies ick di noch eene nüttelke Instellen. All Bausteden kieken gliek un eenige Husen haast so ut. Mitunner kann man se kuum utnanner hollen. Widelands maakt 't mögelk, Namen över Husen to wiesen. Du kannst de »Namen vun Husen«-Instellen mit de Taste »C« oder de Knoop in de »Beluren«-Listenwessler vun elkeen Feld an- un utknipsen."
+msgstr "Indes wi wachten wies ick di noch eene nüttelke Instellen. All Bausteden kieken gliek un eenige Husen haast so ut. Mitunner kann man se kuum utnanner hollen. Widelands maakt 't mögelk, Namen över Husen to wiesen. Du kannst de »Namen vun Husen«-Instellen mit de Taste »C« of de Knoop in de »Beluren«-Listenwessler vun elkeen Feld an- un utknipsen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:359
 msgid ""
@@ -737,7 +737,7 @@ msgid ""
 "Hi, it’s me again! This time, I have sent you a message. Messages are sent "
 "to you by Widelands to inform you about important events: empty mines, "
 "attacks on your tribe, won or lost military buildings, resources found…"
-msgstr "Moin, ick bün 't weer! Nu hebb ick di eene Naricht schickt. Widelands schickt di Narichten, um di vun Vörfallen vun Belang weten to laten: Wenn een Bargwark leeg is, dien Volk angrepen word, Soldateree-Boen innohmen oder verloren worden, Mineraale funnen worden …"
+msgstr "Moin, ick bün 't weer! Nu hebb ick di eene Naricht schickt. Widelands schickt di Narichten, um di vun Vörfallen vun Belang weten to laten: Wenn een Bargwark leeg is, dien Volk angrepen word, Soldateree-Boen innohmen of verloren worden, Mineraale funnen worden …"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:377
 msgid ""
@@ -745,7 +745,7 @@ msgid ""
 " bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "De Narichtenfenster kann mit de tweeden Knoop vun rechts an de unnern Rand vum Billschirm open oder to maakt worden. Deeser Knoop sücht anners ut, wenn du neje Narichten hest. Wenn du eene neje Naricht kriggst, höörst du ok eenen Klockslag."
+msgstr "De Narichtenfenster kann mit de tweeden Knoop vun rechts an de unnern Rand vum Billschirm open of to maakt worden. Deeser Knoop sücht anners ut, wenn du neje Narichten hest. Wenn du eene neje Naricht kriggst, höörst du ok eenen Klockslag."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:378
 msgid ""
@@ -770,7 +770,7 @@ msgstr "Wenn du eene Naricht wegdeist, word een anner Naricht automatisk ut de L
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press Ctrl + A to select them all."
-msgstr "Du kannst mehr Narichten utkören, indeem du de Umschalt- oder Strg-Taste drückst. Drück Strg + A, um all Narichten uttokören."
+msgstr "Du kannst mehr Narichten utkören, indeem du de Umschalt- of Strg-Taste drückst. Drück Strg + A, um all Narichten uttokören."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:382
 msgid ""
@@ -803,7 +803,7 @@ msgid ""
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically. Keep clicking the ‘Archive selected "
 "message’ button until all messages have been archived and the list is empty."
-msgstr "Daarto maakst du dat Narichtenfenster up, indeem du »N« oder de tweeden Knoop vun rechts an de unnern Rand vum Billschirm drückst. De neeiste Naricht word automatisk utköört. Klick solang de »Deese Naricht wegdoon«-Knoop an, bit alle Narichten wegdaan sünd un de Liste leeg is."
+msgstr "Daarto maakst du dat Narichtenfenster up, indeem du »N« of de tweeden Knoop vun rechts an de unnern Rand vum Billschirm drückst. De neeiste Naricht word automatisk utköört. Klick solang de »Deese Naricht wegdoon«-Knoop an, bit alle Narichten wegdaan sünd un de Liste leeg is."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:398
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
@@ -973,7 +973,7 @@ msgid ""
 "medium (yellow) building plots, but buildings can be built on a building "
 "plot that provides more space than they need. You should always keep that in"
 " mind when you search for a suitable place."
-msgstr "Vergeet nich, dat grote Husen (grönes Teken) nich up lütten (rood) oder middelmatigen (geel) Steden baut worden könen, aver Husen könen up Steden baut worden, de mehr Rüümte as nödig hebben. Daar sallst du immer an denken, wenn du eene gode Stee utsöchst."
+msgstr "Vergeet nich, dat grote Husen (grönes Teken) nich up lütten (rood) of middelmatigen (geel) Steden baut worden könen, aver Husen könen up Steden baut worden, de mehr Rüümte as nödig hebben. Daar sallst du immer an denken, wenn du eene gode Stee utsöchst."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:465
 msgid "Military Site Occupied"
@@ -1011,7 +1011,7 @@ msgstr "De eerste Inföhren is nu klaarmaakt. Daarmit du mehr över dat Speel le
 msgid ""
 "However, since you now know how to control Widelands, you can also start a "
 "game (or continue this one) and discover more by yourself."
-msgstr "Wiel du nu weetst, wo dat Stüren vun Widelands gaht, kannst du ok een echtes Speel starten (oder deeses hier wiederspölen) un sülvst mehr utfinnen."
+msgstr "Wiel du nu weetst, wo dat Stüren vun Widelands gaht, kannst du ok een echtes Speel starten (of deeses hier wiederspölen) un sülvst mehr utfinnen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 msgid "To leave this game and return to the main menu, click on the"
@@ -1032,14 +1032,3 @@ msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
 msgstr "Wees bedankt, dat du deese Inföhren spöölt hest. Amüseer di mit Widelands un besöök uns maal up"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neje Upgaav"
-msgstr[1] "Neje Upgaven"

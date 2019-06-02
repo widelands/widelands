@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
-"PO-Revision-Date: 2018-11-26 08:46+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 12:38+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,7 @@ msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
-msgstr "Bau een Steenbickerhuus un dann eene kumplete Wirtschaft för Bargwarken (Köhle-Bargwark un/oder Holtköhl-Branneree, Iesen-Bargwark, Warktüügsmee, Wapensmee, Panzersmee un Smeltwark)."
+msgstr "Bau een Steenbickerhuus un dann eene kumplete Wirtschaft för Bargwarken (Köhle-Bargwark un/of Holtköhl-Branneree, Iesen-Bargwark, Warktüügsmee, Wapensmee, Panzersmee un Smeltwark)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:72
 msgid "Provide your miners with food"
@@ -96,7 +96,7 @@ msgstr "Bau eene Kneipe, um Spiesen för uns' Bargwarkskeerls to produzeren."
 msgid ""
 "Of course this means you will need more resources for preparing this food – "
 "like fish, meat or bread."
-msgstr "Daar bruukst du natürelk Waren to, um de Spiesen torechttomaken – Fiss, Fleesk oder Brood."
+msgstr "Daar bruukst du natürelk Waren to, um de Spiesen torechttomaken – Fiss, Fleesk of Brood."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:77
 msgid ""
@@ -119,7 +119,7 @@ msgid ""
 "It’s up to you what you want to build. But remember – coal and iron mines "
 "need beer, marble and gold mines need wine and all mines need at least "
 "rations, which are produced out of bread OR meat OR fish."
-msgstr "Du entscheddst, wat du baust. Vergeet nich – Köhle- un Iesen-Bargwarken bruuken Beer, Marmel- un Gold-Bargwarken bruuken Wien. Alle Bargwarken bruuken tominnsten Happen, de ut Brood ODER Fleesk ODER Fiss produzeert worden."
+msgstr "Du entscheddst, wat du baust. Vergeet nich – Köhle- un Iesen-Bargwarken bruuken Beer, Marmel- un Gold-Bargwarken bruuken Wien. Alle Bargwarken bruuken tominnsten Happen, de ut Brood OF Fleesk OF Fiss produzeert worden."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:86
 msgid "Protect your eastern frontier"
@@ -133,7 +133,7 @@ msgstr "Schütt de Grenz im Oosten"
 msgid ""
 "Build stronger military buildings, such as an outpost, a barrier or a tower,"
 " on the eastern frontier."
-msgstr "Bau starke Soldateree-Boen, to 'n Bispööl eene Butenstee, een Uppass oder eenen Toorn, an de oostelke Grenz."
+msgstr "Bau starke Soldateree-Boen, to 'n Bispööl eene Butenstee, een Uppass of eenen Toorn, an de oostelke Grenz."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:90
 msgid "Build a tower to watch deep inside the enemy territory."
@@ -295,7 +295,7 @@ msgstr "Villicht sünd de Lüü in de Schipp vun desülvigen Störm grepen worde
 msgid ""
 "I beg you to be cautious and to build some blockhouses or sentries around "
 "our colony."
-msgstr "Bidde weest vörsichtig un baut een paar Wachters-Kamerkes oder Wachters-Kamers um uns' Dörp."
+msgstr "Bidde weest vörsichtig un baut een paar Wachters-Kamerkes of Wachters-Kamers um uns' Dörp."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:181
 msgid "Marble on the Mountain"
@@ -342,7 +342,7 @@ msgid ""
 "of iron ore. I advise you to immediately build iron and coal mines (or at "
 "least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr "Bi de Gotten, wat för een unbannigs Glück! 't gifft noch twee annere Bargen, un ick glööv, de eene hett een Bült vun Köhle un de anner vun Iesenkluut. Ick raad Jo, stracks Iesen- un Köhle-Bargwarken (oder tominnst Holtköhl-Brannereen), Smeltwarken, Warktüügsmeden, Wapensmeden un Panzersmeden to bauen."
+msgstr "Bi de Gotten, wat för een unbannigs Glück! 't gifft noch twee anner Bargen, un ick glööv, de eene hett een Bült vun Köhle un de anner vun Iesenkluut. Ick raad Jo, stracks Iesen- un Köhle-Bargwarken (of tominnst Holtköhl-Brannereen), Smeltwarken, Warktüügsmeden, Wapensmeden un Panzersmeden to bauen."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:203
@@ -512,14 +512,3 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "Du hest deese Rutfödderung ofsloten. Wenn du willt, kannst du wiederspölen, anners de token Rutfödderung anfangen."
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neje Upgaav"
-msgstr[1] "Neje Upgaven"

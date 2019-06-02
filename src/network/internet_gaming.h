@@ -79,6 +79,23 @@ struct InternetGaming : public ChatProvider {
 	bool relogin();
 	void logout(const std::string& msgcode = "CONNECTION_CLOSED");
 
+	/**
+	 * Connects to the metaserver and checks the password without logging in.
+	 *
+	 * Note that the user might be logged in with another username and as unregistered
+	 * if the user account is already in use by another client.
+	 * @warning Resets the current connection.
+	 * @param nick The username.
+	 * @param pwd The password.
+	 * @param metaserver The hostname of the metaserver.
+	 * @param port The port number of the metaserver.
+	 * @return Whether the password was valid.
+	 */
+	bool check_password(const std::string& nick,
+	                    const std::string& pwd,
+	                    const std::string& metaserver,
+	                    uint32_t port);
+
 	/// \returns whether the client is logged in
 	bool logged_in() {
 		return (state_ == LOBBY) || (state_ == CONNECTING) || (state_ == IN_GAME);
@@ -92,7 +109,7 @@ struct InternetGaming : public ChatProvider {
 		clientupdate_ = true;
 	}
 
-	void handle_metaserver_communication();
+	void handle_metaserver_communication(bool relogin_on_error = true);
 
 	// Game specific functions
 	/**
@@ -202,7 +219,7 @@ private:
 	 */
 	void create_second_connection();
 
-	void handle_packet(RecvPacket& packet);
+	void handle_packet(RecvPacket& packet, bool relogin_on_error = true);
 	void handle_failed_read();
 
 	// conversion functions

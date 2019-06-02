@@ -248,6 +248,7 @@ wl_library(graphic_terrain_programs
     logic_constants
     logic_map_objects
     logic_map_objects_description_maintainer
+    wui_mapview_pixelfunctions
 )
 
 
