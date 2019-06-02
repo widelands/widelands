@@ -17,21 +17,19 @@
  *
  */
 
-#ifndef WL_WUI_SUGGESTED_TEAMS_BOX_H
-#define WL_WUI_SUGGESTED_TEAMS_BOX_H
+#ifndef WL_WUI_SUGGESTED_TEAMS_UI_H
+#define WL_WUI_SUGGESTED_TEAMS_UI_H
 
-#include <set>
 #include <string>
+#include <vector>
 
 #include "logic/widelands.h"
-#include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/icon.h"
-#include "ui_basic/textarea.h"
 
+/// Format a teams lineup using player icons and <img> tags
+std::string format_suggested_teams_lineup(const Widelands::SuggestedTeamLineup& lineup);
 
-// NOCOM the only remaining class should be the new dropdown. Rename the file when we're done.
-
+/// Lists available team lineups for selection
 class SuggestedTeamsDropdown : public UI::Dropdown<size_t> {
 public:
 	explicit SuggestedTeamsDropdown(UI::Panel* parent,
@@ -42,36 +40,9 @@ public:
 									int button_dimension);
 	void rebuild(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams);
 	const Widelands::SuggestedTeamLineup* get_lineup(size_t index) const;
+
 private:
 	std::vector<Widelands::SuggestedTeamLineup> suggested_teams_;
 };
 
-namespace UI {
-
-struct SuggestedTeamsBox : public UI::Box {
-	SuggestedTeamsBox(Panel* parent,
-	                  int32_t x,
-	                  int32_t y,
-	                  uint32_t orientation,
-	                  int32_t padding,
-	                  int32_t indent,
-	                  int32_t max_x = 0,
-	                  int32_t max_y = 0);
-	~SuggestedTeamsBox();
-
-	void hide();
-	void show(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams);
-
-private:
-	int32_t const padding_;
-	int32_t const indent_;
-	int32_t const label_height_;
-	UI::Textarea* suggested_teams_box_label_;
-	UI::Box* lineup_box_;
-	std::vector<UI::Icon*> player_icons_;
-	std::vector<UI::Textarea*> vs_labels_;
-	std::vector<Widelands::SuggestedTeamLineup> suggested_teams_;
-};
-}  // namespace UI
-
-#endif  // end of include guard: WL_WUI_SUGGESTED_TEAMS_BOX_H
+#endif  // end of include guard: WL_WUI_SUGGESTED_TEAMS_UI_H

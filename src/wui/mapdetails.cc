@@ -51,9 +51,7 @@ MapDetails::MapDetails(
                  "",
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(&main_box_, 0, 0, UI::Scrollbar::kSize, 0, style, ""),
-     suggested_teams_box_(
-        new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, w)) {
+     descr_(&main_box_, 0, 0, UI::Scrollbar::kSize, 0, style, "") {
 
 	main_box_.add(&name_label_);
 	main_box_.add_space(padding_);
@@ -64,7 +62,6 @@ MapDetails::MapDetails(
 void MapDetails::clear() {
 	name_label_.set_text("");
 	descr_.set_text("");
-	suggested_teams_box_->hide();
 }
 
 void MapDetails::layout() {
@@ -74,12 +71,7 @@ void MapDetails::layout() {
 	                                            2);
 
 	// Adjust sizes for show / hide suggested teams
-	if (suggested_teams_box_->is_visible()) {
-		suggested_teams_box_->set_pos(Vector2i(0, get_h() - suggested_teams_box_->get_h()));
-		main_box_.set_size(get_w(), get_h() - suggested_teams_box_->get_h() - padding_);
-	} else {
-		main_box_.set_size(get_w(), get_h());
-	}
+	main_box_.set_size(get_w(), get_h());
 	descr_.set_size(main_box_.get_w(), main_box_.get_h() - name_label_.get_h() - padding_);
 	descr_.scroll_to_top();
 }
@@ -157,14 +149,17 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 			   (boost::format("%s%s") % description % as_content(mapdata.hint, style_)).str();
 		}
 
-		descr_.set_text(as_richtext(description));
-
-		// Show / hide suggested teams
-		if (mapdata.suggested_teams.empty()) {
-			suggested_teams_box_->hide();
-		} else {
-			suggested_teams_box_->show(mapdata.suggested_teams);
+		if (!mapdata.suggested_teams.empty()) {
+			// We need some more space below the heading to prevent icon overlap
+			std::string suggested_teams = "<p><vspace gap=4> </p>";
+			for (const auto& lineup : mapdata.suggested_teams) {
+				suggested_teams += "<p><vspace gap=2>" + format_suggested_teams_lineup(lineup) + "</p>";
+			}
+			/** TRANSLATORS: Map header when selecting a map. Contents are a list of possible team lineups. */
+			description += as_heading_with_content(_("Suggested Teams"), suggested_teams, style_, false, true);
 		}
+
+		descr_.set_text(as_richtext(description));
 	}
 	layout();
 }

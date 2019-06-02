@@ -68,11 +68,10 @@ wl_library(wui_mapview_pixelfunctions
 
 wl_library(wui_common_suggested_teams
   SRCS
-    suggested_teams_box.cc
-    suggested_teams_box.h
+    suggested_teams_ui.cc
+    suggested_teams_ui.h
   DEPENDS
     base_i18n
-    graphic
     graphic_playercolor
     logic_constants
     ui_basic

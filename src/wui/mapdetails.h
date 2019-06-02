@@ -25,7 +25,7 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/panel.h"
 #include "wui/mapdata.h"
-#include "wui/suggested_teams_box.h"
+#include "wui/suggested_teams_ui.h"
 
 /**
  * Show a Panel with information about a map.
@@ -45,7 +45,6 @@ private:
 	UI::Box main_box_;
 	UI::MultilineTextarea name_label_;
 	UI::MultilineTextarea descr_;
-	UI::SuggestedTeamsBox* suggested_teams_box_;
 };
 
 #endif  // end of include guard: WL_WUI_MAPDETAILS_H

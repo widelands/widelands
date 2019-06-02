@@ -31,7 +31,7 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
-#include "wui/suggested_teams_box.h"
+#include "wui/suggested_teams_ui.h"
 
 struct ChatProvider;
 class GameController;
