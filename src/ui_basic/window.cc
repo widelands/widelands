@@ -417,9 +417,13 @@ bool Window::handle_key(bool down, SDL_Keysym code) {
 
 	if (down) {
 		switch (code.sym) {
-			case SDLK_ESCAPE:
+			case SDLK_ESCAPE: {
 				die();
+				Panel *ch = get_next_sibling();
+				if (ch != nullptr)
+					ch->focus();
 				return true;
+			}
 			default:
 				break;
 		}
