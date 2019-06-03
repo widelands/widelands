@@ -32,6 +32,8 @@ struct EditorResizeTool;
 struct EditorToolResizeOptionsMenu : public EditorToolOptionsMenu {
 	EditorToolResizeOptionsMenu(EditorInteractive&, EditorResizeTool&, UI::UniqueWindow::Registry&);
 
+	bool handle_key(bool down, SDL_Keysym code) override;
+
 private:
 	EditorInteractive& eia();
 	void update_dimensions();
