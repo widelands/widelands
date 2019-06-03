@@ -97,6 +97,9 @@ bool StoryMessageBox::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_RETURN:
 			clicked_ok();
 			return true;
+		case SDLK_ESCAPE:
+			clicked_ok();
+			return UI::Window::handle_key(down, code);
 		default:
 			break;  // not handled
 		}
