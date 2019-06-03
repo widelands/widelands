@@ -331,7 +331,7 @@ void DefaultAI::think() {
 			set_taskpool_task_time(gametime + 1000, SchedulerTaskId::kRoadCheck);
 			// testing 5 roads
 			{
-				const int32_t roads_to_check = (roads.size() < 20) ? 1 : 3;
+				const int32_t roads_to_check = roads.size() / 30 + 1;
 				for (int j = 0; j < roads_to_check; j += 1) {
 					// improve_roads function will test one road and rotate roads vector
 					if (improve_roads(gametime)) {
@@ -3630,42 +3630,53 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 			is_warehouse = true;
 		}
 	}
-
-	// is connected to a warehouse?
+	const uint32_t flag_coords_hash = flag.get_position().hash();
+	
+	if (flag_warehouse_distance.get_road_prohibited(flag_coords_hash, gametime)) {return false;}
 	const bool needs_warehouse = flag.get_economy()->warehouses().empty();
-
-	if (!has_building && flag.nr_of_roads() == 1) {
-		return false;
-	} else if (is_warehouse && flag.nr_of_roads() <= 3) {
-		// Do nothing
-	} else if (needs_warehouse) {
-		// Do nothing
-	} else if (flag.current_wares() > 5) {
-		// Do nothing
-	} else if (has_building && std::rand() % 3 == 0) {
-		// Do nothing
-	} else if (std::rand() % 10 == 0) {
-		// Do nothing
-	} else {
-		return false;
+	
+	uint32_t tmp_wh; // NOCOM
+	
+	// when deciding if we attempt to build a road from here we use probability NOCOM
+	uint16_t probability_score = 0;
+	if (flag.nr_of_roads() == 1) {probability_score += 20;}
+	if (is_warehouse && flag.nr_of_roads() <= 3) {probability_score += 20;}
+	probability_score += flag.current_wares() * 5;
+	if (needs_warehouse) {probability_score += 500;}
+	if (std::rand() % 10 == 0) 
+	probability_score += flag_warehouse_distance.get_distance(flag_coords_hash, gametime, &tmp_wh);
+	
+	if (std::rand() % 200 < probability_score) {
+		const bool action_taken = create_shortcut_road(flag, 14, gametime);
+		if (!action_taken) {printf ("failed to build a road\n");}
+		return true;
 	}
+	printf ("not trying to build a road\n");
+	return false;
 
-	int16_t expected_shortcut = 27;
-	if (has_building) {
-		expected_shortcut -= 3;
-	}
-	expected_shortcut -= flag.current_wares() * 3;
-	if (is_warehouse) {
-		expected_shortcut -= 10;
-	}
-	if (std::rand() % 5 == 0) {
-		expected_shortcut -= 10;
-	}
-	expected_shortcut -= 2 * flag.nr_of_roads();
+	//// is connected to a warehouse?
+	//const bool needs_warehouse = flag.get_economy()->warehouses().empty();
 
-	create_shortcut_road(flag, 14, expected_shortcut, gametime);
+	//if (!has_building && flag.nr_of_roads() == 1) {
+		//return false;
+	//} else if (is_warehouse && flag.nr_of_roads() <= 3) {
+		//// Do nothing
+	//} else if (needs_warehouse) {
+		//// Do nothing
+	//} else if (flag.current_wares() > 5) {
+		//// Do nothing
+	//} else if (has_building && std::rand() % 3 == 0) {
+		//// Do nothing
+	//} else if (std::rand() % 10 == 0) {
+		//// Do nothing
+	//} else {
+		//return false;
+	//}
 
-	return true;
+
+	//create_shortcut_road(flag, 14, gametime);
+
+	//return true;
 }
 
 // This function takes a road (road is smallest section of roads with two flags on the ends)
@@ -3840,7 +3851,6 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 // connection is not known
 bool DefaultAI::create_shortcut_road(const Flag& flag,
                                      uint16_t checkradius,
-                                     int16_t min_reduction,
                                      uint32_t gametime) {
 
     // Increasing the failed_connection_tries counter
