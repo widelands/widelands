@@ -92,7 +92,7 @@ Button::Button
 		int new_width = get_w();
 		const int new_height =
 		   std::max(text_height(g_gr->styles().button_style(init_style).enabled().font()),
-					text_height(g_gr->styles().button_style(init_style).enabled().font()))
+					text_height(g_gr->styles().button_style(init_style).disabled().font()))
 				+ 4 * kButtonImageMargin;
 		if (w == 0) {
 			// Automatically resize for text width too.

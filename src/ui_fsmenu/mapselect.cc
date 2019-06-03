@@ -151,7 +151,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 		tags_checkboxes_.at(i)->changedto.connect(boost::bind(&FullscreenMenuMapSelect::tagbox_changed, this, i, _1));
 	}
 
-	team_tags_dropdown_->selected.connect([this] { team_tags_changed(); });
+	team_tags_dropdown_->selected.connect([this] { fill_table(); });
 	show_all_maps_->sigclicked.connect([this] { clear_filter(); });
 
 	layout();
@@ -360,10 +360,6 @@ void FullscreenMenuMapSelect::tagbox_changed(int32_t id, bool to) {
 		req_tags_.erase(id);
 	}
 
-	fill_table();
-}
-
-void FullscreenMenuMapSelect::team_tags_changed() {
 	fill_table();
 }
 

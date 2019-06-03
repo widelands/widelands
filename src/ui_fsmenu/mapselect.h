@@ -63,7 +63,6 @@ private:
 	bool set_has_selection();
 	UI::Checkbox* add_tag_checkbox(UI::Box*, std::string, std::string);
 	void tagbox_changed(int32_t, bool);
-	void team_tags_changed();
 	void clear_filter();
 
 	int32_t const checkbox_space_;
