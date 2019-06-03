@@ -459,14 +459,15 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			return;
 
 		} else if (cmd == IGPCMD_ERROR) {
-			std::string errortype = packet.string();
+			const std::string errortype = packet.string();
 			if (errortype != IGPCMD_LOGIN && errortype != IGPCMD_PWD_CHALLENGE) {
 				log("InternetGaming: Strange ERROR in connecting state: %s\n", errortype.c_str());
 				throw WLWarning(
 				   _("Mixed up"), _("The metaserver sent a strange ERROR during connection"));
 			}
 			// Clients login request got rejected
-			logout(packet.string());
+			const std::string message = packet.string();
+			logout(message);
 			set_error();
 			return;
 
