@@ -32,6 +32,8 @@ class EditorInteractive;
 struct EditorMainMenu : public UI::UniqueWindow {
 	EditorMainMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
 
+	bool handle_key(bool down, SDL_Keysym code) override;
+
 private:
 	EditorInteractive& eia();
 	UI::Box box_;

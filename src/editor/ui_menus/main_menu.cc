@@ -82,6 +82,22 @@ EditorMainMenu::EditorMainMenu(EditorInteractive& parent, UI::UniqueWindow::Regi
 		center_to_parent();
 }
 
+bool EditorMainMenu::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+			case SDLK_ESCAPE:
+				die();
+				return true;
+			case SDLK_RETURN:
+				exit_btn();
+				return true;
+			default:
+				break;
+		}
+	}
+	return UI::Window::handle_key(down, code);
+}
+
 void EditorMainMenu::new_map_btn() {
 	new MainMenuNewMap(eia());
 	die();

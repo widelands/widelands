@@ -566,7 +566,9 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_F1:
 			helpmenu_.toggle();
 			return true;
-
+		case SDLK_ESCAPE:
+			new EditorMainMenu(*this, mainmenu_);
+			return true;
 		default:
 			break;
 		}
