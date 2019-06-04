@@ -101,12 +101,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	hbox->add_inf_space();
 	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
 
-	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
-	add_tag_checkbox(hbox, "seafaring", localize_tag("seafaring"));
-	add_tag_checkbox(hbox, "artifacts", localize_tag("artifacts"));
-	add_tag_checkbox(hbox, "scenario", localize_tag("scenario"));
-	hbox->add_inf_space();
-	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
+	// Row with dropdowns
 
 	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
@@ -168,6 +163,15 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 
 	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
 
+	// Row with checkboxes
+
+	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
+	add_tag_checkbox(hbox, "seafaring", localize_tag("seafaring"));
+	add_tag_checkbox(hbox, "artifacts", localize_tag("artifacts"));
+	add_tag_checkbox(hbox, "scenario", localize_tag("scenario"));
+	hbox->add_inf_space();
+	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
+
 	table_.focus();
 	clear_filter();
 
@@ -193,7 +197,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 void FullscreenMenuMapSelect::layout() {
 	title_.set_size(get_w(), title_.get_h());
 	FullscreenMenuLoadMapOrGame::layout();
-	checkboxes_y_ = tabley_ - 4 * (team_tags_dropdown_->get_h() + checkbox_padding_) - 2 * padding_;
+	checkboxes_y_ = tabley_ - 3 * (team_tags_dropdown_->get_h() + checkbox_padding_) - 2 * padding_;
 	title_.set_pos(Vector2i(0, checkboxes_y_ / 3));
 	checkboxes_.set_pos(Vector2i(tablex_, checkboxes_y_));
 	checkboxes_.set_size(get_w() - 2 * tablex_, tabley_ - checkboxes_y_);
