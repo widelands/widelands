@@ -118,6 +118,8 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
 	table_.focus();
 	fill_table();
 	layout();
+
+	table_.cancel.connect(boost::bind(&FullscreenMenuScenarioSelect::clicked_back, boost::ref(*this)));
 }
 
 void FullscreenMenuScenarioSelect::layout() {

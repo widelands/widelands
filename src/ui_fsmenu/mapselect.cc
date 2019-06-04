@@ -298,6 +298,8 @@ void FullscreenMenuMapSelect::fill_table() {
 		table_.select(0);
 	}
 	set_has_selection();
+
+	table_.cancel.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
 }
 
 /*

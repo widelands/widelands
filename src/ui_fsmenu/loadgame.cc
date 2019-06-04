@@ -169,6 +169,10 @@ const std::string& FullscreenMenuLoadGame::filename() const {
 }
 
 bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
+	if (code.sym == SDLK_ESCAPE)
+		FullscreenMenuLoadGame::clicked_back();
+		return true;
+
 	if (!down)
 		return false;
 
