@@ -90,7 +90,9 @@ private:
 	UI::Button* show_all_maps_;
 	std::vector<UI::Checkbox*> tags_checkboxes_;
 
-	UI::Dropdown<std::string>* balancing_dropdown_;
+	UI::Dropdown<std::string>* official_tags_dropdown_;
+
+	UI::Dropdown<std::string>* balancing_tags_dropdown_;
 	bool unspecified_balancing_found_; // Backwards compatibility
 
 	UI::Dropdown<std::string>* team_tags_dropdown_;

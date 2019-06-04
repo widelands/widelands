@@ -102,7 +102,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
 
 	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
-	add_tag_checkbox(hbox, "official", localize_tag("official"));
 	add_tag_checkbox(hbox, "seafaring", localize_tag("seafaring"));
 	add_tag_checkbox(hbox, "artifacts", localize_tag("artifacts"));
 	add_tag_checkbox(hbox, "scenario", localize_tag("scenario"));
@@ -111,7 +110,25 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 
 	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
-	UI::Textarea* dropdown_label = new UI::Textarea(hbox, _("Teams:"));
+	official_tags_dropdown_ = new UI::Dropdown<std::string>(hbox,
+					   "dropdown_official_tags",
+					   0,
+					   0,
+					   200,
+					   50,
+					   24,
+					   "",
+					   UI::DropdownType::kTextual,
+					   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
+	official_tags_dropdown_->set_autoexpand_display_button();
+	official_tags_dropdown_->add(_("Official & Unofficial"), "");
+	official_tags_dropdown_->add(localize_tag("official"), "official");
+	official_tags_dropdown_->add(localize_tag("unofficial"), "unofficial");
+
+	hbox->add(official_tags_dropdown_, UI::Box::Resizing::kFullSize);
+
+	hbox->add_space(checkbox_space_);
+
 	team_tags_dropdown_ = new UI::Dropdown<std::string>(hbox,
 					   "dropdown_team_tags",
 					   0,
@@ -123,21 +140,18 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 					   UI::DropdownType::kTextual,
 					   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	team_tags_dropdown_->set_autoexpand_display_button();
-	team_tags_dropdown_->add(pgettext("team_tags", "Any"), "");
+	team_tags_dropdown_->add(_("Any Teams"), "");
 	team_tags_dropdown_->add(localize_tag("ffa"), "ffa");
 	team_tags_dropdown_->add(localize_tag("1v1"), "1v1");
 	team_tags_dropdown_->add(localize_tag("2teams"), "2teams");
 	team_tags_dropdown_->add(localize_tag("3teams"), "3teams");
 	team_tags_dropdown_->add(localize_tag("4teams"), "4teams");
 
-	hbox->add(dropdown_label, UI::Box::Resizing::kFullSize);
-	hbox->add_space(4);
 	hbox->add(team_tags_dropdown_, UI::Box::Resizing::kFullSize);
 
 	hbox->add_space(checkbox_space_);
 
-	dropdown_label = new UI::Textarea(hbox, _("Balancing:"));
-	balancing_dropdown_ = new UI::Dropdown<std::string>(hbox,
+	balancing_tags_dropdown_ = new UI::Dropdown<std::string>(hbox,
 					   "dropdown_balancing",
 					   0,
 					   0,
@@ -147,12 +161,10 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 					   "",
 					   UI::DropdownType::kTextual,
 					   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
-	balancing_dropdown_->set_autoexpand_display_button();
+	balancing_tags_dropdown_->set_autoexpand_display_button();
 	rebuild_balancing_dropdown();
 
-	hbox->add(dropdown_label, UI::Box::Resizing::kFullSize);
-	hbox->add_space(4);
-	hbox->add(balancing_dropdown_, UI::Box::Resizing::kFullSize);
+	hbox->add(balancing_tags_dropdown_, UI::Box::Resizing::kFullSize);
 
 	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
 
@@ -170,7 +182,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 		tags_checkboxes_.at(i)->changedto.connect(boost::bind(&FullscreenMenuMapSelect::tagbox_changed, this, i, _1));
 	}
 
-	balancing_dropdown_->selected.connect([this] { fill_table(); });
+	balancing_tags_dropdown_->selected.connect([this] { fill_table(); });
+	official_tags_dropdown_->selected.connect([this] { fill_table(); });
 	team_tags_dropdown_->selected.connect([this] { fill_table(); });
 	show_all_maps_->sigclicked.connect([this] { clear_filter(); });
 
@@ -320,19 +333,29 @@ void FullscreenMenuMapSelect::fill_table() {
 
 				bool has_all_tags = true;
 				if (team_tags_dropdown_->has_selection()) {
-					std::string team_tag = team_tags_dropdown_->get_selected();
-					if (!team_tag.empty()) {
-						has_all_tags &= mapdata.tags.count(team_tag);
+					const std::string selected_tag = team_tags_dropdown_->get_selected();
+					if (!selected_tag.empty()) {
+						has_all_tags &= mapdata.tags.count(selected_tag);
 					}
 				}
-				if (balancing_dropdown_->has_selection()) {
-					std::string balancing_tag = balancing_dropdown_->get_selected();
-					if (!balancing_tag.empty()) {
-						if (balancing_tag == "unspecified") {
+				if (official_tags_dropdown_->has_selection()) {
+					const std::string selected_tag = official_tags_dropdown_->get_selected();
+					if (!selected_tag.empty()) {
+						if (selected_tag == "official") {
+							has_all_tags &= mapdata.tags.count("official");
+						} else {
+							has_all_tags &= !mapdata.tags.count("official");
+						}
+					}
+				}
+				if (balancing_tags_dropdown_->has_selection()) {
+					const std::string selected_tag = balancing_tags_dropdown_->get_selected();
+					if (!selected_tag.empty()) {
+						if (selected_tag == "unspecified") {
 							has_all_tags &= !mapdata.tags.count("balanced");
 							has_all_tags &= !mapdata.tags.count("unbalanced");
 						} else {
-							has_all_tags &= mapdata.tags.count(balancing_tag);
+							has_all_tags &= mapdata.tags.count(selected_tag);
 						}
 					}
 				}
@@ -412,23 +435,24 @@ void FullscreenMenuMapSelect::clear_filter() {
 		checkbox->set_state(false);
 	}
 
-	balancing_dropdown_->select("");
+	balancing_tags_dropdown_->select("");
+	official_tags_dropdown_->select("");
 	team_tags_dropdown_->select("");
 	fill_table();
 }
 
 void FullscreenMenuMapSelect::rebuild_balancing_dropdown() {
-	const std::string selected = balancing_dropdown_->has_selection() ? balancing_dropdown_->get_selected() : "";
-	balancing_dropdown_->clear();
-	balancing_dropdown_->add(pgettext("balancing", "Any"), "");
-	balancing_dropdown_->add(localize_tag("balanced"), "balanced");
-	balancing_dropdown_->add(localize_tag("unbalanced"), "unbalanced");
+	const std::string selected = balancing_tags_dropdown_->has_selection() ? balancing_tags_dropdown_->get_selected() : "";
+	balancing_tags_dropdown_->clear();
+	balancing_tags_dropdown_->add(_("Balanced & Unbalanced"), "");
+	balancing_tags_dropdown_->add(localize_tag("balanced"), "balanced");
+	balancing_tags_dropdown_->add(localize_tag("unbalanced"), "unbalanced");
 	if (unspecified_balancing_found_) {
 		// Backwards compatibility with old maps
-		balancing_dropdown_->add(pgettext("balancing", "Unspecified"), "unspecified");
-		balancing_dropdown_->select(selected);
+		balancing_tags_dropdown_->add(pgettext("balancing", "Unspecified"), "unspecified");
+		balancing_tags_dropdown_->select(selected);
 	} else {
-		balancing_dropdown_->select(selected == "unspecified" ? "" : selected);
+		balancing_tags_dropdown_->select(selected == "unspecified" ? "" : selected);
 		fill_table();
 	}
 }
