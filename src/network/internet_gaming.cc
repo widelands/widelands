@@ -912,7 +912,7 @@ void InternetGaming::send(const std::string& msg) {
 		if (msg == "/help") {
 			format_and_add_chat("", "", true, _("Supported admin commands:"));
 			format_and_add_chat("", "", true, _("/motd <msg>  sets a permanent greeting message"));
-			format_and_add_chat("", "", true, _("/announcement <msg>  send a one time system message"));
+			format_and_add_chat("", "", true, _("/announce <msg>  send a one time system message"));
 			format_and_add_chat("", "", true, _("/warn <user> <msg>  send a private system message to the given user"));
 			format_and_add_chat("", "", true, _("/kick <user|game>  removes the given user or game from the metaserver"));
 			return;
@@ -954,8 +954,8 @@ void InternetGaming::send(const std::string& msg) {
 			m.string(arg);
 			net->send(m);
 			return;
-		} else if (!arg.empty() && cmd == "announcement") {
-			// send the request to change the motd
+		} else if (!arg.empty() && cmd == "announce") {
+			// send the request to make an announcement
 			SendPacket m;
 			m.string(IGPCMD_ANNOUNCEMENT);
 			m.string(arg);
