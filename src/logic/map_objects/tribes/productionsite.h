@@ -128,6 +128,14 @@ public:
 		return out_of_resource_productivity_threshold_;
 	}
 
+	bool highlight_overlapping_workarea_for(const std::string& n) const {
+		return highlight_overlapping_workarea_for_.count(n);
+	}
+
+	const std::set<std::string>& get_highlight_overlapping_workarea_for() const {
+		return highlight_overlapping_workarea_for_;
+	}
+
 private:
 	BillOfMaterials working_positions_;
 	BillOfMaterials input_wares_;
@@ -140,6 +148,7 @@ private:
 	std::string out_of_resource_message_;
 	std::string resource_not_needed_message_;
 	int out_of_resource_productivity_threshold_;
+	std::set<std::string> highlight_overlapping_workarea_for_;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteDescr);
 };

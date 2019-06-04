@@ -208,6 +208,25 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		}
 	}
 
+	if (table.has_key("indicate_workarea_overlaps")) {
+		for (const std::string& s : table.get_table("indicate_workarea_overlaps")->array_entries<std::string>()) {
+			if (highlight_overlapping_workarea_for_.count(s)) {
+				throw wexception("indicate_workarea_overlaps has duplicate entry");
+			}
+			highlight_overlapping_workarea_for_.insert(s);
+		}
+	}
+	if (workarea_info().empty() ^ highlight_overlapping_workarea_for_.empty()) {
+		if (highlight_overlapping_workarea_for_.empty()) {
+			log("WARNING: Productionsite %s has a workarea but does not warn about any conflicting buildings\n",
+					name().c_str());
+		} else {
+			throw GameDataError(
+					"Productionsite %s without a workarea must not warn about conflicting buildings",
+					name().c_str());
+		}
+	}
+
 	// Verify that any map resource collected is valid
 	if (!hints().collects_ware_from_map().empty()) {
 		if (!(tribes.ware_exists(hints().collects_ware_from_map()))) {

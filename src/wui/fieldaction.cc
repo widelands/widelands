@@ -208,6 +208,7 @@ private:
 	bool showing_workarea_preview_;
 	std::set<Widelands::Coords> overlapping_workareas_;
 	bool is_showing_workarea_overlaps_;
+	Widelands::DescriptionIndex building_under_mouse_;
 
 	/// Variables to use with attack dialog.
 	AttackBox* attack_box_;
@@ -258,6 +259,7 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
      best_tab_(0),
      showing_workarea_preview_(false),
      is_showing_workarea_overlaps_(ib->get_display_flag(InteractiveBase::dfShowWorkareaOverlap)),
+     building_under_mouse_(Widelands::INVALID_INDEX),
      attack_box_(nullptr) {
 	ib->set_sel_freeze(true);
 	set_center_panel(&tabpanel_);
@@ -280,12 +282,12 @@ void FieldActionWindow::think() {
 		if (!is_showing_workarea_overlaps_) {
 			clear_overlapping_workareas();
 		}
-#ifndef NDEBUG
 		else {
-			// Desired overlaps will be shown as soon as the user moves the mouse
 			assert(overlapping_workareas_.empty());
+			if (building_under_mouse_ != Widelands::INVALID_INDEX) {
+				building_icon_mouse_in(building_under_mouse_);
+			}
 		}
-#endif
 	}
 	if (player_ && player_->vision(node_.field - &ibase().egbase().map()[0]) <= 1 &&
 	    !player_->see_all()) {
@@ -730,6 +732,7 @@ void FieldActionWindow::building_icon_mouse_out(Widelands::DescriptionIndex) {
 	if (showing_workarea_preview_) {
 		ibase().hide_workarea(node_, false);
 		showing_workarea_preview_ = false;
+		building_under_mouse_ = Widelands::INVALID_INDEX;
 		clear_overlapping_workareas();
 	}
 }
@@ -737,6 +740,7 @@ void FieldActionWindow::building_icon_mouse_out(Widelands::DescriptionIndex) {
 void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex idx) {
 	if (!showing_workarea_preview_) {
 		assert(overlapping_workareas_.empty());
+		building_under_mouse_ = idx;
 		const Widelands::BuildingDescr& descr = *player_->tribe().get_building_descr(idx);
 		const WorkareaInfo& workarea_info = descr.workarea_info();
 		ibase().show_workarea(workarea_info, node_);
@@ -772,7 +776,9 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						upcast(Widelands::ConstructionSite, cs, imm);
 						d = cs->get_info().becomes;
 						if ((descr.type() == Widelands::MapObjectType::PRODUCTIONSITE &&
-						     d->type() != Widelands::MapObjectType::PRODUCTIONSITE) ||
+						     (d->type() != Widelands::MapObjectType::PRODUCTIONSITE ||
+						     !dynamic_cast<const ProductionSiteDescr&>(descr).
+						     		highlight_overlapping_workarea_for(d->name()))) ||
 						    ((descr.type() == Widelands::MapObjectType::MILITARYSITE ||
 						      descr.type() == Widelands::MapObjectType::WAREHOUSE) &&
 						     imm_type != Widelands::MapObjectType::MILITARYSITE &&
@@ -781,7 +787,8 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						}
 					} else if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
 						if (imm_type != Widelands::MapObjectType::PRODUCTIONSITE ||
-						    imm->get_owner() != player_) {
+						    imm->get_owner() != player_ || !dynamic_cast<const ProductionSiteDescr&>(
+						    		descr).highlight_overlapping_workarea_for(imm->descr().name())) {
 							continue;
 						}
 					} else if (descr.type() == Widelands::MapObjectType::WAREHOUSE ||
@@ -811,7 +818,9 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						std::map<Widelands::TCoords<>, uint32_t> colors;
 						for (const Widelands::TCoords<>& t : map.triangles_in_region(
 						        map.to_set(Widelands::Area<>(mr.location(), wa_radius)))) {
-							colors[t] = main_region.count(t) ? 0xffbf3f3f : 0x7fffffff;
+							colors[t] = mr.location() == t.node || mr.location() == map.get_brn(t.node) ||
+									mr.location() == (t.t == Widelands::TriangleIndex::D ? map.get_bln(t.node) :
+									map.get_rn(t.node)) || main_region.count(t) ? 0xffbf3f3f : 0x7fffffff;
 						}
 						ibase().show_workarea(wa, mr.location(), colors);
 						overlapping_workareas_.insert(mr.location());
