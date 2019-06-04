@@ -64,6 +64,7 @@ private:
 	UI::Checkbox* add_tag_checkbox(UI::Box*, std::string, std::string);
 	void tagbox_changed(int32_t, bool);
 	void clear_filter();
+	void rebuild_balancing_dropdown();
 
 	int32_t const checkbox_space_;
 	const int checkbox_padding_;
@@ -88,6 +89,9 @@ private:
 
 	UI::Button* show_all_maps_;
 	std::vector<UI::Checkbox*> tags_checkboxes_;
+
+	UI::Dropdown<std::string>* balancing_dropdown_;
+	bool unspecified_balancing_found_; // Backwards compatibility
 
 	UI::Dropdown<std::string>* team_tags_dropdown_;
 

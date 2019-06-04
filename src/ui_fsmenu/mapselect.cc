@@ -68,7 +68,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
      basedir_(kMapsDir),
      settings_(settings),
      ctrl_(ctrl),
-     has_translated_mapname_(false) {
+     has_translated_mapname_(false),
+	 unspecified_balancing_found_(false) {
 	curdir_ = basedir_;
 	if (settings_->settings().multiplayer) {
 		back_.set_tooltip(_("Return to the multiplayer game setup"));
@@ -102,7 +103,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 
 	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 	add_tag_checkbox(hbox, "official", localize_tag("official"));
-	add_tag_checkbox(hbox, "unbalanced", localize_tag("unbalanced"));
 	add_tag_checkbox(hbox, "seafaring", localize_tag("seafaring"));
 	add_tag_checkbox(hbox, "artifacts", localize_tag("artifacts"));
 	add_tag_checkbox(hbox, "scenario", localize_tag("scenario"));
@@ -111,8 +111,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 
 	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
-	UI::Textarea* teams_label = new UI::Textarea(hbox, _("Teams:"));
-
+	UI::Textarea* dropdown_label = new UI::Textarea(hbox, _("Teams:"));
 	team_tags_dropdown_ = new UI::Dropdown<std::string>(hbox,
 					   "dropdown_team_tags",
 					   0,
@@ -124,21 +123,41 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 					   UI::DropdownType::kTextual,
 					   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	team_tags_dropdown_->set_autoexpand_display_button();
-	team_tags_dropdown_->add(pgettext("team_tags", "Any"), "", nullptr, true);
+	team_tags_dropdown_->add(pgettext("team_tags", "Any"), "");
 	team_tags_dropdown_->add(localize_tag("ffa"), "ffa");
 	team_tags_dropdown_->add(localize_tag("1v1"), "1v1");
 	team_tags_dropdown_->add(localize_tag("2teams"), "2teams");
 	team_tags_dropdown_->add(localize_tag("3teams"), "3teams");
 	team_tags_dropdown_->add(localize_tag("4teams"), "4teams");
 
-	hbox->add(teams_label, UI::Box::Resizing::kFullSize);
+	hbox->add(dropdown_label, UI::Box::Resizing::kFullSize);
 	hbox->add_space(4);
 	hbox->add(team_tags_dropdown_, UI::Box::Resizing::kFullSize);
+
+	hbox->add_space(checkbox_space_);
+
+	dropdown_label = new UI::Textarea(hbox, _("Balancing:"));
+	balancing_dropdown_ = new UI::Dropdown<std::string>(hbox,
+					   "dropdown_balancing",
+					   0,
+					   0,
+					   200,
+					   50,
+					   24,
+					   "",
+					   UI::DropdownType::kTextual,
+					   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
+	balancing_dropdown_->set_autoexpand_display_button();
+	rebuild_balancing_dropdown();
+
+	hbox->add(dropdown_label, UI::Box::Resizing::kFullSize);
+	hbox->add_space(4);
+	hbox->add(balancing_dropdown_, UI::Box::Resizing::kFullSize);
 
 	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
 
 	table_.focus();
-	fill_table();
+	clear_filter();
 
 	// We don't need the unlocalizing option if there is nothing to unlocalize.
 	// We know this after the list is filled.
@@ -151,6 +170,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 		tags_checkboxes_.at(i)->changedto.connect(boost::bind(&FullscreenMenuMapSelect::tagbox_changed, this, i, _1));
 	}
 
+	balancing_dropdown_->selected.connect([this] { fill_table(); });
 	team_tags_dropdown_->selected.connect([this] { fill_table(); });
 	show_all_maps_->sigclicked.connect([this] { clear_filter(); });
 
@@ -248,6 +268,7 @@ void FullscreenMenuMapSelect::entry_selected() {
  */
 void FullscreenMenuMapSelect::fill_table() {
 	has_translated_mapname_ = false;
+	bool unspecified_balancing_found = false;
 
 	maps_data_.clear();
 
@@ -304,6 +325,24 @@ void FullscreenMenuMapSelect::fill_table() {
 						has_all_tags &= mapdata.tags.count(team_tag);
 					}
 				}
+				if (balancing_dropdown_->has_selection()) {
+					std::string balancing_tag = balancing_dropdown_->get_selected();
+					if (!balancing_tag.empty()) {
+						if (balancing_tag == "unspecified") {
+							has_all_tags &= !mapdata.tags.count("balanced");
+							has_all_tags &= !mapdata.tags.count("unbalanced");
+						} else {
+							has_all_tags &= mapdata.tags.count(balancing_tag);
+						}
+					}
+				}
+				// Backwards compatibility
+				if (!mapdata.tags.count("balanced") && !mapdata.tags.count("unbalanced")) {
+					unspecified_balancing_found = true;
+				} else if (mapdata.tags.count("balanced") && mapdata.tags.count("unbalanced")) {
+					log("WARNING: Map '%s' is both balanced and unbalanced - please fix the 'elemental' packet\n", mapfilename.c_str());
+				}
+
 				for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end();
 					 ++it) {
 					has_all_tags &= mapdata.tags.count(tags_ordered_[*it]);
@@ -332,6 +371,10 @@ void FullscreenMenuMapSelect::fill_table() {
 		table_.select(0);
 	}
 	set_has_selection();
+	if (unspecified_balancing_found != unspecified_balancing_found_) {
+		unspecified_balancing_found_ = unspecified_balancing_found;
+		rebuild_balancing_dropdown();
+	}
 }
 
 /*
@@ -369,6 +412,23 @@ void FullscreenMenuMapSelect::clear_filter() {
 		checkbox->set_state(false);
 	}
 
+	balancing_dropdown_->select("");
 	team_tags_dropdown_->select("");
 	fill_table();
+}
+
+void FullscreenMenuMapSelect::rebuild_balancing_dropdown() {
+	const std::string selected = balancing_dropdown_->has_selection() ? balancing_dropdown_->get_selected() : "";
+	balancing_dropdown_->clear();
+	balancing_dropdown_->add(pgettext("balancing", "Any"), "");
+	balancing_dropdown_->add(localize_tag("balanced"), "balanced");
+	balancing_dropdown_->add(localize_tag("unbalanced"), "unbalanced");
+	if (unspecified_balancing_found_) {
+		// Backwards compatibility with old maps
+		balancing_dropdown_->add(pgettext("balancing", "Unspecified"), "unspecified");
+		balancing_dropdown_->select(selected);
+	} else {
+		balancing_dropdown_->select(selected == "unspecified" ? "" : selected);
+		fill_table();
+	}
 }

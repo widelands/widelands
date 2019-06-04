@@ -9,4 +9,4 @@ name=_"Two Frontiers"
 author="ISCH"
 descr=_"A multiplayer battle map on a small circle-shaped island."
 hint=
-tags="ffa,official"
+tags="balanced,ffa,official"
