@@ -285,7 +285,9 @@ void FieldActionWindow::think() {
 		else {
 			assert(overlapping_workareas_.empty());
 			if (building_under_mouse_ != Widelands::INVALID_INDEX) {
-				building_icon_mouse_in(building_under_mouse_);
+				const Widelands::DescriptionIndex di = building_under_mouse_;
+				building_icon_mouse_out(di); // this unsets building_under_mouse_
+				building_icon_mouse_in(di);
 			}
 		}
 	}
