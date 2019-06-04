@@ -43,6 +43,13 @@ tribes:new_productionsite_type {
       barbarians_ranger = 1
    },
 
+   indicate_workarea_overlaps = {
+      "barbarians_rangers_hut",
+      "barbarians_lumberjacks_hut",
+      "barbarians_farm",
+      "barbarians_reed_yard",
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...

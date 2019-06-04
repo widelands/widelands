@@ -31,6 +31,13 @@ tribes:new_productionsite_type {
       },
    },
 
+   indicate_workarea_overlaps = {
+      "frisians_berry_farm",
+      "frisians_reed_farm",
+      "frisians_farm",
+      "frisians_beekeepers_house",
+   },
+
    aihints = {
       collects_ware_from_map = "honey",
       prohibited_till = 620,

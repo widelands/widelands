@@ -29,6 +29,12 @@ tribes:new_productionsite_type {
       },
    },
 
+   indicate_workarea_overlaps = {
+      "empire_farm",
+      "empire_vineyard",
+      "empire_foresters_house",
+   },
+
    aihints = {
       basic_amount = 1,
       space_consumer = true,

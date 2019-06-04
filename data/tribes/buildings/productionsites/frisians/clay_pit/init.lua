@@ -35,6 +35,15 @@ tribes:new_productionsite_type {
       },
    },
 
+   indicate_workarea_overlaps = {
+      "frisians_aqua_farm",
+      "frisians_clay_pit",
+      "frisians_berry_farm",
+      "frisians_reed_farm",
+      "frisians_farm",
+      "frisians_foresters_house",
+   },
+
    aihints = {
       very_weak_ai_limit = 1,
       weak_ai_limit = 2,

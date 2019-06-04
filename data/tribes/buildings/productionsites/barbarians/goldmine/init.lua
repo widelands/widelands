@@ -48,6 +48,12 @@ tribes:new_productionsite_type {
       barbarians_miner = 1
    },
 
+   indicate_workarea_overlaps = {
+      "barbarians_goldmine",
+      "barbarians_goldmine_deep",
+      "barbarians_goldmine_deeper",
+   },
+
    inputs = {
       { name = "ration", amount = 6 }
    },

@@ -46,6 +46,10 @@ tribes:new_productionsite_type {
       { name = "cloth", amount = 4 }
    },
 
+   indicate_workarea_overlaps = {
+      "barbarians_shipyard",
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

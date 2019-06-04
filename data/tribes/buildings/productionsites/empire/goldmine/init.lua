@@ -45,6 +45,11 @@ tribes:new_productionsite_type {
       empire_miner = 1
    },
 
+   indicate_workarea_overlaps = {
+      "empire_goldmine",
+      "empire_goldmine_deep",
+   },
+
    inputs = {
       { name = "ration", amount = 6 },
       { name = "wine", amount = 6 }

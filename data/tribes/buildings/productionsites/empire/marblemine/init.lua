@@ -42,6 +42,11 @@ tribes:new_productionsite_type {
       basic_amount = 1
    },
 
+   indicate_workarea_overlaps = {
+      "empire_marblemine",
+      "empire_marblemine_deep",
+   },
+
    working_positions = {
       empire_miner = 1
    },

@@ -42,6 +42,11 @@ tribes:new_productionsite_type {
       },
    },
 
+   indicate_workarea_overlaps = {
+      "frisians_rockmine",
+      "frisians_rockmine_deep",
+   },
+
    aihints = {
       mines = "stones",
    },

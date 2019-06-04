@@ -38,6 +38,12 @@ tribes:new_productionsite_type {
       "reed"
    },
 
+   indicate_workarea_overlaps = {
+      "barbarians_rangers_hut",
+      "barbarians_reed_yard",
+      "barbarians_farm",
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

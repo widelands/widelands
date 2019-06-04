@@ -41,6 +41,16 @@ tribes:new_productionsite_type {
       frisians_berry_farmer = 1
    },
 
+   indicate_workarea_overlaps = {
+      "frisians_clay_pit",
+      "frisians_berry_farm",
+      "frisians_reed_farm",
+      "frisians_farm",
+      "frisians_foresters_house",
+      "frisians_beekeepers_house",
+      "frisians_collectors_house",
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...

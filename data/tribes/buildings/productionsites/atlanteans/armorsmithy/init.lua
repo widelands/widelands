@@ -55,6 +55,13 @@ dirname = path.dirname(__file__)
 --        done, including any animations and sounds played.
 --        See :doc:`productionsite_program`.
 --
+--    **indicate_workarea_overlaps**
+--        *Optional*. The names of other productionsites whose workareas should be highlighted
+--        if theirs overlap with this building’s workarea while the player is placing a
+--        building of this type e.g.::
+--
+--            indicate_workarea_overlaps = { "atlanteans_farm", "atlanteans_blackroot_farm" },
+--
 --    **out_of_resource_notification**.
 --        *Optional*. This table defines the message sent by the productionsite
 --        to the player if it has run out of a resource to collect. There are 4

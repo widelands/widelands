@@ -54,6 +54,12 @@ tribes:new_productionsite_type {
       "wheat"
    },
 
+   indicate_workarea_overlaps = {
+      "barbarians_rangers_hut",
+      "barbarians_farm",
+      "barbarians_reed_yard",
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

@@ -46,6 +46,12 @@ tribes:new_productionsite_type {
       "corn"
    },
 
+   indicate_workarea_overlaps = {
+      "atlanteans_blackroot_farm",
+      "atlanteans_farm",
+      "atlanteans_foresters_house",
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...

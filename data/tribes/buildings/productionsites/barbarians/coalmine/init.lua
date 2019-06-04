@@ -55,6 +55,12 @@ tribes:new_productionsite_type {
       "coal"
    },
 
+   indicate_workarea_overlaps = {
+      "barbarians_coalmine",
+      "barbarians_coalmine_deep",
+      "barbarians_coalmine_deeper",
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...

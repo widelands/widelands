@@ -41,6 +41,12 @@ tribes:new_productionsite_type {
       mines = "iron",
    },
 
+   indicate_workarea_overlaps = {
+      "barbarians_ironmine",
+      "barbarians_ironmine_deep",
+      "barbarians_ironmine_deeper",
+   },
+
    working_positions = {
       barbarians_miner = 1,
       barbarians_miner_chief = 1,

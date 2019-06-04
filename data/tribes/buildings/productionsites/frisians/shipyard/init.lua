@@ -41,6 +41,10 @@ tribes:new_productionsite_type {
       prohibited_till = 1050
    },
 
+   indicate_workarea_overlaps = {
+      "frisians_shipyard",
+   },
+
    working_positions = {
       frisians_shipwright = 1
    },

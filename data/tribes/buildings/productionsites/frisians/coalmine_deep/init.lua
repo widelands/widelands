@@ -51,6 +51,11 @@ tribes:new_productionsite_type {
       frisians_miner_master = 1,
    },
 
+   indicate_workarea_overlaps = {
+      "frisians_coalmine",
+      "frisians_coalmine_deep",
+   },
+
    inputs = {
       { name = "meal", amount = 8 }
    },

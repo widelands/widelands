@@ -43,6 +43,10 @@ tribes:new_productionsite_type {
       atlanteans_miner = 3
    },
 
+   indicate_workarea_overlaps = {
+      "atlanteans_coalmine",
+   },
+
    inputs = {
       { name = "smoked_fish", amount = 10 },
       { name = "smoked_meat", amount = 6 },

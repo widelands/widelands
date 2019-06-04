@@ -55,6 +55,12 @@ tribes:new_productionsite_type {
       "iron_ore"
    },
 
+   indicate_workarea_overlaps = {
+      "barbarians_ironmine",
+      "barbarians_ironmine_deep",
+      "barbarians_ironmine_deeper",
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
