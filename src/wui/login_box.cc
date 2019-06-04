@@ -63,6 +63,9 @@ LoginBox::LoginBox(Panel& parent)
 	eb_nickname->set_text(s.get_string("nickname", _("nobody")));
 	cb_register->set_state(s.get_bool("registered", false));
 	eb_nickname->focus();
+
+	eb_nickname->cancel.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
+	eb_password->cancel.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
 }
 
 /**
