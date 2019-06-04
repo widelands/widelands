@@ -25,8 +25,7 @@
 #include "graphic/texture.h"
 #include "wui/mapviewpixelconstants.h"
 
-WorkareaProgram::WorkareaProgram()
-	: cache_(nullptr) {
+WorkareaProgram::WorkareaProgram() : cache_(nullptr) {
 	gl_program_.build("workarea");
 
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
@@ -93,8 +92,11 @@ static inline RGBAColor apply_color_special(RGBAColor base, RGBAColor special) {
 	return RGBAColor(r, g, b, special.a);
 }
 
-void WorkareaProgram::add_vertex(const FieldsToDraw::Field& field, RGBAColor overlay,
-		std::vector<PerVertexData>* v, Vector2f offset, Vector2f viewport) {
+void WorkareaProgram::add_vertex(const FieldsToDraw::Field& field,
+                                 RGBAColor overlay,
+                                 std::vector<PerVertexData>* v,
+                                 Vector2f offset,
+                                 Vector2f viewport) {
 	v->emplace_back();
 	PerVertexData& back = v->back();
 
@@ -115,46 +117,47 @@ void WorkareaProgram::add_vertex(const FieldsToDraw::Field& field, RGBAColor ove
 constexpr float kBorderStrength = 2.8f;
 
 // Helper functions for calculating the border thickness
-const static float kOffsetFactor = static_cast<float>(std::sqrt(kBorderStrength * kBorderStrength /
-		(kTriangleWidth * kTriangleWidth + kTriangleHeight * kTriangleHeight)));
+const static float kOffsetFactor = static_cast<float>(
+   std::sqrt(kBorderStrength * kBorderStrength /
+             (kTriangleWidth * kTriangleWidth + kTriangleHeight * kTriangleHeight)));
 static Vector2f offset(size_t radius, size_t pos) {
 	if (pos % radius == 0) {
 		switch (pos / radius) {
-			case 0: // North/Northwest
-				return Vector2f(-kTriangleWidth * (2 * kOffsetFactor -
-						kBorderStrength / kTriangleHeight), -kBorderStrength);
-			case 1: // North/Northeast
-				return Vector2f(kTriangleWidth * (2 * kOffsetFactor -
-						kBorderStrength / kTriangleHeight), -kBorderStrength);
-			case 2: // Northeast/Southeast
-				return Vector2f(kBorderStrength, 0);
-			case 3: // Southeast/South
-				return Vector2f(kTriangleWidth * (2 * kOffsetFactor -
-						kBorderStrength / kTriangleHeight), kBorderStrength);
-			case 4: // South/Southwest
-				return Vector2f(-kTriangleWidth * (2 * kOffsetFactor -
-						kBorderStrength / kTriangleHeight), kBorderStrength);
-			case 5: // Southwest/Northwest
-				return Vector2f(-kBorderStrength, 0);
-			default:
-				NEVER_HERE();
+		case 0:  // North/Northwest
+			return Vector2f(-kTriangleWidth * (2 * kOffsetFactor - kBorderStrength / kTriangleHeight),
+			                -kBorderStrength);
+		case 1:  // North/Northeast
+			return Vector2f(kTriangleWidth * (2 * kOffsetFactor - kBorderStrength / kTriangleHeight),
+			                -kBorderStrength);
+		case 2:  // Northeast/Southeast
+			return Vector2f(kBorderStrength, 0);
+		case 3:  // Southeast/South
+			return Vector2f(kTriangleWidth * (2 * kOffsetFactor - kBorderStrength / kTriangleHeight),
+			                kBorderStrength);
+		case 4:  // South/Southwest
+			return Vector2f(-kTriangleWidth * (2 * kOffsetFactor - kBorderStrength / kTriangleHeight),
+			                kBorderStrength);
+		case 5:  // Southwest/Northwest
+			return Vector2f(-kBorderStrength, 0);
+		default:
+			NEVER_HERE();
 		}
 	} else {
 		switch (pos / radius) {
-			case 0: // North
-				return Vector2f(0, -kBorderStrength);
-			case 1: // Northeast
-				return Vector2f(kOffsetFactor * kTriangleWidth, -kOffsetFactor * kTriangleHeight);
-			case 2: // Southeast
-				return Vector2f(kOffsetFactor * kTriangleWidth, kOffsetFactor * kTriangleHeight);
-			case 3: // South
-				return Vector2f(0, kBorderStrength);
-			case 4: // Southwest
-				return Vector2f(-kOffsetFactor * kTriangleWidth, kOffsetFactor * kTriangleHeight);
-			case 5: // Northwest
-				return Vector2f(-kOffsetFactor * kTriangleWidth, -kOffsetFactor * kTriangleHeight);
-			default:
-				NEVER_HERE();
+		case 0:  // North
+			return Vector2f(0, -kBorderStrength);
+		case 1:  // Northeast
+			return Vector2f(kOffsetFactor * kTriangleWidth, -kOffsetFactor * kTriangleHeight);
+		case 2:  // Southeast
+			return Vector2f(kOffsetFactor * kTriangleWidth, kOffsetFactor * kTriangleHeight);
+		case 3:  // South
+			return Vector2f(0, kBorderStrength);
+		case 4:  // Southwest
+			return Vector2f(-kOffsetFactor * kTriangleWidth, kOffsetFactor * kTriangleHeight);
+		case 5:  // Northwest
+			return Vector2f(-kOffsetFactor * kTriangleWidth, -kOffsetFactor * kTriangleHeight);
+		default:
+			NEVER_HERE();
 		}
 	}
 }
@@ -165,11 +168,12 @@ void WorkareaProgram::draw(uint32_t texture_id,
                            float z_value,
                            Vector2f rendertarget_dimension) {
 	const FieldsToDraw::Field& topleft = fields_to_draw.at(0);
-	if (cache_ && cache_->fcoords == topleft.fcoords && !(
-			cache_->surface_pixel.x > topleft.surface_pixel.x ||
-			cache_->surface_pixel.x < topleft.surface_pixel.x ||
-			cache_->surface_pixel.y > topleft.surface_pixel.y ||
-			cache_->surface_pixel.y < topleft.surface_pixel.y) && cache_->workareas == workarea) {
+	if (cache_ && cache_->fcoords == topleft.fcoords &&
+	    !(cache_->surface_pixel.x > topleft.surface_pixel.x ||
+	      cache_->surface_pixel.x < topleft.surface_pixel.x ||
+	      cache_->surface_pixel.y > topleft.surface_pixel.y ||
+	      cache_->surface_pixel.y < topleft.surface_pixel.y) &&
+	    cache_->workareas == workarea) {
 		return gl_draw(texture_id, z_value);
 	}
 	cache_.reset(new WorkareasCache(workarea, topleft.fcoords, topleft.surface_pixel));
@@ -180,9 +184,9 @@ void WorkareaProgram::draw(uint32_t texture_id,
 		size_t estimate_inner = 0;
 		size_t estimate_outer = 0;
 		for (const WorkareasEntry& wa_map : workarea) {
-			estimate_inner += 3 * wa_map.first.size(); // One triangle per entry
+			estimate_inner += 3 * wa_map.first.size();  // One triangle per entry
 			for (const auto& vector : wa_map.second) {
-				estimate_outer += 6 * vector.size(); // Two triangles per border segment
+				estimate_outer += 6 * vector.size();  // Two triangles per border segment
 			}
 		}
 		vertices_.reserve(estimate_inner);
@@ -264,15 +268,15 @@ void WorkareaProgram::draw(uint32_t texture_id,
 					}
 				}
 				switch (index) {
-					case 5:
-						index = 4;
-						break;
-					case 4:
-						index = 2;
-						break;
-					default:
-						index = -1;
-						break;
+				case 5:
+					index = 4;
+					break;
+				case 4:
+					index = 2;
+					break;
+				default:
+					index = -1;
+					break;
 				}
 			}
 		}

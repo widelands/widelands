@@ -172,7 +172,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		new GameStatisticsMenu(*this, statisticsmenu_, main_windows_);
 	};
 
-	set_display_flag(InteractiveBase::dfShowWorkareaOverlap, true); // enable by default
+	set_display_flag(InteractiveBase::dfShowWorkareaOverlap, true);  // enable by default
 
 	toolbar()->add_space(15);
 

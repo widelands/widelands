@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-10 11:59+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 12:36+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr "Künstelk Schatten"
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr "Söök ollde Künstelk Schatten. Wenn all funnen sünd, winnt de Speler oder Klottje dat hett de meeste dat Speel."
+msgstr "Söök ollde Künstelk Schatten. Wenn all funnen sünd, winnt de Speler of Klottje dat hett de meeste dat Speel."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:18
 msgid "Artifacts owned"
@@ -148,7 +148,7 @@ msgstr "Dwingelant"
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:17
 msgid "The tribe or team that can defeat all others wins the game!"
-msgstr "De Speler oder Klottje dat kriggt all annern unner siegt!"
+msgstr "De Speler of Klottje dat kriggt all annern unner siegt!"
 
 #: ../../data/scripting/win_conditions/endless_game.lua:15
 msgid "Endless Game"
@@ -217,7 +217,7 @@ msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
-msgstr "All de Spelers oder Klottjen versöken, tominnst de halvig Kaart intonehmen. De Speler oder Klottje dat hett deese Gewest för tominnst 20 Menüten winnt dat Speel."
+msgstr "All de Spelers of Klottjen versöken, tominnst de halvig Kaart intonehmen. De Speler of Klottje dat hett deese Gewest för tominnst 20 Menüten winnt dat Speel."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:56
 msgid "Currently no faction owns more than half of the map’s area."
@@ -233,7 +233,7 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first."
-msgstr "All de Spelers oder Klottjen versöken, tominnst de halvig Kaart intonehmen. De Speler oder Klottje dat hett deese Gewest för tominnst 20 Menüten winnt dat Speel. Wenn dat Speel na 4 Stünnen noch löppt, winnt de Speler oder Klottje mit de grootste Gewest."
+msgstr "All de Spelers of Klottjen versöken, tominnst de halvig Kaart intonehmen. De Speler of Klottje dat hett deese Gewest för tominnst 20 Menüten winnt dat Speel. Wenn dat Speel na 4 Stünnen noch löppt, winnt de Speler of Klottje mit de grootste Gewest."
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'

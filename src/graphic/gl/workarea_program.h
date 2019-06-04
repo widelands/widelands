@@ -52,8 +52,11 @@ private:
 
 	// Adds a vertex to the end of vertices with data from 'field' in order to apply the specified
 	// 'overlay' and, if desired, at the specified offset.
-	void add_vertex(const FieldsToDraw::Field& field, RGBAColor overlay,
-			std::vector<PerVertexData>*, Vector2f offset = Vector2f::zero(), Vector2f viewport = Vector2f::zero());
+	void add_vertex(const FieldsToDraw::Field& field,
+	                RGBAColor overlay,
+	                std::vector<PerVertexData>*,
+	                Vector2f offset = Vector2f::zero(),
+	                Vector2f viewport = Vector2f::zero());
 
 	// The program used for drawing the workarea overlay.
 	Gl::Program gl_program_;
@@ -76,7 +79,7 @@ private:
 	// Calculating the workareas is a bit slow, so we only recalculate when we have to
 	struct WorkareasCache {
 		WorkareasCache(const Workareas& wa, const Widelands::FCoords f, const Vector2f v)
-			: workareas(wa), fcoords(f), surface_pixel(v) {
+		   : workareas(wa), fcoords(f), surface_pixel(v) {
 		}
 
 		const Workareas workareas;

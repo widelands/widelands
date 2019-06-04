@@ -233,7 +233,8 @@ static const char* const pic_ripflag = "images/wui/fieldaction/menu_rip_flag.png
 static const char* const pic_watchfield = "images/wui/fieldaction/menu_watch_field.png";
 static const char* const pic_showcensus = "images/wui/fieldaction/menu_show_census.png";
 static const char* const pic_showstatistics = "images/wui/fieldaction/menu_show_statistics.png";
-static const char* const pic_showworkareaoverlap = "images/wui/fieldaction/menu_show_workarea_overlap.png";
+static const char* const pic_showworkareaoverlap =
+   "images/wui/fieldaction/menu_show_workarea_overlap.png";
 static const char* const pic_debug = "images/wui/fieldaction/menu_debug.png";
 static const char* const pic_abort = "images/wui/menu_abort.png";
 static const char* const pic_geologist = "images/wui/fieldaction/menu_geologist.png";
@@ -273,7 +274,8 @@ FieldActionWindow::~FieldActionWindow() {
 }
 
 void FieldActionWindow::think() {
-	if (is_showing_workarea_overlaps_ != ibase().get_display_flag(InteractiveBase::dfShowWorkareaOverlap)) {
+	if (is_showing_workarea_overlaps_ !=
+	    ibase().get_display_flag(InteractiveBase::dfShowWorkareaOverlap)) {
 		is_showing_workarea_overlaps_ = !is_showing_workarea_overlaps_;
 		if (!is_showing_workarea_overlaps_) {
 			clear_overlapping_workareas();
@@ -285,7 +287,8 @@ void FieldActionWindow::think() {
 		}
 #endif
 	}
-	if (player_ && player_->vision(node_.field - &ibase().egbase().map()[0]) <= 1 && !player_->see_all()) {
+	if (player_ && player_->vision(node_.field - &ibase().egbase().map()[0]) <= 1 &&
+	    !player_->see_all()) {
 		die();
 	}
 }
@@ -390,9 +393,10 @@ void FieldActionWindow::add_buttons_auto() {
 	add_button(&watchbox, "census", pic_showcensus, &FieldActionWindow::act_show_census,
 	           _("Toggle building label display"));
 	if (is_a(InteractivePlayer, &ibase())) {
-		add_button(&watchbox, "workarea_overlap", pic_showworkareaoverlap,
-				   &FieldActionWindow::act_show_workarea_overlap,
-				   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"));
+		add_button(
+		   &watchbox, "workarea_overlap", pic_showworkareaoverlap,
+		   &FieldActionWindow::act_show_workarea_overlap,
+		   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"));
 	}
 
 	if (ibase().get_display_flag(InteractiveBase::dfDebug))
