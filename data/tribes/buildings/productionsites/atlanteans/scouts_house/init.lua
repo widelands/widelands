@@ -39,10 +39,6 @@ tribes:new_productionsite_type {
       { name = "atlanteans_bread", amount = 2 }
    },
 
-   indicate_workarea_overlaps = {
-      "atlanteans_scouts_house",
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start scouting because ...

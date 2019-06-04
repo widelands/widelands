@@ -35,10 +35,6 @@ tribes:new_productionsite_type {
       empire_scout = 1
    },
 
-   indicate_workarea_overlaps = {
-      "empire_scouts_house",
-   },
-
    inputs = {
       { name = "ration", amount = 2 }
    },

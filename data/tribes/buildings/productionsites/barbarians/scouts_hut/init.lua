@@ -43,10 +43,6 @@ tribes:new_productionsite_type {
       { name = "ration", amount = 2 }
    },
 
-   indicate_workarea_overlaps = {
-      "barbarians_scouts_hut",
-   },
-
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start scouting because ...

@@ -777,7 +777,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						d = cs->get_info().becomes;
 						if ((descr.type() == Widelands::MapObjectType::PRODUCTIONSITE &&
 						     (d->type() != Widelands::MapObjectType::PRODUCTIONSITE ||
-						     !dynamic_cast<const ProductionSiteDescr&>(descr).
+						     !dynamic_cast<const Widelands::ProductionSiteDescr&>(descr).
 						     		highlight_overlapping_workarea_for(d->name()))) ||
 						    ((descr.type() == Widelands::MapObjectType::MILITARYSITE ||
 						      descr.type() == Widelands::MapObjectType::WAREHOUSE) &&
@@ -787,7 +787,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						}
 					} else if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
 						if (imm_type != Widelands::MapObjectType::PRODUCTIONSITE ||
-						    imm->get_owner() != player_ || !dynamic_cast<const ProductionSiteDescr&>(
+						    imm->get_owner() != player_ || !dynamic_cast<const Widelands::ProductionSiteDescr&>(
 						    		descr).highlight_overlapping_workarea_for(imm->descr().name())) {
 							continue;
 						}
@@ -818,9 +818,9 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						std::map<Widelands::TCoords<>, uint32_t> colors;
 						for (const Widelands::TCoords<>& t : map.triangles_in_region(
 						        map.to_set(Widelands::Area<>(mr.location(), wa_radius)))) {
-							colors[t] = mr.location() == t.node || mr.location() == map.get_brn(t.node) ||
-									mr.location() == (t.t == Widelands::TriangleIndex::D ? map.get_bln(t.node) :
-									map.get_rn(t.node)) || main_region.count(t) ? 0xffbf3f3f : 0x7fffffff;
+							colors[t] = mr.location() == t.node || mr.location() == map.br_n(t.node) ||
+									mr.location() == (t.t == Widelands::TriangleIndex::D ? map.bl_n(t.node) :
+									map.r_n(t.node)) || main_region.count(t) ? 0xffbf3f3f : 0x7fffffff;
 						}
 						ibase().show_workarea(wa, mr.location(), colors);
 						overlapping_workareas_.insert(mr.location());
