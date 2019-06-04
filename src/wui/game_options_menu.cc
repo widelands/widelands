@@ -112,8 +112,8 @@ bool GameOptionsMenu::handle_key(bool down, SDL_Keysym code) {
 					igb_.end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 					return true;
 				}
-				else
-					new GameExitConfirmBox(*get_parent(), igb_);
+				
+				new GameExitConfirmBox(*get_parent(), igb_);
 				die();
 				return true;
 			default:
