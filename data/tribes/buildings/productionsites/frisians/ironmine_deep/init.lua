@@ -13,12 +13,12 @@ tribes:new_productionsite_type {
       brick = 2,
       granite = 1,
       log = 1,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle_on_enhanced = {
       brick = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
@@ -63,10 +63,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
          descname = _"mining iron",
          actions = {
-            "sleep=5000",
             "return=skipped unless economy needs iron_ore",
             "consume=meal",
-            "sleep=57100",
+            "sleep=62100",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",

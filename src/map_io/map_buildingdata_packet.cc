@@ -65,7 +65,7 @@ constexpr uint16_t kCurrentPacketPFBuilding = 1;
 // Responsible for warehouses and expedition bootstraps
 constexpr uint16_t kCurrentPacketVersionWarehouse = 7;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
-constexpr uint16_t kCurrentPacketVersionProductionsite = 6;
+constexpr uint16_t kCurrentPacketVersionProductionsite = 7;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;
 
 void MapBuildingdataPacket::read(FileSystem& fs,
@@ -93,9 +93,9 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 					if (fr.unsigned_8()) {
 						char const* const animation_name = fr.c_string();
 						try {
-							building.anim_ = building.descr().get_animation(animation_name);
+							building.anim_ = building.descr().get_animation(animation_name, &building);
 						} catch (const GameDataError& e) {
-							building.anim_ = building.descr().get_animation("idle");
+							building.anim_ = building.descr().get_animation("idle", &building);
 							log("Warning: Tribe %s building: %s, using animation %s instead.\n",
 							    building.owner().tribe().name().c_str(), e.what(),
 							    building.descr().get_animation_name(building.anim_).c_str());
@@ -552,6 +552,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
                                                 MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
+		// TODO(GunChleoc): Savegame compatibility, remove after Build 21.
 		if (packet_version >= 5 && packet_version <= kCurrentPacketVersionProductionsite) {
 			ProductionSite::WorkingPosition& wp_begin = *productionsite.working_positions_;
 			const ProductionSiteDescr& pr_descr = productionsite.descr();
@@ -645,13 +646,13 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				if (pr_descr.programs().count(program_name)) {
 					uint32_t const skip_time = fr.unsigned_32();
 					if (gametime < skip_time)
-						throw GameDataError("program %s was skipped at time %u, but time is only "
+						throw GameDataError("program %s failed/was skipped at time %u, but time is only "
 						                    "%u",
 						                    program_name, skip_time, gametime);
-					productionsite.skipped_programs_[program_name] = skip_time;
+					productionsite.failed_skipped_programs_[program_name] = skip_time;
 				} else {
 					fr.unsigned_32();  // eat skip time
-					log("WARNING: productionsite has skipped program \"%s\", which "
+					log("WARNING: productionsite has failed/skipped program \"%s\", which "
 					    "does not exist\n",
 					    program_name);
 				}
@@ -710,6 +711,13 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				productionsite.statistics_[i] = fr.unsigned_8();
 			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
 			productionsite.production_result_ = fr.c_string();
+
+			// TODO(GunChleoc): Savegame compatibility, remove after Build 21.
+			if (kCurrentPacketVersionProductionsite >= 7) {
+				productionsite.main_worker_ = fr.signed_32();
+			} else {
+				productionsite.main_worker_ = productionsite.working_positions_[0].worker ? 0 : -1;
+			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Productionsite", packet_version,
 			                            kCurrentPacketVersionProductionsite);
@@ -1121,10 +1129,10 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	fw.signed_32(productionsite.fetchfromflag_);
 
 	//  skipped programs
-	assert(productionsite.skipped_programs_.size() <= std::numeric_limits<uint8_t>::max());
-	fw.unsigned_8(productionsite.skipped_programs_.size());
+	assert(productionsite.failed_skipped_programs_.size() <= std::numeric_limits<uint8_t>::max());
+	fw.unsigned_8(productionsite.failed_skipped_programs_.size());
 
-	for (const auto& temp_program : productionsite.skipped_programs_) {
+	for (const auto& temp_program : productionsite.failed_skipped_programs_) {
 		fw.string(temp_program.first);
 		fw.unsigned_32(temp_program.second);
 	}
@@ -1173,6 +1181,8 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 		fw.unsigned_8(productionsite.statistics_[i]);
 	fw.string(productionsite.statistics_string_on_changed_statistics_);
 	fw.string(productionsite.production_result());
+
+	fw.signed_32(productionsite.main_worker_);
 }
 
 /*

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-03 08:14+0000\n"
-"PO-Revision-Date: 2019-02-03 12:45+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-30 18:29+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -27,11 +27,11 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/helptexts.lua:16
-#: ../../data/tribes/buildings/militarysites/barbarians/barrier/helptexts.lua:16
-#: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:16
-#: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:16
-#: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:16
-#: ../../data/tribes/buildings/militarysites/barbarians/tower/helptexts.lua:16
+#: ../../data/tribes/buildings/militarysites/barbarians/barrier/helptexts.lua:13
+#: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:14
+#: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:13
+#: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:14
+#: ../../data/tribes/buildings/militarysites/barbarians/tower/helptexts.lua:14
 #: ../../data/tribes/buildings/militarysites/empire/barrier/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/empire/castle/helptexts.lua:16
@@ -56,11 +56,11 @@ msgstr "Allotja soldats que defensen i expandeixen el territori controlat."
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/helptexts.lua:21
-#: ../../data/tribes/buildings/militarysites/barbarians/barrier/helptexts.lua:21
-#: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:21
-#: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:21
-#: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:21
-#: ../../data/tribes/buildings/militarysites/barbarians/tower/helptexts.lua:21
+#: ../../data/tribes/buildings/militarysites/barbarians/barrier/helptexts.lua:18
+#: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:19
+#: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:18
+#: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:19
+#: ../../data/tribes/buildings/militarysites/barbarians/tower/helptexts.lua:19
 #: ../../data/tribes/buildings/militarysites/empire/barrier/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/empire/castle/helptexts.lua:21
@@ -81,14 +81,108 @@ msgid ""
 "send him away."
 msgstr "Si disposeu de pocs soldats per ocupar els edificis militars nous, cliqueu la fletxa descendent per reduir el nombre de soldats desitjats. També podeu clicar un soldat per fer-lo sortir de l'edifici."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/barrier/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘When we looked down to the valley from our newly established barrier, we "
+"felt that the spirit of our fathers was with us.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/barrier/helptexts.lua:8
+#: ../../data/tribes/buildings/militarysites/barbarians/tower/helptexts.lua:9
+#: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid "Ballad ‘The Battle of Kal’mavrath’ by Hakhor the Bard"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘The Citadel of Adlen surely is the finest masterpiece of Barbarian "
+"craftsmanship. Nothing as strong and big and beautiful has ever been built "
+"in such a short time.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:9
+msgctxt "barbarians_building"
+msgid ""
+"Colintan, chief planner of the Citadel of Adlen,<br>at its opening ceremony"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘This stronghold made from blackwood and stones will be a hard nut to crack "
+"for them.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid "Berthron,<br>chief military adviser of Chat’Karuth"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘The log cabin was so small that two men could hardly live there. But we "
+"were young and carefree. We just relished our freedom and the responsibility"
+" as an outpost.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:9
+msgctxt "barbarians_building"
+msgid "Boldreth,<br>about his time as young soldier"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/militarysites/barbarians/tower/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘From the height of our tower we could see far into enemy territory. The "
+"enemy was well prepared, but we also noticed some weak points in their "
+"defense.’"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:3
+msgctxt "building"
+msgid "‘Don’t swear at the builder who is short of building materials.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:8
+msgctxt "building"
+msgid "Proverb widely used for impossible tasks of any kind"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:16
+#: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:13
 msgctxt "building"
 msgid "A new building is being built at this construction site."
 msgstr "En aquest lloc s'està construint un nou edifici."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:3
+msgctxt "building"
+msgid "‘New paths will appear when you are willing to tear down the old.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:8
+msgctxt "building"
+msgid "Proverb"
+msgstr "Proverbi"
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:16
+#: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:13
 msgctxt "building"
 msgid ""
 "A building is being dismantled at this dismantle site, returning some of the"
@@ -134,7 +228,7 @@ msgstr "El cultivador de negrarrel necessita %1% de mitjana per sembrar i recol�
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/helptexts.lua:16
-#: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:13
 msgctxt "building"
@@ -172,8 +266,23 @@ msgctxt "atlanteans_building"
 msgid "The farmer needs %1% on average to sow and harvest a sheaf of corn."
 msgstr "L'agricultor necessita %1% de mitjana per sembrar i recol·lectar una càrrega de panís."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:6
+msgctxt "atlanteans_building"
+msgid ""
+"‘‘Only after the last duck has been shot down<br>Only after the last deer "
+"has been put to death<br>Only after the last fish has been caught<br>Then "
+"will you find that spiders are not to be eaten.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:14
+msgctxt "atlanteans_building"
+msgid "Prophecy of the fishbreeders"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:19
 msgctxt "building"
 msgid "Breeds fish."
 msgstr "Cria peixos."
@@ -277,6 +386,13 @@ msgid ""
 "respectively."
 msgstr "Mol la negrarrel i el panís per produir farina de negrarrel i farina de panís, respectivament."
 
+#: ../../data/tribes/buildings/productionsites/atlanteans/mill/helptexts.lua:21
+msgctxt "atlanteans_building"
+msgid ""
+"When no cornmeal is required, the mill will try to produce blackroot flour "
+"even when there is no demand for it."
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:16
 msgctxt "atlanteans_building"
@@ -298,7 +414,7 @@ msgstr "Serra fusta per obtenir-ne taulons."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/helptexts.lua:16
-#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:17
 #: ../../data/tribes/buildings/productionsites/empire/scouts_house/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:13
 msgctxt "building"
@@ -307,7 +423,7 @@ msgstr "Explora territoris desconeguts."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/helptexts.lua:16
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:18
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/helptexts.lua:16
 msgctxt "building"
@@ -323,7 +439,7 @@ msgstr "Construeix vaixells per comerciar i per a la colonització per la via ma
 #. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/helptexts.lua:16
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:17
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/helptexts.lua:16
 msgctxt "building"
 msgid "Smelts iron ore into iron and gold ore into gold."
@@ -371,6 +487,7 @@ msgstr "Teixeix tela de seda d'aranya per construir les veles dels vaixells i ta
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:13
 #: ../../data/tribes/buildings/productionsites/empire/well/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:13
 msgctxt "building"
 msgid "Draws water out of the deep."
 msgstr "Extrau aigua del sòl."
@@ -392,7 +509,7 @@ msgstr "El llenyataire d'aquesta casa necessita arbres per talar dins la seva à
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:6
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
@@ -401,7 +518,7 @@ msgstr "«La destral d'un guerrer novell demostra les millors qualitats de qui l
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:11
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid ""
 "An old Barbarian proverb<br> meaning that you need to take some risks "
@@ -424,8 +541,8 @@ msgid ""
 msgstr "El taller de destrals dels bàrbars és l'intermedi de la sèrie de tres edificis de producció d'eines i armes. És l'ampliació del taller de metall però el treballador no necessita qualificació addicional."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
-#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:31
@@ -435,10 +552,10 @@ msgstr "El taller de destrals dels bàrbars és l'intermedi de la sèrie de tres
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:24
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:27
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:24
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:23
@@ -466,7 +583,7 @@ msgstr "El taller de destrals dels bàrbars és l'intermedi de la sèrie de tres
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/helptexts.lua:26
 #: ../../data/tribes/scripting/help/global_helptexts.lua:69
@@ -486,7 +603,7 @@ msgstr "Els tres tipus d'armes tarden el mateix temps a fabricar-se, però les m
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:27
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:24
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -494,14 +611,30 @@ msgid ""
 "type of ax in about %s on average."
 msgstr "Si se li subministren els béns necessaris adequadament, aquest edifici pot produir una destral cada %s de mitjana."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘He who has enough bread will never be too tired to dig the ore and wield "
+"the ax.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid ""
+"Khantarakh, ‘The Modern Barbarian Economy’,<br>3ʳᵈ cowhide ‘Craftsmanship "
+"and Trade’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Bakes pitta bread for soldiers and miners alike."
 msgstr "Forneja pita per als soldats i els miners."
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -510,42 +643,115 @@ msgid ""
 msgstr "Si se li subministren els béns necessaris adequadament, aquest edifici pot elaborar una pita cada %s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘Don't ask what your tribe can do for you, ask what you can do for your "
+"tribe!’"
+msgstr ""
+
 #. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:11
+msgctxt "barbarians_building"
+msgid "Famous barbarian recruitment poster"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Equips recruits and trains them as soldiers."
 msgstr "Equipa i entrena els reclutes per convertir-los en soldats."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘Seasonal fish and game specialties served with pitta bread.<br>Choose from "
+"a prime selection of regional craft beer brands.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:12
+msgctxt "barbarians_building"
+msgid "Menu of ‘The Laughing Barbarian’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/helptexts.lua:17
 msgctxt "barbarians_building"
 msgid ""
 "Prepares rations for scouts and rations, snacks and meals to feed all "
 "miners."
 msgstr "Elabora racions per alimentar els exploradors i racions, aperitius i àpats per alimentar els miners."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘When the Barbarian was created,<br>this was the first thing that he "
+"stated:<br>“You want me fighting without fear?<br>Then you should create "
+"some beer!”’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:14
+msgctxt "barbarians_building"
+msgid "First verse of the drinking song ‘Way of the Barbarian’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:19
 #: ../../data/tribes/buildings/productionsites/empire/brewery/helptexts.lua:16
 msgctxt "building"
 msgid "Produces beer to keep the miners strong and happy."
 msgstr "Produeix cervesa per mantenir els miners forts i feliços."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘The smart leader builds roads, while the really wise leader breeds cattle.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid ""
+"Khantarakh, ‘The Modern Barbarian Economy’,<br> 5ᵗʰ cowhide ‘Traffic and "
+"Logistics’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Breeds strong oxen for adding them to the transportation system."
 msgstr "Cria bous per afegir-los al sistema de transport."
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce an ox "
 "in %s on average."
 msgstr "Si se li subministren els béns necessaris adequadament, aquest edifici pot generar un bou cada %s de mitjana."
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘What’s the work of a charcoal burner?<br>He’s the tribe’s most plodding "
+"earner!<br>Logs on logs he piles up high,<br>Until the kiln will reach the "
+"sky.<br>He sets the fire, sees it smolder<br>The logs he carried on his "
+"shoulder.<br>Burnt down to just one single coal<br>This troubles much a "
+"burner’s soul.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:18
+msgctxt "barbarians_building"
+msgid "Song of the charcoal burners"
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a coal mine building, part 1
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:4
@@ -611,15 +817,30 @@ msgid ""
 "average."
 msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina produirà carbó aproximadament cada 14,4 segons."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘See the crop fields from here to the horizons. They are a huge, heaving, "
+"golden sea.<br>Oh wheat, source of wealth, soul of beer, strength of our "
+"warriors!’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:9
+msgctxt "barbarians_building"
+msgid "Line from the harvesting song ‘The Wealth of the Fields’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:14
 #: ../../data/tribes/buildings/productionsites/empire/farm/helptexts.lua:16
 msgctxt "building"
 msgid "Sows and harvests wheat."
 msgstr "Sembra i recol·lecta blat."
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:24
 msgctxt "barbarians_building"
 msgid "The farmer needs %1% on average to sow and harvest a sheaf of wheat."
 msgstr "L'agricultor necessita %1% de mitjana per sembrar i recol·lectar una càrrega de blat."
@@ -629,6 +850,14 @@ msgstr "L'agricultor necessita %1% de mitjana per sembrar i recol·lectar una c�
 msgctxt "barbarians_building"
 msgid "‘What do you mean, my fish ain’t fresh?!’"
 msgstr "«Què vols dir amb això que el meu peix no és fresc?!»"
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid ""
+"Frequent response of a barbarian fisherman,<br>often followed by an "
+"enjoyable brawl"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
@@ -793,6 +1022,19 @@ msgid ""
 "average."
 msgstr "Si se li subministren els aliments necessaris adequadament, aquesta mina pot cavar per aconseguir granit cada %s de mitjana."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘The helmets forgéd by this smithy<br>Are widely known for looking pithy.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:11
+msgctxt "barbarians_building"
+msgid "Slogan of ‘Harrath’s Handsome Helmets’ in Al’thunran"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:16
 msgctxt "barbarians_building"
@@ -827,6 +1069,18 @@ msgstr "El caçador d'aquesta cabana necessita animals per caçar dins la seva �
 msgctxt "barbarians_building"
 msgid "The hunter pauses %s before going to work again."
 msgstr "El caçador fa una pausa de %s abans de treballar de nou."
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid "‘Miner’s Delight: Pitta bread with fish or meat, comes with one beer.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:11
+msgctxt "barbarians_building"
+msgid "Chef’s recommendation in ‘The Singing Master Miner’"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:16
@@ -1031,20 +1285,32 @@ msgid ""
 " about %s on average."
 msgstr "Si se li subministren els béns necessaris adequadament, aquest edifici pot produir una cervesa cada %s de mitjana."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid "‘We open up roads and make houses from mountains.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid "Slogan of the stonemasons’ guild"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
 msgstr "Talla granit de les roques properes."
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:21
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid "The quarry needs rocks to cut within the work area."
 msgstr "La pedrera necessita roques per tallar dins la seva àrea de treball."
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The stonemason pauses %s before going back to work again."
@@ -1114,6 +1380,62 @@ msgctxt "barbarians_building"
 msgid "A reed yard can produce a sheaf of thatch reed in about %s on average."
 msgstr "Un camp de juncs pot produir un feix de juncs cada %s de mitjana."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘Behind the next hill there might be wealth and happiness but also hostility"
+" and doom.<br>He who will not explore it commits the crime of stupidity.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:12
+msgctxt "barbarians_building"
+msgid "Chat’Karuth<br>at the oath taking ceremony of the first scout troupe"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘When I saw the Saxnot for the first time, her majestic dragon head already "
+"looked up to the skies and the master was about to install the square "
+"sail.<br>It was the most noble ship I ever saw.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/helptexts.lua:13
+#: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid "Captain Thanlas the Elder,<br>Explorer"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘From inferior looking rubble they form shiny gold and gleaming iron.<br>The"
+" smelters are real magicians among our craftsmen.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:12
+msgctxt "barbarians_building"
+msgid "Chat’Karuth<br>at the 5ᵗʰ conference of master craftsmen"
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid "‘Fresh from the countryside: Bread, fish or game to go.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:11
+msgctxt "barbarians_building"
+msgid "Menu of the tavern ‘Ye Ol’ Bronze Axe’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:13
@@ -1122,28 +1444,44 @@ msgid "Prepares rations to feed the scouts and miners."
 msgstr "Elabora racions per alimentar els exploradors i els miners."
 
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid "Produces all the axes that the Barbarians use for warfare."
 msgstr "Produeix les destrals que els bàrbars usen a les seves guerres."
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:21
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid ""
 "The Barbarian war mill is their most advanced production site for weapons. "
 "As such you will need to enhance an ax workshop in order to get one."
 msgstr "El taller de guerra bàrbar és el seu edifici més avançat d'armes. L'obtindreu ampliant un taller de destrals."
 
-#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:29
+#: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:26
 msgctxt "barbarians_building"
 msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
 msgstr "Tots els tipus d'armes tarden el mateix temps a fabricar-se, però les matèries primeres necessàries són diferents. Les armes de major nivell requereixen béns més preuats. Els dos últims tipus necessiten or."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘Fine cloth and jewelry mean nothing to a true Barbarian.<br>But a noble "
+"sail in the wind will please his eyes.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:12
+msgctxt "barbarians_building"
+msgid ""
+"Khantarakh, ‘The Modern Barbarian Economy’,<br>9ᵗʰ cowhide ‘Seafaring and "
+"Conquest’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:17
 msgctxt "barbarians_building"
 msgid "Weaves cloth out of thatch reed."
 msgstr "Teixeix tela amb fibres de junc."
@@ -1171,8 +1509,24 @@ msgctxt "barbarians_building"
 msgid "The carrier needs %s to get one bucket full of water."
 msgstr "El transportista necessita %s per aconseguir un poal ple d'aigua."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"‘Then he hit the door with his ax and, behold,<br>the door only trembled, "
+"but the shaft of the ax burst into a thousand pieces.’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:12
+msgctxt "barbarians_building"
+msgid ""
+"Legend about a quarrel between the brothers Harthor and Manthor,<br>Manthor "
+"is said to be the inventor of blackwood"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid ""
 "Hardens logs by fire into blackwood, which is used to construct robust "
@@ -2000,9 +2354,8 @@ msgstr "Cartell d'una cerveseria d'aiguamel"
 msgctxt "building"
 msgid ""
 "Brews beer out of barley and water. It also brews mead, which is beer "
-"refined with honey. Mead is consumed by miners in deep mines and by "
-"experienced soldiers."
-msgstr "Fermenta cervesa a partir de civada i aigua. També fermenta aiguamel, cervesa refinada amb mel. L'aiguamel la consumeixen els miners que treballen en mines profundes i per soldats amb experiència."
+"refined with honey. Mead is consumed by experienced soldiers."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:3
@@ -2339,7 +2692,7 @@ msgid ""
 msgstr "La rèplica del cabdill Arldor quan se li va preguntar per què el seu clan no podia beure aigua salada"
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The well needs %s on average to produce one bucket of water."
@@ -2585,7 +2938,7 @@ msgstr "Serveix de base per a la colonització i comerç per via marítima. Tamb
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/atlanteans/warehouse/helptexts.lua:16
-#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:16
+#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:14
 #: ../../data/tribes/buildings/warehouses/empire/warehouse/helptexts.lua:16
 #: ../../data/tribes/buildings/warehouses/frisians/warehouse/helptexts.lua:16
 msgctxt "building"
@@ -2594,27 +2947,57 @@ msgid ""
 " tools."
 msgstr "Els treballadors i soldats hi trobaran refugi. També emmagatzema béns i eines."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘Steep like the slopes of Kal’mavrath, shiny like the most delicate armor "
+"and strong like our ancestors, that’s how the headquarters of Chat’Karuth "
+"presented itself to us.’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:16
+#: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:13
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters_interim/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Accommodation for your people. Also stores your wares and tools."
 msgstr "L'allotjament de la vostra gent. També emmagatzema els vostres béns i eines."
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:22
+#: ../../data/tribes/buildings/warehouses/barbarians/headquarters/helptexts.lua:19
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters_interim/helptexts.lua:22
 msgctxt "barbarians_building"
 msgid "The headquarters is your main building."
 msgstr "El quarter general és l'edifici principal."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid ""
+"‘I prefer the planks of a ship to any fortress, no matter how strong it is.’"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:16
+#: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:13
 msgctxt "barbarians_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr "Serveix de base per a la colonització i comerç per via marítima. També fa de magatzem per a soldats, béns i eines."
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:3
+msgctxt "barbarians_building"
+msgid "‘Who still owns a warehouse is not yet defeated!’"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:8
+msgctxt "barbarians_building"
+msgid ""
+"Berthron, chief military adviser of Chat’Karuth,<br>when they lost the "
+"headquarters in the battle around the heights of Kal’Megarath"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/empire/headquarters/helptexts.lua:16
@@ -2901,58 +3284,58 @@ msgstr "%s i"
 msgid "Food:"
 msgstr "Menjar:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:157
+#: ../../data/tribes/scripting/help/building_help.lua:158
 msgid "Equipment:"
 msgstr "Equipament:"
 
 #. TRANSLATORS: Heading for a flavour text in the building help.
-#: ../../data/tribes/scripting/help/building_help.lua:180
+#: ../../data/tribes/scripting/help/building_help.lua:181
 msgid "Lore"
 msgstr "Saviesa popular"
 
-#: ../../data/tribes/scripting/help/building_help.lua:201
+#: ../../data/tribes/scripting/help/building_help.lua:202
 #: ../../data/tribes/scripting/help/init.lua:59
 #: ../../data/tribes/scripting/help/tips.lua:49
 msgid "General"
 msgstr "    "
 
-#: ../../data/tribes/scripting/help/building_help.lua:202
+#: ../../data/tribes/scripting/help/building_help.lua:203
 msgid "Purpose:"
 msgstr "Finalitat de l'edifici:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:230
-#: ../../data/tribes/scripting/help/building_help.lua:463
+#: ../../data/tribes/scripting/help/building_help.lua:231
+#: ../../data/tribes/scripting/help/building_help.lua:462
 msgid "Note:"
 msgstr "Nota:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:235
+#: ../../data/tribes/scripting/help/building_help.lua:236
 msgid "Work area radius:"
 msgstr "Radi de l'àrea de treball:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:239
-#: ../../data/tribes/scripting/help/building_help.lua:244
+#: ../../data/tribes/scripting/help/building_help.lua:240
+#: ../../data/tribes/scripting/help/building_help.lua:245
 msgid "Healing:"
 msgstr "Entrenament de salut:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:240
-#: ../../data/tribes/scripting/help/building_help.lua:245
+#: ../../data/tribes/scripting/help/building_help.lua:241
+#: ../../data/tribes/scripting/help/building_help.lua:246
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
 msgstr[0] "Els soldats allotjats es curen a raó de %d punt per segon."
 msgstr[1] "Els soldats allotjats es curen a raó de %d punts per segon."
 
-#: ../../data/tribes/scripting/help/building_help.lua:241
-#: ../../data/tribes/scripting/help/building_help.lua:247
+#: ../../data/tribes/scripting/help/building_help.lua:242
+#: ../../data/tribes/scripting/help/building_help.lua:248
 msgid "Conquer range:"
 msgstr "Radi de conquesta:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:246
-#: ../../data/tribes/scripting/help/building_help.lua:250
+#: ../../data/tribes/scripting/help/building_help.lua:247
+#: ../../data/tribes/scripting/help/building_help.lua:251
 msgid "Capacity:"
 msgstr "Capacitat:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:252
+#: ../../data/tribes/scripting/help/building_help.lua:253
 msgid "Vision range:"
 msgstr "Radi de visió:"
 
@@ -2962,160 +3345,164 @@ msgstr "%1$s des de: %2$s"
 
 #. TRANSLATORS: Heading in the building help for wares that a building accepts
 #. (e.g. wheat for a mill).
-#: ../../data/tribes/scripting/help/building_help.lua:284
+#: ../../data/tribes/scripting/help/building_help.lua:283
 msgid "Incoming:"
 msgstr "Béns consumits:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:288
+#: ../../data/tribes/scripting/help/building_help.lua:287
 msgid "Collects:"
 msgstr "Recull:"
 
 #. TRANSLATORS: This is a verb (The miner mines)
-#: ../../data/tribes/scripting/help/building_help.lua:300
+#: ../../data/tribes/scripting/help/building_help.lua:299
 msgid "Mines:"
 msgstr "Mines:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:320
+#: ../../data/tribes/scripting/help/building_help.lua:319
 msgid "Produces:"
 msgstr "Produeix:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:362
+#: ../../data/tribes/scripting/help/building_help.lua:361
 msgid "Outgoing:"
 msgstr "Ús dels béns produïts:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:364
+#: ../../data/tribes/scripting/help/building_help.lua:363
 msgid "None"
 msgstr "Res"
 
-#: ../../data/tribes/scripting/help/building_help.lua:365
+#: ../../data/tribes/scripting/help/building_help.lua:364
 msgid "Dependencies"
 msgstr "Requeriments específics"
 
-#: ../../data/tribes/scripting/help/building_help.lua:381
+#: ../../data/tribes/scripting/help/building_help.lua:380
 msgid "Health Training"
 msgstr "Entrenament de salut"
 
-#: ../../data/tribes/scripting/help/building_help.lua:382
+#: ../../data/tribes/scripting/help/building_help.lua:381
 msgid "Trains ‘Health’ from %1% up to %2%"
 msgstr "Entreneu el nivell de «salut» des de %1% fins a %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:384
-#: ../../data/tribes/scripting/help/building_help.lua:398
-#: ../../data/tribes/scripting/help/building_help.lua:410
-#: ../../data/tribes/scripting/help/building_help.lua:423
+#: ../../data/tribes/scripting/help/building_help.lua:383
+#: ../../data/tribes/scripting/help/building_help.lua:397
+#: ../../data/tribes/scripting/help/building_help.lua:409
+#: ../../data/tribes/scripting/help/building_help.lua:422
 msgid "Soldiers:"
 msgstr "Soldats:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:394
+#: ../../data/tribes/scripting/help/building_help.lua:393
 msgid "Attack Training"
 msgstr "Entrenament d'atac"
 
 #. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
 #. numbers.
-#: ../../data/tribes/scripting/help/building_help.lua:396
+#: ../../data/tribes/scripting/help/building_help.lua:395
 msgid "Trains ‘Attack’ from %1% up to %2%"
 msgstr "Entreneu el nivell d'«atac» des de %1% fins a %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:407
+#: ../../data/tribes/scripting/help/building_help.lua:406
 msgid "Defense Training"
 msgstr "Entrenament de defensa"
 
-#: ../../data/tribes/scripting/help/building_help.lua:408
+#: ../../data/tribes/scripting/help/building_help.lua:407
 msgid "Trains ‘Defense’ from %1% up to %2%"
 msgstr "Entreneu el nivell de «defensa» des de %1% fins a %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:420
+#: ../../data/tribes/scripting/help/building_help.lua:419
 msgid "Evade Training"
 msgstr "Entrenament d'evasió"
 
-#: ../../data/tribes/scripting/help/building_help.lua:421
+#: ../../data/tribes/scripting/help/building_help.lua:420
 msgid "Trains ‘Evade’ from %1% up to %2%"
 msgstr "Entreneu el nivell d'«evasió» des de %1% fins a %2%"
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.
-#: ../../data/tribes/scripting/help/building_help.lua:448
+#: ../../data/tribes/scripting/help/building_help.lua:447
 msgid "Building"
 msgstr "Edifici"
 
-#: ../../data/tribes/scripting/help/building_help.lua:464
+#: ../../data/tribes/scripting/help/building_help.lua:463
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr "Aquest edifici es pot obtenir construint-lo directament o ampliant un altre tipus d'edifici."
 
-#: ../../data/tribes/scripting/help/building_help.lua:470
+#: ../../data/tribes/scripting/help/building_help.lua:469
 msgid "Direct build cost:"
 msgstr "Cost de construcció directa:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:472
+#: ../../data/tribes/scripting/help/building_help.lua:471
 #: ../../data/tribes/scripting/help/immovable_help.lua:50
 msgid "Build cost:"
 msgstr "Cost de construcció:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:483
+#: ../../data/tribes/scripting/help/building_help.lua:482
 msgid "Or enhanced from:"
 msgstr "O ampliat a partir de:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:485
+#: ../../data/tribes/scripting/help/building_help.lua:484
 msgid "Enhanced from:"
 msgstr "Ampliat a partir de:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:494
+#: ../../data/tribes/scripting/help/building_help.lua:493
 msgid "Cumulative cost:"
 msgstr "Cost acumulat:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:539
-#: ../../data/tribes/scripting/help/building_help.lua:588
+#: ../../data/tribes/scripting/help/building_help.lua:538
+#: ../../data/tribes/scripting/help/building_help.lua:587
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: ../../data/tribes/scripting/help/building_help.lua:544
+#: ../../data/tribes/scripting/help/building_help.lua:543
 msgid "If built directly, dismantle yields:"
 msgstr "Si és construït directament, desmantellar-lo proporciona:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:549
+#: ../../data/tribes/scripting/help/building_help.lua:548
 msgid "If enhanced, dismantle yields:"
 msgstr "Si s'amplia, desmantellar-lo proporciona:"
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
-#: ../../data/tribes/scripting/help/building_help.lua:552
-#: ../../data/tribes/scripting/help/building_help.lua:593
+#: ../../data/tribes/scripting/help/building_help.lua:551
+#: ../../data/tribes/scripting/help/building_help.lua:592
 msgid "Dismantle yields:"
 msgstr "Desmantellar-lo proporciona:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:602
+#: ../../data/tribes/scripting/help/building_help.lua:601
 msgid "Can be enhanced to:"
 msgstr "Pot ampliar-se a:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:632
+#: ../../data/tribes/scripting/help/building_help.lua:631
 msgid "Crew required:"
 msgstr "Personal requerit:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:632
+#: ../../data/tribes/scripting/help/building_help.lua:631
 #: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "Treballadors"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-#: ../../data/tribes/scripting/help/building_help.lua:654
+#: ../../data/tribes/scripting/help/building_help.lua:653
 #, lua-format
 msgid "%s or better"
 msgstr "%s o millor"
 
-#. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
+#. TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
 #: ../../data/tribes/scripting/help/building_help.lua:665
 msgid "Worker uses:"
-msgid_plural "Workers use:"
-msgstr[0] "El treballador empra:"
-msgstr[1] "Els treballadors empren:"
+msgstr "Eines que necessita:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:690
+#. TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker
+#. uses
+#: ../../data/tribes/scripting/help/building_help.lua:668
+msgid "Workers use:"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/building_help.lua:695
 msgid "Production"
 msgstr "Producció"
 
-#: ../../data/tribes/scripting/help/building_help.lua:691
+#: ../../data/tribes/scripting/help/building_help.lua:696
 msgid "Performance:"
 msgstr "Rendiment:"
 
@@ -3681,25 +4068,8 @@ msgstr "Un jugador"
 msgid "Multiplayer"
 msgstr "Multijugador"
 
-#. TRANSLATORS: You can also translate this as 'additional workplace'
-#. result = result .. h3(pgettext("workerhelp_one_building", "Can also work
-#. at"))
-#. else
-#. Translators: Worker Encyclopedia: Heading above a list of buildings where a
-#. worker may work instead of a less experienced worker
-#. TRANSLATORS: You can also translate this as 'additional workplaces'
-#. result = result .. h3(ngettext("Can also work at", "Can also work at",
-#. #additional))
-#. end
-#. RST
-#. .. function:: worker_help_string(worker_description)
-#. Displays the worker with a helptext, an image and the tool used
-#. :arg tribe: The :class:`LuaTribeDescription` for the tribe
-#. that we are displaying this help for.
-#. :arg worker_description: the worker_description from C++.
-#. :returns: Help string for the worker
 #: ../../data/tribes/scripting/help/ware_help.lua:34
-#: ../../data/tribes/scripting/help/worker_help.lua:153
+#: ../../data/tribes/scripting/help/worker_help.lua:162
 msgid "Purpose"
 msgstr "Finalitat:"
 
@@ -3710,105 +4080,136 @@ msgstr "Finalitat:"
 msgid "Producer"
 msgstr "Es produeix a:"
 
-#. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
+#. TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
 #: ../../data/tribes/scripting/help/ware_help.lua:107
 msgid "Ware produced:"
-msgid_plural "Wares produced:"
-msgstr[0] "Bé produït:"
-msgstr[1] "Béns produïts:"
+msgstr "Bé produït:"
+
+#. TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a
+#. productionsite
+#: ../../data/tribes/scripting/help/ware_help.lua:110
+msgid "Wares produced:"
+msgstr ""
+
+#. TRANSLATORS: Ware Encyclopedia: Heading for 1 building and / or worker that
+#. consumes a ware
+#: ../../data/tribes/scripting/help/ware_help.lua:172
+msgid "Consumer"
+msgstr "Utilitza aquest bé:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:167
-msgid "Consumer"
-msgid_plural "Consumers"
-msgstr[0] "Utilitza aquest bé:"
-msgstr[1] "Utilitzen aquest bé:"
+#: ../../data/tribes/scripting/help/ware_help.lua:175
+msgid "Consumers"
+msgstr ""
 
-#. TRANSLATORS: Worker Encyclopedia: Workers recruited by a productionsite
+#. TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:79
 msgid "Worker recruited:"
-msgid_plural "Workers recruited:"
-msgstr[0] "Treballador contractat:"
-msgstr[1] "Treballadors contractats:"
+msgstr "Treballador contractat:"
 
-#. TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker is
-#. needed to work at
-#. TRANSLATORS: You can also translate this as 'workplace(s)'
-#: ../../data/tribes/scripting/help/worker_help.lua:106
+#. TRANSLATORS: Worker Encyclopedia: More than 1 worker recruited by a
+#. productionsite
+#: ../../data/tribes/scripting/help/worker_help.lua:82
+msgid "Workers recruited:"
+msgstr "Treballadors contractats:"
+
+#. TRANSLATORS: Worker Encyclopedia: Heading for 1 building where a worker can
+#. work
+#. TRANSLATORS: You can also translate this as 'workplace'
+#: ../../data/tribes/scripting/help/worker_help.lua:112
+msgctxt "workerhelp_one_building"
 msgid "Works at"
-msgid_plural "Works at"
-msgstr[0] "Edifici on treballa:"
-msgstr[1] "Edificis on treballa:"
+msgstr "Edificis on treballa:"
+
+#. TRANSLATORS: Worker Encyclopedia: A list of more than 1 building where a
+#. worker can work
+#. TRANSLATORS: You can also translate this as 'workplaces'
+#: ../../data/tribes/scripting/help/worker_help.lua:116
+msgctxt "workerhelp_multiple_buildings"
+msgid "Works at"
+msgstr ""
+
+#. TRANSLATORS: You can also translate this as 'additional workplace'
+#: ../../data/tribes/scripting/help/worker_help.lua:132
+msgctxt "workerhelp_one_building"
+msgid "Can also work at"
+msgstr "També pot treballar en"
+
+#. TRANSLATORS: You can also translate this as 'additional workplaces'
+#: ../../data/tribes/scripting/help/worker_help.lua:136
+msgctxt "workerhelp_multiple_buildings"
+msgid "Can also work at"
+msgstr "També pot treballar en"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
-#: ../../data/tribes/scripting/help/worker_help.lua:168
+#: ../../data/tribes/scripting/help/worker_help.lua:177
 msgid "Worker uses"
 msgstr "Eines que necessita:"
 
 #. TRANSLATORS: Soldier levels
-#: ../../data/tribes/scripting/help/worker_help.lua:185
+#: ../../data/tribes/scripting/help/worker_help.lua:194
 msgid "Levels"
 msgstr "Nivells"
 
-#: ../../data/tribes/scripting/help/worker_help.lua:187
+#: ../../data/tribes/scripting/help/worker_help.lua:196
 msgid "Health"
 msgstr "Salut"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
-#: ../../data/tribes/scripting/help/worker_help.lua:191
+#: ../../data/tribes/scripting/help/worker_help.lua:200
 msgid "Starts at %1% points."
 msgstr "Comença en %1% punts."
 
 #. TRANSLATORS: Soldier health / attack defense / evade points
-#: ../../data/tribes/scripting/help/worker_help.lua:194
-#: ../../data/tribes/scripting/help/worker_help.lua:205
+#: ../../data/tribes/scripting/help/worker_help.lua:203
+#: ../../data/tribes/scripting/help/worker_help.lua:214
 msgid "Increased by %1% point for each level."
 msgid_plural "Increased by %1% points for each level."
 msgstr[0] "Incrementa %1% punt per cada nivell."
 msgstr[1] "Incrementa %1% punts per cada nivell."
 
 #. TRANSLATORS: Soldier health / attack defense / evade level
-#: ../../data/tribes/scripting/help/worker_help.lua:197
-#: ../../data/tribes/scripting/help/worker_help.lua:207
-#: ../../data/tribes/scripting/help/worker_help.lua:217
-#: ../../data/tribes/scripting/help/worker_help.lua:232
+#: ../../data/tribes/scripting/help/worker_help.lua:206
+#: ../../data/tribes/scripting/help/worker_help.lua:216
+#: ../../data/tribes/scripting/help/worker_help.lua:226
+#: ../../data/tribes/scripting/help/worker_help.lua:241
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
 msgstr[0] "El nivell màxim és %1%."
 msgstr[1] "El nivell màxim és %1%."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:199
+#: ../../data/tribes/scripting/help/worker_help.lua:208
 msgid "Attack"
 msgstr "Atac"
 
 #. TRANSLATORS: Points are 4 digit numbers.
-#: ../../data/tribes/scripting/help/worker_help.lua:202
+#: ../../data/tribes/scripting/help/worker_help.lua:211
 msgid "A random value between %1% and %2% points is added to each attack."
 msgstr "A cada atac, s'afegeix un nombre aleatori entre %1% i %2%."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:209
+#: ../../data/tribes/scripting/help/worker_help.lua:218
 msgid "Defense"
 msgstr "Defensa"
 
-#: ../../data/tribes/scripting/help/worker_help.lua:213
-#: ../../data/tribes/scripting/help/worker_help.lua:221
-#: ../../data/tribes/scripting/help/worker_help.lua:228
+#: ../../data/tribes/scripting/help/worker_help.lua:222
+#: ../../data/tribes/scripting/help/worker_help.lua:230
+#: ../../data/tribes/scripting/help/worker_help.lua:237
 #, lua-format
 msgid "Starts at %d%%."
 msgstr "Comença a %d%%."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:215
-#: ../../data/tribes/scripting/help/worker_help.lua:230
+#: ../../data/tribes/scripting/help/worker_help.lua:224
+#: ../../data/tribes/scripting/help/worker_help.lua:239
 #, lua-format
 msgid "Increased by %d%% for each level."
 msgstr "Incrementa un %d%% per cada nivell."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:222
+#: ../../data/tribes/scripting/help/worker_help.lua:231
 msgid "This soldier cannot be trained in defense."
 msgstr "Aquest soldat no pot entrenar-se en defensa."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:225
+#: ../../data/tribes/scripting/help/worker_help.lua:234
 msgid "Evade"
 msgstr "Evasió"
 
@@ -4020,9 +4421,9 @@ msgstr "Els flequers de l'Imperi fan pa molt gustós amb farina de blat i aigua.
 #: ../../data/tribes/wares/bread_frisians/helptexts.lua:4
 msgctxt "frisians_ware"
 msgid ""
-"Bread is made out of barley and water and is used in the taverns and "
-"drinking halls to prepare rations. It is also consumed by training soldiers."
-msgstr "El pa es cou un cop s'ha obtingut la massa barrejant civada i aigua i es consumeix a les tavernes i sales de begudes per fer-ne racions. També en mengen els soldats quan s'entrenen."
+"Bread is made out of barley and water and is used in the taverns to prepare "
+"rations. It is also consumed by training soldiers."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:4
@@ -4062,8 +4463,8 @@ msgstr "Les pales de forner les produeix el fabricant d'eines."
 msgctxt "frisians_ware"
 msgid ""
 "Bricks are the best and most important building material. They are made out "
-"of clay and granite."
-msgstr "El maó és el millor i més important material de construcció. S'obté a partir d'argila i granit."
+"of a mix of clay and granite dried in a coal fire."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Buckets
 #: ../../data/tribes/wares/buckets/helptexts.lua:4
@@ -4136,8 +4537,9 @@ msgstr "Els focs de les forges imperials i els tallers d'armes i armadures s'ali
 #. TRANSLATORS: Helptext for a ware: Coal
 #: ../../data/tribes/wares/coal/helptexts.lua:12
 msgctxt "frisians_ware"
-msgid "The fires of the furnaces and armor smithies are fed with coal."
-msgstr "El foc de les fargues i dels tallers d'armadures s'alimenten de carbó."
+msgid ""
+"The fires of the brick kilns, furnaces and armor smithies are fed with coal."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Corn
 #: ../../data/tribes/wares/corn/helptexts.lua:4
@@ -4167,61 +4569,64 @@ msgstr "Aquests meravellosos diamants s'utilitzen en la construcció d'alguns ed
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:4
 msgctxt "ware"
-msgid "The felling ax is the tool of the lumberjack to chop down trees."
-msgstr "La destral per talar arbres és l'eina del llenyataire."
+msgid "The felling ax is the tool to chop down trees."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:6
 msgctxt "barbarians_ware"
 msgid ""
-"Felling axes are produced in the metal workshop (but cease to be produced by"
-" the building if it is enhanced to an ax workshop and war mill)."
-msgstr "Les destrals per talar arbres es fabriquen al taller de metall (però no se'n faran més a l'edifici si s'amplia a taller de destrals o de guerra)."
+"Felling axes are used by lumberjacks and produced in the metal workshop (but"
+" cease to be produced by the building if it is enhanced to an ax workshop "
+"and war mill)."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:8
 msgctxt "frisians_ware"
-msgid "Felling axes are produced by the blacksmithy."
-msgstr "Les destrals per talar arbres es produeixen a la forja."
+msgid "Felling axes are used by woodcutters and produced by the blacksmithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:10
 msgctxt "empire_ware"
-msgid "Felling axes are produced by the toolsmith."
-msgstr "Les destrals per talar arbres les fabriquen els fabricants d'eines."
+msgid "Felling axes are used by lumberjacks and produced by the toolsmithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:4
 msgctxt "ware"
-msgid ""
-"Fire tongs are the tools of the smelter, who works in the smelting works."
-msgstr "Les tenalles són les eines del fonedor, que treballa al forn de metalls. Les produeix el fabricant d'eines."
+msgid "Fire tongs are the tools for smelting ores."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:6
 msgctxt "atlanteans_ware_fire_tongs"
-msgid "They are produced by the toolsmith."
-msgstr "Les produeixen els fabricants d'eines."
+msgid "They are used in the smelting works and produced by the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:8
 msgctxt "frisians_ware"
-msgid "They are produced by the blacksmithy."
-msgstr "Es produeixen a la forja."
+msgid ""
+"They are used in the furnace and the brick kiln and produced by the "
+"blacksmithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:10
 msgctxt "barbarians_ware"
 msgid ""
-"Produced by the metal workshop (but they cease to be produced by the "
-"building if it is enhanced to an ax workshop and war mill)."
-msgstr "Es fabriquen al taller de metall (però no se'n faran més a l'edifici si s'amplia a taller de destrals o de guerra)."
+"They are used in the smelting works and produced by the metal workshop (but "
+"they cease to be produced by the building if it is enhanced to an ax "
+"workshop and war mill)."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:12
 msgctxt "empire_ware_fire_tongs"
-msgid "They are produced by the toolsmith."
-msgstr "Les produeixen els fabricants d'eines."
+msgid "They are used in the smelting works and produced by the toolsmith."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fish
 #: ../../data/tribes/wares/fish/helptexts.lua:4
@@ -4303,8 +4708,8 @@ msgstr "La farina de negrarrel es produeix en molins a partir de negrarrel. S'em
 msgctxt "frisians_ware"
 msgid ""
 "Fruit are berries gathered from berry bushes by a fruit collector. They are "
-"used for rations and meals."
-msgstr "Les fruites recollides dels arbustos de baies pels recol·lectors de fruita s'empren per fer racions i àpats."
+"used for rations and for feeding the fish at the aqua farms."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fur
 #: ../../data/tribes/wares/fur/helptexts.lua:4
@@ -4348,52 +4753,81 @@ msgstr "Els vestits de pell ordinaris es poden decorar amb ferro per donar-los-h
 #: ../../data/tribes/wares/gold/helptexts.lua:4
 msgctxt "ware"
 msgid ""
-"Gold is the most valuable of all metals, and it is obtained out of gold ore "
-"in a smelting works."
-msgstr "L'or és el metall més valuós. S'obté en forma de lingots a partir de mineral d'or en el forn de metalls."
+"Gold is the most valuable of all metals, and it is smelted out of gold ore."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid ""
-"Gold is used by the armor smithy, the weapon smithy and the gold spinning "
-"mill."
-msgstr "Els lingots d'or s'empren als tallers d'armes i armadures i a la filadora d'or."
+"It is produced by the smelting works and used by the armor smithy, the "
+"weapon smithy and the gold spinning mill."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:8
 msgctxt "barbarians_ware"
 msgid ""
-"Only very important things are embellished with gold. It is used as a "
-"precious building material and to produce different axes (in the war mill) "
-"and different parts of armor (in the helm smithy)."
-msgstr "Només les peces més importants s'engalanen amb or. S'empra com a un preciós material de construcció i per produir diferents tipus de destrals (als tallers de destrals i de guerra) i diferents armadures (al taller d'armadures)."
+"Only very important things are embellished with gold. It is produced by the "
+"smelting works and used as a precious building material and to produce "
+"different axes (in the war mill) and different parts of armor (in the helm "
+"smithy)."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:10
 msgctxt "frisians_ware"
 msgid ""
-"Only very important things are embellished with gold. It is used to produce "
-"better swords and the best helmets. The best armor is also decorated with "
-"gold."
-msgstr "Només els objectes més importants s'embelleixen amb or. Les millors espases i cascos en porten una mica, però la millor armadura fins i tot es decora amb or."
+"Only very important things are embellished with gold. It is produced by the "
+"furnace and is used to produce better swords and the best helmets. The best "
+"armor is also decorated with gold."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Gold
 #: ../../data/tribes/wares/gold/helptexts.lua:12
 msgctxt "empire_ware"
 msgid ""
-"Armor and weapons are embellished with gold in the armor smithy and the "
-"weapon smithy."
-msgstr "Les armes i armadures s'engalanen amb or als tallers d'armes i d'armadures."
+"It is produced by the smelting works. Armor and weapons are embellished with"
+" gold in the armor smithy and the weapon smithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Gold Ore
 #: ../../data/tribes/wares/gold_ore/helptexts.lua:4
 msgctxt "ware"
+msgid "Gold ore is mined in a gold mine."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Gold Ore
+#: ../../data/tribes/wares/gold_ore/helptexts.lua:6
+msgctxt "atlanteans_ware"
 msgid ""
-"Gold ore is mined in a gold mine. Smelted in a smelting works, it turns into"
-" gold which is used as a precious building material and to produce weapons "
-"and armor."
-msgstr "El mineral d'or s'obté a les mines d'or. Es redueix i se'n preparen lingots al forn de metalls. Després, aquests lingots d'or es podran usar com a material de construcció o per produir armes i armadures."
+"Smelted in a smelting works, it turns into gold which is used as a precious "
+"building material and to produce weapons and armor."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Gold Ore
+#: ../../data/tribes/wares/gold_ore/helptexts.lua:8
+msgctxt "barbarians_ware"
+msgid ""
+"Smelted in a smelting works, it turns into gold which is used as a precious "
+"building material and to produce weapons and armor."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Gold Ore
+#: ../../data/tribes/wares/gold_ore/helptexts.lua:10
+msgctxt "frisians_ware"
+msgid ""
+"Smelted in a furnace, it turns into gold which is used as a precious "
+"building material and to produce weapons and armor."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Gold Ore
+#: ../../data/tribes/wares/gold_ore/helptexts.lua:12
+msgctxt "empire_ware"
+msgid ""
+"Smelted in a smelting works, it turns into gold which is used as a precious "
+"building material and to produce weapons and armor."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Gold Thread
 #: ../../data/tribes/wares/gold_thread/helptexts.lua:4
@@ -4596,44 +5030,70 @@ msgstr "Les produeixen els fabricants d'eines."
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:4
 msgctxt "ware"
-msgid "Iron is extracted from iron ore in the smelting works."
-msgstr "El ferro s'obté en forma de lingots a partir de mineral de ferro en el forn de metalls."
+msgid "Iron is smelted out of iron ores."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:6
 msgctxt "atlanteans_ware"
-msgid "It is used in the toolsmithy, armor smithy and weapon smithy."
-msgstr "S'empra als tallers d'eines, armes i armadures."
+msgid ""
+"It is produced by the smelting works and used in the toolsmithy, armor "
+"smithy and weapon smithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:8
 msgctxt "barbarians_ware"
 msgid ""
-"It is used to produce weapons and tools in the metal workshop, ax workshop, "
-"war mill and helm smithy."
-msgstr "S'usa per produir armes i eines als tallers de metall, de destrals, de guerra i de cascos."
+"It is produced by the smelting works and used to produce weapons and tools "
+"in the metal workshop, ax workshop, war mill and helm smithy."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:10
 msgctxt "empire_ware"
-msgid "Weapons, armor and tools are made of iron."
-msgstr "Les eines, armes i armadures es fabriquen amb ferro."
+msgid ""
+"It is produced by the smelting works. Weapons, armor and tools are made of "
+"iron."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:12
 msgctxt "frisians_ware"
 msgid ""
-"Tools and weapons are made of iron. It is also used as jewellery for fur "
-"garment armor to give it a silver shine."
-msgstr "Les eines i les armes es fabriquen amb ferro. També s'empra com a bijuteria per als vestits de pell, de manera que l'armadura no només protegeix sinó que a més a més té un toc platejat."
+"It is produced by the furnace. Tools and weapons are made of iron. It is "
+"also used as jewellery for fur garment armor to give it a silver shine."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Iron Ore
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:4
 msgctxt "default_ware"
-msgid ""
-"Iron ore is mined in iron mines. It is smelted in a smelting works to "
-"retrieve the iron."
-msgstr "El mineral de ferro s'extreu de les mines de ferro. Es transforma en ferro quan es redueix al forn de metalls."
+msgid "Iron ore is mined in iron mines."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Iron Ore
+#: ../../data/tribes/wares/iron_ore/helptexts.lua:6
+msgctxt "atlanteans_ware"
+msgid "It is smelted in a smelting works to retrieve the iron."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Iron Ore
+#: ../../data/tribes/wares/iron_ore/helptexts.lua:8
+msgctxt "barbarians_ware"
+msgid "It is smelted in a smelting works to retrieve the iron."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Iron Ore
+#: ../../data/tribes/wares/iron_ore/helptexts.lua:10
+msgctxt "frisians_ware"
+msgid "It is smelted in a furnace to retrieve the iron."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Iron Ore
+#: ../../data/tribes/wares/iron_ore/helptexts.lua:12
+msgctxt "empire_ware"
+msgid "It is smelted in a smelting works to retrieve the iron."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:4
@@ -4728,9 +5188,9 @@ msgstr "Les columnes de marbre representen l'elevada cultura de l'Imperi i es ne
 #: ../../data/tribes/wares/mead/helptexts.lua:4
 msgctxt "frisians_ware"
 msgid ""
-"Mead is produced by mead breweries and used in drinking halls for producing "
-"meals. Soldiers drink mead during advanced training."
-msgstr "L'aiguamel es produeix a les cerveseries d'aiguamel i s'empra a les sales de begudes per produir àpats. Els soldats també en beuen durant entrenaments avançats."
+"Mead is produced by mead breweries. Soldiers drink mead during advanced "
+"training."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../data/tribes/wares/meal/helptexts.lua:4

@@ -21,6 +21,7 @@
 #define WL_UI_FSMENU_MAIN_H
 
 #include "ui_basic/button.h"
+#include "ui_basic/icon.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/main_menu.h"
 
@@ -38,6 +39,7 @@ protected:
 private:
 	void layout() override;
 
+	UI::Icon logo_icon_;
 	UI::Button playtutorial;
 	UI::Button singleplayer;
 	UI::Button multiplayer;

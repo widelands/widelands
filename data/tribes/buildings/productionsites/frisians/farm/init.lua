@@ -13,13 +13,13 @@ tribes:new_productionsite_type {
       brick = 3,
       granite = 1,
       log = 2,
-      thatch_reed = 3
+      reed = 3
    },
    return_on_dismantle = {
       brick = 2,
       granite = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
@@ -71,17 +71,17 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
          descname = _"planting barley",
          actions = {
-            "sleep=18000",
-            "callworker=plant"
+            "callworker=plant",
+            "sleep=18000"
          }
       },
       harvest_barley = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
          descname = _"harvesting barley",
          actions = {
-            "sleep=8000",
             "callworker=harvest",
             "animate=working 40000",
+            "sleep=8000",
             "produce=barley" --produces 2 barley per field
          }
       },

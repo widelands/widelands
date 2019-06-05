@@ -14,7 +14,7 @@ tribes:new_productionsite_type {
       brick = 1,
       granite = 2,
       log = 2,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       brick = 1,
@@ -65,10 +65,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _"mining gold",
          actions = {
-            "sleep=5000",
             "return=skipped unless economy needs gold_ore",
             "consume=ration",
-            "sleep=40000",
+            "sleep=45000",
             "animate=working 20000",
             "mine=gold 3 50 5 20", --name radius % chance_empty gain_exp_on_empty
             "produce=gold_ore"

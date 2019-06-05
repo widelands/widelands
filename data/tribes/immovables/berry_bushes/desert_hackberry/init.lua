@@ -8,7 +8,7 @@ terrain_affinity = {
 }
 
 animations = {}
-add_animation(animations, "idle", dirname, "tiny/idle", { 10, 9 })
+add_animation(animations, "idle", dirname .. "tiny", "idle", { 10, 9 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -29,7 +29,7 @@ tribes:new_immovable_type {
 }
 
 animations = {}
-add_animation(animations, "idle", dirname, "small/idle", { 19, 21 })
+add_animation(animations, "idle", dirname .. "small", "idle", { 19, 21 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -50,7 +50,7 @@ tribes:new_immovable_type {
 }
 
 animations = {}
-add_animation(animations, "idle", dirname, "medium/idle", { 21, 27 })
+add_animation(animations, "idle", dirname .. "medium", "idle", { 21, 27 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -71,7 +71,7 @@ tribes:new_immovable_type {
 }
 
 animations = {}
-add_animation(animations, "idle", dirname, "ripe/idle", { 21, 27 })
+add_animation(animations, "idle", dirname .. "ripe", "idle", { 21, 27 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",

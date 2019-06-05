@@ -8,8 +8,8 @@ animations = {
    }
 }
 -- TODO(GunChleoc): Make real oxen animations
-add_walking_animations(animations, "walk", dirname, "walk", {21, 31}, 20)
-add_walking_animations(animations, "walkload", dirname, "walk", {21, 31}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {21, 31}, 20)
+add_directional_animation(animations, "walkload", dirname, "walk", {21, 31}, 10)
 
 
 tribes:new_carrier_type {
@@ -25,4 +25,10 @@ tribes:new_carrier_type {
    ware_hotspot = { -2, 13 },
 
    animations = animations,
+
+   aihints = {
+      preciousness = {
+         barbarians = 2
+      },
+   }
 }

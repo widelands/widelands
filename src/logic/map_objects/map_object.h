@@ -48,6 +48,7 @@ struct DirAnimations;
 namespace Widelands {
 
 class EditorCategory;
+class MapObject;
 class MapObjectLoader;
 class Player;
 struct Path;
@@ -123,17 +124,14 @@ struct MapObjectDescr {
 		return type_;
 	}
 
-	uint32_t get_animation(char const* const anim) const;
-	uint32_t get_animation(const std::string& animname) const;
+	virtual uint32_t get_animation(const std::string& animname, const MapObject* mo) const;
 	uint32_t main_animation() const;
 	std::string get_animation_name(uint32_t) const;  ///< needed for save, debug
 
 	bool is_animation_known(const std::string& name) const;
-	void add_animation(const std::string& name, uint32_t anim);
 
-	/// Sets the directional animations in 'anims' with the animations
-	/// '&lt;prefix&gt;_(ne|e|se|sw|w|nw)'.
-	void add_directional_animation(DirAnimations* anims, const std::string& prefix);
+	/// Preload animation graphics at default scale
+	void load_graphics() const;
 
 	/// Returns the image for the first frame of the idle animation if the MapObject has animations,
 	/// nullptr otherwise
@@ -154,7 +152,13 @@ protected:
 	                    const std::set<uint32_t>& allowed_special);
 	void add_attribute(uint32_t attr);
 
+	/// Sets the directional animations in 'anims' with the animations
+	/// '&lt;basename&gt;_(ne|e|se|sw|w|nw)'.
+	void assign_directional_animation(DirAnimations* anims, const std::string& basename);
+
 private:
+	void add_animations(const LuaTable& table);
+
 	/// Throws an exception if the MapObjectDescr has no representative image
 	void check_representative_image();
 

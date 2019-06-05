@@ -581,6 +581,8 @@ private:
 	uint32_t permanent_;
 };
 
+// TODO(Nordfriese): CmdResetWareTargetQuantity can be removed when we next break savegame
+// compatibility
 struct CmdResetWareTargetQuantity : public CmdChangeTargetQuantity {
 	CmdResetWareTargetQuantity() : CmdChangeTargetQuantity() {
 	}
@@ -629,6 +631,8 @@ private:
 	uint32_t permanent_;
 };
 
+// TODO(Nordfriese): CmdResetWorkerTargetQuantity can be removed when we next break savegame
+// compatibility
 struct CmdResetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 	CmdResetWorkerTargetQuantity() : CmdChangeTargetQuantity() {
 	}
@@ -733,10 +737,10 @@ private:
 };
 
 struct CmdEnemyFlagAction : public PlayerCommand {
-	CmdEnemyFlagAction() : PlayerCommand(), serial(0), number(0) {
+	CmdEnemyFlagAction() : PlayerCommand(), serial(0) {
 	}  // For savegame loading
-	CmdEnemyFlagAction(uint32_t t, int32_t p, const Flag& f, uint32_t num)
-	   : PlayerCommand(t, p), serial(f.serial()), number(num) {
+	CmdEnemyFlagAction(uint32_t t, int32_t p, const Flag& f, const std::vector<Serial>& s)
+	   : PlayerCommand(t, p), serial(f.serial()), soldiers(s) {
 	}
 
 	// Write these commands to a file (for savegames)
@@ -754,7 +758,7 @@ struct CmdEnemyFlagAction : public PlayerCommand {
 
 private:
 	Serial serial;
-	uint8_t number;
+	std::vector<Serial> soldiers;
 };
 
 /// Abstract base for commands about a message.

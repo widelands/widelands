@@ -1,3 +1,4 @@
+add_subdirectory(styles)
 add_subdirectory(text)
 
 # TODO(sirver): Separate this directory into a base directory and one
@@ -5,20 +6,12 @@ add_subdirectory(text)
 
 # Align and color
 
-
-wl_library(graphic_styles
-  SRCS
-    panel_styles.cc
-    panel_styles.h
-  DEPENDS
-    graphic_color
-    graphic_surface
-)
-
 wl_library(graphic_align
   SRCS
     align.h
     align.cc
+  DEPENDS
+    base_geometry
 )
 
 wl_library(graphic_color
@@ -104,8 +97,10 @@ wl_library(graphic_gl_utils
   DEPENDS
     base_exceptions
     base_geometry
+    base_i18n
     base_log
     base_macros
+    graphic_text
     io_fileread
     io_filesystem
 )
@@ -253,6 +248,7 @@ wl_library(graphic_terrain_programs
     logic_constants
     logic_map_objects
     logic_map_objects_description_maintainer
+    wui_mapview_pixelfunctions
 )
 
 
@@ -267,12 +263,6 @@ wl_library(graphic_fonthandler
     graphic_text
 )
 
-wl_library(graphic_text_constants
-  SRCS
-    text_constants.h
-    text_constants.cc
-)
-
 wl_library(graphic_text_layout
   SRCS
     text_layout.cc
@@ -282,8 +272,8 @@ wl_library(graphic_text_layout
     graphic_align
     graphic_color
     graphic_surface
+    graphic_styles
     graphic_text
-    graphic_text_constants
     graphic_fonthandler
     graphic_styles
 )
@@ -302,7 +292,6 @@ wl_library(graphic_wordwrap
     graphic_color
     graphic_fonthandler
     graphic_text
-    graphic_text_constants
     graphic_text_layout
 )
 
@@ -341,7 +330,6 @@ wl_library(graphic
     graphic_render_queue
     graphic_styles
     graphic_surface
-    graphic_text_layout
     io_filesystem
     io_stream
     logic_constants
@@ -353,3 +341,4 @@ wl_library(graphic
     scripting_lua_table
     sound
 )
+

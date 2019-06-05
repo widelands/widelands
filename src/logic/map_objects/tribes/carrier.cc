@@ -70,7 +70,7 @@ void Carrier::road_update(Game& game, State& state) {
 	} else if (signal == "blocked") {
 		// Blocked by an ongoing battle
 		signal_handled();
-		set_animation(game, descr().get_animation("idle"));
+		set_animation(game, descr().get_animation("idle", this));
 		return schedule_act(game, 250);
 	} else if (signal.size()) {
 		// Something else happened (probably a location signal)
@@ -91,7 +91,7 @@ void Carrier::road_update(Game& game, State& state) {
 			// Short delay before we move to pick up
 			state.ivar1 = 1;
 
-			set_animation(game, descr().get_animation("idle"));
+			set_animation(game, descr().get_animation("idle", this));
 			return schedule_act(game, 50);
 		}
 	}
@@ -100,12 +100,12 @@ void Carrier::road_update(Game& game, State& state) {
 
 	// Move into idle position if necessary
 	if (start_task_movepath(game, road.get_path(), road.get_idle_index(),
-	                        descr().get_right_walk_anims(does_carry_ware())))
+	                        descr().get_right_walk_anims(does_carry_ware(), this)))
 		return;
 
 	// Be bored. There's nothing good on TV, either.
 	// TODO(unknown): idle animations
-	set_animation(game, descr().get_animation("idle"));
+	set_animation(game, descr().get_animation("idle", this));
 	state.ivar1 = 1;  //  we are available immediately after an idle phase
 	// subtract maintenance cost and check for road demotion
 	road.charge_wallet(game);
@@ -154,7 +154,7 @@ void Carrier::transport_update(Game& game, State& state) {
 	} else if (signal == "blocked") {
 		// Blocked by an ongoing battle
 		signal_handled();
-		set_animation(game, descr().get_animation("idle"));
+		set_animation(game, descr().get_animation("idle", this));
 		return schedule_act(game, 250);
 	} else if (signal.size()) {
 		molog("[transport]: Interrupted by signal '%s'\n", signal.c_str());
@@ -228,7 +228,8 @@ void Carrier::deliver_to_building(Game& game, State& state) {
 		}
 
 		// No more deliverable wares. Walk out to the flag.
-		return start_task_move(game, WALK_SE, descr().get_right_walk_anims(does_carry_ware()), true);
+		return start_task_move(
+		   game, WALK_SE, descr().get_right_walk_anims(does_carry_ware(), this), true);
 	} else {
 		//  tough luck, the building has disappeared
 		molog("[Carrier]: Building disappeared while in building.\n");
@@ -258,7 +259,7 @@ void Carrier::pickup_from_flag(Game& game, State& state) {
 			road.pay_for_road(game, flag.count_wares_in_queue(otherflag));
 			set_carried_ware(game, ware);
 
-			set_animation(game, descr().get_animation("idle"));
+			set_animation(game, descr().get_animation("idle", this));
 			return schedule_act(game, 20);
 		} else {
 			molog("[Carrier]: Nothing suitable on flag.\n");
@@ -289,7 +290,7 @@ void Carrier::drop_ware(Game& game, State& state) {
 			      "present.\n");
 
 			promised_pickup_to_ = NOONE;
-			set_animation(game, descr().get_animation("idle"));
+			set_animation(game, descr().get_animation("idle", this));
 			return schedule_act(game, 20);
 		}
 
@@ -306,7 +307,7 @@ void Carrier::drop_ware(Game& game, State& state) {
 		road.pay_for_road(game, flag.count_wares_in_queue(otherflag));
 		set_carried_ware(game, other);
 
-		set_animation(game, descr().get_animation("idle"));
+		set_animation(game, descr().get_animation("idle", this));
 		return schedule_act(game, 20);
 	} else {
 		return pop_task(game);
@@ -323,7 +324,8 @@ void Carrier::drop_ware(Game& game, State& state) {
 void Carrier::enter_building(Game& game, State& state) {
 	if (!start_task_walktoflag(game, state.ivar1 ^ 1)) {
 		state.ivar1 = -1;
-		return start_task_move(game, WALK_NW, descr().get_right_walk_anims(does_carry_ware()), true);
+		return start_task_move(
+		   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware(), this), true);
 	}
 }
 
@@ -507,7 +509,8 @@ bool Carrier::start_task_walktoflag(Game& game, int32_t const flag, bool const o
 			--idx;
 	}
 
-	return start_task_movepath(game, path, idx, descr().get_right_walk_anims(does_carry_ware()));
+	return start_task_movepath(
+	   game, path, idx, descr().get_right_walk_anims(does_carry_ware(), this));
 }
 
 void Carrier::log_general_info(const Widelands::EditorGameBase& egbase) const {

@@ -14,12 +14,12 @@ tribes:new_productionsite_type {
       brick = 3,
       granite = 1,
       log = 2,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle = {
       brick = 2,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
@@ -61,9 +61,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
          descname = _"baking bread",
          actions = {
-            "sleep=20000",
             "return=skipped unless economy needs bread_frisians or workers need experience",
             "consume=water barley",
+            "sleep=20000",
             "animate=working 20000",
             "produce=bread_frisians"
          },

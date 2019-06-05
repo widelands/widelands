@@ -82,6 +82,15 @@ wl_library(logic_filesystem_constants
     filesystem_constants.cc
 )
 
+wl_library(logic_objectives
+  SRCS
+    objective.cc
+    objective.h
+  DEPENDS
+    base_i18n
+)
+
+
 wl_library(logic_generic_save_handler
   SRCS
     generic_save_handler.h
@@ -130,11 +139,11 @@ wl_library(logic_map
     graphic_playercolor
     io_fileread
     io_filesystem
-    logic # TODO(GunChleoc): Circular
     logic_constants
     logic_exceptions
     logic_filesystem_constants
     logic_map_objects
+    logic_objectives
     logic_tribe_basic_info
     logic_widelands_geometry
     logic_widelands_geometry_io
@@ -195,7 +204,6 @@ wl_library(logic
     message.h
     message_id.h
     message_queue.h
-    objective.h
     player.cc
     player.h
     player_area.h
@@ -239,7 +247,6 @@ wl_library(logic
     logic_widelands_geometry
     map_io
     map_io_map_loader
-    network # TODO(GunChleoc): Circular dependency
     note_sound
     notifications
     profile

@@ -12,7 +12,7 @@ tribes:new_productionsite_type {
    buildcost = {
       brick = 1,
       log = 2,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       brick = 1,
@@ -46,8 +46,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
          descname = _"planting bushes",
          actions = {
-            "sleep=21000",
-            "callworker=plant"
+            "callworker=plant",
+            "sleep=21000"
          }
       },
    },

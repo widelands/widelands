@@ -103,7 +103,6 @@ wl_library(map_io
     graphic_minimap_renderer
     graphic_playercolor
     graphic_surface
-    helper
     io_fileread
     io_filesystem
     logic
@@ -111,6 +110,7 @@ wl_library(map_io
     logic_exceptions
     logic_map
     logic_map_objects
+    logic_objectives
     logic_widelands_geometry
     logic_widelands_geometry_io
     profile

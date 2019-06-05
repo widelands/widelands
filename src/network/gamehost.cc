@@ -761,15 +761,15 @@ void GameHost::think() {
 	}
 }
 
-void GameHost::send_player_command(Widelands::PlayerCommand& pc) {
-	pc.set_duetime(d->committed_networktime + 1);
+void GameHost::send_player_command(Widelands::PlayerCommand* pc) {
+	pc->set_duetime(d->committed_networktime + 1);
 
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_PLAYERCOMMAND);
-	packet.signed_32(pc.duetime());
-	pc.serialize(packet);
+	packet.signed_32(pc->duetime());
+	pc->serialize(packet);
 	broadcast(packet);
-	d->game->enqueue_command(&pc);
+	d->game->enqueue_command(pc);
 
 	committed_network_time(d->committed_networktime + 1);
 }
@@ -1621,13 +1621,13 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 
 	// Assign the player a name, preferably the name chosen by the client
 	if (playername.empty())  // Make sure there is at least a name base.
-		playername = _("Player");
+		playername = "Player";
 	std::string effective_name = playername;
 
 	if (has_user_name(effective_name, client.usernum)) {
-		uint32_t i = 2;
+		uint32_t i = 1;
 		do {
-			effective_name = (boost::format(_("Player %u")) % i++).str();
+			effective_name = (boost::format("%s%u") % playername % i++).str();
 		} while (has_user_name(effective_name, client.usernum));
 	}
 
@@ -2181,11 +2181,11 @@ void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
 		if (!d->game)
 			throw DisconnectException("PLAYERCMD_WO_GAME");
 		int32_t time = r.signed_32();
-		Widelands::PlayerCommand& plcmd = *Widelands::PlayerCommand::deserialize(r);
+		Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
 		log("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n", i, client.playernum,
-		    static_cast<unsigned int>(plcmd.id()), plcmd.sender(), time);
+		    static_cast<unsigned int>(plcmd->id()), plcmd->sender(), time);
 		receive_client_time(i, time);
-		if (plcmd.sender() != client.playernum + 1)
+		if (plcmd->sender() != client.playernum + 1)
 			throw DisconnectException("PLAYERCMD_FOR_OTHER");
 		send_player_command(plcmd);
 	} break;

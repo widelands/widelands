@@ -36,6 +36,7 @@ enum class NoteId : uint32_t {
 	Ship,
 	Building,
 	Economy,
+	EconomyProfile,
 	GraphicResolutionChanged,
 	NoteExpeditionCanceled,
 	Sound,

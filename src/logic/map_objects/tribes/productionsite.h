@@ -190,8 +190,13 @@ public:
 	uint8_t get_statistics_percent() {
 		return last_stat_percent_;
 	}
+
+	// receives the duration of the last period and the result (true if something was produced)
+	// and sets crude_percent_ to new value
+	void update_crude_statistics(uint32_t, bool);
+
 	uint8_t get_crude_statistics() {
-		return (crude_percent_ + 5000) / 10000;
+		return crude_percent_ / 100;
 	}
 
 	const std::string& production_result() const {
@@ -302,13 +307,13 @@ protected:  // TrainingSite must have access to this stuff
 
 	int32_t fetchfromflag_;  ///< Number of wares to fetch from flag
 
-	/// If a program has ended with the result Skipped, that program may not
+	/// If a program has ended with the result Failed or Skipped, that program may not
 	/// start again until a certain time has passed. This is a map from program
-	/// name to game time. When a program ends with the result Skipped, its name
+	/// name to game time. When a program ends with the result Failed or Skipped, its name
 	/// is added to this map, with the current game time. (When the program ends
 	/// with any other result, its name is removed from the map.)
-	using SkippedPrograms = std::map<std::string, Time>;
-	SkippedPrograms skipped_programs_;
+	using FailedSkippedPrograms = std::map<std::string, Time>;
+	FailedSkippedPrograms failed_skipped_programs_;
 
 	using Stack = std::vector<State>;
 	Stack stack_;           ///<  program stack
@@ -322,8 +327,9 @@ protected:  // TrainingSite must have access to this stuff
 	std::vector<bool> statistics_;
 	uint8_t last_stat_percent_;
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:
-	// 0-10)
-	uint32_t crude_percent_;
+	// 0-100)
+	uint32_t crude_percent_;  // basically this is percent * 100 to avoid floats
+	uint32_t last_program_end_time;
 	bool is_stopped_;
 	std::string default_anim_;  // normally "idle", "empty", if empty mine.
 
@@ -332,6 +338,8 @@ private:
 	Trend trend_;
 	std::string statistics_string_on_changed_statistics_;
 	std::string production_result_;  // hover tooltip text
+
+	int32_t main_worker_;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSite);
 };

@@ -14,13 +14,13 @@ tribes:new_productionsite_type {
       brick = 3,
       granite = 1,
       log = 3,
-      thatch_reed = 2,
+      reed = 2,
       cloth = 1
    },
    return_on_dismantle = {
       brick = 2,
       log = 2,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
@@ -66,9 +66,8 @@ tribes:new_productionsite_type {
          descname = _"constructing a ship",
          actions = {
             "checkmap=seafaring",
-            "sleep=10000",
             "construct=frisians_shipconstruction buildship 6",
-            "sleep=10000",
+            "sleep=20000",
          }
       },
       ship_preparation = {

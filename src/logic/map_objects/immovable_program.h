@@ -65,12 +65,12 @@ struct ImmovableProgram {
 	struct ActAnimate : public Action {
 		ActAnimate(char* parameters, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
-		uint32_t animation() const {
-			return id_;
+		const std::string& animation() const {
+			return animation_name_;
 		}
 
 	private:
-		uint32_t id_;
+		std::string animation_name_;
 		Duration duration_;
 	};
 
@@ -175,7 +175,7 @@ struct ImmovableProgram {
 		}
 
 	private:
-		uint32_t animid_;
+		std::string animation_name_;
 		Duration buildtime_;
 		Duration decaytime_;
 	};

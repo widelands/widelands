@@ -47,7 +47,8 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	game_.game_controller()->set_desired_speed(0);
 	// Init boxes
 	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, PADDING);
-	title_area_ = new UI::Textarea(vbox, "", UI::Align::kCenter);
+	title_area_ = new UI::Textarea(
+	   vbox, "", UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle));
 	vbox->add(title_area_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	vbox->add_space(PADDING);
 
@@ -103,9 +104,6 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	players_table_->add_column(80, _("Team"), "", UI::Align::kCenter);
 	players_table_->add_column(100, _("Status"), "", UI::Align::kCenter);
 	players_table_->add_column(100, _("Time"), "", UI::Align::kCenter);
-
-	// Prepare Elements
-	title_area_->set_fontsize(UI_FONT_SIZE_BIG);
 
 	// Connections
 	continue_button_->sigclicked.connect(boost::bind(&GameSummaryScreen::continue_clicked, this));

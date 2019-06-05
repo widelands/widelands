@@ -12,11 +12,11 @@ tribes:new_productionsite_type {
    buildcost = {
       brick = 1,
       log = 1,
-      thatch_reed = 3
+      reed = 3
    },
    return_on_dismantle = {
       brick = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
@@ -50,8 +50,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "sleep=45000",
-            "callworker=bees"
+            "callworker=bees",
+            "sleep=45000"
          }
       },
    },

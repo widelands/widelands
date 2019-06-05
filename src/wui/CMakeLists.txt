@@ -4,6 +4,7 @@ wl_library(wui_sound_options
     sound_options.h
   DEPENDS
     base_i18n
+    graphic_styles
     sound
     ui_basic
 )
@@ -26,6 +27,7 @@ wl_library(wui_chat_ui
     graphic
     graphic_color
     graphic_fonthandler
+    graphic_playercolor
     graphic_text
     graphic_text_layout
     logic
@@ -44,8 +46,10 @@ wl_library(wui_economy_options
     graphic
     logic
     logic_commands
+    logic_filesystem_constants
     logic_map_objects
     notifications
+    profile
     ui_basic
     wui_waresdisplay
 )
@@ -86,10 +90,11 @@ wl_library(wui_common_gamedetails
     base_time_string
     helper
     game_io
+    graphic
     graphic_fonthandler
     graphic_image_io
     graphic_surface
-    graphic_text_constants
+    graphic_text_layout
     io_filesystem
     logic
     logic_constants
@@ -115,8 +120,6 @@ wl_library(wui_common_mapdetails
     base_i18n
     base_log
     graphic
-    graphic_fonthandler
-    graphic_text_constants
     graphic_text_layout
     io_filesystem
     logic_game_controller
@@ -292,7 +295,6 @@ wl_library(wui
     graphic_playercolor
     graphic_surface
     graphic_text
-    graphic_text_constants
     graphic_text_layout
     io_fileread
     io_filesystem
@@ -305,6 +307,7 @@ wl_library(wui
     logic_generic_save_handler
     logic_map
     logic_map_objects
+    logic_objectives
     logic_tribe_basic_info
     logic_widelands_geometry
     network

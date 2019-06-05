@@ -12,7 +12,7 @@ tribes:new_productionsite_type {
    buildcost = {
       brick = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       brick = 1,
@@ -50,8 +50,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
          descname = _"fishing",
          actions = {
-            "sleep=16000",
-            "callworker=fish"
+            "callworker=fish",
+            "sleep=16000" -- TODO(stonerl): reduce to 3000 and move 13000 to the worker
          }
       },
    },

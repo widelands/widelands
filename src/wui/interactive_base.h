@@ -46,6 +46,12 @@ struct CoordPath;
 class EdgeOverlayManager;
 class UniqueWindowHandler;
 
+struct WorkareaPreview {
+	Widelands::Coords coords;
+	const WorkareaInfo* info;
+	std::map<Widelands::TCoords<>, uint32_t> data;
+};
+
 /**
  * This is used to represent the code that InteractivePlayer and
  * EditorInteractive share.
@@ -56,6 +62,8 @@ public:
 		dfShowCensus = 1,      ///< show census report on buildings
 		dfShowStatistics = 2,  ///< show statistics report on buildings
 		dfDebug = 4,           ///< general debugging info
+		dfShowWorkareaOverlap =
+		   8,  ///< highlight overlapping workareas when placing a constructionsite
 	};
 
 	// Overlays displayed while a road is under construction.
@@ -84,7 +92,10 @@ public:
 	}
 
 	void show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords);
-	void hide_workarea(const Widelands::Coords& coords);
+	void show_workarea(const WorkareaInfo& workarea_info,
+	                   Widelands::Coords coords,
+	                   std::map<Widelands::TCoords<>, uint32_t>& extra_data);
+	void hide_workarea(const Widelands::Coords& coords, bool is_additional);
 
 	bool has_expedition_port_space(const Widelands::Coords&) const;
 	std::map<Widelands::Ship*, Widelands::Coords>& get_expedition_port_spaces() {
@@ -236,7 +247,8 @@ protected:
 	TextToDraw get_text_to_draw() const;
 
 	// Returns the current overlays for the work area previews.
-	Workareas get_workarea_overlays(const Widelands::Map& map) const;
+	Workareas get_workarea_overlays(const Widelands::Map& map);
+	static WorkareasEntry get_workarea_overlay(const Widelands::Map&, const WorkareaPreview&);
 
 	// Returns the 'BuildhelpOverlay' for 'caps' or nullptr if there is no help
 	// to be displayed on this field.
@@ -292,9 +304,9 @@ private:
 	MiniMap::Registry minimap_registry_;
 	QuickNavigation quick_navigation_;
 
-	// The currently enabled work area previews. They are keyed by the
-	// coordinate that the building that shows the work area is positioned.
-	std::map<Widelands::Coords, const WorkareaInfo*> workarea_previews_;
+	// The currently enabled work area previews
+	std::unordered_set<std::unique_ptr<WorkareaPreview>> workarea_previews_;
+	std::unique_ptr<Workareas> workareas_cache_;
 
 	std::map<Widelands::Ship*, Widelands::Coords> expedition_port_spaces_;
 
