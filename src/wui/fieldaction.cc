@@ -779,7 +779,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						continue;
 					}
 					const Widelands::BuildingDescr* d = nullptr;
-					bool& positive;
+					bool positive;
 					if (imm_type == Widelands::MapObjectType::CONSTRUCTIONSITE) {
 						upcast(Widelands::ConstructionSite, cs, imm);
 						d = cs->get_info().becomes;
