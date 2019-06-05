@@ -44,7 +44,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "atlanteans_coalmine" = false,
+      atlanteans_coalmine = false,
    },
 
    inputs = {

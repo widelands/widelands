@@ -47,7 +47,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "barbarians_granitemine" = false,
+      barbarians_granitemine = false,
    },
 
    inputs = {

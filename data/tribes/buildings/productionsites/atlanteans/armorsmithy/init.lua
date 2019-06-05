@@ -63,8 +63,8 @@ dirname = path.dirname(__file__)
 --        each other negatively. Example for a fishbreeder’s house::
 --
 --            indicate_workarea_overlaps = {
---               "atlanteans_fishers_house" = true,
---               "atlanteans_fishbreeders_house" = false
+--               atlanteans_fishers_house = true,
+--               atlanteans_fishbreeders_house = false
 --            },
 --
 --    **out_of_resource_notification**.

@@ -39,8 +39,8 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "empire_ironmine" = false,
-      "empire_ironmine_deep" = false,
+      empire_ironmine = false,
+      empire_ironmine_deep = false,
    },
 
    working_positions = {

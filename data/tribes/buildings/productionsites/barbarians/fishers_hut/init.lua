@@ -48,7 +48,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "barbarians_fishers_hut" = false,
+      barbarians_fishers_hut = false,
    },
 
    programs = {

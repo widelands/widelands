@@ -33,7 +33,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "empire_quarry" = false,
+      empire_quarry = false,
    },
 
    outputs = {

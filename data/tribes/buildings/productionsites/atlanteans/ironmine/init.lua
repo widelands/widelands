@@ -20,7 +20,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "atlanteans_ironmine" = false,
+      atlanteans_ironmine = false,
    },
 
    animations = {

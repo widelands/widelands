@@ -44,7 +44,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "atlanteans_well" = false,
+      atlanteans_well = false,
    },
 
    programs = {

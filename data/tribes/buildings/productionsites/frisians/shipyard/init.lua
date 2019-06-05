@@ -42,7 +42,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "frisians_shipyard" = false,
+      frisians_shipyard = false,
    },
 
    working_positions = {

@@ -48,9 +48,9 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "barbarians_coalmine" = false,
-      "barbarians_coalmine_deep" = false,
-      "barbarians_coalmine_deeper" = false,
+      barbarians_coalmine = false,
+      barbarians_coalmine_deep = false,
+      barbarians_coalmine_deeper = false,
    },
 
    inputs = {

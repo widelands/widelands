@@ -45,8 +45,8 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "barbarians_rangers_hut" = true,
-      "barbarians_lumberjacks_hut" = false,
+      barbarians_rangers_hut = true,
+      barbarians_lumberjacks_hut = false,
    },
 
    programs = {

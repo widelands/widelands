@@ -38,8 +38,8 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "atlanteans_foresters_house" = true,
-      "atlanteans_woodcutters_house" = false,
+      atlanteans_foresters_house = true,
+      atlanteans_woodcutters_house = false,
    },
 
    programs = {

@@ -39,9 +39,9 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "barbarians_rangers_hut" = false,
-      "barbarians_reed_yard" = false,
-      "barbarians_farm" = false,
+      barbarians_rangers_hut = false,
+      barbarians_reed_yard = false,
+      barbarians_farm = false,
    },
 
    programs = {

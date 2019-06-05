@@ -37,7 +37,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "frisians_hunters_house" = false,
+      frisians_hunters_house = false,
    },
 
    working_positions = {

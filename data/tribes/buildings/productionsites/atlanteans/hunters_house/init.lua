@@ -39,7 +39,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "atlanteans_hunters_house" = false,
+      atlanteans_hunters_house = false,
    },
 
    programs = {

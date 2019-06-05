@@ -56,7 +56,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "atlanteans_crystalmine" = false,
+      atlanteans_crystalmine = false,
    },
 
    programs = {

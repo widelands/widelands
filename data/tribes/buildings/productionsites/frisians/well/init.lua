@@ -45,7 +45,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "frisians_well" = false,
+      frisians_well = false,
    },
 
    programs = {

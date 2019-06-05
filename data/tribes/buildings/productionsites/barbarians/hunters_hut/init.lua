@@ -46,8 +46,8 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "barbarians_hunters_hut" = false,
-      "barbarians_gamekeepers_hut" = true,
+      barbarians_hunters_hut = false,
+      barbarians_gamekeepers_hut = true,
    },
 
    outputs = {

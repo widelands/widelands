@@ -43,9 +43,9 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "atlanteans_blackroot_farm" = false,
-      "atlanteans_farm" = false,
-      "atlanteans_foresters_house" = false,
+      atlanteans_blackroot_farm = false,
+      atlanteans_farm = false,
+      atlanteans_foresters_house = false,
    },
 
    programs = {

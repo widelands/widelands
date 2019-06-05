@@ -44,7 +44,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "barbarians_quarry" = false,
+      barbarians_quarry = false,
    },
 
    programs = {

@@ -53,8 +53,8 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "frisians_coalmine" = false,
-      "frisians_coalmine_deep" = false,
+      frisians_coalmine = false,
+      frisians_coalmine_deep = false,
    },
 
    inputs = {
