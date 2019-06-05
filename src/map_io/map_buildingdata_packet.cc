@@ -590,8 +590,9 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 						}
 						found_working_position = true;
 						break;
-					} else
+					} else {
 						wp += count;
+					}
 				}
 
 				if (!found_working_position)
@@ -626,6 +627,9 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 						break;
 					} else {
 						wp += count;
+					}
+					if (found_working_position) {
+						break;
 					}
 				}
 
