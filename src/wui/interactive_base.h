@@ -62,6 +62,8 @@ public:
 		dfShowCensus = 1,      ///< show census report on buildings
 		dfShowStatistics = 2,  ///< show statistics report on buildings
 		dfDebug = 4,           ///< general debugging info
+		dfShowWorkareaOverlap =
+		   8,  ///< highlight overlapping workareas when placing a constructionsite
 	};
 
 	// Overlays displayed while a road is under construction.

@@ -20,7 +20,7 @@
 #include "ui_fsmenu/multiplayer.h"
 
 #include "base/i18n.h"
-#include "graphic/text_constants.h"
+#include "graphic/graphic.h"
 #include "network/internet_gaming.h"
 #include "profile/profile.h"
 #include "random/random.h"
@@ -31,7 +31,14 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
    : FullscreenMenuMainMenu(),
 
      // Title
-     title(this, 0, 0, _("Choose game type"), UI::Align::kCenter),
+     title(this,
+           0,
+           0,
+           0,
+           0,
+           _("Choose game type"),
+           UI::Align::kCenter,
+           g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Buttons
      metaserver(
@@ -54,7 +61,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 	   boost::bind(&FullscreenMenuMultiPlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kBack));
 
-	title.set_fontsize(fs_big());
+	title.set_font_scale(scale_factor());
 
 	vbox_.add(&metaserver, UI::Box::Resizing::kFullSize);
 	vbox_.add(&showloginbox, UI::Box::Resizing::kFullSize);

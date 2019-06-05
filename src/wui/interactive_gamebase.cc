@@ -26,7 +26,6 @@
 #include "base/macros.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -123,18 +122,19 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 		uint32_t const desired = game_controller->desired_speed();
 		if (real == desired) {
 			if (real != 1000) {
-				game_speed = as_condensed(speed_string(real));
+				game_speed = speed_string(real);
 			}
 		} else {
-			game_speed = as_condensed((boost::format
-			                           /** TRANSLATORS: actual_speed (desired_speed) */
-			                           (_("%1$s (%2$s)")) %
-			                           speed_string(real) % speed_string(desired))
-			                             .str());
+			game_speed = (boost::format
+			              /** TRANSLATORS: actual_speed (desired_speed) */
+			              (_("%1$s (%2$s)")) %
+			              speed_string(real) % speed_string(desired))
+			                .str();
 		}
 
 		if (!game_speed.empty()) {
-			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(game_speed);
+			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
+			   as_richtext_paragraph(game_speed, UI::FontStyle::kWuiGameSpeedAndCoordinates));
 			rendered_text->draw(dst, Vector2i(get_w() - 5, 5), UI::Align::kRight);
 		}
 	}

@@ -279,19 +279,23 @@ uint32_t SoldierDescr::get_animation(const std::string& anim, const MapObject* m
 	throw GameDataError("This soldier does not have an idle animation for this training level!");
 }
 
-const DirAnimations& SoldierDescr::get_right_walk_anims(bool const ware,
-                                                        const Worker* worker) const {
-	const Soldier* soldier = dynamic_cast<const Soldier*>(worker);
+const DirAnimations& SoldierDescr::get_right_walk_anims(bool const ware, Worker* worker) const {
+	Soldier* soldier = dynamic_cast<Soldier*>(worker);
 	if (!soldier) {
 		return WorkerDescr::get_right_walk_anims(ware, worker);
 	}
-	DirAnimations* anim = new DirAnimations();
+	auto& cache = soldier->get_walking_animations_cache();
+	if (cache.first && cache.first->matches(soldier)) {
+		return *cache.second;
+	}
 	for (const auto& pair : walk_name_) {
 		if (pair.first->matches(soldier)) {
+			cache.first.reset(new SoldierLevelRange(*pair.first));
+			cache.second.reset(new DirAnimations());
 			for (uint8_t dir = 1; dir <= 6; ++dir) {
-				anim->set_animation(dir, get_animation(pair.second.at(dir), worker));
+				cache.second->set_animation(dir, get_animation(pair.second.at(dir), worker));
 			}
-			return *anim;
+			return *cache.second;
 		}
 	}
 	throw GameDataError(

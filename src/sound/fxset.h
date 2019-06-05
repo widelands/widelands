@@ -20,7 +20,6 @@
 #ifndef WL_SOUND_FXSET_H
 #define WL_SOUND_FXSET_H
 
-#include <set>
 #include <string>
 #include <vector>
 
@@ -49,6 +48,9 @@ struct FXset {
 	 */
 	Mix_Chunk* get_fx(uint32_t random);
 
+	/// Load the sound files into memory
+	void load_sound_files();
+
 private:
 	/** Load an audio file into memory.
 	 * \param path      the effect to be loaded
@@ -69,7 +71,7 @@ private:
 	 * This will be cleared when the effects have been loaded into memory by \ref get_fx on first
 	 * play.
 	 */
-	std::set<std::string> paths_;
+	std::vector<std::string> paths_;
 
 	/// The collection of sound effects, to be loaded on demand
 	std::vector<Mix_Chunk*> fxs_;

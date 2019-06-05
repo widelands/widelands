@@ -19,7 +19,7 @@ animations = {
    },
 }
 
-add_walking_animations(animations, "walk", dirname, "walk", {13, 15}, 20)
+add_directional_animation(animations, "walk", dirname, "walk", {13, 15}, 20)
 
 -- RST
 -- .. function:: new_critter_type{table}
