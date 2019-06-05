@@ -37,7 +37,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "atlanteans_quarry",
+      "atlanteans_quarry" = false,
    },
 
    programs = {

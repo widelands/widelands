@@ -58,9 +58,14 @@ dirname = path.dirname(__file__)
 --    **indicate_workarea_overlaps**
 --        *Optional*. The names of other productionsites whose workareas should be highlighted
 --        if theirs overlap with this building’s workarea while the player is placing a
---        building of this type e.g.::
+--        building of this type. The overlaps can be shown either as desired (`true`), if the
+--        proximity of these buildings is favourable, or as negative (`false`), if they influence
+--        each other negatively. Example for a fishbreeder’s house::
 --
---            indicate_workarea_overlaps = { "atlanteans_farm", "atlanteans_blackroot_farm" },
+--            indicate_workarea_overlaps = {
+--               "atlanteans_fishers_house" = true,
+--               "atlanteans_fishbreeders_house" = false
+--            },
 --
 --    **out_of_resource_notification**.
 --        *Optional*. This table defines the message sent by the productionsite

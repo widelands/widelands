@@ -44,8 +44,8 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "frisians_foresters_house",
-      "frisians_woodcutters_house",
+      "frisians_foresters_house" = true,
+      "frisians_woodcutters_house" = false,
    },
 
    programs = {

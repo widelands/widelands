@@ -38,8 +38,8 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "empire_lumberjacks_house",
-      "empire_foresters_house",
+      "empire_lumberjacks_house" = false,
+      "empire_foresters_house" = true,
    },
 
    programs = {

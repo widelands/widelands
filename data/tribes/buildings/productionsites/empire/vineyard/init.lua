@@ -45,9 +45,9 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "empire_vineyard",
-      "empire_farm",
-      "empire_foresters_house",
+      "empire_vineyard" = false,
+      "empire_farm" = false,
+      "empire_foresters_house" = false,
    },
 
    programs = {

@@ -44,10 +44,10 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "barbarians_rangers_hut",
-      "barbarians_lumberjacks_hut",
-      "barbarians_farm",
-      "barbarians_reed_yard",
+      "barbarians_rangers_hut" = false,
+      "barbarians_lumberjacks_hut" = true,
+      "barbarians_farm" = false,
+      "barbarians_reed_yard" = false,
    },
 
    programs = {

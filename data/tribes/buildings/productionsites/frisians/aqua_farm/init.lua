@@ -50,8 +50,8 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "frisians_aqua_farm",
-      "frisians_clay_pit",
+      "frisians_aqua_farm" = false,
+      "frisians_clay_pit" = true,
    },
 
    programs = {

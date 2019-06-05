@@ -48,7 +48,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "empire_shipyard",
+      "empire_shipyard" = false,
    },
 
    working_positions = {

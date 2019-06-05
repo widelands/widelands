@@ -38,10 +38,10 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "atlanteans_blackroot_farm",
-      "atlanteans_farm",
-      "atlanteans_foresters_house",
-      "atlanteans_woodcutters_house",
+      "atlanteans_blackroot_farm" = false,
+      "atlanteans_farm" = false,
+      "atlanteans_foresters_house" = false,
+      "atlanteans_woodcutters_house" = true,
    },
 
    programs = {

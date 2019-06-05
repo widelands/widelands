@@ -40,7 +40,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "frisians_quarry",
+      "frisians_quarry" = false,
    },
 
    outputs = {

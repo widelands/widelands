@@ -209,20 +209,21 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	}
 
 	if (table.has_key("indicate_workarea_overlaps")) {
-		for (const std::string& s : table.get_table("indicate_workarea_overlaps")->array_entries<std::string>()) {
-			if (highlight_overlapping_workarea_for_.count(s)) {
+		items_table = table.get_table("indicate_workarea_overlaps");
+		for (const std::string& s : items_table->keys<std::string>()) {
+			if (highlight_overlapping_workarea_for_.find(s) != highlight_overlapping_workarea_for_.end()) {
 				throw wexception("indicate_workarea_overlaps has duplicate entry");
 			}
-			highlight_overlapping_workarea_for_.insert(s);
+			highlight_overlapping_workarea_for_.emplace(s, items_table->get_bool(s));
 		}
 	}
 	if (workarea_info().empty() ^ highlight_overlapping_workarea_for_.empty()) {
 		if (highlight_overlapping_workarea_for_.empty()) {
-			log("WARNING: Productionsite %s has a workarea but does not warn about any conflicting buildings\n",
+			log("WARNING: Productionsite %s has a workarea but does not inform about any conflicting buildings\n",
 					name().c_str());
 		} else {
 			throw GameDataError(
-					"Productionsite %s without a workarea must not warn about conflicting buildings",
+					"Productionsite %s without a workarea must not inform about conflicting buildings",
 					name().c_str());
 		}
 	}

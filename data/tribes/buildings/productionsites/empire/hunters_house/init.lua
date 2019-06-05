@@ -39,7 +39,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "empire_hunters_house",
+      "empire_hunters_house" = false,
    },
 
    programs = {

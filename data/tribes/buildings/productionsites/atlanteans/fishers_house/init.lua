@@ -42,8 +42,8 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "atlanteans_fishers_house",
-      "atlanteans_fishbreeders_house",
+      "atlanteans_fishers_house" = false,
+      "atlanteans_fishbreeders_house" = true,
    },
 
    programs = {

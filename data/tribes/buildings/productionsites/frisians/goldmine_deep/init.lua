@@ -47,8 +47,8 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "frisians_goldmine",
-      "frisians_goldmine_deep",
+      "frisians_goldmine" = false,
+      "frisians_goldmine_deep" = false,
    },
 
    working_positions = {

@@ -43,7 +43,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "empire_well",
+      "empire_well" = false,
    },
 
    programs = {

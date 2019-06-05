@@ -43,8 +43,8 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "frisians_ironmine",
-      "frisians_ironmine_deep",
+      "frisians_ironmine" = false,
+      "frisians_ironmine_deep" = false,
    },
 
    aihints = {

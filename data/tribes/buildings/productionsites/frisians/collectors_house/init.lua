@@ -32,8 +32,8 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "frisians_berry_farm",
-      "frisians_collectors_house",
+      "frisians_berry_farm" = true,
+      "frisians_collectors_house" = false,
    },
 
    aihints = {

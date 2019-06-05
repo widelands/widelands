@@ -38,10 +38,10 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "empire_farm",
-      "empire_vineyard",
-      "empire_lumberjacks_house",
-      "empire_foresters_house",
+      "empire_farm" = false,
+      "empire_vineyard" = false,
+      "empire_lumberjacks_house" = true,
+      "empire_foresters_house" = false,
    },
 
    programs = {

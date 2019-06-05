@@ -46,8 +46,8 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "empire_coalmine",
-      "empire_coalmine_deep",
+      "empire_coalmine" = false,
+      "empire_coalmine_deep" = false,
    },
 
    inputs = {

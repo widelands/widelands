@@ -32,10 +32,10 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "frisians_berry_farm",
-      "frisians_reed_farm",
-      "frisians_farm",
-      "frisians_beekeepers_house",
+      "frisians_berry_farm" = true,
+      "frisians_reed_farm" = true,
+      "frisians_farm" = true,
+      "frisians_beekeepers_house" = false,
    },
 
    aihints = {

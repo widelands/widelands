@@ -59,7 +59,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "atlanteans_shipyard",
+      "atlanteans_shipyard" = false,
    },
 
    programs = {

@@ -42,9 +42,9 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      "barbarians_ironmine",
-      "barbarians_ironmine_deep",
-      "barbarians_ironmine_deeper",
+      "barbarians_ironmine" = false,
+      "barbarians_ironmine_deep" = false,
+      "barbarians_ironmine_deeper" = false,
    },
 
    working_positions = {
