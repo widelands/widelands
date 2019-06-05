@@ -915,6 +915,7 @@ void InternetGaming::send(const std::string& msg) {
 			format_and_add_chat("", "", true, _("/announce <msg> send a one time system message"));
 			format_and_add_chat("", "", true, _("/warn <user> <msg> send a private system message to the given user"));
 			format_and_add_chat("", "", true, _("/kick <user|game> removes the given user or game from the metaserver"));
+			format_and_add_chat("", "", true, _("/ban <user> bans a user for 24 hours from the metaserver"));
 			return;
 		}
 
@@ -961,9 +962,10 @@ void InternetGaming::send(const std::string& msg) {
 			m.string(arg);
 			net->send(m);
 			return;
-		} else if (!arg.empty() && (cmd == "warn" || cmd == "kick")) {
+		} else if (!arg.empty() && (cmd == "warn" || cmd == "kick" || cmd == "ban")) {
 			// warn a user by sending a private system message or
-			// kick a user or game from the metaserver
+			// kick a user (for 5 minutes) or a game from the metaserver or
+			// ban a user for 24 hours
 			SendPacket m;
 			m.string(IGPCMD_CMD);
 			m.string(cmd);
