@@ -52,8 +52,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
          descname = _"fishing",
          actions = {
-            "sleep=18000",
-            "callworker=fish"
+            "callworker=fish",
+            "sleep=10500"
          }
       },
    },
