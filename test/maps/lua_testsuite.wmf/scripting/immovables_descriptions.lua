@@ -623,5 +623,5 @@ function test_descr:test_name()
 end
 
 function test_descr:test_icon_name()
-   assert_equal("tribes/ships/empire/ship/menu.png", egbase:get_ship_description("empire_ship").icon_name)
+   assert_equal("tribes/ships/empire/menu.png", egbase:get_ship_description("empire_ship").icon_name)
 end
