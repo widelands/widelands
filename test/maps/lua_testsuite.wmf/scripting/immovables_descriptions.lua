@@ -35,6 +35,29 @@ function test_descr:test_immovable_species()
    assert_equal("Alder", egbase:get_immovable_description("alder_summer_old").species)
 end
 
+function test_descr:test_immovable_becomes()
+   -- Test multiple transform entries
+   local becomes = egbase:get_immovable_description("aspen_summer_old").becomes
+   assert_equal(2, #becomes)
+   assert_equal("deadtree2", becomes[1])
+   assert_equal("fallentree", becomes[2])
+   -- Test grow
+   becomes = egbase:get_immovable_description("aspen_summer_mature").becomes
+   assert_equal(1, #becomes)
+   assert_equal("aspen_summer_old", becomes[1])
+   -- Test none
+   becomes = egbase:get_immovable_description("fallentree").becomes
+   assert_equal(0, #becomes)
+   -- Test tribe immovable
+   becomes = egbase:get_immovable_description("wheatfield_ripe").becomes
+   assert_equal(1, #becomes)
+   assert_equal("wheatfield_harvested", becomes[1])
+   -- Test ship
+   becomes = egbase:get_immovable_description("atlanteans_shipconstruction").becomes
+   assert_equal(1, #becomes)
+   assert_equal("atlanteans_ship", becomes[1])
+end
+
 function test_descr:test_immovable_buildcost()
    local buildcost = egbase:get_immovable_description(
       "atlanteans_shipconstruction").buildcost
@@ -577,4 +600,28 @@ function test_descr:test_worker_buildable()
    assert_equal(true, egbase:get_worker_description("barbarians_carrier").buildable)
    assert_equal(true, egbase:get_worker_description("barbarians_miner").buildable)
    assert_equal(false, egbase:get_worker_description("barbarians_miner_chief").buildable)
+end
+
+
+--  =======================================================
+--  ****************** ShipDescription ******************
+--  =======================================================
+
+function test_descr:test_ship_descr()
+   assert_error("Unknown ship", function() egbase:get_ship_description("XXX") end)
+   assert_error("Wrong number of parameters: 2", function() egbase:get_ship_description("XXX","YYY") end)
+end
+
+-- This is actually a property of MapOjectDescription
+function test_descr:test_descname()
+   assert_equal("Ship", egbase:get_ship_description("atlanteans_ship").descname)
+end
+
+-- This is actually a property of MapOjectDescription
+function test_descr:test_name()
+   assert_equal("barbarians_ship", egbase:get_ship_description("barbarians_ship").name)
+end
+
+function test_descr:test_icon_name()
+   assert_equal("tribes/ships/empire/ship/menu.png", egbase:get_ship_description("empire_ship").icon_name)
 end

@@ -186,7 +186,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 		}
 		try {
 			programs_[program_name] = new ImmovableProgram(
-			   program_name, programs->get_table(program_name)->array_entries<std::string>(), *this);
+			   program_name, programs->get_table(program_name)->array_entries<std::string>(), this);
 		} catch (const std::exception& e) {
 			throw GameDataError("%s: Error in immovable program %s: %s", name().c_str(), program_name.c_str(), e.what());
 		}
@@ -229,6 +229,10 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 
 const EditorCategory* ImmovableDescr::editor_category() const {
 	return editor_category_;
+}
+
+void ImmovableDescr::add_becomes(const std::string& bob_or_immovable) {
+	becomes_.insert(bob_or_immovable);
 }
 
 bool ImmovableDescr::has_terrain_affinity() const {

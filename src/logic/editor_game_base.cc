@@ -290,6 +290,7 @@ void EditorGameBase::postload() {
 
 	// Postload tribes
 	assert(tribes_);
+	world_->postload();
 	tribes_->postload();
 
 	for (DescriptionIndex i = 0; i < tribes_->nrtribes(); i++) {

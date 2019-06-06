@@ -66,6 +66,19 @@ void World::load_graphics() {
 	}
 }
 
+void World::postload() {
+
+	// Validate immovable grows/transforms data
+	for (DescriptionIndex i = 0; i < immovables_->size(); ++i) {
+		const ImmovableDescr& imm = immovables_->get(i);
+		for (const std::string& target : imm.becomes()) {
+			if (get_immovable_index(target) == INVALID_INDEX) {
+				throw GameDataError("Unknown grow/transform target '%s' for world immovable '%s'", target.c_str(), imm.name().c_str());
+			}
+		}
+	}
+}
+
 const DescriptionMaintainer<TerrainDescription>& World::terrains() const {
 	return *terrains_;
 }

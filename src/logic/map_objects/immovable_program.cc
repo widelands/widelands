@@ -37,7 +37,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name, std::unique_ptr
 
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
                                    const std::vector<std::string>& lines,
-                                   const ImmovableDescr& immovable)
+                                   ImmovableDescr* immovable)
    : MapObjectProgram(init_name) {
 	for (const std::string& line : lines) {
 		if (line.empty()) {
@@ -47,7 +47,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 			ProgramParseInput parseinput = parse_program_string(line);
 
 			if (parseinput.name == "animate") {
-				actions_.push_back(std::unique_ptr<Action>(new ActAnimate(parseinput.arguments, immovable)));
+				actions_.push_back(std::unique_ptr<Action>(new ActAnimate(parseinput.arguments, *immovable)));
 			} else if (parseinput.name == "transform") {
 				actions_.push_back(std::unique_ptr<Action>(new ActTransform(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "grow") {
@@ -55,11 +55,11 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 			} else if (parseinput.name == "remove") {
 				actions_.push_back(std::unique_ptr<Action>(new ActRemove(parseinput.arguments)));
 			} else if (parseinput.name == "seed") {
-				actions_.push_back(std::unique_ptr<Action>(new ActSeed(parseinput.arguments, immovable)));
+				actions_.push_back(std::unique_ptr<Action>(new ActSeed(parseinput.arguments, *immovable)));
 			} else if (parseinput.name == "playsound") {
 				actions_.push_back(std::unique_ptr<Action>(new ActPlaySound(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
-				actions_.push_back(std::unique_ptr<Action>(new ActConstruct(parseinput.arguments, immovable)));
+				actions_.push_back(std::unique_ptr<Action>(new ActConstruct(parseinput.arguments, *immovable)));
 			} else {
 				throw GameDataError("Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
 			}
@@ -100,7 +100,7 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 	immovable.program_step(game);
 }
 
-ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments, const ImmovableDescr& descr) {
+ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments, ImmovableDescr* descr) {
 	if (arguments.empty()) {
 		throw GameDataError("Usage: transform=[bob] <name> [<probability>]");
 	}
@@ -114,11 +114,11 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 			} else if (argument[0] >= '0' && argument[0] <= '9') {
 				probability = read_positive(argument, 254);
 			} else {
-				// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load order. Maybe in postload() one day.
 				type_name = argument;
+				descr->add_becomes(type_name);
 			}
 		}
-		if (type_name == descr.name()) {
+		if (type_name == descr->name()) {
 			throw GameDataError("illegal transformation to the same type");
 		}
 	} catch (const WException& e) {
@@ -143,17 +143,17 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 		immovable.program_step(game);
 }
 
-ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, const ImmovableDescr& descr) {
+ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, ImmovableDescr* descr) {
 	if (arguments.size() != 1) {
 		throw GameDataError("Usage: grow=<immovable name>");
 	}
-	if (!descr.has_terrain_affinity()) {
+	if (!descr->has_terrain_affinity()) {
 		throw GameDataError(
-		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
+		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr->name().c_str());
 	}
 
-	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load order. Maybe in postload() one day.
 	type_name = arguments.front();
+	descr->add_becomes(type_name);
 }
 
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {

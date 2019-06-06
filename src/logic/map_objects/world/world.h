@@ -90,6 +90,9 @@ public:
 	// demand.
 	void load_graphics();
 
+	// Validate the world objects
+	void postload();
+
 private:
 	std::unique_ptr<DescriptionMaintainer<CritterDescr>> critters_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;

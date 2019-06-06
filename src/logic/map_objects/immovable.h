@@ -161,6 +161,11 @@ public:
 		return species_;
 	}
 
+	void add_becomes(const std::string& bob_or_immovable);
+	const std::set<std::string>& becomes() const {
+		return becomes_;
+	}
+
 	// Every immovable that can 'grow' needs to have terrain affinity defined,
 	// all others do not. Returns true if this one has it defined.
 	bool has_terrain_affinity() const;
@@ -189,6 +194,7 @@ private:
 	Buildcost buildcost_;
 
 	std::string species_;
+	std::set<std::string> becomes_;
 
 	EditorCategory* editor_category_;  // not owned.
 	std::unique_ptr<TerrainAffinity> terrain_affinity_;
