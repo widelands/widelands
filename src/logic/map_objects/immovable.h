@@ -169,7 +169,15 @@ public:
 	// an undefined value.
 	const TerrainAffinity& terrain_affinity() const;
 
-protected:
+private:
+	// Common constructor functions for tribes and world.
+	ImmovableDescr(const std::string& init_descname,
+	               const LuaTable&,
+	               MapObjectDescr::OwnerType type);
+
+	// Adds a default program if none was defined.
+	void make_sure_default_program_is_there();
+
 	int32_t size_;
 	Programs programs_;
 
@@ -181,15 +189,6 @@ protected:
 	Buildcost buildcost_;
 
 	std::string species_;
-
-private:
-	// Common constructor functions for tribes and world.
-	ImmovableDescr(const std::string& init_descname,
-	               const LuaTable&,
-	               MapObjectDescr::OwnerType type);
-
-	// Adds a default program if none was defined.
-	void make_sure_default_program_is_there();
 
 	EditorCategory* editor_category_;  // not owned.
 	std::unique_ptr<TerrainAffinity> terrain_affinity_;
