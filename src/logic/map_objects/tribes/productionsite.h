@@ -128,12 +128,12 @@ public:
 		return out_of_resource_productivity_threshold_;
 	}
 
-	bool highlight_overlapping_workarea_for(const std::string& n, bool& positive) const {
+	bool highlight_overlapping_workarea_for(const std::string& n, bool* positive) const {
 		const auto it = highlight_overlapping_workarea_for_.find(n);
 		if (it == highlight_overlapping_workarea_for_.end()) {
 			return false;
 		} else {
-			positive = it->second;
+			*positive = it->second;
 			return true;
 		}
 	}
