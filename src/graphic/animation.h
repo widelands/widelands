@@ -94,7 +94,8 @@ public:
 	                  const Rectf& source_rect,
 	                  const Rectf& destination_rect,
 	                  const RGBColor* clr,
-	                  Surface* target, float scale) const = 0;
+	                  Surface* target,
+	                  float scale) const = 0;
 
 	/// Load animation images into memory for default scale.
 	virtual void load_default_scale_and_sounds() const = 0;
@@ -129,7 +130,8 @@ public:
 	uint32_t load(const LuaTable& table, const std::string& basename);
 	/// Same as above, but this animation will be used for getting a representative image by map
 	/// object name
-	uint32_t load(const std::string& map_object_name, const LuaTable& table, const std::string& basename);
+	uint32_t
+	load(const std::string& map_object_name, const LuaTable& table, const std::string& basename);
 
 	/// Returns the animation with the given ID or throws an exception if it is
 	/// unknown.

@@ -32,6 +32,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -45,7 +46,7 @@
 
 namespace {
 char const* const animation_direction_names[6] = {"_ne", "_e", "_se", "_sw", "_w", "_nw"};
-} // namespace
+}  // namespace
 
 namespace Widelands {
 
@@ -277,34 +278,45 @@ void MapObjectDescr::add_animations(const LuaTable& table) {
 		try {
 			std::unique_ptr<LuaTable> anim = table.get_table(animname);
 			// TODO(GunChleoc): Require basename after conversion has been completed
-			const std::string basename = anim->has_key<std::string>("basename") ? anim->get_string("basename") : "";
-			const bool is_directional = anim->has_key<std::string>("directional") ? anim->get_bool("directional") : false;
+			const std::string basename =
+			   anim->has_key<std::string>("basename") ? anim->get_string("basename") : "";
+			const bool is_directional =
+			   anim->has_key<std::string>("directional") ? anim->get_bool("directional") : false;
 			if (is_directional) {
 				for (int dir = 1; dir <= 6; ++dir) {
-					const std::string directional_animname = animname + animation_direction_names[dir - 1];
+					const std::string directional_animname =
+					   animname + animation_direction_names[dir - 1];
 					if (is_animation_known(directional_animname)) {
-						throw GameDataError("Tried to add already existing directional animation '%s\'", directional_animname.c_str());
+						throw GameDataError("Tried to add already existing directional animation '%s\'",
+						                    directional_animname.c_str());
 					}
-					const std::string directional_basename = basename + animation_direction_names[dir - 1];
-					anims_.insert(std::pair<std::string, uint32_t>(directional_animname, g_gr->animations().load(*anim, directional_basename)));
+					const std::string directional_basename =
+					   basename + animation_direction_names[dir - 1];
+					anims_.insert(std::pair<std::string, uint32_t>(
+					   directional_animname, g_gr->animations().load(*anim, directional_basename)));
 				}
 			} else {
 				if (is_animation_known(animname)) {
-					throw GameDataError("Tried to add already existing animation '%s'", animname.c_str());
+					throw GameDataError(
+					   "Tried to add already existing animation '%s'", animname.c_str());
 				}
 				if (animname == "idle") {
-					   anims_.insert(std::pair<std::string, uint32_t>(animname, g_gr->animations().load(name_, *anim, basename)));
+					anims_.insert(std::pair<std::string, uint32_t>(
+					   animname, g_gr->animations().load(name_, *anim, basename)));
 				} else {
-					anims_.insert(std::pair<std::string, uint32_t>(animname, g_gr->animations().load(*anim, basename)));
+					anims_.insert(std::pair<std::string, uint32_t>(
+					   animname, g_gr->animations().load(*anim, basename)));
 				}
 			}
 		} catch (const std::exception& e) {
-			throw GameDataError("Error loading animation for map object '%s': %s", name().c_str(), e.what());
+			throw GameDataError(
+			   "Error loading animation for map object '%s': %s", name().c_str(), e.what());
 		}
 	}
 }
 
-void MapObjectDescr::assign_directional_animation(DirAnimations* anims, const std::string& basename) {
+void MapObjectDescr::assign_directional_animation(DirAnimations* anims,
+                                                  const std::string& basename) {
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		const std::string anim_name = basename + animation_direction_names[dir - 1];
 		try {
@@ -510,20 +522,26 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	if (scale < 1.f) {
 		return;
 	}
-	const int font_size = scale * UI_FONT_SIZE_SMALL;
+
+	UI::FontStyleInfo census_font(g_gr->styles().building_statistics_style().census_font());
+	census_font.set_size(scale * census_font.size());
 
 	// We always render this so we can have a stable position for the statistics string.
 	std::shared_ptr<const UI::RenderedText> rendered_census =
-	   UI::g_fh->render(as_condensed(census, UI::Align::kCenter, font_size), 120 * scale);
+	   UI::g_fh->render(as_richtext_paragraph(census, census_font, UI::Align::kCenter), 120 * scale);
 	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
 	if ((draw_text & TextToDraw::kCensus) != TextToDraw::kNone) {
 		rendered_census->draw(*dst, position, UI::Align::kCenter);
 	}
 
 	if ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone && !statictics.empty()) {
+		UI::FontStyleInfo statistics_font(
+		   g_gr->styles().building_statistics_style().statistics_font());
+		statistics_font.set_size(scale * statistics_font.size());
+
 		std::shared_ptr<const UI::RenderedText> rendered_statistics =
-		   UI::g_fh->render(as_condensed(statictics, UI::Align::kCenter, font_size));
-		position.y += rendered_census->height() + text_height(font_size) / 4;
+		   UI::g_fh->render(as_richtext_paragraph(statictics, statistics_font, UI::Align::kCenter));
+		position.y += rendered_census->height() + text_height(statistics_font) / 4;
 		rendered_statistics->draw(*dst, position, UI::Align::kCenter);
 	}
 }

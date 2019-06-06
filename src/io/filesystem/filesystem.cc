@@ -84,7 +84,8 @@ const std::vector<std::string> illegal_filename_characters{
    "<", ">", ":", "\"", "|", "?", "*", "/", "\\",
 };
 
-/// A class that makes iteration over filename_?.* templates easy. It is much faster than using regex.
+/// A class that makes iteration over filename_?.* templates easy. It is much faster than using
+/// regex.
 class NumberGlob {
 public:
 	explicit NumberGlob(const std::string& file_template);
@@ -255,7 +256,7 @@ std::string FileSystem::illegal_filename_tooltip() {
 	   (boost::format(pgettext("illegal_filename_characters", "%s at the start of the filename")) %
 	    richtext_escape(i18n::localize_list(starting_characters, i18n::ConcatenateWith::OR)))
 	      .str(),
-	   UI_FONT_SIZE_MESSAGE));
+	   UI::FontStyle::kWuiMessageParagraph));
 
 	const std::string illegal(as_listitem(
 	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
@@ -263,7 +264,7 @@ std::string FileSystem::illegal_filename_tooltip() {
 	   (boost::format(pgettext("illegal_filename_characters", "%s anywhere in the filename")) %
 	    richtext_escape(i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR)))
 	      .str(),
-	   UI_FONT_SIZE_MESSAGE));
+	   UI::FontStyle::kWuiMessageParagraph));
 
 	return (boost::format("%s%s%s") %
 	        /** TRANSLATORS: Tooltip header for characters in illegal filenames.
@@ -312,12 +313,15 @@ std::string FileSystem::get_homedir() {
 }
 
 // Returning a vector rather than a set because animations need the indices
-std::vector<std::string> FileSystem::get_sequential_files(const std::string& directory, const std::string& basename, const std::string& extension) const {
+std::vector<std::string> FileSystem::get_sequential_files(const std::string& directory,
+                                                          const std::string& basename,
+                                                          const std::string& extension) const {
 	std::vector<std::string> result;
 
 	auto get_files = [this, directory, basename, extension](const std::string& number_template) {
 		std::vector<std::string> files;
-		const std::string filename_template = directory + file_separator() + basename + number_template + "." + extension;
+		const std::string filename_template =
+		   directory + file_separator() + basename + number_template + "." + extension;
 
 		NumberGlob glob(filename_template);
 		std::string filename;

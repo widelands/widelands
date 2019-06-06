@@ -35,7 +35,7 @@ tribes:new_worker_type {
          "findobject=attrib:rocks radius:6",
          "walk=object",
          "playsound=sound/stonecutting/stonecutter 220",
-         "animate=hacking 10000",
+         "animate=hacking 17500",
          "callobject=shrink",
          "createware=granite",
          "return"
@@ -44,7 +44,7 @@ tribes:new_worker_type {
          "findobject=attrib:rocks radius:6",
          "walk=object",
          "playsound=sound/stonecutting/stonecutter 220",
-         "animate=hacking 10000",
+         "animate=hacking 17500",
          "callobject=shrink",
          "createware=marble",
          "return"

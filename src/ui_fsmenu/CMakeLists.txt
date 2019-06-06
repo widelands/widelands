@@ -9,7 +9,6 @@ wl_library(ui_fsmenu_options
     graphic
     graphic_fonthandler
     graphic_text
-    graphic_text_constants
     graphic_text_layout
     io_filesystem
     logic_filesystem_constants
@@ -75,7 +74,7 @@ wl_library(ui_fsmenu_loading_common
     singleplayer.h
   DEPENDS
     base_i18n
-    graphic_text_constants
+    graphic
     io_filesystem
     profile
     network
@@ -102,7 +101,6 @@ wl_library(ui_fsmenu_gameloading
     base_i18n
     graphic
     graphic_playercolor
-    graphic_text_constants
     io_filesystem
     logic
     logic_game_controller
@@ -145,7 +143,6 @@ wl_library(ui_fsmenu_maploading
     base_log
     graphic
     graphic_fonthandler
-    graphic_text_constants
     graphic_surface
     io_filesystem
     logic_filesystem_constants
@@ -173,7 +170,6 @@ wl_library(ui_fsmenu_network
     base_log
     base_macros
     graphic
-    graphic_text_constants
     network
     profile
     random

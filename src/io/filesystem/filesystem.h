@@ -132,8 +132,8 @@ public:
 	static std::string filename_without_ext(const char* n);
 	static std::string get_homedir();
 
-
-	/// Return the files in the given 'directory' that match the condition in 'test', i.e. 'test' returned 'true' for their filenames.
+	/// Return the files in the given 'directory' that match the condition in 'test', i.e. 'test'
+	/// returned 'true' for their filenames.
 	template <class UnaryPredicate>
 	FilenameSet filter_directory(const std::string& directory, UnaryPredicate test) const {
 		FilenameSet result = list_directory(directory);
@@ -147,8 +147,11 @@ public:
 		return result;
 	}
 
-	/// Returns all files in the given 'directory' that match 'basename' followed by 1-3 numbers, followed by '.', followed by 'extension'
-	std::vector<std::string> get_sequential_files(const std::string& directory, const std::string& basename, const std::string& extension) const;
+	/// Returns all files in the given 'directory' that match 'basename' followed by 1-3 numbers,
+	/// followed by '.', followed by 'extension'
+	std::vector<std::string> get_sequential_files(const std::string& directory,
+	                                              const std::string& basename,
+	                                              const std::string& extension) const;
 
 	virtual unsigned long long disk_space() = 0;
 
