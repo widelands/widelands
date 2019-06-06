@@ -63,7 +63,7 @@ tribes:new_productionsite_type {
            -- This order is on purpose so that the productivity
            -- drops fast once all rocks are gone.
             "callworker=cut_granite",
-            "sleep=25000"
+            "sleep=17500"
          }
       },
       mine_marble = {
@@ -73,7 +73,7 @@ tribes:new_productionsite_type {
            -- This order is on purpose so that the productivity
            -- drops fast once all rocks are gone.
             "callworker=cut_marble",
-            "sleep=25000"
+            "sleep=17500"
          }
       },
    },

@@ -55,8 +55,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
          descname = _"planting trees",
          actions = {
-            "sleep=16000",
-            "callworker=plant"
+            "callworker=plant",
+            "sleep=11500"
          }
       },
    },

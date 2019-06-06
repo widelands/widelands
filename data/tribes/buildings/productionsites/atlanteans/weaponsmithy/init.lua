@@ -132,8 +132,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident because ...
          descname = _"forging a heavy double trident",
          actions = {
-             -- time total: 77 + 3.6
-           "return=skipped unless economy needs trident_heavy_double",
+            -- time total: 77 + 3.6
+            "return=skipped unless economy needs trident_heavy_double",
             "consume=iron:2 coal:2 planks gold",
             "sleep=32000",
             "playsound=sound/smiths/smith 192",

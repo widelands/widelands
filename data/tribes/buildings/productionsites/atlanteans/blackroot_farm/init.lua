@@ -62,16 +62,16 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
          descname = _"planting blackroot",
          actions = {
-            "sleep=20000",
-            "callworker=plant"
+            "callworker=plant",
+            "sleep=10000"
          }
       },
       harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because ...
          descname = _"harvesting blackroot",
          actions = {
-            "sleep=5000",
-            "callworker=harvest"
+            "callworker=harvest",
+            "sleep=3000"
          }
       },
    },

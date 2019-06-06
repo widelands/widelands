@@ -80,17 +80,17 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
          descname = _"planting barley",
          actions = {
-            "sleep=18000",
-            "callworker=plant"
+            "callworker=plant",
+            "sleep=18000"
          }
       },
       harvest_barley = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
          descname = _"harvesting barley",
          actions = {
-            "sleep=8000",
             "callworker=harvest",
             "animate=working 40000",
+            "sleep=8000",
             "produce=barley" --produces 2 barley per field
          }
       },

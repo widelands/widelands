@@ -57,8 +57,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "sleep=45000",
-            "callworker=bees"
+            "callworker=bees",
+            "sleep=45000"
          }
       },
    },

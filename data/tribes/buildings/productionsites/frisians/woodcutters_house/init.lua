@@ -53,8 +53,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
          descname = _"felling trees",
          actions = {
-            "sleep=30000",
-            "callworker=harvest"
+            "callworker=harvest",
+            "sleep=20000"
          }
       },
    },
