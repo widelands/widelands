@@ -38,17 +38,16 @@ tribes:new_worker_type {
       plant = {
          "findspace=size:any radius:1",
          "walk=coords",
-         "animate=planting 1500",
+         "animate=planting 6500",
          "plant=attrib:seed_reed",
-         "animate=planting 1500",
+         "animate=planting 6500",
          "return"
       },
       harvest = {
          "findobject=attrib:ripe_reed radius:1",
          "walk=object",
-         "animate=harvesting 12000",
+         "animate=harvesting 14000",
          "callobject=harvest",
-         "animate=harvesting 1",
          "createware=reed",
          "return"
       },
