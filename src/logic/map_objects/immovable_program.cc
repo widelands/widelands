@@ -317,11 +317,13 @@ void ImmovableProgram::ActConstruct::execute(Game& g, Immovable& imm) const {
 		}
 
 		uint32_t randdecay = g.logic_rand() % totaldelivered;
-		for (const auto& subtractme : d->delivered) {
-			if (randdecay < subtractme.second) {
+		for (Buildcost::iterator it = d->delivered.begin(); it != d->delivered.end(); ++it) {
+			if (randdecay < it->second) {
+				it->second--;
 				break;
 			}
-			randdecay -= subtractme.second;
+
+			randdecay -= it->second;
 		}
 
 		imm.anim_construction_done_ = d->delivered.total();
