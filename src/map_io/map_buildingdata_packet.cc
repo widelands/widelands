@@ -619,18 +619,14 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 					if (worker_descr.can_act_as(working_position.first)) {
 						while (wp->worker || wp->worker_request) {
 							++wp;
-							if (!--count) {
-								continue;
-							}
+							if (!--count)
+								goto end_working_position;
 						}
 						found_working_position = true;
 						break;
-					} else {
+					} else
 						wp += count;
-					}
-					if (found_working_position) {
-						break;
-					}
+				end_working_position:;
 				}
 
 				if (!found_working_position)
