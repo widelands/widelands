@@ -178,8 +178,6 @@ BillOfMaterials ProductionProgram::parse_bill_of_materials(const std::vector<std
 				throw GameDataError("Worker '%s' is not listed in the building's 'outputs' table",
 									produceme.first.c_str());
 			} break;
-		default:
-			NEVER_HERE();
 		}
 
 		result.push_back(std::make_pair(index, read_positive(produceme.second)));
@@ -679,9 +677,8 @@ void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) con
 			return ps.program_end(game, ProgramResult::kFailed);
 		}
 	}
-	default:
-		NEVER_HERE();
 	}
+	NEVER_HERE();
 }
 
 ProductionProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments, ProductionSiteDescr* descr) {

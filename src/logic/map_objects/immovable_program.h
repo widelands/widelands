@@ -104,7 +104,6 @@ struct ImmovableProgram : public MapObjectProgram {
 
 	private:
 		std::string type_name;
-		bool tribe;
 	};
 
 	struct ActRemove : public Action {
