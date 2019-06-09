@@ -44,223 +44,20 @@ static const char pic_stock_policy_button_remove[] = "images/wui/buildings/stock
 static const char pic_decrease_capacity[] = "images/wui/buildings/menu_down_train.png";
 static const char pic_increase_capacity[] = "images/wui/buildings/menu_up_train.png";
 
-constexpr uint32_t kPriorityButtonSize = 10;
-constexpr uint32_t kFakeInputQueueWareWidth = WARE_MENU_PIC_WIDTH + 2;
-constexpr uint32_t kFakeInputQueueWareHeight = 3 * kPriorityButtonSize;
-constexpr uint32_t kFakeInputQueueButtonSize = 24;
-
-ConstructionSiteWindow::FakeInputQueue::FakeInputQueue(Panel* parent,
-               int32_t x,
-               int32_t y,
-               bool can_act,
-               Widelands::ConstructionSite& cs,
-               Widelands::WareWorker ww,
-               Widelands::DescriptionIndex di)
-		: UI::Panel(parent, x, y, 0, 0),
-		constructionsite_(cs),
-		settings_(*dynamic_cast<Widelands::ProductionsiteSettings*>(cs.get_settings())),
-		type_(ww),
-		index_(di),
-		max_fill_indicator_(g_gr->images().get(pic_max_fill_indicator)),
-		priority_group_(nullptr) {
-	max_fill_ = get_settings().max_fill;
-
-	const Widelands::Tribes& tribes = cs.owner().egbase().tribes();
-	const Widelands::MapObjectDescr* w_descr = nullptr;
-	if (type_ == Widelands::wwWARE) {
-		w_descr = tribes.get_ware_descr(index_);
-	} else {
-		w_descr = tribes.get_worker_descr(index_);
-	}
-	assert(w_descr);
-	set_tooltip(w_descr->descname());
-	icon_ = w_descr->icon();
-
-	UI::Button& decrease = *new UI::Button(
-			this, "decrease_max_fill", 0, (kFakeInputQueueWareHeight - kFakeInputQueueButtonSize) / 2,
-			kFakeInputQueueButtonSize, kFakeInputQueueButtonSize,
-			UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_left.png"),
-			_("Decrease the number of items to initially store here"));
-	UI::Button& increase = *new UI::Button(
-			this, "increase_max_fill", kFakeInputQueueButtonSize + kFakeInputQueueWareWidth * max_fill_ + 8,
-			(kFakeInputQueueWareHeight - kFakeInputQueueButtonSize) / 2,
-			kFakeInputQueueButtonSize, kFakeInputQueueButtonSize, UI::ButtonStyle::kWuiMenu,
-			g_gr->images().get("images/ui_basic/scrollbar_right.png"),
-			_("Increase the number of items to initially store here"));
-	decrease.sigclicked.connect(boost::bind(&ConstructionSiteWindow::FakeInputQueue::change_fill, this, true));
-	increase.sigclicked.connect(boost::bind(&ConstructionSiteWindow::FakeInputQueue::change_fill, this, false));
-	decrease.set_repeating(true);
-	increase.set_repeating(true);
-	if (type_ == Widelands::wwWARE) {
-		priority_group_.reset(new UI::Radiogroup());
-		Vector2i pos(kFakeInputQueueWareWidth * max_fill_ + 2 * kFakeInputQueueButtonSize + 10, 0);
-		priority_group_->add_button(
-		   this, pos, g_gr->images().get(pic_priority_high), _("Highest priority"));
-		pos.y += kPriorityButtonSize;
-		priority_group_->add_button(
-		   this, pos, g_gr->images().get(pic_priority_normal), _("Normal priority"));
-		pos.y += kPriorityButtonSize;
-		priority_group_->add_button(
-		   this, pos, g_gr->images().get(pic_priority_low), _("Lowest priority"));
-		if (can_act) {
-			priority_group_->changedto.connect([this](uint32_t state) {
-				Widelands::Game& game = dynamic_cast<Widelands::Game&>(constructionsite_.get_owner()->egbase());
-				int32_t priority;
-				switch (state) {
-					case 0:
-						priority = Widelands::kPriorityHigh;
-						break;
-					case 1:
-						priority = Widelands::kPriorityNormal;
-						break;
-					case 2:
-						priority = Widelands::kPriorityLow;
-						break;
-					default:
-						return;
-				}
-				if (SDL_GetModState() & KMOD_CTRL) {
-					for (const auto& pair : settings_.ware_queues) {
-						game.send_player_constructionsite_input_queue_priority(constructionsite_,
-								Widelands::wwWARE, pair.first, priority);
-					}
-					for (const auto& pair : settings_.worker_queues) {
-						game.send_player_constructionsite_input_queue_priority(constructionsite_,
-								Widelands::wwWORKER, pair.first, priority);
-					}
-				} else {
-					game.send_player_constructionsite_input_queue_priority(constructionsite_,
-								type_, index_, priority);
-				}
-			});
-		}
-	}
-	decrease.set_enabled(can_act);
-	increase.set_enabled(can_act);
-	update_desired_size();
-}
-
-void ConstructionSiteWindow::FakeInputQueue::update_desired_size() {
-	set_desired_size(kFakeInputQueueWareWidth * max_fill_ + 2 * kFakeInputQueueButtonSize + kPriorityButtonSize + 12,
-			3 * kPriorityButtonSize);
-}
-
-void ConstructionSiteWindow::FakeInputQueue::change_fill(bool lower) {
-	Widelands::Game& game = dynamic_cast<Widelands::Game&>(constructionsite_.get_owner()->egbase());
-	if (SDL_GetModState() & KMOD_SHIFT) {
-		for (const auto& pair : settings_.ware_queues) {
-			if (SDL_GetModState() & KMOD_CTRL) {
-				game.send_player_constructionsite_input_queue_max_fill(constructionsite_,
-						Widelands::wwWARE, pair.first, lower ? 0 : pair.second.max_fill);
-			} else if (lower && pair.second.desired_fill > 0) {
-				game.send_player_constructionsite_input_queue_max_fill(constructionsite_,
-						Widelands::wwWARE, pair.first, pair.second.desired_fill - 1);
-			} else if (!lower && pair.second.desired_fill < pair.second.max_fill) {
-				game.send_player_constructionsite_input_queue_max_fill(constructionsite_,
-						Widelands::wwWARE, pair.first, pair.second.desired_fill + 1);
-			}
-		}
-		for (const auto& pair : settings_.worker_queues) {
-			if (SDL_GetModState() & KMOD_CTRL) {
-				game.send_player_constructionsite_input_queue_max_fill(constructionsite_,
-						Widelands::wwWORKER, pair.first, lower ? 0 : pair.second.max_fill);
-			} else if (lower && pair.second.desired_fill > 0) {
-				game.send_player_constructionsite_input_queue_max_fill(constructionsite_,
-						Widelands::wwWORKER, pair.first, pair.second.desired_fill - 1);
-			} else if (!lower && pair.second.desired_fill < pair.second.max_fill) {
-				game.send_player_constructionsite_input_queue_max_fill(constructionsite_,
-						Widelands::wwWORKER, pair.first, pair.second.desired_fill + 1);
-			}
-		}
-	} else {
-		const uint32_t fill = get_settings().desired_fill;
-		if (SDL_GetModState() & KMOD_CTRL) {
-			game.send_player_constructionsite_input_queue_max_fill(constructionsite_, type_, index_,
-					lower ? 0 : max_fill_);
-		} else if (lower && fill > 0) {
-			game.send_player_constructionsite_input_queue_max_fill(constructionsite_, type_, index_, fill - 1);
-		} else if (!lower && fill < max_fill_) {
-			game.send_player_constructionsite_input_queue_max_fill(constructionsite_, type_, index_, fill + 1);
-		}
-	}
-}
-
-const Widelands::ProductionsiteSettings::InputQueueSetting& ConstructionSiteWindow::FakeInputQueue::get_settings() const {
-	switch (type_) {
-		case Widelands::wwWARE:
-			for (const auto& pair : settings_.ware_queues) {
-				if (pair.first == index_) {
-					return pair.second;
-				}
-			}
-			NEVER_HERE();
-		case Widelands::wwWORKER:
-			for (const auto& pair : settings_.worker_queues) {
-				if (pair.first == index_) {
-					return pair.second;
-				}
-			}
-			NEVER_HERE();
-	}
-	NEVER_HERE();
-}
-
-void ConstructionSiteWindow::FakeInputQueue::think() {
-	UI::Panel::think();
-	if (priority_group_) {
-		switch (get_settings().priority) {
-			case Widelands::kPriorityHigh:
-				priority_group_->set_state(0);
-				break;
-			case Widelands::kPriorityNormal:
-				priority_group_->set_state(1);
-				break;
-			case Widelands::kPriorityLow:
-				priority_group_->set_state(2);
-				break;
-			default:
-				NEVER_HERE();
-		}
-	}
-}
-
-void ConstructionSiteWindow::FakeInputQueue::draw(RenderTarget& dst) {
-	UI::Panel::draw(dst);
-
-	Vector2i point = Vector2i::zero();
-	point.x = kFakeInputQueueButtonSize + 4;
-	point.y = (kFakeInputQueueWareHeight - icon_->height()) / 2;
-
-	const uint32_t fill = get_settings().desired_fill;
-	uint32_t draw_yes = fill;
-	uint32_t draw_no = max_fill_ - draw_yes;
-	for (; draw_yes; --draw_yes, point.x += kFakeInputQueueWareWidth) {
-		dst.blitrect(Vector2i(point.x, point.y), icon_, Recti(0, 0, icon_->width(), icon_->height()),
-			         BlendMode::UseAlpha);
-	}
-	for (; draw_no; --draw_no, point.x += kFakeInputQueueWareWidth) {
-		dst.blitrect_scale_monochrome(Rectf(point.x, point.y, icon_->width(), icon_->height()), icon_,
-			                          Recti(0, 0, icon_->width(), icon_->height()),
-			                          RGBAColor(191, 191, 191, 127));
-	}
-
-	point.x = 4 + kFakeInputQueueWareWidth + (fill * kFakeInputQueueWareWidth) - max_fill_indicator_->width() / 2;
-	// Unsigned arithmetic...
-	point.y = kFakeInputQueueWareHeight;
-	point.y -= max_fill_indicator_->height();
-	point.y /= 2;
-	dst.blit(point, max_fill_indicator_);
-}
-
 ConstructionSiteWindow::FakeWaresDisplay::FakeWaresDisplay(UI::Panel* parent,
 														  bool can_act,
 														  Widelands::ConstructionSite& cs,
 														  Widelands::WareWorker type)
 	: WaresDisplay(parent, 0, 0, cs.owner().tribe(), type, can_act),
-	  settings_(*dynamic_cast<Widelands::WarehouseSettings*>(cs.get_settings())) {
+	  settings_(*dynamic_cast<Widelands::WarehouseSettings*>(cs.get_settings())),
+	  tribe_(cs.owner().tribe()) {
 }
 
 void ConstructionSiteWindow::FakeWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIndex ware) {
+	if (get_type() == Widelands::wwWORKER && std::find(tribe_.worker_types_without_cost().begin(),
+			tribe_.worker_types_without_cost().end(), ware) != tribe_.worker_types_without_cost().end()) {
+		return;
+	}
 	WaresDisplay::draw_ware(dst, ware);
 
 	const auto& map = get_type() == Widelands::wwWARE ? settings_.ware_preferences : settings_.worker_preferences;
@@ -339,14 +136,14 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		UI::Box& settings_box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 		if (upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings())) {
 			for (const auto& pair : ps->ware_queues) {
-				FakeInputQueue* queue = new FakeInputQueue(&settings_box, 0, 0, can_act,
+				InputQueueDisplay* queue = new InputQueueDisplay(&settings_box, 0, 0, *igbase(),
 						*construction_site, Widelands::wwWARE, pair.first);
 				settings_box.add(queue);
 				settings_box.add_space(8);
 				cs_ware_queues_.push_back(queue);
 			}
 			for (const auto& pair : ps->worker_queues) {
-				FakeInputQueue* queue = new FakeInputQueue(&settings_box, 0, 0, can_act,
+				InputQueueDisplay* queue = new InputQueueDisplay(&settings_box, 0, 0, *igbase(),
 						*construction_site, Widelands::wwWORKER, pair.first);
 				settings_box.add(queue);
 				settings_box.add_space(8);
@@ -368,12 +165,12 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				cs_soldier_capacity_decrease_->set_enabled(can_act);
 				cs_soldier_capacity_increase_->set_enabled(can_act);
 				cs_soldier_capacity_decrease_->sigclicked.connect([this, ts]() {
-					igbase()->game().send_player_constructionsite_soldier_capacity(
+					igbase()->game().send_player_change_soldier_capacity(
 							*construction_site_.get(igbase()->egbase()),
 							SDL_GetModState() & KMOD_CTRL ? 0 : ts->desired_capacity - 1);
 					});
 				cs_soldier_capacity_increase_->sigclicked.connect([this, ts]() {
-					igbase()->game().send_player_constructionsite_soldier_capacity(
+					igbase()->game().send_player_change_soldier_capacity(
 							*construction_site_.get(igbase()->egbase()),
 							SDL_GetModState() & KMOD_CTRL ? ts->max_capacity : ts->desired_capacity + 1);
 					});
@@ -387,9 +184,10 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_stopped_ = new UI::Checkbox(&settings_box, Vector2i::zero(),
 				 _("Stopped"),
 				 _("Stop this building’s work after completion"));
-			cs_stopped_->changed.connect([this]() {
-				igbase()->game().send_player_constructionsite_startstop(
-						*construction_site_.get(igbase()->egbase()), cs_stopped_->get_state());
+			cs_stopped_->clickedto.connect([this, ps](bool stop) {
+				if (stop != ps->stopped) {
+					igbase()->game().send_player_start_stop_building(*construction_site_.get(igbase()->egbase()));
+				}
 			});
 			settings_box.add(cs_stopped_, UI::Box::Resizing::kFullSize);
 			settings_box.add_space(8);
@@ -410,12 +208,12 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_soldier_capacity_decrease_->set_enabled(can_act);
 			cs_soldier_capacity_increase_->set_enabled(can_act);
 			cs_soldier_capacity_decrease_->sigclicked.connect([this, ms]() {
-				igbase()->game().send_player_constructionsite_soldier_capacity(
+				igbase()->game().send_player_change_soldier_capacity(
 						*construction_site_.get(igbase()->egbase()),
 						SDL_GetModState() & KMOD_CTRL ? 0 : ms->desired_capacity - 1);
 				});
 			cs_soldier_capacity_increase_->sigclicked.connect([this, ms]() {
-				igbase()->game().send_player_constructionsite_soldier_capacity(
+				igbase()->game().send_player_change_soldier_capacity(
 						*construction_site_.get(igbase()->egbase()),
 						SDL_GetModState() & KMOD_CTRL ? ms->max_capacity : ms->desired_capacity + 1);
 				});
@@ -439,8 +237,9 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 					_("Prefer heroes"));
 			if (can_act) {
 				cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
-					igbase()->game().send_player_constructionsite_prefer_heroes(
-							*construction_site_.get(igbase()->egbase()), state);
+					igbase()->game().send_player_militarysite_set_soldier_preference(
+							*construction_site_.get(igbase()->egbase()),
+							state ? Widelands::SoldierPreference::kHeroes : Widelands::SoldierPreference::kRookies);
 				});
 			}
 			settings_box.add_space(8);
@@ -498,9 +297,11 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				cs_launch_expedition_ = new UI::Checkbox(&settings_box, Vector2i::zero(),
 					 _("Start an expedition"),
 					 _("Start an expedition from this port after completion"));
-				cs_launch_expedition_->changed.connect([this]() {
-					igbase()->game().send_player_constructionsite_launch_expedition(
-							*construction_site_.get(igbase()->egbase()), cs_launch_expedition_->get_state());
+				cs_launch_expedition_->clickedto.connect([this, ws](bool launch) {
+					if (launch != ws->launch_expedition) {
+						igbase()->game().send_player_start_or_cancel_expedition(
+								*construction_site_.get(igbase()->egbase()));
+					}
 				});
 				settings_box.add(cs_launch_expedition_, UI::Box::Resizing::kFullSize);
 				settings_box.add_space(8);
@@ -523,7 +324,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			                  building_descr.icon(), enhance_tooltip);
 			cs_enhance_->sigclicked.connect([this, construction_site] {
 				if (SDL_GetModState() & KMOD_CTRL) {
-					igbase()->game().send_player_constructionsite_enhance(*construction_site);
+					igbase()->game().send_player_enhance_building(*construction_site, Widelands::INVALID_INDEX);
 				} else {
 				show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()),
 						*construction_site, construction_site->get_info().becomes->enhancement(), true);
@@ -551,14 +352,14 @@ void ConstructionSiteWindow::change_policy(Widelands::WareWorker ww, Widelands::
 	if (ww == Widelands::wwWARE) {
 		for (const auto& pair : ws->ware_preferences) {
 			if (cs_warehouse_wares_->ware_selected(pair.first)) {
-				igbase()->game().send_player_constructionsite_stock_policy(*construction_site,
+				igbase()->game().send_player_set_stock_policy(*construction_site,
 						Widelands::wwWARE, pair.first, p);
 			}
 		}
 	} else {
 		for (const auto& pair : ws->worker_preferences) {
 			if (cs_warehouse_workers_->ware_selected(pair.first)) {
-				igbase()->game().send_player_constructionsite_stock_policy(*construction_site,
+				igbase()->game().send_player_set_stock_policy(*construction_site,
 						Widelands::wwWORKER, pair.first, p);
 			}
 		}
@@ -583,7 +384,7 @@ void ConstructionSiteWindow::think() {
 	progress_->set_state(construction_site->get_built_per64k());
 
 	const bool can_act = igbase()->can_act(construction_site->owner().player_number());
-	// FakeInputQueue and FakeWaresDisplay update themselves – we need to refresh the other settings
+	// InputQueueDisplay and FakeWaresDisplay update themselves – we need to refresh the other settings
 	if (upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings())) {
 		assert(cs_stopped_);
 		cs_stopped_->set_state(ps->stopped);

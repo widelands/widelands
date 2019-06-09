@@ -776,8 +776,7 @@ void Game::send_player_start_or_cancel_expedition(Building& building) {
 }
 
 void Game::send_player_enhance_building(Building& building, DescriptionIndex const id) {
-	assert(building.owner().tribe().has_building(id));
-
+	assert(building.descr().type() == MapObjectType::CONSTRUCTIONSITE || building.owner().tribe().has_building(id));
 	send_player_command(
 	   new CmdEnhanceBuilding(get_gametime(), building.owner().player_number(), building, id));
 }
@@ -859,45 +858,9 @@ void Game::send_player_propose_trade(const Trade& trade) {
 	   new CmdProposeTrade(get_gametime(), object->get_owner()->player_number(), trade));
 }
 
-void Game::send_player_constructionsite_soldier_capacity(ConstructionSite& cs, uint32_t c) {
-	send_player_command(new CmdConstructionsiteSoldierCapacity(
-		   get_gametime(), cs.get_owner()->player_number(), cs, c));
-}
-
-void Game::send_player_constructionsite_prefer_heroes(ConstructionSite& cs, bool h) {
-	send_player_command(new CmdConstructionsitePreferHeroes(
-		   get_gametime(), cs.get_owner()->player_number(), cs, h));
-}
-
-void Game::send_player_constructionsite_launch_expedition(ConstructionSite& cs, bool l) {
-	send_player_command(new CmdConstructionsiteLaunchExpedition(
-		   get_gametime(), cs.get_owner()->player_number(), cs, l));
-}
-
-void Game::send_player_constructionsite_stock_policy(
-		ConstructionSite& cs, WareWorker ww, DescriptionIndex di, StockPolicy pol) {
-	send_player_command(new CmdConstructionsiteStockPolicy(
-		   get_gametime(), cs.get_owner()->player_number(), cs, ww, di, pol));
-}
-
-void Game::send_player_constructionsite_input_queue_priority(
-		ConstructionSite& cs, WareWorker ww, DescriptionIndex di, int32_t p) {
-	send_player_command(new CmdConstructionsiteInputQueuePriority(
-		   get_gametime(), cs.get_owner()->player_number(), cs, ww, di, p));
-}
-
-void Game::send_player_constructionsite_input_queue_max_fill(
-		ConstructionSite& cs, WareWorker ww, DescriptionIndex di, uint32_t max) {
-	send_player_command(new CmdConstructionsiteInputQueueMaxFill(
-		   get_gametime(), cs.get_owner()->player_number(), cs, ww, di, max));
-}
-
-void Game::send_player_constructionsite_enhance(ConstructionSite& cs) {
-	send_player_command(new CmdConstructionsiteEnhance(get_gametime(), cs.get_owner()->player_number(), cs));
-}
-
-void Game::send_player_constructionsite_startstop(ConstructionSite& cs, bool stop) {
-	send_player_command(new CmdConstructionsiteStartStop(get_gametime(), cs.get_owner()->player_number(), cs, stop));
+void Game::send_player_set_stock_policy(Building& imm, WareWorker ww, DescriptionIndex di, StockPolicy sp) {
+	send_player_command(new CmdSetStockPolicy(get_gametime(), imm.get_owner()->player_number(),
+			imm, ww == wwWORKER, di, sp));
 }
 
 int Game::propose_trade(const Trade& trade) {

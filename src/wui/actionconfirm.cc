@@ -301,7 +301,7 @@ void EnhanceConfirm::ok() {
 	if (still_under_construction_) {
 		upcast(Widelands::ConstructionSite, cs, object_.get(game));
 		if (cs && iaplayer().can_act(cs->owner().player_number())) {
-			game.send_player_constructionsite_enhance(*cs);
+			game.send_player_enhance_building(*cs, Widelands::INVALID_INDEX);
 		}
 	} else {
 		upcast(Widelands::Building, building, object_.get(game));

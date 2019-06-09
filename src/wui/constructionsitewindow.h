@@ -31,6 +31,7 @@
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "wui/buildingwindow.h"
+#include "wui/inputqueuedisplay.h"
 
 /**
  * Status window for construction sites.
@@ -48,36 +49,6 @@ protected:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 
 private:
-	struct FakeInputQueue : UI::Panel {
-		FakeInputQueue(Panel* parent,
-			           int32_t x,
-			           int32_t y,
-			           bool can_act,
-			           Widelands::ConstructionSite& cs,
-			           Widelands::WareWorker ww,
-			           Widelands::DescriptionIndex di);
-
-		void draw(RenderTarget& dst) override;
-		void think() override;
-
-		const Widelands::ProductionsiteSettings::InputQueueSetting& get_settings() const;
-
-	private:
-		Widelands::ConstructionSite& constructionsite_;
-		Widelands::ProductionsiteSettings& settings_;
-		Widelands::WareWorker type_;
-		Widelands::DescriptionIndex index_;
-
-		void change_fill(bool);
-		void update_desired_size() override;
-
-		uint32_t max_fill_;
-		const Image* icon_;
-		const Image* max_fill_indicator_;
-
-		std::unique_ptr<UI::Radiogroup> priority_group_;
-	};
-
 	class FakeWaresDisplay : public WaresDisplay {
 	public:
 		FakeWaresDisplay(UI::Panel* parent,
@@ -90,6 +61,7 @@ private:
 
 	private:
 		Widelands::WarehouseSettings& settings_;
+		const Widelands::TribeDescr& tribe_;
 	};
 
 	Widelands::OPtr<Widelands::ConstructionSite> construction_site_;
@@ -102,8 +74,8 @@ private:
 	UI::Button* cs_soldier_capacity_decrease_;
 	UI::Button* cs_soldier_capacity_increase_;
 	UI::Textarea* cs_soldier_capacity_display_;
-	std::vector<FakeInputQueue*> cs_ware_queues_;
-	std::vector<FakeInputQueue*> cs_worker_queues_;
+	std::vector<InputQueueDisplay*> cs_ware_queues_;
+	std::vector<InputQueueDisplay*> cs_worker_queues_;
 	UI::Checkbox* cs_stopped_;
 	FakeWaresDisplay* cs_warehouse_wares_;
 	FakeWaresDisplay* cs_warehouse_workers_;

@@ -33,13 +33,13 @@ namespace Widelands {
 
 ProductionsiteSettings::ProductionsiteSettings(const ProductionSiteDescr& descr)
 		: BuildingSettings(descr.name()), stopped(false) {
-	for (WareRange i(descr.input_wares()); i; ++i) {
-		ware_queues.push_back(std::make_pair(i.current->first,
-				InputQueueSetting{i.current->second, i.current->second, kPriorityNormal}));
+	for (const auto& pair : descr.input_wares()) {
+		ware_queues.push_back(std::make_pair(pair.first,
+				InputQueueSetting{pair.second, pair.second, kPriorityNormal}));
 	}
-	for (WareRange i(descr.input_workers()); i; ++i) {
-		worker_queues.push_back(std::make_pair(i.current->first,
-				InputQueueSetting{i.current->second, i.current->second, kPriorityNormal}));
+	for (const auto& pair : descr.input_workers()) {
+		worker_queues.push_back(std::make_pair(pair.first,
+				InputQueueSetting{pair.second, pair.second, kPriorityNormal}));
 	}
 }
 

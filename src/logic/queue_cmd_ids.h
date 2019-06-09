@@ -73,15 +73,6 @@ enum class QueueCommandTypes {
 	kMilitarysiteSetSoldierPreference,
 	kProposeTrade,  // 27
 
-	kConstructionSiteStockPolicy,
-	kConstructionSiteSoldierCapacity,
-	kConstructionSitePreferHeroes,
-	kConstructionSiteLaunchExpedition,
-	kConstructionSiteInputQueuePriority,
-	kConstructionSiteInputQueueMaxFill,
-	kConstructionSiteEnhance,
-	kConstructionSiteStartStop, // 35
-
 	kSinkShip = 121,
 	kShipCancelExpedition,
 	kPortStartExpedition,

@@ -264,6 +264,7 @@ public:
 
 	void send_player_enhance_building(Building&, DescriptionIndex);
 	void send_player_evict_worker(Worker&);
+	void send_player_set_stock_policy(Building&, WareWorker, DescriptionIndex, StockPolicy);
 	void send_player_set_ware_priority(PlayerImmovable&,
 	                                   int32_t type,
 	                                   DescriptionIndex index,
@@ -283,16 +284,6 @@ public:
 	void send_player_sink_ship(Ship&);
 	void send_player_cancel_expedition_ship(Ship&);
 	void send_player_propose_trade(const Trade& trade);
-
-	void send_player_constructionsite_soldier_capacity(ConstructionSite&, uint32_t);
-	void send_player_constructionsite_prefer_heroes(ConstructionSite&, bool);
-	void send_player_constructionsite_launch_expedition(ConstructionSite&, bool);
-	void send_player_constructionsite_stock_policy(
-			ConstructionSite&, WareWorker, DescriptionIndex, StockPolicy);
-	void send_player_constructionsite_input_queue_priority(ConstructionSite&, WareWorker, DescriptionIndex, int32_t);
-	void send_player_constructionsite_input_queue_max_fill(ConstructionSite&, WareWorker, DescriptionIndex, uint32_t);
-	void send_player_constructionsite_enhance(ConstructionSite&);
-	void send_player_constructionsite_startstop(ConstructionSite&, bool);
 
 	InteractivePlayer* get_ipl();
 

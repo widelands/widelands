@@ -53,7 +53,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	// Draw the construction site marker
 	std::vector<std::pair<uint32_t, uint32_t>> animations;
 	uint32_t total_frames = 0;
-	for (const BuildingDescr* d : intermediates) {
+	auto push_animation = [](const BuildingDescr* d, std::vector<std::pair<uint32_t, uint32_t>>* anims, uint32_t* tf) {
 		const bool known = d->is_animation_known("build");
 		const uint32_t anim_idx = known ?
 				d->get_animation("build", nullptr) :
@@ -62,19 +62,13 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		// would get many build steps with almost the same image...
 		const uint32_t nrframes = known ? g_gr->animations().get_animation(anim_idx).nr_frames() : 1;
 		assert(nrframes);
-		total_frames += nrframes;
-		animations.push_back(std::make_pair(anim_idx, nrframes));
+		*tf += nrframes;
+		anims->push_back(std::make_pair(anim_idx, nrframes));
+	};
+	for (const BuildingDescr* d : intermediates) {
+		push_animation(d, &animations, &total_frames);
 	}
-	{ // Now the same for the final building
-		const bool known = becomes->is_animation_known("build");
-		const uint32_t anim_idx = known ?
-				becomes->get_animation("build", nullptr) :
-				becomes->get_unoccupied_animation();
-		const uint32_t nrframes = known ? g_gr->animations().get_animation(anim_idx).nr_frames() : 1;
-		assert(nrframes);
-		total_frames += nrframes;
-		animations.push_back(std::make_pair(anim_idx, nrframes));
-	}
+	push_animation(becomes, &animations, &total_frames);
 
 	uint32_t frame_index = totaltime ? std::min(completedtime * total_frames / totaltime, total_frames - 1) : 0;
 	uint32_t animation_index = 0;
@@ -284,7 +278,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 					assert(b.soldier_control());
 					assert(ts->desired_capacity >= b.soldier_control()->min_soldier_capacity());
 					assert(ts->desired_capacity <= b.soldier_control()->max_soldier_capacity());
-					if (ts->desired_capacity != b.mutable_soldier_control()->soldier_capacity()) {
+					if (ts->desired_capacity != b.soldier_control()->soldier_capacity()) {
 						b.mutable_soldier_control()->set_soldier_capacity(ts->desired_capacity);
 					}
 				}
@@ -293,7 +287,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 				assert(b.soldier_control());
 				assert(ms->desired_capacity >= b.soldier_control()->min_soldier_capacity());
 				assert(ms->desired_capacity <= b.soldier_control()->max_soldier_capacity());
-				if (ms->desired_capacity != b.mutable_soldier_control()->soldier_capacity()) {
+				if (ms->desired_capacity != b.soldier_control()->soldier_capacity()) {
 					b.mutable_soldier_control()->set_soldier_capacity(ms->desired_capacity);
 				}
 				dynamic_cast<MilitarySite&>(b).set_soldier_preference(ms->prefer_heroes ?
@@ -335,113 +329,113 @@ void ConstructionSite::enhance(Game&) {
 	info_.becomes = building_;
 
 	const std::map<DescriptionIndex, uint8_t>& buildcost = building_->enhancement_cost();
-	const size_t buildcost_size = buildcost.size();
 	std::set<DescriptionIndex> new_ware_types;
-	for (std::map<DescriptionIndex, uint8_t>::const_iterator it = buildcost.begin(); it != buildcost.end(); ++it) {
+	for (const auto& pair : buildcost) {
 		bool found = false;
 		for (const auto& queue : wares_) {
-			if (queue->get_index() == it->first) {
+			if (queue->get_index() == pair.first) {
 				found = true;
 				break;
 			}
 		}
 		if (!found) {
-			new_ware_types.insert(it->first);
+			new_ware_types.insert(pair.first);
 		}
 	}
 
 	const size_t old_size = wares_.size();
 	wares_.resize(old_size + new_ware_types.size());
-	std::map<DescriptionIndex, uint8_t>::const_iterator it = buildcost.begin();
 
-	size_t new_wares_index = 0;
-	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
-		if (new_ware_types.count(it->first)) {
-			WaresQueue& wq = *(wares_[old_size + new_wares_index] = new WaresQueue(*this, it->first, it->second));
+	size_t new_index = 0;
+	for (const auto& pair : buildcost) {
+		if (new_ware_types.count(pair.first)) {
+			WaresQueue& wq = *(wares_[old_size + new_index] = new WaresQueue(*this, pair.first, pair.second));
 			wq.set_callback(ConstructionSite::wares_queue_callback, this);
 			wq.set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
-			++new_wares_index;
+			++new_index;
 		} else {
-			assert(i >= new_wares_index);
-			WaresQueue& wq = *wares_[i - new_wares_index];
-			wq.set_max_size(wq.get_max_size() + it->second);
-			wq.set_max_fill(wq.get_max_fill() + it->second);
+			for (size_t i = 0; i < old_size; ++i) {
+				WaresQueue& wq = *wares_[i];
+				if (wq.get_index() == pair.first) {
+					wq.set_max_size(wq.get_max_size() + pair.second);
+					wq.set_max_fill(wq.get_max_fill() + pair.second);
+					break;
+				}
+			}
 		}
-		work_steps_ += it->second;
+		work_steps_ += pair.second;
 	}
 
 	BuildingSettings* old_settings = settings_.release();
 	if (upcast(const WarehouseDescr, wd, building_)) {
+		upcast(WarehouseSettings, ws, old_settings);
+		assert(ws);
 		WarehouseSettings* new_settings = new WarehouseSettings(*wd, owner().tribe());
 		settings_.reset(new_settings);
-		if (upcast(WarehouseSettings, ws, old_settings)) {
-			for (const auto& pair : ws->ware_preferences) {
-				new_settings->ware_preferences[pair.first] = pair.second;
-			}
-			for (const auto& pair : ws->worker_preferences) {
-				new_settings->worker_preferences[pair.first] = pair.second;
-			}
-			new_settings->launch_expedition = ws->launch_expedition && building_->get_isport();
+		for (const auto& pair : ws->ware_preferences) {
+			new_settings->ware_preferences[pair.first] = pair.second;
 		}
+		for (const auto& pair : ws->worker_preferences) {
+			new_settings->worker_preferences[pair.first] = pair.second;
+		}
+		new_settings->launch_expedition = ws->launch_expedition && building_->get_isport();
 	} else if (upcast(const TrainingSiteDescr, td, building_)) {
+		upcast(TrainingsiteSettings, ts, old_settings);
+		assert(ts);
 		TrainingsiteSettings* new_settings = new TrainingsiteSettings(*td);
 		settings_.reset(new_settings);
-		if (upcast(ProductionsiteSettings, ps, old_settings)) {
-			new_settings->stopped = ps->stopped;
-			for (const auto& pair_old : ps->ware_queues) {
-				for (auto& pair_new : new_settings->ware_queues) {
-					if (pair_new.first == pair_old.first) {
-						pair_new.second.priority = pair_old.second.priority;
-						pair_new.second.desired_fill = std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
-						break;
-					}
+		new_settings->stopped = ts->stopped;
+		for (const auto& pair_old : ts->ware_queues) {
+			for (auto& pair_new : new_settings->ware_queues) {
+				if (pair_new.first == pair_old.first) {
+					pair_new.second.priority = pair_old.second.priority;
+					pair_new.second.desired_fill = std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					break;
 				}
-			}
-			for (const auto& pair_old : ps->worker_queues) {
-				for (auto& pair_new : new_settings->worker_queues) {
-					if (pair_new.first == pair_old.first) {
-						pair_new.second.priority = pair_old.second.priority;
-						pair_new.second.desired_fill = std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
-						break;
-					}
-				}
-			}
-			if (upcast(TrainingsiteSettings, ts, old_settings)) {
-				new_settings->desired_capacity = std::min(new_settings->max_capacity, ts->desired_capacity);
 			}
 		}
-	} else if (upcast(const ProductionSiteDescr, pd, building_)) {
-		ProductionsiteSettings* new_settings = new ProductionsiteSettings(*pd);
-		settings_.reset(new_settings);
-		if (upcast(ProductionsiteSettings, ps, old_settings)) {
-			new_settings->stopped = ps->stopped;
-			for (const auto& pair_old : ps->ware_queues) {
-				for (auto& pair_new : new_settings->ware_queues) {
-					if (pair_new.first == pair_old.first) {
-						pair_new.second.priority = pair_old.second.priority;
-						pair_new.second.desired_fill = std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
-						break;
-					}
+		for (const auto& pair_old : ts->worker_queues) {
+			for (auto& pair_new : new_settings->worker_queues) {
+				if (pair_new.first == pair_old.first) {
+					pair_new.second.priority = pair_old.second.priority;
+					pair_new.second.desired_fill = std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					break;
 				}
 			}
-			for (const auto& pair_old : ps->worker_queues) {
-				for (auto& pair_new : new_settings->worker_queues) {
-					if (pair_new.first == pair_old.first) {
-						pair_new.second.priority = pair_old.second.priority;
-						pair_new.second.desired_fill = std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
-						break;
-					}
+		}
+		new_settings->desired_capacity = std::min(new_settings->max_capacity, ts->desired_capacity);
+	} else if (upcast(const ProductionSiteDescr, pd, building_)) {
+		upcast(ProductionsiteSettings, ps, old_settings);
+		assert(ps);
+		ProductionsiteSettings* new_settings = new ProductionsiteSettings(*pd);
+		settings_.reset(new_settings);
+		new_settings->stopped = ps->stopped;
+		for (const auto& pair_old : ps->ware_queues) {
+			for (auto& pair_new : new_settings->ware_queues) {
+				if (pair_new.first == pair_old.first) {
+					pair_new.second.priority = pair_old.second.priority;
+					pair_new.second.desired_fill = std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					break;
+				}
+			}
+		}
+		for (const auto& pair_old : ps->worker_queues) {
+			for (auto& pair_new : new_settings->worker_queues) {
+				if (pair_new.first == pair_old.first) {
+					pair_new.second.priority = pair_old.second.priority;
+					pair_new.second.desired_fill = std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					break;
 				}
 			}
 		}
 	} else if (upcast(const MilitarySiteDescr, md, building_)) {
+		upcast(MilitarysiteSettings, ms, old_settings);
+		assert(ms);
 		MilitarysiteSettings* new_settings = new MilitarysiteSettings(*md);
 		settings_.reset(new_settings);
-		if (upcast(MilitarysiteSettings, ms, old_settings)) {
-			new_settings->desired_capacity = std::max<uint32_t>(1, std::min<uint32_t>(
-					new_settings->max_capacity, ms->desired_capacity));
-			new_settings->prefer_heroes = ms->prefer_heroes;
-		}
+		new_settings->desired_capacity = std::max<uint32_t>(1, std::min<uint32_t>(
+				new_settings->max_capacity, ms->desired_capacity));
+		new_settings->prefer_heroes = ms->prefer_heroes;
 	} else {
 		// TODO(Nordfriese): Add support for markets when trading is implemented
 		log("WARNING: Enhanced constructionsite to a %s, which is not of any known building type\n",
