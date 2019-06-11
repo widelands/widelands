@@ -61,7 +61,18 @@ struct Waterway : public RoadBase {
 	void remove_worker(Worker&) override;
 	void assign_carrier(Carrier&, uint8_t) override;
 
-	FerryFleet* get_fleet() const;
+	const FerryFleet* get_fleet() const {
+		return fleet_;
+	}
+	FerryFleet* get_fleet() {
+		return fleet_;
+	}
+	const Ferry* get_ferry() const {
+		return ferry_;
+	}
+	Ferry* get_ferry() {
+		return ferry_;
+	}
 
 	void log_general_info(const EditorGameBase&) const override;
 

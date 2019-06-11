@@ -105,10 +105,6 @@ void Waterway::assign_carrier(Carrier& c, uint8_t) {
 	ferry_ = dynamic_cast<Ferry*>(&c);
 }
 
-FerryFleet* Waterway::get_fleet() const {
-	return fleet_;
-}
-
 void Waterway::set_fleet(FerryFleet* fleet) {
 	if (fleet_ == fleet) {
 		return;
