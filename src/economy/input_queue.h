@@ -184,7 +184,10 @@ public:
 	 * @param game The game this queue will be part of.
 	 * @param mol The game/map loader that handles the lading. Required to pass to Request::read().
 	 */
-	void read(FileRead& f, Game& g, MapObjectLoader& mol);
+	void read(FileRead& f,
+	          Game& g,
+	          MapObjectLoader& mol,
+	          const TribesLegacyLookupTable& tribes_lookup_table);
 
 	/**
 	 * Writes the state of this class.
