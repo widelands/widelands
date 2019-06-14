@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
-"PO-Revision-Date: 2019-05-25 10:12+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-05-30 18:50+0000\n"
+"PO-Revision-Date: 2019-06-05 11:35+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -134,7 +134,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Berthron,<br>chief military adviser of Chat’Karuth"
-msgstr ""
+msgstr "Berthron,<br>chef militaire et conseiller de Chat’Karuth"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:3
@@ -149,7 +149,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/helptexts.lua:9
 msgctxt "barbarians_building"
 msgid "Boldreth,<br>about his time as young soldier"
-msgstr ""
+msgstr "Boldreth,<br>à l'époque où il était un jeune soldat"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/helptexts.lua:3
@@ -158,7 +158,7 @@ msgid ""
 "‘From the height of our tower we could see far into enemy territory. The "
 "enemy was well prepared, but we also noticed some weak points in their "
 "defense.’"
-msgstr ""
+msgstr "'Depuis les hauteurs de notre tour nous pouvions voir au loin dans le territoire ennemi. L'ennemi était bien préparé, mais nous avons aussi remarqué des points faibles dans leur défense.'"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:3
@@ -282,13 +282,13 @@ msgid ""
 "‘‘Only after the last duck has been shot down<br>Only after the last deer "
 "has been put to death<br>Only after the last fish has been caught<br>Then "
 "will you find that spiders are not to be eaten.’"
-msgstr ""
+msgstr "‘‘Tant que le dernier canard n'ait été abattu<br>Tant que le dernier des cerfs n'ait été mis à mort<br>Tant que le dernier poisson n'ait été péché<br>Alors tu trouveras que les araignées ne sont pas faites pour êtres mangées.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:14
 msgctxt "atlanteans_building"
 msgid "Prophecy of the fishbreeders"
-msgstr ""
+msgstr "La prophétie des pisciculteurs"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:19
@@ -626,7 +626,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘He who has enough bread will never be too tired to dig the ore and wield "
 "the ax.’"
-msgstr ""
+msgstr "'Celui qui aura assez de pain ne sera jamais assez fatigué pour extraire des minerais et porter une hache.'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:8
@@ -706,7 +706,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:14
 msgctxt "barbarians_building"
 msgid "First verse of the drinking song ‘Way of the Barbarian’"
-msgstr ""
+msgstr "Le premier verset de la chanson à boire 'La voie du barbare'"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/helptexts.lua:19
@@ -760,7 +760,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid "Song of the charcoal burners"
-msgstr ""
+msgstr "La chanson des charbonniers"
 
 #. TRANSLATORS: Lore helptext for a coal mine building, part 1
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:4
@@ -866,7 +866,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Frequent response of a barbarian fisherman,<br>often followed by an "
 "enjoyable brawl"
-msgstr ""
+msgstr "La réponse fréquente des pêcheurs barbares,<br>souvent suvie d'une joyeuse bagarre"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:13
@@ -1083,7 +1083,7 @@ msgstr "Le chasseur fait une pause de %s avant de se remettre au travail."
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:6
 msgctxt "barbarians_building"
 msgid "‘Miner’s Delight: Pitta bread with fish or meat, comes with one beer.’"
-msgstr ""
+msgstr "'Le délice des mineurs: Du pain pitta avec du poisson ou de la viande, accompagné d'une bière.'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:11
@@ -1298,13 +1298,13 @@ msgstr "Si toutes les marchandises sont livrées à temps, ce bâtiment peut pro
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:3
 msgctxt "barbarians_building"
 msgid "‘We open up roads and make houses from mountains.’"
-msgstr ""
+msgstr "'Nous avons créé des routes et fait des montagnes nos maisons.'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Slogan of the stonemasons’ guild"
-msgstr ""
+msgstr "Le slogan de la guilde des tailleurs de pierres"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:13
@@ -1378,16 +1378,16 @@ msgstr "La plantation de roseaux fait pousser des roseaux qui ont deux usages po
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid ""
-"Thatch reed is the traditional material for roofing, and it is woven into "
-"the extremely durable cloth that they use for their ships’ sails."
-msgstr "Le chaume de roseaux est le matériau traditionnel pour faire les toits, et il est tissé en une étoffe extrêmement résistante qu'ils utilisent pour les voiles de leurs navires."
+"Reed is the traditional material for roofing, and it is woven into the "
+"extremely durable cloth that they use for their ships’ sails."
+msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
-msgid "A reed yard can produce a sheaf of thatch reed in about %s on average."
-msgstr "Une plantation de roseaux peut produire une gerbe en environ %s en moyenne."
+msgid "A reed yard can produce a sheaf of reed in about %s on average."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:6
@@ -1417,7 +1417,7 @@ msgstr ""
 #: ../../data/tribes/buildings/warehouses/barbarians/port/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid "Captain Thanlas the Elder,<br>Explorer"
-msgstr ""
+msgstr "Capitaine Thanlas l'ancien,<br>Explorateur"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:6
@@ -1431,7 +1431,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/helptexts.lua:12
 msgctxt "barbarians_building"
 msgid "Chat’Karuth<br>at the 5ᵗʰ conference of master craftsmen"
-msgstr ""
+msgstr "Chat’Karuth<br>à la 5ème conférence des maitres artisans"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:6
@@ -1443,7 +1443,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Menu of the tavern ‘Ye Ol’ Bronze Axe’"
-msgstr ""
+msgstr "Le menu de la taverne 'La vieille hache de bronze'"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:16
@@ -1492,8 +1492,8 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:17
 msgctxt "barbarians_building"
-msgid "Weaves cloth out of thatch reed."
-msgstr "Tisse des étoffes à partir de chaume de roseau."
+msgid "Weaves cloth out of reed."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:3
@@ -3069,65 +3069,65 @@ msgid "The remains of a destroyed building."
 msgstr "Les restes d'un bâtiment détruit."
 
 #. TRANSLATORS: Helptext for a field
-#: ../../data/tribes/immovables/blackrootfield_harvested/helptexts.lua:4
-#: ../../data/tribes/immovables/cornfield_harvested/helptexts.lua:4
-#: ../../data/tribes/immovables/field_harvested/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield/harvested/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield/harvested/helptexts.lua:4
+#: ../../data/tribes/immovables/wheatfield/harvested/helptexts.lua:4
 msgid "This field has been harvested."
 msgstr "Ce champ a été récolté."
 
 #. TRANSLATORS: Helptext for a field
-#: ../../data/tribes/immovables/blackrootfield_medium/helptexts.lua:4
-#: ../../data/tribes/immovables/blackrootfield_small/helptexts.lua:4
-#: ../../data/tribes/immovables/cornfield_medium/helptexts.lua:4
-#: ../../data/tribes/immovables/cornfield_small/helptexts.lua:4
-#: ../../data/tribes/immovables/field_medium/helptexts.lua:4
-#: ../../data/tribes/immovables/field_small/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield/medium/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield/small/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield/medium/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield/small/helptexts.lua:4
+#: ../../data/tribes/immovables/wheatfield/medium/helptexts.lua:4
+#: ../../data/tribes/immovables/wheatfield/small/helptexts.lua:4
 msgid "This field is growing."
 msgstr "Ce champ est en croissance."
 
 #. TRANSLATORS: Helptext for a field
-#: ../../data/tribes/immovables/blackrootfield_ripe/helptexts.lua:4
-#: ../../data/tribes/immovables/cornfield_ripe/helptexts.lua:4
-#: ../../data/tribes/immovables/field_ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield/ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield/ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/wheatfield/ripe/helptexts.lua:4
 msgid "This field is ready for harvesting."
 msgstr "Ce champ est prêt pour la récolte."
 
 #. TRANSLATORS: Helptext for a field
-#: ../../data/tribes/immovables/blackrootfield_tiny/helptexts.lua:4
-#: ../../data/tribes/immovables/cornfield_tiny/helptexts.lua:4
-#: ../../data/tribes/immovables/field_tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield/tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield/tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/wheatfield/tiny/helptexts.lua:4
 msgid "This field has just been planted."
 msgstr "Ce champ vient juste d'être planté."
 
 #. TRANSLATORS: Helptext for a grapevine
-#: ../../data/tribes/immovables/grapevine_medium/helptexts.lua:4
-#: ../../data/tribes/immovables/grapevine_small/helptexts.lua:4
+#: ../../data/tribes/immovables/grapevine/medium/helptexts.lua:4
+#: ../../data/tribes/immovables/grapevine/small/helptexts.lua:4
 msgid "This grapevine is growing."
 msgstr "Cette vigne est en croissance."
 
 #. TRANSLATORS: Helptext for a grapevine
-#: ../../data/tribes/immovables/grapevine_ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/grapevine/ripe/helptexts.lua:4
 msgid "This grapevine is ready for harvesting."
 msgstr "Cette vigne est prête à être récoltée."
 
 #. TRANSLATORS: Helptext for a grapevine
-#: ../../data/tribes/immovables/grapevine_tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/grapevine/tiny/helptexts.lua:4
 msgid "This grapevine has just been planted."
 msgstr "Cette vigne vient d'être plantée."
 
 #. TRANSLATORS: Helptext for a reed field
-#: ../../data/tribes/immovables/reed_medium/helptexts.lua:4
-#: ../../data/tribes/immovables/reed_small/helptexts.lua:4
+#: ../../data/tribes/immovables/reedfield/medium/helptexts.lua:4
+#: ../../data/tribes/immovables/reedfield/small/helptexts.lua:4
 msgid "This reed is growing."
 msgstr "Ce roseau est en croissance."
 
 #. TRANSLATORS: Helptext for a reed field
-#: ../../data/tribes/immovables/reed_ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/reedfield/ripe/helptexts.lua:4
 msgid "This reed is ready for harvesting."
 msgstr "Ce roseau est prêt à être récolté."
 
 #. TRANSLATORS: Helptext for a reed field
-#: ../../data/tribes/immovables/reed_tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/reedfield/tiny/helptexts.lua:4
 msgid "This reed has just been planted."
 msgstr "Ce roseau vient d'être planté."
 
@@ -3499,13 +3499,13 @@ msgstr "%s ou plus"
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
 #: ../../data/tribes/scripting/help/building_help.lua:665
 msgid "Worker uses:"
-msgstr ""
+msgstr "L'ouvrier utilise:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker
 #. uses
 #: ../../data/tribes/scripting/help/building_help.lua:668
 msgid "Workers use:"
-msgstr ""
+msgstr "Les ouvriers utilisent:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:695
 msgid "Production"
@@ -4092,19 +4092,19 @@ msgstr "Producteur"
 #. TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
 #: ../../data/tribes/scripting/help/ware_help.lua:107
 msgid "Ware produced:"
-msgstr ""
+msgstr "Marchandise produite:"
 
 #. TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a
 #. productionsite
 #: ../../data/tribes/scripting/help/ware_help.lua:110
 msgid "Wares produced:"
-msgstr ""
+msgstr "Marchandises produites:"
 
 #. TRANSLATORS: Ware Encyclopedia: Heading for 1 building and / or worker that
 #. consumes a ware
 #: ../../data/tribes/scripting/help/ware_help.lua:172
 msgid "Consumer"
-msgstr ""
+msgstr "Client"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
@@ -4115,13 +4115,13 @@ msgstr ""
 #. TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:79
 msgid "Worker recruited:"
-msgstr ""
+msgstr "Ouvrier recruté:"
 
 #. TRANSLATORS: Worker Encyclopedia: More than 1 worker recruited by a
 #. productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:82
 msgid "Workers recruited:"
-msgstr ""
+msgstr "Ouvriers recrutés:"
 
 #. TRANSLATORS: Worker Encyclopedia: Heading for 1 building where a worker can
 #. work
@@ -4129,7 +4129,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/worker_help.lua:112
 msgctxt "workerhelp_one_building"
 msgid "Works at"
-msgstr ""
+msgstr "Travaille à"
 
 #. TRANSLATORS: Worker Encyclopedia: A list of more than 1 building where a
 #. worker can work
@@ -4137,19 +4137,19 @@ msgstr ""
 #: ../../data/tribes/scripting/help/worker_help.lua:116
 msgctxt "workerhelp_multiple_buildings"
 msgid "Works at"
-msgstr ""
+msgstr "Travaille à"
 
 #. TRANSLATORS: You can also translate this as 'additional workplace'
 #: ../../data/tribes/scripting/help/worker_help.lua:132
 msgctxt "workerhelp_one_building"
 msgid "Can also work at"
-msgstr ""
+msgstr "Peut aussi travailler à"
 
 #. TRANSLATORS: You can also translate this as 'additional workplaces'
 #: ../../data/tribes/scripting/help/worker_help.lua:136
 msgctxt "workerhelp_multiple_buildings"
 msgid "Can also work at"
-msgstr ""
+msgstr "Peut aussi travailler à"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
 #: ../../data/tribes/scripting/help/worker_help.lua:177
@@ -4492,9 +4492,8 @@ msgstr "L'argile est faite d'eau et de boue pour être transformée en briques, 
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../data/tribes/wares/cloth/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid ""
-"Cloth is needed for Barbarian ships. It is produced out of thatch reed."
-msgstr "Le tissu est nécessaire pour les navires barbares. Il est produit à partir de chaume de roseau."
+msgid "Cloth is needed for Barbarian ships. It is produced out of reed."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../data/tribes/wares/cloth/helptexts.lua:6
@@ -4548,7 +4547,7 @@ msgstr "Les feux des fonderies, forges d'armures et d'armes impériales sont hab
 msgctxt "frisians_ware"
 msgid ""
 "The fires of the brick kilns, furnaces and armor smithies are fed with coal."
-msgstr ""
+msgstr "Les fourneaux des fours à briques, des forges et des armuriers sont nourris avec du charbon."
 
 #. TRANSLATORS: Helptext for a ware: Corn
 #: ../../data/tribes/wares/corn/helptexts.lua:4
@@ -4579,7 +4578,7 @@ msgstr "Ces merveilleux diamants sont utilisés pour construire des bâtiments e
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:4
 msgctxt "ware"
 msgid "The felling ax is the tool to chop down trees."
-msgstr ""
+msgstr "La cognée est l'outil pour abattre les arbres."
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:6
@@ -4612,7 +4611,7 @@ msgstr ""
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:6
 msgctxt "atlanteans_ware_fire_tongs"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr ""
+msgstr "Ils sont utilisés dans les travaux de la fonte et produits par le forgeron d'outils."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:8
@@ -5040,7 +5039,7 @@ msgstr "Elles sont produites par le forgeron d'outils."
 #: ../../data/tribes/wares/iron/helptexts.lua:4
 msgctxt "ware"
 msgid "Iron is smelted out of iron ores."
-msgstr ""
+msgstr "Le fer est fondu et extrait des minerais de fer."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:6
@@ -5380,6 +5379,23 @@ msgid ""
 "Fruit, bread or smoked meat or fish."
 msgstr "Les rations sont produites dans les tavernes et les bistrots à partir de quelque chose à manger: Fruit, pain ou viande fumée ou poisson."
 
+#. TRANSLATORS: Helptext for a ware: Reed
+#: ../../data/tribes/wares/reed/helptexts.lua:4
+msgctxt "barbarians_ware"
+msgid ""
+"Reed is produced in a reed yard and used to make the roofs of buildings "
+"waterproof."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Reed
+#: ../../data/tribes/wares/reed/helptexts.lua:6
+msgctxt "frisians_ware"
+msgid ""
+"Reed is grown in a reed farm. Nothing is better suited to make roofs "
+"waterproof. It is also used to make buckets and fishing nets as well as "
+"cloth."
+msgstr ""
+
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../data/tribes/wares/saw/helptexts.lua:4
 msgctxt "atlanteans_ware"
@@ -5644,23 +5660,6 @@ msgid ""
 "They are used in the labyrinth – together with food – to train soldiers from"
 " health level 0 to level 1."
 msgstr "Les tabards dorés sont produits dans les ateliers de tissage Atlantes à partir de fil d'or. Ils sont utilisés au labyrinthe – avec de la nourriture – pour entraîner la santé des soldats du niveau 0 au niveau 1."
-
-#. TRANSLATORS: Helptext for a ware: Thatch Reed
-#: ../../data/tribes/wares/thatch_reed/helptexts.lua:4
-msgctxt "barbarians_ware"
-msgid ""
-"Thatch reed is produced in a reed yard and used to make the roofs of "
-"buildings waterproof."
-msgstr "Le chaume de roseau est produit dans les plantations de roseaux et utilisé pour rendre les toitures des bâtiments étanches."
-
-#. TRANSLATORS: Helptext for a ware: Thatch Reed
-#: ../../data/tribes/wares/thatch_reed/helptexts.lua:6
-msgctxt "frisians_ware"
-msgid ""
-"Thatch reed is a special kind of reed that is grown in a reed farm. Nothing "
-"is better suited to make roofs waterproof. It is also used to make buckets "
-"and fishing nets as well as cloth."
-msgstr "Le roseau de chaume est un roseau spécial qui est cultivé dans une roselière. Rien n'est mieux adapté pour rendre les toits imperméables. Il est également utilisé pour fabriquer des seaux et des filets de pêche ainsi que des tissus."
 
 #. TRANSLATORS: Helptext for a ware: Double Trident
 #: ../../data/tribes/wares/trident_double/helptexts.lua:4
@@ -6040,8 +6039,8 @@ msgstr "Le garde-chasse s'assure que la population de gibier ne descende jamais 
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../data/tribes/workers/barbarians/gardener/helptexts.lua:3
 msgctxt "barbarians_worker"
-msgid "Grows thatch reed."
-msgstr "Fait pousser des chaumes de roseaux."
+msgid "Plants and harvests reed fields."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/barbarians/geologist/helptexts.lua:3
@@ -6486,8 +6485,8 @@ msgstr "Travaille au plus profond des mines pour obtenir du charbon, du fer, de 
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../data/tribes/workers/frisians/reed_farmer/helptexts.lua:3
 msgctxt "frisians_worker"
-msgid "Grows thatch reed."
-msgstr "Fait pousser des chaumes de roseaux."
+msgid "Plants and harvests reed fields."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Reindeer
 #: ../../data/tribes/workers/frisians/reindeer/helptexts.lua:3
