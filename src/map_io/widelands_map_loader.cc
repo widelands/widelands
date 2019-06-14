@@ -152,7 +152,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 	std::unique_ptr<WorldLegacyLookupTable> world_lookup_table(
 	   create_world_legacy_lookup_table(old_world_name_));
-	std::unique_ptr<TribesLegacyLookupTable> tribe_lookup_table(new TribesLegacyLookupTable());
+	std::unique_ptr<TribesLegacyLookupTable> tribes_lookup_table(new TribesLegacyLookupTable());
 	log("Reading Terrain Data ... ");
 	{
 		MapTerrainPacket p;
@@ -163,7 +163,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	MapObjectPacket mapobjects;
 
 	log("Reading Map Objects ... ");
-	mapobjects.read(*fs_, egbase, *mol_, *world_lookup_table, *tribe_lookup_table);
+	mapobjects.read(*fs_, egbase, *mol_, *world_lookup_table, *tribes_lookup_table);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Player Start Position Data ... ");
@@ -259,21 +259,21 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log("Reading Flagdata Data ... ");
 		{
 			MapFlagdataPacket p;
-			p.read(*fs_, egbase, is_game, *mol_);
+			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Roaddata Data ... ");
 		{
 			MapRoaddataPacket p;
-			p.read(*fs_, egbase, is_game, *mol_);
+			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Buildingdata Data ... ");
 		{
 			MapBuildingdataPacket p;
-			p.read(*fs_, egbase, is_game, *mol_);
+			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
@@ -297,7 +297,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log("Reading Players View Data ... ");
 		{
 			MapPlayersViewPacket p;
-			p.read(*fs_, egbase, is_game, *mol_);
+			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table, *world_lookup_table);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 

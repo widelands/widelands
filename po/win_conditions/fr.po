@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-11 09:20+0000\n"
-"Last-Translator: Christophe Quintard <christophe.quintard@gmail.com>\n"
+"POT-Creation-Date: 2019-05-30 18:50+0000\n"
+"PO-Revision-Date: 2019-06-03 09:25+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgstr "La recherche d'anciens artefacts. Une fois qu'ils sont tous trouvés, l'
 
 #: ../../data/scripting/win_conditions/artifacts.lua:18
 msgid "Artifacts owned"
-msgstr "Possession des artefacts"
+msgstr "Artefacts possédés"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:73
 msgid "No Artifacts"
@@ -224,7 +224,7 @@ msgstr "Chaque joueur ou équipe tente de posséder plus de la moitié de la sur
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:56
 msgid "Currently no faction owns more than half of the map’s area."
-msgstr "Actuellement aucune faction ne possède plus de la moitié de la carte"
+msgstr "Actuellement aucune faction ne possède plus de la moitié de la carte."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
