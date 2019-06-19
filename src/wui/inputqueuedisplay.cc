@@ -73,7 +73,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
 
 	uint32_t priority_button_height = show_only ? 0 : 3 * PriorityButtonSize;
 	uint32_t image_height =
-	   show_only ? WARE_MENU_PIC_HEIGHT : std::max<int32_t>(WARE_MENU_PIC_HEIGHT, ph);
+	   show_only ? kWareMenuPicHeight : std::max<int32_t>(kWareMenuPicHeight, ph);
 
 	total_height_ = std::max(priority_button_height, image_height) + 2 * Border;
 
