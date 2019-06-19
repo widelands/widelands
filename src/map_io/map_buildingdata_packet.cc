@@ -275,7 +275,7 @@ void MapBuildingdataPacket::read_constructionsite(
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version >= 3) {
-			read_partially_finished_building(constructionsite, fr, game, mol);
+			read_partially_finished_building(constructionsite, fr, game, mol, tribes_lookup_table);
 
 			for (ConstructionSite::Wares::iterator wares_iter = constructionsite.wares_.begin();
 			     wares_iter != constructionsite.wares_.end(); ++wares_iter) {
