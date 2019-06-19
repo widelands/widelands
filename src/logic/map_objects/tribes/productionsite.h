@@ -309,13 +309,13 @@ protected:  // TrainingSite must have access to this stuff
 
 	int32_t fetchfromflag_;  ///< Number of wares to fetch from flag
 
-	/// If a program has ended with the result Skipped, that program may not
+	/// If a program has ended with the result Failed or Skipped, that program may not
 	/// start again until a certain time has passed. This is a map from program
-	/// name to game time. When a program ends with the result Skipped, its name
+	/// name to game time. When a program ends with the result Failed or Skipped, its name
 	/// is added to this map, with the current game time. (When the program ends
 	/// with any other result, its name is removed from the map.)
-	using SkippedPrograms = std::map<std::string, Time>;
-	SkippedPrograms skipped_programs_;
+	using FailedSkippedPrograms = std::map<std::string, Time>;
+	FailedSkippedPrograms failed_skipped_programs_;
 
 	using Stack = std::vector<State>;
 	Stack stack_;           ///<  program stack

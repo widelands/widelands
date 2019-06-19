@@ -61,16 +61,16 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
          descname = _"planting reed",
          actions = {
-            "sleep=18000",
-            "callworker=plantreed"
+            "callworker=plantreed",
+            "sleep=18000"
          }
       },
       harvest_reed = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
          descname = _"harvesting reed",
          actions = {
-            "sleep=5000",
-            "callworker=harvestreed"
+            "callworker=harvestreed",
+            "sleep=5000"
          }
       },
    },

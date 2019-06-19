@@ -427,12 +427,9 @@ void ProductionSite::calc_statistics() {
 			trend = "=";
 		}
 
-		const std::string trend_str =
-		   g_gr->styles().color_tag((boost::format(_("%i%%")) % trend).str(), color);
-
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
 		statistics_string_on_changed_statistics_ =
-		   (boost::format("%s\u2009%s") % perc_str % trend_str).str();
+		   (boost::format("%s\u2009%s") % perc_str % g_gr->styles().color_tag(trend, color)).str();
 	} else {
 		statistics_string_on_changed_statistics_ = perc_str;
 	}
@@ -923,8 +920,8 @@ void ProductionSite::program_start(Game& game, const std::string& program_name) 
 
 	program_timer_ = true;
 	uint32_t tdelta = 10;
-	SkippedPrograms::const_iterator i = skipped_programs_.find(program_name);
-	if (i != skipped_programs_.end()) {
+	FailedSkippedPrograms::const_iterator i = failed_skipped_programs_.find(program_name);
+	if (i != failed_skipped_programs_.end()) {
 		uint32_t const gametime = game.get_gametime();
 		uint32_t const earliest_allowed_start_time = i->second + 10000;
 		if (gametime + tdelta < earliest_allowed_start_time)
@@ -955,13 +952,14 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 
 	switch (result) {
 	case ProgramResult::kFailed:
+		failed_skipped_programs_[program_name] = game.get_gametime();
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(false);
 		calc_statistics();
 		update_crude_statistics(current_duration, false);
 		break;
 	case ProgramResult::kCompleted:
-		skipped_programs_.erase(program_name);
+		failed_skipped_programs_.erase(program_name);
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(true);
 		train_workers(game);
@@ -969,11 +967,11 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		calc_statistics();
 		break;
 	case ProgramResult::kSkipped:
-		skipped_programs_[program_name] = game.get_gametime();
+		failed_skipped_programs_[program_name] = game.get_gametime();
 		update_crude_statistics(current_duration, false);
 		break;
 	case ProgramResult::kNone:
-		skipped_programs_.erase(program_name);
+		failed_skipped_programs_.erase(program_name);
 		break;
 	}
 

@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
 # Anton Khabarov <2233009@gmail.com>, 2015-2016,2018
 # Arex <arex@ngs.ru>, 2015
-# CupIvan <mail@cupivan.ru>, 2017
+# CupIvan <mail@cupivan.ru>, 2017,2019
 # George Matsune <georg29387878@gmail.com>, 2017
 # CupIvan <mail@cupivan.ru>, 2015
 # Viktor S <awsswa59@gmail.com>, 2018
@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-25 13:58+0000\n"
-"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
+"POT-Creation-Date: 2019-05-30 18:50+0000\n"
+"PO-Revision-Date: 2019-06-13 05:33+0000\n"
+"Last-Translator: CupIvan <mail@cupivan.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -551,7 +551,7 @@ msgstr "Бронная"
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:65
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:61
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:58
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:48
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:67
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:60
@@ -561,8 +561,8 @@ msgstr "Бронная"
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:44
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:63
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:81
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:52
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:70
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:50
@@ -969,7 +969,7 @@ msgid "Horse Farm"
 msgstr "Конный завод"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:53
+#: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:52
 msgctxt "atlanteans_building"
 msgid "breeding horses"
 msgstr "выращивает лошадей"
@@ -991,7 +991,7 @@ msgstr "охотится"
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:65
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:69
 msgid "No Game"
 msgstr "Нет дичи"
 
@@ -999,7 +999,7 @@ msgstr "Нет дичи"
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:55
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:66
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:55
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:67
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:71
 msgid "Out of Game"
 msgstr "Больше нет дичи"
 
@@ -1075,7 +1075,7 @@ msgstr "Мельница"
 msgid "grinding corn"
 msgstr "размалывает кукурузу"
 
-#. TRANSLATORS: Completed/Skipped/Did not start grinding blackrootbecause ...
+#. TRANSLATORS: Completed/Skipped/Did not start grinding blackroot because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:78
 msgid "grinding blackroot"
 msgstr "размалывает козелец"
@@ -1150,7 +1150,7 @@ msgstr "Верфь"
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:73
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:72
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:72
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:66
 msgid "constructing a ship"
@@ -1357,21 +1357,21 @@ msgctxt "atlanteans_building"
 msgid "Well"
 msgstr "Колодец"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:59
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:62
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:59
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:62
 msgid "No Water"
 msgstr "Нет воды"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:60
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:61
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:63
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:60
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:63
 msgid "Out of Water"
 msgstr "Больше нет воды"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:61
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:62
 msgctxt "atlanteans_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Носильщик, работающий у этого колодца, не может найти воду нем."
@@ -1455,7 +1455,7 @@ msgid "Barracks"
 msgstr "Казармы"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:60
 msgctxt "barbarians_building"
 msgid "recruiting soldier"
 msgstr "вербует солдат"
@@ -1508,7 +1508,7 @@ msgid "Cattle Farm"
 msgstr "Скотный двор"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:53
+#: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:52
 msgctxt "barbarians_building"
 msgid "rearing cattle"
 msgstr "разводит скот"
@@ -1670,12 +1670,12 @@ msgid "forging a helmet"
 msgstr "куёт шлем"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a mask because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:90
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:91
 msgid "forging a mask"
 msgstr "куёт защитную маску"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warhelm because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:102
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:104
 msgid "forging a warhelm"
 msgstr "куёт боевой шлем"
 
@@ -1831,7 +1831,7 @@ msgstr "Хижина лесничего"
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:7
 msgctxt "barbarians_building"
 msgid "Reed Yard"
-msgstr "Плантация"
+msgstr "Тростниковый двор"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:53
@@ -1850,7 +1850,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
 "seeds."
-msgstr "У садовника из этой плантации нет почвы пригодной для посева."
+msgstr "У садовника на тростниковом дворе нет почвы пригодной для посева."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:7
@@ -1859,7 +1859,7 @@ msgid "Scout’s Hut"
 msgstr "Хижина разведчика"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:7
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:13
 msgctxt "barbarians_building"
 msgid "Shipyard"
 msgstr "Верфь"
@@ -2028,7 +2028,7 @@ msgid "Donkey Farm"
 msgstr "Ослиная ферма"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
-#: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:53
+#: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:52
 msgctxt "empire_building"
 msgid "rearing donkeys"
 msgstr "разводит ослов"
@@ -2738,7 +2738,7 @@ msgid "Hunter’s House"
 msgstr "Домик охотника"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:69
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:73
 msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -3313,7 +3313,7 @@ msgid "Port"
 msgstr "Порт"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/init.lua:7
+#: ../../data/tribes/buildings/warehouses/barbarians/warehouse/init.lua:11
 msgctxt "barbarians_building"
 msgid "Warehouse"
 msgstr "Склад"
@@ -3367,52 +3367,52 @@ msgid "Ashes"
 msgstr "Пепелище"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/barleyfield_harvested/init.lua:7
+#: ../../data/tribes/immovables/barleyfield/harvested/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (harvested)"
 msgstr "Ячменное поле (убрано)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/barleyfield_medium/init.lua:7
+#: ../../data/tribes/immovables/barleyfield/medium/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (medium)"
 msgstr "Ячменное поле (среднее)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/barleyfield_ripe/init.lua:7
+#: ../../data/tribes/immovables/barleyfield/ripe/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (ripe)"
 msgstr "Ячменное поле (зрелое)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/barleyfield_small/init.lua:7
+#: ../../data/tribes/immovables/barleyfield/small/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (small)"
 msgstr "Ячменное поле (малое)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/barleyfield_tiny/init.lua:7
+#: ../../data/tribes/immovables/barleyfield/tiny/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (tiny)"
 msgstr "Ячменное поле (крохотное)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:18
 msgid "Blueberry Bush (tiny)"
 msgstr "Черничный куст (крохотное)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:37
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:39
 msgid "Blueberry Bush (small)"
 msgstr "Черничный куст (малое)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:60
 msgid "Blueberry Bush (medium)"
 msgstr "Черничный куст (среднее)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:81
 msgid "Blueberry Bush (ripe)"
 msgstr "Черничный куст (зрелое)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:16
 msgid "Black Currant (tiny)"
 msgstr "Черная смородина (крохотное)"
 
@@ -3420,15 +3420,15 @@ msgstr "Черная смородина (крохотное)"
 msgid "Black Currant (small)"
 msgstr "Черная смородина (малое)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:58
 msgid "Black Currant (medium)"
 msgstr "Черная смородина (среднее)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:79
 msgid "Black Currant (ripe)"
 msgstr "Черная смородина (зрелое)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:16
 msgid "Red Currant (tiny)"
 msgstr "Красная смородина (крохотное)"
 
@@ -3436,15 +3436,15 @@ msgstr "Красная смородина (крохотное)"
 msgid "Red Currant (small)"
 msgstr "Красная смородина (малое)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:58
 msgid "Red Currant (medium)"
 msgstr "Красная смородина (среднее)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:79
 msgid "Red Currant (ripe)"
 msgstr "Красная смородина (зрелое)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:16
 msgid "Desert Hackberry (tiny)"
 msgstr "Каркас (крохотное)"
 
@@ -3452,15 +3452,15 @@ msgstr "Каркас (крохотное)"
 msgid "Desert Hackberry (small)"
 msgstr "Каркас (малое)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:58
 msgid "Desert Hackberry (medium)"
 msgstr "Каркас (среднее)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:79
 msgid "Desert Hackberry (ripe)"
 msgstr "Каркас (зрелое)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:16
 msgid "Juniper (tiny)"
 msgstr "Можжевельник (крохотное)"
 
@@ -3468,15 +3468,15 @@ msgstr "Можжевельник (крохотное)"
 msgid "Juniper (small)"
 msgstr "Можжевельник (малое)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:58
 msgid "Juniper (medium)"
 msgstr "Можжевельник (среднее)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:79
 msgid "Juniper (ripe)"
 msgstr "Можжевельник (зрелое)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:16
 msgid "Raspberry Bush (tiny)"
 msgstr "Малина (крохотное)"
 
@@ -3484,15 +3484,15 @@ msgstr "Малина (крохотное)"
 msgid "Raspberry Bush (small)"
 msgstr "Малина (малое)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:58
 msgid "Raspberry Bush (medium)"
 msgstr "Малина (среднее)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:79
 msgid "Raspberry Bush (ripe)"
 msgstr "Малина (зрелое)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:16
 msgid "Sea Buckthorn (tiny)"
 msgstr "Облепиха (крохотное)"
 
@@ -3500,15 +3500,15 @@ msgstr "Облепиха (крохотное)"
 msgid "Sea Buckthorn (small)"
 msgstr "Облепиха (малое)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:58
 msgid "Sea Buckthorn (medium)"
 msgstr "Облепиха (среднее)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:79
 msgid "Sea Buckthorn (ripe)"
 msgstr "Облепиха (зрелое)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:16
 msgid "Strawberries (tiny)"
 msgstr "Клубника (крохотное)"
 
@@ -3516,70 +3516,70 @@ msgstr "Клубника (крохотное)"
 msgid "Strawberries (small)"
 msgstr "Клубника (малое)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:58
 msgid "Strawberries (medium)"
 msgstr "Клубника (среднее)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:79
 msgid "Strawberries (ripe)"
 msgstr "Клубника (зрелое)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/blackrootfield_harvested/init.lua:7
+#: ../../data/tribes/immovables/blackrootfield/harvested/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (harvested)"
 msgstr "Козельцовое поле (убрано)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/blackrootfield_medium/init.lua:7
+#: ../../data/tribes/immovables/blackrootfield/medium/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (medium)"
 msgstr "Козельцовое поле (среднее)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/blackrootfield_ripe/init.lua:7
+#: ../../data/tribes/immovables/blackrootfield/ripe/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (ripe)"
 msgstr "Козельцовое поле (крохотное)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/blackrootfield_small/init.lua:7
+#: ../../data/tribes/immovables/blackrootfield/small/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (small)"
 msgstr "Козельцовое поле (малое)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/blackrootfield_tiny/init.lua:7
+#: ../../data/tribes/immovables/blackrootfield/tiny/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (tiny)"
 msgstr "Козельцовое поле (крохотное)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/cornfield_harvested/init.lua:7
+#: ../../data/tribes/immovables/cornfield/harvested/init.lua:7
 msgctxt "immovable"
 msgid "Cornfield (harvested)"
 msgstr "Кукурузное поле (убрано)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/cornfield_medium/init.lua:7
+#: ../../data/tribes/immovables/cornfield/medium/init.lua:7
 msgctxt "immovable"
 msgid "Cornfield (medium)"
 msgstr "Кукурузное поле (среднее)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/cornfield_ripe/init.lua:7
+#: ../../data/tribes/immovables/cornfield/ripe/init.lua:7
 msgctxt "immovable"
 msgid "Cornfield (ripe)"
 msgstr "Кукурузное поле (крохотное)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/cornfield_small/init.lua:7
+#: ../../data/tribes/immovables/cornfield/small/init.lua:7
 msgctxt "immovable"
 msgid "Cornfield (small)"
 msgstr "Кукурузное поле (малое)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/cornfield_tiny/init.lua:7
+#: ../../data/tribes/immovables/cornfield/tiny/init.lua:7
 msgctxt "immovable"
 msgid "Cornfield (tiny)"
 msgstr "Кукурузное поле (крохотное)"
@@ -3591,190 +3591,180 @@ msgid "Destroyed building"
 msgstr "Разрушенное здание"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/field_harvested/init.lua:7
-msgctxt "immovable"
-msgid "Field (harvested)"
-msgstr "Поле (убрано)"
-
-#. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/field_medium/init.lua:7
-msgctxt "immovable"
-msgid "Field (medium)"
-msgstr "Поле (среднее)"
-
-#. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/field_ripe/init.lua:7
-msgctxt "immovable"
-msgid "Field (ripe)"
-msgstr "Поле (зрелое)"
-
-#. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/field_small/init.lua:7
-msgctxt "immovable"
-msgid "Field (small)"
-msgstr "Поле (малое)"
-
-#. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/field_tiny/init.lua:7
-msgctxt "immovable"
-msgid "Field (tiny)"
-msgstr "Поле (крохотное)"
-
-#. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/grapevine_medium/init.lua:7
+#: ../../data/tribes/immovables/grapevine/medium/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (medium)"
 msgstr "Виноград (средний)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/grapevine_ripe/init.lua:7
+#: ../../data/tribes/immovables/grapevine/ripe/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (ripe)"
 msgstr "Виноград (зрелый)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/grapevine_small/init.lua:7
+#: ../../data/tribes/immovables/grapevine/small/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (small)"
 msgstr "Виноград (малый)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/grapevine_tiny/init.lua:7
+#: ../../data/tribes/immovables/grapevine/tiny/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (tiny)"
 msgstr "Виноград (крохотный)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/pond_dry/init.lua:7
+#: ../../data/tribes/immovables/pond/dry/init.lua:7
 msgctxt "immovable"
 msgid "Dry Pond"
 msgstr "Пересохший пруд"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/pond_growing/init.lua:7
+#: ../../data/tribes/immovables/pond/growing/init.lua:7
 msgctxt "immovable"
 msgid "Pond With Fish Spawn"
 msgstr "Пруд нерестящейся рыбы"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/pond_mature/init.lua:7
+#: ../../data/tribes/immovables/pond/mature/init.lua:7
 msgctxt "immovable"
 msgid "Pond With Fish"
 msgstr "Зарыбленный пруд"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/reed_medium/init.lua:7
+#: ../../data/tribes/immovables/reedfield/medium/init.lua:7
 msgctxt "immovable"
-msgid "Reed (medium)"
-msgstr "Тростник (средний)"
+msgid "Reed Field (medium)"
+msgstr "Тростниковое поле (среднее)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/reed_ripe/init.lua:7
+#: ../../data/tribes/immovables/reedfield/ripe/init.lua:7
 msgctxt "immovable"
-msgid "Reed (ripe)"
-msgstr "Тростник (зрелый)"
+msgid "Reed Field (ripe)"
+msgstr "Тростниковое поле (зрелое)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/reed_small/init.lua:7
+#: ../../data/tribes/immovables/reedfield/small/init.lua:7
 msgctxt "immovable"
-msgid "Reed (small)"
-msgstr "Тростник (малый)"
+msgid "Reed Field (small)"
+msgstr "Тростниковое поле (малое)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/reed_tiny/init.lua:7
+#: ../../data/tribes/immovables/reedfield/tiny/init.lua:7
 msgctxt "immovable"
-msgid "Reed (tiny)"
-msgstr "Тростник (крохотный)"
+msgid "Reed Field (tiny)"
+msgstr "Тростниковое поле (крохотное)"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:7
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:7
 #: ../../data/tribes/immovables/resi/empire/init.lua:7
 #: ../../data/tribes/immovables/resi/frisians/init.lua:7
-msgctxt "immovable"
-msgid "Resources: None"
-msgstr "Ресурсы: Нет"
+msgctxt "resource_indicator"
+msgid "No Resources"
+msgstr "Нет ресурсов"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:29
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:29
-#: ../../data/tribes/immovables/resi/empire/init.lua:29
-#: ../../data/tribes/immovables/resi/frisians/init.lua:29
-msgctxt "immovable"
-msgid "Resources: Water Vein"
-msgstr "Ресурсы: Родник"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:30
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:30
+#: ../../data/tribes/immovables/resi/empire/init.lua:30
+#: ../../data/tribes/immovables/resi/frisians/init.lua:30
+msgctxt "resource_indicator"
+msgid "Water"
+msgstr "Вода"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:52
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:51
-#: ../../data/tribes/immovables/resi/empire/init.lua:51
-#: ../../data/tribes/immovables/resi/frisians/init.lua:52
-msgctxt "immovable"
-msgid "Resources: Coal Vein"
-msgstr "Ресурсы: Угольная жила"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:54
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:53
+#: ../../data/tribes/immovables/resi/empire/init.lua:53
+#: ../../data/tribes/immovables/resi/frisians/init.lua:54
+msgctxt "resource_indicator"
+msgid "Some Coal"
+msgstr "Немного угля"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:75
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:73
-#: ../../data/tribes/immovables/resi/empire/init.lua:73
-#: ../../data/tribes/immovables/resi/frisians/init.lua:75
-msgctxt "immovable"
-msgid "Resources: Gold Vein"
-msgstr "Ресурсы: Золотая жила"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:78
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:76
+#: ../../data/tribes/immovables/resi/empire/init.lua:76
+#: ../../data/tribes/immovables/resi/frisians/init.lua:78
+msgctxt "resource_indicator"
+msgid "Some Gold"
+msgstr "Немного золота"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:98
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:95
-#: ../../data/tribes/immovables/resi/empire/init.lua:95
-#: ../../data/tribes/immovables/resi/frisians/init.lua:98
-msgctxt "immovable"
-msgid "Resources: Iron Vein"
-msgstr "Ресурсы: Железная жила"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:102
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:99
+#: ../../data/tribes/immovables/resi/empire/init.lua:99
+#: ../../data/tribes/immovables/resi/frisians/init.lua:102
+msgctxt "resource_indicator"
+msgid "Some Iron"
+msgstr "Немного железа"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:121
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:117
-#: ../../data/tribes/immovables/resi/empire/init.lua:117
-#: ../../data/tribes/immovables/resi/frisians/init.lua:121
-msgctxt "immovable"
-msgid "Resources: Some Stones"
-msgstr "Ресурсы: Немного камней"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:126
+msgctxt "resource_indicator"
+msgid "Some Precious Stones"
+msgstr "Немного драгоценных камней"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:144
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:139
-#: ../../data/tribes/immovables/resi/empire/init.lua:139
-#: ../../data/tribes/immovables/resi/frisians/init.lua:144
-msgctxt "immovable"
-msgid "Resources: Main Coal Vein"
-msgstr "Ресурсы: Главная угольная жила"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:150
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:145
+#: ../../data/tribes/immovables/resi/empire/init.lua:145
+#: ../../data/tribes/immovables/resi/frisians/init.lua:150
+msgctxt "resource_indicator"
+msgid "A Lot of Coal"
+msgstr "Много угля"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:167
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:161
-#: ../../data/tribes/immovables/resi/empire/init.lua:161
-#: ../../data/tribes/immovables/resi/frisians/init.lua:167
-msgctxt "immovable"
-msgid "Resources: Main Gold Vein"
-msgstr "Ресурсы: Главная золотая жила"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:174
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:168
+#: ../../data/tribes/immovables/resi/empire/init.lua:168
+#: ../../data/tribes/immovables/resi/frisians/init.lua:174
+msgctxt "resource_indicator"
+msgid "A Lot of Gold"
+msgstr "Много золота"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:190
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:183
-#: ../../data/tribes/immovables/resi/empire/init.lua:183
-#: ../../data/tribes/immovables/resi/frisians/init.lua:190
-msgctxt "immovable"
-msgid "Resources: Main Iron Vein"
-msgstr "Ресурсы: Главная железная жила"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:198
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:191
+#: ../../data/tribes/immovables/resi/empire/init.lua:191
+#: ../../data/tribes/immovables/resi/frisians/init.lua:198
+msgctxt "resource_indicator"
+msgid "A Lot of Iron"
+msgstr "Много железа"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:213
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:205
-#: ../../data/tribes/immovables/resi/empire/init.lua:205
-#: ../../data/tribes/immovables/resi/frisians/init.lua:213
-msgctxt "immovable"
-msgid "Resources: A Lot of Stones"
-msgstr "Ресурсы: Много камней"
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:222
+msgctxt "resource_indicator"
+msgid "A Lot of Precious Stones"
+msgstr "Много драгоценных камней"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:122
+#: ../../data/tribes/immovables/resi/frisians/init.lua:126
+msgctxt "resource_indicator"
+msgid "Some Granite"
+msgstr "Немного гранита"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:214
+#: ../../data/tribes/immovables/resi/frisians/init.lua:222
+msgctxt "resource_indicator"
+msgid "A Lot of Granite"
+msgstr "Много гранита"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/empire/init.lua:122
+msgctxt "resource_indicator"
+msgid "Some Marble"
+msgstr "Немного мрамора"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/empire/init.lua:214
+msgctxt "resource_indicator"
+msgid "A Lot of Marble"
+msgstr "Много мрамора"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/init.lua:7
@@ -3784,6 +3774,36 @@ msgstr "Ресурсы: Много камней"
 msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Строящийся корабль"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/wheatfield/harvested/init.lua:7
+msgctxt "immovable"
+msgid "Wheat Field (harvested)"
+msgstr "Пшеничное поле (убрано)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/wheatfield/medium/init.lua:7
+msgctxt "immovable"
+msgid "Wheat Field (medium)"
+msgstr "Пшеничное поле (среднее)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/wheatfield/ripe/init.lua:7
+msgctxt "immovable"
+msgid "Wheat Field (ripe)"
+msgstr "Пшеничное поле (зрелое)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/wheatfield/small/init.lua:7
+msgctxt "immovable"
+msgid "Wheat Field (small)"
+msgstr "Пшеничное поле (малое)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/wheatfield/tiny/init.lua:7
+msgctxt "immovable"
+msgid "Wheat Field (tiny)"
+msgstr "Пшеничное поле (крохотное)"
 
 #: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:32
 #: ../../data/tribes/preload.lua:49 ../../data/tribes/preload.lua:66
@@ -4380,6 +4400,13 @@ msgctxt "ware"
 msgid "Ration"
 msgstr "Паёк"
 
+#. TRANSLATORS: This is a ware name used in lists of wares. Used for thatching
+#. roofs and as a fiber for weaving cloth, fishing nets etc.
+#: ../../data/tribes/wares/reed/init.lua:7
+msgctxt "ware"
+msgid "Reed"
+msgstr "Тростник"
+
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/saw/init.lua:7
 msgctxt "ware"
@@ -4519,12 +4546,6 @@ msgid "Golden Tabard"
 msgstr "Золотая накидка"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/thatch_reed/init.lua:7
-msgctxt "ware"
-msgid "Thatch Reed"
-msgstr "Кровельный тростник"
-
-#. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/trident_double/init.lua:7
 msgctxt "ware"
 msgid "Double Trident"
@@ -4603,7 +4624,7 @@ msgid "Builder"
 msgstr "Строитель"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/carrier/init.lua:49
+#: ../../data/tribes/workers/atlanteans/carrier/init.lua:36
 msgctxt "atlanteans_worker"
 msgid "Carrier"
 msgstr "Носильщик"
@@ -4711,7 +4732,7 @@ msgid "Smoker"
 msgstr "Коптильщик"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/soldier/init.lua:198
+#: ../../data/tribes/workers/atlanteans/soldier/init.lua:251
 msgctxt "atlanteans_worker"
 msgid "Soldier"
 msgstr "Солдат"
@@ -4789,13 +4810,13 @@ msgid "Master Brewer"
 msgstr "Пивовар-мастер"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/builder/init.lua:27
+#: ../../data/tribes/workers/barbarians/builder/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Builder"
 msgstr "Строитель"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/carrier/init.lua:18
+#: ../../data/tribes/workers/barbarians/carrier/init.lua:13
 msgctxt "barbarians_worker"
 msgid "Carrier"
 msgstr "Носильщик"
@@ -4903,7 +4924,7 @@ msgid "Ranger"
 msgstr "Лесничий"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/recruit/init.lua:17
+#: ../../data/tribes/workers/barbarians/recruit/init.lua:12
 msgctxt "barbarians_worker"
 msgid "Recruit"
 msgstr "Рекрут"
@@ -4915,7 +4936,7 @@ msgid "Scout"
 msgstr "Разведчик"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/shipwright/init.lua:26
+#: ../../data/tribes/workers/barbarians/shipwright/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Shipwright"
 msgstr "Корабел"
@@ -4927,7 +4948,7 @@ msgid "Smelter"
 msgstr "Литейщик"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/soldier/init.lua:67
+#: ../../data/tribes/workers/barbarians/soldier/init.lua:77
 msgctxt "barbarians_worker"
 msgid "Soldier"
 msgstr "Солдат"
@@ -4981,7 +5002,7 @@ msgid "Carpenter"
 msgstr "Плотник"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/carrier/init.lua:18
+#: ../../data/tribes/workers/empire/carrier/init.lua:13
 msgctxt "empire_worker"
 msgid "Carrier"
 msgstr "Носильщик"
@@ -5101,7 +5122,7 @@ msgid "Smelter"
 msgstr "Литейщик"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/soldier/init.lua:67
+#: ../../data/tribes/workers/empire/soldier/init.lua:77
 msgctxt "empire_worker"
 msgid "Soldier"
 msgstr "Солдат"
@@ -5209,7 +5230,7 @@ msgid "Builder"
 msgstr "Строитель"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/frisians/carrier/init.lua:17
+#: ../../data/tribes/workers/frisians/carrier/init.lua:12
 msgctxt "frisians_worker"
 msgid "Carrier"
 msgstr "Носильщик"
@@ -5335,7 +5356,7 @@ msgid "Smoker"
 msgstr "Коптильщик"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/frisians/soldier/init.lua:76
+#: ../../data/tribes/workers/frisians/soldier/init.lua:401
 msgctxt "frisians_worker"
 msgid "Soldier"
 msgstr "Солдат"

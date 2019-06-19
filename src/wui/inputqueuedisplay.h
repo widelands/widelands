@@ -51,7 +51,7 @@ class InputQueue;
  */
 class InputQueueDisplay : public UI::Panel {
 public:
-	enum { CellWidth = WARE_MENU_PIC_WIDTH, CellSpacing = 2, Border = 4, PriorityButtonSize = 10 };
+	enum { CellWidth = kWareMenuPicWidth, CellSpacing = 2, Border = 4, PriorityButtonSize = 10 };
 
 	// Constructor for real queues (e.g. in ProductionSites)
 	InputQueueDisplay(UI::Panel* parent,
