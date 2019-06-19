@@ -682,6 +682,14 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 				}
 			}
 
+			else if (subcmd == IGPCMD_CMD) {
+				// Something went wrong with the command
+				message += _("Command could not be executed.");
+				message =
+				   (boost::format("%s %s") % message % InternetGamingMessages::get_message(reason))
+				      .str();
+			}
+
 			else if (subcmd == IGPCMD_GAME_OPEN) {
 				// Something went wrong with the newly opened game
 				message = InternetGamingMessages::get_message(reason);
@@ -901,6 +909,20 @@ void InternetGaming::send(const std::string& msg) {
 		// beginning
 		// with a "/" - let's see...
 
+		if (msg == "/help") {
+			format_and_add_chat("", "", true, _("Supported admin commands:"));
+			format_and_add_chat("", "", true, _("/motd <msg> sets a permanent greeting message"));
+			format_and_add_chat("", "", true, _("/announce <msg> send a one time system message"));
+			format_and_add_chat(
+			   "", "", true, _("/warn <user> <msg> send a private system message to the given user"));
+			format_and_add_chat(
+			   "", "", true,
+			   _("/kick <user|game> removes the given user or game from the metaserver"));
+			format_and_add_chat(
+			   "", "", true, _("/ban <user> bans a user for 24 hours from the metaserver"));
+			return;
+		}
+
 		// Split up in "cmd" "arg"
 		std::string cmd, arg;
 		std::string temp = msg.substr(1);  // cut off '/'
@@ -937,10 +959,20 @@ void InternetGaming::send(const std::string& msg) {
 			m.string(arg);
 			net->send(m);
 			return;
-		} else if (!arg.empty() && cmd == "announcement") {
-			// send the request to change the motd
+		} else if (!arg.empty() && cmd == "announce") {
+			// send the request to make an announcement
 			SendPacket m;
 			m.string(IGPCMD_ANNOUNCEMENT);
+			m.string(arg);
+			net->send(m);
+			return;
+		} else if (!arg.empty() && (cmd == "warn" || cmd == "kick" || cmd == "ban")) {
+			// warn a user by sending a private system message or
+			// kick a user (for 5 minutes) or a game from the metaserver or
+			// ban a user for 24 hours
+			SendPacket m;
+			m.string(IGPCMD_CMD);
+			m.string(cmd);
 			m.string(arg);
 			net->send(m);
 			return;
