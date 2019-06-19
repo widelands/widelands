@@ -448,13 +448,12 @@ bool ProductionSite::init(EditorGameBase& egbase) {
 	const BillOfMaterials& input_workers = descr().input_workers();
 	input_queues_.resize(input_wares.size() + input_workers.size());
 
-	for (WareRange i(input_wares); i; ++i) {
-		input_queues_[i.i] = new WaresQueue(*this, i.current->first, i.current->second);
+	size_t i = 0;
+	for (const WareAmount& pair : input_wares) {
+		input_queues_[i++] = new WaresQueue(*this, pair.first, pair.second);
 	}
-
-	for (WareRange i(input_workers); i; ++i) {
-		input_queues_[input_wares.size() + i.i] =
-		   new WorkersQueue(*this, i.current->first, i.current->second);
+	for (const WareAmount& pair : input_workers) {
+		input_queues_[i++] = new WorkersQueue(*this, pair.first, pair.second);
 	}
 
 	//  Request missing workers.
