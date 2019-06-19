@@ -48,6 +48,7 @@ option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
 option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
 option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
+option(OPTION_BUILD_TESTS "Build tests" ON)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -298,17 +299,19 @@ else (NOT DEFINED WL_VERSION)
 endif (NOT DEFINED WL_VERSION)
 
 # Enable testing.
-include(CTest)
-enable_testing()
+if (OPTION_BUILD_TESTS)
+  include(CTest)
+  enable_testing()
 
-# Run a test after a normal compile. This magic is needed as 'make test' will
-# not rebuild tests:
-# http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
-add_custom_target(_run_all_tests ALL
-  COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-  DEPENDS wl_tests
-)
+  # Run a test after a normal compile. This magic is needed as 'make test' will
+  # not rebuild tests:
+  # http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
+  add_custom_target(_run_all_tests ALL
+    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    DEPENDS wl_tests
+  )
+endif (OPTION_BUILD_TESTS)
 
 install (
   FILES ${CMAKE_CURRENT_BINARY_DIR}/VERSION
