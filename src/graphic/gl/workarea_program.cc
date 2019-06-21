@@ -23,8 +23,9 @@
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "graphic/texture.h"
+#include "wui/mapviewpixelconstants.h"
 
-WorkareaProgram::WorkareaProgram() {
+WorkareaProgram::WorkareaProgram() : cache_(nullptr) {
 	gl_program_.build("workarea");
 
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
@@ -36,22 +37,32 @@ WorkareaProgram::WorkareaProgram() {
 void WorkareaProgram::gl_draw(int gl_texture, float z_value) {
 	glUseProgram(gl_program_.object());
 
-	auto& gl_state = Gl::State::instance();
-	gl_state.enable_vertex_attrib_array({attr_position_, attr_overlay_});
-
-	gl_array_buffer_.bind();
-	gl_array_buffer_.update(vertices_);
-
-	Gl::vertex_attrib_pointer(
-	   attr_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
-	Gl::vertex_attrib_pointer(
-	   attr_overlay_, 4, sizeof(PerVertexData), offsetof(PerVertexData, overlay_r));
-
-	gl_state.bind(GL_TEXTURE0, gl_texture);
-
-	glUniform1f(u_z_value_, z_value);
-
-	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
+	{
+		auto& gl_state = Gl::State::instance();
+		gl_state.enable_vertex_attrib_array({attr_position_, attr_overlay_});
+		gl_array_buffer_.bind();
+		gl_array_buffer_.update(vertices_);
+		Gl::vertex_attrib_pointer(
+		   attr_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+		Gl::vertex_attrib_pointer(
+		   attr_overlay_, 4, sizeof(PerVertexData), offsetof(PerVertexData, overlay_r));
+		gl_state.bind(GL_TEXTURE0, gl_texture);
+		glUniform1f(u_z_value_, z_value);
+		glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
+	}
+	{
+		auto& gl_state = Gl::State::instance();
+		gl_state.enable_vertex_attrib_array({attr_position_, attr_overlay_});
+		gl_array_buffer_.bind();
+		gl_array_buffer_.update(outer_vertices_);
+		Gl::vertex_attrib_pointer(
+		   attr_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+		Gl::vertex_attrib_pointer(
+		   attr_overlay_, 4, sizeof(PerVertexData), offsetof(PerVertexData, overlay_r));
+		gl_state.bind(GL_TEXTURE0, gl_texture);
+		glUniform1f(u_z_value_, z_value);
+		glDrawArrays(GL_TRIANGLES, 0, outer_vertices_.size());
+	}
 }
 
 constexpr uint8_t kWorkareaTransparency = 127;
@@ -81,31 +92,113 @@ static inline RGBAColor apply_color_special(RGBAColor base, RGBAColor special) {
 	return RGBAColor(r, g, b, special.a);
 }
 
-void WorkareaProgram::add_vertex(const FieldsToDraw::Field& field, RGBAColor overlay) {
-	vertices_.emplace_back();
-	PerVertexData& back = vertices_.back();
+void WorkareaProgram::add_vertex(const FieldsToDraw::Field& field,
+                                 RGBAColor overlay,
+                                 std::vector<PerVertexData>* v,
+                                 Vector2f offset,
+                                 Vector2f viewport) {
+	v->emplace_back();
+	PerVertexData& back = v->back();
 
-	back.gl_x = field.gl_position.x;
-	back.gl_y = field.gl_position.y;
+	if (offset.x > 0 || offset.x < 0 || offset.y > 0 || offset.y < 0) {
+		back.gl_x = field.surface_pixel.x + offset.x;
+		back.gl_y = field.surface_pixel.y + offset.y;
+		pixel_to_gl_renderbuffer(viewport.x, viewport.y, &back.gl_x, &back.gl_y);
+	} else {
+		back.gl_x = field.gl_position.x;
+		back.gl_y = field.gl_position.y;
+	}
 	back.overlay_r = overlay.r / 255.f;
 	back.overlay_g = overlay.g / 255.f;
 	back.overlay_b = overlay.b / 255.f;
 	back.overlay_a = overlay.a / 255.f;
 }
 
+constexpr float kBorderStrength = 2.8f;
+
+// Helper functions for calculating the border thickness
+const static float kOffsetFactor = static_cast<float>(
+   std::sqrt(kBorderStrength * kBorderStrength /
+             (kTriangleWidth * kTriangleWidth + kTriangleHeight * kTriangleHeight)));
+static Vector2f offset(size_t radius, size_t pos) {
+	if (pos % radius == 0) {
+		switch (pos / radius) {
+		case 0:  // North/Northwest
+			return Vector2f(-kTriangleWidth * (2 * kOffsetFactor - kBorderStrength / kTriangleHeight),
+			                -kBorderStrength);
+		case 1:  // North/Northeast
+			return Vector2f(kTriangleWidth * (2 * kOffsetFactor - kBorderStrength / kTriangleHeight),
+			                -kBorderStrength);
+		case 2:  // Northeast/Southeast
+			return Vector2f(kBorderStrength, 0);
+		case 3:  // Southeast/South
+			return Vector2f(kTriangleWidth * (2 * kOffsetFactor - kBorderStrength / kTriangleHeight),
+			                kBorderStrength);
+		case 4:  // South/Southwest
+			return Vector2f(-kTriangleWidth * (2 * kOffsetFactor - kBorderStrength / kTriangleHeight),
+			                kBorderStrength);
+		case 5:  // Southwest/Northwest
+			return Vector2f(-kBorderStrength, 0);
+		default:
+			NEVER_HERE();
+		}
+	} else {
+		switch (pos / radius) {
+		case 0:  // North
+			return Vector2f(0, -kBorderStrength);
+		case 1:  // Northeast
+			return Vector2f(kOffsetFactor * kTriangleWidth, -kOffsetFactor * kTriangleHeight);
+		case 2:  // Southeast
+			return Vector2f(kOffsetFactor * kTriangleWidth, kOffsetFactor * kTriangleHeight);
+		case 3:  // South
+			return Vector2f(0, kBorderStrength);
+		case 4:  // Southwest
+			return Vector2f(-kOffsetFactor * kTriangleWidth, kOffsetFactor * kTriangleHeight);
+		case 5:  // Northwest
+			return Vector2f(-kOffsetFactor * kTriangleWidth, -kOffsetFactor * kTriangleHeight);
+		default:
+			NEVER_HERE();
+		}
+	}
+}
+
 void WorkareaProgram::draw(uint32_t texture_id,
                            Workareas workarea,
                            const FieldsToDraw& fields_to_draw,
-                           float z_value) {
+                           float z_value,
+                           Vector2f rendertarget_dimension) {
+	const FieldsToDraw::Field& topleft = fields_to_draw.at(0);
+	if (cache_ && cache_->fcoords == topleft.fcoords &&
+	    !(cache_->surface_pixel.x > topleft.surface_pixel.x ||
+	      cache_->surface_pixel.x < topleft.surface_pixel.x ||
+	      cache_->surface_pixel.y > topleft.surface_pixel.y ||
+	      cache_->surface_pixel.y < topleft.surface_pixel.y) &&
+	    cache_->workareas == workarea) {
+		return gl_draw(texture_id, z_value);
+	}
+	cache_.reset(new WorkareasCache(workarea, topleft.fcoords, topleft.surface_pixel));
+
 	vertices_.clear();
-	vertices_.reserve(fields_to_draw.size() * 3);
+	outer_vertices_.clear();
+	{
+		size_t estimate_inner = 0;
+		size_t estimate_outer = 0;
+		for (const WorkareasEntry& wa_map : workarea) {
+			estimate_inner += 3 * wa_map.first.size();  // One triangle per entry
+			for (const auto& vector : wa_map.second) {
+				estimate_outer += 6 * vector.size();  // Two triangles per border segment
+			}
+		}
+		vertices_.reserve(estimate_inner);
+		outer_vertices_.reserve(estimate_outer);
+	}
 
 	auto emplace_triangle = [this, workarea, fields_to_draw](
 	                           const FieldsToDraw::Field& field,
 	                           Widelands::TriangleIndex triangle_index) {
 		RGBAColor color(0, 0, 0, 0);
 		for (const WorkareasEntry& wa_map : workarea) {
-			for (const WorkareaPreviewData& data : wa_map) {
+			for (const WorkareaPreviewData& data : wa_map.first) {
 				if (data.coords == Widelands::TCoords<>(field.fcoords, triangle_index)) {
 					RGBAColor color_to_apply = workarea_colors[data.index];
 					if (data.use_special_coloring) {
@@ -117,12 +210,12 @@ void WorkareaProgram::draw(uint32_t texture_id,
 			}
 		}
 		if (color.a > 0) {
-			add_vertex(field, color);
-			add_vertex(fields_to_draw.at(field.brn_index), color);
+			add_vertex(field, color, &vertices_);
+			add_vertex(fields_to_draw.at(field.brn_index), color, &vertices_);
 			add_vertex(
 			   fields_to_draw.at(triangle_index == Widelands::TriangleIndex::D ? field.bln_index :
 			                                                                     field.rn_index),
-			   color);
+			   color, &vertices_);
 		}
 	};
 
@@ -134,6 +227,57 @@ void WorkareaProgram::draw(uint32_t texture_id,
 			}
 			if (field.rn_index != FieldsToDraw::kInvalidIndex) {
 				emplace_triangle(field, Widelands::TriangleIndex::R);
+			}
+		}
+	}
+
+	{
+		// Draw the border. Since a basic line is too narrow to be properly visible,
+		// we draw two triangles to give the line some thickness.
+		for (const WorkareasEntry& wa_map : workarea) {
+			int32_t index = 5;
+			for (const auto& border : wa_map.second) {
+				assert(index == 5 || index == 4 || index == 2);
+				RGBAColor& color = workarea_colors[index];
+				const size_t nr_border_coords = border.size();
+				const size_t radius = nr_border_coords / 6;
+				assert(radius * 6 == nr_border_coords);
+				size_t border_pos = 0;
+				for (auto it = border.begin(); it != border.end(); ++it, ++border_pos) {
+					int f1 = fields_to_draw.calculate_index(it->x, it->y);
+					if (f1 == FieldsToDraw::kInvalidIndex) {
+						continue;
+					}
+					int f2;
+					if (it + 1 == border.end()) {
+						f2 = fields_to_draw.calculate_index(border.begin()->x, border.begin()->y);
+					} else {
+						f2 = fields_to_draw.calculate_index((it + 1)->x, (it + 1)->y);
+					}
+					if (f2 != FieldsToDraw::kInvalidIndex) {
+						const FieldsToDraw::Field& field1 = fields_to_draw.at(f1);
+						const FieldsToDraw::Field& field2 = fields_to_draw.at(f2);
+						Vector2f off1 = offset(radius, border_pos);
+						Vector2f off2 = offset(radius, (border_pos + 1) % nr_border_coords);
+						add_vertex(field1, color, &outer_vertices_);
+						add_vertex(field1, color, &outer_vertices_, off1, rendertarget_dimension);
+						add_vertex(field2, color, &outer_vertices_, off2, rendertarget_dimension);
+						add_vertex(field1, color, &outer_vertices_);
+						add_vertex(field2, color, &outer_vertices_);
+						add_vertex(field2, color, &outer_vertices_, off2, rendertarget_dimension);
+					}
+				}
+				switch (index) {
+				case 5:
+					index = 4;
+					break;
+				case 4:
+					index = 2;
+					break;
+				default:
+					index = -1;
+					break;
+				}
 			}
 		}
 	}

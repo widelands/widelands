@@ -18,6 +18,7 @@
  */
 
 #include "map_io/tribes_legacy_lookup_table.h"
+
 // Whenever we break savegame compatibility, we can empty these maps
 TribesLegacyLookupTable::TribesLegacyLookupTable()
    :  // Workers
@@ -36,7 +37,7 @@ TribesLegacyLookupTable::TribesLegacyLookupTable()
         {"reed_medium", "reedfield_medium"},
         {"reed_small", "reedfield_small"},
         {"reed_tiny", "reedfield_tiny"},
-        {"reed_tiny", "reedfield_ripe"},
+        {"reed_ripe", "reedfield_ripe"},
      } {
 }
 

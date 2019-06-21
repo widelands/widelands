@@ -113,7 +113,7 @@ tribes:new_trainingsite_type {
          descname = _"sleeping",
          actions = {
             "sleep=5000",
-            "checksoldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
+            "return=no_stats",
          }
       },
       upgrade_soldier_attack_3 = {
@@ -121,6 +121,10 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 3 to level 4"),
          actions = {
             "checksoldier=soldier attack 3",
+            "return=failed unless site has sword_long",
+            "return=failed unless site has honey_bread",
+            "return=failed unless site has mead",
+            "return=failed unless site has smoked_fish,smoked_meat",
             "animate=working 22800",
             "checksoldier=soldier attack 3", -- Because the soldier can be expelled by the player
             "consume=sword_long honey_bread mead smoked_fish,smoked_meat",
@@ -132,6 +136,10 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 4 to level 5"),
          actions = {
             "checksoldier=soldier attack 4",
+            "return=failed unless site has sword_broad",
+            "return=failed unless site has honey_bread",
+            "return=failed unless site has mead",
+            "return=failed unless site has smoked_fish,smoked_meat",
             "animate=working 15600",
             "checksoldier=soldier attack 4", -- Because the soldier can be expelled by the player
             "consume=sword_broad honey_bread mead smoked_fish,smoked_meat",
@@ -144,6 +152,10 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 5 to level 6"),
          actions = {
             "checksoldier=soldier attack 5",
+            "return=failed unless site has sword_double",
+            "return=failed unless site has honey_bread",
+            "return=failed unless site has mead",
+            "return=failed unless site has smoked_fish,smoked_meat",
             "animate=working 15600",
             "checksoldier=soldier attack 5", -- Because the soldier can be expelled by the player
             "consume=sword_double honey_bread mead smoked_fish,smoked_meat",
@@ -156,6 +168,9 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier defense from level 1 to level 2"),
          actions = {
             "checksoldier=soldier defense 1",
+            "return=failed unless site has fur_garment_golden",
+            "return=failed unless site has honey_bread,mead",
+            "return=failed unless site has smoked_fish,smoked_meat",
             "animate=working 22800",
             "checksoldier=soldier defense 1", -- Because the soldier can be expelled by the player
             "consume=fur_garment_golden honey_bread,mead smoked_fish,smoked_meat",
@@ -168,6 +183,9 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier health from level 1 to level 2"),
          actions = {
             "checksoldier=soldier health 1",
+            "return=failed unless site has helmet_golden",
+            "return=failed unless site has honey_bread,mead",
+            "return=failed unless site has smoked_fish,smoked_meat",
             "animate=working 22800",
             "checksoldier=soldier health 1", -- Because the soldier can be expelled by the player
             "consume=helmet_golden honey_bread,mead smoked_fish,smoked_meat",

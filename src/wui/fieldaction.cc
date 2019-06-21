@@ -168,6 +168,7 @@ public:
 	void act_watch();
 	void act_show_census();
 	void act_show_statistics();
+	void act_show_workarea_overlap();
 	void act_debug();
 	void act_buildflag();
 	void act_configure_economy();
@@ -212,6 +213,7 @@ private:
 	uint32_t best_tab_;
 	bool showing_workarea_preview_;
 	std::set<Widelands::Coords> overlapping_workareas_;
+	bool is_showing_workarea_overlaps_;
 
 	/// Variables to use with attack dialog.
 	AttackBox* attack_box_;
@@ -240,6 +242,8 @@ static const char* const pic_ripflag = "images/wui/fieldaction/menu_rip_flag.png
 static const char* const pic_watchfield = "images/wui/fieldaction/menu_watch_field.png";
 static const char* const pic_showcensus = "images/wui/fieldaction/menu_show_census.png";
 static const char* const pic_showstatistics = "images/wui/fieldaction/menu_show_statistics.png";
+static const char* const pic_showworkareaoverlap =
+   "images/wui/fieldaction/menu_show_workarea_overlap.png";
 static const char* const pic_debug = "images/wui/fieldaction/menu_debug.png";
 static const char* const pic_abort = "images/wui/menu_abort.png";
 static const char* const pic_geologist = "images/wui/fieldaction/menu_geologist.png";
@@ -262,6 +266,7 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
      fastclick_(true),
      best_tab_(0),
      showing_workarea_preview_(false),
+     is_showing_workarea_overlaps_(ib->get_display_flag(InteractiveBase::dfShowWorkareaOverlap)),
      attack_box_(nullptr) {
 	ib->set_sel_freeze(true);
 	set_center_panel(&tabpanel_);
@@ -271,15 +276,30 @@ FieldActionWindow::~FieldActionWindow() {
 	if (showing_workarea_preview_) {
 		ibase().hide_workarea(node_, false);
 	}
+	showing_workarea_preview_ = false;
 	clear_overlapping_workareas();
 	ibase().set_sel_freeze(false);
 	delete attack_box_;
 }
 
 void FieldActionWindow::think() {
+	if (is_showing_workarea_overlaps_ !=
+	    ibase().get_display_flag(InteractiveBase::dfShowWorkareaOverlap)) {
+		is_showing_workarea_overlaps_ = !is_showing_workarea_overlaps_;
+		if (!is_showing_workarea_overlaps_) {
+			clear_overlapping_workareas();
+		}
+#ifndef NDEBUG
+		else {
+			// Desired overlaps will be shown as soon as the user moves the mouse
+			assert(overlapping_workareas_.empty());
+		}
+#endif
+	}
 	if (player_ && player_->vision(node_.field - &ibase().egbase().map()[0]) <= 1 &&
-	    !player_->see_all())
+	    !player_->see_all()) {
 		die();
+	}
 }
 
 void FieldActionWindow::clear_overlapping_workareas() {
@@ -390,6 +410,12 @@ void FieldActionWindow::add_buttons_auto() {
 	}
 	add_button(&watchbox, "census", pic_showcensus, &FieldActionWindow::act_show_census,
 	           _("Toggle building label display"));
+	if (is_a(InteractivePlayer, &ibase())) {
+		add_button(
+		   &watchbox, "workarea_overlap", pic_showworkareaoverlap,
+		   &FieldActionWindow::act_show_workarea_overlap,
+		   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"));
+	}
 
 	if (ibase().get_display_flag(InteractiveBase::dfDebug))
 		add_button(
@@ -604,6 +630,12 @@ void FieldActionWindow::act_show_statistics() {
 	reset_mouse_and_die();
 }
 
+void FieldActionWindow::act_show_workarea_overlap() {
+	ibase().set_display_flag(InteractiveBase::dfShowWorkareaOverlap,
+	                         !ibase().get_display_flag(InteractiveBase::dfShowWorkareaOverlap));
+	reset_mouse_and_die();
+}
+
 /*
 ===============
 Show a debug widow for this field.
@@ -761,8 +793,8 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx) {
 void FieldActionWindow::building_icon_mouse_out(Widelands::DescriptionIndex) {
 	if (showing_workarea_preview_) {
 		ibase().hide_workarea(node_, false);
-		clear_overlapping_workareas();
 		showing_workarea_preview_ = false;
+		clear_overlapping_workareas();
 	}
 }
 
@@ -773,6 +805,9 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 		const WorkareaInfo& workarea_info = descr.workarea_info();
 		ibase().show_workarea(workarea_info, node_);
 		showing_workarea_preview_ = true;
+		if (!is_showing_workarea_overlaps_) {
+			return;
+		}
 
 		const Widelands::Map& map = ibase().egbase().map();
 		uint32_t workarea_radius = 0;
