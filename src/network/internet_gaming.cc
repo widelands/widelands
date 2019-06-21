@@ -235,6 +235,53 @@ void InternetGaming::logout(const std::string& msgcode) {
 	reset();
 }
 
+bool InternetGaming::check_password(const std::string& nick,
+                                    const std::string& pwd,
+                                    const std::string& metaserver,
+                                    uint32_t port) {
+	reset();
+
+	meta_ = metaserver;
+	port_ = port;
+	initialize_connection();
+
+	// Has to be set for the password challenge later on
+	authenticator_ = pwd;
+
+	log("InternetGaming: Verifying password.\n");
+	{
+		SendPacket s;
+		s.string(IGPCMD_CHECK_PWD);
+		s.string(boost::lexical_cast<std::string>(kInternetGamingProtocolVersion));
+		s.string(nick);
+		s.string(build_id());
+		net->send(s);
+	}
+
+	// Now let's see, whether the metaserver is answering
+	uint32_t const secs = time(nullptr);
+	state_ = CONNECTING;
+	while (kInternetGamingTimeout > time(nullptr) - secs) {
+		handle_metaserver_communication(false);
+		if (state_ != CONNECTING) {
+			if (state_ == LOBBY) {
+				SendPacket s;
+				s.string(IGPCMD_DISCONNECT);
+				s.string("CONNECTION_CLOSED");
+				net->send(s);
+				reset();
+				return true;
+			} else if (error()) {
+				reset();
+				return false;
+			}
+		}
+	}
+	log("InternetGaming: No answer from metaserver!\n");
+	reset();
+	return false;
+}
+
 /**
  * Handle situation when reading from socket failed.
  */
@@ -265,7 +312,7 @@ void InternetGaming::handle_failed_read() {
 }
 
 /// handles all communication between the metaserver and the client
-void InternetGaming::handle_metaserver_communication() {
+void InternetGaming::handle_metaserver_communication(bool relogin_on_error) {
 	if (error())
 		return;
 	try {
@@ -278,7 +325,7 @@ void InternetGaming::handle_metaserver_communication() {
 			// Process all available packets
 			std::unique_ptr<RecvPacket> packet = net->try_receive();
 			if (packet) {
-				handle_packet(*packet);
+				handle_packet(*packet, relogin_on_error);
 			} else {
 				// Nothing more to receive
 				break;
@@ -315,7 +362,7 @@ void InternetGaming::handle_metaserver_communication() {
 			set_error();
 			waittimeout_ = std::numeric_limits<int32_t>::max();
 			log("InternetGaming: reached a timeout for an awaited answer of the metaserver!\n");
-			if (!relogin()) {
+			if (relogin_on_error && !relogin()) {
 				// Do not try to relogin again automatically.
 				reset();
 				set_error();
@@ -328,7 +375,7 @@ void InternetGaming::handle_metaserver_communication() {
 	if (time(nullptr) - lastping_ > 240) {
 		// Try to relogin
 		set_error();
-		if (!relogin()) {
+		if (relogin_on_error && !relogin()) {
 			// Do not try to relogin again automatically.
 			reset();
 			set_error();
@@ -337,7 +384,7 @@ void InternetGaming::handle_metaserver_communication() {
 }
 
 /// Handle one packet received from the metaserver.
-void InternetGaming::handle_packet(RecvPacket& packet) {
+void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 	std::string cmd = packet.string();
 
 	// First check if everything is fine or whether the metaserver broke up with the client.
@@ -347,7 +394,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 		if (reason == "CLIENT_TIMEOUT") {
 			// Try to relogin
 			set_error();
-			if (!relogin()) {
+			if (relogin_on_error && !relogin()) {
 				// Do not try to relogin again automatically.
 				reset();
 				set_error();
@@ -403,6 +450,12 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			const time_t now = time(nullptr);
 			log("InternetGaming: Client %s logged in at UTC %s", clientname_.c_str(),
 			    asctime(gmtime(&now)));
+			return;
+
+		} else if (cmd == IGPCMD_PWD_OK) {
+			const time_t now = time(nullptr);
+			log("InternetGaming: Password check successful at UTC %s", asctime(gmtime(&now)));
+			state_ = LOBBY;
 			return;
 
 		} else if (cmd == IGPCMD_ERROR) {
@@ -629,6 +682,14 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				}
 			}
 
+			else if (subcmd == IGPCMD_CMD) {
+				// Something went wrong with the command
+				message += _("Command could not be executed.");
+				message =
+				   (boost::format("%s %s") % message % InternetGamingMessages::get_message(reason))
+				      .str();
+			}
+
 			else if (subcmd == IGPCMD_GAME_OPEN) {
 				// Something went wrong with the newly opened game
 				message = InternetGamingMessages::get_message(reason);
@@ -848,6 +909,20 @@ void InternetGaming::send(const std::string& msg) {
 		// beginning
 		// with a "/" - let's see...
 
+		if (msg == "/help") {
+			format_and_add_chat("", "", true, _("Supported admin commands:"));
+			format_and_add_chat("", "", true, _("/motd <msg> sets a permanent greeting message"));
+			format_and_add_chat("", "", true, _("/announce <msg> send a one time system message"));
+			format_and_add_chat(
+			   "", "", true, _("/warn <user> <msg> send a private system message to the given user"));
+			format_and_add_chat(
+			   "", "", true,
+			   _("/kick <user|game> removes the given user or game from the metaserver"));
+			format_and_add_chat(
+			   "", "", true, _("/ban <user> bans a user for 24 hours from the metaserver"));
+			return;
+		}
+
 		// Split up in "cmd" "arg"
 		std::string cmd, arg;
 		std::string temp = msg.substr(1);  // cut off '/'
@@ -884,10 +959,20 @@ void InternetGaming::send(const std::string& msg) {
 			m.string(arg);
 			net->send(m);
 			return;
-		} else if (!arg.empty() && cmd == "announcement") {
-			// send the request to change the motd
+		} else if (!arg.empty() && cmd == "announce") {
+			// send the request to make an announcement
 			SendPacket m;
 			m.string(IGPCMD_ANNOUNCEMENT);
+			m.string(arg);
+			net->send(m);
+			return;
+		} else if (!arg.empty() && (cmd == "warn" || cmd == "kick" || cmd == "ban")) {
+			// warn a user by sending a private system message or
+			// kick a user (for 5 minutes) or a game from the metaserver or
+			// ban a user for 24 hours
+			SendPacket m;
+			m.string(IGPCMD_CMD);
+			m.string(cmd);
 			m.string(arg);
 			net->send(m);
 			return;

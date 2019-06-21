@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-30 18:50+0000\n"
+"POT-Creation-Date: 2019-06-14 07:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -529,7 +529,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:42
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:64
-#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:82
+#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:81
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:53
@@ -547,7 +547,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:44
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:52
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:70
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:69
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:50
@@ -557,7 +557,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:43
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:63
-#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:81
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:80
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:50
@@ -578,7 +578,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:57
-#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:75
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:74
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:64
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:62
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:65
@@ -638,7 +638,7 @@ msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:74
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:78
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:87
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:88
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:70
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:76
@@ -649,7 +649,7 @@ msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:75
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:79
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:88
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:89
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:71
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:78
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:77
@@ -687,22 +687,33 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:58
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:82
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:81
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:61
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:73
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:72
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:61
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:75
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:74
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:60
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:75
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:74
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:59
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:72
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:71
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:57
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:72
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:71
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:65
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:77
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:76
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:64
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:81
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:80
 msgid "mining coal"
+msgstr ""
+
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:100
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:90
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:92
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:89
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:94
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:98
+msgid "No Coal"
 msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:101
@@ -713,21 +724,10 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:90
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:95
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:99
-msgid "No Coal"
-msgstr ""
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:102
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:92
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:94
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:94
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:91
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:91
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:96
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:100
 msgid "Main Coal Vein Exhausted"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:104
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:103
 msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -744,7 +744,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:71
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:115
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:59
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:71
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:70
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:70
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:97
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:66
@@ -898,20 +898,31 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:58
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:71
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:70
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:61
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:61
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:75
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:74
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:60
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:74
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:73
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:59
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:71
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:70
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:57
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:70
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:69
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:66
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:64
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:79
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:78
 msgid "mining gold"
+msgstr ""
+
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:88
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:74
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:92
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:91
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:88
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:87
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:79
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:96
+msgid "No Gold"
 msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:89
@@ -922,21 +933,10 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:88
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:80
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:97
-msgid "No Gold"
-msgstr ""
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:90
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:76
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:94
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:93
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:90
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:89
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:81
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:98
 msgid "Main Gold Vein Exhausted"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:92
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:91
 msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1000,20 +1000,31 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:58
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:74
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:73
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:61
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:61
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:75
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:74
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:60
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:75
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:74
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:59
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:72
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:71
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:57
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:71
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:70
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:66
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:64
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:81
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:80
 msgid "mining iron"
+msgstr ""
+
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:92
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:74
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:92
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:89
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:88
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:79
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:98
+msgid "No Iron"
 msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:93
@@ -1024,21 +1035,10 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:89
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:80
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:99
-msgid "No Iron"
-msgstr ""
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:94
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:76
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:94
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:94
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:91
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:90
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:81
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:100
 msgid "Main Iron Vein Exhausted"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:96
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:95
 msgctxt "atlanteans_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1444,14 +1444,14 @@ msgid "preparing a ration"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:84
-#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:81
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:80
 msgid "preparing a snack"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:97
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:77
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:96
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:76
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:86
 msgid "preparing a meal"
 msgstr ""
@@ -1491,8 +1491,8 @@ msgctxt "barbarians_building"
 msgid "Coal Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:94
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:96
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:93
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:95
 msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1511,7 +1511,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Coal Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:96
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:95
 msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1532,12 +1532,12 @@ msgid "planting wheat"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:77
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:78
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:68
 msgid "harvesting wheat"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:89
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:90
 msgctxt "barbarians_building"
 msgid "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
@@ -1567,8 +1567,8 @@ msgctxt "barbarians_building"
 msgid "Gold Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:78
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:96
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:77
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:95
 msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1587,7 +1587,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Gold Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:95
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:94
 msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1601,19 +1601,19 @@ msgctxt "barbarians_building"
 msgid "Granite Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:89
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:88
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:96
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:99
 msgid "No Granite"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:90
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:89
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:97
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:100
 msgid "Main Granite Vein Exhausted"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:92
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:91
 msgctxt "barbarians_building"
 msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
@@ -1671,8 +1671,8 @@ msgctxt "barbarians_building"
 msgid "Iron Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:78
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:96
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:77
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:95
 msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1691,7 +1691,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Iron Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:96
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:95
 msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1955,7 +1955,7 @@ msgctxt "empire_building"
 msgid "Coal Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:93
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:92
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1968,7 +1968,7 @@ msgctxt "empire_building"
 msgid "Deep Coal Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:93
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:92
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2024,7 +2024,7 @@ msgctxt "empire_building"
 msgid "Gold Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:91
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2037,7 +2037,7 @@ msgctxt "empire_building"
 msgid "Deep Gold Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:91
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:90
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2071,7 +2071,7 @@ msgctxt "empire_building"
 msgid "Iron Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:93
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:92
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2084,7 +2084,7 @@ msgctxt "empire_building"
 msgid "Deep Iron Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:91
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2533,7 +2533,7 @@ msgctxt "frisians_building"
 msgid "Coal Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:98
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:97
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2546,7 +2546,7 @@ msgctxt "frisians_building"
 msgid "Deep Coal Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:101
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2639,7 +2639,7 @@ msgctxt "frisians_building"
 msgid "Gold Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:83
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:82
 msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2652,7 +2652,7 @@ msgctxt "frisians_building"
 msgid "Deep Gold Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:100
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:99
 msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2691,7 +2691,7 @@ msgctxt "frisians_building"
 msgid "Iron Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:83
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:82
 msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2704,7 +2704,7 @@ msgctxt "frisians_building"
 msgid "Deep Iron Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:101
 msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2941,19 +2941,19 @@ msgid "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:175
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:178
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:186
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:192
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:197
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:206
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr ""
@@ -2971,25 +2971,25 @@ msgid "upgrading soldier defense from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:111
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:114
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:122
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:128
 msgctxt "atlanteans_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:133
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:141
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:144
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:154
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr ""
@@ -3007,7 +3007,7 @@ msgid "upgrading soldier evade from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:102
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:104
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr ""
@@ -3025,43 +3025,43 @@ msgid "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:120
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:123
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:131
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:137
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:142
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:151
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:153
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:165
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:164
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:179
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:175
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:192
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:186
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:206
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr ""
@@ -3086,7 +3086,7 @@ msgid "Colosseum"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:86
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:88
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr ""
@@ -3104,43 +3104,43 @@ msgid "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:114
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:117
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:125
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:131
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:136
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:145
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:147
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:159
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:158
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:172
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:169
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:186
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:180
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:200
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
 msgstr ""
@@ -3158,25 +3158,25 @@ msgid "upgrading soldier attack from level 3 to level 4"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:132
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:136
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:144
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:152
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:156
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:168
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:168
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:183
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr ""
@@ -3194,25 +3194,25 @@ msgid "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:132
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:134
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:144
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:150
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:156
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:166
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:167
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:179
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr ""
@@ -3336,15 +3336,15 @@ msgstr ""
 msgid "Blueberry Bush (tiny)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:39
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:40
 msgid "Blueberry Bush (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:60
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:62
 msgid "Blueberry Bush (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:81
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:84
 msgid "Blueberry Bush (ripe)"
 msgstr ""
 
@@ -3352,15 +3352,15 @@ msgstr ""
 msgid "Black Currant (tiny)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:37
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:38
 msgid "Black Currant (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:58
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:60
 msgid "Black Currant (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:79
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:82
 msgid "Black Currant (ripe)"
 msgstr ""
 
@@ -3368,15 +3368,15 @@ msgstr ""
 msgid "Red Currant (tiny)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:37
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:38
 msgid "Red Currant (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:58
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:60
 msgid "Red Currant (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:79
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:82
 msgid "Red Currant (ripe)"
 msgstr ""
 
@@ -3384,15 +3384,15 @@ msgstr ""
 msgid "Desert Hackberry (tiny)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:37
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:38
 msgid "Desert Hackberry (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:58
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:60
 msgid "Desert Hackberry (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:79
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:82
 msgid "Desert Hackberry (ripe)"
 msgstr ""
 
@@ -3400,15 +3400,15 @@ msgstr ""
 msgid "Juniper (tiny)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:37
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:38
 msgid "Juniper (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:58
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:60
 msgid "Juniper (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:79
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:82
 msgid "Juniper (ripe)"
 msgstr ""
 
@@ -3416,15 +3416,15 @@ msgstr ""
 msgid "Raspberry Bush (tiny)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:37
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:38
 msgid "Raspberry Bush (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:58
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:60
 msgid "Raspberry Bush (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:79
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:82
 msgid "Raspberry Bush (ripe)"
 msgstr ""
 
@@ -3432,15 +3432,15 @@ msgstr ""
 msgid "Sea Buckthorn (tiny)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:37
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:38
 msgid "Sea Buckthorn (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:58
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:60
 msgid "Sea Buckthorn (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:79
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:82
 msgid "Sea Buckthorn (ripe)"
 msgstr ""
 
@@ -3448,15 +3448,15 @@ msgstr ""
 msgid "Strawberries (tiny)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:37
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:38
 msgid "Strawberries (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:58
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:60
 msgid "Strawberries (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:79
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:82
 msgid "Strawberries (ripe)"
 msgstr ""
 

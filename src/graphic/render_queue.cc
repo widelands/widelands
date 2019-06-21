@@ -261,7 +261,9 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
 			workarea_program_->draw(
 			   item.terrain_arguments.terrains->get(0).get_texture(0).blit_data().texture_id,
-			   item.terrain_arguments.workareas, *item.terrain_arguments.fields_to_draw, item.z_value);
+			   item.terrain_arguments.workareas, *item.terrain_arguments.fields_to_draw, item.z_value,
+			   Vector2f(item.terrain_arguments.renderbuffer_width,
+			            item.terrain_arguments.renderbuffer_height));
 			++i;
 		} break;
 

@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
-"PO-Revision-Date: 2019-05-25 10:12+0000\n"
+"POT-Creation-Date: 2019-05-30 18:50+0000\n"
+"PO-Revision-Date: 2019-05-30 18:52+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -1374,16 +1374,16 @@ msgstr "Kasvattaa ruoikon, jota tarvitaan kahteen eri Barbaariheimon tarpeeseen.
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid ""
-"Thatch reed is the traditional material for roofing, and it is woven into "
-"the extremely durable cloth that they use for their ships’ sails."
-msgstr "Kaislanolki on tavanomainen materiaali kattojen tekemiseen ja siitä ommellaan erittäin kestävää kangasta, jota käytetään heidän laivojen purjeisiin."
+"Reed is the traditional material for roofing, and it is woven into the "
+"extremely durable cloth that they use for their ships’ sails."
+msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
-msgid "A reed yard can produce a sheaf of thatch reed in about %s on average."
-msgstr "Ruokotarha voi tuottaa kaislanolkikimpun keskimäärin %s."
+msgid "A reed yard can produce a sheaf of reed in about %s on average."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:6
@@ -1488,8 +1488,8 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:17
 msgctxt "barbarians_building"
-msgid "Weaves cloth out of thatch reed."
-msgstr "Kutoo kangasta kaislanoljista."
+msgid "Weaves cloth out of reed."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:3
@@ -3065,65 +3065,65 @@ msgid "The remains of a destroyed building."
 msgstr "Tuhotun rakennuksen jäänteet."
 
 #. TRANSLATORS: Helptext for a field
-#: ../../data/tribes/immovables/blackrootfield_harvested/helptexts.lua:4
-#: ../../data/tribes/immovables/cornfield_harvested/helptexts.lua:4
-#: ../../data/tribes/immovables/field_harvested/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield/harvested/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield/harvested/helptexts.lua:4
+#: ../../data/tribes/immovables/wheatfield/harvested/helptexts.lua:4
 msgid "This field has been harvested."
 msgstr "Tämän pellon sato on jo korjattu."
 
 #. TRANSLATORS: Helptext for a field
-#: ../../data/tribes/immovables/blackrootfield_medium/helptexts.lua:4
-#: ../../data/tribes/immovables/blackrootfield_small/helptexts.lua:4
-#: ../../data/tribes/immovables/cornfield_medium/helptexts.lua:4
-#: ../../data/tribes/immovables/cornfield_small/helptexts.lua:4
-#: ../../data/tribes/immovables/field_medium/helptexts.lua:4
-#: ../../data/tribes/immovables/field_small/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield/medium/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield/small/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield/medium/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield/small/helptexts.lua:4
+#: ../../data/tribes/immovables/wheatfield/medium/helptexts.lua:4
+#: ../../data/tribes/immovables/wheatfield/small/helptexts.lua:4
 msgid "This field is growing."
 msgstr "Tämän pellon sato kasvaa."
 
 #. TRANSLATORS: Helptext for a field
-#: ../../data/tribes/immovables/blackrootfield_ripe/helptexts.lua:4
-#: ../../data/tribes/immovables/cornfield_ripe/helptexts.lua:4
-#: ../../data/tribes/immovables/field_ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield/ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield/ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/wheatfield/ripe/helptexts.lua:4
 msgid "This field is ready for harvesting."
 msgstr "Tämä pellon sato on valmis korjattavaksi."
 
 #. TRANSLATORS: Helptext for a field
-#: ../../data/tribes/immovables/blackrootfield_tiny/helptexts.lua:4
-#: ../../data/tribes/immovables/cornfield_tiny/helptexts.lua:4
-#: ../../data/tribes/immovables/field_tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield/tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield/tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/wheatfield/tiny/helptexts.lua:4
 msgid "This field has just been planted."
 msgstr "Tämä pelto on juuri istutettu."
 
 #. TRANSLATORS: Helptext for a grapevine
-#: ../../data/tribes/immovables/grapevine_medium/helptexts.lua:4
-#: ../../data/tribes/immovables/grapevine_small/helptexts.lua:4
+#: ../../data/tribes/immovables/grapevine/medium/helptexts.lua:4
+#: ../../data/tribes/immovables/grapevine/small/helptexts.lua:4
 msgid "This grapevine is growing."
 msgstr "Tämä viiniköynnös kasvaa."
 
 #. TRANSLATORS: Helptext for a grapevine
-#: ../../data/tribes/immovables/grapevine_ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/grapevine/ripe/helptexts.lua:4
 msgid "This grapevine is ready for harvesting."
 msgstr "Tämä viiniköynnös on valmis korjattavaksi."
 
 #. TRANSLATORS: Helptext for a grapevine
-#: ../../data/tribes/immovables/grapevine_tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/grapevine/tiny/helptexts.lua:4
 msgid "This grapevine has just been planted."
 msgstr "Tämä viiniköynnös on juuri istutettu."
 
 #. TRANSLATORS: Helptext for a reed field
-#: ../../data/tribes/immovables/reed_medium/helptexts.lua:4
-#: ../../data/tribes/immovables/reed_small/helptexts.lua:4
+#: ../../data/tribes/immovables/reedfield/medium/helptexts.lua:4
+#: ../../data/tribes/immovables/reedfield/small/helptexts.lua:4
 msgid "This reed is growing."
 msgstr "Tämä ruoikko kasvaa."
 
 #. TRANSLATORS: Helptext for a reed field
-#: ../../data/tribes/immovables/reed_ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/reedfield/ripe/helptexts.lua:4
 msgid "This reed is ready for harvesting."
 msgstr "Tämä ruoikko on sadonkorjuuvalmis."
 
 #. TRANSLATORS: Helptext for a reed field
-#: ../../data/tribes/immovables/reed_tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/reedfield/tiny/helptexts.lua:4
 msgid "This reed has just been planted."
 msgstr "Tämä ruoikko on juuri kylvetty."
 
@@ -4488,9 +4488,8 @@ msgstr "Vedestä ja mudasta tehdään savea, josta tehdään tiiliä, joita käy
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../data/tribes/wares/cloth/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid ""
-"Cloth is needed for Barbarian ships. It is produced out of thatch reed."
-msgstr "Kangasta tarvitaan barbaarien laivoihin. Sitä tuotetaan kaislanoljista."
+msgid "Cloth is needed for Barbarian ships. It is produced out of reed."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../data/tribes/wares/cloth/helptexts.lua:6
@@ -5376,6 +5375,23 @@ msgid ""
 "Fruit, bread or smoked meat or fish."
 msgstr "Ruoka-annoksia tuotetaan krouveissa ja juomahalleissa jostakin syötävästä: hedelmä, leipä tai savustettu liha tai kala."
 
+#. TRANSLATORS: Helptext for a ware: Reed
+#: ../../data/tribes/wares/reed/helptexts.lua:4
+msgctxt "barbarians_ware"
+msgid ""
+"Reed is produced in a reed yard and used to make the roofs of buildings "
+"waterproof."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Reed
+#: ../../data/tribes/wares/reed/helptexts.lua:6
+msgctxt "frisians_ware"
+msgid ""
+"Reed is grown in a reed farm. Nothing is better suited to make roofs "
+"waterproof. It is also used to make buckets and fishing nets as well as "
+"cloth."
+msgstr ""
+
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../data/tribes/wares/saw/helptexts.lua:4
 msgctxt "atlanteans_ware"
@@ -5640,23 +5656,6 @@ msgid ""
 "They are used in the labyrinth – together with food – to train soldiers from"
 " health level 0 to level 1."
 msgstr "Kultaisia taisteluasuja tuotetaan Atlantiksen kutomoissa kultalangasta. Niitä käytetään labyrintissä – yhdessä ruuan kanssa – sotilaiden kouluttamiseksi terveystasolta 0 tasolle 1."
-
-#. TRANSLATORS: Helptext for a ware: Thatch Reed
-#: ../../data/tribes/wares/thatch_reed/helptexts.lua:4
-msgctxt "barbarians_ware"
-msgid ""
-"Thatch reed is produced in a reed yard and used to make the roofs of "
-"buildings waterproof."
-msgstr "Kaislanolki tuotetaan ruokotarjassa ja käytetään vedenpitävien talonkattojen tekemmiseen."
-
-#. TRANSLATORS: Helptext for a ware: Thatch Reed
-#: ../../data/tribes/wares/thatch_reed/helptexts.lua:6
-msgctxt "frisians_ware"
-msgid ""
-"Thatch reed is a special kind of reed that is grown in a reed farm. Nothing "
-"is better suited to make roofs waterproof. It is also used to make buckets "
-"and fishing nets as well as cloth."
-msgstr "Kaislanolki on tietynlainen ruoko, jota kasvatetaan ruokofarmissa. Mikää ei ole sopivampi veden pitäviin kattoihin. Sitä käytetään myös ämpäreitä ja kalaverkkoja sekä kangasta."
 
 #. TRANSLATORS: Helptext for a ware: Double Trident
 #: ../../data/tribes/wares/trident_double/helptexts.lua:4
@@ -6036,8 +6035,8 @@ msgstr "Riistanvartija varmistaa, etteivät riistaeläinten kannat pienene liika
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../data/tribes/workers/barbarians/gardener/helptexts.lua:3
 msgctxt "barbarians_worker"
-msgid "Grows thatch reed."
-msgstr "Kasvattaa kaislanolkia."
+msgid "Plants and harvests reed fields."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/barbarians/geologist/helptexts.lua:3
@@ -6482,8 +6481,8 @@ msgstr "Työskentelee syvällä kaivoksessa hankkiakseen hiiltä, rautaa, kultaa
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../data/tribes/workers/frisians/reed_farmer/helptexts.lua:3
 msgctxt "frisians_worker"
-msgid "Grows thatch reed."
-msgstr "Kasvattaa kaislanolkia."
+msgid "Plants and harvests reed fields."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Reindeer
 #: ../../data/tribes/workers/frisians/reindeer/helptexts.lua:3

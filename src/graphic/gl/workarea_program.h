@@ -20,6 +20,7 @@
 #ifndef WL_GRAPHIC_GL_WORKAREA_PROGRAM_H
 #define WL_GRAPHIC_GL_WORKAREA_PROGRAM_H
 
+#include <memory>
 #include <vector>
 
 #include "base/vector.h"
@@ -34,8 +35,7 @@ public:
 	WorkareaProgram();
 
 	// Draws the workarea overlay.
-	void
-	draw(uint32_t texture_id, Workareas workarea, const FieldsToDraw& fields_to_draw, float z_value);
+	void draw(uint32_t texture_id, Workareas, const FieldsToDraw&, float z, Vector2f rendertarget);
 
 private:
 	struct PerVertexData {
@@ -51,8 +51,12 @@ private:
 	void gl_draw(int gl_texture, float z_value);
 
 	// Adds a vertex to the end of vertices with data from 'field' in order to apply the specified
-	// 'overlay'.
-	void add_vertex(const FieldsToDraw::Field& field, RGBAColor overlay);
+	// 'overlay' and, if desired, at the specified offset.
+	void add_vertex(const FieldsToDraw::Field& field,
+	                RGBAColor overlay,
+	                std::vector<PerVertexData>*,
+	                Vector2f offset = Vector2f::zero(),
+	                Vector2f viewport = Vector2f::zero());
 
 	// The program used for drawing the workarea overlay.
 	Gl::Program gl_program_;
@@ -70,6 +74,20 @@ private:
 	// Objects below are kept around to avoid memory allocations on each frame.
 	// They could theoretically also be recreated.
 	std::vector<PerVertexData> vertices_;
+	std::vector<PerVertexData> outer_vertices_;
+
+	// Calculating the workareas is a bit slow, so we only recalculate when we have to
+	struct WorkareasCache {
+		WorkareasCache(const Workareas& wa, const Widelands::FCoords f, const Vector2f v)
+		   : workareas(wa), fcoords(f), surface_pixel(v) {
+		}
+
+		const Workareas workareas;
+		// Viewpoint data
+		const Widelands::FCoords fcoords;
+		const Vector2f surface_pixel;
+	};
+	std::unique_ptr<WorkareasCache> cache_;
 
 	DISALLOW_COPY_AND_ASSIGN(WorkareaProgram);
 };

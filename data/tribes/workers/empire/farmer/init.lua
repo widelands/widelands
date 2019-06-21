@@ -43,9 +43,9 @@ tribes:new_worker_type {
       plant = {
          "findspace=size:any radius:2 space",
          "walk=coords",
-         "animate=planting 4000",
+         "animate=planting 6000",
          "plant=attrib:seed_wheat",
-         "animate=planting 4000",
+         "animate=planting 6000",
          "return",
       },
       harvest = {
