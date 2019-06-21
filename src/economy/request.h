@@ -24,6 +24,7 @@
 #include "logic/map_objects/tribes/requirements.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
+#include "map_io/tribes_legacy_lookup_table.h"
 
 class FileRead;
 class FileWrite;
@@ -116,7 +117,8 @@ public:
 
 	void start_transfer(Game&, Supply&);
 
-	void read(FileRead&, Game&, MapObjectLoader&);
+	void
+	read(FileRead&, Game&, MapObjectLoader&, const TribesLegacyLookupTable& tribes_lookup_table);
 	void write(FileWrite&, Game&, MapObjectSaver&) const;
 	Worker* get_transfer_worker();
 

@@ -4,15 +4,15 @@
 # Translators:
 # GunChleoc, 2016
 # Juanjo, 2015
-# Juanjo, 2015-2018
+# Juanjo, 2015-2019
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
-"PO-Revision-Date: 2019-05-25 10:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-05-30 18:50+0000\n"
+"PO-Revision-Date: 2019-06-11 21:41+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -291,10 +291,10 @@ msgstr "Construïu un camp de juncs"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
-"The third material necessary for improved buildings is thatch reed, used to "
-"cover roofs. Thatch reed is planted by a gardener around his building, the "
-"reed yard."
-msgstr "El tercer material necessari per als edificis ampliats és la fibra de junc, que s'empra per a fer teulades. El junc el planta el jardiner al voltant del seu edifici: el camp de juncs."
+"The third material necessary for improved buildings is reed, used to cover "
+"roofs. Reed fields are planted by a gardener around his building, the reed "
+"yard."
+msgstr "El tercer material necessari per als edificis ampliats és el junc, que s'empra per a fer teulades. El junc el planta el jardiner al voltant del seu edifici: el camp de juncs."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131

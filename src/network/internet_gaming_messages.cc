@@ -43,6 +43,7 @@ void InternetGamingMessages::fill_map() {
 	igmessages["NO_SUCH_USER"] = _("There is no user with this name logged in.");
 	igmessages["NO_SUCH_GAME"] = _("The game no longer exists, maybe it has just been closed.");
 	igmessages["WRONG_PASSWORD"] = _("Wrong password, please try again.");
+	igmessages["BANNED"] = _("You have been temporarily banned from online gaming.");
 	igmessages["UNSUPPORTED_PROTOCOL"] = _("The protocol version you are using is not supported!");
 	igmessages["ALREADY_LOGGED_IN"] = _("You are already logged in!");
 	igmessages["DEFICIENT_PERMISSION"] =
