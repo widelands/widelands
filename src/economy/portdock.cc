@@ -475,9 +475,11 @@ ExpeditionBootstrap* PortDock::expedition_bootstrap() const {
 	return expedition_bootstrap_.get();
 }
 
-void PortDock::expedition_bootstrap_complete(Game& game) {
-	expedition_ready_ = true;
-	get_fleet()->update(game);
+void PortDock::set_expedition_bootstrap_complete(Game& game, bool complete) {
+	if (expedition_ready_ != complete) {
+		expedition_ready_ = complete;
+		get_fleet()->update(game);
+	}
 }
 
 void PortDock::cancel_expedition(Game& game) {

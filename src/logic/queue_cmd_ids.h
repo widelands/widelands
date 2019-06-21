@@ -86,7 +86,8 @@ enum class QueueCommandTypes {
 	kIncorporate = 130,
 	kLuaScript,
 	kLuaCoroutine,
-	kCalculateStatistics,  // 133
+	kCalculateStatistics,
+	kExpeditionConfig, // 134
 	kCallEconomyBalance = 200,
 
 	kDeleteMessage,  // 201

@@ -50,6 +50,7 @@ struct Flag;
 struct Path;
 struct PlayerImmovable;
 enum class IslandExploreDirection;
+struct PortDock;
 enum class ScoutingDirection;
 enum class SoldierPreference : uint8_t;
 struct Ship;
@@ -259,6 +260,7 @@ public:
 	void send_player_start_stop_building(Building&);
 	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);
 	void send_player_start_or_cancel_expedition(Building&);
+	void send_player_expedition_config(PortDock&, WareWorker, DescriptionIndex, bool);
 
 	void send_player_enhance_building(Building&, DescriptionIndex);
 	void send_player_evict_worker(Worker&);

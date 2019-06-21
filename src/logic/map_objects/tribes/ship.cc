@@ -621,62 +621,47 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	case ShipStates::kExpeditionColonizing: {
 		assert(!expedition_->seen_port_buildspaces.empty());
 		BaseImmovable* baim = map[expedition_->seen_port_buildspaces.front()].get_immovable();
-		// Following is a preparation for very rare situation, when colonizing port already have a
-		// worker (bug-1727673)
-		// We leave the worker on the ship then
-		bool leftover_builder = false;
 		if (baim) {
+			assert(!items_.empty());
+			const size_t nr_items = items_.size() - 1;
 			upcast(ConstructionSite, cs, baim);
-
-			for (int i = items_.size() - 1; i >= 0; --i) {
-				WareInstance* ware;
-				Worker* worker;
-				items_.at(i).get(game, &ware, &worker);
-				if (ware) {
-					// no, we don't transfer the wares, we create new ones out of
-					// air and remove the old ones ;)
-					WaresQueue& wq =
-					   dynamic_cast<WaresQueue&>(cs->inputqueue(ware->descr_index(), wwWARE));
-					const uint32_t cur = wq.get_filled();
-
-					// This is to help to debug the situation when colonization fails
-					// Can the reason be that worker was not unloaded as the last one?
-					if (wq.get_max_fill() <= cur) {
-						log("  %d: Colonization error: unloading wares to constructionsite of %s"
-						    " (owner %d) failed.\n"
-						    " Wares unloaded to the site: %d, max capacity: %d, remaining to unload: %d\n"
-						    " No free capacity to unload another ware\n",
-						    get_owner()->player_number(), cs->get_info().becomes->name().c_str(),
-						    cs->get_owner()->player_number(), cur, wq.get_max_fill(), i);
-					}
-
-					assert(wq.get_max_fill() > cur);
-					wq.set_filled(cur + 1);
-					items_.at(i).remove(game);
-					items_.resize(i);
-					break;
+			WareInstance* ware;
+			Worker* worker;
+			items_.at(nr_items).get(game, &ware, &worker);
+			if (ware) {
+				// no, we don't transfer the wares, we create new ones out of
+				// air and remove the old ones ;)
+				WaresQueue* wq;
+				try {
+					wq = dynamic_cast<WaresQueue*>(&cs->inputqueue(ware->descr_index(), wwWARE));
+					assert(wq);
+				} catch (const WException&) {
+					// cs->inputqueue() may throw if this is an additional item
+					wq = nullptr;
+				}
+				if (!wq || wq->get_filled() >= wq->get_max_fill()) {
+					cs->add_additional_ware(ware->descr_index());
 				} else {
-					assert(worker);
-					// If constructionsite does not need worker anymore, we must leave it on the ship.
-					// Also we presume that he is on position 0
-					if (cs->get_builder_request() == nullptr) {
-						log("%2d: WARNING: Colonizing ship %s cannot unload the worker to new port at "
-						    "%3dx%3d because the request is no longer active\n",
-						    get_owner()->player_number(), shipname_.c_str(), cs->get_position().x,
-						    cs->get_position().y);
-						leftover_builder = true;
-						break;  // no more unloading (builder shoud be on position 0)
-					}
-					worker->set_economy(nullptr);
-					worker->set_location(cs);
-					worker->set_position(game, cs->get_position());
-					worker->reset_tasks(game);
+					wq->set_filled(wq->get_filled() + 1);
+				}
+				items_.at(nr_items).remove(game);
+				items_.resize(nr_items);
+			} else {
+				assert(worker);
+				worker->set_economy(nullptr);
+				worker->set_location(cs);
+				worker->set_position(game, cs->get_position());
+				worker->reset_tasks(game);
+				if (cs->get_builder_request() &&
+						worker->descr().worker_index() == worker->get_owner()->tribe().builder()) {
 					PartiallyFinishedBuilding::request_builder_callback(
 					   game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
-					items_.resize(i);
+				} else {
+					cs->add_additional_worker(game, *worker);
 				}
+				items_.resize(nr_items);
 			}
-		} else {  // it seems that port constructionsite has dissapeared
+		} else {  // it seems that port constructionsite has disappeared
 			// Send a message to the player, that a port constructionsite is gone
 			send_message(game, _("Port Lost!"), _("New port construction site is gone"),
 			             _("Unloading of wares failed, expedition is cancelled now."),
@@ -684,7 +669,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			send_signal(game, "cancel_expedition");
 		}
 
-		if (items_.empty() || !baim || leftover_builder) {  // we are done, either way
+		if (items_.empty() || !baim) {  // we are done, either way
 			ship_state_ = ShipStates::kTransport;            // That's it, expedition finished
 
 			// Bring us back into a fleet and a economy.

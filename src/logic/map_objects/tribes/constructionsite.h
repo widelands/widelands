@@ -114,6 +114,15 @@ public:
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
 
+	void add_additional_ware(DescriptionIndex);
+	void add_additional_worker(Game&, Worker&);
+	const std::map<DescriptionIndex, uint8_t>& get_additional_wares() const {
+		return additional_wares_;
+	}
+	const std::vector<Worker*>& get_additional_workers() const {
+		return additional_workers_;
+	}
+
 protected:
 	void update_statistics_string(std::string* statistics_string) override;
 
@@ -135,6 +144,9 @@ private:
 
 	bool builder_idle_;                 // used to determine whether the builder is idle
 	ConstructionsiteInformation info_;  // asked for by player point of view for the gameview
+
+	std::map<DescriptionIndex, uint8_t> additional_wares_;
+	std::vector<Worker*> additional_workers_;
 };
 }  // namespace Widelands
 

@@ -208,8 +208,8 @@ public:
 		return portdock_;
 	}
 
-	// Returns the waresqueue of the expedition if this is a port.
-	// Will throw an exception otherwise.
+	// Returns the first matching not completely filled waresqueue of the expedition if this is a port.
+	// Will throw an exception otherwise or if all queues of this type are full.
 	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
 
 	void log_general_info(const EditorGameBase&) const override;
