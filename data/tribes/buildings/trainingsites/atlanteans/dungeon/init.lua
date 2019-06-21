@@ -156,7 +156,7 @@ tribes:new_trainingsite_type {
          descname = _"sleeping",
          actions = {
             "sleep=5000",
-            "checksoldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
+            "return=no_stats",
          }
       },
       upgrade_soldier_attack_0 = {
@@ -164,6 +164,9 @@ tribes:new_trainingsite_type {
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
             "checksoldier=soldier attack 0",
+            "return=failed unless site has trident_long",
+            "return=failed unless site has atlanteans_bread",
+            "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=30000",
             "checksoldier=soldier attack 0",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_long",
@@ -175,6 +178,9 @@ tribes:new_trainingsite_type {
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
             "checksoldier=soldier attack 1",
+            "return=failed unless site has trident_steel",
+            "return=failed unless site has atlanteans_bread",
+            "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=30000",
             "checksoldier=soldier attack 1",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_steel",
@@ -186,6 +192,9 @@ tribes:new_trainingsite_type {
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 2 to level 3"),
          actions = {
             "checksoldier=soldier attack 2",
+            "return=failed unless site has trident_double",
+            "return=failed unless site has atlanteans_bread",
+            "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=30000",
             "checksoldier=soldier attack 2",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_double",
@@ -197,6 +206,9 @@ tribes:new_trainingsite_type {
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 3 to level 4"),
          actions = {
             "checksoldier=soldier attack 3",
+            "return=failed unless site has trident_heavy_double",
+            "return=failed unless site has atlanteans_bread",
+            "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=30000",
             "checksoldier=soldier attack 3",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_heavy_double",
