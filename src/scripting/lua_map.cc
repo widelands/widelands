@@ -5112,9 +5112,7 @@ int LuaWarehouse::set_soldiers(lua_State* L) {
 }
 
 /* RST
-   .. method:: start_expedition(port)
-
-      :arg: port
+   .. method:: start_expedition()
 
       Starts preparation for expedition
 
@@ -5143,9 +5141,7 @@ int LuaWarehouse::start_expedition(lua_State* L) {
 }
 
 /* RST
-   .. method:: cancel_expedition(port)
-
-      :arg: port
+   .. method:: cancel_expedition()
 
       Cancels an expedition if in progress
 
@@ -5671,13 +5667,15 @@ const MethodType<LuaShip> LuaShip::Methods[] = {
    METHOD(LuaShip, get_wares),
    METHOD(LuaShip, get_workers),
    METHOD(LuaShip, build_colonization_port),
+   METHOD(LuaShip, make_expedition),
    {nullptr, nullptr},
 };
 const PropertyType<LuaShip> LuaShip::Properties[] = {
    PROP_RO(LuaShip, debug_economy),      PROP_RO(LuaShip, last_portdock),
    PROP_RO(LuaShip, destination),        PROP_RO(LuaShip, state),
    PROP_RW(LuaShip, scouting_direction), PROP_RW(LuaShip, island_explore_direction),
-   PROP_RO(LuaShip, shipname),           {nullptr, nullptr, nullptr},
+   PROP_RO(LuaShip, shipname),           PROP_RW(LuaShip, capacity),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5874,6 +5872,25 @@ int LuaShip::get_shipname(lua_State* L) {
 	return 1;
 }
 
+/* RST
+   .. attribute:: capacity
+
+   The ship's current capacity. Defaults to the capacity defined in the tribe's singleton ship description.
+
+   Do not change this value if the ship is currently shipping more items than the new capacity allows.
+
+      (RW) returns the current capacity of this ship
+
+*/
+int LuaShip::get_capacity(lua_State* L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->get_capacity());
+	return 1;
+}
+int LuaShip::set_capacity(lua_State* L) {
+	get(L, get_egbase(L))->set_capacity(luaL_checkuint32(L, -1));
+	return 0;
+}
+
 /*
  ==========================================================
  LUA METHODS
@@ -5947,6 +5964,71 @@ int LuaShip::build_colonization_port(lua_State* L) {
 			return 1;
 		}
 	}
+	return 0;
+}
+
+/* RST
+   .. method:: make_expedition([items])
+
+      Turns this ship into an expedition ship without a base port. Creates all necessary
+      wares and a builder plus, if desired, the specified additional items.
+      Any items previously present in the ship will be deleted.
+
+      The ship must be empty and not an expedition ship when this method is called.
+
+      :returns: nil
+*/
+int LuaShip::make_expedition(lua_State* L) {
+	upcast(Game, game, &get_egbase(L));
+	assert(game);
+	Ship* ship = get(L, *game);
+	assert(ship);
+	if (ship->get_ship_state() != Widelands::Ship::ShipStates::kTransport || ship->get_nritems() > 0) {
+		report_error(L, "Ship.make_expedition can be used only on transport ships!");
+	}
+
+	const Widelands::TribeDescr& tribe = ship->owner().tribe();
+	for (const auto& pair : tribe.get_building_descr(tribe.port())->buildcost()) {
+		for (size_t i = pair.second; i > 0; --i) {
+			Widelands::WareInstance& w = *new Widelands::WareInstance(pair.first, tribe.get_ware_descr(pair.first));
+			w.init(*game);
+			ship->add_item(*game, Widelands::ShippingItem(w));
+		}
+	}
+	ship->add_item(*game, Widelands::ShippingItem(tribe.get_worker_descr(tribe.builder())->create(*game,
+			ship->get_owner(), nullptr, ship->get_position())));
+	if (lua_gettop(L) > 1) {
+		luaL_checktype(L, 2, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			uint32_t amount = luaL_checkuint32(L, -1);
+			lua_pop(L, 1);
+			std::string what = luaL_checkstring(L, -1);
+			Widelands::DescriptionIndex index = game->tribes().ware_index(what);
+			if (tribe.has_ware(index)) {
+				while (amount > 0) {
+					Widelands::WareInstance& w = *new Widelands::WareInstance(index, tribe.get_ware_descr(index));
+					w.init(*game);
+					ship->add_item(*game, Widelands::ShippingItem(w));
+					--amount;
+				}
+			} else {
+				index = tribe.worker_index(what);
+				if (tribe.has_worker(index)) {
+					while (amount > 0) {
+						ship->add_item(*game, Widelands::ShippingItem(tribe.get_worker_descr(index)->create(*game,
+								ship->get_owner(), nullptr, ship->get_position())));
+						--amount;
+					}
+				} else {
+					report_error(L, "Invalid ware or worker: %s", what.c_str());
+				}
+			}
+		}
+	}
+	ship->set_destination(nullptr);
+	ship->start_task_expedition(*game);
+
 	return 0;
 }
 

@@ -397,7 +397,7 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 	}
 
 	// Then load the remaining capacity of the departing ship with relevant items
-	uint32_t remaining_capacity = ship.descr().get_capacity() - ship.get_nritems();
+	uint32_t remaining_capacity = ship.get_capacity() - ship.get_nritems();
 
 	// Firstly load the wares/workers which go to chosen destination
 	for (auto si_it = waiting_.begin(); si_it != waiting_.end() && remaining_capacity > 0; ++si_it) {

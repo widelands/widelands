@@ -39,6 +39,9 @@ function make_extra_data(plr, name, version, extra)
    return table.concat(rv, ";")
 end
 
+-- don't declare players defeated instantly with Discovery starting condition
+win_conditions__initially_without_warehouse = {}
+
 -- =======================================================================
 --                             PUBLIC FUNCTIONS
 -- =======================================================================
@@ -59,7 +62,9 @@ end
 --    :returns: :const:`nil`
 function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
    for idx,p in ipairs(plrs) do
-      if p.defeated then
+      if win_conditions__initially_without_warehouse[idx] == nil then
+         win_conditions__initially_without_warehouse[idx] = p.defeated
+      elseif p.defeated and not win_conditions__initially_without_warehouse[idx] then
          p:send_message(heading, msg)
          p.see_all = 1
          if (wc_name and wc_ver) then
@@ -67,6 +72,8 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
          end
          table.remove(plrs, idx)
          break
+      elseif not p.defeated then
+         win_conditions__initially_without_warehouse[idx] = false
       end
    end
 end

@@ -116,7 +116,7 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
 	// Read the sailing animations
 	assign_directional_animation(&sail_anims_, "sail");
 
-	capacity_ = table.has_key("capacity") ? table.get_int("capacity") : 20;
+	default_capacity_ = table.has_key("capacity") ? table.get_int("capacity") : 20;
 }
 
 uint32_t ShipDescr::movecaps() const {
@@ -128,7 +128,8 @@ Bob& ShipDescr::create_object() const {
 }
 
 Ship::Ship(const ShipDescr& gdescr)
-   : Bob(gdescr), fleet_(nullptr), economy_(nullptr), ship_state_(ShipStates::kTransport) {
+   : Bob(gdescr), fleet_(nullptr), economy_(nullptr),
+     ship_state_(ShipStates::kTransport), capacity_(gdescr.get_default_capacity()) {
 }
 
 Ship::~Ship() {
@@ -738,7 +739,7 @@ void Ship::set_destination(PortDock* pd) {
 }
 
 void Ship::add_item(Game& game, const ShippingItem& item) {
-	assert(items_.size() < descr().get_capacity());
+	assert(items_.size() < get_capacity());
 
 	items_.push_back(item);
 	items_.back().set_location(game, this);
@@ -1134,7 +1135,7 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 8;
+constexpr uint8_t kCurrentPacketVersion = 9;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")
@@ -1142,7 +1143,7 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	return Bob::Loader::get_task(name);
 }
 
-void Ship::Loader::load(FileRead& fr) {
+void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 	Bob::Loader::load(fr);
 
 	// Economy
@@ -1178,6 +1179,9 @@ void Ship::Loader::load(FileRead& fr) {
 	}
 
 	shipname_ = fr.c_string();
+
+	capacity_ = packet_version >= 9 ? fr.unsigned_32() : -1;
+
 	lastdock_ = fr.unsigned_32();
 	destination_ = fr.unsigned_32();
 
@@ -1222,6 +1226,8 @@ void Ship::Loader::load_finish() {
 	// restore the  ship id and name
 	ship.shipname_ = shipname_;
 
+	ship.capacity_ = capacity_ < 0 ? ship.descr().get_default_capacity() : capacity_;
+
 	// if the ship is on an expedition, restore the expedition specific data
 	if (expedition_) {
 		ship.expedition_.swap(expedition_);
@@ -1244,7 +1250,8 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		// TODO(Nordfriese): Savegame compatibility
+		if (packet_version >= 8 && packet_version <= kCurrentPacketVersion) {
 			try {
 				const ShipDescr* descr = nullptr;
 				// Removing this will break the test suite
@@ -1252,7 +1259,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 				const DescriptionIndex& ship_index = egbase.tribes().safe_ship_index(name);
 				descr = egbase.tribes().get_ship_descr(ship_index);
 				loader->init(egbase, mol, descr->create_object());
-				loader->load(fr);
+				loader->load(fr, packet_version);
 			} catch (const WException& e) {
 				throw GameDataError("Failed to load ship: %s", e.what());
 			}
@@ -1300,6 +1307,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	}
 
 	fw.string(shipname_);
+	fw.unsigned_32(capacity_);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(lastdock_.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_.get(egbase)));
 
