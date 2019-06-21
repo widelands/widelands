@@ -31,7 +31,6 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"

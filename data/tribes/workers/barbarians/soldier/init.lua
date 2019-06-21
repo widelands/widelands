@@ -57,7 +57,7 @@ animations = {
       fps = 20
    },
 }
-add_walking_animations(animations, "walk", dirname, "walk", {16, 31}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {16, 31}, 10)
 
 all_levels_bar = {
    min_health = 0,

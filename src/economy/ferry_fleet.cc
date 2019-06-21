@@ -203,6 +203,24 @@ uint32_t FerryFleet::count_ferries() const {
 	return ferries_.size();
 }
 
+uint32_t FerryFleet::count_unattended_waterways() const {
+	return pending_ferry_requests_.size();
+}
+
+// Returns true of this waterway has a ferry or a ferry is on the way there
+bool FerryFleet::has_ferry(const Waterway& ww) const {
+	if (ww.get_ferry()) {
+		return true;
+	}
+	assert(ww.get_fleet() == this);
+	for (const auto& pair : pending_ferry_requests_) {
+		if (pair.second == &ww) {
+			return false;
+		}
+	}
+	return true;
+}
+
 void FerryFleet::add_ferry(EditorGameBase& /* egbase */, Ferry* ferry) {
 	ferries_.push_back(ferry);
 	ferry->set_fleet(this);

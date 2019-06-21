@@ -27,8 +27,6 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/font_handler.h"
-#include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -70,7 +68,10 @@ void MapDetails::clear() {
 }
 
 void MapDetails::layout() {
-	name_label_.set_size(get_w() - padding_, text_height() + 2);
+	name_label_.set_size(get_w() - padding_, text_height(style_ == UI::PanelStyle::kFsMenu ?
+	                                                        UI::FontStyle::kFsMenuInfoPanelHeading :
+	                                                        UI::FontStyle::kWuiInfoPanelHeading) +
+	                                            2);
 
 	// Adjust sizes for show / hide suggested teams
 	if (suggested_teams_box_->is_visible()) {

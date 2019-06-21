@@ -1,21 +1,12 @@
-dirname = path.dirname(__file__)
+image_dirname = path.dirname(__file__) .. "images/empire/"
+
+animations = {}
+add_animation(animations, "frontier", image_dirname, "frontier", {1, 19})
+add_animation(animations, "flag", image_dirname, "flag", {14, 38}, 10)
 
 tribes:new_tribe {
    name = "empire",
-
-   animations = {
-      -- No idea for the frontier. Maybe some javelins?
-      frontier = {
-         pictures = path.list_files(dirname .. "images/empire/frontier_??.png"),
-         hotspot = { 1, 19 },
-      },
-      -- Not just a plain color, maybe a cross or some stripes
-      flag = {
-         pictures = path.list_files(dirname .. "images/empire/flag_??.png"),
-         hotspot = { 14, 38 },
-         fps = 10
-      }
-   },
+   animations = animations,
 
    bridges = {
       normal_e = {
@@ -48,12 +39,12 @@ tribes:new_tribe {
    -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
-         "tribes/images/empire/roadt_busy.png",
+         image_dirname .. "roadt_busy.png",
       },
       normal = {
-         "tribes/images/empire/roadt_normal_00.png",
-         "tribes/images/empire/roadt_normal_01.png",
-         "tribes/images/empire/roadt_normal_02.png",
+         image_dirname .. "roadt_normal_00.png",
+         image_dirname .. "roadt_normal_01.png",
+         image_dirname .. "roadt_normal_02.png",
       },
       waterway = {
          "tribes/images/empire/waterway_0.png",

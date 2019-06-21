@@ -174,6 +174,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		new GameStatisticsMenu(*this, statisticsmenu_, main_windows_);
 	};
 
+	set_display_flag(InteractiveBase::dfShowWorkareaOverlap, true);  // enable by default
+
 	toolbar()->add_space(15);
 
 	add_toolbar_button(
@@ -522,6 +524,10 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				new GameMainMenuSaveGame(*this, main_windows_.savegame);
 			else
 				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+			return true;
+
+		case SDLK_w:
+			set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
 			return true;
 
 		case SDLK_KP_7:

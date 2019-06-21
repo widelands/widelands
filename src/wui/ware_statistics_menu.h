@@ -29,13 +29,27 @@
 struct DifferentialPlotArea;
 class InteractivePlayer;
 struct WuiPlotArea;
+struct StatisticWaresDisplay;
+struct WuiPlotAreaSlider;
+namespace UI {
+struct Box;
+struct TabPanel;
+}  // namespace UI
 
 struct WareStatisticsMenu : public UI::UniqueWindow {
 public:
 	WareStatisticsMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 	void set_time(int32_t);
 
+protected:
+	void layout() override;
+
 private:
+	UI::Box* main_box_;
+	UI::TabPanel* tab_panel_;
+	StatisticWaresDisplay* display_;
+	WuiPlotAreaSlider* slider_;
+
 	WuiPlotArea* plot_production_;
 	WuiPlotArea* plot_consumption_;
 	WuiPlotArea* plot_stock_;

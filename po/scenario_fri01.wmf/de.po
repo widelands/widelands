@@ -1,20 +1,20 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # SevyRide, 2018
 # Wuzzy <almikes@aol.com>, 2018
 # Elisabeth Jäger, 2018
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-16 06:01+0000\n"
+"POT-Creation-Date: 2019-05-30 18:50+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,7 +89,7 @@ msgid "20 × Coal"
 msgstr "20 × Kohle"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:52
-msgid "30 × Thatch Reed"
+msgid "30 × Reed"
 msgstr "30 × Reet"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:53
@@ -255,17 +255,19 @@ msgstr ""
 "Willkommen auf der schönen Insel Langeneß! Ich bin Reebaud, der Häuptling "
 "dieser unberührten Insel."
 
-#. TRANSLATORS: Reebaud – Introduction 1
+#. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
+#. dukedoms
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:133
 msgid ""
 "My tribe and I have just arrived from the mainland. There were fights with "
-"the Danes in the North, the Vikings in the East… So, I decided to lead my "
-"tribe away to start a quiet, peaceful life on this untouched island."
+"the Danes in the North, the Schauenburgers and Holsteiners in the East and "
+"South… So I decided to lead my tribe away to start a quiet, peaceful life on"
+" this untouched island."
 msgstr ""
 "Mein Stamm und ich sind gerade vom Festland angekommen. Es gab dort Kämpfe "
-"mit den Dänen im Norden und mit den Wikingern im Osten … Daher entschied ich"
-" mich, meinen Stamm wegzuführen, um ein stilles, friedliches Leben auf "
-"dieser unberührten Insel anzufangen."
+"mit den Dänen im Norden, den Schauenburgern und Holsteinern im Osten un "
+"Süden … Daher entschied ich mich, meinen Stamm wegzuführen, um ein stilles, "
+"friedliches Leben auf dieser unberührten Insel anzufangen."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:137
 msgid "A new home"
@@ -284,7 +286,7 @@ msgstr ""
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:142
 msgid ""
-"I have asked Hauke, one of my advisors to oversee the construction of our "
+"I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
 msgstr ""
 "Ich habe Hauke, einen meiner Berater gebeten, den Aufbau unserer Siedlung zu"
@@ -294,14 +296,15 @@ msgstr ""
 msgid "The first buildings"
 msgstr "Die ersten Gebäude"
 
-#. TRANSLATORS: Hauke – Introduction 3
+#. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian
+#. greeting
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:148
 msgid ""
-"Greetings, Chieftain Reebaud! I will start with the colonization of the "
-"island straight away."
+"Peace, Chieftain Reebaud! I will start with the colonization of the island "
+"straight away."
 msgstr ""
-"Seid gegrüßt, Häuptling Reebaud! Ich werde mit der Besiedelung der Insel "
-"sofort beginnen."
+"Frieden, Häuptling Reebaud! Ich werde mit der Besiedelung der Insel sofort "
+"beginnen."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:151
@@ -332,7 +335,7 @@ msgid ""
 "Also, we had better build a reed farm soon. Even reed farms need reed to be "
 "built, so we must take care not to run short before we can grow our own. "
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
-"start growing thatch reed."
+"start growing reed fields."
 msgstr ""
 "Außerdem sollten wir möglichst bald eine Reetpflanzung bauen. Da auch der "
 "Bau einer Reetpflanzung ohne Reet nicht möglich ist, müssen wir dafür "
@@ -436,8 +439,8 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:189
 msgid ""
-"You should assign the new reed farm the highest priority for thatch reed in "
-"the construction site window."
+"You should assign the new reed farm the highest priority for reed in the "
+"construction site window."
 msgstr ""
 "Du solltest der neuen Reetpflanzung die höchste Priorität für Reet im "
 "Baustellenfenster zuweisen."
@@ -590,7 +593,7 @@ msgstr ""
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:234
 msgid ""
-"But when the mines will have to be expanded, rations won’t keep the miners "
+"But when the mines will have to be enhanced, rations won’t keep the miners "
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
 msgstr ""
@@ -1107,9 +1110,9 @@ msgstr "Krieger zum Hafen!"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid ""
 "I almost forgot in this haste – whereever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to 10 soldiers on "
-"our ship, if they don’t mind being all crammed up together. Let’s send some "
-"to the port when it’s completed, so they can embark when we set sail!"
+"to secure and expand our new colony. There’s space for up to ten soldiers on"
+" our ship, if they don’t mind being all crammed together. Let’s send some to"
+" the port when it’s completed, so they can embark when we set sail!"
 msgstr ""
 "In der Eile hätte ich es fast vergessen – wo immer wir landen, werden wir "
 "Krieger brauchen, um unsere neue Kolonie zu sichern und zu erweitern. Wir "
@@ -1150,14 +1153,3 @@ msgstr ""
 "Du hast diese Mission abgeschlossen. Du kannst uns nun im nächsten Szenario "
 "helfen, eine neue Heimat aufzubauen, weit weg von der rächenden Hand dieses "
 "falschen Gottes …"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "„%s“"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neues Ziel"
-msgstr[1] "Neue Ziele"

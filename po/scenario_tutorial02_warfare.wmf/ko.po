@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-22 05:17+0000\n"
-"PO-Revision-Date: 2019-05-05 11:53+0000\n"
-"Last-Translator: TaeMin An\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 10:12+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -548,13 +548,3 @@ msgid ""
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
 msgstr "이제 캠페인을 플레이하실 준비가 되셨습니다. 거기서는 부족들의 각각 다른 경제에 대해 알려줄 것입니다. 또한 남은 튜토리얼을 플레이하셔도 되지만, 캠페인에서 승리하는데 꼭 필요한 것은 아닙니다."
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "\"%s\""
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "새 목표"
