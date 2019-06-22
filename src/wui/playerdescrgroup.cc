@@ -19,6 +19,7 @@
 
 #include "wui/playerdescrgroup.h"
 
+#include <memory>
 #include <string>
 
 #include <boost/format.hpp>
@@ -29,6 +30,7 @@
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
+#include "map_io/map_loader.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
@@ -299,13 +301,36 @@ void PlayerDescriptionGroup::toggle_playerinit() {
 		return;
 
 	const PlayerSettings& player = settings.players[d->plnum];
+	std::set<std::string> tags;
+	if (!settings.mapfilename.empty()) {
+		Widelands::Map map;
+		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(settings.mapfilename);
+		if (ml) {
+			ml->preload_map(true);
+			tags = map.get_tags();
+		}
+	}
 
 	for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 		if (tribeinfo.name == player.tribe) {
-			d->settings->set_player_init(
-			   d->plnum, (player.initialization_index + 1) % tribeinfo.initializations.size());
-			update();
-			return;
+			const size_t nr_inits = tribeinfo.initializations.size();
+			for (size_t i = (player.initialization_index + 1) % nr_inits;
+					i != player.initialization_index; i = (i + 1) % nr_inits) {
+				bool matches_tags = true;
+				for (const std::string& tag : tribeinfo.initializations[i].required_map_tags) {
+					if (!tags.count(tag)) {
+						matches_tags = false;
+						break;
+					}
+				}
+				if (!matches_tags) {
+					continue;
+				}
+				d->settings->set_player_init(d->plnum, i);
+				update();
+				return;
+			}
+			NEVER_HERE();
 		}
 	}
 	NEVER_HERE();
