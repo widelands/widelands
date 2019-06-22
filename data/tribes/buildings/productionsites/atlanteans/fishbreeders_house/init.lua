@@ -41,8 +41,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
          descname = _"breeding fish",
          actions = {
-            "sleep=24000",
-            "callworker=breed"
+            "callworker=breed",
+            "sleep=13500"
          }
       },
    },

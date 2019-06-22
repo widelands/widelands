@@ -59,9 +59,9 @@ tribes:new_productionsite_type {
          descname = _"sewing fur garment",
          actions = {
             -- time total: 40 + 3.6
-            "sleep=20000",
             "return=skipped unless economy needs fur_garment or workers need experience",
             "consume=fur:2",
+            "sleep=20000",
             "animate=working 20000",
             "produce=fur_garment"
          },
