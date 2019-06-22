@@ -1348,6 +1348,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
                                      const World& world,
                                      ProductionSiteDescr* building)
    : MapObjectProgram(init_name), descname_(init_descname) {
+	log("NOCOM %s:", building->name().c_str());
 
 	for (const std::string& line : actions_table->array_entries<std::string>()) {
 		if (line.empty()) {
@@ -1355,6 +1356,8 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 		}
 		try {
 			ProgramParseInput parseinput = parse_program_string(line);
+
+			log(" %s", parseinput.name.c_str()); // NOCOM
 
 			if (parseinput.name == "return") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
@@ -1426,6 +1429,8 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			throw GameDataError("Error reading line '%s': %s", line.c_str(), e.what());
 		}
 	}
+	log(".\n"); // NOCOM
+
 	if (actions_.empty()) {
 		throw GameDataError("No actions found");
 	}
