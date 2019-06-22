@@ -30,7 +30,7 @@ init = {
       -- NOCOM check whether we are on an ocean with a port space!
    until field
    local ship = player:place_ship(field)
-   ship.capacity = 50
+   ship.capacity = 55
    ship:make_expedition({
       log = 7,
       granite = 5,
@@ -41,13 +41,17 @@ init = {
       atlanteans_stonecutter = 1,
       atlanteans_woodcutter = 1,
       atlanteans_forester = 1,
+      atlanteans_sawyer = 1,
       atlanteans_geologist = 1,
       atlanteans_miner = 3,
       atlanteans_smelter = 1,
       atlanteans_toolsmith = 1,
-      atlanteans_baker = 1,
       atlanteans_smoker = 1,
       atlanteans_fisher = 1,
+      atlanteans_baker = 1,
+      atlanteans_blackroot_farmer = 1,
+      atlanteans_farmer = 1,
+      atlanteans_spiderbreeder = 1,
       atlanteans_soldier = 1,
       -- One builder is contained without listing him explicitely
    })
