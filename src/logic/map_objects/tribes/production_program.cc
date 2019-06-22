@@ -56,6 +56,7 @@ bool match_and_skip(std::vector<std::string>::const_iterator& it, const std::str
 	bool result = *it == matchme;
 	if (result) {
 		++it;
+		log(" %s", matchme.c_str()); // NOCOM
 	}
 	return result;
 }
@@ -63,11 +64,13 @@ bool match_and_skip(std::vector<std::string>::const_iterator& it, const std::str
 ProductionProgram::ActReturn::Condition* create_economy_condition(const std::string& item, const ProductionSiteDescr& descr, const Tribes& tribes) {
 	DescriptionIndex index = tribes.ware_index(item);
 	if (tribes.ware_exists(index)) {
+		log(" ware: %s", item.c_str()); // NOCOM
 		descr.ware_demand_checks()->insert(index);
 		return new ProductionProgram::ActReturn::EconomyNeedsWare(index);
 	} else if (tribes.worker_exists(tribes.worker_index(item))) {
 		index = tribes.worker_index(item);
 		descr.worker_demand_checks()->insert(index);
+		log(" worker: %s", item.c_str()); // NOCOM
 		return new ProductionProgram::ActReturn::EconomyNeedsWorker(index);
 	} else {
 		throw GameDataError("Expected ware or worker type but found '%s'", item.c_str());
@@ -388,6 +391,7 @@ ProductionProgram::ActReturn::Condition* ProductionProgram::ActReturn::create_co
 ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& arguments,
                                         const ProductionSiteDescr& descr,
                                         const Tribes& tribes) {
+	log(": <"); // NOCOM
 	if (arguments.empty()) {
 		throw GameDataError("Usage: return=failed|completed|skipped|no_stats [when|unless <conditions>]");
 	}
@@ -433,6 +437,7 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 			throw GameDataError("Expected when|unless but found '%s'", begin->c_str());
 		}
 	}
+	log("> "); // NOCOM
 }
 
 ProductionProgram::ActReturn::~ActReturn() {
