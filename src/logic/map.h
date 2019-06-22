@@ -522,7 +522,8 @@ public:
 	resize(EditorGameBase& egbase, const Coords coords, int32_t w, int32_t h);
 
 protected:
-	// Calculate map compatibility information for the website if it wasn't defined in the map packet
+	/// Calculate map compatibility information for the website if it wasn't defined in the map packet.
+	/// If is_post_one_world is true, this map wasn't created for a specific world (Widelands versions up to Build 18).
 	void calculate_needs_widelands_version_after(bool is_post_one_world);
 
 private:
