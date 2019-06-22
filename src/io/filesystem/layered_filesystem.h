@@ -56,10 +56,10 @@ public:
 	// files). Take ownership of the given filesystem.
 	void set_home_file_system(FileSystem*);
 
-	std::set<std::string> list_directory(const std::string& path) override;
+	FilenameSet list_directory(const std::string& path) const override;
 
 	bool is_writable() const override;
-	bool file_exists(const std::string& path) override;
+	bool file_exists(const std::string& path) const override;
 	bool is_directory(const std::string& path) override;
 	void ensure_directory_exists(const std::string& fs_dirname) override;
 	void make_directory(const std::string& fs_dirname) override;

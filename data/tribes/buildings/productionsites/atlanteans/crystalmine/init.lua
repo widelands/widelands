@@ -71,8 +71,8 @@ tribes:new_productionsite_type {
          descname = _"mining granite",
          actions = {
             "return=skipped unless economy needs granite",
-            "sleep=40000",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "sleep=40000",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_granite",
@@ -87,8 +87,8 @@ tribes:new_productionsite_type {
          descname = _"mining quartz",
          actions = {
             "return=skipped unless economy needs quartz",
-            "sleep=30000",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "sleep=30000",
             "call=a_mine_produce_quartz",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_granite",
@@ -103,8 +103,8 @@ tribes:new_productionsite_type {
          descname = _"mining diamonds",
          actions = {
             "return=skipped unless economy needs diamond",
-            "sleep=40000",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "sleep=40000",
             "call=a_mine_produce_diamond",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_diamond",

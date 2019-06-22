@@ -5,6 +5,7 @@
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2007
 # Alexander Bikmeyev <bikmeyev@gmail.com>, 2016
+# CupIvan <mail@cupivan.ru>, 2019
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2017-2018
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-10 07:33+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-05-30 18:50+0000\n"
+"PO-Revision-Date: 2019-06-13 05:43+0000\n"
+"Last-Translator: CupIvan <mail@cupivan.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -491,7 +492,7 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr "Капризные Боги не отвечает на наши молитвы. Вместо этого, солнечные лучи сильно нагрели Землю и вызвали таяние ледников; людей поглотила бездна. Но двум оставшимся в живых племенам удалось укрыться на последнем клочке земли, высоко в величественных горах. И хотя Боги смилостивились, и климат вновь стал прохладнее, вода продолжала прибывать и пребывать. К последнему безопасному месту — самому высокому горному массиву, где золота и пространства хватит только для одного племени — ведут два противоположных пути. Но помните, будьте осторожны ... это последнее жизненное пространство, оно невелико и выживать здесь трудно."
+msgstr "Капризные Боги не отвечают на наши молитвы. Вместо этого, солнечные лучи сильно нагрели Землю и вызвали таяние ледников; людей поглотила бездна. Но двум оставшимся в живых племенам удалось укрыться на последнем клочке земли, высоко в величественных горах. И хотя Боги смилостивились, и климат вновь стал прохладнее, вода продолжала прибывать и пребывать. К последнему безопасному месту – самому высокому горному массиву, где золота и пространства хватит только для одного племени – ведут два противоположных пути. Но помните, будьте осторожны ... это последнее жизненное пространство, оно невелико и выживать здесь трудно."
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."

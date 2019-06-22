@@ -26,6 +26,7 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/color.h"
+#include "graphic/styles/font_style.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
@@ -139,7 +140,6 @@ private:
 	using EntryRecordDeque = std::deque<EntryRecord*>;
 
 	int max_pic_width_;
-	int lineheight_;
 	EntryRecordDeque entry_records_;
 	Scrollbar scrollbar_;
 	uint32_t scrollpos_;  //  in pixels
@@ -148,7 +148,9 @@ private:
 	uint32_t last_selection_;  // for double clicks
 	ListselectLayout selection_mode_;
 	const Image* check_pic_;
+	const FontStyleInfo* font_style_;
 	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
+	int lineheight_;
 	std::string current_tooltip_;
 };
 

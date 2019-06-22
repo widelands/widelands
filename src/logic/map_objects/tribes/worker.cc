@@ -33,8 +33,9 @@
 #include "economy/portdock.h"
 #include "economy/road.h"
 #include "economy/transfer.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -972,12 +973,11 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 		   MapObjectDescr::OwnerType::kTribe, get_owner());
 
 		// Geologist also sends a message notifying the player
+		// TODO(GunChleoc): We keep formatting this even when timeout has not elapsed
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
-			const std::string message =
-			   (boost::format("<div padding_r=10><p><img object=%s></p></div>"
-			                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-			    ri.descr().name() % UI_FONT_SIZE_MESSAGE % _("A geologist found resources."))
-			      .str();
+			const std::string rt_description = as_mapobject_message(
+			   ri.descr().name(), g_gr->images().get(rdescr->representative_image())->width(),
+			   _("A geologist found resources."));
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
@@ -985,8 +985,8 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			   game,
 			   std::unique_ptr<Message>(new Message(Message::Type::kGeologists, game.get_gametime(),
 			                                        rdescr->descname(), rdescr->representative_image(),
-			                                        ri.descr().descname(), message, position, serial_,
-			                                        rdescr->name())),
+			                                        ri.descr().descname(), rt_description, position,
+			                                        serial_, rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
 	}

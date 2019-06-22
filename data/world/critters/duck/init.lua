@@ -11,7 +11,7 @@ animations = {
    },
 }
 
-add_walking_animations(animations, "walk", dirname, "walk", {5, 10})
+add_directional_animation(animations, "walk", dirname, "walk", {5, 10})
 
 world:new_critter_type{
    name = "duck",
