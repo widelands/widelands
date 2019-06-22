@@ -51,7 +51,7 @@ struct CritterDescr : BobDescr {
 		return walk_anims_;
 	}
 
-	CritterProgram const* get_program(const std::string&) const;
+	CritterProgram const* get_program(const std::string& program_name) const;
 
 	const EditorCategory* editor_category() const;
 

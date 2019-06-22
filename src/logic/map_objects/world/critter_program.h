@@ -43,7 +43,7 @@ struct CritterAction {
 };
 
 struct CritterProgram : public MapObjectProgram {
-	explicit CritterProgram(const std::string& name, const LuaTable& actions_table);
+	explicit CritterProgram(const std::string& program_name, const LuaTable& actions_table);
 
 	int32_t get_size() const {
 		return actions_.size();

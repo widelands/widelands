@@ -343,8 +343,8 @@ void Tribes::postload() {
 		TribeDescr* tribe_descr = tribes_->get_mutable(i);
 
 		// Register which wares and workers have economy demand checks for each tribe
-		for (const DescriptionIndex building_index : tribe_descr->buildings()) {
-			postload_register_economy_demand_checks(*buildings_->get_mutable(building_index), *tribe_descr);
+		for (const DescriptionIndex bi : tribe_descr->buildings()) {
+			postload_register_economy_demand_checks(*buildings_->get_mutable(bi), *tribe_descr);
 		}
 		// Verify that the preciousness has been set for all of the tribe's wares
 		for (const DescriptionIndex wi : tribe_descr->wares()) {
@@ -365,23 +365,23 @@ void Tribes::postload_register_economy_demand_checks(BuildingDescr& building_des
 		// This function can be called only once per loading of tribes
 		assert(prodsite->ware_demand_checks() != nullptr);
 
-		for (const DescriptionIndex ware_index : *prodsite->ware_demand_checks()) {
-			if (!tribe_descr.has_ware(ware_index)) {
+		for (const DescriptionIndex wi : *prodsite->ware_demand_checks()) {
+			if (!tribe_descr.has_ware(wi)) {
 				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check for ware '%s', but the tribe does not use this ware",
 									prodsite->name().c_str(),
 									tribe_descr.name().c_str(),
-									get_ware_descr(ware_index)->name().c_str());
+									get_ware_descr(wi)->name().c_str());
 			}
-			wares_->get_mutable(ware_index)->set_has_demand_check(tribe_descr.name());
+			wares_->get_mutable(wi)->set_has_demand_check(tribe_descr.name());
 		}
-		for (const DescriptionIndex worker_index : *prodsite->worker_demand_checks()) {
-			if (!tribe_descr.has_worker(worker_index)) {
+		for (const DescriptionIndex wi : *prodsite->worker_demand_checks()) {
+			if (!tribe_descr.has_worker(wi)) {
 				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check for worker '%s', but the tribe does not use this worker",
 									prodsite->name().c_str(),
 									tribe_descr.name().c_str(),
-									get_worker_descr(worker_index)->name().c_str());
+									get_worker_descr(wi)->name().c_str());
 			}
-			workers_->get_mutable(worker_index)->set_has_demand_check();
+			workers_->get_mutable(wi)->set_has_demand_check();
 		}
 		prodsite->clear_demand_checks();
 	}

@@ -40,7 +40,7 @@
 
 namespace Widelands {
 
-CritterProgram::CritterProgram(const std::string& name, const LuaTable& actions_table) : MapObjectProgram(name) {
+CritterProgram::CritterProgram(const std::string& program_name, const LuaTable& actions_table) : MapObjectProgram(program_name) {
 	for (const std::string& line : actions_table.array_entries<std::string>()) {
 		try {
 			const std::vector<std::string> cmd(split_string(line, " \t\r\n"));
@@ -135,10 +135,10 @@ bool CritterDescr::is_swimming() const {
 Get a program from the workers description.
 ===============
 */
-CritterProgram const* CritterDescr::get_program(const std::string& programname) const {
-	Programs::const_iterator const it = programs_.find(programname);
+CritterProgram const* CritterDescr::get_program(const std::string& program_name) const {
+	Programs::const_iterator const it = programs_.find(program_name);
 	if (it == programs_.end())
-		throw wexception("%s has no program '%s'", name().c_str(), programname.c_str());
+		throw wexception("%s has no program '%s'", name().c_str(), program_name.c_str());
 	return it->second.get();
 }
 
