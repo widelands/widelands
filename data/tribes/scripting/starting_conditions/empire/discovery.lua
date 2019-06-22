@@ -35,18 +35,20 @@ init = {
       log = 6,
       granite = 3,
       planks = 4,
-      marble = 4,
+      marble = 3,
       iron = 2,
 
       empire_stonemason = 1,
       empire_lumberjack = 1,
       empire_forester = 1,
+      empire_carpenter = 1,
       empire_geologist = 1,
-      empire_miner = 2,
+      empire_miner = 1,
       empire_smelter = 1,
       empire_toolsmith = 1,
       empire_innkeeper = 1,
       empire_fisher = 1,
+      empire_farmer = 1,
       empire_soldier = 1,
       -- One builder is contained without listing him explicitely
    })
