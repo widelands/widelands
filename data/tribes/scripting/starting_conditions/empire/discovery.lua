@@ -2,7 +2,7 @@
 --                 Start conditions for Discovery
 -- =======================================================================
 
-include "scripting/infrastructure.lua"
+include "scripting/ui.lua"
 
 set_textdomain("tribes")
 
@@ -50,6 +50,7 @@ init = {
       empire_soldier = 1,
       -- One builder is contained without listing him explicitely
    })
+   scroll_to_field(field)
 end
 }
 
