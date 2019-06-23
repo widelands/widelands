@@ -420,6 +420,11 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 			if (it == end) {
 				throw GameDataError("Expected: [%s] <condition> after '%s'", separator.c_str(), (it - 1)->c_str());
 			}
+			log(" [%s '%s'", it->c_str(), separator.c_str()); // NOCOM
+			if (end != args.end()) {
+				log(" %s", end->c_str()); // NOCOM
+			}
+			log("]");
 			conditions_.push_back(create_condition(it, end, descr, tribes));
 			match_and_skip(end, separator);
 			it = end;
@@ -1410,20 +1415,27 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				throw GameDataError("Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
 			}
 
+			log(" | "); // NOCOM
+
 			const ProductionProgram::Action& action = *actions_.back();
 			for (const auto& group : action.consumed_wares_workers()) {
+				log("."); // NOCOM
 				consumed_wares_workers_.push_back(group);
 			}
+			log(" | "); // NOCOM
 			// Add produced wares. If the ware already exists, increase the amount
 			for (const auto& ware : action.produced_wares()) {
+				log("."); // NOCOM
 				if (produced_wares_.count(ware.first) == 1) {
 					produced_wares_.at(ware.first) += ware.second;
 				} else {
 					produced_wares_.insert(ware);
 				}
 			}
+			log(" | "); // NOCOM
 			// Add recruited workers. If the worker already exists, increase the amount
 			for (const auto& worker : action.recruited_workers()) {
+				log("."); // NOCOM
 				if (recruited_workers_.count(worker.first) == 1) {
 					recruited_workers_.at(worker.first) += worker.second;
 				} else {
