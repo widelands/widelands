@@ -54,7 +54,7 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
      is_dying_(false),
      parent_(&parent),
      building_(&b),
-     building_descr_for_help_(descr),
+     building_descr_for_help_(&descr),
      building_position_(b.get_position()),
      showing_workarea_(false),
      avoid_fastclick_(avoid_fastclick),
@@ -363,14 +363,14 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		                  g_gr->images().get("images/ui_basic/menu_help.png"), _("Help"));
 
 		UI::UniqueWindow::Registry& registry =
-		   igbase()->unique_windows().get_registry(building_descr_for_help_.name() + "_help");
+		   igbase()->unique_windows().get_registry(building_descr_for_help_->name() + "_help");
 		registry.open_window = [this, &registry] {
 			if (parent_ != nullptr) {
 				Widelands::Building* building_in_lambda = building_.get(parent_->egbase());
 				if (building_in_lambda == nullptr) {
 					return;
 				}
-				new UI::BuildingHelpWindow(igbase(), registry, building_descr_for_help_,
+				new UI::BuildingHelpWindow(igbase(), registry, *building_descr_for_help_,
 				                           building_in_lambda->owner().tribe(),
 				                           &parent_->egbase().lua());
 			}

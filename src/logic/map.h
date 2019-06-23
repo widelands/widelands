@@ -289,6 +289,9 @@ public:
 		return height_;
 	}
 
+	// Map compatibility information for the website
+	int needs_widelands_version_after() const;
+
 	//  The next few functions are only valid when the map is loaded as a
 	//  scenario.
 	const std::string& get_scenario_player_tribe(PlayerNumber) const;
@@ -517,6 +520,12 @@ public:
 	// Change the map size
 	std::map<Coords, FieldData>
 	resize(EditorGameBase& egbase, const Coords coords, int32_t w, int32_t h);
+
+protected:
+	/// Calculate map compatibility information for the website if it wasn't defined in the map
+	/// packet. If is_post_one_world is true, this map wasn't created for a specific world (Widelands
+	/// versions up to Build 18).
+	void calculate_needs_widelands_version_after(bool is_post_one_world);
 
 private:
 	void recalc_border(const FCoords&);

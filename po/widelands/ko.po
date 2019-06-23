@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-06-14 07:23+0000\n"
-"PO-Revision-Date: 2019-06-14 07:24+0000\n"
+"POT-Creation-Date: 2019-06-21 08:49+0000\n"
+"PO-Revision-Date: 2019-06-21 08:50+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -2065,41 +2065,69 @@ msgstr "%s 가 로비를 떠났음"
 msgid "Chat message could not be sent."
 msgstr "채팅 메시지가 전송되지 않습니다."
 
-#: ../../src/network/internet_gaming.cc:699
+#: ../../src/network/internet_gaming.cc:687
+msgid "Command could not be executed."
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:707
 #, c-format
 msgid "ERROR: %s"
 msgstr "오류: %s"
 
-#: ../../src/network/internet_gaming.cc:702
+#: ../../src/network/internet_gaming.cc:710
 msgid "An unexpected error message has been received about command %1%: %2%"
 msgstr "명령 %1%:%2%에 대한 예기치 않은 오류 메시지가 수신되었습니다."
 
-#: ../../src/network/internet_gaming.cc:715
+#: ../../src/network/internet_gaming.cc:723
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "메타서버에서 알 수 없는 명령을 수신함: %s"
 
-#: ../../src/network/internet_gaming.cc:864
+#: ../../src/network/internet_gaming.cc:872
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "메시지가 전송되지 않습니다: 메타서버에 연결되지 않았습니다!"
 
-#: ../../src/network/internet_gaming.cc:883
-#: ../../src/network/internet_gaming.cc:890
+#: ../../src/network/internet_gaming.cc:891
+#: ../../src/network/internet_gaming.cc:898
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "메시지가 전송되지 않습니다. 개인 메시지인가요?"
 
-#: ../../src/network/internet_gaming.cc:966
+#: ../../src/network/internet_gaming.cc:913
+msgid "Supported admin commands:"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:914
+msgid "/motd <msg> sets a permanent greeting message"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:915
+msgid "/announce <msg> send a one time system message"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:917
+msgid "/warn <user> <msg> send a private system message to the given user"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:920
+msgid "/kick <user|game> removes the given user or game from the metaserver"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:922
+msgid "/ban <user> bans a user for 24 hours from the metaserver"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:998
 msgid "Conversion error"
 msgstr "전환 오류"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:969
+#: ../../src/network/internet_gaming.cc:1001
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "\"%s\"의 참값을 얻지 못함"
 
-#: ../../src/network/internet_gaming.cc:987
+#: ../../src/network/internet_gaming.cc:1019
 msgctxt "chat_sender"
 msgid "Unknown"
 msgstr "알 수 없음"
@@ -2117,32 +2145,36 @@ msgid "Wrong password, please try again."
 msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:46
+msgid "You have been temporarily banned from online gaming."
+msgstr ""
+
+#: ../../src/network/internet_gaming_messages.cc:47
 msgid "The protocol version you are using is not supported!"
 msgstr "사용하는 프로토콜 버전이 지원되지 않습니다!"
 
-#: ../../src/network/internet_gaming_messages.cc:47
+#: ../../src/network/internet_gaming_messages.cc:48
 msgid "You are already logged in!"
 msgstr "이미 로그인되어 있습니다!"
 
-#: ../../src/network/internet_gaming_messages.cc:49
+#: ../../src/network/internet_gaming_messages.cc:50
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr "슈퍼유저 권한 없이 슈퍼유저 명령을 전송해서 연결이 해제되었습니다. 이 사건은 관리자에게 연결되어 전송될 예정입니다."
 
-#: ../../src/network/internet_gaming_messages.cc:52
+#: ../../src/network/internet_gaming_messages.cc:53
 msgid "Connection was closed by the client normally."
 msgstr "연결이 일반적으로 클라이언트에 의해 종료되었습니다."
 
-#: ../../src/network/internet_gaming_messages.cc:53
+#: ../../src/network/internet_gaming_messages.cc:54
 msgid "The connection to the metaserver was lost."
 msgstr "메타서버 연결이 끊어졌습니다."
 
-#: ../../src/network/internet_gaming_messages.cc:54
+#: ../../src/network/internet_gaming_messages.cc:55
 msgid "Metaserver did not answer"
 msgstr "메타서버가 응답하지 않습니다"
 
-#: ../../src/network/internet_gaming_messages.cc:56
+#: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
