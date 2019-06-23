@@ -281,7 +281,17 @@ void InputQueueDisplay::update_priority_buttons() {
 		   this, pos, g_gr->images().get(pic_priority_low), _("Lowest priority"));
 	}
 
-	int32_t priority = building_.get_priority(type_, index_, false);
+	int32_t priority = -1;
+	if (settings_) {
+		for (const auto& pair : settings_->ware_queues) {
+			if (pair.first == index_) {
+				priority = pair.second.priority;
+				break;
+			}
+		}
+	} else {
+		priority = building_.get_priority(type_, index_, false);
+	}
 	switch (priority) {
 	case Widelands::kPriorityHigh:
 		priority_radiogroup_->set_state(0);
@@ -293,7 +303,7 @@ void InputQueueDisplay::update_priority_buttons() {
 		priority_radiogroup_->set_state(2);
 		break;
 	default:
-		break;
+		NEVER_HERE();
 	}
 
 	priority_radiogroup_->changedto.connect(
