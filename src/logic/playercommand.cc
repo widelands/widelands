@@ -1049,25 +1049,29 @@ CmdSetWarePriority::CmdSetWarePriority(const uint32_t init_duetime,
                                        PlayerImmovable& imm,
                                        const int32_t init_type,
                                        const DescriptionIndex i,
-                                       const int32_t init_priority)
+                                       const int32_t init_priority,
+                                       bool cs_setting)
    : PlayerCommand(init_duetime, init_sender),
      serial_(imm.serial()),
      type_(init_type),
      index_(i),
-     priority_(init_priority) {
+     priority_(init_priority),
+     is_constructionsite_setting_(cs_setting) {
 }
 
 void CmdSetWarePriority::execute(Game& game) {
 	MapObject* mo = game.objects().get_object(serial_);
-	if (upcast(ConstructionSite, cs, mo)) {
-		if (upcast(ProductionsiteSettings, s, cs->get_settings())) {
-			for (auto& pair : s->ware_queues) {
-				if (pair.first == index_) {
-					pair.second.priority = priority_;
-					return;
+	if (is_constructionsite_setting_) {
+		if (upcast(ConstructionSite, cs, mo)) {
+			if (upcast(ProductionsiteSettings, s, cs->get_settings())) {
+				for (auto& pair : s->ware_queues) {
+					if (pair.first == index_) {
+						pair.second.priority = priority_;
+						return;
+					}
 				}
+				NEVER_HERE();
 			}
-			NEVER_HERE();
 		}
 	} else if (upcast(Building, psite, mo)) {
 		if (psite->owner().player_number() == sender()) {
@@ -1076,7 +1080,7 @@ void CmdSetWarePriority::execute(Game& game) {
 	}
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdSetWarePriority = 1;
+constexpr uint16_t kCurrentPacketVersionCmdSetWarePriority = 2;
 
 void CmdSetWarePriority::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionCmdSetWarePriority);
@@ -1087,6 +1091,7 @@ void CmdSetWarePriority::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 	fw.unsigned_8(type_);
 	fw.signed_32(index_);
 	fw.signed_32(priority_);
+	fw.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
 
 void CmdSetWarePriority::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
@@ -1098,6 +1103,7 @@ void CmdSetWarePriority::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 			type_ = fr.unsigned_8();
 			index_ = fr.signed_32();
 			priority_ = fr.signed_32();
+			is_constructionsite_setting_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdSetWarePriority", packet_version, kCurrentPacketVersionCmdSetWarePriority);
@@ -1113,7 +1119,8 @@ CmdSetWarePriority::CmdSetWarePriority(StreamRead& des)
      serial_(des.unsigned_32()),
      type_(des.unsigned_8()),
      index_(des.signed_32()),
-     priority_(des.signed_32()) {
+     priority_(des.signed_32()),
+     is_constructionsite_setting_(des.unsigned_8()) {
 }
 
 void CmdSetWarePriority::serialize(StreamWrite& ser) {
@@ -1123,6 +1130,7 @@ void CmdSetWarePriority::serialize(StreamWrite& ser) {
 	ser.unsigned_8(type_);
 	ser.signed_32(index_);
 	ser.signed_32(priority_);
+	ser.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
 
 /*** class Cmd_SetWareMaxFill ***/
@@ -1131,19 +1139,22 @@ CmdSetInputMaxFill::CmdSetInputMaxFill(const uint32_t init_duetime,
                                        PlayerImmovable& imm,
                                        const DescriptionIndex index,
                                        const WareWorker type,
-                                       const uint32_t max_fill)
+                                       const uint32_t max_fill,
+                                       bool cs_setting)
    : PlayerCommand(init_duetime, init_sender),
      serial_(imm.serial()),
      index_(index),
      type_(type),
-     max_fill_(max_fill) {
+     max_fill_(max_fill),
+     is_constructionsite_setting_(cs_setting) {
 }
 
 void CmdSetInputMaxFill::execute(Game& game) {
 	MapObject* mo = game.objects().get_object(serial_);
-	if (upcast(ConstructionSite, cs, mo)) {
-		if (upcast(ProductionsiteSettings, s, cs->get_settings())) {
-			switch (type_) {
+	if (is_constructionsite_setting_) {
+		if (upcast(ConstructionSite, cs, mo)) {
+			if (upcast(ProductionsiteSettings, s, cs->get_settings())) {
+				switch (type_) {
 				case wwWARE:
 					for (auto& pair : s->ware_queues) {
 						if (pair.first == index_) {
@@ -1162,8 +1173,9 @@ void CmdSetInputMaxFill::execute(Game& game) {
 						}
 					}
 					NEVER_HERE();
+				}
+				NEVER_HERE();
 			}
-			NEVER_HERE();
 		}
 	} else if (upcast(Building, b, mo)) {
 		if (b->owner().player_number() == sender()) {
@@ -1172,7 +1184,7 @@ void CmdSetInputMaxFill::execute(Game& game) {
 	}
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 2;
+constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 3;
 
 void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionCmdSetInputMaxFill);
@@ -1187,6 +1199,7 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 		fw.unsigned_8(1);
 	}
 	fw.unsigned_32(max_fill_);
+	fw.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
 
 void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
@@ -1202,6 +1215,7 @@ void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 				type_ = wwWORKER;
 			}
 			max_fill_ = fr.unsigned_32();
+			is_constructionsite_setting_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdSetInputMaxFill", packet_version, kCurrentPacketVersionCmdSetInputMaxFill);
@@ -1220,6 +1234,7 @@ CmdSetInputMaxFill::CmdSetInputMaxFill(StreamRead& des) : PlayerCommand(0, des.u
 		type_ = wwWORKER;
 	}
 	max_fill_ = des.unsigned_32();
+	is_constructionsite_setting_ = des.unsigned_8();
 }
 
 void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
@@ -1233,6 +1248,7 @@ void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
 		ser.unsigned_8(1);
 	}
 	ser.unsigned_32(max_fill_);
+	ser.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
 
 CmdChangeTargetQuantity::CmdChangeTargetQuantity(const uint32_t init_duetime,

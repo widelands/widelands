@@ -30,11 +30,18 @@
 namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
+// Map compatibility information for the website
+constexpr int kCurrentNeedsWidelandsVersionAfter = 20;
 
 void MapVersionPacket::read(FileSystem& fs,
                             EditorGameBase& egbase,
                             bool const skip,
-                            MapObjectLoader&) {
+                            bool is_post_one_world) {
+
+	pre_read(fs, egbase.mutable_map(), skip, is_post_one_world);
+}
+
+void MapVersionPacket::pre_read(FileSystem& fs, Map* map, bool skip, bool is_post_one_world) {
 	if (skip)
 		return;
 
@@ -42,7 +49,6 @@ void MapVersionPacket::read(FileSystem& fs,
 	try {
 		prof.read("version", nullptr, fs);
 	} catch (...) {
-		Map* map = egbase.mutable_map();
 		map->map_version_.map_version_timestamp = 0;
 		map->map_version_.map_creator_version = "unknown";
 		return;
@@ -55,7 +61,6 @@ void MapVersionPacket::read(FileSystem& fs,
 		if ((packet_version == kCurrentPacketVersion) ||
 		    (packet_version > kCurrentPacketVersion &&
 		     forward_compatibility <= kCurrentPacketVersion)) {
-			Map* map = egbase.mutable_map();
 			map->map_version_.map_source_url = globv.get_safe_string("map_source_url");
 			map->map_version_.map_source_release = globv.get_safe_string("map_release");
 			map->map_version_.map_creator_version = globv.get_safe_string("map_creator_version");
@@ -63,6 +68,9 @@ void MapVersionPacket::read(FileSystem& fs,
 			map->map_version_.map_version_minor = globv.get_safe_int("map_version_minor");
 			uint32_t ts = static_cast<uint32_t>(globv.get_safe_int("map_version_timestamp"));
 			map->map_version_.map_version_timestamp = ts;
+			map->map_version_.needs_widelands_version_after =
+			   globv.get_int("needs_widelands_version_after", 0);
+			map->calculate_needs_widelands_version_after(is_post_one_world);
 		} else {
 			throw UnhandledVersionError("MapVersionPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -71,7 +79,7 @@ void MapVersionPacket::read(FileSystem& fs,
 	}
 }
 
-void MapVersionPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
+void MapVersionPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 	Profile prof;
 	Section& globs = prof.create_section("global");
 
@@ -117,6 +125,7 @@ void MapVersionPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSa
 	globs.set_int("map_version_timestamp", static_cast<uint32_t>(time(nullptr)));
 	globs.set_int("packet_version", kCurrentPacketVersion);
 	globs.set_int("packet_compatibility", kCurrentPacketVersion);
+	globs.set_int("needs_widelands_version_after", kCurrentNeedsWidelandsVersionAfter);
 
 	prof.write("version", false, fs);
 }

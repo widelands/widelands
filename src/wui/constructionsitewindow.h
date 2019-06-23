@@ -52,9 +52,9 @@ private:
 	class FakeWaresDisplay : public WaresDisplay {
 	public:
 		FakeWaresDisplay(UI::Panel* parent,
-		                  bool can_act,
-		                  Widelands::ConstructionSite& cs,
-		                  Widelands::WareWorker type);
+		                 bool can_act,
+		                 Widelands::ConstructionSite& cs,
+		                 Widelands::WareWorker type);
 
 	protected:
 		void draw_ware(RenderTarget& dst, Widelands::DescriptionIndex ware) override;

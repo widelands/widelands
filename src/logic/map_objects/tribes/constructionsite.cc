@@ -53,11 +53,11 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	// Draw the construction site marker
 	std::vector<std::pair<uint32_t, uint32_t>> animations;
 	uint32_t total_frames = 0;
-	auto push_animation = [](const BuildingDescr* d, std::vector<std::pair<uint32_t, uint32_t>>* anims, uint32_t* tf) {
+	auto push_animation = [](const BuildingDescr* d,
+	                         std::vector<std::pair<uint32_t, uint32_t>>* anims, uint32_t* tf) {
 		const bool known = d->is_animation_known("build");
-		const uint32_t anim_idx = known ?
-				d->get_animation("build", nullptr) :
-				d->get_unoccupied_animation();
+		const uint32_t anim_idx =
+		   known ? d->get_animation("build", nullptr) : d->get_unoccupied_animation();
 		// If there is no build animation, we use only the first frame or we
 		// would get many build steps with almost the same image...
 		const uint32_t nrframes = known ? g_gr->animations().get_animation(anim_idx).nr_frames() : 1;
@@ -70,7 +70,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	}
 	push_animation(becomes, &animations, &total_frames);
 
-	uint32_t frame_index = totaltime ? std::min(completedtime * total_frames / totaltime, total_frames - 1) : 0;
+	uint32_t frame_index =
+	   totaltime ? std::min(completedtime * total_frames / totaltime, total_frames - 1) : 0;
 	uint32_t animation_index = 0;
 	while (frame_index >= animations[animation_index].second) {
 		frame_index -= animations[animation_index].second;
@@ -82,19 +83,21 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	if (frame_index > 0) {
 		// Not the first pic within this animation – draw the previous one
 		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-				animations[animation_index].first, anim_time - FRAME_LENGTH, &player_color);
+		                    animations[animation_index].first, anim_time - FRAME_LENGTH,
+		                    &player_color);
 	} else if (animation_index > 0) {
-		// The first pic, but not the first series of animations – draw the last pic of the previous series
-		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-				animations[animation_index - 1].first,
-				FRAME_LENGTH * (animations[animation_index - 1].second - 1), &player_color);
+		// The first pic, but not the first series of animations – draw the last pic of the previous
+		// series
+		dst->blit_animation(
+		   point_on_dst, Widelands::Coords::null(), scale, animations[animation_index - 1].first,
+		   FRAME_LENGTH * (animations[animation_index - 1].second - 1), &player_color);
 	} else if (was) {
 		//  First pic in first series, but there was another building here before –
 		//  get its most fitting picture and draw it instead
 		const uint32_t unocc = was->get_unoccupied_animation();
 		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, unocc,
-				FRAME_LENGTH * (g_gr->animations().get_animation(unocc).nr_frames() - 1),
-				&player_color);
+		                    FRAME_LENGTH * (g_gr->animations().get_animation(unocc).nr_frames() - 1),
+		                    &player_color);
 	}
 	// Now blit a segment of the current construction phase from the bottom.
 	int percent = 100 * completedtime * total_frames;
@@ -105,7 +108,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	for (uint32_t i = 0; i < animation_index; ++i) {
 		percent -= 100 * animations[i].second;
 	}
-	dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time, &player_color, percent);
+	dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
+	                    &player_color, percent);
 }
 
 /**
@@ -138,7 +142,10 @@ IMPLEMENTATION
 */
 
 ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
-   : PartiallyFinishedBuilding(cs_descr), fetchfromflag_(0), builder_idle_(false), settings_(nullptr) {
+   : PartiallyFinishedBuilding(cs_descr),
+     fetchfromflag_(0),
+     builder_idle_(false),
+     settings_(nullptr) {
 }
 
 void ConstructionSite::update_statistics_string(std::string* s) {
@@ -235,7 +242,7 @@ void ConstructionSite::init_settings() {
 	} else {
 		// TODO(Nordfriese): Add support for markets when trading is implemented
 		log("WARNING: Created constructionsite for a %s, which is not of any known building type\n",
-				building_->name().c_str());
+		    building_->name().c_str());
 	}
 }
 
@@ -290,8 +297,8 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 				if (ms->desired_capacity != b.soldier_control()->soldier_capacity()) {
 					b.mutable_soldier_control()->set_soldier_capacity(ms->desired_capacity);
 				}
-				dynamic_cast<MilitarySite&>(b).set_soldier_preference(ms->prefer_heroes ?
-						SoldierPreference::kHeroes : SoldierPreference::kRookies);
+				dynamic_cast<MilitarySite&>(b).set_soldier_preference(
+				   ms->prefer_heroes ? SoldierPreference::kHeroes : SoldierPreference::kRookies);
 			} else if (upcast(WarehouseSettings, ws, settings_.get())) {
 				Warehouse& site = dynamic_cast<Warehouse&>(b);
 				for (const auto& pair : ws->ware_preferences) {
@@ -349,7 +356,8 @@ void ConstructionSite::enhance(Game&) {
 	size_t new_index = 0;
 	for (const auto& pair : buildcost) {
 		if (new_ware_types.count(pair.first)) {
-			WaresQueue& wq = *(wares_[old_size + new_index] = new WaresQueue(*this, pair.first, pair.second));
+			WaresQueue& wq =
+			   *(wares_[old_size + new_index] = new WaresQueue(*this, pair.first, pair.second));
 			wq.set_callback(ConstructionSite::wares_queue_callback, this);
 			wq.set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
 			++new_index;
@@ -389,7 +397,8 @@ void ConstructionSite::enhance(Game&) {
 			for (auto& pair_new : new_settings->ware_queues) {
 				if (pair_new.first == pair_old.first) {
 					pair_new.second.priority = pair_old.second.priority;
-					pair_new.second.desired_fill = std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					pair_new.second.desired_fill =
+					   std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
 					break;
 				}
 			}
@@ -398,7 +407,8 @@ void ConstructionSite::enhance(Game&) {
 			for (auto& pair_new : new_settings->worker_queues) {
 				if (pair_new.first == pair_old.first) {
 					pair_new.second.priority = pair_old.second.priority;
-					pair_new.second.desired_fill = std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					pair_new.second.desired_fill =
+					   std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
 					break;
 				}
 			}
@@ -414,7 +424,8 @@ void ConstructionSite::enhance(Game&) {
 			for (auto& pair_new : new_settings->ware_queues) {
 				if (pair_new.first == pair_old.first) {
 					pair_new.second.priority = pair_old.second.priority;
-					pair_new.second.desired_fill = std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					pair_new.second.desired_fill =
+					   std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
 					break;
 				}
 			}
@@ -423,7 +434,8 @@ void ConstructionSite::enhance(Game&) {
 			for (auto& pair_new : new_settings->worker_queues) {
 				if (pair_new.first == pair_old.first) {
 					pair_new.second.priority = pair_old.second.priority;
-					pair_new.second.desired_fill = std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					pair_new.second.desired_fill =
+					   std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
 					break;
 				}
 			}
@@ -433,13 +445,13 @@ void ConstructionSite::enhance(Game&) {
 		assert(ms);
 		MilitarysiteSettings* new_settings = new MilitarysiteSettings(*md);
 		settings_.reset(new_settings);
-		new_settings->desired_capacity = std::max<uint32_t>(1, std::min<uint32_t>(
-				new_settings->max_capacity, ms->desired_capacity));
+		new_settings->desired_capacity = std::max<uint32_t>(
+		   1, std::min<uint32_t>(new_settings->max_capacity, ms->desired_capacity));
 		new_settings->prefer_heroes = ms->prefer_heroes;
 	} else {
 		// TODO(Nordfriese): Add support for markets when trading is implemented
 		log("WARNING: Enhanced constructionsite to a %s, which is not of any known building type\n",
-				building_->name().c_str());
+		    building_->name().c_str());
 	}
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::GAINED));
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));

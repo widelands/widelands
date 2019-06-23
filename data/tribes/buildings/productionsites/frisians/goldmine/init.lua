@@ -43,6 +43,11 @@ tribes:new_productionsite_type {
       },
    },
 
+   indicate_workarea_overlaps = {
+      frisians_goldmine = false,
+      frisians_goldmine_deep = false,
+   },
+
    aihints = {
       mines = "gold",
       mines_percent = 50,

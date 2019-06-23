@@ -288,11 +288,11 @@ void MapBuildingdataPacket::read_constructionsite(
 			if (packet_version >= 4) {
 				const uint32_t intermediates = fr.unsigned_32();
 				for (uint32_t i = 0; i < intermediates; ++i) {
-					constructionsite.info_.intermediates.push_back(game.tribes().get_building_descr(
-							game.tribes().building_index(fr.c_string())));
+					constructionsite.info_.intermediates.push_back(
+					   game.tribes().get_building_descr(game.tribes().building_index(fr.c_string())));
 				}
-				constructionsite.settings_.reset(BuildingSettings::load(game,
-						constructionsite.owner().tribe(), fr));
+				constructionsite.settings_.reset(
+				   BuildingSettings::load(game, constructionsite.owner().tribe(), fr));
 			} else {
 				constructionsite.init_settings();
 			}

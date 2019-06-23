@@ -354,7 +354,8 @@ Building& EditorGameBase::warp_constructionsite(const Coords& c,
                                                 const BuildingSettings* settings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
-	Building& b = tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings);
+	Building& b =
+	   tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings);
 	if (settings) {
 		dynamic_cast<ConstructionSite&>(b).apply_settings(*settings);
 	}

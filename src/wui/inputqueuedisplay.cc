@@ -87,8 +87,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
                                      int32_t const y,
                                      InteractiveGameBase& igb,
                                      Widelands::ConstructionSite& building,
-	                                 Widelands::WareWorker ww,
-	                                 Widelands::DescriptionIndex di,
+                                     Widelands::WareWorker ww,
+                                     Widelands::DescriptionIndex di,
                                      bool show_only)
    : UI::Panel(parent, x, y, 0, 28),
      igb_(igb),
@@ -137,7 +137,8 @@ uint32_t InputQueueDisplay::check_max_size() const {
 		return queue_->get_max_size();
 	}
 	assert(settings_);
-	for (const auto& pair : type_ == Widelands::wwWARE ? settings_->ware_queues : settings_->worker_queues) {
+	for (const auto& pair :
+	     type_ == Widelands::wwWARE ? settings_->ware_queues : settings_->worker_queues) {
 		if (pair.first == index_) {
 			return pair.second.max_fill;
 		}
@@ -150,7 +151,8 @@ uint32_t InputQueueDisplay::check_max_fill() const {
 		return queue_->get_max_fill();
 	}
 	assert(settings_);
-	for (const auto& pair : type_ == Widelands::wwWARE ? settings_->ware_queues : settings_->worker_queues) {
+	for (const auto& pair :
+	     type_ == Widelands::wwWARE ? settings_->ware_queues : settings_->worker_queues) {
 		if (pair.first == index_) {
 			return pair.second.desired_fill;
 		}
@@ -203,10 +205,11 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 
 	cache_max_fill_ = check_max_fill();
 
-	uint32_t nr_inputs_to_draw = queue_ ? std::min(queue_->get_filled(), cache_size_) : cache_max_fill_;
+	uint32_t nr_inputs_to_draw =
+	   queue_ ? std::min(queue_->get_filled(), cache_size_) : cache_max_fill_;
 	uint32_t nr_missing_to_draw =
 	   queue_ ? std::min(queue_->get_missing(), cache_max_fill_) + cache_size_ - cache_max_fill_ :
-	   cache_size_ - cache_max_fill_;
+	            cache_size_ - cache_max_fill_;
 	if (nr_inputs_to_draw > cache_max_fill_) {
 		nr_missing_to_draw -= nr_inputs_to_draw - cache_max_fill_;
 	}
@@ -235,8 +238,8 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 	if (!show_only_) {
 		uint16_t pw = max_fill_indicator_->width();
 		point.y = Border;
-		point.x = Border + CellWidth + CellSpacing +
-		          (cache_max_fill_ * (CellWidth + CellSpacing)) - CellSpacing / 2 - pw / 2;
+		point.x = Border + CellWidth + CellSpacing + (cache_max_fill_ * (CellWidth + CellSpacing)) -
+		          CellSpacing / 2 - pw / 2;
 		dst.blit(point, max_fill_indicator_);
 	}
 }
@@ -402,7 +405,7 @@ void InputQueueDisplay::radiogroup_changed(int32_t state) {
 	if (SDL_GetModState() & KMOD_CTRL) {
 		update_siblings_priority(state);
 	}
-	igb_.game().send_player_set_ware_priority(building_, type_, index_, priority);
+	igb_.game().send_player_set_ware_priority(building_, type_, index_, priority, settings_ != nullptr);
 }
 
 void InputQueueDisplay::radiogroup_clicked() {
@@ -462,7 +465,7 @@ void InputQueueDisplay::decrease_max_fill_clicked() {
 	// Update the value of this queue if required
 	if (cache_max_fill_ > 0) {
 		igb_.game().send_player_set_input_max_fill(
-		   building_, index_, type_, ((SDL_GetModState() & KMOD_CTRL) ? 0 : cache_max_fill_ - 1));
+		   building_, index_, type_, ((SDL_GetModState() & KMOD_CTRL) ? 0 : cache_max_fill_ - 1), settings_ != nullptr);
 	}
 
 	// Update other queues of this building
@@ -481,7 +484,7 @@ void InputQueueDisplay::increase_max_fill_clicked() {
 	if (cache_max_fill_ < cache_size_) {
 		igb_.game().send_player_set_input_max_fill(
 		   building_, index_, type_,
-		   ((SDL_GetModState() & KMOD_CTRL) ? cache_size_ : cache_max_fill_ + 1));
+		   ((SDL_GetModState() & KMOD_CTRL) ? cache_size_ : cache_max_fill_ + 1), settings_ != nullptr);
 	}
 
 	if (SDL_GetModState() & KMOD_SHIFT) {
@@ -509,7 +512,7 @@ void InputQueueDisplay::update_siblings_fill(int32_t delta) {
 		                                 display->cache_size_));
 		if (new_fill != display->cache_max_fill_) {
 			igb_.game().send_player_set_input_max_fill(
-			   building_, display->index_, display->type_, new_fill);
+			   building_, display->index_, display->type_, new_fill, settings_ != nullptr);
 		}
 	} while ((sibling = sibling->get_next_sibling()));
 }

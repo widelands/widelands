@@ -39,6 +39,10 @@ tribes:new_productionsite_type {
       frisians_stonemason = 1
    },
 
+   indicate_workarea_overlaps = {
+      frisians_quarry = false,
+   },
+
    outputs = {
       "granite"
    },

@@ -109,7 +109,6 @@ class Warehouse : public Building {
 	MO_DESCR(WarehouseDescr)
 
 public:
-
 	/**
 	 * Whether worker indices in count_workers() have to match exactly.
 	 */

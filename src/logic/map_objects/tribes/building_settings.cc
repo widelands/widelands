@@ -32,32 +32,34 @@
 namespace Widelands {
 
 ProductionsiteSettings::ProductionsiteSettings(const ProductionSiteDescr& descr)
-		: BuildingSettings(descr.name()), stopped(false) {
+   : BuildingSettings(descr.name()), stopped(false) {
 	for (const auto& pair : descr.input_wares()) {
-		ware_queues.push_back(std::make_pair(pair.first,
-				InputQueueSetting{pair.second, pair.second, kPriorityNormal}));
+		ware_queues.push_back(
+		   std::make_pair(pair.first, InputQueueSetting{pair.second, pair.second, kPriorityNormal}));
 	}
 	for (const auto& pair : descr.input_workers()) {
-		worker_queues.push_back(std::make_pair(pair.first,
-				InputQueueSetting{pair.second, pair.second, kPriorityNormal}));
+		worker_queues.push_back(
+		   std::make_pair(pair.first, InputQueueSetting{pair.second, pair.second, kPriorityNormal}));
 	}
 }
 
 MilitarysiteSettings::MilitarysiteSettings(const MilitarySiteDescr& descr)
-		: BuildingSettings(descr.name()),
-	  max_capacity(descr.get_max_number_of_soldiers()),
-	  desired_capacity(descr.get_max_number_of_soldiers()),
-	  prefer_heroes(descr.prefers_heroes_at_start_) {
+   : BuildingSettings(descr.name()),
+     max_capacity(descr.get_max_number_of_soldiers()),
+     desired_capacity(descr.get_max_number_of_soldiers()),
+     prefer_heroes(descr.prefers_heroes_at_start_) {
 }
 
 TrainingsiteSettings::TrainingsiteSettings(const TrainingSiteDescr& descr)
-	: ProductionsiteSettings(descr),
-	  max_capacity(descr.get_max_number_of_soldiers()),
-	  desired_capacity(descr.get_max_number_of_soldiers()) {
+   : ProductionsiteSettings(descr),
+     max_capacity(descr.get_max_number_of_soldiers()),
+     desired_capacity(descr.get_max_number_of_soldiers()) {
 }
 
 WarehouseSettings::WarehouseSettings(const WarehouseDescr& wh, const TribeDescr& tribe)
-		: BuildingSettings(wh.name()), launch_expedition_allowed(wh.get_isport()), launch_expedition(false) {
+   : BuildingSettings(wh.name()),
+     launch_expedition_allowed(wh.get_isport()),
+     launch_expedition(false) {
 	for (const DescriptionIndex di : tribe.wares()) {
 		ware_preferences.emplace(di, StockPolicy::kNormal);
 	}
@@ -153,29 +155,31 @@ BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tri
 			const BuildingType type = static_cast<BuildingType>(fr.unsigned_8());
 			BuildingSettings* result = nullptr;
 			switch (type) {
-				case BuildingType::kTrainingsite: {
-					result = new TrainingsiteSettings(*dynamic_cast<const TrainingSiteDescr*>(
-							game.tribes().get_building_descr(index)));
-					break;
-				}
-				case BuildingType::kProductionsite: {
-					result = new ProductionsiteSettings(*dynamic_cast<const ProductionSiteDescr*>(
-							game.tribes().get_building_descr(index)));
-					break;
-				}
-				case BuildingType::kMilitarysite: {
-					result = new MilitarysiteSettings(*dynamic_cast<const MilitarySiteDescr*>(
-							game.tribes().get_building_descr(index)));
-					break;
-				}
-				case BuildingType::kWarehouse: {
-					result = new WarehouseSettings(*dynamic_cast<const WarehouseDescr*>(
-							game.tribes().get_building_descr(index)), tribe);
-					break;
-				}
+			case BuildingType::kTrainingsite: {
+				result = new TrainingsiteSettings(
+				   *dynamic_cast<const TrainingSiteDescr*>(game.tribes().get_building_descr(index)));
+				break;
+			}
+			case BuildingType::kProductionsite: {
+				result = new ProductionsiteSettings(
+				   *dynamic_cast<const ProductionSiteDescr*>(game.tribes().get_building_descr(index)));
+				break;
+			}
+			case BuildingType::kMilitarysite: {
+				result = new MilitarysiteSettings(
+				   *dynamic_cast<const MilitarySiteDescr*>(game.tribes().get_building_descr(index)));
+				break;
+			}
+			case BuildingType::kWarehouse: {
+				result = new WarehouseSettings(
+				   *dynamic_cast<const WarehouseDescr*>(game.tribes().get_building_descr(index)),
+				   tribe);
+				break;
+			}
 			}
 			if (!result) {
-				throw wexception("Unknown building category %u (%s)", static_cast<uint8_t>(type), name.c_str());
+				throw wexception(
+				   "Unknown building category %u (%s)", static_cast<uint8_t>(type), name.c_str());
 			}
 			result->read(game, fr);
 			return result;
@@ -343,4 +347,4 @@ void WarehouseSettings::save(const Game& game, FileWrite& fw) const {
 	}
 }
 
-} // namespace Widelands
+}  // namespace Widelands

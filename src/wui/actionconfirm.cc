@@ -93,7 +93,7 @@ struct EnhanceConfirm : public ActionConfirm {
 	EnhanceConfirm(InteractivePlayer& parent,
 	               Widelands::Building& building,
 	               const Widelands::DescriptionIndex& id,
-                   bool still_under_construction);
+	               bool still_under_construction);
 
 	void think() override;
 	void ok() override;
@@ -262,7 +262,7 @@ Create the panels for enhancement confirmation.
 EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
                                Widelands::Building& building,
                                const Widelands::DescriptionIndex& id,
-                          bool still_under_construction)
+                               bool still_under_construction)
    : ActionConfirm(
         parent,
         _("Enhance building?"),
@@ -288,7 +288,8 @@ void EnhanceConfirm::think() {
 	upcast(Widelands::Building, building, object_.get(egbase));
 
 	if (!building || !iaplayer().can_act(building->owner().player_number()) ||
-	    !(still_under_construction_ || (building->get_playercaps() & Widelands::Building::PCap_Enhancable)))
+	    !(still_under_construction_ ||
+	      (building->get_playercaps() & Widelands::Building::PCap_Enhancable)))
 		die();
 }
 
@@ -306,7 +307,7 @@ void EnhanceConfirm::ok() {
 	} else {
 		upcast(Widelands::Building, building, object_.get(game));
 		if (building && iaplayer().can_act(building->owner().player_number()) &&
-			(building->get_playercaps() & Widelands::Building::PCap_Enhancable)) {
+		    (building->get_playercaps() & Widelands::Building::PCap_Enhancable)) {
 			game.send_player_enhance_building(*building, id_);
 		}
 	}

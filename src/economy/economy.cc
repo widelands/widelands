@@ -1034,10 +1034,9 @@ void Economy::handle_active_supplies(Game& game) {
 			wh = preferred_wh;
 		} else {
 			wh = find_closest_warehouse(supply.get_position(game)->base_flag(), type, nullptr, 0,
-			                            (!havenormal) ?
-			                               WarehouseAcceptFn() :
-			                               boost::bind(&accept_warehouse_if_policy, _1, type, ware,
-			                                           StockPolicy::kNormal));
+			                            (!havenormal) ? WarehouseAcceptFn() :
+			                                            boost::bind(&accept_warehouse_if_policy, _1,
+			                                                        type, ware, StockPolicy::kNormal));
 		}
 		if (!wh) {
 			log("Warning: Economy::handle_active_supplies "

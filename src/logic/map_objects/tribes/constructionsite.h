@@ -57,7 +57,8 @@ struct ConstructionsiteInformation {
 	const BuildingDescr*
 	   becomes;  // Also works as a marker telling whether there is a construction site.
 	const BuildingDescr* was;  // only valid if "becomes" is an enhanced building.
-	std::vector<const BuildingDescr*> intermediates; // If we enhance a building while it's still under construction
+	std::vector<const BuildingDescr*>
+	   intermediates;  // If we enhance a building while it's still under construction
 	uint32_t totaltime;
 	uint32_t completedtime;
 };

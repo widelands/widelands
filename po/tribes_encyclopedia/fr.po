@@ -7,6 +7,7 @@
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
 # David D, 2018
+# David TARCZEWSKI <transifex@tarczewski.fr>, 2019
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
@@ -19,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-30 18:50+0000\n"
-"PO-Revision-Date: 2019-06-05 11:35+0000\n"
-"Last-Translator: Renaud Bouchard\n"
+"POT-Creation-Date: 2019-06-14 07:23+0000\n"
+"PO-Revision-Date: 2019-06-21 01:16+0000\n"
+"Last-Translator: David TARCZEWSKI <transifex@tarczewski.fr>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -113,7 +114,7 @@ msgid ""
 "‘The Citadel of Adlen surely is the finest masterpiece of Barbarian "
 "craftsmanship. Nothing as strong and big and beautiful has ever been built "
 "in such a short time.’"
-msgstr ""
+msgstr "La Citadelle d'Adlen est certainement le plus beau chef-d'œuvre de l'artisanat barbare. Rien d'aussi solide, grandiose et splendide n'a jamais été construit en si peu de temps."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/helptexts.lua:9
