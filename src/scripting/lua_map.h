@@ -104,6 +104,7 @@ public:
 	int recalculate(lua_State*);
 	int recalculate_seafaring(lua_State*);
 	int set_port_space(lua_State*);
+	int sea_route_exists(lua_State*);
 
 	/*
 	 * C methods

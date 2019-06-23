@@ -1202,6 +1202,7 @@ const MethodType<LuaMap> LuaMap::Methods[] = {
    METHOD(LuaMap, recalculate),
    METHOD(LuaMap, recalculate_seafaring),
    METHOD(LuaMap, set_port_space),
+   METHOD(LuaMap, sea_route_exists),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMap> LuaMap::Properties[] = {
@@ -1491,6 +1492,33 @@ int LuaMap::set_port_space(lua_State* L) {
 	const bool success = get_egbase(L).mutable_map()->set_port_space(
 	   get_egbase(L).world(), Widelands::Coords(x, y), allowed, false, true);
 	lua_pushboolean(L, success);
+	return 1;
+}
+
+/* RST
+   .. method:: sea_route_exists(field, port)
+
+      Returns whether a sea route exists from the given field to the given port space.
+
+      :arg field: The field where to start
+      :type field: :class:`wl.map.Field`
+      :arg port: The port space to find
+      :type port: :class:`wl.map.Field`
+
+      :rtype: :class:`bool`
+*/
+int LuaMap::sea_route_exists(lua_State* L) {
+	const Widelands::Map& map = get_egbase(L).map();
+	const Widelands::FCoords f_start = (*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L);
+	const Widelands::FCoords f_port = (*get_user_class<LuaMaps::LuaField>(L, 3))->fcoords(L);
+	for (const Widelands::Coords& c : map.find_portdock(f_port)) {
+		Widelands::Path p;
+		if (map.findpath(f_start, c, 0, p, CheckStepDefault(MOVECAPS_SWIM)) >= 0) {
+			lua_pushboolean(L, true);
+			return 1;
+		}
+	}
+	lua_pushboolean(L, false);
 	return 1;
 }
 

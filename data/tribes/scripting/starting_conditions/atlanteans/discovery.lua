@@ -26,8 +26,18 @@ init = {
    local field = nil
    repeat
       field = map:get_field(math.random(map.width), math.random(map.height))
-      if not field:has_caps("swimmable") then field = nil end
-      -- NOCOM check whether we are on an ocean with a port space!
+      if not field:has_caps("swimmable") then
+         field = nil
+      else
+         local route_found = false
+         for i,port in pairs(map.port_spaces) do
+            if map:sea_route_exists(field, map:get_field(port.x, port.y)) then
+               route_found = true
+               break
+            end
+         end
+         if not route_found then field = nil end
+      end
    until field
    local ship = player:place_ship(field)
    ship.capacity = 55
