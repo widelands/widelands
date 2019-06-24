@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Alexander Jansen <bornxlo@gmail.com>, 2015
+# Alexander Mackinnon Jansen <bornxlo@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:29+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 10:12+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/widelands/widelands/language/nb/)\n"
 "MIME-Version: 1.0\n"
@@ -439,7 +439,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
-"space were you want the building to be, choose it from the window that "
+"space where you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
 msgstr ""
@@ -1034,14 +1034,3 @@ msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
 msgstr "Takk for at du spilte gjennom innføringen. Vi håper du liker Widelands og husk du kan besøke oss på"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "«%s»"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Nytt mål"
-msgstr[1] "Nye mål"

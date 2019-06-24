@@ -26,7 +26,6 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
-#include "graphic/text_constants.h"
 #include "logic/filesystem_constants.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
@@ -41,12 +40,18 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
      table_(this, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Main Title
-     title_(this, 0, 0, _("Choose a campaign"), UI::Align::kCenter),
+     title_(this,
+            0,
+            0,
+            0,
+            0,
+            _("Choose a campaign"),
+            UI::Align::kCenter,
+            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Campaign description
      campaign_details_(this),
      campaigns_(campvis) {
-	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
 
@@ -128,9 +133,7 @@ void FullscreenMenuCampaignSelect::fill_table() {
 		tableEntry.set_picture(0, campaign_data.difficulty_image);
 		tableEntry.set_string(1, campaign_data.tribename);
 		tableEntry.set_string(2, campaign_data.descname);
-		if (!campaign_data.visible) {
-			tableEntry.set_color(UI_FONT_CLR_DISABLED);
-		}
+		tableEntry.set_disabled(!campaign_data.visible);
 	}
 
 	if (table_.size()) {

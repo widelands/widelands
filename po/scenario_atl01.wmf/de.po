@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Elisabeth Jäger, 2016-2017
@@ -17,10 +17,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
-"PO-Revision-Date: 2018-02-27 11:19+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 10:11+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -934,14 +934,3 @@ msgstr "Gebäude verloren!"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:488
 msgid "We lost a building to the ocean!"
 msgstr "Wir haben ein Gebäude an das Meer verloren!"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "„%s“"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neues Ziel"
-msgstr[1] "Neue Ziele"

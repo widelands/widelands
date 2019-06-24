@@ -27,7 +27,6 @@
 
 #include "graphic/font_handler.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/player.h"
@@ -69,11 +68,8 @@ private:
 	                                                 uint32_t max,
 	                                                 uint32_t initial,
 	                                                 char const* hint);
-	// TODO(GunChleoc): This should also return a unique_ptr
-	UI::Textarea& add_text(UI::Box& parent,
-	                       std::string str,
-	                       UI::Align alignment = UI::Align::kLeft,
-	                       int fontsize = UI_FONT_SIZE_SMALL);
+	UI::Textarea&
+	add_text(UI::Box& parent, std::string str, UI::Align alignment, const UI::FontStyle style);
 	std::unique_ptr<UI::Button> add_button(UI::Box& parent,
 	                                       const std::string& text,
 	                                       void (AttackBox::*fn)(),

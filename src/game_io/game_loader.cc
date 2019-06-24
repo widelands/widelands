@@ -93,7 +93,9 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		log("Game: Reading Scenario Tribes took %ums\n", timer.ms_since_last_query());
 	}
 
-	log("Game: Reading Player Info ... ");
+	// This also triggers loading the world and tribes, so we need a newline at the end of the log
+	// output
+	log("Game: Reading Player Info ...\n");
 	{
 		GamePlayerInfoPacket p;
 		p.read(fs_, game_);

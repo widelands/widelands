@@ -34,7 +34,6 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
@@ -384,7 +383,8 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 	const WorkareaInfo* workarea_info = workarea.info;
 	intermediate_result[coords] = 0;
 	WorkareaInfo::size_type wa_index;
-	switch (workarea_info->size()) {
+	const size_t workarea_size = workarea_info->size();
+	switch (workarea_size) {
 	case 0:
 		return WorkareasEntry();  // no workarea
 	case 1:
@@ -436,7 +436,7 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 					break;
 				}
 			}
-			result.push_back(wd);
+			result.first.push_back(wd);
 		}
 		if (rn != intermediate_result.end()) {
 			TCoords<> tc(pair.first, Widelands::TriangleIndex::R);
@@ -447,8 +447,40 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 					break;
 				}
 			}
-			result.push_back(wd);
+			result.first.push_back(wd);
 		}
+	}
+	for (const auto& pair : *workarea_info) {
+		std::vector<Coords> border;
+		Coords c = coords;
+		for (uint32_t i = pair.first; i > 0; --i) {
+			map.get_tln(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_rn(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_brn(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_bln(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_ln(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_tln(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_trn(c, &c);
+		}
+		result.second.push_back(border);
 	}
 	return result;
 }
@@ -566,8 +598,8 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y).str();
 	}
 	if (!node_text.empty()) {
-		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh->render(as_condensed(node_text));
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
+		   as_richtext_paragraph(node_text, UI::FontStyle::kWuiGameSpeedAndCoordinates));
 		rendered_text->draw(
 		   dst, Vector2i(get_w() - 5, get_h() - rendered_text->height() - 5), UI::Align::kRight);
 	}
@@ -576,15 +608,16 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	if (game != nullptr) {
 		// Blit in-game clock
 		const std::string gametime(gametimestring(egbase().get_gametime(), true));
-		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh->render(as_condensed(gametime));
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
+		   as_richtext_paragraph(gametime, UI::FontStyle::kWuiGameSpeedAndCoordinates));
 		rendered_text->draw(dst, Vector2i(5, 5));
 
 		// Blit FPS when playing a game in debug mode
 		if (get_display_flag(dfDebug)) {
 			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-			rendered_text = UI::g_fh->render(as_condensed(
-			   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
+			rendered_text = UI::g_fh->render(as_richtext_paragraph(
+			   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str(),
+			   UI::FontStyle::kWuiGameSpeedAndCoordinates));
 			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
 		}
 	}

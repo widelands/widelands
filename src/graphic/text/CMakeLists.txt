@@ -41,7 +41,6 @@ wl_library(graphic_text
     graphic_playercolor
     graphic_sdl_utils
     graphic_surface
-    graphic_text_layout
     io_fileread
     io_filesystem
     scripting_lua_interface

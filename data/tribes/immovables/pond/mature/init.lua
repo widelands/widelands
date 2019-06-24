@@ -5,6 +5,7 @@ tribes:new_immovable_type {
    name = "pond_mature",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext ("immovable", "Pond With Fish"),
+   icon = dirname .. "menu.png",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = { "pond_mature" },

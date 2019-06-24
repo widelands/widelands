@@ -335,6 +335,22 @@ void Tribes::postload() {
 			for (const auto& job : de->working_positions()) {
 				workers_->get_mutable(job.first)->add_employer(i);
 			}
+
+			// Check that all workarea overlap hints are valid
+			for (const auto& pair : de->get_highlight_overlapping_workarea_for()) {
+				const DescriptionIndex di = safe_building_index(pair.first);
+				if (upcast(const ProductionSiteDescr, p, get_building_descr(di))) {
+					if (!p->workarea_info().empty()) {
+						continue;
+					}
+					throw GameDataError("Productionsite %s will inform about conflicting building %s "
+					                    "which doesn’t have a workarea",
+					                    de->name().c_str(), pair.first.c_str());
+				}
+				throw GameDataError("Productionsite %s will inform about conflicting building %s which "
+				                    "is not a productionsite",
+				                    de->name().c_str(), pair.first.c_str());
+			}
 		}
 
 		// Register which buildings buildings can have been enhanced from
@@ -347,14 +363,9 @@ void Tribes::postload() {
 	// Calculate the trainingsites proportions.
 	postload_calculate_trainingsites_proportions();
 
-	// Resize the configuration of our wares if they won't fit in the current window (12 = info label
-	// size).
-	// Also, do some final checks on the gamedata
-	int number = (g_gr->get_yres() - 290) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
+	// Some final checks on the gamedata
 	for (DescriptionIndex i = 0; i < tribes_->size(); ++i) {
 		TribeDescr* tribe_descr = tribes_->get_mutable(i);
-		tribe_descr->resize_ware_orders(number);
-
 		// Verify that the preciousness has been set for all of the tribe's wares
 		for (const DescriptionIndex wi : tribe_descr->wares()) {
 			if (tribe_descr->get_ware_descr(wi)->ai_hints().preciousness(tribe_descr->name()) ==

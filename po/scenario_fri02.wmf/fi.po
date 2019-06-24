@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-01 12:45+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Jukka Pakarinen, 2018\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
@@ -606,12 +606,9 @@ msgstr "Taloutemme on valmis"
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:246
 msgid ""
-"You are right – we should build more berry farms, collector’s houses and "
-"taverns as well as a drinking hall, and advanced bakeries and breweries."
+"You are right – we should build more berry farms, fruit collector’s houses "
+"and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
-"Olet oikeassa – meidän pitäisi rakentaa enemmän marjatarhoja, kerääjien "
-"mökkejä ja krouveja sekä myös juomahalli, ja kehittyneempiä leimomoita ja "
-"panimoita."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:249
@@ -688,17 +685,14 @@ msgstr ""
 "Muukalainen! Minä, Pohjoisen maiden Prokonsuli, Keisarikunnan provinssista, "
 "vaadin tietooni ketä te olette ja millä asialla olette näillä mailla!"
 
-#. TRANSLATORS: Reebaud – Supply Murilius 4
+#. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
+#. frisian greeting, nothing more.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:278
 msgid ""
-"Greetings, representative of the Empire! I am Reebaud, the chieftain of this"
-" tribe. All we want is to settle down here, build our home and live our "
-"lives in peace. We do not seek trouble, but we aren’t afraid to fight, "
-"either."
+"Peace, representative of the Empire! I am Reebaud, the chieftain of this "
+"tribe. All we want is to settle down here, build our home and live our lives"
+" in peace. We do not seek trouble, but we aren’t afraid to fight, either."
 msgstr ""
-"Tervehdys, Keisarikunnan edustaja! Ole Reebaund, tämän heimon päällikkö. Me "
-"kaikki haluamme vain asettua tänne, rakentaa kotimme ja elää elämäämme "
-"rauhassa. Emme hae ongelmia, mutta emme myöskään pelkää taistelle."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
 #. case (form of address) of Reebaud.
@@ -1048,14 +1042,3 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:416
 msgid "Congratulations"
 msgstr "Onnittelut"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Uusi Tavoite"
-msgstr[1] "Uudet Tavoitteet"

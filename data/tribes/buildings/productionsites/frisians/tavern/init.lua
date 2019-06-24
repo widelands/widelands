@@ -76,8 +76,8 @@ tribes:new_productionsite_type {
             -- time total: 49.5
             "return=skipped unless economy needs ration",
             "return=skipped when site has fruit,bread_frisians and site has smoked_fish,smoked_meat",
-            "sleep=5000",
             "consume=fruit,bread_frisians,smoked_fish,smoked_meat",
+            "sleep=5000",
             "animate=working 34500",
             "sleep=10000",
             "produce=ration"

@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-23 09:59+0000\n"
-"PO-Revision-Date: 2019-02-25 18:21+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 10:12+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1035,14 +1035,3 @@ msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
 msgstr "Kiitos tämän opetuspelin pelaamisesta. Nauti Widelandsista ja muista vierailla meillä"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Uusi Tavoite"
-msgstr[1] "Uudet Tavoitteet"

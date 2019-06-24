@@ -19,6 +19,7 @@
 #ifndef WL_WUI_SOUND_OPTIONS_H
 #define WL_WUI_SOUND_OPTIONS_H
 
+#include "graphic/styles/text_panel_style.h"
 #include "ui_basic/box.h"
 
 /**

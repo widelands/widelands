@@ -55,15 +55,20 @@ tribes:new_productionsite_type {
       "gold_ore"
    },
 
+   indicate_workarea_overlaps = {
+      barbarians_goldmine = false,
+      barbarians_goldmine_deep = false,
+      barbarians_goldmine_deeper = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _"mining gold",
          actions = {
-            "sleep=5000",
             "return=skipped unless economy needs gold_ore",
             "consume=snack",
-            "sleep=35000",
+            "sleep=40000",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",

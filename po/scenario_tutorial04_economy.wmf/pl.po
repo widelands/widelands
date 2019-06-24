@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016
 # MikeNow <m.nowot@gmail.com>, 2015
-# Tomasz Pudło <wptom@wp.pl>, 2018
+# tombox <wptom@wp.pl>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-14 06:11+0000\n"
-"PO-Revision-Date: 2018-09-14 06:13+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 10:12+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -971,16 +971,3 @@ msgid ""
 "If you have still questions, the Widelands community will surely help you. "
 "You can find it at:"
 msgstr "To ostatni samouczek, jaki dla ciebie przygotowałem. Nauczyłem cię wszystkiego, co umiem. Ten świat wciąż skrywa sekrety, których nie znam. Poszukam teraz dla siebie zacisznego miejsca do spędzenia jesieni życia. Jeśli masz jeszcze jakieś pytania, społeczność Widelands na pewno ci pomoże. Możesz ją znaleźć na:"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "\"%s\""
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Nowy cel"
-msgstr[1] "Nowe cele"
-msgstr[2] "Nowe cele"
-msgstr[3] "Nowe cele"

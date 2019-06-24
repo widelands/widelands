@@ -30,7 +30,6 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/findbob.h"
@@ -396,10 +395,9 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			        .str();
 		}
 	}
-	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_OK.hex_value() %
-	      // Line break to make Codecheck happy.
-	      *s)
-	        .str();
+	*s = g_gr->styles().color_tag(
+	   // Line break to make Codecheck happy.
+	   *s, g_gr->styles().building_statistics_style().medium_color());
 }
 
 bool MilitarySite::init(EditorGameBase& egbase) {
@@ -982,6 +980,14 @@ bool MilitarySite::update_upgrade_requirements() {
 	}
 
 	return false;
+}
+
+const BuildingSettings* MilitarySite::create_building_settings() const {
+	MilitarysiteSettings* settings = new MilitarysiteSettings(descr());
+	settings->desired_capacity =
+	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
+	settings->prefer_heroes = soldier_preference_ == SoldierPreference::kHeroes;
+	return settings;
 }
 
 // setters

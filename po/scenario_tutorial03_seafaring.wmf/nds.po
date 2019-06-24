@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
-"PO-Revision-Date: 2018-11-30 08:53+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 12:38+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,7 @@ msgid ""
 "Port spaces are set by the map designer, so a map will either contain them "
 "or not. They might, however, be hidden under trees or be blocked by "
 "surrounding buildings."
-msgstr "Rüümte för Muden worden vun de Kaarten-Maker fastleggt, eene Kaart hett se also oder even nich. Se könen aver vun Bomen oder Husen in de Naberskupp verdeckt wesen."
+msgstr "Rüümte för Muden worden vun de Kaarten-Maker fastleggt, eene Kaart hett se also of even nich. Se könen aver vun Bomen of Husen in de Naberskupp verdeckt wesen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:60
 msgid ""
@@ -136,7 +136,7 @@ msgid ""
 "Ports are built like normal buildings, but are only available on blue port "
 "spaces. Just click on a field with the icon and the building menu "
 "automatically offers you to build a port."
-msgstr "Muden baust du as annere Husen, aver se sünd blot up de blauen Rüümten för Muden paraat. Klick een Feld mit de Teken an un dat Bau-Menü büddt di eene Muu an."
+msgstr "Muden baust du as anner Husen, aver se sünd blot up de blauen Rüümten för Muden paraat. Klick een Feld mit de Teken an un dat Bau-Menü büddt di eene Muu an."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:70
 msgid ""
@@ -186,7 +186,7 @@ msgid ""
 "The shipyard is a medium building. Although it can be built everywhere on "
 "the map, the shipwright only works when he is close to the water and there "
 "are no trees or roads at the shoreline."
-msgstr "De Warft is een middelmatigs Huus. Se kann up de ganze Kaart baut worden, aver de Schippebauer warkt blot dann, wenn Water in de Naberskupp is un de Küst nich vun Bomen oder Straten verdeckt word."
+msgstr "De Warft is een middelmatigs Huus. Se kann up de ganze Kaart baut worden, aver de Schippebauer warkt blot dann, wenn Water in de Naberskupp is un de Küst nich vun Bomen of Straten verdeckt word."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:98
 msgid "Waiting for the ships"
@@ -266,7 +266,7 @@ msgid ""
 "Although it might take long and be expensive and not without dangers – who "
 "knows what monsters live in the sea? – I see no other possibility: we will "
 "have to undertake an expedition to the unknown seas."
-msgstr "'t kann lang düren un is düür un nich sünner Gefahr – wat för Beesten wull in de See leven? – aver ick weet keene annere Kans: wi mutten eene Söke tur frömden See utrüsten."
+msgstr "'t kann lang düren un is düür un nich sünner Gefahr – wat för Beesten wull in de See leven? – aver ick weet keene anner Kans: wi mutten eene Söke tur frömden See utrüsten."
 
 #. TRANSLATORS: This shall be the beginning of a poem
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:128
@@ -411,14 +411,3 @@ msgid ""
 "and watch how the ships deliver wares to the island when you construct some "
 "buildings there. There is also another island where you can build a port."
 msgstr "Up deese Kaart gifft 't keene Feinde. As immer kannst du wiederspölen un tokieken as de Schippen Waren to de Insel brengen, wenn du daar Husen baust. 't gifft noch eene anner Insel, wo du eene Muu bauen kannst."
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neje Upgaav"
-msgstr[1] "Neje Upgaven"
