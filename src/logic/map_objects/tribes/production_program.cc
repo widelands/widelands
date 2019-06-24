@@ -436,10 +436,15 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 			if (end != args.end()) {
 				log(" %s", end->c_str()); // NOCOM
 			}
-			log("]");
+
 			conditions_.push_back(create_condition(it, end, descr, tribes));
-			match_and_skip(end, separator);
+			if (end != args.end()) {
+				log(" *%s:%s ->", end->c_str(), separator.c_str());
+				match_and_skip(end, separator);
+				log("* ");
+			}
 			it = end;
+			log("]"); // NOCOM
 		}
 	};
 
