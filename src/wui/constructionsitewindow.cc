@@ -242,16 +242,16 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_prefer_heroes_rookies_.reset(new UI::Radiogroup());
 			cs_prefer_heroes_rookies_->add_button(
 			   &soldier_preference_panel, Vector2i::zero(),
-			   g_gr->images().get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
+			   g_gr->images().get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
 			cs_prefer_heroes_rookies_->add_button(
 			   &soldier_preference_panel, Vector2i(32, 0),
-			   g_gr->images().get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
+			   g_gr->images().get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
 			if (can_act) {
 				cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
 					igbase()->game().send_player_militarysite_set_soldier_preference(
 					   *construction_site_.get(igbase()->egbase()),
-					   state ? Widelands::SoldierPreference::kHeroes :
-					           Widelands::SoldierPreference::kRookies);
+					   state ? Widelands::SoldierPreference::kRookies :
+					           Widelands::SoldierPreference::kHeroes);
 				});
 			}
 			settings_box.add_space(8);
