@@ -438,7 +438,7 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 			}
 
 			conditions_.push_back(create_condition(it, end, descr, tribes));
-			if (end != args.end()) {
+			if (end != args.end()) { // NOCOM this condition has fixed it somewhat
 				log(" *%s:%s ->", end->c_str(), separator.c_str());
 				match_and_skip(end, separator);
 				log("* ");
