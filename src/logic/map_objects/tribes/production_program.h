@@ -166,10 +166,10 @@ struct ProductionProgram : public MapObjectProgram {
 			virtual std::string description_negation(const Tribes&) const = 0;
 		};
 		static Condition*
-		create_condition(std::vector<std::string>::const_iterator& begin, std::vector<std::string>::const_iterator& end, const ProductionSiteDescr&, const Tribes& tribes);
+		create_condition(const std::vector<std::string>& arguments, std::vector<std::string>::const_iterator& begin, std::vector<std::string>::const_iterator& end, const ProductionSiteDescr&, const Tribes& tribes);
 
 		struct Negation : public Condition {
-			Negation(std::vector<std::string>::const_iterator& begin, std::vector<std::string>::const_iterator& end, const ProductionSiteDescr& descr, const Tribes& tribes);
+			Negation(const std::vector<std::string>& arguments, std::vector<std::string>::const_iterator& begin, std::vector<std::string>::const_iterator& end, const ProductionSiteDescr& descr, const Tribes& tribes);
 			~Negation() override;
 			bool evaluate(const ProductionSite&) const override;
 			// Just a dummy to satisfy the superclass interface. Do not use.

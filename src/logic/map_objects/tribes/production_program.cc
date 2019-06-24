@@ -52,8 +52,8 @@ namespace Widelands {
 
 namespace {
 /// If the iterator contents match the string, increment the iterator. Returns whether it matched.
-bool match_and_skip(std::vector<std::string>::const_iterator& it, const std::string& matchme) {
-	bool result = *it == matchme;
+bool match_and_skip(const std::vector<std::string>& args, std::vector<std::string>::const_iterator& it, const std::string& matchme) {
+	bool result = (it != args.end()) && (*it == matchme);
 	if (result) {
 		++it;
 		log(" %s", matchme.c_str()); // NOCOM
@@ -191,8 +191,8 @@ BillOfMaterials ProductionProgram::parse_bill_of_materials(const std::vector<std
 ProductionProgram::ActReturn::Condition::~Condition() {
 }
 
-ProductionProgram::ActReturn::Negation::Negation(std::vector<std::string>::const_iterator& begin, std::vector<std::string>::const_iterator& end, const ProductionSiteDescr& descr, const Tribes& tribes)
-   : operand(create_condition(begin, end, descr, tribes)) {
+ProductionProgram::ActReturn::Negation::Negation(const std::vector<std::string>& arguments, std::vector<std::string>::const_iterator& begin, std::vector<std::string>::const_iterator& end, const ProductionSiteDescr& descr, const Tribes& tribes)
+   : operand(create_condition(arguments, begin, end, descr, tribes)) {
 }
 
 ProductionProgram::ActReturn::Negation::~Negation() {
@@ -353,7 +353,7 @@ ProductionProgram::ActReturn::WorkersNeedExperience::description_negation(const 
 	return _("the workers need no experience");
 }
 
-ProductionProgram::ActReturn::Condition* ProductionProgram::ActReturn::create_condition(
+ProductionProgram::ActReturn::Condition* ProductionProgram::ActReturn::create_condition(const std::vector<std::string>& arguments,
    std::vector<std::string>::const_iterator& begin, std::vector<std::string>::const_iterator& end, const ProductionSiteDescr& descr, const Tribes& tribes) {
 	ProductionProgram::ActReturn::Condition* returnme = nullptr;
 	log(" ("); // NOCOM
@@ -362,10 +362,10 @@ ProductionProgram::ActReturn::Condition* ProductionProgram::ActReturn::create_co
 		throw GameDataError("Expected a condition after '%s'", (begin - 1)->c_str());
 	}
 	try {
-		if (match_and_skip(begin, "not")) {
-			return new ActReturn::Negation(begin, end, descr, tribes);
-		} else if (match_and_skip(begin, "economy")) {
-			if (!match_and_skip(begin, "needs")) {
+		if (match_and_skip(arguments, begin, "not")) {
+			return new ActReturn::Negation(arguments, begin, end, descr, tribes);
+		} else if (match_and_skip(arguments, begin, "economy")) {
+			if (!match_and_skip(arguments, begin, "needs")) {
 				throw GameDataError("Expected 'needs' after 'economy' but found '%s'", begin->c_str());
 			}
 			log(" {"); // NOCOM
@@ -373,18 +373,18 @@ ProductionProgram::ActReturn::Condition* ProductionProgram::ActReturn::create_co
 			log("}"); // NOCOM
 			log(")"); // NOCOM
 			return returnme;
-		} else if (match_and_skip(begin, "site")) {
-			if (!match_and_skip(begin, "has")) {
+		} else if (match_and_skip(arguments, begin, "site")) {
+			if (!match_and_skip(arguments, begin, "has")) {
 				throw GameDataError("Expected 'has' after 'site' but found '%s'", begin->c_str());
 			}
 			returnme = new ProductionProgram::ActReturn::SiteHas(begin, end, descr, tribes);
 			log(")"); // NOCOM
 			return returnme;
-		} else if (match_and_skip(begin, "workers")) {
-			if (!match_and_skip(begin, "need")) {
+		} else if (match_and_skip(arguments, begin, "workers")) {
+			if (!match_and_skip(arguments, begin, "need")) {
 				throw GameDataError("Expected 'need experience' after 'workers' but found '%s'", begin->c_str());
 			}
-			if (!match_and_skip(begin, "experience")) {
+			if (!match_and_skip(arguments, begin, "experience")) {
 				throw GameDataError("Expected 'experience' after 'workers need' but found '%s'", begin->c_str());
 			}
 			returnme = new ProductionProgram::ActReturn::WorkersNeedExperience();
@@ -409,13 +409,13 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 	}
 	auto begin = arguments.begin();
 
-	if (match_and_skip(begin, "failed")) {
+	if (match_and_skip(arguments, begin, "failed")) {
 		result_ = ProgramResult::kFailed;
-	} else if (match_and_skip(begin, "completed")) {
+	} else if (match_and_skip(arguments, begin, "completed")) {
 		result_ = ProgramResult::kCompleted;
-	} else if (match_and_skip(begin, "skipped")) {
+	} else if (match_and_skip(arguments, begin, "skipped")) {
 		result_ = ProgramResult::kSkipped;
-	} else if (match_and_skip(begin, "no_stats")) {
+	} else if (match_and_skip(arguments, begin, "no_stats")) {
 		result_ = ProgramResult::kNone;
 	} else {
 		throw GameDataError("Usage: return=failed|completed|skipped|no_stats [when|unless <conditions>]");
@@ -437,10 +437,10 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 				log(" %s", end->c_str()); // NOCOM
 			}
 
-			conditions_.push_back(create_condition(it, end, descr, tribes));
+			conditions_.push_back(create_condition(args, it, end, descr, tribes));
 			if (end != args.end()) { // NOCOM this condition has fixed it somewhat
 				log(" *%s:%s ->", end->c_str(), separator.c_str());
-				match_and_skip(end, separator);
+				match_and_skip(args, end, separator);
 				log("* ");
 			}
 			it = end;
@@ -450,9 +450,9 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 
 	is_when_ = true;
 	if (begin != arguments.end()) {
-		if (match_and_skip(begin, "when")) {
+		if (match_and_skip(arguments, begin, "when")) {
 			parse_conditions(arguments, begin, "and");
-		} else if (match_and_skip(begin, "unless")) {
+		} else if (match_and_skip(arguments, begin, "unless")) {
 			is_when_ = false;
 			parse_conditions(arguments, begin, "or");
 		} else {
