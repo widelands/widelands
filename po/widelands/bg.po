@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-06-14 07:23+0000\n"
-"PO-Revision-Date: 2019-06-14 07:24+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-06-21 08:49+0000\n"
+"PO-Revision-Date: 2019-06-21 11:41+0000\n"
+"Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -109,11 +109,11 @@ msgstr "„%s“"
 
 #: ../../data/scripting/richtext_scenarios.lua:90
 msgid "New Objective"
-msgstr ""
+msgstr "Нова задача"
 
 #: ../../data/scripting/richtext_scenarios.lua:92
 msgid "New Objectives"
-msgstr ""
+msgstr "Нови задачи"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:43
@@ -1120,7 +1120,7 @@ msgstr "Текущ размер: %u"
 #: ../../src/graphic/gl/initialize.cc:205
 #, c-format
 msgid "ERROR: %s\n"
-msgstr ""
+msgstr "ГРЕШКА: %s\n"
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1128,7 +1128,7 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:228
 #: ../../src/graphic/gl/initialize.cc:247
 msgid "Widelands won’t work because your graphics driver is too old."
-msgstr ""
+msgstr "Widelands не може да стартира, тъй като драйверът на графичната Ви карта е твърде стар."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1136,7 +1136,7 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:231
 #: ../../src/graphic/gl/initialize.cc:250
 msgid "The shading language needs to be version 1.20 or newer."
-msgstr ""
+msgstr "Трябва да се поддържат шейдъри версия 1.20 или по-нова."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -2075,41 +2075,69 @@ msgstr "%s напусна стаята"
 msgid "Chat message could not be sent."
 msgstr "Чат съобщението не може да бъде изпратено."
 
-#: ../../src/network/internet_gaming.cc:699
+#: ../../src/network/internet_gaming.cc:687
+msgid "Command could not be executed."
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:707
 #, c-format
 msgid "ERROR: %s"
 msgstr "ГРЕШКА: %s"
 
-#: ../../src/network/internet_gaming.cc:702
+#: ../../src/network/internet_gaming.cc:710
 msgid "An unexpected error message has been received about command %1%: %2%"
 msgstr "Получено е неочаквано съобщение относно командата „%1%“: %2%"
 
-#: ../../src/network/internet_gaming.cc:715
+#: ../../src/network/internet_gaming.cc:723
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Получена е непозната команда от мета сървъра: %s"
 
-#: ../../src/network/internet_gaming.cc:864
+#: ../../src/network/internet_gaming.cc:872
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Съобщението не може да бъде изпратено: Не сте свързани с мета сървъра!"
 
-#: ../../src/network/internet_gaming.cc:883
-#: ../../src/network/internet_gaming.cc:890
+#: ../../src/network/internet_gaming.cc:891
+#: ../../src/network/internet_gaming.cc:898
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Съобщението не може да бъде изпратено: Трябваше ли да бъде тайно съобщение?"
 
-#: ../../src/network/internet_gaming.cc:966
+#: ../../src/network/internet_gaming.cc:913
+msgid "Supported admin commands:"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:914
+msgid "/motd <msg> sets a permanent greeting message"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:915
+msgid "/announce <msg> send a one time system message"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:917
+msgid "/warn <user> <msg> send a private system message to the given user"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:920
+msgid "/kick <user|game> removes the given user or game from the metaserver"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:922
+msgid "/ban <user> bans a user for 24 hours from the metaserver"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:998
 msgid "Conversion error"
 msgstr "Грешка при превръщането"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:969
+#: ../../src/network/internet_gaming.cc:1001
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Не може да бъде установена вярната стойност за „%s“"
 
-#: ../../src/network/internet_gaming.cc:987
+#: ../../src/network/internet_gaming.cc:1019
 msgctxt "chat_sender"
 msgid "Unknown"
 msgstr "Неизвестен"
@@ -2127,32 +2155,36 @@ msgid "Wrong password, please try again."
 msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:46
+msgid "You have been temporarily banned from online gaming."
+msgstr ""
+
+#: ../../src/network/internet_gaming_messages.cc:47
 msgid "The protocol version you are using is not supported!"
 msgstr "Версията на протокола, която използвате, не се поддържа!"
 
-#: ../../src/network/internet_gaming_messages.cc:47
+#: ../../src/network/internet_gaming_messages.cc:48
 msgid "You are already logged in!"
 msgstr "Вие вече сте вписани!"
 
-#: ../../src/network/internet_gaming_messages.cc:49
+#: ../../src/network/internet_gaming_messages.cc:50
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr "Вие бяхте изключени, тъй като изпратихте команда на супер потребител, но нямате такива права. Това ще бъде записано и докладвано на администратора."
 
-#: ../../src/network/internet_gaming_messages.cc:52
+#: ../../src/network/internet_gaming_messages.cc:53
 msgid "Connection was closed by the client normally."
 msgstr "Връзката беше прекъсната нормално от клиента."
 
-#: ../../src/network/internet_gaming_messages.cc:53
+#: ../../src/network/internet_gaming_messages.cc:54
 msgid "The connection to the metaserver was lost."
 msgstr "Връзката с мета сървъра беше прекъсната."
 
-#: ../../src/network/internet_gaming_messages.cc:54
+#: ../../src/network/internet_gaming_messages.cc:55
 msgid "Metaserver did not answer"
 msgstr "Мета сървърът не отговори"
 
-#: ../../src/network/internet_gaming_messages.cc:56
+#: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
