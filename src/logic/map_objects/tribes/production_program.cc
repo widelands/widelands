@@ -53,10 +53,9 @@ namespace Widelands {
 namespace {
 /// If the iterator contents match the string, increment the iterator. Returns whether it matched.
 bool match_and_skip(const std::vector<std::string>& args, std::vector<std::string>::const_iterator& it, const std::string& matchme) {
-	bool result = (it != args.end()) && (*it == matchme);
+	const bool result = (it != args.end()) && (*it == matchme);
 	if (result) {
 		++it;
-		log(" %s", matchme.c_str()); // NOCOM
 	}
 	return result;
 }
@@ -64,13 +63,11 @@ bool match_and_skip(const std::vector<std::string>& args, std::vector<std::strin
 ProductionProgram::ActReturn::Condition* create_economy_condition(const std::string& item, const ProductionSiteDescr& descr, const Tribes& tribes) {
 	DescriptionIndex index = tribes.ware_index(item);
 	if (tribes.ware_exists(index)) {
-		log(" ware: %s", item.c_str()); // NOCOM
 		descr.ware_demand_checks()->insert(index);
 		return new ProductionProgram::ActReturn::EconomyNeedsWare(index);
 	} else if (tribes.worker_exists(tribes.worker_index(item))) {
 		index = tribes.worker_index(item);
 		descr.worker_demand_checks()->insert(index);
-		log(" worker: %s", item.c_str()); // NOCOM
 		return new ProductionProgram::ActReturn::EconomyNeedsWorker(index);
 	} else {
 		throw GameDataError("Expected ware or worker type but found '%s'", item.c_str());
@@ -355,10 +352,7 @@ ProductionProgram::ActReturn::WorkersNeedExperience::description_negation(const 
 
 ProductionProgram::ActReturn::Condition* ProductionProgram::ActReturn::create_condition(const std::vector<std::string>& arguments,
    std::vector<std::string>::const_iterator& begin, std::vector<std::string>::const_iterator& end, const ProductionSiteDescr& descr, const Tribes& tribes) {
-	ProductionProgram::ActReturn::Condition* returnme = nullptr;
-	log(" ("); // NOCOM
 	if (begin == end) {
-		log("NOCOM Expected a condition after '%s'\n", (begin - 1)->c_str());
 		throw GameDataError("Expected a condition after '%s'", (begin - 1)->c_str());
 	}
 	try {
@@ -368,18 +362,12 @@ ProductionProgram::ActReturn::Condition* ProductionProgram::ActReturn::create_co
 			if (!match_and_skip(arguments, begin, "needs")) {
 				throw GameDataError("Expected 'needs' after 'economy' but found '%s'", begin->c_str());
 			}
-			log(" {"); // NOCOM
-			returnme = create_economy_condition(*begin, descr, tribes);
-			log("}"); // NOCOM
-			log(")"); // NOCOM
-			return returnme;
+			return create_economy_condition(*begin, descr, tribes);
 		} else if (match_and_skip(arguments, begin, "site")) {
 			if (!match_and_skip(arguments, begin, "has")) {
 				throw GameDataError("Expected 'has' after 'site' but found '%s'", begin->c_str());
 			}
-			returnme = new ProductionProgram::ActReturn::SiteHas(begin, end, descr, tribes);
-			log(")"); // NOCOM
-			return returnme;
+			return new ProductionProgram::ActReturn::SiteHas(begin, end, descr, tribes);
 		} else if (match_and_skip(arguments, begin, "workers")) {
 			if (!match_and_skip(arguments, begin, "need")) {
 				throw GameDataError("Expected 'need experience' after 'workers' but found '%s'", begin->c_str());
@@ -387,15 +375,12 @@ ProductionProgram::ActReturn::Condition* ProductionProgram::ActReturn::create_co
 			if (!match_and_skip(arguments, begin, "experience")) {
 				throw GameDataError("Expected 'experience' after 'workers need' but found '%s'", begin->c_str());
 			}
-			returnme = new ProductionProgram::ActReturn::WorkersNeedExperience();
-			log(")"); // NOCOM
-			return returnme;
+			return new ProductionProgram::ActReturn::WorkersNeedExperience();
 		} else {
 			throw GameDataError(
 			   "Expected not|economy|site|workers after '%s' but found '%s'", (begin - 1)->c_str(), begin->c_str());
 		}
 	} catch (const WException& e) {
-		log("NOCOM Invalid condition. %s\n", e.what());
 		throw GameDataError("Invalid condition. %s", e.what());
 	}
 }
@@ -403,7 +388,6 @@ ProductionProgram::ActReturn::Condition* ProductionProgram::ActReturn::create_co
 ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& arguments,
                                         const ProductionSiteDescr& descr,
                                         const Tribes& tribes) {
-	log(": <"); // NOCOM
 	if (arguments.empty()) {
 		throw GameDataError("Usage: return=failed|completed|skipped|no_stats [when|unless <conditions>]");
 	}
@@ -432,19 +416,10 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 			if (it == end) {
 				throw GameDataError("Expected: [%s] <condition> after '%s'", separator.c_str(), (it - 1)->c_str());
 			}
-			log(" [%s '%s'", it->c_str(), separator.c_str()); // NOCOM
-			if (end != args.end()) {
-				log(" %s", end->c_str()); // NOCOM
-			}
 
 			conditions_.push_back(create_condition(args, it, end, descr, tribes));
-			if (end != args.end()) { // NOCOM this condition has fixed it somewhat
-				log(" *%s:%s ->", end->c_str(), separator.c_str());
-				match_and_skip(args, end, separator);
-				log("* ");
-			}
+			match_and_skip(args, end, separator);
 			it = end;
-			log("]"); // NOCOM
 		}
 	};
 
@@ -456,11 +431,9 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 			is_when_ = false;
 			parse_conditions(arguments, begin, "or");
 		} else {
-			log("NOCOM Expected when|unless but found '%s'\n", begin->c_str());
 			throw GameDataError("Expected when|unless but found '%s'", begin->c_str());
 		}
 	}
-	log("> "); // NOCOM
 }
 
 ProductionProgram::ActReturn::~ActReturn() {
@@ -1376,7 +1349,6 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
                                      const World& world,
                                      ProductionSiteDescr* building)
    : MapObjectProgram(init_name), descname_(init_descname) {
-	log("NOCOM %s:", building->name().c_str());
 
 	for (const std::string& line : actions_table->array_entries<std::string>()) {
 		if (line.empty()) {
@@ -1384,8 +1356,6 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 		}
 		try {
 			ProgramParseInput parseinput = parse_program_string(line);
-
-			log(" %s", parseinput.name.c_str()); // NOCOM
 
 			if (parseinput.name == "return") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
@@ -1433,27 +1403,22 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				throw GameDataError("Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
 			}
 
-			log(" | "); // NOCOM
-
 			const ProductionProgram::Action& action = *actions_.back();
 			for (const auto& group : action.consumed_wares_workers()) {
-				log("gr"); // NOCOM
 				consumed_wares_workers_.push_back(group);
 			}
-			log(" | "); // NOCOM
+
 			// Add produced wares. If the ware already exists, increase the amount
 			for (const auto& ware : action.produced_wares()) {
-				log("wa"); // NOCOM
 				if (produced_wares_.count(ware.first) == 1) {
 					produced_wares_.at(ware.first) += ware.second;
 				} else {
 					produced_wares_.insert(ware);
 				}
 			}
-			log(" | "); // NOCOM
+
 			// Add recruited workers. If the worker already exists, increase the amount
 			for (const auto& worker : action.recruited_workers()) {
-				log("wo"); // NOCOM
 				if (recruited_workers_.count(worker.first) == 1) {
 					recruited_workers_.at(worker.first) += worker.second;
 				} else {
@@ -1464,7 +1429,6 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			throw GameDataError("Error reading line '%s': %s", line.c_str(), e.what());
 		}
 	}
-	log(".\n"); // NOCOM
 
 	if (actions_.empty()) {
 		throw GameDataError("No actions found");
