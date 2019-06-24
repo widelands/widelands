@@ -74,7 +74,7 @@ BillOfMaterials deserialize_bill_of_materials(StreamRead* des) {
 
 }  // namespace
 
-// TODO(GunChleoc): Replay loading compatibility. Completely get rid of this after Build 20
+// TODO(GunChleoc): Replay loading compatibility. Completely get rid of this after Build 21
 enum class QueueCommandCompatibilityTypes {
 	PLCMD_UNUSED = 0,
 	PLCMD_BULLDOZE = 1,
