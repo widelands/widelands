@@ -33,7 +33,7 @@
 #include "economy/input_queue.h"
 #include "economy/request.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -638,13 +638,13 @@ void Building::draw_info(const TextToDraw draw_text,
 
 int32_t
 Building::get_priority(WareWorker type, DescriptionIndex const ware_index, bool adjust) const {
-	int32_t priority = DEFAULT_PRIORITY;
+	int32_t priority = kPriorityNormal;
 	if (type == wwWARE) {
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
 		std::map<DescriptionIndex, int32_t>::const_iterator it = ware_priorities_.find(ware_index);
 		if (it != ware_priorities_.end())
-			priority = adjust ? (priority * it->second / DEFAULT_PRIORITY) : it->second;
+			priority = adjust ? (priority * it->second / kPriorityNormal) : it->second;
 	}
 
 	return priority;
@@ -660,7 +660,7 @@ void Building::collect_priorities(std::map<int32_t, std::map<DescriptionIndex, i
 	std::map<DescriptionIndex, int32_t>& ware_priorities = p[wwWARE];
 	std::map<DescriptionIndex, int32_t>::const_iterator it;
 	for (it = ware_priorities_.begin(); it != ware_priorities_.end(); ++it) {
-		if (it->second == DEFAULT_PRIORITY)
+		if (it->second == kPriorityNormal)
 			continue;
 		ware_priorities[it->first] = it->second;
 	}
@@ -774,10 +774,8 @@ void Building::send_message(Game& game,
                             uint32_t throttle_time,
                             uint32_t throttle_radius) {
 	const std::string rt_description =
-	   (boost::format("<div padding_r=10><p><img object=%s color=%s></p></div>"
-	                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-	    descr().name() % owner().get_playercolor().hex_value() % UI_FONT_SIZE_MESSAGE % description)
-	      .str();
+	   as_mapobject_message(descr().name(), descr().representative_image()->width(), description,
+	                        &owner().get_playercolor());
 
 	std::unique_ptr<Message> msg(new Message(msgtype, game.get_gametime(), title, icon_filename,
 	                                         heading, rt_description, get_position(),

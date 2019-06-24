@@ -20,6 +20,7 @@
 #ifndef WL_UI_BASIC_PROGRESSBAR_H
 #define WL_UI_BASIC_PROGRESSBAR_H
 
+#include "graphic/style_manager.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -58,6 +59,7 @@ private:
 	uint32_t orientation_;
 	uint32_t state_;  ///< state_ is [0..total_]
 	uint32_t total_;  ///< maximum progress
+	const UI::ProgressbarStyleInfo& style_;
 };
 }  // namespace UI
 

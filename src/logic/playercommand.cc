@@ -561,8 +561,14 @@ CmdStartStopBuilding::CmdStartStopBuilding(StreamRead& des) : PlayerCommand(0, d
 }
 
 void CmdStartStopBuilding::execute(Game& game) {
-	if (upcast(Building, building, game.objects().get_object(serial)))
+	MapObject* mo = game.objects().get_object(serial);
+	if (upcast(ConstructionSite, cs, mo)) {
+		if (upcast(ProductionsiteSettings, s, cs->get_settings())) {
+			s->stopped = !s->stopped;
+		}
+	} else if (upcast(Building, building, mo)) {
 		game.get_player(sender())->start_stop_building(*building);
+	}
 }
 
 void CmdStartStopBuilding::serialize(StreamWrite& ser) {
@@ -611,8 +617,14 @@ void CmdMilitarySiteSetSoldierPreference::serialize(StreamWrite& ser) {
 }
 
 void CmdMilitarySiteSetSoldierPreference::execute(Game& game) {
-	if (upcast(MilitarySite, building, game.objects().get_object(serial)))
+	MapObject* mo = game.objects().get_object(serial);
+	if (upcast(ConstructionSite, cs, mo)) {
+		if (upcast(MilitarysiteSettings, s, cs->get_settings())) {
+			s->prefer_heroes = preference == SoldierPreference::kHeroes;
+		}
+	} else if (upcast(MilitarySite, building, mo)) {
 		game.get_player(sender())->military_site_set_soldier_preference(*building, preference);
+	}
 }
 
 constexpr uint16_t kCurrentPacketVersionSoldierPreference = 1;
@@ -657,8 +669,14 @@ CmdStartOrCancelExpedition::CmdStartOrCancelExpedition(StreamRead& des)
 }
 
 void CmdStartOrCancelExpedition::execute(Game& game) {
-	if (upcast(Warehouse, warehouse, game.objects().get_object(serial)))
+	MapObject* mo = game.objects().get_object(serial);
+	if (upcast(ConstructionSite, cs, mo)) {
+		if (upcast(WarehouseSettings, s, cs->get_settings())) {
+			s->launch_expedition = !s->launch_expedition;
+		}
+	} else if (upcast(Warehouse, warehouse, game.objects().get_object(serial))) {
 		game.get_player(sender())->start_or_cancel_expedition(*warehouse);
+	}
 }
 
 void CmdStartOrCancelExpedition::serialize(StreamWrite& ser) {
@@ -701,8 +719,12 @@ CmdEnhanceBuilding::CmdEnhanceBuilding(StreamRead& des) : PlayerCommand(0, des.u
 }
 
 void CmdEnhanceBuilding::execute(Game& game) {
-	if (upcast(Building, building, game.objects().get_object(serial)))
+	MapObject* mo = game.objects().get_object(serial);
+	if (upcast(ConstructionSite, cs, mo)) {
+		cs->enhance(game);
+	} else if (upcast(Building, building, mo)) {
 		game.get_player(sender())->enhance_building(building, bi);
+	}
 }
 
 void CmdEnhanceBuilding::serialize(StreamWrite& ser) {
@@ -1111,14 +1133,22 @@ CmdSetWarePriority::CmdSetWarePriority(const uint32_t init_duetime,
 }
 
 void CmdSetWarePriority::execute(Game& game) {
-	upcast(Building, psite, game.objects().get_object(serial_));
-
-	if (!psite)
-		return;
-	if (psite->owner().player_number() != sender())
-		return;
-
-	psite->set_priority(type_, index_, priority_);
+	MapObject* mo = game.objects().get_object(serial_);
+	if (upcast(ConstructionSite, cs, mo)) {
+		if (upcast(ProductionsiteSettings, s, cs->get_settings())) {
+			for (auto& pair : s->ware_queues) {
+				if (pair.first == index_) {
+					pair.second.priority = priority_;
+					return;
+				}
+			}
+			NEVER_HERE();
+		}
+	} else if (upcast(Building, psite, mo)) {
+		if (psite->owner().player_number() == sender()) {
+			psite->set_priority(type_, index_, priority_);
+		}
+	}
 }
 
 constexpr uint16_t kCurrentPacketVersionCmdSetWarePriority = 1;
@@ -1185,14 +1215,36 @@ CmdSetInputMaxFill::CmdSetInputMaxFill(const uint32_t init_duetime,
 }
 
 void CmdSetInputMaxFill::execute(Game& game) {
-	upcast(Building, b, game.objects().get_object(serial_));
-
-	if (!b)
-		return;
-	if (b->owner().player_number() != sender())
-		return;
-
-	b->inputqueue(index_, type_).set_max_fill(max_fill_);
+	MapObject* mo = game.objects().get_object(serial_);
+	if (upcast(ConstructionSite, cs, mo)) {
+		if (upcast(ProductionsiteSettings, s, cs->get_settings())) {
+			switch (type_) {
+			case wwWARE:
+				for (auto& pair : s->ware_queues) {
+					if (pair.first == index_) {
+						assert(pair.second.max_fill >= max_fill_);
+						pair.second.desired_fill = max_fill_;
+						return;
+					}
+				}
+				NEVER_HERE();
+			case wwWORKER:
+				for (auto& pair : s->worker_queues) {
+					if (pair.first == index_) {
+						assert(pair.second.max_fill >= max_fill_);
+						pair.second.desired_fill = max_fill_;
+						return;
+					}
+				}
+				NEVER_HERE();
+			}
+			NEVER_HERE();
+		}
+	} else if (upcast(Building, b, mo)) {
+		if (b->owner().player_number() == sender()) {
+			b->inputqueue(index_, type_).set_max_fill(max_fill_);
+		}
+	}
 }
 
 constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 2;
@@ -1604,7 +1656,18 @@ CmdChangeSoldierCapacity::CmdChangeSoldierCapacity(StreamRead& des)
 }
 
 void CmdChangeSoldierCapacity::execute(Game& game) {
-	if (upcast(Building, building, game.objects().get_object(serial))) {
+	MapObject* mo = game.objects().get_object(serial);
+	if (upcast(ConstructionSite, cs, mo)) {
+		assert(val >= 0);
+		uint32_t capacity = static_cast<uint32_t>(val);
+		if (upcast(MilitarysiteSettings, ms, cs->get_settings())) {
+			assert(ms->max_capacity >= capacity);
+			ms->desired_capacity = capacity;
+		} else if (upcast(TrainingsiteSettings, ts, cs->get_settings())) {
+			assert(ts->max_capacity >= capacity);
+			ts->desired_capacity = capacity;
+		}
+	} else if (upcast(Building, building, mo)) {
 		if (building->get_owner() == game.get_player(sender()) &&
 		    building->soldier_control() != nullptr) {
 			SoldierControl* soldier_control = building->mutable_soldier_control();
@@ -1826,10 +1889,10 @@ void CmdMessageSetStatusArchived::serialize(StreamWrite& ser) {
 /*** struct Cmd_SetStockPolicy ***/
 CmdSetStockPolicy::CmdSetStockPolicy(uint32_t time,
                                      PlayerNumber p,
-                                     Warehouse& wh,
+                                     Building& wh,
                                      bool isworker,
                                      DescriptionIndex ware,
-                                     Warehouse::StockPolicy policy)
+                                     StockPolicy policy)
    : PlayerCommand(time, p) {
 	warehouse_ = wh.serial();
 	isworker_ = isworker;
@@ -1844,7 +1907,16 @@ CmdSetStockPolicy::CmdSetStockPolicy()
 void CmdSetStockPolicy::execute(Game& game) {
 	// Sanitize data that could have come from the network
 	if (Player* plr = game.get_player(sender())) {
-		if (upcast(Warehouse, warehouse, game.objects().get_object(warehouse_))) {
+		MapObject* mo = game.objects().get_object(warehouse_);
+		if (upcast(ConstructionSite, cs, mo)) {
+			if (upcast(WarehouseSettings, s, cs->get_settings())) {
+				if (isworker_) {
+					s->worker_preferences[ware_] = policy_;
+				} else {
+					s->ware_preferences[ware_] = policy_;
+				}
+			}
+		} else if (upcast(Warehouse, warehouse, mo)) {
 			if (warehouse->get_owner() != plr) {
 				log("Cmd_SetStockPolicy: sender %u, but warehouse owner %u\n", sender(),
 				    warehouse->owner().player_number());
@@ -1872,7 +1944,7 @@ CmdSetStockPolicy::CmdSetStockPolicy(StreamRead& des) : PlayerCommand(0, des.uns
 	warehouse_ = des.unsigned_32();
 	isworker_ = des.unsigned_8();
 	ware_ = DescriptionIndex(des.unsigned_8());
-	policy_ = static_cast<Warehouse::StockPolicy>(des.unsigned_8());
+	policy_ = static_cast<StockPolicy>(des.unsigned_8());
 }
 
 void CmdSetStockPolicy::serialize(StreamWrite& ser) {
@@ -1894,7 +1966,7 @@ void CmdSetStockPolicy::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoad
 			warehouse_ = fr.unsigned_32();
 			isworker_ = fr.unsigned_8();
 			ware_ = DescriptionIndex(fr.unsigned_8());
-			policy_ = static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
+			policy_ = static_cast<StockPolicy>(fr.unsigned_8());
 		} else {
 			throw UnhandledVersionError(
 			   "CmdSetStockPolicy", packet_version, kCurrentPacketVersionCmdSetStockPolicy);
@@ -1982,4 +2054,5 @@ void CmdProposeTrade::write(FileWrite& /* fw */,
 	// TODO(sirver,trading): Implement this.
 	NEVER_HERE();
 }
+
 }  // namespace Widelands

@@ -24,6 +24,7 @@
 #include <boost/format.hpp>
 
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 
@@ -37,7 +38,11 @@ ProgressBar::ProgressBar(Panel* const parent,
                          int32_t const w,
                          int32_t const h,
                          uint32_t const orientation)
-   : Panel(parent, x, y, w, h), orientation_(orientation), state_(0), total_(100) {
+   : Panel(parent, x, y, w, h),
+     orientation_(orientation),
+     state_(0),
+     total_(100),
+     style_(g_gr->styles().progressbar_style(UI::PanelStyle::kWui)) {
 }
 
 /**
@@ -66,9 +71,9 @@ void ProgressBar::draw(RenderTarget& dst) {
 	assert(0 <= fraction);
 	assert(fraction <= 1);
 
-	const RGBColor color = fraction <= 0.33f ?
-	                          RGBColor(255, 0, 0) :
-	                          fraction <= 0.67f ? RGBColor(255, 255, 0) : RGBColor(0, 255, 0);
+	const RGBColor& color = fraction <= 0.33f ?
+	                           style_.low_color() :
+	                           fraction <= 0.67f ? style_.medium_color() : style_.high_color();
 
 	// Draw the actual bar
 	if (orientation_ == Horizontal) {
@@ -85,11 +90,8 @@ void ProgressBar::draw(RenderTarget& dst) {
 	}
 
 	// Print the state in percent without decimal points.
-	const std::string progress_text = (boost::format("<font color=%s>%u%%</font>") %
-	                                   UI_FONT_CLR_BRIGHT.hex_value() % floorf(fraction * 100.f))
-	                                     .str();
-	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh->render(as_uifont(progress_text));
+	std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(as_richtext_paragraph(
+	   (boost::format("%u%%") % floorf(fraction * 100.f)).str(), style_.font()));
 	Vector2i pos(get_w() / 2, get_h() / 2);
 	UI::center_vertically(rendered_text->height(), &pos);
 	rendered_text->draw(dst, pos, UI::Align::kCenter);

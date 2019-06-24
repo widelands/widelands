@@ -26,7 +26,6 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
-#include "graphic/text_constants.h"
 #include "network/crypto.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
@@ -56,15 +55,21 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
      butw_(get_w() * 36 / 125),
      buth_(get_h() * 19 / 400),
      lisw_(get_w() * 623 / 1000),
-     fs_(fs_small()),
      prev_clientlist_len_(1000),
      new_client_fx_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_freshmen")),
 
      // Text labels
-     title(this, get_w() / 2, get_h() / 20, _("Metaserver Lobby"), UI::Align::kCenter),
-     clients_(this, get_w() * 4 / 125, get_h() * 15 / 100, _("Clients online:")),
-     opengames_(this, get_w() * 17 / 25, get_h() * 15 / 100, _("Open Games:")),
-     servername_(this, get_w() * 17 / 25, get_h() * 63 / 100, _("Name of your server:")),
+     title(this,
+           get_w() / 2,
+           get_h() / 20,
+           0,
+           0,
+           _("Metaserver Lobby"),
+           UI::Align::kCenter,
+           g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+     clients_(this, get_w() * 4 / 125, get_h() * 15 / 100, 0, 0, _("Clients online:")),
+     opengames_(this, get_w() * 17 / 25, get_h() * 15 / 100, 0, 0, _("Open Games:")),
+     servername_(this, get_w() * 17 / 25, get_h() * 63 / 100, 0, 0, _("Name of your server:")),
 
      // Buttons
      joingame_(this,
@@ -93,8 +98,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
            _("Leave Lobby")),
 
      // Edit boxes
-     edit_servername_(
-        this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, buth_, 2, UI::PanelStyle::kFsMenu, fs_),
+     edit_servername_(this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, UI::PanelStyle::kFsMenu),
 
      // List
      clientsonline_list_(
@@ -126,30 +130,35 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	// Set the texts and style of UI elements
 	Section& s = g_options.pull_section("global");  //  for playername
 
-	title.set_fontsize(fs_big());
-	opengames_.set_fontsize(fs_);
-	clients_.set_fontsize(fs_);
-	servername_.set_fontsize(fs_);
+	title.set_font_scale(scale_factor());
+
+	opengames_.set_font_scale(scale_factor());
+	clients_.set_font_scale(scale_factor());
+	servername_.set_font_scale(scale_factor());
+
 	std::string server = s.get_string("servername", "");
+	edit_servername_.set_font_scale(scale_factor());
 	edit_servername_.set_text(server);
 	edit_servername_.changed.connect(
 	   boost::bind(&FullscreenMenuInternetLobby::change_servername, this));
 
-	// prepare the lists
-	std::string t_tip =
-	   (boost::format("%s%s%s%s%s%s%s%s%s%s") %
-	    "<rt padding=2><p align=center spacing=3><font bold=yes underline=yes>" % _("User Status") %
-	    "</font></p>" % "<p valign=bottom><img src=images/wui/overlays/roadb_green.png> " %
-	    _("Administrator") % "<br><img src=images/wui/overlays/roadb_yellow.png> " %
-	    _("Registered") % "<br><img src=images/wui/overlays/roadb_red.png> " % _("Unregistered") %
-	    "</p></rt>")
+	// Prepare the lists
+	const std::string t_tip =
+	   (boost::format("<rt padding=2><p align=center spacing=3>%s</p>"
+	                  "<p valign=bottom><img src=images/wui/overlays/roadb_green.png> %s"
+	                  "<br><img src=images/wui/overlays/roadb_yellow.png> %s"
+	                  "<br><img src=images/wui/overlays/roadb_red.png> %s</p></rt>") %
+	    g_gr->styles().font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("User Status")) %
+	    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Administrator")) %
+	    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Registered")) %
+	    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Unregistered")))
 	      .str();
 	clientsonline_list_.add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */
 	clientsonline_list_.add_column((lisw_ - 22) * 3 / 8, pgettext("player", "Name"));
 	clientsonline_list_.add_column((lisw_ - 22) * 2 / 8, _("Version"));
 	clientsonline_list_.add_column(
-	   0, _("Game"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
+	   (lisw_ - 22) * 3 / 8, _("Game"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	clientsonline_list_.set_column_compare(
 	   0, boost::bind(&FullscreenMenuInternetLobby::compare_clienttype, this, _1, _2));
 	clientsonline_list_.double_clicked.connect(
@@ -292,11 +301,12 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 				break;
 			case kClientSuperuser:
 				pic = g_gr->images().get("images/wui/overlays/roadb_green.png");
-				er.set_color(RGBColor(0, 255, 0));
+				er.set_font_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupSuperuser));
 				er.set_picture(0, pic);
 				break;
 			case kClientIRC:
 				// No icon for IRC users
+				er.set_font_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupIrcClient));
 				continue;
 			default:
 				continue;
@@ -372,8 +382,7 @@ void FullscreenMenuInternetLobby::change_servername() {
 				edit_servername_.set_tooltip(
 				   (boost::format(
 				       _("The game %s is already running. Please choose a different name.")) %
-				    (boost::format("%s%s%s%s%s") % "<font bold=1 color=" %
-				     UI_FONT_CLR_WARNING.hex_value() % ">" % game.name % "</font>"))
+				    g_gr->styles().font_style(UI::FontStyle::kWarning).as_font_tag(game.name))
 				      .str());
 			}
 		}
@@ -435,6 +444,9 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 				change_servername();
 				return;
 			}
+		}
+		if (games->empty() && servername_ui.empty()) {
+			servername_ui = _("unnamed");
 		}
 	}
 

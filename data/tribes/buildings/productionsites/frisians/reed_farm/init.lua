@@ -47,6 +47,15 @@ tribes:new_productionsite_type {
       "reed"
    },
 
+   indicate_workarea_overlaps = {
+      frisians_clay_pit = false,
+      frisians_berry_farm = false,
+      frisians_reed_farm = false,
+      frisians_farm = false,
+      frisians_foresters_house = false,
+      frisians_beekeepers_house = true,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -61,16 +70,16 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
          descname = _"planting reed",
          actions = {
-            "sleep=18000",
-            "callworker=plantreed"
+            "callworker=plantreed",
+            "sleep=18000"
          }
       },
       harvest_reed = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
          descname = _"harvesting reed",
          actions = {
-            "sleep=5000",
-            "callworker=harvestreed"
+            "callworker=harvestreed",
+            "sleep=5000"
          }
       },
    },

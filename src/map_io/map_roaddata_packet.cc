@@ -44,7 +44,8 @@ constexpr uint16_t kCurrentPacketVersion = 4;
 void MapRoaddataPacket::read(FileSystem& fs,
                              EditorGameBase& egbase,
                              bool const skip,
-                             MapObjectLoader& mol) {
+                             MapObjectLoader& mol,
+                             const TribesLegacyLookupTable& tribes_lookup_table) {
 	if (skip)
 		return;
 
@@ -136,7 +137,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 						if (fr.unsigned_8()) {
 							(carrier_request =
 							    new Request(road, 0, Road::request_carrier_callback, wwWORKER))
-							   ->read(fr, game, mol);
+							   ->read(fr, game, mol, tribes_lookup_table);
 						} else {
 							carrier_request = nullptr;
 						}

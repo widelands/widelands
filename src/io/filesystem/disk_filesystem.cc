@@ -76,7 +76,7 @@ bool RealFSImpl::is_writable() const {
 	return true;
 }
 
-std::set<std::string> RealFSImpl::list_directory(const std::string& path) {
+FilenameSet RealFSImpl::list_directory(const std::string& path) const {
 #ifdef _WIN32
 	std::string buf;
 	struct _finddata_t c_file;
@@ -152,7 +152,7 @@ std::set<std::string> RealFSImpl::list_directory(const std::string& path) {
  * \e can't exist then)
  */
 // TODO(unknown): Can this be rewritten to just using exceptions? Should it?
-bool RealFSImpl::file_exists(const std::string& path) {
+bool RealFSImpl::file_exists(const std::string& path) const {
 	return FileSystemPath(canonicalize_name(path)).exists_;
 }
 

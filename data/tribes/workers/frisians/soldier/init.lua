@@ -347,10 +347,10 @@ animations = {
       fps = 10
    },
 }
-add_walking_animations (animations, "walk", dirname, "rookie/walk", {7, 24}, 15)
-add_walking_animations (animations, "health_walk", dirname, "helm/walk", {7, 25}, 15)
-add_walking_animations (animations, "attack_walk", dirname, "sword/walk", {8, 24}, 15)
-add_walking_animations (animations, "hero_walk", dirname, "hero/walk", {8, 25}, 15)
+add_directional_animation(animations, "walk", dirname .. "rookie", "walk", {7, 24}, 15)
+add_directional_animation(animations, "health_walk", dirname .. "helm", "walk", {7, 25}, 15)
+add_directional_animation(animations, "attack_walk", dirname .. "sword", "walk", {8, 24}, 15)
+add_directional_animation(animations, "hero_walk", dirname .. "hero", "walk", {8, 25}, 15)
 
 -- convenience definitions so we don´t have to repeat this table for every single entry below
 fri_health = {

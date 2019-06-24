@@ -57,6 +57,15 @@ tribes:new_productionsite_type {
       "barley"
    },
 
+   indicate_workarea_overlaps = {
+      frisians_clay_pit = false,
+      frisians_berry_farm = false,
+      frisians_reed_farm = false,
+      frisians_farm = false,
+      frisians_foresters_house = false,
+      frisians_beekeepers_house = true,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -71,17 +80,17 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
          descname = _"planting barley",
          actions = {
-            "sleep=18000",
-            "callworker=plant"
+            "callworker=plant",
+            "sleep=18000"
          }
       },
       harvest_barley = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
          descname = _"harvesting barley",
          actions = {
-            "sleep=8000",
             "callworker=harvest",
             "animate=working 40000",
+            "sleep=8000",
             "produce=barley" --produces 2 barley per field
          }
       },

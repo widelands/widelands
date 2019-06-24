@@ -180,6 +180,8 @@ public:
 	             uint8_t priority = kFxPriorityAlwaysPlay,
 	             int32_t stereo_position = kStereoCenter,
 	             int distance = 0);
+	// Trigger loading of the sound files for the given effect.
+	void load_fx(SoundType type, FxId id);
 	void remove_fx_set(SoundType type);
 
 	void register_songs(const std::string& dir, const std::string& basename);

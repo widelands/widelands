@@ -29,18 +29,24 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
 
 namespace {
-
-int base_height(int button_dimension) {
-	return std::max(
-	   button_dimension,
-	   UI::g_fh->render(as_uifont(UI::g_fh->fontset()->representative_character()))->height() + 2);
+int base_height(int button_dimension, UI::PanelStyle style) {
+	int result =
+	   std::max(button_dimension, text_height(g_gr->styles().table_style(style).enabled()) + 2);
+	return result;
 }
 
+/*
+int BaseDropdown::base_height(int button_dimension) const {
+   return std::max(button_dimension,
+text_height(g_gr->styles().table_style(UI::PanelStyle::kWui).enabled()) + 2);
+}
+*/
 }  // namespace
 
 namespace UI {
@@ -61,13 +67,14 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                y,
                type == DropdownType::kPictorial ? button_dimension : w,
                // Height only to fit the button, so we can use this in Box layout.
-               base_height(button_dimension)),
+               base_height(button_dimension, style)),
      id_(next_id_++),
      max_list_height_(h - 2 * get_h()),
      list_width_(w),
      list_offset_x_(0),
      list_offset_y_(0),
      button_dimension_(button_dimension),
+     base_height_(base_height(button_dimension, style)),
      mouse_tolerance_(50),
      button_box_(this, 0, 0, UI::Box::Horizontal, w, h),
      push_button_(type == DropdownType::kTextual ?
@@ -154,16 +161,16 @@ BaseDropdown::~BaseDropdown() {
 }
 
 void BaseDropdown::set_height(int height) {
-	max_list_height_ = height - base_height(button_dimension_);
+	max_list_height_ = height - base_height_;
 	layout();
 }
 
 void BaseDropdown::set_max_items(int items) {
-	set_height(list_->get_lineheight() * items + base_height(button_dimension_));
+	set_height(list_->get_lineheight() * items + base_height_);
 }
 
 void BaseDropdown::layout() {
-	const int base_h = base_height(button_dimension_);
+	const int base_h = base_height_;
 	const int w = type_ == DropdownType::kPictorial ? button_dimension_ : get_w();
 	button_box_.set_size(w, base_h);
 	display_button_.set_desired_size(
