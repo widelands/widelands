@@ -299,6 +299,15 @@ static const std::string IGPCMD_PONG = "PONG";
 static const std::string IGPCMD_CHAT = "CHAT";
 
 /**
+ * Sent by the client to issue a superuser command.
+ *
+ * The client sends this message to the metaserver with the following payload:
+ * \li string:    the command
+ * \li string:    arbitrary parameters.
+ */
+static const std::string IGPCMD_CMD = "CMD";
+
+/**
  * Sent by the metaserver to inform the client, that the list of games was changed. No payload is
  * sent,
  * as e.g. clients in a game are not really interested about other games and we want to keep traffic

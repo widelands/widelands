@@ -98,18 +98,22 @@ constexpr uint16_t kCurrentPacketVersion = 6;
  * might have been initialized. We have to kill them and replace
  * them through the data in the file
  */
-void Request::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
+void Request::read(FileRead& fr,
+                   Game& game,
+                   MapObjectLoader& mol,
+                   const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			const TribeDescr& tribe = target_.owner().tribe();
 			char const* const type_name = fr.c_string();
-			DescriptionIndex const wai = tribe.ware_index(type_name);
+			DescriptionIndex const wai = tribe.ware_index(tribes_lookup_table.lookup_ware(type_name));
 			if (tribe.has_ware(wai)) {
 				type_ = wwWARE;
 				index_ = wai;
 			} else {
-				DescriptionIndex const woi = tribe.worker_index(type_name);
+				DescriptionIndex const woi =
+				   tribe.worker_index(tribes_lookup_table.lookup_worker(type_name));
 				if (tribe.has_worker(woi)) {
 					type_ = wwWORKER;
 					index_ = woi;
@@ -262,7 +266,7 @@ int32_t Request::get_required_time() const {
 int32_t Request::get_priority(int32_t cost) const {
 	int MAX_IDLE_PRIORITY = 100;
 	bool is_construction_site = false;
-	int32_t modifier = DEFAULT_PRIORITY;
+	int32_t modifier = kPriorityNormal;
 
 	if (target_building_) {
 		modifier = target_building_->get_priority(get_type(), get_index());

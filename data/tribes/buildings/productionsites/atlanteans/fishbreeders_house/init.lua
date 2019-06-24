@@ -42,9 +42,14 @@ tribes:new_productionsite_type {
          descname = _"breeding fish",
          actions = {
             "callworker=breed",
-            "sleep=24000"
+            "sleep=13500"
          }
       },
+   },
+
+   indicate_workarea_overlaps = {
+      atlanteans_fishers_house = true,
+      atlanteans_fishbreeders_house = false,
    },
 
    out_of_resource_notification = {

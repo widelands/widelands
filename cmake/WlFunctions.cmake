@@ -178,6 +178,12 @@ endfunction()
 
 # Common test target definition.
 function(wl_test NAME)
+
+  if (NOT OPTION_BUILD_TESTS)
+    return()
+  endif()
+
+
   _parse_common_args("${ARGN}")
 
   add_executable(${NAME} ${ARG_SRCS})

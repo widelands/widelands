@@ -46,7 +46,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
    : UI::Panel(parent, x, y, 0, 28),
      igb_(igb),
      building_(building),
-     queue_(queue),
+     queue_(&queue),
+     settings_(nullptr),
      priority_radiogroup_(nullptr),
      increase_max_fill_(nullptr),
      decrease_max_fill_(nullptr),
@@ -58,12 +59,58 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      total_height_(0),
      show_only_(show_only) {
 	if (type_ == Widelands::wwWARE) {
-		const Widelands::WareDescr& ware = *queue.owner().tribe().get_ware_descr(queue_.get_index());
+		const Widelands::WareDescr& ware = *queue.owner().tribe().get_ware_descr(queue_->get_index());
 		set_tooltip(ware.descname().c_str());
 		icon_ = ware.icon();
 	} else {
 		const Widelands::WorkerDescr& worker =
-		   *queue.owner().tribe().get_worker_descr(queue_.get_index());
+		   *queue.owner().tribe().get_worker_descr(queue_->get_index());
+		set_tooltip(worker.descname().c_str());
+		icon_ = worker.icon();
+	}
+
+	uint16_t ph = max_fill_indicator_->height();
+
+	uint32_t priority_button_height = show_only ? 0 : 3 * PriorityButtonSize;
+	uint32_t image_height =
+	   show_only ? kWareMenuPicHeight : std::max<int32_t>(kWareMenuPicHeight, ph);
+
+	total_height_ = std::max(priority_button_height, image_height) + 2 * Border;
+
+	max_size_changed();
+
+	set_thinks(true);
+}
+
+InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
+                                     int32_t const x,
+                                     int32_t const y,
+                                     InteractiveGameBase& igb,
+                                     Widelands::ConstructionSite& building,
+                                     Widelands::WareWorker ww,
+                                     Widelands::DescriptionIndex di,
+                                     bool show_only)
+   : UI::Panel(parent, x, y, 0, 28),
+     igb_(igb),
+     building_(building),
+     queue_(nullptr),
+     settings_(dynamic_cast<const Widelands::ProductionsiteSettings*>(building.get_settings())),
+     priority_radiogroup_(nullptr),
+     increase_max_fill_(nullptr),
+     decrease_max_fill_(nullptr),
+     index_(di),
+     type_(ww),
+     max_fill_indicator_(g_gr->images().get(pic_max_fill_indicator)),
+     total_height_(0),
+     show_only_(show_only) {
+	cache_size_ = check_max_size();
+	cache_max_fill_ = check_max_fill();
+	if (type_ == Widelands::wwWARE) {
+		const Widelands::WareDescr& ware = *building.owner().tribe().get_ware_descr(index_);
+		set_tooltip(ware.descname().c_str());
+		icon_ = ware.icon();
+	} else {
+		const Widelands::WorkerDescr& worker = *building.owner().tribe().get_worker_descr(index_);
 		set_tooltip(worker.descname().c_str());
 		icon_ = worker.icon();
 	}
@@ -85,6 +132,34 @@ InputQueueDisplay::~InputQueueDisplay() {
 	delete priority_radiogroup_;
 }
 
+uint32_t InputQueueDisplay::check_max_size() const {
+	if (queue_) {
+		return queue_->get_max_size();
+	}
+	assert(settings_);
+	for (const auto& pair :
+	     type_ == Widelands::wwWARE ? settings_->ware_queues : settings_->worker_queues) {
+		if (pair.first == index_) {
+			return pair.second.max_fill;
+		}
+	}
+	NEVER_HERE();
+}
+
+uint32_t InputQueueDisplay::check_max_fill() const {
+	if (queue_) {
+		return queue_->get_max_fill();
+	}
+	assert(settings_);
+	for (const auto& pair :
+	     type_ == Widelands::wwWARE ? settings_->ware_queues : settings_->worker_queues) {
+		if (pair.first == index_) {
+			return pair.second.desired_fill;
+		}
+	}
+	NEVER_HERE();
+}
+
 /**
  * Recalculate the panel's size based on the size of the queue.
  *
@@ -94,7 +169,7 @@ void InputQueueDisplay::max_size_changed() {
 	uint32_t pbs = show_only_ ? 0 : PriorityButtonSize;
 	uint32_t ctrl_b_size = show_only_ ? 0 : 2 * kWareMenuPicWidth;
 
-	cache_size_ = queue_.get_max_size();
+	cache_size_ = check_max_size();
 
 	update_priority_buttons();
 	update_max_fill_buttons();
@@ -111,12 +186,12 @@ void InputQueueDisplay::max_size_changed() {
  * Compare the current InputQueue state with the cached state; update if necessary.
  */
 void InputQueueDisplay::think() {
-	if (static_cast<uint32_t>(queue_.get_max_size()) != cache_size_)
+	if (static_cast<uint32_t>(check_max_size()) != cache_size_)
 		max_size_changed();
 
 	// TODO(sirver): It seems cache_max_fill_ is not really useful for anything.
-	if (static_cast<uint32_t>(queue_.get_max_fill()) != cache_max_fill_) {
-		cache_max_fill_ = queue_.get_max_fill();
+	if (static_cast<uint32_t>(check_max_fill()) != cache_max_fill_) {
+		cache_max_fill_ = check_max_fill();
 		compute_max_fill_buttons_enabled_state();
 	}
 }
@@ -128,11 +203,13 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 	if (!cache_size_)
 		return;
 
-	cache_max_fill_ = queue_.get_max_fill();
+	cache_max_fill_ = check_max_fill();
 
-	uint32_t nr_inputs_to_draw = std::min(queue_.get_filled(), cache_size_);
+	uint32_t nr_inputs_to_draw =
+	   queue_ ? std::min(queue_->get_filled(), cache_size_) : cache_max_fill_;
 	uint32_t nr_missing_to_draw =
-	   std::min(queue_.get_missing(), cache_max_fill_) + cache_size_ - cache_max_fill_;
+	   queue_ ? std::min(queue_->get_missing(), cache_max_fill_) + cache_size_ - cache_max_fill_ :
+	            cache_size_ - cache_max_fill_;
 	if (nr_inputs_to_draw > cache_max_fill_) {
 		nr_missing_to_draw -= nr_inputs_to_draw - cache_max_fill_;
 	}
@@ -161,8 +238,8 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 	if (!show_only_) {
 		uint16_t pw = max_fill_indicator_->width();
 		point.y = Border;
-		point.x = Border + CellWidth + CellSpacing +
-		          (queue_.get_max_fill() * (CellWidth + CellSpacing)) - CellSpacing / 2 - pw / 2;
+		point.x = Border + CellWidth + CellSpacing + (cache_max_fill_ * (CellWidth + CellSpacing)) -
+		          CellSpacing / 2 - pw / 2;
 		dst.blit(point, max_fill_indicator_);
 	}
 }
@@ -206,13 +283,13 @@ void InputQueueDisplay::update_priority_buttons() {
 
 	int32_t priority = building_.get_priority(type_, index_, false);
 	switch (priority) {
-	case HIGH_PRIORITY:
+	case Widelands::kPriorityHigh:
 		priority_radiogroup_->set_state(0);
 		break;
-	case DEFAULT_PRIORITY:
+	case Widelands::kPriorityNormal:
 		priority_radiogroup_->set_state(1);
 		break;
-	case LOW_PRIORITY:
+	case Widelands::kPriorityLow:
 		priority_radiogroup_->set_state(2);
 		break;
 	default:
@@ -314,13 +391,13 @@ void InputQueueDisplay::radiogroup_changed(int32_t state) {
 
 	switch (state) {
 	case 0:
-		priority = HIGH_PRIORITY;
+		priority = Widelands::kPriorityHigh;
 		break;
 	case 1:
-		priority = DEFAULT_PRIORITY;
+		priority = Widelands::kPriorityNormal;
 		break;
 	case 2:
-		priority = LOW_PRIORITY;
+		priority = Widelands::kPriorityLow;
 		break;
 	default:
 		return;

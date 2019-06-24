@@ -33,16 +33,24 @@ public:
 	// Implements OneWorldLegacyLookupTable.
 	std::string lookup_resource(const std::string& resource) const override;
 	std::string lookup_terrain(const std::string& terrain) const override;
-	std::string lookup_critter(const std::string& critter) const override;
+	std::string lookup_critter(const std::string& critter, uint16_t packet_version) const override;
 	std::string lookup_immovable(const std::string& immovable) const override;
 
 private:
+	// Old name, <packet version when it got changed, new name>
+	const std::map<std::string, std::map<uint16_t, std::string>> critters_;
 	const std::map<std::string, std::string> immovables_;
 	const std::map<std::string, std::string> resources_;
 	const std::map<std::string, std::string> terrains_;
 };
 
 PostOneWorldLegacyLookupTable::PostOneWorldLegacyLookupTable() :
+critters_
+{
+	// We need to bump the packet version in Critter every time we rename a critter.
+	// Also, don't forget to edit the OneWorldLegacyLookupTable! You can look up which world had which units in Build 18.
+	{"elk", {{2, "moose"}}},
+},
 immovables_
 {
 	{"blackland_stones1", "blackland_rocks1"},
@@ -113,8 +121,17 @@ std::string PostOneWorldLegacyLookupTable::lookup_terrain(const std::string& ter
 	return i->second;
 }
 
-std::string PostOneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
-	return critter;
+std::string PostOneWorldLegacyLookupTable::lookup_critter(const std::string& critter,
+                                                          uint16_t packet_version) const {
+	std::string result = critter;
+	if (critters_.count(critter) == 1) {
+		for (const auto& candidate : critters_.at(result)) {
+			if (candidate.first >= packet_version) {
+				result = candidate.second;
+			}
+		}
+	}
+	return result;
 }
 
 std::string PostOneWorldLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
@@ -132,7 +149,7 @@ public:
 	// Implements OneWorldLegacyLookupTable.
 	std::string lookup_resource(const std::string& resource) const override;
 	std::string lookup_terrain(const std::string& terrain) const override;
-	std::string lookup_critter(const std::string& critter) const override;
+	std::string lookup_critter(const std::string& critter, uint16_t packet_version) const override;
 	std::string lookup_immovable(const std::string& immovable) const override;
 
 private:
@@ -205,6 +222,7 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
         std::make_pair("greenland",
                        std::map<std::string, std::string>{
                           {"deer", "stag"},
+                          {"elk", "moose"},
                        }),
         std::make_pair("blackland",
                        std::map<std::string, std::string>{
@@ -213,6 +231,7 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
         std::make_pair("winterland",
                        std::map<std::string, std::string>{
                           {"deer", "stag"},
+                          {"elk", "moose"},
                        }),
         std::make_pair("desert",
                        std::map<std::string, std::string>{
@@ -418,7 +437,7 @@ std::string OneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain
 	return terrain;
 }
 
-std::string OneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
+std::string OneWorldLegacyLookupTable::lookup_critter(const std::string& critter, uint16_t) const {
 	const std::map<std::string, std::string>& world_critters = critters_.at(old_world_name_);
 	const auto& i = world_critters.find(critter);
 	if (i != world_critters.end()) {

@@ -128,6 +128,20 @@ public:
 		return out_of_resource_productivity_threshold_;
 	}
 
+	bool highlight_overlapping_workarea_for(const std::string& n, bool* positive) const {
+		const auto it = highlight_overlapping_workarea_for_.find(n);
+		if (it == highlight_overlapping_workarea_for_.end()) {
+			return false;
+		} else {
+			*positive = it->second;
+			return true;
+		}
+	}
+
+	const std::map<std::string, bool>& get_highlight_overlapping_workarea_for() const {
+		return highlight_overlapping_workarea_for_;
+	}
+
 private:
 	BillOfMaterials working_positions_;
 	BillOfMaterials input_wares_;
@@ -140,6 +154,7 @@ private:
 	std::string out_of_resource_message_;
 	std::string resource_not_needed_message_;
 	int out_of_resource_productivity_threshold_;
+	std::map<std::string, bool> highlight_overlapping_workarea_for_;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteDescr);
 };
@@ -240,6 +255,8 @@ public:
 	void unnotify_player();
 
 	void set_default_anim(std::string);
+
+	const BuildingSettings* create_building_settings() const override;
 
 protected:
 	void update_statistics_string(std::string* statistics) override;
