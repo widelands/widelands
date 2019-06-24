@@ -36,7 +36,7 @@ namespace Widelands {
 // The command types are used by the QueueCmdFactory, for network serialization
 // and for savegame compatibility.
 // DO NOT change the order
-// TODO(GunChleoc): Pretty this up after Build 21 when we break savegame compatibility.
+// TODO(GunChleoc): Whenever we break savegame compatibility, clean this up.
 enum class QueueCommandTypes : uint8_t {
 
 	/* ID zero is reserved and must never be used */

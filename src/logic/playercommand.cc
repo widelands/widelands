@@ -74,42 +74,6 @@ BillOfMaterials deserialize_bill_of_materials(StreamRead* des) {
 
 }  // namespace
 
-// TODO(GunChleoc): Replay loading compatibility. Completely get rid of this after Build 21
-enum class QueueCommandCompatibilityTypes {
-	PLCMD_UNUSED = 0,
-	PLCMD_BULLDOZE = 1,
-	PLCMD_BUILD = 2,
-	PLCMD_BUILDFLAG = 3,
-	PLCMD_BUILDROAD = 4,
-	PLCMD_FLAGACTION = 5,
-	PLCMD_STARTSTOPBUILDING = 6,
-	PLCMD_ENHANCEBUILDING = 7,
-	PLCMD_CHANGETRAININGOPTIONS = 8,
-	PLCMD_DROPSOLDIER = 9,
-	PLCMD_CHANGESOLDIERCAPACITY = 10,
-	PLCMD_ENEMYFLAGACTION = 11,
-	PLCMD_SETWAREPRIORITY = 12,
-	PLCMD_SETWARETARGETQUANTITY = 13,
-	PLCMD_RESETWARETARGETQUANTITY = 14,
-	PLCMD_SETWORKERTARGETQUANTITY = 15,
-	PLCMD_RESETWORKERTARGETQUANTITY = 16,
-	// Used to be PLCMD_CHANGEMILITARYCONFIG
-	PLCMD_MESSAGESETSTATUSREAD = 18,
-	PLCMD_MESSAGESETSTATUSARCHIVED = 19,
-	PLCMD_SETSTOCKPOLICY = 20,
-	PLCMD_SETINPUTMAXFILL = 21,
-	PLCMD_DISMANTLEBUILDING = 22,
-	PLCMD_EVICTWORKER = 23,
-	PLCMD_MILITARYSITESETSOLDIERPREFERENCE = 24,
-	PLCMD_SHIP_EXPEDITION = 25,
-	PLCMD_SHIP_SCOUT = 26,
-	PLCMD_SHIP_EXPLORE = 27,
-	PLCMD_SHIP_CONSTRUCT = 28,
-	PLCMD_SHIP_SINK = 29,
-	PLCMD_SHIP_CANCELEXPEDITION = 30,
-	PLCMD_PROPOSE_TRADE = 31,
-};
-
 /*** class PlayerCommand ***/
 
 PlayerCommand::PlayerCommand(const uint32_t time, const PlayerNumber s)
@@ -120,139 +84,74 @@ void PlayerCommand::write_id(StreamWrite& ser) {
 	ser.unsigned_8(static_cast<uint8_t>(id()));
 }
 
-PlayerCommand* PlayerCommand::deserialize(StreamRead& des, bool use_compatibility_mode) {
-	if (use_compatibility_mode) {
-		switch (static_cast<QueueCommandCompatibilityTypes>(des.unsigned_8())) {
-		case QueueCommandCompatibilityTypes::PLCMD_BULLDOZE:
-			return new CmdBulldoze(des);
-		case QueueCommandCompatibilityTypes::PLCMD_BUILD:
-			return new CmdBuild(des);
-		case QueueCommandCompatibilityTypes::PLCMD_BUILDFLAG:
-			return new CmdBuildFlag(des);
-		case QueueCommandCompatibilityTypes::PLCMD_BUILDROAD:
-			return new CmdBuildRoad(des);
-		case QueueCommandCompatibilityTypes::PLCMD_FLAGACTION:
-			return new CmdFlagAction(des);
-		case QueueCommandCompatibilityTypes::PLCMD_STARTSTOPBUILDING:
-			return new CmdStartStopBuilding(des);
-		case QueueCommandCompatibilityTypes::PLCMD_SHIP_EXPEDITION:
-			return new CmdStartOrCancelExpedition(des);
-		case QueueCommandCompatibilityTypes::PLCMD_SHIP_SCOUT:
-			return new CmdShipScoutDirection(des);
-		case QueueCommandCompatibilityTypes::PLCMD_SHIP_EXPLORE:
-			return new CmdShipExploreIsland(des);
-		case QueueCommandCompatibilityTypes::PLCMD_SHIP_CONSTRUCT:
-			return new CmdShipConstructPort(des);
-		case QueueCommandCompatibilityTypes::PLCMD_SHIP_SINK:
-			return new CmdShipSink(des);
-		case QueueCommandCompatibilityTypes::PLCMD_SHIP_CANCELEXPEDITION:
-			return new CmdShipCancelExpedition(des);
-		case QueueCommandCompatibilityTypes::PLCMD_ENHANCEBUILDING:
-			return new CmdEnhanceBuilding(des);
-		case QueueCommandCompatibilityTypes::PLCMD_CHANGETRAININGOPTIONS:
-			return new CmdChangeTrainingOptions(des);
-		case QueueCommandCompatibilityTypes::PLCMD_DROPSOLDIER:
-			return new CmdDropSoldier(des);
-		case QueueCommandCompatibilityTypes::PLCMD_CHANGESOLDIERCAPACITY:
-			return new CmdChangeSoldierCapacity(des);
-		case QueueCommandCompatibilityTypes::PLCMD_ENEMYFLAGACTION:
-			return new CmdEnemyFlagAction(des);
-		case QueueCommandCompatibilityTypes::PLCMD_SETWAREPRIORITY:
-			return new CmdSetWarePriority(des);
-		case QueueCommandCompatibilityTypes::PLCMD_SETWARETARGETQUANTITY:
-			return new CmdSetWareTargetQuantity(des);
-		case QueueCommandCompatibilityTypes::PLCMD_RESETWARETARGETQUANTITY:
-			return new CmdResetWareTargetQuantity(des);
-		case QueueCommandCompatibilityTypes::PLCMD_SETWORKERTARGETQUANTITY:
-			return new CmdSetWorkerTargetQuantity(des);
-		case QueueCommandCompatibilityTypes::PLCMD_RESETWORKERTARGETQUANTITY:
-			return new CmdResetWorkerTargetQuantity(des);
-		case QueueCommandCompatibilityTypes::PLCMD_MESSAGESETSTATUSREAD:
-			return new CmdMessageSetStatusRead(des);
-		case QueueCommandCompatibilityTypes::PLCMD_MESSAGESETSTATUSARCHIVED:
-			return new CmdMessageSetStatusArchived(des);
-		case QueueCommandCompatibilityTypes::PLCMD_SETSTOCKPOLICY:
-			return new CmdSetStockPolicy(des);
-		case QueueCommandCompatibilityTypes::PLCMD_SETINPUTMAXFILL:
-			return new CmdSetInputMaxFill(des);
-		case QueueCommandCompatibilityTypes::PLCMD_DISMANTLEBUILDING:
-			return new CmdDismantleBuilding(des);
-		case QueueCommandCompatibilityTypes::PLCMD_EVICTWORKER:
-			return new CmdEvictWorker(des);
-		case QueueCommandCompatibilityTypes::PLCMD_MILITARYSITESETSOLDIERPREFERENCE:
-			return new CmdMilitarySiteSetSoldierPreference(des);
-		default:
-			throw wexception("PlayerCommand::deserialize(): Invalid compatibility command id encountered");
-		}
-	} else {
-		switch (static_cast<QueueCommandTypes>(des.unsigned_8())) {
-		case QueueCommandTypes::kBulldoze:
-			return new CmdBulldoze(des);
-		case QueueCommandTypes::kBuild:
-			return new CmdBuild(des);
-		case QueueCommandTypes::kBuildFlag:
-			return new CmdBuildFlag(des);
-		case QueueCommandTypes::kBuildRoad:
-			return new CmdBuildRoad(des);
-		case QueueCommandTypes::kFlagAction:
-			return new CmdFlagAction(des);
-		case QueueCommandTypes::kStartStopBuilding:
-			return new CmdStartStopBuilding(des);
-		case QueueCommandTypes::kEnhanceBuilding:
-			return new CmdEnhanceBuilding(des);
+PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
+	switch (static_cast<QueueCommandTypes>(des.unsigned_8())) {
+	case QueueCommandTypes::kBulldoze:
+		return new CmdBulldoze(des);
+	case QueueCommandTypes::kBuild:
+		return new CmdBuild(des);
+	case QueueCommandTypes::kBuildFlag:
+		return new CmdBuildFlag(des);
+	case QueueCommandTypes::kBuildRoad:
+		return new CmdBuildRoad(des);
+	case QueueCommandTypes::kFlagAction:
+		return new CmdFlagAction(des);
+	case QueueCommandTypes::kStartStopBuilding:
+		return new CmdStartStopBuilding(des);
+	case QueueCommandTypes::kEnhanceBuilding:
+		return new CmdEnhanceBuilding(des);
 
-		case QueueCommandTypes::kChangeTrainingOptions:
-			return new CmdChangeTrainingOptions(des);
-		case QueueCommandTypes::kDropSoldier:
-			return new CmdDropSoldier(des);
-		case QueueCommandTypes::kChangeSoldierCapacity:
-			return new CmdChangeSoldierCapacity(des);
-		case QueueCommandTypes::kEnemyFlagAction:
-			return new CmdEnemyFlagAction(des);
+	case QueueCommandTypes::kChangeTrainingOptions:
+		return new CmdChangeTrainingOptions(des);
+	case QueueCommandTypes::kDropSoldier:
+		return new CmdDropSoldier(des);
+	case QueueCommandTypes::kChangeSoldierCapacity:
+		return new CmdChangeSoldierCapacity(des);
+	case QueueCommandTypes::kEnemyFlagAction:
+		return new CmdEnemyFlagAction(des);
 
-		case QueueCommandTypes::kSetWarePriority:
-			return new CmdSetWarePriority(des);
-		case QueueCommandTypes::kSetWareTargetQuantity:
-			return new CmdSetWareTargetQuantity(des);
-		case QueueCommandTypes::kResetWareTargetQuantity:
-			return new CmdResetWareTargetQuantity(des);
-		case QueueCommandTypes::kSetWorkerTargetQuantity:
-			return new CmdSetWorkerTargetQuantity(des);
-		case QueueCommandTypes::kResetWorkerTargetQuantity:
-			return new CmdResetWorkerTargetQuantity(des);
+	case QueueCommandTypes::kSetWarePriority:
+		return new CmdSetWarePriority(des);
+	case QueueCommandTypes::kSetWareTargetQuantity:
+		return new CmdSetWareTargetQuantity(des);
+	case QueueCommandTypes::kResetWareTargetQuantity:
+		return new CmdResetWareTargetQuantity(des);
+	case QueueCommandTypes::kSetWorkerTargetQuantity:
+		return new CmdSetWorkerTargetQuantity(des);
+	case QueueCommandTypes::kResetWorkerTargetQuantity:
+		return new CmdResetWorkerTargetQuantity(des);
 
-		case QueueCommandTypes::kMessageSetStatusRead:
-			return new CmdMessageSetStatusRead(des);
-		case QueueCommandTypes::kMessageSetStatusArchived:
-			return new CmdMessageSetStatusArchived(des);
+	case QueueCommandTypes::kMessageSetStatusRead:
+		return new CmdMessageSetStatusRead(des);
+	case QueueCommandTypes::kMessageSetStatusArchived:
+		return new CmdMessageSetStatusArchived(des);
 
-		case QueueCommandTypes::kSetStockPolicy:
-			return new CmdSetStockPolicy(des);
-		case QueueCommandTypes::kSetInputMaxFill:
-			return new CmdSetInputMaxFill(des);
-		case QueueCommandTypes::kDismantleBuilding:
-			return new CmdDismantleBuilding(des);
-		case QueueCommandTypes::kEvictWorker:
-			return new CmdEvictWorker(des);
-		case QueueCommandTypes::kMilitarysiteSetSoldierPreference:
-			return new CmdMilitarySiteSetSoldierPreference(des);
+	case QueueCommandTypes::kSetStockPolicy:
+		return new CmdSetStockPolicy(des);
+	case QueueCommandTypes::kSetInputMaxFill:
+		return new CmdSetInputMaxFill(des);
+	case QueueCommandTypes::kDismantleBuilding:
+		return new CmdDismantleBuilding(des);
+	case QueueCommandTypes::kEvictWorker:
+		return new CmdEvictWorker(des);
+	case QueueCommandTypes::kMilitarysiteSetSoldierPreference:
+		return new CmdMilitarySiteSetSoldierPreference(des);
 
-		case QueueCommandTypes::kStartOrCancelExpedition:
-			return new CmdStartOrCancelExpedition(des);
-		case QueueCommandTypes::kShipScoutDirection:
-			return new CmdShipScoutDirection(des);
-		case QueueCommandTypes::kShipExploreIsland:
-			return new CmdShipExploreIsland(des);
-		case QueueCommandTypes::kShipConstructPort:
-			return new CmdShipConstructPort(des);
-		case QueueCommandTypes::kShipSink:
-			return new CmdShipSink(des);
-		case QueueCommandTypes::kShipCancelExpedition:
-			return new CmdShipCancelExpedition(des);
+	case QueueCommandTypes::kStartOrCancelExpedition:
+		return new CmdStartOrCancelExpedition(des);
+	case QueueCommandTypes::kShipScoutDirection:
+		return new CmdShipScoutDirection(des);
+	case QueueCommandTypes::kShipExploreIsland:
+		return new CmdShipExploreIsland(des);
+	case QueueCommandTypes::kShipConstructPort:
+		return new CmdShipConstructPort(des);
+	case QueueCommandTypes::kShipSink:
+		return new CmdShipSink(des);
+	case QueueCommandTypes::kShipCancelExpedition:
+		return new CmdShipCancelExpedition(des);
 
-		default:
-			throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
-		}
+	default:
+		throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
 	}
 }
 

@@ -66,7 +66,7 @@ public:
 
 	// For networking and replays
 	virtual void serialize(StreamWrite&) = 0;
-	static Widelands::PlayerCommand* deserialize(StreamRead&, bool use_compatibility_mode);
+	static Widelands::PlayerCommand* deserialize(StreamRead&);
 
 	// Call these from child classes
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;

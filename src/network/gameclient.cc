@@ -870,7 +870,7 @@ void GameClient::handle_playercommand(RecvPacket& packet) {
 		throw DisconnectException("PLAYERCMD_WO_GAME");
 
 	int32_t const time = packet.signed_32();
-	Widelands::PlayerCommand& plcmd = *Widelands::PlayerCommand::deserialize(packet, false);
+	Widelands::PlayerCommand& plcmd = *Widelands::PlayerCommand::deserialize(packet);
 	plcmd.set_duetime(time);
 	d->game->enqueue_command(&plcmd);
 	d->time.receive(time);
