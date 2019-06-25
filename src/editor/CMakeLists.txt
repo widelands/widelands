@@ -65,6 +65,8 @@ wl_library(editor
     ui_menus/main_menu_save_map.h
     ui_menus/main_menu_save_map_make_directory.cc
     ui_menus/main_menu_save_map_make_directory.h
+    ui_menus/map_size_box.cc
+    ui_menus/map_size_box.h
     ui_menus/player_menu.cc
     ui_menus/player_menu.h
     ui_menus/tool_change_height_options_menu.cc
