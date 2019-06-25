@@ -46,7 +46,11 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),
      box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
-	 map_size_box_(box_, "new_map_menu", 4, parent.egbase().map().get_width(), parent.egbase().map().get_height()),
+     map_size_box_(box_,
+                   "new_map_menu",
+                   4,
+                   parent.egbase().map().get_width(),
+                   parent.egbase().map().get_height()),
      list_(&box_, 0, 0, box_width_, 330, UI::PanelStyle::kWui),
      // Buttons
      button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
@@ -102,9 +106,7 @@ void MainMenuNewMap::clicked_create_map() {
 	parent.cleanup_for_load();
 
 	map->create_empty_map(
-	   egbase.world(),
-	   map_size_box_.selected_width(),
-	   map_size_box_.selected_height(),
+	   egbase.world(), map_size_box_.selected_width(), map_size_box_.selected_height(),
 	   list_.get_selected(), _("No Name"),
 	   g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")));
 

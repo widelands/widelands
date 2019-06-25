@@ -442,6 +442,9 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 				return;
 			}
 		}
+		if (games->empty() && servername_ui.empty()) {
+			servername_ui = _("unnamed");
+		}
 	}
 
 	g_options.pull_section("global").set_string("servername", servername_ui);

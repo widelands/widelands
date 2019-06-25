@@ -73,16 +73,17 @@ Panel
 */
 const char LuaPanel::className[] = "Panel";
 const PropertyType<LuaPanel> LuaPanel::Properties[] = {
-   PROP_RO(LuaPanel, buttons), PROP_RO(LuaPanel, dropdowns),   PROP_RO(LuaPanel, tabs),       PROP_RO(LuaPanel, windows),
-   PROP_RW(LuaPanel, position_x), PROP_RW(LuaPanel, position_y), PROP_RW(LuaPanel, width),
-   PROP_RW(LuaPanel, height),     {nullptr, nullptr, nullptr},
+   PROP_RO(LuaPanel, buttons), PROP_RO(LuaPanel, dropdowns),  PROP_RO(LuaPanel, tabs),
+   PROP_RO(LuaPanel, windows), PROP_RW(LuaPanel, position_x), PROP_RW(LuaPanel, position_y),
+   PROP_RW(LuaPanel, width),   PROP_RW(LuaPanel, height),     {nullptr, nullptr, nullptr},
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
    METHOD(LuaPanel, get_descendant_position),
    {nullptr, nullptr},
 };
 
-// Look for all descendant panels of class P and add the corresponding Lua version to the currently active Lua table. Class P needs to be a NamedPanel.
+// Look for all descendant panels of class P and add the corresponding Lua version to the currently
+// active Lua table. Class P needs to be a NamedPanel.
 template <class P, class LuaP>
 static void put_all_visible_panels_into_table(lua_State* L, UI::Panel* g) {
 	if (g == nullptr) {
@@ -125,7 +126,6 @@ int LuaPanel::get_buttons(lua_State* L) {
 
 	return 1;
 }
-
 
 /* RST
    .. attribute:: dropdowns
@@ -342,7 +342,6 @@ int LuaButton::click(lua_State* /* L */) {
 	return 0;
 }
 
-
 /*
  * C Functions
  */
@@ -404,7 +403,10 @@ int LuaDropdown::open(lua_State* /* L */) {
 int LuaDropdown::highlight_item(lua_State* L) {
 	unsigned int desired_item = luaL_checkuint32(L, -1);
 	if (desired_item < 1 || desired_item > get()->size()) {
-		report_error(L, "Attempted to highlight item %d on dropdown '%s'. Avaliable range for this dropdown is 1-%d.", desired_item, get()->get_name().c_str(), get()->size());
+		report_error(L,
+		             "Attempted to highlight item %d on dropdown '%s'. Avaliable range for this "
+		             "dropdown is 1-%d.",
+		             desired_item, get()->get_name().c_str(), get()->size());
 	}
 	log("Highlighting item %d in dropdown '%s'\n", desired_item, get()->get_name().c_str());
 	// Open the dropdown

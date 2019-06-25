@@ -40,17 +40,21 @@ EditorToolResizeOptionsMenu::EditorToolResizeOptionsMenu(
    : EditorToolOptionsMenu(parent, registry, 260, 200, _("Resize"), resize_tool),
      resize_tool_(resize_tool),
      box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
-     map_size_box_(box_, "tool_resize_map", 4, parent.egbase().map().get_width(), parent.egbase().map().get_height()),
+     map_size_box_(box_,
+                   "tool_resize_map",
+                   4,
+                   parent.egbase().map().get_width(),
+                   parent.egbase().map().get_height()),
      text_area_(
-			   &box_,
-			   0,
-			   0,
-			   get_inner_w() - 2 * hmargin(),
-			   48,
-			   UI::PanelStyle::kWui,
-			   _("Select the new map size, then click the map to split it at the desired location."),
-			   UI::Align::kCenter,
-			   UI::MultilineTextarea::ScrollMode::kNoScrolling) {
+        &box_,
+        0,
+        0,
+        get_inner_w() - 2 * hmargin(),
+        48,
+        UI::PanelStyle::kWui,
+        _("Select the new map size, then click the map to split it at the desired location."),
+        UI::Align::kCenter,
+        UI::MultilineTextarea::ScrollMode::kNoScrolling) {
 
 	map_size_box_.set_selection_function([this] { update_dimensions(); });
 

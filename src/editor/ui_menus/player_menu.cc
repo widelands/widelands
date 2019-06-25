@@ -123,7 +123,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, EditorSetStartingP
    : EditorToolOptionsMenu(parent, registry, 0, 0, _("Player Options"), tool),
      box_(this, kMargin, kMargin, UI::Box::Vertical),
      no_of_players_(&box_,
-					"dropdown_map_players",
+                    "dropdown_map_players",
                     0,
                     0,
                     50,
@@ -131,7 +131,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, EditorSetStartingP
                     24,
                     _("Number of players"),
                     UI::DropdownType::kTextual,
-                    UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary) {
+                    UI::PanelStyle::kWui,
+                    UI::ButtonStyle::kWuiSecondary) {
 	box_.set_size(100, 100);  // Prevent assert failures
 	box_.add(&no_of_players_, UI::Box::Resizing::kFullSize);
 	box_.add_space(2 * kMargin);
@@ -155,7 +156,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, EditorSetStartingP
 	iterate_player_numbers(p, kMaxPlayers) {
 		const bool map_has_player = p <= nr_players;
 
-		no_of_players_.add(boost::lexical_cast<std::string>(static_cast<unsigned int>(p)), p, nullptr, p == nr_players);
+		no_of_players_.add(boost::lexical_cast<std::string>(static_cast<unsigned int>(p)), p, nullptr,
+		                   p == nr_players);
 		no_of_players_.selected.connect(
 		   boost::bind(&EditorPlayerMenu::no_of_players_clicked, boost::ref(*this)));
 
@@ -169,9 +171,10 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, EditorSetStartingP
 		plr_name->changed.connect(boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
 
 		// Tribe
-		UI::Dropdown<std::string>* plr_tribe =
-		   new UI::Dropdown<std::string>(row, (boost::format("dropdown_tribe%d") % static_cast<unsigned int>(p)).str(), 0, 0, 50, 16, plr_name->get_h(), _("Tribe"),
-		                                 UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
+		UI::Dropdown<std::string>* plr_tribe = new UI::Dropdown<std::string>(
+		   row, (boost::format("dropdown_tribe%d") % static_cast<unsigned int>(p)).str(), 0, 0, 50,
+		   16, plr_name->get_h(), _("Tribe"), UI::DropdownType::kPictorial, UI::PanelStyle::kWui,
+		   UI::ButtonStyle::kWuiSecondary);
 		{
 			i18n::Textdomain td("tribes");
 			for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {

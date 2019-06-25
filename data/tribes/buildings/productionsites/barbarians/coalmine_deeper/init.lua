@@ -47,6 +47,12 @@ tribes:new_productionsite_type {
       barbarians_miner_master = 1,
    },
 
+   indicate_workarea_overlaps = {
+      barbarians_coalmine = false,
+      barbarians_coalmine_deep = false,
+      barbarians_coalmine_deeper = false,
+   },
+
    inputs = {
       { name = "meal", amount = 6 }
    },
@@ -59,10 +65,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
-            "sleep=5000",
             "return=skipped unless economy needs coal",
             "consume=meal",
-            "sleep=32000",
+            "sleep=37000",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",

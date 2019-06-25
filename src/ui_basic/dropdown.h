@@ -57,14 +57,14 @@ protected:
 	/// \param x                  the x-position within 'parent'
 	/// \param y                  the y-position within 'parent'
 	/// \param list_w             the dropdown's width
-	/// \param max_list_items     the maximum number of items shown in the list before it starts using a scrollbar
-	/// \param button_dimension   the width of the push button in textual dropdowns. For pictorial
-	/// dropdowns, this is both the width and the height of the button.
+	/// \param max_list_items     the maximum number of items shown in the list before it starts
+	/// using a scrollbar \param button_dimension   the width of the push button in textual
+	/// dropdowns. For pictorial dropdowns, this is both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
 	/// \param style              the style used for buttons and background
 	BaseDropdown(Panel* parent,
-				 const std::string& name,
+	             const std::string& name,
 	             int32_t x,
 	             int32_t y,
 	             uint32_t list_w,
@@ -73,7 +73,7 @@ protected:
 	             const std::string& label,
 	             const DropdownType type,
 	             PanelStyle style,
-				 ButtonStyle button_style);
+	             ButtonStyle button_style);
 	~BaseDropdown() override;
 
 public:
@@ -128,13 +128,14 @@ public:
 	/// Set maximum available height in the UI
 	void set_height(int height);
 
-	/// Toggle the list on and off and position the mouse on the button so that the dropdown won't close on us.
-	/// If this is a menu and nothing was selected yet, select the first item for easier keyboard navigation.
+	/// Toggle the list on and off and position the mouse on the button so that the dropdown won't
+	/// close on us. If this is a menu and nothing was selected yet, select the first item for easier
+	/// keyboard navigation.
 	void toggle();
 
-	/// If 'open', show the list and position the mouse on the button so that the dropdown won't close on us.
-	/// If this is a menu and nothing was selected yet, select the first item for easier keyboard navigation.
-	/// If not 'open', close the list.
+	/// If 'open', show the list and position the mouse on the button so that the dropdown won't
+	/// close on us. If this is a menu and nothing was selected yet, select the first item for easier
+	/// keyboard navigation. If not 'open', close the list.
 	void set_list_visibility(bool open);
 
 	void set_size(int nw, int nh) override;
@@ -154,7 +155,8 @@ protected:
 	         uint32_t value,
 	         const Image* pic,
 	         const bool select_this,
-	         const std::string& tooltip_text, const std::string& hotkey);
+	         const std::string& tooltip_text,
+	         const std::string& hotkey);
 
 	/// \return the index of the selected element
 	uint32_t get_selected() const;
@@ -177,7 +179,8 @@ private:
 
 	/// Updates the title and tooltip of the display button and triggers a 'selected' signal.
 	void set_value();
-	/// Toggles the dropdown list on and off and sends a notification if the list is visible afterwards.
+	/// Toggles the dropdown list on and off and sends a notification if the list is visible
+	/// afterwards.
 	void toggle_list();
 	/// Toggle the list closed if the dropdown is currently expanded.
 	void close();
@@ -189,7 +192,8 @@ private:
 	static int next_id_;
 	const int id_;
 	std::unique_ptr<Notifications::Subscriber<NoteDropdown>> dropdown_subscriber_;
-	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>> graphic_resolution_changed_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 
 	// Dimensions
 	unsigned int max_list_items_;
@@ -219,15 +223,15 @@ public:
 	/// \param x                  the x-position within 'parent'
 	/// \param y                  the y-position within 'parent'
 	/// \param list_w             the dropdown's width
-	/// \param max_list_items     the maximum number of items shown in the list before it starts using a scrollbar
-	/// \param button_dimension   the width of the push button in textual dropdowns. For pictorial
-	/// dropdowns, this is both the width and the height of the button.
+	/// \param max_list_items     the maximum number of items shown in the list before it starts
+	/// using a scrollbar \param button_dimension   the width of the push button in textual
+	/// dropdowns. For pictorial dropdowns, this is both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
 	/// \param style              the style used for buttons and background
 	/// Text conventions: Title Case for all elements
 	Dropdown(Panel* parent,
-			 const std::string& name,
+	         const std::string& name,
 	         int32_t x,
 	         int32_t y,
 	         uint32_t list_w,
@@ -236,8 +240,18 @@ public:
 	         const std::string& label,
 	         const DropdownType type,
 	         PanelStyle style,
-			 ButtonStyle button_style)
-	   : BaseDropdown(parent, name, x, y, list_w, max_list_items, button_dimension, label, type, style, button_style) {
+	         ButtonStyle button_style)
+	   : BaseDropdown(parent,
+	                  name,
+	                  x,
+	                  y,
+	                  list_w,
+	                  max_list_items,
+	                  button_dimension,
+	                  label,
+	                  type,
+	                  style,
+	                  button_style) {
 	}
 	~Dropdown() {
 		entry_cache_.clear();
@@ -255,7 +269,8 @@ public:
 	         Entry value,
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
-	         const std::string& tooltip_text = std::string(), const std::string& hotkey = std::string()) {
+	         const std::string& tooltip_text = std::string(),
+	         const std::string& hotkey = std::string()) {
 		entry_cache_.push_back(std::unique_ptr<Entry>(new Entry(value)));
 		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey);
 	}

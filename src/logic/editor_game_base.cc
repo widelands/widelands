@@ -38,6 +38,7 @@
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -349,10 +350,16 @@ Building& EditorGameBase::warp_constructionsite(const Coords& c,
                                                 PlayerNumber const owner,
                                                 DescriptionIndex idx,
                                                 bool loading,
-                                                Building::FormerBuildings former_buildings) {
+                                                Building::FormerBuildings former_buildings,
+                                                const BuildingSettings* settings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
-	return tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings);
+	Building& b =
+	   tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings);
+	if (settings) {
+		dynamic_cast<ConstructionSite&>(b).apply_settings(*settings);
+	}
+	return b;
 }
 
 /**

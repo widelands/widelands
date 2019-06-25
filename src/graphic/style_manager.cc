@@ -340,7 +340,8 @@ void StyleManager::add_progressbar_style(UI::PanelStyle style, const LuaTable& t
 void StyleManager::add_table_style(UI::PanelStyle style, const LuaTable& table) {
 	table_styles_.insert(std::make_pair(
 	   style, std::unique_ptr<const UI::TableStyleInfo>(new UI::TableStyleInfo(
-	             read_font_style(table, "enabled"), read_font_style(table, "disabled"), read_font_style(table, "hotkey")))));
+	             read_font_style(table, "enabled"), read_font_style(table, "disabled"),
+	             read_font_style(table, "hotkey")))));
 }
 
 void StyleManager::set_statistics_plot_style(const LuaTable& table) {

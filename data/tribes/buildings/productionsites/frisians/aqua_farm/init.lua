@@ -49,6 +49,11 @@ tribes:new_productionsite_type {
       "fish"
    },
 
+   indicate_workarea_overlaps = {
+      frisians_aqua_farm = false,
+      frisians_clay_pit = true,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -64,11 +69,11 @@ tribes:new_productionsite_type {
          descname = _"breeding fish",
          actions = {
             "return=skipped unless economy needs fish",
-            "sleep=23000",
             "return=failed unless site has water:2",
             "return=failed unless site has fruit",
             "callworker=breed_in_pond",
             "consume=fruit water:2",
+            "sleep=23000",
          },
       },
       fish_pond = {

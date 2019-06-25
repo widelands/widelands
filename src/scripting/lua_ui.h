@@ -123,7 +123,6 @@ public:
 	}
 };
 
-
 class LuaDropdown : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaDropdown);
@@ -156,7 +155,6 @@ public:
 		return static_cast<UI::BaseDropdown*>(panel_);
 	}
 };
-
 
 class LuaTab : public LuaPanel {
 public:

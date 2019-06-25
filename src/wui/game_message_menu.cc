@@ -131,8 +131,8 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	                  archivebtn_->get_y(), kButtonSize, kButtonSize, UI::ButtonStyle::kWuiPrimary,
 	                  g_gr->images().get("images/wui/menus/goto.png"),
 	                  as_tooltip_text_with_hotkey(
-	                   /** TRANSLATORS: Tooltip in the messages window */
-	                   _("Center main mapview on location"), "g"));
+	                     /** TRANSLATORS: Tooltip in the messages window */
+	                     _("Center main mapview on location"), "g"));
 	centerviewbtn_->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
 	centerviewbtn_->set_enabled(false);
 
@@ -523,8 +523,8 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 
 		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
 		button.set_tooltip(as_tooltip_text_with_hotkey(
-		                    /** TRANSLATORS: Tooltip in the messages window */
-		                    _("Show all messages"), pgettext("hotkey", "Alt+0")));
+		   /** TRANSLATORS: Tooltip in the messages window */
+		   _("Show all messages"), pgettext("hotkey", "Alt+0")));
 	}
 }
 
@@ -533,21 +533,20 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
  */
 void GameMessageMenu::set_filter_messages_tooltips() {
 	geologistsbtn_->set_tooltip(as_tooltip_text_with_hotkey(
-	                             /** TRANSLATORS: Tooltip in the messages window */
-	                             _("Show geologists' messages only"),
-	                             pgettext("hotkey", "Alt+1")));
+	   /** TRANSLATORS: Tooltip in the messages window */
+	   _("Show geologists' messages only"), pgettext("hotkey", "Alt+1")));
 	economybtn_->set_tooltip(as_tooltip_text_with_hotkey(
-	                          /** TRANSLATORS: Tooltip in the messages window */
-	                          _("Show economy messages only"), pgettext("hotkey", "Alt+2")));
+	   /** TRANSLATORS: Tooltip in the messages window */
+	   _("Show economy messages only"), pgettext("hotkey", "Alt+2")));
 	seafaringbtn_->set_tooltip(as_tooltip_text_with_hotkey(
-	                            /** TRANSLATORS: Tooltip in the messages window */
-	                            _("Show seafaring messages only"), pgettext("hotkey", "Alt+3")));
+	   /** TRANSLATORS: Tooltip in the messages window */
+	   _("Show seafaring messages only"), pgettext("hotkey", "Alt+3")));
 	warfarebtn_->set_tooltip(as_tooltip_text_with_hotkey(
-	                          /** TRANSLATORS: Tooltip in the messages window */
-	                          _("Show warfare messages only"), pgettext("hotkey", "Alt+4")));
+	   /** TRANSLATORS: Tooltip in the messages window */
+	   _("Show warfare messages only"), pgettext("hotkey", "Alt+4")));
 	scenariobtn_->set_tooltip(as_tooltip_text_with_hotkey(
-	                           /** TRANSLATORS: Tooltip in the messages window */
-	                           _("Show scenario messages only"), pgettext("hotkey", "Alt+5")));
+	   /** TRANSLATORS: Tooltip in the messages window */
+	   _("Show scenario messages only"), pgettext("hotkey", "Alt+5")));
 }
 
 /**
