@@ -434,7 +434,7 @@ void ConstructionSiteWindow::think() {
 		cs_soldier_capacity_decrease_->set_enabled(can_act && ms->desired_capacity > 1);
 		cs_soldier_capacity_increase_->set_enabled(can_act &&
 		                                           ms->desired_capacity < ms->max_capacity);
-		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 1 : 0);
+		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1);
 	} else if (upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings())) {
 		if (cs_launch_expedition_) {
 			cs_launch_expedition_->set_state(ws->launch_expedition);
