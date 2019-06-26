@@ -27,7 +27,7 @@
 #include "wui/interactive_player.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
-static const char pic_tab_settings[] = "images/wui/menus/menu_stock.png";
+static const char pic_tab_settings[] = "images/wui/menus/statistics_stock.png";
 static const char pic_tab_settings_wares[] = "images/wui/stats/menu_tab_wares_warehouse.png";
 static const char pic_tab_settings_workers[] = "images/wui/stats/menu_tab_workers_warehouse.png";
 static const char pic_max_fill_indicator[] = "images/wui/buildings/max_fill_indicator.png";
