@@ -46,15 +46,16 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      buth_(get_h() * 9 / 200),
 
      win_condition_dropdown_(this,
+                             "dropdown_wincondition",
                              get_w() * 7 / 10,
                              get_h() * 4 / 10 + buth_,
                              butw_,
-                             get_h() - get_h() * 4 / 10 - buth_,
+                             10,  // max number of items
                              buth_,
                              "",
                              UI::DropdownType::kTextual,
-                             UI::PanelStyle::kFsMenu),
-
+                             UI::PanelStyle::kFsMenu,
+                             UI::ButtonStyle::kFsMenuMenu),
      peaceful_(this, Vector2i(get_w() * 7 / 10, get_h() * 19 / 40 + buth_), _("Peaceful mode")),
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),

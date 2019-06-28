@@ -42,7 +42,7 @@ struct Radiobutton : public Statebox {
 	}
 
 private:
-	void clicked() override;
+	void button_clicked() override;
 
 	Radiobutton* nextbtn_;
 	Radiogroup& group_;

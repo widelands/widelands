@@ -288,7 +288,7 @@ print_loading_message("┗━ took", function()
       include "world/critters/deer/init.lua"
       include "world/critters/reindeer/init.lua"
       include "world/critters/stag/init.lua"
-      include "world/critters/elk/init.lua"
+      include "world/critters/moose/init.lua"
 
       -- Carnivores
       world:new_editor_critter_category {

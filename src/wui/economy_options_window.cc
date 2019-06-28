@@ -51,8 +51,18 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
      worker_panel_(new EconomyOptionsPanel(
         &tabpanel_, this, serial_, player_, can_act, Widelands::wwWORKER, kDesiredWidth)),
      dropdown_box_(this, 0, 0, UI::Box::Horizontal),
-     dropdown_(
-        &dropdown_box_, 0, 0, 174, 200, 34, "", UI::DropdownType::kTextual, UI::PanelStyle::kWui),
+     dropdown_(&dropdown_box_,
+               "economy_profiles",
+               0,
+               0,
+               174,
+               10,
+               34,
+               "",
+               UI::DropdownType::kTextual,
+               UI::PanelStyle::kWui,
+               UI::ButtonStyle::kWuiSecondary),  // NOCOM test if this is the correct button style.
+                                                 // heap-use-after-free somewhere too.
      time_last_thought_(0),
      save_profile_dialog_(nullptr) {
 	set_center_panel(&main_box_);
