@@ -199,6 +199,8 @@ public:
 	void training_successful(TrainingAttribute type, uint32_t level);
 	void training_done();
 
+	const BuildingSettings* create_building_settings() const override;
+
 protected:
 	void program_end(Game&, ProgramResult) override;
 

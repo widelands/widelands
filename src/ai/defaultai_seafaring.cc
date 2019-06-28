@@ -346,7 +346,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 				if (site->bo->is(BuildingAttribute::kShipyard)) {
 					for (uint32_t k = 0; k < site->bo->inputs.size(); ++k) {
 						game().send_player_set_ware_priority(
-						   *site->site, wwWARE, site->bo->inputs.at(k), HIGH_PRIORITY);
+						   *site->site, wwWARE, site->bo->inputs.at(k), kPriorityHigh);
 					}
 				}
 			}

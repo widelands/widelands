@@ -662,13 +662,13 @@ void Building::draw_info(const TextToDraw draw_text,
 
 int32_t
 Building::get_priority(WareWorker type, DescriptionIndex const ware_index, bool adjust) const {
-	int32_t priority = DEFAULT_PRIORITY;
+	int32_t priority = kPriorityNormal;
 	if (type == wwWARE) {
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
 		std::map<DescriptionIndex, int32_t>::const_iterator it = ware_priorities_.find(ware_index);
 		if (it != ware_priorities_.end())
-			priority = adjust ? (priority * it->second / DEFAULT_PRIORITY) : it->second;
+			priority = adjust ? (priority * it->second / kPriorityNormal) : it->second;
 	}
 
 	return priority;
@@ -684,7 +684,7 @@ void Building::collect_priorities(std::map<int32_t, std::map<DescriptionIndex, i
 	std::map<DescriptionIndex, int32_t>& ware_priorities = p[wwWARE];
 	std::map<DescriptionIndex, int32_t>::const_iterator it;
 	for (it = ware_priorities_.begin(); it != ware_priorities_.end(); ++it) {
-		if (it->second == DEFAULT_PRIORITY)
+		if (it->second == kPriorityNormal)
 			continue;
 		ware_priorities[it->first] = it->second;
 	}

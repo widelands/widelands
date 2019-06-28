@@ -14,6 +14,12 @@ return {
       font = "default"
    },
 
+   af_ZA = {
+      name = "Afrikaans",
+      sort_name = "Afrikaans",
+      font = "default"
+   },
+
    ar = {
       name = "العربية",
       sort_name = "Al-ʿArabiyyah",

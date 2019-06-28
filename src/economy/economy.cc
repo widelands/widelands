@@ -953,7 +953,7 @@ void Economy::create_requested_workers(Game& game) {
 static bool accept_warehouse_if_policy(Warehouse& wh,
                                        WareWorker type,
                                        DescriptionIndex ware,
-                                       Warehouse::StockPolicy policy) {
+                                       StockPolicy policy) {
 	return wh.get_stock_policy(type, ware) == policy;
 }
 
@@ -988,7 +988,7 @@ void Economy::handle_active_supplies(Game& game) {
 
 		for (uint32_t nwh = 0; nwh < warehouses_.size(); ++nwh) {
 			Warehouse* wh = warehouses_[nwh];
-			Warehouse::StockPolicy policy = wh->get_stock_policy(type_, ware);
+			Warehouse::StockPolicy policy = wh->get_stock_policy(type, ware);
 			if (policy == Warehouse::StockPolicy::kPrefer) {
 				haveprefer = true;
 
@@ -1000,23 +1000,23 @@ void Economy::handle_active_supplies(Game& game) {
 					preferred_wh = wh;
 					preferred_wh_stock = current_stock;
 				}
-			}
-			if (policy == Warehouse::StockPolicy::kNormal)
+			} else if (policy == StockPolicy::kNormal) {
 				havenormal = true;
+			}
 		}
-		if (!havenormal && !haveprefer && type_ == wwWARE)
+		if (!havenormal && !haveprefer && type_ == wwWARE) {
 			continue;
+		}
 
 		// We either have one preferred warehouse picked up or walk on roads to find nearest one
 		Warehouse* wh = nullptr;
 		if (preferred_wh) {
 			wh = preferred_wh;
 		} else {
-			wh = find_closest_warehouse(supply.get_position(game)->base_flag(), nullptr, 0,
-			                            (!havenormal) ?
-			                               WarehouseAcceptFn() :
-			                               boost::bind(&accept_warehouse_if_policy, _1, type_, ware,
-			                                           Warehouse::StockPolicy::kNormal));
+			wh = find_closest_warehouse(supply.get_position(game)->base_flag(), type, nullptr, 0,
+			                            (!havenormal) ? WarehouseAcceptFn() :
+			                                            boost::bind(&accept_warehouse_if_policy, _1,
+			                                                        type, ware, Warehouse::StockPolicy::kNormal));
 		}
 		if (!wh) {
 			log("Warning: Economy::handle_active_supplies "
