@@ -988,8 +988,8 @@ void Economy::handle_active_supplies(Game& game) {
 
 		for (uint32_t nwh = 0; nwh < warehouses_.size(); ++nwh) {
 			Warehouse* wh = warehouses_[nwh];
-			Warehouse::StockPolicy policy = wh->get_stock_policy(type, ware);
-			if (policy == Warehouse::StockPolicy::kPrefer) {
+			StockPolicy policy = wh->get_stock_policy(type, ware);
+			if (policy == StockPolicy::kPrefer) {
 				haveprefer = true;
 
 				// Getting count of worker/ware
@@ -1016,7 +1016,7 @@ void Economy::handle_active_supplies(Game& game) {
 			wh = find_closest_warehouse(supply.get_position(game)->base_flag(), type, nullptr, 0,
 			                            (!havenormal) ? WarehouseAcceptFn() :
 			                                            boost::bind(&accept_warehouse_if_policy, _1,
-			                                                        type, ware, Warehouse::StockPolicy::kNormal));
+			                                                        type, ware, StockPolicy::kNormal));
 		}
 		if (!wh) {
 			log("Warning: Economy::handle_active_supplies "
