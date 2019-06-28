@@ -119,8 +119,11 @@ void Tag::parse_closing_tag(TextStream& ts) {
 
 void Tag::parse_attribute(TextStream& ts, std::unordered_set<std::string>& allowed_attrs) {
 	std::string aname = ts.till_any("=");
-	if (!allowed_attrs.count(aname))
-		throw SyntaxErrorImpl(ts.line(), ts.col(), "an allowed attribute", aname, ts.peek(100));
+	if (!allowed_attrs.count(aname)) {
+		const std::string error_info =
+		   (boost::format("an allowed attribute for '%s' tag") % name_).str();
+		throw SyntaxErrorImpl(ts.line(), ts.col(), error_info, aname, ts.peek(100));
+	}
 
 	ts.skip(1);
 
