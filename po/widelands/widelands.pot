@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-06-14 07:23+0000\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -621,7 +621,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:60
 #: ../../src/ui_basic/messagebox.cc:95 ../../src/ui_fsmenu/launch_mpg.cc:78
 #: ../../src/ui_fsmenu/options.cc:92
-#: ../../src/wui/economy_options_window.cc:519
+#: ../../src/wui/economy_options_window.cc:516
 #: ../../src/wui/game_main_menu_save_game.cc:70 ../../src/wui/login_box.cc:63
 msgid "Cancel"
 msgstr ""
@@ -827,6 +827,7 @@ msgstr ""
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:160
+#: ../../src/ui_fsmenu/internet_lobby.cc:449
 msgid "unnamed"
 msgstr ""
 
@@ -2010,41 +2011,69 @@ msgstr ""
 msgid "Chat message could not be sent."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:699
+#: ../../src/network/internet_gaming.cc:687
+msgid "Command could not be executed."
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:707
 #, c-format
 msgid "ERROR: %s"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:702
+#: ../../src/network/internet_gaming.cc:710
 msgid "An unexpected error message has been received about command %1%: %2%"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:715
+#: ../../src/network/internet_gaming.cc:723
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:864
+#: ../../src/network/internet_gaming.cc:872
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:883
-#: ../../src/network/internet_gaming.cc:890
+#: ../../src/network/internet_gaming.cc:891
+#: ../../src/network/internet_gaming.cc:898
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:966
+#: ../../src/network/internet_gaming.cc:913
+msgid "Supported admin commands:"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:914
+msgid "/motd <msg> sets a permanent greeting message"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:915
+msgid "/announce <msg> send a one time system message"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:917
+msgid "/warn <user> <msg> send a private system message to the given user"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:920
+msgid "/kick <user|game> removes the given user or game from the metaserver"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:922
+msgid "/ban <user> bans a user for 24 hours from the metaserver"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:998
 msgid "Conversion error"
 msgstr ""
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:969
+#: ../../src/network/internet_gaming.cc:1001
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:987
+#: ../../src/network/internet_gaming.cc:1019
 msgctxt "chat_sender"
 msgid "Unknown"
 msgstr ""
@@ -2062,32 +2091,36 @@ msgid "Wrong password, please try again."
 msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:46
-msgid "The protocol version you are using is not supported!"
+msgid "You have been temporarily banned from online gaming."
 msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:47
+msgid "The protocol version you are using is not supported!"
+msgstr ""
+
+#: ../../src/network/internet_gaming_messages.cc:48
 msgid "You are already logged in!"
 msgstr ""
 
-#: ../../src/network/internet_gaming_messages.cc:49
+#: ../../src/network/internet_gaming_messages.cc:50
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr ""
 
-#: ../../src/network/internet_gaming_messages.cc:52
+#: ../../src/network/internet_gaming_messages.cc:53
 msgid "Connection was closed by the client normally."
 msgstr ""
 
-#: ../../src/network/internet_gaming_messages.cc:53
+#: ../../src/network/internet_gaming_messages.cc:54
 msgid "The connection to the metaserver was lost."
 msgstr ""
 
-#: ../../src/network/internet_gaming_messages.cc:54
+#: ../../src/network/internet_gaming_messages.cc:55
 msgid "Metaserver did not answer"
 msgstr ""
 
-#: ../../src/network/internet_gaming_messages.cc:56
+#: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
@@ -3365,48 +3398,48 @@ msgstr ""
 msgid "Save target settings"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:426
+#: ../../src/wui/economy_options_window.cc:423
 msgid "The profile name cannot be empty"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:427
+#: ../../src/wui/economy_options_window.cc:424
 msgid "The default profile cannot be overwritten"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:430
+#: ../../src/wui/economy_options_window.cc:427
 msgid "Save the profile under this name"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:442
+#: ../../src/wui/economy_options_window.cc:439
 msgid "The predefined profiles cannot be deleted"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:445
+#: ../../src/wui/economy_options_window.cc:442
 msgid "Delete the selected profiles"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:467
+#: ../../src/wui/economy_options_window.cc:464
 msgid "Overwrite?"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:468
+#: ../../src/wui/economy_options_window.cc:465
 msgid "A profile with this name already exists. Do you wish to replace it?"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:511
+#: ../../src/wui/economy_options_window.cc:508
 msgid "Save Profile"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:518 ../../src/wui/login_box.cc:57
+#: ../../src/wui/economy_options_window.cc:515 ../../src/wui/login_box.cc:57
 msgid "Save"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:520
+#: ../../src/wui/economy_options_window.cc:517
 #: ../../src/wui/load_or_save_game.cc:94
 msgid "Delete"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:521
+#: ../../src/wui/economy_options_window.cc:518
 msgid "Existing Profiles"
 msgstr ""
 

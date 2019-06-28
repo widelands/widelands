@@ -123,8 +123,12 @@ void Panel::free_children() {
 	// Scan-build claims this results in double free.
 	// This is a false positive.
 	// See https://bugs.launchpad.net/widelands/+bug/1198928
-	while (first_child_)
+	while (first_child_) {
+		Panel* next_child = first_child_->next_;
 		delete first_child_;
+		first_child_ = next_child;
+	}
+	first_child_ = nullptr;
 }
 
 /**
@@ -530,6 +534,7 @@ void Panel::handle_mousein(bool) {
 bool Panel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
+		clicked();
 	}
 	return false;
 }
@@ -735,10 +740,12 @@ void Panel::check_child_death() {
 		Panel* p = next;
 		next = p->next_;
 
-		if (p->flags_ & pf_die)
+		if (p->flags_ & pf_die) {
 			delete p;
-		else if (p->flags_ & pf_child_die)
+			p = nullptr;
+		} else if (p->flags_ & pf_child_die) {
 			p->check_child_death();
+		}
 	}
 
 	flags_ &= ~pf_child_die;

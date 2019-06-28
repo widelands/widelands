@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-30 18:50+0000\n"
-"PO-Revision-Date: 2019-05-30 18:52+0000\n"
+"POT-Creation-Date: 2019-06-21 08:49+0000\n"
+"PO-Revision-Date: 2019-06-21 08:50+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -277,7 +277,7 @@ msgid "Players"
 msgstr "Játékosok"
 
 #: ../../src/editor/editorinteractive.cc:99
-#: ../../src/wui/interactive_player.cc:182
+#: ../../src/wui/interactive_player.cc:184
 #: ../../src/wui/interactive_spectator.cc:72
 msgid "Show building spaces (on/off)"
 msgstr "Épülethelyek megjelenítése (be/ki)"
@@ -299,13 +299,13 @@ msgid "Show resources (on/off)"
 msgstr "Nyersanyagok megjelenítése (be/ki)"
 
 #: ../../src/editor/editorinteractive.cc:120
-#: ../../src/wui/interactive_player.cc:178
+#: ../../src/wui/interactive_player.cc:180
 #: ../../src/wui/interactive_spectator.cc:68
 msgid "Minimap"
 msgstr "Térkép"
 
 #: ../../src/editor/editorinteractive.cc:123
-#: ../../src/wui/interactive_player.cc:184
+#: ../../src/wui/interactive_player.cc:186
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Reset zoom"
 msgstr "Közelítés visszaállítása"
@@ -319,7 +319,7 @@ msgid "Redo"
 msgstr "Mégis"
 
 #: ../../src/editor/editorinteractive.cc:141
-#: ../../src/wui/buildingwindow.cc:363 ../../src/wui/interactive_player.cc:208
+#: ../../src/wui/buildingwindow.cc:363 ../../src/wui/interactive_player.cc:210
 msgid "Help"
 msgstr "Súgó"
 
@@ -569,7 +569,7 @@ msgid "Current: %s"
 msgstr "Jelenlegi: %s"
 
 #: ../../src/editor/ui_menus/help.cc:42 ../../src/ui_fsmenu/multiplayer.cc:126
-#: ../../src/wui/encyclopedia_window.cc:141 ../../src/wui/login_box.cc:197
+#: ../../src/wui/encyclopedia_window.cc:141 ../../src/wui/login_box.cc:196
 #: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
 msgstr "Hiba!"
@@ -1117,7 +1117,7 @@ msgid "Current Size: %u"
 msgstr "Jelenlegi méret: %u"
 
 #. * TRANSLATORS: Error message printed to console/command line/log file
-#: ../../src/graphic/gl/initialize.cc:206
+#: ../../src/graphic/gl/initialize.cc:205
 #, c-format
 msgid "ERROR: %s\n"
 msgstr ""
@@ -1125,23 +1125,23 @@ msgstr ""
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:229
-#: ../../src/graphic/gl/initialize.cc:248
+#: ../../src/graphic/gl/initialize.cc:228
+#: ../../src/graphic/gl/initialize.cc:247
 msgid "Widelands won’t work because your graphics driver is too old."
 msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:232
-#: ../../src/graphic/gl/initialize.cc:251
+#: ../../src/graphic/gl/initialize.cc:231
+#: ../../src/graphic/gl/initialize.cc:250
 msgid "The shading language needs to be version 1.20 or newer."
 msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:263
+#: ../../src/graphic/gl/initialize.cc:262
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
@@ -1150,7 +1150,7 @@ msgstr ""
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:267
+#: ../../src/graphic/gl/initialize.cc:266
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
@@ -1985,131 +1985,159 @@ msgstr "Az IRC-vel jelölt felhasználók lehet hogy nem reagálnak az üzenetek
 msgid "Successfully reconnected to the metaserver!"
 msgstr "Sikeres újracsatlakozás a metakiszolgálóhoz!"
 
-#: ../../src/network/internet_gaming.cc:288
+#: ../../src/network/internet_gaming.cc:335
 #: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "Valami hiba történt: %s"
 
-#: ../../src/network/internet_gaming.cc:379
+#: ../../src/network/internet_gaming.cc:426
 msgid "Welcome to the Widelands Metaserver!"
 msgstr "Üdvözlünk a Widelands metakiszolgálón!"
 
-#: ../../src/network/internet_gaming.cc:383
+#: ../../src/network/internet_gaming.cc:430
 #, c-format
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
 msgstr "„%s” néven jelentkeztél be, mivel a kért név már használatban van, vagy foglalt."
 
-#: ../../src/network/internet_gaming.cc:396
+#: ../../src/network/internet_gaming.cc:443
 msgid "Our forums can be found at:"
 msgstr "A fórumunk itt található:"
 
-#: ../../src/network/internet_gaming.cc:398
+#: ../../src/network/internet_gaming.cc:445
 msgid "For reporting bugs, visit:"
 msgstr "Hibajelentéshez keresd fel:"
 
-#: ../../src/network/internet_gaming.cc:413
+#: ../../src/network/internet_gaming.cc:466
 msgid "Mixed up"
 msgstr "Kevert"
 
-#: ../../src/network/internet_gaming.cc:413
+#: ../../src/network/internet_gaming.cc:466
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "A metakiszolgáló egy furcsa HIBÁT észlelt a kapcsolatban"
 
-#: ../../src/network/internet_gaming.cc:427
+#: ../../src/network/internet_gaming.cc:480
 msgid "Unexpected packet"
 msgstr "Váratlan csomag"
 
-#: ../../src/network/internet_gaming.cc:428
+#: ../../src/network/internet_gaming.cc:481
 msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
 msgstr "Váratlan hálózati csomag érkezett a metakiszolgálótól. Lehet, hogy a metakiszolgáló más protokollverziót használ. Ha a hiba továbbra is fennáll, akkor próbáld meg frissíteni a játékot."
 
-#: ../../src/network/internet_gaming.cc:440
+#: ../../src/network/internet_gaming.cc:493
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "FIGYELMEZTETÉS: %s parancs érkezett bár nem vagyunk KAPCSOLATBAN állapotban."
 
-#: ../../src/network/internet_gaming.cc:451
+#: ../../src/network/internet_gaming.cc:504
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "Kiszolgáló időeltolódása %d másodperc."
 msgstr[1] "Kiszolgáló időeltolódása %d másodperc."
 
-#: ../../src/network/internet_gaming.cc:466
+#: ../../src/network/internet_gaming.cc:519
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Érvénytelen csevegő üzenet típus „%s”."
 
-#: ../../src/network/internet_gaming.cc:466
+#: ../../src/network/internet_gaming.cc:519
 msgid "Invalid message type"
 msgstr "Érvénytelen üzenettípus"
 
-#: ../../src/network/internet_gaming.cc:506
+#: ../../src/network/internet_gaming.cc:559
 #, c-format
 msgid "The game %s is now available"
 msgstr "A játék %s elérhető"
 
-#: ../../src/network/internet_gaming.cc:517
+#: ../../src/network/internet_gaming.cc:570
 #, c-format
 msgid "The game %s has been closed"
 msgstr "A játék %s lezárva"
 
-#: ../../src/network/internet_gaming.cc:557
+#: ../../src/network/internet_gaming.cc:610
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s belépett a szobába"
 
-#: ../../src/network/internet_gaming.cc:569
+#: ../../src/network/internet_gaming.cc:622
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s kilépett a szobából"
 
-#: ../../src/network/internet_gaming.cc:624
+#: ../../src/network/internet_gaming.cc:677
 msgid "Chat message could not be sent."
 msgstr "Csevegő üzenet nem lett elküldve."
 
-#: ../../src/network/internet_gaming.cc:646
+#: ../../src/network/internet_gaming.cc:687
+msgid "Command could not be executed."
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:707
 #, c-format
 msgid "ERROR: %s"
 msgstr "HIBA: %s"
 
-#: ../../src/network/internet_gaming.cc:649
+#: ../../src/network/internet_gaming.cc:710
 msgid "An unexpected error message has been received about command %1%: %2%"
 msgstr "Váratlan hibaüzenet érkezett a(z) %1% parancsról: %2%"
 
-#: ../../src/network/internet_gaming.cc:662
+#: ../../src/network/internet_gaming.cc:723
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Ismeretlen parancs érkezett a metakiszolgálótól: %s"
 
-#: ../../src/network/internet_gaming.cc:811
+#: ../../src/network/internet_gaming.cc:872
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Üzenet nem lett elküldve: Nem vagy kapcsolódva a metakiszolgálóhoz!"
 
-#: ../../src/network/internet_gaming.cc:830
-#: ../../src/network/internet_gaming.cc:837
+#: ../../src/network/internet_gaming.cc:891
+#: ../../src/network/internet_gaming.cc:898
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Üzenet nem lett elküldve: Ez egy személyes üzenet lett volna?"
 
 #: ../../src/network/internet_gaming.cc:913
+msgid "Supported admin commands:"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:914
+msgid "/motd <msg> sets a permanent greeting message"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:915
+msgid "/announce <msg> send a one time system message"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:917
+msgid "/warn <user> <msg> send a private system message to the given user"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:920
+msgid "/kick <user|game> removes the given user or game from the metaserver"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:922
+msgid "/ban <user> bans a user for 24 hours from the metaserver"
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:998
 msgid "Conversion error"
 msgstr "Átalakítási hiba"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:916
+#: ../../src/network/internet_gaming.cc:1001
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Nem sikerült a(z) „%s” igazságértékének meghatározása"
 
-#: ../../src/network/internet_gaming.cc:934
+#: ../../src/network/internet_gaming.cc:1019
 msgctxt "chat_sender"
 msgid "Unknown"
 msgstr "Ismeretlen"
@@ -2127,32 +2155,36 @@ msgid "Wrong password, please try again."
 msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:46
+msgid "You have been temporarily banned from online gaming."
+msgstr ""
+
+#: ../../src/network/internet_gaming_messages.cc:47
 msgid "The protocol version you are using is not supported!"
 msgstr "A protokoll verzió, amit te használsz, nem támogatott!"
 
-#: ../../src/network/internet_gaming_messages.cc:47
+#: ../../src/network/internet_gaming_messages.cc:48
 msgid "You are already logged in!"
 msgstr "Már be vagy jelentkezve!"
 
-#: ../../src/network/internet_gaming_messages.cc:49
+#: ../../src/network/internet_gaming_messages.cc:50
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr "Kapcsolat megszakítva, mert superuser parancsot köldött, superuser jogosultság nélkül. Ez az esemény naplózva lett és jelntésre került az adminisztrátornak."
 
-#: ../../src/network/internet_gaming_messages.cc:52
+#: ../../src/network/internet_gaming_messages.cc:53
 msgid "Connection was closed by the client normally."
 msgstr "A kapcsolatot az ügyfél normálisan lezárta."
 
-#: ../../src/network/internet_gaming_messages.cc:53
+#: ../../src/network/internet_gaming_messages.cc:54
 msgid "The connection to the metaserver was lost."
 msgstr "A kapcsolat a metakiszolgálóval elveszett."
 
-#: ../../src/network/internet_gaming_messages.cc:54
+#: ../../src/network/internet_gaming_messages.cc:55
 msgid "Metaserver did not answer"
 msgstr "A metakiszolgáló nem válaszolt"
 
-#: ../../src/network/internet_gaming_messages.cc:56
+#: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
@@ -2324,17 +2356,17 @@ msgstr "A(z) „%s” játékost legyőzték és néző lett belőle."
 msgid "Client %1$s did not answer for more than %2$s."
 msgstr "A(z) %1$s ügyfél nem válaszolt több mint ennyi ideig: %2$s."
 
-#: ../../src/network/network_lan_promotion.cc:359
+#: ../../src/network/network_lan_promotion.cc:360
 msgid "Failed to use the local network!"
 msgstr "A helyi hálózat használata meghiúsult."
 
 #. * TRANSLATORS: %s is a list of alternative ports with "or"
-#: ../../src/network/network_lan_promotion.cc:361
+#: ../../src/network/network_lan_promotion.cc:362
 #, c-format
 msgid ""
 "Widelands was unable to use the local network. Maybe some other process is "
-"already running a server on port %sor your network setup is broken."
-msgstr "A Widelands nem tudta a helyi hálózatot használni. Lehet hogy már fut egy folyamat a(z) %s porton, vagy a hálózati beállítás hibás."
+"already running a server on port %s or your network setup is broken."
+msgstr ""
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -3366,7 +3398,7 @@ msgstr "Lebontás"
 msgid "Returns:"
 msgstr "Visszajár:"
 
-#: ../../src/wui/buildingwindow.cc:344 ../../src/wui/fieldaction.cc:378
+#: ../../src/wui/buildingwindow.cc:344 ../../src/wui/fieldaction.cc:404
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr "Hibakereső ablak megjelenítése"
@@ -3486,87 +3518,93 @@ msgstr "Törlés"
 msgid "Existing Profiles"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:220
+#: ../../src/wui/fieldaction.cc:222
 msgid "Build small building"
 msgstr "Kis épület építése"
 
-#: ../../src/wui/fieldaction.cc:221
+#: ../../src/wui/fieldaction.cc:223
 msgid "Build big building"
 msgstr "Nagy épület építése"
 
-#: ../../src/wui/fieldaction.cc:221
+#: ../../src/wui/fieldaction.cc:223
 msgid "Build medium building"
 msgstr "Közepes épület építése"
 
-#: ../../src/wui/fieldaction.cc:222
+#: ../../src/wui/fieldaction.cc:224
 msgid "Build port building"
 msgstr "Kikötő építése"
 
-#: ../../src/wui/fieldaction.cc:248
+#: ../../src/wui/fieldaction.cc:252
 msgid "Action"
 msgstr "Műveletek"
 
-#: ../../src/wui/fieldaction.cc:326 ../../src/wui/fieldaction.cc:382
+#: ../../src/wui/fieldaction.cc:346 ../../src/wui/fieldaction.cc:408
 msgid "Build road"
 msgstr "Út építése"
 
-#: ../../src/wui/fieldaction.cc:332
+#: ../../src/wui/fieldaction.cc:352
 msgid "Destroy this flag"
 msgstr "Zászló megsemmisítése"
 
-#: ../../src/wui/fieldaction.cc:337
+#: ../../src/wui/fieldaction.cc:357
 msgid "Configure economy"
 msgstr "Gazdaság beállítása"
 
-#: ../../src/wui/fieldaction.cc:340
+#: ../../src/wui/fieldaction.cc:360
 msgid "Send geologist to explore site"
 msgstr "Geológus küldése a terület felderítésére"
 
-#: ../../src/wui/fieldaction.cc:355
+#: ../../src/wui/fieldaction.cc:375
 msgid "Place a flag"
 msgstr "Zászló elhelyezése"
 
-#: ../../src/wui/fieldaction.cc:359
+#: ../../src/wui/fieldaction.cc:379
 msgid "Destroy a road"
 msgstr "Út megsemmisítése"
 
-#: ../../src/wui/fieldaction.cc:369
+#: ../../src/wui/fieldaction.cc:389
 msgid "Watch field in a separate window"
 msgstr "Terület figyelése külön ablakban"
 
-#: ../../src/wui/fieldaction.cc:371
+#: ../../src/wui/fieldaction.cc:391
 msgid "Toggle building statistics display"
 msgstr "Épületstatisztika megjelenítése"
 
-#: ../../src/wui/fieldaction.cc:374
+#: ../../src/wui/fieldaction.cc:394
 msgid "Toggle building label display"
 msgstr "Épület nevek megjelenítése"
 
-#: ../../src/wui/fieldaction.cc:384 ../../src/wui/watchwindow.cc:54
+#: ../../src/wui/fieldaction.cc:399
+msgid ""
+"Toggle whether overlapping workareas are indicated when placing a "
+"constructionsite"
+msgstr ""
+
+#: ../../src/wui/fieldaction.cc:410 ../../src/wui/watchwindow.cc:54
 msgid "Watch"
 msgstr "Nézőke"
 
-#: ../../src/wui/fieldaction.cc:405
+#: ../../src/wui/fieldaction.cc:431
 msgid "Attack"
 msgstr "Támadás"
 
-#: ../../src/wui/fieldaction.cc:485
+#: ../../src/wui/fieldaction.cc:511
 msgid "Build mines"
 msgstr "Bánya építése"
 
-#: ../../src/wui/fieldaction.cc:498
+#: ../../src/wui/fieldaction.cc:524
 msgid "Build flag"
 msgstr "Szászló létrehozása"
 
-#: ../../src/wui/fieldaction.cc:501
+#: ../../src/wui/fieldaction.cc:527
 msgid "Cancel road"
 msgstr "Mégsem kell ide út"
 
-#: ../../src/wui/fieldaction.cc:504
+#: ../../src/wui/fieldaction.cc:530
 msgid "Build roads"
 msgstr "Út építése"
 
-#: ../../src/wui/game_chat_menu.cc:53 ../../src/wui/interactive_player.cc:191
+#: ../../src/wui/game_chat_menu.cc:53 ../../src/wui/interactive_player.cc:193
 #: ../../src/wui/interactive_spectator.cc:84
 msgid "Chat"
 msgstr "Csevegés"
@@ -3815,7 +3853,7 @@ msgid "Del: %s"
 msgstr "Del: %s"
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:201
+#: ../../src/wui/interactive_player.cc:203
 msgid "Objectives"
 msgstr "Célkitűzések"
 
@@ -4057,12 +4095,12 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statisztika"
 
-#: ../../src/wui/interactive_player.cc:205
-#: ../../src/wui/interactive_player.cc:257
+#: ../../src/wui/interactive_player.cc:207
+#: ../../src/wui/interactive_player.cc:259
 msgid "Messages"
 msgstr "Üzenetek"
 
-#: ../../src/wui/interactive_player.cc:262
+#: ../../src/wui/interactive_player.cc:264
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"

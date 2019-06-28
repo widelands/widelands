@@ -89,6 +89,7 @@ public:
 	      const std::string& tooltip_text = std::string());
 	virtual ~Panel();
 
+	boost::signals2::signal<void()> clicked;
 	boost::signals2::signal<void()> position_changed;
 
 	Panel* get_parent() const {
@@ -119,8 +120,8 @@ public:
 	virtual void end();
 
 	// Geometry
-	void set_size(int nw, int nh);
-	void set_desired_size(int w, int h);
+	virtual void set_size(int nw, int nh);
+	virtual void set_desired_size(int w, int h);
 	virtual void set_pos(Vector2i);
 	virtual void move_inside_parent();
 	virtual void layout();

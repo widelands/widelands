@@ -4871,39 +4871,38 @@ int LuaWarehouse::set_workers(lua_State* L) {
 }
 
 // Transforms the given warehouse policy to a string which is used by the lua code
-inline void wh_policy_to_string(lua_State* L, Warehouse::StockPolicy p) {
+inline void wh_policy_to_string(lua_State* L, StockPolicy p) {
 	switch (p) {
-	case Warehouse::StockPolicy::kNormal:
+	case StockPolicy::kNormal:
 		lua_pushstring(L, "normal");
 		break;
-	case Warehouse::StockPolicy::kPrefer:
+	case StockPolicy::kPrefer:
 		lua_pushstring(L, "prefer");
 		break;
-	case Warehouse::StockPolicy::kDontStock:
+	case StockPolicy::kDontStock:
 		lua_pushstring(L, "dontstock");
 		break;
-	case Warehouse::StockPolicy::kRemove:
+	case StockPolicy::kRemove:
 		lua_pushstring(L, "remove");
 		break;
 	}
 }
 // Transforms the given string from the lua code to a warehouse policy
-inline Warehouse::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
+inline StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
 	std::string str = luaL_checkstring(L, index);
 	if (str == "normal")
-		return Warehouse::StockPolicy::kNormal;
+		return StockPolicy::kNormal;
 	else if (str == "prefer")
-		return Warehouse::StockPolicy::kPrefer;
+		return StockPolicy::kPrefer;
 	else if (str == "dontstock")
-		return Warehouse::StockPolicy::kDontStock;
+		return StockPolicy::kDontStock;
 	else if (str == "remove")
-		return Warehouse::StockPolicy::kRemove;
+		return StockPolicy::kRemove;
 	else
 		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
 }
 
-inline bool
-do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
+inline bool do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const StockPolicy p) {
 	wh->set_ware_policy(idx, p);
 	return true;
 }
@@ -4912,8 +4911,7 @@ do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::S
  * Sets the given policy for the given ware in the given warehouse and return true.
  * If the no ware with the given name exists for the tribe of the warehouse, return false.
  */
-inline bool
-do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
+inline bool do_set_ware_policy(Warehouse* wh, const std::string& name, const StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	DescriptionIndex idx = tribe.ware_index(name);
 	if (!tribe.has_ware(idx)) {
@@ -4922,8 +4920,7 @@ do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse::Stoc
 	return do_set_ware_policy(wh, idx, p);
 }
 
-inline bool
-do_set_worker_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
+inline bool do_set_worker_policy(Warehouse* wh, const DescriptionIndex idx, const StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	// If the worker does not cost anything, ignore it
 	// Otherwise, an unlimited stream of carriers might leave the warehouse
@@ -4941,8 +4938,7 @@ do_set_worker_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse:
  * policy.
  * If no worker with the given name exists for the tribe of the warehouse, return false.
  */
-inline bool
-do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
+inline bool do_set_worker_policy(Warehouse* wh, const std::string& name, const StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	DescriptionIndex idx = tribe.worker_index(name);
 	if (!tribe.has_worker(idx)) {
@@ -4972,7 +4968,7 @@ int LuaWarehouse::set_warehouse_policies(lua_State* L) {
 		report_error(L, "Wrong number of arguments to set_warehouse_policies!");
 
 	Warehouse* wh = get(L, get_egbase(L));
-	Warehouse::StockPolicy p = string_to_wh_policy(L, -1);
+	StockPolicy p = string_to_wh_policy(L, -1);
 	lua_pop(L, 1);
 	const TribeDescr& tribe = wh->owner().tribe();
 

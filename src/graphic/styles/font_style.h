@@ -44,6 +44,7 @@ enum class FontStyle {
 	kDisabled,
 	kLabel,
 	kTooltipHeader,
+	kTooltipHotkey,
 	kTooltip,
 	kWarning,
 	kWuiAttackBoxSliderLabel,
