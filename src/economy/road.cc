@@ -299,10 +299,6 @@ void Road::cleanup(EditorGameBase& egbase) {
 	PlayerImmovable::cleanup(egbase);
 }
 
-/** The road is drawn by the terrain renderer via marked fields. */
-void Road::draw(uint32_t, const TextToDraw, const Vector2f&, const Coords&, float, RenderTarget*) {
-}
-
 /**
  * Workers' economies are fixed by PlayerImmovable, but we need to handle
  * any requests ourselves.

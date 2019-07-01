@@ -131,13 +131,13 @@ protected:
 	void cleanup(EditorGameBase&) override;
 
 private:
-	// Does nothing
-	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
+	/** The road is drawn by the terrain renderer via marked fields. */
+	void draw(uint32_t,
+	          TextToDraw,
 	          const Vector2f&,
 	          const Coords&,
-	          float scale,
-	          RenderTarget* dst) override;
+	          float,
+			  RenderTarget*) override {}
 
 	void set_path(EditorGameBase&, const Path&);
 
