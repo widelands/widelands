@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-06-21 08:49+0000\n"
-"PO-Revision-Date: 2019-06-21 08:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
+"PO-Revision-Date: 2019-07-02 13:20+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -107,11 +107,11 @@ msgstr "»%s«"
 
 #: ../../data/scripting/richtext_scenarios.lua:90
 msgid "New Objective"
-msgstr ""
+msgstr "Nyt mål"
 
 #: ../../data/scripting/richtext_scenarios.lua:92
 msgid "New Objectives"
-msgstr ""
+msgstr "Nye mål"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:43
@@ -140,7 +140,7 @@ msgstr "Meget svag kunstig intelligens"
 #: ../../src/base/i18n.cc:374
 msgctxt "sentence_separator"
 msgid "%1% %2%"
-msgstr ""
+msgstr "%1% %2%"
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -282,7 +282,7 @@ msgstr "Vis byggepladser (til/fra)"
 
 #: ../../src/editor/editorinteractive.cc:101
 msgid "Show grid (on/off)"
-msgstr ""
+msgstr "Vis gitter (til/fra)"
 
 #: ../../src/editor/editorinteractive.cc:105
 msgid "Show immovables (on/off)"
@@ -646,7 +646,7 @@ msgstr "O.k."
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:60
 #: ../../src/ui_basic/messagebox.cc:95 ../../src/ui_fsmenu/launch_mpg.cc:78
 #: ../../src/ui_fsmenu/options.cc:92
-#: ../../src/wui/economy_options_window.cc:519
+#: ../../src/wui/economy_options_window.cc:516
 #: ../../src/wui/game_main_menu_save_game.cc:70 ../../src/wui/login_box.cc:63
 msgid "Cancel"
 msgstr "Annuller"
@@ -716,12 +716,12 @@ msgstr "Hold"
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:55
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:64
 msgid "Width"
-msgstr ""
+msgstr "Bredde"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:64
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:73
 msgid "Height"
-msgstr ""
+msgstr "Højde"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:77
 msgid "Create Map"
@@ -859,6 +859,7 @@ msgstr "Filnavn:"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:160
+#: ../../src/ui_fsmenu/internet_lobby.cc:449
 msgid "unnamed"
 msgstr "unavngivet"
 
@@ -1052,7 +1053,7 @@ msgstr "Vælg det punkt der skal have koordinat (0,0). Dette vil være det øver
 
 #: ../../src/editor/ui_menus/tool_menu.cc:69
 msgid "Change the map’s size"
-msgstr ""
+msgstr "Ændr kortets størrelse"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:38
 msgid "Random Height Options"
@@ -1080,21 +1081,21 @@ msgstr "Fast højde"
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:39
 msgid "Resize"
-msgstr ""
+msgstr "Ændr størrelse"
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:48
 msgid "New width"
-msgstr ""
+msgstr "Ny bredde"
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:57
 msgid "New height"
-msgstr ""
+msgstr "Ny højde"
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:67
 msgid ""
 "Select the new map size, then click the map to split it at the desired "
 "location."
-msgstr ""
+msgstr "Vælg den nye kortstørrelse, klik så på kortet for at opdele på den ønskede placering."
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
@@ -1118,7 +1119,7 @@ msgstr "Aktuel størrelse: %u"
 #: ../../src/graphic/gl/initialize.cc:205
 #, c-format
 msgid "ERROR: %s\n"
-msgstr ""
+msgstr "FEJL: %s\n"
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1126,7 +1127,7 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:228
 #: ../../src/graphic/gl/initialize.cc:247
 msgid "Widelands won’t work because your graphics driver is too old."
-msgstr ""
+msgstr "Widelands fungerer ikke da din grafikdriver er for gammel."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1134,7 +1135,7 @@ msgstr ""
 #: ../../src/graphic/gl/initialize.cc:231
 #: ../../src/graphic/gl/initialize.cc:250
 msgid "The shading language needs to be version 1.20 or newer."
-msgstr ""
+msgstr "Shadingsproget skal være version 1.20 eller senere."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1143,7 +1144,7 @@ msgstr ""
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
-msgstr ""
+msgstr "Widelands vil ikke fungere da vi ikke kunne registrere shadingsprogversion."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1152,7 +1153,7 @@ msgstr ""
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
-msgstr ""
+msgstr "Der opstod et ukendt problem under læsning af informationen fra grafikdriveren."
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces tha
@@ -1541,7 +1542,7 @@ msgstr "Ingen soldater fundet ved dette træningsniveau!"
 #: ../../src/logic/map_objects/tribes/production_program.cc:1428
 #, c-format
 msgid "Completed %s"
-msgstr ""
+msgstr "Fuldført %s"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:299
 msgid "(not occupied)"
@@ -1551,14 +1552,14 @@ msgstr "(ledig)"
 #. missing
 #: ../../src/logic/map_objects/tribes/productionsite.cc:307
 msgid "Worker missing"
-msgstr ""
+msgstr "Arbejder mangler"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker
 #. missing. If you need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/productionsite.cc:310
 msgid "Workers missing"
-msgstr ""
+msgstr "Arbejdere mangler"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:317
 msgid "(stopped)"
@@ -1736,7 +1737,7 @@ msgstr "%s kan ikke finde hjem og vil sandsynligvis dø."
 #: ../../src/logic/map_objects/tribes/worker.cc:1870
 #: ../../src/wui/productionsitewindow.cc:102
 msgid "Worker"
-msgstr ""
+msgstr "Arbejder"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1871
 msgid "Worker got lost!"
@@ -2075,7 +2076,7 @@ msgstr "Besked kunne ikke sendes."
 
 #: ../../src/network/internet_gaming.cc:687
 msgid "Command could not be executed."
-msgstr ""
+msgstr "Kommando kunne ikke afvikles."
 
 #: ../../src/network/internet_gaming.cc:707
 #, c-format
@@ -2102,27 +2103,27 @@ msgstr "Besked kunne ikke sendes: Var dette en privat besked?"
 
 #: ../../src/network/internet_gaming.cc:913
 msgid "Supported admin commands:"
-msgstr ""
+msgstr "Understøttede administratorkommandoer:"
 
 #: ../../src/network/internet_gaming.cc:914
 msgid "/motd <msg> sets a permanent greeting message"
-msgstr ""
+msgstr "/motd <msg> angiver en permanent velkomstbesked"
 
 #: ../../src/network/internet_gaming.cc:915
 msgid "/announce <msg> send a one time system message"
-msgstr ""
+msgstr "/announce <msg> send en engangssystembesked"
 
 #: ../../src/network/internet_gaming.cc:917
 msgid "/warn <user> <msg> send a private system message to the given user"
-msgstr ""
+msgstr "/warn <user> <msg> send en privat systembesked til den angivne bruger"
 
 #: ../../src/network/internet_gaming.cc:920
 msgid "/kick <user|game> removes the given user or game from the metaserver"
-msgstr ""
+msgstr "/kick <user|game> fjerner den angivne bruger eller spil fra metaserveren"
 
 #: ../../src/network/internet_gaming.cc:922
 msgid "/ban <user> bans a user for 24 hours from the metaserver"
-msgstr ""
+msgstr "/ban <user> giver en bruger karantæne i 24 timer fra metaserveren"
 
 #: ../../src/network/internet_gaming.cc:998
 msgid "Conversion error"
@@ -2150,11 +2151,11 @@ msgstr "Spillet findes ikke længere, måske er det bare blevet lukket."
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "Wrong password, please try again."
-msgstr ""
+msgstr "Forkert adgangskode, prøv igen."
 
 #: ../../src/network/internet_gaming_messages.cc:46
 msgid "You have been temporarily banned from online gaming."
-msgstr ""
+msgstr "Du har fået midlertidig karantæne fra onlinespil."
 
 #: ../../src/network/internet_gaming_messages.cc:47
 msgid "The protocol version you are using is not supported!"
@@ -2364,7 +2365,7 @@ msgstr "Kunne ikke bruge det lokale netværk!"
 msgid ""
 "Widelands was unable to use the local network. Maybe some other process is "
 "already running a server on port %s or your network setup is broken."
-msgstr ""
+msgstr "Widelands kunne ikke bruge det lokale netværk. Måske afvikler en anden proces allerede en server på port %s eller din netværksopsætning er ødelagt."
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -2500,7 +2501,7 @@ msgstr "Kampagnenavn"
 #. * TRANSLATORS: Header for campaign name
 #: ../../src/ui_fsmenu/campaigndetails.cc:48
 msgid "Campaign"
-msgstr ""
+msgstr "Kampagne"
 
 #. * TRANSLATORS: Header for campaign description
 #: ../../src/ui_fsmenu/campaigndetails.cc:70
@@ -2524,7 +2525,7 @@ msgstr "Tilsluttede klienter:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:71
 msgid "Open Games:"
-msgstr ""
+msgstr "Åbne spil:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:72
 msgid "Name of your server:"
@@ -2541,7 +2542,7 @@ msgstr "Åbn et nyt spil"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:98
 msgid "Leave Lobby"
-msgstr ""
+msgstr "Forlad lobby"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:151
 msgid "User Status"
@@ -2577,7 +2578,7 @@ msgstr "Spil"
 #: ../../src/ui_fsmenu/internet_lobby.cc:384
 #, c-format
 msgid "The game %s is already running. Please choose a different name."
-msgstr ""
+msgstr "Spillet %s kører allerede. Vælg venligst et andet navn."
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:398
 msgid ""
@@ -2595,7 +2596,7 @@ msgstr "Tidsudløb på forbindelsen"
 #: ../../src/ui_fsmenu/internet_lobby.cc:441
 #, c-format
 msgid "unnamed %u"
-msgstr ""
+msgstr "unavngivet %u"
 
 #: ../../src/ui_fsmenu/intro.cc:33
 msgid "Press any key or click to continue…"
@@ -2603,7 +2604,7 @@ msgstr "Tryk på en tast eller klik for at fortsætte..."
 
 #: ../../src/ui_fsmenu/launch_game.cc:58
 msgid "Peaceful mode"
-msgstr ""
+msgstr "Fredfyldt tilstand"
 
 #: ../../src/ui_fsmenu/launch_game.cc:59
 msgid "Start game"
@@ -2619,19 +2620,19 @@ msgstr "Tilbage"
 
 #: ../../src/ui_fsmenu/launch_game.cc:99
 msgid "The relations between players are set by the scenario"
-msgstr ""
+msgstr "Relationerne mellem spillere angives af scenariet"
 
 #: ../../src/ui_fsmenu/launch_game.cc:101
 msgid "The relations between players are set by the saved game"
-msgstr ""
+msgstr "Relationerne mellem spillere angives af det gemte spil"
 
 #: ../../src/ui_fsmenu/launch_game.cc:103
 msgid "The selected win condition does not allow peaceful matches"
-msgstr ""
+msgstr "Den valgte sejr-betingelse tillader ikke fredfyldte spil"
 
 #: ../../src/ui_fsmenu/launch_game.cc:105
 msgid "Forbid fighting between players"
-msgstr ""
+msgstr "Forbyd kamp mellem spillere"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/ui_fsmenu/launch_game.cc:112
@@ -2882,7 +2883,7 @@ msgstr "Vælg spiltype"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:45
 msgid "Online Game"
-msgstr ""
+msgstr "Onlinespil"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:46
 msgid "LAN / Direct IP"
@@ -2890,7 +2891,7 @@ msgstr "LAN / direkte IP"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:48 ../../src/wui/login_box.cc:31
 msgid "Online Game Settings"
-msgstr ""
+msgstr "Indstillinger for onlinespil"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:45
 msgid "Begin Network Game"
@@ -2950,7 +2951,7 @@ msgstr "Ukendt"
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters."
-msgstr ""
+msgstr "Indtast et gyldigt navn. Denne værdi må kun indeholde engelske bogstaver, tal og tegnene @ . + - _ ."
 
 #: ../../src/ui_fsmenu/options.cc:93
 msgid "Apply"
@@ -3083,7 +3084,7 @@ msgstr "Vælg et introduktionsspil"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:72
 msgid "Pick a tutorial from the list, then hit “OK”."
-msgstr ""
+msgstr "Vælg et introduktionsspil fra listen, tryk så på »O.k.«."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:74
 msgid ""
@@ -3092,7 +3093,7 @@ msgstr "Du kan se en beskrivelse af det valgte introduktionsspil til højre."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:92
 msgid "Return to campaign selection"
-msgstr ""
+msgstr "Tilbage til kampagnevalg"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:93
 msgid "Play this scenario"
@@ -3126,17 +3127,17 @@ msgstr "Nr."
 #: ../../src/ui_fsmenu/scenario_select.cc:204
 #, c-format
 msgid "Invalid path to file in campaigns.lua of tutorials.lua: %s"
-msgstr ""
+msgstr "Ugyldig sti til filen campaigns.lua for tutorials.lua: %s"
 
 #: ../../src/ui_fsmenu/scenariodetails.cc:47
 msgid "Tutorial"
-msgstr ""
+msgstr "Introduktionsspil"
 
 #. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:56 ../../src/wui/mapdetails.cc:129
 msgid "Author"
-msgstr ""
+msgstr "Forfatter"
 
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
@@ -3146,7 +3147,7 @@ msgstr ""
 #. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:59 ../../src/wui/mapdetails.cc:132
 msgid "Authors"
-msgstr ""
+msgstr "Forfattere"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:38
 msgid "New Game"
@@ -3237,7 +3238,7 @@ msgstr "Ønsker du at afbryde den aktive ekspedition?"
 
 #: ../../src/wui/attack_box.cc:196
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
-msgstr ""
+msgstr "Send færre soldater. Hold Ctrl nede for ikke at sende soldater."
 
 #: ../../src/wui/attack_box.cc:205
 msgid "Number of soldiers"
@@ -3246,7 +3247,7 @@ msgstr "Antal soldater"
 #: ../../src/wui/attack_box.cc:210
 msgid ""
 "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
-msgstr ""
+msgstr "Send flere soldater. Hold Ctrl nede for at sende så mange soldater som muligt"
 
 #: ../../src/wui/attack_box.cc:215
 msgid "Start attack"
@@ -3254,36 +3255,36 @@ msgstr "Start angreb"
 
 #: ../../src/wui/attack_box.cc:229
 msgid "Attackers:"
-msgstr ""
+msgstr "Angribere:"
 
 #: ../../src/wui/attack_box.cc:236
 msgid "Click on a soldier to remove him from the list of attackers"
-msgstr ""
+msgstr "Klik på en soldat for at fjerne ham fra listen over angribere"
 
 #: ../../src/wui/attack_box.cc:238
 msgid "Hold down Ctrl to remove all soldiers from the list"
-msgstr ""
+msgstr "Hold Ctrl nede for at fjerne alle soldater fra listen"
 
 #: ../../src/wui/attack_box.cc:239
 msgid ""
 "Hold down Shift to remove all soldiers up to the one you’re pointing at"
-msgstr ""
+msgstr "Hold Skift nede for at fjerne alle soldater op til den du peger på"
 
 #: ../../src/wui/attack_box.cc:247
 msgid "Not attacking:"
-msgstr ""
+msgstr "Angriber ikke:"
 
 #: ../../src/wui/attack_box.cc:253
 msgid "Click on a soldier to add him to the list of attackers"
-msgstr ""
+msgstr "Klik på en soldat for at tilføje ham til listen over angribere"
 
 #: ../../src/wui/attack_box.cc:255
 msgid "Hold down Ctrl to add all soldiers to the list"
-msgstr ""
+msgstr "Hold Ctrl neden for at tilføje alle soldater til listen"
 
 #: ../../src/wui/attack_box.cc:256
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
-msgstr ""
+msgstr "Hold Skift nede for at tilføje alle soldater op til den du peger på"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
 #: ../../src/wui/attack_box.cc:340 ../../src/wui/soldierlist.cc:390
@@ -3449,7 +3450,7 @@ msgstr "Arbejdere"
 
 #: ../../src/wui/economy_options_window.cc:66
 msgid "Decrease target by 10"
-msgstr ""
+msgstr "Sænk mål med 10"
 
 #: ../../src/wui/economy_options_window.cc:73
 msgid "Decrease target"
@@ -3461,60 +3462,60 @@ msgstr "Øg mål"
 
 #: ../../src/wui/economy_options_window.cc:87
 msgid "Increase target by 10"
-msgstr ""
+msgstr "Øg mål med 10"
 
 #: ../../src/wui/economy_options_window.cc:92
 msgid "Profile to apply to the selected items"
-msgstr ""
+msgstr "Profil at anvende på de valgte elementer"
 
 #: ../../src/wui/economy_options_window.cc:99
 msgid "Save target settings"
-msgstr ""
+msgstr "Gem målindstillinger"
 
-#: ../../src/wui/economy_options_window.cc:426
+#: ../../src/wui/economy_options_window.cc:423
 msgid "The profile name cannot be empty"
-msgstr ""
+msgstr "Profilnavnet kan ikke være tomt"
+
+#: ../../src/wui/economy_options_window.cc:424
+msgid "The default profile cannot be overwritten"
+msgstr "Standardprofilen kan ikke overskrives"
 
 #: ../../src/wui/economy_options_window.cc:427
-msgid "The default profile cannot be overwritten"
-msgstr ""
-
-#: ../../src/wui/economy_options_window.cc:430
 msgid "Save the profile under this name"
-msgstr ""
+msgstr "Gem profilen under dette navn"
+
+#: ../../src/wui/economy_options_window.cc:439
+msgid "The predefined profiles cannot be deleted"
+msgstr "De på forhånd definerede profiler kan ikke slettes"
 
 #: ../../src/wui/economy_options_window.cc:442
-msgid "The predefined profiles cannot be deleted"
-msgstr ""
-
-#: ../../src/wui/economy_options_window.cc:445
 msgid "Delete the selected profiles"
-msgstr ""
+msgstr "Slet de valgte profiler"
 
-#: ../../src/wui/economy_options_window.cc:467
+#: ../../src/wui/economy_options_window.cc:464
 msgid "Overwrite?"
-msgstr ""
+msgstr "Overskriv?"
 
-#: ../../src/wui/economy_options_window.cc:468
+#: ../../src/wui/economy_options_window.cc:465
 msgid "A profile with this name already exists. Do you wish to replace it?"
-msgstr ""
+msgstr "En profil med dette navn findes allerede. Ønsker du at erstatte den?"
 
-#: ../../src/wui/economy_options_window.cc:511
+#: ../../src/wui/economy_options_window.cc:508
 msgid "Save Profile"
-msgstr ""
+msgstr "Gem profil"
 
-#: ../../src/wui/economy_options_window.cc:518 ../../src/wui/login_box.cc:57
+#: ../../src/wui/economy_options_window.cc:515 ../../src/wui/login_box.cc:57
 msgid "Save"
-msgstr ""
+msgstr "Gem"
 
-#: ../../src/wui/economy_options_window.cc:520
+#: ../../src/wui/economy_options_window.cc:517
 #: ../../src/wui/load_or_save_game.cc:94
 msgid "Delete"
 msgstr "Slet"
 
-#: ../../src/wui/economy_options_window.cc:521
+#: ../../src/wui/economy_options_window.cc:518
 msgid "Existing Profiles"
-msgstr ""
+msgstr "Eksisterende profiler"
 
 #: ../../src/wui/fieldaction.cc:222
 msgid "Build small building"
@@ -4389,7 +4390,7 @@ msgstr "Adgangskode:"
 
 #: ../../src/wui/login_box.cc:41
 msgid "Log in to a registered account."
-msgstr ""
+msgstr "Log ind til en registreret konto."
 
 #: ../../src/wui/login_box.cc:46
 #, c-format
@@ -4468,7 +4469,7 @@ msgstr "tom"
 
 #: ../../src/wui/mapdetails.cc:92
 msgid "Directory"
-msgstr ""
+msgstr "Mappe"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being
@@ -4491,7 +4492,7 @@ msgstr "Navnet på dette kort på dit sprog: %s"
 #. * TRANSLATORS: Map hint header when selecting a map.
 #: ../../src/wui/mapdetails.cc:155
 msgid "Hint"
-msgstr ""
+msgstr "Fif"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/wui/maptable.cc:34
@@ -4852,22 +4853,22 @@ msgstr ""
 #: ../../src/wui/sound_options.cc:125
 msgctxt "sound_options"
 msgid "Music"
-msgstr ""
+msgstr "Musik"
 
 #: ../../src/wui/sound_options.cc:127
 msgctxt "sound_options"
 msgid "Chat Messages"
-msgstr ""
+msgstr "Diskussionsbeskeder"
 
 #: ../../src/wui/sound_options.cc:130
 msgctxt "sound_options"
 msgid "Game Messages"
-msgstr ""
+msgstr "Spilbeskeder"
 
 #: ../../src/wui/sound_options.cc:134
 msgctxt "sound_options"
 msgid "User Interface"
-msgstr ""
+msgstr "Brugerflade"
 
 #: ../../src/wui/sound_options.cc:136
 msgctxt "sound_options"
@@ -4878,7 +4879,7 @@ msgstr ""
 msgid ""
 "Sound is disabled either due to a problem with the sound driver, or because "
 "it was switched off at the command line."
-msgstr ""
+msgstr "Lyd er deaktiveret på grund af et problem med lyddriveren, eller fordi den blev deaktiveret via kommandolinjen."
 
 #: ../../src/wui/stock_menu.cc:41
 msgid "Wares (total)"
@@ -4899,7 +4900,7 @@ msgstr "Arbejdere på lager"
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../src/wui/suggested_teams_box.cc:90
 msgid "Suggested Teams"
-msgstr ""
+msgstr "Foreslåede hold"
 
 #: ../../src/wui/trainingsitewindow.cc:47
 msgid "Soldiers in training"
