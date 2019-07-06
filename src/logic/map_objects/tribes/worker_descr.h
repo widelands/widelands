@@ -87,7 +87,7 @@ public:
 			default_target_quantity_ = 1;
 	}
 
-	virtual const DirAnimations& get_right_walk_anims(bool const carries_ware, const Worker*) const {
+	virtual const DirAnimations& get_right_walk_anims(bool const carries_ware, Worker*) const {
 		return carries_ware ? walkload_anims_ : walk_anims_;
 	}
 	WorkerProgram const* get_program(const std::string&) const;

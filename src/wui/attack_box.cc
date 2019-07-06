@@ -27,7 +27,7 @@
 #include "base/macros.h"
 #include "graphic/font_handler.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/soldier.h"
 
 constexpr int32_t kUpdateTimeInGametimeMs = 500;  //  half a second, gametime
@@ -78,10 +78,12 @@ std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box& parent,
 	return result;
 }
 
-UI::Textarea&
-AttackBox::add_text(UI::Box& parent, std::string str, UI::Align alignment, int fontsize) {
-	UI::Textarea& result = *new UI::Textarea(&parent, str.c_str());
-	result.set_fontsize(fontsize);
+UI::Textarea& AttackBox::add_text(UI::Box& parent,
+                                  std::string str,
+                                  UI::Align alignment,
+                                  const UI::FontStyle style) {
+	UI::Textarea& result =
+	   *new UI::Textarea(&parent, str.c_str(), UI::Align::kLeft, g_gr->styles().font_style(style));
 	parent.add(&result, UI::Box::Resizing::kAlign, alignment);
 	return result;
 }
@@ -181,7 +183,6 @@ void AttackBox::update_attack(bool action_on_panel) {
 
 void AttackBox::init() {
 	assert(node_coordinates_);
-
 	std::vector<Widelands::Soldier*> all_attackers = get_max_attackers();
 	const size_t max_attackers = all_attackers.size();
 
@@ -198,7 +199,7 @@ void AttackBox::init() {
 	linebox.add(&columnbox);
 
 	soldiers_text_.reset(&add_text(columnbox, slider_heading(max_attackers > 0 ? 1 : 0),
-	                               UI::Align::kCenter, UI_FONT_SIZE_ULTRASMALL));
+	                               UI::Align::kCenter, UI::FontStyle::kWuiAttackBoxSliderLabel));
 
 	soldiers_slider_ = add_slider(
 	   columnbox, 210, 17, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));
@@ -222,32 +223,41 @@ void AttackBox::init() {
 		remaining_soldiers_->add(s);
 	}
 
-	boost::format tooltip_format("%s<br><p><font size=%d bold=0>%s<br>%s</font></p>");
+	boost::format tooltip_format("<p>%s%s%s</p>");
 	{
-		UI::Textarea& txt = add_text(mainbox, _("Attackers:"));
+		UI::Textarea& txt =
+		   add_text(mainbox, _("Attackers:"), UI::Align::kLeft, UI::FontStyle::kLabel);
 		// Needed so we can get tooltips
 		txt.set_handle_mouse(true);
 		txt.set_tooltip(
-		   (tooltip_format % _("Click on a soldier to remove him from the list of attackers") %
-		    UI_FONT_SIZE_MESSAGE % _("Hold down Ctrl to remove all soldiers from the list") %
-		    _("Hold down Shift to remove all soldiers up to the one you’re pointing at"))
+		   (tooltip_format %
+		    g_gr->styles()
+		       .font_style(UI::FontStyle::kTooltipHeader)
+		       .as_font_tag(_("Click on a soldier to remove him from the list of attackers")) %
+		    as_listitem(
+		       _("Hold down Ctrl to remove all soldiers from the list"), UI::FontStyle::kTooltip) %
+		    as_listitem(_("Hold down Shift to remove all soldiers up to the one you’re pointing at"),
+		                UI::FontStyle::kTooltip))
 		      .str());
 		mainbox.add(attacking_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
 
 	{
-		UI::Textarea& txt = add_text(mainbox, _("Not attacking:"));
+		UI::Textarea& txt =
+		   add_text(mainbox, _("Not attacking:"), UI::Align::kLeft, UI::FontStyle::kLabel);
 		txt.set_handle_mouse(true);
 		txt.set_tooltip(
-		   (tooltip_format % _("Click on a soldier to add him to the list of attackers") %
-		    UI_FONT_SIZE_MESSAGE % _("Hold down Ctrl to add all soldiers to the list") %
-		    _("Hold down Shift to add all soldiers up to the one you’re pointing at"))
+		   (tooltip_format %
+		    g_gr->styles()
+		       .font_style(UI::FontStyle::kTooltipHeader)
+		       .as_font_tag(_("Click on a soldier to add him to the list of attackers")) %
+		    as_listitem(
+		       _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kTooltip) %
+		    as_listitem(_("Hold down Shift to add all soldiers up to the one you’re pointing at"),
+		                UI::FontStyle::kTooltip))
 		      .str());
 		mainbox.add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
-
-	current_soldier_stats_.reset(new UI::Textarea(&mainbox, "", UI::Align::kCenter));
-	mainbox.add(current_soldier_stats_.get(), UI::Box::Resizing::kFullSize, UI::Align::kCenter);
 
 	soldiers_slider_->set_enabled(max_attackers > 0);
 	more_soldiers_->set_enabled(max_attackers > 0);
@@ -322,20 +332,19 @@ bool AttackBox::ListOfSoldiers::handle_mousepress(uint8_t btn, int32_t x, int32_
 }
 
 void AttackBox::ListOfSoldiers::handle_mousein(bool) {
-	attack_box_->set_soldier_info_text();
+	set_tooltip(std::string());
 }
 
 bool AttackBox::ListOfSoldiers::handle_mousemove(uint8_t, int32_t x, int32_t y, int32_t, int32_t) {
 	if (const Widelands::Soldier* soldier = soldier_at(x, y)) {
-		attack_box_->set_soldier_info_text(
-		   (boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
-		    soldier->get_health_level() % soldier->descr().get_max_health_level() %
-		    soldier->get_attack_level() % soldier->descr().get_max_attack_level() %
-		    soldier->get_defense_level() % soldier->descr().get_max_defense_level() %
-		    soldier->get_evade_level() % soldier->descr().get_max_evade_level())
-		      .str());
+		set_tooltip((boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
+		             soldier->get_health_level() % soldier->descr().get_max_health_level() %
+		             soldier->get_attack_level() % soldier->descr().get_max_attack_level() %
+		             soldier->get_defense_level() % soldier->descr().get_max_defense_level() %
+		             soldier->get_evade_level() % soldier->descr().get_max_evade_level())
+		               .str());
 	} else {
-		attack_box_->set_soldier_info_text();
+		set_tooltip(std::string());
 	}
 	return true;
 }

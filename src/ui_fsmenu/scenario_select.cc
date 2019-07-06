@@ -26,7 +26,6 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
-#include "graphic/text_constants.h"
 #include "logic/filesystem_constants.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
@@ -51,8 +50,11 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
      title_(&header_box_,
             0,
             0,
+            0,
+            0,
             is_tutorial_ ? _("Choose a tutorial") : _("Choose a scenario"),
-            UI::Align::kCenter),
+            UI::Align::kCenter,
+            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
      subtitle_(&header_box_,
                0,
                0,
@@ -64,7 +66,6 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
                UI::MultilineTextarea::ScrollMode::kNoScrolling),
      scenario_details_(this),
      campaign_(camp) {
-	title_.set_fontsize(UI_FONT_SIZE_BIG);
 
 	// Set subtitle of the page
 	if (campaign_ == nullptr) {
@@ -218,9 +219,7 @@ void FullscreenMenuScenarioSelect::fill_table() {
 		te.set_string(0, (boost::format("%d") % (i + 1)).str());
 		te.set_picture(
 		   1, g_gr->images().get("images/ui_basic/ls_wlmap.png"), scenario_data->descname);
-		if (!scenario_data->playable) {
-			te.set_color(UI_FONT_CLR_DISABLED);
-		}
+		te.set_disabled(!scenario_data->playable);
 	}
 
 	if (!table_.empty()) {

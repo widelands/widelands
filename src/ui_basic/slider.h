@@ -21,6 +21,7 @@
 
 #include <boost/signals2.hpp>
 
+#include "graphic/styles/text_panel_style.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -105,7 +106,6 @@ private:
 	void set_highlighted(bool highlighted);
 
 public:
-	boost::signals2::signal<void()> clicked;
 	boost::signals2::signal<void()> changed;
 	boost::signals2::signal<void(int32_t)> changedto;
 
@@ -236,6 +236,11 @@ protected:
 	void draw(RenderTarget& dst) override;
 	void layout() override;
 
+private:
+	// We need the style to initialize the slider, so it has to come first.
+	const UI::TextPanelStyleInfo& style;
+
+protected:
 	HorizontalSlider slider;
 
 private:

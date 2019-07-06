@@ -91,7 +91,7 @@ private:
 	/// Jumps to the next / previous appropriate building
 	void jump_building(JumpTarget target, bool reverse);
 
-	/// Sets the label for id type to text in the chosen color with dynamic font size
+	/// Sets the label for the given textarea to text in the chosen color
 	void set_labeltext(UI::Textarea* textarea, const std::string& text, const RGBColor& color);
 
 	/// Sets the current building type for the bottom navigation
@@ -106,6 +106,9 @@ private:
 	int32_t validate_pointer(int32_t*, int32_t);
 
 	InteractivePlayer& iplayer() const;
+
+	/// Style
+	const UI::BuildingStatisticsStyleInfo& style_;
 
 	/// UI tabs
 	UI::TabPanel tab_panel_;

@@ -761,18 +761,23 @@ void Player::enhance_or_dismantle(Building* building,
 			workers = building->get_workers();
 		}
 
+		const BuildingSettings* settings = nullptr;
 		if (index_of_new_building != INVALID_INDEX) {
+			settings = building->create_building_settings();
 			// For enhancing, register whether the window was open
 			Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kStartWarp));
 		}
+
 		building->remove(egbase());  //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
 		//  pointer.
-		if (index_of_new_building != INVALID_INDEX)
+
+		if (index_of_new_building != INVALID_INDEX) {
 			building = &egbase().warp_constructionsite(
-			   position, player_number_, index_of_new_building, false, former_buildings);
-		else
+			   position, player_number_, index_of_new_building, false, former_buildings, settings);
+		} else {
 			building = &egbase().warp_dismantlesite(position, player_number_, false, former_buildings);
+		}
 
 		// Open the new building window if needed
 		Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kFinishWarp));
@@ -962,8 +967,18 @@ void Player::enemyflagaction(Flag& flag,
 			if (const AttackTarget* attack_target = building->attack_target()) {
 				if (attack_target->can_be_attacked()) {
 					for (Soldier* temp_attacker : soldiers) {
-						upcast(MilitarySite, ms, temp_attacker->get_location(egbase()));
-						ms->send_attacker(*temp_attacker, *building);
+						assert(temp_attacker);
+						assert(temp_attacker->get_owner() == this);
+						if (upcast(MilitarySite, ms, temp_attacker->get_location(egbase()))) {
+							assert(ms->get_owner() == this);
+							ms->send_attacker(*temp_attacker, *building);
+						} else {
+							// The soldier may not be in a militarysite anymore if he was kicked out
+							// in the short delay between sending and executing a playercommand
+							log("Player(%u)::enemyflagaction: Not sending soldier %u because he left the "
+							    "building\n",
+							    player_number(), temp_attacker->serial());
+						}
 					}
 				}
 			}

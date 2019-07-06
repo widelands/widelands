@@ -72,8 +72,8 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 50 + 3.6
             "return=skipped unless economy needs fur_garment_studded",
-            "sleep=25000",
             "consume=fur_garment iron",
+            "sleep=25000",
             "animate=working 25000",
             "produce=fur_garment_studded"
          },
@@ -84,8 +84,8 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 50 + 3.6
             "return=skipped unless economy needs fur_garment_golden",
-            "sleep=25000",
             "consume=fur_garment iron gold",
+            "sleep=25000",
             "animate=working 25000",
             "produce=fur_garment_golden"
          },

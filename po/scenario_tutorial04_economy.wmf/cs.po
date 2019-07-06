@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Matej Svrcek <mmatej@yahoo.com>, 2016
@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-14 06:11+0000\n"
-"PO-Revision-Date: 2018-09-14 06:13+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 10:12+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -969,16 +969,3 @@ msgid ""
 "If you have still questions, the Widelands community will surely help you. "
 "You can find it at:"
 msgstr "Toto byl poslední tutoriál, který jsem pro tebe připravil. Teď jsem tě naučil všechno, co vím. Přestou jsou v tomto světě tajemství, o kterých ani já nevím. Já se nyní poohlédnu po nějakém klidném místě, kde strávím zbytek života. Pokud máš nějaké otázky, komunita Widelands ti jistě ráda pomůže. Nalezneš ji tady:"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Nový úkol"
-msgstr[1] "Nové úkoly"
-msgstr[2] "Nové úkoly"
-msgstr[3] "Nové úkoly"

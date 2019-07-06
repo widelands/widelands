@@ -12,7 +12,7 @@ world:new_immovable_type{
          pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 10, 11 },
          sound_effect = {
-            path = "sound/animals/frog1",
+            path = "sound/animals/frog",
          },
       },
    }

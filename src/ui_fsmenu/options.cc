@@ -35,7 +35,6 @@
 #include "graphic/graphic.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -79,7 +78,14 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      padding_(10),
 
      // Title
-     title_(this, 0, 0, _("Options"), UI::Align::kCenter),
+     title_(this,
+            0,
+            0,
+            0,
+            0,
+            _("Options"),
+            UI::Align::kCenter,
+            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),
@@ -99,23 +105,27 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      // Interface options
      language_dropdown_(&box_interface_left_,
+                        "dropdown_language",
                         0,
                         0,
                         100,  // 100 is arbitrary, will be resized in layout().
-                        100,  // 100 is arbitrary, will be resized in layout().
+                        50,
                         24,
                         _("Language"),
                         UI::DropdownType::kTextual,
-                        UI::PanelStyle::kFsMenu),
+                        UI::PanelStyle::kFsMenu,
+                        UI::ButtonStyle::kFsMenuMenu),
      resolution_dropdown_(&box_interface_left_,
+                          "dropdown_resolution",
                           0,
                           0,
                           100,  // 100 is arbitrary, will be resized in layout().
-                          100,  // 100 is arbitrary, will be resized in layout().
+                          50,
                           24,
                           _("Window Size"),
                           UI::DropdownType::kTextual,
-                          UI::PanelStyle::kFsMenu),
+                          UI::PanelStyle::kFsMenu,
+                          UI::ButtonStyle::kFsMenuMenu),
 
      fullscreen_(&box_interface_left_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
@@ -213,8 +223,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      /** TRANSLATORS: and it also lets you jump to it on the map. */
      single_watchwin_(&box_game_, Vector2i::zero(), _("Use single watchwindow mode")),
      os_(opt) {
-	// Set up UI Elements
-	title_.set_fontsize(UI_FONT_SIZE_BIG);
 
 	// Buttons
 	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_);
@@ -523,7 +531,8 @@ void FullscreenMenuOptions::update_language_stats(bool include_system_lang) {
 		             .str();
 	}
 	// Make font a bit smaller so the link will fit at 800x600 resolution.
-	translation_info_.set_text(as_uifont(message, 12));
+	translation_info_.set_text(
+	   as_richtext_paragraph(message, UI::FontStyle::kFsMenuTranslationInfo));
 }
 
 void FullscreenMenuOptions::clicked_apply() {

@@ -26,7 +26,6 @@
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "base/wexception.h"
-#include "graphic/text_constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -47,20 +46,28 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      buth_(get_h() * 9 / 200),
 
      win_condition_dropdown_(this,
+                             "dropdown_wincondition",
                              get_w() * 7 / 10,
                              get_h() * 4 / 10 + buth_,
                              butw_,
-                             get_h() - get_h() * 4 / 10 - buth_,
+                             10,  // max number of items
                              buth_,
                              "",
                              UI::DropdownType::kTextual,
-                             UI::PanelStyle::kFsMenu),
-
+                             UI::PanelStyle::kFsMenu,
+                             UI::ButtonStyle::kFsMenuMenu),
      peaceful_(this, Vector2i(get_w() * 7 / 10, get_h() * 19 / 40 + buth_), _("Peaceful mode")),
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
-     title_(this, get_w() / 2, get_h() / 25, "", UI::Align::kCenter),
+     title_(this,
+            get_w() / 2,
+            get_h() / 25,
+            0,
+            0,
+            "",
+            UI::Align::kCenter,
+            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
      // Variables and objects used in the menu
      settings_(settings),
      ctrl_(ctrl),
@@ -75,7 +82,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 
 	lua_ = new LuaInterface();
 
-	title_.set_fontsize(fs_big());
+	title_.set_font_scale(scale_factor());
 }
 
 FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {

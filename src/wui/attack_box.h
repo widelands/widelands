@@ -27,7 +27,6 @@
 
 #include "graphic/font_handler.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/player.h"
@@ -55,9 +54,6 @@ struct AttackBox : public UI::Box {
 
 	size_t count_soldiers() const;
 	std::vector<Widelands::Serial> soldiers() const;
-	void set_soldier_info_text(std::string text = "") {
-		current_soldier_stats_->set_text(text);
-	}
 
 	UI::Button* get_attack_button() const {
 		return attack_button_.get();
@@ -72,11 +68,8 @@ private:
 	                                                 uint32_t max,
 	                                                 uint32_t initial,
 	                                                 char const* hint);
-	// TODO(GunChleoc): This should also return a unique_ptr
-	UI::Textarea& add_text(UI::Box& parent,
-	                       std::string str,
-	                       UI::Align alignment = UI::Align::kLeft,
-	                       int fontsize = UI_FONT_SIZE_SMALL);
+	UI::Textarea&
+	add_text(UI::Box& parent, std::string str, UI::Align alignment, const UI::FontStyle style);
 	std::unique_ptr<UI::Button> add_button(UI::Box& parent,
 	                                       const std::string& text,
 	                                       void (AttackBox::*fn)(),
@@ -161,7 +154,6 @@ private:
 
 	std::unique_ptr<ListOfSoldiers> attacking_soldiers_;
 	std::unique_ptr<ListOfSoldiers> remaining_soldiers_;
-	std::unique_ptr<UI::Textarea> current_soldier_stats_;
 	std::unique_ptr<UI::Button> attack_button_;
 
 	/// The last time the information in this Panel got updated

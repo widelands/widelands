@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -350,7 +350,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:230
 msgid "Victory"
-msgstr ""
+msgstr "Buaidh"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
 msgid ""
@@ -1638,16 +1638,3 @@ msgstr ""
 "Mallachd oirbh a Lutius on a mharbh sibh luchd-frithealaidh sìtheil na ban-"
 "dia Vesta! Gum bhiodh an droch-fhortan air ur beatha ’s ur dùthaich agus gun"
 " sgiùrsadh fearg na ban-dia ar teaghlach às an t-saoghal!"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Amas ùr"
-msgstr[1] "Amasan ùra"
-msgstr[2] "Amasan ùra"
-msgstr[3] "Amasan ùra"
