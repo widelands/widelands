@@ -53,6 +53,15 @@ struct BuildingSettings {
 	virtual void apply(const BuildingSettings&) {
 	}
 
+protected:
+	enum class BuildingType : uint8_t {
+		kWarehouse = 1,
+		kProductionsite = 2,
+		kTrainingsite = 3,
+		kMilitarysite = 4,
+	};
+	virtual BuildingType type() const = 0;
+
 private:
 	const std::string descr_;
 };
@@ -74,6 +83,11 @@ struct ProductionsiteSettings : public BuildingSettings {
 	std::vector<std::pair<DescriptionIndex, InputQueueSetting>> ware_queues;
 	std::vector<std::pair<DescriptionIndex, InputQueueSetting>> worker_queues;
 	bool stopped;
+
+protected:
+	BuildingType type() const override {
+		return BuildingType::kProductionsite;
+	}
 };
 
 struct MilitarysiteSettings : public BuildingSettings {
@@ -88,6 +102,11 @@ struct MilitarysiteSettings : public BuildingSettings {
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
 	bool prefer_heroes;
+
+protected:
+	BuildingType type() const override {
+		return BuildingType::kMilitarysite;
+	}
 };
 
 struct TrainingsiteSettings : public ProductionsiteSettings {
@@ -101,6 +120,11 @@ struct TrainingsiteSettings : public ProductionsiteSettings {
 
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
+
+protected:
+	BuildingType type() const override {
+		return BuildingType::kTrainingsite;
+	}
 };
 
 struct WarehouseSettings : public BuildingSettings {
@@ -116,6 +140,11 @@ struct WarehouseSettings : public BuildingSettings {
 	std::map<DescriptionIndex, StockPolicy> worker_preferences;
 	const bool launch_expedition_allowed;
 	bool launch_expedition;
+
+protected:
+	BuildingType type() const override {
+		return BuildingType::kWarehouse;
+	}
 };
 
 }  // namespace Widelands

@@ -76,7 +76,7 @@ private:
 
 BuildGrid::BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32_t y, int32_t cols)
    : UI::IconGrid(parent, x, y, kBuildGridCellSize, kBuildGridCellSize, cols), plr_(plr) {
-	clicked.connect(boost::bind(&BuildGrid::click_slot, this, _1));
+	icon_clicked.connect(boost::bind(&BuildGrid::click_slot, this, _1));
 	mouseout.connect(boost::bind(&BuildGrid::mouseout_slot, this, _1));
 	mousein.connect(boost::bind(&BuildGrid::mousein_slot, this, _1));
 }

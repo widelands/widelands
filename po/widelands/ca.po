@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-06-21 08:49+0000\n"
-"PO-Revision-Date: 2019-06-21 08:50+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
+"PO-Revision-Date: 2019-07-03 16:50+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -329,7 +329,7 @@ msgstr "Format no compatible"
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
-msgstr "El Widelands no ha trobat l'arxiu «%s». El format de l'arxiu sembla ser incompatible."
+msgstr "El Widelands no ha trobat el fitxer «%s». El format sembla ser incompatible."
 
 #: ../../src/editor/editorinteractive.cc:184 ../../src/logic/game.cc:232
 #: ../../src/logic/game.cc:289
@@ -645,7 +645,7 @@ msgstr "D'acord"
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:60
 #: ../../src/ui_basic/messagebox.cc:95 ../../src/ui_fsmenu/launch_mpg.cc:78
 #: ../../src/ui_fsmenu/options.cc:92
-#: ../../src/wui/economy_options_window.cc:519
+#: ../../src/wui/economy_options_window.cc:516
 #: ../../src/wui/game_main_menu_save_game.cc:70 ../../src/wui/login_box.cc:63
 msgid "Cancel"
 msgstr "Cancel·la"
@@ -665,7 +665,7 @@ msgstr "Mostra els noms originals dels mapes"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:132
 #: ../../src/ui_fsmenu/loadgame.cc:66
 msgid "Show Filenames"
-msgstr "Mostra noms d'arxius"
+msgstr "Mostra els noms dels fitxers"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:101
 msgid "Map name:"
@@ -854,16 +854,17 @@ msgstr "Crea el directori"
 #: ../../src/wui/game_main_menu_save_game.cc:66
 #: ../../src/wui/gamedetails.cc:143
 msgid "Filename:"
-msgstr "Nom de l'arxiu:"
+msgstr "Nom del fitxer:"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:160
+#: ../../src/ui_fsmenu/internet_lobby.cc:449
 msgid "unnamed"
 msgstr "sense nom"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:169
 msgid "A file or directory with that name already exists."
-msgstr "Ja existeix un arxiu o una carpeta amb aquest nom."
+msgstr "Ja existeix un fitxer o una carpeta amb aquest nom."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:171
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:186
@@ -879,7 +880,7 @@ msgstr "S'ha produït un error mentre es creava el directori «%s»."
 #: ../../src/wui/game_main_menu_save_game.cc:226
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr "Ja existeix un arxiu amb el nom «%s». Voleu sobreescriure'l?"
+msgstr "Ja existeix un fitxer amb el nom «%s». Voleu sobreescriure'l?"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:298
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:341
@@ -1823,19 +1824,19 @@ msgstr "El Widelands no ha pogut establir una connexió amb l'adreça donada. O 
 
 #: ../../src/network/gameclient.cc:783
 msgid "/me 's file failed md5 checksumming."
-msgstr "/me - la suma md5 de l'arxiu ha fallat."
+msgstr "/me - la suma md5 del fitxer ha fallat."
 
 #: ../../src/network/gameclient.cc:824
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
-msgstr "/me ha comprovat l'arxiu rebut. Encara que la suma md5 és correcta, no es pot manipular l'arxiu."
+msgstr "/me ha comprovat el fitxer rebut. Encara que la suma md5 és correcta, el fitxer no es pot manipular."
 
 #. * TRANSLATORS: %s contains an error message.
 #: ../../src/network/gameclient.cc:1076
 #, c-format
 msgid "%s An automatic savegame will be created."
-msgstr "%s Es guardarà l'arxiu de la partida automàticament."
+msgstr "%s Es guardarà el fitxer de la partida automàticament."
 
 #: ../../src/network/gameclient.cc:1080
 msgid "Disconnected from Host"
@@ -2101,7 +2102,7 @@ msgstr "No s'ha pogut enviar el missatge. Era un missatge privat?"
 
 #: ../../src/network/internet_gaming.cc:913
 msgid "Supported admin commands:"
-msgstr ""
+msgstr "Ordres d'administrador suportades:"
 
 #: ../../src/network/internet_gaming.cc:914
 msgid "/motd <msg> sets a permanent greeting message"
@@ -2153,7 +2154,7 @@ msgstr "Contrasenya incorrecta. Torneu a provar."
 
 #: ../../src/network/internet_gaming_messages.cc:46
 msgid "You have been temporarily banned from online gaming."
-msgstr ""
+msgstr "Us han prohibit jugar en línia temporalment."
 
 #: ../../src/network/internet_gaming_messages.cc:47
 msgid "The protocol version you are using is not supported!"
@@ -2307,11 +2308,11 @@ msgstr "El client ha enviat un informe de sincronització inesperat."
 
 #: ../../src/network/network_gaming_messages.cc:157
 msgid "Client requests file although none is available to send."
-msgstr "El client demana un arxiu, encara que no n'hi ha cap disponible per enviar."
+msgstr "El client demana un fitxer, encara que no n'hi ha cap disponible per enviar."
 
 #: ../../src/network/network_gaming_messages.cc:158
 msgid "Client requests file part that does not exist."
-msgstr "El client demana una part d'arxiu que no existeix."
+msgstr "El client demana una part d'un fitxer que no existeix."
 
 #: ../../src/network/network_gaming_messages.cc:159
 #, c-format
@@ -2331,17 +2332,17 @@ msgstr "%s s'ha unit a la partida"
 #: ../../src/network/network_gaming_messages.cc:163
 #, c-format
 msgid "Started to send file %1$s to %2$s!"
-msgstr "S'ha començat a enviar l'arxiu %1$s a %2$s!"
+msgstr "S'ha començat a enviar el fitxer %1$s a %2$s!"
 
 #: ../../src/network/network_gaming_messages.cc:164
 #, c-format
 msgid "Completed transfer of file %1$s to %2$s"
-msgstr "S'ha completat de transferir l'arxiu %1$s a %2$s"
+msgstr "S'ha completat la transferència del fitxer %1$s a %2$s"
 
 #: ../../src/network/network_gaming_messages.cc:165
 #, c-format
 msgid "Sending part %1$s of file %2$s to %3$s"
-msgstr "S'està enviant la part %1$s de l'arxiu %2$s a %3$s"
+msgstr "S'està enviant la part %1$s del fitxer %2$s a %3$s"
 
 #: ../../src/network/network_gaming_messages.cc:166
 #, c-format
@@ -2721,7 +2722,7 @@ msgstr "AVÍS:\nLa partida desada que heu seleccionat és un directori. Això pa
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:367 ../../src/ui_fsmenu/launch_spg.cc:196
 msgid "File not found"
-msgstr "No s'ha trobat l'arxiu"
+msgstr "No s'ha trobat el fitxer"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:368 ../../src/ui_fsmenu/launch_spg.cc:197
 #, c-format
@@ -2729,13 +2730,13 @@ msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
 "The file was: %s\n"
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
-msgstr "El Widelands ha intentat iniciar la partida però l'arxiu no s'ha pogut trobar.\nL'arxiu és «%s».\nSi això passa en una partida en xarxa, l'amfitrió pot haver seleccionat un arxiu que no teniu al vostre ordinador. Normalment, l'amfitrió us ha d'enviar l'arxiu. Potser la transferència no s'ha completat?"
+msgstr "El Widelands ha intentat iniciar la partida però el fitxer no s'ha pogut trobar.\nEl nom del fitxer és «%s».\nSi això passa en una partida en xarxa, l'amfitrió pot haver seleccionat un fitxer que no teniu al vostre ordinador. Normalment, l'amfitrió us l'ha d'enviar. Potser la transferència no s'ha completat?"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:409
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
-msgstr "No es pot trobar l'arxiu seleccionat. Si no se t'envia automàticament, si us plau, informeu l'amfitrió d'aquest problema."
+msgstr "No es pot trobar el fitxer seleccionat. Si no se t'envia automàticament, si us plau, informeu l'amfitrió d'aquest problema."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:440
 #, c-format
@@ -2749,7 +2750,7 @@ msgstr "Sou un espectador."
 #: ../../src/ui_fsmenu/launch_mpg.cc:466
 #, c-format
 msgid "Unable to load the win condition script file '%s'."
-msgstr "No s'ha pogut carregar la condició de victòria de l'arxiu de script «%s»."
+msgstr "No s'ha pogut carregar l'script amb la condició de victòria del fitxer «%s»."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:519
 msgid "Saved players are:"
@@ -3001,11 +3002,11 @@ msgstr "Desa automàticament cada:"
 
 #: ../../src/ui_fsmenu/options.cc:197
 msgid "Maximum number of autosave files:"
-msgstr "Nombre màxim d'arxius de desades automàtiques:"
+msgstr "Nombre màxim de fitxers de desades automàtiques:"
 
 #: ../../src/ui_fsmenu/options.cc:203
 msgid "Compress widelands data files (maps, replays and savegames)"
-msgstr "Comprimeix els arxius de dades del Widelands (mapes, repeticions i partides desades)"
+msgstr "Comprimeix els fitxers de dades del Widelands (mapes, repeticions i partides desades)"
 
 #: ../../src/ui_fsmenu/options.cc:208
 msgid "Write syncstreams in network games to debug desyncs"
@@ -3470,48 +3471,48 @@ msgstr ""
 msgid "Save target settings"
 msgstr "Desa la configuració de l'objectiu"
 
-#: ../../src/wui/economy_options_window.cc:426
+#: ../../src/wui/economy_options_window.cc:423
 msgid "The profile name cannot be empty"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:427
+#: ../../src/wui/economy_options_window.cc:424
 msgid "The default profile cannot be overwritten"
 msgstr "El perfil per defecte no es pot sobreescriure."
 
-#: ../../src/wui/economy_options_window.cc:430
+#: ../../src/wui/economy_options_window.cc:427
 msgid "Save the profile under this name"
 msgstr "Desa el perfil amb aquest nom"
 
-#: ../../src/wui/economy_options_window.cc:442
+#: ../../src/wui/economy_options_window.cc:439
 msgid "The predefined profiles cannot be deleted"
 msgstr "Els perfils predefinits no es poden esborrar."
 
-#: ../../src/wui/economy_options_window.cc:445
+#: ../../src/wui/economy_options_window.cc:442
 msgid "Delete the selected profiles"
 msgstr "Esborra els perfils seleccionats"
 
-#: ../../src/wui/economy_options_window.cc:467
+#: ../../src/wui/economy_options_window.cc:464
 msgid "Overwrite?"
 msgstr "Voleu sobreescriure'l?"
 
-#: ../../src/wui/economy_options_window.cc:468
+#: ../../src/wui/economy_options_window.cc:465
 msgid "A profile with this name already exists. Do you wish to replace it?"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:511
+#: ../../src/wui/economy_options_window.cc:508
 msgid "Save Profile"
 msgstr "Desa el perfil"
 
-#: ../../src/wui/economy_options_window.cc:518 ../../src/wui/login_box.cc:57
+#: ../../src/wui/economy_options_window.cc:515 ../../src/wui/login_box.cc:57
 msgid "Save"
 msgstr "Desa"
 
-#: ../../src/wui/economy_options_window.cc:520
+#: ../../src/wui/economy_options_window.cc:517
 #: ../../src/wui/load_or_save_game.cc:94
 msgid "Delete"
 msgstr "Esborra"
 
-#: ../../src/wui/economy_options_window.cc:521
+#: ../../src/wui/economy_options_window.cc:518
 msgid "Existing Profiles"
 msgstr "Perfils existents"
 
@@ -3706,7 +3707,7 @@ msgstr "Hora"
 #: ../../src/wui/game_message_menu.cc:126
 #: ../../src/wui/game_message_menu.cc:605
 msgid "Show Archive"
-msgstr "Mostra l'arxiu"
+msgstr "Mostra el fitxer"
 
 #. * TRANSLATORS: %s is a tooltip, G is the corresponding hotkey
 #: ../../src/wui/game_message_menu.cc:134
@@ -4179,7 +4180,7 @@ msgstr "Mode"
 msgid ""
 "The filename that the game was saved under followed by the map’s name, or "
 "the map’s name followed by the last objective achieved."
-msgstr "El nom d'arxiu amb què es va desar la partida seguit del nom del mapa o bé el nom del mapa seguit de l'últim objectiu complit."
+msgstr "El nom del fitxer amb què es va desar la partida seguit del nom del mapa o bé el nom del mapa seguit de l'últim objectiu complit."
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
 #: ../../src/wui/load_or_save_game.cc:180
@@ -4207,8 +4208,8 @@ msgstr "Esborra aquestes partides"
 #, c-format
 msgid "Selected %d file:"
 msgid_plural "Selected %d files:"
-msgstr[0] "%d arxiu seleccionat:"
-msgstr[1] "%d arxius seleccionats:"
+msgstr[0] "%d fitxer seleccionat:"
+msgstr[1] "%d fitxers seleccionats:"
 
 #: ../../src/wui/load_or_save_game.cc:249
 msgid "Do you really want to delete this replay?"
@@ -4238,19 +4239,19 @@ msgstr[1] "Voleu esborrar aquestes %d partides?"
 
 #: ../../src/wui/load_or_save_game.cc:274
 msgid "Confirm Deleting File"
-msgstr "Confirmeu l'esborrat de l'arxiu"
+msgstr "Confirmeu l'esborrat del fitxer"
 
 #: ../../src/wui/load_or_save_game.cc:274
 msgid "Confirm Deleting Files"
-msgstr "Confirmeu l'esborrat dels arxius"
+msgstr "Confirmeu l'esborrat dels fitxers"
 
 #: ../../src/wui/load_or_save_game.cc:317
 msgid "Error Deleting File!"
-msgstr "S'ha produït un error a l'esborrar l'arxiu."
+msgstr "S'ha produït un error a l'esborrar el fitxer."
 
 #: ../../src/wui/load_or_save_game.cc:317
 msgid "Error Deleting Files!"
-msgstr "S'ha produït un error esborrant els arxius."
+msgstr "S'ha produït un error esborrant els fitxers."
 
 #: ../../src/wui/load_or_save_game.cc:320
 msgid "The replay could not be deleted."
@@ -4364,7 +4365,7 @@ msgstr "%1% (%2%)"
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
-msgstr "Aquest arxiu té un format erroni i no es pot carregar. Potser va ser creat amb una versió anterior del Widelands."
+msgstr "Aquest fitxer té un format erroni i no es pot carregar. Potser va ser creat amb una versió anterior del Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
 #: ../../src/wui/load_or_save_game.cc:547
@@ -4499,7 +4500,7 @@ msgstr "#J"
 
 #: ../../src/wui/maptable.cc:35 ../../src/wui/maptable.cc:64
 msgid "Filename"
-msgstr "Nom de l'arxiu:"
+msgstr "Nom del fitxer:"
 
 #: ../../src/wui/maptable.cc:35
 msgid "The name of the map or scenario"
