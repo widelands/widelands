@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-11 05:49+0000\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -32,8 +32,8 @@ msgid ""
 "Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, a brick "
 "kiln, and houses for a woodcutter and a forester."
 msgstr ""
-"Tog cuaraidh, tuathanas-cuilce, sùil-chriadha, tobar, sloc guail-fhiodha, "
-"àth bhreigichean ’s taighean do bhuaineadair-fiodha ’s planntair-coille."
+"Tog cuaraidh, tuathanas-feòir, sùil-chriadha, tobar, sloc guail-fhiodha, àth"
+" bhreigichean ’s taighean do bhuaineadair-fiodha ’s planntair-coille."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:35
 msgid "Expand to the south"
@@ -610,8 +610,8 @@ msgstr "Tha an eaconamaidh againn coileanta"
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:246
 msgid ""
-"You are right – we should build more berry farms, collector’s houses and "
-"taverns as well as a drinking hall, and advanced bakeries and breweries."
+"You are right – we should build more berry farms, fruit collector’s houses "
+"and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
 "Tha thu ceart – bu chòir dhuinn barrachd croitean-dhearc, taighean-"
 "cruinniche ’s taighean-tàirn a thogail agus talla-òil ’s taighean-fuine ’s "
@@ -695,18 +695,18 @@ msgstr ""
 " h-Impireachd, ag iarraidh oirbh gun innis sibh dhomh cò sibhse is dè tha "
 "sibh ris san dùthaich seo!"
 
-#. TRANSLATORS: Reebaud – Supply Murilius 4
+#. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
+#. frisian greeting, nothing more.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:278
 msgid ""
-"Greetings, representative of the Empire! I am Reebaud, the chieftain of this"
-" tribe. All we want is to settle down here, build our home and live our "
-"lives in peace. We do not seek trouble, but we aren’t afraid to fight, "
-"either."
+"Peace, representative of the Empire! I am Reebaud, the chieftain of this "
+"tribe. All we want is to settle down here, build our home and live our lives"
+" in peace. We do not seek trouble, but we aren’t afraid to fight, either."
 msgstr ""
-"Fàilte, a riochdaire na h-Impireachd! Is mise Reebaud, ceannard an treubha "
-"seo. Chan eil fainear dhuinn ach tuineachadh an-seo, ar dachaigh a thogail "
-"agus beatha sìtheil a leantainn. Chan eil sinn ag iarraidh trioblaid ach cha"
-" chuir sabaid an t-eagal oirnn nas motha."
+"Sìth leibh, a riochdaire na h-Impireachd! Is mise Reebaud, ceannard an "
+"treubha seo. Chan eil fainear dhuinn ach tuineachadh an-seo, ar dachaigh a "
+"thogail agus beatha sìtheil a leantainn. Chan eil sinn ag iarraidh trioblaid"
+" ach cha chuir sabaid an t-eagal oirnn nas motha."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
 #. case (form of address) of Reebaud.
@@ -1060,16 +1060,3 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:416
 msgid "Congratulations"
 msgstr "Meal do naidheachd"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Amas ùr"
-msgstr[1] "Amasan ùra"
-msgstr[2] "Amasan ùra"
-msgstr[3] "Amasan ùra"

@@ -103,7 +103,6 @@ wl_library(map_io
     graphic_minimap_renderer
     graphic_playercolor
     graphic_surface
-    helper
     io_fileread
     io_filesystem
     logic

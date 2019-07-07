@@ -26,7 +26,6 @@
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "base/wexception.h"
-#include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -58,27 +57,41 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
      mapname_(this,
               get_w() * 7 / 10 + butw_ / 2,
               get_h() * 53 / 200 - 15,
+              0,
+              0,
               std::string(),
               UI::Align::kCenter),
-     name_(this, get_w() * 1 / 25, get_h() * 53 / 200 - 15, _("Player’s name")),
+     name_(this, get_w() * 1 / 25, get_h() * 53 / 200 - 15, 0, 0, _("Player’s name")),
      type_(this,
            // (Element x) + (PlayerDescriptionGroup x)  + border
            ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2,
            get_h() * 53 / 200 - 15,
+           0,
+           0,
            _("Player’s type")),
-     team_(
-        this, ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200, _("Team")),
+     team_(this,
+           ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2,
+           get_h() * 53 / 200,
+           0,
+           0,
+           _("Team")),
      tribe_(this,
             ((get_w() * 16 / 25) * 80 / 125) + (get_w() / 25) + 2,
             get_h() * 53 / 200 - 15,
+            0,
+            0,
             _("Player’s tribe")),
      init_(this,
            ((get_w() * 16 / 25) * 55 / 125) + (get_w() / 25) + 2,
            get_h() * 53 / 200,
+           0,
+           0,
            _("Start type")),
      wincondition_type_(this,
                         get_w() * 7 / 10 + (butw_ / 2),
                         get_h() * 7 / 20 + buth_,
+                        0,
+                        0,
                         _("Type of game"),
                         UI::Align::kCenter),
 
@@ -101,16 +114,19 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 	ok_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 9 / 10));
 	back_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 17 / 20));
 	win_condition_dropdown_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 4 / 10 + buth_));
+	win_condition_dropdown_.set_size(select_map_.get_w(), win_condition_dropdown_.get_h());
+
 	title_.set_text(_("Launch Game"));
 	select_map_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchSPG::select_map, boost::ref(*this)));
 
-	int smaller_fontsize = fs_small() * 4 / 5;
-	name_.set_fontsize(smaller_fontsize);
-	type_.set_fontsize(smaller_fontsize);
-	team_.set_fontsize(smaller_fontsize);
-	tribe_.set_fontsize(smaller_fontsize);
-	init_.set_fontsize(smaller_fontsize);
+	// We want to redesign this screen, so we won't bother defining a font size in the style manager.
+	const int small_scale_factor = scale_factor() * 4 / 5;
+	name_.set_font_scale(small_scale_factor);
+	type_.set_font_scale(small_scale_factor);
+	team_.set_font_scale(small_scale_factor);
+	tribe_.set_font_scale(small_scale_factor);
+	init_.set_font_scale(small_scale_factor);
 
 	uint32_t y = get_h() * 3 / 10 - buth_;
 	for (uint32_t i = 0; i < kMaxPlayers; ++i) {

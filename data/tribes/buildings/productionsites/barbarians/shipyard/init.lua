@@ -46,6 +46,10 @@ tribes:new_productionsite_type {
       { name = "cloth", amount = 4 }
    },
 
+   indicate_workarea_overlaps = {
+      barbarians_shipyard = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -61,9 +65,8 @@ tribes:new_productionsite_type {
          descname = _"constructing a ship",
          actions = {
             "checkmap=seafaring",
-            "sleep=10000",
             "construct=barbarians_shipconstruction buildship 6",
-            "sleep=10000",
+            "sleep=20000",
          }
       },
       ship_preparation = {

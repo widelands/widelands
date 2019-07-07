@@ -101,7 +101,7 @@ CritterDescr::CritterDescr(const std::string& init_descname,
                            const World& world)
    : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table),
      editor_category_(nullptr) {
-	add_directional_animation(&walk_anims_, "walk");
+	assign_directional_animation(&walk_anims_, "walk");
 
 	add_attributes(
 	   table.get_table("attributes")->array_entries<std::string>(), std::set<uint32_t>());
@@ -268,7 +268,9 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 1;
+// We need to bump this packet version every time we rename a critter, so that the world legacy
+// lookup table will work.
+constexpr uint8_t kCurrentPacketVersion = 2;
 
 Critter::Loader::Loader() {
 }
@@ -303,7 +305,7 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 			const CritterDescr* descr = nullptr;
 
 			if (critter_owner == "world") {
-				critter_name = lookup_table.lookup_critter(critter_name);
+				critter_name = lookup_table.lookup_critter(critter_name, packet_version);
 				descr = egbase.world().get_critter_descr(critter_name);
 			} else {
 				throw GameDataError(

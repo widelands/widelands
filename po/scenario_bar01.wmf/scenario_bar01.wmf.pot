@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"POT-Creation-Date: 2019-07-05 07:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -285,9 +285,9 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
-"The third material necessary for improved buildings is thatch reed, used to "
-"cover roofs. Thatch reed is planted by a gardener around his building, the "
-"reed yard."
+"The third material necessary for improved buildings is reed, used to cover "
+"roofs. Reed fields are planted by a gardener around his building, the reed "
+"yard."
 msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129

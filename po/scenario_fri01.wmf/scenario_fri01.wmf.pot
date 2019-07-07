@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"POT-Creation-Date: 2019-07-05 07:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -76,7 +76,7 @@ msgid "20 × Coal"
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:52
-msgid "30 × Thatch Reed"
+msgid "30 × Reed"
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:53
@@ -284,7 +284,7 @@ msgid ""
 "Also, we had better build a reed farm soon. Even reed farms need reed to be "
 "built, so we must take care not to run short before we can grow our own. "
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
-"start growing thatch reed."
+"start growing reed fields."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:162
@@ -356,8 +356,8 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:189
 msgid ""
-"You should assign the new reed farm the highest priority for thatch reed in "
-"the construction site window."
+"You should assign the new reed farm the highest priority for reed in the "
+"construction site window."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:192

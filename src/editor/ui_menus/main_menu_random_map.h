@@ -23,6 +23,7 @@
 #include <vector>
 
 #include "base/macros.h"
+#include "editor/ui_menus/map_size_box.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
@@ -89,8 +90,7 @@ private:
 	UI::Box box_;
 
 	// Size
-	UI::Dropdown<int32_t> width_;
-	UI::Dropdown<int32_t> height_;
+	MapSizeBox map_size_box_;
 
 	uint8_t max_players_;
 	UI::SpinBox players_;

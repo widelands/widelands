@@ -20,16 +20,26 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_CONSTRUCTIONSITE_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_CONSTRUCTIONSITE_H
 
+#include <memory>
 #include <vector>
 
 #include "base/macros.h"
+#include "logic/map_objects/tribes/building_settings.h"
 #include "logic/map_objects/tribes/partially_finished_building.h"
 #include "scripting/lua_table.h"
+
+class FileRead;
+class FileWrite;
 
 namespace Widelands {
 
 class Building;
+class MilitarySiteDescr;
+class ProductionSiteDescr;
 class Request;
+enum class StockPolicy;
+class TrainingSiteDescr;
+class WarehouseDescr;
 class WaresQueue;
 
 /// Per-player and per-field constructionsite information
@@ -47,6 +57,8 @@ struct ConstructionsiteInformation {
 	const BuildingDescr*
 	   becomes;  // Also works as a marker telling whether there is a construction site.
 	const BuildingDescr* was;  // only valid if "becomes" is an enhanced building.
+	std::vector<const BuildingDescr*>
+	   intermediates;  // If we enhance a building while it's still under construction
 	uint32_t totaltime;
 	uint32_t completedtime;
 };
@@ -114,6 +126,13 @@ public:
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
 
+	BuildingSettings* get_settings() const {
+		return settings_.get();
+	}
+	void apply_settings(const BuildingSettings&);
+
+	void enhance(Game&);
+
 protected:
 	void update_statistics_string(std::string* statistics_string) override;
 
@@ -135,6 +154,9 @@ private:
 
 	bool builder_idle_;                 // used to determine whether the builder is idle
 	ConstructionsiteInformation info_;  // asked for by player point of view for the gameview
+
+	std::unique_ptr<BuildingSettings> settings_;
+	void init_settings();
 };
 }  // namespace Widelands
 

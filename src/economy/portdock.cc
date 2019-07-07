@@ -368,25 +368,33 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 		}
 	}
 
+	// Decide where the arrived ship will go next
+	PortDock* next_port = fleet_->find_next_dest(game, ship, *this);
+	if (next_port) {
+		// Unload any wares/workers onboard the departing ship which are not favored by next dest
+		ship.unload_unfit_items(game, *this, *next_port);
+	}
+#ifndef NDEBUG
+	else {
+		assert(ship.get_nritems() == 0);
+	}
+#endif
+
 	// Check for items with invalid destination. TODO(ypopezios): Prevent invalid destinations
 	for (auto si_it = waiting_.begin(); si_it != waiting_.end(); ++si_it) {
 		if (!si_it->get_destination(game)) {
 			// Invalid destination. Carry the item back into the warehouse
+			// TODO(Nordfriese): This readds the invalid item to the list
 			si_it->set_location(game, warehouse_);
 			si_it->end_shipping(game);
 			si_it = waiting_.erase(si_it);
 		}
 	}
 
-	// Decide where the arrived ship will go next
-	PortDock* next_port = fleet_->find_next_dest(game, ship, *this);
 	if (!next_port) {
-		ship.set_destination(next_port);
+		ship.set_destination(nullptr);
 		return;  // no need to load anything
 	}
-
-	// Unload any wares/workers onboard the departing ship which are not favored by next dest
-	ship.unload_unfit_items(game, *this, *next_port);
 
 	// Then load the remaining capacity of the departing ship with relevant items
 	uint32_t remaining_capacity = ship.descr().get_capacity() - ship.get_nritems();
@@ -402,7 +410,8 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 
 	// Then load any wares/workers favored by the chosen destination
 	for (auto si_it = waiting_.begin(); si_it != waiting_.end() && remaining_capacity > 0; ++si_it) {
-		if (fleet_->is_path_favourable(*this, *next_port, *si_it->get_destination(game))) {
+		const PortDock* dest = si_it->get_destination(game);
+		if (dest && fleet_->is_path_favourable(*this, *next_port, *dest)) {
 			ship.add_item(game, *si_it);
 			si_it = waiting_.erase(si_it);
 			--remaining_capacity;

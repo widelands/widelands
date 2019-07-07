@@ -43,7 +43,8 @@ constexpr uint16_t kCurrentPacketVersion = 5;
 void MapFlagdataPacket::read(FileSystem& fs,
                              EditorGameBase& egbase,
                              bool const skip,
-                             MapObjectLoader& mol) {
+                             MapObjectLoader& mol,
+                             const TribesLegacyLookupTable& tribes_lookup_table) {
 	if (skip)
 		return;
 
@@ -131,7 +132,7 @@ void MapFlagdataPacket::read(FileSystem& fs,
 							Flag::FlagJob f;
 							if (fr.unsigned_8()) {
 								f.request = new Request(flag, 0, Flag::flag_job_request_callback, wwWORKER);
-								f.request->read(fr, dynamic_cast<Game&>(egbase), mol);
+								f.request->read(fr, dynamic_cast<Game&>(egbase), mol, tribes_lookup_table);
 							} else {
 								f.request = nullptr;
 							}

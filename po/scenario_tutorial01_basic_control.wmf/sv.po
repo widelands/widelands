@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # D M <hunter12@home.se>, 2017
@@ -9,9 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 13:12+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 10:12+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -440,10 +440,10 @@ msgstr "Bygg ett stenbrott bredvid klipporna här. Kommer du ihåg hur jag gjord
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
-"space were you want the building to be, choose it from the window that "
+"space where you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
-msgstr "Säkerställ att du visar byggnadsytorna. Klicka sedan på platsen där du vill placera byggnaden. Välj rätt byggnad från fönstret som öppnas och byggnaden placeras på vald plats. Kanske detta är ett bra tillfälle att berätta mer om alla dessa byggnadsytesymboler vi tidigare aktiverade."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:241
 msgid ""
@@ -1035,14 +1035,3 @@ msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
 msgstr "Tack för att du spelade denna handledning. Njut av Widelands och kom ihåg att besöka oss på"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Nytt uppdrag"
-msgstr[1] "Nya uppdrag"

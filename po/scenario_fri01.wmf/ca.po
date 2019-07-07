@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Juanjo, 2018
+# Juanjo, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Juanjo, 2018\n"
+"POT-Creation-Date: 2019-05-30 18:50+0000\n"
+"PO-Revision-Date: 2018-03-24 18:15+0000\n"
+"Last-Translator: Juanjo, 2019\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -86,8 +87,8 @@ msgid "20 × Coal"
 msgstr "20 × Carbó"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:52
-msgid "30 × Thatch Reed"
-msgstr "30 × Fibres de junc"
+msgid "30 × Reed"
+msgstr "30 × Juncs"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:53
 msgid ""
@@ -252,17 +253,19 @@ msgstr ""
 "Benvingut a la preciosa illa de Langeness! Sóc en Reebaud, el cabdill "
 "d'aquesta illa prístina."
 
-#. TRANSLATORS: Reebaud – Introduction 1
+#. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
+#. dukedoms
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:133
 msgid ""
 "My tribe and I have just arrived from the mainland. There were fights with "
-"the Danes in the North, the Vikings in the East… So, I decided to lead my "
-"tribe away to start a quiet, peaceful life on this untouched island."
+"the Danes in the North, the Schauenburgers and Holsteiners in the East and "
+"South… So I decided to lead my tribe away to start a quiet, peaceful life on"
+" this untouched island."
 msgstr ""
 "El nostre clan hem arribat aquí des de terra ferma. Hi havia lluites amb els"
-" danesos al nord, els víkings a l'est… Així que vaig decidir conduir la meva"
-" gent a un lloc més pacífic, on gaudir d'una vida tranquil·la en aquesta "
-"illa verge."
+" danesos al nord, els Holsteiner a l'est i al sud… Així que vaig decidir "
+"conduir la meva gent a un lloc més pacífic, on gaudir d'una vida tranquil·la"
+" en aquesta illa verge."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:137
 msgid "A new home"
@@ -281,7 +284,7 @@ msgstr ""
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:142
 msgid ""
-"I have asked Hauke, one of my advisors to oversee the construction of our "
+"I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
 msgstr ""
 "He preguntat en Hauke, un dels meus consellers per supervisar la construcció"
@@ -291,14 +294,13 @@ msgstr ""
 msgid "The first buildings"
 msgstr "Els primers edificis"
 
-#. TRANSLATORS: Hauke – Introduction 3
+#. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian
+#. greeting
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:148
 msgid ""
-"Greetings, Chieftain Reebaud! I will start with the colonization of the "
-"island straight away."
-msgstr ""
-"Salutacions, cap Reebaud! Començaré amb la colonització de l'illa ara "
-"mateix."
+"Peace, Chieftain Reebaud! I will start with the colonization of the island "
+"straight away."
+msgstr "Pau, cap Reebaud! Començaré amb la colonització de l'illa ara mateix."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:151
@@ -328,7 +330,7 @@ msgid ""
 "Also, we had better build a reed farm soon. Even reed farms need reed to be "
 "built, so we must take care not to run short before we can grow our own. "
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
-"start growing thatch reed."
+"start growing reed fields."
 msgstr ""
 "A més a més, hauríem de construir una masoveria de juncs aviat. Les "
 "masoveries de juncs també en necessiten per construir-les, així que haurem "
@@ -429,8 +431,8 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:189
 msgid ""
-"You should assign the new reed farm the highest priority for thatch reed in "
-"the construction site window."
+"You should assign the new reed farm the highest priority for reed in the "
+"construction site window."
 msgstr ""
 "Heu d'assignar una prioritat alta als juncs des de la finestra de "
 "construcció de la nova masoveria de juncs."
@@ -582,7 +584,7 @@ msgstr ""
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:234
 msgid ""
-"But when the mines will have to be expanded, rations won’t keep the miners "
+"But when the mines will have to be enhanced, rations won’t keep the miners "
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
 msgstr ""
@@ -1090,13 +1092,13 @@ msgstr "Soldats cap al port!"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid ""
 "I almost forgot in this haste – whereever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to 10 soldiers on "
-"our ship, if they don’t mind being all crammed up together. Let’s send some "
-"to the port when it’s completed, so they can embark when we set sail!"
+"to secure and expand our new colony. There’s space for up to ten soldiers on"
+" our ship, if they don’t mind being all crammed together. Let’s send some to"
+" the port when it’s completed, so they can embark when we set sail!"
 msgstr ""
 "Quasi se m'oblida amb tanta pressa: sigui on sigui que atraquem, "
 "necessitarem soldats per assegurar el terreny i expandir la nostra colònia. "
-"Hi caben 10 soldats al vaixell, si no els importa viatjar en un vaixell "
+"Hi caben deu soldats al vaixell, si no els importa viatjar en un vaixell "
 "atapeït. Enviem-ne uns quants al port quan s'acabi de construir, perquè "
 "puguin embarcar abans de llevar l'àncora. "
 
@@ -1131,14 +1133,3 @@ msgid ""
 msgstr ""
 "Heu completat la missió. Podeu avançar al proper escenari per ajudar-nos a "
 "construir una nova llar, lluny de l'abast d'aquest Déu impostor i venjatiu…"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "«%s»"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Objectiu nou"
-msgstr[1] "Objectius nous"

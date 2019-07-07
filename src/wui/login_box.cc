@@ -33,10 +33,10 @@ LoginBox::LoginBox(Panel& parent)
 
 	int32_t margin = 10;
 
-	ta_nickname = new UI::Textarea(this, margin, margin, _("Nickname:"));
-	ta_password = new UI::Textarea(this, margin, 70, _("Password:"));
-	eb_nickname = new UI::EditBox(this, 150, margin, 330, 20, 2, UI::PanelStyle::kWui);
-	eb_password = new UI::EditBox(this, 150, 70, 330, 20, 2, UI::PanelStyle::kWui);
+	ta_nickname = new UI::Textarea(this, margin, margin, 0, 0, _("Nickname:"));
+	ta_password = new UI::Textarea(this, margin, 70, 0, 0, _("Password:"));
+	eb_nickname = new UI::EditBox(this, 150, margin, 330, UI::PanelStyle::kWui);
+	eb_password = new UI::EditBox(this, 150, 70, 330, UI::PanelStyle::kWui);
 
 	cb_register = new UI::Checkbox(this, Vector2i(margin, 40), _("Log in to a registered account."),
 	                               "", get_inner_w() - 2 * margin);
@@ -77,7 +77,7 @@ LoginBox::LoginBox(Panel& parent)
 		loginbtn->set_enabled(false);
 	} else {
 		eb_password->set_can_focus(false);
-		ta_password->set_color(UI_FONT_CLR_DISABLED);
+		ta_password->set_style(g_gr->styles().font_style(UI::FontStyle::kDisabled));
 	}
 
 	eb_nickname->focus();
@@ -138,12 +138,13 @@ bool LoginBox::handle_key(bool down, SDL_Keysym code) {
 
 void LoginBox::clicked_register() {
 	if (cb_register->get_state()) {
-		ta_password->set_color(UI_FONT_CLR_DISABLED);
+		ta_password->set_style(g_gr->styles().font_style(UI::FontStyle::kDisabled));
 		eb_password->set_can_focus(false);
 		eb_password->set_text("");
 	} else {
-		ta_password->set_color(UI_FONT_CLR_FG);
+		ta_password->set_style(g_gr->styles().font_style(UI::FontStyle::kLabel));
 		eb_password->set_can_focus(true);
+		eb_password->focus();
 	}
 }
 
@@ -168,7 +169,6 @@ void LoginBox::verify_input() {
 	if (eb_password->text().empty() && cb_register->get_state()) {
 		eb_password->set_tooltip(_("Please enter your password!"));
 		loginbtn->set_enabled(false);
-		eb_password->focus();
 	}
 
 	Section& s = g_options.pull_section("global");
@@ -188,15 +188,13 @@ bool LoginBox::check_password() {
 	const std::string& meta = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
 	uint32_t port = s.get_natural("metaserverport", kInternetGamingPort);
 	std::string password = crypto::sha1(eb_password->text());
-	InternetGaming::ref().login(get_nickname(), password, true, meta, port);
 
-	if (!InternetGaming::ref().logged_in()) {
+	if (!InternetGaming::ref().check_password(get_nickname(), password, meta, port)) {
 		// something went wrong -> show the error message
 		// idealy it is about the wrong password
 		ChatMessage msg = InternetGaming::ref().get_messages().back();
 		UI::WLMessageBox wmb(this, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
-		InternetGaming::ref().reset();
 		eb_password->set_text("");
 		eb_password->focus();
 		return false;
