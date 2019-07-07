@@ -311,17 +311,6 @@ void ProductionSite::load_finish(EditorGameBase& egbase) {
  * Display whether we're occupied.
  */
 void ProductionSite::update_statistics_string(std::string* s) {
-	uint32_t const nr_working_positions = descr().nr_working_positions();
-	uint32_t nr_workers = 0;
-	for (uint32_t i = nr_working_positions; i;)
-		nr_workers += working_positions_[--i].worker ? 1 : 0;
-
-	if (nr_workers == 0) {
-		*s = g_gr->styles().color_tag(
-		   _("(not occupied)"), g_gr->styles().building_statistics_style().low_color());
-		return;
-	}
-
 	uint32_t nr_requests = 0;
 	uint32_t nr_coming = 0;
 	for (uint32_t i = 0; i < descr().nr_working_positions(); ++i) {
