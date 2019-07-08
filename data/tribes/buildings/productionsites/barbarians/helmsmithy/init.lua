@@ -81,6 +81,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs helmet",
             "consume=coal iron",
             "sleep=32000",
+            "playsound=sound/smiths/smith 192",
             "animate=working 35000",
             "produce=helmet"
          }
@@ -93,6 +94,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs helmet_mask",
             "consume=coal iron:2",
             "sleep=32000",
+            "playsound=sound/smiths/smith 192",
             "animate=working 45000",
             "produce=helmet_mask"
          }
@@ -105,6 +107,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs helmet_warhelm",
             "consume=coal gold iron:2",
             "sleep=32000",
+            "playsound=sound/smiths/smith 192",
             "animate=working 55000",
             "produce=helmet_warhelm"
          }

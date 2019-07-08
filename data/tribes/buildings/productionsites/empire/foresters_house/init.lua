@@ -37,13 +37,20 @@ tribes:new_productionsite_type {
       empire_forester = 1
    },
 
+   indicate_workarea_overlaps = {
+      empire_farm = false,
+      empire_vineyard = false,
+      empire_lumberjacks_house = true,
+      empire_foresters_house = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
          descname = _"planting trees",
          actions = {
-            "sleep=11000",
-            "callworker=plant"
+            "callworker=plant",
+            "sleep=10000"
          }
       },
    },

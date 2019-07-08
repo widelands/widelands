@@ -1,15 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # tamanegi, 2018
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2019-05-30 18:50+0000\n"
+"PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Japanese (https://www.transifex.com/widelands/teams/35159/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -80,8 +81,8 @@ msgid "20 × Coal"
 msgstr "石炭 × 20"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:52
-msgid "30 × Thatch Reed"
-msgstr "カヤ × 30"
+msgid "30 × Reed"
+msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:53
 msgid ""
@@ -230,15 +231,15 @@ msgid ""
 "this pristine island."
 msgstr "美しいランゲネスの島へようこそ！私はリーボード、このプリスティン島のまとめ役だ。"
 
-#. TRANSLATORS: Reebaud – Introduction 1
+#. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
+#. dukedoms
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:133
 msgid ""
 "My tribe and I have just arrived from the mainland. There were fights with "
-"the Danes in the North, the Vikings in the East… So, I decided to lead my "
-"tribe away to start a quiet, peaceful life on this untouched island."
+"the Danes in the North, the Schauenburgers and Holsteiners in the East and "
+"South… So I decided to lead my tribe away to start a quiet, peaceful life on"
+" this untouched island."
 msgstr ""
-"私と部族の皆は大陸からここへ着いたばかりだ。大陸では北のデーン人や東のバイキングとの争いがあり…… "
-"だから、私は皆を率いて大陸を離れ、この手つかずの場所で静かで平和な暮らしをしようと決めた。"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:137
 msgid "A new home"
@@ -254,20 +255,21 @@ msgstr "ここはあらたな住処を建設するのにとても良い場所だ
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:142
 msgid ""
-"I have asked Hauke, one of my advisors to oversee the construction of our "
+"I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
-msgstr "そこで、我々の住処建設の監督を相談役の一人であるホークにお願いすることにした。"
+msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:146
 msgid "The first buildings"
 msgstr "最初の建物"
 
-#. TRANSLATORS: Hauke – Introduction 3
+#. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian
+#. greeting
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:148
 msgid ""
-"Greetings, Chieftain Reebaud! I will start with the colonization of the "
-"island straight away."
-msgstr "ごきげんよう、リーボード族長！それでは早速建設を始めていきましょうかな。"
+"Peace, Chieftain Reebaud! I will start with the colonization of the island "
+"straight away."
+msgstr ""
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:151
@@ -293,9 +295,8 @@ msgid ""
 "Also, we had better build a reed farm soon. Even reed farms need reed to be "
 "built, so we must take care not to run short before we can grow our own. "
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
-"start growing thatch reed."
+"start growing reed fields."
 msgstr ""
-"それと、早めにカヤ農場を１つ建てるべきでしょうな。なにせ、カヤ農場そのものを建てるのにもカヤが必要ですからな。というわけで、尽きる前にカヤの育成を始めねばなりませんな。カヤは簡単に栽培できますからな、カヤ農夫さえいれば特に他の物資は必要とはしませんぞ。"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:162
 msgid "Building our new home"
@@ -372,9 +373,9 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:189
 msgid ""
-"You should assign the new reed farm the highest priority for thatch reed in "
-"the construction site window."
-msgstr "ですので、新たなカヤ農場を建設する時にはカヤを最優先で供給するようにしましょうぞ。優先設定は建築中の建物のウィンドウでできますからな。"
+"You should assign the new reed farm the highest priority for reed in the "
+"construction site window."
+msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Clay Shortages"
@@ -497,12 +498,10 @@ msgstr "ふむ、うまくいきましたな。鉱夫達も満足し、採掘を
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:234
 msgid ""
-"But when the mines will have to be expanded, rations won’t keep the miners "
+"But when the mines will have to be enhanced, rations won’t keep the miners "
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
 msgstr ""
-"されど、鉱山を拡張してしまったら、彼らもレーションでは満足してくれんでしょうな。事前準備は大切ですぞ ── "
-"２つ目の酒場を作り、宴会場への拡張を考えてはいかがでしょうかな。"
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:237
@@ -911,13 +910,10 @@ msgstr "兵士を港へ！"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid ""
 "I almost forgot in this haste – whereever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to 10 soldiers on "
-"our ship, if they don’t mind being all crammed up together. Let’s send some "
-"to the port when it’s completed, so they can embark when we set sail!"
+"to secure and expand our new colony. There’s space for up to ten soldiers on"
+" our ship, if they don’t mind being all crammed together. Let’s send some to"
+" the port when it’s completed, so they can embark when we set sail!"
 msgstr ""
-"あまりのことで忘れるところでしたぞ ── "
-"どこに上陸することになろうと、その地を確保し、拡張していくためには兵士が欠かせませんな。無理矢理詰め込めば一隻に 10 "
-"人ほどは入るはずですぞ。港が完成したら、忘れずに送りましょうぞ。そうすれば彼らも我らとともに出航できますからな！"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:416
 msgid "Victory"
@@ -946,13 +942,3 @@ msgid ""
 " help us build a new home, far from the false God’s vengeful reach…"
 msgstr ""
 "このシナリオを完遂しました。次のシナリオに進み、復讐心に駆られた偽りの神の手が届かぬ地、そこに彼らが新たな住処を作るのを助けてもらえないでしょうか……？"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "『%s』"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "新たな目的"

@@ -367,16 +367,15 @@ void LoadOrSaveGame::fill_table() {
 	table_.clear();
 
 	FilenameSet gamefiles;
-
 	if (filetype_ == FileType::kReplay) {
-		gamefiles = filter(g_fs->list_directory(kReplayDir), [](const std::string& fn) {
+		gamefiles = g_fs->filter_directory(kReplayDir, [](const std::string& fn) {
 			return boost::algorithm::ends_with(fn, kReplayExtension);
 		});
 		// Update description column title for replays
 		table_.set_column_tooltip(2, show_filenames_ ? _("Filename: Map name (start of replay)") :
 		                                               _("Map name (start of replay)"));
 	} else {
-		gamefiles = filter(g_fs->list_directory(kSaveDir), [](const std::string& fn) {
+		gamefiles = g_fs->filter_directory(kSaveDir, [](const std::string& fn) {
 			return boost::algorithm::ends_with(fn, kSavegameExtension);
 		});
 	}

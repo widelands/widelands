@@ -95,6 +95,10 @@ protected:
 
 	bool is_dying_;
 
+	void set_building_descr_for_help(const Widelands::BuildingDescr* d) {
+		building_descr_for_help_ = d;
+	}
+
 private:
 	void create_capsbuttons(UI::Box* buttons, Widelands::Building* building);
 
@@ -110,7 +114,7 @@ private:
 	Widelands::OPtr<Widelands::Building> building_;
 
 	// The building description that will be used for the help button
-	const Widelands::BuildingDescr& building_descr_for_help_;
+	const Widelands::BuildingDescr* building_descr_for_help_;
 
 	// We require this to unregister overlays when we are closed. Since the
 	// building might have been destroyed by then we have to keep a copy of its

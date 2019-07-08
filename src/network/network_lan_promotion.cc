@@ -102,7 +102,8 @@ LanBase::LanBase(uint16_t port) : io_service(), socket_v4(io_service), socket_v6
 	for (ifa = ifaddr, n = 0; ifa != nullptr; ifa = ifa->ifa_next, n++) {
 		if (ifa->ifa_addr == nullptr)
 			continue;
-		if (!(ifa->ifa_flags & IFF_BROADCAST) && !(ifa->ifa_flags & IFF_MULTICAST))
+		if (!(ifa->ifa_flags & IFF_LOOPBACK) && !(ifa->ifa_flags & IFF_BROADCAST) &&
+		    !(ifa->ifa_flags & IFF_MULTICAST))
 			continue;
 		switch (ifa->ifa_addr->sa_family) {
 		case AF_INET:
@@ -291,7 +292,7 @@ bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const 
 			// Remove this interface id from the set
 			it = interface_indices_v6.erase(it);
 			if (interface_indices_v6.empty()) {
-				log("[LAN] Warning: No more multicast capable IPv6 interfaces."
+				log("[LAN] Warning: No more multicast capable IPv6 interfaces. "
 				    "Other LAN players won't find your game.\n");
 			}
 		} else {
@@ -359,7 +360,7 @@ void LanBase::report_network_error() {
 	throw WLWarning(_("Failed to use the local network!"),
 	                /** TRANSLATORS: %s is a list of alternative ports with "or" */
 	                _("Widelands was unable to use the local network. "
-	                  "Maybe some other process is already running a server on port %s"
+	                  "Maybe some other process is already running a server on port %s "
 	                  "or your network setup is broken."),
 	                i18n::localize_list(ports_list, i18n::ConcatenateWith::OR).c_str());
 }

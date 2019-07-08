@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"POT-Creation-Date: 2019-07-05 07:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -38,10 +38,6 @@ msgstr ""
 msgid "Duck"
 msgstr ""
 
-#: ../../data/world/critters/elk/init.lua:19
-msgid "Elk"
-msgstr ""
-
 #: ../../data/world/critters/fox/init.lua:19
 msgid "Fox"
 msgstr ""
@@ -52,6 +48,10 @@ msgstr ""
 
 #: ../../data/world/critters/marten/init.lua:15
 msgid "Marten"
+msgstr ""
+
+#: ../../data/world/critters/moose/init.lua:19
+msgid "Moose"
 msgstr ""
 
 #: ../../data/world/critters/reindeer/init.lua:16

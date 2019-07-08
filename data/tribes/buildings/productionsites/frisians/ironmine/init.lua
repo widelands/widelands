@@ -43,6 +43,11 @@ tribes:new_productionsite_type {
       },
    },
 
+   indicate_workarea_overlaps = {
+      frisians_ironmine = false,
+      frisians_ironmine_deep = false,
+   },
+
    aihints = {
       mines = "iron",
       mines_percent = 50,
@@ -65,10 +70,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
          descname = _"mining iron",
          actions = {
-            "sleep=5000",
             "return=skipped unless economy needs iron_ore",
             "consume=ration",
-            "sleep=40000",
+            "sleep=45000",
             "animate=working 20000",
             "mine=iron 3 50 5 20",
             "produce=iron_ore"
