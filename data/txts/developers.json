@@ -159,7 +159,7 @@
 		},
 		{
 			"heading": "Musicians",
-			"image": "images/wui/overlays/workarea123.png",
+			"image": "images/wui/buildings/toggle_workarea.png",
 			"entries":[
 				{
 					"members":[
@@ -178,7 +178,7 @@
 		},
 		{
 			"heading": "Sound Effects",
-			"image": "images/wui/overlays/workarea123.png",
+			"image": "images/wui/buildings/toggle_workarea.png",
 			"entries":[
 				{
 					"members":[

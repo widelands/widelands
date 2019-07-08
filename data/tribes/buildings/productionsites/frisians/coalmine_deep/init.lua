@@ -51,6 +51,11 @@ tribes:new_productionsite_type {
       frisians_miner_master = 1,
    },
 
+   indicate_workarea_overlaps = {
+      frisians_coalmine = false,
+      frisians_coalmine_deep = false,
+   },
+
    inputs = {
       { name = "meal", amount = 8 }
    },
@@ -63,10 +68,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
-            "sleep=5000",
             "return=skipped unless economy needs coal",
             "consume=meal",
-            "sleep=34900",
+            "sleep=39900",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",

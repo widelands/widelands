@@ -38,6 +38,11 @@ tribes:new_productionsite_type {
       mines = "gold"
    },
 
+   indicate_workarea_overlaps = {
+      empire_goldmine = false,
+      empire_goldmine_deep = false,
+   },
+
    working_positions = {
       empire_miner = 1,
       empire_miner_master = 1
@@ -56,10 +61,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _"mining gold",
          actions = {
-            "sleep=5000",
             "return=skipped unless economy needs gold_ore",
             "consume=meal wine",
-            "sleep=35000",
+            "sleep=40000",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",

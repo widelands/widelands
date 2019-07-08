@@ -24,6 +24,7 @@
 
 #include "economy/flag.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/trainingsite.h"
@@ -474,7 +475,8 @@ struct CmdSetWarePriority : public PlayerCommand {
 	                   PlayerImmovable&,
 	                   int32_t type,
 	                   DescriptionIndex index,
-	                   int32_t priority);
+	                   int32_t priority,
+	                   bool cs);
 
 	// Write these commands to a file (for savegames)
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -494,6 +496,7 @@ private:
 	int32_t type_;  ///< this is always WARE right now
 	DescriptionIndex index_;
 	int32_t priority_;
+	bool is_constructionsite_setting_;
 };
 
 struct CmdSetInputMaxFill : public PlayerCommand {
@@ -504,7 +507,8 @@ struct CmdSetInputMaxFill : public PlayerCommand {
 	                   PlayerImmovable&,
 	                   DescriptionIndex,
 	                   WareWorker,
-	                   uint32_t maxfill);
+	                   uint32_t maxfill,
+	                   bool cs);
 
 	// Write these commands to a file (for savegames)
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -524,6 +528,7 @@ private:
 	DescriptionIndex index_;
 	WareWorker type_;
 	uint32_t max_fill_;
+	bool is_constructionsite_setting_;
 };
 
 struct CmdChangeTargetQuantity : public PlayerCommand {
@@ -824,10 +829,10 @@ struct CmdMessageSetStatusArchived : public PlayerMessageCommand {
 struct CmdSetStockPolicy : PlayerCommand {
 	CmdSetStockPolicy(uint32_t time,
 	                  PlayerNumber p,
-	                  Warehouse& wh,
+	                  Building& wh,
 	                  bool isworker,
 	                  DescriptionIndex ware,
-	                  Warehouse::StockPolicy policy);
+	                  StockPolicy policy);
 
 	QueueCommandTypes id() const override {
 		return QueueCommandTypes::kSetStockPolicy;
@@ -848,7 +853,7 @@ private:
 	Serial warehouse_;
 	bool isworker_;
 	DescriptionIndex ware_;
-	Warehouse::StockPolicy policy_;
+	StockPolicy policy_;
 };
 
 struct CmdProposeTrade : PlayerCommand {
@@ -872,6 +877,7 @@ struct CmdProposeTrade : PlayerCommand {
 private:
 	Trade trade_;
 };
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYERCOMMAND_H

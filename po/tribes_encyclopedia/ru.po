@@ -12,15 +12,15 @@
 # Viktor S <awsswa59@gmail.com>, 2018-2019
 # Yuriy Sokolov <lention@mail.ru>, 2015,2019
 # Олег Шевченко <olegrock@gmail.com>, 2017
-# Олег Шевченко <olegrock@gmail.com>, 2017-2018
-# Федор <Lunar-energy@ya.ru>, 2015
+# Олег Шевченко <olegrock@gmail.com>, 2017-2019
+# Fede4ka, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
-"PO-Revision-Date: 2019-05-25 10:12+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
+"PO-Revision-Date: 2019-06-25 13:30+0000\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1379,16 +1379,16 @@ msgstr "Выращенный тростник служит двум разным
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid ""
-"Thatch reed is the traditional material for roofing, and it is woven into "
-"the extremely durable cloth that they use for their ships’ sails."
-msgstr "Кровельный тростник - традиционный материал для покрытия крыш, также он сплетается в очень прочное сукно, которое используется для корабельных парусов."
+"Reed is the traditional material for roofing, and it is woven into the "
+"extremely durable cloth that they use for their ships’ sails."
+msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/helptexts.lua:23
 #, lua-format
 msgctxt "barbarians_building"
-msgid "A reed yard can produce a sheaf of thatch reed in about %s on average."
-msgstr "Плантация может производить сноп кровельного тростника примерно за %s, в среднем."
+msgid "A reed yard can produce a sheaf of reed in about %s on average."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/helptexts.lua:6
@@ -1493,8 +1493,8 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:17
 msgctxt "barbarians_building"
-msgid "Weaves cloth out of thatch reed."
-msgstr "Плетёт сукно из кровельного тростника."
+msgid "Weaves cloth out of reed."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:3
@@ -1902,7 +1902,7 @@ msgstr "Сборщик ягод для лесника"
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:13
 msgctxt "building"
 msgid "Plants berry bushes in the surrounding area."
-msgstr "Ягодно кустовидные растения в окрестностях."
+msgstr "Сажает ягодные кусты в окрестностях."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:18
@@ -1916,13 +1916,13 @@ msgstr "Ягодной ферме требуется свободное прос
 #, lua-format
 msgctxt "frisians_building"
 msgid "The berry farmer pauses %s before going to work again."
-msgstr "Сборщик ягод делает паузу %s, прежде чем снова работать."
+msgstr "Сборщик ягод делает перерыв в работе на %s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "If you don’t have iron, change your name from blacksmith to lacksmith!"
-msgstr "Если у вас нет железа, измените свое имя с кузнеца до отсутствие кузнеца!"
+msgstr "Если у вас нет железа, смените имя кузнеца на недокузнец!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:8
@@ -1934,14 +1934,14 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:13
 msgctxt "building"
 msgid "Forges tools to equip new workers."
-msgstr "Создает инструменты для оснащения новых рабочих."
+msgstr "Куёт инструменты для оснащения новых работников."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The blacksmith needs %s on average to produce one tool."
-msgstr "Кузнец должен %s в среднем производить один инструмент."
+msgstr "Кузнецу нужно %s в среднем для производства одного инструмента."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/helptexts.lua:3
@@ -1967,7 +1967,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brewery needs %s on average to brew one mug of beer."
-msgstr "Пивовару нужно %s в среднем, чтобы сварить кружку пива."
+msgstr "Пивоварне нужно %s в среднем, чтобы сварить кружку пива."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:3
@@ -1996,7 +1996,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce two bricks."
-msgstr "Кирпичная печь нуждается %s в среднем для производства двух кирпичей."
+msgstr "Печи для обжига кирпича нужно %s в среднем для производства двух кирпичей."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:3
@@ -3072,65 +3072,65 @@ msgid "The remains of a destroyed building."
 msgstr "Останки разрушенного здания."
 
 #. TRANSLATORS: Helptext for a field
-#: ../../data/tribes/immovables/blackrootfield_harvested/helptexts.lua:4
-#: ../../data/tribes/immovables/cornfield_harvested/helptexts.lua:4
-#: ../../data/tribes/immovables/field_harvested/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield/harvested/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield/harvested/helptexts.lua:4
+#: ../../data/tribes/immovables/wheatfield/harvested/helptexts.lua:4
 msgid "This field has been harvested."
 msgstr "Урожай с этого поля собран."
 
 #. TRANSLATORS: Helptext for a field
-#: ../../data/tribes/immovables/blackrootfield_medium/helptexts.lua:4
-#: ../../data/tribes/immovables/blackrootfield_small/helptexts.lua:4
-#: ../../data/tribes/immovables/cornfield_medium/helptexts.lua:4
-#: ../../data/tribes/immovables/cornfield_small/helptexts.lua:4
-#: ../../data/tribes/immovables/field_medium/helptexts.lua:4
-#: ../../data/tribes/immovables/field_small/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield/medium/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield/small/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield/medium/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield/small/helptexts.lua:4
+#: ../../data/tribes/immovables/wheatfield/medium/helptexts.lua:4
+#: ../../data/tribes/immovables/wheatfield/small/helptexts.lua:4
 msgid "This field is growing."
 msgstr "Это поле растет."
 
 #. TRANSLATORS: Helptext for a field
-#: ../../data/tribes/immovables/blackrootfield_ripe/helptexts.lua:4
-#: ../../data/tribes/immovables/cornfield_ripe/helptexts.lua:4
-#: ../../data/tribes/immovables/field_ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield/ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield/ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/wheatfield/ripe/helptexts.lua:4
 msgid "This field is ready for harvesting."
 msgstr "Поле готово к уборке."
 
 #. TRANSLATORS: Helptext for a field
-#: ../../data/tribes/immovables/blackrootfield_tiny/helptexts.lua:4
-#: ../../data/tribes/immovables/cornfield_tiny/helptexts.lua:4
-#: ../../data/tribes/immovables/field_tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield/tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield/tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/wheatfield/tiny/helptexts.lua:4
 msgid "This field has just been planted."
 msgstr "Это поле засажено."
 
 #. TRANSLATORS: Helptext for a grapevine
-#: ../../data/tribes/immovables/grapevine_medium/helptexts.lua:4
-#: ../../data/tribes/immovables/grapevine_small/helptexts.lua:4
+#: ../../data/tribes/immovables/grapevine/medium/helptexts.lua:4
+#: ../../data/tribes/immovables/grapevine/small/helptexts.lua:4
 msgid "This grapevine is growing."
 msgstr "Этот виноград растет."
 
 #. TRANSLATORS: Helptext for a grapevine
-#: ../../data/tribes/immovables/grapevine_ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/grapevine/ripe/helptexts.lua:4
 msgid "This grapevine is ready for harvesting."
 msgstr "Виноград готов к сбору."
 
 #. TRANSLATORS: Helptext for a grapevine
-#: ../../data/tribes/immovables/grapevine_tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/grapevine/tiny/helptexts.lua:4
 msgid "This grapevine has just been planted."
 msgstr "Виноград посажен."
 
 #. TRANSLATORS: Helptext for a reed field
-#: ../../data/tribes/immovables/reed_medium/helptexts.lua:4
-#: ../../data/tribes/immovables/reed_small/helptexts.lua:4
+#: ../../data/tribes/immovables/reedfield/medium/helptexts.lua:4
+#: ../../data/tribes/immovables/reedfield/small/helptexts.lua:4
 msgid "This reed is growing."
 msgstr "Этот тростник растет."
 
 #. TRANSLATORS: Helptext for a reed field
-#: ../../data/tribes/immovables/reed_ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/reedfield/ripe/helptexts.lua:4
 msgid "This reed is ready for harvesting."
 msgstr "Этот тростник готов к сбору."
 
 #. TRANSLATORS: Helptext for a reed field
-#: ../../data/tribes/immovables/reed_tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/reedfield/tiny/helptexts.lua:4
 msgid "This reed has just been planted."
 msgstr "Тростник посажен."
 
@@ -4501,9 +4501,8 @@ msgstr ""
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../data/tribes/wares/cloth/helptexts.lua:4
 msgctxt "barbarians_ware"
-msgid ""
-"Cloth is needed for Barbarian ships. It is produced out of thatch reed."
-msgstr "Сукно требуется кораблям варваров. Изготавливается из кровельного тростника."
+msgid "Cloth is needed for Barbarian ships. It is produced out of reed."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../data/tribes/wares/cloth/helptexts.lua:6
@@ -5389,6 +5388,23 @@ msgid ""
 "Fruit, bread or smoked meat or fish."
 msgstr ""
 
+#. TRANSLATORS: Helptext for a ware: Reed
+#: ../../data/tribes/wares/reed/helptexts.lua:4
+msgctxt "barbarians_ware"
+msgid ""
+"Reed is produced in a reed yard and used to make the roofs of buildings "
+"waterproof."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a ware: Reed
+#: ../../data/tribes/wares/reed/helptexts.lua:6
+msgctxt "frisians_ware"
+msgid ""
+"Reed is grown in a reed farm. Nothing is better suited to make roofs "
+"waterproof. It is also used to make buckets and fishing nets as well as "
+"cloth."
+msgstr ""
+
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../data/tribes/wares/saw/helptexts.lua:4
 msgctxt "atlanteans_ware"
@@ -5653,23 +5669,6 @@ msgid ""
 "They are used in the labyrinth – together with food – to train soldiers from"
 " health level 0 to level 1."
 msgstr "Золотая накидка производится на ткацкой фабрике атлантов из золотой нити. Накидка используется в лабиринте, вместе с пайками, для тренировки солдат здоровью с 0 до 1 уровня."
-
-#. TRANSLATORS: Helptext for a ware: Thatch Reed
-#: ../../data/tribes/wares/thatch_reed/helptexts.lua:4
-msgctxt "barbarians_ware"
-msgid ""
-"Thatch reed is produced in a reed yard and used to make the roofs of "
-"buildings waterproof."
-msgstr "Кровельный тростник выращивается на плантации и используется в качестве кровельного материала для защиты строений от непогоды."
-
-#. TRANSLATORS: Helptext for a ware: Thatch Reed
-#: ../../data/tribes/wares/thatch_reed/helptexts.lua:6
-msgctxt "frisians_ware"
-msgid ""
-"Thatch reed is a special kind of reed that is grown in a reed farm. Nothing "
-"is better suited to make roofs waterproof. It is also used to make buckets "
-"and fishing nets as well as cloth."
-msgstr "Кровельный тростник - особый вид тростника, который выращивается в тростниковой ферме. Ничто лучше не подходит для обеспечения водонепроницаемости крыш. Он также используется для изготовления ведер и рыболовных сетей, колодцев, а также ткани."
 
 #. TRANSLATORS: Helptext for a ware: Double Trident
 #: ../../data/tribes/wares/trident_double/helptexts.lua:4
@@ -6049,8 +6048,8 @@ msgstr "Егерь заботится о том, чтобы популяция �
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../data/tribes/workers/barbarians/gardener/helptexts.lua:3
 msgctxt "barbarians_worker"
-msgid "Grows thatch reed."
-msgstr "Выращивает кровельный тростник."
+msgid "Plants and harvests reed fields."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/barbarians/geologist/helptexts.lua:3
@@ -6495,7 +6494,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../data/tribes/workers/frisians/reed_farmer/helptexts.lua:3
 msgctxt "frisians_worker"
-msgid "Grows thatch reed."
+msgid "Plants and harvests reed fields."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Reindeer

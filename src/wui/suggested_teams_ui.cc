@@ -39,16 +39,17 @@ std::string format_suggested_teams_lineup(const Widelands::SuggestedTeamLineup& 
 	return result;
 }
 
-SuggestedTeamsDropdown::SuggestedTeamsDropdown(UI::Panel* parent, int32_t x, int32_t y, uint32_t list_w, uint32_t list_h, int button_dimension) :
-	UI::Dropdown<size_t>(parent,
+SuggestedTeamsDropdown::SuggestedTeamsDropdown(UI::Panel* parent, int32_t x, int32_t y, uint32_t list_w, int button_dimension) :
+	UI::Dropdown<size_t>(parent, "suggested_teams_dropdown",
 	         x,
 	         y,
 	         list_w,
-	         list_h,
+	         10,
 	         button_dimension,
 	         "",
 	         UI::DropdownType::kTextual,
-	         UI::PanelStyle::kFsMenu) {
+	         UI::PanelStyle::kFsMenu,
+	         UI::ButtonStyle::kFsMenuMenu) {
 	set_visible(false);
 }
 

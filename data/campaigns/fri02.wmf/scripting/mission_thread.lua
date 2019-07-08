@@ -33,6 +33,7 @@ end
 
 function check_empire()
    while true do
+      sleep(1000)
       for idx,field in ipairs(all_fields) do
          sleep(5)
          local p1c = false
@@ -272,9 +273,9 @@ function supply_murilius()
    while not p3.defeated do sleep(4513) end
    set_objective_done(o)
 
-   -- If the barbarians already defeated Murilius – well done
+   -- If the barbarians already defeated Murilius – well done.
    -- Otherwise, Murilius provokes Reebaud into ordering the player to conquer his entire colony
-   -- (merely defeating the Empire isn’t enough)
+   -- (merely defeating the Empire isn’t enough).
    -- We don't bother to check water, walkable-only and other useless terrains.
    -- That would be really too much to ask from our poor player, now wouldn't it?
    if not p2.defeated then
@@ -285,6 +286,7 @@ function supply_murilius()
       o = add_campaign_objective(obj_defeat_murilius)
       local def = false
       while not def do
+         sleep(1000)
          def = true
          for idx,field in ipairs(useful_fields) do
             if field.owner == p2 then

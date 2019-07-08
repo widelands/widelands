@@ -36,7 +36,6 @@ public:
 									int32_t x,
 									int32_t y,
 									uint32_t list_w,
-									uint32_t list_h,
 									int button_dimension);
 	void rebuild(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams);
 	const Widelands::SuggestedTeamLineup* get_lineup(size_t index) const;

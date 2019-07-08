@@ -104,7 +104,7 @@ int32_t IconGrid::add(const std::string& name,
 }
 
 void IconGrid::clicked_button(uint32_t idx) {
-	clicked(idx);
+	icon_clicked(idx);
 	play_click();
 }
 

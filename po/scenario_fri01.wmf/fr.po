@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Renaud Bouchard, 2019\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -90,8 +90,8 @@ msgid "20 × Coal"
 msgstr "20 × Charbon"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:52
-msgid "30 × Thatch Reed"
-msgstr "30 × Chaume de roseau"
+msgid "30 × Reed"
+msgstr "30 × Roseaux"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:53
 msgid ""
@@ -288,6 +288,8 @@ msgid ""
 "I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
 msgstr ""
+"J'ai demandé à Hauke, un de mes conseillers, de superviser la construction "
+"de notre colonie. "
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:146
 msgid "The first buildings"
@@ -300,6 +302,8 @@ msgid ""
 "Peace, Chieftain Reebaud! I will start with the colonization of the island "
 "straight away."
 msgstr ""
+"Paix, chef de tribu Reebaud! Je vais commencer la colonisation de l'île tout"
+" de suite."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:151
@@ -330,13 +334,8 @@ msgid ""
 "Also, we had better build a reed farm soon. Even reed farms need reed to be "
 "built, so we must take care not to run short before we can grow our own. "
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
-"start growing thatch reed."
+"start growing reed fields."
 msgstr ""
-"Aussi, nous ferions mieux de construire une roselière rapidement. Les "
-"roselières ont besoin de roseaux pour être bâties, alors nous devons prendre"
-" soin de ne pas en être à court avant de pouvoir cultiver les nôtres. Le "
-"roseau se cultive facilement, de sorte que l'agriculteur n'a plus besoin de "
-"rien pour commencer à cultiver le roseau de chaume."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:162
 msgid "Building our new home"
@@ -433,11 +432,9 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:189
 msgid ""
-"You should assign the new reed farm the highest priority for thatch reed in "
-"the construction site window."
+"You should assign the new reed farm the highest priority for reed in the "
+"construction site window."
 msgstr ""
-"Vous devriez assigner à la nouvelle roselière la plus haute priorité au "
-"roseau de chaume dans la fenêtre du chantier."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Clay Shortages"

@@ -1275,43 +1275,42 @@ void Warehouse::PlannedWorkers::cleanup() {
 	}
 }
 
-Warehouse::StockPolicy Warehouse::get_ware_policy(DescriptionIndex ware) const {
+StockPolicy Warehouse::get_ware_policy(DescriptionIndex ware) const {
 	assert(ware < static_cast<DescriptionIndex>(ware_policy_.size()));
 	return ware_policy_[ware];
 }
 
-Warehouse::StockPolicy Warehouse::get_worker_policy(DescriptionIndex ware) const {
+StockPolicy Warehouse::get_worker_policy(DescriptionIndex ware) const {
 	assert(ware < static_cast<DescriptionIndex>(worker_policy_.size()));
 	return worker_policy_[ware];
 }
 
-Warehouse::StockPolicy Warehouse::get_stock_policy(WareWorker waretype,
-                                                   DescriptionIndex wareindex) const {
+StockPolicy Warehouse::get_stock_policy(WareWorker waretype, DescriptionIndex wareindex) const {
 	if (waretype == wwWORKER)
 		return get_worker_policy(wareindex);
 	else
 		return get_ware_policy(wareindex);
 }
 
-void Warehouse::set_ware_policy(DescriptionIndex ware, Warehouse::StockPolicy policy) {
+void Warehouse::set_ware_policy(DescriptionIndex ware, StockPolicy policy) {
 	assert(ware < static_cast<DescriptionIndex>(ware_policy_.size()));
 	ware_policy_[ware] = policy;
 }
 
-void Warehouse::set_worker_policy(DescriptionIndex ware, Warehouse::StockPolicy policy) {
+void Warehouse::set_worker_policy(DescriptionIndex ware, StockPolicy policy) {
 	assert(ware < static_cast<DescriptionIndex>(worker_policy_.size()));
 	worker_policy_[ware] = policy;
 }
 
 /**
- * Check if there are remaining wares with \ref Warehouse::StockPolicy::kRemove,
+ * Check if there are remaining wares with \ref StockPolicy::kRemove,
  * and remove one of them if appropriate.
  */
 void Warehouse::check_remove_stock(Game& game) {
 	if (base_flag().current_wares() < base_flag().total_capacity() / 2) {
 		for (DescriptionIndex ware = 0; ware < static_cast<DescriptionIndex>(ware_policy_.size());
 		     ++ware) {
-			if (get_ware_policy(ware) != Warehouse::StockPolicy::kRemove || !get_wares().stock(ware))
+			if (get_ware_policy(ware) != StockPolicy::kRemove || !get_wares().stock(ware))
 				continue;
 
 			launch_ware(game, ware);
@@ -1321,7 +1320,7 @@ void Warehouse::check_remove_stock(Game& game) {
 
 	for (DescriptionIndex widx = 0; widx < static_cast<DescriptionIndex>(worker_policy_.size());
 	     ++widx) {
-		if (get_worker_policy(widx) != Warehouse::StockPolicy::kRemove || !get_workers().stock(widx))
+		if (get_worker_policy(widx) != StockPolicy::kRemove || !get_workers().stock(widx))
 			continue;
 
 		Worker& worker = launch_worker(game, widx, Requirements());
@@ -1335,6 +1334,18 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	assert(portdock_->expedition_bootstrap() != nullptr);
 
 	return portdock_->expedition_bootstrap()->inputqueue(index, type);
+}
+
+const BuildingSettings* Warehouse::create_building_settings() const {
+	WarehouseSettings* settings = new WarehouseSettings(descr(), owner().tribe());
+	for (auto& pair : settings->ware_preferences) {
+		pair.second = get_ware_policy(pair.first);
+	}
+	for (auto& pair : settings->worker_preferences) {
+		pair.second = get_worker_policy(pair.first);
+	}
+	settings->launch_expedition = portdock_ && portdock_->expedition_started();
+	return settings;
 }
 
 void Warehouse::log_general_info(const EditorGameBase& egbase) const {

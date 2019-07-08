@@ -39,6 +39,10 @@ tribes:new_productionsite_type {
       frisians_stonemason = 1
    },
 
+   indicate_workarea_overlaps = {
+      frisians_quarry = false,
+   },
+
    outputs = {
       "granite"
    },
@@ -61,7 +65,7 @@ tribes:new_productionsite_type {
            -- This order is on purpose so that the productivity
            -- drops fast once all rocks are gone.
             "callworker=cut_granite",
-            "sleep=25000"
+            "sleep=17500"
          }
       },
    },
