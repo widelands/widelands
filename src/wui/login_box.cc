@@ -188,15 +188,13 @@ bool LoginBox::check_password() {
 	const std::string& meta = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
 	uint32_t port = s.get_natural("metaserverport", kInternetGamingPort);
 	std::string password = crypto::sha1(eb_password->text());
-	InternetGaming::ref().login(get_nickname(), password, true, meta, port);
 
-	if (!InternetGaming::ref().logged_in()) {
+	if (!InternetGaming::ref().check_password(get_nickname(), password, meta, port)) {
 		// something went wrong -> show the error message
 		// idealy it is about the wrong password
 		ChatMessage msg = InternetGaming::ref().get_messages().back();
 		UI::WLMessageBox wmb(this, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
-		InternetGaming::ref().reset();
 		eb_password->set_text("");
 		eb_password->focus();
 		return false;

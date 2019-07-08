@@ -67,7 +67,8 @@ struct BaseListselect : public Panel {
 	         uint32_t value,
 	         const Image* pic,
 	         const bool select_this,
-	         const std::string& tooltip_text, const std::string& hotkey);
+	         const std::string& tooltip_text,
+	         const std::string& hotkey);
 
 	void remove(uint32_t);
 	void remove(const char* name);
@@ -126,10 +127,11 @@ private:
 
 	struct EntryRecord {
 		explicit EntryRecord(const std::string& init_name,
-							 uint32_t init_entry,
-							 const Image* init_pic,
-							 const std::string& tooltip_text, const std::string& hotkey_text,
-							 const UI::TableStyleInfo& style);
+		                     uint32_t init_entry,
+		                     const Image* init_pic,
+		                     const std::string& tooltip_text,
+		                     const std::string& hotkey_text,
+		                     const UI::TableStyleInfo& style);
 
 		const std::string name;
 		const uint32_t entry_;
@@ -174,7 +176,8 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	         Entry value,
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
-	         const std::string& tooltip_text = std::string(), const std::string& hotkey = std::string()) {
+	         const std::string& tooltip_text = std::string(),
+	         const std::string& hotkey = std::string()) {
 		entry_cache_.push_back(value);
 		BaseListselect::add(name, entry_cache_.size() - 1, pic, select_this, tooltip_text, hotkey);
 	}
@@ -215,7 +218,8 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 	         Entry& value,
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
-	         const std::string& tooltip_text = std::string(), const std::string& hotkey = std::string()) {
+	         const std::string& tooltip_text = std::string(),
+	         const std::string& hotkey = std::string()) {
 		Base::add(name, &value, pic, select_this, tooltip_text, hotkey);
 	}
 

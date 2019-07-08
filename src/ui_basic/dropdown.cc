@@ -52,7 +52,8 @@ namespace UI {
 
 int BaseDropdown::next_id_ = 0;
 
-BaseDropdown::BaseDropdown(UI::Panel* parent, const std::string& name,
+BaseDropdown::BaseDropdown(UI::Panel* parent,
+                           const std::string& name,
                            int32_t x,
                            int32_t y,
                            uint32_t w,
@@ -60,17 +61,20 @@ BaseDropdown::BaseDropdown(UI::Panel* parent, const std::string& name,
                            int button_dimension,
                            const std::string& label,
                            const DropdownType type,
-                           UI::PanelStyle style, ButtonStyle button_style)
+                           UI::PanelStyle style,
+                           ButtonStyle button_style)
    : UI::NamedPanel(parent,
-					name,
-               x,
-               y,
-               (type == DropdownType::kPictorial || type == DropdownType::kPictorialMenu) ? button_dimension : w,
-               // Height only to fit the button, so we can use this in Box layout.
-               base_height(button_dimension, style)),
+                    name,
+                    x,
+                    y,
+                    (type == DropdownType::kPictorial || type == DropdownType::kPictorialMenu) ?
+                       button_dimension :
+                       w,
+                    // Height only to fit the button, so we can use this in Box layout.
+                    base_height(button_dimension, style)),
      id_(next_id_++),
      max_list_items_(max_list_items),
-	 max_list_height_(std::numeric_limits<uint32_t>::max()),
+     max_list_height_(std::numeric_limits<uint32_t>::max()),
      list_offset_x_(0),
      list_offset_y_(0),
      base_height_(base_height(button_dimension, style)),
@@ -94,10 +98,10 @@ BaseDropdown::BaseDropdown(UI::Panel* parent, const std::string& name,
                         w - button_dimension :
                         type == DropdownType::kTextualNarrow ? w : button_dimension,
                      get_h(),
-					 type == DropdownType::kTextual ?
-						 (style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
-															 UI::ButtonStyle::kWuiSecondary) :
-						 button_style,
+                     type == DropdownType::kTextual ?
+                        (style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                                            UI::ButtonStyle::kWuiSecondary) :
+                        button_style,
                      label),
      label_(label),
      type_(type),
@@ -117,9 +121,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent, const std::string& name,
 		}
 	});
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged&) {
-		layout();
-	});
+	   [this](const GraphicResolutionChanged&) { layout(); });
 
 	assert(max_list_items_ > 0);
 	// Hook into highest parent that we can get so that we can drop down outside the panel.
@@ -127,7 +129,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent, const std::string& name,
 	while (list_parent->get_parent()) {
 		list_parent = list_parent->get_parent();
 	}
-	list_ = new UI::Listselect<uintptr_t>(list_parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
+	list_ =
+	   new UI::Listselect<uintptr_t>(list_parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
 
 	list_->set_visible(false);
 	button_box_.add(&display_button_, UI::Box::Resizing::kExpandBoth);
@@ -146,7 +149,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent, const std::string& name,
 	// Find parent windows, boxes etc. so that we can move the list along with them
 	UI::Panel* ancestor = this;
 	while ((ancestor = ancestor->get_parent()) != nullptr) {
-		ancestor->position_changed.connect([this] {layout(); });
+		ancestor->position_changed.connect([this] { layout(); });
 	}
 	layout();
 }
@@ -166,8 +169,9 @@ void BaseDropdown::set_height(int height) {
 void BaseDropdown::layout() {
 	int list_width = list_->calculate_desired_width();
 
-	const int new_list_height =
-	   std::min(max_list_height_ / list_->get_lineheight(), std::min(list_->size(), max_list_items_)) * list_->get_lineheight();
+	const int new_list_height = std::min(max_list_height_ / list_->get_lineheight(),
+	                                     std::min(list_->size(), max_list_items_)) *
+	                            list_->get_lineheight();
 	list_->set_size(std::max(list_width, button_box_.get_w()), new_list_height);
 
 	// Update list position. The list is hooked into the highest parent that we can get so that we
@@ -382,10 +386,8 @@ void BaseDropdown::set_list_visibility(bool open) {
 	if (list_->is_visible()) {
 		list_->move_to_top();
 		focus();
-		set_mouse_pos(
-					Vector2i(
-						display_button_.get_x() + (display_button_.get_w() * 3 / 5),
-						display_button_.get_y() + (display_button_.get_h() * 2 / 5)));
+		set_mouse_pos(Vector2i(display_button_.get_x() + (display_button_.get_w() * 3 / 5),
+		                       display_button_.get_y() + (display_button_.get_h() * 2 / 5)));
 		if (type_ == DropdownType::kPictorialMenu && !has_selection() && !list_->empty()) {
 			select(0);
 		}

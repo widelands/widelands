@@ -27,7 +27,9 @@
 namespace UI {
 
 struct TableStyleInfo {
-	explicit TableStyleInfo(UI::FontStyleInfo* init_enabled, UI::FontStyleInfo* init_disabled, UI::FontStyleInfo* init_hotkey)
+	explicit TableStyleInfo(UI::FontStyleInfo* init_enabled,
+	                        UI::FontStyleInfo* init_disabled,
+	                        UI::FontStyleInfo* init_hotkey)
 	   : enabled_(init_enabled), disabled_(init_disabled), hotkey_(init_hotkey) {
 	}
 

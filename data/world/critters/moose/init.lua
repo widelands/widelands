@@ -15,8 +15,8 @@ animations = {
 add_directional_animation(animations, "walk", dirname, "walk", {21, 34}, 20)
 
 world:new_critter_type{
-   name = "elk",
-   descname = _ "Elk",
+   name = "moose",
+   descname = _ "Moose",
    editor_category = "critters_herbivores",
    attributes = { "eatable" },
    programs = {

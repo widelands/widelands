@@ -55,7 +55,11 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
      label_height_(text_height(UI::FontStyle::kLabel) + 2),
      box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
      // Size
-	 map_size_box_(box_, "random_map_menu", 4, parent.egbase().map().get_width(), parent.egbase().map().get_height()),
+     map_size_box_(box_,
+                   "random_map_menu",
+                   4,
+                   parent.egbase().map().get_width(),
+                   parent.egbase().map().get_height()),
      max_players_(2),
      players_(&box_,
               0,
@@ -392,11 +396,11 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	case ButtonId::kMapSize:
 	case ButtonId::kNone:
 		// Restrict maximum players according to map size, but allow at least 2 players.
-		max_players_ = std::min(
-		   static_cast<size_t>(kMaxMapgenPlayers), (find_dimension_index(map_size_box_.selected_width()) +
-		                                            find_dimension_index(map_size_box_.selected_height())) /
-		                                                 2 +
-		                                              2);
+		max_players_ = std::min(static_cast<size_t>(kMaxMapgenPlayers),
+		                        (find_dimension_index(map_size_box_.selected_width()) +
+		                         find_dimension_index(map_size_box_.selected_height())) /
+		                              2 +
+		                           2);
 		players_.set_interval(1, max_players_);
 		if (players_.get_value() > max_players_) {
 			players_.set_value(max_players_);

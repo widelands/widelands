@@ -22,9 +22,10 @@
 #include "base/i18n.h"
 #include "logic/map.h"
 
-MapSizeBox::MapSizeBox(UI::Box& parent, const std::string& name, int spacing, int map_width, int map_height)
+MapSizeBox::MapSizeBox(
+   UI::Box& parent, const std::string& name, int spacing, int map_width, int map_height)
    : UI::Box(&parent, 0, 0, UI::Box::Horizontal, 0, 0, spacing),
-	 width_(this,
+     width_(this,
             name + "_map_width",
             0,
             0,

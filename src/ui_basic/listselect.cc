@@ -38,19 +38,22 @@ constexpr int kHotkeyGap = 16;
 
 namespace UI {
 
-
 BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
-					 uint32_t init_entry,
-					 const Image* init_pic,
-					 const std::string& tooltip_text, const std::string& hotkey_text, const TableStyleInfo& style) :
-	name(init_name),
-	entry_(init_entry),
-	pic(init_pic),
-	tooltip(tooltip_text),
-	name_alignment(i18n::has_rtl_character(init_name.c_str(), 20) ? Align::kRight : Align::kLeft),
-	hotkey_alignment(i18n::has_rtl_character(hotkey_text.c_str(), 20) ? Align::kRight : Align::kLeft) {
+                                         uint32_t init_entry,
+                                         const Image* init_pic,
+                                         const std::string& tooltip_text,
+                                         const std::string& hotkey_text,
+                                         const TableStyleInfo& style)
+   : name(init_name),
+     entry_(init_entry),
+     pic(init_pic),
+     tooltip(tooltip_text),
+     name_alignment(i18n::has_rtl_character(init_name.c_str(), 20) ? Align::kRight : Align::kLeft),
+     hotkey_alignment(i18n::has_rtl_character(hotkey_text.c_str(), 20) ? Align::kRight :
+                                                                         Align::kLeft) {
 	rendered_name = UI::g_fh->render(as_richtext_paragraph(richtext_escape(name), style.enabled()));
-	rendered_hotkey = UI::g_fh->render(as_richtext_paragraph(richtext_escape(hotkey_text), style.hotkey()));
+	rendered_hotkey =
+	   UI::g_fh->render(as_richtext_paragraph(richtext_escape(hotkey_text), style.hotkey()));
 }
 
 /**
@@ -70,19 +73,19 @@ BaseListselect::BaseListselect(Panel* const parent,
                                UI::PanelStyle style,
                                const ListselectLayout selection_mode)
    : Panel(parent, x, y, w, h),
-	 widest_text_(0),
-	 widest_hotkey_(0),
+     widest_text_(0),
+     widest_hotkey_(0),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-	 table_style_(g_gr->styles().table_style(style)),
+     table_style_(g_gr->styles().table_style(style)),
      background_style_(selection_mode == ListselectLayout::kDropdown ?
                           g_gr->styles().dropdown_style(style) :
                           nullptr),
-	 lineheight_(text_height(table_style_.enabled()) + kMargin) {
+     lineheight_(text_height(table_style_.enabled()) + kMargin) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
@@ -134,11 +137,9 @@ void BaseListselect::add(const std::string& name,
                          uint32_t entry,
                          const Image* pic,
                          bool const sel,
-                         const std::string& tooltip_text, const std::string& hotkey) {
-	EntryRecord* er = new EntryRecord(
-						  name,
-						  entry, pic, tooltip_text,
-						  hotkey, table_style_);
+                         const std::string& tooltip_text,
+                         const std::string& hotkey) {
+	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, table_style_);
 
 	int entry_height = lineheight_;
 	if (pic) {
@@ -427,11 +428,11 @@ void BaseListselect::draw(RenderTarget& dst) {
 			hotkey_point.x += widest_hotkey_ - er.rendered_hotkey->width();
 		}
 
-		er.rendered_name->draw(
-		   dst, text_point, Recti(0, 0, maxw - widest_hotkey_, lineheight), UI::Align::kLeft, RenderedText::CropMode::kSelf);
+		er.rendered_name->draw(dst, text_point, Recti(0, 0, maxw - widest_hotkey_, lineheight),
+		                       UI::Align::kLeft, RenderedText::CropMode::kSelf);
 		if (er.rendered_hotkey->width() > 0) {
-			er.rendered_hotkey->draw(
-			   dst, hotkey_point, Recti(0, 0, maxw - widest_text_, lineheight), UI::Align::kLeft, RenderedText::CropMode::kSelf);
+			er.rendered_hotkey->draw(dst, hotkey_point, Recti(0, 0, maxw - widest_text_, lineheight),
+			                         UI::Align::kLeft, RenderedText::CropMode::kSelf);
 		}
 		y += get_lineheight();
 		++idx;

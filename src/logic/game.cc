@@ -56,6 +56,7 @@
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/replay.h"
@@ -775,8 +776,8 @@ void Game::send_player_start_or_cancel_expedition(Building& building) {
 }
 
 void Game::send_player_enhance_building(Building& building, DescriptionIndex const id) {
-	assert(building.owner().tribe().has_building(id));
-
+	assert(building.descr().type() == MapObjectType::CONSTRUCTIONSITE ||
+	       building.owner().tribe().has_building(id));
 	send_player_command(
 	   new CmdEnhanceBuilding(get_gametime(), building.owner().player_number(), building, id));
 }
@@ -788,17 +789,19 @@ void Game::send_player_evict_worker(Worker& worker) {
 void Game::send_player_set_ware_priority(PlayerImmovable& imm,
                                          int32_t const type,
                                          DescriptionIndex const index,
-                                         int32_t const prio) {
-	send_player_command(
-	   new CmdSetWarePriority(get_gametime(), imm.owner().player_number(), imm, type, index, prio));
+                                         int32_t const prio,
+                                         bool cs) {
+	send_player_command(new CmdSetWarePriority(
+	   get_gametime(), imm.owner().player_number(), imm, type, index, prio, cs));
 }
 
 void Game::send_player_set_input_max_fill(PlayerImmovable& imm,
                                           DescriptionIndex const index,
                                           WareWorker type,
-                                          uint32_t const max_fill) {
+                                          uint32_t const max_fill,
+                                          bool cs) {
 	send_player_command(new CmdSetInputMaxFill(
-	   get_gametime(), imm.owner().player_number(), imm, index, type, max_fill));
+	   get_gametime(), imm.owner().player_number(), imm, index, type, max_fill, cs));
 }
 
 void Game::send_player_change_training_options(TrainingSite& ts,
@@ -856,6 +859,14 @@ void Game::send_player_propose_trade(const Trade& trade) {
 	assert(object != nullptr);
 	send_player_command(
 	   new CmdProposeTrade(get_gametime(), object->get_owner()->player_number(), trade));
+}
+
+void Game::send_player_set_stock_policy(Building& imm,
+                                        WareWorker ww,
+                                        DescriptionIndex di,
+                                        StockPolicy sp) {
+	send_player_command(new CmdSetStockPolicy(
+	   get_gametime(), imm.get_owner()->player_number(), imm, ww == wwWORKER, di, sp));
 }
 
 int Game::propose_trade(const Trade& trade) {
