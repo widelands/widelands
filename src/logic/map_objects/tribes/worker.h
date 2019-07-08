@@ -183,11 +183,13 @@ protected:
 	virtual bool is_evict_allowed();
 	virtual void draw_inner(const EditorGameBase& game,
 	                        const Vector2f& point_on_dst,
+	                        const Widelands::Coords& coords,
 	                        const float scale,
 	                        RenderTarget* dst) const;
 	void draw(const EditorGameBase&,
 	          const TextToDraw& draw_text,
 	          const Vector2f& field_on_dst,
+	          const Widelands::Coords& coords,
 	          float scale,
 	          RenderTarget* dst) const override;
 	void init_auto_task(Game&) override;

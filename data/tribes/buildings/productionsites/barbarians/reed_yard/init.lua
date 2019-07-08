@@ -35,7 +35,13 @@ tribes:new_productionsite_type {
    },
 
    outputs = {
-      "thatch_reed"
+      "reed"
+   },
+
+   indicate_workarea_overlaps = {
+      barbarians_rangers_hut = false,
+      barbarians_reed_yard = false,
+      barbarians_farm = false,
    },
 
    programs = {
@@ -52,16 +58,16 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
          descname = _"planting reed",
          actions = {
-            "sleep=18000", -- orig sleep=20000 but gardener animation was increased by 2sec
-            "callworker=plant"
+            "callworker=plant",
+            "sleep=8000" -- orig sleep=20000 but gardener animation was increased by 2sec
          }
       },
       harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
          descname = _"harvesting reed",
          actions = {
-            "sleep=5000",
-            "callworker=harvest"
+            "callworker=harvest",
+            "sleep=3000"
          }
       },
    },

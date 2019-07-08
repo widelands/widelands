@@ -52,10 +52,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
          descname = _"grinding wheat",
          actions = {
-            "sleep=5000",
             "return=skipped unless economy needs flour",
             "consume=wheat",
-            "playsound=sound/mill mill_turning 240",
+            "sleep=5000",
+            "playsound=sound/mill/mill_turning 240",
             "animate=working 10000",
             "produce=flour"
          }

@@ -31,8 +31,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      recruitment = true,
-      prohibited_till = 610
+      prohibited_till = 610,
    },
 
    working_positions = {
@@ -52,10 +51,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
          descname = pgettext("atlanteans_building", "breeding horses"),
          actions = {
-            "sleep=15000",
             "return=skipped unless economy needs atlanteans_horse",
             "consume=corn water",
-            "playsound=sound/farm horse 192",
+            "sleep=15000",
+            "playsound=sound/farm/horse 192",
             "animate=working 15000", -- Feeding cute little foals ;)
             "recruit=atlanteans_horse"
          }

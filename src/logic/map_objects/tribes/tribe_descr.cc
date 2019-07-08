@@ -31,7 +31,6 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/immovable.h"
@@ -64,8 +63,16 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		initializations_ = info.initializations;
 
 		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
-		frontier_animation_id_ = g_gr->animations().load(*items_table->get_table("frontier"));
-		flag_animation_id_ = g_gr->animations().load(*items_table->get_table("flag"));
+		{
+			std::unique_ptr<LuaTable> animations_table = items_table->get_table("frontier");
+			frontier_animation_id_ =
+			   g_gr->animations().load(name_ + std::string("_frontier"), *animations_table,
+			                           animations_table->get_string("basename"));
+			animations_table = items_table->get_table("flag");
+			flag_animation_id_ =
+			   g_gr->animations().load(name_ + std::string("_frontier"), *animations_table,
+			                           animations_table->get_string("basename"));
+		}
 
 		items_table = table.get_table("roads");
 		const auto load_roads = [&items_table](
@@ -88,8 +95,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		load_roads("busy", &busy_road_paths_);
 
 		items_table = table.get_table("wares_order");
-		wares_order_coords_.resize(tribes_.nrwares());
-		int columnindex = 0;
 		for (const int key : items_table->keys<int>()) {
 			std::vector<DescriptionIndex> column;
 			std::vector<std::string> warenames =
@@ -103,7 +108,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 					}
 					wares_.insert(wareindex);
 					column.push_back(wareindex);
-					wares_order_coords_[wareindex] = std::make_pair(columnindex, rowindex);
 				} catch (const WException& e) {
 					throw GameDataError(
 					   "Failed adding ware '%s: %s", warenames[rowindex].c_str(), e.what());
@@ -111,13 +115,10 @@ TribeDescr::TribeDescr(const LuaTable& table,
 			}
 			if (!column.empty()) {
 				wares_order_.push_back(column);
-				++columnindex;
 			}
 		}
 
 		items_table = table.get_table("workers_order");
-		workers_order_coords_.resize(tribes_.nrworkers());
-		columnindex = 0;
 		for (const int key : items_table->keys<int>()) {
 			std::vector<DescriptionIndex> column;
 			std::vector<std::string> workernames =
@@ -131,7 +132,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 					}
 					workers_.insert(workerindex);
 					column.push_back(workerindex);
-					workers_order_coords_[workerindex] = std::make_pair(columnindex, rowindex);
 
 					const WorkerDescr& worker_descr = *tribes_.get_worker_descr(workerindex);
 					if (worker_descr.is_buildable() && worker_descr.buildcost().empty()) {
@@ -144,7 +144,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 			}
 			if (!column.empty()) {
 				workers_order_.push_back(column);
-				++columnindex;
 			}
 		}
 
@@ -174,7 +173,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 				throw GameDataError("Tribe has no indicators for resource %s.", resource.c_str());
 			}
 			resource_indicators_[resource] = resis;
-		};
+		}
 
 		ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
 
@@ -198,7 +197,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		}
 
 		port_ = add_special_building(table.get_string("port"));
-		barracks_ = add_special_building(table.get_string("barracks"));
 
 		ironore_ = add_special_ware(table.get_string("ironore"));
 		rawlog_ = add_special_ware(table.get_string("rawlog"));
@@ -327,10 +325,6 @@ DescriptionIndex TribeDescr::port() const {
 	assert(tribes_.building_exists(port_));
 	return port_;
 }
-DescriptionIndex TribeDescr::barracks() const {
-	assert(tribes_.building_exists(barracks_));
-	return barracks_;
-}
 DescriptionIndex TribeDescr::ironore() const {
 	assert(tribes_.ware_exists(ironore_));
 	return ironore_;
@@ -420,38 +414,6 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	}
 
 	return list->second.find(lowest)->second;
-}
-
-void TribeDescr::resize_ware_orders(size_t maxLength) {
-	bool need_resize = false;
-
-	// Check if we actually need to resize.
-	for (WaresOrder::iterator it = wares_order_.begin(); it != wares_order_.end(); ++it) {
-		if (it->size() > maxLength) {
-			need_resize = true;
-		}
-	}
-
-	// Build new smaller wares_order.
-	if (need_resize) {
-		WaresOrder new_wares_order;
-		for (WaresOrder::iterator it = wares_order_.begin(); it != wares_order_.end(); ++it) {
-			new_wares_order.push_back(std::vector<Widelands::DescriptionIndex>());
-			for (std::vector<Widelands::DescriptionIndex>::iterator it2 = it->begin();
-			     it2 != it->end(); ++it2) {
-				if (new_wares_order.rbegin()->size() >= maxLength) {
-					new_wares_order.push_back(std::vector<Widelands::DescriptionIndex>());
-				}
-				new_wares_order.rbegin()->push_back(*it2);
-				wares_order_coords_[*it2].first = new_wares_order.size() - 1;
-				wares_order_coords_[*it2].second = new_wares_order.rbegin()->size() - 1;
-			}
-		}
-
-		// Remove old array.
-		wares_order_.clear();
-		wares_order_ = new_wares_order;
-	}
 }
 
 void TribeDescr::add_building(const std::string& buildingname) {

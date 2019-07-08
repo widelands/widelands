@@ -42,9 +42,7 @@ enum class SoldierPreference : uint8_t {
 
 class MilitarySiteDescr : public BuildingDescr {
 public:
-	MilitarySiteDescr(const std::string& init_descname,
-	                  const LuaTable& t,
-	                  const EditorGameBase& egbase);
+	MilitarySiteDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
 	~MilitarySiteDescr() override {
 	}
 
@@ -109,6 +107,8 @@ public:
 	SoldierPreference get_soldier_preference() const {
 		return soldier_preference_;
 	}
+
+	const BuildingSettings* create_building_settings() const override;
 
 protected:
 	void conquer_area(EditorGameBase&);

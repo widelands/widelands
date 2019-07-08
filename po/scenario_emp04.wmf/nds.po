@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2019\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -152,15 +152,15 @@ msgstr "Hannel mit Julia, um de Technik to kriegen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:120
 msgid "Diplomacy: Trade or War"
-msgstr "Hannel oder Krieg"
+msgstr "Hannel of Krieg"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:121
 msgid ""
 "Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the "
 "goddess in your headquarters or conquer the monastery."
 msgstr ""
-"Reselveer: Of sammelst du 35 Ähren Weit un 15 Potten Wien för de Gottheid in"
-" dienem Raadhuus, of du manntjest dat Klooster."
+"Reselveer: Oder sammelst du 35 Ähren Weit un 15 Potten Wien för de Gottheid "
+"in dienem Raadhuus, of du manntjest dat Klooster."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:127
 msgid "Train at least 3 heroes"
@@ -193,7 +193,7 @@ msgid ""
 "Remember that you can control the production amount in the economy settings."
 msgstr ""
 "Vergeet nich, dat du de Tahl vun Waren, de produzeert worden sallen, in de "
-"Wirtschafts-Instellungen stüren kannst."
+"Wirtschafts-Instellens stüren kannst."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:146
 msgid "Recruit new soldiers"
@@ -340,6 +340,10 @@ msgstr ""
 "överwunnen, de vör uns laggen. Wi hebben sogaar de Willen Lüü ur uns' Land "
 "dreven. Aver uns' Sieg is blot för körte Tied, denn dat is eerst de Anfang "
 "vum Krieg. Laat uns wachten, wat de Tokunft för uns noch paraat hollt."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:230
+msgid "Victory"
+msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
 msgid ""
@@ -1375,14 +1379,3 @@ msgid ""
 " life and your land be cursed and may the wrath of the goddess scourge your "
 "family from the face of the earth!"
 msgstr ""
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neje Upgaav"
-msgstr[1] "Neje Upgaven"

@@ -40,7 +40,7 @@ endfunction(wl_include_directories TARGET DIR)
 # it works is different. SYSTEM includes silence warnings for included headers etc.
 function(wl_include_system_directories TARGET DIR)
   _include_directories_internal(${TARGET} ${DIR} TRUE)
-endfunction(wl_include_system_directories TARGET_DIR)
+endfunction(wl_include_system_directories TARGET DIR)
 
 # Add common compile tasks, like includes and libraries to link against for third party
 # libraries, and codecheck hook for sources.
@@ -178,6 +178,12 @@ endfunction()
 
 # Common test target definition.
 function(wl_test NAME)
+
+  if (NOT OPTION_BUILD_TESTS)
+    return()
+  endif()
+
+
   _parse_common_args("${ARGN}")
 
   add_executable(${NAME} ${ARG_SRCS})

@@ -7,12 +7,16 @@ terrain_affinity = {
    pickiness = 10,
 }
 
+animations = {}
+add_animation(animations, "idle", dirname .. "tiny", "idle", { 4, 7 })
+
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_raspberry_tiny",
    descname = _ "Raspberry Bush (tiny)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "tiny/menu.png",
    attributes = { "seed_berrybush" },
    terrain_affinity = terrain_affinity,
    programs = {
@@ -22,14 +26,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_raspberry_small",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "tiny/idle_?.png"),
-         hotspot = {4, 7},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname .. "small", "idle", { 16, 31 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -37,6 +38,7 @@ tribes:new_immovable_type {
    descname = _ "Raspberry Bush (small)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "small/menu.png",
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
@@ -46,14 +48,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_raspberry_medium",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "small/idle_?.png"),
-         hotspot = {16, 31},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname .. "medium", "idle", { 17, 34 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -61,6 +60,7 @@ tribes:new_immovable_type {
    descname = _ "Raspberry Bush (medium)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "medium/menu.png",
    attributes = { "flowering" },
    terrain_affinity = terrain_affinity,
    programs = {
@@ -70,14 +70,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_raspberry_ripe",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "medium/idle_?.png"),
-         hotspot = {17, 34},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname .. "ripe", "idle", { 17, 34 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -85,6 +82,7 @@ tribes:new_immovable_type {
    descname = _ "Raspberry Bush (ripe)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "ripe/menu.png",
    attributes = { "ripe_bush" },
    terrain_affinity = terrain_affinity,
    programs = {
@@ -96,11 +94,5 @@ tribes:new_immovable_type {
          "remove=",
       }
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "ripe/idle_?.png"),
-         hotspot = {17, 34},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }

@@ -83,7 +83,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 
 	editbox_ = new UI::EditBox(
 	   this, editbox_label_.get_x() + editbox_label_.get_w() + padding_, editbox_label_.get_y(),
-	   tablew_ - editbox_label_.get_w() - padding_ + 1, buth_, 2, UI::PanelStyle::kWui);
+	   tablew_ - editbox_label_.get_w() - padding_ + 1, UI::PanelStyle::kWui);
 	editbox_->set_text(parent.egbase().map().get_name());
 
 	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));

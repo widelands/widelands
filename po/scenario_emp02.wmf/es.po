@@ -4,6 +4,7 @@
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2016
+# Facundo Gomez <facundogomez15@gmail.com>, 2019
 # GunChleoc, 2016
 # Kiba Gasteiz, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-03 08:14+0000\n"
-"PO-Revision-Date: 2019-02-05 16:26+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 10:11+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -115,7 +116,7 @@ msgstr "Para proveer estos comestibles, tendrás que construir una casa de pesca
 msgid ""
 "Build a brewery and a winery to supply the miners with some good and strong "
 "drinks."
-msgstr ""
+msgstr "Construye una cervecería y una bodega para darle a los mineros unos tragos buenos y fuertes."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:79
 msgid "Maybe you will also need a piggery, a vineyard and some wells."
@@ -162,7 +163,7 @@ msgstr "Construye unos barracones para empezar a entrenar soldados."
 msgid ""
 "Attack and completely destroy the Barbarian buildings as soon as you have "
 "enough soldiers."
-msgstr ""
+msgstr "Ataca y destruye completamente los edificios bárbaros en cuanto tengas suficientes soldados."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:101
 msgid ""
@@ -519,14 +520,3 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "Has completado esta misión. Puedes continuar jugando si quieres, de otro modo avanza a la siguiente misión."
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Nuevo objetivo"
-msgstr[1] "Nuevos objetivos"

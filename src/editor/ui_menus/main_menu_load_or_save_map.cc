@@ -55,7 +55,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                   get_inner_w() - right_column_x_ - padding_,
                   tableh_,
                   UI::PanelStyle::kWui),
-     directory_info_(this, padding_, get_inner_h() - 2 * buth_ - 4 * padding_),
+     directory_info_(this, padding_, get_inner_h() - 2 * buth_ - 4 * padding_, 0, 0),
      ok_(this,
          "ok",
          UI::g_fh->fontset()->is_rtl() ? get_inner_w() / 2 - butw_ - padding_ :

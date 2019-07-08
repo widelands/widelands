@@ -67,7 +67,6 @@ wl_library(ui_basic
     graphic_styles
     graphic_surface
     graphic_text
-    graphic_text_constants
     graphic_text_layout
     graphic_wordwrap
     io_filesystem
@@ -76,5 +75,6 @@ wl_library(ui_basic
     scripting_lua_interface
     scripting_lua_table
     sound
+    sound_constants
     widelands_ball_of_mud
 )

@@ -24,7 +24,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
@@ -42,6 +41,7 @@ Panel* Panel::mousein_ = nullptr;
 bool Panel::allow_user_input_ = true;
 const Image* Panel::default_cursor_ = nullptr;
 const Image* Panel::default_cursor_click_ = nullptr;
+FxId Panel::click_fx_ = kNoSoundEffect;
 
 /**
  * Initialize a panel, link it into the parent's queue.
@@ -123,8 +123,12 @@ void Panel::free_children() {
 	// Scan-build claims this results in double free.
 	// This is a false positive.
 	// See https://bugs.launchpad.net/widelands/+bug/1198928
-	while (first_child_)
+	while (first_child_) {
+		Panel* next_child = first_child_->next_;
 		delete first_child_;
+		first_child_ = next_child;
+	}
+	first_child_ = nullptr;
 }
 
 /**
@@ -457,12 +461,12 @@ void Panel::draw_background(RenderTarget& dst, const UI::PanelStyleInfo& info) {
 	draw_background(dst, Recti(0, 0, get_w(), get_h()), info);
 }
 void Panel::draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo& info) {
-	if (info.image != nullptr) {
+	if (info.image() != nullptr) {
 		dst.fill_rect(rect, RGBAColor(0, 0, 0, 255));
-		dst.tile(rect, info.image, Vector2i(get_x(), get_y()));
+		dst.tile(rect, info.image(), Vector2i(get_x(), get_y()));
 	}
-	if (info.color != RGBAColor(0, 0, 0, 0)) {
-		dst.fill_rect(rect, info.color, BlendMode::UseAlpha);
+	if (info.color() != RGBAColor(0, 0, 0, 0)) {
+		dst.fill_rect(rect, info.color(), BlendMode::UseAlpha);
 	}
 }
 
@@ -530,6 +534,7 @@ void Panel::handle_mousein(bool) {
 bool Panel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
+		clicked();
 	}
 	return false;
 }
@@ -713,13 +718,16 @@ void Panel::die() {
  * sound_handler.h in every UI subclass just for playing a 'click'
  */
 void Panel::play_click() {
-	g_sound_handler.play_fx("click", 128, PRIO_ALWAYS_PLAY);
+	g_sh->play_fx(SoundType::kUI, click_fx_);
 }
-void Panel::play_new_chat_message() {
-	g_sound_handler.play_fx("lobby_chat", 128, PRIO_ALWAYS_PLAY);
-}
-void Panel::play_new_chat_member() {
-	g_sound_handler.play_fx("lobby_freshmen", 128, PRIO_ALWAYS_PLAY);
+
+/**
+ * This needs to be called once after g_soundhandler has been instantiated and before play_click()
+ * is called. We do it this way so that we don't have to register the same sound every time we
+ * create a new panel.
+ */
+void Panel::register_click() {
+	click_fx_ = SoundHandler::register_fx(SoundType::kUI, "sound/click");
 }
 
 /**
@@ -732,10 +740,12 @@ void Panel::check_child_death() {
 		Panel* p = next;
 		next = p->next_;
 
-		if (p->flags_ & pf_die)
+		if (p->flags_ & pf_die) {
 			delete p;
-		else if (p->flags_ & pf_child_die)
+			p = nullptr;
+		} else if (p->flags_ & pf_child_die) {
 			p->check_child_death();
+		}
 	}
 
 	flags_ &= ~pf_child_die;
@@ -1078,7 +1088,7 @@ bool Panel::draw_tooltip(const std::string& text) {
 	RenderTarget& dst = *g_gr->get_render_target();
 	std::string text_to_render = text;
 	if (!is_richtext(text_to_render)) {
-		text_to_render = as_tooltip(text_to_render);
+		text_to_render = as_richtext_paragraph(text_to_render, UI::FontStyle::kTooltip);
 	}
 
 	constexpr uint32_t kTipWidthMax = 360;

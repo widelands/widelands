@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-15 11:14+0000\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -95,7 +95,7 @@ msgstr "Tog 3 taighean coillteir is 2 chuaraidh air a char as lugha"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:84
 msgid "Quarries and Lumberjacks"
-msgstr "Taighean coillteir cuaraidhean"
+msgstr "Taighean coillteir ’s cuaraidhean"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:85
 msgid ""
@@ -120,9 +120,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:100
 msgid "Replace the old and ineffective forester’s houses"
-msgstr ""
-"Tog taighean planntair-choille ùra an àite na seann-fheadhna nach eil "
-"èifeachdach"
+msgstr "Tog taighean planntair-choille ùra an àite na seann-fheadhna"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:102
 msgid "Build Two New Forester’s Houses"
@@ -133,11 +131,11 @@ msgid ""
 "Replace the two forester’s houses by new ones to increase productivity."
 msgstr ""
 "Tog taighean planntair-choille ùra an àite na seann-fheadhna airson barrachd"
-" dèanadais."
+" cinneasachaidh."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:109
 msgid "Find the monastery in the north"
-msgstr "Lorg am manachainn gu tuath"
+msgstr "Lorg am manachainn gu tuath oirnn"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:111
 msgid "Find the Monastery"
@@ -148,8 +146,8 @@ msgid ""
 "Find the monastery in the north to obtain the improved technology for your "
 "wheat production chain."
 msgstr ""
-"Lorg am manachainn gu tuath ach am faigh thu an teicneolas ùr a dh’fheumas "
-"tu airson giullachd na cruithneachd."
+"Lorg am manachainn gu tuath oirnn ach am faigh thu an teicneolas ùr a "
+"dh’fheumas tu airson giullachd na cruithneachd."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:118
 msgid "Deal with Julia to get the technology"
@@ -180,7 +178,7 @@ msgid ""
 "Use your resources wisely to train at least three fully promoted heroes."
 msgstr ""
 "Cleachd na stòrasan agad gu glic ach an oidich thu co-dhiù trì seann-"
-"ghaisgich aig a bheil gad àrdachadh."
+"ghaisgich aig a bheil gach àrdachadh."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:136
 msgid "Produce at least 10 tools"
@@ -233,15 +231,16 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:165
 msgid "Build 2 charcoal kiln"
-msgstr "Tog 2 àth-ghuail"
+msgstr "Tog 2 shloc guail-fhiodha"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:167
 msgid "Build Two Charcoal Kilns"
-msgstr "Tog dà àth-ghuail"
+msgstr "Tog dà shloc guail-fhiodha"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:168
 msgid "Build two charcoal kilns to support the iron industry."
-msgstr "Tog dà àth-ghuail airson taic a chur ri gnìomhachas an iarrainn."
+msgstr ""
+"Tog dà shloc guail-fhiodha airson taic a chur ri gnìomhachas an iarainn."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:169
 msgid "Remember to ensure a constant log supply for them."
@@ -295,7 +294,7 @@ msgid ""
 msgstr ""
 "Ràinig sinn dhachaigh mu dheireadh thall. Tha mi glè thoilichte an dùthaich "
 "àlainn againn fhaicinn a-rithist. Tha fiughair mhòr agam ri coiseachd na "
-"h-oirthire bhrèagha agus rir an t-sealg ’nar coilltean domhainn."
+"h-oirthire bhrèagha agus ris an t-sealg ’nar coilltean domhainn."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:205
@@ -304,7 +303,7 @@ msgstr "Tha mi ’n dùil gu bheil Saledus is Amalea àghmhor cuideachd."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:210
 msgid "Tools, Tools, Tools"
-msgstr "Innealan ’s innealan ’s innealan"
+msgstr "Acainnean ’s acainnean ’s acainnean"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:213
@@ -312,7 +311,7 @@ msgid ""
 "Praise the gods! We just ensured a constant tool supply. Now we should be "
 "able to expand our economy."
 msgstr ""
-"Mholamaid na diathan! Rinn sinn cinnteach gum faigh sinn innealan gu "
+"Mholamaid na diathan! Rinn sinn cinnteach gum faigh sinn acainnean gu "
 "cunbhalach a-nis. Saoilidh mi gun dèid leinn an eaconamaidh againn a "
 "leudachadh a-nis."
 
@@ -345,10 +344,13 @@ msgid ""
 "war. Let’s see what the future still holds for us."
 msgstr ""
 "Mholamaid na diathan on a chaidh an latha leinn. Sheas sinn an aghaidh nan "
-"dùbhlain uile a chaidh a chur romhainn. Fhuadaich sinn fiù ’s na Tùsanaich "
-"às ar dùthaich. Gidheadh, chan e ach buaidh shealadach a tha sin o nach eil "
-"an cogadh ach dìreach air a thòiseachadh. Chì sinn na bhios romhainn "
-"fhathast."
+"dùbhlan uile a chaidh a chur romhainn. Fhuadaich sinn fiù ’s na Tùsanaich às"
+" ar dùthaich. Gidheadh, chan e ach buaidh shealadach a tha sin o nach eil an"
+" cogadh ach dìreach air a thòiseachadh. Chì sinn na bhios romhainn fhathast."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:230
+msgid "Victory"
+msgstr "Buaidh"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
 msgid ""
@@ -373,8 +375,8 @@ msgid ""
 "the road network seems to be completely in shambles as well. Who might be "
 "responsible for this chaos?"
 msgstr ""
-"Ochan ò! Tha Amalea ceart. A dh’innse na fìrinn, chan fhaic mi saothrachadh "
-"sam bith. Agus tha coltas gu bheil lìonra nan rathaidean millte gu lèir. "
+"Ochan ò! Tha Amalea ceart. A dh’innse na fìrinn, chan fhaic mi cinneasachadh"
+" sam bith. Agus tha coltas gu bheil lìonra nan rathaidean millte gu lèir. "
 "Saoil cò dh’adhbharaich an rù-rà sin?"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:247
@@ -388,7 +390,7 @@ msgstr "Tha Lutius a’ cur fàilte air an oifigear"
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:250
 msgid "Ave! Who are you and what happened to our beautiful land?"
-msgstr "Ave! Cò sibhse is dè dh’èirich dhar dùthaich dhrùiteil?"
+msgstr "Ave! Cò sibhse is dè dh’èirich dha ’r dùthaich dhrùitich?"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:255
 msgid "Difficult Times"
@@ -416,7 +418,7 @@ msgid ""
 "Barbarians decide to attack us."
 msgstr ""
 "’S eagal leam nach eil sinn ullaichte idir idir nan robh na Tùsanaich a’ cur"
-" romhpa gun doir iad ionnsaigh oirnn."
+" romhpa gun doireadh iad ionnsaigh oirnn."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:269
 msgid "Welcome Back"
@@ -441,7 +443,7 @@ msgid ""
 "As you have already noticed, things have gone terribly wrong around here "
 "since you left."
 msgstr ""
-"Mar a mhothaich sibh ceana, chaidh cùisean uabhasach ceàrr an-seo on àm a "
+"Mar a mhothaich sibh cheana, chaidh cùisean uabhasach ceàrr an-seo on àm a "
 "dh’fhàg sibh."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:279
@@ -461,9 +463,9 @@ msgid ""
 "delegated the authority of running the city to his former secretary and "
 "instated him as his surrogate around here."
 msgstr ""
-"A thighearna, innsinn on toiseach-tòiseachaidh. Dh’fhàg an rìgh Fremil o "
-"chionn fhada a shabaid nan Tùsanach. On a bha aige ris an làn-aire a cur ris"
-" an dleastanas sin, thug e ùghdarras don seann-rùnaire aige airson "
+"A thighearna, innsidh mi e on toiseach-tòiseachaidh. Dh’fhàg an rìgh Fremil "
+"o chionn fhada a shabaid nan Tùsanach. On a bha aige ris an làn-aire a cur "
+"ris an dleastanas sin, thug e ùghdarras don seann-rùnaire aige airson "
 "stiùireadh a’ bhaile agus thug e cumhachd neach-ionaid dha."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:284
@@ -474,7 +476,7 @@ msgid ""
 msgstr ""
 "Ach sin aon dhe na co-dhùnaidhean as miosa a rinn e a-riamh. Chaidh an "
 "rùnaire tuilleadh is dèidheil air a’ chumhachd ùr a bh’ aige. Bha a nàdar "
-"fèineil a cheart cho dona ’s a bha a ghòrachas agus a neo-thapaidheachd a "
+"fèineil a cheart cho dona ’s a bha a ghòrachas agus a neo-sheòltachd a "
 "thaobh riaghladh a’ bhaile."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:286
@@ -485,7 +487,7 @@ msgid ""
 msgstr ""
 "Mhothaich an sluagh don fhìrinn sin às dèidh greis is shad iad an dearg "
 "amadan a-mach. Thagh iad mise mar mèar a’ bhaile seo an uairsin. Gidheadh, "
-"tha fheabhas on rù-rà ro dhuilich agus thar mo chomas-se."
+"tha feabhas on rù-rà ro dhuilich agus thar mo chomas-se."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:294
 msgid "Amalea Looks Puzzled"
@@ -493,7 +495,7 @@ msgstr "Tha Amalea a’ cur neònachas oirre"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:295
 msgid "Amalea is doubtful…"
-msgstr "Tha Amalea amharasach"
+msgstr "Tha Amalea amharasach…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:297
@@ -513,7 +515,7 @@ msgid ""
 " managed our country while we were absent created utter chaos. I’m not quite"
 " sure how we can fix this, if at all possible."
 msgstr ""
-"Seall air an eaconamaidh againn. Cha mhòr nach dèid dad a shaothrachadh "
+"Seall air an eaconamaidh againn. Cha mhòr nach dèid dad a chinneasachadh "
 "idir. Ge b’ e cò a stiùirich ar dùthaich fad ’s a bha sinn thall thairis, "
 "cha do chruthaich iad ach bùrach mòr. Chan eil mi buileach cinnteach ciamar "
 "a chàraicheas sinn e ma ghabhas a chàradh idir."
@@ -599,9 +601,9 @@ msgid ""
 " productivity and the constructors don’t know how to dismantle them either."
 msgstr ""
 "’S e an dorch-fhortan gun do chaill ar muinntir na planaichean-togail is "
-"obrachaidh nan tuathanasan. Chan fhaigh iad toradh sam bith air a shàilleibh"
-" agus chan eil fios aig an luchd-togail mar a chuireas iad às an cèile iad "
-"nas motha."
+"obrachaidh nan tuathanasan. Chan fhaigh iad cinneasachadh sam bith air a "
+"shàilleibh agus chan eil fios aig an luchd-togail mar a bheireas iad às an "
+"cèile iad nas motha."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:330
@@ -659,7 +661,7 @@ msgid ""
 msgstr ""
 "Iochd, mura dìochuimhnich mi, tha saothair eile againn ri coileanadh. Fhad "
 "’s a nì an luchd-togail againn an obair, bu chòir do chuideigin lìonra nan "
-"rathaidean againn a sgioblachadh. Chan eil iad a’ fàgail rum gu leòr dhuinn "
+"rathaidean againn a sgioblachadh. Chan eil iad a’ fàgail rùm gu leòr dhuinn "
 "airson na togalaichean a dh’fheumas sinn a chur ann."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:356
@@ -688,7 +690,7 @@ msgid ""
 msgstr ""
 "’S urrainn dhuinn tòiseachadh air tuathanasan a thogail a-nis ach an dèan "
 "sinn leann agus cruaidh-fheum aig na mèinnearan againn air. A bharrachd air "
-"sin, thug na planaichean comas dhuinn an seann-thuathanasan againn a "
+"sin, thug na planaichean comas dhuinn na seann-thuathanasan againn a "
 "leasachadh ach an obraich iad a-rithist."
 
 #. TRANSLATORS: Amalea
@@ -729,8 +731,8 @@ msgid ""
 "I really think we can start to be hopeful about our future now. I pray that "
 "we can make ourselves comfortable in our homeland again."
 msgstr ""
-"Cha chreid nach urrainn dhuinn a bhith dòchasach a-nis. Tha mi a’ guidhe gum"
-" dig an t-àm a bhios sinn cofhurtail ’nar dachaigh a-rithist."
+"Cha chreid mi nach urrainn dhuinn a bhith dòchasach a-nis. Tha mi a’ guidhe "
+"gun dig an t-àm a bhios sinn cofhurtail ’nar dachaigh a-rithist."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:383
@@ -739,7 +741,7 @@ msgid ""
 "some houses for our fishermen. As all the fish has been caught at our coast,"
 " we should try our luck in the eastern part of our territory."
 msgstr ""
-"Gidheadh, tha obair chruaidh romhainn fhathast. Bi chòir dhuinn taighean a "
+"Gidheadh, tha obair chruaidh romhainn fhathast. Bu chòir dhuinn taighean a "
 "thogail dha na h-iasgairean againn a-nis. Chaidh an t-iasg uile a ghlacadh "
 "aig an oirthir, mar sin bu chòir dhuinn taobh ear an ranntair againn "
 "fheuchainn."
@@ -788,8 +790,8 @@ msgid ""
 "For the sake of Neptune, I just discovered another problem! It seems that "
 "really very few things are working as expected in this economy."
 msgstr ""
-"Gum beannaicheadh Neaptun mi, ’s an gun do mhothaich mi air trioblaid eile! "
-"’S gann gun obraich dad sam bith mar bu chòir san eaconamaidh seo."
+"Gum beannaicheadh Neaptun mi, ’s ann gun do mhothaich mi air trioblaid eile!"
+" ’S gann gun obraich dad sam bith mar bu chòir san eaconamaidh seo."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:411
@@ -798,7 +800,7 @@ msgid ""
 "behind his experience and expectations. So, I took a close look at our "
 "foresters’ performance."
 msgstr ""
-"Dh’innis fear dhe na coilltearan dhomh nach fàs na coilltean mar a bhiodh "
+"Dh’innis fear dhe na coilltearan dhomh nach fhàs na coilltean mar a bhiodh "
 "dùil aige air idir. Mar sin, thug mi sùil air saothrachadh nam planntairean-"
 "coille againn."
 
@@ -870,7 +872,7 @@ msgid ""
 "too many resources."
 msgstr ""
 "Nise, a Lutius, seo duilgheadas eile dhut: às dèidh cuid a leann is flùr a "
-"shaothrachadh, mhothaich mi gu bheil an teicneolas a tha na muilleanan is na"
+"shaothrachadh, mhothaich mi gu bheil an teicneolas a tha na muileannan is na"
 " taighean-grùide againn a’ cleachdadh caran sean. Tha iad a’ caitheamh fada "
 "cus a stòrasan mar sin."
 
@@ -944,7 +946,7 @@ msgid ""
 "and her priestesses could have helped us against the Barbarians."
 msgstr ""
 "Chan eil mi cinnteach am bu sin an roghainn cheart. Seadh, ’s ann gun d’ "
-"fhuair sinn na planaichean. Ach ged a tha sinn comasach air muilleanan is "
+"fhuair sinn na planaichean. Ach ged a tha sinn comasach air muileannan is "
 "taighean-grùide a thogail ’s a leasachadh leis an teicneolas leasaichte "
 "a-nis, cha bhi fios againn gu bràth tuilleadh an cuidicheadh Vesta ’s a ban-"
 "sagartan sinn an aghaidh nan Tùsanach."
@@ -955,8 +957,8 @@ msgid ""
 "Furthermore, we will have to live with the guilt of destroying a temple of "
 "an Empire goddess on our souls."
 msgstr ""
-"A bharrachd air sin, ’s ann air ar n-anman-ne a tha an an cionta a-nis gun "
-"do mhill sinn teampall ban-dia na h-Impireachd."
+"A bharrachd air sin, ’s ann air ar n-anman-ne a tha an cionta a-nis gun do "
+"mhill sinn teampall ban-dia na h-Impireachd."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:474
 msgid "Amalea is Very Content"
@@ -975,7 +977,7 @@ msgid ""
 msgstr ""
 "Glè mhath. ’S urrainn dhuinn togalaichean nas èifeachdaiche a thogail a-nis "
 "ach am pisich sinn a’ chruithneachd againn. A bharrachd air sin, leigidh na "
-"planaichean leinn am muillean is taigh-grùide againn a leasachadh leis an "
+"planaichean leinn am muileann is taigh-grùide againn a leasachadh leis an "
 "teicneolas leasaichte."
 
 #. TRANSLATORS: Amalea
@@ -1080,8 +1082,8 @@ msgid ""
 "Great, another issue solved! Now the charcoal will support our metal "
 "production and we can concentrate more on exploration and military strength."
 msgstr ""
-"Glè mhath, dh’fhuasgail sinn dùbhlan eile! Chuiridh an gual on t-sloc taic "
-"ri saothrachadh na meatailte agus ’s urrainn dhuinn ar n-aire a thoirt air "
+"Glè mhath, dh’fhuasgail sinn dùbhlan eile! Cuiridh an gual on t-sloc taic ri"
+" saothrachadh na meatailte agus ’s urrainn dhuinn ar n-aire a thoirt air "
 "rùrachadh is neart an airm a-nis."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:522
@@ -1119,7 +1121,7 @@ msgid ""
 "Maybe the goddess Vesta is still supporting us."
 msgstr ""
 "Hò-rò, a Lutius, chan eil fios agam ciamar ach chaidh leann is fìon a "
-"thabhann dhuinn. Lorg sinn na bhatharan a bharrachd sin nuair a chunnt sinn "
+"thabhann dhuinn. Lorg sinn na batharan a bharrachd sin nuair a chunnt sinn "
 "an stòras againn o chionn ghoirid. ‘S dòcha gu bheil a’ bhan-dia Vesta a’ "
 "toirt taic dhuinn fhathast."
 
@@ -1294,7 +1296,7 @@ msgid ""
 "Sire, if we need the technology that badly, why don’t we conquer it? We "
 "could defeat the little monastery in an instant."
 msgstr ""
-"A thighearna, o a tha cruaidh-fheum againn air an teicneolas, carson nach "
+"A thighearna, on a tha cruaidh-fheum againn air an teicneolas, carson nach "
 "ceannsaich sinn e? Rachadh leinn a’ mhanachainn bheag a tha sin a ghabhail "
 "gun dàil."
 
@@ -1360,7 +1362,7 @@ msgid ""
 "make any deals with the Barbarians either, so, we better keep our soldiers "
 "in good mood and train them adequately."
 msgstr ""
-"A thighearna, tha mi ag aideachadh gur dòcha gum bi na dhathan feargach "
+"A thighearna, tha mi ag aideachadh gur dòcha gum bi na diathan feargach "
 "a-nis ach aig amannan cogaidh ’s e an toradh a bhios ’na fhìreanachadh dhan "
 "ghnìomh. Agus cha bhi gnothach againn leis na Tùsanaich nas motha, mar sin "
 "bu chòir dhuinn na saighdearan againn a chumail ann an deagh thrum agus an "
@@ -1473,10 +1475,10 @@ msgid ""
 "training facilities, we should train as many fully promoted soldiers as we "
 "can. I really would consider them heroes after that."
 msgstr ""
-"A chinn-fheachd, nise on a tha barrachd ghoireasan oideachaidh againn ’s iad"
-" nas fheàrr cuideachd, bu chòir dhuinn nas urrainn dhuinn a shaighdearan "
-"oideachadh ach an ruig iad an rang às àirde. Chuirinn-sa curaidhean orra an "
-"uairsin."
+"A chinn-fheachd, nise on a tha barrachd leanna againn ’s goireasan "
+"oideachaidh leasaichte cuideachd, bu chòir dhuinn nas urrainn dhuinn a "
+"shaighdearan oideachadh ach an ruig iad an rang às àirde. Chuirinn-sa "
+"curaidhean orra an uairsin."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:693
 msgid ""
@@ -1522,7 +1524,7 @@ msgid ""
 "deeply that they ever came!"
 msgstr ""
 "Cuireamaid às dhaibh ach am faigh sinn grèim air ar dùthaich-ne a-rithist. "
-"Bidh goirt a’ cheannachd agad air gun dàinig iad a-riamh!"
+"Bidh goirt a’ cheannachd aca air gun dàinig iad a-riamh!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:714
 msgid "Victory is Ours"
@@ -1539,7 +1541,7 @@ msgid ""
 "last of them. May they never come back!"
 msgstr ""
 "A thighearna, chuir sinn ruaig air na Tùsanaich mu dheireadh thall. Fhuair "
-"sinn cuidhteas de gach uile gin diubh. Gum bi iad fada gun tilleadh!"
+"sinn cuidhteas de gach uile gin dhiubh. Gum bi iad fada gun tilleadh!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:719
 msgid ""
@@ -1574,7 +1576,7 @@ msgid ""
 "regret deeply that they ever came!"
 msgstr ""
 "Feumaidh sinn cur às dhaibh ach am faigh sinn grèim air ar dùthaich-ne "
-"a-rithist. Bidh goirt a’ cheannachd agad air gun dàinig iad a-riamh!"
+"a-rithist. Bidh goirt a’ cheannachd aca air gun dàinig iad a-riamh!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:740
 msgid "Worship to be Gifted"
@@ -1636,16 +1638,3 @@ msgstr ""
 "Mallachd oirbh a Lutius on a mharbh sibh luchd-frithealaidh sìtheil na ban-"
 "dia Vesta! Gum bhiodh an droch-fhortan air ur beatha ’s ur dùthaich agus gun"
 " sgiùrsadh fearg na ban-dia ar teaghlach às an t-saoghal!"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Amas ùr"
-msgstr[1] "Amasan ùra"
-msgstr[2] "Amasan ùra"
-msgstr[3] "Amasan ùra"

@@ -11,8 +11,8 @@ animations = {
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {8, 21}, 20)
-add_walking_animations(animations, "walkload", dirname, "walkload", {8, 20}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {8, 21}, 20)
+add_directional_animation(animations, "walkload", dirname, "walkload", {8, 20}, 10)
 
 
 tribes:new_worker_type {
@@ -33,10 +33,10 @@ tribes:new_worker_type {
       fish = {
          "findspace=size:any radius:7 resource:fish",
          "walk=coords",
-         "playsound=sound/fisher fisher_throw_net 192",
+         "playsound=sound/fisher/fisher_throw_net 192",
          "mine=fish 1",
-         "animate=fishing 3000",
-         "playsound=sound/fisher fisher_pull_net 192",
+         "animate=fishing 9500",
+         "playsound=sound/fisher/fisher_pull_net 192",
          "createware=fish",
          "return"
       }

@@ -92,6 +92,7 @@ int main(int argc, char** argv) {
 			json->add_int("width", map->get_width());
 			json->add_int("height", map->get_height());
 			json->add_int("nr_players", map->get_nrplayers());
+			json->add_int("needs_widelands_version_after", map->needs_widelands_version_after());
 
 			const std::string world_name =
 			   static_cast<Widelands::WidelandsMapLoader*>(ml.get())->old_world_name();

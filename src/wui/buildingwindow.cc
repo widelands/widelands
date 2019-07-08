@@ -54,7 +54,7 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
      is_dying_(false),
      parent_(&parent),
      building_(&b),
-     building_descr_for_help_(descr),
+     building_descr_for_help_(&descr),
      building_position_(b.get_position()),
      showing_workarea_(false),
      avoid_fastclick_(avoid_fastclick),
@@ -253,11 +253,14 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			const Widelands::TribeDescr& tribe = owner.tribe();
 			if (owner.is_building_type_allowed(enhancement)) {
 				const Widelands::BuildingDescr& building_descr = *tribe.get_building_descr(enhancement);
-
 				std::string enhance_tooltip =
 				   (boost::format(_("Enhance to %s")) % building_descr.descname().c_str()).str() +
-				   "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
-				   waremap_to_richtext(tribe, building_descr.enhancement_cost());
+				   "<br>" +
+				   g_gr->styles()
+				      .ware_info_style(UI::WareInfoStyle::kNormal)
+				      .header_font()
+				      .as_font_tag(_("Construction costs:")) +
+				   "<br>" + waremap_to_richtext(tribe, building_descr.enhancement_cost());
 
 				UI::Button* enhancebtn =
 				   new UI::Button(capsbuttons, "enhance", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
@@ -293,7 +296,13 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 
 				UI::Button* dismantlebtn =
 				   new UI::Button(capsbuttons, "dismantle", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				                  g_gr->images().get(pic_dismantle), dismantle_text);
+				                  g_gr->images().get(pic_dismantle),
+				                  std::string(_("Dismantle")) + "<br>" +
+				                     g_gr->styles()
+				                        .ware_info_style(UI::WareInfoStyle::kNormal)
+				                        .header_font()
+				                        .as_font_tag(_("Returns:")) +
+				                     "<br>" + waremap_to_richtext(owner.tribe(), wares));
 				dismantlebtn->sigclicked.connect(
 				   boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
 				capsbuttons->add(dismantlebtn);
@@ -320,7 +329,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (!wa_info->empty()) {
 			toggle_workarea_ =
 			   new UI::Button(capsbuttons, "workarea", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_gr->images().get("images/wui/overlays/workarea123.png"));
+			                  g_gr->images().get("images/wui/buildings/toggle_workarea.png"));
 			toggle_workarea_->sigclicked.connect(
 			   boost::bind(&BuildingWindow::toggle_workarea, boost::ref(*this)));
 
@@ -354,14 +363,14 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		                  g_gr->images().get("images/ui_basic/menu_help.png"), _("Help"));
 
 		UI::UniqueWindow::Registry& registry =
-		   igbase()->unique_windows().get_registry(building_descr_for_help_.name() + "_help");
+		   igbase()->unique_windows().get_registry(building_descr_for_help_->name() + "_help");
 		registry.open_window = [this, &registry] {
 			if (parent_ != nullptr) {
 				Widelands::Building* building_in_lambda = building_.get(parent_->egbase());
 				if (building_in_lambda == nullptr) {
 					return;
 				}
-				new UI::BuildingHelpWindow(igbase(), registry, building_descr_for_help_,
+				new UI::BuildingHelpWindow(igbase(), registry, *building_descr_for_help_,
 				                           building_in_lambda->owner().tribe(),
 				                           &parent_->egbase().lua());
 			}
@@ -512,7 +521,7 @@ void BuildingWindow::hide_workarea(bool configure_button) {
 		return;  // already hidden, nothing to be done
 	}
 
-	igbase()->hide_workarea(building_position_);
+	igbase()->hide_workarea(building_position_, false);
 	showing_workarea_ = false;
 	if (configure_button) {
 		configure_workarea_button();

@@ -33,7 +33,6 @@
 #include "logic/map.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
-#include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
 constexpr int kMaxValue = 63;
@@ -74,7 +73,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall),
      resources_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1),
-     cur_selection_(&box_, 0, 0, "", UI::Align::kCenter) {
+     cur_selection_(&box_, 0, 0, 0, 0, "", UI::Align::kCenter) {
 	// Configure spin boxes
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change rseources access keys. **/

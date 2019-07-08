@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-22 18:47+0000\n"
+"POT-Creation-Date: 2019-07-05 07:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -301,6 +301,10 @@ msgid ""
 "imposed on us. We even expelled the Barbarians out of our country. However, "
 "our victory is only temporary, as this is still just the beginning of the "
 "war. Let’s see what the future still holds for us."
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:230
+msgid "Victory"
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
@@ -1308,14 +1312,3 @@ msgid ""
 "life and your land be cursed and may the wrath of the goddess scourge your "
 "family from the face of the earth!"
 msgstr ""
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr ""
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""

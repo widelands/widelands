@@ -26,7 +26,8 @@ if(POLICY CMP0072)
     distro_name (DISTRO_NAME)
     # DISTRO_NAME is different on the build-servers.
     if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic"
-         OR DISTRO_NAME MATCHES "Ubuntu 19.04" OR DISTRO_NAME MATCHES "Disco")
+         OR DISTRO_NAME MATCHES "Ubuntu 19.04" OR DISTRO_NAME MATCHES "Disco"
+         OR DISTRO_NAME MATCHES "Ubuntu 19.10" OR DISTRO_NAME MATCHES "Eoan")
         AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
       cmake_policy(SET CMP0072 OLD)
     endif()
@@ -47,6 +48,7 @@ option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
 option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
 option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
+option(OPTION_BUILD_TESTS "Build tests" ON)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -292,22 +294,24 @@ if (NOT DEFINED WL_VERSION)
 else (NOT DEFINED WL_VERSION)
   add_custom_target (
     InputRevision ALL
-    COMMAND ${CMAKE_COMMAND -DWL_INSTALL_BASEDIR=${WL_INSTALL_BASEDIR} -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/InputRevision.cmake
+    COMMAND ${CMAKE_COMMAND} -DWL_INSTALL_BASEDIR=${WL_INSTALL_BASEDIR} -DWL_VERSION=${WL_VERSION} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/InputRevision.cmake
   )
 endif (NOT DEFINED WL_VERSION)
 
 # Enable testing.
-include(CTest)
-enable_testing()
+if (OPTION_BUILD_TESTS)
+  include(CTest)
+  enable_testing()
 
-# Run a test after a normal compile. This magic is needed as 'make test' will
-# not rebuild tests:
-# http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
-add_custom_target(_run_all_tests ALL
-  COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-  DEPENDS wl_tests
-)
+  # Run a test after a normal compile. This magic is needed as 'make test' will
+  # not rebuild tests:
+  # http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
+  add_custom_target(_run_all_tests ALL
+    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    DEPENDS wl_tests
+  )
+endif (OPTION_BUILD_TESTS)
 
 install (
   FILES ${CMAKE_CURRENT_BINARY_DIR}/VERSION

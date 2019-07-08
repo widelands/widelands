@@ -68,7 +68,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs cornmeal",
             "sleep=3500",
             "consume=corn",
-            "playsound=sound/mill mill_turning 240",
+            "playsound=sound/mill/mill_turning 240",
             "animate=working 15000",
             "produce=cornmeal"
          }
@@ -79,9 +79,9 @@ tribes:new_productionsite_type {
          actions = {
             -- No check whether we need blackroot_flour because blackroots cannot be used for anything else.
             "return=skipped when site has corn and economy needs cornmeal and not economy needs blackroot_flour",
-            "sleep=3500",
             "consume=blackroot",
-            "playsound=sound/mill mill_turning 240",
+            "sleep=3500",
+            "playsound=sound/mill/mill_turning 240",
             "animate=working 15000",
             "produce=blackroot_flour"
          }

@@ -34,6 +34,7 @@ constexpr double kAIFilesKeepAroundTime = 7 * 24 * 60 * 60;
 
 /// Filesystem names for maps
 const std::string kMapsDir = "maps";
+const std::string kCampaignsDir = "campaigns";
 const std::string kWidelandsMapExtension = ".wmf";
 const std::string kS2MapExtension1 = ".swd";
 const std::string kS2MapExtension2 = ".wld";
@@ -61,7 +62,7 @@ constexpr double kReplayKeepAroundTime = 4 * 7 * 24 * 60 * 60;
 
 /// Filesystem names and intervals for savegames
 const std::string kSaveDir = "save";
-const std::string kCampVisFile = "save/campvis";
+const std::string kCampVisFile = "save/campaigns.conf";
 const std::string kSavegameExtension = ".wgf";
 const std::string kAutosavePrefix = "wl_autosave";
 // Default autosave interval in minutes
@@ -76,5 +77,7 @@ const std::string kScreenshotsDir = "screenshots";
 
 /// Filesystem names for config
 const std::string kConfigFile = "config";
+
+const std::string kEconomyProfilesDir = "tribes/economy_profiles";
 
 #endif  // end of include guard: WL_LOGIC_FILESYSTEM_CONSTANTS_H

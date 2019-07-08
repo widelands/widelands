@@ -46,30 +46,11 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),
      box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
-     width_(&box_,
-            0,
-            0,
-            box_width_,
-            box_width_ / 3,
-            0,
-            0,
-            0,
-            UI::PanelStyle::kWui,
-            _("Width:"),
-            UI::SpinBox::Units::kNone,
-            UI::SpinBox::Type::kValueList),
-     height_(&box_,
-             0,
-             0,
-             box_width_,
-             box_width_ / 3,
-             0,
-             0,
-             0,
-             UI::PanelStyle::kWui,
-             _("Height:"),
-             UI::SpinBox::Units::kNone,
-             UI::SpinBox::Type::kValueList),
+     map_size_box_(box_,
+                   "new_map_menu",
+                   4,
+                   parent.egbase().map().get_width(),
+                   parent.egbase().map().get_height()),
      list_(&box_, 0, 0, box_width_, 330, UI::PanelStyle::kWui),
      // Buttons
      button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
@@ -89,27 +70,9 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
                     0,
                     UI::ButtonStyle::kWuiSecondary,
                     _("Cancel")) {
-	width_.set_value_list(Widelands::kMapDimensions);
-	height_.set_value_list(Widelands::kMapDimensions);
 
-	{
-		size_t width_index, height_index;
-		Widelands::Extent const map_extent = parent.egbase().map().extent();
-		for (width_index = 0; width_index < Widelands::kMapDimensions.size() &&
-		                      Widelands::kMapDimensions[width_index] < map_extent.w;
-		     ++width_index) {
-		}
-		width_.set_value(width_index);
-
-		for (height_index = 0; height_index < Widelands::kMapDimensions.size() &&
-		                       Widelands::kMapDimensions[height_index] < map_extent.h;
-		     ++height_index) {
-		}
-		height_.set_value(height_index);
-	}
-
-	box_.add(&width_);
-	box_.add(&height_);
+	box_.set_size(100, 20);  // Prevent assert failures
+	box_.add(&map_size_box_, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(margin_);
 	UI::Textarea* terrain_label = new UI::Textarea(&box_, _("Terrain:"));
 	box_.add(terrain_label);
@@ -127,9 +90,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
 	}
 	box_.add(&button_box_);
 
-	box_.set_size(box_width_, width_.get_h() + height_.get_h() + terrain_label->get_h() +
-	                             list_.get_h() + button_box_.get_h() + 9 * margin_);
-	set_size(get_w(), box_.get_h() + 2 * margin_ + get_h() - get_inner_h());
+	set_center_panel(&box_);
 	fill_list();
 	center_to_parent();
 }
@@ -145,8 +106,7 @@ void MainMenuNewMap::clicked_create_map() {
 	parent.cleanup_for_load();
 
 	map->create_empty_map(
-	   egbase.world(), width_.get_value() > 0 ? width_.get_value() : Widelands::kMapDimensions[0],
-	   height_.get_value() > 0 ? height_.get_value() : Widelands::kMapDimensions[0],
+	   egbase.world(), map_size_box_.selected_width(), map_size_box_.selected_height(),
 	   list_.get_selected(), _("No Name"),
 	   g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")));
 
@@ -167,7 +127,7 @@ void MainMenuNewMap::clicked_cancel() {
  */
 void MainMenuNewMap::fill_list() {
 	list_.clear();
-	const DescriptionMaintainer<Widelands::TerrainDescription>& terrains =
+	const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains =
 	   eia().egbase().world().terrains();
 
 	for (Widelands::DescriptionIndex index = 0; index < terrains.size(); ++index) {
