@@ -1,17 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2018
+# Tamás Kismarton <kismartontomi@gmail.com>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-02 08:03+0000\n"
+"POT-Creation-Date: 2019-05-30 18:50+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>, 2018\n"
+"Last-Translator: Tamás Kismarton <kismartontomi@gmail.com>, 2019\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,21 +22,23 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Build a wood economy and a reed farm"
-msgstr ""
+msgstr "Építs egy fagazdaságot és egy nádfarmot"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:29
 msgid "Wood Economy"
-msgstr ""
+msgstr "Fagazdaság"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:30
 msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
+"Építs egy Favágó házat és két Erdészházat, hogy elkezdj farönköt termelni és"
+" hogy tudj Nádfarmot építeni és nádat termelni."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Start producing bricks"
-msgstr ""
+msgstr "Gyárts téglákat"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:37
 msgid "Brick Economy"
@@ -62,27 +65,27 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "30 × Log"
-msgstr ""
+msgstr "30 x Farönk"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "30 × Granite"
-msgstr ""
+msgstr "30 x Gránit"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "10 × Clay"
-msgstr ""
+msgstr "10 x Agyag"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "40 × Brick"
-msgstr ""
+msgstr "40 x Tégla"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:51
 msgid "20 × Coal"
-msgstr ""
+msgstr "20 x Szén"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:52
-msgid "30 × Thatch Reed"
-msgstr ""
+msgid "30 × Reed"
+msgstr "30 x Nád"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:53
 msgid ""
@@ -216,11 +219,11 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:177
 msgid "Introduction"
-msgstr ""
+msgstr "Bevezetés"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:128
 msgid "Welcome!"
-msgstr ""
+msgstr "Üdvözöllek!"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:130
@@ -229,17 +232,19 @@ msgid ""
 "this pristine island."
 msgstr ""
 
-#. TRANSLATORS: Reebaud – Introduction 1
+#. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
+#. dukedoms
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:133
 msgid ""
 "My tribe and I have just arrived from the mainland. There were fights with "
-"the Danes in the North, the Vikings in the East… So, I decided to lead my "
-"tribe away to start a quiet, peaceful life on this untouched island."
+"the Danes in the North, the Schauenburgers and Holsteiners in the East and "
+"South… So I decided to lead my tribe away to start a quiet, peaceful life on"
+" this untouched island."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:137
 msgid "A new home"
-msgstr ""
+msgstr "Az új otthon"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:139
@@ -251,19 +256,20 @@ msgstr ""
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:142
 msgid ""
-"I have asked Hauke, one of my advisors to oversee the construction of our "
+"I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:146
 msgid "The first buildings"
-msgstr ""
+msgstr "Az első épületek"
 
-#. TRANSLATORS: Hauke – Introduction 3
+#. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian
+#. greeting
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:148
 msgid ""
-"Greetings, Chieftain Reebaud! I will start with the colonization of the "
-"island straight away."
+"Peace, Chieftain Reebaud! I will start with the colonization of the island "
+"straight away."
 msgstr ""
 
 #. TRANSLATORS: Hauke – Introduction 3
@@ -288,12 +294,12 @@ msgid ""
 "Also, we had better build a reed farm soon. Even reed farms need reed to be "
 "built, so we must take care not to run short before we can grow our own. "
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
-"start growing thatch reed."
+"start growing reed fields."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:162
 msgid "Building our new home"
-msgstr ""
+msgstr "Építsük fel az új otthonunkat"
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:164
@@ -347,7 +353,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:186
 msgid "Build another reed farm"
-msgstr ""
+msgstr "Építs másik nádfarmot"
 
 #. TRANSLATORS: Hauke – no reed
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:188
@@ -360,8 +366,8 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:189
 msgid ""
-"You should assign the new reed farm the highest priority for thatch reed in "
-"the construction site window."
+"You should assign the new reed farm the highest priority for reed in the "
+"construction site window."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:192
@@ -479,7 +485,7 @@ msgstr ""
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:234
 msgid ""
-"But when the mines will have to be expanded, rations won’t keep the miners "
+"But when the mines will have to be enhanced, rations won’t keep the miners "
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
 msgstr ""
@@ -867,9 +873,9 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid ""
 "I almost forgot in this haste – whereever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to 10 soldiers on "
-"our ship, if they don’t mind being all crammed up together. Let’s send some "
-"to the port when it’s completed, so they can embark when we set sail!"
+"to secure and expand our new colony. There’s space for up to ten soldiers on"
+" our ship, if they don’t mind being all crammed together. Let’s send some to"
+" the port when it’s completed, so they can embark when we set sail!"
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:416
@@ -901,14 +907,3 @@ msgstr ""
 "Teljesítetted ezt a küldetést. Most továbbléphetsz a következő küldetésre, "
 "és segíthetsz új otthont építeni, távol a hamis istenek bosszúszomjas "
 "karmaitól…"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr ""
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""

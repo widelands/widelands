@@ -137,6 +137,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
 	clientsonline_table_.add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */
 	clientsonline_table_.add_column(180, pgettext("player", "Name"));
+	/** TRANSLATORS: Widelands version */
 	clientsonline_table_.add_column(120, _("Version"));
 	clientsonline_table_.add_column(
 	   0, _("Game"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
@@ -458,6 +459,9 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 				change_servername();
 				return;
 			}
+		}
+		if (games->empty() && servername_ui.empty()) {
+			servername_ui = _("unnamed");
 		}
 	}
 

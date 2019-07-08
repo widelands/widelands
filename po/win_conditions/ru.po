@@ -4,19 +4,21 @@
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Anton Khabarov <2233009@gmail.com>, 2015-2016,2018
+# CupIvan <mail@cupivan.ru>, 2019
 # Максим Дронь <dronmax@gmail.com>, 2015
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Viktor S <awsswa59@gmail.com>, 2018-2019
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Олег Шевченко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-10 07:33+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
+"PO-Revision-Date: 2019-06-26 06:34+0000\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +38,7 @@ msgstr "Ищите древние артефакты. После того, ка�
 
 #: ../../data/scripting/win_conditions/artifacts.lua:18
 msgid "Artifacts owned"
-msgstr ""
+msgstr "Артефакт завоёван"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:73
 msgid "No Artifacts"
@@ -191,7 +193,7 @@ msgstr "%1$s контролирует %2$3.0f%% территории (%3$i из 
 #. consistent with the translation of the Win condition.
 #: ../../data/scripting/win_conditions/territorial_functions.lua:60
 msgid "Territory percentage"
-msgstr ""
+msgstr "Процент территории"
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:195
 msgid "You own more than half of the map’s area."
@@ -233,7 +235,7 @@ msgstr "Каждый игрок или команда пытается захв�
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:56
 msgid "Currently no faction owns more than half of the map’s area."
-msgstr ""
+msgstr "На данный момент ещё ни одна сторона не завладела более половины карты."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
@@ -254,8 +256,8 @@ msgstr "Каждый игрок или команда пытается захв�
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
-msgstr[0] "%i минута"
-msgstr[1] "%i минуты"
+msgstr[0] "%i минуту"
+msgstr[1] "%i минут"
 msgstr[2] "%i минут"
 msgstr[3] "%i минут"
 
@@ -263,17 +265,17 @@ msgstr[3] "%i минут"
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:295
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
-msgstr[0] "%1% час и %2%"
-msgstr[1] "%1% часы и %2%"
-msgstr[2] "%1% часы и %2%"
-msgstr[3] "%1% часы и %2%"
+msgstr[0] "%1% час %2%"
+msgstr[1] "%1% часа %2%"
+msgstr[2] "%1% часов %2%"
+msgstr[3] "%1%часов%2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:301
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% час"
-msgstr[1] "%1% часов"
+msgstr[1] "%1% часа"
 msgstr[2] "%1% часов"
 msgstr[3] "%1% часов"
 

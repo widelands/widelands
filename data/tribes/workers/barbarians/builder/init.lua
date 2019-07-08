@@ -7,8 +7,8 @@ animations["work"]["sound_effect"] = {
    path = "sound/hammering/hammering",
    priority = 64
 }
-add_walking_animations(animations, "walk", dirname, "walk", {7, 22}, 10)
-add_walking_animations(animations, "walkload", dirname, "walk", {7, 22}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {7, 22}, 10)
+add_directional_animation(animations, "walkload", dirname, "walk", {7, 22}, 10)
 
 
 tribes:new_worker_type {

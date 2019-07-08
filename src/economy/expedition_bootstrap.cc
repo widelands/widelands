@@ -202,8 +202,12 @@ void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	}
 }
 
-void ExpeditionBootstrap::load(
-   Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol, uint16_t packet_version) {
+void ExpeditionBootstrap::load(Warehouse& warehouse,
+                               FileRead& fr,
+                               Game& game,
+                               MapObjectLoader& mol,
+                               const TribesLegacyLookupTable& tribes_lookup_table,
+                               uint16_t packet_version) {
 
 	static const uint16_t kCurrentPacketVersion = 7;
 	assert(queues_.empty());
@@ -214,7 +218,7 @@ void ExpeditionBootstrap::load(
 			uint8_t num_queues = fr.unsigned_8();
 			for (uint8_t i = 0; i < num_queues; ++i) {
 				WorkersQueue* wq = new WorkersQueue(warehouse, INVALID_INDEX, 0);
-				wq->read(fr, game, mol);
+				wq->read(fr, game, mol, tribes_lookup_table);
 				wq->set_callback(input_callback, this);
 
 				if (wq->get_index() == INVALID_INDEX) {
@@ -232,7 +236,7 @@ void ExpeditionBootstrap::load(
 		uint8_t num_queues = fr.unsigned_8();
 		for (uint8_t i = 0; i < num_queues; ++i) {
 			WaresQueue* wq = new WaresQueue(warehouse, INVALID_INDEX, 0);
-			wq->read(fr, game, mol);
+			wq->read(fr, game, mol, tribes_lookup_table);
 			wq->set_callback(input_callback, this);
 
 			if (wq->get_index() == INVALID_INDEX) {

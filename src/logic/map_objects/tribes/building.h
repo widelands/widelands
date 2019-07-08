@@ -32,6 +32,7 @@
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/attack_target.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"
+#include "logic/map_objects/tribes/building_settings.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/map_objects/tribes/workarea_info.h"
@@ -51,9 +52,9 @@ class InputQueue;
 
 class Building;
 
-#define LOW_PRIORITY 2
-#define DEFAULT_PRIORITY 4
-#define HIGH_PRIORITY 8
+constexpr int32_t kPriorityLow = 2;
+constexpr int32_t kPriorityNormal = 4;
+constexpr int32_t kPriorityHigh = 8;
 
 /*
  * Common to all buildings!
@@ -266,8 +267,8 @@ public:
 
 	// Get/Set the priority for this waretype for this building. 'type' defines
 	// if this is for a worker or a ware, 'index' is the type of worker or ware.
-	// If 'adjust' is false, the three possible states HIGH_PRIORITY,
-	// DEFAULT_PRIORITY and LOW_PRIORITY are returned, otherwise numerical
+	// If 'adjust' is false, the three possible states kPriorityHigh,
+	// kPriorityNormal and kPriorityLow are returned, otherwise numerical
 	// values adjusted to the preciousness of the ware in general are returned.
 	virtual int32_t get_priority(WareWorker type, DescriptionIndex, bool adjust = true) const;
 	void set_priority(int32_t type, DescriptionIndex ware_index, int32_t new_priority);
@@ -300,6 +301,10 @@ public:
 
 	void add_worker(Worker&) override;
 	void remove_worker(Worker&) override;
+
+	virtual const BuildingSettings* create_building_settings() const {
+		return nullptr;
+	}
 
 	// AttackTarget object associated with this building. If the building can
 	// never be attacked (for example productionsites) this will be nullptr.

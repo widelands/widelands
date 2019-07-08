@@ -4,18 +4,17 @@
 # 
 # Translators:
 # GunChleoc, 2018
-# Олег Шевченко <olegrock@gmail.com>, 2018
 # Anton Khabarov <2233009@gmail.com>, 2018
 # Viktor S <awsswa59@gmail.com>, 2018
-# Yuriy Sokolov <lention@mail.ru>, 2019
+# Олег Шевченко <olegrock@gmail.com>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2019\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>, 2019\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -347,7 +346,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:230
 msgid "Victory"
-msgstr ""
+msgstr "Победа"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
 msgid ""
@@ -580,8 +579,9 @@ msgid ""
 "Brother, I'm really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
-"Брат, мне очень жаль, что я вынужден приносить плохие новости. Но как ты "
-"видишь, наши фермы ничего не производят и мы не можем разобрать их."
+"Брат, я очень волнуюсь, что мне снова придется сообщить плохие новости. Но "
+"как ты видишь, наши фермы ничего не производят и мы не можем их "
+"демонтировать."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:327
@@ -611,8 +611,8 @@ msgid ""
 "Until we have found the plans, the only option for our farms is to destroy "
 "them."
 msgstr ""
-"Пока мы не найдем другой выход, единственный вариант для наших ферм - "
-"уничтожить их."
+"Пока мы не найдем чертежи, единственным вариантом для наших ферм является их"
+" уничтожение."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:340
 msgid "Amalea Looks Confident"
@@ -677,8 +677,9 @@ msgid ""
 " desperately. Furthermore, the plans have enabled us to upgrade our old "
 "farms to get to work again."
 msgstr ""
-"Теперь мы можем начать строить фермы, чтобы затем варить пиво для жаждущих "
-"шахтеров. Кроме того, теперь мы можем улучшить наши старые фермы."
+"Теперь мы можем начать строить фермы, чтобы варить пиво в котором так "
+"отчаянно нуждаются наши шахтеры. Кроме того, эти чертежи позволили нам "
+"модернизировать наши старые фермы, чтобы снова приступить к работе."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:365
@@ -924,10 +925,10 @@ msgid ""
 "breweries with the improved technology, we will never know if and how Vesta "
 "and her priestesses could have helped us against the Barbarians."
 msgstr ""
-"Я не уверена, что это нужно было делать.. Да, мы получили планы но, хотя мы "
-"теперь можем строить и модернизировать наши мельницы и пивоварни с помощью "
-"улучшенной технологии, мы никогда не узнаем, помогли ли нам Веста и ее жрицы"
-" в борьбе против варваров."
+"Я не уверена, что это было правильно. Да, мы получили чертежи. Но хотя мы "
+"теперь можем строить и модернизировать наши мельницы и пивоваренные заводы с"
+" помощью усовершенствованной технологии, мы никогда не узнаем, могли ли "
+"Веста и ее жрицы помочь нам в борьбе против варваров."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:469
@@ -954,8 +955,8 @@ msgid ""
 "brewery with the improved technology."
 msgstr ""
 "Отлично сработано. Теперь мы можем построить более эффективные здания для "
-"переработки пшеницы. Кроме того, планы позволяют нам модернизировать нашу "
-"текущую мельницу и пивоварню с помощью улучшенных технологий."
+"переработки пшеницы. Кроме того, чертежи позволяют нам модернизировать нашу "
+"старую мельницу и пивоварню с помощью улучшенных технологий."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:480
@@ -964,9 +965,9 @@ msgid ""
 "water, flour and beer. Now I really think that nothing can prevent us from "
 "getting stronger and taking back our homeland."
 msgstr ""
-"И, самое главное, у нас есть новый союзник, который просто предоставил нам "
-"много воды, муки и пива. Теперь я действительно думаю, что ничто не может "
-"помешать нам стать сильнее и вернуть нашу родину."
+"И, что лучше всего, у нас появился новый союзник, который только что дал нам"
+" много воды, муки и пива. Теперь, я думаю, ничто не сможет помешать нам "
+"стать сильнее и вернуть нашу родину."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:485
 msgid "Amalea is Satisfied"
@@ -984,11 +985,11 @@ msgid ""
 "immediately. After all, we need more tools to get our economy back up and "
 "build more and different production sites."
 msgstr ""
-"Хорошо, Люциус, другая проблема решена. Но много еще впереди. Поскольку мы в"
-" состоянии производить продовольствие сейчас, мы должны начать добычу угля и"
-" железной руды немедленно. В конце концов, нам нужно больше инструментов, "
-"чтобы вернуть нашу экономику и построить больше и разных производственных "
-"площадок."
+"Хорошо, Люциус, другая проблема решена. Но много еще впереди. Поскольку "
+"сейчас мы уже можем производить продукты питания, нам следует немедленно "
+"начать добычу угля и железной руды. В конце концов, нам нужно больше "
+"инструментов, чтобы восстановить нашу экономику и построить больше разных "
+"производственных площадок."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:491
@@ -997,9 +998,9 @@ msgid ""
 "wrong with our mines as well. It’s probably a good idea to send a geologist "
 "to check whether there are enough resources in the vicinity of our mines."
 msgstr ""
-"Но, согласно нашему недавнему опыту, я предполагаю, что с нашими минами что-"
-"то будет не так. Вероятно, это хорошая идея отправить геолога, чтобы "
-"проверить, хватит ли ресурсов вблизи наших шахт."
+"Но, исходя из нашего недавнего опыта, предполагаю, что что-то не так и с "
+"нашими шахтами. Думаю, было бы неплохо отправить геолога, чтобы проверить, "
+"достаточно ли ресурсов около наших шахт."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:494
@@ -1009,19 +1010,18 @@ msgid ""
 "In the meantime, we can start raising the buildings that we need most "
 "urgently. I think we are still lacking a vineyard in our economy."
 msgstr ""
-"Как только мы расплавили железо, нам нужно начать производство инструментов."
-" Возможно, мы должны контролировать их производство с помощью настроек "
-"экономики. Тем временем мы можем начать строить здания, которые нам нужны "
-"наиболее срочно. Я думаю, что нам все еще не хватает виноградника в нашей "
-"экономике."
+"Как только мы выплавим железо, нам нужно будет приступить к производству "
+"инструментов. Возможно, нам следует контролировать их производство через "
+"настройки экономики. А пока мы можем начать возводить здания, которые нам "
+"наиболее необходимы. Я думаю, что сейчас нам нужен виноградник."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:501
 msgid "Amalea has Some Advice"
-msgstr "У Амалии есть некоторые советы"
+msgstr "Несколько советов Амалии"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:502
 msgid "Amalea is providing economic advice…"
-msgstr "Амалия предоставляет экономические консультации ..."
+msgstr "Амалия даёт советы по экономике ..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:504
@@ -1029,8 +1029,8 @@ msgid ""
 "Lutius, it seems that our coal supply is a little weak. So, we need to "
 "expand and explore all mineable areas for more coal."
 msgstr ""
-"Люциус , похоже, что наш запас угля мал. Таким образом, нам необходимо "
-"расширить и исследовать все добывающие районы для получения большего "
+"Люциус, похоже, поставки угля немного ослабли. Поэтому, нам необходимо "
+"расширить границы и исследовать все области добычи для получения большего "
 "количества угля."
 
 #. TRANSLATORS: Amalea
@@ -1040,9 +1040,9 @@ msgid ""
 "mining shortfalls with charcoal. But be careful to ensure a continuous log "
 "supply afterwards."
 msgstr ""
-"Тем временем, это может помочь построить печь на древесном угле для решения "
-"любых проблем с недостатком добычи угля. Но будьте осторожны, необходимо "
-"обеспечить непрерывную поставку бревна после этого."
+"В то же время, это может помочь построить печь углежога, для компенсации "
+"недостатка добычи угля. Но будьте осторожны, после этого необходимо будет "
+"обеспечить непрерывную поставку бревен."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:514
 msgid "Amalea is in a Good Mood"
@@ -1050,7 +1050,7 @@ msgstr "Амалия в хорошем настроении"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:515
 msgid "Amalea is celebrating success…"
-msgstr "Амалия празднует успех ..."
+msgstr "Амалия празднует успех..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:517
@@ -1058,9 +1058,9 @@ msgid ""
 "Great, another issue solved! Now the charcoal will support our metal "
 "production and we can concentrate more on exploration and military strength."
 msgstr ""
-"Отлично, другая проблема решена! Теперь уголь будет поддерживать наше "
-"производство металлов, и мы можем больше сосредоточиться на разведке и "
-"военной силе."
+"Отлично, ещё одна проблема решена! Теперь древесный уголь будет поддерживать"
+" наше производство металла, и мы можем больше сосредоточиться на разведке и "
+"увеличении военной мощи."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:522
 msgid "Amalea Looks Thoughtful"
@@ -1068,7 +1068,7 @@ msgstr "Амалия выглядит задумчиво"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:523
 msgid "Amalea is sorrowful…"
-msgstr "Амалия печальна ..."
+msgstr "Амалия опечалена..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:525
@@ -1077,17 +1077,17 @@ msgid ""
 "destroyed by an uncontrolled kitchen fire. I fear this might be a sign of "
 "the goddess Vesta still being in a bad mood."
 msgstr ""
-"Дорогой брат, у меня плохие новости. Одно из наших зданий просто разрушено "
-"неконтролируемым огнем в кухне. Я боюсь, что это может быть признаком того, "
-"что богиня Веста все еще находится в плохом настроении."
+"Дорогой брат, у меня плохие новости. Одно из наших зданий только что было "
+"уничтожено пожаром на кухне. Боюсь, что это может быть признаком того, что "
+"богиня Веста все еще в плохом настроении."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:530
 msgid "Amalea is Positively Surprised"
-msgstr "Амалия позитивно удивлена"
+msgstr "Амалия приятно удивлена"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:531
 msgid "Amalea is celebrating a happy event…"
-msgstr "Амалия празднует счастливое событие ..."
+msgstr "Амалия празднует счастливое событие..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:533
@@ -1096,9 +1096,9 @@ msgid ""
 "wine. We found the additional wares while we were taking stock recently. "
 "Maybe the goddess Vesta is still supporting us."
 msgstr ""
-"Ваше здоровье Люциус, я не знаю, как, но мы были одарены пивом и вином. Мы "
-"нашли дополнительные товары, хотя мы недавно проверили запасы. Может быть, "
-"богиня Веста все еще поддерживает нас."
+"Браво, Люциус, я не знаю, как, но мы были одарены пивом и вином. Мы нашли "
+"дополнительные товары, когда проверили запасы. Может быть, богиня Веста все "
+"еще поддерживает нас."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:538
 msgid "Amalea Analyzes the Economy"
@@ -1106,7 +1106,7 @@ msgstr "Амалия анализирует экономику"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:539
 msgid "Amalea reminds Lutius of the farms…"
-msgstr "Амалия напоминает Люциусу о фермах ..."
+msgstr "Амалия напоминает Люциусу о фермах..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:541
@@ -1115,9 +1115,10 @@ msgid ""
 "there might be a problem with our farms. They don’t show any productivity "
 "although there is enough space to plant wheat."
 msgstr ""
-"Посмотрите Люциус, я только что проанализировал нашу экономику несколько "
-"дальше. Я думаю, что может быть проблема с нашими фермами. Они не показывают"
-" никакой производительности, хотя для выращивания пшеницы достаточно места."
+"Послушай, Люциус, я только что проанализировала перспективы развития нашей "
+"экономики. Думаю, что могут возникнуть проблемы с нашими фермами. Они не "
+"дают нужной производительности, хотя для выращивания пшеницы достаточно "
+"места."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:544
@@ -1125,16 +1126,16 @@ msgid ""
 "I think we should have a deeper look into the issue and open the building "
 "window of one of them."
 msgstr ""
-"Я думаю, нам нужно более глубоко изучить проблему и открыть в одном из "
-"зданий окно."
+"Я думаю, нам нужно более глубоко изучить проблему и открыть окно "
+"строительства одного из них."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:551
 msgid "Amalea’s Restrictions"
-msgstr "Амалии ограничена"
+msgstr "Ограничения Амалии"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:552
 msgid "Amalea restricts the building possibilities…"
-msgstr "Амалия ограничивает возможности строительства ..."
+msgstr "Амалия ограничивает возможности строительства..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:554
@@ -1142,7 +1143,7 @@ msgid ""
 "Excuse me Lutius, but I think the most critical resources in the current "
 "state of our economy are logs."
 msgstr ""
-"Извините меня, Люциус, но я думаю, что самыми критическими ресурсами в "
+"Прости меня, Люциус, но я думаю, что самыми критическими ресурсами в "
 "нынешнем состоянии нашей экономики являются бревна."
 
 #. TRANSLATORS: Amalea
@@ -1152,17 +1153,17 @@ msgid ""
 " lumberjack’s house until we have gained enough building materials by "
 "dismantling the ineffective buildings."
 msgstr ""
-"Поэтому я взял на себя права ограничить наши текущие варианты строительства "
-"до дома лесоруба, пока мы не приобрели достаточно строительных материалов, "
-"разобрав неэффективные здания."
+"Поэтому я взяла на себя смелость ограничить наши текущие варианты "
+"строительства домиком дровосека, пока мы не приобрели достаточно "
+"строительных материалов, разобрав неэффективные здания."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:562
 msgid "Amalea Reminds to Clear Road Network"
-msgstr "Amalea Напоминает, очистить дорожную сеть"
+msgstr "Напоминание Амалии о проблемах дорожной сети"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:563
 msgid "Amalea reminds Lutius of the scrambled road network…"
-msgstr "Амалия напоминает Люциусу о перепутанной дорожной сети ..."
+msgstr "Амалия напоминает Люциусу о запутанной дорожной сети..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:565
@@ -1600,16 +1601,3 @@ msgstr ""
 "Черт бы тебя побрал Люциус за убийство мирных слуг богини Весты! Пусть твоя "
 "жизнь и твоя земля будут прокляты, и гнев богини может стереть твою семью с "
 "лица земли!"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Новое задание"
-msgstr[1] "Новые задания"
-msgstr[2] "Новых заданий"
-msgstr[3] "Новые задания"

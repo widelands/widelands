@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Wuzzy <almikes@aol.com>, 2018
 # Elisabeth Jäger, 2016,2018
 # wl-zocker, 2014
 # German Translation <widelands-public@lists.sourceforge.net>, 2007
-# Jürgen Eberlein <juergen.eberlein@web.de>, 2015
+# 11432e78848bb4940138532ffe479e21, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2015
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-22 08:28+0000\n"
-"PO-Revision-Date: 2018-04-24 09:30+0000\n"
-"Last-Translator: Elisabeth Jäger\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 10:11+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -432,14 +432,3 @@ msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
 msgstr "Herr, Ihr habt diese Halbinsel zu einem sicheren Ort gemacht. Es ist Zeit fortzufahren!"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "„%s“"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Neues Ziel"
-msgstr[1] "Neue Ziele"

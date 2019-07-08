@@ -761,18 +761,23 @@ void Player::enhance_or_dismantle(Building* building,
 			workers = building->get_workers();
 		}
 
+		const BuildingSettings* settings = nullptr;
 		if (index_of_new_building != INVALID_INDEX) {
+			settings = building->create_building_settings();
 			// For enhancing, register whether the window was open
 			Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kStartWarp));
 		}
+
 		building->remove(egbase());  //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
 		//  pointer.
-		if (index_of_new_building != INVALID_INDEX)
+
+		if (index_of_new_building != INVALID_INDEX) {
 			building = &egbase().warp_constructionsite(
-			   position, player_number_, index_of_new_building, false, former_buildings);
-		else
+			   position, player_number_, index_of_new_building, false, former_buildings, settings);
+		} else {
 			building = &egbase().warp_dismantlesite(position, player_number_, false, former_buildings);
+		}
 
 		// Open the new building window if needed
 		Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kFinishWarp));
