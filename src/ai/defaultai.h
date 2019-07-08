@@ -251,7 +251,6 @@ private:
 	void set_inputs_to_max(const Widelands::ProductionSiteObserver&);
 	void stop_site(const Widelands::ProductionSiteObserver&);
 	void initiate_dismantling(Widelands::ProductionSiteObserver&, uint32_t);
-	void print_land_stats();
 
 	// Checks whether first value is in range, or lesser then...
 	template <typename T> void check_range(const T, const T, const T, const char*);
