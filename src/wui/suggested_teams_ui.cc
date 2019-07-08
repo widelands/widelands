@@ -49,7 +49,7 @@ SuggestedTeamsDropdown::SuggestedTeamsDropdown(UI::Panel* parent, int32_t x, int
 	         "",
 	         UI::DropdownType::kTextual,
 	         UI::PanelStyle::kFsMenu,
-	         UI::ButtonStyle::kFsMenuMenu) {
+	         UI::ButtonStyle::kFsMenuMenu, true) {
 	set_visible(false);
 }
 

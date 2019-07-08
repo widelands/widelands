@@ -61,8 +61,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
                "",
                UI::DropdownType::kTextual,
                UI::PanelStyle::kWui,
-               UI::ButtonStyle::kWuiSecondary),  // NOCOM test if this is the correct button style.
-                                                 // heap-use-after-free somewhere too.
+               UI::ButtonStyle::kWuiSecondary),
      time_last_thought_(0),
      save_profile_dialog_(nullptr) {
 	set_center_panel(&main_box_);

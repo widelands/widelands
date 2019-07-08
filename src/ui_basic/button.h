@@ -72,11 +72,13 @@ private:
 	    const std::string& title_text,
 	    const std::string& tooltip_text,
 	    UI::Button::VisualState state,
-	    UI::Button::ImageMode mode);
+	    UI::Button::ImageMode mode,
+		bool skip_richtext_escape);
 
 public:
 	/**
 	 * Text conventions: Title Case for the 'title_text', Sentence case for the 'tooltip_text'
+	 *  Only use 'skip_richtext_escape' if there are no user input/translatable strings, or if it has been taken care of from the outside.
 	 */
 	Button  /// for textual buttons
 	   (Panel* const parent,
@@ -88,7 +90,7 @@ public:
 	    UI::ButtonStyle style,
 	    const std::string& title_text,
 	    const std::string& tooltip_text = std::string(),
-	    UI::Button::VisualState state = UI::Button::VisualState::kRaised);
+	    UI::Button::VisualState state = UI::Button::VisualState::kRaised, bool skip_richtext_escape = false);
 
 	/**
 	 * Text conventions: Sentence case for the 'tooltip_text'
@@ -159,6 +161,7 @@ protected:
 	bool highlighted_;  //  mouse is over the button
 	bool pressed_;      //  mouse is clicked over the button
 	bool enabled_;
+	bool skip_richtext_escape_;
 	UI::Button::VisualState visual_state_;
 	UI::ButtonDisableStyle disable_style_;
 	bool repeating_;

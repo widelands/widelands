@@ -62,7 +62,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                            const std::string& label,
                            const DropdownType type,
                            UI::PanelStyle style,
-                           ButtonStyle button_style)
+                           ButtonStyle button_style,
+						   bool skip_richtext_escape)
    : UI::NamedPanel(parent,
                     name,
                     x,
@@ -102,10 +103,14 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                         (style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
                                                             UI::ButtonStyle::kWuiSecondary) :
                         button_style,
-                     label),
+                     label,
+					 "",
+					 UI::Button::VisualState::kRaised,
+					 skip_richtext_escape),
      label_(label),
      type_(type),
-     is_enabled_(true) {
+     is_enabled_(true),
+	 skip_richtext_escape_(skip_richtext_escape) {
 	if (label.empty()) {
 		set_tooltip(pgettext("dropdown", "Select Item"));
 	} else {
@@ -227,7 +232,7 @@ void BaseDropdown::add(const std::string& name,
                        const std::string& tooltip_text,
                        const std::string& hotkey = std::string()) {
 	assert(pic != nullptr || type_ != DropdownType::kPictorial);
-	list_->add(name, value, pic, select_this, tooltip_text, hotkey);
+	list_->add(name, value, pic, select_this, tooltip_text, hotkey, skip_richtext_escape_);
 	if (select_this) {
 		set_value();
 	}

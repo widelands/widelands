@@ -43,7 +43,7 @@ BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
                                          const Image* init_pic,
                                          const std::string& tooltip_text,
                                          const std::string& hotkey_text,
-                                         const TableStyleInfo& style)
+                                         const TableStyleInfo& style, bool skip_richtest_escape)
    : name(init_name),
      entry_(init_entry),
      pic(init_pic),
@@ -51,8 +51,7 @@ BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
      name_alignment(i18n::has_rtl_character(init_name.c_str(), 20) ? Align::kRight : Align::kLeft),
      hotkey_alignment(i18n::has_rtl_character(hotkey_text.c_str(), 20) ? Align::kRight :
                                                                          Align::kLeft) {
-	// NOCOM
-	rendered_name = UI::g_fh->render(as_richtext_paragraph(richtext_escape(name), style.enabled()));
+	rendered_name = UI::g_fh->render(as_richtext_paragraph(skip_richtest_escape ? name : richtext_escape(name), style.enabled()));
 	rendered_hotkey =
 	   UI::g_fh->render(as_richtext_paragraph(richtext_escape(hotkey_text), style.hotkey()));
 }
@@ -139,8 +138,9 @@ void BaseListselect::add(const std::string& name,
                          const Image* pic,
                          bool const sel,
                          const std::string& tooltip_text,
-                         const std::string& hotkey) {
-	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, table_style_);
+                         const std::string& hotkey,
+						 bool skip_richtext_escape) {
+	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, table_style_, skip_richtext_escape);
 
 	int entry_height = lineheight_;
 	if (pic) {

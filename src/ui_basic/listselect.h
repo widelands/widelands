@@ -62,13 +62,14 @@ struct BaseListselect : public Panel {
 	void sort(const uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
 	/**
 	 * Text conventions: Title Case for the 'name', Sentence case for the 'tooltip_text'
+	 * Only use 'skip_richtext_escape' if there are no user input/translatable strings, or if it has been taken care of from the outside.
 	 */
 	void add(const std::string& name,
 	         uint32_t value,
 	         const Image* pic,
 	         const bool select_this,
 	         const std::string& tooltip_text,
-	         const std::string& hotkey);
+	         const std::string& hotkey, bool skip_richtext_escape);
 
 	void remove(uint32_t);
 	void remove(const char* name);
@@ -131,7 +132,7 @@ private:
 		                     const Image* init_pic,
 		                     const std::string& tooltip_text,
 		                     const std::string& hotkey_text,
-		                     const UI::TableStyleInfo& style);
+		                     const UI::TableStyleInfo& style, bool skip_richtest_escape);
 
 		const std::string name;
 		const uint32_t entry_;
@@ -177,9 +178,10 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string(),
-	         const std::string& hotkey = std::string()) {
+	         const std::string& hotkey = std::string(),
+			 bool skip_richtext_escape = false) {
 		entry_cache_.push_back(value);
-		BaseListselect::add(name, entry_cache_.size() - 1, pic, select_this, tooltip_text, hotkey);
+		BaseListselect::add(name, entry_cache_.size() - 1, pic, select_this, tooltip_text, hotkey, skip_richtext_escape);
 	}
 
 	const Entry& operator[](uint32_t const i) const {
@@ -219,8 +221,9 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string(),
-	         const std::string& hotkey = std::string()) {
-		Base::add(name, &value, pic, select_this, tooltip_text, hotkey);
+	         const std::string& hotkey = std::string(),
+			 bool skip_richtext_escape = false) {
+		Base::add(name, &value, pic, select_this, tooltip_text, hotkey, skip_richtext_escape);
 	}
 
 	Entry& operator[](uint32_t const i) const {
