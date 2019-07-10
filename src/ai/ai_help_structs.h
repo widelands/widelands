@@ -123,13 +123,19 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 // TODO(tiborb): this should be replaced by command line switch
 constexpr int kFNeuronBitSize = 32;
 constexpr int kMutationRatePosition = 42;
-// This is expiration time for distance from a flag to neares warehouse
+// This is expiration time for distance from a flag to nearest warehouse
 constexpr int kFlagDistanceExpirationPeriod = 120 * 1000;
 // If the distance of flag-warehouse was not updated for this time, we presume that the flag
 // does not exist anymore and remove it
 constexpr int kOldFlagRemoveTime = 5 * 60 * 1000;
 
 constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
+
+constexpr uint32_t kNoField = std::numeric_limits<uint32_t>::max();
+
+constexpr uint32_t kOneMinute = 60 * 1000;
+
+constexpr uint16_t kFarButReachable = 1000;
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe);

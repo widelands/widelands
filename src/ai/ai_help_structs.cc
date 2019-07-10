@@ -307,7 +307,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      // count of rocks can only decrease, so  amount of rocks
      // is recalculated only when previous count is positive
      // count of water fields are stable, so if the current count is
-     // non-negative, water is not recaldulated
+     // non-negative, water is not recalculated
      rocks_nearby(1),
      water_nearby(-1),
      open_water_nearby(-1),
@@ -1348,10 +1348,11 @@ uint16_t FlagWarehouseDistances::FlagInfo::get(const uint32_t gametime, uint32_t
 	if (gametime <= expiry_time) {
 		return distance;
 	}
-	return 1000;
+	return kFarButReachable;
 }
 
 void FlagWarehouseDistances::FlagInfo::road_built(const uint32_t gametime) {
+	// Prohibiting for next 60 seconds
 	new_road_prohibited_till = gametime + 60 * 1000;
 }
 
@@ -1379,7 +1380,7 @@ int16_t
 FlagWarehouseDistances::get_distance(const uint32_t flag_coords, uint32_t gametime, uint32_t* nw) {
 	if (flags_map.count(flag_coords) == 0) {
 		*nw = 0;
-		return 1000;  // this is to discourage to build second road from brand new flag...
+		return kFarButReachable;  // this is to discourage to build second road from brand new flag...
 	} else {
 		return flags_map[flag_coords].get(gametime, nw);
 	}
@@ -1410,7 +1411,7 @@ bool FlagWarehouseDistances::remove_old_flag(uint32_t gametime) {
 	return false;
 }
 
-// Returns pointer to winning road, providing the treshold is exceeded
+// Returns pointer to winning road, provided that the treshold is exceeded
 FlagCandidates::Candidate* FlagCandidates::get_winner(const int16_t treshold) {
 	if (flags_.empty()) {
 		return nullptr;
@@ -1431,7 +1432,7 @@ FlagCandidates::Candidate::Candidate(
 	different_economy = de;
 	start_flag_dist_to_wh = start_f_dist;
 	flag_to_flag_road_distance = 0;
-	possible_road_distance = 1000;
+	possible_road_distance = kFarButReachable;
 	cand_flag_distance_to_wh = act_dist_to_wh;
 	air_distance = air_dst;
 }

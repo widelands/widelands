@@ -1060,7 +1060,7 @@ void DefaultAI::late_initialization() {
 	   kExpeditionMinDuration +
 	   static_cast<double>(off) * (kExpeditionMaxDuration - kExpeditionMinDuration) / scope;
 	log(" %d: expedition max duration = %u (%u minutes), map area root: %u\n", player_number(),
-	    expedition_max_duration / 1000, expedition_max_duration / 60000, map_area_root);
+	    expedition_max_duration / 1000, expedition_max_duration / kOneMinute, map_area_root);
 	assert(expedition_max_duration >= kExpeditionMinDuration);
 	assert(expedition_max_duration <= kExpeditionMaxDuration);
 
@@ -3441,7 +3441,6 @@ void DefaultAI::check_flag_distances(const uint32_t gametime) {
 		std::queue<Widelands::Flag*>
 		   remaining_flags;  // only used to collect flags reachable walk over roads
 		remaining_flags.push(&wh_obs.site->base_flag());
-		// const bool distance_set =
 		flag_warehouse_distance.set_distance(
 		   wh_obs.site->base_flag().get_position().hash(), 0, gametime, this_wh_hash);
 		uint32_t tmp_wh;
@@ -3454,7 +3453,7 @@ void DefaultAI::check_flag_distances(const uint32_t gametime) {
 		// to_be_checked can be set back to true. Because less hoops (fewer flag-to-flag roads) does
 		// not always mean shortest road.
 		while (!remaining_flags.empty()) {
-			checked_flags += 1;
+			++checked_flags;
 			// looking for a node with shortest existing road distance from starting flag and one that
 			// has to be checked Now going over roads leading from this flag
 			const uint16_t current_flag_distance = flag_warehouse_distance.get_distance(
@@ -3495,7 +3494,7 @@ void DefaultAI::check_flag_distances(const uint32_t gametime) {
 		   gametime / 1000);
 	}
 
-	// Now let do some lazy prunning - remove the flags that were not updated for long
+	// Now let do some lazy pruning - remove the flags that were not updated for long
 	flag_warehouse_distance.remove_old_flag(gametime);
 }
 
@@ -3634,15 +3633,15 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	if (is_warehouse && flag.nr_of_roads() <= 3) {probability_score += 20;}
 	probability_score += flag.current_wares() * 5;
 	if (needs_warehouse) {probability_score += 500;}
-	if (std::rand() % 10 == 0)
+	if (std::rand() % 10 == 0) {
 	probability_score += flag_warehouse_distance.get_distance(flag_coords_hash, gametime, &tmp_wh);
+	}
 
 	if (std::rand() % 200 < probability_score) {
-		const bool action_taken = create_shortcut_road(flag, 14, gametime);
-		if (!action_taken) {printf ("failed to build a road\n");}
+		create_shortcut_road(flag, 14, gametime);
 		return true;
 	}
-	printf ("not trying to build a road\n");
+
 	return false;
 
 }
@@ -3831,8 +3830,8 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     // this should not happen, but if the economy has a warehouse and a dismantle
     // grace time set, we must 'zero' the dismantle grace time
     if (!flag.get_economy()->warehouses().empty() &&
-        eco->dismantle_grace_time != std::numeric_limits<uint32_t>::max()) {
-        eco->dismantle_grace_time = std::numeric_limits<uint32_t>::max();
+        eco->dismantle_grace_time != kNever) {
+        eco->dismantle_grace_time = kNever;
     }
 
     // first we deal with situations when this is economy with no warehouses
@@ -3856,7 +3855,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
         // if grace time is not set, this is probably first time without a warehouse and we must set
         // it
-        if (eco->dismantle_grace_time == std::numeric_limits<uint32_t>::max()) {
+        if (eco->dismantle_grace_time == kNever) {
 
             // constructionsites
             if (upcast(ConstructionSite const, constructionsite, flag.get_building())) {
@@ -4056,10 +4055,10 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     if (flag.get_economy()->warehouses().empty()) {
 
         // blocking only if latest block was less then 60 seconds ago or it is last attempt
-        if (eco->fields_block_last_time + 60000 < gametime || last_attempt_) {
+        if (eco->fields_block_last_time + kOneMinute < gametime || last_attempt_) {
             eco->fields_block_last_time = gametime;
 
-            const uint32_t block_time = last_attempt_ ? 10 * 60 * 1000 : 2 * 60 * 1000;
+            const uint32_t block_time = last_attempt_ ? 10 * kOneMinute : 2 * kOneMinute;
 
             FindNodeAcceptAll buildable_functor;
             CheckStepOwnTerritory check_own(player_, MOVECAPS_WALK, true);
@@ -4098,7 +4097,7 @@ void DefaultAI::collect_nearflags(std::map<uint32_t, NearFlag> &nearflags, const
     for (;;) {
         // looking for a node with shortest existing road distance from starting flag and one that has
         // to be checked
-        uint32_t start_field = std::numeric_limits<uint32_t>::max();
+        uint32_t start_field = kNoField;
         uint32_t nearest_distance = 10000;
         for (auto item : nearflags) {
             if (item.second.current_road_distance < nearest_distance && item.second.to_be_checked) {
@@ -4107,7 +4106,7 @@ void DefaultAI::collect_nearflags(std::map<uint32_t, NearFlag> &nearflags, const
             }
         }
         // OK, we failed to find a NearFlag where to_be_checked == true, so quitting the loop now
-        if (start_field == std::numeric_limits<uint32_t>::max()) {
+        if (start_field == kNoField) {
             break;
         }
 
