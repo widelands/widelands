@@ -3433,7 +3433,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 // Re-calculating warehouse to flag distances
 void DefaultAI::check_flag_distances(const uint32_t gametime) {
 	for (WarehouseSiteObserver& wh_obs : warehousesites) {
-		// wh_obs.flag_distances_last_update = gametime; NOCOM
 		uint16_t checked_flags = 0;
 		const uint32_t this_wh_hash = wh_obs.site->get_position().hash();
 		uint32_t highest_distance_set = 0;
@@ -3488,10 +3487,6 @@ void DefaultAI::check_flag_distances(const uint32_t gametime) {
 			remaining_flags.pop();
 		}
 
-		printf(
-		   "%d: Checked flags: %3d, highest distance: %5d, warehouses: %lu, time: %d s\n",  // NOCOM
-		   player_number(), checked_flags, highest_distance_set, warehousesites.size(),
-		   gametime / 1000);
 	}
 
 	// Now let do some lazy pruning - remove the flags that were not updated for long
@@ -3625,9 +3620,9 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	if (flag_warehouse_distance.get_road_prohibited(flag_coords_hash, gametime)) {return false;}
 	const bool needs_warehouse = flag.get_economy()->warehouses().empty();
 
-	uint32_t tmp_wh; // NOCOM
+	uint32_t tmp_wh;
 
-	// when deciding if we attempt to build a road from here we use probability NOCOM
+	// when deciding if we attempt to build a road from here we use probability
 	uint16_t probability_score = 0;
 	if (flag.nr_of_roads() == 1) {probability_score += 20;}
 	if (is_warehouse && flag.nr_of_roads() <= 3) {probability_score += 20;}
@@ -4000,7 +3995,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     // Now we calculate roads from here to few best looking RoadCandidates....
     flag_candidates.sort_by_air_distance();
     uint32_t possible_roads_count = 0;
-    for (const auto &flag_candidate : flag_candidates.flags()){
+    for (const auto &flag_candidate : flag_candidates.flags()) {
         if (possible_roads_count > 10) {break;}
         const Widelands::Coords coords = Coords::unhash(flag_candidate.coords_hash);
         Path path;
@@ -4025,8 +4020,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     FlagCandidates::Candidate* winner = flag_candidates.get_winner(winner_min_score);
     if (winner) {
         const Widelands::Coords target_coords = Coords::unhash(winner->coords_hash);
-        printf("Winner to connect to %3dx%3d: ",flag.get_position(). x,flag.get_position().y); //without new line
-        winner->print();
 
 		// This is to prohibit the flag for some time but with exemption of warehouse
 		if (flag_warehouse_distance.get_distance(winner->coords_hash, gametime, &tmp_wh) > 0) {

@@ -25,6 +25,7 @@
 #include "base/log.h"
 #endif
 #include "ai/ai_help_structs.h"
+#include "base/macros.h"
 
 // Triggered by BOOST_AUTO_TEST_CASE
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
@@ -41,10 +42,7 @@ BOOST_AUTO_TEST_CASE(flag_distance_soft_expiry) {
 	FlagWarehouseDistances fw;
 	uint32_t tmp_wh;
 	BOOST_CHECK_EQUAL(fw.get_distance(0, 0, &tmp_wh), 1000);
-	// set_distance(const uint32_t flag_coords, const uint16_t distance,
-	//	uint32_t const gametime, uint32_t const nearest_warehouse)
 	BOOST_CHECK_EQUAL(fw.set_distance(1, 2, 0, 3), true);
-	// get_distance(const uint32_t flag_coords, uint32_t gametime, uint32_t* nw)
 	BOOST_CHECK_EQUAL(fw.get_distance(1, 2, &tmp_wh), 2);  // distance now 2
 	BOOST_CHECK_EQUAL(tmp_wh, 3);
 
@@ -65,10 +63,7 @@ BOOST_AUTO_TEST_CASE(flag_distance_below_expiry)
 {
 	FlagWarehouseDistances fw;
 	uint32_t tmp_wh;
-	// set_distance(const uint32_t flag_coords, const uint16_t distance,
-	//	uint32_t const gametime, uint32_t const nearest_warehouse)
 	BOOST_CHECK_EQUAL(fw.set_distance(1, 2, 0, 3), true);
-	// get_distance(const uint32_t flag_coords, uint32_t gametime, uint32_t* nw)
 
 	// setting longer distance after soft but below expiry time
 	BOOST_CHECK_EQUAL(fw.set_distance(1, 3, kFlagDistanceExpirationPeriod * 2 / 3, 5), true);
@@ -81,10 +76,7 @@ BOOST_AUTO_TEST_CASE(flag_distance_after_expiry)
 {
 	FlagWarehouseDistances fw;
 	uint32_t tmp_wh;
-	// set_distance(const uint32_t flag_coords, const uint16_t distance,
-	//	uint32_t const gametime, uint32_t const nearest_warehouse)
 	BOOST_CHECK_EQUAL(fw.set_distance(1, 2, 0, 3), true);
-	// get_distance(const uint32_t flag_coords, uint32_t gametime, uint32_t* nw)
 
 	// setting longer distance below expiry time
 	BOOST_CHECK_EQUAL(fw.set_distance(1, 3, 2 * kFlagDistanceExpirationPeriod, 5), true);
@@ -100,14 +92,11 @@ BOOST_AUTO_TEST_CASE(flag_distance_expiration_extension)
 	BOOST_CHECK_EQUAL(fw.set_distance(1, 2, 0, 3), true);
 	BOOST_CHECK_EQUAL(
 	   fw.set_distance(1, 2, 0, 3), false);  // cannot reset the same distance in the same time
-	// get_distance(const uint32_t flag_coords, uint32_t gametime, uint32_t* nw)
 
 	// Now we are after expiration time
 	BOOST_CHECK_EQUAL(fw.get_distance(1, kFlagDistanceExpirationPeriod + 3, &tmp_wh), 1000);
 
 	// setting distance 2 time shortly one after another
-	// set_distance(const uint32_t flag_coords, const uint16_t distance,
-	//	uint32_t const gametime, uint32_t const nearest_warehouse)
 	BOOST_CHECK_EQUAL(fw.set_distance(1, 2, kFlagDistanceExpirationPeriod + 3, 5), true);
 	BOOST_CHECK_EQUAL(fw.set_distance(1, 2, kFlagDistanceExpirationPeriod + 10, 5), true);
 	// current expiry_time should be 2*kFlagDistanceExpirationPeriod + 10
@@ -120,7 +109,6 @@ BOOST_AUTO_TEST_CASE(flag_distance_road_builtexpiration_extension)
 /* setting the same distance restart the expiry_period */
 {
 	FlagWarehouseDistances fw;
-	// uint32_t tmp_wh;
 	// No road built on fresh flag
 	BOOST_CHECK_EQUAL(fw.get_road_prohibited(1, 1), false);
 	// get_distance(const uint32_t flag_coords, uint32_t gametime, uint32_t* nw)

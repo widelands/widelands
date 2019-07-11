@@ -20,6 +20,7 @@
 #ifndef WL_AI_AI_HELP_STRUCTS_H
 #define WL_AI_AI_HELP_STRUCTS_H
 
+#include <algorithm>
 #include <list>
 #include <queue>
 #include <unordered_set>
@@ -899,7 +900,7 @@ public:
 	void set_road_built(uint32_t, uint32_t);
 	bool get_road_prohibited(uint32_t, uint32_t);
 	uint16_t count() const;
-	bool remove_old_flag(uint32_t);  // NOCOM add to tests
+	bool remove_old_flag(uint32_t);
 };
 
 // This is one-time structure - initiated and filled up when investigating possible roads to be
@@ -927,13 +928,6 @@ struct FlagCandidates {
 		}
 		bool operator<(const Candidate& other) const {
 			return score() > other.score();
-		}
-		void print() {  // NOCOM - remove
-			printf(" Candidate flag at %3dx%3d: dist. to wh %4d, cur. road length: %2d, poss. road "
-			       "length: %3d, air dist.: %2d, different ec: %s, score: %4d, \n",
-			       Coords::unhash(coords_hash).x, Coords::unhash(coords_hash).y,
-			       cand_flag_distance_to_wh, flag_to_flag_road_distance, possible_road_distance,
-			       air_distance, (different_economy) ? "Y" : "N", score());
 		}
 	};
 

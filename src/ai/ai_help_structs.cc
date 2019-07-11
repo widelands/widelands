@@ -19,6 +19,8 @@
 
 #include "ai/ai_help_structs.h"
 
+#include <algorithm>
+
 #include "base/macros.h"
 #include "base/time_string.h"
 #include "logic/ai_dna_handler.h"
@@ -1449,7 +1451,6 @@ bool FlagCandidates::set_road_possible(const uint32_t coords_hash, const uint16_
 			return true;
 		}
 	}
-	printf("ERROR [set_road_possible] - no such flag\n");  // NOCOM
 	return false;
 }
 

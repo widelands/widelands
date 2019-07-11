@@ -6,5 +6,4 @@ wl_test(test_ai
     base_log
     base_macros
     ai
-    logic_widelands_geometry
 )
