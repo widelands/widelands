@@ -259,7 +259,6 @@ wl_library(wui
     story_message_box.h
     trainingsitewindow.cc
     trainingsitewindow.h
-    transport_draw.cc
     tribal_encyclopedia.cc
     tribal_encyclopedia.h
     unique_window_handler.cc
