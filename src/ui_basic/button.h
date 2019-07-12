@@ -156,9 +156,6 @@ public:
 	boost::signals2::signal<void()> sigmouseout;
 
 protected:
-	virtual void clicked() {
-	}  /// Override this to react on the click.
-
 	bool highlighted_;  //  mouse is over the button
 	bool pressed_;      //  mouse is clicked over the button
 	bool enabled_;
