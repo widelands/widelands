@@ -1439,7 +1439,7 @@ FlagCandidates::Candidate::Candidate(
 	air_distance = air_dst;
 }
 
-int16_t FlagCandidates::Candidate::score() const {  // NOCOM
+int16_t FlagCandidates::Candidate::score() const {
 	return different_economy * 2000 + (start_flag_dist_to_wh - cand_flag_distance_to_wh) +
 	       (flag_to_flag_road_distance - 2 * possible_road_distance);
 }
