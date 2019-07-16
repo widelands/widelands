@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,6 +74,8 @@ public:
 	// 'map_views', hence this function.
 	virtual void draw_map_view(MapView* given_map_view, RenderTarget* dst) = 0;
 
+	void set_sel_pos(Widelands::NodeAndTriangle<> const center) override;
+
 	virtual void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) = 0;
 	const PlayerType& get_playertype() const {
 		return playertype_;
@@ -95,6 +97,9 @@ public:
 	}
 
 	void show_game_summary();
+	/// For the game host. Show a window and ask the host player what to do with the tribe of the
+	/// leaving client.
+	bool show_game_client_disconnected();
 	void postload() override;
 	void start() override;
 
@@ -107,6 +112,7 @@ protected:
 	PlayerType playertype_;
 	UI::UniqueWindow::Registry fieldaction_;
 	UI::UniqueWindow::Registry game_summary_;
+	UI::UniqueWindow::Registry client_disconnected_;
 	UI::Button* toggle_buildhelp_;
 	UI::Button* reset_zoom_;
 

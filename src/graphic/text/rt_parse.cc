@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -119,8 +119,11 @@ void Tag::parse_closing_tag(TextStream& ts) {
 
 void Tag::parse_attribute(TextStream& ts, std::unordered_set<std::string>& allowed_attrs) {
 	std::string aname = ts.till_any("=");
-	if (!allowed_attrs.count(aname))
-		throw SyntaxErrorImpl(ts.line(), ts.col(), "an allowed attribute", aname, ts.peek(100));
+	if (!allowed_attrs.count(aname)) {
+		const std::string error_info =
+		   (boost::format("an allowed attribute for '%s' tag") % name_).str();
+		throw SyntaxErrorImpl(ts.line(), ts.col(), error_info, aname, ts.peek(100));
+	}
 
 	ts.skip(1);
 
@@ -208,7 +211,8 @@ You can also set some options here what will affect your whole text.
 Attributes
 ^^^^^^^^^^
 
-* **padding**: The rectangle of this tag is shrunk so leave a gap on its outside, on all four outer edges.
+* **padding**: The rectangle of this tag is shrunk so leave a gap on its outside, on all four outer
+  edges.
 * **padding_r**: Padding on the right-hand side
 * **padding_l**: Padding on the left-hand side
 * **padding_b**: Padding on the bottom
@@ -216,7 +220,8 @@ Attributes
 
 * **background**: Give this tag's rectangle a background color as a hex value.
 
-* **keep_spaces**: Do now trim away trailing and double spaces. Use this where the user is editing text.
+* **keep_spaces**: Do now trim away trailing and double spaces. Use this where the user is editing
+  text.
 * **db_show_spaces**: Highlight all blank spaces for debugging purposes.
 
 Sub-tags
@@ -262,10 +267,11 @@ Attributes
 The same attributes as :ref:`rt_tags_rt`, plus the following:
 
 * **margin**: Shrink all contents to leave a margin towards the outer edge of this tag's rectangle.
-* **float**: Make text float around this div. Allowed values are ``left``,  ``right``.
-  The structure has to be something like: ``div("width=100%", div("float=left padding_r=6", p(img(imagepath))) .. p(text))``,
-  with the first embedded div being the floating one.
-* **valign**: Align the contents vertically. Allowed values are ``top`` (default), ``center`` or ``middle``, ``bottom``.
+* **float**: Make text float around this div. Allowed values are ``left``, ``right``.
+  The structure has to be something like: ``div("width=100%", div("float=left padding_r=6",
+  p(img(imagepath))) .. p(text))``, with the first embedded div being the floating one.
+* **valign**: Align the contents vertically. Allowed values are ``top`` (default), ``center`` or
+  ``middle``, ``bottom``.
 * **width**: The width of this element, as a pixel amount, or as a percentage.
   The last ``div`` in a row can be expanded automatically by using ``*``.
 
@@ -478,14 +484,18 @@ Attributes
 ^^^^^^^^^^
 
 * **src**: The path to the image, relative to the ``data`` directory.
+* **object**: Show the representative image of a map object instead of using ``src``.
 * **ref**: To be implemented
 * **color**: Player color for the image as a hex value
-* **width**: Width of the image as a pixel amount. The corresponding height will be matched automatically.
+* **width**: Width of the image as a pixel amount.
+  The corresponding height will be matched automatically.
+  Not supported in conjunction with the ``object`` parameter.
 
 :ref:`Return to tag index<rt_tags>`
 		*/
 		TagConstraint tc;
 		tc.allowed_attrs.insert("src");
+		tc.allowed_attrs.insert("object");
 		tc.allowed_attrs.insert("ref");
 		tc.allowed_attrs.insert("color");
 		tc.allowed_attrs.insert("width");
@@ -515,4 +525,4 @@ std::string Parser::remaining_text() {
 		return "";
 	return text_stream_->remaining_text();
 }
-}
+}  // namespace RT

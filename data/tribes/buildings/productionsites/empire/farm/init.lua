@@ -29,6 +29,12 @@ tribes:new_productionsite_type {
       },
    },
 
+   indicate_workarea_overlaps = {
+      empire_farm = false,
+      empire_vineyard = false,
+      empire_foresters_house = false,
+   },
+
    aihints = {
       basic_amount = 1,
       space_consumer = true,
@@ -52,23 +58,23 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant",
             "call=harvest",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
          descname = _"planting wheat",
          actions = {
-            "sleep=14000",
-            "callworker=plant"
+            "callworker=plant",
+            "sleep=10000"
          }
       },
       harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
          descname = _"harvesting wheat",
          actions = {
-            "sleep=4000",
-            "callworker=harvest"
+            "callworker=harvest",
+            "sleep=4000"
          }
       },
    },

@@ -42,6 +42,11 @@ tribes:new_productionsite_type {
       basic_amount = 1
    },
 
+   indicate_workarea_overlaps = {
+      empire_marblemine = false,
+      empire_marblemine_deep = false,
+   },
+
    working_positions = {
       empire_miner = 1
    },
@@ -60,39 +65,69 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=mine_marble",
             "call=mine_granite",
-            "return=skipped"
-         }
-      },
-      mine_marble = {
-         -- TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
-         descname = _"mining marble",
-         actions = {
-            "sleep=20000",
-            "return=skipped unless economy needs marble or economy needs granite",
-            "consume=wine ration",
-            "animate=working 20000",
-            "mine=stones 2 50 5 17",
-            "produce=marble:2",
-            "animate=working 20000",
-            "mine=stones 2 50 5 17",
-            "produce=marble granite"
+            "call=mine_marble",
+            "return=no_stats"
          }
       },
       mine_granite = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _"mining granite",
          actions = {
-            "sleep=20000",
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=ration wine",
-            "animate=working 20000",
+            "sleep=18000",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_marble",
+            "call=a_mine_produce_granite",
+            "return=no_stats"
+         }
+      },
+      mine_marble = {
+         -- TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
+         descname = _"mining marble",
+         actions = {
+            "return=skipped unless economy needs marble or economy needs granite",
+            "consume=wine ration",
+            "sleep=18000",
+            "call=a_mine_produce_marble",
+            "call=a_mine_produce_marble",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_marble",
+            "return=no_stats"
+         }
+      },
+      a_mine_produce_granite = {
+         descname = _"mining granite",
+         actions = {
+            "animate=working 10500",
             "mine=stones 2 50 5 17",
-            "produce=granite marble",
-            "animate=working 20000",
+            "produce=granite",
+         }
+      },
+      a_mine_produce_marble = {
+         descname = _"mining marble",
+         actions = {
+            "animate=working 10500",
             "mine=stones 2 50 5 17",
-            "produce=granite:2"
+            "produce=marble",
+         }
+      },
+      encyclopedia_granite = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=ration wine",
+            "produce=granite:3 marble",
+         }
+      },
+      encyclopedia_marble = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=wine ration",
+            "produce=marble:3 granite",
          }
       },
    },

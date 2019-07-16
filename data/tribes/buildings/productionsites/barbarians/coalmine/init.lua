@@ -55,17 +55,39 @@ tribes:new_productionsite_type {
       "coal"
    },
 
+   indicate_workarea_overlaps = {
+      barbarians_coalmine = false,
+      barbarians_coalmine_deep = false,
+      barbarians_coalmine_deeper = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
-            "sleep=45000",
             "return=skipped unless economy needs coal",
             "consume=ration",
-            "animate=working 20000",
+            "sleep=45000",
+            "call=mine_produce",
+            "call=mine_produce",
+            "return=no_stats"
+         }
+      },
+      mine_produce = {
+         descname = _"mining coal",
+         actions = {
+            "animate=working 10000",
             "mine=coal 2 33 5 17",
-            "produce=coal:2"
+            "produce=coal",
+         }
+      },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=ration",
+            "produce=coal:2",
          }
       },
    },

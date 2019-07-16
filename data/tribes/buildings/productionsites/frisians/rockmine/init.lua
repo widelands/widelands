@@ -14,7 +14,7 @@ tribes:new_productionsite_type {
       brick = 1,
       granite = 2,
       log = 2,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       brick = 1,
@@ -43,6 +43,11 @@ tribes:new_productionsite_type {
       },
    },
 
+   indicate_workarea_overlaps = {
+      frisians_rockmine = false,
+      frisians_rockmine_deep = false,
+   },
+
    aihints = {
       mines = "stones",
       mines_percent = 50,
@@ -65,15 +70,29 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _"mining granite",
          actions = {
-            "sleep=45000",
+            "sleep=5000",
             "return=skipped unless economy needs granite",
             "consume=ration",
-            "animate=working 20000",
+            "sleep=38000",
+            "call=mine_produce",
+            "call=mine_produce",
+            "return=no_stats"
+         }
+      },
+      mine_produce = {
+         descname = _"mining granite",
+         actions = {
+            "animate=working 21000",
             "mine=stones 3 50 5 20",
             "produce=granite",
-            "animate=working 20000",
-            "mine=stones 3 50 5 20",
-            "produce=granite"
+         }
+      },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=ration",
+            "produce=granite:2",
          }
       },
    },

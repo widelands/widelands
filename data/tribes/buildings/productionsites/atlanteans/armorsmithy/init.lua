@@ -55,6 +55,18 @@ dirname = path.dirname(__file__)
 --        done, including any animations and sounds played.
 --        See :doc:`productionsite_program`.
 --
+--    **indicate_workarea_overlaps**
+--        *Optional*. The names of other productionsites whose workareas should be highlighted
+--        if theirs overlap with this building’s workarea while the player is placing a
+--        building of this type. The overlaps can be shown either as desired (`true`), if the
+--        proximity of these buildings is favourable, or as negative (`false`), if they influence
+--        each other negatively. Example for a fishbreeder’s house::
+--
+--            indicate_workarea_overlaps = {
+--               atlanteans_fishers_house = true,
+--               atlanteans_fishbreeders_house = false
+--            },
+--
 --    **out_of_resource_notification**.
 --        *Optional*. This table defines the message sent by the productionsite
 --        to the player if it has run out of a resource to collect. There are 4
@@ -144,18 +156,18 @@ tribes:new_productionsite_type {
          actions = {
             "call=produce_shield_steel",
             "call=produce_shield_advanced",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_shield_steel = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because ...
          descname = _"forging a steel shield",
          actions = {
-            -- time total: 90
+            -- time total: 67 + 3.6
             "return=skipped unless economy needs shield_steel",
-            "sleep=45000",  -- +13 enlarge
             "consume=iron:2 coal:2",
-            "animate=working 45000",  -- +10 enlarge
+            "sleep=32000",
+            "animate=working 35000",
             "produce=shield_steel"
          }
       },
@@ -163,11 +175,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield because ...
          descname = _"forging an advanced shield",
          actions = {
-            -- time total: 110
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs shield_advanced",
             "consume=iron:2 coal:2 gold",
-            "sleep=50000",  -- +18 enlarge
-            "animate=working 60000",  -- +15 enlarge
+            "sleep=32000",
+            "animate=working 45000",
             "produce=shield_advanced"
          }
       },

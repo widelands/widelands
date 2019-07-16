@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@ struct Radiobutton : public Statebox {
 	}
 
 private:
-	void clicked() override;
+	void button_clicked() override;
 
 	Radiobutton* nextbtn_;
 	Radiogroup& group_;
@@ -86,6 +86,6 @@ private:
 	int32_t highestid_;
 	int32_t state_;  //  -1: none
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_RADIOBUTTON_H

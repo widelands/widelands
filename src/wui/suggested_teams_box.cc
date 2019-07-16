@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2018 by the Widelands Development Team
+ * Copyright (C) 2015-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,7 +87,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::SuggestedTeamLineup>& 
 		set_visible(true);
 		suggested_teams_box_label_->set_visible(true);
 		/** TRANSLATORS: Label for the list of suggested teams when choosing a map */
-		suggested_teams_box_label_->set_text(_("Suggested Teams:"));
+		suggested_teams_box_label_->set_text(_("Suggested Teams"));
 		int32_t teamlist_offset =
 		   suggested_teams_box_label_->get_y() + suggested_teams_box_label_->get_h() + padding_;
 
@@ -136,4 +136,4 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::SuggestedTeamLineup>& 
 		set_size(get_w(), teamlist_offset + lineup_counter * (label_height_));
 	}
 }
-}
+}  // namespace UI

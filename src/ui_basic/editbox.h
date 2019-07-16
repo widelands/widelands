@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2018 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/align.h"
+#include "graphic/style_manager.h"
 #include "ui_basic/button.h"
 
 #define CHAT_HISTORY_SIZE 5
@@ -44,14 +45,7 @@ struct EditBoxImpl;
  * Text conventions: Sentence case for labels associated with the editbox
  */
 struct EditBox : public Panel {
-	EditBox(Panel*,
-	        int32_t x,
-	        int32_t y,
-	        uint32_t w,
-	        uint32_t h,
-	        int margin_y,
-	        UI::PanelStyle style,
-	        int font_size = UI_FONT_SIZE_SMALL);
+	EditBox(Panel*, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style);
 	~EditBox() override;
 
 	boost::signals2::signal<void()> changed;
@@ -60,7 +54,10 @@ struct EditBox : public Panel {
 
 	const std::string& text() const;
 	void set_text(const std::string&);
-	void set_max_length(uint32_t);
+	void set_max_length(int);
+	void set_font_scale(float scale);
+	void set_font_style(const UI::FontStyleInfo& style);
+	void set_font_style_and_margin(const UI::FontStyleInfo& style, int margin);
 
 	void activate_history(bool activate) {
 		history_active_ = activate;
@@ -72,15 +69,34 @@ struct EditBox : public Panel {
 
 	void draw(RenderTarget&) override;
 
+	void set_password(bool pass) {
+		password_ = pass;
+	}
+
+	void set_warning(bool warn) {
+		warning_ = warn;
+	}
+
+	bool has_warning() {
+		return warning_;
+	}
+
+	bool is_password() {
+		return password_;
+	}
+
 private:
 	std::unique_ptr<EditBoxImpl> m_;
 
 	void check_caret();
+	std::string text_to_asterisk();
 
 	bool history_active_;
 	int16_t history_position_;
 	std::string history_[CHAT_HISTORY_SIZE];
+	bool password_;
+	bool warning_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_EDITBOX_H

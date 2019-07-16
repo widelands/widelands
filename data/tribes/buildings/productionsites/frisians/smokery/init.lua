@@ -12,12 +12,12 @@ tribes:new_productionsite_type {
    buildcost = {
       brick = 4,
       log = 1,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle = {
       brick = 2,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=smoke_meat",
             "call=smoke_fish",
-            "return=skipped"
+            "return=no_stats"
          },
       },
       smoke_fish = {
@@ -73,8 +73,8 @@ tribes:new_productionsite_type {
          descname = _"smoking fish",
          actions = {
             "return=skipped unless economy needs smoked_fish",
-            "sleep=16000",
             "consume=fish:2 log",
+            "sleep=16000",
             "animate=working 30000",
             "produce=smoked_fish:2"
          },
@@ -85,8 +85,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped when site has fish:2 and economy needs smoked_fish",
             "return=skipped unless economy needs smoked_meat",
-            "sleep=16000",
             "consume=meat:2 log",
+            "sleep=16000",
             "animate=working 30000",
             "produce=smoked_meat:2"
          },

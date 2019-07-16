@@ -2,10 +2,13 @@ dirname = path.dirname (__file__)
 
 terrain_affinity = {
    preferred_temperature = 115,
-   preferred_humidity = 0.6,
-   preferred_fertility = 0.2,
-   pickiness = 0.15,
+   preferred_humidity = 600,
+   preferred_fertility = 200,
+   pickiness = 15,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname .. "tiny", "idle", { 3, 15 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -13,6 +16,7 @@ tribes:new_immovable_type {
    descname = _ "Juniper (tiny)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "tiny/menu.png",
    attributes = { "seed_berrybush" },
    terrain_affinity = terrain_affinity,
    programs = {
@@ -22,14 +26,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_juniper_small",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "tiny/idle_?.png"),
-         hotspot = {3, 15},
-         scale = 2,
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname .. "small", "idle", { 6, 30 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -37,6 +38,7 @@ tribes:new_immovable_type {
    descname = _ "Juniper (small)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "small/menu.png",
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
@@ -46,14 +48,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_juniper_medium",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "small/idle_?.png"),
-         hotspot = {6, 30},
-         scale = 2,
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname .. "medium", "idle", { 10, 47 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -61,6 +60,7 @@ tribes:new_immovable_type {
    descname = _ "Juniper (medium)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "medium/menu.png",
    attributes = { "flowering" },
    terrain_affinity = terrain_affinity,
    programs = {
@@ -70,14 +70,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_juniper_ripe",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "medium/idle_?.png"),
-         hotspot = {10, 47},
-         scale = 2,
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname .. "ripe", "idle", { 11, 49 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -85,6 +82,7 @@ tribes:new_immovable_type {
    descname = _ "Juniper (ripe)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "ripe/menu.png",
    attributes = { "ripe_bush" },
    terrain_affinity = terrain_affinity,
    programs = {
@@ -96,11 +94,5 @@ tribes:new_immovable_type {
          "remove=",
       }
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "ripe/idle_?.png"),
-         hotspot = {11, 49},
-         scale = 2,
-      },
-   },
+   animations = animations,
 }

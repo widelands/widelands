@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2018 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,29 +28,6 @@ namespace Widelands {
 using WareAmount = std::pair<DescriptionIndex, Widelands::Quantity>;
 using BillOfMaterials = std::vector<WareAmount>;
 
-// range structure for iterating ware range with index
-struct WareRange {
-	explicit WareRange(const BillOfMaterials& range)
-	   : i(0), current(range.begin()), end(range.end()) {
-	}
-	WareRange& operator++() {
-		++i;
-		++current;
-		return *this;
-	}
-	bool empty() const {
-		return current == end;
-	}
-	operator bool() const {
-		return !empty();
-	}
-
-	uint8_t i;
-	BillOfMaterials::const_iterator current;
-
-private:
-	BillOfMaterials::const_iterator const end;
-};
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_BILL_OF_MATERIALS_H

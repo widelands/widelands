@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2018 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -119,9 +119,10 @@ void ItemWaresDisplay::draw(RenderTarget& dst) {
 		if (it.worker) {
 			y += IWD_WorkerBaseline;
 			constexpr float kZoom = 1.f;
-			dst.blit_animation(Vector2f(x + (IWD_ItemWidth / 2.f), y + (IWD_ItemHeight / 2.f)), kZoom,
+			dst.blit_animation(Vector2f(x + (IWD_ItemWidth / 2.f), y + (IWD_ItemHeight / 2.f)),
+			                   Widelands::Coords::null(), kZoom,
 			                   tribe.get_worker_descr(it.index)->main_animation(), 0,
-			                   player().get_playercolor());
+			                   &player().get_playercolor());
 		} else {
 			y += IWD_WareBaseLine;
 			if (tribe.get_ware_descr(it.index)->icon())

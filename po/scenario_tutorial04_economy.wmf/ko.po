@@ -1,17 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2018
 # GunChleoc, 2018
-# TaeMin An <kavern02@gmail.com>, 2017
+# ks k, 2018
+# ks k, 2018
+# TaeMin An, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-01 06:47+0000\n"
-"PO-Revision-Date: 2018-09-02 16:12+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 10:12+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -482,7 +484,7 @@ msgid ""
 "The ‘Wares’ tab shows information about the wares that your tribe needs, "
 "including a short help text, a list of buildings that produce each ware, the"
 " needed wares to produce it and where the ware is consumed."
-msgstr "‘물자’탭은 짧은 도움말 글자, 각 물자들을 생산하는 건물 목록, 그것을 생산하는 필요한 물자, 물자가 소비되는곳등을 포함하여 부족이 필요로 하는 물자에 관한 정보를 표시합니다."
+msgstr "‘물자’ 탭은 짧은 도움말 글자, 각 물자들을 생산하는 건물 목록, 그것을 생산하는 필요한 물자, 물자가 소비되는곳등을 포함하여 부족이 필요로 하는 물자에 관한 정보를 표시합니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:233
 msgid ""
@@ -492,9 +494,9 @@ msgstr "‘일꾼’ 탭에는 두 번째 탭에 있는 도구와 비슷한 방�
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:234
 msgid ""
-"The ‘Buldings’ tab contains all the necessary information about the "
+"The ‘Buildings’ tab contains all the necessary information about the "
 "buildings of your tribe."
-msgstr "‘건물’탭에는 부족의 건물에 대한 모든 필요한 정보가 포함되어 있습니다."
+msgstr "‘건물’ 탭에는 부족 건물에 대한 필요한 모든 정보가 들어있습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:235
 msgid ""
@@ -970,13 +972,3 @@ msgid ""
 "If you have still questions, the Widelands community will surely help you. "
 "You can find it at:"
 msgstr "당신을 위해 준비한 마지막 자습서였습니다. 제가 아는 모든 것을 다 가르쳐 드렸습니다. 아직 이 세계에는 저도 모르는 비밀들이 숨겨져 있습니다. 전 이제 인생의 말년을 보낼 조용한 곳을 찾을 겁니다. 아직 질문거리가 있다면, Widelands 커뮤니티가 도와줄 것입니다. 그 주소는:"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "새 목표"

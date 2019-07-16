@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,9 +25,10 @@
 AI Hints and Restrictions
 =========================
 
-Every :doc:`building <autogen_toc_lua_tribes_buildings>`'s ``init.lua`` file has an ``aihints`` table in its ``new_<building_type>_type{table}``
-function. This ``aihints`` table can contain any number of entries, which will help the AI decide
-when and where to build or dismantle a building of that type and/or how to treat it.
+Every :doc:`building <autogen_toc_lua_tribes_buildings>`'s ``init.lua`` file has an ``aihints``
+table in its ``new_<building_type>_type{table}`` function. This ``aihints`` table can contain any
+number of entries, which will help the AI decide when and where to build or dismantle a building of
+that type and/or how to treat it.
 
 All entries in ``aihints`` are optional.
 
@@ -136,7 +137,8 @@ Production Sites
 
 **collects_ware_from_map**
     The building will generate this ware from the map, e.g. a well mining the ``water`` ware,
-    or the hunter returning from the hunt with the ``meat`` ware. The same ware needs also to be listed as the first one of the building's outputs, e.g.::
+    or the hunter returning from the hunt with the ``meat`` ware. The same ware needs also to be
+    listed as the first one of the building's outputs, e.g.::
 
         aihints = {
             collects_ware_from_map = "meat"
@@ -148,7 +150,8 @@ Production Sites
         },
 
     **Note:** The AI expects exactly one such building type for each of the following wares:
-    ``fish`` (fisher), ``granite`` (quarry), ``log`` (lumberjack/woodcutter), ``meat`` (hunter), ``water`` (well).
+    ``fish`` (fisher), ``granite`` (quarry), ``log`` (lumberjack/woodcutter), ``meat`` (hunter),
+    ``water`` (well).
 
 **mines**
     The building will mine to obtain the given ware, e.g.::
@@ -220,7 +223,6 @@ Production Sites
 BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
    : mines_(table->has_key("mines") ? table->get_string("mines") : ""),
      needs_water_(table->has_key("needs_water") ? table->get_bool("needs_water") : false),
-     recruitment_(table->has_key("recruitment") ? table->get_bool("recruitment") : false),
      space_consumer_(table->has_key("space_consumer") ? table->get_bool("space_consumer") : false),
      expansion_(table->has_key("expansion") ? table->get_bool("expansion") : false),
      fighting_(table->has_key("fighting") ? table->get_bool("fighting") : false),
@@ -270,4 +272,28 @@ int16_t BuildingHints::get_ai_limit(const Widelands::AiType ai_type) const {
 		return normal_ai_limit_;
 	}
 	NEVER_HERE();
+}
+
+// TODO(GunChleoc): WareDescr has a bare "preciousness" table that should be moved below a new
+// "aihints" table.
+void WareWorkerHints::read_preciousness(const LuaTable& table) {
+	for (const std::string& key : table.keys<std::string>()) {
+		preciousnesses_.insert(std::make_pair(key, table.get_int(key)));
+	}
+}
+
+/// Returns the preciousness of the ware, or kInvalidWare if the tribe doesn't use the ware.
+int WareWorkerHints::preciousness(const std::string& tribename) const {
+	if (preciousnesses_.count(tribename) > 0) {
+		return preciousnesses_.at(tribename);
+	}
+	return Widelands::kInvalidWare;
+}
+
+WareHints::WareHints(const LuaTable& table) : WareWorkerHints() {
+	read_preciousness(table);
+}
+
+WorkerHints::WorkerHints(const LuaTable& table) : WareWorkerHints() {
+	read_preciousness(*table.get_table("preciousness"));
 }

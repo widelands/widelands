@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,6 @@
 #include "graphic/graphic.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -79,7 +78,14 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      padding_(10),
 
      // Title
-     title_(this, 0, 0, _("Options"), UI::Align::kCenter),
+     title_(this,
+            0,
+            0,
+            0,
+            0,
+            _("Options"),
+            UI::Align::kCenter,
+            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),
@@ -99,23 +105,27 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      // Interface options
      language_dropdown_(&box_interface_left_,
+                        "dropdown_language",
                         0,
                         0,
                         100,  // 100 is arbitrary, will be resized in layout().
-                        100,  // 100 is arbitrary, will be resized in layout().
+                        50,
                         24,
                         _("Language"),
                         UI::DropdownType::kTextual,
-                        UI::PanelStyle::kFsMenu),
+                        UI::PanelStyle::kFsMenu,
+                        UI::ButtonStyle::kFsMenuMenu),
      resolution_dropdown_(&box_interface_left_,
+                          "dropdown_resolution",
                           0,
                           0,
                           100,  // 100 is arbitrary, will be resized in layout().
-                          100,  // 100 is arbitrary, will be resized in layout().
+                          50,
                           24,
                           _("Window Size"),
                           UI::DropdownType::kTextual,
-                          UI::PanelStyle::kFsMenu),
+                          UI::PanelStyle::kFsMenu,
+                          UI::ButtonStyle::kFsMenuMenu),
 
      fullscreen_(&box_interface_left_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
@@ -163,9 +173,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     UI::SpinBox::Units::kPixels),
 
      // Sound options
-     music_(&box_sound_, Vector2i::zero(), _("Enable music"), "", 0),
-     fx_(&box_sound_, Vector2i::zero(), _("Enable sound effects"), "", 0),
-     message_sound_(&box_sound_, Vector2i::zero(), _("Play a sound at message arrival"), "", 0),
+     sound_options_(box_sound_, UI::SliderStyle::kFsMenu),
 
      // Saving options
      sb_autosave_(&box_saving_,
@@ -215,8 +223,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      /** TRANSLATORS: and it also lets you jump to it on the map. */
      single_watchwin_(&box_game_, Vector2i::zero(), _("Use single watchwindow mode")),
      os_(opt) {
-	// Set up UI Elements
-	title_.set_fontsize(UI_FONT_SIZE_BIG);
 
 	// Buttons
 	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_);
@@ -254,16 +260,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_windows_.add(&sb_dis_border_);
 
 	// Sound
-	box_sound_.add(&music_);
-	box_sound_.add(&fx_);
-	box_sound_.add(&message_sound_);
-
-	if (g_sound_handler.is_backend_disabled()) {
-		UI::Textarea* sound_warning = new UI::Textarea(
-		   &box_sound_, 0, 0, _("Sound is disabled due to a problem with the sound driver"));
-		sound_warning->set_color(UI_FONT_CLR_WARNING);
-		box_sound_.add(sound_warning);
-	}
+	box_sound_.add(&sound_options_);
 
 	// Saving
 	box_saving_.add(&sb_autosave_);
@@ -279,7 +276,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	// Bind actions
 	language_dropdown_.selected.connect(
 	   boost::bind(&FullscreenMenuOptions::update_language_stats, this, false));
-	cancel_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_back, this));
+	cancel_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_cancel, this));
 	apply_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_apply, this));
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_ok, this));
 
@@ -329,14 +326,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	snap_win_overlap_only_.set_state(opt.snap_win_overlap_only);
 	dock_windows_to_edges_.set_state(opt.dock_windows_to_edges);
 	animate_map_panning_.set_state(opt.animate_map_panning);
-
-	// Sound options
-	music_.set_state(opt.music);
-	music_.set_enabled(!g_sound_handler.is_backend_disabled());
-	fx_.set_state(opt.fx);
-	fx_.set_enabled(!g_sound_handler.is_backend_disabled());
-	message_sound_.set_state(opt.message_sound);
-	message_sound_.set_enabled(!g_sound_handler.is_backend_disabled());
 
 	// Saving options
 	zip_.set_state(opt.zip);
@@ -404,9 +393,7 @@ void FullscreenMenuOptions::layout() {
 	sb_dis_border_.set_desired_size(tab_panel_width, sb_dis_border_.get_h());
 
 	// Sound options
-	music_.set_desired_size(tab_panel_width, music_.get_h());
-	fx_.set_desired_size(tab_panel_width, fx_.get_h());
-	message_sound_.set_desired_size(tab_panel_width, message_sound_.get_h());
+	sound_options_.set_desired_size(tab_panel_width, tabs_.get_inner_h());
 
 	// Saving options
 	sb_autosave_.set_unit_width(250);
@@ -544,11 +531,17 @@ void FullscreenMenuOptions::update_language_stats(bool include_system_lang) {
 		             .str();
 	}
 	// Make font a bit smaller so the link will fit at 800x600 resolution.
-	translation_info_.set_text(as_uifont(message, 12));
+	translation_info_.set_text(
+	   as_richtext_paragraph(message, UI::FontStyle::kFsMenuTranslationInfo));
 }
 
 void FullscreenMenuOptions::clicked_apply() {
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kApplyOptions);
+}
+
+void FullscreenMenuOptions::clicked_cancel() {
+	g_sh->load_config();
+	clicked_back();
 }
 
 OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
@@ -572,11 +565,6 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.animate_map_panning = animate_map_panning_.get_state();
 	os_.panel_snap_distance = sb_dis_panel_.get_value();
 	os_.border_snap_distance = sb_dis_border_.get_value();
-
-	// Sound options
-	os_.music = music_.get_state();
-	os_.fx = fx_.get_state();
-	os_.message_sound = message_sound_.get_state();
 
 	// Saving options
 	os_.autosave = sb_autosave_.get_value();
@@ -633,11 +621,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.panel_snap_distance = opt_section_.get_int("panel_snap_distance", 0);
 	opt.border_snap_distance = opt_section_.get_int("border_snap_distance", 0);
 
-	// Sound options
-	opt.music = !opt_section_.get_bool("disable_music", false);
-	opt.fx = !opt_section_.get_bool("disable_fx", false);
-	opt.message_sound = opt_section_.get_bool("sound_at_message", true);
-
 	// Saving options
 	opt.autosave = opt_section_.get_int("autosave", kDefaultAutosaveInterval * 60);
 	opt.rolling_autosave = opt_section_.get_int("rolling_autosave", 5);
@@ -674,11 +657,6 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_int("panel_snap_distance", opt.panel_snap_distance);
 	opt_section_.set_int("border_snap_distance", opt.border_snap_distance);
 
-	// Sound options
-	opt_section_.set_bool("disable_music", !opt.music);
-	opt_section_.set_bool("disable_fx", !opt.fx);
-	opt_section_.set_bool("sound_at_message", opt.message_sound);
-
 	// Saving options
 	opt_section_.set_int("autosave", opt.autosave * 60);
 	opt_section_.set_int("rolling_autosave", opt.rolling_autosave);
@@ -696,8 +674,9 @@ void OptionsCtrl::save_options() {
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
 	UI::g_fh->reinitialize_fontset(i18n::get_locale());
-	g_sound_handler.set_disable_music(!opt.music);
-	g_sound_handler.set_disable_fx(!opt.fx);
+
+	// Sound options
+	g_sh->save_config();
 
 	// Now write to file
 	g_options.write(kConfigFile.c_str(), true);

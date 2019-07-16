@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,9 @@
 
 // We have to add Boost to this block to make codecheck happy
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
 #ifdef _WIN32
 #include <direct.h>
 #include <io.h>
@@ -81,6 +83,55 @@ const std::vector<std::string> illegal_filename_starting_characters{
 const std::vector<std::string> illegal_filename_characters{
    "<", ">", ":", "\"", "|", "?", "*", "/", "\\",
 };
+
+/// A class that makes iteration over filename_?.* templates easy. It is much faster than using
+/// regex.
+class NumberGlob {
+public:
+	explicit NumberGlob(const std::string& file_template);
+
+	/// If there is a next filename, puts it in 's' and returns true.
+	bool next(std::string* s);
+
+private:
+	std::string template_;
+	std::string format_;
+	std::string to_replace_;
+	uint32_t current_;
+	uint32_t max_;
+
+	DISALLOW_COPY_AND_ASSIGN(NumberGlob);
+};
+
+/**
+ * Implementation for NumberGlob.
+ */
+NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template), current_(0) {
+	int nchars = count(file_template.begin(), file_template.end(), '?');
+	format_ = "%0" + boost::lexical_cast<std::string>(nchars) + "i";
+
+	max_ = 1;
+	for (int i = 0; i < nchars; ++i) {
+		max_ *= 10;
+		to_replace_ += "?";
+	}
+	max_ -= 1;
+}
+
+bool NumberGlob::next(std::string* s) {
+	if (current_ > max_) {
+		return false;
+	}
+
+	if (max_) {
+		*s = boost::replace_last_copy(
+		   template_, to_replace_, (boost::format(format_) % current_).str());
+	} else {
+		*s = template_;
+	}
+	++current_;
+	return true;
+}
 }  // namespace
 
 /**
@@ -205,19 +256,19 @@ std::string FileSystem::illegal_filename_tooltip() {
 	   (boost::format(pgettext("illegal_filename_characters", "%s at the start of the filename")) %
 	    richtext_escape(i18n::localize_list(starting_characters, i18n::ConcatenateWith::OR)))
 	      .str(),
-	   UI_FONT_SIZE_MESSAGE));
+	   UI::FontStyle::kWuiMessageParagraph));
 
 	const std::string illegal(as_listitem(
 	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
-	         * %s is a list of illegal characters */
+	    * %s is a list of illegal characters */
 	   (boost::format(pgettext("illegal_filename_characters", "%s anywhere in the filename")) %
 	    richtext_escape(i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR)))
 	      .str(),
-	   UI_FONT_SIZE_MESSAGE));
+	   UI::FontStyle::kWuiMessageParagraph));
 
 	return (boost::format("%s%s%s") %
 	        /** TRANSLATORS: Tooltip header for characters in illegal filenames.
-	              * This is followed by a list of bullet points */
+	         * This is followed by a list of bullet points */
 	        pgettext("illegal_filename_characters", "The following characters are not allowed:") %
 	        illegal_start % illegal)
 	   .str();
@@ -259,6 +310,40 @@ std::string FileSystem::get_homedir() {
 	}
 
 	return homedir;
+}
+
+// Returning a vector rather than a set because animations need the indices
+std::vector<std::string> FileSystem::get_sequential_files(const std::string& directory,
+                                                          const std::string& basename,
+                                                          const std::string& extension) const {
+	std::vector<std::string> result;
+
+	auto get_files = [this, directory, basename, extension](const std::string& number_template) {
+		std::vector<std::string> files;
+		const std::string filename_template =
+		   directory + file_separator() + basename + number_template + "." + extension;
+
+		NumberGlob glob(filename_template);
+		std::string filename;
+		while (glob.next(&filename)) {
+			if (!file_exists(filename)) {
+				break;
+			}
+			files.push_back(filename);
+		}
+		return files;
+	};
+	result = get_files("");
+	if (result.empty()) {
+		result = get_files("_?");
+	}
+	if (result.empty()) {
+		result = get_files("_??");
+	}
+	if (result.empty()) {
+		result = get_files("_???");
+	}
+	return result;
 }
 
 /**
@@ -306,7 +391,7 @@ std::string FileSystem::canonicalize_name(std::string path) const {
 	std::list<std::string>::iterator i;
 
 #ifdef _WIN32
-	// remove all slashes with backslashes so following can work.
+	// replace all slashes with backslashes so following can work.
 	for (uint32_t j = 0; j < path.size(); ++j) {
 		if (path[j] == '/')
 			path[j] = '\\';
@@ -463,8 +548,8 @@ bool FileSystem::check_writeable_for_data(char const* const path) {
 		fs.ensure_directory_exists(".widelands");
 		fs.fs_unlink(".widelands");
 		return true;
-	} catch (...) {
-		log("Directory %s is not writeable - next try\n", path);
+	} catch (const FileError& e) {
+		log("Directory %s is not writeable - next try: %s\n", path, e.what());
 	}
 
 	return false;

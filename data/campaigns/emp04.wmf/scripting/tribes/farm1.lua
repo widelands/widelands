@@ -7,14 +7,7 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
-
-
-   return_on_dismantle = {
-      planks = 1,
-      granite = 1,
-      marble = 1,
-      marble_column = 1
-   },
+   enhancement = "empire_farm2",
 
    animations = {
       idle = {
@@ -24,7 +17,6 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-
    },
 
    working_positions = {
@@ -41,7 +33,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant",
             "call=harvest",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       plant = {

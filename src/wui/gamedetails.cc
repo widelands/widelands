@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2018 by the Widelands Development Team
+ * Copyright (C) 2016-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,12 +28,12 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/time_string.h"
+#include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 
-// TODO(GunChleoc): Arabic: line height broken for descriptions for Arabic.
 SavegameData::SavegameData()
    : gametime(""),
      nrplayers("0"),
@@ -87,7 +87,7 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
 	add(button_box_, UI::Box::Resizing::kFullSize);
 
 	minimap_icon_.set_visible(false);
-	minimap_icon_.set_frame(UI_FONT_CLR_FG);
+	minimap_icon_.set_frame(g_gr->styles().minimap_icon_frame());
 }
 
 void GameDetails::clear() {

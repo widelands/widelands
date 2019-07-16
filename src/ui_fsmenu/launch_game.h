@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "graphic/playercolor.h"
 #include "logic/map.h"
 #include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
@@ -56,6 +57,9 @@ protected:
 	/// Creates a blank label/tooltip and returns 'false' otherwise.
 	bool init_win_condition_label();
 
+	/// Enables or disables the peaceful mode checkbox.
+	void update_peaceful_mode();
+
 	/// Loads all win conditions that can be played with the map into the selection dropdown.
 	/// Disables the dropdown if the map is a scenario.
 	void update_win_conditions();
@@ -71,15 +75,20 @@ protected:
 	std::unique_ptr<LuaTable> win_condition_if_valid(const std::string& win_condition_script,
 	                                                 std::set<std::string> tags) const;
 
+	void toggle_peaceful();
+
 	uint32_t butw_;
 	uint32_t buth_;
 
 	UI::Dropdown<std::string> win_condition_dropdown_;
+	UI::Checkbox peaceful_;
 	std::string last_win_condition_;
 	UI::Button ok_, back_;
 	UI::Textarea title_;
 	GameSettingsProvider* settings_;
 	GameController* ctrl_;
+
+	bool peaceful_mode_forbidden_;
 
 	Widelands::PlayerNumber nr_players_;
 };

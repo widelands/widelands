@@ -4,11 +4,11 @@ animations = {}
 add_animation(animations, "idle", dirname, "waiting", {11, 22}, 10)
 add_animation(animations, "work", dirname, "work", {10, 22}, 10)
 animations["work"]["sound_effect"] = {
-   name = "hammering",
-   directory = "sound/hammering"
+   path = "sound/hammering/hammering",
+   priority = 64
 }
-add_walking_animations(animations, "walk", dirname, "walk", {7, 22}, 10)
-add_walking_animations(animations, "walkload", dirname, "walk", {7, 22}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {7, 22}, 10)
+add_directional_animation(animations, "walkload", dirname, "walk", {7, 22}, 10)
 
 
 tribes:new_worker_type {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@ class EditorInteractive;
  * This is the Main Options Menu. Here, information
  * about the current map are displayed and you can change
  * author, name and description
-*/
+ */
 struct MainMenuMapOptions : public UI::Window {
 	MainMenuMapOptions(EditorInteractive&, bool modal = false);
 

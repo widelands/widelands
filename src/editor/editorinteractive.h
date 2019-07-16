@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,6 +29,7 @@
 #include "editor/tools/noise_height_tool.h"
 #include "editor/tools/place_critter_tool.h"
 #include "editor/tools/place_immovable_tool.h"
+#include "editor/tools/resize_tool.h"
 #include "editor/tools/set_origin_tool.h"
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_starting_pos_tool.h"
@@ -49,7 +50,7 @@ class EditorTool;
 class EditorInteractive : public InteractiveBase {
 public:
 	struct Tools {
-		Tools()
+		Tools(const Widelands::Map& map)
 		   : current_pointer(&info),
 		     use_tool(EditorTool::First),
 		     increase_height(decrease_height, set_height),
@@ -58,7 +59,8 @@ public:
 		     place_critter(delete_critter),
 		     increase_resources(decrease_resources, set_resources),
 		     set_port_space(unset_port_space),
-		     set_origin() {
+		     set_origin(),
+		     resize(map.get_width(), map.get_height()) {
 		}
 		EditorTool& current() const {
 			return *current_pointer;
@@ -83,6 +85,7 @@ public:
 		EditorSetPortSpaceTool set_port_space;
 		EditorUnsetPortSpaceTool unset_port_space;
 		EditorSetOriginTool set_origin;
+		EditorResizeTool resize;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
 
@@ -140,11 +143,13 @@ public:
 private:
 	friend struct EditorToolMenu;
 
+	bool player_hears_field(const Widelands::Coords& coords) const override;
 	void on_buildhelp_changed(const bool value) override;
 
 	void toggle_resources();
 	void toggle_immovables();
 	void toggle_bobs();
+	void toggle_grid();
 
 	//  state variables
 	bool need_save_;
@@ -162,9 +167,11 @@ private:
 	UI::UniqueWindow::Registry immovablemenu_;
 	UI::UniqueWindow::Registry crittermenu_;
 	UI::UniqueWindow::Registry resourcesmenu_;
+	UI::UniqueWindow::Registry resizemenu_;
 	UI::UniqueWindow::Registry helpmenu_;
 
 	UI::Button* toggle_buildhelp_;
+	UI::Button* toggle_grid_;
 	UI::Button* toggle_resources_;
 	UI::Button* toggle_immovables_;
 	UI::Button* toggle_bobs_;
@@ -177,6 +184,7 @@ private:
 	bool draw_resources_ = true;
 	bool draw_immovables_ = true;
 	bool draw_bobs_ = true;
+	bool draw_grid_ = true;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

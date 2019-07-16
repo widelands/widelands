@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,10 @@
 #ifndef WL_GRAPHIC_ALIGN_H
 #define WL_GRAPHIC_ALIGN_H
 
+#include <string>
+
+#include "base/vector.h"
+
 namespace UI {
 
 // TODO(GunChleoc): Step 1: Clean up superfluous usages of kLeft/kTop, especially with dalls to
@@ -33,5 +37,9 @@ enum class Align {
 	kTop = kLeft,
 	kBottom = kRight,
 };
-}
+
+void center_vertically(uint32_t h, Vector2i* pt);
+void correct_for_align(Align, uint32_t w, Vector2i* pt);
+Align mirror_alignment(Align alignment, bool is_rtl);
+}  // namespace UI
 #endif  // end of include guard: WL_GRAPHIC_ALIGN_H

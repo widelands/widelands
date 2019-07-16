@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,13 +23,12 @@
 #include <memory>
 
 #include "graphic/align.h"
-#include "graphic/color.h"
+#include "graphic/styles/panel_styles.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
 namespace UI {
-struct Scrollbar;
 
 /**
  * This defines an area, where a text can easily be printed.
@@ -60,11 +59,13 @@ struct MultilineTextarea : public Panel {
 	}
 
 	void set_text(const std::string&);
-	uint32_t get_eff_w() const {
+	// int instead of uint because of overflow situations
+	int32_t get_eff_w() const {
 		return scrollbar_.is_enabled() ? get_w() - Scrollbar::kSize : get_w();
 	}
 
-	void set_color(RGBColor fg);
+	void set_style(const FontStyleInfo& style);
+	void set_font_scale(float scale);
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
@@ -87,15 +88,18 @@ private:
 	 * turns '\\n' into '<br>' tags as needed, then creates the richtext style wrappers.
 	 */
 	std::string make_richtext();
-
 	std::string text_;
+
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
-	RGBColor color_;
+
+	const FontStyleInfo* style_;
+	float font_scale_;
+
 	const Align align_;
 
 	Scrollbar scrollbar_;
 	ScrollMode scrollmode_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_MULTILINETEXTAREA_H

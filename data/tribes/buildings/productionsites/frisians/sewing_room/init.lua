@@ -14,7 +14,7 @@ tribes:new_productionsite_type {
       brick = 3,
       granite = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       brick = 2,
@@ -58,10 +58,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing fur garment because ...
          descname = _"sewing fur garment",
          actions = {
-            "sleep=20000",
+            -- time total: 40 + 3.6
             "return=skipped unless economy needs fur_garment or workers need experience",
             "consume=fur:2",
-            "animate=working 25000",
+            "sleep=20000",
+            "animate=working 20000",
             "produce=fur_garment"
          },
       },

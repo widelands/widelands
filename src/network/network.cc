@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,18 +38,23 @@ bool do_resolve(const boost::asio::ip::tcp& protocol,
 		boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
 		if (iter == boost::asio::ip::tcp::resolver::iterator()) {
 			// Resolution failed
+			log("Could not resolve network name '%s:%u' to %s-address\n", hostname.c_str(), port,
+			    ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"));
 			return false;
 		}
 		addr->ip = iter->endpoint().address();
 		addr->port = port;
+		log("Resolved network name '%s:%u' to %s\n", hostname.c_str(), port,
+		    addr->ip.to_string().c_str());
 		return true;
 	} catch (const boost::system::system_error& ec) {
 		// Resolution failed
-		log("Could not resolve network name: %s\n", ec.what());
+		log("Could not resolve network name '%s:%u' to %s-address: %s\n", hostname.c_str(), port,
+		    ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"), ec.what());
 		return false;
 	}
 }
-}
+}  // namespace
 
 bool NetAddress::resolve_to_v4(NetAddress* addr, const std::string& hostname, uint16_t port) {
 	return do_resolve(boost::asio::ip::tcp::v4(), addr, hostname, port);

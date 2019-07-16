@@ -12,7 +12,7 @@ tribes:new_productionsite_type {
    buildcost = {
       brick = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       brick = 1,
@@ -36,6 +36,10 @@ tribes:new_productionsite_type {
       prohibited_till = 480
    },
 
+   indicate_workarea_overlaps = {
+      frisians_hunters_house = false,
+   },
+
    working_positions = {
       frisians_hunter = 1
    },
@@ -50,12 +54,16 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _"hunting",
          actions = {
-            "sleep=35000",
             "callworker=hunt",
             "sleep=35000",
             "callworker=hunt",
             "sleep=35000",
             "callworker=hunt",
+            "sleep=35000",
+            "callworker=hunt",
+            "sleep=35000",
+            "callworker=hunt",
+            "sleep=35000",
             "produce=fur"
          }
       },

@@ -8,6 +8,7 @@ nr_players="1"
 name=_"Not yet implemented"
 # TRANSLATORS: Author for dummy map
 author=_"Nobody"
+# TRANSLATORS: Description for greyed out dummy scenario displayed in campaign screen
 descr=_"Sorry, this map is not yet implemented."
 hint=
 tags=

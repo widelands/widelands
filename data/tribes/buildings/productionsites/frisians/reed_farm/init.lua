@@ -13,7 +13,7 @@ tribes:new_productionsite_type {
       brick = 2,
       --granite = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       brick = 1,
@@ -44,7 +44,16 @@ tribes:new_productionsite_type {
    },
 
    outputs = {
-      "thatch_reed"
+      "reed"
+   },
+
+   indicate_workarea_overlaps = {
+      frisians_clay_pit = false,
+      frisians_berry_farm = false,
+      frisians_reed_farm = false,
+      frisians_farm = false,
+      frisians_foresters_house = false,
+      frisians_beekeepers_house = true,
    },
 
    programs = {
@@ -54,23 +63,23 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant_reed",
             "call=harvest_reed",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       plant_reed = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
          descname = _"planting reed",
          actions = {
-            "sleep=18000",
-            "callworker=plantreed"
+            "callworker=plantreed",
+            "sleep=18000"
          }
       },
       harvest_reed = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
          descname = _"harvesting reed",
          actions = {
-            "sleep=5000",
-            "callworker=harvestreed"
+            "callworker=harvestreed",
+            "sleep=5000"
          }
       },
    },

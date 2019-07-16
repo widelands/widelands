@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,9 +33,17 @@
 #include "graphic/image.h"
 #include "graphic/surface.h"
 #include "scripting/lua_table.h"
+#include "sound/constants.h"
+
+// #include "logic/widelands_geometry.h"
 
 /// The default animation speed
 constexpr int kFrameLength = 250;
+
+class Image;
+// class LuaTable;
+class Surface;
+struct RGBColor;
 
 /**
  * Representation of an Animation in the game. An animation is a looping set of
@@ -48,8 +56,9 @@ constexpr int kFrameLength = 250;
  */
 class Animation {
 public:
+	/// The mipmap scales supported by the engine.
+	/// Ensure that this always matches supported_scales in data/scripting/mapobjects.lua.
 	static const std::set<float> kSupportedScales;
-
 	explicit Animation(const LuaTable& table);
 	virtual ~Animation() {
 	}
@@ -82,8 +91,6 @@ public:
 	/// The 'clr' is the player color used for blending - the parameter can be
 	/// 'nullptr', in which case the neutral image will be returned.
 	virtual const Image* representative_image(const RGBColor* clr) const = 0;
-	/// The filename of the image used for the first frame, without player color.
-	virtual const std::string& representative_image_filename() const = 0;
 
 	/// Blit the animation frame that should be displayed at the given time index
 	/// into the given 'destination_rect'.
@@ -92,6 +99,7 @@ public:
 	/// in which case the neutral image will be blitted. The Surface is the 'target'
 	/// for the blit operation and must be non-null.
 	virtual void blit(uint32_t time,
+	                  const Widelands::Coords& coords,
 	                  const Rectf& source_rect,
 	                  const Rectf& destination_rect,
 	                  const RGBColor* clr,
@@ -105,11 +113,18 @@ public:
 	virtual std::vector<const Image*> pc_masks(float scale) const = 0;
 	virtual std::set<float> available_scales() const = 0;
 
-	/// Play the sound effect associated with this animation at the given time.
-	void trigger_sound(uint32_t time, uint32_t stereo_position) const;
+	/// Load animation images into memory for default scale.
+	virtual void load_default_scale_and_sounds() const = 0;
+	void load_sounds() const;
 
 protected:
+	/// Play the sound effect associated with this animation at the given time.
+	/// Any sound effects are played with stereo position according to 'coords'.
+	/// If 'coords' == Widelands::Coords::null(), skip playing any sound effects.
+	void trigger_sound(uint32_t time, const Widelands::Coords& coords) const;
+
 	uint16_t nr_frames_;
+	int representative_frame_;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);
@@ -118,8 +133,9 @@ private:
 	const uint32_t frametime_;
 	const bool play_once_;
 
-	// Name of sound effect that will be played at frame 0.
-	std::string sound_effect_;
+	// ID of sound effect that will be played at frame 0.
+	FxId sound_effect_;
+	int32_t sound_priority_;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_ANIMATION_H

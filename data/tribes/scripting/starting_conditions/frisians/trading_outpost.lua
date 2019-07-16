@@ -25,7 +25,7 @@ return {
          wares = {
              log = 30,
              granite = 45,
-             thatch_reed = 35,
+             reed = 35,
              brick = 70,
              clay = 20,
              water = 5,
@@ -54,7 +54,7 @@ return {
              bread_paddle = 2,
              kitchen_tools = 2,
              felling_ax = 3,
-             needles = 2,
+             needles = 1,
              basket = 2,
              pick = 5,
              shovel = 5,
@@ -85,6 +85,7 @@ return {
              frisians_stonemason = 2,
              frisians_reindeer = 5,
              frisians_trainer = 4,
+             frisians_seamstress_master = 1,
          },
          -- Max health: 2, Max attack: 6, Max defense: 2, Max evade: 0
          soldiers = {
@@ -98,7 +99,7 @@ return {
          inputs = {
             iron = 7,
             log = 7,
-            thatch_reed = 7,
+            reed = 7,
          }
       })
 

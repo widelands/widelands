@@ -9,15 +9,15 @@ animations = {
    work = {
       pictures = path.list_files(dirname .. "work_??.png"),
       sound_effect = {
-            directory = "sound/hammering",
-            name = "hammering",
+         path = "sound/hammering/hammering",
+         priority = 64
       },
       hotspot = { 11, 21 },
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {11, 23}, 10)
-add_walking_animations(animations, "walkload", dirname, "walk", {11, 23}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {11, 23}, 10)
+add_directional_animation(animations, "walkload", dirname, "walk", {11, 23}, 10)
 
 
 tribes:new_worker_type {

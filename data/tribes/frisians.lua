@@ -1,28 +1,46 @@
-dirname = path.dirname (__file__)
+image_dirname = path.dirname(__file__) .. "images/frisians/"
+
+animations = {}
+add_animation(animations, "frontier", image_dirname, "frontier", {9, 26})
+add_animation(animations, "flag", image_dirname, "flag", {10, 39}, 10)
 
 tribes:new_tribe {
    name = "frisians",
-
-   animations = {
-      frontier = {
-         pictures = path.list_files (dirname .. "images/frisians/frontier_??.png"),
-         hotspot = { 9, 26 },
-      },
-      flag = {
-         pictures = path.list_files (dirname .. "images/frisians/flag_??.png"),
-         hotspot = { 10, 39 },
-         fps = 10,
-      }
-   },
+   animations = animations,
 
    -- Image file paths for this tribe's road textures
    roads = {
       busy = {
-         "tribes/images/frisians/roadt_busy.png",
+         image_dirname .. "roadt_busy.png",
       },
       normal = {
-         "tribes/images/frisians/roadt_normal_00.png",
-         "tribes/images/frisians/roadt_normal_01.png",
+         image_dirname .. "roadt_normal_00.png",
+         image_dirname .. "roadt_normal_01.png",
+      },
+   },
+
+   resource_indicators = {
+      [""] = {
+         [0] = "frisians_resi_none",
+      },
+      coal = {
+         [10] = "frisians_resi_coal_1",
+         [20] = "frisians_resi_coal_2",
+      },
+      iron = {
+         [10] = "frisians_resi_iron_1",
+         [20] = "frisians_resi_iron_2",
+      },
+      gold = {
+         [10] = "frisians_resi_gold_1",
+         [20] = "frisians_resi_gold_2",
+      },
+      stones = {
+         [10] = "frisians_resi_stones_1",
+         [20] = "frisians_resi_stones_2",
+      },
+      water = {
+         [100] = "frisians_resi_water",
       },
    },
 
@@ -36,7 +54,7 @@ tribes:new_tribe {
          "granite",
          "clay",
          "brick",
-         "thatch_reed",
+         "reed",
          "fur",
          "cloth"
       },
@@ -196,27 +214,28 @@ tribes:new_tribe {
       "pond_dry",
       "pond_growing",
       "pond_mature",
-      "reed_tiny",
-      "reed_small",
-      "reed_medium",
-      "reed_ripe",
-      "resi_coal1",
-      "resi_coal2",
-      "resi_gold1",
-      "resi_gold2",
-      "resi_iron1",
-      "resi_iron2",
-      "resi_none",
-      "resi_water1",
-      "resi_stones1",
-      "resi_stones2",
+      "reedfield_tiny",
+      "reedfield_small",
+      "reedfield_medium",
+      "reedfield_ripe",
+      "frisians_resi_none",
+      "frisians_resi_water",
+      "frisians_resi_coal_1",
+      "frisians_resi_iron_1",
+      "frisians_resi_gold_1",
+      "frisians_resi_stones_1",
+      "frisians_resi_coal_2",
+      "frisians_resi_iron_2",
+      "frisians_resi_gold_2",
+      "frisians_resi_stones_2",
       "frisians_shipconstruction",
-      --These non-frisian immovables can be used by bee-keepers
-      "field_medium",
+      -- These non-frisian immovables can be used by bee-keepers
+      "wheatfield_medium",
       "cornfield_medium",
       "blackrootfield_medium",
       "grapevine_medium",
-      "grapevine_ripe", --used by the fruit collector
+      -- Used by the fruit collector
+      "grapevine_ripe",
    },
 
    -- The order here also determines the order in lists on screen.
@@ -305,6 +324,7 @@ tribes:new_tribe {
       "Langeneß",
       "Norderoog",
       "Norderoogsand",
+      "Nordstrand",
       "Nordstrandischmoor",
       "Oland",
       "Pellworm",
@@ -322,7 +342,6 @@ tribes:new_tribe {
    soldier = "frisians_soldier",
    ship = "frisians_ship",
    port = "frisians_port",
-   barracks = "frisians_barracks",
    ironore = "iron_ore",
    rawlog = "log",
    refinedlog = "brick",

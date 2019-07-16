@@ -45,7 +45,6 @@ if (WIN32)
       ${WIN32_ICON_O}
     USES_SDL2
     DEPENDS
-      base_log
       base_exceptions
       widelands_ball_of_mud
       build_info
@@ -56,7 +55,6 @@ else()
       main.cc
     USES_SDL2
     DEPENDS
-      base_log
       base_exceptions
       widelands_ball_of_mud
       build_info
@@ -109,14 +107,13 @@ wl_library(widelands_ball_of_mud
     graphic
     graphic_fonthandler
     graphic_text
-    graphic_text_constants
-    helper
     io_filesystem
     logic
     logic_exceptions
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_map
     logic_single_player_game_settings
     map_io_map_loader
     network

@@ -2,10 +2,13 @@ dirname = path.dirname (__file__)
 
 terrain_affinity = {
    preferred_temperature = 100, -- Temperature is in arbitrary units.
-   preferred_humidity = 0.95,   -- In percent (1 being very wet).
-   preferred_fertility = 0.05,  -- In percent (1 being very fertile).
-   pickiness = 0.15,            -- Lower means it is less picky, i.e. it can deal better.
+   preferred_humidity = 950,    -- Values between 0 and 1000 (1000 being very wet).
+   preferred_fertility = 50,    -- Values between 0 and 1000 (1000 being very fertile).
+   pickiness = 15,              -- Lower means it is less picky, i.e. it can deal better.
 }
+
+animations = {}
+add_animation(animations, "idle", dirname .. "tiny", "idle", { 9, 19 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -13,6 +16,7 @@ tribes:new_immovable_type {
    descname = _ "Sea Buckthorn (tiny)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "tiny/menu.png",
    attributes = { "seed_berrybush" },
    terrain_affinity = terrain_affinity,
    programs = {
@@ -22,13 +26,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_sea_buckthorn_small",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "tiny/idle_?.png"),
-         hotspot = {9, 19},
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname .. "small", "idle", { 14, 32 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -36,6 +38,7 @@ tribes:new_immovable_type {
    descname = _ "Sea Buckthorn (small)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "small/menu.png",
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
@@ -45,13 +48,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_sea_buckthorn_medium",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "small/idle_?.png"),
-         hotspot = {14, 32},
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname .. "medium", "idle", { 17, 40 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -59,6 +60,7 @@ tribes:new_immovable_type {
    descname = _ "Sea Buckthorn (medium)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "medium/menu.png",
    attributes = { "flowering" },
    terrain_affinity = terrain_affinity,
    programs = {
@@ -68,13 +70,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_sea_buckthorn_ripe",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "medium/idle_?.png"),
-         hotspot = {17, 40},
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname .. "ripe", "idle", { 17, 40 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -82,6 +82,7 @@ tribes:new_immovable_type {
    descname = _ "Sea Buckthorn (ripe)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "ripe/menu.png",
    attributes = { "ripe_bush" },
    terrain_affinity = terrain_affinity,
    programs = {
@@ -93,10 +94,5 @@ tribes:new_immovable_type {
          "remove=",
       }
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "ripe/idle_?.png"),
-         hotspot = {17, 40},
-      },
-   },
+   animations = animations,
 }

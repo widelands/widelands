@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,7 +93,9 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		log("Game: Reading Scenario Tribes took %ums\n", timer.ms_since_last_query());
 	}
 
-	log("Game: Reading Player Info ... ");
+	// This also triggers loading the world and tribes, so we need a newline at the end of the log
+	// output
+	log("Game: Reading Player Info ...\n");
 	{
 		GamePlayerInfoPacket p;
 		p.read(fs_, game_);
@@ -162,4 +164,4 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 
 	return 0;
 }
-}
+}  // namespace Widelands

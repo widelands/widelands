@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,7 @@
 #include "base/macros.h"
 #include "base/time_string.h"
 #include "base/warning.h"
+#include "build_info.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
@@ -55,14 +56,15 @@
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
 #include "map_io/widelands_map_loader.h"
-#include "network/network.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
+#include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
@@ -75,13 +77,20 @@ namespace Widelands {
 Game::SyncWrapper::~SyncWrapper() {
 	if (dump_ != nullptr) {
 		if (!syncstreamsave_)
-			g_fs->fs_unlink(dumpfname_);
+			try {
+				g_fs->fs_unlink(dumpfname_);
+			} catch (const FileError& e) {
+				// not really a problem if deletion fails, but we'll log it
+				log("Deleting synchstream file %s failed: %s\n", dumpfname_.c_str(), e.what());
+			}
 	}
 }
 
 void Game::SyncWrapper::start_dump(const std::string& fname) {
 	dumpfname_ = fname + kSyncstreamExtension;
 	dump_.reset(g_fs->open_stream_write(dumpfname_));
+	current_excerpt_id_ = 0;
+	excerpts_buffer_[current_excerpt_id_].clear();
 }
 
 void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
@@ -109,6 +118,8 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 			log("Writing to syncstream file %s failed. Stop synctream dump.\n", dumpfname_.c_str());
 			dump_.reset();
 		}
+		assert(current_excerpt_id_ < kExcerptSize);
+		excerpts_buffer_[current_excerpt_id_].append(static_cast<const char*>(sync_data), size);
 	}
 
 	target_.data(sync_data, size);
@@ -129,6 +140,7 @@ Game::Game()
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
      replay_(false) {
+	Economy::initialize_serial();
 }
 
 Game::~Game() {
@@ -221,7 +233,14 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	loader_ui.step(_("Creating players"));
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		add_player(p, 0, map().get_scenario_player_tribe(p), map().get_scenario_player_name(p));
+		// If tribe name is empty, pick a random tribe
+		std::string tribe = map().get_scenario_player_tribe(p);
+		if (tribe.empty()) {
+			log("Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
+			const DescriptionIndex random = std::rand() % tribes().nrtribes();
+			tribe = tribes().get_tribe_descr(random)->name();
+		}
+		add_player(p, 0, tribe, map().get_scenario_player_name(p));
 		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
 	win_condition_displayname_ = "Scenario";
@@ -303,9 +322,27 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 
 	// Check for win_conditions
 	if (!settings.scenario) {
+		loader_ui->step(_("Initializing game…"));
+		if (settings.peaceful) {
+			for (uint32_t i = 1; i < settings.players.size(); ++i) {
+				if (Player* p1 = get_player(i)) {
+					for (uint32_t j = i + 1; j <= settings.players.size(); ++j) {
+						if (Player* p2 = get_player(j)) {
+							p1->set_attack_forbidden(j, true);
+							p2->set_attack_forbidden(i, true);
+						}
+					}
+				}
+			}
+		}
+
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
+		if (table->has_key<std::string>("init")) {
+			std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("init");
+			cr->resume();
+		}
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
 	} else {
@@ -525,7 +562,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 		;
 #endif
 
-	g_sound_handler.change_music("ingame", 1000, 0);
+	g_sh->change_music("ingame", 1000);
 
 	state_ = gs_running;
 
@@ -533,7 +570,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 
 	state_ = gs_ending;
 
-	g_sound_handler.change_music("menu", 1000, 0);
+	g_sh->change_music("menu", 1000);
 
 	cleanup_objects();
 	set_ibase(nullptr);
@@ -598,6 +635,52 @@ StreamWrite& Game::syncstream() {
 }
 
 /**
+ * Switches to the next part of the syncstream excerpt.
+ */
+void Game::report_sync_request() {
+	syncwrapper_.current_excerpt_id_ =
+	   (syncwrapper_.current_excerpt_id_ + 1) % SyncWrapper::kExcerptSize;
+	syncwrapper_.excerpts_buffer_[syncwrapper_.current_excerpt_id_].clear();
+}
+
+/**
+ * Triggers writing of syncstream excerpt and adds the playernumber of the desynced player
+ * to the stream.
+ * Playernumber should be negative when called by network clients
+ */
+void Game::report_desync(int32_t playernumber) {
+	if (syncwrapper_.dumpfname_.empty()) {
+		log("Error: A desync occurred but no filename for the syncstream has been set.");
+		return;
+	}
+	// Replace .wss extension of syncstream file with .wse extension for syncstream extract
+	std::string filename = syncwrapper_.dumpfname_;
+	assert(syncwrapper_.dumpfname_.length() > kSyncstreamExtension.length());
+	filename.replace(filename.length() - kSyncstreamExtension.length(),
+	                 kSyncstreamExtension.length(), kSyncstreamExcerptExtension);
+	std::unique_ptr<StreamWrite> file(g_fs->open_stream_write(filename));
+	assert(file != nullptr);
+	// Write revision, branch and build type of this build to the file
+	file->unsigned_32(build_id().length());
+	file->text(build_id());
+	file->unsigned_32(build_type().length());
+	file->text(build_type());
+	file->signed_32(playernumber);
+	// Write our buffers to the file. Start with the oldest one
+	const size_t i2 = (syncwrapper_.current_excerpt_id_ + 1) % SyncWrapper::kExcerptSize;
+	size_t i = i2;
+	do {
+		file->text(syncwrapper_.excerpts_buffer_[i]);
+		syncwrapper_.excerpts_buffer_[i].clear();
+		i = (i + 1) % SyncWrapper::kExcerptSize;
+	} while (i != i2);
+	file->unsigned_8(SyncEntry::kDesync);
+	file->signed_32(playernumber);
+	// Restart buffers
+	syncwrapper_.current_excerpt_id_ = 0;
+}
+
+/**
  * Calculate the current synchronization checksum and copy
  * it into the given array, without affecting the subsequent
  * checksumming process.
@@ -619,6 +702,7 @@ Md5Checksum Game::get_sync_hash() const {
  */
 uint32_t Game::logic_rand() {
 	uint32_t const result = rng().rand();
+	syncstream().unsigned_8(SyncEntry::kRandom);
 	syncstream().unsigned_32(result);
 	return result;
 }
@@ -628,7 +712,7 @@ uint32_t Game::logic_rand() {
  * It takes the appropriate action, i.e. either add to the cmd_queue or send
  * across the network.
  */
-void Game::send_player_command(PlayerCommand& pc) {
+void Game::send_player_command(PlayerCommand* pc) {
 	ctrl_->send_player_command(pc);
 }
 
@@ -651,120 +735,122 @@ void Game::enqueue_command(Command* const cmd) {
 
 // we might want to make these inlines:
 void Game::send_player_bulldoze(PlayerImmovable& pi, bool const recurse) {
-	send_player_command(*new CmdBulldoze(get_gametime(), pi.owner().player_number(), pi, recurse));
+	send_player_command(new CmdBulldoze(get_gametime(), pi.owner().player_number(), pi, recurse));
 }
 
 void Game::send_player_dismantle(PlayerImmovable& pi) {
-	send_player_command(*new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi));
+	send_player_command(new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi));
 }
 
 void Game::send_player_build(int32_t const pid, const Coords& coords, DescriptionIndex const id) {
 	assert(tribes().building_exists(id));
-	send_player_command(*new CmdBuild(get_gametime(), pid, coords, id));
+	send_player_command(new CmdBuild(get_gametime(), pid, coords, id));
 }
 
 void Game::send_player_build_flag(int32_t const pid, const Coords& coords) {
-	send_player_command(*new CmdBuildFlag(get_gametime(), pid, coords));
+	send_player_command(new CmdBuildFlag(get_gametime(), pid, coords));
 }
 
 void Game::send_player_build_road(int32_t pid, Path& path) {
-	send_player_command(*new CmdBuildRoad(get_gametime(), pid, path));
+	send_player_command(new CmdBuildRoad(get_gametime(), pid, path));
 }
 
 void Game::send_player_flagaction(Flag& flag) {
-	send_player_command(*new CmdFlagAction(get_gametime(), flag.owner().player_number(), flag));
+	send_player_command(new CmdFlagAction(get_gametime(), flag.owner().player_number(), flag));
 }
 
 void Game::send_player_start_stop_building(Building& building) {
 	send_player_command(
-	   *new CmdStartStopBuilding(get_gametime(), building.owner().player_number(), building));
+	   new CmdStartStopBuilding(get_gametime(), building.owner().player_number(), building));
 }
 
 void Game::send_player_militarysite_set_soldier_preference(Building& building,
                                                            SoldierPreference my_preference) {
-	send_player_command(*new CmdMilitarySiteSetSoldierPreference(
+	send_player_command(new CmdMilitarySiteSetSoldierPreference(
 	   get_gametime(), building.owner().player_number(), building, my_preference));
 }
 
 void Game::send_player_start_or_cancel_expedition(Building& building) {
 	send_player_command(
-	   *new CmdStartOrCancelExpedition(get_gametime(), building.owner().player_number(), building));
+	   new CmdStartOrCancelExpedition(get_gametime(), building.owner().player_number(), building));
 }
 
 void Game::send_player_enhance_building(Building& building, DescriptionIndex const id) {
-	assert(building.owner().tribe().has_building(id));
-
+	assert(building.descr().type() == MapObjectType::CONSTRUCTIONSITE ||
+	       building.owner().tribe().has_building(id));
 	send_player_command(
-	   *new CmdEnhanceBuilding(get_gametime(), building.owner().player_number(), building, id));
+	   new CmdEnhanceBuilding(get_gametime(), building.owner().player_number(), building, id));
 }
 
 void Game::send_player_evict_worker(Worker& worker) {
-	send_player_command(*new CmdEvictWorker(get_gametime(), worker.owner().player_number(), worker));
+	send_player_command(new CmdEvictWorker(get_gametime(), worker.owner().player_number(), worker));
 }
 
 void Game::send_player_set_ware_priority(PlayerImmovable& imm,
                                          int32_t const type,
                                          DescriptionIndex const index,
-                                         int32_t const prio) {
-	send_player_command(
-	   *new CmdSetWarePriority(get_gametime(), imm.owner().player_number(), imm, type, index, prio));
+                                         int32_t const prio,
+                                         bool cs) {
+	send_player_command(new CmdSetWarePriority(
+	   get_gametime(), imm.owner().player_number(), imm, type, index, prio, cs));
 }
 
 void Game::send_player_set_input_max_fill(PlayerImmovable& imm,
                                           DescriptionIndex const index,
                                           WareWorker type,
-                                          uint32_t const max_fill) {
-	send_player_command(*new CmdSetInputMaxFill(
-	   get_gametime(), imm.owner().player_number(), imm, index, type, max_fill));
+                                          uint32_t const max_fill,
+                                          bool cs) {
+	send_player_command(new CmdSetInputMaxFill(
+	   get_gametime(), imm.owner().player_number(), imm, index, type, max_fill, cs));
 }
 
 void Game::send_player_change_training_options(TrainingSite& ts,
                                                TrainingAttribute attr,
                                                int32_t const val) {
 	send_player_command(
-	   *new CmdChangeTrainingOptions(get_gametime(), ts.owner().player_number(), ts, attr, val));
+	   new CmdChangeTrainingOptions(get_gametime(), ts.owner().player_number(), ts, attr, val));
 }
 
 void Game::send_player_drop_soldier(Building& b, int32_t const ser) {
 	assert(ser != -1);
-	send_player_command(*new CmdDropSoldier(get_gametime(), b.owner().player_number(), b, ser));
+	send_player_command(new CmdDropSoldier(get_gametime(), b.owner().player_number(), b, ser));
 }
 
 void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 	send_player_command(
-	   *new CmdChangeSoldierCapacity(get_gametime(), b.owner().player_number(), b, val));
+	   new CmdChangeSoldierCapacity(get_gametime(), b.owner().player_number(), b, val));
 }
 
 void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
-                                       uint32_t const num_soldiers) {
+                                       const std::vector<Serial>& soldiers) {
 	if (1 < player(who_attacks)
 	           .vision(Map::get_index(flag.get_building()->get_position(), map().get_width())))
-		send_player_command(*new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, num_soldiers));
+		send_player_command(new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
 }
 
 void Game::send_player_ship_scouting_direction(Ship& ship, WalkingDir direction) {
-	send_player_command(*new CmdShipScoutDirection(
+	send_player_command(new CmdShipScoutDirection(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
 void Game::send_player_ship_construct_port(Ship& ship, Coords coords) {
-	send_player_command(*new CmdShipConstructPort(
+	send_player_command(new CmdShipConstructPort(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
 }
 
 void Game::send_player_ship_explore_island(Ship& ship, IslandExploreDirection direction) {
-	send_player_command(*new CmdShipExploreIsland(
+	send_player_command(new CmdShipExploreIsland(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
 void Game::send_player_sink_ship(Ship& ship) {
 	send_player_command(
-	   *new CmdShipSink(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
+	   new CmdShipSink(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
 void Game::send_player_cancel_expedition_ship(Ship& ship) {
-	send_player_command(*new CmdShipCancelExpedition(
+	send_player_command(new CmdShipCancelExpedition(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
@@ -772,7 +858,15 @@ void Game::send_player_propose_trade(const Trade& trade) {
 	auto* object = objects().get_object(trade.initiator);
 	assert(object != nullptr);
 	send_player_command(
-	   *new CmdProposeTrade(get_gametime(), object->get_owner()->player_number(), trade));
+	   new CmdProposeTrade(get_gametime(), object->get_owner()->player_number(), trade));
+}
+
+void Game::send_player_set_stock_policy(Building& imm,
+                                        WareWorker ww,
+                                        DescriptionIndex di,
+                                        StockPolicy sp) {
+	send_player_command(new CmdSetStockPolicy(
+	   get_gametime(), imm.get_owner()->player_number(), imm, ww == wwWORKER, di, sp));
 }
 
 int Game::propose_trade(const Trade& trade) {
@@ -849,6 +943,13 @@ void Game::cancel_trade(int trade_id) {
 
 LuaGameInterface& Game::lua() {
 	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
+}
+
+const std::string& Game::get_win_condition_displayname() const {
+	return win_condition_displayname_;
+}
+void Game::set_win_condition_displayname(const std::string& name) {
+	win_condition_displayname_ = name;
 }
 
 /**
@@ -1064,8 +1165,4 @@ void Game::write_statistics(FileWrite& fw) {
 		fw.unsigned_32(general_stats_[p - 1].custom_statistic[j]);
 	}
 }
-
-double logic_rand_as_double(Game* game) {
-	return static_cast<double>(game->logic_rand()) / std::numeric_limits<uint32_t>::max();
-}
-}
+}  // namespace Widelands

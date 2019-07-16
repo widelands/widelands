@@ -13,12 +13,12 @@ tribes:new_productionsite_type {
       brick = 2,
       granite = 1,
       log = 1,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle_on_enhanced = {
       brick = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
@@ -51,6 +51,11 @@ tribes:new_productionsite_type {
       frisians_miner_master = 1,
    },
 
+   indicate_workarea_overlaps = {
+      frisians_coalmine = false,
+      frisians_coalmine_deep = false,
+   },
+
    inputs = {
       { name = "meal", amount = 8 }
    },
@@ -63,21 +68,33 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
-            "sleep=40000",
             "return=skipped unless economy needs coal",
             "consume=meal",
-            "animate=working 9000",
+            "sleep=39900",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "return=no_stats"
+         }
+      },
+      mine_produce = {
+         descname = _"mining coal",
+         actions = {
+            "animate=working 8700",
             "mine=coal 3 100 10 5",
             "produce=coal",
-            "animate=working 9000",
-            "mine=coal 3 100 10 5",
-            "produce=coal",
-            "animate=working 9000",
-            "mine=coal 3 100 10 5",
-            "produce=coal",
-            "animate=working 9000",
-            "mine=coal 3 100 10 5",
-            "produce=coal"
+         }
+      },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=meal",
+            "produce=coal:7",
          }
       },
    },

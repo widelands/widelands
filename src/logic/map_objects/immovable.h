@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -104,6 +104,7 @@ struct BaseImmovable : public MapObject {
 	virtual void draw(uint32_t gametime,
 	                  TextToDraw draw_text,
 	                  const Vector2f& point_on_dst,
+	                  const Coords& coords,
 	                  float scale,
 	                  RenderTarget* dst) = 0;
 
@@ -229,6 +230,7 @@ public:
 	void draw(uint32_t gametime,
 	          TextToDraw draw_text,
 	          const Vector2f& point_on_dst,
+	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
 
@@ -315,6 +317,7 @@ private:
 	void draw_construction(uint32_t gametime,
 	                       TextToDraw draw_text,
 	                       const Vector2f& point_on_dst,
+	                       const Widelands::Coords& coords,
 	                       float scale,
 	                       RenderTarget* dst);
 };
@@ -356,7 +359,7 @@ struct PlayerImmovable : public BaseImmovable {
 		return workers_;
 	}
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	/**
 	 * These functions are called when a ware or worker arrives at
@@ -395,6 +398,6 @@ protected:
 public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_IMMOVABLE_H

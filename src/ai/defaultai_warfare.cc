@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2018 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -266,7 +266,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[3] = (is_warehouse) ? 2 : 0;
 				inputs[4] = (site->second.attack_soldiers_competency > 15) ? 2 : 0;
 				inputs[5] = (site->second.attack_soldiers_competency > 25) ? 4 : 0;
-				;
 				inputs[6] =
 				   (2 * site->second.defenders_strength > 3 * site->second.attack_soldiers_strength) ?
 				      2 :
@@ -482,7 +481,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 
 	// how many attack soldiers we can send?
-	int32_t attackers = player_->find_attack_soldiers(*flag);
+	std::vector<Soldier*> soldiers;
+	int32_t attackers = player_->find_attack_soldiers(*flag, &soldiers);
 	assert(attackers < 500);
 
 	if (attackers > 5) {
@@ -500,7 +500,12 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	    player_number(), flag->get_position().x, flag->get_position().y, best_score, attackers,
 	    enemy_sites[best_target].attack_counter + 1,
 	    (gametime - enemy_sites[best_target].last_time_attacked) / 1000);
-	game().send_player_enemyflagaction(*flag, player_number(), static_cast<uint16_t>(attackers));
+	std::vector<Serial> attacking_soldiers;
+	for (int a = 0; a < attackers; ++a) {
+		// TODO(Nordfriese): We could now choose the soldiers we want to send
+		attacking_soldiers.push_back(soldiers[a]->serial());
+	}
+	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers);
 	assert(1 <
 	       player_->vision(Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;

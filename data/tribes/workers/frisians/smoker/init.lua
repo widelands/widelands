@@ -6,8 +6,8 @@ animations = {
       hotspot = {8, 23},
    }
 }
-add_walking_animations (animations, "walk", dirname, "walk", {10, 23}, 15)
-add_walking_animations (animations, "walkload", dirname, "walk", {10, 26}, 15)
+add_directional_animation(animations, "walk", dirname, "walk", {10, 23}, 15)
+add_directional_animation(animations, "walkload", dirname, "walk", {10, 26}, 15)
 
 tribes:new_worker_type {
    msgctxt = "frisians_worker",
@@ -23,5 +23,6 @@ tribes:new_worker_type {
       kitchen_tools = 1
    },
 
+   ware_hotspot = {0, 20},
    animations = animations,
 }

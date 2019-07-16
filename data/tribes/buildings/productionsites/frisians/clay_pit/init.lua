@@ -12,7 +12,7 @@ tribes:new_productionsite_type {
    buildcost = {
       brick = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       brick = 1
@@ -33,6 +33,15 @@ tribes:new_productionsite_type {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
          hotspot = {49, 63},
       },
+   },
+
+   indicate_workarea_overlaps = {
+      frisians_aqua_farm = true,
+      frisians_clay_pit = false,
+      frisians_berry_farm = false,
+      frisians_reed_farm = false,
+      frisians_farm = false,
+      frisians_foresters_house = false,
    },
 
    aihints = {
@@ -58,12 +67,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making clay because ...
          descname = _"making clay",
          actions = {
-            "sleep=20000",
-            "return=skipped unless economy needs clay or site has water",
+
+            "return=skipped unless economy needs clay or economy needs fish", -- Fish-producing aqua farms can stop working if the clay pits do so
             "return=failed unless site has water",
             "callworker=dig",
             "consume=water",
-            "sleep=2000",
+            "sleep=22000",
             "animate=working 17000",
             "sleep=1000",
             "produce=clay"

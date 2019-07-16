@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2018 by the Widelands Development Team
+ * Copyright (C) 2015-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,6 +67,14 @@ bool SinglePlayerGameSettingsProvider::can_launch() {
 
 std::string SinglePlayerGameSettingsProvider::get_map() {
 	return s.mapfilename;
+}
+
+bool SinglePlayerGameSettingsProvider::is_peaceful_mode() {
+	return s.peaceful;
+}
+
+void SinglePlayerGameSettingsProvider::set_peaceful_mode(bool peace) {
+	s.peaceful = peace;
 }
 
 void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,

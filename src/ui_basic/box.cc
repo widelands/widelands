@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2018 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@
 namespace UI {
 /**
  * Initialize an empty box
-*/
+ */
 Box::Box(Panel* const parent,
          int32_t const x,
          int32_t const y,
@@ -296,7 +296,7 @@ void Box::add(Panel* const panel, Resizing resizing, UI::Align const align) {
 
 /**
  * Add spacing of empty pixels.
-*/
+ */
 void Box::add_space(uint32_t space) {
 	Item it;
 
@@ -312,7 +312,7 @@ void Box::add_space(uint32_t space) {
 
 /**
  * Add some infinite space (to align some buttons to the right)
-*/
+ */
 void Box::add_inf_space() {
 	Item it;
 
@@ -330,7 +330,7 @@ void Box::add_inf_space() {
  * Retrieve the given item's desired size. depth is the size of the
  * item along the orientation axis, breadth is the size perpendicular
  * to the orientation axis.
-*/
+ */
 void Box::get_item_desired_size(uint32_t const idx, int* depth, int* breadth) {
 	assert(idx < items_.size());
 
@@ -385,7 +385,7 @@ void Box::set_item_size(uint32_t idx, int depth, int breadth) {
  * Position the given item according to its parameters.
  * pos is the position relative to the parent in the direction of the
  * orientation axis.
-*/
+ */
 void Box::set_item_pos(uint32_t idx, int32_t pos) {
 	assert(idx < items_.size());
 
@@ -423,6 +423,6 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 
 	case Item::ItemSpace:
 		break;  //  no need to do anything
-	};
+	}
 }
-}
+}  // namespace UI

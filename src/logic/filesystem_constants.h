@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,21 +34,35 @@ constexpr double kAIFilesKeepAroundTime = 7 * 24 * 60 * 60;
 
 /// Filesystem names for maps
 const std::string kMapsDir = "maps";
+const std::string kCampaignsDir = "campaigns";
 const std::string kWidelandsMapExtension = ".wmf";
 const std::string kS2MapExtension1 = ".swd";
 const std::string kS2MapExtension2 = ".wld";
+
+/// Filesystem names for temp files holding static data that needs to be accessible via filesystem
+/// Kept in a separate dir to avoid filesystem conflicts
+const std::string kTempFileDir = "temp";
+const std::string kTempFileExtension = ".tmp";
+// We delete (accidentally remaining) temp files older than a week
+constexpr double kTempFilesKeepAroundTime = 7 * 24 * 60 * 60;
+
+/// Filesystem names for for temporary backup when overwriting files during saving
+const std::string kTempBackupExtension = ".tmp";
+// We delete (accidentally remaining) temp backup files older than a day
+constexpr double kTempBackupsKeepAroundTime = 24 * 60 * 60;
 
 /// Filesystem names and timeouts for replays
 const std::string kReplayDir = "replays";
 const std::string kReplayExtension = ".wrpl";
 const std::string kSyncstreamExtension = ".wss";
+const std::string kSyncstreamExcerptExtension = ".wse";
 // The time in seconds for how long old replays/syncstreams should be kept
 // around, in seconds. Right now this is 4 weeks.
 constexpr double kReplayKeepAroundTime = 4 * 7 * 24 * 60 * 60;
 
 /// Filesystem names and intervals for savegames
 const std::string kSaveDir = "save";
-const std::string kCampVisFile = "save/campvis";
+const std::string kCampVisFile = "save/campaigns.conf";
 const std::string kSavegameExtension = ".wgf";
 const std::string kAutosavePrefix = "wl_autosave";
 // Default autosave interval in minutes
@@ -63,5 +77,7 @@ const std::string kScreenshotsDir = "screenshots";
 
 /// Filesystem names for config
 const std::string kConfigFile = "config";
+
+const std::string kEconomyProfilesDir = "tribes/economy_profiles";
 
 #endif  // end of include guard: WL_LOGIC_FILESYSTEM_CONSTANTS_H

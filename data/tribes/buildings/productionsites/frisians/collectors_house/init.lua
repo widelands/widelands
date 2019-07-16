@@ -12,7 +12,7 @@ tribes:new_productionsite_type {
    buildcost = {
       brick = 1,
       log = 2,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       brick = 1,
@@ -29,6 +29,11 @@ tribes:new_productionsite_type {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
          hotspot = {49, 67},
       },
+   },
+
+   indicate_workarea_overlaps = {
+      frisians_berry_farm = true,
+      frisians_collectors_house = false,
    },
 
    aihints = {

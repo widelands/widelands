@@ -41,7 +41,7 @@ class NonPackedAnimation : public Animation {
 public:
 	~NonPackedAnimation() override {
 	}
-	explicit NonPackedAnimation(const LuaTable& table);
+	explicit NonPackedAnimation(const LuaTable& table, const std::string& basename);
 
 	// Implements Animation.
 	float height() const override;
@@ -52,35 +52,55 @@ public:
 	                            float scale) const override;
 
 	const Image* representative_image(const RGBColor* clr) const override;
-	const std::string& representative_image_filename() const override;
 	virtual void blit(uint32_t time,
+	                  const Widelands::Coords& coords,
 	                  const Rectf& source_rect,
 	                  const Rectf& destination_rect,
 	                  const RGBColor* clr,
-	                  Surface* target, float scale) const override;
+	                  Surface* target,
+	                  float scale) const override;
 
 	std::vector<const Image*> images(float scale) const override;
 	std::vector<const Image*> pc_masks(float scale) const override;
 	std::set<float> available_scales() const override;
+	void load_default_scale_and_sounds() const override;
 
 private:
 	float find_best_scale(float scale) const;
-
-	// Loads the graphics if they are not yet loaded.
-	void ensure_graphics_are_loaded() const;
 
 	// Load the needed graphics from disk.
 	void load_graphics();
 
 	struct MipMapEntry {
-		explicit MipMapEntry(float scale, const LuaTable& table);
+		explicit MipMapEntry(std::vector<std::string> files);
 
-		bool hasplrclrs;
+		// Loads the graphics if they are not yet loaded.
+		void ensure_graphics_are_loaded() const;
+
+		// Load the needed graphics from disk.
+		void load_graphics();
+
+		void blit(uint32_t idx,
+		          const Rectf& source_rect,
+		          const Rectf& destination_rect,
+		          const RGBColor* clr,
+		          Surface* target) const;
+
+		// Whether this image set has player color masks provided
+		bool has_playercolor_masks;
+
+		// Image files on disk
 		std::vector<std::string> image_files;
-		std::vector<std::string> pc_mask_image_files;
 
+		// Loaded images for each frame
 		std::vector<const Image*> frames;
-		std::vector<const Image*> pcmasks;
+
+		// Loaded player color mask images for each frame
+		std::vector<const Image*> playercolor_mask_frames;
+
+	private:
+		// Player color mask files on disk
+		std::vector<std::string> playercolor_mask_image_files;
 	};
 
 	struct MipMapCompare {
@@ -90,5 +110,4 @@ private:
 	std::map<float, std::unique_ptr<MipMapEntry>, MipMapCompare> mipmaps_;
 
 };
-
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_NONPACKED_ANIMATION_H

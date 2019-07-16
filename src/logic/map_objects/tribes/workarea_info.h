@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2018 by the Widelands Development Team
+ * Copyright (C) 2005-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,5 +43,43 @@
 // document (as const) the expected stings.
 
 using WorkareaInfo = std::map<uint32_t, std::set<std::string>>;
+
+// Visualization-related structs
+struct WorkareaPreviewData {
+	WorkareaPreviewData(Widelands::TCoords<> c, uint8_t i)
+	   : coords(c), index(i), use_special_coloring(false), special_coloring(0) {
+	}
+	WorkareaPreviewData(Widelands::TCoords<> c, uint8_t i, uint32_t col)
+	   : coords(c), index(i), use_special_coloring(true), special_coloring(col) {
+	}
+	WorkareaPreviewData()
+	   : coords(Widelands::TCoords<>(Widelands::Coords::null(), Widelands::TriangleIndex::D)),
+	     index(0),
+	     use_special_coloring(false),
+	     special_coloring(0) {
+	}
+	WorkareaPreviewData(const WorkareaPreviewData& other) = default;
+	WorkareaPreviewData& operator=(const WorkareaPreviewData&) = default;
+
+	bool operator==(const WorkareaPreviewData& d) const {
+		return index == d.index && coords == d.coords &&
+		       use_special_coloring == d.use_special_coloring &&
+		       (!use_special_coloring || special_coloring == d.special_coloring);
+	}
+
+	// The triangle this data is applied to
+	Widelands::TCoords<> coords;
+	// The underlying workarea color
+	uint8_t index;
+	// If a "special coloring" is specified, its RGB will be overlayed over the base color as
+	// strongly as if it had full alpha, and the final transparency of the entire triangle will be
+	// set to this color's alpha
+	bool use_special_coloring;
+	uint32_t special_coloring;
+};
+// Pair of interior information and a per-circle list of border coords
+using WorkareasEntry =
+   std::pair<std::vector<WorkareaPreviewData>, std::vector<std::vector<Widelands::Coords>>>;
+using Workareas = std::vector<WorkareasEntry>;
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKAREA_INFO_H

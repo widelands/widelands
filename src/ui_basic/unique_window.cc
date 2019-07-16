@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,20 +32,21 @@ UniqueWindow IMPLEMENTATION
 
 /**
  * Creates the window, if it does not exist.
-*/
+ */
 void UniqueWindow::Registry::create() {
 	if (!window) {
 		open_window();
 	} else {
-		if (window->is_minimal())
+		if (window->is_minimal()) {
 			window->restore();
+		}
 		window->move_to_top();
 	}
 }
 
 /**
- * Destroys the window, if it eixsts.
-*/
+ * Destroys the window, if it exists.
+ */
 void UniqueWindow::Registry::destroy() {
 	if (window) {
 		window->die();
@@ -54,10 +55,16 @@ void UniqueWindow::Registry::destroy() {
 
 /**
  * Either destroys or creates the window.
-*/
+ */
 void UniqueWindow::Registry::toggle() {
 	if (window) {
-		window->die();
+		// There is already a window. If it is minimal, restore it.
+		if (window->is_minimal()) {
+			window->restore();
+			opened();
+		} else {
+			window->die();
+		}
 	} else {
 		open_window();
 	}
@@ -66,14 +73,14 @@ void UniqueWindow::Registry::toggle() {
 /**
  * In order to avoid dangling pointers, we need to kill our contained window
  * here.
-*/
+ */
 UniqueWindow::Registry::~Registry() {
 	delete window;
 }
 
 /**
  * Register, position according to the registry information.
-*/
+ */
 UniqueWindow::UniqueWindow(Panel* const parent,
                            const std::string& name,
                            UniqueWindow::Registry* const reg,
@@ -95,7 +102,7 @@ UniqueWindow::UniqueWindow(Panel* const parent,
 
 /**
  * Unregister, save latest position.
-*/
+ */
 UniqueWindow::~UniqueWindow() {
 	if (registry_) {
 		assert(registry_->window == this);
@@ -108,4 +115,4 @@ UniqueWindow::~UniqueWindow() {
 		registry_->closed();
 	}
 }
-}
+}  // namespace UI

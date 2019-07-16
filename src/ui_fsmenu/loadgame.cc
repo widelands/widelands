@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,8 +37,11 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
      title_(&main_box_,
             0,
             0,
+            0,
+            0,
             is_replay ? _("Choose a replay") : _("Choose a saved game"),
-            UI::Align::kCenter),
+            UI::Align::kCenter,
+            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      load_or_save_(&info_box_,
                    g,
@@ -112,7 +115,7 @@ void FullscreenMenuLoadGame::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
 	main_box_.set_size(get_w() - 2 * tablex_, tabley_ + tableh_ + padding_);
 	main_box_.set_pos(Vector2i(tablex_, 0));
-	title_.set_fontsize(fs_big());
+	title_.set_font_scale(scale_factor());
 	load_or_save_.delete_button()->set_desired_size(butw_, buth_);
 	button_spacer_->set_desired_size(butw_, buth_ + 2 * padding_);
 	load_or_save_.table().set_desired_size(tablew_, tableh_);
@@ -158,7 +161,8 @@ void FullscreenMenuLoadGame::entry_selected() {
 }
 
 void FullscreenMenuLoadGame::fill_table() {
-	load_or_save_.fill_table(showing_filenames_);
+	load_or_save_.set_show_filenames(showing_filenames_);
+	load_or_save_.fill_table();
 }
 
 const std::string& FullscreenMenuLoadGame::filename() const {

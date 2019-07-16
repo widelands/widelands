@@ -83,7 +83,7 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	}
 
 	const Animation& animation =
-	   g_gr->animations().get_animation(descr->get_animation(animation_name));
+	   g_gr->animations().get_animation(descr->get_animation(animation_name, nullptr));
 
 	const int nr_frames = animation.nr_frames();
 

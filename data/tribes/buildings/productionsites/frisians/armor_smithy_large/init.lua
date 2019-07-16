@@ -13,7 +13,7 @@ tribes:new_productionsite_type {
       brick = 4,
       granite = 2,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle_on_enhanced = {
       brick = 2,
@@ -67,20 +67,20 @@ tribes:new_productionsite_type {
             "call=produce_hg",
             "call=produce_s3",
             "call=produce_s4",
-            "return=skipped",
+            "return=no_stats",
          },
       },
       produce_s3 = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a broadsword because ...
          descname = _"forging a broadsword",
          actions = {
-            -- time total: 82
+            -- time total: 57 + 3.6
             "return=skipped unless economy needs sword_broad",
-            "sleep=39000",
             "consume=coal iron:2 gold",
-            "playsound=sound/smiths smith 192",
-            "animate=working 34000",
-            "playsound=sound/smiths sharpening 120",
+            "sleep=24000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 24000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=sword_broad"
          },
@@ -89,13 +89,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a double-edged sword because ...
          descname = _"forging a double-edged sword",
          actions = {
-            -- time total: 87
+            -- time total: 57 + 3.6
             "return=skipped unless economy needs sword_double",
             "consume=coal:2 iron:2 gold",
-            "sleep=41000",
-            "playsound=sound/smiths smith 192",
-            "animate=working 37000",
-            "playsound=sound/smiths sharpening 120",
+            "sleep=24000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 24000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=sword_double"
          },
@@ -104,11 +104,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a golden helmet because ...
          descname = _"forging a golden helmet",
          actions = {
-            -- time total: 115
+            -- time total: 67 + 3.6
             "return=skipped unless economy needs helmet_golden",
             "consume=coal:2 iron:2 gold",
-            "sleep=51000",
-            "animate=working 64000",
+            "sleep=30000",
+            "animate=working 37000",
             "produce=helmet_golden"
          },
       },

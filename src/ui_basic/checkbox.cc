@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,14 +30,14 @@ namespace {
 int text_width(int available_width, int pic_width) {
 	return available_width > (pic_width + kPadding) ? available_width - pic_width - kPadding : 0;
 }
-}
+}  // namespace
 
 namespace UI {
 /**
  * Stateboxes start out enabled and unchecked.
  * If pic is non-zero, the given picture is used instead of the normal
  * checkbox graphics.
-*/
+ */
 Statebox::Statebox(Panel* const parent,
                    Vector2i const p,
                    const Image* pic,
@@ -50,7 +50,6 @@ Statebox::Statebox(Panel* const parent,
 	uint16_t h = pic->height();
 	set_desired_size(w, h);
 	set_size(w, h);
-	set_can_focus(true);
 	set_flags(Has_Custom_Picture, true);
 }
 
@@ -79,9 +78,11 @@ void Statebox::layout() {
 			h = pic_graphics_->height();
 			pic_width = pic_graphics_->width();
 		}
-		rendered_text_ = label_text_.empty() ?
-		                    nullptr :
-		                    UI::g_fh->render(as_uifont(label_text_), text_width(get_w(), pic_width));
+		rendered_text_ =
+		   label_text_.empty() ?
+		      nullptr :
+		      UI::g_fh->render(as_richtext_paragraph(label_text_, UI::FontStyle::kLabel),
+		                       text_width(get_w(), pic_width));
 		if (rendered_text_.get()) {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
 			h = std::max(rendered_text_->height(), h);
@@ -98,7 +99,6 @@ void Statebox::layout() {
  * Args: enabled  true if the checkbox should be enabled, false otherwise
  */
 void Statebox::set_enabled(bool const enabled) {
-	set_can_focus(enabled);
 	if (((flags_ & Is_Enabled) > 1) && enabled)
 		return;
 
@@ -126,7 +126,7 @@ void Statebox::set_state(bool const on) {
 
 /**
  * Redraw the entire checkbox
-*/
+ */
 void Statebox::draw(RenderTarget& dst) {
 	if (flags_ & Has_Custom_Picture) {
 		// center picture
@@ -155,9 +155,9 @@ void Statebox::draw(RenderTarget& dst) {
 			rendered_text_->draw(dst, text_anchor);
 		}
 
-		dst.blitrect(
-		   image_anchor, pic_graphics_, Recti(Vector2i((flags_ & Is_Checked) ? kStateboxSize : 0, 0),
-		                                      kStateboxSize, kStateboxSize));
+		dst.blitrect(image_anchor, pic_graphics_,
+		             Recti(Vector2i((flags_ & Is_Checked) ? kStateboxSize : 0, 0), kStateboxSize,
+		                   kStateboxSize));
 
 		if (flags_ & Is_Highlighted)
 			dst.draw_rect(
@@ -177,8 +177,7 @@ void Statebox::handle_mousein(bool const inside) {
  */
 bool Statebox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && (flags_ & Is_Enabled)) {
-		focus();
-		clicked();
+		button_clicked();
 		return true;
 	}
 	return false;
@@ -191,9 +190,9 @@ bool Statebox::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_
 /**
  * Toggle the checkbox state
  */
-void Checkbox::clicked() {
+void Checkbox::button_clicked() {
 	clickedto(!get_state());
 	set_state(!get_state());
 	play_click();
 }
-}
+}  // namespace UI

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,10 +30,9 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
-#include "logic/findbob.h"
 #include "logic/game.h"
+#include "logic/map_objects/findbob.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -127,7 +126,8 @@ int MilitarySite::SoldierControl::incorporate_soldier(EditorGameBase& egbase, So
 	if (!military_site_->didconquer_) {
 		military_site_->conquer_area(egbase);
 		// Building is now occupied - idle animation should be played
-		military_site_->start_animation(egbase, military_site_->descr().get_animation("idle"));
+		military_site_->start_animation(
+		   egbase, military_site_->descr().get_animation("idle", military_site_));
 
 		if (upcast(Game, game, &egbase)) {
 			military_site_->send_message(
@@ -290,13 +290,13 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 }
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/militarysites/atlanteans/castle/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/militarysites/atlanteans/castle/init.lua
+ */
 MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
-                                     const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, egbase),
+                                     const Tribes& tribes)
+   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, tribes),
      conquer_radius_(0),
      num_soldiers_(0),
      heal_per_second_(0) {
@@ -307,7 +307,7 @@ MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
 	heal_per_second_ = table.get_int("heal_per_second");
 
 	if (conquer_radius_ > 0)
-		workarea_info_[conquer_radius_].insert(descname() + " conquer");
+		workarea_info_[conquer_radius_].insert(name() + " conquer");
 	prefers_heroes_at_start_ = table.get_bool("prefer_heroes");
 
 	std::unique_ptr<LuaTable> items_table = table.get_table("messages");
@@ -374,6 +374,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			      stationed % (capacity_ - stationed))
 			        .str();
 		} else {
+			/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
 			*s = (boost::format(ngettext("%u soldier", "%u soldiers", stationed)) % stationed).str();
 		}
 	} else {
@@ -394,10 +395,9 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			        .str();
 		}
 	}
-	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_OK.hex_value() %
-	      // Line break to make Codecheck happy.
-	      *s)
-	        .str();
+	*s = g_gr->styles().color_tag(
+	   // Line break to make Codecheck happy.
+	   *s, g_gr->styles().building_statistics_style().medium_color());
 }
 
 bool MilitarySite::init(EditorGameBase& egbase) {
@@ -830,7 +830,7 @@ void MilitarySite::reinit_after_conqueration(Game& game) {
 	clear_requirements();
 	conquer_area(game);
 	update_soldier_request();
-	start_animation(game, descr().get_animation("idle"));
+	start_animation(game, descr().get_animation("idle", this));
 
 	// feature request 1247384 in launchpad bugs: Conquered buildings tend to
 	// be in a hostile area; typically players want heroes there.
@@ -883,10 +883,19 @@ void MilitarySite::clear_requirements() {
 }
 
 void MilitarySite::send_attacker(Soldier& soldier, Building& target) {
-	assert(is_present(soldier));
-
-	if (has_soldier_job(soldier))
+	if (!is_present(soldier)) {
+		// The soldier may not be present anymore due to having been kicked out. Most of the time
+		// the function calling us will notice this, but there are cornercase where it might not,
+		// e.g. when a soldier was ordered to leave but did not physically quit the building yet.
+		log("MilitarySite(%3dx%3d)::send_attacker: Not sending soldier %u because he left the "
+		    "building\n",
+		    get_position().x, get_position().y, soldier.serial());
 		return;
+	}
+
+	if (has_soldier_job(soldier)) {
+		return;
+	}
 
 	SoldierJob sj;
 	sj.soldier = &soldier;
@@ -973,10 +982,18 @@ bool MilitarySite::update_upgrade_requirements() {
 	return false;
 }
 
+const BuildingSettings* MilitarySite::create_building_settings() const {
+	MilitarysiteSettings* settings = new MilitarysiteSettings(descr());
+	settings->desired_capacity =
+	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
+	settings->prefer_heroes = soldier_preference_ == SoldierPreference::kHeroes;
+	return settings;
+}
+
 // setters
 
 void MilitarySite::set_soldier_preference(SoldierPreference p) {
 	soldier_preference_ = p;
 	next_swap_soldiers_time_ = 0;
 }
-}
+}  // namespace Widelands

@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # ks k, 2018
 # ks k, 2018
+# TaeMin An, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-08-19 11:47+0000\n"
-"PO-Revision-Date: 2018-08-22 02:37+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2019-05-30 18:50+0000\n"
+"PO-Revision-Date: 2019-05-30 18:52+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,17 +22,17 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:22
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:24
 msgid "Build two ranger’s huts"
-msgstr "숲 지킴이의 오두막 두곳 짓기"
+msgstr "숲 지킴이의 오두막 2곳 짓기"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:25
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr "나무꾼의 오두막 옆에 각각 숲 지키미의 오두막을 지으십시오."
+msgstr "나무꾼의 오두막 옆에 각각 숲 지킴이의 오두막을 지으십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:26
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr "당연히 나무는 느린 속도로 자랍니다. 통나무가 충분하게 확보하려면 숲 지킴이를 만들어야합니다."
+msgstr "당연히 나무는 느린 속도로 자랍니다. 통나무가 충분하게 확보되려면 숲 지킴이가 필요합니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:32
 msgid "Expand north-east and build a quarry"
@@ -158,7 +159,7 @@ msgid ""
 "farms. The wheat of the farms has to be processed with water in a bakery "
 "before it becomes edible. You can obtain water by building a well on a spot "
 "where your geologists have found a water source."
-msgstr "다른 종류의 음식을 생산하는 다른 방법은 어부와 농장입니다. 농장의 밀은 먹을 수 있게 되기 전에 빵집에서 물로 가공되어야 합니다. 지질학자들이 수원을 발견한 지점에 우물을 건설하면 물을 얻을 수 있습니다."
+msgstr "다른 종류의 음식을 생산하는 다른 방법은 어부와 농장입니다. 농장의 밀은 먹을 수 있게 되기 전에 제과점에서 물로 가공되어야 합니다. 지질학자들이 수원을 발견한 지점에 우물을 건설하면 물을 얻을 수 있습니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Refine your mined resources"
@@ -176,11 +177,11 @@ msgstr "광부가 파낸 철광석은 아직 쓸모가 없습니다. 먼저 철�
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:86
 msgid "Enhance buildings and build a micro brewery"
-msgstr "건물을 보강하고 소형양조장을 건설하십시오."
+msgstr "건물을 보강하고 소형 양조장을 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:88
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr "광산과 선술집을 보강하고 소형양조장을 건설하십시오."
+msgstr "광산과 선술집을 보강하고 소형 양조장을 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:89
 msgid ""
@@ -190,7 +191,7 @@ msgstr "탄광이나 철광석을 깊은 광산으로 보강하고 주점을 여
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Also build a micro brewery."
-msgstr "소형양조장도 건설하십시오."
+msgstr "소형 양조장도 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:91
 msgid ""
@@ -214,7 +215,7 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr "그런 건물은 보통 그 건물의 기본적인 종류보다 더 큰 요구가 있습니다. 이를테면, 깊은 광산은 식량 대신 간식이 필요합니다. 피타빵과 두 번째 종류의 음식 (고기 또는 생선) 과 맥주에서 간식을 생산하기 위해서는 선술집을 여관으로 향상시켜야합니다."
+msgstr "그런 건물은 보통 그 건물의 기본적인 종류보다 더 큰 요구가 있습니다. 이를테면, 깊은 광산은 식량 대신 간식이 필요합니다. 피타 빵과 두 번째 종류의 음식 (고기 또는 생선) 과 맥주에서 간식을 생산하기 위해서는 선술집을 여관으로 향상시켜야합니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:94
 msgid ""
@@ -236,7 +237,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "모든 군대를 포함하여 더 크고 우수한 건물은 더 나은 건축 자재를 필요로 합니다. 그것들은 단순한 통나무만으로는 만들 수 없습니다 통나무는 목재 경화제에 의해 먼저 검은 나무로 정제되어야합니다. 블랙우드가 바닥 나기 전에 목재 경화제를 만드는 것을 잊지 마십시오. 그렇지 않으면 영토확장을 할 수 없습니다."
+msgstr "모든 군대를 포함하여 더 크고 우수한 건물은 더 나은 건축 자재를 필요로 합니다. 그것들은 단순한 통나무만으로는 만들 수 없습니다 통나무는 목재 경화제에 의해 먼저 검은 나무로 정제되어야합니다. 검은나무가 바닥 나기 전에 목재 경화제를 만드는 것을 잊지 마십시오. 그렇지 않으면 영토확장을 할 수 없습니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:108
 msgid "Build a lime kiln and coal economy"
@@ -252,7 +253,7 @@ msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr "더 좋은 건물들은 블랙우드 외에 다른 개선된 재료들도 필요로 할 수 있습니다. 그것들 중 하나는 화강암, 물 그리고 석탄으로 만들어진 묶음입니다."
+msgstr "더 좋은 건물들은 검은나무 외에 다른 개선된 재료들도 필요로 할 수 있습니다. 그것들 중 하나는 화강암, 물 그리고 석탄으로 만들어진 묶음입니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
@@ -289,10 +290,10 @@ msgstr "갈대 농장 짓기"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
-"The third material necessary for improved buildings is thatch reed, used to "
-"cover roofs. Thatch reed is planted by a gardener around his building, the "
-"reed yard."
-msgstr "향상된 건물을 건설하는데 필요한 세번째 재료는 지붕을 덮는 데 사용되는 갈대 초가 지붕입니다. 갈대 초가 지붕은 그의 건물인 갈대밭 주변 정원사가 심습니다."
+"The third material necessary for improved buildings is reed, used to cover "
+"roofs. Reed fields are planted by a gardener around his building, the reed "
+"yard."
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
@@ -382,7 +383,7 @@ msgstr "쓰론은 전쟁을 고민하고 있다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:189
 msgid "Thron is shaking his head…"
-msgstr "쓰론이 머리를 가로로 저었다…"
+msgstr "쓰론은 머리를 가로로 저었다…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:191
@@ -399,7 +400,7 @@ msgid ""
 " Yet whenever I close my eyes, I see the fortress my father built consumed "
 "by flames. The Throne Among the Trees, the symbol of unity and peace among "
 "our kin, became the wedge that drives us apart."
-msgstr "그들이 우리 친척들의 행동에 대해 이야기하는 것은 듣기 슬픈 일입니다. 저는 잠에서 깨어 있고, 불안하며, 제가 생각했던 것보다 더 피곤한 채 밤을 보냈습니다. 하지만 나는 눈을 감을 때마다 아버지께서 건설하신 성이 화염에 휩싸인것을 봅니다. 우리의 동족 간의 화합과 평화의 상징인 나무들 사이의 왕좌는 우리를 갈라놓는 쐐기가 되었습니다."
+msgstr "그들이 우리 친척들의 행동에 대해 이야기하는 것은 듣기 슬픈 일이다. 나는 잠에서 깨어 있고, 불안하며, 제가 생각했던 것보다 더 피곤한 채 밤을 보냈다. 하지만 나는 눈을 감을 때마다 아버지께서 건설하신 성이 화염에 휩싸인것을 본다. 우리의 동족 간의 화합과 평화의 상징인 나무들 사이의 왕좌는 우리를 갈라놓는 쐐기가 되었다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:204
@@ -411,14 +412,14 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr "오늘 나의 사냥꾼들은 숲 속에 숨어서 있던 남자, 여자, 그리고 어린 아이들 무리를 내 앞에 데려왔습니다. 본능에 의해 지배되는 야생 동물에 불과했을 때, 예전처럼 서로 싸우는 부족들에 둘러쌓여 분노하는 전쟁, 증오, 복수에서 도망쳐 숲속에 숨어있던 무리였습니다. 내 형제들 중 누구도 나무 왕좌를 차지하지 못할 것이고, 어떤 부족도 다른 부족을 제압할 만큼 강하지 못할 것입니다.이 학살, 끝이 없을겁니다… 아버지가 제게 말씀하셨던 그때가 지금입니까?"
+msgstr "오늘 나의 사냥꾼들은 숲 속에 숨어서 있던 남자, 여자, 그리고 어린 아이들 무리를 내 앞에 데려왔다. 본능에 의해 지배되는 야생 동물에 불과했을 때, 예전처럼 서로 싸우는 부족들에 둘러쌓여 분노하는 전쟁, 증오, 복수에서 도망쳐 숲속에 숨어있던 무리였다. 내 형제들 중 누구도 나무 왕좌를 차지하지 못할 것이고, 어떤 부족도 다른 부족을 제압할 만큼 강하지 못할 것이다. 이 학살, 끝이 없을것이다… 아버지, 내게 말씀하셨던 그때가 지금인가요?"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:207
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
-msgstr "우리의 생명을 위협하는 자에게 대항하여 일어서는 것이 여러분의 피와 마음 가운데 하나일 수도 있습니다."
+msgstr "[번역확인]우리의 생명을 위협하는 자에게 대항하여 일어서는 것이 그대들의 피와 마음 가운데 하나일 수도 있다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:213
 msgid "Thron is Considering the Future"
@@ -432,7 +433,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr "볼드레쓰는 날이 갈수록 점점 찢어지고 있었다. 추운 계절이 다가오면서 동료들의 기세가 꺾이고, 우리는 여전히 오두막과 막사에서 살고있다. 이렇게 오랫동안 황무지에서 머물 생각은 없었다. – 그러나 나는 오랫동안 형제들이이 무의미한 전투에 이렇게 오랫동안이나 참전할것이라고는 생각하지 못했다."
+msgstr "볼드레쓰는 나날이 초췌해져가고있다. 추운 계절이 다가오면서 동료들의 기세가 꺾이고, 우리는 여전히 오두막과 막사에서 살고있다. 이렇게 오랫동안 황무지에서 머물 생각은 없었다. – 그러나 나는 오랫동안 형제들이이 무의미한 전투에 이렇게 오랫동안이나 참전할것이라고는 생각하지 못했다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:219
@@ -488,7 +489,7 @@ msgstr "칸트루크는 말했다…"
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
-msgstr "이미 채석장 한곳과 나무꾼의 오두막 2곳을 지어졌습니다. 우리가 여기에서 더 오랫동안 머물려 한다면 이는 좋은 선택이오."
+msgstr "이미 채석장 한곳과 나무꾼의 오두막 2곳을 지어졌소. 우리가 여기에서 더 오랫동안 머물려 한다면 이는 좋은 선택이오."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:242
@@ -837,7 +838,7 @@ msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as"
 " ours!"
-msgstr "방금 발견했는데, 우리는 흑목이 떨어져 갑니다. 전사들을 허물어질것 같은 오두막에 보낼수없소, 뭔가 손을 쓰지 않으면 우리 또한 위기에 빠질수 있소!(번역확인)"
+msgstr "방금 발견했는데, 우리는 검은나무가 얼마 남지 않았소. 전사들을 허물어질것 같은 오두막에 보낼수없소, 뭔가 손을 쓰지 않으면 우리 또한 위기에 빠질수 있소!(번역확인)"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:443
@@ -875,12 +876,12 @@ msgid ""
 "our roofs from becoming leaky! Maybe the young ones like spending their "
 "nights in the rain, but I just can’t find any sleep with these raindrops "
 "dripping on my face!"
-msgstr "족장, 이것은 이것은 불명예스러운 일이요! 우리가 강력한 방어시설과 거대한 건물을 지을때 필요한 회반죽을 생산할수 있는것은 잘한일이오.다만 그것만으로는 지붕이 새는것을 막지는 못하지요!젊은이들이야 밤새 비 맞는것을 좋아할수도 있겠지만, 그 비가 내얼굴에는 떨어진다면 나는 잠을 한 숨도 못 이룰겁니다!"
+msgstr "족장, 이것은 불명예스러운 일이요! 우리가 강력한 방어시설과 거대한 건물을 지을때 필요한 회반죽을 생산할수 있는것은 잘한일이오. 다만 그것만으로는 지붕이 새는것을 막지는 못하오! 젊은이들이야 밤새 비 맞는것을 좋아할수도 있겠지만, 그 비가 내 얼굴에는 떨어진다면 나는 잠을 한 숨도 못 잘겁니다!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:465
 msgid "Now this is a problem we should do something about!"
-msgstr "이제 이것은 우리가 해야 할 문제가 됐소!"
+msgstr "이제 이것을 해야 할 문제가 됐소!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:471
 msgid "Khantrukh seems relieved…"
@@ -1027,13 +1028,3 @@ msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
 msgstr "그러나 그들은 알'쑨란 주변의 전쟁때문에 지금 이 삶이 끝날까봐 두려워합니다. 따라서 우리는 서로를 도울 수 있기를 바라면서 그들은 우리와 함께하기로 결정했습니다."
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "새로운 목표"

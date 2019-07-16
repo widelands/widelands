@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,13 +21,14 @@
 #define WL_UI_FSMENU_MAIN_H
 
 #include "ui_basic/button.h"
+#include "ui_basic/icon.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/main_menu.h"
 
 /**
  * This runs the main menu. There, you can select
  * between different playmodes, exit and so on.
-*/
+ */
 class FullscreenMenuMain : public FullscreenMenuMainMenu {
 public:
 	FullscreenMenuMain();
@@ -38,6 +39,7 @@ protected:
 private:
 	void layout() override;
 
+	UI::Icon logo_icon_;
 	UI::Button playtutorial;
 	UI::Button singleplayer;
 	UI::Button multiplayer;

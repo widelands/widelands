@@ -132,10 +132,11 @@ end
 function ship_industry()
    local objective = add_campaign_objective(obj_build_port_and_shipyard)
 
-   -- Check for port built to realize we need gold
-   while not check_for_buildings(p1, {empire_port = 1}) do sleep(2434) end
+   -- Wait a minute to realize we need more gold to build expeditions
+   sleep(60000)
    campaign_message_box(amalea_6)
    p1:allow_buildings{
+      "empire_well",
       "empire_brewery",
       "empire_coalmine",
       "empire_coalmine_deep",
@@ -194,7 +195,6 @@ function wheat()
    -- We need to turn the wheat into cloth for building ships
    objective = add_campaign_objective(obj_produce_cloth)
    p1:allow_buildings{
-      "empire_well",
       "empire_sheepfarm",
       "empire_weaving_mill",
       "empire_charcoal_kiln",
@@ -265,7 +265,7 @@ function expedition()
    sleep(25000)
    campaign_message_box(diary_page_5)
 
-   p1:reveal_scenario("empiretut03")
+   p1:mark_scenario_as_solved("emp03.wmf")
 end
 
 -- After discovery of Barbarian ruins, we should hurry to build a full training capability
@@ -369,6 +369,7 @@ function mission_thread()
 
    local port = map:get_field(17, 17)
    while port.owner ~= p1 do sleep(3000) end
+   p1:conquer(port,4)
 
    sleep(3213)
    objective.done = true

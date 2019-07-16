@@ -5,7 +5,6 @@
 https://github.com/auriamg/macdylibbundler not doing the job right.
 
 Unfortunately the above tool is not maintained, so we roll our own.
-
 """
 
 import argparse
@@ -13,12 +12,18 @@ import os.path as p
 import os
 import shutil
 import subprocess
+import hashlib
+
+
+def hash_file(fn):
+    return hashlib.sha1(open(fn, 'rb').read()).hexdigest()
 
 
 def get_dependencies(loading_binary):
     out = subprocess.check_output(['/usr/bin/otool', '-L', loading_binary])
     interesting_lines = (l.strip()
                          for l in out.splitlines() if l.startswith('\t'))
+    binary_hash = hash_file(loading_binary)
     dependencies = []
     for line in interesting_lines:
         if '.framework' in line:  # We cannot handle frameworks
@@ -27,31 +32,23 @@ def get_dependencies(loading_binary):
             continue
         if '@executable_path' in line:
             continue
-        dependencies.append(line[:line.find('(')].strip())
+        dependency = line[:line.find('(')].strip()
+        dependencies.append(dependency)
     dep_dict = {}
     for dep in dependencies:
         file_name = dep.replace('@loader_path', p.dirname(loading_binary))
+        dependency_hash = hash_file(file_name)
+        if binary_hash == file_name:
+            # This is a dylib and the first line is not a dependency, but the
+            # ID of this dependency. We ignore it.
+            continue
         dep_dict[dep] = os.path.realpath(file_name)
     return dep_dict
 
 
-def fix_dependencies(top_level_binary):
-    top_level_binary = p.realpath(top_level_binary)
-    todo = {(top_level_binary, top_level_binary)}
-    done = set()
-    path = p.dirname(top_level_binary)
-    while todo:
-        (binary_in_path, binary_in_system) = todo.pop()
-        print('Fixing %s' % binary_in_path)
-        done.add(binary_in_path)
-        dependencies = get_dependencies(binary_in_system)
-        for (dep_name, dep_file) in dependencies.items():
-            in_directory = p.join(path, p.basename(dep_file))
-            todo.add((in_directory, dep_file))
-            shutil.copy(dep_file, in_directory)
-            os.chmod(in_directory, 0644)
-            subprocess.check_call(['/usr/bin/install_name_tool', '-change',
-                                   dep_name, '@executable_path/' + p.basename(dep_file), binary_in_path])
+def change_id(binary):
+    subprocess.check_call(['/usr/bin/install_name_tool', '-id',
+                           '@executable_path/' + p.basename(binary), binary])
 
 
 def parse_args():
@@ -75,7 +72,8 @@ def main():
         if b in done:
             continue
         done.add(b)
-        for (dep_name, dep_path) in get_dependencies(b).items():
+        dependencies = get_dependencies(b)
+        for (dep_name, dep_path) in dependencies.items():
             if dep_name in all_dependencies and all_dependencies[dep_name] != dep_path:
                 raise RuntimeError('{} was already seen with a different path: {} != {}' % (
                     dep_name, dep_path, all_dependencies[dep_name]))
@@ -92,9 +90,12 @@ def main():
 
     for binary in to_fix:
         print('Fixing binary: %s' % binary)
+        if binary.endswith('.dylib'):
+            change_id(binary)
         for (dep_name, dep_path) in all_dependencies.items():
             subprocess.check_call(['/usr/bin/install_name_tool', '-change',
                                    dep_name, '@executable_path/' + p.basename(dep_path), binary])
+
 
 if __name__ == '__main__':
     main()

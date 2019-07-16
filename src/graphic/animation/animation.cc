@@ -24,41 +24,37 @@
 
 #include "base/vector.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/game_data_error.h"
 #include "scripting/lua_table.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 
-namespace {
-
-// Parses an array { 12, 23 } into a point.
-void get_point(const LuaTable& table, Vector2i* p) {
-	std::vector<int> pts = table.array_entries<int>();
-	if (pts.size() != 2) {
-		throw wexception("Expected 2 entries, but got %" PRIuS ".", pts.size());
-	}
-	p->x = pts[0];
-	p->y = pts[1];
-}
-
-} // namespace
-
 const std::set<float> Animation::kSupportedScales { 0.5, 1, 2, 4};
 
 Animation::Animation(const LuaTable& table) :
-	hotspot_(Vector2i::zero()),
+	representative_frame_(table.has_key("representative_frame") ? table.get_int("representative_frame") : 0),
+	hotspot_(table.get_vector<std::string, int>("hotspot")),
 	frametime_(table.has_key("fps") ? (1000 / get_positive_int(table, "fps")) : kFrameLength),
-	play_once_(table.has_key("play_once") ? table.get_bool("play_once") : false) {
+	play_once_(table.has_key("play_once") ? table.get_bool("play_once") : false),
+	sound_effect_(kNoSoundEffect),
+	sound_priority_(kFxPriorityLowest) {
 	try {
 		// Sound
 		if (table.has_key("sound_effect")) {
 			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
+			sound_effect_ =
+			   SoundHandler::register_fx(SoundType::kAmbient, sound_effects->get_string("path"));
 
-			const std::string name = sound_effects->get_string("name");
-			const std::string directory = sound_effects->get_string("directory");
-			sound_effect_ = directory + g_fs->file_separator() + name;
-			g_sound_handler.load_fx_if_needed(directory, name, sound_effect_);
+			if (sound_effects->has_key<std::string>("priority")) {
+				sound_priority_ = sound_effects->get_int("priority");
+			}
+
+			if (sound_priority_ < kFxPriorityLowest) {
+				throw Widelands::GameDataError(
+				   "Minmum priority for sounds is %d, but only %d was specified for %s",
+				   kFxPriorityLowest, sound_priority_, sound_effects->get_string("path").c_str());
+			}
 		}
-		get_point(*table.get_table("hotspot"), &hotspot_);
 	} catch (const LuaError& e) {
 		throw wexception("Error in animation table: %s", e.what());
 	}
@@ -88,11 +84,20 @@ uint32_t Animation::current_frame(uint32_t time) const {
 	return 0;
 }
 
-void Animation::trigger_sound(uint32_t time, uint32_t stereo_position) const {
-	if (sound_effect_.empty()) {
+// TODO(unknown): The chosen semantics of animation sound effects is problematic:
+// What if the game runs very slowly or very quickly?
+void Animation::trigger_sound(uint32_t time, const Widelands::Coords& coords) const {
+	if (sound_effect_ == kNoSoundEffect || coords == Widelands::Coords::null()) {
 		return;
 	}
 	if (current_frame(time) == 0) {
-		Notifications::publish(NoteSound(sound_effect_, stereo_position, 1));
+		Notifications::publish(
+		   NoteSound(SoundType::kAmbient, sound_effect_, coords, sound_priority_));
+	}
+}
+
+void Animation::load_sounds() const {
+	if (sound_effect_ != kNoSoundEffect && !SoundHandler::is_backend_disabled()) {
+		g_sh->load_fx(SoundType::kAmbient, sound_effect_);
 	}
 }

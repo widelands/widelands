@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -92,7 +92,8 @@ struct DismantleConfirm : public ActionConfirm {
 struct EnhanceConfirm : public ActionConfirm {
 	EnhanceConfirm(InteractivePlayer& parent,
 	               Widelands::Building& building,
-	               const Widelands::DescriptionIndex& id);
+	               const Widelands::DescriptionIndex& id,
+	               bool still_under_construction);
 
 	void think() override;
 	void ok() override;
@@ -100,6 +101,7 @@ struct EnhanceConfirm : public ActionConfirm {
 private:
 	// Do not make this a reference - it is a stack variable in the caller
 	const Widelands::DescriptionIndex id_;
+	bool still_under_construction_;
 };
 
 /**
@@ -246,7 +248,7 @@ void DismantleConfirm::ok() {
 	if (building && iaplayer().can_act(building->owner().player_number()) &&
 	    (building->get_playercaps() & Widelands::Building::PCap_Dismantle)) {
 		game.send_player_dismantle(*todismantle);
-		iaplayer().hide_workarea(building->get_position());
+		iaplayer().hide_workarea(building->get_position(), false);
 	}
 
 	die();
@@ -259,7 +261,8 @@ Create the panels for enhancement confirmation.
 */
 EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
                                Widelands::Building& building,
-                               const Widelands::DescriptionIndex& id)
+                               const Widelands::DescriptionIndex& id,
+                               bool still_under_construction)
    : ActionConfirm(
         parent,
         _("Enhance building?"),
@@ -270,7 +273,8 @@ EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
               .str() :
            _("Do you really want to enhance this building?"),
         building),
-     id_(id) {
+     id_(id),
+     still_under_construction_(still_under_construction) {
 	// Nothing special to do
 }
 
@@ -284,7 +288,8 @@ void EnhanceConfirm::think() {
 	upcast(Widelands::Building, building, object_.get(egbase));
 
 	if (!building || !iaplayer().can_act(building->owner().player_number()) ||
-	    !(building->get_playercaps() & Widelands::Building::PCap_Enhancable))
+	    !(still_under_construction_ ||
+	      (building->get_playercaps() & Widelands::Building::PCap_Enhancable)))
 		die();
 }
 
@@ -293,11 +298,18 @@ void EnhanceConfirm::think() {
  */
 void EnhanceConfirm::ok() {
 	Widelands::Game& game = iaplayer().game();
-	upcast(Widelands::Building, building, object_.get(game));
 
-	if (building && iaplayer().can_act(building->owner().player_number()) &&
-	    (building->get_playercaps() & Widelands::Building::PCap_Enhancable)) {
-		game.send_player_enhance_building(*building, id_);
+	if (still_under_construction_) {
+		upcast(Widelands::ConstructionSite, cs, object_.get(game));
+		if (cs && iaplayer().can_act(cs->owner().player_number())) {
+			game.send_player_enhance_building(*cs, Widelands::INVALID_INDEX);
+		}
+	} else {
+		upcast(Widelands::Building, building, object_.get(game));
+		if (building && iaplayer().can_act(building->owner().player_number()) &&
+		    (building->get_playercaps() & Widelands::Building::PCap_Enhancable)) {
+			game.send_player_enhance_building(*building, id_);
+		}
 	}
 
 	die();
@@ -419,8 +431,9 @@ void show_dismantle_confirm(InteractivePlayer& player, Widelands::Building& buil
  */
 void show_enhance_confirm(InteractivePlayer& player,
                           Widelands::Building& building,
-                          const Widelands::DescriptionIndex& id) {
-	new EnhanceConfirm(player, building, id);
+                          const Widelands::DescriptionIndex& id,
+                          bool constructionsite) {
+	new EnhanceConfirm(player, building, id, constructionsite);
 }
 
 /**

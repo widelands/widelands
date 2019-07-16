@@ -14,13 +14,13 @@ tribes:new_militarysite_type {
       brick = 6,
       granite = 2,
       log = 4,
-      thatch_reed = 3
+      reed = 3
    },
    return_on_dismantle = {
       brick = 3,
       granite = 1,
       log = 2,
-      thatch_reed = 1
+      reed = 1
 
    },
    animations = {

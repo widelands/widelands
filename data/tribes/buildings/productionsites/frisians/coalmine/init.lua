@@ -14,7 +14,7 @@ tribes:new_productionsite_type {
       brick = 1,
       granite = 2,
       log = 2,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       brick = 1,
@@ -52,6 +52,11 @@ tribes:new_productionsite_type {
       frisians_miner = 1
    },
 
+   indicate_workarea_overlaps = {
+      frisians_coalmine = false,
+      frisians_coalmine_deep = false,
+   },
+
    inputs = {
       { name = "ration", amount = 8 }
    },
@@ -64,12 +69,28 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
-            "sleep=45000",
             "return=skipped unless economy needs coal",
             "consume=ration",
-            "animate=working 40000",
+            "sleep=45000",
+            "call=mine_produce",
+            "call=mine_produce",
+            "return=no_stats"
+         }
+      },
+      mine_produce = {
+         descname = _"mining coal",
+         actions = {
+            "animate=working 15000",
             "mine=coal 3 50 5 20",
-            "produce=coal:2"
+            "produce=coal",
+         }
+      },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=ration",
+            "produce=coal:2",
          }
       },
    },

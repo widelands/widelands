@@ -1,4 +1,3 @@
-include "scripting/messages.lua"
 include "scripting/field_animations.lua"
 
 local done_mining = false
@@ -8,11 +7,15 @@ local see_empire = nil
 
 local all_fields = {}
 local mountains = {}
+local useful_fields = {}
 for x=0,map.width - 1 do
    for y=0,map.height - 1 do
       local field = map:get_field(x, y)
       if field.terd:find("mountain") ~= nil then
          table.insert(mountains, field)
+      end
+      if field:has_caps("small") or field:has_caps("mine") then
+         table.insert(useful_fields, field)
       end
       table.insert(all_fields, field)
    end
@@ -30,6 +33,7 @@ end
 
 function check_empire()
    while true do
+      sleep(1000)
       for idx,field in ipairs(all_fields) do
          sleep(5)
          local p1c = false
@@ -87,7 +91,7 @@ function expand_south()
    end
    scroll_to_field(wh.fields[1])
    sleep(3000)
-   p2:forbid_buildings {"empire_fortress", "empire_castle", "empire_barrier", "empire_blockhouse", "empire_tower"}
+   p2:forbid_buildings {"empire_fortress", "empire_castle", "empire_blockhouse", "empire_tower"}
    p3:forbid_buildings {"barbarians_citadel", "barbarians_tower"}
    campaign_message_box(supply_murilius_6)
    campaign_message_box(supply_murilius_7)
@@ -99,13 +103,56 @@ function expand_south()
    set_objective_done(o)
 
    o = add_campaign_objective(obj_supply_murilius)
+   local o_scout = add_campaign_objective(obj_scout)
+   local o_poem = nil
    local choice = ""
+   sleep(30000) -- give the player some time to account for nearly completed buildings
    local milbld = count_military_buildings_p1()
+   local scout = nil
    while choice == "" do
-      sleep(2791)
+      sleep(791)
+
+      local milsites = count_military_buildings_p1()
+      if o_poem and milsites < milbld then
+         -- the player has dismantled a militarysite, so we assume he understood the poem
+         set_objective_done(o_poem)
+         o_poem = nil
+      end
+
+      if o_scout and not scout then
+         -- let's see if a scout is spying in Murilius's territory
+         for i,house in pairs(p1:get_buildings("frisians_scouts_house")) do
+            for j,field in pairs(house.fields[1]:region(17)) do -- the scout has a radius of 15
+               for k,bob in pairs(field.bobs) do
+                  if bob.descr.name == "frisians_scout" and
+                        field.owner == p2 and
+                        field.brn.owner == p2 and
+                        field.bln.owner == p2 and
+                        field.trn.owner == p2 and
+                        field.tln.owner == p2 and
+                        field.rn.owner == p2 and
+                        field.ln.owner == p2 then
+                     scout = bob
+                     break
+                  end
+               end
+               if scout then break end
+            end
+            if scout then break end
+         end
+      elseif o_scout and scout then
+         if scout.field.immovable and scout.field.immovable.descr.name == "frisians_scouts_house" then
+            set_objective_done(o_scout)
+            campaign_message_box(expansion_hint)
+            o_poem = add_campaign_objective(obj_poem)
+            o_scout = nil
+            scout = nil
+         end
+      end
+
       if #(p1:get_buildings("frisians_warehouse_empire")) < 1 then
          choice = "destroy"
-      elseif count_military_buildings_p1() > milbld then
+      elseif milsites > milbld then
          -- It *is* permitted to destroy/dismantle a military building and build a new one elsewhere
          choice = "military"
       else
@@ -125,6 +172,13 @@ function expand_south()
             choice = "supply"
          end
       end
+   end
+   -- We don’t need the scout/poem objectives anymore
+   if o_scout then
+      set_objective_done(o_scout)
+   end
+   if o_poem then
+      set_objective_done(o_poem)
    end
    set_objective_done(o)
    p2:allow_buildings("all")
@@ -219,18 +273,22 @@ function supply_murilius()
    while not p3.defeated do sleep(4513) end
    set_objective_done(o)
 
-   -- If the barbarians already defeated Murilius – well done
+   -- If the barbarians already defeated Murilius – well done.
    -- Otherwise, Murilius provokes Reebaud into ordering the player to conquer his entire colony
-   -- (merely defeating the Empire isn’t enough)
+   -- (merely defeating the Empire isn’t enough).
+   -- We don't bother to check water, walkable-only and other useless terrains.
+   -- That would be really too much to ask from our poor player, now wouldn't it?
    if not p2.defeated then
       campaign_message_box(defeat_murilius_1)
       campaign_message_box(defeat_murilius_2)
-      p2.team = 2
+      p1:set_attack_forbidden(2, false)
+      p2:set_attack_forbidden(1, false)
       o = add_campaign_objective(obj_defeat_murilius)
       local def = false
       while not def do
+         sleep(1000)
          def = true
-         for idx,field in ipairs(all_fields) do
+         for idx,field in ipairs(useful_fields) do
             if field.owner == p2 then
                def = false
                break
@@ -244,7 +302,8 @@ function supply_murilius()
 end
 
 function defeat_murilius()
-   p2.team = 2
+   p1:set_attack_forbidden(2, false)
+   p2:set_attack_forbidden(1, false)
    campaign_message_box(defeat_both)
    local o = add_campaign_objective(obj_defeat_both)
    while not (p2.defeated and p3.defeated) do sleep(4829) end
@@ -271,19 +330,35 @@ function mission_thread()
    place_building_in_region(p3, "barbarians_metal_workshop", p1_start:region(7))
    place_building_in_region(p3, "barbarians_well", p1_start:region(7))
    place_building_in_region(p3, "barbarians_rangers_hut", p1_start:region(7))
-   reveal_concentric(p1, p1_start, 9, true, 100)
+   reveal_concentric(p1, p1_start, 10, true, 100)
    scroll_to_field(p1_start)
+   sleep(2000)
    campaign_message_box(intro_2)
    include "map:scripting/starting_conditions.lua"
    sleep(5000)
 
-   p1.team = 1
-   p2.team = 1
-   p3.team = 2
--- TODO: instead of alliances, just forbid certain players to attack each other:
---     · Beginning:          forbid 1>2, 2>1, 2>3
---     · Refusing alliance:  forbid only 2>3
---     · Accepting alliance: first unchanged, after p3 defeated: allow all
+   p1:set_attack_forbidden(2, true)
+   p2:set_attack_forbidden(1, true)
+   p2:set_attack_forbidden(3, true)
+   run(function()
+      repeat
+         local conquered = (#p3:get_buildings("empire_sentry") +
+                            #p3:get_buildings("empire_blockhouse") +
+                            #p3:get_buildings("empire_outpost") +
+                            #p3:get_buildings("empire_barrier") +
+                            #p3:get_buildings("empire_tower") +
+                            #p3:get_buildings("empire_fortress") +
+                            #p3:get_buildings("empire_castle") -
+                            #p2:get_buildings("barbarians_sentry") -
+                            #p2:get_buildings("barbarians_barrier") -
+                            #p2:get_buildings("barbarians_tower") -
+                            #p2:get_buildings("barbarians_fortress") -
+                            #p2:get_buildings("barbarians_citadel"))
+         p2:set_attack_forbidden(3, conquered <= 0)
+         sleep(6913)
+      until p3.defeated or p2.defeated
+      p2:set_attack_forbidden(3, false)
+   end)
 
    campaign_message_box(intro_3)
    local o = add_campaign_objective(obj_new_home)

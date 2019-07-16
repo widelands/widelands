@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,8 @@
 #include "base/vector.h"
 #include "base/wexception.h"
 #include "graphic/align.h"
+#include "graphic/animation/animation.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
@@ -47,10 +49,22 @@
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/sdl_ttf_font.h"
 #include "graphic/text/textstream.h"
-#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
+
+namespace {
+/**
+ * This function replaces some HTML entities in strings, e.g. &nbsp;.
+ * It is used by the renderer after the tags have been parsed.
+ */
+void replace_entities(std::string* text) {
+	boost::replace_all(*text, "&gt;", ">");
+	boost::replace_all(*text, "&lt;", "<");
+	boost::replace_all(*text, "&nbsp;", " ");
+	boost::replace_all(*text, "&amp;", "&");  // Must be performed last
+}
+}  // namespace
 
 namespace RT {
 
@@ -92,6 +106,7 @@ struct NodeStyle {
 	uint8_t spacing;
 	UI::Align halign;
 	UI::Align valign;
+	const bool is_rtl;
 	std::string reference;
 };
 
@@ -970,6 +985,16 @@ public:
 		check_size();
 	}
 
+	ImgRenderNode(NodeStyle& ns, const Image* image)
+	   : RenderNode(ns),
+	     image_(image),
+	     filename_(""),
+	     scale_(1.0),
+	     color_(RGBColor(0, 0, 0)),
+	     use_playercolor_(false) {
+		check_size();
+	}
+
 	std::string debug_info() const override {
 		return "img";
 	}
@@ -989,14 +1014,14 @@ private:
 	const Image* image_;
 	const std::string filename_;
 	const double scale_;
-	const RGBColor& color_;
+	const RGBColor color_;
 	bool use_playercolor_;
 };
 
 std::shared_ptr<UI::RenderedText> ImgRenderNode::render(TextureCache* texture_cache) {
 	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 
-	if (scale_ == 1.0) {
+	if (scale_ == 1.0 || filename_.empty()) {
 		// Image can be used as is, and has already been cached in g_gr->images()
 		assert(image_ != nullptr);
 		rendered_text->rects.push_back(
@@ -1223,7 +1248,7 @@ public:
 				nodestyle_.halign = UI::Align::kLeft;
 			}
 		}
-		nodestyle_.halign = mirror_alignment(nodestyle_.halign);
+		nodestyle_.halign = mirror_alignment(nodestyle_.halign, nodestyle_.is_rtl);
 		if (a.has("valign")) {
 			const std::string align = a["valign"].get_string();
 			if (align == "bottom") {
@@ -1267,28 +1292,36 @@ public:
 		const AttrMap& a = tag_.attrs();
 		RGBColor color;
 		bool use_playercolor = false;
-		const std::string image_filename = a["src"].get_string();
 		double scale = 1.0;
 
 		if (a.has("color")) {
 			color = a["color"].get_color();
 			use_playercolor = true;
 		}
-		if (a.has("width")) {
-			int width = a["width"].get_int();
-			if (width > renderer_style_.overall_width) {
-				log("WARNING: Font renderer: Specified image width of %d exceeds the overall available "
-				    "width of %d. Setting width to %d.\n",
-				    width, renderer_style_.overall_width, renderer_style_.overall_width);
-				width = renderer_style_.overall_width;
+		if (a.has("object")) {
+			const Image* representative_image = g_gr->animations().get_representative_image(
+			   a["object"].get_string(), use_playercolor ? &color : nullptr);
+			render_node_.reset(new ImgRenderNode(nodestyle_, representative_image));
+		} else {
+			const std::string image_filename = a["src"].get_string();
+
+			if (a.has("width")) {
+				int width = a["width"].get_int();
+				if (width > renderer_style_.overall_width) {
+					log("WARNING: Font renderer: Specified image width of %d exceeds the overall "
+					    "available "
+					    "width of %d. Setting width to %d.\n",
+					    width, renderer_style_.overall_width, renderer_style_.overall_width);
+					width = renderer_style_.overall_width;
+				}
+				const int image_width = image_cache_->get(image_filename)->width();
+				if (width < image_width) {
+					scale = static_cast<double>(width) / image_width;
+				}
 			}
-			const int image_width = image_cache_->get(image_filename)->width();
-			if (width < image_width) {
-				scale = static_cast<double>(width) / image_width;
-			}
+			render_node_.reset(
+			   new ImgRenderNode(nodestyle_, image_filename, scale, color, use_playercolor));
 		}
-		render_node_.reset(
-		   new ImgRenderNode(nodestyle_, image_filename, scale, color, use_playercolor));
 	}
 	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		nodes.push_back(render_node_);
@@ -1696,7 +1729,7 @@ Renderer::~Renderer() {
 }
 
 std::shared_ptr<RenderNode>
-Renderer::layout(const std::string& text, uint16_t width, const TagSet& allowed_tags) {
+Renderer::layout(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags) {
 	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
 	if (!width) {
@@ -1716,6 +1749,7 @@ Renderer::layout(const std::string& text, uint16_t width, const TagSet& allowed_
 	                           0,
 	                           UI::Align::kLeft,
 	                           UI::Align::kTop,
+	                           is_rtl,
 	                           ""};
 
 	RTTagHandler rtrn(
@@ -1730,8 +1764,8 @@ Renderer::layout(const std::string& text, uint16_t width, const TagSet& allowed_
 }
 
 std::shared_ptr<const UI::RenderedText>
-Renderer::render(const std::string& text, uint16_t width, const TagSet& allowed_tags) {
-	std::shared_ptr<RenderNode> node(layout(text, width, allowed_tags));
+Renderer::render(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags) {
+	std::shared_ptr<RenderNode> node(layout(text, width, is_rtl, allowed_tags));
 	return std::shared_ptr<const UI::RenderedText>(node->render(texture_cache_));
 }
-}
+}  // namespace RT

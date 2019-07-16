@@ -13,13 +13,13 @@ tribes:new_productionsite_type {
       brick = 4,
       granite = 2,
       log = 2,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle = {
       brick = 2,
       granite = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
@@ -77,7 +77,7 @@ tribes:new_productionsite_type {
             "call=smelt_mixed",
             "call=smelt_iron",
             "call=make_fur",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       make_fur = {
@@ -85,8 +85,8 @@ tribes:new_productionsite_type {
          descname = pgettext("frisians_building", "recycling fur"),
          actions = {
             "return=skipped unless site has fur_garment_old",
-            "sleep=40000",
             "consume=fur_garment_old",
+            "sleep=40000",
             "animate=working_fur 15000",
             "produce=fur"
          }
@@ -95,9 +95,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
          descname = pgettext("frisians_building", "recycling iron"),
          actions = {
-            "return=skipped unless economy needs iron",
-            "sleep=40000",
+            "return=skipped unless economy needs iron or not economy needs coal", -- if the economy doesn't need coal the situation gets even improved because recycling saves coal
             "consume=scrap_iron:2 coal",
+            "sleep=40000",
             "animate=working_metal 40000",
             "produce=iron:2"
          }
@@ -106,9 +106,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold because ...
          descname = pgettext("frisians_building", "recycling iron and gold"),
          actions = {
-            "return=skipped unless economy needs iron or economy needs gold",
-            "sleep=40000",
+            "return=skipped unless economy needs iron or economy needs gold or not economy needs coal", -- if the economy doesn't need coal the situation gets even improved because recycling saves coal
             "consume=scrap_metal_mixed:2 coal",
+            "sleep=40000",
             "animate=working_metal 40000",
             "produce=iron gold"
          }

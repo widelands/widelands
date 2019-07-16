@@ -28,7 +28,7 @@ return {
          wares = {
             log = 25,
             granite = 35,
-            thatch_reed = 20,
+            reed = 20,
             brick = 50,
             clay = 30,
             water = 10,
@@ -50,7 +50,7 @@ return {
             bread_paddle = 2,
             kitchen_tools = 2,
             felling_ax = 3,
-            needles = 2,
+            needles = 1,
             basket = 2,
             pick = 5,
             shovel = 5,
@@ -81,6 +81,7 @@ return {
              frisians_stonemason = 2,
              frisians_reindeer = 5,
              frisians_trainer = 3,
+             frisians_seamstress_master = 1,
          },
          soldiers = {
             [{0,0,0,0}] = 33,
@@ -134,7 +135,7 @@ return {
          inputs = {
             iron = 6,
             log = 6,
-            thatch_reed = 4,
+            reed = 4,
          }
       })
 

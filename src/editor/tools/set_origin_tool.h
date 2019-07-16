@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2018 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 #define WL_EDITOR_TOOLS_SET_ORIGIN_TOOL_H
 
 #include "editor/tools/tool.h"
-#include "logic/widelands.h"
 
 /// Sets the starting position of players.
 struct EditorSetOriginTool : public EditorTool {

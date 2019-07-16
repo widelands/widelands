@@ -14,13 +14,13 @@ tribes:new_productionsite_type {
       brick = 3,
       granite = 1,
       log = 3,
-      thatch_reed = 2,
+      reed = 2,
       cloth = 1
    },
    return_on_dismantle = {
       brick = 2,
       log = 2,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
@@ -41,6 +41,10 @@ tribes:new_productionsite_type {
       prohibited_till = 1050
    },
 
+   indicate_workarea_overlaps = {
+      frisians_shipyard = false,
+   },
+
    working_positions = {
       frisians_shipwright = 1
    },
@@ -56,9 +60,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "sleep=20000",
-            "call=ship",
-            "return=skipped"
+            "call=ship on failure fail",
+            "call=ship_preparation",
+            "return=no_stats"
          }
       },
       ship = {
@@ -67,8 +71,14 @@ tribes:new_productionsite_type {
          actions = {
             "checkmap=seafaring",
             "construct=frisians_shipconstruction buildship 6",
+            "sleep=20000",
+         }
+      },
+      ship_preparation = {
+         descname = _"working",
+         actions = {
             "sleep=35000",
-            "return=completed"
+            -- no working animation yet
          }
       },
    },
