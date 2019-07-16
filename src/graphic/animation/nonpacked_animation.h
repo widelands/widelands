@@ -103,11 +103,13 @@ private:
 		std::vector<std::string> playercolor_mask_image_files;
 	};
 
+	/// Ensures that the graphics are loaded before returning the entry
+	const MipMapEntry& mipmap_entry(float scale) const;
+
 	struct MipMapCompare {
 	  bool operator() (const float lhs, const float rhs) const
 	  {return lhs > rhs;}
 	};
 	std::map<float, std::unique_ptr<MipMapEntry>, MipMapCompare> mipmaps_;
-
 };
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_NONPACKED_ANIMATION_H

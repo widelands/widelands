@@ -236,29 +236,19 @@ float NonPackedAnimation::find_best_scale(float scale) const {
 }
 
 float NonPackedAnimation::height() const {
-	const MipMapEntry& mipmap = *mipmaps_.at(1.0f);
-	mipmap.ensure_graphics_are_loaded();
-	return mipmap.frames.front()->height();
+	return mipmap_entry(1.0f).frames.front()->height();
 }
 
 float NonPackedAnimation::width() const {
-	const MipMapEntry& mipmap = *mipmaps_.at(1.0f);
-	mipmap.ensure_graphics_are_loaded();
-	return mipmap.frames.front()->width();
+	return mipmap_entry(1.0f).frames.front()->width();
 }
 
 std::vector<const Image*> NonPackedAnimation::images(float scale) const {
-	// NOCOM ensure scale exists
-	const MipMapEntry& mipmap = *mipmaps_.at(scale);
-	mipmap.ensure_graphics_are_loaded();
-	return mipmap.frames;
+	return mipmap_entry(scale).frames;
 }
 
 std::vector<const Image*> NonPackedAnimation::pc_masks(float scale) const {
-	// NOCOM ensure scale exists
-	const MipMapEntry& mipmap = *mipmaps_.at(scale);
-	mipmap.ensure_graphics_are_loaded();
-	return mipmap.playercolor_mask_frames;
+	return mipmap_entry(scale).playercolor_mask_frames;
 }
 
 std::set<float> NonPackedAnimation::available_scales() const  {
@@ -272,8 +262,7 @@ std::set<float> NonPackedAnimation::available_scales() const  {
 }
 
 const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
-	const MipMapEntry& mipmap = *mipmaps_.at(1.0f);
-	mipmap.ensure_graphics_are_loaded(); // NOCOM make this check built-in, replacing the at() calls.
+	const MipMapEntry& mipmap = mipmap_entry(1.0f);
 	std::vector<std::string> images = mipmap.image_files;
 	assert(!images.empty());
 	const Image* image = (mipmap.has_playercolor_masks && clr) ?
@@ -289,9 +278,7 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 }
 
 Rectf NonPackedAnimation::source_rectangle(const int percent_from_bottom, float scale) const {
-	const MipMapEntry& mipmap = *mipmaps_.at(find_best_scale(scale));
-	mipmap.ensure_graphics_are_loaded();
-	const Image* first_frame = mipmap.frames.front();
+	const Image* first_frame = mipmap_entry(find_best_scale(scale)).frames.front();
 	const float h = percent_from_bottom * first_frame->height() / 100;
 	// Using floor for pixel perfect positioning
 	return Rectf(0.f, std::floor(first_frame->height() - h), first_frame->width(), h);
@@ -314,12 +301,19 @@ void NonPackedAnimation::blit(uint32_t time,
                               const RGBColor* clr,
                               Surface* target,
                               float scale) const {
-	mipmaps_.at(find_best_scale(scale))
-	   ->blit(current_frame(time), source_rect, destination_rect, clr, target);
+	mipmap_entry(find_best_scale(scale))
+	   .blit(current_frame(time), source_rect, destination_rect, clr, target);
 	trigger_sound(time, coords);
 }
 
 void NonPackedAnimation::load_default_scale_and_sounds() const {
 	mipmaps_.at(1.0f)->ensure_graphics_are_loaded();
 	load_sounds();
+}
+
+const NonPackedAnimation::MipMapEntry& NonPackedAnimation::mipmap_entry(float scale) const {
+	assert(mipmaps_.count(scale) == 1);
+	const MipMapEntry& mipmap = *mipmaps_.at(scale);
+	mipmap.ensure_graphics_are_loaded();
+	return mipmap;
 }

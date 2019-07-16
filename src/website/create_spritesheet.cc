@@ -164,7 +164,6 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 		const std::string filename_base = (boost::format("%s_%d") % animation_name % scale).str();
 		write_spritesheet(images, filename_base + ".png", w, h, columns, spritesheet_width, spritesheet_height);
 		std::vector<const Image*> pc_masks = animation.pc_masks(scale);
-		log("- %" PRIuS " player color masks\n", images.size());
 		if (!pc_masks.empty()) {
 			write_spritesheet(pc_masks, filename_base + "_pc.png", w, h, columns, spritesheet_width, spritesheet_height);
 		}
