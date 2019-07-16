@@ -137,7 +137,7 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 		}
 	}
 
-	log("WRITING '%s' animation for '%s'. It has %d pictures and %" PRIuS "scales.\n", animation_name.c_str(),
+	log("WRITING '%s' animation for '%s'. It has %d pictures and %" PRIuS " scales.\n", animation_name.c_str(),
 		descr->name().c_str(), nr_frames, animation.available_scales().size());
 
 	// Create image files and add Lua code for each scale
@@ -164,6 +164,7 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 		const std::string filename_base = (boost::format("%s_%d") % animation_name % scale).str();
 		write_spritesheet(images, filename_base + ".png", w, h, columns, spritesheet_width, spritesheet_height);
 		std::vector<const Image*> pc_masks = animation.pc_masks(scale);
+		log("- %" PRIuS " player color masks\n", images.size());
 		if (!pc_masks.empty()) {
 			write_spritesheet(pc_masks, filename_base + "_pc.png", w, h, columns, spritesheet_width, spritesheet_height);
 		}

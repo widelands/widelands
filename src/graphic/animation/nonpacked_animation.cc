@@ -242,15 +242,23 @@ float NonPackedAnimation::height() const {
 }
 
 float NonPackedAnimation::width() const {
-	return mipmaps_.at(1.0f)->frames.at(0)->width();
+	const MipMapEntry& mipmap = *mipmaps_.at(1.0f);
+	mipmap.ensure_graphics_are_loaded();
+	return mipmap.frames.front()->width();
 }
 
 std::vector<const Image*> NonPackedAnimation::images(float scale) const {
-	return mipmaps_.at(scale)->frames;
+	// NOCOM ensure scale exists
+	const MipMapEntry& mipmap = *mipmaps_.at(scale);
+	mipmap.ensure_graphics_are_loaded();
+	return mipmap.frames;
 }
 
 std::vector<const Image*> NonPackedAnimation::pc_masks(float scale) const {
-	return mipmaps_.at(scale)->playercolor_mask_frames;
+	// NOCOM ensure scale exists
+	const MipMapEntry& mipmap = *mipmaps_.at(scale);
+	mipmap.ensure_graphics_are_loaded();
+	return mipmap.playercolor_mask_frames;
 }
 
 std::set<float> NonPackedAnimation::available_scales() const  {
@@ -265,6 +273,7 @@ std::set<float> NonPackedAnimation::available_scales() const  {
 
 const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 	const MipMapEntry& mipmap = *mipmaps_.at(1.0f);
+	mipmap.ensure_graphics_are_loaded(); // NOCOM make this check built-in, replacing the at() calls.
 	std::vector<std::string> images = mipmap.image_files;
 	assert(!images.empty());
 	const Image* image = (mipmap.has_playercolor_masks && clr) ?
