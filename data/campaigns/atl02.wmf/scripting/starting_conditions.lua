@@ -8,6 +8,10 @@ include "map:scripting/init_Maletus.lua"
 -- ===============
 -- Initialization
 -- ===============
+
+
+
+
 -- Initializing p1 (the scenario player)
    p1:allow_buildings("all")
    p1:allow_workers("all")

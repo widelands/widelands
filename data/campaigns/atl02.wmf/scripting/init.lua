@@ -37,6 +37,20 @@ function msg_boxes(boxes_descr)
    end
 end
 
+-- Return the total number of items in warehouses of the given
+-- ware.
+function count_in_warehouses(ware)
+   local whs = array_combine(
+      p1:get_buildings("atlanteans_headquarters"),
+      p1:get_buildings("atlanteans_warehouse")
+   )
+   local rv = 0
+   for idx,wh in ipairs(whs) do
+      rv = rv + wh:get_wares(ware)
+   end
+   return rv
+end
+
 -- ====================
 -- Starting the main thread
 -- ====================
