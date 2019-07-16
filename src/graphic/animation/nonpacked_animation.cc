@@ -128,10 +128,10 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 				                               mipmaps_.begin()->second->image_files.front().c_str());
 		}
 
-		if (representative_frame_ < 0 || representative_frame_ > nr_frames_ - 1) {
+		if (representative_frame() < 0 || representative_frame() > nr_frames_ - 1) {
 			throw wexception("Animation has %d as its representative frame, but the frame indices "
 			                 "available are 0 - %d",
-			                 representative_frame_, nr_frames_ - 1);
+			                 representative_frame(), nr_frames_ - 1);
 		}
 
 		// Perform some checks to make sure that the data is complete and consistent
@@ -266,8 +266,8 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	std::vector<std::string> images = mipmap.image_files;
 	assert(!images.empty());
 	const Image* image = (mipmap.has_playercolor_masks && clr) ?
-	                        playercolor_image(*clr, images[representative_frame_]) :
-	                        g_gr->images().get(images[representative_frame_]);
+	                        playercolor_image(*clr, images[representative_frame()]) :
+	                        g_gr->images().get(images[representative_frame()]);
 
 	const int w = image->width();
 	const int h = image->height();

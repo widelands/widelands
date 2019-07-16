@@ -116,6 +116,7 @@ public:
 	/// Load animation images into memory for default scale.
 	virtual void load_default_scale_and_sounds() const = 0;
 	void load_sounds() const;
+	int representative_frame() const;
 
 protected:
 	/// Play the sound effect associated with this animation at the given time.
@@ -124,10 +125,11 @@ protected:
 	void trigger_sound(uint32_t time, const Widelands::Coords& coords) const;
 
 	uint16_t nr_frames_;
-	int representative_frame_;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);
+
+	int representative_frame_;
 
 	Vector2i hotspot_ = Vector2i::zero();
 	const uint32_t frametime_;

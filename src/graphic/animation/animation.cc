@@ -101,3 +101,7 @@ void Animation::load_sounds() const {
 		g_sh->load_fx(SoundType::kAmbient, sound_effect_);
 	}
 }
+
+int Animation::representative_frame() const {
+	return representative_frame_;
+}

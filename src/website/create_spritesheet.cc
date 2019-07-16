@@ -120,14 +120,13 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	// Add global paramaters for this animation to Lua
 	std::unique_ptr<LuaTree::Element> lua_object(new LuaTree::Element());
 	LuaTree::Object* lua_animation = lua_object->add_object(animation_name);
-	lua_animation->add_int("frames", nr_frames);
+	lua_animation->add_raw("directory", "path.dirname(__file__)");
+	lua_animation->add_string("spritesheet", animation_name);
 
 	LuaTree::Object* lua_table = lua_animation->add_object("hotspot");
 	const Vector2i& hotspot = animation.hotspot();
 	lua_table->add_int("", hotspot.x);
 	lua_table->add_int("", hotspot.y);
-
-	LuaTree::Object* lua_mipmap = lua_animation->add_object("mipmap");
 
 	if (animation.nr_frames() > 1) {
 		uint32_t frametime = animation.frametime();
@@ -140,18 +139,29 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	log("WRITING '%s' animation for '%s'. It has %d pictures and %" PRIuS " scales.\n", animation_name.c_str(),
 		descr->name().c_str(), nr_frames, animation.available_scales().size());
 
-	// Create image files and add Lua code for each scale
+	const int columns = floor(sqrt(nr_frames));
+	int rows = 1;
+	while (rows * columns < nr_frames) {
+		++rows;
+	}
+
+	lua_animation->add_int("frames", nr_frames);
+	lua_animation->add_int("columns", columns);
+
+	const int representative_frame = animation.representative_frame();
+	if (representative_frame > 0) {
+		lua_animation->add_int("representative_frame", representative_frame);
+	}
+
+
+	// Create image files for each scale
 	for (const float scale : animation.available_scales()) {
 		std::vector<const Image*> images = animation.images(scale);
 
 		// Get parameters at this scale
 		const int w = animation.width() * scale;
 		const int h = animation.height() * scale;
-		const int columns = floor(sqrt(nr_frames));
-		int rows = 1;
-		while (rows * columns < nr_frames) {
-			++rows;
-		}
+
 		const int spritesheet_width = columns * w;
 		const int spritesheet_height = rows * h;
 
@@ -167,15 +177,8 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 		if (!pc_masks.empty()) {
 			write_spritesheet(pc_masks, filename_base + "_pc.png", w, h, columns, spritesheet_width, spritesheet_height);
 		}
-
-		// Lua parameters at this scale
-		lua_table = lua_mipmap->add_object();
-		lua_table->add_double("scale", scale);
-		lua_table->add_raw("spritesheet", "path.dirname(__file__) .. \"" + filename_base + ".png\"");
-		lua_table = lua_table->add_object("dimension");
-		lua_table->add_int("", w);
-		lua_table->add_int("", h);
 	}
+
 	log("LUA CODE:\n%s\n", lua_animation->as_string().c_str());
 	log("Done!\n");
 }
