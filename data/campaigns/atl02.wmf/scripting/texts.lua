@@ -27,94 +27,185 @@ end
 -- =======================================================================
 --                                Objectives
 -- =======================================================================
--- obj_ensure_build_wares_production = {
-   -- name = "obj_ensure_build_wares_production",
-   -- title = _ "Ensure the supply of build wares",
-   -- body = objective_text(_"The supply of build wares", _
--- [[Build a quarry, two woodcutter's houses, two forester's houses and a
--- sawmill.]]
-   -- ),
--- }
+
 obj_basic_infrastructure = {
    name = "obj_basic_infrastructure",
    title = _ "Ensure the supply of build wares",
    number = 4,
-   body = objective_text(_"Establish a basic production", _
-[[You will need at least a quarry, a few lumberjacks and a sawmill.
-A forester might or might not be needed depending on how fast the trees
-are growing around you. Find the balance.]]
-   ),
+   body = objective_text(_"Establish a basic production",
+   p(_[[We will need at least a quarry, a few lumberjacks and a sawmill. A forester might or might not be needed depending on how fast the trees are growing around you. Find the balance.]]))
 }
+
 obj_tools = {
    name = "obj_tools",
    title = _ "Build tools quickly",
    number = 1,
-   body = objective_text(_"Make new tools", _
-[[Most of your tools have been lost in the ship tragedy. Your people will
-not be able to fulfill their duties without proper tools. Luckily you still
-have some iron ore and plenty of coal. Build a production of tools, it is
-a prerequisite for success on island.]]
-   ),
+   body = objective_text(_"Make new tools",
+      p(_[[Most of our tools have been lost in the ship tragedy. Our people will not be able to fulfill their duties without proper tools. Luckily we still have some iron ore and plenty of coal. Build a production of tools, it is a prerequisite for success on island. Don't forget to build a smelter as well.]]))
 }
 
 obj_explore = {
    name = "obj_explore",
    title = _"Explore the surroundings",
    number = 1,
-   body = objective_text(_"Explore your surroundings", _
-[[We are pretty sure that we are not alone on the island. We do not know
-if the others on this island are friends or foes so we need to treat carefully.
-Expand and explore the island by building at least one habitat for a scout
-and military buildings. Favor Towers over other military buildings for their
-bigger view range.]]
-   ),
+   body = objective_text(_"Explore your surroundings",
+   p(_[[We are pretty sure that we are not alone on the island. We do not know if the others on this island are friends or foes so we need to treat carefully. Expand and explore the island by building at least one habitat for a scout and military buildings. Build at least one tower for his bigger view range.]]))
+}
+obj_spidercloth = {
+   name = "obj_spidercloth_production",
+   title = _"Build a spider farm and a weaving mill",
+   number = 3,
+   body = objective_text(_"Spidercloth Production",
+      p(_[[We need some spidercloth urgently as we are running out of it. So it is essential to spare every piece we still have. Reduce the input of all buildings that consume spidercloth. Don't forget the constructionsites.]]) ..
+      p(_[[After that we need to have a farm under all circumstances as it needs spidercloth to be build. Additionally we need a spiderfarm and a weaving mill. Later on a gold spinning mill would be helpful as well.]]))
 }
 
 -- =======================================================================
 --                                  Texts
 -- =======================================================================
 
+defeated = {
+   {
+      title =_"Defeated!",
+      body = sidolus(_"Sidolus has bad news…",
+         -- TRANSLATORS: Sidolus
+         _([[Aaaargh, Jundlina. I don't know how this could have happened, but Satul couldn't protect us from the enemy. They have destroyed our last warehouse. So, we have lost this battle and our people is doomed!]])),
+      posy=1,
+   }
+}
+
 -- This is an array or message descriptions
 initial_messages = {
-{
-   title = _"The princess' memoir",
-   body = jundlina(_"Jundlina writes her diary",
-   -- TRANSLATORS: Jundlina - Diary
-   _([[Our escape from the cursed island was a close one: we managed to load three ships and make our escape, but the currents of the sinking island tested our new ships and their design. ]]) ..
-   _([[And one failed the test: the last days of loading was done in chaos and without much planing and so one of ships ended up carrying most of the heavy wares in our possession. ]]) ..
-   _([[This plus the current was too much for the ship and it was pulled below the sea level by Lutas and his currents and we lost most men and all wares it carried.]])
-   .. paragraphdivider() ..
-   -- TRANSLATORS: Jundlina - Diary
-   _([[The fear was great in us all. We expected the other ships to be drowned as well, but they persisted. We escaped the island and began our smooth sailing to other costs. ]]) ..
-   _([[Many weeks have passed and we did only see small islands not suitable for habitation and without any sign of being blessed by Satul, the fire god. ]]) ..
-   _([[Last night however, we made out a new island. We saw smoke hovering over it. The black comes from the fiery mountain in the north of the island, the grey however comes from settlers.]])),
-   h=500,
-},
-{
-   title = _"Planing for the future",
-   body = jundlina(_"Jundlina continues",
-   -- TRANSLATORS: Jundlina - Diary
-   _([[At least the east side is inhabited, so much is clear. We do not know if the people there are friends or foes. We do not even know what tribe they might be from. ]]) ..
-   _([[The only thing that is sure that they can't be Atlantians for no ship of us has sailed as far as us in the last hundreds years. I can only hope they are friendly. ]]) ..
-   _([[We have not much water left, our food is running low, we lost all our tools and most of our building materials with the third ship. We can't afford waging war until we rooted ourselves here.]]))
-},
-{
-   title = _"Jundlina gives orders",
-   body = jundlina(_"Jundlina decides",
-   -- TRANSLATORS: Jundlina - Diary
-   _([[We still have plenty of coal and iron ore, so a metal workshop and a smelter will provide us with good tools in no time. Also, we need to solve our building material problem. ]]) ..
-   _([[The island is full of trees, we might not even need foresters. But we need stone, that is for sure]])
-   .. paragraphdivider() ..
-   -- TRANSLATORS: Jundlina - Diary
-   _([[Let's also explore this island. But we need to be careful. We should prefer towers over other military buildings so that we can see potential enemies before they see us. ]]) ..
-   _([[We will be careful with the stones though. When we no longer need a building, we will dismantle it instead of burning it down. ]]) ..
-   _([[This will take more time, but we can reuse some of its materials. Also, I want a scout out and exploring at all times.]]))
-   .. new_objectives(obj_tools)
-   .. new_objectives(obj_basic_infrastructure)
-   .. new_objectives(obj_explore),
-   h=500,
-},
+   {
+      title = _"The princess' memoir",
+      body = jundlina(_"Jundlina writes her diary",
+      -- TRANSLATORS: Jundlina - Diary
+      _([[Our escape from the cursed island was a close one: we managed to load three ships and make our escape, but the currents of the sinking island tested our new ships and their design. ]]) ..
+      _([[And one failed the test: the last days of loading was done in chaos and without much planning and so one of our ships ended up carrying most of the heavy wares in our possession. ]]) ..
+      _([[The heavy weight plus the strong current was too much for the ship and it was pulled below the sea level by Lutas forces and we lost most men and all wares it carried.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Jundlina - Diary
+      _([[The fear was great in us all. We expected the other ships to be drowned as well, but they persisted. We escaped the island and began our smooth sailing to other coasts. ]]) ..
+      _([[Many weeks have passed and we did only see small islands not suitable for habitation and without any sign of being blessed by Satul, the fire god. ]]) ..
+      _([[Last night however, we made out a new island. We saw smoke hovering over it. The black comes from the fiery mountain in the north of the island, the grey however comes from settlers.]])),
+      h=500,
+   },
+   {
+      title = _"Planning for the future",
+      body = jundlina(_"Jundlina continues",
+      -- TRANSLATORS: Jundlina - Diary
+      _([[At least the east side of the island is inhabited, so much is clear. We do not know if the people there are friends or foes. We do not even know what tribe they might be from. ]]) ..
+      _([[The only thing that is sure that they can't be Atlantians for no ship of us has sailed as far as us in the last hundreds years. I can only hope they are friendly. ]]) ..
+      _([[We have not much water left, our food is running low, we lost all our tools and most of our building materials with the third ship. We can't afford waging war until we rooted ourselves here.]]))
+   },
+   {
+      title = _"Jundlina gives orders",
+      body = jundlina(_"Jundlina decides",
+      -- TRANSLATORS: Jundlina - Diary
+      _([[We still have plenty of coal and iron ore, so a metal workshop and a smelter will provide us with good tools in no time. Also, we need to solve our building material problem. ]]) ..
+      _([[The island is full of trees, we might not even need foresters. But we need stone, that is for sure!]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Jundlina - Diary
+      _([[Let's also explore this island. But we need to be careful. We should build at least one tower so that we can see potential enemies before they see us. ]]) ..
+      _([[But we need to be careful with the stones and other precious material though. When we no longer need a building, we will dismantle it instead of burning it down. ]]) ..
+      _([[This will take more time, but we can reuse some of its materials. Also, I want a scout out and exploring at all times.]]))
+      .. new_objectives(obj_tools)
+      .. new_objectives(obj_basic_infrastructure)
+      .. new_objectives(obj_explore),
+      h=500,
+   },
 } -- end of initial messages.
 
+spidercloth_1 = {
+   {
+      title = _"Opol arrives at Jundlina",
+      body = opol(
+         -- TRANSLATORS: Opol
+         _([[May Satul warm you, Jundlina. As highest weaver of the guild I have bad news for you. I just realized we are running out of spidercloth. This is very critical as you know that spidercloth is needed for many buildings.]])
+         .. paragraphdivider() ..
+         -- TRANSLATORS: Opol
+         _([[We should build up a spidercloth production urgently.]]))
+   },
+   {
+       title = _"Jundlina Replies",
+       body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[May Satul warm you too, Opol. I wanted to delay production of spidercloth, but I understand the urgency. We need to build a complete spidercloth production instantly.]]))
+         ..  new_objectives(obj_spidercloth_production)
+   }
+}
 
+spidercloth_2 = {
+   {
+      title = _"Opol makes a point",
+      body = opol(
+         -- TRANSLATORS: Opol
+         _([[Jundlina! It seems there is another problem even more urgent. I fear we haven't build a farm to feed our spiders yet. As this is one of the buildings needing spidercloth for completion we are potentially running into a deadlock here.]]))
+   },
+   {
+      title = _"Jundlina Acknowledges",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[I see the risk Opol. Thanks for reporting. We will build a farm first now.]]))
+   }
+}
 
+spidercloth_3 = {
+   {
+      title = _"Opol Seeks Out Jundlina",
+      body = opol(
+         -- TRANSLATORS: Opol
+         _([[May Satul warm you, Jundlina! The weaving mill and spider farm buildings are complete and the weavers’ guild can start their work again. I promise we will deliver the finest cloth and some tabards soon. Maybe we can build a gold spinning mill later on to make better tabards as well.]]))
+   },
+   {
+      title = _"Jundlina Cheers",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[This is good news indeed, Opol. You may go back to your work now, and may Satul warm you and the weavers' guild!]]))
+   }
+}
+
+enemy_1 = {
+   {
+      title = _"Sidolus Reports foreign inhabitants",
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
+         _([[May Satul warm you, Jundlina! The weaving mill, gold spinning mill and spider farm buildings are complete and the weavers’ guild can start their work again. I promise we will deliver the finest cloth and some tabards soon.]]))
+   },
+   {
+      title = _"Jundlina Cheers",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[This is good news indeed, Opol. Youmay go back to your work now, Opol, and may Satul warm you and the weavers' guild!]]))
+   }
+}
+
+allies = {
+   {
+      title = _"Allies?",
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
+         _([[May Satul warm you, Jundlina! The weaving mill, gold spinning mill and spider farm buildings are complete and the weavers’ guild can start their work again. I promise we will deliver the finest cloth and some tabards soon.]]))
+   },
+   {
+      title = _"Jundlina Cheers",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[This is good news indeed, Opol. Youmay go back to your work now, Opol, and may Satul warm you and the weavers' guild!]]))
+   }
+}
+
+infrastructure_1 = {
+   {
+      title = _"Building material ensured",
+      body = loftomor(
+         -- TRANSLATORS: Sidolus
+         _([[May Satul warm you, Jundlina! We have finished our supply of building materials.]]))
+   },
+   {
+      title = _"Jundlina Cheers",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[This is good news indeed, Loftomor. Now we can think of constructing more sophisticated buildings to make our economy grow. Please advice if you feel we are missing necessary buildings.]]))
+   }
+}
