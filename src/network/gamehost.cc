@@ -902,7 +902,8 @@ int32_t GameHost::check_client(const std::string& name) {
 }
 
 /**
- * If the host sends a chat message with formation /kick <name> <reason>
+ * If the host sends a chat message with formation /kick <name> <reason>.
+ *
  * This function will handle this command and try to kick the user.
  */
 void GameHost::kick_user(uint32_t client, const std::string& reason) {
@@ -979,18 +980,22 @@ bool GameHost::can_launch() {
 		return false;
 
 	// if there is one client that is currently receiving a file, we can not launch.
+
+	std::vector<UserSettings> &users = d->settings.users;
+
 	for (std::vector<Client>::iterator j = d->clients.begin(); j != d->clients.end(); ++j) {
-		if (j->usernum == -1) {
+		int usernum = j->usernum;
+		if (usernum == -1) {
 			return false;
 		}
-		if (!d->settings.users[j->usernum].ready) {
+		if (users[j->usernum].ready) {
 			return false;
 		}
 	}
 
 	// all players must be connected to a controller (human/ai) or be closed.
 	// but not all should be closed!
-	bool one_not_closed = false;
+	bool one_not_closed = false; // TODO(k.halfmann): check this logic
 	for (PlayerSettings& setting : d->settings.players) {
 		if (setting.state != PlayerSettings::State::kClosed)
 			one_not_closed = true;
@@ -1010,14 +1015,15 @@ void GameHost::set_map(const std::string& mapname,
 
 	std::vector<PlayerSettings>::size_type oldplayers = d->settings.players.size();
 
-	SendPacket packet;
-
 	// Care about the host
 	if (static_cast<int32_t>(maxplayers) <= d->settings.playernum &&
 	    d->settings.playernum != UserSettings::none()) {
 		set_player_number(UserSettings::none());
 	}
 
+	SendPacket packet;
+
+	// Drop players not matching map any longer
 	while (oldplayers > maxplayers) {
 		--oldplayers;
 		for (uint16_t i = 1; i < d->settings.users.size(); ++i)
@@ -1032,16 +1038,13 @@ void GameHost::set_map(const std::string& mapname,
 				d->clients.at(j).playernum = UserSettings::none();
 
 				// Broadcast change
-				packet.reset();
-				packet.unsigned_8(NETCMD_SETTING_USER);
-				packet.unsigned_32(i);
-				write_setting_user(packet, i);
-				broadcast(packet);
+				broadcast_setting_user(packet, d->clients.at(j).usernum);
 			}
 	}
 
 	d->settings.players.resize(maxplayers);
 
+	// Open slots for new players found on the map.
 	while (oldplayers < maxplayers) {
 		PlayerSettings& player = d->settings.players.at(oldplayers);
 		player.state = PlayerSettings::State::kOpen;
@@ -1109,9 +1112,12 @@ void GameHost::set_map(const std::string& mapname,
 	}
 }
 
+// TODO(k.halfmann): refactor this
 void GameHost::set_player_state(uint8_t const number,
                                 PlayerSettings::State const state,
                                 bool const host) {
+
+	// ignore player numbers out of range
 	if (number >= d->settings.players.size())
 		return;
 
@@ -1121,9 +1127,9 @@ void GameHost::set_player_state(uint8_t const number,
 		return;
 
 	if (player.state == PlayerSettings::State::kHuman) {
-		//  0 is host and has no client
-		if (d->settings.users.at(0).position == number) {
-			d->settings.users.at(0).position = UserSettings::none();
+		//  kHostPlayerNum has no client
+		if (d->settings.users.at(kHostPlayerNum).position == number) {
+			d->settings.users.at(kHostPlayerNum).position = UserSettings::none();
 			d->settings.playernum = UserSettings::none();
 		}
 		for (uint8_t i = 1; i < d->settings.users.size(); ++i) {
@@ -1183,11 +1189,7 @@ void GameHost::set_player_state(uint8_t const number,
 
 	// Broadcast change to player
 	SendPacket packet;
-	packet.reset();
-	packet.unsigned_8(NETCMD_SETTING_PLAYER);
-	packet.unsigned_8(number);
-	write_setting_player(packet, number);
-	broadcast(packet);
+	broadcast_setting_player(packet, number);
 
 	// Let clients know whether their slot has changed
 	packet.reset();
@@ -1204,6 +1206,7 @@ void GameHost::set_player_tribe(uint8_t const number,
 
 	PlayerSettings& player = d->settings.players.at(number);
 
+	// TODDO(k.halfmann): check this logic, will tribe "survive" een when random is selected?
 	if (player.tribe == tribe && player.random_tribe == random_tribe)
 		return;
 
@@ -1224,11 +1227,8 @@ void GameHost::set_player_tribe(uint8_t const number,
 
 			//  broadcast changes
 			SendPacket packet;
-			packet.unsigned_8(NETCMD_SETTING_PLAYER);
-			packet.unsigned_8(number);
-			write_setting_player(packet, number);
-			broadcast(packet);
-			return;
+			broadcast_setting_player(packet, number);
+			return; // TODO(k.halfmann): check this logic
 		}
 	}
 	log("Player %u attempted to change to tribe %s; not a valid tribe\n", number, tribe.c_str());
@@ -1250,10 +1250,7 @@ void GameHost::set_player_init(uint8_t const number, uint8_t const index) {
 
 				//  broadcast changes
 				SendPacket packet;
-				packet.unsigned_8(NETCMD_SETTING_PLAYER);
-				packet.unsigned_8(number);
-				write_setting_player(packet, number);
-				broadcast(packet);
+				broadcast_setting_player(packet, number);
 				return;
 			} else
 				log("Attempted to change to out-of-range initialization index %u "
@@ -1275,10 +1272,7 @@ void GameHost::set_player_ai(uint8_t number, const std::string& name, bool const
 
 	// Broadcast changes
 	SendPacket packet;
-	packet.unsigned_8(NETCMD_SETTING_PLAYER);
-	packet.unsigned_8(number);
-	write_setting_player(packet, number);
-	broadcast(packet);
+	broadcast_setting_player(packet, number);
 }
 
 void GameHost::set_player_name(uint8_t const number, const std::string& name) {
@@ -1294,10 +1288,7 @@ void GameHost::set_player_name(uint8_t const number, const std::string& name) {
 
 	// Broadcast changes
 	SendPacket packet;
-	packet.unsigned_8(NETCMD_SETTING_PLAYER);
-	packet.unsigned_8(number);
-	write_setting_player(packet, number);
-	broadcast(packet);
+	broadcast_setting_player(packet, number);
 }
 
 void GameHost::set_player_closeable(uint8_t const number, bool closeable) {
@@ -1333,10 +1324,7 @@ void GameHost::set_player_shared(PlayerSlot number, Widelands::PlayerNumber shar
 
 	// Broadcast changes
 	SendPacket packet;
-	packet.unsigned_8(NETCMD_SETTING_PLAYER);
-	packet.unsigned_8(number);
-	write_setting_player(packet, number);
-	broadcast(packet);
+	broadcast_setting_player(packet, number);
 }
 
 void GameHost::set_player(uint8_t const number, const PlayerSettings& ps) {
@@ -1348,10 +1336,7 @@ void GameHost::set_player(uint8_t const number, const PlayerSettings& ps) {
 
 	// Broadcast changes
 	SendPacket packet;
-	packet.unsigned_8(NETCMD_SETTING_PLAYER);
-	packet.unsigned_8(number);
-	write_setting_player(packet, number);
-	broadcast(packet);
+	broadcast_setting_player(packet, number);
 }
 
 void GameHost::set_player_number(uint8_t const number) {
@@ -1422,10 +1407,7 @@ void GameHost::switch_to_player(uint32_t user, uint8_t number) {
 
 	// Broadcast the user changes to everybody
 	SendPacket packet;
-	packet.unsigned_8(NETCMD_SETTING_USER);
-	packet.unsigned_32(user);
-	write_setting_user(packet, user);
-	broadcast(packet);
+	broadcast_setting_user(packet, user);
 }
 
 void GameHost::set_player_team(uint8_t number, Widelands::TeamNumber team) {
@@ -1435,10 +1417,7 @@ void GameHost::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 
 	// Broadcast changes
 	SendPacket packet;
-	packet.unsigned_8(NETCMD_SETTING_PLAYER);
-	packet.unsigned_8(number);
-	write_setting_player(packet, number);
-	broadcast(packet);
+	broadcast_setting_player(packet, number);
 }
 
 void GameHost::set_multiplayer_game_settings() {
@@ -1508,6 +1487,14 @@ void GameHost::write_setting_player(SendPacket& packet, uint8_t const number) {
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, number));
 }
 
+void GameHost::broadcast_setting_player(SendPacket& packet, uint8_t const number) {
+	packet.reset();
+	packet.unsigned_8(NETCMD_SETTING_PLAYER);
+	packet.unsigned_8(number);
+	write_setting_player(packet, number);
+	broadcast(packet);
+}
+
 void GameHost::write_setting_all_players(SendPacket& packet) {
 	packet.unsigned_8(d->settings.players.size());
 	for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
@@ -1523,6 +1510,14 @@ void GameHost::write_setting_user(SendPacket& packet, uint32_t const number) {
 	packet.unsigned_8(d->settings.users.at(number).ready ? 1 : 0);
 	Notifications::publish(NoteGameSettings(
 	   NoteGameSettings::Action::kUser, d->settings.users.at(number).position, number));
+}
+
+void GameHost::broadcast_setting_user(SendPacket& packet, uint32_t const number) {
+	packet.reset();
+	packet.unsigned_8(NETCMD_SETTING_USER);
+	packet.unsigned_32(number);
+	write_setting_user(packet, number);
+	broadcast(packet);
 }
 
 void GameHost::write_setting_all_users(SendPacket& packet) {
@@ -1692,11 +1687,7 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	d->net->send(client.sock_id, packet);
 
 	// Broadcast new information about the player to everybody
-	packet.reset();
-	packet.unsigned_8(NETCMD_SETTING_USER);
-	packet.unsigned_32(client.usernum);
-	write_setting_user(packet, client.usernum);
-	broadcast(packet);
+	broadcast_setting_user(packet, client.usernum);
 
 	// Check if there is an unoccupied player left and if, assign.
 	for (uint8_t i = 0; i < d->settings.players.size(); ++i)
@@ -2025,6 +2016,170 @@ void GameHost::handle_network() {
 	reaper();
 }
 
+void GameHost::handle_disconnect(uint32_t const client_num, RecvPacket& r) {
+	uint8_t number = r.unsigned_8();
+	std::string reason = r.string();
+	if (number == 1)
+		disconnect_client(client_num, reason, false);
+	else {
+		std::string arg = r.string();
+		disconnect_client(client_num, reason, false, arg);
+	}
+	return;
+}
+
+void GameHost::handle_ping(Client& client) {
+	log("[Host]: Received ping from metaserver.\n");
+	// Send PING back
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_METASERVER_PING);
+	d->net->send(client.sock_id, packet);
+
+	// Remove metaserver from list of clients
+	client.playernum = UserSettings::not_connected();
+	d->net->close(client.sock_id);
+	client.sock_id = 0;
+	return;
+}
+
+/** Wait for NETCMD_HELLO and handle unexpected other commands */
+void GameHost::handle_hello(uint32_t const client_num, uint8_t const cmd, Client& client, RecvPacket& r) {
+	// Now we wait for the client to say Hi in the right language,
+	// unless the game has already started
+	if (d->game)
+		throw DisconnectException("GAME_ALREADY_STARTED");
+
+	if (cmd != NETCMD_HELLO)
+		throw ProtocolException(cmd);
+
+	uint8_t version = r.unsigned_8();
+	if (version != NETWORK_PROTOCOL_VERSION)
+		throw DisconnectException("DIFFERENT_PROTOCOL_VERS");
+
+	std::string clientname = r.string();
+	client.build_id = r.string();
+
+	welcome_client(client_num, clientname);
+	return;
+}
+
+void GameHost::handle_changetribe(Client& client, RecvPacket& r) {
+	//  Do not be harsh about packets of this type arriving out of order -
+	//  the client might just have had bad luck with the timing.
+	if (!d->game) {
+		uint8_t num = r.unsigned_8();
+		if (num != client.playernum)
+			throw DisconnectException("NO_ACCESS_TO_PLAYER");
+		std::string tribe = r.string();
+		bool random_tribe = r.unsigned_8() == 1;
+		set_player_tribe(num, tribe, random_tribe);
+	}
+}
+
+/** Handle changed sharing of clients by users */
+void GameHost::handle_changeshared(Client& client, RecvPacket& r) {
+	//  Do not be harsh about packets of this type arriving out of order -
+	//  the client might just have had bad luck with the timing.
+	if (!d->game) {
+		uint8_t num = r.unsigned_8();
+		if (num != client.playernum)
+			throw DisconnectException("NO_ACCESS_TO_PLAYER");
+		set_player_shared(num, r.unsigned_8());
+	}
+}
+
+void GameHost::handle_changeteam(Client& client, RecvPacket& r) {
+	if (!d->game) {
+		uint8_t num = r.unsigned_8();
+		if (num != client.playernum)
+			throw DisconnectException("NO_ACCESS_TO_PLAYER");
+		set_player_team(num, r.unsigned_8());
+	}
+}
+
+void GameHost::handle_changeinit(Client& client, RecvPacket& r) {
+	if (!d->game) {
+		// TODO(GunChleoc): For some nebulous reason, we don't receive the num that the client is
+		// sending when a player changes slot. So, keeping the access to the client off for now.
+		// Would be nice to have though.
+		uint8_t num = r.unsigned_8();
+		if (num != client.playernum)
+			throw DisconnectException("NO_ACCESS_TO_PLAYER");
+		set_player_init(num, r.unsigned_8());
+	}
+}
+
+void GameHost::handle_changeposition(Client& client, RecvPacket& r) {
+	if (!d->game) {
+		uint8_t const pos = r.unsigned_8();
+		switch_to_player(client.usernum, pos);
+	}
+}
+
+void GameHost::handle_nettime(uint32_t const client_num, RecvPacket& r) {
+	if (!d->game)
+		throw DisconnectException("TIME_SENT_NOT_READY");
+	receive_client_time(client_num, r.signed_32());
+}
+
+void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, RecvPacket& r) {
+	if (!d->game)
+		throw DisconnectException("PLAYERCMD_WO_GAME");
+	int32_t time = r.signed_32();
+	Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
+	log("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n", client_num, client.playernum,
+	    static_cast<unsigned int>(plcmd->id()), plcmd->sender(), time);
+	receive_client_time(client_num, time);
+	if (plcmd->sender() != client.playernum + 1)
+		throw DisconnectException("PLAYERCMD_FOR_OTHER");
+	send_player_command(plcmd);
+}
+
+void GameHost::handle_syncreport(uint32_t const client_num, Client& client, RecvPacket& r) {
+	if (!d->game || !d->syncreport_pending || client.syncreport_arrived) {
+		throw DisconnectException("UNEXPECTED_SYNC_REP");
+	}
+	int32_t time = r.signed_32();
+	r.data(client.syncreport.data, 16);
+	client.syncreport_arrived = true;
+	receive_client_time(client_num, time);
+	check_sync_reports();
+}
+
+void GameHost::handle_chat(Client& client, RecvPacket& r) {
+	ChatMessage c(r.string());
+	c.playern = d->settings.users.at(client.usernum).position;
+	c.sender = d->settings.users.at(client.usernum).name;
+	if (c.msg.size() && *c.msg.begin() == '@') {
+		// Personal message
+		std::string::size_type const space = c.msg.find(' ');
+		if (space >= c.msg.size() - 1)
+			return; // No Message after '@<User>'
+		c.recipient = c.msg.substr(1, space - 1);
+		c.msg = c.msg.substr(space + 1);
+	}
+	send(c);
+}
+
+/** Care for change of game speed PAUSE, 1x 2x 3x .... */
+void GameHost::handle_speed(Client& client, RecvPacket& r) {
+	client.desiredspeed = r.unsigned_16();
+	update_network_speed();
+}
+
+/** a new file should be upload to all players */
+void GameHost::handle_new_file(Client& client) {
+	if (!file_)  // Do we have a file for sending?
+		throw DisconnectException("REQUEST_OF_N_E_FILE");
+	send_system_message_code(
+	    "STARTED_SENDING_FILE", file_->filename, d->settings.users.at(client.usernum).name);
+	send_file_part(client.sock_id, 0);
+	// Remember client as "currently receiving file"
+	d->settings.users[client.usernum].ready = false;
+	SendPacket packet;
+	broadcast_setting_user(packet, client.usernum);
+}
+
 /**
  * Handle a single received packet.
  *
@@ -2033,246 +2188,82 @@ void GameHost::handle_network() {
  * \param i the client number
  * \param r the received packet
  */
-void GameHost::handle_packet(uint32_t const i, RecvPacket& r) {
-	Client& client = d->clients.at(i);
+void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
+	Client& client = d->clients.at(client_num);
 	uint8_t const cmd = r.unsigned_8();
 
 	if (cmd == NETCMD_DISCONNECT) {
-		uint8_t number = r.unsigned_8();
-		std::string reason = r.string();
-		if (number == 1)
-			disconnect_client(i, reason, false);
-		else {
-			std::string arg = r.string();
-			disconnect_client(i, reason, false, arg);
-		}
-		return;
+		return handle_disconnect(client_num, r);
 	}
 
 	if (client.playernum == UserSettings::not_connected()) {
 		if (cmd == NETCMD_METASERVER_PING) {
-			log("[Host]: Received ping from metaserver.\n");
-			// Send PING back
-			SendPacket packet;
-			packet.unsigned_8(NETCMD_METASERVER_PING);
-			d->net->send(client.sock_id, packet);
-
-			// Remove metaserver from list of clients
-			client.playernum = UserSettings::not_connected();
-			d->net->close(client.sock_id);
-			client.sock_id = 0;
-			return;
+			return handle_ping(client);
 		}
-
 		// Now we wait for the client to say Hi in the right language,
-		// unless the game has already started
-		if (d->game)
-			throw DisconnectException("GAME_ALREADY_STARTED");
-
-		if (cmd != NETCMD_HELLO)
-			throw ProtocolException(cmd);
-
-		uint8_t version = r.unsigned_8();
-		if (version != NETWORK_PROTOCOL_VERSION)
-			throw DisconnectException("DIFFERENT_PROTOCOL_VERS");
-
-		std::string clientname = r.string();
-		client.build_id = r.string();
-
-		welcome_client(i, clientname);
-		return;
+		return handle_hello(client_num, cmd, client, r);
 	}
 
 	switch (cmd) {
-	case NETCMD_PONG:
-		log("[Host]: Client %u: got pong\n", i);
+	    case NETCMD_PONG:
+		log("[Host]: Client %u: got pong\n", client_num);
 		break;
 
-	case NETCMD_SETTING_MAP:
-		if (!d->game) {
+	    case NETCMD_SETTING_CHANGETRIBE:    return handle_changetribe(client, r);
+	    case NETCMD_SETTING_CHANGESHARED:   return handle_changeshared(client, r);
+	    case NETCMD_SETTING_CHANGETEAM:     return handle_changeteam(client, r);
+	    case NETCMD_SETTING_CHANGEINIT:     return handle_changeinit(client, r);
+	    case NETCMD_SETTING_CHANGEPOSITION: return handle_changeposition(client, r);
+	    case NETCMD_TIME:                   return handle_nettime(client_num, r);
+	    case NETCMD_PLAYERCOMMAND:          return handle_playercommmand(client_num, client, r);
+	    case NETCMD_SYNCREPORT:             return handle_syncreport(client_num, client, r);
+	    case NETCMD_CHAT:                   return handle_chat(client, r);
+	    case NETCMD_SETSPEED:               return handle_speed(client, r);
+	    case NETCMD_NEW_FILE_AVAILABLE:     return handle_new_file(client);
+	    case NETCMD_FILE_PART:              return handle_file_part(client, r);
+
+	    case NETCMD_SETTING_MAP:
+	    case NETCMD_SETTING_PLAYER:
+	    case NETCMD_WIN_CONDITION:
+	    case NETCMD_PEACEFUL_MODE:
+	    case NETCMD_LAUNCH:
+		if (!d->game) { // not expected whe game is in progress -> somethings wrong here
 			throw DisconnectException("NO_ACCESS_TO_SERVER");
 		}
 		break;
 
-	case NETCMD_SETTING_CHANGETRIBE:
-		//  Do not be harsh about packets of this type arriving out of order -
-		//  the client might just have had bad luck with the timing.
-		if (!d->game) {
-			uint8_t num = r.unsigned_8();
-			if (num != client.playernum)
-				throw DisconnectException("NO_ACCESS_TO_PLAYER");
-			std::string tribe = r.string();
-			bool random_tribe = r.unsigned_8() == 1;
-			set_player_tribe(num, tribe, random_tribe);
-		}
-		break;
-
-	case NETCMD_SETTING_CHANGESHARED:
-		//  Do not be harsh about packets of this type arriving out of order -
-		//  the client might just have had bad luck with the timing.
-		if (!d->game) {
-			uint8_t num = r.unsigned_8();
-			if (num != client.playernum)
-				throw DisconnectException("NO_ACCESS_TO_PLAYER");
-			set_player_shared(num, r.unsigned_8());
-		}
-		break;
-
-	case NETCMD_SETTING_CHANGETEAM:
-		if (!d->game) {
-			uint8_t num = r.unsigned_8();
-			if (num != client.playernum)
-				throw DisconnectException("NO_ACCESS_TO_PLAYER");
-			set_player_team(num, r.unsigned_8());
-		}
-		break;
-
-	case NETCMD_SETTING_CHANGEINIT:
-		if (!d->game) {
-			// TODO(GunChleoc): For some nebulous reason, we don't receive the num that the client is
-			// sending when a player changes slot. So, keeping the access to the client off for now.
-			// Would be nice to have though.
-			uint8_t num = r.unsigned_8();
-			if (num != client.playernum)
-				throw DisconnectException("NO_ACCESS_TO_PLAYER");
-			set_player_init(num, r.unsigned_8());
-		}
-		break;
-
-	case NETCMD_SETTING_CHANGEPOSITION:
-		if (!d->game) {
-			uint8_t const pos = r.unsigned_8();
-			switch_to_player(client.usernum, pos);
-		}
-		break;
-
-	case NETCMD_SETTING_PLAYER:
-		if (!d->game) {
-			throw DisconnectException("NO_ACCESS_TO_SERVER");
-		}
-		break;
-
-	case NETCMD_WIN_CONDITION:
-		if (!d->game) {
-			throw DisconnectException("NO_ACCESS_TO_SERVER");
-		}
-		break;
-
-	case NETCMD_PEACEFUL_MODE:
-		if (!d->game) {
-			throw DisconnectException("NO_ACCESS_TO_SERVER");
-		}
-		break;
-
-	case NETCMD_LAUNCH:
-		if (!d->game) {
-			throw DisconnectException("NO_ACCESS_TO_SERVER");
-		}
-		break;
-
-	case NETCMD_TIME:
-		if (!d->game)
-			throw DisconnectException("TIME_SENT_NOT_READY");
-		receive_client_time(i, r.signed_32());
-		break;
-
-	case NETCMD_PLAYERCOMMAND: {
-		if (!d->game)
-			throw DisconnectException("PLAYERCMD_WO_GAME");
-		int32_t time = r.signed_32();
-		Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
-		log("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n", i, client.playernum,
-		    static_cast<unsigned int>(plcmd->id()), plcmd->sender(), time);
-		receive_client_time(i, time);
-		if (plcmd->sender() != client.playernum + 1)
-			throw DisconnectException("PLAYERCMD_FOR_OTHER");
-		send_player_command(plcmd);
-	} break;
-
-	case NETCMD_SYNCREPORT: {
-		if (!d->game || !d->syncreport_pending || client.syncreport_arrived)
-			throw DisconnectException("UNEXPECTED_SYNC_REP");
-		int32_t time = r.signed_32();
-		r.data(client.syncreport.data, 16);
-		client.syncreport_arrived = true;
-		receive_client_time(i, time);
-		check_sync_reports();
-		break;
-	}
-
-	case NETCMD_CHAT: {
-		ChatMessage c(r.string());
-		c.playern = d->settings.users.at(client.usernum).position;
-		c.sender = d->settings.users.at(client.usernum).name;
-		if (c.msg.size() && *c.msg.begin() == '@') {
-			// Personal message
-			std::string::size_type const space = c.msg.find(' ');
-			if (space >= c.msg.size() - 1)
-				break;
-			c.recipient = c.msg.substr(1, space - 1);
-			c.msg = c.msg.substr(space + 1);
-		}
-		send(c);
-		break;
-	}
-
-	case NETCMD_SETSPEED: {
-		client.desiredspeed = r.unsigned_16();
-		update_network_speed();
-		break;
-	}
-
-	case NETCMD_NEW_FILE_AVAILABLE: {
-		if (!file_)  // Do we have a file for sending
-			throw DisconnectException("REQUEST_OF_N_E_FILE");
-		send_system_message_code(
-		   "STARTED_SENDING_FILE", file_->filename, d->settings.users.at(client.usernum).name);
-		send_file_part(client.sock_id, 0);
-		// Remember client as "currently receiving file"
-		d->settings.users[client.usernum].ready = false;
-		SendPacket packet;
-		packet.unsigned_8(NETCMD_SETTING_USER);
-		packet.unsigned_32(client.usernum);
-		write_setting_user(packet, client.usernum);
-		broadcast(packet);
-		break;
-	}
-
-	case NETCMD_FILE_PART: {
-		if (!file_)  // Do we have a file for sending
-			throw DisconnectException("REQUEST_OF_N_E_FILE");
-		uint32_t part = r.unsigned_32();
-		std::string x = r.string();
-		if (x != file_->md5sum) {
-			log(
-			   "[Host]: File transfer checksum mismatch %s != %s\n", x.c_str(), file_->md5sum.c_str());
-			return;  // Surely the file was changed, so we cancel here.
-		}
-		if (part >= file_->parts.size())
-			throw DisconnectException("REQUEST_OF_N_E_FILEPART");
-		if (part == file_->parts.size() - 1) {
-			send_system_message_code(
-			   "COMPLETED_FILE_TRANSFER", file_->filename, d->settings.users.at(client.usernum).name);
-			d->settings.users[client.usernum].ready = true;
-			SendPacket packet;
-			packet.unsigned_8(NETCMD_SETTING_USER);
-			packet.unsigned_32(client.usernum);
-			write_setting_user(packet, client.usernum);
-			broadcast(packet);
-			return;
-		}
-		++part;
-		if (part % 100 == 0)
-			send_system_message_code("SENDING_FILE_PART",
-			                         (boost::format("%i/%i") % part % (file_->parts.size() + 1)).str(),
-			                         file_->filename, d->settings.users.at(client.usernum).name);
-		send_file_part(client.sock_id, part);
-		break;
-	}
-
-	default:
+	    default:
 		throw ProtocolException(cmd);
 	}
+}
+
+/** Hanlde uploading part of a file  */
+void GameHost::handle_file_part(Client& client, RecvPacket& r) {
+	if (!file_)  // Do we have a file for sending
+		throw DisconnectException("REQUEST_OF_N_E_FILE");
+	uint32_t part = r.unsigned_32();
+	std::string x = r.string();
+	if (x != file_->md5sum) {
+		log(
+		    "[Host]: File transfer checksum mismatch %s != %s\n", x.c_str(), file_->md5sum.c_str());
+		return;  // Surely the file was changed, so we cancel here.
+	}
+	if (part >= file_->parts.size())
+		throw DisconnectException("REQUEST_OF_N_E_FILEPART");
+	if (part == file_->parts.size() - 1) {
+		send_system_message_code(
+					 "COMPLETED_FILE_TRANSFER", file_->filename, d->settings.users.at(client.usernum).name);
+		d->settings.users[client.usernum].ready = true;
+		SendPacket packet;
+		broadcast_setting_user(packet, client.usernum);
+		return;
+	}
+	++part;
+	if (part % 100 == 0) // Show Progress message every 100th transfer
+		send_system_message_code("SENDING_FILE_PART",
+					 (boost::format("%i/%i") % part % (file_->parts.size() + 1)).str(),
+					 file_->filename, d->settings.users.at(client.usernum).name);
+	send_file_part(client.sock_id, part);
 }
 
 void GameHost::send_file_part(NetHostInterface::ConnectionId csock_id, uint32_t part) {
@@ -2313,13 +2304,13 @@ void GameHost::disconnect_player_controller(uint8_t const number, const std::str
 	// Don't replace player with AI, let host choose what to do
 }
 
-void GameHost::disconnect_client(uint32_t const number,
+void GameHost::disconnect_client(uint32_t const client_number,
                                  const std::string& reason,
                                  bool const sendreason,
                                  const std::string& arg) {
-	assert(number < d->clients.size());
+	assert(client_number < d->clients.size());
 
-	Client& client = d->clients.at(number);
+	Client& client = d->clients.at(client_number);
 
 	// If the client is linked to a player and it is the client that closes the connection
 	// and the game has already started ...
@@ -2357,8 +2348,7 @@ void GameHost::disconnect_client(uint32_t const number,
 			disconnect_player_controller(position, d->settings.users.at(client.usernum).name);
 		}
 		// Do NOT reset the clients name in the corresponding UserSettings, that way we keep the name
-		// for the
-		// statistics.
+		// for the statistics.
 		// d->settings.users.at(client.usernum).name = std::string();
 
 		// Broadcast the user changes to everybody
@@ -2366,14 +2356,11 @@ void GameHost::disconnect_client(uint32_t const number,
 		   "CLIENT_X_LEFT_GAME", d->settings.users.at(client.usernum).name, reason, arg);
 
 		SendPacket packet;
-		packet.unsigned_8(NETCMD_SETTING_USER);
-		packet.unsigned_32(client.usernum);
-		write_setting_user(packet, client.usernum);
-		broadcast(packet);
-	} else
+		broadcast_setting_user(packet, client.usernum);
+	} else {
 		send_system_message_code("UNKNOWN_LEFT_GAME", reason, arg);
-
-	log("[Host]: disconnect_client(%u, %s, %s)\n", number, reason.c_str(), arg.c_str());
+	}
+	log("[Host]: disconnect_client(%u, %s, %s)\n", client_number, reason.c_str(), arg.c_str());
 
 	if (client.sock_id > 0) {
 		if (sendreason) {
