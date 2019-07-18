@@ -988,7 +988,7 @@ bool GameHost::can_launch() {
 		if (usernum == -1) {
 			return false;
 		}
-		if (users[j->usernum].ready) {
+		if (users[usernum].ready) {
 			return false;
 		}
 	}
