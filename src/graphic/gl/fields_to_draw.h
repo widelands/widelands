@@ -30,7 +30,6 @@
 #include "base/vector.h"
 #include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
-#include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
 // Helper struct that contains the data needed for drawing all fields.
@@ -61,7 +60,7 @@ public:
 		Widelands::Vision vision;
 		Widelands::Player* owner;  // can be nullptr.
 
-		// Index of neighbors in this 'FieldsToDraw'. kInvalidIndex if this
+		// Index of neighbors in this 'FieldsToDraw'. INVALID_INDEX if this
 		// neighbor is not contained.
 		int ln_index;
 		int rn_index;
@@ -97,9 +96,8 @@ public:
 		return &fields_[index];
 	}
 
-private:
 	// Calculates the index of the given field with ('fx', 'fy') being geometric
-	// coordinates in the map. Returns kInvalidIndex if this field is not in the
+	// coordinates in the map. Returns INVALID_INDEX if this field is not in the
 	// fields_to_draw.
 	inline int calculate_index(int fx, int fy) const {
 		uint16_t xidx = fx - min_fx_;
@@ -113,6 +111,7 @@ private:
 		return yidx * w_ + xidx;
 	}
 
+private:
 	// Minimum and maximum field coordinates (geometric) to render. Can be negative.
 	int min_fx_ = 0;
 	int max_fx_ = 0;

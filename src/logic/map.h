@@ -29,9 +29,8 @@
 
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
-#include "logic/description_maintainer.h"
 #include "logic/field.h"
-#include "logic/findimmovable.h"
+#include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/walkingdir.h"
 #include "logic/map_revision.h"
 #include "logic/objective.h"
@@ -290,6 +289,9 @@ public:
 		return height_;
 	}
 
+	// Map compatibility information for the website
+	int needs_widelands_version_after() const;
+
 	//  The next few functions are only valid when the map is loaded as a
 	//  scenario.
 	const std::string& get_scenario_player_tribe(PlayerNumber) const;
@@ -333,6 +335,7 @@ public:
 
 	// Field logic
 	static MapIndex get_index(const Coords&, int16_t width);
+	MapIndex get_index(const Coords&) const;
 	MapIndex max_index() const {
 		return width_ * height_;
 	}
@@ -381,6 +384,9 @@ public:
 	void get_neighbour(const Coords&, Direction dir, Coords*) const;
 	void get_neighbour(const FCoords&, Direction dir, FCoords*) const;
 	FCoords get_neighbour(const FCoords&, Direction dir) const;
+
+	std::set<Coords> to_set(Area<Coords> area) const;
+	std::set<TCoords<Coords>> triangles_in_region(std::set<Coords> area) const;
 
 	// Pathfinding
 	int32_t findpath(Coords instart,
@@ -515,6 +521,12 @@ public:
 	std::map<Coords, FieldData>
 	resize(EditorGameBase& egbase, const Coords coords, int32_t w, int32_t h);
 
+protected:
+	/// Calculate map compatibility information for the website if it wasn't defined in the map
+	/// packet. If is_post_one_world is true, this map wasn't created for a specific world (Widelands
+	/// versions up to Build 18).
+	void calculate_needs_widelands_version_after(bool is_post_one_world);
+
 private:
 	void recalc_border(const FCoords&);
 	void recalc_brightness(const FCoords&);
@@ -591,6 +603,10 @@ inline MapIndex Map::get_index(const Coords& c, int16_t const width) {
 	assert(c.x < width);
 	assert(0 <= c.y);
 	return c.y * width + c.x;
+}
+
+inline MapIndex Map::get_index(const Coords& c) const {
+	return get_index(c, width_);
 }
 
 inline Field& Map::operator[](MapIndex const i) const {

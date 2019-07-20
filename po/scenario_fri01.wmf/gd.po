@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-11 05:49+0000\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Build a wood economy and a reed farm"
-msgstr "Tog eaconamaidh fiodha agus tuathanas-cuilce"
+msgstr "Tog eaconamaidh fiodha agus tuathanas-feòir"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:29
 msgid "Wood Economy"
@@ -33,8 +33,8 @@ msgid ""
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
 "Tog co-dhiù aon taigh buaineadair-fhiodha agus dà thaigh planntair-choille "
-"ach an tòisich thu air fiodh a shaothrachadh agus tuathanas-cuilce ach am "
-"fàs thu cuilceach."
+"ach an tòisich thu air fiodh a shaothrachadh agus tuathanas-feòir ach am fàs"
+" thu achaidhean feòir."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Start producing bricks"
@@ -87,8 +87,8 @@ msgid "20 × Coal"
 msgstr "20 × gual"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:52
-msgid "30 × Thatch Reed"
-msgstr "30 × feur tughaidh"
+msgid "30 × Reed"
+msgstr "30 × feur"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:53
 msgid ""
@@ -253,17 +253,19 @@ msgstr ""
 "Fàilte gu eilean Langeness àlainn! Is mise Reebaud, ceann-cinnidh an eilein "
 "ùir seo."
 
-#. TRANSLATORS: Reebaud – Introduction 1
+#. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
+#. dukedoms
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:133
 msgid ""
 "My tribe and I have just arrived from the mainland. There were fights with "
-"the Danes in the North, the Vikings in the East… So, I decided to lead my "
-"tribe away to start a quiet, peaceful life on this untouched island."
+"the Danes in the North, the Schauenburgers and Holsteiners in the East and "
+"South… So I decided to lead my tribe away to start a quiet, peaceful life on"
+" this untouched island."
 msgstr ""
 "Tha mi fhìn ’s mo cuideachd dìreach air tighinn on tìr-mhòr. Bha còmhstri an"
-" aghaidh nan Dànach gu tuath is nan Lochlannach gu ear… Mar sin, chuir mi "
-"romham an treubh agam a stiùireadh air falbh ach am buannaicheamaid beatha "
-"shìtheil shàmhach san eilean ùr seo."
+" aghaidh nan Dànach gu tuath is muinntir Schauenburg ’s Holstein gu ear is "
+"deas… Mar sin, chuir mi romham an treubh agam a stiùireadh air falbh ach am "
+"buannaicheamaid beatha shìtheil shàmhach san eilean ùr seo."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:137
 msgid "A new home"
@@ -282,7 +284,7 @@ msgstr ""
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:142
 msgid ""
-"I have asked Hauke, one of my advisors to oversee the construction of our "
+"I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
 msgstr ""
 "Dh’iarr mi air an fhear-chomhairle Hauke ach an stiùirich e togail an "
@@ -292,14 +294,15 @@ msgstr ""
 msgid "The first buildings"
 msgstr "Na ciad togalaichean"
 
-#. TRANSLATORS: Hauke – Introduction 3
+#. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian
+#. greeting
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:148
 msgid ""
-"Greetings, Chieftain Reebaud! I will start with the colonization of the "
-"island straight away."
+"Peace, Chieftain Reebaud! I will start with the colonization of the island "
+"straight away."
 msgstr ""
-"Sin sibh, a cheannaird Reebauid! Tòisichidh mi le tuineachadh an eilein sa "
-"bhad."
+"Sìth leibh, a cheannaird Reebauid! Tòisichidh mi le tuineachadh an eilein sa"
+" bhad."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:151
@@ -330,14 +333,13 @@ msgid ""
 "Also, we had better build a reed farm soon. Even reed farms need reed to be "
 "built, so we must take care not to run short before we can grow our own. "
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
-"start growing thatch reed."
+"start growing reed fields."
 msgstr ""
-"A bharrachd air sin, bu chòir dhuinn tuathanas-cuilce a thogail a "
-"dh’aithghearr. Tha fiù tuathanasan-cuilce feumach air feur tughaidh, mar sin"
-" feumaidh sinn a bhith faiceallach nach ruith e oirnn mus fhàs sinn "
-"cuilceach ùr. Chan eil e doirbh cuilceach a thogail, mar sin chan eil an "
-"tuathanach-cuilce feumach air dad sam bith eile airson feur tughaidh a "
-"shaothrachadh."
+"A bharrachd air sin, bu chòir dhuinn tuathanas-feòir a thogail a "
+"dh’aithghearr. Tha fiù tuathanasan-feòir feumach air feur, mar sin feumaidh "
+"sinn a bhith faiceallach nach ruith e oirnn mus fhàs sinn feur ùr. Chan eil "
+"e doirbh feur a thogail, mar sin chan eil an tuathanach-feòir feumach air "
+"dad sam bith eile airson achaidhean feòir a chur."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:162
 msgid "Building our new home"
@@ -352,13 +354,13 @@ msgid ""
 "rocks, but I don’t see any here. Perhaps these hills contain enough stones "
 "to mine some granite."
 msgstr ""
-"Tha sinn air dèanamh cinnteach gun dèid fiodh is feur tughaidh a "
-"shaothrachadh. Nise, feumaidh sinn dèiligeadh ri stòras nam breigichean "
-"againn. Thèid breigichean a losgadh ann an àth bhreigichean à gaireal is "
-"criadh, mar sin feumaidh sinn an dà dhiubh a shaothrachadh an toiseach. Air "
-"an tìr-mhòr, b’ àbhaist dhuinn an gaireal a ghearradh à carraigean ach chan "
-"fhaic mi gin ann a sheo. ’S dòcha gum bi clach gu leòr sna cnuic seo ach an "
-"tochail sinn cuid a ghaireil."
+"Tha sinn air dèanamh cinnteach gun dèid fiodh is feur a shaothrachadh. Nise,"
+" feumaidh sinn dèiligeadh ri stòras nam breigichean againn. Thèid "
+"breigichean a losgadh ann an àth bhreigichean à gaireal is criadh, mar sin "
+"feumaidh sinn an dà dhiubh a shaothrachadh an toiseach. Air an tìr-mhòr, b’ "
+"àbhaist dhuinn an gaireal a ghearradh à carraigean ach chan fhaic mi gin ann"
+" a sheo. ’S dòcha gum bi clach gu leòr sna cnuic seo ach an tochail sinn "
+"cuid a ghaireil."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:167
@@ -413,11 +415,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:185
 msgid "Reed Shortages"
-msgstr "Gainnead fheòir tughaidh"
+msgstr "Gainnead fheòir"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:186
 msgid "Build another reed farm"
-msgstr "Tog tuathanas-cuilce eile"
+msgstr "Tog tuathanas-feòir eile"
 
 #. TRANSLATORS: Hauke – no reed
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:188
@@ -427,19 +429,19 @@ msgid ""
 "also used for making fishing nets and other tools; therefore, resolving this"
 " shortage should be a priority."
 msgstr ""
-"Mhothaich mi gu bheil am feur tughaidh gann oirnn greis mhath a-nis. Tha "
-"coltas gu bheil na togalaichean againn feumach air tòrr dheth. Bu chòir "
-"dhuinn tuathanas-cuilce no dhà eile a thogail. Thèid feur tughaidh a "
-"chleachdadh cuideachd airson lìontan-èisg is acainnean eile a dhèanamh; mar "
-"sin, tha e cudromach gum fuasgail sinn an gainnead seo."
+"Mhothaich mi gu bheil am feur gann oirnn greis mhath a-nis. Tha coltas gu "
+"bheil na togalaichean againn feumach air tòrr dheth. Bu chòir dhuinn "
+"tuathanas-feòir no dhà eile a thogail. Thèid feur ’ga chleachdadh cuideachd "
+"airson lìontan-èisg is acainnean eile a dhèanamh; mar sin, tha e cudromach "
+"gum fuasgail sinn an gainnead seo."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:189
 msgid ""
-"You should assign the new reed farm the highest priority for thatch reed in "
-"the construction site window."
+"You should assign the new reed farm the highest priority for reed in the "
+"construction site window."
 msgstr ""
-"Bu chòir dhut am prìomhachas as àirde a chur air an fheur tughaidh ann an "
-"uinneag làrach togail an tuathanais-chuilce ùir."
+"Bu chòir dhut am prìomhachas as àirde a chur air an fheur ann an uinneag "
+"làrach togail an tuathanais-fheòir ùir."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Clay Shortages"
@@ -589,7 +591,7 @@ msgstr ""
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:234
 msgid ""
-"But when the mines will have to be expanded, rations won’t keep the miners "
+"But when the mines will have to be enhanced, rations won’t keep the miners "
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
 msgstr ""
@@ -1098,9 +1100,9 @@ msgid ""
 msgstr ""
 "Tha an tuil a’ tighinn on iar. Ma bheir sinn ar casan leinn, tha teans gun "
 "dèan sin às! Cha leig sinn leas ach port is doca a thogail – thà, agus taigh"
-" nam beart ach an dèanamaid clò treun dha na siùil de dh’fheur tughaidh is "
-"bian. ’S urrainn dhuinn dol air triall on phort an uairsin. Dèanamaid "
-"ùrnaigh dha na diathan is cuireamaid cabhag oirnn!"
+" nam beart ach an dèanamaid clò treun dha na siùil de dh’fheur is bian. ’S "
+"urrainn dhuinn dol air triall on phort an uairsin. Dèanamaid ùrnaigh dha na "
+"diathan is cuireamaid cabhag oirnn!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:409
 msgid "Don’t Forget the Soldiers"
@@ -1114,14 +1116,14 @@ msgstr "A shaighdearaibh, dhan phort!"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid ""
 "I almost forgot in this haste – whereever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to 10 soldiers on "
-"our ship, if they don’t mind being all crammed up together. Let’s send some "
-"to the port when it’s completed, so they can embark when we set sail!"
+"to secure and expand our new colony. There’s space for up to ten soldiers on"
+" our ship, if they don’t mind being all crammed together. Let’s send some to"
+" the port when it’s completed, so they can embark when we set sail!"
 msgstr ""
 "Cha mhòr gun do dhìochuimhnich mi leis a’ chabhag a tha oirnn – ge b’ e "
 "càite an dèid sinn, feumaidh sinn saighdearan ach an gabh sinn greim air "
-"tuineachadh ùr ’s gun leudaich sinn e. Tha rùm dha suas ri 10 saighdearan "
-"air an long againn ma tha iad coma gum bi e dùmhail ann. Cuireamaid cuid "
+"tuineachadh ùr ’s gun leudaich sinn e. Tha rùm dha suas ri deich saighdearan"
+" air an long againn ma tha iad coma gum bi e dùmhail ann. Cuireamaid cuid "
 "dhiubh dhan phort nuair a bhios e deiseil ach an dig iad leinn dhan mhuir!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:416
@@ -1156,16 +1158,3 @@ msgstr ""
 "Tha thu air am misean seo a choileanadh. Faodaidh tu gluasad air adhart dhan"
 " ath-chnàmh-sgeul a-nis ach an cuir thu taic dhuinn le togail na dachaighe "
 "ùire, fad air falbh on dia dìoghaltach…"
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Amas ùr"
-msgstr[1] "Amasan ùra"
-msgstr[2] "Amasan ùra"
-msgstr[3] "Amasan ùra"

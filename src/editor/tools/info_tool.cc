@@ -39,7 +39,8 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
                                           EditorActionArgs* /* args */,
                                           Widelands::Map* map) {
 
-	static constexpr int kListFontsize = UI_FONT_SIZE_MESSAGE;
+	constexpr UI::FontStyle font_style = UI::FontStyle::kWuiInfoPanelParagraph;
+
 	parent.stop_painting();
 
 	UI::Window* const w =
@@ -53,7 +54,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	std::string buf = as_heading(_("Node"), UI::PanelStyle::kWui, true);
 	buf += as_listitem(
 	   (boost::format(_("Coordinates: (%1$i, %2$i)")) % center.node.x % center.node.y).str(),
-	   kListFontsize);
+	   font_style);
 
 	std::vector<std::string> caps_strings;
 	Widelands::NodeCaps const caps = f.nodecaps();
@@ -100,15 +101,15 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	buf += as_listitem((boost::format(_("Caps: %s")) %
 	                    i18n::localize_list(caps_strings, i18n::ConcatenateWith::COMMA))
 	                      .str(),
-	                   kListFontsize);
+	                   font_style);
 
 	if (f.get_owned_by() > 0) {
 		buf += as_listitem(
 		   (boost::format(_("Owned by: Player %u")) % static_cast<unsigned int>(f.get_owned_by()))
 		      .str(),
-		   kListFontsize);
+		   font_style);
 	} else {
-		buf += as_listitem(_("Owned by: —"), kListFontsize);
+		buf += as_listitem(_("Owned by: —"), font_style);
 	}
 
 	// *** Terrain info
@@ -119,7 +120,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	   center.triangle.t == Widelands::TriangleIndex::D ? tf.terrain_d() : tf.terrain_r());
 
 	buf += as_listitem(
-	   (boost::format(pgettext("terrain_name", "Name: %s")) % ter.descname()).str(), kListFontsize);
+	   (boost::format(pgettext("terrain_name", "Name: %s")) % ter.descname()).str(), font_style);
 
 	std::vector<std::string> terrain_is_strings;
 	for (const Widelands::TerrainDescription::Type& terrain_type : ter.get_types()) {
@@ -132,10 +133,10 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	   (boost::format(_("Is: %s")) %
 	    i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND))
 	      .str(),
-	   kListFontsize);
+	   font_style);
 	buf += as_listitem(
 	   (boost::format(_("Editor Category: %s")) % ter.editor_category()->descname()).str(),
-	   kListFontsize);
+	   font_style);
 
 	// *** Map Object info
 	const Widelands::BaseImmovable* immovable = f.get_immovable();
@@ -144,9 +145,8 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 		/** TRANSLATORS: Heading for immovables and animals in editor info tool */
 		buf += as_heading(_("Objects"), UI::PanelStyle::kWui);
 		if (immovable) {
-			buf +=
-			   as_listitem((boost::format(_("Immovable: %s")) % immovable->descr().descname()).str(),
-			               kListFontsize);
+			buf += as_listitem(
+			   (boost::format(_("Immovable: %s")) % immovable->descr().descname()).str(), font_style);
 		}
 
 		if (bob) {
@@ -179,19 +179,19 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 				buf += as_listitem((boost::format(_("Animals: %s")) %
 				                    i18n::localize_list(critternames, i18n::ConcatenateWith::COMMA))
 				                      .str(),
-				                   kListFontsize);
+				                   font_style);
 			}
 			if (!workernames.empty()) {
 				buf += as_listitem((boost::format(_("Workers: %s")) %
 				                    i18n::localize_list(workernames, i18n::ConcatenateWith::COMMA))
 				                      .str(),
-				                   kListFontsize);
+				                   font_style);
 			}
 			if (!shipnames.empty()) {
 				buf += as_listitem((boost::format(_("Ships: %s")) %
 				                    i18n::localize_list(shipnames, i18n::ConcatenateWith::COMMA))
 				                      .str(),
-				                   kListFontsize);
+				                   font_style);
 			}
 		}
 	}
@@ -204,28 +204,28 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 		   (boost::format(pgettext("resources", "%1%x %2%")) % static_cast<unsigned int>(ramount) %
 		    world.get_resource(f.get_resources())->descname())
 		      .str(),
-		   kListFontsize);
+		   font_style);
 	}
 
 	// *** Map info
 	buf += as_heading(_("Map"), UI::PanelStyle::kWui);
 	buf += as_listitem(
-	   (boost::format(pgettext("map_name", "Name: %s")) % map->get_name()).str(), kListFontsize);
+	   (boost::format(pgettext("map_name", "Name: %s")) % map->get_name()).str(), font_style);
 	buf += as_listitem(
 	   (boost::format(_("Size: %1% x %2%")) % map->get_width() % map->get_height()).str(),
-	   kListFontsize);
+	   font_style);
 
 	if (map->get_nrplayers() > 0) {
 		buf += as_listitem(
 		   (boost::format(_("Players: %u")) % static_cast<unsigned int>(map->get_nrplayers())).str(),
-		   kListFontsize);
+		   font_style);
 	} else {
-		buf += as_listitem(_("Players: –"), kListFontsize);
+		buf += as_listitem(_("Players: –"), font_style);
 	}
 
-	buf += as_listitem((boost::format(_("Author: %s")) % map->get_author()).str(), kListFontsize);
-	buf += as_listitem(
-	   (boost::format(_("Description: %s")) % map->get_description()).str(), kListFontsize);
+	buf += as_listitem((boost::format(_("Author: %s")) % map->get_author()).str(), font_style);
+	buf +=
+	   as_listitem((boost::format(_("Description: %s")) % map->get_description()).str(), font_style);
 
 	multiline_textarea->set_text(as_richtext(buf));
 

@@ -39,24 +39,11 @@ EditorToolResizeOptionsMenu::EditorToolResizeOptionsMenu(EditorInteractive& pare
    : EditorToolOptionsMenu(parent, registry, 260, 200, _("Resize")),
      resize_tool_(resize_tool),
      box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
-     new_width_(&box_,
-                0,
-                0,
-                get_inner_w() - 2 * hmargin(),
-                200,
-                24,
-                _("New width"),
-                UI::DropdownType::kTextual,
-                UI::PanelStyle::kWui),
-     new_height_(&box_,
-                 0,
-                 0,
-                 get_inner_w() - 2 * hmargin(),
-                 200,
-                 24,
-                 _("New height"),
-                 UI::DropdownType::kTextual,
-                 UI::PanelStyle::kWui),
+     map_size_box_(box_,
+                   "tool_resize_map",
+                   4,
+                   parent.egbase().map().get_width(),
+                   parent.egbase().map().get_height()),
      text_area_(
         &box_,
         0,
@@ -68,40 +55,20 @@ EditorToolResizeOptionsMenu::EditorToolResizeOptionsMenu(EditorInteractive& pare
         UI::Align::kCenter,
         UI::MultilineTextarea::ScrollMode::kNoScrolling) {
 
-	for (const int32_t& i : Widelands::kMapDimensions) {
-		new_width_.add(std::to_string(i), i);
-		new_height_.add(std::to_string(i), i);
-	}
-	new_width_.select(parent.egbase().map().get_width());
-	new_height_.select(parent.egbase().map().get_height());
-	new_width_.set_max_items(8);
-	new_height_.set_max_items(8);
+	map_size_box_.set_selection_function([this] { update_dimensions(); });
 
-	new_width_.selected.connect(
-	   boost::bind(&EditorToolResizeOptionsMenu::update_width, boost::ref(*this)));
-	new_height_.selected.connect(
-	   boost::bind(&EditorToolResizeOptionsMenu::update_height, boost::ref(*this)));
+	box_.add(&map_size_box_, UI::Box::Resizing::kExpandBoth);
+	box_.add(&text_area_, UI::Box::Resizing::kFullSize);
 
-	box_.add(&text_area_);
-	box_.set_size(100, 20);  // Prevent assert failures
-	box_.add(&new_width_, UI::Box::Resizing::kFullSize);
-	box_.add(&new_height_, UI::Box::Resizing::kFullSize);
-
-	box_.set_size(get_inner_w() - 2 * hmargin(),
-	              new_width_.get_h() + new_height_.get_h() + text_area_.get_h() + 2 * vspacing());
-	set_inner_size(get_inner_w(), box_.get_h() + 1 * vmargin());
+	set_center_panel(&box_);
 }
 
-void EditorToolResizeOptionsMenu::update_width() {
-	int32_t w = new_width_.get_selected();
+void EditorToolResizeOptionsMenu::update_dimensions() {
+	const int32_t w = map_size_box_.selected_width();
+	const int32_t h = map_size_box_.selected_height();
 	assert(w > 0);
-	resize_tool_.set_width(w);
-	select_correct_tool();
-}
-
-void EditorToolResizeOptionsMenu::update_height() {
-	int32_t h = new_height_.get_selected();
 	assert(h > 0);
+	resize_tool_.set_width(w);
 	resize_tool_.set_height(h);
 	select_correct_tool();
 }

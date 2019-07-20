@@ -59,6 +59,13 @@ RGBAColor::RGBAColor(const RGBColor& c) {
 	a = 255;
 }
 
+RGBAColor::RGBAColor(uint32_t hex)
+   : r((hex & 0xff0000) >> 16),
+     g((hex & 0xff00) >> 8),
+     b((hex & 0xff)),
+     a((hex & 0xff000000) >> 24) {
+}
+
 std::string RGBAColor::hex_value() const {
 	return (boost::format("%02x%02x%02x%02x>") % int(r) % int(g) % int(b) % int(a)).str();
 }

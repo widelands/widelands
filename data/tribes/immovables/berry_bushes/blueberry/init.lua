@@ -10,7 +10,7 @@ terrain_affinity = {
 }
 
 animations = {}
-add_animation(animations, "idle", dirname, "tiny/idle", { 6, 7 })
+add_animation(animations, "idle", dirname .. "tiny", "idle", { 6, 7 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -18,6 +18,7 @@ tribes:new_immovable_type {
    descname = _ "Blueberry Bush (tiny)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "tiny/menu.png",
    attributes = { "seed_berrybush" },
    terrain_affinity = terrain_affinity,
    programs = {
@@ -31,7 +32,7 @@ tribes:new_immovable_type {
 }
 
 animations = {}
-add_animation(animations, "idle", dirname, "small/idle", { 12, 13 })
+add_animation(animations, "idle", dirname .. "small", "idle", { 12, 13 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -39,6 +40,7 @@ tribes:new_immovable_type {
    descname = _ "Blueberry Bush (small)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "small/menu.png",
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
@@ -52,7 +54,7 @@ tribes:new_immovable_type {
 }
 
 animations = {}
-add_animation(animations, "idle", dirname, "medium/idle", { 15, 16 })
+add_animation(animations, "idle", dirname .. "medium", "idle", { 15, 16 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -60,6 +62,7 @@ tribes:new_immovable_type {
    descname = _ "Blueberry Bush (medium)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "medium/menu.png",
    attributes = { "flowering" },
    terrain_affinity = terrain_affinity,
    programs = {
@@ -73,7 +76,7 @@ tribes:new_immovable_type {
 }
 
 animations = {}
-add_animation(animations, "idle", dirname, "ripe/idle", { 15, 16 })
+add_animation(animations, "idle", dirname .. "ripe", "idle", { 15, 16 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -81,6 +84,7 @@ tribes:new_immovable_type {
    descname = _ "Blueberry Bush (ripe)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "ripe/menu.png",
    attributes = { "ripe_bush" },
    terrain_affinity = terrain_affinity,
    programs = {

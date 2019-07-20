@@ -3,8 +3,7 @@
 -- =======================================================================
 
 function send_building_lost_message(f)
-   local icon = f.immovable.descr.representative_image
-   local message = building_lost(icon)
+   local message = building_lost(f.immovable.descr.name)
    send_message(
       p1,
       message.title,
@@ -12,7 +11,7 @@ function send_building_lost_message(f)
       {
          field = f,
          popup = false,
-         icon = icon,
+         icon = f.immovable.descr.icon_name,
          message.title
       }
    )

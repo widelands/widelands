@@ -52,15 +52,18 @@ tribes:new_productionsite_type {
       "gold_ore"
    },
 
+   indicate_workarea_overlaps = {
+      atlanteans_goldmine = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _"mining gold",
          actions = {
-            "sleep=5000",
             "return=skipped unless economy needs gold_ore",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=34000",
+            "sleep=39000",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",

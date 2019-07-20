@@ -22,7 +22,6 @@
 
 #include "economy/input_queue.h"
 #include "logic/map_objects/immovable.h"
-#include "logic/widelands.h"
 
 namespace Widelands {
 

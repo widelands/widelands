@@ -412,6 +412,10 @@ void SoundHandler::play_fx(SoundType type,
 	}
 }
 
+void SoundHandler::load_fx(SoundType type, FxId id) {
+	fxs_[type][id]->load_sound_files();
+}
+
 /// Removes the given FXset from memory
 void SoundHandler::remove_fx_set(SoundType type) {
 	fxs_.erase(type);

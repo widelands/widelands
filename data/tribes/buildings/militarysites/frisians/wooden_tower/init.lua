@@ -13,7 +13,7 @@ tribes:new_militarysite_type {
 
    buildcost = {
       log = 3,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       log = 2

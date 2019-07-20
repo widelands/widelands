@@ -13,12 +13,12 @@ tribes:new_productionsite_type {
       brick = 3,
       granite = 1,
       log = 1,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle = {
       brick = 2,
       granite = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
@@ -62,9 +62,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start burning bricks because ...
          descname = _"burning bricks",
          actions = {
-            "sleep=30000",
             "return=skipped unless economy needs brick",
             "consume=granite clay:3 coal",
+            "sleep=30000",
             "animate=working 50000",
             "produce=brick:3"
          },

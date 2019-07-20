@@ -31,13 +31,13 @@
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/findbob.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/map_objects/findbob.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -114,7 +114,7 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
 	i18n::Textdomain td("tribes");
 
 	// Read the sailing animations
-	add_directional_animation(&sail_anims_, "sail");
+	assign_directional_animation(&sail_anims_, "sail");
 
 	capacity_ = table.has_key("capacity") ? table.get_int("capacity") : 20;
 }
@@ -275,7 +275,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 	case ShipStates::kSinkRequest:
 		if (descr().is_animation_known("sinking")) {
 			ship_state_ = ShipStates::kSinkAnimation;
-			start_task_idle(game, descr().get_animation("sinking"), 3000);
+			start_task_idle(game, descr().get_animation("sinking", this), 3000);
 			return;
 		}
 		log("Oh no... this ship has no sinking animation :(!\n");
@@ -788,7 +788,8 @@ bool Ship::withdraw_item(Game& game, PortDock& pd) {
 void Ship::unload_unfit_items(Game& game, PortDock& here, const PortDock& nextdest) {
 	size_t dst = 0;
 	for (ShippingItem& si : items_) {
-		if (fleet_->is_path_favourable(here, nextdest, *si.get_destination(game))) {
+		const PortDock* dest = si.get_destination(game);
+		if (dest && fleet_->is_path_favourable(here, nextdest, *dest)) {
 			items_[dst++] = si;
 		} else {
 			here.shipping_item_returned(game, si);
@@ -920,11 +921,13 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 	get_owner()->force_csite(c, get_owner()->tribe().port());
 
 	// Make sure that we have space to squeeze in a lumberjack
-	std::vector<ImmovableFound> trees;
-	game.map().find_immovables(Area<FCoords>(game.map().get_fcoords(c), 2), &trees,
+	std::vector<ImmovableFound> trees_rocks;
+	game.map().find_immovables(Area<FCoords>(game.map().get_fcoords(c), 3), &trees_rocks,
 	                           FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
-	for (auto& tree : trees) {
-		tree.object->remove(game);
+	game.map().find_immovables(Area<FCoords>(game.map().get_fcoords(c), 3), &trees_rocks,
+	                           FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks")));
+	for (auto& immo : trees_rocks) {
+		immo.object->remove(game);
 	}
 	set_ship_state_and_notify(
 	   ShipStates::kExpeditionColonizing, NoteShip::Action::kDestinationChanged);
@@ -1059,9 +1062,8 @@ void Ship::draw(const EditorGameBase& egbase,
 		case (ShipStates::kSinkAnimation):
 			break;
 		}
-		statistics_string = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_OK.hex_value() %
-		                     statistics_string)
-		                       .str();
+		statistics_string = g_gr->styles().color_tag(
+		   statistics_string, g_gr->styles().building_statistics_style().medium_color());
 	}
 
 	do_draw_info(draw_text, shipname_, statistics_string, calc_drawpos(egbase, point_on_dst, scale),
@@ -1126,10 +1128,7 @@ void Ship::send_message(Game& game,
                         const std::string& description,
                         const std::string& picture) {
 	const std::string rt_description =
-	   (boost::format("<div padding_r=10><p><img src=%s></p></div>"
-	                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-	    picture % UI_FONT_SIZE_MESSAGE % description)
-	      .str();
+	   as_mapobject_message(picture, g_gr->images().get(picture)->width(), description);
 
 	get_owner()->add_message(game, std::unique_ptr<Message>(new Message(
 	                                  Message::Type::kSeafaring, game.get_gametime(), title, picture,

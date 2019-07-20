@@ -149,6 +149,7 @@ private:
 	void toggle_resources();
 	void toggle_immovables();
 	void toggle_bobs();
+	void toggle_grid();
 
 	//  state variables
 	bool need_save_;
@@ -170,6 +171,7 @@ private:
 	UI::UniqueWindow::Registry helpmenu_;
 
 	UI::Button* toggle_buildhelp_;
+	UI::Button* toggle_grid_;
 	UI::Button* toggle_resources_;
 	UI::Button* toggle_immovables_;
 	UI::Button* toggle_bobs_;
@@ -182,6 +184,7 @@ private:
 	bool draw_resources_ = true;
 	bool draw_immovables_ = true;
 	bool draw_bobs_ = true;
+	bool draw_grid_ = true;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

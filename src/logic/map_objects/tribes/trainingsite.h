@@ -36,7 +36,8 @@ public:
 	TrainingSiteDescr(const std::string& init_descname,
 	                  const std::string& msgctxt,
 	                  const LuaTable& table,
-	                  const EditorGameBase& egbase);
+	                  const Tribes& tribes,
+	                  const World& world);
 	~TrainingSiteDescr() override {
 	}
 
@@ -197,6 +198,8 @@ public:
 	void training_attempted(TrainingAttribute type, uint32_t level);
 	void training_successful(TrainingAttribute type, uint32_t level);
 	void training_done();
+
+	const BuildingSettings* create_building_settings() const override;
 
 protected:
 	void program_end(Game&, ProgramResult) override;

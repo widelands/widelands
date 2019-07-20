@@ -9,7 +9,6 @@ wl_library(ui_fsmenu_options
     graphic
     graphic_fonthandler
     graphic_text
-    graphic_text_constants
     graphic_text_layout
     helper
     io_filesystem
@@ -76,7 +75,7 @@ wl_library(ui_fsmenu_loading_common
     singleplayer.h
   DEPENDS
     base_i18n
-    graphic_text_constants
+    graphic
     io_filesystem
     io_profile
     network
@@ -103,13 +102,14 @@ wl_library(ui_fsmenu_gameloading
     base_i18n
     graphic
     graphic_playercolor
-    graphic_text_constants
     helper
     io_filesystem
     io_profile
     logic
     logic_game_controller
     logic_game_settings
+    logic_map
+    logic_map_objects
     logic_tribe_basic_info
     map_io_map_loader
     scripting_lua_interface
@@ -145,7 +145,6 @@ wl_library(ui_fsmenu_maploading
     base_log
     graphic
     graphic_fonthandler
-    graphic_text_constants
     graphic_surface
     io_filesystem
     io_profile
@@ -173,7 +172,6 @@ wl_library(ui_fsmenu_network
     base_log
     base_macros
     graphic
-    graphic_text_constants
     io_profile
     network
     random

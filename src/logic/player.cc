@@ -39,10 +39,10 @@
 #include "io/filewrite.h"
 #include "logic/cmd_delete_message.h"
 #include "logic/cmd_luacoroutine.h"
-#include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/militarysite.h"
@@ -254,7 +254,8 @@ void Player::set_team_number(TeamNumber team) {
  * each other.
  */
 bool Player::is_hostile(const Player& other) const {
-	return &other != this && (!team_number_ || team_number_ != other.team_number_);
+	return &other != this && (!team_number_ || team_number_ != other.team_number_) &&
+	       !is_attack_forbidden(other.player_number());
 }
 
 bool Player::is_defeated() const {
@@ -760,18 +761,23 @@ void Player::enhance_or_dismantle(Building* building,
 			workers = building->get_workers();
 		}
 
+		const BuildingSettings* settings = nullptr;
 		if (index_of_new_building != INVALID_INDEX) {
+			settings = building->create_building_settings();
 			// For enhancing, register whether the window was open
 			Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kStartWarp));
 		}
+
 		building->remove(egbase());  //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
 		//  pointer.
-		if (index_of_new_building != INVALID_INDEX)
+
+		if (index_of_new_building != INVALID_INDEX) {
 			building = &egbase().warp_constructionsite(
-			   position, player_number_, index_of_new_building, false, former_buildings);
-		else
+			   position, player_number_, index_of_new_building, false, former_buildings, settings);
+		} else {
 			building = &egbase().warp_dismantlesite(position, player_number_, false, former_buildings);
+		}
 
 		// Open the new building window if needed
 		Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kFinishWarp));
@@ -949,22 +955,30 @@ Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32
 
 // TODO(unknown): Clean this mess up. The only action we really have right now is
 // to attack, so pretending we have more types is pointless.
-void Player::enemyflagaction(Flag& flag, PlayerNumber const attacker, uint32_t const count) {
-	if (attacker != player_number())
+void Player::enemyflagaction(Flag& flag,
+                             PlayerNumber const attacker,
+                             const std::vector<Widelands::Soldier*>& soldiers) {
+	if (attacker != player_number()) {
 		log("Player (%d) is not the sender of an attack (%d)\n", attacker, player_number());
-	else if (count == 0)
-		log("enemyflagaction: count is 0\n");
-	else if (is_hostile(flag.owner())) {
+	} else if (soldiers.empty()) {
+		log("enemyflagaction: no soldiers given\n");
+	} else if (is_hostile(flag.owner())) {
 		if (Building* const building = flag.get_building()) {
 			if (const AttackTarget* attack_target = building->attack_target()) {
 				if (attack_target->can_be_attacked()) {
-					std::vector<Soldier*> attackers;
-					find_attack_soldiers(flag, &attackers, count);
-					assert(attackers.size() <= count);
-
-					for (Soldier* temp_attacker : attackers) {
-						upcast(MilitarySite, ms, temp_attacker->get_location(egbase()));
-						ms->send_attacker(*temp_attacker, *building);
+					for (Soldier* temp_attacker : soldiers) {
+						assert(temp_attacker);
+						assert(temp_attacker->get_owner() == this);
+						if (upcast(MilitarySite, ms, temp_attacker->get_location(egbase()))) {
+							assert(ms->get_owner() == this);
+							ms->send_attacker(*temp_attacker, *building);
+						} else {
+							// The soldier may not be in a militarysite anymore if he was kicked out
+							// in the short delay between sending and executing a playercommand
+							log("Player(%u)::enemyflagaction: Not sending soldier %u because he left the "
+							    "building\n",
+							    player_number(), temp_attacker->serial());
+						}
 					}
 				}
 			}
@@ -1334,6 +1348,21 @@ const std::string& Player::get_ai() const {
 	return ai_;
 }
 
+bool Player::is_attack_forbidden(PlayerNumber who) const {
+	return forbid_attack_.find(who) != forbid_attack_.end();
+}
+
+void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
+	const auto it = forbid_attack_.find(who);
+	if (forbid ^ (it == forbid_attack_.end())) {
+		return;
+	} else if (forbid) {
+		forbid_attack_.emplace(who);
+	} else {
+		forbid_attack_.erase(it);
+	}
+}
+
 /**
  * Pick random name from remaining names (if any)
  */
@@ -1373,7 +1402,9 @@ void Player::read_remaining_shipnames(FileRead& fr) {
  *
  * \param fr source stream
  */
-void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
+void Player::read_statistics(FileRead& fr,
+                             const uint16_t packet_version,
+                             const TribesLegacyLookupTable& lookup_table) {
 	uint16_t nr_wares = fr.unsigned_16();
 	size_t nr_entries = fr.unsigned_16();
 
@@ -1403,7 +1434,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 		ware_productions_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = fr.c_string();
+		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u statistics: unknown ware name %s", player_number(), name.c_str());
@@ -1428,7 +1459,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 		ware_consumptions_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = fr.c_string();
+		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u consumption statistics: unknown ware name %s", player_number(),
@@ -1455,7 +1486,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 		ware_stocks_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = fr.c_string();
+		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u stock statistics: unknown ware name %s", player_number(), name.c_str());

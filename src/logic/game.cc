@@ -56,12 +56,12 @@
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
 #include "map_io/widelands_map_loader.h"
-#include "network/network.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -323,6 +323,19 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 	// Check for win_conditions
 	if (!settings.scenario) {
 		loader_ui->step(_("Initializing game…"));
+		if (settings.peaceful) {
+			for (uint32_t i = 1; i < settings.players.size(); ++i) {
+				if (Player* p1 = get_player(i)) {
+					for (uint32_t j = i + 1; j <= settings.players.size(); ++j) {
+						if (Player* p2 = get_player(j)) {
+							p1->set_attack_forbidden(j, true);
+							p2->set_attack_forbidden(i, true);
+						}
+					}
+				}
+			}
+		}
+
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
@@ -699,7 +712,7 @@ uint32_t Game::logic_rand() {
  * It takes the appropriate action, i.e. either add to the cmd_queue or send
  * across the network.
  */
-void Game::send_player_command(PlayerCommand& pc) {
+void Game::send_player_command(PlayerCommand* pc) {
 	ctrl_->send_player_command(pc);
 }
 
@@ -722,120 +735,122 @@ void Game::enqueue_command(Command* const cmd) {
 
 // we might want to make these inlines:
 void Game::send_player_bulldoze(PlayerImmovable& pi, bool const recurse) {
-	send_player_command(*new CmdBulldoze(get_gametime(), pi.owner().player_number(), pi, recurse));
+	send_player_command(new CmdBulldoze(get_gametime(), pi.owner().player_number(), pi, recurse));
 }
 
 void Game::send_player_dismantle(PlayerImmovable& pi) {
-	send_player_command(*new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi));
+	send_player_command(new CmdDismantleBuilding(get_gametime(), pi.owner().player_number(), pi));
 }
 
 void Game::send_player_build(int32_t const pid, const Coords& coords, DescriptionIndex const id) {
 	assert(tribes().building_exists(id));
-	send_player_command(*new CmdBuild(get_gametime(), pid, coords, id));
+	send_player_command(new CmdBuild(get_gametime(), pid, coords, id));
 }
 
 void Game::send_player_build_flag(int32_t const pid, const Coords& coords) {
-	send_player_command(*new CmdBuildFlag(get_gametime(), pid, coords));
+	send_player_command(new CmdBuildFlag(get_gametime(), pid, coords));
 }
 
 void Game::send_player_build_road(int32_t pid, Path& path) {
-	send_player_command(*new CmdBuildRoad(get_gametime(), pid, path));
+	send_player_command(new CmdBuildRoad(get_gametime(), pid, path));
 }
 
 void Game::send_player_flagaction(Flag& flag) {
-	send_player_command(*new CmdFlagAction(get_gametime(), flag.owner().player_number(), flag));
+	send_player_command(new CmdFlagAction(get_gametime(), flag.owner().player_number(), flag));
 }
 
 void Game::send_player_start_stop_building(Building& building) {
 	send_player_command(
-	   *new CmdStartStopBuilding(get_gametime(), building.owner().player_number(), building));
+	   new CmdStartStopBuilding(get_gametime(), building.owner().player_number(), building));
 }
 
 void Game::send_player_militarysite_set_soldier_preference(Building& building,
                                                            SoldierPreference my_preference) {
-	send_player_command(*new CmdMilitarySiteSetSoldierPreference(
+	send_player_command(new CmdMilitarySiteSetSoldierPreference(
 	   get_gametime(), building.owner().player_number(), building, my_preference));
 }
 
 void Game::send_player_start_or_cancel_expedition(Building& building) {
 	send_player_command(
-	   *new CmdStartOrCancelExpedition(get_gametime(), building.owner().player_number(), building));
+	   new CmdStartOrCancelExpedition(get_gametime(), building.owner().player_number(), building));
 }
 
 void Game::send_player_enhance_building(Building& building, DescriptionIndex const id) {
-	assert(building.owner().tribe().has_building(id));
-
+	assert(building.descr().type() == MapObjectType::CONSTRUCTIONSITE ||
+	       building.owner().tribe().has_building(id));
 	send_player_command(
-	   *new CmdEnhanceBuilding(get_gametime(), building.owner().player_number(), building, id));
+	   new CmdEnhanceBuilding(get_gametime(), building.owner().player_number(), building, id));
 }
 
 void Game::send_player_evict_worker(Worker& worker) {
-	send_player_command(*new CmdEvictWorker(get_gametime(), worker.owner().player_number(), worker));
+	send_player_command(new CmdEvictWorker(get_gametime(), worker.owner().player_number(), worker));
 }
 
 void Game::send_player_set_ware_priority(PlayerImmovable& imm,
                                          int32_t const type,
                                          DescriptionIndex const index,
-                                         int32_t const prio) {
-	send_player_command(
-	   *new CmdSetWarePriority(get_gametime(), imm.owner().player_number(), imm, type, index, prio));
+                                         int32_t const prio,
+                                         bool cs) {
+	send_player_command(new CmdSetWarePriority(
+	   get_gametime(), imm.owner().player_number(), imm, type, index, prio, cs));
 }
 
 void Game::send_player_set_input_max_fill(PlayerImmovable& imm,
                                           DescriptionIndex const index,
                                           WareWorker type,
-                                          uint32_t const max_fill) {
-	send_player_command(*new CmdSetInputMaxFill(
-	   get_gametime(), imm.owner().player_number(), imm, index, type, max_fill));
+                                          uint32_t const max_fill,
+                                          bool cs) {
+	send_player_command(new CmdSetInputMaxFill(
+	   get_gametime(), imm.owner().player_number(), imm, index, type, max_fill, cs));
 }
 
 void Game::send_player_change_training_options(TrainingSite& ts,
                                                TrainingAttribute attr,
                                                int32_t const val) {
 	send_player_command(
-	   *new CmdChangeTrainingOptions(get_gametime(), ts.owner().player_number(), ts, attr, val));
+	   new CmdChangeTrainingOptions(get_gametime(), ts.owner().player_number(), ts, attr, val));
 }
 
 void Game::send_player_drop_soldier(Building& b, int32_t const ser) {
 	assert(ser != -1);
-	send_player_command(*new CmdDropSoldier(get_gametime(), b.owner().player_number(), b, ser));
+	send_player_command(new CmdDropSoldier(get_gametime(), b.owner().player_number(), b, ser));
 }
 
 void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 	send_player_command(
-	   *new CmdChangeSoldierCapacity(get_gametime(), b.owner().player_number(), b, val));
+	   new CmdChangeSoldierCapacity(get_gametime(), b.owner().player_number(), b, val));
 }
 
 void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
-                                       uint32_t const num_soldiers) {
+                                       const std::vector<Serial>& soldiers) {
 	if (1 < player(who_attacks)
 	           .vision(Map::get_index(flag.get_building()->get_position(), map().get_width())))
-		send_player_command(*new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, num_soldiers));
+		send_player_command(new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
 }
 
 void Game::send_player_ship_scouting_direction(Ship& ship, WalkingDir direction) {
-	send_player_command(*new CmdShipScoutDirection(
+	send_player_command(new CmdShipScoutDirection(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
 void Game::send_player_ship_construct_port(Ship& ship, Coords coords) {
-	send_player_command(*new CmdShipConstructPort(
+	send_player_command(new CmdShipConstructPort(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
 }
 
 void Game::send_player_ship_explore_island(Ship& ship, IslandExploreDirection direction) {
-	send_player_command(*new CmdShipExploreIsland(
+	send_player_command(new CmdShipExploreIsland(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
 void Game::send_player_sink_ship(Ship& ship) {
 	send_player_command(
-	   *new CmdShipSink(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
+	   new CmdShipSink(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
 void Game::send_player_cancel_expedition_ship(Ship& ship) {
-	send_player_command(*new CmdShipCancelExpedition(
+	send_player_command(new CmdShipCancelExpedition(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
@@ -843,7 +858,15 @@ void Game::send_player_propose_trade(const Trade& trade) {
 	auto* object = objects().get_object(trade.initiator);
 	assert(object != nullptr);
 	send_player_command(
-	   *new CmdProposeTrade(get_gametime(), object->get_owner()->player_number(), trade));
+	   new CmdProposeTrade(get_gametime(), object->get_owner()->player_number(), trade));
+}
+
+void Game::send_player_set_stock_policy(Building& imm,
+                                        WareWorker ww,
+                                        DescriptionIndex di,
+                                        StockPolicy sp) {
+	send_player_command(new CmdSetStockPolicy(
+	   get_gametime(), imm.get_owner()->player_number(), imm, ww == wwWORKER, di, sp));
 }
 
 int Game::propose_trade(const Trade& trade) {

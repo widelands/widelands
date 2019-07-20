@@ -48,8 +48,9 @@ const uint32_t TrainingSite::training_state_multiplier_ = 12;
 TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
                                      const std::string& msgctxt,
                                      const LuaTable& table,
-                                     const EditorGameBase& egbase)
-   : ProductionSiteDescr(init_descname, msgctxt, MapObjectType::TRAININGSITE, table, egbase),
+                                     const Tribes& tribes,
+                                     const World& world)
+   : ProductionSiteDescr(init_descname, msgctxt, MapObjectType::TRAININGSITE, table, tribes, world),
      num_soldiers_(table.get_int("soldier_capacity")),
      max_stall_(table.get_int("trainer_patience")),
 
@@ -522,6 +523,14 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 		log("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
 		soldier_control_.drop_soldier(*soldier_to_drop);
 	}
+}
+
+const BuildingSettings* TrainingSite::create_building_settings() const {
+	TrainingsiteSettings* settings = new TrainingsiteSettings(descr());
+	settings->apply(*ProductionSite::create_building_settings());
+	settings->desired_capacity =
+	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
+	return settings;
 }
 
 /**

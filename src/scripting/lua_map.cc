@@ -27,8 +27,8 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/input_queue.h"
-#include "logic/findimmovable.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/terrain_affinity.h"
 #include "logic/map_objects/tribes/carrier.h"
@@ -1799,13 +1799,9 @@ const MethodType<LuaMapObjectDescription> LuaMapObjectDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[] = {
-   PROP_RO(LuaMapObjectDescription, descname),
-   PROP_RO(LuaMapObjectDescription, helptext_script),
-   PROP_RO(LuaMapObjectDescription, icon_name),
-   PROP_RO(LuaMapObjectDescription, name),
-   PROP_RO(LuaMapObjectDescription, type_name),
-   PROP_RO(LuaMapObjectDescription, representative_image),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMapObjectDescription, descname),  PROP_RO(LuaMapObjectDescription, helptext_script),
+   PROP_RO(LuaMapObjectDescription, icon_name), PROP_RO(LuaMapObjectDescription, name),
+   PROP_RO(LuaMapObjectDescription, type_name), {nullptr, nullptr, nullptr},
 };
 
 // Only base classes can be persisted.
@@ -1862,17 +1858,6 @@ int LuaMapObjectDescription::get_icon_name(lua_State* L) {
 
 int LuaMapObjectDescription::get_name(lua_State* L) {
 	lua_pushstring(L, get()->name());
-	return 1;
-}
-
-/* RST
-   .. attribute:: representative_image
-
-         (RO) a :class:`string` with the file path to the representative image
-         of the map object's idle animation
-*/
-int LuaMapObjectDescription::get_representative_image(lua_State* L) {
-	lua_pushstring(L, get()->representative_image_filename());
 	return 1;
 }
 
@@ -3701,7 +3686,6 @@ int LuaTerrainDescription::get_humidity(lua_State* L) {
 
          (RO) the :class:`string` file path to a representative image
 */
-
 int LuaTerrainDescription::get_representative_image(lua_State* L) {
 	lua_pushstring(L, get()->texture_paths().front());
 	return 1;
@@ -4887,39 +4871,38 @@ int LuaWarehouse::set_workers(lua_State* L) {
 }
 
 // Transforms the given warehouse policy to a string which is used by the lua code
-inline void wh_policy_to_string(lua_State* L, Warehouse::StockPolicy p) {
+inline void wh_policy_to_string(lua_State* L, StockPolicy p) {
 	switch (p) {
-	case Warehouse::StockPolicy::kNormal:
+	case StockPolicy::kNormal:
 		lua_pushstring(L, "normal");
 		break;
-	case Warehouse::StockPolicy::kPrefer:
+	case StockPolicy::kPrefer:
 		lua_pushstring(L, "prefer");
 		break;
-	case Warehouse::StockPolicy::kDontStock:
+	case StockPolicy::kDontStock:
 		lua_pushstring(L, "dontstock");
 		break;
-	case Warehouse::StockPolicy::kRemove:
+	case StockPolicy::kRemove:
 		lua_pushstring(L, "remove");
 		break;
 	}
 }
 // Transforms the given string from the lua code to a warehouse policy
-inline Warehouse::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
+inline StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
 	std::string str = luaL_checkstring(L, index);
 	if (str == "normal")
-		return Warehouse::StockPolicy::kNormal;
+		return StockPolicy::kNormal;
 	else if (str == "prefer")
-		return Warehouse::StockPolicy::kPrefer;
+		return StockPolicy::kPrefer;
 	else if (str == "dontstock")
-		return Warehouse::StockPolicy::kDontStock;
+		return StockPolicy::kDontStock;
 	else if (str == "remove")
-		return Warehouse::StockPolicy::kRemove;
+		return StockPolicy::kRemove;
 	else
 		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
 }
 
-inline bool
-do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
+inline bool do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const StockPolicy p) {
 	wh->set_ware_policy(idx, p);
 	return true;
 }
@@ -4928,8 +4911,7 @@ do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::S
  * Sets the given policy for the given ware in the given warehouse and return true.
  * If the no ware with the given name exists for the tribe of the warehouse, return false.
  */
-inline bool
-do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
+inline bool do_set_ware_policy(Warehouse* wh, const std::string& name, const StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	DescriptionIndex idx = tribe.ware_index(name);
 	if (!tribe.has_ware(idx)) {
@@ -4938,8 +4920,7 @@ do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse::Stoc
 	return do_set_ware_policy(wh, idx, p);
 }
 
-inline bool
-do_set_worker_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
+inline bool do_set_worker_policy(Warehouse* wh, const DescriptionIndex idx, const StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	// If the worker does not cost anything, ignore it
 	// Otherwise, an unlimited stream of carriers might leave the warehouse
@@ -4957,8 +4938,7 @@ do_set_worker_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse:
  * policy.
  * If no worker with the given name exists for the tribe of the warehouse, return false.
  */
-inline bool
-do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
+inline bool do_set_worker_policy(Warehouse* wh, const std::string& name, const StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	DescriptionIndex idx = tribe.worker_index(name);
 	if (!tribe.has_worker(idx)) {
@@ -4988,7 +4968,7 @@ int LuaWarehouse::set_warehouse_policies(lua_State* L) {
 		report_error(L, "Wrong number of arguments to set_warehouse_policies!");
 
 	Warehouse* wh = get(L, get_egbase(L));
-	Warehouse::StockPolicy p = string_to_wh_policy(L, -1);
+	StockPolicy p = string_to_wh_policy(L, -1);
 	lua_pop(L, 1);
 	const TribeDescr& tribe = wh->owner().tribe();
 

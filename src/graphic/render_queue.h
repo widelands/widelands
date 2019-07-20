@@ -32,10 +32,11 @@
 #include "graphic/color.h"
 #include "graphic/gl/draw_line_program.h"
 #include "graphic/gl/fields_to_draw.h"
-#include "logic/description_maintainer.h"
+#include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/world/terrain_description.h"
 
 class DitherProgram;
+class GridProgram;
 class RoadProgram;
 class TerrainProgram;
 class WorkareaProgram;
@@ -84,6 +85,7 @@ public:
 		kTerrainBase,
 		kTerrainDither,
 		kTerrainWorkarea,
+		kTerrainGrid,
 		kTerrainRoad,
 		kBlit,
 		kRect,
@@ -119,7 +121,7 @@ public:
 		int gametime = 0;
 		int renderbuffer_width = 0;
 		int renderbuffer_height = 0;
-		const DescriptionMaintainer<Widelands::TerrainDescription>* terrains = nullptr;
+		const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>* terrains = nullptr;
 		const FieldsToDraw* fields_to_draw = nullptr;
 		Workareas workareas;
 		float scale = 1.f;
@@ -182,6 +184,7 @@ private:
 	std::unique_ptr<TerrainProgram> terrain_program_;
 	std::unique_ptr<DitherProgram> dither_program_;
 	std::unique_ptr<WorkareaProgram> workarea_program_;
+	std::unique_ptr<GridProgram> grid_program_;
 	std::unique_ptr<RoadProgram> road_program_;
 
 	std::vector<Item> blended_items_;

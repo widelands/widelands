@@ -74,9 +74,9 @@ void SinglePlayerGameController::think() {
 	}
 }
 
-void SinglePlayerGameController::send_player_command(Widelands::PlayerCommand& pc) {
-	pc.set_cmdserial(++player_cmdserial_);
-	game_.enqueue_command(&pc);
+void SinglePlayerGameController::send_player_command(Widelands::PlayerCommand* pc) {
+	pc->set_cmdserial(++player_cmdserial_);
+	game_.enqueue_command(pc);
 }
 
 int32_t SinglePlayerGameController::get_frametime() {

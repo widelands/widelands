@@ -45,6 +45,11 @@ tribes:new_productionsite_type {
       empire_miner = 1
    },
 
+   indicate_workarea_overlaps = {
+      empire_ironmine = false,
+      empire_ironmine_deep = false,
+   },
+
    inputs = {
       { name = "ration", amount = 6 },
       { name = "beer", amount = 6 }
@@ -58,10 +63,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
          descname = _"mining iron",
          actions = {
-            "sleep=5000",
             "return=skipped unless economy needs iron_ore",
             "consume=ration beer",
-            "sleep=38000",
+            "sleep=43000",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",

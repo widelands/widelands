@@ -24,6 +24,7 @@
 
 #include "graphic/image.h"
 #include "logic/game_controller.h"
+#include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"

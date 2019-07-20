@@ -33,7 +33,7 @@
 #include "economy/input_queue.h"
 #include "economy/request.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -56,9 +56,9 @@ static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const MapObjectType init_type,
                              const LuaTable& table,
-                             const EditorGameBase& egbase)
+                             const Tribes& tribes)
    : MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
-     egbase_(egbase),
+     tribes_(tribes),
      buildable_(table.has_key("buildcost")),
      can_be_dismantled_(table.has_key("return_on_dismantle") ||
                         table.has_key("return_on_dismantle_on_enhanced")),
@@ -115,13 +115,13 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		if (enh == name()) {
 			throw wexception("enhancement to same type");
 		}
-		DescriptionIndex const en_i = egbase_.tribes().building_index(enh);
-		if (egbase_.tribes().building_exists(en_i)) {
+		DescriptionIndex const en_i = tribes_.building_index(enh);
+		if (tribes_.building_exists(en_i)) {
 			enhancement_ = en_i;
 
 			//  Merge the enhancements workarea info into this building's
 			//  workarea info.
-			const BuildingDescr* tmp_enhancement = egbase_.tribes().get_building_descr(en_i);
+			const BuildingDescr* tmp_enhancement = tribes_.get_building_descr(en_i);
 			for (auto area : tmp_enhancement->workarea_info_) {
 				std::set<std::string>& strs = workarea_info_[area.first];
 				for (std::string str : area.second)
@@ -139,14 +139,14 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	// However, we support "return_on_dismantle" without "buildable", because this is used by custom
 	// scenario buildings.
 	if (table.has_key("return_on_dismantle")) {
-		return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), egbase_.tribes());
+		return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), tribes_);
 	}
 	if (table.has_key("buildcost")) {
 		if (!table.has_key("return_on_dismantle")) {
 			throw wexception(
 			   "The building '%s' has a \"buildcost\" but no \"return_on_dismantle\"", name().c_str());
 		}
-		buildcost_ = Buildcost(table.get_table("buildcost"), egbase_.tribes());
+		buildcost_ = Buildcost(table.get_table("buildcost"), tribes_);
 	}
 
 	if (table.has_key("enhancement_cost")) {
@@ -156,9 +156,8 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			                 "\"return_on_dismantle_on_enhanced\"",
 			                 name().c_str());
 		}
-		enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), egbase_.tribes());
-		return_enhanced_ =
-		   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
+		enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), tribes_);
+		return_enhanced_ = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes_);
 	}
 
 	needs_seafaring_ = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
@@ -202,7 +201,7 @@ void BuildingDescr::set_hints_trainingsites_max_percent(int percent) {
 }
 
 uint32_t BuildingDescr::get_unoccupied_animation() const {
-	return get_animation(is_animation_known("unoccupied") ? "unoccupied" : "idle");
+	return get_animation(is_animation_known("unoccupied") ? "unoccupied" : "idle", nullptr);
 }
 
 /**
@@ -229,7 +228,7 @@ Create a construction site for this type of building
 */
 Building& BuildingDescr::create_constructionsite() const {
 	BuildingDescr const* const descr =
-	   egbase_.tribes().get_building_descr(egbase_.tribes().safe_building_index("constructionsite"));
+	   tribes_.get_building_descr(tribes_.safe_building_index("constructionsite"));
 	ConstructionSite& csite = dynamic_cast<ConstructionSite&>(descr->create_object());
 	csite.set_building(*this);
 
@@ -639,13 +638,13 @@ void Building::draw_info(const TextToDraw draw_text,
 
 int32_t
 Building::get_priority(WareWorker type, DescriptionIndex const ware_index, bool adjust) const {
-	int32_t priority = DEFAULT_PRIORITY;
+	int32_t priority = kPriorityNormal;
 	if (type == wwWARE) {
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
 		std::map<DescriptionIndex, int32_t>::const_iterator it = ware_priorities_.find(ware_index);
 		if (it != ware_priorities_.end())
-			priority = adjust ? (priority * it->second / DEFAULT_PRIORITY) : it->second;
+			priority = adjust ? (priority * it->second / kPriorityNormal) : it->second;
 	}
 
 	return priority;
@@ -661,7 +660,7 @@ void Building::collect_priorities(std::map<int32_t, std::map<DescriptionIndex, i
 	std::map<DescriptionIndex, int32_t>& ware_priorities = p[wwWARE];
 	std::map<DescriptionIndex, int32_t>::const_iterator it;
 	for (it = ware_priorities_.begin(); it != ware_priorities_.end(); ++it) {
-		if (it->second == DEFAULT_PRIORITY)
+		if (it->second == kPriorityNormal)
 			continue;
 		ware_priorities[it->first] = it->second;
 	}
@@ -774,13 +773,9 @@ void Building::send_message(Game& game,
                             bool link_to_building_lifetime,
                             uint32_t throttle_time,
                             uint32_t throttle_radius) {
-	const std::string& img = descr().representative_image_filename();
-	const int width = descr().representative_image()->width();
 	const std::string rt_description =
-	   (boost::format("<div padding_r=10><p><img width=%d src=%s color=%s></p></div>"
-	                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-	    width % img % owner().get_playercolor().hex_value() % UI_FONT_SIZE_MESSAGE % description)
-	      .str();
+	   as_mapobject_message(descr().name(), descr().representative_image()->width(), description,
+	                        &owner().get_playercolor());
 
 	std::unique_ptr<Message> msg(new Message(msgtype, game.get_gametime(), title, icon_filename,
 	                                         heading, rt_description, get_position(),

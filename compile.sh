@@ -38,6 +38,9 @@ print_help () {
     echo "-t or --no-translations"
     echo "                      Omit building translations."
     echo " "
+    echo "-s or --skip-tests"
+    echo "                      Skip linking and executing the tests."
+    echo " "
     echo "-a or --no-asan       If in debug mode, switch off the AddressSanitizer."
     echo "                      Release builds are created without AddressSanitizer"
     echo "                      by default."
@@ -83,6 +86,7 @@ COMMANDLINE="$0 $@"
 ## Options to control the build.
 BUILD_WEBSITE="ON"
 BUILD_TRANSLATIONS="ON"
+BUILD_TESTS="ON"
 BUILD_TYPE="Debug"
 USE_ASAN="ON"
 COMPILER="default"
@@ -131,6 +135,10 @@ do
       BUILD_TRANSLATIONS="OFF"
     shift
     ;;
+    -s|--skip-tests)
+      BUILD_TESTS="OFF"
+    shift
+    ;;
     -w|--no-website)
       BUILD_WEBSITE="OFF"
     shift
@@ -176,7 +184,14 @@ if [ $BUILD_TRANSLATIONS = "ON" ]; then
   echo "Translations will be built."
   echo "You can use -t or --no-translations to omit building them."
 else
-echo "Translations will not be built."
+	echo "Translations will not be built."
+fi
+echo " "
+if [ $BUILD_TESTS = "ON" ]; then
+  echo "Tests will be built."
+  echo "You can use -s or --skip-tests to omit building them."
+else
+	echo "Tests will not be built."
 fi
 echo " "
 echo "###########################################################"
@@ -264,9 +279,9 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   # Compile Widelands
   compile_widelands () {
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
-      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG
+      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG
     else
-      cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG
+      cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG
     fi
 
     $buildtool -j $CORES
@@ -358,6 +373,13 @@ if [ $BUILD_TRANSLATIONS = "ON" ]; then
 else
   echo "# - No translations                                       #"
 fi
+if [ $BUILD_TESTS = "ON" ]; then
+  echo "# - Tests                                                 #"
+else
+  echo "# - No tests                                              #"
+fi
+
+
 if [ $USE_XDG = "ON" ]; then
   echo "# - With support for the XDG Base Directory Specification #"
 else

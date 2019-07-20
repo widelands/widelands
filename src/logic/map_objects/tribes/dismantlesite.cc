@@ -29,7 +29,6 @@
 #include "economy/wares_queue.h"
 #include "graphic/animation.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -46,8 +45,8 @@ namespace Widelands {
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
-                                       const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, egbase),
+                                       const Tribes& tribes)
+   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, tribes),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE);  // Yep, this is correct.
@@ -103,9 +102,8 @@ Print completion percentage.
 */
 void DismantleSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
-	      (boost::format(_("%u%% dismantled")) % percent))
-	        .str();
+	*s = g_gr->styles().color_tag((boost::format(_("%u%% dismantled")) % percent).str(),
+	                              g_gr->styles().building_statistics_style().construction_color());
 }
 
 /*
@@ -211,11 +209,13 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 
 		worker.pop_task(game);
 		// No more building, so move to the flag
-		worker.start_task_move(game, WALK_SE, worker.descr().get_right_walk_anims(false), true);
+		worker.start_task_move(
+		   game, WALK_SE, worker.descr().get_right_walk_anims(false, &worker), true);
 		worker.set_location(nullptr);
 	} else if (!working_) {
 		work_steptime_ = game.get_gametime() + DISMANTLESITE_STEP_TIME;
-		worker.start_task_idle(game, worker.descr().get_animation("work"), DISMANTLESITE_STEP_TIME);
+		worker.start_task_idle(
+		   game, worker.descr().get_animation("work", &worker), DISMANTLESITE_STEP_TIME);
 
 		working_ = true;
 	}

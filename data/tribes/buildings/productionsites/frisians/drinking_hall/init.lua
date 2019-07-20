@@ -13,12 +13,12 @@ tribes:new_productionsite_type {
       brick = 2,
       granite = 2,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle_on_enhanced = {
       brick = 1,
       granite = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
@@ -74,8 +74,8 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 33
             "return=skipped unless economy needs ration",
-            "sleep=5000",
             "consume=fruit,smoked_fish,smoked_meat",
+            "sleep=5000",
             "animate=working 18000",
             "sleep=10000",
             "produce=ration"

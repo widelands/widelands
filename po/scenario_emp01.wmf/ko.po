@@ -1,15 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # ks k, 2019
+# TaeMin An, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-12-28 13:48+0000\n"
-"PO-Revision-Date: 2019-01-06 09:40+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"PO-Revision-Date: 2019-05-25 10:11+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,17 +20,17 @@ msgstr ""
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:27
 msgid "Build a blockhouse"
-msgstr "막사를 지으십시오"
+msgstr "사각 요새를 지으십시오"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:29
 msgid "Blockhouse"
-msgstr "막사"
+msgstr "사각 요새"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:30
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr "임시 기지 오른쪽 숲 동쪽에 있는 빨간색 집 모양에 막사를 지으십시오."
+msgstr "임시 기지 오른쪽 숲 동쪽에 있는 빨간색 집 모양에 사각 요새를 지으십시오."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:36
 msgid "Build a lumberjack’s house"
@@ -222,7 +223,7 @@ msgid ""
 "You really should build a blockhouse in the eastern portion of the forest. "
 "Then one of my men can keep watch in the darkness and keep us safe from "
 "these creatures."
-msgstr "그대는 정말 숲 동쪽 지역에 블록하우스를 건설을 하시오. 그러면 내 부하들 중 하나가 어둠 속에서 우리를 감시하고 이 생물들로부터 우리를 안전하게 지켜줄 수 있소"
+msgstr "그대는 정말 숲 동쪽 지역에 사각 요새를 건설을 하시오. 그러면 내 부하들 중 하나가 어둠 속에서 우리를 감시하고 이 생물들로부터 우리를 안전하게 지켜줄 수 있소"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:141
 msgid "Safe For Now"
@@ -237,7 +238,7 @@ msgstr "실데도스는 안도의 한숨을 쉬며 말했다…"
 msgid ""
 "Sire, I saw that the construction of the blockhouse was completed, so I have"
 " assigned one of my best soldiers to it to keep watch on the desert."
-msgstr "폐하, 블록하우스가 다 지어졌습니다.  가장 유능한 병사 한 명을 그곳에 임명해서 사막을 감시하게 했습니다."
+msgstr "폐하, 사각 요새가 다 지어졌습니다.  가장 유능한 병사 한 명을 그곳에 임명해서 사막을 감시하게 했습니다."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:147
@@ -266,7 +267,7 @@ msgstr "반가워요, 루티우스! 금방 밖에 사레두스를 만났어요."
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
-msgstr "그는 나에게 그 블록하우스에 대해 가르쳐 주었다. 흠, 우리에게 더 이상 블록하우스가 필요하지 않을것같다. – 대신에 지금은 다른 것에 좀 더 집중하는것이 좋을것 같다."
+msgstr "그는 나에게 그 사각 요새에 대해 가르쳐 주었다. 흠, 우리에게 더 이상 사각 요새가 필요하지 않을것같다. – 대신에 지금은 다른 것에 좀 더 집중하는것이 좋을것 같다."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:161
@@ -425,13 +426,3 @@ msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
 msgstr ""
-
-#: ../../data/scripting/format_scenario.lua:12
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/format_scenario.lua:40
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "새로운 임무"

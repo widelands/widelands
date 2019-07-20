@@ -15,6 +15,8 @@ wl_library(map_io_map_loader
     io_filesystem
     logic
     logic_filesystem_constants
+    logic_map
+    logic_map_objects
     map_io
     scripting_lua_interface
 )
@@ -101,13 +103,16 @@ wl_library(map_io
     graphic_minimap_renderer
     graphic_playercolor
     graphic_surface
-    helper
     io_fileread
     io_filesystem
     io_profile
     logic
     logic_constants
     logic_exceptions
+    logic_map
+    logic_map_objects
+    logic_objectives
     logic_widelands_geometry
+    logic_widelands_geometry_io
     scripting_logic
 )

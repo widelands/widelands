@@ -119,8 +119,11 @@ void Tag::parse_closing_tag(TextStream& ts) {
 
 void Tag::parse_attribute(TextStream& ts, std::unordered_set<std::string>& allowed_attrs) {
 	std::string aname = ts.till_any("=");
-	if (!allowed_attrs.count(aname))
-		throw SyntaxErrorImpl(ts.line(), ts.col(), "an allowed attribute", aname, ts.peek(100));
+	if (!allowed_attrs.count(aname)) {
+		const std::string error_info =
+		   (boost::format("an allowed attribute for '%s' tag") % name_).str();
+		throw SyntaxErrorImpl(ts.line(), ts.col(), error_info, aname, ts.peek(100));
+	}
 
 	ts.skip(1);
 
@@ -481,15 +484,18 @@ Attributes
 ^^^^^^^^^^
 
 * **src**: The path to the image, relative to the ``data`` directory.
+* **object**: Show the representative image of a map object instead of using ``src``.
 * **ref**: To be implemented
 * **color**: Player color for the image as a hex value
-* **width**: Width of the image as a pixel amount. The corresponding height will be matched
-  automatically.
+* **width**: Width of the image as a pixel amount.
+  The corresponding height will be matched automatically.
+  Not supported in conjunction with the ``object`` parameter.
 
 :ref:`Return to tag index<rt_tags>`
 		*/
 		TagConstraint tc;
 		tc.allowed_attrs.insert("src");
+		tc.allowed_attrs.insert("object");
 		tc.allowed_attrs.insert("ref");
 		tc.allowed_attrs.insert("color");
 		tc.allowed_attrs.insert("width");

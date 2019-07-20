@@ -27,11 +27,10 @@ local wc_desc = _ (
    "after 4 hours, whichever comes first."
 )
 
-local fields = 0
-
 return {
    name = wc_name,
    description = wc_desc,
+   peaceful_mode_allowed = false,
    init = function()
       fields = wl.Game().map:count_conquerable_fields()
    end,
@@ -81,6 +80,9 @@ return {
             end
          end
       end)
+
+      -- Install statistics hook
+      hooks.custom_statistic = statistics
 
       -- here is the main loop!!!
       while game.time < (max_time * 60 * 1000) and count_factions(plrs) > 1 and territory_points.remaining_time > 0 do

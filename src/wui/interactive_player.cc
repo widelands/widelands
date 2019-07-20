@@ -171,6 +171,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		new GameStatisticsMenu(*this, statisticsmenu_, main_windows_);
 	};
 
+	set_display_flag(InteractiveBase::dfShowWorkareaOverlap, true);  // enable by default
+
 	toolbar()->add_space(15);
 
 	add_toolbar_button(
@@ -287,7 +289,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	const uint32_t gametime = gbase.get_gametime();
 
 	Workareas workareas = get_workarea_overlays(map);
-	auto* fields_to_draw = given_map_view->draw_terrain(gbase, workareas, dst);
+	auto* fields_to_draw = given_map_view->draw_terrain(gbase, workareas, false, dst);
 	const auto& road_building = road_building_overlays();
 
 	const float scale = 1.f / given_map_view->view().zoom;
@@ -338,8 +340,10 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		if (f->vision > 0) {
 			// Draw build help.
-			if (buildhelp()) {
-				const auto* overlay = get_buildhelp_overlay(plr.get_buildcaps(f->fcoords));
+			bool show_port_space = has_expedition_port_space(f->fcoords);
+			if (show_port_space || buildhelp()) {
+				const auto* overlay = get_buildhelp_overlay(
+				   show_port_space ? f->fcoords.field->maxcaps() : plr.get_buildcaps(f->fcoords));
 				if (overlay != nullptr) {
 					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale);
 				}
@@ -468,6 +472,10 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				new GameMainMenuSaveGame(*this, main_windows_.savegame);
 			else
 				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+			return true;
+
+		case SDLK_w:
+			set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
 			return true;
 
 		case SDLK_KP_7:

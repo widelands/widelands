@@ -26,6 +26,7 @@ wl_binary(wl_map_info
     io_filesystem
     json
     logic
+    logic_map
     map_io_map_loader
     website_common
 )
@@ -42,6 +43,7 @@ wl_binary(wl_map_object_info
     io_filesystem
     json
     logic
+    logic_map_objects
     logic_tribe_basic_info
     website_common
 )

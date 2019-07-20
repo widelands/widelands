@@ -61,6 +61,7 @@ void draw_terrain(const Widelands::EditorGameBase& egbase,
                   const FieldsToDraw& fields_to_draw,
                   const float scale,
                   Workareas workarea,
+                  bool grid,
                   RenderTarget* dst) {
 	const Recti& bounding_rect = dst->get_rect();
 	const Surface& surface = dst->get_surface();
@@ -91,6 +92,13 @@ void draw_terrain(const Widelands::EditorGameBase& egbase,
 		// Enqueue the drawing of the workarea overlay layer.
 		i.program_id = RenderQueue::Program::kTerrainWorkarea;
 		i.terrain_arguments.workareas = workarea;
+		RenderQueue::instance().enqueue(i);
+	}
+
+	if (grid) {
+		// Enqueue the drawing of the grid layer.
+		i.program_id = RenderQueue::Program::kTerrainGrid;
+		i.blend_mode = BlendMode::UseAlpha;
 		RenderQueue::instance().enqueue(i);
 	}
 

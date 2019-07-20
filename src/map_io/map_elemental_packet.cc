@@ -26,7 +26,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/widelands.h"
 
 namespace Widelands {
 

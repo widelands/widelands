@@ -12,15 +12,15 @@
 # Владимир Куряев <istercul@gmail.com>, 2016
 # Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
-# Олег Шевченко <olegrock@gmail.com>, 2017-2018
-# Федор <Lunar-energy@ya.ru>, 2015
+# Олег Шевченко <olegrock@gmail.com>, 2017-2019
+# Fede4ka, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-29 07:26+0000\n"
-"PO-Revision-Date: 2019-03-31 08:55+0000\n"
-"Last-Translator: Viktor S <awsswa59@gmail.com>\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
+"PO-Revision-Date: 2019-06-24 10:13+0000\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,7 +47,7 @@ msgstr "Информация об условиях распространени�
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../data/txts/LICENSE.lua:10
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
-msgstr "Copyright 2002 - %1% команда разработчиков Widelands.."
+msgstr "Ⓒ 2002 - %1% Команда разработчиков Widelands."
 
 #: ../../data/txts/LICENSE.lua:12
 msgid ""

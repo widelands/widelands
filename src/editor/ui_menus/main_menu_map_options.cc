@@ -28,6 +28,7 @@
 #include "editor/editorinteractive.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/text_layout.h"
 #include "logic/map.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
@@ -45,7 +46,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
    : UI::Window(&parent, "map_options", 0, 0, 350, parent.get_inner_h() - 80, _("Map Options")),
      padding_(4),
      indent_(10),
-     labelh_(text_height() + 4),
+     labelh_(text_height(UI::FontStyle::kLabel) + 4),
      checkbox_space_(25),
      butw_((get_inner_w() - 3 * padding_) / 2),
      max_w_(get_inner_w() - 2 * padding_),
@@ -72,8 +73,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
      tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
 
-     name_(&main_box_, 0, 0, max_w_, 0, 2, UI::PanelStyle::kWui),
-     author_(&main_box_, 0, 0, max_w_, 0, 2, UI::PanelStyle::kWui),
+     name_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
+     author_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
      size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
      teams_list_(

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-29 07:26+0000\n"
-"PO-Revision-Date: 2019-04-04 07:58+0000\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
+"PO-Revision-Date: 2019-07-01 09:30+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -42,15 +42,11 @@ msgstr "Chamois"
 msgid "Deer"
 msgstr "Cerf"
 
-#: ../../data/world/critters/duck/init.lua:19
+#: ../../data/world/critters/duck/init.lua:18
 msgid "Duck"
 msgstr "Canard"
 
-#: ../../data/world/critters/elk/init.lua:20
-msgid "Elk"
-msgstr "Élan"
-
-#: ../../data/world/critters/fox/init.lua:20
+#: ../../data/world/critters/fox/init.lua:19
 msgid "Fox"
 msgstr "Renard"
 
@@ -62,19 +58,23 @@ msgstr "Lynx"
 msgid "Marten"
 msgstr "Martre"
 
+#: ../../data/world/critters/moose/init.lua:19
+msgid "Moose"
+msgstr "Élan"
+
 #: ../../data/world/critters/reindeer/init.lua:16
 msgid "Reindeer"
 msgstr "Renne"
 
-#: ../../data/world/critters/sheep/init.lua:19
+#: ../../data/world/critters/sheep/init.lua:18
 msgid "Sheep"
 msgstr "Mouton"
 
-#: ../../data/world/critters/stag/init.lua:20
+#: ../../data/world/critters/stag/init.lua:19
 msgid "Stag"
 msgstr "Cerf"
 
-#: ../../data/world/critters/wildboar/init.lua:19
+#: ../../data/world/critters/wildboar/init.lua:18
 msgid "Wild boar"
 msgstr "Sanglier"
 
@@ -82,7 +82,7 @@ msgstr "Sanglier"
 msgid "Wisent"
 msgstr "Bison"
 
-#: ../../data/world/critters/wolf/init.lua:20
+#: ../../data/world/critters/wolf/init.lua:19
 msgid "Wolf"
 msgstr "Loup"
 
@@ -237,7 +237,7 @@ msgstr "Sentier"
 
 #: ../../data/world/immovables/trees/alder/init.lua:20
 msgid "Alder (Sapling)"
-msgstr "Aulne (Jeune arbre)"
+msgstr "Aulne (Jeune pousse)"
 
 #: ../../data/world/immovables/trees/alder/init.lua:43
 msgid "Alder (Pole)"
@@ -257,7 +257,7 @@ msgstr "Aulne"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:12
 msgid "Aspen (Sapling)"
-msgstr "Tremble (Jeune arbre)"
+msgstr "Tremble (Jeune pousse)"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:35
 msgid "Aspen (Pole)"
@@ -277,7 +277,7 @@ msgstr "Tremble"
 
 #: ../../data/world/immovables/trees/beech/init.lua:12
 msgid "Beech (Sapling)"
-msgstr "Hêtre (jeune arbre)"
+msgstr "Hêtre (jeune pousse)"
 
 #: ../../data/world/immovables/trees/beech/init.lua:35
 msgid "Beech (Pole)"
@@ -297,7 +297,7 @@ msgstr "Hêtre"
 
 #: ../../data/world/immovables/trees/birch/init.lua:12
 msgid "Birch (Sapling)"
-msgstr "Bouleau (Jeune arbre)"
+msgstr "Bouleau (Jeune pousse)"
 
 #: ../../data/world/immovables/trees/birch/init.lua:35
 msgid "Birch (Pole)"
@@ -318,7 +318,7 @@ msgstr "Bouleau"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:13
 msgid "Cirrus Tree (Sapling)"
-msgstr "Sapin Cirrus (Jeune arbre)"
+msgstr "Sapin Cirrus (Jeune pousse)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:37
@@ -355,7 +355,7 @@ msgstr "Arbre abattu"
 
 #: ../../data/world/immovables/trees/larch/init.lua:12
 msgid "Larch (Sapling)"
-msgstr "Mélèze (Jeune arbre)"
+msgstr "Mélèze (Jeune pousse)"
 
 #: ../../data/world/immovables/trees/larch/init.lua:35
 msgid "Larch (Pole)"
@@ -376,7 +376,7 @@ msgstr "Mélèze"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:13
 msgid "Liana Tree (Sapling)"
-msgstr "Arbre liane (Jeune arbre)"
+msgstr "Arbre liane (Jeune pousse)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:37
@@ -400,7 +400,7 @@ msgstr "Arbre à lianes"
 
 #: ../../data/world/immovables/trees/maple/init.lua:12
 msgid "Maple (Sapling)"
-msgstr "Érable (Jeune arbre)"
+msgstr "Érable (Jeune pousse)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:35
 msgid "Maple (Pole)"
@@ -421,7 +421,7 @@ msgstr "Érable"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:13
 msgid "Dark Mushroom Tree (Sapling)"
-msgstr "Champignon boisé sombre (Jeune arbre)"
+msgstr "Champignon boisé sombre (Jeune pousse)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:37
@@ -446,7 +446,7 @@ msgstr "Arbre champignon sombre"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:13
 msgid "Green Mushroom Tree (Sapling)"
-msgstr "Champignon boisé vert (Jeune arbre)"
+msgstr "Champignon boisé vert (Jeune pousse)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:37
@@ -471,7 +471,7 @@ msgstr "Arbre champignon verts"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:13
 msgid "Red Mushroom Tree (Sapling)"
-msgstr "Champignon boisé rouge (Jeune arbre)"
+msgstr "Champignon boisé rouge (Jeune pousse)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:37
@@ -495,7 +495,7 @@ msgstr "Arbre champignon rouges"
 
 #: ../../data/world/immovables/trees/oak/init.lua:12
 msgid "Oak (Sapling)"
-msgstr "Chêne (Jeune arbre)"
+msgstr "Chêne (Jeune pousse)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:35
 msgid "Oak (Pole)"
@@ -535,7 +535,7 @@ msgstr "Palmier de Palmyre"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:12
 msgid "Coconut Palm (Sapling)"
-msgstr "Cocotier (Jeune arbre)"
+msgstr "Cocotier (Jeune pousse)"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:35
 msgid "Coconut Palm (Pole)"
@@ -555,7 +555,7 @@ msgstr "Cocotier"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:12
 msgid "Date Palm (Sapling)"
-msgstr "Palmier Dattier (Jeune arbre)"
+msgstr "Palmier Dattier (Jeune pousse)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:35
 msgid "Date Palm (Pole)"
@@ -575,7 +575,7 @@ msgstr "Palmier Dattier"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:12
 msgid "Oil Palm (Sapling)"
-msgstr "Palmier à huile (Jeune arbre)"
+msgstr "Palmier à huile (Jeune pousse)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:35
 msgid "Oil Palm (Pole)"
@@ -595,7 +595,7 @@ msgstr "Palmier à huile"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:12
 msgid "Roystonea regia Palm (Sapling)"
-msgstr "Palmier Royal (Jeune arbre)"
+msgstr "Palmier Royal (Jeune pousse)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:35
 msgid "Roystonea regia Palm (Pole)"
@@ -615,7 +615,7 @@ msgstr "Palmier Royal"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:12
 msgid "Rowan (Sapling)"
-msgstr "Sorbier des oiseleurs (Jeune arbre)"
+msgstr "Sorbier des oiseleurs (Jeune pousse)"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:35
 msgid "Rowan (Pole)"
@@ -635,7 +635,7 @@ msgstr "Sorbier des oiseleurs"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:12
 msgid "Spruce (Sapling)"
-msgstr "Épicéa (Jeune arbre)"
+msgstr "Épicéa (Jeune pousse)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:35
 msgid "Spruce (Pole)"
@@ -656,7 +656,7 @@ msgstr "Épicéa"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:13
 msgid "Twine Tree (Sapling)"
-msgstr "Arbre à ficelle (Jeune arbre)"
+msgstr "Arbre à ficelle (Jeune pousse)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:37
@@ -681,7 +681,7 @@ msgstr "Arbre à ficelle"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:13
 msgid "Green Umbrella Tree (Sapling)"
-msgstr "Arbre ombrelle vert (Jeune arbre)"
+msgstr "Arbre ombrelle vert (Jeune pousse)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:37
@@ -706,7 +706,7 @@ msgstr "Arbre ombrelle vert"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:13
 msgid "Red Umbrella Tree (Sapling)"
-msgstr "Arbre ombrelle rouge (Jeune arbre)"
+msgstr "Arbre ombrelle rouge (Jeune pousse)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:37

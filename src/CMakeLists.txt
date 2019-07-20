@@ -106,8 +106,6 @@ wl_library(widelands_ball_of_mud
     graphic
     graphic_fonthandler
     graphic_text
-    graphic_text_constants
-    helper
     io_filesystem
     io_profile
     logic
@@ -115,6 +113,7 @@ wl_library(widelands_ball_of_mud
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_map
     logic_single_player_game_settings
     map_io_map_loader
     network

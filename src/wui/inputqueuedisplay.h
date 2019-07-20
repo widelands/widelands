@@ -39,6 +39,8 @@ struct Radiogroup;
 
 namespace Widelands {
 class Building;
+class ConstructionSite;
+struct ProductionsiteSettings;
 class InputQueue;
 }  // namespace Widelands
 
@@ -49,14 +51,24 @@ class InputQueue;
  */
 class InputQueueDisplay : public UI::Panel {
 public:
-	enum { CellWidth = WARE_MENU_PIC_WIDTH, CellSpacing = 2, Border = 4, PriorityButtonSize = 10 };
+	enum { CellWidth = kWareMenuPicWidth, CellSpacing = 2, Border = 4, PriorityButtonSize = 10 };
 
+	// Constructor for real queues (e.g. in ProductionSites)
 	InputQueueDisplay(UI::Panel* parent,
 	                  int32_t x,
 	                  int32_t y,
 	                  InteractiveGameBase& igb,
 	                  Widelands::Building& building,
 	                  const Widelands::InputQueue& queue,
+	                  bool = false);
+	// Constructor for fake queues (e.g. in ConstructionSite settings)
+	InputQueueDisplay(UI::Panel* parent,
+	                  int32_t x,
+	                  int32_t y,
+	                  InteractiveGameBase&,
+	                  Widelands::ConstructionSite&,
+	                  Widelands::WareWorker,
+	                  Widelands::DescriptionIndex,
 	                  bool = false);
 	~InputQueueDisplay() override;
 
@@ -66,7 +78,8 @@ public:
 private:
 	InteractiveGameBase& igb_;
 	Widelands::Building& building_;
-	const Widelands::InputQueue& queue_;
+	const Widelands::InputQueue* queue_;
+	const Widelands::ProductionsiteSettings* settings_;
 	UI::Radiogroup* priority_radiogroup_;
 	UI::Button* increase_max_fill_;
 	UI::Button* decrease_max_fill_;
@@ -89,6 +102,9 @@ private:
 	void radiogroup_clicked();
 	void update_siblings_priority(int32_t);
 	void update_siblings_fill(int32_t);
+
+	uint32_t check_max_size() const;
+	uint32_t check_max_fill() const;
 
 	void compute_max_fill_buttons_enabled_state();
 };

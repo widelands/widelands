@@ -50,7 +50,7 @@ wl_library(network
     io_stream
     io_profile
     logic
-    logic_constants
+    logic_commands
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings

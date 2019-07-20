@@ -65,6 +65,8 @@ wl_library(editor
     ui_menus/main_menu_save_map.h
     ui_menus/main_menu_save_map_make_directory.cc
     ui_menus/main_menu_save_map_make_directory.h
+    ui_menus/map_size_box.cc
+    ui_menus/map_size_box.h
     ui_menus/player_menu.cc
     ui_menus/player_menu.h
     ui_menus/tool_change_height_options_menu.cc
@@ -105,6 +107,9 @@ wl_library(editor
     logic_constants
     logic_filesystem_constants
     logic_generic_save_handler
+    logic_map
+    logic_map_objects
+    logic_map_objects_description_maintainer
     logic_tribe_basic_info
     logic_widelands_geometry
     map_io

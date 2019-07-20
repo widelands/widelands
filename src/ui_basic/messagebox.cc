@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/window.h"
 
 namespace UI {
@@ -44,19 +45,21 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	// Make sure that there is space for buttons + message, but not too tall
 	const int maxheight = std::min(260, std::max(outerheight * 2 / 3, 200));
 
+	const UI::FontStyle font_style = UI::FontStyle::kLabel;
+
 	const int margin = 5;
 	int width, height = 0;
 	{
 		std::shared_ptr<const UI::RenderedText> temp_rendered_text =
-		   g_fh->render(as_uifont(text), maxwidth);
+		   g_fh->render(as_richtext_paragraph(text, font_style), maxwidth);
 		width = temp_rendered_text->width();
 		height = temp_rendered_text->height();
 	}
 
 	// Stupid heuristic to avoid excessively long lines
-	if (height < 2 * UI_FONT_SIZE_SMALL) {
+	if (height < 2 * text_height(font_style)) {
 		std::shared_ptr<const UI::RenderedText> temp_rendered_text =
-		   g_fh->render(as_uifont(text), maxwidth / 2);
+		   g_fh->render(as_richtext_paragraph(text, font_style), maxwidth / 2);
 		width = temp_rendered_text->width();
 		height = temp_rendered_text->height();
 	}

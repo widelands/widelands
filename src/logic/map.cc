@@ -36,18 +36,18 @@
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "logic/findimmovable.h"
-#include "logic/findnode.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findimmovable.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
 #include "logic/maphollowregion.h"
+#include "logic/mapregion.h"
 #include "logic/objective.h"
 #include "logic/pathfield.h"
-#include "logic/player.h"
 #include "map_io/s2map.h"
 #include "map_io/widelands_map_loader.h"
 #include "notifications/notifications.h"
@@ -712,6 +712,22 @@ void Map::set_size(const uint32_t w, const uint32_t h) {
 	clear_array<>(&fields_, field_size);
 
 	pathfieldmgr_->set_size(field_size);
+}
+
+int Map::needs_widelands_version_after() const {
+	return map_version_.needs_widelands_version_after;
+}
+
+void Map::calculate_needs_widelands_version_after(bool is_post_one_world) {
+	if (map_version_.needs_widelands_version_after == 0) {
+		if (nrplayers_ > 8) {
+			// We introduced support for 16 players after Build 19
+			map_version_.needs_widelands_version_after = 19;
+		} else if (is_post_one_world) {
+			// We merged the worlds in the engine after Build 18
+			map_version_.needs_widelands_version_after = 18;
+		}
+	}
 }
 
 /*
@@ -1632,8 +1648,10 @@ bool Map::set_port_space(
 		success = force || is_port_space_allowed(world, get_fcoords(c));
 		if (success) {
 			port_spaces_.insert(c);
+			recalculate_seafaring &= !allows_seafaring();
 		}
 	} else {
+		recalculate_seafaring &= allows_seafaring();
 		port_spaces_.erase(c);
 		success = true;
 	}
@@ -2383,6 +2401,32 @@ MilitaryInfluence Map::calc_influence(Coords const a, Area<> const area) const {
 	influence *= influence;
 
 	return influence;
+}
+
+std::set<Coords> Map::to_set(Area<Coords> area) const {
+	std::set<Coords> result;
+	MapRegion<Area<Coords>> mr(*this, area);
+	do {
+		result.insert(mr.location());
+	} while (mr.advance(*this));
+	return result;
+}
+
+// Returns all triangles whose corners are all in the given area
+std::set<TCoords<Coords>> Map::triangles_in_region(std::set<Coords> area) const {
+	std::set<TCoords<Coords>> result;
+	for (const Coords& c : area) {
+		if (!area.count(br_n(c))) {
+			continue;
+		}
+		if (area.count(r_n(c))) {
+			result.insert(TCoords<Coords>(c, TriangleIndex::R));
+		}
+		if (area.count(bl_n(c))) {
+			result.insert(TCoords<Coords>(c, TriangleIndex::D));
+		}
+	}
+	return result;
 }
 
 }  // namespace Widelands
