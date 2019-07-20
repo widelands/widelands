@@ -92,6 +92,8 @@ wl_library(widelands_ball_of_mud
     wlapplication.h
     wlapplication_messages.cc
     wlapplication_messages.h
+    wlapplication_options.cc
+    wlapplication_options.h
   USES_SDL2
   USES_SDL2_IMAGE
   USES_SDL2_TTF

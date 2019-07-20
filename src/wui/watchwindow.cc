@@ -26,11 +26,11 @@
 #include "base/macros.h"
 #include "base/rect.h"
 #include "graphic/graphic.h"
-#include "io/profile.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
 #include "logic/player.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelconstants.h"
@@ -305,7 +305,7 @@ Open a watch window.
 ===============
 */
 WatchWindow* show_watch_window(InteractiveGameBase& parent, const Widelands::Coords& coords) {
-	if (g_options.pull_section("global").get_bool("single_watchwin", false)) {
+	if (get_config_bool("single_watchwin", false)) {
 		if (!g_watch_window) {
 			g_watch_window = new WatchWindow(parent, 250, 150, 200, 200, true);
 		}

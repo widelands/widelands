@@ -39,12 +39,12 @@
 #include "helper.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
+#include "wlapplication_options.h"
 
 namespace {
 
@@ -680,10 +680,5 @@ void OptionsCtrl::save_options() {
 	g_sh->save_config();
 
 	// Now write to file
-#ifdef USE_XDG
-	RealFSImpl userconfigdir(WLApplication::get()->get_userconfigdir());
-	g_options.write(kConfigFile.c_str(), true, userconfigdir);
-#else
-	g_options.write(kConfigFile.c_str(), true);
-#endif
+	write_config(WLApplication::get());
 }

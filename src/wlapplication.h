@@ -197,7 +197,7 @@ struct WLApplication {
 	static void emergency_save(Widelands::Game&);
 
 #ifdef USE_XDG
-	// this is only for src/ui_fsmenu/options.cc
+	// this is only for src/wlapplication_options.cc
 	std::string get_userconfigdir() {
 		return userconfigdir_;
 	}

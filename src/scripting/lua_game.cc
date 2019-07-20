@@ -37,6 +37,7 @@
 #include "scripting/globals.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_map.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/story_message_box.h"
 
@@ -1057,7 +1058,7 @@ int LuaObjective::set_done(lua_State* L) {
 	Objective& o = get(L, get_game(L));
 	o.set_done(luaL_checkboolean(L, -1));
 
-	const int32_t autosave = g_options.pull_section("global").get_int("autosave", 0);
+	const int32_t autosave = get_config_int("autosave", 0);
 	if (autosave <= 0) {
 		return 0;
 	}

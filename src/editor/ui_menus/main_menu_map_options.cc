@@ -33,6 +33,7 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_basic/textarea.h"
+#include "wlapplication_options.h"
 #include "wui/map_tags.h"
 
 inline EditorInteractive& MainMenuMapOptions::eia() {
@@ -193,7 +194,7 @@ void MainMenuMapOptions::changed() {
 void MainMenuMapOptions::clicked_ok() {
 	eia().egbase().mutable_map()->set_name(name_.text());
 	eia().egbase().mutable_map()->set_author(author_.text());
-	g_options.pull_section("global").set_string("realname", author_.text());
+	set_config_string("realname", author_.text());
 	eia().egbase().mutable_map()->set_description(descr_->get_text());
 	eia().egbase().mutable_map()->set_hint(hint_->get_text());
 

@@ -25,9 +25,9 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
-#include "io/profile.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
+#include "wlapplication_options.h"
 
 namespace UI {
 
@@ -165,7 +165,7 @@ int Panel::do_run() {
 
 	// With the default of 30FPS, the game will be drawn every 33ms.
 	const uint32_t draw_delay =
-	   1000 / std::max(5, g_options.pull_section("global").get_int("maxfps", 30));
+	   1000 / std::max(5, get_config_int("maxfps", 30));
 
 	static InputCallback input_callback = {Panel::ui_mousepress, Panel::ui_mouserelease,
 	                                       Panel::ui_mousemove,  Panel::ui_key,

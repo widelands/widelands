@@ -58,7 +58,6 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "io/profile.h"
 #include "logic/ai_dna_handler.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
@@ -93,6 +92,7 @@
 #include "ui_fsmenu/scenario_select.h"
 #include "ui_fsmenu/singleplayer.h"
 #include "wlapplication_messages.h"
+#include "wlapplication_options.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -357,8 +357,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	cleanup_temp_files();
 	cleanup_temp_backups();
 
-	Section& config = g_options.pull_section("global");
-
 	// Start the SDL core
 	if (SDL_Init(SDL_INIT_VIDEO) == -1)
 		throw wexception("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
@@ -373,9 +371,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	   &g_gr->images(), i18n::get_locale());  // This will create the fontset, so loading it first.
 
 	g_gr->initialize(
-	   config.get_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
-	   config.get_int("xres", DEFAULT_RESOLUTION_W), config.get_int("yres", DEFAULT_RESOLUTION_H),
-	   config.get_bool("fullscreen", false));
+	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
+	   get_config_int("xres", DEFAULT_RESOLUTION_W), get_config_int("yres", DEFAULT_RESOLUTION_H),
+	   get_config_bool("fullscreen", false));
 
 	g_sh = new SoundHandler();
 
@@ -395,7 +393,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	std::srand(time(nullptr));
 
 	// Make sure we didn't forget to read any global option
-	g_options.check_used();
+	check_config_used();
 }
 
 /**
@@ -445,7 +443,7 @@ void WLApplication::run() {
 		replay();
 	} else if (game_type_ == LOADGAME) {
 		Widelands::Game game;
-		game.set_ai_training_mode(g_options.pull_section("global").get_bool("ai_training", false));
+		game.set_ai_training_mode(get_config_bool("ai_training", false));
 		try {
 			game.run_load_game(filename_, script_to_run_);
 		} catch (const Widelands::GameDataError& e) {
@@ -579,7 +577,7 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 				last_resolution_change_ = time;
 				bool value = !g_gr->fullscreen();
 				g_gr->set_fullscreen(value);
-				g_options.pull_section("global").set_bool("fullscreen", value);
+				set_config_bool("fullscreen", value);
 			}
 			return true;
 		}
@@ -753,14 +751,12 @@ void WLApplication::set_input_grab(bool grab) {
 }
 
 void WLApplication::refresh_graphics() {
-	Section& s = g_options.pull_section("global");
-
 	g_gr->change_resolution(
-	   s.get_int("xres", DEFAULT_RESOLUTION_W), s.get_int("yres", DEFAULT_RESOLUTION_H));
-	g_gr->set_fullscreen(s.get_bool("fullscreen", false));
+	   get_config_int("xres", DEFAULT_RESOLUTION_W), get_config_int("yres", DEFAULT_RESOLUTION_H));
+	g_gr->set_fullscreen(get_config_bool("fullscreen", false));
 
 	// does only work with a window
-	set_input_grab(s.get_bool("inputgrab", false));
+	set_input_grab(get_config_bool("inputgrab", false));
 }
 
 /**
@@ -770,20 +766,12 @@ void WLApplication::refresh_graphics() {
 bool WLApplication::init_settings() {
 
 	// Read in the configuration file
-#ifdef USE_XDG
-	RealFSImpl userconfigdir(userconfigdir_);
-	userconfigdir.ensure_directory_exists(".");
-	log("Set configuration: %s/%s\n", userconfigdir_.c_str(), kConfigFile.c_str());
-	g_options.read(kConfigFile.c_str(), "global", userconfigdir);
-#else
-	g_options.read(kConfigFile.c_str(), "global");
-#endif
-	Section& s = g_options.pull_section("global");
+	read_config(this);
 
 	// Then parse the commandline - overwrites conffile settings
 	handle_commandline_parameters();
 
-	set_mouse_swap(s.get_bool("swapmouse", false));
+	set_mouse_swap(get_config_bool("swapmouse", false));
 
 	// TODO(unknown): KLUDGE!
 	// Without this the following config options get dropped by check_used().
@@ -791,84 +779,73 @@ bool WLApplication::init_settings() {
 	// sensible way
 
 	// Some of the options listed here are documented in wlapplication_messages.cc
-	s.get_bool("ai_training");
-	s.get_bool("auto_speed");
-	s.get_bool("fullscreen");
-	s.get_bool("animate_map_panning");
-	s.get_int("xres");
-	s.get_int("yres");
-	s.get_int("border_snap_distance");
-	s.get_int("maxfps");
-	s.get_int("panel_snap_distance");
-	s.get_int("autosave");
-	s.get_int("rolling_autosave");
+	get_config_bool("ai_training", false);
+	get_config_bool("auto_speed", false);
+	get_config_bool("fullscreen", false);
+	get_config_bool("animate_map_panning", false);
+	get_config_int("xres", 0);
+	get_config_int("yres", 0);
+	get_config_int("border_snap_distance", 0);
+	get_config_int("maxfps", 0);
+	get_config_int("panel_snap_distance", 0);
+	get_config_int("autosave", 0);
+	get_config_int("rolling_autosave", 0);
 	// Undocumented on command line, appears in game options
-	s.get_bool("single_watchwin");
-	s.get_bool("auto_roadbuild_mode");
+	get_config_bool("single_watchwin", false);
+	get_config_bool("auto_roadbuild_mode", false);
 	// Undocumented on command line, appears in game options
-	s.get_bool("nozip");
-	s.get_bool("snap_windows_only_when_overlapping");
-	s.get_bool("dock_windows_to_edges");
-	s.get_bool("write_syncstreams");
+	get_config_bool("nozip", false);
+	get_config_bool("snap_windows_only_when_overlapping", false);
+	get_config_bool("dock_windows_to_edges", false);
+	get_config_bool("write_syncstreams", false);
 	// Undocumented on command line, appears in game options
-	s.get_bool("transparent_chat");
+	get_config_bool("transparent_chat", false);
 	// Undocumented. Unique ID used to allow the metaserver to recognize players
-	s.get_string("uuid");
+	get_config_string("uuid", nullptr);
 	// Undocumented, appears in online login box
 	// Whether the used metaserver login is for a registered user
-	s.get_string("registered");
+	get_config_string("registered", nullptr);
 	// Undocumented, appears in online login box and LAN lobby
 	// The nickname used for LAN and online games
-	s.get_string("nickname");
+	get_config_string("nickname", nullptr);
 	// Undocumented. The plaintext password for online logins
 	// TODO(Notabilis): Remove next line after build 20.
 	// Currently left in to avoid removing stored passwords for users of both build 19 and trunk
-	s.get_string("password");
+	get_config_string("password", nullptr);
 	// Undocumented, appears in online login box. The hashed password for online logins
-	s.get_string("password_sha1");
+	get_config_string("password_sha1", nullptr);
 	// Undocumented, appears in online login box. Whether to automatically use the stored login
-	s.get_string("auto_log");
+	get_config_string("auto_log", nullptr);
 	// Undocumented, appears in LAN lobby. The last host connected to
-	s.get_string("lasthost");
+	get_config_string("lasthost", nullptr);
 	// Undocumented, appears in online lobby. The name of the last hosted game
-	s.get_string("servername");
+	get_config_string("servername", nullptr);
 	// Undocumented, appears in editor. Name of map author
-	s.get_string("realname");
-	s.get_string("metaserver");
-	s.get_natural("metaserverport");
+	get_config_string("realname", nullptr);
+	get_config_string("metaserver", nullptr);
+	get_config_natural("metaserverport", 0);
 	// Undocumented, checkbox appears on "Watch Replay" screen
-	s.get_bool("display_replay_filenames");
-	s.get_bool("editor_player_menu_warn_too_many_players");
+	get_config_bool("display_replay_filenames", false);
+	get_config_bool("editor_player_menu_warn_too_many_players", false);
 	// KLUDGE!
 
-	long int last_start = s.get_int("last_start", 0);
-	if (last_start + 12 * 60 * 60 < time(nullptr) || !s.get_string("uuid")) {
+	long int last_start = get_config_int("last_start", 0);
+	if (last_start + 12 * 60 * 60 < time(nullptr) || !get_config_string("uuid", nullptr)) {
 		// First start of the game or not started for 12 hours. Create a (new) UUID.
 		// For the use of the UUID, see network/internet_gaming_protocol.h
-		s.set_string("uuid", generate_random_uuid());
+		get_config_string("uuid", generate_random_uuid().c_str());
 	}
-	s.set_int("last_start", time(nullptr));
+	get_config_int("last_start", time(nullptr));
 
 	// Replace the stored plaintext password with its SHA-1 hashed version
 	// Used to upgrade the stored password when upgrading widelands
-	if (strlen(s.get_string("password", "")) > 0 && strlen(s.get_string("password_sha1", "")) == 0) {
-		s.set_string("password_sha1", crypto::sha1(s.get_string("password")));
+	if (strlen(get_config_string("password", "")) > 0 && strlen(get_config_string("password_sha1", "")) == 0) {
+		get_config_string("password_sha1", crypto::sha1(get_config_string("password", nullptr)).c_str());
 	}
 
 	// Save configuration now. Otherwise, the UUID is not saved
 	// when the game crashes, losing part of its advantage
-	try {
-		// NOCOM We'll be getting more writing to config with the new sound handler, so we need to pull out the options stuff into a separate file.
-#ifdef USE_XDG
-		g_options.write(kConfigFile.c_str(), false, userconfigdir);
-#else
-		g_options.write(kConfigFile.c_str(), false);
-#endif
-	} catch (const std::exception& e) {
-		log("WARNING: could not save configuration: %s\n", e.what());
-	} catch (...) {
-		log("WARNING: could not save configuration");
-	}
+	write_config(this);
 
 	return true;
 }
@@ -877,9 +854,6 @@ bool WLApplication::init_settings() {
  * Initialize language settings
  */
 void WLApplication::init_language() {
-	// retrieve configuration settings
-	Section& s = g_options.pull_section("global");
-
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
 
@@ -887,7 +861,7 @@ void WLApplication::init_language() {
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
-	std::string language = s.get_string("language", "");
+	std::string language = get_config_string("language", "");
 	i18n::set_locale(language);
 }
 
@@ -898,18 +872,7 @@ void WLApplication::shutdown_settings() {
 	// To be proper, release our textdomain
 	i18n::release_textdomain();
 
-	try {  //  overwrite the old config file
-#ifdef USE_XDG
-		RealFSImpl userconfigdir(userconfigdir_);
-		g_options.write(kConfigFile.c_str(), true, userconfigdir);
-#else
-		g_options.write(kConfigFile.c_str(), true);
-#endif
-	} catch (const std::exception& e) {
-		log("WARNING: could not save configuration: %s\n", e.what());
-	} catch (...) {
-		log("WARNING: could not save configuration");
-	}
+	write_config(this);
 }
 
 void WLApplication::shutdown_hardware() {
@@ -989,7 +952,7 @@ void WLApplication::handle_commandline_parameters() {
 		commandline_.erase("nosound");
 	}
 	if (commandline_.count("nozip")) {
-		g_options.pull_section("global").create_val("nozip", "true");
+		set_config_bool("nozip", true);
 		commandline_.erase("nozip");
 	}
 
@@ -1083,17 +1046,17 @@ void WLApplication::handle_commandline_parameters() {
 
 	// Following is used for training of AI
 	if (commandline_.count("ai_training")) {
-		g_options.pull_section("global").create_val("ai_training", "true");
+		set_config_bool("ai_training", true);
 		commandline_.erase("ai_training");
 	} else {
-		g_options.pull_section("global").create_val("ai_training", "false");
+		set_config_bool("ai_training", false);
 	}
 
 	if (commandline_.count("auto_speed")) {
-		g_options.pull_section("global").create_val("auto_speed", "true");
+		set_config_bool("auto_speed", true);
 		commandline_.erase("auto_speed");
 	} else {
-		g_options.pull_section("global").create_val("auto_speed", "false");
+		set_config_bool("auto_speed", false);
 	}
 
 	// If it hasn't been handled yet it's probably an attempt to
@@ -1107,7 +1070,7 @@ void WLApplication::handle_commandline_parameters() {
 		// TODO(unknown): barf here on unknown option; the list of known options
 		// needs to be centralized
 
-		g_options.pull_section("global").create_val(it->first.c_str(), it->second.c_str());
+		set_config_string(it->first.c_str(), it->second.c_str());
 	}
 
 	if (commandline_.count("help") || commandline_.count("version")) {
@@ -1155,7 +1118,7 @@ void WLApplication::mainmenu() {
 				replay();
 				break;
 			case FullscreenMenuBase::MenuTarget::kOptions: {
-				Section& s = g_options.pull_section("global");
+				Section& s = get_config_section();
 				OptionsCtrl om(s);
 				break;
 			}
@@ -1285,11 +1248,10 @@ void WLApplication::mainmenu_multiplayer() {
 			std::string password(mp.get_password());
 			bool registered = mp.registered();
 
-			Section& s = g_options.pull_section("global");
-			s.set_string("nickname", playername);
+			get_config_string("nickname", playername);
 			// Only change the password if we use a registered account
 			if (registered) {
-				s.set_string("password_sha1", password);
+				get_config_string("password_sha1", password);
 			}
 
 			// reinitalise in every run, else graphics look strange
@@ -1355,7 +1317,7 @@ bool WLApplication::new_game() {
 
 	Widelands::Game game;
 
-	game.set_ai_training_mode(g_options.pull_section("global").get_bool("ai_training", false));
+	game.set_ai_training_mode(get_config_bool("ai_training", false));
 
 	if (code == FullscreenMenuBase::MenuTarget::kScenarioGame) {  // scenario
 		try {
@@ -1370,7 +1332,7 @@ bool WLApplication::new_game() {
 		try {
 			// Game controller needs the ibase pointer to init
 			// the chat
-			game.set_ibase(new InteractivePlayer(game, g_options.pull_section("global"), pn, false));
+			game.set_ibase(new InteractivePlayer(game, get_config_section(), pn, false));
 			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
 			UI::ProgressWindow loader_ui;
 			std::vector<std::string> tipstext;
@@ -1407,7 +1369,7 @@ bool WLApplication::load_game() {
 	Widelands::Game game;
 	std::string filename;
 
-	game.set_ai_training_mode(g_options.pull_section("global").get_bool("ai_training", false));
+	game.set_ai_training_mode(get_config_bool("ai_training", false));
 	SinglePlayerGameSettingsProvider sp;
 	FullscreenMenuLoadGame ssg(game, &sp);
 
@@ -1494,7 +1456,7 @@ void WLApplication::replay() {
 
 		loader_ui.step(_("Loading…"));
 
-		game.set_ibase(new InteractiveSpectator(game, g_options.pull_section("global")));
+		game.set_ibase(new InteractiveSpectator(game, get_config_section()));
 		game.set_write_replay(false);
 		ReplayGameController rgc(game, filename_);
 
