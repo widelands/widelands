@@ -45,7 +45,7 @@ print_help () {
     echo "                      Release builds are created without AddressSanitizer"
     echo "                      by default."
     echo " "
-    echo "--with-xdg            Enable support for the XDG Base Directory Specification."
+    echo "--without-xdg         Disable support for the XDG Base Directory Specification."
     echo " "
     echo "Compiler options:"
     echo " "
@@ -90,7 +90,7 @@ BUILD_TESTS="ON"
 BUILD_TYPE="Debug"
 USE_ASAN="ON"
 COMPILER="default"
-USE_XDG="OFF"
+USE_XDG="ON"
 
 if [ "$(uname)" = "Darwin" ]; then
   CORES="$(expr $(sysctl -n hw.ncpu) - 1)"
@@ -157,8 +157,8 @@ do
       fi
     shift
     ;;
-    --with-xdg)
-        USE_XDG="ON"
+    --without-xdg)
+        USE_XDG="OFF"
     shift
     ;;
     *)
@@ -378,7 +378,6 @@ if [ $BUILD_TESTS = "ON" ]; then
 else
   echo "# - No tests                                              #"
 fi
-
 
 if [ $USE_XDG = "ON" ]; then
   echo "# - With support for the XDG Base Directory Specification #"

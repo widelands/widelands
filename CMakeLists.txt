@@ -50,7 +50,7 @@ option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
 option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
 option(OPTION_BUILD_TESTS "Build tests" ON)
 
-option(USE_XDG "Follow XDG-Basedir specification" OFF) # Disabled by default
+option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 IF(USE_XDG AND NOT APPLE AND NOT WIN32)
   ADD_DEFINITIONS(-DUSE_XDG)
   message(STATUS "Building with XDG support")
