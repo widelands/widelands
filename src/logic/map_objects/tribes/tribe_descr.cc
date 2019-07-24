@@ -122,26 +122,8 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		items_table = table.get_table("workers_order");
 		for (const int key : items_table->keys<int>()) {
 			std::vector<DescriptionIndex> column;
-			std::vector<std::string> workernames =
-			   items_table->get_table(key)->array_entries<std::string>();
-			for (size_t rowindex = 0; rowindex < workernames.size(); ++rowindex) {
-				try {
-					DescriptionIndex workerindex = tribes_.safe_worker_index(workernames[rowindex]);
-					if (has_worker(workerindex)) {
-						throw GameDataError(
-						   "Duplicate definition of worker '%s'", workernames[rowindex].c_str());
-					}
-					workers_.insert(workerindex);
-					column.push_back(workerindex);
-
-					const WorkerDescr& worker_descr = *tribes_.get_worker_descr(workerindex);
-					if (worker_descr.is_buildable() && worker_descr.buildcost().empty()) {
-						worker_types_without_cost_.push_back(workerindex);
-					}
-				} catch (const WException& e) {
-					throw GameDataError(
-					   "Failed adding worker '%s: %s", workernames[rowindex].c_str(), e.what());
-				}
+			for (const std::string& workername : items_table->get_table(key)->array_entries<std::string>()) {
+				add_worker(workername, column);
 			}
 			if (!column.empty()) {
 				workers_order_.push_back(column);
@@ -444,6 +426,30 @@ void TribeDescr::add_building(const std::string& buildingname) {
 	} catch (const WException& e) {
 		throw GameDataError("Failed adding building '%s': %s", buildingname.c_str(), e.what());
 	}
+}
+
+void TribeDescr::add_worker(const std::string& workername, std::vector<DescriptionIndex>& workers_order_column) {
+	try {
+		DescriptionIndex workerindex = tribes_.safe_worker_index(workername);
+		if (has_worker(workerindex)) {
+			throw GameDataError(
+			   "Duplicate definition of worker '%s'", workername.c_str());
+		}
+		workers_.insert(workerindex);
+		workers_order_column.push_back(workerindex);
+
+		const WorkerDescr& worker_descr = *tribes_.get_worker_descr(workerindex);
+		if (worker_descr.is_buildable() && worker_descr.buildcost().empty()) {
+			worker_types_without_cost_.push_back(workerindex);
+		}
+	} catch (const WException& e) {
+		throw GameDataError(
+		   "Failed adding worker '%s: %s", workername.c_str(), e.what());
+	}
+}
+
+void TribeDescr::add_worker(const std::string& workername) {
+	add_worker(workername, workers_order_.back());
 }
 
 /**

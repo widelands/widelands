@@ -173,6 +173,7 @@ public:
 	int new_warehouse_type(lua_State* L);
 	int new_worker_type(lua_State* L);
 	int add_custom_building(lua_State* L);
+	int add_custom_worker(lua_State* L);
 
 	/*
 	 * C methods
