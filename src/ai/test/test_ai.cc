@@ -175,7 +175,7 @@ BOOST_AUTO_TEST_CASE(flag_candidate_winner_score) {
 	BOOST_CHECK_EQUAL(fc.set_cur_road_distance(kTestedCoords, kCurRoadDistFlToFl), true);
 	BOOST_CHECK_EQUAL(
 	   fc.set_cur_road_distance(1, 5), false);    // we cannot set distance to unknown flag
-	BOOST_CHECK_EQUAL(fc.get_winner(), nullptr);  // road not possible
+	BOOST_CHECK(!fc.get_winner());  // road not possible
 	// set length of possible road
 	BOOST_CHECK_EQUAL(fc.set_road_possible(kTestedCoords, kPosRoadDist), true);
 	BOOST_VERIFY(fc.get_winner());

@@ -29,10 +29,6 @@
 
 namespace Widelands {
 
-// couple of constants for calculation of road interconnections
-constexpr int kRoadPossiblyBuildable = 200;
-constexpr int kConnectedByRoads = 400;
-constexpr int kNotConnectedByRoads = 600;
 constexpr int kNoAiTrainingMutation = 200;
 constexpr int kUpperDefaultMutationLimit = 150;
 constexpr int kLowerDefaultMutationLimit = 75;
