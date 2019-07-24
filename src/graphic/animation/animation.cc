@@ -60,7 +60,7 @@ Animation::Animation(const LuaTable& table) :
 	}
 	assert(frametime_ > 0);
 }
-
+// NOCOM build animations are flying in for both spritesheet and file animations
 Rectf Animation::destination_rectangle(const Vector2f& position,
                                                 const Rectf& source_rect,
                                                 const float scale) const {

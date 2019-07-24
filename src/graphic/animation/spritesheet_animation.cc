@@ -257,8 +257,8 @@ const Image* SpriteSheetAnimation::representative_image(const RGBColor* clr) con
 	                        playercolor_image(*clr, mipmap.sheet_file) :
 	                        g_gr->images().get(mipmap.sheet_file);
 
-	const int w = image->width();
-	const int h = image->height();
+	const int w = width();
+	const int h = height();
 
 	Texture* rv = new Texture(w, h);
 	rv->blit(Rectf(column * w, row * h, w, h), *image, Rectf(0.f, 0.f, w, h), 1., BlendMode::Copy);

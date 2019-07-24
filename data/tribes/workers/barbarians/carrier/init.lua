@@ -19,11 +19,18 @@ animations = {
       rows = 4,
       hotspot = { 9, 19 },
       directional = true
+   },
+   walkload = {
+      directory = path.dirname(__file__),
+      basename = "walkload",
+      fps = 10,
+      frames = 10,
+      columns = 3,
+      rows = 4,
+      directional = true,
+      hotspot = { 7, 22 }
    }
 }
-
---add_directional_animation(animations, "walk", dirname, "walk", {9, 19}, 10)
-add_directional_animation(animations, "walkload", dirname, "walkload", {7, 22}, 10)
 
 tribes:new_carrier_type {
    msgctxt = "barbarians_worker",
