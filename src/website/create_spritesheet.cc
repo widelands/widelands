@@ -42,6 +42,7 @@
 #include "website/website_common.h"
 
 namespace {
+char const* const animation_direction_names[6] = {"_ne", "_e", "_se", "_sw", "_w", "_nw"};
 
 // Reads animation data from engine and then creates spritesheets and the corresponding lua code.
 void write_spritesheet(Widelands::EditorGameBase& egbase,
@@ -75,15 +76,17 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	}
 	assert(descr->name() == map_object_name);
 
+	const bool is_directional = descr->is_animation_known(animation_name + animation_direction_names[0]);
+
 	// Validate the animation
-	if (!descr->is_animation_known(animation_name)) {
+	if (!is_directional && !descr->is_animation_known(animation_name)) {
 		log("ABORTING. Unknown animation '%s' for '%s'\n", animation_name.c_str(),
-		    descr->name().c_str());
+			descr->name().c_str());
 		return;
 	}
 
 	const Animation& animation =
-	   g_gr->animations().get_animation(descr->get_animation(animation_name, nullptr));
+	   g_gr->animations().get_animation(descr->get_animation(is_directional ? animation_name + "_ne" : animation_name, nullptr));
 
 	const int nr_frames = animation.nr_frames();
 
@@ -121,7 +124,7 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	std::unique_ptr<LuaTree::Element> lua_object(new LuaTree::Element());
 	LuaTree::Object* lua_animation = lua_object->add_object(animation_name);
 	lua_animation->add_raw("directory", "path.dirname(__file__)");
-	lua_animation->add_string("spritesheet", animation_name);
+	lua_animation->add_string("basename", animation_name);
 
 	LuaTree::Object* lua_table = lua_animation->add_object("hotspot");
 	const Vector2i& hotspot = animation.hotspot();
@@ -147,12 +150,16 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 
 	lua_animation->add_int("frames", nr_frames);
 	lua_animation->add_int("columns", columns);
+	lua_animation->add_int("rows", rows);
 
 	const int representative_frame = animation.representative_frame();
 	if (representative_frame > 0) {
 		lua_animation->add_int("representative_frame", representative_frame);
 	}
 
+	if (is_directional) {
+		lua_animation->add_bool("directional", true);
+	}
 
 	// Create image files for each scale
 	for (const float scale : animation.available_scales()) {
@@ -171,11 +178,31 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 		}
 
 		// Write spritesheet for animation and player colors
-		const std::string filename_base = (boost::format("%s_%d") % animation_name % scale).str();
-		write_spritesheet(images, filename_base + ".png", w, h, columns, spritesheet_width, spritesheet_height);
-		std::vector<const Image*> pc_masks = animation.pc_masks(scale);
-		if (!pc_masks.empty()) {
-			write_spritesheet(pc_masks, filename_base + "_pc.png", w, h, columns, spritesheet_width, spritesheet_height);
+		if (is_directional) {
+			for (int dir = 1; dir <= 6; ++dir) {
+				const std::string directional_animname =
+				   animation_name + animation_direction_names[dir - 1];
+				if (!descr->is_animation_known(directional_animname)) {
+					throw wexception("Missing directional animation '%s\'",
+										directional_animname.c_str());
+				}
+				const std::string filename_base =
+				   (boost::format("%s%s_%d") % animation_name % animation_direction_names[dir - 1] % scale).str();
+				const Animation& directional_animation =
+				 g_gr->animations().get_animation(descr->get_animation(directional_animname, nullptr));
+				write_spritesheet(directional_animation.images(scale), filename_base + ".png", w, h, columns, spritesheet_width, spritesheet_height);
+				std::vector<const Image*> pc_masks = directional_animation.pc_masks(scale);
+				if (!pc_masks.empty()) {
+					write_spritesheet(pc_masks, filename_base + "_pc.png", w, h, columns, spritesheet_width, spritesheet_height);
+				}
+			}
+		} else {
+			const std::string filename_base = (boost::format("%s_%d") % animation_name % scale).str();
+			write_spritesheet(images, filename_base + ".png", w, h, columns, spritesheet_width, spritesheet_height);
+			std::vector<const Image*> pc_masks = animation.pc_masks(scale);
+			if (!pc_masks.empty()) {
+				write_spritesheet(pc_masks, filename_base + "_pc.png", w, h, columns, spritesheet_width, spritesheet_height);
+			}
 		}
 	}
 

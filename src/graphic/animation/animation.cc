@@ -61,6 +61,16 @@ Animation::Animation(const LuaTable& table) :
 	assert(frametime_ > 0);
 }
 
+Rectf Animation::destination_rectangle(const Vector2f& position,
+                                                const Rectf& source_rect,
+                                                const float scale) const {
+	const float best_scale = find_best_scale(scale);
+	// Using floor + ceil for pixel perfect positioning
+	return Rectf(std::floor(position.x - hotspot().x * scale - source_rect.x),
+	             std::floor(position.y - hotspot().y * scale - source_rect.y),
+	             std::ceil(source_rect.w * scale / best_scale), std::ceil(source_rect.h * scale / best_scale));
+}
+
 uint16_t Animation::nr_frames() const {
 	assert(nr_frames_ > 0);
 	return nr_frames_;

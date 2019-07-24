@@ -284,16 +284,6 @@ Rectf NonPackedAnimation::source_rectangle(const int percent_from_bottom, float 
 	return Rectf(0.f, std::floor(first_frame->height() - h), first_frame->width(), h);
 }
 
-Rectf NonPackedAnimation::destination_rectangle(const Vector2f& position,
-                                                const Rectf& source_rect,
-                                                const float scale) const {
-	const float best_scale = find_best_scale(scale);
-	// Using floor + ceil for pixel perfect positioning
-	return Rectf(std::floor(position.x - hotspot().x * scale - source_rect.x),
-	             std::floor(position.y - hotspot().y * scale - source_rect.y),
-	             std::ceil(source_rect.w * scale / best_scale), std::ceil(source_rect.h * scale / best_scale));
-}
-
 void NonPackedAnimation::blit(uint32_t time,
                               const Widelands::Coords& coords,
                               const Rectf& source_rect,

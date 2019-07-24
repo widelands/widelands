@@ -78,8 +78,8 @@ public:
 	/// 'position' is where the top left corner of the animation will end up,
 	/// 'source_rect' is the rectangle calculated by source_rectangle,
 	/// 'scale' is the zoom scale.
-	virtual Rectf
-	destination_rectangle(const Vector2f& position, const Rectf& source_rect, float scale) const = 0;
+	Rectf
+	destination_rectangle(const Vector2f& position, const Rectf& source_rect, float scale) const;
 
 	/// The number of animation frames of this animation. Returns a positive integer.
 	uint16_t nr_frames() const;
@@ -128,6 +128,8 @@ protected:
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);
+
+	virtual float find_best_scale(float scale) const = 0;
 
 	int representative_frame_;
 

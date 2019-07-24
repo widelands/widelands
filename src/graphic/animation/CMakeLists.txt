@@ -8,6 +8,8 @@ wl_library(graphic_animation
     diranimations.cc
     nonpacked_animation.cc
     nonpacked_animation.h
+    spritesheet_animation.cc
+    spritesheet_animation.h
   DEPENDS
     base_exceptions
     base_geometry

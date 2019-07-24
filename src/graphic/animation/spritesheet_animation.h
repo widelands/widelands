@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_GRAPHIC_ANIMATION_NONPACKED_ANIMATION_H
-#define WL_GRAPHIC_ANIMATION_NONPACKED_ANIMATION_H
+#ifndef WL_GRAPHIC_ANIMATION_SPRITESHEET_ANIMATION_H
+#define WL_GRAPHIC_ANIMATION_SPRITESHEET_ANIMATION_H
 
 #include <map>
 #include <memory>
@@ -34,14 +34,13 @@
 #include "scripting/lua_table.h"
 
 /**
- * Implements the Animation interface for an animation that is unpacked on disk, that
- * is every frame and every pc color frame is an singular file on disk.
+ * Implements the Animation interface for an animation where the images are in a spritesheet.
  */
-class NonPackedAnimation : public Animation {
+class SpriteSheetAnimation : public Animation {
 public:
-	~NonPackedAnimation() override {
+	~SpriteSheetAnimation() override {
 	}
-	explicit NonPackedAnimation(const LuaTable& table, const std::string& basename);
+	explicit SpriteSheetAnimation(const LuaTable& table, const std::string& basename);
 
 	// Implements Animation.
 	float height() const override;
@@ -69,7 +68,7 @@ private:
 	void load_graphics();
 
 	struct MipMapEntry {
-		explicit MipMapEntry(std::vector<std::string> files);
+		explicit MipMapEntry(const std::string& file, int init_rows, int columns);
 
 		// Loads the graphics if they are not yet loaded.
 		void ensure_graphics_are_loaded() const;
@@ -86,18 +85,23 @@ private:
 		// Whether this image set has player color masks provided
 		bool has_playercolor_masks;
 
-		// Image files on disk
-		std::vector<std::string> image_files;
+		// Sprite sheet file name on disk
+		const std::string sheet_file;
 
-		// Loaded images for each frame
-		std::vector<const Image*> frames;
+		// Loaded sprite sheet for all frames
+		const Image* sheet;
 
-		// Loaded player color mask images for each frame
-		std::vector<const Image*> playercolor_mask_frames;
+		// Loaded player color mask sprite sheet for all frames
+		const Image* playercolor_mask_sheet;
+
+		const int rows;
+		const int columns;
+		int width;
+		int height;
 
 	private:
-		// Player color mask files on disk
-		std::vector<std::string> playercolor_mask_image_files;
+		// Player color mask file on disk
+		std::string playercolor_mask_sheet_file;
 	};
 
 	/// Ensures that the graphics are loaded before returning the entry
@@ -108,5 +112,8 @@ private:
 	  {return lhs > rhs;}
 	};
 	std::map<float, std::unique_ptr<MipMapEntry>, MipMapCompare> mipmaps_;
+
+	int rows_;
+	int columns_;
 };
-#endif  // end of include guard: WL_GRAPHIC_ANIMATION_NONPACKED_ANIMATION_H
+#endif  // end of include guard: WL_GRAPHIC_ANIMATION_SPRITESHEET_ANIMATION_H

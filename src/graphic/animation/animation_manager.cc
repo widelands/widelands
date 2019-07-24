@@ -22,18 +22,22 @@
 #include <memory>
 
 #include "graphic/animation/nonpacked_animation.h"
+#include "graphic/animation/spritesheet_animation.h"
 #include "graphic/graphic.h"
 
 
 uint32_t AnimationManager::load(const LuaTable& table, const std::string& basename) {
-	animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table, basename)));
+	if (table.has_key("columns")) {
+		animations_.push_back(std::unique_ptr<Animation>(new SpriteSheetAnimation(table, basename)));
+	} else {
+		animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table, basename)));
+	}
 	return animations_.size();
 }
 uint32_t AnimationManager::load(const std::string& map_object_name,
                                 const LuaTable& table,
                                 const std::string& basename) {
-	animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table, basename)));
-	const size_t result = animations_.size();
+	const size_t result = load(table, basename);
 	representative_animations_by_map_object_name_.insert(std::make_pair(map_object_name, result));
 	return result;
 }
