@@ -994,7 +994,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		return true;
 	}
 
-	// If one of the arrow keys is pressed, scroll here
+	// If one of the arrow keys is pressed, scroll this distance
 	constexpr uint32_t kScrollDistance = 10;
 
 	if (down) {

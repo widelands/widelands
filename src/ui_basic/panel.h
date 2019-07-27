@@ -79,7 +79,7 @@ public:
 		pf_layout_toplevel = 512,
 		/// whether widget wants to receive unicode textinput messages
 		pf_handle_textinput = 1024,
-		/// whether widget and its parents will handle any key presses
+		/// whether widget and its children will handle any key presses
 		pf_handle_keypresses = 2048,
 	};
 
@@ -305,7 +305,7 @@ protected:
 		flags_ |= pf_handle_textinput;
 	}
 
-	// This panel will never receive keypresses (do_key) or textinput (do_textinput).
+	// If this is set to 'true', this panel ad its children will never receive keypresses (do_key) or textinput (do_textinput).
 	void set_handle_keypresses(bool const on) {
 		if (on) {
 			flags_ |= pf_handle_keypresses;
