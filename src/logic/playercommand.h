@@ -52,7 +52,7 @@ public:
 	PlayerCommand() : GameLogicCommand(0), sender_(0), cmdserial_(0) {
 	}
 
-	void write_id(StreamWrite& ser);
+	void write_id_and_sender(StreamWrite& ser);
 
 	PlayerNumber sender() const {
 		return sender_;

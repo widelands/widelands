@@ -80,8 +80,9 @@ PlayerCommand::PlayerCommand(const uint32_t time, const PlayerNumber s)
    : GameLogicCommand(time), sender_(s), cmdserial_(0) {
 }
 
-void PlayerCommand::write_id(StreamWrite& ser) {
+void PlayerCommand::write_id_and_sender(StreamWrite& ser) {
 	ser.unsigned_8(static_cast<uint8_t>(id()));
+	ser.unsigned_8(sender());
 }
 
 PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
@@ -200,8 +201,7 @@ void CmdBulldoze::execute(Game& game) {
 }
 
 void CmdBulldoze::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(recurse);
 }
@@ -247,8 +247,7 @@ void CmdBuild::execute(Game& game) {
 }
 
 void CmdBuild::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.signed_16(bi);
 	write_coords_32(&ser, coords);
 }
@@ -291,8 +290,7 @@ void CmdBuildFlag::execute(Game& game) {
 }
 
 void CmdBuildFlag::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	write_coords_32(&ser, coords);
 }
 
@@ -361,8 +359,7 @@ void CmdBuildRoad::execute(Game& game) {
 }
 
 void CmdBuildRoad::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	write_coords_32(&ser, start);
 	ser.unsigned_16(nsteps);
 
@@ -418,8 +415,7 @@ void CmdFlagAction::execute(Game& game) {
 }
 
 void CmdFlagAction::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_8(0);
 	ser.unsigned_32(serial);
 }
@@ -471,8 +467,7 @@ void CmdStartStopBuilding::execute(Game& game) {
 }
 
 void CmdStartStopBuilding::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 }
 
@@ -509,8 +504,7 @@ CmdMilitarySiteSetSoldierPreference::CmdMilitarySiteSetSoldierPreference(StreamR
 }
 
 void CmdMilitarySiteSetSoldierPreference::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(static_cast<uint8_t>(preference));
 }
@@ -579,8 +573,7 @@ void CmdStartOrCancelExpedition::execute(Game& game) {
 }
 
 void CmdStartOrCancelExpedition::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 }
 
@@ -627,8 +620,7 @@ void CmdEnhanceBuilding::execute(Game& game) {
 }
 
 void CmdEnhanceBuilding::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_16(bi);
 }
@@ -674,8 +666,7 @@ void CmdDismantleBuilding::execute(Game& game) {
 }
 
 void CmdDismantleBuilding::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 }
 
@@ -718,8 +709,7 @@ void CmdEvictWorker::execute(Game& game) {
 }
 
 void CmdEvictWorker::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 }
 
@@ -773,8 +763,7 @@ void CmdShipScoutDirection::execute(Game& game) {
 }
 
 void CmdShipScoutDirection::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(static_cast<uint8_t>(dir));
 }
@@ -831,8 +820,7 @@ void CmdShipConstructPort::execute(Game& game) {
 }
 
 void CmdShipConstructPort::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	write_coords_32(&ser, coords);
 }
@@ -892,8 +880,7 @@ void CmdShipExploreIsland::execute(Game& game) {
 }
 
 void CmdShipExploreIsland::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(static_cast<uint8_t>(island_explore_direction));
 }
@@ -941,8 +928,7 @@ void CmdShipSink::execute(Game& game) {
 }
 
 void CmdShipSink::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 }
 
@@ -986,8 +972,7 @@ void CmdShipCancelExpedition::execute(Game& game) {
 }
 
 void CmdShipCancelExpedition::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 }
 
@@ -1098,8 +1083,7 @@ CmdSetWarePriority::CmdSetWarePriority(StreamRead& des)
 }
 
 void CmdSetWarePriority::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial_);
 	ser.unsigned_8(type_);
 	ser.signed_32(index_);
@@ -1212,8 +1196,7 @@ CmdSetInputMaxFill::CmdSetInputMaxFill(StreamRead& des) : PlayerCommand(0, des.u
 }
 
 void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial_);
 	ser.signed_32(index_);
 	if (type_ == wwWARE) {
@@ -1253,8 +1236,7 @@ CmdChangeTargetQuantity::CmdChangeTargetQuantity(StreamRead& des)
 }
 
 void CmdChangeTargetQuantity::serialize(StreamWrite& ser) {
-	// Does not implement id(), so we don't have any id header to serialize
-	ser.unsigned_8(sender());
+	// Subclasses take care of writing their id() and sender()
 	ser.unsigned_32(economy());
 	ser.unsigned_8(ware_type());
 }
@@ -1305,7 +1287,7 @@ CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(StreamRead& des)
 }
 
 void CmdSetWareTargetQuantity::serialize(StreamWrite& ser) {
-	write_id(ser);
+	write_id_and_sender(ser);
 	CmdChangeTargetQuantity::serialize(ser);
 	ser.unsigned_32(permanent_);
 }
@@ -1352,7 +1334,7 @@ CmdResetWareTargetQuantity::CmdResetWareTargetQuantity(StreamRead& des)
 }
 
 void CmdResetWareTargetQuantity::serialize(StreamWrite& ser) {
-	write_id(ser);
+	write_id_and_sender(ser);
 	CmdChangeTargetQuantity::serialize(ser);
 }
 
@@ -1403,7 +1385,7 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(StreamRead& des)
 }
 
 void CmdSetWorkerTargetQuantity::serialize(StreamWrite& ser) {
-	write_id(ser);
+	write_id_and_sender(ser);
 	CmdChangeTargetQuantity::serialize(ser);
 	ser.unsigned_32(permanent_);
 }
@@ -1454,7 +1436,7 @@ CmdResetWorkerTargetQuantity::CmdResetWorkerTargetQuantity(StreamRead& des)
 }
 
 void CmdResetWorkerTargetQuantity::serialize(StreamWrite& ser) {
-	write_id(ser);
+	write_id_and_sender(ser);
 	CmdChangeTargetQuantity::serialize(ser);
 }
 
@@ -1472,8 +1454,7 @@ void CmdChangeTrainingOptions::execute(Game& game) {
 }
 
 void CmdChangeTrainingOptions::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(static_cast<uint8_t>(attribute));
 	ser.unsigned_16(value);
@@ -1525,8 +1506,7 @@ void CmdDropSoldier::execute(Game& game) {
 }
 
 void CmdDropSoldier::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_32(soldier);
 }
@@ -1600,8 +1580,7 @@ void CmdChangeSoldierCapacity::execute(Game& game) {
 }
 
 void CmdChangeSoldierCapacity::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.signed_16(val);
 }
@@ -1677,8 +1656,7 @@ void CmdEnemyFlagAction::execute(Game& game) {
 }
 
 void CmdEnemyFlagAction::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_8(1);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(sender());
@@ -1783,8 +1761,7 @@ void CmdMessageSetStatusRead::execute(Game& game) {
 }
 
 void CmdMessageSetStatusRead::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(message_id().value());
 }
 
@@ -1796,8 +1773,7 @@ void CmdMessageSetStatusArchived::execute(Game& game) {
 }
 
 void CmdMessageSetStatusArchived::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(message_id().value());
 }
 
@@ -1863,8 +1839,7 @@ CmdSetStockPolicy::CmdSetStockPolicy(StreamRead& des) : PlayerCommand(0, des.uns
 }
 
 void CmdSetStockPolicy::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(warehouse_);
 	ser.unsigned_8(isworker_);
 	ser.unsigned_8(ware_);
@@ -1947,8 +1922,7 @@ CmdProposeTrade::CmdProposeTrade(StreamRead& des) : PlayerCommand(0, des.unsigne
 }
 
 void CmdProposeTrade::serialize(StreamWrite& ser) {
-	write_id(ser);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(trade_.initiator);
 	ser.unsigned_32(trade_.receiver);
 	serialize_bill_of_materials(trade_.items_to_send, &ser);
