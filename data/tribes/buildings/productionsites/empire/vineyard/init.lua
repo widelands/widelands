@@ -44,6 +44,12 @@ tribes:new_productionsite_type {
       "grape"
    },
 
+   indicate_workarea_overlaps = {
+      empire_vineyard = false,
+      empire_farm = false,
+      empire_foresters_house = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
@@ -58,16 +64,16 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting grapevines because ...
          descname = _"planting grapevines",
          actions = {
-            "sleep=20000",
-            "callworker=plant"
+            "callworker=plant",
+            "sleep=13000"
          }
       },
       harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because ...
          descname = _"harvesting grapes",
          actions = {
-            "sleep=5000",
-            "callworker=harvest"
+            "callworker=harvest",
+            "sleep=5000"
          }
       },
    },

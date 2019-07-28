@@ -78,4 +78,6 @@ const std::string kScreenshotsDir = "screenshots";
 /// Filesystem names for config
 const std::string kConfigFile = "config";
 
+const std::string kEconomyProfilesDir = "tribes/economy_profiles";
+
 #endif  // end of include guard: WL_LOGIC_FILESYSTEM_CONSTANTS_H

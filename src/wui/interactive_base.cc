@@ -34,7 +34,6 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
@@ -384,7 +383,8 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 	const WorkareaInfo* workarea_info = workarea.info;
 	intermediate_result[coords] = 0;
 	WorkareaInfo::size_type wa_index;
-	switch (workarea_info->size()) {
+	const size_t workarea_size = workarea_info->size();
+	switch (workarea_size) {
 	case 0:
 		return WorkareasEntry();  // no workarea
 	case 1:
@@ -436,7 +436,7 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 					break;
 				}
 			}
-			result.push_back(wd);
+			result.first.push_back(wd);
 		}
 		if (rn != intermediate_result.end()) {
 			TCoords<> tc(pair.first, Widelands::TriangleIndex::R);
@@ -447,8 +447,40 @@ WorkareasEntry InteractiveBase::get_workarea_overlay(const Widelands::Map& map,
 					break;
 				}
 			}
-			result.push_back(wd);
+			result.first.push_back(wd);
 		}
+	}
+	for (const auto& pair : *workarea_info) {
+		std::vector<Coords> border;
+		Coords c = coords;
+		for (uint32_t i = pair.first; i > 0; --i) {
+			map.get_tln(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_rn(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_brn(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_bln(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_ln(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_tln(c, &c);
+		}
+		for (uint32_t i = pair.first; i > 0; --i) {
+			border.push_back(c);
+			map.get_trn(c, &c);
+		}
+		result.second.push_back(border);
 	}
 	return result;
 }
@@ -478,27 +510,6 @@ Called once per frame by the UI code
 ===============
 */
 void InteractiveBase::think() {
-	// If one of the arrow keys is pressed, scroll here
-	const uint32_t scrollval = 10;
-
-	if (keyboard_free() && Panel::allow_user_input()) {
-		if (get_key_state(SDL_SCANCODE_UP) ||
-		    (get_key_state(SDL_SCANCODE_KP_8) && (SDL_GetModState() ^ KMOD_NUM))) {
-			map_view_.pan_by(Vector2i(0, -scrollval));
-		}
-		if (get_key_state(SDL_SCANCODE_DOWN) ||
-		    (get_key_state(SDL_SCANCODE_KP_2) && (SDL_GetModState() ^ KMOD_NUM))) {
-			map_view_.pan_by(Vector2i(0, scrollval));
-		}
-		if (get_key_state(SDL_SCANCODE_LEFT) ||
-		    (get_key_state(SDL_SCANCODE_KP_4) && (SDL_GetModState() ^ KMOD_NUM))) {
-			map_view_.pan_by(Vector2i(-scrollval, 0));
-		}
-		if (get_key_state(SDL_SCANCODE_RIGHT) ||
-		    (get_key_state(SDL_SCANCODE_KP_6) && (SDL_GetModState() ^ KMOD_NUM))) {
-			map_view_.pan_by(Vector2i(scrollval, 0));
-		}
-	}
 	egbase().think();  // Call game logic here. The game advances.
 
 	// Cleanup found port spaces if the ship sailed on or was destroyed
@@ -566,8 +577,8 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y).str();
 	}
 	if (!node_text.empty()) {
-		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh->render(as_condensed(node_text));
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
+		   as_richtext_paragraph(node_text, UI::FontStyle::kWuiGameSpeedAndCoordinates));
 		rendered_text->draw(
 		   dst, Vector2i(get_w() - 5, get_h() - rendered_text->height() - 5), UI::Align::kRight);
 	}
@@ -576,15 +587,16 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	if (game != nullptr) {
 		// Blit in-game clock
 		const std::string gametime(gametimestring(egbase().get_gametime(), true));
-		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh->render(as_condensed(gametime));
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
+		   as_richtext_paragraph(gametime, UI::FontStyle::kWuiGameSpeedAndCoordinates));
 		rendered_text->draw(dst, Vector2i(5, 5));
 
 		// Blit FPS when playing a game in debug mode
 		if (get_display_flag(dfDebug)) {
 			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-			rendered_text = UI::g_fh->render(as_condensed(
-			   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
+			rendered_text = UI::g_fh->render(as_richtext_paragraph(
+			   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str(),
+			   UI::FontStyle::kWuiGameSpeedAndCoordinates));
 			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
 		}
 	}
@@ -978,8 +990,12 @@ void InteractiveBase::roadb_remove_overlay() {
 }
 
 bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
-	if (quick_navigation_.handle_key(down, code))
+	if (quick_navigation_.handle_key(down, code)) {
 		return true;
+	}
+
+	// If one of the arrow keys is pressed, scroll this distance
+	constexpr uint32_t kScrollDistance = 10;
 
 	if (down) {
 		switch (code.sym) {
@@ -1017,6 +1033,40 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 				}
 			}
 			return true;
+		// Scroll the map
+		case SDLK_KP_8:
+			if (SDL_GetModState() & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_UP:
+			map_view_.pan_by(Vector2i(0, -kScrollDistance));
+			return true;
+		case SDLK_KP_2:
+			if (SDL_GetModState() & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_DOWN:
+			map_view_.pan_by(Vector2i(0, kScrollDistance));
+			return true;
+		case SDLK_KP_4:
+			if (SDL_GetModState() & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_LEFT:
+			map_view_.pan_by(Vector2i(-kScrollDistance, 0));
+			return true;
+		case SDLK_KP_6:
+			if (SDL_GetModState() & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_RIGHT:
+			map_view_.pan_by(Vector2i(kScrollDistance, 0));
+			return true;
+
 #ifndef NDEBUG  //  only in debug builds
 		case SDLK_F6:
 			GameChatMenu::create_script_console(

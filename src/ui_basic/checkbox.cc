@@ -78,9 +78,11 @@ void Statebox::layout() {
 			h = pic_graphics_->height();
 			pic_width = pic_graphics_->width();
 		}
-		rendered_text_ = label_text_.empty() ?
-		                    nullptr :
-		                    UI::g_fh->render(as_uifont(label_text_), text_width(get_w(), pic_width));
+		rendered_text_ =
+		   label_text_.empty() ?
+		      nullptr :
+		      UI::g_fh->render(as_richtext_paragraph(label_text_, UI::FontStyle::kLabel),
+		                       text_width(get_w(), pic_width));
 		if (rendered_text_.get()) {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
 			h = std::max(rendered_text_->height(), h);
@@ -175,7 +177,7 @@ void Statebox::handle_mousein(bool const inside) {
  */
 bool Statebox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && (flags_ & Is_Enabled)) {
-		clicked();
+		button_clicked();
 		return true;
 	}
 	return false;
@@ -188,7 +190,7 @@ bool Statebox::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_
 /**
  * Toggle the checkbox state
  */
-void Checkbox::clicked() {
+void Checkbox::button_clicked() {
 	clickedto(!get_state());
 	set_state(!get_state());
 	play_click();

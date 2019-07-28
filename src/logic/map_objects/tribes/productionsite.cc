@@ -32,7 +32,6 @@
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
 #include "economy/workers_queue.h"
-#include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -209,6 +208,28 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		}
 	}
 
+	if (table.has_key("indicate_workarea_overlaps")) {
+		items_table = table.get_table("indicate_workarea_overlaps");
+		for (const std::string& s : items_table->keys<std::string>()) {
+			if (highlight_overlapping_workarea_for_.find(s) !=
+			    highlight_overlapping_workarea_for_.end()) {
+				throw wexception("indicate_workarea_overlaps has duplicate entry");
+			}
+			highlight_overlapping_workarea_for_.emplace(s, items_table->get_bool(s));
+		}
+	}
+	if (workarea_info().empty() ^ highlight_overlapping_workarea_for_.empty()) {
+		if (highlight_overlapping_workarea_for_.empty()) {
+			log("WARNING: Productionsite %s has a workarea but does not inform about any conflicting "
+			    "buildings\n",
+			    name().c_str());
+		} else {
+			throw GameDataError(
+			   "Productionsite %s without a workarea must not inform about conflicting buildings",
+			   name().c_str());
+		}
+	}
+
 	// Verify that any map resource collected is valid
 	if (!hints().collects_ware_from_map().empty()) {
 		if (!(tribes.ware_exists(hints().collects_ware_from_map()))) {
@@ -296,28 +317,26 @@ void ProductionSite::update_statistics_string(std::string* s) {
 		nr_workers += working_positions_[--i].worker ? 1 : 0;
 
 	if (nr_workers == 0) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() %
-		      _("(not occupied)"))
-		        .str();
+		*s = g_gr->styles().color_tag(
+		   _("(not occupied)"), g_gr->styles().building_statistics_style().low_color());
 		return;
 	}
 
 	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD.hex_value() %
-		      (nr_requests == 1 ?
-		          /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
-		          _("Worker missing") :
-		          /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
-		             missing. If you need plural forms here, please let us know. */
-		          _("Workers missing")))
-		        .str();
+		*s = g_gr->styles().color_tag(
+		   (nr_requests == 1 ?
+		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
+		       _("Worker missing") :
+		       /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
+		          missing. If you need plural forms here, please let us know. */
+		       _("Workers missing")),
+		   g_gr->styles().building_statistics_style().low_color());
 		return;
 	}
 
 	if (is_stopped_) {
-		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT.hex_value() %
-		      _("(stopped)"))
-		        .str();
+		*s = g_gr->styles().color_tag(
+		   _("(stopped)"), g_gr->styles().building_statistics_style().neutral_color());
 		return;
 	}
 	*s = statistics_string_on_changed_statistics_;
@@ -407,37 +426,32 @@ void ProductionSite::calc_statistics() {
 
 	const unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
-	std::string color;
-	if (percOk < 33)
-		color = UI_FONT_CLR_BAD.hex_value();
-	else if (percOk < 66)
-		color = UI_FONT_CLR_OK.hex_value();
-	else
-		color = UI_FONT_CLR_GOOD.hex_value();
-	const std::string perc_str =
-	   (boost::format("<font color=%s>%s</font>") % color % (boost::format(_("%i%%")) % percOk))
-	      .str();
-
-	std::string trend;
-	if (lastPercOk > percOk) {
-		trend_ = Trend::kRising;
-		color = UI_FONT_CLR_GOOD.hex_value();
-		trend = "+";
-	} else if (lastPercOk < percOk) {
-		trend_ = Trend::kFalling;
-		color = UI_FONT_CLR_BAD.hex_value();
-		trend = "-";
-	} else {
-		trend_ = Trend::kUnchanged;
-		color = UI_FONT_CLR_BRIGHT.hex_value();
-		trend = "=";
-	}
-	const std::string trend_str = (boost::format("<font color=%s>%s</font>") % color % trend).str();
+	const std::string perc_str = g_gr->styles().color_tag(
+	   (boost::format(_("%i%%")) % percOk).str(),
+	   (percOk < 33) ? g_gr->styles().building_statistics_style().low_color() :
+	                   (percOk < 66) ? g_gr->styles().building_statistics_style().medium_color() :
+	                                   g_gr->styles().building_statistics_style().high_color());
 
 	if (0 < percOk && percOk < 100) {
+		RGBColor color = g_gr->styles().building_statistics_style().high_color();
+		std::string trend;
+		if (lastPercOk > percOk) {
+			trend_ = Trend::kRising;
+			color = g_gr->styles().building_statistics_style().high_color();
+			trend = "+";
+		} else if (lastPercOk < percOk) {
+			trend_ = Trend::kFalling;
+			color = g_gr->styles().building_statistics_style().low_color();
+			trend = "-";
+		} else {
+			trend_ = Trend::kUnchanged;
+			color = g_gr->styles().building_statistics_style().neutral_color();
+			trend = "=";
+		}
+
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
 		statistics_string_on_changed_statistics_ =
-		   (boost::format("%s\u2009%s") % perc_str % trend_str).str();
+		   (boost::format("%s\u2009%s") % perc_str % g_gr->styles().color_tag(trend, color)).str();
 	} else {
 		statistics_string_on_changed_statistics_ = perc_str;
 	}
@@ -453,13 +467,12 @@ bool ProductionSite::init(EditorGameBase& egbase) {
 	const BillOfMaterials& input_workers = descr().input_workers();
 	input_queues_.resize(input_wares.size() + input_workers.size());
 
-	for (WareRange i(input_wares); i; ++i) {
-		input_queues_[i.i] = new WaresQueue(*this, i.current->first, i.current->second);
+	size_t i = 0;
+	for (const WareAmount& pair : input_wares) {
+		input_queues_[i++] = new WaresQueue(*this, pair.first, pair.second);
 	}
-
-	for (WareRange i(input_workers); i; ++i) {
-		input_queues_[input_wares.size() + i.i] =
-		   new WorkersQueue(*this, i.current->first, i.current->second);
+	for (const WareAmount& pair : input_workers) {
+		input_queues_[i++] = new WorkersQueue(*this, pair.first, pair.second);
 	}
 
 	//  Request missing workers.
@@ -929,8 +942,8 @@ void ProductionSite::program_start(Game& game, const std::string& program_name) 
 
 	program_timer_ = true;
 	uint32_t tdelta = 10;
-	SkippedPrograms::const_iterator i = skipped_programs_.find(program_name);
-	if (i != skipped_programs_.end()) {
+	FailedSkippedPrograms::const_iterator i = failed_skipped_programs_.find(program_name);
+	if (i != failed_skipped_programs_.end()) {
 		uint32_t const gametime = game.get_gametime();
 		uint32_t const earliest_allowed_start_time = i->second + 10000;
 		if (gametime + tdelta < earliest_allowed_start_time)
@@ -961,13 +974,14 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 
 	switch (result) {
 	case ProgramResult::kFailed:
+		failed_skipped_programs_[program_name] = game.get_gametime();
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(false);
 		calc_statistics();
 		update_crude_statistics(current_duration, false);
 		break;
 	case ProgramResult::kCompleted:
-		skipped_programs_.erase(program_name);
+		failed_skipped_programs_.erase(program_name);
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 		statistics_.push_back(true);
 		train_workers(game);
@@ -975,11 +989,11 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		calc_statistics();
 		break;
 	case ProgramResult::kSkipped:
-		skipped_programs_[program_name] = game.get_gametime();
+		failed_skipped_programs_[program_name] = game.get_gametime();
 		update_crude_statistics(current_duration, false);
 		break;
 	case ProgramResult::kNone:
-		skipped_programs_.erase(program_name);
+		failed_skipped_programs_.erase(program_name);
 		break;
 	}
 
@@ -1025,6 +1039,30 @@ void ProductionSite::notify_player(Game& game, uint8_t minutes, FailNotification
 
 void ProductionSite::unnotify_player() {
 	set_production_result("");
+}
+
+const BuildingSettings* ProductionSite::create_building_settings() const {
+	ProductionsiteSettings* settings = new ProductionsiteSettings(descr());
+	settings->stopped = is_stopped_;
+	for (auto& pair : settings->ware_queues) {
+		pair.second.priority = get_priority(wwWARE, pair.first, false);
+		for (const auto& queue : input_queues_) {
+			if (queue->get_type() == wwWARE && queue->get_index() == pair.first) {
+				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());
+				break;
+			}
+		}
+	}
+	for (auto& pair : settings->worker_queues) {
+		pair.second.priority = get_priority(wwWORKER, pair.first, false);
+		for (const auto& queue : input_queues_) {
+			if (queue->get_type() == wwWORKER && queue->get_index() == pair.first) {
+				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());
+				break;
+			}
+		}
+	}
+	return settings;
 }
 
 /// Changes the default anim string to \li anim

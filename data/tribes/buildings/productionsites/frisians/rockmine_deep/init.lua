@@ -13,12 +13,12 @@ tribes:new_productionsite_type {
       brick = 2,
       granite = 1,
       log = 1,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle_on_enhanced = {
       brick = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
@@ -40,6 +40,11 @@ tribes:new_productionsite_type {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
          hotspot = {39, 72},
       },
+   },
+
+   indicate_workarea_overlaps = {
+      frisians_rockmine = false,
+      frisians_rockmine_deep = false,
    },
 
    aihints = {

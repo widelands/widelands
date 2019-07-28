@@ -19,7 +19,8 @@ are available, and what your image files need to look like:
 
    animations = {
       idle = {
-         files = path.list_files(path.dirname(__file__) .. "idle_??.png"),
+         directory = path.dirname(__file__),
+         basename = "idle",
          hotspot = { 5, 7 },
          fps = 4,
          sound_effect = {
@@ -28,7 +29,14 @@ are available, and what your image files need to look like:
          },
          representative_frame = 3,
       },
-      working = ...
+      walk = {
+         directory = path.dirname(__file__),
+         basename = "walk",
+         hotspot = { 5, 7 },
+         fps = 4,
+         directional = true
+      },
+      ...
    }
 
 Let's have a detailed look at the ``idle`` animation:
@@ -36,11 +44,23 @@ Let's have a detailed look at the ``idle`` animation:
 **idle**
    *Mandatory*. This is the name of the animation. The animation can then be referenced by this name e.g. if you want to trigger it in a production program.
 
-**files**
-   *Mandatory*. A template for the image names. Our example will pick up any image from ``idle_00.png`` through ``idle_99.png`` in the specified directory path -- the current path in our example. These images can optionally have corresponding player color mask images called ``idle_00_pc.png`` through ``idle_99_pc.png``. Make sure to include leading 0's in the file names and to have consistent length -- we support 1, 2 and 3 digit numbers in an animation.
+**directory**
+   *Mandatory*. The directory where the animation image files are located.
+
+**basename**
+   *Mandatory*. The filename prefix for the image files. Our example will pick up any image from ``idle_00.png`` through ``idle_99.png`` in the specified directory path -- the current path in our example. These images can optionally have corresponding player color mask images called ``idle_00_pc.png`` through ``idle_99_pc.png``. Make sure to include leading 0's in the file names and to have consistent length -- we support 1, 2 and 3 digit numbers in an animation.
+   If your animation contains only one file, you can also call it ``idle.png`` (and ``idle_pc.png`` for the player color mask) without ``_`` or any numbers in the file name.
+
+   We support *mipmaps* for animations. They allow us to provide the same image in different resolutions for optimum rendering quality.
+   For using mipmaps, simply name your files accordingly, and the engine will pick them up. e.g. ``idle_0.5_00.png`` will be rendered at scale ``0.5``, and ``idle_1_00.png`` will be rendered at the neutral scale ``1``.
+   The scale of ``1`` is mandatory, and other supported scales are ``0.5``, ``2`` and ``4``.
 
 **pictures**
-   *DEPRECATED*. The same as ``files``.
+   *DEPRECATED*. This is older code that is slowly being phased out - do not use this parameter.
+   A table with full directory and file names.
+
+**directional**
+   *Optional*. If this is ``true``, indicates to the engine that this is a directional animation. In our example, the engine will create a set of 6 animations called ``"walk_ne"``, ``"walk_e"``, ``"walk_se"``, ``"walk_sw"``, ``"walk_w"``, and ``"walk_nw"``. See :ref:`animations_directional` below.
 
 **hotspot**
    *Mandatory*. Hotspots define a place on a graphic image through its *x* and *y* coordinates that can be used as a handle or reference point to provide control over positioning the image on the map. For example, hotspots help carriers stay on the road, and control the positioning of the wares they carry. Increase ``x`` to shift the animation to the left and ``y`` to shift it upwards.
@@ -56,56 +76,7 @@ Let's have a detailed look at the ``idle`` animation:
    * **255:** Always play
 
 
-Mipmaps
--------
-
-We support mipmaps for animations. They allow us to provide the same image in different
-resolutions for optimum rendering quality. Let's look at an example with a mipmap ``idle`` animation and a normal ``build`` animation:
-
-.. code-block:: lua
-
-   animations = {
-      idle = {
-         mipmap = {
-            {
-               scale = 0.5,
-               files = path.list_files(dirname .. "idle_0.5_??.png"),
-            },
-            {
-               scale = 1,
-               files = path.list_files(dirname .. "idle_1_??.png"),
-            },
-            {
-               scale = 2,
-               files = path.list_files(dirname .. "idle_2_??.png"),
-            },
-            {
-               scale = 4,
-               files = path.list_files(dirname .. "idle_4_??.png"),
-            }
-         },
-         hotspot = { 5, 7 },
-         fps = 4,
-         sound_effect = {
-            directory = "sound/foo",
-            name = "bar",
-         },
-      },
-      build = {
-         files = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 5, 7 },
-      }
-   },
-
-The scale of ``1`` is mandatory, and other supported scales are ``0.5``, ``2``
-and ``4``.
-The base table should no longer contain the ``files`` entry
-when you're using a mipmap.
-Each mimap entry must define the ``files`` and the ``scale``.
-See also :ref:`animations_converting_formats`.
-
-**representative_frame**
-   *Optional*. Choose the animation frame that will be displayed in messages and in the encyclopedia as a representative image. Default is 0.
+.. _animations_directional:
 
 Directional Animations
 ----------------------
@@ -126,7 +97,7 @@ Convenience Functions
 ---------------------
 
 In order to cut down on the manual coding needed, we provide the convenience functions
-:any:`add_animation` for static animations and :any:`add_walking_animations` for walking
+:any:`add_animation` for static animations and :any:`add_directional_animation` for walking
 animations, both of which will also detect mipmaps automatically.
 The corresponding ``.lua`` script file is included centrally when the tribe or world
 loading is started, so you won't need to include it again. Example:
@@ -142,10 +113,10 @@ loading is started, so you won't need to include it again. Example:
    add_animation(animations, "idle", dirname, "idle", {16, 30}, 5)
 
    -- Add animations for the 6 directions with hotspot = {16, 30} and fps = 10
-   add_walking_animations(animations, "walk", dirname, "walk", {16, 30}, 10)
+   add_directional_animation(animations, "walk", dirname, "walk", {16, 30}, 10)
 
    -- Add a "walkload" animation. The animation hasn't been created yet in this example, so we reuse the files for the "walk" animation.
-   add_walking_animations(animations, "walkload", dirname, "walk", {16, 30}, 10)
+   add_directional_animation(animations, "walkload", dirname, "walk", {16, 30}, 10)
 
 
    tribes:new_worker_type {
@@ -191,7 +162,7 @@ When converting a simple file animation to a mipmap animation, follow these step
   MipmapMaker accepts high-resolution images as input files (they should be at least 4 times the in-game size)
   and creates correctly named mipmap images for all supported scales for each animation, e.g.:
 
-  java MipmapMaker ~/widelands/data/tribes/workers/fancytribe/diligentworker walk_se 2 true true true 4.0
+  ``java MipmapMaker ~/widelands/data/tribes/workers/fancytribe/diligentworker walk_se 2 true true true 4.0``
 
   MipmapMaker is documented in ``widelands-media/graphics/tools/Graphics Tools (Java)/Readme``.
 

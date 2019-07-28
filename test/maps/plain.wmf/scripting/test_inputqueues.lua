@@ -47,7 +47,8 @@ run(function()
    assert_all_queues_are_full(b)
 
    stable_save(game, "inputqueues")
-   sleep(1000)
+   -- If we don't sleep long enough, this test can stall.
+   sleep(10 * game.desired_speed)
 
    assert_all_queues_are_full(b)
 

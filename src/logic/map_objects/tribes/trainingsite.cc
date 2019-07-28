@@ -525,6 +525,14 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 	}
 }
 
+const BuildingSettings* TrainingSite::create_building_settings() const {
+	TrainingsiteSettings* settings = new TrainingsiteSettings(descr());
+	settings->apply(*ProductionSite::create_building_settings());
+	settings->desired_capacity =
+	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
+	return settings;
+}
+
 /**
  * In addition to advancing the program, update soldier status.
  */

@@ -21,8 +21,8 @@ animations = {
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {8, 23}, 10)
-add_walking_animations(animations, "walkload", dirname, "walkload", {8, 24}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {8, 23}, 10)
+add_directional_animation(animations, "walkload", dirname, "walkload", {8, 24}, 10)
 
 
 tribes:new_worker_type {
@@ -44,9 +44,9 @@ tribes:new_worker_type {
       plant = {
          "findspace=size:any radius:1",
          "walk=coords",
-         "animate=dig 2000",
+         "animate=dig 6000",
          "plant=attrib:seed_grapes",
-         "animate=planting 3000",
+         "animate=planting 6000",
          "return"
       },
       harvest = {

@@ -12,7 +12,7 @@ tribes:new_productionsite_type {
    buildcost = {
       granite = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       granite = 1,
@@ -46,8 +46,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start scouting because ...
          descname = _"scouting",
          actions = {
-            "sleep=30000",
             "consume=ration",
+            "sleep=30000",
             "callworker=scout"
          }
       },
