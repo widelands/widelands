@@ -284,6 +284,7 @@ Rectf NonPackedAnimation::source_rectangle(const int percent_from_bottom, float 
 	return Rectf(0.f, std::floor(first_frame->height() - h), first_frame->width(), h);
 }
 
+
 void NonPackedAnimation::blit(uint32_t time,
                               const Widelands::Coords& coords,
                               const Rectf& source_rect,

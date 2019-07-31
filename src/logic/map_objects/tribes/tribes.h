@@ -96,7 +96,7 @@ public:
 
 	/// Registers a custom scenario building with the tribes
 	void add_custom_building(const LuaTable& table);
-	/// Registers a custom scenario wprker with the tribes
+	/// Registers a custom scenario worker with the tribes
 	void add_custom_worker(const LuaTable& table);
 
 	size_t nrbuildings() const;
