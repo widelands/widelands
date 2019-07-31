@@ -3617,7 +3617,7 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	}
 	const uint32_t flag_coords_hash = flag.get_position().hash();
 
-	if (flag_warehouse_distance.get_road_prohibited(flag_coords_hash, gametime)) {return false;}
+	if (flag_warehouse_distance.is_road_prohibited(flag_coords_hash, gametime)) {return false;}
 	const bool needs_warehouse = flag.get_economy()->warehouses().empty();
 
 	uint32_t tmp_wh;
@@ -3819,7 +3819,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
     // At the same time it indicates a time an economy is without a warehouse
     EconomyObserver* eco = get_economy_observer(flag.economy());
     // if we passed grace time this will be last attempt and if it fails
-    // building is destroyes
+    // building is destroyed
     bool last_attempt_ = false;
 
     // this should not happen, but if the economy has a warehouse and a dismantle
@@ -3925,15 +3925,16 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
         const uint32_t reachable_coords_hash = reachable_coords.hash();
 
         // first make sure there is an immovable (should be, but still)
-        if (upcast(PlayerImmovable const, player_immovable, map[reachable_coords].get_immovable())) {
+        Widelands::BaseImmovable* this_immovable = map[reachable_coords].get_immovable();
+        if (upcast(PlayerImmovable const, player_immovable, this_immovable)) {
 
             // if it is the road, make a flag there
-            if (dynamic_cast<const Road*>(map[reachable_coords].get_immovable())) {
+            if (this_immovable->descr().type() == MapObjectType::ROAD) {
                 game().send_player_build_flag(player_number(), reachable_coords);
             }
 
             // do not go on if it is not a flag
-            if (!dynamic_cast<const Flag*>(map[reachable_coords].get_immovable())) {
+            if (this_immovable->descr().type() != MapObjectType::FLAG) {
                 continue;
             }
 
@@ -3944,11 +3945,11 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
             }
 
             // This is a candidate, sending all necessary info to RoadCandidates
-            const bool different_economy = (player_immovable->get_economy() != flag.get_economy());
+            const bool is_different_economy = (player_immovable->get_economy() != flag.get_economy());
 			const uint16_t air_distance = map.calc_distance(flag.get_position(), reachable_coords);
 
-            if (!flag_candidates.has_candidate(reachable_coords_hash) && !flag_warehouse_distance.get_road_prohibited(reachable_coords_hash, gametime)) {
-                flag_candidates.add_flag(reachable_coords_hash, different_economy,
+            if (!flag_candidates.has_candidate(reachable_coords_hash) && !flag_warehouse_distance.is_road_prohibited(reachable_coords_hash, gametime)) {
+                flag_candidates.add_flag(reachable_coords_hash, is_different_economy,
                 flag_warehouse_distance.get_distance(reachable_coords_hash, gametime, &tmp_wh), air_distance);
             }
         }
@@ -3961,13 +3962,11 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
     collect_nearflags(nearflags, flag, checkradius);
 
-
-
     // Sending calculated walking costs from nearflags to RoadCandidates to update info on
     // Candidate flags/roads
     for (auto& nf_walk : nearflags) {
 		const uint32_t nf_hash = nf_walk.second.flag->get_position().hash();
-        // NearFlag contains also flags beyond check radius, these are not relevent for us
+        // NearFlag contains also flags beyond check radius, these are not relevant for us
         if (flag_candidates.has_candidate(nf_hash)) {
             flag_candidates.set_cur_road_distance(
                nf_hash, nf_walk.second.current_road_distance);
@@ -4006,7 +4005,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
            map.findpath(flag.get_position(), coords, 0, path, check, 0, fields_necessity);
         if (pathcost >= 0) {
             flag_candidates.set_road_possible(flag_candidate.coords_hash, path.get_nsteps());
-            possible_roads_count += 1;
+            ++possible_roads_count;
         }
     }
 
@@ -4025,7 +4024,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		if (flag_warehouse_distance.get_distance(winner->coords_hash, gametime, &tmp_wh) > 0) {
 			flag_warehouse_distance.set_road_built(winner->coords_hash, gametime);
 		}
-		// and we stright away set distance of future flag
+		// and we straight away set distance of future flag
 		flag_warehouse_distance.set_distance(flag.get_position().hash(), winner->start_flag_dist_to_wh + winner->possible_road_distance,
 		gametime, 0); // faking the warehouse
 
@@ -4082,8 +4081,7 @@ void DefaultAI::collect_nearflags(std::map<uint32_t, NearFlag> &nearflags, const
     // All nodes are marked as to_be_checked == true first and once the node is checked it is changed
     // to false. Under some conditions, the same node can be checked twice, the to_be_checked can
     // be set back to true. Because less hoops (fewer flag-to-flag roads) does not always mean
-    // shortest
-    // road.
+    // shortest road.
 
 	const Map& map = game().map();
 

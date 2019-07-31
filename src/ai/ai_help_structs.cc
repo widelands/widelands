@@ -1318,7 +1318,7 @@ FlagWarehouseDistances::FlagInfo::FlagInfo() {
 
 // We are updating the distance info, but not all the time.
 // Always if after soft expiration period, but
-// if below expiration period only when the new value is lower than current on
+// if below expiration period only when the new value is lower than current one
 // In both cases new expiration times are calculated
 bool FlagWarehouseDistances::FlagInfo::update(const uint32_t gametime,
                                               const uint16_t new_distance,
@@ -1332,9 +1332,9 @@ bool FlagWarehouseDistances::FlagInfo::update(const uint32_t gametime,
 		nearest_warehouse = nearest_wh;
 		return true;
 	} else if (new_distance < distance || (new_distance == distance &&
-	                                       expiry_time < gametime + kFlagDistanceExpirationPeriod)) {
+	                                       expiry_time < new_expiry_time)) {
 		distance = new_distance;
-		expiry_time = gametime + kFlagDistanceExpirationPeriod;
+		expiry_time = new_expiry_time;
 		nearest_warehouse = nearest_wh;
 		return true;
 	}
@@ -1349,12 +1349,12 @@ uint16_t FlagWarehouseDistances::FlagInfo::get(const uint32_t gametime, uint32_t
 	return kFarButReachable;
 }
 
-void FlagWarehouseDistances::FlagInfo::road_built(const uint32_t gametime) {
+void FlagWarehouseDistances::FlagInfo::set_road_built(const uint32_t gametime) {
 	// Prohibiting for next 60 seconds
 	new_road_prohibited_till = gametime + 60 * 1000;
 }
 
-bool FlagWarehouseDistances::FlagInfo::road_prohibited(const uint32_t gametime) const {
+bool FlagWarehouseDistances::FlagInfo::is_road_prohibited(const uint32_t gametime) const {
 	return new_road_prohibited_till > gametime;
 }
 
@@ -1386,14 +1386,14 @@ FlagWarehouseDistances::get_distance(const uint32_t flag_coords, uint32_t gameti
 
 void FlagWarehouseDistances::set_road_built(const uint32_t coords_hash, const uint32_t gametime) {
 	if (flags_map.count(coords_hash) == 1) {
-		flags_map[coords_hash].road_built(gametime);
+		flags_map[coords_hash].set_road_built(gametime);
 	}
 }
 
-bool FlagWarehouseDistances::get_road_prohibited(const uint32_t coords_hash,
+bool FlagWarehouseDistances::is_road_prohibited(const uint32_t coords_hash,
                                                  const uint32_t gametime) {
 	if (flags_map.count(coords_hash) == 1) {
-		return flags_map[coords_hash].road_prohibited(gametime);
+		return flags_map[coords_hash].is_road_prohibited(gametime);
 	}
 	return false;
 }
@@ -1410,12 +1410,12 @@ bool FlagWarehouseDistances::remove_old_flag(uint32_t gametime) {
 }
 
 // Returns pointer to winning road, provided that the treshold is exceeded
-FlagCandidates::Candidate* FlagCandidates::get_winner(const int16_t treshold) {
+FlagCandidates::Candidate* FlagCandidates::get_winner(const int16_t threshold) {
 	if (flags_.empty()) {
 		return nullptr;
 	}
 	sort();
-	if (flags_[0].score() < treshold) {
+	if (flags_[0].score() < threshold) {
 		return nullptr;
 	}
 	if (!flags_[0].is_buildable()) {
@@ -1425,9 +1425,9 @@ FlagCandidates::Candidate* FlagCandidates::get_winner(const int16_t treshold) {
 }
 
 FlagCandidates::Candidate::Candidate(
-   const uint32_t ch, bool de, uint16_t start_f_dist, uint16_t act_dist_to_wh, uint16_t air_dst) {
-	coords_hash = ch;
-	different_economy = de;
+   const uint32_t c_hash, bool different_eco, uint16_t start_f_dist, uint16_t act_dist_to_wh, uint16_t air_dst) {
+	coords_hash = c_hash;
+	different_economy = different_eco;
 	start_flag_dist_to_wh = start_f_dist;
 	flag_to_flag_road_distance = 0;
 	possible_road_distance = kFarButReachable;
@@ -1478,7 +1478,7 @@ void FlagCandidates::add_flag(const uint32_t coords,
 	   Candidate(coords, different_economy, start_flag_dist_to_wh, act_dist_to_wh, air_distance));
 }
 
-bool FlagCandidates::has_candidate(const uint32_t coords_hash) {
+bool FlagCandidates::has_candidate(const uint32_t coords_hash) const {
 	for (auto& item : flags_) {
 		if (item.coords_hash == coords_hash) {
 			return true;

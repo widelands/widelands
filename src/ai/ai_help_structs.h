@@ -885,9 +885,9 @@ private:
 
 		bool update(uint32_t, uint16_t, uint32_t);
 		// Saying the road was built and when
-		void road_built(uint32_t);
+		void set_road_built(uint32_t);
 		// Asking if road can be built from this flag (providing current gametime)
-		bool road_prohibited(uint32_t) const;
+		bool is_road_prohibited(uint32_t) const;
 		// get current distance (providing current gametime)
 		uint16_t get(uint32_t, uint32_t*) const;
 	};
@@ -895,16 +895,16 @@ private:
 
 public:
 	// All these function uses lookup in flags_map so first argument is usually flag coords hash
-	bool set_distance(uint32_t, uint16_t, uint32_t, uint32_t);
-	int16_t get_distance(uint32_t, uint32_t, uint32_t*);
-	void set_road_built(uint32_t, uint32_t);
-	bool get_road_prohibited(uint32_t, uint32_t);
+	bool set_distance(uint32_t flag_coords, uint16_t distance, uint32_t gametime, uint32_t nearest_warehouse);
+	int16_t get_distance(uint32_t flag_coords, uint32_t gametime, uint32_t* nw);
+	void set_road_built(uint32_t coords_hash, uint32_t gametime);
+	bool is_road_prohibited(uint32_t coords_hash, uint32_t gametime);
 	uint16_t count() const;
-	bool remove_old_flag(uint32_t);
+	bool remove_old_flag(uint32_t gametime);
 };
 
 // This is one-time structure - initiated and filled up when investigating possible roads to be
-// build to a flag At the end the flags are scored based on gained info), ordered and if treshold is
+// built to a flag. At the end the flags are scored based on gained info), ordered and if treshold is
 // achieved the road is to be built
 struct FlagCandidates {
 
@@ -939,7 +939,7 @@ public:
 	const std::vector<Candidate>& flags() const {
 		return flags_;
 	}
-	bool has_candidate(uint32_t);
+	bool has_candidate(uint32_t) const;
 	void add_flag(uint32_t, bool, uint16_t, uint16_t);
 	bool set_cur_road_distance(uint32_t, uint16_t);
 	bool set_road_possible(uint32_t, uint16_t);

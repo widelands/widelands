@@ -110,21 +110,21 @@ BOOST_AUTO_TEST_CASE(flag_distance_road_builtexpiration_extension)
 {
 	FlagWarehouseDistances fw;
 	// No road built on fresh flag
-	BOOST_CHECK_EQUAL(fw.get_road_prohibited(1, 1), false);
+	BOOST_CHECK_EQUAL(fw.is_road_prohibited(1, 1), false);
 	// get_distance(const uint32_t flag_coords, uint32_t gametime, uint32_t* nw)
 
 	// setting road we dont know about
 	fw.set_road_built(1, 0);
-	BOOST_CHECK_EQUAL(fw.get_road_prohibited(1, 1), false);
+	BOOST_CHECK_EQUAL(fw.is_road_prohibited(1, 1), false);
 
 	// let fw knows about it
 	fw.set_distance(1, 2, 0, 3);
 	fw.set_road_built(1, 0);
-	BOOST_CHECK_EQUAL(fw.get_road_prohibited(1, 1), true);
-	BOOST_CHECK_EQUAL(fw.get_road_prohibited(1, 59999), true);
-	BOOST_CHECK_EQUAL(fw.get_road_prohibited(1, 60001), false);
+	BOOST_CHECK_EQUAL(fw.is_road_prohibited(1, 1), true);
+	BOOST_CHECK_EQUAL(fw.is_road_prohibited(1, 59999), true);
+	BOOST_CHECK_EQUAL(fw.is_road_prohibited(1, 60001), false);
 
-	BOOST_CHECK_EQUAL(fw.get_road_prohibited(2, 60001), false);
+	BOOST_CHECK_EQUAL(fw.is_road_prohibited(2, 60001), false);
 }
 
 BOOST_AUTO_TEST_CASE(flag_distance_old_removal)
@@ -148,7 +148,7 @@ BOOST_AUTO_TEST_CASE(new_flag_road_not_prohibited)
 	BOOST_CHECK_EQUAL(fw.count(), 0);
 	fw.set_distance(1, 2, 0, 3);
 	BOOST_CHECK_EQUAL(fw.count(), 1);
-	BOOST_CHECK_EQUAL(fw.get_road_prohibited(1, 1), false);
+	BOOST_CHECK_EQUAL(fw.is_road_prohibited(1, 1), false);
 }
 
 BOOST_AUTO_TEST_CASE(flag_candidate_init)
