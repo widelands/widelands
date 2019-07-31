@@ -20,6 +20,8 @@
 #ifndef WL_GRAPHIC_ANIMATION_ANIMATION_H
 #define WL_GRAPHIC_ANIMATION_ANIMATION_H
 
+#include <map>
+#include <memory>
 #include <set>
 #include <string>
 #include <vector>
@@ -34,8 +36,6 @@
 #include "graphic/surface.h"
 #include "scripting/lua_table.h"
 #include "sound/constants.h"
-
-// #include "logic/widelands_geometry.h"
 
 /// The default animation speed
 constexpr int kFrameLength = 250;
@@ -70,15 +70,15 @@ public:
 	}
 
 	/// The height of this animation.
-	virtual float height() const = 0;
-	virtual float width() const  = 0;
+	int height() const;
+	int width() const;
 	const Vector2i& hotspot() const;
 
 	uint32_t current_frame(uint32_t time) const;
 
 	/// The size of the animation source images in pixels. Use 'percent_from_bottom' to crop the
 	/// animation.
-	virtual Rectf source_rectangle(int percent_from_bottom, float scale) const = 0;
+	Rectf source_rectangle(int percent_from_bottom, float scale) const;
 
 	/// Calculates the destination rectangle for blitting the animation in pixels.
 	/// 'position' is where the top left corner of the animation will end up,
@@ -104,12 +104,12 @@ public:
 	/// The 'clr' is the player color used for blitting - the parameter can be 'nullptr',
 	/// in which case the neutral image will be blitted. The Surface is the 'target'
 	/// for the blit operation and must be non-null.
-	virtual void blit(uint32_t time,
+	void blit(uint32_t time,
 	                  const Widelands::Coords& coords,
 	                  const Rectf& source_rect,
 	                  const Rectf& destination_rect,
 	                  const RGBColor* clr,
-	                  Surface* target, float scale) const = 0;
+	                  Surface* target, float scale) const;
 
 	/// We need to expose these for the packed animation,
 	/// so that the create_spritesheet utility can use them
@@ -117,25 +117,57 @@ public:
 	/// We need to expose these for the packed animation,
 	/// so that the create_spritemap utility can use them
 	virtual std::vector<const Image*> pc_masks(float scale) const = 0;
-	virtual std::set<float> available_scales() const = 0;
+	std::set<float> available_scales() const;
 
 	/// Load animation images into memory for default scale.
-	virtual void load_default_scale_and_sounds() const = 0;
-	void load_sounds() const;
+	void load_default_scale_and_sounds() const;
 	int representative_frame() const;
 
 protected:
+	struct MipMapEntry {
+
+		MipMapEntry();
+
+		// Loads the graphics if they are not yet loaded.
+		virtual void ensure_graphics_are_loaded() const = 0;
+
+		// Load the needed graphics from disk.
+		virtual void load_graphics() = 0;
+
+		virtual void blit(uint32_t idx,
+		          const Rectf& source_rect,
+		          const Rectf& destination_rect,
+		          const RGBColor* clr,
+		          Surface* target) const = 0;
+
+		virtual int width() const = 0;
+		virtual int height() const = 0;
+
+		// Whether this image set has player color masks provided
+		bool has_playercolor_masks;
+	};
+
+	struct MipMapCompare {
+	  bool operator() (const float lhs, const float rhs) const
+	  {return lhs > rhs;}
+	};
+
 	/// Play the sound effect associated with this animation at the given time.
 	/// Any sound effects are played with stereo position according to 'coords'.
 	/// If 'coords' == Widelands::Coords::null(), skip playing any sound effects.
 	void trigger_sound(uint32_t time, const Widelands::Coords& coords) const;
 
+	/// Ensures that the graphics are loaded before returning the entry
+	const Animation::MipMapEntry& mipmap_entry(float scale) const;
+
 	uint16_t nr_frames_;
+
+	std::map<float, std::unique_ptr<MipMapEntry>, MipMapCompare> mipmaps_;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);
 
-	virtual float find_best_scale(float scale) const = 0;
+	float find_best_scale(float scale) const;
 
 	int representative_frame_;
 

@@ -45,8 +45,8 @@ SpriteSheetAnimation::MipMapEntry IMPLEMENTATION
 ==============================================================================
 */
 
-SpriteSheetAnimation::MipMapEntry::MipMapEntry(const std::string& file, int init_rows, int init_columns)
-   : has_playercolor_masks(false), sheet_file(file), sheet(nullptr), playercolor_mask_sheet(nullptr), rows(init_rows), columns(init_columns), width(0), height(0), playercolor_mask_sheet_file("") {
+SpriteSheetAnimation::SpriteSheetMipMapEntry::SpriteSheetMipMapEntry(const std::string& file, int init_rows, int init_columns)
+   : Animation::MipMapEntry(), sheet_file(file), sheet(nullptr), playercolor_mask_sheet(nullptr), rows(init_rows), columns(init_columns), w(0), h(0), playercolor_mask_sheet_file("") {
 
 	assert(g_fs->file_exists(file));
 
@@ -59,6 +59,68 @@ SpriteSheetAnimation::MipMapEntry::MipMapEntry(const std::string& file, int init
 	}
 }
 
+
+// Loads the graphics if they are not yet loaded.
+void SpriteSheetAnimation::SpriteSheetMipMapEntry::ensure_graphics_are_loaded() const {
+	if (sheet == nullptr) {
+		const_cast<SpriteSheetMipMapEntry*>(this)->load_graphics();
+	}
+}
+
+// Load the needed graphics from disk.
+void SpriteSheetAnimation::SpriteSheetMipMapEntry::load_graphics() {
+	sheet = g_gr->images().get(sheet_file);
+
+	if (!playercolor_mask_sheet_file.empty()) {
+		playercolor_mask_sheet = g_gr->images().get(playercolor_mask_sheet_file);
+
+		if (sheet->width() != playercolor_mask_sheet->width()) {
+			throw Widelands::GameDataError(
+			   "animation sprite sheet has width %d but playercolor mask sheet has width %d. The sheet's image is %s",
+			   sheet->width(), playercolor_mask_sheet->width(), sheet_file.c_str());
+		}
+		if (sheet->height() != playercolor_mask_sheet->height()) {
+			throw Widelands::GameDataError(
+			   "animation sprite sheet has height %d but playercolor mask sheet has height %d. The sheet's image is %s",
+			   sheet->height(), playercolor_mask_sheet->height(), sheet_file.c_str());
+		}
+	}
+
+	// Frame width and height
+	w = sheet->width() / columns;
+	h = sheet->height() / rows;
+}
+
+void SpriteSheetAnimation::SpriteSheetMipMapEntry::blit(uint32_t idx,
+                                           const Rectf& source_rect,
+                                           const Rectf& destination_rect,
+                                           const RGBColor* clr,
+                                           Surface* target) const {
+	assert(sheet != nullptr);
+	assert(target);
+	assert(static_cast<int>(idx) <= columns * rows);
+
+	const int column = idx % columns;
+	const int row = idx / rows;
+
+	Rectf frame_rect(source_rect.x + column * width(), source_rect.y + row * height(),
+					 source_rect.w, source_rect.h);
+
+	if (!has_playercolor_masks || clr == nullptr) {
+		target->blit(destination_rect, *sheet, frame_rect, 1., BlendMode::UseAlpha);
+	} else {
+		assert(playercolor_mask_sheet != nullptr);
+		target->blit_blended(
+		   destination_rect, *sheet, *playercolor_mask_sheet, frame_rect, *clr);
+	}
+}
+
+int SpriteSheetAnimation::SpriteSheetMipMapEntry::width() const {
+	return w;
+}
+int SpriteSheetAnimation::SpriteSheetMipMapEntry::height() const {
+	return h;
+}
 
 /*
 ==============================================================================
@@ -91,7 +153,7 @@ SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table, const std::str
 			   directory + g_fs->file_separator() + basename + scale_as_string + ".png";
 			if (g_fs->file_exists(path)) {
 				mipmaps_.insert(std::make_pair(
-				   scale_as_float, std::unique_ptr<MipMapEntry>(new MipMapEntry(path, rows_, columns_))));
+				   scale_as_float, std::unique_ptr<SpriteSheetMipMapEntry>(new SpriteSheetMipMapEntry(path, rows_, columns_))));
 			}
 		};
 		add_scale(0.5f, "_0.5");
@@ -112,9 +174,10 @@ SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table, const std::str
 		}
 
 		// Perform some checks to make sure that the data is complete and consistent
+		const SpriteSheetMipMapEntry& first = dynamic_cast<const SpriteSheetMipMapEntry&>(*mipmaps_.begin()->second.get());
 		if (table.has_key("fps") && nr_frames_ == 1) {
 				throw Widelands::GameDataError("Animation with one frame in sprite sheet %s must not have 'fps'",
-				                               mipmaps_.begin()->second->sheet_file.c_str());
+				                               first.sheet_file.c_str());
 		}
 
 		if (representative_frame() < 0 || representative_frame() > nr_frames_ - 1) {
@@ -128,9 +191,9 @@ SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table, const std::str
 										   nr_frames_, rows_, columns_);
 		}
 
-		const bool should_have_playercolor = mipmaps_.begin()->second->has_playercolor_masks;
+		const bool should_have_playercolor = first.has_playercolor_masks;
 		for (const auto& mipmap : mipmaps_) {
-			if (mipmap.second->has_playercolor_masks != should_have_playercolor) {
+			if (first.has_playercolor_masks != should_have_playercolor) {
 				throw Widelands::GameDataError(
 				   "Mismatched existence of player colors in animation table for scales %.2f and %.2f",
 				   static_cast<double>(mipmaps_.begin()->first), static_cast<double>(mipmap.first));
@@ -145,85 +208,6 @@ SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table, const std::str
 	}
 }
 
-// Loads the graphics if they are not yet loaded.
-void SpriteSheetAnimation::MipMapEntry::ensure_graphics_are_loaded() const {
-	if (sheet == nullptr) {
-		const_cast<MipMapEntry*>(this)->load_graphics();
-	}
-}
-
-// Load the needed graphics from disk.
-void SpriteSheetAnimation::MipMapEntry::load_graphics() {
-
-	sheet = g_gr->images().get(sheet_file);
-
-	if (!playercolor_mask_sheet_file.empty()) {
-		playercolor_mask_sheet = g_gr->images().get(playercolor_mask_sheet_file);
-
-		if (sheet->width() != playercolor_mask_sheet->width()) {
-			throw Widelands::GameDataError(
-			   "animation sprite sheet has width %d but playercolor mask sheet has width %d. The sheet's image is %s",
-			   sheet->width(), playercolor_mask_sheet->width(), sheet_file.c_str());
-		}
-		if (sheet->height() != playercolor_mask_sheet->height()) {
-			throw Widelands::GameDataError(
-			   "animation sprite sheet has height %d but playercolor mask sheet has height %d. The sheet's image is %s",
-			   sheet->height(), playercolor_mask_sheet->height(), sheet_file.c_str());
-		}
-	}
-
-	// Frame width and height
-	width = sheet->width() / columns;
-	height = sheet->height() / rows;
-}
-
-void SpriteSheetAnimation::MipMapEntry::blit(uint32_t idx,
-                                           const Rectf& source_rect,
-                                           const Rectf& destination_rect,
-                                           const RGBColor* clr,
-                                           Surface* target) const {
-	ensure_graphics_are_loaded();
-	assert(sheet != nullptr);
-	assert(target);
-	assert(static_cast<int>(idx) <= columns * rows);
-
-	const int column = idx % columns;
-	const int row = idx / rows;
-
-	Rectf frame_rect(source_rect.x + column * width, source_rect.y + row * height,
-					 source_rect.w, source_rect.h);
-
-	if (!has_playercolor_masks || clr == nullptr) {
-		target->blit(destination_rect, *sheet, frame_rect, 1., BlendMode::UseAlpha);
-	} else {
-		assert(playercolor_mask_sheet != nullptr);
-		target->blit_blended(
-		   destination_rect, *sheet, *playercolor_mask_sheet, frame_rect, *clr);
-	}
-}
-
-// NOCOM code duplication
-float SpriteSheetAnimation::find_best_scale(float scale) const {
-	assert(!mipmaps_.empty());
-	float result = mipmaps_.begin()->first;
-	for (const auto& mipmap : mipmaps_) {
-		// The map is reverse sorted, so we can break as soon as we are lower than the wanted scale
-		if (mipmap.first < scale) {
-			break;
-		}
-		result = mipmap.first;
-	}
-	return result;
-}
-
-float SpriteSheetAnimation::height() const {
-	return mipmap_entry(1.0f).height;
-}
-
-float SpriteSheetAnimation::width() const {
-	return mipmap_entry(1.0f).width;
-}
-
 std::vector<const Image*> SpriteSheetAnimation::images(float) const {
 	// We only need to implement this if we add compressed spritemaps, or maybe for usage in a test
 	NEVER_HERE();
@@ -234,21 +218,8 @@ std::vector<const Image*> SpriteSheetAnimation::pc_masks(float) const {
 	NEVER_HERE();
 }
 
-// NOCOM code duplication
-std::set<float> SpriteSheetAnimation::available_scales() const  {
-	std::set<float> result;
-	for (float scale : kSupportedScales) {
-		if (mipmaps_.count(scale) == 1) {
-			result.insert(scale);
-		}
-	}
-	return result;
-}
-
 const Image* SpriteSheetAnimation::representative_image(const RGBColor* clr) const {
-	const MipMapEntry& mipmap = mipmap_entry(1.0f);
-	mipmap.ensure_graphics_are_loaded();
-
+	const SpriteSheetMipMapEntry& mipmap = dynamic_cast<const SpriteSheetMipMapEntry&>(mipmap_entry(1.0f));
 	const int column = representative_frame() % columns_;
 	const int row = representative_frame() / rows_;
 	const int w = width();
@@ -265,38 +236,4 @@ const Image* SpriteSheetAnimation::representative_image(const RGBColor* clr) con
 	return rv;
 }
 
-// NOCOM code duplication
 // NOCOM Barbarian carriers are not walking smoothly
-Rectf SpriteSheetAnimation::source_rectangle(const int percent_from_bottom, float scale) const {
-	const MipMapEntry& mipmap = mipmap_entry(find_best_scale(scale));
-	const float h = percent_from_bottom * mipmap.height / 100;
-	// Using floor for pixel perfect positioning
-	return Rectf(0.f, std::floor(mipmap.height - h), mipmap.width, h);
-}
-
-// NOCOM code duplication
-void SpriteSheetAnimation::blit(uint32_t time,
-                              const Widelands::Coords& coords,
-                              const Rectf& source_rect,
-                              const Rectf& destination_rect,
-                              const RGBColor* clr,
-                              Surface* target,
-                              float scale) const {
-	mipmap_entry(find_best_scale(scale))
-	   .blit(current_frame(time), source_rect, destination_rect, clr, target);
-	trigger_sound(time, coords);
-}
-
-// NOCOM code duplication
-void SpriteSheetAnimation::load_default_scale_and_sounds() const {
-	mipmaps_.at(1.0f)->ensure_graphics_are_loaded();
-	load_sounds();
-}
-
-// NOCOM code duplication
-const SpriteSheetAnimation::MipMapEntry& SpriteSheetAnimation::mipmap_entry(float scale) const {
-	assert(mipmaps_.count(scale) == 1);
-	const MipMapEntry& mipmap = *mipmaps_.at(scale);
-	mipmap.ensure_graphics_are_loaded();
-	return mipmap;
-}

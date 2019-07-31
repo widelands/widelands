@@ -44,47 +44,32 @@ public:
 	explicit NonPackedAnimation(const LuaTable& table, const std::string& basename);
 
 	// Implements Animation.
-	float height() const override;
-	float width() const override;
-	Rectf source_rectangle(int percent_from_bottom, float scale) const override;
-
 	const Image* representative_image(const RGBColor* clr) const override;
-	virtual void blit(uint32_t time,
-	                  const Widelands::Coords& coords,
-	                  const Rectf& source_rect,
-	                  const Rectf& destination_rect,
-	                  const RGBColor* clr,
-	                  Surface* target,
-	                  float scale) const override;
 
 	std::vector<const Image*> images(float scale) const override;
 	std::vector<const Image*> pc_masks(float scale) const override;
-	std::set<float> available_scales() const override;
-	void load_default_scale_and_sounds() const override;
 
 private:
-	float find_best_scale(float scale) const override;
-
 	// Load the needed graphics from disk.
 	void load_graphics();
 
-	struct MipMapEntry {
-		explicit MipMapEntry(std::vector<std::string> files);
+	struct NonPackedMipMapEntry : Animation::MipMapEntry {
+		explicit NonPackedMipMapEntry(std::vector<std::string> files);
 
 		// Loads the graphics if they are not yet loaded.
-		void ensure_graphics_are_loaded() const;
+		void ensure_graphics_are_loaded() const override;
 
 		// Load the needed graphics from disk.
-		void load_graphics();
+		void load_graphics() override;
 
 		void blit(uint32_t idx,
 		          const Rectf& source_rect,
 		          const Rectf& destination_rect,
 		          const RGBColor* clr,
-		          Surface* target) const;
+		          Surface* target) const override;
 
-		// Whether this image set has player color masks provided
-		bool has_playercolor_masks;
+		int width() const override;
+		int height() const override;
 
 		// Image files on disk
 		std::vector<std::string> image_files;
@@ -99,14 +84,5 @@ private:
 		// Player color mask files on disk
 		std::vector<std::string> playercolor_mask_image_files;
 	};
-
-	/// Ensures that the graphics are loaded before returning the entry
-	const MipMapEntry& mipmap_entry(float scale) const;
-
-	struct MipMapCompare {
-	  bool operator() (const float lhs, const float rhs) const
-	  {return lhs > rhs;}
-	};
-	std::map<float, std::unique_ptr<MipMapEntry>, MipMapCompare> mipmaps_;
 };
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_NONPACKED_ANIMATION_H

@@ -31,6 +31,9 @@
 
 const std::set<float> Animation::kSupportedScales { 0.5, 1, 2, 4};
 
+Animation::MipMapEntry::MipMapEntry() : has_playercolor_masks(false) {
+}
+
 Animation::Animation(const LuaTable& table) :
 	representative_frame_(table.has_key("representative_frame") ? table.get_int("representative_frame") : 0),
 	hotspot_(table.get_vector<std::string, int>("hotspot")),
@@ -61,6 +64,20 @@ Animation::Animation(const LuaTable& table) :
 	assert(frametime_ > 0);
 }
 
+const Animation::MipMapEntry& Animation::mipmap_entry(float scale) const {
+	assert(mipmaps_.count(scale) == 1);
+	const MipMapEntry& mipmap = *mipmaps_.at(scale);
+	mipmap.ensure_graphics_are_loaded();
+	return mipmap;
+}
+
+Rectf Animation::source_rectangle(const int percent_from_bottom, float scale) const {
+	const MipMapEntry& mipmap = mipmap_entry(find_best_scale(scale));
+	const float h = percent_from_bottom * mipmap.height() / 100;
+	// Using floor for pixel perfect positioning
+	return Rectf(0.f, std::floor(mipmap.height() - h), mipmap.width(), h);
+}
+
 Rectf Animation::destination_rectangle(const Vector2f& position,
                                                 const Rectf& source_rect,
                                                 const float scale) const {
@@ -73,6 +90,14 @@ Rectf Animation::destination_rectangle(const Vector2f& position,
 uint16_t Animation::nr_frames() const {
 	assert(nr_frames_ > 0);
 	return nr_frames_;
+}
+
+int Animation::height() const {
+	return mipmap_entry(1.0f).height();
+}
+
+int Animation::width() const {
+	return mipmap_entry(1.0f).width();
 }
 
 uint32_t Animation::frametime() const {
@@ -105,12 +130,49 @@ void Animation::trigger_sound(uint32_t time, const Widelands::Coords& coords) co
 	}
 }
 
-void Animation::load_sounds() const {
+std::set<float> Animation::available_scales() const  {
+	std::set<float> result;
+	for (float scale : kSupportedScales) {
+		if (mipmaps_.count(scale) == 1) {
+			result.insert(scale);
+		}
+	}
+	return result;
+}
+
+void Animation::blit(uint32_t time,
+                              const Widelands::Coords& coords,
+                              const Rectf& source_rect,
+                              const Rectf& destination_rect,
+                              const RGBColor* clr,
+                              Surface* target,
+                              float scale) const {
+	mipmap_entry(find_best_scale(scale))
+	   .blit(current_frame(time), source_rect, destination_rect, clr, target);
+	trigger_sound(time, coords);
+}
+
+void Animation::load_default_scale_and_sounds() const {
+	mipmaps_.at(1.0f)->ensure_graphics_are_loaded();
 	if (sound_effect_ != kNoSoundEffect && !SoundHandler::is_backend_disabled()) {
 		g_sh->load_fx(SoundType::kAmbient, sound_effect_);
 	}
 }
 
+float Animation::find_best_scale(float scale) const {
+	assert(!mipmaps_.empty());
+	float result = mipmaps_.begin()->first;
+	for (const auto& mipmap : mipmaps_) {
+		// The map is reverse sorted, so we can break as soon as we are lower than the wanted scale
+		if (mipmap.first < scale) {
+			break;
+		}
+		result = mipmap.first;
+	}
+	return result;
+}
+
 int Animation::representative_frame() const {
 	return representative_frame_;
 }
+
