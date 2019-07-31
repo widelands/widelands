@@ -235,14 +235,16 @@ void InteractiveGameBase::rebuild_gamespeed_menu() {
 				  /** TRANSLATORS: Tooltip for Speed - in the game's game speed menu */
 				  _("Decrease the game speed"), pgettext("hotkey", "Page Down"));
 
-	if (get_game()->game_controller() && get_game()->game_controller()->is_paused()) {
-		gamespeedmenu_.add(_("Resume"), GameSpeedEntry::kPause, g_gr->images().get("images/wui/menus/gamespeed_resume.png"), false,
-					  /** TRANSLATORS: Tooltip for Pause in the game's game speed menu */
-					  _("Resume the Game"), pgettext("hotkey", "Pause"));
-	} else {
-		gamespeedmenu_.add(_("Pause"), GameSpeedEntry::kPause, g_gr->images().get("images/wui/menus/gamespeed_pause.png"), false,
-					  /** TRANSLATORS: Tooltip for Pause in the game's game speed menu */
-					  _("Pause the Game"), pgettext("hotkey", "Pause"));
+	if (!is_multiplayer()) {
+		if (get_game()->game_controller() && get_game()->game_controller()->is_paused()) {
+			gamespeedmenu_.add(_("Resume"), GameSpeedEntry::kPause, g_gr->images().get("images/wui/menus/gamespeed_resume.png"), false,
+						  /** TRANSLATORS: Tooltip for Pause in the game's game speed menu */
+						  _("Resume the Game"), pgettext("hotkey", "Pause"));
+		} else {
+			gamespeedmenu_.add(_("Pause"), GameSpeedEntry::kPause, g_gr->images().get("images/wui/menus/gamespeed_pause.png"), false,
+						  /** TRANSLATORS: Tooltip for Pause in the game's game speed menu */
+						  _("Pause the Game"), pgettext("hotkey", "Pause"));
+		}
 	}
 }
 
@@ -259,7 +261,9 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 		gamespeedmenu_.toggle();
 	} break;
 	case GameSpeedEntry::kPause: {
-		toggle_game_paused();
+		if (!is_multiplayer()) {
+			toggle_game_paused();
+		}
 	} break;
 	}
 }
