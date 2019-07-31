@@ -187,7 +187,6 @@ void SpriteSheetAnimation::MipMapEntry::blit(uint32_t idx,
 	assert(target);
 	assert(static_cast<int>(idx) <= columns * rows);
 
-	// NOCOM reuse calculation for representative image
 	const int column = idx % columns;
 	const int row = idx / rows;
 
@@ -248,20 +247,21 @@ std::set<float> SpriteSheetAnimation::available_scales() const  {
 
 const Image* SpriteSheetAnimation::representative_image(const RGBColor* clr) const {
 	const MipMapEntry& mipmap = mipmap_entry(1.0f);
+	mipmap.ensure_graphics_are_loaded();
+
 	const int column = representative_frame() % columns_;
 	const int row = representative_frame() / rows_;
-
-	// NOCOM inefficient - we should only compose the frame
-	const Image* image =
-	(mipmap.has_playercolor_masks && clr) ?
-	                        playercolor_image(*clr, mipmap.sheet_file) :
-	                        g_gr->images().get(mipmap.sheet_file);
-
 	const int w = width();
 	const int h = height();
 
 	Texture* rv = new Texture(w, h);
-	rv->blit(Rectf(column * w, row * h, w, h), *image, Rectf(0.f, 0.f, w, h), 1., BlendMode::Copy);
+	Rectf rect(Vector2f::zero(), w, h);
+	if (mipmap.has_playercolor_masks && clr) {
+		rv->fill_rect(rect, RGBAColor(0, 0, 0, 0));
+		rv->blit_blended(Rectf(column * w, row * h, w, h), *mipmap.sheet, *mipmap.playercolor_mask_sheet, rect, *clr);
+	} else {
+		rv->blit(Rectf(column * w, row * h, w, h), *mipmap.sheet, rect, 1., BlendMode::Copy);
+	}
 	return rv;
 }
 
