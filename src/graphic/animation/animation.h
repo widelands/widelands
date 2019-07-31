@@ -56,6 +56,12 @@ struct RGBColor;
  */
 class Animation {
 public:
+	// NOCOM document
+	enum class Type {
+		kFile,
+		kSpritesheet
+	};
+
 	/// The mipmap scales supported by the engine.
 	/// Ensure that this always matches supported_scales in data/scripting/mapobjects.lua.
 	static const std::set<float> kSupportedScales;

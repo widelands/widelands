@@ -19,8 +19,15 @@ tribes:new_productionsite_type {
    },
 
    animations = {
+      unoccupied = {
+         pictures = path.list_files(dirname .. "unoccupied_??.png"),
+         hotspot = { 52, 64 },
+      }
+   },
+
+   spritesheets = {
       idle = {
-         directory = path.dirname(__file__),
+         directory = dirname,
          basename = "idle",
          frames = 20,
          columns = 4,
@@ -28,7 +35,7 @@ tribes:new_productionsite_type {
          hotspot = { 52, 64 }
       },
       build = {
-         directory = path.dirname(__file__),
+         directory = dirname,
          basename = "build",
          frames = 4,
          columns = 2,
@@ -36,17 +43,13 @@ tribes:new_productionsite_type {
          hotspot = { 52, 64 }
       },
       working = {
-         directory = path.dirname(__file__),
+         directory = dirname,
          basename = "working",
          frames = 20,
          columns = 4,
          rows = 5,
          hotspot = { 52, 64 }
-      },
-      unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
-         hotspot = { 52, 64 },
-      },
+      }
    },
 
    aihints = {

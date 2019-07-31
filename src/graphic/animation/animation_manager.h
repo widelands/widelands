@@ -44,10 +44,10 @@ public:
 	 *
 	 * Optional parameters in the Lua table are 'fps' and 'sound_effect'.
 	 */
-	uint32_t load(const LuaTable& table, const std::string& basename);
+	uint32_t load(const LuaTable& table, const std::string& basename, Animation::Type type);
 	/// Same as above, but this animation will be used for getting a representative image by map
 	/// object name
-	uint32_t load(const std::string& map_object_name, const LuaTable& table, const std::string& basename);
+	uint32_t load(const std::string& map_object_name, const LuaTable& table, const std::string& basename, Animation::Type type);
 
 	/// Returns the animation with the given ID or throws an exception if it is
 	/// unknown.

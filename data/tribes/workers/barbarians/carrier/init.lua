@@ -1,6 +1,6 @@
 dirname = path.dirname(__file__)
 
-animations = {
+spritesheets = {
    idle = {
       directory = dirname,
       basename = "idle",
@@ -11,7 +11,7 @@ animations = {
       hotspot = { 14, 21 }
    },
    walk = {
-      directory = path.dirname(__file__),
+      directory = dirname,
       basename = "walk",
       fps = 10,
       frames = 10,
@@ -21,7 +21,7 @@ animations = {
       directional = true
    },
    walkload = {
-      directory = path.dirname(__file__),
+      directory = dirname,
       basename = "walkload",
       fps = 10,
       frames = 10,

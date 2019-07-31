@@ -266,6 +266,7 @@ const Image* SpriteSheetAnimation::representative_image(const RGBColor* clr) con
 }
 
 // NOCOM code duplication
+// NOCO Barbarian carriers are holding saws
 Rectf SpriteSheetAnimation::source_rectangle(const int percent_from_bottom, float scale) const {
 	const MipMapEntry& mipmap = mipmap_entry(find_best_scale(scale));
 	const float h = percent_from_bottom * mipmap.height / 100;

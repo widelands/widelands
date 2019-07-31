@@ -68,11 +68,13 @@ TribeDescr::TribeDescr(const LuaTable& table,
 			std::unique_ptr<LuaTable> animations_table = items_table->get_table("frontier");
 			frontier_animation_id_ =
 			   g_gr->animations().load(name_ + std::string("_frontier"), *animations_table,
-			                           animations_table->get_string("basename"));
+			                           animations_table->get_string("basename"),
+									   animations_table->has_key("columns") ? Animation::Type::kSpritesheet : Animation::Type::kFile);
 			animations_table = items_table->get_table("flag");
 			flag_animation_id_ =
 			   g_gr->animations().load(name_ + std::string("_frontier"), *animations_table,
-			                           animations_table->get_string("basename"));
+			                           animations_table->get_string("basename"),
+									   animations_table->has_key("columns") ? Animation::Type::kSpritesheet : Animation::Type::kFile);
 		}
 
 		items_table = table.get_table("roads");

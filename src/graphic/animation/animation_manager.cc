@@ -26,18 +26,20 @@
 #include "graphic/graphic.h"
 
 
-uint32_t AnimationManager::load(const LuaTable& table, const std::string& basename) {
-	if (table.has_key("columns")) {
-		animations_.push_back(std::unique_ptr<Animation>(new SpriteSheetAnimation(table, basename)));
-	} else {
+uint32_t AnimationManager::load(const LuaTable& table, const std::string& basename, Animation::Type type) {
+	switch (type) {
+	case Animation::Type::kFile:
 		animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table, basename)));
+		break;
+	case Animation::Type::kSpritesheet:
+		animations_.push_back(std::unique_ptr<Animation>(new SpriteSheetAnimation(table, basename)));
 	}
 	return animations_.size();
 }
 uint32_t AnimationManager::load(const std::string& map_object_name,
                                 const LuaTable& table,
-                                const std::string& basename) {
-	const size_t result = load(table, basename);
+                                const std::string& basename, Animation::Type type) {
+	const size_t result = load(table, basename, type);
 	representative_animations_by_map_object_name_.insert(std::make_pair(map_object_name, result));
 	return result;
 }

@@ -19,6 +19,13 @@ tribes:new_productionsite_type {
    },
 
    animations = {
+      unoccupied = {
+         pictures = path.list_files(dirname .. "unoccupied_??.png"),
+         hotspot = { 52, 64 },
+      }
+   },
+
+   spritesheets = {
       idle = {
          directory = dirname,
          basename = "idle",
@@ -42,11 +49,7 @@ tribes:new_productionsite_type {
          columns = 4,
          rows = 5,
          hotspot = { 52, 64 }
-      },
-      unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
-         hotspot = { 52, 64 },
-      },
+      }
    },
 
    aihints = {
