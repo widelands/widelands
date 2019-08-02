@@ -58,7 +58,6 @@ NonPackedAnimation::NonPackedMipMapEntry::NonPackedMipMapEntry(std::vector<std::
 		boost::replace_last(image_file, ".png", "_pc.png");
 		if (g_fs->file_exists(image_file)) {
 			has_playercolor_masks = true;
-			// NOCOM memory leak
 			playercolor_mask_image_files.push_back(image_file);
 		} else if (has_playercolor_masks) {
 			throw Widelands::GameDataError(
@@ -172,7 +171,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 				   g_fs->get_sequential_files(directory, basename + scale_as_string, "png");
 				if (!filenames.empty()) {
 					mipmaps_.insert(std::make_pair(
-					   scale_as_float, std::unique_ptr<NonPackedMipMapEntry>(new NonPackedMipMapEntry(filenames))));
+					   scale_as_float, std::unique_ptr<NonPackedMipMapEntry>(new NonPackedMipMapEntry(std::move(filenames)))));
 				}
 			};
 			// NOCOM code duplication

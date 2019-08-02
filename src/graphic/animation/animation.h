@@ -66,8 +66,7 @@ public:
 	/// Ensure that this always matches supported_scales in data/scripting/mapobjects.lua.
 	static const std::set<float> kSupportedScales;
 	explicit Animation(const LuaTable& table);
-	virtual ~Animation() {
-	}
+	virtual ~Animation() = default;
 
 	/// The height of this animation.
 	int height() const;
@@ -127,6 +126,7 @@ protected:
 	struct MipMapEntry {
 
 		MipMapEntry();
+		virtual ~MipMapEntry() {}
 
 		// Loads the graphics if they are not yet loaded.
 		virtual void ensure_graphics_are_loaded() const = 0;

@@ -38,8 +38,7 @@
  */
 class SpriteSheetAnimation : public Animation {
 public:
-	~SpriteSheetAnimation() override {
-	}
+	~SpriteSheetAnimation() override = default;
 	explicit SpriteSheetAnimation(const LuaTable& table, const std::string& basename);
 
 	// Implements Animation.

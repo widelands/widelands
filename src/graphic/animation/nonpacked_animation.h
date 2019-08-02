@@ -39,8 +39,7 @@
  */
 class NonPackedAnimation : public Animation {
 public:
-	~NonPackedAnimation() override {
-	}
+	~NonPackedAnimation() override  = default;
 	explicit NonPackedAnimation(const LuaTable& table, const std::string& basename);
 
 	// Implements Animation.
@@ -55,6 +54,7 @@ private:
 
 	struct NonPackedMipMapEntry : Animation::MipMapEntry {
 		explicit NonPackedMipMapEntry(std::vector<std::string> files);
+		~NonPackedMipMapEntry() override = default;
 
 		// Loads the graphics if they are not yet loaded.
 		void ensure_graphics_are_loaded() const override;
