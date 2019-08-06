@@ -29,7 +29,7 @@
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 
-const std::set<float> Animation::kSupportedScales { 0.5, 1, 2, 4};
+const std::map<float, std::string> Animation::kSupportedScales { {0.5, "_0.5"}, {1, "_1"}, {2, "_2"}, {4, "_4"}};
 
 Animation::MipMapEntry::MipMapEntry() : has_playercolor_masks(false) {
 }
@@ -119,10 +119,9 @@ uint32_t Animation::current_frame(uint32_t time) const {
 }
 
 void Animation::add_available_scales(const std::string& basename, const std::string& directory) {
-	add_scale_if_files_present(basename, directory, 0.5f, "_0.5");
-	add_scale_if_files_present(basename, directory, 1.0f, "_1");
-	add_scale_if_files_present(basename, directory, 2.0f, "_2");
-	add_scale_if_files_present(basename, directory, 4.0f, "_4");
+	for (const auto& scale : kSupportedScales) {
+		add_scale_if_files_present(basename, directory, scale.first, scale.second);
+	}
 
 	if (mipmaps_.count(1.0f) == 0) {
 		// There might be only 1 scale
@@ -151,9 +150,9 @@ void Animation::trigger_sound(uint32_t time, const Widelands::Coords& coords) co
 
 std::set<float> Animation::available_scales() const  {
 	std::set<float> result;
-	for (float scale : kSupportedScales) {
-		if (mipmaps_.count(scale) == 1) {
-			result.insert(scale);
+	for (const auto& scale : kSupportedScales) {
+		if (mipmaps_.count(scale.first) == 1) {
+			result.insert(scale.first);
 		}
 	}
 	return result;

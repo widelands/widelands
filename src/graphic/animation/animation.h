@@ -62,9 +62,9 @@ public:
 		kSpritesheet
 	};
 
-	/// The mipmap scales supported by the engine.
+	/// The mipmap scales supported by the engine as float and filename suffix.
 	/// Ensure that this always matches supported_scales in data/scripting/mapobjects.lua.
-	static const std::set<float> kSupportedScales;
+	static const std::map<float, std::string> kSupportedScales;
 	explicit Animation(const LuaTable& table);
 	virtual ~Animation() = default;
 
