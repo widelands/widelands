@@ -118,6 +118,25 @@ uint32_t Animation::current_frame(uint32_t time) const {
 	return 0;
 }
 
+void Animation::add_available_scales(const std::string& basename, const std::string& directory) {
+	add_scale_if_files_present(basename, directory, 0.5f, "_0.5");
+	add_scale_if_files_present(basename, directory, 1.0f, "_1");
+	add_scale_if_files_present(basename, directory, 2.0f, "_2");
+	add_scale_if_files_present(basename, directory, 4.0f, "_4");
+
+	if (mipmaps_.count(1.0f) == 0) {
+		// There might be only 1 scale
+		add_scale_if_files_present(basename, directory, 1.0f, "");
+		if (mipmaps_.count(1.0f) == 0) {
+			// No files found at all
+			throw Widelands::GameDataError(
+			   "Animation in directory '%s' with basename '%s' has no images for mandatory "
+			   "scale '1' in mipmap - supported scales are: 0.5, 1, 2, 4",
+			   directory.c_str(), basename.c_str());
+		}
+	}
+}
+
 // TODO(unknown): The chosen semantics of animation sound effects is problematic:
 // What if the game runs very slowly or very quickly?
 void Animation::trigger_sound(uint32_t time, const Widelands::Coords& coords) const {

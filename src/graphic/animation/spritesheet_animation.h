@@ -48,6 +48,9 @@ public:
 	std::vector<const Image*> pc_masks(float scale) const override;
 
 private:
+	void add_scale_if_files_present(const std::string& basename, const std::string& directory,
+								   float scale_as_float, const std::string& scale_as_string) override;
+
 	// Load the needed graphics from disk.
 	void load_graphics();
 

@@ -162,35 +162,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 				throw Widelands::GameDataError(
 				   "Animation did not define both a basename and a directory for its image files");
 			}
-			const std::string directory = table.get_string("directory");
-
-			// List files for the given scale, and if we have any, add a mipmap entry for them.
-			auto add_scale = [this, basename, directory](
-			                    float scale_as_float, const std::string& scale_as_string) {
-				std::vector<std::string> filenames =
-				   g_fs->get_sequential_files(directory, basename + scale_as_string, "png");
-				if (!filenames.empty()) {
-					mipmaps_.insert(std::make_pair(
-					   scale_as_float, std::unique_ptr<NonPackedMipMapEntry>(new NonPackedMipMapEntry(std::move(filenames)))));
-				}
-			};
-			// NOCOM code duplication
-			add_scale(0.5f, "_0.5");
-			add_scale(1.0f, "_1");
-			add_scale(2.0f, "_2");
-			add_scale(4.0f, "_4");
-
-			if (mipmaps_.count(1.0f) == 0) {
-				// There might be only 1 scale
-				add_scale(1.0f, "");
-				if (mipmaps_.count(1.0f) == 0) {
-					// No files found at all
-					throw Widelands::GameDataError(
-					   "Animation in directory '%s' with basename '%s' has no images for mandatory "
-					   "scale '1' in mipmap - supported scales are: 0.5, 1, 2, 4",
-					   directory.c_str(), basename.c_str());
-				}
-			}
+			add_available_scales(basename, table.get_string("directory"));
 		}
 
 		// Frames
@@ -256,4 +228,14 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	Texture* rv = new Texture(w, h);
 	rv->blit(Rectf(0.f, 0.f, w, h), *image, Rectf(0.f, 0.f, w, h), 1., BlendMode::Copy);
 	return rv;
+}
+
+void NonPackedAnimation::add_scale_if_files_present(const std::string& basename, const std::string& directory,
+			   float scale_as_float, const std::string& scale_as_string) {
+	std::vector<std::string> filenames =
+	   g_fs->get_sequential_files(directory, basename + scale_as_string, "png");
+	if (!filenames.empty()) {
+		mipmaps_.insert(std::make_pair(
+		   scale_as_float, std::unique_ptr<NonPackedMipMapEntry>(new NonPackedMipMapEntry(std::move(filenames)))));
+	}
 }

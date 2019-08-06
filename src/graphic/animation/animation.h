@@ -152,6 +152,9 @@ protected:
 	  {return lhs > rhs;}
 	};
 
+	/// Register animations for the scales listed in kSupportedScales if available. The scale of 1.0 is mandatory.
+	void add_available_scales(const std::string& basename, const std::string& directory);
+
 	/// Play the sound effect associated with this animation at the given time.
 	/// Any sound effects are played with stereo position according to 'coords'.
 	/// If 'coords' == Widelands::Coords::null(), skip playing any sound effects.
@@ -166,6 +169,10 @@ protected:
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);
+
+	// Look for a file or filess for the given scale, and if we have any, add a mipmap entry for them.
+	virtual void add_scale_if_files_present(const std::string& basename, const std::string& directory,
+							   float scale_as_float, const std::string& scale_as_string) = 0;
 
 	float find_best_scale(float scale) const;
 

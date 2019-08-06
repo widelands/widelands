@@ -146,32 +146,7 @@ SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table, const std::str
 		rows_ = table.get_int("rows");
 		columns_ = table.get_int("columns");
 
-		// Look for a file for the given scale, and if we have it, add a mipmap entry for it.
-		auto add_scale = [this, basename, directory](
-							float scale_as_float, const std::string& scale_as_string) {
-			const std::string path =
-			   directory + g_fs->file_separator() + basename + scale_as_string + ".png";
-			if (g_fs->file_exists(path)) {
-				mipmaps_.insert(std::make_pair(
-				   scale_as_float, std::unique_ptr<SpriteSheetMipMapEntry>(new SpriteSheetMipMapEntry(path, rows_, columns_))));
-			}
-		};
-		add_scale(0.5f, "_0.5");
-		add_scale(1.0f, "_1");
-		add_scale(2.0f, "_2");
-		add_scale(4.0f, "_4");
-
-		if (mipmaps_.count(1.0f) == 0) {
-			// There might be only 1 scale
-			add_scale(1.0f, "");
-			if (mipmaps_.count(1.0f) == 0) {
-				// No files found at all
-				throw Widelands::GameDataError(
-				   "Animation in directory '%s' with basename '%s' has no sprite sheet for mandatory "
-				   "scale '1' in mipmap - supported scales are: 0.5, 1, 2, 4",
-				   directory.c_str(), basename.c_str());
-			}
-		}
+		add_available_scales(basename, directory);
 
 		// Perform some checks to make sure that the data is complete and consistent
 		const SpriteSheetMipMapEntry& first = dynamic_cast<const SpriteSheetMipMapEntry&>(*mipmaps_.begin()->second.get());
@@ -234,6 +209,16 @@ const Image* SpriteSheetAnimation::representative_image(const RGBColor* clr) con
 		rv->blit(Rectf(column * w, row * h, w, h), *mipmap.sheet, rect, 1., BlendMode::Copy);
 	}
 	return rv;
+}
+
+void SpriteSheetAnimation::add_scale_if_files_present(const std::string& basename, const std::string& directory,
+			   float scale_as_float, const std::string& scale_as_string) {
+	const std::string path =
+	   directory + g_fs->file_separator() + basename + scale_as_string + ".png";
+	if (g_fs->file_exists(path)) {
+		mipmaps_.insert(std::make_pair(
+		   scale_as_float, std::unique_ptr<SpriteSheetMipMapEntry>(new SpriteSheetMipMapEntry(path, rows_, columns_))));
+	}
 }
 
 // NOCOM Barbarian carriers are not walking smoothly
