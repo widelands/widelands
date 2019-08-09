@@ -281,7 +281,17 @@ void InputQueueDisplay::update_priority_buttons() {
 		   this, pos, g_gr->images().get(pic_priority_low), _("Lowest priority"));
 	}
 
-	int32_t priority = building_.get_priority(type_, index_, false);
+	int32_t priority = -1;
+	if (settings_) {
+		for (const auto& pair : settings_->ware_queues) {
+			if (pair.first == index_) {
+				priority = pair.second.priority;
+				break;
+			}
+		}
+	} else {
+		priority = building_.get_priority(type_, index_, false);
+	}
 	switch (priority) {
 	case Widelands::kPriorityHigh:
 		priority_radiogroup_->set_state(0);
@@ -293,7 +303,7 @@ void InputQueueDisplay::update_priority_buttons() {
 		priority_radiogroup_->set_state(2);
 		break;
 	default:
-		break;
+		NEVER_HERE();
 	}
 
 	priority_radiogroup_->changedto.connect(
@@ -405,7 +415,8 @@ void InputQueueDisplay::radiogroup_changed(int32_t state) {
 	if (SDL_GetModState() & KMOD_CTRL) {
 		update_siblings_priority(state);
 	}
-	igb_.game().send_player_set_ware_priority(building_, type_, index_, priority);
+	igb_.game().send_player_set_ware_priority(
+	   building_, type_, index_, priority, settings_ != nullptr);
 }
 
 void InputQueueDisplay::radiogroup_clicked() {
@@ -465,7 +476,8 @@ void InputQueueDisplay::decrease_max_fill_clicked() {
 	// Update the value of this queue if required
 	if (cache_max_fill_ > 0) {
 		igb_.game().send_player_set_input_max_fill(
-		   building_, index_, type_, ((SDL_GetModState() & KMOD_CTRL) ? 0 : cache_max_fill_ - 1));
+		   building_, index_, type_, ((SDL_GetModState() & KMOD_CTRL) ? 0 : cache_max_fill_ - 1),
+		   settings_ != nullptr);
 	}
 
 	// Update other queues of this building
@@ -484,7 +496,8 @@ void InputQueueDisplay::increase_max_fill_clicked() {
 	if (cache_max_fill_ < cache_size_) {
 		igb_.game().send_player_set_input_max_fill(
 		   building_, index_, type_,
-		   ((SDL_GetModState() & KMOD_CTRL) ? cache_size_ : cache_max_fill_ + 1));
+		   ((SDL_GetModState() & KMOD_CTRL) ? cache_size_ : cache_max_fill_ + 1),
+		   settings_ != nullptr);
 	}
 
 	if (SDL_GetModState() & KMOD_SHIFT) {
@@ -512,7 +525,7 @@ void InputQueueDisplay::update_siblings_fill(int32_t delta) {
 		                                 display->cache_size_));
 		if (new_fill != display->cache_max_fill_) {
 			igb_.game().send_player_set_input_max_fill(
-			   building_, display->index_, display->type_, new_fill);
+			   building_, display->index_, display->type_, new_fill, settings_ != nullptr);
 		}
 	} while ((sibling = sibling->get_next_sibling()));
 }

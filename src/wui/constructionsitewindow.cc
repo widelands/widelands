@@ -219,7 +219,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_soldier_capacity_decrease_->sigclicked.connect([this, ms]() {
 				igbase()->game().send_player_change_soldier_capacity(
 				   *construction_site_.get(igbase()->egbase()),
-				   SDL_GetModState() & KMOD_CTRL ? 0 : ms->desired_capacity - 1);
+				   SDL_GetModState() & KMOD_CTRL ? 1 : ms->desired_capacity - 1);
 			});
 			cs_soldier_capacity_increase_->sigclicked.connect([this, ms]() {
 				igbase()->game().send_player_change_soldier_capacity(
@@ -242,16 +242,16 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_prefer_heroes_rookies_.reset(new UI::Radiogroup());
 			cs_prefer_heroes_rookies_->add_button(
 			   &soldier_preference_panel, Vector2i::zero(),
-			   g_gr->images().get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
+			   g_gr->images().get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
 			cs_prefer_heroes_rookies_->add_button(
 			   &soldier_preference_panel, Vector2i(32, 0),
-			   g_gr->images().get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
+			   g_gr->images().get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
 			if (can_act) {
 				cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
 					igbase()->game().send_player_militarysite_set_soldier_preference(
 					   *construction_site_.get(igbase()->egbase()),
-					   state ? Widelands::SoldierPreference::kHeroes :
-					           Widelands::SoldierPreference::kRookies);
+					   state ? Widelands::SoldierPreference::kRookies :
+					           Widelands::SoldierPreference::kHeroes);
 				});
 			}
 			settings_box.add_space(8);
@@ -434,7 +434,7 @@ void ConstructionSiteWindow::think() {
 		cs_soldier_capacity_decrease_->set_enabled(can_act && ms->desired_capacity > 1);
 		cs_soldier_capacity_increase_->set_enabled(can_act &&
 		                                           ms->desired_capacity < ms->max_capacity);
-		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 1 : 0);
+		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1);
 	} else if (upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings())) {
 		if (cs_launch_expedition_) {
 			cs_launch_expedition_->set_state(ws->launch_expedition);

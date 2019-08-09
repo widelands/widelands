@@ -138,13 +138,6 @@ constexpr uint8_t kCurrentPacketVersionProductionsite = 1;
 constexpr uint8_t kCurrentPacketVersionTrainingsite = 1;
 constexpr uint8_t kCurrentPacketVersionWarehouse = 1;
 
-enum class BuildingType : uint8_t {
-	kWarehouse = 1,
-	kProductionsite = 2,
-	kTrainingsite = 3,
-	kMilitarysite = 4,
-};
-
 // static
 BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tribe, FileRead& fr) {
 	try {
@@ -200,6 +193,7 @@ void BuildingSettings::read(const Game&, FileRead&) {
 void BuildingSettings::save(const Game&, FileWrite& fw) const {
 	fw.unsigned_8(kCurrentPacketVersion);
 	fw.c_string(descr_.c_str());
+	fw.unsigned_8(static_cast<uint8_t>(type()));
 }
 
 void MilitarysiteSettings::read(const Game& game, FileRead& fr) {
@@ -220,7 +214,6 @@ void MilitarysiteSettings::read(const Game& game, FileRead& fr) {
 
 void MilitarysiteSettings::save(const Game& game, FileWrite& fw) const {
 	BuildingSettings::save(game, fw);
-	fw.unsigned_8(static_cast<uint8_t>(BuildingType::kMilitarysite));
 	fw.unsigned_8(kCurrentPacketVersionMilitarysite);
 
 	fw.unsigned_32(desired_capacity);
@@ -262,7 +255,6 @@ void ProductionsiteSettings::read(const Game& game, FileRead& fr) {
 
 void ProductionsiteSettings::save(const Game& game, FileWrite& fw) const {
 	BuildingSettings::save(game, fw);
-	fw.unsigned_8(static_cast<uint8_t>(BuildingType::kProductionsite));
 	fw.unsigned_8(kCurrentPacketVersionProductionsite);
 
 	fw.unsigned_8(stopped ? 1 : 0);
@@ -297,7 +289,6 @@ void TrainingsiteSettings::read(const Game& game, FileRead& fr) {
 
 void TrainingsiteSettings::save(const Game& game, FileWrite& fw) const {
 	ProductionsiteSettings::save(game, fw);
-	fw.unsigned_8(static_cast<uint8_t>(BuildingType::kTrainingsite));
 	fw.unsigned_8(kCurrentPacketVersionTrainingsite);
 	fw.unsigned_32(desired_capacity);
 }
@@ -331,7 +322,6 @@ void WarehouseSettings::read(const Game& game, FileRead& fr) {
 
 void WarehouseSettings::save(const Game& game, FileWrite& fw) const {
 	BuildingSettings::save(game, fw);
-	fw.unsigned_8(static_cast<uint8_t>(BuildingType::kWarehouse));
 	fw.unsigned_8(kCurrentPacketVersionWarehouse);
 
 	fw.unsigned_8(launch_expedition ? 1 : 0);

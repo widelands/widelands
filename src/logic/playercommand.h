@@ -501,7 +501,8 @@ struct CmdSetWarePriority : public PlayerCommand {
 	                   PlayerImmovable&,
 	                   int32_t type,
 	                   DescriptionIndex index,
-	                   int32_t priority);
+	                   int32_t priority,
+	                   bool cs);
 
 	// Write these commands to a file (for savegames)
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -521,6 +522,7 @@ private:
 	int32_t type_;  ///< this is always WARE right now
 	DescriptionIndex index_;
 	int32_t priority_;
+	bool is_constructionsite_setting_;
 };
 
 struct CmdSetInputMaxFill : public PlayerCommand {
@@ -531,7 +533,8 @@ struct CmdSetInputMaxFill : public PlayerCommand {
 	                   PlayerImmovable&,
 	                   DescriptionIndex,
 	                   WareWorker,
-	                   uint32_t maxfill);
+	                   uint32_t maxfill,
+	                   bool cs);
 
 	// Write these commands to a file (for savegames)
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -551,6 +554,7 @@ private:
 	DescriptionIndex index_;
 	WareWorker type_;
 	uint32_t max_fill_;
+	bool is_constructionsite_setting_;
 };
 
 struct CmdChangeTargetQuantity : public PlayerCommand {

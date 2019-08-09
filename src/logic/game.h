@@ -267,14 +267,10 @@ public:
 	void send_player_enhance_building(Building&, DescriptionIndex);
 	void send_player_evict_worker(Worker&);
 	void send_player_set_stock_policy(Building&, WareWorker, DescriptionIndex, StockPolicy);
-	void send_player_set_ware_priority(PlayerImmovable&,
-	                                   int32_t type,
-	                                   DescriptionIndex index,
-	                                   int32_t prio);
-	void send_player_set_input_max_fill(PlayerImmovable&,
-	                                    DescriptionIndex index,
-	                                    WareWorker type,
-	                                    uint32_t);
+	void send_player_set_ware_priority(
+	   PlayerImmovable&, int32_t type, DescriptionIndex index, int32_t prio, bool is_cs = false);
+	void send_player_set_input_max_fill(
+	   PlayerImmovable&, DescriptionIndex index, WareWorker type, uint32_t, bool is_cs = false);
 	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);
 	void send_player_drop_soldier(Building&, int32_t);
 	void send_player_change_soldier_capacity(Building&, int32_t);

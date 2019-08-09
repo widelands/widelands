@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2015-2018
+# Juanjo, 2015-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-10 07:33+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
+"PO-Revision-Date: 2019-07-03 16:48+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,7 +33,7 @@ msgstr "Opcions:"
 
 #: ../../src/wlapplication_messages.cc:45
 msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr " --<config-entry-name>=VALOR reemplaça el valor de l'ajustament a l'arxiu de configuració"
+msgstr " --<config-entry-name>=VALOR reemplaça el valor de l'ajustament al fitxer de configuració"
 
 #: ../../src/wlapplication_messages.cc:46
 msgid "                      Note: New value will be written to config file"
@@ -43,13 +43,13 @@ msgstr "                      Nota: El nou valor s'escriurà al fitxer de config
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr " --datadir=DIRNAME    Usa el directori indicat per als arxius\n                      de dades del Widelands"
+msgstr " --datadir=DIRNAME    Usa el directori indicat per als fitxers\n                      de dades del Widelands"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr " --homedir=DIRNAME    Usa el directori indicat per desar\n                      arxius del Widelands de configuració,\n                      partides desades i repeticions"
+msgstr " --homedir=DIRNAME    Usa el directori indicat per desar\n                      fitxers del Widelands de configuració,\n                      partides desades i repeticions"
 
 #: ../../src/wlapplication_messages.cc:55
 msgid "                      Default is ~/.widelands"
@@ -95,7 +95,7 @@ msgstr " --autosave=[…]     Desa automàticament cada n minuts"
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
-msgstr " --rolling_autosave=[…]\n                      Usa aquests arxius per a les partides\n                      desades automàticament"
+msgstr " --rolling_autosave=[…]\n                      Usa aquests fitxers per a les partides\n                      desades automàticament"
 
 #: ../../src/wlapplication_messages.cc:81
 msgid ""
@@ -115,14 +115,14 @@ msgstr " --nosound            Inicia el programa amb el so desactivat."
 
 #: ../../src/wlapplication_messages.cc:90
 msgid " --nozip              Do not save files as binary zip archives."
-msgstr " --nozip              No guarda els arxius com a binaris zip."
+msgstr " --nozip              No guarda els fitxers com a binaris zip."
 
 #: ../../src/wlapplication_messages.cc:92
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
-msgstr " --editor             Comença directament a l'editor del\n                      Widelands. Podeu afegir =NOMARXIU\n                      per carregar directament el mapa a l'editor."
+msgstr " --editor             Comença directament a l'editor del\n                      Widelands. Podeu afegir =NOMFITXER\n                      per carregar directament el mapa a l'editor."
 
 #: ../../src/wlapplication_messages.cc:96
 msgid ""

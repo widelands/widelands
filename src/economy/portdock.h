@@ -95,12 +95,6 @@ public:
 
 	Flag& base_flag() override;
 	PositionList get_positions(const EditorGameBase&) const override;
-	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
-	          const Vector2f& point_on_dst,
-	          const Coords&,
-	          float scale,
-	          RenderTarget* dst) override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
@@ -139,6 +133,10 @@ public:
 
 private:
 	friend struct Fleet;
+
+	// Does nothing - we do not show them on the map
+	void draw(uint32_t, TextToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
+	}
 
 	void init_fleet(EditorGameBase& egbase);
 	void set_fleet(Fleet* fleet);
