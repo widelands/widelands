@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-01 12:45+0000\n"
-"PO-Revision-Date: 2019-03-01 17:50+0000\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
+"PO-Revision-Date: 2019-07-03 16:50+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -67,19 +67,19 @@ msgstr "També distribuïm la GPL com a un document de text junt amb el Wideland
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr "En Linux, podreu trobar un arxiu anomenat «COPYING» en l'arrel del codi o del paquet binari de la instal·lació, o també en el directori de la instal·lació (com ara «%1%»)."
+msgstr "En Linux, podreu trobar un document anomenat «COPYING» en l'arrel del codi o del paquet binari de la instal·lació, o també en el directori de la instal·lació (com ara «%1%»)."
 
 #: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr "En Windows, podreu trobar l'arxiu anomenat «COPYING.txt» en el directori d'instal·lació. El menú d'inici del Widelands també disposa d'un enllaç a aquest arxiu."
+msgstr "En Windows, podreu trobar el fitxer anomenat «COPYING.txt» en el directori d'instal·lació. El menú d'inici del Widelands també disposa d'un enllaç a aquest fitxer."
 
 #: ../../data/txts/LICENSE.lua:21
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr "En MacOS, podreu trobar l'arxiu «COPYING» en l'arxiu que us vau baixar del lloc web."
+msgstr "En MacOS, podreu trobar el document «COPYING» en el fitxer que us vau baixar del lloc web."
 
 #: ../../data/txts/LICENSE.lua:23
 msgid "This game comes as-is and without any warranty."
@@ -108,7 +108,7 @@ msgstr "Visiteu la pàgina principal del Widelands (en anglès):"
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
-msgstr "El Widelands es distribueix sota la llicència pública general (GPL). Per més informació, llegiu l'arxiu «COPYING»."
+msgstr "El Widelands es distribueix sota la llicència pública general (GPL). Per més informació, llegiu el document «COPYING»."
 
 #: ../../data/txts/README.lua:13
 msgid "Status"
@@ -371,7 +371,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr "El Widelands grava totes les partides que jugueu en dos arxius. El que té extensió .wrpl.wgf conté les dades inicials de la partida i el que té extensió .wrpl conté totes les ordres executades pels jugadors, com ara construcció de camins i edificis o atacs a l'enemic. La resta del nom dels arxius us pot ajudar a saber quan es va començar la partida."
+msgstr "El Widelands grava totes les partides que jugueu en dos fitxers. El que té extensió .wrpl.wgf conté les dades inicials de la partida i el que té extensió .wrpl conté totes les ordres executades pels jugadors, com ara construcció de camins i edificis o atacs a l'enemic. La resta del nom dels fitxers us pot ajudar a saber quan es va començar la partida."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -390,7 +390,7 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr "Les repeticions són una eina útil per trobar errors del programa, així que pot ser útil adjuntar-les en informes d'errors. En Linux i Mac OS X, els arxius de repetició es desen al directori «%s». En Windows, al directori «replays» on està instal·lat el Widelands."
+msgstr "Les repeticions són una eina útil per trobar errors del programa, així que pot ser útil adjuntar-les en informes d'errors. En Linux i Mac OS X, els fitxers de repetició es desen al directori «%s». En Windows, al directori «replays» on està instal·lat el Widelands."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35

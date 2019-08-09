@@ -793,17 +793,19 @@ void Game::send_player_evict_worker(Worker& worker) {
 void Game::send_player_set_ware_priority(PlayerImmovable& imm,
                                          int32_t const type,
                                          DescriptionIndex const index,
-                                         int32_t const prio) {
-	send_player_command(
-	   new CmdSetWarePriority(get_gametime(), imm.owner().player_number(), imm, type, index, prio));
+                                         int32_t const prio,
+                                         bool cs) {
+	send_player_command(new CmdSetWarePriority(
+	   get_gametime(), imm.owner().player_number(), imm, type, index, prio, cs));
 }
 
 void Game::send_player_set_input_max_fill(PlayerImmovable& imm,
                                           DescriptionIndex const index,
                                           WareWorker type,
-                                          uint32_t const max_fill) {
+                                          uint32_t const max_fill,
+                                          bool cs) {
 	send_player_command(new CmdSetInputMaxFill(
-	   get_gametime(), imm.owner().player_number(), imm, index, type, max_fill));
+	   get_gametime(), imm.owner().player_number(), imm, index, type, max_fill, cs));
 }
 
 void Game::send_player_change_training_options(TrainingSite& ts,

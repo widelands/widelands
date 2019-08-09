@@ -148,11 +148,6 @@ void PortDock::set_economy(Economy* e, WareWorker type) {
 	}
 }
 
-void PortDock::draw(
-   uint32_t, const TextToDraw, const Vector2f&, const Widelands::Coords&, float, RenderTarget*) {
-	// do nothing
-}
-
 bool PortDock::init(EditorGameBase& egbase) {
 	PlayerImmovable::init(egbase);
 
