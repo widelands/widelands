@@ -232,8 +232,6 @@ wl_library(logic
     graphic
     graphic_color
     graphic_playercolor
-    graphic_toolbar_imageset
-    helper
     io_fileread
     io_filesystem
     io_stream
