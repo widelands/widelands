@@ -57,7 +57,7 @@ Panel::Panel(Panel* const nparent,
      last_child_(nullptr),
      mousein_child_(nullptr),
      focus_(nullptr),
-     flags_(pf_handle_mouse | pf_thinks | pf_visible),
+     flags_(pf_handle_mouse | pf_thinks | pf_visible | pf_handle_keypresses),
      x_(nx),
      y_(ny),
      w_(nw),
@@ -910,6 +910,10 @@ bool Panel::do_mousemove(
 bool Panel::do_key(bool const down, SDL_Keysym const code) {
 	if (focus_ && focus_->do_key(down, code)) {
 		return true;
+	}
+
+	if (!handles_keypresses()) {
+		return false;
 	}
 
 	// If we handle text, it does not matter if we handled this key

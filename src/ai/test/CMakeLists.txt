@@ -1,0 +1,9 @@
+wl_test(test_ai
+  SRCS
+    ai_test_main.cc
+    test_ai.cc
+  DEPENDS
+    base_log
+    base_macros
+    ai
+)

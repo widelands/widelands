@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
-"PO-Revision-Date: 2019-05-25 10:11+0000\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
+"PO-Revision-Date: 2019-07-02 14:20+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -191,13 +191,13 @@ msgstr "Stòrasan"
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
-msgstr ""
+msgstr "Stòras dligheach:"
 
 #. TRANSLATORS: A header in the editor help if there is more than 1 valid
 #. resource
 #: ../../data/scripting/editor/terrain_help.lua:28
 msgid "Valid Resources:"
-msgstr ""
+msgstr "Stòrasan dligheach:"
 
 #: ../../data/scripting/editor/terrain_help.lua:39
 msgid "Default:"

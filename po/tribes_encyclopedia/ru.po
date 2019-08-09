@@ -12,15 +12,15 @@
 # Viktor S <awsswa59@gmail.com>, 2018-2019
 # Yuriy Sokolov <lention@mail.ru>, 2015,2019
 # Олег Шевченко <olegrock@gmail.com>, 2017
-# Олег Шевченко <olegrock@gmail.com>, 2017-2018
+# Олег Шевченко <olegrock@gmail.com>, 2017-2019
 # Fede4ka, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-30 18:50+0000\n"
-"PO-Revision-Date: 2019-05-30 18:52+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
+"PO-Revision-Date: 2019-06-25 13:30+0000\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1902,7 +1902,7 @@ msgstr "Сборщик ягод для лесника"
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:13
 msgctxt "building"
 msgid "Plants berry bushes in the surrounding area."
-msgstr "Ягодно кустовидные растения в окрестностях."
+msgstr "Сажает ягодные кусты в окрестностях."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:18
@@ -1916,13 +1916,13 @@ msgstr "Ягодной ферме требуется свободное прос
 #, lua-format
 msgctxt "frisians_building"
 msgid "The berry farmer pauses %s before going to work again."
-msgstr "Сборщик ягод делает паузу %s, прежде чем снова работать."
+msgstr "Сборщик ягод делает перерыв в работе на %s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "If you don’t have iron, change your name from blacksmith to lacksmith!"
-msgstr "Если у вас нет железа, измените свое имя с кузнеца до отсутствие кузнеца!"
+msgstr "Если у вас нет железа, смените имя кузнеца на недокузнец!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:8
@@ -1934,14 +1934,14 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:13
 msgctxt "building"
 msgid "Forges tools to equip new workers."
-msgstr "Создает инструменты для оснащения новых рабочих."
+msgstr "Куёт инструменты для оснащения новых работников."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The blacksmith needs %s on average to produce one tool."
-msgstr "Кузнец должен %s в среднем производить один инструмент."
+msgstr "Кузнецу нужно %s в среднем для производства одного инструмента."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/helptexts.lua:3
@@ -1967,7 +1967,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brewery needs %s on average to brew one mug of beer."
-msgstr "Пивовару нужно %s в среднем, чтобы сварить кружку пива."
+msgstr "Пивоварне нужно %s в среднем, чтобы сварить кружку пива."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:3
@@ -1996,7 +1996,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce two bricks."
-msgstr "Кирпичная печь нуждается %s в среднем для производства двух кирпичей."
+msgstr "Печи для обжига кирпича нужно %s в среднем для производства двух кирпичей."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:3
