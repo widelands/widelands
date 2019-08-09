@@ -7,14 +7,15 @@
 # Wuzzy <almikes@aol.com>, 2018
 # Elisabeth Jäger, 2018
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019
+# Simon S. <sim.sta@icloud.com>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"POT-Creation-Date: 2019-07-31 09:14+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019\n"
+"Last-Translator: Simon S. <sim.sta@icloud.com>, 2019\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -621,8 +622,7 @@ msgid ""
 "and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
 "Du hast recht – wir sollten mehr Beerenzuchten, Beerensammlerhäuser und "
-"Tavernen sowie eine Trinkhalle und verbesserte Bäckereien und Brauereien "
-"bauen."
+"Tavernen sowie eine Trinkhalle, verbesserte Bäckereien und Brauereien bauen."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:249
