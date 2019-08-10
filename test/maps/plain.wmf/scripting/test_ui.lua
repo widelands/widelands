@@ -1,3 +1,5 @@
+-- There are more UI test in lua_testsuite.wmf/ui.lua
+
 local function open_and_close_sound_options(dropdown, is_debug_build)
    sleep(100)
 
