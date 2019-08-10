@@ -1,4 +1,4 @@
-local function open_and_close_sound_options(dropdown)
+local function open_and_close_sound_options(dropdown, is_debug_build)
    sleep(100)
 
    -- Test out-of-range selection in dropdown
@@ -10,7 +10,11 @@ local function open_and_close_sound_options(dropdown)
    end)
 
    -- Test selecting an item in the dropdown
-   dropdown:highlight_item(1)
+   if (is_debug_build) then
+      dropdown:highlight_item(2)
+   else
+      dropdown:highlight_item(1)
+   end
    assert_nil(wl.ui.MapView().windows.sound_options_menu, "Sound options window should not have been there yet")
 
    dropdown:select()
@@ -37,20 +41,26 @@ run(function()
    local dropdown = dropdowns["dropdown_menu_main"]
    assert_not_nil(dropdown, "Failed to find main menu dropdown")
 
+   local is_debug_build = dropdown.no_of_items == 4
+
    -- Selecting from closed dropdown should fail silently
    dropdown:select()
 
    -- Validate selection without opening
-   open_and_close_sound_options(dropdown);
+   open_and_close_sound_options(dropdown, is_debug_build);
 
    -- Validate selection with opening
    dropdown:open()
    sleep(100)
-   open_and_close_sound_options(dropdown);
+   open_and_close_sound_options(dropdown, is_debug_build);
 
    -- Exit by dropdown
    local dropdown = dropdowns["dropdown_menu_main"]
-   dropdown:highlight_item(3)
+      if (is_debug_build) then
+      dropdown:highlight_item(4)
+   else
+      dropdown:highlight_item(3)
+   end
    dropdown:select()
 
    local message_box = wl.ui.MapView().windows["message_box"]
