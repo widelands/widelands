@@ -326,12 +326,14 @@ void PortDock::shipping_item_returned(Game& game, ShippingItem& si) {
  */
 void PortDock::ship_coming(Ship& ship, bool affirmative) {
 	if (affirmative) {
-		assert(ships_coming_.find(&ship) == ships_coming_.end());
-		ships_coming_.insert(&ship);
+		if (ships_coming_.find(&ship) == ships_coming_.end()) {
+			ships_coming_.insert(&ship);
+		}
 	} else {
 		auto it = ships_coming_.find(&ship);
-		assert(it != ships_coming_.end());
-		ships_coming_.erase(it);
+		if (it != ships_coming_.end()) {
+			ships_coming_.erase(it);
+		}
 	}
 }
 
