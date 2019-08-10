@@ -163,8 +163,8 @@ void InteractiveGameBase::add_main_menu() {
 	mainmenu_.add(_("Save Game"), MainMenuEntry::kSaveMap,
 	              g_gr->images().get("images/wui/menus/save_game.png"));
 
-	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(
+				/** TRANSLATORS: An entry in the game's main menu */
 	   _("Exit Game"), MainMenuEntry::kExitGame, g_gr->images().get("images/wui/menus/exit.png"));
 
 	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
@@ -217,10 +217,12 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                  ShowHideEntry::kCensus,
 	                  g_gr->images().get("images/wui/menus/toggle_census.png"), false, "", "c");
 
-	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building staristics are
-	 * shown */
+
 	showhidemenu_.add(
-	   get_display_flag(dfShowStatistics) ? _("Hide Statistics") : _("Show Statistics"),
+	   get_display_flag(dfShowStatistics) ?
+					/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building staristics are
+					 * shown */
+					_("Hide Statistics") : _("Show Statistics"),
 	   ShowHideEntry::kStatistics, g_gr->images().get("images/wui/menus/toggle_statistics.png"),
 	   false, "", "s");
 }
