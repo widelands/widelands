@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,21 +17,16 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_TOOL_MENU_H
-#define WL_EDITOR_UI_MENUS_TOOL_MENU_H
+#ifndef WL_LOGIC_NOTE_MAP_OPTIONS_H
+#define WL_LOGIC_NOTE_MAP_OPTIONS_H
 
-#include "editor/editorinteractive.h"
-#include "ui_basic/radiobutton.h"
-#include "ui_basic/unique_window.h"
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 
-/// The tool selection window/menu.
-struct EditorToolMenu : public UI::UniqueWindow {
-	EditorToolMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
+struct NoteMapOptions {
+	CAN_BE_SENT_AS_NOTE(NoteId::MapOptions)
 
-private:
-	UI::Radiogroup radioselect_;
-
-	void changed_to();
+	NoteMapOptions() = default;
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_MENU_H
+#endif  // end of include guard: WL_LOGIC_NOTE_MAP_OPTIONS_H

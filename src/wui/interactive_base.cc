@@ -91,13 +91,90 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 
 }  // namespace
 
+InteractiveBase::Toolbar::Toolbar(Panel* parent)
+   : UI::Panel(parent, 0, 0, parent->get_inner_w(), parent->get_inner_h()),
+     box(this, 0, 0, UI::Box::Horizontal),
+     repeat(0) {
+}
+
+void InteractiveBase::Toolbar::change_imageset(const ToolbarImageset& images) {
+	imageset = images;
+	finalize();
+}
+
+void InteractiveBase::Toolbar::finalize() {
+	// Set box size and get minimum height
+	int box_width, height;
+	box.get_desired_size(&box_width, &height);
+	box.set_size(box_width, height);
+
+	// Calculate repetition and width
+	repeat = 1;
+	int width = imageset.left->width() + imageset.center->width() + imageset.right->width();
+	while (width < box.get_w()) {
+		++repeat;
+		width += imageset.left->width() + imageset.right->width();
+	}
+	width += imageset.left_corner->width() + imageset.right_corner->width();
+
+	// Find the highest image
+	height = std::max(height, imageset.left_corner->height());
+	height = std::max(height, imageset.left->height());
+	height = std::max(height, imageset.center->height());
+	height = std::max(height, imageset.right->height());
+	height = std::max(height, imageset.right_corner->height());
+
+	// Set size and position
+	set_size(width, height);
+	set_pos(
+	   Vector2i((get_parent()->get_inner_w() - width) >> 1, get_parent()->get_inner_h() - height));
+	box.set_pos(Vector2i((get_w() - box.get_w()) / 2, get_h() - box.get_h()));
+
+	// Notify dropdowns
+	box.position_changed();
+}
+
+void InteractiveBase::Toolbar::draw(RenderTarget& dst) {
+	int x = 0;
+	// Left corner
+	dst.blit(Vector2i(x, get_h() - imageset.left_corner->height()), imageset.left_corner);
+	x += imageset.left_corner->width();
+	// Repeat left
+	for (int i = 0; i < repeat; ++i) {
+		dst.blit(Vector2i(x, get_h() - imageset.left->height()), imageset.left);
+		x += imageset.left->width();
+	}
+	// Center
+	dst.blit(Vector2i(x, get_h() - imageset.center->height()), imageset.center);
+	x += imageset.center->width();
+	// Repeat right
+	for (int i = 0; i < repeat; ++i) {
+		dst.blit(Vector2i(x, get_h() - imageset.right->height()), imageset.right);
+		x += imageset.right->width();
+	}
+	// Right corner
+	dst.blit(Vector2i(x, get_h() - imageset.right_corner->height()), imageset.right_corner);
+}
+
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      buildhelp_(false),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoveraly before the toolbar so it is below
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
-     toolbar_(this, 0, 0, UI::Box::Horizontal),
+     toolbar_(this),
+     mapviewmenu_(toolbar(),
+                  "dropdown_menu_mapview",
+                  0,
+                  0,
+                  34U,
+                  10,
+                  34U,
+                  /** TRANSLATORS: Title for the map view menu button in the game */
+                  _("Map View"),
+                  UI::DropdownType::kPictorialMenu,
+                  UI::PanelStyle::kWui,
+                  UI::ButtonStyle::kWuiPrimary),
      quick_navigation_(&map_view_),
      workareas_cache_(nullptr),
      egbase_(the_egbase),
@@ -147,7 +224,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		   set_size(message.width, message.height);
 		   map_view_.set_size(message.width, message.height);
 		   resize_chat_overlay();
-		   adjust_toolbar_position();
+		   finalize_toolbar();
 	   });
 	sound_subscriber_ = Notifications::subscribe<NoteSound>(
 	   [this](const NoteSound& note) { play_sound_effect(note); });
@@ -191,6 +268,63 @@ InteractiveBase::~InteractiveBase() {
 	}
 }
 
+void InteractiveBase::add_mapview_menu(MiniMapType minimap_type) {
+	mapviewmenu_.set_image(g_gr->images().get("images/wui/menus/toggle_minimap.png"));
+	toolbar()->add(&mapviewmenu_);
+
+	minimap_registry_.open_window = [this] { toggle_minimap(); };
+	minimap_registry_.minimap_type = minimap_type;
+	minimap_registry_.closed.connect([this] { rebuild_mapview_menu(); });
+
+	rebuild_mapview_menu();
+	mapviewmenu_.selected.connect([this] { mapview_menu_selected(mapviewmenu_.get_selected()); });
+}
+
+void InteractiveBase::rebuild_mapview_menu() {
+	mapviewmenu_.clear();
+
+	/** TRANSLATORS: An entry in the game's map view menu */
+	mapviewmenu_.add(minimap_registry_.window != nullptr ? _("Hide Minimap") : _("Show Minimap"),
+	                 MapviewMenuEntry::kMinimap,
+	                 g_gr->images().get("images/wui/menus/toggle_minimap.png"), false, "", "m");
+
+	/** TRANSLATORS: An entry in the game's map view menu */
+	mapviewmenu_.add(_("Zoom +"), MapviewMenuEntry::kIncreaseZoom,
+	                 g_gr->images().get("images/wui/menus/zoom_increase.png"), false, "",
+	                 pgettext("hotkey", "Ctrl++"));
+
+	/** TRANSLATORS: An entry in the game's map view menu */
+	mapviewmenu_.add(_("Reset zoom"), MapviewMenuEntry::kResetZoom,
+	                 g_gr->images().get("images/wui/menus/zoom_reset.png"), false, "",
+	                 pgettext("hotkey", "Ctrl+0"));
+
+	/** TRANSLATORS: An entry in the game's map view menu */
+	mapviewmenu_.add(_("Zoom -"), MapviewMenuEntry::kDecreaseZoom,
+	                 g_gr->images().get("images/wui/menus/zoom_decrease.png"), false, "",
+	                 pgettext("hotkey", "Ctrl+-"));
+}
+
+void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
+	switch (entry) {
+	case MapviewMenuEntry::kMinimap: {
+		toggle_minimap();
+	} break;
+	case MapviewMenuEntry::kDecreaseZoom: {
+		map_view()->decrease_zoom();
+		mapviewmenu_.toggle();
+	} break;
+	case MapviewMenuEntry::kIncreaseZoom: {
+		map_view()->increase_zoom();
+		mapviewmenu_.toggle();
+	} break;
+
+	case MapviewMenuEntry::kResetZoom: {
+		map_view()->reset_zoom();
+		mapviewmenu_.toggle();
+	} break;
+	}
+}
+
 const InteractiveBase::BuildhelpOverlay*
 InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
 	const int buildhelp_overlay_index = caps_to_buildhelp(caps);
@@ -222,12 +356,20 @@ bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords,
 	return false;
 }
 
+void InteractiveBase::set_toolbar_imageset(const ToolbarImageset& imageset) {
+	toolbar_.change_imageset(imageset);
+}
+
 UniqueWindowHandler& InteractiveBase::unique_windows() {
 	return *unique_window_handler_;
 }
 
 void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 	sel_.pos = center;
+}
+
+void InteractiveBase::finalize_toolbar() {
+	toolbar_.finalize();
 }
 
 /*
@@ -269,8 +411,11 @@ bool InteractiveBase::buildhelp() const {
 }
 
 void InteractiveBase::show_buildhelp(bool t) {
+	const bool old_value = buildhelp_;
 	buildhelp_ = t;
-	on_buildhelp_changed(t);
+	if (old_value != t) {
+		rebuild_showhide_menu();
+	}
 }
 
 void InteractiveBase::toggle_buildhelp() {
@@ -283,9 +428,9 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
                                                 UI::UniqueWindow::Registry* window,
                                                 bool bind_default_toggle) {
 	UI::Button* button =
-	   new UI::Button(&toolbar_, name, 0, 0, 34U, 34U, UI::ButtonStyle::kWuiPrimary,
+	   new UI::Button(&toolbar_.box, name, 0, 0, 34U, 34U, UI::ButtonStyle::kWuiPrimary,
 	                  g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
-	toolbar_.add(button);
+	toolbar_.box.add(button);
 	if (window) {
 		window->opened.connect([button] { button->set_perm_pressed(true); });
 		window->closed.connect([button] { button->set_perm_pressed(false); });
@@ -296,9 +441,6 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 		}
 	}
 	return button;
-}
-
-void InteractiveBase::on_buildhelp_changed(bool /* value */) {
 }
 
 bool InteractiveBase::has_expedition_port_space(const Widelands::Coords& coords) const {
@@ -638,6 +780,7 @@ void InteractiveBase::toggle_minimap() {
 		});
 		mainview_move();
 	}
+	rebuild_mapview_menu();
 }
 
 const std::vector<QuickNavigation::Landmark>& InteractiveBase::landmarks() {
@@ -653,17 +796,6 @@ void InteractiveBase::set_landmark(size_t key, const MapView::View& landmark_vie
  */
 void InteractiveBase::hide_minimap() {
 	minimap_registry_.destroy();
-}
-
-/**
-===========
-InteractiveBase::minimap_registry()
-
-Exposes the Registry object of the minimap to derived classes
-===========
-*/
-MiniMap::Registry& InteractiveBase::minimap_registry() {
-	return minimap_registry_;
 }
 
 /*
@@ -999,40 +1131,6 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 
 	if (down) {
 		switch (code.sym) {
-		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_PAGEUP:
-			if (upcast(Game, game, &egbase_)) {
-				if (GameController* const ctrl = game->game_controller()) {
-					ctrl->set_desired_speed(ctrl->desired_speed() + 1000);
-				}
-			}
-			return true;
-
-		case SDLK_PAUSE:
-			if (upcast(Game, game, &egbase_)) {
-				if (GameController* const ctrl = game->game_controller()) {
-					ctrl->toggle_paused();
-				}
-			}
-			return true;
-
-		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_PAGEDOWN:
-			if (upcast(Widelands::Game, game, &egbase_)) {
-				if (GameController* const ctrl = game->game_controller()) {
-					uint32_t const speed = ctrl->desired_speed();
-					ctrl->set_desired_speed(1000 < speed ? speed - 1000 : 0);
-				}
-			}
-			return true;
 		// Scroll the map
 		case SDLK_KP_8:
 			if (SDL_GetModState() & KMOD_NUM) {
@@ -1066,13 +1164,15 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RIGHT:
 			map_view_.pan_by(Vector2i(kScrollDistance, 0));
 			return true;
-
 #ifndef NDEBUG  //  only in debug builds
 		case SDLK_F6:
 			GameChatMenu::create_script_console(
 			   this, debugconsole_, *DebugConsole::get_chat_provider());
 			return true;
 #endif
+		case SDLK_m:
+			toggle_minimap();
+			return true;
 		default:
 			break;
 		}
