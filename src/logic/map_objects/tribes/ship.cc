@@ -854,6 +854,7 @@ void Ship::reorder_destinations(Game& game) {
 	upcast(PortDock, pd, get_position().field->get_immovable());
 	size_t nr_dests = 0;
 	DestinationsQueue old_dq;
+	PortDock* fallback_dest = nullptr;
 	std::map<PortDock*, uint32_t> shipping_items;
 	for (const auto& pair : destinations_) {
 		PortDock* p = pair.first.get(game);
@@ -865,6 +866,7 @@ void Ship::reorder_destinations(Game& game) {
 			}
 		}
 		if (nr_items == 0 && p->count_waiting() == 0 && !p->expedition_started() && (!pd || pd->count_waiting(p) == 0)) {
+			fallback_dest = p;
 			// We don't need to go there anymore
 			p->ship_coming(*this, false);
 			continue;
@@ -877,6 +879,9 @@ void Ship::reorder_destinations(Game& game) {
 		destinations_.clear();
 		if (nr_dests > 0) {
 			destinations_.push_back(old_dq[0]);
+		} else if (fallback_dest) {
+			destinations_.push_back(std::make_pair(OPtr<PortDock>(fallback_dest), 1));
+			fallback_dest->ship_coming(*this, true);
 		}
 		return;
 	}
