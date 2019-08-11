@@ -343,13 +343,13 @@ void Tribes::postload() {
 					if (!p->workarea_info().empty()) {
 						continue;
 					}
-					throw GameDataError(
-							"Productionsite %s will inform about conflicting building %s which doesn’t have a workarea",
-							de->name().c_str(), pair.first.c_str());
+					throw GameDataError("Productionsite %s will inform about conflicting building %s "
+					                    "which doesn’t have a workarea",
+					                    de->name().c_str(), pair.first.c_str());
 				}
-				throw GameDataError(
-						"Productionsite %s will inform about conflicting building %s which is not a productionsite",
-						de->name().c_str(), pair.first.c_str());
+				throw GameDataError("Productionsite %s will inform about conflicting building %s which "
+				                    "is not a productionsite",
+				                    de->name().c_str(), pair.first.c_str());
 			}
 		}
 

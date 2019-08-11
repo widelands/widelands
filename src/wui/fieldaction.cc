@@ -76,7 +76,7 @@ private:
 
 BuildGrid::BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32_t y, int32_t cols)
    : UI::IconGrid(parent, x, y, kBuildGridCellSize, kBuildGridCellSize, cols), plr_(plr) {
-	clicked.connect(boost::bind(&BuildGrid::click_slot, this, _1));
+	icon_clicked.connect(boost::bind(&BuildGrid::click_slot, this, _1));
 	mouseout.connect(boost::bind(&BuildGrid::mouseout_slot, this, _1));
 	mousein.connect(boost::bind(&BuildGrid::mousein_slot, this, _1));
 }
@@ -163,9 +163,6 @@ public:
 	void add_buttons_attack();
 
 	void act_watch();
-	void act_show_census();
-	void act_show_statistics();
-	void act_show_workarea_overlap();
 	void act_debug();
 	void act_buildflag();
 	void act_configure_economy();
@@ -232,10 +229,6 @@ static const char* const pic_remroad = "images/wui/fieldaction/menu_rem_way.png"
 static const char* const pic_buildflag = "images/wui/fieldaction/menu_build_flag.png";
 static const char* const pic_ripflag = "images/wui/fieldaction/menu_rip_flag.png";
 static const char* const pic_watchfield = "images/wui/fieldaction/menu_watch_field.png";
-static const char* const pic_showcensus = "images/wui/fieldaction/menu_show_census.png";
-static const char* const pic_showstatistics = "images/wui/fieldaction/menu_show_statistics.png";
-static const char* const pic_showworkareaoverlap =
-   "images/wui/fieldaction/menu_show_workarea_overlap.png";
 static const char* const pic_debug = "images/wui/fieldaction/menu_debug.png";
 static const char* const pic_abort = "images/wui/menu_abort.png";
 static const char* const pic_geologist = "images/wui/fieldaction/menu_geologist.png";
@@ -281,12 +274,11 @@ void FieldActionWindow::think() {
 		is_showing_workarea_overlaps_ = !is_showing_workarea_overlaps_;
 		if (!is_showing_workarea_overlaps_) {
 			clear_overlapping_workareas();
-		}
-		else {
+		} else {
 			assert(overlapping_workareas_.empty());
 			if (building_under_mouse_ != Widelands::INVALID_INDEX) {
 				const Widelands::DescriptionIndex di = building_under_mouse_;
-				building_icon_mouse_out(di); // this unsets building_under_mouse_
+				building_icon_mouse_out(di);  // this unsets building_under_mouse_
 				building_icon_mouse_in(di);
 			}
 		}
@@ -386,21 +378,10 @@ void FieldActionWindow::add_buttons_auto() {
 	                             node_, ibase().egbase().map().get_width())))
 		add_buttons_attack();
 
-	//  Watch actions, only when game (no use in editor) same for statistics.
-	//  census is ok
+	//  Watch actions, only when in game (no use in editor).
 	if (dynamic_cast<const Game*>(&ibase().egbase())) {
 		add_button(&watchbox, "watch", pic_watchfield, &FieldActionWindow::act_watch,
 		           _("Watch field in a separate window"));
-		add_button(&watchbox, "statistics", pic_showstatistics,
-		           &FieldActionWindow::act_show_statistics, _("Toggle building statistics display"));
-	}
-	add_button(&watchbox, "census", pic_showcensus, &FieldActionWindow::act_show_census,
-	           _("Toggle building label display"));
-	if (is_a(InteractivePlayer, &ibase())) {
-		add_button(
-		   &watchbox, "workarea_overlap", pic_showworkareaoverlap,
-		   &FieldActionWindow::act_show_workarea_overlap,
-		   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"));
 	}
 
 	if (ibase().get_display_flag(InteractiveBase::dfDebug))
@@ -585,29 +566,6 @@ void FieldActionWindow::act_watch() {
 
 /*
 ===============
-Toggle display of census and statistics for buildings, respectively.
-===============
-*/
-void FieldActionWindow::act_show_census() {
-	ibase().set_display_flag(
-	   InteractiveBase::dfShowCensus, !ibase().get_display_flag(InteractiveBase::dfShowCensus));
-	reset_mouse_and_die();
-}
-
-void FieldActionWindow::act_show_statistics() {
-	ibase().set_display_flag(InteractiveBase::dfShowStatistics,
-	                         !ibase().get_display_flag(InteractiveBase::dfShowStatistics));
-	reset_mouse_and_die();
-}
-
-void FieldActionWindow::act_show_workarea_overlap() {
-	ibase().set_display_flag(InteractiveBase::dfShowWorkareaOverlap,
-	                         !ibase().get_display_flag(InteractiveBase::dfShowWorkareaOverlap));
-	reset_mouse_and_die();
-}
-
-/*
-===============
 Show a debug widow for this field.
 ===============
 */
@@ -779,14 +737,14 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						continue;
 					}
 					const Widelands::BuildingDescr* d = nullptr;
-					bool positive = false; // unused default value to make g++ happy
+					bool positive = false;  // unused default value to make g++ happy
 					if (imm_type == Widelands::MapObjectType::CONSTRUCTIONSITE) {
 						upcast(Widelands::ConstructionSite, cs, imm);
 						d = cs->get_info().becomes;
 						if ((descr.type() == Widelands::MapObjectType::PRODUCTIONSITE &&
 						     (d->type() != Widelands::MapObjectType::PRODUCTIONSITE ||
-						     !dynamic_cast<const Widelands::ProductionSiteDescr&>(descr).
-						     		highlight_overlapping_workarea_for(d->name(), &positive))) ||
+						      !dynamic_cast<const Widelands::ProductionSiteDescr&>(descr)
+						          .highlight_overlapping_workarea_for(d->name(), &positive))) ||
 						    ((descr.type() == Widelands::MapObjectType::MILITARYSITE ||
 						      descr.type() == Widelands::MapObjectType::WAREHOUSE) &&
 						     imm_type != Widelands::MapObjectType::MILITARYSITE &&
@@ -795,8 +753,9 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						}
 					} else if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
 						if (imm_type != Widelands::MapObjectType::PRODUCTIONSITE ||
-						    imm->get_owner() != player_ || !dynamic_cast<const Widelands::ProductionSiteDescr&>(
-						    		descr).highlight_overlapping_workarea_for(imm->descr().name(), &positive)) {
+						    imm->get_owner() != player_ ||
+						    !dynamic_cast<const Widelands::ProductionSiteDescr&>(descr)
+						        .highlight_overlapping_workarea_for(imm->descr().name(), &positive)) {
 							continue;
 						}
 					} else if (descr.type() == Widelands::MapObjectType::WAREHOUSE ||
@@ -827,11 +786,14 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						for (const Widelands::TCoords<>& t : map.triangles_in_region(
 						        map.to_set(Widelands::Area<>(mr.location(), wa_radius)))) {
 							colors[t] = mr.location() == t.node || mr.location() == map.br_n(t.node) ||
-									mr.location() == (t.t == Widelands::TriangleIndex::D ? map.bl_n(t.node) :
-									map.r_n(t.node)) || main_region.count(t) ?
-									descr.type() == Widelands::MapObjectType::PRODUCTIONSITE ?
-									positive ? kOverlapColorPositive : kOverlapColorNegative :
-									kOverlapColorDefault : kOverlapColorPale;
+							                  mr.location() == (t.t == Widelands::TriangleIndex::D ?
+							                                       map.bl_n(t.node) :
+							                                       map.r_n(t.node)) ||
+							                  main_region.count(t) ?
+							               descr.type() == Widelands::MapObjectType::PRODUCTIONSITE ?
+							               positive ? kOverlapColorPositive : kOverlapColorNegative :
+							               kOverlapColorDefault :
+							               kOverlapColorPale;
 						}
 						ibase().show_workarea(wa, mr.location(), colors);
 						overlapping_workareas_.insert(mr.location());

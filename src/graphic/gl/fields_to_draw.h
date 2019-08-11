@@ -100,15 +100,10 @@ public:
 	// coordinates in the map. Returns INVALID_INDEX if this field is not in the
 	// fields_to_draw.
 	inline int calculate_index(int fx, int fy) const {
-		uint16_t xidx = fx - min_fx_;
-		if (xidx >= w_) {
+		if (fx < min_fx_ || fx > max_fx_ || fy < min_fy_ || fy > max_fy_) {
 			return kInvalidIndex;
 		}
-		uint16_t yidx = fy - min_fy_;
-		if (yidx >= h_) {
-			return kInvalidIndex;
-		}
-		return yidx * w_ + xidx;
+		return (fy - min_fy_) * w_ + (fx - min_fx_);
 	}
 
 private:

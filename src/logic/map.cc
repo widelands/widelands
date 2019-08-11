@@ -46,6 +46,7 @@
 #include "logic/mapfringeregion.h"
 #include "logic/maphollowregion.h"
 #include "logic/mapregion.h"
+#include "logic/note_map_options.h"
 #include "logic/objective.h"
 #include "logic/pathfield.h"
 #include "map_io/s2map.h"
@@ -712,6 +713,22 @@ void Map::set_size(const uint32_t w, const uint32_t h) {
 	clear_array<>(&fields_, field_size);
 
 	pathfieldmgr_->set_size(field_size);
+}
+
+int Map::needs_widelands_version_after() const {
+	return map_version_.needs_widelands_version_after;
+}
+
+void Map::calculate_needs_widelands_version_after(bool is_post_one_world) {
+	if (map_version_.needs_widelands_version_after == 0) {
+		if (nrplayers_ > 8) {
+			// We introduced support for 16 players after Build 19
+			map_version_.needs_widelands_version_after = 19;
+		} else if (is_post_one_world) {
+			// We merged the worlds in the engine after Build 18
+			map_version_.needs_widelands_version_after = 18;
+		}
+	}
 }
 
 /*
@@ -2299,6 +2316,7 @@ void Map::recalculate_allows_seafaring() {
 	// There need to be at least 2 port spaces for seafaring to make sense
 	if (get_port_spaces().size() < 2) {
 		allows_seafaring_ = false;
+		Notifications::publish(NoteMapOptions());
 		return;
 	}
 
@@ -2324,6 +2342,7 @@ void Map::recalculate_allows_seafaring() {
 			// Found one
 			if (reachable_from_previous_ports.count(current_position) > 0) {
 				allows_seafaring_ = true;
+				Notifications::publish(NoteMapOptions());
 				return;
 			}
 
@@ -2346,6 +2365,7 @@ void Map::recalculate_allows_seafaring() {
 		}
 	}
 	allows_seafaring_ = false;
+	Notifications::publish(NoteMapOptions());
 }
 
 void Map::cleanup_port_spaces(const World& world) {

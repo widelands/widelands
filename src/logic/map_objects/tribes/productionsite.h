@@ -256,6 +256,8 @@ public:
 
 	void set_default_anim(std::string);
 
+	const BuildingSettings* create_building_settings() const override;
+
 protected:
 	void update_statistics_string(std::string* statistics) override;
 

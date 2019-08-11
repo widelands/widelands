@@ -422,6 +422,13 @@ return {
             size = fs_font_size,
             bold = true,
             shadow = true
+         },
+         hotkey = {
+            color = {180, 180, 180},
+            face = fs_font_face,
+            size = fs_font_size,
+            bold = true,
+            shadow = true
          }
       },
       wui = {
@@ -434,6 +441,13 @@ return {
          },
          disabled = {
             color = {127, 127, 127},
+            face = fs_font_face,
+            size = fs_font_size,
+            bold = true,
+            shadow = true
+         },
+         hotkey = {
+            color = {180, 180, 180},
             face = fs_font_face,
             size = fs_font_size,
             bold = true,
@@ -611,6 +625,12 @@ return {
       label = default_ui_font,
       tooltip = {
          color = fs_font_color,
+         face = fs_font_face,
+         size = 14,
+         bold = false,
+      },
+      tooltip_hotkey = {
+         color = {180, 180, 180},
          face = fs_font_face,
          size = 14,
          bold = false,
