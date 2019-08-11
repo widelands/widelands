@@ -121,6 +121,9 @@ private:
 	PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse);
 	const PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse) const;
 
+	bool penalize_route(Game&, PortDock&, const Ship&, uint32_t*);
+	void check_push_destination(Game&, Ship&, const PortDock&, PortDock&, uint32_t);
+
 	std::vector<Ship*> ships_;
 	std::vector<PortDock*> ports_;
 

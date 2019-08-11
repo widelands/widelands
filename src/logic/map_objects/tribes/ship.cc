@@ -916,11 +916,11 @@ void Ship::reorder_destinations(Game& game) {
 }
 
 /**
- * Returns an estimation for the time in arbitarry units from now until the moment when
+ * Returns an estimation for the time in arbitrary units from now until the moment when
  * this ship will probably arrive at the given PortDock. This may change later when
  * destinations are added or removed.
  * Returns -1 if we are not planning to visit this PortDock or if we are not planning
- * to visit the given intermediate portdock earlier thaan the destination.
+ * to visit the given intermediate portdock earlier than the destination.
  */
 int32_t Ship::estimated_arrival_time(Game& game, const PortDock& dest, const PortDock* intermediate) const {
 	uint32_t time = 0;
