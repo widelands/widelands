@@ -857,7 +857,7 @@ void Fleet::check_push_destination(Game& game, Ship& ship,
 	assert(direct_route);
 	uint32_t malus = 1;
 	uint32_t shortest_detour = std::numeric_limits<uint32_t>::max();
-	uint32_t best_index;
+	uint32_t best_index = std::numeric_limits<uint32_t>::max();
 	if (ship.destinations_.empty()) {
 		// Idle ships are preferred
 		best_index = 0;
