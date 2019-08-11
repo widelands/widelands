@@ -791,8 +791,8 @@ void Game::send_player_set_ware_priority(PlayerImmovable& imm,
                                          DescriptionIndex const index,
                                          int32_t const prio,
                                          bool cs) {
-	send_player_command(
-	   new CmdSetWarePriority(get_gametime(), imm.owner().player_number(), imm, type, index, prio, cs));
+	send_player_command(new CmdSetWarePriority(
+	   get_gametime(), imm.owner().player_number(), imm, type, index, prio, cs));
 }
 
 void Game::send_player_set_input_max_fill(PlayerImmovable& imm,

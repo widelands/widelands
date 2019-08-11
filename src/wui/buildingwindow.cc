@@ -346,9 +346,9 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			capsbuttons->add(debugbtn);
 		}
 
-		UI::Button* gotobtn = new UI::Button(
-		   capsbuttons, "goto", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-		   g_gr->images().get("images/wui/menus/menu_goto.png"), _("Center view on this"));
+		UI::Button* gotobtn =
+		   new UI::Button(capsbuttons, "goto", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+		                  g_gr->images().get("images/wui/menus/goto.png"), _("Center view on this"));
 		gotobtn->sigclicked.connect(boost::bind(&BuildingWindow::clicked_goto, boost::ref(*this)));
 		capsbuttons->add(gotobtn);
 

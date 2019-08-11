@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-10 07:33+0000\n"
+"POT-Creation-Date: 2019-06-23 11:24+0000\n"
+"PO-Revision-Date: 2019-07-02 14:19+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgstr "Lorg buill-ealain àrsaidh. Nuair a bhios iad uile air an lorg, buannaic
 
 #: ../../data/scripting/win_conditions/artifacts.lua:18
 msgid "Artifacts owned"
-msgstr ""
+msgstr "Sealbh bhall-ealain"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:73
 msgid "No Artifacts"
@@ -187,7 +187,7 @@ msgstr "Bha %2$3.0f%% dhen tìr aig %1$s (%3$i de %4$i)."
 #. consistent with the translation of the Win condition.
 #: ../../data/scripting/win_conditions/territorial_functions.lua:60
 msgid "Territory percentage"
-msgstr ""
+msgstr "Ceudad an ranntair"
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:195
 msgid "You own more than half of the map’s area."
@@ -229,7 +229,7 @@ msgstr "Feuchaidh gach cluicheadair no sgioba barrachd air an dàrna leth dhe ro
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:56
 msgid "Currently no faction owns more than half of the map’s area."
-msgstr ""
+msgstr "Chan eil barrachd air an dàrna leth de roinn a’ mhapa aig buidheann sam bith."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"

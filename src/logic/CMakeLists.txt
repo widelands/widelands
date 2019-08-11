@@ -124,6 +124,7 @@ wl_library(logic_map
     maptriangleregion.cc
     maptriangleregion.h
     nodecaps.h
+    note_map_options.h
     path.cc
     path.h
     pathfield.cc

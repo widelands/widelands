@@ -415,7 +415,8 @@ void InputQueueDisplay::radiogroup_changed(int32_t state) {
 	if (SDL_GetModState() & KMOD_CTRL) {
 		update_siblings_priority(state);
 	}
-	igb_.game().send_player_set_ware_priority(building_, type_, index_, priority, settings_ != nullptr);
+	igb_.game().send_player_set_ware_priority(
+	   building_, type_, index_, priority, settings_ != nullptr);
 }
 
 void InputQueueDisplay::radiogroup_clicked() {
@@ -475,7 +476,8 @@ void InputQueueDisplay::decrease_max_fill_clicked() {
 	// Update the value of this queue if required
 	if (cache_max_fill_ > 0) {
 		igb_.game().send_player_set_input_max_fill(
-		   building_, index_, type_, ((SDL_GetModState() & KMOD_CTRL) ? 0 : cache_max_fill_ - 1), settings_ != nullptr);
+		   building_, index_, type_, ((SDL_GetModState() & KMOD_CTRL) ? 0 : cache_max_fill_ - 1),
+		   settings_ != nullptr);
 	}
 
 	// Update other queues of this building
@@ -494,7 +496,8 @@ void InputQueueDisplay::increase_max_fill_clicked() {
 	if (cache_max_fill_ < cache_size_) {
 		igb_.game().send_player_set_input_max_fill(
 		   building_, index_, type_,
-		   ((SDL_GetModState() & KMOD_CTRL) ? cache_size_ : cache_max_fill_ + 1), settings_ != nullptr);
+		   ((SDL_GetModState() & KMOD_CTRL) ? cache_size_ : cache_max_fill_ + 1),
+		   settings_ != nullptr);
 	}
 
 	if (SDL_GetModState() & KMOD_SHIFT) {
