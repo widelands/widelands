@@ -392,10 +392,10 @@ void PortDock::load_wares(Game& game, Ship& ship) {
 		assert(dest);
 		assert(dest != this);
 		// Decide whether to load this item
-		bool load;
+		bool load_item;
 		auto dc = destination_check.find(dest);
 		if (dc != destination_check.end()) {
-			load = dc->second;
+			load_item = dc->second;
 		} else {
 			int32_t time = ship.estimated_arrival_time(game, *dest);
 			Path direct_route;
@@ -420,10 +420,10 @@ void PortDock::load_wares(Game& game, Ship& ship) {
 					break;
 				}
 			}
-			load = time >= 0;
-			destination_check.emplace(dest, load);
+			load_item = time >= 0;
+			destination_check.emplace(dest, load_item);
 		}
-		if (load) {
+		if (load_item) {
 			ship.add_item(game, *it);
 			it = waiting_.erase(it);
 			--free_capacity;
