@@ -1049,6 +1049,11 @@ const BuildingSettings* ProductionSite::create_building_settings() const {
 		for (const auto& queue : input_queues_) {
 			if (queue->get_type() == wwWARE && queue->get_index() == pair.first) {
 				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());
+				if (pair.second.desired_fill == 0) {
+					// Players may set slots to 0 before enhancing a building to retrieve precious wares
+					// – we assume they want the slot to be fully filled in the upgraded building
+					pair.second.desired_fill = pair.second.max_fill;
+				}
 				break;
 			}
 		}
@@ -1058,6 +1063,9 @@ const BuildingSettings* ProductionSite::create_building_settings() const {
 		for (const auto& queue : input_queues_) {
 			if (queue->get_type() == wwWORKER && queue->get_index() == pair.first) {
 				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());
+				if (pair.second.desired_fill == 0) {
+					pair.second.desired_fill = pair.second.max_fill;
+				}
 				break;
 			}
 		}
