@@ -31,7 +31,7 @@
 // TODO(unknown): as soon as g_fs is not needed anymore,
 // include "filesystem.h" instead of layered_filesystem.h.
 
-extern class Profile g_options;
+class Profile;
 class FileSystem;
 
 /**
