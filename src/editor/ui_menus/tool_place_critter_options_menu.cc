@@ -47,7 +47,7 @@ UI::Checkbox* create_critter_checkbox(UI::Panel* parent,
 
 EditorToolPlaceCritterOptionsMenu::EditorToolPlaceCritterOptionsMenu(
    EditorInteractive& parent, EditorPlaceCritterTool& tool, UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Animals")) {
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Animals"), tool) {
 	const Widelands::World& world = parent.egbase().world();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceCritterTool>(

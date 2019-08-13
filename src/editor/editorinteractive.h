@@ -37,10 +37,10 @@
 #include "logic/map.h"
 #include "notifications/notifications.h"
 #include "ui_basic/button.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_base.h"
 
-class Editor;
 class EditorTool;
 
 /**
@@ -138,16 +138,57 @@ public:
 	// Access to the tools.
 	Tools* tools();
 
-	UI::UniqueWindow::Registry window_help;
-
 private:
-	friend struct EditorToolMenu;
+	// For referencing the items in mainmenu_
+	enum class MainMenuEntry {
+		kNewMap,
+		kNewRandomMap,
+		kLoadMap,
+		kSaveMap,
+		kMapOptions,
+		kExitEditor,
+	};
+
+	// For referencing the items in toolmenu_
+	enum class ToolMenuEntry {
+		kChangeHeight,
+		kRandomHeight,
+		kTerrain,
+		kImmovables,
+		kAnimals,
+		kResources,
+		kPortSpace,
+		kPlayers,
+		kMapOrigin,
+		kMapSize,
+		kFieldInfo
+	};
+
+	// For referencing the items in showhidemenu_
+	enum class ShowHideEntry { kBuildingSpaces, kGrid, kAnimals, kImmovables, kResources };
+
+	// Adds the mainmenu_ to the toolbar
+	void add_main_menu();
+	// Takes the appropriate action when an item in the mainmenu_ is selected
+	void main_menu_selected(MainMenuEntry entry);
+	// Adds the toolmenu_ to the toolbar
+	void add_tool_menu();
+	// Takes the appropriate action when an item in the toolmenu_ is selected
+	void tool_menu_selected(ToolMenuEntry entry);
+
+	// Adds the showhidemenu_ to the toolbar
+	void add_showhide_menu();
+	void rebuild_showhide_menu() override;
+	// Takes the appropriate action when an item in the showhidemenu_ is selected
+	void showhide_menu_selected(ShowHideEntry entry);
 
 	bool player_hears_field(const Widelands::Coords& coords) const override;
-	void on_buildhelp_changed(const bool value) override;
 
+	// Show / hide the resources overlays in the mapview
 	void toggle_resources();
+	// Show / hide the immovables in the mapview
 	void toggle_immovables();
+	// Show / hide the bobs in the mapview
 	void toggle_bobs();
 	void toggle_grid();
 
@@ -156,25 +197,38 @@ private:
 	uint32_t realtime_;
 	bool is_painting_;
 
-	UI::UniqueWindow::Registry toolmenu_;
+	// All unique menu windows
+	struct EditorMenuWindows {
+		UI::UniqueWindow::Registry newmap;
+		UI::UniqueWindow::Registry newrandommap;
+		UI::UniqueWindow::Registry savemap;
+		UI::UniqueWindow::Registry loadmap;
+		UI::UniqueWindow::Registry mapoptions;
 
-	UI::UniqueWindow::Registry toolsizemenu_;
-	UI::UniqueWindow::Registry playermenu_;
-	UI::UniqueWindow::Registry mainmenu_;
-	UI::UniqueWindow::Registry heightmenu_;
-	UI::UniqueWindow::Registry noise_heightmenu_;
-	UI::UniqueWindow::Registry terrainmenu_;
-	UI::UniqueWindow::Registry immovablemenu_;
-	UI::UniqueWindow::Registry crittermenu_;
-	UI::UniqueWindow::Registry resourcesmenu_;
-	UI::UniqueWindow::Registry resizemenu_;
-	UI::UniqueWindow::Registry helpmenu_;
+		UI::UniqueWindow::Registry toolsize;
 
-	UI::Button* toggle_buildhelp_;
-	UI::Button* toggle_grid_;
-	UI::Button* toggle_resources_;
-	UI::Button* toggle_immovables_;
-	UI::Button* toggle_bobs_;
+		UI::UniqueWindow::Registry help;
+	} menu_windows_;
+
+	// All unique tool windows for those tools that have them
+	struct EditorToolWindows {
+		UI::UniqueWindow::Registry height;
+		UI::UniqueWindow::Registry noiseheight;
+		UI::UniqueWindow::Registry terrain;
+		UI::UniqueWindow::Registry immovables;
+		UI::UniqueWindow::Registry critters;
+		UI::UniqueWindow::Registry resources;
+		UI::UniqueWindow::Registry players;
+		UI::UniqueWindow::Registry resizemap;
+	} tool_windows_;
+
+	// Main menu on the toolbar
+	UI::Dropdown<MainMenuEntry> mainmenu_;
+	// Tools menu on the toolbar
+	UI::Dropdown<ToolMenuEntry> toolmenu_;
+	// Show / Hide menu on the toolbar
+	UI::Dropdown<ShowHideEntry> showhidemenu_;
+
 	UI::Button* undo_;
 	UI::Button* redo_;
 
