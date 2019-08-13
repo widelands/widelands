@@ -35,58 +35,53 @@ Section& get_config_section() {
     return g_options.pull_section("global");
 }
 
-Section& get_config_section(const char* section) {
-    return g_options.pull_section(section);
+Section& get_config_section(const std::string& section) {
+    return g_options.pull_section(section.c_str());
 }
 
 Section* get_config_section_ptr(const std::string& section) {
-    return g_options.get_section(section);
+    return g_options.get_section(section.c_str());
 }
 
-bool get_config_bool(const char* name, bool dflt) {
-    return g_options.pull_section("global").get_bool(name, dflt);
+bool get_config_bool(const std::string& name, const bool dflt) {
+    return g_options.pull_section("global").get_bool(name.c_str(), dflt);
 }
 
-bool get_config_bool(const char* section, const char* name, bool dflt) {
-    return g_options.pull_section(section).get_bool(name, dflt);
+bool get_config_bool(const std::string& section,
+                     const std::string& name,
+                     const bool dflt) {
+    return g_options.pull_section(section.c_str()).get_bool(name.c_str(), dflt);
 }
 
-int32_t get_config_int(const char* name, int32_t dflt) {
-    return g_options.pull_section("global").get_int(name, dflt);
+int32_t get_config_int(const std::string& name, const int32_t dflt) {
+    return g_options.pull_section("global").get_int(name.c_str(), dflt);
 }
 
-int32_t get_config_int(const char* section, const char* name, int32_t dflt) {
-    return g_options.pull_section(section).get_int(name, dflt);
+int32_t get_config_int(const std::string& section,
+                       const std::string& name,
+                       const int32_t dflt) {
+    return g_options.pull_section(section.c_str()).get_int(name.c_str(), dflt);
 }
 
-uint32_t get_config_natural(const char* name, uint32_t dflt) {
-    return g_options.pull_section("global").get_natural(name, dflt);
+uint32_t get_config_natural(const std::string& name, const uint32_t dflt) {
+    return g_options.pull_section("global").get_natural(name.c_str(), dflt);
 }
 
-uint32_t get_config_natural(const char* section,
-                            const char* name,
+uint32_t get_config_natural(const std::string& section,
+                            const std::string& name,
                             uint32_t dflt) {
-    return g_options.pull_section(section).get_natural(name, dflt);
+    return g_options.pull_section(section.c_str()).get_natural(name.c_str(), dflt);
 }
 
-const char* get_config_string(const char* name, const char* dflt) {
-    return g_options.pull_section("global").get_string(name, dflt);
+std::string get_config_string(const std::string& name,
+                              const std::string& dflt) {
+    return g_options.pull_section("global").get_string(name.c_str(), dflt.c_str());
 }
 
-const char* get_config_string(const char* name, std::string& dflt) {
-    return g_options.pull_section("global").get_string(name, dflt.c_str());
-}
-
-const char* get_config_string(const char* section,
-                              const char* name,
-                              const char* dflt) {
-    return g_options.pull_section(section).get_string(name, dflt);
-}
-
-const char* get_config_string(const char* section,
-                              const char* name,
-                              std::string& dflt) {
-    return g_options.pull_section(section).get_string(name, dflt.c_str());
+std::string get_config_string(const std::string& section,
+                              const std::string& name,
+                              const std::string& dflt) {
+    return g_options.pull_section(section.c_str()).get_string(name.c_str(), dflt.c_str());
 }
 
 Section& get_config_safe_section() {
@@ -94,43 +89,37 @@ Section& get_config_safe_section() {
 }
 
 Section& get_config_safe_section(const std::string& section) {
-    return g_options.get_safe_section(section);
+    return g_options.get_safe_section(section.c_str());
 }
 
-void set_config_bool(const char* name, bool value) {
-    g_options.pull_section("global").set_bool(name, value);
+void set_config_bool(const std::string& name, const bool value) {
+    g_options.pull_section("global").set_bool(name.c_str(), value);
 }
 
-void set_config_bool(const char* section, const char* name, bool value) {
-    g_options.pull_section(section).set_bool(name, value);
+void set_config_bool(const std::string& section,
+                     const std::string& name,
+                     const bool value) {
+    g_options.pull_section(section.c_str()).set_bool(name.c_str(), value);
 }
 
-void set_config_int(const char* name, int32_t value) {
-    g_options.pull_section("global").set_int(name, value);
+void set_config_int(const std::string& name, int32_t value) {
+    g_options.pull_section("global").set_int(name.c_str(), value);
 }
 
-void set_config_int(const char* section, const char* name, int32_t value) {
-    g_options.pull_section(section).set_int(name, value);
+void set_config_int(const std::string& section,
+                    const std::string& name,
+                    const int32_t value) {
+    g_options.pull_section(section.c_str()).set_int(name.c_str(), value);
 }
 
-void set_config_string(const char* name, const char* value) {
-    g_options.pull_section("global").set_string(name, value);
+void set_config_string(const std::string& name, const std::string& value) {
+    set_config_string(name.c_str(), value.c_str());
 }
 
-void set_config_string(const char* section,
-                       const char* name,
-                       const char* value) {
-    g_options.pull_section(section).set_string(name, value);
-}
-
-void set_config_string(const char* name, const std::string& value) {
-    set_config_string(name, value.c_str());
-}
-
-void set_config_string(const char* section,
-                       const char* name,
+void set_config_string(const std::string& section,
+                       const std::string& name,
                        const std::string& value) {
-    set_config_string(section, name, value.c_str());
+    set_config_string(section.c_str(), name.c_str(), value.c_str());
 }
 
 void read_config(WLApplication* wlapplication) {

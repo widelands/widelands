@@ -40,22 +40,25 @@ void check_config_used();
  * Values are available after read_config() is called.
  */
 Section& get_config_section();
-Section& get_config_section(const char*);
+Section& get_config_section(const std::string&);
 Section* get_config_section_ptr(const std::string&);
-bool get_config_bool(const char* name, bool dflt);
-bool get_config_bool(const char* section, const char* name, bool dflt);
-int32_t get_config_int(const char* name, int32_t dflt = 0);
-int32_t get_config_int(const char* section, const char* name, int32_t dflt);
-uint32_t get_config_natural(const char* name, uint32_t dflt);
-uint32_t get_config_natural(const char* section, const char* name, uint32_t dflt);
-const char* get_config_string(const char* name, const char* dflt);
-const char* get_config_string(const char* name, std::string& dflt);
-const char* get_config_string(const char* section,
-                              const char* name,
-                              const char* dflt);
-const char* get_config_string(const char* section,
-                              const char* name,
-                              std::string& dflt);
+bool get_config_bool(const std::string& name, bool dflt);
+bool get_config_bool(const std::string& section,
+                     const std::string& name,
+                     const bool dflt);
+int32_t get_config_int(const std::string& name, const int32_t dflt = 0);
+int32_t get_config_int(const std::string& section,
+                       const std::string& name,
+                       const int32_t dflt);
+uint32_t get_config_natural(const std::string& name, uint32_t dflt);
+uint32_t get_config_natural(const std::string& section,
+                            const std::string& name,
+                            const uint32_t dflt);
+std::string get_config_string(const std::string& name,
+                              const std::string& dflt);
+std::string get_config_string(const std::string& section,
+                              const std::string& name,
+                              const std::string& dflt);
 
 /*
  * Get config values from the config settings cache.
@@ -71,15 +74,17 @@ Section& get_config_safe_section(const std::string&);
  * If the section parameter is omitted the global section will be used.
  * Values will be written to the config file once write_config() is called.
  */
-void set_config_bool(const char* name, bool value);
-void set_config_bool(const char* section, const char* name, bool value);
-void set_config_int(const char* name, int32_t value);
-void set_config_int(const char* section, const char* name, int32_t value);
-void set_config_string(const char* name, const char* value);
-void set_config_string(const char* name, const std::string& value);
-void set_config_string(const char* section, const char* name, const char* value);
-void set_config_string(const char* section,
-                       const char* name,
+void set_config_bool(const std::string& name, bool value);
+void set_config_bool(const std::string& section,
+                     const std::string& name,
+                     bool value);
+void set_config_int(const std::string& name, int32_t value);
+void set_config_int(const std::string& section,
+                    const std::string& name,
+                    const int32_t value);
+void set_config_string(const std::string& name, const std::string& value);
+void set_config_string(const std::string& section,
+                       const std::string& name,
                        const std::string& value);
 
 /*

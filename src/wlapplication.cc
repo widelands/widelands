@@ -801,28 +801,28 @@ bool WLApplication::init_settings() {
 	// Undocumented on command line, appears in game options
 	get_config_bool("transparent_chat", false);
 	// Undocumented. Unique ID used to allow the metaserver to recognize players
-	get_config_string("uuid", nullptr);
+	get_config_string("uuid", "");
 	// Undocumented, appears in online login box
 	// Whether the used metaserver login is for a registered user
-	get_config_string("registered", nullptr);
+	get_config_string("registered", "");
 	// Undocumented, appears in online login box and LAN lobby
 	// The nickname used for LAN and online games
-	get_config_string("nickname", nullptr);
+	get_config_string("nickname", "");
 	// Undocumented. The plaintext password for online logins
 	// TODO(Notabilis): Remove next line after build 20.
 	// Currently left in to avoid removing stored passwords for users of both build 19 and trunk
-	get_config_string("password", nullptr);
+	get_config_string("password", "");
 	// Undocumented, appears in online login box. The hashed password for online logins
-	get_config_string("password_sha1", nullptr);
+	get_config_string("password_sha1", "");
 	// Undocumented, appears in online login box. Whether to automatically use the stored login
-	get_config_string("auto_log", nullptr);
+	get_config_string("auto_log", "");
 	// Undocumented, appears in LAN lobby. The last host connected to
-	get_config_string("lasthost", nullptr);
+	get_config_string("lasthost", "");
 	// Undocumented, appears in online lobby. The name of the last hosted game
-	get_config_string("servername", nullptr);
+	get_config_string("servername", "");
 	// Undocumented, appears in editor. Name of map author
-	get_config_string("realname", nullptr);
-	get_config_string("metaserver", nullptr);
+	get_config_string("realname", "");
+	get_config_string("metaserver", "");
 	get_config_natural("metaserverport", 0);
 	// Undocumented, checkbox appears on "Watch Replay" screen
 	get_config_bool("display_replay_filenames", false);
@@ -830,7 +830,7 @@ bool WLApplication::init_settings() {
 	// KLUDGE!
 
 	long int last_start = get_config_int("last_start", 0);
-	if (last_start + 12 * 60 * 60 < time(nullptr) || !get_config_string("uuid", nullptr)) {
+	if (last_start + 12 * 60 * 60 < time(nullptr) || !get_config_string("uuid", "").empty()) {
 		// First start of the game or not started for 12 hours. Create a (new) UUID.
 		// For the use of the UUID, see network/internet_gaming_protocol.h
 		get_config_string("uuid", generate_random_uuid().c_str());
@@ -839,8 +839,8 @@ bool WLApplication::init_settings() {
 
 	// Replace the stored plaintext password with its SHA-1 hashed version
 	// Used to upgrade the stored password when upgrading widelands
-	if (strlen(get_config_string("password", "")) > 0 && strlen(get_config_string("password_sha1", "")) == 0) {
-		get_config_string("password_sha1", crypto::sha1(get_config_string("password", nullptr)).c_str());
+	if (get_config_string("password", "").length() > 0 && get_config_string("password_sha1", "").length() == 0) {
+		get_config_string("password_sha1", crypto::sha1(get_config_string("password", "")).c_str());
 	}
 
 	// Save configuration now. Otherwise, the UUID is not saved
