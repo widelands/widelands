@@ -56,6 +56,7 @@ class Tribes;
 class TribeDescr;
 struct Flag;
 struct AttackController;
+struct BuildingSettings;
 
 struct NoteFieldPossession {
 	CAN_BE_SENT_AS_NOTE(NoteId::FieldPossession)
@@ -130,7 +131,8 @@ public:
 	                      PlayerNumber,
 	                      DescriptionIndex,
 	                      bool loading = false,
-	                      Building::FormerBuildings former_buildings = Building::FormerBuildings());
+	                      Building::FormerBuildings former_buildings = Building::FormerBuildings(),
+	                      const BuildingSettings* settings = nullptr);
 	Building&
 	warp_dismantlesite(const Coords&,
 	                   PlayerNumber,

@@ -431,6 +431,7 @@ void Window::restore() {
 	set_inner_size(get_inner_w(), oldh_);
 	update_desired_size();
 	move_inside_parent();
+	set_handle_keypresses(true);
 }
 void Window::minimize() {
 	assert(!is_minimal_);
@@ -446,6 +447,7 @@ void Window::minimize() {
 	set_border(get_lborder(), get_rborder(), get_tborder(), 0);
 	set_size(get_w(), TP_B_PIXMAP_THICKNESS);
 	set_pos(Vector2i(x, y));  // If on border, this feels more natural
+	set_handle_keypresses(false);
 }
 
 /**

@@ -51,8 +51,17 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
      worker_panel_(new EconomyOptionsPanel(
         &tabpanel_, this, serial_, player_, can_act, Widelands::wwWORKER, kDesiredWidth)),
      dropdown_box_(this, 0, 0, UI::Box::Horizontal),
-     dropdown_(
-        &dropdown_box_, 0, 0, 174, 200, 34, "", UI::DropdownType::kTextual, UI::PanelStyle::kWui),
+     dropdown_(&dropdown_box_,
+               "economy_profiles",
+               0,
+               0,
+               174,
+               10,
+               34,
+               "",
+               UI::DropdownType::kTextual,
+               UI::PanelStyle::kWui,
+               UI::ButtonStyle::kWuiSecondary),
      time_last_thought_(0),
      save_profile_dialog_(nullptr) {
 	set_center_panel(&main_box_);
@@ -95,7 +104,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	dropdown_.selected.connect([this] { reset_target(); });
 
 	b = new UI::Button(&dropdown_box_, "save_targets", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-	                   g_gr->images().get("images/wui/menus/menu_save_game.png"),
+	                   g_gr->images().get("images/wui/menus/save_game.png"),
 	                   _("Save target settings"));
 	b->sigclicked.connect([this] { create_target(); });
 	dropdown_box_.add_space(8);
@@ -314,7 +323,8 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 		}
 	}
 	for (const Widelands::DescriptionIndex& index : items) {
-		if (display_.ware_selected(index) || (!anything_selected && !display_.is_ware_hidden(index))) {
+		if (display_.ware_selected(index) ||
+		    (!anything_selected && !display_.is_ware_hidden(index))) {
 			if (is_wares) {
 				game.send_player_command(new Widelands::CmdSetWareTargetQuantity(
 				   game.get_gametime(), player_->player_number(), serial_, index,

@@ -49,8 +49,6 @@ wl_library(editor
     ui_menus/categorized_item_selection_menu.h
     ui_menus/help.cc
     ui_menus/help.h
-    ui_menus/main_menu.cc
-    ui_menus/main_menu.h
     ui_menus/main_menu_load_map.cc
     ui_menus/main_menu_load_map.h
     ui_menus/main_menu_load_or_save_map.cc
@@ -65,14 +63,14 @@ wl_library(editor
     ui_menus/main_menu_save_map.h
     ui_menus/main_menu_save_map_make_directory.cc
     ui_menus/main_menu_save_map_make_directory.h
+    ui_menus/map_size_box.cc
+    ui_menus/map_size_box.h
     ui_menus/player_menu.cc
     ui_menus/player_menu.h
     ui_menus/tool_change_height_options_menu.cc
     ui_menus/tool_change_height_options_menu.h
     ui_menus/tool_change_resources_options_menu.cc
     ui_menus/tool_change_resources_options_menu.h
-    ui_menus/tool_menu.cc
-    ui_menus/tool_menu.h
     ui_menus/tool_noise_height_options_menu.cc
     ui_menus/tool_noise_height_options_menu.h
     ui_menus/tool_options_menu.cc
