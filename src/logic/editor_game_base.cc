@@ -629,6 +629,8 @@ void EditorGameBase::change_field_owner(const FCoords& fc, PlayerNumber const ne
 	}
 }
 
+// Directly conquer an area for a given player, regardless of military influence.
+// In the editor only, this function can also be used to make the entire area unowned by any player.
 void EditorGameBase::conquer_area_no_building(PlayerArea<Area<FCoords>> player_area) {
 	assert(0 <= player_area.x);
 	assert(player_area.x < map().get_width());
@@ -636,7 +638,7 @@ void EditorGameBase::conquer_area_no_building(PlayerArea<Area<FCoords>> player_a
 	assert(player_area.y < map().get_height());
 	assert(&map()[0] <= player_area.field);
 	assert(player_area.field < &map()[0] + map().max_index());
-	assert(0 < player_area.player_number);
+	assert(player_area.player_number > 0 || !is_a(Game, this));
 	assert(player_area.player_number <= map().get_nrplayers());
 	MapRegion<Area<FCoords>> mr(map(), player_area);
 	do {

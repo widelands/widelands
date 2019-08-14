@@ -61,7 +61,8 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 
 	if (layers & MiniMapLayer::Owner) {
 		if (0 < owner) {
-			color = blend_color(color, egbase.player(owner).get_playercolor());
+			const Widelands::Player* p = egbase.get_player(owner); // may be nullptr in editor
+			color = blend_color(color, p ? p->get_playercolor() : kPlayerColors[owner - 1]);
 		}
 	}
 

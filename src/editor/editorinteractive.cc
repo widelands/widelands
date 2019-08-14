@@ -45,6 +45,7 @@
 #include "editor/ui_menus/main_menu_random_map.h"
 #include "editor/ui_menus/main_menu_save_map.h"
 #include "editor/ui_menus/player_menu.h"
+#include "editor/ui_menus/scenario_tool_field_owner_options_menu.h"
 #include "editor/ui_menus/tool_change_height_options_menu.h"
 #include "editor/ui_menus/tool_change_resources_options_menu.h"
 #include "editor/ui_menus/tool_noise_height_options_menu.h"
@@ -53,6 +54,7 @@
 #include "editor/ui_menus/tool_resize_options_menu.h"
 #include "editor/ui_menus/tool_set_terrain_options_menu.h"
 #include "editor/ui_menus/toolsize_menu.h"
+#include "graphic/game_renderer.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
 #include "logic/map.h"
@@ -86,6 +88,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      need_save_(false),
      realtime_(SDL_GetTicks()),
      is_painting_(false),
+     save_as_scenario_(false),
      mainmenu_(toolbar(),
                "dropdown_menu_main",
                0,
@@ -106,7 +109,19 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                12,
                34U,
                /** TRANSLATORS: Title for the tool menu button in the editor */
-               as_tooltip_text_with_hotkey(_("Tools"), "t"),
+               as_tooltip_text_with_hotkey(_("Map Tools"), "t"),
+               UI::DropdownType::kPictorialMenu,
+               UI::PanelStyle::kWui,
+               UI::ButtonStyle::kWuiPrimary),
+     scenario_toolmenu_(toolbar(),
+               "dropdown_menu_scenario_tools",
+               0,
+               0,
+               34U,
+               12,
+               34U,
+               /** TRANSLATORS: Title for the tool menu button in the editor */
+               as_tooltip_text_with_hotkey(_("Scenario Tools"), "s"),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),
@@ -126,10 +141,11 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      undo_(nullptr),
      redo_(nullptr),
      tools_(new Tools(e.map())),
-     history_(nullptr)  // history needs the undo/redo buttons
+     history_(nullptr) // history needs the undo/redo buttons
 {
 	add_main_menu();
 	add_tool_menu();
+	add_scenario_tool_menu();
 
 	add_toolbar_button(
 	   "wui/editor/menus/toolsize", "toolsize", _("Tool size"), &menu_windows_.toolsize, true);
@@ -339,6 +355,26 @@ void EditorInteractive::add_tool_menu() {
 	toolbar()->add(&toolmenu_);
 }
 
+void EditorInteractive::add_scenario_tool_menu() {
+	scenario_toolmenu_.set_image(g_gr->images().get("images/wui/editor/menus/scenario_tools.png"));
+
+	scenario_tool_windows_.fieldowner.open_window = [this] {
+		new ScenarioToolFieldOwnerOptionsMenu(*this, tools()->sc_owner, scenario_tool_windows_.fieldowner);
+	};
+	/** TRANSLATORS: An entry in the editor's scenario tool menu */
+	scenario_toolmenu_.add(_("Ownership"), ScenarioToolMenuEntry::kFieldOwner,
+	              g_gr->images().get("images/wui/editor/tools/sc_owner.png"), false,
+	              /** TRANSLATORS: Tooltip for the field ownership scenario tool in the editor */
+	              _("Set the initial ownership of fields"));
+	scenario_toolmenu_.add(_("Dummy"), ScenarioToolMenuEntry::kFieldOwner,
+	              g_gr->images().get("images/wui/editor/tools/sc_owner.png"), false,
+	              /** TRANSLATORS: Tooltip for the XXX scenario tool in the editor */
+	              _("Dummy"));
+
+	scenario_toolmenu_.selected.connect([this] { scenario_tool_menu_selected(scenario_toolmenu_.get_selected()); });
+	toolbar()->add(&scenario_toolmenu_);
+}
+
 void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 	switch (entry) {
 	case ToolMenuEntry::kChangeHeight:
@@ -376,6 +412,16 @@ void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 		break;
 	}
 	toolmenu_.toggle();
+}
+
+void EditorInteractive::scenario_tool_menu_selected(ScenarioToolMenuEntry entry) {
+	save_as_scenario_ = true; // NOCOM move to a place where it makes sense!
+	switch (entry) {
+	case ScenarioToolMenuEntry::kFieldOwner:
+		scenario_tool_windows_.fieldowner.toggle();
+		break;
+	}
+	scenario_toolmenu_.toggle();
 }
 
 void EditorInteractive::add_showhide_menu() {
@@ -583,6 +629,9 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	const auto& world = ebase.world();
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
+
+		draw_border_markers(field, scale, *fields_to_draw, &dst, &egbase());
+
 		if (draw_immovables_) {
 			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 			if (imm != nullptr && imm->get_positions(ebase).front() == field.fcoords) {
@@ -817,6 +866,8 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				menu_windows_.savemap.toggle();
+			} else {
+				scenario_toolmenu_.toggle();
 			}
 			return true;
 

@@ -35,24 +35,47 @@
 void draw_border_markers(const FieldsToDraw::Field& field,
                          const float scale,
                          const FieldsToDraw& fields_to_draw,
-                         RenderTarget* dst) {
+                         RenderTarget* dst,
+                         const Widelands::EditorGameBase* egbase) {
 	if (!field.all_neighbors_valid() || !field.is_border) {
 		return;
 	}
-	assert(field.owner != nullptr);
-
-	uint32_t const anim_idx = field.owner->tribe().frontier_animation();
-	if (field.vision) {
-		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, anim_idx, 0,
-		                    &field.owner->get_playercolor());
+	uint32_t anim_idx;
+	const RGBColor* pc;
+	if (field.owner) {
+		anim_idx = field.owner->tribe().frontier_animation();
+		pc = &field.owner->get_playercolor();
+	} else {
+		// No players in the scenario editor
+		const Widelands::PlayerNumber p = field.fcoords.field->get_owned_by();
+		if (p == 0) {
+			return;
+		}
+		assert(egbase);
+		const std::string tribe = egbase->map().get_scenario_player_tribe(p);
+		anim_idx = egbase->tribes().get_tribe_descr(tribe.empty() ?
+				// random tribe: a different marker on every field
+				(field.fcoords.x + field.fcoords.y) % egbase->tribes().nrtribes() :
+				egbase->tribes().safe_tribe_index(tribe))->frontier_animation();
+		pc = &kPlayerColors[p - 1];
 	}
+
+	if (field.vision) {
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, anim_idx, 0, pc);
+	}
+	auto draw_edge = [field](const FieldsToDraw::Field& nf) {
+		if (field.owner) {
+			return field.owner == nf.owner || nf.owner == nullptr;
+		}
+		const Widelands::PlayerNumber p = nf.fcoords.field->get_owned_by();
+		return p == 0 || p == field.fcoords.field->get_owned_by();
+	};
 	for (const auto& nf : {fields_to_draw.at(field.rn_index), fields_to_draw.at(field.bln_index),
 	                       fields_to_draw.at(field.brn_index)}) {
-		if ((field.vision || nf.vision) && nf.is_border &&
-		    (field.owner == nf.owner || nf.owner == nullptr)) {
+		if ((field.vision || nf.vision) && nf.is_border && draw_edge(nf)) {
 			dst->blit_animation(middle(field.rendertarget_pixel, nf.rendertarget_pixel),
 			                    Widelands::Coords::null(), scale, anim_idx, 0,
-			                    &field.owner->get_playercolor());
+			                    pc);
 		}
 	}
 }

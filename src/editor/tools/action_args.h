@@ -58,6 +58,8 @@ struct EditorActionArgs {
 	Widelands::ResourceAmount set_to;                      // resources change tools
 	Widelands::Extent new_map_size;                        // resize tool
 
+	uint8_t new_owner; // set owner tool
+
 	struct ResourceState {
 		Widelands::FCoords location;
 		Widelands::DescriptionIndex idx;
@@ -77,6 +79,8 @@ struct EditorActionArgs {
 	Widelands::HeightInterval interval;                                // noise height tool
 	std::list<Widelands::DescriptionIndex> terrain_type, original_terrain_type;  // set terrain tool
 	ResizeHistory resized;                                                       // resize tool
+
+	std::list<uint8_t> old_owners; // set owner tool
 
 	std::list<EditorToolAction*> draw_actions;  // draw tool
 

@@ -24,9 +24,12 @@
 #include "base/log.h"
 #include "base/scoped_timer.h"
 #include "base/wexception.h"
+#include "build_info.h"
+#include "editor/editorinteractive.h"
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
 #include "graphic/texture.h"
+#include "io/fileread.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -81,6 +84,26 @@ void MapSaver::save() {
 	mos_ = new MapObjectSaver();
 
 	bool is_game = is_a(Game, &egbase_);
+	if (!is_game) {
+		// Save game-typical stuff also in the scenario editor
+		upcast(EditorInteractive, eia, egbase_.get_ibase());
+		assert(eia);
+		if (eia->save_as_scenario()) {
+			is_game = true;
+			// We need to ensure there is an init.lua so the map will be loaded as a scenario
+			fs_.ensure_directory_exists("scripting");
+			FileRead fr;
+			if (fr.try_open(fs_, "scripting/init.lua")) {
+				// There already is one
+				fr.close();
+			} else {
+				// Create dummy file
+				FileWrite fw;
+				fw.print_f("-- Automatically created by Widelands %s (%s)\n", build_id().c_str(), build_type().c_str());
+				fw.write(fs_, "scripting/init.lua");
+			}
+		}
+	}
 
 	// The binary data is saved in an own directory
 	// to keep it hidden from the poor debuggers

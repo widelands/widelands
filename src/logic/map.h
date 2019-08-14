@@ -68,6 +68,12 @@ struct NoteFieldTerrainChanged {
 	MapIndex map_index;
 };
 
+// Sent when the name, tribe, AI level, or closeable state of a player is changed.
+// Intended to be received only in the editor!
+struct NoteEditorPlayerEdited {
+	CAN_BE_SENT_AS_NOTE(NoteId::EditorPlayerEdited)
+};
+
 struct ImmovableFound {
 	BaseImmovable* object;
 	Coords coords;

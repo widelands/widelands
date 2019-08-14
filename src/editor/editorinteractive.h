@@ -30,6 +30,7 @@
 #include "editor/tools/place_critter_tool.h"
 #include "editor/tools/place_immovable_tool.h"
 #include "editor/tools/resize_tool.h"
+#include "editor/tools/scenario_field_owner_tool.h"
 #include "editor/tools/set_origin_tool.h"
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_starting_pos_tool.h"
@@ -60,7 +61,8 @@ public:
 		     increase_resources(decrease_resources, set_resources),
 		     set_port_space(unset_port_space),
 		     set_origin(),
-		     resize(map.get_width(), map.get_height()) {
+		     resize(map.get_width(), map.get_height()),
+		     sc_owner() {
 		}
 		EditorTool& current() const {
 			return *current_pointer;
@@ -86,6 +88,8 @@ public:
 		EditorUnsetPortSpaceTool unset_port_space;
 		EditorSetOriginTool set_origin;
 		EditorResizeTool resize;
+
+		ScenarioFieldOwnerTool sc_owner;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
 
@@ -135,6 +139,10 @@ public:
 	};
 	void map_changed(const MapWas& action);
 
+	bool save_as_scenario() const {
+		return save_as_scenario_;
+	}
+
 	// Access to the tools.
 	Tools* tools();
 
@@ -163,6 +171,10 @@ private:
 		kMapSize,
 		kFieldInfo
 	};
+	// For referencing the items in scenario_toolmenu_
+	enum class ScenarioToolMenuEntry {
+		kFieldOwner
+	};
 
 	// For referencing the items in showhidemenu_
 	enum class ShowHideEntry { kBuildingSpaces, kGrid, kAnimals, kImmovables, kResources };
@@ -173,8 +185,11 @@ private:
 	void main_menu_selected(MainMenuEntry entry);
 	// Adds the toolmenu_ to the toolbar
 	void add_tool_menu();
+	// Adds the scenario_toolmenu_ to the toolbar
+	void add_scenario_tool_menu();
 	// Takes the appropriate action when an item in the toolmenu_ is selected
 	void tool_menu_selected(ToolMenuEntry entry);
+	void scenario_tool_menu_selected(ScenarioToolMenuEntry entry);
 
 	// Adds the showhidemenu_ to the toolbar
 	void add_showhide_menu();
@@ -196,6 +211,7 @@ private:
 	bool need_save_;
 	uint32_t realtime_;
 	bool is_painting_;
+	bool save_as_scenario_;
 
 	// All unique menu windows
 	struct EditorMenuWindows {
@@ -204,6 +220,7 @@ private:
 		UI::UniqueWindow::Registry savemap;
 		UI::UniqueWindow::Registry loadmap;
 		UI::UniqueWindow::Registry mapoptions;
+		UI::UniqueWindow::Registry scenarioctrl;
 
 		UI::UniqueWindow::Registry toolsize;
 
@@ -221,11 +238,15 @@ private:
 		UI::UniqueWindow::Registry players;
 		UI::UniqueWindow::Registry resizemap;
 	} tool_windows_;
+	struct ScenarioToolWindows {
+		UI::UniqueWindow::Registry fieldowner;
+	} scenario_tool_windows_;
 
 	// Main menu on the toolbar
 	UI::Dropdown<MainMenuEntry> mainmenu_;
 	// Tools menu on the toolbar
 	UI::Dropdown<ToolMenuEntry> toolmenu_;
+	UI::Dropdown<ScenarioToolMenuEntry> scenario_toolmenu_;
 	// Show / Hide menu on the toolbar
 	UI::Dropdown<ShowHideEntry> showhidemenu_;
 
