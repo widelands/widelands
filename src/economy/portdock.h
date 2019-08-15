@@ -149,7 +149,7 @@ private:
 	Warehouse* warehouse_;
 	PositionList dockpoints_;
 	std::list<ShippingItem> waiting_;
-	std::set<Ship*> ships_coming_;
+	std::set<OPtr<Ship>> ships_coming_;
 	bool expedition_ready_;
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;

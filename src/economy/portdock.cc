@@ -197,9 +197,9 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 		for (ShippingItem& shipping_item : waiting_) {
 			shipping_item.remove(*game);
 		}
-		for (Ship* s : ships_coming_) {
-			if (egbase.objects().object_still_available(s)) {
-				s->pop_destination(*game, *this);
+		for (OPtr<Ship>& s : ships_coming_) {
+			if (Ship* ship = s.get(*game)) {
+				ship->pop_destination(*game, *this);
 			}
 		}
 	}
@@ -325,12 +325,13 @@ void PortDock::shipping_item_returned(Game& game, ShippingItem& si) {
  * A ship changed destination and is now coming to the dock. Increase counter for need_ship.
  */
 void PortDock::ship_coming(Ship& ship, bool affirmative) {
+	OPtr<Ship> s(&ship);
 	if (affirmative) {
-		if (ships_coming_.find(&ship) == ships_coming_.end()) {
-			ships_coming_.insert(&ship);
+		if (ships_coming_.find(s) == ships_coming_.end()) {
+			ships_coming_.insert(s);
 		}
 	} else {
-		auto it = ships_coming_.find(&ship);
+		auto it = ships_coming_.find(s);
 		if (it != ships_coming_.end()) {
 			ships_coming_.erase(it);
 		}
@@ -403,7 +404,9 @@ void PortDock::load_wares(Game& game, Ship& ship) {
 			if (time < 0) {
 				time = direct_route.get_nsteps();
 			}
-			for (Ship* s : ships_coming_) {
+			for (OPtr<Ship>& ship : ships_coming_) {
+				Ship* s = ship.get(game);
+				assert(s);
 				int32_t t = s->estimated_arrival_time(game, *dest, this);
 				if (t < 0) {
 					// The ship is not planning to go there yet, perhaps we can ask for a detour?
@@ -583,7 +586,7 @@ void PortDock::Loader::load_pointers() {
 	pd.warehouse_ = &mol().get<Warehouse>(warehouse_);
 
 	for (Serial s : ships_coming_) {
-		pd.ships_coming_.insert(&mol().get<Ship>(s));
+		pd.ships_coming_.insert(OPtr<Ship>(&mol().get<Ship>(s)));
 	}
 	for (uint32_t i = 0; i < waiting_.size(); ++i) {
 		pd.waiting_.push_back(waiting_[i].get(mol()));
@@ -641,8 +644,8 @@ void PortDock::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) 
 	}
 
 	fw.unsigned_32(ships_coming_.size());
-	for (Ship* s : ships_coming_) {
-		fw.unsigned_32(mos.get_object_file_index(*s));
+	for (OPtr<Ship>& s : ships_coming_) {
+		fw.unsigned_32(mos.get_object_file_index(s.get(egbase)));
 	}
 
 	fw.unsigned_32(waiting_.size());
