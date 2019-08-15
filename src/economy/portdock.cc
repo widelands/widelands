@@ -197,7 +197,7 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 		for (ShippingItem& shipping_item : waiting_) {
 			shipping_item.remove(*game);
 		}
-		for (OPtr<Ship>& s : ships_coming_) {
+		for (const OPtr<Ship>& s : ships_coming_) {
 			if (Ship* ship = s.get(*game)) {
 				ship->pop_destination(*game, *this);
 			}
@@ -404,8 +404,8 @@ void PortDock::load_wares(Game& game, Ship& ship) {
 			if (time < 0) {
 				time = direct_route.get_nsteps();
 			}
-			for (OPtr<Ship>& ship : ships_coming_) {
-				Ship* s = ship.get(game);
+			for (const OPtr<Ship>& ship_ptr : ships_coming_) {
+				Ship* s = ship_ptr.get(game);
 				assert(s);
 				int32_t t = s->estimated_arrival_time(game, *dest, this);
 				if (t < 0) {
@@ -644,8 +644,8 @@ void PortDock::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) 
 	}
 
 	fw.unsigned_32(ships_coming_.size());
-	for (OPtr<Ship>& s : ships_coming_) {
-		fw.unsigned_32(mos.get_object_file_index(s.get(egbase)));
+	for (const OPtr<Ship>& s : ships_coming_) {
+		fw.unsigned_32(mos.get_object_file_index(*s.get(egbase)));
 	}
 
 	fw.unsigned_32(waiting_.size());
