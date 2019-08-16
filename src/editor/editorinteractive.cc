@@ -29,6 +29,7 @@
 #include "base/i18n.h"
 #include "base/scoped_timer.h"
 #include "base/warning.h"
+#include "build_info.h"
 #include "editor/tools/decrease_height_tool.h"
 #include "editor/tools/decrease_resources_tool.h"
 #include "editor/tools/increase_height_tool.h"
@@ -57,6 +58,7 @@
 #include "graphic/game_renderer.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
+#include "io/filewrite.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/resource_description.h"
@@ -1023,3 +1025,60 @@ void EditorInteractive::map_changed(const MapWas& action) {
 EditorInteractive::Tools* EditorInteractive::tools() {
 	return tools_.get();
 }
+
+void EditorInteractive::write_lua(FileWrite& fw) const {
+	const Widelands::Map& map = egbase().map();
+	const Widelands::PlayerNumber nr_players = map.get_nrplayers();
+
+	// Header
+	fw.print_f("-- Automatically created by Widelands %s (%s)\n", build_id().c_str(), build_type().c_str());
+	fw.print_f("-- Do not modify this file. "
+			"All changes will be discarded the next time this map is saved in the editor.\n");
+
+	// i18n
+	fw.print_f("\nset_textdomain(\"scenario_%s.wmf\")\n\n", map.get_name().c_str());
+
+	// Useful includes
+	fw.print_f("include \"scripting/coroutine.lua\"\n");
+	fw.print_f("include \"scripting/objective_utils.lua\"\n");
+	fw.print_f("include \"scripting/infrastructure.lua\"\n");
+	fw.print_f("include \"scripting/table.lua\"\n\n");
+
+	// Frequently used variables
+	fw.print_f("game = wl.Game()\n");
+	fw.print_f("map = game.map\n");
+	for (Widelands::PlayerNumber p = 1; p <= nr_players; ++p) {
+		fw.print_f("p%u = game.players[%u]\n", p, p);
+	}
+
+	// Main function
+	// NOCOM: Just a dummy that places a headquarters for each player with some wares and workers.
+	// This whole function is a very ugly tribe-specific hack of course.
+	// Soon we won´t even have to worry about initial building placement – that will be saved in the map itself.
+	fw.print_f("\nfunction mission_thread()\n");
+	for (Widelands::PlayerNumber p = 1; p <= nr_players; ++p) {
+		const std::string tribe = map.get_scenario_player_tribe(p);
+		fw.print_f("   -- Starting conditions for player %u\n", p);
+		fw.print_f("   p%u:allow_buildings(\"all\")\n", p);
+		fw.print_f("   local hq%u = p%u:place_building(\"%s_headquarters\", "
+				"map.player_slots[%u].starting_field, false, true)\n", p, p, tribe.c_str(), p);
+		fw.print_f("   hq%u:set_wares {\n", p);
+		for (Widelands::DescriptionIndex di :
+				egbase().tribes().get_tribe_descr(egbase().tribes().tribe_index(tribe))->wares()) {
+			fw.print_f("      %s = %u,\n", egbase().tribes().get_ware_descr(di)->name().c_str(), std::rand() % 50);
+		}
+		fw.print_f("   }\n");
+		fw.print_f("   hq%u:set_workers {\n", p);
+		for (Widelands::DescriptionIndex di :
+				egbase().tribes().get_tribe_descr(egbase().tribes().tribe_index(tribe))->workers()) {
+			fw.print_f("      %s = %u,\n", egbase().tribes().get_worker_descr(di)->name().c_str(), std::rand() % 5);
+		}
+		fw.print_f("   }\n");
+		fw.print_f("   hq%u:set_soldiers({0,0,0,0}, %u)\n\n", p, tribe == "atlanteans" ? 35 : 45);
+	}
+	fw.print_f("end\n");
+
+	// Main function call
+	fw.print_f("\nrun(mission_thread)\n");
+}
+

@@ -42,6 +42,7 @@
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_base.h"
 
+class FileWrite;
 class EditorTool;
 
 /**
@@ -142,6 +143,7 @@ public:
 	bool save_as_scenario() const {
 		return save_as_scenario_;
 	}
+	void write_lua(FileWrite&) const;
 
 	// Access to the tools.
 	Tools* tools();
