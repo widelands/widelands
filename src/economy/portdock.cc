@@ -193,14 +193,25 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 		warehouse_->portdock_ = nullptr;
 	}
 
+	log("\nNOCOM Destroying portdock %u\n", serial());
 	if (upcast(Game, game, &egbase)) {
+	log("NOCOM ...in a game.\n");
+	log("NOCOM Shipping items left: ");
+	log("%lu\n", waiting_.size());
+	log("NOCOM Ships coming: ");
+	log("%lu\n", ships_coming_.size());
 		for (ShippingItem& shipping_item : waiting_) {
+			log("NOCOM Removing shippingitem ");
+			log("%u\n", shipping_item.object_.serial());
 			shipping_item.remove(*game);
 		}
 		for (const OPtr<Ship>& s : ships_coming_) {
+			log("NOCOM Informing ship ");
+			log("%u", s.serial());
 			if (Ship* ship = s.get(*game)) {
+				log(" (found)\n");
 				ship->pop_destination(*game, *this);
-			}
+			} else log(" (NOT found)\n");
 		}
 	}
 
