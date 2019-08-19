@@ -76,4 +76,21 @@ return {
          dirname .. "scripting/starting_conditions/frisians/village.lua";
       }
    }
+
+      -- Basic information for the Frisian tribe
+   {
+      name = "amazons",
+      author = _"The Widelands Development Team",
+      -- TRANSLATORS: This is a tribe name
+      descname = _"Amazons (experimental)",
+      tooltip = _("The people of the amazonian jungle. Very early experimental state yet"),
+      icon = dirname .. "images/amazons/icon.png",
+
+      starting_conditions = {
+         dirname .. "scripting/starting_conditions/amazons/headquarters.lua";
+         dirname .. "scripting/starting_conditions/amazons/fortified_village.lua";
+         dirname .. "scripting/starting_conditions/amazons/trading_outpost.lua";
+         dirname .. "scripting/starting_conditions/amazons/village.lua";
+      }
+   }
 }

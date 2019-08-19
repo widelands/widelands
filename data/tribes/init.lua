@@ -25,6 +25,7 @@ print_loading_message("┗━ took", function()
    -- ===================================
 
    print_loading_message("┃    Ships", function()
+      include "tribes/ships/amazons/init.lua"
       include "tribes/ships/atlanteans/init.lua"
       include "tribes/ships/barbarians/init.lua"
       include "tribes/ships/empire/init.lua"
@@ -179,10 +180,12 @@ print_loading_message("┗━ took", function()
       include "tribes/immovables/reedfield/ripe/init.lua"
       include "tribes/immovables/reedfield/small/init.lua"
       include "tribes/immovables/reedfield/tiny/init.lua"
+      include "tribes/immovables/resi/amazons/init.lua"
       include "tribes/immovables/resi/atlanteans/init.lua"
       include "tribes/immovables/resi/barbarians/init.lua"
       include "tribes/immovables/resi/empire/init.lua"
       include "tribes/immovables/resi/frisians/init.lua"
+      include "tribes/immovables/shipconstruction_amazons/init.lua"
       include "tribes/immovables/shipconstruction_atlanteans/init.lua"
       include "tribes/immovables/shipconstruction_barbarians/init.lua"
       include "tribes/immovables/shipconstruction_empire/init.lua"
