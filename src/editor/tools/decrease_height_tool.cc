@@ -26,9 +26,9 @@
 #include "logic/mapregion.h"
 
 /// Decreases the heights by a value. Chages surrounding nodes if necessary.
-int32_t EditorDecreaseHeightTool::handle_click_impl(const Widelands::World& world,
+int32_t EditorDecreaseHeightTool::handle_click_impl(const Widelands::EditorGameBase& egbase,
                                                     const Widelands::NodeAndTriangle<>& center,
-                                                    EditorInteractive& /* parent */,
+                                                    EditorInteractive&,
                                                     EditorActionArgs* args,
                                                     Widelands::Map* map) {
 	if (args->original_heights.empty()) {
@@ -42,13 +42,13 @@ int32_t EditorDecreaseHeightTool::handle_click_impl(const Widelands::World& worl
 	}
 
 	return map->change_height(
-	   world, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius),
+	   egbase, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius),
 	   -args->change_by);
 }
 
-int32_t EditorDecreaseHeightTool::handle_undo_impl(const Widelands::World& world,
+int32_t EditorDecreaseHeightTool::handle_undo_impl(const Widelands::EditorGameBase& egbase,
                                                    const Widelands::NodeAndTriangle<>& center,
-                                                   EditorInteractive& /* parent */,
+                                                   EditorInteractive&,
                                                    EditorActionArgs* args,
                                                    Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
@@ -62,8 +62,7 @@ int32_t EditorDecreaseHeightTool::handle_undo_impl(const Widelands::World& world
 		++i;
 	} while (mr.advance(*map));
 
-	map->recalc_for_field_area(
-	   world, Widelands::Area<Widelands::FCoords>(
+	map->recalc_for_field_area(egbase, Widelands::Area<Widelands::FCoords>(
 	             map->get_fcoords(center.node),
 	             args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 2));
 

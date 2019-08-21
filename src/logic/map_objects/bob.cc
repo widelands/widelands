@@ -638,7 +638,7 @@ void Bob::movepath_update(Game& game, State& state) {
 	// Using probability of 1/8 and pausing it for 5, 10 or 15 seconds
 	if (game.logic_rand() % 8 == 0) {
 		if (is_a(Ship, this)) {
-			const uint32_t ships_count = game.map().find_bobs(
+			const uint32_t ships_count = game.map().find_bobs(game,
 			   Widelands::Area<Widelands::FCoords>(get_position(), 0), nullptr, FindBobShip());
 			assert(ships_count > 0);
 			if (ships_count > 1) {
@@ -825,7 +825,7 @@ int32_t Bob::start_walk(Game& game, WalkingDir const dir, uint32_t const a, bool
 bool Bob::check_node_blocked(Game& game, const FCoords& field, bool) {
 	// Battles always block movement!
 	std::vector<Bob*> soldiers;
-	game.map().find_bobs(Area<FCoords>(field, 0), &soldiers, FindBobEnemySoldier(get_owner()));
+	game.map().find_bobs(game, Area<FCoords>(field, 0), &soldiers, FindBobEnemySoldier(get_owner()));
 
 	if (!soldiers.empty()) {
 		for (Bob* temp_bob : soldiers) {

@@ -23,13 +23,12 @@
 #include "logic/field.h"
 #include "logic/widelands_geometry.h"
 
-int32_t EditorResizeTool::handle_click_impl(const Widelands::World& world,
+int32_t EditorResizeTool::handle_click_impl(const Widelands::EditorGameBase&,
                                             const Widelands::NodeAndTriangle<>& center,
-                                            EditorInteractive& parent,
+                                            EditorInteractive& eia,
                                             EditorActionArgs* args,
                                             Widelands::Map* map) {
-	Widelands::EditorGameBase& egbase = parent.egbase();
-
+	Widelands::EditorGameBase& egbase = eia.egbase();
 	args->resized.old_map_size = map->extent();
 	args->resized.port_spaces.clear();
 	args->resized.starting_positions.clear();
@@ -43,18 +42,17 @@ int32_t EditorResizeTool::handle_click_impl(const Widelands::World& world,
 	args->resized.deleted_fields =
 	   map->resize(egbase, center.node, args->new_map_size.w, args->new_map_size.h);
 
-	map->recalc_whole_map(world);
+	map->recalc_whole_map(egbase);
 	return 0;
 }
 
 int32_t
-EditorResizeTool::handle_undo_impl(const Widelands::World& world,
+EditorResizeTool::handle_undo_impl(const Widelands::EditorGameBase&,
                                    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                   EditorInteractive& parent,
+                                   EditorInteractive& eia,
                                    EditorActionArgs* args,
                                    Widelands::Map* map) {
-	Widelands::EditorGameBase& egbase = parent.egbase();
-
+	Widelands::EditorGameBase& egbase = eia.egbase();
 	map->resize(egbase, center.node, args->resized.old_map_size.w, args->resized.old_map_size.h);
 
 	for (const auto& it : args->resized.deleted_fields) {
@@ -82,13 +80,13 @@ EditorResizeTool::handle_undo_impl(const Widelands::World& world,
 	}
 
 	for (const Widelands::Coords& c : args->resized.port_spaces) {
-		map->set_port_space(world, c, true, true);
+		map->set_port_space(egbase, c, true, true);
 	}
 	for (uint8_t i = 1; i <= map->get_nrplayers(); ++i) {
 		map->set_starting_pos(i, args->resized.starting_positions[i - 1]);
 	}
 
-	map->recalc_whole_map(world);
+	map->recalc_whole_map(egbase);
 	return 0;
 }
 

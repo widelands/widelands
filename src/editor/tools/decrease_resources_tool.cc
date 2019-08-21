@@ -31,9 +31,9 @@
  * Decrease the resources of the current field by the given value if
  * there is not already another resource there.
  */
-int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& world,
+int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::EditorGameBase& egbase,
                                                        const Widelands::NodeAndTriangle<>& center,
-                                                       EditorInteractive& /* parent */,
+                                                       EditorInteractive&,
                                                        EditorActionArgs* args,
                                                        Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
@@ -44,7 +44,7 @@ int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& w
 		amount = (amount > args->change_by) ? amount - args->change_by : 0;
 
 		if (mr.location().field->get_resources() == args->current_resource &&
-		    map->is_resource_valid(world, mr.location(), args->current_resource) &&
+		    map->is_resource_valid(egbase, mr.location(), args->current_resource) &&
 		    mr.location().field->get_resources_amount() != 0) {
 
 			args->original_resource.push_back(
@@ -58,12 +58,12 @@ int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& w
 	return mr.radius();
 }
 
-int32_t EditorDecreaseResourcesTool::handle_undo_impl(const Widelands::World& world,
+int32_t EditorDecreaseResourcesTool::handle_undo_impl(const Widelands::EditorGameBase& egbase,
                                                       const Widelands::NodeAndTriangle<>& center,
                                                       EditorInteractive& parent,
                                                       EditorActionArgs* args,
                                                       Widelands::Map* map) {
-	return parent.tools()->set_resources.handle_undo_impl(world, center, parent, args, map);
+	return parent.tools()->set_resources.handle_undo_impl(egbase, center, parent, args, map);
 }
 
 EditorActionArgs EditorDecreaseResourcesTool::format_args_impl(EditorInteractive& parent) {

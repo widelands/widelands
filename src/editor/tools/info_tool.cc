@@ -29,11 +29,12 @@
 #include "graphic/text_layout.h"
 #include "logic/map_objects/world/editor_category.h"
 #include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 
 /// Show a window with information about the pointed at node and triangle.
-int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
+int32_t EditorInfoTool::handle_click_impl(const Widelands::EditorGameBase& egbase,
                                           const Widelands::NodeAndTriangle<>& center,
                                           EditorInteractive& parent,
                                           EditorActionArgs* /* args */,
@@ -116,7 +117,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	buf += as_heading(_("Terrain"), UI::PanelStyle::kWui);
 
 	const Widelands::Field& tf = (*map)[center.triangle.node];
-	const Widelands::TerrainDescription& ter = world.terrain_descr(
+	const Widelands::TerrainDescription& ter = egbase.world().terrain_descr(
 	   center.triangle.t == Widelands::TriangleIndex::D ? tf.terrain_d() : tf.terrain_r());
 
 	buf += as_listitem(
@@ -202,7 +203,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 		buf += as_heading(_("Resources"), UI::PanelStyle::kWui);
 		buf += as_listitem(
 		   (boost::format(pgettext("resources", "%1%x %2%")) % static_cast<unsigned int>(ramount) %
-		    world.get_resource(f.get_resources())->descname())
+		    egbase.world().get_resource(f.get_resources())->descname())
 		      .str(),
 		   font_style);
 	}

@@ -925,7 +925,7 @@ Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32
 	const Map& map = egbase().map();
 	std::vector<BaseImmovable*> flags;
 
-	map.find_reachable_immovables_unique(Area<FCoords>(map.get_fcoords(flag.get_position()), 25),
+	map.find_reachable_immovables_unique(egbase(), Area<FCoords>(map.get_fcoords(flag.get_position()), 25),
 	                                     flags, CheckStepDefault(MOVECAPS_WALK),
 	                                     FindFlagOf(FindImmovablePlayerMilitarySite(*this)));
 
