@@ -27,7 +27,7 @@ struct EditorInfoTool : public EditorTool {
 	EditorInfoTool() : EditorTool(*this, *this, false) {
 	}
 
-	int32_t handle_click_impl(const Widelands::World& world,
+	int32_t handle_click_impl(const Widelands::EditorGameBase&,
 	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,

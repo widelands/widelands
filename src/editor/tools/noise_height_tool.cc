@@ -27,9 +27,9 @@
 #include "logic/mapregion.h"
 
 /// Sets the heights to random values. Changes surrounding nodes if necessary.
-int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::World& world,
+int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::EditorGameBase& egbase,
                                                  const Widelands::NodeAndTriangle<>& center,
-                                                 EditorInteractive& /* parent */,
+                                                 EditorInteractive&,
                                                  EditorActionArgs* args,
                                                  Widelands::Map* map) {
 	if (args->original_heights.empty()) {
@@ -48,7 +48,7 @@ int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::World& world,
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
 		max = std::max(
-		   max, map->set_height(world, mr.location(),
+		   max, map->set_height(egbase, mr.location(),
 		                        args->interval.min +
 		                           static_cast<int32_t>(static_cast<double>(args->interval.max -
 		                                                                    args->interval.min + 1) *
@@ -58,12 +58,12 @@ int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::World& world,
 }
 
 int32_t
-EditorNoiseHeightTool::handle_undo_impl(const Widelands::World& world,
+EditorNoiseHeightTool::handle_undo_impl(const Widelands::EditorGameBase& egbase,
                                         const Widelands::NodeAndTriangle<Widelands::Coords>& center,
                                         EditorInteractive& parent,
                                         EditorActionArgs* args,
                                         Widelands::Map* map) {
-	return set_tool_.handle_undo_impl(world, center, parent, args, map);
+	return set_tool_.handle_undo_impl(egbase, center, parent, args, map);
 }
 
 EditorActionArgs EditorNoiseHeightTool::format_args_impl(EditorInteractive& parent) {

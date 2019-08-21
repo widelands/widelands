@@ -24,11 +24,12 @@
 #include "editor/tools/increase_resources_tool.h"
 #include "logic/field.h"
 #include "logic/map_objects/world/resource_description.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 
-int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
+int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::EditorGameBase& egbase,
                                                   const Widelands::NodeAndTriangle<>& center,
-                                                  EditorInteractive& /* parent */,
+                                                  EditorInteractive&,
                                                   EditorActionArgs* args,
                                                   Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
@@ -37,13 +38,13 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 		Widelands::ResourceAmount amount = args->set_to;
 		Widelands::ResourceAmount max_amount =
 		   args->current_resource != Widelands::kNoResource ?
-		      world.get_resource(args->current_resource)->max_amount() :
+		      egbase.world().get_resource(args->current_resource)->max_amount() :
 		      0;
 
 		if (amount > max_amount)
 			amount = max_amount;
 
-		if (map->is_resource_valid(world, mr.location(), args->current_resource)) {
+		if (map->is_resource_valid(egbase, mr.location(), args->current_resource)) {
 
 			args->original_resource.push_back(
 			   EditorActionArgs::ResourceState{mr.location(), mr.location().field->get_resources(),
@@ -56,7 +57,7 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 }
 
 int32_t EditorSetResourcesTool::handle_undo_impl(
-   const Widelands::World& world,
+   const Widelands::EditorGameBase& egbase,
    const Widelands::NodeAndTriangle<Widelands::Coords>& /* center */,
    EditorInteractive& /* parent */,
    EditorActionArgs* args,
@@ -64,7 +65,7 @@ int32_t EditorSetResourcesTool::handle_undo_impl(
 	for (const auto& res : args->original_resource) {
 		Widelands::ResourceAmount amount = res.amount;
 		Widelands::ResourceAmount max_amount =
-		   world.get_resource(args->current_resource)->max_amount();
+		   egbase.world().get_resource(args->current_resource)->max_amount();
 
 		if (amount > max_amount)
 			amount = max_amount;
@@ -86,7 +87,7 @@ EditorActionArgs EditorSetResourcesTool::format_args_impl(EditorInteractive& par
 Widelands::NodeCaps resource_tools_nodecaps(const Widelands::FCoords& fcoords,
                                             const Widelands::EditorGameBase& egbase,
                                             Widelands::DescriptionIndex resource) {
-	if (egbase.map().is_resource_valid(egbase.world(), fcoords, resource)) {
+	if (egbase.map().is_resource_valid(egbase, fcoords, resource)) {
 		return fcoords.field->nodecaps();
 	}
 	return Widelands::NodeCaps::CAPS_NONE;

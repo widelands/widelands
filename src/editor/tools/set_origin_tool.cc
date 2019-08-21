@@ -22,7 +22,7 @@
 #include "editor/editorinteractive.h"
 #include "wui/mapviewpixelconstants.h"
 
-int32_t EditorSetOriginTool::handle_click_impl(const Widelands::World&,
+int32_t EditorSetOriginTool::handle_click_impl(const Widelands::EditorGameBase&,
                                                const Widelands::NodeAndTriangle<>& center,
                                                EditorInteractive& eia,
                                                EditorActionArgs* /* args */,
@@ -34,7 +34,7 @@ int32_t EditorSetOriginTool::handle_click_impl(const Widelands::World&,
 }
 
 int32_t
-EditorSetOriginTool::handle_undo_impl(const Widelands::World&,
+EditorSetOriginTool::handle_undo_impl(const Widelands::EditorGameBase&,
                                       const Widelands::NodeAndTriangle<Widelands::Coords>& center,
                                       EditorInteractive& eia,
                                       EditorActionArgs* /* args */,

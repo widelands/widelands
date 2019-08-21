@@ -24,7 +24,7 @@
 
 using Widelands::TCoords;
 
-int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::World& world,
+int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::EditorGameBase& egbase,
                                                 const Widelands::NodeAndTriangle<>& center,
                                                 EditorInteractive& /* parent */,
                                                 EditorActionArgs* args,
@@ -56,7 +56,7 @@ int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::World& world,
 		            radius));
 		std::list<Widelands::DescriptionIndex>::iterator i = args->terrain_type.begin();
 		do {
-			max = std::max(max, map->change_terrain(world, mr.location(), *i));
+			max = std::max(max, map->change_terrain(egbase, mr.location(), *i));
 			++i;
 		} while (mr.advance(*map));
 	}
@@ -64,7 +64,7 @@ int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::World& world,
 }
 
 int32_t
-EditorSetTerrainTool::handle_undo_impl(const Widelands::World& world,
+EditorSetTerrainTool::handle_undo_impl(const Widelands::EditorGameBase& egbase,
                                        const Widelands::NodeAndTriangle<Widelands::Coords>& center,
                                        EditorInteractive& /* parent */,
                                        EditorActionArgs* args,
@@ -82,7 +82,7 @@ EditorSetTerrainTool::handle_undo_impl(const Widelands::World& world,
 
 		std::list<Widelands::DescriptionIndex>::iterator i = args->original_terrain_type.begin();
 		do {
-			max = std::max(max, map->change_terrain(world, mr.location(), *i));
+			max = std::max(max, map->change_terrain(egbase, mr.location(), *i));
 			++i;
 		} while (mr.advance(*map));
 		return radius + max;

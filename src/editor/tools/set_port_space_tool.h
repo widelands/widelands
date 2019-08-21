@@ -30,13 +30,13 @@ class EditorUnsetPortSpaceTool : public EditorTool {
 public:
 	explicit EditorUnsetPortSpaceTool();
 
-	int32_t handle_click_impl(const Widelands::World& world,
+	int32_t handle_click_impl(const Widelands::EditorGameBase&,
 	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
-	int32_t handle_undo_impl(const Widelands::World& world,
+	int32_t handle_undo_impl(const Widelands::EditorGameBase&,
 	                         const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
@@ -54,13 +54,13 @@ class EditorSetPortSpaceTool : public EditorTool {
 public:
 	explicit EditorSetPortSpaceTool(EditorUnsetPortSpaceTool&);
 
-	int32_t handle_click_impl(const Widelands::World& world,
+	int32_t handle_click_impl(const Widelands::EditorGameBase&,
 	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
-	int32_t handle_undo_impl(const Widelands::World& world,
+	int32_t handle_undo_impl(const Widelands::EditorGameBase&,
 	                         const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,

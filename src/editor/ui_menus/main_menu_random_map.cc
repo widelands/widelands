@@ -485,7 +485,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	MapGenerator gen(*map, map_info, egbase);
 	map->create_empty_map(
-	   egbase.world(), map_info.w, map_info.h, 0, _("No Name"),
+	   egbase, map_info.w, map_info.h, 0, _("No Name"),
 	   g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")),
 	   sstrm.str().c_str());
 	loader_ui.step(_("Generating random map…"));
@@ -519,7 +519,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	egbase.postload();
 	egbase.load_graphics(loader_ui);
 
-	map->recalc_whole_map(egbase.world());
+	map->recalc_whole_map(egbase);
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);
 	UI::WLMessageBox mbox(
 	   &eia,

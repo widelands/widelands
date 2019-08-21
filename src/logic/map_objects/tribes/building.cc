@@ -107,6 +107,12 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			throw GameDataError("size: %s", e.what());
 		}
 	}
+	if (table.has_key("built_over_immovable")) {
+		// Throws an error if no matching immovable exists
+		built_over_immovable_ = get_attribute_id(table.get_string("built_over_immovable"), false);
+	} else {
+		built_over_immovable_ = -1;
+	}
 
 	// Parse build options
 	if (table.has_key("enhancement")) {
@@ -188,8 +194,10 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 }
 
 bool BuildingDescr::suitability(const Map&, const FCoords& fc) const {
-	return mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
-	               size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
+	return (mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
+	               size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK)) &&
+	       (built_over_immovable_ < 0 || (fc.field->get_immovable() &&
+	               fc.field->get_immovable()->has_attribute(built_over_immovable_)));
 }
 
 const BuildingHints& BuildingDescr::hints() const {

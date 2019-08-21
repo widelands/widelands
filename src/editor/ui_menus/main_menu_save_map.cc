@@ -314,7 +314,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	Widelands::Map* map = egbase.mutable_map();
 
 	// Recompute seafaring tag
-	map->cleanup_port_spaces(egbase.world());
+	map->cleanup_port_spaces(egbase);
 	if (map->allows_seafaring()) {
 		map->add_tag("seafaring");
 	} else {

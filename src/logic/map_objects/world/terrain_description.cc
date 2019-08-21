@@ -113,6 +113,19 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 		custom_tooltips_ = table.get_table("tooltips")->array_entries<std::string>();
 	}
 
+	if (table.has_key("enhancement")) {
+		const std::string e = table.get_string("enhancement");
+		if (e == name_) {
+			throw GameDataError("%s: a terrain cannot be enhanced to itself", name_.c_str());
+		}
+		enhancement_ = world.terrains().get_index(e);
+		if (enhancement_ == INVALID_INDEX) {
+			throw GameDataError("%s: unknown enhancement terrain: %s", name_.c_str(), e.c_str());
+		}
+	} else {
+		enhancement_ = INVALID_INDEX;
+	}
+
 	if (!(0 < fertility_ && fertility_ < 1000)) {
 		throw GameDataError("%s: fertility is not in (0, 1000).", name_.c_str());
 	}
@@ -254,6 +267,10 @@ int TerrainDescription::humidity() const {
 
 int TerrainDescription::fertility() const {
 	return fertility_;
+}
+
+DescriptionIndex TerrainDescription::enhancement() const {
+	return enhancement_;
 }
 
 void TerrainDescription::set_minimap_color(const RGBColor& color) {

@@ -75,6 +75,7 @@ The available commands are:
 - `scout`_
 - `playsound`_
 - `construct`_
+- `terraform`_
 */
 
 const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
@@ -95,6 +96,7 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
    {"scout", &WorkerProgram::parse_scout},
    {"playsound", &WorkerProgram::parse_playsound},
    {"construct", &WorkerProgram::parse_construct},
+   {"terraform", &WorkerProgram::parse_terraform},
 
    {nullptr, nullptr}};
 
@@ -346,6 +348,8 @@ findspace
       * ``big``: Big building plots only.
       * ``mine``: Mining plots only.
       * ``port``: Port spaces only.
+      * ``swim``: Anything on the coast.
+      * ``terraform``: A node with terrain that can be enhanced
 
    :arg int radius: Search for map fields within the given radius around the worker.
 
@@ -439,7 +443,9 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			} sizenames[] = {{"any", FindNodeSize::sizeAny},     {"build", FindNodeSize::sizeBuild},
 			                 {"small", FindNodeSize::sizeSmall}, {"medium", FindNodeSize::sizeMedium},
 			                 {"big", FindNodeSize::sizeBig},     {"mine", FindNodeSize::sizeMine},
-			                 {"port", FindNodeSize::sizePort},   {nullptr, 0}};
+			                 {"port", FindNodeSize::sizePort},   {"swim", FindNodeSize::sizeSwim},
+			                 {"terraform", FindNodeSize::sizeTerraform},
+			                 {nullptr, 0}};
 
 			int32_t index;
 
@@ -758,6 +764,28 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 	for (uint32_t i = 1; i < cmd.size(); ++i) {
 		act->sparamv.push_back(cmd[i]);
 	}
+}
+
+/* RST
+terraform
+^^^^^^^^^
+.. function:: terraform
+
+   Turns the terrain of one of the triangles around the current node into its enhancement terrain. Example::
+
+      terraform = {
+         "findspace=size:terraform radius:6",
+         "walk=coords",
+         "animate=dig 2000",
+         "terraform",
+         "return"
+      }
+*/
+void WorkerProgram::parse_terraform(Worker::Action* act, const std::vector<std::string>& cmd) {
+	if (!cmd.empty()) {
+		throw wexception("terraform takes no arguments");
+	}
+	act->function = &Worker::run_terraform;
 }
 
 /* RST
