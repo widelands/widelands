@@ -35,7 +35,7 @@ world:new_immovable_type{
    descname = _ "Larch (Pole)",
    editor_category = "trees_coniferous",
    size = "small",
-   attributes = {},
+   attributes = { "tree_pole" },
    terrain_affinity = terrain_affinity,
    programs = {
       program = {

@@ -1,6 +1,8 @@
 function ware_helptext(tribe)
    local helptext = {
       -- TRANSLATORS: Helptext for a ware: Kitchen Tools
+      amazons = pgettext("amazons_ware", "Kitchen tools are needed for preparing rations, baking cassava bread and brewing chocolate. Be sure to have a stonecarver to produce this basic tool."),
+      -- TRANSLATORS: Helptext for a ware: Kitchen Tools
       barbarians = pgettext("barbarians_ware", "Kitchen tools are needed for preparing rations, snacks and meals. Be sure to have a metal workshop to produce this basic tool (but it ceases to be produced by the building if it is enhanced to an ax workshop and war mill)."),
       -- TRANSLATORS: Helptext for a ware: Kitchen Tools
       frisians = pgettext("frisians_ware", "Kitchen tools are needed for preparing rations and meals. The smoker also needs them."),

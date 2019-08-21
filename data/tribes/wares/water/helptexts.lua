@@ -3,6 +3,8 @@ function ware_helptext(tribe)
       -- TRANSLATORS: Helptext for a ware: Water
       default = pgettext("ware", "Water is the essence of life!"),
       -- TRANSLATORS: Helptext for a ware: Water
+      amazons = pgettext("amazons_ware", "Water is used by the cassava root cookery, the chocolate brewery, the gold digger and the tapir farms."),
+      -- TRANSLATORS: Helptext for a ware: Water
       atlanteans = pgettext("atlanteans_ware", "Water is used in the bakery and the horse and spider farms."),
       -- TRANSLATORS: Helptext for a ware: Water
       frisians = pgettext("frisians_ware", "Water is used to bake bread and brew beer. Reindeer farms and aqua farms also consume it."),

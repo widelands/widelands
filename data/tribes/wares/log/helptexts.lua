@@ -3,6 +3,8 @@ function ware_helptext(tribe)
       -- TRANSLATORS: Helptext for a ware: Log
       default = pgettext("ware", "Logs are an important basic building material. They are produced by felling trees."),
       -- TRANSLATORS: Helptext for a ware: Log
+      amazons = pgettext("amazons_ware", "Amazon woodcutters fell trees and jungle preservers are planting them. They are used by the stonecarver. The charcoal kiln also needs logs to produce charcoal."),
+      -- TRANSLATORS: Helptext for a ware: Log
       atlanteans = pgettext("atlanteans_ware", "Atlanteans use logs also as the base for planks, which are used in nearly every building. Besides the sawmill, the charcoal kiln, the toolsmithy and the smokery also need logs for their work."),
       -- TRANSLATORS: Helptext for a ware: Log
       barbarians = pgettext("barbarians_ware", "Barbarian lumberjacks fell the trees; rangers take care of the supply of trees. Logs are also used in the metal workshop to build basic tools, and in the charcoal kiln for the production of coal. The wood hardener refines logs into blackwood by hardening them with fire."),

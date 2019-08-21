@@ -1,4 +1,4 @@
 function worker_helptext()
    -- TRANSLATORS: Helptext for a worker: Seamstress
-   return pgettext("frisians_worker", "Produces cloth and sews fur garments.")
+   return pgettext("amazons_worker", "Produces all kinds of armor.")
 end

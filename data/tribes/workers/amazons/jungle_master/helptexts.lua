@@ -1,4 +1,4 @@
 function worker_helptext()
-   -- TRANSLATORS: Helptext for a worker: Fruit Collector
-   return pgettext("frisians_worker", "Gathers berries.")
+   -- TRANSLATORS: Helptext for a worker: Forester
+   return pgettext("amazons_worker", "Plants trees.")
 end

@@ -15,16 +15,16 @@ animations = {
 add_directional_animation(animations, "walk", dirname, "walk", {11, 23}, 15)
 
 tribes:new_worker_type {
-   msgctxt = "frisians_worker",
-   name = "frisians_geologist",
+   msgctxt = "amazons_worker",
+   name = "amazons_geologist",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext ("frisians_worker", "Geologist"),
+   descname = pgettext ("amazons_worker", "Geologist"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 
    buildcost = {
-      frisians_carrier = 1,
+      amazons_carrier = 1,
       hammer = 1
    },
 

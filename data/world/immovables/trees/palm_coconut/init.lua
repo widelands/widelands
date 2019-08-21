@@ -35,7 +35,7 @@ world:new_immovable_type{
    descname = _ "Coconut Palm (Pole)",
    editor_category = "trees_palm",
    size = "small",
-   attributes = {},
+   attributes = { "tree_pole" },
    terrain_affinity = terrain_affinity,
    programs = {
       program = {

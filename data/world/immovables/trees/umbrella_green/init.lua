@@ -37,7 +37,7 @@ world:new_immovable_type{
    descname = _ "Green Umbrella Tree (Pole)",
    editor_category = "trees_wasteland",
    size = "small",
-   attributes = {},
+   attributes = { "tree_pole" },
    terrain_affinity = terrain_affinity,
    programs = {
       program = {

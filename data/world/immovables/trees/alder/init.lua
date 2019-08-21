@@ -43,7 +43,7 @@ world:new_immovable_type{
    descname = _ "Alder (Pole)",
    editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
+   attributes = { "tree_pole" },
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
