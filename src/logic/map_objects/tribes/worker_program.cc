@@ -773,7 +773,7 @@ terraform
 
    Turns the terrain of one of the triangles around the current node into its enhancement terrain. Example::
 
-      release = {
+      terraform = {
          "findspace=size:terraform radius:6",
          "walk=coords",
          "animate=dig 2000",
@@ -781,7 +781,6 @@ terraform
          "return"
       }
 */
-// TODO(GunChleoc): attrib:eatable would be much better, then depend on terrain too
 void WorkerProgram::parse_terraform(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (!cmd.empty()) {
 		throw wexception("terraform takes no arguments");
