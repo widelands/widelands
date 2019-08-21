@@ -54,9 +54,7 @@ tribes:new_productionsite_type {
          descname = _"working",
          actions = {
             "sleep=20000",
-            "animate=working 20000",
-            "mine=water 1 100 65 2",
-            "produce=water",
+            "callworker=fetch_water",
          }
       },
    },

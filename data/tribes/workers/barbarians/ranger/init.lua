@@ -48,6 +48,12 @@ tribes:new_worker_type {
          "plant=attrib:tree_sapling",
          "animate=water 3500",
          "return"
+      },
+      terraform = {
+         "findspace=size:terraform radius:5",
+         "walk=coords",
+         "terraform",
+         "return"
       }
    },
 
