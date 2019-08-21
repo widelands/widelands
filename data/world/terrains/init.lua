@@ -142,6 +142,12 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --
 --            fertility = 700,
 --
+--    **enhancement**
+--        *Optional*. The terrain this terrain can be turned into by buildings like
+--        the amazon gardening center. Example::
+--
+--            enhancement = "summer_meadow3",
+--
 
 ------------------------
 --  Former greenland  --
@@ -189,6 +195,7 @@ world:new_terrain_type{
    humidity = 600,
    fertility = 650,
 
+   enhancement = "summer_meadow1"
 }
 
 
@@ -209,6 +216,8 @@ world:new_terrain_type{
    temperature = 105,
    humidity = 550,
    fertility = 800,
+
+   enhancement = "summer_meadow2"
 }
 
 
@@ -229,6 +238,8 @@ world:new_terrain_type{
    temperature = 110,
    humidity = 650,
    fertility = 750,
+
+   enhancement = "summer_meadow3"
 }
 
 
@@ -245,6 +256,8 @@ world:new_terrain_type{
    temperature = 100,
    humidity = 400,
    fertility = 400,
+
+   enhancement = "summer_meadow4"
 }
 
 
@@ -261,6 +274,8 @@ world:new_terrain_type{
    temperature = 100,
    humidity = 150,
    fertility = 150,
+
+   enhancement = "summer_steppe"
 }
 
 
@@ -277,6 +292,8 @@ world:new_terrain_type{
    temperature = 75,
    humidity = 800,
    fertility = 450,
+
+   enhancement = "summer_meadow4"
 }
 
 world:new_terrain_type{
@@ -332,6 +349,8 @@ world:new_terrain_type{
    temperature = 80,
    humidity = 100,
    fertility = 100,
+
+   enhancement = "summer_forested_mountain1"
 }
 
 
@@ -348,6 +367,8 @@ world:new_terrain_type{
    temperature = 80,
    humidity = 100,
    fertility = 100,
+
+   enhancement = "summer_forested_mountain2"
 }
 
 
@@ -364,6 +385,8 @@ world:new_terrain_type{
    temperature = 80,
    humidity = 100,
    fertility = 100,
+
+   enhancement = "summer_forested_mountain1"
 }
 
 
@@ -380,6 +403,8 @@ world:new_terrain_type{
    temperature = 80,
    humidity = 100,
    fertility = 100,
+
+   enhancement = "summer_forested_mountain2"
 }
 
 world:new_terrain_type{

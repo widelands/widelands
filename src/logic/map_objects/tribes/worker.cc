@@ -920,7 +920,7 @@ bool Worker::run_createbob(Game& game, State& state, const Action& action) {
 	return true;
 }
 
-bool Worker::run_terraform(Game& game, State&, const Action&) {
+bool Worker::run_terraform(Game& game, State& state, const Action&) {
 	const World& world = game.world();
 	std::map<TCoords<FCoords>, DescriptionIndex> triangles;
 	const FCoords f = get_position();
@@ -955,12 +955,16 @@ bool Worker::run_terraform(Game& game, State&, const Action&) {
 	}
 
 	if (triangles.empty()) {
+		send_signal(game, "fail");
+		pop_task(game);
 		return false;
 	}
 	assert(game.mutable_map());
 	auto it = triangles.begin();
-	for (size_t rand = game.logic_rand() % triangles.size() + 1; rand > 0; --rand, ++it);
+	for (size_t rand = game.logic_rand() % triangles.size(); rand > 0; --rand) ++it;
 	game.mutable_map()->change_terrain(game, it->first, it->second);
+	++state.ivar1;
+	schedule_act(game, 10);
 	return true;
 }
 

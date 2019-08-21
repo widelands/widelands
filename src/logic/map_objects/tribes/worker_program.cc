@@ -782,7 +782,7 @@ terraform
       }
 */
 void WorkerProgram::parse_terraform(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (!cmd.empty()) {
+	if (cmd.size() > 1) {
 		throw wexception("terraform takes no arguments");
 	}
 	act->function = &Worker::run_terraform;

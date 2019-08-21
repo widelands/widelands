@@ -50,7 +50,7 @@ tribes:new_worker_type {
          "return"
       },
       terraform = {
-         "findspace=size:terraform radius:5",
+         "findspace=size:terraform radius:6",
          "walk=coords",
          "terraform",
          "return"
