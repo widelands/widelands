@@ -56,13 +56,18 @@ constexpr int32_t kPriorityLow = 2;
 constexpr int32_t kPriorityNormal = 4;
 constexpr int32_t kPriorityHigh = 8;
 
+/* The value "" means that the DescriptionIndex is a normal building, as happens e.g. when enhancing a building.
+ * The value "tribe"/"world" means that the DescriptionIndex refers to an immovable of
+ * OwnerType kTribe/kWorld, as happens e.g. with amazon treetop sentry. This immovable
+ * should therefore always be painted below the building image.
+ */
+using FormerBuildings = std::vector<std::pair<DescriptionIndex, std::string>>;
+
 /*
  * Common to all buildings!
  */
 class BuildingDescr : public MapObjectDescr {
 public:
-	using FormerBuildings = std::vector<DescriptionIndex>;
-
 	BuildingDescr(const std::string& init_descname,
 	              MapObjectType type,
 	              const LuaTable& t,
@@ -229,8 +234,6 @@ public:
 		PCap_Enhancable = 1 << 2,  // can be enhanced to something
 	};
 
-	using FormerBuildings = std::vector<DescriptionIndex>;
-
 public:
 	enum class InfoStringFormat { kCensus, kStatistics, kTooltip };
 
@@ -382,6 +385,7 @@ protected:
 
 	// The former buildings names, with the current one in last position.
 	FormerBuildings old_buildings_;
+	const MapObjectDescr* was_immovable_;
 
 private:
 	std::string statistics_string_;

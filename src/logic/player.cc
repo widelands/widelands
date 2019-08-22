@@ -98,12 +98,12 @@ namespace Widelands {
  */
 void find_former_buildings(const Tribes& tribes,
                            const Widelands::DescriptionIndex bi,
-                           Widelands::Building::FormerBuildings* former_buildings) {
+                           Widelands::FormerBuildings* former_buildings) {
 	assert(former_buildings && former_buildings->empty());
-	former_buildings->push_back(bi);
+	former_buildings->push_back(std::make_pair(bi, ""));
 
 	for (;;) {
-		Widelands::DescriptionIndex oldest_idx = former_buildings->front();
+		Widelands::DescriptionIndex oldest_idx = former_buildings->front().first;
 		const Widelands::BuildingDescr* oldest = tribes.get_building_descr(oldest_idx);
 		if (!oldest->is_enhanced()) {
 			break;
@@ -111,7 +111,7 @@ void find_former_buildings(const Tribes& tribes,
 		for (DescriptionIndex i = 0; i < tribes.nrbuildings(); ++i) {
 			const BuildingDescr* building_descr = tribes.get_building_descr(i);
 			if (building_descr->enhancement() == oldest_idx) {
-				former_buildings->insert(former_buildings->begin(), i);
+				former_buildings->insert(former_buildings->begin(), std::make_pair(i, ""));
 				break;
 			}
 		}
@@ -534,9 +534,9 @@ Road& Player::force_road(const Path& path) {
 }
 
 Building& Player::force_building(Coords const location,
-                                 const BuildingDescr::FormerBuildings& former_buildings) {
+                                 const FormerBuildings& former_buildings) {
 	const Map& map = egbase().map();
-	DescriptionIndex idx = former_buildings.back();
+	DescriptionIndex idx = former_buildings.back().first;
 	const BuildingDescr* descr = egbase().tribes().get_building_descr(idx);
 	terraform_for_building(egbase(), player_number(), location, descr);
 	FCoords flag_loc;
@@ -548,14 +548,14 @@ Building& Player::force_building(Coords const location,
 
 Building& Player::force_csite(Coords const location,
                               DescriptionIndex b_idx,
-                              const BuildingDescr::FormerBuildings& former_buildings) {
+                              const FormerBuildings& former_buildings) {
 	EditorGameBase& eg = egbase();
 	const Map& map = eg.map();
 	const Tribes& tribes = eg.tribes();
 	const PlayerNumber pn = player_number();
 
 	if (!former_buildings.empty()) {
-		DescriptionIndex idx = former_buildings.back();
+		DescriptionIndex idx = former_buildings.back().first;
 		const BuildingDescr* descr = tribes.get_building_descr(idx);
 		terraform_for_building(eg, pn, location, descr);
 	}
@@ -577,9 +577,7 @@ Place a construction site or building, checking that it's legal to do so.
 Building* Player::build(Coords c,
                         DescriptionIndex const idx,
                         bool constructionsite,
-                        BuildingDescr::FormerBuildings& former_buildings) {
-	int32_t buildcaps;
-
+                        FormerBuildings& former_buildings) {
 	// Validate building type
 	if (!tribe().has_building(idx)) {
 		return nullptr;
@@ -594,21 +592,44 @@ Building* Player::build(Coords c,
 	// Validate build position
 	const Map& map = egbase().map();
 	map.normalize_coords(c);
-	buildcaps = get_buildcaps(map.get_fcoords(c));
-
-	if (descr->get_ismine()) {
-		if (!(buildcaps & BUILDCAPS_MINE))
-			return nullptr;
-	} else {
-		if ((buildcaps & BUILDCAPS_SIZEMASK) < descr->get_size() - BaseImmovable::SMALL + 1)
-			return nullptr;
-		if (descr->get_isport() && !(buildcaps & BUILDCAPS_PORT))
-			return nullptr;
+	const FCoords fc = map.get_fcoords(c);
+	if (!fc.field->is_interior(player_number()) || !map.br_n(fc).field->is_interior(player_number())) {
+		return nullptr;
+	}
+	if (descr->get_size() >= BaseImmovable::BIG &&
+			!((map.l_n(fc).field->is_interior(player_number())) &&
+			(map.tr_n(fc).field->is_interior(player_number())) &&
+			(map.tl_n(fc).field->is_interior(player_number())))) {
+		return nullptr;
 	}
 
-	if (constructionsite)
+	if (descr->get_built_over_immovable() >= 0 &&
+			!(fc.field->get_immovable() &&
+			fc.field->get_immovable()->has_attribute(descr->get_built_over_immovable()))) {
+		return nullptr;
+	}
+
+	const NodeCaps buildcaps = descr->get_built_over_immovable() < 0 ?
+			get_buildcaps(fc) : map.get_max_nodecaps(egbase(), fc);
+	if (descr->get_ismine()) {
+		if (!(buildcaps & BUILDCAPS_MINE)) {
+			return nullptr;
+		}
+	} else {
+		if ((buildcaps & BUILDCAPS_SIZEMASK) < descr->get_size() - BaseImmovable::SMALL + 1) {
+			return nullptr;
+		}
+		if (descr->get_isport() && !(buildcaps & BUILDCAPS_PORT)) {
+			return nullptr;
+		}
+	}
+	if (!(get_buildcaps(map.br_n(fc)) & BUILDCAPS_FLAG)) {
+		return nullptr;
+	}
+
+	if (constructionsite) {
 		return &egbase().warp_constructionsite(c, player_number_, idx, false, former_buildings);
-	else {
+	} else {
 		return &descr->create(egbase(), this, c, false, false, former_buildings);
 	}
 }
@@ -747,7 +768,7 @@ void Player::enhance_or_dismantle(Building* building,
 	if (building->get_owner() == this &&
 	    (index_of_new_building == INVALID_INDEX ||
 	     building->descr().enhancement() == index_of_new_building)) {
-		Building::FormerBuildings former_buildings = building->get_former_buildings();
+		FormerBuildings former_buildings = building->get_former_buildings();
 		const Coords position = building->get_position();
 
 		//  Get workers and soldiers

@@ -81,12 +81,12 @@ bool FindNodeSize::accept(const EditorGameBase& egbase, const FCoords& coord) co
 	case sizeSwim:
 		return map.can_reach_by_water(coord);
 	case sizeTerraform:
-		return egbase.world().terrain_descr(coord.field->terrain_d()).enhancement() != INVALID_INDEX ||
-				egbase.world().terrain_descr(coord.field->terrain_r()).enhancement() != INVALID_INDEX ||
-				egbase.world().terrain_descr(map.tl_n(coord).field->terrain_d()).enhancement() != INVALID_INDEX ||
-				egbase.world().terrain_descr(map.tl_n(coord).field->terrain_r()).enhancement() != INVALID_INDEX ||
-				egbase.world().terrain_descr(map.tr_n(coord).field->terrain_d()).enhancement() != INVALID_INDEX ||
-				egbase.world().terrain_descr(map.l_n(coord).field->terrain_r()).enhancement() != INVALID_INDEX;
+		return !(egbase.world().terrain_descr(coord.field->terrain_d()).enhancement().empty() &&
+				egbase.world().terrain_descr(coord.field->terrain_r()).enhancement().empty() &&
+				egbase.world().terrain_descr(map.tl_n(coord).field->terrain_d()).enhancement().empty() &&
+				egbase.world().terrain_descr(map.tl_n(coord).field->terrain_r()).enhancement().empty() &&
+				egbase.world().terrain_descr(map.tr_n(coord).field->terrain_d()).enhancement().empty() &&
+				egbase.world().terrain_descr(map.l_n(coord).field->terrain_r()).enhancement().empty());
 	case sizeAny:
 		return true;
 	}

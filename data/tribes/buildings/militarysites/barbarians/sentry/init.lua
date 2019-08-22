@@ -8,6 +8,7 @@ tribes:new_militarysite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
+   built_over_immovable = "tree",
 
    buildcost = {
       blackwood = 2

@@ -929,27 +929,27 @@ bool Worker::run_terraform(Game& game, State& state, const Action&) {
 	game.map().get_trn(f, &trn);
 	game.map().get_ln(f, &ln);
 
-	DescriptionIndex di = world.terrain_descr(f.field->terrain_r()).enhancement();
+	DescriptionIndex di = world.get_terrain_index(world.terrain_descr(f.field->terrain_r()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::R), di));
 	}
-	di = world.terrain_descr(f.field->terrain_d()).enhancement();
+	di = world.get_terrain_index(world.terrain_descr(f.field->terrain_d()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::D), di));
 	}
-	di = world.terrain_descr(tln.field->terrain_r()).enhancement();
+	di = world.get_terrain_index(world.terrain_descr(tln.field->terrain_r()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::R), di));
 	}
-	di = world.terrain_descr(tln.field->terrain_d()).enhancement();
+	di = world.get_terrain_index(world.terrain_descr(tln.field->terrain_d()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::D), di));
 	}
-	di = world.terrain_descr(ln.field->terrain_r()).enhancement();
+	di = world.get_terrain_index(world.terrain_descr(ln.field->terrain_r()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(ln, TriangleIndex::R), di));
 	}
-	di = world.terrain_descr(trn.field->terrain_d()).enhancement();
+	di = world.get_terrain_index(world.terrain_descr(trn.field->terrain_d()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(trn, TriangleIndex::D), di));
 	}

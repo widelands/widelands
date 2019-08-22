@@ -291,9 +291,11 @@ void EditorGameBase::postload() {
 		}
 	}
 
-	// Postload tribes
+	// Postload tribes and world
 	assert(tribes_);
 	tribes_->postload();
+	assert(world_);
+	world_->postload();
 
 	for (DescriptionIndex i = 0; i < tribes_->nrtribes(); i++) {
 		const TribeDescr* tribe = tribes_->get_tribe_descr(i);
@@ -333,7 +335,7 @@ void EditorGameBase::load_graphics(UI::ProgressWindow& loader_ui) {
 Building& EditorGameBase::warp_building(const Coords& c,
                                         PlayerNumber const owner,
                                         DescriptionIndex const idx,
-                                        Building::FormerBuildings former_buildings) {
+                                        FormerBuildings former_buildings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 	return tribe.get_building_descr(idx)->create(*this, plr, c, false, true, former_buildings);
@@ -350,7 +352,7 @@ Building& EditorGameBase::warp_constructionsite(const Coords& c,
                                                 PlayerNumber const owner,
                                                 DescriptionIndex idx,
                                                 bool loading,
-                                                Building::FormerBuildings former_buildings,
+                                                FormerBuildings former_buildings,
                                                 const BuildingSettings* settings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
@@ -370,7 +372,7 @@ Building& EditorGameBase::warp_constructionsite(const Coords& c,
 Building& EditorGameBase::warp_dismantlesite(const Coords& c,
                                              PlayerNumber const owner,
                                              bool loading,
-                                             Building::FormerBuildings former_buildings) {
+                                             FormerBuildings former_buildings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 
