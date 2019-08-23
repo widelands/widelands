@@ -431,7 +431,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		return;
 	}
 	if (!(node_.field->get_immovable() &&
-			node_.field->get_immovable().descr().type() == Widelands::MapObjectType::FLAG) &&
+			node_.field->get_immovable()->descr().type() == Widelands::MapObjectType::FLAG) &&
 			!(player_->get_buildcaps(map_.br_n(node_)) & Widelands::BUILDCAPS_FLAG)) {
 		return;
 	}
