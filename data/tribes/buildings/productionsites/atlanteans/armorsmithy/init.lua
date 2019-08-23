@@ -29,6 +29,13 @@ dirname = path.dirname(__file__)
 --        ``"medium"``, or ``"big"``, production sites can also have size ``"mine"``
 --        for defining a mine building to be built on mountains.
 --
+--    **built_over_immovable**
+--        *Optional*. If this is set, this building can be built only over an immovable (world or tribe)
+--        with the given attribute. The immovable will seem to remain existing below the building. Example::
+--
+--            built_over_immovable = "tree",
+--
+--
 --    **working_positions**
 --        *Mandatory*. The name and amount for each worker type working at this
 --        building, e.g.::
