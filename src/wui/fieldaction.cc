@@ -426,9 +426,13 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 	if (!player_) {
 		return;
 	}
-	if (!(player_->get_buildcaps(map_.br_n(node_)) & Widelands::BUILDCAPS_FLAG) ||
-			!node_.field->is_interior(player_->player_number()) ||
+	if (!node_.field->is_interior(player_->player_number()) ||
 			!map_.br_n(node_).field->is_interior(player_->player_number())) {
+		return;
+	}
+	if (!(node_.field->get_immovable() &&
+			node_.field->get_immovable().descr().type() == Widelands::MapObjectType::FLAG) &&
+			!(player_->get_buildcaps(map_.br_n(node_)) & Widelands::BUILDCAPS_FLAG)) {
 		return;
 	}
 	BuildGrid* bbg_house[4] = {nullptr, nullptr, nullptr, nullptr};
