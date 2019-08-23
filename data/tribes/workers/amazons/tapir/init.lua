@@ -12,10 +12,10 @@ add_directional_animation(animations, "walk", dirname, "walk", {21, 43}, 20)
 add_directional_animation(animations, "walkload", dirname, "walk", {21, 43}, 20)
 
 tribes:new_carrier_type {
-   msgctxt = "frisians_worker",
-   name = "frisians_reindeer",
+   msgctxt = "amazons_worker",
+   name = "amazons_tapir",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext ("frisians_worker", "Reindeer"),
+   descname = pgettext ("amazons_worker", "Tapir"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
@@ -27,7 +27,7 @@ tribes:new_carrier_type {
 
    aihints = {
       preciousness = {
-         frisians = 2
+         amazons = 2
       },
    }
 }
