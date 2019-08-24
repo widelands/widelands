@@ -10,18 +10,21 @@ tribes:new_trainingsite_type {
    size = "medium",
 
    buildcost = {
-      brick = 5,
-      granite = 3,
+      balsa = 2,
+      ironwood = 2,
       log = 3,
-      gold = 1,
-      reed = 3
+      granite = 2,
+      rubber = 5,
+      rope = 2,
+      gold = 2
    },
    return_on_dismantle = {
-      brick = 3,
-      granite = 1,
+      balsa = 1,
+      ironwood = 1,
       log = 1,
-      gold = 1,
-      reed = 1
+      granite = 2,
+      rubber = 3,
+      rope = 1,
    },
 
    animations = {
@@ -42,67 +45,39 @@ tribes:new_trainingsite_type {
    },
 
    aihints = {
+      trainingsites_max_percent = 25,
       prohibited_till = 900,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
    },
 
    working_positions = {
-      frisians_trainer = 1
+      amazons_trainer = 1
    },
 
    inputs = {
-      { name = "beer", amount = 6 },
-      { name = "bread_frisians", amount = 6 },
-      { name = "smoked_fish", amount = 6 },
-      { name = "smoked_meat", amount = 6 },
-      { name = "sword_long", amount = 2 },
-      { name = "sword_broad", amount = 2 },
-      { name = "sword_double", amount = 2 },
-      { name = "helmet", amount = 2 },
-      { name = "fur_garment_studded", amount = 2 },
+      { name = "fish", amount = 5 },
+      { name = "meat", amount = 5 },
+      { name = "amazons_bread", amount = 2 },
+      { name = "chocolate", amount = 5 },
+      { name = "spear_stone_tipped", amount = 3 },
+      { name = "spear_hardened", amount = 3 },
    },
    outputs = {
-      "frisians_soldier",
-      "scrap_metal_mixed",
-      "scrap_iron",
-      "fur_garment_old",
+      "amazons_soldier",
    },
 
    ["soldier attack"] = {
       min_level = 0,
-      max_level = 2,
+      max_level = 1,
       food = {
-         {"smoked_fish", "smoked_meat"},
-         {"beer"},
-         {"bread_frisians"}
+         {"fish", "meat"},
+         {"chocolate"},
+         {"amazons_bread"}
       },
       weapons = {
-         "sword_long",
-         "sword_broad",
-         "sword_double",
-      }
-   },
-   ["soldier health"] = {
-      min_level = 0,
-      max_level = 0,
-      food = {
-         {"bread_frisians", "beer"},
-         {"smoked_fish", "smoked_meat"},
-      },
-      weapons = {
-         "helmet",
-      }
-   },
-   ["soldier defense"] = {
-      min_level = 0,
-      max_level = 0,
-      food = {
-         {"bread_frisians", "beer"},
-         {"smoked_fish", "smoked_meat"},
-      },
-      weapons = {
-         "fur_garment_studded",
+         "spear_stone_tipped",
+         "spear_hardened",
       }
    },
 
@@ -117,80 +92,35 @@ tribes:new_trainingsite_type {
       },
       upgrade_soldier_attack_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext ("frisians_building", "upgrading soldier attack from level 0 to level 1"),
+         descname = pgettext("amazons_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
             "checksoldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
-            "return=failed unless site has sword_long",
-            "return=failed unless site has bread_frisians,beer,smoked_fish,smoked_meat",
-            "animate=working 26400",
+            "return=failed unless site has fish,meat",
+            "return=failed unless site has chocolate",
+            "return=failed unless site has spear_stone_tipped",
+            "animate=working 30000",
             "checksoldier=soldier attack 0", -- Because the soldier can be expelled by the player
-            "consume=sword_long bread_frisians,beer,smoked_fish,smoked_meat",
-            "train=soldier attack 0 1",
-            "produce=scrap_iron"
+            "consume=fish,meat chocolate spear_stone_tipped",
+            "train=soldier attack 0 1"
          }
       },
       upgrade_soldier_attack_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext ("frisians_building", "upgrading soldier attack from level 1 to level 2"),
+         descname = pgettext("amazons_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
-            "checksoldier=soldier attack 1",
-            "return=failed unless site has sword_broad",
-            "return=failed unless site has bread_frisians",
-            "return=failed unless site has beer",
-            "return=failed unless site has smoked_fish,smoked_meat",
-            "animate=working 22800",
-            "checksoldier=soldier attack 1",
-            "consume=sword_broad bread_frisians beer smoked_fish,smoked_meat",
-            "train=soldier attack 1 2",
-            "produce=scrap_iron:2"
-         }
-      },
-      upgrade_soldier_attack_2 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext ("frisians_building", "upgrading soldier attack from level 2 to level 3"),
-         actions = {
-            "checksoldier=soldier attack 2",
-            "return=failed unless site has sword_double",
-            "return=failed unless site has bread_frisians",
-            "return=failed unless site has beer",
-            "return=failed unless site has smoked_fish,smoked_meat",
-            "animate=working 22800",
-            "checksoldier=soldier attack 2",
-            "consume=sword_double bread_frisians beer smoked_fish,smoked_meat",
-            "train=soldier attack 2 3",
-            "produce=scrap_iron scrap_metal_mixed"
-         }
-      },
-      upgrade_soldier_health_0 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext ("frisians_building", "upgrading soldier health from level 0 to level 1"),
-         actions = {
-            "checksoldier=soldier health 0",
-            "return=failed unless site has bread_frisians,beer",
-            "return=failed unless site has smoked_fish,smoked_meat",
+            "checksoldier=soldier attack 1", -- Fails when aren't any soldier of level 1 attack
+            "return=failed unless site has amazons_bread",
+            "return=failed unless site has fish,meat",
+            "return=failed unless site has chocolate",
+            "return=failed unless site has spear_hardened",
             "animate=working 30000",
-            "checksoldier=soldier health 0",
-            "consume=helmet bread_frisians,beer smoked_fish,smoked_meat",
-            "train=soldier health 0 1"
-         }
-      },
-      upgrade_soldier_defense_0 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = pgettext ("frisians_building", "upgrading soldier defense from level 0 to level 1"),
-         actions = {
-            "checksoldier=soldier defense 0",
-            "return=failed unless site has fur_garment_studded",
-            "return=failed unless site has bread_frisians,beer",
-            "return=failed unless site has smoked_fish,smoked_meat",
-            "animate=working 26400",
-            "checksoldier=soldier defense 0",
-            "consume=fur_garment_studded bread_frisians,beer smoked_fish,smoked_meat",
-            "train=soldier defense 0 1",
-            "produce=fur_garment_old"
+            "checksoldier=soldier attack 1", -- Because the soldier can be expulsed by the player
+            "consume=amazons_bread fish,meat chocolate spear_hardened",
+            "train=soldier attack 1 2"
          }
       },
    },
 
-   soldier_capacity = 10,
-   trainer_patience = 5
+   soldier_capacity = 8,
+   trainer_patience = 3
 }

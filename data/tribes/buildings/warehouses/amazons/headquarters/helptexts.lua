@@ -13,12 +13,12 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("frisians_building", "Accommodation for your people. Also stores your wares and tools.")
+   return pgettext("amazons_building", "Accommodation for your people. Also stores your wares and tools.")
 end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext ("frisians_building", "The headquarters is your main building.")
+   return pgettext ("amazons_building", "The headquarters is your main building.")
 end
 
 function building_helptext_performance()

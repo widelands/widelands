@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("frisians_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools.")
+   return pgettext("amazons_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools.")
 end
 
 function building_helptext_note()

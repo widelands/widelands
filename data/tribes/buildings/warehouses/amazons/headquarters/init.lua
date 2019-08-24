@@ -1,10 +1,10 @@
 dirname = path.dirname (__file__)
 
 tribes:new_warehouse_type {
-   msgctxt = "frisians_building",
-   name = "frisians_headquarters",
+   msgctxt = "amazons_building",
+   name = "amazons_headquarters",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Headquarters"),
+   descname = pgettext ("amazons_building", "Headquarters"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",

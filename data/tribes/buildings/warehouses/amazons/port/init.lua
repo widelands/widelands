@@ -1,30 +1,30 @@
 dirname = path.dirname (__file__)
 
 tribes:new_warehouse_type {
-   msgctxt = "frisians_building",
-   name = "frisians_port",
+   msgctxt = "amazons_building",
+   name = "amazons_port",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Port"),
+   descname = pgettext ("amazons_building", "Port"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "port",
    needs_seafaring = true,
 
    buildcost = {
-      brick = 6,
-      granite = 4,
-      log = 6,
-      cloth = 2,
+      balsa = 3,
+      granite = 3,
+      log = 4,
+      rubber = 3,
       gold = 2,
-      reed = 4
+      rope = 3
    },
    return_on_dismantle = {
-      brick = 3,
-      granite = 2,
-      log = 3,
+      balsa = 2,
+      granite = 1,
+      log = 2,
+      rubber = 1,
       gold = 1,
-      cloth = 1,
-      reed = 2
+      rope = 2
    },
 
    animations = {
