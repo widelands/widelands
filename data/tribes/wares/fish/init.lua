@@ -11,6 +11,7 @@ tribes:new_ware_type {
       frisians = 20,
    },
    preciousness = {
+      amazons = 4,
       atlanteans = 4,
       barbarians = 3,
       frisians = 1,

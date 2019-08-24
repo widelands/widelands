@@ -1,7 +1,7 @@
 function ware_helptext(tribe)
    local helptext = {
-      -- TRANSLATORS: Helptext for a ware: Mead
-      amazons = pgettext("amazons_ware", "Chocolate is produced by chocolate breweries."),
+      -- TRANSLATORS: Helptext for a ware: Chocolate drink
+      amazons = pgettext("amazons_ware", "Chocolate is produced by chocolate breweries and used to train soldiers."),
    }
    local result = ""
    if tribe then

@@ -8,11 +8,13 @@ tribes:new_ware_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
+      amazons = 20,
       barbarians = 20,
       frisians = 20,
       empire = 20
    },
    preciousness = {
+      amazons = 5,
       barbarians = 5,
       frisians = 3,
       empire = 4

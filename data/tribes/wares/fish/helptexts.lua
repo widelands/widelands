@@ -1,6 +1,8 @@
 function ware_helptext(tribe)
    local helptext = {
       -- TRANSLATORS: Helptext for a ware: Fish
+      amazons = pgettext("amazons_ware", "Fish is one of the two major food resources of the Amazons. It is used by the food preserver to prepare rations for the miners. It is also consumed at the training sites (training glade and warriors gathering)."),
+      -- TRANSLATORS: Helptext for a ware: Fish
       atlanteans = pgettext("atlanteans_ware", "Fish is one of the biggest food resources of the Atlanteans. It has to be smoked in a smokery before being delivered to mines, training sites and scouts."),
       -- TRANSLATORS: Helptext for a ware: Fish
       barbarians = pgettext("barbarians_ware", "Besides pitta bread and meat, fish is also a foodstuff for the Barbarians. It is used in the taverns, inns and big inns and at the training sites (training camp and battle arena)."),

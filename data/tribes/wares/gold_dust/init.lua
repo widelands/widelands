@@ -2,30 +2,23 @@ dirname = path.dirname(__file__)
 
 tribes:new_ware_type {
    msgctxt = "ware",
-   name = "gold",
+   name = "gold_dust",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = pgettext("ware", "Gold"),
+   descname = pgettext("ware", "Gold Dust"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-      amazons = 20,
-      atlanteans = 20,
-      barbarians = 20,
-      frisians = 20,
-      empire = 20
+      amazons = 15,
    },
+
    preciousness = {
-      atlanteans = 2,
-      atlanteans = 2,
-      barbarians = 2,
-      frisians = 6,
-      empire = 2
+      amazons = 2,
    },
 
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle.png"),
-         hotspot = { 4, 10 },
+         hotspot = { 4, 4 },
       },
    }
 }
