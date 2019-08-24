@@ -1,23 +1,23 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_reed_farm",
+   msgctxt = "amazons_building",
+   name = "amazons_cocoa_farm",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Reed Farm"),
+   descname = pgettext ("amazons_building", "Cocoa Farm"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "small",
+   size = "big",
 
    buildcost = {
-      brick = 2,
-      --granite = 1,
-      log = 1,
-      reed = 1
+      log = 4,
+      rubber = 2,
+      granite = 2,
    },
    return_on_dismantle = {
-      brick = 1,
-      log = 1
+      log = 2,
+      rubber = 1,
+      granite = 1,
    },
 
    animations = {
@@ -40,20 +40,18 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_reed_farmer = 1
+      amazons_cocoa_farmer = 1
    },
 
    outputs = {
-      "reed"
+      "cocoa_beans"
    },
 
    indicate_workarea_overlaps = {
-      frisians_clay_pit = false,
-      frisians_berry_farm = false,
-      frisians_reed_farm = false,
-      frisians_farm = false,
-      frisians_foresters_house = false,
-      frisians_beekeepers_house = true,
+      amazons_junglemaster_hut = false,
+      amazons_rare_tree_plantation = false,
+      amazons_cocoa_farm = false,
+      amazons_cassava_root_plantation = false,
    },
 
    programs = {
@@ -66,20 +64,20 @@ tribes:new_productionsite_type {
             "return=no_stats"
          }
       },
-      plant_reed = {
+      plant_cocoa = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
-         descname = _"planting reed",
+         descname = _"planting cocoa",
          actions = {
-            "callworker=plantreed",
-            "sleep=18000"
+            "callworker=plant",
+            "sleep=10000"
          }
       },
-      harvest_reed = {
+      harvest_cocoa = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
-         descname = _"harvesting reed",
+         descname = _"harvesting cocoa",
          actions = {
-            "callworker=harvestreed",
-            "sleep=5000"
+            "callworker=harvest",
+            "sleep=4000"
          }
       },
    },
@@ -87,7 +85,7 @@ tribes:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Fields",
       heading = _"Out of Fields",
-      message = pgettext("frisians_building", "The reed farmer working at this reed farm has no cleared soil to plant his seeds."),
+      message = pgettext("amazons_building", "The cocoa farmer working at this cocoa farm has no cleared soil to plant his seeds."),
       productivity_threshold = 20
    },
 }

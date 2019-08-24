@@ -3,22 +3,22 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "Who says a beast of burden cannot be useful for other things than transport?")
+   return no_lore_text_yet()
 end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "The reindeer breeder who first proposed using reindeer fur for clothing")
+   return no_lore_author_text_yet()
 end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("frisians_building", "Breeds strong reindeer for adding them to the transportation system. Also keeps them for their fur, which is turned into armor and cloth.")
+   return pgettext("amazons_building", "Breeds tapir for adding them to the transportation system.")
 end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext ("frisians_building", "If the supply is steady, the reindeer farm produces one meat after producing three pieces of fur.")
+   return pgettext ("Tapirs help to prevent trafic jams on highly used roads.")
 end
 
 function building_helptext_performance()

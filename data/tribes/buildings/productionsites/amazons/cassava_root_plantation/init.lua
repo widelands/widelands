@@ -1,25 +1,23 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_farm",
+   msgctxt = "amazons_building",
+   name = "amazons_cassava_root_plantation",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Farm"),
+   descname = pgettext ("amazons_building", "Cassava Root Plantation"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
    buildcost = {
-      brick = 3,
-      granite = 1,
-      log = 2,
-      reed = 3
+      log = 4,
+      rope = 2,
+      granite = 2,
    },
    return_on_dismantle = {
-      brick = 2,
+      log = 2,
+      rope = 1,
       granite = 1,
-      log = 1,
-      reed = 1
    },
 
    animations = {
@@ -46,24 +44,21 @@ tribes:new_productionsite_type {
    aihints = {
       space_consumer = true,
       prohibited_till = 220,
-      supports_production_of = { "honey" }
    },
 
    working_positions = {
-      frisians_farmer = 1
+      amazons_cassava_farmer = 1
    },
 
    outputs = {
-      "barley"
+      "cassava_root"
    },
 
    indicate_workarea_overlaps = {
-      frisians_clay_pit = false,
-      frisians_berry_farm = false,
-      frisians_reed_farm = false,
-      frisians_farm = false,
-      frisians_foresters_house = false,
-      frisians_beekeepers_house = true,
+      amazons_junglemaster_hut = false,
+      amazons_rare_tree_plantation = false,
+      amazons_cocoa_farm = false,
+      amazons_cassava_root_plantation = false,
    },
 
    programs = {
@@ -71,27 +66,25 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=plant_barley",
-            "call=harvest_barley",
+            "call=plant_cassava",
+            "call=harvest_cassava",
             "return=no_stats"
          }
       },
       plant_barley = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
-         descname = _"planting barley",
+         descname = _"planting cassava root",
          actions = {
             "callworker=plant",
-            "sleep=18000"
+            "sleep=10000"
          }
       },
       harvest_barley = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
-         descname = _"harvesting barley",
+         descname = _"harvesting cassava root",
          actions = {
             "callworker=harvest",
-            "animate=working 40000",
-            "sleep=8000",
-            "produce=barley" --produces 2 barley per field
+            "sleep=4000",
          }
       },
    },
@@ -99,7 +92,7 @@ tribes:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Fields",
       heading = _"Out of Fields",
-      message = pgettext ("frisians_building", "The farmer working at this farm has no cleared soil to plant his seeds."),
+      message = pgettext ("amazons_building", "The farmer working at this cassava root plantation has no cleared soil to plant his seeds."),
       productivity_threshold = 30
    },
 }

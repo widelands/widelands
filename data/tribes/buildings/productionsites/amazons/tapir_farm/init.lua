@@ -1,25 +1,21 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_reindeer_farm",
+   msgctxt = "amazons_building",
+   name = "amazons_tapir_farm",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Reindeer Farm"),
+   descname = pgettext ("amazons_building", "Tapir Farm"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
    buildcost = {
-      brick = 2,
-      granite = 1,
-      log = 3,
-      reed = 2
+      log = 5,
+      rope = 2,
    },
    return_on_dismantle = {
-      brick = 1,
-      granite = 1,
-      log = 1,
-      reed = 1
+      log = 3
+      rope = 1,
    },
 
    animations = {
@@ -44,17 +40,15 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_reindeer_breeder = 1
+      amazons_tapir_breeder = 1
    },
 
    inputs = {
-      { name = "barley", amount = 8 },
+      { name = "cassava_root", amount = 8 },
       { name = "water", amount = 8 }
    },
    outputs = {
-      "frisians_reindeer",
-      "fur",
-      "meat",
+      "amazons_tapir",
    },
 
    programs = {
@@ -62,46 +56,19 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=recruit_deer",
-            "call=make_fur",
-            "call=recruit_deer",
-            "call=make_fur",
-            "call=recruit_deer",
-            "call=make_fur_meat",
+            "call=recruit_tapir",
             "return=no_stats",
          }
       },
-      recruit_deer = {
+      recruit_tapir = {
          -- TRANSLATORS: Completed/Skipped/Did not start rearing reindeer because ...
-         descname = pgettext("frisians_building", "rearing reindeer"),
+         descname = pgettext("amazons_building", "rearing reindeer"),
          actions = {
-            "return=skipped unless economy needs frisians_reindeer",
-            "consume=barley water",
+            "return=skipped unless economy needs amazons_tapir",
+            "consume=cassava_root water",
             "sleep=15000",
             "animate=working 15000",
-            "recruit=frisians_reindeer"
-         }
-      },
-      make_fur = {
-         -- TRANSLATORS: Completed/Skipped/Did not start producing fur because ...
-         descname = pgettext("frisians_building", "producing fur"),
-         actions = {
-            "return=skipped unless economy needs fur",
-            "consume=barley water",
-            "sleep=15000",
-            "animate=working 20000",
-            "produce=fur"
-         }
-      },
-      make_fur_meat = {
-         -- TRANSLATORS: Completed/Skipped/Did not start producing fur because ...
-         descname = pgettext("frisians_building", "producing fur"),
-         actions = {
-            "return=skipped unless economy needs fur",
-            "consume=barley water",
-            "sleep=15000",
-            "animate=working 20000",
-            "produce=fur meat"
+            "recruit=amazons_tapir"
          }
       },
    },

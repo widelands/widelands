@@ -1,26 +1,26 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_shipyard",
+   msgctxt = "amazons_building",
+   name = "amazons_shipyard",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Shipyard"),
+   descname = pgettext ("amazons_building", "Shipyard"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
    needs_seafaring = true,
 
    buildcost = {
-      brick = 3,
-      granite = 1,
-      log = 3,
-      reed = 2,
-      cloth = 1
+      balsa = 5,
+      log = 5,
+      rubber = 3,
+      rope = 3,
    },
    return_on_dismantle = {
-      brick = 2,
-      log = 2,
-      reed = 1
+      balsa = 1,
+      log = 1,
+      rubber = 1,
+      rope = 1,
    },
 
    animations = {
@@ -42,17 +42,18 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      frisians_shipyard = false,
+      amazons_shipyard = false,
    },
 
    working_positions = {
-      frisians_shipwright = 1
+      amazons_shipwright = 1
    },
 
    inputs = {
-      { name = "log", amount = 10 },
-      { name = "cloth", amount = 6 },
-      { name = "clay", amount = 3 }
+      { name = "log", amount = 4 },
+      { name = "balsa", amount = 4 },
+      { name = "rubber", amount = 7 },
+      { name = "ropes", amount = 4 }
    },
 
    programs = {
@@ -70,7 +71,7 @@ tribes:new_productionsite_type {
          descname = _"constructing a ship",
          actions = {
             "checkmap=seafaring",
-            "construct=frisians_shipconstruction buildship 6",
+            "construct=amazons_shipconstruction buildship 6",
             "sleep=20000",
          }
       },
