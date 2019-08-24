@@ -21,7 +21,8 @@ tribes:new_worker_type {
    buildcost = {
       amazons_carrier = 1,
       spear = 1,
-      tunic = 1
+      tunic = 1,
+      ration = 1
    },
 
    ware_hotspot = {0, 20},

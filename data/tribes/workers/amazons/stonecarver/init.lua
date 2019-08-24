@@ -20,7 +20,8 @@ tribes:new_worker_type {
 
    buildcost = {
       amazons_carrier = 1,
-      hammer = 1
+      hammer = 1,
+      chisel = 1
    },
 
    ware_hotspot = {0, 20},
