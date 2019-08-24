@@ -1,21 +1,23 @@
 dirname = path.dirname (__file__)
 
 tribes:new_militarysite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_wooden_tower_high",
+   msgctxt = "amazons_building",
+   name = "amazons_observation_tower",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "High Wooden Tower"),
+   descname = pgettext ("amazons_building", "Observation Tower"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "small",
-   vision_range = 17,
+   size = "medium",
+   vision_range = 19,
 
    enhancement_cost = {
-      log = 2,
-      reed = 1
+      ironwood = 1,
+      rope = 1,
+      balsa = 2
    },
    return_on_dismantle_on_enhanced = {
-      log = 1,
+      ironwood = 1,
+      balsa = 1
    },
 
    animations = {
@@ -34,16 +36,16 @@ tribes:new_militarysite_type {
       expansion = true,
    },
 
-   max_soldiers = 2,
-   heal_per_second = 70,
-   conquers = 6,
+   max_soldiers = 5,
+   heal_per_second = 150,
+   conquers = 8,
    prefer_heroes = false,
 
    messages = {
-      occupied = _"Your soldiers have occupied your high wooden tower.",
-      aggressor = _"Your high wooden tower discovered an aggressor.",
-      attack = _"Your high wooden tower is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the high wooden tower.",
-      defeated_you = _"Your soldiers defeated the enemy at the high wooden tower."
+      occupied = _"Your soldiers have occupied your observation tower.",
+      aggressor = _"Your observation tower discovered an aggressor.",
+      attack = _"Your observation tower is under attack.",
+      defeated_enemy = _"The enemy defeated your soldiers at the observation tower.",
+      defeated_you = _"Your soldiers defeated the enemy at the observation tower."
    },
 }

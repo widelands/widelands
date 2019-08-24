@@ -1,26 +1,22 @@
 dirname = path.dirname (__file__)
 
 tribes:new_militarysite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_tower",
+   msgctxt = "amazons_building",
+   name = "amazons_warriors_dwelling",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Tower"),
+   descname = pgettext ("amazons_building", "Warriors Dwelling"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "big",
-   vision_range = 21,
+   size = "medium",
+   vision_range = 11,
 
    buildcost = {
-      brick = 6,
-      granite = 2,
-      log = 4,
-      reed = 3
+      ironwood = 2,
+      granite = 3,
    },
    return_on_dismantle = {
-      brick = 3,
-      granite = 1,
-      log = 2,
-      reed = 1
+      ironwood = 1,
+      granite = 2,
 
    },
    animations = {
@@ -41,16 +37,16 @@ tribes:new_militarysite_type {
       prohibited_till = 500
    },
 
-   max_soldiers = 7,
-   heal_per_second = 170,
-   conquers = 10,
+   max_soldiers = 5,
+   heal_per_second = 150,
+   conquers = 8
    prefer_heroes = true,
 
    messages = {
-      occupied = _"Your soldiers have occupied your tower.",
-      aggressor = _"Your tower discovered an aggressor.",
-      attack = _"Your tower is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the tower.",
-      defeated_you = _"Your soldiers defeated the enemy at the tower."
+      occupied = _"Your soldiers have occupied your warriors delling.",
+      aggressor = _"Your warriors dwelling discovered an aggressor.",
+      attack = _"Your warriors dwelling is under attack.",
+      defeated_enemy = _"The enemy defeated your soldiers at the warriors dwelling.",
+      defeated_you = _"Your soldiers defeated the enemy at the warriors dwelling."
    },
 }

@@ -1,25 +1,27 @@
 dirname = path.dirname (__file__)
 
 tribes:new_militarysite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_fortress",
+   msgctxt = "amazons_building",
+   name = "amazons_fortress",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Fortress"),
+   descname = pgettext ("amazons_building", "Fortress"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
+   vision_range = 15,
+   enhancement = "amazons_fortification",
 
    buildcost = {
-      brick = 10,
-      granite = 4,
-      log = 3,
-      reed = 5
+      ironwood = 6,
+      granite = 6,
+      log = 2,
+      rubber = 2
    },
    return_on_dismantle = {
-      brick = 5,
-      granite = 2,
-      log = 2,
-      reed = 2
+      ironwood = 3,
+      granite = 3,
+      log = 1,
+      rubber = 1
    },
 
    animations = {
@@ -41,9 +43,9 @@ tribes:new_militarysite_type {
       prohibited_till = 1400
    },
 
-   max_soldiers = 12,
-   heal_per_second = 220,
-   conquers = 12,
+   max_soldiers = 8,
+   heal_per_second = 170,
+   conquers = 11,
    prefer_heroes = true,
 
    messages = {

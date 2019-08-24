@@ -1,24 +1,24 @@
 dirname = path.dirname (__file__)
 
 tribes:new_militarysite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_outpost",
+   msgctxt = "amazons_building",
+   name = "amazons_fortification",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Outpost"),
+   descname = pgettext ("amazons_building", "Fortification"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "medium",
+   size = "big",
+   vision_range = 16,
 
-   buildcost = {
-      brick = 5,
-      granite = 1,
-      log = 1,
-      reed = 2
+   enhancement_cost = {
+      ironwood = 4,
+      granite = 4,
+      rope = 2
    },
-   return_on_dismantle = {
-      brick = 2,
-      log = 1,
-      reed = 1
+   return_on_dismantle_on_enhanced = {
+      ironwood = 2,
+      granite = 2,
+
    },
 
    animations = {
@@ -39,16 +39,16 @@ tribes:new_militarysite_type {
       mountain_conqueror = true
    },
 
-   max_soldiers = 6,
-   heal_per_second = 160,
-   conquers = 9,
+   max_soldiers = 12,
+   heal_per_second = 220,
+   conquers = 12
    prefer_heroes = true,
 
    messages = {
-      occupied = _"Your soldiers have occupied your outpost.",
-      aggressor = _"Your outpost discovered an aggressor.",
-      attack = _"Your outpost is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the outpost.",
-      defeated_you = _"Your soldiers defeated the enemy at the outpost."
+      occupied = _"Your soldiers have occupied your fortification.",
+      aggressor = _"Your fortification discovered an aggressor.",
+      attack = _"Your fortification is under attack.",
+      defeated_enemy = _"The enemy defeated your soldiers at the fortification.",
+      defeated_you = _"Your soldiers defeated the enemy at the fortification."
    },
 }

@@ -1,5 +1,5 @@
 -- =======================================================================
---                Frisians Village Starting Conditions
+--                amazons Village Starting Conditions
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
@@ -20,95 +20,90 @@ return {
       plr:allow_workers("all")
    end
 
-   hq = prefilled_buildings(plr, { "frisians_headquarters", sf.x, sf.y,
+   hq = prefilled_buildings(plr, { "amazons_headquarters", sf.x, sf.y,
       wares = {
-         log = 60,
-         granite = 60,
-         reed = 50,
-         brick = 50,
-         clay = 20,
+         log = 40,
+         granite = 50,
          water = 10,
          fish = 10,
          meat = 10,
-         fruit = 10,
-         barley = 5,
-         ration = 10,
-         honey = 10,
-         smoked_meat = 5,
-         smoked_fish = 5,
-         mead = 5,
-         meal = 2,
+         cassava_root = 5,
+         ration = 20,
          coal = 20,
-         iron = 5,
-         gold = 2,
-         iron_ore = 10,
-         gold_ore = 2,
-         bread_frisians = 10,
-         honey_bread = 5,
-         beer = 5,
-         cloth = 5,
-         fur = 10,
-         fur_garment = 5,
-         sword_short = 5,
+         gold = 4,
+         gold_dust = 5,
+         bread_amazons = 15,
          hammer = 5,
-         fire_tongs = 2,
-         bread_paddle = 2,
          kitchen_tools = 2,
          felling_ax = 3,
-         needles = 2,
-         basket = 2,
+         needles = 1,
          pick = 5,
          shovel = 5,
-         scythe = 3,
          hunting_spear = 2,
          fishing_net = 3,
+         bread_amazons= 20,
+         cocoa_beans = 5,
+         chocolate= 15,
+         tunic= 15,
+         vest_padded= 2,
+         protector_padded= 1,
+         helmet_wooden= 1,
+         boots_sturdy= 2,
+         boots_swift= 1,
+         boots_hero= 1,
+         spear_wooden= 15,
+         spear_stone_tipped= 1,
+         spear_hardened= 1,
+         armor_wooden= 2,
+         warriors_coat= 1,
+         stonebowl= 1,
+         chisel= 2,
+         rope= 20,
       },
       workers = {
-         frisians_blacksmith = 3,
-         frisians_baker = 1,
-         frisians_brewer = 1,
-         frisians_builder = 10,
-         frisians_charcoal_burner = 1,
-         frisians_claydigger = 2,
-         frisians_brickmaker = 2,
-         frisians_carrier = 40,
-         frisians_reed_farmer = 2,
-         frisians_berry_farmer = 1,
-         frisians_farmer = 1,
-         frisians_geologist = 4,
-         frisians_woodcutter = 3,
-         frisians_beekeeper = 1,
-         frisians_miner = 4,
-         frisians_forester = 2,
-         frisians_stonemason = 2,
-         frisians_reindeer = 5,
+         amazons_cook = 3,
+         amazons_builder = 10,
+         amazons_charcoal_burner = 1,
+         amazons_gold_digger = 1,
+         amazons_gold_smelter = 1,
+         amazons_carrier = 40,
+         amazons_cassava_farmer = 1,
+         amazons_cocoa_farmer = 1,
+         amazons_wilderness_keeper = 1,
+         amazons_stonecarver = 2,
+         amazons_geologist = 4,
+         amazons_woodcutter = 3,
+         amazons_liana_cutter = 1,
+         amazons_jungle_preserver = 2,
+         amazons_stonecutter = 2,
+         amazons_trainer = 3,
+         amazons_dressmaker = 1,
+         amazons_tapir= 5,
       },
       soldiers = {
          [{0,0,0,0}] = 5,
       }
    })
 
-      place_building_in_region(plr, "frisians_blacksmithy", sf:region(10), {
+      place_building_in_region(player, "amazons_stonecarvery", sf:region(11), {
          inputs = {
-            iron = 7,
+            ironwood = 4,
+            log = 4,
+            granite = 4
+            rope = 4,
+         }
+      })
+
+      place_building_in_region(plr, "amazons_charcoal_kiln", sf:region(10), {
+         inputs = {
             log = 7,
-            reed = 7
          },
       })
 
-      place_building_in_region(plr, "frisians_charcoal_kiln", sf:region(10), {
+      place_building_in_region(player, "amazons_rope_weaver_booth", sf:region(11), {
          inputs = {
-            log = 7,
-            clay = 3
-         },
-      })
-
-      place_building_in_region(plr, "frisians_brick_kiln", sf:region(10), {
-         inputs = {
-            clay = 2,
-            granite = 2,
-            coal = 1
-         },
+            liana = 7,
+         }
       })
 
 end

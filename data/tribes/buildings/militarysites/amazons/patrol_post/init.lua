@@ -1,23 +1,21 @@
 dirname = path.dirname (__file__)
 
 tribes:new_militarysite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_sentinel",
+   msgctxt = "amazons_building",
+   name = "amazons_patrol_post",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Sentinel"),
+   descname = pgettext ("amazons_building", "Patrol Post"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
-   vision_range = 8,
 
    buildcost = {
-      brick = 1,
+      granite = 1,
       log = 1,
-      reed = 1
+      rope = 1
    },
    return_on_dismantle = {
-      brick = 1,
-      log = 1
+      granite = 1,
    },
 
    animations = {
@@ -43,10 +41,10 @@ tribes:new_militarysite_type {
    prefer_heroes = false,
 
    messages = {
-      occupied = _"Your soldiers have occupied your sentinel.",
-      aggressor = _"Your sentinel discovered an aggressor.",
-      attack = _"Your sentinel is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the sentinel.",
-      defeated_you = _"Your soldiers defeated the enemy at the sentinel."
+      occupied = _"Your soldiers have occupied your patrol post.",
+      aggressor = _"Your patrol post discovered an aggressor.",
+      attack = _"Your patrol post is under attack.",
+      defeated_enemy = _"The enemy defeated your soldiers at the patrol post.",
+      defeated_you = _"Your soldiers defeated the enemy at the patrol post."
    },
 }
