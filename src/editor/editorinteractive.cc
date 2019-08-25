@@ -1102,7 +1102,9 @@ EditorInteractive::Tools* EditorInteractive::tools() {
 }
 
 bool EditorInteractive::save_as_scenario() const {
-	return functions_.find(kMainFunction) != functions_.end();
+	// NOCOM
+	// return functions_.find(kMainFunction) != functions_.end();
+	return true;
 }
 
 void EditorInteractive::write_lua(FileWrite& fw) const {
