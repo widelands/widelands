@@ -12,7 +12,7 @@ tribes:new_ware_type {
       empire = 30
    },
    preciousness = {
-      amazons = 1,
+      amazons = 3,
       empire = 1
    },
 

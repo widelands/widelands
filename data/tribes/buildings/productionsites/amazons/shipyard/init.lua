@@ -11,10 +11,10 @@ tribes:new_productionsite_type {
    needs_seafaring = true,
 
    buildcost = {
-      balsa = 5,
-      log = 5,
+      balsa = 2,
+      log = 2,
       rubber = 3,
-      rope = 3,
+      rope = 2,
    },
    return_on_dismantle = {
       balsa = 1,
@@ -50,10 +50,10 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "log", amount = 4 },
-      { name = "balsa", amount = 4 },
-      { name = "rubber", amount = 7 },
-      { name = "ropes", amount = 4 }
+      { name = "log", amount = 5 },
+      { name = "balsa", amount = 5 },
+      { name = "rubber", amount = 3 },
+      { name = "ropes", amount = 3 }
    },
 
    programs = {

@@ -1,24 +1,23 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_drinking_hall",
+   msgctxt = "amazons_building",
+   name = "amazons_cassava_root_cooker",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Drinking Hall"),
+   descname = pgettext ("amazons_building", "Cassava Root Cooker"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
    enhancement_cost = {
-      brick = 2,
-      granite = 2,
-      log = 1,
-      reed = 1
+      log = 2,
+      granite = 4,
+      rope = 2,
    },
    return_on_dismantle_on_enhanced = {
-      brick = 1,
-      granite = 1,
-      reed = 1
+      log = 1,
+      granite = 2,
+      rope = 1,
    },
 
    animations = {
@@ -43,19 +42,15 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_landlady = 1
+      amazons_cook = 1
    },
 
    inputs = {
-      { name = "fruit", amount = 4 },
-      { name = "honey_bread", amount = 4 },
-      { name = "beer", amount = 4 },
-      { name = "smoked_fish", amount = 4 },
-      { name = "smoked_meat", amount = 4 },
+      { name = "cassava_root", amount = 4 },
+      { name = "water", amount = 8 },
    },
    outputs = {
-      "ration",
-      "meal"
+      "amazons_bread",
    },
 
    programs = {
@@ -63,34 +58,21 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=produce_ration",
-            "call=produce_meal",
+            "call=produce_bread",
             "return=no_stats"
          }
       },
-      produce_ration = {
+      produce_bread = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-         descname = _"preparing a ration",
+         descname = _"baking bread",
          actions = {
             -- time total: 33
-            "return=skipped unless economy needs ration",
-            "consume=fruit,smoked_fish,smoked_meat",
+            "return=skipped unless economy needs amazons bread",
+            "consume=cassava_root water:2",
             "sleep=5000",
             "animate=working 18000",
             "sleep=10000",
-            "produce=ration"
-         }
-      },
-      produce_meal = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
-         descname = _"preparing a meal",
-         actions = {
-            --time total: 40
-            "return=skipped unless economy needs meal",
-            "consume=beer honey_bread smoked_fish,smoked_meat",
-            "animate=working 30000",
-            "sleep=10000",
-            "produce=meal"
+            "produce=amazons bread"
          }
       },
    },

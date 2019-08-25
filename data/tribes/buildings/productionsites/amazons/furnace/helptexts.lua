@@ -3,17 +3,17 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "Miners get ores from the depths of the hills; but without our work, their labour is in vain.")
+   return no_lore_text_yet()
 end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "Slogan of the Smelters’ Guild")
+   return no_lore_author_text_yet()
 end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("building", "Smelts iron ore and gold ore into iron and gold ingots using coal.")
+   return pgettext("building", "Smelts gold dust gold ingots using charcoal.")
 end
 
 function building_helptext_note()

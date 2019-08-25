@@ -1,24 +1,25 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_sewing_room",
+   msgctxt = "amazons_building",
+   name = "amazons_dressmaker",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Sewing Room"),
+   descname = pgettext ("amazons_building", "Dressmaker"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "frisians_tailors_shop",
+   enhancement = "amazons_tailors_shop",
 
    buildcost = {
-      brick = 3,
-      granite = 1,
-      log = 1,
-      reed = 1
+      balsa = 3,
+      log = 3,
+      rubber = 3,
+      rope = 1,
    },
    return_on_dismantle = {
-      brick = 2,
-      log = 1,
+      balsa = 1,
+      log = 2,
+      rubber = 1,
    },
 
    animations = {
@@ -43,27 +44,142 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_seamstress = 1
+      amazons_dressmaker= 1
    },
 
    inputs = {
-      { name = "fur", amount = 8 },
+      { name = "ironwood", amount = 4 },
+      { name = "balsa", amount = 4 },
+      { name = "rubber", amount = 8 },
+      { name = "rope", amount = 2 },
+      { name = "gold", amount = 2 },
    },
    outputs = {
-      "fur_garment"
+      "tunic",
+      "armor_wooden",
+      "helmet_wooden",
+      "warriors_coat",
+      "boots_sturdy",
+      "boots_swift",
+      "boots_hero",
+      "vest_padded",
+      "protector_padded",
    },
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start sewing fur garment because ...
-         descname = _"sewing fur garment",
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
          actions = {
-            -- time total: 40 + 3.6
-            "return=skipped unless economy needs fur_garment or workers need experience",
-            "consume=fur:2",
-            "sleep=20000",
-            "animate=working 20000",
-            "produce=fur_garment"
+            "call=produce_tunic",
+            "call=produce_helmet_wooden",
+            "call=produce_armor_wooden",
+            "call=produce_warriors_coat",
+            "call=produce_boots_sturdy",
+            "call=produce_vest_padded",
+            "call=produce_boots_swift",
+            "call=produce_boots_hero",
+            "call=produce_protector_padded",
+            "return=no_stats",
+         },
+      },
+      produce_tunic = {
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because ...
+         descname = _"sewing a tunic",
+         actions = {
+            "return=skipped unless economy needs tunic",
+            "consume=rubber rope",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=tunic"
+         },
+      },
+      produce_armor_wooden = {
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
+         descname = _"making a light wooden armor",
+         actions = {
+            "return=skipped unless economy needs armor_wooden",
+            "consume=balsa:2 rope",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=armor_wooden"
+         },
+      },
+      produce_helmet_wooden = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+         descname = _"making a wooden helmet",
+         actions = {
+            "return=skipped unless economy needs helmet_wooden",
+            "consume=ironwood rubber",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=helmet_wooden"
+         },
+      },
+      produce_warriors_coat = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+         descname = _"sewing a warriors coat",
+         actions = {
+            "return=skipped unless economy needs warriors_coat",
+            "consume=ironwood balsa:2 rubber gold",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=warriors_coat"
+         },
+      },
+      produce_boots_sturdy = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+         descname = _"making sturdy boots",
+         actions = {
+            "return=skipped unless economy needs boots_sturdy",
+            "consume=rubber balsa",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=boots_sturdy"
+         },
+      },
+      produce_boots_swift = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
+         descname = _"making swift boots",
+         actions = {
+            "return=skipped unless economy needs boots_swift",
+            "consume=rubber:3",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=boots_swift"
+         },
+      },
+      produce_boots_hero = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
+         descname = _"making heros boots",
+         actions = {
+            "return=skipped unless economy needs boots_hero",
+            "consume=rubber:3 gold",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=boots_hero"
+         },
+      },
+      produce_vest_padded = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
+         descname = _"making a padded vest",
+         actions = {
+            "return=skipped unless economy needs vest_padded",
+            "consume=rubber:2 rope:2",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=vest_padded"
+         },
+      },
+      produce_protector_padded = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
+         descname = _"making a padded protector",
+         actions = {
+            "return=skipped unless economy needs protector_padded",
+            "consume=rubber:2 rope:2 balsa gold",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=protector_padded"
          },
       },
    },

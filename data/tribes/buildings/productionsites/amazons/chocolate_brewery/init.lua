@@ -1,24 +1,23 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_brewery",
+   msgctxt = "amazons_building",
+   name = "amazons_chocolate_brewery",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Brewery"),
+   descname = pgettext ("amazons_building", "Chocolate Brewery"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "frisians_mead_brewery",
 
    buildcost = {
-      brick = 3,
+      balsa = 1,
       log = 2,
-      reed = 2
+      rubber = 2,
+      granite = 1,
    },
    return_on_dismantle = {
-      brick = 2,
-      log = 1,
-      reed = 1
+      log = 2,
+      granite = 1,
    },
 
    animations = {
@@ -44,27 +43,28 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_brewer = 1
+      amazons_cook = 1
    },
 
    inputs = {
-      { name = "barley", amount = 7 },
-      { name = "water", amount = 7 },
+      { name = "cocoa_beans", amount = 4 },
+      { name = "water", amount = 8 },
    },
    outputs = {
-      "beer"
+      "chocolate"
    },
 
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
-         descname = _"brewing beer",
+         descname = _"brewing chocolate",
          actions = {
-            "return=skipped unless economy needs beer or workers need experience",
-            "consume=water barley",
+            "return=skipped unless economy needs chocolate or workers need experience",
+            "consume=water:2 cocoa_beans",
             "sleep=30000",
+            "playsound=sound/empire/beerbubble 180",
             "animate=working 30000",
-            "produce=beer"
+            "produce=chocolate"
          },
       },
    },

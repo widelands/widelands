@@ -1,24 +1,25 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_brick_kiln",
+   msgctxt = "amazons_building",
+   name = "amazons_stonecarvery",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Brick Kiln"),
+   descname = pgettext ("amazons_building", "Stonecarvery"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {
-      brick = 3,
-      granite = 1,
-      log = 1,
-      reed = 2
+      balsa = 2,
+      ironwood = 2,
+      rubber = 2,
+      granite = 2,
    },
    return_on_dismantle = {
-      brick = 2,
+      balsa = 1,
+      ironwood = 1,
+      rubber = 1,
       granite = 1,
-      reed = 1
    },
 
    animations = {
@@ -45,28 +46,186 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_brickmaker = 1
+      amazons_stonecarver = 1
    },
 
    inputs = {
-      { name = "granite", amount = 3 },
-      { name = "clay", amount = 6 },
-      { name = "coal", amount = 3 },
+      { name = "granite", amount = 7 },
+      { name = "log", amount = 5 },
+      { name = "ironwood", amount = 3 },
    },
+
    outputs = {
-      "brick"
+      "shovel",
+      "felling_ax",
+      "pick",
+      "machete",
+      "spear_wooden",
+      "kitchen_tools",
+      "hammer",
+      "chisel",
+      "needles",
+      "stone_bowl",
+      "spear_stone_tipped",
+      "spear_hardened",
    },
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start burning bricks because ...
-         descname = _"burning bricks",
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
          actions = {
-            "return=skipped unless economy needs brick",
-            "consume=granite clay:3 coal",
-            "sleep=30000",
-            "animate=working 50000",
-            "produce=brick:3"
+            "call=produce_shovel",
+            "call=produce_spear_wooden",
+            "call=produce_felling_ax",
+            "call=produce_spear_granite_tipped",
+            "call=produce_pick",
+            "call=produce_spear_hardened",
+            "call=produce_machete",
+            "call=produce_spear_wooden",
+            "call=produce_kitchen_tools",
+            "call=produce_spear_granite_tipped",
+            "call=produce_hammer",
+            "call=produce_spear_hardened",
+            "call=produce_chisel",
+            "call=produce_spear_wooden",
+            "call=produce_needles",
+            "call=produce_spear_stone_tipped",
+            "call=produce_stone_bowl",
+            "call=produce_spear_hardened",
+            "return=no_stats",
+         },
+      },
+      produce_shovel = {
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because ...
+         descname = _"making a shovel",
+         actions = {
+            "return=skipped unless economy needs shovel",
+            "consume=ironwood",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=shovel"
+         },
+      },
+      produce_felling_ax = {
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
+         descname = _"making a felling axe",
+         actions = {
+            "return=skipped unless economy needs felling_ax",
+            "consume=log granite",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=felling_ax"
+         },
+      },
+      produce_pick = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+         descname = _"making a pick",
+         actions = {
+            "return=skipped unless economy needs pick",
+            "consume=log granite",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=pick"
+         },
+      },
+      produce_machete = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+         descname = _"making a machete",
+         actions = {
+            "return=skipped unless economy needs machete",
+            "consume=log granite",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=machete"
+         },
+      },
+      produce_kitchen_tools = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+         descname = _"making kitchen_tools",
+         actions = {
+            "return=skipped unless economy needs kitchen_tools",
+            "consume=log granite",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=kitchen_tools"
+         },
+      },
+      produce_hammer = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
+         descname = _"making a hammer",
+         actions = {
+            "return=skipped unless economy needs hammer",
+            "consume=log granite",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=hammer"
+         },
+      },
+      produce_chisel = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
+         descname = _"making a chisel",
+         actions = {
+            "return=skipped unless economy needs chisel",
+            "consume=rubbergranite:3 gold",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=chisel"
+         },
+      },
+      produce_needles = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
+         descname = _"making needles",
+         actions = {
+            "return=skipped unless economy needs needles",
+            "consume=granite",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=needles"
+         },
+      },
+      produce_stone_bowl = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
+         descname = _"making a stone bowl",
+         actions = {
+            "return=skipped unless economy needs stone_bowl",
+            "consume=granite",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=stone_bowl"
+         },
+      },
+      produce_spear_wooden = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
+         descname = _"making a wooden spear",
+         actions = {
+            "return=skipped unless economy needs spear_granite_tipped",
+            "consume=ironwood",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=spear_stone_tipped"
+         },
+      },
+      produce_spear_stone_tipped = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
+         descname = _"making a stone tipped spear",
+         actions = {
+            "return=skipped unless economy needs spear_stone_tipped",
+            "consume=ironwood granite",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=spear_stone_tipped"
+         },
+      },
+      produce_spear_hardened = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
+         descname = _"making a hardened spear",
+         actions = {
+            "return=skipped unless economy needs spear_hardened",
+            "consume=ironwood:2 granite",
+            "sleep=32000",
+            "animate=working 35000",
+            "produce=spear_hardened"
          },
       },
    },

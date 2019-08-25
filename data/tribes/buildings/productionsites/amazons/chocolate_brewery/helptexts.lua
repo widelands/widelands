@@ -1,16 +1,19 @@
+-- This include can be removed when all help texts have been defined.
+include "tribes/scripting/help/global_helptexts.lua"
+
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "I know no single master miner who’ll ever work without a nice pint of beer!")
+   return no_lore_text_yet()
 end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "A brewer boasting about the importance of his profession")
+   return no_lore_author_text_yet()
 end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("building", "Brews beer for miners and soldier training.")
+   return pgettext("building", "Brews chocolate for soldier training.")
 end
 
 function building_helptext_note()
@@ -20,5 +23,5 @@ end
 
 function building_helptext_performance()
    -- TRANSLATORS: Performance helptext for a building
-   return pgettext("frisians_building", "The brewery needs %s on average to brew one mug of beer."):bformat(ngettext("%d second", "%d seconds", 60):bformat(60))
+   return pgettext("amazons_building", "The chocolate brewery needs %s on average to brew one mug of chocolate."):bformat(ngettext("%d second", "%d seconds", 60):bformat(60))
 end

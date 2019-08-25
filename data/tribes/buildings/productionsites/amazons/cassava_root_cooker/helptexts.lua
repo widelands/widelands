@@ -3,17 +3,17 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "All I need to be happy is a slice of honey bread with some smoked meat and a beer.")
+   return no_lore_text_yet()
 end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "A master miner to the landlady")
+   return no_lore_author_text_yet()
 end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("frisians_building", "Prepares rations for scouts and rations and meals to feed the miners in all mines.")
+   return pgettext("amazons_building", "Bakes bread from cassava root.")
 end
 
 function building_helptext_note()

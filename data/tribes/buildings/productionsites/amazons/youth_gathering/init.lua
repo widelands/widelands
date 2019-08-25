@@ -1,25 +1,23 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_barracks",
+   msgctxt = "amazons_building",
+   name = "amazons_youth_gathering",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Barracks"),
+   descname = pgettext ("amazons_building", "Youth Gathering"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {
-      brick = 4,
-      granite = 2,
       log = 3,
-      reed = 2
+      rubber = 5,
+      rope = 2,
    },
    return_on_dismantle = {
-      brick = 2,
-      granite = 1,
-      log = 1,
-      reed = 1
+      log = 2,
+      rubber = 2,
+      rope = 1,
    },
 
    animations = {
@@ -46,28 +44,31 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_trainer = 1
+      amazons_trainer = 1
    },
 
    inputs = {
-      { name = "sword_short", amount = 8 },
-      { name = "fur_garment", amount = 8 },
-      { name = "frisians_carrier", amount = 8 }
+      { name = "spear_wooden", amount = 5 },
+      { name = "tunic", amount = 5 },
+      { name = "cassava_root", amount = 5 },
+      { name = "meat", amount = 3 },
+      { name = "fish", amount = 3 },
+      { name = "amazons_carrier", amount = 8 }
    },
    outputs = {
-      "frisians_soldier",
+      "amazons_soldier",
    },
 
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-         descname = pgettext("frisians_building", "recruiting soldier"),
+         descname = pgettext("amazons_building", "recruiting soldier"),
          actions = {
-            "return=skipped unless economy needs frisians_soldier",
-            "consume=sword_short fur_garment frisians_carrier",
+            "return=skipped unless economy needs amazons_soldier",
+            "consume=spear_wooden tunic cassava_root meat,fish amazons_carrier",
             "sleep=15000",
             "animate=working 15000",
-            "recruit=frisians_soldier"
+            "recruit=amazons_soldier"
          }
       },
    }
