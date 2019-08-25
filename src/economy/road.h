@@ -110,8 +110,8 @@ struct Road : public PlayerImmovable {
 		return idle_index_;
 	}
 
-	void presplit(Game&, Coords split);
-	void postsplit(Game&, Flag&);
+	void presplit(EditorGameBase&, Coords split);
+	void postsplit(EditorGameBase&, Flag&);
 
 	bool notify_ware(Game& game, FlagId flagid);
 	void update_wallet_chargetime(Game& game);

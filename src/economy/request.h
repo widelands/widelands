@@ -118,8 +118,8 @@ public:
 	void start_transfer(Game&, Supply&);
 
 	void
-	read(FileRead&, Game&, MapObjectLoader&, const TribesLegacyLookupTable& tribes_lookup_table);
-	void write(FileWrite&, Game&, MapObjectSaver&) const;
+	read(FileRead&, EditorGameBase&, MapObjectLoader&, const TribesLegacyLookupTable& tribes_lookup_table);
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) const;
 	Worker* get_transfer_worker();
 
 	//  callbacks for WareInstance/Worker code

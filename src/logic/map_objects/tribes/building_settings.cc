@@ -21,7 +21,7 @@
 
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "logic/game.h"
+#include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
@@ -139,33 +139,33 @@ constexpr uint8_t kCurrentPacketVersionTrainingsite = 1;
 constexpr uint8_t kCurrentPacketVersionWarehouse = 1;
 
 // static
-BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tribe, FileRead& fr) {
+BuildingSettings* BuildingSettings::load(const EditorGameBase& egbase, const TribeDescr& tribe, FileRead& fr) {
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
 			const std::string name(fr.c_string());
-			const DescriptionIndex index = game.tribes().building_index(name);
+			const DescriptionIndex index = egbase.tribes().building_index(name);
 			const BuildingType type = static_cast<BuildingType>(fr.unsigned_8());
 			BuildingSettings* result = nullptr;
 			switch (type) {
 			case BuildingType::kTrainingsite: {
 				result = new TrainingsiteSettings(
-				   *dynamic_cast<const TrainingSiteDescr*>(game.tribes().get_building_descr(index)));
+				   *dynamic_cast<const TrainingSiteDescr*>(egbase.tribes().get_building_descr(index)));
 				break;
 			}
 			case BuildingType::kProductionsite: {
 				result = new ProductionsiteSettings(
-				   *dynamic_cast<const ProductionSiteDescr*>(game.tribes().get_building_descr(index)));
+				   *dynamic_cast<const ProductionSiteDescr*>(egbase.tribes().get_building_descr(index)));
 				break;
 			}
 			case BuildingType::kMilitarysite: {
 				result = new MilitarysiteSettings(
-				   *dynamic_cast<const MilitarySiteDescr*>(game.tribes().get_building_descr(index)));
+				   *dynamic_cast<const MilitarySiteDescr*>(egbase.tribes().get_building_descr(index)));
 				break;
 			}
 			case BuildingType::kWarehouse: {
 				result = new WarehouseSettings(
-				   *dynamic_cast<const WarehouseDescr*>(game.tribes().get_building_descr(index)),
+				   *dynamic_cast<const WarehouseDescr*>(egbase.tribes().get_building_descr(index)),
 				   tribe);
 				break;
 			}
@@ -174,7 +174,7 @@ BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tri
 				throw wexception(
 				   "Unknown building category %u (%s)", static_cast<uint8_t>(type), name.c_str());
 			}
-			result->read(game, fr);
+			result->read(egbase, fr);
 			return result;
 		} else {
 			throw UnhandledVersionError(
@@ -186,18 +186,18 @@ BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tri
 	NEVER_HERE();
 }
 
-void BuildingSettings::read(const Game&, FileRead&) {
+void BuildingSettings::read(const EditorGameBase&, FileRead&) {
 	// Header was peeled away by load()
 }
 
-void BuildingSettings::save(const Game&, FileWrite& fw) const {
+void BuildingSettings::save(const EditorGameBase&, FileWrite& fw) const {
 	fw.unsigned_8(kCurrentPacketVersion);
 	fw.c_string(descr_.c_str());
 	fw.unsigned_8(static_cast<uint8_t>(type()));
 }
 
-void MilitarysiteSettings::read(const Game& game, FileRead& fr) {
-	BuildingSettings::read(game, fr);
+void MilitarysiteSettings::read(const EditorGameBase& egbase, FileRead& fr) {
+	BuildingSettings::read(egbase, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionMilitarysite) {
@@ -212,16 +212,16 @@ void MilitarysiteSettings::read(const Game& game, FileRead& fr) {
 	}
 }
 
-void MilitarysiteSettings::save(const Game& game, FileWrite& fw) const {
-	BuildingSettings::save(game, fw);
+void MilitarysiteSettings::save(const EditorGameBase& egbase, FileWrite& fw) const {
+	BuildingSettings::save(egbase, fw);
 	fw.unsigned_8(kCurrentPacketVersionMilitarysite);
 
 	fw.unsigned_32(desired_capacity);
 	fw.unsigned_8(prefer_heroes ? 1 : 0);
 }
 
-void ProductionsiteSettings::read(const Game& game, FileRead& fr) {
-	BuildingSettings::read(game, fr);
+void ProductionsiteSettings::read(const EditorGameBase& egbase, FileRead& fr) {
+	BuildingSettings::read(egbase, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionProductionsite) {
@@ -253,8 +253,8 @@ void ProductionsiteSettings::read(const Game& game, FileRead& fr) {
 	}
 }
 
-void ProductionsiteSettings::save(const Game& game, FileWrite& fw) const {
-	BuildingSettings::save(game, fw);
+void ProductionsiteSettings::save(const EditorGameBase& egbase, FileWrite& fw) const {
+	BuildingSettings::save(egbase, fw);
 	fw.unsigned_8(kCurrentPacketVersionProductionsite);
 
 	fw.unsigned_8(stopped ? 1 : 0);
@@ -272,8 +272,8 @@ void ProductionsiteSettings::save(const Game& game, FileWrite& fw) const {
 	}
 }
 
-void TrainingsiteSettings::read(const Game& game, FileRead& fr) {
-	ProductionsiteSettings::read(game, fr);
+void TrainingsiteSettings::read(const EditorGameBase& egbase, FileRead& fr) {
+	ProductionsiteSettings::read(egbase, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionTrainingsite) {
@@ -287,14 +287,14 @@ void TrainingsiteSettings::read(const Game& game, FileRead& fr) {
 	}
 }
 
-void TrainingsiteSettings::save(const Game& game, FileWrite& fw) const {
-	ProductionsiteSettings::save(game, fw);
+void TrainingsiteSettings::save(const EditorGameBase& egbase, FileWrite& fw) const {
+	ProductionsiteSettings::save(egbase, fw);
 	fw.unsigned_8(kCurrentPacketVersionTrainingsite);
 	fw.unsigned_32(desired_capacity);
 }
 
-void WarehouseSettings::read(const Game& game, FileRead& fr) {
-	BuildingSettings::read(game, fr);
+void WarehouseSettings::read(const EditorGameBase& egbase, FileRead& fr) {
+	BuildingSettings::read(egbase, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionWarehouse) {
@@ -320,8 +320,8 @@ void WarehouseSettings::read(const Game& game, FileRead& fr) {
 	}
 }
 
-void WarehouseSettings::save(const Game& game, FileWrite& fw) const {
-	BuildingSettings::save(game, fw);
+void WarehouseSettings::save(const EditorGameBase& egbase, FileWrite& fw) const {
+	BuildingSettings::save(egbase, fw);
 	fw.unsigned_8(kCurrentPacketVersionWarehouse);
 
 	fw.unsigned_8(launch_expedition ? 1 : 0);

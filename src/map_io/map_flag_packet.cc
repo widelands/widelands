@@ -108,7 +108,7 @@ void MapFlagPacket::read(FileSystem& fs,
 					//  packet. We always create this, no matter what skip is
 					//  since we have to read the data packets. We delete this
 					//  object later again, if it is not wanted.
-					Flag* flag = new Flag(dynamic_cast<Game&>(egbase), player, fc, economy);
+					Flag* flag = new Flag(egbase, player, fc, economy);
 					mol.register_object<Flag>(serial, *flag);
 
 				} catch (const WException& e) {

@@ -138,6 +138,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	WareInstance* fetch_pending_ware(Game&, PlayerImmovable& dest);
 	void propagate_promoted_road(Road* promoted_road);
 	Wares get_wares();
+	WareInstance& get_ware(size_t);
 	uint8_t count_wares_in_queue(PlayerImmovable& dest) const;
 
 	void call_carrier(Game&, WareInstance&, PlayerImmovable* nextstep);

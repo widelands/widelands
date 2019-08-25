@@ -128,25 +128,22 @@ Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords, 
 	set_flag_position(coords);
 
 	upcast(Road, road, egbase.map().get_immovable(coords));
-	upcast(Game, game, &egbase);
 
-	if (game) {
-		if (eco) {
-			// We're saveloading
-			eco->add_flag(*this);
-		} else {
-			//  we split a road, or a new, standalone flag is created
-			(road ? road->get_economy() : owning_player->create_economy())->add_flag(*this);
-			if (road) {
-				road->presplit(*game, coords);
-			}
+	if (eco) {
+		// We're saveloading
+		eco->add_flag(*this);
+	} else {
+		//  we split a road, or a new, standalone flag is created
+		(road ? road->get_economy() : owning_player->create_economy())->add_flag(*this);
+		if (road) {
+			road->presplit(egbase, coords);
 		}
 	}
 
 	init(egbase);
 
-	if (!eco && road && game) {
-		road->postsplit(*game, *this);
+	if (!eco && road) {
+		road->postsplit(egbase, *this);
 	}
 }
 
@@ -598,6 +595,12 @@ Flag::Wares Flag::get_wares() {
 	}
 
 	return rv;
+}
+
+WareInstance& Flag::get_ware(size_t index) {
+	assert(index < current_wares());
+	assert(wares_[index].ware);
+	return *wares_[index].ware;
 }
 
 /**

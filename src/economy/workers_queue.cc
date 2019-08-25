@@ -123,7 +123,6 @@ void WorkersQueue::set_filled(Quantity filled) {
 	const WorkerDescr* worker_descr = tribe.get_worker_descr(index_);
 	EditorGameBase& egbase = get_owner()->egbase();
 	upcast(Game, game, &egbase);
-	assert(game != nullptr);
 
 	// Add workers
 	while (get_filled() < filled) {
@@ -131,7 +130,9 @@ void WorkersQueue::set_filled(Quantity filled) {
 		Worker& w =
 		   worker_descr->create(egbase, get_owner(), &owner_, owner_.get_positions(egbase).front());
 		assert(w.get_location(egbase) == &owner_);
-		w.start_task_idle(*game, 0, -1);
+		if (game) {
+			w.start_task_idle(*game, 0, -1);
+		}
 		workers_.push_back(&w);
 	}
 	assert(get_filled() >= filled);
@@ -145,7 +146,9 @@ void WorkersQueue::set_filled(Quantity filled) {
 		Worker* w = workers_.front();
 		assert(w->get_location(egbase) == &owner_);
 		// Remove from game
-		w->schedule_destroy(*game);
+		if (game) {
+			w->schedule_destroy(*game);
+		}
 		// Remove reference from list
 		workers_.erase(workers_.begin());
 	}
@@ -157,11 +160,12 @@ void WorkersQueue::set_max_fill(Quantity q) {
 	InputQueue::set_max_fill(q);
 
 	// If requested, kick out workers
-	upcast(Game, game, &get_owner()->egbase());
-	while (workers_.size() > max_fill_) {
-		workers_.back()->reset_tasks(*game);
-		workers_.back()->start_task_leavebuilding(*game, true);
-		workers_.pop_back();
+	if (upcast(Game, game, &get_owner()->egbase())) {
+		while (workers_.size() > max_fill_) {
+			workers_.back()->reset_tasks(*game);
+			workers_.back()->start_task_leavebuilding(*game, true);
+			workers_.pop_back();
+		}
 	}
 }
 
@@ -182,7 +186,7 @@ Worker* WorkersQueue::extract_worker() {
 
 constexpr uint16_t kCurrentPacketVersion = 3;
 
-void WorkersQueue::write_child(FileWrite& fw, Game&, MapObjectSaver& mos) {
+void WorkersQueue::write_child(FileWrite& fw, EditorGameBase&, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
 	// Store references to the workers
 	fw.unsigned_32(workers_.size());
@@ -192,7 +196,7 @@ void WorkersQueue::write_child(FileWrite& fw, Game&, MapObjectSaver& mos) {
 	}
 }
 
-void WorkersQueue::read_child(FileRead& fr, Game&, MapObjectLoader& mol) {
+void WorkersQueue::read_child(FileRead& fr, EditorGameBase&, MapObjectLoader& mol) {
 	uint16_t const packet_version = fr.unsigned_16();
 	try {
 		if (packet_version == kCurrentPacketVersion) {

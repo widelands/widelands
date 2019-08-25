@@ -20,8 +20,10 @@
 #ifndef WL_EDITOR_EDITORINTERACTIVE_H
 #define WL_EDITOR_EDITORINTERACTIVE_H
 
+#include <map>
 #include <memory>
 
+#include "editor/scripting/scripting.h"
 #include "editor/tools/history.h"
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/increase_resources_tool.h"
@@ -30,7 +32,9 @@
 #include "editor/tools/place_critter_tool.h"
 #include "editor/tools/place_immovable_tool.h"
 #include "editor/tools/resize_tool.h"
+#include "editor/tools/scenario_building_settings_tool.h"
 #include "editor/tools/scenario_field_owner_tool.h"
+#include "editor/tools/scenario_infrastructure_tool.h"
 #include "editor/tools/set_origin_tool.h"
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_starting_pos_tool.h"
@@ -63,7 +67,10 @@ public:
 		     set_port_space(unset_port_space),
 		     set_origin(),
 		     resize(map.get_width(), map.get_height()),
-		     sc_owner() {
+		     sc_owner(),
+		     sc_infra_del(),
+		     sc_infra(sc_infra_del),
+		     sc_bld_settings() {
 		}
 		EditorTool& current() const {
 			return *current_pointer;
@@ -91,6 +98,9 @@ public:
 		EditorResizeTool resize;
 
 		ScenarioFieldOwnerTool sc_owner;
+		ScenarioInfrastructureDeleteTool sc_infra_del;
+		ScenarioInfrastructureTool sc_infra;
+		ScenarioBuildingSettingsTool sc_bld_settings;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
 
@@ -140,13 +150,25 @@ public:
 	};
 	void map_changed(const MapWas& action);
 
-	bool save_as_scenario() const {
-		return save_as_scenario_;
-	}
+	bool save_as_scenario() const;
 	void write_lua(FileWrite&) const;
 
 	// Access to the tools.
 	Tools* tools();
+
+	// Scripting access
+	const std::map<std::string, Variable>& variables() const {
+		return variables_;
+	}
+	std::map<std::string, Variable>& variables() {
+		return variables_;
+	}
+	const std::map<std::string, Function>& functions() const {
+		return functions_;
+	}
+	std::map<std::string, Function>& functions() {
+		return functions_;
+	}
 
 private:
 	// For referencing the items in mainmenu_
@@ -175,7 +197,10 @@ private:
 	};
 	// For referencing the items in scenario_toolmenu_
 	enum class ScenarioToolMenuEntry {
-		kFieldOwner
+		kFieldOwner,
+		kInfrastructure,
+		kBuildingSettings,
+		kLua,
 	};
 
 	// For referencing the items in showhidemenu_
@@ -213,7 +238,6 @@ private:
 	bool need_save_;
 	uint32_t realtime_;
 	bool is_painting_;
-	bool save_as_scenario_;
 
 	// All unique menu windows
 	struct EditorMenuWindows {
@@ -242,6 +266,8 @@ private:
 	} tool_windows_;
 	struct ScenarioToolWindows {
 		UI::UniqueWindow::Registry fieldowner;
+		UI::UniqueWindow::Registry infrastructure;
+		UI::UniqueWindow::Registry lua;
 	} scenario_tool_windows_;
 
 	// Main menu on the toolbar
@@ -258,10 +284,16 @@ private:
 	std::unique_ptr<Tools> tools_;
 	std::unique_ptr<EditorHistory> history_;
 
+	std::map<std::string, Variable> variables_;
+	std::map<std::string, Function> functions_;
+
 	bool draw_resources_ = true;
 	bool draw_immovables_ = true;
 	bool draw_bobs_ = true;
 	bool draw_grid_ = true;
+
+	void update_players();
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEditorPlayerEdited>> player_notes_;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

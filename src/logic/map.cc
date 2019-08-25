@@ -779,7 +779,7 @@ void Map::set_scenario_player_tribe(PlayerNumber const p, const std::string& tri
 	assert(p <= get_nrplayers());
 	scenario_tribes_.resize(get_nrplayers());
 	scenario_tribes_[p - 1] = tribename;
-	Notifications::publish(NoteEditorPlayerEdited());
+	Notifications::publish(NoteEditorPlayerEdited{this});
 }
 
 void Map::set_scenario_player_name(PlayerNumber const p, const std::string& playername) {
@@ -787,7 +787,7 @@ void Map::set_scenario_player_name(PlayerNumber const p, const std::string& play
 	assert(p <= get_nrplayers());
 	scenario_names_.resize(get_nrplayers());
 	scenario_names_[p - 1] = playername;
-	Notifications::publish(NoteEditorPlayerEdited());
+	Notifications::publish(NoteEditorPlayerEdited{this});
 }
 
 void Map::set_scenario_player_ai(PlayerNumber const p, const std::string& ainame) {
@@ -795,7 +795,7 @@ void Map::set_scenario_player_ai(PlayerNumber const p, const std::string& ainame
 	assert(p <= get_nrplayers());
 	scenario_ais_.resize(get_nrplayers());
 	scenario_ais_[p - 1] = ainame;
-	Notifications::publish(NoteEditorPlayerEdited());
+	Notifications::publish(NoteEditorPlayerEdited{this});
 }
 
 void Map::set_scenario_player_closeable(PlayerNumber const p, bool closeable) {
@@ -803,7 +803,7 @@ void Map::set_scenario_player_closeable(PlayerNumber const p, bool closeable) {
 	assert(p <= get_nrplayers());
 	scenario_closeables_.resize(get_nrplayers());
 	scenario_closeables_[p - 1] = closeable;
-	Notifications::publish(NoteEditorPlayerEdited());
+	Notifications::publish(NoteEditorPlayerEdited{this});
 }
 
 /*
@@ -826,7 +826,7 @@ void Map::set_nrplayers(PlayerNumber const nrplayers) {
 	scenario_tribes_.resize(nrplayers);
 
 	nrplayers_ = nrplayers;  // in case the number players got less
-	Notifications::publish(NoteEditorPlayerEdited());
+	Notifications::publish(NoteEditorPlayerEdited{this});
 }
 
 /*

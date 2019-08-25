@@ -131,12 +131,13 @@ uint32_t InputQueue::get_missing() const {
 constexpr uint16_t kCurrentPacketVersion = 3;
 
 void InputQueue::read(FileRead& fr,
-                      Game& game,
+                      EditorGameBase& egbase,
                       MapObjectLoader& mol,
                       const TribesLegacyLookupTable& tribes_lookup_table) {
 
 	uint16_t const packet_version = fr.unsigned_16();
 	try {
+		Game* game = dynamic_cast<Game*>(&egbase);
 		// A bit messy since InputQueue started with packet version 1 but has to support the build19
 		// WaresQueue packets with version 2 and has now be changed to version 3 while fixing
 		// Unfortunately, this will probably crash when loading old pre-build19 save games
@@ -152,13 +153,14 @@ void InputQueue::read(FileRead& fr,
 			max_fill_ = fr.signed_32();
 			consume_interval_ = fr.unsigned_32();
 			if (fr.unsigned_8()) {
+				assert(game);
 				request_.reset(new Request(owner_, 0, InputQueue::request_callback, type_));
-				request_->read(fr, game, mol, tribes_lookup_table);
+				request_->read(fr, *game, mol, tribes_lookup_table);
 			} else {
 				request_.reset();
 			}
 
-			read_child(fr, game, mol);
+			read_child(fr, egbase, mol);
 		} else if (packet_version == 2) {
 			// TODO(GunChleoc): Savegame compatibility, get rid after Build 21
 			assert(type_ == wwWARE);
@@ -169,8 +171,9 @@ void InputQueue::read(FileRead& fr,
 			uint32_t filled = fr.unsigned_32();
 			consume_interval_ = fr.unsigned_32();
 			if (fr.unsigned_8()) {
+				assert(game);
 				request_.reset(new Request(owner_, 0, InputQueue::request_callback, type_));
-				request_->read(fr, game, mol, tribes_lookup_table);
+				request_->read(fr, *game, mol, tribes_lookup_table);
 			} else {
 				request_.reset();
 			}
@@ -186,7 +189,7 @@ void InputQueue::read(FileRead& fr,
 	}
 }
 
-void InputQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
+void InputQueue::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	//  Owner and callback is not saved, but this should be obvious on load.
@@ -200,13 +203,15 @@ void InputQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	fw.signed_32(max_size_);
 	fw.signed_32(max_fill_);
 	fw.signed_32(consume_interval_);
+	Game* game = dynamic_cast<Game*>(&egbase);
 	if (request_) {
+		assert(game);
 		fw.unsigned_8(1);
-		request_->write(fw, game, mos);
+		request_->write(fw, *game, mos);
 	} else {
 		fw.unsigned_8(0);
 	}
 
-	write_child(fw, game, mos);
+	write_child(fw, egbase, mos);
 }
 }  // namespace Widelands

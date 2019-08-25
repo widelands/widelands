@@ -132,7 +132,7 @@ void MapFlagdataPacket::read(FileSystem& fs,
 							Flag::FlagJob f;
 							if (fr.unsigned_8()) {
 								f.request = new Request(flag, 0, Flag::flag_job_request_callback, wwWORKER);
-								f.request->read(fr, dynamic_cast<Game&>(egbase), mol, tribes_lookup_table);
+								f.request->read(fr, egbase, mol, tribes_lookup_table);
 							} else {
 								f.request = nullptr;
 							}
@@ -215,7 +215,7 @@ void MapFlagdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 			for (const Flag::FlagJob& temp_job : flag_jobs) {
 				if (temp_job.request) {
 					fw.unsigned_8(1);
-					temp_job.request->write(fw, dynamic_cast<Game&>(egbase), mos);
+					temp_job.request->write(fw, egbase, mos);
 				} else
 					fw.unsigned_8(0);
 

@@ -28,6 +28,7 @@
 namespace Widelands {
 
 class Economy;
+class EditorGameBase;
 class Game;
 class MapObjectLoader;
 struct MapObjectSaver;
@@ -185,7 +186,7 @@ public:
 	 * @param mol The game/map loader that handles the lading. Required to pass to Request::read().
 	 */
 	void read(FileRead& f,
-	          Game& g,
+	          EditorGameBase& g,
 	          MapObjectLoader& mol,
 	          const TribesLegacyLookupTable& tribes_lookup_table);
 
@@ -195,7 +196,7 @@ public:
 	 * @param game The game this queue is part of.
 	 * @param mos The game/map saver that handles the saving. Required to pass to Request::write().
 	 */
-	void write(FileWrite& w, Game& g, MapObjectSaver& s);
+	void write(FileWrite& w, EditorGameBase& g, MapObjectSaver& s);
 
 protected:
 	/**
@@ -248,7 +249,7 @@ protected:
 	 * @param game The game this queue will be part of.
 	 * @param mol The game/map loader that handles the loading.
 	 */
-	virtual void read_child(FileRead& f, Game& g, MapObjectLoader& mol) = 0;
+	virtual void read_child(FileRead& f, EditorGameBase& g, MapObjectLoader& mol) = 0;
 
 	/**
 	 * Writes the state of the subclass.
@@ -256,7 +257,7 @@ protected:
 	 * @param game The game this queue is part of.
 	 * @param mos The game/map saver that handles the saving.
 	 */
-	virtual void write_child(FileWrite& w, Game& g, MapObjectSaver& s) = 0;
+	virtual void write_child(FileWrite& w, EditorGameBase& g, MapObjectSaver& s) = 0;
 
 	/// The building this queue is part of.
 	PlayerImmovable& owner_;

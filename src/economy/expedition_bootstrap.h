@@ -57,7 +57,7 @@ public:
 
 	// Cancel an ongoing bootstrap. This will incorporate wares and workers into
 	// the corresponding warehouse.
-	void cancel(Game& game);
+	void cancel(EditorGameBase&);
 
 	/**
 	 * Returns a list of workers and wares that are ready to go to an expediton.
@@ -65,7 +65,7 @@ public:
 	 * Ownership is transferred and the object is in an undefined
 	 * state after this and must be deleted.
 	 */
-	void get_waiting_workers_and_wares(Game&,
+	void get_waiting_workers_and_wares(EditorGameBase&,
 	                                   const TribeDescr&,
 	                                   std::vector<Worker*>* return_workers,
 	                                   std::vector<WareInstance*>* return_wares);
@@ -89,7 +89,7 @@ public:
 	 */
 	void load(Warehouse& warehouse,
 	          FileRead& fr,
-	          Game& game,
+	          EditorGameBase& egbase,
 	          MapObjectLoader& mol,
 	          const TribesLegacyLookupTable& tribes_lookup_table,
 	          uint16_t version);
@@ -99,7 +99,7 @@ public:
 	 * The actual data is stored in the buildingdata
 	 * packet, and there in the warehouse data packet.
 	 */
-	void save(FileWrite& fw, Game& game, MapObjectSaver& mos);
+	void save(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos);
 
 private:
 	// Handles arriving workers and wares.

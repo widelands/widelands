@@ -22,12 +22,14 @@
 
 #include <list>
 #include <map>
+#include <memory>
 #include <set>
 #include <string>
 #include <vector>
 
 #include "logic/field.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/building_settings.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
@@ -59,6 +61,9 @@ struct EditorActionArgs {
 	Widelands::Extent new_map_size;                        // resize tool
 
 	uint8_t new_owner; // set owner tool
+	std::list<std::pair<Widelands::MapObjectType, Widelands::DescriptionIndex>> infrastructure_types; // infrastructure tool
+	Widelands::PlayerNumber infrastructure_owner; // infrastructure tool
+	bool infrastructure_constructionsite; // infrastructure tool
 
 	struct ResourceState {
 		Widelands::FCoords location;
@@ -71,6 +76,21 @@ struct EditorActionArgs {
 		std::set<Widelands::Coords> port_spaces;
 		std::vector<Widelands::Coords> starting_positions;
 	};
+	struct InfrastructureHistory {
+		Widelands::MapObjectType type; // valid: FLAG, BUILDING, IMMOVABLE; 0 means no item stood here
+		Widelands::PlayerNumber owner;
+		std::string name = ""; // for buildings and player immovables
+		bool constructionsite; // for buildings
+		const Widelands::BuildingSettings* settings; // only for buildings
+		explicit InfrastructureHistory() :
+				type(Widelands::MapObjectType::MAPOBJECT), owner(0), constructionsite(false), settings(nullptr) {
+		}
+		~InfrastructureHistory() {
+			if (settings) {
+				delete settings;
+			}
+		}
+	};
 
 	std::list<ResourceState> original_resource;                        // resources set tool
 	std::list<const Widelands::BobDescr*> old_bob_type, new_bob_type;  // bob change tools
@@ -81,6 +101,8 @@ struct EditorActionArgs {
 	ResizeHistory resized;                                                       // resize tool
 
 	std::list<uint8_t> old_owners; // set owner tool
+	std::list<Widelands::Serial> infrastructure_placed; // infrastructure tool
+	std::list<InfrastructureHistory> infrastructure_deleted; // infrastructure delete tool
 
 	std::list<EditorToolAction*> draw_actions;  // draw tool
 

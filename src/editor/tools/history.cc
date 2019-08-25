@@ -36,6 +36,9 @@ EditorActionArgs::EditorActionArgs(EditorInteractive& base)
      current_resource(0),
      set_to(0),
      new_map_size(0, 0),
+     new_owner(0),
+     infrastructure_owner(0),
+     infrastructure_constructionsite(false),
      interval(0, 0),
      refcount(0) {
 }
@@ -53,6 +56,7 @@ EditorActionArgs::~EditorActionArgs() {
 	original_heights.clear();
 	original_terrain_type.clear();
 	terrain_type.clear();
+	infrastructure_deleted.clear();
 }
 
 // === EditorHistory === //

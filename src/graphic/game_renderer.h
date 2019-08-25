@@ -42,7 +42,6 @@ void draw_terrain(const Widelands::EditorGameBase& egbase,
 void draw_border_markers(const FieldsToDraw::Field& field,
                          const float scale,
                          const FieldsToDraw& fields_to_draw,
-                         RenderTarget* dst,
-                         const Widelands::EditorGameBase* = nullptr);
+                         RenderTarget* dst);
 
 #endif  // end of include guard: WL_GRAPHIC_GAME_RENDERER_H

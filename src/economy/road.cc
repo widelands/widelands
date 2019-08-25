@@ -404,8 +404,8 @@ void Road::assign_carrier(Carrier& c, uint8_t slot) {
  * the new flag initializes. We remove markings to avoid interference with the
  * flag.
  */
-void Road::presplit(Game& game, Coords) {
-	unmark_map(game);
+void Road::presplit(EditorGameBase& egbase, Coords) {
+	unmark_map(egbase);
 }
 
 /**
@@ -415,15 +415,16 @@ void Road::presplit(Game& game, Coords) {
  * After the split, this road will span [start...new flag]. A new road will
  * be created to span [new flag...end]
  */
-// TODO(SirVer): This needs to take an EditorGameBase as well.
-void Road::postsplit(Game& game, Flag& flag) {
+void Road::postsplit(EditorGameBase& egbase, Flag& flag) {
+	Game* game = dynamic_cast<Game*>(&egbase);
+
 	Flag& oldend = *flags_[FlagEnd];
 
 	// detach from end
 	oldend.detach_road(flagidx_[FlagEnd]);
 
 	// build our new path and the new road's path
-	const Map& map = game.map();
+	const Map& map = egbase.map();
 	CoordPath path(map, path_);
 	CoordPath secondpath(path);
 	int32_t const index = path.get_index(flag.get_position());
@@ -445,14 +446,14 @@ void Road::postsplit(Game& game, Flag& flag) {
 
 	// change road size and reattach
 	flags_[FlagEnd] = &flag;
-	set_path(game, path);
+	set_path(egbase, path);
 
 	const Direction dir = get_reverse_dir(path_[path_.get_nsteps() - 1]);
 	flags_[FlagEnd]->attach_road(dir, this);
 	flagidx_[FlagEnd] = dir;
 
 	// recreate road markings
-	mark_map(game);
+	mark_map(egbase);
 
 	// create the new road
 	Road& newroad = *new Road();
@@ -460,7 +461,7 @@ void Road::postsplit(Game& game, Flag& flag) {
 	newroad.type_ = type_;
 	newroad.flags_[FlagStart] = &flag;  //  flagidx will be set on init()
 	newroad.flags_[FlagEnd] = &oldend;
-	newroad.set_path(game, secondpath);
+	newroad.set_path(egbase, secondpath);
 
 	// Find workers on this road that need to be reassigned
 	// The algorithm is pretty simplistic, and has a bias towards keeping
@@ -485,7 +486,7 @@ void Road::postsplit(Game& game, Flag& flag) {
 			}
 		}
 
-		if (idx < 0) {
+		if (game && idx < 0) {
 			reassigned_workers.push_back(w);
 
 			/*
@@ -493,13 +494,13 @@ void Road::postsplit(Game& game, Flag& flag) {
 			 * in this road and remove him. Than add him to the new road
 			 */
 			for (CarrierSlot& old_slot : carrier_slots_) {
-				Carrier const* const carrier = old_slot.carrier.get(game);
+				Carrier const* const carrier = old_slot.carrier.get(*game);
 
 				if (carrier == w) {
 					old_slot.carrier = nullptr;
 					for (CarrierSlot& new_slot : newroad.carrier_slots_) {
-						if (!new_slot.carrier.get(game) && !new_slot.carrier_request &&
-						    new_slot.carrier_type == old_slot.carrier_type) {
+						if (!new_slot.carrier.get(*game) && !new_slot.carrier_request &&
+							new_slot.carrier_type == old_slot.carrier_type) {
 							upcast(Carrier, new_carrier, w);
 							new_slot.carrier = new_carrier;
 							break;
@@ -510,11 +511,11 @@ void Road::postsplit(Game& game, Flag& flag) {
 		}
 
 		// Cause a worker update in any case
-		w->send_signal(game, "road");
+		w->send_signal(*game, "road");
 	}
 
 	// Initialize the new road
-	newroad.init(game);
+	newroad.init(egbase);
 	newroad.wallet_ = wallet_;
 
 	// Actually reassign workers after the new road has initialized,
@@ -523,19 +524,21 @@ void Road::postsplit(Game& game, Flag& flag) {
 		w->set_location(&newroad);
 	}
 
-	//  Request a new carrier for this road if necessary. This must be done
-	//  _after_ the new road initializes, otherwise request routing might not
-	//  work correctly
-	for (CarrierSlot& slot : carrier_slots_) {
-		if (!slot.carrier.get(game) && !slot.carrier_request &&
-		    (slot.carrier_type == 1 || type_ == RoadType::kBusy)) {
-			request_carrier(slot);
+	if (game) {
+		//  Request a new carrier for this road if necessary. This must be done
+		//  _after_ the new road initializes, otherwise request routing might not
+		//  work correctly
+		for (CarrierSlot& slot : carrier_slots_) {
+			if (!slot.carrier.get(*game) && !slot.carrier_request &&
+				(slot.carrier_type == 1 || type_ == RoadType::kBusy)) {
+				request_carrier(slot);
+			}
 		}
-	}
 
-	//  Make sure wares waiting on the original endpoint flags are dealt with.
-	flags_[FlagStart]->update_wares(game, &oldend);
-	oldend.update_wares(game, flags_[FlagStart]);
+		//  Make sure wares waiting on the original endpoint flags are dealt with.
+		flags_[FlagStart]->update_wares(*game, &oldend);
+		oldend.update_wares(*game, flags_[FlagStart]);
+	}
 }
 
 /**

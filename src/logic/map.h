@@ -68,12 +68,6 @@ struct NoteFieldTerrainChanged {
 	MapIndex map_index;
 };
 
-// Sent when the name, tribe, AI level, or closeable state of a player is changed.
-// Intended to be received only in the editor!
-struct NoteEditorPlayerEdited {
-	CAN_BE_SENT_AS_NOTE(NoteId::EditorPlayerEdited)
-};
-
 struct ImmovableFound {
 	BaseImmovable* object;
 	Coords coords;
@@ -1230,6 +1224,14 @@ inline void move_r(int16_t const mapwidth, FCoords& f, MapIndex& i) {
 	}
 	assert(f.x < mapwidth);
 }
+
+// Sent when the name, tribe, AI level, or closeable state of a player is changed.
+// Intended to be received only in the editor!
+struct NoteEditorPlayerEdited {
+	CAN_BE_SENT_AS_NOTE(NoteId::EditorPlayerEdited)
+
+	Map* map;
+};
 
 #define iterate_Map_FCoords(map, extent, fc)                                                       \
 	for (Widelands::FCoords fc = (map).get_fcoords(Widelands::Coords(0, 0));                        \

@@ -31,7 +31,7 @@ class FileWrite;
 
 namespace Widelands {
 
-class Game;
+class EditorGameBase;
 class MilitarySiteDescr;
 class ProductionSiteDescr;
 enum class StockPolicy;
@@ -45,10 +45,10 @@ struct BuildingSettings {
 	virtual ~BuildingSettings() {
 	}
 
-	static BuildingSettings* load(const Game&, const TribeDescr&, FileRead&);
+	static BuildingSettings* load(const EditorGameBase&, const TribeDescr&, FileRead&);
 
-	virtual void save(const Game&, FileWrite&) const;
-	virtual void read(const Game&, FileRead&);
+	virtual void save(const EditorGameBase&, FileWrite&) const;
+	virtual void read(const EditorGameBase&, FileRead&);
 
 	virtual void apply(const BuildingSettings&) {
 	}
@@ -72,8 +72,8 @@ struct ProductionsiteSettings : public BuildingSettings {
 	}
 	void apply(const BuildingSettings&) override;
 
-	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
+	void save(const EditorGameBase&, FileWrite&) const override;
+	void read(const EditorGameBase&, FileRead&) override;
 
 	struct InputQueueSetting {
 		const uint32_t max_fill;
@@ -96,8 +96,8 @@ struct MilitarysiteSettings : public BuildingSettings {
 	}
 	void apply(const BuildingSettings&) override;
 
-	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
+	void save(const EditorGameBase&, FileWrite&) const override;
+	void read(const EditorGameBase&, FileRead&) override;
 
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
@@ -115,8 +115,8 @@ struct TrainingsiteSettings : public ProductionsiteSettings {
 	}
 	void apply(const BuildingSettings&) override;
 
-	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
+	void save(const EditorGameBase&, FileWrite&) const override;
+	void read(const EditorGameBase&, FileRead&) override;
 
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
@@ -133,8 +133,8 @@ struct WarehouseSettings : public BuildingSettings {
 	}
 	void apply(const BuildingSettings&) override;
 
-	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&) override;
+	void save(const EditorGameBase&, FileWrite&) const override;
+	void read(const EditorGameBase&, FileRead&) override;
 
 	std::map<DescriptionIndex, StockPolicy> ware_preferences;
 	std::map<DescriptionIndex, StockPolicy> worker_preferences;

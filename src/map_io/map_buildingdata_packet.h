@@ -53,50 +53,50 @@ public:
 private:
 	void read_constructionsite(ConstructionSite&,
 	                           FileRead&,
-	                           Game&,
+	                           EditorGameBase&,
 	                           MapObjectLoader&,
 	                           const TribesLegacyLookupTable& tribes_lookup_table);
 	void read_dismantlesite(DismantleSite&,
 	                        FileRead&,
-	                        Game&,
+	                        EditorGameBase&,
 	                        MapObjectLoader&,
 	                        const TribesLegacyLookupTable& tribes_lookup_table);
 	void read_partially_finished_building(PartiallyFinishedBuilding&,
 	                                      FileRead&,
-	                                      Game&,
+	                                      EditorGameBase&,
 	                                      MapObjectLoader&,
 	                                      const TribesLegacyLookupTable& tribes_lookup_table);
 	void read_warehouse(Warehouse&,
 	                    FileRead&,
-	                    Game&,
+	                    EditorGameBase&,
 	                    MapObjectLoader&,
 	                    const TribesLegacyLookupTable& tribes_lookup_table);
 	void read_militarysite(MilitarySite&,
 	                       FileRead&,
-	                       Game&,
+	                       EditorGameBase&,
 	                       MapObjectLoader&,
 	                       const TribesLegacyLookupTable& tribes_lookup_table);
 	void read_trainingsite(TrainingSite&,
 	                       FileRead&,
-	                       Game&,
+	                       EditorGameBase&,
 	                       MapObjectLoader&,
 	                       const TribesLegacyLookupTable& tribes_lookup_table);
 	void read_productionsite(ProductionSite&,
 	                         FileRead&,
-	                         Game&,
+	                         EditorGameBase&,
 	                         MapObjectLoader&,
 	                         const TribesLegacyLookupTable& tribes_lookup_table);
 
-	void write_constructionsite(const ConstructionSite&, FileWrite&, Game&, MapObjectSaver&);
-	void write_dismantlesite(const DismantleSite&, FileWrite&, Game&, MapObjectSaver&);
+	void write_constructionsite(const ConstructionSite&, FileWrite&, EditorGameBase&, MapObjectSaver&);
+	void write_dismantlesite(const DismantleSite&, FileWrite&, EditorGameBase&, MapObjectSaver&);
 	void write_partially_finished_building(const PartiallyFinishedBuilding&,
 	                                       FileWrite&,
-	                                       Game&,
+	                                       EditorGameBase&,
 	                                       MapObjectSaver&);
-	void write_warehouse(const Warehouse&, FileWrite&, Game&, MapObjectSaver&);
-	void write_militarysite(const MilitarySite&, FileWrite&, Game&, MapObjectSaver&);
-	void write_trainingsite(const TrainingSite&, FileWrite&, Game&, MapObjectSaver&);
-	void write_productionsite(const ProductionSite&, FileWrite&, Game&, MapObjectSaver&);
+	void write_warehouse(const Warehouse&, FileWrite&, EditorGameBase&, MapObjectSaver&);
+	void write_militarysite(const MilitarySite&, FileWrite&, EditorGameBase&, MapObjectSaver&);
+	void write_trainingsite(const TrainingSite&, FileWrite&, EditorGameBase&, MapObjectSaver&);
+	void write_productionsite(const ProductionSite&, FileWrite&, EditorGameBase&, MapObjectSaver&);
 };
 }  // namespace Widelands
 

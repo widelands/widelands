@@ -99,7 +99,7 @@ constexpr uint16_t kCurrentPacketVersion = 6;
  * them through the data in the file
  */
 void Request::read(FileRead& fr,
-                   Game& game,
+                   EditorGameBase& egbase,
                    MapObjectLoader& mol,
                    const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
@@ -159,7 +159,7 @@ void Request::read(FileRead& fr,
 				} catch (const WException& e) {
 					throw wexception("transfer %u: %s", i, e.what());
 				}
-			requirements_.read(fr, game, mol);
+			requirements_.read(fr, egbase, mol);
 			if (!is_open() && economy_)
 				economy_->remove_request(*this);
 		} else {
@@ -173,18 +173,18 @@ void Request::read(FileRead& fr,
 /**
  * Write this request to a file
  */
-void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
+void Request::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	//  Target and economy should be set. Same is true for callback stuff.
 
 	assert(type_ == wwWARE || type_ == wwWORKER);
 	if (type_ == wwWARE) {
-		assert(game.tribes().ware_exists(index_));
-		fw.c_string(game.tribes().get_ware_descr(index_)->name());
+		assert(egbase.tribes().ware_exists(index_));
+		fw.c_string(egbase.tribes().get_ware_descr(index_)->name());
 	} else if (type_ == wwWORKER) {
-		assert(game.tribes().worker_exists(index_));
-		fw.c_string(game.tribes().get_worker_descr(index_)->name());
+		assert(egbase.tribes().worker_exists(index_));
+		fw.c_string(egbase.tribes().get_worker_descr(index_)->name());
 	}
 
 	fw.unsigned_32(count_);
@@ -205,7 +205,7 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 			fw.unsigned_32(mos.get_object_file_index(*trans.worker_));
 		}
 	}
-	requirements_.write(fw, game, mos);
+	requirements_.write(fw, egbase, mos);
 }
 
 /**

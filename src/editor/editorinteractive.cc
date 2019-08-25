@@ -46,7 +46,9 @@
 #include "editor/ui_menus/main_menu_random_map.h"
 #include "editor/ui_menus/main_menu_save_map.h"
 #include "editor/ui_menus/player_menu.h"
+#include "editor/ui_menus/scenario_lua.h"
 #include "editor/ui_menus/scenario_tool_field_owner_options_menu.h"
+#include "editor/ui_menus/scenario_tool_infrastructure_options_menu.h"
 #include "editor/ui_menus/tool_change_height_options_menu.h"
 #include "editor/ui_menus/tool_change_resources_options_menu.h"
 #include "editor/ui_menus/tool_noise_height_options_menu.h"
@@ -65,6 +67,7 @@
 #include "logic/map_objects/world/world.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
+#include "logic/playersmanager.h"
 #include "map_io/map_loader.h"
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_interface.h"
@@ -90,7 +93,6 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      need_save_(false),
      realtime_(SDL_GetTicks()),
      is_painting_(false),
-     save_as_scenario_(false),
      mainmenu_(toolbar(),
                "dropdown_menu_main",
                0,
@@ -188,6 +190,15 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		map_clicked(node_and_triangle, false);
 	});
+
+	player_notes_ = Notifications::subscribe<Widelands::NoteEditorPlayerEdited>(
+		[this](const Widelands::NoteEditorPlayerEdited& n) {
+			if (n.map == &egbase().map()) {
+				update_players();
+			}
+		});
+
+	update_players();
 }
 
 void EditorInteractive::add_main_menu() {
@@ -368,10 +379,31 @@ void EditorInteractive::add_scenario_tool_menu() {
 	              g_gr->images().get("images/wui/editor/tools/sc_owner.png"), false,
 	              /** TRANSLATORS: Tooltip for the field ownership scenario tool in the editor */
 	              _("Set the initial ownership of fields"));
-	scenario_toolmenu_.add(_("Dummy"), ScenarioToolMenuEntry::kFieldOwner,
-	              g_gr->images().get("images/wui/editor/tools/sc_owner.png"), false,
-	              /** TRANSLATORS: Tooltip for the XXX scenario tool in the editor */
-	              _("Dummy"));
+
+	scenario_tool_windows_.infrastructure.open_window = [this] {
+		new ScenarioToolInfrastructureOptionsMenu(*this, tools()->sc_infra, scenario_tool_windows_.infrastructure);
+	};
+	/** TRANSLATORS: An entry in the editor's scenario tool menu */
+	scenario_toolmenu_.add(_("Place Infrastructure"), ScenarioToolMenuEntry::kInfrastructure,
+	              g_gr->images().get("images/wui/editor/tools/sc_infra.png"), false,
+	              /** TRANSLATORS: Tooltip for the place infrastructure scenario tool in the editor */
+	              _("Place buildings, flags and tribe immovables"));
+
+	/** TRANSLATORS: An entry in the editor's scenario tool menu */
+	scenario_toolmenu_.add(_("Infrastructure Settings"), ScenarioToolMenuEntry::kBuildingSettings,
+	              g_gr->images().get("images/wui/editor/tools/sc_bld_settings.png"), false,
+	              /** TRANSLATORS: Tooltip for the infrastructure settings scenario tool in the editor */
+	              _("Create the initial settings for buildings and flags"),
+	              _("Shift+i"));
+
+	scenario_tool_windows_.lua.open_window = [this] {
+		new ScenarioLuaOptionsMenu(*this, scenario_tool_windows_.lua);
+	};
+	/** TRANSLATORS: An entry in the editor's scenario tool menu */
+	scenario_toolmenu_.add(_("Scripting"), ScenarioToolMenuEntry::kLua,
+	              g_gr->images().get("images/wui/editor/menus/scripting.png"), false,
+	              /** TRANSLATORS: Tooltip for the scenario scripting menu in the editor */
+	              _("Edit the scenario storyline"));
 
 	scenario_toolmenu_.selected.connect([this] { scenario_tool_menu_selected(scenario_toolmenu_.get_selected()); });
 	toolbar()->add(&scenario_toolmenu_);
@@ -417,10 +449,18 @@ void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 }
 
 void EditorInteractive::scenario_tool_menu_selected(ScenarioToolMenuEntry entry) {
-	save_as_scenario_ = true; // NOCOM move to a place where it makes sense!
 	switch (entry) {
 	case ScenarioToolMenuEntry::kFieldOwner:
 		scenario_tool_windows_.fieldowner.toggle();
+		break;
+	case ScenarioToolMenuEntry::kInfrastructure:
+		scenario_tool_windows_.infrastructure.toggle();
+		break;
+	case ScenarioToolMenuEntry::kBuildingSettings:
+		select_tool(tools()->sc_bld_settings, EditorTool::First);
+		break;
+	case ScenarioToolMenuEntry::kLua:
+		scenario_tool_windows_.lua.toggle();
 		break;
 	}
 	scenario_toolmenu_.toggle();
@@ -530,6 +570,8 @@ void EditorInteractive::cleanup_for_load() {
 	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
 	// Instead, delete and re-create the egbase.
 	egbase().cleanup_for_load();
+	functions_.clear();
+	variables_.clear();
 }
 
 /// Called just before the editor starts, after postload, init and gfxload.
@@ -632,7 +674,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 
-		draw_border_markers(field, scale, *fields_to_draw, &dst, &egbase());
+		draw_border_markers(field, scale, *fields_to_draw, &dst);
 
 		if (draw_immovables_) {
 			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
@@ -852,7 +894,11 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_i:
-			select_tool(tools_->info, EditorTool::First);
+			if (code.mod & KMOD_SHIFT) {
+				select_tool(tools_->sc_bld_settings, EditorTool::First);
+			} else {
+				select_tool(tools_->info, EditorTool::First);
+			}
 			return true;
 
 		case SDLK_l:
@@ -1010,6 +1056,23 @@ void EditorInteractive::map_changed(const MapWas& action) {
 			}
 		}
 
+		// Ensure that there is at least 1 player
+		if (egbase().map().get_nrplayers() < 1) {
+			Widelands::Map* mutable_map = egbase().mutable_map();
+			mutable_map->set_nrplayers(1);
+			// Init player 1
+			mutable_map->set_scenario_player_ai(1, "");
+			mutable_map->set_scenario_player_closeable(1, false);
+			/** TRANSLATORS: Default player name, e.g. Player 1 */
+			mutable_map->set_scenario_player_name(1, (boost::format(_("Player %u")) % 1).str());
+			mutable_map->set_scenario_player_tribe(1, "");
+			update_players();
+		}
+
+		variables_.clear();
+		functions_.clear();
+		functions_.emplace(std::make_pair(kMainFunction, Function(true)));
+
 		// Make sure that we will start at coordinates (0,0).
 		map_view()->set_view(MapView::View{Vector2f::zero(), 1.f}, MapView::Transition::Jump);
 		set_sel_pos(Widelands::NodeAndTriangle<>{
@@ -1022,13 +1085,28 @@ void EditorInteractive::map_changed(const MapWas& action) {
 	}
 }
 
+void EditorInteractive::update_players() {
+	const Widelands::Map& map = egbase().map();
+	Widelands::PlayersManager* pm = egbase().player_manager();
+	assert(pm);
+	pm->cleanup();
+	const Widelands::PlayerNumber max = map.get_nrplayers();
+	for (Widelands::PlayerNumber p = 1; p <= max; ++p) {
+		pm->add_player(p, p, map.get_scenario_player_tribe(p), map.get_scenario_player_name(p));
+	}
+	egbase().allocate_player_maps();
+}
+
 EditorInteractive::Tools* EditorInteractive::tools() {
 	return tools_.get();
 }
 
+bool EditorInteractive::save_as_scenario() const {
+	return functions_.find(kMainFunction) != functions_.end();
+}
+
 void EditorInteractive::write_lua(FileWrite& fw) const {
 	const Widelands::Map& map = egbase().map();
-	const Widelands::PlayerNumber nr_players = map.get_nrplayers();
 
 	// Header
 	fw.print_f("-- Automatically created by Widelands %s (%s)\n", build_id().c_str(), build_type().c_str());
@@ -1044,41 +1122,36 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	fw.print_f("include \"scripting/infrastructure.lua\"\n");
 	fw.print_f("include \"scripting/table.lua\"\n\n");
 
-	// Frequently used variables
-	fw.print_f("game = wl.Game()\n");
-	fw.print_f("map = game.map\n");
-	for (Widelands::PlayerNumber p = 1; p <= nr_players; ++p) {
-		fw.print_f("p%u = game.players[%u]\n", p, p);
+	// Variables
+	for (const auto& pair : variables_) {
+		fw.print_f("%s = %s\n", pair.first.c_str(), pair.second.value.c_str());
 	}
 
-	// Main function
-	// NOCOM: Just a dummy that places a headquarters for each player with some wares and workers.
-	// This whole function is a very ugly tribe-specific hack of course.
-	// Soon we won´t even have to worry about initial building placement – that will be saved in the map itself.
-	fw.print_f("\nfunction mission_thread()\n");
-	for (Widelands::PlayerNumber p = 1; p <= nr_players; ++p) {
-		const std::string tribe = map.get_scenario_player_tribe(p);
-		fw.print_f("   -- Starting conditions for player %u\n", p);
-		fw.print_f("   p%u:allow_buildings(\"all\")\n", p);
-		fw.print_f("   local hq%u = p%u:place_building(\"%s_headquarters\", "
-				"map.player_slots[%u].starting_field, false, true)\n", p, p, tribe.c_str(), p);
-		fw.print_f("   hq%u:set_wares {\n", p);
-		for (Widelands::DescriptionIndex di :
-				egbase().tribes().get_tribe_descr(egbase().tribes().tribe_index(tribe))->wares()) {
-			fw.print_f("      %s = %u,\n", egbase().tribes().get_ware_descr(di)->name().c_str(), std::rand() % 50);
+	// Functions
+	for (const auto& pair : functions_) {
+		fw.print_f("\nfunction %s(", pair.first.c_str());
+		const size_t params = pair.second.parameters.size();
+		if (params) {
+			auto it = pair.second.parameters.begin();
+			fw.print_f("%s", it->c_str());
+			for (size_t i = 1; i < params; ++i) {
+				++it;
+				fw.print_f(", %s", it->c_str());
+			}
+			assert(it == pair.second.parameters.end());
 		}
-		fw.print_f("   }\n");
-		fw.print_f("   hq%u:set_workers {\n", p);
-		for (Widelands::DescriptionIndex di :
-				egbase().tribes().get_tribe_descr(egbase().tribes().tribe_index(tribe))->workers()) {
-			fw.print_f("      %s = %u,\n", egbase().tribes().get_worker_descr(di)->name().c_str(), std::rand() % 5);
-		}
-		fw.print_f("   }\n");
-		fw.print_f("   hq%u:set_soldiers({0,0,0,0}, %u)\n\n", p, tribe == "atlanteans" ? 35 : 45);
+		fw.print_f(")\n");
+		// NOCOM function body
+		fw.print_f("   print(\"[NOCOM] Hello world! :)\")\n");
+		fw.print_f("end\n");
 	}
-	fw.print_f("end\n");
 
-	// Main function call
-	fw.print_f("\nrun(mission_thread)\n");
+	// Main function(s) call
+	for (const auto& pair : functions_) {
+		if (pair.second.autostart) {
+			assert(pair.second.parameters.empty());
+			fw.print_f("\nrun(%s)", pair.first.c_str());
+		}
+	}
 }
 

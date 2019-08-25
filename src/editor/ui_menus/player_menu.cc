@@ -140,20 +140,6 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 	box_.add_space(2 * kMargin);
 
 	const Widelands::Map& map = eia().egbase().map();
-
-	// Ensure that there is at least 1 player
-	if (map.get_nrplayers() < 1) {
-		Widelands::Map* mutable_map = eia().egbase().mutable_map();
-		mutable_map->set_nrplayers(1);
-		// Init player 1
-		mutable_map->set_scenario_player_ai(1, "");
-		mutable_map->set_scenario_player_closeable(1, false);
-		/** TRANSLATORS: Default player name, e.g. Player 1 */
-		mutable_map->set_scenario_player_name(1, (boost::format(_("Player %u")) % 1).str());
-		mutable_map->set_scenario_player_tribe(1, "");
-		eia().set_need_save(true);
-	}
-
 	const Widelands::PlayerNumber nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, kMaxPlayers) {
 		const bool map_has_player = p <= nr_players;

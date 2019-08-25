@@ -121,7 +121,7 @@ void find_former_buildings(const Tribes& tribes,
 Player::Player(EditorGameBase& the_egbase,
                PlayerNumber const plnum,
                uint8_t const initialization_index,
-               const TribeDescr& tribe_descr,
+               const TribeDescr* tribe_descr,
                const std::string& name)
    : egbase_(the_egbase),
      initialization_index_(initialization_index),
@@ -152,7 +152,7 @@ Player::Player(EditorGameBase& the_egbase,
 
 	// Disallow workers that the player's tribe doesn't have.
 	for (size_t worker_index = 0; worker_index < allowed_worker_types_.size(); ++worker_index) {
-		if (!tribe().has_worker(static_cast<DescriptionIndex>(worker_index))) {
+		if (!get_tribe() || !tribe().has_worker(static_cast<DescriptionIndex>(worker_index))) {
 			allowed_worker_types_[worker_index] = false;
 		}
 	}
@@ -161,8 +161,8 @@ Player::Player(EditorGameBase& the_egbase,
 	// that aren't militarysites that the tribe could conquer.
 	for (size_t i = 0; i < allowed_building_types_.size(); ++i) {
 		const DescriptionIndex& building_index = static_cast<DescriptionIndex>(i);
-		const BuildingDescr& descr = *tribe().get_building_descr(building_index);
-		if (!tribe().has_building(building_index) && descr.type() != MapObjectType::MILITARYSITE) {
+		const BuildingDescr& descr = *egbase_.tribes().get_building_descr(building_index);
+		if ((!get_tribe() || !tribe().has_building(building_index)) && descr.type() != MapObjectType::MILITARYSITE) {
 			allowed_building_types_[i] = false;
 		}
 	}
@@ -185,13 +185,14 @@ Player::Player(EditorGameBase& the_egbase,
 	   });
 
 	// Populating remaining_shipnames vector
-	for (const auto& shipname : tribe_descr.get_ship_names()) {
-		remaining_shipnames_.insert(shipname);
+	if (tribe_descr) {
+		for (const auto& shipname : tribe_descr->get_ship_names()) {
+			remaining_shipnames_.insert(shipname);
+		}
 	}
 }
 
 Player::~Player() {
-	delete[] fields_;
 }
 
 void Player::create_default_infrastructure() {
@@ -238,7 +239,7 @@ void Player::allocate_map() {
 	const Map& map = egbase().map();
 	assert(map.get_width());
 	assert(map.get_height());
-	fields_ = new Field[map.max_index()];
+	fields_.reset(new Field[map.max_index()]);
 }
 
 /**
@@ -998,8 +999,8 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 
 	Field& field = fields_[f.field - &first_map_field];
 
-	assert(fields_ <= &field);
-	assert(&field < fields_ + map.max_index());
+	assert(fields_.get() <= &field);
+	assert(&field < fields_.get() + map.max_index());
 
 	{  // discover everything (above the ground) in this field
 		field.terrains = f.field->get_terrains();
@@ -1113,8 +1114,8 @@ Vision Player::see_node(const Map& map, const FCoords& f, Time const gametime, b
 	}
 
 	Field& field = fields_[f.field - &first_map_field];
-	assert(fields_ <= &field);
-	assert(&field < fields_ + map.max_index());
+	assert(fields_.get() <= &field);
+	assert(&field < fields_.get() + map.max_index());
 
 	if (field.vision == 0) {
 		field.vision = 1;

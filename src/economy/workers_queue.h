@@ -70,8 +70,8 @@ public:
 	Worker* extract_worker();
 
 protected:
-	void read_child(FileRead&, Game&, MapObjectLoader&) override;
-	void write_child(FileWrite&, Game&, MapObjectSaver&) override;
+	void read_child(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+	void write_child(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 
 	void entered(DescriptionIndex index, Worker* worker) override;
 

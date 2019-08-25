@@ -80,7 +80,7 @@ public:
 	Player(EditorGameBase&,
 	       PlayerNumber,
 	       uint8_t initialization_index,
-	       const TribeDescr& tribe,
+	       const TribeDescr* tribe,
 	       const std::string& name);
 	~Player();
 
@@ -132,6 +132,9 @@ public:
 		return kPlayerColors[player_number_ - 1];
 	}
 	const TribeDescr& tribe() const {
+		return *tribe_;
+	}
+	const TribeDescr* get_tribe() const {
 		return tribe_;
 	}
 
@@ -434,7 +437,7 @@ public:
 	};
 
 	const Field* fields() const {
-		return fields_;
+		return fields_.get();
 	}
 
 	// See area
@@ -637,7 +640,7 @@ private:
 	bool team_player_uptodate_;
 	bool see_all_;
 	const PlayerNumber player_number_;
-	const TribeDescr& tribe_;  // buildings, wares, workers, sciences
+	const TribeDescr* tribe_;  // buildings, wares, workers, sciences
 	uint32_t casualties_, kills_;
 	uint32_t msites_lost_, msites_defeated_;
 	uint32_t civil_blds_lost_, civil_blds_defeated_;
@@ -645,7 +648,7 @@ private:
 	// If we run out of ship names, we'll want to continue with unique numbers
 	uint32_t ship_name_counter_;
 
-	Field* fields_;
+	std::unique_ptr<Field[]> fields_;
 	std::vector<bool> allowed_worker_types_;
 	std::vector<bool> allowed_building_types_;
 	std::map<Serial, std::unique_ptr<Economy>> economies_;

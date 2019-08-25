@@ -26,7 +26,7 @@
 #include "editor/ui_menus/tool_options_menu.h"
 #include "logic/map.h"
 #include "notifications/notifications.h"
-#include "ui_basic/listselect.h"
+#include "ui_basic/dropdown.h"
 
 class EditorInteractive;
 
@@ -42,9 +42,9 @@ private:
 	EditorInteractive& eia();
 	ScenarioFieldOwnerTool& tool_;
 
-	void select(Widelands::PlayerNumber);
+	void select();
 
-	UI::Listselect<Widelands::PlayerNumber> list_;
+	UI::Dropdown<Widelands::PlayerNumber> list_;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEditorPlayerEdited>> subscriber_;
 };

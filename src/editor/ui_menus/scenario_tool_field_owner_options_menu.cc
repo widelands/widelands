@@ -32,15 +32,18 @@ inline EditorInteractive& ScenarioToolFieldOwnerOptionsMenu::eia() {
 ScenarioToolFieldOwnerOptionsMenu::ScenarioToolFieldOwnerOptionsMenu(EditorInteractive& parent,
                                                                      ScenarioFieldOwnerTool& tool,
                                                                      UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 400, 300, _("Set Field Owner"), tool),
+   : EditorToolOptionsMenu(parent, registry, 300, 24, _("Set Field Owner"), tool),
      tool_(tool),
-     list_(this, 0, 0, get_inner_w(), get_inner_h(), UI::PanelStyle::kWui) {
+     list_(this, "player", 0, 0, get_inner_w(), 8, get_inner_h(), "",
+     		UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary) {
 	subscriber_ = Notifications::subscribe<Widelands::NoteEditorPlayerEdited>(
-		[this](const Widelands::NoteEditorPlayerEdited&) {
-			update();
+		[this](const Widelands::NoteEditorPlayerEdited& n) {
+			if (n.map == &eia().egbase().map()) {
+				update();
+			}
 		});
 
-	list_.selected.connect(boost::bind(&ScenarioToolFieldOwnerOptionsMenu::select, this, _1));
+	list_.selected.connect(boost::bind(&ScenarioToolFieldOwnerOptionsMenu::select, this));
 	update();
 
 	if (get_usedefaultpos()) {
@@ -50,8 +53,13 @@ ScenarioToolFieldOwnerOptionsMenu::ScenarioToolFieldOwnerOptionsMenu(EditorInter
 
 void ScenarioToolFieldOwnerOptionsMenu::update() {
 	const Widelands::Map& map = eia().egbase().map();
-	const Widelands::PlayerNumber sel = tool_.get_new_owner();
 	const Widelands::PlayerNumber max = map.get_nrplayers();
+	if (&tool_ != &eia().tools()->sc_owner) {
+		// Happens if the window remains open during new map creation,
+		// because the EIA's order for us to die() is only executed after the map sends us a NoteEditorPlayerEdited
+		return;
+	}
+	const Widelands::PlayerNumber sel = tool_.get_new_owner();
 	list_.clear();
 	list_.add(_("Unset Owner"), 0, nullptr, sel == 0 || sel > max, _("Mark fields as unowned"));
 	for (Widelands::PlayerNumber p = 1; p <= max; ++p) {
@@ -60,11 +68,12 @@ void ScenarioToolFieldOwnerOptionsMenu::update() {
 		list_.add((boost::format(_("Player %1$s (%2$s)")) % std::to_string(static_cast<int>(p)) % name).str(), p,
 				g_gr->images().get(tribe.empty() ? "images/ui_fsmenu/random.png" :
 						Widelands::get_tribeinfo(eia().egbase().map().get_scenario_player_tribe(p)).icon),
-				sel == p, (boost::format(_("Claim fields for %s")) % name).str());
+						sel == p, (boost::format(_("Claim fields for %s")) % name).str());
 	}
 }
 
-void ScenarioToolFieldOwnerOptionsMenu::select(Widelands::PlayerNumber p) {
+void ScenarioToolFieldOwnerOptionsMenu::select() {
+	const Widelands::PlayerNumber p = list_.get_selected();
 	assert(p <= eia().egbase().map().get_nrplayers());
 	tool_.set_new_owner(p);
 	select_correct_tool();
