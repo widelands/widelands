@@ -199,16 +199,12 @@ wl_library(wui
     game_debug_ui.h
     game_exit_confirm_box.cc
     game_exit_confirm_box.h
-    game_statistics_menu.cc
-    game_statistics_menu.h
     game_main_menu_save_game.cc
     game_main_menu_save_game.h
     game_message_menu.cc
     game_message_menu.h
     game_objectives_menu.cc
     game_objectives_menu.h
-    game_options_menu.cc
-    game_options_menu.h
     game_options_sound_menu.cc
     game_options_sound_menu.h
     game_summary.cc
@@ -294,6 +290,7 @@ wl_library(wui
     graphic_surface
     graphic_text
     graphic_text_layout
+    graphic_toolbar_imageset
     io_fileread
     io_filesystem
     io_profile

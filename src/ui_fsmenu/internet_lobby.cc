@@ -238,17 +238,18 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 
 	if (games != nullptr) {  // If no communication error occurred, fill the list.
 		for (const InternetGame& game : *games) {
-			const Image* pic;
 			if (game.connectable == INTERNET_GAME_SETUP && game.build_id == localbuildid) {
 				// only clients with the same build number are displayed
-				pic = g_gr->images().get("images/ui_basic/continue.png");
-				opengames_list_.add(game.name, game, pic, false, game.build_id);
+				opengames_list_.add(richtext_escape(game.name), game,
+				                    g_gr->images().get("images/ui_basic/continue.png"), false,
+				                    game.build_id);
 			} else if (game.connectable == INTERNET_GAME_SETUP &&
 			           game.build_id.compare(0, 6, "build-") != 0 &&
 			           localbuildid.compare(0, 6, "build-") != 0) {
 				// only development clients are allowed to see games openend by such
-				pic = g_gr->images().get("images/ui_basic/different.png");
-				opengames_list_.add(game.name, game, pic, false, game.build_id);
+				opengames_list_.add(richtext_escape(game.name), game,
+				                    g_gr->images().get("images/ui_basic/different.png"), false,
+				                    game.build_id);
 			}
 		}
 	}

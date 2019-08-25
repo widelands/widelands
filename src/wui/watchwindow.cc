@@ -59,12 +59,12 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
      cur_index_(0) {
 	UI::Button* followbtn =
 	   new UI::Button(this, "follow", 0, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
-	                  g_gr->images().get("images/wui/menus/menu_watch_follow.png"), _("Follow"));
+	                  g_gr->images().get("images/wui/menus/watch_follow.png"), _("Follow"));
 	followbtn->sigclicked.connect(boost::bind(&WatchWindow::do_follow, this));
 
 	UI::Button* gotobtn = new UI::Button(
 	   this, "center_mainview_here", 34, h - 34, 34, 34, UI::ButtonStyle::kWuiSecondary,
-	   g_gr->images().get("images/wui/menus/menu_goto.png"), _("Center the main view on this"));
+	   g_gr->images().get("images/wui/menus/goto.png"), _("Center the main view on this"));
 	gotobtn->sigclicked.connect(boost::bind(&WatchWindow::do_goto, this));
 
 	if (init_single_window) {

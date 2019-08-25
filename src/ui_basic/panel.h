@@ -79,6 +79,8 @@ public:
 		pf_layout_toplevel = 512,
 		/// whether widget wants to receive unicode textinput messages
 		pf_handle_textinput = 1024,
+		/// whether widget and its children will handle any key presses
+		pf_handle_keypresses = 2048,
 	};
 
 	Panel(Panel* const nparent,
@@ -303,6 +305,16 @@ protected:
 		flags_ |= pf_handle_textinput;
 	}
 
+	// If this is set to 'true', this panel ad its children will never receive keypresses (do_key) or
+	// textinput (do_textinput).
+	void set_handle_keypresses(bool const on) {
+		if (on) {
+			flags_ |= pf_handle_keypresses;
+		} else {
+			flags_ &= ~pf_handle_keypresses;
+		}
+	}
+
 	// Defines if think() should be called repeatedly. This is true on construction.
 	void set_thinks(bool yes);
 
@@ -325,6 +337,14 @@ private:
 	bool handles_mouse() const {
 		return (flags_ & pf_handle_mouse) != 0;
 	}
+
+	bool handles_keypresses() const {
+		if (get_parent() != nullptr && !get_parent()->handles_keypresses()) {
+			return false;
+		}
+		return (flags_ & pf_handle_keypresses) != 0;
+	}
+
 	bool handles_textinput() const {
 		return (flags_ & pf_handle_textinput) != 0;
 	}

@@ -37,6 +37,7 @@ const std::string kCampVisFileLegacy = "save/campvis";
 Campaigns::Campaigns() {
 	// Load solved scenarios
 	std::unique_ptr<Profile> campvis;
+	g_fs->ensure_directory_exists(kSaveDir);
 	if (!(g_fs->file_exists(kCampVisFile))) {
 		// There is no campaigns.conf file - create one.
 		campvis.reset(new Profile(kCampVisFile.c_str()));

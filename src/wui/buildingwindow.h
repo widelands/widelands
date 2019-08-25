@@ -135,8 +135,6 @@ private:
 
 	bool showing_workarea_;
 	bool avoid_fastclick_;
-	// The building is being transformed from a contructionsite to a finished building etc.
-	bool is_warping_;
 
 	UI::Button* expeditionbtn_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>

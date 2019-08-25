@@ -128,6 +128,7 @@ wl_library(logic_map_objects
     graphic_image_io
     graphic_surface
     graphic_text_layout
+    graphic_toolbar_imageset
     helper
     io_fileread
     io_filesystem
