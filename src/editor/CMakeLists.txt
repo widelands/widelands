@@ -34,10 +34,10 @@ wl_library(editor
     tools/place_immovable_tool.h
     tools/resize_tool.cc
     tools/resize_tool.h
-    tools/scenario_building_settings_tool.cc
-    tools/scenario_building_settings_tool.h
     tools/scenario_field_owner_tool.cc
     tools/scenario_field_owner_tool.h
+    tools/scenario_infrastructure_settings_tool.cc
+    tools/scenario_infrastructure_settings_tool.h
     tools/scenario_infrastructure_tool.cc
     tools/scenario_infrastructure_tool.h
     tools/set_height_tool.cc
@@ -75,12 +75,10 @@ wl_library(editor
     ui_menus/map_size_box.h
     ui_menus/player_menu.cc
     ui_menus/player_menu.h
+    ui_menus/scenario_infrastructure_settings_window.h
+    ui_menus/scenario_infrastructure_settings_window.cc
     ui_menus/scenario_lua.cc
     ui_menus/scenario_lua.h
-#    ui_menus/scenario_building_settings_window.cc
-#    ui_menus/scenario_building_settings_window.h
-    ui_menus/scenario_flag_settings_window.h
-    ui_menus/scenario_flag_settings_window.cc
     ui_menus/scenario_tool_field_owner_options_menu.cc
     ui_menus/scenario_tool_field_owner_options_menu.h
     ui_menus/scenario_tool_infrastructure_options_menu.cc

@@ -36,7 +36,7 @@ using Widelands::SoldierControl;
  */
 struct SoldierCapacityControl : UI::Box {
 	SoldierCapacityControl(UI::Panel* parent,
-	                       InteractiveGameBase& igb,
+	                       InteractiveBase& ib,
 	                       Widelands::Building& building);
 
 protected:
@@ -47,7 +47,7 @@ private:
 	void click_decrease();
 	void click_increase();
 
-	InteractiveGameBase& igbase_;
+	InteractiveBase& ibase_;
 	Widelands::Building& building_;
 
 	UI::Button decrease_;
@@ -56,10 +56,10 @@ private:
 };
 
 SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
-                                               InteractiveGameBase& igb,
+                                               InteractiveBase& igb,
                                                Widelands::Building& building)
    : Box(parent, 0, 0, Horizontal),
-     igbase_(igb),
+     ibase_(ib),
      building_(building),
      decrease_(this,
                "decrease",
@@ -102,13 +102,17 @@ void SoldierCapacityControl::think() {
 	uint32_t const capacity = soldiers->soldier_capacity();
 	value_.set_text(boost::lexical_cast<std::string>(capacity));
 
-	bool const can_act = igbase_.can_act(building_.owner().player_number());
+	bool const can_act = ibase_.can_act(building_.owner().player_number());
 	decrease_.set_enabled(can_act && soldiers->min_soldier_capacity() < capacity);
 	increase_.set_enabled(can_act && soldiers->max_soldier_capacity() > capacity);
 }
 
 void SoldierCapacityControl::change_soldier_capacity(int delta) {
-	igbase_.game().send_player_change_soldier_capacity(building_, delta);
+	if (InteractiveGameBase* ig = dynamic_cast<InteractiveGameBase*>(&ibase_)) {
+		ig->game().send_player_change_soldier_capacity(building_, delta);
+	} else {
+		log("NOCOM: SoldierCapacityControl::change_soldier_capacity in editor not yet implemented\n");
+	}
 }
 
 void SoldierCapacityControl::click_decrease() {
@@ -128,7 +132,7 @@ void SoldierCapacityControl::click_increase() {
 }
 
 UI::Panel* create_soldier_capacity_control(UI::Panel& parent,
-                                           InteractiveGameBase& igb,
+                                           InteractiveBase& ib,
                                            Widelands::Building& building) {
-	return new SoldierCapacityControl(&parent, igb, building);
+	return new SoldierCapacityControl(&parent, ib, building);
 }

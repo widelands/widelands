@@ -72,9 +72,6 @@ public:
 	void add_wanted_building_window(const Widelands::Coords& coords,
 	                                const Vector2i point,
 	                                bool was_minimal);
-	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords,
-	                                       bool avoid_fastclick,
-	                                       bool workarea_preview_wanted);
 	bool try_show_ship_window();
 	void show_ship_window(Widelands::Ship* ship);
 	bool is_multiplayer() {

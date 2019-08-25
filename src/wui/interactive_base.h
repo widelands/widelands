@@ -182,6 +182,11 @@ public:
 	// Sets the landmark for the keyboard 'key' to 'point'
 	void set_landmark(size_t key, const MapView::View& view);
 
+	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords,
+	                                       bool avoid_fastclick,
+	                                       bool workarea_preview_wanted,
+	                                       bool omnipotent = false);
+
 	MapView* map_view() {
 		return &map_view_;
 	}

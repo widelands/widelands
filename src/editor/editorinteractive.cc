@@ -390,8 +390,8 @@ void EditorInteractive::add_scenario_tool_menu() {
 	              _("Place buildings, flags and tribe immovables"));
 
 	/** TRANSLATORS: An entry in the editor's scenario tool menu */
-	scenario_toolmenu_.add(_("Infrastructure Settings"), ScenarioToolMenuEntry::kBuildingSettings,
-	              g_gr->images().get("images/wui/editor/tools/sc_bld_settings.png"), false,
+	scenario_toolmenu_.add(_("Infrastructure Settings"), ScenarioToolMenuEntry::kInfrastructureSettings,
+	              g_gr->images().get("images/wui/editor/tools/sc_infra_settings.png"), false,
 	              /** TRANSLATORS: Tooltip for the infrastructure settings scenario tool in the editor */
 	              _("Create the initial settings for buildings and flags"),
 	              _("Shift+i"));
@@ -456,8 +456,8 @@ void EditorInteractive::scenario_tool_menu_selected(ScenarioToolMenuEntry entry)
 	case ScenarioToolMenuEntry::kInfrastructure:
 		scenario_tool_windows_.infrastructure.toggle();
 		break;
-	case ScenarioToolMenuEntry::kBuildingSettings:
-		select_tool(tools()->sc_bld_settings, EditorTool::First);
+	case ScenarioToolMenuEntry::kInfrastructureSettings:
+		select_tool(tools()->sc_infra_settings, EditorTool::First);
 		break;
 	case ScenarioToolMenuEntry::kLua:
 		scenario_tool_windows_.lua.toggle();
@@ -895,7 +895,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_i:
 			if (code.mod & KMOD_SHIFT) {
-				select_tool(tools_->sc_bld_settings, EditorTool::First);
+				select_tool(tools_->sc_infra_settings, EditorTool::First);
 			} else {
 				select_tool(tools_->info, EditorTool::First);
 			}

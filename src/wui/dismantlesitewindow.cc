@@ -23,16 +23,17 @@
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
-DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent,
+DismantleSiteWindow::DismantleSiteWindow(InteractiveBase& parent,
                                          UI::UniqueWindow::Registry& reg,
                                          Widelands::DismantleSite& ds,
-                                         bool avoid_fastclick)
-   : BuildingWindow(parent, reg, ds, avoid_fastclick), dismantle_site_(&ds), progress_(nullptr) {
+                                         bool avoid_fastclick,
+                                         bool op)
+   : BuildingWindow(parent, reg, ds, avoid_fastclick, op), dismantle_site_(&ds), progress_(nullptr) {
 	init(avoid_fastclick, false);
 }
 
 void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
-	Widelands::DismantleSite* dismantle_site = dismantle_site_.get(igbase()->egbase());
+	Widelands::DismantleSite* dismantle_site = dismantle_site_.get(ibase()->egbase());
 	assert(dismantle_site != nullptr);
 
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
@@ -65,7 +66,7 @@ void DismantleSiteWindow::think() {
 	// existance.
 	BuildingWindow::think();
 
-	Widelands::DismantleSite* dismantle_site = dismantle_site_.get(igbase()->egbase());
+	Widelands::DismantleSite* dismantle_site = dismantle_site_.get(ibase()->egbase());
 	if (dismantle_site == nullptr) {
 		return;
 	}

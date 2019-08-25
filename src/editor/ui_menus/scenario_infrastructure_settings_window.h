@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_SCENARIO_FLAG_SETTINGS_WINDOW_H
-#define WL_EDITOR_UI_MENUS_SCENARIO_FLAG_SETTINGS_WINDOW_H
+#ifndef WL_EDITOR_UI_MENUS_SCENARIO_INFRASTRUCTURE_SETTINGS_WINDOW_H
+#define WL_EDITOR_UI_MENUS_SCENARIO_INFRASTRUCTURE_SETTINGS_WINDOW_H
 
 #include <memory>
 #include <vector>
@@ -30,11 +30,11 @@
 #include "ui_basic/window.h"
 
 class EditorInteractive;
-struct ScenarioBuildingSettingsTool;
+struct ScenarioInfrastructureSettingsTool;
 
 /// The control center for the scenario scripting
 struct ScenarioFlagSettingsWindow : public UI::Window {
-	ScenarioFlagSettingsWindow(EditorInteractive&, ScenarioBuildingSettingsTool&, Widelands::Flag&);
+	ScenarioFlagSettingsWindow(EditorInteractive&, ScenarioInfrastructureSettingsTool&, Widelands::Flag&);
 
 	const Widelands::Flag* flag() const;
 
@@ -53,8 +53,8 @@ private:
 	void update();
 	void select(uint32_t slot);
 
-	ScenarioBuildingSettingsTool& tool_;
+	ScenarioInfrastructureSettingsTool& tool_;
 	Widelands::OPtr<Widelands::Flag> flag_;
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_SCENARIO_FLAG_SETTINGS_WINDOW_H
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_SCENARIO_INFRASTRUCTURE_SETTINGS_WINDOW_H

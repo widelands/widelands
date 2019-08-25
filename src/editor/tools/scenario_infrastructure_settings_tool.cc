@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor/tools/scenario_building_settings_tool.h"
+#include "editor/tools/scenario_infrastructure_settings_tool.h"
 
 #include <cstdio>
 #include <vector>
@@ -27,7 +27,7 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 
-int32_t ScenarioBuildingSettingsTool::handle_click_impl(const Widelands::World&,
+int32_t ScenarioInfrastructureSettingsTool::handle_click_impl(const Widelands::World&,
                                           const Widelands::NodeAndTriangle<>& center,
                                           EditorInteractive& parent,
                                           EditorActionArgs*,
@@ -39,32 +39,22 @@ int32_t ScenarioBuildingSettingsTool::handle_click_impl(const Widelands::World&,
 	}
 	Widelands::BaseImmovable& imm = *f.get_immovable();
 	if (imm.descr().type() == Widelands::MapObjectType::FLAG) {
-		for (const ScenarioFlagSettingsWindow* w : open_windows_flag_) {
+		for (const ScenarioFlagSettingsWindow* w : open_windows_) {
 			if (w->flag() == &imm) {
 				return 0;
 			}
 		}
-		open_windows_flag_.insert(new ScenarioFlagSettingsWindow(parent, *this, dynamic_cast<Widelands::Flag&>(imm)));
-	} /* else if (Widelands::Building* bld = dynamic_cast<Widelands::Building>(&imm)) {
-		for (const ScenarioBuildingSettingsWindow* w : open_windows_building_) {
-			if (w->building() == bld) {
-				return 0;
-			}
-		}
-		open_windows_building_.insert(new ScenarioBuildingSettingsWindow(parent, *bld));
-	} */
+		open_windows_.insert(new ScenarioFlagSettingsWindow(parent, *this, dynamic_cast<Widelands::Flag&>(imm)));
+	} else if (dynamic_cast<Widelands::Building*>(&imm)) {
+		// This function uses UniqueWindow to ensure that the window doesn't open twice
+		parent.show_building_window(center.node, true, false, true);
+	}
 	return 0;
 }
 
-/* void ScenarioBuildingSettingsTool::window_closing(const ScenarioBuildingSettingsWindow* w) {
-	auto it = open_windows_building_.find(w);
-	assert(it != open_windows_building_.end());
-	open_windows_building_.erase(it);
-} */
-
-void ScenarioBuildingSettingsTool::window_closing(const ScenarioFlagSettingsWindow* w) {
-	auto it = open_windows_flag_.find(w);
-	assert(it != open_windows_flag_.end());
-	open_windows_flag_.erase(it);
+void ScenarioInfrastructureSettingsTool::window_closing(const ScenarioFlagSettingsWindow* w) {
+	auto it = open_windows_.find(w);
+	assert(it != open_windows_.end());
+	open_windows_.erase(it);
 }
 

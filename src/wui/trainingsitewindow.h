@@ -28,11 +28,12 @@
  * Status window for \ref TrainingSite
  */
 struct TrainingSiteWindow : public ProductionSiteWindow {
-	TrainingSiteWindow(InteractiveGameBase& parent,
+	TrainingSiteWindow(InteractiveBase& parent,
 	                   UI::UniqueWindow::Registry& reg,
 	                   Widelands::TrainingSite&,
 	                   bool avoid_fastclick,
-	                   bool workarea_preview_wanted);
+	                   bool workarea_preview_wanted,
+	                    bool omnipotent);
 
 private:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;

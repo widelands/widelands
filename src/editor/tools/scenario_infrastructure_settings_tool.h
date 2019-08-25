@@ -17,18 +17,17 @@
  *
  */
 
-#ifndef WL_EDITOR_TOOLS_SCENARIO_BUILDING_SETTINGS_TOOL_H
-#define WL_EDITOR_TOOLS_SCENARIO_BUILDING_SETTINGS_TOOL_H
+#ifndef WL_EDITOR_TOOLS_SCENARIO_INFRASTRUCTURE_SETTINGS_TOOL_H
+#define WL_EDITOR_TOOLS_SCENARIO_INFRASTRUCTURE_SETTINGS_TOOL_H
 
 #include <set>
 
 #include "editor/tools/tool.h"
-// #include "editor/ui_menus/scenario_building_settings_window.h"
-#include "editor/ui_menus/scenario_flag_settings_window.h"
+#include "editor/ui_menus/scenario_infrastructure_settings_window.h"
 
 /// Open windows for buildings and flags where their initial settings can be configured
-struct ScenarioBuildingSettingsTool : public EditorTool {
-	ScenarioBuildingSettingsTool() : EditorTool(*this, *this, false) {
+struct ScenarioInfrastructureSettingsTool : public EditorTool {
+	ScenarioInfrastructureSettingsTool() : EditorTool(*this, *this, false) {
 	}
 
 	int32_t handle_click_impl(const Widelands::World& world,
@@ -38,19 +37,17 @@ struct ScenarioBuildingSettingsTool : public EditorTool {
 	                          Widelands::Map* map) override;
 
 	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/wui/editor/fsel_editor_bld_settings.png");
+		return g_gr->images().get("images/wui/editor/fsel_editor_infra_settings.png");
 	}
 
 	bool has_size_one() const override {
 		return true;
 	}
 
-//	void window_closing(const ScenarioBuildingSettingsWindow*);
 	void window_closing(const ScenarioFlagSettingsWindow*);
 
 private:
-//	std::set<const ScenarioBuildingSettingsWindow*> open_windows_building_;
-	std::set<const ScenarioFlagSettingsWindow*> open_windows_flag_;
+	std::set<const ScenarioFlagSettingsWindow*> open_windows_;
 };
 
-#endif  // end of include guard: WL_EDITOR_TOOLS_SCENARIO_BUILDING_SETTINGS_TOOL_H
+#endif  // end of include guard: WL_EDITOR_TOOLS_SCENARIO_INFRASTRUCTURE_SETTINGS_TOOL_H

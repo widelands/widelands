@@ -45,11 +45,12 @@ static const char* pic_bulldoze = "images/wui/buildings/menu_bld_bulldoze.png";
 static const char* pic_dismantle = "images/wui/buildings/menu_bld_dismantle.png";
 static const char* pic_debug = "images/wui/fieldaction/menu_debug.png";
 
-BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
+BuildingWindow::BuildingWindow(InteractiveBase& parent,
                                UI::UniqueWindow::Registry& reg,
                                Widelands::Building& b,
                                const Widelands::BuildingDescr& descr,
-                               bool avoid_fastclick)
+                               bool avoid_fastclick,
+                               bool op)
    : UI::UniqueWindow(&parent, "building_window", &reg, Width, 0, b.descr().descname()),
      is_dying_(false),
      parent_(&parent),
@@ -59,16 +60,18 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
      showing_workarea_(false),
      avoid_fastclick_(avoid_fastclick),
      is_warping_(false),
+     omnipotent_(op),
      expeditionbtn_(nullptr) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) { on_building_note(note); });
 }
 
-BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
+BuildingWindow::BuildingWindow(InteractiveBase& parent,
                                UI::UniqueWindow::Registry& reg,
                                Widelands::Building& b,
-                               bool avoid_fastclick)
-   : BuildingWindow(parent, reg, b, b.descr(), avoid_fastclick) {
+                               bool avoid_fastclick,
+                               bool op)
+   : BuildingWindow(parent, reg, b, b.descr(), avoid_fastclick, op) {
 }
 
 BuildingWindow::~BuildingWindow() {
@@ -76,6 +79,10 @@ BuildingWindow::~BuildingWindow() {
 		// Accessing the toggle_workarea_ button can cause segfaults, so we leave it alone
 		hide_workarea(false);
 	}
+}
+
+InteractiveGameBase* BuildingWindow::igbase() const {
+	return dynamic_cast<InteractiveGameBase*>(ibase());
 }
 
 void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
@@ -393,11 +400,15 @@ void BuildingWindow::act_bulldoze() {
 		return;
 	}
 
-	if (SDL_GetModState() & KMOD_CTRL) {
-		if (building->get_playercaps() & Widelands::Building::PCap_Bulldoze)
-			igbase()->game().send_player_bulldoze(*building);
+	if (InteractiveGameBase* ig = igbase()) {
+		if (SDL_GetModState() & KMOD_CTRL) {
+			if (building->get_playercaps() & Widelands::Building::PCap_Bulldoze)
+				ig->game().send_player_bulldoze(*building);
+		} else {
+			show_bulldoze_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building);
+		}
 	} else {
-		show_bulldoze_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building);
+		building->remove(parent_->egbase());
 	}
 }
 
@@ -408,13 +419,17 @@ Callback for dismantling request
 */
 void BuildingWindow::act_dismantle() {
 	Widelands::Building* building = building_.get(parent_->egbase());
-	if (SDL_GetModState() & KMOD_CTRL) {
-		if (building->get_playercaps() & Widelands::Building::PCap_Dismantle) {
-			igbase()->game().send_player_dismantle(*building);
-			hide_workarea(true);
+	if (InteractiveGameBase* ig = igbase()) {
+		if (SDL_GetModState() & KMOD_CTRL) {
+			if (building->get_playercaps() & Widelands::Building::PCap_Dismantle) {
+				ig->game().send_player_dismantle(*building);
+				hide_workarea(true);
+			}
+		} else {
+			show_dismantle_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building);
 		}
 	} else {
-		show_dismantle_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building);
+		building->owner().dismantle_building(building);
 	}
 }
 
@@ -429,8 +444,12 @@ void BuildingWindow::act_start_stop() {
 		return;
 	}
 
-	if (dynamic_cast<const Widelands::ProductionSite*>(building)) {
-		igbase()->game().send_player_start_stop_building(*building);
+	if (Widelands::ProductionSite* p = dynamic_cast<Widelands::ProductionSite*>(building)) {
+		if (InteractiveGameBase* ig = igbase()) {
+			ig->game().send_player_start_stop_building(*building);
+		} else {
+			p->owner().start_stop_building(*p);
+		}
 	}
 }
 
@@ -445,10 +464,14 @@ void BuildingWindow::act_start_or_cancel_expedition() {
 		return;
 	}
 
-	if (upcast(Widelands::Warehouse const, warehouse, building)) {
+	if (Widelands::Warehouse* warehouse = dynamic_cast<Widelands::Warehouse*>(building)) {
 		if (warehouse->get_portdock()) {
-			expeditionbtn_->set_enabled(false);
-			igbase()->game().send_player_start_or_cancel_expedition(*building);
+			if (InteractiveGameBase* ig = igbase()) {
+				expeditionbtn_->set_enabled(false);
+				ig->game().send_player_start_or_cancel_expedition(*building);
+			} else {
+				warehouse->owner().start_or_cancel_expedition(warehouse);
+			}
 		}
 		get_tabs()->activate("expedition_wares_queue");
 	}
@@ -468,11 +491,15 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id) {
 		return;
 	}
 
-	if (SDL_GetModState() & KMOD_CTRL) {
-		if (building->get_playercaps() & Widelands::Building::PCap_Enhancable)
-			igbase()->game().send_player_enhance_building(*building, id);
+	if (InteractiveGameBase* ig = igbase()) {
+		if (SDL_GetModState() & KMOD_CTRL) {
+			if (building->get_playercaps() & Widelands::Building::PCap_Enhancable)
+				ig->game().send_player_enhance_building(*building, id);
+		} else {
+			show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building, id);
+		}
 	} else {
-		show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building, id);
+		building->owner().enhance_building(building, id);
 	}
 }
 
@@ -482,7 +509,7 @@ Callback for debug window
 ===============
 */
 void BuildingWindow::act_debug() {
-	show_field_debug(*igbase(), igbase()->game().map().get_fcoords(building_position_));
+	show_field_debug(*igbase(), ibase()->egbase().map().get_fcoords(building_position_));
 }
 
 /**

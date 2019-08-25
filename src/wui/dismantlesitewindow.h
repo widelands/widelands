@@ -28,10 +28,11 @@
  * Status window for dismantle sites.
  */
 struct DismantleSiteWindow : public BuildingWindow {
-	DismantleSiteWindow(InteractiveGameBase& parent,
+	DismantleSiteWindow(InteractiveBase& parent,
 	                    UI::UniqueWindow::Registry& reg,
 	                    Widelands::DismantleSite&,
-	                    bool avoid_fastclick);
+	                    bool avoid_fastclick,
+	                    bool omnipotent);
 
 	void think() override;
 

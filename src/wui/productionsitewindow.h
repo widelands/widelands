@@ -27,11 +27,12 @@
 #include "wui/buildingwindow.h"
 
 struct ProductionSiteWindow : public BuildingWindow {
-	ProductionSiteWindow(InteractiveGameBase& parent,
+	ProductionSiteWindow(InteractiveBase& parent,
 	                     UI::UniqueWindow::Registry& reg,
 	                     Widelands::ProductionSite&,
 	                     bool avoid_fastclick,
-	                     bool workarea_preview_wanted);
+	                     bool workarea_preview_wanted,
+	                     bool omnipotent);
 
 protected:
 	void think() override;

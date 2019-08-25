@@ -32,8 +32,8 @@
 #include "editor/tools/place_critter_tool.h"
 #include "editor/tools/place_immovable_tool.h"
 #include "editor/tools/resize_tool.h"
-#include "editor/tools/scenario_building_settings_tool.h"
 #include "editor/tools/scenario_field_owner_tool.h"
+#include "editor/tools/scenario_infrastructure_settings_tool.h"
 #include "editor/tools/scenario_infrastructure_tool.h"
 #include "editor/tools/set_origin_tool.h"
 #include "editor/tools/set_port_space_tool.h"
@@ -70,7 +70,7 @@ public:
 		     sc_owner(),
 		     sc_infra_del(),
 		     sc_infra(sc_infra_del),
-		     sc_bld_settings() {
+		     sc_infra_settings() {
 		}
 		EditorTool& current() const {
 			return *current_pointer;
@@ -100,7 +100,7 @@ public:
 		ScenarioFieldOwnerTool sc_owner;
 		ScenarioInfrastructureDeleteTool sc_infra_del;
 		ScenarioInfrastructureTool sc_infra;
-		ScenarioBuildingSettingsTool sc_bld_settings;
+		ScenarioInfrastructureSettingsTool sc_infra_settings;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
 
@@ -199,7 +199,7 @@ private:
 	enum class ScenarioToolMenuEntry {
 		kFieldOwner,
 		kInfrastructure,
-		kBuildingSettings,
+		kInfrastructureSettings,
 		kLua,
 	};
 

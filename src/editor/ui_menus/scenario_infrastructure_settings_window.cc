@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor/ui_menus/scenario_flag_settings_window.h"
+#include "editor/ui_menus/scenario_infrastructure_settings_window.h"
 
 #include <memory>
 
@@ -26,6 +26,7 @@
 #include "base/i18n.h"
 #include "economy/ware_instance.h"
 #include "editor/editorinteractive.h"
+#include "editor/tools/scenario_unfrastructure_settings_tool.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 
@@ -34,7 +35,7 @@ inline EditorInteractive& ScenarioFlagSettingsWindow::eia() {
 }
 
 ScenarioFlagSettingsWindow::ScenarioFlagSettingsWindow(EditorInteractive& parent,
-		ScenarioBuildingSettingsTool& t, Widelands::Flag& f)
+		ScenarioInfrastructureSettingsTool& t, Widelands::Flag& f)
    : UI::Window(&parent, "scenario_flag_settings_" + std::to_string(f.serial()), 0, 0, 300, 100,
 			(boost::format(_("Flag at %1$dx%2$d")) % f.get_position().x % f.get_position().y).str()),
      tool_(t),

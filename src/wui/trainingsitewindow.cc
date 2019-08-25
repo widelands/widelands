@@ -28,22 +28,23 @@ static char const* pic_tab_military = "images/wui/buildings/menu_tab_military.pn
 /**
  * Create the \ref TrainingSite specific soldier list tab.
  */
-TrainingSiteWindow::TrainingSiteWindow(InteractiveGameBase& parent,
+TrainingSiteWindow::TrainingSiteWindow(InteractiveBase& parent,
                                        UI::UniqueWindow::Registry& reg,
                                        Widelands::TrainingSite& ts,
                                        bool avoid_fastclick,
-                                       bool workarea_preview_wanted)
-   : ProductionSiteWindow(parent, reg, ts, avoid_fastclick, workarea_preview_wanted),
+                                       bool workarea_preview_wanted,
+                                       bool op)
+   : ProductionSiteWindow(parent, reg, ts, avoid_fastclick, workarea_preview_wanted, op),
      training_site_(&ts) {
 	init(avoid_fastclick, workarea_preview_wanted);
 }
 
 void TrainingSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
-	Widelands::ProductionSite* training_site = training_site_.get(igbase()->egbase());
+	Widelands::ProductionSite* training_site = training_site_.get(ibase()->egbase());
 	assert(training_site != nullptr);
 	ProductionSiteWindow::init(avoid_fastclick, workarea_preview_wanted);
 	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
-	                create_soldier_list(*get_tabs(), *igbase(), *training_site),
+	                create_soldier_list(*get_tabs(), *ibase(), *training_site),
 	                _("Soldiers in training"));
 	think();
 }

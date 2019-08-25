@@ -27,11 +27,12 @@
  * Status window for \ref MilitarySite
  */
 struct MilitarySiteWindow : public BuildingWindow {
-	MilitarySiteWindow(InteractiveGameBase& parent,
+	MilitarySiteWindow(InteractiveBase& parent,
 	                   UI::UniqueWindow::Registry& reg,
 	                   Widelands::MilitarySite&,
 	                   bool avoid_fastclick,
-	                   bool workarea_preview_wanted);
+	                   bool workarea_preview_wanted,
+	                    bool omnipotent);
 
 private:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;

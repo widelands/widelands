@@ -29,7 +29,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
-#include "wui/interactive_gamebase.h"
+#include "wui/interactive_base.h"
 #include "wui/waresdisplay.h"
 
 /**
@@ -47,23 +47,26 @@ struct BuildingWindow : public UI::UniqueWindow {
 protected:
 	// This constructor allows setting a building description for the help button independent of the
 	// base building
-	BuildingWindow(InteractiveGameBase& parent,
+	BuildingWindow(InteractiveBase& parent,
 	               UI::UniqueWindow::Registry& reg,
 	               Widelands::Building&,
 	               const Widelands::BuildingDescr&,
-	               bool avoid_fastclick);
+	               bool avoid_fastclick,
+	                     bool omnipotent);
 
 public:
-	BuildingWindow(InteractiveGameBase& parent,
+	BuildingWindow(InteractiveBase& parent,
 	               UI::UniqueWindow::Registry& reg,
 	               Widelands::Building&,
-	               bool avoid_fastclick);
+	               bool avoid_fastclick,
+	                     bool omnipotent);
 
 	~BuildingWindow() override;
 
-	InteractiveGameBase* igbase() const {
+	InteractiveBase* ibase() const {
 		return parent_;
 	}
+	InteractiveGameBase* igbase() const;
 
 	void draw(RenderTarget&) override;
 	void think() override;
@@ -108,7 +111,7 @@ private:
 	// For ports only.
 	void update_expedition_button(bool expedition_was_canceled);
 
-	InteractiveGameBase* parent_;
+	InteractiveBase* parent_;
 
 	// The building that this window belongs to
 	Widelands::OPtr<Widelands::Building> building_;
@@ -137,6 +140,8 @@ private:
 	bool avoid_fastclick_;
 	// The building is being transformed from a contructionsite to a finished building etc.
 	bool is_warping_;
+
+	bool omnipotent_; // Editor only – allows changing almost every detail
 
 	UI::Button* expeditionbtn_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>
