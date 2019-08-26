@@ -1,22 +1,21 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_well",
+   msgctxt = "amazons_building",
+   name = "amazons_water_gatherers_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Well"),
+   descname = pgettext ("amazons_building", "Water Gatherer's Hut"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
    buildcost = {
-      log = 1,
-      granite = 2,
-      brick = 1
+      log = 3,
+      granite = 1,
+      rubber = 1
    },
    return_on_dismantle = {
-      granite = 1,
-      brick = 1
+      log = 2,
    },
 
    animations = {
@@ -32,12 +31,11 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      collects_ware_from_map = "water",
       basic_amount = 1
    },
 
    working_positions = {
-      frisians_carrier = 1
+      amazons_carrier = 1
    },
 
    outputs = {
@@ -45,7 +43,6 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      frisians_well = false,
    },
 
    programs = {
@@ -54,8 +51,8 @@ tribes:new_productionsite_type {
          descname = _"working",
          actions = {
             "sleep=20000",
-            "animate=working 20000",
-            "mine=water 1 100 65 2",
+            "callworker=fetch_water",
+            -- he carries 2 buckets so we need to create one now
             "produce=water",
          }
       },
@@ -65,7 +62,7 @@ tribes:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Water",
       heading = _"Out of Water",
-      message = pgettext ("frisians_building", "The carrier working at this well can’t find any water in his well."),
+      message = pgettext ("amazons_building", "The carrier working at this water gatherer's hut can’t find any water in his vicinity."),
       productivity_threshold = 33
    },
 }

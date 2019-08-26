@@ -1,22 +1,21 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_hunters_house",
+   msgctxt = "amazons_building",
+   name = "amazons_hunter_gatherers_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Hunter’s House"),
+   descname = pgettext ("amazons_building", "Hunter-Gatherer's Hut"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
    buildcost = {
-      brick = 1,
-      log = 1,
-      reed = 1
+      log = 3,
+      rope = 1
    },
    return_on_dismantle = {
-      brick = 1,
-      log = 1
+      log = 1,
+      rope = 1
    },
 
    animations = {
@@ -33,48 +32,43 @@ tribes:new_productionsite_type {
 
    aihints = {
       collects_ware_from_map = "meat",
+      collects_ware_from_map = "fish",
       prohibited_till = 480
    },
 
    indicate_workarea_overlaps = {
-      frisians_hunters_house = false,
+      amazons_hunter_gatherers_hut = false,
+      amazons_wilderness_keepers_tent = true
    },
 
    working_positions = {
-      frisians_hunter = 1
+      amazons_hunter_gatherer = 1
    },
 
    outputs = {
       "meat",
-      "fur"
+      "fish"
    },
 
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-         descname = _"hunting",
+         descname = _"gathering",
          actions = {
             "callworker=hunt",
-            "sleep=35000",
-            "callworker=hunt",
-            "sleep=35000",
-            "callworker=hunt",
-            "sleep=35000",
-            "callworker=hunt",
-            "sleep=35000",
-            "callworker=hunt",
-            "sleep=35000",
-            "produce=fur"
+            "sleep=30000",
+            "callworker=fish",
+            "sleep=30000",
          }
       },
    },
    out_of_resource_notification = {
-      -- Translators: Short for "Out of Game" for a resource
-      title = _"No Game",
+      -- Translators: Short for "Out of Game and out of fish" for a resource
+      title = _"No Game, No Fish",
       -- TRANSLATORS: "Game" means animals that you can hunt
-      heading = _"Out of Game",
+      heading = _"Out of Game and Fish",
       -- TRANSLATORS: "game" means animals that you can hunt
-      message = pgettext("frisians_building", "The hunter working out of this hunter’s house can’t find any game in his work area."),
+      message = pgettext("amazons_building", "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any game or fish in his work area."),
       productivity_threshold = 33
    },
 }

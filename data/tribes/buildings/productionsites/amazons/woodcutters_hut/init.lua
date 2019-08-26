@@ -1,22 +1,19 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_woodcutters_house",
+   msgctxt = "amazons_building",
+   name = "amazons_woodcutters_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Woodcutter’s House"),
+   descname = pgettext ("amazons_building", "Woodcutter’s Hut"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
    buildcost = {
-      brick = 1,
-      log = 1,
-      reed = 1
+      log = 4,
    },
    return_on_dismantle = {
-      log = 1,
-      brick = 1
+      log = 2,
    },
 
    animations = {
@@ -36,7 +33,7 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_woodcutter = 1
+      amazons_woodcutter = 1
    },
 
    outputs = {
@@ -44,8 +41,8 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      frisians_foresters_house = true,
-      frisians_woodcutters_house = false,
+      amazons_junglemasters_hut = true,
+      amazons_woodcutters_hut = false,
    },
 
    programs = {
@@ -54,7 +51,7 @@ tribes:new_productionsite_type {
          descname = _"felling trees",
          actions = {
             "callworker=harvest",
-            "sleep=20000"
+            "sleep=10000"
          }
       },
    },
@@ -62,7 +59,7 @@ tribes:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Trees",
       heading = _"Out of Trees",
-      message = pgettext ("frisians_building", "The woodcutter working at this woodcutter’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house."),
+      message = pgettext ("amazons_building", "The woodcutter working at this woodcutter’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house."),
       productivity_threshold = 66
    },
 }

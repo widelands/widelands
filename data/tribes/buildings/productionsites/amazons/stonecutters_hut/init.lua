@@ -1,22 +1,19 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_quarry",
+   msgctxt = "amazons_building",
+   name = "amazons_stonecutters_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Quarry"),
+   descname = pgettext ("amazons_building", "Stonecutter's Hut"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
    buildcost = {
-      brick = 1,
-      log = 1,
-      reed = 1
+      log = 4,
    },
    return_on_dismantle = {
-      brick = 1,
-      log = 1,
+      log = 2,
    },
 
    animations = {
@@ -36,11 +33,11 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_stonemason = 1
+      amazons_stonecutter = 1
    },
 
    indicate_workarea_overlaps = {
-      frisians_quarry = false,
+      amazons_quarry = false,
    },
 
    outputs = {
@@ -60,12 +57,12 @@ tribes:new_productionsite_type {
       },
       mine_stone = {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-         descname = _"quarrying granite",
+         descname = _"cutting granite",
          actions = {
            -- This order is on purpose so that the productivity
            -- drops fast once all rocks are gone.
             "callworker=cut_granite",
-            "sleep=17500"
+            "sleep=10000"
          }
       },
    },
@@ -73,6 +70,6 @@ tribes:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Rocks",
       heading = _"Out of Rocks",
-      message = pgettext("frisians_building", "The stonemason working at this quarry can’t find any rocks in his work area."),
+      message = pgettext("amazons_building", "The stonecutter working at this stonecutter's hut can’t find any rocks in his work area."),
    },
 }

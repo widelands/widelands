@@ -1,71 +1,57 @@
-dirname = path.dirname (__file__)
+dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_collectors_house",
+   msgctxt = "amazons_building",
+   name = "amazons_wilderness_keepers_tent",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Fruit Collector’s House"),
+   descname = pgettext("amazons_building", "Wilderness Keepers Tent"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
    buildcost = {
-      brick = 1,
-      log = 2,
-      reed = 1
+      log = 1,
+      rope = 2
    },
    return_on_dismantle = {
-      brick = 1,
-      log = 1
+      rope = 1
    },
 
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {49, 89},
+         hotspot = {49, 88},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {49, 67},
+         hotspot = {49, 66},
       },
    },
 
-   indicate_workarea_overlaps = {
-      frisians_berry_farm = true,
-      frisians_collectors_house = false,
-   },
-
    aihints = {
-      collects_ware_from_map = "fruit",
-      prohibited_till = 470,
-      requires_supporters = true
+      supports_production_of = { "fish", "meat" },
+      prohibited_till = 760,
    },
 
    working_positions = {
-      frisians_fruit_collector = 1
+      amazons_wilderness_keeper = 1
    },
 
-   outputs = {
-      "fruit"
+   indicate_workarea_overlaps = {
+      amazons_hunter_gatherers_hut = true,
    },
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
-         descname = _"gathering berries",
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
          actions = {
-            "sleep=21000",
-            "callworker=harvest",
-         }
+            "callworker=breed_fish",
+            "sleep=52500",
+            "callworker=release_game",
+            "sleep=52500",
+         },
       },
-   },
-
-   out_of_resource_notification = {
-      -- Translators: Short for "Out of ..." for a resource
-      title = _"No Bushes",
-      heading = _"Out of Berries",
-      message = pgettext ("frisians_building", "The fruit collector working at this fruit collector’s house can’t find any berry bushes in his work area. You should consider building another berry farm, or dismantling or destroying this building."),
-      productivity_threshold = 8
    },
 }
