@@ -28,6 +28,7 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "ui_basic/textarea.h"
 #include "wui/inputqueuedisplay.h"
+#include "wui/interactive_gamebase.h"
 
 static char const* pic_tab_wares = "images/wui/buildings/menu_tab_wares.png";
 static char const* pic_tab_workers = "images/wui/buildings/menu_list_workers.png";
@@ -83,7 +84,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 
 		for (uint32_t i = 0; i < inputqueues.size(); ++i) {
 			prod_box->add(
-			   new InputQueueDisplay(prod_box, 0, 0, *ibase(), *production_site, *inputqueues[i]));
+			   new InputQueueDisplay(prod_box, 0, 0, *ibase(), *production_site, *inputqueues[i], false, is_omnipotent()));
 		}
 
 		get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), prod_box, _("Wares"));
@@ -114,7 +115,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		}
 		worker_table_->fit_height();
 
-		if (ibase()->can_act(production_site->owner().player_number())) {
+		if (check_can_act(production_site->owner().player_number())) {
 			worker_caps_->add_inf_space();
 			UI::Button* evict_button =
 			   new UI::Button(worker_caps_, "evict", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,

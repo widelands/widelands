@@ -31,7 +31,8 @@ class Building;
 }
 
 UI::Panel* create_soldier_capacity_control(UI::Panel& parent,
-                                           InteractiveBase& igb,
-                                           Widelands::Building& building);
+                                           InteractiveBase& ib,
+                                           Widelands::Building& building,
+                                           bool op);
 
 #endif  // end of include guard: WL_WUI_SOLDIERCAPACITYCONTROL_H

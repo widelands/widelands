@@ -35,8 +35,6 @@
 #include "logic/player.h"
 #include "network/gamehost.h"
 #include "profile/profile.h"
-#include "wui/constructionsitewindow.h"
-#include "wui/dismantlesitewindow.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_client_disconnected.h"
 #include "wui/game_exit_confirm_box.h"
@@ -44,12 +42,8 @@
 #include "wui/game_options_sound_menu.h"
 #include "wui/game_summary.h"
 #include "wui/interactive_player.h"
-#include "wui/militarysitewindow.h"
-#include "wui/productionsitewindow.h"
 #include "wui/shipwindow.h"
-#include "wui/trainingsitewindow.h"
 #include "wui/unique_window_handler.h"
-#include "wui/warehousewindow.h"
 
 namespace {
 
@@ -108,31 +102,6 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                     UI::DropdownType::kPictorialMenu,
                     UI::PanelStyle::kWui,
                     UI::ButtonStyle::kWuiPrimary) {
-	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
-	   [this](const Widelands::NoteBuilding& note) {
-		   switch (note.action) {
-		   case Widelands::NoteBuilding::Action::kFinishWarp: {
-			   if (upcast(
-			          Widelands::Building const, building, game().objects().get_object(note.serial))) {
-				   const Widelands::Coords coords = building->get_position();
-				   // Check whether the window is wanted
-				   if (wanted_building_windows_.count(coords.hash()) == 1) {
-					   const WantedBuildingWindow& wanted_building_window =
-					      *wanted_building_windows_.at(coords.hash()).get();
-					   UI::UniqueWindow* building_window =
-					      show_building_window(coords, true, wanted_building_window.show_workarea);
-					   building_window->set_pos(wanted_building_window.window_position);
-					   if (wanted_building_window.minimize) {
-						   building_window->minimize();
-					   }
-					   wanted_building_windows_.erase(coords.hash());
-				   }
-			   }
-		   } break;
-		   default:
-			   break;
-		   }
-	   });
 }
 
 void InteractiveGameBase::add_main_menu() {
@@ -471,14 +440,6 @@ void InteractiveGameBase::start() {
 			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
 		}
 	}
-}
-
-void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords,
-                                                     const Vector2i point,
-                                                     bool was_minimal) {
-	wanted_building_windows_.insert(std::make_pair(
-	   coords.hash(), std::unique_ptr<const WantedBuildingWindow>(new WantedBuildingWindow(
-	                     point, was_minimal, has_workarea_preview(coords)))));
 }
 
 /**

@@ -85,6 +85,17 @@ InteractiveGameBase* BuildingWindow::igbase() const {
 	return dynamic_cast<InteractiveGameBase*>(ibase());
 }
 
+bool BuildingWindow::check_can_act(Widelands::PlayerNumber p) const {
+	if (omnipotent_) {
+		return true;
+	}
+	if (InteractiveGameBase* ig = igbase()) {
+		return ig->can_act(p);
+	}
+	// If we are not in a game, we must be in the editor, where we are omnipotent
+	NEVER_HERE();
+}
+
 void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 	if (note.serial == building_.serial()) {
 		switch (note.action) {
@@ -96,7 +107,7 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 			break;
 		// The building is no more. Next think() will call die().
 		case Widelands::NoteBuilding::Action::kStartWarp:
-			igbase()->add_wanted_building_window(building_position_, get_pos(), is_minimal());
+			ibase()->add_wanted_building_window(building_position_, get_pos(), is_minimal());
 			is_warping_ = true;
 			break;
 		default:
@@ -171,12 +182,12 @@ Check the capabilities and setup the capsbutton panel in case they've changed.
 */
 void BuildingWindow::think() {
 	Widelands::Building* building = building_.get(parent_->egbase());
-	if (building == nullptr || !igbase()->can_see(building->owner().player_number())) {
+	if (building == nullptr || !(omnipotent_ || igbase()->can_see(building->owner().player_number()))) {
 		die();
 		return;
 	}
 
-	if (!caps_setup_ || capscache_player_number_ != igbase()->player_number() ||
+	if (!caps_setup_ || (igbase() && capscache_player_number_ != igbase()->player_number()) ||
 	    building->get_playercaps() != capscache_) {
 		capsbuttons_->free_children();
 		create_capsbuttons(capsbuttons_, building);
@@ -200,12 +211,13 @@ void BuildingWindow::think() {
 void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Building* building) {
 	assert(building != nullptr);
 	capscache_ = building->get_playercaps();
-	capscache_player_number_ = igbase()->player_number();
 
 	const Widelands::Player& owner = building->owner();
 	const Widelands::PlayerNumber owner_number = owner.player_number();
-	const bool can_see = igbase()->can_see(owner_number);
-	const bool can_act = igbase()->can_act(owner_number);
+	const bool can_see = omnipotent_ || igbase()->can_see(owner_number);
+	const bool can_act = check_can_act(owner_number);
+
+	capscache_player_number_ = igbase() ? igbase()->player_number() : owner_number;
 
 	bool requires_destruction_separator = false;
 	if (can_act) {
@@ -345,7 +357,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			set_fastclick_panel(toggle_workarea_);
 		}
 
-		if (igbase()->get_display_flag(InteractiveBase::dfDebug)) {
+		if (ibase()->get_display_flag(InteractiveBase::dfDebug)) {
 			UI::Button* debugbtn =
 			   new UI::Button(capsbuttons, "debug", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                  g_gr->images().get(pic_debug), _("Show Debug Window"));
@@ -370,14 +382,14 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		                  g_gr->images().get("images/ui_basic/menu_help.png"), _("Help"));
 
 		UI::UniqueWindow::Registry& registry =
-		   igbase()->unique_windows().get_registry(building_descr_for_help_->name() + "_help");
+		   ibase()->unique_windows().get_registry(building_descr_for_help_->name() + "_help");
 		registry.open_window = [this, &registry] {
 			if (parent_ != nullptr) {
 				Widelands::Building* building_in_lambda = building_.get(parent_->egbase());
 				if (building_in_lambda == nullptr) {
 					return;
 				}
-				new UI::BuildingHelpWindow(igbase(), registry, *building_descr_for_help_,
+				new UI::BuildingHelpWindow(ibase(), registry, *building_descr_for_help_,
 				                           building_in_lambda->owner().tribe(),
 				                           &parent_->egbase().lua());
 			}
@@ -429,7 +441,7 @@ void BuildingWindow::act_dismantle() {
 			show_dismantle_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building);
 		}
 	} else {
-		building->owner().dismantle_building(building);
+		building->get_owner()->dismantle_building(building);
 	}
 }
 
@@ -448,7 +460,7 @@ void BuildingWindow::act_start_stop() {
 		if (InteractiveGameBase* ig = igbase()) {
 			ig->game().send_player_start_stop_building(*building);
 		} else {
-			p->owner().start_stop_building(*p);
+			p->get_owner()->start_stop_building(*p);
 		}
 	}
 }
@@ -470,7 +482,7 @@ void BuildingWindow::act_start_or_cancel_expedition() {
 				expeditionbtn_->set_enabled(false);
 				ig->game().send_player_start_or_cancel_expedition(*building);
 			} else {
-				warehouse->owner().start_or_cancel_expedition(warehouse);
+				warehouse->get_owner()->start_or_cancel_expedition(*warehouse);
 			}
 		}
 		get_tabs()->activate("expedition_wares_queue");
@@ -499,7 +511,7 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id) {
 			show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building, id);
 		}
 	} else {
-		building->owner().enhance_building(building, id);
+		building->get_owner()->enhance_building(building, id);
 	}
 }
 
@@ -509,7 +521,7 @@ Callback for debug window
 ===============
 */
 void BuildingWindow::act_debug() {
-	show_field_debug(*igbase(), ibase()->egbase().map().get_fcoords(building_position_));
+	show_field_debug(*ibase(), ibase()->egbase().map().get_fcoords(building_position_));
 }
 
 /**
@@ -533,7 +545,7 @@ void BuildingWindow::show_workarea() {
 	if (workarea_info->empty()) {
 		return;
 	}
-	igbase()->show_workarea(*workarea_info, building_position_);
+	ibase()->show_workarea(*workarea_info, building_position_);
 	showing_workarea_ = true;
 
 	configure_workarea_button();
@@ -548,7 +560,7 @@ void BuildingWindow::hide_workarea(bool configure_button) {
 		return;  // already hidden, nothing to be done
 	}
 
-	igbase()->hide_workarea(building_position_, false);
+	ibase()->hide_workarea(building_position_, false);
 	showing_workarea_ = false;
 	if (configure_button) {
 		configure_workarea_button();
@@ -583,7 +595,7 @@ void BuildingWindow::create_input_queue_panel(UI::Box* const box,
                                               const Widelands::InputQueue& iq,
                                               bool show_only) {
 	// The *max* width should be larger than the default width
-	box->add(new InputQueueDisplay(box, 0, 0, *igbase(), b, iq, show_only));
+	box->add(new InputQueueDisplay(box, 0, 0, *ibase(), b, iq, show_only, omnipotent_));
 }
 
 /**
@@ -591,7 +603,7 @@ void BuildingWindow::create_input_queue_panel(UI::Box* const box,
  * for the corresponding button.
  */
 void BuildingWindow::clicked_goto() {
-	igbase()->map_view()->scroll_to_field(building_position_, MapView::Transition::Smooth);
+	ibase()->map_view()->scroll_to_field(building_position_, MapView::Transition::Smooth);
 }
 
 void BuildingWindow::update_expedition_button(bool expedition_was_canceled) {

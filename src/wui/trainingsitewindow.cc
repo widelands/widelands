@@ -44,7 +44,7 @@ void TrainingSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted
 	assert(training_site != nullptr);
 	ProductionSiteWindow::init(avoid_fastclick, workarea_preview_wanted);
 	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
-	                create_soldier_list(*get_tabs(), *ibase(), *training_site),
+	                create_soldier_list(*get_tabs(), *ibase(), *training_site, is_omnipotent()),
 	                _("Soldiers in training"));
 	think();
 }

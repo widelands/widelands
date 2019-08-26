@@ -27,11 +27,12 @@
  * Status window for warehouses
  */
 struct WarehouseWindow : public BuildingWindow {
-	WarehouseWindow(InteractiveGameBase& parent,
+	WarehouseWindow(InteractiveBase& parent,
 	                UI::UniqueWindow::Registry& reg,
 	                Widelands::Warehouse&,
 	                bool avoid_fastclick,
-	                bool workarea_preview_wanted);
+	                bool workarea_preview_wanted,
+	                bool op);
 
 private:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;

@@ -67,9 +67,14 @@ public:
 		return parent_;
 	}
 	InteractiveGameBase* igbase() const;
+	bool check_can_act(Widelands::PlayerNumber) const;
 
 	void draw(RenderTarget&) override;
 	void think() override;
+
+	bool is_omnipotent() const {
+		return omnipotent_;
+	}
 
 protected:
 	virtual void init(bool avoid_fastclick, bool workarea_preview_wanted);

@@ -36,15 +36,18 @@ static char const* pic_priority_normal = "images/wui/buildings/normal_priority_b
 static char const* pic_priority_high = "images/wui/buildings/high_priority_button.png";
 static char const* pic_max_fill_indicator = "images/wui/buildings/max_fill_indicator.png";
 
+#define igb() InteractiveGameBase* igb = dynamic_cast<InteractiveGameBase*>(&ib_)
+
 InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
                                      int32_t const x,
                                      int32_t const y,
-                                     InteractiveGameBase& igb,
+                                     InteractiveBase& ib,
                                      Widelands::Building& building,
                                      const Widelands::InputQueue& queue,
-                                     bool show_only)
+                                     bool show_only,
+                                     bool op)
    : UI::Panel(parent, x, y, 0, 28),
-     igb_(igb),
+     ib_(ib),
      building_(building),
      queue_(&queue),
      settings_(nullptr),
@@ -57,7 +60,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      cache_size_(queue.get_max_size()),
      cache_max_fill_(queue.get_max_fill()),
      total_height_(0),
-     show_only_(show_only) {
+     show_only_(show_only),
+     omnipotent_(op) {
 	if (type_ == Widelands::wwWARE) {
 		const Widelands::WareDescr& ware = *queue.owner().tribe().get_ware_descr(queue_->get_index());
 		set_tooltip(ware.descname().c_str());
@@ -85,13 +89,14 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
 InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
                                      int32_t const x,
                                      int32_t const y,
-                                     InteractiveGameBase& igb,
+                                     InteractiveBase& ib,
                                      Widelands::ConstructionSite& building,
                                      Widelands::WareWorker ww,
                                      Widelands::DescriptionIndex di,
-                                     bool show_only)
+                                     bool show_only,
+                                     bool op)
    : UI::Panel(parent, x, y, 0, 28),
-     igb_(igb),
+     ib_(ib),
      building_(building),
      queue_(nullptr),
      settings_(dynamic_cast<const Widelands::ProductionsiteSettings*>(building.get_settings())),
@@ -102,7 +107,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      type_(ww),
      max_fill_indicator_(g_gr->images().get(pic_max_fill_indicator)),
      total_height_(0),
-     show_only_(show_only) {
+     show_only_(show_only),
+     omnipotent_(op) {
 	cache_size_ = check_max_size();
 	cache_max_fill_ = check_max_fill();
 	if (type_ == Widelands::wwWARE) {
@@ -244,6 +250,16 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 	}
 }
 
+bool InputQueueDisplay::check_can_act() const {
+	if (omnipotent_) {
+		return true;
+	}
+	if (igb()) {
+		return igb->can_act(building_.owner().player_number());
+	}
+	NEVER_HERE();
+}
+
 /**
  * Updates priority buttons of the InputQueue
  */
@@ -310,7 +326,7 @@ void InputQueueDisplay::update_priority_buttons() {
 	   boost::bind(&InputQueueDisplay::radiogroup_changed, this, _1));
 	priority_radiogroup_->clicked.connect(boost::bind(&InputQueueDisplay::radiogroup_clicked, this));
 
-	bool const can_act = igb_.can_act(building_.owner().player_number());
+	bool const can_act = check_can_act();
 	if (!can_act)
 		priority_radiogroup_->set_enabled(false);
 }
@@ -393,7 +409,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
  */
 void InputQueueDisplay::radiogroup_changed(int32_t state) {
 	assert(type_ == Widelands::wwWARE);
-	if (!igb_.can_act(building_.owner().player_number())) {
+	if (!check_can_act()) {
 		return;
 	}
 
@@ -415,8 +431,12 @@ void InputQueueDisplay::radiogroup_changed(int32_t state) {
 	if (SDL_GetModState() & KMOD_CTRL) {
 		update_siblings_priority(state);
 	}
-	igb_.game().send_player_set_ware_priority(
-	   building_, type_, index_, priority, settings_ != nullptr);
+	if (igb()) {
+		igb->game().send_player_set_ware_priority(
+		   building_, type_, index_, priority, settings_ != nullptr);
+	} else {
+		log("NOCOM: InputQueueDisplay::radiogroup_changed in editor not yet implemented\n");
+	}
 }
 
 void InputQueueDisplay::radiogroup_clicked() {
@@ -469,15 +489,19 @@ void InputQueueDisplay::update_siblings_priority(int32_t state) {
  * stored here has been clicked
  */
 void InputQueueDisplay::decrease_max_fill_clicked() {
-	if (!igb_.can_act(building_.owner().player_number())) {
+	if (!check_can_act()) {
 		return;
 	}
 
 	// Update the value of this queue if required
 	if (cache_max_fill_ > 0) {
-		igb_.game().send_player_set_input_max_fill(
-		   building_, index_, type_, ((SDL_GetModState() & KMOD_CTRL) ? 0 : cache_max_fill_ - 1),
-		   settings_ != nullptr);
+		if (igb()) {
+			igb->game().send_player_set_input_max_fill(
+			   building_, index_, type_, ((SDL_GetModState() & KMOD_CTRL) ? 0 : cache_max_fill_ - 1),
+			   settings_ != nullptr);
+		} else {
+			log("NOCOM: InputQueueDisplay::decrease_max_fill_clicked in editor not yet implemented\n");
+		}
 	}
 
 	// Update other queues of this building
@@ -489,15 +513,19 @@ void InputQueueDisplay::decrease_max_fill_clicked() {
 }
 
 void InputQueueDisplay::increase_max_fill_clicked() {
-	if (!igb_.can_act(building_.owner().player_number())) {
+	if (!check_can_act()) {
 		return;
 	}
 
 	if (cache_max_fill_ < cache_size_) {
-		igb_.game().send_player_set_input_max_fill(
-		   building_, index_, type_,
-		   ((SDL_GetModState() & KMOD_CTRL) ? cache_size_ : cache_max_fill_ + 1),
-		   settings_ != nullptr);
+		if (igb()) {
+			igb->game().send_player_set_input_max_fill(
+			   building_, index_, type_,
+			   ((SDL_GetModState() & KMOD_CTRL) ? cache_size_ : cache_max_fill_ + 1),
+			   settings_ != nullptr);
+		} else {
+			log("NOCOM: InputQueueDisplay::decrease_max_fill_clicked in editor not yet implemented\n");
+		}
 	}
 
 	if (SDL_GetModState() & KMOD_SHIFT) {
@@ -524,17 +552,19 @@ void InputQueueDisplay::update_siblings_fill(int32_t delta) {
 		   std::max(0, std::min<int32_t>(static_cast<int32_t>(display->cache_max_fill_) + delta,
 		                                 display->cache_size_));
 		if (new_fill != display->cache_max_fill_) {
-			igb_.game().send_player_set_input_max_fill(
-			   building_, display->index_, display->type_, new_fill, settings_ != nullptr);
+			if (igb()) {
+				igb->game().send_player_set_input_max_fill(
+				   building_, display->index_, display->type_, new_fill, settings_ != nullptr);
+			} else {
+				log("NOCOM: InputQueueDisplay::update_siblings_fill in editor not yet implemented\n");
+			}
 		}
 	} while ((sibling = sibling->get_next_sibling()));
 }
 
 void InputQueueDisplay::compute_max_fill_buttons_enabled_state() {
-
 	// Disable those buttons for replay watchers
-	bool const can_act = igb_.can_act(building_.owner().player_number());
-	if (!can_act) {
+	if (!check_can_act()) {
 		if (increase_max_fill_)
 			increase_max_fill_->set_enabled(false);
 		if (decrease_max_fill_)

@@ -35,6 +35,7 @@ AbstractWaresDisplay* create_portdock_wares_display(UI::Panel* parent,
 
 UI::Box* create_portdock_expedition_display(UI::Panel* parent,
                                             Widelands::Warehouse& wh,
-                                            InteractiveGameBase&);
+                                            InteractiveBase&,
+                                            bool omnipotent);
 
 #endif  // end of include guard: WL_WUI_PORTDOCKWARESDISPLAY_H

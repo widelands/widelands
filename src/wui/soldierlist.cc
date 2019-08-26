@@ -56,7 +56,8 @@ struct SoldierPanel : UI::Panel {
 
 	SoldierPanel(UI::Panel& parent,
 	             Widelands::EditorGameBase& egbase,
-	             Widelands::Building& building);
+	             Widelands::Building& building,
+	             bool op);
 
 	Widelands::EditorGameBase& egbase() const {
 		return egbase_;
@@ -109,15 +110,19 @@ private:
 	uint32_t icon_height_;
 
 	int32_t last_animate_time_;
+
+	bool omnipotent_;
 };
 
 SoldierPanel::SoldierPanel(UI::Panel& parent,
                            Widelands::EditorGameBase& gegbase,
-                           Widelands::Building& building)
+                           Widelands::Building& building,
+                           bool op)
    : Panel(&parent, 0, 0, 0, 0),
      egbase_(gegbase),
      soldier_control_(building.soldier_control()),
-     last_animate_time_(0) {
+     last_animate_time_(0),
+     omnipotent_(op) {
 	assert(soldier_control_ != nullptr);
 	Soldier::calc_info_icon_size(building.owner().tribe(), icon_width_, icon_height_);
 	icon_width_ += 2 * kIconBorder;
@@ -346,7 +351,7 @@ bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
  * List of soldiers \ref MilitarySiteWindow and \ref TrainingSiteWindow
  */
 struct SoldierList : UI::Box {
-	SoldierList(UI::Panel& parent, InteractiveBase& igb, Widelands::Building& building);
+	SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building, bool op);
 
 	const SoldierControl* soldiers() const;
 
@@ -355,8 +360,10 @@ private:
 	void eject(const Soldier* soldier);
 	void set_soldier_preference(int32_t changed_to);
 	void think() override;
+	bool check_can_act() const;
 
 	InteractiveBase& ibase_;
+	bool omnipotent_;
 	Widelands::Building& building_;
 	const UI::FontStyle font_style_;
 	SoldierPanel soldierpanel_;
@@ -364,13 +371,13 @@ private:
 	UI::Textarea infotext_;
 };
 
-SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building)
+SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building, bool op)
    : UI::Box(&parent, 0, 0, UI::Box::Vertical),
-
      ibase_(ib),
+     omnipotent_(op),
      building_(building),
      font_style_(UI::FontStyle::kLabel),
-     soldierpanel_(*this, igb.egbase(), building),
+     soldierpanel_(*this, ib.egbase(), building, op),
      infotext_(this, _("Click soldier to send away")) {
 	add(&soldierpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -399,7 +406,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 
-	bool can_act = ibase_.can_act(building_.owner().player_number());
+	const bool can_act = check_can_act();
 	if (upcast(Widelands::MilitarySite, ms, &building)) {
 		soldier_preference_.add_button(buttons, Vector2i::zero(),
 		                               g_gr->images().get("images/wui/buildings/prefer_rookies.png"),
@@ -425,8 +432,12 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 		}
 	}
 	buttons->add_inf_space();
-	buttons->add(create_soldier_capacity_control(*buttons, igb, building));
+	buttons->add(create_soldier_capacity_control(*buttons, ib, building, op));
 	add(buttons, UI::Box::Resizing::kFullSize);
+}
+
+bool SoldierList::check_can_act() const {
+	return omnipotent_ || dynamic_cast<InteractiveGameBase&>(ibase_).can_act(building_.owner().player_number());
 }
 
 const SoldierControl* SoldierList::soldiers() const {
@@ -435,7 +446,7 @@ const SoldierControl* SoldierList::soldiers() const {
 
 void SoldierList::think() {
 	// Only update the soldiers pref radio if player is spectator
-	if (ibase_.can_act(building_.owner().player_number())) {
+	if (check_can_act()) {
 		return;
 	}
 	if (upcast(Widelands::MilitarySite, ms, &building_)) {
@@ -467,10 +478,9 @@ void SoldierList::mouseover(const Soldier* soldier) {
 
 void SoldierList::eject(const Soldier* soldier) {
 	uint32_t const capacity_min = soldiers()->min_soldier_capacity();
-	bool can_act = ibase_.can_act(building_.owner().player_number());
 	bool over_min = capacity_min < soldiers()->present_soldiers().size();
 
-	if (can_act && over_min) {
+	if (check_can_act() && over_min) {
 		if (InteractiveGameBase* ig = dynamic_cast<InteractiveGameBase*>(&ibase_)) {
 			ig->game().send_player_drop_soldier(building_, soldier->serial());
 		} else {
@@ -494,6 +504,6 @@ void SoldierList::set_soldier_preference(int32_t changed_to) {
 }
 
 UI::Panel*
-create_soldier_list(UI::Panel& parent, InteractiveBase& igb, Widelands::Building& building) {
-	return new SoldierList(parent, igb, building);
+create_soldier_list(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building, bool op) {
+	return new SoldierList(parent, ib, building, op);
 }

@@ -30,7 +30,7 @@
 #include "ui_basic/panel.h"
 #include "ui_basic/radiobutton.h"
 
-class InteractiveGameBase;
+class InteractiveBase;
 
 namespace UI {
 class Panel;
@@ -57,26 +57,28 @@ public:
 	InputQueueDisplay(UI::Panel* parent,
 	                  int32_t x,
 	                  int32_t y,
-	                  InteractiveGameBase& igb,
+	                  InteractiveBase& igb,
 	                  Widelands::Building& building,
 	                  const Widelands::InputQueue& queue,
-	                  bool = false);
+	                  bool show_only,
+	                  bool omnipotent);
 	// Constructor for fake queues (e.g. in ConstructionSite settings)
 	InputQueueDisplay(UI::Panel* parent,
 	                  int32_t x,
 	                  int32_t y,
-	                  InteractiveGameBase&,
+	                  InteractiveBase&,
 	                  Widelands::ConstructionSite&,
 	                  Widelands::WareWorker,
 	                  Widelands::DescriptionIndex,
-	                  bool = false);
+	                  bool show_only,
+	                  bool omnipotent);
 	~InputQueueDisplay() override;
 
 	void think() override;
 	void draw(RenderTarget&) override;
 
 private:
-	InteractiveGameBase& igb_;
+	InteractiveBase& ib_;
 	Widelands::Building& building_;
 	const Widelands::InputQueue* queue_;
 	const Widelands::ProductionsiteSettings* settings_;
@@ -92,6 +94,9 @@ private:
 	uint32_t cache_max_fill_;
 	uint32_t total_height_;
 	bool show_only_;
+	bool omnipotent_;
+
+	bool check_can_act() const;
 
 	virtual void max_size_changed();
 	void update_priority_buttons();

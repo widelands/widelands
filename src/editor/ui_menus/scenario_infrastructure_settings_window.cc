@@ -26,7 +26,7 @@
 #include "base/i18n.h"
 #include "economy/ware_instance.h"
 #include "editor/editorinteractive.h"
-#include "editor/tools/scenario_unfrastructure_settings_tool.h"
+#include "editor/tools/scenario_infrastructure_settings_tool.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 

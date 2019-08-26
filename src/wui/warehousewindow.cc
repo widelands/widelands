@@ -102,29 +102,33 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionI
 struct WarehouseWaresPanel : UI::Box {
 	WarehouseWaresPanel(UI::Panel* parent,
 	                    uint32_t width,
-	                    InteractiveGameBase&,
+	                    InteractiveBase&,
 	                    Widelands::Warehouse&,
-	                    Widelands::WareWorker type);
+	                    Widelands::WareWorker type,
+	                    bool op);
 
 	void set_policy(Widelands::StockPolicy);
 
 private:
-	InteractiveGameBase& gb_;
+	InteractiveBase& ib_;
 	Widelands::Warehouse& wh_;
 	bool can_act_;
+	bool omnipotent_;
 	Widelands::WareWorker type_;
 	WarehouseWaresDisplay display_;
 };
 
 WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
                                          uint32_t width,
-                                         InteractiveGameBase& gb,
+                                         InteractiveBase& ib,
                                          Widelands::Warehouse& wh,
-                                         Widelands::WareWorker type)
+                                         Widelands::WareWorker type,
+                                         bool op)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
-     gb_(gb),
+     ib_(ib),
      wh_(wh),
-     can_act_(gb_.can_act(wh_.owner().player_number())),
+     can_act_(op || dynamic_cast<InteractiveGameBase&>(ib).can_act(wh_.owner().player_number())),
+     omnipotent_(op),
      type_(type),
      display_(this, width, wh_, type_, can_act_) {
 	add(&display_, Resizing::kFullSize);
@@ -153,16 +157,21 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
  * Add Buttons policy buttons
  */
 void WarehouseWaresPanel::set_policy(Widelands::StockPolicy newpolicy) {
-	if (gb_.can_act(wh_.owner().player_number())) {
+	InteractiveGameBase* ig = dynamic_cast<InteractiveGameBase*>(&ib_);
+	if (omnipotent_ || ig->can_act(wh_.owner().player_number())) {
 		bool is_workers = type_ == Widelands::wwWORKER;
 		const std::set<Widelands::DescriptionIndex> indices =
 		   is_workers ? wh_.owner().tribe().workers() : wh_.owner().tribe().wares();
 
 		for (const Widelands::DescriptionIndex& index : indices) {
 			if (display_.ware_selected(index)) {
-				gb_.game().send_player_command(new Widelands::CmdSetStockPolicy(
-				   gb_.game().get_gametime(), wh_.owner().player_number(), wh_, is_workers, index,
-				   newpolicy));
+				if (ig) {
+					ig->game().send_player_command(new Widelands::CmdSetStockPolicy(
+					   ig->game().get_gametime(), wh_.owner().player_number(), wh_, is_workers, index,
+					   newpolicy));
+				} else {
+					log("NOCOM: WarehouseWaresPanel::set_policy in editor not yet implemented\n");
+				}
 			}
 		}
 	}
@@ -171,26 +180,27 @@ void WarehouseWaresPanel::set_policy(Widelands::StockPolicy newpolicy) {
 /**
  * Create the tabs of a warehouse window.
  */
-WarehouseWindow::WarehouseWindow(InteractiveGameBase& parent,
+WarehouseWindow::WarehouseWindow(InteractiveBase& parent,
                                  UI::UniqueWindow::Registry& reg,
                                  Widelands::Warehouse& wh,
                                  bool avoid_fastclick,
-                                 bool workarea_preview_wanted)
-   : BuildingWindow(parent, reg, wh, avoid_fastclick), warehouse_(&wh) {
+                                 bool workarea_preview_wanted,
+                                 bool op)
+   : BuildingWindow(parent, reg, wh, avoid_fastclick, op), warehouse_(&wh) {
 	init(avoid_fastclick, workarea_preview_wanted);
 }
 
 void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
-	Widelands::Warehouse* warehouse = warehouse_.get(igbase()->egbase());
+	Widelands::Warehouse* warehouse = warehouse_.get(ibase()->egbase());
 	assert(warehouse != nullptr);
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	get_tabs()->add(
 	   "wares", g_gr->images().get(pic_tab_wares),
-	   new WarehouseWaresPanel(get_tabs(), Width, *igbase(), *warehouse, Widelands::wwWARE),
+	   new WarehouseWaresPanel(get_tabs(), Width, *ibase(), *warehouse, Widelands::wwWARE, is_omnipotent()),
 	   _("Wares"));
 	get_tabs()->add(
 	   "workers", g_gr->images().get(pic_tab_workers),
-	   new WarehouseWaresPanel(get_tabs(), Width, *igbase(), *warehouse, Widelands::wwWORKER),
+	   new WarehouseWaresPanel(get_tabs(), Width, *ibase(), *warehouse, Widelands::wwWORKER, is_omnipotent()),
 	   _("Workers"));
 
 	if (const Widelands::PortDock* pd = warehouse->get_portdock()) {
@@ -202,7 +212,7 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 		                _("Workers waiting to embark"));
 		if (pd->expedition_started()) {
 			get_tabs()->add("expedition_wares_queue", g_gr->images().get(pic_tab_expedition),
-			                create_portdock_expedition_display(get_tabs(), *warehouse, *igbase()),
+			                create_portdock_expedition_display(get_tabs(), *warehouse, *ibase(), is_omnipotent()),
 			                _("Expedition"));
 		}
 	}

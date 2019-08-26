@@ -132,12 +132,12 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 	// Add the wares queue
 	for (uint32_t i = 0; i < construction_site->get_nrwaresqueues(); ++i)
 		box.add(new InputQueueDisplay(
-		   &box, 0, 0, *igbase(), *construction_site, *construction_site->get_waresqueue(i)));
+		   &box, 0, 0, *igbase(), *construction_site, *construction_site->get_waresqueue(i), false, is_omnipotent()));
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 
 	if (construction_site->get_settings()) {
-		const bool can_act = ibase()->can_act(construction_site->owner().player_number());
+		const bool can_act = check_can_act(construction_site->owner().player_number());
 		// Create the settings. Since we don't access an actual building, we create
 		// a simplified faksimile of the later building window that contains only
 		// the relevant options.
@@ -146,14 +146,16 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		if (upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings())) {
 			for (const auto& pair : ps->ware_queues) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
-				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWARE, pair.first);
+				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWARE, pair.first,
+				   false, is_omnipotent());
 				settings_box.add(queue);
 				settings_box.add_space(8);
 				cs_ware_queues_.push_back(queue);
 			}
 			for (const auto& pair : ps->worker_queues) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
-				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWORKER, pair.first);
+				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWORKER, pair.first,
+				   false, is_omnipotent());
 				settings_box.add(queue);
 				settings_box.add_space(8);
 				cs_ware_queues_.push_back(queue);
@@ -446,7 +448,7 @@ void ConstructionSiteWindow::think() {
 
 	progress_->set_state(construction_site->get_built_per64k());
 
-	const bool can_act = ibase()->can_act(construction_site->owner().player_number());
+	const bool can_act = check_can_act(construction_site->owner().player_number());
 	// InputQueueDisplay and FakeWaresDisplay update themselves – we need to refresh the other
 	// settings
 	if (upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings())) {
