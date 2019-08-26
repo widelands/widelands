@@ -5,6 +5,7 @@
 # Wuzzy <almikes@aol.com>, 2016,2018
 # Elisabeth Jäger, 2017-2018
 # GunChleoc, 2016
+# Jonas Jonas <jonas.burger@googlemail.com>, 2019
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018-2019
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-20 14:59+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2019-08-21 17:14+0000\n"
+"PO-Revision-Date: 2019-08-21 19:15+0000\n"
+"Last-Translator: Jonas Jonas <jonas.burger@googlemail.com>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,7 +68,7 @@ msgid ""
 "the east. A strange aura came from there, and no one wanted to set foot "
 "there. But the border could not be left undefended, and so you constructed "
 "three fortresses."
-msgstr "Aber eines Tages entdecktest du unfruchtbares Ödland mit verlassenen Gebäuden im Osten. Eine seltsame Aura ging von dort aus, und keiner wollte auch nur einen Fuß dorthin setzen. Doch die Grenze konnte nicht unbefestigt bleiben, also ließest du drei Festungen bauen."
+msgstr "Aber eines Tages entdecktest du unfruchtbares Ödland mit verlassenen Gebäuden im Osten. Eine seltsame Aura ging von dem Ort aus, und keiner wollte auch nur einen Fuß dorthin setzen. Doch die Grenze konnte nicht unbefestigt bleiben, also ließest du drei Festungen bauen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:34
 msgid ""
@@ -99,14 +100,14 @@ msgstr "Öffne das Gebäudestatistik-Fenster"
 msgid ""
 "Open the building statistics window for an overview over the buildings you "
 "have."
-msgstr "Öffne das Gebäudestatistik-Fenster für einen Überblick über die Gebäude, die du hast. "
+msgstr "Öffne das Gebäudestatistik-Fenster für einen Überblick über deine Gebäude. "
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:57
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:131
 msgid ""
 "First, you will have to open the ‘Statistics’ menu at the bottom of the "
 "screen."
-msgstr "Zuerst musst du das Statistikmenü unten am Bildschirmrand öffnen."
+msgstr "Zuerst musst du das Statistik-Menü am unteren Bildschirmrand öffnen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Afterwards, choose ‘Buildings’."
