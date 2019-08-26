@@ -31,8 +31,7 @@ struct ProductionSiteWindow : public BuildingWindow {
 	                     UI::UniqueWindow::Registry& reg,
 	                     Widelands::ProductionSite&,
 	                     bool avoid_fastclick,
-	                     bool workarea_preview_wanted,
-	                     bool omnipotent);
+	                     bool workarea_preview_wanted);
 
 protected:
 	void think() override;

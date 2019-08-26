@@ -31,6 +31,6 @@ class Building;
 }
 
 UI::Panel*
-create_soldier_list(UI::Panel& parent, InteractiveBase& igb, Widelands::Building& building, bool op);
+create_soldier_list(UI::Panel& parent, InteractiveBase& igb, Widelands::Building& building);
 
 #endif  // end of include guard: WL_WUI_SOLDIERLIST_H

@@ -49,7 +49,6 @@ private:
 	void click_increase();
 
 	InteractiveBase& ibase_;
-	bool omnipotent_;
 	Widelands::Building& building_;
 
 	UI::Button decrease_;
@@ -59,11 +58,9 @@ private:
 
 SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
                                                InteractiveBase& ib,
-                                               Widelands::Building& building,
-                                               bool op)
+                                               Widelands::Building& building)
    : Box(parent, 0, 0, Horizontal),
      ibase_(ib),
-     omnipotent_(op),
      building_(building),
      decrease_(this,
                "decrease",
@@ -106,7 +103,7 @@ void SoldierCapacityControl::think() {
 	uint32_t const capacity = soldiers->soldier_capacity();
 	value_.set_text(boost::lexical_cast<std::string>(capacity));
 
-	bool const can_act = omnipotent_ || dynamic_cast<InteractiveGameBase&>(ibase_).can_act(
+	bool const can_act = ibase_.omnipotent() || dynamic_cast<InteractiveGameBase&>(ibase_).can_act(
 			building_.owner().player_number());
 	decrease_.set_enabled(can_act && soldiers->min_soldier_capacity() < capacity);
 	increase_.set_enabled(can_act && soldiers->max_soldier_capacity() > capacity);
@@ -116,7 +113,16 @@ void SoldierCapacityControl::change_soldier_capacity(int delta) {
 	if (InteractiveGameBase* ig = dynamic_cast<InteractiveGameBase*>(&ibase_)) {
 		ig->game().send_player_change_soldier_capacity(building_, delta);
 	} else {
-		log("NOCOM: SoldierCapacityControl::change_soldier_capacity in editor not yet implemented\n");
+		SoldierControl* soldier_control = building_.mutable_soldier_control();
+		Widelands::Quantity const old_capacity = soldier_control->soldier_capacity();
+		Widelands::Quantity const new_capacity =
+		   std::min(static_cast<Widelands::Quantity>(
+		               std::max(static_cast<int32_t>(old_capacity) + delta,
+		                        static_cast<int32_t>(soldier_control->min_soldier_capacity()))),
+		            soldier_control->max_soldier_capacity());
+		if (old_capacity != new_capacity) {
+			soldier_control->set_soldier_capacity(new_capacity);
+		}
 	}
 }
 
@@ -138,7 +144,6 @@ void SoldierCapacityControl::click_increase() {
 
 UI::Panel* create_soldier_capacity_control(UI::Panel& parent,
                                            InteractiveBase& ib,
-                                           Widelands::Building& building,
-                                           bool op) {
-	return new SoldierCapacityControl(&parent, ib, building, op);
+                                           Widelands::Building& building) {
+	return new SoldierCapacityControl(&parent, ib, building);
 }

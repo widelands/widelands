@@ -38,7 +38,7 @@ ScenarioFlagSettingsWindow::ScenarioFlagSettingsWindow(EditorInteractive& parent
 		ScenarioInfrastructureSettingsTool& t, Widelands::Flag& f)
    : UI::Window(&parent, "scenario_flag_settings_" + std::to_string(f.serial()), 0, 0, 300, 100,
 			(boost::format(_("Flag at %1$dx%2$d")) % f.get_position().x % f.get_position().y).str()),
-     tool_(t),
+     tool_(&t),
      flag_(&f) {
 	main_box_.reset(new UI::Box(this, 0, 0, UI::Box::Horizontal));
 	set_center_panel(main_box_.get());
@@ -119,8 +119,15 @@ void ScenarioFlagSettingsWindow::think() {
 	UI::Window::think();
 }
 
+void ScenarioFlagSettingsWindow::unset_tool() {
+	assert(tool_);
+	tool_ = nullptr;
+}
+
 void ScenarioFlagSettingsWindow::die() {
-	tool_.window_closing(this);
+	if (tool_) {
+		tool_->window_closing(this);
+	}
 	UI::Window::die();
 }
 

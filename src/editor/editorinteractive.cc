@@ -1102,7 +1102,7 @@ EditorInteractive::Tools* EditorInteractive::tools() {
 }
 
 bool EditorInteractive::save_as_scenario() const {
-	// NOCOM
+	// NOCOM EditorInteractive::save_as_scenario()
 	// return functions_.find(kMainFunction) != functions_.end();
 	return true;
 }

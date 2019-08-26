@@ -42,9 +42,8 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveBase& parent,
                                            UI::UniqueWindow::Registry& reg,
                                            Widelands::ProductionSite& ps,
                                            bool avoid_fastclick,
-                                           bool workarea_preview_wanted,
-                                           bool op)
-   : BuildingWindow(parent, reg, ps, avoid_fastclick, op),
+                                           bool workarea_preview_wanted)
+   : BuildingWindow(parent, reg, ps, avoid_fastclick),
      production_site_(&ps),
      worker_table_(nullptr),
      worker_caps_(nullptr) {
@@ -84,7 +83,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 
 		for (uint32_t i = 0; i < inputqueues.size(); ++i) {
 			prod_box->add(
-			   new InputQueueDisplay(prod_box, 0, 0, *ibase(), *production_site, *inputqueues[i], false, is_omnipotent()));
+			   new InputQueueDisplay(prod_box, 0, 0, *ibase(), *production_site, *inputqueues[i]));
 		}
 
 		get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), prod_box, _("Wares"));
@@ -218,7 +217,8 @@ void ProductionSiteWindow::evict_worker() {
 			if (InteractiveGameBase* ig = igbase()) {
 				ig->game().send_player_evict_worker(*worker);
 			} else {
-				log("NOCOM: ProductionSiteWindow::evict_worker in editor not yet implemented\n");
+				// We must be in the editor, where we just delete the worker instead of kicking him
+				worker->remove(ibase()->egbase());
 			}
 		}
 	}

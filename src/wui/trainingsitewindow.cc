@@ -32,9 +32,8 @@ TrainingSiteWindow::TrainingSiteWindow(InteractiveBase& parent,
                                        UI::UniqueWindow::Registry& reg,
                                        Widelands::TrainingSite& ts,
                                        bool avoid_fastclick,
-                                       bool workarea_preview_wanted,
-                                       bool op)
-   : ProductionSiteWindow(parent, reg, ts, avoid_fastclick, workarea_preview_wanted, op),
+                                       bool workarea_preview_wanted)
+   : ProductionSiteWindow(parent, reg, ts, avoid_fastclick, workarea_preview_wanted),
      training_site_(&ts) {
 	init(avoid_fastclick, workarea_preview_wanted);
 }
@@ -44,7 +43,7 @@ void TrainingSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted
 	assert(training_site != nullptr);
 	ProductionSiteWindow::init(avoid_fastclick, workarea_preview_wanted);
 	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
-	                create_soldier_list(*get_tabs(), *ibase(), *training_site, is_omnipotent()),
+	                create_soldier_list(*get_tabs(), *ibase(), *training_site),
 	                _("Soldiers in training"));
 	think();
 }

@@ -132,6 +132,10 @@ public:
 		return nullptr;
 	}
 
+	bool omnipotent() const override {
+		return true;
+	}
+
 	// action functions
 	void exit();
 

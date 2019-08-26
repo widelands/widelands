@@ -96,9 +96,8 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveBase& parent,
                                                UI::UniqueWindow::Registry& reg,
                                                Widelands::ConstructionSite& cs,
                                                bool avoid_fastclick,
-                                               bool workarea_preview_wanted,
-                                               bool op)
-   : BuildingWindow(parent, reg, cs, cs.building(), avoid_fastclick, op),
+                                               bool workarea_preview_wanted)
+   : BuildingWindow(parent, reg, cs, cs.building(), avoid_fastclick),
      construction_site_(&cs),
      progress_(nullptr),
      cs_enhance_(nullptr),
@@ -132,7 +131,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 	// Add the wares queue
 	for (uint32_t i = 0; i < construction_site->get_nrwaresqueues(); ++i)
 		box.add(new InputQueueDisplay(
-		   &box, 0, 0, *igbase(), *construction_site, *construction_site->get_waresqueue(i), false, is_omnipotent()));
+		   &box, 0, 0, *igbase(), *construction_site, *construction_site->get_waresqueue(i)));
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 
@@ -146,16 +145,14 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		if (upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings())) {
 			for (const auto& pair : ps->ware_queues) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
-				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWARE, pair.first,
-				   false, is_omnipotent());
+				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWARE, pair.first);
 				settings_box.add(queue);
 				settings_box.add_space(8);
 				cs_ware_queues_.push_back(queue);
 			}
 			for (const auto& pair : ps->worker_queues) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
-				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWORKER, pair.first,
-				   false, is_omnipotent());
+				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWORKER, pair.first);
 				settings_box.add(queue);
 				settings_box.add_space(8);
 				cs_ware_queues_.push_back(queue);

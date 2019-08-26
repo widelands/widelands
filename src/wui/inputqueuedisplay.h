@@ -60,8 +60,7 @@ public:
 	                  InteractiveBase& igb,
 	                  Widelands::Building& building,
 	                  const Widelands::InputQueue& queue,
-	                  bool show_only,
-	                  bool omnipotent);
+	                  bool show_only = false);
 	// Constructor for fake queues (e.g. in ConstructionSite settings)
 	InputQueueDisplay(UI::Panel* parent,
 	                  int32_t x,
@@ -70,8 +69,7 @@ public:
 	                  Widelands::ConstructionSite&,
 	                  Widelands::WareWorker,
 	                  Widelands::DescriptionIndex,
-	                  bool show_only,
-	                  bool omnipotent);
+	                  bool show_only = false);
 	~InputQueueDisplay() override;
 
 	void think() override;
@@ -94,9 +92,10 @@ private:
 	uint32_t cache_max_fill_;
 	uint32_t total_height_;
 	bool show_only_;
-	bool omnipotent_;
 
 	bool check_can_act() const;
+
+	Widelands::ProductionsiteSettings& mutable_settings() const;
 
 	virtual void max_size_changed();
 	void update_priority_buttons();

@@ -1162,8 +1162,7 @@ void InteractiveBase::add_wanted_building_window(const Widelands::Coords& coords
 
 UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords& coord,
                                                             bool avoid_fastclick,
-                                                            bool workarea_preview_wanted,
-                                                            bool omnipotent) {
+                                                            bool workarea_preview_wanted) {
 	Widelands::BaseImmovable* immovable = egbase().map().get_immovable(coord);
 	upcast(Widelands::Building, building, immovable);
 	assert(building);
@@ -1172,41 +1171,41 @@ UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords&
 
 	switch (building->descr().type()) {
 	case Widelands::MapObjectType::CONSTRUCTIONSITE:
-		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted, omnipotent] {
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
 			new ConstructionSiteWindow(*this, registry,
 			                           *dynamic_cast<Widelands::ConstructionSite*>(building),
-			                           avoid_fastclick, workarea_preview_wanted, omnipotent);
+			                           avoid_fastclick, workarea_preview_wanted);
 		};
 		break;
 	case Widelands::MapObjectType::DISMANTLESITE:
-		registry.open_window = [this, &registry, building, avoid_fastclick, omnipotent] {
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
 			new DismantleSiteWindow(
-			   *this, registry, *dynamic_cast<Widelands::DismantleSite*>(building), avoid_fastclick, omnipotent);
+			   *this, registry, *dynamic_cast<Widelands::DismantleSite*>(building), avoid_fastclick);
 		};
 		break;
 	case Widelands::MapObjectType::MILITARYSITE:
-		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted, omnipotent] {
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
 			new MilitarySiteWindow(*this, registry, *dynamic_cast<Widelands::MilitarySite*>(building),
-			                       avoid_fastclick, workarea_preview_wanted, omnipotent);
+			                       avoid_fastclick, workarea_preview_wanted);
 		};
 		break;
 	case Widelands::MapObjectType::PRODUCTIONSITE:
-		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted, omnipotent] {
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
 			new ProductionSiteWindow(*this, registry,
 			                         *dynamic_cast<Widelands::ProductionSite*>(building),
-			                         avoid_fastclick, workarea_preview_wanted, omnipotent);
+			                         avoid_fastclick, workarea_preview_wanted);
 		};
 		break;
 	case Widelands::MapObjectType::TRAININGSITE:
-		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted, omnipotent] {
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
 			new TrainingSiteWindow(*this, registry, *dynamic_cast<Widelands::TrainingSite*>(building),
-			                       avoid_fastclick, workarea_preview_wanted, omnipotent);
+			                       avoid_fastclick, workarea_preview_wanted);
 		};
 		break;
 	case Widelands::MapObjectType::WAREHOUSE:
-		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted, omnipotent] {
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
 			new WarehouseWindow(*this, registry, *dynamic_cast<Widelands::Warehouse*>(building),
-			                    avoid_fastclick, workarea_preview_wanted, omnipotent);
+			                    avoid_fastclick, workarea_preview_wanted);
 		};
 		break;
 	// TODO(sirver,trading): Add UI for market.

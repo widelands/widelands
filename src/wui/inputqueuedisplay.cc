@@ -44,8 +44,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
                                      InteractiveBase& ib,
                                      Widelands::Building& building,
                                      const Widelands::InputQueue& queue,
-                                     bool show_only,
-                                     bool op)
+                                     bool show_only)
    : UI::Panel(parent, x, y, 0, 28),
      ib_(ib),
      building_(building),
@@ -60,8 +59,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      cache_size_(queue.get_max_size()),
      cache_max_fill_(queue.get_max_fill()),
      total_height_(0),
-     show_only_(show_only),
-     omnipotent_(op) {
+     show_only_(show_only) {
 	if (type_ == Widelands::wwWARE) {
 		const Widelands::WareDescr& ware = *queue.owner().tribe().get_ware_descr(queue_->get_index());
 		set_tooltip(ware.descname().c_str());
@@ -93,8 +91,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
                                      Widelands::ConstructionSite& building,
                                      Widelands::WareWorker ww,
                                      Widelands::DescriptionIndex di,
-                                     bool show_only,
-                                     bool op)
+                                     bool show_only)
    : UI::Panel(parent, x, y, 0, 28),
      ib_(ib),
      building_(building),
@@ -107,8 +104,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      type_(ww),
      max_fill_indicator_(g_gr->images().get(pic_max_fill_indicator)),
      total_height_(0),
-     show_only_(show_only),
-     omnipotent_(op) {
+     show_only_(show_only) {
 	cache_size_ = check_max_size();
 	cache_max_fill_ = check_max_fill();
 	if (type_ == Widelands::wwWARE) {
@@ -250,8 +246,8 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 	}
 }
 
-bool InputQueueDisplay::check_can_act() const {
-	if (omnipotent_) {
+inline bool InputQueueDisplay::check_can_act() const {
+	if (ib_.omnipotent()) {
 		return true;
 	}
 	if (igb()) {
@@ -404,6 +400,14 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	compute_max_fill_buttons_enabled_state();
 }
 
+Widelands::ProductionsiteSettings& InputQueueDisplay::mutable_settings() const {
+	Widelands::ConstructionSite* cs = dynamic_cast<Widelands::ConstructionSite*>(&building_);
+	assert(cs);
+	Widelands::ProductionsiteSettings* s = dynamic_cast<Widelands::ProductionsiteSettings*>(cs->get_settings());
+	assert(s);
+	return *s;
+}
+
 /**
  * Update priority when radiogroup has changed
  */
@@ -435,7 +439,17 @@ void InputQueueDisplay::radiogroup_changed(int32_t state) {
 		igb->game().send_player_set_ware_priority(
 		   building_, type_, index_, priority, settings_ != nullptr);
 	} else {
-		log("NOCOM: InputQueueDisplay::radiogroup_changed in editor not yet implemented\n");
+		if (settings_) {
+			for (auto& pair : mutable_settings().ware_queues) {
+				if (pair.first == index_) {
+					pair.second.priority = priority;
+					return;
+				}
+			}
+			NEVER_HERE();
+		} else {
+			building_.set_priority(type_, index_, priority);
+		}
 	}
 }
 
@@ -495,14 +509,39 @@ void InputQueueDisplay::decrease_max_fill_clicked() {
 
 	// Update the value of this queue if required
 	if (cache_max_fill_ > 0) {
+		const size_t maxfill = (SDL_GetModState() & KMOD_CTRL) ? 0 : cache_max_fill_ - 1;
 		if (igb()) {
 			igb->game().send_player_set_input_max_fill(
-			   building_, index_, type_, ((SDL_GetModState() & KMOD_CTRL) ? 0 : cache_max_fill_ - 1),
-			   settings_ != nullptr);
+			   building_, index_, type_, maxfill, settings_ != nullptr);
 		} else {
-			log("NOCOM: InputQueueDisplay::decrease_max_fill_clicked in editor not yet implemented\n");
+			if (settings_) {
+				switch (type_) {
+				case Widelands::wwWARE:
+					for (auto& pair : mutable_settings().ware_queues) {
+						if (pair.first == index_) {
+							assert(pair.second.max_fill >= maxfill);
+							pair.second.desired_fill = maxfill;
+							goto decreased_max_fill;
+						}
+					}
+					NEVER_HERE();
+				case Widelands::wwWORKER:
+					for (auto& pair : mutable_settings().worker_queues) {
+						if (pair.first == index_) {
+							assert(pair.second.max_fill >= maxfill);
+							pair.second.desired_fill = maxfill;
+							goto decreased_max_fill;
+						}
+					}
+					NEVER_HERE();
+				}
+				NEVER_HERE();
+			} else {
+				building_.inputqueue(index_, type_).set_max_fill(maxfill);
+			}
 		}
 	}
+	decreased_max_fill:
 
 	// Update other queues of this building
 	if (SDL_GetModState() & KMOD_SHIFT) {
@@ -518,15 +557,39 @@ void InputQueueDisplay::increase_max_fill_clicked() {
 	}
 
 	if (cache_max_fill_ < cache_size_) {
+		const size_t maxfill = (SDL_GetModState() & KMOD_CTRL) ? cache_size_ : cache_max_fill_ + 1;
 		if (igb()) {
 			igb->game().send_player_set_input_max_fill(
-			   building_, index_, type_,
-			   ((SDL_GetModState() & KMOD_CTRL) ? cache_size_ : cache_max_fill_ + 1),
-			   settings_ != nullptr);
+			   building_, index_, type_, maxfill, settings_ != nullptr);
 		} else {
-			log("NOCOM: InputQueueDisplay::decrease_max_fill_clicked in editor not yet implemented\n");
+			if (settings_) {
+				switch (type_) {
+				case Widelands::wwWARE:
+					for (auto& pair : mutable_settings().ware_queues) {
+						if (pair.first == index_) {
+							assert(pair.second.max_fill >= maxfill);
+							pair.second.desired_fill = maxfill;
+							goto increased_max_fill;
+						}
+					}
+					NEVER_HERE();
+				case Widelands::wwWORKER:
+					for (auto& pair : mutable_settings().worker_queues) {
+						if (pair.first == index_) {
+							assert(pair.second.max_fill >= maxfill);
+							pair.second.desired_fill = maxfill;
+							goto increased_max_fill;
+						}
+					}
+					NEVER_HERE();
+				}
+				NEVER_HERE();
+			} else {
+				building_.inputqueue(index_, type_).set_max_fill(maxfill);
+			}
 		}
 	}
+	increased_max_fill:
 
 	if (SDL_GetModState() & KMOD_SHIFT) {
 		update_siblings_fill(
@@ -556,9 +619,34 @@ void InputQueueDisplay::update_siblings_fill(int32_t delta) {
 				igb->game().send_player_set_input_max_fill(
 				   building_, display->index_, display->type_, new_fill, settings_ != nullptr);
 			} else {
-				log("NOCOM: InputQueueDisplay::update_siblings_fill in editor not yet implemented\n");
+				if (settings_) {
+					switch (display->type_) {
+					case Widelands::wwWARE:
+						for (auto& pair : mutable_settings().ware_queues) {
+							if (pair.first == display->index_) {
+								assert(pair.second.max_fill >= new_fill);
+								pair.second.desired_fill = new_fill;
+								goto one_sibling_fill_updated;
+							}
+						}
+						NEVER_HERE();
+					case Widelands::wwWORKER:
+						for (auto& pair : mutable_settings().worker_queues) {
+							if (pair.first == display->index_) {
+								assert(pair.second.max_fill >= new_fill);
+								pair.second.desired_fill = new_fill;
+								goto one_sibling_fill_updated;
+							}
+						}
+						NEVER_HERE();
+					}
+					NEVER_HERE();
+				} else {
+					building_.inputqueue(display->index_, display->type_).set_max_fill(new_fill);
+				}
 			}
 		}
+		one_sibling_fill_updated: continue;
 	} while ((sibling = sibling->get_next_sibling()));
 }
 

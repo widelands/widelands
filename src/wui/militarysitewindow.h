@@ -31,8 +31,7 @@ struct MilitarySiteWindow : public BuildingWindow {
 	                   UI::UniqueWindow::Registry& reg,
 	                   Widelands::MilitarySite&,
 	                   bool avoid_fastclick,
-	                   bool workarea_preview_wanted,
-	                    bool omnipotent);
+	                   bool workarea_preview_wanted);
 
 private:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;

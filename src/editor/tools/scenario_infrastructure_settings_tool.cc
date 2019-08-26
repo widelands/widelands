@@ -52,7 +52,14 @@ int32_t ScenarioInfrastructureSettingsTool::handle_click_impl(const Widelands::W
 	return 0;
 }
 
-void ScenarioInfrastructureSettingsTool::window_closing(const ScenarioFlagSettingsWindow* w) {
+ScenarioInfrastructureSettingsTool::~ScenarioInfrastructureSettingsTool() {
+	for (ScenarioFlagSettingsWindow* w : open_windows_) {
+		// Make sure the window won't try to notify us after we are destroyed
+		w->unset_tool();
+	}
+}
+
+void ScenarioInfrastructureSettingsTool::window_closing(ScenarioFlagSettingsWindow* w) {
 	auto it = open_windows_.find(w);
 	assert(it != open_windows_.end());
 	open_windows_.erase(it);

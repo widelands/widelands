@@ -29,6 +29,7 @@
 struct ScenarioInfrastructureSettingsTool : public EditorTool {
 	ScenarioInfrastructureSettingsTool() : EditorTool(*this, *this, false) {
 	}
+	~ScenarioInfrastructureSettingsTool() override;
 
 	int32_t handle_click_impl(const Widelands::World& world,
 	                          const Widelands::NodeAndTriangle<>& center,
@@ -44,10 +45,10 @@ struct ScenarioInfrastructureSettingsTool : public EditorTool {
 		return true;
 	}
 
-	void window_closing(const ScenarioFlagSettingsWindow*);
+	void window_closing(ScenarioFlagSettingsWindow*);
 
 private:
-	std::set<const ScenarioFlagSettingsWindow*> open_windows_;
+	std::set<ScenarioFlagSettingsWindow*> open_windows_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SCENARIO_INFRASTRUCTURE_SETTINGS_TOOL_H

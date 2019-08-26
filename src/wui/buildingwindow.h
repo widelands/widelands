@@ -51,15 +51,13 @@ protected:
 	               UI::UniqueWindow::Registry& reg,
 	               Widelands::Building&,
 	               const Widelands::BuildingDescr&,
-	               bool avoid_fastclick,
-	                     bool omnipotent);
+	               bool avoid_fastclick);
 
 public:
 	BuildingWindow(InteractiveBase& parent,
 	               UI::UniqueWindow::Registry& reg,
 	               Widelands::Building&,
-	               bool avoid_fastclick,
-	                     bool omnipotent);
+	               bool avoid_fastclick);
 
 	~BuildingWindow() override;
 
@@ -71,10 +69,6 @@ public:
 
 	void draw(RenderTarget&) override;
 	void think() override;
-
-	bool is_omnipotent() const {
-		return omnipotent_;
-	}
 
 protected:
 	virtual void init(bool avoid_fastclick, bool workarea_preview_wanted);
@@ -145,8 +139,6 @@ private:
 	bool avoid_fastclick_;
 	// The building is being transformed from a contructionsite to a finished building etc.
 	bool is_warping_;
-
-	bool omnipotent_; // Editor only – allows changing almost every detail
 
 	UI::Button* expeditionbtn_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>

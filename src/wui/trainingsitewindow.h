@@ -32,8 +32,7 @@ struct TrainingSiteWindow : public ProductionSiteWindow {
 	                   UI::UniqueWindow::Registry& reg,
 	                   Widelands::TrainingSite&,
 	                   bool avoid_fastclick,
-	                   bool workarea_preview_wanted,
-	                    bool omnipotent);
+	                   bool workarea_preview_wanted);
 
 private:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;

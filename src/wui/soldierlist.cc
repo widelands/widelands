@@ -52,7 +52,7 @@ constexpr uint32_t kIconBorder = 2;
  * Iconic representation of soldiers, including their levels and current health.
  */
 struct SoldierPanel : UI::Panel {
-	using SoldierFn = boost::function<void(const Soldier*)>;
+	using SoldierFn = boost::function<void(Soldier*)>;
 
 	SoldierPanel(UI::Panel& parent,
 	             Widelands::EditorGameBase& egbase,
@@ -77,7 +77,7 @@ protected:
 
 private:
 	Vector2i calc_pos(uint32_t row, uint32_t col) const;
-	const Soldier* find_soldier(int32_t x, int32_t y) const;
+	Soldier* find_soldier(int32_t x, int32_t y) const;
 
 	struct Icon {
 		Widelands::OPtr<Soldier> soldier;
@@ -110,19 +110,15 @@ private:
 	uint32_t icon_height_;
 
 	int32_t last_animate_time_;
-
-	bool omnipotent_;
 };
 
 SoldierPanel::SoldierPanel(UI::Panel& parent,
                            Widelands::EditorGameBase& gegbase,
-                           Widelands::Building& building,
-                           bool op)
+                           Widelands::Building& building)
    : Panel(&parent, 0, 0, 0, 0),
      egbase_(gegbase),
      soldier_control_(building.soldier_control()),
-     last_animate_time_(0),
-     omnipotent_(op) {
+     last_animate_time_(0) {
 	assert(soldier_control_ != nullptr);
 	Soldier::calc_info_icon_size(building.owner().tribe(), icon_width_, icon_height_);
 	icon_width_ += 2 * kIconBorder;
@@ -312,7 +308,7 @@ Vector2i SoldierPanel::calc_pos(uint32_t row, uint32_t col) const {
 /**
  * Return the soldier (if any) at the given coordinates.
  */
-const Soldier* SoldierPanel::find_soldier(int32_t x, int32_t y) const {
+Soldier* SoldierPanel::find_soldier(int32_t x, int32_t y) const {
 	for (const Icon& icon : icons_) {
 		Recti r(icon.pos, icon_width_, icon_height_);
 		if (r.contains(Vector2i(x, y))) {
@@ -338,7 +334,7 @@ bool SoldierPanel::handle_mousemove(
 bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		if (click_fn_) {
-			if (const Soldier* soldier = find_soldier(x, y))
+			if (Soldier* soldier = find_soldier(x, y))
 				click_fn_(soldier);
 		}
 		return true;
@@ -357,13 +353,12 @@ struct SoldierList : UI::Box {
 
 private:
 	void mouseover(const Soldier* soldier);
-	void eject(const Soldier* soldier);
+	void eject(Soldier* soldier);
 	void set_soldier_preference(int32_t changed_to);
 	void think() override;
 	bool check_can_act() const;
 
 	InteractiveBase& ibase_;
-	bool omnipotent_;
 	Widelands::Building& building_;
 	const UI::FontStyle font_style_;
 	SoldierPanel soldierpanel_;
@@ -371,10 +366,9 @@ private:
 	UI::Textarea infotext_;
 };
 
-SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building, bool op)
+SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building)
    : UI::Box(&parent, 0, 0, UI::Box::Vertical),
      ibase_(ib),
-     omnipotent_(op),
      building_(building),
      font_style_(UI::FontStyle::kLabel),
      soldierpanel_(*this, ib.egbase(), building, op),
@@ -437,7 +431,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 }
 
 bool SoldierList::check_can_act() const {
-	return omnipotent_ || dynamic_cast<InteractiveGameBase&>(ibase_).can_act(building_.owner().player_number());
+	return ibase_.omnipotent() || dynamic_cast<InteractiveGameBase&>(ibase_).can_act(building_.owner().player_number());
 }
 
 const SoldierControl* SoldierList::soldiers() const {
@@ -476,7 +470,7 @@ void SoldierList::mouseover(const Soldier* soldier) {
 	      .str());
 }
 
-void SoldierList::eject(const Soldier* soldier) {
+void SoldierList::eject(Soldier* soldier) {
 	uint32_t const capacity_min = soldiers()->min_soldier_capacity();
 	bool over_min = capacity_min < soldiers()->present_soldiers().size();
 
@@ -484,26 +478,24 @@ void SoldierList::eject(const Soldier* soldier) {
 		if (InteractiveGameBase* ig = dynamic_cast<InteractiveGameBase*>(&ibase_)) {
 			ig->game().send_player_drop_soldier(building_, soldier->serial());
 		} else {
-			log("NOCOM: SoldierList::eject in editor not yet implemented\n");
+			building_.get_owner()->drop_soldier(building_, *soldier);
 		}
 	}
 }
 
 void SoldierList::set_soldier_preference(int32_t changed_to) {
-#ifndef NDEBUG
-	upcast(Widelands::MilitarySite, ms, &building_);
-	assert(ms);
-#endif
+	assert(is_a(Widelands::MilitarySite, &building_));
 	if (InteractiveGameBase* ig = dynamic_cast<InteractiveGameBase*>(&ibase_)) {
 		ig->game().send_player_militarysite_set_soldier_preference(
 		   building_, changed_to == 0 ? Widelands::SoldierPreference::kRookies :
 			                            Widelands::SoldierPreference::kHeroes);
 	} else {
-		log("NOCOM: SoldierList::set_soldier_preference in editor not yet implemented\n");
+		building_.get_owner()->military_site_set_soldier_preference(building_,
+				changed_to == 0 ? Widelands::SoldierPreference::kRookies : Widelands::SoldierPreference::kHeroes);
 	}
 }
 
 UI::Panel*
-create_soldier_list(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building, bool op) {
-	return new SoldierList(parent, ib, building, op);
+create_soldier_list(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building) {
+	return new SoldierList(parent, ib, building);
 }

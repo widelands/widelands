@@ -49,8 +49,7 @@ BuildingWindow::BuildingWindow(InteractiveBase& parent,
                                UI::UniqueWindow::Registry& reg,
                                Widelands::Building& b,
                                const Widelands::BuildingDescr& descr,
-                               bool avoid_fastclick,
-                               bool op)
+                               bool avoid_fastclick)
    : UI::UniqueWindow(&parent, "building_window", &reg, Width, 0, b.descr().descname()),
      is_dying_(false),
      parent_(&parent),
@@ -60,7 +59,6 @@ BuildingWindow::BuildingWindow(InteractiveBase& parent,
      showing_workarea_(false),
      avoid_fastclick_(avoid_fastclick),
      is_warping_(false),
-     omnipotent_(op),
      expeditionbtn_(nullptr) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) { on_building_note(note); });
@@ -69,9 +67,8 @@ BuildingWindow::BuildingWindow(InteractiveBase& parent,
 BuildingWindow::BuildingWindow(InteractiveBase& parent,
                                UI::UniqueWindow::Registry& reg,
                                Widelands::Building& b,
-                               bool avoid_fastclick,
-                               bool op)
-   : BuildingWindow(parent, reg, b, b.descr(), avoid_fastclick, op) {
+                               bool avoid_fastclick)
+   : BuildingWindow(parent, reg, b, b.descr(), avoid_fastclick) {
 }
 
 BuildingWindow::~BuildingWindow() {
@@ -86,14 +83,7 @@ InteractiveGameBase* BuildingWindow::igbase() const {
 }
 
 bool BuildingWindow::check_can_act(Widelands::PlayerNumber p) const {
-	if (omnipotent_) {
-		return true;
-	}
-	if (InteractiveGameBase* ig = igbase()) {
-		return ig->can_act(p);
-	}
-	// If we are not in a game, we must be in the editor, where we are omnipotent
-	NEVER_HERE();
+	return ibase().omnipotent() || igbase()->can_act(p);
 }
 
 void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
@@ -182,7 +172,7 @@ Check the capabilities and setup the capsbutton panel in case they've changed.
 */
 void BuildingWindow::think() {
 	Widelands::Building* building = building_.get(parent_->egbase());
-	if (building == nullptr || !(omnipotent_ || igbase()->can_see(building->owner().player_number()))) {
+	if (building == nullptr || !(ibase().omnipotent() || igbase()->can_see(building->owner().player_number()))) {
 		die();
 		return;
 	}
@@ -214,7 +204,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 
 	const Widelands::Player& owner = building->owner();
 	const Widelands::PlayerNumber owner_number = owner.player_number();
-	const bool can_see = omnipotent_ || igbase()->can_see(owner_number);
+	const bool can_see = ibase().omnipotent() || igbase()->can_see(owner_number);
 	const bool can_act = check_can_act(owner_number);
 
 	capscache_player_number_ = igbase() ? igbase()->player_number() : owner_number;
@@ -595,7 +585,7 @@ void BuildingWindow::create_input_queue_panel(UI::Box* const box,
                                               const Widelands::InputQueue& iq,
                                               bool show_only) {
 	// The *max* width should be larger than the default width
-	box->add(new InputQueueDisplay(box, 0, 0, *ibase(), b, iq, show_only, omnipotent_));
+	box->add(new InputQueueDisplay(box, 0, 0, *ibase(), b, iq, show_only));
 }
 
 /**

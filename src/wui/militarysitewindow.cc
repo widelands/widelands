@@ -29,9 +29,8 @@ MilitarySiteWindow::MilitarySiteWindow(InteractiveBase& parent,
                                        UI::UniqueWindow::Registry& reg,
                                        Widelands::MilitarySite& ms,
                                        bool avoid_fastclick,
-                                       bool workarea_preview_wanted,
-                                       bool op)
-   : BuildingWindow(parent, reg, ms, avoid_fastclick, op), military_site_(&ms) {
+                                       bool workarea_preview_wanted)
+   : BuildingWindow(parent, reg, ms, avoid_fastclick), military_site_(&ms) {
 	init(avoid_fastclick, workarea_preview_wanted);
 }
 
@@ -40,6 +39,6 @@ void MilitarySiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted
 	assert(military_site != nullptr);
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
-	                create_soldier_list(*get_tabs(), *ibase(), *military_site, is_omnipotent()), _("Soldiers"));
+	                create_soldier_list(*get_tabs(), *ibase(), *military_site), _("Soldiers"));
 	think();
 }

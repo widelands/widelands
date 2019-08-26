@@ -38,6 +38,8 @@ struct ScenarioFlagSettingsWindow : public UI::Window {
 
 	const Widelands::Flag* flag() const;
 
+	void unset_tool();
+
 protected:
 	void die() override;
 	void think() override;
@@ -53,7 +55,7 @@ private:
 	void update();
 	void select(uint32_t slot);
 
-	ScenarioInfrastructureSettingsTool& tool_;
+	ScenarioInfrastructureSettingsTool* tool_;
 	Widelands::OPtr<Widelands::Flag> flag_;
 };
 

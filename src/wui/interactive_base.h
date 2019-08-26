@@ -184,11 +184,14 @@ public:
 
 	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords,
 	                                       bool avoid_fastclick,
-	                                       bool workarea_preview_wanted,
-	                                       bool omnipotent = false);
+	                                       bool workarea_preview_wanted);
 	void add_wanted_building_window(const Widelands::Coords& coords,
 	                                const Vector2i point,
 	                                bool was_minimal);
+
+	virtual bool omnipotent() const {
+		return false;
+	}
 
 	MapView* map_view() {
 		return &map_view_;
