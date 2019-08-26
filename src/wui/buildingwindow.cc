@@ -58,7 +58,6 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
      building_position_(b.get_position()),
      showing_workarea_(false),
      avoid_fastclick_(avoid_fastclick),
-     is_warping_(false),
      expeditionbtn_(nullptr) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) { on_building_note(note); });
@@ -72,10 +71,8 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
 }
 
 BuildingWindow::~BuildingWindow() {
-	if (!is_warping_) {
-		// Accessing the toggle_workarea_ button can cause segfaults, so we leave it alone
-		hide_workarea(false);
-	}
+	// Accessing the toggle_workarea_ button can cause segfaults, so we leave it alone
+	hide_workarea(false);
 }
 
 void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
@@ -90,7 +87,6 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 		// The building is no more. Next think() will call die().
 		case Widelands::NoteBuilding::Action::kStartWarp:
 			igbase()->add_wanted_building_window(building_position_, get_pos(), is_minimal());
-			is_warping_ = true;
 			break;
 		default:
 			break;
@@ -346,9 +342,9 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			capsbuttons->add(debugbtn);
 		}
 
-		UI::Button* gotobtn = new UI::Button(
-		   capsbuttons, "goto", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-		   g_gr->images().get("images/wui/menus/menu_goto.png"), _("Center view on this"));
+		UI::Button* gotobtn =
+		   new UI::Button(capsbuttons, "goto", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+		                  g_gr->images().get("images/wui/menus/goto.png"), _("Center view on this"));
 		gotobtn->sigclicked.connect(boost::bind(&BuildingWindow::clicked_goto, boost::ref(*this)));
 		capsbuttons->add(gotobtn);
 
