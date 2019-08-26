@@ -1,33 +1,28 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_smokery",
+   msgctxt = "amazons_building",
+   name = "amazons_rare_tree_plantation",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Smokery"),
+   descname = pgettext ("amazons_building", "Rare Tree Plantation"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {
-      brick = 4,
-      log = 1,
-      reed = 2
+      log = 6,
+      granite = 3,
+      rope = 3,
    },
    return_on_dismantle = {
-      brick = 2,
-      log = 1,
-      reed = 1
+      log = 2,
+      granite = 2,
+      rope = 1,
    },
 
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 82},
-         fps = 10,
-      },
-      working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
          hotspot = {56, 82},
          fps = 10,
       },
@@ -38,24 +33,20 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 470,
-      very_weak_ai_limit = 1,
-      weak_ai_limit = 2,
-      basic_amount = 1
+      supports_production_of = { "balsa", "rubber", "ironwood" },
+      space_consumer = true,
    },
 
    working_positions = {
-      frisians_smoker = 1
+      amazons_jungle_master = 1
    },
 
-   inputs = {
-      { name = "meat", amount = 6 },
-      { name = "fish", amount = 6 },
-      { name = "log", amount = 6 },
-   },
-   outputs = {
-      "smoked_meat",
-      "smoked_fish",
+   indicate_workarea_overlaps = {
+      amazons_rare_tree_plantation = false,
+      amazons_cocoa_farm = false,
+      amazons_cassava_root_plantation = false,
+      amazons_junglemasters_hut = false,
+      amazons_rare_trees_woodcutters_hut = true,
    },
 
    programs = {
@@ -63,33 +54,40 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=smoke_meat",
-            "call=smoke_fish",
+            "call=plant_balsa",
+            "call=plant_rubber",
+            "call=plant_ironwood",
             "return=no_stats"
          },
       },
-      smoke_fish = {
-         -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-         descname = _"smoking fish",
+      plant_balsa = {
+         -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
+         descname = _"preparing a ration",
          actions = {
-            "return=skipped unless economy needs smoked_fish",
-            "consume=fish:2 log",
-            "sleep=16000",
-            "animate=working 30000",
-            "produce=smoked_fish:2"
+            -- time total: 33
+            "return=skipped unless economy needs balsa",
+            "callworker=plant_balsa",
+            "sleep=12000"
          },
       },
-      smoke_meat = {
-         -- TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
-         descname = _"smoking meat",
+      plant_rubber = {
+         -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
+         descname = _"preparing a ration",
          actions = {
-            "return=skipped when site has fish:2 and economy needs smoked_fish",
-            "return=skipped unless economy needs smoked_meat",
-            "consume=meat:2 log",
-            "sleep=16000",
-            "animate=working 30000",
-            "produce=smoked_meat:2"
+            -- time total: 33
+            "return=skipped unless economy needs rubber",
+            "callworker=plant_rubber",
+            "sleep=12000"
+         },
+      },
+      plant_ironwood = {
+         -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
+         descname = _"preparing a ration",
+         actions = {
+            -- time total: 33
+            "return=skipped unless economy needs ironwood",
+            "callworker=plant_ironwood",
+            "sleep=12000"
          },
       },
    },
-}

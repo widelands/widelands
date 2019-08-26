@@ -50,7 +50,7 @@ tribes:new_productionsite_type {
       { name = "water", amount = 8 },
    },
    outputs = {
-      "amazons_bread",
+      "bread_amazons",
    },
 
    programs = {
@@ -67,12 +67,12 @@ tribes:new_productionsite_type {
          descname = _"baking bread",
          actions = {
             -- time total: 33
-            "return=skipped unless economy needs amazons bread",
+            "return=skipped unless economy needs bread_amazons",
             "consume=cassava_root water:2",
             "sleep=5000",
             "animate=working 18000",
             "sleep=10000",
-            "produce=amazons bread"
+            "produce=bread_amazons"
          }
       },
    },

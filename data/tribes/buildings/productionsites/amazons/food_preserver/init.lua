@@ -1,24 +1,24 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_tavern",
+   msgctxt = "amazons_building",
+   name = "amazons_food_preserver",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Tavern"),
+   descname = pgettext ("amazons_building", "Food Preserver"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "frisians_drinking_hall",
 
    buildcost = {
-      brick = 3,
       log = 2,
-      reed = 2
+      granite = 3,
+      rope = 2,
+      rubber =1
    },
    return_on_dismantle = {
-      brick = 2,
       log = 1,
-      reed = 1
+      granite = 2,
+      rope = 1,
    },
 
    animations = {
@@ -46,14 +46,14 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_landlady = 1
+      amazons_cook = 1
    },
 
    inputs = {
-      { name = "fruit", amount = 4 },
-      { name = "bread_frisians", amount = 4 },
-      { name = "smoked_fish", amount = 4 },
-      { name = "smoked_meat", amount = 4 },
+      { name = "coal", amount = 3 },
+      { name = "bread_amazons", amount = 6 },
+      { name = "fish", amount = 6 },
+      { name = "meat", amount = 6 },
    },
    outputs = {
       "ration"
@@ -64,34 +64,19 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=produce_malus",
-            "call=produce_bonus",
+            "call=produce_ration",
             "return=no_stats"
          },
       },
-      produce_malus = {
+      produce_ration = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
-         descname = _"preparing only one ration",
+         descname = _"preparing a ration",
          actions = {
-            -- time total: 49.5
+            -- time total: 33
             "return=skipped unless economy needs ration",
-            "return=skipped when site has fruit,bread_frisians and site has smoked_fish,smoked_meat",
-            "consume=fruit,bread_frisians,smoked_fish,smoked_meat",
+            "consume=bread_amazons:2 fish,meat:2 coal",
             "sleep=5000",
-            "animate=working 34500",
-            "sleep=10000",
-            "produce=ration"
-         },
-      },
-      produce_bonus = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
-         descname = _"preparing rations",
-         actions = {
-            -- time total: 66
-            "return=skipped unless economy needs ration",
-            "consume=fruit,bread_frisians smoked_fish,smoked_meat",
-            "sleep=5000",
-            "animate=working 51000",
+            "animate=working 18000",
             "sleep=10000",
             "produce=ration:2"
          },

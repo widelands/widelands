@@ -1,24 +1,22 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_charcoal_kiln",
+   msgctxt = "amazons_building",
+   name = "amazons_charcoal_kiln",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Charcoal Kiln"),
+   descname = pgettext ("amazons_building", "Charcoal Kiln"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
    buildcost = {
-      brick = 3,
-      granite = 1,
-      log = 1,
-      reed = 2
+      log = 2,
+      granite = 4,
+      ironwood = 1,
    },
    return_on_dismantle = {
-      brick = 2,
       log = 1,
-      reed = 1
+      granite = 2,
    },
 
    animations = {
@@ -43,12 +41,11 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_charcoal_burner = 1
+      amazons_charcoal_burner = 1
    },
 
    inputs = {
-      { name = "log", amount = 8 },
-      { name = "clay", amount = 4 },
+      { name = "log", amount = 8 }
    },
    outputs = {
       "coal"
@@ -60,11 +57,11 @@ tribes:new_productionsite_type {
          descname = _"producing coal",
          actions = {
             "return=skipped unless economy needs coal",
-            "consume=log:3 clay",
+            "consume=log:6",
             "sleep=30000",
-            "animate=working 30000",
+            "animate=working 90000", -- Charcoal fires will burn for some days in real life
             "produce=coal"
-         },
+         }
       },
    },
 }

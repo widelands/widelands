@@ -1,26 +1,23 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_weaving_mill",
+   msgctxt = "amazons_building",
+   name = "amazons_rope_weaver_booth",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Weaving Mill"),
+   descname = pgettext ("amazons_building", "Rope Weaver Booth"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   needs_seafaring = true,
 
    buildcost = {
-      brick = 4,
+      log = 5,
       granite = 2,
-      log = 3,
-      reed = 2
+      rope = 1,
+      rubber =1
    },
    return_on_dismantle = {
-      brick = 2,
+      log = 3,
       granite = 1,
-      log = 1,
-      reed = 1
    },
 
    animations = {
@@ -45,27 +42,26 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_seamstress = 1
+      amazons_carrier = 1
    },
 
    inputs = {
-      { name = "fur", amount = 6 },
-      { name = "reed", amount = 6 },
+      { name = "liana", amount = 8 },
    },
    outputs = {
-      "cloth",
+      "rope",
    },
 
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
-         descname = _"weaving cloth",
+         descname = _"making a rope",
          actions = {
-            "return=skipped unless economy needs cloth",
-            "consume=fur reed",
-            "sleep=25000",
-            "animate=working 20000",
-            "produce=cloth"
+            "return=skipped unless economy needs rope",
+            "consume=liana:2",
+            "sleep=32000",
+            "animate=working 50000",
+            "produce=rope"
          },
       },
    },

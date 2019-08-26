@@ -1,72 +1,59 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_bakery",
+   msgctxt = "amazons_building",
+   name = "amazons_gardening_center",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Bakery"),
+   descname = pgettext ("amazons_building", "Gardening Center"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "frisians_honey_bread_bakery",
 
    buildcost = {
-      brick = 3,
-      granite = 1,
-      log = 2,
-      reed = 2
+      log = 4,
+      granite = 2,
+      rope = 2,
    },
    return_on_dismantle = {
-      brick = 2,
-      log = 1,
-      reed = 1
+      log = 2,
+      granite = 1,
+      rope = 1,
    },
 
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 80},
-         fps = 10,
-      },
-      working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 80},
+         hotspot = {49, 90},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 66},
+         hotspot = {49, 68},
       },
    },
 
    aihints = {
-      prohibited_till = 500,
-      forced_after = 710
+      supports_production_of = { "log" },
+      prohibited_till = 460
    },
 
    working_positions = {
-      frisians_baker = 1
+      amazons_jungle_master = 1
    },
 
-   inputs = {
-      { name = "barley", amount = 7 },
-      { name = "water", amount = 7 },
-   },
-   outputs = {
-      "bread_frisians"
+   indicate_workarea_overlaps = {
+      amazons_rare_tree_plantation = true,
+      amazons_junglemasters_hut = true,
    },
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
-         descname = _"baking bread",
+         -- TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
+         descname = _"enhancing the fertility of land",
          actions = {
-            "return=skipped unless economy needs bread_frisians or workers need experience",
-            "consume=water barley",
-            "sleep=20000",
-            "animate=working 20000",
-            "produce=bread_frisians"
-         },
+            "callworker=terraform",
+            "sleep=12000"
+         }
       },
    },
 }
