@@ -45,9 +45,9 @@ int32_t ScenarioInfrastructureSettingsTool::handle_click_impl(const Widelands::W
 			}
 		}
 		open_windows_.insert(new ScenarioFlagSettingsWindow(parent, *this, dynamic_cast<Widelands::Flag&>(imm)));
-	} else if (dynamic_cast<Widelands::Building*>(&imm)) {
+	} else if (is_a(Widelands::Building, &imm)) {
 		// This function uses UniqueWindow to ensure that the window doesn't open twice
-		parent.show_building_window(center.node, true, false, true);
+		parent.show_building_window(center.node, true, false);
 	}
 	return 0;
 }

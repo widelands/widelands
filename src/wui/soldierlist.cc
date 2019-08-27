@@ -56,8 +56,7 @@ struct SoldierPanel : UI::Panel {
 
 	SoldierPanel(UI::Panel& parent,
 	             Widelands::EditorGameBase& egbase,
-	             Widelands::Building& building,
-	             bool op);
+	             Widelands::Building& building);
 
 	Widelands::EditorGameBase& egbase() const {
 		return egbase_;
@@ -347,7 +346,7 @@ bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
  * List of soldiers \ref MilitarySiteWindow and \ref TrainingSiteWindow
  */
 struct SoldierList : UI::Box {
-	SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building, bool op);
+	SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building);
 
 	const SoldierControl* soldiers() const;
 
@@ -371,7 +370,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
      ibase_(ib),
      building_(building),
      font_style_(UI::FontStyle::kLabel),
-     soldierpanel_(*this, ib.egbase(), building, op),
+     soldierpanel_(*this, ib.egbase(), building),
      infotext_(this, _("Click soldier to send away")) {
 	add(&soldierpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -426,12 +425,12 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 		}
 	}
 	buttons->add_inf_space();
-	buttons->add(create_soldier_capacity_control(*buttons, ib, building, op));
+	buttons->add(create_soldier_capacity_control(*buttons, ib, building));
 	add(buttons, UI::Box::Resizing::kFullSize);
 }
 
 bool SoldierList::check_can_act() const {
-	return ibase_.omnipotent() || dynamic_cast<InteractiveGameBase&>(ibase_).can_act(building_.owner().player_number());
+	return ibase_.omnipotent() || ibase_.can_act(building_.owner().player_number());
 }
 
 const SoldierControl* SoldierList::soldiers() const {
@@ -475,8 +474,8 @@ void SoldierList::eject(Soldier* soldier) {
 	bool over_min = capacity_min < soldiers()->present_soldiers().size();
 
 	if (check_can_act() && over_min) {
-		if (InteractiveGameBase* ig = dynamic_cast<InteractiveGameBase*>(&ibase_)) {
-			ig->game().send_player_drop_soldier(building_, soldier->serial());
+		if (ibase_.get_game()) {
+			ibase_.game().send_player_drop_soldier(building_, soldier->serial());
 		} else {
 			building_.get_owner()->drop_soldier(building_, *soldier);
 		}
@@ -485,8 +484,8 @@ void SoldierList::eject(Soldier* soldier) {
 
 void SoldierList::set_soldier_preference(int32_t changed_to) {
 	assert(is_a(Widelands::MilitarySite, &building_));
-	if (InteractiveGameBase* ig = dynamic_cast<InteractiveGameBase*>(&ibase_)) {
-		ig->game().send_player_militarysite_set_soldier_preference(
+	if (ibase_.get_game()) {
+		ibase_.game().send_player_militarysite_set_soldier_preference(
 		   building_, changed_to == 0 ? Widelands::SoldierPreference::kRookies :
 			                            Widelands::SoldierPreference::kHeroes);
 	} else {

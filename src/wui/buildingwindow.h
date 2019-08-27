@@ -64,7 +64,6 @@ public:
 	InteractiveBase* ibase() const {
 		return parent_;
 	}
-	InteractiveGameBase* igbase() const;
 	bool check_can_act(Widelands::PlayerNumber) const;
 
 	void draw(RenderTarget&) override;

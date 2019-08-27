@@ -519,8 +519,14 @@ void Map::set_origin(const Coords& new_origin) {
 	for (FCoords c(Coords(0, 0), fields_.get()); c.y < height_; ++c.y) {
 		for (c.x = 0; c.x < width_; ++c.x, ++c.field) {
 			assert(c.field == &operator[](c));
-			if (upcast(Immovable, immovable, c.field->get_immovable())) {
-				immovable->position_ = c;
+			if (BaseImmovable* imm = c.field->get_immovable()) {
+				if (imm->descr().type() == MapObjectType::FLAG) {
+					dynamic_cast<Flag&>(*imm).position_ = c;
+				} else if (upcast(Immovable, immovable, imm)) {
+					immovable->position_ = c;
+				} else if (upcast(Building, b, imm)) {
+					b->position_ = c;
+				}
 			}
 			for (Bob* bob = c.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
 				bob->position_.x = c.x;
@@ -674,8 +680,15 @@ Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const i
 	// Inform immovables and bobs about their new position
 	for (MapIndex idx = 0; idx < field_size; ++idx) {
 		Field& f = operator[](idx);
-		if (upcast(Immovable, immovable, f.get_immovable())) {
-			immovable->position_ = get_fcoords(f);
+		const FCoords fc = get_fcoords(f);
+		if (BaseImmovable* imm = f.get_immovable()) {
+			if (imm->descr().type() == MapObjectType::FLAG) {
+				dynamic_cast<Flag&>(*imm).position_ = fc;
+			} else if (upcast(Immovable, immovable, imm)) {
+				immovable->position_ = fc;
+			} else if (upcast(Building, b, imm)) {
+				b->position_ = fc;
+			}
 		}
 		// Ensuring that all bob iterators are changed correctly is a bit hacky, but the more obvious
 		// solution of doing it like in set_origin() is highly problematic here, or so ASan tells me
@@ -688,7 +701,7 @@ Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const i
 			bob->position_.field = nullptr;
 			bob->linknext_ = nullptr;
 			bob->linkpprev_ = nullptr;
-			bob->set_position(egbase, get_fcoords(f));
+			bob->set_position(egbase, fc);
 		}
 	}
 

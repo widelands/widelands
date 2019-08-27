@@ -131,7 +131,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 	// Add the wares queue
 	for (uint32_t i = 0; i < construction_site->get_nrwaresqueues(); ++i)
 		box.add(new InputQueueDisplay(
-		   &box, 0, 0, *igbase(), *construction_site, *construction_site->get_waresqueue(i)));
+		   &box, 0, 0, *ibase(), *construction_site, *construction_site->get_waresqueue(i)));
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 
@@ -145,14 +145,14 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		if (upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings())) {
 			for (const auto& pair : ps->ware_queues) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
-				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWARE, pair.first);
+				   &settings_box, 0, 0, *ibase(), *construction_site, Widelands::wwWARE, pair.first);
 				settings_box.add(queue);
 				settings_box.add_space(8);
 				cs_ware_queues_.push_back(queue);
 			}
 			for (const auto& pair : ps->worker_queues) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
-				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWORKER, pair.first);
+				   &settings_box, 0, 0, *ibase(), *construction_site, Widelands::wwWORKER, pair.first);
 				settings_box.add(queue);
 				settings_box.add_space(8);
 				cs_ware_queues_.push_back(queue);
@@ -173,8 +173,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				cs_soldier_capacity_decrease_->set_enabled(can_act);
 				cs_soldier_capacity_increase_->set_enabled(can_act);
 				cs_soldier_capacity_decrease_->sigclicked.connect([this, ts]() {
-					if (InteractiveGameBase* ig = igbase()) {
-						ig->game().send_player_change_soldier_capacity(
+					if (ibase()->get_game()) {
+						ibase()->game().send_player_change_soldier_capacity(
 						   *construction_site_.get(ibase()->egbase()),
 						   SDL_GetModState() & KMOD_CTRL ? 0 : ts->desired_capacity - 1);
 					} else {
@@ -182,8 +182,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 					}
 				});
 				cs_soldier_capacity_increase_->sigclicked.connect([this, ts]() {
-					if (InteractiveGameBase* ig = igbase()) {
-						ig->game().send_player_change_soldier_capacity(
+					if (ibase()->get_game()) {
+						ibase()->game().send_player_change_soldier_capacity(
 						   *construction_site_.get(ibase()->egbase()),
 						   SDL_GetModState() & KMOD_CTRL ? ts->max_capacity : ts->desired_capacity + 1);
 					} else {
@@ -202,9 +202,9 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			                               _("Stop this building’s work after completion"));
 			cs_stopped_->clickedto.connect([this, ps](bool stop) {
 				if (stop != ps->stopped) {
-					if (InteractiveGameBase* ig = igbase()) {
-						ig->game().send_player_start_stop_building(
-						   *construction_site_.get(ig->egbase()));
+					if (ibase()->get_game()) {
+						ibase()->game().send_player_start_stop_building(
+						   *construction_site_.get(ibase()->egbase()));
 					} else {
 						log("NOCOM: ConstructionSiteWindow cs_stopped_->clickedto in editor not yet implemented\n");
 					}
@@ -229,18 +229,18 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_soldier_capacity_decrease_->set_enabled(can_act);
 			cs_soldier_capacity_increase_->set_enabled(can_act);
 			cs_soldier_capacity_decrease_->sigclicked.connect([this, ms]() {
-				if (InteractiveGameBase* ig = igbase()) {
-					ig->game().send_player_change_soldier_capacity(
-					   *construction_site_.get(ig->egbase()),
+				if (ibase()->get_game()) {
+					ibase()->game().send_player_change_soldier_capacity(
+					   *construction_site_.get(ibase()->egbase()),
 					   SDL_GetModState() & KMOD_CTRL ? 1 : ms->desired_capacity - 1);
 			   	} else {
 					log("NOCOM: ConstructionSiteWindow cs_soldier_capacity_decrease_->sigclicked in editor not yet implemented\n");
 			   	}
 			});
 			cs_soldier_capacity_increase_->sigclicked.connect([this, ms]() {
-				if (InteractiveGameBase* ig = igbase()) {
-					ig->game().send_player_change_soldier_capacity(
-					   *construction_site_.get(ig->egbase()),
+				if (ibase()->get_game()) {
+					ibase()->game().send_player_change_soldier_capacity(
+					   *construction_site_.get(ibase()->egbase()),
 					   SDL_GetModState() & KMOD_CTRL ? ms->max_capacity : ms->desired_capacity + 1);
 				} else {
 					log("NOCOM: ConstructionSiteWindow cs_soldier_capacity_increase_->sigclicked in editor not yet implemented\n");
@@ -268,9 +268,9 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			   g_gr->images().get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
 			if (can_act) {
 				cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
-					if (InteractiveGameBase* ig = igbase()) {
-						ig->game().send_player_militarysite_set_soldier_preference(
-						   *construction_site_.get(ig->egbase()),
+					if (ibase()->get_game()) {
+						ibase()->game().send_player_militarysite_set_soldier_preference(
+						   *construction_site_.get(ibase()->egbase()),
 						   state ? Widelands::SoldierPreference::kRookies :
 							       Widelands::SoldierPreference::kHeroes);
 					} else {
@@ -339,9 +339,9 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				                    _("Start an expedition from this port after completion"));
 				cs_launch_expedition_->clickedto.connect([this, ws](bool launch) {
 					if (launch != ws->launch_expedition) {
-						if (InteractiveGameBase* ig = igbase()) {
-							ig->game().send_player_start_or_cancel_expedition(
-							   *construction_site_.get(ig->egbase()));
+						if (ibase()->get_game()) {
+							ibase()->game().send_player_start_or_cancel_expedition(
+							   *construction_site_.get(ibase()->egbase()));
 						} else {
 							log("NOCOM: ConstructionSiteWindow cs_launch_expedition_->clickedto in editor not yet implemented\n");
 						}
@@ -371,12 +371,12 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			   new UI::Button(&settings_box, "enhance", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                  building_descr.icon(), enhance_tooltip);
 			cs_enhance_->sigclicked.connect([this, construction_site] {
-				if (InteractiveGameBase* ig = igbase()) {
+				if (ibase()->get_game()) {
 					if (SDL_GetModState() & KMOD_CTRL) {
-						ig->game().send_player_enhance_building(
+						ibase()->game().send_player_enhance_building(
 						   *construction_site, Widelands::INVALID_INDEX);
 					} else {
-						show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *construction_site,
+						show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*ibase()), *construction_site,
 							                 construction_site->get_info().becomes->enhancement(), true);
 					}
 				} else {
@@ -402,12 +402,11 @@ void ConstructionSiteWindow::change_policy(Widelands::WareWorker ww, Widelands::
 	assert(construction_site);
 	upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings());
 	assert(ws);
-	InteractiveGameBase* ig = igbase();
 	if (ww == Widelands::wwWARE) {
 		for (const auto& pair : ws->ware_preferences) {
 			if (cs_warehouse_wares_->ware_selected(pair.first)) {
-				if (ig) {
-					ig->game().send_player_set_stock_policy(
+				if (ibase()->get_game()) {
+					ibase()->game().send_player_set_stock_policy(
 					   *construction_site, Widelands::wwWARE, pair.first, p);
 				} else {
 					log("NOCOM: ConstructionSiteWindow ConstructionSiteWindow::change_policy in editor not yet implemented\n");
@@ -417,8 +416,8 @@ void ConstructionSiteWindow::change_policy(Widelands::WareWorker ww, Widelands::
 	} else {
 		for (const auto& pair : ws->worker_preferences) {
 			if (cs_warehouse_workers_->ware_selected(pair.first)) {
-				if (ig) {
-					ig->game().send_player_set_stock_policy(
+				if (ibase()->get_game()) {
+					ibase()->game().send_player_set_stock_policy(
 					   *construction_site, Widelands::wwWORKER, pair.first, p);
 				} else {
 					log("NOCOM: ConstructionSiteWindow ConstructionSiteWindow::change_policy in editor not yet implemented\n");

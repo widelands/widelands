@@ -36,8 +36,6 @@ static char const* pic_priority_normal = "images/wui/buildings/normal_priority_b
 static char const* pic_priority_high = "images/wui/buildings/high_priority_button.png";
 static char const* pic_max_fill_indicator = "images/wui/buildings/max_fill_indicator.png";
 
-#define igb() InteractiveGameBase* igb = dynamic_cast<InteractiveGameBase*>(&ib_)
-
 InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
                                      int32_t const x,
                                      int32_t const y,
@@ -247,13 +245,7 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 }
 
 inline bool InputQueueDisplay::check_can_act() const {
-	if (ib_.omnipotent()) {
-		return true;
-	}
-	if (igb()) {
-		return igb->can_act(building_.owner().player_number());
-	}
-	NEVER_HERE();
+	return ib_.omnipotent() || ib_.can_act(building_.owner().player_number());
 }
 
 /**
@@ -435,8 +427,8 @@ void InputQueueDisplay::radiogroup_changed(int32_t state) {
 	if (SDL_GetModState() & KMOD_CTRL) {
 		update_siblings_priority(state);
 	}
-	if (igb()) {
-		igb->game().send_player_set_ware_priority(
+	if (ib_.get_game()) {
+		ib_.game().send_player_set_ware_priority(
 		   building_, type_, index_, priority, settings_ != nullptr);
 	} else {
 		if (settings_) {
@@ -510,8 +502,8 @@ void InputQueueDisplay::decrease_max_fill_clicked() {
 	// Update the value of this queue if required
 	if (cache_max_fill_ > 0) {
 		const size_t maxfill = (SDL_GetModState() & KMOD_CTRL) ? 0 : cache_max_fill_ - 1;
-		if (igb()) {
-			igb->game().send_player_set_input_max_fill(
+		if (ib_.get_game()) {
+			ib_.game().send_player_set_input_max_fill(
 			   building_, index_, type_, maxfill, settings_ != nullptr);
 		} else {
 			if (settings_) {
@@ -558,8 +550,8 @@ void InputQueueDisplay::increase_max_fill_clicked() {
 
 	if (cache_max_fill_ < cache_size_) {
 		const size_t maxfill = (SDL_GetModState() & KMOD_CTRL) ? cache_size_ : cache_max_fill_ + 1;
-		if (igb()) {
-			igb->game().send_player_set_input_max_fill(
+		if (ib_.get_game()) {
+			ib_.game().send_player_set_input_max_fill(
 			   building_, index_, type_, maxfill, settings_ != nullptr);
 		} else {
 			if (settings_) {
@@ -615,8 +607,8 @@ void InputQueueDisplay::update_siblings_fill(int32_t delta) {
 		   std::max(0, std::min<int32_t>(static_cast<int32_t>(display->cache_max_fill_) + delta,
 		                                 display->cache_size_));
 		if (new_fill != display->cache_max_fill_) {
-			if (igb()) {
-				igb->game().send_player_set_input_max_fill(
+			if (ib_.get_game()) {
+				ib_.game().send_player_set_input_max_fill(
 				   building_, display->index_, display->type_, new_fill, settings_ != nullptr);
 			} else {
 				if (settings_) {

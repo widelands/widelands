@@ -124,7 +124,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      ib_(ib),
      wh_(wh),
-     can_act_(ib.omnipotent() || dynamic_cast<InteractiveGameBase&>(ib).can_act(wh_.owner().player_number())),
+     can_act_(ib.omnipotent() || ib.can_act(wh_.owner().player_number())),
      type_(type),
      display_(this, width, wh_, type_, can_act_) {
 	add(&display_, Resizing::kFullSize);
@@ -153,17 +153,16 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
  * Add Buttons policy buttons
  */
 void WarehouseWaresPanel::set_policy(Widelands::StockPolicy newpolicy) {
-	InteractiveGameBase* ig = dynamic_cast<InteractiveGameBase*>(&ib_);
-	if (ib_.omnipotent() || ig->can_act(wh_.owner().player_number())) {
+	if (ib_.omnipotent() || ib_.can_act(wh_.owner().player_number())) {
 		bool is_workers = type_ == Widelands::wwWORKER;
 		const std::set<Widelands::DescriptionIndex> indices =
 		   is_workers ? wh_.owner().tribe().workers() : wh_.owner().tribe().wares();
 
 		for (const Widelands::DescriptionIndex& index : indices) {
 			if (display_.ware_selected(index)) {
-				if (ig) {
-					ig->game().send_player_command(new Widelands::CmdSetStockPolicy(
-					   ig->game().get_gametime(), wh_.owner().player_number(), wh_, is_workers, index,
+				if (ib_.get_game()) {
+					ib_.game().send_player_command(new Widelands::CmdSetStockPolicy(
+					   ib_.game().get_gametime(), wh_.owner().player_number(), wh_, is_workers, index,
 					   newpolicy));
 				} else {
 					if (is_workers) {

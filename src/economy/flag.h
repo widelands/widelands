@@ -72,6 +72,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	friend struct MapWarePacket;      // has to look at pending wares
 	friend struct MapWaredataPacket;  // has to look at pending wares
 	friend struct Router;
+	friend struct Map;
 
 	const FlagDescr& descr() const;
 

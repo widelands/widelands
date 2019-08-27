@@ -28,7 +28,7 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "ui_basic/textarea.h"
 #include "wui/inputqueuedisplay.h"
-#include "wui/interactive_gamebase.h"
+#include "wui/interactive_base.h"
 
 static char const* pic_tab_wares = "images/wui/buildings/menu_tab_wares.png";
 static char const* pic_tab_workers = "images/wui/buildings/menu_list_workers.png";
@@ -214,8 +214,8 @@ void ProductionSiteWindow::evict_worker() {
 		Widelands::Worker* worker =
 		   production_site->working_positions()[worker_table_->get_selected()].worker;
 		if (worker) {
-			if (InteractiveGameBase* ig = igbase()) {
-				ig->game().send_player_evict_worker(*worker);
+			if (ibase()->get_game()) {
+				ibase()->game().send_player_evict_worker(*worker);
 			} else {
 				// We must be in the editor, where we just delete the worker instead of kicking him
 				worker->remove(ibase()->egbase());

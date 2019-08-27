@@ -189,12 +189,29 @@ public:
 	                                const Vector2i point,
 	                                bool was_minimal);
 
+	MapView* map_view() {
+		return &map_view_;
+	}
+
+	// Should return true only in EditorInteractive
 	virtual bool omnipotent() const {
 		return false;
 	}
-
-	MapView* map_view() {
-		return &map_view_;
+	// The following functions should be implemented only by InteractiveGameBase and its subclasses!
+	virtual Widelands::Game* get_game() const {
+		return nullptr;
+	}
+	virtual Widelands::Game& game() const {
+		NEVER_HERE();
+	}
+	virtual bool can_see(Widelands::PlayerNumber) const {
+		NEVER_HERE();
+	}
+	virtual bool can_act(Widelands::PlayerNumber) const {
+		NEVER_HERE();
+	}
+	virtual Widelands::PlayerNumber player_number() const {
+		NEVER_HERE();
 	}
 
 protected:

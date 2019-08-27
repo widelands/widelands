@@ -26,7 +26,7 @@
 #include "logic/player.h"
 #include "ui_basic/button.h"
 #include "ui_basic/radiobutton.h"
-#include "wui/interactive_gamebase.h"
+#include "wui/interactive_base.h"
 
 using Widelands::SoldierControl;
 
@@ -37,8 +37,7 @@ using Widelands::SoldierControl;
 struct SoldierCapacityControl : UI::Box {
 	SoldierCapacityControl(UI::Panel* parent,
 	                       InteractiveBase& ib,
-	                       Widelands::Building& building,
-	                       bool op);
+	                       Widelands::Building& building);
 
 protected:
 	void think() override;
@@ -103,15 +102,15 @@ void SoldierCapacityControl::think() {
 	uint32_t const capacity = soldiers->soldier_capacity();
 	value_.set_text(boost::lexical_cast<std::string>(capacity));
 
-	bool const can_act = ibase_.omnipotent() || dynamic_cast<InteractiveGameBase&>(ibase_).can_act(
+	bool const can_act = ibase_.omnipotent() || ibase_.can_act(
 			building_.owner().player_number());
 	decrease_.set_enabled(can_act && soldiers->min_soldier_capacity() < capacity);
 	increase_.set_enabled(can_act && soldiers->max_soldier_capacity() > capacity);
 }
 
 void SoldierCapacityControl::change_soldier_capacity(int delta) {
-	if (InteractiveGameBase* ig = dynamic_cast<InteractiveGameBase*>(&ibase_)) {
-		ig->game().send_player_change_soldier_capacity(building_, delta);
+	if (ibase_.get_game()) {
+		ibase_.game().send_player_change_soldier_capacity(building_, delta);
 	} else {
 		SoldierControl* soldier_control = building_.mutable_soldier_control();
 		Widelands::Quantity const old_capacity = soldier_control->soldier_capacity();

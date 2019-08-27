@@ -78,12 +78,8 @@ BuildingWindow::~BuildingWindow() {
 	}
 }
 
-InteractiveGameBase* BuildingWindow::igbase() const {
-	return dynamic_cast<InteractiveGameBase*>(ibase());
-}
-
 bool BuildingWindow::check_can_act(Widelands::PlayerNumber p) const {
-	return ibase().omnipotent() || igbase()->can_act(p);
+	return ibase()->omnipotent() || ibase()->can_act(p);
 }
 
 void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
@@ -172,12 +168,12 @@ Check the capabilities and setup the capsbutton panel in case they've changed.
 */
 void BuildingWindow::think() {
 	Widelands::Building* building = building_.get(parent_->egbase());
-	if (building == nullptr || !(ibase().omnipotent() || igbase()->can_see(building->owner().player_number()))) {
+	if (building == nullptr || !(ibase()->omnipotent() || ibase()->can_see(building->owner().player_number()))) {
 		die();
 		return;
 	}
 
-	if (!caps_setup_ || (igbase() && capscache_player_number_ != igbase()->player_number()) ||
+	if (!caps_setup_ || capscache_player_number_ != ibase()->player_number() ||
 	    building->get_playercaps() != capscache_) {
 		capsbuttons_->free_children();
 		create_capsbuttons(capsbuttons_, building);
@@ -204,10 +200,10 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 
 	const Widelands::Player& owner = building->owner();
 	const Widelands::PlayerNumber owner_number = owner.player_number();
-	const bool can_see = ibase().omnipotent() || igbase()->can_see(owner_number);
+	const bool can_see = ibase()->omnipotent() || ibase()->can_see(owner_number);
 	const bool can_act = check_can_act(owner_number);
 
-	capscache_player_number_ = igbase() ? igbase()->player_number() : owner_number;
+	capscache_player_number_ = ibase()->player_number();
 
 	bool requires_destruction_separator = false;
 	if (can_act) {
@@ -402,12 +398,12 @@ void BuildingWindow::act_bulldoze() {
 		return;
 	}
 
-	if (InteractiveGameBase* ig = igbase()) {
+	if (ibase()->get_game()) {
 		if (SDL_GetModState() & KMOD_CTRL) {
 			if (building->get_playercaps() & Widelands::Building::PCap_Bulldoze)
-				ig->game().send_player_bulldoze(*building);
+				ibase()->game().send_player_bulldoze(*building);
 		} else {
-			show_bulldoze_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building);
+			show_bulldoze_confirm(dynamic_cast<InteractivePlayer&>(*ibase()), *building);
 		}
 	} else {
 		building->remove(parent_->egbase());
@@ -421,14 +417,14 @@ Callback for dismantling request
 */
 void BuildingWindow::act_dismantle() {
 	Widelands::Building* building = building_.get(parent_->egbase());
-	if (InteractiveGameBase* ig = igbase()) {
+	if (ibase()->get_game()) {
 		if (SDL_GetModState() & KMOD_CTRL) {
 			if (building->get_playercaps() & Widelands::Building::PCap_Dismantle) {
-				ig->game().send_player_dismantle(*building);
+				ibase()->game().send_player_dismantle(*building);
 				hide_workarea(true);
 			}
 		} else {
-			show_dismantle_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building);
+			show_dismantle_confirm(dynamic_cast<InteractivePlayer&>(*ibase()), *building);
 		}
 	} else {
 		building->get_owner()->dismantle_building(building);
@@ -447,8 +443,8 @@ void BuildingWindow::act_start_stop() {
 	}
 
 	if (Widelands::ProductionSite* p = dynamic_cast<Widelands::ProductionSite*>(building)) {
-		if (InteractiveGameBase* ig = igbase()) {
-			ig->game().send_player_start_stop_building(*building);
+		if (ibase()->get_game()) {
+			ibase()->game().send_player_start_stop_building(*building);
 		} else {
 			p->get_owner()->start_stop_building(*p);
 		}
@@ -468,9 +464,9 @@ void BuildingWindow::act_start_or_cancel_expedition() {
 
 	if (Widelands::Warehouse* warehouse = dynamic_cast<Widelands::Warehouse*>(building)) {
 		if (warehouse->get_portdock()) {
-			if (InteractiveGameBase* ig = igbase()) {
+			if (ibase()->get_game()) {
 				expeditionbtn_->set_enabled(false);
-				ig->game().send_player_start_or_cancel_expedition(*building);
+				ibase()->game().send_player_start_or_cancel_expedition(*building);
 			} else {
 				warehouse->get_owner()->start_or_cancel_expedition(*warehouse);
 			}
@@ -493,12 +489,12 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id) {
 		return;
 	}
 
-	if (InteractiveGameBase* ig = igbase()) {
+	if (ibase()->get_game()) {
 		if (SDL_GetModState() & KMOD_CTRL) {
 			if (building->get_playercaps() & Widelands::Building::PCap_Enhancable)
-				ig->game().send_player_enhance_building(*building, id);
+				ibase()->game().send_player_enhance_building(*building, id);
 		} else {
-			show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building, id);
+			show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*ibase()), *building, id);
 		}
 	} else {
 		building->get_owner()->enhance_building(building, id);

@@ -42,16 +42,12 @@ public:
 	                    bool multiplayer = false);
 	~InteractiveGameBase() override {
 	}
-	Widelands::Game* get_game() const;
-	Widelands::Game& game() const;
+	Widelands::Game* get_game() const override;
+	Widelands::Game& game() const override;
 
 	// Chat messages
 	void set_chat_provider(ChatProvider&);
 	ChatProvider* get_chat_provider();
-
-	virtual bool can_see(Widelands::PlayerNumber) const = 0;
-	virtual bool can_act(Widelands::PlayerNumber) const = 0;
-	virtual Widelands::PlayerNumber player_number() const = 0;
 
 	// Only the 'InteractiveGameBase' has all information of what should be
 	// drawn into a map_view (i.e. which overlays are available). The
