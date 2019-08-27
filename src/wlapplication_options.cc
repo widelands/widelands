@@ -113,13 +113,13 @@ void set_config_int(const std::string& section,
 }
 
 void set_config_string(const std::string& name, const std::string& value) {
-    set_config_string(name.c_str(), value.c_str());
+    g_options.pull_section("global").set_string(name.c_str(), value.c_str());
 }
 
 void set_config_string(const std::string& section,
                        const std::string& name,
                        const std::string& value) {
-    set_config_string(section.c_str(), name.c_str(), value.c_str());
+    g_options.pull_section(section.c_str()).set_string(name.c_str(), value.c_str());
 }
 
 void read_config(WLApplication* wlapplication) {
