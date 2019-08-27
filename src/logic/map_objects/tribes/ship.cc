@@ -892,6 +892,7 @@ void Ship::reorder_destinations(Game& game) {
 	assert(dq.size() == nr_dests);
 
 	std::vector<std::pair<OPtr<PortDock>, uint32_t>> old_destinations = destinations_;
+	const size_t nr_all_old_dests = old_destinations.size();
 	destinations_.clear();
 	size_t index = 0;
 	for (const auto& pair : dq) {
@@ -899,7 +900,7 @@ void Ship::reorder_destinations(Game& game) {
 		uint32_t priority = pair.second;
 		size_t old_index = 0;
 		for (;; ++old_index) {
-			assert(old_index < nr_dests);
+			assert(old_index < nr_all_old_dests);
 			if (old_destinations[old_index].first == optr) {
 				break;
 			}
