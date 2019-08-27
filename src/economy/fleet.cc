@@ -851,6 +851,7 @@ void Fleet::push_next_destinations(Game& game, Ship& ship, const PortDock& from_
  */
 void Fleet::check_push_destination(Game& game, Ship& ship,
 		const PortDock& from_port, PortDock& destination, uint32_t penalty_factor) {
+	assert(!ship.has_destination(game, destination));
 	Path path;
 	get_path(from_port, destination, path);
 	const uint32_t direct_route = path.get_nsteps();
@@ -877,11 +878,11 @@ void Fleet::check_push_destination(Game& game, Ship& ship,
 				base_length = path.get_nsteps();
 			}
 			if (iterator != &from_port) {
-				get_path(*iterator, from_port, path);
+				get_path(*iterator, destination, path);
 				detour = path.get_nsteps();
 			}
 			if (pd != &from_port) {
-				get_path(from_port, *pd, path);
+				get_path(destination, *pd, path);
 				detour += path.get_nsteps();
 			}
 			assert(detour >= base_length);
