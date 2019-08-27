@@ -48,7 +48,6 @@ wl_library(network
     io_fileread
     io_filesystem
     io_stream
-    io_profile
     logic
     logic_commands
     logic_filesystem_constants

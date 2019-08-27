@@ -12,7 +12,6 @@ wl_library(ui_fsmenu_options
     graphic_text_layout
     helper
     io_filesystem
-    io_profile
     logic_filesystem_constants
     scripting_lua_interface
     scripting_lua_table
@@ -77,12 +76,12 @@ wl_library(ui_fsmenu_loading_common
     base_i18n
     graphic
     io_filesystem
-    io_profile
     network
     random
     ui_basic
     ui_fsmenu_base
     ui_fsmenu_main_menu
+    widelands_ball_of_mud
     wui_common_mapdetails
     wui
 )
@@ -119,6 +118,7 @@ wl_library(ui_fsmenu_gameloading
     ui_fsmenu_helpwindow
     ui_fsmenu_loading_common
     ui_fsmenu_maploading
+    widelands_ball_of_mud
     wui
     wui_chat_ui
     wui_common_gamedetails
@@ -172,12 +172,12 @@ wl_library(ui_fsmenu_network
     base_log
     base_macros
     graphic
-    io_profile
     network
     random
     sound
     ui_basic
     ui_fsmenu_base
+    widelands_ball_of_mud
     wui_chat_ui
 )
 

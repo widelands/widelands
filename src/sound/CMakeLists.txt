@@ -31,8 +31,8 @@ wl_library(sound
     helper
     io_fileread
     io_filesystem
-    io_profile
     logic_exceptions
     random
     sound_constants
+    widelands_ball_of_mud
 )
