@@ -106,7 +106,7 @@ tribes:new_soldier_type {
    evade = {
       max_level = 2,
       base = 25,
-      increase_per_level = 15,
+      increase_per_level = 16,
       pictures = path.list_files(dirname .. "evade_level?.png"),
    },
 
