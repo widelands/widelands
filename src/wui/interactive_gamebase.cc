@@ -232,7 +232,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 
 	showhidemenu_.add(get_display_flag(dfShowSoldierLevels) ?
 	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-	                      * level information is sown above soldiers' heads */
+	                      * level information is shown above soldiers' heads */
 	                     _("Hide Soldier Levels") :
 	                     _("Show Soldier Levels"),
 	                  ShowHideEntry::kSoldierLevels,
