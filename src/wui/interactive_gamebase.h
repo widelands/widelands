@@ -87,7 +87,7 @@ public:
 
 protected:
 	// For referencing the items in showhidemenu_
-	enum class ShowHideEntry { kBuildingSpaces, kCensus, kStatistics, kWorkareaOverlap };
+	enum class ShowHideEntry { kBuildingSpaces, kCensus, kStatistics, kSoldierLevels, kWorkareaOverlap };
 
 	// Adds the mapviewmenu_ to the toolbar
 	void add_main_menu();

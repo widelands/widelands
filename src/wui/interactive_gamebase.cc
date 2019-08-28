@@ -223,11 +223,20 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 
 	showhidemenu_.add(get_display_flag(dfShowStatistics) ?
 	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-	                      * building staristics are shown */
+	                      * building statistics are shown */
 	                     _("Hide Statistics") :
 	                     _("Show Statistics"),
 	                  ShowHideEntry::kStatistics,
 	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "s");
+
+
+	showhidemenu_.add(get_display_flag(dfShowSoldierLevels) ?
+	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+	                      * level information is sown above soldiers' heads */
+	                     _("Hide Soldier Levels") :
+	                     _("Show Soldier Levels"),
+	                  ShowHideEntry::kSoldierLevels,
+	                  g_gr->images().get("images/wui/menus/toggle_soldier_levels.png"), false, "", "l");
 }
 
 void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
@@ -240,6 +249,9 @@ void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
 	} break;
 	case ShowHideEntry::kStatistics: {
 		set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+	} break;
+	case ShowHideEntry::kSoldierLevels: {
+		set_display_flag(dfShowSoldierLevels, !get_display_flag(dfShowSoldierLevels));
 	} break;
 	case ShowHideEntry::kWorkareaOverlap: {
 		set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));

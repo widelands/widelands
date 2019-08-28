@@ -132,12 +132,12 @@ protected:
 
 private:
 	/** The road is drawn by the terrain renderer via marked fields. */
-	void draw(uint32_t gametime,
-	          InfoToDraw info_to_draw,
+	void draw(uint32_t,
+	          InfoToDraw,
 	          const Vector2f&,
 	          const Coords&,
-	          float scale,
-	          RenderTarget* dst) override;
+	          float,
+			  RenderTarget*) override {}
 
 	void set_path(EditorGameBase&, const Path&);
 
