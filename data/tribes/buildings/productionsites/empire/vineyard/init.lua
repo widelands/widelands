@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
          descname = _"planting grapevines",
          actions = {
             "callworker=plant",
-            "sleep=13000"
+            "sleep=12000"
          }
       },
       harvest = {
