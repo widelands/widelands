@@ -15,7 +15,7 @@ tribes:new_ware_type {
       empire = 20
    },
    preciousness = {
-      atlanteans = 2,
+      amazons = 2,
       atlanteans = 2,
       barbarians = 2,
       frisians = 6,

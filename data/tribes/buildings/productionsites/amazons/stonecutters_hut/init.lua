@@ -37,7 +37,7 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      amazons_quarry = false,
+      amazons_stonecutters_hut = false,
    },
 
    outputs = {

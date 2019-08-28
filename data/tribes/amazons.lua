@@ -90,7 +90,7 @@ tribes:new_tribe {
       {
          -- Weapons & Armor
           "spear_stone_tipped",
-          "spear_advanced",
+          "spear_hardened",
           "armor_wooden",
           "helmet_wooden",
           "warriors_coat",
