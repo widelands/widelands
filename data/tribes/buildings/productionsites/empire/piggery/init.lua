@@ -55,9 +55,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs meat",
             "consume=water wheat",
-            "sleep=25000",
+            "sleep=20000",
             "playsound=sound/farm/farm_animal 180",
-            "animate=working 30000",
+            "animate=working 24000",
             "produce=meat"
          }
       },
