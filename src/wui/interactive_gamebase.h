@@ -97,6 +97,9 @@ protected:
 	// Adds the gamespeedmenu_ to the toolbar
 	void add_gamespeed_menu();
 
+	// Adds a chat toolbar button and registers the chat console window
+	void add_chat_ui();
+
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 	void draw_overlay(RenderTarget&) override;

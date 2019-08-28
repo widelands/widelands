@@ -784,17 +784,8 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 				select_tool(tools_->current(), EditorTool::Third);
 			return true;
 
-		case SDLK_SPACE:
-			toggle_buildhelp();
-			return true;
-
 		case SDLK_g:
 			toggle_grid();
-			return true;
-
-		case SDLK_c:
-			set_display_flag(
-			   InteractiveBase::dfShowCensus, !get_display_flag(InteractiveBase::dfShowCensus));
 			return true;
 
 		case SDLK_h:

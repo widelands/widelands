@@ -133,6 +133,10 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 			   break;
 		   }
 	   });
+
+	if (chat_provider_ != nullptr) {
+		chat_overlay()->set_chat_provider(*chat_provider_);
+	}
 }
 
 void InteractiveGameBase::add_main_menu() {
@@ -300,6 +304,15 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	}
 }
 
+void InteractiveGameBase::add_chat_ui() {
+	add_toolbar_button("wui/menus/chat", "chat", _("Chat"), &chat_, true);
+	chat_.open_window = [this] {
+		if (chat_provider_) {
+			GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+		}
+	};
+}
+
 void InteractiveGameBase::increase_gamespeed() {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		ctrl->set_desired_speed(ctrl->desired_speed() + 1000);
@@ -321,6 +334,58 @@ void InteractiveGameBase::toggle_game_paused() {
 	}
 }
 
+bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
+	if (InteractiveBase::handle_key(down, code)) {
+		return true;
+	}
+
+	if (down) {
+		switch (code.sym) {
+		case SDLK_KP_9:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_PAGEUP:
+			increase_gamespeed();
+			return true;
+
+		case SDLK_PAUSE:
+			toggle_game_paused();
+			return true;
+
+		case SDLK_KP_3:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_PAGEDOWN:
+			decrease_gamespeed();
+			return true;
+
+		case SDLK_c:
+			set_display_flag(
+			   InteractiveBase::dfShowCensus, !get_display_flag(InteractiveBase::dfShowCensus));
+			return true;
+
+		case SDLK_l:
+			set_display_flag(dfShowSoldierLevels, !get_display_flag(dfShowSoldierLevels));
+			return true;
+
+		case SDLK_s:
+			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+				new GameMainMenuSaveGame(*this, menu_windows_.savegame);
+			} else {
+				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+			}
+			return true;
+
+		default:
+			break;
+		}
+	}
+	return false;
+}
 
 /// \return a pointer to the running \ref Game instance.
 Widelands::Game* InteractiveGameBase::get_game() const {
@@ -407,46 +472,6 @@ void InteractiveGameBase::postload() {
 	// Close game-relevant UI windows (but keep main menu open)
 	fieldaction_.destroy();
 	hide_minimap();
-}
-
-bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
-	if (InteractiveBase::handle_key(down, code)) {
-		return true;
-	}
-
-	if (down) {
-		switch (code.sym) {
-		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_PAGEUP:
-			increase_gamespeed();
-			return true;
-
-		case SDLK_PAUSE:
-			toggle_game_paused();
-			return true;
-
-		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_PAGEDOWN:
-			decrease_gamespeed();
-			return true;
-
-		case SDLK_l:
-			set_display_flag(dfShowSoldierLevels, !get_display_flag(dfShowSoldierLevels));
-			return true;
-
-		default:
-			break;
-		}
-	}
-	return false;
 }
 
 void InteractiveGameBase::start() {

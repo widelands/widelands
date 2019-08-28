@@ -183,12 +183,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	toolbar()->add_space(15);
 	if (multiplayer) {
-		add_toolbar_button("wui/menus/chat", "chat", _("Chat"), &chat_, true);
-		chat_.open_window = [this] {
-			if (chat_provider_) {
-				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
-			}
-		};
+		add_chat_ui();
 		toolbar()->add_space(15);
 	}
 
