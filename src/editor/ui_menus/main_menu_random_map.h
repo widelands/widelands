@@ -30,7 +30,7 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/spinbox.h"
 #include "ui_basic/textarea.h"
-#include "ui_basic/window.h"
+#include "ui_basic/unique_window.h"
 
 namespace Widelands {
 struct UniqueRandomMapInfo;
@@ -46,8 +46,8 @@ template <typename T, typename ID> struct IDButton;
  * the user to choose the new world and a few other
  * things like size, world ....
  */
-struct MainMenuNewRandomMap : public UI::Window {
-	explicit MainMenuNewRandomMap(EditorInteractive&);
+struct MainMenuNewRandomMap : public UI::UniqueWindow {
+	explicit MainMenuNewRandomMap(EditorInteractive&, UI::UniqueWindow::Registry&);
 
 	enum class ButtonId : uint8_t {
 		kNone,

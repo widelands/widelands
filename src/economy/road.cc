@@ -130,6 +130,13 @@ int32_t Road::get_cost(FlagId fromflag) {
 	return cost_[fromflag];
 }
 
+void Road::draw(uint32_t,
+		  InfoToDraw,
+		  const Vector2f&,
+		  const Coords&,
+		  float,
+		  RenderTarget*) {}
+
 /**
  * Set the new path, calculate costs.
  * You have to set start and end flags before calling this function.

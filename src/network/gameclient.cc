@@ -53,6 +53,7 @@
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
+#include "wlapplication_options.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -163,9 +164,9 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 	   (boost::format("%s_netclient%u") % kAutosavePrefix % static_cast<unsigned int>(pn)).str());
 	InteractiveGameBase* igb;
 	if (pn > 0) {
-		igb = new InteractivePlayer(*game, g_options.pull_section("global"), pn, true, parent);
+		igb = new InteractivePlayer(*game, get_config_section(), pn, true, parent);
 	} else {
-		igb = new InteractiveSpectator(*game, g_options.pull_section("global"), true, parent);
+		igb = new InteractiveSpectator(*game, get_config_section(), true, parent);
 	}
 
 	game->set_ibase(igb);
@@ -264,9 +265,8 @@ void GameClient::run() {
 
 	d->server_is_waiting = true;
 
-	bool write_sync_streams = g_options.pull_section("global").get_bool("write_syncstreams", true);
 	Widelands::Game game;
-	game.set_write_syncstream(write_sync_streams);
+	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
 
 	try {
 		std::unique_ptr<UI::ProgressWindow> loader_ui(new UI::ProgressWindow());

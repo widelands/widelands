@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,21 +17,5 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_TOOL_MENU_H
-#define WL_EDITOR_UI_MENUS_TOOL_MENU_H
-
-#include "editor/editorinteractive.h"
-#include "ui_basic/radiobutton.h"
-#include "ui_basic/unique_window.h"
-
-/// The tool selection window/menu.
-struct EditorToolMenu : public UI::UniqueWindow {
-	EditorToolMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
-
-private:
-	UI::Radiogroup radioselect_;
-
-	void changed_to();
-};
-
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_MENU_H
+#define BOOST_TEST_MODULE AI
+#include <boost/test/unit_test.hpp>
