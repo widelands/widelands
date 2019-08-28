@@ -19,6 +19,13 @@ tribes:new_ware_type {
       frisians = 40,
       empire = 10
    },
+   animations = {
+      idle = {
+         pictures = path.list_files(dirname .. "idle.png"),
+         hotspot = { 4, 6 },
+      },
+   }
+}
 
 tribes:new_ware_type {
    msgctxt = "ware",

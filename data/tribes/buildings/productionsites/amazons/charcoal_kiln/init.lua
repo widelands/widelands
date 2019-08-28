@@ -15,8 +15,7 @@ tribes:new_productionsite_type {
       ironwood = 1,
    },
    return_on_dismantle = {
-      log = 1,
-      granite = 2,
+      granite = 3,
    },
 
    animations = {

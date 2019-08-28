@@ -233,6 +233,13 @@ print_loading_message("┗━ took", function()
          items_per_row = 8,
       }
 
+      -- world:new_editor_immovable_category{
+         -- name = "trees_amazons",
+         -- descname = _ "Amazon Rare Trees",
+         -- picture = "tribes/immovables/trees/balsa/old/idle_0.png",
+         -- items_per_row = 8,
+      -- }
+
       include "world/immovables/trees/alder/init.lua"
       include "world/immovables/trees/aspen/init.lua"
       include "world/immovables/trees/beech/init.lua"

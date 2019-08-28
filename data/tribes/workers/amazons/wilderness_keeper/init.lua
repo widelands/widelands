@@ -42,6 +42,7 @@ tribes:new_worker_type {
          "breed=fish 1",
          "return"
       }
+   },
 
    ware_hotspot = {0, 20},
    animations = animations,

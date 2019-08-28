@@ -42,7 +42,7 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      amazons_carrier = 1
+      amazons_liana_cutter = 1
    },
 
    inputs = {

@@ -35,12 +35,12 @@ tribes:new_worker_type {
 
 
    programs = {
-      plant_iron = {
+      plant_ironwood = {
          "findspace=size:any radius:5 avoid:field saplingsearches:7",
          "walk=coords",
          "animate=dig 2000",
          "animate=planting 1000",
-         "plant=attrib:tree_iron",
+         "plant=attrib:tree_ironwood_sapling",
          "animate=water 2000",
          "return"
       },
@@ -49,7 +49,7 @@ tribes:new_worker_type {
          "walk=coords",
          "animate=dig 2000",
          "animate=planting 1000",
-         "plant=attrib:tree_rubber",
+         "plant=attrib:tree_rubber_sapling",
          "animate=water 2000",
          "return"
       },
@@ -58,11 +58,16 @@ tribes:new_worker_type {
          "walk=coords",
          "animate=dig 2000",
          "animate=planting 1000",
-         "plant=attrib:tree_balsa",
+         "plant=attrib:tree_balsa_sapling",
          "animate=water 2000",
          "return"
       },
-      
+      terraform = {
+         "findspace=size:terraform radius:6",
+         "walk=coords",
+         "terraform",
+         "return"
+      },
    },
 
    animations = animations,

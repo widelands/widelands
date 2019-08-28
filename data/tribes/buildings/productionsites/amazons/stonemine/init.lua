@@ -1,24 +1,18 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_rockmine",
+   msgctxt = "amazons_building",
+   name = "amazons_stonemine",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Rock Mine"),
+   descname = pgettext("amazons_building", "Stone Mine"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "frisians_rockmine_deep",
 
    buildcost = {
-      brick = 1,
-      granite = 2,
       log = 2,
-      reed = 1
    },
    return_on_dismantle = {
-      brick = 1,
-      granite = 1,
       log = 1
    },
 
@@ -44,18 +38,17 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      frisians_rockmine = false,
-      frisians_rockmine_deep = false,
+      amazons_stonemine = false,
    },
 
    aihints = {
       mines = "stones",
-      mines_percent = 50,
+      mines_percent = 100,
       prohibited_till = 630
    },
 
    working_positions = {
-      frisians_miner = 1
+      amazons_stonecutter = 1
    },
 
    inputs = {
@@ -82,8 +75,8 @@ tribes:new_productionsite_type {
       mine_produce = {
          descname = _"mining granite",
          actions = {
-            "animate=working 21000",
-            "mine=stones 3 50 5 20",
+            "animate=working 10000",
+            "mine=stones 1 100 5 5",
             "produce=granite",
          }
       },
@@ -101,6 +94,6 @@ tribes:new_productionsite_type {
       title = _"No Granite",
       heading = _"Main Granite Vein Exhausted",
       message =
-         pgettext("frisians_building", "This rock mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
+         pgettext("amazons_building", "This stone mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
    },
 }

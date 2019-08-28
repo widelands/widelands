@@ -14,7 +14,7 @@ tribes:new_productionsite_type {
       rope = 2,
    },
    return_on_dismantle = {
-      log = 3
+      log = 3,
       rope = 1,
    },
 
@@ -44,7 +44,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "cassava_root", amount = 8 },
+      { name = "cassavaroot", amount = 8 },
       { name = "water", amount = 8 }
    },
    outputs = {
@@ -61,11 +61,11 @@ tribes:new_productionsite_type {
          }
       },
       recruit_tapir = {
-         -- TRANSLATORS: Completed/Skipped/Did not start rearing reindeer because ...
-         descname = pgettext("amazons_building", "rearing reindeer"),
+         -- TRANSLATORS: Completed/Skipped/Did not start breeding tapir because ...
+         descname = pgettext("amazons_building", "breeding tapir"),
          actions = {
             "return=skipped unless economy needs amazons_tapir",
-            "consume=cassava_root water",
+            "consume=cassavaroot water",
             "sleep=15000",
             "animate=working 15000",
             "recruit=amazons_tapir"

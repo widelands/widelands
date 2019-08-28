@@ -6,7 +6,7 @@ animations = {
       hotspot = {8, 23},
    },
    work = {
-      pictures = path.list_files (dirname .. "dig_??.png"),
+      pictures = path.list_files (dirname .. "work_??.png"),
       hotspot = { 15, 20 },
       fps = 20
    }
@@ -30,12 +30,12 @@ tribes:new_worker_type {
 
    programs = {
       cut = {
-         "findobject=attrib:tree radius:10",
+         "findobject=attrib:tree radius:6",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting 255",
-         "animate=work 20000",
+         "animate=work 4000",
          "playsound=sound/woodcutting/tree_falling 130",
-         "animate=idle 2000",
+         "animate=idle 1000",
          "createware=liana",
          "return"
       }

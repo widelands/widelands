@@ -42,6 +42,7 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/armor_chain/init.lua"
       include "tribes/wares/armor_gilded/init.lua"
       include "tribes/wares/armor_helmet/init.lua"
+      include "tribes/wares/armor_wooden/init.lua"
       include "tribes/wares/ax/init.lua"
       include "tribes/wares/ax_battle/init.lua"
       include "tribes/wares/ax_broad/init.lua"
@@ -56,6 +57,9 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/blackroot/init.lua"
       include "tribes/wares/blackroot_flour/init.lua"
       include "tribes/wares/blackwood/init.lua"
+      include "tribes/wares/boots_hero/init.lua"
+      include "tribes/wares/boots_sturdy/init.lua"
+      include "tribes/wares/boots_swift/init.lua"
       include "tribes/wares/bread_amazons/init.lua"
       include "tribes/wares/bread_atlanteans/init.lua"
       include "tribes/wares/bread_barbarians/init.lua"
@@ -87,6 +91,7 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/fur_garment_old/init.lua"
       include "tribes/wares/fur_garment_studded/init.lua"
       include "tribes/wares/gold/init.lua"
+      include "tribes/wares/gold_dust/init.lua"
       include "tribes/wares/gold_ore/init.lua"
       include "tribes/wares/gold_thread/init.lua"
       include "tribes/wares/granite/init.lua"
@@ -97,6 +102,7 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/helmet_golden/init.lua"
       include "tribes/wares/helmet_mask/init.lua"
       include "tribes/wares/helmet_warhelm/init.lua"
+      include "tribes/wares/helmet_wooden/init.lua"
       include "tribes/wares/honey/init.lua"
       include "tribes/wares/honey_bread/init.lua"
       include "tribes/wares/hook_pole/init.lua"
@@ -118,6 +124,7 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/needles/init.lua"
       include "tribes/wares/pick/init.lua"
       include "tribes/wares/planks/init.lua"
+      include "tribes/wares/protector_padded/init.lua"
       include "tribes/wares/quartz/init.lua"
       include "tribes/wares/ration/init.lua"
       include "tribes/wares/reed/init.lua"
@@ -135,11 +142,14 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/snack/init.lua"
       include "tribes/wares/spear/init.lua"
       include "tribes/wares/spear_advanced/init.lua"
+      include "tribes/wares/spear_hardened/init.lua"
       include "tribes/wares/spear_heavy/init.lua"
+      include "tribes/wares/spear_stone_tipped/init.lua"
       include "tribes/wares/spear_war/init.lua"
       include "tribes/wares/spear_wooden/init.lua"
       include "tribes/wares/spidercloth/init.lua"
       include "tribes/wares/spider_silk/init.lua"
+      include "tribes/wares/stonebowl/init.lua"
       include "tribes/wares/sword_broad/init.lua"
       include "tribes/wares/sword_double/init.lua"
       include "tribes/wares/sword_long/init.lua"
@@ -151,6 +161,9 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/trident_light/init.lua"
       include "tribes/wares/trident_long/init.lua"
       include "tribes/wares/trident_steel/init.lua"
+      include "tribes/wares/tunic/init.lua"
+      include "tribes/wares/vest_padded/init.lua"
+      include "tribes/wares/warriors_coat/init.lua"
       include "tribes/wares/water/init.lua"
       include "tribes/wares/wheat/init.lua"
       include "tribes/wares/wine/init.lua"
@@ -169,6 +182,11 @@ print_loading_message("┗━ took", function()
       include "tribes/immovables/blackrootfield/ripe/init.lua"
       include "tribes/immovables/blackrootfield/small/init.lua"
       include "tribes/immovables/blackrootfield/tiny/init.lua"
+      include "tribes/immovables/cassavafield/harvested/init.lua"
+      include "tribes/immovables/cassavafield/medium/init.lua"
+      include "tribes/immovables/cassavafield/ripe/init.lua"
+      include "tribes/immovables/cassavafield/small/init.lua"
+      include "tribes/immovables/cassavafield/tiny/init.lua"
       include "tribes/immovables/cornfield/harvested/init.lua"
       include "tribes/immovables/cornfield/medium/init.lua"
       include "tribes/immovables/cornfield/ripe/init.lua"
@@ -209,11 +227,15 @@ print_loading_message("┗━ took", function()
       include "tribes/immovables/berry_bushes/sea_buckthorn/init.lua"
       include "tribes/immovables/berry_bushes/desert_hackberry/init.lua"
       include "tribes/immovables/berry_bushes/juniper/init.lua"
+      include "tribes/immovables/cocoafield/init.lua"
       include "tribes/immovables/barleyfield/tiny/init.lua"
       include "tribes/immovables/barleyfield/small/init.lua"
       include "tribes/immovables/barleyfield/medium/init.lua"
       include "tribes/immovables/barleyfield/ripe/init.lua"
       include "tribes/immovables/barleyfield/harvested/init.lua"
+      include "tribes/immovables/trees/balsa/init.lua"
+      include "tribes/immovables/trees/ironwood/init.lua"
+      include "tribes/immovables/trees/rubber/init.lua"
    end)
 
    -- ===================================
@@ -354,6 +376,32 @@ print_loading_message("┗━ took", function()
       include "tribes/workers/frisians/smelter/init.lua"
       include "tribes/workers/frisians/shipwright/init.lua"
       include "tribes/workers/frisians/scout/init.lua"
+
+      include "tribes/workers/amazons/carrier/init.lua"
+      include "tribes/workers/amazons/tapir/init.lua"
+      include "tribes/workers/amazons/builder/init.lua"
+      include "tribes/workers/amazons/soldier/init.lua"
+      include "tribes/workers/amazons/gold_digger/init.lua"
+      include "tribes/workers/amazons/woodcutter_master/init.lua"
+      include "tribes/workers/amazons/woodcutter/init.lua"
+      include "tribes/workers/amazons/cook/init.lua"
+      include "tribes/workers/amazons/stonecutter/init.lua"
+      include "tribes/workers/amazons/geologist/init.lua"
+      include "tribes/workers/amazons/jungle_master/init.lua"
+      include "tribes/workers/amazons/jungle_preserver/init.lua"
+      include "tribes/workers/amazons/liana_cutter/init.lua"
+      include "tribes/workers/amazons/cocoa_farmer/init.lua"
+      include "tribes/workers/amazons/cassava_farmer/init.lua"
+      include "tribes/workers/amazons/stonecarver/init.lua"
+      include "tribes/workers/amazons/charcoal_burner/init.lua"
+      include "tribes/workers/amazons/dressmaker/init.lua"
+      include "tribes/workers/amazons/trainer/init.lua"
+      include "tribes/workers/amazons/wilderness_keeper/init.lua"
+      include "tribes/workers/amazons/tapir_breeder/init.lua"
+      include "tribes/workers/amazons/hunter_gatherer/init.lua"
+      include "tribes/workers/amazons/gold_smelter/init.lua"
+      include "tribes/workers/amazons/shipwright/init.lua"
+      include "tribes/workers/amazons/scout/init.lua"
    end)
 
    -- ===================================
@@ -375,6 +423,9 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/warehouses/frisians/headquarters/init.lua"
       include "tribes/buildings/warehouses/frisians/port/init.lua"
       include "tribes/buildings/warehouses/frisians/warehouse/init.lua"
+      include "tribes/buildings/warehouses/amazons/headquarters/init.lua"
+      include "tribes/buildings/warehouses/amazons/port/init.lua"
+      include "tribes/buildings/warehouses/amazons/warehouse/init.lua"
    end)
 
    -- ===================================
@@ -460,6 +511,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua"
       include "tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua"
       include "tribes/buildings/productionsites/barbarians/goldmine/init.lua"
+
       -- Empire small
       include "tribes/buildings/productionsites/empire/quarry/init.lua"
       include "tribes/buildings/productionsites/empire/lumberjacks_house/init.lua"
@@ -548,6 +600,37 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua"
       include "tribes/buildings/productionsites/frisians/brick_kiln/init.lua"
       include "tribes/buildings/productionsites/frisians/barracks/init.lua"
+
+      -- Amazons small
+      include "tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua"
+      include "tribes/buildings/productionsites/amazons/rare_trees_woodcutters_hut/init.lua"
+      include "tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua"
+      include "tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua"
+      include "tribes/buildings/productionsites/amazons/junglemasters_hut/init.lua"
+      include "tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua"
+      include "tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua"
+      include "tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua"
+      include "tribes/buildings/productionsites/amazons/scouts_hut/init.lua"
+      -- Amazons medium
+      include "tribes/buildings/productionsites/amazons/gardening_center/init.lua"
+      include "tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua"
+      include "tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua"
+      include "tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua"
+      include "tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua"
+      include "tribes/buildings/productionsites/amazons/dressmaker/init.lua"
+      include "tribes/buildings/productionsites/amazons/food_preserver/init.lua"
+      include "tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua"
+      include "tribes/buildings/productionsites/amazons/furnace/init.lua"
+      include "tribes/buildings/productionsites/amazons/shipyard/init.lua"
+      include "tribes/buildings/productionsites/amazons/stonecarvery/init.lua"
+      include "tribes/buildings/productionsites/amazons/youth_gathering/init.lua"
+      -- Amazons big
+      include "tribes/buildings/productionsites/amazons/tapir_farm/init.lua"
+      include "tribes/buildings/productionsites/amazons/cocoa_farm/init.lua"
+      include "tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua"
+      -- Amazons mines
+      include "tribes/buildings/productionsites/amazons/stonemine/init.lua"
+      include "tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua"
    end)
 
    -- ===================================
@@ -564,6 +647,8 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/trainingsites/empire/trainingcamp/init.lua"
       include "tribes/buildings/trainingsites/frisians/training_camp/init.lua"
       include "tribes/buildings/trainingsites/frisians/training_arena/init.lua"
+      include "tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua"
+      include "tribes/buildings/trainingsites/amazons/training_glade/init.lua"
    end)
 
    -- ===================================
@@ -598,6 +683,15 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/militarysites/frisians/outpost/init.lua"
       include "tribes/buildings/militarysites/frisians/tower/init.lua"
       include "tribes/buildings/militarysites/frisians/fortress/init.lua"
+
+      include "tribes/buildings/militarysites/amazons/patrol_post/init.lua"
+      include "tribes/buildings/militarysites/amazons/treetop_sentry/init.lua"
+      include "tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua"
+      include "tribes/buildings/militarysites/amazons/observation_tower/init.lua"
+      include "tribes/buildings/militarysites/amazons/tower/init.lua"
+      include "tribes/buildings/militarysites/amazons/fortification/init.lua"
+      include "tribes/buildings/militarysites/amazons/fortress/init.lua"
+
    end)
 
    -- ===================================
@@ -613,6 +707,7 @@ print_loading_message("┗━ took", function()
    --    Tribes
    -- ===================================
    print_loading_message("┃    Tribe infos", function()
+      include "tribes/amazons.lua"
       include "tribes/atlanteans.lua"
       include "tribes/barbarians.lua"
       include "tribes/empire.lua"

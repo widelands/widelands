@@ -18,7 +18,6 @@ tribes:new_militarysite_type {
    return_on_dismantle_on_enhanced = {
       ironwood = 2,
       granite = 2,
-
    },
 
    animations = {
@@ -41,7 +40,7 @@ tribes:new_militarysite_type {
 
    max_soldiers = 12,
    heal_per_second = 220,
-   conquers = 12
+   conquers = 12,
    prefer_heroes = true,
 
    messages = {

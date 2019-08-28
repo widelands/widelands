@@ -90,4 +90,5 @@ tribes:new_productionsite_type {
             "sleep=12000"
          },
       },
-   },
+   }
+}

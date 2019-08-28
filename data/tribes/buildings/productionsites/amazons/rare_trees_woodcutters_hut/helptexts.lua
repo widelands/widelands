@@ -1,24 +1,27 @@
-function building_helptext_lore ()
-   -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "What can ever be more beautiful than the brilliant sun’s beams shining through the glistering canopy of leaves?")
+-- This include can be removed when all help texts have been defined.
+include "tribes/scripting/help/global_helptexts.lua"
+
+function building_helptext_lore()
+   -- TRANSLATORS#: Lore helptext for a building
+   return no_lore_text_yet()
 end
 
-function building_helptext_lore_author ()
-   -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "A forester explaining his choice of profession")
+function building_helptext_lore_author()
+   -- TRANSLATORS#: Lore author helptext for a building
+   return no_lore_author_text_yet()
 end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("building", "Plants trees in the surrounding area.")
+   return pgettext("building", "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and rubber.")
 end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("frisians_building", "The forester’s house needs free space within the work area to plant the trees.")
+   return ""
 end
 
 function building_helptext_performance()
    -- TRANSLATORS: Performance helptext for a building
-   return pgettext("frisians_building", "The forester pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 12):bformat(12))
+   return no_performance_text_yet()
 end

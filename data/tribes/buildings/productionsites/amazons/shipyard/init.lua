@@ -53,7 +53,7 @@ tribes:new_productionsite_type {
       { name = "log", amount = 5 },
       { name = "balsa", amount = 5 },
       { name = "rubber", amount = 3 },
-      { name = "ropes", amount = 3 }
+      { name = "rope", amount = 3 }
    },
 
    programs = {

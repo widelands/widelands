@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
       "hammer",
       "chisel",
       "needles",
-      "stone_bowl",
+      "stonebowl",
       "spear_stone_tipped",
       "spear_hardened",
    },
@@ -78,20 +78,20 @@ tribes:new_productionsite_type {
             "call=produce_shovel",
             "call=produce_spear_wooden",
             "call=produce_felling_ax",
-            "call=produce_spear_granite_tipped",
+            "call=produce_spear_stone_tipped",
             "call=produce_pick",
             "call=produce_spear_hardened",
             "call=produce_machete",
             "call=produce_spear_wooden",
             "call=produce_kitchen_tools",
-            "call=produce_spear_granite_tipped",
+            "call=produce_spear_stone_tipped",
             "call=produce_hammer",
             "call=produce_spear_hardened",
             "call=produce_chisel",
             "call=produce_spear_wooden",
             "call=produce_needles",
             "call=produce_spear_stone_tipped",
-            "call=produce_stone_bowl",
+            "call=produce_stonebowl",
             "call=produce_spear_hardened",
             "return=no_stats",
          },
@@ -167,7 +167,7 @@ tribes:new_productionsite_type {
          descname = _"making a chisel",
          actions = {
             "return=skipped unless economy needs chisel",
-            "consume=rubbergranite:3 gold",
+            "consume=granite",
             "sleep=32000",
             "animate=working 35000",
             "produce=chisel"
@@ -184,26 +184,26 @@ tribes:new_productionsite_type {
             "produce=needles"
          },
       },
-      produce_stone_bowl = {
+      produce_stonebowl = {
          -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
          descname = _"making a stone bowl",
          actions = {
-            "return=skipped unless economy needs stone_bowl",
+            "return=skipped unless economy needs stonebowl",
             "consume=granite",
             "sleep=32000",
             "animate=working 35000",
-            "produce=stone_bowl"
+            "produce=stonebowl"
          },
       },
       produce_spear_wooden = {
          -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
          descname = _"making a wooden spear",
          actions = {
-            "return=skipped unless economy needs spear_granite_tipped",
+            "return=skipped unless economy needs spear_wooden",
             "consume=ironwood",
             "sleep=32000",
             "animate=working 35000",
-            "produce=spear_stone_tipped"
+            "produce=spear_wooden"
          },
       },
       produce_spear_stone_tipped = {

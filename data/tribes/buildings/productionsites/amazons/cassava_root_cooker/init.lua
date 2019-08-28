@@ -46,7 +46,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "cassava_root", amount = 4 },
+      { name = "cassavaroot", amount = 4 },
       { name = "water", amount = 8 },
    },
    outputs = {
@@ -68,7 +68,7 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 33
             "return=skipped unless economy needs bread_amazons",
-            "consume=cassava_root water:2",
+            "consume=cassavaroot water:2",
             "sleep=5000",
             "animate=working 18000",
             "sleep=10000",

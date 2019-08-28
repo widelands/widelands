@@ -15,7 +15,7 @@ tribes:new_trainingsite_type {
       granite = 4,
       rubber = 4,
       rope = 2,
-      gold = 2
+      gold = 3
    },
    return_on_dismantle = {
       ironwood = 2,
@@ -57,7 +57,7 @@ tribes:new_trainingsite_type {
    inputs = {
       { name = "fish", amount = 4 },
       { name = "meat", amount = 4 },
-      { name = "amazons_bread", amount = 2 },
+      { name = "bread_amazons", amount = 2 },
       { name = "chocolate", amount = 5 },
       { name = "boots_sturdy", amount = 2 },
       { name = "boots_swift", amount = 2 },
@@ -78,7 +78,7 @@ tribes:new_trainingsite_type {
       food = {
          {"fish", "meat"},
          {"chocolate"},
-         {"amazons_bread"}
+         {"bread_amazons"}
       },
       weapons = {
          "boots_sturdy",
@@ -92,7 +92,7 @@ tribes:new_trainingsite_type {
       food = {
          {"fish", "meat"},
          {"chocolate"},
-         {"amazons_bread"}
+         {"bread_amazons"}
       },
       weapons = {
          "armor_wooden",
@@ -106,7 +106,7 @@ tribes:new_trainingsite_type {
       food = {
          {"fish", "meat"},
          {"chocolate"},
-         {"amazons_bread"}
+         {"bread_amazons"}
       },
       weapons = {
          "vest_padded",
@@ -144,10 +144,10 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier evade 1",
             "return=failed unless site has boots_swift",
             "return=failed unless site has chocolate",
-            "return=failed unless site has amazons_bread",
+            "return=failed unless site has bread_amazons",
             "animate=working 15600",
             "checksoldier=soldier evade 1", -- Because the soldier can be expelled by the player
-            "consume=boots_swift amazons_bread chocolate",
+            "consume=boots_swift bread_amazons chocolate",
             "train=soldier evade 1 2",
          }
       },
@@ -158,11 +158,11 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier evade 2",
             "return=failed unless site has boots_hero",
             "return=failed unless site has chocolate:2",
-            "return=failed unless site has amazons_bread:2",
+            "return=failed unless site has bread_amazons:2",
             "return=failed unless site has fish,meat:2",
             "animate=working 15600",
             "checksoldier=soldier evade 2", -- Because the soldier can be expelled by the player
-            "consume=boots_hero amazons_bread:2 chocolate:2 fish,meat:2",
+            "consume=boots_hero bread_amazons:2 chocolate:2 fish,meat:2",
             "train=soldier evade 2 3",
          }
       },
@@ -187,10 +187,10 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier health 1",
             "return=failed unless site has helmet_wooden",
             "return=failed unless site has chocolate",
-            "return=failed unless site has amazons_bread",
+            "return=failed unless site has bread_amazons",
             "animate=working 15600",
             "checksoldier=soldier health 1", -- Because the soldier can be expelled by the player
-            "consume=helmet_wooden amazons_bread chocolate",
+            "consume=helmet_wooden bread_amazons chocolate",
             "train=soldier health 1 2",
          }
       },
@@ -201,11 +201,11 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier health 2",
             "return=failed unless site has warriors_coat",
             "return=failed unless site has chocolate",
-            "return=failed unless site has amazons_bread",
+            "return=failed unless site has bread_amazons",
             "return=failed unless site has fish,meat",
             "animate=working 15600",
             "checksoldier=soldier health 2", -- Because the soldier can be expelled by the player
-            "consume=warriors_coat amazons_bread chocolate fish,meat",
+            "consume=warriors_coat bread_amazons chocolate fish,meat",
             "train=soldier health 2 3",
          }
       },
@@ -216,10 +216,10 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier defense 0",
             "return=failed unless site has vest_padded",
             "return=failed unless site has chocolate",
-            "return=failed unless site has amazons_bread",
+            "return=failed unless site has bread_amazons",
             "animate=working 22800",
             "checksoldier=soldier defense 0", -- Because the soldier can be expelled by the player
-            "consume=vest_padded amazons_bread chocolate",
+            "consume=vest_padded bread_amazons chocolate",
             "train=soldier defense 0 1",
          }
       },
@@ -230,11 +230,11 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier defense 1",
             "return=failed unless site has protector_padded",
             "return=failed unless site has chocolate",
-            "return=failed unless site has amazons_bread",
+            "return=failed unless site has bread_amazons",
             "return=failed unless site has fish,meat",
             "animate=working 22800",
             "checksoldier=soldier defense 1", -- Because the soldier can be expelled by the player
-            "consume=protector_padded amazons_bread chocolate fish,meat",
+            "consume=protector_padded bread_amazons chocolate fish,meat",
             "train=soldier health 1 2",
 
          }

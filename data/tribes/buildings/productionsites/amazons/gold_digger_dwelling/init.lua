@@ -1,25 +1,20 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_goldmine",
+   msgctxt = "amazons_building",
+   name = "amazons_gold_digger_dwelling",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Gold Mine"),
+   descname = pgettext("amazons_building", "Gold Digger Dwelling"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "frisians_goldmine_deep",
 
    buildcost = {
-      brick = 1,
-      granite = 2,
-      log = 2,
-      reed = 1
+      log = 4,
+      rope = 1
    },
    return_on_dismantle = {
-      brick = 1,
-      granite = 1,
-      log = 1
+      log = 2
    },
 
    animations = {
@@ -44,25 +39,25 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      frisians_goldmine = false,
-      frisians_goldmine_deep = false,
+      amazons_gold_digger_dwelling = false,
    },
 
    aihints = {
       mines = "gold",
-      mines_percent = 50,
+      mines_percent = 100,
       prohibited_till = 1100
    },
 
    working_positions = {
-      frisians_miner = 1
+      amazons_gold_digger = 1
    },
 
    inputs = {
-      { name = "ration", amount = 8 }
+      { name = "ration", amount = 3 },
+      { name = "water", amount = 10 }
    },
    outputs = {
-      "gold_ore"
+      "gold_dust"
    },
 
    programs = {
@@ -70,12 +65,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _"mining gold",
          actions = {
-            "return=skipped unless economy needs gold_ore",
-            "consume=ration",
+            "return=skipped unless economy needs gold_dust",
+            "consume=ration water:5",
             "sleep=45000",
             "animate=working 20000",
-            "mine=gold 3 50 5 20", --name radius % chance_empty gain_exp_on_empty
-            "produce=gold_ore"
+            "mine=gold 1 100 5 5", --name radius % chance_empty gain_exp_on_empty
+            "produce=gold_dust"
          }
       },
    },
@@ -84,6 +79,6 @@ tribes:new_productionsite_type {
       title = _"No Gold",
       heading = _"Main Gold Vein Exhausted",
       message =
-         pgettext("frisians_building", "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
+         pgettext("amazons_building", "This gold digger dwelling's main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
    },
 }

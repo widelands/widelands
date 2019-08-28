@@ -42,7 +42,7 @@ tribes:new_worker_type {
 
    programs = {
       plant = {
-         "findspace=size:any radius:5 avoid:field saplingsearches:7",
+         "findspace=size:any radius:6 avoid:field saplingsearches:7",
          "walk=coords",
          "animate=dig 2000",
          "animate=planting 1000",

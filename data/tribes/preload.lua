@@ -75,9 +75,9 @@ return {
          dirname .. "scripting/starting_conditions/frisians/trading_outpost.lua";
          dirname .. "scripting/starting_conditions/frisians/village.lua";
       }
-   }
+   },
 
-      -- Basic information for the Frisian tribe
+      -- Basic information for the Amazon tribe
    {
       name = "amazons",
       author = _"The Widelands Development Team",
@@ -88,9 +88,9 @@ return {
 
       starting_conditions = {
          dirname .. "scripting/starting_conditions/amazons/headquarters.lua";
-         dirname .. "scripting/starting_conditions/amazons/fortified_village.lua";
-         dirname .. "scripting/starting_conditions/amazons/trading_outpost.lua";
-         dirname .. "scripting/starting_conditions/amazons/village.lua";
+         -- dirname .. "scripting/starting_conditions/amazons/fortified_village.lua";
+         -- dirname .. "scripting/starting_conditions/amazons/trading_outpost.lua";
+         -- dirname .. "scripting/starting_conditions/amazons/village.lua";
       }
    }
 }

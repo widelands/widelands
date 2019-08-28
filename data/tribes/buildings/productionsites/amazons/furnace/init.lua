@@ -43,7 +43,7 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      amazons_smelter = 1
+      amazons_gold_smelter = 1
    },
 
    inputs = {

@@ -51,7 +51,7 @@ tribes:new_productionsite_type {
    },
 
    outputs = {
-      "cassava_root"
+      "cassavaroot"
    },
 
    indicate_workarea_overlaps = {
@@ -71,7 +71,7 @@ tribes:new_productionsite_type {
             "return=no_stats"
          }
       },
-      plant_barley = {
+      plant_cassava = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
          descname = _"planting cassava root",
          actions = {
@@ -79,7 +79,7 @@ tribes:new_productionsite_type {
             "sleep=10000"
          }
       },
-      harvest_barley = {
+      harvest_cassava = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
          descname = _"harvesting cassava root",
          actions = {

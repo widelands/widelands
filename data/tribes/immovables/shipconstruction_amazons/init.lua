@@ -2,7 +2,7 @@ dirname = path.dirname (__file__)
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
-   name = "frisians_shipconstruction",
+   name = "amazons_shipconstruction",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Ship Under Construction"),
    icon = dirname .. "menu.png",
@@ -12,13 +12,14 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "construct=idle 5000 210000",
-         "transform=bob tribe:frisians_ship",
+         "transform=bob tribe:amazons_ship",
       }
    },
    buildcost = {
-      log = 10,
-      clay = 2,
-      cloth = 6
+      log = 5,
+      balsa = 5,
+      rubber = 3,
+      rope = 3
    },
 
    animations = {

@@ -1,22 +1,20 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_foresters_house",
+   msgctxt = "amazons_building",
+   name = "amazons_junglemasters_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Forester’s House"),
+   descname = pgettext("amazons_building", "Junglemaster's Hut"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
    buildcost = {
-      brick = 1,
-      log = 1,
-      reed = 1
+      log = 3,
+      rope = 1
    },
    return_on_dismantle = {
-      brick = 1,
-      log = 1,
+      log = 2,
    },
 
    animations = {
@@ -32,21 +30,21 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      supports_production_of = { "log" },
+      supports_production_of = { "log", "liana" },
       space_consumer = true,
    },
 
    working_positions = {
-      frisians_forester = 1
+      amazons_jungle_preserver = 1
    },
 
    indicate_workarea_overlaps = {
-      frisians_clay_pit = false,
-      frisians_berry_farm = false,
-      frisians_reed_farm = false,
-      frisians_farm = false,
-      frisians_foresters_house = false,
-      frisians_woodcutters_house = true,
+      amazons_cocoa_farm = false,
+      amazons_cassava_root_plantation = false,
+      amazons_rare_tree_plantation = false,
+      amazons_junglemasters_hut = false,
+      amazons_liana_cutters_hut = true,
+      amazons_woodcutters_hut = true,
    },
 
    programs = {
@@ -55,7 +53,7 @@ tribes:new_productionsite_type {
          descname = _"planting trees",
          actions = {
             "callworker=plant",
-            "sleep=12000"
+            "sleep=8000"
          }
       },
    },

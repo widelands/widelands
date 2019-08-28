@@ -8,6 +8,7 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
+   enhancement = "amazons_rare_trees_woodcutters_hut",
 
    buildcost = {
       log = 4,

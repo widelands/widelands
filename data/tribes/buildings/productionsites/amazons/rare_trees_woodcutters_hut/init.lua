@@ -1,22 +1,22 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_foresters_house",
+   msgctxt = "amazons_building",
+   name = "amazons_rare_trees_woodcutters_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Forester’s House"),
+   descname = pgettext("amazons_building", "Rare Tree Woodcutter's Hut"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
-   buildcost = {
-      brick = 1,
+   enhancement_cost = {
       log = 1,
-      reed = 1
+      granite = 1,
+      rope = 1
    },
-   return_on_dismantle = {
-      brick = 1,
+   return_on_dismantle_on_enhanced = {
       log = 1,
+      rope = 1
    },
 
    animations = {
@@ -32,31 +32,64 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      supports_production_of = { "log" },
-      space_consumer = true,
+
    },
 
    working_positions = {
-      frisians_forester = 1
+      amazons_woodcutter_master = 1
+   },
+
+   outputs = {
+      "ironwood",
+      "balsa",
+      "rubber",
+      "log"
    },
 
    indicate_workarea_overlaps = {
-      frisians_clay_pit = false,
-      frisians_berry_farm = false,
-      frisians_reed_farm = false,
-      frisians_farm = false,
-      frisians_foresters_house = false,
-      frisians_woodcutters_house = true,
+      amazons_rare_tree_plantation = true,
    },
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
-         descname = _"planting trees",
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
          actions = {
-            "callworker=plant",
+            "call=harvest_balsa",
+            "call=harvest_rubber",
+            "call=harvest_ironwood",
+            "return=no_stats"
+         },
+      },
+      harvest_balsa = {
+         -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
+         descname = _"harvesting balsa",
+         actions = {
+            -- time total: 33
+            "return=skipped unless economy needs balsa",
+            "callworker=harvest_balsa",
             "sleep=12000"
-         }
+         },
+      },
+      harvest_rubber = {
+         -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
+         descname = _"harvesting rubber",
+         actions = {
+            -- time total: 33
+            "return=skipped unless economy needs rubber",
+            "callworker=harvest_rubber",
+            "sleep=12000"
+         },
+      },
+      harvest_ironwood = {
+         -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
+         descname = _"harvesting ironwood",
+         actions = {
+            -- time total: 33
+            "return=skipped unless economy needs ironwood",
+            "callworker=harvest_ironwood",
+            "sleep=12000"
+         },
       },
    },
 }

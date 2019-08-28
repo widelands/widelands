@@ -18,10 +18,10 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("frisians_building", "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any granite."):bformat("1/2")
+   return ""
 end
 
 function building_helptext_performance()
    -- TRANSLATORS: Performance helptext for a building
-   return pgettext("frisians_building", "If the food supply is steady, the rock mine can produce two blocks of granite in %s on average."):bformat(ngettext("%d second", "%d seconds", 85):bformat(85))
+   return no_performance_text_yet()
 end

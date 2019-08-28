@@ -1,10 +1,10 @@
 dirname = path.dirname (__file__)
 
 tribes:new_trainingsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_training_camp",
+   msgctxt = "amazons_building",
+   name = "amazons_warriors_gathering",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Training Camp"),
+   descname = pgettext ("amazons_building", "Warrior's Gathering"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
@@ -16,7 +16,7 @@ tribes:new_trainingsite_type {
       granite = 2,
       rubber = 5,
       rope = 2,
-      gold = 2
+      gold = 1
    },
    return_on_dismantle = {
       balsa = 1,
@@ -58,7 +58,7 @@ tribes:new_trainingsite_type {
    inputs = {
       { name = "fish", amount = 5 },
       { name = "meat", amount = 5 },
-      { name = "amazons_bread", amount = 2 },
+      { name = "bread_amazons", amount = 2 },
       { name = "chocolate", amount = 5 },
       { name = "spear_stone_tipped", amount = 3 },
       { name = "spear_hardened", amount = 3 },
@@ -73,7 +73,7 @@ tribes:new_trainingsite_type {
       food = {
          {"fish", "meat"},
          {"chocolate"},
-         {"amazons_bread"}
+         {"bread_amazons"}
       },
       weapons = {
          "spear_stone_tipped",
@@ -109,13 +109,13 @@ tribes:new_trainingsite_type {
          descname = pgettext("amazons_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
             "checksoldier=soldier attack 1", -- Fails when aren't any soldier of level 1 attack
-            "return=failed unless site has amazons_bread",
+            "return=failed unless site has bread_amazons",
             "return=failed unless site has fish,meat",
             "return=failed unless site has chocolate",
             "return=failed unless site has spear_hardened",
             "animate=working 30000",
             "checksoldier=soldier attack 1", -- Because the soldier can be expulsed by the player
-            "consume=amazons_bread fish,meat chocolate spear_hardened",
+            "consume=bread_amazons fish,meat chocolate spear_hardened",
             "train=soldier attack 1 2"
          }
       },

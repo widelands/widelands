@@ -2,7 +2,7 @@ dirname = path.dirname(__file__)
 
 tribes:new_ware_type {
    msgctxt = "atlanteans_ware",
-   name = "boots_hero,
+   name = "boots_hero",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("atlanteans_ware", "Hero Boots"),
    helptext_script = dirname .. "helptexts.lua",

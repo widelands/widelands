@@ -28,44 +28,24 @@ animations = {
       hotspot = {20, 24},
       fps = 10
    },
-   atk_ok_1_e = {
-      pictures = path.list_files (dirname .. "rookie/atk_ok_1_e_??.png"),
+   atk_ok_e = {
+      pictures = path.list_files (dirname .. "rookie/atk_ok_e_??.png"),
       hotspot = {23, 24},
       fps = 10
    },
-   atk_fail_1_e = {
-      pictures = path.list_files (dirname .. "rookie/atk_fail_1_e_??.png"),
+   atk_fail_e = {
+      pictures = path.list_files (dirname .. "rookie/atk_fail_e_??.png"),
       hotspot = {23, 23},
       fps = 10
    },
-   atk_ok_1_w = {
-      pictures = path.list_files (dirname .. "rookie/atk_ok_1_w_??.png"),
+   atk_ok_w = {
+      pictures = path.list_files (dirname .. "rookie/atk_ok_w_??.png"),
       hotspot = {-1, 22},
       fps = 10
    },
-   atk_fail_1_w = {
-      pictures = path.list_files (dirname .. "rookie/atk_fail_1_w_??.png"),
+   atk_fail_w = {
+      pictures = path.list_files (dirname .. "rookie/atk_fail_w_??.png"),
       hotspot = {-1, 22},
-      fps = 10
-   },
-   atk_ok_2_e = {
-      pictures = path.list_files (dirname .. "rookie/atk_ok_2_e_??.png"),
-      hotspot = {23, 23},
-      fps = 10
-   },
-   atk_fail_2_e = {
-      pictures = path.list_files (dirname .. "rookie/atk_fail_2_e_??.png"),
-      hotspot = {23, 23},
-      fps = 10
-   },
-   atk_ok_2_w = {
-      pictures = path.list_files (dirname .. "rookie/atk_ok_2_w_??.png"),
-      hotspot = {-1, 23},
-      fps = 10
-   },
-   atk_fail_2_w = {
-      pictures = path.list_files (dirname .. "rookie/atk_fail_2_w_??.png"),
-      hotspot = {-1, 23},
       fps = 10
    },
    eva_ok_e = {

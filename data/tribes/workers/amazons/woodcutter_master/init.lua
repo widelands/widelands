@@ -25,11 +25,11 @@ tribes:new_worker_type {
    vision_range = 2,
 
    programs = {
-      harvest_iron = {
-         "findobject=attrib:iron_tree radius:10",
+      harvest_ironwood = {
+         "findobject=attrib:tree_ironwood radius:10",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting 255",
-         "animate=hacking 20000",
+         "animate=hacking 25000",
          "playsound=sound/woodcutting/tree_falling 130",
          "callobject=fall",
          "animate=idle 2000",
@@ -37,10 +37,10 @@ tribes:new_worker_type {
          "return"
       },
       harvest_rubber = {
-         "findobject=attrib:rubber_tree radius:10",
+         "findobject=attrib:tree_rubber radius:10",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting 255",
-         "animate=hacking 20000",
+         "animate=hacking 25000",
          "playsound=sound/woodcutting/tree_falling 130",
          "callobject=fall",
          "animate=idle 2000",
@@ -48,16 +48,27 @@ tribes:new_worker_type {
          "return"
       },
       harvest_balsa = {
-         "findobject=attrib:balsa_tree radius:10",
+         "findobject=attrib:tree_balsa radius:10",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting 255",
-         "animate=hacking 20000",
+         "animate=hacking 25000",
          "playsound=sound/woodcutting/tree_falling 130",
          "callobject=fall",
          "animate=idle 2000",
          "createware=balsa",
          "return"
-      }
+      },
+      harvest = {
+         "findobject=attrib:tree radius:10",
+         "walk=object",
+         "playsound=sound/woodcutting/woodcutting 255",
+         "animate=hacking 25000",
+         "playsound=sound/woodcutting/tree_falling 130",
+         "callobject=fall",
+         "animate=idle 2000",
+         "createware=log",
+         "return"
+      },
    },
 
    ware_hotspot = {0, 20},

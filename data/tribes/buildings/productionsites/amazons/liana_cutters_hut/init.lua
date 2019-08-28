@@ -1,21 +1,19 @@
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
-   name = "frisians_clay_pit",
+   msgctxt = "amazons_building",
+   name = "amazons_liana_cutters_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Clay Pit"),
+   descname = pgettext ("amazons_building", "Liana Cutter's Hut"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
    buildcost = {
-      brick = 1,
-      log = 1,
-      reed = 1
+      log = 5,
    },
    return_on_dismantle = {
-      brick = 1
+      log = 3
    },
 
    animations = {
@@ -36,54 +34,39 @@ tribes:new_productionsite_type {
    },
 
    indicate_workarea_overlaps = {
-      frisians_aqua_farm = true,
-      frisians_clay_pit = false,
-      frisians_berry_farm = false,
-      frisians_reed_farm = false,
-      frisians_farm = false,
-      frisians_foresters_house = false,
+      amazons_junglemaster_hut = true,
    },
 
    aihints = {
       very_weak_ai_limit = 1,
       weak_ai_limit = 2,
       basic_amount = 1,
-      supports_production_of = { "fish" }
    },
 
    working_positions = {
-      frisians_claydigger = 1
+      amazons_liana_cutter = 1
    },
 
-   inputs = {
-      { name = "water", amount = 4 },
-   },
    outputs = {
-      "clay"
+      "liana"
    },
 
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start making clay because ...
-         descname = _"making clay",
+         descname = _"cutting lianas",
          actions = {
-
-            "return=skipped unless economy needs clay or economy needs fish", -- Fish-producing aqua farms can stop working if the clay pits do so
-            "return=failed unless site has water",
-            "callworker=dig",
-            "consume=water",
-            "sleep=22000",
-            "animate=working 17000",
-            "sleep=1000",
-            "produce=clay"
+            "return=skipped unless economy needs liana",
+            "callworker=cut",
+            "sleep=30000",
          },
       },
    },
    out_of_resource_notification = {
-      -- TRANSLATORS: Short for "No Level Ground" for clay pits
-      title = _"No Ground",
-      heading = _"No Level Ground",
-      message = pgettext ("frisians_building", "The clay digger working at this clay pit can’t find any level ground in his work area. Consider dismantling this clay pit and rebuilding it somewhere else."),
+      -- TRANSLATORS: Short for "No Trees to cut lianas" for clay pits
+      title = _"No Trees",
+      heading = _"No Tree to Cut Lianas",
+      message = pgettext ("amazons_building", "The liana Cutter working at this site can’t find any tree in his work area. Consider dismantling this liana cutter's hut and rebuilding it somewhere else."),
       productivity_threshold = 33
    },
 }
