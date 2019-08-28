@@ -17,26 +17,43 @@
  *
  */
 
-#include "editor/scripting/scripting.h"
+#ifndef WL_EDITOR_SCRIPTING_H
+#define WL_EDITOR_SCRIPTING_H
 
-#include "base/wexception.h"
+#include <list>
+#include <string>
 
-Variable::Variable(const std::string& t)
-	: type(t) {
-	if (type == "nil") {
-		value = "nil";
-	} else if (type == "bool") {
-		value = "false";
-	} else if (type == "int") {
-		value = "0";
-	} else if (type == "string") {
-		value = "";
-	} else {
-		NEVER_HERE();
+#include "base/macros.h"
+
+const std::string kMainFunction = "mission_thread";
+
+// NOCOM saveloading for all this in some editor-only packet
+
+struct Variable {
+	std::string type; // type of the value (supported: nil, string, bool, int)
+	std::string value;
+
+	Variable(const std::string&);
+	Variable(const std::string&, const std::string&);
+	~Variable() {
 	}
-}
+};
 
-Variable::Variable(const std::string& t, const std::string& v)
-	: type(t), value(v) {
-}
+struct FunctionStatement {
 
+
+
+};
+
+struct Function {
+	Function(bool a) : autostart(a) {
+	}
+	~Function() {
+	}
+
+	bool autostart;
+	std::list<std::string> parameters;
+	std::list<FunctionStatement> body;
+};
+
+#endif  // end of include guard: WL_EDITOR_SCRIPTING_H

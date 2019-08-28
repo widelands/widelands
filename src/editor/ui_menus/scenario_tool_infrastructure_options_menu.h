@@ -20,8 +20,8 @@
 #ifndef WL_EDITOR_UI_MENUS_SCENARIO_TOOL_INFRASTRUCTURE_OPTIONS_MENU_H
 #define WL_EDITOR_UI_MENUS_SCENARIO_TOOL_INFRASTRUCTURE_OPTIONS_MENU_H
 
-#include <map>
 #include <memory>
+#include <vector>
 
 #include "editor/tools/scenario_infrastructure_tool.h"
 #include "editor/ui_menus/tool_options_menu.h"
@@ -31,7 +31,7 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/icongrid.h"
-#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textarea.h"
 #include "ui_basic/tabpanel.h"
 
 class EditorInteractive;
@@ -51,15 +51,15 @@ private:
 
 	void select_player();
 	void toggle_construct();
-	void toggle_selected(Widelands::MapObjectType, Widelands::DescriptionIndex, int32_t);
+	void toggle_selected(UI::IconGrid*, Widelands::MapObjectType, Widelands::DescriptionIndex, int32_t);
 
 	std::unique_ptr<UI::Box> main_box_;
 	std::unique_ptr<UI::Dropdown<Widelands::PlayerNumber>> players_;
 	std::unique_ptr<UI::Checkbox> construct_;
 	std::unique_ptr<UI::TabPanel> item_categories_;
-	std::map<Widelands::MapObjectType, std::unique_ptr<UI::TabPanel>> item_tribe_tabs_;
-	std::map<Widelands::MapObjectType, std::map<Widelands::DescriptionIndex, std::unique_ptr<UI::IconGrid>>> item_grids_;
-	std::unique_ptr<UI::MultilineTextarea> selected_items_;
+	std::vector<std::unique_ptr<UI::TabPanel>> item_tabs_;
+	std::vector<std::unique_ptr<UI::IconGrid>> item_grids_;
+	std::unique_ptr<UI::Textarea> selected_items_;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEditorPlayerEdited>> subscriber_;
 };

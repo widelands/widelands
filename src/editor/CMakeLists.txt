@@ -4,8 +4,8 @@ wl_library(editor
     editorinteractive.h
     map_generator.cc
     map_generator.h
-    scripting/scripting.cc
-    scripting/scripting.h
+    scripting.cc
+    scripting.h
     tools/action_args.h
     tools/decrease_height_tool.cc
     tools/decrease_height_tool.h
