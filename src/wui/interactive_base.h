@@ -26,10 +26,10 @@
 #include <SDL_keycode.h>
 
 #include "graphic/toolbar_imageset.h"
+#include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "notifications/notifications.h"
-#include "profile/profile.h"
 #include "sound/note_sound.h"
 #include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"

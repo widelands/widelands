@@ -22,11 +22,11 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/format.hpp>
 
+#include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 

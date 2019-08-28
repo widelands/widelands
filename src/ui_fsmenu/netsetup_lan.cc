@@ -25,7 +25,7 @@
 #include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/network.h"
-#include "profile/profile.h"
+#include "wlapplication_options.h"
 
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
    : FullscreenMenuBase(),
@@ -110,13 +110,11 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 	loadlasthost.sigclicked.connect(
 	   boost::bind(&FullscreenMenuNetSetupLAN::clicked_lasthost, boost::ref(*this)));
 
-	Section& s = g_options.pull_section("global");  //  for playername
-
 	playername.set_font_scale(scale_factor());
 	hostname.set_font_scale(scale_factor());
 
 	hostname.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_hostname, this));
-	playername.set_text(s.get_string("nickname", (_("nobody"))));
+	playername.set_text(get_config_string("nickname", (_("nobody"))));
 	playername.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_playername, this));
 	opengames.add_column(listw_ * 2 / 5, _("Host"));
 	opengames.add_column(listw_ * 2 / 5, _("Map"));
@@ -264,12 +262,12 @@ void FullscreenMenuNetSetupLAN::change_playername() {
 		joingame.set_enabled(true);
 	}
 
-	g_options.pull_section("global").set_string("nickname", playername.text());
+	set_config_string("nickname", playername.text());
 }
 
 void FullscreenMenuNetSetupLAN::clicked_joingame() {
 	// Save selected host so users can reload it for reconnection.
-	g_options.pull_section("global").set_string("lasthost", hostname.text());
+	set_config_string("lasthost", hostname.text());
 
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kJoingame);
 }
@@ -279,7 +277,7 @@ void FullscreenMenuNetSetupLAN::clicked_hostgame() {
 }
 
 void FullscreenMenuNetSetupLAN::clicked_lasthost() {
-	Section& s = g_options.get_safe_section("global");
+	Section& s = get_config_safe_section();
 	std::string const host = s.get_string("lasthost", "");
 	hostname.set_text(host);
 	if (host.size())

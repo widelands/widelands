@@ -50,6 +50,12 @@ option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
 option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
 option(OPTION_BUILD_TESTS "Build tests" ON)
 
+option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
+IF(USE_XDG AND NOT APPLE AND NOT WIN32)
+  ADD_DEFINITIONS(-DUSE_XDG)
+  message(STATUS "Building with XDG support")
+ENDIF(USE_XDG AND NOT APPLE AND NOT WIN32)
+
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
 endif (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)

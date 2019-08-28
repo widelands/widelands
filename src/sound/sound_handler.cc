@@ -30,7 +30,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "profile/profile.h"
+#include "wlapplication_options.h"
 
 namespace {
 constexpr int kDefaultMusicVolume = 64;
@@ -190,28 +190,26 @@ void SoundHandler::initialization_error(const char* const msg, bool quit_sdl) {
 }
 
 /**
- * Load the sound options from g_options. If an option is not available, use the defaults set by the
- * constructor.
+ * Load the sound options from cached config. If an option is not available, use the defaults set by
+ * the constructor.
  */
 void SoundHandler::read_config() {
 	// TODO(GunChleoc): Compatibility code to avoid getting bug reports about unread sections. Remove
 	// after Build 21.
-	if (g_options.get_section("sound") == nullptr) {
-		Section& global = g_options.pull_section("global");
-
+	if (get_config_section_ptr("sound") == nullptr) {
 		for (auto& option : sound_options_) {
 			switch (option.first) {
 			case SoundType::kMusic:
-				option.second.volume = global.get_int("music_volume", option.second.volume);
-				option.second.enabled = !global.get_bool("disable_music", !option.second.enabled);
+				option.second.volume = get_config_int("music_volume", option.second.volume);
+				option.second.enabled = !get_config_bool("disable_music", !option.second.enabled);
 				break;
 			case SoundType::kChat:
-				option.second.volume = global.get_int("fx_volume", option.second.volume);
-				option.second.enabled = global.get_bool("sound_at_message", option.second.enabled);
+				option.second.volume = get_config_int("fx_volume", option.second.volume);
+				option.second.enabled = get_config_bool("sound_at_message", option.second.enabled);
 				break;
 			default:
-				option.second.volume = global.get_int("fx_volume", option.second.volume);
-				option.second.enabled = !global.get_bool("disable_fx", !option.second.enabled);
+				option.second.volume = get_config_int("fx_volume", option.second.volume);
+				option.second.enabled = !get_config_bool("disable_fx", !option.second.enabled);
 				break;
 			}
 		}
@@ -219,32 +217,30 @@ void SoundHandler::read_config() {
 	}
 
 	// This is the code that we want to keep
-	Section& sound = g_options.pull_section("sound");
 	for (auto& option : sound_options_) {
 		option.second.volume =
-		   sound.get_int(("volume_" + option.second.name).c_str(), option.second.volume);
+		   get_config_int("sound", ("volume_" + option.second.name).c_str(), option.second.volume);
 		option.second.enabled =
-		   sound.get_bool(("enable_" + option.second.name).c_str(), option.second.enabled);
+		   get_config_bool("sound", ("enable_" + option.second.name).c_str(), option.second.enabled);
 	}
 }
 
-/// Save the current sound options to g_options
+/// Save the current sound options to config cache
 void SoundHandler::save_config() {
-	Section& sound = g_options.pull_section("sound");
 	for (auto& option : sound_options_) {
 		const int volume = option.second.volume;
 		const std::string& name = option.second.name;
 		const bool enabled = option.second.enabled;
 
 		const std::string enable_name = "enable_" + name;
-		sound.set_bool(enable_name.c_str(), enabled);
+		set_config_bool("sound", enable_name.c_str(), enabled);
 
 		const std::string volume_name = "volume_" + name;
-		sound.set_int(volume_name.c_str(), volume);
+		set_config_int("sound", volume_name.c_str(), volume);
 	}
 }
 
-/// Read the sound options from g_options and apply them
+/// Read the sound options from the cache and apply them
 void SoundHandler::load_config() {
 	read_config();
 	for (auto& option : sound_options_) {
