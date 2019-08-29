@@ -44,6 +44,58 @@
 namespace {
 char const* const animation_direction_names[6] = {"_ne", "_e", "_se", "_sw", "_w", "_nw"};
 
+// Find trimmed rect according to transparent pixels.
+// Lock texture before you call this function.
+void find_trim_rect(Texture* texture, Recti* rect) {
+	const int max_x = texture->width();
+	const int max_y = texture->height();
+
+	// Find left margin
+	bool found = false;
+	for (int x = 0; x < max_x && !found; ++x) {
+		for (int y = 0; y < max_y && !found; ++y) {
+			RGBAColor pixel = texture->get_pixel(x, y);
+			if (pixel.a != 0) {
+				rect->x = std::max(rect->x, x - 1);
+				found = true;
+			}
+		}
+	}
+	// Find right margin
+	found = false;
+	for (int x = max_x - 1; x >= 0 && !found; --x) {
+		for (int y = 0; y < max_y && !found; ++y) {
+			RGBAColor pixel = texture->get_pixel(x, y);
+			if (pixel.a != 0) {
+				rect->w = std::min(max_x, x + 1 - rect->x);
+				found = true;
+			}
+		}
+	}
+	// Find top margin
+	found = false;
+	for (int y = 0; y < max_y && !found; ++y) {
+		for (int x = 0; x < max_x && !found; ++x) {
+			RGBAColor pixel = texture->get_pixel(x, y);
+			if (pixel.a != 0) {
+				rect->y = std::max(rect->y, y - 1);
+				found = true;
+			}
+		}
+	}
+	// Find bottom margin
+	found = false;
+	for (int y = max_y - 1; y >= 0 && !found; --y) {
+		for (int x = 0; x < max_x && !found; ++x) {
+			RGBAColor pixel = texture->get_pixel(x, y);
+			if (pixel.a != 0) {
+				rect->h = std::min(max_y, y + 1 - rect->y);
+				found = true;
+			}
+		}
+	}
+}
+
 // Reads animation data from engine and then creates spritesheets and the corresponding lua code.
 void write_spritesheet(Widelands::EditorGameBase& egbase,
                      const std::string& map_object_name,
@@ -98,10 +150,10 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	}
 
 	// Write a spritesheet of the given images into the given filename
-	const auto write_spritesheet = [out_filesystem](std::vector<const Image*> imgs, const std::string& filename, int img_w, int img_h, int columns, int spritesheet_width, int spritesheet_height) {
-		log("CREATING %d x %d spritesheet with %d columns, %" PRIuS " frames. Image size: %d x %d.\n", spritesheet_width, spritesheet_height, columns, imgs.size(), img_w, img_h);
+	const auto write_spritesheet = [out_filesystem](std::vector<const Image*> imgs, const std::string& filename, const Recti& rect, int columns, int spritesheet_width, int spritesheet_height) {
+		log("CREATING %d x %d spritesheet with %d columns, %" PRIuS " frames. Image size: %d x %d.\n", spritesheet_width, spritesheet_height, columns, imgs.size(), rect.w, rect.h);
 		Texture* spritesheet = new Texture(spritesheet_width, spritesheet_height);
-		spritesheet->fill_rect(Rectf(0.f, 0.f, spritesheet_width, spritesheet_height), RGBAColor(0, 0, 0, 0));
+		spritesheet->fill_rect(Rectf(Vector2f::zero(), spritesheet_width, spritesheet_height), RGBAColor(0, 0, 0, 0));
 		int row = 0;
 		int col = 0;
 		for (size_t i = 0; i < imgs.size(); ++i, ++col) {
@@ -110,10 +162,10 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 				++row;
 			}
 			const Image* image = imgs[i];
-			const int x = col * img_w;
-			const int y = row * img_h;
-			log("Frame %" PRIuS " at: %d, %d\n", i, x, y);
-			spritesheet->blit(Rectf(x, y, img_w, img_h), *image, Rectf(0, 0, img_w, img_h), 1., BlendMode::Copy);
+			const int x = col * rect.w;
+			const int y = row * rect.h;
+			log("Frame %" PRIuS " at: %d, %d, %d, %d\n", i, x, y, x + rect.w, y + rect.h);
+			spritesheet->blit(Rectf(x, y, rect.w, rect.h), *image, Rectf(rect.x, rect.y, rect.w, rect.h), 1., BlendMode::Copy);
 		}
 		std::unique_ptr<::StreamWrite> sw(out_filesystem->open_stream_write(filename));
 		save_to_png(spritesheet, sw.get(), ColorType::RGBA);
@@ -125,11 +177,6 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	LuaTree::Object* lua_animation = lua_object->add_object(animation_name);
 	lua_animation->add_raw("directory", "path.dirname(__file__)");
 	lua_animation->add_string("basename", animation_name);
-
-	LuaTree::Object* lua_table = lua_animation->add_object("hotspot");
-	const Vector2i& hotspot = animation.hotspot();
-	lua_table->add_int("", hotspot.x);
-	lua_table->add_int("", hotspot.y);
 
 	if (animation.nr_frames() > 1) {
 		uint32_t frametime = animation.frametime();
@@ -164,13 +211,19 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	// Create image files for each scale
 	for (const float scale : animation.available_scales()) {
 		std::vector<const Image*> images = animation.images(scale);
+		Recti margins(Vector2f::zero(), images.front()->width(), images.front()->height());
 
-		// Get parameters at this scale
-		const int w = animation.width() * scale;
-		const int h = animation.height() * scale;
+		// Crop the animation to save space
+		for (const Image* image : images) {
+			std::unique_ptr<Texture> temp_texture(new Texture(image->width(), image->height()));
+			Rectf image_dimensions(Vector2f::zero(), image->width(), image->height());
+			temp_texture->blit(image_dimensions, *image, image_dimensions, 1., BlendMode::Copy);
+			temp_texture->lock();
+			find_trim_rect(temp_texture.get(), &margins);
+		}
 
-		const int spritesheet_width = columns * w;
-		const int spritesheet_height = rows * h;
+		const int spritesheet_width = columns * margins.w;
+		const int spritesheet_height = rows * margins.h;
 
 		if (spritesheet_width > kMinimumSizeForTextures || spritesheet_height > kMinimumSizeForTextures) {
 			egbase.cleanup_objects();
@@ -178,6 +231,7 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 		}
 
 		// Write spritesheet for animation and player colors
+		// NOCOM trim directional animations
 		if (is_directional) {
 			for (int dir = 1; dir <= 6; ++dir) {
 				const std::string directional_animname =
@@ -190,19 +244,27 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 				   (boost::format("%s%s_%d") % animation_name % animation_direction_names[dir - 1] % scale).str();
 				const Animation& directional_animation =
 				 g_gr->animations().get_animation(descr->get_animation(directional_animname, nullptr));
-				write_spritesheet(directional_animation.images(scale), filename_base + ".png", w, h, columns, spritesheet_width, spritesheet_height);
+				write_spritesheet(directional_animation.images(scale), filename_base + ".png", margins, columns, spritesheet_width, spritesheet_height);
 				std::vector<const Image*> pc_masks = directional_animation.pc_masks(scale);
 				if (!pc_masks.empty()) {
-					write_spritesheet(pc_masks, filename_base + "_pc.png", w, h, columns, spritesheet_width, spritesheet_height);
+					write_spritesheet(pc_masks, filename_base + "_pc.png", margins, columns, spritesheet_width, spritesheet_height);
 				}
 			}
 		} else {
 			const std::string filename_base = (boost::format("%s_%d") % animation_name % scale).str();
-			write_spritesheet(images, filename_base + ".png", w, h, columns, spritesheet_width, spritesheet_height);
+			write_spritesheet(images, filename_base + ".png", margins, columns, spritesheet_width, spritesheet_height);
 			std::vector<const Image*> pc_masks = animation.pc_masks(scale);
 			if (!pc_masks.empty()) {
-				write_spritesheet(pc_masks, filename_base + "_pc.png", w, h, columns, spritesheet_width, spritesheet_height);
+				write_spritesheet(pc_masks, filename_base + "_pc.png", margins, columns, spritesheet_width, spritesheet_height);
 			}
+		}
+
+		if (scale == 1.0f) {
+			// Adjust and write hostspot
+			LuaTree::Object* lua_table = lua_animation->add_object("hotspot");
+			const Vector2i& hotspot = animation.hotspot();
+			lua_table->add_int("", hotspot.x - margins.x);
+			lua_table->add_int("", hotspot.y - margins.y);
 		}
 	}
 
