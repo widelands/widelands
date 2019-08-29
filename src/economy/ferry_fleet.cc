@@ -290,9 +290,9 @@ void FerryFleet::reroute_ferry_request(Game& game, Waterway* oldww, Waterway* ne
 		}
 	}
 	// NOCOM(CodeReview): You're not doing any iterator manipulation, so you can use a range-based for loop to make the code more readable
-	for (auto it = pending_ferry_requests_.begin(); it != pending_ferry_requests_.end(); ++it) {
-		if (it->second == oldww) {
-			it->second = newww;
+	for (auto& pair : pending_ferry_requests_) {
+		if (pair.second == oldww) {
+			pair.second = newww;
 			return;
 		}
 	}

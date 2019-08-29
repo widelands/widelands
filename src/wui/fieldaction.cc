@@ -479,7 +479,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps) {
 			    !player_->is_building_type_allowed(building_index)) {
 				continue;
 			}
-			if (!building_descr->meets_requirements(ibase().egbase().map().allows_seafaring(),
+			if (!building_descr->is_useful_on_map(ibase().egbase().map().allows_seafaring(),
 					ibase().egbase().map().get_waterway_max_length() >= 2)) {
 				continue;
 			}

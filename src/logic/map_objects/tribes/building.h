@@ -127,7 +127,7 @@ public:
 		return needs_waterways_;
 	}
 
-	bool meets_requirements(bool seafaring_allowed, bool waterways_allowed) const;
+	bool is_useful_on_map(bool seafaring_allowed, bool waterways_allowed) const;
 
 	// Returns the enhancement this building can become or
 	// INVALID_INDEX if it cannot be enhanced.
