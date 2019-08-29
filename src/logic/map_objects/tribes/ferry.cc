@@ -159,6 +159,7 @@ void Ferry::start_task_row(Game& game, Waterway* ww) {
 }
 
 void Ferry::row_update(Game& game, State&) {
+	// NOCOM do we want the ferry's coordinates in the molog messages for this function?
 	if (!destination_) {
 		return pop_task(game);
 	}

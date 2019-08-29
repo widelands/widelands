@@ -237,8 +237,9 @@ Warehouse* Economy::find_closest_warehouse(Flag& start,
 
 	while (RoutingNode* current = astar.step()) {
 		if (cost_cutoff && (type_ == wwWARE ?
-				current->mpf_realcost_ware : current->mpf_realcost_worker) > static_cast<int32_t>(cost_cutoff))
+							current->mpf_realcost_ware : current->mpf_realcost_worker) > static_cast<int32_t>(cost_cutoff)) {
 			return nullptr;
+		}
 
 		Flag& flag = current->base_flag();
 		if (upcast(Warehouse, warehouse, flag.get_building())) {
@@ -610,7 +611,7 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 				log("Economy::find_best_supply: %s-Economy %u of player %u: Error, COULD NOT FIND A ROUTE!",
 						type_ ? "WORKER" : "WARE", serial_, owner_.player_number());
 				// To help to debug this a bit:
-				log(" ... ware at: %3dx%3d, requestor at: %3dx%3d! Item: %s.\n",
+				log(" ... ware/worker at: %3dx%3d, requestor at: %3dx%3d! Item: %s.\n",
 				    supp.get_position(game)->base_flag().get_position().x,
 				    supp.get_position(game)->base_flag().get_position().y, target_flag.get_position().x,
 				    target_flag.get_position().y, type_ == wwWARE ?
@@ -854,6 +855,9 @@ void Economy::create_requested_worker(Game& game, DescriptionIndex index) {
 		}
 	}
 
+	// Couldn't create enough workers now.
+	// Let's see how many we have resources for that may be scattered
+	// throughout the economy.
 	for (const std::pair<Economy*, std::vector<Quantity>>& pair : total_available) {
 		Request* req = nullptr;
 		uint32_t demand = 0;
@@ -943,6 +947,7 @@ void Economy::create_requested_worker(Game& game, DescriptionIndex index) {
  * try to create the worker at warehouses.
  */
 void Economy::create_requested_workers(Game& game) {
+// NOCOM can a ware economy request a worker? If not, we can assert(type_ != wwWORKER);
 	if (type_ != wwWORKER || !warehouses().size())
 		return;
 

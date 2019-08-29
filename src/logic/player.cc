@@ -558,16 +558,16 @@ Waterway* Player::build_waterway(const Path& path) {
 					}
 				}
 				if (!CheckStepFerry(egbase()).reachable_dest(map, fc)) {
-					log("%i: building waterway aborted, unreachable for ferries\n", player_number());
+					log("%i: building waterway aborted, unreachable for ferries\n", static_cast<unsigned int>(player_number()));
 					return nullptr;
 				}
 			}
 			return &Waterway::create(egbase(), *start, *end, path);
 		} else {
-			log("%i: building waterway aborted, missing end flag\n", player_number());
+			log("%i: building waterway aborted, missing end flag\n", static_cast<unsigned int>(player_number()));
 		}
 	} else {
-		log("%i: building waterway aborted, missing start flag\n", player_number());
+		log("%i: building waterway aborted, missing start flag\n", static_cast<unsigned int>(player_number()));
 	}
 	return nullptr;
 }
