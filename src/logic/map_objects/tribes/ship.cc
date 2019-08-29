@@ -1094,14 +1094,10 @@ WalkingDir Ship::get_scouting_direction() const {
 /// @note only called via player command
 void Ship::exp_construct_port(Game& game, const Coords& c) {
 	assert(expedition_);
-	if (const BaseImmovable* imm = game.map().get_fcoords(c).field->get_immovable()) {
-		if ((imm->descr().type() == MapObjectType::WAREHOUSE &&
-				dynamic_cast<const Warehouse*>(imm)->descr().get_isport()) ||
-				(imm->descr().type() == MapObjectType::CONSTRUCTIONSITE &&
-				dynamic_cast<const ConstructionSite*>(imm)->building().get_isport())) {
-			// Another expedition ship was a second faster
-			return;
-		}
+	if (is_a(Building, game.map().get_fcoords(c).field->get_immovable())) {
+		// Another expedition ship (or an enemy player) was a second faster
+		set_ship_state_and_notify(ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
+		return;
 	}
 	get_owner()->force_csite(c, get_owner()->tribe().port());
 
