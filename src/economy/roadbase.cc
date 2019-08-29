@@ -93,8 +93,9 @@ void RoadBase::set_path(EditorGameBase& egbase, const Path& path) {
 }
 
 static inline void set_roadtype(EditorGameBase& egbase, const FCoords curf, uint8_t dir, RoadType type) {
-	if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
+	if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E) {
 		egbase.set_road(curf, dir, type);
+	}
 }
 
 /**

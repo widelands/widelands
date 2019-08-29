@@ -51,19 +51,26 @@ void EconomyDataPacket::read(FileRead& fr) {
 					switch (eco_->type()) {
 						case wwWARE:
 							i = tribe.ware_index(type_name);
-							if (tribe.get_ware_descr(i)->default_target_quantity(tribe.name()) ==
-								kInvalidWare) {
-								log("WARNING: target quantity configured for ware %s, "
-									"which should not have target quantity, "
-									"ignoring\n",
-									type_name);
-							} else {
-								Economy::TargetQuantity& tq = eco_->target_quantities_[i];
-								if (tq.last_modified) {
-									throw GameDataError("duplicated entry for ware %s", type_name);
+							if (tribe.has_ware(i)) {
+								if (tribe.get_ware_descr(i)->default_target_quantity(tribe.name()) ==
+									kInvalidWare) {
+									log("WARNING: target quantity configured for ware %s, "
+										"which should not have target quantity, "
+										"ignoring\n",
+										type_name);
+								} else {
+									Economy::TargetQuantity& tq = eco_->target_quantities_[i];
+									if (tq.last_modified) {
+										throw GameDataError("duplicated entry for ware %s", type_name);
+									}
+									tq.permanent = permanent;
+									tq.last_modified = last_modified;
 								}
-								tq.permanent = permanent;
-								tq.last_modified = last_modified;
+							} else {
+								log("WARNING: target quantity configured for \"%s\" in ware economy, "
+									"which is not a ware type defined in tribe "
+									"%s, ignoring\n",
+									type_name, tribe.name().c_str());
 							}
 							break;
 						case wwWORKER:
@@ -83,10 +90,10 @@ void EconomyDataPacket::read(FileRead& fr) {
 									tq.last_modified = last_modified;
 								}
 							} else {
-								log("WARNING: target quantity configured for \"%s\" in %s-economy, "
-									"which is not a ware or worker type defined in tribe "
+								log("WARNING: target quantity configured for \"%s\" in worker economy, "
+									"which is not a worker type defined in tribe "
 									"%s, ignoring\n",
-									type_name, eco_->type() == wwWARE ? "Ware" : "Worker", tribe.name().c_str());
+									type_name, tribe.name().c_str());
 							}
 							break;
 					}
@@ -115,10 +122,11 @@ void EconomyDataPacket::write(FileWrite& fw) {
 		const Economy::TargetQuantity& tq = eco_->target_quantities_[w_index];
 		if (Time const last_modified = tq.last_modified) {
 			fw.unsigned_32(last_modified);
-			if (eco_->type() == wwWARE)
+			if (eco_->type() == wwWARE) {
 				fw.c_string(tribe.get_ware_descr(w_index)->name());
-			else
+			} else {
 				fw.c_string(tribe.get_worker_descr(w_index)->name());
+			}
 			fw.unsigned_32(tq.permanent);
 		}
 	}

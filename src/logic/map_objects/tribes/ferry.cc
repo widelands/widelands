@@ -234,7 +234,7 @@ bool Ferry::init_fleet() {
 	assert(get_owner());
 	EditorGameBase& egbase = get_owner()->egbase();
 	FerryFleet* fleet = new FerryFleet(get_owner());
-	fleet->add_ferry(egbase, this);
+	fleet->add_ferry(this);
 	// fleet calls the set_fleet function appropriately
 	return fleet->init(egbase);
 }

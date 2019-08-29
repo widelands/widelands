@@ -69,7 +69,7 @@ struct FerryFleet : MapObject {
 	void cleanup(EditorGameBase&) override;
 	void update(EditorGameBase&, uint32_t tdelta = 100);
 
-	void add_ferry(EditorGameBase& egbase, Ferry* ferry);
+	void add_ferry(Ferry* ferry);
 	void remove_ferry(EditorGameBase& egbase, Ferry* ferry);
 
 	void log_general_info(const EditorGameBase&) const override;

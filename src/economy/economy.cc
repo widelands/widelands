@@ -319,10 +319,11 @@ void Economy::set_target_quantity(DescriptionIndex const ware_or_worker_type,
                                        Quantity const permanent,
                                        Time const mod_time) {
 #ifndef NDEBUG
-	if (type_ == wwWARE)
+	if (type_ == wwWARE) {
 		assert(owner().egbase().tribes().ware_exists(ware_or_worker_type));
-	else
+	} else {
 		assert(owner().egbase().tribes().worker_exists(ware_or_worker_type));
+	}
 #endif
 	TargetQuantity& tq = target_quantities_[ware_or_worker_type];
 	tq.permanent = permanent;
@@ -356,10 +357,11 @@ void Economy::add_wares_or_workers(DescriptionIndex const id, Quantity const cou
  */
 void Economy::remove_wares_or_workers(DescriptionIndex const id, Quantity const count) {
 #ifndef NDEBUG
-	if (type_ == wwWARE)
+	if (type_ == wwWARE) {
 		assert(owner().egbase().tribes().ware_exists(id));
-	else
+	} else {
 		assert(owner().egbase().tribes().worker_exists(id));
+	}
 #endif
 	wares_or_workers_.remove(id, count);
 
@@ -459,8 +461,9 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) c
 		for (const Warehouse* wh : warehouses_) {
 			quantity += type_ == wwWARE ?
 					wh->get_wares().stock(ware_or_worker_type) : wh->get_workers().stock(ware_or_worker_type);
-			if (t <= quantity)
+			if (t <= quantity) {
 				return false;
+			}
 		}
 		return true;
 
@@ -469,8 +472,9 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) c
 		for (const Request* temp_req : requests_) {
 			const Request& req = *temp_req;
 
-			if (req.get_type() == type_ && req.get_index() == ware_or_worker_type)
+			if (req.get_type() == type_ && req.get_index() == ware_or_worker_type) {
 				return true;
+			}
 		}
 		return false;
 	}
@@ -808,8 +812,9 @@ void Economy::create_requested_worker(Game& game, DescriptionIndex index) {
 		}
 	}
 
-	if (open_requests.empty())
+	if (open_requests.empty()) {
 		return;
+	}
 
 	// We have worker demands that are not fulfilled by supplies.
 	// Find warehouses where we can create the required workers,
@@ -843,8 +848,9 @@ void Economy::create_requested_worker(Game& game, DescriptionIndex index) {
 			total_available[eco] = wh_available;
 		}
 		else {
-			for (Quantity idx = 0; idx < wh_available.size(); ++idx)
+			for (Quantity idx = 0; idx < wh_available.size(); ++idx) {
 				total_available[eco][idx] += wh_available[idx];
+			}
 		}
 	}
 
@@ -902,8 +908,9 @@ void Economy::create_requested_worker(Game& game, DescriptionIndex index) {
 			}
 
 			// in case of planAtLeastOne undo a set to zero
-			if (nullptr != wh_with_plan && 0 == total_planned)
+			if (nullptr != wh_with_plan && 0 == total_planned) {
 				wh_with_plan->plan_workers(game, index, 1);
+			}
 
 		} else if (total_planned < demand) {
 			uint32_t plan_goal = std::min(can_create, demand);

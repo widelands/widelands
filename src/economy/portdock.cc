@@ -440,12 +440,14 @@ uint32_t PortDock::count_waiting(WareWorker waretype, DescriptionIndex wareindex
 
 		switch (waretype) {
 			case wwWORKER:
-				if (worker && worker->descr().worker_index() == wareindex)
+				if (worker && worker->descr().worker_index() == wareindex) {
 					count++;
+				}
 				break;
 			case wwWARE:
-				if (ware && ware->descr_index() == wareindex)
+				if (ware && ware->descr_index() == wareindex) {
 					count++;
+				}
 				break;
 		}
 	}

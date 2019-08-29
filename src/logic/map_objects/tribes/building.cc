@@ -216,6 +216,7 @@ uint32_t BuildingDescr::get_unoccupied_animation() const {
 	return get_animation(is_animation_known("unoccupied") ? "unoccupied" : "idle", nullptr);
 }
 
+// NOCOM I think the function name is too vague - how about "is_allowed_on_map" or "useful_on_map" or something like that?
 bool BuildingDescr::meets_requirements(bool seafaring_allowed, bool waterways_allowed) const {
 	if (needs_seafaring_ && needs_waterways_ ) {
 		return seafaring_allowed || waterways_allowed;
