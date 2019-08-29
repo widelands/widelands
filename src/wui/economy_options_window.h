@@ -121,7 +121,6 @@ private:
 		Widelands::Serial serial_;
 		Widelands::Player* player_;
 		Widelands::WareWorker type_;
-		bool can_act_;
 		TargetWaresDisplay display_;
 		EconomyOptionsWindow* economy_options_window_;
 	};

@@ -24,6 +24,7 @@
 
 #include "economy/economy.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -31,7 +32,6 @@
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "profile/profile.h"
 #include "scripting/factory.h"
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"

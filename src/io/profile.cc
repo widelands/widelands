@@ -17,7 +17,7 @@
  *
  */
 
-#include "profile/profile.h"
+#include "io/profile.h"
 
 #include <algorithm>
 #include <cctype>
@@ -62,8 +62,6 @@ static char const* falseWords[FALSE_WORDS] = {
    /** TRANSLATORS: A variant of the commandline parameter "false" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
    _("off"), "0"};
-
-Profile g_options(Profile::err_log);
 
 Section::Value::Value(const std::string& nname, const char* const nval)
    : used_(false), name_(nname) {

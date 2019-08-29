@@ -22,7 +22,7 @@
 
 #include <SDL_keyboard.h>
 
-#include "profile/profile.h"
+#include "io/profile.h"
 #include "ui_basic/button.h"
 #include "wui/interactive_gamebase.h"
 
@@ -56,7 +56,6 @@ private:
 	void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) override;
 
 	UI::UniqueWindow::Registry chat_;
-	UI::UniqueWindow::Registry options_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_SPECTATOR_H

@@ -22,7 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "profile/profile.h"
+#include "wlapplication_options.h"
 #include "wui/gamedetails.h"
 
 FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
@@ -101,8 +101,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	if (is_replay_) {
 		show_filenames_->changed.connect(
 		   boost::bind(&FullscreenMenuLoadGame::toggle_filenames, boost::ref(*this)));
-		show_filenames_->set_state(
-		   g_options.pull_section("global").get_bool("display_replay_filenames", true));
+		show_filenames_->set_state(get_config_bool("display_replay_filenames", true));
 	}
 
 	fill_table();
@@ -125,7 +124,7 @@ void FullscreenMenuLoadGame::layout() {
 
 void FullscreenMenuLoadGame::toggle_filenames() {
 	showing_filenames_ = show_filenames_->get_state();
-	g_options.pull_section("global").set_bool("display_replay_filenames", showing_filenames_);
+	set_config_bool("display_replay_filenames", showing_filenames_);
 
 	// Remember selection
 	const std::set<uint32_t> selected = load_or_save_.table().selections();

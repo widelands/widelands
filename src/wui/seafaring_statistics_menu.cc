@@ -98,7 +98,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                kButtonSize,
                kButtonSize,
                UI::ButtonStyle::kWuiPrimary,
-               g_gr->images().get("images/wui/menus/menu_watch_follow.png"),
+               g_gr->images().get("images/wui/menus/watch_follow.png"),
                /** TRANSLATORS: Tooltip in the seafaring statistics window */
                as_tooltip_text_with_hotkey(_("Watch the selected ship"), "w")),
      openwindowbtn_(&navigation_box_,

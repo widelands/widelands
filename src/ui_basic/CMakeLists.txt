@@ -71,7 +71,6 @@ wl_library(ui_basic
     graphic_wordwrap
     io_filesystem
     notifications
-    profile
     scripting_lua_interface
     scripting_lua_table
     sound

@@ -23,7 +23,7 @@ function ui_tests:_cnt(t)
 end
 
 function ui_tests:test_buttons_property()
-   assert_not_equal(nil, self.mv.buttons.buildhelp)
+   assert_not_nil(self.mv.buttons.help)
 end
 
 function ui_tests:test_window_property()
@@ -33,7 +33,7 @@ function ui_tests:test_window_property()
    self.mv.buttons.messages:click()
    assert_equal(1, self:_cnt(self.mv.windows))
 
-   assert_not_equal(nil, self.mv.windows.messages)
+   assert_not_nil(self.mv.windows.messages)
 end
 
 function ui_tests:test_window_property1()
@@ -42,8 +42,8 @@ function ui_tests:test_window_property1()
    self.mv.buttons.objectives:click()
    assert_equal(1, self:_cnt(self.mv.windows))
 
-   assert_not_equal(nil, self.mv.windows.objectives)
-   assert_equal(nil, self.mv.windows.messages)
+   assert_not_nil(self.mv.windows.objectives)
+   assert_nil(self.mv.windows.messages)
 end
 
 function ui_tests:test_position_x()
@@ -78,7 +78,7 @@ end
 function ui_tests:test_descendant_position_not_child()
    self.mv.buttons.messages:click()
    local w = self.mv.windows.messages
-   local b = self.mv.buttons.buildhelp
+   local b = self.mv.buttons.help
 
    assert_error("Not a descendant!", function()
       w:get_descendant_position(b)
@@ -105,17 +105,17 @@ end
 -- ========
 button_tests = lunit.TestCase("Button tests")
 function button_tests:setup()
-   self.b = wl.ui.MapView().buttons.buildhelp
-   wl.ui.MapView().buildhelp = false
+   self.b = wl.ui.MapView().buttons.help
+   for n,w in pairs(wl.ui.MapView().windows) do w:close() end
 end
 
 function button_tests:test_name()
-   assert_equal("buildhelp", self.b.name)
+   assert_equal("help", self.b.name)
 end
 function button_tests:test_click()
    self.b:click()
 
-   assert_equal(true, wl.ui.MapView().buildhelp)
+   assert_not_nil(wl.ui.MapView().windows.encyclopedia)
 end
 
 -- =========
@@ -159,13 +159,13 @@ mv_tests = lunit.TestCase("MapView tests")
 function mv_tests:setup()
    self.mv = wl.ui.MapView()
    self.mv.census = false
-   self.mv.buildhelp = false
+   self.mv.statistics = false
    for n,w in pairs(self.mv.windows) do w:close() end
 end
 
 function mv_tests:test_click()
    self.mv:click(map:get_field(10,10))
-   assert_not_equal(nil, self.mv.windows.field_action)
+   assert_not_nil(self.mv.windows.field_action)
 end
 
 function mv_tests:test_census()
@@ -179,3 +179,10 @@ function mv_tests:test_statistics()
    assert_equal(true, self.mv.statistics)
    assert_equal(false, self.mv.census)
 end
+
+
+-- =========
+-- Dropdowns
+-- =========
+
+--[[Dropdowns are tested in plain.wmf/test_ui.lua, because we need to call sleep()]]

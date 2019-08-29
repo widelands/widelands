@@ -36,6 +36,7 @@
 #include "logic/generic_save_handler.h"
 #include "logic/playersmanager.h"
 #include "ui_basic/messagebox.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_gamebase.h"
 
 InteractiveGameBase& GameMainMenuSaveGame::igbase() {
@@ -162,7 +163,7 @@ void GameMainMenuSaveGame::ok() {
 	}
 
 	std::string filename = filename_editbox_.text();
-	if (save_game(filename, !g_options.pull_section("global").get_bool("nozip", false))) {
+	if (save_game(filename, !get_config_bool("nozip", false))) {
 		die();
 	} else {
 		load_or_save_.table_.focus();

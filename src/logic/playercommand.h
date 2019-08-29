@@ -52,6 +52,8 @@ public:
 	PlayerCommand() : GameLogicCommand(0), sender_(0), cmdserial_(0) {
 	}
 
+	void write_id_and_sender(StreamWrite& ser);
+
 	PlayerNumber sender() const {
 		return sender_;
 	}
@@ -62,6 +64,7 @@ public:
 		cmdserial_ = s;
 	}
 
+	// For networking and replays
 	virtual void serialize(StreamWrite&) = 0;
 	static Widelands::PlayerCommand* deserialize(StreamRead&);
 
@@ -138,7 +141,7 @@ struct CmdBuildFlag : public PlayerCommand {
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kFlag;
+		return QueueCommandTypes::kBuildFlag;
 	}
 
 	void execute(Game&) override;
@@ -232,7 +235,7 @@ struct CmdStartStopBuilding : public PlayerCommand {
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kStopBuilding;
+		return QueueCommandTypes::kStartStopBuilding;
 	}
 
 	explicit CmdStartStopBuilding(StreamRead&);
@@ -282,7 +285,7 @@ struct CmdStartOrCancelExpedition : public PlayerCommand {
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kPortStartExpedition;
+		return QueueCommandTypes::kStartOrCancelExpedition;
 	}
 
 	explicit CmdStartOrCancelExpedition(StreamRead&);
@@ -381,7 +384,7 @@ struct CmdShipScoutDirection : public PlayerCommand {
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kShipScout;
+		return QueueCommandTypes::kShipScoutDirection;
 	}
 
 	explicit CmdShipScoutDirection(StreamRead&);
@@ -433,7 +436,7 @@ struct CmdShipExploreIsland : public PlayerCommand {
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kShipExplore;
+		return QueueCommandTypes::kShipExploreIsland;
 	}
 
 	explicit CmdShipExploreIsland(StreamRead&);
@@ -456,7 +459,7 @@ struct CmdShipSink : public PlayerCommand {
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kSinkShip;
+		return QueueCommandTypes::kShipSink;
 	}
 
 	explicit CmdShipSink(StreamRead&);
