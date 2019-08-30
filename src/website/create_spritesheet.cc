@@ -108,8 +108,45 @@ void find_margins(const std::vector<const Image*>& images, Recti* margins) {
 	}
 }
 
+// Write a spritesheet of the given images into the given filename
+void write_spritesheet(std::vector<const Image*> imgs, const std::string& filename, const Recti& rect, int columns, int spritesheet_width, int spritesheet_height, FileSystem* out_filesystem) {
+	log("CREATING %d x %d spritesheet with %d columns, %" PRIuS " frames. Image size: %d x %d.\n", spritesheet_width, spritesheet_height, columns, imgs.size(), rect.w, rect.h);
+	std::unique_ptr<Texture> spritesheet(new Texture(spritesheet_width, spritesheet_height));
+	spritesheet->fill_rect(Rectf(Vector2f::zero(), spritesheet_width, spritesheet_height), RGBAColor(0, 0, 0, 0));
+	int row = 0;
+	int col = 0;
+	for (size_t i = 0; i < imgs.size(); ++i, ++col) {
+		if (col == columns) {
+			col = 0;
+			++row;
+		}
+		const Image* image = imgs[i];
+		const int x = col * rect.w;
+		const int y = row * rect.h;
+		log("Frame %" PRIuS " at: %d, %d, %d, %d\n", i, x, y, x + rect.w, y + rect.h);
+		spritesheet->blit(Rectf(x, y, rect.w, rect.h), *image, Rectf(rect.x, rect.y, rect.w, rect.h), 1., BlendMode::Copy);
+	}
+	std::unique_ptr<::StreamWrite> sw(out_filesystem->open_stream_write(filename));
+	save_to_png(spritesheet.get(), sw.get(), ColorType::RGBA);
+	log("Wrote spritesheet to %s/%s\n", out_filesystem->get_basename().c_str(), filename.c_str());
+}
+
+// Container for writing spritesheet files
+struct SpritesheetData {
+	explicit SpritesheetData(const std::string& fb,
+						   const std::vector<const Image*>& im,
+						   const std::vector<const Image*>& pc) :
+		filename_base(fb),
+		images(im),
+		pc_masks(pc) {}
+
+	const std::string filename_base;
+	const std::vector<const Image*> images;
+	const std::vector<const Image*> pc_masks;
+};
+
 // Reads animation data from engine and then creates spritesheets and the corresponding lua code.
-void write_spritesheet(Widelands::EditorGameBase& egbase,
+void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
                      const std::string& map_object_name,
                      const std::string& animation_name,
                      FileSystem* out_filesystem) {
@@ -149,10 +186,10 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 		return;
 	}
 
-	const Animation& animation =
+	const Animation& representative_animation =
 	   g_gr->animations().get_animation(descr->get_animation(is_directional ? animation_name + "_ne" : animation_name, nullptr));
 
-	const int nr_frames = animation.nr_frames();
+	const int nr_frames = representative_animation.nr_frames();
 
 	// Only create spritesheet if animation has more than 1 frame.
 	if (nr_frames < 2) {
@@ -160,29 +197,6 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 			descr->name().c_str());
 		return;
 	}
-
-	// Write a spritesheet of the given images into the given filename
-	const auto write_spritesheet = [out_filesystem](std::vector<const Image*> imgs, const std::string& filename, const Recti& rect, int columns, int spritesheet_width, int spritesheet_height) {
-		log("CREATING %d x %d spritesheet with %d columns, %" PRIuS " frames. Image size: %d x %d.\n", spritesheet_width, spritesheet_height, columns, imgs.size(), rect.w, rect.h);
-		std::unique_ptr<Texture> spritesheet(new Texture(spritesheet_width, spritesheet_height));
-		spritesheet->fill_rect(Rectf(Vector2f::zero(), spritesheet_width, spritesheet_height), RGBAColor(0, 0, 0, 0));
-		int row = 0;
-		int col = 0;
-		for (size_t i = 0; i < imgs.size(); ++i, ++col) {
-			if (col == columns) {
-				col = 0;
-				++row;
-			}
-			const Image* image = imgs[i];
-			const int x = col * rect.w;
-			const int y = row * rect.h;
-			log("Frame %" PRIuS " at: %d, %d, %d, %d\n", i, x, y, x + rect.w, y + rect.h);
-			spritesheet->blit(Rectf(x, y, rect.w, rect.h), *image, Rectf(rect.x, rect.y, rect.w, rect.h), 1., BlendMode::Copy);
-		}
-		std::unique_ptr<::StreamWrite> sw(out_filesystem->open_stream_write(filename));
-		save_to_png(spritesheet.get(), sw.get(), ColorType::RGBA);
-		log("Wrote spritesheet to %s/%s\n", out_filesystem->get_basename().c_str(), filename.c_str());
-	};
 
 	// Add global paramaters for this animation to Lua
 	std::unique_ptr<LuaTree::Element> lua_object(new LuaTree::Element());
@@ -192,7 +206,7 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 
 	// We only write FPS if the animation is not a build animation and does not use the default FPS.
 	if (animation_name != "build") {
-		uint32_t frametime = animation.frametime();
+		uint32_t frametime = representative_animation.frametime();
 		assert(frametime > 0);
 		if (frametime != kFrameLength) {
 			assert(nr_frames > 1);
@@ -201,7 +215,7 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	}
 
 	log("WRITING '%s' animation for '%s'. It has %d pictures and %" PRIuS " scales.\n", animation_name.c_str(),
-		descr->name().c_str(), nr_frames, animation.available_scales().size());
+		descr->name().c_str(), nr_frames, representative_animation.available_scales().size());
 
 	const int columns = floor(sqrt(nr_frames));
 	int rows = 1;
@@ -213,7 +227,7 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	lua_animation->add_int("columns", columns);
 	lua_animation->add_int("rows", rows);
 
-	const int representative_frame = animation.representative_frame();
+	const int representative_frame = representative_animation.representative_frame();
 	if (representative_frame > 0) {
 		lua_animation->add_int("representative_frame", representative_frame);
 	}
@@ -223,37 +237,9 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	}
 
 	// Create image files for each scale and find & write the hotspot
-	for (const float scale : animation.available_scales()) {
-
-		// Find margins for trimming
-		std::vector<const Image*> images = animation.images(scale);
-		Recti margins(images.front()->width() / 2, images.front()->height() / 2, images.front()->width() / 2, images.front()->height() / 2);
-		if (is_directional) {
-			for (int dir = 1; dir <= 6; ++dir) {
-				const std::string directional_animname =
-				   animation_name + animation_direction_names[dir - 1];
-				if (!descr->is_animation_known(directional_animname)) {
-					throw wexception("Missing directional animation '%s\'",
-										directional_animname.c_str());
-				}
-				const Animation& directional_animation =
-				 g_gr->animations().get_animation(descr->get_animation(directional_animname, nullptr));
-				find_margins(directional_animation.images(scale), &margins);
-			}
-		} else {
-			find_margins(images, &margins);
-		}
-
-		// Write the spritesheet(s)
-		const int spritesheet_width = columns * margins.w;
-		const int spritesheet_height = rows * margins.h;
-
-		if (spritesheet_width > kMinimumSizeForTextures || spritesheet_height > kMinimumSizeForTextures) {
-			egbase.cleanup_objects();
-			throw wexception("Unable to create spritesheet; either the width (%d) or the height (%d) are bigger than the minimum supported texture size (%d)", spritesheet_width, spritesheet_height, kMinimumSizeForTextures);
-		}
-
-		// Write spritesheet for animation and player colors
+	for (const float scale : representative_animation.available_scales()) {
+		// Collect animation data to write
+		std::vector<SpritesheetData> spritesheets_to_write;
 		if (is_directional) {
 			for (int dir = 1; dir <= 6; ++dir) {
 				const std::string directional_animname =
@@ -266,25 +252,45 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 				   (boost::format("%s%s_%d") % animation_name % animation_direction_names[dir - 1] % scale).str();
 				const Animation& directional_animation =
 				 g_gr->animations().get_animation(descr->get_animation(directional_animname, nullptr));
-				write_spritesheet(directional_animation.images(scale), filename_base + ".png", margins, columns, spritesheet_width, spritesheet_height);
-				std::vector<const Image*> pc_masks = directional_animation.pc_masks(scale);
-				if (!pc_masks.empty()) {
-					write_spritesheet(pc_masks, filename_base + "_pc.png", margins, columns, spritesheet_width, spritesheet_height);
-				}
+				spritesheets_to_write.push_back(SpritesheetData(filename_base,
+										   directional_animation.images(scale),
+										   directional_animation.pc_masks(scale)));
 			}
+
 		} else {
-			const std::string filename_base = (boost::format("%s_%d") % animation_name % scale).str();
-			write_spritesheet(images, filename_base + ".png", margins, columns, spritesheet_width, spritesheet_height);
-			std::vector<const Image*> pc_masks = animation.pc_masks(scale);
-			if (!pc_masks.empty()) {
-				write_spritesheet(pc_masks, filename_base + "_pc.png", margins, columns, spritesheet_width, spritesheet_height);
+			spritesheets_to_write.push_back(SpritesheetData((boost::format("%s_%d") % animation_name % scale).str(),
+									   representative_animation.images(scale),
+									   representative_animation.pc_masks(scale)));
+		}
+
+		// Find margins for trimming
+		std::vector<const Image*> images = spritesheets_to_write.front().images;
+		Recti margins(images.front()->width() / 2, images.front()->height() / 2, images.front()->width() / 2, images.front()->height() / 2);
+		for (const auto& animation_data : spritesheets_to_write) {
+			find_margins(animation_data.images, &margins);
+		}
+
+		// Write the spritesheet(s)
+		const int spritesheet_width = columns * margins.w;
+		const int spritesheet_height = rows * margins.h;
+
+		if (spritesheet_width > kMinimumSizeForTextures || spritesheet_height > kMinimumSizeForTextures) {
+			egbase.cleanup_objects();
+			throw wexception("Unable to create spritesheet; either the width (%d) or the height (%d) are bigger than the minimum supported texture size (%d)", spritesheet_width, spritesheet_height, kMinimumSizeForTextures);
+		}
+
+		// Write spritesheets for animation and player colors
+		for (const auto& spritesheet_data : spritesheets_to_write) {
+			write_spritesheet(spritesheet_data.images, spritesheet_data.filename_base + ".png", margins, columns, spritesheet_width, spritesheet_height, out_filesystem);
+			if (!spritesheet_data.pc_masks.empty()) {
+				write_spritesheet(spritesheet_data.pc_masks, spritesheet_data.filename_base + "_pc.png", margins, columns, spritesheet_width, spritesheet_height, out_filesystem);
 			}
 		}
 
 		if (scale == 1.0f) {
 			// Adjust and write hostspot
 			LuaTree::Object* lua_table = lua_animation->add_object("hotspot");
-			const Vector2i& hotspot = animation.hotspot();
+			const Vector2i& hotspot = representative_animation.hotspot();
 			lua_table->add_int("", hotspot.x - margins.x);
 			lua_table->add_int("", hotspot.y - margins.y);
 		}
@@ -316,7 +322,7 @@ int main(int argc, char** argv) {
 		initialize();
 		std::unique_ptr<FileSystem> out_filesystem(&FileSystem::create(output_path));
 		Widelands::EditorGameBase egbase(nullptr);
-		write_spritesheet(egbase, map_object_name, animation_name, out_filesystem.get());
+		write_animation_spritesheets(egbase, map_object_name, animation_name, out_filesystem.get());
 		egbase.cleanup_objects();
 	} catch (std::exception& e) {
 		log("Exception: %s.\n", e.what());
