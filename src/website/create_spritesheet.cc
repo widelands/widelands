@@ -97,6 +97,17 @@ void find_trim_rect(Texture* texture, Recti* rect) {
 	}
 }
 
+// Finds margins so that we can crop the animation to save space
+void find_margins(const std::vector<const Image*>& images, Recti* margins) {
+	for (const Image* image : images) {
+		std::unique_ptr<Texture> temp_texture(new Texture(image->width(), image->height()));
+		Rectf image_dimensions(Vector2f::zero(), image->width(), image->height());
+		temp_texture->blit(image_dimensions, *image, image_dimensions, 1., BlendMode::Copy);
+		temp_texture->lock();
+		find_trim_rect(temp_texture.get(), margins);
+	}
+}
+
 // Reads animation data from engine and then creates spritesheets and the corresponding lua code.
 void write_spritesheet(Widelands::EditorGameBase& egbase,
                      const std::string& map_object_name,
@@ -211,20 +222,29 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 		lua_animation->add_bool("directional", true);
 	}
 
-	// Create image files for each scale
+	// Create image files for each scale and find & write the hotspot
 	for (const float scale : animation.available_scales()) {
+
+		// Find margins for trimming
 		std::vector<const Image*> images = animation.images(scale);
 		Recti margins(images.front()->width() / 2, images.front()->height() / 2, images.front()->width() / 2, images.front()->height() / 2);
-
-		// Crop the animation to save space
-		for (const Image* image : images) {
-			std::unique_ptr<Texture> temp_texture(new Texture(image->width(), image->height()));
-			Rectf image_dimensions(Vector2f::zero(), image->width(), image->height());
-			temp_texture->blit(image_dimensions, *image, image_dimensions, 1., BlendMode::Copy);
-			temp_texture->lock();
-			find_trim_rect(temp_texture.get(), &margins);
+		if (is_directional) {
+			for (int dir = 1; dir <= 6; ++dir) {
+				const std::string directional_animname =
+				   animation_name + animation_direction_names[dir - 1];
+				if (!descr->is_animation_known(directional_animname)) {
+					throw wexception("Missing directional animation '%s\'",
+										directional_animname.c_str());
+				}
+				const Animation& directional_animation =
+				 g_gr->animations().get_animation(descr->get_animation(directional_animname, nullptr));
+				find_margins(directional_animation.images(scale), &margins);
+			}
+		} else {
+			find_margins(images, &margins);
 		}
 
+		// Write the spritesheet(s)
 		const int spritesheet_width = columns * margins.w;
 		const int spritesheet_height = rows * margins.h;
 
@@ -234,7 +254,6 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 		}
 
 		// Write spritesheet for animation and player colors
-		// NOCOM trim directional animations
 		if (is_directional) {
 			for (int dir = 1; dir <= 6; ++dir) {
 				const std::string directional_animname =
