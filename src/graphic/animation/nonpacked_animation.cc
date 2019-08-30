@@ -68,15 +68,12 @@ NonPackedAnimation::NonPackedMipMapEntry::NonPackedMipMapEntry(std::vector<std::
 	assert(!image_files.empty());
 }
 
-
-// Loads the graphics if they are not yet loaded.
 void NonPackedAnimation::NonPackedMipMapEntry::ensure_graphics_are_loaded() const {
 	if (frames.empty()) {
 		const_cast<NonPackedMipMapEntry*>(this)->load_graphics();
 	}
 }
 
-// Load the needed graphics from disk.
 void NonPackedAnimation::NonPackedMipMapEntry::load_graphics() {
 	if (image_files.empty()) {
 		throw Widelands::GameDataError("animation without image files.");

@@ -42,7 +42,6 @@ public:
 	~NonPackedAnimation() override  = default;
 	explicit NonPackedAnimation(const LuaTable& table, const std::string& basename);
 
-	// Implements Animation.
 	const Image* representative_image(const RGBColor* clr) const override;
 
 	std::vector<const Image*> images(float scale) const override;
@@ -51,17 +50,12 @@ public:
 private:
 	void add_scale_if_files_present(const std::string& basename, const std::string& directory,
 								   float scale_as_float, const std::string& scale_as_string) override;
-	// Load the needed graphics from disk.
-	void load_graphics();
 
 	struct NonPackedMipMapEntry : Animation::MipMapEntry {
 		explicit NonPackedMipMapEntry(std::vector<std::string> files);
 		~NonPackedMipMapEntry() override = default;
 
-		// Loads the graphics if they are not yet loaded.
 		void ensure_graphics_are_loaded() const override;
-
-		// Load the needed graphics from disk.
 		void load_graphics() override;
 
 		void blit(uint32_t idx,
@@ -73,17 +67,17 @@ private:
 		int width() const override;
 		int height() const override;
 
-		// Image files on disk
+		/// Image files on disk
 		std::vector<std::string> image_files;
 
-		// Loaded images for each frame
+		/// Loaded images for each frame
 		std::vector<const Image*> frames;
 
-		// Loaded player color mask images for each frame
+		/// Loaded player color mask images for each frame
 		std::vector<const Image*> playercolor_mask_frames;
 
 	private:
-		// Player color mask files on disk
+		/// Player color mask files on disk
 		std::vector<std::string> playercolor_mask_image_files;
 	};
 };

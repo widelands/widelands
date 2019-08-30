@@ -41,7 +41,6 @@ public:
 	~SpriteSheetAnimation() override = default;
 	explicit SpriteSheetAnimation(const LuaTable& table, const std::string& basename);
 
-	// Implements Animation.
 	const Image* representative_image(const RGBColor* clr) const override;
 
 	std::vector<const Image*> images(float scale) const override;
@@ -51,16 +50,10 @@ private:
 	void add_scale_if_files_present(const std::string& basename, const std::string& directory,
 								   float scale_as_float, const std::string& scale_as_string) override;
 
-	// Load the needed graphics from disk.
-	void load_graphics();
-
 	struct SpriteSheetMipMapEntry : Animation::MipMapEntry {
 		explicit SpriteSheetMipMapEntry(const std::string& file, int init_rows, int columns);
 
-		// Loads the graphics if they are not yet loaded.
 		void ensure_graphics_are_loaded() const override;
-
-		// Load the needed graphics from disk.
 		void load_graphics() override;
 
 		void blit(uint32_t idx,
@@ -72,26 +65,32 @@ private:
 		int width() const override;
 		int height() const override;
 
-		// Sprite sheet file name on disk
-		const std::string sheet_file;
-
-		// Loaded sprite sheet for all frames
+		/// Loaded sprite sheet for all frames
 		const Image* sheet;
 
-		// Loaded player color mask sprite sheet for all frames
+		/// Loaded player color mask sprite sheet for all frames
 		const Image* playercolor_mask_sheet;
 
+		/// Number of rows for the spritesheets
 		const int rows;
+		/// Number of columns for the spritesheets
 		const int columns;
+		/// Texture width
 		int w;
+		/// Texture height
 		int h;
 
 	private:
-		// Player color mask file on disk
+		/// Sprite sheet file name on disk
+		const std::string sheet_file;
+
+		/// Player color mask file on disk
 		std::string playercolor_mask_sheet_file;
 	};
 
+	/// Number of rows for the spritesheets
 	int rows_;
+	/// Number of columns for the spritesheets
 	int columns_;
 };
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_SPRITESHEET_ANIMATION_H

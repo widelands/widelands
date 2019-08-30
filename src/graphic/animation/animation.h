@@ -40,11 +40,6 @@
 /// The default animation speed
 constexpr int kFrameLength = 250;
 
-class Image;
-// class LuaTable;
-class Surface;
-struct RGBColor;
-
 /**
  * Representation of an Animation in the game. An animation is a looping set of
  * image frames and their corresponding sound effects. This class makes no
@@ -56,7 +51,7 @@ struct RGBColor;
  */
 class Animation {
 public:
-	// NOCOM document
+	/// Whether we have an animation consisting of multiple files or of 1 single spritesheet file
 	enum class Type {
 		kFile,
 		kSpritesheet
@@ -70,9 +65,12 @@ public:
 
 	/// The height of this animation.
 	int height() const;
+	/// The width of this animation.
 	int width() const;
+	/// The hotspot of this animation for aligning it on the map.
 	const Vector2i& hotspot() const;
 
+	/// The frame to be blitted for the given 'time'
 	uint32_t current_frame(uint32_t time) const;
 
 	/// The size of the animation source images in pixels. Use 'percent_from_bottom' to crop the
@@ -111,39 +109,49 @@ public:
 	                  Surface* target, float scale) const;
 
 	/// We need to expose these for the packed animation,
-	/// so that the create_spritesheet utility can use them
+	/// so that the create_spritesheet utility can use them.
+	/// Do not use otherwise.
 	virtual std::vector<const Image*> images(float scale) const = 0;
 	/// We need to expose these for the packed animation,
-	/// so that the create_spritemap utility can use them
+	/// so that the create_spritemap utility can use them.
+	/// Do not use otherwise.
 	virtual std::vector<const Image*> pc_masks(float scale) const = 0;
+
+	/// The scales for which this animation has exact images.
 	std::set<float> available_scales() const;
 
 	/// Load animation images into memory for default scale.
 	void load_default_scale_and_sounds() const;
+
+	/// The frame to be shown in menus etc.
 	int representative_frame() const;
 
 protected:
+	/// Animation data for a particular scale
 	struct MipMapEntry {
 
 		MipMapEntry();
 		virtual ~MipMapEntry() {}
 
-		// Loads the graphics if they are not yet loaded.
+		/// Loads the graphics if they are not yet loaded.
 		virtual void ensure_graphics_are_loaded() const = 0;
 
-		// Load the needed graphics from disk.
+		/// Load the needed graphics from disk.
 		virtual void load_graphics() = 0;
 
+		/// Blit the frame at the given index
 		virtual void blit(uint32_t idx,
 		          const Rectf& source_rect,
 		          const Rectf& destination_rect,
 		          const RGBColor* clr,
 		          Surface* target) const = 0;
 
+		/// The width of this mipmap entry's textures
 		virtual int width() const = 0;
+		/// The height of this mipmap entry's textures
 		virtual int height() const = 0;
 
-		// Whether this image set has player color masks provided
+		/// Whether this texture set has player color masks provided
 		bool has_playercolor_masks;
 	};
 
@@ -163,27 +171,36 @@ protected:
 	/// Ensures that the graphics are loaded before returning the entry
 	const Animation::MipMapEntry& mipmap_entry(float scale) const;
 
+	/// The number of textures this animation will play
 	uint16_t nr_frames_;
 
+	/// Texture sets for different zoom scales
 	std::map<float, std::unique_ptr<MipMapEntry>, MipMapCompare> mipmaps_;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);
 
-	// Look for a file or filess for the given scale, and if we have any, add a mipmap entry for them.
+	/// Look for a file or files for the given scale, and if we have any, add a mipmap entry for them.
 	virtual void add_scale_if_files_present(const std::string& basename, const std::string& directory,
 							   float scale_as_float, const std::string& scale_as_string) = 0;
 
+	/// Find the best scale for blitting at the given zoom 'scale'
 	float find_best_scale(float scale) const;
 
+	/// The frame to show in menus, in the in-game help etc.
 	int representative_frame_;
 
+	/// For aligning the image on the map
 	Vector2i hotspot_ = Vector2i::zero();
+
+	/// The length of each frame
 	const uint32_t frametime_;
+	/// If this is 'true', don't loop the animation
 	const bool play_once_;
 
-	// ID of sound effect that will be played at frame 0.
+	/// ID of sound effect that will be played at frame 0, or kNoSoundEffect if there is no sound effect to be played.
 	FxId sound_effect_;
+	/// How likely it is that the sound effect will be played
 	int32_t sound_priority_;
 };
 

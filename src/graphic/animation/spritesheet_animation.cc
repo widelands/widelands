@@ -47,7 +47,7 @@ SpriteSheetAnimation::MipMapEntry IMPLEMENTATION
 */
 
 SpriteSheetAnimation::SpriteSheetMipMapEntry::SpriteSheetMipMapEntry(const std::string& file, int init_rows, int init_columns)
-   : Animation::MipMapEntry(), sheet_file(file), sheet(nullptr), playercolor_mask_sheet(nullptr), rows(init_rows), columns(init_columns), w(0), h(0), playercolor_mask_sheet_file("") {
+   : Animation::MipMapEntry(), sheet(nullptr), playercolor_mask_sheet(nullptr), rows(init_rows), columns(init_columns), w(0), h(0), sheet_file(file), playercolor_mask_sheet_file("") {
 
 	assert(g_fs->file_exists(file));
 
@@ -61,14 +61,12 @@ SpriteSheetAnimation::SpriteSheetMipMapEntry::SpriteSheetMipMapEntry(const std::
 }
 
 
-// Loads the graphics if they are not yet loaded.
 void SpriteSheetAnimation::SpriteSheetMipMapEntry::ensure_graphics_are_loaded() const {
 	if (sheet == nullptr) {
 		const_cast<SpriteSheetMipMapEntry*>(this)->load_graphics();
 	}
 }
 
-// Load the needed graphics from disk.
 void SpriteSheetAnimation::SpriteSheetMipMapEntry::load_graphics() {
 	sheet = g_gr->images().get(sheet_file);
 
@@ -152,8 +150,8 @@ SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table, const std::str
 		// Perform some checks to make sure that the data is complete and consistent
 		const SpriteSheetMipMapEntry& first = dynamic_cast<const SpriteSheetMipMapEntry&>(*mipmaps_.begin()->second.get());
 		if (table.has_key("fps") && nr_frames_ == 1) {
-				throw Widelands::GameDataError("Animation with one frame in sprite sheet %s must not have 'fps'",
-				                               first.sheet_file.c_str());
+				throw Widelands::GameDataError("'%s' sprite sheet animation with one frame must not have 'fps'",
+				                               basename.c_str());
 		}
 
 		if (representative_frame() < 0 || representative_frame() > nr_frames_ - 1) {
