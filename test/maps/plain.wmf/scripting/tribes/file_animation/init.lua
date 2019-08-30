@@ -18,4 +18,13 @@ tribes:new_worker_type {
    buildcost = {}, -- This will give the worker the property "buildable"
 
    animations = animations,
+
+   programs = {
+      show_idle = {
+         "findspace=size:any radius:5",
+         "walk=coords",
+         "animate=idle 10000",
+         "return"
+      }
+   },
 }

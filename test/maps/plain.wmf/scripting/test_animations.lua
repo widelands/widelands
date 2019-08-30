@@ -13,9 +13,8 @@ run(function()
    p1:place_flag(map:get_field(20,26))
    local building = p1:place_building("barbarians_spritesheet_animation", wl.Game().map:get_field(17, 21), false, true)
 
-   -- NOCOM make the worker walk out of the building and idle
-
-   sleep(1000 * 10)
+   -- Make the worker walk out of the building and idle for a few times
+   sleep(5 * 40000)
 
    print("# All Tests passed.")
    wl.ui.MapView():close()
