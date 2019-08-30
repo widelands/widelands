@@ -46,6 +46,7 @@ char const* const animation_direction_names[6] = {"_ne", "_e", "_se", "_sw", "_w
 
 // Find trimmed rect according to transparent pixels.
 // Lock texture before you call this function.
+// TODO(GunChleoc): Revisit trimming when we have fresh Blender exports, to make sure that we won't jump a pixel when zooming
 void find_trim_rect(Texture* texture, Recti* rect) {
 	const int max_x = texture->width();
 	const int max_y = texture->height();
@@ -181,6 +182,7 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	if (animation.nr_frames() > 1) {
 		uint32_t frametime = animation.frametime();
 		assert(frametime > 0);
+		// NOCOM do not add default FPS
 		if (nr_frames > 1 && animation_name != "build" && frametime != kFrameLength) {
 			lua_animation->add_int("fps", 1000 / frametime);
 		}

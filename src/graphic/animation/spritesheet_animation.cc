@@ -101,7 +101,7 @@ void SpriteSheetAnimation::SpriteSheetMipMapEntry::blit(uint32_t idx,
 	assert(static_cast<int>(idx) <= columns * rows);
 
 	const int column = idx % columns;
-	const int row = idx / rows;
+	const int row = idx / columns;
 
 	Rectf frame_rect(source_rect.x + column * width(), source_rect.y + row * height(),
 					 source_rect.w, source_rect.h);
