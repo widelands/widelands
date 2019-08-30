@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <SDL.h>
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/log.h"
@@ -150,10 +151,12 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
                      const std::string& map_object_name,
                      const std::string& animation_name,
                      FileSystem* out_filesystem) {
-	egbase.mutable_tribes()->postload();  // Make sure that all values have been set.
 	const Widelands::Tribes& tribes = egbase.tribes();
 	const Widelands::World& world = egbase.world();
 	log("==========================================\n");
+
+	bool is_fontier_or_flag_animation = false;
+	uint32_t frontier_or_flag_animation_id = 0;
 
 	// Get the map object
 	const Widelands::MapObjectDescr* descr = nullptr;
@@ -172,29 +175,53 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 	} else if (world.get_critter_descr(map_object_name)) {
 		descr = world.get_critter_descr(map_object_name);
 	} else {
+		// Frontier and flag animations need special treatment
+		std::vector<std::string> map_object_name_vector;
+		boost::split(
+		   map_object_name_vector, map_object_name, boost::is_any_of("_"));
+		if (map_object_name_vector.size() == 2) {
+			const Widelands::TribeDescr* tribe =
+			   tribes.get_tribe_descr(tribes.tribe_index(map_object_name_vector.front()));
+			if (map_object_name_vector.back() == "frontier") {
+				is_fontier_or_flag_animation = true;
+				frontier_or_flag_animation_id = tribe->frontier_animation();
+			} else if (map_object_name_vector.back() == "flag") {
+				is_fontier_or_flag_animation = true;
+				frontier_or_flag_animation_id = tribe->flag_animation();
+			}
+		}
+	}
+	if (!is_fontier_or_flag_animation && descr == nullptr) {
 		log("ABORTING. Unable to find map object for '%s'!\n", map_object_name.c_str());
 		return;
 	}
-	assert(descr->name() == map_object_name);
+	assert(is_fontier_or_flag_animation || (descr->name() == map_object_name));
 
-	const bool is_directional = descr->is_animation_known(animation_name + animation_direction_names[0]);
+	const bool is_directional = !is_fontier_or_flag_animation && descr->is_animation_known(animation_name + animation_direction_names[0]);
 
-	// Validate the animation
-	if (!is_directional && !descr->is_animation_known(animation_name)) {
-		log("ABORTING. Unknown animation '%s' for '%s'\n", animation_name.c_str(),
-			descr->name().c_str());
-		return;
+	// Ensure that the animation exists
+	if (!is_fontier_or_flag_animation) {
+		if (!descr->is_animation_known(animation_name) && !descr->is_animation_known(animation_name + "_ne")) {
+			log("ABORTING. Unknown animation '%s' for '%s'\n", animation_name.c_str(),
+				map_object_name.c_str());
+			return;
+		}
 	}
 
+	// Representative animation for collecting global paramaters for the animation set
 	const Animation& representative_animation =
-	   g_gr->animations().get_animation(descr->get_animation(is_directional ? animation_name + "_ne" : animation_name, nullptr));
+			g_gr->animations().get_animation(is_fontier_or_flag_animation ?
+												 frontier_or_flag_animation_id :
+												 descr->get_animation(is_directional ?
+																		  animation_name + "_ne" :
+																		  animation_name, nullptr));
 
 	const int nr_frames = representative_animation.nr_frames();
 
 	// Only create spritesheet if animation has more than 1 frame.
 	if (nr_frames < 2) {
 		log("ABORTING. Animation '%s' for '%s' has less than 2 images and doesn't need a spritesheet.\n", animation_name.c_str(),
-			descr->name().c_str());
+			map_object_name.c_str());
 		return;
 	}
 
@@ -215,7 +242,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 	}
 
 	log("WRITING '%s' animation for '%s'. It has %d pictures and %" PRIuS " scales.\n", animation_name.c_str(),
-		descr->name().c_str(), nr_frames, representative_animation.available_scales().size());
+		map_object_name.c_str(), nr_frames, representative_animation.available_scales().size());
 
 	const int columns = floor(sqrt(nr_frames));
 	int rows = 1;
@@ -224,8 +251,8 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 	}
 
 	lua_animation->add_int("frames", nr_frames);
-	lua_animation->add_int("columns", columns);
 	lua_animation->add_int("rows", rows);
+	lua_animation->add_int("columns", columns);
 
 	const int representative_frame = representative_animation.representative_frame();
 	if (representative_frame > 0) {

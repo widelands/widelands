@@ -115,7 +115,8 @@ then delete the old animation code in the map object's ``init.lua`` file and add
 The tool will print the new code to the console for you, so all you need to do is copy/paste
 and then add any missing optional parameters back in.
 
-Note that the table for spritesheets is called ``spritesheets``, not ``animations``!
+Note that except for flag and frontier animations, the table for spritesheets is
+called ``spritesheets``, not ``animations``!
 This distinction is necessary for performance reasons.
 
 Spritesheets have three additional mandatory parameters so that the engine can
@@ -142,8 +143,8 @@ Here's the example from above as spritesheets:
          basename = "idle",
          fps = 4,
          frames = 150,
-         columns = 12,
          rows = 13,
+         columns = 12,
          hotspot = { 5, 7 }
          sound_effect = {
             path = "sound/foo/bar",
@@ -156,8 +157,8 @@ Here's the example from above as spritesheets:
          basename = "walk",
          fps = 4,
          frames = 10,
-         columns = 3,
          rows = 4,
+         columns = 3,
          directional = true,
          hotspot = { 5, 7 }
       },
