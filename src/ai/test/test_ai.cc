@@ -36,7 +36,7 @@ class World;
 
 using namespace Widelands;
 
-BOOST_AUTO_TEST_SUITE(ai)
+BOOST_AUTO_TEST_SUITE(warehouse_distance)
 
 BOOST_AUTO_TEST_CASE(flag_distance_soft_expiry) {
 	FlagWarehouseDistances fw;
