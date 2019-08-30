@@ -179,11 +179,12 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	lua_animation->add_raw("directory", "path.dirname(__file__)"); // NOCOM no idea why this is leaking memory
 	lua_animation->add_string("basename", animation_name);
 
-	if (animation.nr_frames() > 1) {
+	// We only write FPS if the animation is not a build animation and does not use the default FPS.
+	if (animation_name != "build") {
 		uint32_t frametime = animation.frametime();
 		assert(frametime > 0);
-		// NOCOM do not add default FPS
-		if (nr_frames > 1 && animation_name != "build" && frametime != kFrameLength) {
+		if (frametime != kFrameLength) {
+			assert(nr_frames > 1);
 			lua_animation->add_int("fps", 1000 / frametime);
 		}
 	}
@@ -306,6 +307,3 @@ int main(int argc, char** argv) {
 	cleanup();
 	return 0;
 }
-
-/* NOCOM memory leaks for builder_barbarians idle
- * */

@@ -223,5 +223,3 @@ void SpriteSheetAnimation::add_scale_if_files_present(const std::string& basenam
 		   scale_as_float, std::unique_ptr<SpriteSheetMipMapEntry>(new SpriteSheetMipMapEntry(path, rows_, columns_))));
 	}
 }
-
-// NOCOM Barbarian carriers are not walking smoothly
