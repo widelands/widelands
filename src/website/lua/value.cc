@@ -48,12 +48,12 @@ std::string Empty::as_string() const {
 	return "nil";
 }
 
-String::String(std::string value) : string_value(value) {}
+String::String(const std::string& value) : string_value(value) {}
 std::string String::as_string() const {
 	return "\"" + string_value + "\"";
 }
 
-Raw::Raw(std::string value) : raw_value(value) {}
+Raw::Raw(const std::string& value) : raw_value(value) {}
 std::string Raw::as_string() const {
 	return raw_value;
 }

@@ -57,14 +57,14 @@ private:
 };
 
 struct String : Value {
-	explicit String(std::string value);
+	explicit String(const std::string& value);
 	std::string as_string() const override;
 private:
 	const std::string string_value;
 };
 
 struct Raw : Value {
-	explicit Raw(std::string value);
+	explicit Raw(const std::string& value);
 	std::string as_string() const override;
 private:
 	const std::string raw_value;

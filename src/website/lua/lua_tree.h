@@ -58,6 +58,15 @@ public:
 protected:
 	static const std::string tab_;
 
+	struct KeyValuePair {
+		explicit KeyValuePair(const std::string& init_key, LuaTree::Value* init_value) :
+			key(init_key),
+			value(init_value) {}
+
+		const std::string key;
+		std::unique_ptr<LuaTree::Value> value;
+	};
+
 	std::string keyless_values_as_string() const;
 	std::string values_as_string(const std::string& tabs) const;
 	std::string children_as_string() const;
@@ -66,7 +75,7 @@ protected:
 	std::string key_;
 	const int level_;
 	std::vector<std::unique_ptr<LuaTree::Element>> children_;
-	std::vector<std::pair<std::string, std::unique_ptr<LuaTree::Value>>> values_;
+	std::vector<std::unique_ptr<KeyValuePair>> values_;
 	std::vector<std::unique_ptr<LuaTree::Value>> keyless_values_;
 };
 

@@ -153,7 +153,7 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	// Write a spritesheet of the given images into the given filename
 	const auto write_spritesheet = [out_filesystem](std::vector<const Image*> imgs, const std::string& filename, const Recti& rect, int columns, int spritesheet_width, int spritesheet_height) {
 		log("CREATING %d x %d spritesheet with %d columns, %" PRIuS " frames. Image size: %d x %d.\n", spritesheet_width, spritesheet_height, columns, imgs.size(), rect.w, rect.h);
-		Texture* spritesheet = new Texture(spritesheet_width, spritesheet_height);
+		std::unique_ptr<Texture> spritesheet(new Texture(spritesheet_width, spritesheet_height));
 		spritesheet->fill_rect(Rectf(Vector2f::zero(), spritesheet_width, spritesheet_height), RGBAColor(0, 0, 0, 0));
 		int row = 0;
 		int col = 0;
@@ -169,14 +169,14 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 			spritesheet->blit(Rectf(x, y, rect.w, rect.h), *image, Rectf(rect.x, rect.y, rect.w, rect.h), 1., BlendMode::Copy);
 		}
 		std::unique_ptr<::StreamWrite> sw(out_filesystem->open_stream_write(filename));
-		save_to_png(spritesheet, sw.get(), ColorType::RGBA);
+		save_to_png(spritesheet.get(), sw.get(), ColorType::RGBA);
 		log("Wrote spritesheet to %s/%s\n", out_filesystem->get_basename().c_str(), filename.c_str());
 	};
 
 	// Add global paramaters for this animation to Lua
 	std::unique_ptr<LuaTree::Element> lua_object(new LuaTree::Element());
 	LuaTree::Object* lua_animation = lua_object->add_object(animation_name);
-	lua_animation->add_raw("directory", "path.dirname(__file__)");
+	lua_animation->add_raw("directory", "path.dirname(__file__)"); // NOCOM no idea why this is leaking memory
 	lua_animation->add_string("basename", animation_name);
 
 	if (animation.nr_frames() > 1) {

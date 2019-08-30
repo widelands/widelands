@@ -27,6 +27,7 @@
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
@@ -185,11 +186,13 @@ SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table, const std::str
 
 std::vector<const Image*> SpriteSheetAnimation::images(float) const {
 	// We only need to implement this if we add compressed spritemaps, or maybe for usage in a test
+	log("ERROR: Accessing image files is not supported by spritesheets\n");
 	NEVER_HERE();
 }
 
 std::vector<const Image*> SpriteSheetAnimation::pc_masks(float) const {
 	// We only need to implement this if we add compressed spritemaps, or maybe for usage in a test
+	log("ERROR: Accessing image files is not supported by spritesheets\n");
 	NEVER_HERE();
 }
 
