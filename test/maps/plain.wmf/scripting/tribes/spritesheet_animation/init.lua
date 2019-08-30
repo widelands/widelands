@@ -48,7 +48,13 @@ tribes:new_productionsite_type {
          frames = 20,
          columns = 4,
          rows = 5,
-         hotspot = { 52, 64 }
+         hotspot = { 52, 64 },
+         -- These won't be played in the test suite, just testing the table structure.
+         sound_effect = {
+            path = "sound/hammering/hammering",
+            priority = 64
+         },
+         representative_frame = 3
       }
    },
 

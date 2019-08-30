@@ -3,6 +3,12 @@ dirname = "test/maps/plain.wmf/" .. path.dirname(__file__)
 animations = {}
 
 add_animation(animations, "idle", dirname, "idle", {14, 21}, 5)
+-- These won't be played in the test suite, just testing the table structure.
+animations["idle"]["sound_effect"] = {
+   path = "sound/hammering/hammering",
+   priority = 64
+}
+
 add_directional_animation(animations, "walk", dirname, "walk", {9, 19}, 10)
 add_directional_animation(animations, "walkload", dirname, "walkload", {7, 22}, 10)
 
