@@ -10,7 +10,7 @@ For information on how to create the animations' images with Blender, see
 The Blender export will give you a list of files for each animation.
 We call this a "file" animation.
 Once you have tested your animation in Widelands and are satisfied with the results,
-we recomennd that you convert it to a :ref:`spritesheet <animations_spritesheets>`.
+we recommend that you convert it to a :ref:`spritesheet <animations_spritesheets>`.
 This will save disk space and make animation loading faster.
 
 Animations are defined as `Lua tables <http://lua-users.org/wiki/TablesTutorial>`_.
@@ -112,7 +112,8 @@ This will print the command line options to use for converting your animation.
 
 After conversion, you will need to delete the old files and copy over the new files,
 then delete the old animation code in the map object's ``init.lua`` file and add the new code.
-The tool will print the new code to the console for you, so all you need to do is copy/paste.
+The tool will print the new code to the console for you, so all you need to do is copy/paste
+and then add any missing optional parameters back in.
 
 Note that the table for spritesheets is called ``spritesheets``, not ``animations``!
 This distinction is necessary for performance reasons.

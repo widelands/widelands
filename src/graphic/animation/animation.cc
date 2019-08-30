@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -193,4 +193,3 @@ float Animation::find_best_scale(float scale) const {
 int Animation::representative_frame() const {
 	return representative_frame_;
 }
-
