@@ -26,6 +26,7 @@ tribes:new_worker_type {
    },
 
    animations = animations,
+   --
    spritesheets = {
       idle = {
          directory = path.dirname(__file__),
@@ -34,7 +35,7 @@ tribes:new_worker_type {
          frames = 150,
          columns = 12,
          rows = 13,
-         hotspot = { 6, 19 }
+         hotspot = { 12, 22 }
       }
    }
 }
