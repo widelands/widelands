@@ -39,7 +39,7 @@ tribes:new_immovable_type{
    descname = _ "Ironwood Tree (Pole)",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "tree_pole" },
+   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
