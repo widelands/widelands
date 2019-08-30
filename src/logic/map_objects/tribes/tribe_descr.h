@@ -26,6 +26,7 @@
 
 #include "base/macros.h"
 #include "graphic/animation/animation.h"
+#include "graphic/toolbar_imageset.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/road_textures.h"
@@ -165,6 +166,9 @@ public:
 	/// Registers a worker with the tribe and adds it to the bottom of the last worker column
 	void add_worker(const std::string& workername);
 
+	// The custom toolbar imageset if any. Can be nullptr.
+	ToolbarImageset* toolbar_image_set() const;
+
 private:
 	/// Registers a worker with the tribe and adds it to the bottom of the given worker column
 	void add_worker(const std::string& workername, std::vector<DescriptionIndex>& workers_order_column);
@@ -211,6 +215,9 @@ private:
 	// Order and positioning of wares in the warehouse display
 	WaresOrder wares_order_;
 	WaresOrder workers_order_;
+
+	// An optional custom imageset for the in-game menu toolbar
+	std::unique_ptr<ToolbarImageset> toolbar_image_set_;
 
 	std::vector<Widelands::TribeBasicInfo::Initialization> initializations_;
 

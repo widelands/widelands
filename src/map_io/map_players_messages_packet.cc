@@ -23,13 +23,13 @@
 
 #include <boost/format.hpp>
 
+#include "io/profile.h"
 #include "logic/game_data_error.h"
 #include "logic/message.h"
 #include "logic/player.h"
 #include "map_io/coords_profile.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 

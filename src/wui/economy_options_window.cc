@@ -24,13 +24,13 @@
 #include <boost/lexical_cast.hpp>
 
 #include "graphic/graphic.h"
+#include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "profile/profile.h"
 #include "ui_basic/messagebox.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
@@ -76,6 +76,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	b->sigclicked.connect([this] { change_target(-10); });
 	buttons->add(b);
 	b->set_repeating(true);
+	b->set_enabled(can_act);
 	buttons->add_space(8);
 	b = new UI::Button(buttons, "decrease_target", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
 	                   g_gr->images().get("images/ui_basic/scrollbar_down.png"),
@@ -83,6 +84,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	b->sigclicked.connect([this] { change_target(-1); });
 	buttons->add(b);
 	b->set_repeating(true);
+	b->set_enabled(can_act);
 	buttons->add_space(24);
 
 	b = new UI::Button(buttons, "increase_target", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
@@ -90,6 +92,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	b->sigclicked.connect([this] { change_target(1); });
 	buttons->add(b);
 	b->set_repeating(true);
+	b->set_enabled(can_act);
 	buttons->add_space(8);
 	b = new UI::Button(buttons, "increase_target_fast", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
 	                   g_gr->images().get("images/ui_basic/scrollbar_up_fast.png"),
@@ -97,14 +100,19 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	b->sigclicked.connect([this] { change_target(10); });
 	buttons->add(b);
 	b->set_repeating(true);
+	b->set_enabled(can_act);
 
 	dropdown_.set_tooltip(_("Profile to apply to the selected items"));
 	dropdown_box_.set_size(40, 20);  // Prevent assert failures
 	dropdown_box_.add(&dropdown_, UI::Box::Resizing::kFullSize);
-	dropdown_.selected.connect([this] { reset_target(); });
+	if (can_act) {
+		dropdown_.selected.connect([this] { reset_target(); });
+	} else {
+		dropdown_.set_enabled(false);
+	}
 
 	b = new UI::Button(&dropdown_box_, "save_targets", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-	                   g_gr->images().get("images/wui/menus/menu_save_game.png"),
+	                   g_gr->images().get("images/wui/menus/save_game.png"),
 	                   _("Save target settings"));
 	b->sigclicked.connect([this] { create_target(); });
 	dropdown_box_.add_space(8);
@@ -239,16 +247,11 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
      serial_(serial),
      player_(player),
      type_(type),
-     can_act_(can_act),
-     display_(this, 0, 0, serial_, player_, type_, can_act_),
+     display_(this, 0, 0, serial_, player_, type_, can_act),
      economy_options_window_(eco_window) {
 	add(&display_, UI::Box::Resizing::kFullSize);
 
 	display_.set_hgap(AbstractWaresDisplay::calc_hgap(display_.get_extent().w, min_w));
-
-	if (!can_act_) {
-		return;
-	}
 }
 
 void EconomyOptionsWindow::EconomyOptionsPanel::set_economy(Widelands::Serial serial) {

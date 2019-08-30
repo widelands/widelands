@@ -28,6 +28,7 @@
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/profile.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -36,7 +37,6 @@
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
@@ -113,7 +113,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                          buth_,
                          buth_,
                          UI::ButtonStyle::kFsMenuSecondary,
-                         g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
+                         g_gr->images().get("images/wui/menus/toggle_minimap.png"),
                          _("Change map or saved game")),
      help_button_(this,
                   "help",
