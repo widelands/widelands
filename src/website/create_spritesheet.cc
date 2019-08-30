@@ -56,7 +56,7 @@ void find_trim_rect(Texture* texture, Recti* rect) {
 		for (int y = 0; y < max_y && !found; ++y) {
 			RGBAColor pixel = texture->get_pixel(x, y);
 			if (pixel.a != 0) {
-				rect->x = std::max(rect->x, x - 1);
+				rect->x = std::min(rect->x, x - 1);
 				found = true;
 			}
 		}
@@ -67,7 +67,7 @@ void find_trim_rect(Texture* texture, Recti* rect) {
 		for (int y = 0; y < max_y && !found; ++y) {
 			RGBAColor pixel = texture->get_pixel(x, y);
 			if (pixel.a != 0) {
-				rect->w = std::min(max_x, x + 1 - rect->x);
+				rect->w = std::max(max_x, x + 1 - rect->x);
 				found = true;
 			}
 		}
@@ -78,7 +78,7 @@ void find_trim_rect(Texture* texture, Recti* rect) {
 		for (int x = 0; x < max_x && !found; ++x) {
 			RGBAColor pixel = texture->get_pixel(x, y);
 			if (pixel.a != 0) {
-				rect->y = std::max(rect->y, y - 1);
+				rect->y = std::min(rect->y, y - 1);
 				found = true;
 			}
 		}
@@ -89,7 +89,7 @@ void find_trim_rect(Texture* texture, Recti* rect) {
 		for (int x = 0; x < max_x && !found; ++x) {
 			RGBAColor pixel = texture->get_pixel(x, y);
 			if (pixel.a != 0) {
-				rect->h = std::min(max_y, y + 1 - rect->y);
+				rect->h = std::max(max_y, y + 1 - rect->y);
 				found = true;
 			}
 		}
@@ -211,7 +211,7 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	// Create image files for each scale
 	for (const float scale : animation.available_scales()) {
 		std::vector<const Image*> images = animation.images(scale);
-		Recti margins(Vector2f::zero(), images.front()->width(), images.front()->height());
+		Recti margins(images.front()->width() / 2, images.front()->height() / 2, images.front()->width() / 2, images.front()->height() / 2);
 
 		// Crop the animation to save space
 		for (const Image* image : images) {
@@ -304,3 +304,6 @@ int main(int argc, char** argv) {
 	cleanup();
 	return 0;
 }
+
+/* NOCOM memory leaks for builder_barbarians idle
+ * */
