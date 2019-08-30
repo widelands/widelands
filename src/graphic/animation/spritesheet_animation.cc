@@ -131,7 +131,6 @@ SpriteSheetAnimation IMPLEMENTATION
 
 SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table, const std::string& basename)
    : Animation(table) {
-	assert(table.has_key("columns"));
 	try {
 		// Get image files
 		if (basename.empty() || !table.has_key("directory")) {
@@ -197,7 +196,7 @@ std::vector<const Image*> SpriteSheetAnimation::pc_masks(float) const {
 const Image* SpriteSheetAnimation::representative_image(const RGBColor* clr) const {
 	const SpriteSheetMipMapEntry& mipmap = dynamic_cast<const SpriteSheetMipMapEntry&>(mipmap_entry(1.0f));
 	const int column = representative_frame() % columns_;
-	const int row = representative_frame() / rows_;
+	const int row = representative_frame() / columns_;
 	const int w = width();
 	const int h = height();
 

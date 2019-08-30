@@ -155,11 +155,6 @@ protected:
 		bool has_playercolor_masks;
 	};
 
-	struct MipMapCompare {
-	  bool operator() (const float lhs, const float rhs) const
-	  {return lhs > rhs;}
-	};
-
 	/// Register animations for the scales listed in kSupportedScales if available. The scale of 1.0 is mandatory.
 	void add_available_scales(const std::string& basename, const std::string& directory);
 
@@ -174,6 +169,11 @@ protected:
 	/// The number of textures this animation will play
 	uint16_t nr_frames_;
 
+	/// Reverse sort the zoom scales for faster lookup
+	struct MipMapCompare {
+	  inline bool operator() (const float lhs, const float rhs) const
+	  {return lhs > rhs;}
+	};
 	/// Texture sets for different zoom scales
 	std::map<float, std::unique_ptr<MipMapEntry>, MipMapCompare> mipmaps_;
 

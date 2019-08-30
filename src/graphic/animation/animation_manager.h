@@ -63,7 +63,7 @@ public:
 private:
 	/// A list of all known animations
 	std::vector<std::unique_ptr<Animation>> animations_;
-	/// Maps the vector index
+	/// Maps the animations' vector indices + player colors to their representative images
 	std::map<std::pair<uint32_t, const RGBColor*>, std::unique_ptr<const Image>>
 	   representative_images_;
 	/// Maps map object names to the ID of the animations that contain their representative images

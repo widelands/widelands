@@ -45,9 +45,9 @@ uint32_t AnimationManager::load(const std::string& map_object_name,
 }
 
 const Animation& AnimationManager::get_animation(uint32_t id) const {
-	if (!id || id > animations_.size())
+	if (!id || id > animations_.size()) {
 		throw wexception("Requested unknown animation with id: %i", id);
-
+	}
 	return *animations_[id - 1];
 }
 
