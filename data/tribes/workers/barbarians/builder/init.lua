@@ -1,7 +1,7 @@
 dirname = path.dirname(__file__)
 
 animations = {}
--- NOCOM remove this and the files add_animation(animations, "idle", dirname, "waiting", {11, 22}, 10)
+add_animation(animations, "idle", dirname, "waiting", {11, 22}, 10)
 add_animation(animations, "work", dirname, "work", {10, 22}, 10)
 animations["work"]["sound_effect"] = {
    path = "sound/hammering/hammering",
@@ -26,16 +26,4 @@ tribes:new_worker_type {
    },
 
    animations = animations,
-   --
-   spritesheets = {
-      idle = {
-         directory = path.dirname(__file__),
-         basename = "idle",
-         fps = 10,
-         frames = 150,
-         columns = 12,
-         rows = 13,
-         hotspot = { 12, 22 }
-      }
-   }
 }
