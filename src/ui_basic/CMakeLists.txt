@@ -76,4 +76,5 @@ wl_library(ui_basic
     sound
     sound_constants
     widelands_ball_of_mud
+    widelands_options
 )

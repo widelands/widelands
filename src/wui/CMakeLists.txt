@@ -154,6 +154,7 @@ wl_library(wui_mapview
     logic_widelands_geometry
     ui_basic
     widelands_ball_of_mud
+    widelands_options
     wui_mapview_pixelfunctions
 )
 

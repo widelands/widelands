@@ -107,7 +107,6 @@ wl_library(widelands_ball_of_mud
     graphic_fonthandler
     graphic_text
     io_filesystem
-    io_profile
     logic
     logic_exceptions
     logic_filesystem_constants
@@ -144,6 +143,7 @@ wl_library(widelands_options
     base_log
     io_filesystem
     io_profile
+    logic_filesystem_constants
 )
 
 
