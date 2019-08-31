@@ -42,6 +42,7 @@ public:
 	// Constructor for root node
 	explicit Element() : LuaTree::Element("", -1) {
 	}
+	virtual ~Element() = default;
 
 	LuaTree::Object* add_object(const std::string& key = "");
 	void add_bool(const std::string& key, bool value);
