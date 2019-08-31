@@ -95,7 +95,7 @@ struct NoteEconomy {
 class Economy {
 public:
 	friend class EconomyDataPacket;
-	// TODO(Nordfriese): For savegame compatibility
+	// TODO(Nordfriese): These 3 friends are for savegame compatibility
 	friend class CmdCallEconomyBalance;
 	friend class MapFlagPacket;
 	friend class Ship;
