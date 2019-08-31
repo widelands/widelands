@@ -92,8 +92,6 @@ wl_library(widelands_ball_of_mud
     wlapplication.h
     wlapplication_messages.cc
     wlapplication_messages.h
-    wlapplication_options.cc
-    wlapplication_options.h
   USES_SDL2
   USES_SDL2_IMAGE
   USES_SDL2_TTF
@@ -129,8 +127,25 @@ wl_library(widelands_ball_of_mud
     ui_fsmenu_misc
     ui_fsmenu_network
     ui_fsmenu_options
+    widelands_options
     wui
 )
+
+# TODO(unknown): Ideally widelands_ball_of_mud shouldn't exist, everything should be in a
+# library.
+wl_library(widelands_options
+  SRCS
+    wlapplication_options.cc
+    wlapplication_options.h
+  USES_SDL2
+  USES_SDL2_IMAGE
+  USES_SDL2_TTF
+  DEPENDS
+    base_log
+    io_filesystem
+    io_profile
+)
+
 
 # TODO(sirver): Split into libs with useful names.
 wl_library(helper

@@ -24,7 +24,6 @@
 
 #include "base/log.h"
 #include "io/filesystem/disk_filesystem.h"
-#include "io/profile.h"
 #include "logic/filesystem_constants.h"
 
 static Profile g_options(Profile::err_log);

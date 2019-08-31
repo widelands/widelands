@@ -33,7 +33,7 @@ wl_library(wui_chat_ui
     logic
     sound
     ui_basic
-    widelands_ball_of_mud
+    widelands_options
     wui
 )
 
@@ -314,7 +314,7 @@ wl_library(wui
     scripting_lua_table
     sound
     ui_basic
-    widelands_ball_of_mud
+    widelands_options
     wui_chat_ui
     wui_common_gamedetails
     wui_economy_options
