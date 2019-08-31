@@ -776,6 +776,7 @@ void ProductionSite::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
 	molog("is_stopped: %u\n", is_stopped_);
+	molog("main_worker: %i\n", main_worker_);
 }
 
 void ProductionSite::set_stopped(bool const stopped) {
@@ -796,18 +797,17 @@ bool ProductionSite::can_start_working() const {
 }
 
 void ProductionSite::try_start_working(Game& game) {
-	if (main_worker_ >= 0) {
-		return;
-	}
 	const size_t nr_workers = descr().working_positions().size();
 	for (uint32_t i = 0; i < nr_workers; ++i) {
-		if (Worker* worker = working_positions_[i].worker) {
-			// We may start even if can_start_working() returns false, because basic actions
-			// like unloading extra wares should take place anyway
-			main_worker_ = i;
-			worker->reset_tasks(game);
-			worker->start_task_buildingwork(game);
-			return;
+		if (main_worker_ == static_cast<int>(i) || main_worker_ < 0) {
+			if (Worker* worker = working_positions_[i].worker) {
+				// We may start even if can_start_working() returns false, because basic actions
+				// like unloading extra wares should take place anyway
+				main_worker_ = i;
+				worker->reset_tasks(game);
+				worker->start_task_buildingwork(game);
+				return;
+			}
 		}
 	}
 }

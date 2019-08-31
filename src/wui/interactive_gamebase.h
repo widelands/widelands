@@ -23,8 +23,8 @@
 #include <map>
 #include <memory>
 
+#include "io/profile.h"
 #include "logic/game.h"
-#include "profile/profile.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/unique_window.h"
 #include "wui/general_statistics_menu.h"

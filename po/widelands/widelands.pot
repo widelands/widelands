@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"POT-Creation-Date: 2019-08-26 10:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -267,7 +267,7 @@ msgid "Redo"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:157
-#: ../../src/wui/buildingwindow.cc:363 ../../src/wui/interactive_player.cc:207
+#: ../../src/wui/buildingwindow.cc:359 ../../src/wui/interactive_player.cc:207
 msgid "Help"
 msgstr ""
 
@@ -769,7 +769,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:60
 #: ../../src/ui_basic/messagebox.cc:95 ../../src/ui_fsmenu/launch_mpg.cc:78
 #: ../../src/ui_fsmenu/options.cc:92
-#: ../../src/wui/economy_options_window.cc:525
+#: ../../src/wui/economy_options_window.cc:528
 #: ../../src/wui/game_main_menu_save_game.cc:70 ../../src/wui/login_box.cc:63
 msgid "Cancel"
 msgstr ""
@@ -3399,62 +3399,62 @@ msgid "Lacking Soldiers:"
 msgstr ""
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:235
+#: ../../src/wui/buildingwindow.cc:231
 msgid "Continue"
 msgstr ""
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:237
+#: ../../src/wui/buildingwindow.cc:233
 msgid "Stop"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:257
+#: ../../src/wui/buildingwindow.cc:253
 #: ../../src/wui/constructionsitewindow.cc:338
 #, c-format
 msgid "Enhance to %s"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:262
+#: ../../src/wui/buildingwindow.cc:258
 #: ../../src/wui/constructionsitewindow.cc:339 ../../src/wui/fieldaction.cc:99
 msgid "Construction costs:"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:279
+#: ../../src/wui/buildingwindow.cc:275
 msgid "Destroy"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:293 ../../src/wui/buildingwindow.cc:294
-#: ../../src/wui/buildingwindow.cc:300
+#: ../../src/wui/buildingwindow.cc:289 ../../src/wui/buildingwindow.cc:290
+#: ../../src/wui/buildingwindow.cc:296
 msgid "Dismantle"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:294 ../../src/wui/buildingwindow.cc:304
+#: ../../src/wui/buildingwindow.cc:290 ../../src/wui/buildingwindow.cc:300
 msgid "Returns:"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:344 ../../src/wui/fieldaction.cc:389
+#: ../../src/wui/buildingwindow.cc:340 ../../src/wui/fieldaction.cc:389
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:351
+#: ../../src/wui/buildingwindow.cc:347
 msgid "Center view on this"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:537
+#: ../../src/wui/buildingwindow.cc:533
 msgid "Hide work area"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:540
+#: ../../src/wui/buildingwindow.cc:536
 msgid "Show work area"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:573
+#: ../../src/wui/buildingwindow.cc:569
 #: ../../src/wui/constructionsitewindow.cc:314
 msgid "Start an expedition"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:577
+#: ../../src/wui/buildingwindow.cc:573
 msgid "Cancel the expedition"
 msgstr ""
 
@@ -3555,68 +3555,68 @@ msgstr ""
 msgid "Decrease target by 10"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:82
+#: ../../src/wui/economy_options_window.cc:83
 msgid "Decrease target"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:89
+#: ../../src/wui/economy_options_window.cc:91
 msgid "Increase target"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:96
+#: ../../src/wui/economy_options_window.cc:99
 msgid "Increase target by 10"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:101
+#: ../../src/wui/economy_options_window.cc:105
 msgid "Profile to apply to the selected items"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:108
+#: ../../src/wui/economy_options_window.cc:116
 msgid "Save target settings"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:432
+#: ../../src/wui/economy_options_window.cc:435
 msgid "The profile name cannot be empty"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:433
+#: ../../src/wui/economy_options_window.cc:436
 msgid "The default profile cannot be overwritten"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:436
+#: ../../src/wui/economy_options_window.cc:439
 msgid "Save the profile under this name"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:448
+#: ../../src/wui/economy_options_window.cc:451
 msgid "The predefined profiles cannot be deleted"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:451
+#: ../../src/wui/economy_options_window.cc:454
 msgid "Delete the selected profiles"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:473
+#: ../../src/wui/economy_options_window.cc:476
 msgid "Overwrite?"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:474
+#: ../../src/wui/economy_options_window.cc:477
 msgid "A profile with this name already exists. Do you wish to replace it?"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:517
+#: ../../src/wui/economy_options_window.cc:520
 msgid "Save Profile"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:524 ../../src/wui/login_box.cc:57
+#: ../../src/wui/economy_options_window.cc:527 ../../src/wui/login_box.cc:57
 msgid "Save"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:526
+#: ../../src/wui/economy_options_window.cc:529
 #: ../../src/wui/load_or_save_game.cc:94
 msgid "Delete"
 msgstr ""
 
-#: ../../src/wui/economy_options_window.cc:527
+#: ../../src/wui/economy_options_window.cc:530
 msgid "Existing Profiles"
 msgstr ""
 
@@ -4185,70 +4185,70 @@ msgstr ""
 msgid "Show Census"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether building staristics are
-#. * shown
-#: ../../src/wui/interactive_gamebase.cc:225
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * building staristics are shown
+#: ../../src/wui/interactive_gamebase.cc:223
 msgid "Hide Statistics"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:225
+#: ../../src/wui/interactive_gamebase.cc:224
 msgid "Show Statistics"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:259
+#: ../../src/wui/interactive_gamebase.cc:258
 msgid "Speed +"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for Speed + in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:262
+#: ../../src/wui/interactive_gamebase.cc:261
 msgid "Increase the game speed"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:262
+#: ../../src/wui/interactive_gamebase.cc:261
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:264
+#: ../../src/wui/interactive_gamebase.cc:263
 msgid "Speed -"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for Speed - in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:267
+#: ../../src/wui/interactive_gamebase.cc:266
 msgid "Decrease the game speed"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:267
+#: ../../src/wui/interactive_gamebase.cc:266
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:271
+#: ../../src/wui/interactive_gamebase.cc:270
 msgid "Resume"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:274
-#: ../../src/wui/interactive_gamebase.cc:279
+#: ../../src/wui/interactive_gamebase.cc:273
+#: ../../src/wui/interactive_gamebase.cc:278
 msgctxt "hotkey"
 msgid "Pause"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:274
+#: ../../src/wui/interactive_gamebase.cc:273
 msgid "Resume the Game"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:276
+#: ../../src/wui/interactive_gamebase.cc:275
 msgid "Pause"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:279
+#: ../../src/wui/interactive_gamebase.cc:278
 msgid "Pause the Game"
 msgstr ""
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:394
+#: ../../src/wui/interactive_gamebase.cc:393
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr ""
@@ -4260,7 +4260,7 @@ msgid "Statistics"
 msgstr ""
 
 #: ../../src/wui/interactive_player.cc:202
-#: ../../src/wui/interactive_player.cc:355
+#: ../../src/wui/interactive_player.cc:354
 msgid "Messages"
 msgstr ""
 
@@ -4281,25 +4281,25 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps are
-#. * highlighted
-#: ../../src/wui/interactive_player.cc:316
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
+#. * are highlighted
+#: ../../src/wui/interactive_player.cc:315
 msgid "Hide Workarea Overlaps"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps are
-#. * highlighted
-#: ../../src/wui/interactive_player.cc:319
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
+#. * are highlighted
+#: ../../src/wui/interactive_player.cc:318
 msgid "Show Workarea Overlaps"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:322
+#: ../../src/wui/interactive_player.cc:321
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:360
+#: ../../src/wui/interactive_player.cc:359
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"

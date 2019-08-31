@@ -66,6 +66,7 @@
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
+#include "wlapplication_options.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 
@@ -245,7 +246,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	}
 	win_condition_displayname_ = "Scenario";
 
-	set_ibase(new InteractivePlayer(*this, g_options.pull_section("global"), 1, false));
+	set_ibase(new InteractivePlayer(*this, get_config_section(), 1, false));
 
 	loader_ui.step(_("Loading map…"));
 	maploader->load_map_complete(*this, Widelands::MapLoader::LoadType::kScenario);
@@ -409,7 +410,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		}
 		loader_ui.set_background(background);
 		player_nr = gpdp.get_player_nr();
-		set_ibase(new InteractivePlayer(*this, g_options.pull_section("global"), player_nr, false));
+		set_ibase(new InteractivePlayer(*this, get_config_section(), player_nr, false));
 
 		loader_ui.step(_("Loading…"));
 		gl.load_game();
