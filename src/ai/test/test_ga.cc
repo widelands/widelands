@@ -17,6 +17,8 @@
  *
  */
 
+// Unittests related to Genetic Algorithm
+
 #include <exception>
 
 #include <boost/test/unit_test.hpp>
@@ -38,8 +40,8 @@ using namespace Widelands;
 
 BOOST_AUTO_TEST_SUITE(ai_ga)
 
+// Neuron presents a curve, of integers in range (0-20) (21 values)
 BOOST_AUTO_TEST_CASE(neuron) {
-	//weight(w), type(f), id(i)
 	Neuron n1 = Neuron(-50, 0, 0);
 	BOOST_CHECK_EQUAL(n1.get_id(), 0);
 	BOOST_CHECK_EQUAL(n1.get_weight(), -50);
@@ -49,7 +51,6 @@ BOOST_AUTO_TEST_CASE(neuron) {
 }
 
 BOOST_AUTO_TEST_CASE(neuron_updated_weight) {
-	//weight(w), type(f), id(i)
 	Neuron n1 = Neuron(-50, 0, 0);
 	n1.set_weight(50);
 	n1.recalculate();
@@ -59,8 +60,8 @@ BOOST_AUTO_TEST_CASE(neuron_updated_weight) {
 	BOOST_CHECK_EQUAL(n1.get_result_safe(100), 50);
 }
 
+// FNeuron is uint32_t that serves as 32 bools, that can be set and get independently
 BOOST_AUTO_TEST_CASE(fneuron_position) {
-	//core(c), id(i)
 	FNeuron fn = FNeuron(0, 0);
 	BOOST_CHECK_EQUAL(fn.get_int(), 0); // Initialized as 0, so must be still 0
 	const bool val0 = fn.get_position(0);
