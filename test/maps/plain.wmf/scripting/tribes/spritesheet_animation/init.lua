@@ -25,6 +25,10 @@ tribes:new_productionsite_type {
       }
    },
 
+   indicate_workarea_overlaps = {
+      barbarians_spritesheet_animation = false
+   },
+
    spritesheets = {
       idle = {
          directory = dirname,
