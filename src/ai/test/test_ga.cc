@@ -32,10 +32,6 @@
 // Triggered by BOOST_AUTO_TEST_CASE
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 
-namespace Widelands {  // Needed?
-class World;
-}  // namespace Widelands
-
 using namespace Widelands;
 
 BOOST_AUTO_TEST_SUITE(ai_ga)
@@ -70,7 +66,7 @@ BOOST_AUTO_TEST_CASE(fneuron_position) {
 	fn.flip_bit(0);
 	BOOST_CHECK_EQUAL(!fn.get_position(0), val0);
 	BOOST_CHECK_EQUAL(fn.get_position(1), val1); //should not be changed
-	BOOST_CHECK(fn.get_int() != 0);	// Initialized as 0, so now must be different
+	BOOST_CHECK(fn.get_int() != 0); // Initialized as 0, so now must be different
 	fn.flip_bit(0); // reverting back
 	BOOST_CHECK_EQUAL(fn.get_int(), 0);
 }
