@@ -296,7 +296,7 @@ protected:
 
 		const Task* get_task(const std::string& name) override;
 
-		void load(FileRead& fr);
+		void load(FileRead& fr, uint8_t packet_version);
 		void load_pointers() override;
 		void load_finish() override;
 
@@ -310,6 +310,7 @@ protected:
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<ShippingItem::Loader> items_;
+		uint8_t packet_version_ = 0;
 	};
 
 public:

@@ -289,7 +289,6 @@ void FerryFleet::reroute_ferry_request(Game& game, Waterway* oldww, Waterway* ne
 			return;
 		}
 	}
-
 	for (auto& pair : pending_ferry_requests_) {
 		if (pair.second == oldww) {
 			pair.second = newww;

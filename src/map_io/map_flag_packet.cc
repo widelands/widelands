@@ -53,19 +53,21 @@ void MapFlagPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 2) {
 			const Map& map = egbase.map();
 			PlayerNumber const nr_players = map.get_nrplayers();
 			Widelands::Extent const extent = map.extent();
+			std::set<Serial> all_economy_serials; // For savegame compatibility only
 			iterate_Map_FCoords(map, extent, fc) if (fr.unsigned_8()) {
 				PlayerNumber const owner = fr.unsigned_8();
 				if (!(0 < owner && owner <= nr_players)) {
 					throw GameDataError("Invalid player number: %i.", owner);
 				}
-// NOCOM(codereview): Add savegame compatibility
-// NOCOM(Nordfriese): Savegame compatibility means that in games where economies don't have a WareWorker type, all economies need to be loaded and then split into one of each type, and for every PlayerImmovable we need to retrieve the appropriate economies and assign them. I didn't intend to rewrite the whole codebase ;) And if I remember correctly, there was a plan to fix and re-add the anti-congestion algorithm, which will break compatibility anyway. So there´s no need to preserve compatibility using lots of ugly hacking IMHO.
 				const Serial ware_economy_serial = fr.unsigned_32();
-				const Serial worker_economy_serial = fr.unsigned_32();
+				const Serial worker_economy_serial = packet_version >= 3 ? fr.unsigned_32() :
+						mol.get_economy_savegame_compatibility(ware_economy_serial);
+				all_economy_serials.insert(ware_economy_serial);
+				all_economy_serials.insert(worker_economy_serial);
 
 				Serial const serial = fr.unsigned_32();
 
@@ -121,6 +123,19 @@ void MapFlagPacket::read(FileSystem& fs,
 					throw GameDataError(
 					   "%u (at (%i, %i), owned by player %u): %s", serial, fc.x, fc.y, owner, e.what());
 				}
+			}
+			if (Economy::last_economy_serial_ == kInvalidSerial) {
+				// This is for savegame compatibility
+				auto upper_border = all_economy_serials.end();
+				--upper_border;
+				auto lower_border = upper_border;
+				--lower_border;
+				while (*lower_border == (*upper_border) - 1) {
+					--upper_border;
+					--lower_border;
+				}
+				Economy::last_economy_serial_ = 1 + *lower_border;
+				log("Reset economy serial to %u\n", Economy::last_economy_serial_);
 			}
 		} else {
 			throw UnhandledVersionError("MapFlagPacket", packet_version, kCurrentPacketVersion);

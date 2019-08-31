@@ -1159,20 +1159,21 @@ Load / Save implementation
 */
 
 constexpr uint8_t kCurrentPacketVersion = 9;
-// NOCOM(codereview) Add savegame compatibility
-// NOCOM(Nordfriese): See reply in MapFlagPacket
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")
 		return &taskShip;
 	return Bob::Loader::get_task(name);
 }
 
-void Ship::Loader::load(FileRead& fr) {
+void Ship::Loader::load(FileRead& fr, uint8_t pw) {
 	Bob::Loader::load(fr);
+	packet_version_ = pw;
 
 	// Economy
+	// TODO(Nordfriese): Savegame compatibility
 	ware_economy_serial_ = fr.unsigned_32();
-	worker_economy_serial_ = fr.unsigned_32();
+	worker_economy_serial_ = packet_version_ >= 9 ? fr.unsigned_32() :
+			mol().get_economy_savegame_compatibility(ware_economy_serial_);
 
 	// The state the ship is in
 	ship_state_ = static_cast<ShipStates>(fr.unsigned_8());
@@ -1244,7 +1245,12 @@ void Ship::Loader::load_finish() {
 	if (worker_economy_serial_ != kInvalidSerial) {
 		ship.worker_economy_ = ship.get_owner()->get_economy(worker_economy_serial_);
 		if (!ship.worker_economy_) {
+			const Serial last = Economy::last_economy_serial_;
 			ship.worker_economy_ = ship.get_owner()->create_economy(worker_economy_serial_, wwWORKER);
+			if (packet_version_ < 9) {
+				log("Reset economy serial from %u to %u\n", Economy::last_economy_serial_, last);
+				Economy::last_economy_serial_ = last;
+			}
 		}
 	}
 
@@ -1278,7 +1284,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 8) {
 			try {
 				const ShipDescr* descr = nullptr;
 				// Removing this will break the test suite
@@ -1286,7 +1292,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 				const DescriptionIndex& ship_index = egbase.tribes().safe_ship_index(name);
 				descr = egbase.tribes().get_ship_descr(ship_index);
 				loader->init(egbase, mol, descr->create_object());
-				loader->load(fr);
+				loader->load(fr, packet_version);
 			} catch (const WException& e) {
 				throw GameDataError("Failed to load ship: %s", e.what());
 			}

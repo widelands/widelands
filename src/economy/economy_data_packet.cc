@@ -34,14 +34,24 @@ namespace Widelands {
 void EconomyDataPacket::read(FileRead& fr) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
 			const Serial saved_serial = fr.unsigned_32();
 			if (eco_->serial_ != saved_serial) {
 				throw GameDataError(
 				   "Representative flag/ship has economy serial %d, but the data packet has %d",
 				   eco_->serial_, saved_serial);
 			}
-			assert(Economy::last_economy_serial_ >= eco_->serial_);
+			// TODO(Nordfriese): Savegame compatibility
+			// assert(Economy::last_economy_serial_ >= eco_->serial_);
+			assert((packet_version == kCurrentPacketVersion) ^ (mol_ != nullptr));
+			Economy* other_eco = nullptr;
+			if (mol_) {
+				assert(eco_->type() == wwWARE);
+				const Serial serial = mol_->get_existing_economy_savegame_compatibility(eco_->serial());
+				other_eco = eco_->owner().get_economy(serial);
+				assert(other_eco);
+				assert(other_eco->type() == wwWORKER);
+			}
 			try {
 				const TribeDescr& tribe = eco_->owner().tribe();
 				while (Time const last_modified = fr.unsigned_32()) {
@@ -65,6 +75,28 @@ void EconomyDataPacket::read(FileRead& fr) {
 									}
 									tq.permanent = permanent;
 									tq.last_modified = last_modified;
+								}
+							} else if (other_eco) {
+								i = tribe.worker_index(type_name);
+								if (tribe.has_worker(i)) {
+									if (tribe.get_worker_descr(i)->default_target_quantity() == kInvalidWare) {
+										log("WARNING: target quantity configured for worker %s, "
+											"which should not have target quantity, "
+											"ignoring\n",
+											type_name);
+									} else {
+										Economy::TargetQuantity& tq = other_eco->target_quantities_[i];
+										if (tq.last_modified) {
+											throw GameDataError("duplicated entry for worker %s", type_name);
+										}
+										tq.permanent = permanent;
+										tq.last_modified = last_modified;
+									}
+								} else {
+									log("WARNING: target quantity configured for \"%s\" in worker economy, "
+										"which is not a worker type defined in tribe "
+										"%s, ignoring\n",
+										type_name, tribe.name().c_str());
 								}
 							} else {
 								log("WARNING: target quantity configured for \"%s\" in ware economy, "
@@ -102,6 +134,9 @@ void EconomyDataPacket::read(FileRead& fr) {
 				throw GameDataError("target quantities: %s", e.what());
 			}
 			eco_->request_timerid_ = fr.unsigned_32();
+			if (other_eco) {
+				other_eco->request_timerid_ = eco_->request_timerid_;
+			}
 		} else {
 			throw UnhandledVersionError("EconomyDataPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -111,6 +146,7 @@ void EconomyDataPacket::read(FileRead& fr) {
 }
 
 void EconomyDataPacket::write(FileWrite& fw) {
+	assert(!mol_);
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	// We save the serial number for sanity checks
