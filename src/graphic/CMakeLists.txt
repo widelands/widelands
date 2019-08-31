@@ -340,10 +340,7 @@ wl_library(graphic
     graphic_surface
     io_filesystem
     io_stream
-    logic_constants
-    logic_exceptions
     logic_widelands_geometry
-    note_sound
     notifications
     scripting_lua_interface
     scripting_lua_table

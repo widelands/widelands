@@ -11,8 +11,8 @@ wl_library(graphic_animation
     spritesheet_animation.cc
     spritesheet_animation.h
   DEPENDS
-    base_exceptions
     base_geometry
+    base_log
     base_macros
     graphic
     graphic_color
@@ -20,7 +20,9 @@ wl_library(graphic_animation
     graphic_surface
     io_filesystem
     logic_constants
+    logic_exceptions
     note_sound
     scripting_lua_table
     sound
+    sound_constants
 )
