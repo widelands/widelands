@@ -38,6 +38,7 @@ wl_library(logic_map_objects
     immovable.cc
     immovable.h
     immovable_program.h
+    info_to_draw.h
     map_object.cc
     map_object.h
     terrain_affinity.cc
