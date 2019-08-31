@@ -228,7 +228,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 	// Add global paramaters for this animation to Lua
 	std::unique_ptr<LuaTree::Element> lua_object(new LuaTree::Element());
 	LuaTree::Object* lua_animation = lua_object->add_object(animation_name);
-	lua_animation->add_raw("directory", "path.dirname(__file__)"); // NOCOM no idea why this is leaking memory
+	lua_animation->add_raw("directory", "path.dirname(__file__)");
 	lua_animation->add_string("basename", animation_name);
 
 	// We only write FPS if the animation is not a build animation and does not use the default FPS.

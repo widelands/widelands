@@ -27,6 +27,7 @@ namespace LuaTree {
 /// Value types for LuaTree
 struct Value {
 	Value() = default;
+	virtual ~Value() = default;
 	virtual std::string as_string() const = 0;
 };
 
