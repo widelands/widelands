@@ -20,21 +20,8 @@ install:
   # Update msys2 system (twice, first run does system packages)
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   - cmd: "bash --login -c \"pacman -Suuyy --nodeps --noconfirm\""
-  # we need to downgrade GCC to the last working version
-  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-gcc-8.3.0-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-x86_64-gcc-8.3.0-2-any.pkg.tar.xz\""
-  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-gcc-libgfortran-8.3.0-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-x86_64-gcc-libgfortran-8.3.0-2-any.pkg.tar.xz\""
-  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-gcc-fortran-8.3.0-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-x86_64-gcc-fortran-8.3.0-2-any.pkg.tar.xz\""
-  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-gcc-objc-8.3.0-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-x86_64-gcc-objc-8.3.0-2-any.pkg.tar.xz\""
-  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-gcc-libs-8.3.0-2-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-x86_64-gcc-libs-8.3.0-2-any.pkg.tar.xz\""
-
-  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/i686/mingw-w64-i686-gcc-7.4.0-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-i686-gcc-7.4.0-1-any.pkg.tar.xz\""
-  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/i686/mingw-w64-i686-gcc-libgfortran-7.4.0-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-i686-gcc-libgfortran-7.4.0-1-any.pkg.tar.xz\""
-  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/i686/mingw-w64-i686-gcc-fortran-7.4.0-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-i686-gcc-fortran-7.4.0-1-any.pkg.tar.xz\""
-  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/i686/mingw-w64-i686-gcc-objc-7.4.0-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-i686-gcc-objc-7.4.0-1-any.pkg.tar.xz\""
-  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/i686/mingw-w64-i686-gcc-libs-7.4.0-1-any.pkg.tar.xz && pacman --noconfirm --nodeps -U mingw-w64-i686-gcc-libs-7.4.0-1-any.pkg.tar.xz\""
-
   # Installed required libs
-  - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glew\""
+  - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glbinding\""
 
 shallow_clone: true
 
@@ -49,7 +36,7 @@ build_script:
   - cmd: md build
   - cmd: cd build
   - cmd: echo %APPVEYOR_BUILD_VERSION%_%CONFIGURATION%_%PLATFORM% > %APPVEYOR_BUILD_FOLDER%\WL_RELEASE
-  - cmd: "IF \"%PLATFORM%\" == \"x86\" (cmake -G \"Ninja\" -DBoost_NO_BOOST_CMAKE=ON -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_USE_GLBINDING=OFF -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking %APPVEYOR_BUILD_FOLDER%) ELSE (cmake -G \"Ninja\" -DBoost_NO_BOOST_CMAKE=ON -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_USE_GLBINDING=OFF -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking %APPVEYOR_BUILD_FOLDER%)"
+  - cmd: "IF \"%PLATFORM%\" == \"x86\" (cmake -G \"Ninja\" -DBoost_NO_BOOST_CMAKE=ON -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_USE_GLBINDING=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking %APPVEYOR_BUILD_FOLDER%) ELSE (cmake -G \"Ninja\" -DBoost_NO_BOOST_CMAKE=ON -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_USE_GLBINDING=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking %APPVEYOR_BUILD_FOLDER%)"
   - cmd: "cmake --build ."
 on_success:
   - cmd: strip -sv %APPVEYOR_BUILD_FOLDER%\build\src\widelands.exe

@@ -74,108 +74,83 @@ BillOfMaterials deserialize_bill_of_materials(StreamRead* des) {
 
 }  // namespace
 
-// NOTE keep numbers of existing entries as they are to ensure backward compatible savegame loading
-enum {
-	PLCMD_UNUSED = 0,
-	PLCMD_BULLDOZE = 1,
-	PLCMD_BUILD = 2,
-	PLCMD_BUILDFLAG = 3,
-	PLCMD_BUILDROAD = 4,
-	PLCMD_FLAGACTION = 5,
-	PLCMD_STARTSTOPBUILDING = 6,
-	PLCMD_ENHANCEBUILDING = 7,
-	PLCMD_CHANGETRAININGOPTIONS = 8,
-	PLCMD_DROPSOLDIER = 9,
-	PLCMD_CHANGESOLDIERCAPACITY = 10,
-	PLCMD_ENEMYFLAGACTION = 11,
-	PLCMD_SETWAREPRIORITY = 12,
-	PLCMD_SETWARETARGETQUANTITY = 13,
-	PLCMD_RESETWARETARGETQUANTITY = 14,
-	PLCMD_SETWORKERTARGETQUANTITY = 15,
-	PLCMD_RESETWORKERTARGETQUANTITY = 16,
-	// Used to be PLCMD_CHANGEMILITARYCONFIG
-	PLCMD_MESSAGESETSTATUSREAD = 18,
-	PLCMD_MESSAGESETSTATUSARCHIVED = 19,
-	PLCMD_SETSTOCKPOLICY = 20,
-	PLCMD_SETINPUTMAXFILL = 21,
-	PLCMD_DISMANTLEBUILDING = 22,
-	PLCMD_EVICTWORKER = 23,
-	PLCMD_MILITARYSITESETSOLDIERPREFERENCE = 24,
-	PLCMD_SHIP_EXPEDITION = 25,
-	PLCMD_SHIP_SCOUT = 26,
-	PLCMD_SHIP_EXPLORE = 27,
-	PLCMD_SHIP_CONSTRUCT = 28,
-	PLCMD_SHIP_SINK = 29,
-	PLCMD_SHIP_CANCELEXPEDITION = 30,
-	PLCMD_PROPOSE_TRADE = 31,
-};
-
 /*** class PlayerCommand ***/
 
 PlayerCommand::PlayerCommand(const uint32_t time, const PlayerNumber s)
    : GameLogicCommand(time), sender_(s), cmdserial_(0) {
 }
 
+void PlayerCommand::write_id_and_sender(StreamWrite& ser) {
+	ser.unsigned_8(static_cast<uint8_t>(id()));
+	ser.unsigned_8(sender());
+}
+
 PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
-	switch (des.unsigned_8()) {
-	case PLCMD_BULLDOZE:
+	switch (static_cast<QueueCommandTypes>(des.unsigned_8())) {
+	case QueueCommandTypes::kBulldoze:
 		return new CmdBulldoze(des);
-	case PLCMD_BUILD:
+	case QueueCommandTypes::kBuild:
 		return new CmdBuild(des);
-	case PLCMD_BUILDFLAG:
+	case QueueCommandTypes::kBuildFlag:
 		return new CmdBuildFlag(des);
-	case PLCMD_BUILDROAD:
+	case QueueCommandTypes::kBuildRoad:
 		return new CmdBuildRoad(des);
-	case PLCMD_FLAGACTION:
+	case QueueCommandTypes::kFlagAction:
 		return new CmdFlagAction(des);
-	case PLCMD_STARTSTOPBUILDING:
+	case QueueCommandTypes::kStartStopBuilding:
 		return new CmdStartStopBuilding(des);
-	case PLCMD_SHIP_EXPEDITION:
-		return new CmdStartOrCancelExpedition(des);
-	case PLCMD_SHIP_SCOUT:
-		return new CmdShipScoutDirection(des);
-	case PLCMD_SHIP_EXPLORE:
-		return new CmdShipExploreIsland(des);
-	case PLCMD_SHIP_CONSTRUCT:
-		return new CmdShipConstructPort(des);
-	case PLCMD_SHIP_SINK:
-		return new CmdShipSink(des);
-	case PLCMD_SHIP_CANCELEXPEDITION:
-		return new CmdShipCancelExpedition(des);
-	case PLCMD_ENHANCEBUILDING:
+	case QueueCommandTypes::kEnhanceBuilding:
 		return new CmdEnhanceBuilding(des);
-	case PLCMD_CHANGETRAININGOPTIONS:
+
+	case QueueCommandTypes::kChangeTrainingOptions:
 		return new CmdChangeTrainingOptions(des);
-	case PLCMD_DROPSOLDIER:
+	case QueueCommandTypes::kDropSoldier:
 		return new CmdDropSoldier(des);
-	case PLCMD_CHANGESOLDIERCAPACITY:
+	case QueueCommandTypes::kChangeSoldierCapacity:
 		return new CmdChangeSoldierCapacity(des);
-	case PLCMD_ENEMYFLAGACTION:
+	case QueueCommandTypes::kEnemyFlagAction:
 		return new CmdEnemyFlagAction(des);
-	case PLCMD_SETWAREPRIORITY:
+
+	case QueueCommandTypes::kSetWarePriority:
 		return new CmdSetWarePriority(des);
-	case PLCMD_SETWARETARGETQUANTITY:
+	case QueueCommandTypes::kSetWareTargetQuantity:
 		return new CmdSetWareTargetQuantity(des);
-	case PLCMD_RESETWARETARGETQUANTITY:
+	case QueueCommandTypes::kResetWareTargetQuantity:
 		return new CmdResetWareTargetQuantity(des);
-	case PLCMD_SETWORKERTARGETQUANTITY:
+	case QueueCommandTypes::kSetWorkerTargetQuantity:
 		return new CmdSetWorkerTargetQuantity(des);
-	case PLCMD_RESETWORKERTARGETQUANTITY:
+	case QueueCommandTypes::kResetWorkerTargetQuantity:
 		return new CmdResetWorkerTargetQuantity(des);
-	case PLCMD_MESSAGESETSTATUSREAD:
+
+	case QueueCommandTypes::kMessageSetStatusRead:
 		return new CmdMessageSetStatusRead(des);
-	case PLCMD_MESSAGESETSTATUSARCHIVED:
+	case QueueCommandTypes::kMessageSetStatusArchived:
 		return new CmdMessageSetStatusArchived(des);
-	case PLCMD_SETSTOCKPOLICY:
+
+	case QueueCommandTypes::kSetStockPolicy:
 		return new CmdSetStockPolicy(des);
-	case PLCMD_SETINPUTMAXFILL:
+	case QueueCommandTypes::kSetInputMaxFill:
 		return new CmdSetInputMaxFill(des);
-	case PLCMD_DISMANTLEBUILDING:
+	case QueueCommandTypes::kDismantleBuilding:
 		return new CmdDismantleBuilding(des);
-	case PLCMD_EVICTWORKER:
+	case QueueCommandTypes::kEvictWorker:
 		return new CmdEvictWorker(des);
-	case PLCMD_MILITARYSITESETSOLDIERPREFERENCE:
+	case QueueCommandTypes::kMilitarysiteSetSoldierPreference:
 		return new CmdMilitarySiteSetSoldierPreference(des);
+
+	case QueueCommandTypes::kStartOrCancelExpedition:
+		return new CmdStartOrCancelExpedition(des);
+	case QueueCommandTypes::kShipScoutDirection:
+		return new CmdShipScoutDirection(des);
+	case QueueCommandTypes::kShipExploreIsland:
+		return new CmdShipExploreIsland(des);
+	case QueueCommandTypes::kShipConstructPort:
+		return new CmdShipConstructPort(des);
+	case QueueCommandTypes::kShipSink:
+		return new CmdShipSink(des);
+	case QueueCommandTypes::kShipCancelExpedition:
+		return new CmdShipCancelExpedition(des);
+
 	default:
 		throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
 	}
@@ -226,8 +201,7 @@ void CmdBulldoze::execute(Game& game) {
 }
 
 void CmdBulldoze::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_BULLDOZE);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(recurse);
 }
@@ -273,8 +247,7 @@ void CmdBuild::execute(Game& game) {
 }
 
 void CmdBuild::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_BUILD);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.signed_16(bi);
 	write_coords_32(&ser, coords);
 }
@@ -317,8 +290,7 @@ void CmdBuildFlag::execute(Game& game) {
 }
 
 void CmdBuildFlag::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_BUILDFLAG);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	write_coords_32(&ser, coords);
 }
 
@@ -387,8 +359,7 @@ void CmdBuildRoad::execute(Game& game) {
 }
 
 void CmdBuildRoad::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_BUILDROAD);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	write_coords_32(&ser, start);
 	ser.unsigned_16(nsteps);
 
@@ -444,8 +415,7 @@ void CmdFlagAction::execute(Game& game) {
 }
 
 void CmdFlagAction::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_FLAGACTION);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_8(0);
 	ser.unsigned_32(serial);
 }
@@ -497,8 +467,7 @@ void CmdStartStopBuilding::execute(Game& game) {
 }
 
 void CmdStartStopBuilding::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_STARTSTOPBUILDING);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 }
 
@@ -535,8 +504,7 @@ CmdMilitarySiteSetSoldierPreference::CmdMilitarySiteSetSoldierPreference(StreamR
 }
 
 void CmdMilitarySiteSetSoldierPreference::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_MILITARYSITESETSOLDIERPREFERENCE);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(static_cast<uint8_t>(preference));
 }
@@ -605,8 +573,7 @@ void CmdStartOrCancelExpedition::execute(Game& game) {
 }
 
 void CmdStartOrCancelExpedition::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SHIP_EXPEDITION);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 }
 
@@ -653,8 +620,7 @@ void CmdEnhanceBuilding::execute(Game& game) {
 }
 
 void CmdEnhanceBuilding::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_ENHANCEBUILDING);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_16(bi);
 }
@@ -700,8 +666,7 @@ void CmdDismantleBuilding::execute(Game& game) {
 }
 
 void CmdDismantleBuilding::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_DISMANTLEBUILDING);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 }
 
@@ -744,8 +709,7 @@ void CmdEvictWorker::execute(Game& game) {
 }
 
 void CmdEvictWorker::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_EVICTWORKER);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 }
 
@@ -799,8 +763,7 @@ void CmdShipScoutDirection::execute(Game& game) {
 }
 
 void CmdShipScoutDirection::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SHIP_SCOUT);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(static_cast<uint8_t>(dir));
 }
@@ -857,8 +820,7 @@ void CmdShipConstructPort::execute(Game& game) {
 }
 
 void CmdShipConstructPort::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SHIP_CONSTRUCT);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	write_coords_32(&ser, coords);
 }
@@ -918,8 +880,7 @@ void CmdShipExploreIsland::execute(Game& game) {
 }
 
 void CmdShipExploreIsland::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SHIP_EXPLORE);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(static_cast<uint8_t>(island_explore_direction));
 }
@@ -967,8 +928,7 @@ void CmdShipSink::execute(Game& game) {
 }
 
 void CmdShipSink::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SHIP_SINK);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 }
 
@@ -1012,8 +972,7 @@ void CmdShipCancelExpedition::execute(Game& game) {
 }
 
 void CmdShipCancelExpedition::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SHIP_CANCELEXPEDITION);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 }
 
@@ -1049,25 +1008,29 @@ CmdSetWarePriority::CmdSetWarePriority(const uint32_t init_duetime,
                                        PlayerImmovable& imm,
                                        const int32_t init_type,
                                        const DescriptionIndex i,
-                                       const int32_t init_priority)
+                                       const int32_t init_priority,
+                                       bool cs_setting)
    : PlayerCommand(init_duetime, init_sender),
      serial_(imm.serial()),
      type_(init_type),
      index_(i),
-     priority_(init_priority) {
+     priority_(init_priority),
+     is_constructionsite_setting_(cs_setting) {
 }
 
 void CmdSetWarePriority::execute(Game& game) {
 	MapObject* mo = game.objects().get_object(serial_);
-	if (upcast(ConstructionSite, cs, mo)) {
-		if (upcast(ProductionsiteSettings, s, cs->get_settings())) {
-			for (auto& pair : s->ware_queues) {
-				if (pair.first == index_) {
-					pair.second.priority = priority_;
-					return;
+	if (is_constructionsite_setting_) {
+		if (upcast(ConstructionSite, cs, mo)) {
+			if (upcast(ProductionsiteSettings, s, cs->get_settings())) {
+				for (auto& pair : s->ware_queues) {
+					if (pair.first == index_) {
+						pair.second.priority = priority_;
+						return;
+					}
 				}
+				NEVER_HERE();
 			}
-			NEVER_HERE();
 		}
 	} else if (upcast(Building, psite, mo)) {
 		if (psite->owner().player_number() == sender()) {
@@ -1076,7 +1039,7 @@ void CmdSetWarePriority::execute(Game& game) {
 	}
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdSetWarePriority = 1;
+constexpr uint16_t kCurrentPacketVersionCmdSetWarePriority = 2;
 
 void CmdSetWarePriority::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionCmdSetWarePriority);
@@ -1087,6 +1050,7 @@ void CmdSetWarePriority::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 	fw.unsigned_8(type_);
 	fw.signed_32(index_);
 	fw.signed_32(priority_);
+	fw.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
 
 void CmdSetWarePriority::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
@@ -1098,6 +1062,7 @@ void CmdSetWarePriority::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 			type_ = fr.unsigned_8();
 			index_ = fr.signed_32();
 			priority_ = fr.signed_32();
+			is_constructionsite_setting_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdSetWarePriority", packet_version, kCurrentPacketVersionCmdSetWarePriority);
@@ -1113,16 +1078,17 @@ CmdSetWarePriority::CmdSetWarePriority(StreamRead& des)
      serial_(des.unsigned_32()),
      type_(des.unsigned_8()),
      index_(des.signed_32()),
-     priority_(des.signed_32()) {
+     priority_(des.signed_32()),
+     is_constructionsite_setting_(des.unsigned_8()) {
 }
 
 void CmdSetWarePriority::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SETWAREPRIORITY);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial_);
 	ser.unsigned_8(type_);
 	ser.signed_32(index_);
 	ser.signed_32(priority_);
+	ser.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
 
 /*** class Cmd_SetWareMaxFill ***/
@@ -1131,39 +1097,43 @@ CmdSetInputMaxFill::CmdSetInputMaxFill(const uint32_t init_duetime,
                                        PlayerImmovable& imm,
                                        const DescriptionIndex index,
                                        const WareWorker type,
-                                       const uint32_t max_fill)
+                                       const uint32_t max_fill,
+                                       bool cs_setting)
    : PlayerCommand(init_duetime, init_sender),
      serial_(imm.serial()),
      index_(index),
      type_(type),
-     max_fill_(max_fill) {
+     max_fill_(max_fill),
+     is_constructionsite_setting_(cs_setting) {
 }
 
 void CmdSetInputMaxFill::execute(Game& game) {
 	MapObject* mo = game.objects().get_object(serial_);
-	if (upcast(ConstructionSite, cs, mo)) {
-		if (upcast(ProductionsiteSettings, s, cs->get_settings())) {
-			switch (type_) {
-			case wwWARE:
-				for (auto& pair : s->ware_queues) {
-					if (pair.first == index_) {
-						assert(pair.second.max_fill >= max_fill_);
-						pair.second.desired_fill = max_fill_;
-						return;
+	if (is_constructionsite_setting_) {
+		if (upcast(ConstructionSite, cs, mo)) {
+			if (upcast(ProductionsiteSettings, s, cs->get_settings())) {
+				switch (type_) {
+				case wwWARE:
+					for (auto& pair : s->ware_queues) {
+						if (pair.first == index_) {
+							assert(pair.second.max_fill >= max_fill_);
+							pair.second.desired_fill = max_fill_;
+							return;
+						}
 					}
-				}
-				NEVER_HERE();
-			case wwWORKER:
-				for (auto& pair : s->worker_queues) {
-					if (pair.first == index_) {
-						assert(pair.second.max_fill >= max_fill_);
-						pair.second.desired_fill = max_fill_;
-						return;
+					NEVER_HERE();
+				case wwWORKER:
+					for (auto& pair : s->worker_queues) {
+						if (pair.first == index_) {
+							assert(pair.second.max_fill >= max_fill_);
+							pair.second.desired_fill = max_fill_;
+							return;
+						}
 					}
+					NEVER_HERE();
 				}
 				NEVER_HERE();
 			}
-			NEVER_HERE();
 		}
 	} else if (upcast(Building, b, mo)) {
 		if (b->owner().player_number() == sender()) {
@@ -1172,7 +1142,7 @@ void CmdSetInputMaxFill::execute(Game& game) {
 	}
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 2;
+constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 3;
 
 void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionCmdSetInputMaxFill);
@@ -1187,6 +1157,7 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 		fw.unsigned_8(1);
 	}
 	fw.unsigned_32(max_fill_);
+	fw.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
 
 void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
@@ -1202,6 +1173,7 @@ void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 				type_ = wwWORKER;
 			}
 			max_fill_ = fr.unsigned_32();
+			is_constructionsite_setting_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdSetInputMaxFill", packet_version, kCurrentPacketVersionCmdSetInputMaxFill);
@@ -1220,11 +1192,11 @@ CmdSetInputMaxFill::CmdSetInputMaxFill(StreamRead& des) : PlayerCommand(0, des.u
 		type_ = wwWORKER;
 	}
 	max_fill_ = des.unsigned_32();
+	is_constructionsite_setting_ = des.unsigned_8();
 }
 
 void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SETINPUTMAXFILL);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial_);
 	ser.signed_32(index_);
 	if (type_ == wwWARE) {
@@ -1233,6 +1205,7 @@ void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
 		ser.unsigned_8(1);
 	}
 	ser.unsigned_32(max_fill_);
+	ser.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
 
 CmdChangeTargetQuantity::CmdChangeTargetQuantity(const uint32_t init_duetime,
@@ -1263,7 +1236,7 @@ CmdChangeTargetQuantity::CmdChangeTargetQuantity(StreamRead& des)
 }
 
 void CmdChangeTargetQuantity::serialize(StreamWrite& ser) {
-	ser.unsigned_8(sender());
+	// Subclasses take care of writing their id() and sender()
 	ser.unsigned_32(economy());
 	ser.unsigned_8(ware_type());
 }
@@ -1314,7 +1287,7 @@ CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(StreamRead& des)
 }
 
 void CmdSetWareTargetQuantity::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SETWARETARGETQUANTITY);
+	write_id_and_sender(ser);
 	CmdChangeTargetQuantity::serialize(ser);
 	ser.unsigned_32(permanent_);
 }
@@ -1361,7 +1334,7 @@ CmdResetWareTargetQuantity::CmdResetWareTargetQuantity(StreamRead& des)
 }
 
 void CmdResetWareTargetQuantity::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_RESETWARETARGETQUANTITY);
+	write_id_and_sender(ser);
 	CmdChangeTargetQuantity::serialize(ser);
 }
 
@@ -1412,7 +1385,7 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(StreamRead& des)
 }
 
 void CmdSetWorkerTargetQuantity::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SETWORKERTARGETQUANTITY);
+	write_id_and_sender(ser);
 	CmdChangeTargetQuantity::serialize(ser);
 	ser.unsigned_32(permanent_);
 }
@@ -1463,7 +1436,7 @@ CmdResetWorkerTargetQuantity::CmdResetWorkerTargetQuantity(StreamRead& des)
 }
 
 void CmdResetWorkerTargetQuantity::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_RESETWORKERTARGETQUANTITY);
+	write_id_and_sender(ser);
 	CmdChangeTargetQuantity::serialize(ser);
 }
 
@@ -1481,8 +1454,7 @@ void CmdChangeTrainingOptions::execute(Game& game) {
 }
 
 void CmdChangeTrainingOptions::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_CHANGETRAININGOPTIONS);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(static_cast<uint8_t>(attribute));
 	ser.unsigned_16(value);
@@ -1534,8 +1506,7 @@ void CmdDropSoldier::execute(Game& game) {
 }
 
 void CmdDropSoldier::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_DROPSOLDIER);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_32(soldier);
 }
@@ -1609,8 +1580,7 @@ void CmdChangeSoldierCapacity::execute(Game& game) {
 }
 
 void CmdChangeSoldierCapacity::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_CHANGESOLDIERCAPACITY);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.signed_16(val);
 }
@@ -1686,8 +1656,7 @@ void CmdEnemyFlagAction::execute(Game& game) {
 }
 
 void CmdEnemyFlagAction::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_ENEMYFLAGACTION);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_8(1);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(sender());
@@ -1792,8 +1761,7 @@ void CmdMessageSetStatusRead::execute(Game& game) {
 }
 
 void CmdMessageSetStatusRead::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_MESSAGESETSTATUSREAD);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(message_id().value());
 }
 
@@ -1805,8 +1773,7 @@ void CmdMessageSetStatusArchived::execute(Game& game) {
 }
 
 void CmdMessageSetStatusArchived::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_MESSAGESETSTATUSARCHIVED);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(message_id().value());
 }
 
@@ -1872,8 +1839,7 @@ CmdSetStockPolicy::CmdSetStockPolicy(StreamRead& des) : PlayerCommand(0, des.uns
 }
 
 void CmdSetStockPolicy::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_SETSTOCKPOLICY);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(warehouse_);
 	ser.unsigned_8(isworker_);
 	ser.unsigned_8(ware_);
@@ -1956,8 +1922,7 @@ CmdProposeTrade::CmdProposeTrade(StreamRead& des) : PlayerCommand(0, des.unsigne
 }
 
 void CmdProposeTrade::serialize(StreamWrite& ser) {
-	ser.unsigned_8(PLCMD_PROPOSE_TRADE);
-	ser.unsigned_8(sender());
+	write_id_and_sender(ser);
 	ser.unsigned_32(trade_.initiator);
 	ser.unsigned_32(trade_.receiver);
 	serialize_bill_of_materials(trade_.items_to_send, &ser);

@@ -106,7 +106,6 @@ private:
 	void set_highlighted(bool highlighted);
 
 public:
-	boost::signals2::signal<void()> clicked;
 	boost::signals2::signal<void()> changed;
 	boost::signals2::signal<void(int32_t)> changedto;
 

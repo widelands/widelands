@@ -48,7 +48,7 @@ Radiobutton::~Radiobutton() {
  * Inform the radiogroup about the click; the group is responsible of setting
  * button states.
  */
-void Radiobutton::clicked() {
+void Radiobutton::button_clicked() {
 	group_.set_state(id_);
 	play_click();
 }

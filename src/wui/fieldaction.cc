@@ -76,7 +76,7 @@ private:
 
 BuildGrid::BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32_t y, int32_t cols)
    : UI::IconGrid(parent, x, y, kBuildGridCellSize, kBuildGridCellSize, cols), plr_(plr) {
-	clicked.connect(boost::bind(&BuildGrid::click_slot, this, _1));
+	icon_clicked.connect(boost::bind(&BuildGrid::click_slot, this, _1));
 	mouseout.connect(boost::bind(&BuildGrid::mouseout_slot, this, _1));
 	mousein.connect(boost::bind(&BuildGrid::mousein_slot, this, _1));
 }
@@ -163,9 +163,6 @@ public:
 	void add_buttons_attack();
 
 	void act_watch();
-	void act_show_census();
-	void act_show_statistics();
-	void act_show_workarea_overlap();
 	void act_debug();
 	void act_buildflag();
 	void act_configure_economy();
@@ -232,10 +229,6 @@ static const char* const pic_remroad = "images/wui/fieldaction/menu_rem_way.png"
 static const char* const pic_buildflag = "images/wui/fieldaction/menu_build_flag.png";
 static const char* const pic_ripflag = "images/wui/fieldaction/menu_rip_flag.png";
 static const char* const pic_watchfield = "images/wui/fieldaction/menu_watch_field.png";
-static const char* const pic_showcensus = "images/wui/fieldaction/menu_show_census.png";
-static const char* const pic_showstatistics = "images/wui/fieldaction/menu_show_statistics.png";
-static const char* const pic_showworkareaoverlap =
-   "images/wui/fieldaction/menu_show_workarea_overlap.png";
 static const char* const pic_debug = "images/wui/fieldaction/menu_debug.png";
 static const char* const pic_abort = "images/wui/menu_abort.png";
 static const char* const pic_geologist = "images/wui/fieldaction/menu_geologist.png";
@@ -385,21 +378,10 @@ void FieldActionWindow::add_buttons_auto() {
 	                             node_, ibase().egbase().map().get_width())))
 		add_buttons_attack();
 
-	//  Watch actions, only when game (no use in editor) same for statistics.
-	//  census is ok
+	//  Watch actions, only when in game (no use in editor).
 	if (dynamic_cast<const Game*>(&ibase().egbase())) {
 		add_button(&watchbox, "watch", pic_watchfield, &FieldActionWindow::act_watch,
 		           _("Watch field in a separate window"));
-		add_button(&watchbox, "statistics", pic_showstatistics,
-		           &FieldActionWindow::act_show_statistics, _("Toggle building statistics display"));
-	}
-	add_button(&watchbox, "census", pic_showcensus, &FieldActionWindow::act_show_census,
-	           _("Toggle building label display"));
-	if (is_a(InteractivePlayer, &ibase())) {
-		add_button(
-		   &watchbox, "workarea_overlap", pic_showworkareaoverlap,
-		   &FieldActionWindow::act_show_workarea_overlap,
-		   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"));
 	}
 
 	if (ibase().get_display_flag(InteractiveBase::dfDebug))
@@ -579,29 +561,6 @@ Open a watch window for the given field and delete self.
 void FieldActionWindow::act_watch() {
 	upcast(InteractiveGameBase, igbase, &ibase());
 	show_watch_window(*igbase, node_);
-	reset_mouse_and_die();
-}
-
-/*
-===============
-Toggle display of census and statistics for buildings, respectively.
-===============
-*/
-void FieldActionWindow::act_show_census() {
-	ibase().set_display_flag(
-	   InteractiveBase::dfShowCensus, !ibase().get_display_flag(InteractiveBase::dfShowCensus));
-	reset_mouse_and_die();
-}
-
-void FieldActionWindow::act_show_statistics() {
-	ibase().set_display_flag(InteractiveBase::dfShowStatistics,
-	                         !ibase().get_display_flag(InteractiveBase::dfShowStatistics));
-	reset_mouse_and_die();
-}
-
-void FieldActionWindow::act_show_workarea_overlap() {
-	ibase().set_display_flag(InteractiveBase::dfShowWorkareaOverlap,
-	                         !ibase().get_display_flag(InteractiveBase::dfShowWorkareaOverlap));
 	reset_mouse_and_die();
 }
 
