@@ -130,8 +130,6 @@ wl_library(widelands_ball_of_mud
     wui
 )
 
-# TODO(unknown): Ideally widelands_ball_of_mud shouldn't exist, everything should be in a
-# library.
 wl_library(widelands_options
   SRCS
     wlapplication_options.cc
