@@ -213,11 +213,11 @@ std::vector<const Image*> NonPackedAnimation::pc_masks(float scale) const {
 
 const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 	const NonPackedMipMapEntry& mipmap = dynamic_cast<const NonPackedMipMapEntry&>(mipmap_entry(1.0f));
-	std::vector<std::string> images = mipmap.image_files;
-	assert(!images.empty());
+	assert(!mipmap.image_files.empty());
+	const std::string& image_filename = mipmap.image_files[representative_frame()];
 	const Image* image = (mipmap.has_playercolor_masks && clr) ?
-	                        playercolor_image(*clr, images[representative_frame()]) :
-	                        g_gr->images().get(images[representative_frame()]);
+	                        playercolor_image(*clr, image_filename) :
+	                        g_gr->images().get(image_filename);
 
 	const int w = image->width();
 	const int h = image->height();

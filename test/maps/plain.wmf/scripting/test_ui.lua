@@ -77,7 +77,11 @@ run(function()
    ok_button:click()
 
    -- Give Widelands some time to close the map view
-   sleep(10000)
+   count = 0
+   while (wl.ui.MapView() ~= nil and count < 50) do
+      sleep(1000)
+      count = count + 1
+   end
    assert_nil(wl.ui.MapView(), "Exiting by main menu did not close the map view")
 
    if (wl.ui.MapView() ~= nil) then
