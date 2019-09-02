@@ -187,7 +187,6 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
  * set values
  */
 void MainMenuMapOptions::update() {
-	log("NOCOM update!\n");
 	const Widelands::Map& map = eia().egbase().map();
 	author_.set_text(map.get_author());
 	name_.set_text(map.get_name());
