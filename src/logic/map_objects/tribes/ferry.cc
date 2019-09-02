@@ -159,7 +159,6 @@ void Ferry::start_task_row(Game& game, Waterway* ww) {
 }
 
 void Ferry::row_update(Game& game, State&) {
-	// NOCOM do we want the ferry's coordinates in the molog messages for this function?
 	if (!destination_) {
 		return pop_task(game);
 	}
@@ -193,14 +192,15 @@ void Ferry::row_update(Game& game, State&) {
 			return start_task_road(game);
 		}
 		// If we get here, the waterway was destroyed and we didn't notice
-		molog("[row]: Reached the destination but it is no longer there\n");
+		molog("[row]: Reached the destination (%3dx%3d) but it is no longer there\n", get_position().x, get_position().y);
 		destination_.reset(nullptr);
 		return pop_task(game);
 	}
 
 	Path path(pos);
 	if (!map.findpath(pos, *destination_, 0, path, CheckStepFerry(game))) {
-		molog("[row]: Can't find a path to the waterway!\n");
+		molog("[row]: Can't find a path to the waterway! Ferry at %3dx%3d, Waterway at %3dx%3d\n",
+				get_position().x, get_position().y, destination_->x, destination_->y);
 		// try again later
 		return schedule_act(game, 50);
 	}

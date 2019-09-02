@@ -947,7 +947,6 @@ void Economy::create_requested_worker(Game& game, DescriptionIndex index) {
  * try to create the worker at warehouses.
  */
 void Economy::create_requested_workers(Game& game) {
-// NOCOM can a ware economy request a worker? If not, we can assert(type_ != wwWORKER);
 	if (type_ != wwWORKER || !warehouses().size())
 		return;
 

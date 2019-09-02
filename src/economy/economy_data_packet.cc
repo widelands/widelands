@@ -42,7 +42,7 @@ void EconomyDataPacket::read(FileRead& fr) {
 				   eco_->serial_, saved_serial);
 			}
 			// TODO(Nordfriese): Savegame compatibility
-			// NOCOM removed on purpose? assert(Economy::last_economy_serial_ >= eco_->serial_);
+			// assert(Economy::last_economy_serial_ >= eco_->serial_); // Uncomment when we break savegame compatibility
 			assert((packet_version == kCurrentPacketVersion) ^ (mol_ != nullptr));
 			Economy* other_eco = nullptr;
 			if (mol_) {
