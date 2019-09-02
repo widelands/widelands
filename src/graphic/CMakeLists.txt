@@ -6,6 +6,16 @@ add_subdirectory(text)
 
 # Align and color
 
+wl_library(graphic_toolbar_imageset
+  SRCS
+    toolbar_imageset.cc
+    toolbar_imageset.h
+  DEPENDS
+    graphic
+    graphic_surface
+    scripting_lua_table
+)
+
 wl_library(graphic_align
   SRCS
     align.h

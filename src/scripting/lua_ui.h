@@ -140,6 +140,7 @@ public:
 	 * Properties
 	 */
 	int get_name(lua_State* L);
+	int get_no_of_items(lua_State* L);
 
 	/*
 	 * Lua Methods

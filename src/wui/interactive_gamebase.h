@@ -23,8 +23,9 @@
 #include <map>
 #include <memory>
 
+#include "io/profile.h"
 #include "logic/game.h"
-#include "profile/profile.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/unique_window.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/interactive_base.h"
@@ -35,22 +36,6 @@ enum PlayerType { NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED };
 
 class InteractiveGameBase : public InteractiveBase {
 public:
-	struct GameMainMenuWindows {
-		UI::UniqueWindow::Registry loadgame;
-		UI::UniqueWindow::Registry savegame;
-		UI::UniqueWindow::Registry readme;
-		UI::UniqueWindow::Registry keys;
-		UI::UniqueWindow::Registry help;
-		UI::UniqueWindow::Registry license;
-		UI::UniqueWindow::Registry sound_options;
-
-		UI::UniqueWindow::Registry building_stats;
-		GeneralStatisticsMenu::Registry general_stats;
-		UI::UniqueWindow::Registry ware_stats;
-		UI::UniqueWindow::Registry stock;
-		UI::UniqueWindow::Registry seafaring_stats;
-	};
-
 	InteractiveGameBase(Widelands::Game&,
 	                    Section& global_s,
 	                    PlayerType pt = NONE,
@@ -104,20 +89,76 @@ public:
 	void start() override;
 
 protected:
+	// For referencing the items in showhidemenu_
+	enum class ShowHideEntry { kBuildingSpaces, kCensus, kStatistics, kWorkareaOverlap };
+
+	// Adds the mapviewmenu_ to the toolbar
+	void add_main_menu();
+	// Adds the showhidemenu_ to the toolbar
+	void add_showhide_menu();
+	void rebuild_showhide_menu() override;
+	// Adds the gamespeedmenu_ to the toolbar
+	void add_gamespeed_menu();
+
+	bool handle_key(bool down, SDL_Keysym code) override;
+
 	void draw_overlay(RenderTarget&) override;
 
-	GameMainMenuWindows main_windows_;
+	// All unique menu windows
+	struct GameMenuWindows {
+		UI::UniqueWindow::Registry sound_options;
+		UI::UniqueWindow::Registry savegame;
+
+		GeneralStatisticsMenu::Registry stats_general;
+		UI::UniqueWindow::Registry stats_wares;
+		UI::UniqueWindow::Registry stats_stock;
+		UI::UniqueWindow::Registry stats_buildings;
+		UI::UniqueWindow::Registry stats_seafaring;
+
+		UI::UniqueWindow::Registry help;
+	} menu_windows_;
+
 	ChatProvider* chat_provider_;
 	bool multiplayer_;
 	PlayerType playertype_;
+
+	// Show / Hide menu on the toolbar
+	UI::Dropdown<ShowHideEntry> showhidemenu_;
+
 	UI::UniqueWindow::Registry fieldaction_;
 	UI::UniqueWindow::Registry game_summary_;
 	UI::UniqueWindow::Registry client_disconnected_;
-	UI::Button* toggle_buildhelp_;
-	UI::Button* reset_zoom_;
 
 private:
-	void on_buildhelp_changed(const bool value) override;
+	// For referencing the items in mainmenu_
+	enum class MainMenuEntry {
+#ifndef NDEBUG  //  only in debug builds
+		kScriptConsole,
+#endif
+		kOptions,
+		kSaveMap,
+		kExitGame
+	};
+
+	// For referencing the items in gamespeedmenu_
+	enum class GameSpeedEntry { kIncrease, kDecrease, kPause };
+
+	// Takes the appropriate action when an item in the mainmenu_ is selected
+	void main_menu_selected(MainMenuEntry entry);
+	// Takes the appropriate action when an item in the showhidemenu_ is selected
+	void showhide_menu_selected(ShowHideEntry entry);
+	// Takes the appropriate action when an item in the gamespeedmenu_ is selected
+	void gamespeed_menu_selected(GameSpeedEntry entry);
+	// Rebuilds the gamespeedmenu_ according to current game settings
+	void rebuild_gamespeed_menu();
+
+	// Increases the gamespeed
+	void increase_gamespeed();
+	// Decreases the gamespeed
+	void decrease_gamespeed();
+	// Pauses / Unpauses the game and calls rebuild_gamespeed_menu
+	void toggle_game_paused();
+
 	struct WantedBuildingWindow {
 		explicit WantedBuildingWindow(const Vector2i& pos,
 		                              bool was_minimized,
@@ -128,6 +169,12 @@ private:
 		const bool minimize;
 		const bool show_workarea;
 	};
+
+	// Main menu on the toolbar
+	UI::Dropdown<MainMenuEntry> mainmenu_;
+	// Game speed menu on the toolbar
+	UI::Dropdown<GameSpeedEntry> gamespeedmenu_;
+
 	// Building coordinates, window position, whether the window was minimized
 	std::map<uint32_t, std::unique_ptr<const WantedBuildingWindow>> wanted_building_windows_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;

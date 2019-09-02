@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-30 18:50+0000\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2019\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -606,7 +606,7 @@ msgid ""
 "Build a beekeeper’s house next to the berry farm to produce some honey, "
 "which we can store until we need it."
 msgstr ""
-"De Backeree un Broeree sallen utbaut worden sobald de Arbeiders genoog "
+"De Backeree un Broeree sallen utbaut worden sobold de Arbeiders genoog "
 "Erfahrung hebben. Se könen dann Hönnigbeer un mit Hönnig sööt Brood "
 "produzeren. Bau eene Imkeree tegen de Buskenplanteree, um Hönnig to "
 "produzeren. Wi könen de Hönnig upbewahren, bit wi 't bruken."
@@ -1124,3 +1124,16 @@ msgstr ""
 "Du hest deese Rutfödderung ofsloten. Du kannst nu de token Rutfödderung "
 "anfangen un uns helpen, eene neje Heimaad uptobauen, wied weg vun de "
 "haatsken Macht vun de falsken Gott …"
+
+#: ../../data/scripting/richtext_scenarios.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr "“%s”"
+
+#: ../../data/scripting/richtext_scenarios.lua:91
+msgid "New Objective"
+msgstr "Neje Upgaav"
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr "Neje Upgaven"
