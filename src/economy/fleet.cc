@@ -871,13 +871,11 @@ void Fleet::check_push_destination(Game& game, Ship& ship,
 		// the detour, the number of items it's shipping and the number of items waiting here
 		for (const auto& pair : ship.destinations_) {
 			const PortDock* pd = pair.first.get(game);
-			uint32_t base_length = 0;
 			uint32_t detour = 0;
 
-			if (iterator != pd) {
-				get_path(*iterator, *pd, path);
-				base_length = path.get_nsteps();
-			}
+			assert(iterator != pd);
+			get_path(*iterator, *pd, path);
+			const uint32_t base_length = path.get_nsteps();
 
 			assert(iterator != &destination);
 			get_path(*iterator, destination, path);
@@ -887,8 +885,7 @@ void Fleet::check_push_destination(Game& game, Ship& ship,
 			get_path(destination, *pd, path);
 			detour += path.get_nsteps();
 
-			assert(detour >= base_length);
-			detour -= base_length;
+			detour -= std::min(detour, base_length);
 			if (detour < shortest_detour) {
 				shortest_detour = detour;
 				best_index = index;
