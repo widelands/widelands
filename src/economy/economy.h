@@ -96,9 +96,9 @@ class Economy {
 public:
 	friend class EconomyDataPacket;
 	// TODO(Nordfriese): These 3 friends are for savegame compatibility
-	friend class CmdCallEconomyBalance;
+	friend struct CmdCallEconomyBalance;
 	friend class MapFlagPacket;
-	friend class Ship;
+	friend struct Ship;
 
 	// Initialize the global serial on game start
 	static void initialize_serial();

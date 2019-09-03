@@ -861,7 +861,7 @@ void Economy::create_requested_worker(Game& game, DescriptionIndex index) {
 	for (const std::pair<Economy*, std::vector<Quantity>>& pair : total_available) {
 		Request* req = nullptr;
 		uint32_t demand = 0;
-		for (const std::pair<Request*, uint32_t>& r : open_requests) {
+		for (const auto& r : open_requests) {
 			if (r.first->target().get_economy(wwWARE) == pair.first) {
 				assert (r.second > 0);
 				demand += r.second;
