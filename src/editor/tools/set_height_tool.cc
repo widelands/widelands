@@ -25,9 +25,8 @@
 #include "logic/field.h"
 #include "logic/mapregion.h"
 
-int32_t EditorSetHeightTool::handle_click_impl(const Widelands::EditorGameBase& egbase,
-                                               const Widelands::NodeAndTriangle<>& center,
-                                               EditorInteractive&,
+int32_t EditorSetHeightTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                               EditorInteractive& eia,
                                                EditorActionArgs* args,
                                                Widelands::Map* map) {
 	if (args->original_heights.empty()) {
@@ -40,14 +39,13 @@ int32_t EditorSetHeightTool::handle_click_impl(const Widelands::EditorGameBase& 
 		while (mr.advance(*map));
 	}
 	return map->set_height(
-	   egbase, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius),
+	   eia.egbase(), Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius),
 	   args->interval);
 }
 
 int32_t
-EditorSetHeightTool::handle_undo_impl(const Widelands::EditorGameBase& egbase,
-                                      const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                      EditorInteractive&,
+EditorSetHeightTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
+                                      EditorInteractive& eia,
                                       EditorActionArgs* args,
                                       Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
@@ -63,7 +61,7 @@ EditorSetHeightTool::handle_undo_impl(const Widelands::EditorGameBase& egbase,
 	} while (mr.advance(*map));
 
 	map->recalc_for_field_area(
-	   egbase, Widelands::Area<Widelands::FCoords>(
+	   eia.egbase(), Widelands::Area<Widelands::FCoords>(
 	             map->get_fcoords(center.node),
 	             args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 2));
 

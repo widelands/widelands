@@ -23,12 +23,10 @@
 #include "logic/field.h"
 #include "logic/widelands_geometry.h"
 
-int32_t EditorResizeTool::handle_click_impl(const Widelands::EditorGameBase&,
-                                            const Widelands::NodeAndTriangle<>& center,
+int32_t EditorResizeTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                             EditorInteractive& eia,
                                             EditorActionArgs* args,
                                             Widelands::Map* map) {
-	Widelands::EditorGameBase& egbase = eia.egbase();
 	args->resized.old_map_size = map->extent();
 	args->resized.port_spaces.clear();
 	args->resized.starting_positions.clear();
@@ -40,15 +38,14 @@ int32_t EditorResizeTool::handle_click_impl(const Widelands::EditorGameBase&,
 	}
 
 	args->resized.deleted_fields =
-	   map->resize(egbase, center.node, args->new_map_size.w, args->new_map_size.h);
+	   map->resize(eia.egbase(), center.node, args->new_map_size.w, args->new_map_size.h);
 
-	map->recalc_whole_map(egbase);
+	map->recalc_whole_map(eia.egbase());
 	return 0;
 }
 
 int32_t
-EditorResizeTool::handle_undo_impl(const Widelands::EditorGameBase&,
-                                   const Widelands::NodeAndTriangle<Widelands::Coords>& center,
+EditorResizeTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
                                    EditorInteractive& eia,
                                    EditorActionArgs* args,
                                    Widelands::Map* map) {

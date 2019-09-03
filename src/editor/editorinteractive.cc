@@ -149,8 +149,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	history_.reset(new EditorHistory(*undo_, *redo_));
 
-	undo_->sigclicked.connect([this] { history_->undo_action(egbase()); });
-	redo_->sigclicked.connect([this] { history_->redo_action(egbase()); });
+	undo_->sigclicked.connect([this] { history_->undo_action(); });
+	redo_->sigclicked.connect([this] { history_->redo_action(); });
 
 	toolbar()->add_space(15);
 
@@ -528,7 +528,7 @@ void EditorInteractive::exit() {
 void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle,
                                     const bool should_draw) {
 	history_->do_action(tools_->current(), tools_->use_tool, *egbase().mutable_map(),
-	                    egbase(), node_and_triangle, *this, should_draw);
+	                    node_and_triangle, *this, should_draw);
 	set_need_save(true);
 }
 
@@ -826,14 +826,14 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_y:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				history_->redo_action(egbase());
+				history_->redo_action();
 			return true;
 
 		case SDLK_z:
 			if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) && (code.mod & (KMOD_LSHIFT | KMOD_RSHIFT)))
-				history_->redo_action(egbase());
+				history_->redo_action();
 			else if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				history_->undo_action(egbase());
+				history_->undo_action();
 			return true;
 
 		case SDLK_F1:

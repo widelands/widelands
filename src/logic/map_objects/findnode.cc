@@ -80,17 +80,21 @@ bool FindNodeSize::accept(const EditorGameBase& egbase, const FCoords& coord) co
 		return (nodecaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_BIG;
 	case sizeSwim:
 		return map.can_reach_by_water(coord);
-	case sizeTerraform:
-		return !(egbase.world().terrain_descr(coord.field->terrain_d()).enhancement().empty() &&
-				egbase.world().terrain_descr(coord.field->terrain_r()).enhancement().empty() &&
-				egbase.world().terrain_descr(map.tl_n(coord).field->terrain_d()).enhancement().empty() &&
-				egbase.world().terrain_descr(map.tl_n(coord).field->terrain_r()).enhancement().empty() &&
-				egbase.world().terrain_descr(map.tr_n(coord).field->terrain_d()).enhancement().empty() &&
-				egbase.world().terrain_descr(map.l_n(coord).field->terrain_r()).enhancement().empty());
 	case sizeAny:
 		return true;
 	}
 	NEVER_HERE();
+}
+
+bool FindNodeTerraform::accept(const EditorGameBase& egbase, const FCoords& coord) const {
+	const Map& map = egbase.map();
+	const World& world = egbase.world();
+	return !(world.terrain_descr(coord.field->terrain_d()).enhancement().empty() &&
+			world.terrain_descr(coord.field->terrain_r()).enhancement().empty() &&
+			world.terrain_descr(map.tl_n(coord).field->terrain_d()).enhancement().empty() &&
+			world.terrain_descr(map.tl_n(coord).field->terrain_r()).enhancement().empty() &&
+			world.terrain_descr(map.tr_n(coord).field->terrain_d()).enhancement().empty() &&
+			world.terrain_descr(map.l_n(coord).field->terrain_r()).enhancement().empty());
 }
 
 bool FindNodeImmovableSize::accept(const EditorGameBase&, const FCoords& coord) const {

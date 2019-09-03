@@ -132,7 +132,7 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 		   static_cast<ResourceAmount>(random_value / (kMaxElevation / max_amount));
 		res_val *= static_cast<ResourceAmount>(map_info_.resource_amount) + 1;
 		res_val /= 3;
-		if (map_.is_resource_valid(egbase_, fc, res_idx)) {
+		if (map_.is_resource_valid(world, fc, res_idx)) {
 			map_.initialize_resources(fc, res_idx, res_val);
 		}
 	};

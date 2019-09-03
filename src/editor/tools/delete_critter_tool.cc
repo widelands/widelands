@@ -28,7 +28,6 @@
  * Deletes the bob at the given location
  */
 int32_t EditorDeleteCritterTool::handle_click_impl(
-   const Widelands::EditorGameBase&,
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
    EditorInteractive& eia,
    EditorActionArgs* args,
@@ -49,13 +48,12 @@ int32_t EditorDeleteCritterTool::handle_click_impl(
 }
 
 int32_t EditorDeleteCritterTool::handle_undo_impl(
-   const Widelands::EditorGameBase& egbase,
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
    EditorInteractive& parent,
    EditorActionArgs* args,
    Widelands::Map* map) {
 
-	uint32_t ret = parent.tools()->place_critter.handle_undo_impl(egbase, center, parent, args, map);
+	uint32_t ret = parent.tools()->place_critter.handle_undo_impl(center, parent, args, map);
 	args->old_bob_type.clear();
 	return ret;
 }

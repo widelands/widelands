@@ -573,6 +573,9 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	if (action.iparam3)
 		functor.add(FindNodeSpace(get_location(game)));
 
+	if (action.iparam7)
+		functor.add(FindNodeTerraform());
+
 	if (!map.find_reachable_fields(game, area, &list, cstep, functor)) {
 
 		// This is default note "out of resources" sent to a player

@@ -503,7 +503,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 		}
 
 		// Prepare the map, set default textures
-		mutable_map()->recalc_default_resources(*this);
+		mutable_map()->recalc_default_resources(world());
 
 		// Finally, set the scenario names and tribes to represent
 		// the correct names of the players

@@ -32,8 +32,7 @@
  * Choses an object to place randomly from all enabled
  * and places this on the current field
  */
-int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::EditorGameBase&,
-                                                    const Widelands::NodeAndTriangle<>& center,
+int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                     EditorInteractive& eia,
                                                     EditorActionArgs* args,
                                                     Widelands::Map* map) {
@@ -67,7 +66,6 @@ int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::EditorGameB
 }
 
 int32_t EditorPlaceImmovableTool::handle_undo_impl(
-   const Widelands::EditorGameBase&,
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
    EditorInteractive& eia,
    EditorActionArgs* args,

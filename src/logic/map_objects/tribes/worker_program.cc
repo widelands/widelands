@@ -336,7 +336,7 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 findspace
 ^^^^^^^^^
 .. function:: findspace=size:\<plot\> radius:\<distance\> [breed] [resource:\<name\>]
-   [avoid:\<immovable_attribute\>] [saplingsearches:\<number\>] [space]
+   [avoid:\<immovable_attribute\>] [saplingsearches:\<number\>] [space] [terraform]
 
    :arg string size: The size or building plot type of the free space.
       The possible values are:
@@ -349,7 +349,6 @@ findspace
       * ``mine``: Mining plots only.
       * ``port``: Port spaces only.
       * ``swim``: Anything on the coast.
-      * ``terraform``: A node with terrain that can be enhanced
 
    :arg int radius: Search for map fields within the given radius around the worker.
 
@@ -368,6 +367,8 @@ findspace
    :arg empty space: Find only fields that are walkable in such a way that all
       neighbors are also walkable (an exception is made if one of the neighboring
       fields is owned by this worker's location).
+
+   :arg empty terraform: Find only nodes where at least one adjacent triangle has terrain that can be enhanced
 
    Find a map field based on a number of predicates.
    The field can then be used in other commands like ``walk``. Examples::
@@ -409,6 +410,7 @@ findspace
  * iparam4 = whether the "breed" flag is set
  * iparam5 = Immovable attribute id
  * iparam6 = Forester retries
+ * iparam7 = whether the "terraform" flag is set
  * sparam1 = Resource
  */
 void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::string>& cmd) {
@@ -421,6 +423,7 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	act->iparam4 = 0;
 	act->iparam5 = -1;
 	act->iparam6 = 1;
+	act->iparam7 = 0;
 	act->sparam1 = "";
 
 	// Parse predicates
@@ -444,7 +447,6 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			                 {"small", FindNodeSize::sizeSmall}, {"medium", FindNodeSize::sizeMedium},
 			                 {"big", FindNodeSize::sizeBig},     {"mine", FindNodeSize::sizeMine},
 			                 {"port", FindNodeSize::sizePort},   {"swim", FindNodeSize::sizeSwim},
-			                 {"terraform", FindNodeSize::sizeTerraform},
 			                 {nullptr, 0}};
 
 			int32_t index;
@@ -459,6 +461,8 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			act->iparam2 = sizenames[index].val;
 		} else if (key == "breed") {
 			act->iparam4 = 1;
+		} else if (key == "terraform") {
+			act->iparam7 = 1;
 		} else if (key == "resource") {
 			act->sparam1 = value;
 		} else if (key == "space") {

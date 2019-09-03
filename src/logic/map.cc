@@ -179,8 +179,7 @@ void Map::recalc_whole_map(const EditorGameBase& egbase) {
 	recalculate_allows_seafaring();
 }
 
-void Map::recalc_default_resources(const EditorGameBase& egbase) {
-	const World& world = egbase.world();
+void Map::recalc_default_resources(const World& world) {
 	for (int16_t y = 0; y < height_; ++y)
 		for (int16_t x = 0; x < width_; ++x) {
 			FCoords f, f1;
@@ -2101,21 +2100,21 @@ Map::change_terrain(const EditorGameBase& egbase, TCoords<FCoords> const c, Desc
 
 	// remove invalid resources if necessary
 	// check vertex to which the triangle belongs
-	if (!is_resource_valid(egbase, c.node, c.node.field->get_resources())) {
+	if (!is_resource_valid(egbase.world(), c.node, c.node.field->get_resources())) {
 		clear_resources(c.node);
 	}
 
 	// always check south-east vertex
 	Widelands::FCoords f_se(c.node);
 	get_neighbour(f_se, Widelands::WALK_SE, &f_se);
-	if (!is_resource_valid(egbase, f_se, f_se.field->get_resources())) {
+	if (!is_resource_valid(egbase.world(), f_se, f_se.field->get_resources())) {
 		clear_resources(f_se);
 	}
 
 	// check south-west vertex if d-Triangle is changed, check east vertex if r-Triangle is changed
 	Widelands::FCoords f_sw_e(c.node);
 	get_neighbour(f_sw_e, c.t == TriangleIndex::D ? Widelands::WALK_SW : Widelands::WALK_E, &f_sw_e);
-	if (!is_resource_valid(egbase, f_sw_e, f_sw_e.field->get_resources())) {
+	if (!is_resource_valid(egbase.world(), f_sw_e, f_sw_e.field->get_resources())) {
 		clear_resources(f_sw_e);
 	}
 
@@ -2128,13 +2127,12 @@ Map::change_terrain(const EditorGameBase& egbase, TCoords<FCoords> const c, Desc
 	return kPotentiallyAffectedNeighbors;
 }
 
-bool Map::is_resource_valid(const Widelands::EditorGameBase& egbase,
+bool Map::is_resource_valid(const Widelands::World& world,
                             const Widelands::FCoords& c,
                             DescriptionIndex curres) const {
 	if (curres == Widelands::kNoResource)
 		return true;
 
-	const World& world = egbase.world();
 	Widelands::FCoords f1;
 
 	int32_t count = 0;
@@ -2160,10 +2158,10 @@ bool Map::is_resource_valid(const Widelands::EditorGameBase& egbase,
 	return count > 1;
 }
 
-void Map::ensure_resource_consistency(const EditorGameBase& egbase) {
+void Map::ensure_resource_consistency(const World& world) {
 	for (MapIndex i = 0; i < max_index(); ++i) {
 		auto fcords = get_fcoords(fields_[i]);
-		if (!is_resource_valid(egbase, fcords, fcords.field->get_resources())) {
+		if (!is_resource_valid(world, fcords, fcords.field->get_resources())) {
 			clear_resources(fcords);
 		}
 	}

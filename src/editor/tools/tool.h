@@ -46,23 +46,21 @@ public:
 
 	enum ToolIndex { First, Second, Third };
 	int32_t handle_click(ToolIndex i,
-	                     const Widelands::EditorGameBase& egbase,
 	                     const Widelands::NodeAndTriangle<>& center,
 	                     EditorInteractive& parent,
 	                     EditorActionArgs* args,
 	                     Widelands::Map* map) {
 		return (i == First ? *this : i == Second ? second_ : third_)
-		   .handle_click_impl(egbase, center, parent, args, map);
+		   .handle_click_impl(center, parent, args, map);
 	}
 
 	int32_t handle_undo(ToolIndex i,
-	                    const Widelands::EditorGameBase& egbase,
 	                    const Widelands::NodeAndTriangle<>& center,
 	                    EditorInteractive& parent,
 	                    EditorActionArgs* args,
 	                    Widelands::Map* map) {
 		return (i == First ? *this : i == Second ? second_ : third_)
-		   .handle_undo_impl(egbase, center, parent, args, map);
+		   .handle_undo_impl(center, parent, args, map);
 	}
 
 	const Image* get_sel(const ToolIndex i) {
@@ -82,13 +80,11 @@ public:
 	virtual EditorActionArgs format_args_impl(EditorInteractive& parent) {
 		return EditorActionArgs(parent);
 	}
-	virtual int32_t handle_click_impl(const Widelands::EditorGameBase&,
-	                                  const Widelands::NodeAndTriangle<>&,
+	virtual int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
 	                                  EditorInteractive&,
 	                                  EditorActionArgs*,
 	                                  Widelands::Map*) = 0;
-	virtual int32_t handle_undo_impl(const Widelands::EditorGameBase&,
-	                                 const Widelands::NodeAndTriangle<>&,
+	virtual int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>&,
 	                                 EditorInteractive&,
 	                                 EditorActionArgs*,
 	                                 Widelands::Map*) {

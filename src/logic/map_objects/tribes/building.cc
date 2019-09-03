@@ -112,7 +112,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		// Throws an error if no matching immovable exists
 		built_over_immovable_ = get_attribute_id(table.get_string("built_over_immovable"), false);
 	} else {
-		built_over_immovable_ = -1;
+		built_over_immovable_ = INVALID_INDEX;
 	}
 
 	// Parse build options
@@ -181,7 +181,8 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
                                 bool loading,
                                 FormerBuildings const former_buildings) const {
 	std::pair<DescriptionIndex, std::string> immovable = std::make_pair(INVALID_INDEX, "");
-	if (built_over_immovable_ >= 0) {
+	if (built_over_immovable_ != INVALID_INDEX) {
+		bool immovable_previously_found = false;
 		for (const auto& pair : former_buildings) {
 			if (!pair.second.empty()) {
 				const MapObjectDescr* d;
@@ -193,24 +194,26 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 					throw wexception("Invalid FormerBuildings type: %s", pair.second.c_str());
 				}
 				if (d->has_attribute(built_over_immovable_)) {
-					goto immovable_previously_found;
+					immovable_previously_found = true;
+					break;
 				}
 			}
 		}
-		// Must be done first, because the immovable will be gone the moment the building is placed
-		const FCoords f = egbase.map().get_fcoords(pos);
-		if (f.field->get_immovable() && f.field->get_immovable()->has_attribute(built_over_immovable_)) {
-			upcast(const ImmovableDescr, imm, &f.field->get_immovable()->descr());
-			assert(imm);
-			immovable = imm->owner_type() == MapObjectDescr::OwnerType::kWorld ?
-					std::make_pair(egbase.world().get_immovable_index(imm->name()), "world") :
-					std::make_pair(egbase.tribes().safe_immovable_index(imm->name()), "tribe");
-		} else {
-			throw wexception("Attempting to build %s at %dx%d – no immovable with required attribute %i found",
-					name().c_str(), pos.x, pos.y, built_over_immovable_);
+		if (!immovable_previously_found) {
+			// Must be done first, because the immovable will be gone the moment the building is placed
+			const FCoords f = egbase.map().get_fcoords(pos);
+			if (f.field->get_immovable() && f.field->get_immovable()->has_attribute(built_over_immovable_)) {
+				upcast(const ImmovableDescr, imm, &f.field->get_immovable()->descr());
+				assert(imm);
+				immovable = imm->owner_type() == MapObjectDescr::OwnerType::kWorld ?
+						std::make_pair(egbase.world().get_immovable_index(imm->name()), "world") :
+						std::make_pair(egbase.tribes().safe_immovable_index(imm->name()), "tribe");
+			} else {
+				throw wexception("Attempting to build %s at %dx%d – no immovable with required attribute %i found",
+						name().c_str(), pos.x, pos.y, built_over_immovable_);
+			}
 		}
 	}
-	immovable_previously_found:
 
 	Building& b = construct ? create_constructionsite() : create_object();
 	b.position_ = pos;
@@ -233,7 +236,7 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 bool BuildingDescr::suitability(const Map&, const FCoords& fc) const {
 	return (mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
 	               size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK)) &&
-           (built_over_immovable_ < 0 ||
+           (built_over_immovable_ == INVALID_INDEX ||
                    (fc.field->get_immovable() && fc.field->get_immovable()->has_attribute(built_over_immovable_)));
 }
 

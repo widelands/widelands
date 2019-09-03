@@ -593,7 +593,8 @@ Building* Player::build(Coords c,
 	const Map& map = egbase().map();
 	map.normalize_coords(c);
 	const FCoords fc = map.get_fcoords(c);
-	if (!fc.field->is_interior(player_number()) || !map.br_n(fc).field->is_interior(player_number())) {
+	const FCoords brn = map.br_n(fc);
+	if (!fc.field->is_interior(player_number()) || !brn.field->is_interior(player_number())) {
 		return nullptr;
 	}
 	if (descr->get_size() >= BaseImmovable::BIG &&
@@ -603,13 +604,13 @@ Building* Player::build(Coords c,
 		return nullptr;
 	}
 
-	if (descr->get_built_over_immovable() >= 0 &&
+	if (descr->get_built_over_immovable() != INVALID_INDEX &&
 			!(fc.field->get_immovable() &&
 			fc.field->get_immovable()->has_attribute(descr->get_built_over_immovable()))) {
 		return nullptr;
 	}
 
-	const NodeCaps buildcaps = descr->get_built_over_immovable() < 0 ?
+	const NodeCaps buildcaps = descr->get_built_over_immovable() == INVALID_INDEX ?
 			get_buildcaps(fc) : map.get_max_nodecaps(egbase(), fc);
 	if (descr->get_ismine()) {
 		if (!(buildcaps & BUILDCAPS_MINE)) {
@@ -623,7 +624,8 @@ Building* Player::build(Coords c,
 			return nullptr;
 		}
 	}
-	if (!(get_buildcaps(map.br_n(fc)) & BUILDCAPS_FLAG)) {
+	if (!(brn.field->get_immovable() && brn.field->get_immovable()->descr().type() == MapObjectType::FLAG) &&
+			!(get_buildcaps(brn) & BUILDCAPS_FLAG)) {
 		return nullptr;
 	}
 

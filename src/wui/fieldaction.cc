@@ -360,8 +360,9 @@ void FieldActionWindow::add_buttons_auto() {
 			const int32_t nodecaps = map_.get_max_nodecaps(ibase().egbase(), node_);
 
 			// Add house building
-			if (player_ && ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) ||
-			    (nodecaps & Widelands::BUILDCAPS_MINE))) {
+			const int32_t caps = buildcaps | nodecaps;
+			if (player_ && ((caps & Widelands::BUILDCAPS_SIZEMASK) ||
+			    (caps & Widelands::BUILDCAPS_MINE))) {
 				add_buttons_build(buildcaps, nodecaps);
 			}
 
@@ -426,13 +427,14 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 	if (!player_) {
 		return;
 	}
+	const Widelands::FCoords brn = map_.br_n(node_);
 	if (!node_.field->is_interior(player_->player_number()) ||
-			!map_.br_n(node_).field->is_interior(player_->player_number())) {
+			!brn.field->is_interior(player_->player_number())) {
 		return;
 	}
-	if (!(node_.field->get_immovable() &&
-			node_.field->get_immovable()->descr().type() == Widelands::MapObjectType::FLAG) &&
-			!(player_->get_buildcaps(map_.br_n(node_)) & Widelands::BUILDCAPS_FLAG)) {
+	if (!(brn.field->get_immovable() &&
+			brn.field->get_immovable()->descr().type() == Widelands::MapObjectType::FLAG) &&
+			!(player_->get_buildcaps(brn) & Widelands::BUILDCAPS_FLAG)) {
 		return;
 	}
 	BuildGrid* bbg_house[4] = {nullptr, nullptr, nullptr, nullptr};
@@ -460,14 +462,14 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 			continue;
 		}
 
-		if (building_descr->get_built_over_immovable() >= 0 &&
+		if (building_descr->get_built_over_immovable() != Widelands::INVALID_INDEX &&
 				!(node_.field->get_immovable() &&
 				node_.field->get_immovable()->has_attribute(building_descr->get_built_over_immovable()))) {
 			continue;
 		}
 		// Figure out if we can build it here, and in which tab it belongs
 		if (building_descr->get_ismine()) {
-			if (!((building_descr->get_built_over_immovable() < 0 ?
+			if (!((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
 					buildcaps : max_nodecaps) & Widelands::BUILDCAPS_MINE)) {
 				continue;
 			}
@@ -476,7 +478,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		} else {
 			int32_t size = building_descr->get_size() - Widelands::BaseImmovable::SMALL;
 
-			if (((building_descr->get_built_over_immovable() < 0 ?
+			if (((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
 					buildcaps : max_nodecaps) & Widelands::BUILDCAPS_SIZEMASK) < size + 1) {
 				continue;
 			}
