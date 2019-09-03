@@ -63,11 +63,20 @@ tribes:new_worker_type {
          "return"
       },
       terraform = {
-         "findspace=size:terraform radius:6",
+         "findspace=size:any radius:6 terraform",
          "walk=coords",
          "terraform",
          "return"
       },
+      plant = {
+         "findspace=size:any radius:6 avoid:field saplingsearches:7",
+         "walk=coords",
+         "animate=dig 2000",
+         "animate=planting 1000",
+         "plant=attrib:tree_pole",
+         "animate=water 2000",
+         "return"
+      }
    },
 
    animations = animations,
