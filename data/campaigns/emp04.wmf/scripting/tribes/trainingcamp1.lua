@@ -8,7 +8,16 @@ tribes:new_trainingsite_type {
    icon = dirname .. "menu.png",
    size = "big",
 
-
+   buildcost = {
+      log = 3,
+      granite = 6,
+      planks = 6,
+      marble = 6,
+      gold = 5,
+      marble_column = 5,
+      cloth = 4
+   },
+   
    return_on_dismantle = {
       granite = 3,
       planks = 2,
