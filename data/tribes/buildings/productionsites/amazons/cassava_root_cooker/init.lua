@@ -9,12 +9,12 @@ tribes:new_productionsite_type {
    icon = dirname .. "menu.png",
    size = "medium",
 
-   enhancement_cost = {
+   buildcost = {
       log = 2,
       granite = 4,
       rope = 2,
    },
-   return_on_dismantle_on_enhanced = {
+   return_on_dismantle = {
       log = 1,
       granite = 2,
       rope = 1,

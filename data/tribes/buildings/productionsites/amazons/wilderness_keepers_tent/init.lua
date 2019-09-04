@@ -47,8 +47,23 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
+            "call=breed",
+            "call=release",
+            "return=no_stats",
+         },
+      },
+      breed = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"breeding fish",
+         actions = {
             "callworker=breed_fish",
             "sleep=52500",
+         },
+      },
+      release = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"releasing game",
+         actions = {
             "callworker=release_game",
             "sleep=52500",
          },
