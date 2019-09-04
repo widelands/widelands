@@ -20,7 +20,7 @@ tribes:new_worker_type {
 
    buildcost = {
       amazons_carrier = 1,
-      spear = 1,
+      spear_wooden = 1,
       tunic = 1,
       ration = 1
    },

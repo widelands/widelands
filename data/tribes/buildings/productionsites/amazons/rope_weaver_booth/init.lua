@@ -60,7 +60,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs rope",
             "consume=liana:2",
             "sleep=32000",
-            "animate=working 50000",
+            "animate=working 40000",
             "produce=rope"
          },
       },
