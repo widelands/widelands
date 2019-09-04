@@ -34,7 +34,6 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "network/gamehost.h"
-#include "profile/profile.h"
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
 #include "wui/game_chat_menu.h"

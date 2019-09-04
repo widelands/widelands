@@ -67,6 +67,7 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
+#include "wlapplication_options.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_base.h"
 
@@ -82,7 +83,7 @@ void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* load
 }  // namespace
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
-   : InteractiveBase(e, g_options.pull_section("global")),
+   : InteractiveBase(e, get_config_section()),
      need_save_(false),
      realtime_(SDL_GetTicks()),
      is_painting_(false),
@@ -908,10 +909,9 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				   egbase, 64, 64, 0,
 				   /** TRANSLATORS: Default name for new map */
 				   _("No Name"),
-				   g_options.pull_section("global").get_string(
-				      "realname",
-				      /** TRANSLATORS: Map author name when it hasn't been set yet */
-				      pgettext("author_name", "Unknown")));
+				   get_config_string("realname",
+				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
+				                     pgettext("author_name", "Unknown")));
 
 				load_all_tribes(&egbase, &loader_ui);
 

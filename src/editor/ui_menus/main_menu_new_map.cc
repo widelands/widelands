@@ -36,6 +36,7 @@
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/progresswindow.h"
+#include "wlapplication_options.h"
 
 inline EditorInteractive& MainMenuNewMap::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
@@ -105,10 +106,9 @@ void MainMenuNewMap::clicked_create_map() {
 
 	parent.cleanup_for_load();
 
-	map->create_empty_map(
-	   egbase, map_size_box_.selected_width(), map_size_box_.selected_height(),
-	   list_.get_selected(), _("No Name"),
-	   g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")));
+	map->create_empty_map(egbase, map_size_box_.selected_width(),
+	                      map_size_box_.selected_height(), list_.get_selected(), _("No Name"),
+	                      get_config_string("realname", pgettext("author_name", "Unknown")));
 
 	egbase.postload();
 	egbase.load_graphics(loader_ui);

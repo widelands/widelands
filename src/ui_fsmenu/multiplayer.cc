@@ -22,9 +22,9 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "network/internet_gaming.h"
-#include "profile/profile.h"
 #include "random/random.h"
 #include "ui_basic/messagebox.h"
+#include "wlapplication_options.h"
 #include "wui/login_box.h"
 
 FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
@@ -96,11 +96,9 @@ void FullscreenMenuMultiPlayer::show_internet_login() {
  * This fullscreen menu ends it's modality.
  */
 void FullscreenMenuMultiPlayer::internet_login() {
-	Section& s = g_options.pull_section("global");
-
-	nickname_ = s.get_string("nickname", "");
-	password_ = s.get_string("password_sha1", "no_password_set");
-	register_ = s.get_bool("registered", false);
+	nickname_ = get_config_string("nickname", "");
+	password_ = get_config_string("password_sha1", "no_password_set");
+	register_ = get_config_bool("registered", false);
 
 	// Checks can be done directly in editbox' by using valid_username().
 	// This is just to be on the safe side, in case the user changed the password in the config file.
@@ -111,9 +109,9 @@ void FullscreenMenuMultiPlayer::internet_login() {
 	}
 
 	// Try to connect to the metaserver
-	const std::string& meta = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
-	uint32_t port = s.get_natural("metaserverport", kInternetGamingPort);
-	std::string auth = register_ ? password_ : s.get_string("uuid");
+	const std::string& meta = get_config_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+	uint32_t port = get_config_natural("metaserverport", kInternetGamingPort);
+	std::string auth = register_ ? password_ : get_config_string("uuid", nullptr);
 	assert(!auth.empty());
 	InternetGaming::ref().login(nickname_, auth, register_, meta, port);
 
@@ -128,7 +126,7 @@ void FullscreenMenuMultiPlayer::internet_login() {
 
 		// Reset InternetGaming and passwort and show internet login again
 		InternetGaming::ref().reset();
-		s.set_string("password_sha1", "no_password_set");
+		set_config_string("password_sha1", "no_password_set");
 		auto_log_ = true;
 		show_internet_login();
 	}

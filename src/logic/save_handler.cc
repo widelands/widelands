@@ -37,6 +37,7 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/generic_save_handler.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_base.h"
 
 SaveHandler::SaveHandler()
@@ -198,15 +199,13 @@ void SaveHandler::initialize(uint32_t realtime) {
 	if (initialized_)
 		return;
 
-	Section& global = g_options.pull_section("global");
+	fs_type_ = get_config_bool("nozip", false) ? FileSystem::DIR : FileSystem::ZIP;
 
-	fs_type_ = global.get_bool("nozip", false) ? FileSystem::DIR : FileSystem::ZIP;
-
-	autosave_interval_in_ms_ = global.get_int("autosave", kDefaultAutosaveInterval * 60) * 1000;
+	autosave_interval_in_ms_ = get_config_int("autosave", kDefaultAutosaveInterval * 60) * 1000;
 
 	next_save_realtime_ = realtime + autosave_interval_in_ms_;
 
-	number_of_rolls_ = global.get_int("rolling_autosave", 5);
+	number_of_rolls_ = get_config_int("rolling_autosave", 5);
 
 	initialized_ = true;
 }
