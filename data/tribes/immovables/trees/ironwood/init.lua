@@ -97,7 +97,7 @@ tribes:new_immovable_type{
    programs = {
       program = {
          "animate=idle 1535000",
-         "transform=deadtree2 33",
+         "transform=deadtree7 33",
          "seed=ironwood_amazons_sapling",
       },
       fall = {

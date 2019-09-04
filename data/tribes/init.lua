@@ -236,6 +236,7 @@ print_loading_message("┗━ took", function()
       include "tribes/immovables/trees/balsa/init.lua"
       include "tribes/immovables/trees/ironwood/init.lua"
       include "tribes/immovables/trees/rubber/init.lua"
+      include "tribes/immovables/trees/deadtree7/init.lua"
    end)
 
    -- ===================================

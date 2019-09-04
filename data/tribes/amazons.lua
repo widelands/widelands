@@ -152,6 +152,7 @@ tribes:new_tribe {
    immovables = {
       "ashes",
       "destroyed_building",
+      "deadtree7",
       "balsa_amazons_sapling",
       "balsa_amazons_pole",
       "balsa_amazons_mature",
