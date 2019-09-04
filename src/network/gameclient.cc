@@ -149,10 +149,14 @@ bool GameClientImpl::run_map_menu(GameClient* parent) {
  * Show progress dialog and load map or saved game.
  */
 InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressWindow* loader) {
-
-	const std::string& tribename = parent->get_players_tribe();
-	assert(Widelands::tribe_exists(tribename));
-	GameTips tips(*loader, {"general_game", "multiplayer", tribename});
+	std::vector<std::string> tipstext;
+	tipstext.push_back("general_game");
+	tipstext.push_back("multiplayer");
+	try {
+		tipstext.push_back(parent->get_players_tribe());
+	} catch (GameSettingsProvider::NoTribe) {
+	}
+	GameTips tips(*loader, tipstext);
 
 	modal = loader;
 
