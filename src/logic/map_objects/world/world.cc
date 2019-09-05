@@ -66,6 +66,19 @@ void World::load_graphics() {
 	}
 }
 
+void World::postload() {
+	const size_t nr_t = get_nr_terrains();
+	for (size_t i = 0; i < nr_t; ++i) {
+		const TerrainDescription& t = terrain_descr(i);
+		if (!t.enhancement().empty()) {
+			if (!terrain_descr(t.enhancement())) {
+				throw GameDataError(
+				   "Terrain %s: Unknown enhancement %s", t.name().c_str(), t.enhancement().c_str());
+			}
+		}
+	}
+}
+
 const DescriptionMaintainer<TerrainDescription>& World::terrains() const {
 	return *terrains_;
 }
@@ -131,6 +144,14 @@ TerrainDescription& World::terrain_descr(DescriptionIndex const i) const {
 const TerrainDescription* World::terrain_descr(const std::string& name) const {
 	int32_t const i = terrains_->get_index(name);
 	return i != INVALID_INDEX ? terrains_->get_mutable(i) : nullptr;
+}
+
+DescriptionIndex World::get_terrain_index(const std::string& name) const {
+	return terrains_->get_index(name);
+}
+
+DescriptionIndex World::get_nr_terrains() const {
+	return terrains_->size();
 }
 
 DescriptionIndex World::get_critter(char const* const l) const {
