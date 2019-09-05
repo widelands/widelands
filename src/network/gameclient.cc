@@ -152,9 +152,8 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 	std::vector<std::string> tipstext;
 	tipstext.push_back("general_game");
 	tipstext.push_back("multiplayer");
-	try {
+	if (parent->has_players_tribe()) {
 		tipstext.push_back(parent->get_players_tribe());
-	} catch (GameSettingsProvider::NoTribe) {
 	}
 	GameTips tips(*loader, tipstext);
 
