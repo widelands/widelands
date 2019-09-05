@@ -17,14 +17,5 @@ tribes:new_carrier_type {
 
    buildcost = {}, -- This will give the worker the property "buildable"
 
-   programs = {
-      fetch_water = {
-         "findspace=size:swim radius:6",
-         "walk=coords",
-         "createware=water",
-         "return"
-      }
-   },
-
    animations = animations,
 }

@@ -56,8 +56,6 @@ tribes:new_productionsite_type {
          descname = _"planting trees",
          actions = {
             "callworker=plant",
-            "sleep=11500",
-            "callworker=terraform",
             "sleep=11500"
          }
       },
