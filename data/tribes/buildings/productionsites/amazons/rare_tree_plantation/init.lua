@@ -54,8 +54,6 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=plant_rubber",
-            "call=plant_ironwood",
             "call=plant_balsa",
             "call=plant_rubber",
             "call=plant_ironwood",

@@ -31,11 +31,16 @@ tribes:new_productionsite_type {
 
    aihints = {
       supports_production_of = { "fish", "meat" },
+      collects_ware_from_map = "meat",
       prohibited_till = 760,
    },
 
    working_positions = {
       amazons_wilderness_keeper = 1
+   },
+
+   outputs = {
+      "meat"
    },
 
    indicate_workarea_overlaps = {

@@ -54,9 +54,9 @@ tribes:new_tribe {
          "granite",
          "balsa",
          "ironwood",
+         "rubber",
          "liana",
          "rope",
-         "rubber",
       },
       {
          -- Food
@@ -73,6 +73,7 @@ tribes:new_tribe {
          -- Mining
           "gold_dust",
           "gold",
+          "charcoal"
       },
       {
          -- Tools
@@ -264,7 +265,7 @@ tribes:new_tribe {
    soldier = "amazons_soldier",
    ship = "amazons_ship",
    port = "amazons_port",
-   ironore = "ironwood",
+   ironore = "gold_dust",
    rawlog = "log",
    refinedlog = "rope",
    granite = "granite",
