@@ -643,9 +643,8 @@ void GameHost::run() {
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
-		try {
+		if (d->hp.has_players_tribe()) {
 			tipstext.push_back(d->hp.get_players_tribe());
-		} catch (GameSettingsProvider::NoTribe) {
 		}
 		std::unique_ptr<GameTips> tips(new GameTips(*loader_ui, tipstext));
 
