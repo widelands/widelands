@@ -368,8 +368,8 @@ findspace
       neighbors are also walkable (an exception is made if one of the neighboring
       fields is owned by this worker's location).
 
-   :arg empty terraform: Find only nodes where at least one adjacent triangle has terrain that can
-be enhanced
+   :arg empty terraform: Find only nodes where at least one adjacent triangle has
+      terrain that can be enhanced
 
    Find a map field based on a number of predicates.
    The field can then be used in other commands like ``walk``. Examples::
@@ -780,8 +780,8 @@ terraform
 ^^^^^^^^^
 .. function:: terraform
 
-   Turns the terrain of one of the triangles around the current node into its enhancement terrain.
-Example::
+   Turns the terrain of one of the triangles around the current node into its
+   enhancement terrain. Example::
 
       terraform = {
          "findspace=size:terraform radius:6",
