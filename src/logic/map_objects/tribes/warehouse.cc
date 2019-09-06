@@ -86,7 +86,8 @@ void Warehouse::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) con
 	       map.calc_distance(enemy.get_position(), warehouse_->get_position()))
 		return;
 
-	if (map.find_bobs(Area<FCoords>(map.get_fcoords(warehouse_->base_flag().get_position()), 2),
+	if (map.find_bobs(game,
+	                  Area<FCoords>(map.get_fcoords(warehouse_->base_flag().get_position()), 2),
 	                  nullptr, FindBobEnemySoldier(owner)))
 		return;
 

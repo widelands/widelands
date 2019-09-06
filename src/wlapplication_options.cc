@@ -25,7 +25,7 @@
 #include "logic/filesystem_constants.h"
 #include "wlapplication.h"
 
-Profile g_options(Profile::err_log);
+static Profile g_options(Profile::err_log);
 
 void check_config_used() {
 	g_options.check_used();
