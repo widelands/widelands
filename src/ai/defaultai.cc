@@ -647,11 +647,7 @@ void DefaultAI::late_initialization() {
 		bo.fighting_type = bh.is_fighting_type();
 		bo.mountain_conqueror = bh.is_mountain_conqueror();
 		bo.requires_supporters = bh.requires_supporters();
-		if (!bh.collects_ware_from_map().empty()) {
-			bo.collected_map_resource = tribe_->safe_ware_index(bh.collects_ware_from_map());
-		} else {
-			bo.collected_map_resource = INVALID_INDEX;
-		}
+		bo.set_collected_map_resource(*tribe_, bh.collects_ware_from_map());
 		if (bo.requires_supporters) {
 			log(" %d: %s strictly requires supporters\n", player_number(), bo.name);
 		}
@@ -2708,8 +2704,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio += bo.primary_priority;
 
 					// keep wells more distant
-					assert(bo.collected_map_resource != INVALID_INDEX);
-					if (bf->collecting_producers_nearby.at(bo.collected_map_resource) > 2) {
+					if (bf->collecting_producers_nearby.at(bo.get_collected_map_resource()) > 2) {
 						continue;
 					}
 
@@ -2738,10 +2733,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					        (bf->trees_nearby - trees_nearby_treshold_) / 10;
 
 					// consider cutters and rangers nearby
-					assert(bo.collected_map_resource != INVALID_INDEX);
-					prio += 2 * bf->supporters_nearby.at(bo.collected_map_resource) *
+					prio += 2 * bf->supporters_nearby.at(bo.get_collected_map_resource()) *
 					        std::abs(management_data.get_military_number_at(25));
-					prio -= bf->collecting_producers_nearby.at(bo.collected_map_resource) *
+					prio -= bf->collecting_producers_nearby.at(bo.get_collected_map_resource()) *
 					        std::abs(management_data.get_military_number_at(36)) * 3;
 
 				} else if (bo.is(BuildingAttribute::kNeedsRocks)) {
@@ -2773,8 +2767,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 
 					// to prevent to many quaries on one spot
-					assert(bo.collected_map_resource != INVALID_INDEX);
-					prio = prio - 50 * bf->collecting_producers_nearby.at(bo.collected_map_resource);
+					prio = prio - 50 * bf->collecting_producers_nearby.at(bo.get_collected_map_resource());
 
 				} else if (bo.is(BuildingAttribute::kHunter)) {
 
@@ -2789,11 +2782,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// Overdue priority here
 					prio += bo.primary_priority;
 
-					prio += bf->supporters_nearby.at(bo.collected_map_resource) * 5;
+					prio += bf->supporters_nearby.at(bo.get_collected_map_resource()) * 5;
 
-					assert(bo.collected_map_resource != INVALID_INDEX);
 					prio += (bf->critters_nearby * 3) - 8 -
-					        5 * bf->collecting_producers_nearby.at(bo.collected_map_resource);
+					        5 * bf->collecting_producers_nearby.at(bo.get_collected_map_resource());
 
 				} else if (bo.is(BuildingAttribute::kFisher)) {  // fisher
 
@@ -2808,9 +2800,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// Overdue priority here
 					prio += bo.primary_priority;
 
-					assert(bo.collected_map_resource != INVALID_INDEX);
-					prio -= bf->collecting_producers_nearby.at(bo.collected_map_resource) * 20;
-					prio += bf->supporters_nearby.at(bo.collected_map_resource) * 20;
+					prio -= bf->collecting_producers_nearby.at(bo.get_collected_map_resource()) * 20;
+					prio += bf->supporters_nearby.at(bo.get_collected_map_resource()) * 20;
 
 					prio += -5 + bf->fish_nearby *
 					                (1 + std::abs(management_data.get_military_number_at(63) / 15));
@@ -3037,7 +3028,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							               std::abs(management_data.get_military_number_at(102)) / 5;
 						} else {
 							// leave some free space between them
-							prio -= bf->collecting_producers_nearby.at(bo.collected_map_resource) *
+							prio -= bf->collecting_producers_nearby.at(bo.get_collected_map_resource()) *
 							        std::abs(management_data.get_military_number_at(108)) / 5;
 						}
 
@@ -6068,8 +6059,8 @@ void DefaultAI::consider_productionsite_influence(BuildableField& field,
 	for (size_t i = 0; i < bo.ware_outputs.size(); ++i) {
 		++field.producers_nearby.at(bo.ware_outputs.at(i));
 	}
-	if (bo.collected_map_resource != INVALID_INDEX) {
-		++field.collecting_producers_nearby.at(bo.collected_map_resource);
+	if (bo.has_collected_map_resource()) {
+		++field.collecting_producers_nearby.at(bo.get_collected_map_resource());
 	}
 
 	if (!bo.production_hints.empty()) {

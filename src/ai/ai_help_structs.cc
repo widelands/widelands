@@ -370,6 +370,24 @@ void BuildingObserver::unset_is(const BuildingAttribute attribute) {
 	assert(!is(attribute));
 }
 
+bool BuildingObserver::has_collected_map_resource() const {
+	return collected_map_resource != INVALID_INDEX;
+}
+void BuildingObserver::set_collected_map_resource(const Widelands::TribeDescr& tribe, const std::string& ware_name) {
+	if (!ware_name.empty()) {
+		collected_map_resource = tribe.safe_ware_index(ware_name);
+	} else {
+		collected_map_resource = Widelands::INVALID_INDEX;
+	}
+}
+DescriptionIndex BuildingObserver::get_collected_map_resource() const {
+	if (has_collected_map_resource()) {
+		return collected_map_resource;
+	} else {
+		throw wexception("Building '%s' needs to define the AI hint \"collects_ware_from_map\"", desc->name().c_str());
+	}
+}
+
 Widelands::AiModeBuildings BuildingObserver::aimode_limit_status() {
 	if (total_count() > cnt_limit_by_aimode) {
 		return Widelands::AiModeBuildings::kLimitExceeded;
