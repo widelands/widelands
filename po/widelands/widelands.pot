@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-30 15:45+0000\n"
+"POT-Creation-Date: 2019-09-06 07:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1287,7 +1287,7 @@ msgstr ""
 msgid "off"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:323
+#: ../../src/logic/editor_game_base.cc:325
 msgid "Loading graphics"
 msgstr ""
 
@@ -1406,39 +1406,39 @@ msgid "No description defined"
 msgstr ""
 
 #: ../../src/logic/map_objects/immovable.cc:529
-#: ../../src/logic/map_objects/tribes/constructionsite.cc:153
+#: ../../src/logic/map_objects/tribes/constructionsite.cc:154
 #, c-format
 msgid "%i%% built"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/dismantlesite.cc:105
+#: ../../src/logic/map_objects/tribes/dismantlesite.cc:122
 #, c-format
 msgid "%u%% dismantled"
 msgstr ""
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
-#: ../../src/logic/map_objects/tribes/militarysite.cc:243
+#: ../../src/logic/map_objects/tribes/militarysite.cc:244
 msgctxt "building"
 msgid "Lost!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:244
+#: ../../src/logic/map_objects/tribes/militarysite.cc:245
 msgid "Militarysite lost!"
 msgstr ""
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as "Success!"
-#: ../../src/logic/map_objects/tribes/militarysite.cc:286
+#: ../../src/logic/map_objects/tribes/militarysite.cc:287
 msgid "Enemy Defeated!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:286
+#: ../../src/logic/map_objects/tribes/militarysite.cc:287
 msgid "Enemy at site defeated!"
 msgstr ""
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:373
+#: ../../src/logic/map_objects/tribes/militarysite.cc:374
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] ""
@@ -1446,9 +1446,9 @@ msgstr[1] ""
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in Attack box.
 #. * TRANSLATORS: Number of soldiers stationed at a militarysite.
-#: ../../src/logic/map_objects/tribes/militarysite.cc:378
-#: ../../src/wui/attack_box.cc:113 ../../src/wui/constructionsitewindow.cc:419
-#: ../../src/wui/constructionsitewindow.cc:431
+#: ../../src/logic/map_objects/tribes/militarysite.cc:379
+#: ../../src/wui/attack_box.cc:113 ../../src/wui/constructionsitewindow.cc:415
+#: ../../src/wui/constructionsitewindow.cc:427
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
@@ -1458,7 +1458,7 @@ msgstr[1] ""
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
 #. * TRANSLATORS: %3% is the maximum number of soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:387
+#: ../../src/logic/map_objects/tribes/militarysite.cc:388
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] ""
@@ -1466,19 +1466,19 @@ msgstr[1] ""
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:393
+#: ../../src/logic/map_objects/tribes/militarysite.cc:394
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/map_objects/tribes/militarysite.cc:863
+#: ../../src/logic/map_objects/tribes/militarysite.cc:864
 msgctxt "building"
 msgid "Attack!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:863
+#: ../../src/logic/map_objects/tribes/militarysite.cc:864
 msgid "You are under attack"
 msgstr ""
 
@@ -1778,15 +1778,15 @@ msgstr ""
 msgid "Logic error"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:532
+#: ../../src/logic/map_objects/tribes/warehouse.cc:533
 msgid "A new port was added to your economy."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:535
+#: ../../src/logic/map_objects/tribes/warehouse.cc:536
 msgid "A new headquarters was added to your economy."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:538
+#: ../../src/logic/map_objects/tribes/warehouse.cc:539
 msgid "A new warehouse was added to your economy."
 msgstr ""
 
@@ -1804,22 +1804,22 @@ msgid ""
 "compatible with world"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:980
+#: ../../src/logic/map_objects/tribes/worker.cc:1033
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1863
+#: ../../src/logic/map_objects/tribes/worker.cc:1916
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:1870
+#: ../../src/logic/map_objects/tribes/worker.cc:1923
 #: ../../src/wui/productionsitewindow.cc:102
 msgid "Worker"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1871
+#: ../../src/logic/map_objects/tribes/worker.cc:1924
 msgid "Worker got lost!"
 msgstr ""
 
@@ -1852,7 +1852,7 @@ msgstr ""
 msgid "This objective has no description."
 msgstr ""
 
-#: ../../src/logic/player.cc:1382
+#: ../../src/logic/player.cc:1406
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -3409,13 +3409,13 @@ msgid "Stop"
 msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:253
-#: ../../src/wui/constructionsitewindow.cc:338
+#: ../../src/wui/constructionsitewindow.cc:334
 #, c-format
 msgid "Enhance to %s"
 msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:258
-#: ../../src/wui/constructionsitewindow.cc:339 ../../src/wui/fieldaction.cc:99
+#: ../../src/wui/constructionsitewindow.cc:335 ../../src/wui/fieldaction.cc:99
 msgid "Construction costs:"
 msgstr ""
 
@@ -3432,7 +3432,7 @@ msgstr ""
 msgid "Returns:"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:340 ../../src/wui/fieldaction.cc:389
+#: ../../src/wui/buildingwindow.cc:340 ../../src/wui/fieldaction.cc:390
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr ""
@@ -3450,7 +3450,7 @@ msgid "Show work area"
 msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:569
-#: ../../src/wui/constructionsitewindow.cc:314
+#: ../../src/wui/constructionsitewindow.cc:310
 msgid "Start an expedition"
 msgstr ""
 
@@ -3458,74 +3458,74 @@ msgstr ""
 msgid "Cancel the expedition"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:136
+#: ../../src/wui/constructionsitewindow.cc:132
 #: ../../src/wui/dismantlesitewindow.cc:54
 msgid "Building materials"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:166
-#: ../../src/wui/constructionsitewindow.cc:210
+#: ../../src/wui/constructionsitewindow.cc:162
+#: ../../src/wui/constructionsitewindow.cc:206
 #: ../../src/wui/soldiercapacitycontrol.cc:72
 msgid ""
 "Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:170
-#: ../../src/wui/constructionsitewindow.cc:214
+#: ../../src/wui/constructionsitewindow.cc:166
+#: ../../src/wui/constructionsitewindow.cc:210
 #: ../../src/wui/soldiercapacitycontrol.cc:81
 msgid ""
 "Increase capacity. Hold down Ctrl to set the capacity to the highest value"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:193
+#: ../../src/wui/constructionsitewindow.cc:189
 msgid "Stopped"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:194
+#: ../../src/wui/constructionsitewindow.cc:190
 msgid "Stop this building’s work after completion"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:245 ../../src/wui/soldierlist.cc:409
+#: ../../src/wui/constructionsitewindow.cc:241 ../../src/wui/soldierlist.cc:409
 msgid "Prefer heroes"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:248 ../../src/wui/soldierlist.cc:406
+#: ../../src/wui/constructionsitewindow.cc:244 ../../src/wui/soldierlist.cc:406
 msgid "Prefer rookies"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:270
+#: ../../src/wui/constructionsitewindow.cc:266
 #: ../../src/wui/warehousewindow.cc:145
 msgid "Normal policy"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:274
+#: ../../src/wui/constructionsitewindow.cc:270
 #: ../../src/wui/warehousewindow.cc:146
 msgid "Preferably store selected wares here"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:278
+#: ../../src/wui/constructionsitewindow.cc:274
 #: ../../src/wui/warehousewindow.cc:147
 msgid "Do not store selected wares here"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:282
+#: ../../src/wui/constructionsitewindow.cc:278
 #: ../../src/wui/warehousewindow.cc:148
 msgid "Remove selected wares from here"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:304
+#: ../../src/wui/constructionsitewindow.cc:300
 msgid "Ware settings to apply after construction"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:307
+#: ../../src/wui/constructionsitewindow.cc:303
 msgid "Worker settings to apply after construction"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:315
+#: ../../src/wui/constructionsitewindow.cc:311
 msgid "Start an expedition from this port after completion"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:360
+#: ../../src/wui/constructionsitewindow.cc:356
 msgid "Settings to apply after construction"
 msgstr ""
 
@@ -3640,7 +3640,7 @@ msgstr ""
 msgid "Action"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:342 ../../src/wui/fieldaction.cc:393
+#: ../../src/wui/fieldaction.cc:342 ../../src/wui/fieldaction.cc:394
 msgid "Build road"
 msgstr ""
 
@@ -3656,39 +3656,39 @@ msgstr ""
 msgid "Send geologist to explore site"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:371
+#: ../../src/wui/fieldaction.cc:372
 msgid "Place a flag"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:375
+#: ../../src/wui/fieldaction.cc:376
 msgid "Destroy a road"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:384
+#: ../../src/wui/fieldaction.cc:385
 msgid "Watch field in a separate window"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:395 ../../src/wui/watchwindow.cc:54
+#: ../../src/wui/fieldaction.cc:396 ../../src/wui/watchwindow.cc:54
 msgid "Watch"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:416
+#: ../../src/wui/fieldaction.cc:417
 msgid "Attack"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:496
+#: ../../src/wui/fieldaction.cc:530
 msgid "Build mines"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:509
+#: ../../src/wui/fieldaction.cc:543
 msgid "Build flag"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:512
+#: ../../src/wui/fieldaction.cc:546
 msgid "Cancel road"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:515
+#: ../../src/wui/fieldaction.cc:549
 msgid "Build roads"
 msgstr ""
 
