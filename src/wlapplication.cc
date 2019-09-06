@@ -1347,9 +1347,8 @@ bool WLApplication::new_game() {
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
 			tipstext.push_back("singleplayer");
-			try {
+			if (sp.has_players_tribe()) {
 				tipstext.push_back(sp.get_players_tribe());
-			} catch (GameSettingsProvider::NoTribe) {
 			}
 			GameTips tips(loader_ui, tipstext);
 
