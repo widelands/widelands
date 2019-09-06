@@ -207,7 +207,7 @@ void Ship::wakeup_neighbours(Game& game) {
 	FCoords position = get_position();
 	Area<FCoords> area(position, 1);
 	std::vector<Bob*> ships;
-	game.map().find_bobs(area, &ships, FindBobShip());
+	game.map().find_bobs(game, area, &ships, FindBobShip());
 
 	for (std::vector<Bob*>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
 		if (*it == this)
@@ -406,7 +406,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 
 			// Check whether the maximum theoretical possible NodeCap of the field
 			// is of the size big and whether it can theoretically be a port space
-			if ((map->get_max_nodecaps(game.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG ||
+			if ((map->get_max_nodecaps(game, fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG ||
 			    map->find_portdock(fc).empty()) {
 				continue;
 			}
@@ -463,7 +463,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 			Area<FCoords> area(node, 0);
 			std::vector<Bob*> ships;
-			map.find_bobs(area, &ships, FindBobShip());
+			map.find_bobs(game, area, &ships, FindBobShip());
 
 			for (std::vector<Bob*>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
 				if (*it == this)
@@ -922,9 +922,9 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 
 	// Make sure that we have space to squeeze in a lumberjack
 	std::vector<ImmovableFound> trees_rocks;
-	game.map().find_immovables(Area<FCoords>(game.map().get_fcoords(c), 3), &trees_rocks,
+	game.map().find_immovables(game, Area<FCoords>(game.map().get_fcoords(c), 3), &trees_rocks,
 	                           FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
-	game.map().find_immovables(Area<FCoords>(game.map().get_fcoords(c), 3), &trees_rocks,
+	game.map().find_immovables(game, Area<FCoords>(game.map().get_fcoords(c), 3), &trees_rocks,
 	                           FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks")));
 	for (auto& immo : trees_rocks) {
 		immo.object->remove(game);

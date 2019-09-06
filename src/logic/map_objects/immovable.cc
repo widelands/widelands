@@ -107,7 +107,7 @@ void BaseImmovable::set_position(EditorGameBase& egbase, const Coords& c) {
 	f.field->immovable = this;
 
 	if (get_size() >= SMALL) {
-		map->recalc_for_field_area(egbase.world(), Area<FCoords>(f, 2));
+		map->recalc_for_field_area(egbase, Area<FCoords>(f, 2));
 	}
 }
 
@@ -133,7 +133,7 @@ void BaseImmovable::unset_position(EditorGameBase& egbase, const Coords& c) {
 	egbase.inform_players_about_immovable(f.field - &(*map)[0], nullptr);
 
 	if (get_size() >= SMALL) {
-		map->recalc_for_field_area(egbase.world(), Area<FCoords>(f, 2));
+		map->recalc_for_field_area(egbase, Area<FCoords>(f, 2));
 	}
 }
 

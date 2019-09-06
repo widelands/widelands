@@ -56,13 +56,18 @@ constexpr int32_t kPriorityLow = 2;
 constexpr int32_t kPriorityNormal = 4;
 constexpr int32_t kPriorityHigh = 8;
 
+/* The value "" means that the DescriptionIndex is a normal building, as happens e.g. when enhancing
+ * a building. The value "tribe"/"world" means that the DescriptionIndex refers to an immovable of
+ * OwnerType kTribe/kWorld, as happens e.g. with amazon treetop sentry. This immovable
+ * should therefore always be painted below the building image.
+ */
+using FormerBuildings = std::vector<std::pair<DescriptionIndex, std::string>>;
+
 /*
  * Common to all buildings!
  */
 class BuildingDescr : public MapObjectDescr {
 public:
-	using FormerBuildings = std::vector<DescriptionIndex>;
-
 	BuildingDescr(const std::string& init_descname,
 	              MapObjectType type,
 	              const LuaTable& t,
@@ -169,6 +174,10 @@ public:
 
 	uint32_t get_unoccupied_animation() const;
 
+	DescriptionIndex get_built_over_immovable() const {
+		return built_over_immovable_;
+	}
+
 protected:
 	virtual Building& create_object() const = 0;
 	Building& create_constructionsite() const;
@@ -191,6 +200,8 @@ private:
 	   enhanced_from_;        // The building this building was enhanced from, or INVALID_INDEX
 	bool enhanced_building_;  // if it is one, it is bulldozable
 	BuildingHints hints_;     // hints (knowledge) for computer players
+	DescriptionIndex built_over_immovable_;  // can be built only on nodes where an immovable with
+	                                         // this attribute stands
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t vision_range_;
@@ -223,8 +234,6 @@ public:
 		PCap_Dismantle = 1 << 1,   // can dismantle this buildings
 		PCap_Enhancable = 1 << 2,  // can be enhanced to something
 	};
-
-	using FormerBuildings = std::vector<DescriptionIndex>;
 
 public:
 	enum class InfoStringFormat { kCensus, kStatistics, kTooltip };
@@ -377,6 +386,7 @@ protected:
 
 	// The former buildings names, with the current one in last position.
 	FormerBuildings old_buildings_;
+	const MapObjectDescr* was_immovable_;
 
 private:
 	std::string statistics_string_;

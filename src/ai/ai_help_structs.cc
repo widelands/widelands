@@ -136,7 +136,7 @@ bool CheckStepOwnTerritory::reachable_dest(const Map& map, const FCoords& dest) 
 FindNodeEnemy::FindNodeEnemy(Player* p, Game& g) : player(p), game(g) {
 }
 
-bool FindNodeEnemy::accept(const Map&, const FCoords& fc) const {
+bool FindNodeEnemy::accept(const EditorGameBase&, const FCoords& fc) const {
 	return (fc.field->nodecaps() & MOVECAPS_WALK) && fc.field->get_owned_by() != 0 &&
 	       player->is_hostile(*game.get_player(fc.field->get_owned_by()));
 }
@@ -147,7 +147,7 @@ bool FindNodeEnemy::accept(const Map&, const FCoords& fc) const {
 FindNodeEnemiesBuilding::FindNodeEnemiesBuilding(Player* p, Game& g) : player(p), game(g) {
 }
 
-bool FindNodeEnemiesBuilding::accept(const Map&, const FCoords& fc) const {
+bool FindNodeEnemiesBuilding::accept(const EditorGameBase&, const FCoords& fc) const {
 	return (fc.field->get_immovable()) && fc.field->get_owned_by() != 0 &&
 	       player->is_hostile(*game.get_player(fc.field->get_owned_by()));
 }
@@ -158,7 +158,7 @@ bool FindNodeEnemiesBuilding::accept(const Map&, const FCoords& fc) const {
 FindEnemyNodeWalkable::FindEnemyNodeWalkable(Player* p, Game& g) : player(p), game(g) {
 }
 
-bool FindEnemyNodeWalkable::accept(const Map&, const FCoords& fc) const {
+bool FindEnemyNodeWalkable::accept(const EditorGameBase&, const FCoords& fc) const {
 	return ((fc.field->nodecaps() & MOVECAPS_WALK) && (fc.field->get_owned_by() > 0) &&
 	        player->is_hostile(*game.get_player(fc.field->get_owned_by())));
 }
@@ -168,7 +168,7 @@ FindNodeAllyOwned::FindNodeAllyOwned(Player* p, Game& g, PlayerNumber n)
    : player(p), game(g), player_number(n) {
 }
 
-bool FindNodeAllyOwned::accept(const Map&, const FCoords& fc) const {
+bool FindNodeAllyOwned::accept(const EditorGameBase&, const FCoords& fc) const {
 	return (fc.field->nodecaps() & MOVECAPS_WALK) && (fc.field->get_owned_by() != 0) &&
 	       (fc.field->get_owned_by() != player_number) &&
 	       !player->is_hostile(*game.get_player(fc.field->get_owned_by()));
@@ -181,7 +181,7 @@ FindNodeUnownedMineable::FindNodeUnownedMineable(Player* p, Game& g, int32_t t)
    : player(p), game(g), ore_type(t) {
 }
 
-bool FindNodeUnownedMineable::accept(const Map&, const FCoords& fc) const {
+bool FindNodeUnownedMineable::accept(const EditorGameBase&, const FCoords& fc) const {
 	if (ore_type == INVALID_INDEX) {
 		return (fc.field->nodecaps() & BUILDCAPS_MINE) && (fc.field->get_owned_by() == neutral());
 	}
@@ -192,7 +192,7 @@ bool FindNodeUnownedMineable::accept(const Map&, const FCoords& fc) const {
 FindNodeUnownedBuildable::FindNodeUnownedBuildable(Player* p, Game& g) : player(p), game(g) {
 }
 
-bool FindNodeUnownedBuildable::accept(const Map&, const FCoords& fc) const {
+bool FindNodeUnownedBuildable::accept(const EditorGameBase&, const FCoords& fc) const {
 	return ((fc.field->nodecaps() & BUILDCAPS_SIZEMASK) ||
 	        (fc.field->nodecaps() & BUILDCAPS_MINE)) &&
 	       (fc.field->get_owned_by() == neutral());
@@ -202,7 +202,7 @@ bool FindNodeUnownedBuildable::accept(const Map&, const FCoords& fc) const {
 FindNodeUnownedWalkable::FindNodeUnownedWalkable(Player* p, Game& g) : player(p), game(g) {
 }
 
-bool FindNodeUnownedWalkable::accept(const Map&, const FCoords& fc) const {
+bool FindNodeUnownedWalkable::accept(const EditorGameBase&, const FCoords& fc) const {
 	return (fc.field->nodecaps() & MOVECAPS_WALK) && (fc.field->get_owned_by() == neutral());
 }
 
@@ -211,7 +211,7 @@ bool FindNodeUnownedWalkable::accept(const Map&, const FCoords& fc) const {
 FindNodeMineable::FindNodeMineable(Game& g, DescriptionIndex r) : game(g), res(r) {
 }
 
-bool FindNodeMineable::accept(const Map&, const FCoords& fc) const {
+bool FindNodeMineable::accept(const EditorGameBase&, const FCoords& fc) const {
 
 	return (fc.field->nodecaps() & BUILDCAPS_MINE) && (fc.field->get_resources() == res);
 }
@@ -220,21 +220,23 @@ bool FindNodeMineable::accept(const Map&, const FCoords& fc) const {
 FindNodeWater::FindNodeWater(const World& world) : world_(world) {
 }
 
-bool FindNodeWater::accept(const Map& map, const FCoords& coord) const {
+bool FindNodeWater::accept(const EditorGameBase& egbase, const FCoords& coord) const {
 	return (world_.terrain_descr(coord.field->terrain_d()).get_is() &
 	        TerrainDescription::Is::kWater) ||
-	       (world_.terrain_descr(map.get_neighbour(coord, WALK_W).field->terrain_r()).get_is() &
+	       (world_.terrain_descr(egbase.map().get_neighbour(coord, WALK_W).field->terrain_r())
+	           .get_is() &
 	        TerrainDescription::Is::kWater) ||
-	       (world_.terrain_descr(map.get_neighbour(coord, WALK_NW).field->terrain_r()).get_is() &
+	       (world_.terrain_descr(egbase.map().get_neighbour(coord, WALK_NW).field->terrain_r())
+	           .get_is() &
 	        TerrainDescription::Is::kWater);
 }
 
-bool FindNodeOpenWater::accept(const Map& /* map */, const FCoords& coord) const {
+bool FindNodeOpenWater::accept(const EditorGameBase&, const FCoords& coord) const {
 	return !(coord.field->nodecaps() & MOVECAPS_WALK) && (coord.field->nodecaps() & MOVECAPS_SWIM);
 }
 
 // FindNodeWithFlagOrRoad
-bool FindNodeWithFlagOrRoad::accept(const Map&, FCoords fc) const {
+bool FindNodeWithFlagOrRoad::accept(const EditorGameBase&, FCoords fc) const {
 	if (upcast(PlayerImmovable const, pimm, fc.field->get_immovable()))
 		return (dynamic_cast<Flag const*>(pimm) ||
 		        (dynamic_cast<Road const*>(pimm) && (fc.field->nodecaps() & BUILDCAPS_FLAG)));

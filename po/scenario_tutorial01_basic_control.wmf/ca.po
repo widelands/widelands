@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-19 16:54+0000\n"
+"POT-Creation-Date: 2019-08-26 10:18+0000\n"
+"PO-Revision-Date: 2019-08-28 10:48+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -63,7 +63,7 @@ msgstr "En aquest tutorial, se us guiarà a través d'objectius"
 msgid ""
 "Follow the intructions in the objective below so that I can show you where "
 "to find them."
-msgstr ""
+msgstr "Seguiu les instruccions de l'objectiu de sota per tal que us pugui ensenyar on trobar-ho."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:50
 msgid "Objectives and how to close this window"
@@ -110,7 +110,7 @@ msgstr "Mostra espais de construcció"
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Necessitem un lloc per la cabana del llenyataire. Per fer-ho més fàcil, podeu activar el botó «Mostra els espais de construcció». Hi ha dues maneres de fer-ho:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:67
 msgid ""
@@ -850,7 +850,7 @@ msgid ""
 "You have two messages at the moment. This one, which you are currently "
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages:"
-msgstr ""
+msgstr "Ara mateix teniu dos missatges. El que esteu llegint ara mateix i el que us informa que teniu un nou quarter general sota control. Cal aprendre com arxivar els missatges:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:541
 msgid "Close the messages window"
@@ -932,7 +932,7 @@ msgstr "Han arribat missatges!"
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance?"
-msgstr ""
+msgstr "Heu rebut alguns missatges. El botó de la part de baix ha canviat d'aparença perquè hi ha nous missatges que encara no heu llegit."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:597
 msgid "Expand your territory"
@@ -1003,7 +1003,7 @@ msgstr "Expandir-se és tan senzill com construir un edifici militar a la fronte
 msgid ""
 "As soon as a military building is manned, it will extend your land. I will "
 "tell you more about military buildings in another tutorial."
-msgstr ""
+msgstr "Tan aviat com un edifici militar es guarneixi de personal, estendrà el vostre territori. Us explicaré més sobre els edificis militars en un altre tutorial."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:618
 msgid "Military Site Occupied"

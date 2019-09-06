@@ -479,7 +479,7 @@ void InteractiveGameBase::postload() {
 	show_buildhelp(false);
 
 	// Recalc whole map for changed owner stuff
-	egbase().mutable_map()->recalc_whole_map(egbase().world());
+	egbase().mutable_map()->recalc_whole_map(egbase());
 
 	// Close game-relevant UI windows (but keep main menu open)
 	fieldaction_.destroy();
@@ -585,7 +585,7 @@ bool InteractiveGameBase::try_show_ship_window() {
 	}
 
 	std::vector<Widelands::Bob*> ships;
-	if (map.find_bobs(area, &ships, Widelands::FindBobShip())) {
+	if (map.find_bobs(egbase(), area, &ships, Widelands::FindBobShip())) {
 		for (Widelands::Bob* ship : ships) {
 			if (can_see(ship->owner().player_number())) {
 				// FindBobShip should have returned only ships
