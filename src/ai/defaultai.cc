@@ -898,7 +898,8 @@ void DefaultAI::late_initialization() {
 	assert(count_buildings_with_attribute(BuildingAttribute::kRanger) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kWell) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kLumberjack) == 1);
-	assert(count_buildings_with_attribute(BuildingAttribute::kHunter) == 1);
+	assert((count_buildings_with_attribute(BuildingAttribute::kHunter) == 1) ||
+		   (count_buildings_with_attribute(BuildingAttribute::kHunter) == 0));
 	assert(count_buildings_with_attribute(BuildingAttribute::kIronMine) >= 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kFisher) == 1);
 	// If there will be a tribe with more than 3 mines of the same type, just increase the number
