@@ -223,9 +223,11 @@ FindNodeWater::FindNodeWater(const World& world) : world_(world) {
 bool FindNodeWater::accept(const EditorGameBase& egbase, const FCoords& coord) const {
 	return (world_.terrain_descr(coord.field->terrain_d()).get_is() &
 	        TerrainDescription::Is::kWater) ||
-	       (world_.terrain_descr(egbase.map().get_neighbour(coord, WALK_W).field->terrain_r()).get_is() &
+	       (world_.terrain_descr(egbase.map().get_neighbour(coord, WALK_W).field->terrain_r())
+	           .get_is() &
 	        TerrainDescription::Is::kWater) ||
-	       (world_.terrain_descr(egbase.map().get_neighbour(coord, WALK_NW).field->terrain_r()).get_is() &
+	       (world_.terrain_descr(egbase.map().get_neighbour(coord, WALK_NW).field->terrain_r())
+	           .get_is() &
 	        TerrainDescription::Is::kWater);
 }
 

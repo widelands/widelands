@@ -130,8 +130,7 @@ struct FindNodeSize {
 		sizeBig,
 		sizeMine,  //  can build a mine on this field
 		sizePort,  //  can build a port on this field
-		sizeSwim, // coast
-		sizeTerraform // a neighbouring triangle has enhanceable terrain
+		sizeSwim   // coast
 	};
 
 	explicit FindNodeSize(Size init_size) : size(init_size) {
@@ -191,6 +190,12 @@ struct FindNodeResourceBreedable {
 private:
 	DescriptionIndex resource;
 	AnimalBreedable strictness;
+};
+
+/// Accepts a node where at least 1 adjacent triangle has enhancable terrain
+struct FindNodeTerraform {
+	FindNodeTerraform() = default;
+	bool accept(const EditorGameBase&, const FCoords&) const;
 };
 
 /// Accepts a node if it is a shore node in the sense that it is walkable

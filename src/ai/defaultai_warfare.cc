@@ -53,8 +53,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		static std::vector<ImmovableFound> immovables;
 		immovables.clear();
 		immovables.reserve(40);
-		map.find_immovables(game(), Area<FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3), &immovables,
-		                    FindImmovableAttackTarget());
+		map.find_immovables(game(), Area<FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3),
+		                    &immovables, FindImmovableAttackTarget());
 
 		for (uint32_t j = 0; j < immovables.size(); ++j) {
 			if (upcast(MilitarySite const, bld, immovables.at(j).object)) {

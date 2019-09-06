@@ -24,8 +24,8 @@
 #include "base/macros.h"
 #include "base/math.h"
 #include "graphic/rendertarget.h"
-#include "profile/profile.h"
 #include "wlapplication.h"
+#include "wlapplication_options.h"
 #include "wui/mapviewpixelfunctions.h"
 
 namespace {
@@ -296,7 +296,7 @@ bool MapView::ViewArea::contains_map_pixel(const Vector2f& map_pixel) const {
 MapView::MapView(
    UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h)
    : UI::Panel(parent, x, y, w, h),
-     animate_map_panning_(g_options.pull_section("global").get_bool("animate_map_panning", true)),
+     animate_map_panning_(get_config_bool("animate_map_panning", true)),
      map_(map),
      view_(),
      last_mouse_pos_(Vector2i::zero()),

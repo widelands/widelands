@@ -573,6 +573,9 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	if (action.iparam3)
 		functor.add(FindNodeSpace(get_location(game)));
 
+	if (action.iparam7)
+		functor.add(FindNodeTerraform());
+
 	if (!map.find_reachable_fields(game, area, &list, cstep, functor)) {
 
 		// This is default note "out of resources" sent to a player
@@ -920,7 +923,7 @@ bool Worker::run_createbob(Game& game, State& state, const Action& action) {
 	return true;
 }
 
-bool Worker::run_terraform(Game& game, State&, const Action&) {
+bool Worker::run_terraform(Game& game, State& state, const Action&) {
 	const World& world = game.world();
 	std::map<TCoords<FCoords>, DescriptionIndex> triangles;
 	const FCoords f = get_position();
@@ -929,38 +932,44 @@ bool Worker::run_terraform(Game& game, State&, const Action&) {
 	game.map().get_trn(f, &trn);
 	game.map().get_ln(f, &ln);
 
-	DescriptionIndex di = world.terrain_descr(f.field->terrain_r()).enhancement();
+	DescriptionIndex di =
+	   world.get_terrain_index(world.terrain_descr(f.field->terrain_r()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::R), di));
 	}
-	di = world.terrain_descr(f.field->terrain_d()).enhancement();
+	di = world.get_terrain_index(world.terrain_descr(f.field->terrain_d()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::D), di));
 	}
-	di = world.terrain_descr(tln.field->terrain_r()).enhancement();
+	di = world.get_terrain_index(world.terrain_descr(tln.field->terrain_r()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::R), di));
 	}
-	di = world.terrain_descr(tln.field->terrain_d()).enhancement();
+	di = world.get_terrain_index(world.terrain_descr(tln.field->terrain_d()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::D), di));
 	}
-	di = world.terrain_descr(ln.field->terrain_r()).enhancement();
+	di = world.get_terrain_index(world.terrain_descr(ln.field->terrain_r()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(ln, TriangleIndex::R), di));
 	}
-	di = world.terrain_descr(trn.field->terrain_d()).enhancement();
+	di = world.get_terrain_index(world.terrain_descr(trn.field->terrain_d()).enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(trn, TriangleIndex::D), di));
 	}
 
 	if (triangles.empty()) {
+		send_signal(game, "fail");
+		pop_task(game);
 		return false;
 	}
 	assert(game.mutable_map());
 	auto it = triangles.begin();
-	for (size_t rand = game.logic_rand() % triangles.size() + 1; rand > 0; --rand, ++it);
+	for (size_t rand = game.logic_rand() % triangles.size(); rand > 0; --rand)
+		++it;
 	game.mutable_map()->change_terrain(game, it->first, it->second);
+	++state.ivar1;
+	schedule_act(game, 10);
 	return true;
 }
 

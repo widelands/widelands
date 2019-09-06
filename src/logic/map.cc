@@ -179,8 +179,7 @@ void Map::recalc_whole_map(const EditorGameBase& egbase) {
 	recalculate_allows_seafaring();
 }
 
-void Map::recalc_default_resources(const EditorGameBase& egbase) {
-	const World& world = egbase.world();
+void Map::recalc_default_resources(const World& world) {
 	for (int16_t y = 0; y < height_; ++y)
 		for (int16_t x = 0; x < width_; ++x) {
 			FCoords f, f1;
@@ -892,7 +891,8 @@ Functor is of the form: functor(Map*, FCoords)
 ===============
 */
 template <typename functorT>
-void Map::find_reachable(const EditorGameBase& egbase, const Area<FCoords>& area,
+void Map::find_reachable(const EditorGameBase& egbase,
+                         const Area<FCoords>& area,
                          const CheckStep& checkstep,
                          functorT& functor) const {
 	std::vector<Coords> queue;
@@ -935,7 +935,8 @@ Call the functor for every field within the given radius.
 Functor is of the form: functor(Map &, FCoords)
 ===============
 */
-template <typename functorT> void Map::find(const EditorGameBase& egbase, const Area<FCoords>& area, functorT& functor) const {
+template <typename functorT>
+void Map::find(const EditorGameBase& egbase, const Area<FCoords>& area, functorT& functor) const {
 	MapRegion<Area<FCoords>> mr(*this, area);
 	do
 		functor(egbase, mr.location());
@@ -983,7 +984,8 @@ the list.
 Returns the number of objects found.
 ===============
 */
-uint32_t Map::find_bobs(const EditorGameBase& egbase, Area<FCoords> const area,
+uint32_t Map::find_bobs(const EditorGameBase& egbase,
+                        Area<FCoords> const area,
                         std::vector<Bob*>* const list,
                         const FindBob& functor) const {
 	FindBobsCallback cb(list, functor);
@@ -1005,7 +1007,8 @@ the list.
 Returns the number of objects found.
 ===============
 */
-uint32_t Map::find_reachable_bobs(const EditorGameBase& egbase, Area<FCoords> const area,
+uint32_t Map::find_reachable_bobs(const EditorGameBase& egbase,
+                                  Area<FCoords> const area,
                                   std::vector<Bob*>* const list,
                                   const CheckStep& checkstep,
                                   const FindBob& functor) const {
@@ -1059,7 +1062,8 @@ Returns true if an immovable has been found.
 If list is not 0, found immovables are stored in list.
 ===============
 */
-uint32_t Map::find_immovables(const EditorGameBase& egbase, Area<FCoords> const area,
+uint32_t Map::find_immovables(const EditorGameBase& egbase,
+                              Area<FCoords> const area,
                               std::vector<ImmovableFound>* const list,
                               const FindImmovable& functor) const {
 	FindImmovablesCallback cb(list, functor);
@@ -1079,7 +1083,8 @@ If list is not 0, found immovables are stored in list.
 Returns the number of immovables we found.
 ===============
 */
-uint32_t Map::find_reachable_immovables(const EditorGameBase& egbase, Area<FCoords> const area,
+uint32_t Map::find_reachable_immovables(const EditorGameBase& egbase,
+                                        Area<FCoords> const area,
                                         std::vector<ImmovableFound>* const list,
                                         const CheckStep& checkstep,
                                         const FindImmovable& functor) const {
@@ -1097,7 +1102,8 @@ uint32_t Map::find_reachable_immovables(const EditorGameBase& egbase, Area<FCoor
  *
  * \return the number of immovables found.
  */
-uint32_t Map::find_reachable_immovables_unique(const EditorGameBase& egbase, const Area<FCoords> area,
+uint32_t Map::find_reachable_immovables_unique(const EditorGameBase& egbase,
+                                               const Area<FCoords> area,
                                                std::vector<BaseImmovable*>& list,
                                                const CheckStep& checkstep,
                                                const FindImmovable& functor) const {
@@ -1153,7 +1159,8 @@ Returns the number of matching fields.
 Note that list can be 0.
 ===============
 */
-uint32_t Map::find_fields(const EditorGameBase& egbase, Area<FCoords> const area,
+uint32_t Map::find_fields(const EditorGameBase& egbase,
+                          Area<FCoords> const area,
                           std::vector<Coords>* list,
                           const FindNode& functor) const {
 	FindNodesCallback cb(list, functor);
@@ -1172,7 +1179,8 @@ Returns the number of matching fields.
 Note that list can be 0.
 ===============
 */
-uint32_t Map::find_reachable_fields(const EditorGameBase& egbase, Area<FCoords> const area,
+uint32_t Map::find_reachable_fields(const EditorGameBase& egbase,
+                                    Area<FCoords> const area,
                                     std::vector<Coords>* list,
                                     const CheckStep& checkstep,
                                     const FindNode& functor) const {
@@ -1264,7 +1272,8 @@ void Map::recalc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f) 
 	f.field->max_caps = calc_nodecaps_pass1(egbase, f, false);
 }
 
-NodeCaps Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool consider_mobs) const {
+NodeCaps
+Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool consider_mobs) const {
 	uint8_t caps = CAPS_NONE;
 	const World& world = egbase.world();
 
@@ -1363,8 +1372,8 @@ NodeCaps Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f
 	//  restrictions
 	if (caps & MOVECAPS_WALK) {
 		//  4b) Flags must be at least 2 edges apart
-		if (consider_mobs &&
-		    find_immovables(egbase, Area<FCoords>(f, 1), nullptr, FindImmovableType(MapObjectType::FLAG)))
+		if (consider_mobs && find_immovables(egbase, Area<FCoords>(f, 1), nullptr,
+		                                     FindImmovableType(MapObjectType::FLAG)))
 			return static_cast<NodeCaps>(caps);
 		caps |= BUILDCAPS_FLAG;
 	}
@@ -1645,8 +1654,11 @@ bool Map::is_port_space(const Coords& c) const {
 	return port_spaces_.count(c);
 }
 
-bool Map::set_port_space(
-   const EditorGameBase& egbase, const Coords& c, bool set, bool force, bool recalculate_seafaring) {
+bool Map::set_port_space(const EditorGameBase& egbase,
+                         const Coords& c,
+                         bool set,
+                         bool force,
+                         bool recalculate_seafaring) {
 	bool success = false;
 	if (set) {
 		success = force || is_port_space_allowed(egbase, get_fcoords(c));
@@ -2095,27 +2107,28 @@ bool Map::can_reach_by_water(const Coords& field) const {
 	return false;
 }
 
-int32_t
-Map::change_terrain(const EditorGameBase& egbase, TCoords<FCoords> const c, DescriptionIndex const terrain) {
+int32_t Map::change_terrain(const EditorGameBase& egbase,
+                            TCoords<FCoords> const c,
+                            DescriptionIndex const terrain) {
 	c.node.field->set_terrain(c.t, terrain);
 
 	// remove invalid resources if necessary
 	// check vertex to which the triangle belongs
-	if (!is_resource_valid(egbase, c.node, c.node.field->get_resources())) {
+	if (!is_resource_valid(egbase.world(), c.node, c.node.field->get_resources())) {
 		clear_resources(c.node);
 	}
 
 	// always check south-east vertex
 	Widelands::FCoords f_se(c.node);
 	get_neighbour(f_se, Widelands::WALK_SE, &f_se);
-	if (!is_resource_valid(egbase, f_se, f_se.field->get_resources())) {
+	if (!is_resource_valid(egbase.world(), f_se, f_se.field->get_resources())) {
 		clear_resources(f_se);
 	}
 
 	// check south-west vertex if d-Triangle is changed, check east vertex if r-Triangle is changed
 	Widelands::FCoords f_sw_e(c.node);
 	get_neighbour(f_sw_e, c.t == TriangleIndex::D ? Widelands::WALK_SW : Widelands::WALK_E, &f_sw_e);
-	if (!is_resource_valid(egbase, f_sw_e, f_sw_e.field->get_resources())) {
+	if (!is_resource_valid(egbase.world(), f_sw_e, f_sw_e.field->get_resources())) {
 		clear_resources(f_sw_e);
 	}
 
@@ -2128,13 +2141,12 @@ Map::change_terrain(const EditorGameBase& egbase, TCoords<FCoords> const c, Desc
 	return kPotentiallyAffectedNeighbors;
 }
 
-bool Map::is_resource_valid(const Widelands::EditorGameBase& egbase,
+bool Map::is_resource_valid(const Widelands::World& world,
                             const Widelands::FCoords& c,
                             DescriptionIndex curres) const {
 	if (curres == Widelands::kNoResource)
 		return true;
 
-	const World& world = egbase.world();
 	Widelands::FCoords f1;
 
 	int32_t count = 0;
@@ -2160,10 +2172,10 @@ bool Map::is_resource_valid(const Widelands::EditorGameBase& egbase,
 	return count > 1;
 }
 
-void Map::ensure_resource_consistency(const EditorGameBase& egbase) {
+void Map::ensure_resource_consistency(const World& world) {
 	for (MapIndex i = 0; i < max_index(); ++i) {
 		auto fcords = get_fcoords(fields_[i]);
-		if (!is_resource_valid(egbase, fcords, fcords.field->get_resources())) {
+		if (!is_resource_valid(world, fcords, fcords.field->get_resources())) {
 			clear_resources(fcords);
 		}
 	}
@@ -2204,7 +2216,8 @@ uint32_t Map::set_height(const EditorGameBase& egbase, const FCoords fc, uint8_t
 	return radius;
 }
 
-uint32_t Map::change_height(const EditorGameBase& egbase, Area<FCoords> area, int16_t const difference) {
+uint32_t
+Map::change_height(const EditorGameBase& egbase, Area<FCoords> area, int16_t const difference) {
 	{
 		MapRegion<Area<FCoords>> mr(*this, area);
 		do {
@@ -2229,7 +2242,8 @@ uint32_t Map::change_height(const EditorGameBase& egbase, Area<FCoords> area, in
 	return area.radius;
 }
 
-uint32_t Map::set_height(const EditorGameBase& egbase, Area<FCoords> area, HeightInterval height_interval) {
+uint32_t
+Map::set_height(const EditorGameBase& egbase, Area<FCoords> area, HeightInterval height_interval) {
 	assert(height_interval.valid());
 	assert(height_interval.max <= MAX_FIELD_HEIGHT);
 	{

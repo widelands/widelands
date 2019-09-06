@@ -507,11 +507,9 @@ public:
 	Flag* build_flag(const Coords&);   /// Build a flag if it is allowed.
 	Road& force_road(const Path&);
 	Road* build_road(const Path&);  /// Build a road if it is allowed.
-	Building& force_building(Coords, const Building::FormerBuildings&);
-	Building& force_csite(Coords,
-	                      DescriptionIndex,
-	                      const Building::FormerBuildings& = Building::FormerBuildings());
-	Building* build(Coords, DescriptionIndex, bool, Building::FormerBuildings&);
+	Building& force_building(Coords, const FormerBuildings&);
+	Building& force_csite(Coords, DescriptionIndex, const FormerBuildings& = FormerBuildings());
+	Building* build(Coords, DescriptionIndex, bool, FormerBuildings&);
 	void bulldoze(PlayerImmovable&, bool recurse = false);
 	void flagaction(Flag&);
 	void start_stop_building(PlayerImmovable&);
@@ -698,7 +696,7 @@ private:
 
 void find_former_buildings(const Tribes& tribes,
                            const DescriptionIndex bi,
-                           Building::FormerBuildings* former_buildings);
+                           FormerBuildings* former_buildings);
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_H

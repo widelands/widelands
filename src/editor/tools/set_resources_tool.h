@@ -35,14 +35,12 @@ struct EditorSetResourcesTool : public EditorTool {
 	/**
 	 * Sets the resources of the current to a fixed value
 	 */
-	int32_t handle_click_impl(const Widelands::EditorGameBase&,
-	                          const Widelands::NodeAndTriangle<>& center,
+	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
-	int32_t handle_undo_impl(const Widelands::EditorGameBase&,
-	                         const Widelands::NodeAndTriangle<>& center,
+	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;

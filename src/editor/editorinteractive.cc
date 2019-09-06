@@ -67,6 +67,7 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
+#include "wlapplication_options.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_base.h"
 
@@ -82,7 +83,7 @@ void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* load
 }  // namespace
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
-   : InteractiveBase(e, g_options.pull_section("global")),
+   : InteractiveBase(e, get_config_section()),
      need_save_(false),
      realtime_(SDL_GetTicks()),
      is_painting_(false),
@@ -149,8 +150,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	history_.reset(new EditorHistory(*undo_, *redo_));
 
-	undo_->sigclicked.connect([this] { history_->undo_action(egbase()); });
-	redo_->sigclicked.connect([this] { history_->redo_action(egbase()); });
+	undo_->sigclicked.connect([this] { history_->undo_action(); });
+	redo_->sigclicked.connect([this] { history_->redo_action(); });
 
 	toolbar()->add_space(15);
 
@@ -528,7 +529,7 @@ void EditorInteractive::exit() {
 void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle,
                                     const bool should_draw) {
 	history_->do_action(tools_->current(), tools_->use_tool, *egbase().mutable_map(),
-	                    egbase(), node_and_triangle, *this, should_draw);
+	                    node_and_triangle, *this, should_draw);
 	set_need_save(true);
 }
 
@@ -826,14 +827,14 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_y:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				history_->redo_action(egbase());
+				history_->redo_action();
 			return true;
 
 		case SDLK_z:
 			if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) && (code.mod & (KMOD_LSHIFT | KMOD_RSHIFT)))
-				history_->redo_action(egbase());
+				history_->redo_action();
 			else if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				history_->undo_action(egbase());
+				history_->undo_action();
 			return true;
 
 		case SDLK_F1:
@@ -908,10 +909,9 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				   egbase, 64, 64, 0,
 				   /** TRANSLATORS: Default name for new map */
 				   _("No Name"),
-				   g_options.pull_section("global").get_string(
-				      "realname",
-				      /** TRANSLATORS: Map author name when it hasn't been set yet */
-				      pgettext("author_name", "Unknown")));
+				   get_config_string("realname",
+				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
+				                     pgettext("author_name", "Unknown")));
 
 				load_all_tribes(&egbase, &loader_ui);
 

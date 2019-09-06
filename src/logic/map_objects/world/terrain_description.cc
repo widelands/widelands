@@ -114,16 +114,13 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 	}
 
 	if (table.has_key("enhancement")) {
-		const std::string e = table.get_string("enhancement");
-		if (e == name_) {
+		enhancement_ = table.get_string("enhancement");
+		if (enhancement_ == name_) {
 			throw GameDataError("%s: a terrain cannot be enhanced to itself", name_.c_str());
 		}
-		enhancement_ = world.terrains().get_index(e);
-		if (enhancement_ == INVALID_INDEX) {
-			throw GameDataError("%s: unknown enhancement terrain: %s", name_.c_str(), e.c_str());
-		}
+		// Other invalid terrains will be detected in World::postload
 	} else {
-		enhancement_ = INVALID_INDEX;
+		enhancement_ = "";
 	}
 
 	if (!(0 < fertility_ && fertility_ < 1000)) {
@@ -269,7 +266,7 @@ int TerrainDescription::fertility() const {
 	return fertility_;
 }
 
-DescriptionIndex TerrainDescription::enhancement() const {
+const std::string& TerrainDescription::enhancement() const {
 	return enhancement_;
 }
 

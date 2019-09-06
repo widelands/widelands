@@ -67,6 +67,7 @@ class Worker : public Bob {
 		int32_t iparam4;
 		int32_t iparam5;
 		int32_t iparam6;
+		int32_t iparam7;
 		std::string sparam1;
 
 		std::vector<std::string> sparamv;

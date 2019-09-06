@@ -39,6 +39,7 @@
 #include "random/random.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
+#include "wlapplication_options.h"
 
 namespace {
 // The map generator can't find starting positions for too many players
@@ -484,10 +485,9 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	      << "ID = " << map_id_edit_.text() << "\n";
 
 	MapGenerator gen(*map, map_info, egbase);
-	map->create_empty_map(
-	   egbase, map_info.w, map_info.h, 0, _("No Name"),
-	   g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")),
-	   sstrm.str().c_str());
+	map->create_empty_map(egbase, map_info.w, map_info.h, 0, _("No Name"),
+	                      get_config_string("realname", pgettext("author_name", "Unknown")),
+	                      sstrm.str().c_str());
 	loader_ui.step(_("Generating random map…"));
 
 	log("============== Generating Map ==============\n");

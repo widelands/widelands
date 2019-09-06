@@ -1342,11 +1342,12 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		}
 	}
 
-	field.unowned_land_nearby = map.find_fields(game(),
-	   Area<FCoords>(field.coords, actual_enemy_check_area), nullptr, find_unowned_walkable);
+	field.unowned_land_nearby = map.find_fields(
+	   game(), Area<FCoords>(field.coords, actual_enemy_check_area), nullptr, find_unowned_walkable);
 
-	field.enemy_owned_land_nearby = map.find_fields(game(),
-	   Area<FCoords>(field.coords, actual_enemy_check_area), nullptr, find_enemy_owned_walkable);
+	field.enemy_owned_land_nearby =
+	   map.find_fields(game(), Area<FCoords>(field.coords, actual_enemy_check_area), nullptr,
+	                   find_enemy_owned_walkable);
 
 	field.nearest_buildable_spot_nearby = std::numeric_limits<uint16_t>::max();
 	field.unowned_buildable_spots_nearby = 0;
@@ -1408,8 +1409,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	// testing mines
 	if (resource_count_now) {
-		uint32_t close_mines = map.find_fields(game(),
-		   Area<FCoords>(field.coords, kProductionArea), nullptr, find_unowned_mines_pots);
+		uint32_t close_mines = map.find_fields(
+		   game(), Area<FCoords>(field.coords, kProductionArea), nullptr, find_unowned_mines_pots);
 		uint32_t distant_mines =
 		   map.find_fields(game(), Area<FCoords>(field.coords, kDistantResourcesArea), nullptr,
 
@@ -1425,8 +1426,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		    (mines_per_type[iron_resource_id].in_construction +
 		     mines_per_type[iron_resource_id].finished) <= 1) {
 			// counting iron mines, if we have less than two iron mines
-			field.unowned_iron_mines_nearby = map.find_fields(game(),
-			   Area<FCoords>(field.coords, kDistantResourcesArea), nullptr, find_unowned_iron_mines);
+			field.unowned_iron_mines_nearby =
+			   map.find_fields(game(), Area<FCoords>(field.coords, kDistantResourcesArea), nullptr,
+			                   find_unowned_iron_mines);
 		} else {
 			field.unowned_iron_mines_nearby = 0;
 		}
@@ -1492,14 +1494,15 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 		if (field.water_nearby > 0) {
 			FindNodeOpenWater find_open_water(game().world());
-			field.open_water_nearby =
-			   map.find_fields(game(), Area<FCoords>(field.coords, kProductionArea), nullptr, find_open_water);
+			field.open_water_nearby = map.find_fields(
+			   game(), Area<FCoords>(field.coords, kProductionArea), nullptr, find_open_water);
 		}
 
 		if (resource_necessity_water_needed_) {  // for atlanteans
-			field.distant_water = map.find_fields(game(), Area<FCoords>(field.coords, kDistantResourcesArea),
-			                                      nullptr, find_water) -
-			                      field.water_nearby;
+			field.distant_water =
+			   map.find_fields(
+			      game(), Area<FCoords>(field.coords, kDistantResourcesArea), nullptr, find_water) -
+			   field.water_nearby;
 			assert(field.open_water_nearby <= field.water_nearby);
 		}
 	}
@@ -1520,8 +1523,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		CheckStepWalkOn fisher_cstep(MOVECAPS_WALK, true);
 		static std::vector<Coords> fish_fields_list;  // pity this contains duplicates
 		fish_fields_list.clear();
-		map.find_reachable_fields(game(), Area<FCoords>(field.coords, kProductionArea), &fish_fields_list,
-		                          fisher_cstep, FindNodeResource(world.get_resource("fish")));
+		map.find_reachable_fields(game(), Area<FCoords>(field.coords, kProductionArea),
+		                          &fish_fields_list, fisher_cstep,
+		                          FindNodeResource(world.get_resource("fish")));
 
 		// This is "list" of unique fields in fish_fields_list we got above
 		static std::set<Coords> counted_fields;
@@ -1537,13 +1541,13 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// Counting resources that do not change fast
 	if (resource_count_now) {
 		// Counting fields with critters (game)
-		field.critters_nearby =
-		   map.find_bobs(game(), Area<FCoords>(field.coords, kProductionArea), nullptr, FindBobCritter());
+		field.critters_nearby = map.find_bobs(
+		   game(), Area<FCoords>(field.coords, kProductionArea), nullptr, FindBobCritter());
 
 		// Rocks are not renewable, we will count them only if previous state is nonzero
 		if (field.rocks_nearby > 0) {
-			field.rocks_nearby = map.find_immovables(game(),
-			   Area<FCoords>(map.get_fcoords(field.coords), kProductionArea), nullptr,
+			field.rocks_nearby = map.find_immovables(
+			   game(), Area<FCoords>(map.get_fcoords(field.coords), kProductionArea), nullptr,
 			   FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks")));
 
 			// adding 5 if rocks found
@@ -1559,14 +1563,14 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		// Counting trees nearby
 		int32_t const tree_attr = MapObjectDescr::get_attribute_id("tree");
 		field.trees_nearby =
-		   map.find_immovables(game(), Area<FCoords>(map.get_fcoords(field.coords), kProductionArea), nullptr,
-		                       FindImmovableAttribute(tree_attr));
+		   map.find_immovables(game(), Area<FCoords>(map.get_fcoords(field.coords), kProductionArea),
+		                       nullptr, FindImmovableAttribute(tree_attr));
 
 		// Counting bushes nearby
 		int32_t const bush_attr = MapObjectDescr::get_attribute_id("ripe_bush");
 		field.bushes_nearby =
-		   map.find_immovables(game(), Area<FCoords>(map.get_fcoords(field.coords), kProductionArea), nullptr,
-		                       FindImmovableAttribute(bush_attr));
+		   map.find_immovables(game(), Area<FCoords>(map.get_fcoords(field.coords), kProductionArea),
+		                       nullptr, FindImmovableAttribute(bush_attr));
 	}
 
 	// resetting some values
@@ -3918,7 +3922,8 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 	// get all flags within radius
 	std::vector<Coords> reachable;
 	map.find_reachable_fields(game(),
-	   Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius), &reachable, check, functor);
+	                          Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius),
+	                          &reachable, check, functor);
 
 	for (const Coords& reachable_coords : reachable) {
 
@@ -4066,7 +4071,8 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 
 			// get all flags within radius
 			std::vector<Coords> reachable_to_block;
-			map.find_reachable_fields(game(), Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius),
+			map.find_reachable_fields(game(),
+			                          Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius),
 			                          &reachable_to_block, check_own, buildable_functor);
 
 			for (auto coords : reachable_to_block) {
@@ -4467,8 +4473,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			return false;
 		}
 
-		const uint32_t remaining_trees = map.find_immovables(game(),
-		   Area<FCoords>(map.get_fcoords(site.site->get_position()), radius), nullptr,
+		const uint32_t remaining_trees = map.find_immovables(
+		   game(), Area<FCoords>(map.get_fcoords(site.site->get_position()), radius), nullptr,
 		   FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
 
 		if (site.site->get_statistics_percent() >
@@ -4534,10 +4540,10 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// Quarry handling
 	if (site.bo->is(BuildingAttribute::kNeedsRocks)) {
 
-		if (map.find_immovables(game(), Area<FCoords>(map.get_fcoords(site.site->get_position()), 6), nullptr,
+		if (map.find_immovables(
+		       game(), Area<FCoords>(map.get_fcoords(site.site->get_position()), 6), nullptr,
 
-		                        FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks"))) ==
-		    0) {
+		       FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks"))) == 0) {
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
@@ -4689,9 +4695,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			return false;
 		}
 
-		const uint32_t trees_in_vicinity =
-		   map.find_immovables(game(), Area<FCoords>(map.get_fcoords(site.site->get_position()), 5), nullptr,
-		                       FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
+		const uint32_t trees_in_vicinity = map.find_immovables(
+		   game(), Area<FCoords>(map.get_fcoords(site.site->get_position()), 5), nullptr,
+		   FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
 
 		// stop ranger if enough trees around regardless of policy
 		if (trees_in_vicinity > 25) {

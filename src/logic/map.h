@@ -51,6 +51,7 @@ class Objective;
 struct BaseImmovable;
 struct MapGenerator;
 struct PathfieldManager;
+class World;
 
 // Global list of available map dimensions.
 const std::vector<int32_t> kMapDimensions = {64,  80,  96,  112, 128, 144, 160, 176, 192, 208,
@@ -198,7 +199,7 @@ public:
 	/***
 	 * Ensures that resources match their adjacent terrains.
 	 */
-	void ensure_resource_consistency(const EditorGameBase&);
+	void ensure_resource_consistency(const World&);
 
 	/***
 	 * Recalculates all default resources.
@@ -207,7 +208,7 @@ public:
 	 * the editor. Since there, default resources
 	 * are not shown.
 	 */
-	void recalc_default_resources(const EditorGameBase&);
+	void recalc_default_resources(const World&);
 
 	void set_nrplayers(PlayerNumber);
 
@@ -305,28 +306,36 @@ public:
 	NodeCaps get_max_nodecaps(const EditorGameBase&, const FCoords&) const;
 
 	BaseImmovable* get_immovable(const Coords&) const;
-	uint32_t find_bobs(const EditorGameBase&, const Area<FCoords>,
+	uint32_t find_bobs(const EditorGameBase&,
+	                   const Area<FCoords>,
 	                   std::vector<Bob*>* list,
 	                   const FindBob& functor = FindBobAlwaysTrue()) const;
-	uint32_t find_reachable_bobs(const EditorGameBase&, const Area<FCoords>,
+	uint32_t find_reachable_bobs(const EditorGameBase&,
+	                             const Area<FCoords>,
 	                             std::vector<Bob*>* list,
 	                             const CheckStep&,
 	                             const FindBob& functor = FindBobAlwaysTrue()) const;
-	uint32_t find_immovables(const EditorGameBase&, const Area<FCoords>,
+	uint32_t find_immovables(const EditorGameBase&,
+	                         const Area<FCoords>,
 	                         std::vector<ImmovableFound>* list,
 	                         const FindImmovable& = find_immovable_always_true()) const;
-	uint32_t find_reachable_immovables(const EditorGameBase&, const Area<FCoords>,
+	uint32_t find_reachable_immovables(const EditorGameBase&,
+	                                   const Area<FCoords>,
 	                                   std::vector<ImmovableFound>* list,
 	                                   const CheckStep&,
 	                                   const FindImmovable& = find_immovable_always_true()) const;
 	uint32_t
-	find_reachable_immovables_unique(const EditorGameBase&, const Area<FCoords>,
+	find_reachable_immovables_unique(const EditorGameBase&,
+	                                 const Area<FCoords>,
 	                                 std::vector<BaseImmovable*>& list,
 	                                 const CheckStep&,
 	                                 const FindImmovable& = find_immovable_always_true()) const;
-	uint32_t
-	find_fields(const EditorGameBase&, const Area<FCoords>, std::vector<Coords>* list, const FindNode& functor) const;
-	uint32_t find_reachable_fields(const EditorGameBase&, const Area<FCoords>,
+	uint32_t find_fields(const EditorGameBase&,
+	                     const Area<FCoords>,
+	                     std::vector<Coords>* list,
+	                     const FindNode& functor) const;
+	uint32_t find_reachable_fields(const EditorGameBase&,
+	                               const Area<FCoords>,
 	                               std::vector<Coords>* list,
 	                               const CheckStep&,
 	                               const FindNode&) const;
@@ -458,7 +467,7 @@ public:
 	 *
 	 * To qualify as valid, resources need to be surrounded by at least two matching terrains.
 	 */
-	bool is_resource_valid(const Widelands::EditorGameBase&,
+	bool is_resource_valid(const Widelands::World&,
 	                       const Widelands::FCoords& c,
 	                       DescriptionIndex curres) const;
 
@@ -545,8 +554,10 @@ private:
 	                   NodeCaps initcaps = CAPS_NONE) const;
 	bool is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs) const;
 	template <typename functorT>
-	void find_reachable(const EditorGameBase&, const Area<FCoords>&, const CheckStep&, functorT&) const;
-	template <typename functorT> void find(const EditorGameBase&, const Area<FCoords>&, functorT&) const;
+	void
+	find_reachable(const EditorGameBase&, const Area<FCoords>&, const CheckStep&, functorT&) const;
+	template <typename functorT>
+	void find(const EditorGameBase&, const Area<FCoords>&, functorT&) const;
 
 	/// # of players this map supports (!= Game's number of players!)
 	PlayerNumber nrplayers_;

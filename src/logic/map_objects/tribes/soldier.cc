@@ -971,8 +971,8 @@ void Soldier::attack_update(Game& game, State& state) {
 		}
 		//  Any enemy soldier at baseflag count as defender.
 		std::vector<Bob*> soldiers;
-		map.find_bobs(game, Area<FCoords>(map.get_fcoords(enemy->base_flag().get_position()), 0), &soldiers,
-		              FindBobEnemySoldier(get_owner()));
+		map.find_bobs(game, Area<FCoords>(map.get_fcoords(enemy->base_flag().get_position()), 0),
+		              &soldiers, FindBobEnemySoldier(get_owner()));
 		defenders += soldiers.size();
 	}
 
@@ -1643,7 +1643,8 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 void Soldier::send_space_signals(Game& game) {
 	std::vector<Bob*> soldiers;
 
-	game.map().find_bobs(game, Area<FCoords>(get_position(), 1), &soldiers, FindBobSoldierOnBattlefield());
+	game.map().find_bobs(
+	   game, Area<FCoords>(get_position(), 1), &soldiers, FindBobSoldierOnBattlefield());
 
 	for (Bob* temp_soldier : soldiers) {
 		if (upcast(Soldier, soldier, temp_soldier)) {
