@@ -74,7 +74,7 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	immovables.clear();
 	immovables.reserve(50);
 	// Search in a radius of range
-	map.find_immovables(Area<FCoords>(map.get_fcoords(candidate_spot), 10), &immovables);
+	map.find_immovables(game(), Area<FCoords>(map.get_fcoords(candidate_spot), 10), &immovables);
 
 	int32_t const rocks_attr = MapObjectDescr::get_attribute_id("rocks");
 	uint16_t rocks = 0;

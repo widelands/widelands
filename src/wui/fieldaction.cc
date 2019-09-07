@@ -160,7 +160,7 @@ public:
 
 	void init();
 	void add_buttons_auto();
-	void add_buttons_build(int32_t buildcaps);
+	void add_buttons_build(int32_t buildcaps, int32_t max_nodecaps);
 	void add_buttons_road(bool flag);
 	void add_buttons_waterway(bool flag);
 	void add_buttons_attack();
@@ -371,12 +371,13 @@ void FieldActionWindow::add_buttons_auto() {
 			}
 		} else {
 			const int32_t buildcaps = player_ ? player_->get_buildcaps(node_) : 0;
+			const int32_t nodecaps = map_.get_max_nodecaps(ibase().egbase(), node_);
 
 			// Add house building
-			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) ||
-			    (buildcaps & Widelands::BUILDCAPS_MINE)) {
-				assert(igbase->get_player());
-				add_buttons_build(buildcaps);
+			const int32_t caps = buildcaps | nodecaps;
+			if (player_ &&
+			    ((caps & Widelands::BUILDCAPS_SIZEMASK) || (caps & Widelands::BUILDCAPS_MINE))) {
+				add_buttons_build(buildcaps, nodecaps);
 			}
 
 			// Add build actions
@@ -440,9 +441,20 @@ void FieldActionWindow::add_buttons_attack() {
 Add buttons for house building.
 ===============
 */
-void FieldActionWindow::add_buttons_build(int32_t buildcaps) {
-	if (!player_)
+void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecaps) {
+	if (!player_) {
 		return;
+	}
+	const Widelands::FCoords brn = map_.br_n(node_);
+	if (!node_.field->is_interior(player_->player_number()) ||
+	    !brn.field->is_interior(player_->player_number())) {
+		return;
+	}
+	if (!(brn.field->get_immovable() &&
+	      brn.field->get_immovable()->descr().type() == Widelands::MapObjectType::FLAG) &&
+	    !(player_->get_buildcaps(brn) & Widelands::BUILDCAPS_FLAG)) {
+		return;
+	}
 	BuildGrid* bbg_house[4] = {nullptr, nullptr, nullptr, nullptr};
 	BuildGrid* bbg_mine = nullptr;
 
@@ -465,27 +477,49 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps) {
 					ibase().egbase().map().get_waterway_max_length() >= 2)) {
 				continue;
 			}
-		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced())
+		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced()) {
 			continue;
+		}
 
+		if (building_descr->get_built_over_immovable() != Widelands::INVALID_INDEX &&
+		    !(node_.field->get_immovable() && node_.field->get_immovable()->has_attribute(
+		                                         building_descr->get_built_over_immovable()))) {
+			continue;
+		}
 		// Figure out if we can build it here, and in which tab it belongs
 		if (building_descr->get_ismine()) {
-			if (!(buildcaps & Widelands::BUILDCAPS_MINE))
+			if (!((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
+			          buildcaps :
+			          max_nodecaps) &
+			      Widelands::BUILDCAPS_MINE)) {
 				continue;
+			}
 
 			ppgrid = &bbg_mine;
 		} else {
 			int32_t size = building_descr->get_size() - Widelands::BaseImmovable::SMALL;
 
-			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) < size + 1)
+			if (((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
+			         buildcaps :
+			         max_nodecaps) &
+			     Widelands::BUILDCAPS_SIZEMASK) < size + 1) {
 				continue;
-			if (building_descr->get_isport() && !(buildcaps & Widelands::BUILDCAPS_PORT))
+			}
+			if (building_descr->get_isport() && !(buildcaps & Widelands::BUILDCAPS_PORT)) {
 				continue;
+			}
+			if (building_descr->get_size() >= Widelands::BaseImmovable::BIG &&
+			    !((map_.l_n(node_).field->is_interior(player_->player_number())) &&
+			      (map_.tr_n(node_).field->is_interior(player_->player_number())) &&
+			      (map_.tl_n(node_).field->is_interior(player_->player_number())))) {
+				continue;
+			}
 
-			if (building_descr->get_isport())
+			if (building_descr->get_isport()) {
 				ppgrid = &bbg_house[3];
-			else
+			} else {
 				ppgrid = &bbg_house[size];
+			}
 		}
 
 		// Allocate the tab's grid if necessary

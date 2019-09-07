@@ -785,7 +785,7 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	}
 	DescriptionIndex building_index = tribes.building_index(name);
 
-	BuildingDescr::FormerBuildings former_buildings;
+	FormerBuildings former_buildings;
 	find_former_buildings(tribes, building_index, &former_buildings);
 	if (constructionsite) {
 		former_buildings.pop_back();
