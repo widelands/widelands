@@ -41,8 +41,8 @@ struct Client;
  * launch, as well as dealing with the actual network protocol.
  */
 struct GameHost : public GameController {
-	/** playernumber 0 actually identifies the host */
-	static constexpr uint8_t kHostPlayerNum = 0;
+	/** playernumber 0 identifies the spectators */
+	static constexpr uint8_t kSpectatorPlayerNum = 0;
 
 	GameHost(const std::string& playername, bool internet = false);
 	~GameHost() override;

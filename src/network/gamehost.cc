@@ -981,10 +981,10 @@ bool GameHost::can_launch() {
 
 	// if there is one client that is currently receiving a file, we can not launch.
 
-	std::vector<UserSettings> &users = d->settings.users;
+	const std::vector<UserSettings> &users = d->settings.users;
 
 	for (std::vector<Client>::iterator j = d->clients.begin(); j != d->clients.end(); ++j) {
-		int usernum = j->usernum;
+		const int usernum = j->usernum;
 		if (usernum == -1) {
 			return false;
 		}
@@ -1038,7 +1038,7 @@ void GameHost::set_map(const std::string& mapname,
 				d->clients.at(j).playernum = UserSettings::none();
 
 				// Broadcast change
-				broadcast_setting_user(packet, d->clients.at(j).usernum);
+				broadcast_setting_user(packet, i);
 			}
 	}
 
@@ -1127,9 +1127,9 @@ void GameHost::set_player_state(uint8_t const number,
 		return;
 
 	if (player.state == PlayerSettings::State::kHuman) {
-		//  kHostPlayerNum has no client
-		if (d->settings.users.at(kHostPlayerNum).position == number) {
-			d->settings.users.at(kHostPlayerNum).position = UserSettings::none();
+		// kSpectatorPlayerNum has no client
+		if (d->settings.users.at(kSpectatorPlayerNum).position == number) {
+			d->settings.users.at(kSpectatorPlayerNum).position = UserSettings::none();
 			d->settings.playernum = UserSettings::none();
 		}
 		for (uint8_t i = 1; i < d->settings.users.size(); ++i) {
@@ -2019,9 +2019,9 @@ void GameHost::handle_network() {
 void GameHost::handle_disconnect(uint32_t const client_num, RecvPacket& r) {
 	uint8_t number = r.unsigned_8();
 	std::string reason = r.string();
-	if (number == 1)
+	if (number == 1) {
 		disconnect_client(client_num, reason, false);
-	else {
+	} else {
 		std::string arg = r.string();
 		disconnect_client(client_num, reason, false, arg);
 	}
@@ -2046,12 +2046,12 @@ void GameHost::handle_ping(Client& client) {
 void GameHost::handle_hello(uint32_t const client_num, uint8_t const cmd, Client& client, RecvPacket& r) {
 	// Now we wait for the client to say Hi in the right language,
 	// unless the game has already started
-	if (d->game)
+	if (d->game) {
 		throw DisconnectException("GAME_ALREADY_STARTED");
-
-	if (cmd != NETCMD_HELLO)
+	}
+	if (cmd != NETCMD_HELLO) {
 		throw ProtocolException(cmd);
-
+	}
 	uint8_t version = r.unsigned_8();
 	if (version != NETWORK_PROTOCOL_VERSION)
 		throw DisconnectException("DIFFERENT_PROTOCOL_VERS");
@@ -2068,8 +2068,9 @@ void GameHost::handle_changetribe(Client& client, RecvPacket& r) {
 	//  the client might just have had bad luck with the timing.
 	if (!d->game) {
 		uint8_t num = r.unsigned_8();
-		if (num != client.playernum)
+		if (num != client.playernum) {
 			throw DisconnectException("NO_ACCESS_TO_PLAYER");
+		}
 		std::string tribe = r.string();
 		bool random_tribe = r.unsigned_8() == 1;
 		set_player_tribe(num, tribe, random_tribe);
@@ -2161,13 +2162,13 @@ void GameHost::handle_chat(Client& client, RecvPacket& r) {
 	send(c);
 }
 
-/** Care for change of game speed PAUSE, 1x 2x 3x .... */
+/** Take care of change of game speed PAUSE, 1x 2x 3x .... */
 void GameHost::handle_speed(Client& client, RecvPacket& r) {
 	client.desiredspeed = r.unsigned_16();
 	update_network_speed();
 }
 
-/** a new file should be upload to all players */
+/** a new file should be uploaded to all players */
 void GameHost::handle_new_file(Client& client) {
 	if (!file_)  // Do we have a file for sending?
 		throw DisconnectException("REQUEST_OF_N_E_FILE");
@@ -2237,7 +2238,7 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	}
 }
 
-/** Hanlde uploading part of a file  */
+/** Handle uploading part of a file  */
 void GameHost::handle_file_part(Client& client, RecvPacket& r) {
 	if (!file_)  // Do we have a file for sending
 		throw DisconnectException("REQUEST_OF_N_E_FILE");
