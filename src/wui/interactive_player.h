@@ -25,9 +25,9 @@
 
 #include <SDL_keyboard.h>
 
+#include "io/profile.h"
 #include "logic/message_id.h"
 #include "logic/note_map_options.h"
-#include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "wui/interactive_gamebase.h"
 

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-30 18:50+0000\n"
-"PO-Revision-Date: 2019-06-11 21:41+0000\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-13 12:41+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -1029,3 +1029,16 @@ msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
 msgstr "Però temen que la guerra al voltant de l'Al'thunran signifiqui la seva fi. Per això han decidit unir-se a nosaltres, amb la intenció que ens puguem ajudar els uns als altres."
+
+#: ../../data/scripting/richtext_scenarios.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr "«%s»"
+
+#: ../../data/scripting/richtext_scenarios.lua:91
+msgid "New Objective"
+msgstr "Objectiu nou"
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr "Nous objectius"

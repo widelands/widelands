@@ -33,8 +33,7 @@
 struct EditorSetStartingPosTool : public EditorTool {
 	EditorSetStartingPosTool();
 
-	int32_t handle_click_impl(const Widelands::World& world,
-	                          const Widelands::NodeAndTriangle<>&,
+	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
 	                          EditorInteractive&,
 	                          EditorActionArgs*,
 	                          Widelands::Map*) override;

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-06-23 11:24+0000\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Renaud Bouchard, 2019\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -1138,3 +1138,16 @@ msgstr ""
 "Vous avez terminé cette mission. Vous pouvez passer au scénario suivant "
 "maintenant pour nous aider à construire une nouvelle maison, loin de la "
 "colère vengeresse de ce faux Dieu..."
+
+#: ../../data/scripting/richtext_scenarios.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:91
+msgid "New Objective"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

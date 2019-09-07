@@ -30,7 +30,7 @@
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
 #include "logic/player.h"
-#include "profile/profile.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelconstants.h"
@@ -240,7 +240,7 @@ void WatchWindow::do_follow() {
 		                           .node),
 		        2);
 		     area.radius <= 32; area.radius *= 2)
-			if (map.find_bobs(area, &bobs))
+			if (map.find_bobs(g, area, &bobs))
 				break;
 		//  Find the bob closest to us
 		float closest_dist = 0;
@@ -305,7 +305,7 @@ Open a watch window.
 ===============
 */
 WatchWindow* show_watch_window(InteractiveGameBase& parent, const Widelands::Coords& coords) {
-	if (g_options.pull_section("global").get_bool("single_watchwin", false)) {
+	if (get_config_bool("single_watchwin", false)) {
 		if (!g_watch_window) {
 			g_watch_window = new WatchWindow(parent, 250, 150, 200, 200, true);
 		}

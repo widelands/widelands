@@ -31,7 +31,7 @@
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/rt_errors.h"
-#include "profile/profile.h"
+#include "wlapplication_options.h"
 #include "wui/chat_msg_layout.h"
 #include "wui/logmessage.h"
 
@@ -85,8 +85,7 @@ private:
 ChatOverlay::ChatOverlay(
    UI::Panel* const parent, int32_t const x, int32_t const y, int32_t const w, int32_t const h)
    : UI::Panel(parent, x, y, w, h), m(new Impl()) {
-	Section& s = g_options.pull_section("global");
-	m->transparent_ = s.get_bool("transparent_chat", true);
+	m->transparent_ = get_config_bool("transparent_chat", true);
 
 	set_thinks(true);
 }

@@ -24,13 +24,13 @@
 #include <boost/lexical_cast.hpp>
 
 #include "graphic/graphic.h"
+#include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "profile/profile.h"
 #include "ui_basic/messagebox.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";

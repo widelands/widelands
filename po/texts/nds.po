@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
-"PO-Revision-Date: 2019-05-25 12:38+0000\n"
+"POT-Creation-Date: 2019-08-21 17:14+0000\n"
+"PO-Revision-Date: 2019-08-24 12:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -73,13 +73,13 @@ msgstr "Up Linux finnst du de Datei mit de Naam »COPYING« in de Ruut vun de Qu
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr "Up Linux finnst du de Datei mit de Naam »COPYING.txt« in de List, waar Widelands sekert is, un de Startmenü hett een Verwies up de Datei."
+msgstr "Up Windows finnst du de Datei mit de Naam »COPYING.txt« in de List, waar Widelands sekert is, un de Startmenü hett een Verwies up de Datei."
 
 #: ../../data/txts/LICENSE.lua:21
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr "Up Linux finnst du de Datei mit de Naam »COPYING« in de Paket, dat du vun de Internett-Sied runnerladen hest."
+msgstr "Up MacOS finnst du de Datei mit de Naam »COPYING« in de Paket, dat du vun de Internett-Sied runnerladen hest."
 
 #: ../../data/txts/LICENSE.lua:23
 msgid "This game comes as-is and without any warranty."

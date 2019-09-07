@@ -48,6 +48,8 @@ public:
 	const DescriptionMaintainer<TerrainDescription>& terrains() const;
 	TerrainDescription& terrain_descr(DescriptionIndex i) const;
 	const TerrainDescription* terrain_descr(const std::string& name) const;
+	DescriptionIndex get_terrain_index(const std::string& name) const;
+	DescriptionIndex get_nr_terrains() const;
 
 	const DescriptionMaintainer<CritterDescr>& critters() const;
 	DescriptionIndex get_critter(char const* const l) const;
@@ -89,6 +91,7 @@ public:
 	// Load the graphics for the world. Animations are loaded on
 	// demand.
 	void load_graphics();
+	void postload();
 
 private:
 	std::unique_ptr<DescriptionMaintainer<CritterDescr>> critters_;
