@@ -35,7 +35,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
    EditorInteractive& parent,
    EditorNoiseHeightTool& noise_tool,
    UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 300, 120, _("Random Height Options")),
+   : EditorToolOptionsMenu(parent, registry, 300, 120, _("Random Height Options"), noise_tool),
      noise_tool_(noise_tool),
      box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
      lower_(&box_,

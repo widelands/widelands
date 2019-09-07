@@ -24,7 +24,7 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
-#include "profile/profile.h"
+#include "wlapplication_options.h"
 
 SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
                                                        bool const useai,
@@ -33,7 +33,7 @@ SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
      use_ai_(useai),
      lastframe_(SDL_GetTicks()),
      time_(game_.get_gametime()),
-     speed_(g_options.pull_section("global").get_natural("speed_of_new_game", 1000)),
+     speed_(get_config_natural("speed_of_new_game", 1000)),
      paused_(false),
      player_cmdserial_(0),
      local_(local) {
