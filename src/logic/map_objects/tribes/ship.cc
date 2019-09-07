@@ -750,8 +750,8 @@ bool Ship::has_destination(EditorGameBase& egbase, const PortDock& pd) const {
  * Call this after (un)loading the ship, for proper logging.
  */
 void Ship::push_destination(Game& game, PortDock& pd) {
-	for (auto it = destinations_.begin(); it != destinations_.end(); ++it) {
-		if (it->first.get(game) == &pd) {
+	for (const auto& pair : destinations_) {
+		if (pair.first.get(game) == &pd) {
 			// We're already going there
 			return;
 		}
@@ -796,25 +796,28 @@ static inline float prioritised_distance(Path& path, uint32_t priority, uint32_t
 	return static_cast<float>(path.get_nsteps() * items) / (priority * priority);
 }
 using DestinationsQueue = std::vector<std::pair<PortDock*, uint32_t>>;
-static std::pair<DestinationsQueue, float> shortest_order(Game& game,
-                                                          Fleet& fleet,
+static std::pair<DestinationsQueue, float> shortest_order(Game* game,
+                                                          Fleet* fleet,
                                                           bool is_on_dock,
                                                           void* start,
                                                           const DestinationsQueue& remaining_to_visit,
                                                           const std::map<PortDock*, uint32_t> shipping_items) {
 	const size_t nr_dests = remaining_to_visit.size();
 	assert(nr_dests > 0);
-	if (nr_dests == 1) {
-		// Recursion break: Only one portdock left
-		Path path;
+	auto get_first_path = [game, start, remaining_to_visit, fleet, is_on_dock](Path& path, PortDock& dest) {
 		if (is_on_dock) {
 			PortDock* p = static_cast<PortDock*>(start);
 			if (p != remaining_to_visit[0].first) {
-				fleet.get_path(*p, *remaining_to_visit[0].first, path);
+				fleet->get_path(*p, dest, path);
 			}
 		} else {
-			static_cast<Ship*>(start)->calculate_sea_route(game, *remaining_to_visit[0].first, &path);
+			static_cast<Ship*>(start)->calculate_sea_route(*game, dest, &path);
 		}
+	};
+	if (nr_dests == 1) {
+		// Recursion break: Only one portdock left
+		Path path;
+		get_first_path(path, *remaining_to_visit[0].first);
 		return std::pair<DestinationsQueue, float>(remaining_to_visit, prioritised_distance(
 				path, remaining_to_visit[0].second, shipping_items.at(remaining_to_visit[0].first)));
 	}
@@ -831,14 +834,7 @@ static std::pair<DestinationsQueue, float> shortest_order(Game& game,
 		auto result = shortest_order(game, fleet, true, pair.first, remaining, shipping_items);
 		result.first.emplace(result.first.begin(), pair);
 		Path path;
-		if (is_on_dock) {
-			PortDock* p = static_cast<PortDock*>(start);
-			if (p != remaining_to_visit[0].first) {
-				fleet.get_path(*static_cast<PortDock*>(start), *pair.first, path);
-			}
-		} else {
-			static_cast<Ship*>(start)->calculate_sea_route(game, *pair.first, &path);
-		}
+		get_first_path(path, *pair.first);
 		const float length = result.second + prioritised_distance(path, pair.second, shipping_items.at(pair.first));
 		if (length < best_result.second) {
 			best_result.first = result.first;
@@ -887,7 +883,7 @@ void Ship::reorder_destinations(Game& game) {
 	}
 
 	const OPtr<PortDock> old_dest = destinations_.front().first;
-	DestinationsQueue dq = shortest_order(game, *fleet_, pd,
+	DestinationsQueue dq = shortest_order(&game, fleet_, pd,
 			pd ? static_cast<void*>(pd) : static_cast<void*>(this), old_dq, shipping_items).first;
 	assert(dq.size() == nr_dests);
 
@@ -899,11 +895,8 @@ void Ship::reorder_destinations(Game& game) {
 		OPtr<PortDock> optr(pair.first);
 		uint32_t priority = pair.second;
 		size_t old_index = 0;
-		for (;; ++old_index) {
+		for (; old_destinations[old_index].first != optr; ++old_index) {
 			assert(old_index < nr_all_old_dests);
-			if (old_destinations[old_index].first == optr) {
-				break;
-			}
 		}
 		if (old_index < index) {
 			priority += index - old_index;
@@ -920,10 +913,10 @@ void Ship::reorder_destinations(Game& game) {
  * Returns an estimation for the time in arbitrary units from now until the moment when
  * this ship will probably arrive at the given PortDock. This may change later when
  * destinations are added or removed.
- * Returns -1 if we are not planning to visit this PortDock or if we are not planning
+ * Returns kInvalidDestination if we are not planning to visit this PortDock or if we are not planning
  * to visit the given intermediate portdock earlier than the destination.
  */
-int32_t Ship::estimated_arrival_time(Game& game, const PortDock& dest, const PortDock* intermediate) const {
+uint32_t Ship::estimated_arrival_time(Game& game, const PortDock& dest, const PortDock* intermediate) const {
 	uint32_t time = 0;
 	const PortDock* iterator = nullptr;
 	for (const auto& pair : destinations_) {
@@ -939,10 +932,10 @@ int32_t Ship::estimated_arrival_time(Game& game, const PortDock& dest, const Por
 		}
 		time += path.get_nsteps();
 		if (iterator == &dest) {
-			return intermediate ? -1 : time;
+			return intermediate ? kInvalidDestination : time;
 		}
 	}
-	return -1;
+	return kInvalidDestination;
 }
 
 void Ship::add_item(Game& game, const ShippingItem& item) {

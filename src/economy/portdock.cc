@@ -400,32 +400,31 @@ void PortDock::load_wares(Game& game, Ship& ship) {
 		if (dc != destination_check.end()) {
 			load_item = dc->second;
 		} else {
-			int32_t time = ship.estimated_arrival_time(game, *dest);
+			uint32_t time = ship.estimated_arrival_time(game, *dest);
 			Path direct_route;
 			fleet_->get_path(*this, *dest, direct_route);
-			if (time < 0) {
+			if (time == kInvalidDestination) {
 				time = direct_route.get_nsteps();
 			}
 			for (const OPtr<Ship>& ship_ptr : ships_coming_) {
 				Ship* s = ship_ptr.get(game);
 				assert(s);
-				int32_t t = s->estimated_arrival_time(game, *dest, this);
-				if (t < 0) {
+				uint32_t t = s->estimated_arrival_time(game, *dest, this);
+				if (t == kInvalidDestination) {
 					// The ship is not planning to go there yet, perhaps we can ask for a detour?
 					t = s->estimated_arrival_time(game, *this);
-					assert(t >= 0);
 					assert(s->count_destinations() >= 1);
 					if (time > t + static_cast<int32_t>(direct_route.get_nsteps() * s->count_destinations())) {
-						time = -1;
+						time = kInvalidDestination;
 						break;
 					}
 				} else if (t < time) {
 					// A ship is coming that is planning to visit the ware's destination sooner than this one
-					time = -1;
+					time = kInvalidDestination;
 					break;
 				}
 			}
-			load_item = time >= 0;
+			load_item = time < kInvalidDestination;
 			destination_check.emplace(dest, load_item);
 		}
 		if (load_item) {

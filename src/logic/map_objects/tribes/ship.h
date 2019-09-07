@@ -80,6 +80,8 @@ private:
 
 constexpr int32_t kShipInterval = 1500;
 
+constexpr uint32_t kInvalidDestination = std::numeric_limits<uint32_t>::max();
+
 /**
  * Ships belong to a player and to an economy. The usually are in a (unique)
  * fleet for a player, but only if they are on standard duty. Exploration ships
@@ -110,7 +112,7 @@ struct Ship : Bob {
 	void push_destination(Game&, PortDock&);
 	void pop_destination(Game&, PortDock&);
 	void clear_destinations(Game&);
-	int32_t estimated_arrival_time(Game&, const PortDock& dest, const PortDock* intermediate = nullptr) const;
+	uint32_t estimated_arrival_time(Game&, const PortDock& dest, const PortDock* intermediate = nullptr) const;
 	size_t count_destinations() const {
 		return destinations_.size();
 	}
