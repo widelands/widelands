@@ -26,6 +26,7 @@
 
 #include "base/macros.h"
 #include "graphic/animation.h"
+#include "graphic/toolbar_imageset.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/road_textures.h"
@@ -162,6 +163,9 @@ public:
 
 	void add_building(const std::string& buildingname);
 
+	// The custom toolbar imageset if any. Can be nullptr.
+	ToolbarImageset* toolbar_image_set() const;
+
 private:
 	// Helper function for adding a special worker type (carriers etc.)
 	DescriptionIndex add_special_worker(const std::string& workername);
@@ -205,6 +209,9 @@ private:
 	// Order and positioning of wares in the warehouse display
 	WaresOrder wares_order_;
 	WaresOrder workers_order_;
+
+	// An optional custom imageset for the in-game menu toolbar
+	std::unique_ptr<ToolbarImageset> toolbar_image_set_;
 
 	std::vector<Widelands::TribeBasicInfo::Initialization> initializations_;
 

@@ -24,6 +24,7 @@
 #include <string>
 #include <vector>
 
+#include "editor/ui_menus/tool_options_menu.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
@@ -32,9 +33,11 @@
 
 class EditorInteractive;
 
-class EditorPlayerMenu : public UI::UniqueWindow {
+class EditorPlayerMenu : public EditorToolOptionsMenu {
 public:
-	EditorPlayerMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
+	EditorPlayerMenu(EditorInteractive&,
+	                 EditorSetStartingPosTool& tool,
+	                 UI::UniqueWindow::Registry&);
 	~EditorPlayerMenu() override {
 	}
 

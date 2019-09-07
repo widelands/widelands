@@ -34,11 +34,13 @@ struct GameChatMenu : public UI::UniqueWindow {
 	 */
 	static GameChatMenu* create_chat_console(UI::Panel*, UI::UniqueWindow::Registry&, ChatProvider&);
 
+#ifndef NDEBUG  //  only in debug builds
 	/**
 	 * Creates a chat window only for scripting in debug mode
 	 */
 	static GameChatMenu*
 	create_script_console(UI::Panel*, UI::UniqueWindow::Registry&, ChatProvider&);
+#endif
 
 	/**
 	 * Configure the menu so that it is useful for writing chat messages.

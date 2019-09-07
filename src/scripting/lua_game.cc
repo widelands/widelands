@@ -37,6 +37,7 @@
 #include "scripting/globals.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_map.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/story_message_box.h"
 
@@ -108,8 +109,9 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RO(LuaPlayer, name),       PROP_RO(LuaPlayer, allowed_buildings),
    PROP_RO(LuaPlayer, objectives), PROP_RO(LuaPlayer, defeated),
    PROP_RO(LuaPlayer, messages),   PROP_RO(LuaPlayer, inbox),
-   PROP_RW(LuaPlayer, team),       PROP_RO(LuaPlayer, tribe),
-   PROP_RW(LuaPlayer, see_all),    {nullptr, nullptr, nullptr},
+   PROP_RO(LuaPlayer, color),      PROP_RW(LuaPlayer, team),
+   PROP_RO(LuaPlayer, tribe),      PROP_RW(LuaPlayer, see_all),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -218,6 +220,17 @@ int LuaPlayer::get_inbox(lua_State* L) {
 		lua_rawset(L, -3);
 	}
 
+	return 1;
+}
+
+/* RST
+   .. attribute:: color
+
+      (RO) The playercolor assigned to this player, in hex notation.
+*/
+int LuaPlayer::get_color(lua_State* L) {
+	const PlayerNumber pnumber = get(L, get_egbase(L)).player_number();
+	lua_pushstring(L, kPlayerColors[pnumber - 1].hex_value());
 	return 1;
 }
 
@@ -1057,7 +1070,7 @@ int LuaObjective::set_done(lua_State* L) {
 	Objective& o = get(L, get_game(L));
 	o.set_done(luaL_checkboolean(L, -1));
 
-	const int32_t autosave = g_options.pull_section("global").get_int("autosave", 0);
+	const int32_t autosave = get_config_int("autosave", 0);
 	if (autosave <= 0) {
 		return 0;
 	}
