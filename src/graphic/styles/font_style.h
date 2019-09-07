@@ -67,7 +67,6 @@ struct FontStyleInfo {
 	                       bool init_underline,
 	                       bool init_shadow);
 	explicit FontStyleInfo(const FontStyleInfo& other);
-	FontStyleInfo& operator=(const FontStyleInfo& other) = default;
 
 	std::string as_font_tag(const std::string& text) const;
 
