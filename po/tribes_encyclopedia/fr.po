@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-06-23 11:24+0000\n"
-"PO-Revision-Date: 2019-07-02 07:31+0000\n"
+"POT-Creation-Date: 2019-07-27 07:48+0000\n"
+"PO-Revision-Date: 2019-07-30 13:23+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -129,7 +129,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘This stronghold made from blackwood and stones will be a hard nut to crack "
 "for them.’"
-msgstr ""
+msgstr "'Cette place-forte faite de bois dur leur fera une dure coquille à casser.'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/helptexts.lua:8
@@ -401,7 +401,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "When no cornmeal is required, the mill will try to produce blackroot flour "
 "even when there is no demand for it."
-msgstr ""
+msgstr "Quand la farine de maïs n'est plus nécessaire, le moulin essaiera de   de produire de la farine de racine noire même si il n'y a pas de demande pour."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/helptexts.lua:16
@@ -1037,13 +1037,13 @@ msgstr "Si l'approvisionnement en nourriture est stable, cette mine peut produir
 msgctxt "barbarians_building"
 msgid ""
 "‘The helmets forgéd by this smithy<br>Are widely known for looking pithy.’"
-msgstr ""
+msgstr "'Les casques forgés par ce forgeron<br>sont largements connus pour leur aspect pitoyable.’"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Slogan of ‘Harrath’s Handsome Helmets’ in Al’thunran"
-msgstr ""
+msgstr "Slogan des 'Élégants casques de Harrath' à Al'thunran "
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/helptexts.lua:16
@@ -1090,7 +1090,7 @@ msgstr "'Le délice des mineurs: Du pain pitta avec du poisson ou de la viande, 
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:11
 msgctxt "barbarians_building"
 msgid "Chef’s recommendation in ‘The Singing Master Miner’"
-msgstr ""
+msgstr "Les recommandations du chef pour 'La chanson du maitre mineur'"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/helptexts.lua:16
@@ -1438,7 +1438,7 @@ msgstr "Chat’Karuth<br>à la 5ème conférence des maitres artisans"
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:6
 msgctxt "barbarians_building"
 msgid "‘Fresh from the countryside: Bread, fish or game to go.’"
-msgstr ""
+msgstr "'En direct de la campagne: Pain, poisson ou gibier à la demande.'"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/helptexts.lua:11
@@ -5064,7 +5064,7 @@ msgctxt "empire_ware"
 msgid ""
 "It is produced by the smelting works. Weapons, armor and tools are made of "
 "iron."
-msgstr ""
+msgstr "Il est produit par la fonderie. Les armes, armures et outils sont faits de fer."
 
 #. TRANSLATORS: Helptext for a ware: Iron
 #: ../../data/tribes/wares/iron/helptexts.lua:12
@@ -5084,7 +5084,7 @@ msgstr ""
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "It is smelted in a smelting works to retrieve the iron."
-msgstr ""
+msgstr "Il est fondu dans une fonderie pour récupérer le fer."
 
 #. TRANSLATORS: Helptext for a ware: Iron Ore
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:8
@@ -5096,13 +5096,13 @@ msgstr ""
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:10
 msgctxt "frisians_ware"
 msgid "It is smelted in a furnace to retrieve the iron."
-msgstr ""
+msgstr "Il est fondu dans une fonderie pour récupérer le fer."
 
 #. TRANSLATORS: Helptext for a ware: Iron Ore
 #: ../../data/tribes/wares/iron_ore/helptexts.lua:12
 msgctxt "empire_ware"
 msgid "It is smelted in a smelting works to retrieve the iron."
-msgstr ""
+msgstr "Il est fondu dans une fonderie pour récupérer le fer."
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:4

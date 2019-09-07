@@ -203,6 +203,9 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		refinedlog_ = add_special_ware(table.get_string("refinedlog"));
 		granite_ = add_special_ware(table.get_string("granite"));
 
+		if (table.has_key<std::string>("toolbar")) {
+			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
+		}
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
 	}
@@ -443,6 +446,10 @@ void TribeDescr::add_building(const std::string& buildingname) {
 	} catch (const WException& e) {
 		throw GameDataError("Failed adding building '%s': %s", buildingname.c_str(), e.what());
 	}
+}
+
+ToolbarImageset* TribeDescr::toolbar_image_set() const {
+	return toolbar_image_set_.get();
 }
 
 /**

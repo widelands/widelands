@@ -36,13 +36,14 @@
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/progresswindow.h"
+#include "wlapplication_options.h"
 
 inline EditorInteractive& MainMenuNewMap::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
-MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
-   : UI::Window(&parent, "new_map_menu", 0, 0, 360, 150, _("New Map")),
+MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
+   : UI::UniqueWindow(&parent, "new_map_menu", &registry, 360, 150, _("New Map")),
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),
      box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
@@ -105,15 +106,14 @@ void MainMenuNewMap::clicked_create_map() {
 
 	parent.cleanup_for_load();
 
-	map->create_empty_map(
-	   egbase.world(), map_size_box_.selected_width(), map_size_box_.selected_height(),
-	   list_.get_selected(), _("No Name"),
-	   g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")));
+	map->create_empty_map(egbase, map_size_box_.selected_width(), map_size_box_.selected_height(),
+	                      list_.get_selected(), _("No Name"),
+	                      get_config_string("realname", pgettext("author_name", "Unknown")));
 
 	egbase.postload();
 	egbase.load_graphics(loader_ui);
 
-	map->recalc_whole_map(egbase.world());
+	map->recalc_whole_map(egbase);
 	parent.map_changed(EditorInteractive::MapWas::kReplaced);
 	die();
 }
