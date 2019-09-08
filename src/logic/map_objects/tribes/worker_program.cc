@@ -784,7 +784,7 @@ buildferry
 
    Adds a new instance of this tribe's ferry to the map at the worker's current location. Example::
 
-      release = {
+      construct = {
          "findspace=size:swim radius:4",
          "walk=coords",
          "animate=work 2000",
@@ -793,7 +793,7 @@ buildferry
          "return"
       }
 */
-void WorkerProgram::parse_buildferry(Worker::Action* act, const std::vector<std::string>&) {
+void WorkerProgram::parse_buildferry(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() > 1) {
 		throw wexception("buildferry takes no arguments");
 	}
