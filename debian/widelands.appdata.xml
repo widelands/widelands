@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2016 The Widelands Development Team <widelands-dev_at_lists.launchpad.net> -->
 <component type="desktop-application">
-  <id>org.widelands.widelands.desktop</id>
+  <id>org.widelands.widelands</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <icon type="stock">widelands</icon>
@@ -37,7 +37,9 @@
   <summary xml:lang="sk">Budovateľská stretegická hra v reálnom čase</summary>
   <summary xml:lang="sr">Graditeljska strateška igra u realnom vremenu</summary>
   <summary xml:lang="sv">Ett uppbyggnadsstrategispel i realtid</summary>
+  <summary xml:lang="tr">Gerçek zamanlı inşa strateji oyunu</summary>
   <summary xml:lang="uk">Стратегічна гра у режимі реального часу</summary>
+  <summary xml:lang="zh_CN">即时策略游戏</summary>
   <summary xml:lang="zh_TW">一款即時演變的策略遊戲</summary>
   <description>
     <p>
@@ -143,10 +145,10 @@
       A Widelands tartalmaz egy egyjátékos módot, hadjáratokkal, amelyek a törzsekről és az ő viszontagságaikról mesélnek a Widelands univerzumában. Azonban a móka akkor kezdődik csak el igazán, mikor összejössz barátaiddal az Interneten vagy LAN-on keresztül, hogy közösen építsetek fel új birodalmakat – vagy háborúban porig romboljátok egymást. A Widelands mesterséges intelligencia formájában is kihívást kínál.
     </p>
     <p xml:lang="it">
-      Sei il reggente di un piccolo clan. Il tuo compito è costruire un insediamento in continua crescita. Ogni componente del tuo clan del tuo clan farà la sua parte per produrre più risorse per favorire questa crescita.
+      Sei il reggente di un piccolo clan. Il tuo compito è costruire un insediamento in continua crescita. Ogni componente del tuo clan farà la sua parte per produrre più risorse per favorire questa crescita.
     </p>
     <p xml:lang="it">
-      Widelands è giocabile in modalità giocatore singolo, con campagne che raccontano storie delle tribù e la loro lotta nell'universo Widelands . Oppure, l'insediamento in realtà inizia quando vi unite con gli amici su Internet o in LAN per costruire nuovi imperi insieme – o per schiacciare gli altri nella polvere in una guerra. In Widelands è presente anche una intelligenza artificiale per metterti alla prova.
+      Widelands offre una modalità giocatore singolo con campagne che raccontano le storie delle tribù e la loro lotta nell'universo di Widelands. Tuttavia, l'insediamento inizia davvero quando ti unisci con gli amici su Internet o LAN per costruire nuovi imperi insieme - o per frantumarsi a vicenda nella polvere della guerra. Widelands offre anche un'intelligenza artificiale per metterti alla prova.
     </p>
     <p xml:lang="ja">
       あなたは小さな部族の執政官です。あなたの使命は部族を発展させていくことにあります。部族の全てのメンバーがさらなる発展のため各種生産活動に力を尽くしてくれることでしょう。
@@ -182,7 +184,7 @@
       Du büst de Baas vun eenem lütten Volk. Dien Upgaav is, een Dörp zu bauen un stadig to vergrotern. Elkeen Minsk in dienem Volk sett sien beste Been vör, um mehr Waren un Mineraale to produzeren un dat Wassdoom widertodrieven.
     </p>
     <p xml:lang="nds">
-      Widelands is för eenen Speler gadelk un hett Rutfödderungs-Riege, de de Histoorje vun de Völker un hör Leven in de Welt vun Widelands vertellen. Dat Spölen fangt aver eerst dann würrelk an, wenn du mit dienen Frünnen över 't Internett oder LAN tosammen neje Rieken baust – oder hör nanner in gewaltigen Slachten verneelt. Widelands hett ok eenen künstelk Speler, tegen hüm du antreden kannst.
+      Widelands is för eenen Speler gadelk un hett Rutfödderungs-Riege, de de Histoorje vun de Völker un hör Leven in de Welt vun Widelands vertellen. Dat Spölen fangt aver eerst dann würrelk an, wenn du mit dienen Frünnen över 't Internett of LAN tosammen neje Rieken baust – of hör nanner in gewaltigen Slachten verneelt. Widelands hett ok eenen künstelk Speler, tegen hüm du antreden kannst.
     </p>
     <p xml:lang="nl">
       Je bent de leider van een kleine stam.  Het is jouw taak een bloeiende nederzetting uit te bouwen.  Elk stamlid zal daarbij haar of zijn steentje bijdragen door het produceren van meer grondstoffen.
@@ -238,17 +240,30 @@
     <p xml:lang="sv">
       Widelands erbjuder ett enspelarläge med fälttåg som berättar historier om stammarna och deras kamp i Widelands värld. Bosättandet börjar på riktigt när du slår dig samman med vänner över internet eller LAN för att bygga nya imperium tillsammans – eller för att krossa varandra i krigets damm. Widelands erbjuder också artificiell intelligens för att utmana dig.
     </p>
+    <p xml:lang="tr">
+      Küçük bir klanın yetkili vekilisiniz. Göreviniz sürekli büyüyecek bir yerleşim kurmak. Klanınızın her üyesi bu uğurda daha fazla kaynak üreterek üzerine düşen görevi yapacak. 
+    </p>
+    <p xml:lang="tr">
+      Widelands size tek oyunculu mod ile kabilelerin hikayelerini ve Widelands evreninde çektikleri zorlukları anlatan hikayeleri sunar. Fakat yerleşim tam olarak arkadaşlarınla Internet üzerinden ya da LAN ile bağlanıp beraber yeni imparatorluklar kurduğunda başlar - ya da birbirinizi savaşın tozlu ortamında ezdiğinizde.
+Widelands ayrıca size yapay zeka ile meydan okur.
+    </p>
     <p xml:lang="uk">
       Ви є регентом маленького клану.  Ваше завдання полягає у створенні постійно зростаючого поселення. Кожен член вашого клану буде робити свою частину, щоб виробити більше ресурсів для подальшого росту.
     </p>
     <p xml:lang="uk">
       Widelands пропонує режим одиночної гри в кампанію, яка розповідає історії племен і їх боротьбу у всесвіті Widelands. Однак, реальне розселення починається тоді, коли ви об’єднуєтеся з друзями через інтернет або локальну мережу, будувати нові імперії разом, або розбити один одного в пилу війни. Widelands також пропонує штучний інтелект, щоб кинути виклик вам.
     </p>
+    <p xml:lang="zh_CN">
+      作为小部落的摄政王， 你的任务是让部落发展壮大。 每个成员会尽力生产资源，促进增长。
+    </p>
+    <p xml:lang="zh_CN">
+      Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
+    </p>
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Current%20Developments/To%20the%20sea.png</image>
-      <caption>Fleet of Ships</caption>
+      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2020/Four_Tribes_2.jpeg</image>
+      <caption>Seafaring of the Four Tribes</caption>
     </screenshot>
     <screenshot>
       <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2019/Dolomites.png</image>
@@ -267,7 +282,14 @@
       <caption>Map Selection Screen</caption>
     </screenshot>
   </screenshots>
+  <url type="homepage">https://wl.widelands.org/</url>
+  <update_contact>widelands-dev_at_lists.launchpad.net</update_contact>
+  <provides>
+    <binary>widelands</binary>
+  </provides>
+  <launchable type="desktop-id">org.widelands.widelands.desktop</launchable>
   <releases>
+    <release date="2019-05-02" version="Build 20"/>
     <release date="2016-11-11" version="Build 19"/>
     <release date="2014-02-22" version="Build 18"/>
     <release date="2012-04-23" version="Build 17"/>
@@ -290,6 +312,7 @@
     <release date="2002-08-27" version="Build 1"/>
   </releases>
   <languages>
+    <lang>af_ZA</lang>
     <lang>ar</lang>
     <lang>ast</lang>
     <lang>bg</lang>
@@ -346,6 +369,7 @@
     <lang>sk</lang>
     <lang>sl</lang>
     <lang>sr</lang>
+    <lang>sr_RS</lang>
     <lang>sv</lang>
     <lang>tr</lang>
     <lang>uk</lang>
@@ -379,13 +403,11 @@
   <translation type="gettext">tribes</translation>
   <translation type="gettext">mp_scenario_smugglers.wmf</translation>
   <translation type="gettext">scenario_fri02.wmf</translation>
-  <url type="homepage">https://wl.widelands.org/</url>
   <url type="bugtracker">https://bugs.launchpad.net/widelands</url>
   <url type="donation">https://wl.widelands.org/wiki/The%20Widelands%20Project/</url>
   <url type="help">https://wl.widelands.org/wiki/Game%20Manual/</url>
   <url type="translate">https://wl.widelands.org/wiki/TranslatingWidelands/</url>
   <developer_name>The Widelands Development Team</developer_name>
-  <update_contact>widelands-dev_at_lists.launchpad.net</update_contact>
   <content_rating type="oars-1.0">
     <content_attribute id="violence-cartoon">moderate</content_attribute>
     <content_attribute id="violence-fantasy">none</content_attribute>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,6 +29,7 @@
 #include "editor/tools/noise_height_tool.h"
 #include "editor/tools/place_critter_tool.h"
 #include "editor/tools/place_immovable_tool.h"
+#include "editor/tools/resize_tool.h"
 #include "editor/tools/set_origin_tool.h"
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_starting_pos_tool.h"
@@ -36,10 +37,10 @@
 #include "logic/map.h"
 #include "notifications/notifications.h"
 #include "ui_basic/button.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_base.h"
 
-class Editor;
 class EditorTool;
 
 /**
@@ -49,7 +50,7 @@ class EditorTool;
 class EditorInteractive : public InteractiveBase {
 public:
 	struct Tools {
-		Tools()
+		Tools(const Widelands::Map& map)
 		   : current_pointer(&info),
 		     use_tool(EditorTool::First),
 		     increase_height(decrease_height, set_height),
@@ -58,7 +59,8 @@ public:
 		     place_critter(delete_critter),
 		     increase_resources(decrease_resources, set_resources),
 		     set_port_space(unset_port_space),
-		     set_origin() {
+		     set_origin(),
+		     resize(map.get_width(), map.get_height()) {
 		}
 		EditorTool& current() const {
 			return *current_pointer;
@@ -83,6 +85,7 @@ public:
 		EditorSetPortSpaceTool set_port_space;
 		EditorUnsetPortSpaceTool unset_port_space;
 		EditorSetOriginTool set_origin;
+		EditorResizeTool resize;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
 
@@ -135,39 +138,97 @@ public:
 	// Access to the tools.
 	Tools* tools();
 
-	UI::UniqueWindow::Registry window_help;
-
 private:
-	friend struct EditorToolMenu;
+	// For referencing the items in mainmenu_
+	enum class MainMenuEntry {
+		kNewMap,
+		kNewRandomMap,
+		kLoadMap,
+		kSaveMap,
+		kMapOptions,
+		kExitEditor,
+	};
 
-	void on_buildhelp_changed(const bool value) override;
+	// For referencing the items in toolmenu_
+	enum class ToolMenuEntry {
+		kChangeHeight,
+		kRandomHeight,
+		kTerrain,
+		kImmovables,
+		kAnimals,
+		kResources,
+		kPortSpace,
+		kPlayers,
+		kMapOrigin,
+		kMapSize,
+		kFieldInfo
+	};
 
+	// For referencing the items in showhidemenu_
+	enum class ShowHideEntry { kBuildingSpaces, kGrid, kAnimals, kImmovables, kResources };
+
+	// Adds the mainmenu_ to the toolbar
+	void add_main_menu();
+	// Takes the appropriate action when an item in the mainmenu_ is selected
+	void main_menu_selected(MainMenuEntry entry);
+	// Adds the toolmenu_ to the toolbar
+	void add_tool_menu();
+	// Takes the appropriate action when an item in the toolmenu_ is selected
+	void tool_menu_selected(ToolMenuEntry entry);
+
+	// Adds the showhidemenu_ to the toolbar
+	void add_showhide_menu();
+	void rebuild_showhide_menu() override;
+	// Takes the appropriate action when an item in the showhidemenu_ is selected
+	void showhide_menu_selected(ShowHideEntry entry);
+
+	bool player_hears_field(const Widelands::Coords& coords) const override;
+
+	// Show / hide the resources overlays in the mapview
 	void toggle_resources();
+	// Show / hide the immovables in the mapview
 	void toggle_immovables();
+	// Show / hide the bobs in the mapview
 	void toggle_bobs();
+	void toggle_grid();
 
 	//  state variables
 	bool need_save_;
 	uint32_t realtime_;
 	bool is_painting_;
 
-	UI::UniqueWindow::Registry toolmenu_;
+	// All unique menu windows
+	struct EditorMenuWindows {
+		UI::UniqueWindow::Registry newmap;
+		UI::UniqueWindow::Registry newrandommap;
+		UI::UniqueWindow::Registry savemap;
+		UI::UniqueWindow::Registry loadmap;
+		UI::UniqueWindow::Registry mapoptions;
 
-	UI::UniqueWindow::Registry toolsizemenu_;
-	UI::UniqueWindow::Registry playermenu_;
-	UI::UniqueWindow::Registry mainmenu_;
-	UI::UniqueWindow::Registry heightmenu_;
-	UI::UniqueWindow::Registry noise_heightmenu_;
-	UI::UniqueWindow::Registry terrainmenu_;
-	UI::UniqueWindow::Registry immovablemenu_;
-	UI::UniqueWindow::Registry crittermenu_;
-	UI::UniqueWindow::Registry resourcesmenu_;
-	UI::UniqueWindow::Registry helpmenu_;
+		UI::UniqueWindow::Registry toolsize;
 
-	UI::Button* toggle_buildhelp_;
-	UI::Button* toggle_resources_;
-	UI::Button* toggle_immovables_;
-	UI::Button* toggle_bobs_;
+		UI::UniqueWindow::Registry help;
+	} menu_windows_;
+
+	// All unique tool windows for those tools that have them
+	struct EditorToolWindows {
+		UI::UniqueWindow::Registry height;
+		UI::UniqueWindow::Registry noiseheight;
+		UI::UniqueWindow::Registry terrain;
+		UI::UniqueWindow::Registry immovables;
+		UI::UniqueWindow::Registry critters;
+		UI::UniqueWindow::Registry resources;
+		UI::UniqueWindow::Registry players;
+		UI::UniqueWindow::Registry resizemap;
+	} tool_windows_;
+
+	// Main menu on the toolbar
+	UI::Dropdown<MainMenuEntry> mainmenu_;
+	// Tools menu on the toolbar
+	UI::Dropdown<ToolMenuEntry> toolmenu_;
+	// Show / Hide menu on the toolbar
+	UI::Dropdown<ShowHideEntry> showhidemenu_;
+
 	UI::Button* undo_;
 	UI::Button* redo_;
 
@@ -177,6 +238,7 @@ private:
 	bool draw_resources_ = true;
 	bool draw_immovables_ = true;
 	bool draw_bobs_ = true;
+	bool draw_grid_ = true;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

@@ -7,12 +7,16 @@ terrain_affinity = {
    pickiness = 40,
 }
 
+animations = {}
+add_animation(animations, "idle", dirname .. "tiny", "idle", { 4, 10 })
+
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_currant_red_tiny",
    descname = _ "Red Currant (tiny)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "tiny/menu.png",
    attributes = { "seed_berrybush" },
    terrain_affinity = terrain_affinity,
    programs = {
@@ -22,14 +26,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_currant_red_small",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "tiny/idle_?.png"),
-         hotspot = {4, 10},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname .. "small", "idle", { 8, 20 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -37,6 +38,7 @@ tribes:new_immovable_type {
    descname = _ "Red Currant (small)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "small/menu.png",
    attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
@@ -46,14 +48,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_currant_red_medium",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "small/idle_?.png"),
-         hotspot = {8, 20},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname .. "medium", "idle", { 13, 33 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -61,6 +60,7 @@ tribes:new_immovable_type {
    descname = _ "Red Currant (medium)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "medium/menu.png",
    attributes = { "flowering" },
    terrain_affinity = terrain_affinity,
    programs = {
@@ -70,14 +70,11 @@ tribes:new_immovable_type {
          "grow=berry_bush_currant_red_ripe",
       },
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "medium/idle_?.png"),
-         hotspot = {13, 33},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }
+
+animations = {}
+add_animation(animations, "idle", dirname .. "ripe", "idle", { 13, 33 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -85,6 +82,7 @@ tribes:new_immovable_type {
    descname = _ "Red Currant (ripe)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "ripe/menu.png",
    attributes = { "ripe_bush" },
    terrain_affinity = terrain_affinity,
    programs = {
@@ -96,11 +94,5 @@ tribes:new_immovable_type {
          "remove=",
       }
    },
-   animations = {
-      idle = {
-         pictures = path.list_files (dirname .. "ripe/idle_?.png"),
-         hotspot = {13, 33},
-         scale = 3,
-      },
-   },
+   animations = animations,
 }

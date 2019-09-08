@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ constexpr int kTextureSideLength = 64;
 
 class TerrainDescription {
 public:
-	enum Is {
+	enum class Is {
 		kArable = 0,
 		kWalkable = 1,
 		kWater = 2,
@@ -123,6 +123,9 @@ public:
 	/// Fertility, ranging from 0 to 1000.
 	int fertility() const;
 
+	// The terrain which certain workers can transform this terrain into.
+	const std::string& enhancement() const;
+
 	/// Additional tooptip entries for the editor
 	const std::vector<std::string>& custom_tooltips() const {
 		return custom_tooltips_;
@@ -142,12 +145,20 @@ private:
 	int temperature_;
 	int fertility_;
 	int humidity_;
+	std::string enhancement_;
 	std::vector<std::string> texture_paths_;
 	std::vector<const Image*> textures_;
 	RGBColor minimap_colors_[256];
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainDescription);
 };
+
+inline TerrainDescription::Is operator|(TerrainDescription::Is left, TerrainDescription::Is right) {
+	return TerrainDescription::Is(static_cast<int>(left) | static_cast<int>(right));
+}
+inline int operator&(TerrainDescription::Is left, TerrainDescription::Is right) {
+	return static_cast<int>(left) & static_cast<int>(right);
+}
 
 }  // namespace Widelands
 

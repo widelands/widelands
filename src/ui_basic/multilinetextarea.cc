@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,9 +23,10 @@
 #include <boost/bind.hpp>
 
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 
 namespace UI {
@@ -44,17 +45,28 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      MultilineTextarea::ScrollMode scroll_mode)
    : Panel(parent, x, y, w, h),
      text_(text),
-     color_(UI_FONT_CLR_FG),
+     style_(&g_gr->styles().font_style(FontStyle::kLabel)),
+     font_scale_(1.0f),
      align_(align),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
-	scrollbar_.set_singlestepsize(text_height());
+	scrollbar_.set_singlestepsize(text_height(*style_, font_scale_));
 	scrollbar_.set_steps(1);
 	set_scrollmode(scroll_mode);
 	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
+}
+
+void MultilineTextarea::set_style(const UI::FontStyleInfo& style) {
+	style_ = &style;
+	recompute();
+}
+void MultilineTextarea::set_font_scale(float scale) {
+	font_scale_ = scale;
+	scrollbar_.set_singlestepsize(text_height(*style_, font_scale_));
+	recompute();
 }
 
 /**
@@ -63,11 +75,6 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
  */
 void MultilineTextarea::set_text(const std::string& text) {
 	text_ = text;
-	recompute();
-}
-
-void MultilineTextarea::set_color(RGBColor fg) {
-	color_ = fg;
 	recompute();
 }
 
@@ -129,7 +136,7 @@ void MultilineTextarea::layout() {
 	// Take care of the scrollbar
 	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 	scrollbar_.set_size(Scrollbar::kSize, get_h());
-	scrollbar_.set_pagesize(get_h() - 2 * UI_FONT_SIZE_BIG);
+	scrollbar_.set_pagesize(get_h() - 2 * style_->size() * font_scale_);
 }
 
 /**
@@ -140,7 +147,7 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 		return;
 	}
 	int anchor = 0;
-	Align alignment = mirror_alignment(align_, text_);
+	Align alignment = mirror_alignment(align_, i18n::has_rtl_character(text_.c_str(), 20));
 	switch (alignment) {
 	// TODO(Arty): We might want to revisit this after the font renderer can handle long strings
 	// without whitespaces differently.
@@ -192,7 +199,11 @@ std::string MultilineTextarea::make_richtext() {
 	// TODO(GunChleoc): Revisit this once the old font renderer is completely gone.
 	boost::replace_all(temp, "\n\n", "<br>&nbsp;<br>");
 	boost::replace_all(temp, "\n", "<br>");
-	return as_aligned(temp, align_, UI_FONT_SIZE_SMALL, color_);
+
+	FontStyleInfo scaled_style(*style_);
+	scaled_style.set_size(std::max(g_gr->styles().minimum_font_size(),
+	                               static_cast<int>(std::ceil(scaled_style.size() * font_scale_))));
+	return as_richtext_paragraph(temp, scaled_style, align_);
 }
 
 }  // namespace UI

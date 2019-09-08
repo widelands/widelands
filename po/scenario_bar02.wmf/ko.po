@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
+# TaeMin An, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-28 05:45+0000\n"
-"PO-Revision-Date: 2018-10-03 19:02+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,7 +77,7 @@ msgstr "농장을 지으십시오."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:42
 msgid "Build a bakery"
-msgstr "빵집을 지으십시오."
+msgstr "제과점을 지으십시오."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:47
 msgid "Build a cattle farm"
@@ -96,7 +97,7 @@ msgstr "길이 더 길어지고 공급 체제가 더 커짐에 따라 물건들�
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:57
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:59
 msgid "Build a tower"
-msgstr "감시 탑을 지으십시오."
+msgstr "탑을 지으십시오."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:60
 msgid ""
@@ -441,7 +442,7 @@ msgid ""
 "find enough space, we should as well build up a farm and a bakery! One of "
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
-msgstr "볼드레쓰의 말이 옳소! 우리는 길고 추운 겨울을 보낼 음식이 충분하지 못하오. 우리는 우물, 어부, 사냥꾼의 오두막을 지어야 하오. 그리고 충분한 공간이 있다면 농장과 빵집도 짓는다면 더욱 좋아질것이오! 우리의 농부들중에 한명은 매우 영리한것같소. 그는 이미 이런 추운 곳의 흙에서 잘 자랄수있는 식물을 가지고 있소."
+msgstr "볼드레쓰의 말이 옳소! 우리는 길고 추운 겨울을 보낼 음식이 충분하지 못하오. 우리는 우물, 어부, 사냥꾼의 오두막을 지어야 하오. 그리고 충분한 공간이 있다면 농장과 제과점도 짓는다면 더욱 좋아질것이오! 우리의 농부들중에 한명은 매우 영리한것같소. 그는 이미 이런 추운 곳의 흙에서 잘 자랄수있는 식물을 가지고 있소."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:250
 msgid "Food Economy Completed"
@@ -642,12 +643,15 @@ msgid ""
 "to make their work lighter and our transportation more efficient."
 msgstr "족장, 불쌍한 운송일꾼들을 기억하시오. 우리의 길이 점점 더 길어지면 그들의 어깨에 놓일 부담은 결코 가벼워지지 않을것이오. 우리는 더 많은 황소를 키워야하오. 그들의 일을 더 가볍고 우리의 운송을 더 효율적으로 하기위해서요."
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "새로운 목표"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

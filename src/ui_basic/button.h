@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/color.h"
-#include "graphic/text_layout.h"
+#include "graphic/styles/button_style.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -146,7 +146,7 @@ public:
 	void set_perm_pressed(bool pressed);
 
 	/// Change the background style of the button.
-	void set_background_style(UI::ButtonStyle bstyle);
+	void set_style(UI::ButtonStyle bstyle);
 
 	/// Convenience function. Toggles between raised and permpressed style
 	void toggle();
@@ -156,9 +156,6 @@ public:
 	boost::signals2::signal<void()> sigmouseout;
 
 protected:
-	virtual void clicked() {
-	}  /// Override this to react on the click.
-
 	bool highlighted_;  //  mouse is over the button
 	bool pressed_;      //  mouse is clicked over the button
 	bool enabled_;
@@ -172,7 +169,7 @@ protected:
 	std::string title_;         //  title string used when title_image_ == nullptr
 	const Image* title_image_;  //  custom icon on the button
 
-	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
+	const UI::ButtonStyleInfo* style_;  // Background color and texture. Not owned.
 };
 
 }  // namespace UI

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,11 +50,11 @@ public:
 	}
 
 	// Returns all files and directories (full path) in the given directory 'directory'.
-	virtual std::set<std::string> list_directory(const std::string& directory) = 0;
+	virtual FilenameSet list_directory(const std::string& directory) const = 0;
 
 	virtual bool is_writable() const = 0;
 	virtual bool is_directory(const std::string& path) = 0;
-	virtual bool file_exists(const std::string& path) = 0;
+	virtual bool file_exists(const std::string& path) const = 0;
 
 	virtual void* load(const std::string& fname, size_t& length) = 0;
 
@@ -131,6 +131,35 @@ public:
 	/// Given a filename, return the name with any path or extension stripped off.
 	static std::string filename_without_ext(const char* n);
 	static std::string get_homedir();
+
+#ifdef USE_XDG
+	// Get XDG dirs for Linux
+	// https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+	static std::string get_userdatadir();
+	static std::string get_userconfigdir();
+	static std::vector<std::string> get_xdgdatadirs();
+#endif
+
+	/// Return the files in the given 'directory' that match the condition in 'test', i.e. 'test'
+	/// returned 'true' for their filenames.
+	template <class UnaryPredicate>
+	FilenameSet filter_directory(const std::string& directory, UnaryPredicate test) const {
+		FilenameSet result = list_directory(directory);
+		for (auto it = result.begin(); it != result.end();) {
+			if (!test(*it)) {
+				it = result.erase(it);
+			} else {
+				++it;
+			}
+		}
+		return result;
+	}
+
+	/// Returns all files in the given 'directory' that match 'basename' followed by 1-3 numbers,
+	/// followed by '.', followed by 'extension'
+	std::vector<std::string> get_sequential_files(const std::string& directory,
+	                                              const std::string& basename,
+	                                              const std::string& extension) const;
 
 	virtual unsigned long long disk_space() = 0;
 

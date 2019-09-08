@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2018 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,7 @@
 
 // Triggered by BOOST_AUTO_TEST_CASE
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
+CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
 #ifndef BEGIN_LUNA_PROPERTIES
 #define BEGIN_LUNA_PROPERTIES(klass) const PropertyType<klass> klass::Properties[] = {

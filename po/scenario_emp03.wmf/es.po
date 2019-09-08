@@ -1,16 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Madkat Here, 2017
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019
+# Facundo Gomez <facundogomez15@gmail.com>, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Madkat Here, 2017\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2017-05-15 11:49+0000\n"
+"Last-Translator: Facundo Gomez <facundogomez15@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,6 +50,8 @@ msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr ""
+"Construye una cantera cerca de las rocas abundantes, para liberar algunas "
+"parcelas de construcción y obtener algunos recursos valiosos."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -68,7 +73,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower the demand for marble columns to 4"
-msgstr ""
+msgstr "Reduce la demanda de columnas de mármol à 4"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid "Lower Demand for Marble Columns"
@@ -79,6 +84,8 @@ msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr ""
+"Disminuye a cuatro la demanda de columnas de mármol en la configuración de "
+"la economía. Esto ayudará a aguardar algo de mármol para las construcciones."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:78
 msgid ""
@@ -97,7 +104,7 @@ msgstr "Espacio para puerto"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:87
 msgid "Search for a port space in order to regain access to the sea."
-msgstr ""
+msgstr "Busca por un espacio para un puerto para recuperar acceso al mar."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:93
 msgid "Build a port and a shipyard on the Island"
@@ -117,7 +124,7 @@ msgstr "Construye un astillero para producir los barcos para navegar."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:102
 msgid "Produce wheat"
-msgstr ""
+msgstr "Produce trigo"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:104
 msgid "Wheat Production"
@@ -127,6 +134,7 @@ msgstr "Producción de Trigo"
 msgid ""
 "Produce at least 50 sheaves of wheat to get your wool production started."
 msgstr ""
+"Produce al menos 50 fajos de trigo para iniciar tu producción de lana."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:111
 msgid "Produce cloth for building our first ship"
@@ -141,6 +149,8 @@ msgid ""
 "Now turn all the wheat into at least 50 bales of wool and then use the wool "
 "to weave cloth in order to build a ship."
 msgstr ""
+"Ahora convierte todo el trigo en al menos 50 fardos de lana y luego usar la "
+"lana para tejer tela para construir un barco."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:120
 msgid "Build 2 ports on distant islands"
@@ -150,19 +160,24 @@ msgstr "Construye 2 puertos en islas distantes"
 #. them
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid "Build two Expedition Ports"
-msgstr ""
+msgstr "Construye dos Puertos de Expedición"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:124
 msgid ""
 "Explore the island in the south. Use an expedition to build a port there. "
 "Afterwards, try to find some mining resources."
 msgstr ""
+"Explora la isla al sur. Utiliza una expedición para construir un puerto "
+"allí. Después, intenta encontrar algunos recursos mineros."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:125
 msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
 msgstr ""
+"Envía un buque hacia el norte para recolectar información sobre los "
+"bárbaros. Trata de construir un puerto en la isla y fundar un puesto de "
+"avanzada."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:131
 msgid "Produce gold to send out expeditions"
@@ -176,6 +191,8 @@ msgstr "Producción de Oro"
 msgid ""
 "Produce at least six bars of gold to be able to colonize your vicinity."
 msgstr ""
+"Produce al menos seis unidades de oro para poder colonizar nuestra vecindad."
+" "
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Barbarians"
@@ -187,7 +204,7 @@ msgstr "Derrota al Enemigo"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
 msgid "End the Barbarians’ existence in this part of the world."
-msgstr ""
+msgstr "Finaliza la existencia de los bárbaros en esta parte del mundo."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore further and build ports"
@@ -201,6 +218,7 @@ msgstr "Explora islas adicionales y busca espacios portuarios"
 msgid ""
 "Discover more land in your vicinity and build as many ports as you can."
 msgstr ""
+"Descubre más tierra en tus cercanías y construye tantos puertos como puedas."
 
 #. TRANSLATORS: Objective header
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:159
@@ -231,6 +249,8 @@ msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train your"
 " soldiers."
 msgstr ""
+"Construye un campo de entrenamiento, algunos cuarteles y una arena o coliseo"
+" para entrenar a tus soldados."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:184
 msgid "The Journey Home"
@@ -241,7 +261,7 @@ msgstr "El Viaje a Casa"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:209
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:389
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:621
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:649
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:650
 msgid "Diary of Lutius"
 msgstr "Diario de Lutius"
 
@@ -304,6 +324,11 @@ msgid ""
 "we awoke at noon, nobody was really surprised that all we could see was "
 "sand… although the amount of rocks near our camp was astonishing."
 msgstr ""
+"Otra vez, hemos varado en una costa desconocida y dormido a la sombra de "
+"algunas palmeras hasta que el sol se levanto alto en el cielo. Me temo que "
+"cuando despertemos al mediodía, nadie estaba realmente sorprendido de que "
+"todo lo que podíamos ver era arena... aunque la cantidad de rocas cerca de "
+"nuestro campamento era sorprendente."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:217
@@ -519,6 +544,10 @@ msgid ""
 "settings to a smaller amount. I think a reserve of four columns might be "
 "sufficient for the moment being."
 msgstr ""
+"Pero ahí está el problema, si usamos todo nuestro mármol para las columnas, "
+"podríamos acabarlo. Entonces, deberíamos bajar la configuración de columnas "
+"de mármol de la economía a una cantidad menor. Creo que una reserva de "
+"cuatro columnas puede ser suficiente por el momento."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:319
 msgid "Amalea Looks Happy"
@@ -626,6 +655,9 @@ msgid ""
 "have only five bales of cloth left, which we will need to build the port and"
 " the shipyard."
 msgstr ""
+"Para enviar una nave exploradora primero necesitamos una nave. "
+"Desafortunadamente, tan solo quedan 5 fardos de tela, que necesitaremos para"
+" construir el puerto y el astillero."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:371
@@ -671,6 +703,8 @@ msgid ""
 "I think a stock of 50 sheaves of wheat would be enough for starters. Perhaps"
 " we will have to adjust the target quantity for wheat to achieve this."
 msgstr ""
+"Creo que un stock de 50 gavillas de trigo sería suficiente para empezar. Tal"
+" vez tendremos que ajustar la cantidad de trigo para lograr esto."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:388
 msgid "Seafaring is Possible Again"
@@ -779,6 +813,9 @@ msgid ""
 "they have to use all our remaining gold for building the port. So, we won’t "
 "have any gold left after our port is build."
 msgstr ""
+"Salve Lutius. Mientras hablábamos con todos nuestros valientes "
+"constructores, me dijeron que tienen que gastar todo nuestro oro restante "
+"para construir el puerto. Ahora no tenemos oro."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:440
@@ -998,7 +1035,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:535
 msgid "Amalea’s Counsel"
-msgstr ""
+msgstr "El Consejo de Amalea"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:538
@@ -1031,6 +1068,11 @@ msgid ""
 "a reserve of six to nine bales giving us two to three expeditions would be "
 "sufficient."
 msgstr ""
+"Por lo tanto, realmente recomiendo que revisemos nuestro inventario de telas"
+" regularmente para asegurarnos de mantener suficiente tela en reserva para "
+"enviar al menos algunas expediciones. Dado que una expedición necesita 3 "
+"fardos de tela. pienso que una reserva de 6 a 9 fajas de tela que nos darán "
+"2 o 3 expediciones sería suficiente."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:548
 msgid "Victory is Ours"
@@ -1075,6 +1117,9 @@ msgid ""
 "As we have seen on our journeys, it is of great importance to put the gods "
 "and especially Neptune in a good mood to safeguard our journey."
 msgstr ""
+"Como hemos visto en nuestros viajes, es de suma importancia poner a los "
+"dioses y en especial a Neptuno de buen humor para salvaguardar nuestro "
+"viaje."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:566
 msgid ""
@@ -1137,6 +1182,9 @@ msgid ""
 "somewhat worried that we will have to fight against them before we are ready"
 " to do so."
 msgstr ""
+"Señor, encontramos las ruinas de una antigua fortaleza y villa bárbara. "
+"Estoy algo preocupado acerca de tener que luchar contra ellos antes de que "
+"estemos listos para ello."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:596
 msgid "Train Faster, Train Harder"
@@ -1211,6 +1259,10 @@ msgstr ""
 "pondremos en marcha lo antes posible para ayudar a defender al Imperio de la"
 " tribu bárbara."
 
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:624
+msgid "Victory"
+msgstr ""
+
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:625
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
@@ -1220,20 +1272,20 @@ msgstr ""
 "modo avanza a la siguiente misión."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:634
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:635
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
 msgstr ""
 "Finalmente, hemos descubierto una pieza de nuestro santuario. ¡Alabado sea "
 "Neptuno!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:637
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:638
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
 msgstr ""
 "Hemos descubierto otra pieza de nuestro santuario. ¡Alabado sea Neptuno!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:642
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:643
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
@@ -1241,7 +1293,7 @@ msgstr[0] "Todavía tenemos que encontrar %d pieza de nuestro santuario."
 msgstr[1] "Todavía tenemos que encontrar %d piezas de nuestro santuario."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:645
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:646
 msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
@@ -1249,17 +1301,19 @@ msgstr ""
 "Finalmente, hemos descubierto la última pieza de nuestro santuario. Ahora "
 "podemos rearmarlo para adorar a nuestro dios. ¡Alabado sea Neptuno!"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:649
 msgid "Artifact Found"
 msgstr "Artefacto Encontrado"
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Nuevo Objetivo"
-msgstr[1] "Nuevos Objetivos"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

@@ -7,7 +7,7 @@ CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS) $(CPPFLAGS)
 LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 
 %:
-	dh $@ $(DH_ARGS) --parallel --buildsystem=cmake
+	dh $@ $(DH_ARGS) --buildsystem=cmake
 
 
 override_dh_auto_configure:

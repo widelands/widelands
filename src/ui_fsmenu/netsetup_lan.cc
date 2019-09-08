@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,10 +22,10 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
-#include "graphic/text_constants.h"
 #include "network/constants.h"
+#include "network/internet_gaming.h"
 #include "network/network.h"
-#include "profile/profile.h"
+#include "wlapplication_options.h"
 
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
    : FullscreenMenuBase(),
@@ -37,11 +37,22 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
      listw_(get_w() * 9 / 16),
 
      // Text labels
-     title(this, get_w() / 2, get_h() / 10, _("Begin Network Game"), UI::Align::kCenter),
-     opengames_(
-        this, get_w() * 3 / 50, get_h() * 27 / 100, _("List of games in your local network:")),
-     playername_(this, get_w() * 16 / 25, get_h() * 27 / 100, _("Your nickname:")),
-     hostname_(this, get_w() * 16 / 25, get_h() * 17 / 40, _("Host to connect:")),
+     title(this,
+           get_w() / 2,
+           get_h() / 10,
+           0,
+           0,
+           _("Begin Network Game"),
+           UI::Align::kCenter,
+           g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+     opengames_(this,
+                get_w() * 3 / 50,
+                get_h() * 27 / 100,
+                0,
+                0,
+                _("List of games in your local network:")),
+     playername_(this, get_w() * 16 / 25, get_h() * 27 / 100, 0, 0, _("Your nickname:")),
+     hostname_(this, get_w() * 16 / 25, get_h() * 17 / 40, 0, 0, _("Host to connect:")),
 
      // Buttons
      joingame(this,
@@ -79,22 +90,9 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
                   _("Load previous host")),
 
      // Edit boxes
-     playername(this,
-                get_w() * 16 / 25,
-                get_h() * 3333 / 10000,
-                butw_,
-                buth_,
-                2,
-                UI::PanelStyle::kFsMenu,
-                fs_small()),
-     hostname(this,
-              get_w() * 16 / 25,
-              get_h() * 19 / 40,
-              get_w() * 17 / 80,
-              buth_,
-              2,
-              UI::PanelStyle::kFsMenu,
-              fs_small()),
+     playername(this, get_w() * 16 / 25, get_h() * 3333 / 10000, butw_, UI::PanelStyle::kFsMenu),
+     hostname(
+        this, get_w() * 16 / 25, get_h() * 19 / 40, get_w() * 17 / 80, UI::PanelStyle::kFsMenu),
 
      // List
      opengames(this,
@@ -112,11 +110,11 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 	loadlasthost.sigclicked.connect(
 	   boost::bind(&FullscreenMenuNetSetupLAN::clicked_lasthost, boost::ref(*this)));
 
-	Section& s = g_options.pull_section("global");  //  for playername
+	playername.set_font_scale(scale_factor());
+	hostname.set_font_scale(scale_factor());
 
-	title.set_fontsize(UI_FONT_SIZE_BIG);
 	hostname.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_hostname, this));
-	playername.set_text(s.get_string("nickname", (_("nobody"))));
+	playername.set_text(get_config_string("nickname", (_("nobody"))));
 	playername.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_playername, this));
 	opengames.add_column(listw_ * 2 / 5, _("Host"));
 	opengames.add_column(listw_ * 2 / 5, _("Map"));
@@ -136,6 +134,7 @@ void FullscreenMenuNetSetupLAN::layout() {
 
 void FullscreenMenuNetSetupLAN::think() {
 	FullscreenMenuBase::think();
+	change_playername();
 
 	discovery.run();
 }
@@ -183,7 +182,12 @@ void FullscreenMenuNetSetupLAN::game_selected(uint32_t) {
 }
 
 void FullscreenMenuNetSetupLAN::game_doubleclicked(uint32_t) {
-	clicked_joingame();
+	assert(opengames.has_selection());
+	const NetOpenGame* const game = opengames.get_selected();
+	// Only join games that are open
+	if (game->info.state == LAN_GAME_OPEN || !playername.has_warning()) {
+		clicked_joingame();
+	}
 }
 
 void FullscreenMenuNetSetupLAN::update_game_info(
@@ -202,7 +206,7 @@ void FullscreenMenuNetSetupLAN::update_game_info(
 		/** TRANSLATORS: The state of a LAN game can be open, closed or unknown */
 		er.set_string(2, pgettext("game_state", "Unknown"));
 		break;
-	};
+	}
 }
 
 void FullscreenMenuNetSetupLAN::game_opened(const NetOpenGame* game) {
@@ -242,12 +246,28 @@ void FullscreenMenuNetSetupLAN::change_hostname() {
 }
 
 void FullscreenMenuNetSetupLAN::change_playername() {
-	g_options.pull_section("global").set_string("nickname", playername.text());
+	playername.set_warning(false);
+	playername.set_tooltip("");
+	hostgame.set_enabled(true);
+
+	if (!InternetGaming::ref().valid_username(playername.text())) {
+		playername.set_warning(true);
+		playername.set_tooltip(_("Enter a valid nickname. This value may contain only "
+		                         "English letters, numbers, and @ . + - _ characters."));
+		joingame.set_enabled(false);
+		hostgame.set_enabled(false);
+		return;
+	}
+	if (!hostname.text().empty()) {
+		joingame.set_enabled(true);
+	}
+
+	set_config_string("nickname", playername.text());
 }
 
 void FullscreenMenuNetSetupLAN::clicked_joingame() {
 	// Save selected host so users can reload it for reconnection.
-	g_options.pull_section("global").set_string("lasthost", hostname.text());
+	set_config_string("lasthost", hostname.text());
 
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kJoingame);
 }
@@ -257,7 +277,7 @@ void FullscreenMenuNetSetupLAN::clicked_hostgame() {
 }
 
 void FullscreenMenuNetSetupLAN::clicked_lasthost() {
-	Section& s = g_options.get_safe_section("global");
+	Section& s = get_config_safe_section();
 	std::string const host = s.get_string("lasthost", "");
 	hostname.set_text(host);
 	if (host.size())

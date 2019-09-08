@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,12 +32,13 @@
 #include "economy/road.h"
 #include "graphic/color.h"
 #include "logic/filesystem_constants.h"
-#include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -53,6 +54,7 @@
 #include "map_io/map_saver.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
+#include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
 #include "wui/interactive_base.h"
 #include "wui/interactive_gamebase.h"
@@ -78,6 +80,9 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
 
 EditorGameBase::~EditorGameBase() {
 	delete_tempfile();
+	if (g_sh != nullptr) {
+		g_sh->remove_fx_set(SoundType::kAmbient);
+	}
 }
 
 /**
@@ -286,9 +291,11 @@ void EditorGameBase::postload() {
 		}
 	}
 
-	// Postload tribes
+	// Postload tribes and world
 	assert(tribes_);
 	tribes_->postload();
+	assert(world_);
+	world_->postload();
 
 	for (DescriptionIndex i = 0; i < tribes_->nrtribes(); i++) {
 		const TribeDescr* tribe = tribes_->get_tribe_descr(i);
@@ -328,7 +335,7 @@ void EditorGameBase::load_graphics(UI::ProgressWindow& loader_ui) {
 Building& EditorGameBase::warp_building(const Coords& c,
                                         PlayerNumber const owner,
                                         DescriptionIndex const idx,
-                                        Building::FormerBuildings former_buildings) {
+                                        FormerBuildings former_buildings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 	return tribe.get_building_descr(idx)->create(*this, plr, c, false, true, former_buildings);
@@ -345,10 +352,16 @@ Building& EditorGameBase::warp_constructionsite(const Coords& c,
                                                 PlayerNumber const owner,
                                                 DescriptionIndex idx,
                                                 bool loading,
-                                                Building::FormerBuildings former_buildings) {
+                                                FormerBuildings former_buildings,
+                                                const BuildingSettings* settings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
-	return tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings);
+	Building& b =
+	   tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings);
+	if (settings) {
+		dynamic_cast<ConstructionSite&>(b).apply_settings(*settings);
+	}
+	return b;
 }
 
 /**
@@ -359,7 +372,7 @@ Building& EditorGameBase::warp_constructionsite(const Coords& c,
 Building& EditorGameBase::warp_dismantlesite(const Coords& c,
                                              PlayerNumber const owner,
                                              bool loading,
-                                             Building::FormerBuildings former_buildings) {
+                                             FormerBuildings former_buildings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 
@@ -635,7 +648,7 @@ void EditorGameBase::conquer_area_no_building(PlayerArea<Area<FCoords>> player_a
 	//  This must reach two steps beyond the conquered area to adjust the borders
 	//  of neighbour players.
 	player_area.radius += 2;
-	map_.recalc_for_field_area(world(), player_area);
+	map_.recalc_for_field_area(*this, player_area);
 }
 
 /// Conquers the given area for that player; does the actual work.
@@ -660,7 +673,6 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 	assert(0 < player_area.player_number);
 	assert(player_area.player_number <= map().get_nrplayers());
 	assert(preferred_player <= map().get_nrplayers());
-	assert(preferred_player != player_area.player_number);
 	assert(!conquer || !preferred_player);
 	Player* conquering_player = get_player(player_area.player_number);
 	MapRegion<Area<FCoords>> mr(map(), player_area);
@@ -711,7 +723,7 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 	// This must reach two steps beyond the conquered area to adjust the borders
 	// of neighbour players.
 	player_area.radius += 2;
-	map_.recalc_for_field_area(world(), player_area);
+	map_.recalc_for_field_area(*this, player_area);
 
 	//  Deal with player immovables in the lost area
 	//  Players are not allowed to have their immovables on their borders.
@@ -731,7 +743,7 @@ void EditorGameBase::cleanup_playerimmovables_area(PlayerArea<Area<FCoords>> con
 	std::vector<PlayerImmovable*> burnlist;
 
 	//  find all immovables that need fixing
-	map_.find_immovables(area, &immovables, FindImmovablePlayerImmovable());
+	map_.find_immovables(*this, area, &immovables, FindImmovablePlayerImmovable());
 
 	for (const ImmovableFound& temp_imm : immovables) {
 		upcast(PlayerImmovable, imm, temp_imm.object);

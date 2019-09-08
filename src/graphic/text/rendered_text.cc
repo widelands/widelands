@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2018 by the Widelands Development Team
+ * Copyright (C) 2017-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "graphic/graphic.h"
-#include "graphic/text_layout.h"
 
 namespace UI {
 // RenderedRect

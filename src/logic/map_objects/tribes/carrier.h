@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,9 +27,7 @@ namespace Widelands {
 
 class CarrierDescr : public WorkerDescr {
 public:
-	CarrierDescr(const std::string& init_descname,
-	             const LuaTable& table,
-	             const EditorGameBase& egbase);
+	CarrierDescr(const std::string& init_descname, const LuaTable& table, const Tribes& tribes);
 	~CarrierDescr() override {
 	}
 

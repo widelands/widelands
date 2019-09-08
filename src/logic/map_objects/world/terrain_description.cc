@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -111,6 +111,16 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 
 	if (table.has_key("tooltips")) {
 		custom_tooltips_ = table.get_table("tooltips")->array_entries<std::string>();
+	}
+
+	if (table.has_key("enhancement")) {
+		enhancement_ = table.get_string("enhancement");
+		if (enhancement_ == name_) {
+			throw GameDataError("%s: a terrain cannot be enhanced to itself", name_.c_str());
+		}
+		// Other invalid terrains will be detected in World::postload
+	} else {
+		enhancement_ = "";
 	}
 
 	if (!(0 < fertility_ && fertility_ < 1000)) {
@@ -254,6 +264,10 @@ int TerrainDescription::humidity() const {
 
 int TerrainDescription::fertility() const {
 	return fertility_;
+}
+
+const std::string& TerrainDescription::enhancement() const {
+	return enhancement_;
 }
 
 void TerrainDescription::set_minimap_color(const RGBColor& color) {

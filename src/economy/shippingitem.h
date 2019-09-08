@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2018 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ struct ShippingItem {
 	void get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const;
 
 	void set_economy(Game&, Economy* e);
-	PortDock* get_destination(Game&);
+	const PortDock* get_destination(Game&) const;
 
 	void remove(EditorGameBase&);
 

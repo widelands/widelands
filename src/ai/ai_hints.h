@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,9 +23,11 @@
 #include <memory>
 #include <stdint.h>
 #include <string>
+#include <unordered_map>
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "logic/widelands.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -54,10 +56,6 @@ struct BuildingHints {
 
 	bool get_needs_water() const {
 		return needs_water_;
-	}
-
-	bool for_recruitment() const {
-		return recruitment_;
 	}
 
 	bool is_space_consumer() const {
@@ -110,7 +108,6 @@ struct BuildingHints {
 private:
 	const std::string mines_;
 	const bool needs_water_;
-	const bool recruitment_;
 	const bool space_consumer_;
 	const bool expansion_;
 	const bool fighting_;
@@ -129,6 +126,32 @@ private:
 	std::set<std::string> supported_production_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
+};
+
+/// Hints common to wares and workers
+struct WareWorkerHints {
+	WareWorkerHints() = default;
+
+	/// Returns the preciousness of the ware/worker, or kInvalidWare if the tribe doesn't use the
+	/// ware/worker or the worker has no preciousness defined for the tribe.
+	int preciousness(const std::string& tribename) const;
+
+protected:
+	void read_preciousness(const LuaTable& table);
+
+private:
+	// tribename, preciousness. No default.
+	std::unordered_map<std::string, int> preciousnesses_;
+};
+
+/// Hints for wares
+struct WareHints : WareWorkerHints {
+	explicit WareHints(const LuaTable& table);
+};
+
+/// Hints for workers
+struct WorkerHints : WareWorkerHints {
+	explicit WorkerHints(const LuaTable& table);
 };
 
 #endif  // end of include guard: WL_AI_AI_HINTS_H

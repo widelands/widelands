@@ -13,13 +13,13 @@ tribes:new_productionsite_type {
       brick = 2,
       granite = 1,
       log = 3,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle = {
       brick = 1,
       granite = 1,
       log = 1,
-      thatch_reed = 1
+      reed = 1
    },
 
    animations = {
@@ -76,8 +76,8 @@ tribes:new_productionsite_type {
          descname = pgettext("frisians_building", "rearing reindeer"),
          actions = {
             "return=skipped unless economy needs frisians_reindeer",
-            "sleep=15000",
             "consume=barley water",
+            "sleep=15000",
             "animate=working 15000",
             "recruit=frisians_reindeer"
          }
@@ -87,8 +87,8 @@ tribes:new_productionsite_type {
          descname = pgettext("frisians_building", "producing fur"),
          actions = {
             "return=skipped unless economy needs fur",
-            "sleep=15000",
             "consume=barley water",
+            "sleep=15000",
             "animate=working 20000",
             "produce=fur"
          }
@@ -98,8 +98,8 @@ tribes:new_productionsite_type {
          descname = pgettext("frisians_building", "producing fur"),
          actions = {
             "return=skipped unless economy needs fur",
-            "sleep=15000",
             "consume=barley water",
+            "sleep=15000",
             "animate=working 20000",
             "produce=fur meat"
          }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
            get_inner_h() - 3 * padding_ - buth_,
            padding_ / 2),
      label_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, buth_, _("Enter Directory Name:")),
-     edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, 0, 4, UI::PanelStyle::kWui),
+     edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, UI::PanelStyle::kWui),
      ok_button_(this,
                 "ok",
                 UI::g_fh->fontset()->is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,

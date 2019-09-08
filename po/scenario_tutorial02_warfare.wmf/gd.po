@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2018
+# GunChleoc, 2015-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 06:56+0000\n"
-"PO-Revision-Date: 2018-09-10 12:42+0000\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -229,7 +229,7 @@ msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
-msgstr "Tha ionad-oideachaidh eile ann agus seo an campa oideachaidh. ’S e togalach mòr a th’ ann cuideachd agus a chum nach dèan an raon catha a choileanadh, nì e oideachadh ionnsaighe agus slàinte (cuimhnich nach urrainn dha na saighdearan Tùsanach oideachadh dìona fhaighinn)."
+msgstr "Tha ionad-oideachaidh eile ann agus seo an campa oideachaidh. ’S e togalach mòr a th’ ann cuideachd agus a chùm nach dèan an raon catha a choileanadh, nì e oideachadh ionnsaighe agus slàinte (cuimhnich nach urrainn dha na saighdearan Tùsanach oideachadh dìona fhaighinn)."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:114
@@ -292,21 +292,21 @@ msgid ""
 "soldiers) or rookies. From time to time, a soldier will walk out of the "
 "building and be replaced by a stronger/weaker one automatically – this is "
 "what you saw earlier."
-msgstr "Anns gach togalach an airm, ’s urrainn dhut suidheachadh am b’ fhearr leis seann-ghaisgich (saighdearan air an oideachadh) no saighdearan ùra. Fàgaidh saighdear an togalach o àm gu àm agus thig fear nas treasa/nas laige a-steach ’na àite gu fèin-obrachail – seo na chunnaic thu roimhe."
+msgstr "Anns gach togalach an airm, ’s urrainn dhut suidheachadh am b’ fheàrr leis seann-ghaisgich (saighdearan air an oideachadh) no saighdearan ùra. Fàgaidh saighdear an togalach o àm gu àm agus thig fear nas treasa/nas laige a-steach ’na àite gu fèin-obrachail – seo na chunnaic thu roimhe."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
 msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
-msgstr "Tha an roghainn thùsail a-rèir seòrsa gach togalaich. Airson nan Tùsanach, ’s e am freiceadan a tha san aon togalach as fearr leis saighdearan ùra a ghnàth. Bu chòir dhut an roghainn seo atharrachadh a-rèir an t-suidheachaidh sa bheil thu."
+msgstr "Tha an roghainn thùsail a-rèir seòrsa gach togalaich. Airson nan Tùsanach, ’s e am freiceadan a tha san aon togalach as fheàrr leis saighdearan ùra a ghnàth. Bu chòir dhut an roghainn seo atharrachadh a-rèir an t-suidheachaidh sa bheil thu."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
 msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
-msgstr "Nuair a bhios tu a’ meudachadh an ranntair agad gu tìr nach eil aig duine, bidh e freagarrach gum b’ fhearr leis na togalaichean agad saighdearan ùra. Nuair a bhios ionnsaigh fainear dhut, cuir seann-ghaisgich dhan sgìre sin. Is fhearr le togalaichean a bhuinnig thu seann-ghaisgich an-còmhnaidh."
+msgstr "Nuair a bhios tu a’ leudachadh an ranntair agad gu tìr nach eil aig duine, bidh e freagarrach gum b’ fheàrr leis na togalaichean agad saighdearan ùra. Nuair a bhios ionnsaigh fainear dhut, cuir seann-ghaisgich dhan sgìre sin. Is fheàrr le togalaichean a bhuinnig thu seann-ghaisgich an-còmhnaidh."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
 msgid "Soldier capacity"
@@ -389,7 +389,7 @@ msgstr "Co-dhiù, tha cunnart an lùib milleadh togalach an airm an-còmhnaidh: 
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
-msgstr "Am faca tu am freiceadan agad? O nach eil rum airson mòran shaighdearan ann ’s on a tha e faisg air taigh-faire a tha nas treasa, chan eil e gu mòran feum dhut idir."
+msgstr "Am faca tu am freiceadan agad? O nach eil rùm airson mòran shaighdearan ann ’s on a tha e faisg air taigh-faire a tha nas treasa, chan eil e gu mòran feum dhut idir."
 
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:164
@@ -400,7 +400,7 @@ msgstr "Thoir às a chèile e."
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr "Nach gabh thu an cothrom gus eòlas fhaighinn air na roghainnean eile? Is iad roghainn nan seann-ghaisgeach no saighdearan ùra agus an rum."
+msgstr "Nach gabh thu an cothrom gus eòlas fhaighinn air na roghainnean eile? Is iad roghainn nan seann-ghaisgeach no saighdearan ùra agus an rùm."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
 msgid "Dismantle your north-western sentry"
@@ -472,7 +472,7 @@ msgid ""
 "the Barbarians can build. It also costs a lot of resources and takes a long "
 "time to build. It is most suited to guard strategically important points "
 "like constricted points or mountains."
-msgstr "’S urrainn do 12 shaighdear còmhnaidh ann an cathair is ’s ise togalach an airm as motha as urrainn dha na Tùsanaich a thogail. Tha i glè chosgail cuideachd is bheir e ùine mhòr gus tè a thogail. Tha i nas fhearr gus ionadan cudromach a dhìon a leithid àiteachan caola no beanntan."
+msgstr "’S urrainn do 12 shaighdear còmhnaidh ann an cathair is ’s ise togalach an airm as motha as urrainn dha na Tùsanaich a thogail. Tha i glè chosgail cuideachd is bheir e ùine mhòr gus tè a thogail. Tha i nas fheàrr gus ionadan cudromach a dhìon a leithid àiteachan caola no beanntan."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
 msgid "Defeat your Enemy"
@@ -541,7 +541,7 @@ msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
-msgstr "Ach tha an cogadh cosgail agus chan eil e an rathad as fhearr dhan t-soirbheachas an-còmhnaidh. Nuair a shuidhicheas tu geama ùr, ’s urrainn dhut cumha buaidhe sìtheil a thaghadh cuideachd. Bu chòir dhut am feuchainn on fhiach iad."
+msgstr "Ach tha an cogadh cosgail agus chan eil e an rathad as fheàrr dhan t-soirbheachas an-còmhnaidh. Nuair a shuidhicheas tu geama ùr, ’s urrainn dhut cumha buaidhe sìtheil a thaghadh cuideachd. Bu chòir dhut am feuchainn on fhiach iad."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
 msgid ""
@@ -550,15 +550,15 @@ msgid ""
 "tutorials, but they are not crucial for succeeding in the campaigns."
 msgstr "Tha thu ullamh a-nis gus na h-iomairtean a chluiche. Ionnsaichidh iad dhut mun eaconamaidh eadar-dhealaichte a tha aig gach treubh. ’S urrainn dhut na h-oideachaidhean eile a chluiche cuideachd ach cha leig thu leas ach an dèid na h-iomairtean leat."
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Amas ùr"
-msgstr[1] "Amasan ùra"
-msgstr[2] "Amasan ùra"
-msgstr[3] "Amasan ùra"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

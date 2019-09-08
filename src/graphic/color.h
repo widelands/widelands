@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,6 +49,7 @@ struct RGBColor {
 
 struct RGBAColor {
 	RGBAColor(uint8_t R, uint8_t G, uint8_t B, uint8_t A);
+	RGBAColor(uint32_t);
 	RGBAColor(const RGBAColor& other) = default;
 
 	// Initializes the color to black.

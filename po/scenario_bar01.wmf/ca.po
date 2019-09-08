@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # Juanjo, 2015
-# Juanjo, 2015-2018
+# Juanjo, 2015-2019
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-07-02 16:49+0000\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-13 12:41+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -291,10 +291,10 @@ msgstr "Construïu un camp de juncs"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
-"The third material necessary for improved buildings is thatch reed, used to "
-"cover roofs. Thatch reed is planted by a gardener around his building, the "
-"reed yard."
-msgstr "El tercer material necessari per als edificis ampliats és la fibra de junc, que s'empra per a fer teulades. El junc el planta el jardiner al voltant del seu edifici: el camp de juncs."
+"The third material necessary for improved buildings is reed, used to cover "
+"roofs. Reed fields are planted by a gardener around his building, the reed "
+"yard."
+msgstr "El tercer material necessari per als edificis ampliats és el junc, que s'empra per a fer teulades. El junc el planta el jardiner al voltant del seu edifici: el camp de juncs."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
@@ -1030,13 +1030,15 @@ msgid ""
 "Therefore, they have decided to join us, hoping that we can help each other."
 msgstr "Però temen que la guerra al voltant de l'Al'thunran signifiqui la seva fi. Per això han decidit unir-se a nosaltres, amb la intenció que ens puguem ajudar els uns als altres."
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr "«%s»"
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Objectiu"
-msgstr[1] "Objectius"
+msgstr "Objectiu nou"
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr "Nous objectius"

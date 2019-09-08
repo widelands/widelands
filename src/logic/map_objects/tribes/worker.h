@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,6 +67,7 @@ class Worker : public Bob {
 		int32_t iparam4;
 		int32_t iparam5;
 		int32_t iparam6;
+		int32_t iparam7;
 		std::string sparam1;
 
 		std::vector<std::string> sparamv;
@@ -179,10 +180,13 @@ protected:
 	virtual bool is_evict_allowed();
 	virtual void draw_inner(const EditorGameBase& game,
 	                        const Vector2f& point_on_dst,
+	                        const Widelands::Coords& coords,
 	                        const float scale,
 	                        RenderTarget* dst) const;
 	void draw(const EditorGameBase&,
+	          const TextToDraw& draw_text,
 	          const Vector2f& field_on_dst,
+	          const Widelands::Coords& coords,
 	          float scale,
 	          RenderTarget* dst) const override;
 	void init_auto_task(Game&) override;
@@ -253,6 +257,7 @@ private:
 	bool run_scout(Game&, State&, const Action&);
 	bool run_playsound(Game&, State&, const Action&);
 	bool run_construct(Game&, State&, const Action&);
+	bool run_terraform(Game&, State&, const Action&);
 
 	// Forester considers multiple spaces in findspace, unlike others.
 	int16_t findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game);

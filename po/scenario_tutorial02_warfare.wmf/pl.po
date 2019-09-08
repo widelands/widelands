@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006
@@ -7,13 +7,13 @@
 # GunChleoc, 2014
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Sebastian Janus <sebek89@gmail.com>, 2015
-# Tomasz Pudło <wptom@wp.pl>, 2016
+# tombox <wptom@wp.pl>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 13:09+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -553,15 +553,15 @@ msgid ""
 "tutorials, but they are not crucial for succeeding in the campaigns."
 msgstr "Jesteś już gotów, by spróbować swych sił w kampaniach. Stanowią one również samouczki dla poszczególnych gospodarek plemion. Możesz również zagrać w pozostałe samouczki, lecz nie są one niezbędne do zwycięstwa w kampaniach."
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "\"%s\""
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Nowy cel"
-msgstr[1] "Nowe cele"
-msgstr[2] "Nowe cele"
-msgstr[3] "Nowe cele"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

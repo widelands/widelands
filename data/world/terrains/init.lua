@@ -142,6 +142,12 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --
 --            fertility = 700,
 --
+--    **enhancement**
+--        *Optional*. The terrain this terrain can be turned into by buildings like
+--        the amazon gardening center. Example::
+--
+--            enhancement = "summer_meadow3",
+--
 
 ------------------------
 --  Former greenland  --
@@ -188,7 +194,6 @@ world:new_terrain_type{
    temperature = 100,
    humidity = 600,
    fertility = 650,
-
 }
 
 
@@ -245,6 +250,8 @@ world:new_terrain_type{
    temperature = 100,
    humidity = 400,
    fertility = 400,
+
+   enhancement = "summer_mountain_meadow"
 }
 
 
@@ -261,6 +268,8 @@ world:new_terrain_type{
    temperature = 100,
    humidity = 150,
    fertility = 150,
+
+   enhancement = "summer_steppe"
 }
 
 
@@ -277,6 +286,8 @@ world:new_terrain_type{
    temperature = 75,
    humidity = 800,
    fertility = 450,
+
+   enhancement = "summer_meadow1"
 }
 
 world:new_terrain_type{
@@ -332,6 +343,8 @@ world:new_terrain_type{
    temperature = 80,
    humidity = 100,
    fertility = 100,
+
+   enhancement = "summer_forested_mountain1"
 }
 
 
@@ -348,6 +361,8 @@ world:new_terrain_type{
    temperature = 80,
    humidity = 100,
    fertility = 100,
+
+   enhancement = "summer_forested_mountain1"
 }
 
 
@@ -364,6 +379,8 @@ world:new_terrain_type{
    temperature = 80,
    humidity = 100,
    fertility = 100,
+
+   enhancement = "summer_forested_mountain2"
 }
 
 
@@ -380,6 +397,8 @@ world:new_terrain_type{
    temperature = 80,
    humidity = 100,
    fertility = 100,
+
+   enhancement = "summer_forested_mountain2"
 }
 
 world:new_terrain_type{
@@ -500,6 +519,8 @@ world:new_terrain_type{
    temperature = 120,
    humidity = 150,
    fertility = 900,
+
+   enhancement = "hardground3"
 }
 
 
@@ -520,6 +541,8 @@ world:new_terrain_type{
    temperature = 118,
    humidity = 130,
    fertility = 999,
+
+   enhancement = "hardground1"
 }
 
 
@@ -616,6 +639,8 @@ world:new_terrain_type{
    temperature = 120,
    humidity = 100,
    fertility = 200,
+
+   enhancement = "drysoil"
 }
 
 
@@ -670,6 +695,8 @@ world:new_terrain_type{
    temperature = 80,
    humidity = 50,
    fertility = 200,
+
+   enhancement = "wasteland_forested_mountain1"
 }
 
 
@@ -686,6 +713,8 @@ world:new_terrain_type{
    temperature = 80,
    humidity = 50,
    fertility = 200,
+
+   enhancement = "wasteland_forested_mountain1"
 }
 
 
@@ -702,6 +731,8 @@ world:new_terrain_type{
    temperature = 80,
    humidity = 50,
    fertility = 200,
+
+   enhancement = "wasteland_forested_mountain2"
 }
 
 
@@ -718,6 +749,8 @@ world:new_terrain_type{
    temperature = 80,
    humidity = 50,
    fertility = 200,
+
+   enhancement = "wasteland_forested_mountain2"
 }
 
 
@@ -882,6 +915,8 @@ world:new_terrain_type{
    temperature = 40,
    humidity = 750,
    fertility = 400,
+
+   enhancement = "tundra2"
 }
 
 
@@ -898,6 +933,8 @@ world:new_terrain_type{
    temperature = 35,
    humidity = 750,
    fertility = 300,
+
+   enhancement = "tundra_taiga"
 }
 
 
@@ -914,6 +951,8 @@ world:new_terrain_type{
    temperature = 25,
    humidity = 800,
    fertility = 100,
+
+   enhancement = "taiga"
 }
 
 
@@ -968,6 +1007,8 @@ world:new_terrain_type{
    temperature = 20,
    humidity = 300,
    fertility = 50,
+
+   enhancement = "winter_forested_mountain1"
 }
 
 
@@ -984,6 +1025,8 @@ world:new_terrain_type{
    temperature = 20,
    humidity = 300,
    fertility = 50,
+
+   enhancement = "winter_forested_mountain1"
 }
 
 
@@ -1000,6 +1043,8 @@ world:new_terrain_type{
    temperature = 20,
    humidity = 300,
    fertility = 50,
+
+   enhancement = "winter_forested_mountain2"
 }
 
 
@@ -1016,6 +1061,8 @@ world:new_terrain_type{
    temperature = 20,
    humidity = 300,
    fertility = 50,
+
+   enhancement = "winter_forested_mountain2"
 }
 world:new_terrain_type{
    name = "ice",
@@ -1117,6 +1164,8 @@ world:new_terrain_type{
    temperature = 168,
    humidity = 1,
    fertility = 100,
+
+   enhancement = "drysoil"
 }
 
 world:new_terrain_type{
@@ -1132,6 +1181,8 @@ world:new_terrain_type{
    temperature = 172,
    humidity = 200,
    fertility = 200,
+
+   enhancement = "highmountainmeadow"
 }
 world:new_terrain_type{
    name = "desert_steppe",
@@ -1190,6 +1241,8 @@ world:new_terrain_type{
    temperature = 145,
    humidity = 500,
    fertility = 500,
+
+   enhancement = "desert_steppe"
 }
 
 
@@ -1210,6 +1263,8 @@ world:new_terrain_type{
    temperature = 140,
    humidity = 400,
    fertility = 400,
+
+   enhancement = "mountainmeadow"
 }
 
 
@@ -1265,6 +1320,8 @@ world:new_terrain_type{
    temperature = 130,
    humidity = 50,
    fertility = 50,
+
+   enhancement = "desert_forested_mountain1"
 }
 
 
@@ -1281,6 +1338,8 @@ world:new_terrain_type{
    temperature = 130,
    humidity = 50,
    fertility = 50,
+
+   enhancement = "desert_forested_mountain1"
 }
 
 
@@ -1297,6 +1356,8 @@ world:new_terrain_type{
    temperature = 130,
    humidity = 50,
    fertility = 50,
+
+   enhancement = "desert_forested_mountain2"
 }
 
 
@@ -1313,6 +1374,8 @@ world:new_terrain_type{
    temperature = 130,
    humidity = 50,
    fertility = 50,
+
+   enhancement = "desert_forested_mountain2"
 }
 world:new_terrain_type{
    name = "desert1",

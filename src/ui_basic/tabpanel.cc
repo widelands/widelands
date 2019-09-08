@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2018 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,7 @@ Tab::Tab(TabPanel* const tab_parent,
      tooltip(tooltip_text),
      panel(contents) {
 	if (!init_title.empty()) {
-		rendered_title = UI::g_fh->render(as_uifont(init_title));
+		rendered_title = UI::g_fh->render(as_richtext_paragraph(init_title, UI::FontStyle::kLabel));
 		set_size(std::max(kTabPanelButtonHeight, rendered_title->width() + 2 * kTabPanelTextMargin),
 		         kTabPanelButtonHeight);
 	}

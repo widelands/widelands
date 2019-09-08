@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2018
+# GunChleoc, 2015-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014,2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-01 06:47+0000\n"
-"PO-Revision-Date: 2018-09-05 11:23+0000\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -104,7 +104,7 @@ msgstr "Is ciall dha seo gum bi feum againn air barrachd stòrasan gus am biadh 
 msgid ""
 "To provide these foodstuffs, you can build a fisher’s house, a hunter’s "
 "house, a farm, a mill and a bakery."
-msgstr "’S urrainn dhut taigh-iasgair, tuathanas, muileann ’s taigh-fuine a thogail gus am biadh seo ullachadh."
+msgstr "’S urrainn dhut taigh-iasgair, taigh-sealgair, tuathanas, muileann ’s taigh-fuine a thogail gus am biadh seo ullachadh."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:78
 msgid ""
@@ -352,7 +352,7 @@ msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
 "will cut columns from marble."
-msgstr "Ach thoiribh an aire: feumaidh sinn stuthan togail nas fhearr ’s nas uaisle airson nan togalaichean mòra sin. Mar sin, feumaidh sibh taigh a thogail dhan chlachair a ghearras colbhan on mharmor."
+msgstr "Ach thoiribh an aire: feumaidh sinn stuthan togail nas fheàrr ’s nas uaisle airson nan togalaichean mòra sin. Mar sin, feumaidh sibh taigh a thogail dhan chlachair a ghearras colbhan on mharmor."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:206
@@ -515,15 +515,15 @@ msgid ""
 "otherwise move on to the next mission."
 msgstr "Tha thu air am misean seo a choileanadh. Faodaidh tu leantainn air adhart a’ cluiche ma thogras tu no gluasad air adhart dhan ath-mhisean."
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Amas ùr"
-msgstr[1] "Amasan ùra"
-msgstr[2] "Amasan ùra"
-msgstr[3] "Amasan ùra"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

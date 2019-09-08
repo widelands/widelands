@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2018 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,10 @@
 #define WL_MAP_IO_MAP_PLAYERS_VIEW_PACKET_H
 
 #include "map_io/map_data_packet.h"
+#include "map_io/tribes_legacy_lookup_table.h"
+#include "map_io/world_legacy_lookup_table.h"
+
+namespace Widelands {
 
 /// For each player, its view of each node, edge and triangle that he has seen
 /// but does not see currently. Information that he currently sees is not
@@ -31,6 +35,16 @@
 /// This information can not be loaded before the terrains, roads, immovables
 /// and players' vision maps are loaded. The vision maps are completely loaded
 /// after MapBobdataPacket has been loaded.
-MAP_DATA_PACKET(MapPlayersViewPacket)
+class MapPlayersViewPacket {
+public:
+	void read(FileSystem&,
+	          EditorGameBase&,
+	          bool,
+	          MapObjectLoader&,
+	          const TribesLegacyLookupTable& tribes_lookup_table,
+	          const WorldLegacyLookupTable& world_lookup_table);
+	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
+};
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_PLAYERS_VIEW_PACKET_H

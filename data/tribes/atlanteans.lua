@@ -5,10 +5,7 @@
 -- ---------------------
 --
 -- This file contains all the units for a tribe.
-
-dirname = path.dirname(__file__)
-
--- RST
+--
 -- .. function:: new_tribe{table}
 --
 --    This function adds all units to a tribe.
@@ -47,31 +44,38 @@ dirname = path.dirname(__file__)
 --    **ship**: The internal name of the tribe's ship.
 --
 --    **port**: The internal name of the tribe's port building. This unit needs to be defined in the ``buildings`` table too.
+--
+--    **toolbar**: *Optional*. Replace the default toolbar images with these custom images. Example:
+--
+--    .. code-block:: lua
+--
+--       toolbar = {
+--          left_corner = dirname .. "images/atlanteans/toolbar_left_corner.png",
+--          left = dirname .. "images/atlanteans/toolbar_left.png", -- Will be tiled
+--          center = dirname .. "images/atlanteans/toolbar_center.png",
+--          right = dirname .. "images/atlanteans/toolbar_right.png", -- Will be tiled
+--          right_corner = dirname .. "images/atlanteans/toolbar_right_corner.png"
+--       }
+--
+
+image_dirname = path.dirname(__file__) .. "images/atlanteans/"
+
+animations = {}
+add_animation(animations, "frontier", image_dirname, "frontier", {3, 12})
+add_animation(animations, "flag", image_dirname, "flag", {15, 35}, 10)
+
 tribes:new_tribe {
    name = "atlanteans",
-
-   animations = {
-      -- Some blue fires would be fine, but just an idea
-      frontier = {
-         pictures = path.list_files(dirname .. "images/atlanteans/frontier_??.png"),
-         hotspot = { 3, 12 },
-      },
-      flag = {
-         -- Not just a plain color, maybe a cross or some stripes
-         pictures = path.list_files(dirname .. "images/atlanteans/flag_??.png"),
-         hotspot = { 15, 35 },
-         fps = 10
-      }
-   },
+   animations = animations,
 
    -- Image file paths for this tribe's road textures
    roads = {
       busy = {
-         "tribes/images/atlanteans/roadt_busy.png",
+         image_dirname .. "roadt_busy.png",
       },
       normal = {
-         "tribes/images/atlanteans/roadt_normal_00.png",
-         "tribes/images/atlanteans/roadt_normal_01.png",
+         image_dirname .. "roadt_normal_00.png",
+         image_dirname .. "roadt_normal_01.png",
       },
    },
 
@@ -375,9 +379,16 @@ tribes:new_tribe {
    soldier = "atlanteans_soldier",
    ship = "atlanteans_ship",
    port = "atlanteans_port",
-   barracks = "atlanteans_barracks",
    ironore = "iron_ore",
    rawlog = "log",
    refinedlog = "planks",
    granite = "granite",
+
+   toolbar = {
+      left_corner = image_dirname .. "toolbar_left_corner.png",
+      left = image_dirname .. "toolbar_left.png",
+      center = image_dirname .. "toolbar_center.png",
+      right = image_dirname .. "toolbar_right.png",
+      right_corner = image_dirname .. "toolbar_right_corner.png"
+   }
 }

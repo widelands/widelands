@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,11 +43,16 @@ namespace Widelands {
 
 Serial Economy::last_economy_serial_ = 0;
 
+void Economy::initialize_serial() {
+	log("Initializing economy serial\n");
+	last_economy_serial_ = 0;
+}
+
 Economy::Economy(Player& player) : Economy(player, last_economy_serial_++) {
 }
 
 Economy::Economy(Player& player, Serial init_serial)
-   : serial_(init_serial), owner_(player), request_timerid_(0), has_window_(false) {
+   : serial_(init_serial), owner_(player), request_timerid_(0), options_window_(nullptr) {
 	last_economy_serial_ = std::max(last_economy_serial_, serial_ + 1);
 	const TribeDescr& tribe = player.tribe();
 	DescriptionIndex const nr_wares = player.egbase().tribes().nrwares();
@@ -429,9 +434,9 @@ void Economy::remove_request(Request& req) {
 	RequestList::iterator const it = std::find(requests_.begin(), requests_.end(), &req);
 
 	if (it == requests_.end()) {
-		FORMAT_WARNINGS_OFF;
+		FORMAT_WARNINGS_OFF
 		log("WARNING: remove_request(%p) not in list\n", &req);
-		FORMAT_WARNINGS_ON;
+		FORMAT_WARNINGS_ON
 		return;
 	}
 
@@ -530,7 +535,7 @@ void Economy::merge(Economy& e) {
 
 	//  If the options window for e is open, but not the one for this, the user
 	//  should still have an options window after the merge.
-	if (e.has_window() && !has_window()) {
+	if (e.get_options_window() && !get_options_window()) {
 		Notifications::publish(NoteEconomy{e.serial(), serial_, NoteEconomy::Action::kMerged});
 	}
 
@@ -706,6 +711,7 @@ void Economy::process_requests(Game& game, RSPairStruct* supply_pairs) {
 		// alerts, so add info to the sync stream here.
 		{
 			::StreamWrite& ss = game.syncstream();
+			ss.unsigned_8(SyncEntry::kProcessRequests);
 			ss.unsigned_8(req.get_type());
 			ss.unsigned_8(req.get_index());
 			ss.unsigned_32(req.target().serial());
@@ -965,7 +971,7 @@ void Economy::create_requested_workers(Game& game) {
 static bool accept_warehouse_if_policy(Warehouse& wh,
                                        WareWorker type,
                                        DescriptionIndex ware,
-                                       Warehouse::StockPolicy policy) {
+                                       StockPolicy policy) {
 	return wh.get_stock_policy(type, ware) == policy;
 }
 
@@ -999,8 +1005,8 @@ void Economy::handle_active_supplies(Game& game) {
 
 		for (uint32_t nwh = 0; nwh < warehouses_.size(); ++nwh) {
 			Warehouse* wh = warehouses_[nwh];
-			Warehouse::StockPolicy policy = wh->get_stock_policy(type, ware);
-			if (policy == Warehouse::StockPolicy::kPrefer) {
+			StockPolicy policy = wh->get_stock_policy(type, ware);
+			if (policy == StockPolicy::kPrefer) {
 				haveprefer = true;
 
 				// Getting count of worker/ware
@@ -1016,7 +1022,7 @@ void Economy::handle_active_supplies(Game& game) {
 					preferred_wh_stock = current_stock;
 				}
 			}
-			if (policy == Warehouse::StockPolicy::kNormal)
+			if (policy == StockPolicy::kNormal)
 				havenormal = true;
 		}
 		if (!havenormal && !haveprefer && type == wwWARE)
@@ -1028,10 +1034,9 @@ void Economy::handle_active_supplies(Game& game) {
 			wh = preferred_wh;
 		} else {
 			wh = find_closest_warehouse(supply.get_position(game)->base_flag(), type, nullptr, 0,
-			                            (!havenormal) ?
-			                               WarehouseAcceptFn() :
-			                               boost::bind(&accept_warehouse_if_policy, _1, type, ware,
-			                                           Warehouse::StockPolicy::kNormal));
+			                            (!havenormal) ? WarehouseAcceptFn() :
+			                                            boost::bind(&accept_warehouse_if_policy, _1,
+			                                                        type, ware, StockPolicy::kNormal));
 		}
 		if (!wh) {
 			log("Warning: Economy::handle_active_supplies "
@@ -1046,7 +1051,7 @@ void Economy::handle_active_supplies(Game& game) {
 	// to avoid potential future problems caused by the supplies_ changing
 	// under us in some way.
 	::StreamWrite& ss = game.syncstream();
-	ss.unsigned_32(0x02decafa);  // appears as facade02 in sync stream
+	ss.unsigned_8(SyncEntry::kHandleActiveSupplies);
 	ss.unsigned_32(assignments.size());
 
 	for (const auto& temp_assignment : assignments) {

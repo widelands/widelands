@@ -11,8 +11,8 @@ animations = {
       fps = 50
    }
 }
-add_walking_animations (animations, "walk", dirname, "walk", {11, 24}, 15)
-add_walking_animations (animations, "walkload", dirname, "walkload", {10, 26}, 15)
+add_directional_animation(animations, "walk", dirname, "walk", {11, 24}, 15)
+add_directional_animation(animations, "walkload", dirname, "walkload", {10, 26}, 15)
 
 tribes:new_worker_type {
    msgctxt = "frisians_worker",
@@ -37,5 +37,6 @@ tribes:new_worker_type {
       }
    },
 
+   ware_hotspot = {0, 20},
    animations = animations,
 }

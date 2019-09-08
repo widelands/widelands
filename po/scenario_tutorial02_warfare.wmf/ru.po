@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
@@ -8,13 +8,13 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Владимир Куряев <istercul@gmail.com>, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
-# Федор <Lunar-energy@ya.ru>, 2015
+# Fede4ka, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 13:16+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -554,15 +554,15 @@ msgid ""
 "tutorials, but they are not crucial for succeeding in the campaigns."
 msgstr "Теперь вы готовы играть в кампании. Они обучат вас различиям экономки племен. Также можно пройти оставшиеся уроки, но они не имеют решающего значение в кампаниях."
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Новое задание"
-msgstr[1] "Новых задания"
-msgstr[2] "Новых заданий"
-msgstr[3] "Новых заданий"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

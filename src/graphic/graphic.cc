@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,6 @@
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
-#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
@@ -114,7 +113,19 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		    " size %d %d\n"
 		    "**** END GRAPHICS REPORT ****\n",
 		    SDL_GetCurrentVideoDriver(), disp_mode.format, disp_mode.w, disp_mode.h);
-		assert(SDL_BYTESPERPIXEL(disp_mode.format) == 4);
+		const int bytes_per_pixel = SDL_BYTESPERPIXEL(disp_mode.format);
+		if (bytes_per_pixel != 4) {
+			const std::string error_message =
+			   (boost::format(
+			       "SDL should report 4 bytes per pixel, but %d were reported instead.\nPlease check "
+			       "that everything's OK with your graphics driver.") %
+			    bytes_per_pixel)
+			      .str();
+			log("ERROR: %s\n", error_message.c_str());
+			SDL_ShowSimpleMessageBox(
+			   SDL_MESSAGEBOX_ERROR, "Video Error", error_message.c_str(), nullptr);
+			exit(1);
+		}
 	}
 
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;

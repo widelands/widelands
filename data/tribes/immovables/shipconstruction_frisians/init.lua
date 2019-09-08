@@ -5,9 +5,9 @@ tribes:new_immovable_type {
    name = "frisians_shipconstruction",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Ship Under Construction"),
+   icon = dirname .. "menu.png",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
-   representative_image = dirname .. "build_03.png",
    attributes = { "shipconstruction" },
    programs = {
       program = {
@@ -25,7 +25,8 @@ tribes:new_immovable_type {
       idle = {
          pictures = path.list_files (dirname .. "build_??.png"),
          hotspot = { 75, 141 },
-         fps = 1
+         fps = 1,
+         representative_frame = 3
       },
    }
 }

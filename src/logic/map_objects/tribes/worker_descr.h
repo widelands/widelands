@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "ai/ai_hints.h"
 #include "base/macros.h"
 #include "graphic/diranimations.h"
 #include "logic/map_objects/bob.h"
@@ -48,8 +49,8 @@ public:
 	WorkerDescr(const std::string& init_descname,
 	            MapObjectType type,
 	            const LuaTable& table,
-	            const EditorGameBase& egbase);
-	WorkerDescr(const std::string& init_descname, const LuaTable& t, const EditorGameBase& egbase);
+	            const Tribes& tribes);
+	WorkerDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
 	~WorkerDescr() override;
 
 	Bob& create_object() const override;
@@ -86,7 +87,7 @@ public:
 			default_target_quantity_ = 1;
 	}
 
-	const DirAnimations& get_right_walk_anims(bool const carries_ware) const {
+	virtual const DirAnimations& get_right_walk_anims(bool const carries_ware, Worker*) const {
 		return carries_ware ? walkload_anims_ : walk_anims_;
 	}
 	WorkerProgram const* get_program(const std::string&) const;
@@ -114,6 +115,11 @@ public:
 	using Programs = std::map<std::string, std::unique_ptr<WorkerProgram>>;
 	const Programs& programs() const {
 		return programs_;
+	}
+
+	/// AI hints for this worker type. Can be nullptr.
+	const WorkerHints* ai_hints() const {
+		return ai_hints_.get();
 	}
 
 protected:
@@ -144,8 +150,11 @@ private:
 	/// Buildings where this worker can work
 	std::set<DescriptionIndex> employers_;
 
-	const EditorGameBase& egbase_;
+private:
+	// Hints for the AI
+	std::unique_ptr<WorkerHints> ai_hints_;
 
+	const Tribes& tribes_;
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);
 };
 }  // namespace Widelands

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ Radiobutton::~Radiobutton() {
  * Inform the radiogroup about the click; the group is responsible of setting
  * button states.
  */
-void Radiobutton::clicked() {
+void Radiobutton::button_clicked() {
 	group_.set_state(id_);
 	play_click();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,10 +39,10 @@
 #include "io/filewrite.h"
 #include "logic/cmd_delete_message.h"
 #include "logic/cmd_luacoroutine.h"
-#include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/militarysite.h"
@@ -54,6 +54,7 @@
 #include "logic/playercommand.h"
 #include "scripting/lua_table.h"
 #include "sound/note_sound.h"
+#include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
 
 namespace {
@@ -97,12 +98,12 @@ namespace Widelands {
  */
 void find_former_buildings(const Tribes& tribes,
                            const Widelands::DescriptionIndex bi,
-                           Widelands::Building::FormerBuildings* former_buildings) {
+                           Widelands::FormerBuildings* former_buildings) {
 	assert(former_buildings && former_buildings->empty());
-	former_buildings->push_back(bi);
+	former_buildings->push_back(std::make_pair(bi, ""));
 
 	for (;;) {
-		Widelands::DescriptionIndex oldest_idx = former_buildings->front();
+		Widelands::DescriptionIndex oldest_idx = former_buildings->front().first;
 		const Widelands::BuildingDescr* oldest = tribes.get_building_descr(oldest_idx);
 		if (!oldest->is_enhanced()) {
 			break;
@@ -110,7 +111,7 @@ void find_former_buildings(const Tribes& tribes,
 		for (DescriptionIndex i = 0; i < tribes.nrbuildings(); ++i) {
 			const BuildingDescr* building_descr = tribes.get_building_descr(i);
 			if (building_descr->enhancement() == oldest_idx) {
-				former_buildings->insert(former_buildings->begin(), i);
+				former_buildings->insert(former_buildings->begin(), std::make_pair(i, ""));
 				break;
 			}
 		}
@@ -143,7 +144,10 @@ Player::Player(EditorGameBase& the_egbase,
      current_consumed_statistics_(the_egbase.tribes().nrwares()),
      ware_productions_(the_egbase.tribes().nrwares()),
      ware_consumptions_(the_egbase.tribes().nrwares()),
-     ware_stocks_(the_egbase.tribes().nrwares()) {
+     ware_stocks_(the_egbase.tribes().nrwares()),
+     message_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/message")),
+     attack_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/under_attack")),
+     occupied_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/site_occupied")) {
 	set_name(name);
 
 	// Disallow workers that the player's tribe doesn't have.
@@ -250,7 +254,17 @@ void Player::set_team_number(TeamNumber team) {
  * each other.
  */
 bool Player::is_hostile(const Player& other) const {
-	return &other != this && (!team_number_ || team_number_ != other.team_number_);
+	return &other != this && (!team_number_ || team_number_ != other.team_number_) &&
+	       !is_attack_forbidden(other.player_number());
+}
+
+bool Player::is_defeated() const {
+	for (const auto& economy : economies()) {
+		if (!economy.second->warehouses().empty()) {
+			return false;
+		}
+	}
+	return true;
 }
 
 void Player::AiPersistentState::initialize() {
@@ -312,17 +326,21 @@ void Player::update_team_players() {
  * Plays the corresponding sound when a message is received and if sound is
  * enabled.
  */
-void Player::play_message_sound(const Message::Type& msgtype) {
-#define MAYBE_PLAY(type, file)                                                                     \
-	if (msgtype == type) {                                                                          \
-		Notifications::publish(NoteSound(file, 200, PRIO_ALWAYS_PLAY));                              \
-		return;                                                                                      \
-	}
-
-	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
-		MAYBE_PLAY(Message::Type::kEconomySiteOccupied, "military/site_occupied");
-		MAYBE_PLAY(Message::Type::kWarfareUnderAttack, "military/under_attack");
-		Notifications::publish(NoteSound("message", 200, PRIO_ALWAYS_PLAY));
+void Player::play_message_sound(const Message* message) {
+	if (g_sh->is_sound_enabled(SoundType::kMessage)) {
+		FxId fx;
+		switch (message->type()) {
+		case Message::Type::kEconomySiteOccupied:
+			fx = occupied_fx_;
+			break;
+		case Message::Type::kWarfareUnderAttack:
+			fx = attack_fx_;
+			break;
+		default:
+			fx = message_fx_;
+		}
+		Notifications::publish(
+		   NoteSound(SoundType::kMessage, fx, message->position(), kFxPriorityAlwaysPlay));
 	}
 }
 
@@ -339,7 +357,7 @@ MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, 
 	// Sound & popup
 	if (InteractivePlayer* const iplayer = game.get_ipl()) {
 		if (&iplayer->player() == this) {
-			play_message_sound(message->type());
+			play_message_sound(message);
 			if (popup)
 				iplayer->popup_message(id, *message);
 		}
@@ -515,10 +533,9 @@ Road& Player::force_road(const Path& path) {
 	return Road::create(egbase(), start, end, path);
 }
 
-Building& Player::force_building(Coords const location,
-                                 const BuildingDescr::FormerBuildings& former_buildings) {
+Building& Player::force_building(Coords const location, const FormerBuildings& former_buildings) {
 	const Map& map = egbase().map();
-	DescriptionIndex idx = former_buildings.back();
+	DescriptionIndex idx = former_buildings.back().first;
 	const BuildingDescr* descr = egbase().tribes().get_building_descr(idx);
 	terraform_for_building(egbase(), player_number(), location, descr);
 	FCoords flag_loc;
@@ -530,14 +547,14 @@ Building& Player::force_building(Coords const location,
 
 Building& Player::force_csite(Coords const location,
                               DescriptionIndex b_idx,
-                              const BuildingDescr::FormerBuildings& former_buildings) {
+                              const FormerBuildings& former_buildings) {
 	EditorGameBase& eg = egbase();
 	const Map& map = eg.map();
 	const Tribes& tribes = eg.tribes();
 	const PlayerNumber pn = player_number();
 
 	if (!former_buildings.empty()) {
-		DescriptionIndex idx = former_buildings.back();
+		DescriptionIndex idx = former_buildings.back().first;
 		const BuildingDescr* descr = tribes.get_building_descr(idx);
 		terraform_for_building(eg, pn, location, descr);
 	}
@@ -559,9 +576,7 @@ Place a construction site or building, checking that it's legal to do so.
 Building* Player::build(Coords c,
                         DescriptionIndex const idx,
                         bool constructionsite,
-                        BuildingDescr::FormerBuildings& former_buildings) {
-	int32_t buildcaps;
-
+                        FormerBuildings& former_buildings) {
 	// Validate building type
 	if (!tribe().has_building(idx)) {
 		return nullptr;
@@ -576,21 +591,48 @@ Building* Player::build(Coords c,
 	// Validate build position
 	const Map& map = egbase().map();
 	map.normalize_coords(c);
-	buildcaps = get_buildcaps(map.get_fcoords(c));
-
-	if (descr->get_ismine()) {
-		if (!(buildcaps & BUILDCAPS_MINE))
-			return nullptr;
-	} else {
-		if ((buildcaps & BUILDCAPS_SIZEMASK) < descr->get_size() - BaseImmovable::SMALL + 1)
-			return nullptr;
-		if (descr->get_isport() && !(buildcaps & BUILDCAPS_PORT))
-			return nullptr;
+	const FCoords fc = map.get_fcoords(c);
+	const FCoords brn = map.br_n(fc);
+	if (!fc.field->is_interior(player_number()) || !brn.field->is_interior(player_number())) {
+		return nullptr;
+	}
+	if (descr->get_size() >= BaseImmovable::BIG &&
+	    !((map.l_n(fc).field->is_interior(player_number())) &&
+	      (map.tr_n(fc).field->is_interior(player_number())) &&
+	      (map.tl_n(fc).field->is_interior(player_number())))) {
+		return nullptr;
 	}
 
-	if (constructionsite)
+	if (descr->get_built_over_immovable() != INVALID_INDEX &&
+	    !(fc.field->get_immovable() &&
+	      fc.field->get_immovable()->has_attribute(descr->get_built_over_immovable()))) {
+		return nullptr;
+	}
+
+	const NodeCaps buildcaps = descr->get_built_over_immovable() == INVALID_INDEX ?
+	                              get_buildcaps(fc) :
+	                              map.get_max_nodecaps(egbase(), fc);
+	if (descr->get_ismine()) {
+		if (!(buildcaps & BUILDCAPS_MINE)) {
+			return nullptr;
+		}
+	} else {
+		if ((buildcaps & BUILDCAPS_SIZEMASK) < descr->get_size() - BaseImmovable::SMALL + 1) {
+			return nullptr;
+		}
+		if (descr->get_isport() && !(buildcaps & BUILDCAPS_PORT)) {
+			return nullptr;
+		}
+	}
+	if (!(brn.field->get_immovable() &&
+	      brn.field->get_immovable()->descr().type() == MapObjectType::FLAG) &&
+	    !(get_buildcaps(brn) & BUILDCAPS_FLAG)) {
+		return nullptr;
+	}
+
+	if (constructionsite) {
 		return &egbase().warp_constructionsite(c, player_number_, idx, false, former_buildings);
-	else {
+	} else {
 		return &descr->create(egbase(), this, c, false, false, former_buildings);
 	}
 }
@@ -729,7 +771,7 @@ void Player::enhance_or_dismantle(Building* building,
 	if (building->get_owner() == this &&
 	    (index_of_new_building == INVALID_INDEX ||
 	     building->descr().enhancement() == index_of_new_building)) {
-		Building::FormerBuildings former_buildings = building->get_former_buildings();
+		FormerBuildings former_buildings = building->get_former_buildings();
 		const Coords position = building->get_position();
 
 		//  Get workers and soldiers
@@ -743,18 +785,23 @@ void Player::enhance_or_dismantle(Building* building,
 			workers = building->get_workers();
 		}
 
+		const BuildingSettings* settings = nullptr;
 		if (index_of_new_building != INVALID_INDEX) {
+			settings = building->create_building_settings();
 			// For enhancing, register whether the window was open
 			Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kStartWarp));
 		}
+
 		building->remove(egbase());  //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
 		//  pointer.
-		if (index_of_new_building != INVALID_INDEX)
+
+		if (index_of_new_building != INVALID_INDEX) {
 			building = &egbase().warp_constructionsite(
-			   position, player_number_, index_of_new_building, false, former_buildings);
-		else
+			   position, player_number_, index_of_new_building, false, former_buildings, settings);
+		} else {
 			building = &egbase().warp_dismantlesite(position, player_number_, false, former_buildings);
+		}
 
 		// Open the new building window if needed
 		Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kFinishWarp));
@@ -902,9 +949,9 @@ Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32
 	const Map& map = egbase().map();
 	std::vector<BaseImmovable*> flags;
 
-	map.find_reachable_immovables_unique(Area<FCoords>(map.get_fcoords(flag.get_position()), 25),
-	                                     flags, CheckStepDefault(MOVECAPS_WALK),
-	                                     FindFlagOf(FindImmovablePlayerMilitarySite(*this)));
+	map.find_reachable_immovables_unique(
+	   egbase(), Area<FCoords>(map.get_fcoords(flag.get_position()), 25), flags,
+	   CheckStepDefault(MOVECAPS_WALK), FindFlagOf(FindImmovablePlayerMilitarySite(*this)));
 
 	if (flags.empty())
 		return 0;
@@ -932,22 +979,30 @@ Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32
 
 // TODO(unknown): Clean this mess up. The only action we really have right now is
 // to attack, so pretending we have more types is pointless.
-void Player::enemyflagaction(Flag& flag, PlayerNumber const attacker, uint32_t const count) {
-	if (attacker != player_number())
+void Player::enemyflagaction(Flag& flag,
+                             PlayerNumber const attacker,
+                             const std::vector<Widelands::Soldier*>& soldiers) {
+	if (attacker != player_number()) {
 		log("Player (%d) is not the sender of an attack (%d)\n", attacker, player_number());
-	else if (count == 0)
-		log("enemyflagaction: count is 0\n");
-	else if (is_hostile(flag.owner())) {
+	} else if (soldiers.empty()) {
+		log("enemyflagaction: no soldiers given\n");
+	} else if (is_hostile(flag.owner())) {
 		if (Building* const building = flag.get_building()) {
 			if (const AttackTarget* attack_target = building->attack_target()) {
 				if (attack_target->can_be_attacked()) {
-					std::vector<Soldier*> attackers;
-					find_attack_soldiers(flag, &attackers, count);
-					assert(attackers.size() <= count);
-
-					for (Soldier* temp_attacker : attackers) {
-						upcast(MilitarySite, ms, temp_attacker->get_location(egbase()));
-						ms->send_attacker(*temp_attacker, *building);
+					for (Soldier* temp_attacker : soldiers) {
+						assert(temp_attacker);
+						assert(temp_attacker->get_owner() == this);
+						if (upcast(MilitarySite, ms, temp_attacker->get_location(egbase()))) {
+							assert(ms->get_owner() == this);
+							ms->send_attacker(*temp_attacker, *building);
+						} else {
+							// The soldier may not be in a militarysite anymore if he was kicked out
+							// in the short delay between sending and executing a playercommand
+							log("Player(%u)::enemyflagaction: Not sending soldier %u because he left the "
+							    "building\n",
+							    player_number(), temp_attacker->serial());
+						}
 					}
 				}
 			}
@@ -1317,6 +1372,21 @@ const std::string& Player::get_ai() const {
 	return ai_;
 }
 
+bool Player::is_attack_forbidden(PlayerNumber who) const {
+	return forbid_attack_.find(who) != forbid_attack_.end();
+}
+
+void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
+	const auto it = forbid_attack_.find(who);
+	if (forbid ^ (it == forbid_attack_.end())) {
+		return;
+	} else if (forbid) {
+		forbid_attack_.emplace(who);
+	} else {
+		forbid_attack_.erase(it);
+	}
+}
+
 /**
  * Pick random name from remaining names (if any)
  */
@@ -1356,7 +1426,9 @@ void Player::read_remaining_shipnames(FileRead& fr) {
  *
  * \param fr source stream
  */
-void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
+void Player::read_statistics(FileRead& fr,
+                             const uint16_t packet_version,
+                             const TribesLegacyLookupTable& lookup_table) {
 	uint16_t nr_wares = fr.unsigned_16();
 	size_t nr_entries = fr.unsigned_16();
 
@@ -1386,7 +1458,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 		ware_productions_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = fr.c_string();
+		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u statistics: unknown ware name %s", player_number(), name.c_str());
@@ -1411,7 +1483,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 		ware_consumptions_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = fr.c_string();
+		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u consumption statistics: unknown ware name %s", player_number(),
@@ -1438,7 +1510,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 		ware_stocks_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = fr.c_string();
+		const std::string name = lookup_table.lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u stock statistics: unknown ware name %s", player_number(), name.c_str());

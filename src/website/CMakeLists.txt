@@ -1,3 +1,5 @@
+add_subdirectory(json)
+
 wl_library(website_common
   SRCS
     website_common.cc
@@ -8,7 +10,6 @@ wl_library(website_common
     base_i18n
     graphic
     io_filesystem
-    sound
 )
 
 
@@ -23,7 +24,9 @@ wl_binary(wl_map_info
     graphic_surface
     io_fileread
     io_filesystem
+    json
     logic
+    logic_map
     map_io_map_loader
     website_common
 )
@@ -38,7 +41,9 @@ wl_binary(wl_map_object_info
     graphic
     io_fileread
     io_filesystem
+    json
     logic
+    logic_map_objects
     logic_tribe_basic_info
     website_common
 )

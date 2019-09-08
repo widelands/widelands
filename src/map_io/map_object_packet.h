@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2018 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ struct MapObjectPacket {
 	          EditorGameBase&,
 	          MapObjectLoader&,
 	          const WorldLegacyLookupTable& world_lookup_table,
-	          const TribesLegacyLookupTable& tribe_lookup_table);
+	          const TribesLegacyLookupTable& tribes_lookup_table);
 
 	void load_finish();
 

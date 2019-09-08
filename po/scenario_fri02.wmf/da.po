@@ -1,13 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Joe Hansen <joedalton2@yahoo.dk>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2018-03-24 18:16+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2019\n"
 "Language-Team: Danish (https://www.transifex.com/widelands/teams/35159/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -72,7 +76,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:54
 msgid "Build an Aqua Farm to Start Producing Fish"
-msgstr ""
+msgstr "Byg en vandfarm for at starte produktionen af fisk"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:55
 msgid ""
@@ -204,7 +208,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:103
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Besejr barbarerne."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:104
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
@@ -448,7 +452,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:225
 msgid "We need fish"
-msgstr ""
+msgstr "Vi skal bruge fisk"
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:227
@@ -499,8 +503,8 @@ msgstr ""
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:246
 msgid ""
-"You are right – we should build more berry farms, collector’s houses and "
-"taverns as well as a drinking hall, and advanced bakeries and breweries."
+"You are right – we should build more berry farms, fruit collector’s houses "
+"and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
@@ -522,7 +526,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:305
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:315
 msgid "We Are Not Alone"
-msgstr ""
+msgstr "Vi er ikke alene"
 
 #. TRANSLATORS: "Greetings, strangers!". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
@@ -554,7 +558,7 @@ msgstr ""
 #. TRANSLATORS: Reebaud – Supply Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:263
 msgid "…does anyone understand what he is saying?"
-msgstr ""
+msgstr "... er der nogen der forstå hvad han siger?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3. This is a foreign language to
 #. Murilius, so he sounds very formal.
@@ -570,13 +574,13 @@ msgid ""
 "lands!"
 msgstr ""
 
-#. TRANSLATORS: Reebaud – Supply Murilius 4
+#. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
+#. frisian greeting, nothing more.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:278
 msgid ""
-"Greetings, representative of the Empire! I am Reebaud, the chieftain of this"
-" tribe. All we want is to settle down here, build our home and live our "
-"lives in peace. We do not seek trouble, but we aren’t afraid to fight, "
-"either."
+"Peace, representative of the Empire! I am Reebaud, the chieftain of this "
+"tribe. All we want is to settle down here, build our home and live our lives"
+" in peace. We do not seek trouble, but we aren’t afraid to fight, either."
 msgstr ""
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
@@ -846,13 +850,15 @@ msgstr ""
 msgid "Congratulations"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

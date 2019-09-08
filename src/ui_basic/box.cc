@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2018 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -423,6 +423,6 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 
 	case Item::ItemSpace:
 		break;  //  no need to do anything
-	};
+	}
 }
 }  // namespace UI

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -130,10 +130,11 @@ protected:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
-	void
-	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
-
 private:
+	/** The road is drawn by the terrain renderer via marked fields. */
+	void draw(uint32_t, TextToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
+	}
+
 	void set_path(EditorGameBase&, const Path&);
 
 	void mark_map(EditorGameBase&);

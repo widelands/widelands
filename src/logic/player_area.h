@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2018 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #ifndef WL_LOGIC_PLAYER_AREA_H
 #define WL_LOGIC_PLAYER_AREA_H
 
-#include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {

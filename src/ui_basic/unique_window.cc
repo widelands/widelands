@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,7 +58,13 @@ void UniqueWindow::Registry::destroy() {
  */
 void UniqueWindow::Registry::toggle() {
 	if (window) {
-		window->die();
+		// There is already a window. If it is minimal, restore it.
+		if (window->is_minimal()) {
+			window->restore();
+			opened();
+		} else {
+			window->die();
+		}
 	} else {
 		open_window();
 	}

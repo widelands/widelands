@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -90,6 +90,9 @@ struct NoteEconomy {
 class Economy {
 public:
 	friend class EconomyDataPacket;
+
+	// Initialize the global serial on game start
+	static void initialize_serial();
 
 	/// Configurable target quantity for the supply of a ware type in the
 	/// economy.
@@ -193,11 +196,11 @@ public:
 		return worker_target_quantities_[i];
 	}
 
-	bool has_window() const {
-		return has_window_;
+	void* get_options_window() const {
+		return options_window_;
 	}
-	void set_has_window(bool yes) {
-		has_window_ = yes;
+	void set_options_window(void* window) {
+		options_window_ = window;
 	}
 
 	const WareList& get_wares() const {
@@ -286,7 +289,11 @@ private:
 	uint32_t request_timerid_;
 
 	static std::unique_ptr<Soldier> soldier_prototype_;
-	bool has_window_;
+
+	// This is always an EconomyOptionsWindow* (or nullptr) but I don't want a wui dependency here.
+	// We cannot use UniqueWindow to make sure an economy never has two windows because the serial
+	// may change when merging while the window is open, so we have to keep track of it here.
+	void* options_window_;
 
 	// 'list' of unique providers
 	std::map<UniqueDistance, Supply*> available_supplies_;

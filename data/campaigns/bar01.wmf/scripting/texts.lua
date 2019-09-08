@@ -43,16 +43,16 @@ obj_build_mines = {
    body = objective_text(_"Build coal and iron mines",
       li(_"Build a coal mine and an iron mine.") ..
       li_arrow(_"To do so, place a flag up on the mountain’s flank to the east (on mountain terrain though, not mountain meadow). When you click on the new flag, you can send geologists there. Because the flag is on a mountain, the geologists will search for ores; otherwise, they would search for water. Then build a mine for both kinds of resources that they will find, choosing the appropriate mine to be built:") ..
-      li_image(wl.Game():get_immovable_description("barbarians_resi_coal_1").representative_image, _"a bit of coal") ..
-      li_image(wl.Game():get_immovable_description("barbarians_resi_coal_2").representative_image, _"a lot of coal") ..
-      li_image(wl.Game():get_immovable_description("barbarians_resi_iron_1").representative_image, _"a bit of iron") ..
-      li_image(wl.Game():get_immovable_description("barbarians_resi_iron_2").representative_image, _"a lot of iron") ..
-      li_image(wl.Game():get_immovable_description("barbarians_resi_gold_1").representative_image, _"a bit of gold") ..
-      li_image(wl.Game():get_immovable_description("barbarians_resi_gold_2").representative_image, _"a lot of gold") ..
-      li_image(wl.Game():get_immovable_description("barbarians_resi_stones_1").representative_image, _"a bit of granite") ..
-      li_image(wl.Game():get_immovable_description("barbarians_resi_stones_2").representative_image, _"a lot of granite") ..
-      li_image(wl.Game():get_immovable_description("barbarians_resi_water").representative_image, _"water") ..
-      li_image(wl.Game():get_immovable_description("barbarians_resi_none").representative_image, _"nothing was found here") ..
+      li_object("barbarians_resi_coal_1", _"a bit of coal") ..
+      li_object("barbarians_resi_coal_2", _"a lot of coal") ..
+      li_object("barbarians_resi_iron_1", _"a bit of iron") ..
+      li_object("barbarians_resi_iron_2", _"a lot of iron") ..
+      li_object("barbarians_resi_gold_1", _"a bit of gold") ..
+      li_object("barbarians_resi_gold_2", _"a lot of gold") ..
+      li_object("barbarians_resi_stones_1", _"a bit of granite") ..
+      li_object("barbarians_resi_stones_2", _"a lot of granite") ..
+      li_object("barbarians_resi_water", _"water") ..
+      li_object("barbarians_resi_none", _"nothing was found here") ..
       p(_[[Mines can only be built on mountain terrain. Suitable places for mines are displayed as orange mine symbols.]]))
 }
 
@@ -120,7 +120,7 @@ obj_better_material_3 = {
    title = _"Build a reed yard",
    number = 1,
    body = objective_text(_"Build a reed yard",
-      p(_([[The third material necessary for improved buildings is thatch reed, used to cover roofs. Thatch reed is planted by a gardener around his building, the reed yard.]])) ..
+      p(_([[The third material necessary for improved buildings is reed, used to cover roofs. Reed fields are planted by a gardener around his building, the reed yard.]])) ..
       li(_"Build a reed yard"))
 }
 

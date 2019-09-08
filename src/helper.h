@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,17 +41,4 @@ char* next_word(char*& p, bool& reached_end, char terminator = ' ');
 /// lines.
 std::vector<std::string> split_string(const std::string&, char const* separators);
 
-// A functional container filtering (by copying the values). Returns a new
-// ContainerType that  contains all values where 'test' returned true.
-template <typename ContainerType, class UnaryPredicate>
-ContainerType filter(const ContainerType& container, UnaryPredicate test) {
-	ContainerType filtered;
-	for (const auto& entry : container) {
-		if (!test(entry)) {
-			continue;
-		}
-		filtered.insert(entry);
-	}
-	return filtered;
-}
 #endif  // end of include guard: WL_HELPER_H

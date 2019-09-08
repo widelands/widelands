@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2018 by the Widelands Development Team
+ * Copyright (C) 2017-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,8 @@
 #include "base/time_string.h"
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/profile.h"
 #include "logic/filesystem_constants.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 

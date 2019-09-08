@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -359,7 +359,7 @@ void FieldDebugWindow::think() {
 
 	// Bobs information
 	std::vector<Widelands::Bob*> bobs;
-	map_.find_bobs(Widelands::Area<Widelands::FCoords>(coords_, 0), &bobs);
+	map_.find_bobs(egbase, Widelands::Area<Widelands::FCoords>(coords_, 0), &bobs);
 
 	// Do not clear the list. Instead parse all bobs and sync lists
 	for (uint32_t idx = 0; idx < ui_bobs_.size(); idx++) {

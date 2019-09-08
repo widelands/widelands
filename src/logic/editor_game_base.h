@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,6 +56,7 @@ class Tribes;
 class TribeDescr;
 struct Flag;
 struct AttackController;
+struct BuildingSettings;
 
 struct NoteFieldPossession {
 	CAN_BE_SENT_AS_NOTE(NoteId::FieldPossession)
@@ -120,22 +121,20 @@ public:
 	void set_road(const FCoords&, uint8_t direction, uint8_t roadtype);
 
 	// warping stuff. instantly creating map_objects
-	Building&
-	warp_building(const Coords&,
-	              PlayerNumber,
-	              DescriptionIndex,
-	              Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	Building&
-	warp_constructionsite(const Coords&,
-	                      PlayerNumber,
-	                      DescriptionIndex,
-	                      bool loading = false,
-	                      Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	Building&
-	warp_dismantlesite(const Coords&,
-	                   PlayerNumber,
-	                   bool loading = false,
-	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
+	Building& warp_building(const Coords&,
+	                        PlayerNumber,
+	                        DescriptionIndex,
+	                        FormerBuildings former_buildings = FormerBuildings());
+	Building& warp_constructionsite(const Coords&,
+	                                PlayerNumber,
+	                                DescriptionIndex,
+	                                bool loading = false,
+	                                FormerBuildings former_buildings = FormerBuildings(),
+	                                const BuildingSettings* settings = nullptr);
+	Building& warp_dismantlesite(const Coords&,
+	                             PlayerNumber,
+	                             bool loading = false,
+	                             FormerBuildings former_buildings = FormerBuildings());
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
 	Immovable&

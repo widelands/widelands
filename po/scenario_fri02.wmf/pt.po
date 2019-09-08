@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# zecas <jjorge@free.fr>, 2018
+# zecas <jjorge@free.fr>, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-12 07:46+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: zecas <jjorge@free.fr>, 2018\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2018-03-24 18:16+0000\n"
+"Last-Translator: zecas <jjorge@free.fr>, 2019\n"
 "Language-Team: Portuguese (https://www.transifex.com/widelands/teams/35159/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -100,51 +101,51 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:64
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × Troncos"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:65
 msgid "40 × Granite"
-msgstr ""
+msgstr "40 × Granito"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:66
 msgid "30 × Fish"
-msgstr ""
+msgstr "30 × Peixe"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:67
 msgid "30 × Beer"
-msgstr ""
+msgstr "30 × Cerveja"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:68
 msgid "150 × Water"
-msgstr ""
+msgstr "150 × Água"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:69
 msgid "40 × Ration"
-msgstr ""
+msgstr "40 × Rações"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:70
 msgid "10 × Meal"
-msgstr ""
+msgstr "10 × Refeição"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:71
 msgid "30 × Coal"
-msgstr ""
+msgstr "30 × Carvão"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "40 × Iron Ore"
-msgstr ""
+msgstr "40 × Minério de Ferro"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "20 × Iron"
-msgstr ""
+msgstr "20 × Ferro"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:74
 msgid "30 × Gold Ore"
-msgstr ""
+msgstr "30 × Minério de Ouro"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:75
 msgid "10 × Gold"
-msgstr ""
+msgstr "10 × Ouro"
 
 #. TRANSLATORS: Continues from "Decide whether you want to work with Murilius
 #. against the Barbarians. If so, fill his warehouse with these wares: [list
@@ -158,7 +159,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Spy on Murilius"
-msgstr ""
+msgstr "Espia o Murilius"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:84
 msgid "Send a Scout to Spy on the Empire"
@@ -502,8 +503,8 @@ msgstr ""
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:246
 msgid ""
-"You are right – we should build more berry farms, collector’s houses and "
-"taverns as well as a drinking hall, and advanced bakeries and breweries."
+"You are right – we should build more berry farms, fruit collector’s houses "
+"and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
@@ -573,13 +574,13 @@ msgid ""
 "lands!"
 msgstr ""
 
-#. TRANSLATORS: Reebaud – Supply Murilius 4
+#. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
+#. frisian greeting, nothing more.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:278
 msgid ""
-"Greetings, representative of the Empire! I am Reebaud, the chieftain of this"
-" tribe. All we want is to settle down here, build our home and live our "
-"lives in peace. We do not seek trouble, but we aren’t afraid to fight, "
-"either."
+"Peace, representative of the Empire! I am Reebaud, the chieftain of this "
+"tribe. All we want is to settle down here, build our home and live our lives"
+" in peace. We do not seek trouble, but we aren’t afraid to fight, either."
 msgstr ""
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
@@ -849,13 +850,15 @@ msgstr ""
 msgid "Congratulations"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

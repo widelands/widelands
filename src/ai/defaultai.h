@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2018 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -148,6 +148,7 @@ private:
 	static constexpr int32_t kSpotsTooLittle = 15;
 	static constexpr int kManagementUpdateInterval = 10 * 60 * 1000;
 	static constexpr int kStatUpdateInterval = 60 * 1000;
+	static constexpr int kFlagWarehouseUpdInterval = 15 * 1000;
 
 	// For vision and scheduling
 	static constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
@@ -196,13 +197,17 @@ private:
 	// if needed it calls create_shortcut_road() with a flag from which
 	// new road should be considered (or is needed)
 	bool improve_roads(uint32_t);
-	bool create_shortcut_road(const Widelands::Flag&,
-	                          uint16_t maxcheckradius,
-	                          int16_t minReduction,
-	                          const uint32_t gametime);
+	bool
+	create_shortcut_road(const Widelands::Flag&, uint16_t maxcheckradius, const uint32_t gametime);
 	// trying to identify roads that might be removed
 	bool dispensable_road_test(const Widelands::Road&);
 	bool dismantle_dead_ends();
+	void collect_nearflags(std::map<uint32_t, Widelands::NearFlag>&,
+	                       const Widelands::Flag&,
+	                       const uint16_t);
+	// calculating distances from local warehouse to flags
+	void check_flag_distances(uint32_t);
+	Widelands::FlagWarehouseDistances flag_warehouse_distance;
 
 	bool check_economies();
 	bool check_productionsites(uint32_t);
@@ -212,7 +217,6 @@ private:
 
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(Widelands::BuildingObserver&, uint32_t, WareWorker = WareWorker::kWare);
-	uint32_t calculate_stocklevel(Widelands::BuildingObserver&, WareWorker = WareWorker::kWare);
 	uint32_t calculate_stocklevel(Widelands::DescriptionIndex,
 	                              WareWorker = WareWorker::kWare);  // count all direct outputs_
 

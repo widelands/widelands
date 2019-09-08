@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2018
@@ -7,13 +7,14 @@
 # ks k, 2017
 # ks k, 2017-2019
 # Moon Yeonki <backnii@gmail.com>, 2017
+# TaeMin An, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-12-28 13:48+0000\n"
-"PO-Revision-Date: 2019-01-05 08:00+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2019-04-22 05:17+0000\n"
+"PO-Revision-Date: 2019-05-05 12:28+0000\n"
+"Last-Translator: TaeMin An\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,56 +38,57 @@ msgstr "허가서"
 msgid "Licensing information for Widelands"
 msgstr "Widelands 허가서 정보"
 
-#: ../../data/txts/LICENSE.lua:9
-msgid "Copyright 2002 - 2018 by the Widelands Development Team."
-msgstr "저작권 2002 - 2018 Widelands 개발팀."
+#. TRANSLATORS: Placeholder is copyright end year
+#: ../../data/txts/LICENSE.lua:10
+msgid "Copyright 2002 - %1% by the Widelands Development Team."
+msgstr ""
 
-#: ../../data/txts/LICENSE.lua:11
+#: ../../data/txts/LICENSE.lua:12
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "이 게임은 무료 및 오픈 소스 (FOSS)이며, GNU 일반 공중 사용 허가서 (GPL) V2.0의 허가서 아래에 있습니다."
 
-#: ../../data/txts/LICENSE.lua:13
+#: ../../data/txts/LICENSE.lua:14
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "자유-오픈소스 소프트웨어 및 GPL에 대한 자세한 내용은 다음 웹 페이지를 참조하십시오:%s"
 
-#: ../../data/txts/LICENSE.lua:15
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "이 허가서의 전체 내용과 그 철학 및 법적 의미에 대한 자세한 정보를 찾을 수 있습니다."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "또한 우리는 GPL을 Widelands에 텍스트 문서로 포함하고 있습니다."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "리눅스에서는 소스 또는 독립 실행형 바이너리 패키지의 루트 또는 설치 디렉토리 (예 : '%1%')에서 COPYING이라는 파일을 찾을 수 있습니다."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "윈도우즈에서는 설치 폴더에 COPYING.txt라는 파일을 찾을 수 있으며 와이드랜드 시작 메뉴 항목은 이 파일에 대한 링크를 제공합니다."
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:21
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "맥오에스에서는 웹 사이트에서 다운로드 한 압축파일에서 COPYING이라는 파일을 찾을 수 있습니다."
 
-#: ../../data/txts/LICENSE.lua:22
+#: ../../data/txts/LICENSE.lua:23
 msgid "This game comes as-is and without any warranty."
 msgstr "이 게임은 어떠한 보증도 제공하지 않습니다."
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
@@ -241,6 +243,10 @@ msgid "Fedora Linux"
 msgstr "페도라 리눅스"
 
 #: ../../data/txts/developers.lua:3
+msgid "Flatpak"
+msgstr ""
+
+#: ../../data/txts/developers.lua:3
 msgid "Former Elders"
 msgstr "전직 장로"
 
@@ -315,6 +321,14 @@ msgstr "윈도우즈"
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
 msgstr "제타OS"
+
+#: ../../data/txts/developers.lua:3
+msgid "and many, many more (thank you for everything you've done)"
+msgstr ""
+
+#: ../../data/txts/developers.lua:3
+msgid "vacant"
+msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -505,7 +519,7 @@ msgstr "낚시꾼들을 잘 감시하고 어장 집을 지으십시오. 물고�
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr "항상 통나무가 고갈되지 않도록 숲지기와 나무꾼의 집을 지으십시오."
+msgstr "항상 통나무가 고갈되지 않도록 숲지기와 벌목꾼의 집을 지으십시오."
 
 #: ../../data/txts/tips/atlanteans.lua:12
 msgid ""
@@ -637,7 +651,7 @@ msgstr "우물이나 광산을 짓기 전에 지질학자를 보내 사이트를
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr "초소, 큰 요새, 작은 요새 등 다양한 군사 건물을 건설하여 영토를 확장 할 수 있습니다."
+msgstr "초소, 큰 요새, 사각 요새 등 다양한 군사 건물을 건설하여 영토를 확장 할 수 있습니다."
 
 #: ../../data/txts/tips/general_game.lua:18
 msgid "Miners will work only if supplied with food."

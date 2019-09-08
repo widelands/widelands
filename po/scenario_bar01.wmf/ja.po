@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-11 05:42+0000\n"
-"PO-Revision-Date: 2018-05-12 08:31+0000\n"
-"Last-Translator: tamanegi\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -289,10 +289,10 @@ msgstr "カヤ園を建設しましょう"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
-"The third material necessary for improved buildings is thatch reed, used to "
-"cover roofs. Thatch reed is planted by a gardener around his building, the "
-"reed yard."
-msgstr "良い建物に必要な物資の３つ目はカヤです。屋根を覆うために使われます。カヤはカヤ園のまわりにカヤ農夫が植えます。"
+"The third material necessary for improved buildings is reed, used to cover "
+"roofs. Reed fields are planted by a gardener around his building, the reed "
+"yard."
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
@@ -1028,12 +1028,15 @@ msgid ""
 "Therefore, they have decided to join us, hoping that we can help each other."
 msgstr "今、彼らはアル-サンラン周辺に広がる戦争のため、今の暮らしができなくなるかもしれない、という不安を抱いています。そのため、彼らは我々の仲間に加わりました。互いに手を取り合うことができると信じて。"
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "『%s』"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "新たな目的"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

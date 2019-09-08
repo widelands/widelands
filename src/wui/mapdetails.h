@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #ifndef WL_WUI_MAPDETAILS_H
 #define WL_WUI_MAPDETAILS_H
 
+#include "graphic/text_layout.h"
 #include "ui_basic/box.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/panel.h"
@@ -35,6 +36,9 @@ public:
 
 	void clear();
 	void update(const MapData& mapdata, bool localize_mapname);
+	std::string name() {
+		return name_;
+	}
 
 private:
 	void layout() override;
@@ -42,6 +46,7 @@ private:
 	const int padding_;
 
 	UI::Box main_box_;
+	std::string name_;
 	UI::MultilineTextarea name_label_;
 	UI::MultilineTextarea descr_;
 	UI::SuggestedTeamsBox* suggested_teams_box_;

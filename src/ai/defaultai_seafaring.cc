@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2018 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,7 +74,7 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	immovables.clear();
 	immovables.reserve(50);
 	// Search in a radius of range
-	map.find_immovables(Area<FCoords>(map.get_fcoords(candidate_spot), 10), &immovables);
+	map.find_immovables(game(), Area<FCoords>(map.get_fcoords(candidate_spot), 10), &immovables);
 
 	int32_t const rocks_attr = MapObjectDescr::get_attribute_id("rocks");
 	uint16_t rocks = 0;
@@ -346,7 +346,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 				if (site->bo->is(BuildingAttribute::kShipyard)) {
 					for (uint32_t k = 0; k < site->bo->inputs.size(); ++k) {
 						game().send_player_set_ware_priority(
-						   *site->site, wwWARE, site->bo->inputs.at(k), HIGH_PRIORITY);
+						   *site->site, wwWARE, site->bo->inputs.at(k), kPriorityHigh);
 					}
 				}
 			}

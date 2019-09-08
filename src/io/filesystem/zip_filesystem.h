@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,10 +38,10 @@ public:
 
 	bool is_writable() const override;
 
-	std::set<std::string> list_directory(const std::string& path) override;
+	FilenameSet list_directory(const std::string& path) const override;
 
 	bool is_directory(const std::string& path) override;
-	bool file_exists(const std::string& path) override;
+	bool file_exists(const std::string& path) const override;
 
 	void* load(const std::string& fname, size_t& length) override;
 

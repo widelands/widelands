@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2018 by the Widelands Development Team
+ * Copyright (C) 2012-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,11 +85,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	               "                      Port number of the metaserver for internet gaming.")
 	          << endl
 	          << endl
-
-	          << _("Sound options:") << endl
 	          << _(" --nosound            Starts the game with sound disabled.") << endl
-	          << _(" --disable_fx         Disable sound effects.") << endl
-	          << _(" --disable_music      Disable music.") << endl
 	          << endl
 	          << _(" --nozip              Do not save files as binary zip archives.") << endl
 	          << endl

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2018 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 22,
+	NETWORK_PROTOCOL_VERSION = 23,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -427,6 +427,14 @@ enum {
 	 * \li string:    Third attached string
 	 */
 	NETCMD_SYSTEM_MESSAGE_CODE = 32,
+
+	/**
+	 * Sent by the host to toggle peaceful mode.
+	 *
+	 * Attached data is:
+	 * \li uint8_t: 1 if peaceful mode is enabled, 0 otherwise
+	 */
+	NETCMD_PEACEFUL_MODE = 33,
 
 	/**
 	 * Sent by the metaserver to a freshly opened game to check connectability

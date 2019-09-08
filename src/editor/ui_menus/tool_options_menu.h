@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,8 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	                      UI::UniqueWindow::Registry&,
 	                      const uint32_t width,
 	                      const uint32_t height,
-	                      char const* title);
+	                      const std::string& title,
+	                      EditorTool& tool);
 
 	/**
 	 * Selects the correct tool from the parent.
@@ -53,7 +54,8 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	}
 
 private:
-	EditorTool* current_pointer_;
+	EditorInteractive& parent_;
+	EditorTool& current_tool_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_OPTIONS_MENU_H

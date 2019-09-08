@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent, const ImmovableDescr&
 
 EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
    EditorInteractive& parent, EditorPlaceImmovableTool& tool, UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Immovables")) {
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Immovables"), tool) {
 	const Widelands::World& world = parent.egbase().world();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>(

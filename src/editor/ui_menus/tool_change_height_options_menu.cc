@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
    EditorInteractive& parent,
    EditorIncreaseHeightTool& increase_tool,
    UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 350, 100, _("Height Tools Options")),
+   : EditorToolOptionsMenu(parent, registry, 350, 100, _("Height Tools Options"), increase_tool),
      increase_tool_(increase_tool),
      box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
      change_by_(&box_,

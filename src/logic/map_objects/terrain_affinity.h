@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include <string>
 
 #include "base/macros.h"
-#include "logic/description_maintainer.h"
+#include "logic/map_objects/description_maintainer.h"
 
 class LuaTable;
 

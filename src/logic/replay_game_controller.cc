@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2018 by the Widelands Development Team
+ * Copyright (C) 2015-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,7 @@ void ReplayGameController::think() {
 	}
 }
 
-void ReplayGameController::send_player_command(Widelands::PlayerCommand&) {
+void ReplayGameController::send_player_command(Widelands::PlayerCommand*) {
 	throw wexception("Trying to send a player command during replay");
 }
 

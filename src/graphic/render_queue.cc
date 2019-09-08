@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,8 +28,10 @@
 #include "graphic/gl/dither_program.h"
 #include "graphic/gl/draw_line_program.h"
 #include "graphic/gl/fill_rect_program.h"
+#include "graphic/gl/grid_program.h"
 #include "graphic/gl/road_program.h"
 #include "graphic/gl/terrain_program.h"
+#include "graphic/gl/workarea_program.h"
 
 namespace {
 
@@ -142,6 +144,8 @@ RenderQueue::RenderQueue()
    : next_z_(1),
      terrain_program_(new TerrainProgram()),
      dither_program_(new DitherProgram()),
+     workarea_program_(new WorkareaProgram()),
+     grid_program_(new GridProgram()),
      road_program_(new RoadProgram()) {
 }
 
@@ -164,6 +168,8 @@ void RenderQueue::enqueue(const Item& given_item) {
 	case Program::kRect:
 	case Program::kTerrainBase:
 	case Program::kTerrainDither:
+	case Program::kTerrainWorkarea:
+	case Program::kTerrainGrid:
 	case Program::kTerrainRoad:
 		/* all fallthroughs intended */
 		break;
@@ -248,6 +254,24 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			dither_program_->draw(item.terrain_arguments.gametime, *item.terrain_arguments.terrains,
 			                      *item.terrain_arguments.fields_to_draw,
 			                      item.z_value + kOpenGlZDelta);
+			++i;
+		} break;
+
+		case Program::kTerrainWorkarea: {
+			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
+			workarea_program_->draw(
+			   item.terrain_arguments.terrains->get(0).get_texture(0).blit_data().texture_id,
+			   item.terrain_arguments.workareas, *item.terrain_arguments.fields_to_draw, item.z_value,
+			   Vector2f(item.terrain_arguments.renderbuffer_width,
+			            item.terrain_arguments.renderbuffer_height));
+			++i;
+		} break;
+
+		case Program::kTerrainGrid: {
+			ScopedScissor scoped_scissor(item.terrain_arguments.destination_rect);
+			grid_program_->draw(
+			   item.terrain_arguments.terrains->get(0).get_texture(0).blit_data().texture_id,
+			   *item.terrain_arguments.fields_to_draw, item.z_value);
 			++i;
 		} break;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,15 +31,16 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
-#include "editor/ui_menus/main_menu_map_options.h"
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
 #include "logic/filesystem_constants.h"
+#include "logic/generic_save_handler.h"
 #include "map_io/map_saver.h"
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/messagebox.h"
+#include "wlapplication_options.h"
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"
 
@@ -48,9 +49,11 @@ inline EditorInteractive& MainMenuSaveMap::eia() {
 }
 
 // TODO(GunChleoc): Arabic: Make directory dialog: buttons need more height for Arabic.
-MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
-   : MainMenuLoadOrSaveMap(parent, 3, "save_map_menu", _("Save Map"), "maps/My_Maps"),
-
+MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
+                                 UI::UniqueWindow::Registry& registry,
+                                 Registry& map_options_registry)
+   : MainMenuLoadOrSaveMap(parent, registry, 3, "save_map_menu", _("Save Map"), "maps/My_Maps"),
+     map_options_registry_(map_options_registry),
      make_directory_(this,
                      "make_directory",
                      right_column_x_,
@@ -82,7 +85,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 
 	editbox_ = new UI::EditBox(
 	   this, editbox_label_.get_x() + editbox_label_.get_w() + padding_, editbox_label_.get_y(),
-	   tablew_ - editbox_label_.get_w() - padding_ + 1, buth_, 2, UI::PanelStyle::kWui);
+	   tablew_ - editbox_label_.get_w() - padding_ + 1, UI::PanelStyle::kWui);
 	editbox_->set_text(parent.egbase().map().get_name());
 
 	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
@@ -113,13 +116,18 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 	MapData mapdata(map, "", maptype, MapData::DisplayType::kMapnames);
 
 	map_details_.update(mapdata, false);
+
+	subscriber_ = Notifications::subscribe<NoteMapOptions>(
+	   [this](const NoteMapOptions&) { update_map_options(); });
 }
 
 /**
  * Called when the ok button was pressed or a file in list was double clicked.
  */
 void MainMenuSaveMap::clicked_ok() {
-	assert(ok_.enabled());
+	if (!ok_.enabled()) {
+		return;
+	}
 	std::string filename = editbox_->text();
 	std::string complete_filename;
 
@@ -141,7 +149,7 @@ void MainMenuSaveMap::clicked_ok() {
 			                 filename.substr(0, filename_size - 4) :
 			                 filename);
 		}
-		if (save_map(filename, !g_options.pull_section("global").get_bool("nozip", false))) {
+		if (save_map(filename, !get_config_bool("nozip", false))) {
 			die();
 		} else {
 			table_.focus();
@@ -193,24 +201,29 @@ void MainMenuSaveMap::clicked_make_directory() {
 }
 
 void MainMenuSaveMap::clicked_edit_options() {
-	MainMenuMapOptions mo(eia(), true);
-	if (mo.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-		const Widelands::Map& map = eia().egbase().map();
-		MapData::MapType maptype;
-
-		if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
-		    map.scenario_types() & Widelands::Map::SP_SCENARIO) {
-			maptype = MapData::MapType::kScenario;
-		} else {
-			maptype = MapData::MapType::kNormal;
-		}
-
-		MapData mapdata(map, editbox_->text(), maptype, MapData::DisplayType::kMapnames);
-
-		map_details_.update(mapdata, false);
-	}
+	map_options_registry_.create();
 }
 
+void MainMenuSaveMap::update_map_options() {
+	const Widelands::Map& map = eia().egbase().map();
+	MapData::MapType maptype;
+
+	const std::string old_name = map_details_.name();
+
+	if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
+	    map.scenario_types() & Widelands::Map::SP_SCENARIO) {
+		maptype = MapData::MapType::kScenario;
+	} else {
+		maptype = MapData::MapType::kNormal;
+	}
+
+	MapData mapdata(map, editbox_->text(), maptype, MapData::DisplayType::kMapnames);
+
+	map_details_.update(mapdata, false);
+	if (old_name == editbox_->text()) {
+		editbox_->set_text(map_details_.name());
+	}
+}
 /**
  * called when an item was selected
  */
@@ -269,15 +282,12 @@ void MainMenuSaveMap::set_current_directory(const std::string& filename) {
 
 /**
  * Save the map in the current directory with
- * the current filename
+ * the given filename
  *
  * returns true if dialog should close, false if it
  * should stay open
  */
 bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
-	//  Make sure that the current directory exists and is writeable.
-	g_fs->ensure_directory_exists(curdir_);
-
 	// Trim it for preceding/trailing whitespaces in user input
 	boost::trim(filename);
 
@@ -301,27 +311,11 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		}
 	}
 
-	//  Try deleting file (if it exists). If it fails, give a message and let the player choose a new
-	//  name.
-	try {
-		g_fs->fs_unlink(complete_filename);
-	} catch (const std::exception& e) {
-		log("Unable to delete old map file %s while saving map: %s\n", complete_filename.c_str(),
-		    e.what());
-		const std::string s = (boost::format(_("File ‘%s’ could not be deleted.")) %
-		                       FileSystem::fs_filename(filename.c_str()))
-		                         .str() +
-		                      " " + _("Try saving under a different name!");
-		UI::WLMessageBox mbox(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
-		mbox.run<UI::Panel::Returncodes>();
-		return false;
-	}
-
 	Widelands::EditorGameBase& egbase = eia().egbase();
 	Widelands::Map* map = egbase.mutable_map();
 
 	// Recompute seafaring tag
-	map->cleanup_port_spaces(egbase.world());
+	map->cleanup_port_spaces(egbase);
 	if (map->allows_seafaring()) {
 		map->add_tag("seafaring");
 	} else {
@@ -334,21 +328,35 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		map->delete_tag("artifacts");
 	}
 
-	//  Try saving.
-	try {
-		std::unique_ptr<FileSystem> fs(g_fs->create_sub_file_system(
-		   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
-		std::unique_ptr<Widelands::MapSaver> wms(new Widelands::MapSaver(*fs, egbase));
-		wms->save();
-		fs.reset();
-	} catch (const std::exception& e) {
-		std::string s = _("Error Saving Map!\nSaved map file may be corrupt!\n\nReason "
-		                  "given:\n");
-		s += e.what();
-		UI::WLMessageBox mbox(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
-		mbox.run<UI::Panel::Returncodes>();
+	// Try saving the map.
+	GenericSaveHandler gsh(
+	   [&egbase](FileSystem& fs) {
+		   Widelands::MapSaver wms(fs, egbase);
+		   wms.save();
+	   },
+	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
+	GenericSaveHandler::Error error = gsh.save();
+
+	// If only the temporary backup couldn't be deleted, we still treat it as
+	// success. Automatic cleanup will deal with later. No need to bother the
+	// player with it.
+	if (error == GenericSaveHandler::Error::kSuccess ||
+	    error == GenericSaveHandler::Error::kDeletingBackupFailed) {
+		egbase.get_ibase()->log_message(_("Map saved"));
+		eia().set_need_save(false);
+		return true;
 	}
 
-	die();
+	std::string msg = gsh.localized_formatted_result_message();
+	UI::WLMessageBox mbox(this, _("Error Saving Map!"), msg, UI::WLMessageBox::MBoxType::kOk);
+	mbox.run<UI::Panel::Returncodes>();
+
+	// If only the backup failed (likely just because of a file lock),
+	// then leave the dialog open for the player to try with a new filename.
+	if (error == GenericSaveHandler::Error::kBackupFailed) {
+		return false;
+	}
+
+	// In the other error cases close the dialog.
 	return true;
 }

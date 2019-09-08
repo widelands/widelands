@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,13 +20,19 @@
 #include "ui_fsmenu/singleplayer.h"
 
 #include "base/i18n.h"
-#include "graphic/text_constants.h"
 
 FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
    : FullscreenMenuMainMenu(),
 
      // Title
-     title(this, 0, 0, _("Single Player"), UI::Align::kCenter),
+     title(this,
+           0,
+           0,
+           0,
+           0,
+           _("Single Player"),
+           UI::Align::kCenter,
+           g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Buttons
      new_game(&vbox_, "new_game", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("New Game")),
@@ -48,7 +54,7 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
 	   boost::bind(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kBack));
 
-	title.set_fontsize(fs_big());
+	title.set_font_scale(scale_factor());
 
 	vbox_.add(&new_game, UI::Box::Resizing::kFullSize);
 	vbox_.add(&campaign, UI::Box::Resizing::kFullSize);

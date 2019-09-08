@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,7 @@
 #include "logic/message_queue.h"
 #include "logic/see_unsee_node.h"
 #include "logic/widelands.h"
+#include "sound/constants.h"
 
 class Node;
 namespace Widelands {
@@ -147,6 +148,11 @@ public:
 	NodeCaps get_buildcaps(const FCoords&) const;
 
 	bool is_hostile(const Player&) const;
+
+	/**
+	 * Returns whether the player lost the last warehouse.
+	 */
+	bool is_defeated() const;
 
 	// For cheating
 	void set_see_all(bool const t) {
@@ -501,11 +507,9 @@ public:
 	Flag* build_flag(const Coords&);   /// Build a flag if it is allowed.
 	Road& force_road(const Path&);
 	Road* build_road(const Path&);  /// Build a road if it is allowed.
-	Building& force_building(Coords, const Building::FormerBuildings&);
-	Building& force_csite(Coords,
-	                      DescriptionIndex,
-	                      const Building::FormerBuildings& = Building::FormerBuildings());
-	Building* build(Coords, DescriptionIndex, bool, Building::FormerBuildings&);
+	Building& force_building(Coords, const FormerBuildings&);
+	Building& force_csite(Coords, DescriptionIndex, const FormerBuildings& = FormerBuildings());
+	Building* build(Coords, DescriptionIndex, bool, FormerBuildings&);
 	void bulldoze(PlayerImmovable&, bool recurse = false);
 	void flagaction(Flag&);
 	void start_stop_building(PlayerImmovable&);
@@ -531,7 +535,7 @@ public:
 	uint32_t find_attack_soldiers(Flag&,
 	                              std::vector<Soldier*>* soldiers = nullptr,
 	                              uint32_t max = std::numeric_limits<uint32_t>::max());
-	void enemyflagaction(Flag&, PlayerNumber attacker, uint32_t count);
+	void enemyflagaction(Flag&, PlayerNumber attacker, const std::vector<Widelands::Soldier*>&);
 
 	uint32_t casualties() const {
 		return casualties_;
@@ -579,7 +583,8 @@ public:
 
 	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex const) const;
 
-	void read_statistics(FileRead&, uint16_t packet_version);
+	void
+	read_statistics(FileRead&, uint16_t packet_version, const TribesLegacyLookupTable& lookup_table);
 	void write_statistics(FileWrite&) const;
 	void read_remaining_shipnames(FileRead&);
 	void write_remaining_shipnames(FileWrite&) const;
@@ -598,13 +603,16 @@ public:
 		further_initializations_.push_back(init);
 	}
 
+	void set_attack_forbidden(PlayerNumber who, bool forbid);
+	bool is_attack_forbidden(PlayerNumber who) const;
+
 	const std::string pick_shipname();
 
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
 	void update_team_players();
-	void play_message_sound(const Message::Type& msgtype);
+	void play_message_sound(const Message* message);
 	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
@@ -675,14 +683,20 @@ private:
 	 */
 	std::vector<std::vector<uint32_t>> ware_stocks_;
 
+	std::set<PlayerNumber> forbid_attack_;
+
 	PlayerBuildingStats building_stats_;
+
+	FxId message_fx_;
+	FxId attack_fx_;
+	FxId occupied_fx_;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };
 
 void find_former_buildings(const Tribes& tribes,
                            const DescriptionIndex bi,
-                           Building::FormerBuildings* former_buildings);
+                           FormerBuildings* former_buildings);
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_H

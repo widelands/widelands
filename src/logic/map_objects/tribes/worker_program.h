@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,6 +91,7 @@ private:
 	void parse_scout(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_playsound(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_construct(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_terraform(Worker::Action* act, const std::vector<std::string>& cmd);
 
 	const std::string name_;
 	const WorkerDescr& worker_;

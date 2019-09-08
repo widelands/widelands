@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,10 +21,10 @@
 
 #include <vector>
 
-#include "logic/description_maintainer.h"
 #include "logic/field.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/widelands_geometry.h"
 #include "scripting/lua_table.h"

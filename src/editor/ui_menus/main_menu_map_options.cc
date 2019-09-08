@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,10 +28,12 @@
 #include "editor/editorinteractive.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/text_layout.h"
 #include "logic/map.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_basic/textarea.h"
+#include "wlapplication_options.h"
 #include "wui/map_tags.h"
 
 inline EditorInteractive& MainMenuMapOptions::eia() {
@@ -41,11 +43,12 @@ inline EditorInteractive& MainMenuMapOptions::eia() {
 /**
  * Create all the buttons etc...
  */
-MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
-   : UI::Window(&parent, "map_options", 0, 0, 350, parent.get_inner_h() - 80, _("Map Options")),
+MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& registry)
+   : UI::UniqueWindow(
+        &parent, "map_options", &registry, 350, parent.get_inner_h() - 80, _("Map Options")),
      padding_(4),
      indent_(10),
-     labelh_(text_height() + 4),
+     labelh_(text_height(UI::FontStyle::kLabel) + 4),
      checkbox_space_(25),
      butw_((get_inner_w() - 3 * padding_) / 2),
      max_w_(get_inner_w() - 2 * padding_),
@@ -72,14 +75,14 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
      tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
 
-     name_(&main_box_, 0, 0, max_w_, 0, 2, UI::PanelStyle::kWui),
-     author_(&main_box_, 0, 0, max_w_, 0, 2, UI::PanelStyle::kWui),
+     name_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
+     author_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
      size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
      teams_list_(
         &teams_box_, 0, 0, max_w_, 60, UI::PanelStyle::kWui, UI::ListselectLayout::kShowCheck),
 
-     modal_(modal) {
+     registry_(registry) {
 
 	tab_box_.set_size(max_w_, get_inner_h() - labelh_ - 2 * padding_);
 	tabs_.set_size(max_w_, tab_box_.get_inner_h());
@@ -138,12 +141,12 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, players));
 
 	tab_box_.add(&tabs_, UI::Box::Resizing::kFullSize);
-	tabs_.add("main_map_options", g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
+	tabs_.add("main_map_options", g_gr->images().get("images/wui/menus/toggle_minimap.png"),
 	          &main_box_, _("Main Options"));
 	tabs_.add("map_tags", g_gr->images().get("images/ui_basic/checkbox_checked.png"), &tags_box_,
 	          _("Tags"));
-	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/editor_menu_player_menu.png"),
-	          &teams_box_, _("Teams"));
+	tabs_.add("map_teams", g_gr->images().get("images/wui/editor/tools/players.png"), &teams_box_,
+	          _("Teams"));
 
 	name_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	author_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
@@ -192,7 +195,7 @@ void MainMenuMapOptions::changed() {
 void MainMenuMapOptions::clicked_ok() {
 	eia().egbase().mutable_map()->set_name(name_.text());
 	eia().egbase().mutable_map()->set_author(author_.text());
-	g_options.pull_section("global").set_string("realname", author_.text());
+	set_config_string("realname", author_.text());
 	eia().egbase().mutable_map()->set_description(descr_->get_text());
 	eia().egbase().mutable_map()->set_hint(hint_->get_text());
 
@@ -202,20 +205,12 @@ void MainMenuMapOptions::clicked_ok() {
 			eia().egbase().mutable_map()->add_tag(tag.first);
 		}
 	}
-
-	if (modal_) {
-		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
-	} else {
-		die();
-	}
+	Notifications::publish(NoteMapOptions());
+	registry_.destroy();
 }
 
 void MainMenuMapOptions::clicked_cancel() {
-	if (modal_) {
-		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
-	} else {
-		die();
-	}
+	registry_.destroy();
 }
 
 /*

@@ -26,11 +26,11 @@ tribes:new_productionsite_type {
    animations = {
       idle = { -- TODO(GunChleoc): make animations
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 52, 64 },
+         hotspot = { 56, 68 },
       },
       working = { -- TODO(GunChleoc): make animations
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 52, 64 },
+         hotspot = { 56, 68 },
       }
    },
 
@@ -58,9 +58,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
          descname = pgettext("empire_building", "recruiting soldier"),
          actions = {
-            "sleep=15000",
             "return=skipped unless economy needs empire_soldier",
             "consume=armor_helmet spear_wooden empire_recruit",
+            "sleep=15000",
             "animate=working 15000",
             "recruit=empire_soldier"
          }
