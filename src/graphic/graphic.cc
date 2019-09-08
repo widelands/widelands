@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,6 @@
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
-#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
@@ -59,7 +58,10 @@ void set_icon(SDL_Window* sdl_window) {
 
 }  // namespace
 
-Graphic::Graphic() : image_cache_(new ImageCache()), animation_manager_(new AnimationManager()) {
+Graphic::Graphic()
+   : image_cache_(new ImageCache()),
+     animation_manager_(new AnimationManager()),
+     style_manager_(new StyleManager()) {
 }
 
 /**
@@ -82,6 +84,8 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	                    window_mode_width_, window_mode_height_, SDL_WINDOW_OPENGL);
 
 	GLint max;
+	// LeakSanitizer reports a memory leak which is triggered somewhere in this function call,
+	// probably coming from the gaphics drivers
 	gl_context_ = Gl::initialize(
 	   trace_gl == TraceGl::kYes ? Gl::Trace::kYes : Gl::Trace::kNo, sdl_window_, &max);
 
@@ -100,18 +104,35 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		SDL_DisplayMode disp_mode;
 		SDL_GetWindowDisplayMode(sdl_window_, &disp_mode);
 		log("**** GRAPHICS REPORT ****\n"
+#ifdef WL_USE_GLVND
+		    " VIDEO DRIVER GLVND %s\n"
+#else
 		    " VIDEO DRIVER %s\n"
+#endif
 		    " pixel fmt %u\n"
 		    " size %d %d\n"
 		    "**** END GRAPHICS REPORT ****\n",
 		    SDL_GetCurrentVideoDriver(), disp_mode.format, disp_mode.w, disp_mode.h);
-		assert(SDL_BYTESPERPIXEL(disp_mode.format) == 4);
+		const int bytes_per_pixel = SDL_BYTESPERPIXEL(disp_mode.format);
+		if (bytes_per_pixel != 4) {
+			const std::string error_message =
+			   (boost::format(
+			       "SDL should report 4 bytes per pixel, but %d were reported instead.\nPlease check "
+			       "that everything's OK with your graphics driver.") %
+			    bytes_per_pixel)
+			      .str();
+			log("ERROR: %s\n", error_message.c_str());
+			SDL_ShowSimpleMessageBox(
+			   SDL_MESSAGEBOX_ERROR, "Video Error", error_message.c_str(), nullptr);
+			exit(1);
+		}
 	}
 
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
 	image_cache_->fill_with_texture_atlases(
 	   std::move(texture_atlases), std::move(textures_in_atlas));
+	styles().init();
 }
 
 Graphic::~Graphic() {
@@ -127,14 +148,14 @@ Graphic::~Graphic() {
 
 /**
  * Return the screen x resolution
-*/
+ */
 int Graphic::get_xres() {
 	return screen_->width();
 }
 
 /**
  * Return the screen x resolution
-*/
+ */
 int Graphic::get_yres() {
 	return screen_->height();
 }
@@ -161,10 +182,19 @@ void Graphic::resolution_changed() {
 
 /**
  * Return a pointer to the RenderTarget representing the screen
-*/
+ */
 RenderTarget* Graphic::get_render_target() {
 	render_target_->reset();
 	return render_target_.get();
+}
+
+int Graphic::max_texture_size_for_font_rendering() const {
+// Test with minimum supported size in debug builds.
+#ifndef NDEBUG
+	return kMinimumSizeForTextures;
+#else
+	return max_texture_size_;
+#endif
 }
 
 bool Graphic::fullscreen() {
@@ -199,7 +229,7 @@ void Graphic::set_fullscreen(const bool value) {
 
 /**
  * Bring the screen uptodate.
-*/
+ */
 void Graphic::refresh() {
 	RenderQueue::instance().draw(screen_->width(), screen_->height());
 
@@ -229,7 +259,7 @@ void Graphic::refresh() {
 
 /**
  * Save a screenshot to the given file.
-*/
+ */
 void Graphic::screenshot(const std::string& fname) {
 	screenshot_filename_ = fname;
 }

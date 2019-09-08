@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,16 +33,24 @@ public:
 	// Implements OneWorldLegacyLookupTable.
 	std::string lookup_resource(const std::string& resource) const override;
 	std::string lookup_terrain(const std::string& terrain) const override;
-	std::string lookup_critter(const std::string& critter) const override;
+	std::string lookup_critter(const std::string& critter, uint16_t packet_version) const override;
 	std::string lookup_immovable(const std::string& immovable) const override;
 
 private:
+	// Old name, <packet version when it got changed, new name>
+	const std::map<std::string, std::map<uint16_t, std::string>> critters_;
 	const std::map<std::string, std::string> immovables_;
 	const std::map<std::string, std::string> resources_;
 	const std::map<std::string, std::string> terrains_;
 };
 
 PostOneWorldLegacyLookupTable::PostOneWorldLegacyLookupTable() :
+critters_
+{
+	// We need to bump the packet version in Critter every time we rename a critter.
+	// Also, don't forget to edit the OneWorldLegacyLookupTable! You can look up which world had which units in Build 18.
+	{"elk", {{2, "moose"}}},
+},
 immovables_
 {
 	{"blackland_stones1", "blackland_rocks1"},
@@ -113,8 +121,17 @@ std::string PostOneWorldLegacyLookupTable::lookup_terrain(const std::string& ter
 	return i->second;
 }
 
-std::string PostOneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
-	return critter;
+std::string PostOneWorldLegacyLookupTable::lookup_critter(const std::string& critter,
+                                                          uint16_t packet_version) const {
+	std::string result = critter;
+	if (critters_.count(critter) == 1) {
+		for (const auto& candidate : critters_.at(result)) {
+			if (candidate.first >= packet_version) {
+				result = candidate.second;
+			}
+		}
+	}
+	return result;
 }
 
 std::string PostOneWorldLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
@@ -132,7 +149,7 @@ public:
 	// Implements OneWorldLegacyLookupTable.
 	std::string lookup_resource(const std::string& resource) const override;
 	std::string lookup_terrain(const std::string& terrain) const override;
-	std::string lookup_critter(const std::string& critter) const override;
+	std::string lookup_critter(const std::string& critter, uint16_t packet_version) const override;
 	std::string lookup_immovable(const std::string& immovable) const override;
 
 private:
@@ -192,11 +209,12 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
                           {"strand", "winter_beach"},
                           {"water", "winter_water"},
                        }),
-        std::make_pair(
-           "desert",
-           std::map<std::string, std::string>{
-              {"beach", "desert_beach"}, {"steppe", "desert_steppe"}, {"wasser", "desert_water"},
-           }),
+        std::make_pair("desert",
+                       std::map<std::string, std::string>{
+                          {"beach", "desert_beach"},
+                          {"steppe", "desert_steppe"},
+                          {"wasser", "desert_water"},
+                       }),
      },
 
      // CRITTERS
@@ -204,6 +222,7 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
         std::make_pair("greenland",
                        std::map<std::string, std::string>{
                           {"deer", "stag"},
+                          {"elk", "moose"},
                        }),
         std::make_pair("blackland",
                        std::map<std::string, std::string>{
@@ -212,6 +231,7 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
         std::make_pair("winterland",
                        std::map<std::string, std::string>{
                           {"deer", "stag"},
+                          {"elk", "moose"},
                        }),
         std::make_pair("desert",
                        std::map<std::string, std::string>{
@@ -319,54 +339,33 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
                           {"tree8_s", "rowan_summer_pole"},
                           {"tree8_t", "rowan_summer_sapling"},
                        }),
-        std::make_pair("greenland",
-                       std::map<std::string, std::string>{
-                          {"sstones1", "standing_stone1_summer"},
-                          {"sstones2", "standing_stone2_summer"},
-                          {"sstones3", "standing_stone3_summer"},
-                          {"sstones4", "standing_stone4_summer"},
-                          {"sstones5", "standing_stone5_summer"},
-                          {"sstones6", "standing_stone6"},
-                          {"sstones7", "standing_stone7"},
-                          {"stones1", "greenland_rocks1"},
-                          {"stones2", "greenland_rocks2"},
-                          {"stones3", "greenland_rocks3"},
-                          {"stones4", "greenland_rocks4"},
-                          {"stones5", "greenland_rocks5"},
-                          {"stones6", "greenland_rocks6"},
-                          {"tree1", "aspen_summer_old"},
-                          {"tree1_m", "aspen_summer_mature"},
-                          {"tree1_s", "aspen_summer_pole"},
-                          {"tree1_t", "aspen_summer_sapling"},
-                          {"tree2", "oak_summer_old"},
-                          {"tree2_m", "oak_summer_mature"},
-                          {"tree2_s", "oak_summer_pole"},
-                          {"tree2_t", "oak_summer_sapling"},
-                          {"tree3", "spruce_summer_old"},
-                          {"tree3_m", "spruce_summer_mature"},
-                          {"tree3_s", "spruce_summer_pole"},
-                          {"tree3_t", "spruce_summer_sapling"},
-                          {"tree4", "alder_summer_old"},
-                          {"tree4_m", "alder_summer_mature"},
-                          {"tree4_s", "alder_summer_pole"},
-                          {"tree4_t", "alder_summer_sapling"},
-                          {"tree5", "birch_summer_old"},
-                          {"tree5_m", "birch_summer_mature"},
-                          {"tree5_s", "birch_summer_pole"},
-                          {"tree5_t", "birch_summer_sapling"},
-                          {"tree6", "beech_summer_old"},
-                          {"tree6_m", "beech_summer_mature"},
-                          {"tree6_s", "beech_summer_pole"},
-                          {"tree6_t", "beech_summer_sapling"},
-                          {"tree7", "larch_summer_old"},
-                          {"tree7_m", "larch_summer_mature"},
-                          {"tree7_s", "larch_summer_pole"},
-                          {"tree7_t", "larch_summer_sapling"},
-                          {"tree8", "rowan_summer_old"},
-                          {"tree8_m", "rowan_summer_mature"},
-                          {"tree8_s", "rowan_summer_pole"},
-                          {"tree8_t", "rowan_summer_sapling"},
-                       }),
+        std::make_pair(
+           "greenland",
+           std::map<std::string, std::string>{
+              {"sstones1", "standing_stone1_summer"}, {"sstones2", "standing_stone2_summer"},
+              {"sstones3", "standing_stone3_summer"}, {"sstones4", "standing_stone4_summer"},
+              {"sstones5", "standing_stone5_summer"}, {"sstones6", "standing_stone6"},
+              {"sstones7", "standing_stone7"},        {"stones1", "greenland_rocks1"},
+              {"stones2", "greenland_rocks2"},        {"stones3", "greenland_rocks3"},
+              {"stones4", "greenland_rocks4"},        {"stones5", "greenland_rocks5"},
+              {"stones6", "greenland_rocks6"},        {"tree1", "aspen_summer_old"},
+              {"tree1_m", "aspen_summer_mature"},     {"tree1_s", "aspen_summer_pole"},
+              {"tree1_t", "aspen_summer_sapling"},    {"tree2", "oak_summer_old"},
+              {"tree2_m", "oak_summer_mature"},       {"tree2_s", "oak_summer_pole"},
+              {"tree2_t", "oak_summer_sapling"},      {"tree3", "spruce_summer_old"},
+              {"tree3_m", "spruce_summer_mature"},    {"tree3_s", "spruce_summer_pole"},
+              {"tree3_t", "spruce_summer_sapling"},   {"tree4", "alder_summer_old"},
+              {"tree4_m", "alder_summer_mature"},     {"tree4_s", "alder_summer_pole"},
+              {"tree4_t", "alder_summer_sapling"},    {"tree5", "birch_summer_old"},
+              {"tree5_m", "birch_summer_mature"},     {"tree5_s", "birch_summer_pole"},
+              {"tree5_t", "birch_summer_sapling"},    {"tree6", "beech_summer_old"},
+              {"tree6_m", "beech_summer_mature"},     {"tree6_s", "beech_summer_pole"},
+              {"tree6_t", "beech_summer_sapling"},    {"tree7", "larch_summer_old"},
+              {"tree7_m", "larch_summer_mature"},     {"tree7_s", "larch_summer_pole"},
+              {"tree7_t", "larch_summer_sapling"},    {"tree8", "rowan_summer_old"},
+              {"tree8_m", "rowan_summer_mature"},     {"tree8_s", "rowan_summer_pole"},
+              {"tree8_t", "rowan_summer_sapling"},
+           }),
         std::make_pair("winterland",
                        std::map<std::string, std::string>{
                           {"sstones1", "standing_stone1_winter"},
@@ -438,7 +437,7 @@ std::string OneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain
 	return terrain;
 }
 
-std::string OneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
+std::string OneWorldLegacyLookupTable::lookup_critter(const std::string& critter, uint16_t) const {
 	const std::map<std::string, std::string>& world_critters = critters_.at(old_world_name_);
 	const auto& i = world_critters.find(critter);
 	if (i != world_critters.end()) {

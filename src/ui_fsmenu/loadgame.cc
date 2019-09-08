@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "wlapplication_options.h"
 #include "wui/gamedetails.h"
 
 FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
@@ -36,8 +37,11 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
      title_(&main_box_,
             0,
             0,
+            0,
+            0,
             is_replay ? _("Choose a replay") : _("Choose a saved game"),
-            UI::Align::kCenter),
+            UI::Align::kCenter,
+            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      load_or_save_(&info_box_,
                    g,
@@ -45,10 +49,11 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                       LoadOrSaveGame::FileType::kReplay :
                       (gsp->settings().multiplayer ? LoadOrSaveGame::FileType::kGameMultiPlayer :
                                                      LoadOrSaveGame::FileType::kGameSinglePlayer),
-                   GameDetails::Style::kFsMenu,
+                   UI::PanelStyle::kFsMenu,
                    true),
 
-     is_replay_(is_replay) {
+     is_replay_(is_replay),
+     showing_filenames_(false) {
 
 	// Make sure that we have some space to work with.
 	main_box_.set_size(get_w(), get_w());
@@ -57,6 +62,10 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	main_box_.add_inf_space();
 	main_box_.add(&title_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	main_box_.add_inf_space();
+	if (is_replay_) {
+		show_filenames_ = new UI::Checkbox(&main_box_, Vector2i::zero(), _("Show Filenames"));
+		main_box_.add(show_filenames_, UI::Box::Resizing::kFullSize);
+	}
 	main_box_.add_inf_space();
 	main_box_.add(&info_box_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(padding_);
@@ -89,6 +98,12 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	load_or_save_.table().double_clicked.connect(
 	   boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
 
+	if (is_replay_) {
+		show_filenames_->changed.connect(
+		   boost::bind(&FullscreenMenuLoadGame::toggle_filenames, boost::ref(*this)));
+		show_filenames_->set_state(get_config_bool("display_replay_filenames", true));
+	}
+
 	fill_table();
 	if (!load_or_save_.table().empty()) {
 		load_or_save_.table().select(0);
@@ -99,12 +114,29 @@ void FullscreenMenuLoadGame::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
 	main_box_.set_size(get_w() - 2 * tablex_, tabley_ + tableh_ + padding_);
 	main_box_.set_pos(Vector2i(tablex_, 0));
-	title_.set_fontsize(fs_big());
+	title_.set_font_scale(scale_factor());
 	load_or_save_.delete_button()->set_desired_size(butw_, buth_);
 	button_spacer_->set_desired_size(butw_, buth_ + 2 * padding_);
 	load_or_save_.table().set_desired_size(tablew_, tableh_);
 	load_or_save_.game_details()->set_max_size(
 	   main_box_.get_w() - tablew_ - right_column_margin_, tableh_);
+}
+
+void FullscreenMenuLoadGame::toggle_filenames() {
+	showing_filenames_ = show_filenames_->get_state();
+	set_config_bool("display_replay_filenames", showing_filenames_);
+
+	// Remember selection
+	const std::set<uint32_t> selected = load_or_save_.table().selections();
+	// Fill table again
+	fill_table();
+
+	// Restore selection items
+	// TODO(GunChleoc): It would be nice to have a function to just change the entry texts
+	for (const uint32_t selectme : selected) {
+		load_or_save_.table().multiselect(selectme, true);
+	}
+	entry_selected();
 }
 
 void FullscreenMenuLoadGame::clicked_ok() {
@@ -128,6 +160,7 @@ void FullscreenMenuLoadGame::entry_selected() {
 }
 
 void FullscreenMenuLoadGame::fill_table() {
+	load_or_save_.set_show_filenames(showing_filenames_);
 	load_or_save_.fill_table();
 }
 

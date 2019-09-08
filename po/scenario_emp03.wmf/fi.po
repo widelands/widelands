@@ -1,16 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Jukka Pakarinen, 2017
+# GunChleoc, 2018
+# Jukka Pakarinen, 2018
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-01 09:32+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Jukka Pakarinen, 2017\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2017-05-15 11:49+0000\n"
+"Last-Translator: Jukka Pakarinen, 2018\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,6 +49,8 @@ msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr ""
+"Rakenna kivilouhos lähelle runsasta kivikkoa, jotta vapautuisi "
+"rakennuspaikkoja ja saisit arvokkaita resursseja."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -67,7 +71,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower the demand for marble columns to 4"
-msgstr ""
+msgstr "Pienennä marmoripylväiden kysyntä arvoon 4"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid "Lower Demand for Marble Columns"
@@ -78,6 +82,8 @@ msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr ""
+"Pienennä marmoripylväiden kysyntä arvoon neljä talouden asetuksissa. Sen "
+"avulla marmoria säästyy rakennuksiin."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:78
 msgid ""
@@ -95,11 +101,11 @@ msgstr "Satamapaikka"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:87
 msgid "Search for a port space in order to regain access to the sea."
-msgstr ""
+msgstr "Etsi satamapaikka saadaksesi yhteyden merelle."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:93
 msgid "Build a port and a shipyard on the Island"
-msgstr "Rakenna saarelle satama ja telakka "
+msgstr "Rakenna saarelle satama ja telakka"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:95
 msgid "Ship Industry"
@@ -115,7 +121,7 @@ msgstr "Rakenna telakka tuottaaksesi aluksia purjehtimiseen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:102
 msgid "Produce wheat"
-msgstr ""
+msgstr "Tuota vehnää"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:104
 msgid "Wheat Production"
@@ -124,7 +130,7 @@ msgstr "Vehnätuotanto"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:105
 msgid ""
 "Produce at least 50 sheaves of wheat to get your wool production started."
-msgstr ""
+msgstr "Tuota ainakin 50 vehnälyhdettä saadaksesi villan tuotannon käyntiin."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:111
 msgid "Produce cloth for building our first ship"
@@ -139,6 +145,8 @@ msgid ""
 "Now turn all the wheat into at least 50 bales of wool and then use the wool "
 "to weave cloth in order to build a ship."
 msgstr ""
+"Muunna nyt vehnä ainakin 50 paaliksi villaa ja käytä sitten villat kankaan "
+"kutomiseen, jotta voit rakentaa aluksen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:120
 msgid "Build 2 ports on distant islands"
@@ -148,19 +156,23 @@ msgstr "Rakenna 2 satamaa kaukaisille saarille"
 #. them
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid "Build two Expedition Ports"
-msgstr ""
+msgstr "Rakenna kaksi Tutkimusmatkasatamaa"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:124
 msgid ""
 "Explore the island in the south. Use an expedition to build a port there. "
 "Afterwards, try to find some mining resources."
 msgstr ""
+"Tutki etelässä oleva saari. Käytä tukimusmatkaa rakentaaksesi sinne sataman."
+" Yritä sen jälkeen löytää joitakin kaivosresursseja."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:125
 msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
 msgstr ""
+"Lähetä alus pohjoiseen keräämään tietoja Barbaareista. Yritä rakentaa "
+"saarelle satama ja perusta etuvartioasema."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:131
 msgid "Produce gold to send out expeditions"
@@ -173,7 +185,7 @@ msgstr "Kultatuotanto"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:134
 msgid ""
 "Produce at least six bars of gold to be able to colonize your vicinity."
-msgstr ""
+msgstr "Tuota ainakin kuusi kultaharkkoa pystyäksesi asuttamaan lähialueesi."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Barbarians"
@@ -185,7 +197,7 @@ msgstr "Kukista Vihollinen"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
 msgid "End the Barbarians’ existence in this part of the world."
-msgstr ""
+msgstr "Päätä Barbaarien olemassaolo tässä osassa maailmaa."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore further and build ports"
@@ -199,6 +211,8 @@ msgstr "Tutki Muita Saaria ja Etsi Satamapaikkoja"
 msgid ""
 "Discover more land in your vicinity and build as many ports as you can."
 msgstr ""
+"Paljasta lisää maata lähialueeltasi ja rakentaa niin monta satamaa kuin "
+"voit."
 
 #. TRANSLATORS: Objective header
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:159
@@ -229,6 +243,8 @@ msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train your"
 " soldiers."
 msgstr ""
+"Rakenna harjoitusleiri, kasarmeja ja Areena tai Colosseumi sotilaittesi "
+"kouluttamiseksi."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:184
 msgid "The Journey Home"
@@ -239,7 +255,7 @@ msgstr "Kotimatka"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:209
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:389
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:621
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:649
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:650
 msgid "Diary of Lutius"
 msgstr "Lutiuksen päiväkirja"
 
@@ -354,7 +370,7 @@ msgid ""
 msgstr ""
 "Herrani, emme tiedä mitään tästä saaresta. Ja uskon ettemme myöskään ole "
 "turvassa. Olisi järkevää rakentaa torni saaren tutkimiseksi ja lisätä jonkin"
-" verran sotilasvahvuutta. "
+" verran sotilasvahvuutta."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:238
 msgid "Amalea Interrupts"
@@ -522,6 +538,10 @@ msgid ""
 "settings to a smaller amount. I think a reserve of four columns might be "
 "sufficient for the moment being."
 msgstr ""
+"Mutta siinä on eräs hankaluus, jos kulutamme kaikki marmorimme pylväisiin, "
+"marmori loppuu. Joten meidän pitäisi pienentää marmoripylväiden määrää "
+"talouden asetuksissa. Arvelen, että neljän pylvään reservi saattaisi olla "
+"sopiva tilanteeseen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:319
 msgid "Amalea Looks Happy"
@@ -530,7 +550,7 @@ msgstr "Amalea Näyttää Iloiselta"
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:322
 msgid "I have excellent progress to report now."
-msgstr "Minulla on nyt loistavaa edistystä kerrottavana. "
+msgstr "Minulla on nyt loistavaa edistystä kerrottavana."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:325
@@ -630,6 +650,9 @@ msgid ""
 "have only five bales of cloth left, which we will need to build the port and"
 " the shipyard."
 msgstr ""
+"Lähettääksemme tutkimusmatka-aluksen, me tarvitsemme ensin laivan. "
+"Valitettavasti meillä on jäljellä vain viisi paalia kangasta, jotka me "
+"tarvitsemme sataman ja telakan rakentamiseksi."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:371
@@ -640,7 +663,7 @@ msgid ""
 msgstr ""
 "Siksi me tarvitsemme lisää kangasta pystyäksemme rakentamaan aluksia. Mutta "
 "saarella ei ole tilaa kokonaisen kankaan tuotantoon tarvittavan talouden "
-"rakentamiseen. Siksi meidän täytyy rakentaa tarvittavat tavarat askel "
+"rakentamiseen. Siksi meidän täytyy rakentaa tarvittavat tuotteet askel "
 "kerrallaan."
 
 #. TRANSLATORS: Amalea
@@ -665,7 +688,7 @@ msgstr ""
 "Sen jälkeen kun meilä on riittävästi vehnää, voimme purkaa maatilan ja "
 "rakentaa lammastilan tuottaaksemme villaa. Myöhemmin voisimme rakentaa "
 "kutomon samalle paikalle, kutoaksemme villasta kangasta. Mutta ensin "
-"aloitamme tuottamaan riittävän määrän vehnää. "
+"aloitamme tuottamaan riittävän määrän vehnää."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:380
@@ -673,6 +696,9 @@ msgid ""
 "I think a stock of 50 sheaves of wheat would be enough for starters. Perhaps"
 " we will have to adjust the target quantity for wheat to achieve this."
 msgstr ""
+"Arvelen, että 50 vehnälyhdettä varastossa olisi aluksi riittävästi. "
+"Mahdollisesti meidän täytyy säätää tarvittava vehnän määrä, jotta se "
+"toteutuisi."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:388
 msgid "Seafaring is Possible Again"
@@ -779,12 +805,13 @@ msgstr "Amalea näyttää mietteliäältä…"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:437
 msgid ""
 "Salve Lutius. While talking to all our brave builders, they told me that "
-"they had to use up all our remaining gold for building the port. Now we "
-"don’t have any gold left."
+"they have to use all our remaining gold for building the port. So, we won’t "
+"have any gold left after our port is build."
 msgstr ""
-"Tervehdys Lutius. Puhuessani meidän kaikille rohkeille rakentajille, he "
-"kerotoivat, että heidän oli käytettvä kaikki jäljellä oleve kulta sataman "
-"rakentamiseksi. Nyt meillä ei ole enää yhtään kultaa jäljellä."
+"Tervehdys Lutius. Puhuessani kaikille rohkeille rakentajillemme, he "
+"kerotoivat, että heidän täytyy käyttää kaikki jäljellä oleve kulta sataman "
+"rakentamiseksi. Joten, meillä ei tule olemaan yhtään kultaa jäljellä sataman"
+" valimistuttua."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:440
@@ -814,8 +841,8 @@ msgid ""
 msgstr ""
 "Suosittelen rakentamaan tuotantoketjun kaivostoiminnalle ja kullan "
 "sulattamiseksi. Luulempa meidän tarvitsevan viinitarhan, viinikellari, "
-"krouvi, kalastajan mökki tai metsästäjän mökki ja sulattamo. Ja tottakai "
-"myös itse kaivokset."
+"krouvi, kalastajatorpan tai metsästäjän mökki ja sulattamo. Ja tottakai myös"
+" itse kaivokset."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:449
@@ -1035,6 +1062,11 @@ msgid ""
 "a reserve of six to nine bales giving us two to three expeditions would be "
 "sufficient."
 msgstr ""
+"Sen vuoksi suosittelen todellakin, että tarkistamme kankaiden määrän "
+"varastossa melko säännöllisesti, jotta sitä on riittävästi varalla, ainakin "
+"tutkimusmatkojen lähettämiseksi. Kun yksi tutkimusmatka tarvitsee kolme "
+"paalia kangasta, arvelen paalien määrän kuuden ja yhdeksän välillä "
+"mahdollistavan meille kaksi tai kolme tutkimusmatkaa."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:548
 msgid "Victory is Ours"
@@ -1203,7 +1235,7 @@ msgid ""
 msgstr ""
 "Sen vuoksi meidän tulee rakentaa kokonainen koulutusinfrastruktuuri "
 "huolimatta rajoitetusta alueesta käytössämme. Me tarvitsemme jonkin verran "
-"kasarmeja, harjoitusleirin ja areenan tai colosseumin. "
+"kasarmeja, harjoitusleirin ja areenan tai colosseumin."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:620
 msgid "Time to get Home Again"
@@ -1221,6 +1253,10 @@ msgstr ""
 "kotonani. Meidän tulisi lähteä purjehtimaa niin pian kuin mahdollista "
 "auttaaksemme puolustamaan Keisarikuntaa Barbaariheimolta."
 
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:624
+msgid "Victory"
+msgstr ""
+
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:625
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
@@ -1230,17 +1266,17 @@ msgstr ""
 "tai siirtyä seuraavaan komennukseen."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:634
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:635
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
 msgstr "Olemme viimeinkin löytäneet palan alttariamme. Ylistetty Neptunus!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:637
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:638
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
 msgstr "Olemme löytäneet toisen palan alttariamme. Ylistetty Neptunus!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:642
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:643
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
@@ -1248,7 +1284,7 @@ msgstr[0] "Meidän täytyy vielä löytää %d pala alttaristamme."
 msgstr[1] "Meidän täytyy vielä löytää %d palaa alttaristamme."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:645
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:646
 msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
@@ -1256,17 +1292,19 @@ msgstr ""
 "Olemme viimeinkin löytäneet viimeisen palasen alttaristamme. Nyt voimme "
 "jälleen kokoontua sille palvomaan jumalaamme. Ylistetty Neptunus!"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:649
 msgid "Artifact Found"
 msgstr "Maamerkki Löydetty"
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Uusi Tavoite"
-msgstr[1] "Uudet Tavoitteet"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

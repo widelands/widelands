@@ -1,19 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
-# GunChleoc, 2016
+# GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016
-# Thadah D. Denyse <juchuf@gmail.com>, 2017
+# Gontzal M. Pujana <juchuf@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-10 11:03+0000\n"
-"PO-Revision-Date: 2018-02-10 11:05+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -677,7 +677,7 @@ msgstr "He recibido información de que nuestra industria minera ha empezado a f
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
-msgstr "Hoy he visto a los primeros reclutas reuniéndose delante de los nuevos barracones. Si todo va bien, deberían recibir su entrenamiento pronto. "
+msgstr "Hoy he visto a los primeros reclutas reuniéndose delante de los nuevos barracones. Si todo va bien, deberían recibir su entrenamiento pronto."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:335
 msgid "Jundlina Summons Sidolus"
@@ -929,13 +929,15 @@ msgstr "¡Edificio perdido!"
 msgid "We lost a building to the ocean!"
 msgstr "¡Hemos perdido un edificio en el océano!"
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Objetivo nuevo"
-msgstr[1] "Objetivos nuevos"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

@@ -1,20 +1,20 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2017
+# Jukka Pakarinen, 2016-2018
 # Markus Hällfors <markus@hallfors.com>, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
 # Teppo Mäenpää <teppo@runbox.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-10 11:03+0000\n"
-"PO-Revision-Date: 2018-02-10 11:05+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -25,11 +25,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:31
 msgid "Ensure the supply of building wares"
-msgstr "Varmista rakennustarvikkeiden toimitus"
+msgstr "Varmista rakennustuotteiden toimitus"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:33
 msgid "Supply Building Wares"
-msgstr "Toimita Rakennustarvikkeita"
+msgstr "Toimita Rakennustuotteita"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Supply basic building material for your economy:"
@@ -41,7 +41,7 @@ msgstr "Rakenna kivilouhos"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build two woodcutter’s houses"
-msgstr "Rakenna kaksi puunhakkaajan mökkiä"
+msgstr "Rakenna kaksi metsurin mökkiä"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two forester’s houses"
@@ -94,7 +94,7 @@ msgid ""
 "breeding more. Make sure that there are always fish left, otherwise the fish"
 " breeder won’t be able to breed new ones. The smoking happens in a smokery, "
 "you will need at least two of those."
-msgstr "Kaksi muuta tärkeää ruokatavaraa ovat kala ja savustettu liha. Raakaa lihaa toimittaa metsästäjä. Kalastaja kalastaa kaloja merestä ja samaan aikaan kalankasvattaja kasvattaa lisää kaloja varmistaen ettei kalakanta kuole sukupuuttoon. Kannattaa varmistaa, että kaloja on aina saatavilla, koska muussa tapauksessa kalankasvattaja ei voi kasvattaa enää uusia kaloja. Savustaminen tehdään savustamossa, joten tarvitset niitä ainakin kaksi."
+msgstr "Kaksi muuta tärkeää ruokatuotteet ovat savukala ja savustettu liha. Raakaa lihaa toimittaa metsästäjä. Kalastaja kalastaa kaloja merestä ja samaan aikaan kalankasvattaja kasvattaa lisää kaloja varmistaen ettei kalakanta kuole sukupuuttoon. Kannattaa varmistaa, että kaloja on aina saatavilla, koska muussa tapauksessa kalankasvattaja ei voi kasvattaa enää uusia kaloja. Savustaminen tehdään savustamossa, joten tarvitset niitä ainakin kaksi."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid "Build a farm and a blackroot farm"
@@ -118,7 +118,7 @@ msgstr "Rakenna metsästäjän mökki saadaksesi raakaa lihaa"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a fisher’s house close to water to get raw fish"
-msgstr "Rakenna kalastajan mökki lähelle vettä saadaksesi raakaa kalaa"
+msgstr "Rakenna kalastajatorppa lähelle vettä saadaksesi raakaa kalaa"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:65
 msgid ""
@@ -203,7 +203,7 @@ msgstr "Rakenna työkalupaja"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:102
 msgid "Build a barracks"
-msgstr "Rakenna parakki"
+msgstr "Rakenna kasarmi"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:100
 msgid "Recruiting new soldiers"
@@ -463,7 +463,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr "Lämmittäköön Satul sinua, Jundlina! Kaikkein tärkeimpiä asioita asutuksen rakentamiseksi ovat rakennusmateriaalit. Puuta on ainakin saatavilla, joten meidän pitäisi rakentaa asumuksia joillekkin puunhakkaajille ja tottakai myös metsänhoitajille, jotta puut eivät pääse loppumaan. Niin, ja meidän ei pidä unohtaa sahaa, koska useimpia rakennuksia ei voi tehdä pelkistä puun rungoista. Vahvemmat rakennukset tarvitsevat myös graniittia, jota on runsain mitoin täältä koilliseen katsottaessa; meidän vain tarvitsee rakentaa louhos ja kivanhakkaaja tulee menemään työhönsä ripeästi."
+msgstr "Lämmittäköön Satul sinua, Jundlina! Kaikkein tärkeimpiä asioita asutuksen rakentamiseksi ovat rakennusmateriaalit. Puuta on ainakin saatavilla, joten meidän pitäisi rakentaa asumuksia joillekkin metsureille ja tottakai myös metsänhoitajille, jotta puut eivät pääse loppumaan. Niin, ja meidän ei pidä unohtaa sahaa, koska useimpia rakennuksia ei voi tehdä pelkistä puun rungoista. Vahvemmat rakennukset tarvitsevat myös graniittia, jota on runsain mitoin täältä koilliseen katsottaessa; meidän vain tarvitsee rakentaa louhos ja kivanhakkaaja tulee menemään työhönsä ripeästi."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:206
 msgid "Sidolus Speaks"
@@ -526,7 +526,7 @@ msgid ""
 " our people are accustomed to making their own food. I feel if we could "
 "split responsibilities, it would be better for us all. I want your thoughts "
 "on this."
-msgstr "Lämmittäköön Satul myös sinua, Colionder. Kyllä, ole mietiskellyt voisimmeko kenties keskittää meidän ruuan tuotantomme. Menetämme paljon tuotteliaisuudestamme, koska meidän kansamme on tottuneet tekemään ruokansa itse. Minusta tuntuu, että jos voisimme jaakaa vastuita, se olisi parempi meille kaikille. Haluan sinun mielipiteesi tästä."
+msgstr "Lämmittäköön Satul myös sinua, Colionder. Kyllä, ole mietiskellyt voisimmeko kenties keskittää meidän ruoan tuotantomme. Menetämme paljon tuotteliaisuudestamme, koska meidän kansamme on tottuneet tekemään ruokansa itse. Minusta tuntuu, että jos voisimme jaakaa vastuita, se olisi parempi meille kaikille. Haluan sinun mielipiteesi tästä."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:234
 msgid "Colionder is in Thought"
@@ -581,7 +581,7 @@ msgstr "Jundlina Käy Läpi Raportit"
 msgid ""
 "Seems like our food production is finished and everybody is working together"
 " nicely. It is really starting to feel like home here."
-msgstr "Näyttää siltä, että ruuan tuotantomme valmistuu ja kaikki toimivat mukavasti yhdessä. Tällä olo alkaa tosiaankin tuntua kuin olisi kotona."
+msgstr "Näyttää siltä, että ruoan tuotantomme valmistuu ja kaikki toimivat mukavasti yhdessä. Tällä olo alkaa tosiaankin tuntua kuin olisi kotona."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:265
 msgid "A Man Comes to Jundlina"
@@ -710,7 +710,7 @@ msgid ""
 "would keep them occupied and focused on their duties. I would need a dungeon"
 " and a labyrinth for them. I have the plans ready, but I guess they won’t "
 "come cheap."
-msgstr "Olen samaa mieltä kanssasi ja olen rankaissut häiriköitä ankarasti. Mutta se on hyvin vaikeaa pitää mieheni vaiti: he ovat tylsistyneitä ja eikä heillä ole mitään tekemistä. Haluaisin kohottaa heidän asemaan harjoituksilla. Minun mielestä rutiinien lisäys elämässä pitäisi heidät tehtäviin omistautuvina ja keskittyneinä. Tarvitsisin tyrmän ja labyrintin heille. Minulla on jo suunnitelma valmiina, mutta veikkaan ettei niitä tule saamaan halvalla."
+msgstr "Olen samaa mieltä kanssasi ja olen rankaissut häiriköitä ankarasti. Mutta se on hyvin vaikeaa pitää mieheni vaiti: he ovat tylsistyneitä ja eikä heillä ole mitään tekemistä. Haluaisin kohottaa heidän asemaan harjoituksilla. Minun mielestä rutiinien lisäys elämässä pitäisi heidät tehtäviin omistautuvina ja keskittyneinä. Tarvitsisin tyrmän ja labyrintin heille. Minulla on jo pohjapiirustukset valmiina, mutta veikkaan ettei niitä tule saamaan halvalla."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:350
@@ -745,7 +745,7 @@ msgid ""
 "People are complaining about crowded streets and slow transportation. We "
 "need to help out our carriers on the roads. I have decided to build a horse "
 "farm so that the horses can help with the heavy wares."
-msgstr "Ihmiset ovat valittaneet ruuhkaisista teistä ja hitaasta kuljetuksesta. Tarvitsemme kantajillemme apua teille. Olen päättänyt rakentaa hevorfarmin, jotta hevoset voivat auttaa painavien tavaroiden kantamisessa."
+msgstr "Ihmiset ovat valittaneet ruuhkaisista teistä ja hitaasta kuljetuksesta. Tarvitsemme kantajillemme apua teille. Olen päättänyt rakentaa hevorfarmin, jotta hevoset voivat auttaa painavien tuotteiden kantamisessa."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:372
@@ -836,7 +836,7 @@ msgid ""
 "that the ocean is rising quickly. We have to reach higher ground and "
 "evacuate everybody and as much wares as we can from the headquarters up the "
 "mountains. How can we escape?"
-msgstr "Pelastakoon Satul meidät! Lutas yrittää silti saada meidät. Tiedustelija tiedotti minuam että meri nousee nopeasti. Meidän täytyy siirtyä korkeammalle maaperälle ja evakuoida kaikki sekä kuljettaa niin paljon tavaraa päämajasta vuorille kuin voimme. Kuinka voimme selvitä tästä?"
+msgstr "Pelastakoon Satul meidät! Lutas yrittää silti saada meidät. Tiedustelija tiedotti minuam että meri nousee nopeasti. Meidän täytyy siirtyä korkeammalle maaperälle ja evakuoida kaikki sekä kuljettaa niin paljon tuotteita päämajasta vuorille kuin voimme. Kuinka voimme selvitä tästä?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:432
 msgid "A Young Man Approaches"
@@ -886,7 +886,7 @@ msgid ""
 "logs and spidercloth for the construction there. Forget about everything "
 "else, we need those wares on top of the mountain before our warehouses are "
 "all swallowed by the sea."
-msgstr "Nopeasti nyt, me tarvitsemme talon Osturille järven rannalle ja tarvitsemme lautoja, kaadettuja puita ja hämähäkinsilkkiä rakennustyömaalle. Unohda kaikki muu, me tarvitsemme nuo tavarat vuoren päälle enen kuin kaikki varastomme päätyvät meren nielaisemaksi."
+msgstr "Nopeasti nyt, me tarvitsemme talon Osturille järven rannalle ja tarvitsemme lautoja, kaadettuja puita ja hämähäkinsilkkiä rakennustyömaalle. Unohda kaikki muu, me tarvitsemme nuo tuotteet vuoren päälle enen kuin kaikki varastomme päätyvät meren nielaisemaksi."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:471
 msgid "Jundlina is Relieved"
@@ -900,7 +900,7 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away…"
-msgstr "Ylistetty Satul! Ostur, nuori laivan rakentaja teki sen. Meillä on kolme laivaa – joita vahvempia en ole koskaan nähnyt – ja niissä on riittävästi tilaa kuljetta meidät kaikki ja osan tavaroistamme myös. Ja tämä apu tuli juuri ajallaan: Luta on juuri nielaisemassa loppua saaresta, vesi nousee nopeammin tuntia kohden. Mutta me voimme tehdä nyt meidän pakomme ja aloittaa uudestaan jossain kaukaisella maalla…"
+msgstr "Ylistetty Satul! Ostur, nuori laivan rakentaja teki sen. Meillä on kolme laivaa – joita vahvempia en ole koskaan nähnyt – ja niissä on riittävästi tilaa kuljetta meidät kaikki ja osan tuotteistamme myös. Ja tämä apu tuli juuri ajallaan: Luta on juuri nielaisemassa loppua saaresta, vesi nousee nopeammin tuntia kohden. Mutta me voimme tehdä nyt meidän pakomme ja aloittaa uudestaan jossain kaukaisella maalla…"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:477
@@ -930,13 +930,15 @@ msgstr "Rakennus menetettiin!"
 msgid "We lost a building to the ocean!"
 msgstr "Rakennus vajosi veteen!"
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "\"%s\""
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Uusi Tavoite"
-msgstr[1] "Uudet Tavoitteet"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

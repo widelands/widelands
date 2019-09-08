@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,9 +37,9 @@
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
 #include "logic/editor_game_base.h"
-#include "logic/findbob.h"
-#include "logic/findnode.h"
 #include "logic/game.h"
+#include "logic/map_objects/findbob.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/requirements.h"
@@ -86,7 +86,8 @@ void Warehouse::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) con
 	       map.calc_distance(enemy.get_position(), warehouse_->get_position()))
 		return;
 
-	if (map.find_bobs(Area<FCoords>(map.get_fcoords(warehouse_->base_flag().get_position()), 2),
+	if (map.find_bobs(game,
+	                  Area<FCoords>(map.get_fcoords(warehouse_->base_flag().get_position()), 2),
 	                  nullptr, FindBobEnemySoldier(owner)))
 		return;
 
@@ -287,19 +288,19 @@ Warehouse Building
 */
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua
+ */
 WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                const LuaTable& table,
-                               const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, egbase),
+                               const Tribes& tribes)
+   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, tribes),
      conquers_(0),
      heal_per_second_(0) {
 	heal_per_second_ = table.get_int("heal_per_second");
 	if (table.has_key("conquers")) {
 		conquers_ = table.get_int("conquers");
-		workarea_info_[conquers_].insert(descname() + " conquer");
+		workarea_info_[conquers_].insert(name() + " conquer");
 	}
 }
 
@@ -1072,7 +1073,7 @@ bool Warehouse::can_create_worker(Game&, DescriptionIndex const worker) const {
 			} else
 				throw wexception("worker type %s needs \"%s\" to be built but that is neither "
 				                 "a ware type nor a worker type defined in the tribe %s",
-				                 w_desc.descname().c_str(), input_name.c_str(),
+				                 w_desc.name().c_str(), input_name.c_str(),
 				                 owner().tribe().name().c_str());
 		}
 	}
@@ -1275,43 +1276,42 @@ void Warehouse::PlannedWorkers::cleanup() {
 	}
 }
 
-Warehouse::StockPolicy Warehouse::get_ware_policy(DescriptionIndex ware) const {
+StockPolicy Warehouse::get_ware_policy(DescriptionIndex ware) const {
 	assert(ware < static_cast<DescriptionIndex>(ware_policy_.size()));
 	return ware_policy_[ware];
 }
 
-Warehouse::StockPolicy Warehouse::get_worker_policy(DescriptionIndex ware) const {
+StockPolicy Warehouse::get_worker_policy(DescriptionIndex ware) const {
 	assert(ware < static_cast<DescriptionIndex>(worker_policy_.size()));
 	return worker_policy_[ware];
 }
 
-Warehouse::StockPolicy Warehouse::get_stock_policy(WareWorker waretype,
-                                                   DescriptionIndex wareindex) const {
+StockPolicy Warehouse::get_stock_policy(WareWorker waretype, DescriptionIndex wareindex) const {
 	if (waretype == wwWORKER)
 		return get_worker_policy(wareindex);
 	else
 		return get_ware_policy(wareindex);
 }
 
-void Warehouse::set_ware_policy(DescriptionIndex ware, Warehouse::StockPolicy policy) {
+void Warehouse::set_ware_policy(DescriptionIndex ware, StockPolicy policy) {
 	assert(ware < static_cast<DescriptionIndex>(ware_policy_.size()));
 	ware_policy_[ware] = policy;
 }
 
-void Warehouse::set_worker_policy(DescriptionIndex ware, Warehouse::StockPolicy policy) {
+void Warehouse::set_worker_policy(DescriptionIndex ware, StockPolicy policy) {
 	assert(ware < static_cast<DescriptionIndex>(worker_policy_.size()));
 	worker_policy_[ware] = policy;
 }
 
 /**
- * Check if there are remaining wares with \ref Warehouse::StockPolicy::kRemove,
+ * Check if there are remaining wares with \ref StockPolicy::kRemove,
  * and remove one of them if appropriate.
  */
 void Warehouse::check_remove_stock(Game& game) {
 	if (base_flag().current_wares() < base_flag().total_capacity() / 2) {
 		for (DescriptionIndex ware = 0; ware < static_cast<DescriptionIndex>(ware_policy_.size());
 		     ++ware) {
-			if (get_ware_policy(ware) != Warehouse::StockPolicy::kRemove || !get_wares().stock(ware))
+			if (get_ware_policy(ware) != StockPolicy::kRemove || !get_wares().stock(ware))
 				continue;
 
 			launch_ware(game, ware);
@@ -1321,7 +1321,7 @@ void Warehouse::check_remove_stock(Game& game) {
 
 	for (DescriptionIndex widx = 0; widx < static_cast<DescriptionIndex>(worker_policy_.size());
 	     ++widx) {
-		if (get_worker_policy(widx) != Warehouse::StockPolicy::kRemove || !get_workers().stock(widx))
+		if (get_worker_policy(widx) != StockPolicy::kRemove || !get_workers().stock(widx))
 			continue;
 
 		Worker& worker = launch_worker(game, widx, Requirements());
@@ -1337,17 +1337,28 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	return portdock_->expedition_bootstrap()->inputqueue(index, type);
 }
 
-void Warehouse::log_general_info(const EditorGameBase& egbase) {
+const BuildingSettings* Warehouse::create_building_settings() const {
+	WarehouseSettings* settings = new WarehouseSettings(descr(), owner().tribe());
+	for (auto& pair : settings->ware_preferences) {
+		pair.second = get_ware_policy(pair.first);
+	}
+	for (auto& pair : settings->worker_preferences) {
+		pair.second = get_worker_policy(pair.first);
+	}
+	settings->launch_expedition = portdock_ && portdock_->expedition_started();
+	return settings;
+}
+
+void Warehouse::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
 	if (descr().get_isport()) {
-		PortDock* pd_tmp = portdock_;
-		if (pd_tmp) {
-			molog("Port dock: %u\n", pd_tmp->serial());
-			molog("port needs ship: %s\n", (pd_tmp->get_need_ship()) ? "true" : "false");
-			molog("wares and workers waiting: %u\n", pd_tmp->count_waiting());
-			molog("exped. in progr.: %s\n", (pd_tmp->expedition_started()) ? "true" : "false");
-			Fleet* fleet = pd_tmp->get_fleet();
+		if (portdock_) {
+			molog("Port dock: %u\n", portdock_->serial());
+			molog("port needs ship: %s\n", (portdock_->get_need_ship()) ? "true" : "false");
+			molog("wares and workers waiting: %u\n", portdock_->count_waiting());
+			molog("exped. in progr.: %s\n", (portdock_->expedition_started()) ? "true" : "false");
+			Fleet* fleet = portdock_->get_fleet();
 			if (fleet) {
 				molog("* fleet: %u\n", fleet->serial());
 				molog("  ships: %u, ports: %u\n", fleet->count_ships(), fleet->count_ports());
@@ -1360,4 +1371,4 @@ void Warehouse::log_general_info(const EditorGameBase& egbase) {
 		}
 	}
 }
-}
+}  // namespace Widelands

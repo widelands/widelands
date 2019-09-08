@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,18 +25,19 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
-#include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
+#include "graphic/font_handler.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map_io/widelands_map_loader.h"
 
 MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
+                                             Registry& registry,
                                              int no_of_bottom_rows,
                                              const std::string& name,
                                              const std::string& title,
                                              const std::string& basedir)
-   : UI::Window(&parent, name, 0, 0, parent.get_inner_w() - 40, parent.get_inner_h() - 40, title),
+   : UI::UniqueWindow(
+        &parent, name, &registry, parent.get_inner_w() - 40, parent.get_inner_h() - 40, title),
 
      // Values for alignment and size
      padding_(4),
@@ -49,31 +50,31 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      right_column_x_(tablew_ + 2 * padding_),
      butw_((get_inner_w() - right_column_x_ - 2 * padding_) / 2),
 
-     table_(this, tablex_, tabley_, tablew_, tableh_),
+     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kWui),
      map_details_(this,
                   right_column_x_,
                   tabley_,
                   get_inner_w() - right_column_x_ - padding_,
                   tableh_,
-                  MapDetails::Style::kWui),
-     directory_info_(this, padding_, get_inner_h() - 2 * buth_ - 4 * padding_),
+                  UI::PanelStyle::kWui),
+     directory_info_(this, padding_, get_inner_h() - 2 * buth_ - 4 * padding_, 0, 0),
      ok_(this,
          "ok",
-         UI::g_fh1->fontset()->is_rtl() ? get_inner_w() / 2 - butw_ - padding_ :
-                                          get_inner_w() / 2 + padding_,
+         UI::g_fh->fontset()->is_rtl() ? get_inner_w() / 2 - butw_ - padding_ :
+                                         get_inner_w() / 2 + padding_,
          get_inner_h() - padding_ - buth_,
          butw_,
          buth_,
-         g_gr->images().get("images/ui_basic/but5.png"),
+         UI::ButtonStyle::kWuiPrimary,
          _("OK")),
      cancel_(this,
              "cancel",
-             UI::g_fh1->fontset()->is_rtl() ? get_inner_w() / 2 + padding_ :
-                                              get_inner_w() / 2 - butw_ - padding_,
+             UI::g_fh->fontset()->is_rtl() ? get_inner_w() / 2 + padding_ :
+                                             get_inner_w() / 2 - butw_ - padding_,
              get_inner_h() - padding_ - buth_,
              butw_,
              buth_,
-             g_gr->images().get("images/ui_basic/but1.png"),
+             UI::ButtonStyle::kWuiSecondary,
              _("Cancel")),
      basedir_(basedir),
      has_translated_mapname_(false),
@@ -82,9 +83,8 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	curdir_ = basedir_;
 
 	UI::Box* vbox = new UI::Box(this, tablex_, padding_, UI::Box::Horizontal, padding_, get_w());
-	show_mapnames_ =
-	   new UI::Button(vbox, "show_mapnames", 0, 0, 2 * butw_, buth_,
-	                  g_gr->images().get("images/ui_basic/but1.png"), _("Show Map Names"));
+	show_mapnames_ = new UI::Button(vbox, "show_mapnames", 0, 0, 2 * butw_, buth_,
+	                                UI::ButtonStyle::kWuiSecondary, _("Show Map Names"));
 	vbox->add(show_mapnames_, UI::Box::Resizing::kFullSize);
 
 	cb_dont_localize_mapnames_ =

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -32,8 +33,10 @@
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
+#include "logic/generic_save_handler.h"
 #include "logic/playersmanager.h"
 #include "ui_basic/messagebox.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_gamebase.h"
 
 InteractiveGameBase& GameMainMenuSaveGame::igbase() {
@@ -56,27 +59,20 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
      load_or_save_(&info_box_,
                    igbase().game(),
-                   LoadOrSaveGame::FileType::kGame,
-                   GameDetails::Style::kWui,
+                   LoadOrSaveGame::FileType::kShowAll,
+                   UI::PanelStyle::kWui,
                    false),
 
      filename_box_(load_or_save_.table_box(), 0, 0, UI::Box::Horizontal),
      filename_label_(&filename_box_, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),
-     filename_editbox_(
-        &filename_box_, 0, 0, 0, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
+     filename_editbox_(&filename_box_, 0, 0, 0, UI::PanelStyle::kWui),
 
      buttons_box_(load_or_save_.game_details()->button_box(), 0, 0, UI::Box::Horizontal),
-     cancel_(&buttons_box_,
-             "cancel",
-             0,
-             0,
-             0,
-             0,
-             g_gr->images().get("images/ui_basic/but1.png"),
-             _("Cancel")),
-     ok_(&buttons_box_, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but5.png"), _("OK")),
+     cancel_(&buttons_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
+     ok_(&buttons_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 
-     curdir_(kSaveDir) {
+     curdir_(kSaveDir),
+     illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
 
 	layout();
 
@@ -106,12 +102,15 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
 	filename_editbox_.changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
 	filename_editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
+	filename_editbox_.cancel.connect(boost::bind(&GameMainMenuSaveGame::reset_editbox_or_die, this,
+	                                             parent.game().save_handler().get_cur_filename()));
 
 	ok_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 	cancel_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
 
 	load_or_save_.table().selected.connect(boost::bind(&GameMainMenuSaveGame::entry_selected, this));
 	load_or_save_.table().double_clicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
+	load_or_save_.table().cancel.connect(boost::bind(&GameMainMenuSaveGame::die, this));
 
 	load_or_save_.fill_table();
 	load_or_save_.select_by_name(parent.game().save_handler().get_cur_filename());
@@ -119,6 +118,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	center_to_parent();
 	move_to_top();
 
+	filename_editbox_.focus();
 	pause_game(true);
 	set_thinks(false);
 	layout();
@@ -141,69 +141,32 @@ void GameMainMenuSaveGame::entry_selected() {
 
 void GameMainMenuSaveGame::edit_box_changed() {
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
-	const bool is_legal_filename = LayeredFileSystem::is_legal_filename(filename_editbox_.text());
+	const bool is_legal_filename = FileSystem::is_legal_filename(filename_editbox_.text());
 	ok_.set_enabled(is_legal_filename);
+	filename_editbox_.set_tooltip(is_legal_filename ? "" : illegal_filename_tooltip_);
 	load_or_save_.delete_button()->set_enabled(false);
 	load_or_save_.clear_selections();
 }
 
-static void dosave(InteractiveGameBase& igbase, const std::string& complete_filename) {
-	Widelands::Game& game = igbase.game();
-
-	std::string error;
-	if (!game.save_handler().save_game(game, complete_filename, &error)) {
-		std::string s = _("Game Saving Error!\nSaved game file may be corrupt!\n\n"
-		                  "Reason given:\n");
-		s += error;
-		UI::WLMessageBox mbox(&igbase, _("Save Game Error!"), s, UI::WLMessageBox::MBoxType::kOk);
-		mbox.run<UI::Panel::Returncodes>();
+void GameMainMenuSaveGame::reset_editbox_or_die(const std::string& current_filename) {
+	if (filename_editbox_.text() == current_filename) {
+		die();
+	} else {
+		filename_editbox_.set_text(current_filename);
+		load_or_save_.select_by_name(current_filename);
 	}
-	game.save_handler().set_current_filename(complete_filename);
 }
 
-struct SaveWarnMessageBox : public UI::WLMessageBox {
-	SaveWarnMessageBox(GameMainMenuSaveGame& parent, const std::string& filename)
-	   : UI::WLMessageBox(&parent,
-	                      _("Save Game Error!"),
-	                      (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
-	                       FileSystem::fs_filename(filename.c_str()))
-	                         .str(),
-	                      MBoxType::kOkCancel),
-	     filename_(filename) {
-	}
-
-	GameMainMenuSaveGame& menu_save_game() {
-		return dynamic_cast<GameMainMenuSaveGame&>(*get_parent());
-	}
-
-	void clicked_ok() override {
-		g_fs->fs_unlink(filename_);
-		dosave(menu_save_game().igbase(), filename_);
-		menu_save_game().die();
-	}
-
-	void clicked_back() override {
-		die();
-	}
-
-private:
-	std::string const filename_;
-};
-
 void GameMainMenuSaveGame::ok() {
-	if (filename_editbox_.text().empty()) {
+	if (!ok_.enabled()) {
 		return;
 	}
 
-	std::string const complete_filename =
-	   igbase().game().save_handler().create_file_name(curdir_, filename_editbox_.text());
-
-	//  Check if file exists. If it does, show a warning.
-	if (g_fs->file_exists(complete_filename)) {
-		new SaveWarnMessageBox(*this, complete_filename);
-	} else {
-		dosave(igbase(), complete_filename);
+	std::string filename = filename_editbox_.text();
+	if (save_game(filename, !get_config_bool("nozip", false))) {
 		die();
+	} else {
+		load_or_save_.table_.focus();
 	}
 }
 
@@ -237,4 +200,72 @@ void GameMainMenuSaveGame::pause_game(bool paused) {
 		return;
 	}
 	igbase().game().game_controller()->set_paused(paused);
+}
+
+/**
+ * Save the game in the Savegame directory with
+ * the given filename
+ *
+ * returns true if dialog should close, false if it
+ * should stay open
+ */
+bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
+	// Trim it for preceding/trailing whitespaces in user input
+	boost::trim(filename);
+
+	//  OK, first check if the extension matches (ignoring case).
+	if (!boost::iends_with(filename, kSavegameExtension)) {
+		filename += kSavegameExtension;
+	}
+
+	//  Append directory name.
+	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
+
+	//  Check if file exists. If so, show a warning.
+	if (g_fs->file_exists(complete_filename)) {
+		const std::string s =
+		   (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
+		    FileSystem::fs_filename(filename.c_str()))
+		      .str();
+		UI::WLMessageBox mbox(
+		   this, _("Error Saving Game!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
+		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
+			return false;
+		}
+	}
+
+	// Try saving the game.
+	Widelands::Game& game = igbase().game();
+	GenericSaveHandler gsh(
+	   [&game](FileSystem& fs) {
+		   Widelands::GameSaver gs(fs, game);
+		   gs.save();
+	   },
+	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
+	GenericSaveHandler::Error error = gsh.save();
+
+	// If only the temporary backup couldn't be deleted, we still treat it as
+	// success. Automatic cleanup will deal with later. No need to bother the
+	// player with it.
+	if (error == GenericSaveHandler::Error::kSuccess ||
+	    error == GenericSaveHandler::Error::kDeletingBackupFailed) {
+		game.save_handler().set_current_filename(complete_filename);
+		igbase().log_message(_("Game saved"));
+		return true;
+	}
+
+	// Show player an error message.
+	std::string msg = gsh.localized_formatted_result_message();
+	UI::WLMessageBox mbox(this, _("Error Saving Game!"), msg, UI::WLMessageBox::MBoxType::kOk);
+	mbox.run<UI::Panel::Returncodes>();
+
+	// If only the backup failed (likely just because of a file lock),
+	// then leave the dialog open for the player to try with a new filename.
+	if (error == GenericSaveHandler::Error::kBackupFailed) {
+		return false;
+	}
+
+	// In the other error cases close the dialog.
+	igbase().log_message(_("Saving failed!"));
+	return true;
 }

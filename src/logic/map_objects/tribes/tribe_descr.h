@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,8 +26,7 @@
 
 #include "base/macros.h"
 #include "graphic/animation.h"
-#include "logic/description_maintainer.h"
-#include "logic/editor_game_base.h"
+#include "graphic/toolbar_imageset.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/road_textures.h"
@@ -36,10 +35,10 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 
-class EditorGameBase;
 class ResourceDescription;
 class WareDescr;
 class Warehouse;
@@ -47,6 +46,18 @@ class WorkerDescr;
 class World;
 class BuildingDescr;
 struct Event;
+
+/*
+ * Resource indicators:
+ * A ResourceIndicatorSet maps the resource name to a ResourceIndicatorList.
+ * A ResourceIndicatorList maps resource amounts to the DescriptionIndex of an immovable this player
+ * uses.
+ * Special case: The ResourceIndicatorList mapped to "" contains resis that will be used in
+ * locations
+ * without resources. If it has several entries, result is arbitrary.
+ */
+using ResourceIndicatorList = std::map<uint32_t, DescriptionIndex>;
+using ResourceIndicatorSet = std::map<std::string, ResourceIndicatorList>;
 
 /*
 Tribes
@@ -72,6 +83,7 @@ public:
 	const std::set<DescriptionIndex>& wares() const;
 	const std::set<DescriptionIndex>& workers() const;
 	const std::set<DescriptionIndex>& immovables() const;
+	const ResourceIndicatorSet& resource_indicators() const;
 
 	bool has_building(const DescriptionIndex& index) const;
 	bool has_ware(const DescriptionIndex& index) const;
@@ -105,7 +117,6 @@ public:
 	DescriptionIndex soldier() const;
 	DescriptionIndex ship() const;
 	DescriptionIndex port() const;
-	DescriptionIndex barracks() const;
 	DescriptionIndex ironore() const;
 	DescriptionIndex rawlog() const;
 	DescriptionIndex refinedlog() const;
@@ -138,28 +149,22 @@ public:
 	}
 
 	using WaresOrder = std::vector<std::vector<Widelands::DescriptionIndex>>;
-	using WaresOrderCoords = std::vector<std::pair<uint32_t, uint32_t>>;
 	const WaresOrder& wares_order() const {
 		return wares_order_;
-	}
-	const WaresOrderCoords& wares_order_coords() const {
-		return wares_order_coords_;
 	}
 
 	const WaresOrder& workers_order() const {
 		return workers_order_;
 	}
-	const WaresOrderCoords& workers_order_coords() const {
-		return workers_order_coords_;
-	}
-
-	void resize_ware_orders(size_t maxLength);
 
 	const std::vector<std::string>& get_ship_names() const {
 		return ship_names_;
 	}
 
 	void add_building(const std::string& buildingname);
+
+	// The custom toolbar imageset if any. Can be nullptr.
+	ToolbarImageset* toolbar_image_set() const;
 
 private:
 	// Helper function for adding a special worker type (carriers etc.)
@@ -184,6 +189,7 @@ private:
 	std::vector<std::string> ship_names_;
 	std::set<DescriptionIndex> workers_;
 	std::set<DescriptionIndex> wares_;
+	ResourceIndicatorSet resource_indicators_;
 	// The wares that are used by construction sites
 	std::set<DescriptionIndex> construction_materials_;
 	// Special units. Some of them are used by the engine, some are only used by the AI.
@@ -194,7 +200,6 @@ private:
 	DescriptionIndex soldier_;     // The soldier that this tribe uses
 	DescriptionIndex ship_;        // The ship that this tribe uses
 	DescriptionIndex port_;        // The port that this tribe uses
-	DescriptionIndex barracks_;    // The barracks to create soldiers
 	DescriptionIndex ironore_;     // Iron ore
 	DescriptionIndex rawlog_;      // Simple log
 	DescriptionIndex refinedlog_;  // Refined log, e.g. wood or blackwood
@@ -203,14 +208,15 @@ private:
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display
 	WaresOrder wares_order_;
-	WaresOrderCoords wares_order_coords_;
 	WaresOrder workers_order_;
-	WaresOrderCoords workers_order_coords_;
+
+	// An optional custom imageset for the in-game menu toolbar
+	std::unique_ptr<ToolbarImageset> toolbar_image_set_;
 
 	std::vector<Widelands::TribeBasicInfo::Initialization> initializations_;
 
 	DISALLOW_COPY_AND_ASSIGN(TribeDescr);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBE_DESCR_H

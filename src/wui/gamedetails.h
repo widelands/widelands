@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 by the Widelands Development Team
+ * Copyright (C) 2016-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 
 #include "graphic/image.h"
 #include "logic/game_controller.h"
+#include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
@@ -76,10 +77,9 @@ struct SavegameData {
  */
 class GameDetails : public UI::Box {
 public:
-	enum class Style { kFsMenu, kWui };
 	enum class Mode { kSavegame, kReplay };
 
-	GameDetails(Panel* parent, Style style, Mode mode);
+	GameDetails(Panel* parent, UI::PanelStyle style, Mode mode);
 
 	/// Reset the data
 	void clear();
@@ -96,7 +96,7 @@ private:
 	/// Layout the information on screen
 	void layout() override;
 
-	const Style style_;
+	const UI::PanelStyle style_;
 	const Mode mode_;
 	const int padding_;
 

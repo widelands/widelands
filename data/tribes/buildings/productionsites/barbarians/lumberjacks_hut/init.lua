@@ -32,8 +32,8 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
+      collects_ware_from_map = "log",
       basic_amount = 1,
-      logproducer = true
    },
 
    working_positions = {
@@ -44,13 +44,18 @@ tribes:new_productionsite_type {
       "log"
    },
 
+   indicate_workarea_overlaps = {
+      barbarians_rangers_hut = true,
+      barbarians_lumberjacks_hut = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
          descname = _"felling trees",
          actions = {
-            "sleep=25000", -- Sleeps shorter than any other tribes.
-            "worker=chop"
+            "callworker=harvest",
+            "sleep=20000"
          }
       },
    },

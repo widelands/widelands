@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,9 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H
 #define WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H
 
-enum TextToDraw {
+// Only declare powers of 2 and adjust the ~ operator below if you add any values to this enum
+// class.
+enum class TextToDraw {
 	kNone = 0,
 	kCensus = 1,
 	kStatistics = 2,
@@ -28,6 +30,15 @@ enum TextToDraw {
 
 inline TextToDraw operator|(TextToDraw a, TextToDraw b) {
 	return static_cast<TextToDraw>(static_cast<int>(a) | static_cast<int>(b));
+}
+inline TextToDraw operator&(TextToDraw a, TextToDraw b) {
+	return static_cast<TextToDraw>(static_cast<int>(a) & static_cast<int>(b));
+}
+inline TextToDraw removeFromTextToDraw(TextToDraw base, TextToDraw remove) {
+	const int result = static_cast<int>(base) & ~static_cast<int>(remove);
+	assert(result >= 0);
+	assert(result <= 2);
+	return static_cast<TextToDraw>(result);
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H

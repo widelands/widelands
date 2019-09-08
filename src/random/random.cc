@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,6 +105,6 @@ void RNG::write_state(StreamWrite& sw) {
 }
 
 std::string generate_random_uuid() {
-	static boost::uuids::random_generator gen = boost::uuids::random_generator();
+	static boost::uuids::random_generator gen;
 	return boost::uuids::to_string(gen());
 }

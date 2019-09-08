@@ -50,10 +50,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
          descname = _"spinning gold",
          actions = {
-            "sleep=15000",
             "return=skipped unless economy needs gold_thread",
             "consume=gold",
-            "play_sound=sound/atlanteans goldspin 192",
+            "sleep=15000",
+            "playsound=sound/atlanteans/goldspin 192",
             "animate=working 25000",
             "produce=gold_thread"
          }

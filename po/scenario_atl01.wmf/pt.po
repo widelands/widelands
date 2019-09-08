@@ -1,18 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015
 # GunChleoc, 2015-2016
 # GunChleoc, 2014-2015
 # GunChleoc, 2014
+# Rui <xymarior@yandex.com>, 2018
 # zecas <jjorge@free.fr>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-10 11:03+0000\n"
-"PO-Revision-Date: 2018-02-10 11:05+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -558,7 +559,7 @@ msgid ""
 "building where the side effects do not matter? I think those two things "
 "would be accepted by the people and would reduce the cooking time without "
 "taking away the ritual."
-msgstr "Ah! Outra coisa é ter de fazer o fumeiro do peixe e da carne cá em casa: é terrível ter de passar a semana a cheirar a fumo e ficar com a casa empestada com os cheiros todos. Não pensas que podíamos fazer isto num edifício especial sem termos todos que ter levar com o pivete e a sujidade? Estou em crer que as pessoas vão aceitar isto de bom grado, pois para além de diminuir os tempos de confecção para podermos-nos dedicar a outras coisas, isto não vai tirar nada ao ritual sagrado da preparação da nossa comida."
+msgstr "Ah! Outra coisa é ter de fazer o fumeiro do peixe e da carne cá em casa: é terrível ter de passar a semana a cheirar a fumo e ficar com a casa empestada com os cheiros todos. Não pensas que podíamos fazer isto num edifício especial sem termos todos que ter levar com o pivete e a sujidade? Estou em crer que as pessoas vão aceitar isto de bom grado, pois para além de diminuir os tempos de confeção para podermos dedicar-nos a outras coisas, isto não vai tirar nada ao ritual sagrado da preparação da nossa comida."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:246
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
@@ -834,7 +835,7 @@ msgid ""
 "that the ocean is rising quickly. We have to reach higher ground and "
 "evacuate everybody and as much wares as we can from the headquarters up the "
 "mountains. How can we escape?"
-msgstr "Que Satul nos salve! Lutas está a tentar capturar-nos. Um escuteiro informou-me que o oceano está a subir rapidamente. Temos de chegar a um terreno elevado e evacuar todos e a quantos materiais do nosso quartel-general for possível. Mas como poderíamos escapar?"
+msgstr "Que Satul nos salve! Lutas está a tentar capturar-nos. Um batedor informou-me que o oceano está a subir rapidamente. Temos de chegar a um terreno elevado e evacuar todos e a quantos materiais do nosso quartel-general for possível. Mas como poderíamos escapar?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:432
 msgid "A Young Man Approaches"
@@ -928,13 +929,15 @@ msgstr "Este Edifício foi destruído!"
 msgid "We lost a building to the ocean!"
 msgstr "Perdemos prédio para o mar!"
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "«&nbsp;%s&nbsp;»"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Novo objetivo"
-msgstr[1] "Novos objetivos"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,9 +25,10 @@
 AI Hints and Restrictions
 =========================
 
-Every :doc:`building <autogen_toc_lua_tribes_buildings>`'s ``init.lua`` file has an ``aihints`` table in its ``new_<building_type>_type{table}``
-function. This ``aihints`` table can contain any number of entries, which will help the AI decide
-when and where to build or dismantle a building of that type and/or how to treat it.
+Every :doc:`building <autogen_toc_lua_tribes_buildings>`'s ``init.lua`` file has an ``aihints``
+table in its ``new_<building_type>_type{table}`` function. This ``aihints`` table can contain any
+number of entries, which will help the AI decide when and where to build or dismantle a building of
+that type and/or how to treat it.
 
 All entries in ``aihints`` are optional.
 
@@ -134,19 +135,23 @@ Military Sites
 Production Sites
 ----------------
 
-**graniteproducer**
-    The building will produce the ``granite`` ware, e.g.::
+**collects_ware_from_map**
+    The building will generate this ware from the map, e.g. a well mining the ``water`` ware,
+    or the hunter returning from the hunt with the ``meat`` ware. The same ware needs also to be
+    listed as the first one of the building's outputs, e.g.::
 
-        graniteproducer = true,
+        aihints = {
+            collects_ware_from_map = "meat"
+        },
 
-    The AI expects exactly one such building type.
+        outputs = {
+            "meat",
+            "fur"
+        },
 
-**logproducer**
-    The building will produce the ``log`` ware, e.g.::
-
-        logproducer = true,
-
-    The AI expects exactly one such building type.
+    **Note:** The AI expects exactly one such building type for each of the following wares:
+    ``fish`` (fisher), ``granite`` (quarry), ``log`` (lumberjack/woodcutter), ``meat`` (hunter),
+    ``water`` (well).
 
 **mines**
     The building will mine to obtain the given ware, e.g.::
@@ -157,13 +162,6 @@ Production Sites
     The percentage that a mine will mine of its resource before it needs enhancing, e.g.::
 
         mines_percent = 60,
-
-**mines_water**
-    The building will mine to obtain the ``water`` ware, e.g.::
-
-        mines_water = true,
-
-    **Note:** The AI expects exactly one such building type.
 
 **needs_water**
     The building needs to be placed near a body of water, e.g.::
@@ -203,6 +201,13 @@ Production Sites
     the AI can tolerate such buildings, they will be primarily treated as normal
     production sites when deciding on the building's location.
 
+**requires_supporters**
+    This building will be built only if a supporter is nearby::
+
+        requires_supporters = true,
+
+    For example if set for lumberjack, it will be built only if a renger is nearby.
+
 **trainingsites_max_percent**
     The maximum percengate this training site will have among all training sites, e.g.::
 
@@ -217,18 +222,16 @@ Production Sites
 
 BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
    : mines_(table->has_key("mines") ? table->get_string("mines") : ""),
-     log_producer_(table->has_key("logproducer") ? table->get_bool("logproducer") : false),
-     granite_producer_(table->has_key("graniteproducer") ? table->get_bool("graniteproducer") :
-                                                           false),
      needs_water_(table->has_key("needs_water") ? table->get_bool("needs_water") : false),
-     mines_water_(table->has_key("mines_water") ? table->get_bool("mines_water") : false),
-     recruitment_(table->has_key("recruitment") ? table->get_bool("recruitment") : false),
      space_consumer_(table->has_key("space_consumer") ? table->get_bool("space_consumer") : false),
      expansion_(table->has_key("expansion") ? table->get_bool("expansion") : false),
      fighting_(table->has_key("fighting") ? table->get_bool("fighting") : false),
      mountain_conqueror_(
         table->has_key("mountain_conqueror") ? table->get_bool("mountain_conqueror") : false),
      shipyard_(table->has_key("shipyard") ? table->get_bool("shipyard") : false),
+     collects_ware_from_map_(table->has_key("collects_ware_from_map") ?
+                                table->get_string("collects_ware_from_map") :
+                                ""),
      prohibited_till_(table->has_key("prohibited_till") ? table->get_int("prohibited_till") : 0),
      basic_amount_(table->has_key("basic_amount") ? table->get_int("basic_amount") : 0),
      // 10 days default
@@ -237,6 +240,9 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
      very_weak_ai_limit_(
         table->has_key("very_weak_ai_limit") ? table->get_int("very_weak_ai_limit") : -1),
      weak_ai_limit_(table->has_key("weak_ai_limit") ? table->get_int("weak_ai_limit") : -1),
+     normal_ai_limit_(table->has_key("normal_ai_limit") ? table->get_int("normal_ai_limit") : -1),
+     requires_supporters_(
+        table->has_key("requires_supporters") ? table->get_bool("requires_supporters") : false),
      trainingsites_max_percent_(table->has_key("trainingsites_max_percent") ?
                                    table->get_int("trainingsites_max_percent") :
                                    0) {
@@ -254,4 +260,40 @@ void BuildingHints::set_trainingsites_max_percent(int percent) {
 
 uint8_t BuildingHints::trainingsites_max_percent() const {
 	return trainingsites_max_percent_;
+}
+
+int16_t BuildingHints::get_ai_limit(const Widelands::AiType ai_type) const {
+	switch (ai_type) {
+	case Widelands::AiType::kVeryWeak:
+		return very_weak_ai_limit_;
+	case Widelands::AiType::kWeak:
+		return weak_ai_limit_;
+	case Widelands::AiType::kNormal:
+		return normal_ai_limit_;
+	}
+	NEVER_HERE();
+}
+
+// TODO(GunChleoc): WareDescr has a bare "preciousness" table that should be moved below a new
+// "aihints" table.
+void WareWorkerHints::read_preciousness(const LuaTable& table) {
+	for (const std::string& key : table.keys<std::string>()) {
+		preciousnesses_.insert(std::make_pair(key, table.get_int(key)));
+	}
+}
+
+/// Returns the preciousness of the ware, or kInvalidWare if the tribe doesn't use the ware.
+int WareWorkerHints::preciousness(const std::string& tribename) const {
+	if (preciousnesses_.count(tribename) > 0) {
+		return preciousnesses_.at(tribename);
+	}
+	return Widelands::kInvalidWare;
+}
+
+WareHints::WareHints(const LuaTable& table) : WareWorkerHints() {
+	read_preciousness(table);
+}
+
+WorkerHints::WorkerHints(const LuaTable& table) : WareWorkerHints() {
+	read_preciousness(*table.get_table("preciousness"));
 }

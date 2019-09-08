@@ -23,7 +23,7 @@ end
 -- Objectives
 -- ===========
 obj_build_woodeconomy = {
-   name = "build_woodeconomy ",
+   name = "build_woodeconomy",
    title =_"Build up a wood economy",
    number = 5,
    body = objective_text(_"Wood Economy",
@@ -32,7 +32,7 @@ obj_build_woodeconomy = {
 }
 
 obj_build_quarry = {
-   name = "build_quarry ",
+   name = "build_quarry",
    title =_"Build a quarry",
    number = 1,
    body = objective_text(_"Quarry",
@@ -41,7 +41,7 @@ obj_build_quarry = {
 }
 
 obj_build_military_buildings = {
-   name = "build_military_buildings ",
+   name = "build_military_buildings",
    title =_"Protect your colony",
    number = 1,
    body = objective_text(_"Protect Your Colony",
@@ -50,7 +50,7 @@ obj_build_military_buildings = {
 }
 
 obj_build_marblemine = {
-   name = "build_marblemine ",
+   name = "build_marblemine",
    title =_"Start mining marble",
    number = 1,
    body = objective_text(_"Marble",
@@ -59,7 +59,7 @@ obj_build_marblemine = {
 }
 
 obj_build_mining_infrastructure = {
-   name = "build_mining_infrastructure ",
+   name = "build_mining_infrastructure",
    title =_"Build a stonemason’s house and mining infrastructure",
    number = 7,
    body = objective_text(_"Stonemason’s house and Mining Infrastructure",
@@ -72,31 +72,33 @@ obj_build_food_infrastructure = {
    title =_"Provide your miners with food",
    number = 1,
    body = objective_text(_"Food For Your Miners",
-      li(_[[To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.]]) ..
-      li(_[[Of course this means we will need more resources for preparing this food – like fish, meat or bread. To provide these foodstuffs, you would have to build a fisher’s house, a farm, a mill and a bakery.]]) ..
-      li(_[[Maybe you will also need a hunter’s house, a piggery, a vineyard and some wells.]]) ..
+      li(_[[Build a tavern to produce some food to sustain our miners.]]) ..
+      li_arrow(_[[Of course this means you will need more resources for preparing this food – like fish, meat or bread.]]) ..
+      li_arrow(_[[To provide these foodstuffs, you can build a fisher’s house, a hunter’s house, a farm, a mill and a bakery.]]) ..
+      li(_[[Build a brewery and a winery to supply the miners with some good and strong drinks.]]) ..
+      li_arrow(_[[Maybe you will also need a piggery, a vineyard and some wells.]]) ..
       li_arrow(_[[It’s up to you what you want to build. But remember – coal and iron mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish.]])
    ),
 }
 
 obj_build_bigger_military_buildings = {
-   name = "build_bigger_military_buildings ",
+   name = "build_bigger_military_buildings",
    title =_"Protect your eastern frontier",
    number = 1,
    body = objective_text(_"Protect Your Eastern Frontier",
-      li(_[[Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier.]]) ..
-      li_arrow(_[[To watch deep inside the enemy territory, build a tower.]])
+      li(_[[Build stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier.]]) ..
+      li_arrow(_[[Build a tower to watch deep inside the enemy territory.]])
    ),
 }
 
 obj_remove_the_barbarians = {
-   name = "remove_the_barbarians ",
+   name = "remove_the_barbarians",
    title =_"Destroy the Barbarian tribe",
    number = 2,
    body = objective_text(_"Destroy the Barbarian Tribe",
       li(_[[Build a barracks to start training soldiers.]]) ..
-      li(_[[As soon as you have enough soldiers, attack and completely destroy the Barbarian buildings.]]) ..
-      li(_[[Finally, build up a fortress on the peninsula (near where the Barbarian headquarters stood before), to avoid new settlements of other tribes in that region.]])
+      li(_[[Attack and completely destroy the Barbarian buildings as soon as you have enough soldiers.]]) ..
+      li(_[[Build a fortress on the peninsula (near where the Barbarian headquarters stood before). Finally, this will avoid new settlements of other tribes in that region.]])
    ),
 }
 
@@ -212,7 +214,7 @@ amalea_1 = {
       _([[Lutius, don’t you think you forgot something important?]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[It’s nice, and of course a good idea, to build up mines, which will give us a more comfortable life, but the people working in the mines are unhappy with the current situation. They have to do hard work and have no time for making their own food.]])
+      _([[It’s nice, and of course a good idea, to build mines, which will give us a more comfortable life, but the people working in the mines are unhappy with the current situation. They have to do hard work and have no time for making their own food.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[What do you think about helping them out? I can’t tell you what we need exactly… but here are my recommendations:]]))
@@ -243,7 +245,7 @@ diary_page_8 = {
       _([[At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me, they charged towards me and started attacking me with their throwing spears. Thanks be to the Gods that I was able to flee and hide myself, before retreating back to our colony under cover of darkness.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
-      _([[Anyway, we must build up stronger military buildings as soon as possible.]]))
+      _([[Anyway, we must build stronger military buildings as soon as possible.]]))
       .. new_objectives(obj_build_bigger_military_buildings)
 }
 
@@ -265,7 +267,7 @@ diary_page_10 = {
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
       _([[There are still a few Barbarians hiding on our island, but I am sure that we will find them soon. Every Barbarian who doesn’t attack us will be put in a boat with the other peaceful ones, and sent back to their country.]]))
-      ..  objective_text(_"Victory",
+      .. objective_text(_"Victory",
       _[[You have established a working economy, trained new soldiers and driven the Barbarians from the island.]])
 }
 

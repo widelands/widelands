@@ -1,20 +1,20 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2016
+# GunChleoc, 2016,2018
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2018
+# Jukka Pakarinen, 2016-2019
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
 # Sampo Harjula <sahtor@sahtor.net>, 2015
 # Teppo Mäenpää <teppo@runbox.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
-"PO-Revision-Date: 2018-02-23 18:18+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-03-29 07:26+0000\n"
+"PO-Revision-Date: 2019-03-30 17:05+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,57 +38,62 @@ msgstr "Lisenssi"
 msgid "Licensing information for Widelands"
 msgstr "Widelands pelin lisenssi"
 
-#: ../../data/txts/LICENSE.lua:9
-msgid "Copyright 2002 - 2018 by the Widelands Development Team."
-msgstr ""
+#. TRANSLATORS: Placeholder is copyright end year
+#: ../../data/txts/LICENSE.lua:10
+msgid "Copyright 2002 - %1% by the Widelands Development Team."
+msgstr "Copyright 2002 - %1% Widelands-kehittäjätiimi."
 
-#: ../../data/txts/LICENSE.lua:11
+#: ../../data/txts/LICENSE.lua:12
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Tämä peli on vapaata ohjelmistoa (FOSS), lisenssinä GNU General Public License (GPL) V2.0."
 
-#: ../../data/txts/LICENSE.lua:13
+#: ../../data/txts/LICENSE.lua:14
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Löydät lisätietoa vapaista FOSS ohjelmistoista ja GPL-lisenssistä osoitteesta: %s"
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Sieltä löydät linsenssitekstin sekä muuta tietoa vapaista ohjelmistoista."
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:18
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "GPL-lisenssiteksti löytyy myös Widelands-paketista."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Linux-käyttöjärjerstelmässä teksti löytyy COPYING -nimisestä tiedostosta, joka puolestaan löytyy asennuspuun juurihakemistosta (usein ‘%1%’)."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Windows-käyttöjärjestelmässä lisenssi löytyy COPYING.txt -nimisestä tiedostosta. Asennushakemiston löydät Widelands Start -valikon avulla."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:21
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "MacOS:n alla lisenssiteksti löytyy COPYING -nimisestä tiedostosta, joka löytyy veppisivulta lataamastasi asennuspaketista."
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:23
+msgid "This game comes as-is and without any warranty."
+msgstr "Tämä peli tulee sellaisena kuin se on ja ilman minkäänlaista takuuta."
+
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
-"This game comes as-is and without any warranty. For more information and "
-"support you can find us at %1% (Website, Wiki, Forum for questions or "
-"general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr "Tämä peli tulee sellaisena kuin se on ja ilman minkäänlaista takuuta. Lisätietoja ja tukea voit etsiä osoitteista %1% (Kotisivut, Wiki, Foorumi kysymyksille tai yleistuki), %2% (Virheraportointi), ja %3% (Kielikäännökset)."
+"For more information and support you can find us at %1% (Website, Wiki, "
+"Forum for questions or general support), %2% (Bugtracker), and %3% "
+"(Translations)."
+msgstr "Lisätietoa ja tukea voit etsiä ja saada osoitteesta %1% (Kotisivut, Wiki, Keskustelupalsta kysymyksille tai yleiselle tuelle), %2% (Bugiraportointijärjestelmä), ja %3% (Käännökset)."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -198,11 +203,11 @@ msgid "Widelands Translators"
 msgstr "Kääntäjät"
 
 #: ../../data/txts/developers.lua:3
-msgid "Atlantean"
-msgstr "Atlantislainen"
+msgid "Atlanteans"
+msgstr "Atlantislaiset"
 
 #: ../../data/txts/developers.lua:3
-msgid "Barbarian"
+msgid "Barbarians"
 msgstr "Barbaarit"
 
 #: ../../data/txts/developers.lua:3
@@ -238,12 +243,20 @@ msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
+msgid "Flatpak"
+msgstr "Flatpak"
+
+#: ../../data/txts/developers.lua:3
 msgid "Former Elders"
 msgstr "Entiset vanhimmat"
 
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
 msgstr "FreeBSD"
+
+#: ../../data/txts/developers.lua:3
+msgid "Frisians"
+msgstr "Vapaamieliset"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -309,6 +322,14 @@ msgstr "Windows"
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
+#: ../../data/txts/developers.lua:3
+msgid "and many, many more (thank you for everything you've done)"
+msgstr "ja paljon monia muita (kiitos kaikesta mitä olette tehneet)"
+
+#: ../../data/txts/developers.lua:3
+msgid "vacant"
+msgstr "vacant"
+
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
 msgstr "Verkko-ohje"
@@ -331,7 +352,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr "Widelands on ilmainen, vapaan koodin reaaliaikastrategiapeli, jossa on yksinpelikampanjoitasekä mahdollisuus moninpeliin verkossa. Peli ammensi alunperin inspiraatiota Settlers II -pelistä,mutta on sitemmin kehittynyt esikuvaansa monipuolisemmaksi."
+msgstr "Widelands on ilmainen, vapaan koodin reaaliaikastrategiapeli, jossa on yksinpelikampanjoita sekä mahdollisuus moninpeliin verkossa. Peli ammensi alunperin inspiraatiota Settlers II -pelistä, mutta on sitemmin kehittynyt esikuvaansa monipuolisemmaksi."
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid ""
@@ -467,7 +488,7 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr "Vain peliä isännöivä taho voi säätää kolmea jälkimmäistä asetusta klikkaamalla pelaajan ‘Tyyppi’ painiketta. Isännöivät palaajat voivat myös asettaa jokaisen pelaajan alkuasetelman (rakennukset, tavarat ja työntekijät, joilla pelaaja aloittaa) ja heimon sekä joukkueen tekoälypelaajille."
+msgstr "Vain peliä isännöivä taho voi säätää kolmea jälkimmäistä asetusta klikkaamalla pelaajan ‘Tyyppi’ painiketta. Isännöivät palaajat voivat myös asettaa jokaisen pelaajan alkuasetelman (rakennukset, tuotteet ja työntekijät, joilla pelaaja aloittaa) ja heimon sekä joukkueen tekoälypelaajille."
 
 #: ../../data/txts/help/multiplayer_help.lua:22
 msgid ""
@@ -519,6 +540,7 @@ msgid ""
 msgstr "Rakenna aina metsänvartijan ja riistanvartijan majat, jotta tukit ja riista eivät pääse loppumaan."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+#: ../../data/txts/tips/frisians.lua:12
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
@@ -530,7 +552,7 @@ msgstr "Useimmat laajennetut rakennukset tarvitsevat kokeneita työläisiä. Äl
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr ""
+msgstr "Kartan muokkaus- ja muita ohjeita sekä lyhyt johdanto löytyy wikisivulta osoiteesta %s."
 
 #: ../../data/txts/tips/editor.lua:11
 msgid ""
@@ -592,7 +614,7 @@ msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr ""
+msgstr "Voit sijoittaa suuren rakennuksen mihin tahansa solmukohtaan, johon voisit sijoittaa keskisuuren rakennuksen, jos lännen, luoteen ja koillisen suunnalla ei ole esinettä tai viljelykelvotonta maata."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -601,6 +623,17 @@ msgstr "Rakenna aina metsänhoitajan mökki, jottei taloutesi tukehtuisi tukkipu
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
 msgstr "Keisarikunta tarvitsee paljon marmoria. Jatka marmoriresurssien etsimistä."
+
+#: ../../data/txts/tips/frisians.lua:4
+msgid ""
+"To produce bricks, you need granite; to produce granite, you need a quarry "
+"or rock mine; to build those, you need bricks. Take care not to get "
+"deadlocked!"
+msgstr "Tuottaaksesi tiiliä, tarvitset graniittia; tuottaaksesi graniittia, tarvitset kivilouhoksen tai kivikaivoksen; rakentaaksesi ne, tarvitset tiiliä. Pidä huoli ettet jumiudu umpikujaan!"
+
+#: ../../data/txts/tips/frisians.lua:8
+msgid "Always build a forester’s house, so you will not run out of logs."
+msgstr "Rakenna aina metsänhoitajan mökki, jottei taloutesi tukehtuisi tukkipulaan."
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""
@@ -628,7 +661,7 @@ msgstr "Kaivokset toimivat vain, jos kaivosmiehet saavat ruokaa."
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr "Jaa tiesi lyhyempiin pätkiin asettamalla niille lippuja. Tämä nopeuttaa tavaroiden kuljetusta."
+msgstr "Jaa tiesi lyhyempiin pätkiin asettamalla niille lippuja. Tämä nopeuttaa tuotteiden kuljetusta."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/general_game.lua:27
@@ -636,19 +669,19 @@ msgstr "Jaa tiesi lyhyempiin pätkiin asettamalla niille lippuja. Tämä nopeutt
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
-msgstr ""
+msgstr "Kysymyksiä mielessä? Vastauksia voit löytää FAQ sivuilta eli usein kysytyistä kysymyksistä, wikistä ja yhteisömme keskustelupalstoilta osoitteessa %s."
 
 #: ../../data/txts/tips/general_game.lua:31
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware. Pressing Ctrl while clicking will adjust all wares at once."
-msgstr "Käytä rakennusruudun prioriteettipainikkeita säätääksesi tavaran toimituksia. Kaikkia tavaroita voi säätää kerralla, jos Ctrl on pohjassa."
+msgstr "Käytä rakennusruudun prioriteettipainikkeita säätääksesi tavaran toimituksia. Kaikkia tuotteita voi säätää kerralla, jos Ctrl on pohjassa."
 
 #: ../../data/txts/tips/general_game.lua:35
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr "Säädä tavaroiden tavoitemäärät varastossa 'Muokkaa taloutta' -valikon avulla. Taloudenmuokkausvalikon löydät minkä tahansa lipun valikosta."
+msgstr "Säädä tavaroiden tavoitemäärät varastossa 'Muuta talouden asetuksia' -valikon avulla. Taloudenmuokkausvalikon löydät minkä tahansa lipun valikosta."
 
 #: ../../data/txts/tips/general_game.lua:39
 msgid ""
@@ -725,7 +758,7 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
-msgstr "Kun rakennus tuhotaan, sen työntekijät käyvät etsimään lähistöltä lippua, mistä he voivat kulkea tietä pitkin tieverkostossa olevalle varastolle. Jos lähistöllä ei ole sellaista lippua, he jatkavat kuljeskelua ja lopulta kuolevat. "
+msgstr "Kun rakennus tuhotaan, sen työntekijät käyvät etsimään lähistöltä lippua, mistä he voivat kulkea tietä pitkin tieverkostossa olevalle varastolle. Jos lähistöllä ei ole sellaista lippua, he jatkavat kuljeskelua ja lopulta kuolevat."
 
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
@@ -757,4 +790,4 @@ msgstr "Jos peli sattuisi kaatumaan, älä hätäänny! Peli tallennetaan automa
 msgid ""
 "Our computer players are too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr ""
+msgstr "Ovatko tietokonevastustajamme liian tylsiä? Vieraile verkkosivuillamme osoitteessa %s ja tapaa muita pelaajia pelataksesi verkossa."

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,6 @@
 
 #include "base/i18n.h"
 #include "graphic/animation.h"
-#include "graphic/graphic.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 
@@ -36,7 +35,8 @@ namespace Widelands {
  * /data/tribes/wares/armor/init.lua
  */
 WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table)
-   : MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname, table) {
+   : MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname, table),
+     ai_hints_(new WareHints(*table.get_table("preciousness"))) {
 	if (helptext_script().empty()) {
 		throw GameDataError("Ware %s has no helptext script", name().c_str());
 	}
@@ -52,18 +52,6 @@ WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table)
 	for (const std::string& key : items_table->keys<std::string>()) {
 		default_target_quantities_.emplace(key, items_table->get_int(key));
 	}
-
-	items_table = table.get_table("preciousness");
-	for (const std::string& key : items_table->keys<std::string>()) {
-		preciousnesses_.emplace(key, items_table->get_int(key));
-	}
-}
-
-int WareDescr::preciousness(const std::string& tribename) const {
-	if (preciousnesses_.count(tribename) > 0) {
-		return preciousnesses_.at(tribename);
-	}
-	return kInvalidWare;
 }
 
 DescriptionIndex WareDescr::default_target_quantity(const std::string& tribename) const {
@@ -99,4 +87,4 @@ const std::set<DescriptionIndex>& WareDescr::consumers() const {
 const std::set<DescriptionIndex>& WareDescr::producers() const {
 	return producers_;
 }
-}
+}  // namespace Widelands

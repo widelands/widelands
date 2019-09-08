@@ -41,10 +41,15 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
          descname = _"breeding fish",
          actions = {
-            "sleep=24000",
-            "worker=breed"
+            "callworker=breed",
+            "sleep=13500"
          }
       },
+   },
+
+   indicate_workarea_overlaps = {
+      atlanteans_fishers_house = true,
+      atlanteans_fishbreeders_house = false,
    },
 
    out_of_resource_notification = {

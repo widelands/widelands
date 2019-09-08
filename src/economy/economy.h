@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,8 +56,8 @@ struct NoteEconomy {
 	// When 2 economies have been merged, this is the economy number that has
 	// been removed, while the other one is the number of the resulting economy.
 	// For all other messages old_economy == new_economy.
-	Economy* old_economy;
-	Economy* new_economy;
+	Widelands::Serial old_economy;
+	Widelands::Serial new_economy;
 
 	enum class Action { kMerged, kDeleted };
 	const Action action;
@@ -91,6 +91,9 @@ class Economy {
 public:
 	friend class EconomyDataPacket;
 
+	// Initialize the global serial on game start
+	static void initialize_serial();
+
 	/// Configurable target quantity for the supply of a ware type in the
 	/// economy.
 	///
@@ -108,7 +111,12 @@ public:
 	};
 
 	explicit Economy(Player&);
+	explicit Economy(Player&, Serial serial);  // For saveloading
 	~Economy();
+
+	Serial serial() const {
+		return serial_;
+	}
 
 	Player& owner() const {
 		return owner_;
@@ -188,11 +196,11 @@ public:
 		return worker_target_quantities_[i];
 	}
 
-	bool has_window() const {
-		return has_window_;
+	void* get_options_window() const {
+		return options_window_;
 	}
-	void set_has_window(bool yes) {
-		has_window_ = yes;
+	void set_options_window(void* window) {
+		options_window_ = window;
 	}
 
 	const WareList& get_wares() const {
@@ -208,6 +216,9 @@ public:
 	void rebalance_supply() {
 		start_request_timer();
 	}
+
+protected:
+	static Serial last_economy_serial_;
 
 private:
 	// This structs is to store distance from supply to request(or), but to allow unambiguous
@@ -251,6 +262,8 @@ private:
 	/*************/
 	using RequestList = std::vector<Request*>;
 
+	const Serial serial_;
+
 	Player& owner_;
 
 	using Flags = std::vector<Flag*>;
@@ -264,7 +277,7 @@ private:
 
 	TargetQuantity* ware_target_quantities_;
 	TargetQuantity* worker_target_quantities_;
-	Router* router_;
+	std::unique_ptr<Router> router_;
 
 	using SplitPair = std::pair<OPtr<Flag>, OPtr<Flag>>;
 	std::vector<SplitPair> split_checks_;
@@ -276,13 +289,17 @@ private:
 	uint32_t request_timerid_;
 
 	static std::unique_ptr<Soldier> soldier_prototype_;
-	bool has_window_;
+
+	// This is always an EconomyOptionsWindow* (or nullptr) but I don't want a wui dependency here.
+	// We cannot use UniqueWindow to make sure an economy never has two windows because the serial
+	// may change when merging while the window is open, so we have to keep track of it here.
+	void* options_window_;
 
 	// 'list' of unique providers
 	std::map<UniqueDistance, Supply*> available_supplies_;
 
 	DISALLOW_COPY_AND_ASSIGN(Economy);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ECONOMY_H

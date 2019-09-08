@@ -3,11 +3,17 @@ dirname = "tribes/buildings/productionsites/empire/mill/"
 tribes:new_productionsite_type {
    msgctxt = "empire_building",
    name = "empire_mill1",
-   descname = "Mill",
+   descname = pgettext("empire_building", "Mill"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
+   enhancement = "empire_mill2",
 
+   buildcost = {
+      log = 3,
+      granite = 3,
+      marble = 1
+   },
    return_on_dismantle = {
       log = 1,
       granite = 2,
@@ -27,7 +33,6 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-
    },
 
    working_positions = {
@@ -48,7 +53,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "return=skipped unless economy needs flour",
             "consume=wheat:2",
-            "play_sound=sound/mill mill_turning 240",
+            "playsound=sound/mill/mill_turning 240",
             "animate=working 10000",
             "produce=flour"
          }

@@ -74,10 +74,14 @@ function worker_help_producers_string(tribe, worker_description)
             for j, program_name in ipairs(producing_programs) do
                result = result .. help_consumed_wares_workers(tribe, building, program_name)
                if (recruited_workers_counters[program_name] > 0) then
-                  result = result
-                     -- TRANSLATORS: Worker Encyclopedia: Workers recruited by a productionsite
-                     .. h3(ngettext("Worker recruited:", "Workers recruited:", recruited_workers_counters[program_name]))
-                     .. recruited_workers_strings[program_name]
+                  if (recruited_workers_counters[program_name] == 1) then
+                     -- TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
+                     result = result .. h3(_"Worker recruited:")
+                  else
+                     -- TRANSLATORS: Worker Encyclopedia: More than 1 worker recruited by a productionsite
+                     result = result .. h3(_"Workers recruited:")
+                  end
+                  result = result .. recruited_workers_strings[program_name]
                end
             end
          end
@@ -97,15 +101,44 @@ end
 --
 function worker_help_employers_string(worker_description)
    local result = ""
-   local employers = worker_description.employers;
 
-   if (#employers > 0) then
-      -- TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker can work
-      -- TRANSLATORS: You can also translate this as 'workplace(s)'
-      result = result .. h2(ngettext("Works at", "Works at", #employers))
+   if (#worker_description.employers > 0) then
+      local normal = {}
+      local additional = {}
+
+      if (#worker_description.employers == 1) then
+      -- TRANSLATORS: Worker Encyclopedia: Heading for 1 building where a worker can work
+      -- TRANSLATORS: You can also translate this as 'workplace'
+         result = result .. h2(pgettext("workerhelp_one_building", "Works at"))
+      else
+      -- TRANSLATORS: Worker Encyclopedia: A list of more than 1 building where a worker can work
+      -- TRANSLATORS: You can also translate this as 'workplaces'
+         result = result .. h2(pgettext("workerhelp_multiple_buildings", "Works at"))
+      end
       for i, building in ipairs(worker_description.employers) do
          result = result .. dependencies({worker_description, building}, building.descname)
+         normal[building.descname] = true
       end
+      building = worker_description.employers[1]
+         if #building.working_positions > 1 and worker_description.name ~= building.working_positions[1].name then
+            for i, build in ipairs(building.working_positions[1].employers) do
+               if not normal[build.descname] then
+                  table.insert(additional, build)
+               end
+            end
+            if #additional == 1 then
+               -- Translators: Worker Encyclopedia: Heading above a list 1 building where a worker may work instead of a less experienced worker
+               -- TRANSLATORS: You can also translate this as 'additional workplace'
+               result = result .. h2(pgettext("workerhelp_one_building", "Can also work at"))
+            else
+               -- Translators: Worker Encyclopedia: Heading above a list of buildings where a worker may work instead of a less experienced worker
+               -- TRANSLATORS: You can also translate this as 'additional workplaces'
+               result = result .. h2(pgettext("workerhelp_multiple_buildings", "Can also work at"))
+            end
+            for i, build in ipairs(additional) do
+               result = result .. dependencies({worker_description, build}, build.descname)
+            end
+         end
    end
    return result
 end
@@ -129,7 +162,7 @@ function worker_help_string(tribe, worker_description)
    local result = h2(_"Purpose") ..
       li_image(worker_description.icon_name, worker_helptext())
 
-   if (worker_description.is_buildable) then
+   if (worker_description.buildable) then
       -- Get the tools for the workers.
       local toolnames = {}
       for j, buildcost in ipairs(worker_description.buildcost) do

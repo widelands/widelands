@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,8 +27,8 @@
 #include "base/warning.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
-#include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/profile.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -37,13 +37,12 @@
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
-#include "wui/gamechatpanel.h"
+#include "wui/game_chat_panel.h"
 #include "wui/multiplayersetupgroup.h"
 
 /// Simple user interaction window for selecting either map, save or cancel
@@ -59,24 +58,24 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		uint32_t space = y;
 		uint32_t butw = get_inner_w() - 2 * space;
 		uint32_t buth = (get_inner_h() - 2 * space) / 5;
-		UI::Button* btn = new UI::Button(this, "map", space, y, butw, buth,
-		                                 g_gr->images().get("images/ui_basic/but0.png"), _("Map"),
-		                                 _("Select a map"));
+		UI::Button* btn =
+		   new UI::Button(this, "map", space, y, butw, buth, UI::ButtonStyle::kFsMenuSecondary,
+		                  _("Map"), _("Select a map"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kNormalGame));
 
 		btn = new UI::Button(this, "saved_game", space, y + buth + space, butw, buth,
-		                     g_gr->images().get("images/ui_basic/but0.png"),
+		                     UI::ButtonStyle::kFsMenuSecondary,
 		                     /** Translators: This is a button to select a savegame */
 		                     _("Saved Game"), _("Select a saved game"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kScenarioGame));
 
-		btn = new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2,
-		                     buth, g_gr->images().get("images/ui_basic/but1.png"), _("Cancel"),
-		                     _("Cancel selection"));
+		btn =
+		   new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
+		                  UI::ButtonStyle::kFsMenuSecondary, _("Cancel"), _("Cancel selection"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kBack));
@@ -99,13 +98,12 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                                                  GameController* const ctrl)
    : FullscreenMenuLaunchGame(settings, ctrl),
      // Values for alignment and size
-     fs_(fs_small()),
      // TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
      // so we can have the SuggestedTeamsBox
      padding_(4),
      indent_(10),
      label_height_(20),
-     right_column_x_(get_w() * 37 / 50),
+     right_column_x_(get_w() * 57 / 80),
 
      // Buttons
      change_map_or_save_(this,
@@ -114,8 +112,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                          get_h() * 3 / 20,
                          buth_,
                          buth_,
-                         g_gr->images().get("images/ui_basic/but1.png"),
-                         g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
+                         UI::ButtonStyle::kFsMenuSecondary,
+                         g_gr->images().get("images/wui/menus/toggle_minimap.png"),
                          _("Change map or saved game")),
      help_button_(this,
                   "help",
@@ -123,43 +121,71 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                   get_h() / 100,
                   buth_,
                   buth_,
-                  g_gr->images().get("images/ui_basic/but1.png"),
+                  UI::ButtonStyle::kFsMenuSecondary,
                   g_gr->images().get("images/ui_basic/menu_help.png"),
                   _("Show the help window")),
 
      // Text labels
-     mapname_(this, right_column_x_, get_h() * 3 / 20, std::string()),
+     mapname_(this,
+              right_column_x_,
+              get_h() * 3 / 20,
+              0,
+              0,
+              std::string(),
+              UI::Align::kLeft,
+              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupMapname)),
      clients_(this,
-              // (get_w() * 57 / 80) is the width of the MultiPlayerSetupGroup
-              get_w() / 50,
+              // the width of the MultiPlayerSetupGroup is (get_w() * 53 / 80)
+              get_w() * 3 / 80,
               get_h() / 10,
-              (get_w() * 57 / 80) / 3,
+              get_w() * 19 / 80,
               get_h() / 10,
               _("Clients"),
-              UI::Align::kCenter),
+              UI::Align::kCenter,
+              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
      players_(this,
-              get_w() / 50 + (get_w() * 57 / 80) * 6 / 15,
+              get_w() / 4,
               get_h() / 10,
-              (get_w() * 57 / 80) * 9 / 15,
+              get_w() * 9 / 20,
               get_h() / 10,
               _("Players"),
-              UI::Align::kCenter),
-     map_(this, right_column_x_, get_h() / 10, butw_, get_h() / 10, _("Map"), UI::Align::kCenter),
+              UI::Align::kCenter,
+              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
+     map_(this,
+          right_column_x_,
+          get_h() / 10,
+          butw_,
+          get_h() / 10,
+          _("Map"),
+          UI::Align::kCenter,
+          g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
      wincondition_type_(this,
                         right_column_x_ + (butw_ / 2),
                         get_h() * 10 / 20 - 1.5 * label_height_,
+                        0,
+                        0,
                         _("Type of game"),
-                        UI::Align::kCenter),
+                        UI::Align::kCenter,
+                        g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
 
-     map_info_(
-        this, right_column_x_, get_h() * 2 / 10, butw_, get_h() * 23 / 80 - 2 * label_height_),
-     client_info_(
-        this, right_column_x_, get_h() * 13 / 20 - 2 * label_height_, butw_, 2 * label_height_),
+     map_info_(this,
+               right_column_x_,
+               get_h() * 2 / 10,
+               butw_,
+               get_h() * 23 / 80 - 1.6 * label_height_,
+               UI::PanelStyle::kFsMenu),
+     client_info_(this,
+                  right_column_x_,
+                  get_h() * 15 / 20 - 2 * label_height_,
+                  butw_,
+                  get_h(),
+                  UI::PanelStyle::kFsMenu),
      help_(nullptr),
 
      // Variables and objects used in the menu
      chat_(nullptr) {
-	ok_.set_pos(Vector2i(right_column_x_, get_h() * 12 / 20 - 2 * label_height_));
+	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 25 / 40 - 2 * label_height_));
+	ok_.set_pos(Vector2i(right_column_x_, get_h() * 14 / 20 - 2 * label_height_));
 	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
 	win_condition_dropdown_.set_pos(
 	   Vector2i(right_column_x_, get_h() * 11 / 20 - 2 * label_height_));
@@ -169,20 +195,18 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	help_button_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchMPG::help_clicked, boost::ref(*this)));
 
-	mapname_.set_fontsize(fs_);
-	mapname_.set_color(RGBColor(255, 255, 127));
-	clients_.set_fontsize(fs_);
-	clients_.set_color(RGBColor(0, 255, 0));
-	players_.set_fontsize(fs_);
-	players_.set_color(RGBColor(0, 255, 0));
-	map_.set_fontsize(fs_);
-	map_.set_color(RGBColor(0, 255, 0));
+	mapname_.set_font_scale(scale_factor());
+	clients_.set_font_scale(scale_factor());
+	players_.set_font_scale(scale_factor());
+	map_.set_font_scale(scale_factor());
+	wincondition_type_.set_font_scale(scale_factor());
 
 	mapname_.set_text(_("(no map)"));
 	map_info_.set_text(_("The host has not yet selected a map or saved game."));
 
 	mpsg_ = new MultiPlayerSetupGroup(
-	   this, get_w() / 50, change_map_or_save_.get_y(), get_w() * 57 / 80, get_h(), settings, buth_);
+	   this, get_w() * 3 / 80, change_map_or_save_.get_y(), get_w() * 53 / 80,
+	   get_h() * 17 / 30 - change_map_or_save_.get_y(), settings, buth_);
 
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {
@@ -215,8 +239,9 @@ void FullscreenMenuLaunchMPG::layout() {
  */
 void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider& chat) {
 	delete chat_;
-	chat_ = new GameChatPanel(
-	   this, get_w() / 50, get_h() * 13 / 20, get_w() * 57 / 80, get_h() * 3 / 10, chat);
+	chat_ = new GameChatPanel(this, get_w() * 3 / 80, get_h() * 17 / 30 + 0.5 * label_height_,
+	                          get_w() * 53 / 80, get_h() * 11 / 30, chat, UI::PanelStyle::kFsMenu);
+	chat_->focus_edit();
 }
 
 /**
@@ -230,6 +255,11 @@ void FullscreenMenuLaunchMPG::win_condition_selected() {
 	if (settings_->can_change_map() && win_condition_dropdown_.has_selection()) {
 		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
 		last_win_condition_ = win_condition_dropdown_.get_selected();
+
+		std::unique_ptr<LuaTable> t = lua_->run_script(last_win_condition_);
+		t->do_not_warn_about_unaccessed_keys();
+		peaceful_mode_forbidden_ = !t->get_bool("peaceful_mode_allowed");
+		update_peaceful_mode();
 	}
 }
 
@@ -351,6 +381,18 @@ void FullscreenMenuLaunchMPG::clicked_ok() {
 	}
 }
 
+void FullscreenMenuLaunchMPG::think() {
+	if (ctrl_) {
+		ctrl_->think();
+	}
+	refresh();
+
+	// unfocus chat window when other UI element has focus
+	if (!chat_->has_focus()) {
+		chat_->unfocus_edit();
+	}
+}
+
 /**
  * update the user interface and take care about the visibility of
  * buttons and text.
@@ -362,13 +404,13 @@ void FullscreenMenuLaunchMPG::refresh() {
 
 	if (settings.mapfilename != filename_proof_) {
 		if (!g_fs->file_exists(settings.mapfilename)) {
-			client_info_.set_color(UI_FONT_CLR_WARNING);
+			client_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kWarning));
 			client_info_.set_text(
 			   _("The selected file can not be found. If it is not automatically "
 			     "transferred to you, please write to the host about this problem."));
 		} else {
 			// Reset font color
-			client_info_.set_color(UI_FONT_CLR_FG);
+			client_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kLabel));
 
 			// Update local nr of players - needed for the client UI
 			nr_players_ = settings.players.size();
@@ -404,6 +446,9 @@ void FullscreenMenuLaunchMPG::refresh() {
 
 	change_map_or_save_.set_enabled(settings_->can_change_map());
 	change_map_or_save_.set_visible(settings_->can_change_map());
+
+	update_peaceful_mode();
+	peaceful_.set_state(settings_->is_peaceful_mode());
 
 	if (!settings_->can_change_map() && !init_win_condition_label()) {
 		try {
@@ -569,7 +614,7 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 	std::string infotext;
 	infotext += std::string(_("Map details:")) + "\n";
 	infotext += std::string("• ") +
-	            (boost::format(_("Size: %1$u x %2$u")) % map.get_width() % map.get_height()).str() +
+	            (boost::format(_("Size: %1% x %2%")) % map.get_width() % map.get_height()).str() +
 	            "\n";
 	infotext += std::string("• ") +
 	            (boost::format(ngettext("%u Player", "%u Players", nr_players_)) %

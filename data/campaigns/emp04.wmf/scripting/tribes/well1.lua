@@ -3,11 +3,10 @@ dirname = "tribes/buildings/productionsites/empire/well/"
 tribes:new_productionsite_type {
    msgctxt = "empire_building",
    name = "empire_well1",
-   descname = "Well",
+   descname = pgettext("empire_building", "Well"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
-   enhancement = "empire_well2",
 
    buildcost = {
       log = 2,
@@ -15,7 +14,8 @@ tribes:new_productionsite_type {
       marble = 1
    },
    return_on_dismantle = {
-      marble = 1
+      log = 1,
+      marble = 1,
    },
 
    animations = {
@@ -47,7 +47,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=30000",
             "animate=working 30000",
-            "mine=water 5 100 10 2",
+            "mine=water 5 100 5 2",
             "produce=water"
          }
       },

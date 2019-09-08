@@ -15,15 +15,10 @@
 
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 13, 24 },
-      fps=10,
-   }
-}
-add_walking_animations(animations, "walk", dirname, "walk", {8, 25}, 10)
-add_walking_animations(animations, "walkload", dirname, "walkload", {8, 25}, 10)
+animations = {}
+add_animation(animations, "idle", dirname, "idle", {13, 24}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {8, 25}, 10)
+add_directional_animation(animations, "walkload", dirname, "walkload", {8, 25}, 10)
 
 -- RST
 -- .. function:: new_carrier_type{table}
@@ -31,15 +26,7 @@ add_walking_animations(animations, "walkload", dirname, "walkload", {8, 25}, 10)
 --    This function adds the definition of a carrier to the engine.
 --
 --    :arg table: This table contains all the data that the game engine will add
---                to this carrier. It contains the :ref:`lua_tribes_workers_common`,
---                plus the following additional property:
---
---    **ware_hotspot**
---        *Optional*. The x, y coordinates for adjusting the placement of the
---        ware being carried. The default value is ``{0, 15}``. Increase ``x``
---        to shift the ware to the left and ``y`` to shift it upwards. For example::
---
---           ware_hotspot = { -2, 13 },
+--                to this carrier. It contains the :ref:`lua_tribes_workers_common`.
 --
 tribes:new_carrier_type {
    msgctxt = "atlanteans_worker",

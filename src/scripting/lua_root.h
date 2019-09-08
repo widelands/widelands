@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,10 +57,9 @@ public:
 	int get_time(lua_State*);
 	int get_desired_speed(lua_State*);
 	int set_desired_speed(lua_State*);
-	int get_allow_autosaving(lua_State*);
-	int set_allow_autosaving(lua_State*);
 	int get_allow_saving(lua_State*);
 	int set_allow_saving(lua_State*);
+	int get_type(lua_State*);
 
 	/*
 	 * Lua methods

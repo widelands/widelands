@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 
 #include "editor/tools/tool.h"
 #include "graphic/playercolor.h"
-#include "logic/widelands.h"
 
 // How much place should be left around a player position
 // where no other player can start
@@ -34,8 +33,7 @@
 struct EditorSetStartingPosTool : public EditorTool {
 	EditorSetStartingPosTool();
 
-	int32_t handle_click_impl(const Widelands::World& world,
-	                          const Widelands::NodeAndTriangle<>&,
+	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
 	                          EditorInteractive&,
 	                          EditorActionArgs*,
 	                          Widelands::Map*) override;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,7 @@
 #include "base/vector.h"
 #include "base/wexception.h"
 #include "graphic/align.h"
+#include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
@@ -47,10 +48,22 @@
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/sdl_ttf_font.h"
 #include "graphic/text/textstream.h"
-#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
+
+namespace {
+/**
+ * This function replaces some HTML entities in strings, e.g. &nbsp;.
+ * It is used by the renderer after the tags have been parsed.
+ */
+void replace_entities(std::string* text) {
+	boost::replace_all(*text, "&gt;", ">");
+	boost::replace_all(*text, "&lt;", "<");
+	boost::replace_all(*text, "&nbsp;", " ");
+	boost::replace_all(*text, "&amp;", "&");  // Must be performed last
+}
+}  // namespace
 
 namespace RT {
 
@@ -92,6 +105,7 @@ struct NodeStyle {
 	uint8_t spacing;
 	UI::Align halign;
 	UI::Align valign;
+	const bool is_rtl;
 	std::string reference;
 };
 
@@ -198,13 +212,13 @@ struct Reference {
 
 class RenderNode {
 public:
-	enum Floating {
-		NO_FLOAT = 0,
-		FLOAT_RIGHT,
-		FLOAT_LEFT,
+	enum class Floating {
+		kNone,
+		kRight,
+		kLeft,
 	};
 	explicit RenderNode(NodeStyle& ns)
-	   : floating_(NO_FLOAT), halign_(ns.halign), valign_(ns.valign), x_(0), y_(0) {
+	   : floating_(Floating::kNone), halign_(ns.halign), valign_(ns.valign), x_(0), y_(0) {
 	}
 	virtual ~RenderNode() {
 	}
@@ -264,12 +278,7 @@ protected:
 	/// Throws a TextureTooBig exception if the given dimensions would be bigger than the graphics
 	/// can handle
 	void check_size(int check_w, int check_h) {
-// Test for minimum supported size in debug builds.
-#ifndef NDEBUG
-		const int maximum_size = kMinimumSizeForTextures;
-#else
-		const int maximum_size = g_gr->max_texture_size();
-#endif
+		const int maximum_size = g_gr->max_texture_size_for_font_rendering();
 		if (check_w > maximum_size || check_h > maximum_size) {
 			const std::string error_message =
 			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % check_w % check_h %
@@ -292,6 +301,9 @@ private:
 	int32_t x_, y_;
 };
 
+/*
+ * Class to calculate positions of nodes within a div tag.
+ */
 class Layout {
 public:
 	explicit Layout(std::vector<std::shared_ptr<RenderNode>>& all)
@@ -307,19 +319,7 @@ public:
 	fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv, uint16_t w, Borders p, bool trim_spaces);
 
 private:
-	// Represents a change in the rendering constraints. For example when an
-	// Image is inserted, the width will become wider after it. This is a
-	// constraint change.
-	struct ConstraintChange {
-		int at_y;
-		int32_t delta_w;
-		int32_t delta_offset_x;
-
-		bool operator<(const ConstraintChange& o) const {
-			return at_y > o.at_y || (at_y == o.at_y && delta_w > o.delta_w);
-		}
-	};
-
+	bool calculate_line_width(uint16_t* x, uint16_t* w, uint16_t lineheight);
 	uint16_t fit_line(uint16_t w,
 	                  const Borders&,
 	                  std::vector<std::shared_ptr<RenderNode>>* rv,
@@ -328,13 +328,55 @@ private:
 	uint16_t h_;
 	size_t idx_;
 	std::vector<std::shared_ptr<RenderNode>>& all_nodes_;
-	std::priority_queue<ConstraintChange> constraint_changes_;
+	std::queue<std::shared_ptr<RenderNode>> floats_;
 };
 
-uint16_t Layout::fit_line(uint16_t w,
-                          const Borders& p,
-                          std::vector<std::shared_ptr<RenderNode>>* rv,
-                          bool trim_spaces) {
+/**
+ * Calculate the width of a line at h_ taking into account floating elements.
+ * @param x The first useable x position in the line. Has to be set by the caller,
+ *          might be modified inside this function.
+ * @param w The useable width of the line. Has to be set by the caller,
+ *          might be modified inside this function.
+ * @param lineheight The height of the line the maximum width should be calculated of.
+ * @return Whether less than the full width can be used (i.e., there is a float).
+ */
+bool Layout::calculate_line_width(uint16_t* x, uint16_t* w, uint16_t lineheight) {
+	// Drop elements we already passed
+	while (!floats_.empty() && h_ >= floats_.front()->y() + floats_.front()->height()) {
+		floats_.pop();
+	}
+	if (floats_.empty()) {
+		return false;
+	}
+	// Check whether there is an element at the current height
+	std::shared_ptr<RenderNode> n = floats_.front();
+	if (h_ + lineheight < n->y()) {
+		// Nope, nothing in the current line
+		// Since the elements are ordered, no further element can match
+		return false;
+	}
+
+	if (n->get_floating() == RenderNode::Floating::kLeft) {
+		*x += n->width();
+	} else {
+		assert(n->get_floating() == RenderNode::Floating::kRight);
+		*w -= n->width();
+	}
+	return true;
+}
+
+/*
+ * Calculate x positions of nodes in one line and return them in rv.
+ * As many nodes of all_nodes_ are added to the line as there is space.
+ * Remove leading/trailing spaces and assign x positions to all elements.
+ * Use remaining space to distribute expanding elements a bit further.
+ * Returns hotspot of the line.
+ * Method is called from within Layout::fit_nodes().
+ */
+uint16_t Layout::fit_line(const uint16_t w_max,  // Maximum width of line
+                          const Borders& p,      // Left/right border. Is left empty
+                          std::vector<std::shared_ptr<RenderNode>>* rv,  // Output: Nodes to render
+                          bool trim_spaces) {  // Whether leading/trailing space should be removed
 	assert(rv->empty());
 
 	// Remove leading spaces
@@ -342,17 +384,80 @@ uint16_t Layout::fit_line(uint16_t w,
 		all_nodes_[idx_++].reset();
 	}
 
-	uint16_t x = p.left;
+	uint16_t w;
+	uint16_t x;
 	std::size_t first_idx = idx_;
+	uint16_t lineheight = 0;
+
+	// Pass 1: Run through all nodes who *might* end up in this line and check for floats
+	w = w_max - p.right;
+	x = p.left;
+	bool width_was_reduced = calculate_line_width(&x, &w, lineheight);
+	lineheight = 0;
+	uint16_t w_used = 0;
+	for (; idx_ < all_nodes_.size(); ++idx_) {
+		if (w_used + all_nodes_[idx_]->width() > w) {
+			// Line is full
+			break;
+		}
+		if (all_nodes_[idx_]->get_floating() == RenderNode::Floating::kNone) {
+			// Normal, non-floating node
+			w_used += all_nodes_[idx_]->width();
+			assert(all_nodes_[idx_]->height() >= all_nodes_[idx_]->hotspot_y());
+			lineheight = std::max(lineheight, all_nodes_[idx_]->height());
+			continue;
+		}
+		// Found a float. Add it to list
+		// New float start directly below lowest flow in list
+		if (!floats_.empty()) {
+			all_nodes_[idx_]->set_y(floats_.back()->y() + floats_.back()->height());
+		} else {
+			all_nodes_[idx_]->set_y(h_);
+		}
+		// Set x position of the float based on its desired orientation
+		if (all_nodes_[idx_]->get_floating() == RenderNode::Floating::kLeft) {
+			all_nodes_[idx_]->set_x(p.left);
+		} else {
+			assert(all_nodes_[idx_]->get_floating() == RenderNode::Floating::kRight);
+			all_nodes_[idx_]->set_x(w_max - all_nodes_[idx_]->width() - p.right);
+		}
+		floats_.push(all_nodes_[idx_]);
+		// When the line width hasn't been reduced by a float yet, do so now.
+		// If it already has been reduced than the new float will be placed somewhere below
+		// the current line so no need to adapt the line width
+		if (!width_was_reduced) {
+			// Don't need to reset x and w since they haven't been modified on last call
+			width_was_reduced = calculate_line_width(&x, &w, lineheight);
+			assert(width_was_reduced);
+		}
+	}
+
+	idx_ = first_idx;
+	// w and x now contain the width of the line and the x position of the first element in it
 
 	// Calc fitting nodes
 	while (idx_ < all_nodes_.size()) {
 		std::shared_ptr<RenderNode> n = all_nodes_[idx_];
-		uint16_t nw = n->width();
-		if (x + nw + p.right > w || n->get_floating() != RenderNode::NO_FLOAT) {
+		if (n->get_floating() != RenderNode::Floating::kNone) {
+			// Don't handle floaters here
+			rv->push_back(n);
 			if (idx_ == first_idx) {
+				first_idx++;
+			}
+			++idx_;
+			continue;
+		}
+		uint16_t nw = n->width();
+		// Check whether the element is too big for the current line
+		// (position + width-of-element + border) > width-of-line
+		if (x + nw + p.right > w) {
+			// Its too big
+			if (idx_ == first_idx) {
+				// If it is the first element in the line, add it anyway and pretend that it matches
+				// exactly
 				nw = w - p.right - x;
 			} else {
+				// Too wide and not the first element: We are done with the line
 				break;
 			}
 		}
@@ -401,9 +506,12 @@ uint16_t Layout::fit_line(uint16_t w,
 		}
 	}
 
-	// Find the biggest hotspot of the truly remaining items.
+	// Find the biggest hotspot of the truly remaining non-floating items.
 	uint16_t cur_line_hotspot = 0;
 	for (std::shared_ptr<RenderNode> node : *rv) {
+		if (node->get_floating() != RenderNode::Floating::kNone) {
+			continue;
+		}
 		cur_line_hotspot = std::max(cur_line_hotspot, node->hotspot_y());
 	}
 	return cur_line_hotspot;
@@ -412,6 +520,9 @@ uint16_t Layout::fit_line(uint16_t w,
 /*
  * Take ownership of all nodes, delete those that we do not render anyways (for
  * example unneeded spaces), append the rest to the vector we got.
+ * Also, calculate positions for all nodes based on the given width w
+ * and the widths of the nodes.
+ * Method is called from within DivTagHandler::enter().
  */
 uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
                            uint16_t w,
@@ -428,10 +539,12 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 
 		int line_height = 0;
 		int line_start = INFINITE_WIDTH;
-		// Compute real line height and width, taking into account alignement
+		// Compute real line height and width, taking into account alignment
 		for (std::shared_ptr<RenderNode> n : nodes_in_line) {
-			line_height = std::max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
-			n->set_y(h_ + biggest_hotspot - n->hotspot_y());
+			if (n->get_floating() == RenderNode::Floating::kNone) {
+				line_height = std::max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
+				n->set_y(h_ + biggest_hotspot - n->hotspot_y());
+			}
 			if (line_start >= INFINITE_WIDTH || n->x() < line_start) {
 				line_start = n->x() - p.left;
 			}
@@ -440,7 +553,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 
 		// Go over again and adjust position for VALIGN
 		for (std::shared_ptr<RenderNode> n : nodes_in_line) {
-			uint16_t space = line_height - n->height();
+			int space = line_height - n->height();
 			if (!space || n->valign() == UI::Align::kBottom) {
 				continue;
 			}
@@ -450,43 +563,25 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 			// Space can become negative, for example when we have mixed fontsets on the same line
 			// (e.g. "default" and "arabic"), due to differing font heights and hotspots.
 			// So, we fix the sign.
-			n->set_y(std::abs(n->y() - space));
+			if (n->get_floating() == RenderNode::Floating::kNone) {
+				n->set_y(std::abs(n->y() - space));
+			}
 		}
 		rv->insert(rv->end(), nodes_in_line.begin(), nodes_in_line.end());
 
 		h_ += line_height;
-		while (!constraint_changes_.empty() && constraint_changes_.top().at_y <= h_) {
-			const ConstraintChange& top = constraint_changes_.top();
-			w += top.delta_w;
-			p.left += top.delta_offset_x;
-			constraint_changes_.pop();
-		}
 
-		if ((idx_ < all_nodes_.size()) && all_nodes_[idx_]->get_floating()) {
-			std::shared_ptr<RenderNode> n = all_nodes_[idx_];
-			n->set_y(h_);
-			ConstraintChange cc = {h_ + n->height(), 0, 0};
-			if (n->get_floating() == RenderNode::FLOAT_LEFT) {
-				n->set_x(p.left);
-				p.left += n->width();
-				cc.delta_offset_x = -n->width();
-				max_line_width = std::max<int>(max_line_width, n->x() + n->width() + p.right);
-			} else {
-				n->set_x(w - n->width() - p.right);
-				w -= n->width();
-				cc.delta_w = n->width();
-				max_line_width = std::max(max_line_width, w);
-			}
-			constraint_changes_.push(cc);
-			rv->push_back(n);
-			++idx_;
-		}
 		if (idx_ == idx_before_iteration_) {
 			throw WidthTooSmall(
 			   "Could not fit a single render node in line. Width of an Element is too small!");
 		}
 	}
 
+	if (!floats_.empty()) {
+		// If there is a float left this means the floats go down further than the text.
+		// If this is the case, reset the height of the div
+		h_ = std::max<uint16_t>(h_, floats_.back()->y() + floats_.back()->height());
+	}
 	h_ += p.bottom;
 	return max_line_width;
 }
@@ -800,6 +895,7 @@ public:
 
 		// Draw Solid background Color
 		if (is_background_color_set_) {
+			// TODO(Notabilis): I think margin_.right and .bottom are missing in next line
 			UI::RenderedRect* bg_rect =
 			   new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_color_);
 			// Size is automatically adjusted in RenderedText while blitting, so no need to call
@@ -888,6 +984,16 @@ public:
 		check_size();
 	}
 
+	ImgRenderNode(NodeStyle& ns, const Image* image)
+	   : RenderNode(ns),
+	     image_(image),
+	     filename_(""),
+	     scale_(1.0),
+	     color_(RGBColor(0, 0, 0)),
+	     use_playercolor_(false) {
+		check_size();
+	}
+
 	std::string debug_info() const override {
 		return "img";
 	}
@@ -907,14 +1013,14 @@ private:
 	const Image* image_;
 	const std::string filename_;
 	const double scale_;
-	const RGBColor& color_;
+	const RGBColor color_;
 	bool use_playercolor_;
 };
 
 std::shared_ptr<UI::RenderedText> ImgRenderNode::render(TextureCache* texture_cache) {
 	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 
-	if (scale_ == 1.0) {
+	if (scale_ == 1.0 || filename_.empty()) {
 		// Image can be used as is, and has already been cached in g_gr->images()
 		assert(image_ != nullptr);
 		rendered_text->rects.push_back(
@@ -1141,7 +1247,7 @@ public:
 				nodestyle_.halign = UI::Align::kLeft;
 			}
 		}
-		nodestyle_.halign = mirror_alignment(nodestyle_.halign);
+		nodestyle_.halign = mirror_alignment(nodestyle_.halign, nodestyle_.is_rtl);
 		if (a.has("valign")) {
 			const std::string align = a["valign"].get_string();
 			if (align == "bottom") {
@@ -1185,28 +1291,36 @@ public:
 		const AttrMap& a = tag_.attrs();
 		RGBColor color;
 		bool use_playercolor = false;
-		const std::string image_filename = a["src"].get_string();
 		double scale = 1.0;
 
 		if (a.has("color")) {
 			color = a["color"].get_color();
 			use_playercolor = true;
 		}
-		if (a.has("width")) {
-			int width = a["width"].get_int();
-			if (width > renderer_style_.overall_width) {
-				log("WARNING: Font renderer: Specified image width of %d exceeds the overall available "
-				    "width of %d. Setting width to %d.\n",
-				    width, renderer_style_.overall_width, renderer_style_.overall_width);
-				width = renderer_style_.overall_width;
+		if (a.has("object")) {
+			const Image* representative_image = g_gr->animations().get_representative_image(
+			   a["object"].get_string(), use_playercolor ? &color : nullptr);
+			render_node_.reset(new ImgRenderNode(nodestyle_, representative_image));
+		} else {
+			const std::string image_filename = a["src"].get_string();
+
+			if (a.has("width")) {
+				int width = a["width"].get_int();
+				if (width > renderer_style_.overall_width) {
+					log("WARNING: Font renderer: Specified image width of %d exceeds the overall "
+					    "available "
+					    "width of %d. Setting width to %d.\n",
+					    width, renderer_style_.overall_width, renderer_style_.overall_width);
+					width = renderer_style_.overall_width;
+				}
+				const int image_width = image_cache_->get(image_filename)->width();
+				if (width < image_width) {
+					scale = static_cast<double>(width) / image_width;
+				}
 			}
-			const int image_width = image_cache_->get(image_filename)->width();
-			if (width < image_width) {
-				scale = static_cast<double>(width) / image_width;
-			}
+			render_node_.reset(
+			   new ImgRenderNode(nodestyle_, image_filename, scale, color, use_playercolor));
 		}
-		render_node_.reset(
-		   new ImgRenderNode(nodestyle_, image_filename, scale, color, use_playercolor));
 	}
 	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		nodes.push_back(render_node_);
@@ -1336,6 +1450,13 @@ public:
 	     render_node_(new DivTagRenderNode(ns)) {
 	}
 
+	/*
+	 * Calculate width of all children of this div.
+	 * Width is either fixed, a percentage of the parent or fill. If the width should fill
+	 * the line, it is set to the remaining width of the current line. New lines aren't really
+	 * started here but percent/filling elements are made so big that they won't fit into the
+	 * previous line when their final position is calculated in Layout::fit_nodes().
+	 */
 	void enter() override {
 		Borders padding, margin;
 
@@ -1354,6 +1475,9 @@ public:
 			uint8_t p = a["padding"].get_int();
 			padding.left = padding.top = padding.right = padding.bottom = p;
 		}
+		// TODO(GunChleoc): padding_l and padding_r don't seem to produce balanced results.
+		// We ran into that with the game tips,
+		// using "<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>" there.
 		if (a.has("padding_r"))
 			padding.right = a["padding_r"].get_int();
 		if (a.has("padding_b"))
@@ -1368,26 +1492,25 @@ public:
 		}
 
 		std::vector<std::shared_ptr<RenderNode>> subnodes;
-		// If a percentage width is used, temporarily set it as the overall width. This way, divs with
-		// width "fill" only use the width of their parent node. Also, percentages given in child
-		// nodes
-		// are relative to the width of their parent node.
-		const uint16_t old_overall_width = renderer_style_.overall_width;
+		// If a percentage width is used, temporarily set it as the overall width. This way,
+		// divs with width "fill" only use the width of their parent node. Also, percentages
+		// given in child nodes are relative to the width of their parent node.
+		const uint16_t old_line_width = renderer_style_.overall_width;
 		if (render_node_->desired_width().unit == WidthUnit::kPercent) {
 			renderer_style_.overall_width =
 			   render_node_->desired_width().width * renderer_style_.overall_width / 100;
 		}
 		TagHandler::emit_nodes(subnodes);
-		renderer_style_.overall_width = old_overall_width;
+		renderer_style_.overall_width = old_line_width;
 
-		// Determine the width by the width of the widest subnode
+		// Determine the required width by the width of the widest subnode
 		uint16_t width_first_subnode = INFINITE_WIDTH;
 		uint16_t widest_subnode = 0;
 		for (std::shared_ptr<RenderNode> n : subnodes) {
 			if (n->width() >= INFINITE_WIDTH) {
 				continue;
 			}
-			if (width_first_subnode >= INFINITE_WIDTH && n->width() > 0) {
+			if (width_first_subnode >= INFINITE_WIDTH && n->width()) {
 				width_first_subnode = n->width() + padding.left + padding.right;
 			}
 			widest_subnode = std::max<int>(widest_subnode, n->width() + padding.left + padding.right);
@@ -1401,6 +1524,9 @@ public:
 		case WidthUnit::kPercent:
 			w_ = render_node_->desired_width().width * renderer_style_.overall_width / 100;
 
+			if (render_node_->get_floating() != RenderNode::Floating::kNone) {
+				break;
+			}
 			// Reduce remaining width
 			if (renderer_style_.remaining_width <= w_) {
 				// Not enough space. Div will be placed in the next line, calculate the remaining space
@@ -1412,7 +1538,9 @@ public:
 			break;
 		case WidthUnit::kFill:
 			w_ = renderer_style_.remaining_width;
-			renderer_style_.remaining_width = 0;
+			if (render_node_->get_floating() == RenderNode::Floating::kNone) {
+				renderer_style_.remaining_width = 0;
+			}
 			break;
 		default:
 			if (!w_) {
@@ -1430,7 +1558,9 @@ public:
 			extra_width = w_ - max_line_width;
 		} else if (render_node_->desired_width().unit == WidthUnit::kShrink) {
 			w_ = max_line_width;
-			renderer_style_.remaining_width -= w_;
+			if (render_node_->get_floating() == RenderNode::Floating::kNone) {
+				renderer_style_.remaining_width -= w_;
+			}
 		}
 
 		// Collect all tags from children
@@ -1494,9 +1624,9 @@ public:
 		if (a.has("float")) {
 			const std::string s = a["float"].get_string();
 			if (s == "right")
-				render_node_->set_floating(RenderNode::FLOAT_RIGHT);
+				render_node_->set_floating(RenderNode::Floating::kRight);
 			else if (s == "left")
-				render_node_->set_floating(RenderNode::FLOAT_LEFT);
+				render_node_->set_floating(RenderNode::Floating::kLeft);
 		}
 		if (a.has("valign")) {
 			const std::string align = a["valign"].get_string();
@@ -1598,7 +1728,7 @@ Renderer::~Renderer() {
 }
 
 std::shared_ptr<RenderNode>
-Renderer::layout(const std::string& text, uint16_t width, const TagSet& allowed_tags) {
+Renderer::layout(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags) {
 	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
 	if (!width) {
@@ -1618,6 +1748,7 @@ Renderer::layout(const std::string& text, uint16_t width, const TagSet& allowed_
 	                           0,
 	                           UI::Align::kLeft,
 	                           UI::Align::kTop,
+	                           is_rtl,
 	                           ""};
 
 	RTTagHandler rtrn(
@@ -1632,8 +1763,8 @@ Renderer::layout(const std::string& text, uint16_t width, const TagSet& allowed_
 }
 
 std::shared_ptr<const UI::RenderedText>
-Renderer::render(const std::string& text, uint16_t width, const TagSet& allowed_tags) {
-	std::shared_ptr<RenderNode> node(layout(text, width, allowed_tags));
+Renderer::render(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags) {
+	std::shared_ptr<RenderNode> node(layout(text, width, is_rtl, allowed_tags));
 	return std::shared_ptr<const UI::RenderedText>(node->render(texture_cache_));
 }
-}
+}  // namespace RT

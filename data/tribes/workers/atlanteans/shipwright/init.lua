@@ -4,15 +4,15 @@ animations = {
    idle = {
       pictures = path.list_files(dirname .. "idle_??.png"),
       sound_effect = {
-            directory = "sound/hammering",
-            name = "hammering",
+         path = "sound/hammering/hammering",
+         priority = 64
       },
       hotspot = { 12, 28 },
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {12, 28}, 10)
-add_walking_animations(animations, "walkload", dirname, "walkload", {12, 28}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {12, 28}, 10)
+add_directional_animation(animations, "walkload", dirname, "walkload", {12, 28}, 10)
 
 
 tribes:new_worker_type {
@@ -31,12 +31,12 @@ tribes:new_worker_type {
 
    programs = {
       buildship = {
-         "walk object-or-coords",
-         "plant attrib:shipconstruction unless object",
-         "play_sound sound/sawmill sawmill 230",
-         "animation idle 500",
+         "walk=object-or-coords",
+         "plant=attrib:shipconstruction unless object",
+         "playsound=sound/sawmill/sawmill 230",
+         "animate=idle 500",
          "construct",
-         "animation idle 5000",
+         "animate=idle 5000",
          "return"
       }
    },

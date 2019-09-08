@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,6 +33,7 @@
 
 // Triggered by BOOST_AUTO_TEST_CASE
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
+CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
 using namespace Widelands;
 
@@ -391,8 +392,8 @@ struct ComplexRouterFixture {
 	}
 
 	/**
-	  * Convenience function
-	  */
+	 * Convenience function
+	 */
 	TestingRoutingNode* new_node_w_neighbour(TestingRoutingNode* const d,
 	                                         const Coords& pos = Coords(0, 0),
 	                                         int32_t = 1,
@@ -407,11 +408,11 @@ struct ComplexRouterFixture {
 	}
 
 	/**
-	  * Add a triangle of nodes (each node is connected to the
-	  * other two) starting at the already existing node.
-	  *
-	  * \return The argument Node
-	  */
+	 * Add a triangle of nodes (each node is connected to the
+	 * other two) starting at the already existing node.
+	 *
+	 * \return The argument Node
+	 */
 	TestingRoutingNode* add_triangle(TestingRoutingNode* d) {
 		TestingRoutingNode* dnew_1 = new TestingRoutingNode();
 		TestingRoutingNode* dnew_2 = new TestingRoutingNode();
@@ -429,10 +430,10 @@ struct ComplexRouterFixture {
 	}
 
 	/**
-	  * Add a dead end to confuse the router
-	  *
-	  * \arg d The node to attach the dead end to
-	  */
+	 * Add a dead end to confuse the router
+	 *
+	 * \arg d The node to attach the dead end to
+	 */
 	TestingRoutingNode* add_dead_end(TestingRoutingNode* d) {
 
 		// Some random dead ends

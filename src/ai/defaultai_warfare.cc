@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2017 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,8 +53,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		static std::vector<ImmovableFound> immovables;
 		immovables.clear();
 		immovables.reserve(40);
-		map.find_immovables(Area<FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3), &immovables,
-		                    FindImmovableAttackTarget());
+		map.find_immovables(game(), Area<FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3),
+		                    &immovables, FindImmovableAttackTarget());
 
 		for (uint32_t j = 0; j < immovables.size(); ++j) {
 			if (upcast(MilitarySite const, bld, immovables.at(j).object)) {
@@ -85,7 +85,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 
 	// now we update some of them
-	uint32_t best_target = std::numeric_limits<uint32_t>::max();
+	Widelands::Serial best_target = Widelands::kInvalidSerial;
 	uint8_t best_score = 0;
 	uint32_t count = 0;
 	// sites that were either conquered or destroyed
@@ -203,7 +203,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			if (site->second.mines_nearby == ExtendedBool::kUnset) {
 				FindNodeMineable find_mines_spots_nearby(game(), f.field->get_resources());
 				const int32_t minescount =
-				   map.find_fields(Area<FCoords>(f, 6), nullptr, find_mines_spots_nearby);
+				   map.find_fields(game(), Area<FCoords>(f, 6), nullptr, find_mines_spots_nearby);
 				if (minescount > 0) {
 					site->second.mines_nearby = ExtendedBool::kTrue;
 				} else {
@@ -266,7 +266,6 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[3] = (is_warehouse) ? 2 : 0;
 				inputs[4] = (site->second.attack_soldiers_competency > 15) ? 2 : 0;
 				inputs[5] = (site->second.attack_soldiers_competency > 25) ? 4 : 0;
-				;
 				inputs[6] =
 				   (2 * site->second.defenders_strength > 3 * site->second.attack_soldiers_strength) ?
 				      2 :
@@ -322,8 +321,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[27] = (ts_finished_count_ - ts_without_trainers_) * 2;
 				inputs[28] = general_score * 3;
 				inputs[29] = general_score;
-				inputs[30] = ((mines_per_type[iron_ore_id].in_construction +
-				               mines_per_type[iron_ore_id].finished) > 0) ?
+				inputs[30] = ((mines_per_type[iron_resource_id].in_construction +
+				               mines_per_type[iron_resource_id].finished) > 0) ?
 				                1 :
 				                -1;
 				inputs[31] = (player_statistics.get_player_power(pn) >
@@ -430,7 +429,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					}
 				}
 			}
-			site->second.score += management_data.get_military_number_at(138) / 4;
+			site->second.score += (management_data.get_military_number_at(138) +
+			                       management_data.get_military_number_at(159)) /
+			                      8;
 
 			if (site->second.score > 0) {
 				assert(is_visible);
@@ -461,7 +462,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 
 	// if coordinates hash is not set
-	if (best_target == std::numeric_limits<uint32_t>::max()) {
+	if (best_target == Widelands::kInvalidSerial) {
 		return false;
 	}
 
@@ -480,7 +481,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 
 	// how many attack soldiers we can send?
-	int32_t attackers = player_->find_attack_soldiers(*flag);
+	std::vector<Soldier*> soldiers;
+	int32_t attackers = player_->find_attack_soldiers(*flag, &soldiers);
 	assert(attackers < 500);
 
 	if (attackers > 5) {
@@ -498,7 +500,12 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	    player_number(), flag->get_position().x, flag->get_position().y, best_score, attackers,
 	    enemy_sites[best_target].attack_counter + 1,
 	    (gametime - enemy_sites[best_target].last_time_attacked) / 1000);
-	game().send_player_enemyflagaction(*flag, player_number(), static_cast<uint16_t>(attackers));
+	std::vector<Serial> attacking_soldiers;
+	for (int a = 0; a < attackers; ++a) {
+		// TODO(Nordfriese): We could now choose the soldiers we want to send
+		attacking_soldiers.push_back(soldiers[a]->serial());
+	}
+	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers);
 	assert(1 <
 	       player_->vision(Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;
@@ -682,7 +689,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 			               1 :
 			               0;
 			inputs[2] = (mines_.size() < 3) ? -1 : 0;
-			inputs[3] = (mines_per_type[iron_ore_id].total_count() == 0) ? -1 : 0;
+			inputs[3] = (mines_per_type[iron_resource_id].total_count() == 0) ? -1 : 0;
 			inputs[4] = (player_statistics.get_player_power(pn) * 2 >
 			             player_statistics.get_visible_enemies_power(gametime)) ?
 			               -1 :
@@ -1006,7 +1013,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[12] = (scores[size - 1] > total_score / 3) ? -2 : 0;
 	inputs[13] =
 	   (player_statistics.get_enemies_max_land() < player_statistics.get_player_land(pn)) ? -1 : 0;
-	inputs[14] = (mines_per_type[iron_ore_id].total_count() == 0) ? +1 : 0;
+	inputs[14] = (mines_per_type[iron_resource_id].total_count() == 0) ? +1 : 0;
 	inputs[15] = (spots_ < kSpotsTooLittle) ? +1 : 0;
 	inputs[16] = +1;
 	inputs[17] = +2;
@@ -1120,14 +1127,14 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	   !player_statistics.any_enemy_seen_lately(gametime) && (spots_ < kSpotsTooLittle) ? +2 : 0;
 	inputs[57] =
 	   player_statistics.any_enemy_seen_lately(gametime) && (spots_ < kSpotsTooLittle) ? +2 : 0;
-	inputs[58] =
-	   ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) ?
-	      +3 :
-	      0;
-	inputs[59] =
-	   ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) ?
-	      +1 :
-	      0;
+	inputs[58] = ((mines_per_type[iron_resource_id].in_construction +
+	               mines_per_type[iron_resource_id].finished) == 0) ?
+	                +3 :
+	                0;
+	inputs[59] = ((mines_per_type[iron_resource_id].in_construction +
+	               mines_per_type[iron_resource_id].finished) == 0) ?
+	                +1 :
+	                0;
 	inputs[60] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? -2 : 0;
 	inputs[61] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy ||
 	              expansion_type.get_expansion_type() == ExpansionMode::kBoth) ?
@@ -1237,6 +1244,14 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		inputs[113] = -2;
 		inputs[114] = -10;
 	}
+
+	if (!mine_fields_stat.has_critical_ore_fields()) {
+		inputs[115] = -3;
+		inputs[116] = -6;
+		inputs[117] = -8;
+	}
+	inputs[118] = -mine_fields_stat.count_types();
+	inputs[119] = -mine_fields_stat.count_types() * 3;
 
 	for (int i = 0; i < 4 * kFNeuronBitSize; i = i + 1) {
 		if (inputs[i] < -35 || inputs[i] > 6) {

@@ -42,20 +42,19 @@ def detect_debian_version():
 
 
 def detect_git_revision():
-    if not sys.platform.startswith('linux') and \
-       not sys.platform.startswith('darwin'):
-        git_revnum = os.popen(
-            'git show --pretty=format:%h | head -n 1').read().rstrip()
+    try:
+        cmd = subprocess.Popen(
+            ['git', 'rev-parse', '--short', 'HEAD'],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE, cwd=base_path
+        )
+        stdout, stderr = cmd.communicate()
+        git_revnum = stdout.rstrip()
         if git_revnum:
-            return 'unofficial-git-%s' % (git_revnum,)
-        else:
-            return None
-
-    is_git_workdir = os.system('git show >/dev/null 2>&1') == 0
-    if is_git_workdir:
-        git_revnum = os.popen(
-            'git show --pretty=format:%h | head -n 1').read().rstrip()
-        return 'unofficial-git-%s' % (git_revnum,)
+            return 'unofficial-git-%s' % git_revnum
+    except Exception as e:
+        pass
+    return None
 
 
 def check_for_explicit_version():
@@ -63,7 +62,6 @@ def check_for_explicit_version():
 
     It then defaults to this version without further trying to find
     which revision we're on
-
     """
     fname = p.join(base_path, 'WL_RELEASE')
     if os.path.exists(fname):
@@ -72,20 +70,25 @@ def check_for_explicit_version():
 
 def detect_bzr_revision():
     if __has_bzrlib:
-        b = BzrDir.open(base_path).open_branch()
-        revno, nick = b.revno(), b.nick
+        try:
+            b = BzrDir.open(base_path).open_branch()
+            revno, nick = b.revno(), b.nick
+            return 'bzr%s[%s]' % (revno, nick)
+        except:
+            return None
     else:
         # Windows stand alone installer do not come with bzrlib. We try to
         # parse the output of bzr then directly
         try:
-            run_bzr = lambda subcmd: subprocess.Popen(
+            def run_bzr(subcmd): return subprocess.Popen(
                 ['bzr', subcmd], stdout=subprocess.PIPE, cwd=base_path
             ).stdout.read().strip().decode('utf-8')
             revno = run_bzr('revno')
             nick = run_bzr('nick')
+            return 'bzr%s[%s]' % (revno, nick)
         except OSError:
             return None
-    return 'bzr%s[%s] ' % (revno, nick)
+    return None
 
 
 def detect_revision():
@@ -99,6 +102,7 @@ def detect_revision():
             return rv
 
     return 'REVDETECT-BROKEN-PLEASE-REPORT-THIS'
+
 
 if __name__ == '__main__':
     print(detect_revision())

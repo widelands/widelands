@@ -480,11 +480,11 @@ scenario_won = {
    }
 }
 
-function building_lost(icon)
+function building_lost(buildingname)
    set_textdomain("scenario_atl01.wmf")
    return {
       -- TRANSLATORS: Short message title. Translate as "Lost!" if you don't have enough space.
       title = pgettext("message_short_title", "Building lost!"),
-      text = li_image(icon, _"We lost a building to the ocean!")
+      text = li_object(buildingname, _"We lost a building to the ocean!")
    }
 end

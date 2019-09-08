@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,6 @@
 #include <stdint.h>
 
 #include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -102,7 +101,7 @@ CritterDescr::CritterDescr(const std::string& init_descname,
                            const World& world)
    : BobDescr(init_descname, MapObjectType::CRITTER, MapObjectDescr::OwnerType::kWorld, table),
      editor_category_(nullptr) {
-	add_directional_animation(&walk_anims_, "walk");
+	assign_directional_animation(&walk_anims_, "walk");
 
 	add_attributes(
 	   table.get_table("attributes")->array_entries<std::string>(), std::set<uint32_t>());
@@ -182,7 +181,7 @@ PROGRAM task
 
 Follow the steps of a configuration-defined program.
 ivar1 is the next action to be performed.
-ivar2 is used to store description indices selected by plant/setbobdescription
+ivar2 is used to store description indices selected by plant
 objvar1 is used to store objects found by findobject
 coords is used to store target coordinates found by findspace
 
@@ -249,7 +248,7 @@ void Critter::roam_update(Game& game, State& state) {
 	}
 	state.ivar1 = 1;
 	return start_task_idle(
-	   game, descr().get_animation("idle"), idle_time_min + game.logic_rand() % idle_time_rnd);
+	   game, descr().get_animation("idle", this), idle_time_min + game.logic_rand() % idle_time_rnd);
 }
 
 void Critter::init_auto_task(Game& game) {
@@ -269,7 +268,9 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 1;
+// We need to bump this packet version every time we rename a critter, so that the world legacy
+// lookup table will work.
+constexpr uint8_t kCurrentPacketVersion = 2;
 
 Critter::Loader::Loader() {
 }
@@ -304,7 +305,7 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 			const CritterDescr* descr = nullptr;
 
 			if (critter_owner == "world") {
-				critter_name = lookup_table.lookup_critter(critter_name);
+				critter_name = lookup_table.lookup_critter(critter_name, packet_version);
 				descr = egbase.world().get_critter_descr(critter_name);
 			} else {
 				throw GameDataError(
@@ -339,4 +340,4 @@ void Critter::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 
 	Bob::save(egbase, mos, fw);
 }
-}
+}  // namespace Widelands

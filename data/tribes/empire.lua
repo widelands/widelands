@@ -1,31 +1,47 @@
-dirname = path.dirname(__file__)
+image_dirname = path.dirname(__file__) .. "images/empire/"
+
+animations = {}
+add_animation(animations, "frontier", image_dirname, "frontier", {1, 19})
+add_animation(animations, "flag", image_dirname, "flag", {14, 38}, 10)
 
 tribes:new_tribe {
    name = "empire",
-
-   animations = {
-      -- No idea for the frontier. Maybe some javelins?
-      frontier = {
-         pictures = path.list_files(dirname .. "images/empire/frontier_??.png"),
-         hotspot = { 1, 19 },
-      },
-      -- Not just a plain color, maybe a cross or some stripes
-      flag = {
-         pictures = path.list_files(dirname .. "images/empire/flag_??.png"),
-         hotspot = { 14, 38 },
-         fps = 10
-      }
-   },
+   animations = animations,
 
    -- Image file paths for this tribe's road textures
    roads = {
       busy = {
-         "tribes/images/empire/roadt_busy.png",
+         image_dirname .. "roadt_busy.png",
       },
       normal = {
-         "tribes/images/empire/roadt_normal_00.png",
-         "tribes/images/empire/roadt_normal_01.png",
-         "tribes/images/empire/roadt_normal_02.png",
+         image_dirname .. "roadt_normal_00.png",
+         image_dirname .. "roadt_normal_01.png",
+         image_dirname .. "roadt_normal_02.png",
+      },
+   },
+
+   resource_indicators = {
+      [""] = {
+         [0] = "empire_resi_none",
+      },
+      coal = {
+         [10] = "empire_resi_coal_1",
+         [20] = "empire_resi_coal_2",
+      },
+      iron = {
+         [10] = "empire_resi_iron_1",
+         [20] = "empire_resi_iron_2",
+      },
+      gold = {
+         [10] = "empire_resi_gold_1",
+         [20] = "empire_resi_gold_2",
+      },
+      stones = {
+         [10] = "empire_resi_stones_1",
+         [20] = "empire_resi_stones_2",
+      },
+      water = {
+         [100] = "empire_resi_water",
       },
    },
 
@@ -154,25 +170,25 @@ tribes:new_tribe {
    immovables = {
       "ashes",
       "destroyed_building",
-      "field_tiny",
-      "field_small",
-      "field_medium",
-      "field_ripe",
-      "field_harvested",
+      "wheatfield_tiny",
+      "wheatfield_small",
+      "wheatfield_medium",
+      "wheatfield_ripe",
+      "wheatfield_harvested",
       "grapevine_tiny",
       "grapevine_small",
       "grapevine_medium",
       "grapevine_ripe",
-      "resi_coal1",
-      "resi_coal2",
-      "resi_gold1",
-      "resi_gold2",
-      "resi_iron1",
-      "resi_iron2",
-      "resi_none",
-      "resi_water1",
-      "resi_stones1",
-      "resi_stones2",
+      "empire_resi_none",
+      "empire_resi_water",
+      "empire_resi_coal_1",
+      "empire_resi_iron_1",
+      "empire_resi_gold_1",
+      "empire_resi_stones_1",
+      "empire_resi_coal_2",
+      "empire_resi_iron_2",
+      "empire_resi_gold_2",
+      "empire_resi_stones_2",
       "empire_shipconstruction",
    },
 
@@ -325,7 +341,6 @@ tribes:new_tribe {
    soldier = "empire_soldier",
    ship = "empire_ship",
    port = "empire_port",
-   barracks = "empire_barracks",
    ironore = "iron_ore",
    rawlog = "log",
    refinedlog = "planks",

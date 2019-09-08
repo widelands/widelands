@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,8 +34,10 @@ class World;
 class TrainingSiteDescr : public ProductionSiteDescr {
 public:
 	TrainingSiteDescr(const std::string& init_descname,
+	                  const std::string& msgctxt,
 	                  const LuaTable& table,
-	                  const EditorGameBase& egbase);
+	                  const Tribes& tribes,
+	                  const World& world);
 	~TrainingSiteDescr() override {
 	}
 
@@ -197,6 +199,8 @@ public:
 	void training_successful(TrainingAttribute type, uint32_t level);
 	void training_done();
 
+	const BuildingSettings* create_building_settings() const override;
+
 protected:
 	void program_end(Game&, ProgramResult) override;
 
@@ -284,6 +288,6 @@ struct NoteTrainingSiteSoldierTrained {
 	   : ts(init_ts), player(init_player) {
 	}
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_TRAININGSITE_H

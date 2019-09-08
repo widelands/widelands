@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2016
+# GunChleoc, 2016,2018
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Matej Svrcek <mmatej@yahoo.com>, 2015
@@ -10,16 +10,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
-"PO-Revision-Date: 2018-02-25 18:07+0000\n"
-"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-03-01 12:45+0000\n"
+"PO-Revision-Date: 2019-03-01 12:46+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 #: ../../data/txts/AUTHORS.lua:27
 msgid "Developers"
@@ -37,57 +37,62 @@ msgstr "Licence"
 msgid "Licensing information for Widelands"
 msgstr "Licenční informace pro Widelands"
 
-#: ../../data/txts/LICENSE.lua:9
-msgid "Copyright 2002 - 2018 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2018 by the Widelands Development Team."
+#. TRANSLATORS: Placeholder is copyright end year
+#: ../../data/txts/LICENSE.lua:10
+msgid "Copyright 2002 - %1% by the Widelands Development Team."
+msgstr ""
 
-#: ../../data/txts/LICENSE.lua:11
+#: ../../data/txts/LICENSE.lua:12
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Tato hra je Svobodný a otevřený software (FOSS), licencována pod GNU General Public License (GPL) V2.0."
 
-#: ../../data/txts/LICENSE.lua:13
+#: ../../data/txts/LICENSE.lua:14
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Více informací o FOSS a GPL je k dispozici na následujících stránkách: %s"
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Najdeš tam úplný text licence i další informace o filozofii a právních záležitostech."
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:18
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "Dále připojujeme GPL jako textový dokument i k Widelands."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "V Linuxu lze soubor COPYING najít v hlavním adresáři zdrojového kódu nebo samostatného binárního balíčku, nebo v instalačním adresáři (např. ‘%1%’)."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Ve Windows lze soubor COPYING.txt najít v instalačním adresáři a v položce Widelands v nabídce Start je odkaz na tento soubor."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:21
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "V Mac OS X lze najít soubor COPYING v archívu, který si stáhl ze stránky."
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:23
+msgid "This game comes as-is and without any warranty."
+msgstr "Hra je vydávána jak-je a bez jakékoliv záruky."
+
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
-"This game comes as-is and without any warranty. For more information and "
-"support you can find us at %1% (Website, Wiki, Forum for questions or "
-"general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr "Tato hra je poskytována tak-jak-je a bez jakékoli záruky. Pro více informací a podporu se na nás obrať na stránkách %1% (Stránky, Wiki, Fórum na dotazy nebo obecnou podporu), %2% (Hlášení chyb), a %3% (Překlady)."
+"For more information and support you can find us at %1% (Website, Wiki, "
+"Forum for questions or general support), %2% (Bugtracker), and %3% "
+"(Translations)."
+msgstr "Pro více informací a podporu navštivte stránky %1% (Stránky, Wiki, Fórum na dotazy nebo obecnou podporu), %2% (Hlášení chyb), a %3% (Překlady)."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -197,12 +202,12 @@ msgid "Widelands Translators"
 msgstr "Widelands překladatelé"
 
 #: ../../data/txts/developers.lua:3
-msgid "Atlantean"
-msgstr "Atlanťan"
+msgid "Atlanteans"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
-msgid "Barbarian"
-msgstr "Barbaři"
+msgid "Barbarians"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
@@ -237,12 +242,20 @@ msgid "Fedora Linux"
 msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
+msgid "Flatpak"
+msgstr ""
+
+#: ../../data/txts/developers.lua:3
 msgid "Former Elders"
 msgstr "Předešlí starší"
 
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
 msgstr "FreeBSD"
+
+#: ../../data/txts/developers.lua:3
+msgid "Frisians"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -307,6 +320,14 @@ msgstr "Windows"
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
 msgstr "ZetaOS"
+
+#: ../../data/txts/developers.lua:3
+msgid "and many, many more (thank you for everything you've done)"
+msgstr ""
+
+#: ../../data/txts/developers.lua:3
+msgid "vacant"
+msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -518,6 +539,7 @@ msgid ""
 msgstr "Vždy postav chaty pro lesníka a hajného, aby ti nedošly kmeny nebo zvěřina."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+#: ../../data/txts/tips/frisians.lua:12
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
@@ -529,7 +551,7 @@ msgstr "Nejpokročilejší budovy vyžadují i zkušené dělníky. Nevylepšuj 
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr ""
+msgstr "Obecnou nápovědu k editoru, stejně jako krátké tutoriály můžeš najít na naší wiki %s."
 
 #: ../../data/txts/tips/editor.lua:11
 msgid ""
@@ -591,7 +613,7 @@ msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr ""
+msgstr "Velkou budovu můžeš umístit na jakýkoliv uzel, kde lze umístit střední budovu, pokud tu není žádná překážka nebo nepřístupný terén směrem na západ, severo-západ a severo-východ."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -600,6 +622,17 @@ msgstr "Nikdy nezapomeň postavit domek lesníka, aby ti nedošly kmeny."
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
 msgstr "Císařství potřebuje spoustu mramoru. Nepřestávej hledat další naleziště mramoru."
+
+#: ../../data/txts/tips/frisians.lua:4
+msgid ""
+"To produce bricks, you need granite; to produce granite, you need a quarry "
+"or rock mine; to build those, you need bricks. Take care not to get "
+"deadlocked!"
+msgstr ""
+
+#: ../../data/txts/tips/frisians.lua:8
+msgid "Always build a forester’s house, so you will not run out of logs."
+msgstr "Nikdy nezapomeň postavit domek lesníka, aby ti nedošly kmeny."
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""
@@ -635,7 +668,7 @@ msgstr "Rozděl svoje cesty pomocí vlajek na kratší úseky. Zrychlí to přep
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
-msgstr ""
+msgstr "Máš další otázky? Naše FAQ, wiki a samozřejmě komunitní forum najdeš na %s."
 
 #: ../../data/txts/tips/general_game.lua:31
 msgid ""
@@ -724,7 +757,7 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
-msgstr "Když je budova zničena, její dělníci začnou hledat nejbližší vlajku, od níž se mohou po cestě dostat do skladiště. Pokud v okolí žádná vlajka není, toulají se po okolí a nakonec zemřou. "
+msgstr "Když je budova zničena, její dělníci začnou hledat nejbližší vlajku, od níž se mohou po cestě dostat do skladiště. Pokud v okolí žádná vlajka není, toulají se po okolí a nakonec zemřou."
 
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
@@ -756,4 +789,4 @@ msgstr "I kdyby hra spadla, neboj se! Hra se automaticky uloží, takže se k n�
 msgid ""
 "Our computer players are too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr ""
+msgstr "Je hra proti soupeřům řízeným počítačem nudná? Přijď na %s a potkej se s ostatními hráči při online hře."

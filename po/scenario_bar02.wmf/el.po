@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
+# erimitis, 2018
 # Panos Ioannidis <panos.ioannidis@gmail.com>, 2018
 # Philip Prescott-Decie <presdec@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-02 08:01+0000\n"
-"PO-Revision-Date: 2018-03-09 15:51+0000\n"
-"Last-Translator: Panos Ioannidis <panos.ioannidis@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,35 +22,35 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:20
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:22
 msgid "Build up a basic economy"
-msgstr "Χτίστε μία βασική οικονομία"
+msgstr "Φτιάξτε μια βασική οικονομία"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Start collecting basic building materials, and fortify the camp."
-msgstr "Ξεκινήστε τη συλλογή βασικών δομικών υλικών και ενισχύστε το στρατόπεδο."
+msgstr "Ξεκινήστε τη συλλογή βασικών δομικών υλικών και οχυρώστε το στρατόπεδο."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build a lumberjack’s hut"
-msgstr "Κατασκευάστε μια καλύβα ξυλείας"
+msgstr "Φτιάξτε μια καλύβα υλοτόμου"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:25
 msgid "Build a ranger’s hut"
-msgstr "Κατασκευάστε μια καλύβα ανιχνευτή"
+msgstr "Φτιάξτε μια καλύβα δασοφύλακα"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:26
 msgid "Build a quarry"
-msgstr "Κατασκευάστε ένα λατομείο"
+msgstr "Φτιάξτε ένα λατομείο"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:27
 msgid "Build a wood hardener"
-msgstr "Κατασκευάστε σκληρυντικό ξύλου"
+msgstr "Φτιάξτε έναν πυρωτή ξύλων"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:28
 msgid "Build a sentry on the eastern border"
-msgstr "Κατασκευάστε μια σκοπιά στα ανατολικά σύνορα"
+msgstr "Φτιάξτε ένα φυλάκιο στα ανατολικά σύνορα"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:29
 msgid "You should eventually also build a reed yard and a lime kiln."
-msgstr "Θα πρέπει να χτίσετε επίσης μια αυλή καλαμιού και έναν κλίβανο ασβέστη."
+msgstr "Θα πρέπει τέλος να φτιάξετε επίσης έναν καλαμόκηπο και μια ασβεστοκάμινο."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:34
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
@@ -62,49 +63,49 @@ msgstr "Δημιουργήστε μια βασική οικονομία τροφ
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:38
 msgid "Build a fisher’s hut"
-msgstr "Κατασκευάστε μια καλύβα ψαράδων"
+msgstr "Φτιάξτε μια καλύβα ψαρά"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:39
 msgid "Build a hunter’s hut"
-msgstr "Κατασκευάστε μια καλύβα κυνηγού"
+msgstr "Φτιάξτε μια καλύβα κυνηγού"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:40
 msgid "Build a well"
-msgstr "Κατασκευάστε ένα πηγάδι"
+msgstr "Φτιάξτε ένα πηγάδι"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:41
 msgid "Build a farm"
-msgstr "Κατασκευάστε μία φάρμα"
+msgstr "Φτιάξτε ένα αγρόκτημα"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:42
 msgid "Build a bakery"
-msgstr "Κατασκευάστε ένα φούρνο"
+msgstr "Φτιάξτε έναν φούρνο"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:47
 msgid "Build a cattle farm"
-msgstr "Κατασκευάστε ένα αγρόκτημα βοοειδών"
+msgstr "Φτιάξτε ένα βουστάσιο"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:49
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:51
 msgid "Remember to build a cattle farm"
-msgstr "Θυμηθείτε να χτίσετε ένα αγρόκτημα βοοειδών"
+msgstr "Θυμηθείτε να φτιάξετε ένα βουστάσιο"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:50
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr "Καθώς οι δρόμοι σας μεγαλώνουν και η οικονομία σας γίνεται μεγαλύτερη, θα πρέπει να αξιοποιήσετε καλά τα βοοειδή σας για να μεταφέρετε τα εμπορεύματα πιο γρήγορα."
+msgstr "Καθώς οι δρόμοι σας μακραίνουν και η οικονομία σας μεγαλώνει, θα πρέπει να αξιοποιήσετε τα βόδια σας για να βοηθήσουν στην ταχύτερη μεταφορά των υλικών."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:57
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:59
 msgid "Build a tower"
-msgstr "Κατασκευάστε έναν πύργο"
+msgstr "Φτιάξτε έναν πύργο"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:60
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr "Κατασκευάστε έναν πύργο στα βορειοανατολικά σύνορα της επικράτειάς σας για να έχετε μεγαλύτερη οπτική και να προστατέψετε τους ανθρώπους σας από ξαφνικές επιθέσεις από εχθρούς."
+msgstr "Φτιάξτε έναν πύργο στα βορειοανατολικά σύνορα της επικράτειάς σας για να αποκτήσετε μεγαλύτερη οπτική εμβέλεια και να προστατέψετε τον λαό σας από ξαφνικές επιθέσεις εχθρών."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:65
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:67
@@ -115,7 +116,7 @@ msgstr "Εξερευνήστε περαιτέρω"
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr "Κατασκευάστε περισσότερα στρατιωτικά κτίρια για να εξερευνήσετε την περιοχή γύρω από την βάση σας για να διασφαλίσετε την ασφάλεια των ανθρώπων σας."
+msgstr "Φτιάξτε περισσότερα στρατιωτικά κτίρια για να εξερευνήσετε την περιοχή γύρω από το αρχηγείο σας και να σιγουρέψετε την ασφάλεια του λαού σας."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:73
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:75
@@ -127,29 +128,29 @@ msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr "Αναπτύξτε την επικράτειά σας στα βουνά, στείλτε γεωλόγους για να αναζητήσετε μεταλλεύματα και άνθρακα και δημιουργήστε την υποδομή που χρειάζονται με ορυχεία, ταβέρνες, χυτήριο και  εργαστήριο μετάλλων."
+msgstr "Επεκτείνετε την επικράτειά σας στα βουνά, στείλτε γεωλόγους να αναζητήσουν ορυκτά και άνθρακα, και δημιουργήστε μια εξορυκτική οικονομία, με ορυχεία, ταβέρνες, χυτήριο και μεταλλουργείο."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:81
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:83
 msgid "Build a fortress"
-msgstr "Κατασκευάστε ένα φρούριο"
+msgstr "Φτιάξτε ένα φρούριο"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:84
 msgid "Build a fortress to the east of the mountains."
-msgstr "Κατασκευάστε ένα φρούριο στα ανατολικά των βουνών."
+msgstr "Φτιάξτε ένα φρούριο στα ανατολικά των βουνών."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:89
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:91
 msgid "Build a training infrastructure"
-msgstr "Δημιουργήστε μία υποδομή εκπαίδευσης"
+msgstr "Δημιουργήστε μια υποδομή εκπαίδευσης"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:92
 msgid "Build a barracks to train some basic soldiers."
-msgstr "Κατασκευάστε στρατώνες για να εκπαιδεύσετε βασικούς στρατιώτες."
+msgstr "Φτιάξτε έναν στρατώνα για εκπαίδευση βασικών στρατιωτών."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 msgid "Build a battle arena and a training camp to the west of the mountains."
-msgstr "Κατασκευάστε μία αρένα μαχών και ένα εκπαιδευτήριο στα δυτικά των βουνών."
+msgstr "Φτιάξτε μια αρένα μάχης και ένα στρατόπεδο εκπαίδευσης στα δυτικά των βουνών."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:94
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:124
@@ -159,23 +160,23 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr "Αναβαθμίστε το μεταλλουργείο σας σε μεταλλουργείο τσεκουριών προκειμένου να παράγετε όπλα, και χτίστε ένα δεύτερο μεταλλουργείο για να διασφαλίσετε την παραγωγή εργαλείων. Όταν ο σιδηρουργός φτάσει στο επόμενο επίπεδό του (αρχισιδηρουργός), μπορείτε να αναβαθμίσετε το μεταλλουργείο τσεκουριών σε πολεμικό εργοστάσιο, ο οποίος θα μπορεί να παράγει περισσότερα όπλα."
+msgstr "Αναβαθμίστε το μεταλλουργείο σας σε πελεκοποιείο, προκειμένου να παράγετε όπλα, και φτιάξτε ένα δεύτερο μεταλλουργείο για να διασφαλίσετε την παραγωγή εργαλείων. Όταν ο σιδηρουργός φτάσει στο επόμενο επίπεδό του (αρχισιδηρουργός), μπορείτε να αναβαθμίσετε περαιτέρω το πελεκοποιείο σε πολεμικό τόρνο, ο οποίος θα παράγει επιπρόσθετα όπλα."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:95
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:132
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr "Χτίστε ένα κρανοποιεία στα δυτικά των βουνών για να προμηθεύσετε τους στρατιώτες σας με καλύτερη θωράκιση."
+msgstr "Φτιάξτε ένα κρανοποιείο δυτικά των βουνών, για προμήθεια των στρατιωτών σας με καλύτερη θωράκιση."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:101
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:103
 msgid "Build a warehouse"
-msgstr "Κατασκευάστε μία αποθήκη"
+msgstr "Φτιάξτε μια αποθήκη"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:104
 msgid "Build a warehouse to the west of the mountains."
-msgstr "Κατασκευάστε μία αποθήκη στα δυτικά των βουνών"
+msgstr "Φτιάξτε μια αποθήκη στα δυτικά των βουνών"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:105
 msgid ""
@@ -183,18 +184,18 @@ msgid ""
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr "Οι αποθήκες μοιάζουν με το αρχηγείο σας, με την μόνη διαφορά ότι δεν τις υπερασπίζονται στρατιώτες. Είναι καλό να κατασκευάζετε μία αποθήκη όταν η περιοχή σας μεγαλώνει και τα μονοπάτια προς το αρχηγείο σας μακραίνουν όλο και περισσότερο."
+msgstr "Οι αποθήκες μοιάζουν με το αρχηγείο σας, με την μόνη διαφορά ότι δεν τις υπερασπίζονται στρατιώτες. Είναι συνετό να φτιάχνετε μια αποθήκη όταν η επικράτειά σας μεγαλώνει και οι διαδρομές προς το αρχηγείο σας όλο και μακραίνουν."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:110
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:112
 msgid "Build training sites"
-msgstr "Κατασκευάστε μέρη εκπαίδευσης"
+msgstr "Φτιάξτε τόπους εκπαίδευσης"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:113
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr "Κατασκευάστε στρατώνες, μία αρένα μαχών, και ένα εκπαιδευτήριο στα δυτικά των βουνών"
+msgstr "Φτιάξτε έναν στρατώνα, μια αρένα μάχης και ένα στρατόπεδο εκπαίδευσης στα δυτικά των βουνών."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:114
 msgid ""
@@ -202,7 +203,7 @@ msgid ""
 " battle arena are used for training soldiers in their different attributes. "
 "These attributes are important in fights and the better a soldier is, the "
 "higher is the chance to win a fight."
-msgstr "Οι στρατώνες εκπαιδεύουν τους βασικούς στρατιώτες ενώ μέρη εκπαίδευσης όπως το εκπαιδευτήριο ή η αρένα μαχών χρησιμοποιούνται για την εκπαίδευση των στρατιωτών στις διαφορετικές τους ιδιότητες. Αυτές οι ιδιότητες είναι σημαντικές στις μάχες και όσο καλύτερος είναι ένας στρατιώτης, τόσο αυξάνεται η πιθανότητα να κερδίσει μία μάχη."
+msgstr "Οι στρατώνες εκπαιδεύουν τους βασικούς στρατιώτες, ενώ οι τόποι εκπαίδευσης (όπως ένα στρατόπεδο εκπαίδευσης ή μια αρένα μάχης) χρησιμοποιούνται για την εκπαίδευση των στρατιωτών στις διάφορες ιδιότητές τους. Αυτές είναι σημαντικές στις μάχες, επειδή όσο καλύτερος είναι ένας στρατιώτης, τόσο μεγαλύτερη η πιθανότητα να κερδίσει μια μάχη."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:116
 msgid "The attributes are: health, attack, defense and evade."
@@ -211,21 +212,21 @@ msgstr "Οι ιδιότητες είναι: υγεία, επίθεση, άμυν
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:121
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:123
 msgid "Build weapons production"
-msgstr "Κατασκευάστε μία παραγωγή όπλων"
+msgstr "Φτιάξτε παραγωγή όπλων"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:131
 msgid "Build a helm smithy"
-msgstr "Κατασκευάστε ένα κρανοποιείο"
+msgstr "Φτιάξτε ένα κρανοποιείο"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:137
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:139
 msgid "Destroy Kalitath’s army"
-msgstr "Καταστρέψτε τον στρατό του Kalitath"
+msgstr "Καταστρέψτε τον στρατό του Κάλιταθ"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:140
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr "Καταστρέψτε τον στρατό του Kalitath και επεκτείνετε την περιοχή σας προς τα ανατολικά."
+msgstr "Καταστρέψτε τον στρατό του Κάλιταθ και επεκτείνετε την επικράτειά σας προς τα ανατολικά."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:141
 msgid ""
@@ -233,17 +234,17 @@ msgid ""
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr "Για να επιτεθείς σε έναν εχθρό, πρέπει να κάνεις κλικ στην πόρτα του αντιπάλου στρατιωτικού κτιρίου. Στην συνέχεια ένα μενού θα αναδυθεί που θα σου επιτρέψει να διαλέξεις τον αριθμό των στρατιωτών που θες να επιτεθούν. Αφού επιλέξεις τον αριθμό, κάνε κλικ στον σταυρό (\"Έναρξη της επίθεσης\")."
+msgstr "Για επίθεση σε έναν εχθρό, κλικ στην πόρτα ενός εχθρικού στρατιωτικού κτιρίου. Θα αναδυθεί ένα μενού που επιτρέπει την επιλογή του αριθμού στρατιωτών που θα επιτεθούν. Όταν ετοιμαστεί ο αριθμός, κλικ στον σταυρό (\"Έναρξη επίθεσης\")."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:146
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:148
 msgid "Military assault on Al’thunran"
-msgstr "Στρατιωτική επίθεση στον Al'thunran"
+msgstr "Στρατιωτική προσβολή της πρωτεύουσας"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:149
 msgid ""
 "Destroy all forces of Thron’s two brothers to liberate the throne-circle."
-msgstr "Κατάστρεψε όλες τις δυνάμεις των δύο αδερφών του Thron ώστε να απελευθερώσεις τον κύκλο του θρόνου."
+msgstr "Καταστρέψτε όλες τις δυνάμεις των δύο αδερφών του Θρον, προς απελευθέρωση του κύκλου του θρόνου."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:157
 msgid "Close to Home"
@@ -253,7 +254,7 @@ msgstr "Κοντά στο σπίτι"
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:170
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327
 msgid "Thron looks worried…"
-msgstr "Ο Thron δείχνει ανήσυχος"
+msgstr "Ο Θρον δείχνει ανήσυχος…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:160
@@ -261,20 +262,20 @@ msgid ""
 "These last days, we came closer to our capital. Many people have already "
 "joined us on our march and set their hopes on me. However, I fear that we "
 "are not strong enough to take up the battle against my brothers."
-msgstr "Αυτές τις τελευταίες μέρες, πλησιάσαμε την πρωτεύουσά μας. Πολλοί άνθρωποι έχουν ήδη έρθει μαζί μας και πιστεύουν σε μένα. Παρ' όλα αυτά, φοβάμαι ότι δεν είμαστε αρκετά δυνατοί για να αντιμετωπίσουμε τους αδερφούς μου."
+msgstr "Αυτές τις τελευταίες ημέρες, πλησιάσαμε στην πρωτεύουσά μας. Πολλοί άνθρωποι έχουν ήδη ενωθεί στην προέλασή μας και εναποθέσει τις ελπίδες τους σε μένα. Παρόλα αυτά, φοβάμαι ότι δεν είμαστε αρκετά δυνατοί να διεξάγουμε μάχη ενάντια στους αδερφούς μου."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:163
 msgid ""
 "For now, we are resting at the borders of the old forest and preparing for "
 "the coming days."
-msgstr "Προς το παρόν, κάναμε στάση στα σύνορα του παλιού δάσους και προετοιμαζόμαστε για τις επόμενες μέρες."
+msgstr "Προς το παρόν ξεκουραζόμαστε στα όρια του γέρικου δάσους, προετοιμαζόμενοι για τις επόμενες ημέρες."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:169
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:193
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Another Cold Day"
-msgstr "Άλλη μία κρύα μέρα"
+msgstr "Έτερη Κρύα Μέρα"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:172
@@ -293,7 +294,7 @@ msgstr "Αμφιβολίες"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:178
 msgid "Boldreth is shaking his head…"
-msgstr "Ο Boldreth κουνά το κεφάλι του"
+msgstr "Ο Μπόλντρεθ κουνά το κεφάλι του…"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:180
@@ -317,7 +318,7 @@ msgstr "Η ιστορία συνεχίζεται"
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:269
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:315
 msgid "Boldreth says:"
-msgstr "Ο Boldreth λέει:"
+msgstr "Ο Μπόλντρεθ λέει:"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:188
@@ -329,7 +330,7 @@ msgstr "Ωστόσο, ο Thron δεν προτίθεται να ακούσει �
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:194
 msgid "Thron is speaking confidently."
-msgstr "Ο Thron μιλάει με βεβαιότητα"
+msgstr "Ο Θρον μιλά με αυτοπεποίθηση."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:196
@@ -350,7 +351,7 @@ msgstr "Η πρώτη γραμμή των δυνάμεών μου έχει επ�
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:307
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
 msgid "Thron says:"
-msgstr "Ο Thron λέει:"
+msgstr "Ο Θρον λέει:"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:204
@@ -429,7 +430,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:241
 msgid "The Advisor"
-msgstr ""
+msgstr "Ο Σύμβουλος"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:242
 msgid "Khantrukh nods."
@@ -458,7 +459,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:259
 msgid "Tracks"
-msgstr ""
+msgstr "Ίχνη"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:262
@@ -594,7 +595,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid "Victory"
-msgstr ""
+msgstr "Νίκη"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:334
 msgid ""
@@ -604,7 +605,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Military Assault"
-msgstr ""
+msgstr "Στρατιωτική Προσβολή"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:342
@@ -634,7 +635,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:354
 msgid "Khantrukh says:"
-msgstr ""
+msgstr "Ο Κάντρουκ λέει:"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:356
@@ -642,15 +643,17 @@ msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
-msgstr ""
+msgstr "Φύλαρχε, θυμήσου τους καημένους τους μεταφορείς: Οι δρόμοι μας γίνονται όλο και μακρύτεροι, και ο φόρτος στους ώμους τους ποτέ ελαφρύτερος. Θα πρέπει να εκθρέψουμε περισσότερα βόδια, για να κάνουμε την εργασία τους ελαφρύτερη και τις μεταφορές μας αποτελεσματικότερες."
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

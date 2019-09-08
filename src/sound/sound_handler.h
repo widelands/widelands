@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2017 by the Widelands Development Team
+ * Copyright (C) 2005-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,18 +30,12 @@
 #include <unistd.h>
 #endif
 
+#include <SDL_mutex.h>
+
 #include "random/random.h"
+#include "sound/constants.h"
 #include "sound/fxset.h"
-
-struct Songset;
-struct SDL_mutex;
-class FileRead;
-
-/// How many milliseconds in the past to consider for
-/// SoundHandler::play_or_not()
-#define SLIDING_WINDOW_SIZE 20000
-
-extern class SoundHandler g_sound_handler;
+#include "sound/songset.h"
 
 /** The 'sound server' for Widelands.
  *
@@ -54,47 +48,40 @@ extern class SoundHandler g_sound_handler;
  *
  * Background music for different situations (e.g. 'Menu', 'Gameplay') is
  * collected in songsets. Each Songset contains references to one or more
- * songs in ogg format. The only ordering inside a soundset is from the order
- * in which the songs were loaded.
+ * songs in ogg format.
  *
  * Other classes can request to start or stop playing a certain songset,
  * changing the songset is provided as a convenience method. It is also
  * possible to switch to some other piece inside the same songset - but there
  * is \e no control over \e which song out of a songset gets played. The
- * selection is either linear (the order in which the songs were loaded) or
- * completely random.
+ * selection is random.
  *
- * The files for the predefined system songsets
- * \li \c intro
- * \li \c menu
- * \li \c ingame
- *
- * must reside directly in the directory 'sounds' and must be named
- * SONGSET_XX.??? where XX is a number from 00 to 99 and ??? is a filename
- * extension. All subdirectories of 'sounds' will be considered to contain
- * ingame music. The the music and sub-subdirectories found in them can be
- * arbitrarily named. This means: everything below sound/ingame_01 can have
- * any name you want. All audio files below sound/ingame_01 will be played as
+ * The files must reside somewhere below the datadir and must be named
+ * SONGSET_XX.ogg where XX is a number from 00 to 99.
+ * The music and sub-subdirectories found in a directory can be
+ * arbitrarily named. For example, if we register songsets in <datadir>/music,
+ * this means that everything below <datadir>/music/ingame_01 can have
+ * any name you want. All audio files below <datadir>/music/ingame_01 will be played as
  * ingame music.
  *
- * For more information about the naming scheme, see load_fx()
+ * For more information about the naming scheme, see register_songs()
  *
- * You should be using the ogg format for music.
+ * You must use the ogg format for music.
+ *
  *
  * \par Sound effects
  *
- * Buildings and workers can use sound effects in their programs. To do so, use
- * e.g. "play_sound blacksmith_hammer" in the appropriate conf file. The conf file
- * parser will then load one or more audio files for 'hammering blacksmith'
- * from the building's/worker's configuration directory and store them in an
- * FXset for later access, similar to the way music is stored in songsets.
- * For effects, however, the selection is always random. Sound effects are kept
- * in memory at all times, to avoid delays from disk access.
+ * Use register_fx() to record the file locations for each sound effect, to be loaded on first play.
+ * Sound effects are kept in memory at all times once they have been loaded, to avoid delays from
+ * disk access. You can use \ref remove_fx_set to deregister and unload sound effects from memory
+ * though. The file naming scheme is the same as for the songs, and if there are multiple files for
+ * an effect, they are picked at random too. Sound effects are categorized into multiple SoundType
+ * categories, so that the user can control which type of sounds to hear.
  *
- * The abovementioned sound effects are synchronized with a work program. It's
- * also possible to have sound effects that are synchronized with a
- * building/worker \e animation. For more information about this look at class
- * AnimationManager.
+ * For map objects, the abovementioned sound effects are synchronized with a work program or a
+ * building/immovable/worker animation. For more information about this, look at the
+ * Animation class and the online scripting reference.
+ *
  *
  * \par Usage of callbacks
  *
@@ -107,10 +94,10 @@ extern class SoundHandler g_sound_handler;
  *
  * Callbacks must use global(or static) functions \e but \e not normal member
  * functions of a class. If you must know why: ask google. But how can a
- * static function share data with an instance of it's own class? Usually not at
+ * static function share data with an instance of its own class? Usually not at
  * all.
  *
- * Fortunately, g_sound_handler already is a global variable,
+ * Fortunately, g_sh already is a global variable,
  * and therefore accessible to global functions. So problem 1 disappears.
  *
  * Problem 2:
@@ -155,125 +142,133 @@ extern class SoundHandler g_sound_handler;
  * change_music() from inside start_music(). It really is not recursive, trust
  * me :-)
  */
-// TODO(unknown): DOC: priorities
-// TODO(unknown): DOC: play-or-not algorithm
-// TODO(unknown): Environmental sound effects (e.g. wind)
-// TODO(unknown): repair and reenable animation sound effects for 1-pic-animations
-// TODO(unknown): accommodate runtime changes of i18n language
-// TODO(unknown): accommodate sound activation if it was disabled at the beginning
 
-// This is used for SDL UserEvents to be handled in the main loop.
+/// This is used for SDL UserEvents to be handled in the main loop.
 enum { CHANGE_MUSIC };
-class SoundHandler {
-	friend struct Songset;
-	friend struct FXset;
 
+/// Avoid clicks when starting/stopping music
+constexpr int kMinimumMusicFade = 250;
+
+class SoundHandler {
 public:
 	SoundHandler();
 	~SoundHandler();
 
-	void init();
-	void shutdown();
-	void read_config();
-	void load_system_sounds();
+	void save_config();
+	void load_config();
 
-	void load_fx_if_needed(const std::string& dir,
-	                       const std::string& basename,
-	                       const std::string& fx_name);
+	/**
+	 * Returns 'true' if the playing of sounds is disabled due to sound driver problems, or because
+	 * disable_backend() was used.
+	 */
+	inline static bool is_backend_disabled() {
+		return SoundHandler::backend_is_disabled_;
+	}
 
-	void play_fx(const std::string& fx_name,
-	             int32_t stereo_position,
-	             uint8_t priority = PRIO_ALLOW_MULTIPLE + PRIO_MEDIUM);
+	/**
+	 * Disables all sound.
+	 */
+	inline static void disable_backend() {
+		SoundHandler::backend_is_disabled_ = true;
+	}
 
-	void register_song(const std::string& dir, const std::string& basename);
-	void start_music(const std::string& songset_name, int32_t fadein_ms = 0);
-	void stop_music(int32_t fadeout_ms = 0);
+	// This is static so that we can load the tribes and world without instantiating the sound system
+	static FxId register_fx(SoundType type, const std::string& fx_path);
+
+	void play_fx(SoundType type,
+	             FxId fx_id,
+	             uint8_t priority = kFxPriorityAlwaysPlay,
+	             int32_t stereo_position = kStereoCenter,
+	             int distance = 0);
+	// Trigger loading of the sound files for the given effect.
+	void load_fx(SoundType type, FxId id);
+	void remove_fx_set(SoundType type);
+
+	void register_songs(const std::string& dir, const std::string& basename);
+	void stop_music(int fadeout_ms = kMinimumMusicFade);
 	void change_music(const std::string& songset_name = std::string(),
-	                  int32_t fadeout_ms = 0,
-	                  int32_t fadein_ms = 0);
+	                  int fadeout_ms = kMinimumMusicFade);
+
+	const std::string current_songset() const;
+
+	bool is_sound_enabled(SoundType type) const;
+	void set_enable_sound(SoundType type, bool enable);
+	int32_t get_volume(SoundType type) const;
+	void set_volume(SoundType type, int32_t volume);
+
+	int32_t get_max_volume() const;
+
+private:
+	void read_config();
+
+	FxId do_register_fx(SoundType type, const std::string& fx_path);
+
+	void initialization_error(const char* const msg, bool quit_sdl);
+
+	bool play_or_not(SoundType type, FxId fx_id, uint8_t priority);
+	void start_music(const std::string& songset_name);
 
 	static void music_finished_callback();
 	static void fx_finished_callback(int32_t channel);
-	void handle_channel_finished(uint32_t channel);
 
-	bool get_disable_music() const;
-	bool get_disable_fx() const;
-	int32_t get_music_volume() const;
-	int32_t get_fx_volume() const;
-	void set_disable_music(bool disable);
-	void set_disable_fx(bool disable);
-	void set_music_volume(int32_t volume);
-	void set_fx_volume(int32_t volume);
+	void lock_fx();
+	void release_fx_lock();
 
-	/**
-	 * Return the max value for volume settings. We use a function to hide
-	 * SDL_mixer constants outside of sound_handler.
-	 */
-	int32_t get_max_volume() const {
-		return MIX_MAX_VOLUME;
-	}
+	/// Contains options for a sound type or the music
+	struct SoundOptions {
+		explicit SoundOptions(int vol, const std::string& savename)
+		   : enabled(true), volume(vol), name(savename) {
+			assert(!savename.empty());
+			assert(vol >= 0);
+			assert(vol <= MIX_MAX_VOLUME);
+		}
 
-	/** Only for buffering the command line option --nosound until real initialization is done.
-	 * \see SoundHandler::SoundHandler()
-	 * \see SoundHandler::init()
-	 */
-	// TODO(unknown): This is ugly. Find a better way to do it
-	bool nosound_;
+		/// Whether the user wants to hear this type of sound
+		bool enabled;
+		/// Volume for sound effects or music (from 0 to get_max_volume())
+		int volume;
+		/// Name for saving
+		const std::string name;
+	};
 
-	/** Can disable_music_ and disable_fx_ be changed?
-	 * true = they mustn't be changed (e.g. because hardware is missing)
-	 * false = can be changed at user request
-	*/
-	bool lock_audio_disabling_;
-
-private:
-	// Prints an error and disables the sound system.
-	void initialization_error(const std::string& msg);
-
-	void load_one_fx(const std::string& path, const std::string& fx_name);
-	bool play_or_not(const std::string& fx_name, int32_t stereo_position, uint8_t priority);
-
-	/// Whether to disable background music
-	bool disable_music_;
-	/// Whether to disable sound effects
-	bool disable_fx_;
-	/// Volume of music (from 0 to get_max_volume())
-	int32_t music_volume_;
-	/// Volume of sound effects (from 0 to get_max_volume())
-	int32_t fx_volume_;
-
-	/** Whether to play music in random order
-	 * \note Sound effects will \e always be selected at random (inside
-	 * their FXset, of course.
-	*/
-	bool random_order_;
+	/// Contains all options for sound types and music
+	std::map<SoundType, SoundOptions> sound_options_;
 
 	/// A collection of songsets
-	using SongsetMap = std::map<std::string, std::unique_ptr<Songset>>;
-	SongsetMap songs_;
+	std::map<std::string, std::unique_ptr<Songset>> songs_;
 
 	/// A collection of effect sets
-	using FXsetMap = std::map<std::string, std::unique_ptr<FXset>>;
-	FXsetMap fxs_;
+	std::map<SoundType, std::map<FxId, std::unique_ptr<FXset>>> fxs_;
+
+	/// Maps Fx names to identifiers to ensure that we register each effect only once
+	std::map<SoundType, std::map<std::string, FxId>> fx_ids_;
 
 	/// List of currently playing effects, and the channel each one is on
 	/// Access to this variable is protected through fx_lock_ mutex.
-	using ActivefxMap = std::map<uint32_t, std::string>;
-	ActivefxMap active_fx_;
+	std::map<uint32_t, FxId> active_fx_;
 
 	/** Which songset we are currently selecting songs from - not regarding
 	 * if there actually is a song playing \e right \e now.
-	*/
+	 */
 	std::string current_songset_;
 
 	/** The random number generator.
 	 * \note The RNG here \e must \e not be the same as the one for the game
 	 * logic!
-	*/
+	 */
 	RNG rng_;
 
 	/// Protects access to active_fx_ between callbacks and main code.
 	SDL_mutex* fx_lock_;
+
+	/**
+	 * Can sounds be played?
+	 * true = they mustn't be played, e.g. because hardware is missing or disable_backend() was
+	 * called. false = can be played
+	 */
+	static bool backend_is_disabled_;
 };
+
+extern SoundHandler* g_sh;
 
 #endif  // end of include guard: WL_SOUND_SOUND_HANDLER_H

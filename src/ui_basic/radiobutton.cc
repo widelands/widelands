@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@ namespace UI {
 
 /**
  * Initialize the radiobutton and link it into the group's linked list
-*/
+ */
 Radiobutton::Radiobutton(
    Panel* const parent, Vector2i const p, const Image* pic, Radiogroup& group, int32_t const id)
    : Statebox(parent, p, pic), nextbtn_(group.buttons_), group_(group), id_(id) {
@@ -48,7 +48,7 @@ Radiobutton::~Radiobutton() {
  * Inform the radiogroup about the click; the group is responsible of setting
  * button states.
  */
-void Radiobutton::clicked() {
+void Radiobutton::button_clicked() {
 	group_.set_state(id_);
 	play_click();
 }
@@ -84,7 +84,7 @@ Radiogroup::~Radiogroup() {
 /**
  * Create a new radio button with the given attributes
  * Returns the ID of the new button.
-*/
+ */
 int32_t Radiogroup::add_button(Panel* const parent,
                                Vector2i const p,
                                const Image* pic,
@@ -123,4 +123,4 @@ void Radiogroup::set_enabled(bool st) {
 	for (Radiobutton* btn = buttons_; btn; btn = btn->nextbtn_)
 		btn->set_enabled(st);
 }
-}
+}  // namespace UI

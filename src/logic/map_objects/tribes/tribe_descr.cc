@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,6 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/immovable.h"
@@ -52,9 +51,9 @@
 namespace Widelands {
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/atlanteans.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/atlanteans.lua
+ */
 TribeDescr::TribeDescr(const LuaTable& table,
                        const Widelands::TribeBasicInfo& info,
                        const Tribes& init_tribes)
@@ -64,12 +63,20 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		initializations_ = info.initializations;
 
 		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
-		frontier_animation_id_ = g_gr->animations().load(*items_table->get_table("frontier"));
-		flag_animation_id_ = g_gr->animations().load(*items_table->get_table("flag"));
+		{
+			std::unique_ptr<LuaTable> animations_table = items_table->get_table("frontier");
+			frontier_animation_id_ =
+			   g_gr->animations().load(name_ + std::string("_frontier"), *animations_table,
+			                           animations_table->get_string("basename"));
+			animations_table = items_table->get_table("flag");
+			flag_animation_id_ =
+			   g_gr->animations().load(name_ + std::string("_frontier"), *animations_table,
+			                           animations_table->get_string("basename"));
+		}
 
 		items_table = table.get_table("roads");
 		const auto load_roads = [&items_table](
-		   const std::string& road_type, std::vector<std::string>* images) {
+		                           const std::string& road_type, std::vector<std::string>* images) {
 			std::vector<std::string> roads =
 			   items_table->get_table(road_type)->array_entries<std::string>();
 			for (const std::string& filename : roads) {
@@ -88,8 +95,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		load_roads("busy", &busy_road_paths_);
 
 		items_table = table.get_table("wares_order");
-		wares_order_coords_.resize(tribes_.nrwares());
-		int columnindex = 0;
 		for (const int key : items_table->keys<int>()) {
 			std::vector<DescriptionIndex> column;
 			std::vector<std::string> warenames =
@@ -103,7 +108,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 					}
 					wares_.insert(wareindex);
 					column.push_back(wareindex);
-					wares_order_coords_[wareindex] = std::make_pair(columnindex, rowindex);
 				} catch (const WException& e) {
 					throw GameDataError(
 					   "Failed adding ware '%s: %s", warenames[rowindex].c_str(), e.what());
@@ -111,13 +115,10 @@ TribeDescr::TribeDescr(const LuaTable& table,
 			}
 			if (!column.empty()) {
 				wares_order_.push_back(column);
-				++columnindex;
 			}
 		}
 
 		items_table = table.get_table("workers_order");
-		workers_order_coords_.resize(tribes_.nrworkers());
-		columnindex = 0;
 		for (const int key : items_table->keys<int>()) {
 			std::vector<DescriptionIndex> column;
 			std::vector<std::string> workernames =
@@ -131,7 +132,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 					}
 					workers_.insert(workerindex);
 					column.push_back(workerindex);
-					workers_order_coords_[workerindex] = std::make_pair(columnindex, rowindex);
 
 					const WorkerDescr& worker_descr = *tribes_.get_worker_descr(workerindex);
 					if (worker_descr.is_buildable() && worker_descr.buildcost().empty()) {
@@ -144,7 +144,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 			}
 			if (!column.empty()) {
 				workers_order_.push_back(column);
-				++columnindex;
 			}
 		}
 
@@ -160,6 +159,20 @@ TribeDescr::TribeDescr(const LuaTable& table,
 				throw GameDataError(
 				   "Failed adding immovable '%s': %s", immovablename.c_str(), e.what());
 			}
+		}
+
+		items_table = table.get_table("resource_indicators");
+		for (std::string resource : items_table->keys<std::string>()) {
+			ResourceIndicatorList resis;
+			std::unique_ptr<LuaTable> tbl = items_table->get_table(resource);
+			const std::set<int> keys = tbl->keys<int>();
+			for (int upper_limit : keys) {
+				resis[upper_limit] = tribes_.safe_immovable_index(tbl->get_string(upper_limit));
+			}
+			if (resis.empty()) {
+				throw GameDataError("Tribe has no indicators for resource %s.", resource.c_str());
+			}
+			resource_indicators_[resource] = resis;
 		}
 
 		ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
@@ -184,21 +197,23 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		}
 
 		port_ = add_special_building(table.get_string("port"));
-		barracks_ = add_special_building(table.get_string("barracks"));
 
 		ironore_ = add_special_ware(table.get_string("ironore"));
 		rawlog_ = add_special_ware(table.get_string("rawlog"));
 		refinedlog_ = add_special_ware(table.get_string("refinedlog"));
 		granite_ = add_special_ware(table.get_string("granite"));
 
+		if (table.has_key<std::string>("toolbar")) {
+			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
+		}
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
 	}
 }
 
 /**
-  * Access functions
-  */
+ * Access functions
+ */
 
 const std::string& TribeDescr::name() const {
 	return name_;
@@ -225,6 +240,9 @@ const std::set<DescriptionIndex>& TribeDescr::workers() const {
 }
 const std::set<DescriptionIndex>& TribeDescr::immovables() const {
 	return immovables_;
+}
+const ResourceIndicatorSet& TribeDescr::resource_indicators() const {
+	return resource_indicators_;
 }
 
 bool TribeDescr::has_building(const DescriptionIndex& index) const {
@@ -310,10 +328,6 @@ DescriptionIndex TribeDescr::port() const {
 	assert(tribes_.building_exists(port_));
 	return port_;
 }
-DescriptionIndex TribeDescr::barracks() const {
-	assert(tribes_.building_exists(barracks_));
-	return barracks_;
-}
 DescriptionIndex TribeDescr::ironore() const {
 	assert(tribes_.ware_exists(ironore_));
 	return ironore_;
@@ -374,73 +388,35 @@ Find the best matching indicator for the given amount.
 DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* const res,
                                                     const ResourceAmount amount) const {
 	if (!res || !amount) {
-		DescriptionIndex idx = immovable_index("resi_none");
-		if (!has_immovable(idx)) {
-			throw GameDataError("There is no resource indicator for resi_none!");
+		auto list = resource_indicators_.find("");
+		if (list == resource_indicators_.end() || list->second.empty()) {
+			throw GameDataError("Tribe '%s' has no indicator for no resources!", name_.c_str());
 		}
-		return idx;
+		return list->second.begin()->second;
 	}
 
-	int32_t i = 1;
-	int32_t num_indicators = 0;
-	for (;;) {
-		const std::string resi_filename =
-		   (boost::format("resi_%s%i") % res->name().c_str() % i).str();
-		if (!has_immovable(immovable_index(resi_filename))) {
-			break;
-		}
-		++i;
-		++num_indicators;
+	auto list = resource_indicators_.find(res->name());
+	if (list == resource_indicators_.end() || list->second.empty()) {
+		throw GameDataError(
+		   "Tribe '%s' has no indicators for resource '%s'!", name_.c_str(), res->name().c_str());
 	}
 
-	if (!num_indicators) {
-		throw GameDataError("There is no resource indicator for resource %s", res->name().c_str());
-	}
-
-	int32_t bestmatch =
-	   static_cast<int32_t>((static_cast<float>(amount) / res->max_amount()) * num_indicators);
-	if (bestmatch > num_indicators) {
-		throw GameDataError("Amount of %s is %i but max amount is %i", res->name().c_str(),
-		                    static_cast<unsigned int>(amount),
-		                    static_cast<unsigned int>(res->max_amount()));
-	}
-	if (amount < res->max_amount()) {
-		bestmatch += 1;  // Resi start with 1, not 0
-	}
-
-	return immovable_index((boost::format("resi_%s%i") % res->name().c_str() % bestmatch).str());
-}
-
-void TribeDescr::resize_ware_orders(size_t maxLength) {
-	bool need_resize = false;
-
-	// Check if we actually need to resize.
-	for (WaresOrder::iterator it = wares_order_.begin(); it != wares_order_.end(); ++it) {
-		if (it->size() > maxLength) {
-			need_resize = true;
+	uint32_t lowest = 0;
+	for (const auto& resi : list->second) {
+		if (resi.first < amount) {
+			continue;
+		} else if (lowest < amount || resi.first < lowest) {
+			lowest = resi.first;
 		}
 	}
 
-	// Build new smaller wares_order.
-	if (need_resize) {
-		WaresOrder new_wares_order;
-		for (WaresOrder::iterator it = wares_order_.begin(); it != wares_order_.end(); ++it) {
-			new_wares_order.push_back(std::vector<Widelands::DescriptionIndex>());
-			for (std::vector<Widelands::DescriptionIndex>::iterator it2 = it->begin();
-			     it2 != it->end(); ++it2) {
-				if (new_wares_order.rbegin()->size() >= maxLength) {
-					new_wares_order.push_back(std::vector<Widelands::DescriptionIndex>());
-				}
-				new_wares_order.rbegin()->push_back(*it2);
-				wares_order_coords_[*it2].first = new_wares_order.size() - 1;
-				wares_order_coords_[*it2].second = new_wares_order.rbegin()->size() - 1;
-			}
-		}
-
-		// Remove old array.
-		wares_order_.clear();
-		wares_order_ = new_wares_order;
+	if (lowest < amount) {
+		throw GameDataError("Tribe '%s' has no indicators for amount %i of resource '%s' (highest "
+		                    "possible amount is %i)!",
+		                    name_.c_str(), amount, res->name().c_str(), lowest);
 	}
+
+	return list->second.find(lowest)->second;
 }
 
 void TribeDescr::add_building(const std::string& buildingname) {
@@ -472,9 +448,13 @@ void TribeDescr::add_building(const std::string& buildingname) {
 	}
 }
 
+ToolbarImageset* TribeDescr::toolbar_image_set() const {
+	return toolbar_image_set_.get();
+}
+
 /**
-  * Helper functions
-  */
+ * Helper functions
+ */
 
 DescriptionIndex TribeDescr::add_special_worker(const std::string& workername) {
 	try {
@@ -511,4 +491,4 @@ DescriptionIndex TribeDescr::add_special_ware(const std::string& warename) {
 		throw GameDataError("Failed adding special ware '%s': %s", warename.c_str(), e.what());
 	}
 }
-}
+}  // namespace Widelands

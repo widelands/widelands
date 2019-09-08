@@ -14,6 +14,12 @@ return {
       font = "default"
    },
 
+   af_ZA = {
+      name = "Afrikaans",
+      sort_name = "Afrikaans",
+      font = "default"
+   },
+
    ar = {
       name = "العربية",
       sort_name = "Al-ʿArabiyyah",
@@ -249,9 +255,9 @@ return {
    },
 
    ms = {
-      name = "بهاس ملايو",
+      name = "Bahasa Melayu",
       sort_name = "Melayu",
-      font = "arabic"
+      font = "default"
    },
 
    my = {
@@ -267,8 +273,8 @@ return {
    },
 
    nds = {
-      name = "Plattdütsch",
-      sort_name = "Plattdutsch",
+      name = "Plattdüütsch",
+      sort_name = "Plattduutsch",
       font = "default"
    },
 
@@ -345,7 +351,13 @@ return {
    },
 
    sr = {
-      name = "српски",
+      name = "Srpski",
+      sort_name = "Srpski",
+      font = "default"
+   },
+
+   sr_RS = {
+      name = "Српски",
       sort_name = "Srpski",
       font = "default"
    },

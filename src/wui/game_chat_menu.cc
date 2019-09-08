@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,11 +34,12 @@ GameChatMenu::GameChatMenu(UI::Panel* parent,
                            ChatProvider& chat,
                            const std::string& title)
    : UI::UniqueWindow(parent, "chat", &registry, 440, 235, title),
-     chat_(this, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat) {
-	if (get_usedefaultpos())
+     chat_(this, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat, UI::PanelStyle::kWui),
+     close_on_send_(false) {
+	if (get_usedefaultpos()) {
 		center_to_parent();
-
-	close_on_send_ = false;
+	}
+	set_can_focus(true);
 
 	chat_.sent.connect(boost::bind(&GameChatMenu::acknowledge, this));
 	chat_.aborted.connect(boost::bind(&GameChatMenu::acknowledge, this));
@@ -52,18 +53,35 @@ GameChatMenu* GameChatMenu::create_chat_console(UI::Panel* parent,
 	return new GameChatMenu(parent, registry, chat, _("Chat"));
 }
 
+#ifndef NDEBUG  //  only in debug builds
 GameChatMenu* GameChatMenu::create_script_console(UI::Panel* parent,
                                                   UI::UniqueWindow::Registry& registry,
                                                   ChatProvider& chat) {
-	return new GameChatMenu(parent, registry, chat, _("Script console"));
+	return new GameChatMenu(parent, registry, chat, _("Script Console"));
 }
+#endif
 
-void GameChatMenu::enter_chat_message(bool close_on_send) {
+bool GameChatMenu::enter_chat_message(bool close_on_send) {
+	if (is_minimal()) {
+		return false;
+	}
 	chat_.focus_edit();
 	close_on_send_ = close_on_send;
+	return true;
+}
+
+void GameChatMenu::restore() {
+	Window::restore();
+	chat_.focus_edit();
+}
+
+void GameChatMenu::minimize() {
+	Window::minimize();
+	chat_.unfocus_edit();
 }
 
 void GameChatMenu::acknowledge() {
-	if (close_on_send_)
+	if (close_on_send_) {
 		die();
+	}
 }

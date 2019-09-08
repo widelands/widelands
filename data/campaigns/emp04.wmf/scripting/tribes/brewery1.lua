@@ -3,15 +3,22 @@ dirname = "tribes/buildings/productionsites/empire/brewery/"
 tribes:new_productionsite_type {
    msgctxt = "empire_building",
    name = "empire_brewery1",
-   descname = "Brewery",
+   descname = pgettext("empire_building", "Brewery"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
+   enhancement = "empire_brewery2",
 
+   buildcost = {
+      log = 1,
+      planks = 2,
+      granite = 2
+   },
    return_on_dismantle = {
       planks = 1,
       granite = 1
    },
+
 
    animations = {
       idle = {
@@ -47,7 +54,7 @@ tribes:new_productionsite_type {
             "sleep=30000",
             "return=skipped unless economy needs beer",
             "consume=water:3 wheat",
-            "play_sound=sound/empire beerbubble 180",
+            "playsound=sound/empire/beerbubble 180",
             "animate=working 30000",
             "produce=beer"
          }

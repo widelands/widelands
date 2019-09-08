@@ -1,9 +1,8 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=Widelands
 GENERIC_NAME_COMMENT_HOOK
-Icon=/usr/share/games/widelands/data/images/logos/wl-ico-64.png
+Icon=widelands
 TryExec=widelands
 Exec=widelands
-Categories=Application;Game;StrategyGame;
+Categories=Game;StrategyGame;

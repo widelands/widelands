@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "ui_basic/mouse_constants.h"
 
 namespace UI {
@@ -43,7 +44,7 @@ Scrollbar::Scrollbar(Panel* const parent,
                      int32_t const y,
                      uint32_t const w,
                      uint32_t const h,
-                     const Image* button_background,
+                     UI::PanelStyle style,
                      bool const horiz)
    : Panel(parent, x, y, w, h),
      horizontal_(horiz),
@@ -60,14 +61,14 @@ Scrollbar::Scrollbar(Panel* const parent,
                                            "images/ui_basic/scrollbar_up.png")),
      pic_plus_(g_gr->images().get(horiz ? "images/ui_basic/scrollbar_right.png" :
                                           "images/ui_basic/scrollbar_down.png")),
-     pic_buttons_(button_background) {
+     button_style_(g_gr->styles().scrollbar_style(style)) {
 	set_thinks(true);
 	layout();
 }
 
 /**
  * Change the number of steps of the scrollbar.
-*/
+ */
 void Scrollbar::set_steps(int32_t steps) {
 	if (steps < 1)
 		steps = 1;
@@ -103,7 +104,7 @@ void Scrollbar::set_singlestepsize(uint32_t singlestepsize) {
 
 /**
  * Change the number of steps a pageup/down will scroll.
-*/
+ */
 void Scrollbar::set_pagesize(int32_t const pagesize) {
 	pagesize_ = pagesize < 1 ? 1 : pagesize;
 	layout();
@@ -163,7 +164,7 @@ Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y) {
 
 /**
  * Return the center of the knob, in pixels, depending on the current position.
-*/
+ */
 uint32_t Scrollbar::get_knob_pos() {
 	assert(0 != steps_);
 	uint32_t result = buttonsize_ + get_knob_size() / 2;
@@ -174,7 +175,7 @@ uint32_t Scrollbar::get_knob_pos() {
 
 /**
  * Change the position according to knob movement.
-*/
+ */
 void Scrollbar::set_knob_pos(int32_t pos) {
 	uint32_t knobsize = get_knob_size();
 	int32_t extent = horizontal_ ? get_w() : get_h();
@@ -233,7 +234,7 @@ void Scrollbar::action(Area const area) {
 }
 
 void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
-	dst.tile(r.cast<int>(), pic_buttons_, Vector2i(get_x(), get_y()));
+	draw_background(dst, r.cast<int>(), *button_style_);
 
 	// Draw the picture
 	const Image* pic = nullptr;
@@ -304,7 +305,7 @@ void Scrollbar::draw_area(RenderTarget& dst, Area area, const Recti& r) {
 
 /**
  * Draw the scrollbar.
-*/
+ */
 void Scrollbar::draw(RenderTarget& dst) {
 	if (!is_enabled()) {
 		return;  // Don't draw a scrollbar that doesn't do anything
@@ -355,14 +356,15 @@ void Scrollbar::draw(RenderTarget& dst) {
 		draw_area(dst, Area::MinusPage,
 		          Recti(0, buttonsize_, get_w(), knobpos - buttonsize_ - knobsize / 2));
 		assert(knobpos + knobsize / 2 + buttonsize_ <= static_cast<uint32_t>(get_h()));
-		draw_area(dst, Area::PlusPage, Recti(0, knobpos + knobsize / 2, get_w(),
-		                                     get_h() - knobpos - knobsize / 2 - buttonsize_));
+		draw_area(
+		   dst, Area::PlusPage,
+		   Recti(0, knobpos + knobsize / 2, get_w(), get_h() - knobpos - knobsize / 2 - buttonsize_));
 	}
 }
 
 /**
  * Check for possible auto-repeat scrolling.
-*/
+ */
 void Scrollbar::think() {
 	Panel::think();
 

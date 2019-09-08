@@ -14,7 +14,7 @@ tribes:new_productionsite_type {
       blackwood = 1,
       granite = 2,
       grout = 1,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle_on_enhanced = {
       blackwood = 1,
@@ -76,20 +76,20 @@ tribes:new_productionsite_type {
             "call=produce_ax_bronze",
             "call=produce_ax_battle",
             "call=produce_ax_warriors",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_ax = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
          descname = _"forging an ax",
          actions = {
-            -- time total: 73
+            -- time total: 57 + 3.6
             "return=skipped unless economy needs ax",
-            "sleep=36000", -- +10 enlarge
             "consume=coal iron",
-            "play_sound=sound/smiths smith 192",
-            "animate=working 28000",  -- +6 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "sleep=26000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 22000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax"
          }
@@ -98,13 +98,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
          descname = _"forging a sharp ax",
          actions = {
-            -- time total: 76
+            -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_sharp",
             "consume=coal iron:2",
-            "sleep=37000", -- +11 enlarge
-            "play_sound=sound/smiths smith 192",
-            "animate=working 30000", -- +8 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "sleep=26000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 22000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_sharp"
          }
@@ -113,13 +113,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
          descname = _"forging a broad ax",
          actions = {
-            -- time total: 79
+            -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_broad",
             "consume=coal:2 iron:2",
-            "sleep=38000", -- +12 enlarge
-            "play_sound=sound/smiths smith 192",
-            "animate=working 32000", -- +10 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "sleep=26000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 22000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_broad"
          }
@@ -128,13 +128,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because ...
          descname = _"forging a bronze ax",
          actions = {
-            -- time total: 82
+            -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_bronze",
             "consume=coal:2 iron:2",
-            "sleep=39000", -- +13 enlarge
-            "play_sound=sound/smiths smith 192",
-            "animate=working 34000", -- +12 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "sleep=26000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 22000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_bronze"
          }
@@ -143,13 +143,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because ...
          descname = _"forging a battle ax",
          actions = {
-            -- time total: 87
+            -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_battle",
             "consume=coal gold iron:2",
-            "sleep=41000", -- +15 enlarge
-            "play_sound=sound/smiths smith 192",
-            "animate=working 37000", -- +15 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "sleep=26000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 22000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_battle"
          }
@@ -158,13 +158,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because ...
          descname = _"forging a warrior’s ax",
          actions = {
-            -- time total: 92
+            -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_warriors",
             "consume=coal:2 gold:2 iron:2",
-            "sleep=43000", -- +17 enlarge
-            "play_sound=sound/smiths smith 192",
-            "animate=working 40000", -- +18 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "sleep=26000",
+            "playsound=sound/smiths/smith 192",
+            "animate=working 22000",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=ax_warriors"
          }

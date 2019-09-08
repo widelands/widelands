@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,8 @@
 #ifndef WL_WUI_PLOT_AREA_H
 #define WL_WUI_PLOT_AREA_H
 
-#include <vector>
 #include <memory>
+#include <vector>
 
 #include <boost/bind.hpp>
 
@@ -156,7 +156,6 @@ struct WuiPlotAreaSlider : public UI::DiscreteSlider {
 	                  const int32_t y,
 	                  const uint32_t w,
 	                  const uint32_t h,
-	                  const Image* background_picture_id,
 	                  const std::string& tooltip_text = std::string(),
 	                  const uint32_t cursor_size = 20,
 	                  const bool enabled = true)
@@ -167,7 +166,7 @@ struct WuiPlotAreaSlider : public UI::DiscreteSlider {
 	                    h,
 	                    plot_area.get_labels(),
 	                    plot_area.get_time_id(),
-	                    background_picture_id,
+	                    UI::SliderStyle::kWuiLight,
 	                    tooltip_text,
 	                    cursor_size,
 	                    enabled),
