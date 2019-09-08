@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,16 +22,10 @@
 #include <cstdio>
 #include <memory>
 
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/regex.hpp>
-
-#include "base/log.h"
 #include "base/wexception.h"
-#include "io/fileread.h"
 #include "io/streamread.h"
 
 LayeredFileSystem* g_fs;
-
 LayeredFileSystem::LayeredFileSystem() : home_(nullptr) {
 }
 
@@ -39,18 +33,6 @@ LayeredFileSystem::LayeredFileSystem() : home_(nullptr) {
  * Free all sub-filesystems
  */
 LayeredFileSystem::~LayeredFileSystem() {
-}
-
-bool LayeredFileSystem::is_legal_filename(const std::string& filename) {
-	// No potential file separators or other potentially illegal characters
-	// https://msdn.microsoft.com/en-us/library/windows/desktop/aa365247(v=vs.85).aspx
-	// http://www.linfo.org/file_name.html
-	// https://support.apple.com/en-us/HT202808
-	// We can't just regex for word & digit characters here because of non-Latin scripts.
-	boost::regex re(".*[<>:\"|?*/\\\\].*");
-	return !filename.empty() && !boost::starts_with(filename, ".") &&
-	       !boost::starts_with(filename, " ") && !boost::starts_with(filename, "-") &&
-	       !boost::regex_match(filename, re);
 }
 
 /**
@@ -70,17 +52,6 @@ void LayeredFileSystem::set_home_file_system(FileSystem* fs) {
 }
 
 /**
- * Remove a filesystem from the stack
- * \param fs The filesystem to be removed
- */
-void LayeredFileSystem::remove_file_system(const FileSystem& fs) {
-	if (filesystems_.back().get() != &fs)
-		throw std::logic_error("LayeredFileSystem::remove_file_system: interspersed add/remove "
-		                       "detected!");
-	filesystems_.pop_back();
-}
-
-/**
  * Find files in all sub-filesystems in the given path, with the given pattern.
  * Store all found files in results.
  *
@@ -88,7 +59,7 @@ void LayeredFileSystem::remove_file_system(const FileSystem& fs) {
  *
  * Returns the number of files found.
  */
-std::set<std::string> LayeredFileSystem::list_directory(const std::string& path) {
+FilenameSet LayeredFileSystem::list_directory(const std::string& path) const {
 	std::set<std::string> results;
 	FilenameSet files;
 	// Check home system first
@@ -110,7 +81,7 @@ std::set<std::string> LayeredFileSystem::list_directory(const std::string& path)
 /**
  * Returns true if the file can be found in at least one of the sub-filesystems
  */
-bool LayeredFileSystem::file_exists(const std::string& path) {
+bool LayeredFileSystem::file_exists(const std::string& path) const {
 	if (home_ && home_->file_exists(path))
 		return true;
 	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)

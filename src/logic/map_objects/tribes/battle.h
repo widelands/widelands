@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@ class Soldier;
 class BattleDescr : public MapObjectDescr {
 public:
 	BattleDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::BATTLE, init_name, init_descname) {
+	   : MapObjectDescr(MapObjectType::BATTLE, init_name, init_descname, "") {
 	}
 	~BattleDescr() override {
 	}
@@ -49,10 +49,10 @@ public:
 	const BattleDescr& descr() const;
 
 	Battle();                           //  for loading an existing battle from a savegame
-	Battle(Game&, Soldier&, Soldier&);  //  to create a new battle in the game
+	Battle(Game&, Soldier*, Soldier*);  //  to create a new battle in the game
 
 	// Implements MapObject.
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	bool has_new_save_support() override {
 		return true;
@@ -74,10 +74,12 @@ public:
 		return second_;
 	}
 
+	uint32_t get_pending_damage(const Soldier* for_whom) const;
+
 	// Returns the other soldier involved in this battle. CHECKs that the given
-	// soldier is participating in this battle. Can return nullptr, but I have
-	// no idea what that means.
-	Soldier* opponent(Soldier&);
+	// soldier is participating in this battle. Can return nullptr, probably when the
+	// opponent has died.
+	Soldier* opponent(const Soldier&) const;
 
 	// Called by the battling soldiers once they've met on a common node and are
 	// idle.
@@ -124,6 +126,6 @@ private:
 	 */
 	bool last_attack_hits_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_BATTLE_H

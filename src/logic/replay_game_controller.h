@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2017 by the Widelands Development Team
+ * Copyright (C) 2015-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ public:
 
 	void think() override;
 
-	void send_player_command(Widelands::PlayerCommand&) override;
+	void send_player_command(Widelands::PlayerCommand*) override;
 	int32_t get_frametime() override;
 	GameController::GameType get_game_type() override;
 	uint32_t real_speed() override;
@@ -46,7 +46,7 @@ public:
 
 private:
 	struct CmdReplayEnd : public Widelands::Command {
-		CmdReplayEnd(uint32_t const init_duetime) : Widelands::Command(init_duetime) {
+		explicit CmdReplayEnd(uint32_t const init_duetime) : Widelands::Command(init_duetime) {
 		}
 		virtual void execute(Widelands::Game& game);
 		virtual Widelands::QueueCommandTypes id() const;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "graphic/graphic.h"
 #include "logic/field.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
@@ -97,7 +96,7 @@ void draw_view_window(const Map& map,
 	const int half_height =
 	   round_up_to_nearest_even(std::ceil(view_area.h / kTriangleHeight / divider));
 
-	Vector2i center_pixel;
+	Vector2i center_pixel = Vector2i::zero();
 	switch (minimap_type) {
 	case MiniMapType::kStaticViewWindow:
 		center_pixel = Vector2i(texture->width() / 2, texture->height() / 2);
@@ -158,13 +157,13 @@ void do_draw_minimap(Texture* texture,
 	const Widelands::Map& map = egbase.map();
 	const uint16_t surface_h = texture->height();
 	const uint16_t surface_w = texture->width();
-	const int32_t mapwidth = egbase.get_map().get_width();
+	const int32_t mapwidth = map.get_width();
 
 	for (uint32_t y = 0; y < surface_h; ++y) {
-		Widelands::FCoords f(
-		   Widelands::Coords(top_left.x, top_left.y + (layers & MiniMapLayer::Zoom2 ? y / 2 : y)));
-		map.normalize_coords(f);
-		f.field = &map[f];
+		Widelands::Coords coords(
+		   Widelands::Coords(top_left.x, top_left.y + ((layers & MiniMapLayer::Zoom2) ? y / 2 : y)));
+		map.normalize_coords(coords);
+		Widelands::FCoords f = map.get_fcoords(coords);
 		Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
 		for (uint32_t x = 0; x < surface_w; ++x) {
 			if (x % 2 || !(layers & MiniMapLayer::Zoom2)) {
@@ -203,7 +202,7 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
                                    const Rectf& view_area,
                                    MiniMapType minimap_type,
                                    const bool zoom) {
-	Vector2f top_left;
+	Vector2f top_left = Vector2f::zero();
 	switch (minimap_type) {
 	case MiniMapType::kStaticViewWindow:
 		top_left =
@@ -212,7 +211,7 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
 		break;
 
 	case MiniMapType::kStaticMap:
-		top_left = Vector2f(0., 0.);
+		top_left = Vector2f::zero();
 		break;
 	}
 
@@ -237,12 +236,13 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 
 	std::unique_ptr<Texture> texture(new Texture(map_w, map_h));
 
-	texture->fill_rect(Rectf(0, 0, texture->width(), texture->height()), RGBAColor(0, 0, 0, 255));
+	texture->fill_rect(
+	   Rectf(0.f, 0.f, texture->width(), texture->height()), RGBAColor(0, 0, 0, 255));
 
 	// Center the view on the middle of the 'view_area'.
 	const bool zoom = layers & MiniMapLayer::Zoom2;
 	Vector2f top_left =
-	   minimap_pixel_to_mappixel(map, Vector2i(0, 0), view_area, minimap_type, zoom);
+	   minimap_pixel_to_mappixel(map, Vector2i::zero(), view_area, minimap_type, zoom);
 	const Coords node =
 	   MapviewPixelFunctions::calc_node_and_triangle(map, top_left.x, top_left.y).node;
 

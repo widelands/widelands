@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 
 #include "base/macros.h"
 #include "economy/request.h"
-#include "logic/map_objects/attackable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/requirements.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
@@ -35,11 +34,15 @@ namespace Widelands {
 class Soldier;
 class World;
 
+// I assume elsewhere, that enum SoldierPreference fits to uint8_t.
+enum class SoldierPreference : uint8_t {
+	kRookies,
+	kHeroes,
+};
+
 class MilitarySiteDescr : public BuildingDescr {
 public:
-	MilitarySiteDescr(const std::string& init_descname,
-	                  const LuaTable& t,
-	                  const EditorGameBase& egbase);
+	MilitarySiteDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
 	~MilitarySiteDescr() override {
 	}
 
@@ -69,47 +72,21 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(MilitarySiteDescr);
 };
 
-class MilitarySite : public Building, public SoldierControl, public Attackable {
+class MilitarySite : public Building {
 	friend class MapBuildingdataPacket;
 	MO_DESCR(MilitarySiteDescr)
 
 public:
-	// I assume elsewhere, that enum SoldierPreference fits to uint8_t.
-	enum SoldierPreference : uint8_t {
-		kNoPreference,
-		kPrefersRookies,
-		kPrefersHeroes,
-	};
+	explicit MilitarySite(const MilitarySiteDescr&);
+	~MilitarySite() override;
 
-	MilitarySite(const MilitarySiteDescr&);
-	virtual ~MilitarySite();
-
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 	void remove_worker(Worker&) override;
 
 	void set_economy(Economy*) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
-
-	// Begin implementation of SoldierControl
-	std::vector<Soldier*> present_soldiers() const override;
-	std::vector<Soldier*> stationed_soldiers() const override;
-	Quantity min_soldier_capacity() const override;
-	Quantity max_soldier_capacity() const override;
-	Quantity soldier_capacity() const override;
-	void set_soldier_capacity(Quantity capacity) override;
-	void drop_soldier(Soldier&) override;
-	int incorporate_soldier(EditorGameBase& game, Soldier& s) override;
-
-	// Begin implementation of Attackable
-	Player& owner() const override {
-		return Building::owner();
-	}
-	bool can_attack() override;
-	void aggressor(Soldier&) override;
-	bool attack(Soldier&) override;
-	// End implementation of Attackable
 
 	/// Launch the given soldier on an attack towards the given
 	/// target building.
@@ -130,6 +107,8 @@ public:
 	SoldierPreference get_soldier_preference() const {
 		return soldier_preference_;
 	}
+
+	const BuildingSettings* create_building_settings() const override;
 
 protected:
 	void conquer_area(EditorGameBase&);
@@ -153,6 +132,40 @@ private:
 	bool drop_least_suited_soldier(bool new_has_arrived, Soldier* s);
 
 private:
+	// We can be attacked if we have stationed soldiers.
+	class AttackTarget : public Widelands::AttackTarget {
+	public:
+		explicit AttackTarget(MilitarySite* military_site) : military_site_(military_site) {
+		}
+
+		bool can_be_attacked() const override;
+		void enemy_soldier_approaches(const Soldier&) const override;
+		Widelands::AttackTarget::AttackResult attack(Soldier*) const override;
+
+	private:
+		MilitarySite* const military_site_;
+	};
+
+	class SoldierControl : public Widelands::SoldierControl {
+	public:
+		explicit SoldierControl(MilitarySite* military_site) : military_site_(military_site) {
+		}
+
+		std::vector<Soldier*> present_soldiers() const override;
+		std::vector<Soldier*> stationed_soldiers() const override;
+		Quantity min_soldier_capacity() const override;
+		Quantity max_soldier_capacity() const override;
+		Quantity soldier_capacity() const override;
+		void set_soldier_capacity(Quantity capacity) override;
+		void drop_soldier(Soldier&) override;
+		int incorporate_soldier(EditorGameBase& game, Soldier& s) override;
+
+	private:
+		MilitarySite* const military_site_;
+	};
+
+	AttackTarget attack_target_;
+	SoldierControl soldier_control_;
 	Requirements soldier_requirements_;  // This is used to grab a bunch of soldiers: Anything goes
 	RequireAttribute soldier_upgrade_requirements_;     // This is used when exchanging soldiers.
 	std::unique_ptr<Request> normal_soldier_request_;   // filling the site
@@ -176,6 +189,6 @@ private:
 	bool soldier_upgrade_try_;  // optimization -- if everybody is zero-level, do not downgrade
 	bool doing_upgrade_request_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_MILITARYSITE_H

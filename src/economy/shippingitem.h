@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,17 +44,16 @@ class Worker;
 struct ShippingItem {
 	ShippingItem() {
 	}
-	ShippingItem(WareInstance& ware);
-	ShippingItem(Worker& worker);
+	explicit ShippingItem(WareInstance& ware);
+	explicit ShippingItem(Worker& worker);
 
 	// Unboxes the item that is shipped which might be either a ware or a
 	// worker. It is safe to pass nullptr for 'ware' or 'worker' in case you are
 	// only interested in the ware if it is the one or the other.
-	void get(EditorGameBase& game, WareInstance** ware, Worker** worker) const;
+	void get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const;
 
 	void set_economy(Game&, Economy* e);
-	PortDock* get_destination(Game&);
-	void schedule_update(Game&, int32_t delay);
+	const PortDock* get_destination(Game&) const;
 
 	void remove(EditorGameBase&);
 
@@ -63,7 +62,7 @@ struct ShippingItem {
 		ShippingItem get(MapObjectLoader& mol);
 
 	private:
-		uint32_t serial_;
+		uint32_t serial_ = 0U;
 	};
 
 	void save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw);

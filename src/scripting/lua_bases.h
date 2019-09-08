@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,10 +43,10 @@ public:
 
 	LuaEditorGameBase() {
 	}
-	LuaEditorGameBase(lua_State* L) {
+	explicit LuaEditorGameBase(lua_State* L) {
 		report_error(L, "Cannot instantiate a 'EditorGameBase' directly!");
 	}
-	virtual ~LuaEditorGameBase() {
+	~LuaEditorGameBase() override {
 	}
 
 	void __persist(lua_State* L) override;
@@ -68,6 +68,8 @@ public:
 	int get_worker_description(lua_State* L);
 	int get_resource_description(lua_State* L);
 	int get_terrain_description(lua_State* L);
+	int save_campaign_data(lua_State* L);
+	int read_campaign_data(lua_State* L);
 
 	/*
 	 * C methods
@@ -83,13 +85,13 @@ public:
 
 	LuaPlayerBase() : player_number_(NONE) {
 	}
-	LuaPlayerBase(lua_State* L) : player_number_(NONE) {
+	explicit LuaPlayerBase(lua_State* L) : player_number_(NONE) {
 		report_error(L, "Cannot instantiate a 'PlayerBase' directly!");
 	}
-	LuaPlayerBase(Widelands::PlayerNumber n) {
+	explicit LuaPlayerBase(Widelands::PlayerNumber n) {
 		player_number_ = n;
 	}
-	virtual ~LuaPlayerBase() {
+	~LuaPlayerBase() override {
 	}
 
 	void __persist(lua_State* L) override;
@@ -126,6 +128,6 @@ protected:
 };
 
 void luaopen_wlbases(lua_State*);
-}
+}  // namespace LuaBases
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_BASES_H

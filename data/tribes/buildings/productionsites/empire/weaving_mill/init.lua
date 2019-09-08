@@ -40,7 +40,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 120
+      prohibited_till = 420
    },
 
    working_positions = {
@@ -59,11 +59,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
          descname = _"weaving",
          actions = {
-            "sleep=5000",
             "return=skipped unless economy needs cloth",
             "consume=wool",
-            "sleep=15000",
-            "play_sound=sound/mill weaving 120",
+            "sleep=20000",
+            "playsound=sound/mill/weaving 120",
             "animate=working 15000", -- Unsure of balancing CW
             "sleep=5000",
             "produce=cloth"

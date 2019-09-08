@@ -6,8 +6,8 @@ animations = {
       hotspot = { 4, 23 },
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {9, 25}, 10)
-add_walking_animations(animations, "walkload", dirname, "walk", {9, 25}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {9, 25}, 10)
+add_directional_animation(animations, "walkload", dirname, "walk", {9, 25}, 10)
 
 
 tribes:new_worker_type {
@@ -17,7 +17,7 @@ tribes:new_worker_type {
    descname = pgettext("barbarians_worker", "Scout"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   vision_range = 2,
+   vision_range = 3,
 
    buildcost = {
       barbarians_carrier = 1
@@ -25,7 +25,7 @@ tribes:new_worker_type {
 
    programs = {
       scout = {
-         "scout 15 75000", -- radius 15, 75 seconds until return
+         "scout=15 75000", -- radius 15, 75 seconds until return
          "return"
       }
    },

@@ -47,7 +47,7 @@ return {
             scythe = 6,
             shovel = 4,
             snack = 3,
-            thatch_reed = 24,
+            reed = 24,
             log = 80,
          },
          workers = {
@@ -63,8 +63,10 @@ return {
             barbarians_lime_burner = 1,
             barbarians_lumberjack = 3,
             barbarians_miner = 4,
+            barbarians_miner_master = 4,
             barbarians_ranger = 1,
             barbarians_stonemason = 2,
+            barbarians_trainer = 4,
             barbarians_ox = 5,
          },
          -- Max health: 3, Max attack: 5, Max defense: 0, Max evade: 2

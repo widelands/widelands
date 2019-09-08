@@ -31,7 +31,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      forced_after = 450,
+      basic_amount = 1,
       prohibited_till = 350
    },
 
@@ -52,9 +52,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "sleep=25000",
             "return=skipped unless economy needs spider_silk",
             "consume=corn water",
+            "sleep=25000",
             "animate=working 30000",
             "produce=spider_silk"
          }

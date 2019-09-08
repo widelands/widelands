@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,6 +57,13 @@ RGBAColor::RGBAColor(const RGBColor& c) {
 	g = c.g;
 	b = c.b;
 	a = 255;
+}
+
+RGBAColor::RGBAColor(uint32_t hex)
+   : r((hex & 0xff0000) >> 16),
+     g((hex & 0xff00) >> 8),
+     b((hex & 0xff)),
+     a((hex & 0xff000000) >> 24) {
 }
 
 std::string RGBAColor::hex_value() const {

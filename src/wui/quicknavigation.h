@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ struct QuickNavigation {
 		}
 	};
 
-	QuickNavigation(MapView* map_view);
+	explicit QuickNavigation(MapView* map_view);
 
 	// Set the landmark for 'index' to 'view'. 'index' must be < 10.
 	void set_landmark(size_t index, const MapView::View& view);

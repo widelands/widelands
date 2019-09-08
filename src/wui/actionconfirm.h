@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@ namespace Widelands {
 class Building;
 struct PlayerImmovable;
 struct Ship;
-}
+}  // namespace Widelands
 
 // Building confirm windows
 void show_bulldoze_confirm(InteractivePlayer& player,
@@ -39,7 +39,8 @@ void show_dismantle_confirm(InteractivePlayer& player, Widelands::Building& buil
 
 void show_enhance_confirm(InteractivePlayer& player,
                           Widelands::Building& building,
-                          const Widelands::DescriptionIndex& id);
+                          const Widelands::DescriptionIndex& id,
+                          bool still_under_construction = false);
 
 // Ship confirm windows
 void show_ship_sink_confirm(InteractivePlayer& player, Widelands::Ship& ship);

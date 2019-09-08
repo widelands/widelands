@@ -38,6 +38,11 @@ tribes:new_productionsite_type {
       mines = "coal"
    },
 
+   indicate_workarea_overlaps = {
+      empire_coalmine = false,
+      empire_coalmine_deep = false,
+   },
+
    working_positions = {
       empire_miner = 1,
       empire_miner_master = 1
@@ -56,15 +61,31 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
-            "sleep=42000",
             "return=skipped unless economy needs coal",
             "consume=beer meal",
-            "animate=working 18000",
+            "sleep=38000",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "return=no_stats"
+         }
+      },
+      mine_produce = {
+         descname = _"mining coal",
+         actions = {
+            "animate=working 8000",
             "mine=coal 2 100 5 2",
-            "produce=coal:2",
-            "animate=working 18000",
-            "mine=coal 2 100 5 2",
-            "produce=coal:3"
+            "produce=coal",
+         }
+      },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=beer meal",
+            "produce=coal:5",
          }
       },
    },

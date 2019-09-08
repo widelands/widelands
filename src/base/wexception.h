@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,12 +36,12 @@
 #endif
 #endif
 
-/** class wexception
+/** Stupid, simple exception class.
  *
- * Stupid, simple exception class. It has the nice bonus that you can give it
- * sprintf()-style format strings
+ * It has the nice bonus that you can give it sprintf()-style format strings.
  */
-struct WException : public std::exception {
+class WException : public std::exception {
+public:
 	explicit WException(char const* const file, uint32_t const line, char const* const fmt, ...)
 	   PRINTF_FORMAT(4, 5);
 

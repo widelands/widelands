@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2017 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,10 @@
 
 #include "ui_basic/tabpanel.h"
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 
@@ -47,19 +49,23 @@ constexpr uint32_t kNotFound = std::numeric_limits<uint32_t>::max();
 Tab::Tab(TabPanel* const tab_parent,
          size_t const tab_id,
          int32_t x,
-         int32_t w,
          const std::string& name,
          const std::string& init_title,
          const Image* init_pic,
          const std::string& tooltip_text,
          Panel* const contents)
-   : NamedPanel(tab_parent, name, x, 0, w, kTabPanelButtonHeight, tooltip_text),
+   : NamedPanel(tab_parent, name, x, 0, kTabPanelButtonHeight, kTabPanelButtonHeight, tooltip_text),
      parent(tab_parent),
      id(tab_id),
      pic(init_pic),
-     title(init_title),
+     rendered_title(nullptr),
      tooltip(tooltip_text),
      panel(contents) {
+	if (!init_title.empty()) {
+		rendered_title = UI::g_fh->render(as_richtext_paragraph(init_title, UI::FontStyle::kLabel));
+		set_size(std::max(kTabPanelButtonHeight, rendered_title->width() + 2 * kTabPanelTextMargin),
+		         kTabPanelButtonHeight);
+	}
 }
 
 /**
@@ -83,37 +89,25 @@ bool Tab::handle_mousepress(uint8_t, int32_t, int32_t) {
  * =================
  */
 /**
- * Initialize an empty TabPanel
-*/
-TabPanel::TabPanel(Panel* const parent,
-                   int32_t const x,
-                   int32_t const y,
-                   const Image* background,
-                   TabPanel::Type border_type)
-   : Panel(parent, x, y, 0, 0),
-     border_type_(border_type),
+ * Initialize an empty TabPanel. We use width == 0 as an indicator that the size hasn't been set
+ * yet.
+ */
+TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
+   : Panel(parent, 0, 0, 0, 0),
+     style_(style),
      active_(0),
      highlight_(kNotFound),
-     pic_background_(background) {
-}
-TabPanel::TabPanel(Panel* const parent,
-                   int32_t const x,
-                   int32_t const y,
-                   int32_t const w,
-                   int32_t const h,
-                   const Image* background,
-                   TabPanel::Type border_type)
-   : Panel(parent, x, y, w, h),
-     border_type_(border_type),
-     active_(0),
-     highlight_(kNotFound),
-     pic_background_(background) {
+     background_style_(g_gr->styles().tabpanel_style(style)) {
 }
 
 /**
  * Resize the visible tab based on our actual size.
  */
 void TabPanel::layout() {
+	if (get_w() == 0) {
+		// The size hasn't been set yet
+		return;
+	}
 	if (active_ < tabs_.size()) {
 		Panel* const panel = tabs_[active_]->panel;
 		uint32_t h = get_h();
@@ -121,8 +115,8 @@ void TabPanel::layout() {
 		// avoid excessive craziness in case there is a wraparound
 		h = std::min(h, h - (kTabPanelButtonHeight + kTabPanelSeparatorHeight));
 		// If we have a border, we will also want some margin to the bottom
-		if (border_type_ == TabPanel::Type::kBorder) {
-			h = h - kTabPanelSeparatorHeight;
+		if (style_ == UI::TabPanelStyle::kFsMenu) {
+			h -= kTabPanelSeparatorHeight;
 		}
 		panel->set_size(get_w(), h);
 	}
@@ -144,9 +138,7 @@ void TabPanel::update_desired_size() {
 		panel->get_desired_size(&panelw, &panelh);
 		// TODO(unknown):  the panel might be bigger -> add a scrollbar in that case
 
-		if (panelw > w) {
-			w = panelw;
-		}
+		w = std::max(w, panelw);
 		h += panelh;
 	}
 
@@ -160,29 +152,26 @@ void TabPanel::update_desired_size() {
 
 /**
  * Add a new textual tab
-*/
+ */
 uint32_t TabPanel::add(const std::string& name,
                        const std::string& title,
                        Panel* const panel,
                        const std::string& tooltip_text) {
-	const Image* pic = UI::g_fh1->render(as_uifont(title));
-	return add_tab(std::max(kTabPanelButtonHeight, pic->width() + 2 * kTabPanelTextMargin), name,
-	               title, pic, tooltip_text, panel);
+	return add_tab(name, title, nullptr, tooltip_text, panel);
 }
 
 /**
  * Add a new pictorial tab
-*/
+ */
 uint32_t TabPanel::add(const std::string& name,
                        const Image* pic,
                        Panel* const panel,
                        const std::string& tooltip_text) {
-	return add_tab(kTabPanelButtonHeight, name, "", pic, tooltip_text, panel);
+	return add_tab(name, "", pic, tooltip_text, panel);
 }
 
 /** Common adding function for textual and pictorial tabs. */
-uint32_t TabPanel::add_tab(int32_t width,
-                           const std::string& name,
+uint32_t TabPanel::add_tab(const std::string& name,
                            const std::string& title,
                            const Image* pic,
                            const std::string& tooltip_text,
@@ -192,10 +181,10 @@ uint32_t TabPanel::add_tab(int32_t width,
 
 	size_t id = tabs_.size();
 	int32_t x = id > 0 ? tabs_[id - 1]->get_x() + tabs_[id - 1]->get_w() : 0;
-	tabs_.push_back(new Tab(this, id, x, width, name, title, pic, tooltip_text, panel));
+	tabs_.push_back(new Tab(this, id, x, name, title, pic, tooltip_text, panel));
 
 	// Add a margin if there is a border
-	if (border_type_ == TabPanel::Type::kBorder) {
+	if (style_ == UI::TabPanelStyle::kFsMenu) {
 		panel->set_border(kTabPanelSeparatorHeight + 1, kTabPanelSeparatorHeight + 1,
 		                  kTabPanelSeparatorHeight, kTabPanelSeparatorHeight);
 		panel->set_pos(Vector2i(0, kTabPanelButtonHeight));
@@ -211,7 +200,7 @@ uint32_t TabPanel::add_tab(int32_t width,
 
 /**
  * Make a different tab the currently active tab.
-*/
+ */
 void TabPanel::activate(uint32_t idx) {
 	if (active_ < tabs_.size())
 		tabs_[active_]->panel->set_visible(false);
@@ -238,6 +227,9 @@ const TabPanel::TabList& TabPanel::tabs() {
 }
 
 bool TabPanel::remove_last_tab(const std::string& tabname) {
+	if (tabs_.empty()) {
+		return false;
+	}
 	if (tabs_.back()->get_name() == tabname) {
 		tabs_.pop_back();
 		if (active_ > tabs_.size() - 1) {
@@ -251,42 +243,42 @@ bool TabPanel::remove_last_tab(const std::string& tabname) {
 
 /**
  * Draw the buttons and the tab
-*/
+ */
 void TabPanel::draw(RenderTarget& dst) {
-	// draw the background
-	static_assert(2 < kTabPanelButtonHeight, "assert(2 < kTabPanelButtonSize) failed.");
-	static_assert(4 < kTabPanelButtonHeight, "assert(4 < kTabPanelButtonSize) failed.");
-
-	if (pic_background_) {
-		if (!tabs_.empty()) {
-			dst.tile(Recti(Vector2i(0, 0), tabs_.back()->get_x() + tabs_.back()->get_w(),
-			               kTabPanelButtonHeight - 2),
-			         pic_background_, Vector2i(get_x(), get_y()));
-		}
-		assert(kTabPanelButtonHeight - 2 <= get_h());
-		dst.tile(Recti(Vector2i(0, kTabPanelButtonHeight - 2), get_w(),
-		               get_h() - kTabPanelButtonHeight + 2),
-		         pic_background_, Vector2i(get_x(), get_y() + kTabPanelButtonHeight - 2));
+	if (get_w() == 0) {
+		// The size hasn't been set yet
+		return;
 	}
 
+	// Draw the background
+	static_assert(2 < kTabPanelButtonHeight, "assert(2 < kTabPanelButtonSize) failed.");
+	static_assert(4 < kTabPanelButtonHeight, "assert(4 < kTabPanelButtonSize) failed.");
+	assert(kTabPanelButtonHeight - 2 <= get_h());
+
+	draw_background(
+	   dst, Recti(0, 0, tabs_.back()->get_x() + tabs_.back()->get_w(), kTabPanelButtonHeight - 2),
+	   *background_style_);
+	draw_background(
+	   dst, Recti(0, kTabPanelButtonHeight - 2, get_w(), get_h() - kTabPanelButtonHeight + 2),
+	   *background_style_);
+
+	// Draw the buttons
 	RGBColor black(0, 0, 0);
 
 	// draw the buttons
-	float x = 0;
+	int x = 0;
 	int tab_width = 0;
 	for (size_t idx = 0; idx < tabs_.size(); ++idx) {
-		x = UI::g_fh1->fontset()->is_rtl() ? get_w() - tabs_[idx]->get_x() - tabs_[idx]->get_w() :
+		x = UI::g_fh->fontset()->is_rtl() ? get_w() - tabs_[idx]->get_x() - tabs_[idx]->get_w() :
 		                                     tabs_[idx]->get_x();
 		tab_width = tabs_[idx]->get_w();
 
 		if (highlight_ == idx) {
-			dst.brighten_rect(Rectf(x, 0, tab_width, kTabPanelButtonHeight), MOUSE_OVER_BRIGHT_FACTOR);
+			dst.brighten_rect(Recti(x, 0, tab_width, kTabPanelButtonHeight), MOUSE_OVER_BRIGHT_FACTOR);
 		}
 
-		assert(tabs_[idx]->pic);
-
-		// If the title is empty, we will assume a pictorial tab
-		if (tabs_[idx]->title.empty()) {
+		// If pic is there, we will assume a pictorial tab
+		if (tabs_[idx]->pic != nullptr) {
 			// Scale the image down if needed, but keep the ratio.
 			constexpr int kMaxImageSize = kTabPanelButtonHeight - 2 * kTabPanelImageMargin;
 			double image_scale =
@@ -300,55 +292,55 @@ void TabPanel::draw(RenderTarget& dst) {
 			         (kTabPanelButtonHeight - picture_height) / 2, picture_width, picture_height),
 			   tabs_[idx]->pic, Recti(0, 0, tabs_[idx]->pic->width(), tabs_[idx]->pic->height()), 1,
 			   BlendMode::UseAlpha);
-		} else {
-			dst.blit(Vector2f(x + kTabPanelTextMargin,
-			                  (kTabPanelButtonHeight - tabs_[idx]->pic->height()) / 2),
-			         tabs_[idx]->pic, BlendMode::UseAlpha, UI::Align::kLeft);
+		} else if (tabs_[idx]->rendered_title != nullptr) {
+			tabs_[idx]->rendered_title->draw(
+			   dst, Vector2i(x + kTabPanelTextMargin,
+			                 (kTabPanelButtonHeight - tabs_[idx]->rendered_title->height()) / 2));
 		}
 
 		// Draw top part of border
-		dst.brighten_rect(Rectf(x, 0, tab_width, 2), BUTTON_EDGE_BRIGHT_FACTOR);
-		dst.brighten_rect(Rectf(x, 2, 2, kTabPanelButtonHeight - 4), BUTTON_EDGE_BRIGHT_FACTOR);
-		dst.fill_rect(Rectf(x + tab_width - 2, 2, 1, kTabPanelButtonHeight - 4), black);
-		dst.fill_rect(Rectf(x + tab_width - 1, 1, 1, kTabPanelButtonHeight - 3), black);
+		dst.brighten_rect(Recti(x, 0, tab_width, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(x, 2, 2, kTabPanelButtonHeight - 4), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.fill_rect(Recti(x + tab_width - 2, 2, 1, kTabPanelButtonHeight - 4), black);
+		dst.fill_rect(Recti(x + tab_width - 1, 1, 1, kTabPanelButtonHeight - 3), black);
 
 		// Draw bottom part
 		if (active_ != idx)
 			dst.brighten_rect(
-			   Rectf(x, kTabPanelButtonHeight - 2, tab_width, 2), 2 * BUTTON_EDGE_BRIGHT_FACTOR);
+			   Recti(x, kTabPanelButtonHeight - 2, tab_width, 2), 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 		else {
-			dst.brighten_rect(Rectf(x, kTabPanelButtonHeight - 2, 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			dst.brighten_rect(Recti(x, kTabPanelButtonHeight - 2, 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
-			dst.brighten_rect(Rectf(x + tab_width - 2, kTabPanelButtonHeight - 2, 2, 2),
+			dst.brighten_rect(Recti(x + tab_width - 2, kTabPanelButtonHeight - 2, 2, 2),
 			                  2 * BUTTON_EDGE_BRIGHT_FACTOR);
-			dst.fill_rect(Rectf(x + tab_width - 2, kTabPanelButtonHeight - 1, 1, 1), black);
-			dst.fill_rect(Rectf(x + tab_width - 2, kTabPanelButtonHeight - 2, 2, 1), black);
+			dst.fill_rect(Recti(x + tab_width - 2, kTabPanelButtonHeight - 1, 1, 1), black);
+			dst.fill_rect(Recti(x + tab_width - 2, kTabPanelButtonHeight - 2, 2, 1), black);
 		}
 	}
 
 	// draw the remaining separator
 	assert(x <= get_w());
 	dst.brighten_rect(
-		Rectf(UI::g_fh1->fontset()->is_rtl() ? 0 : x + tab_width, kTabPanelButtonHeight - 2,
-	        UI::g_fh1->fontset()->is_rtl() ? x : get_w() - x, 2),
+		Recti(UI::g_fh->fontset()->is_rtl() ? 0 : x + tab_width, kTabPanelButtonHeight - 2,
+	        UI::g_fh->fontset()->is_rtl() ? x : get_w() - x, 2),
 	   2 * BUTTON_EDGE_BRIGHT_FACTOR);
 
 	// Draw border around the main panel
-	if (border_type_ == TabPanel::Type::kBorder) {
+	if (style_ == UI::TabPanelStyle::kFsMenu) {
 		//  left edge
-		dst.brighten_rect(Rectf(0, kTabPanelButtonHeight, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, kTabPanelButtonHeight, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  bottom edge
-		dst.fill_rect(Rectf(2, get_h() - 2, get_w() - 2, 1), black);
-		dst.fill_rect(Rectf(1, get_h() - 1, get_w() - 1, 1), black);
+		dst.fill_rect(Recti(2, get_h() - 2, get_w() - 2, 1), black);
+		dst.fill_rect(Recti(1, get_h() - 1, get_w() - 1, 1), black);
 		//  right edge
-		dst.fill_rect(Rectf(get_w() - 2, kTabPanelButtonHeight - 1, 1, get_h() - 2), black);
-		dst.fill_rect(Rectf(get_w() - 1, kTabPanelButtonHeight - 2, 1, get_h() - 1), black);
+		dst.fill_rect(Recti(get_w() - 2, kTabPanelButtonHeight - 1, 1, get_h() - 2), black);
+		dst.fill_rect(Recti(get_w() - 1, kTabPanelButtonHeight - 2, 1, get_h() - 1), black);
 	}
 }
 
 /**
  * Cancel all highlights and the tooltip when the mouse leaves the panel
-*/
+ */
 void TabPanel::handle_mousein(bool inside) {
 	if (!inside && highlight_ != kNotFound) {
 		highlight_ = kNotFound;
@@ -358,7 +350,7 @@ void TabPanel::handle_mousein(bool inside) {
 
 /**
  * Update highlighting
-*/
+ */
 bool TabPanel::handle_mousemove(uint8_t, int32_t const x, int32_t const y, int32_t, int32_t) {
 	size_t hl = find_tab(x, y);
 
@@ -371,7 +363,7 @@ bool TabPanel::handle_mousemove(uint8_t, int32_t const x, int32_t const y, int32
 
 /**
  * Change the active tab if a tab button has been clicked
-*/
+ */
 bool TabPanel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		size_t id = find_tab(x, y);
@@ -393,7 +385,7 @@ size_t TabPanel::find_tab(int32_t x, int32_t y) const {
 	}
 
 	int32_t width = 0;
-	if (UI::g_fh1->fontset()->is_rtl()) {
+	if (UI::g_fh->fontset()->is_rtl()) {
 		x = get_w() - x;
 	}
 
@@ -405,4 +397,4 @@ size_t TabPanel::find_tab(int32_t x, int32_t y) const {
 	}
 	return kNotFound;
 }
-}
+}  // namespace UI

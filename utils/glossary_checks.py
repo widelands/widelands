@@ -27,18 +27,17 @@ sheep     sheep          Nice, fluffy!       'sheep'
 ax        axe            axes|               'axe', 'axes'
 click     click          clicking|clicked    'click', 'clicking', 'clicked'
 click     click          clicking | clicked  'click', 'clicking', 'clicked'
-
 """
 
 from collections import defaultdict
 from subprocess import call, CalledProcessError, Popen, PIPE
-import csv
 import os.path
 import re
 import subprocess
 import sys
 import time
 import traceback
+from file_utils import read_csv_file, make_path, delete_path
 
 #############################################################################
 # Data Containers                                                           #
@@ -85,50 +84,10 @@ class HunspellLocale:
         # Whether a dictionary has been found for the locale
         self.is_available = False
 
+
 hunspell_locales = defaultdict(list)
 """ Hunspell needs specific locales"""
 
-#############################################################################
-# File System Functions                                                     #
-#############################################################################
-
-
-def read_csv_file(filepath):
-    """Parses a CSV file into a 2-dimensional array."""
-    result = []
-    with open(filepath) as csvfile:
-        csvreader = csv.reader(csvfile, delimiter=',', quotechar='"')
-        for row in csvreader:
-            result.append(row)
-    return result
-
-
-def make_path(base_path, subdir):
-    """Creates the correct form of the path and makes sure that it exists."""
-    result = os.path.abspath(os.path.join(base_path, subdir))
-    if not os.path.exists(result):
-        os.makedirs(result)
-    return result
-
-
-def delete_path(path):
-    """Deletes the directory specified by 'path' and all its subdirectories and
-    file contents."""
-    if os.path.exists(path) and not os.path.isfile(path):
-        files = sorted(os.listdir(path), key=str.lower)
-        for deletefile in files:
-            deleteme = os.path.abspath(os.path.join(path, deletefile))
-            if os.path.isfile(deleteme):
-                try:
-                    os.remove(deleteme)
-                except Exception:
-                    print('Failed to delete file ' + deleteme)
-            else:
-                delete_path(deleteme)
-        try:
-            os.rmdir(path)
-        except Exception:
-            print('Failed to delete path ' + deleteme)
 
 #############################################################################
 # Glossary Loading                                                          #
@@ -169,7 +128,6 @@ def load_hunspell_locales(locale):
     Maps a list of generic locales to specific locales and checks which
     dictionaries are available. If locale != "all", load only the
     dictionary for the given locale.
-
     """
     hunspell_locales['bg'].append(HunspellLocale('bg_BG'))
     hunspell_locales['br'].append(HunspellLocale('br_FR'))
@@ -247,7 +205,6 @@ def make_english_plural(word):
     This will create a few nonsense entries for irregular plurals, but
     it's good enough for our purpose. Glossary contains pluralized
     terms, so we don't add any plural forms for strings ending in 's'.
-
     """
     result = ''
     if not word.endswith('s'):
@@ -264,7 +221,6 @@ def make_english_verb_forms(word):
     """Create inflected forms of an English verb: -ed and -ing forms.
 
     Will create nonsense for irregular verbs.
-
     """
     result = []
     if word.endswith('e'):
@@ -363,8 +319,7 @@ def load_glossary(glossary_file, locale):
 def contains_term(string, term):
     """Checks whether 'string' contains 'term' as a whole word.
 
-    This check is case-ionsensitive.
-
+    This check is case-insensitive.
     """
     result = False
     # Regex is slow, so we do this preliminary check
@@ -451,6 +406,9 @@ def check_file(csv_file, glossaries, locale, po_file):
                 # Filter out superstrings, e.g. we don't want to check
                 # "arena" against "battle arena"
                 if source_contains_term(row[source_index], entry, glossaries[locale][0]):
+                    # Skip empty translations
+                    if row[target_index] == '':
+                        continue
                     # Now verify the translation against all translation
                     # variations from the glossary
                     term_found = translation_has_term(entry, row[target_index])
@@ -486,7 +444,6 @@ def check_translations_with_glossary(input_path, output_path, glossary_file, onl
     Loads the Transifex and Hunspell glossaries, converts all po files
     for languages that have glossary entries to temporary csv files,
     runs the check and then reports any hits to csv files.
-
     """
     print('Locale: ' + only_locale)
     temp_path = make_path(output_path, 'temp_glossary')
@@ -550,8 +507,8 @@ def check_translations_with_glossary(input_path, output_path, glossary_file, onl
                     hit.term, hit.translation, hit.source, hit.target, hit.po_file, hit.location)
                 locale_result = locale_result + row
                 counter = counter + 1
-        dest_filepath = output_path + '/glossary_check_' + locale + '.csv'
-        with open(dest_filepath, 'wt') as dest_file:
+        dest_filepath = make_path(output_path, locale)
+        with open(dest_filepath + '/glossary_check.csv', 'wt') as dest_file:
             dest_file.write(locale_result)
         # Uncomment this line to print a statistic of the number of hits for each locale
         # print("%s\t%d"%(locale, counter))
@@ -585,7 +542,8 @@ def main():
 
         input_path = os.path.abspath(os.path.join(
             os.path.dirname(__file__), '../po'))
-        output_path = make_path(os.path.dirname(__file__), '../po_validation')
+        output_path = make_path(os.path.dirname(
+            __file__), '../po_validation/translators')
         result = check_translations_with_glossary(
             input_path, output_path, glossary_file, locale)
         print('Current time: %s' % time.ctime())
@@ -596,6 +554,7 @@ def main():
         traceback.print_exc()
         delete_path(make_path(output_path, 'temp_glossary'))
         return 1
+
 
 if __name__ == '__main__':
     sys.exit(main())

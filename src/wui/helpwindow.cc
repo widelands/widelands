@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/building.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
@@ -44,7 +45,7 @@ BuildingHelpWindow::BuildingHelpWindow(Panel* const parent,
                       width,
                       height,
                       (boost::format(_("Help: %s")) % building_description.descname()).str()),
-     textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 10)) {
+     textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 10, UI::PanelStyle::kWui)) {
 	assert(tribe.has_building(tribe.building_index(building_description.name())) ||
 	       building_description.type() == Widelands::MapObjectType::MILITARYSITE);
 	try {
@@ -55,7 +56,7 @@ BuildingHelpWindow::BuildingHelpWindow(Panel* const parent,
 		cr->resume();
 		std::unique_ptr<LuaTable> return_table = cr->pop_table();
 		return_table->do_not_warn_about_unaccessed_keys();  // We won't display the title here
-		textarea_->set_text(return_table->get_string("text"));
+		textarea_->set_text(as_richtext(return_table->get_string("text")));
 	} catch (LuaError& err) {
 		textarea_->set_text(err.what());
 	}

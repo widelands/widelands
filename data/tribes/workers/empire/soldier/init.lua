@@ -57,8 +57,18 @@ animations = {
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {10, 36}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {10, 36}, 10)
 
+all_levels_emp = {
+   min_health = 0,
+   min_attack = 0,
+   min_defense = 0,
+   min_evade = 0,
+   max_health = 4,
+   max_attack = 4,
+   max_defense = 0,
+   max_evade = 2,
+}
 
 tribes:new_soldier_type {
    msgctxt = "empire_worker",
@@ -84,7 +94,7 @@ tribes:new_soldier_type {
       max_level = 4,
       base = 1300,
       maximum = 1500,
-      increase_per_level = 800,
+      increase_per_level = 920,
       pictures = path.list_files(dirname .. "attack_level?.png"),
    },
    defense = {
@@ -100,35 +110,55 @@ tribes:new_soldier_type {
       pictures = path.list_files(dirname .. "evade_level?.png"),
    },
 
+   aihints = {
+      preciousness = {
+         empire = 5
+      },
+   },
+
    -- Random animations for battle
    attack_success_w = {
-      "atk_ok_w",
+      atk_ok_w = all_levels_emp,
    },
    attack_success_e = {
-      "atk_ok_e",
+      atk_ok_e = all_levels_emp,
    },
    attack_failure_w = {
-      "atk_fail_w",
+      atk_fail_w = all_levels_emp,
    },
    attack_failure_e = {
-      "atk_fail_e",
+      atk_fail_e = all_levels_emp,
    },
    evade_success_w = {
-      "eva_ok_w",
+      eva_ok_w = all_levels_emp,
    },
    evade_success_e = {
-      "eva_ok_e",
+      eva_ok_e = all_levels_emp,
    },
    evade_failure_w = {
-      "eva_fail_w",
+      eva_fail_w = all_levels_emp,
    },
    evade_failure_e = {
-      "eva_fail_e",
+      eva_fail_e = all_levels_emp,
    },
    die_w = {
-      "die_w",
+      die_w = all_levels_emp,
    },
    die_e = {
-      "die_e",
+      die_e = all_levels_emp,
+   },
+   idle = {
+      idle = all_levels_emp,
+   },
+   walk = {
+      {
+         range = all_levels_emp,
+         sw = "walk_sw",
+         se = "walk_se",
+         nw = "walk_nw",
+         ne = "walk_ne",
+         w = "walk_w",
+         e = "walk_e",
+      },
    },
 }

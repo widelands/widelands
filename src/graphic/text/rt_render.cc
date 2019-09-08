@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 #include <vector>
 
 #include <SDL.h>
-#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -36,20 +36,34 @@
 #include "base/vector.h"
 #include "base/wexception.h"
 #include "graphic/align.h"
+#include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
+#include "graphic/playercolor.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_io.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text/rendered_text.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/sdl_ttf_font.h"
 #include "graphic/text/textstream.h"
-#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/filesystem_exceptions.h"
+#include "io/filesystem/layered_filesystem.h"
 
-using namespace std;
+namespace {
+/**
+ * This function replaces some HTML entities in strings, e.g. &nbsp;.
+ * It is used by the renderer after the tags have been parsed.
+ */
+void replace_entities(std::string* text) {
+	boost::replace_all(*text, "&gt;", ">");
+	boost::replace_all(*text, "&lt;", "<");
+	boost::replace_all(*text, "&nbsp;", " ");
+	boost::replace_all(*text, "&amp;", "&");  // Must be performed last
+}
+}  // namespace
 
 namespace RT {
 
@@ -63,9 +77,27 @@ struct Borders {
 	uint8_t left, top, right, bottom;
 };
 
+/// How the width of a div should be calculated
+enum class WidthUnit {
+	kAbsolute,  // Width in pixels
+	kPercent,   // Width in percent
+	kShrink,    // Shrink width to content
+	kFill       // Expand width to fill all remaining space
+};
+
+struct DesiredWidth {
+	DesiredWidth(int init_width, WidthUnit init_unit) : width(init_width), unit(init_unit) {
+	}
+	DesiredWidth() : DesiredWidth(0, WidthUnit::kShrink) {
+	}
+
+	int width;
+	WidthUnit unit;
+};
+
 struct NodeStyle {
 	UI::FontSet const* fontset;
-	string font_face;
+	std::string font_face;
 	uint16_t font_size;
 	RGBColor font_color;
 	int font_style;
@@ -73,7 +105,8 @@ struct NodeStyle {
 	uint8_t spacing;
 	UI::Align halign;
 	UI::Align valign;
-	string reference;
+	const bool is_rtl;
+	std::string reference;
 };
 
 /*
@@ -88,15 +121,15 @@ public:
 
 private:
 	struct FontDescr {
-		string face;
+		std::string face;
 		uint16_t size;
 
 		bool operator<(const FontDescr& o) const {
 			return size < o.size || (size == o.size && face < o.face);
 		}
 	};
-	using FontMap = map<FontDescr, IFont*>;
-	using FontMapPair = pair<const FontDescr, std::unique_ptr<IFont>>;
+	using FontMap = std::map<FontDescr, IFont*>;
+	using FontMapPair = std::pair<const FontDescr, std::unique_ptr<IFont>>;
 
 	FontMap fontmap_;
 
@@ -174,70 +207,55 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 
 struct Reference {
 	Recti dim;
-	string ref;
-};
-
-class RefMap : public IRefMap {
-public:
-	RefMap(const vector<Reference>& refs) : refs_(refs) {
-	}
-	string query(int16_t x, int16_t y) override {
-		// Should this linear algorithm proof to be too slow (doubtful), the
-		// RefMap could also be efficiently implemented using an R-Tree
-		for (const Reference& c : refs_)
-			if (c.dim.contains(Vector2i(x, y)))
-				return c.ref;
-		return "";
-	}
-
-private:
-	vector<Reference> refs_;
+	std::string ref;
 };
 
 class RenderNode {
 public:
-	enum Floating {
-		NO_FLOAT = 0,
-		FLOAT_RIGHT,
-		FLOAT_LEFT,
+	enum class Floating {
+		kNone,
+		kRight,
+		kLeft,
 	};
-	RenderNode(NodeStyle& ns)
-	   : floating_(NO_FLOAT), halign_(ns.halign), valign_(ns.valign), x_(0), y_(0) {
+	explicit RenderNode(NodeStyle& ns)
+	   : floating_(Floating::kNone), halign_(ns.halign), valign_(ns.valign), x_(0), y_(0) {
 	}
 	virtual ~RenderNode() {
 	}
 
-	virtual uint16_t width() = 0;
-	virtual uint16_t height() = 0;
-	virtual uint16_t hotspot_y() = 0;
-	virtual Texture* render(TextureCache* texture_cache) = 0;
+	virtual uint16_t width() const = 0;
+	virtual uint16_t height() const = 0;
+	virtual uint16_t hotspot_y() const = 0;
+	virtual std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) = 0;
 
-	virtual bool is_non_mandatory_space() {
+	// TODO(GunChleoc): Remove this function once conversion is finished and well tested.
+	virtual std::string debug_info() const = 0;
+
+	// If a node is a non-mandatory space, it can be removed as a leading/trailing space
+	// by the positioning algorithm.
+	virtual bool is_non_mandatory_space() const {
 		return false;
 	}
-	virtual bool is_expanding() {
+	virtual bool is_expanding() const {
 		return false;
 	}
 	virtual void set_w(uint16_t) {
 	}  // Only, when is_expanding
 
-	virtual const vector<Reference> get_references() {
-		return vector<Reference>();
+	virtual const std::vector<Reference> get_references() {
+		return std::vector<Reference>();
 	}
 
-	Floating get_floating() {
+	Floating get_floating() const {
 		return floating_;
 	}
 	void set_floating(Floating f) {
 		floating_ = f;
 	}
-	UI::Align halign() {
+	UI::Align halign() const {
 		return halign_;
 	}
-	void set_halign(UI::Align ghalign) {
-		halign_ = ghalign;
-	}
-	UI::Align valign() {
+	UI::Align valign() const {
 		return valign_;
 	}
 	void set_valign(UI::Align gvalign) {
@@ -249,11 +267,31 @@ public:
 	void set_y(int32_t ny) {
 		y_ = ny;
 	}
-	int32_t x() {
+	int32_t x() const {
 		return x_;
 	}
-	int32_t y() {
+	int32_t y() const {
 		return y_;
+	}
+
+protected:
+	/// Throws a TextureTooBig exception if the given dimensions would be bigger than the graphics
+	/// can handle
+	void check_size(int check_w, int check_h) {
+		const int maximum_size = g_gr->max_texture_size_for_font_rendering();
+		if (check_w > maximum_size || check_h > maximum_size) {
+			const std::string error_message =
+			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % check_w % check_h %
+			    maximum_size)
+			      .str();
+			log("%s\n", error_message.c_str());
+			throw TextureTooBig(error_message);
+		}
+	}
+
+	/// Check the size for the node's own dimensions
+	void check_size() {
+		check_size(width(), height());
 	}
 
 private:
@@ -263,9 +301,13 @@ private:
 	int32_t x_, y_;
 };
 
+/*
+ * Class to calculate positions of nodes within a div tag.
+ */
 class Layout {
 public:
-	Layout(vector<RenderNode*>& all) : h_(0), idx_(0), all_nodes_(all) {
+	explicit Layout(std::vector<std::shared_ptr<RenderNode>>& all)
+	   : h_(0), idx_(0), all_nodes_(all) {
 	}
 	virtual ~Layout() {
 	}
@@ -273,50 +315,149 @@ public:
 	uint16_t height() {
 		return h_;
 	}
-	uint16_t fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool shrink_to_fit);
+	uint16_t
+	fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv, uint16_t w, Borders p, bool trim_spaces);
 
 private:
-	// Represents a change in the rendering constraints. For example when an
-	// Image is inserted, the width will become wider after it. This is a
-	// constraint change.
-	struct ConstraintChange {
-		int at_y;
-		int32_t delta_w;
-		int32_t delta_offset_x;
-
-		bool operator<(const ConstraintChange& o) const {
-			return at_y > o.at_y || (at_y == o.at_y && delta_w > o.delta_w);
-		}
-	};
-
-	uint16_t fit_line(uint16_t w, const Borders&, vector<RenderNode*>* rv, bool shrink_to_fit);
+	bool calculate_line_width(uint16_t* x, uint16_t* w, uint16_t lineheight);
+	uint16_t fit_line(uint16_t w,
+	                  const Borders&,
+	                  std::vector<std::shared_ptr<RenderNode>>* rv,
+	                  bool trim_spaces);
 
 	uint16_t h_;
 	size_t idx_;
-	vector<RenderNode*>& all_nodes_;
-	priority_queue<ConstraintChange> constraint_changes_;
+	std::vector<std::shared_ptr<RenderNode>>& all_nodes_;
+	std::queue<std::shared_ptr<RenderNode>> floats_;
 };
 
-uint16_t
-Layout::fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* rv, bool shrink_to_fit) {
+/**
+ * Calculate the width of a line at h_ taking into account floating elements.
+ * @param x The first useable x position in the line. Has to be set by the caller,
+ *          might be modified inside this function.
+ * @param w The useable width of the line. Has to be set by the caller,
+ *          might be modified inside this function.
+ * @param lineheight The height of the line the maximum width should be calculated of.
+ * @return Whether less than the full width can be used (i.e., there is a float).
+ */
+bool Layout::calculate_line_width(uint16_t* x, uint16_t* w, uint16_t lineheight) {
+	// Drop elements we already passed
+	while (!floats_.empty() && h_ >= floats_.front()->y() + floats_.front()->height()) {
+		floats_.pop();
+	}
+	if (floats_.empty()) {
+		return false;
+	}
+	// Check whether there is an element at the current height
+	std::shared_ptr<RenderNode> n = floats_.front();
+	if (h_ + lineheight < n->y()) {
+		// Nope, nothing in the current line
+		// Since the elements are ordered, no further element can match
+		return false;
+	}
+
+	if (n->get_floating() == RenderNode::Floating::kLeft) {
+		*x += n->width();
+	} else {
+		assert(n->get_floating() == RenderNode::Floating::kRight);
+		*w -= n->width();
+	}
+	return true;
+}
+
+/*
+ * Calculate x positions of nodes in one line and return them in rv.
+ * As many nodes of all_nodes_ are added to the line as there is space.
+ * Remove leading/trailing spaces and assign x positions to all elements.
+ * Use remaining space to distribute expanding elements a bit further.
+ * Returns hotspot of the line.
+ * Method is called from within Layout::fit_nodes().
+ */
+uint16_t Layout::fit_line(const uint16_t w_max,  // Maximum width of line
+                          const Borders& p,      // Left/right border. Is left empty
+                          std::vector<std::shared_ptr<RenderNode>>* rv,  // Output: Nodes to render
+                          bool trim_spaces) {  // Whether leading/trailing space should be removed
 	assert(rv->empty());
 
 	// Remove leading spaces
-	while (idx_ < all_nodes_.size() && all_nodes_[idx_]->is_non_mandatory_space() && shrink_to_fit) {
-		delete all_nodes_[idx_++];
+	while (idx_ < all_nodes_.size() && all_nodes_[idx_]->is_non_mandatory_space() && trim_spaces) {
+		all_nodes_[idx_++].reset();
 	}
 
-	uint16_t x = p.left;
+	uint16_t w;
+	uint16_t x;
 	std::size_t first_idx = idx_;
+	uint16_t lineheight = 0;
+
+	// Pass 1: Run through all nodes who *might* end up in this line and check for floats
+	w = w_max - p.right;
+	x = p.left;
+	bool width_was_reduced = calculate_line_width(&x, &w, lineheight);
+	lineheight = 0;
+	uint16_t w_used = 0;
+	for (; idx_ < all_nodes_.size(); ++idx_) {
+		if (w_used + all_nodes_[idx_]->width() > w) {
+			// Line is full
+			break;
+		}
+		if (all_nodes_[idx_]->get_floating() == RenderNode::Floating::kNone) {
+			// Normal, non-floating node
+			w_used += all_nodes_[idx_]->width();
+			assert(all_nodes_[idx_]->height() >= all_nodes_[idx_]->hotspot_y());
+			lineheight = std::max(lineheight, all_nodes_[idx_]->height());
+			continue;
+		}
+		// Found a float. Add it to list
+		// New float start directly below lowest flow in list
+		if (!floats_.empty()) {
+			all_nodes_[idx_]->set_y(floats_.back()->y() + floats_.back()->height());
+		} else {
+			all_nodes_[idx_]->set_y(h_);
+		}
+		// Set x position of the float based on its desired orientation
+		if (all_nodes_[idx_]->get_floating() == RenderNode::Floating::kLeft) {
+			all_nodes_[idx_]->set_x(p.left);
+		} else {
+			assert(all_nodes_[idx_]->get_floating() == RenderNode::Floating::kRight);
+			all_nodes_[idx_]->set_x(w_max - all_nodes_[idx_]->width() - p.right);
+		}
+		floats_.push(all_nodes_[idx_]);
+		// When the line width hasn't been reduced by a float yet, do so now.
+		// If it already has been reduced than the new float will be placed somewhere below
+		// the current line so no need to adapt the line width
+		if (!width_was_reduced) {
+			// Don't need to reset x and w since they haven't been modified on last call
+			width_was_reduced = calculate_line_width(&x, &w, lineheight);
+			assert(width_was_reduced);
+		}
+	}
+
+	idx_ = first_idx;
+	// w and x now contain the width of the line and the x position of the first element in it
 
 	// Calc fitting nodes
 	while (idx_ < all_nodes_.size()) {
-		RenderNode* n = all_nodes_[idx_];
-		uint16_t nw = n->width();
-		if (x + nw + p.right > w || n->get_floating() != RenderNode::NO_FLOAT) {
+		std::shared_ptr<RenderNode> n = all_nodes_[idx_];
+		if (n->get_floating() != RenderNode::Floating::kNone) {
+			// Don't handle floaters here
+			rv->push_back(n);
 			if (idx_ == first_idx) {
+				first_idx++;
+			}
+			++idx_;
+			continue;
+		}
+		uint16_t nw = n->width();
+		// Check whether the element is too big for the current line
+		// (position + width-of-element + border) > width-of-line
+		if (x + nw + p.right > w) {
+			// Its too big
+			if (idx_ == first_idx) {
+				// If it is the first element in the line, add it anyway and pretend that it matches
+				// exactly
 				nw = w - p.right - x;
 			} else {
+				// Too wide and not the first element: We are done with the line
 				break;
 			}
 		}
@@ -326,9 +467,8 @@ Layout::fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* rv, bool shr
 		++idx_;
 	}
 	// Remove trailing spaces
-	while (!rv->empty() && rv->back()->is_non_mandatory_space() && shrink_to_fit) {
+	while (!rv->empty() && rv->back()->is_non_mandatory_space() && trim_spaces) {
 		x -= rv->back()->width();
-		delete rv->back();
 		rv->pop_back();
 	}
 
@@ -339,34 +479,40 @@ Layout::fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* rv, bool shr
 	}
 
 	// Find expanding nodes
-	vector<size_t> expanding_nodes;
-	for (size_t idx = 0; idx < rv->size(); ++idx)
-		if (rv->at(idx)->is_expanding())
+	std::vector<size_t> expanding_nodes;
+	for (size_t idx = 0; idx < rv->size(); ++idx) {
+		if (rv->at(idx)->is_expanding()) {
 			expanding_nodes.push_back(idx);
+		}
+	}
 
 	if (!expanding_nodes.empty()) {  // If there are expanding nodes, we fill the space
 		const uint16_t individual_w = remaining_space / expanding_nodes.size();
 		for (const size_t idx : expanding_nodes) {
 			rv->at(idx)->set_w(individual_w);
-			for (size_t nidx = idx + 1; nidx < rv->size(); ++nidx)
+			for (size_t nidx = idx + 1; nidx < rv->size(); ++nidx) {
 				rv->at(nidx)->set_x(rv->at(nidx)->x() + individual_w);
+			}
 		}
 	} else {
 		// Take last elements style in this line and check horizontal alignment
-		if (!rv->empty() && (*rv->rbegin())->halign() != UI::Align::kLeft) {
-			if ((*rv->rbegin())->halign() == UI::Align::kCenter) {
+		if (!rv->empty() && rv->back()->halign() != UI::Align::kLeft) {
+			if (rv->back()->halign() == UI::Align::kCenter) {
 				remaining_space /= 2;  // Otherwise, we align right
 			}
-			for (RenderNode* node : *rv) {
+			for (std::shared_ptr<RenderNode> node : *rv) {
 				node->set_x(node->x() + remaining_space);
 			}
 		}
 	}
 
-	// Find the biggest hotspot of the truly remaining items.
+	// Find the biggest hotspot of the truly remaining non-floating items.
 	uint16_t cur_line_hotspot = 0;
-	for (RenderNode* node : *rv) {
-		cur_line_hotspot = max(cur_line_hotspot, node->hotspot_y());
+	for (std::shared_ptr<RenderNode> node : *rv) {
+		if (node->get_floating() != RenderNode::Floating::kNone) {
+			continue;
+		}
+		cur_line_hotspot = std::max(cur_line_hotspot, node->hotspot_y());
 	}
 	return cur_line_hotspot;
 }
@@ -374,23 +520,31 @@ Layout::fit_line(uint16_t w, const Borders& p, vector<RenderNode*>* rv, bool shr
 /*
  * Take ownership of all nodes, delete those that we do not render anyways (for
  * example unneeded spaces), append the rest to the vector we got.
+ * Also, calculate positions for all nodes based on the given width w
+ * and the widths of the nodes.
+ * Method is called from within DivTagHandler::enter().
  */
-uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool shrink_to_fit) {
-	assert(rv.empty());
+uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
+                           uint16_t w,
+                           Borders p,
+                           bool trim_spaces) {
+	assert(rv->empty());
 	h_ = p.top;
 
 	uint16_t max_line_width = 0;
 	while (idx_ < all_nodes_.size()) {
-		vector<RenderNode*> nodes_in_line;
+		std::vector<std::shared_ptr<RenderNode>> nodes_in_line;
 		size_t idx_before_iteration_ = idx_;
-		uint16_t biggest_hotspot = fit_line(w, p, &nodes_in_line, shrink_to_fit);
+		uint16_t biggest_hotspot = fit_line(w, p, &nodes_in_line, trim_spaces);
 
 		int line_height = 0;
 		int line_start = INFINITE_WIDTH;
-		// Compute real line height and width, taking into account alignement
-		for (RenderNode* n : nodes_in_line) {
-			line_height = max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
-			n->set_y(h_ + biggest_hotspot - n->hotspot_y());
+		// Compute real line height and width, taking into account alignment
+		for (std::shared_ptr<RenderNode> n : nodes_in_line) {
+			if (n->get_floating() == RenderNode::Floating::kNone) {
+				line_height = std::max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
+				n->set_y(h_ + biggest_hotspot - n->hotspot_y());
+			}
 			if (line_start >= INFINITE_WIDTH || n->x() < line_start) {
 				line_start = n->x() - p.left;
 			}
@@ -398,8 +552,8 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool 
 		}
 
 		// Go over again and adjust position for VALIGN
-		for (RenderNode* n : nodes_in_line) {
-			uint16_t space = line_height - n->height();
+		for (std::shared_ptr<RenderNode> n : nodes_in_line) {
+			int space = line_height - n->height();
 			if (!space || n->valign() == UI::Align::kBottom) {
 				continue;
 			}
@@ -409,43 +563,25 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool 
 			// Space can become negative, for example when we have mixed fontsets on the same line
 			// (e.g. "default" and "arabic"), due to differing font heights and hotspots.
 			// So, we fix the sign.
-			n->set_y(std::abs(n->y() - space));
+			if (n->get_floating() == RenderNode::Floating::kNone) {
+				n->set_y(std::abs(n->y() - space));
+			}
 		}
-		rv.insert(rv.end(), nodes_in_line.begin(), nodes_in_line.end());
+		rv->insert(rv->end(), nodes_in_line.begin(), nodes_in_line.end());
 
 		h_ += line_height;
-		while (!constraint_changes_.empty() && constraint_changes_.top().at_y <= h_) {
-			const ConstraintChange& top = constraint_changes_.top();
-			w += top.delta_w;
-			p.left += top.delta_offset_x;
-			constraint_changes_.pop();
-		}
 
-		if ((idx_ < all_nodes_.size()) && all_nodes_[idx_]->get_floating()) {
-			RenderNode* n = all_nodes_[idx_];
-			n->set_y(h_);
-			ConstraintChange cc = {h_ + n->height(), 0, 0};
-			if (n->get_floating() == RenderNode::FLOAT_LEFT) {
-				n->set_x(p.left);
-				p.left += n->width();
-				cc.delta_offset_x = -n->width();
-				max_line_width = max<int>(max_line_width, n->x() + n->width() + p.right);
-			} else {
-				n->set_x(w - n->width() - p.right);
-				w -= n->width();
-				cc.delta_w = n->width();
-				max_line_width = max(max_line_width, w);
-			}
-			constraint_changes_.push(cc);
-			rv.push_back(n);
-			++idx_;
-		}
 		if (idx_ == idx_before_iteration_) {
 			throw WidthTooSmall(
 			   "Could not fit a single render node in line. Width of an Element is too small!");
 		}
 	}
 
+	if (!floats_.empty()) {
+		// If there is a float left this means the floats go down further than the text.
+		// If this is the case, reset the height of the div
+		h_ = std::max<uint16_t>(h_, floats_.back()->y() + floats_.back()->height());
+	}
 	h_ += p.bottom;
 	return max_line_width;
 }
@@ -455,19 +591,23 @@ uint16_t Layout::fit_nodes(vector<RenderNode*>& rv, uint16_t w, Borders p, bool 
  */
 class TextNode : public RenderNode {
 public:
-	TextNode(FontCache& font, NodeStyle&, const string& txt);
-	virtual ~TextNode() {
+	TextNode(FontCache& font, NodeStyle&, const std::string& txt);
+	~TextNode() override {
 	}
 
-	uint16_t width() override {
+	std::string debug_info() const override {
+		return "'" + txt_ + "'";
+	}
+
+	uint16_t width() const override {
 		return w_;
 	}
-	uint16_t height() override {
+	uint16_t height() const override {
 		return h_ + nodestyle_.spacing;
 	}
-	uint16_t hotspot_y() override;
-	const vector<Reference> get_references() override {
-		vector<Reference> rv;
+	uint16_t hotspot_y() const override;
+	const std::vector<Reference> get_references() override {
+		std::vector<Reference> rv;
 		if (!nodestyle_.reference.empty()) {
 			Reference r = {Recti(0, 0, w_, h_), nodestyle_.reference};
 			rv.push_back(r);
@@ -475,35 +615,37 @@ public:
 		return rv;
 	}
 
-	Texture* render(TextureCache* texture_cache) override;
+	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override;
 
 protected:
 	uint16_t w_, h_;
-	const string txt_;
+	const std::string txt_;
 	NodeStyle nodestyle_;
 	FontCache& fontcache_;
 	SdlTtfFont& font_;
 };
 
-TextNode::TextNode(FontCache& font, NodeStyle& ns, const string& txt)
+TextNode::TextNode(FontCache& font, NodeStyle& ns, const std::string& txt)
    : RenderNode(ns),
      txt_(txt),
      nodestyle_(ns),
      fontcache_(font),
      font_(dynamic_cast<SdlTtfFont&>(fontcache_.get_font(&nodestyle_))) {
 	font_.dimensions(txt_, ns.font_style, &w_, &h_);
+	check_size();
 }
-uint16_t TextNode::hotspot_y() {
+uint16_t TextNode::hotspot_y() const {
 	return font_.ascent(nodestyle_.font_style);
 }
 
-Texture* TextNode::render(TextureCache* texture_cache) {
-	const Texture& img =
+std::shared_ptr<UI::RenderedText> TextNode::render(TextureCache* texture_cache) {
+	auto rendered_image =
 	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
-	Texture* rv = new Texture(img.width(), img.height());
-	rv->blit(Rectf(0, 0, img.width(), img.height()), img, Rectf(0, 0, img.width(), img.height()), 1.,
-	         BlendMode::Copy);
-	return rv;
+	assert(rendered_image != nullptr);
+	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
+	rendered_text->rects.push_back(
+	   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+	return rendered_text;
 }
 
 /*
@@ -513,15 +655,21 @@ Texture* TextNode::render(TextureCache* texture_cache) {
 class FillingTextNode : public TextNode {
 public:
 	FillingTextNode(
-	   FontCache& font, NodeStyle& ns, uint16_t w, const string& txt, bool expanding = false)
+	   FontCache& font, NodeStyle& ns, uint16_t w, const std::string& txt, bool expanding = false)
 	   : TextNode(font, ns, txt), is_expanding_(expanding) {
 		w_ = w;
+		check_size();
 	}
-	virtual ~FillingTextNode() {
+	~FillingTextNode() override {
 	}
-	Texture* render(TextureCache*) override;
 
-	bool is_expanding() override {
+	std::string debug_info() const override {
+		return "ft";
+	}
+
+	std::shared_ptr<UI::RenderedText> render(TextureCache*) override;
+
+	bool is_expanding() const override {
 		return is_expanding_;
 	}
 	void set_w(uint16_t w) override {
@@ -531,15 +679,29 @@ public:
 private:
 	bool is_expanding_;
 };
-Texture* FillingTextNode::render(TextureCache* texture_cache) {
-	const Texture& t =
-	   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
-	Texture* rv = new Texture(w_, h_);
-	for (uint16_t curx = 0; curx < w_; curx += t.width()) {
-		Rectf srcrect(0.f, 0.f, min<int>(t.width(), w_ - curx), h_);
-		rv->blit(Rectf(curx, 0, srcrect.w, srcrect.h), t, srcrect, 1., BlendMode::Copy);
+std::shared_ptr<UI::RenderedText> FillingTextNode::render(TextureCache* texture_cache) {
+	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
+	const std::string hash =
+	   (boost::format("rt:fill:%s:%s:%i:%i:%i:%s") % txt_ % nodestyle_.font_color.hex_value() %
+	    nodestyle_.font_style % width() % height() % (is_expanding_ ? "e" : "f"))
+	      .str();
+
+	std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
+	if (rendered_image == nullptr) {
+		std::shared_ptr<const Image> ttf =
+		   font_.render(txt_, nodestyle_.font_color, nodestyle_.font_style, texture_cache);
+		auto texture = std::make_shared<Texture>(width(), height());
+		for (uint16_t curx = 0; curx < w_; curx += ttf->width()) {
+			Rectf srcrect(0.f, 0.f, std::min<int>(ttf->width(), w_ - curx), h_);
+			texture->blit(
+			   Rectf(curx, 0, srcrect.w, srcrect.h), *ttf.get(), srcrect, 1., BlendMode::Copy);
+		}
+		rendered_image = texture_cache->insert(hash, std::move(texture));
 	}
-	return rv;
+	assert(rendered_image != nullptr);
+	rendered_text->rects.push_back(
+	   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+	return rendered_text;
 }
 
 /*
@@ -549,20 +711,34 @@ Texture* FillingTextNode::render(TextureCache* texture_cache) {
 class WordSpacerNode : public TextNode {
 public:
 	WordSpacerNode(FontCache& font, NodeStyle& ns) : TextNode(font, ns, " ") {
+		check_size();
 	}
 	static void show_spaces(bool t) {
 		show_spaces_ = t;
 	}
 
-	Texture* render(TextureCache* texture_cache) override {
+	std::string debug_info() const override {
+		return "wsp";
+	}
+
+	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override {
 		if (show_spaces_) {
-			Texture* rv = new Texture(w_, h_);
-			rv->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(0xcc, 0, 0, 0xcc));
-			return rv;
+			std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
+			const std::string hash = (boost::format("rt:wsp:%i:%i") % width() % height()).str();
+			std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
+			if (rendered_image == nullptr) {
+				auto texture = std::make_shared<Texture>(width(), height());
+				texture->fill_rect(Rectf(0.f, 0.f, w_, h_), RGBAColor(0xcc, 0, 0, 0xcc));
+				rendered_image = texture_cache->insert(hash, std::move(texture));
+			}
+			assert(rendered_image != nullptr);
+			rendered_text->rects.push_back(
+			   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+			return rendered_text;
 		}
 		return TextNode::render(texture_cache);
 	}
-	bool is_non_mandatory_space() override {
+	bool is_non_mandatory_space() const override {
 		return true;
 	}
 
@@ -577,21 +753,26 @@ bool WordSpacerNode::show_spaces_;
  */
 class NewlineNode : public RenderNode {
 public:
-	NewlineNode(NodeStyle& ns) : RenderNode(ns) {
+	explicit NewlineNode(NodeStyle& ns) : RenderNode(ns) {
 	}
-	uint16_t height() override {
+
+	std::string debug_info() const override {
+		return "nl";
+	}
+
+	uint16_t height() const override {
 		return 0;
 	}
-	uint16_t width() override {
+	uint16_t width() const override {
 		return INFINITE_WIDTH;
 	}
-	uint16_t hotspot_y() override {
+	uint16_t hotspot_y() const override {
 		return 0;
 	}
-	Texture* render(TextureCache* /* texture_cache */) override {
-		NEVER_HERE();
+	std::shared_ptr<UI::RenderedText> render(TextureCache* /* texture_cache */) override {
+		return std::shared_ptr<UI::RenderedText>(new UI::RenderedText());
 	}
-	bool is_non_mandatory_space() override {
+	bool is_non_mandatory_space() const override {
 		return true;
 	}
 };
@@ -603,51 +784,70 @@ class SpaceNode : public RenderNode {
 public:
 	SpaceNode(NodeStyle& ns, uint16_t w, uint16_t h = 0, bool expanding = false)
 	   : RenderNode(ns), w_(w), h_(h), background_image_(nullptr), is_expanding_(expanding) {
+		check_size();
 	}
 
-	uint16_t height() override {
+	std::string debug_info() const override {
+		return "sp";
+	}
+
+	uint16_t height() const override {
 		return h_;
 	}
-	uint16_t width() override {
+	uint16_t width() const override {
 		return w_;
 	}
-	uint16_t hotspot_y() override {
+	uint16_t hotspot_y() const override {
 		return h_;
 	}
-	Texture* render(TextureCache* /* texture_cache */) override {
-		Texture* rv = new Texture(w_, h_);
+	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override {
+		std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
+		const std::string hash = (boost::format("rt:sp:%s:%i:%i:%s") % filename_ % width() %
+		                          height() % (is_expanding_ ? "e" : "f"))
+		                            .str();
 
-		// Draw background image (tiling)
-		if (background_image_) {
-			Rectf dst;
-			Rectf srcrect(0, 0, 1, 1);
-			for (uint16_t curx = 0; curx < w_; curx += background_image_->width()) {
-				dst.x = curx;
-				dst.y = 0;
-				srcrect.w = dst.w = min<int>(background_image_->width(), w_ - curx);
-				srcrect.h = dst.h = h_;
-				rv->blit(dst, *background_image_, srcrect, 1., BlendMode::Copy);
+		std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
+		if (rendered_image == nullptr) {
+			// Draw background image (tiling)
+			auto texture = std::make_shared<Texture>(width(), height());
+			if (background_image_ != nullptr) {
+				Rectf dst;
+				Rectf srcrect(0, 0, 1, 1);
+				for (uint16_t curx = 0; curx < w_; curx += background_image_->width()) {
+					dst.x = curx;
+					dst.y = 0;
+					srcrect.w = dst.w = std::min<int>(background_image_->width(), w_ - curx);
+					srcrect.h = dst.h = h_;
+					texture->blit(dst, *background_image_, srcrect, 1., BlendMode::Copy);
+				}
+			} else {
+				texture->fill_rect(Rectf(0.f, 0.f, w_, h_), RGBAColor(255, 255, 255, 0));
 			}
-		} else {
-			rv->fill_rect(Rectf(0, 0, w_, h_), RGBAColor(255, 255, 255, 0));
+			rendered_image = texture_cache->insert(hash, std::move(texture));
 		}
-		return rv;
+		assert(rendered_image != nullptr);
+		rendered_text->rects.push_back(
+		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+		return rendered_text;
 	}
-	bool is_expanding() override {
+
+	bool is_expanding() const override {
 		return is_expanding_;
 	}
 	void set_w(uint16_t w) override {
 		w_ = w;
 	}
 
-	void set_background(const Image* s) {
+	void set_background(const Image* s, const std::string& filename) {
 		background_image_ = s;
+		filename_ = filename;
 		h_ = s->height();
 	}
 
 private:
 	uint16_t w_, h_;
 	const Image* background_image_;  // not owned
+	std::string filename_;
 	bool is_expanding_;
 };
 
@@ -656,91 +856,90 @@ private:
  */
 class DivTagRenderNode : public RenderNode {
 public:
-	DivTagRenderNode(NodeStyle& ns)
+	explicit DivTagRenderNode(NodeStyle& ns)
 	   : RenderNode(ns),
+	     desired_width_(),
+	     w_(0),
+	     h_(0),
 	     background_color_(0, 0, 0),
 	     is_background_color_set_(false),
 	     background_image_(nullptr) {
 	}
-	virtual ~DivTagRenderNode() {
-		for (RenderNode* n : nodes_to_render_) {
-			delete n;
-		}
+	~DivTagRenderNode() override {
 		nodes_to_render_.clear();
 	}
 
-	uint16_t width() override {
+	std::string debug_info() const override {
+		return "div";
+	}
+
+	uint16_t width() const override {
 		return w_ + margin_.left + margin_.right;
 	}
-	uint16_t height() override {
+	uint16_t height() const override {
 		return h_ + margin_.top + margin_.bottom;
 	}
-	uint16_t hotspot_y() override {
+	uint16_t hotspot_y() const override {
 		return height();
 	}
 
-	Texture* render(TextureCache* texture_cache) override {
-		if (width() > g_gr->max_texture_size() || height() > g_gr->max_texture_size()) {
-			const std::string error_message =
-			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % width() % height() %
-			    g_gr->max_texture_size())
-			      .str();
-			log("%s\n", error_message.c_str());
-			throw TextureTooBig(error_message);
-		}
-		Texture* rv = new Texture(width(), height());
-		rv->fill_rect(Rectf(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
+	DesiredWidth desired_width() const {
+		return desired_width_;
+	}
+
+	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override {
+		std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
+		// Preserve padding
+		rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(
+		   new UI::RenderedRect(Recti(0, 0, width(), height()), nullptr)));
 
 		// Draw Solid background Color
-		bool set_alpha = true;
 		if (is_background_color_set_) {
-			rv->fill_rect(Rectf(margin_.left, margin_.top, w_, h_), background_color_);
-			set_alpha = false;
+			// TODO(Notabilis): I think margin_.right and .bottom are missing in next line
+			UI::RenderedRect* bg_rect =
+			   new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_color_);
+			// Size is automatically adjusted in RenderedText while blitting, so no need to call
+			// check_size() here.
+			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
 		}
 
 		// Draw background image (tiling)
-		if (background_image_) {
-			Rectf dst;
-			Rectf src(0, 0, 0, 0);
+		if (background_image_ != nullptr) {
+			UI::RenderedRect* bg_rect =
+			   new UI::RenderedRect(Recti(margin_.left, margin_.top, w_, h_), background_image_);
+			check_size(bg_rect->width(), bg_rect->height());
+			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
+		}
 
-			for (uint16_t cury = margin_.top; cury < h_ + margin_.top;
-			     cury += background_image_->height()) {
-				for (uint16_t curx = margin_.left; curx < w_ + margin_.left;
-				     curx += background_image_->width()) {
-					dst.x = curx;
-					dst.y = cury;
-					src.w = dst.w = min<int>(background_image_->width(), w_ + margin_.left - curx);
-					src.h = dst.h = min<int>(background_image_->height(), h_ + margin_.top - cury);
-					rv->blit(dst, *background_image_, src, 1., BlendMode::Copy);
+		for (std::shared_ptr<RenderNode> n : nodes_to_render_) {
+			const auto& renderme = n->render(texture_cache);
+			for (auto& rendered_rect : renderme->rects) {
+				if (rendered_rect->was_visited()) {
+					rendered_rect->set_origin(
+					   Vector2i(x() + rendered_rect->x(), y() + rendered_rect->y() + margin_.top));
+
+				} else {
+					rendered_rect->set_origin(
+					   Vector2i(x() + n->x() + margin_.left, y() + n->y() + margin_.top));
+					rendered_rect->set_visited();
 				}
+				rendered_text->rects.push_back(std::move(rendered_rect));
 			}
-			set_alpha = false;
 		}
-
-		for (RenderNode* n : nodes_to_render_) {
-			Texture* node_texture = n->render(texture_cache);
-			if (node_texture) {
-				Rectf dst(n->x() + margin_.left, n->y() + margin_.top, node_texture->width(),
-				          node_texture->height());
-				Rectf src(0, 0, node_texture->width(), node_texture->height());
-				rv->blit(
-				   dst, *node_texture, src, 1., set_alpha ? BlendMode::Copy : BlendMode::UseAlpha);
-				delete node_texture;
-			}
-			delete n;
-		}
-
 		nodes_to_render_.clear();
 
-		return rv;
+		return rendered_text;
 	}
-	const vector<Reference> get_references() override {
+	const std::vector<Reference> get_references() override {
 		return refs_;
 	}
 	void set_dimensions(uint16_t inner_w, uint16_t inner_h, Borders margin) {
 		w_ = inner_w;
 		h_ = inner_h;
 		margin_ = margin;
+	}
+	void set_desired_width(DesiredWidth input_width) {
+		desired_width_ = input_width;
 	}
 	void set_background(RGBColor clr) {
 		background_color_ = clr;
@@ -749,49 +948,101 @@ public:
 	void set_background(const Image* img) {
 		background_image_ = img;
 	}
-	void set_nodes_to_render(vector<RenderNode*>& n) {
+	void set_nodes_to_render(std::vector<std::shared_ptr<RenderNode>>& n) {
 		nodes_to_render_ = n;
 	}
-	void add_reference(int16_t gx, int16_t gy, uint16_t w, uint16_t h, const string& s) {
+	void add_reference(int16_t gx, int16_t gy, uint16_t w, uint16_t h, const std::string& s) {
 		Reference r = {Recti(gx, gy, w, h), s};
 		refs_.push_back(r);
 	}
 
 private:
+	DesiredWidth desired_width_;
 	uint16_t w_, h_;
-	vector<RenderNode*> nodes_to_render_;
+	std::vector<std::shared_ptr<RenderNode>> nodes_to_render_;
 	Borders margin_;
 	RGBColor background_color_;
 	bool is_background_color_set_;
 	const Image* background_image_;  // Not owned.
-	vector<Reference> refs_;
+	std::vector<Reference> refs_;
 };
 
 class ImgRenderNode : public RenderNode {
 public:
-	ImgRenderNode(NodeStyle& ns, const Image& image) : RenderNode(ns), image_(image) {
+	ImgRenderNode(NodeStyle& ns,
+	              const std::string& image_filename,
+	              double scale,
+	              const RGBColor& color,
+	              bool use_playercolor)
+	   : RenderNode(ns),
+	     image_(use_playercolor ? playercolor_image(color, image_filename) :
+	                              g_gr->images().get(image_filename)),
+	     filename_(image_filename),
+	     scale_(scale),
+	     color_(color),
+	     use_playercolor_(use_playercolor) {
+		check_size();
 	}
 
-	uint16_t width() override {
-		return image_.width();
+	ImgRenderNode(NodeStyle& ns, const Image* image)
+	   : RenderNode(ns),
+	     image_(image),
+	     filename_(""),
+	     scale_(1.0),
+	     color_(RGBColor(0, 0, 0)),
+	     use_playercolor_(false) {
+		check_size();
 	}
-	uint16_t height() override {
-		return image_.height();
+
+	std::string debug_info() const override {
+		return "img";
 	}
-	uint16_t hotspot_y() override {
-		return image_.height();
+
+	uint16_t width() const override {
+		return scale_ * image_->width();
 	}
-	Texture* render(TextureCache* texture_cache) override;
+	uint16_t height() const override {
+		return scale_ * image_->height();
+	}
+	uint16_t hotspot_y() const override {
+		return scale_ * image_->height();
+	}
+	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override;
 
 private:
-	const Image& image_;
+	const Image* image_;
+	const std::string filename_;
+	const double scale_;
+	const RGBColor color_;
+	bool use_playercolor_;
 };
 
-Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
-	Texture* rv = new Texture(image_.width(), image_.height());
-	rv->blit(Rectf(0, 0, image_.width(), image_.height()), image_,
-	         Rectf(0, 0, image_.width(), image_.height()), 1., BlendMode::Copy);
-	return rv;
+std::shared_ptr<UI::RenderedText> ImgRenderNode::render(TextureCache* texture_cache) {
+	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
+
+	if (scale_ == 1.0 || filename_.empty()) {
+		// Image can be used as is, and has already been cached in g_gr->images()
+		assert(image_ != nullptr);
+		rendered_text->rects.push_back(
+		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(image_)));
+	} else {
+		const std::string hash = (boost::format("rt:img:%s:%s:%i:%i") % filename_ %
+		                          (use_playercolor_ ? color_.hex_value() : "") % width() % height())
+		                            .str();
+		std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
+		if (rendered_image == nullptr) {
+			auto texture = std::make_shared<Texture>(width(), height());
+			texture->blit(Rectf(0.f, 0.f, width(), height()), *image_,
+			              Rectf(0.f, 0.f, image_->width(), image_->height()), 1., BlendMode::Copy);
+			rendered_image = texture_cache->insert(hash, std::move(texture));
+		}
+
+		assert(rendered_image != nullptr);
+		rendered_text->rects.push_back(
+		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(rendered_image)));
+	}
+
+	return rendered_text;
 }
 // End: Helper Stuff
 
@@ -823,10 +1074,12 @@ public:
 
 	virtual void enter() {
 	}
-	virtual void emit_nodes(vector<RenderNode*>&);
+	virtual void emit_nodes(std::vector<std::shared_ptr<RenderNode>>&);
 
 private:
-	void make_text_nodes(const string& txt, vector<RenderNode*>& nodes, NodeStyle& ns);
+	void make_text_nodes(const std::string& txt,
+	                     std::vector<std::shared_ptr<RenderNode>>& nodes,
+	                     NodeStyle& ns);
 
 protected:
 	Tag& tag_;
@@ -837,16 +1090,18 @@ protected:
 	const UI::FontSets& fontsets_;
 };
 
-void TagHandler::make_text_nodes(const string& txt, vector<RenderNode*>& nodes, NodeStyle& ns) {
+void TagHandler::make_text_nodes(const std::string& txt,
+                                 std::vector<std::shared_ptr<RenderNode>>& nodes,
+                                 NodeStyle& ns) {
 	TextStream ts(txt);
 	std::string word;
-	std::vector<RenderNode*> text_nodes;
+	std::vector<std::shared_ptr<RenderNode>> text_nodes;
 
 	// Bidirectional text (Arabic etc.)
 	if (i18n::has_rtl_character(txt.c_str())) {
 		std::string previous_word;
-		std::vector<RenderNode*>::iterator it = text_nodes.begin();
-		std::vector<WordSpacerNode*> spacer_nodes;
+		std::vector<std::shared_ptr<RenderNode>>::iterator it = text_nodes.begin();
+		std::vector<std::shared_ptr<RenderNode>> spacer_nodes;
 
 		// Collect the word nodes
 		while (ts.pos() < txt.size()) {
@@ -857,7 +1112,8 @@ void TagHandler::make_text_nodes(const string& txt, vector<RenderNode*>& nodes, 
 			// We only know if the spacer goes to the left or right after having a look at the current
 			// word.
 			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
-				spacer_nodes.push_back(new WordSpacerNode(font_cache_, ns));
+				spacer_nodes.push_back(
+				   std::shared_ptr<RenderNode>(new WordSpacerNode(font_cache_, ns)));
 			}
 
 			word = ts.till_any_or_end(" \t\n\r");
@@ -867,31 +1123,32 @@ void TagHandler::make_text_nodes(const string& txt, vector<RenderNode*>& nodes, 
 				bool word_is_bidi = i18n::has_rtl_character(word.c_str());
 				word = i18n::make_ligatures(word.c_str());
 				if (word_is_bidi || i18n::has_rtl_character(previous_word.c_str())) {
-					for (WordSpacerNode* spacer : spacer_nodes) {
+					for (std::shared_ptr<RenderNode> spacer : spacer_nodes) {
 						it = text_nodes.insert(text_nodes.begin(), spacer);
 					}
 					if (word_is_bidi) {
 						word = i18n::line2bidi(word.c_str());
 					}
-					it = text_nodes.insert(
-					   text_nodes.begin(), new TextNode(font_cache_, ns, word.c_str()));
+					it = text_nodes.insert(text_nodes.begin(), std::shared_ptr<RenderNode>(new TextNode(
+					                                              font_cache_, ns, word.c_str())));
 				} else {  // Sequences of Latin words go to the right from current position
 					if (it < text_nodes.end()) {
 						++it;
 					}
-					for (WordSpacerNode* spacer : spacer_nodes) {
+					for (std::shared_ptr<RenderNode> spacer : spacer_nodes) {
 						it = text_nodes.insert(it, spacer);
 						if (it < text_nodes.end()) {
 							++it;
 						}
 					}
-					it = text_nodes.insert(it, new TextNode(font_cache_, ns, word));
+					it = text_nodes.insert(
+					   it, std::shared_ptr<RenderNode>(new TextNode(font_cache_, ns, word)));
 				}
 			}
 			previous_word = word;
 		}
 		// Add the nodes to the end of the previously existing nodes.
-		for (RenderNode* node : text_nodes) {
+		for (std::shared_ptr<RenderNode> node : text_nodes) {
 			nodes.push_back(node);
 		}
 
@@ -900,7 +1157,7 @@ void TagHandler::make_text_nodes(const string& txt, vector<RenderNode*>& nodes, 
 			std::size_t cpos = ts.pos();
 			ts.skip_ws();
 			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
-				nodes.push_back(new WordSpacerNode(font_cache_, ns));
+				nodes.push_back(std::shared_ptr<RenderNode>(new WordSpacerNode(font_cache_, ns)));
 			}
 			word = ts.till_any_or_end(" \t\n\r");
 			ns.fontset = i18n::find_fontset(word.c_str(), fontsets_);
@@ -910,25 +1167,26 @@ void TagHandler::make_text_nodes(const string& txt, vector<RenderNode*>& nodes, 
 				if (i18n::has_script_character(word.c_str(), UI::FontSets::Selector::kCJK)) {
 					std::vector<std::string> units = i18n::split_cjk_word(word.c_str());
 					for (const std::string& unit : units) {
-						nodes.push_back(new TextNode(font_cache_, ns, unit));
+						nodes.push_back(std::shared_ptr<RenderNode>(new TextNode(font_cache_, ns, unit)));
 					}
 				} else {
-					nodes.push_back(new TextNode(font_cache_, ns, word));
+					nodes.push_back(std::shared_ptr<RenderNode>(new TextNode(font_cache_, ns, word)));
 				}
 			}
 		}
 	}
 }
 
-void TagHandler::emit_nodes(vector<RenderNode*>& nodes) {
+void TagHandler::emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) {
 	for (Child* c : tag_.children()) {
 		if (c->tag) {
 			std::unique_ptr<TagHandler> th(create_taghandler(
 			   *c->tag, font_cache_, nodestyle_, image_cache_, renderer_style_, fontsets_));
 			th->enter();
 			th->emit_nodes(nodes);
-		} else
+		} else {
 			make_text_nodes(c->text, nodes, nodestyle_);
+		}
 	}
 }
 
@@ -989,9 +1247,9 @@ public:
 				nodestyle_.halign = UI::Align::kLeft;
 			}
 		}
-		nodestyle_.halign = mirror_alignment(nodestyle_.halign);
+		nodestyle_.halign = mirror_alignment(nodestyle_.halign, nodestyle_.is_rtl);
 		if (a.has("valign")) {
-			const string align = a["valign"].get_string();
+			const std::string align = a["valign"].get_string();
 			if (align == "bottom") {
 				nodestyle_.valign = UI::Align::kBottom;
 			} else if (align == "center" || align == "middle") {
@@ -1003,13 +1261,13 @@ public:
 		if (a.has("spacing"))
 			nodestyle_.spacing = a["spacing"].get_int();
 	}
-	void emit_nodes(vector<RenderNode*>& nodes) override {
+	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		// Put a newline if this is not the first paragraph
 		if (!nodes.empty()) {
-			nodes.push_back(new NewlineNode(nodestyle_));
+			nodes.push_back(std::shared_ptr<RenderNode>(new NewlineNode(nodestyle_)));
 		}
 		if (indent_) {
-			nodes.push_back(new SpaceNode(nodestyle_, indent_));
+			nodes.push_back(std::shared_ptr<RenderNode>(new SpaceNode(nodestyle_, indent_)));
 		}
 		TagHandler::emit_nodes(nodes);
 	}
@@ -1031,14 +1289,45 @@ public:
 
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
-		render_node_ = new ImgRenderNode(nodestyle_, *image_cache_->get(a["src"].get_string()));
+		RGBColor color;
+		bool use_playercolor = false;
+		double scale = 1.0;
+
+		if (a.has("color")) {
+			color = a["color"].get_color();
+			use_playercolor = true;
+		}
+		if (a.has("object")) {
+			const Image* representative_image = g_gr->animations().get_representative_image(
+			   a["object"].get_string(), use_playercolor ? &color : nullptr);
+			render_node_.reset(new ImgRenderNode(nodestyle_, representative_image));
+		} else {
+			const std::string image_filename = a["src"].get_string();
+
+			if (a.has("width")) {
+				int width = a["width"].get_int();
+				if (width > renderer_style_.overall_width) {
+					log("WARNING: Font renderer: Specified image width of %d exceeds the overall "
+					    "available "
+					    "width of %d. Setting width to %d.\n",
+					    width, renderer_style_.overall_width, renderer_style_.overall_width);
+					width = renderer_style_.overall_width;
+				}
+				const int image_width = image_cache_->get(image_filename)->width();
+				if (width < image_width) {
+					scale = static_cast<double>(width) / image_width;
+				}
+			}
+			render_node_.reset(
+			   new ImgRenderNode(nodestyle_, image_filename, scale, color, use_playercolor));
+		}
 	}
-	void emit_nodes(vector<RenderNode*>& nodes) override {
+	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		nodes.push_back(render_node_);
 	}
 
 private:
-	ImgRenderNode* render_node_;
+	std::shared_ptr<ImgRenderNode> render_node_;
 };
 
 class VspaceTagHandler : public TagHandler {
@@ -1057,9 +1346,9 @@ public:
 
 		space_ = a["gap"].get_int();
 	}
-	void emit_nodes(vector<RenderNode*>& nodes) override {
-		nodes.push_back(new SpaceNode(nodestyle_, 0, space_));
-		nodes.push_back(new NewlineNode(nodestyle_));
+	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
+		nodes.push_back(std::shared_ptr<RenderNode>(new SpaceNode(nodestyle_, 0, space_)));
+		nodes.push_back(std::shared_ptr<RenderNode>(new NewlineNode(nodestyle_)));
 	}
 
 private:
@@ -1091,36 +1380,40 @@ public:
 			fill_text_ = a["fill"].get_string();
 			try {
 				background_image_ = image_cache_->get(fill_text_);
+				image_filename_ = fill_text_;
 				fill_text_ = "";
 			} catch (ImageNotFound&) {
 			}
 		}
 	}
 
-	void emit_nodes(vector<RenderNode*>& nodes) override {
-		RenderNode* rn = nullptr;
+	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		if (!fill_text_.empty()) {
-			if (space_ < INFINITE_WIDTH)
-				rn = new FillingTextNode(font_cache_, nodestyle_, space_, fill_text_);
-			else
-				rn = new FillingTextNode(font_cache_, nodestyle_, 0, fill_text_, true);
+			std::shared_ptr<FillingTextNode> node;
+			if (space_ < INFINITE_WIDTH) {
+				node.reset(new FillingTextNode(font_cache_, nodestyle_, space_, fill_text_));
+			} else {
+				node.reset(new FillingTextNode(font_cache_, nodestyle_, 0, fill_text_, true));
+			}
+			nodes.push_back(node);
 		} else {
-			SpaceNode* sn;
-			if (space_ < INFINITE_WIDTH)
-				sn = new SpaceNode(nodestyle_, space_, 0);
-			else
-				sn = new SpaceNode(nodestyle_, 0, 0, true);
-
-			if (background_image_)
-				sn->set_background(background_image_);
-			rn = sn;
+			std::shared_ptr<SpaceNode> node;
+			if (space_ < INFINITE_WIDTH) {
+				node.reset(new SpaceNode(nodestyle_, space_, 0));
+			} else {
+				node.reset(new SpaceNode(nodestyle_, 0, 0, true));
+			}
+			if (background_image_) {
+				node->set_background(background_image_, image_filename_);
+			}
+			nodes.push_back(node);
 		}
-		nodes.push_back(rn);
 	}
 
 private:
-	string fill_text_;
+	std::string fill_text_;
 	const Image* background_image_;
+	std::string image_filename_;
 	uint16_t space_;
 };
 
@@ -1135,8 +1428,8 @@ public:
 	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
-	void emit_nodes(vector<RenderNode*>& nodes) override {
-		nodes.push_back(new NewlineNode(nodestyle_));
+	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
+		nodes.push_back(std::shared_ptr<RenderNode>(new NewlineNode(nodestyle_)));
 	}
 };
 
@@ -1152,10 +1445,18 @@ public:
 	              bool shrink_to_fit = true)
 	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
 	     shrink_to_fit_(shrink_to_fit),
+	     trim_spaces_(true),
 	     w_(max_w),
 	     render_node_(new DivTagRenderNode(ns)) {
 	}
 
+	/*
+	 * Calculate width of all children of this div.
+	 * Width is either fixed, a percentage of the parent or fill. If the width should fill
+	 * the line, it is set to the remaining width of the current line. New lines aren't really
+	 * started here but percent/filling elements are made so big that they won't fit into the
+	 * previous line when their final position is calculated in Layout::fit_nodes().
+	 */
 	void enter() override {
 		Borders padding, margin;
 
@@ -1174,6 +1475,9 @@ public:
 			uint8_t p = a["padding"].get_int();
 			padding.left = padding.top = padding.right = padding.bottom = p;
 		}
+		// TODO(GunChleoc): padding_l and padding_r don't seem to produce balanced results.
+		// We ran into that with the game tips,
+		// using "<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>" there.
 		if (a.has("padding_r"))
 			padding.right = a["padding_r"].get_int();
 		if (a.has("padding_b"))
@@ -1187,28 +1491,80 @@ public:
 			margin.left = margin.top = margin.right = margin.bottom = p;
 		}
 
-		vector<RenderNode*> subnodes;
+		std::vector<std::shared_ptr<RenderNode>> subnodes;
+		// If a percentage width is used, temporarily set it as the overall width. This way,
+		// divs with width "fill" only use the width of their parent node. Also, percentages
+		// given in child nodes are relative to the width of their parent node.
+		const uint16_t old_line_width = renderer_style_.overall_width;
+		if (render_node_->desired_width().unit == WidthUnit::kPercent) {
+			renderer_style_.overall_width =
+			   render_node_->desired_width().width * renderer_style_.overall_width / 100;
+		}
 		TagHandler::emit_nodes(subnodes);
+		renderer_style_.overall_width = old_line_width;
 
-		if (!w_) {  // Determine the width by the width of the widest subnode
-			for (RenderNode* n : subnodes) {
-				if (n->width() >= INFINITE_WIDTH)
-					continue;
-				w_ = max<int>(w_, n->width() + padding.left + padding.right);
+		// Determine the required width by the width of the widest subnode
+		uint16_t width_first_subnode = INFINITE_WIDTH;
+		uint16_t widest_subnode = 0;
+		for (std::shared_ptr<RenderNode> n : subnodes) {
+			if (n->width() >= INFINITE_WIDTH) {
+				continue;
 			}
+			if (width_first_subnode >= INFINITE_WIDTH && n->width()) {
+				width_first_subnode = n->width() + padding.left + padding.right;
+			}
+			widest_subnode = std::max<int>(widest_subnode, n->width() + padding.left + padding.right);
+		}
+		if (renderer_style_.remaining_width < width_first_subnode) {
+			// Not enough space for first subnode. Move to next line
+			renderer_style_.remaining_width = renderer_style_.overall_width;
+		}
+
+		switch (render_node_->desired_width().unit) {
+		case WidthUnit::kPercent:
+			w_ = render_node_->desired_width().width * renderer_style_.overall_width / 100;
+
+			if (render_node_->get_floating() != RenderNode::Floating::kNone) {
+				break;
+			}
+			// Reduce remaining width
+			if (renderer_style_.remaining_width <= w_) {
+				// Not enough space. Div will be placed in the next line, calculate the remaining space
+				// there
+				renderer_style_.remaining_width = renderer_style_.overall_width - w_;
+			} else {
+				renderer_style_.remaining_width -= w_;
+			}
+			break;
+		case WidthUnit::kFill:
+			w_ = renderer_style_.remaining_width;
+			if (render_node_->get_floating() == RenderNode::Floating::kNone) {
+				renderer_style_.remaining_width = 0;
+			}
+			break;
+		default:
+			if (!w_) {
+				w_ = widest_subnode;
+			}
+			// Else do nothing
 		}
 
 		// Layout takes ownership of subnodes
 		Layout layout(subnodes);
-		vector<RenderNode*> nodes_to_render;
-		uint16_t max_line_width = layout.fit_nodes(nodes_to_render, w_, padding, shrink_to_fit_);
+		std::vector<std::shared_ptr<RenderNode>> nodes_to_render;
+		uint16_t max_line_width = layout.fit_nodes(&nodes_to_render, w_, padding, trim_spaces_);
 		uint16_t extra_width = 0;
 		if (w_ < INFINITE_WIDTH && w_ > max_line_width) {
 			extra_width = w_ - max_line_width;
+		} else if (render_node_->desired_width().unit == WidthUnit::kShrink) {
+			w_ = max_line_width;
+			if (render_node_->get_floating() == RenderNode::Floating::kNone) {
+				renderer_style_.remaining_width -= w_;
+			}
 		}
 
 		// Collect all tags from children
-		for (RenderNode* rn : nodes_to_render) {
+		for (std::shared_ptr<RenderNode> rn : nodes_to_render) {
 			for (const Reference& r : rn->get_references()) {
 				render_node_->add_reference(
 				   rn->x() + r.dim.x, rn->y() + r.dim.y, r.dim.w, r.dim.h, r.ref);
@@ -1230,16 +1586,10 @@ public:
 			w_ = max_line_width;
 		}
 
-		if (renderer_style_.remaining_width >= w_) {
-			renderer_style_.remaining_width -= w_;
-		} else {
-			renderer_style_.remaining_width = renderer_style_.overall_width;
-		}
-
 		render_node_->set_dimensions(w_, layout.height(), margin);
 		render_node_->set_nodes_to_render(nodes_to_render);
 	}
-	void emit_nodes(vector<RenderNode*>& nodes) override {
+	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
 		nodes.push_back(render_node_);
 	}
 
@@ -1247,28 +1597,39 @@ public:
 	virtual void handle_unique_attributes() {
 		const AttrMap& a = tag_.attrs();
 		if (a.has("width")) {
+			shrink_to_fit_ = false;
+			w_ = INFINITE_WIDTH;
 			std::string width_string = a["width"].get_string();
 			if (width_string == "*") {
-				w_ = renderer_style_.remaining_width;
+				render_node_->set_desired_width(DesiredWidth(INFINITE_WIDTH, WidthUnit::kFill));
 			} else if (boost::algorithm::ends_with(width_string, "%")) {
 				width_string = width_string.substr(0, width_string.length() - 1);
-				uint8_t new_width_percent = strtol(width_string.c_str(), nullptr, 10);
-				w_ = floor(renderer_style_.overall_width * new_width_percent / 100);
-				w_ = std::min(w_, renderer_style_.remaining_width);
+				uint8_t width_percent = strtol(width_string.c_str(), nullptr, 10);
+				if (width_percent > 100) {
+					log("WARNING: Font renderer: Do not use width > 100%%\n");
+					width_percent = 100;
+				}
+				render_node_->set_desired_width(DesiredWidth(width_percent, WidthUnit::kPercent));
 			} else {
 				w_ = a["width"].get_int();
+				if (w_ > renderer_style_.overall_width) {
+					log("WARNING: Font renderer: Specified width of %d exceeds the overall available "
+					    "width of %d. Setting width to %d.\n",
+					    w_, renderer_style_.overall_width, renderer_style_.overall_width);
+					w_ = renderer_style_.overall_width;
+				}
+				render_node_->set_desired_width(DesiredWidth(w_, WidthUnit::kAbsolute));
 			}
-			shrink_to_fit_ = false;
 		}
 		if (a.has("float")) {
-			const string s = a["float"].get_string();
+			const std::string s = a["float"].get_string();
 			if (s == "right")
-				render_node_->set_floating(RenderNode::FLOAT_RIGHT);
+				render_node_->set_floating(RenderNode::Floating::kRight);
 			else if (s == "left")
-				render_node_->set_floating(RenderNode::FLOAT_LEFT);
+				render_node_->set_floating(RenderNode::Floating::kLeft);
 		}
 		if (a.has("valign")) {
-			const string align = a["valign"].get_string();
+			const std::string align = a["valign"].get_string();
 			if (align == "top")
 				render_node_->set_valign(UI::Align::kTop);
 			else if (align == "bottom")
@@ -1280,10 +1641,12 @@ public:
 
 protected:
 	bool shrink_to_fit_;
+	// Always true for DivTagHandler but might be overwritten in RTTagHandler
+	bool trim_spaces_;
 
 private:
 	uint16_t w_;
-	DivTagRenderNode* render_node_;
+	std::shared_ptr<DivTagRenderNode> render_node_;
 };
 
 class RTTagHandler : public DivTagHandler {
@@ -1302,8 +1665,8 @@ public:
 	void handle_unique_attributes() override {
 		const AttrMap& a = tag_.attrs();
 		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : 0);
-		shrink_to_fit_ =
-		   shrink_to_fit_ && (a.has("keep_spaces") ? !a["keep_spaces"].get_bool() : true);
+		trim_spaces_ = (a.has("keep_spaces") ? !a["keep_spaces"].get_bool() : true);
+		shrink_to_fit_ = shrink_to_fit_ && trim_spaces_;
 	}
 };
 
@@ -1316,13 +1679,13 @@ TagHandler* create_taghandler(Tag& tag,
                               const UI::FontSets& fontsets) {
 	return new T(tag, fc, ns, image_cache, renderer_style, fontsets);
 }
-using TagHandlerMap = map<const string,
-                          TagHandler* (*)(Tag& tag,
-                                          FontCache& fc,
-                                          NodeStyle& ns,
-                                          ImageCache* image_cache,
-                                          RendererStyle& renderer_style,
-                                          const UI::FontSets& fontsets)>;
+using TagHandlerMap = std::map<const std::string,
+                               TagHandler* (*)(Tag& tag,
+                                               FontCache& fc,
+                                               NodeStyle& ns,
+                                               ImageCache* image_cache,
+                                               RendererStyle& renderer_style,
+                                               const UI::FontSets& fontsets)>;
 
 TagHandler* create_taghandler(Tag& tag,
                               FontCache& fc,
@@ -1364,7 +1727,8 @@ Renderer::Renderer(ImageCache* image_cache,
 Renderer::~Renderer() {
 }
 
-RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& allowed_tags) {
+std::shared_ptr<RenderNode>
+Renderer::layout(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags) {
 	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
 	if (!width) {
@@ -1384,11 +1748,12 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	                           0,
 	                           UI::Align::kLeft,
 	                           UI::Align::kTop,
+	                           is_rtl,
 	                           ""};
 
 	RTTagHandler rtrn(
 	   *rt, *font_cache_, default_style, image_cache_, renderer_style_, fontsets_, width);
-	vector<RenderNode*> nodes;
+	std::vector<std::shared_ptr<RenderNode>> nodes;
 	rtrn.enter();
 	rtrn.emit_nodes(nodes);
 
@@ -1397,15 +1762,9 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	return nodes[0];
 }
 
-Texture* Renderer::render(const string& text, uint16_t width, const TagSet& allowed_tags) {
-	std::unique_ptr<RenderNode> node(layout_(text, width, allowed_tags));
-
-	return node->render(texture_cache_);
+std::shared_ptr<const UI::RenderedText>
+Renderer::render(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags) {
+	std::shared_ptr<RenderNode> node(layout(text, width, is_rtl, allowed_tags));
+	return std::shared_ptr<const UI::RenderedText>(node->render(texture_cache_));
 }
-
-IRefMap*
-Renderer::make_reference_map(const string& text, uint16_t width, const TagSet& allowed_tags) {
-	std::unique_ptr<RenderNode> node(layout_(text, width, allowed_tags));
-	return new RefMap(node->get_references());
-}
-}
+}  // namespace RT

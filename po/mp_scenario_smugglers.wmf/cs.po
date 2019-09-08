@@ -1,7 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # GunChleoc, 2014
 # Milan Fašina <matrix17@seznam.cz>, 2016
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-12-30 14:03+0000\n"
-"PO-Revision-Date: 2016-12-31 21:34+0000\n"
-"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
+"POT-Creation-Date: 2018-03-24 09:42+0000\n"
+"PO-Revision-Date: 2018-03-24 13:01+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,20 +20,12 @@ msgstr ""
 "Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:44
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:46
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:98
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:101
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:104
-msgid "Status"
-msgstr "Stav"
-
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:122
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:109
 msgid "Wares Smuggled"
 msgstr "Suroviny propašovány"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:145
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:148
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:132
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:135
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:33
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:57
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:92
@@ -43,10 +36,16 @@ msgstr[0] "%i bod"
 msgstr[1] "%i body"
 msgstr[2] "%i bodů"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:148
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:135
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid "Rules"
 msgstr "Pravidla"
+
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:98
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:101
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:104
+msgid "Status"
+msgstr "Stav"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Smugglers"
@@ -57,7 +56,7 @@ msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
-msgstr "Pašeráci je zábavná mapa pro 4 hráče. Ty a tvůj společník začínáte diagonálně vůči sobě na symetrickém ostrově. Je zde mnoho pašeráckých tunelů. Každý se skládá ze dvou konců, příjimacího a odeslílacího. "
+msgstr "Pašeráci je zábavná mapa pro 4 hráče. Ty a tvůj společník začínáte diagonálně vůči sobě na symetrickém ostrově. Je zde mnoho pašeráckých tunelů. Každý se skládá ze dvou konců, příjimacího a odeslílacího."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
@@ -65,7 +64,7 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds."
-msgstr "Pro vytvoření pašerácké cesty je potřeba postavit skladiště na příjímacím/odesílacím konci a tvůj týmový spoluhráč musí postavit své skladiště na odpovídajícím konci. Suroviny jsou  následně odesílány každých 10 vteřin. "
+msgstr "Pro vytvoření pašerácké cesty je potřeba postavit skladiště na příjímacím/odesílacím konci a tvůj týmový spoluhráč musí postavit své skladiště na odpovídajícím konci. Suroviny jsou  následně odesílány každých 10 vteřin."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12
@@ -109,7 +108,7 @@ msgid ""
 msgstr "Nová pašerácká cesta z %1$s do %2$s byla vytvořena. Každá surovina propašovaná touto cestou bude mít hodnotu %3$s."
 
 #. TRANSLATORS: %s = '<number> points'
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:27
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:26
 #, lua-format
 msgid ""
 "Your team has established a new smuggling route. You have the sending "
@@ -117,7 +116,7 @@ msgid ""
 msgstr "Tvůj tým vytvořil novou pašeráckou cestu. Tvé skladiště bude odesílat. Každá surovina propašovaná touto cestou bude mít hodnotu %s."
 
 #. TRANSLATORS: %s = '<number> points'
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:32
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:30
 #, lua-format
 msgid ""
 "Your team has established a new smuggling route. You have the receiving "
@@ -126,17 +125,17 @@ msgstr "Tvůj tým vytvořil novou pašeráckou cestu. Tvé skladiště bude př
 
 #. TRANSLATORS: the first parameter is '<number> points', the last 2
 #. parameters are player names
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:37
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:34
 msgid "The smuggling route worth %1$s from %2$s to %3$s has been broken!"
 msgstr "Pašerácká cesta s hodnotou %1$s z %2$s do %3$s byla přerušena!"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:41
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:37
 msgid "Game over!"
 msgstr "Konec hry!"
 
 #. TRANSLATORS: the first 4 parameters are player names, the last parameter is
 #. '<number> points'
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:43
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:39
 msgid ""
 "Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to "
 "collect %5$s."

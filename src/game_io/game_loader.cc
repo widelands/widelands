@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,8 @@
  */
 
 #include "game_io/game_loader.h"
+
+#include <memory>
 
 #include <boost/bind.hpp>
 #include <boost/signals2.hpp>
@@ -82,7 +84,18 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	M.read(fs_, game_);
 	log("Game: Reading Map Data took %ums\n", timer.ms_since_last_query());
 
-	log("Game: Reading Player Info ... ");
+	// This has to be loaded after the map packet so that the map's filesystem will exist.
+	// The custom tribe scripts are saved when the map scripting packet is saved, but we need
+	// to load them as early as possible here.
+	if (fs_.file_exists("map/scripting/tribes/init.lua")) {
+		log("Game: Reading Scenario Tribes ... ");
+		game_.lua().run_script("map:scripting/tribes/init.lua");
+		log("Game: Reading Scenario Tribes took %ums\n", timer.ms_since_last_query());
+	}
+
+	// This also triggers loading the world and tribes, so we need a newline at the end of the log
+	// output
+	log("Game: Reading Player Info ...\n");
 	{
 		GamePlayerInfoPacket p;
 		p.read(fs_, game_);
@@ -122,8 +135,8 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	iterate_players_existing_const(p, nr_players, game_, player) {
 		const MessageQueue& messages = player->messages();
 		for (const auto& temp_message : messages) {
-			Message* message = temp_message.second;
-			MessageId message_id = temp_message.first;
+			const std::unique_ptr<Message>& message = temp_message.second;
+			const MessageId message_id = temp_message.first;
 
 			// Renew MapObject connections
 			if (message->serial() > 0) {
@@ -151,4 +164,4 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 
 	return 0;
 }
-}
+}  // namespace Widelands

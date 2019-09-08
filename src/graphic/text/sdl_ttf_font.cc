@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,17 +63,18 @@ void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t* gw, uin
 	*gh = h;
 }
 
-const Texture& SdlTtfFont::render(const std::string& txt,
-                                  const RGBColor& clr,
-                                  int style,
-                                  TextureCache* texture_cache) {
+std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
+                                                const RGBColor& clr,
+                                                int style,
+                                                TextureCache* texture_cache) {
 	const std::string hash =
-	   (boost::format("%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
+	   (boost::format("ttf:%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
 	    static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
 	      .str();
-	const Texture* rv = texture_cache->get(hash);
-	if (rv)
-		return *rv;
+	std::shared_ptr<const Image> rv = texture_cache->get(hash);
+	if (rv != nullptr) {
+		return rv;
+	}
 
 	set_style(style);
 
@@ -84,8 +85,12 @@ const Texture& SdlTtfFont::render(const std::string& txt,
 		SDL_Surface* tsurf = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 		SDL_Surface* shadow = TTF_RenderUTF8_Blended(font_, txt.c_str(), SHADOW_CLR);
 		text_surface = empty_sdl_surface(shadow->w + SHADOW_OFFSET, shadow->h + SHADOW_OFFSET);
+		CLANG_DIAG_OFF("-Wunknown-pragmas")
+		CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
 		SDL_FillRect(text_surface, NULL,
 		             SDL_MapRGBA(text_surface->format, 255, 255, 255, SDL_ALPHA_TRANSPARENT));
+		CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
+		CLANG_DIAG_ON("-Wunknown-pragmas")
 
 		if (text_surface->format->BitsPerPixel != 32)
 			throw RenderError("SDL_TTF did not return a 32 bit surface for shadow text. Giving up!");
@@ -128,7 +133,7 @@ const Texture& SdlTtfFont::render(const std::string& txt,
 		throw RenderError(
 		   (boost::format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	return *texture_cache->insert(hash, std::unique_ptr<Texture>(new Texture(text_surface)));
+	return texture_cache->insert(hash, std::make_shared<Texture>(text_surface));
 }
 
 uint16_t SdlTtfFont::ascent(int style) const {

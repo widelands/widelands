@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,7 +75,8 @@ public:
 
 	///  Base of all exceptions that are caused by errors in the data that is
 	///  read.
-	struct DataError : public WException {
+	class DataError : public WException {
+	public:
 		DataError(char const* const fmt, ...) PRINTF_FORMAT(2, 3);
 	};
 #define data_error(...) DataError(__VA_ARGS__)

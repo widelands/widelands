@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 #include "base/wexception.h"
 #include "economy/request.h"
 #include "economy/wares_queue.h"
-#include "logic/map_objects/attackable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/wareworker.h"
@@ -49,9 +48,7 @@ struct WarehouseSupply;
 
 class WarehouseDescr : public BuildingDescr {
 public:
-	WarehouseDescr(const std::string& init_descname,
-	               const LuaTable& t,
-	               const EditorGameBase& egbase);
+	WarehouseDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
 	~WarehouseDescr() override {
 	}
 
@@ -71,7 +68,41 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(WarehouseDescr);
 };
 
-class Warehouse : public Building, public Attackable, public SoldierControl {
+/**
+ * Each ware and worker type has an associated per-warehouse
+ * stock policy that defines whether it will be stocked by this
+ * warehouse.
+ *
+ * \note The values of this enum are written directly into savegames,
+ * so be careful when changing them.
+ */
+enum class StockPolicy {
+	/**
+	 * The default policy allows stocking wares without any special priority.
+	 */
+	kNormal = 0,
+
+	/**
+	 * As long as there are warehouses with this policy for a ware, all
+	 * available unstocked supplies will be transferred to warehouses
+	 * with this policy.
+	 */
+	kPrefer = 1,
+
+	/**
+	 * If a ware has this stock policy, no more of this ware will enter
+	 * the warehouse.
+	 */
+	kDontStock = 2,
+
+	/**
+	 * Like \ref kDontStock, but in addition, existing stock of this ware
+	 * will be transported out of the warehouse over time.
+	 */
+	kRemove = 3,
+};
+
+class Warehouse : public Building {
 	friend class PortDock;
 	friend class MapBuildingdataPacket;
 
@@ -79,57 +110,23 @@ class Warehouse : public Building, public Attackable, public SoldierControl {
 
 public:
 	/**
-	 * Each ware and worker type has an associated per-warehouse
-	 * stock policy that defines whether it will be stocked by this
-	 * warehouse.
-	 *
-	 * \note The values of this enum are written directly into savegames,
-	 * so be careful when changing them.
-	 */
-	enum class StockPolicy {
-		/**
-	    * The default policy allows stocking wares without any special priority.
-	    */
-		kNormal = 0,
-
-		/**
-	    * As long as there are warehouses with this policy for a ware, all
-	    * available unstocked supplies will be transferred to warehouses
-	    * with this policy.
-	    */
-		kPrefer = 1,
-
-		/**
-	    * If a ware has this stock policy, no more of this ware will enter
-	    * the warehouse.
-	    */
-		kDontStock = 2,
-
-		/**
-	    * Like \ref kDontStock, but in addition, existing stock of this ware
-	    * will be transported out of the warehouse over time.
-	    */
-		kRemove = 3,
-	};
-
-	/**
 	 * Whether worker indices in count_workers() have to match exactly.
 	 */
 	enum class Match {
 		/**
-	    * Return the number of workers with matching indices.
-	    */
+		 * Return the number of workers with matching indices.
+		 */
 		kExact,
 
 		/**
-	    * Return the number of workers with matching indices or
-	    * which are more experienced workers of the given lower type.
-	    */
+		 * Return the number of workers with matching indices or
+		 * which are more experienced workers of the given lower type.
+		 */
 		kCompatible
 	};
 
-	Warehouse(const WarehouseDescr&);
-	virtual ~Warehouse();
+	explicit Warehouse(const WarehouseDescr&);
+	~Warehouse() override;
 
 	void load_finish(EditorGameBase&) override;
 
@@ -147,7 +144,7 @@ public:
 	/// * Conquers land if the the warehouse type is configured to do that.
 	/// * Sends a message to the player about the creation of this warehouse.
 	/// * Sets up @ref PortDock for ports
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 
 	void cleanup(EditorGameBase&) override;
 
@@ -173,29 +170,6 @@ public:
 	void insert_workers(DescriptionIndex, Quantity count);
 	void remove_workers(DescriptionIndex, Quantity count);
 
-	/* SoldierControl implementation */
-	std::vector<Soldier*> present_soldiers() const override;
-	std::vector<Soldier*> stationed_soldiers() const override {
-		return present_soldiers();
-	}
-	Quantity min_soldier_capacity() const override {
-		return 0;
-	}
-	Quantity max_soldier_capacity() const override {
-		return 4294967295U;
-	}
-	Quantity soldier_capacity() const override {
-		return max_soldier_capacity();
-	}
-	void set_soldier_capacity(Quantity /* capacity */) override {
-		throw wexception("Not implemented for a Warehouse!");
-	}
-	void drop_soldier(Soldier&) override {
-		throw wexception("Not implemented for a Warehouse!");
-	}
-	int outcorporate_soldier(EditorGameBase&, Soldier&) override;
-	int incorporate_soldier(EditorGameBase&, Soldier& soldier) override;
-
 	bool fetch_from_flag(Game&) override;
 
 	Quantity count_workers(const Game&, DescriptionIndex worker, const Requirements&, Match);
@@ -219,16 +193,6 @@ public:
 	std::vector<Quantity> calc_available_for_worker(Game&, DescriptionIndex index) const;
 
 	void enable_spawn(Game&, uint8_t worker_types_without_cost_index);
-	void disable_spawn(uint8_t worker_types_without_cost_index);
-
-	// Begin Attackable implementation
-	Player& owner() const override {
-		return Building::owner();
-	}
-	bool can_attack() override;
-	void aggressor(Soldier&) override;
-	bool attack(Soldier&) override;
-	// End Attackable implementation
 
 	void receive_ware(Game&, DescriptionIndex ware) override;
 	void receive_worker(Game&, Worker& worker) override;
@@ -244,18 +208,52 @@ public:
 		return portdock_;
 	}
 
+	const BuildingSettings* create_building_settings() const override;
+
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.
 	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
 
-	void log_general_info(const EditorGameBase&) override;
-
-protected:
-	/// Initializes the container sizes for the owner's tribe.
-	void init_containers(Player& owner);
+	void log_general_info(const EditorGameBase&) const override;
 
 private:
+	class SoldierControl : public Widelands::SoldierControl {
+	public:
+		explicit SoldierControl(Warehouse* warehouse) : warehouse_(warehouse) {
+		}
+
+		std::vector<Soldier*> present_soldiers() const override;
+		std::vector<Soldier*> stationed_soldiers() const override;
+		Quantity min_soldier_capacity() const override;
+		Quantity max_soldier_capacity() const override;
+		Quantity soldier_capacity() const override;
+		void set_soldier_capacity(Quantity capacity) override;
+		void drop_soldier(Soldier&) override;
+		int incorporate_soldier(EditorGameBase& game, Soldier& s) override;
+		int outcorporate_soldier(Soldier&) override;
+
+	private:
+		Warehouse* const warehouse_;
+	};
+
+	// A warehouse that conquers space can also be attacked.
+	class AttackTarget : public Widelands::AttackTarget {
+	public:
+		explicit AttackTarget(Warehouse* warehouse) : warehouse_(warehouse) {
+		}
+
+		bool can_be_attacked() const override;
+		void enemy_soldier_approaches(const Soldier&) const override;
+		Widelands::AttackTarget::AttackResult attack(Soldier*) const override;
+
+	private:
+		Warehouse* const warehouse_;
+	};
+
 	void init_portdock(EditorGameBase& egbase);
+
+	/// Initializes the container sizes for the owner's tribe.
+	void init_containers(const Player& owner);
 
 	/**
 	 * Plan to produce a certain worker type in this warehouse. This means
@@ -282,6 +280,8 @@ private:
 	void update_planned_workers(Game&, PlannedWorkers& pw);
 	void update_all_planned_workers(Game&);
 
+	AttackTarget attack_target_;
+	SoldierControl soldier_control_;
 	WarehouseSupply* supply_;
 
 	std::vector<StockPolicy> ware_policy_;
@@ -303,6 +303,6 @@ private:
 	// try to recreate itself
 	bool cleanup_in_progress_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WAREHOUSE_H

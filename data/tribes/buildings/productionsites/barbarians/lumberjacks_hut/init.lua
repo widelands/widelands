@@ -32,9 +32,8 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      forced_after = 180,
-      prohibited_till = 180,
-      logproducer = true
+      collects_ware_from_map = "log",
+      basic_amount = 1,
    },
 
    working_positions = {
@@ -45,13 +44,18 @@ tribes:new_productionsite_type {
       "log"
    },
 
+   indicate_workarea_overlaps = {
+      barbarians_rangers_hut = true,
+      barbarians_lumberjacks_hut = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
          descname = _"felling trees",
          actions = {
-            "sleep=25000", -- Sleeps shorter than any other tribes.
-            "worker=chop"
+            "callworker=harvest",
+            "sleep=20000"
          }
       },
    },
@@ -60,6 +64,6 @@ tribes:new_productionsite_type {
       title = _"No Trees",
       heading = _"Out of Trees",
       message = pgettext("barbarians_building", "The lumberjack working at this lumberjack’s hut can’t find any trees in his work area. You should consider dismantling or destroying the building or building a ranger’s hut."),
-      productivity_threshold = 66
+      productivity_threshold = 60
    },
 }

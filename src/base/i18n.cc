@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,7 +76,7 @@ char const* translate(const std::string& str) {
 /**
  * Set the localedir. This should usually only be done once
  */
-void set_localedir(std::string dname) {
+void set_localedir(const std::string& dname) {
 	localedir = dname;
 }
 
@@ -145,6 +145,8 @@ void init_locale() {
 		lang = getenv("LANGUAGE");
 		if (lang != nullptr) {
 			env_locale = lang;
+		} else {  // Finall fallback in case we cannot find out anything (#1784495)
+			env_locale = "en";
 		}
 	}
 	locale = "C";
@@ -157,7 +159,7 @@ void init_locale() {
  * Set the locale to the given string.
  * Code inspired by wesnoth.org
  */
-void set_locale(std::string name) {
+void set_locale(const std::string& name) {
 	const std::map<std::string, std::string> kAlternatives = {
 	   {"ar", "ar,ar_AR,ar_AE,ar_BH,ar_DZ,ar_EG,ar_IN,ar_IQ,ar_JO,ar_KW,ar_LB,ar_LY,ar_MA,ar_OM,ar_"
 	          "QA,ar_SA,ar_SD,ar_SY,ar_TN,ar_YE"},
@@ -288,15 +290,26 @@ void set_locale(std::string name) {
 		found = alt_str.find(',', 0);
 	}
 	if (leave_while) {
+		setenv("LC_ALL", locale.c_str(), 1);
 		setenv("LANG", locale.c_str(), 1);
 		setenv("LANGUAGE", locale.c_str(), 1);
 	} else {
-		log("No corresponding locale found - trying to set it via LANGUAGE=%s, LANG=%s\n",
-		    lang.c_str(), lang.c_str());
+		log("No corresponding locale found\n");
+		log(" - Set LANGUAGE, LANG and LC_ALL to '%s'\n", lang.c_str());
+
 		setenv("LANGUAGE", lang.c_str(), 1);
 		setenv("LANG", lang.c_str(), 1);
-		SETLOCALE(LC_MESSAGES, "");  // set locale according to the env. variables
-		                             // --> see  $ man 3 setlocale
+		setenv("LC_ALL", lang.c_str(), 1);
+
+		try {
+			SETLOCALE(LC_MESSAGES, "en_US.utf8");  // set locale according to the env. variables
+			                                       // --> see  $ man 3 setlocale
+			log(" - Set system locale to 'en_US.utf8' to make '%s' accessible to libintl\n",
+			    lang.c_str());
+		} catch (std::exception&) {
+			SETLOCALE(LC_MESSAGES, "");  // set locale according to the env. variables
+			                             // --> see  $ man 3 setlocale
+		}
 		// assume that it worked
 		// maybe, do another check with the return value (?)
 		locale = lang;
@@ -322,7 +335,8 @@ const std::string& get_locale() {
 }
 
 std::string localize_list(const std::vector<std::string>& items, ConcatenateWith listtype) {
-	std::string result = "";
+	i18n::Textdomain td("widelands");
+	std::string result;
 	for (std::vector<std::string>::const_iterator it = items.begin(); it != items.end(); ++it) {
 		if (it == items.begin()) {
 			result = *it;
@@ -352,4 +366,12 @@ std::string localize_list(const std::vector<std::string>& items, ConcatenateWith
 	}
 	return result;
 }
+
+std::string join_sentences(const std::string& sentence1, const std::string& sentence2) {
+	i18n::Textdomain td("widelands");
+	/** TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably
+	 * want to lose the blank space here. */
+	return (boost::format(pgettext("sentence_separator", "%1% %2%")) % sentence1 % sentence2).str();
 }
+
+}  // namespace i18n

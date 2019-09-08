@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2017 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,21 +21,18 @@
 #define WL_EDITOR_TOOLS_SET_ORIGIN_TOOL_H
 
 #include "editor/tools/tool.h"
-#include "logic/widelands.h"
 
 /// Sets the starting position of players.
 struct EditorSetOriginTool : public EditorTool {
 	EditorSetOriginTool() : EditorTool(*this, *this) {
 	}
 
-	int32_t handle_click_impl(const Widelands::World& world,
-	                          const Widelands::NodeAndTriangle<>& center,
+	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& eia,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
-	int32_t handle_undo_impl(const Widelands::World& world,
-	                         const Widelands::NodeAndTriangle<>& center,
+	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;

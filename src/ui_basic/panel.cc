@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,17 +20,14 @@
 #include "ui_basic/panel.h"
 
 #include "base/log.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
-#include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
-
-using namespace std;
+#include "wlapplication_options.h"
 
 namespace UI {
 
@@ -44,6 +41,7 @@ Panel* Panel::mousein_ = nullptr;
 bool Panel::allow_user_input_ = true;
 const Image* Panel::default_cursor_ = nullptr;
 const Image* Panel::default_cursor_click_ = nullptr;
+FxId Panel::click_fx_ = kNoSoundEffect;
 
 /**
  * Initialize a panel, link it into the parent's queue.
@@ -59,7 +57,7 @@ Panel::Panel(Panel* const nparent,
      last_child_(nullptr),
      mousein_child_(nullptr),
      focus_(nullptr),
-     flags_(pf_handle_mouse | pf_thinks | pf_visible),
+     flags_(pf_handle_mouse | pf_thinks | pf_visible | pf_handle_keypresses),
      x_(nx),
      y_(ny),
      w_(nw),
@@ -125,8 +123,12 @@ void Panel::free_children() {
 	// Scan-build claims this results in double free.
 	// This is a false positive.
 	// See https://bugs.launchpad.net/widelands/+bug/1198928
-	while (first_child_)
+	while (first_child_) {
+		Panel* next_child = first_child_->next_;
 		delete first_child_;
+		first_child_ = next_child;
+	}
+	first_child_ = nullptr;
 }
 
 /**
@@ -145,8 +147,9 @@ int Panel::do_run() {
 	app->set_mouse_lock(false);  // more paranoia :-)
 
 	Panel* forefather = this;
-	while (Panel* const p = forefather->parent_)
-		forefather = p;
+	while (forefather->parent_ != nullptr) {
+		forefather = forefather->parent_;
+	}
 
 	default_cursor_ = g_gr->images().get("images/ui_basic/cursor.png");
 	default_cursor_click_ = g_gr->images().get("images/ui_basic/cursor_click.png");
@@ -160,9 +163,8 @@ int Panel::do_run() {
 	// think() is called at most 15 times per second, that is roughly ever 66ms.
 	const uint32_t kGameLogicDelay = 1000 / 15;
 
-	// With the default of 33FPS, the game will be drawn every 33ms.
-	const uint32_t draw_delay =
-	   1000 / std::max(5, g_options.pull_section("global").get_int("maxfps", 30));
+	// With the default of 30FPS, the game will be drawn every 33ms.
+	const uint32_t draw_delay = 1000 / std::max(5, get_config_int("maxfps", 30));
 
 	static InputCallback input_callback = {Panel::ui_mousepress, Panel::ui_mouserelease,
 	                                       Panel::ui_mousemove,  Panel::ui_key,
@@ -177,23 +179,31 @@ int Panel::do_run() {
 		app->handle_input(&input_callback);
 
 		if (start_time >= next_think_time) {
-			if (app->should_die())
+			if (app->should_die()) {
 				end_modal<Returncodes>(Returncodes::kBack);
+			}
 
 			do_think();
 
-			if (flags_ & pf_child_die)
+			if (flags_ & pf_child_die) {
 				check_child_death();
+			}
+
 			next_think_time = start_time + kGameLogicDelay;
 		}
 
 		if (start_time >= next_draw_time) {
 			RenderTarget& rt = *g_gr->get_render_target();
 			forefather->do_draw(rt);
-			rt.blit(
-			   (app->get_mouse_position() - Vector2i(3, 7)).cast<float>(),
-			   WLApplication::get()->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
-			forefather->do_tooltip();
+			rt.blit((app->get_mouse_position() - Vector2i(3, 7)),
+			        app->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
+
+			if (is_modal()) {
+				do_tooltip();
+			} else {
+				forefather->do_tooltip();
+			}
+
 			g_gr->refresh();
 			next_draw_time = start_time + draw_delay;
 		}
@@ -259,6 +269,7 @@ void Panel::set_size(const int nw, const int nh) {
 void Panel::set_pos(const Vector2i n) {
 	x_ = n.x;
 	y_ = n.y;
+	position_changed();
 }
 
 /**
@@ -438,8 +449,24 @@ void Panel::draw_border(RenderTarget&) {
 /**
  * Draw overlays that appear over all child panels.
  * This can be used e.g. for debug information.
-*/
+ */
 void Panel::draw_overlay(RenderTarget&) {
+}
+
+/**
+ * Draw texture and color from the info if they have been specified.
+ */
+void Panel::draw_background(RenderTarget& dst, const UI::PanelStyleInfo& info) {
+	draw_background(dst, Recti(0, 0, get_w(), get_h()), info);
+}
+void Panel::draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo& info) {
+	if (info.image() != nullptr) {
+		dst.fill_rect(rect, RGBAColor(0, 0, 0, 255));
+		dst.tile(rect, info.image(), Vector2i(get_x(), get_y()));
+	}
+	if (info.color() != RGBAColor(0, 0, 0, 0)) {
+		dst.fill_rect(rect, info.color(), BlendMode::UseAlpha);
+	}
 }
 
 /**
@@ -463,7 +490,7 @@ void Panel::do_think() {
 
 /**
  * Get mouse position relative to this panel
-*/
+ */
 Vector2i Panel::get_mouse_position() const {
 	return (parent_ ? parent_->get_mouse_position() : WLApplication::get()->get_mouse_position()) -
 	       Vector2i(get_x() + get_lborder(), get_y() + get_tborder());
@@ -471,7 +498,7 @@ Vector2i Panel::get_mouse_position() const {
 
 /**
  * Set mouse position relative to this panel
-*/
+ */
 void Panel::set_mouse_pos(const Vector2i p) {
 	const Vector2i relative_p = p + Vector2i(get_x() + get_lborder(), get_y() + get_tborder());
 	if (parent_)
@@ -482,7 +509,7 @@ void Panel::set_mouse_pos(const Vector2i p) {
 
 /**
  * Center the mouse on this panel.
-*/
+ */
 void Panel::center_mouse() {
 	set_mouse_pos(Vector2i(get_w() / 2, get_h() / 2));
 }
@@ -501,9 +528,13 @@ void Panel::handle_mousein(bool) {
  * If the panel doesn't process the mouse-click, it is handed to the panel's
  * parent.
  *
- * \return true if the mouseclick was processed, flase otherwise
+ * \return true if the mouseclick was processed, false otherwise
  */
-bool Panel::handle_mousepress(const uint8_t, int32_t, int32_t) {
+bool Panel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
+		focus();
+		clicked();
+	}
 	return false;
 }
 
@@ -578,8 +609,7 @@ bool Panel::handle_textinput(const std::string& /* text */) {
  * false otherwise.
  */
 bool Panel::handle_tooltip() {
-	RenderTarget& rt = *g_gr->get_render_target();
-	return draw_tooltip(rt, tooltip());
+	return draw_tooltip(tooltip());
 }
 
 /**
@@ -615,7 +645,7 @@ void Panel::grab_mouse(bool const grab) {
 
 /**
  * Set if this panel can receive the keyboard focus
-*/
+ */
 void Panel::set_can_focus(bool const yes) {
 
 	if (yes)
@@ -648,8 +678,6 @@ void Panel::focus(const bool topcaller) {
 	if (!parent_ || this == modal_) {
 		return;
 	}
-	if (parent_->focus_ == this)
-		return;
 
 	parent_->focus_ = this;
 	parent_->focus(false);
@@ -689,13 +717,16 @@ void Panel::die() {
  * sound_handler.h in every UI subclass just for playing a 'click'
  */
 void Panel::play_click() {
-	g_sound_handler.play_fx("click", 128, PRIO_ALWAYS_PLAY);
+	g_sh->play_fx(SoundType::kUI, click_fx_);
 }
-void Panel::play_new_chat_message() {
-	g_sound_handler.play_fx("lobby_chat", 128, PRIO_ALWAYS_PLAY);
-}
-void Panel::play_new_chat_member() {
-	g_sound_handler.play_fx("lobby_freshmen", 128, PRIO_ALWAYS_PLAY);
+
+/**
+ * This needs to be called once after g_soundhandler has been instantiated and before play_click()
+ * is called. We do it this way so that we don't have to register the same sound every time we
+ * create a new panel.
+ */
+void Panel::register_click() {
+	click_fx_ = SoundHandler::register_fx(SoundType::kUI, "sound/click");
 }
 
 /**
@@ -708,10 +739,12 @@ void Panel::check_child_death() {
 		Panel* p = next;
 		next = p->next_;
 
-		if (p->flags_ & pf_die)
+		if (p->flags_ & pf_die) {
 			delete p;
-		else if (p->flags_ & pf_child_die)
+			p = nullptr;
+		} else if (p->flags_ & pf_child_die) {
 			p->check_child_death();
+		}
 	}
 
 	flags_ &= ~pf_child_die;
@@ -740,13 +773,13 @@ void Panel::do_draw_inner(RenderTarget& dst) {
  * Draw tooltip if required.
  *
  * \param dst RenderTarget for the parent Panel
-*/
+ */
 void Panel::do_draw(RenderTarget& dst) {
 	if (!is_visible())
 		return;
 
 	Recti outerrc;
-	Vector2i outerofs;
+	Vector2i outerofs = Vector2i::zero();
 
 	if (!dst.enter_window(Recti(Vector2i(x_, y_), w_, h_), &outerrc, &outerofs))
 		return;
@@ -822,7 +855,6 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 }
 
 bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mouse_pos) {
-
 	// Check if a child-panel is beneath the mouse and processes the event
 	for (Panel* child = first_child_; child; child = child->next_) {
 		if (!child->handles_mouse() || !child->is_visible()) {
@@ -835,16 +867,12 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mou
 			continue;
 		}
 		// Found a child at the position
-		if (child->do_mousewheel(
-		       which, x, y, rel_mouse_pos - Vector2i(child->get_x() + child->get_lborder(),
-		                                             child->get_y() + child->get_tborder()))) {
+		if (child->do_mousewheel(which, x, y,
+		                         rel_mouse_pos - Vector2i(child->get_x() + child->get_lborder(),
+		                                                  child->get_y() + child->get_tborder()))) {
 			return true;
 		}
-		// Break after the first hit panel in the list. The panels are ordered from top to bottom,
-		// so only the highest window at the current mouse coordinates receives the event
-		break;
 	}
-
 	return handle_mousewheel(which, x, y);
 }
 
@@ -881,6 +909,10 @@ bool Panel::do_mousemove(
 bool Panel::do_key(bool const down, SDL_Keysym const code) {
 	if (focus_ && focus_->do_key(down, code)) {
 		return true;
+	}
+
+	if (!handles_keypresses()) {
+		return false;
 	}
 
 	// If we handle text, it does not matter if we handled this key
@@ -958,7 +990,7 @@ Panel* Panel::ui_trackmouse(int32_t& x, int32_t& y) {
 /**
  * Input callback function. Pass the mouseclick event to the currently modal
  * panel.
-*/
+ */
 bool Panel::ui_mousepress(const uint8_t button, int32_t x, int32_t y) {
 	if (!allow_user_input_) {
 		return true;
@@ -986,7 +1018,7 @@ bool Panel::ui_mouserelease(const uint8_t button, int32_t x, int32_t y) {
 /**
  * Input callback function. Pass the mousemove event to the currently modal
  * panel.
-*/
+ */
 bool Panel::ui_mousemove(
    uint8_t const state, int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff) {
 	if (!allow_user_input_) {
@@ -1007,7 +1039,7 @@ bool Panel::ui_mousemove(
 /**
  * Input callback function. Pass the mousewheel event to the currently modal
  * panel.
-*/
+ */
 bool Panel::ui_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	if (!allow_user_input_) {
 		return true;
@@ -1051,26 +1083,30 @@ bool Panel::ui_textinput(const std::string& text) {
 /**
  * Draw the tooltip. Return true on success
  */
-bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
+bool Panel::draw_tooltip(const std::string& text) {
 	if (text.empty()) {
 		return false;
 	}
+
+	RenderTarget& dst = *g_gr->get_render_target();
 	std::string text_to_render = text;
 	if (!is_richtext(text_to_render)) {
-		text_to_render = as_tooltip(text);
+		text_to_render = as_richtext_paragraph(text_to_render, UI::FontStyle::kTooltip);
 	}
 
-	static const uint32_t TIP_WIDTH_MAX = 360;
-	const Image* rendered_text = g_fh1->render(text_to_render, TIP_WIDTH_MAX);
-	if (!rendered_text) {
+	constexpr uint32_t kTipWidthMax = 360;
+	std::shared_ptr<const UI::RenderedText> rendered_text =
+	   g_fh->render(text_to_render, kTipWidthMax);
+	if (rendered_text->rects.empty()) {
 		return false;
 	}
-	uint16_t tip_width = rendered_text->width() + 4;
-	uint16_t tip_height = rendered_text->height() + 4;
 
-	Rectf r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
-	const Vector2f tooltip_bottom_right = r.opposite_of_origin();
-	const Vector2f screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
+	const uint16_t tip_width = rendered_text->width() + 4;
+	const uint16_t tip_height = rendered_text->height() + 4;
+
+	Recti r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
+	const Vector2i tooltip_bottom_right = r.opposite_of_origin();
+	const Vector2i screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
 	if (screen_bottom_right.x < tooltip_bottom_right.x)
 		r.x -= 4 + r.w;
 	if (screen_bottom_right.y < tooltip_bottom_right.y)
@@ -1078,7 +1114,7 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-	dst.blit(r.origin() + Vector2f(2.f, 2.f), rendered_text);
+	rendered_text->draw(dst, r.origin() + Vector2i(2, 2));
 	return true;
 }
-}
+}  // namespace UI

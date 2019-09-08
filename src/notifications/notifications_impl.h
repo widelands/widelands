@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,8 @@ namespace Notifications {
 // Subscribes to a notification type and unsubscribes on destruction.
 template <typename T> class Subscriber {
 public:
-	Subscriber(uint32_t id, std::function<void(const T&)> callback) : id_(id), callback_(callback) {
+	Subscriber(uint32_t id, const std::function<void(const T&)>& callback)
+	   : id_(id), callback_(callback) {
 	}
 
 	~Subscriber();
@@ -82,7 +83,7 @@ public:
 		auto subscribers_it = std::find_if(
 		   subscribers.begin(), subscribers.end(), [&subscriber](const void* p_subscriber) {
 			   return static_cast<const Subscriber<T>*>(p_subscriber)->id_ == subscriber->id_;
-			});
+		   });
 
 		assert(subscribers_it != subscribers.end());
 		subscribers.erase(subscribers_it);

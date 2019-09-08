@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -172,7 +172,7 @@ char* gamestring_with_leading_zeros(uint32_t gametime) {
 	gamestringbuffer[4] = '0' + (time /= 10) % 6;
 	gamestringbuffer[2] = '0' + (time /= 6) % 10;
 	gamestringbuffer[1] = '0' + (time /= 10) % 10;
-	gamestringbuffer[0] = '0' + (time /= 10);
+	gamestringbuffer[0] = '0' + (time / 10);
 	return gamestringbuffer;
 }
 

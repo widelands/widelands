@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ public:
 
 	LuaGame() {
 	}
-	LuaGame(lua_State* L);
+	explicit LuaGame(lua_State* L);
 
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
@@ -57,10 +57,9 @@ public:
 	int get_time(lua_State*);
 	int get_desired_speed(lua_State*);
 	int set_desired_speed(lua_State*);
-	int get_allow_autosaving(lua_State*);
-	int set_allow_autosaving(lua_State*);
 	int get_allow_saving(lua_State*);
 	int set_allow_saving(lua_State*);
+	int get_type(lua_State*);
 
 	/*
 	 * Lua methods
@@ -82,8 +81,8 @@ public:
 
 	LuaEditor() {
 	}
-	LuaEditor(lua_State* L);
-	virtual ~LuaEditor() {
+	explicit LuaEditor(lua_State* L);
+	~LuaEditor() override {
 	}
 
 	void __persist(lua_State* L) override;
@@ -111,7 +110,7 @@ public:
 
 	LuaWorld() {
 	}
-	LuaWorld(lua_State* L);
+	explicit LuaWorld(lua_State* L);
 
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
@@ -147,7 +146,7 @@ public:
 
 	LuaTribes() {
 	}
-	LuaTribes(lua_State* L);
+	explicit LuaTribes(lua_State* L);
 
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
@@ -159,19 +158,21 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int new_carrier_type(lua_State* L);
 	int new_constructionsite_type(lua_State* L);
 	int new_dismantlesite_type(lua_State* L);
+	int new_immovable_type(lua_State* L);
+	int new_market_type(lua_State* L);
 	int new_militarysite_type(lua_State* L);
 	int new_productionsite_type(lua_State* L);
-	int new_trainingsite_type(lua_State* L);
-	int new_warehouse_type(lua_State* L);
-	int new_immovable_type(lua_State* L);
 	int new_ship_type(lua_State* L);
-	int new_ware_type(lua_State* L);
-	int new_carrier_type(lua_State* L);
 	int new_soldier_type(lua_State* L);
-	int new_worker_type(lua_State* L);
+	int new_trainingsite_type(lua_State* L);
 	int new_tribe(lua_State* L);
+	int new_ware_type(lua_State* L);
+	int new_warehouse_type(lua_State* L);
+	int new_worker_type(lua_State* L);
+	int add_custom_building(lua_State* L);
 
 	/*
 	 * C methods

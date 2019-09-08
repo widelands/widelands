@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "economy/ware_instance.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/worker_descr.h"
+#include "logic/widelands_geometry.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
@@ -65,20 +66,18 @@ class Worker : public Bob {
 		int32_t iparam3;
 		int32_t iparam4;
 		int32_t iparam5;
+		int32_t iparam6;
+		int32_t iparam7;
 		std::string sparam1;
 
 		std::vector<std::string> sparamv;
 	};
 
 public:
-	Worker(const WorkerDescr&);
-	virtual ~Worker();
+	explicit Worker(const WorkerDescr&);
+	~Worker() override;
 
-	Player& owner() const {
-		assert(get_owner());
-		return *get_owner();
-	}
-	PlayerImmovable* get_location(EditorGameBase& egbase) {
+	PlayerImmovable* get_location(const EditorGameBase& egbase) const {
 		return location_.get(egbase);
 	}
 	OPtr<PlayerImmovable> get_location() const {
@@ -115,7 +114,7 @@ public:
 	void schedule_incorporate(Game&);
 	void incorporate(Game&);
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
 	bool wakeup_flag_capacity(Game&, Flag&);
@@ -140,7 +139,7 @@ public:
 	}
 
 	// debug
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	// worker-specific tasks
 	void start_task_transfer(Game&, Transfer*);
@@ -169,6 +168,9 @@ public:
 	void start_task_leavebuilding(Game&, bool changelocation);
 	void start_task_fugitive(Game&);
 
+	void start_task_carry_trade_item(Game& game, int trade_id, ObjectPointer other_market);
+	void update_task_carry_trade_item(Game&);
+
 	void
 	start_task_geologist(Game&, uint8_t attempts, uint8_t radius, const std::string& subcommand);
 
@@ -176,13 +178,15 @@ public:
 
 protected:
 	virtual bool is_evict_allowed();
-	void draw_inner(const EditorGameBase& game,
-	                const Vector2f& point_on_dst,
-	                const float scale,
-	                RenderTarget* dst) const;
+	virtual void draw_inner(const EditorGameBase& game,
+	                        const Vector2f& point_on_dst,
+	                        const Widelands::Coords& coords,
+	                        const float scale,
+	                        RenderTarget* dst) const;
 	void draw(const EditorGameBase&,
 	          const TextToDraw& draw_text,
 	          const Vector2f& field_on_dst,
+	          const Widelands::Coords& coords,
 	          float scale,
 	          RenderTarget* dst) const override;
 	void init_auto_task(Game&) override;
@@ -208,6 +212,7 @@ public:
 	static const Task taskFugitive;
 	static const Task taskGeologist;
 	static const Task taskScout;
+	static const Task taskCarryTradeItem;
 
 private:
 	// task details
@@ -232,26 +237,54 @@ private:
 	void fugitive_update(Game&, State&);
 	void geologist_update(Game&, State&);
 	void scout_update(Game&, State&);
+	void carry_trade_item_update(Game&, State&);
 
 	// Program commands
 	bool run_mine(Game&, State&, const Action&);
 	bool run_breed(Game&, State&, const Action&);
 	bool run_createware(Game&, State&, const Action&);
-	bool run_setbobdescription(Game&, State&, const Action&);
 	bool run_findobject(Game&, State&, const Action&);
 	bool run_findspace(Game&, State&, const Action&);
 	bool run_walk(Game&, State&, const Action&);
-	bool run_animation(Game&, State&, const Action&);
+	bool run_animate(Game&, State&, const Action&);
 	bool run_return(Game&, State&, const Action&);
-	bool run_object(Game&, State&, const Action&);
+	bool run_callobject(Game&, State&, const Action&);
 	bool run_plant(Game&, State&, const Action&);
-	bool run_create_bob(Game&, State&, const Action&);
+	bool run_createbob(Game&, State&, const Action&);
 	bool run_removeobject(Game&, State&, const Action&);
-	bool run_geologist(Game&, State&, const Action&);
-	bool run_geologist_find(Game&, State&, const Action&);
+	bool run_repeatsearch(Game&, State&, const Action&);
+	bool run_findresources(Game&, State&, const Action&);
 	bool run_scout(Game&, State&, const Action&);
-	bool run_play_sound(Game&, State&, const Action&);
+	bool run_playsound(Game&, State&, const Action&);
 	bool run_construct(Game&, State&, const Action&);
+	bool run_terraform(Game&, State&, const Action&);
+
+	// Forester considers multiple spaces in findspace, unlike others.
+	int16_t findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game);
+
+	// List of places to visit (only if scout), plus a reminder to
+	// occasionally go just somewhere.
+	struct PlaceToScout {
+		PlaceToScout(const Coords pt) : randomwalk(false), scoutme(pt) {
+		}
+		// The variable scoutme should not be accessed when randomwalk is true.
+		// Initializing the scoutme variable with an obviously-wrong value.
+		PlaceToScout() : randomwalk(true), scoutme(-32100, -32100) {
+		}
+		const bool randomwalk;
+		const Coords scoutme;
+	};
+	std::vector<PlaceToScout> scouts_worklist;
+
+	// scout
+	void prepare_scouts_worklist(const Map& map, const Coords& hutpos);
+	void check_visible_sites(const Map& map, const Player& player);
+	void add_sites(Game& game,
+	               const Map& map,
+	               const Player& player,
+	               std::vector<ImmovableFound>& found_sites);
+	bool scout_random_walk(Game& game, const Map& map, State& state);
+	bool scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat);
 
 	OPtr<PlayerImmovable> location_;   ///< meta location of the worker
 	Economy* economy_;                 ///< economy this worker is registered in
@@ -292,6 +325,6 @@ public:
 	                               const TribesLegacyLookupTable& lookup_table,
 	                               uint8_t packet_version);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_H

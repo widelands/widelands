@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,6 @@
 #include "base/log.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -43,7 +42,7 @@
 
 using namespace Widelands;
 
-#define PLOT_HEIGHT 130
+#define PLOT_HEIGHT 145
 #define NR_BASE_DATASETS 11
 
 GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
@@ -51,7 +50,13 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
    : UI::UniqueWindow(&parent, "statistics_menu", &registry, 440, 400, _("General Statistics")),
      my_registry_(&registry),
      box_(this, 0, 0, UI::Box::Vertical, 0, 0, 5),
-     plot_(&box_, 0, 0, 430, PLOT_HEIGHT, kStatisticsSampleTime, WuiPlotArea::Plotmode::kAbsolute),
+     plot_(&box_,
+           0,
+           0,
+           430,
+           PLOT_HEIGHT,
+           Widelands::kStatisticsSampleTime,
+           WuiPlotArea::Plotmode::kAbsolute),
      selected_information_(0) {
 	assert(my_registry_);
 
@@ -108,13 +113,11 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	iterate_players_existing_novar(p, nr_players, game)++ plr_in_game;
 
 	iterate_players_existing_const(p, nr_players, game, player) {
-		const Image* player_image =
-		   playercolor_image(p - 1, g_gr->images().get("images/players/genstats_player.png"),
-		                     g_gr->images().get("images/players/genstats_player_pc.png"));
+		const Image* player_image = playercolor_image(p - 1, "images/players/genstats_player.png");
 		assert(player_image);
-		UI::Button& cb = *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25,
-		                                 g_gr->images().get("images/ui_basic/but4.png"), player_image,
-		                                 player->get_name().c_str());
+		UI::Button& cb =
+		   *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25, UI::ButtonStyle::kWuiMenu,
+		                   player_image, player->get_name().c_str());
 		cb.sigclicked.connect(boost::bind(&GeneralStatisticsMenu::cb_changed_to, this, p));
 		cb.set_perm_pressed(my_registry_->selected_players[p - 1]);
 
@@ -131,64 +134,62 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 
 	UI::Radiobutton* btn;
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
-	                       g_gr->images().get("images/wui/stats/genstats_landsize.png"), _("Land"),
-	                       &btn);
+	const Vector2i zero = Vector2i::zero();
+
+	radiogroup_.add_button(
+	   hbox2, zero, g_gr->images().get("images/wui/stats/genstats_landsize.png"), _("Land"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_nrworkers.png"),
 	                       _("Workers"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_nrbuildings.png"),
 	                       _("Buildings"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
-	                       g_gr->images().get("images/wui/stats/genstats_nrwares.png"), _("Wares"),
-	                       &btn);
+	radiogroup_.add_button(
+	   hbox2, zero, g_gr->images().get("images/wui/stats/genstats_nrwares.png"), _("Wares"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_productivity.png"),
 	                       _("Productivity"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_casualties.png"),
 	                       _("Casualties"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
-	                       g_gr->images().get("images/wui/stats/genstats_kills.png"), _("Kills"),
-	                       &btn);
+	radiogroup_.add_button(
+	   hbox2, zero, g_gr->images().get("images/wui/stats/genstats_kills.png"), _("Kills"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_msites_lost.png"),
 	                       _("Military buildings lost"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_msites_defeated.png"),
 	                       _("Military buildings defeated"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_civil_blds_lost.png"),
 	                       _("Civilian buildings lost"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, Vector2i(0, 0),
+	radiogroup_.add_button(hbox2, zero,
 	                       g_gr->images().get("images/wui/stats/genstats_militarystrength.png"),
 	                       _("Military"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
 	if (hook) {
-		radiogroup_.add_button(
-		   hbox2, Vector2i(0, 0), g_gr->images().get(cs_pic), cs_name.c_str(), &btn);
+		radiogroup_.add_button(hbox2, zero, g_gr->images().get(cs_pic), cs_name.c_str(), &btn);
 		hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 	}
 
@@ -197,9 +198,9 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 
 	box_.add(hbox2, UI::Box::Resizing::kFullSize);
 
-	box_.add(new WuiPlotAreaSlider(
-	            &box_, plot_, 0, 0, 100, 45, g_gr->images().get("images/ui_basic/but1.png")),
-	         UI::Box::Resizing::kFullSize);
+	WuiPlotAreaSlider* slider = new WuiPlotAreaSlider(&box_, plot_, 0, 0, 100, 45);
+	slider->changedto.connect(boost::bind(&WuiPlotArea::set_time_id, &plot_, _1));
+	box_.add(slider, UI::Box::Resizing::kFullSize);
 }
 
 GeneralStatisticsMenu::~GeneralStatisticsMenu() {
@@ -211,16 +212,9 @@ GeneralStatisticsMenu::~GeneralStatisticsMenu() {
 		PlayerNumber const nr_players = game.map().get_nrplayers();
 		iterate_players_existing_novar(p, nr_players, game) {
 			my_registry_->selected_players[p - 1] =
-			   cbs_[p - 1]->style() == UI::Button::Style::kPermpressed;
+			   cbs_[p - 1]->style() == UI::Button::VisualState::kPermpressed;
 		}
 	}
-}
-
-/**
- * called when the help button was clicked
- */
-// TODO(unknown): Implement help
-void GeneralStatisticsMenu::clicked_help() {
 }
 
 /*
@@ -230,7 +224,7 @@ void GeneralStatisticsMenu::cb_changed_to(int32_t const id) {
 	// This represents our player number
 	cbs_[id - 1]->toggle();
 	plot_.show_plot((id - 1) * ndatasets_ + selected_information_,
-	                cbs_[id - 1]->style() == UI::Button::Style::kPermpressed);
+	                cbs_[id - 1]->style() == UI::Button::VisualState::kPermpressed);
 }
 
 /*
@@ -241,7 +235,8 @@ void GeneralStatisticsMenu::radiogroup_changed(int32_t const id) {
 	   dynamic_cast<InteractiveGameBase&>(*get_parent()).game().get_general_statistics().size();
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		if (cbs_[i]) {
-			plot_.show_plot(i * ndatasets_ + id, cbs_[i]->style() == UI::Button::Style::kPermpressed);
+			plot_.show_plot(
+			   i * ndatasets_ + id, cbs_[i]->style() == UI::Button::VisualState::kPermpressed);
 			plot_.show_plot(i * ndatasets_ + selected_information_, false);
 		}
 	selected_information_ = id;

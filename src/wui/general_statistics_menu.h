@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,6 @@ private:
 	UI::Button* cbs_[kMaxPlayers];
 	uint32_t ndatasets_;
 
-	void clicked_help();
 	void cb_changed_to(int32_t);
 	void radiogroup_changed(int32_t);
 };

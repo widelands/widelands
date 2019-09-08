@@ -25,7 +25,10 @@ tribes:new_productionsite_type {
       },
    },
 
-   aihints = {},
+   aihints = {
+      collects_ware_from_map = "meat",
+      prohibited_till = 400
+   },
 
    working_positions = {
       empire_hunter = 1
@@ -35,13 +38,17 @@ tribes:new_productionsite_type {
       "meat"
    },
 
+   indicate_workarea_overlaps = {
+      empire_hunters_house = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _"hunting",
          actions = {
-            "sleep=35000",
-            "worker=hunt"
+            "callworker=hunt",
+            "sleep=35000"
          }
       },
    },

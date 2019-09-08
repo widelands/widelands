@@ -32,8 +32,8 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      forced_after = 1200,
-      prohibited_till = 900
+      basic_amount = 1,
+      prohibited_till = 590
    },
 
    working_positions = {
@@ -54,10 +54,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
          descname = pgettext("atlanteans_building", "baking bread"),
          actions = {
-            "sleep=35000",
             "return=skipped unless economy needs atlanteans_bread",
             "consume=water:2 blackroot_flour cornmeal",
-            "animate=working 30000",
+            "animate=working 35000",
+            "sleep=30000",
             "produce=atlanteans_bread:2"
          }
       },

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2017 by the Widelands Development Team
+ * Copyright (C) 2012-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,7 +46,7 @@ struct EditorToolAction {
 	                 Widelands::Map& m,
 	                 Widelands::NodeAndTriangle<> c,
 	                 EditorInteractive& p,
-	                 EditorActionArgs nargs)
+	                 const EditorActionArgs& nargs)
 	   : tool(t), i(ind), map(m), center(c), parent(p) {
 		args = new EditorActionArgs(parent);
 		*args = nargs;

@@ -34,12 +34,18 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      renews_map_resource = "meat",
-      prohibited_till = 900
+      supports_production_of = { "meat" },
+      prohibited_till = 510,
+      basic_amount = 1
    },
 
    working_positions = {
       barbarians_gamekeeper = 1
+   },
+
+   indicate_workarea_overlaps = {
+      barbarians_hunters_hut = true,
+      barbarians_gamekeepers_hut = false,
    },
 
    programs = {
@@ -47,8 +53,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "sleep=52500",
-            "worker=release"
+            "callworker=release",
+            "sleep=52500"
          }
       },
    },

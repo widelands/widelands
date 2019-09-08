@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,8 +31,8 @@ class GameFactory;
 
 class LuaEditorInterface : public LuaInterface {
 public:
-	LuaEditorInterface(Widelands::EditorGameBase* g);
-	virtual ~LuaEditorInterface();
+	explicit LuaEditorInterface(Widelands::EditorGameBase* g);
+	~LuaEditorInterface() override;
 
 	std::unique_ptr<LuaTable> run_script(const std::string& script) override;
 
@@ -42,8 +42,8 @@ private:
 
 class LuaGameInterface : public LuaInterface {
 public:
-	LuaGameInterface(Widelands::Game* g);
-	virtual ~LuaGameInterface();
+	explicit LuaGameInterface(Widelands::Game* g);
+	~LuaGameInterface() override;
 
 	// Returns a given hook if one is defined, otherwise returns 0
 	std::unique_ptr<LuaTable> get_hook(const std::string& name);

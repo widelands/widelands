@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -11,10 +11,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-04-06 19:07+0000\n"
-"PO-Revision-Date: 2017-04-10 12:33+0000\n"
-"Last-Translator: Omar Anwar <omaraglan91@yahoo.com>\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-05-10 07:32+0000\n"
+"PO-Revision-Date: 2019-05-10 07:33+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,6 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:95
 msgid "From Nemesis to Genesis"
 msgstr "من العداء إلي التكوين"
 
@@ -31,10 +30,9 @@ msgstr "من العداء إلي التكوين"
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr "بعد الهبوط علي جزيرة غامضة قريبه من اتلانتيس، الأطلانطسين الباقين يكافحون لإيجاد وصنع موطن لأنفسهم."
+msgstr "بعد الهبوط علي جزيرة غامضة قريبه من اتلانتيس، الأطلانطيين الباقين يكافحون لإيجاد وصنع موطن لأنفسهم."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
-#: ../../data/campaigns/campaigns.conf:67
 msgid "A Place to Call Home"
 msgstr "مكان ليُطلق عليه المنزل"
 
@@ -42,10 +40,9 @@ msgstr "مكان ليُطلق عليه المنزل"
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr "في هذا المشهد، مباني الإنتاج العالي بما فيها التعدين سوف تُقدم."
+msgstr "في هذا المشهد، يتم تقديم مباني الإنتاج العالي بما فيها التعدين."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
-#: ../../data/campaigns/campaigns.conf:72
 msgid "This Land is Our Land"
 msgstr "هذه الأرض هي أرضنا"
 
@@ -55,105 +52,21 @@ msgid ""
 "and will introduce fighting."
 msgstr "هذا الدرس التعليمي يشرح التحكم فى القوات الحربية ومباني التدريب وسوف يشرح القتال."
 
-#: ../../data/campaigns/campaigns.conf:27
-msgid "The Second Empire"
-msgstr "الإمبراطورية الثانية"
-
-#: ../../data/campaigns/campaigns.conf:29
-msgid "Barbarians"
-msgstr "البرابرة"
-
-#: ../../data/campaigns/campaigns.conf:31
-msgid "Easy. Introduces the Barbarians"
-msgstr "سهل. يُقدم البرابرة"
-
-#: ../../data/campaigns/campaigns.conf:32
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons, and warlord to an army that could match any enemy willing to"
-" rise against the ancient forests. Though at the end of his glorious reign, "
-"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord"
-" knew that. As his father instructed him, Thron left the capital of "
-"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
-"to the high hills where he buried the corpse of his father. There he swore "
-"to the gods and his father’s spirit that he’d return to re-established "
-"order. While his brothers have raged blind war against Thron and the few "
-"forces he left to secure the borders of Al’thunran, the young warlord seeks "
-"to reunite his ambitious brothers and force the tribes to march once again "
-"under a common banner."
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:35
-msgid "The Months of Exile"
-msgstr "أشهر المنفى"
-
-#: ../../data/campaigns/campaigns.conf:37
-msgid "Empire"
-msgstr "اﻹمبراطورية"
-
-#: ../../data/campaigns/campaigns.conf:39
-msgid "Easy. Introduces the Empire"
-msgstr "سهل. يُقدم الإمبراطورية"
-
-#: ../../data/campaigns/campaigns.conf:40
-msgid ""
-"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
-"soldiers to the frontier beyond the northern forests where Barbarian tribes "
-"were crossing onto land held by the Empire. His task was to defend the "
-"Empire’s land. At first, everything was calm. He even talked to a few "
-"Barbarian children and thought about a peaceful life – side by side with "
-"this archaic folk. He began to feel safer and his army began to drop their "
-"attention off the potential enemy. That was their undoing. One night in "
-"March his unprepared army was attacked by 100 Barbarian footmen and was "
-"completely scattered. Only with his bare life he and a handful of his "
-"soldiers survived."
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:43
-msgid "The Run for the Fire"
-msgstr "جري النار"
-
-#: ../../data/campaigns/campaigns.conf:45
-msgid "Atlanteans"
-msgstr "الاطلانتيين"
-
-#: ../../data/campaigns/campaigns.conf:47
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "تحدي. يُقدم الاطلانتيين"
-
-#: ../../data/campaigns/campaigns.conf:48
-msgid ""
-"When their God lost faith in the Atlanteans and drowned their island, one "
-"woman’s struggle for justice and a second chance for her people would become"
-" the stuff of legends. Leading the remaining Atlanteans into a new future in"
-" a new part of the World, Jundlina became the most powerful human of her "
-"time, but at a high cost: her humanity and soul."
-msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:78
-#: ../../data/campaigns/emp01.wmf/elemental:7
-msgid "The Strands of Malac’ Mor"
-msgstr "السواحل لـ ملك 'مور"
-
-#: ../../data/campaigns/campaigns.conf:83
-#: ../../data/campaigns/emp02.wmf/elemental:9
-msgid "An Outpost for Exile"
-msgstr "نقطة مراقبة للمنفي"
-
-#: ../../data/campaigns/campaigns.conf:88
-#: ../../data/campaigns/campaigns.conf:100
-#: ../../data/campaigns/dummy.wmf/elemental:7
+#: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr "لم تنتهى بعد"
 
-#: ../../data/campaigns/dummy.wmf/elemental:9
+#: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "لا أحد"
 
-#: ../../data/campaigns/dummy.wmf/elemental:10
+#: ../../data/campaigns/dummy.wmf/elemental:12
 msgid "Sorry, this map is not yet implemented."
 msgstr "عذراً، هذه الخريطة لم تنتهي بعد."
+
+#: ../../data/campaigns/emp01.wmf/elemental:7
+msgid "The Strands of Malac’ Mor"
+msgstr "السواحل لـ ملك 'مور"
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -164,6 +77,10 @@ msgid ""
 " an unknown desert strand and save his people. For now."
 msgstr "بعد خسارة معركة هامة ضد البرابرة الذي أدت إلى فُقدان جزء كبير من أراضي الإمبراطورية، يترك\" لوتيوس\" فريميل لبدء حياة جديدة. ولكن  مصيره  يأخذ سفينته إلى عاصفة شديدة، مما دمرها تقريباً. فقط الكثير من الحظ أنقذه هو تمكن من أن يُرسي سفينته المتضررة علي شواطئ صحراء غير معروفة وينقذ شعبه. إلي الأن."
 
+#: ../../data/campaigns/emp02.wmf/elemental:9
+msgid "An Outpost for Exile"
+msgstr "نقطة مراقبة للمنفي"
+
 #: ../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
 "Finally the ship was repaired, so Lutius and his people returned to the "
@@ -172,8 +89,53 @@ msgid ""
 "they set out to explore this new living space."
 msgstr "أخيراً تم إصلاح السفينة، حيث \"لوتيوس\" وشعبه عاد إلى السعي إلى إيجاد مكان جيد للبدء من جديد. منذ بضعة أيام في وقت لاحق، هبطوا على أرض الجزيرة الخضراء، والبحر الأبيض المتوسط، تبدو وكأنها الجنة. بسعادة غامرة، خرجوا لإستكشاف هذه المساحة المعيشية الجديدة."
 
+#: ../../data/campaigns/emp03.wmf/elemental:10
+msgid ""
+"On their way home to defend the Empire, the crew of Lutius was surprised by "
+"the will of the gods."
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/elemental:10
+msgid ""
+"After returning home, Lutius and his crew are faced with an economy in "
+"shambles. Resolving the bottlenecks in the economy will be of utmost "
+"importance to reinstate the glory of the empire."
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/elemental:8
+msgid "The Great Stormflood"
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/elemental:10
+msgid ""
+"In 1362, the quiet, peaceful life of the inhabitants of the Northern Frisian"
+" Islands was disrupted by one of the greatest storm floods in human memory: "
+"Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
+" a sign from the Gods that the Frisian community on the island of Langeness "
+"is not wanted here?"
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/elemental:11
+msgid ""
+"This scenario is set in a historical context, but most of the story line is "
+"fiction."
+msgstr ""
+
+#: ../../data/campaigns/fri02.wmf/elemental:8
+msgid "An Icy Welcome"
+msgstr ""
+
+#: ../../data/campaigns/fri02.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe have arrived in the North. But their arrival between "
+"the frozen steppes and the snow-covered mountains is less than welcome…"
+msgstr ""
+
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:15
 msgid "Basic Control"
 msgstr "تحكم أساسي"
 
@@ -184,7 +146,6 @@ msgid ""
 msgstr "في هذا الدرس التعليمي، سوف تتعلم كيف تتحرك في \"الأرض الواسعة\"و كيف تَبني المدن والطرق."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:19
 msgid "Warfare"
 msgstr "الحرب"
 
@@ -195,7 +156,6 @@ msgid ""
 msgstr "في هذا الدرس التعليمي، سوف تتعلم أسرار الحرب: كيف تُجند الجُنود، كَيف تُدربهم وكَيف تقودهم في المعركة."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:23
 msgid "Seafaring"
 msgstr "الإبحار"
 
@@ -206,7 +166,6 @@ msgid ""
 msgstr "في هذا الدرس التعليمي، أنت سوف تتعلم عن الإبحار، حيث سوف تتعلم كيف تتعامل مع السفن و المرافئ."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
-#: ../../data/campaigns/tutorials.conf:27
 msgid "Economy"
 msgstr "الإقتصاد"
 
@@ -284,7 +243,7 @@ msgid ""
 "came from the sky and touched down in its center. Is this a sign of the "
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
-msgstr "بضعه اميال بعيداً عن ساحل جريون عند جزيره غير مُسماه. لم يكن من أسباب تدفعك للذهاب هناك، ولكن بالبارحه سقطت كره نار من السماء وتلامست مع الجزيرة تماماً فى المُنتصف، بدت وكأنها آتيه من الجحيم، تقول لنفسك بصوت خافت داخل عقلك \"هل هذه إشاره من الألهه؟\" وتصدق ما يريد عقلك أن يكون، وتأمل بداخلك أن تكون أنت وقبيلتك أول الواصلين لكنز هذه الجزيرة، قبل ان تفعل باقي القبائل."
+msgstr "بضعه اميال بعيداً عن ساحل جريون عند جزيره غير مُسماه. لم يكن من أسباب تدفعك للذهاب هناك، ولكن بالبارحة سقطت كرة نار من السماء وتلامست مع الجزيرة تماماً فى المُنتصف، بدت وكأنها آتيه من الجحيم، تقول لنفسك بصوت خافت داخل عقلك \"هل هذه إشارة من الألهه؟\" وتصدق ما يريد عقلك أن يكون، وتأمل بداخلك أن تكون أنت وقبيلتك أول الواصلين لكنز هذه الجزيرة، قبل ان تفعل باقي القبائل."
 
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:11
 msgid ""
@@ -296,7 +255,7 @@ msgstr ""
 
 #: ../../data/maps/Crater.wmf/elemental:8
 msgid "Crater"
-msgstr "الفوهه"
+msgstr "الفوهة"
 
 #: ../../data/maps/Crater.wmf/elemental:10
 msgid ""
@@ -304,11 +263,11 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "طويلاً بعد إصطدام نيزك فى جبلين، ظهرت موارد عند الفوهة. والأن تتقاتل قبيلتين للحصول علي تلك الموارد."
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "عبور الأفق"
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "إملأ سُفُنَك بالرجال الأشداء وأبحر نحو الأفق."
 
@@ -397,7 +356,7 @@ msgid ""
 "your tribe woke up on this island among fire and lava? Until now it seems as"
 " if you are alone, but no-one knows what might happen if you met an opposing"
 " tribe?"
-msgstr "أهذا إختبار من الألهه أم خطة شريرة من شخص أخر، أنت وقبيلتك تستيقظون علي هذه الجزيرة بين النيران ومقذوفات البراكين؟ حتى الأن يبدو أنك وحدك، ولكن لا أحد يعلم، ما قد يحدث إذا واجهت قبيلة خصمه؟"
+msgstr "أهذا إختبار من الألهه أم خطة شريرة من شخص أخر، أنت وقبيلتك تستيقظون علي هذه الجزيرة بين النيران ومقذوفات البراكين؟ حتى الأن يبدو أنك وحدك، ولكن لا أحد يعلم، ما قد يحدث إذا واجهت قبيلة معادية؟"
 
 #: ../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
@@ -427,7 +386,7 @@ msgstr ""
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:8
 msgid "Full Moon"
-msgstr ""
+msgstr "القمر الكامل"
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:10
 msgid ""
@@ -454,7 +413,7 @@ msgstr "شبه الجزيرة الذهبية"
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:10
 msgid "Two empires race for the treasures of a legendary peninsula…"
-msgstr "أمبراطورتين يتسابقون علي الكنز في شبه الجزيرة الأسطورية..."
+msgstr "أمبراطورتيين يتسابقون علي الكنز في شبه الجزيرة الأسطورية..."
 
 #: ../../data/maps/Ice_wars.wmf/elemental:8
 msgid "Ice wars"
@@ -478,7 +437,7 @@ msgid ""
 "After an impact of an asteroid and the following harsh winter, three isles "
 "are connected by ice and stone, setting an end to the peaceful coexistence "
 "of three tribes."
-msgstr "بعد سقوط كويكب متلو بشتاء قاسى، وَصَلَ الثلج والحجاره بين 3 جزر وبعضها البعض، مُعلِنَاً بذلك إنهاء حقبه جميله من السلام بين 3 قبائل ، وبدأ حقبه لعينه من الحروب المتتاليه."
+msgstr "بعد سقوط كويكب متلو بشتاء قاسي، وَصَلَت الثلج والحجارة بين 3 جزر وبعضها البعض، مُعلِنَاً بذلك إنهاء حقبة جميلة من السلام بين 3 قبائل ، وبدأ حقبة لعينة من الحروب المتتالية."
 
 #: ../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"
@@ -550,7 +509,7 @@ msgstr ""
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
-msgstr "حلم الجزيره"
+msgstr "حلم الجزيرة"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:9
 msgid ""
@@ -558,7 +517,7 @@ msgid ""
 " where two or more groups try to reach the center island as fast as "
 "possible, to be the first erecting a castle on the top of the central "
 "mountain."
-msgstr "منافسه خاصه فى الثقافه الاطلنطيه مُسماه بـ \"حُلم الجزيره\"، حيث تتنافس مجموعتان او اكثر فى سرعه الوصول الى الجزيره المركزيه، ثم بناء قلعه على اعلى نقطه فى الجبل المركزى."
+msgstr "منافسه خاصة في الثقافة الاطلنطية مُسماه بـ \"حُلم الجزيرة\"، حيث تتنافس مجموعتان او أكثر فى سرعة الوصول الي الجزيرة المركزية، ثم بناء قلعة علي أعلي نقطة في الجبل المركزى."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
@@ -609,7 +568,7 @@ msgid ""
 "building a single ship, players are advised to make ports and shipyards a "
 "priority – expeditions are universally useful and are often the fastest way "
 "to gold deposits."
-msgstr "كل لاعب لديه عقبه مُخِتَلَفَه لتخطيها، ودائماً يوجد اكثر من طريقه لتخطيها. فبينما يمكن هزم الذكاء الصناعى هنا بدون حتى صناعه سفينه واحده، يُنصَح اللاعبون بجعل المراسى ومستودعات السفن اولويه - البعثات مفيده بشكل عام وغالباً ما تكون الوسيله الاسرع لودائع الذهب"
+msgstr "كل لاعب لديه عقبة مُخِتَلَفَة لتخطيها، ودائماً يوجد أكثر من طريقه لتخطيها. فبينما يمكن هزم الذكاء الصناعي هنا بدون حتى صناعة سفينة واحدة، يُنصَح اللاعبون بجعل المراسي ومستودعات السفن أولوية - البعثات مفيده بشكل عام وغالباً ما تكون الوسيلة الأسرع لودائع الذهب."
 
 #: ../../data/maps/Riverlands.wmf/elemental:8
 msgid "Riverlands"
@@ -619,7 +578,7 @@ msgstr ""
 msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
-msgstr "ارض غامضه، اراضيها مُختلفه البنيه الجيولوجيه، والتى يشقها جميعاً حِفِنَه من الانهار الكبيره."
+msgstr "أرض غامضة، أراضيها مليئة بِإختلافات البنية الجيولوجية، والتي يشقها جميعاً حِفِنَة من الأنهار الكبيرة."
 
 #: ../../data/maps/Sun_of_Fire.wmf/elemental:8
 msgid "The Ancient Sun of Fire"
@@ -707,7 +666,7 @@ msgstr ""
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be"
 " no other way but to occupy the land of your enemies."
-msgstr "إختبار غريب آخر من الالهه. يبدو انه لا طريق للجانب اﻵخر سوى بإحتلال اراضى اعدائك."
+msgstr "إختبار غريب آخر من الالهة. يبدو أنه لا طريق للجانب اﻵخر سوى بإحتلال أراضي أعدائك."
 
 #: ../../data/maps/The_Nile_v2.wmf/elemental:8
 msgid "The Nile"
@@ -744,7 +703,7 @@ msgstr ""
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr "فى هذه المناطق الجبليه إستقر اميران. والان يحاولان التوسع بمملكتيهما غير مدركين بحقيقه انهما ليسا وحدهما!"
+msgstr "فى هذه المناطق الجبلية إستقر أمِيران. والأن يحاولان التوسع بمملكتيهما غير مدركين بحقيقة أنهما ليسا وحدهما!"
 
 #: ../../data/maps/The_Thaw.wmf/elemental:8
 msgid "The Thaw"
@@ -837,7 +796,7 @@ msgstr ""
 
 #: ../../data/maps/Two_Frontiers.wmf/elemental:10
 msgid "A multiplayer battle map on a small circle-shaped island."
-msgstr "خريطه معارك متعدده اللاعبين فى فى جزيره دائريه صغيره."
+msgstr "خريطة معارك متعددة اللاعبين في في جزيرة دائرية صغيرة."
 
 #: ../../data/maps/Volcanic_Winter.wmf/elemental:8
 msgid "Volcanic Winter"

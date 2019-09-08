@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,9 +26,9 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
+#include "graphic/font_handler.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
@@ -44,25 +44,32 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
    : FullscreenMenuLoadMapOrGame(),
      checkbox_space_(25),
      // Less padding for big fonts; space is tight.
-     checkbox_padding_(UI::g_fh1->fontset()->size_offset() > 0 ? 0 : 2 * padding_),
+     checkbox_padding_(UI::g_fh->fontset()->size_offset() > 0 ? 0 : 2 * padding_),
 
      // Main title
-     title_(this, 0, 0, _("Choose a map"), UI::Align::kCenter),
+     title_(this,
+            0,
+            0,
+            0,
+            0,
+            _("Choose a map"),
+            UI::Align::kCenter,
+            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
      checkboxes_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
-     table_(this, tablex_, tabley_, tablew_, tableh_),
+     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
      map_details_(this,
                   right_column_x_,
                   tabley_,
                   get_right_column_w(right_column_x_),
                   tableh_ - buth_ - 4 * padding_,
-                  MapDetails::Style::kFsMenu),
+                  UI::PanelStyle::kFsMenu),
 
-     basedir_("maps"),
+     scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
+     basedir_(kMapsDir),
      settings_(settings),
      ctrl_(ctrl),
      has_translated_mapname_(false) {
 	curdir_ = basedir_;
-	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	if (settings_->settings().multiplayer) {
 		back_.set_tooltip(_("Return to the multiplayer game setup"));
 	} else {
@@ -84,7 +91,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 
 	// Must be initialized before tag checkboxes
 	cb_dont_localize_mapnames_ =
-	   new UI::Checkbox(hbox, Vector2i(0, 0), _("Show original map names"));
+	   new UI::Checkbox(hbox, Vector2i::zero(), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 	cb_dont_localize_mapnames_->changedto.connect(
 	   boost::bind(&FullscreenMenuMapSelect::fill_table, boost::ref(*this)));
@@ -114,8 +121,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	add_tag_checkbox(hbox, "3teams", localize_tag("3teams"));
 	add_tag_checkbox(hbox, "4teams", localize_tag("4teams"));
 	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
-
-	scenario_types_ = settings_->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
 
 	table_.focus();
 	fill_table();
@@ -184,7 +189,7 @@ void FullscreenMenuMapSelect::clicked_ok() {
 
 bool FullscreenMenuMapSelect::set_has_selection() {
 	bool has_selection = table_.has_selection();
-	ok_.set_enabled(has_selection);
+	ok_.set_enabled(has_selection && maps_data_.at(table_.get_selected()).nrplayers > 0);
 
 	if (!has_selection) {
 		map_details_.clear();
@@ -303,7 +308,7 @@ FullscreenMenuMapSelect::add_tag_checkbox(UI::Box* box, std::string tag, std::st
 	int32_t id = tags_ordered_.size();
 	tags_ordered_.push_back(tag);
 
-	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i(0, 0), displ_name);
+	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i::zero(), displ_name);
 	cb->changedto.connect(boost::bind(&FullscreenMenuMapSelect::tagbox_changed, this, id, _1));
 
 	box->add(cb, UI::Box::Resizing::kFullSize);

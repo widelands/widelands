@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,15 +24,11 @@
 
 #include "base/macros.h"
 #include "editor/tools/action_args.h"
-#include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "logic/editor_game_base.h"
 #include "logic/widelands_geometry.h"
 
 class EditorInteractive;
-namespace Widelands {
-class Map;
-class World;
-}
 
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:
@@ -50,23 +46,21 @@ public:
 
 	enum ToolIndex { First, Second, Third };
 	int32_t handle_click(ToolIndex i,
-	                     const Widelands::World& world,
 	                     const Widelands::NodeAndTriangle<>& center,
 	                     EditorInteractive& parent,
 	                     EditorActionArgs* args,
 	                     Widelands::Map* map) {
 		return (i == First ? *this : i == Second ? second_ : third_)
-		   .handle_click_impl(world, center, parent, args, map);
+		   .handle_click_impl(center, parent, args, map);
 	}
 
 	int32_t handle_undo(ToolIndex i,
-	                    const Widelands::World& world,
 	                    const Widelands::NodeAndTriangle<>& center,
 	                    EditorInteractive& parent,
 	                    EditorActionArgs* args,
 	                    Widelands::Map* map) {
 		return (i == First ? *this : i == Second ? second_ : third_)
-		   .handle_undo_impl(world, center, parent, args, map);
+		   .handle_undo_impl(center, parent, args, map);
 	}
 
 	const Image* get_sel(const ToolIndex i) {
@@ -86,19 +80,25 @@ public:
 	virtual EditorActionArgs format_args_impl(EditorInteractive& parent) {
 		return EditorActionArgs(parent);
 	}
-	virtual int32_t handle_click_impl(const Widelands::World& world,
-	                                  const Widelands::NodeAndTriangle<>&,
+	virtual int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
 	                                  EditorInteractive&,
 	                                  EditorActionArgs*,
 	                                  Widelands::Map*) = 0;
-	virtual int32_t handle_undo_impl(const Widelands::World&,
-	                                 const Widelands::NodeAndTriangle<>&,
+	virtual int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>&,
 	                                 EditorInteractive&,
 	                                 EditorActionArgs*,
 	                                 Widelands::Map*) {
 		return 0;
 	}  // non unduable tools don't need to implement this.
 	virtual const Image* get_sel_impl() const = 0;
+
+	// Gives the tool the chance to modify the nodecaps to change what will be
+	// displayed as build help.
+	virtual Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+	                                                   const Widelands::EditorGameBase&) {
+		return fcoords.field->nodecaps();
+	}
+
 	virtual bool operates_on_triangles() const {
 		return false;
 	}

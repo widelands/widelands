@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,8 +34,10 @@ class World;
 class TrainingSiteDescr : public ProductionSiteDescr {
 public:
 	TrainingSiteDescr(const std::string& init_descname,
+	                  const std::string& msgctxt,
 	                  const LuaTable& table,
-	                  const EditorGameBase& egbase);
+	                  const Tribes& tribes,
+	                  const World& world);
 	~TrainingSiteDescr() override {
 	}
 
@@ -148,7 +150,7 @@ private:
  *        surrounding strongholds, the training site will burn even if it
  *        contains soldiers!
  */
-class TrainingSite : public ProductionSite, public SoldierControl {
+class TrainingSite : public ProductionSite {
 	friend class MapBuildingdataPacket;
 	MO_DESCR(TrainingSiteDescr)
 	friend struct ::TrainingSiteWindow;
@@ -167,9 +169,9 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 	};
 
 public:
-	TrainingSite(const TrainingSiteDescr&);
+	explicit TrainingSite(const TrainingSiteDescr&);
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 
@@ -189,17 +191,6 @@ public:
 
 	void set_economy(Economy* e) override;
 
-	// Begin implementation of SoldierControl
-	std::vector<Soldier*> present_soldiers() const override;
-	std::vector<Soldier*> stationed_soldiers() const override;
-	Quantity min_soldier_capacity() const override;
-	Quantity max_soldier_capacity() const override;
-	Quantity soldier_capacity() const override;
-	void set_soldier_capacity(Quantity capacity) override;
-	void drop_soldier(Soldier&) override;
-	int incorporate_soldier(EditorGameBase&, Soldier&) override;
-	// End implementation of SoldierControl
-
 	int32_t get_pri(enum TrainingAttribute atr);
 	void set_pri(enum TrainingAttribute atr, int32_t prio);
 
@@ -208,10 +199,30 @@ public:
 	void training_successful(TrainingAttribute type, uint32_t level);
 	void training_done();
 
+	const BuildingSettings* create_building_settings() const override;
+
 protected:
 	void program_end(Game&, ProgramResult) override;
 
 private:
+	class SoldierControl : public Widelands::SoldierControl {
+	public:
+		explicit SoldierControl(TrainingSite* training_site) : training_site_(training_site) {
+		}
+
+		std::vector<Soldier*> present_soldiers() const override;
+		std::vector<Soldier*> stationed_soldiers() const override;
+		Quantity min_soldier_capacity() const override;
+		Quantity max_soldier_capacity() const override;
+		Quantity soldier_capacity() const override;
+		void set_soldier_capacity(Quantity capacity) override;
+		void drop_soldier(Soldier&) override;
+		int incorporate_soldier(EditorGameBase& game, Soldier& s) override;
+
+	private:
+		TrainingSite* const training_site_;
+	};
+
 	void update_soldier_request();
 	static void
 	request_soldier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
@@ -225,6 +236,7 @@ private:
 	void drop_stalled_soldiers(Game&);
 	Upgrade* get_upgrade(TrainingAttribute);
 
+	SoldierControl soldier_control_;
 	/// Open requests for soldiers. The soldiers can be under way or unavailable
 	Request* soldier_request_;
 
@@ -276,6 +288,6 @@ struct NoteTrainingSiteSoldierTrained {
 	   : ts(init_ts), player(init_player) {
 	}
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_TRAININGSITE_H

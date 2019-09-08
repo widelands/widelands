@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,6 @@
 #include <stdint.h>
 
 #include "logic/queue_cmd_ids.h"
-#include <stdint.h>
 
 class FileRead;
 class FileWrite;
@@ -70,7 +69,7 @@ constexpr uint32_t kCommandQueueBucketSize = 65536;  // Make this a power of two
  * the same for all parallel simulation.
  */
 struct Command {
-	Command(const uint32_t init_duetime) : duetime_(init_duetime) {
+	explicit Command(const uint32_t init_duetime) : duetime_(init_duetime) {
 	}
 	virtual ~Command();
 
@@ -96,7 +95,7 @@ private:
  * for all instances of a game to ensure parallel simulation.
  */
 struct GameLogicCommand : public Command {
-	GameLogicCommand(uint32_t const init_duetime) : Command(init_duetime) {
+	explicit GameLogicCommand(uint32_t const init_duetime) : Command(init_duetime) {
 	}
 
 	// Write these commands to a file (for savegames)
@@ -131,7 +130,7 @@ class CmdQueue {
 	};
 
 public:
-	CmdQueue(Game&);
+	explicit CmdQueue(Game&);
 	~CmdQueue();
 
 	/// Add a command to the queue. Takes ownership.
@@ -152,6 +151,6 @@ private:
 	using CommandsContainer = std::vector<std::priority_queue<CmdItem>>;
 	CommandsContainer cmds_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_CMD_QUEUE_H

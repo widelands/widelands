@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,7 +81,7 @@ struct BaseImmovable : public MapObject {
 		BIG        ///< big building
 	};
 
-	BaseImmovable(const MapObjectDescr&);
+	explicit BaseImmovable(const MapObjectDescr&);
 
 	virtual int32_t get_size() const = 0;
 	virtual bool get_passable() const = 0;
@@ -105,6 +105,7 @@ struct BaseImmovable : public MapObject {
 	virtual void draw(uint32_t gametime,
 	                  TextToDraw draw_text,
 	                  const Vector2f& point_on_dst,
+	                  const Coords& coords,
 	                  float scale,
 	                  RenderTarget* dst) = 0;
 
@@ -176,7 +177,7 @@ protected:
 	const MapObjectDescr::OwnerType owner_type_;
 
 	/// Buildcost for externally constructible immovables (for ship construction)
-	/// \see ActConstruction
+	/// \see ActConstruct
 	Buildcost buildcost_;
 
 	std::string species_;
@@ -207,7 +208,7 @@ public:
 	/// display information about it.
 	Immovable(const ImmovableDescr&,
 	          const Widelands::BuildingDescr* former_building_descr = nullptr);
-	~Immovable();
+	~Immovable() override;
 
 	Coords get_position() const {
 		return position_;
@@ -224,12 +225,13 @@ public:
 		increment_program_pointer();
 	}
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 	void draw(uint32_t gametime,
 	          TextToDraw draw_text,
 	          const Vector2f& point_on_dst,
+	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
 
@@ -261,7 +263,7 @@ protected:
 
 /* GCC 4.0 has problems with friend declarations: It doesn't allow
  * substructures of friend classes private access but we rely on this behaviour
- * for ImmovableProgram::ActConstruction. As a dirty workaround, we make the
+ * for ImmovableProgram::ActConstruct. As a dirty workaround, we make the
  * following variables public for this versions but keep the protected for
  * other GCC versions.
  * See the related bug lp:688832.
@@ -316,6 +318,7 @@ private:
 	void draw_construction(uint32_t gametime,
 	                       TextToDraw draw_text,
 	                       const Vector2f& point_on_dst,
+	                       const Widelands::Coords& coords,
 	                       float scale,
 	                       RenderTarget* dst);
 };
@@ -329,15 +332,9 @@ private:
  * also adjusted automatically.
  */
 struct PlayerImmovable : public BaseImmovable {
-	PlayerImmovable(const MapObjectDescr&);
-	virtual ~PlayerImmovable();
+	explicit PlayerImmovable(const MapObjectDescr&);
+	~PlayerImmovable() override;
 
-	Player* get_owner() const {
-		return owner_;
-	}
-	Player& owner() const {
-		return *owner_;
-	}
 	Economy* get_economy() const {
 		return economy_;
 	}
@@ -363,7 +360,7 @@ struct PlayerImmovable : public BaseImmovable {
 		return workers_;
 	}
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	/**
 	 * These functions are called when a ware or worker arrives at
@@ -383,7 +380,7 @@ struct PlayerImmovable : public BaseImmovable {
 	void set_owner(Player*) override;
 
 protected:
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
 private:
@@ -402,6 +399,6 @@ protected:
 public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_IMMOVABLE_H

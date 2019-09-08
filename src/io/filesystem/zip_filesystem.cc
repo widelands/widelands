@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -154,7 +154,7 @@ bool ZipFilesystem::is_writable() const {
  * pathname) in the results. There doesn't seem to be an even remotely
  * cross-platform way of doing this
  */
-std::set<std::string> ZipFilesystem::list_directory(const std::string& path_in) {
+FilenameSet ZipFilesystem::list_directory(const std::string& path_in) const {
 	assert(path_in.size());  //  prevent invalid read below
 
 	std::string path = basedir_in_zip_file_;
@@ -197,7 +197,7 @@ std::set<std::string> ZipFilesystem::list_directory(const std::string& path_in) 
  * Returns true if the given file exists, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
-bool ZipFilesystem::file_exists(const std::string& path) {
+bool ZipFilesystem::file_exists(const std::string& path) const {
 	try {
 		unzGoToFirstFile(zip_file_->read_handle());
 	} catch (...) {
@@ -217,8 +217,14 @@ bool ZipFilesystem::file_exists(const std::string& path) {
 	assert(path_in.size());
 
 	for (;;) {
-		unzGetCurrentFileInfo(zip_file_->read_handle(), &file_info, filename_inzip,
-		                      sizeof(filename_inzip), nullptr, 0, nullptr, 0);
+		const int32_t success =
+		   unzGetCurrentFileInfo(zip_file_->read_handle(), &file_info, filename_inzip,
+		                         sizeof(filename_inzip), nullptr, 0, nullptr, 0);
+
+		// Handle corrupt files
+		if (success != UNZ_OK) {
+			return false;
+		}
 
 		std::string complete_filename = zip_file_->strip_basename(filename_inzip);
 
@@ -256,15 +262,21 @@ bool ZipFilesystem::is_directory(const std::string& path) {
  * Create a sub filesystem out of this filesystem
  */
 FileSystem* ZipFilesystem::make_sub_file_system(const std::string& path) {
+	if (path == ".") {
+		return new ZipFilesystem(zip_file_, basedir_in_zip_file_);
+	}
 	if (!file_exists(path)) {
 		throw wexception(
 		   "ZipFilesystem::make_sub_file_system: The path '%s' does not exist in zip file '%s'.",
-		   path.c_str(), zip_file_->path().c_str());
+		   (basedir_in_zip_file_.empty() ? path : basedir_in_zip_file_ + "/" + path).c_str(),
+		   zip_file_->path().c_str());
 	}
 	if (!is_directory(path)) {
-		throw wexception("ZipFilesystem::make_sub_file_system: "
-		                 "The path '%s' needs to be a directory in zip file '%s'.",
-		                 path.c_str(), zip_file_->path().c_str());
+		throw wexception(
+		   "ZipFilesystem::make_sub_file_system: The path '%s' needs to be a directory in zip file "
+		   "'%s'.",
+		   (basedir_in_zip_file_.empty() ? path : basedir_in_zip_file_ + "/" + path).c_str(),
+		   zip_file_->path().c_str());
 	}
 
 	std::string localpath = path;
@@ -282,7 +294,10 @@ FileSystem* ZipFilesystem::make_sub_file_system(const std::string& path) {
 // see Filesystem::create
 FileSystem* ZipFilesystem::create_sub_file_system(const std::string& path, Type const type) {
 	if (file_exists(path)) {
-		throw wexception("ZipFilesystem::create_sub_file_system: Sub file system already exists.");
+		throw wexception(
+		   "ZipFilesystem::create_sub_file_system: Path '%s' already exists in zip file %s.",
+		   (basedir_in_zip_file_.empty() ? path : basedir_in_zip_file_ + "/" + path).c_str(),
+		   zip_file_->path().c_str());
 	}
 
 	if (type != FileSystem::DIR)
@@ -498,10 +513,10 @@ ZipFilesystem::ZipStreamRead::~ZipStreamRead() {
 size_t ZipFilesystem::ZipStreamRead::data(void* read_data, size_t bufsize) {
 	int copied = unzReadCurrentFile(zip_file_->read_handle(), read_data, bufsize);
 	if (copied < 0) {
-		throw new DataError("Failed to read from zip file %s", zip_file_->path().c_str());
+		throw DataError("Failed to read from zip file %s", zip_file_->path().c_str());
 	}
 	if (copied == 0) {
-		throw new DataError("End of file reaced while reading zip %s", zip_file_->path().c_str());
+		throw DataError("End of file reached while reading zip %s", zip_file_->path().c_str());
 	}
 	return copied;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@ namespace Widelands {
 // end a scenario successfully.
 class Objective {
 public:
-	Objective(const std::string& init_name)
+	explicit Objective(const std::string& init_name)
 	   : name_(init_name),
 	     descname_(init_name),
 	     descr_(_("This objective has no description.")),
@@ -85,6 +85,6 @@ private:
 	bool visible_;
 	bool done_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_OBJECTIVE_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,7 +58,7 @@ private:
 	};
 
 	template <typename T> struct Capsule : public BaseCapsule {
-		Capsule(const T& init_m) : m(init_m) {
+		explicit Capsule(const T& init_m) : m(init_m) {
 		}
 
 		bool check(const MapObject& obj) const override {
@@ -186,6 +186,6 @@ private:
 	int32_t min;
 	int32_t max;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_REQUIREMENTS_H

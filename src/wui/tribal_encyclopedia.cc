@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017 by the Widelands Development Team
+ * Copyright (C) 2016-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
 		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
 		cr->push_arg(tribe.name());
 		upcast(Widelands::Game, game, &parent.egbase());
-		if (game->game_controller()->get_game_type() == GameController::GameType::SINGLEPLAYER) {
+		if (game->game_controller()->get_game_type() == GameController::GameType::kSingleplayer) {
 			cr->push_arg("singleplayer");
 		} else {
 			cr->push_arg("multiplayer");

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -122,7 +122,7 @@ CoordPath::CoordPath(const Map& map, const Path& path) {
 
 /// After which step does the node appear in this path?
 /// \return -1 if node is not part of this path.
-int32_t CoordPath::get_index(Coords const c) const {
+int32_t CoordPath::get_index(const Coords& c) const {
 	for (uint32_t i = 0; i < coords_.size(); ++i)
 		if (coords_[i] == c)
 			return i;
@@ -198,4 +198,4 @@ void CoordPath::append(const CoordPath& tail) {
 	path_.insert(path_.end(), tail.path_.begin(), tail.path_.end());
 	coords_.insert(coords_.end(), tail.coords_.begin() + 1, tail.coords_.end());
 }
-}
+}  // namespace Widelands

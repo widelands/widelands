@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,11 +22,11 @@
 #include <boost/format.hpp>
 
 #include "base/macros.h"
+#include "io/profile.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 
@@ -78,8 +78,9 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 						if (tribe.has_building(index)) {
 							player->allow_building_type(index, allowed);
 						} else {
-							throw GameDataError("tribe %s does not define building type \"%s\"",
-							                    tribe.name().c_str(), name);
+							log("WARNING: MapAllowedBuildingTypesPacket - tribe %s does not define "
+							    "building type \"%s\"\n",
+							    tribe.name().c_str(), name);
 						}
 					}
 				} catch (const WException& e) {
@@ -118,4 +119,4 @@ void MapAllowedBuildingTypesPacket::write(FileSystem& fs, EditorGameBase& egbase
 
 	prof.write("allowed_building_types", false, fs);
 }
-}
+}  // namespace Widelands

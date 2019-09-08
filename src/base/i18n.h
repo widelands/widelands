@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ void release_textdomain();
 /// released when the object goes out of scope. This is exception-safe, unlike
 /// calling grab_textdomain and release_textdomain directly.
 struct Textdomain {
-	Textdomain(const std::string& name) {
+	explicit Textdomain(const std::string& name) {
 		grab_textdomain(name);
 	}
 	~Textdomain() {
@@ -52,16 +52,25 @@ struct Textdomain {
 };
 
 void init_locale();
-void set_locale(std::string);
+void set_locale(const std::string&);
 const std::string& get_locale();
 
-void set_localedir(std::string);
+void set_localedir(const std::string&);
 const std::string& get_localedir();
 
-// Localize a list of 'items'. The last 2 items are concatenated with "and" or
-// "or", depending on 'concatenate_with'.
 enum class ConcatenateWith { AND, OR, AMPERSAND, COMMA };
+/**
+ * Localize a list of 'items'. The last 2 items are concatenated with "and" or
+ * "or" etc, depending on 'concatenate_with'.
+ */
 std::string localize_list(const std::vector<std::string>& items, ConcatenateWith concatenate_with);
-}
+
+/**
+ * Joins 2 sentences together. Use this rather than manually concatenating
+ * a blank space, because some languages don't use blank spaces.
+ */
+std::string join_sentences(const std::string& sentence1, const std::string& sentence2);
+
+}  // namespace i18n
 
 #endif  // end of include guard: WL_BASE_I18N_H

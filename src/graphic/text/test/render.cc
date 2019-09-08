@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@
 #include "graphic/image_cache.h"
 #include "graphic/text/rt_render.h"
 #include "graphic/text/test/paths.h"
-#include "graphic/texture_cache.h"
+#include "graphic/text/texture_cache.h"
 #include "io/filesystem/layered_filesystem.h"
 
 StandaloneRenderer::StandaloneRenderer() {

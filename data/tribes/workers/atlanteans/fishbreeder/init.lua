@@ -11,7 +11,7 @@ animations = {
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {11, 23}, 20)
+add_directional_animation(animations, "walk", dirname, "walk", {11, 23}, 20)
 
 tribes:new_worker_type {
    msgctxt = "atlanteans_worker",
@@ -29,10 +29,10 @@ tribes:new_worker_type {
 
    programs = {
       breed = {
-         "findspace size:any radius:7 breed resource:fish",
-         "walk coords",
-         "animation freeing 3000", -- Play a freeing animation
-         "breed fish 1",
+         "findspace=size:any radius:7 breed resource:fish",
+         "walk=coords",
+         "animate=freeing 13500", -- Play a freeing animation
+         "breed=fish 1",
          "return"
       }
    },

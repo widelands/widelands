@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ public:
 	// and can be deleted.
 	enum { DONE = 0, YIELDED = LUA_YIELD };
 
-	LuaCoroutine(lua_State* L);
+	explicit LuaCoroutine(lua_State* L);
 	virtual ~LuaCoroutine();
 
 	// Returns either 'DONE' or 'YIELDED'.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,10 +83,11 @@ void TerrainProgram::add_vertex(const FieldsToDraw::Field& field, const Vector2f
 	back.texture_offset_y = texture_offset.y;
 }
 
-void TerrainProgram::draw(uint32_t gametime,
-                          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
-                          const FieldsToDraw& fields_to_draw,
-                          float z_value) {
+void TerrainProgram::draw(
+   uint32_t gametime,
+   const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+   const FieldsToDraw& fields_to_draw,
+   float z_value) {
 	// This method expects that all terrains have the same dimensions and that
 	// all are packed into the same texture atlas, i.e. all are in the same GL
 	// texture. It does not check for this invariance for speeds sake.

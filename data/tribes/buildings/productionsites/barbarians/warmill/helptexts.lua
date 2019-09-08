@@ -1,6 +1,3 @@
--- This include can be removed when all help texts have been defined.
-include "tribes/scripting/help/global_helptexts.lua"
-
 function building_helptext_lore()
    -- TRANSLATORS: Lore helptext for a building
    return pgettext("barbarians_building", "‘A new warrior’s ax brings forth the best in its wielder – or the worst in its maker.’")
@@ -18,7 +15,7 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("barbarians_building", "The Barbarian war mill is their most advanced production site for weapons. As such it needs to be upgraded from an ax workshop.")
+   return pgettext("barbarians_building", "The Barbarian war mill is their most advanced production site for weapons. As such you will need to enhance an ax workshop in order to get one.")
 end
 
 function building_helptext_performance()

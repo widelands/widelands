@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,13 +36,8 @@ void FileWrite::clear() {
 	filepos_ = 0;
 }
 
-void FileWrite::write(FileSystem& fs, char const* const filename) {
+void FileWrite::write(FileSystem& fs, const std::string& filename) {
 	fs.write(filename, data_, length_);
-	clear();
-}
-
-void FileWrite::write_append(RealFSImpl& fs, char const* const filename) {
-	fs.write(filename, data_, length_, true);
 	clear();
 }
 

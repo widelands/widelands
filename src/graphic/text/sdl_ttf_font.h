@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,8 @@
 
 #include <SDL_ttf.h>
 
+#include "graphic/text/texture_cache.h"
 #include "graphic/texture.h"
-#include "graphic/texture_cache.h"
 
 namespace RT {
 
@@ -51,7 +51,8 @@ public:
 	}
 
 	virtual void dimensions(const std::string&, int, uint16_t*, uint16_t*) = 0;
-	virtual const Texture& render(const std::string&, const RGBColor& clr, int, TextureCache*) = 0;
+	virtual std::shared_ptr<const Image>
+	render(const std::string&, const RGBColor& clr, int, TextureCache*) = 0;
 
 	virtual uint16_t ascent(int) const = 0;
 	virtual TTF_Font* get_ttf_font() const = 0;
@@ -61,10 +62,11 @@ public:
 class SdlTtfFont : public IFont {
 public:
 	SdlTtfFont(TTF_Font* ttf, const std::string& face, int ptsize, std::string* ttf_memory_block);
-	virtual ~SdlTtfFont();
+	~SdlTtfFont() override;
 
 	void dimensions(const std::string&, int, uint16_t* w, uint16_t* h) override;
-	const Texture& render(const std::string&, const RGBColor& clr, int, TextureCache*) override;
+	std::shared_ptr<const Image>
+	render(const std::string&, const RGBColor& clr, int, TextureCache*) override;
 	uint16_t ascent(int) const override;
 	TTF_Font* get_ttf_font() const override {
 		return font_;

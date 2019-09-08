@@ -12,7 +12,6 @@ macro(_parse_common_args ARGS)
     USES_SDL2
     USES_SDL2_IMAGE
     USES_SDL2_MIXER
-    USES_SDL2_NET
     USES_SDL2_TTF
     USES_ZLIB
     USES_ICU
@@ -41,7 +40,7 @@ endfunction(wl_include_directories TARGET DIR)
 # it works is different. SYSTEM includes silence warnings for included headers etc.
 function(wl_include_system_directories TARGET DIR)
   _include_directories_internal(${TARGET} ${DIR} TRUE)
-endfunction(wl_include_system_directories TARGET_DIR)
+endfunction(wl_include_system_directories TARGET DIR)
 
 # Add common compile tasks, like includes and libraries to link against for third party
 # libraries, and codecheck hook for sources.
@@ -127,11 +126,6 @@ macro(_common_compile_tasks)
     target_link_libraries(${NAME} ${SDL2MIXER_LIBRARY})
   endif()
 
-  if(ARG_USES_SDL2_NET)
-    wl_include_system_directories(${NAME} ${SDL2NET_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDL2NET_LIBRARY})
-  endif()
-
   if(ARG_USES_SDL2_IMAGE)
     wl_include_system_directories(${NAME} ${SDL2IMAGE_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDL2IMAGE_LIBRARY})
@@ -184,6 +178,12 @@ endfunction()
 
 # Common test target definition.
 function(wl_test NAME)
+
+  if (NOT OPTION_BUILD_TESTS)
+    return()
+  endif()
+
+
   _parse_common_args("${ARGN}")
 
   add_executable(${NAME} ${ARG_SRCS})

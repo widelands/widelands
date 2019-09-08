@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,8 +23,8 @@
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "ui_basic/mouse_constants.h"
-#include "wlapplication.h"
 
 namespace UI {
 
@@ -44,7 +44,7 @@ Scrollbar::Scrollbar(Panel* const parent,
                      int32_t const y,
                      uint32_t const w,
                      uint32_t const h,
-                     const Image* button_background,
+                     UI::PanelStyle style,
                      bool const horiz)
    : Panel(parent, x, y, w, h),
      horizontal_(horiz),
@@ -54,21 +54,21 @@ Scrollbar::Scrollbar(Panel* const parent,
      pagesize_(5),
      buttonsize_(kSize),
      steps_(100),
-     pressed_(None),
+     pressed_(Area::None),
      time_nextact_(0),
      knob_grabdelta_(0),
      pic_minus_(g_gr->images().get(horiz ? "images/ui_basic/scrollbar_left.png" :
                                            "images/ui_basic/scrollbar_up.png")),
      pic_plus_(g_gr->images().get(horiz ? "images/ui_basic/scrollbar_right.png" :
                                           "images/ui_basic/scrollbar_down.png")),
-     pic_buttons_(button_background) {
+     button_style_(g_gr->styles().scrollbar_style(style)) {
 	set_thinks(true);
 	layout();
 }
 
 /**
  * Change the number of steps of the scrollbar.
-*/
+ */
 void Scrollbar::set_steps(int32_t steps) {
 	if (steps < 1)
 		steps = 1;
@@ -104,7 +104,7 @@ void Scrollbar::set_singlestepsize(uint32_t singlestepsize) {
 
 /**
  * Change the number of steps a pageup/down will scroll.
-*/
+ */
 void Scrollbar::set_pagesize(int32_t const pagesize) {
 	pagesize_ = pagesize < 1 ? 1 : pagesize;
 	layout();
@@ -134,7 +134,7 @@ Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y) {
 
 	// Out of panel
 	if (x < 0 || x >= static_cast<int32_t>(get_w()) || y < 0 || y >= static_cast<int32_t>(get_h()))
-		return None;
+		return Area::None;
 
 	// Normalize coordinates
 	if (horizontal_) {
@@ -148,23 +148,23 @@ Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y) {
 	int32_t knobsize = get_knob_size();
 
 	if (y < static_cast<int32_t>(buttonsize_))
-		return Minus;
+		return Area::Minus;
 
 	if (y < knob - knobsize / 2)
-		return MinusPage;
+		return Area::MinusPage;
 
 	if (y < knob + knobsize / 2)
-		return Knob;
+		return Area::Knob;
 
 	if (y < extent - static_cast<int32_t>(buttonsize_))
-		return PlusPage;
+		return Area::PlusPage;
 
-	return Plus;
+	return Area::Plus;
 }
 
 /**
  * Return the center of the knob, in pixels, depending on the current position.
-*/
+ */
 uint32_t Scrollbar::get_knob_pos() {
 	assert(0 != steps_);
 	uint32_t result = buttonsize_ + get_knob_size() / 2;
@@ -175,7 +175,7 @@ uint32_t Scrollbar::get_knob_pos() {
 
 /**
  * Change the position according to knob movement.
-*/
+ */
 void Scrollbar::set_knob_pos(int32_t pos) {
 	uint32_t knobsize = get_knob_size();
 	int32_t extent = horizontal_ ? get_w() : get_h();
@@ -212,20 +212,20 @@ void Scrollbar::action(Area const area) {
 	int32_t pos = 0;
 
 	switch (area) {
-	case Minus:
+	case Area::Minus:
 		diff = -singlestepsize_;
 		break;
-	case MinusPage:
+	case Area::MinusPage:
 		diff = -pagesize_;
 		break;
-	case Plus:
+	case Area::Plus:
 		diff = singlestepsize_;
 		break;
-	case PlusPage:
+	case Area::PlusPage:
 		diff = pagesize_;
 		break;
-	case Knob:
-	case None:
+	case Area::Knob:
+	case Area::None:
 		return;
 	}
 
@@ -233,14 +233,14 @@ void Scrollbar::action(Area const area) {
 	set_scrollpos(pos);
 }
 
-void Scrollbar::draw_button(RenderTarget& dst, Area area, const Rectf& r) {
-	dst.tile(r.cast<int>(), pic_buttons_, Vector2i(get_x(), get_y()));
+void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
+	draw_background(dst, r.cast<int>(), *button_style_);
 
 	// Draw the picture
 	const Image* pic = nullptr;
-	if (area == Minus)
+	if (area == Area::Minus)
 		pic = pic_minus_;
-	else if (area == Plus)
+	else if (area == Area::Plus)
 		pic = pic_plus_;
 
 	if (pic) {
@@ -250,8 +250,8 @@ void Scrollbar::draw_button(RenderTarget& dst, Area area, const Rectf& r) {
 		int blit_height = image_scale * pic->height();
 
 		dst.blitrect_scale(
-		   Rectf(r.origin() + Vector2f((r.w - blit_width) / 2.f, (r.h - blit_height) / 2.f),
-		         blit_width, blit_height),
+		   Rectf(r.origin() + Vector2i((r.w - blit_width) / 2, (r.h - blit_height) / 2), blit_width,
+		         blit_height),
 		   pic, Recti(0, 0, pic->width(), pic->height()), 1., BlendMode::UseAlpha);
 	}
 
@@ -260,52 +260,52 @@ void Scrollbar::draw_button(RenderTarget& dst, Area area, const Rectf& r) {
 
 	if (area != pressed_) {
 		// top edge
-		dst.brighten_rect(Rectf(r.origin(), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.origin(), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// left edge
-		dst.brighten_rect(Rectf(r.origin() + Vector2f(0, 2), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.origin() + Vector2i(0, 2), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// bottom edge
-		dst.fill_rect(Rectf(r.origin() + Vector2f(2, r.h - 2), r.w - 2, 1), black);
-		dst.fill_rect(Rectf(r.origin() + Vector2f(1, r.h - 1), r.w - 1, 1), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(2, r.h - 2), r.w - 2, 1), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(1, r.h - 1), r.w - 1, 1), black);
 		// right edge
-		dst.fill_rect(Rectf(r.origin() + Vector2f(r.w - 2, 2), 1, r.h - 2), black);
-		dst.fill_rect(Rectf(r.origin() + Vector2f(r.w - 1, 1), 1, r.h - 1), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(r.w - 2, 2), 1, r.h - 2), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(r.w - 1, 1), 1, r.h - 1), black);
 	} else {
 		// bottom edge
 		dst.brighten_rect(
-		   Rectf(r.origin() + Vector2f(0, r.h - 2), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		   Recti(r.origin() + Vector2i(0, r.h - 2), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// right edge
 		dst.brighten_rect(
-		   Rectf(r.origin() + Vector2f(r.w - 2, 0), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
+		   Recti(r.origin() + Vector2i(r.w - 2, 0), 2, r.h - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// top edge
-		dst.fill_rect(Rectf(r.origin(), r.w - 1, 1), black);
-		dst.fill_rect(Rectf(r.origin() + Vector2f(0, 1), r.w - 2, 1), black);
+		dst.fill_rect(Recti(r.origin(), r.w - 1, 1), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(0, 1), r.w - 2, 1), black);
 		// left edge
-		dst.fill_rect(Rectf(r.origin(), 1, r.h - 1), black);
-		dst.fill_rect(Rectf(r.origin() + Vector2f(1, 0), 1, r.h - 2), black);
+		dst.fill_rect(Recti(r.origin(), 1, r.h - 1), black);
+		dst.fill_rect(Recti(r.origin() + Vector2i(1, 0), 1, r.h - 2), black);
 	}
 }
 
-void Scrollbar::draw_area(RenderTarget& dst, Area area, const Rectf& r) {
+void Scrollbar::draw_area(RenderTarget& dst, Area area, const Recti& r) {
 	//  background
 	dst.brighten_rect(r, area == pressed_ ? 2 * MOUSE_OVER_BRIGHT_FACTOR : MOUSE_OVER_BRIGHT_FACTOR);
 	if (horizontal_) {
 		//  top edge
-		dst.brighten_rect(Rectf(r.x, r.y, r.w - 1.f, 1.f), -BUTTON_EDGE_BRIGHT_FACTOR);
-		dst.brighten_rect(Rectf(r.x, r.y + 1.f, r.w - 2.f, 1.f), -BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.x, r.y, r.w - 1, 1), -BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.x, r.y + 1, r.w - 2, 1), -BUTTON_EDGE_BRIGHT_FACTOR);
 		//  bottom edge
-		dst.brighten_rect(Rectf(r.x, r.h - 2.f, r.w, 2.f), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.x, r.h - 2, r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 	} else {
 		//  right edge
-		dst.brighten_rect(Rectf(r.w - 2.f, r.y, 2.f, r.h), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.w - 2, r.y, 2, r.h), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  left edge
-		dst.brighten_rect(Rectf(r.x, r.y, 1.f, r.h - 1.f), -BUTTON_EDGE_BRIGHT_FACTOR);
-		dst.brighten_rect(Rectf(r.x + 1.f, r.y, 1.f, r.h - 2.f), -BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.x, r.y, 1, r.h - 1), -BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(r.x + 1, r.y, 1, r.h - 2), -BUTTON_EDGE_BRIGHT_FACTOR);
 	}
 }
 
 /**
  * Draw the scrollbar.
-*/
+ */
 void Scrollbar::draw(RenderTarget& dst) {
 	if (!is_enabled()) {
 		return;  // Don't draw a scrollbar that doesn't do anything
@@ -317,56 +317,58 @@ void Scrollbar::draw(RenderTarget& dst) {
 		if ((2 * buttonsize_ + knobsize) > static_cast<uint32_t>(get_w())) {
 			// Our owner allocated too little space
 			if (static_cast<uint32_t>(get_w()) >= 2 * buttonsize_) {
-				draw_button(dst, Minus, Rectf(0, 0, get_w() / 2, get_h()));
-				draw_button(dst, Plus, Rectf(get_w() - buttonsize_, 0, get_w() / 2, get_h()));
+				draw_button(dst, Area::Minus, Recti(0, 0, get_w() / 2, get_h()));
+				draw_button(dst, Area::Plus, Recti(get_w() - buttonsize_, 0, get_w() / 2, get_h()));
 			} else {
-				draw_button(dst, Minus, Rectf(0.f, 0.f, get_w(), get_h()));
+				draw_button(dst, Area::Minus, Recti(0, 0, get_w(), get_h()));
 			}
 			return;
 		}
 
-		draw_button(dst, Minus, Rectf(0, 0, buttonsize_, get_h()));
-		draw_button(dst, Plus, Rectf(get_w() - buttonsize_, 0, buttonsize_, get_h()));
-		draw_button(dst, Knob, Rectf(knobpos - knobsize / 2.f, 0, knobsize, get_h()));
+		draw_button(dst, Area::Minus, Recti(0, 0, buttonsize_, get_h()));
+		draw_button(dst, Area::Plus, Recti(get_w() - buttonsize_, 0, buttonsize_, get_h()));
+		draw_button(dst, Area::Knob, Recti(knobpos - knobsize / 2, 0, knobsize, get_h()));
 
 		assert(buttonsize_ + knobsize / 2 <= knobpos);
-		draw_area(
-		   dst, MinusPage, Rectf(buttonsize_, 0, knobpos - buttonsize_ - knobsize / 2, get_h()));
+		draw_area(dst, Area::MinusPage,
+		          Recti(buttonsize_, 0, knobpos - buttonsize_ - knobsize / 2, get_h()));
 		assert(knobpos + knobsize / 2 + buttonsize_ <= static_cast<uint32_t>(get_w()));
-		draw_area(dst, PlusPage, Rectf(knobpos + knobsize / 2.f, 0.f,
-		                               get_w() - knobpos - knobsize / 2 - buttonsize_, get_h()));
+		draw_area(
+		   dst, Area::PlusPage,
+		   Recti(knobpos + knobsize / 2, 0, get_w() - knobpos - knobsize / 2 - buttonsize_, get_h()));
 	} else {
 		if ((2 * buttonsize_ + knobsize) > static_cast<uint32_t>(get_h())) {
 			// Our owner allocated too little space
 			if (static_cast<uint32_t>(get_h()) >= 2 * buttonsize_) {
-				draw_button(dst, Minus, Rectf(0.f, 0.f, get_w(), get_h() / 2.f));
-				draw_button(dst, Plus, Rectf(0.f, get_h() - buttonsize_, get_w(), get_h() / 2));
+				draw_button(dst, Area::Minus, Recti(0, 0, get_w(), get_h() / 2));
+				draw_button(dst, Area::Plus, Recti(0, get_h() - buttonsize_, get_w(), get_h() / 2));
 			} else {
-				draw_button(dst, Minus, Rectf(0.f, 0.f, get_w(), get_h()));
+				draw_button(dst, Area::Minus, Recti(0, 0, get_w(), get_h()));
 			}
 			return;
 		}
 
-		draw_button(dst, Minus, Rectf(0, 0, get_w(), buttonsize_));
-		draw_button(dst, Plus, Rectf(0, get_h() - buttonsize_, get_w(), buttonsize_));
-		draw_button(dst, Knob, Rectf(0, knobpos - knobsize / 2.f, get_w(), knobsize));
+		draw_button(dst, Area::Minus, Recti(0, 0, get_w(), buttonsize_));
+		draw_button(dst, Area::Plus, Recti(0, get_h() - buttonsize_, get_w(), buttonsize_));
+		draw_button(dst, Area::Knob, Recti(0, knobpos - knobsize / 2, get_w(), knobsize));
 
 		assert(buttonsize_ + knobsize / 2 <= knobpos);
-		draw_area(
-		   dst, MinusPage, Rectf(0.f, buttonsize_, get_w(), knobpos - buttonsize_ - knobsize / 2));
+		draw_area(dst, Area::MinusPage,
+		          Recti(0, buttonsize_, get_w(), knobpos - buttonsize_ - knobsize / 2));
 		assert(knobpos + knobsize / 2 + buttonsize_ <= static_cast<uint32_t>(get_h()));
-		draw_area(dst, PlusPage, Rectf(0.f, knobpos + knobsize / 2.f, get_w(),
-		                               get_h() - knobpos - knobsize / 2.f - buttonsize_));
+		draw_area(
+		   dst, Area::PlusPage,
+		   Recti(0, knobpos + knobsize / 2, get_w(), get_h() - knobpos - knobsize / 2 - buttonsize_));
 	}
 }
 
 /**
  * Check for possible auto-repeat scrolling.
-*/
+ */
 void Scrollbar::think() {
 	Panel::think();
 
-	if (pressed_ == None || pressed_ == Knob)
+	if (pressed_ == Area::None || pressed_ == Area::Knob)
 		return;
 
 	uint32_t const time = SDL_GetTicks();
@@ -383,9 +385,9 @@ void Scrollbar::think() {
 
 bool Scrollbar::handle_mousewheel(uint32_t, int32_t, int32_t y) {
 	if (y < 0) {
-		action(Plus);
+		action(Area::Plus);
 	} else {
-		action(Minus);
+		action(Area::Minus);
 	}
 	return true;
 }
@@ -396,9 +398,9 @@ bool Scrollbar::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	switch (btn) {
 	case SDL_BUTTON_LEFT:
 		pressed_ = get_area_for_point(x, y);
-		if (pressed_ != None) {
+		if (pressed_ != Area::None) {
 			grab_mouse(true);
-			if (pressed_ != Knob) {
+			if (pressed_ != Area::Knob) {
 				action(pressed_);
 				time_nextact_ = SDL_GetTicks() + MOUSE_BUTTON_AUTOREPEAT_DELAY;
 			} else
@@ -417,9 +419,9 @@ bool Scrollbar::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 
 	switch (btn) {
 	case SDL_BUTTON_LEFT:
-		if (pressed_ != None) {
+		if (pressed_ != Area::None) {
 			grab_mouse(false);
-			pressed_ = None;
+			pressed_ = Area::None;
 		}
 		result = true;
 		break;
@@ -434,9 +436,78 @@ bool Scrollbar::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
  * Move the knob while pressed.
  */
 bool Scrollbar::handle_mousemove(uint8_t, int32_t const mx, int32_t const my, int32_t, int32_t) {
-	if (pressed_ == Knob)
+	if (pressed_ == Area::Knob)
 		set_knob_pos((horizontal_ ? mx : my) - knob_grabdelta_);
 	return true;
+}
+
+bool Scrollbar::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		if (horizontal_) {
+			switch (code.sym) {
+			case SDLK_KP_6:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_RIGHT:
+				action(Area::Plus);
+				return true;
+
+			case SDLK_KP_4:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_LEFT:
+				action(Area::Minus);
+				return true;
+			default:
+				break;  // not handled
+			}
+		} else {
+			switch (code.sym) {
+			case SDLK_KP_2:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_DOWN:
+				action(Area::Plus);
+				return true;
+
+			case SDLK_KP_8:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_UP:
+				action(Area::Minus);
+				return true;
+
+			case SDLK_KP_3:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_PAGEDOWN:
+				action(Area::PlusPage);
+				return true;
+
+			case SDLK_KP_9:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_PAGEUP:
+				action(Area::MinusPage);
+				return true;
+			default:
+				break;  // not handled
+			}
+		}
+	}
+	return Panel::handle_key(down, code);
 }
 
 void Scrollbar::layout() {

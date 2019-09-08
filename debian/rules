@@ -7,7 +7,7 @@ CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS) $(CPPFLAGS)
 LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 
 %:
-	dh $@ $(DH_ARGS) --parallel --buildsystem=cmake
+	dh $@ $(DH_ARGS) --buildsystem=cmake
 
 
 override_dh_auto_configure:
@@ -18,10 +18,8 @@ override_dh_auto_configure:
 		-DWL_INSTALL_DATADIR=/usr/share/games/widelands/data \
 		-DWL_INSTALL_PREFIX=/usr \
 		-DOPTION_USE_GLBINDING:BOOL=OFF \
+		-DOPTION_ASAN=OFF \
 		-DCMAKE_BUILD_TYPE=Release
-
-override_dh_strip:
-	dh_strip --dbg-package=widelands-dbg
 
 override_dh_auto_install:
 	dh_auto_install --parallel
@@ -60,8 +58,6 @@ override_dh_auto_install:
 	  cp ./debian/tmp/usr/share/games/widelands/data/images/logos/wl-ico-$${size}.png \
 	     debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps/widelands.png; \
 	done
-	convert debian/tmp/usr/share/icons/hicolor/32x32/apps/widelands.png \
-	        debian/tmp/usr/share/icons/hicolor/32x32/apps/widelands.xpm
 	# Remove binaries that are not intended for the user (according to SirVer)
 	# We want all binaries for our PPA...
 	# for b in wl_map_info wl_map_object_info wl_render_richtext ; do \
@@ -71,12 +67,13 @@ override_dh_auto_install:
 	mkdir debian/tmp/usr/games
 	# ... but we want to place them in the right location so that the .install files work
 	# mv debian/tmp/usr/widelands debian/tmp/usr/games
-	for b in wl_map_info wl_map_object_info wl_render_richtext widelands ; do \
+	# TODO(GunChleoc): wl_render_richtext is currently unmaintained
+	for b in wl_map_info wl_map_object_info widelands ; do \
 	  mv debian/tmp/usr/$${b} debian/tmp/usr/games ;\
 	done
 	# appdata
-	mkdir -p debian/tmp/usr/share/appdata/
-	cp debian/widelands.appdata.xml debian/tmp/usr/share/appdata/
+	mkdir -p debian/tmp/usr/share/metainfo/
+	cp debian/widelands.appdata.xml debian/tmp/usr/share/metainfo/
 
 override_dh_install:
 	dh_install --fail-missing

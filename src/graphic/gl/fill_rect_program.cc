@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@
 
 #include <vector>
 
-#include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 
 // static
@@ -66,7 +66,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 		switch (template_args.blend_mode) {
 		case BlendMode::Subtract:
 			glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
-		/* fallthrough intended */
+			FALLS_THROUGH;
 		case BlendMode::UseAlpha:
 			glBlendFunc(GL_ONE, GL_ONE);
 			break;
@@ -85,7 +85,8 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 
 		auto& gl_state = Gl::State::instance();
 		gl_state.enable_vertex_attrib_array({
-		   attr_position_, attr_color_,
+		   attr_position_,
+		   attr_color_,
 		});
 
 		// Batch common rectangles up.
@@ -132,7 +133,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 		switch (template_args.blend_mode) {
 		case BlendMode::Subtract:
 			glBlendEquation(GL_FUNC_ADD);
-		/* fallthrough intended */
+			FALLS_THROUGH;
 		case BlendMode::UseAlpha:
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			break;

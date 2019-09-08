@@ -3,6 +3,7 @@
 -- ================
 
 function intro()
+   reveal_concentric(plr, wl.Game().map:get_field(32, 59), 15)
    sleep(1000)
    message_box_objective(plr, introduction)
 
@@ -77,7 +78,9 @@ function enhance_fortress()
 end
 
 function create_enemy()
-   prefilled_buildings(wl.Game().players[2],
+   local map = wl.Game().map
+   local p2 = wl.Game().players[2]
+   prefilled_buildings(p2,
       {"empire_barrier", 24, 7},
       {"empire_sentry", 29, 16},
       {"empire_tower", 30, 21},
@@ -87,7 +90,10 @@ function create_enemy()
          }
       }
    )
-   wl.Game().players[2]:forbid_buildings("all")
+   connected_road(p2,map:get_field(29,17).immovable,"tr,tl|tl,tl|tl,tl|tl,tl|tl,l")
+   connected_road(p2,map:get_field(31,22).immovable,"tr,tl|tl,tl,tl")
+   connected_road(p2,map:get_field(31,28).immovable,"tr,tr|tr,tl|tl,tl")
+   p2:forbid_buildings("all")
 end
 
 function attack()

@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
+# GunChleoc, 2015
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-03-02 09:03+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -19,23 +20,23 @@ msgstr ""
 "Language: gd\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
-#: ../../data/campaigns/dummy.wmf/scripting/init.lua:11
+#: ../../data/campaigns/dummy.wmf/scripting/init.lua:12
 msgid "Not yet implemented"
 msgstr "Chan eil seo ann fhathast"
 
-#: ../../data/campaigns/dummy.wmf/scripting/init.lua:12
+#: ../../data/campaigns/dummy.wmf/scripting/init.lua:13
 msgid "Sorry, this map is not yet implemented."
 msgstr "Duilich, ach cha deach am mapa seo a phrògramachadh fhathast."
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Amas ùr"
-msgstr[1] "Amasan ùra"
-msgstr[2] "Amasan ùra"
-msgstr[3] "Amasan ùra"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

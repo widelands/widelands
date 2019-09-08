@@ -7,8 +7,8 @@ animations = {
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {14, 22}, 10)
-add_walking_animations(animations, "walkload", dirname, "walkload", {13, 23}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {14, 22}, 10)
+add_directional_animation(animations, "walkload", dirname, "walkload", {13, 23}, 10)
 
 
 tribes:new_worker_type {
@@ -27,11 +27,11 @@ tribes:new_worker_type {
 
    programs = {
       hunt = {
-         "findobject type:bob radius:13 attrib:eatable",
-         "walk object",
-         "animation idle 1500",
-         "object remove",
-         "createware meat",
+         "findobject=type:bob radius:13 attrib:eatable",
+         "walk=object",
+         "animate=idle 1500",
+         "removeobject",
+         "createware=meat",
          "return"
       }
    },

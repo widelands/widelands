@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,12 +36,9 @@
  */
 class ShipWindow : public UI::UniqueWindow {
 public:
-	ShipWindow(InteractiveGameBase& igb, UI::UniqueWindow::Registry& reg, Widelands::Ship& ship);
+	ShipWindow(InteractiveGameBase& igb, UI::UniqueWindow::Registry& reg, Widelands::Ship* ship);
 
 private:
-	// Resets the vbox_ and fills it with the currently needed buttons, then positions the window.
-	void init(bool avoid_fastclick);
-
 	void think() override;
 
 	UI::Button* make_button(UI::Panel* parent,
@@ -49,6 +46,8 @@ private:
 	                        const std::string& title,
 	                        const std::string& picname,
 	                        boost::function<void()> callback);
+	void set_button_visibility();
+	void no_port_error_message();
 
 	void act_goto();
 	void act_destination();
@@ -60,9 +59,10 @@ private:
 	void act_explore_island(Widelands::IslandExploreDirection);
 
 	InteractiveGameBase& igbase_;
-	Widelands::Ship& ship_;
+	Widelands::OPtr<Widelands::Ship> ship_;
 
-	std::unique_ptr<UI::Box> vbox_;
+	UI::Box vbox_;
+	UI::Box navigation_box_;
 	UI::Button* btn_goto_;
 	UI::Button* btn_destination_;
 	UI::Button* btn_sink_;
@@ -74,7 +74,8 @@ private:
 	UI::Button* btn_scout_[Widelands::LAST_DIRECTION];
 	UI::Button* btn_construct_port_;
 	ItemWaresDisplay* display_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipWindow>> shipnotes_subscriber_;
+	int navigation_box_height_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 	DISALLOW_COPY_AND_ASSIGN(ShipWindow);
 };
 

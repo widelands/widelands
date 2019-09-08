@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include "scripting/lua.h"
 #include "scripting/luna.h"
 #include "ui_basic/button.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_base.h"
@@ -48,16 +49,16 @@ public:
 
 	LuaPanel() : panel_(nullptr) {
 	}
-	LuaPanel(UI::Panel* p) : panel_(p) {
+	explicit LuaPanel(UI::Panel* p) : panel_(p) {
 	}
-	LuaPanel(lua_State* L) : panel_(nullptr) {
+	explicit LuaPanel(lua_State* L) : panel_(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
-	virtual ~LuaPanel() {
+	~LuaPanel() override {
 	}
 
 	void __persist(lua_State* L) override {
-		report_error(L, "Trying to persist a User Interface Panel which is no supported!");
+		report_error(L, "Trying to persist a User Interface Panel which is not supported!");
 	}
 	void __unpersist(lua_State* L) override {
 		report_error(L, "Trying to unpersist a User Interface Panel which is "
@@ -68,6 +69,7 @@ public:
 	 * Properties
 	 */
 	int get_buttons(lua_State* L);
+	int get_dropdowns(lua_State* L);
 	int get_tabs(lua_State* L);
 	int get_windows(lua_State* L);
 	int get_width(lua_State* L);
@@ -95,11 +97,11 @@ public:
 
 	LuaButton() : LuaPanel() {
 	}
-	LuaButton(UI::Panel* p) : LuaPanel(p) {
+	explicit LuaButton(UI::Panel* p) : LuaPanel(p) {
 	}
-	LuaButton(lua_State* L) : LuaPanel(L) {
+	explicit LuaButton(lua_State* L) : LuaPanel(L) {
 	}
-	virtual ~LuaButton() {
+	~LuaButton() override {
 	}
 
 	/*
@@ -121,15 +123,49 @@ public:
 	}
 };
 
+class LuaDropdown : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaDropdown);
+
+	LuaDropdown() : LuaPanel() {
+	}
+	explicit LuaDropdown(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaDropdown(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaDropdown() override {
+	}
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State* L);
+	int get_no_of_items(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int open(lua_State* L);
+	int highlight_item(lua_State* L);
+	int select(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::BaseDropdown* get() {
+		return static_cast<UI::BaseDropdown*>(panel_);
+	}
+};
+
 class LuaTab : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaTab);
 
 	LuaTab() : LuaPanel() {
 	}
-	LuaTab(UI::Panel* p) : LuaPanel(p) {
+	explicit LuaTab(UI::Panel* p) : LuaPanel(p) {
 	}
-	LuaTab(lua_State* L) : LuaPanel(L) {
+	explicit LuaTab(lua_State* L) : LuaPanel(L) {
 	}
 	virtual ~LuaTab() {
 	}
@@ -159,9 +195,9 @@ public:
 
 	LuaWindow() : LuaPanel() {
 	}
-	LuaWindow(UI::Panel* p) : LuaPanel(p) {
+	explicit LuaWindow(UI::Panel* p) : LuaPanel(p) {
 	}
-	LuaWindow(lua_State* L) : LuaPanel(L) {
+	explicit LuaWindow(lua_State* L) : LuaPanel(L) {
 	}
 	virtual ~LuaWindow() {
 	}
@@ -190,10 +226,10 @@ public:
 
 	LuaMapView() : LuaPanel() {
 	}
-	LuaMapView(MapView* p) : LuaPanel(p) {
+	explicit LuaMapView(MapView* p) : LuaPanel(p) {
 	}
-	LuaMapView(lua_State* L);
-	virtual ~LuaMapView() {
+	explicit LuaMapView(lua_State* L);
+	~LuaMapView() override {
 	}
 
 	void __persist(lua_State*) override {
@@ -235,6 +271,6 @@ public:
 };
 
 void luaopen_wlui(lua_State*);
-}
+}  // namespace LuaUi
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_UI_H

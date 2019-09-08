@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -92,6 +92,9 @@ struct Field {
 	NodeCaps nodecaps() const {
 		return static_cast<NodeCaps>(caps);
 	}
+	NodeCaps maxcaps() const {
+		return static_cast<NodeCaps>(max_caps);
+	}
 	uint16_t get_caps() const {
 		return caps;
 	}
@@ -110,10 +113,10 @@ struct Field {
 	void set_terrains(const Terrains& i) {
 		terrains = i;
 	}
-	void set_terrain(const TCoords<FCoords>::TriangleIndex& t, DescriptionIndex const i)
+	void set_terrain(const TriangleIndex& t, DescriptionIndex const i)
 
 	{
-		if (t == TCoords<FCoords>::D)
+		if (t == TriangleIndex::D)
 			set_terrain_d(i);
 		else
 			set_terrain_r(i);
@@ -231,33 +234,34 @@ private:
 	   Player_Number_Bitmask + Border_Bitmask;
 	static_assert(kMaxPlayers <= Player_Number_Bitmask, "Bitmask is too big.");
 
-	// Data Members
+	// Data Members. Initialize everything to make cppcheck happy.
 	/** linked list, \sa Bob::linknext_ */
-	Bob* bobs;
-	BaseImmovable* immovable;
+	Bob* bobs = nullptr;
+	BaseImmovable* immovable = nullptr;
 
-	uint8_t caps : 7;
-	uint8_t roads : 6;
+	uint8_t caps = 0U;
+	uint8_t max_caps = 0U;
+	uint8_t roads = 0U;
 
-	Height height;
-	int8_t brightness;
+	Height height = 0U;
+	int8_t brightness = 0;
 
-	OwnerInfoAndSelectionsType owner_info_and_selections;
+	OwnerInfoAndSelectionsType owner_info_and_selections = Widelands::neutral();
 
-	DescriptionIndex resources;         ///< Resource type on this field, if any
-	ResourceAmount initial_res_amount;  ///< Initial amount of resources
-	ResourceAmount res_amount;          ///< Current amount of resources
+	DescriptionIndex resources = INVALID_INDEX;  ///< Resource type on this field, if any
+	ResourceAmount initial_res_amount = 0U;      ///< Initial amount of resources
+	ResourceAmount res_amount = 0U;              ///< Current amount of resources
 
-	Terrains terrains;
+	Terrains terrains = Terrains{INVALID_INDEX, INVALID_INDEX};
 };
 #pragma pack(pop)
 
 // Check that Field is tightly packed.
 #ifndef WIN32
-static_assert(sizeof(Field) == sizeof(void*) * 2 + 10, "Field is not tightly packed.");
+static_assert(sizeof(Field) == sizeof(void*) * 2 + 11, "Field is not tightly packed.");
 #else
-static_assert(sizeof(Field) <= sizeof(void*) * 2 + 11, "Field is not tightly packed.");
+static_assert(sizeof(Field) <= sizeof(void*) * 2 + 12, "Field is not tightly packed.");
 #endif
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_FIELD_H

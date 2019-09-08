@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2017 by the Widelands Development Team
+ * Copyright (C) 2015-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,8 +22,9 @@
 #include <boost/format.hpp>
 
 #include "ai/computer_player.h"
+#include "base/i18n.h"
 #include "base/wexception.h"
-#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 
 SinglePlayerGameSettingsProvider::SinglePlayerGameSettingsProvider() {
 	s.tribes = Widelands::get_all_tribeinfos();
@@ -45,7 +46,7 @@ bool SinglePlayerGameSettingsProvider::can_change_map() {
 }
 
 bool SinglePlayerGameSettingsProvider::can_change_player_state(uint8_t number) {
-	return (!s.scenario & (number != s.playernum));
+	return ((!s.scenario) && (number != s.playernum));
 }
 
 bool SinglePlayerGameSettingsProvider::can_change_player_tribe(uint8_t) {
@@ -68,6 +69,14 @@ std::string SinglePlayerGameSettingsProvider::get_map() {
 	return s.mapfilename;
 }
 
+bool SinglePlayerGameSettingsProvider::is_peaceful_mode() {
+	return s.peaceful;
+}
+
+void SinglePlayerGameSettingsProvider::set_peaceful_mode(bool peace) {
+	s.peaceful = peace;
+}
+
 void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
                                                const std::string& mapfilename,
                                                uint32_t const maxplayers,
@@ -81,14 +90,15 @@ void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
 
 	while (oldplayers < maxplayers) {
 		PlayerSettings& player = s.players[oldplayers];
-		player.state = (oldplayers == 0) ? PlayerSettings::stateHuman : PlayerSettings::stateComputer;
+		player.state =
+		   (oldplayers == 0) ? PlayerSettings::State::kHuman : PlayerSettings::State::kComputer;
 		player.tribe = s.tribes.at(0).name;
 		player.random_tribe = false;
 		player.initialization_index = 0;
 		player.name = (boost::format(_("Player %u")) % (oldplayers + 1)).str();
 		player.team = 0;
 		// Set default computerplayer ai type
-		if (player.state == PlayerSettings::stateComputer) {
+		if (player.state == PlayerSettings::State::kComputer) {
 			const ComputerPlayer::ImplementationVector& impls = ComputerPlayer::get_implementations();
 			if (impls.size() > 1) {
 				player.ai = impls.at(0)->name;
@@ -107,8 +117,8 @@ void SinglePlayerGameSettingsProvider::set_player_state(uint8_t const number,
 	if (number == s.playernum || number >= s.players.size())
 		return;
 
-	if (state == PlayerSettings::stateOpen)
-		state = PlayerSettings::stateComputer;
+	if (state == PlayerSettings::State::kOpen)
+		state = PlayerSettings::State::kComputer;
 
 	s.players[number].state = state;
 }
@@ -147,7 +157,7 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 		s.players[number].ai = (*it)->name;
 	}
 
-	s.players[number].state = PlayerSettings::stateComputer;
+	s.players[number].state = PlayerSettings::State::kComputer;
 }
 
 void SinglePlayerGameSettingsProvider::set_player_tribe(uint8_t const number,
@@ -166,7 +176,7 @@ void SinglePlayerGameSettingsProvider::set_player_tribe(uint8_t const number,
 		actual_tribe = s.tribes.at(random).name;
 	}
 
-	for (const TribeBasicInfo& tmp_tribe : s.tribes) {
+	for (const Widelands::TribeBasicInfo& tmp_tribe : s.tribes) {
 		if (tmp_tribe.name == player.tribe) {
 			s.players[number].tribe = actual_tribe;
 			if (tmp_tribe.initializations.size() <= player.initialization_index) {
@@ -180,7 +190,7 @@ void SinglePlayerGameSettingsProvider::set_player_init(uint8_t const number, uin
 	if (number >= s.players.size())
 		return;
 
-	for (const TribeBasicInfo& tmp_tribe : s.tribes) {
+	for (const Widelands::TribeBasicInfo& tmp_tribe : s.tribes) {
 		if (tmp_tribe.name == s.players[number].tribe) {
 			if (index < tmp_tribe.initializations.size())
 				s.players[number].initialization_index = index;
@@ -199,7 +209,7 @@ void SinglePlayerGameSettingsProvider::set_player_closeable(uint8_t, bool) {
 	// nothing to do
 }
 
-void SinglePlayerGameSettingsProvider::set_player_shared(uint8_t, uint8_t) {
+void SinglePlayerGameSettingsProvider::set_player_shared(PlayerSlot, Widelands::PlayerNumber) {
 	// nothing to do
 }
 
@@ -219,8 +229,8 @@ void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
 		return;
 	PlayerSettings const position = settings().players.at(number);
 	PlayerSettings const player = settings().players.at(settings().playernum);
-	if (number < settings().players.size() && (position.state == PlayerSettings::stateOpen ||
-	                                           position.state == PlayerSettings::stateComputer)) {
+	if (number < settings().players.size() && (position.state == PlayerSettings::State::kOpen ||
+	                                           position.state == PlayerSettings::State::kComputer)) {
 		set_player(number, player);
 		set_player(settings().playernum, position);
 		s.playernum = number;
@@ -231,11 +241,6 @@ std::string SinglePlayerGameSettingsProvider::get_win_condition_script() {
 	return s.win_condition_script;
 }
 
-void SinglePlayerGameSettingsProvider::set_win_condition_script(std::string wc) {
+void SinglePlayerGameSettingsProvider::set_win_condition_script(const std::string& wc) {
 	s.win_condition_script = wc;
-}
-
-void SinglePlayerGameSettingsProvider::next_win_condition() {
-	// not implemented - feel free to do so, if you need it.
-	NEVER_HERE();
 }

@@ -31,9 +31,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines_water = true,
-      prohibited_till = 800,
-      forced_after = 800
+      collects_ware_from_map = "water"
    },
 
    working_positions = {
@@ -42,6 +40,10 @@ tribes:new_productionsite_type {
 
    outputs = {
       "water"
+   },
+
+   indicate_workarea_overlaps = {
+      empire_well = false,
    },
 
    programs = {

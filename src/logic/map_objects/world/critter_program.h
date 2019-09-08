@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,17 +33,17 @@ struct CritterAction {
 	};
 
 	CritterExecuteActionFn function;
-	int32_t iparam1;
-	int32_t iparam2;
+	int32_t iparam1 = 0;
+	int32_t iparam2 = 0;
 	std::string sparam1;
 
 	std::vector<std::string> sparamv;
 };
 
 struct CritterProgram : public BobProgramBase {
-	CritterProgram(const std::string& name) : name_(name) {
+	explicit CritterProgram(const std::string& name) : name_(name) {
 	}
-	virtual ~CritterProgram() {
+	~CritterProgram() override {
 	}
 
 	std::string get_name() const override {
@@ -63,6 +63,6 @@ private:
 	std::string name_;
 	std::vector<CritterAction> actions_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_WORLD_CRITTER_PROGRAM_H

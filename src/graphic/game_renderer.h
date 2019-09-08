@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,59 +20,28 @@
 #ifndef WL_GRAPHIC_GAME_RENDERER_H
 #define WL_GRAPHIC_GAME_RENDERER_H
 
+#include <map>
 #include <memory>
 
 #include "base/macros.h"
 #include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
-#include "logic/map_objects/draw_text.h"
+#include "logic/editor_game_base.h"
+#include "logic/player.h"
 
-namespace Widelands {
-class Player;
-class EditorGameBase;
-}
+// Draw the terrain only.
+void draw_terrain(const Widelands::EditorGameBase& egbase,
+                  const FieldsToDraw& fields_to_draw,
+                  const float scale,
+                  Workareas workarea,
+                  bool grid,
+                  RenderTarget* dst);
 
-class RenderTarget;
-
-// Renders the MapView on screen.
-class GameRenderer {
-public:
-	GameRenderer();
-	~GameRenderer();
-
-	// Renders the map from a player's point of view into the given drawing
-	// window. The 'viewpoint' is the top left screens pixel map pixel and
-	// 'scale' is the magnification of the view.
-	void rendermap(const Widelands::EditorGameBase& egbase,
-	               const Vector2f& viewpoint,
-	               float scale,
-	               const Widelands::Player& player,
-	               TextToDraw draw_text,
-	               RenderTarget* dst);
-
-	// Renders the map from an omniscient perspective. This is used
-	// for spectators, players that see all, and in the editor.
-	void rendermap(const Widelands::EditorGameBase& egbase,
-	               const Vector2f& viewpoint,
-	               float scale,
-	               TextToDraw draw_text,
-	               RenderTarget* dst);
-
-private:
-	// Draw the map for the given parameters (see rendermap). 'player'
-	// can be nullptr in which case the whole map is drawn.
-	void draw(const Widelands::EditorGameBase& egbase,
-	          const Vector2f& viewpoint,
-	          float scale,
-	          TextToDraw draw_text,
-	          const Widelands::Player* player,
-	          RenderTarget* dst);
-
-	// This is owned and handled by us, but handed to the RenderQueue, so we
-	// basically promise that this stays valid for one frame.
-	FieldsToDraw fields_to_draw_;
-
-	DISALLOW_COPY_AND_ASSIGN(GameRenderer);
-};
+// Draw the border stones for 'field' if it is a border and 'visibility' is
+// correct.
+void draw_border_markers(const FieldsToDraw::Field& field,
+                         const float scale,
+                         const FieldsToDraw& fields_to_draw,
+                         RenderTarget* dst);
 
 #endif  // end of include guard: WL_GRAPHIC_GAME_RENDERER_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ void MapExplorationPacket::read(FileSystem& fs,
 	}
 
 	static_assert(kMaxPlayers < 32, "assert(MAX_PLAYERS < 32) failed.");
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	MapIndex const max_index = map.max_index();
 	try {
@@ -82,7 +82,7 @@ void MapExplorationPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	static_assert(kMaxPlayers < 32, "assert(MAX_PLAYERS < 32) failed.");
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	MapIndex const max_index = map.max_index();
 	for (MapIndex i = 0; i < max_index; ++i) {
@@ -97,4 +97,4 @@ void MapExplorationPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 
 	fw.write(fs, "binary/exploration");
 }
-}
+}  // namespace Widelands

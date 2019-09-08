@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,14 +35,14 @@ struct Radiobutton : public Statebox {
 	friend struct Radiogroup;
 
 	Radiobutton(Panel* parent, Vector2i, const Image* pic, Radiogroup&, int32_t id);
-	~Radiobutton();
+	~Radiobutton() override;
 
 	Radiobutton* next_button() {
 		return nextbtn_;
 	}
 
 private:
-	void clicked() override;
+	void button_clicked() override;
 
 	Radiobutton* nextbtn_;
 	Radiogroup& group_;
@@ -63,6 +63,9 @@ struct Radiogroup {
 	boost::signals2::signal<void(int32_t)> changedto;
 	boost::signals2::signal<void()> clicked;  //  clicked without things changed
 
+	/**
+	 * Text conventions: Sentence case for the 'tooltip'
+	 */
 	int32_t add_button(Panel* parent,
 	                   Vector2i,
 	                   const Image* pic,
@@ -83,6 +86,6 @@ private:
 	int32_t highestid_;
 	int32_t state_;  //  -1: none
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_RADIOBUTTON_H

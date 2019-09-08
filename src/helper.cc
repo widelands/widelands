@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,12 +27,10 @@
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
-using namespace std;
-
-vector<string> split_string(const string& s, const char* const separators) {
-	vector<string> result;
-	for (string::size_type pos = 0, endpos;
-	     (pos = s.find_first_not_of(separators, pos)) != string::npos; pos = endpos) {
+std::vector<std::string> split_string(const std::string& s, const char* const separators) {
+	std::vector<std::string> result;
+	for (std::string::size_type pos = 0, endpos;
+	     (pos = s.find_first_not_of(separators, pos)) != std::string::npos; pos = endpos) {
 		endpos = s.find_first_of(separators, pos);
 		result.push_back(s.substr(pos, endpos - pos));
 	}

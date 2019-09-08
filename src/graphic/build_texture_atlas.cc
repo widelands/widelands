@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,10 +38,6 @@ namespace {
 // This is chosen so that all graphics for tribes are still well inside this
 // threshold, but not background pictures.
 constexpr int kMaxAreaForTextureAtlas = 240 * 240;
-
-// A graphics card must at least support this size for texture for Widelands to
-// run.
-constexpr int kMinimumSizeForTextures = 2048;
 
 // Returns true if 'filename' ends with an image extension.
 bool is_image(const std::string& filename) {

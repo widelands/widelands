@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ void MapTerrainPacket::read(FileSystem& fs,
 	FileRead fr;
 	fr.open(fs, "binary/terrain");
 
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	const World& world = egbase.world();
 
 	try {
@@ -110,4 +110,4 @@ void MapTerrainPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 
 	fw.write(fs, "binary/terrain");
 }
-}
+}  // namespace Widelands

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2016
@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2016-09-19 10:13+0000\n"
-"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
+"POT-Creation-Date: 2018-03-02 08:01+0000\n"
+"PO-Revision-Date: 2018-03-02 08:05+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,17 +31,12 @@ msgstr "10 perc"
 msgid "15 minutes"
 msgstr "15 perc"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:99
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:101
-msgid "Status"
-msgstr "Állapot"
-
 #. TRANSLATORS: number + resource name, e.g. '1x Log'
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:112
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:101
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:223
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:212
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:7
 msgid "Rules"
 msgstr "Szabályok"
@@ -117,43 +112,43 @@ msgstr "A negyedikként befejezőé"
 msgid "Second Island"
 msgstr "Második sziget"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:44
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:43
 msgid "%1$s was the first to reach Island number %2$i."
 msgstr "%1$s érte el elsőként a(z) %2$i. szigetet."
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:45
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:44
 msgid "%1$s was the second to reach Island number %2$i."
 msgstr "%1$s érte el másodikként a(z) %2$i. szigetet."
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:46
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:45
 msgid "%1$s was the third to reach Island number %2$i."
 msgstr "%1$s érte el harmadikként a(z) %2$i. szigetet."
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:47
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:46
 msgid "%1$s was the fourth to reach Island number %2$i."
 msgstr "%1$s érte el negyedikként a(z) %2$i. szigetet."
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:49
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:48
 msgid "The reward for this feat amounts to:"
 msgstr "Jutalma:"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:52
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:51
 #, lua-format
 msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
 msgstr "%s immár a Domb királya, és 20 perc múlva megnyeri a játékot, hacsak addig valaki el nem foglalja a dombot."
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:55
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:53
 #, lua-format
 msgid "%s lost control of the hill."
 msgstr "%s elvesztette az uralmat a domb felett."
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:57
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:54
 msgid "%1$s has been King of the Hill for %2$s!"
 msgstr "%1$s eddig volt a Domb királya: %2$s!"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:58
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:55
 #, lua-format
 msgid "%s has won the game. Congratulations!"
 msgstr "%s megnyerte a játékot. Gratulálunk!"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <boost/format.hpp>
+
 #include "io/filesystem/filesystem.h"
 #include "scripting/lua_table.h"
 
@@ -30,6 +32,10 @@ namespace {
 std::string get_file_content(FileSystem* fs, const std::string& filename) {
 	if (!fs || !fs->file_exists(filename)) {
 		throw LuaScriptNotExistingError(filename);
+	}
+	if (fs->is_directory(filename)) {
+		throw LuaScriptNotExistingError(
+		   (boost::format("%s is a directory") % filename.c_str()).str());
 	}
 	size_t length;
 	void* input_data = fs->load(filename, length);

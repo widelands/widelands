@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,7 +46,7 @@ class Trackable {
 		Trackable* ptr_;
 
 	public:
-		Tracker(Trackable* const p) : refcount_(0), ptr_(p) {
+		explicit Tracker(Trackable* const p) : refcount_(0), ptr_(p) {
 		}
 
 		void addref() {
@@ -104,7 +104,7 @@ protected:
 		if (tracker_)
 			tracker_->deref();
 	}
-	BaseTrackPtr(Trackable* const t) {
+	explicit BaseTrackPtr(Trackable* const t) {
 		if (t) {
 			tracker_ = t->tracker_;
 			tracker_->addref();
@@ -157,12 +157,11 @@ Class T, i.e. the object that the TrackPtr points to, must be a class
 derived from Trackable.
 */
 template <class T> struct TrackPtr : BaseTrackPtr {
-	TrackPtr() {
-	}
+	TrackPtr() = default;
 
-	TrackPtr(T* ptr) : BaseTrackPtr(ptr) {
+	explicit TrackPtr(T* ptr) : BaseTrackPtr(ptr) {
 	}
-	TrackPtr(const TrackPtr<T>& o) : BaseTrackPtr(o) {
+	explicit TrackPtr(const TrackPtr<T>& o) : BaseTrackPtr(o) {
 	}
 
 	TrackPtr& operator=(const TrackPtr<T>& o) {

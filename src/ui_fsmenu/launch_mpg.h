@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,11 +23,12 @@
 #include <memory>
 #include <string>
 
+#include "logic/game_settings.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
 #include "ui_fsmenu/helpwindow.h"
+#include "ui_fsmenu/launch_game.h"
 #include "wui/suggested_teams_box.h"
 
 struct ChatProvider;
@@ -42,15 +43,13 @@ class LuaInterface;
  * games.
  *
  */
-class FullscreenMenuLaunchMPG : public FullscreenMenuBase {
+class FullscreenMenuLaunchMPG : public FullscreenMenuLaunchGame {
 public:
 	FullscreenMenuLaunchMPG(GameSettingsProvider*, GameController*);
-	~FullscreenMenuLaunchMPG();
+	~FullscreenMenuLaunchMPG() override;
 
 	void set_chat_provider(ChatProvider&);
-
 	void think() override;
-
 	void refresh();
 
 protected:
@@ -60,22 +59,15 @@ protected:
 private:
 	void layout() override;
 
-	LuaInterface* lua_;
-
 	void change_map_or_save();
 	void select_map();
 	void select_saved_game();
-	void win_condition_clicked();
-	void win_condition_update();
-	void win_condition_load();
+	void win_condition_selected() override;
+
 	void set_scenario_values();
 	void load_previous_playerdata();
 	void load_map_info();
 	void help_clicked();
-
-	uint32_t butw_;
-	uint32_t buth_;
-	uint32_t fs_;
 
 	// TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
 	// so we can have the SuggestedTeamsBox
@@ -84,17 +76,14 @@ private:
 	int32_t const label_height_;
 	int32_t const right_column_x_;
 
-	UI::Button change_map_or_save_, ok_, back_, wincondition_;
+	UI::Button change_map_or_save_;
 	UI::Button help_button_;
-	UI::Textarea title_, mapname_, clients_, players_, map_, wincondition_type_;
+	UI::Textarea mapname_, clients_, players_, map_, wincondition_type_;
 	UI::MultilineTextarea map_info_, client_info_;
 	std::unique_ptr<UI::FullscreenHelpWindow> help_;
-	GameSettingsProvider* settings_;
-	GameController* ctrl_;
 	GameChatPanel* chat_;
 	MultiPlayerSetupGroup* mpsg_;
 	std::string filename_proof_;  // local variable to check state
-	int16_t nr_players_;
 
 	UI::SuggestedTeamsBox* suggested_teams_box_;
 };

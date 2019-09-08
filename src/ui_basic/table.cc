@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,18 +21,14 @@
 
 #include <boost/bind.hpp>
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
-#include "ui_basic/button.h"
 #include "ui_basic/mouse_constants.h"
-#include "ui_basic/scrollbar.h"
-#include "wlapplication.h"
 
 namespace UI {
 
@@ -42,25 +38,24 @@ namespace UI {
  *       y
  *       w       dimensions, in pixels, of the Table
  *       h
-*/
+ */
 Table<void*>::Table(Panel* const parent,
                     int32_t x,
                     int32_t y,
                     uint32_t w,
                     uint32_t h,
-                    const Image* button_background,
+                    PanelStyle style,
                     TableRows rowtype)
    : Panel(parent, x, y, w, h),
      total_width_(0),
-     headerheight_(
-        UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() +
-        4),
-     lineheight_(
-        UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height()),
-     button_background_(button_background),
+     lineheight_(text_height(g_gr->styles().table_style(style).enabled())),
+     headerheight_(lineheight_ + 4),
+     style_(style),
+     button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
+                                                      UI::ButtonStyle::kWuiSecondary),
      scrollbar_(nullptr),
      scrollbar_filler_button_(
-        new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_background, "")),
+        new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_style_, "")),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_multiselect_(no_selection_index()),
@@ -74,8 +69,8 @@ Table<void*>::Table(Panel* const parent,
 	set_thinks(false);
 	set_can_focus(true);
 	scrollbar_filler_button_->set_visible(false);
-	scrollbar_ = new Scrollbar(this, 0, headerheight_, Scrollbar::kSize,
-	                           get_h() - headerheight_, button_background);
+	scrollbar_ = new Scrollbar(this, get_w() - Scrollbar::kSize, headerheight_, Scrollbar::kSize,
+	                           get_h() - headerheight_, style);
 	scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 	scrollbar_->set_steps(1);
 	scrollbar_->set_singlestepsize(lineheight_);
@@ -85,7 +80,7 @@ Table<void*>::Table(Panel* const parent,
 
 /**
  * Free allocated resources
-*/
+ */
 Table<void*>::~Table() {
 	for (const EntryRecord* entry : entry_records_) {
 		delete entry;
@@ -110,7 +105,7 @@ void Table<void*>::add_column(uint32_t const width,
 
 	{
 		uint32_t complete_width = 0;
-		if (!UI::g_fh1->fontset()->is_rtl()) {
+		if (!UI::g_fh->fontset()->is_rtl()) {
 			for (const Column& col : columns_) {
 				complete_width += col.width;
 			}
@@ -119,8 +114,8 @@ void Table<void*>::add_column(uint32_t const width,
 		Column c;
 		// All columns have a title button that is clickable for sorting.
 		// The title text can be empty.
-		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_background_,
-		                   title, tooltip_string);
+		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_style_, title,
+		                   tooltip_string);
 		c.btn->sigclicked.connect(
 		   boost::bind(&Table::header_button_clicked, boost::ref(*this), columns_.size()));
 		c.width = width;
@@ -139,6 +134,13 @@ void Table<void*>::set_column_title(uint8_t const col, const std::string& title)
 	Column& column = columns_.at(col);
 	assert(column.btn);
 	column.btn->set_title(title);
+}
+
+void Table<void*>::set_column_tooltip(uint8_t col, const std::string& text) {
+	assert(col < columns_.size());
+	Column& column = columns_.at(col);
+	assert(column.btn);
+	column.btn->set_tooltip(text);
 }
 
 /**
@@ -179,7 +181,7 @@ void Table<void*>::header_button_clicked(Columns::size_type const n) {
 
 /**
  * Remove all entries from the table
-*/
+ */
 void Table<void*>::clear() {
 	for (const EntryRecord* entry : entry_records_) {
 		delete entry;
@@ -215,14 +217,14 @@ void Table<void*>::fit_height(uint32_t entries) {
 
 /**
  * Redraw the table
-*/
+ */
 void Table<void*>::draw(RenderTarget& dst) {
 	//  draw text lines
 	int32_t lineheight = get_lineheight();
 	uint32_t idx = scrollpos_ / lineheight;
 	int32_t y = 1 + idx * lineheight - scrollpos_ + headerheight_;
 
-	dst.brighten_rect(Rectf(0.f, 0.f, get_eff_w(), get_h()), ms_darken_value);
+	dst.brighten_rect(Recti(0, 0, get_eff_w(), get_h()), ms_darken_value);
 
 	while (idx < entry_records_.size()) {
 		if (y >= static_cast<int32_t>(get_h()))
@@ -232,33 +234,34 @@ void Table<void*>::draw(RenderTarget& dst) {
 
 		if (idx == selection_ || multiselect_.count(idx)) {
 			assert(2 <= get_eff_w());
-			dst.brighten_rect(Rectf(1.f, y, get_eff_w() - 2, lineheight_), -ms_darken_value);
+			dst.brighten_rect(Recti(1, y, get_eff_w() - 2, lineheight_), -ms_darken_value);
 		}
 
 		Columns::size_type const nr_columns = columns_.size();
 		for (uint32_t col_no = 0, curx = 0; col_no < nr_columns; ++col_no) {
-			const size_t i = UI::g_fh1->fontset()->is_rtl() ? nr_columns - 1 - col_no : col_no;
+			const size_t i = UI::g_fh->fontset()->is_rtl() ? nr_columns - 1 - col_no : col_no;
 			// The first column needs a scrollbar offset for RTL languages.
-			const int scrollbar_offset = (curx == 0 && UI::g_fh1->fontset()->is_rtl() && scrollbar_ &&
+			/* NOCOM fix this
+			const int scrollbar_offset = (curx == 0 && UI::g_fh->fontset()->is_rtl() && scrollbar_ &&
 			                              scrollbar_->is_enabled()) ?
 			                                Scrollbar::kSize :
-			                                0;
+			                                0; */
 
 			const Column& column = columns_[i];
-			int const curw = column.width;
-			Align alignment = mirror_alignment(column.alignment);
+			const int curw = column.width;
+			Align alignment = mirror_alignment(column.alignment, g_fh->fontset()->is_rtl());
 
 			const Image* entry_picture = er.get_picture(i);
 			const std::string& entry_string = er.get_string(i);
 
-			Vector2f point(curx, y);
+			Vector2i point(curx, y);
 			int picw = 0;
 
 			if (entry_picture != nullptr) {
 				picw = entry_picture->width();
 				const int pich = entry_picture->height();
 
-				float draw_x = point.x;
+				int draw_x = point.x;
 
 				// We want a bit of margin
 				int max_pic_height = lineheight - 3;
@@ -269,83 +272,73 @@ void Table<void*>::draw(RenderTarget& dst) {
 					int blit_width = image_scale * picw;
 
 					if (entry_string.empty()) {
-						if (!UI::g_fh1->fontset()->is_rtl() && i == nr_columns - 1 &&
+						if (!UI::g_fh->fontset()->is_rtl() && i == nr_columns - 1 &&
 						    scrollbar_->is_enabled()) {
 							draw_x = point.x + (curw - blit_width - scrollbar_->get_w()) / 2.f;
 						} else {
-							draw_x = point.x + (curw - blit_width) / 2.f;
+							draw_x = point.x + (curw - blit_width) / 2;
 						}
 					} else if (alignment == UI::Align::kRight) {
 						draw_x = point.x + curw - blit_width - 1;
 					}
 
 					// Create the scaled image
-					dst.blitrect_scale(Rectf(draw_x, point.y + 1.f, blit_width, max_pic_height),
+					dst.blitrect_scale(Rectf(draw_x, point.y + 1, blit_width, max_pic_height),
 					                   entry_picture, Recti(0, 0, picw, pich), 1., BlendMode::UseAlpha);
 
 					// For text alignment below
 					picw = blit_width;
 				} else {
 					if (entry_string.empty()) {
-						if (!UI::g_fh1->fontset()->is_rtl() && i == nr_columns - 1 &&
+						if (!UI::g_fh->fontset()->is_rtl() && i == nr_columns - 1 &&
 						    scrollbar_->is_enabled()) {
 							draw_x = point.x + (curw - picw - scrollbar_->get_w()) / 2.f;
 						} else {
-							draw_x = point.x + (curw - picw) / 2.f;
+							draw_x = point.x + (curw - picw) / 2;
 						}
 					} else if (alignment == UI::Align::kRight) {
 						draw_x = point.x + curw - picw - 1;
 					}
-					dst.blit(Vector2f(draw_x, point.y + (lineheight - pich) / 2.f), entry_picture);
+					dst.blit(Vector2i(draw_x, point.y + (lineheight - pich) / 2), entry_picture);
 				}
-				point.x += picw;
+				if (alignment != Align::kRight) {
+					point.x += picw;
+				}
 			}
-
-			++picw;  // A bit of margin between image and text
 
 			if (entry_string.empty()) {
 				curx += curw;
 				continue;
 			}
-			const Image* entry_text_im = UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
 
-			point.x += scrollbar_offset;
+			const UI::FontStyleInfo& font_style = er.font_style() != nullptr ?
+			                                         *er.font_style() :
+			                                         er.is_disabled() ?
+			                                         g_gr->styles().table_style(style_).disabled() :
+			                                         g_gr->styles().table_style(style_).enabled();
+			std::shared_ptr<const UI::RenderedText> rendered_text =
+			   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
 
+			// Fix text alignment for BiDi languages if the entry contains an RTL character. We want
+			// this always on, e.g. for mixed language savegame filenames.
+			alignment =
+			   mirror_alignment(column.alignment, i18n::has_rtl_character(entry_string.c_str(), 20));
+
+			// Position the text according to alignment
 			switch (alignment) {
 			case UI::Align::kCenter:
 				point.x += (curw - picw) / 2;
 				break;
 			case UI::Align::kRight:
-				point.x += curw - 2 * picw;
+				point.x += curw - picw;
 				break;
 			case UI::Align::kLeft:
 				break;
 			}
 
-			// Add an offset for rightmost column when the scrollbar is shown.
-			int text_width = entry_text_im->width();
-			if (i == nr_columns - 1 && scrollbar_->is_enabled()) {
-				text_width = text_width + scrollbar_->get_w();
-			}
-			UI::correct_for_align(alignment, text_width, &point);
-
-			// Crop to column width while blitting
-			if ((curw + picw) < text_width) {
-				// Fix positioning for BiDi languages.
-				if (UI::g_fh1->fontset()->is_rtl()) {
-					point.x = (alignment == UI::Align::kRight) ? curx : curx + picw;
-				}
-				// We want this always on, e.g. for mixed language savegame filenames
-				if (i18n::has_rtl_character(
-				       entry_string.c_str(), 20)) {  // Restrict check for efficiency
-					dst.blitrect(
-					   point, entry_text_im, Recti(text_width - curw + picw, 0, text_width, lineheight));
-				} else {
-					dst.blitrect(point, entry_text_im, Recti(0, 0, curw - picw, lineheight));
-				}
-			} else {
-				dst.blitrect(point, entry_text_im, Recti(0, 0, curw - picw, lineheight));
-			}
+			constexpr int kMargin = 1;
+			rendered_text->draw(dst, point, Recti(kMargin, 0, curw - picw - 2 * kMargin, lineheight),
+			                    alignment, RenderedText::CropMode::kSelf);
 			curx += curw;
 		}
 
@@ -360,6 +353,21 @@ void Table<void*>::draw(RenderTarget& dst) {
 bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
+		case SDLK_ESCAPE:
+			cancel();
+			return true;
+
+		case SDLK_TAB:
+			// Let the panel handle the tab key
+			return get_parent()->handle_key(true, code);
+
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			if (selection_ != no_selection_index()) {
+				double_clicked(selection_);
+			}
+			return true;
+
 		case SDLK_a:
 			if (is_multiselect_ && (code.mod & KMOD_CTRL) && !empty()) {
 				multiselect_.clear();
@@ -446,25 +454,8 @@ void Table<void*>::move_selection(const int32_t offset) {
 		new_selection = entry_records_.size() - 1;
 
 	multiselect(new_selection);
-
 	// Scroll to newly selected entry
-	if (scrollbar_) {
-		// Keep an unselected item above or below
-		int32_t scroll_item = new_selection + offset;
-		if (scroll_item < 0)
-			scroll_item = 0;
-		if (scroll_item > static_cast<int32_t>(entry_records_.size())) {
-			scroll_item = entry_records_.size();
-		}
-
-		// Ensure scroll_item is visible
-		if (static_cast<int32_t>(scroll_item * get_lineheight()) < scrollpos_) {
-			scrollbar_->set_scrollpos(scroll_item * get_lineheight());
-		} else if (static_cast<int32_t>((scroll_item + 1) * get_lineheight() - get_inner_h()) >
-		           scrollpos_) {
-			scrollbar_->set_scrollpos((scroll_item + 1) * get_lineheight() - get_inner_h());
-		}
-	}
+	scroll_to_item(new_selection + offset);
 }
 
 /**
@@ -473,18 +464,26 @@ void Table<void*>::move_selection(const int32_t offset) {
  * Args: i  the entry to select
  */
 void Table<void*>::select(const uint32_t i) {
-	if (empty() || selection_ == i || i == no_selection_index())
+	if (empty() || i == no_selection_index())
 		return;
 
 	selection_ = i;
 	if (is_multiselect_) {
 		multiselect_.insert(selection_);
+		last_multiselect_ = selection_;
 	}
 
 	selected(selection_);
 }
 
-void Table<void*>::multiselect(uint32_t row) {
+/**
+ * If 'force' is true, adds the given 'row' to the selection, ignoring everything else.
+ */
+void Table<void*>::multiselect(uint32_t row, bool force) {
+	if (force) {
+		select(row);
+		return;
+	}
 	if (is_multiselect_) {
 		// Ranged selection with Shift
 		if (SDL_GetModState() & KMOD_SHIFT) {
@@ -514,6 +513,25 @@ void Table<void*>::multiselect(uint32_t row) {
 	}
 }
 
+// Scroll to the given item. Out of range items will be corrected automatically.
+void Table<void*>::scroll_to_item(int32_t item) {
+	if (scrollbar_) {
+		// Correct out of range items
+		if (item < 0) {
+			item = 0;
+		} else if (item >= static_cast<int32_t>(entry_records_.size())) {
+			item = entry_records_.size() - 1;
+		}
+
+		// Ensure item is visible
+		if (static_cast<int32_t>(item * get_lineheight()) < scrollpos_) {
+			scrollbar_->set_scrollpos(item * get_lineheight());
+		} else if (static_cast<int32_t>((item + 2) * get_lineheight() - get_inner_h()) > scrollpos_) {
+			scrollbar_->set_scrollpos((item + 3) * get_lineheight() - get_inner_h());
+		}
+	}
+}
+
 /**
  * Adds/removes the row from multiselect.
  * Returns the row that should be selected afterwards, or no_selection_index() if
@@ -537,7 +555,7 @@ uint32_t Table<void*>::toggle_entry(uint32_t row) {
 
 /**
  * Add a new entry to the table.
-*/
+ */
 Table<void*>::EntryRecord& Table<void*>::add(void* const entry, const bool do_select) {
 	EntryRecord& result = *new EntryRecord(entry);
 	entry_records_.push_back(&result);
@@ -553,9 +571,13 @@ Table<void*>::EntryRecord& Table<void*>::add(void* const entry, const bool do_se
 
 /**
  * Scroll to the given position, in pixels.
-*/
+ */
 void Table<void*>::set_scrollpos(int32_t const i) {
 	scrollpos_ = i;
+}
+
+void Table<void*>::scroll_to_top() {
+	scrollbar_->set_scrollpos(0);
 }
 
 /**
@@ -573,10 +595,25 @@ void Table<void*>::remove(const uint32_t i) {
 	} else if (selection_ > i && selection_ != no_selection_index()) {
 		selection_--;
 	}
-	if (is_multiselect_ && selection_ != no_selection_index()) {
-		multiselect_.insert(selection_);
+	if (is_multiselect_) {
+		if (selection_ != no_selection_index()) {
+			multiselect_.insert(selection_);
+		}
+		last_multiselect_ = selection_;
 	}
 	layout();
+}
+
+/**
+ * Remove the given table entry if it exists.
+ */
+void Table<void*>::remove_entry(const void* const entry) {
+	for (uint32_t i = 0; i < entry_records_.size(); ++i) {
+		if (entry_records_[i]->entry() == entry) {
+			remove(i);
+			return;
+		}
+	}
 }
 
 bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
@@ -588,7 +625,7 @@ bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
 }
 
 void Table<void*>::layout() {
-	if (columns_.empty()) {
+	if (columns_.empty() || get_w() == 0) {
 		return;
 	}
 
@@ -598,12 +635,12 @@ void Table<void*>::layout() {
 	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
 
 	// Find a column to resize
-	size_t resizeable_column = std::numeric_limits<size_t>::max();
+	size_t resizeable_column = 0;
 	if (flexible_column_ < columns_.size()) {
 		resizeable_column = flexible_column_;
 	} else {
 		// Use the widest column
-		uint32_t widest_width = columns_[resizeable_column].width;
+		uint32_t widest_width = columns_[0].width;
 		for (size_t i = 1; i < columns_.size(); ++i) {
 			const uint32_t width = columns_[i].width;
 			if (width > widest_width) {
@@ -613,36 +650,34 @@ void Table<void*>::layout() {
 		}
 	}
 
-	// If we have a resizeable column, adjust the column sizes.
-	if (resizeable_column != std::numeric_limits<size_t>::max()) {
-		int all_columns_width = scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
-		for (const auto& column : columns_) {
-			all_columns_width += column.width;
+	// Adjust the column sizes.
+	int all_columns_width = scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
+	for (const auto& column : columns_) {
+		all_columns_width += column.width;
+	}
+
+	if (all_columns_width != get_w()) {
+		Column& column = columns_.at(resizeable_column);
+		column.width = std::max(0, column.width + get_w() - all_columns_width);
+		column.btn->set_size(column.width, column.btn->get_h());
+
+		int offset = 0;
+		for (const auto& col : columns_) {
+			col.btn->set_pos(Vector2i(offset, col.btn->get_y()));
+			offset = col.btn->get_x() + col.btn->get_w();
 		}
-		if (all_columns_width != get_w()) {
-			Column& column = columns_.at(resizeable_column);
-			column.width = std::max(0, column.width + get_w() - all_columns_width);
-			column.btn->set_size(column.width, column.btn->get_h());
-
-			int offset = 0;
-			for (const auto& col : columns_) {
-				col.btn->set_pos(Vector2i(offset, col.btn->get_y()));
-				offset = col.btn->get_x() + col.btn->get_w();
-			}
-
-			if (scrollbar_->is_enabled()) {
-				// NOCOM fix for RTL. Table column positioning is also broken for RTL.
-				const UI::Button* last_column_btn = columns_.back().btn;
-				scrollbar_filler_button_->set_pos(
-				   Vector2i(last_column_btn->get_x() + last_column_btn->get_w(), 0));
-				scrollbar_filler_button_->set_visible(true);
-			} else {
-				scrollbar_filler_button_->set_visible(false);
-			}
+		if (scrollbar_->is_enabled()) {
+			// NOCOM fix for RTL. Table column positioning is also broken for RTL.
+			const UI::Button* last_column_btn = columns_.back().btn;
+			scrollbar_filler_button_->set_pos(
+			   Vector2i(last_column_btn->get_x() + last_column_btn->get_w(), 0));
+			scrollbar_filler_button_->set_visible(true);
+		} else {
+			scrollbar_filler_button_->set_visible(false);
 		}
 	}
 
-	if (UI::g_fh1->fontset()->is_rtl()) {
+	if (UI::g_fh->fontset()->is_rtl()) {
 		int x = get_inner_w();
 		for (auto& column : columns_) {
 			column.btn->set_pos(Vector2i(x - column.btn->get_w(), 0));
@@ -650,7 +685,7 @@ void Table<void*>::layout() {
 		}
 	}
 
-	scrollbar_->set_pos(Vector2i(UI::g_fh1->fontset()->is_rtl() ? 0 : get_w() - Scrollbar::kSize, scrollbar_->get_y()));
+	scrollbar_->set_pos(Vector2i(UI::g_fh->fontset()->is_rtl() ? 0 : get_w() - Scrollbar::kSize, scrollbar_->get_y()));
 }
 
 /**
@@ -709,7 +744,8 @@ bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t 
 	return ea.get_string(column) < eb.get_string(column);
 }
 
-Table<void*>::EntryRecord::EntryRecord(void* const e) : entry_(e) {
+Table<void*>::EntryRecord::EntryRecord(void* const e)
+   : entry_(e), font_style_(nullptr), disabled_(false) {
 }
 
 void Table<void*>::EntryRecord::set_picture(uint8_t const col,
@@ -736,4 +772,4 @@ const std::string& Table<void*>::EntryRecord::get_string(uint8_t const col) cons
 
 	return data_.at(col).d_string;
 }
-}
+}  // namespace UI

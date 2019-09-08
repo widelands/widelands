@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@ struct SDL_Surface;
 
 class ImageNotFound : public WException {
 public:
-	ImageNotFound(const std::string& fn) : wexception("Image not found: %s", fn.c_str()) {
+	explicit ImageNotFound(const std::string& fn) : wexception("Image not found: %s", fn.c_str()) {
 	}
 };
 

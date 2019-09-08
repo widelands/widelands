@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,13 +26,11 @@
 
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
-
-using namespace std;
 
 namespace {
 
@@ -52,10 +50,8 @@ const uint32_t time_in_ms[] = {
    15 * kMinutes, 30 * kMinutes, 1 * kHours, 2 * kHours, 5 * kHours, 10 * kHours, 30 * kHours};
 
 const char BG_PIC[] = "images/wui/plot_area_bg.png";
-const RGBColor kAxisLineColor(0, 0, 0);
 constexpr int kAxisLinesWidth = 2;
 constexpr int kPlotLinesWidth = 3;
-const RGBColor kZeroLineColor(255, 255, 255);
 
 enum class Units {
 	kMinutesNarrow,
@@ -66,20 +62,18 @@ enum class Units {
 	kDayGeneric
 };
 
-string ytick_text_style(const string& text, const RGBColor& clr) {
-	static boost::format f(
-	   "<rt keep_spaces=1><p><font face=condensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
-	f % int(clr.r) % int(clr.g) % int(clr.b);
-	f % text;
+std::string ytick_text_style(const std::string& text, const UI::FontStyleInfo& style) {
+	static boost::format f("<rt keep_spaces=1><p>%s</p></rt>");
+	f % style.as_font_tag(text);
 	return f.str();
 }
 
-string xtick_text_style(const string& text) {
-	return ytick_text_style(text, RGBColor(255, 0, 0));
+std::string xtick_text_style(const std::string& text) {
+	return ytick_text_style(text, g_gr->styles().statistics_plot_style().x_tick_font());
 }
 
 /**
- * scale value down to the available space, which is specifiey by
+ * scale value down to the available space, which is specified by
  * the length of the y axis and the highest scale.
  */
 float scale_value(float const yline_length, uint32_t const highest_scale, int32_t const value) {
@@ -174,14 +168,27 @@ int32_t calc_how_many(uint32_t time_ms, uint32_t sample_rate) {
 /**
  * print the string into the RenderTarget.
  */
-void draw_value(const string& value,
-                const RGBColor& color,
-                const Vector2f& pos,
+void draw_value(const std::string& value,
+                const UI::FontStyleInfo& style,
+                const Vector2i& pos,
                 RenderTarget& dst) {
-	const Image* pic = UI::g_fh1->render(ytick_text_style(value, color));
-	Vector2f point(pos);  // Un-const this
-	UI::center_vertically(pic->height(), &point);
-	dst.blit(point, pic, BlendMode::UseAlpha, UI::Align::kRight);
+	std::shared_ptr<const UI::RenderedText> tick = UI::g_fh->render(ytick_text_style(value, style));
+	Vector2i point(pos);  // Un-const this
+	UI::center_vertically(tick->height(), &point);
+	tick->draw(dst, point, UI::Align::kRight);
+}
+
+uint32_t calc_plot_x_max_ticks(int32_t plot_width) {
+	// Render a number with 3 digits (maximal length which should appear)
+	return plot_width / UI::g_fh->render(xtick_text_style(" -888 "))->width();
+}
+
+int calc_slider_label_width(const std::string& label) {
+	// Font size and style as used by DiscreteSlider
+	return UI::g_fh
+	   ->render(as_richtext_paragraph(
+	      label, g_gr->styles().slider_style(UI::SliderStyle::kWuiLight).font()))
+	   ->width();
 }
 
 /**
@@ -192,6 +199,8 @@ void draw_diagram(uint32_t time_ms,
                   const uint32_t inner_h,
                   const float xline_length,
                   RenderTarget& dst) {
+	const RGBColor& axis_line_color = g_gr->styles().statistics_plot_style().axis_line_color();
+
 	uint32_t how_many_ticks, max_x;
 
 	Units unit = get_suggested_unit(time_ms, true);
@@ -219,14 +228,14 @@ void draw_diagram(uint32_t time_ms,
 	// Make sure that we always have a tick
 	how_many_ticks = std::max(how_many_ticks, 1u);
 
-	// first, tile the background
-	dst.tile(Recti(Vector2i(0, 0), inner_w, inner_h), g_gr->images().get(BG_PIC), Vector2i(0, 0));
+	// Make sure we haven't more ticks than we have space for -> avoid overlap
+	how_many_ticks = std::min(how_many_ticks, calc_plot_x_max_ticks(inner_w));
 
 	// Draw coordinate system
 	// X Axis
 	dst.draw_line_strip({Vector2f(kSpacing, inner_h - kSpaceBottom),
 	                     Vector2f(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
-	                    kAxisLineColor, kAxisLinesWidth);
+	                    axis_line_color, kAxisLinesWidth);
 	// Arrow
 	dst.draw_line_strip(
 	   {
@@ -234,12 +243,12 @@ void draw_diagram(uint32_t time_ms,
 	      Vector2f(kSpacing, inner_h - kSpaceBottom),
 	      Vector2f(kSpacing + 5, inner_h - kSpaceBottom + 3),
 	   },
-	   kAxisLineColor, kAxisLinesWidth);
+	   axis_line_color, kAxisLinesWidth);
 
 	//  Y Axis
-	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight, kSpacing),
+	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight, kSpacing * 3),
 	                     Vector2f(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
-	                    kAxisLineColor, kAxisLinesWidth);
+	                    axis_line_color, kAxisLinesWidth);
 	//  No Arrow here, since this doesn't continue.
 
 	float sub = (xline_length - kSpaceLeftOfLabel) / how_many_ticks;
@@ -248,33 +257,59 @@ void draw_diagram(uint32_t time_ms,
 	for (uint32_t i = 0; i <= how_many_ticks; ++i) {
 		dst.draw_line_strip({Vector2f(static_cast<int32_t>(posx), inner_h - kSpaceBottom),
 		                     Vector2f(static_cast<int32_t>(posx), inner_h - kSpaceBottom + 3)},
-		                    kAxisLineColor, kAxisLinesWidth);
+		                    axis_line_color, kAxisLinesWidth);
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
-		const Image* xtick = UI::g_fh1->render(
-		   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
-		Vector2f pos(posx, inner_h - kSpaceBottom + 10);
-		UI::center_vertically(xtick->height(), &pos);
-		dst.blit(pos, xtick, BlendMode::UseAlpha, UI::Align::kCenter);
+		if (how_many_ticks != 0 && i != 0) {
+			std::shared_ptr<const UI::RenderedText> xtick = UI::g_fh->render(
+			   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
+			Vector2i pos(posx, inner_h - kSpaceBottom + 10);
+			UI::center_vertically(xtick->height(), &pos);
+			xtick->draw(dst, pos, UI::Align::kCenter);
+		}
 
 		posx -= sub;
 	}
 
-	//  draw yticks, one at full, one at half
+	//  draw yticks, one at full, one at three-quarter, one at half, one at quarter & 0
+	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight + 3, kSpacing * 3),
+	                     Vector2f(inner_w - kSpaceRight - 3, kSpacing * 3)},
+	                    axis_line_color, kAxisLinesWidth);
+
 	dst.draw_line_strip(
-	   {Vector2f(inner_w - kSpaceRight, kSpacing), Vector2f(inner_w - kSpaceRight - 3, kSpacing)},
-	   kAxisLineColor, kAxisLinesWidth);
+	   {Vector2f(
+	       inner_w - kSpaceRight + 2,
+	       kSpacing * 3 + ((((inner_h - kSpaceBottom) + kSpacing * 3) / 2) - kSpacing * 3) / 2),
+	    Vector2f(
+	       inner_w - kSpaceRight,
+	       kSpacing * 3 + ((((inner_h - kSpaceBottom) + kSpacing * 3) / 2) - kSpacing * 3) / 2)},
+	   axis_line_color, kAxisLinesWidth);
+
 	dst.draw_line_strip(
-	   {Vector2f(inner_w - kSpaceRight, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2),
-	    Vector2f(inner_w - kSpaceRight - 3, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2)},
-	   kAxisLineColor, kAxisLinesWidth);
+	   {Vector2f(inner_w - kSpaceRight + 3, ((inner_h - kSpaceBottom) + kSpacing * 3) / 2),
+	    Vector2f(inner_w - kSpaceRight, ((inner_h - kSpaceBottom) + kSpacing * 3) / 2)},
+	   axis_line_color, kAxisLinesWidth);
+
+	dst.draw_line_strip(
+	   {Vector2f(inner_w - kSpaceRight + 2,
+	             inner_h - kSpaceBottom -
+	                (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + kSpacing * 3) / 2) / 2),
+	    Vector2f(inner_w - kSpaceRight,
+	             inner_h - kSpaceBottom -
+	                (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + kSpacing * 3) / 2) / 2)},
+	   axis_line_color, kAxisLinesWidth);
+
+	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight + 3, inner_h - kSpaceBottom),
+	                     Vector2f(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
+	                    axis_line_color, kAxisLinesWidth);
 
 	//  print the used unit
-	const Image* xtick = UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
-	Vector2f pos(2, kSpacing + 2);
+	std::shared_ptr<const UI::RenderedText> xtick =
+	   UI::g_fh->render(xtick_text_style(get_generic_unit_name(unit)));
+	Vector2i pos(2, kSpacing + 2);
 	UI::center_vertically(xtick->height(), &pos);
-	dst.blit(pos, xtick, BlendMode::UseAlpha, UI::Align::kLeft);
+	xtick->draw(dst, pos);
 }
 
 }  // namespace
@@ -292,7 +327,7 @@ WuiPlotArea::WuiPlotArea(UI::Panel* const parent,
      needs_update_(true),
      lastupdate_(0),
      xline_length_(get_inner_w() - kSpaceRight - kSpacing),
-     yline_length_(get_inner_h() - kSpaceBottom - kSpacing),
+     yline_length_(get_inner_h() - kSpaceBottom - kSpacing * 3),
      time_ms_(0),
      highest_scale_(0),
      sub_(0),
@@ -449,27 +484,35 @@ void WuiPlotArea::update() {
  * Draw this. This is the main function
  */
 void WuiPlotArea::draw(RenderTarget& dst) {
+	dst.tile(Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), g_gr->images().get(BG_PIC),
+	         Vector2i::zero());
 	draw_plot(dst, get_inner_h() - kSpaceBottom, std::to_string(highest_scale_), highest_scale_);
+	// Print the 0
+	draw_value((boost::format("%u") % (0)).str(),
+	           g_gr->styles().statistics_plot_style().x_tick_font(),
+	           Vector2i(get_inner_w() - kSpaceRight + 3, get_inner_h() - kSpaceBottom + 10), dst);
 }
 
 void WuiPlotArea::draw_plot(RenderTarget& dst,
                             float yoffset,
                             const std::string& yscale_label,
                             uint32_t highest_scale) {
-	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length_, dst);
-
-	//  print the maximal value into the top right corner
-	draw_value(yscale_label, RGBColor(60, 125, 0),
-	           Vector2f(get_inner_w() - kSpaceRight - 2, kSpacing + 2), dst);
 
 	//  plot the pixels
 	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
 		if (plotdata_[plot].showplot) {
-			draw_plot_line(dst, (plotmode_ == Plotmode::kRelative) ? plotdata_[plot].relative_data :
-			                                                         plotdata_[plot].absolute_data,
+			draw_plot_line(dst,
+			               (plotmode_ == Plotmode::kRelative) ? plotdata_[plot].relative_data.get() :
+			                                                    plotdata_[plot].absolute_data,
 			               highest_scale, sub_, plotdata_[plot].plotcolor, yoffset);
 		}
 	}
+
+	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length_, dst);
+
+	//  print the maximal value into the top right corner
+	draw_value(yscale_label, g_gr->styles().statistics_plot_style().y_max_value_font(),
+	           Vector2i(get_inner_w() - kSpaceRight + 3, kSpacing + 2), dst);
 }
 
 /**
@@ -523,8 +566,8 @@ void WuiPlotArea::register_plot_data(uint32_t const id,
 		plotdata_.resize(id + 1);
 
 	plotdata_[id].absolute_data = data;
-	plotdata_[id].relative_data =
-	   new std::vector<uint32_t>();  // Will be filled in the update() function.
+	plotdata_[id].relative_data.reset(
+	   new std::vector<uint32_t>());  // Will be filled in the update() function.
 	plotdata_[id].showplot = false;
 	plotdata_[id].plotcolor = color;
 
@@ -556,7 +599,23 @@ void WuiPlotAreaSlider::draw(RenderTarget& dst) {
 	uint32_t new_game_time_id = plot_area_.get_game_time_id();
 	if (new_game_time_id != last_game_time_id_) {
 		last_game_time_id_ = new_game_time_id;
-		set_labels(plot_area_.get_labels());
+		std::vector<std::string> new_labels = plot_area_.get_labels();
+		// There should be always at least "15m" and "game"
+		assert(new_labels.size() >= 2);
+		// The slider places the level with equal distances, so find the
+		// longest label and use it to calculate how many labels are possible
+		int max_width = std::max(
+		   calc_slider_label_width(new_labels[0]), calc_slider_label_width(new_labels.back()));
+		for (size_t i = 1; i < new_labels.size() - 1; ++i) {
+			max_width = std::max(max_width, calc_slider_label_width(new_labels[i]));
+			if (max_width * (static_cast<int>(i) + 2) > get_w()) {
+				// We have too many labels. Drop all further ones
+				new_labels[i] = new_labels.back();
+				new_labels.resize(i + 1);
+				break;
+			}
+		}
+		set_labels(new_labels);
 		slider.set_value(plot_area_.get_time_id());
 	}
 	UI::DiscreteSlider::draw(dst);
@@ -640,18 +699,25 @@ void DifferentialPlotArea::update() {
 }
 
 void DifferentialPlotArea::draw(RenderTarget& dst) {
-	// yoffset of the zero line
-	float const yoffset = kSpacing + ((get_inner_h() - kSpaceBottom) - kSpacing) / 2;
-	draw_plot(dst, yoffset, std::to_string(highest_scale_), 2 * highest_scale_);
 
-	// Print the min value
-	draw_value((boost::format("-%u") % (highest_scale_)).str(), RGBColor(125, 0, 0),
-	           Vector2f(get_inner_w() - kSpaceRight - 2, get_inner_h() - kSpacing - 15), dst);
+	// first, tile the background
+	dst.tile(Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), g_gr->images().get(BG_PIC),
+	         Vector2i::zero());
+
+	// yoffset of the zero line
+	float const yoffset = ((get_inner_h() - kSpaceBottom) + kSpacing * 3) / 2;
 
 	// draw zero line
 	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),
 	                     Vector2f(get_inner_w() - kSpaceRight - xline_length_, yoffset)},
-	                    kZeroLineColor, kPlotLinesWidth);
+	                    g_gr->styles().statistics_plot_style().zero_line_color(), kPlotLinesWidth);
+
+	// Draw data and diagram
+	draw_plot(dst, yoffset, std::to_string(highest_scale_), 2 * highest_scale_);
+	// Print the min value
+	draw_value((boost::format("-%u") % (highest_scale_)).str(),
+	           g_gr->styles().statistics_plot_style().y_min_value_font(),
+	           Vector2i(get_inner_w() - kSpaceRight + 3, get_inner_h() - kSpaceBottom + 10), dst);
 }
 
 /**

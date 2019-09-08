@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,12 +65,12 @@ struct ImmovableProgram {
 	struct ActAnimate : public Action {
 		ActAnimate(char* parameters, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
-		uint32_t animation() const {
-			return id_;
+		const std::string& animation() const {
+			return animation_name_;
 		}
 
 	private:
-		uint32_t id_;
+		std::string animation_name_;
 		Duration duration_;
 	};
 
@@ -133,10 +133,9 @@ struct ImmovableProgram {
 	/// Parameter syntax:
 	///    parameters ::= directory sound [priority]
 	/// Parameter semantics:
-	///    directory:
-	///       The directory of the sound files, relative to the datadir.
-	///    sound:
-	///       The base filename of a sound effect (relative to the directory).
+	///    path:
+	///       The directory of the sound files, relative to the datadir, followed
+	///       by the base filename of a sound effect (relative to the directory).
 	///    priority:
 	///       An integer. If omitted, 127 is used.
 	///
@@ -147,7 +146,7 @@ struct ImmovableProgram {
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		std::string name;
+		FxId fx;
 		uint8_t priority;
 	};
 
@@ -164,8 +163,8 @@ struct ImmovableProgram {
 	 *    decay-time:
 	 *       Time until construction decays one step if no progress has been made.
 	 */
-	struct ActConstruction : public Action {
-		ActConstruction(char* parameters, ImmovableDescr&);
+	struct ActConstruct : public Action {
+		ActConstruct(char* parameters, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 		Duration buildtime() const {
@@ -176,7 +175,7 @@ struct ImmovableProgram {
 		}
 
 	private:
-		uint32_t animid_;
+		std::string animation_name_;
 		Duration buildtime_;
 		Duration decaytime_;
 	};
@@ -229,6 +228,6 @@ struct ImmovableActionData {
 
 	static ImmovableActionData* load(FileRead& fr, Immovable& imm, const std::string& name);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_IMMOVABLE_PROGRAM_H

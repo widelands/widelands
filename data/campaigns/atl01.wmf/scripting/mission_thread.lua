@@ -2,6 +2,20 @@
 --                      Atlanteans Tutorial Mission 01
 -- =======================================================================
 
+function send_building_lost_message(f)
+   local message = building_lost(f.immovable.descr.name)
+   send_message(
+      p1,
+      message.title,
+      message.text,
+      {
+         field = f,
+         popup = false,
+         icon = f.immovable.descr.icon_name,
+         message.title
+      }
+   )
+end
 
 -- ==============
 -- Logic Threads
@@ -218,8 +232,7 @@ function check_for_ships()
 
    -- Success
    msg_boxes(scenario_won)
-   p1:reveal_scenario("atlanteans01")
-
+   p1:mark_scenario_as_solved("atl01.wmf")
 end
 
 

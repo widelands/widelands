@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,6 @@ struct ItemWaresDisplay : UI::Panel {
 	uint32_t items_per_row() const {
 		return items_per_row_;
 	}
-	void set_items_per_row(uint32_t nr);
 
 	void clear();
 	void add(bool worker, Widelands::DescriptionIndex index);

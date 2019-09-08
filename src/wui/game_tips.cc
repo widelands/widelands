@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -31,6 +31,8 @@
 #include "scripting/lua_table.h"
 
 #define BG_IMAGE "images/loadscreens/tips_bg.png"
+
+constexpr int kTextPadding = 48;
 
 GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>& names)
    : lastUpdated_(0),
@@ -99,19 +101,17 @@ void GameTips::stop() {
 }
 
 void GameTips::show_tip(int32_t index) {
-	// try to load a background
-	const Image* pic_background = g_gr->images().get(BG_IMAGE);
-	assert(pic_background);
-
 	RenderTarget& rt = *g_gr->get_render_target();
 
-	uint16_t w = pic_background->width();
-	uint16_t h = pic_background->height();
-	Vector2f pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);
-	Rectf tips_area(pt, w, h);
+	const Image* pic_background = g_gr->images().get(BG_IMAGE);
+	const int w = pic_background->width();
+	const int h = pic_background->height();
+	Vector2i pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);
 	rt.blit(pt, pic_background);
 
-	const Image* rendered_text = UI::g_fh1->render(as_game_tip(tips_[index].text), tips_area.w);
-	rt.blit(tips_area.center() - Vector2f(rendered_text->width() / 2, rendered_text->height() / 2),
-	        rendered_text);
+	std::shared_ptr<const UI::RenderedText> rendered_text =
+	   UI::g_fh->render(as_game_tip(tips_[index].text), w - 2 * kTextPadding);
+	pt = Vector2i((g_gr->get_xres() - rendered_text->width()) / 2,
+	              (g_gr->get_yres() - rendered_text->height()) / 2);
+	rendered_text->draw(rt, pt);
 }

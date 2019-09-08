@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,35 +20,22 @@
 #ifndef WL_BASE_LOG_H
 #define WL_BASE_LOG_H
 
+#include "base/macros.h"
 #include <iostream>
-
-#ifdef __GNUC__
-#define PRINTF_FORMAT(b, c) __attribute__((__format__(__printf__, b, c)))
-#else
-#define PRINTF_FORMAT(b, c)
-#endif
-
-// printf macros for size_t, in the style of inttypes.h
-#ifdef _LP64
-#define PRIS_PREFIX "z"
-#else
-#define PRIS_PREFIX
-#endif
-
-// Use these macros after a % in a printf format string
-// to get correct 32/64 bit behavior, like this:
-// size_t size = records.size();
-// printf("%" PRIuS "\n", size);
-
-#define PRIdS PRIS_PREFIX "d"
-#define PRIxS PRIS_PREFIX "x"
-#define PRIuS PRIS_PREFIX "u"
-#define PRIXS PRIS_PREFIX "X"
-#define PRIoS PRIS_PREFIX "o"
 
 // Print a formatted log messages to stdout on most systems and 'stdout.txt' on windows.
 void log(const char*, ...) PRINTF_FORMAT(1, 2);
 
 extern bool g_verbose;
+
+#ifdef _WIN32
+/** Set the directory that stdout.txt shall be written to.
+ *  This should be the same dir where widelands writes its config file. Returns true on success.
+ */
+bool set_logging_dir(const std::string& homedir);
+// Set the directory that stdout.txt shall be written to to the directory the program is started
+// from. Use this only for test cases.
+void set_logging_dir();
+#endif
 
 #endif  // end of include guard: WL_BASE_LOG_H

@@ -1,8 +1,7 @@
--- TODO(GunChleoc): This is unused
-
 function immovable_helptext(tribe)
    local helptext = {
-      default = ""
+      -- TRANSLATORS: Helptext for a tribe immovable
+      default = _("The remains of a destroyed building.")
    }
    local result = ""
    if tribe then

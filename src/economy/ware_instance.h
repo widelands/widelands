@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,6 @@
 #include "economy/transfer.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/ware_descr.h"
-#include "logic/widelands.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
@@ -60,7 +59,7 @@ class WareInstance : public MapObject {
 
 public:
 	WareInstance(DescriptionIndex, const WareDescr* const);
-	~WareInstance();
+	~WareInstance() override;
 
 	MapObject* get_location(EditorGameBase& egbase) {
 		return location_.get(egbase);
@@ -72,7 +71,7 @@ public:
 		return descr_index_;
 	}
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 	void update(Game&);
@@ -93,7 +92,7 @@ public:
 		return transfer_;
 	}
 
-	void log_general_info(const EditorGameBase& egbase) override;
+	void log_general_info(const EditorGameBase& egbase) const override;
 
 private:
 	ObjectPointer location_;
@@ -107,15 +106,15 @@ private:
 	// loading and saving stuff
 protected:
 	struct Loader : MapObject::Loader {
-		Loader();
+		Loader() = default;
 
 		void load(FileRead&);
 		void load_pointers() override;
 		void load_finish() override;
 
 	private:
-		uint32_t location_;
-		uint32_t transfer_nextstep_;
+		uint32_t location_ = 0U;
+		uint32_t transfer_nextstep_ = 0U;
 		Transfer::ReadData transfer_;
 	};
 
@@ -128,6 +127,6 @@ public:
 	static MapObject::Loader*
 	load(EditorGameBase&, MapObjectLoader&, FileRead&, const TribesLegacyLookupTable& lookup_table);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_WARE_INSTANCE_H

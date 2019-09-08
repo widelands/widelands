@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2017 by the Widelands Development Team
+ * Copyright (C) 2013-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,9 +37,11 @@ struct MapVersion {
 	int32_t map_version_major;
 	int32_t map_version_minor;
 	uint32_t map_version_timestamp;
+	// Map compatibility information for the website
+	int needs_widelands_version_after;
 
 	MapVersion();
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_REVISION_H

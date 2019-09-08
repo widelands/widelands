@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include <boost/bind.hpp>
 #include <boost/test/unit_test.hpp>
 
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/iroute.h"
 #include "economy/itransport_cost_calculator.h"
@@ -29,6 +30,10 @@
 #include "economy/routing_node.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands_geometry.h"
+
+// Triggered by BOOST_AUTO_TEST_CASE
+CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
+CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
 using namespace Widelands;
 
@@ -39,7 +44,7 @@ using namespace Widelands;
 class BadAccess : public std::exception {};
 class TestingRoutingNode : public RoutingNode {
 public:
-	TestingRoutingNode(int32_t wcost = 0, Coords pos = Coords(0, 0))
+	explicit TestingRoutingNode(int32_t wcost = 0, Coords pos = Coords(0, 0))
 	   : waitcost_(wcost), position_(pos) {
 	}
 	void add_neighbour(TestingRoutingNode* nb) {
@@ -387,8 +392,8 @@ struct ComplexRouterFixture {
 	}
 
 	/**
-	  * Convenience function
-	  */
+	 * Convenience function
+	 */
 	TestingRoutingNode* new_node_w_neighbour(TestingRoutingNode* const d,
 	                                         const Coords& pos = Coords(0, 0),
 	                                         int32_t = 1,
@@ -403,11 +408,11 @@ struct ComplexRouterFixture {
 	}
 
 	/**
-	  * Add a triangle of nodes (each node is connected to the
-	  * other two) starting at the already existing node.
-	  *
-	  * \return The argument Node
-	  */
+	 * Add a triangle of nodes (each node is connected to the
+	 * other two) starting at the already existing node.
+	 *
+	 * \return The argument Node
+	 */
 	TestingRoutingNode* add_triangle(TestingRoutingNode* d) {
 		TestingRoutingNode* dnew_1 = new TestingRoutingNode();
 		TestingRoutingNode* dnew_2 = new TestingRoutingNode();
@@ -425,10 +430,10 @@ struct ComplexRouterFixture {
 	}
 
 	/**
-	  * Add a dead end to confuse the router
-	  *
-	  * \arg d The node to attach the dead end to
-	  */
+	 * Add a dead end to confuse the router
+	 *
+	 * \arg d The node to attach the dead end to
+	 */
 	TestingRoutingNode* add_dead_end(TestingRoutingNode* d) {
 
 		// Some random dead ends

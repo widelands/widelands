@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,11 +28,10 @@
 
 #include "graphic/color.h"
 #include "graphic/image.h"
+#include "graphic/image_cache.h"
 #include "graphic/text/font_set.h"
-
-class Texture;
-class ImageCache;
-class TextureCache;
+#include "graphic/text/rendered_text.h"
+#include "graphic/text/texture_cache.h"
 
 namespace RT {
 
@@ -58,17 +57,6 @@ struct RendererStyle {
 };
 
 /**
- * A map that maps pixels to a string. The string are the references which can be used
- * for hyperlink like constructions.
- */
-class IRefMap {
-public:
-	virtual ~IRefMap() {
-	}
-	virtual std::string query(int16_t x, int16_t y) = 0;
-};
-
-/**
  * This is the rendering engine. The returned images are not owned by the
  * caller.
  */
@@ -80,17 +68,13 @@ public:
 	~Renderer();
 
 	// Render the given string in the given width. Restricts the allowed tags to
-	// the ones in TagSet. The renderer does not do caching in the TextureCache
-	// for its individual nodes, but the font render does.
-	Texture* render(const std::string&, uint16_t width, const TagSet& tagset = TagSet());
-
-	// Returns a reference map of the clickable hyperlinks in the image. This
-	// will do no caching and needs to do all layouting, so do not call this too
-	// often. The returned object must be freed.
-	IRefMap* make_reference_map(const std::string&, uint16_t, const TagSet& = TagSet());
+	// the ones in TagSet.
+	std::shared_ptr<const UI::RenderedText>
+	render(const std::string&, uint16_t width, bool is_rtl, const TagSet& tagset = TagSet());
 
 private:
-	RenderNode* layout_(const std::string& text, uint16_t width, const TagSet& allowed_tags);
+	std::shared_ptr<RenderNode>
+	layout(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags);
 
 	std::unique_ptr<FontCache> font_cache_;
 	std::unique_ptr<Parser> parser_;
@@ -99,6 +83,6 @@ private:
 	const UI::FontSets& fontsets_;       // All fontsets
 	RendererStyle renderer_style_;       // Properties that all render nodes need to know about
 };
-}
+}  // namespace RT
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_RT_RENDER_H

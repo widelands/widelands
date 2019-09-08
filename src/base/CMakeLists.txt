@@ -12,6 +12,7 @@ wl_library(base_log
   DEPENDS
     base_macros
     base_exceptions
+    build_info
 )
 
 wl_library(base_exceptions

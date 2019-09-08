@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,7 +68,7 @@ public:
 
 private:
 	struct Node {
-		Node(const Recti& init_r);
+		explicit Node(const Recti& init_r);
 		void split(int w, int h);
 
 		bool used;
@@ -81,7 +81,7 @@ private:
 
 	struct Block {
 		Block(int init_index, const Image* init_texture)
-		   : index(init_index), texture(init_texture), done(false) {
+		   : index(init_index), texture(init_texture), node(nullptr), done(false) {
 		}
 
 		// The index in the order the blocks have been added.

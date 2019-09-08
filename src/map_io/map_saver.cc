@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,6 +58,7 @@
 #include "map_io/map_scripting_packet.h"
 #include "map_io/map_terrain_packet.h"
 #include "map_io/map_version_packet.h"
+#include "map_io/map_wincondition_packet.h"
 
 namespace Widelands {
 
@@ -70,8 +71,9 @@ MapSaver::~MapSaver() {
 }
 
 void MapSaver::save() {
+	const Map& map = egbase_.map();
 	std::string timer_message = "MapSaver::save() for '";
-	timer_message += egbase_.map().get_name();
+	timer_message += map.get_name();
 	timer_message += "' took %ums";
 	ScopedTimer timer(timer_message);
 
@@ -154,15 +156,12 @@ void MapSaver::save() {
 	log("Writing Map Version ... ");
 	{
 		MapVersionPacket p;
-		p.write(fs_, egbase_, *mos_);
+		p.write(fs_, egbase_);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	// We don't save these when saving a map in the editor.
 	if (is_game) {
-
-		const Map& map = egbase_.map();
-
 		PlayerNumber const nr_players = map.get_nrplayers();
 
 		//  allowed worker types
@@ -222,6 +221,14 @@ void MapSaver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	if (is_game) {
+		// Map data used by win conditions
+		log("Writing Wincondition Data ... ");
+		{
+			MapWinconditionPacket p;
+			p.write(fs_, *egbase_.mutable_map(), *mos_);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
+
 		// DATA PACKETS
 		if (mos_->get_nr_flags()) {
 			log("Writing Flagdata Data ... ");
@@ -285,7 +292,7 @@ void MapSaver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing map images ... ");
-	save_map_images(&fs_, egbase_.map().filesystem());
+	save_map_images(&fs_, map.filesystem());
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	if (is_game) {

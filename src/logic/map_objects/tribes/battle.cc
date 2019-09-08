@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,28 +53,30 @@ Battle::Battle()
      last_attack_hits_(false) {
 }
 
-Battle::Battle(Game& game, Soldier& First, Soldier& Second)
+Battle::Battle(Game& game, Soldier* first_soldier, Soldier* second_soldier)
    : MapObject(&g_battle_descr),
-     first_(&First),
-     second_(&Second),
+     first_(first_soldier),
+     second_(second_soldier),
+     creationtime_(0),
      readyflags_(0),
      damage_(0),
-     first_strikes_(true) {
-	assert(First.get_owner() != Second.get_owner());
+     first_strikes_(true),
+     last_attack_hits_(false) {
+	assert(first_soldier->get_owner() != second_soldier->get_owner());
 	{
 		StreamWrite& ss = game.syncstream();
-		ss.unsigned_32(0x00e111ba);  // appears as ba111e00 in a hexdump
-		ss.unsigned_32(First.serial());
-		ss.unsigned_32(Second.serial());
+		ss.unsigned_8(SyncEntry::kBattle);
+		ss.unsigned_32(first_soldier->serial());
+		ss.unsigned_32(second_soldier->serial());
 	}
 
-	// Ensures only live soldiers eganges in a battle
-	assert(First.get_current_health() && Second.get_current_health());
+	// Ensures only live soldiers engage in a battle
+	assert(first_soldier->get_current_health() && second_soldier->get_current_health());
 
 	init(game);
 }
 
-void Battle::init(EditorGameBase& egbase) {
+bool Battle::init(EditorGameBase& egbase) {
 	MapObject::init(egbase);
 
 	creationtime_ = egbase.get_gametime();
@@ -89,6 +91,7 @@ void Battle::init(EditorGameBase& egbase) {
 		battle->cancel(game, *second_);
 	}
 	second_->set_battle(game, this);
+	return true;
 }
 
 void Battle::cleanup(EditorGameBase& egbase) {
@@ -128,10 +131,17 @@ bool Battle::locked(Game& game) {
 	return first_->get_position() == second_->get_position();
 }
 
-Soldier* Battle::opponent(Soldier& soldier) {
+Soldier* Battle::opponent(const Soldier& soldier) const {
 	assert(first_ == &soldier || second_ == &soldier);
 	Soldier* other_soldier = first_ == &soldier ? second_ : first_;
 	return other_soldier;
+}
+
+unsigned int Battle::get_pending_damage(const Soldier* for_whom) const {
+	if (for_whom == (first_strikes_ ? first_ : second_)) {
+		return damage_;
+	}
+	return 0;
 }
 
 //  TODO(unknown): Couldn't this code be simplified tremendously by doing all scheduling
@@ -164,25 +174,27 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	// Apply pending damage
 	if (damage_ && oneReadyToFight) {
 		// Current attacker is last defender, so damage goes to current attacker
-		if (first_strikes_)
+		if (first_strikes_) {
 			first_->damage(damage_);
-		else
+		} else {
 			second_->damage(damage_);
+		}
 		damage_ = 0;
 	}
 
 	if (soldier.get_current_health() < 1) {
 		molog("[battle] soldier %u lost the battle\n", soldier.serial());
-		soldier.owner().count_casualty();
-		opponent(soldier)->owner().count_kill();
+		soldier.get_owner()->count_casualty();
+		opponent(soldier)->get_owner()->count_kill();
 		soldier.start_task_die(game);
 		molog("[battle] waking up winner %d\n", opponent(soldier)->serial());
 		opponent(soldier)->send_signal(game, "wakeup");
 		return schedule_destroy(game);
 	}
 
-	if (!first_ || !second_)
+	if (!first_ || !second_) {
 		return soldier.skip_act();
+	}
 
 	// Here is a timeout to prevent battle freezes
 	if (waitingForOpponent && (game.get_gametime() - creationtime_) > 90 * 1000) {
@@ -213,7 +225,7 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 
 		what_anim = this_soldier_is == 1 ? "evade_success_e" : "evade_success_w";
 		return soldier.start_task_idle(
-		   game, soldier.descr().get_rand_anim(game, what_anim.c_str()), 10);
+		   game, soldier.descr().get_rand_anim(game, what_anim, &soldier), 10);
 	}
 	if (bothReadyToFight) {
 		//  Our opponent is waiting for us to fight.
@@ -245,10 +257,12 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	molog("[battle] (%u) vs (%u) is %d, first strikes %d, last hit %d\n", soldier.serial(),
 	      opponent(soldier)->serial(), this_soldier_is, first_strikes_, last_attack_hits_);
 
+	bool shorten_animation = false;
 	if (this_soldier_is == 1) {
 		if (first_strikes_) {
 			if (last_attack_hits_) {
 				what_anim = "evade_failure_e";
+				shorten_animation = true;
 			} else {
 				what_anim = "evade_success_e";
 			}
@@ -269,13 +283,18 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 		} else {
 			if (last_attack_hits_) {
 				what_anim = "evade_failure_w";
+				shorten_animation = true;
 			} else {
 				what_anim = "evade_success_w";
 			}
 		}
 	}
+	// If the soldier will die as soon as the animation is complete, don't
+	// show it for the full length to prevent overlooping (bug 1817664)
+	shorten_animation &= damage_ >= soldier.get_current_health();
 	molog("[battle] Starting animation %s for soldier %d\n", what_anim.c_str(), soldier.serial());
-	soldier.start_task_idle(game, soldier.descr().get_rand_anim(game, what_anim.c_str()), 1000);
+	soldier.start_task_idle(game, soldier.descr().get_rand_anim(game, what_anim, &soldier),
+	                        shorten_animation ? 850 : 1000);
 }
 
 void Battle::calculate_round(Game& game) {
@@ -389,4 +408,4 @@ MapObject::Loader* Battle::load(EditorGameBase& egbase, MapObjectLoader& mol, Fi
 
 	return loader.release();
 }
-}
+}  // namespace Widelands

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,24 +21,24 @@
 
 #include "editor/editorinteractive.h"
 #include "editor/tools/tool.h"
-#include "logic/map.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/mapfringeregion.h"
 #include "logic/mapregion.h"
 
 using namespace Widelands;
 
-/// static callback function for overlay calculation
-int32_t editor_Tool_set_port_space_callback(const Widelands::TCoords<Widelands::FCoords>& c,
-                                            const Map& map) {
+namespace {
+
+Widelands::NodeCaps port_tool_nodecaps(const Widelands::FCoords& c, const Map& map) {
 	NodeCaps const caps = c.field->nodecaps();
-	FCoords f = map.get_fcoords(*c.field);
 	if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG) {
-		if (!map.find_portdock(f).empty())
+		if (!map.find_portdock(c).empty())
 			return caps;
 	}
-	return 0;
+	return NodeCaps::CAPS_NONE;
 }
+
+}  // namespace
 
 EditorSetPortSpaceTool::EditorSetPortSpaceTool(EditorUnsetPortSpaceTool& the_unset_tool)
    : EditorTool(the_unset_tool, the_unset_tool) {
@@ -47,9 +47,8 @@ EditorSetPortSpaceTool::EditorSetPortSpaceTool(EditorUnsetPortSpaceTool& the_uns
 EditorUnsetPortSpaceTool::EditorUnsetPortSpaceTool() : EditorTool(*this, *this) {
 }
 
-int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::World& world,
-                                                  const Widelands::NodeAndTriangle<>& center,
-                                                  EditorInteractive&,
+int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                                  EditorInteractive& eia,
                                                   EditorActionArgs* args,
                                                   Map* map) {
 	assert(0 <= center.node.x);
@@ -63,10 +62,10 @@ int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::World& world,
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
 		//  check if field is valid
-		if (editor_Tool_set_port_space_callback(mr.location(), *map)) {
-			map->set_port_space(mr.location(), true);
+		if (port_tool_nodecaps(mr.location(), *map) != NodeCaps::CAPS_NONE) {
+			map->set_port_space(eia.egbase(), mr.location(), true);
 			Area<FCoords> a(mr.location(), 0);
-			map->recalc_for_field_area(world, a);
+			map->recalc_for_field_area(eia.egbase(), a);
 			++nr;
 		}
 	} while (mr.advance(*map));
@@ -74,17 +73,21 @@ int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::World& world,
 	return nr;
 }
 
-int32_t EditorSetPortSpaceTool::handle_undo_impl(const Widelands::World& world,
-                                                 const NodeAndTriangle<Coords>& center,
+Widelands::NodeCaps
+EditorSetPortSpaceTool::nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+                                               const Widelands::EditorGameBase& egbase) {
+	return port_tool_nodecaps(fcoords, egbase.map());
+}
+
+int32_t EditorSetPortSpaceTool::handle_undo_impl(const NodeAndTriangle<Coords>& center,
                                                  EditorInteractive& parent,
                                                  EditorActionArgs* args,
                                                  Map* map) {
-	return parent.tools()->unset_port_space.handle_click_impl(world, center, parent, args, map);
+	return parent.tools()->unset_port_space.handle_click_impl(center, parent, args, map);
 }
 
-int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::World& world,
-                                                    const Widelands::NodeAndTriangle<>& center,
-                                                    EditorInteractive&,
+int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                                    EditorInteractive& eia,
                                                     EditorActionArgs* args,
                                                     Map* map) {
 	assert(0 <= center.node.x);
@@ -98,10 +101,10 @@ int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::World& worl
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
 		//  check if field is valid
-		if (editor_Tool_set_port_space_callback(mr.location(), *map)) {
-			map->set_port_space(mr.location(), false);
+		if (port_tool_nodecaps(mr.location(), *map)) {
+			map->set_port_space(eia.egbase(), mr.location(), false);
 			Area<FCoords> a(mr.location(), 0);
-			map->recalc_for_field_area(world, a);
+			map->recalc_for_field_area(eia.egbase(), a);
 			++nr;
 		}
 	} while (mr.advance(*map));
@@ -109,10 +112,15 @@ int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::World& worl
 	return nr;
 }
 
-int32_t EditorUnsetPortSpaceTool::handle_undo_impl(const Widelands::World& world,
-                                                   const NodeAndTriangle<Coords>& center,
+int32_t EditorUnsetPortSpaceTool::handle_undo_impl(const NodeAndTriangle<Coords>& center,
                                                    EditorInteractive& parent,
                                                    EditorActionArgs* args,
                                                    Map* map) {
-	return parent.tools()->set_port_space.handle_click_impl(world, center, parent, args, map);
+	return parent.tools()->set_port_space.handle_click_impl(center, parent, args, map);
+}
+
+Widelands::NodeCaps
+EditorUnsetPortSpaceTool::nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+                                                 const Widelands::EditorGameBase& egbase) {
+	return port_tool_nodecaps(fcoords, egbase.map());
 }

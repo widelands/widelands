@@ -16,8 +16,8 @@ animations = {
       fps = 5
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {8, 23}, 10)
-add_walking_animations(animations, "walkload", dirname, "walkload", {7, 23}, 10)
+add_directional_animation(animations, "walk", dirname, "walk", {8, 23}, 10)
+add_directional_animation(animations, "walkload", dirname, "walkload", {7, 23}, 10)
 
 
 tribes:new_worker_type {
@@ -35,21 +35,20 @@ tribes:new_worker_type {
    },
 
    programs = {
-      plantreed = {
-         "findspace size:any radius:1",
-         "walk coords",
-         "animation planting 1500",
-         "plant tribe:reed_tiny",
-         "animation planting 1500",
+      plant = {
+         "findspace=size:any radius:1",
+         "walk=coords",
+         "animate=planting 6500",
+         "plant=attrib:seed_reed",
+         "animate=planting 6500",
          "return"
       },
-      harvestreed = {
-         "findobject attrib:ripe_reed radius:1",
-         "walk object",
-         "animation harvesting 12000",
-         "object harvest",
-         "animation harvesting 1",
-         "createware thatch_reed",
+      harvest = {
+         "findobject=attrib:ripe_reed radius:1",
+         "walk=object",
+         "animate=harvesting 14000",
+         "callobject=harvest",
+         "createware=reed",
          "return"
       },
    },

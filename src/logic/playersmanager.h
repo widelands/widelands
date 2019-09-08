@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include <vector>
 
 #include "graphic/playercolor.h"
+#include "logic/player_end_result.h"
 #include "logic/widelands.h"
 
 namespace Widelands {
@@ -31,13 +32,6 @@ namespace Widelands {
 class EditorGameBase;
 class Player;
 class Player;
-
-enum class PlayerEndResult : uint8_t {
-	PLAYER_LOST = 0,
-	PLAYER_WON = 1,
-	PLAYER_RESIGNED = 2,
-	UNDEFINED = 255
-};
 
 /**
  * Hold data once a player left the game, or on game ends.
@@ -57,7 +51,7 @@ struct PlayerEndStatus {
 
 class PlayersManager {
 public:
-	PlayersManager(EditorGameBase& egbase);
+	explicit PlayersManager(EditorGameBase& egbase);
 	virtual ~PlayersManager();
 
 	void cleanup();
@@ -68,7 +62,7 @@ public:
 	 * Create the player structure for the given plnum.
 	 * Note that AI player structures and the InteractivePlayer are created when
 	 * the game starts. Similar for remote players.
-	*/
+	 */
 	Player* add_player(PlayerNumber,
 	                   uint8_t initialization_index,
 	                   const std::string& tribe,
@@ -79,7 +73,7 @@ public:
 		assert(n <= kMaxPlayers);
 		return players_[n - 1];
 	}
-	Player& player(int32_t n) const {
+	const Player& player(int32_t n) const {
 		assert(1 <= n);
 		assert(n <= kMaxPlayers);
 		return *players_[n - 1];
@@ -97,8 +91,8 @@ public:
 	}
 
 	/**
-	* Adds a new player status for a player that left the game.
-	*/
+	 * Adds a new player status for a player that left the game.
+	 */
 	void add_player_end_status(const PlayerEndStatus& status);
 
 	/**
@@ -112,6 +106,6 @@ private:
 	uint8_t number_of_players_;
 	std::vector<PlayerEndStatus> players_end_status_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYERSMANAGER_H

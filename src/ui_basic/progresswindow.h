@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,8 +47,8 @@ struct IProgressVisualization {
 
 /// Manages a progress window on the screen.
 struct ProgressWindow : public UI::FullscreenWindow {
-	ProgressWindow(const std::string& background = std::string());
-	~ProgressWindow();
+	explicit ProgressWindow(const std::string& background = std::string());
+	~ProgressWindow() override;
 
 	/// Register additional visualization (tips/hints, animation, etc)
 	void add_visualization(IProgressVisualization* instance);
@@ -63,14 +63,15 @@ struct ProgressWindow : public UI::FullscreenWindow {
 private:
 	using VisualizationArray = std::vector<IProgressVisualization*>;
 
-	Vector2f label_center_;
-	Rectf label_rectangle_;
+	Vector2i label_center_;
+	Recti label_rectangle_;
 	VisualizationArray visualizations_;
 	std::string background_;
+	const UI::ProgressbarStyleInfo& style_;
 
 	void draw(RenderTarget&) override;
 	void update(bool repaint);
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_PROGRESSWINDOW_H

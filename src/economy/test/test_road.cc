@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,12 +21,19 @@
 
 #include <boost/test/unit_test.hpp>
 
+#ifdef _WIN32
+#include "base/log.h"
+#endif
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/player.h"
+
+// Triggered by BOOST_AUTO_TEST_CASE
+CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
+CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
 namespace Widelands {
 class World;
@@ -42,20 +49,15 @@ struct TestingFlag : public Flag {
 		set_flag_position(c);
 	}
 };
-struct TestingMap : public Map {
-	TestingMap(int const w, int const h) : Map() {
-		set_size(w, h);
-	}
-
-	void recalc_for_field_area(const World&, Area<FCoords>) override {
-	}
-};
 
 /*************************************************************************/
 /*                                 TESTS                                 */
 /*************************************************************************/
 struct WlTestFixture {
 	WlTestFixture() {
+#ifdef _WIN32
+		set_logging_dir();
+#endif
 		g_fs = new LayeredFileSystem();
 	}
 	~WlTestFixture() {
@@ -66,11 +68,9 @@ struct WlTestFixture {
 
 struct SimpleRoadTestsFixture : public WlTestFixture {
 	SimpleRoadTestsFixture() : g(nullptr), path(Coords(5, 5)) {
-		map = new TestingMap(32, 32);
-		g.set_map(map);
-
-		path.append(*map, WALK_E);
-		path.append(*map, WALK_E);
+		g.mutable_map()->set_size(32, 32);
+		path.append(g.map(), WALK_E);
+		path.append(g.map(), WALK_E);
 
 		start = new TestingFlag(g, Coords(5, 5));
 		end = new TestingFlag(g, Coords(7, 5));
@@ -81,7 +81,6 @@ struct SimpleRoadTestsFixture : public WlTestFixture {
 		// Map is deleted by EditorGameBase
 	}
 
-	TestingMap* map;
 	EditorGameBase g;
 	Road r;
 	Path path;

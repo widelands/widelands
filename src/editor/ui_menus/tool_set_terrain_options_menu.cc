@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,6 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/set_terrain_tool.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 #include "logic/map.h"
@@ -36,7 +35,6 @@
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/panel.h"
-#include "ui_basic/tabpanel.h"
 
 namespace {
 
@@ -53,9 +51,9 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	// Blit the main terrain image
 	const Image& terrain_texture = terrain_descr.get_texture(0);
 	Texture* texture = new Texture(terrain_texture.width(), terrain_texture.height());
-	texture->blit(Rectf(0, 0, terrain_texture.width(), terrain_texture.height()), terrain_texture,
-	              Rectf(0, 0, terrain_texture.width(), terrain_texture.height()), 1.,
-	              BlendMode::UseAlpha);
+	texture->blit(
+	   Rectf(0.f, 0.f, terrain_texture.width(), terrain_texture.height()), terrain_texture,
+	   Rectf(0.f, 0.f, terrain_texture.width(), terrain_texture.height()), 1., BlendMode::UseAlpha);
 	Vector2i pt(1, terrain_texture.height() - kSmallPicSize - 1);
 
 	// Collect tooltips and blit small icons representing "is" values
@@ -66,7 +64,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 
 		texture->blit(Rectf(pt.x, pt.y, terrain_type.icon->width(), terrain_type.icon->height()),
 		              *terrain_type.icon,
-		              Rectf(0, 0, terrain_type.icon->width(), terrain_type.icon->height()), 1.,
+		              Rectf(0.f, 0.f, terrain_type.icon->width(), terrain_type.icon->height()), 1.,
 		              BlendMode::UseAlpha);
 		pt.x += kSmallPicSize + 1;
 	}
@@ -79,7 +77,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	                               .str();
 
 	std::unique_ptr<const Image>& image = offscreen_images->back();
-	UI::Checkbox* cb = new UI::Checkbox(parent, Vector2i(0, 0), image.get(), tooltip);
+	UI::Checkbox* cb = new UI::Checkbox(parent, Vector2i::zero(), image.get(), tooltip);
 	cb->set_desired_size(image->width() + 1, image->height() + 1);
 	return cb;
 }
@@ -88,14 +86,14 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 
 EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
    EditorInteractive& parent, EditorSetTerrainTool& tool, UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Terrain")) {
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Terrain"), tool) {
 	const Widelands::World& world = parent.egbase().world();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::TerrainDescription, EditorSetTerrainTool>(
 	      this, world.editor_terrain_categories(), world.terrains(),
 	      [this](UI::Panel* cb_parent, const TerrainDescription& terrain_descr) {
 		      return create_terrain_checkbox(cb_parent, terrain_descr, &offscreen_images_);
-		   },
+	      },
 	      [this] { select_correct_tool(); }, &tool));
 	set_center_panel(multi_select_menu_.get());
 }

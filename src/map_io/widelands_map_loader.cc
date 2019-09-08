@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,6 +55,7 @@
 #include "map_io/map_scripting_packet.h"
 #include "map_io/map_terrain_packet.h"
 #include "map_io/map_version_packet.h"
+#include "map_io/map_wincondition_packet.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 #include "map_io/world_legacy_lookup_table.h"
 
@@ -80,6 +81,10 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 		MapElementalPacket mp;
 		mp.pre_read(*fs_, &map_);
 		old_world_name_ = mp.old_world_name();
+	}
+	{
+		MapVersionPacket version_packet;
+		version_packet.pre_read(*fs_, &map_, false, old_world_name_.empty());
 	}
 
 	{
@@ -151,7 +156,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 	std::unique_ptr<WorldLegacyLookupTable> world_lookup_table(
 	   create_world_legacy_lookup_table(old_world_name_));
-	std::unique_ptr<TribesLegacyLookupTable> tribe_lookup_table(new TribesLegacyLookupTable());
+	std::unique_ptr<TribesLegacyLookupTable> tribes_lookup_table(new TribesLegacyLookupTable());
 	log("Reading Terrain Data ... ");
 	{
 		MapTerrainPacket p;
@@ -162,7 +167,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	MapObjectPacket mapobjects;
 
 	log("Reading Map Objects ... ");
-	mapobjects.read(*fs_, egbase, *mol_, *world_lookup_table, *tribe_lookup_table);
+	mapobjects.read(*fs_, egbase, *mol_, *world_lookup_table, *tribes_lookup_table);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Player Start Position Data ... ");
@@ -197,7 +202,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log("Reading Map Version Data ... ");
 		{
 			MapVersionPacket p;
-			p.read(*fs_, egbase, is_game, *mol_);
+			p.read(*fs_, egbase, is_game, old_world_name_.empty());
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
@@ -258,21 +263,21 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log("Reading Flagdata Data ... ");
 		{
 			MapFlagdataPacket p;
-			p.read(*fs_, egbase, is_game, *mol_);
+			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Roaddata Data ... ");
 		{
 			MapRoaddataPacket p;
-			p.read(*fs_, egbase, is_game, *mol_);
+			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Buildingdata Data ... ");
 		{
 			MapBuildingdataPacket p;
-			p.read(*fs_, egbase, is_game, *mol_);
+			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
@@ -296,7 +301,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log("Reading Players View Data ... ");
 		{
 			MapPlayersViewPacket p;
-			p.read(*fs_, egbase, is_game, *mol_);
+			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table, *world_lookup_table);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
@@ -307,6 +312,14 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		{
 			MapPlayersMessagesPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
+
+		// Map data used by win conditions.
+		log("Reading Wincondition Data ... ");
+		{
+			MapWinconditionPacket p;
+			p.read(*fs_, *egbase.mutable_map(), *mol_);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
@@ -339,7 +352,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		}
 	}  // load_type != MapLoader::LoadType::kEditor
 
-	map_.recalc_whole_map(egbase.world());
+	map_.recalc_whole_map(egbase);
 
 	map_.ensure_resource_consistency(egbase.world());
 
@@ -347,4 +360,4 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 	return 0;
 }
-}
+}  // namespace Widelands

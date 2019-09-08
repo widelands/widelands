@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,12 +35,14 @@ class InteractiveGameBase;
 namespace UI {
 class Panel;
 struct Radiogroup;
-}
+}  // namespace UI
 
 namespace Widelands {
 class Building;
+class ConstructionSite;
+struct ProductionsiteSettings;
 class InputQueue;
-}
+}  // namespace Widelands
 
 /**
  * This passive class displays the status of an InputQueue
@@ -49,16 +51,26 @@ class InputQueue;
  */
 class InputQueueDisplay : public UI::Panel {
 public:
-	enum { CellWidth = WARE_MENU_PIC_WIDTH, CellSpacing = 2, Border = 4, PriorityButtonSize = 10 };
+	enum { CellWidth = kWareMenuPicWidth, CellSpacing = 2, Border = 4, PriorityButtonSize = 10 };
 
+	// Constructor for real queues (e.g. in ProductionSites)
 	InputQueueDisplay(UI::Panel* parent,
 	                  int32_t x,
 	                  int32_t y,
 	                  InteractiveGameBase& igb,
 	                  Widelands::Building& building,
-	                  Widelands::InputQueue* queue,
+	                  const Widelands::InputQueue& queue,
 	                  bool = false);
-	~InputQueueDisplay();
+	// Constructor for fake queues (e.g. in ConstructionSite settings)
+	InputQueueDisplay(UI::Panel* parent,
+	                  int32_t x,
+	                  int32_t y,
+	                  InteractiveGameBase&,
+	                  Widelands::ConstructionSite&,
+	                  Widelands::WareWorker,
+	                  Widelands::DescriptionIndex,
+	                  bool = false);
+	~InputQueueDisplay() override;
 
 	void think() override;
 	void draw(RenderTarget&) override;
@@ -66,7 +78,8 @@ public:
 private:
 	InteractiveGameBase& igb_;
 	Widelands::Building& building_;
-	Widelands::InputQueue* queue_;
+	const Widelands::InputQueue* queue_;
+	const Widelands::ProductionsiteSettings* settings_;
 	UI::Radiogroup* priority_radiogroup_;
 	UI::Button* increase_max_fill_;
 	UI::Button* decrease_max_fill_;
@@ -86,6 +99,12 @@ private:
 	void decrease_max_fill_clicked();
 	void increase_max_fill_clicked();
 	void radiogroup_changed(int32_t);
+	void radiogroup_clicked();
+	void update_siblings_priority(int32_t);
+	void update_siblings_fill(int32_t);
+
+	uint32_t check_max_size() const;
+	uint32_t check_max_fill() const;
 
 	void compute_max_fill_buttons_enabled_state();
 };

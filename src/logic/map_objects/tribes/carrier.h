@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,11 +27,7 @@ namespace Widelands {
 
 class CarrierDescr : public WorkerDescr {
 public:
-	CarrierDescr(const std::string& init_descname,
-	             const LuaTable& table,
-	             const EditorGameBase& egbase)
-	   : WorkerDescr(init_descname, MapObjectType::CARRIER, table, egbase) {
-	}
+	CarrierDescr(const std::string& init_descname, const LuaTable& table, const Tribes& tribes);
 	~CarrierDescr() override {
 	}
 
@@ -50,9 +46,10 @@ struct Carrier : public Worker {
 
 	MO_DESCR(CarrierDescr)
 
-	Carrier(const CarrierDescr& carrier_descr) : Worker(carrier_descr), promised_pickup_to_(NOONE) {
+	explicit Carrier(const CarrierDescr& carrier_descr)
+	   : Worker(carrier_descr), promised_pickup_to_(NOONE) {
 	}
-	virtual ~Carrier() {
+	~Carrier() override {
 	}
 
 	bool notify_ware(Game&, int32_t flag);
@@ -62,7 +59,7 @@ struct Carrier : public Worker {
 	void start_task_transport(Game&, int32_t fromflag);
 	bool start_task_walktoflag(Game&, int32_t flag, bool offset = false);
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	static Task const taskRoad;
 
@@ -107,6 +104,6 @@ protected:
 public:
 	void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_CARRIER_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,13 +78,14 @@ private:
 	std::string mapname_;
 	std::string background_;
 	std::string win_condition_;
-	uint32_t gametime_;
-	uint8_t player_nr_;  // The local player idx
-	uint8_t number_of_players_;
+	// Initializing everything to make cppcheck happy.
+	uint32_t gametime_ = 0U;
+	uint8_t player_nr_ = 0U;  // The local player idx
+	uint8_t number_of_players_ = 0U;
 	std::string version_;
-	time_t savetimestamp_;
-	GameController::GameType gametype_;
+	time_t savetimestamp_ = 0;
+	GameController::GameType gametype_ = GameController::GameType::kUndefined;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_GAME_IO_GAME_PRELOAD_PACKET_H

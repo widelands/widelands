@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,13 +28,13 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
+#include "logic/player_end_result.h"
 #include "logic/playersmanager.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-#include "wlapplication.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
 
@@ -47,12 +47,13 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	game_.game_controller()->set_desired_speed(0);
 	// Init boxes
 	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, PADDING);
-	title_area_ = new UI::Textarea(vbox, "", UI::Align::kCenter);
+	title_area_ = new UI::Textarea(
+	   vbox, "", UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle));
 	vbox->add(title_area_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	vbox->add_space(PADDING);
 
 	UI::Box* hbox1 = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	players_table_ = new UI::Table<uintptr_t const>(hbox1, 0, 0, 0, 0);
+	players_table_ = new UI::Table<uintptr_t const>(hbox1, 0, 0, 0, 0, UI::PanelStyle::kWui);
 	players_table_->fit_height(game_.player_manager()->get_players_end_status().size());
 	hbox1->add_space(PADDING);
 	hbox1->add(players_table_);
@@ -63,7 +64,8 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	info_box->add(info_area_label_);
 	info_area_ = new UI::MultilineTextarea(
 	   info_box, 0, 0, 130,
-	   std::max(130, players_table_->get_h() - info_area_label_->get_h() - PADDING), "");
+	   std::max(130, players_table_->get_h() - info_area_label_->get_h() - PADDING),
+	   UI::PanelStyle::kWui, "");
 	info_box->add(info_area_, UI::Box::Resizing::kFullSize);
 	info_box->add_space(PADDING);
 	hbox1->add(info_box);
@@ -82,14 +84,13 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 
 	bottom_box->add_inf_space();
 
-	continue_button_ = new UI::Button(
-	   bottom_box, "continue_button", 0, 0, 35, 35, g_gr->images().get("images/ui_basic/but4.png"),
-	   g_gr->images().get("images/ui_basic/continue.png"), _("Continue playing"));
+	continue_button_ =
+	   new UI::Button(bottom_box, "continue_button", 0, 0, 35, 35, UI::ButtonStyle::kWuiMenu,
+	                  g_gr->images().get("images/ui_basic/continue.png"), _("Continue playing"));
 	bottom_box->add(continue_button_);
 	bottom_box->add_space(PADDING);
-	stop_button_ = new UI::Button(
-	   bottom_box, "stop_button", 0, 0, 35, 35, g_gr->images().get("images/ui_basic/but4.png"),
-	   g_gr->images().get("images/wui/menus/menu_exit_game.png"), _("Exit Game"));
+	stop_button_ = new UI::Button(bottom_box, "stop_button", 0, 0, 35, 35, UI::ButtonStyle::kWuiMenu,
+	                              g_gr->images().get("images/wui/menus/exit.png"), _("Exit Game"));
 	bottom_box->add(stop_button_);
 	bottom_box->add_space(PADDING);
 
@@ -101,10 +102,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	players_table_->add_column(150, _("Player"));
 	players_table_->add_column(80, _("Team"), "", UI::Align::kCenter);
 	players_table_->add_column(100, _("Status"), "", UI::Align::kCenter);
-	players_table_->add_column(0, _("Time"), "", UI::Align::kRight, UI::TableColumnType::kFlexible);
-
-	// Prepare Elements
-	title_area_->set_fontsize(UI_FONT_SIZE_BIG);
+	players_table_->add_column(100, _("Time"), "", UI::Align::kCenter);
 
 	// Connections
 	continue_button_->sigclicked.connect(boost::bind(&GameSummaryScreen::continue_clicked, this));
@@ -134,7 +132,7 @@ void GameSummaryScreen::fill_data() {
 	bool local_in_game = false;
 	bool local_won = false;
 	Widelands::Player* single_won = nullptr;
-	uint8_t teawon_ = 0;
+	Widelands::TeamNumber team_won = 0;
 	InteractivePlayer* ipl = game_.get_ipl();
 	// This defines a row to be selected, current player,
 	// if not then the first line
@@ -144,42 +142,43 @@ void GameSummaryScreen::fill_data() {
 		Widelands::PlayerEndStatus pes = players_status.at(i);
 		if (ipl && pes.player == ipl->player_number()) {
 			local_in_game = true;
-			local_won = pes.result == Widelands::PlayerEndResult::PLAYER_WON;
+			local_won = pes.result == Widelands::PlayerEndResult::kWon;
 			current_player_position = i;
 		}
 		Widelands::Player* p = game_.get_player(pes.player);
 		UI::Table<uintptr_t const>::EntryRecord& te = players_table_->add(i);
 		// Player name & pic
 		const Image* player_image =
-		   playercolor_image(pes.player - 1, g_gr->images().get("images/players/genstats_player.png"),
-		                     g_gr->images().get("images/players/genstats_player_pc.png"));
+		   playercolor_image(pes.player - 1, "images/players/genstats_player.png");
 		assert(player_image);
 		te.set_picture(0, player_image, p->get_name());
 		// Team
 		std::string teastr_ =
-		   (boost::format("%|1$u|") % static_cast<unsigned int>(p->team_number())).str();
+		   p->team_number() == 0 ?
+		      "—" :
+		      (boost::format("%|1$u|") % static_cast<unsigned int>(p->team_number())).str();
 		te.set_string(1, teastr_);
 		// Status
 		std::string stat_str;
 		switch (pes.result) {
-		case Widelands::PlayerEndResult::PLAYER_LOST:
+		case Widelands::PlayerEndResult::kLost:
 			/** TRANSLATORS: This is shown in the game summary for the players who have lost. */
 			stat_str = _("Lost");
 			break;
-		case Widelands::PlayerEndResult::PLAYER_WON:
+		case Widelands::PlayerEndResult::kWon:
 			/** TRANSLATORS: This is shown in the game summary for the players who have won. */
 			stat_str = _("Won");
 			if (!single_won) {
 				single_won = p;
 			} else {
-				teawon_ = p->team_number();
+				team_won = p->team_number();
 			}
 			break;
-		case Widelands::PlayerEndResult::PLAYER_RESIGNED:
+		case Widelands::PlayerEndResult::kResigned:
 			/** TRANSLATORS: This is shown in the game summary for the players who have resigned. */
 			stat_str = _("Resigned");
 			break;
-		case Widelands::PlayerEndResult::UNDEFINED:
+		case Widelands::PlayerEndResult::kUndefined:
 			/** TRANSLATORS: This is shown in the game summary when we don't know */
 			/** TRANSLATORS: if the player has lost or won. */
 			stat_str = pgettext("player_won", "Unknown");
@@ -197,12 +196,12 @@ void GameSummaryScreen::fill_data() {
 			title_area_->set_text(_("You lost."));
 		}
 	} else {
-		if (teawon_ <= 0) {
+		if (team_won == 0) {
 			assert(single_won);
 			title_area_->set_text((boost::format(_("%s won!")) % single_won->get_name()).str());
 		} else {
 			title_area_->set_text(
-			   (boost::format(_("Team %|1$u| won!")) % static_cast<unsigned int>(teawon_)).str());
+			   (boost::format(_("Team %|1$u| won!")) % static_cast<unsigned int>(team_won)).str());
 		}
 	}
 	if (!players_status.empty()) {

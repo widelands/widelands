@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,20 +39,21 @@ namespace Widelands {
 /// CmdDeleteMessage) that refers to a message by id, use this map to
 /// translate from the id that is stored in the command to the sequence number
 /// that will be used as the id of the message when the game is loaded.
-struct MapMessageSaver : private std::map<MessageId, MessageId> {
-	MapMessageSaver() : counter(0) {
+struct MapMessageSaver {
+	MapMessageSaver() : counter_(0) {
 	}
 	void add(const MessageId& id) {
-		assert(find(id) == end());
-		insert(std::pair<MessageId, MessageId>(id, ++counter));
+		assert(messages_.find(id) == messages_.end());
+		messages_.insert(std::pair<MessageId, MessageId>(id, ++counter_));
 	}
 	MessageId operator[](const MessageId& id) const {
-		return find(id) != end() ? find(id)->second : MessageId::null();
+		return messages_.find(id) != messages_.end() ? messages_.find(id)->second : MessageId::null();
 	}
 
 private:
-	MessageId counter;
+	std::map<MessageId, MessageId> messages_;
+	MessageId counter_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_MESSAGE_SAVER_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ namespace Widelands {
 /// distinction and not a logical one.
 class EditorCategory {
 public:
-	EditorCategory(const LuaTable& table);
+	explicit EditorCategory(const LuaTable& table);
 
 	/// Internal name.
 	const std::string& name() const;

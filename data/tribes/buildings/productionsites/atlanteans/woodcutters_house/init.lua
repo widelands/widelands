@@ -26,9 +26,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      logproducer = true,
-      forced_after = 210,
-      prohibited_till = 210
+      collects_ware_from_map = "log",
    },
 
    working_positions = {
@@ -39,13 +37,18 @@ tribes:new_productionsite_type {
       "log"
    },
 
+   indicate_workarea_overlaps = {
+      atlanteans_foresters_house = true,
+      atlanteans_woodcutters_house = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
          descname = _"felling trees",
          actions = {
-            "sleep=30000", -- Barbarian lumberjack sleeps 25000
-            "worker=harvest"
+            "callworker=harvest",
+            "sleep=20000"
          }
       },
    },
@@ -54,6 +57,6 @@ tribes:new_productionsite_type {
       title = _"No Trees",
       heading = _"Out of Trees",
       message = pgettext("atlanteans_building", "The woodcutter working at this woodcutter’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house."),
-      productivity_threshold = 66
+      productivity_threshold = 60
    },
 }

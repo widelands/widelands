@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ class PartiallyFinishedBuilding : public Building {
 	friend struct MapBuildingPacket;
 
 public:
-	PartiallyFinishedBuilding(const BuildingDescr& building_descr);
+	explicit PartiallyFinishedBuilding(const BuildingDescr& building_descr);
 
 	virtual void set_building(const BuildingDescr&);
 
@@ -47,7 +47,7 @@ public:
 	uint32_t get_playercaps() const override;
 	const Image* representative_image() const override;
 	void cleanup(EditorGameBase&) override;
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void set_economy(Economy*) override;
 
 	uint32_t get_nrwaresqueues() {
@@ -83,6 +83,6 @@ protected:
 	uint32_t work_completed_;  // how many steps have we done so far?
 	uint32_t work_steps_;      // how many steps (= wares) until we're done?
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PARTIALLY_FINISHED_BUILDING_H

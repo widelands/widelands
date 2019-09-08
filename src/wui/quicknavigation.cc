@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +18,6 @@
  */
 
 #include "wui/quicknavigation.h"
-
-#include "wlapplication.h"
 
 QuickNavigation::QuickNavigation(MapView* map_view) : map_view_(map_view), landmarks_(10) {
 	map_view->changeview.connect([this] { view_changed(); });

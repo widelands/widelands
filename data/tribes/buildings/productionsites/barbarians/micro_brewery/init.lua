@@ -14,7 +14,7 @@ tribes:new_productionsite_type {
       log = 3,
       blackwood = 2,
       granite = 3,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle = {
       log = 1,
@@ -34,7 +34,8 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      forced_after = 500
+      prohibited_till = 530,
+      forced_after = 720
    },
 
    working_positions = {
@@ -54,9 +55,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
          descname = _"brewing beer",
          actions = {
-            "sleep=30000",
             "return=skipped unless economy needs beer or workers need experience",
             "consume=water wheat",
+            "sleep=30000",
             "animate=working 30000",
             "produce=beer"
          }

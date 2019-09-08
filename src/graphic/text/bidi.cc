@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -421,24 +421,32 @@ const std::set<UI::FontSets::Selector> kLTRScripts = {
 const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kLTRCodeBlocks = {
    {UI::FontSets::Selector::kCJK,
     {
-       UBlockCode::UBLOCK_CJK_COMPATIBILITY, UBlockCode::UBLOCK_CJK_COMPATIBILITY_FORMS,
+       UBlockCode::UBLOCK_CJK_COMPATIBILITY,
+       UBlockCode::UBLOCK_CJK_COMPATIBILITY_FORMS,
        UBlockCode::UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS,
        UBlockCode::UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT,
-       UBlockCode::UBLOCK_CJK_RADICALS_SUPPLEMENT, UBlockCode::UBLOCK_CJK_STROKES,
-       UBlockCode::UBLOCK_CJK_SYMBOLS_AND_PUNCTUATION, UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS,
+       UBlockCode::UBLOCK_CJK_RADICALS_SUPPLEMENT,
+       UBlockCode::UBLOCK_CJK_STROKES,
+       UBlockCode::UBLOCK_CJK_SYMBOLS_AND_PUNCTUATION,
+       UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS,
        UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A,
        UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B,
        UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_C,
-       UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D, UBlockCode::UBLOCK_HIRAGANA,
-       UBlockCode::UBLOCK_KATAKANA, UBlockCode::UBLOCK_KATAKANA_PHONETIC_EXTENSIONS,
+       UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D,
+       UBlockCode::UBLOCK_HIRAGANA,
+       UBlockCode::UBLOCK_KATAKANA,
+       UBlockCode::UBLOCK_KATAKANA_PHONETIC_EXTENSIONS,
        UBlockCode::UBLOCK_ENCLOSED_CJK_LETTERS_AND_MONTHS,
-       UBlockCode::UBLOCK_HANGUL_COMPATIBILITY_JAMO, UBlockCode::UBLOCK_HANGUL_JAMO,
-       UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_A, UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_B,
+       UBlockCode::UBLOCK_HANGUL_COMPATIBILITY_JAMO,
+       UBlockCode::UBLOCK_HANGUL_JAMO,
+       UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_A,
+       UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_B,
        UBlockCode::UBLOCK_HANGUL_SYLLABLES,
     }},
    {UI::FontSets::Selector::kMyanmar,
     {
-       UBlockCode::UBLOCK_MYANMAR, UBlockCode::UBLOCK_MYANMAR_EXTENDED_A,
+       UBlockCode::UBLOCK_MYANMAR,
+       UBlockCode::UBLOCK_MYANMAR_EXTENDED_A,
     }},
    {UI::FontSets::Selector::kSinhala,
     {
@@ -457,14 +465,17 @@ const std::set<UI::FontSets::Selector> kRTLScripts = {
 const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kRTLCodeBlocks = {
    {UI::FontSets::Selector::kArabic,
     {
-       UBlockCode::UBLOCK_ARABIC, UBlockCode::UBLOCK_ARABIC_SUPPLEMENT,
-       UBlockCode::UBLOCK_ARABIC_EXTENDED_A, UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_A,
+       UBlockCode::UBLOCK_ARABIC,
+       UBlockCode::UBLOCK_ARABIC_SUPPLEMENT,
+       UBlockCode::UBLOCK_ARABIC_EXTENDED_A,
+       UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_A,
        UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_B,
        UBlockCode::UBLOCK_ARABIC_MATHEMATICAL_ALPHABETIC_SYMBOLS,
     }},
    {UI::FontSets::Selector::kDevanagari,
     {
-       UBlockCode::UBLOCK_DEVANAGARI, UBlockCode::UBLOCK_DEVANAGARI_EXTENDED,
+       UBlockCode::UBLOCK_DEVANAGARI,
+       UBlockCode::UBLOCK_DEVANAGARI_EXTENDED,
        UBlockCode::UBLOCK_VEDIC_EXTENSIONS,
     }},
    {UI::FontSets::Selector::kHebrew,
@@ -492,7 +503,9 @@ const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kRTLCodeBlocks = {
 
 // True if the character is in one of the script's code blocks
 bool is_script_character(UChar32 c, UI::FontSets::Selector script) {
+	CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 	UBlockCode code = ublock_getCode(c);
+	CLANG_DIAG_ON("-Wdisabled-macro-expansion")
 	if (kRTLCodeBlocks.count(script) == 1 && kRTLCodeBlocks.at(script).count(code) == 1) {
 		return true;
 	}
@@ -503,7 +516,9 @@ bool is_script_character(UChar32 c, UI::FontSets::Selector script) {
 }
 
 bool is_rtl_character(UChar32 c) {
+	CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 	UBlockCode code = ublock_getCode(c);
+	CLANG_DIAG_ON("-Wdisabled-macro-expansion")
 	for (UI::FontSets::Selector script : kRTLScripts) {
 		assert(kRTLCodeBlocks.count(script) == 1);
 		if ((kRTLCodeBlocks.at(script).count(code) == 1)) {
@@ -584,9 +599,9 @@ std::string make_ligatures(const char* input) {
 	}
 	const icu::UnicodeString parseme(input, "UTF-8");
 	icu::UnicodeString queue;
-	UChar not_a_character = 0xFFFF;
-	UChar next = not_a_character;
-	UChar previous = not_a_character;
+	const UChar not_a_character = 0xFFFF;
+	UChar next;
+	UChar previous;
 	for (int i = parseme.length() - 1; i >= 0; --i) {
 		UChar c = parseme.charAt(i);
 
@@ -603,18 +618,14 @@ std::string make_ligatures(const char* input) {
 				if (kArabicLegacyDiacritics.count(previous) == 1) {
 					previous = kArabicLegacyDiacritics.at({previous});
 				}
-				if (kArabicLegacyDiacritics.count(next) == 1) {
-					next = kArabicLegacyDiacritics.at({next});
-				}
 
 				// Special ligature forms combine 2 letters.
 				if (kArabicLigatures.count({previous, c}) == 1) {
 					c = kArabicLigatures.at({previous, c});
 					// Now skip 1 letter, since we have just combined 2 letters
 					--i;
-					previous = (i > 0) ? parseme.charAt(i - 1) : not_a_character;
 				}
-			} catch (std::out_of_range e) {
+			} catch (const std::out_of_range& e) {
 				log("Error trying to fetch Arabic diacritic form: %s\n", e.what());
 				NEVER_HERE();
 			}
@@ -640,7 +651,7 @@ std::string make_ligatures(const char* input) {
 					}
 				}
 				c = find_arabic_letter_form(c, previous, next);
-			} catch (std::out_of_range e) {
+			} catch (const std::out_of_range& e) {
 				log("Error trying to fetch Arabic character form: %s\n", e.what());
 				NEVER_HERE();
 			}
@@ -777,4 +788,4 @@ bool is_diacritic(const UChar& c) {
 	return kArabicDiacritics.count(c) == 1;
 }
 
-}  // namespace UI
+}  // namespace i18n

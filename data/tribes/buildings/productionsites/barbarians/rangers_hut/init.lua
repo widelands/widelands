@@ -32,13 +32,22 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      renews_map_resource = "log",
+      supports_production_of = { "log" },
       space_consumer = true,
-      prohibited_till = 200
+      basic_amount = 1,
+      very_weak_ai_limit = 3,
+      weak_ai_limit = 5
    },
 
    working_positions = {
       barbarians_ranger = 1
+   },
+
+   indicate_workarea_overlaps = {
+      barbarians_rangers_hut = false,
+      barbarians_lumberjacks_hut = true,
+      barbarians_farm = false,
+      barbarians_reed_yard = false,
    },
 
    programs = {
@@ -46,8 +55,8 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
          descname = _"planting trees",
          actions = {
-            "sleep=16000",
-            "worker=plant"
+            "callworker=plant",
+            "sleep=11500"
          }
       },
    },

@@ -1,3 +1,6 @@
+# TODO(GunChleoc): This unit testing project is currently unmaintained
+# Reactivate in parent directory once work resumes on this
+
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/paths.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/paths.h)
 
 # Simple binary that renders a text into an image for manual
@@ -23,7 +26,6 @@ wl_library(graphic_text_test_render
   DEPENDS
     base_i18n
     graphic_image_cache
-    graphic_surface
     graphic_text
     io_filesystem
 )

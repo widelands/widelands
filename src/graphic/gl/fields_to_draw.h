@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,13 +28,11 @@
 #include <stdint.h>
 
 #include "base/vector.h"
-#include "logic/map_objects/tribes/road_textures.h"
-#include "logic/player.h"
-#include "logic/widelands.h"
+#include "graphic/rendertarget.h"
+#include "logic/editor_game_base.h"
 #include "logic/widelands_geometry.h"
 
-// Helper struct that contains the data needed for drawing all fields. All
-// methods are inlined for performance reasons.
+// Helper struct that contains the data needed for drawing all fields.
 class FieldsToDraw {
 public:
 	static constexpr int kInvalidIndex = std::numeric_limits<int>::min();
@@ -43,16 +41,16 @@ public:
 		Widelands::Coords geometric_coords;  // geometric coordinates (i.e. map coordinates that can
 		                                     // be out of bounds).
 		Widelands::FCoords fcoords;  // The normalized coords and the field this is refering to.
-		Vector2f gl_position;        // GL Position of this field.
+		Vector2f gl_position = Vector2f::zero();  // GL Position of this field.
 
 		// Surface pixel this will be plotted on.
-		Vector2f surface_pixel;
+		Vector2f surface_pixel = Vector2f::zero();
 
 		// Rendertarget pixel this will be plotted on. This is only different by
 		// the Rendertarget::get_rect().origin() of the view window.
-		Vector2f rendertarget_pixel;
-		Vector2f texture_coords;  // Texture coordinates.
-		float brightness;         // brightness of the pixel
+		Vector2f rendertarget_pixel = Vector2f::zero();
+		Vector2f texture_coords = Vector2f::zero();  // Texture coordinates.
+		float brightness;                            // brightness of the pixel
 
 		// The next values are not necessarily the true data of this field, but
 		// what the player should see. For example in fog of war we always draw
@@ -62,7 +60,7 @@ public:
 		Widelands::Vision vision;
 		Widelands::Player* owner;  // can be nullptr.
 
-		// Index of neighbors in this 'FieldsToDraw'. kInvalidIndex if this
+		// Index of neighbors in this 'FieldsToDraw'. INVALID_INDEX if this
 		// neighbor is not contained.
 		int ln_index;
 		int rn_index;
@@ -77,37 +75,11 @@ public:
 		}
 	};
 
-	FieldsToDraw() {
-	}
-
-	// Resize this fields to draw for reuse.
-	void reset(int minfx, int maxfx, int minfy, int maxfy) {
-		min_fx_ = minfx;
-		max_fx_ = maxfx;
-		min_fy_ = minfy;
-		max_fy_ = maxfy;
-		w_ = max_fx_ - min_fx_ + 1;
-		h_ = max_fy_ - min_fy_ + 1;
-		const size_t dimension = w_ * h_;
-		if (fields_.size() != dimension) {
-			fields_.resize(dimension);
-		}
-	}
-
-	// Calculates the index of the given field with ('fx', 'fy') being geometric
-	// coordinates in the map. Returns kInvalidIndex if this field is not in the
-	// fields_to_draw.
-	inline int calculate_index(int fx, int fy) const {
-		uint16_t xidx = fx - min_fx_;
-		if (xidx >= w_) {
-			return kInvalidIndex;
-		}
-		uint16_t yidx = fy - min_fy_;
-		if (yidx >= h_) {
-			return kInvalidIndex;
-		}
-		return yidx * w_ + xidx;
-	}
+	// Reinitialize for the given view parameters.
+	void reset(const Widelands::EditorGameBase& egbase,
+	           const Vector2f& viewpoint,
+	           const float zoom,
+	           RenderTarget* dst);
 
 	// The number of fields to draw.
 	inline size_t size() const {
@@ -124,16 +96,26 @@ public:
 		return &fields_[index];
 	}
 
+	// Calculates the index of the given field with ('fx', 'fy') being geometric
+	// coordinates in the map. Returns INVALID_INDEX if this field is not in the
+	// fields_to_draw.
+	inline int calculate_index(int fx, int fy) const {
+		if (fx < min_fx_ || fx > max_fx_ || fy < min_fy_ || fy > max_fy_) {
+			return kInvalidIndex;
+		}
+		return (fy - min_fy_) * w_ + (fx - min_fx_);
+	}
+
 private:
 	// Minimum and maximum field coordinates (geometric) to render. Can be negative.
-	int min_fx_;
-	int max_fx_;
-	int min_fy_;
-	int max_fy_;
+	int min_fx_ = 0;
+	int max_fx_ = 0;
+	int min_fy_ = 0;
+	int max_fy_ = 0;
 
 	// Width and height in number of fields.
-	int w_;
-	int h_;
+	int w_ = 0;
+	int h_ = 0;
 
 	std::vector<Field> fields_;
 };

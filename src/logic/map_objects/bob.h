@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -201,7 +201,7 @@ public:
 	 * \see class Bob for in-depth explanation
 	 */
 	struct State {
-		State(const Task* const the_task = nullptr)
+		explicit State(const Task* const the_task = nullptr)
 		   : task(the_task),
 		     ivar1(0),
 		     ivar2(0),
@@ -235,7 +235,7 @@ public:
 		return animstart_;
 	}
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 	void schedule_destroy(Game&);
@@ -266,11 +266,12 @@ public:
 	virtual void draw(const EditorGameBase&,
 	                  const TextToDraw& draw_text,
 	                  const Vector2f& field_on_dst,
+	                  const Coords& coords,
 	                  float scale,
 	                  RenderTarget* dst) const;
 
 	// For debug
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	// default tasks
 	void reset_tasks(Game&);
@@ -278,6 +279,7 @@ public:
 	// TODO(feature-Hasi50): correct (?) Send a signal that may switch to some other \ref Task
 	void send_signal(Game&, char const*);
 	void start_task_idle(Game&, uint32_t anim, int32_t timeout);
+	bool is_idle();
 
 	/// This can fail (and return false). Therefore the caller must check the
 	/// result and find something else for the bob to do. Otherwise there will
@@ -349,8 +351,8 @@ public:
 	}
 
 protected:
-	Bob(const BobDescr& descr);
-	virtual ~Bob();
+	explicit Bob(const BobDescr& descr);
+	~Bob() override;
 
 private:
 	void do_act(Game&);
@@ -436,6 +438,6 @@ public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 	// Pure Bobs cannot be loaded
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_BOB_H

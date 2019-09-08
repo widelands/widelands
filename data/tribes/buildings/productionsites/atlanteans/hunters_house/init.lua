@@ -26,7 +26,8 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 400
+      collects_ware_from_map = "meat",
+      prohibited_till = 380
    },
 
    working_positions = {
@@ -37,13 +38,17 @@ tribes:new_productionsite_type {
       "meat"
    },
 
+   indicate_workarea_overlaps = {
+      atlanteans_hunters_house = false,
+   },
+
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _"hunting",
          actions = {
-            "sleep=35000",
-            "worker=hunt"
+            "callworker=hunt",
+            "sleep=35000"
          }
       },
    },

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,9 +37,9 @@ public:
 
 	LuaPlayer() : LuaBases::LuaPlayerBase() {
 	}
-	LuaPlayer(Widelands::PlayerNumber n) : LuaBases::LuaPlayerBase(n) {
+	explicit LuaPlayer(Widelands::PlayerNumber n) : LuaBases::LuaPlayerBase(n) {
 	}
-	LuaPlayer(lua_State* L) {
+	explicit LuaPlayer(lua_State* L) {
 		report_error(L, "Cannot instantiate a 'Player' directly!");
 	}
 
@@ -58,6 +58,6 @@ private:
 };
 
 void luaopen_wleditor(lua_State*);
-}
+}  // namespace LuaEditor
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_EDITOR_H

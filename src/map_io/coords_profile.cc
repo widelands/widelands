@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,8 @@
 #include <string>
 
 #include "base/wexception.h"
+#include "io/profile.h"
 #include "logic/widelands_geometry.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 
@@ -37,7 +37,7 @@ Coords parse_coords(const std::string& name, const char* const coords, const Ext
 	const long int x = strtol(endp, &endp, 0);
 	const long int y = strtol(endp, &endp, 0);
 
-	//  Check of consistence should NOT be at x, y < 0 as (-1, -1) is used for
+	//  Check of consistence should NOT be at x, y < 0 as (-1, -1) == Coords::null() is used for
 	//  not set starting positions in the editor. So check whether x, y < -1 so
 	//  the editor can load incomplete maps. For games the starting positions
 	//  will be checked in player initalisation anyway.

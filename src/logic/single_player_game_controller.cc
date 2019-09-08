@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2017 by the Widelands Development Team
+ * Copyright (C) 2015-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,7 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
-#include "profile/profile.h"
-#include "wlapplication.h"
+#include "wlapplication_options.h"
 
 SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
                                                        bool const useai,
@@ -34,7 +33,7 @@ SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
      use_ai_(useai),
      lastframe_(SDL_GetTicks()),
      time_(game_.get_gametime()),
-     speed_(g_options.pull_section("global").get_natural("speed_of_new_game", 1000)),
+     speed_(get_config_natural("speed_of_new_game", 1000)),
      paused_(false),
      player_cmdserial_(0),
      local_(local) {
@@ -75,9 +74,9 @@ void SinglePlayerGameController::think() {
 	}
 }
 
-void SinglePlayerGameController::send_player_command(Widelands::PlayerCommand& pc) {
-	pc.set_cmdserial(++player_cmdserial_);
-	game_.enqueue_command(&pc);
+void SinglePlayerGameController::send_player_command(Widelands::PlayerCommand* pc) {
+	pc->set_cmdserial(++player_cmdserial_);
+	game_.enqueue_command(pc);
 }
 
 int32_t SinglePlayerGameController::get_frametime() {
@@ -85,7 +84,7 @@ int32_t SinglePlayerGameController::get_frametime() {
 }
 
 GameController::GameType SinglePlayerGameController::get_game_type() {
-	return GameController::GameType::SINGLEPLAYER;
+	return GameController::GameType::kSingleplayer;
 }
 
 uint32_t SinglePlayerGameController::real_speed() {
