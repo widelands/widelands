@@ -75,6 +75,7 @@ The available commands are:
 - `scout`_
 - `playsound`_
 - `construct`_
+- `terraform`_
 */
 
 const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
@@ -95,6 +96,7 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
    {"scout", &WorkerProgram::parse_scout},
    {"playsound", &WorkerProgram::parse_playsound},
    {"construct", &WorkerProgram::parse_construct},
+   {"terraform", &WorkerProgram::parse_terraform},
 
    {nullptr, nullptr}};
 
@@ -334,7 +336,7 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 findspace
 ^^^^^^^^^
 .. function:: findspace=size:\<plot\> radius:\<distance\> [breed] [resource:\<name\>]
-   [avoid:\<immovable_attribute\>] [saplingsearches:\<number\>] [space]
+   [avoid:\<immovable_attribute\>] [saplingsearches:\<number\>] [space] [terraform]
 
    :arg string size: The size or building plot type of the free space.
       The possible values are:
@@ -346,6 +348,7 @@ findspace
       * ``big``: Big building plots only.
       * ``mine``: Mining plots only.
       * ``port``: Port spaces only.
+      * ``swim``: Anything on the coast.
 
    :arg int radius: Search for map fields within the given radius around the worker.
 
@@ -364,6 +367,9 @@ findspace
    :arg empty space: Find only fields that are walkable in such a way that all
       neighbors are also walkable (an exception is made if one of the neighboring
       fields is owned by this worker's location).
+
+   :arg empty terraform: Find only nodes where at least one adjacent triangle has
+      terrain that can be enhanced
 
    Find a map field based on a number of predicates.
    The field can then be used in other commands like ``walk``. Examples::
@@ -405,6 +411,7 @@ findspace
  * iparam4 = whether the "breed" flag is set
  * iparam5 = Immovable attribute id
  * iparam6 = Forester retries
+ * iparam7 = whether the "terraform" flag is set
  * sparam1 = Resource
  */
 void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::string>& cmd) {
@@ -417,6 +424,7 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	act->iparam4 = 0;
 	act->iparam5 = -1;
 	act->iparam6 = 1;
+	act->iparam7 = 0;
 	act->sparam1 = "";
 
 	// Parse predicates
@@ -436,10 +444,15 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			static const struct {
 				char const* name;
 				int32_t val;
-			} sizenames[] = {{"any", FindNodeSize::sizeAny},     {"build", FindNodeSize::sizeBuild},
-			                 {"small", FindNodeSize::sizeSmall}, {"medium", FindNodeSize::sizeMedium},
-			                 {"big", FindNodeSize::sizeBig},     {"mine", FindNodeSize::sizeMine},
-			                 {"port", FindNodeSize::sizePort},   {nullptr, 0}};
+			} sizenames[] = {{"any", FindNodeSize::sizeAny},
+			                 {"build", FindNodeSize::sizeBuild},
+			                 {"small", FindNodeSize::sizeSmall},
+			                 {"medium", FindNodeSize::sizeMedium},
+			                 {"big", FindNodeSize::sizeBig},
+			                 {"mine", FindNodeSize::sizeMine},
+			                 {"port", FindNodeSize::sizePort},
+			                 {"swim", FindNodeSize::sizeSwim},
+			                 {nullptr, 0}};
 
 			int32_t index;
 
@@ -453,6 +466,8 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			act->iparam2 = sizenames[index].val;
 		} else if (key == "breed") {
 			act->iparam4 = 1;
+		} else if (key == "terraform") {
+			act->iparam7 = 1;
 		} else if (key == "resource") {
 			act->sparam1 = value;
 		} else if (key == "space") {
@@ -758,6 +773,29 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 	for (uint32_t i = 1; i < cmd.size(); ++i) {
 		act->sparamv.push_back(cmd[i]);
 	}
+}
+
+/* RST
+terraform
+^^^^^^^^^
+.. function:: terraform
+
+   Turns the terrain of one of the triangles around the current node into its
+   enhancement terrain. Example::
+
+      terraform = {
+         "findspace=size:terraform radius:6",
+         "walk=coords",
+         "animate=dig 2000",
+         "terraform",
+         "return"
+      }
+*/
+void WorkerProgram::parse_terraform(Worker::Action* act, const std::vector<std::string>& cmd) {
+	if (cmd.size() > 1) {
+		throw wexception("terraform takes no arguments");
+	}
+	act->function = &Worker::run_terraform;
 }
 
 /* RST

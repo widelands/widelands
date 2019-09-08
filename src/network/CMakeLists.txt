@@ -61,5 +61,6 @@ wl_library(network
     ui_basic
     ui_fsmenu_gameloading
     widelands_ball_of_mud
+    widelands_options
     wui
 )

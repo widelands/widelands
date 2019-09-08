@@ -242,7 +242,7 @@ CmdBuild::CmdBuild(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
 
 void CmdBuild::execute(Game& game) {
 	// Empty former vector since its a new csite.
-	Building::FormerBuildings former_buildings;
+	FormerBuildings former_buildings;
 	game.get_player(sender())->build(coords, bi, true, former_buildings);
 }
 

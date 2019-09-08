@@ -1452,7 +1452,7 @@ int LuaMap::get_field(lua_State* L) {
 // TODO(unknown): do we really want this function?
 int LuaMap::recalculate(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
-	egbase.mutable_map()->recalc_whole_map(egbase.world());
+	egbase.mutable_map()->recalc_whole_map(egbase);
 	return 0;
 }
 
@@ -1489,7 +1489,7 @@ int LuaMap::set_port_space(lua_State* L) {
 	const int y = luaL_checkint32(L, 3);
 	const bool allowed = luaL_checkboolean(L, 4);
 	const bool success = get_egbase(L).mutable_map()->set_port_space(
-	   get_egbase(L).world(), Widelands::Coords(x, y), allowed, false, true);
+	   get_egbase(L), Widelands::Coords(x, y), allowed, false, true);
 	lua_pushboolean(L, success);
 	return 1;
 }
@@ -6217,7 +6217,7 @@ int LuaField::set_height(lua_State* L) {
 		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
 
 	EditorGameBase& egbase = get_egbase(L);
-	egbase.mutable_map()->set_height(egbase.world(), f, height);
+	egbase.mutable_map()->set_height(egbase, f, height);
 
 	return 0;
 }
@@ -6401,12 +6401,11 @@ int LuaField::get_terr(lua_State* L) {
 int LuaField::set_terr(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
-	const World& world = egbase.world();
-	const DescriptionIndex td = world.terrains().get_index(name);
+	const DescriptionIndex td = egbase.world().terrains().get_index(name);
 	if (td == static_cast<DescriptionIndex>(Widelands::INVALID_INDEX))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	egbase.mutable_map()->change_terrain(world, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);
+	egbase.mutable_map()->change_terrain(egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);
 
 	lua_pushstring(L, name);
 	return 1;
@@ -6420,12 +6419,11 @@ int LuaField::get_terd(lua_State* L) {
 int LuaField::set_terd(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
-	const World& world = egbase.world();
-	const DescriptionIndex td = world.terrains().get_index(name);
+	const DescriptionIndex td = egbase.world().terrains().get_index(name);
 	if (td == static_cast<DescriptionIndex>(INVALID_INDEX))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	egbase.mutable_map()->change_terrain(world, TCoords<FCoords>(fcoords(L), TriangleIndex::D), td);
+	egbase.mutable_map()->change_terrain(egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::D), td);
 
 	lua_pushstring(L, name);
 	return 1;
