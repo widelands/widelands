@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/place_critter_tool.h"
-#include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/world.h"
@@ -48,14 +47,14 @@ UI::Checkbox* create_critter_checkbox(UI::Panel* parent,
 
 EditorToolPlaceCritterOptionsMenu::EditorToolPlaceCritterOptionsMenu(
    EditorInteractive& parent, EditorPlaceCritterTool& tool, UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Animals")) {
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Animals"), tool) {
 	const Widelands::World& world = parent.egbase().world();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceCritterTool>(
 	      this, world.editor_critter_categories(), world.critters(),
-	      [this](UI::Panel* cb_parent, const Widelands::CritterDescr& critter_descr) {
+	      [](UI::Panel* cb_parent, const Widelands::CritterDescr& critter_descr) {
 		      return create_critter_checkbox(cb_parent, critter_descr);
-		   },
+	      },
 	      [this] { select_correct_tool(); }, &tool));
 	set_center_panel(multi_select_menu_.get());
 }

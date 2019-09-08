@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,8 +27,8 @@
 #include "base/vector.h"
 #include "graphic/align.h"
 #include "graphic/color.h"
+#include "graphic/graphic.h"
 #include "graphic/text/sdl_ttf_font.h"
-#include "graphic/text_constants.h"
 
 class RenderTarget;
 
@@ -38,9 +38,9 @@ namespace UI {
  * Helper struct that provides word wrapping and related functionality.
  */
 struct WordWrap {
-	WordWrap(int fontsize = UI_FONT_SIZE_SMALL,
-	         const RGBColor& color = UI_FONT_CLR_FG,
-	         uint32_t wrapwidth = std::numeric_limits<uint32_t>::max());
+	static constexpr int kLineMargin = 1;
+
+	explicit WordWrap(int fontsize, const RGBColor& color, uint32_t wrapwidth);
 
 	void set_wrapwidth(uint32_t wrapwidth);
 

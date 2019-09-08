@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,14 +37,13 @@ struct InternetClient {
 	std::string build_id;
 	std::string game;
 	std::string type;
-	std::string points;  // Currently unused
 };
 
 /// A simple network game struct
 struct InternetGame {
 	std::string name;
 	std::string build_id;
-	bool connectable;
+	std::string connectable;
 };
 
 /**
@@ -80,6 +79,23 @@ struct InternetGaming : public ChatProvider {
 	bool relogin();
 	void logout(const std::string& msgcode = "CONNECTION_CLOSED");
 
+	/**
+	 * Connects to the metaserver and checks the password without logging in.
+	 *
+	 * Note that the user might be logged in with another username and as unregistered
+	 * if the user account is already in use by another client.
+	 * @warning Resets the current connection.
+	 * @param nick The username.
+	 * @param pwd The password.
+	 * @param metaserver The hostname of the metaserver.
+	 * @param port The port number of the metaserver.
+	 * @return Whether the password was valid.
+	 */
+	bool check_password(const std::string& nick,
+	                    const std::string& pwd,
+	                    const std::string& metaserver,
+	                    uint32_t port);
+
 	/// \returns whether the client is logged in
 	bool logged_in() {
 		return (state_ == LOBBY) || (state_ == CONNECTING) || (state_ == IN_GAME);
@@ -93,7 +109,7 @@ struct InternetGaming : public ChatProvider {
 		clientupdate_ = true;
 	}
 
-	void handle_metaserver_communication();
+	void handle_metaserver_communication(bool relogin_on_error = true);
 
 	// Game specific functions
 	/**
@@ -106,6 +122,13 @@ struct InternetGaming : public ChatProvider {
 	 * @return The addresses.
 	 */
 	const std::pair<NetAddress, NetAddress>& ips();
+
+	/**
+	 * Blocks for some time until either the ips() method is able to return the IPs of the relay
+	 * or an error occurred or the timeout is met.
+	 * @return \c True iff ips() can return something.
+	 */
+	bool wait_for_ips();
 
 	/**
 	 * Returns the password required to connect to the relay server as host.
@@ -172,6 +195,13 @@ struct InternetGaming : public ChatProvider {
 		return true;
 	}
 
+	void format_and_add_chat(const std::string& from,
+	                         const std::string& to,
+	                         bool system,
+	                         const std::string& msg);
+
+	bool valid_username(std::string);
+
 private:
 	InternetGaming();
 
@@ -189,17 +219,12 @@ private:
 	 */
 	void create_second_connection();
 
-	void handle_packet(RecvPacket& packet);
+	void handle_packet(RecvPacket& packet, bool relogin_on_error = true);
 	void handle_failed_read();
 
 	// conversion functions
 	bool str2bool(std::string);
 	std::string bool2str(bool);
-
-	void format_and_add_chat(const std::string& from,
-	                         const std::string& to,
-	                         bool system,
-	                         const std::string& msg);
 
 	/**
 	 * Does the real work of the login.
@@ -217,6 +242,9 @@ private:
 	/// data saved for possible relogin
 	std::string authenticator_;
 	bool reg_;
+
+	/// Password for connecting as host to a game on the relay server
+	std::string relay_password_;
 
 	std::string meta_;
 	uint16_t port_;

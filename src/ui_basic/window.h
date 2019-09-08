@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,8 @@
 #define WL_UI_BASIC_WINDOW_H
 
 #include "ui_basic/panel.h"
+
+#include <memory>
 
 #include "graphic/graphic.h"
 #include "notifications/notifications.h"
@@ -83,8 +85,8 @@ public:
 	bool is_minimal() const {
 		return is_minimal_;
 	}
-	void restore();
-	void minimize();
+	virtual void restore();
+	virtual void minimize();
 	bool is_snap_target() const override {
 		return true;
 	}
@@ -130,6 +132,6 @@ private:
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 		graphic_resolution_changed_subscriber_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_WINDOW_H

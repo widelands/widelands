@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # D M <hunter12@home.se>, 2017
+# GunChleoc, 2018
 # GunChleoc, 2014
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-10 11:03+0000\n"
-"PO-Revision-Date: 2018-02-10 11:05+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -473,7 +474,7 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores. I brought plenty of good men from Atlantis. The military might "
 "is available. We only need some housing to live in."
-msgstr "Må Satul värma dig, Jundlina! Jag håller med om vad Loftomor föreslår. Vi behöver bra tillförsel av byggnadsmaterial för vi måste utöka vårt territorium snabbt. Jag kommer inte att känna mig trygg på denna ö så länge vi inte har sett alla dess stränder. Jag tog med mig många bra män från Atlantis. Den militära styrkan finns. Vi behöver bara några hus att bo i. "
+msgstr "Må Satul värma dig, Jundlina! Jag håller med om vad Loftomor föreslår. Vi behöver bra tillförsel av byggnadsmaterial för vi måste utöka vårt territorium snabbt. Jag kommer inte att känna mig trygg på denna ö så länge vi inte har sett alla dess stränder. Jag tog med mig många bra män från Atlantis. Den militära styrkan finns. Vi behöver bara några hus att bo i."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:216
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:256
@@ -556,7 +557,7 @@ msgid ""
 "building where the side effects do not matter? I think those two things "
 "would be accepted by the people and would reduce the cooking time without "
 "taking away the ritual."
-msgstr "Och ännu viktigare, rökning av fisk och kött. Att rensa dem och förbättra dess smak är hemskt. Mitt hus är fullt av rök och stinker i veckor efteråt. Tror du inte detta skulle kunna göras i en speciell byggnad där röken och stanken inte spelar någon roll? Jag tror att de här två förändringarna skulle accepteras av folket och skulle minska tiden som tas i anspråk för matlagning, utan att ta bort ritualen. "
+msgstr "Och ännu viktigare, rökning av fisk och kött. Att rensa dem och förbättra dess smak är hemskt. Mitt hus är fullt av rök och stinker i veckor efteråt. Tror du inte detta skulle kunna göras i en speciell byggnad där röken och stanken inte spelar någon roll? Jag tror att de här två förändringarna skulle accepteras av folket och skulle minska tiden som tas i anspråk för matlagning, utan att ta bort ritualen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:246
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
@@ -729,7 +730,7 @@ msgid ""
 "will start its work soon. I am looking forward to tomorrow; I am very "
 "interested in how our soldiers are trained, and I wonder if the additional "
 "workload will keep them from bullying the civilian population."
-msgstr "Jag fick en inbjudan från Sidolus. Första dagen med träning i den nya labyrinten kommer att vara imorgon. Fängelsehålan är också klar och kommer att börja användas snart. Jag ser fram emot morgondagen. Jag är mycket intresserad av hur våra soldater tränas och jag undrar om den ökade arbetsbelastningen kommer få dem att sluta trackasera civilbefolkningen. "
+msgstr "Jag fick en inbjudan från Sidolus. Första dagen med träning i den nya labyrinten kommer att vara imorgon. Fängelsehålan är också klar och kommer att börja användas snart. Jag ser fram emot morgondagen. Jag är mycket intresserad av hur våra soldater tränas och jag undrar om den ökade arbetsbelastningen kommer få dem att sluta trackasera civilbefolkningen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:366
 msgid "Jundlina Considers the Economy"
@@ -926,13 +927,15 @@ msgstr "Byggnad förlorad!"
 msgid "We lost a building to the ocean!"
 msgstr "Vi förlorade en byggnad till havet!"
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "Nytt mål"
-msgstr[1] "Nya mål"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

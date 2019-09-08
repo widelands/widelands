@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,14 +26,13 @@
 
 #include "base/time_string.h"
 #include "build_info.h"
-#include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
+#include "io/profile.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/playersmanager.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "wui/interactive_player.h"
@@ -137,4 +136,4 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 		sw->flush();
 	}
 }
-}
+}  // namespace Widelands

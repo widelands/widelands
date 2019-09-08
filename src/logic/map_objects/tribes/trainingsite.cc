@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,13 +42,15 @@ namespace Widelands {
 const uint32_t TrainingSite::training_state_multiplier_ = 12;
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua
+ */
 TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
+                                     const std::string& msgctxt,
                                      const LuaTable& table,
-                                     const EditorGameBase& egbase)
-   : ProductionSiteDescr(init_descname, "", MapObjectType::TRAININGSITE, table, egbase),
+                                     const Tribes& tribes,
+                                     const World& world)
+   : ProductionSiteDescr(init_descname, msgctxt, MapObjectType::TRAININGSITE, table, tribes, world),
      num_soldiers_(table.get_int("soldier_capacity")),
      max_stall_(table.get_int("trainer_patience")),
 
@@ -216,7 +218,7 @@ void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity)
  * soldier is actually stationed here, without breaking anything if he isn't.
  */
 void TrainingSite::SoldierControl::drop_soldier(Soldier& soldier) {
-	Game& game = dynamic_cast<Game&>(training_site_->owner().egbase());
+	Game& game = dynamic_cast<Game&>(training_site_->get_owner()->egbase());
 
 	std::vector<Soldier*>::iterator it =
 	   std::find(training_site_->soldiers_.begin(), training_site_->soldiers_.end(), &soldier);
@@ -269,7 +271,7 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
      soldier_request_(nullptr),
      capacity_(descr().get_max_number_of_soldiers()),
      build_heroes_(false),
-     result_(Failed) {
+     result_(ProgramResult::kFailed) {
 	set_soldier_control(&soldier_control_);
 
 	// Initialize this in the constructor so that loading code may
@@ -349,13 +351,13 @@ void TrainingSite::add_worker(Worker& w) {
 		if (std::find(soldiers_.begin(), soldiers_.end(), soldier) == soldiers_.end())
 			soldiers_.push_back(soldier);
 
-		if (upcast(Game, game, &owner().egbase()))
+		if (upcast(Game, game, &get_owner()->egbase()))
 			schedule_act(*game, 100);
 	}
 }
 
 void TrainingSite::remove_worker(Worker& w) {
-	upcast(Game, game, &owner().egbase());
+	upcast(Game, game, &get_owner()->egbase());
 
 	if (upcast(Soldier, soldier, &w)) {
 		std::vector<Soldier*>::iterator const it =
@@ -523,6 +525,14 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 	}
 }
 
+const BuildingSettings* TrainingSite::create_building_settings() const {
+	TrainingsiteSettings* settings = new TrainingsiteSettings(descr());
+	settings->apply(*ProductionSite::create_building_settings());
+	settings->desired_capacity =
+	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
+	return settings;
+}
+
 /**
  * In addition to advancing the program, update soldier status.
  */
@@ -542,7 +552,7 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
 	bool leftover_soldiers_check = true;
 
 	if (current_upgrade_) {
-		if (result_ == Completed) {
+		if (result_ == ProgramResult::kCompleted) {
 			drop_unupgradable_soldiers(game);
 			leftover_soldiers_check = false;
 			current_upgrade_->lastsuccess = true;
@@ -751,4 +761,4 @@ void TrainingSite::training_done() {
 		}
 	}
 }
-}
+}  // namespace Widelands

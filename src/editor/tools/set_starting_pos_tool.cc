@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,9 +21,7 @@
 
 #include "editor/editorinteractive.h"
 #include "editor/tools/tool.h"
-#include "graphic/graphic.h"
 #include "graphic/playercolor.h"
-#include "logic/map.h"
 
 // global variable to pass data from callback to class
 static int32_t current_player_;
@@ -61,8 +59,7 @@ EditorSetStartingPosTool::EditorSetStartingPosTool() : EditorTool(*this, *this, 
 	current_player_ = 1;
 }
 
-int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::World&,
-                                                    const Widelands::NodeAndTriangle<>& center,
+int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                     EditorInteractive&,
                                                     EditorActionArgs*,
                                                     Widelands::Map* map) {

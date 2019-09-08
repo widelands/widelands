@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2018
 # Omar Anwar <omaraglan91@yahoo.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-10 11:03+0000\n"
-"PO-Revision-Date: 2018-02-10 11:05+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +36,7 @@ msgstr "إبني محجر"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build two woodcutter’s houses"
-msgstr "إبنى اثنين من منازل قاطعي الأخشاب "
+msgstr "إبنى اثنين من منازل قاطعي الأخشاب"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two forester’s houses"
@@ -47,7 +48,7 @@ msgstr "إبنى منشرة"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "Expand your territory and explore"
-msgstr "وسع منطقة سيطرتك وإكتشف "
+msgstr "وسع منطقة سيطرتك وإكتشف"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:46
 msgid "Expand and Explore"
@@ -88,31 +89,31 @@ msgid ""
 "breeding more. Make sure that there are always fish left, otherwise the fish"
 " breeder won’t be able to breed new ones. The smoking happens in a smokery, "
 "you will need at least two of those."
-msgstr "النوعان الآخران المهمان من الطعام هو السمك المدخن واللحم المدخن. اللحم النئ يُوصل من الصياد. صياد السمك يخرج السمك من البحر في حين أن مربى السمك يتأكد من أن الأسماك لن تنقرض بتربية أسماك أكثر. تأكد دائما من أن يكون هناك بعض السمك الباقي وإلا لن يستطيع مربى الأسماك من تربيه المزيد. التدخين يحصل فى المدخنة. أنت سوف تحتاج على الأقل أثنين من هذه. "
+msgstr "النوعان الآخران المهمان من الطعام هو السمك المدخن واللحم المدخن. اللحم النئ يُوصل من الصياد. صياد السمك يخرج السمك من البحر في حين أن مربى السمك يتأكد من أن الأسماك لن تنقرض بتربية أسماك أكثر. تأكد دائما من أن يكون هناك بعض السمك الباقي وإلا لن يستطيع مربى الأسماك من تربيه المزيد. التدخين يحصل فى المدخنة. أنت سوف تحتاج على الأقل أثنين من هذه."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid "Build a farm and a blackroot farm"
-msgstr "إبنى مزرعة ومزرعة الجزر الأسود "
+msgstr "إبنى مزرعة ومزرعة الجزر الأسود"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr "إبنى طاحونة لكي تُنتج نشا الذرة و طحين الجذور السوداء "
+msgstr "إبنى طاحونة لكي تُنتج نشا الذرة و طحين الجذور السوداء"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a well"
-msgstr "إبنى بئر "
+msgstr "إبنى بئر"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr "إبنى مخبز لكي تنتج الخبز من نشا الذرة, طحين الجذور السوداء والماء "
+msgstr "إبنى مخبز لكي تنتج الخبز من نشا الذرة, طحين الجذور السوداء والماء"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Build a hunter’s house to get raw meat"
-msgstr "إبنى منزل الصياد لكي تحصل على اللحم النئ "
+msgstr "إبنى منزل الصياد لكي تحصل على اللحم النئ"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a fisher’s house close to water to get raw fish"
-msgstr "إبنى منزل صياد السمك بالقرب من الماء لكي تحصل على سمك نئ "
+msgstr "إبنى منزل صياد السمك بالقرب من الماء لكي تحصل على سمك نئ"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:65
 msgid ""
@@ -122,15 +123,15 @@ msgstr "إبنى منزل مربي الأسماك قريبا من الصياد �
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:66
 msgid "Build two smokeries to smoke raw meat and fish"
-msgstr "إبنى مدَخنَتيَن لكى تُدخن السمك واللحم النيئ "
+msgstr "إبنى مدَخنَتيَن لكى تُدخن السمك واللحم النيئ"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:72
 msgid "Build a spider farm and a weaving mill"
-msgstr "إبنى مزرعة العنكبوت و مصنع النسيج "
+msgstr "إبنى مزرعة العنكبوت و مصنع النسيج"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:74
 msgid "Spidercloth Production"
-msgstr "إنتاج ملابس العنكبوت "
+msgstr "إنتاج ملابس العنكبوت"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:75
 msgid ""
@@ -143,7 +144,7 @@ msgstr "النساجون ينتجون ملابس العنكبوت والسترا
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:76
 msgid "Build a weaving mill"
-msgstr "إبنى مصنع نسيج "
+msgstr "إبنى مصنع نسيج"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:77
 msgid "Build a spider farm"
@@ -151,11 +152,11 @@ msgstr "إبنى مزرعة عنكبوت"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:78
 msgid "Build a gold spinning mill"
-msgstr "إبنى مصنع ومنجم الذهب "
+msgstr "إبنى مصنع ومنجم الذهب"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:84
 msgid "Build industry and mines"
-msgstr "ابنى الصناعة والمناجم "
+msgstr "ابنى الصناعة والمناجم"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:86
 msgid "Industry and Mines"
@@ -184,15 +185,15 @@ msgstr "إبنى منجم من كل نوع. لكن تأكد أن تُرسل ال
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid "Build a smelting works"
-msgstr "إبنى مصنع الصهر "
+msgstr "إبنى مصنع الصهر"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:91
 msgid "Build an armor smithy and a weapon smithy"
-msgstr "إبني حداد الدرع و حداد الأسلحة "
+msgstr "إبني حداد الدرع و حداد الأسلحة"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:92
 msgid "Build a toolsmithy"
-msgstr "إبنى حداد الأدوات "
+msgstr "إبنى حداد الأدوات"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:102
@@ -213,11 +214,11 @@ msgstr "الأن الأسلحة يتم صياغتها، الجنود الجدد 
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:108
 msgid "Build training sites for soldiers"
-msgstr "إبنى مواقع تدريب للجنود "
+msgstr "إبنى مواقع تدريب للجنود"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:110
 msgid "Soldier Training Sites"
-msgstr "موقع تدريب الجنود "
+msgstr "موقع تدريب الجنود"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:111
 msgid ""
@@ -229,11 +230,11 @@ msgstr "مثل كل القبائل الأخرى, الاطلانطسيون أيض
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:112
 msgid "Build a dungeon and a labyrinth"
-msgstr "إبنى البرج و المتاهه "
+msgstr "إبنى البرج و المتاهه"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:118
 msgid "Build a warehouse and a horse farm"
-msgstr "إبنى مستودع و مزرعة أحصنة "
+msgstr "إبنى مستودع و مزرعة أحصنة"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Warehouse and Horse Farm"
@@ -318,7 +319,7 @@ msgid ""
 "During the nights, they went crazy and were full of fear. It was not long "
 "before the horse breeder Xydra figured out what was wrong with them: the sea"
 " level in front of their stable was rising with ever increasing speed."
-msgstr " لكن كل شئ كان يبدو جيداً. فقط الأحصنة تبدو أنها تَحسُ أن شئ ما خاطئ. في خلال الليل، أصابهم الجنون وأصبحوا ملئيين بالخوف. لم يطول الأمر حتي إكتشف مُربي الأحصنة \"زيدرا\" ماذا يحصل مع الأحصنة: مستوي البحر أمام الإسطبل كان يرتفع بشكل متسارع."
+msgstr "لكن كل شئ كان يبدو جيداً. فقط الأحصنة تبدو أنها تَحسُ أن شئ ما خاطئ. في خلال الليل، أصابهم الجنون وأصبحوا ملئيين بالخوف. لم يطول الأمر حتي إكتشف مُربي الأحصنة \"زيدرا\" ماذا يحصل مع الأحصنة: مستوي البحر أمام الإسطبل كان يرتفع بشكل متسارع."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:160
@@ -751,7 +752,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:384
 msgid "A Dangerous Discovery"
-msgstr "إكتشاف خطير "
+msgstr "إكتشاف خطير"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:385
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:413
@@ -924,17 +925,15 @@ msgstr "مبنى فُقد!"
 msgid "We lost a building to the ocean!"
 msgstr "لقد فقدنا مبنى للبحر!"
 
-#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] "لا أهداف جديدة"
-msgstr[1] "هدف جديد "
-msgstr[2] "هدفان جديدان "
-msgstr[3] "أهداف جديدة"
-msgstr[4] "أهداف جديدة"
-msgstr[5] "أهداف جديدة"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

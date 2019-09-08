@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 #include "graphic/graphic.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
-#include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "wui/inputqueuedisplay.h"
 
@@ -41,7 +40,8 @@ Create the window and its panels, add it to the registry.
 ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
                                            UI::UniqueWindow::Registry& reg,
                                            Widelands::ProductionSite& ps,
-                                           bool avoid_fastclick)
+                                           bool avoid_fastclick,
+                                           bool workarea_preview_wanted)
    : BuildingWindow(parent, reg, ps, avoid_fastclick),
      production_site_(&ps),
      worker_table_(nullptr),
@@ -64,15 +64,15 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 				   break;
 			   }
 		   }
-		});
-	init(avoid_fastclick);
+	   });
+	init(avoid_fastclick, workarea_preview_wanted);
 }
 
-void ProductionSiteWindow::init(bool avoid_fastclick) {
+void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
 	assert(production_site != nullptr);
 
-	BuildingWindow::init(avoid_fastclick);
+	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	const std::vector<Widelands::InputQueue*>& inputqueues = production_site->inputqueues();
 
 	if (inputqueues.size()) {
@@ -82,7 +82,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick) {
 
 		for (uint32_t i = 0; i < inputqueues.size(); ++i) {
 			prod_box->add(
-			   new InputQueueDisplay(prod_box, 0, 0, *igbase(), *production_site, inputqueues[i]));
+			   new InputQueueDisplay(prod_box, 0, 0, *igbase(), *production_site, *inputqueues[i]));
 		}
 
 		get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), prod_box, _("Wares"));
@@ -93,11 +93,18 @@ void ProductionSiteWindow::init(bool avoid_fastclick) {
 		worker_table_ = nullptr;
 	} else {
 		UI::Box* worker_box = new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
-		worker_table_ = new UI::Table<uintptr_t>(worker_box, 0, 0, 0, 100);
+		worker_table_ = new UI::Table<uintptr_t>(worker_box, 0, 0, 0, 100, UI::PanelStyle::kWui);
 		worker_caps_ = new UI::Box(worker_box, 0, 0, UI::Box::Horizontal);
 
-		worker_table_->add_column(
-		   210, (ngettext("Worker", "Workers", production_site->descr().nr_working_positions())));
+		const std::string workers_heading =
+		   (production_site->descr().nr_working_positions() == 1) ?
+		      /** TRANSLATORS: Header in production site window if there is 1 worker */
+		      _("Worker") :
+		      /** TRANSLATORS: Header in production site window if there is more than 1 worker. If you
+		         need plural forms here, please let us know. */
+		      _("Workers");
+
+		worker_table_->add_column(210, workers_heading);
 		worker_table_->add_column(60, _("Exp"));
 		worker_table_->add_column(150, _("Next Level"));
 
@@ -108,10 +115,10 @@ void ProductionSiteWindow::init(bool avoid_fastclick) {
 
 		if (igbase()->can_act(production_site->owner().player_number())) {
 			worker_caps_->add_inf_space();
-			UI::Button* evict_button = new UI::Button(
-			   worker_caps_, "evict", 0, 0, 34, 34, g_gr->images().get("images/ui_basic/but4.png"),
-			   g_gr->images().get("images/wui/buildings/menu_drop_soldier.png"),
-			   _("Terminate the employment of the selected worker"));
+			UI::Button* evict_button =
+			   new UI::Button(worker_caps_, "evict", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			                  g_gr->images().get("images/wui/buildings/menu_drop_soldier.png"),
+			                  _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect(
 			   boost::bind(&ProductionSiteWindow::evict_worker, boost::ref(*this)));
 			worker_caps_->add(evict_button);
@@ -120,9 +127,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick) {
 		worker_box->add(worker_table_, UI::Box::Resizing::kFullSize);
 		worker_box->add_space(4);
 		worker_box->add(worker_caps_, UI::Box::Resizing::kFullSize);
-		get_tabs()->add(
-		   "workers", g_gr->images().get(pic_tab_workers), worker_box,
-		   (ngettext("Worker", "Workers", production_site->descr().nr_working_positions())));
+		get_tabs()->add("workers", g_gr->images().get(pic_tab_workers), worker_box, workers_heading);
 		update_worker_table(production_site);
 	}
 	think();

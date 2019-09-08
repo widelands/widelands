@@ -31,8 +31,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      recruitment = true,
-      prohibited_till = 610
+      prohibited_till = 610,
    },
 
    working_positions = {
@@ -52,10 +51,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
          descname = pgettext("barbarians_building", "rearing cattle"),
          actions = {
-            "sleep=15000",
             "return=skipped unless economy needs barbarians_ox",
             "consume=wheat water",
-            "play_sound=sound/farm ox 192",
+            "sleep=15000",
+            "playsound=sound/farm/ox 192",
             "animate=working 15000", -- Animation of feeding the cattle
             "recruit=barbarians_ox"
          }

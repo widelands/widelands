@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,57 +34,59 @@ Tribes::Tribes()
      ships_(new DescriptionMaintainer<ShipDescr>()),
      wares_(new DescriptionMaintainer<WareDescr>()),
      workers_(new DescriptionMaintainer<WorkerDescr>()),
-     tribes_(new DescriptionMaintainer<TribeDescr>()) {
+     tribes_(new DescriptionMaintainer<TribeDescr>()),
+     largest_workarea_(0) {
 }
 
-void Tribes::add_constructionsite_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_constructionsite_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	buildings_->add(new ConstructionSiteDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
-void Tribes::add_dismantlesite_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_dismantlesite_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	buildings_->add(new DismantleSiteDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
-void Tribes::add_militarysite_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_militarysite_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	buildings_->add(new MilitarySiteDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
-void Tribes::add_productionsite_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_productionsite_type(const LuaTable& table, const World& world) {
 	i18n::Textdomain td("tribes");
 	const std::string msgctxt = table.get_string("msgctxt");
 	buildings_->add(
 	   new ProductionSiteDescr(pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str()),
-	                           msgctxt, table, egbase));
+	                           msgctxt, table, *this, world));
 }
 
-void Tribes::add_trainingsite_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_trainingsite_type(const LuaTable& table, const World& world) {
 	i18n::Textdomain td("tribes");
-	buildings_->add(new TrainingSiteDescr(
-	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	const std::string msgctxt = table.get_string("msgctxt");
+	buildings_->add(
+	   new TrainingSiteDescr(pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str()),
+	                         msgctxt, table, *this, world));
 }
 
-void Tribes::add_warehouse_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_warehouse_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	buildings_->add(new WarehouseDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
-void Tribes::add_market_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_market_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	buildings_->add(new MarketDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
 void Tribes::add_immovable_type(const LuaTable& table) {
@@ -106,31 +108,31 @@ void Tribes::add_ware_type(const LuaTable& table) {
 	   table));
 }
 
-void Tribes::add_carrier_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_carrier_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	workers_->add(new CarrierDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
-void Tribes::add_soldier_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_soldier_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	workers_->add(new SoldierDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
-void Tribes::add_worker_type(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_worker_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	workers_->add(new WorkerDescr(
 	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	   table, *this));
 }
 
-void Tribes::add_tribe(const LuaTable& table, const EditorGameBase& egbase) {
+void Tribes::add_tribe(const LuaTable& table) {
 	const std::string name = table.get_string("name");
 	if (Widelands::tribe_exists(name)) {
-		tribes_->add(new TribeDescr(table, Widelands::get_tribeinfo(name), egbase.tribes()));
+		tribes_->add(new TribeDescr(table, Widelands::get_tribeinfo(name), *this));
 	} else {
 		throw GameDataError("The tribe '%s'' has no preload file.", name.c_str());
 	}
@@ -313,8 +315,14 @@ void Tribes::load_graphics() {
 }
 
 void Tribes::postload() {
+	largest_workarea_ = 0;
 	for (DescriptionIndex i = 0; i < buildings_->size(); ++i) {
 		BuildingDescr& building_descr = *buildings_->get_mutable(i);
+
+		// Calculate largest possible workarea radius
+		for (const auto& pair : building_descr.workarea_info()) {
+			largest_workarea_ = std::max(largest_workarea_, pair.first);
+		}
 
 		// Add consumers and producers to wares.
 		if (upcast(ProductionSiteDescr, de, &building_descr)) {
@@ -326,6 +334,22 @@ void Tribes::postload() {
 			}
 			for (const auto& job : de->working_positions()) {
 				workers_->get_mutable(job.first)->add_employer(i);
+			}
+
+			// Check that all workarea overlap hints are valid
+			for (const auto& pair : de->get_highlight_overlapping_workarea_for()) {
+				const DescriptionIndex di = safe_building_index(pair.first);
+				if (upcast(const ProductionSiteDescr, p, get_building_descr(di))) {
+					if (!p->workarea_info().empty()) {
+						continue;
+					}
+					throw GameDataError("Productionsite %s will inform about conflicting building %s "
+					                    "which doesn’t have a workarea",
+					                    de->name().c_str(), pair.first.c_str());
+				}
+				throw GameDataError("Productionsite %s will inform about conflicting building %s which "
+				                    "is not a productionsite",
+				                    de->name().c_str(), pair.first.c_str());
 			}
 		}
 
@@ -339,12 +363,18 @@ void Tribes::postload() {
 	// Calculate the trainingsites proportions.
 	postload_calculate_trainingsites_proportions();
 
-	// Resize the configuration of our wares if they won't fit in the current window (12 = info label
-	// size).
-	int number = (g_gr->get_yres() - 290) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
+	// Some final checks on the gamedata
 	for (DescriptionIndex i = 0; i < tribes_->size(); ++i) {
 		TribeDescr* tribe_descr = tribes_->get_mutable(i);
-		tribe_descr->resize_ware_orders(number);
+		// Verify that the preciousness has been set for all of the tribe's wares
+		for (const DescriptionIndex wi : tribe_descr->wares()) {
+			if (tribe_descr->get_ware_descr(wi)->ai_hints().preciousness(tribe_descr->name()) ==
+			    kInvalidWare) {
+				throw GameDataError("The ware '%s' needs to define a preciousness for tribe '%s'",
+				                    tribe_descr->get_ware_descr(wi)->name().c_str(),
+				                    tribe_descr->name().c_str());
+			}
+		}
 	}
 }
 
@@ -414,4 +444,7 @@ void Tribes::postload_calculate_trainingsites_proportions() {
 	}
 }
 
+uint32_t Tribes::get_largest_workarea() const {
+	return largest_workarea_;
+}
 }  // namespace Widelands

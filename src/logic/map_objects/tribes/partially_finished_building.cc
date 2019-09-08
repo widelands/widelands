@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
-#include "sound/note_sound.h"
 
 namespace Widelands {
 
@@ -69,10 +68,10 @@ void PartiallyFinishedBuilding::cleanup(EditorGameBase& egbase) {
 bool PartiallyFinishedBuilding::init(EditorGameBase& egbase) {
 	Building::init(egbase);
 
-	if (upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase)) {
 		request_builder(*game);
+	}
 
-	Notifications::publish(NoteSound("create_construction_site", position_, 255));
 	return true;
 }
 
@@ -194,4 +193,4 @@ void PartiallyFinishedBuilding::request_builder_callback(
 	w->start_task_buildingwork(game);
 	b.set_seeing(true);
 }
-}
+}  // namespace Widelands

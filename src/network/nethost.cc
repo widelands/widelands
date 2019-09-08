@@ -19,7 +19,7 @@ int get_ip_version(const boost::asio::ip::tcp::acceptor& acceptor) {
 		return 6;
 	}
 }
-}
+}  // namespace
 
 NetHost::Client::Client(boost::asio::ip::tcp::socket&& sock)
    : socket(std::move(sock)), deserializer() {
@@ -188,9 +188,9 @@ void NetHost::send(const ConnectionId id, const SendPacket& packet) {
 			return;
 		}
 		if (written < packet.get_size()) {
-			throw wexception(
-			   "[NetHost] Unable to send complete packet to relay (only %lu bytes of %lu)", written,
-			   packet.get_size());
+			throw wexception("[NetHost] Unable to send complete packet to relay (only %" PRIuS
+			                 " bytes of %" PRIuS ")",
+			                 written, packet.get_size());
 		}
 	}
 }

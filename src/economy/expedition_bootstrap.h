@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,8 +87,12 @@ public:
 	 * The actual data is stored in the buildingdata
 	 * packet, and there in the warehouse data packet.
 	 */
-	void
-	load(Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol, uint16_t version);
+	void load(Warehouse& warehouse,
+	          FileRead& fr,
+	          Game& game,
+	          MapObjectLoader& mol,
+	          const TribesLegacyLookupTable& tribes_lookup_table,
+	          uint16_t version);
 
 	/** Save this into a file.
 	 *

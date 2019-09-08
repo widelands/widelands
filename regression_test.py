@@ -89,8 +89,7 @@ class WidelandsTestCase(unittest.TestCase):
                     '--datadir={}'.format(datadir()),
                     '--datadir_for_testing={}'.format(datadir_for_testing()),
                     '--homedir={}'.format(self.run_dir),
-                    '--disable_fx=true',
-                    '--disable_music=true',
+                    '--nosound',
                     '--language=en_US' ]
             args += [ "--{}={}".format(key, value) for key, value in iteritems(wlargs) ]
 
@@ -136,6 +135,9 @@ class WidelandsTestCase(unittest.TestCase):
             "Widelands exited abnormally. {}".format(common_msg)
         )
         self.assertTrue("All Tests passed" in stdout,
+            "Not all tests pass. {}.".format(common_msg)
+        )
+        self.assertFalse("lua_errors.cc" in stdout,
             "Not all tests pass. {}.".format(common_msg)
         )
         out("done.\n")

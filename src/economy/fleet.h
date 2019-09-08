@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,6 +46,9 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(FleetDescr);
 };
 
+constexpr int32_t kFleetInterval = 5000;
+constexpr uint32_t kRouteNotCalculated = std::numeric_limits<uint32_t>::max();
+
 /**
  * Manage all ships and ports of a player that are connected
  * by ocean.
@@ -75,14 +78,7 @@ struct Fleet : MapObject {
 
 	const FleetDescr& descr() const;
 
-	explicit Fleet(Player& player);
-
-	Player* get_owner() const {
-		return &owner_;
-	}
-	Player& owner() const {
-		return owner_;
-	}
+	explicit Fleet(Player* player);
 
 	PortDock* get_dock(Flag& flag) const;
 	PortDock* get_dock(EditorGameBase&, Coords) const;
@@ -99,17 +95,17 @@ struct Fleet : MapObject {
 	void remove_ship(EditorGameBase& egbase, Ship* ship);
 	void add_port(EditorGameBase& egbase, PortDock* port);
 	void remove_port(EditorGameBase& egbase, PortDock* port);
-	bool has_ports();
+	bool has_ports() const;
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
-	bool get_path(PortDock& start, PortDock& end, Path& path);
+	bool get_path(const PortDock& start, const PortDock& end, Path& path);
 	void add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& neighbours);
 
-	uint32_t count_ships();
-	uint32_t count_ships_heading_here(EditorGameBase& egbase, PortDock* port);
-	uint32_t count_ports();
-	bool get_act_pending();
+	uint32_t count_ships() const;
+	uint32_t count_ships_heading_here(EditorGameBase& egbase, PortDock* port) const;
+	uint32_t count_ports() const;
+	bool get_act_pending() const;
 
 protected:
 	void act(Game&, uint32_t data) override;
@@ -125,7 +121,6 @@ private:
 	PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse);
 	const PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse) const;
 
-	Player& owner_;
 	std::vector<Ship*> ships_;
 	std::vector<PortDock*> ports_;
 
@@ -160,6 +155,8 @@ public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 
 	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
+	bool is_path_favourable(const PortDock& start, const PortDock& middle, const PortDock& finish);
+	PortDock* find_next_dest(Game&, const Ship&, const PortDock& from_port);
 };
 
 }  // namespace Widelands

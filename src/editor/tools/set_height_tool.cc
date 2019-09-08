@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,12 +23,10 @@
 #include "editor/tools/decrease_height_tool.h"
 #include "editor/tools/increase_height_tool.h"
 #include "logic/field.h"
-#include "logic/map.h"
 #include "logic/mapregion.h"
 
-int32_t EditorSetHeightTool::handle_click_impl(const Widelands::World& world,
-                                               const Widelands::NodeAndTriangle<>& center,
-                                               EditorInteractive& /* parent */,
+int32_t EditorSetHeightTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                               EditorInteractive& eia,
                                                EditorActionArgs* args,
                                                Widelands::Map* map) {
 	if (args->original_heights.empty()) {
@@ -41,14 +39,14 @@ int32_t EditorSetHeightTool::handle_click_impl(const Widelands::World& world,
 		while (mr.advance(*map));
 	}
 	return map->set_height(
-	   world, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius),
+	   eia.egbase(),
+	   Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius),
 	   args->interval);
 }
 
 int32_t
-EditorSetHeightTool::handle_undo_impl(const Widelands::World& world,
-                                      const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                      EditorInteractive& /* parent */,
+EditorSetHeightTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
+                                      EditorInteractive& eia,
                                       EditorActionArgs* args,
                                       Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
@@ -64,9 +62,9 @@ EditorSetHeightTool::handle_undo_impl(const Widelands::World& world,
 	} while (mr.advance(*map));
 
 	map->recalc_for_field_area(
-	   world, Widelands::Area<Widelands::FCoords>(
-	             map->get_fcoords(center.node),
-	             args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 2));
+	   eia.egbase(), Widelands::Area<Widelands::FCoords>(
+	                    map->get_fcoords(center.node),
+	                    args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 2));
 
 	return mr.radius() + 1;
 }

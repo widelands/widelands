@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,8 +50,8 @@ void StreamRead::data_complete(void* const read_data, const size_t size) {
 	size_t read = data(read_data, size);
 
 	if (read != size)
-		throw data_error("Stream ended unexpectedly (%lu bytes read, %lu expected)",
-		                 static_cast<long unsigned int>(read), static_cast<long unsigned int>(size));
+		throw data_error(
+		   "Stream ended unexpectedly (%" PRIuS " bytes read, %" PRIuS " expected)", read, size);
 }
 
 int8_t StreamRead::signed_8() {

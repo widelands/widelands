@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 
 #include <cmath>
 #include <tuple>
+#include <vector>
 
 #include <stdint.h>
 
@@ -153,6 +154,6 @@ struct HeightInterval {
 
 	uint8_t min, max;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_WIDELANDS_GEOMETRY_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #ifndef WL_ECONOMY_FLAG_H
 #define WL_ECONOMY_FLAG_H
 
+#include <deque>
 #include <list>
 #include <vector>
 
@@ -27,6 +28,7 @@
 #include "economy/routing_node.h"
 #include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/walkingdir.h"
 
 namespace Widelands {
 class Building;
@@ -47,11 +49,11 @@ private:
 };
 
 /**
- * Flag represents a flag, obviously.
+ * Flag represents a flag as you see it on the map.
+ *
  * A flag itself doesn't do much. However, it can have up to 6 roads attached
  * to it. Instead of the WALK_NW road, it can also have a building attached to
- * it.
- * Flags also have a store of up to 8 wares.
+ * it. Flags also have a store of up to 8 wares.
  *
  * You can also assign an arbitrary number of "jobs" for a flag.
  * A job consists of a request for a worker, and the name of a program that the
@@ -73,8 +75,12 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	const FlagDescr& descr() const;
 
-	Flag();                                               /// empty flag for savegame loading
-	Flag(EditorGameBase&, Player& owner, const Coords&);  /// create a new flag
+	/// Empty flag, for unit tests only.
+	Flag();
+
+	/// Create a new flag. Only specify an economy during saveloading.
+	/// Otherwise, a new economy will be created automatically if needed.
+	Flag(EditorGameBase&, Player* owner, const Coords&, Economy* economy = nullptr);
 	~Flag() override;
 
 	void load_finish(EditorGameBase&) override;
@@ -130,7 +136,9 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	bool ack_pickup(Game&, Flag& destflag);
 	bool cancel_pickup(Game&, Flag& destflag);
 	WareInstance* fetch_pending_ware(Game&, PlayerImmovable& dest);
+	void propagate_promoted_road(Road* promoted_road);
 	Wares get_wares();
+	uint8_t count_wares_in_queue(PlayerImmovable& dest) const;
 
 	void call_carrier(Game&, WareInstance&, PlayerImmovable* nextstep);
 	void update_wares(Game&, Flag* other);
@@ -139,7 +147,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	void add_flag_job(Game&, DescriptionIndex workerware, const std::string& programname);
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 protected:
 	bool init(EditorGameBase&) override;
@@ -148,6 +156,7 @@ protected:
 	void draw(uint32_t gametime,
 	          TextToDraw draw_text,
 	          const Vector2f& point_on_dst,
+	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
 
@@ -175,7 +184,7 @@ private:
 	int32_t animstart_;
 
 	Building* building_;  ///< attached building (replaces road WALK_NW)
-	Road* roads_[6];      ///< WALK_xx - 1 as index
+	Road* roads_[WalkingDir::LAST_DIRECTION];
 
 	int32_t ware_capacity_;  ///< size of wares_ array
 	int32_t ware_filled_;    ///< number of wares currently on the flag
@@ -185,7 +194,7 @@ private:
 	/// the given flag
 	Flag* always_call_for_flag_;
 
-	using CapacityWaitQueue = std::vector<OPtr<Worker>>;
+	using CapacityWaitQueue = std::deque<OPtr<Worker>>;
 	CapacityWaitQueue capacity_wait_;  ///< workers waiting for capacity
 
 	using FlagJobs = std::list<FlagJob>;
@@ -193,6 +202,6 @@ private:
 };
 
 extern FlagDescr g_flag_descr;
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_FLAG_H

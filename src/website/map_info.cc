@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,25 +36,10 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "map_io/widelands_map_loader.h"
+#include "website/json/json.h"
+#include "website/website_common.h"
 
 using namespace Widelands;
-
-namespace {
-
-// Setup the static objects Widelands needs to operate and initializes systems.
-void initialize() {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		throw wexception("Unable to initialize SDL: %s", SDL_GetError());
-	}
-
-	g_fs = new LayeredFileSystem();
-	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
-
-	g_gr = new Graphic();
-	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
-}
-
-}  // namespace
 
 int main(int argc, char** argv) {
 	if (!(2 <= argc && argc <= 3)) {
@@ -99,52 +84,28 @@ int main(int argc, char** argv) {
 
 		// Write JSON.
 		{
-			FileWrite fw;
-
-			const auto write_string = [&fw](const std::string& s) { fw.data(s.c_str(), s.size()); };
-			const auto write_key_value = [&write_string](
-			   const std::string& key, const std::string& quoted_value) {
-				write_string((boost::format("\"%s\": %s") % key % quoted_value).str());
-			};
-			const auto write_key_value_string = [&write_key_value](
-			   const std::string& key, const std::string& value) {
-				std::string quoted_value = value;
-				boost::replace_all(quoted_value, "\"", "\\\"");
-				write_key_value(key, "\"" + value + "\"");
-			};
-			const auto write_key_value_int = [&write_key_value](
-			   const std::string& key, const int value) {
-				write_key_value(key, boost::lexical_cast<std::string>(value));
-			};
-			write_string("{\n  ");
-			write_key_value_string("name", map->get_name());
-			write_string(",\n  ");
-			write_key_value_string("author", map->get_author());
-			write_string(",\n  ");
-			write_key_value_string("description", map->get_description());
-			write_string(",\n  ");
-			write_key_value_string("hint", map->get_hint());
-			write_string(",\n  ");
-			write_key_value_int("width", map->get_width());
-			write_string(",\n  ");
-			write_key_value_int("height", map->get_height());
-			write_string(",\n  ");
-			write_key_value_int("nr_players", map->get_nrplayers());
-			write_string(",\n  ");
+			std::unique_ptr<JSON::Object> json(new JSON::Object());
+			json->add_string("name", map->get_name());
+			json->add_string("author", map->get_author());
+			json->add_string("description", map->get_description());
+			json->add_string("hint", map->get_hint());
+			json->add_int("width", map->get_width());
+			json->add_int("height", map->get_height());
+			json->add_int("nr_players", map->get_nrplayers());
+			json->add_int("needs_widelands_version_after", map->needs_widelands_version_after());
 
 			const std::string world_name =
 			   static_cast<Widelands::WidelandsMapLoader*>(ml.get())->old_world_name();
-			write_key_value_string("world_name", world_name);
-			write_string(",\n  ");
-			write_key_value_string("minimap", map_path + ".png");
-			write_string("\n");
-
-			write_string("}\n");
-			fw.write(*in_out_filesystem, (map_file + ".json").c_str());
+			json->add_string("world_name", world_name);
+			json->add_string("minimap", map_path + ".png");
+			json->write_to_file(*in_out_filesystem, (map_file + ".json").c_str());
 		}
+		egbase.cleanup_objects();
 	} catch (std::exception& e) {
 		log("Exception: %s.\n", e.what());
+		cleanup();
 		return 1;
 	}
+	cleanup();
 	return 0;
 }

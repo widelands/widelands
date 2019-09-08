@@ -1,28 +1,46 @@
-dirname = path.dirname(__file__)
+image_dirname = path.dirname(__file__) .. "images/barbarians/"
+
+animations = {}
+add_animation(animations, "frontier", image_dirname, "frontier", {1, 19})
+add_animation(animations, "flag", image_dirname, "flag", {10, 38}, 5)
 
 tribes:new_tribe {
    name = "barbarians",
-
-   animations = {
-      frontier = {
-         pictures = path.list_files(dirname .. "images/barbarians/frontier_??.png"),
-         hotspot = { 1, 19 },
-      },
-      flag = {
-         pictures = path.list_files(dirname .. "images/barbarians/flag_??.png"),
-         hotspot = { 10, 38 },
-         fps = 5
-      }
-   },
+   animations = animations,
 
    -- Image file paths for this tribe's road textures
    roads = {
       busy = {
-         "tribes/images/barbarians/roadt_busy.png",
+         image_dirname .. "roadt_busy.png",
       },
       normal = {
-         "tribes/images/barbarians/roadt_normal_00.png",
-         "tribes/images/barbarians/roadt_normal_01.png",
+         image_dirname .. "roadt_normal_00.png",
+         image_dirname .. "roadt_normal_01.png",
+      },
+   },
+
+   resource_indicators = {
+      [""] = {
+         [0] = "barbarians_resi_none",
+      },
+      coal = {
+         [10] = "barbarians_resi_coal_1",
+         [20] = "barbarians_resi_coal_2",
+      },
+      iron = {
+         [10] = "barbarians_resi_iron_1",
+         [20] = "barbarians_resi_iron_2",
+      },
+      gold = {
+         [10] = "barbarians_resi_gold_1",
+         [20] = "barbarians_resi_gold_2",
+      },
+      stones = {
+         [10] = "barbarians_resi_stones_1",
+         [20] = "barbarians_resi_stones_2",
+      },
+      water = {
+         [100] = "barbarians_resi_water",
       },
    },
 
@@ -36,7 +54,7 @@ tribes:new_tribe {
          "log",
          "blackwood",
          "grout",
-         "thatch_reed",
+         "reed",
          "cloth"
       },
       {
@@ -146,25 +164,25 @@ tribes:new_tribe {
    immovables = {
       "ashes",
       "destroyed_building",
-      "field_tiny",
-      "field_small",
-      "field_medium",
-      "field_ripe",
-      "field_harvested",
-      "reed_tiny",
-      "reed_small",
-      "reed_medium",
-      "reed_ripe",
-      "resi_coal1",
-      "resi_coal2",
-      "resi_gold1",
-      "resi_gold2",
-      "resi_iron1",
-      "resi_iron2",
-      "resi_none",
-      "resi_water1",
-      "resi_stones1",
-      "resi_stones2",
+      "wheatfield_tiny",
+      "wheatfield_small",
+      "wheatfield_medium",
+      "wheatfield_ripe",
+      "wheatfield_harvested",
+      "reedfield_tiny",
+      "reedfield_small",
+      "reedfield_medium",
+      "reedfield_ripe",
+      "barbarians_resi_none",
+      "barbarians_resi_water",
+      "barbarians_resi_coal_1",
+      "barbarians_resi_iron_1",
+      "barbarians_resi_gold_1",
+      "barbarians_resi_stones_1",
+      "barbarians_resi_coal_2",
+      "barbarians_resi_iron_2",
+      "barbarians_resi_gold_2",
+      "barbarians_resi_stones_2",
       "barbarians_shipconstruction",
    },
 
@@ -175,9 +193,6 @@ tribes:new_tribe {
       "barbarians_headquarters_interim",
       "barbarians_warehouse",
       "barbarians_port",
-
-      -- Markets
-      "barbarians_market",
 
       -- Small
       "barbarians_quarry",
@@ -286,7 +301,6 @@ tribes:new_tribe {
    soldier = "barbarians_soldier",
    ship = "barbarians_ship",
    port = "barbarians_port",
-   barracks = "barbarians_barracks",
    ironore = "iron_ore",
    rawlog = "log",
    refinedlog = "blackwood",

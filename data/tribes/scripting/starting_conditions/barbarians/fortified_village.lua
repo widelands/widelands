@@ -19,7 +19,6 @@ return {
          sf = shared_in_start
       else
          plr:allow_workers("all")
-         plr:forbid_buildings{"barbarians_market"}
       end
 
       local h = plr:place_building("barbarians_citadel", sf, false, true)
@@ -47,7 +46,7 @@ return {
             scythe = 6,
             shovel = 4,
             snack = 3,
-            thatch_reed = 24,
+            reed = 24,
             log = 79,
          },
          workers = {
@@ -59,6 +58,7 @@ return {
             barbarians_geologist = 4,
             barbarians_lumberjack = 2,
             barbarians_miner = 4,
+            barbarians_miner_master = 4,
             barbarians_ranger = 1,
             barbarians_stonemason = 2,
             barbarians_trainer = 3,

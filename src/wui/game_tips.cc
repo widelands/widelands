@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -31,6 +31,8 @@
 #include "scripting/lua_table.h"
 
 #define BG_IMAGE "images/loadscreens/tips_bg.png"
+
+constexpr int kTextPadding = 48;
 
 GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>& names)
    : lastUpdated_(0),
@@ -108,7 +110,7 @@ void GameTips::show_tip(int32_t index) {
 	rt.blit(pt, pic_background);
 
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh1->render(as_game_tip(tips_[index].text), w);
+	   UI::g_fh->render(as_game_tip(tips_[index].text), w - 2 * kTextPadding);
 	pt = Vector2i((g_gr->get_xres() - rendered_text->width()) / 2,
 	              (g_gr->get_yres() - rendered_text->height()) / 2);
 	rendered_text->draw(rt, pt);

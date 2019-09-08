@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,12 +29,12 @@
 
 #include "graphic/align.h"
 #include "graphic/color.h"
-#include "graphic/graphic.h"
+#include "graphic/styles/font_style.h"
+#include "ui_basic/button.h"
 #include "ui_basic/panel.h"
+#include "ui_basic/scrollbar.h"
 
 namespace UI {
-struct Scrollbar;
-struct Button;
 
 enum class TableRows { kSingle, kMulti, kSingleDescending, kMultiDescending };
 enum class TableColumnType { kFixed, kFlexible };
@@ -58,10 +58,11 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle);
 	~Table();
 
+	boost::signals2::signal<void()> cancel;
 	boost::signals2::signal<void(uint32_t)> selected;
 	boost::signals2::signal<void(uint32_t)> double_clicked;
 
@@ -76,6 +77,7 @@ public:
 
 	/// Text conventions: Title Case for the 'title'
 	void set_column_title(uint8_t col, const std::string& title);
+	void set_column_tooltip(uint8_t col, const std::string& tooltip);
 
 	void clear();
 	void set_sort_column(uint8_t col);
@@ -84,8 +86,9 @@ public:
 
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
+	void remove_entry(Entry);
 
-	EntryRecord& add(void* const entry, const bool select_this = false);
+	EntryRecord& add(void* const entry, bool const select_this = false);
 
 	uint32_t size() const;
 	bool empty() const;
@@ -100,7 +103,7 @@ public:
 	EntryRecord* find(Entry) const;
 
 	void select(uint32_t);
-	void multiselect(uint32_t row);
+	void multiselect(uint32_t row, bool force = false);
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
@@ -121,7 +124,7 @@ public:
 	void draw(RenderTarget&);
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
-	virtual bool handle_key(bool down, SDL_Keysym code);
+	bool handle_key(bool down, SDL_Keysym code);
 };
 
 template <> class Table<void*> : public Panel {
@@ -138,28 +141,32 @@ public:
 		void* entry() const {
 			return entry_;
 		}
-		void set_color(const RGBColor& c) {
-			use_clr = true;
-			clr = c;
+
+		void set_font_style(const UI::FontStyleInfo& style) {
+			font_style_ = &style;
 		}
 
-		bool use_color() const {
-			return use_clr;
+		const UI::FontStyleInfo* font_style() const {
+			return font_style_;
 		}
-		RGBColor get_color() const {
-			return clr;
+
+		bool is_disabled() const {
+			return disabled_;
+		}
+		void set_disabled(bool disable) {
+			disabled_ = disable;
 		}
 
 	private:
 		friend class Table<void*>;
 		void* entry_;
-		bool use_clr;
-		RGBColor clr;
+		const UI::FontStyleInfo* font_style_;
 		struct Data {
 			const Image* d_picture;
 			std::string d_string;
 		};
 		std::vector<Data> data_;
+		bool disabled_;
 	};
 
 	Table(Panel* parent,
@@ -167,7 +174,7 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle);
 	~Table() override;
 
@@ -178,6 +185,7 @@ public:
 	 */
 	using CompareFn = boost::function<bool(uint32_t, uint32_t)>;
 
+	boost::signals2::signal<void()> cancel;
 	boost::signals2::signal<void(uint32_t)> selected;
 	boost::signals2::signal<void(uint32_t)> double_clicked;
 
@@ -188,9 +196,8 @@ public:
 	                TableColumnType column_type = TableColumnType::kFixed);
 
 	void set_column_title(uint8_t col, const std::string& title);
+	void set_column_tooltip(uint8_t col, const std::string& tooltip);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
-
-	void layout() override;
 
 	void clear();
 	void set_sort_column(uint8_t const col) {
@@ -209,8 +216,9 @@ public:
 
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
+	void remove_entry(const void* const entry);
 
-	EntryRecord& add(void* entry = nullptr, bool select = false);
+	EntryRecord& add(void* entry = nullptr, bool const select_this = false);
 
 	uint32_t size() const {
 		return entry_records_.size();
@@ -247,7 +255,7 @@ public:
 	EntryRecord* find(const void* entry) const;
 
 	void select(uint32_t);
-	void multiselect(uint32_t row);
+	void multiselect(uint32_t row, bool force = false);
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
@@ -275,6 +283,10 @@ public:
 	/// If entries == 0, the current entries are used.
 	void fit_height(uint32_t entries = 0);
 
+	void scroll_to_top();
+
+	void layout() override;
+
 	// Drawing and event handling
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
@@ -297,9 +309,10 @@ private:
 
 	Columns columns_;
 	int total_width_;
-	const uint32_t headerheight_;
 	int32_t lineheight_;
-	const Image* button_background_;
+	const uint32_t headerheight_;
+	const UI::PanelStyle style_;
+	const UI::ButtonStyle button_style_;
 	Scrollbar* scrollbar_;
 	// A disabled button that will fill the space above the scroll bar
 	UI::Button* scrollbar_filler_button_;
@@ -330,9 +343,13 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
+	}
+
+	void remove_entry(Entry const* const entry) {
+		Base::remove_entry(const_cast<Entry*>(entry));
 	}
 
 	EntryRecord& add(Entry const* const entry = 0, bool const select_this = false) {
@@ -360,9 +377,13 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
+	}
+
+	void remove_entry(Entry const* entry) {
+		Base::remove_entry(entry);
 	}
 
 	EntryRecord& add(Entry* const entry = 0, bool const select_this = false) {
@@ -390,9 +411,13 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
+	}
+
+	void remove_entry(const Entry& entry) {
+		Base::remove_entry(&const_cast<Entry&>(entry));
 	}
 
 	EntryRecord& add(const Entry& entry, bool const select_this = false) {
@@ -424,9 +449,13 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
+	}
+
+	void remove_entry(Entry& entry) {
+		Base::remove_entry(&entry);
 	}
 
 	EntryRecord& add(Entry& entry, bool const select_this = false) {
@@ -460,9 +489,13 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
+	}
+
+	void remove_entry(uintptr_t const entry) {
+		Base::remove_entry(reinterpret_cast<void*>(entry));
 	}
 
 	EntryRecord& add(uintptr_t const entry, bool const select_this = false) {
@@ -492,11 +525,11 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_TABLE_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,8 +75,13 @@ Player* PlayersManager::add_player(PlayerNumber const player_number,
 			number_of_players_--;
 		}
 	}
-	p = new Player(egbase_, player_number, initialization_index,
-	               *egbase_.tribes().get_tribe_descr(egbase_.tribes().tribe_index(tribe)), name);
+	const TribeDescr* player_tribe =
+	   egbase_.tribes().get_tribe_descr(egbase_.tribes().tribe_index(tribe));
+	if (player_tribe == nullptr) {
+		throw wexception("Tribe '%s' for player %d '%s' does not exist!", tribe.c_str(),
+		                 static_cast<unsigned int>(player_number), name.c_str());
+	}
+	p = new Player(egbase_, player_number, initialization_index, *player_tribe, name);
 	p->set_team_number(team);
 	if (player_number <= UserSettings::highest_playernum()) {
 		number_of_players_++;

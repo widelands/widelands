@@ -13,7 +13,7 @@ tribes:new_productionsite_type {
       log = 4,
       granite = 2,
       grout = 4,
-      thatch_reed = 1
+      reed = 1
    },
    return_on_dismantle = {
       log = 2,
@@ -24,16 +24,19 @@ tribes:new_productionsite_type {
    animations = {
       idle = { -- TODO(GunChleoc): make animations
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 52, 64 },
+         hotspot = { 50, 38 },
+      },
+      build = { -- TODO(GunChleoc): make animations
+         pictures = path.list_files(dirname .. "build_??.png"),
+         hotspot = { 50, 38 },
       },
       working = { -- TODO(GunChleoc): make animations
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 52, 64 },
+         pictures = path.list_files(dirname .. "working_??.png"),
+         hotspot = { 50, 38 },
       }
    },
 
    aihints = {
-      basic_amount = 1,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2,
       prohibited_till = 920
@@ -56,9 +59,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
          descname = pgettext("barbarians_building", "recruiting soldier"),
          actions = {
-            "sleep=15000",
             "return=skipped unless economy needs barbarians_soldier",
             "consume=ax barbarians_recruit",
+            "sleep=15000",
             "animate=working 15000",
             "recruit=barbarians_soldier"
          }

@@ -2,9 +2,9 @@ dirname = path.dirname(__file__)
 
 terrain_affinity = {
    preferred_temperature = 90,
-   preferred_humidity = 0.7,
-   preferred_fertility = 0.5,
-   pickiness = 0.6,
+   preferred_humidity = 700,
+   preferred_fertility = 500,
+   pickiness = 60,
 }
 
 world:new_immovable_type{
@@ -80,6 +80,7 @@ world:new_immovable_type{
    name = "oak_summer_old",
    descname = _ "Oak (Old)",
    species = _ "Oak",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },
@@ -101,8 +102,7 @@ world:new_immovable_type{
          hotspot = { 24, 60 },
          fps = 10,
          sound_effect = {
-            directory = "sound/animals",
-            name = "bird2",
+            path = "sound/animals/bird2",
          },
       },
       falling = {

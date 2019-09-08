@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,19 +29,21 @@ enum class NoteId : uint32_t {
 	ChatMessage,
 	LogMessage,
 	Immovable,
+	ConstructionsiteEnhanced,
 	FieldPossession,
 	FieldTerrainChanged,
 	ProductionSiteOutOfResources,
 	TrainingSiteSoldierTrained,
-	ShipMessage,
-	ShipWindow,
+	Ship,
 	Building,
 	Economy,
+	EconomyProfile,
 	GraphicResolutionChanged,
 	NoteExpeditionCanceled,
 	Sound,
 	Dropdown,
-	GameSettings
+	GameSettings,
+	MapOptions
 };
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H

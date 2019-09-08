@@ -57,7 +57,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=produce_cornmeal",
             "call=produce_blackroot_flour",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_cornmeal = {
@@ -68,20 +68,20 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs cornmeal",
             "sleep=3500",
             "consume=corn",
-            "play_sound=sound/mill mill_turning 240",
+            "playsound=sound/mill/mill_turning 240",
             "animate=working 15000",
             "produce=cornmeal"
          }
       },
       produce_blackroot_flour = {
-         -- TRANSLATORS: Completed/Skipped/Did not start grinding blackrootbecause ...
+         -- TRANSLATORS: Completed/Skipped/Did not start grinding blackroot because ...
          descname = _"grinding blackroot",
          actions = {
             -- No check whether we need blackroot_flour because blackroots cannot be used for anything else.
             "return=skipped when site has corn and economy needs cornmeal and not economy needs blackroot_flour",
-            "sleep=3500",
             "consume=blackroot",
-            "play_sound=sound/mill mill_turning 240",
+            "sleep=3500",
+            "playsound=sound/mill/mill_turning 240",
             "animate=working 15000",
             "produce=blackroot_flour"
          }

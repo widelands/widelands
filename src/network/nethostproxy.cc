@@ -143,7 +143,7 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	conn_->send(password);
 
 	// Wait 10 seconds for an answer
-	uint32_t endtime = time(nullptr) + 10;
+	time_t endtime = time(nullptr) + 10;
 	while (!NetRelayConnection::Peeker(conn_.get()).cmd()) {
 		if (time(nullptr) > endtime) {
 			// No message received in time
@@ -256,7 +256,8 @@ void NetHostProxy::receive_commands() {
 			conn_->receive(&cmd);
 			uint8_t id;
 			conn_->receive(&id);
-			assert(clients_.count(id));
+			assert(clients_.count(
+			   id));  // TODO(Klaus Halfmann): As of a race condition this may not always hold.
 			clients_.at(id).state_ = Client::State::kDisconnected;
 		}
 		break;

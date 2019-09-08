@@ -7,8 +7,8 @@ animations = {
       fps = 10
    }
 }
-add_walking_animations(animations, "walk", dirname, "walk", {19, 33}, 10)
-add_walking_animations(animations, "walkload", dirname, "walk", {19, 33}, 10) -- TODO(GunChleoc): Make animation
+add_directional_animation(animations, "walk", dirname, "walk", {19, 33}, 10)
+add_directional_animation(animations, "walkload", dirname, "walk", {19, 33}, 10) -- TODO(GunChleoc): Make animation
 
 
 tribes:new_carrier_type {
@@ -24,4 +24,10 @@ tribes:new_carrier_type {
    ware_hotspot = {-2, 12},
 
    animations = animations,
+
+   aihints = {
+      preciousness = {
+         atlanteans = 2
+      },
+   }
 }

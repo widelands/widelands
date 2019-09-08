@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "graphic/gl/coordinate_conversion.h"
-#include "graphic/graphic.h"
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
@@ -44,15 +43,16 @@ void draw_border_markers(const FieldsToDraw::Field& field,
 
 	uint32_t const anim_idx = field.owner->tribe().frontier_animation();
 	if (field.vision) {
-		dst->blit_animation(
-		   field.rendertarget_pixel, scale, anim_idx, 0, field.owner->get_playercolor());
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, anim_idx, 0,
+		                    &field.owner->get_playercolor());
 	}
 	for (const auto& nf : {fields_to_draw.at(field.rn_index), fields_to_draw.at(field.bln_index),
 	                       fields_to_draw.at(field.brn_index)}) {
 		if ((field.vision || nf.vision) && nf.is_border &&
 		    (field.owner == nf.owner || nf.owner == nullptr)) {
-			dst->blit_animation(middle(field.rendertarget_pixel, nf.rendertarget_pixel), scale,
-			                    anim_idx, 0, field.owner->get_playercolor());
+			dst->blit_animation(middle(field.rendertarget_pixel, nf.rendertarget_pixel),
+			                    Widelands::Coords::null(), scale, anim_idx, 0,
+			                    &field.owner->get_playercolor());
 		}
 	}
 }
@@ -60,6 +60,8 @@ void draw_border_markers(const FieldsToDraw::Field& field,
 void draw_terrain(const Widelands::EditorGameBase& egbase,
                   const FieldsToDraw& fields_to_draw,
                   const float scale,
+                  Workareas workarea,
+                  bool grid,
                   RenderTarget* dst) {
 	const Recti& bounding_rect = dst->get_rect();
 	const Surface& surface = dst->get_surface();
@@ -85,6 +87,20 @@ void draw_terrain(const Widelands::EditorGameBase& egbase,
 	i.program_id = RenderQueue::Program::kTerrainDither;
 	i.blend_mode = BlendMode::UseAlpha;
 	RenderQueue::instance().enqueue(i);
+
+	if (!workarea.empty()) {
+		// Enqueue the drawing of the workarea overlay layer.
+		i.program_id = RenderQueue::Program::kTerrainWorkarea;
+		i.terrain_arguments.workareas = workarea;
+		RenderQueue::instance().enqueue(i);
+	}
+
+	if (grid) {
+		// Enqueue the drawing of the grid layer.
+		i.program_id = RenderQueue::Program::kTerrainGrid;
+		i.blend_mode = BlendMode::UseAlpha;
+		RenderQueue::instance().enqueue(i);
+	}
 
 	// Enqueue the drawing of the road layer.
 	i.program_id = RenderQueue::Program::kTerrainRoad;

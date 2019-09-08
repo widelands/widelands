@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,10 +23,9 @@
 
 #include "base/macros.h"
 #include "base/math.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "profile/profile.h"
 #include "wlapplication.h"
+#include "wlapplication_options.h"
 #include "wui/mapviewpixelfunctions.h"
 
 namespace {
@@ -40,6 +39,9 @@ constexpr int kNumKeyFrames = 102;
 // performance and to avoid numeric glitches with more extreme values. This
 // value is used for automatic movements and for user controlled zoom.
 constexpr float kMaxZoom = 4.f;
+
+// Step size for zooming by keypress or UI button
+constexpr float kZoomPercentPerKeyPress = 0.10f;
 
 // The time used for panning automated map movement only.
 constexpr float kShortAnimationMs = 500.f;
@@ -124,7 +126,8 @@ void do_plan_map_transition(uint32_t start_time,
                             std::deque<MapView::TimestampedView>* plan) {
 	for (int i = 1; i < kNumKeyFrames - 2; i++) {
 		float dt = (duration_ms / kNumKeyFrames) * i;
-		const float zoom = zoom_t.value(dt);
+		// Using math::clamp as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		const float zoom = math::clamp(zoom_t.value(dt), 1.f / kMaxZoom, kMaxZoom);
 		const Vector2f center_point = center_point_t.value(dt);
 		const Vector2f viewpoint = center_point - Vector2f(width * zoom / 2.f, height * zoom / 2.f);
 		plan->push_back(MapView::TimestampedView{
@@ -246,7 +249,7 @@ bool MapView::ViewArea::contains(const Widelands::Coords& c) const {
 	return contains_map_pixel(MapviewPixelFunctions::to_map_pixel_with_normalization(map_, c));
 }
 
-Vector2f MapView::ViewArea::move_inside(const Widelands::Coords& c) const {
+Vector2f MapView::ViewArea::find_pixel_for_coordinates(const Widelands::Coords& c) const {
 	// We want to figure out to which pixel 'c' maps inside our rect_. Since
 	// Wideland's map is a torus, the current 'rect_' could span the origin.
 	// Without loss of generality we only discuss x - y follows accordingly.
@@ -258,8 +261,9 @@ Vector2f MapView::ViewArea::move_inside(const Widelands::Coords& c) const {
 	// that the point is contained inside of 'rect_'. If we now convert to
 	// panel pixels, we are guaranteed that the pixel we get back is inside the
 	// screen bounds.
+	// Also supports coordinates outside of the view area, for use by the sound system
 	Vector2f p = MapviewPixelFunctions::to_map_pixel_with_normalization(map_, c);
-	assert(contains_map_pixel(p));
+	assert(!contains(c) || contains_map_pixel(p));
 
 	const float w = MapviewPixelFunctions::get_map_end_screen_x(map_);
 	const float h = MapviewPixelFunctions::get_map_end_screen_y(map_);
@@ -292,7 +296,7 @@ bool MapView::ViewArea::contains_map_pixel(const Vector2f& map_pixel) const {
 MapView::MapView(
    UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h)
    : UI::Panel(parent, x, y, w, h),
-     animate_map_panning_(g_options.pull_section("global").get_bool("animate_map_panning", true)),
+     animate_map_panning_(get_config_bool("animate_map_panning", true)),
      map_(map),
      view_(),
      last_mouse_pos_(Vector2i::zero()),
@@ -316,7 +320,7 @@ void MapView::mouse_to_field(const Widelands::Coords& c, const Transition& trans
 	if (!area.contains(c)) {
 		return;
 	}
-	mouse_to_pixel(round(to_panel(area.move_inside(c))), transition);
+	mouse_to_pixel(round(to_panel(area.find_pixel_for_coordinates(c))), transition);
 }
 
 void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition) {
@@ -338,7 +342,10 @@ void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition
 	NEVER_HERE();
 }
 
-FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase, RenderTarget* dst) {
+FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
+                                    Workareas workarea,
+                                    bool grid,
+                                    RenderTarget* dst) {
 	uint32_t now = SDL_GetTicks();
 	while (!view_plans_.empty()) {
 		auto& plan = view_plans_.front();
@@ -352,11 +359,13 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase, Ren
 		}
 
 		// Linearly interpolate between the next and the last.
-		const float t = (now - plan[0].t) / static_cast<float>(plan[1].t - plan[0].t);
+		// Using std::max as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		const float t =
+		   (std::max(1U, now - plan[0].t)) / static_cast<float>(std::max(1U, plan[1].t - plan[0].t));
 		const View new_view = {
 		   mix(t, plan[0].view.viewpoint, plan[1].view.viewpoint),
-		   mix(t, plan[0].view.zoom, plan[1].view.zoom),
-		};
+		   // Using math::clamp as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		   math::clamp(mix(t, plan[0].view.zoom, plan[1].view.zoom), 1.f / kMaxZoom, kMaxZoom)};
 		set_view(new_view, Transition::Jump);
 		break;
 	}
@@ -380,7 +389,7 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase, Ren
 
 	fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
 	const float scale = 1.f / view_.zoom;
-	::draw_terrain(egbase, fields_to_draw_, scale, dst);
+	::draw_terrain(egbase, fields_to_draw_, scale, workarea, grid, dst);
 	return &fields_to_draw_;
 }
 
@@ -388,13 +397,23 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 	const Transition transition = animate_map_panning_ ? passed_transition : Transition::Jump;
 	switch (transition) {
 	case Transition::Jump: {
+		if (view_.view_near(target_view)) {
+			// We're already there
+			return;
+		}
 		view_ = target_view;
+		// Using math::clamp as a workaround for https://bugs.launchpad.net/widelands/+bug/1818494
+		view_.zoom = math::clamp(view_.zoom, 1.f / kMaxZoom, kMaxZoom);
 		MapviewPixelFunctions::normalize_pix(map_, &view_.viewpoint);
 		changeview();
 		return;
 	}
 
 	case Transition::Smooth: {
+		if (!view_plans_.empty() && view_plans_.back().back().view.view_near(target_view)) {
+			// We're already there
+			return;
+		}
 		const TimestampedView current = animation_target_view();
 		const auto plan =
 		   plan_map_transition(current.t, map_, current.view, target_view, get_w(), get_h());
@@ -510,6 +529,10 @@ void MapView::zoom_around(float new_zoom,
 	const TimestampedView current = animation_target_view();
 	switch (transition) {
 	case Transition::Jump: {
+		if (view_.zoom_near(new_zoom)) {
+			// We're already there
+			return;
+		}
 		// Zoom around the current mouse position. See
 		// http://stackoverflow.com/questions/2916081/zoom-in-on-a-point-using-scale-and-translate
 		// for a good explanation of this math.
@@ -519,6 +542,10 @@ void MapView::zoom_around(float new_zoom,
 	}
 
 	case Transition::Smooth: {
+		if (!view_plans_.empty() && view_plans_.back().back().view.zoom_near(new_zoom)) {
+			// We're already there
+			return;
+		}
 		const int w = get_w();
 		const int h = get_h();
 		const auto plan = plan_zoom_transition(
@@ -530,6 +557,18 @@ void MapView::zoom_around(float new_zoom,
 	}
 	}
 	NEVER_HERE();
+}
+
+void MapView::reset_zoom() {
+	zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+}
+void MapView::increase_zoom() {
+	zoom_around(animation_target_view().view.zoom - kZoomPercentPerKeyPress,
+	            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+}
+void MapView::decrease_zoom() {
+	zoom_around(animation_target_view().view.zoom + kZoomPercentPerKeyPress,
+	            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
 }
 
 bool MapView::is_dragging() const {
@@ -556,18 +595,15 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 		return false;
 	}
 
-	constexpr float kPercentPerKeyPress = 0.10f;
 	switch (code.sym) {
 	case SDLK_PLUS:
-		zoom_around(animation_target_view().view.zoom - kPercentPerKeyPress,
-		            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+		increase_zoom();
 		return true;
 	case SDLK_MINUS:
-		zoom_around(animation_target_view().view.zoom + kPercentPerKeyPress,
-		            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+		decrease_zoom();
 		return true;
 	case SDLK_0:
-		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+		reset_zoom();
 		return true;
 	default:
 		return false;
