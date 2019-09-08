@@ -657,7 +657,7 @@ void MapGenerator::create_random_map() {
 	}
 
 	//  Aftermaths...
-	map_.recalc_whole_map(egbase_.world());
+	map_.recalc_whole_map(egbase_);
 
 	// Care about players and place their start positions
 	map_.set_nrplayers(map_info_.numPlayers);
@@ -752,7 +752,7 @@ void MapGenerator::create_random_map() {
 		// Now try to find a place as near as possible to the wished
 		// starting position
 		std::vector<Coords> coords;
-		map_.find_fields(Area<FCoords>(map_.get_fcoords(playerstart), 20), &coords, functor);
+		map_.find_fields(egbase_, Area<FCoords>(map_.get_fcoords(playerstart), 20), &coords, functor);
 
 		// Take the nearest ones
 		uint32_t min_distance = std::numeric_limits<uint32_t>::max();

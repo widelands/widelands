@@ -150,8 +150,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	history_.reset(new EditorHistory(*undo_, *redo_));
 
-	undo_->sigclicked.connect([this] { history_->undo_action(egbase().world()); });
-	redo_->sigclicked.connect([this] { history_->redo_action(egbase().world()); });
+	undo_->sigclicked.connect([this] { history_->undo_action(); });
+	redo_->sigclicked.connect([this] { history_->redo_action(); });
 
 	toolbar()->add_space(15);
 
@@ -529,7 +529,7 @@ void EditorInteractive::exit() {
 void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle,
                                     const bool should_draw) {
 	history_->do_action(tools_->current(), tools_->use_tool, *egbase().mutable_map(),
-	                    egbase().world(), node_and_triangle, *this, should_draw);
+	                    node_and_triangle, *this, should_draw);
 	set_need_save(true);
 }
 
@@ -827,14 +827,14 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_y:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				history_->redo_action(egbase().world());
+				history_->redo_action();
 			return true;
 
 		case SDLK_z:
 			if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) && (code.mod & (KMOD_LSHIFT | KMOD_RSHIFT)))
-				history_->redo_action(egbase().world());
+				history_->redo_action();
 			else if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				history_->undo_action(egbase().world());
+				history_->undo_action();
 			return true;
 
 		case SDLK_F1:
@@ -879,7 +879,7 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 				toolsize_menu.update(toolsize_menu.value());
 			}
 		}
-		egbase().mutable_map()->recalc_whole_map(egbase().world());
+		egbase().mutable_map()->recalc_whole_map(egbase());
 	}
 	tools_->current_pointer = &primary;
 	tools_->use_tool = which;
@@ -906,7 +906,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 			if (filename.empty()) {
 				loader_ui.step(_("Creating empty map…"));
 				egbase.mutable_map()->create_empty_map(
-				   egbase.world(), 64, 64, 0,
+				   egbase, 64, 64, 0,
 				   /** TRANSLATORS: Default name for new map */
 				   _("No Name"),
 				   get_config_string("realname",

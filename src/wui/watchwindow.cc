@@ -240,7 +240,7 @@ void WatchWindow::do_follow() {
 		                           .node),
 		        2);
 		     area.radius <= 32; area.radius *= 2)
-			if (map.find_bobs(area, &bobs))
+			if (map.find_bobs(g, area, &bobs))
 				break;
 		//  Find the bob closest to us
 		float closest_dist = 0;

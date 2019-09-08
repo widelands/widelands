@@ -168,7 +168,7 @@ struct CheckStepOwnTerritory {
 struct FindNodeEnemy {
 	FindNodeEnemy(Player* p, Game& g);
 
-	bool accept(const Map&, const FCoords& fc) const;
+	bool accept(const EditorGameBase&, const FCoords& fc) const;
 
 	Player* player;
 	Game& game;
@@ -181,7 +181,7 @@ struct FindNodeEnemy {
 struct FindNodeEnemiesBuilding {
 	FindNodeEnemiesBuilding(Player* p, Game& g);
 
-	bool accept(const Map&, const FCoords& fc) const;
+	bool accept(const EditorGameBase&, const FCoords& fc) const;
 
 	Player* player;
 	Game& game;
@@ -191,7 +191,7 @@ struct FindNodeEnemiesBuilding {
 struct FindEnemyNodeWalkable {
 	FindEnemyNodeWalkable(Player* p, Game& g);
 
-	bool accept(const Map&, const FCoords& fc) const;
+	bool accept(const EditorGameBase&, const FCoords& fc) const;
 
 	Player* player;
 	Game& game;
@@ -201,7 +201,7 @@ struct FindEnemyNodeWalkable {
 struct FindNodeAllyOwned {
 	FindNodeAllyOwned(Player* p, Game& g, PlayerNumber n);
 
-	bool accept(const Map&, const FCoords& fc) const;
+	bool accept(const EditorGameBase&, const FCoords& fc) const;
 
 	Player* player;
 	Game& game;
@@ -214,7 +214,7 @@ struct FindNodeAllyOwned {
 struct FindNodeUnownedMineable {
 	FindNodeUnownedMineable(Player* p, Game& g, int32_t t = INVALID_INDEX);
 
-	bool accept(const Map&, const FCoords& fc) const;
+	bool accept(const EditorGameBase&, const FCoords& fc) const;
 
 	Player* player;
 	Game& game;
@@ -226,7 +226,7 @@ struct FindNodeUnownedMineable {
 struct FindNodeUnownedBuildable {
 	FindNodeUnownedBuildable(Player* p, Game& g);
 
-	bool accept(const Map&, const FCoords& fc) const;
+	bool accept(const EditorGameBase&, const FCoords& fc) const;
 
 	Player* player;
 	Game& game;
@@ -236,7 +236,7 @@ struct FindNodeUnownedBuildable {
 struct FindNodeUnownedWalkable {
 	FindNodeUnownedWalkable(Player* p, Game& g);
 
-	bool accept(const Map&, const FCoords& fc) const;
+	bool accept(const EditorGameBase&, const FCoords& fc) const;
 
 	Player* player;
 	Game& game;
@@ -247,7 +247,7 @@ struct FindNodeUnownedWalkable {
 struct FindNodeMineable {
 	FindNodeMineable(Game& g, DescriptionIndex r);
 
-	bool accept(const Map&, const FCoords& fc) const;
+	bool accept(const EditorGameBase&, const FCoords& fc) const;
 
 	Game& game;
 	int32_t res;
@@ -257,7 +257,7 @@ struct FindNodeMineable {
 struct FindNodeWater {
 	explicit FindNodeWater(const World& world);
 
-	bool accept(const Map& /* map */, const FCoords& coord) const;
+	bool accept(const EditorGameBase&, const FCoords& coord) const;
 
 private:
 	const World& world_;
@@ -270,16 +270,16 @@ struct FindNodeOpenWater {
 	explicit FindNodeOpenWater(const World& /* world */) {
 	}
 
-	bool accept(const Map& /* map */, const FCoords& coord) const;
+	bool accept(const EditorGameBase&, const FCoords& coord) const;
 };
 
 struct FindNodeWithFlagOrRoad {
-	bool accept(const Map&, FCoords) const;
+	bool accept(const EditorGameBase&, FCoords) const;
 };
 
 // Accepts any field
 struct FindNodeAcceptAll {
-	bool accept(const Map&, FCoords) const {
+	bool accept(const EditorGameBase&, FCoords) const {
 		return true;
 	}
 };
@@ -449,6 +449,11 @@ struct BuildingObserver {
 	void set_is(BuildingAttribute);
 	void unset_is(BuildingAttribute);
 
+	// Building collects a ware from the map
+	bool has_collected_map_resource() const;
+	void set_collected_map_resource(const TribeDescr& tribe, const std::string& ware_name);
+	DescriptionIndex get_collected_map_resource() const;
+
 	char const* name;
 	Widelands::DescriptionIndex id;
 	Widelands::BuildingDescr const* desc;
@@ -486,14 +491,13 @@ struct BuildingObserver {
 	int32_t substitutes_count;
 
 	std::set<DescriptionIndex> production_hints;
-	DescriptionIndex collected_map_resource;
+
 	bool requires_supporters;
 
 	// information needed for decision on new building construction
 	int16_t initial_preciousness;
 	int16_t max_preciousness;
 	int16_t max_needed_preciousness;
-
 	int32_t cnt_built;
 	int32_t cnt_under_construction;
 	int32_t cnt_target;           // number of buildings as target
@@ -513,6 +517,7 @@ struct BuildingObserver {
 	bool build_material_shortage;
 
 private:
+	DescriptionIndex collected_map_resource;
 	std::set<BuildingAttribute> is_what;
 };
 
