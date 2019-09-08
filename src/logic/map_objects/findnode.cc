@@ -20,9 +20,12 @@
 #include "logic/map_objects/findnode.h"
 
 #include "base/wexception.h"
+#include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 
 namespace Widelands {
 
@@ -34,16 +37,16 @@ void FindNodeAnd::add(const FindNode& findfield, bool const negate) {
 	subfunctors.push_back(Subfunctor(findfield, negate));
 }
 
-bool FindNodeAnd::accept(const Map& map, const FCoords& coord) const {
+bool FindNodeAnd::accept(const EditorGameBase& egbase, const FCoords& coord) const {
 	for (const Subfunctor& subfunctor : subfunctors) {
-		if (subfunctor.findfield.accept(map, coord) == subfunctor.negate) {
+		if (subfunctor.findfield.accept(egbase, coord) == subfunctor.negate) {
 			return false;
 		}
 	}
 	return true;
 }
 
-bool FindNodeCaps::accept(const Map&, const FCoords& coord) const {
+bool FindNodeCaps::accept(const EditorGameBase&, const FCoords& coord) const {
 	NodeCaps nodecaps = coord.field->nodecaps();
 
 	if ((nodecaps & BUILDCAPS_SIZEMASK) < (mincaps & BUILDCAPS_SIZEMASK))
@@ -55,11 +58,12 @@ bool FindNodeCaps::accept(const Map&, const FCoords& coord) const {
 	return true;
 }
 
-bool FindNodeSize::accept(const Map&, const FCoords& coord) const {
+bool FindNodeSize::accept(const EditorGameBase& egbase, const FCoords& coord) const {
 	if (BaseImmovable const* const immovable = coord.field->get_immovable())
 		if (immovable->get_size() > BaseImmovable::NONE)
 			return false;
 	NodeCaps const nodecaps = coord.field->nodecaps();
+	const Map& map = egbase.map();
 
 	switch (size) {
 	case sizeBuild:
@@ -74,13 +78,26 @@ bool FindNodeSize::accept(const Map&, const FCoords& coord) const {
 		return (nodecaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_MEDIUM;
 	case sizeBig:
 		return (nodecaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_BIG;
+	case sizeSwim:
+		return map.can_reach_by_water(coord);
 	case sizeAny:
 		return true;
 	}
 	NEVER_HERE();
 }
 
-bool FindNodeImmovableSize::accept(const Map&, const FCoords& coord) const {
+bool FindNodeTerraform::accept(const EditorGameBase& egbase, const FCoords& coord) const {
+	const Map& map = egbase.map();
+	const World& world = egbase.world();
+	return !(world.terrain_descr(coord.field->terrain_d()).enhancement().empty() &&
+	         world.terrain_descr(coord.field->terrain_r()).enhancement().empty() &&
+	         world.terrain_descr(map.tl_n(coord).field->terrain_d()).enhancement().empty() &&
+	         world.terrain_descr(map.tl_n(coord).field->terrain_r()).enhancement().empty() &&
+	         world.terrain_descr(map.tr_n(coord).field->terrain_d()).enhancement().empty() &&
+	         world.terrain_descr(map.l_n(coord).field->terrain_r()).enhancement().empty());
+}
+
+bool FindNodeImmovableSize::accept(const EditorGameBase&, const FCoords& coord) const {
 	int32_t size = BaseImmovable::NONE;
 
 	if (BaseImmovable* const imm = coord.field->get_immovable())
@@ -100,17 +117,17 @@ bool FindNodeImmovableSize::accept(const Map&, const FCoords& coord) const {
 	}
 }
 
-bool FindNodeImmovableAttribute::accept(const Map&, const FCoords& coord) const {
+bool FindNodeImmovableAttribute::accept(const EditorGameBase&, const FCoords& coord) const {
 	if (BaseImmovable* const imm = coord.field->get_immovable())
 		return imm->has_attribute(attribute);
 	return false;
 }
 
-bool FindNodeResource::accept(const Map&, const FCoords& coord) const {
+bool FindNodeResource::accept(const EditorGameBase&, const FCoords& coord) const {
 	return resource == coord.field->get_resources() && coord.field->get_resources_amount();
 }
 
-bool FindNodeResourceBreedable::accept(const Map& map, const FCoords& coord) const {
+bool FindNodeResourceBreedable::accept(const EditorGameBase& egbase, const FCoords& coord) const {
 	// Accept a tile that is full only if a neighbor also matches resource and
 	// is not full.
 	if (resource != coord.field->get_resources()) {
@@ -131,7 +148,7 @@ bool FindNodeResourceBreedable::accept(const Map& map, const FCoords& coord) con
 		break;
 	}
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-		const FCoords neighb = map.get_neighbour(coord, dir);
+		const FCoords neighb = egbase.map().get_neighbour(coord, dir);
 		if (resource == neighb.field->get_resources()) {
 			switch (strictness) {
 			case AnimalBreedable::kDefault:
@@ -150,7 +167,7 @@ bool FindNodeResourceBreedable::accept(const Map& map, const FCoords& coord) con
 	return false;
 }
 
-bool FindNodeShore::accept(const Map& map, const FCoords& coords) const {
+bool FindNodeShore::accept(const EditorGameBase& egbase, const FCoords& coords) const {
 	if (!(coords.field->nodecaps() & MOVECAPS_WALK))
 		return false;
 
@@ -169,7 +186,7 @@ bool FindNodeShore::accept(const Map& map, const FCoords& coords) const {
 
 		// Now test all neighbours
 		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-			FCoords neighb = map.get_neighbour(cur, dir);
+			FCoords neighb = egbase.map().get_neighbour(cur, dir);
 			if (accepted_nodes.count(neighb.hash()) > 0 || rejected_nodes.count(neighb.hash()) > 0) {
 				// We already processed this node
 				continue;

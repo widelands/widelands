@@ -4,13 +4,14 @@
 # Translators:
 # Adam Piggott, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Joshua Ward <joshuaward@myoffice.net.au>, 2019
 # Nora Ghaoui, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-30 18:50+0000\n"
-"PO-Revision-Date: 2019-05-30 18:52+0000\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -293,7 +294,7 @@ msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr ""
+msgstr "The third material necessary for improved buildings is reed, used to cover roofs. Reed fields are planted by a gardener around his building, the reed yard."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
@@ -1028,3 +1029,16 @@ msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
 msgstr "But they fear that the war around Al’thunran will set an end to this life. Therefore, they have decided to join us, hoping that we can help each other."
+
+#: ../../data/scripting/richtext_scenarios.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:91
+msgid "New Objective"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

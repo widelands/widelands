@@ -145,11 +145,6 @@ void PortDock::set_economy(Economy* e) {
 		expedition_bootstrap_->set_economy(e);
 }
 
-void PortDock::draw(
-   uint32_t, const TextToDraw, const Vector2f&, const Widelands::Coords&, float, RenderTarget*) {
-	// do nothing
-}
-
 bool PortDock::init(EditorGameBase& egbase) {
 	PlayerImmovable::init(egbase);
 

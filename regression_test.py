@@ -137,6 +137,9 @@ class WidelandsTestCase(unittest.TestCase):
         self.assertTrue("All Tests passed" in stdout,
             "Not all tests pass. {}.".format(common_msg)
         )
+        self.assertFalse("lua_errors.cc" in stdout,
+            "Not all tests pass. {}.".format(common_msg)
+        )
         out("done.\n")
         if self.keep_output_around:
             out("    stdout: {}\n".format(stdout_filename))

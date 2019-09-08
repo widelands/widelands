@@ -23,9 +23,9 @@
 #include "graphic/font_handler.h"
 #include "network/crypto.h"
 #include "network/internet_gaming.h"
-#include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
+#include "wlapplication_options.h"
 
 LoginBox::LoginBox(Panel& parent)
    : Window(&parent, "login_box", 0, 0, 500, 280, _("Online Game Settings")) {
@@ -67,13 +67,12 @@ LoginBox::LoginBox(Panel& parent)
 	eb_nickname->changed.connect(boost::bind(&LoginBox::change_playername, this));
 	cb_register->clickedto.connect(boost::bind(&LoginBox::clicked_register, this));
 
-	Section& s = g_options.pull_section("global");
-	eb_nickname->set_text(s.get_string("nickname", _("nobody")));
-	cb_register->set_state(s.get_bool("registered", false));
+	eb_nickname->set_text(get_config_string("nickname", _("nobody")));
+	cb_register->set_state(get_config_bool("registered", false));
 	eb_password->set_password(true);
 
 	if (registered()) {
-		eb_password->set_text(s.get_string("password_sha1", ""));
+		eb_password->set_text(get_config_string("password_sha1", ""));
 		loginbtn->set_enabled(false);
 	} else {
 		eb_password->set_can_focus(false);
@@ -92,17 +91,16 @@ void LoginBox::think() {
  * called, if "login" is pressed.
  */
 void LoginBox::clicked_ok() {
-	Section& s = g_options.pull_section("global");
 	if (cb_register->get_state()) {
 		if (check_password()) {
-			s.set_string("nickname", eb_nickname->text());
-			s.set_bool("registered", true);
+			set_config_string("nickname", eb_nickname->text());
+			set_config_bool("registered", true);
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 		}
 	} else {
-		s.set_string("nickname", eb_nickname->text());
-		s.set_bool("registered", false);
-		s.set_string("password_sha1", "");
+		set_config_string("nickname", eb_nickname->text());
+		set_config_bool("registered", false);
+		set_config_string("password_sha1", "");
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 	}
 }
@@ -171,12 +169,11 @@ void LoginBox::verify_input() {
 		loginbtn->set_enabled(false);
 	}
 
-	Section& s = g_options.pull_section("global");
-	if (eb_password->has_focus() && eb_password->text() == s.get_string("password_sha1", "")) {
+	if (eb_password->has_focus() && eb_password->text() == get_config_string("password_sha1", "")) {
 		eb_password->set_text("");
 	}
 
-	if (cb_register->get_state() && eb_password->text() == s.get_string("password_sha1", "")) {
+	if (cb_register->get_state() && eb_password->text() == get_config_string("password_sha1", "")) {
 		loginbtn->set_enabled(false);
 	}
 }
@@ -184,9 +181,8 @@ void LoginBox::verify_input() {
 /// Check password against metaserver
 bool LoginBox::check_password() {
 	// Try to connect to the metaserver
-	Section& s = g_options.pull_section("global");
-	const std::string& meta = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
-	uint32_t port = s.get_natural("metaserverport", kInternetGamingPort);
+	const std::string& meta = get_config_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+	uint32_t port = get_config_natural("metaserverport", kInternetGamingPort);
 	std::string password = crypto::sha1(eb_password->text());
 
 	if (!InternetGaming::ref().check_password(get_nickname(), password, meta, port)) {
@@ -208,7 +204,7 @@ bool LoginBox::check_password() {
 	// be copied to another system and used to log in as the user on the metaserver. Further note:
 	// SHA-1 is considered broken and shouldn't be used anymore. But since the passwords on the
 	// server are protected by SHA-1 we have to use it here, too
-	s.set_string("password_sha1", password);
+	set_config_string("password_sha1", password);
 	InternetGaming::ref().logout();
 	return true;
 }
