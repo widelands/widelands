@@ -90,7 +90,7 @@ void Ferry::unemployed_update(Game& game, State&) {
 		}
 		molog("[unemployed]: trying to find a flag\n");
 		std::vector<ImmovableFound> flags;
-		if (!map.find_reachable_immovables(Area<FCoords>(pos, 4),
+		if (!map.find_reachable_immovables(game, Area<FCoords>(pos, 4),
 				&flags,
 				CheckStepFerry(game),
 				FindImmovableType(MapObjectType::FLAG))) {
