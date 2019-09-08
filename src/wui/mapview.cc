@@ -24,8 +24,8 @@
 #include "base/macros.h"
 #include "base/math.h"
 #include "graphic/rendertarget.h"
-#include "profile/profile.h"
 #include "wlapplication.h"
+#include "wlapplication_options.h"
 #include "wui/mapviewpixelfunctions.h"
 
 namespace {
@@ -39,6 +39,9 @@ constexpr int kNumKeyFrames = 102;
 // performance and to avoid numeric glitches with more extreme values. This
 // value is used for automatic movements and for user controlled zoom.
 constexpr float kMaxZoom = 4.f;
+
+// Step size for zooming by keypress or UI button
+constexpr float kZoomPercentPerKeyPress = 0.10f;
 
 // The time used for panning automated map movement only.
 constexpr float kShortAnimationMs = 500.f;
@@ -293,7 +296,7 @@ bool MapView::ViewArea::contains_map_pixel(const Vector2f& map_pixel) const {
 MapView::MapView(
    UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h)
    : UI::Panel(parent, x, y, w, h),
-     animate_map_panning_(g_options.pull_section("global").get_bool("animate_map_panning", true)),
+     animate_map_panning_(get_config_bool("animate_map_panning", true)),
      map_(map),
      view_(),
      last_mouse_pos_(Vector2i::zero()),
@@ -556,6 +559,18 @@ void MapView::zoom_around(float new_zoom,
 	NEVER_HERE();
 }
 
+void MapView::reset_zoom() {
+	zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+}
+void MapView::increase_zoom() {
+	zoom_around(animation_target_view().view.zoom - kZoomPercentPerKeyPress,
+	            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+}
+void MapView::decrease_zoom() {
+	zoom_around(animation_target_view().view.zoom + kZoomPercentPerKeyPress,
+	            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+}
+
 bool MapView::is_dragging() const {
 	return dragging_;
 }
@@ -580,18 +595,15 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 		return false;
 	}
 
-	constexpr float kPercentPerKeyPress = 0.10f;
 	switch (code.sym) {
 	case SDLK_PLUS:
-		zoom_around(animation_target_view().view.zoom - kPercentPerKeyPress,
-		            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+		increase_zoom();
 		return true;
 	case SDLK_MINUS:
-		zoom_around(animation_target_view().view.zoom + kPercentPerKeyPress,
-		            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+		decrease_zoom();
 		return true;
 	case SDLK_0:
-		zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+		reset_zoom();
 		return true;
 	default:
 		return false;

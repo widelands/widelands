@@ -36,7 +36,7 @@ inline EditorInteractive& EditorToolResizeOptionsMenu::eia() {
 EditorToolResizeOptionsMenu::EditorToolResizeOptionsMenu(EditorInteractive& parent,
                                                          EditorResizeTool& resize_tool,
                                                          UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 260, 200, _("Resize")),
+   : EditorToolOptionsMenu(parent, registry, 260, 200, _("Resize"), resize_tool),
      resize_tool_(resize_tool),
      box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
      map_size_box_(box_,

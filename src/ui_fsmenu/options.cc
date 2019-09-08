@@ -37,13 +37,14 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 #include "helper.h"
+#include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
+#include "wlapplication_options.h"
 
 namespace {
 
@@ -679,5 +680,5 @@ void OptionsCtrl::save_options() {
 	g_sh->save_config();
 
 	// Now write to file
-	g_options.write(kConfigFile.c_str(), true);
+	write_config();
 }

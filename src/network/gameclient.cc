@@ -53,6 +53,7 @@
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
+#include "wlapplication_options.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -148,10 +149,13 @@ bool GameClientImpl::run_map_menu(GameClient* parent) {
  * Show progress dialog and load map or saved game.
  */
 InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressWindow* loader) {
-
-	const std::string& tribename = parent->get_players_tribe();
-	assert(Widelands::tribe_exists(tribename));
-	GameTips tips(*loader, {"general_game", "multiplayer", tribename});
+	std::vector<std::string> tipstext;
+	tipstext.push_back("general_game");
+	tipstext.push_back("multiplayer");
+	if (parent->has_players_tribe()) {
+		tipstext.push_back(parent->get_players_tribe());
+	}
+	GameTips tips(*loader, tipstext);
 
 	modal = loader;
 
@@ -163,9 +167,9 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 	   (boost::format("%s_netclient%u") % kAutosavePrefix % static_cast<unsigned int>(pn)).str());
 	InteractiveGameBase* igb;
 	if (pn > 0) {
-		igb = new InteractivePlayer(*game, g_options.pull_section("global"), pn, true);
+		igb = new InteractivePlayer(*game, get_config_section(), pn, true);
 	} else {
-		igb = new InteractiveSpectator(*game, g_options.pull_section("global"), true);
+		igb = new InteractiveSpectator(*game, get_config_section(), true);
 	}
 	game->set_ibase(igb);
 	igb->set_chat_provider(*parent);
@@ -264,9 +268,8 @@ void GameClient::run() {
 
 	d->server_is_waiting = true;
 
-	bool write_sync_streams = g_options.pull_section("global").get_bool("write_syncstreams", true);
 	Widelands::Game game;
-	game.set_write_syncstream(write_sync_streams);
+	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
 
 	try {
 		std::unique_ptr<UI::ProgressWindow> loader_ui(new UI::ProgressWindow());

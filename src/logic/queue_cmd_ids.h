@@ -33,17 +33,22 @@
 
 namespace Widelands {
 
-enum class QueueCommandTypes {
+// The command types are used by the QueueCmdFactory, for network serialization
+// and for savegame compatibility.
+// DO NOT change the order
+// TODO(GunChleoc): Whenever we break savegame compatibility, clean this up and change data type to
+// uint16_t.
+enum class QueueCommandTypes : uint8_t {
 
 	/* ID zero is reserved and must never be used */
 	kNone = 0,
 
 	/* PLAYER COMMANDS BELOW */
 	kBuild,
-	kFlag,
+	kBuildFlag,
 	kBuildRoad,
 	kFlagAction,
-	kStopBuilding,
+	kStartStopBuilding,
 	kEnhanceBuilding,
 	kBulldoze,
 
@@ -73,12 +78,15 @@ enum class QueueCommandTypes {
 	kMilitarysiteSetSoldierPreference,
 	kProposeTrade,  // 27
 
-	kSinkShip = 121,
+	kShipSink = 121,
 	kShipCancelExpedition,
-	kPortStartExpedition,
+	kStartOrCancelExpedition,
 	kShipConstructPort,
-	kShipScout,
-	kShipExplore,
+	kShipScoutDirection,
+	kShipExploreIsland,
+
+	// The commands below are never serialized, but we still keep the IDs stable for savegame
+	// compatibility.
 
 	kDestroyMapObject,
 	kAct,  // 128

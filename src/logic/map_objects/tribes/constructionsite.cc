@@ -39,6 +39,7 @@
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/world/world.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/window.h"
@@ -196,16 +197,23 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 	   NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxPriorityAlwaysPlay));
 	PartiallyFinishedBuilding::init(egbase);
 
-	const std::map<DescriptionIndex, uint8_t>* buildcost;
+	const std::map<DescriptionIndex, uint8_t>* buildcost = nullptr;
 	if (!old_buildings_.empty()) {
-		// Enhancement
-		DescriptionIndex was_index = old_buildings_.back();
-		const BuildingDescr* was_descr = owner().tribe().get_building_descr(was_index);
-		info_.was = was_descr;
-		buildcost = &building_->enhancement_cost();
-	} else {
+		// Enhancement and/or built over immovable
+		for (auto it = old_buildings_.end(); it != old_buildings_.begin();) {
+			--it;
+			if (it->second.empty()) {
+				const BuildingDescr* was_descr = owner().tribe().get_building_descr(it->first);
+				info_.was = was_descr;
+				buildcost = &building_->enhancement_cost();
+				break;
+			}
+		}
+	}
+	if (!buildcost) {
 		buildcost = &building_->buildcost();
 	}
+	assert(buildcost);
 
 	//  TODO(unknown): figure out whether planing is necessary
 
@@ -263,7 +271,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 	if (work_steps_ <= work_completed_) {
 		// Put the real building in place
 		DescriptionIndex becomes_idx = owner().tribe().building_index(building_->name());
-		old_buildings_.push_back(becomes_idx);
+		old_buildings_.push_back(std::make_pair(becomes_idx, ""));
 		Building& b = building_->create(egbase, get_owner(), position_, false, false, old_buildings_);
 		if (Worker* const builder = builder_.get(egbase)) {
 			builder->reset_tasks(dynamic_cast<Game&>(egbase));
@@ -330,7 +338,7 @@ void ConstructionSite::enhance(Game&) {
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
 	info_.intermediates.push_back(building_);
-	old_buildings_.push_back(owner().tribe().building_index(building_->name()));
+	old_buildings_.push_back(std::make_pair(owner().tribe().building_index(building_->name()), ""));
 	building_ = owner().tribe().get_building_descr(building_->enhancement());
 	assert(building_);
 	info_.becomes = building_;
@@ -609,9 +617,15 @@ void ConstructionSite::draw(uint32_t gametime,
                             float scale,
                             RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;
-	// Draw the construction site marker
 	const RGBColor& player_color = get_owner()->get_playercolor();
-	dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
+	if (was_immovable_) {
+		dst->blit_animation(
+		   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
+	} else {
+		// Draw the construction site marker
+		dst->blit_animation(
+		   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
+	}
 
 	// Draw the partially finished building
 
