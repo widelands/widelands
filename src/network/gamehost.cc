@@ -58,11 +58,11 @@
 #include "network/network_lan_promotion.h"
 #include "network/network_player_settings_backend.h"
 #include "network/network_protocol.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
+#include "wlapplication_options.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -632,9 +632,9 @@ void GameHost::run() {
 	broadcast(packet);
 
 	Widelands::Game game;
-	game.set_ai_training_mode(g_options.pull_section("global").get_bool("ai_training", false));
-	game.set_auto_speed(g_options.pull_section("global").get_bool("auto_speed", false));
-	game.set_write_syncstream(g_options.pull_section("global").get_bool("write_syncstreams", true));
+	game.set_ai_training_mode(get_config_bool("ai_training", false));
+	game.set_auto_speed(get_config_bool("auto_speed", false));
+	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
 
 	try {
 		std::unique_ptr<UI::ProgressWindow> loader_ui;
@@ -643,9 +643,8 @@ void GameHost::run() {
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
-		try {
+		if (d->hp.has_players_tribe()) {
 			tipstext.push_back(d->hp.get_players_tribe());
-		} catch (GameSettingsProvider::NoTribe) {
 		}
 		std::unique_ptr<GameTips> tips(new GameTips(*loader_ui, tipstext));
 
@@ -668,9 +667,9 @@ void GameHost::run() {
 		}
 
 		if ((pn > 0) && (pn <= UserSettings::highest_playernum())) {
-			igb = new InteractivePlayer(game, g_options.pull_section("global"), pn, true);
+			igb = new InteractivePlayer(game, get_config_section(), pn, true);
 		} else {
-			igb = new InteractiveSpectator(game, g_options.pull_section("global"), true);
+			igb = new InteractiveSpectator(game, get_config_section(), true);
 		}
 		igb->set_chat_provider(d->chat);
 		game.set_ibase(igb);

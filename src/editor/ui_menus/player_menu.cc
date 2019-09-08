@@ -32,9 +32,9 @@
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/widelands.h"
-#include "profile/profile.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/multilinetextarea.h"
+#include "wlapplication_options.h"
 
 namespace {
 constexpr int kMargin = 4;
@@ -101,8 +101,7 @@ public:
 
 	void write_option() {
 		if (reminder_choice_.get_state()) {
-			g_options.pull_section("global").set_bool(
-			   "editor_player_menu_warn_too_many_players", false);
+			set_config_bool("editor_player_menu_warn_too_many_players", false);
 		}
 	}
 
@@ -119,8 +118,10 @@ inline EditorInteractive& EditorPlayerMenu::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
-EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&parent, "players_menu", &registry, 100, 100, _("Player Options")),
+EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
+                                   EditorSetStartingPosTool& tool,
+                                   UI::UniqueWindow::Registry& registry)
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Player Options"), tool),
      box_(this, kMargin, kMargin, UI::Box::Vertical),
      no_of_players_(&box_,
                     "dropdown_map_players",
@@ -253,8 +254,7 @@ void EditorPlayerMenu::no_of_players_clicked() {
 
 	// Display a warning if there are too many players
 	if (nr_players > kMaxRecommendedPlayers) {
-		if (g_options.pull_section("global").get_bool(
-		       "editor_player_menu_warn_too_many_players", true)) {
+		if (get_config_bool("editor_player_menu_warn_too_many_players", true)) {
 			EditorPlayerMenuWarningBox warning(get_parent());
 			if (warning.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 				// Abort setting of players

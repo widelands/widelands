@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Renaud Bouchard, 2019\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -617,6 +617,9 @@ msgid ""
 "You are right – we should build more berry farms, fruit collector’s houses "
 "and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
+"Vous avez raison – nous devrions construire plus de fermes arboricoles, de "
+"maisons de cueilleurs de fruits, de tavernes et de bistrots, et des "
+"boulangeries et brasseries avancées."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:249
@@ -703,6 +706,10 @@ msgid ""
 "tribe. All we want is to settle down here, build our home and live our lives"
 " in peace. We do not seek trouble, but we aren’t afraid to fight, either."
 msgstr ""
+"Paix, représentant de l'Empire ! Je suis Reebaud, le chef de cette tribu. "
+"Tout ce que nous voulons est nous établir ici, bâtir nos maisons et vivre "
+"nos vies en paix. Nous ne cherchons pas les ennuis mais n'avons pas peur de "
+"nous battre non plus."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
 #. case (form of address) of Reebaud.
@@ -1047,3 +1054,16 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:416
 msgid "Congratulations"
 msgstr "Félicitations"
+
+#: ../../data/scripting/richtext_scenarios.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:91
+msgid "New Objective"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

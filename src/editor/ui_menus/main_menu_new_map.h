@@ -25,7 +25,7 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
-#include "ui_basic/window.h"
+#include "ui_basic/unique_window.h"
 
 class EditorInteractive;
 
@@ -34,8 +34,8 @@ class EditorInteractive;
  * the user to choose the new world and a few other
  * things like size, world ....
  */
-struct MainMenuNewMap : public UI::Window {
-	explicit MainMenuNewMap(EditorInteractive&);
+struct MainMenuNewMap : public UI::UniqueWindow {
+	explicit MainMenuNewMap(EditorInteractive&, UI::UniqueWindow::Registry&);
 
 private:
 	EditorInteractive& eia();

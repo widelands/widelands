@@ -53,11 +53,13 @@ GameChatMenu* GameChatMenu::create_chat_console(UI::Panel* parent,
 	return new GameChatMenu(parent, registry, chat, _("Chat"));
 }
 
+#ifndef NDEBUG  //  only in debug builds
 GameChatMenu* GameChatMenu::create_script_console(UI::Panel* parent,
                                                   UI::UniqueWindow::Registry& registry,
                                                   ChatProvider& chat) {
-	return new GameChatMenu(parent, registry, chat, _("Script console"));
+	return new GameChatMenu(parent, registry, chat, _("Script Console"));
 }
+#endif
 
 bool GameChatMenu::enter_chat_message(bool close_on_send) {
 	if (is_minimal()) {

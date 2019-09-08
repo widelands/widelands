@@ -776,6 +776,7 @@ void ProductionSite::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
 	molog("is_stopped: %u\n", is_stopped_);
+	molog("main_worker: %i\n", main_worker_);
 }
 
 void ProductionSite::set_stopped(bool const stopped) {
@@ -796,18 +797,17 @@ bool ProductionSite::can_start_working() const {
 }
 
 void ProductionSite::try_start_working(Game& game) {
-	if (main_worker_ >= 0) {
-		return;
-	}
 	const size_t nr_workers = descr().working_positions().size();
 	for (uint32_t i = 0; i < nr_workers; ++i) {
-		if (Worker* worker = working_positions_[i].worker) {
-			// We may start even if can_start_working() returns false, because basic actions
-			// like unloading extra wares should take place anyway
-			main_worker_ = i;
-			worker->reset_tasks(game);
-			worker->start_task_buildingwork(game);
-			return;
+		if (main_worker_ == static_cast<int>(i) || main_worker_ < 0) {
+			if (Worker* worker = working_positions_[i].worker) {
+				// We may start even if can_start_working() returns false, because basic actions
+				// like unloading extra wares should take place anyway
+				main_worker_ = i;
+				worker->reset_tasks(game);
+				worker->start_task_buildingwork(game);
+				return;
+			}
 		}
 	}
 }
@@ -1049,6 +1049,11 @@ const BuildingSettings* ProductionSite::create_building_settings() const {
 		for (const auto& queue : input_queues_) {
 			if (queue->get_type() == wwWARE && queue->get_index() == pair.first) {
 				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());
+				if (pair.second.desired_fill == 0) {
+					// Players may set slots to 0 before enhancing a building to retrieve precious wares
+					// – we assume they want the slot to be fully filled in the upgraded building
+					pair.second.desired_fill = pair.second.max_fill;
+				}
 				break;
 			}
 		}
@@ -1058,6 +1063,9 @@ const BuildingSettings* ProductionSite::create_building_settings() const {
 		for (const auto& queue : input_queues_) {
 			if (queue->get_type() == wwWORKER && queue->get_index() == pair.first) {
 				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());
+				if (pair.second.desired_fill == 0) {
+					pair.second.desired_fill = pair.second.max_fill;
+				}
 				break;
 			}
 		}
@@ -1082,7 +1090,7 @@ void ProductionSite::update_crude_statistics(uint32_t duration, const bool produ
 	static const uint32_t entire_duration = 10 * 60 * 1000;
 	if (duration > duration_cap) {
 		duration = duration_cap;
-	};
+	}
 	const uint32_t past_duration = entire_duration - duration;
 	crude_percent_ =
 	   (crude_percent_ * past_duration + produced * duration * 10000) / entire_duration;

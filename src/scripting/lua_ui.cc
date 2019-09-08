@@ -365,6 +365,7 @@ const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
    PROP_RO(LuaDropdown, name),
+   PROP_RO(LuaDropdown, no_of_items),
    {nullptr, nullptr, nullptr},
 };
 
@@ -375,6 +376,16 @@ const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
 // Documented in parent Class
 int LuaDropdown::get_name(lua_State* L) {
 	lua_pushstring(L, get()->get_name());
+	return 1;
+}
+
+/* RST
+   .. attribute:: no_of_items
+
+      (RO) The number of items his dropdown has.
+*/
+int LuaDropdown::get_no_of_items(lua_State* L) {
+	lua_pushinteger(L, get()->size());
 	return 1;
 }
 
@@ -411,8 +422,14 @@ int LuaDropdown::highlight_item(lua_State* L) {
 	log("Highlighting item %d in dropdown '%s'\n", desired_item, get()->get_name().c_str());
 	// Open the dropdown
 	get()->set_list_visibility(true);
-	// Press arrow down until the desired item is highlighted
+
 	SDL_Keysym code;
+	// Ensure that we're at the top
+	code.sym = SDLK_UP;
+	for (size_t i = 1; i < get()->size(); ++i) {
+		get()->handle_key(true, code);
+	}
+	// Press arrow down until the desired item is highlighted
 	code.sym = SDLK_DOWN;
 	for (size_t i = 1; i < desired_item; ++i) {
 		get()->handle_key(true, code);

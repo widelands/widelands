@@ -53,8 +53,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		static std::vector<ImmovableFound> immovables;
 		immovables.clear();
 		immovables.reserve(40);
-		map.find_immovables(Area<FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3), &immovables,
-		                    FindImmovableAttackTarget());
+		map.find_immovables(game(), Area<FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3),
+		                    &immovables, FindImmovableAttackTarget());
 
 		for (uint32_t j = 0; j < immovables.size(); ++j) {
 			if (upcast(MilitarySite const, bld, immovables.at(j).object)) {
@@ -203,7 +203,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 			if (site->second.mines_nearby == ExtendedBool::kUnset) {
 				FindNodeMineable find_mines_spots_nearby(game(), f.field->get_resources());
 				const int32_t minescount =
-				   map.find_fields(Area<FCoords>(f, 6), nullptr, find_mines_spots_nearby);
+				   map.find_fields(game(), Area<FCoords>(f, 6), nullptr, find_mines_spots_nearby);
 				if (minescount > 0) {
 					site->second.mines_nearby = ExtendedBool::kTrue;
 				} else {

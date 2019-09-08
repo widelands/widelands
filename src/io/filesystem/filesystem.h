@@ -132,6 +132,14 @@ public:
 	static std::string filename_without_ext(const char* n);
 	static std::string get_homedir();
 
+#ifdef USE_XDG
+	// Get XDG dirs for Linux
+	// https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+	static std::string get_userdatadir();
+	static std::string get_userconfigdir();
+	static std::vector<std::string> get_xdgdatadirs();
+#endif
+
 	/// Return the files in the given 'directory' that match the condition in 'test', i.e. 'test'
 	/// returned 'true' for their filenames.
 	template <class UnaryPredicate>
