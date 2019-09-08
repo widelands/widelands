@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
-"PO-Revision-Date: 2019-05-25 10:11+0000\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -291,10 +291,10 @@ msgstr "Tog feur-lios"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
-"The third material necessary for improved buildings is thatch reed, used to "
-"cover roofs. Thatch reed is planted by a gardener around his building, the "
-"reed yard."
-msgstr "’S e feur tughaidh a th’ anns an treas stuth togail a dh’fheumas tu airson togalaichean leasaichte ’s còmhdaichidh e na mullaichean. Cuiridh gàirnealair feur tughaidh timcheall an togalaich aige agus ’s e seo am feur-lios."
+"The third material necessary for improved buildings is reed, used to cover "
+"roofs. Reed fields are planted by a gardener around his building, the reed "
+"yard."
+msgstr "’S e feur a th’ anns an treas stuth togail a dh’fheumas tu airson togalaichean leasaichte ’s còmhdaichidh e na mullaichean. Cuiridh gàirnealair achaidhean feòir timcheall an togalaich aige agus ’s e seo am feur-lios."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
@@ -1029,3 +1029,16 @@ msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
 msgstr "Ach tha eagal orra gun cuir an cogadh mu Al’tùnran crìoch air an dòigh-bheatha seo. Mar sin, chuir iad romhpa aonachadh rinn, an dòchas gun doireadh sinn taic dha chàch a chèile."
+
+#: ../../data/scripting/richtext_scenarios.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:91
+msgid "New Objective"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

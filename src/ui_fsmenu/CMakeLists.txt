@@ -16,9 +16,9 @@ wl_library(ui_fsmenu_options
     scripting_lua_table
     ui_basic
     ui_fsmenu_base
-    profile
     sound
     widelands_ball_of_mud
+    widelands_options
     wui_sound_options
 )
 
@@ -76,12 +76,12 @@ wl_library(ui_fsmenu_loading_common
     base_i18n
     graphic
     io_filesystem
-    profile
     network
     random
     ui_basic
     ui_fsmenu_base
     ui_fsmenu_main_menu
+    widelands_options
     wui_common_mapdetails
     wui
 )
@@ -102,6 +102,7 @@ wl_library(ui_fsmenu_gameloading
     graphic
     graphic_playercolor
     io_filesystem
+    io_profile
     logic
     logic_game_controller
     logic_game_settings
@@ -109,7 +110,6 @@ wl_library(ui_fsmenu_gameloading
     logic_map_objects
     logic_tribe_basic_info
     map_io_map_loader
-    profile
     scripting_lua_interface
     scripting_lua_table
     ui_basic
@@ -117,6 +117,7 @@ wl_library(ui_fsmenu_gameloading
     ui_fsmenu_helpwindow
     ui_fsmenu_loading_common
     ui_fsmenu_maploading
+    widelands_options
     wui
     wui_chat_ui
     wui_common_gamedetails
@@ -145,12 +146,12 @@ wl_library(ui_fsmenu_maploading
     graphic_fonthandler
     graphic_surface
     io_filesystem
+    io_profile
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
     logic_tribe_basic_info
     map_io_map_loader
-    profile
     scripting_lua_interface
     scripting_lua_table
     ui_basic
@@ -171,11 +172,11 @@ wl_library(ui_fsmenu_network
     base_macros
     graphic
     network
-    profile
     random
     sound
     ui_basic
     ui_fsmenu_base
+    widelands_options
     wui_chat_ui
 )
 

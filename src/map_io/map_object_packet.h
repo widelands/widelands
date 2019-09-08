@@ -57,7 +57,7 @@ struct MapObjectPacket {
 	          EditorGameBase&,
 	          MapObjectLoader&,
 	          const WorldLegacyLookupTable& world_lookup_table,
-	          const TribesLegacyLookupTable& tribe_lookup_table);
+	          const TribesLegacyLookupTable& tribes_lookup_table);
 
 	void load_finish();
 

@@ -25,9 +25,9 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
-#include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
+#include "wlapplication_options.h"
 
 namespace UI {
 
@@ -57,7 +57,7 @@ Panel::Panel(Panel* const nparent,
      last_child_(nullptr),
      mousein_child_(nullptr),
      focus_(nullptr),
-     flags_(pf_handle_mouse | pf_thinks | pf_visible),
+     flags_(pf_handle_mouse | pf_thinks | pf_visible | pf_handle_keypresses),
      x_(nx),
      y_(ny),
      w_(nw),
@@ -123,8 +123,12 @@ void Panel::free_children() {
 	// Scan-build claims this results in double free.
 	// This is a false positive.
 	// See https://bugs.launchpad.net/widelands/+bug/1198928
-	while (first_child_)
+	while (first_child_) {
+		Panel* next_child = first_child_->next_;
 		delete first_child_;
+		first_child_ = next_child;
+	}
+	first_child_ = nullptr;
 }
 
 /**
@@ -160,8 +164,7 @@ int Panel::do_run() {
 	const uint32_t kGameLogicDelay = 1000 / 15;
 
 	// With the default of 30FPS, the game will be drawn every 33ms.
-	const uint32_t draw_delay =
-	   1000 / std::max(5, g_options.pull_section("global").get_int("maxfps", 30));
+	const uint32_t draw_delay = 1000 / std::max(5, get_config_int("maxfps", 30));
 
 	static InputCallback input_callback = {Panel::ui_mousepress, Panel::ui_mouserelease,
 	                                       Panel::ui_mousemove,  Panel::ui_key,
@@ -530,6 +533,7 @@ void Panel::handle_mousein(bool) {
 bool Panel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
+		clicked();
 	}
 	return false;
 }
@@ -735,10 +739,12 @@ void Panel::check_child_death() {
 		Panel* p = next;
 		next = p->next_;
 
-		if (p->flags_ & pf_die)
+		if (p->flags_ & pf_die) {
 			delete p;
-		else if (p->flags_ & pf_child_die)
+			p = nullptr;
+		} else if (p->flags_ & pf_child_die) {
 			p->check_child_death();
+		}
 	}
 
 	flags_ &= ~pf_child_die;
@@ -903,6 +909,10 @@ bool Panel::do_mousemove(
 bool Panel::do_key(bool const down, SDL_Keysym const code) {
 	if (focus_ && focus_->do_key(down, code)) {
 		return true;
+	}
+
+	if (!handles_keypresses()) {
+		return false;
 	}
 
 	// If we handle text, it does not matter if we handled this key

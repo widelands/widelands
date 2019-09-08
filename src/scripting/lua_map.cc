@@ -1452,7 +1452,7 @@ int LuaMap::get_field(lua_State* L) {
 // TODO(unknown): do we really want this function?
 int LuaMap::recalculate(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
-	egbase.mutable_map()->recalc_whole_map(egbase.world());
+	egbase.mutable_map()->recalc_whole_map(egbase);
 	return 0;
 }
 
@@ -1489,7 +1489,7 @@ int LuaMap::set_port_space(lua_State* L) {
 	const int y = luaL_checkint32(L, 3);
 	const bool allowed = luaL_checkboolean(L, 4);
 	const bool success = get_egbase(L).mutable_map()->set_port_space(
-	   get_egbase(L).world(), Widelands::Coords(x, y), allowed, false, true);
+	   get_egbase(L), Widelands::Coords(x, y), allowed, false, true);
 	lua_pushboolean(L, success);
 	return 1;
 }
@@ -4932,39 +4932,38 @@ int LuaWarehouse::set_workers(lua_State* L) {
 }
 
 // Transforms the given warehouse policy to a string which is used by the lua code
-inline void wh_policy_to_string(lua_State* L, Warehouse::StockPolicy p) {
+inline void wh_policy_to_string(lua_State* L, StockPolicy p) {
 	switch (p) {
-	case Warehouse::StockPolicy::kNormal:
+	case StockPolicy::kNormal:
 		lua_pushstring(L, "normal");
 		break;
-	case Warehouse::StockPolicy::kPrefer:
+	case StockPolicy::kPrefer:
 		lua_pushstring(L, "prefer");
 		break;
-	case Warehouse::StockPolicy::kDontStock:
+	case StockPolicy::kDontStock:
 		lua_pushstring(L, "dontstock");
 		break;
-	case Warehouse::StockPolicy::kRemove:
+	case StockPolicy::kRemove:
 		lua_pushstring(L, "remove");
 		break;
 	}
 }
 // Transforms the given string from the lua code to a warehouse policy
-inline Warehouse::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
+inline StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
 	std::string str = luaL_checkstring(L, index);
 	if (str == "normal")
-		return Warehouse::StockPolicy::kNormal;
+		return StockPolicy::kNormal;
 	else if (str == "prefer")
-		return Warehouse::StockPolicy::kPrefer;
+		return StockPolicy::kPrefer;
 	else if (str == "dontstock")
-		return Warehouse::StockPolicy::kDontStock;
+		return StockPolicy::kDontStock;
 	else if (str == "remove")
-		return Warehouse::StockPolicy::kRemove;
+		return StockPolicy::kRemove;
 	else
 		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
 }
 
-inline bool
-do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
+inline bool do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const StockPolicy p) {
 	wh->set_ware_policy(idx, p);
 	return true;
 }
@@ -4973,8 +4972,7 @@ do_set_ware_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::S
  * Sets the given policy for the given ware in the given warehouse and return true.
  * If the no ware with the given name exists for the tribe of the warehouse, return false.
  */
-inline bool
-do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
+inline bool do_set_ware_policy(Warehouse* wh, const std::string& name, const StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	DescriptionIndex idx = tribe.ware_index(name);
 	if (!tribe.has_ware(idx)) {
@@ -4983,8 +4981,7 @@ do_set_ware_policy(Warehouse* wh, const std::string& name, const Warehouse::Stoc
 	return do_set_ware_policy(wh, idx, p);
 }
 
-inline bool
-do_set_worker_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse::StockPolicy p) {
+inline bool do_set_worker_policy(Warehouse* wh, const DescriptionIndex idx, const StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	// If the worker does not cost anything, ignore it
 	// Otherwise, an unlimited stream of carriers might leave the warehouse
@@ -5002,8 +4999,7 @@ do_set_worker_policy(Warehouse* wh, const DescriptionIndex idx, const Warehouse:
  * policy.
  * If no worker with the given name exists for the tribe of the warehouse, return false.
  */
-inline bool
-do_set_worker_policy(Warehouse* wh, const std::string& name, const Warehouse::StockPolicy p) {
+inline bool do_set_worker_policy(Warehouse* wh, const std::string& name, const StockPolicy p) {
 	const TribeDescr& tribe = wh->owner().tribe();
 	DescriptionIndex idx = tribe.worker_index(name);
 	if (!tribe.has_worker(idx)) {
@@ -5033,7 +5029,7 @@ int LuaWarehouse::set_warehouse_policies(lua_State* L) {
 		report_error(L, "Wrong number of arguments to set_warehouse_policies!");
 
 	Warehouse* wh = get(L, get_egbase(L));
-	Warehouse::StockPolicy p = string_to_wh_policy(L, -1);
+	StockPolicy p = string_to_wh_policy(L, -1);
 	lua_pop(L, 1);
 	const TribeDescr& tribe = wh->owner().tribe();
 
@@ -6282,7 +6278,7 @@ int LuaField::set_height(lua_State* L) {
 		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
 
 	EditorGameBase& egbase = get_egbase(L);
-	egbase.mutable_map()->set_height(egbase.world(), f, height);
+	egbase.mutable_map()->set_height(egbase, f, height);
 
 	return 0;
 }
@@ -6466,12 +6462,11 @@ int LuaField::get_terr(lua_State* L) {
 int LuaField::set_terr(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
-	const World& world = egbase.world();
-	const DescriptionIndex td = world.terrains().get_index(name);
+	const DescriptionIndex td = egbase.world().terrains().get_index(name);
 	if (td == static_cast<DescriptionIndex>(Widelands::INVALID_INDEX))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	egbase.mutable_map()->change_terrain(world, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);
+	egbase.mutable_map()->change_terrain(egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);
 
 	lua_pushstring(L, name);
 	return 1;
@@ -6485,12 +6480,11 @@ int LuaField::get_terd(lua_State* L) {
 int LuaField::set_terd(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
-	const World& world = egbase.world();
-	const DescriptionIndex td = world.terrains().get_index(name);
+	const DescriptionIndex td = egbase.world().terrains().get_index(name);
 	if (td == static_cast<DescriptionIndex>(INVALID_INDEX))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	egbase.mutable_map()->change_terrain(world, TCoords<FCoords>(fcoords(L), TriangleIndex::D), td);
+	egbase.mutable_map()->change_terrain(egbase, TCoords<FCoords>(fcoords(L), TriangleIndex::D), td);
 
 	lua_pushstring(L, name);
 	return 1;

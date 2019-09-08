@@ -38,6 +38,7 @@
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/building.h"
+#include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -288,10 +289,12 @@ void EditorGameBase::allocate_player_maps() {
 void EditorGameBase::postload() {
 	create_tempfile_and_save_mapdata(FileSystem::ZIP);
 
-	// Postload tribes
+	// Postload tribes and world
 	assert(tribes_);
 	world_->postload();
 	tribes_->postload();
+	assert(world_);
+	world_->postload();
 
 	for (DescriptionIndex i = 0; i < tribes_->nrtribes(); i++) {
 		const TribeDescr* tribe = tribes_->get_tribe_descr(i);
@@ -331,7 +334,7 @@ void EditorGameBase::load_graphics(UI::ProgressWindow& loader_ui) {
 Building& EditorGameBase::warp_building(const Coords& c,
                                         PlayerNumber const owner,
                                         DescriptionIndex const idx,
-                                        Building::FormerBuildings former_buildings) {
+                                        FormerBuildings former_buildings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 	return tribe.get_building_descr(idx)->create(*this, plr, c, false, true, former_buildings);
@@ -348,10 +351,16 @@ Building& EditorGameBase::warp_constructionsite(const Coords& c,
                                                 PlayerNumber const owner,
                                                 DescriptionIndex idx,
                                                 bool loading,
-                                                Building::FormerBuildings former_buildings) {
+                                                FormerBuildings former_buildings,
+                                                const BuildingSettings* settings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
-	return tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings);
+	Building& b =
+	   tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings);
+	if (settings) {
+		dynamic_cast<ConstructionSite&>(b).apply_settings(*settings);
+	}
+	return b;
 }
 
 /**
@@ -362,7 +371,7 @@ Building& EditorGameBase::warp_constructionsite(const Coords& c,
 Building& EditorGameBase::warp_dismantlesite(const Coords& c,
                                              PlayerNumber const owner,
                                              bool loading,
-                                             Building::FormerBuildings former_buildings) {
+                                             FormerBuildings former_buildings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 
@@ -638,7 +647,7 @@ void EditorGameBase::conquer_area_no_building(PlayerArea<Area<FCoords>> player_a
 	//  This must reach two steps beyond the conquered area to adjust the borders
 	//  of neighbour players.
 	player_area.radius += 2;
-	map_.recalc_for_field_area(world(), player_area);
+	map_.recalc_for_field_area(*this, player_area);
 }
 
 /// Conquers the given area for that player; does the actual work.
@@ -713,7 +722,7 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 	// This must reach two steps beyond the conquered area to adjust the borders
 	// of neighbour players.
 	player_area.radius += 2;
-	map_.recalc_for_field_area(world(), player_area);
+	map_.recalc_for_field_area(*this, player_area);
 
 	//  Deal with player immovables in the lost area
 	//  Players are not allowed to have their immovables on their borders.
@@ -733,7 +742,7 @@ void EditorGameBase::cleanup_playerimmovables_area(PlayerArea<Area<FCoords>> con
 	std::vector<PlayerImmovable*> burnlist;
 
 	//  find all immovables that need fixing
-	map_.find_immovables(area, &immovables, FindImmovablePlayerImmovable());
+	map_.find_immovables(*this, area, &immovables, FindImmovablePlayerImmovable());
 
 	for (const ImmovableFound& temp_imm : immovables) {
 		upcast(PlayerImmovable, imm, temp_imm.object);

@@ -6,13 +6,14 @@
 # SevyRide, 2018
 # Wuzzy <almikes@aol.com>, 2018
 # Elisabeth Jäger, 2018
+# Markus M <mayer.markus@gmx.at>, 2019
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -89,7 +90,7 @@ msgid "20 × Coal"
 msgstr "20 × Kohle"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:52
-msgid "30 × Thatch Reed"
+msgid "30 × Reed"
 msgstr "30 × Reet"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:53
@@ -265,7 +266,7 @@ msgid ""
 " this untouched island."
 msgstr ""
 "Mein Stamm und ich sind gerade vom Festland angekommen. Es gab dort Kämpfe "
-"mit den Dänen im Norden, den Schauenburgern und Holsteinern im Osten un "
+"mit den Dänen im Norden, den Schauenburgern und Holsteinern im Osten und "
 "Süden … Daher entschied ich mich, meinen Stamm wegzuführen, um ein stilles, "
 "friedliches Leben auf dieser unberührten Insel anzufangen."
 
@@ -335,7 +336,7 @@ msgid ""
 "Also, we had better build a reed farm soon. Even reed farms need reed to be "
 "built, so we must take care not to run short before we can grow our own. "
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
-"start growing thatch reed."
+"start growing reed fields."
 msgstr ""
 "Außerdem sollten wir möglichst bald eine Reetpflanzung bauen. Da auch der "
 "Bau einer Reetpflanzung ohne Reet nicht möglich ist, müssen wir dafür "
@@ -439,8 +440,8 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:189
 msgid ""
-"You should assign the new reed farm the highest priority for thatch reed in "
-"the construction site window."
+"You should assign the new reed farm the highest priority for reed in the "
+"construction site window."
 msgstr ""
 "Du solltest der neuen Reetpflanzung die höchste Priorität für Reet im "
 "Baustellenfenster zuweisen."
@@ -1153,3 +1154,16 @@ msgstr ""
 "Du hast diese Mission abgeschlossen. Du kannst uns nun im nächsten Szenario "
 "helfen, eine neue Heimat aufzubauen, weit weg von der rächenden Hand dieses "
 "falschen Gottes …"
+
+#: ../../data/scripting/richtext_scenarios.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr "„%s“"
+
+#: ../../data/scripting/richtext_scenarios.lua:91
+msgid "New Objective"
+msgstr "Neue Aufgabe"
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr "Neue Aufgaben"

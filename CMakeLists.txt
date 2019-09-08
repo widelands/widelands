@@ -48,6 +48,13 @@ option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
 option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
 option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
+option(OPTION_BUILD_TESTS "Build tests" ON)
+
+option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
+IF(USE_XDG AND NOT APPLE AND NOT WIN32)
+  ADD_DEFINITIONS(-DUSE_XDG)
+  message(STATUS "Building with XDG support")
+ENDIF(USE_XDG AND NOT APPLE AND NOT WIN32)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and source directory must not be the same.")
@@ -181,7 +188,7 @@ endif(OPTION_ASAN)
 
 # This is set to avoid linker errors when using GLVND-libs on Linux
 if("${OpenGL_GL_PREFERENCE}" STREQUAL "GLVND")
-   set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lGL")
+   link_libraries("GL")
    add_compile_definitions(WL_USE_GLVND)
    message(STATUS "Adding linker flags for GLVND.")
 endif()
@@ -298,17 +305,19 @@ else (NOT DEFINED WL_VERSION)
 endif (NOT DEFINED WL_VERSION)
 
 # Enable testing.
-include(CTest)
-enable_testing()
+if (OPTION_BUILD_TESTS)
+  include(CTest)
+  enable_testing()
 
-# Run a test after a normal compile. This magic is needed as 'make test' will
-# not rebuild tests:
-# http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
-add_custom_target(_run_all_tests ALL
-  COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-  DEPENDS wl_tests
-)
+  # Run a test after a normal compile. This magic is needed as 'make test' will
+  # not rebuild tests:
+  # http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
+  add_custom_target(_run_all_tests ALL
+    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    DEPENDS wl_tests
+  )
+endif (OPTION_BUILD_TESTS)
 
 install (
   FILES ${CMAKE_CURRENT_BINARY_DIR}/VERSION

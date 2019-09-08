@@ -38,6 +38,11 @@ tribes:new_productionsite_type {
       mines = "iron"
    },
 
+   indicate_workarea_overlaps = {
+      empire_ironmine = false,
+      empire_ironmine_deep = false,
+   },
+
    working_positions = {
       empire_miner = 1,
       empire_miner_master = 1

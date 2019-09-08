@@ -24,13 +24,13 @@
 #include <boost/lexical_cast.hpp>
 
 #include "graphic/graphic.h"
+#include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "profile/profile.h"
 #include "ui_basic/messagebox.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
@@ -51,8 +51,17 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
      worker_panel_(new EconomyOptionsPanel(
         &tabpanel_, this, serial_, player_, can_act, Widelands::wwWORKER, kDesiredWidth)),
      dropdown_box_(this, 0, 0, UI::Box::Horizontal),
-     dropdown_(
-        &dropdown_box_, 0, 0, 174, 200, 34, "", UI::DropdownType::kTextual, UI::PanelStyle::kWui),
+     dropdown_(&dropdown_box_,
+               "economy_profiles",
+               0,
+               0,
+               174,
+               10,
+               34,
+               "",
+               UI::DropdownType::kTextual,
+               UI::PanelStyle::kWui,
+               UI::ButtonStyle::kWuiSecondary),
      time_last_thought_(0),
      save_profile_dialog_(nullptr) {
 	set_center_panel(&main_box_);
@@ -67,6 +76,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	b->sigclicked.connect([this] { change_target(-10); });
 	buttons->add(b);
 	b->set_repeating(true);
+	b->set_enabled(can_act);
 	buttons->add_space(8);
 	b = new UI::Button(buttons, "decrease_target", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
 	                   g_gr->images().get("images/ui_basic/scrollbar_down.png"),
@@ -74,6 +84,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	b->sigclicked.connect([this] { change_target(-1); });
 	buttons->add(b);
 	b->set_repeating(true);
+	b->set_enabled(can_act);
 	buttons->add_space(24);
 
 	b = new UI::Button(buttons, "increase_target", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
@@ -81,6 +92,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	b->sigclicked.connect([this] { change_target(1); });
 	buttons->add(b);
 	b->set_repeating(true);
+	b->set_enabled(can_act);
 	buttons->add_space(8);
 	b = new UI::Button(buttons, "increase_target_fast", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
 	                   g_gr->images().get("images/ui_basic/scrollbar_up_fast.png"),
@@ -88,14 +100,19 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	b->sigclicked.connect([this] { change_target(10); });
 	buttons->add(b);
 	b->set_repeating(true);
+	b->set_enabled(can_act);
 
 	dropdown_.set_tooltip(_("Profile to apply to the selected items"));
 	dropdown_box_.set_size(40, 20);  // Prevent assert failures
 	dropdown_box_.add(&dropdown_, UI::Box::Resizing::kFullSize);
-	dropdown_.selected.connect([this] { reset_target(); });
+	if (can_act) {
+		dropdown_.selected.connect([this] { reset_target(); });
+	} else {
+		dropdown_.set_enabled(false);
+	}
 
 	b = new UI::Button(&dropdown_box_, "save_targets", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-	                   g_gr->images().get("images/wui/menus/menu_save_game.png"),
+	                   g_gr->images().get("images/wui/menus/save_game.png"),
 	                   _("Save target settings"));
 	b->sigclicked.connect([this] { create_target(); });
 	dropdown_box_.add_space(8);
@@ -107,7 +124,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	main_box_.add_space(8);
 	main_box_.add(&dropdown_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	economy->set_has_window(true);
+	economy->set_options_window(static_cast<void*>(this));
 	economynotes_subscriber_ = Notifications::subscribe<Widelands::NoteEconomy>(
 	   [this](const Widelands::NoteEconomy& note) { on_economy_note(note); });
 	profilenotes_subscriber_ =
@@ -128,7 +145,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 EconomyOptionsWindow::~EconomyOptionsWindow() {
 	Widelands::Economy* economy = player_->get_economy(serial_);
 	if (economy != nullptr) {
-		economy->set_has_window(false);
+		economy->set_options_window(nullptr);
 	}
 	if (save_profile_dialog_) {
 		save_profile_dialog_->unset_parent();
@@ -145,7 +162,7 @@ void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
 				die();
 				return;
 			}
-			economy->set_has_window(true);
+			economy->set_options_window(static_cast<void*>(this));
 			ware_panel_->set_economy(note.new_economy);
 			worker_panel_->set_economy(note.new_economy);
 			move_to_top();
@@ -230,16 +247,11 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
      serial_(serial),
      player_(player),
      type_(type),
-     can_act_(can_act),
-     display_(this, 0, 0, serial_, player_, type_, can_act_),
+     display_(this, 0, 0, serial_, player_, type_, can_act),
      economy_options_window_(eco_window) {
 	add(&display_, UI::Box::Resizing::kFullSize);
 
 	display_.set_hgap(AbstractWaresDisplay::calc_hgap(display_.get_extent().w, min_w));
-
-	if (!can_act_) {
-		return;
-	}
 }
 
 void EconomyOptionsWindow::EconomyOptionsPanel::set_economy(Widelands::Serial serial) {
@@ -307,29 +319,26 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 	const PredefinedTargets settings = economy_options_window_->get_selected_target();
 
 	bool anything_selected = false;
-	bool second_phase = false;
-
-	do {
-		for (const Widelands::DescriptionIndex& index : items) {
-			if (display_.ware_selected(index) || (second_phase && !display_.is_ware_hidden(index))) {
-				anything_selected = true;
-				if (is_wares) {
-					game.send_player_command(new Widelands::CmdSetWareTargetQuantity(
-					   game.get_gametime(), player_->player_number(), serial_, index,
-					   settings.wares.at(index)));
-				} else {
-					game.send_player_command(new Widelands::CmdSetWorkerTargetQuantity(
-					   game.get_gametime(), player_->player_number(), serial_, index,
-					   settings.workers.at(index)));
-				}
+	for (const Widelands::DescriptionIndex& index : items) {
+		if (display_.ware_selected(index)) {
+			anything_selected = true;
+			break;
+		}
+	}
+	for (const Widelands::DescriptionIndex& index : items) {
+		if (display_.ware_selected(index) ||
+		    (!anything_selected && !display_.is_ware_hidden(index))) {
+			if (is_wares) {
+				game.send_player_command(new Widelands::CmdSetWareTargetQuantity(
+				   game.get_gametime(), player_->player_number(), serial_, index,
+				   settings.wares.at(index)));
+			} else {
+				game.send_player_command(new Widelands::CmdSetWorkerTargetQuantity(
+				   game.get_gametime(), player_->player_number(), serial_, index,
+				   settings.workers.at(index)));
 			}
 		}
-		if (anything_selected) {
-			return;
-		}
-		// Nothing was selected, now go through the loop again and change everything
-		second_phase = true;
-	} while (!second_phase);
+	}
 }
 
 constexpr unsigned kThinkInterval = 200;

@@ -39,6 +39,7 @@
 #include "random/random.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
+#include "wlapplication_options.h"
 
 namespace {
 // The map generator can't find starting positions for too many players
@@ -47,32 +48,20 @@ constexpr uint8_t kMaxMapgenPlayers = 8;
 
 using namespace Widelands;
 
-MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
-   : UI::Window(&parent, "random_map_menu", 0, 0, 400, 500, _("New Random Map")),
+MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
+                                           UI::UniqueWindow::Registry& registry)
+   : UI::UniqueWindow(&parent, "random_map_menu", &registry, 400, 500, _("New Random Map")),
      // UI elements
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),
      label_height_(text_height(UI::FontStyle::kLabel) + 2),
      box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
      // Size
-     width_(&box_,
-            0,
-            0,
-            box_width_,
-            box_width_ / 3,
-            24,
-            _("Width"),
-            UI::DropdownType::kTextual,
-            UI::PanelStyle::kWui),
-     height_(&box_,
-             0,
-             0,
-             box_width_,
-             box_width_ / 3,
-             24,
-             _("Height"),
-             UI::DropdownType::kTextual,
-             UI::PanelStyle::kWui),
+     map_size_box_(box_,
+                   "random_map_menu",
+                   4,
+                   parent.egbase().map().get_width(),
+                   parent.egbase().map().get_height()),
      max_players_(2),
      players_(&box_,
               0,
@@ -212,28 +201,13 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
                     UI::ButtonStyle::kWuiSecondary,
                     _("Cancel")) {
 	int32_t box_height = 0;
+	box_.set_size(100, 20);  // Prevent assert failures
 
 	// ---------- Width + Height ----------
 
-	for (const int32_t& i : Widelands::kMapDimensions) {
-		width_.add(std::to_string(i), i);
-		height_.add(std::to_string(i), i);
-	}
-	width_.select(parent.egbase().map().get_width());
-	height_.select(parent.egbase().map().get_height());
-	width_.set_max_items(12);
-	height_.set_max_items(12);
-
-	width_.selected.connect(
-	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kMapSize));
-	height_.selected.connect(
-	   boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::kMapSize));
-
-	box_.set_size(100, 20);  // Prevent assert failures
-	box_.add(&width_);
-	box_.add(&height_);
-	box_height += margin_ + width_.get_h();
-	box_height += margin_ + height_.get_h();
+	map_size_box_.set_selection_function([this] { button_clicked(ButtonId::kMapSize); });
+	box_.add(&map_size_box_, UI::Box::Resizing::kExpandBoth);
+	box_height += margin_ + map_size_box_.get_h();
 
 	// ---------- Players -----------
 
@@ -396,19 +370,6 @@ static size_t find_dimension_index(int32_t value) {
  */
 void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	switch (n) {
-	case ButtonId::kPlayers:  // intended fall-through
-	case ButtonId::kMapSize:
-		// Restrict maximum players according to map size, but allow at least 2 players.
-		max_players_ = std::min(
-		   static_cast<size_t>(kMaxMapgenPlayers), (find_dimension_index(width_.get_selected()) +
-		                                            find_dimension_index(height_.get_selected())) /
-		                                                 2 +
-		                                              2);
-		players_.set_interval(1, max_players_);
-		if (players_.get_value() > max_players_) {
-			players_.set_value(max_players_);
-		}
-		break;
 	case ButtonId::kWater:
 		waterval_ = water_.get_value();
 		normalize_landmass(n);
@@ -433,17 +394,20 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 		break;
 	case ButtonId::kIslandMode:
 		break;
+	case ButtonId::kPlayers:  // intended fall-through
+	case ButtonId::kMapSize:
 	case ButtonId::kNone:
-		// Make sure that all conditions are met
-		max_players_ = std::min(
-		   static_cast<size_t>(kMaxMapgenPlayers), (find_dimension_index(width_.get_selected()) +
-		                                            find_dimension_index(height_.get_selected())) /
-		                                                 2 +
-		                                              2);
+		// Restrict maximum players according to map size, but allow at least 2 players.
+		max_players_ = std::min(static_cast<size_t>(kMaxMapgenPlayers),
+		                        (find_dimension_index(map_size_box_.selected_width()) +
+		                         find_dimension_index(map_size_box_.selected_height())) /
+		                              2 +
+		                           2);
 		players_.set_interval(1, max_players_);
 		if (players_.get_value() > max_players_) {
 			players_.set_value(max_players_);
 		}
+		// Make sure that landmass is consistent
 		normalize_landmass(n);
 	}
 	nr_edit_box_changed();  // Update ID String
@@ -521,10 +485,9 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	      << "ID = " << map_id_edit_.text() << "\n";
 
 	MapGenerator gen(*map, map_info, egbase);
-	map->create_empty_map(
-	   egbase.world(), map_info.w, map_info.h, 0, _("No Name"),
-	   g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")),
-	   sstrm.str().c_str());
+	map->create_empty_map(egbase, map_info.w, map_info.h, 0, _("No Name"),
+	                      get_config_string("realname", pgettext("author_name", "Unknown")),
+	                      sstrm.str().c_str());
 	loader_ui.step(_("Generating random map…"));
 
 	log("============== Generating Map ==============\n");
@@ -555,7 +518,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	egbase.create_tempfile_and_save_mapdata(FileSystem::ZIP);
 
-	map->recalc_whole_map(egbase.world());
+	map->recalc_whole_map(egbase);
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);
 	UI::WLMessageBox mbox(
 	   &eia,
@@ -597,8 +560,8 @@ void MainMenuNewRandomMap::id_edit_box_changed() {
 		sstrm << map_info.mapNumber;
 		map_number_edit_.set_text(sstrm.str());
 
-		width_.select(map_info.w);
-		height_.select(map_info.h);
+		map_size_box_.select_width(map_info.w);
+		map_size_box_.select_height(map_info.h);
 
 		players_.set_interval(1, map_info.numPlayers);  // hack to make sure we can set the value
 		players_.set_value(map_info.numPlayers);
@@ -651,8 +614,8 @@ void MainMenuNewRandomMap::nr_edit_box_changed() {
 }
 
 void MainMenuNewRandomMap::set_map_info(Widelands::UniqueRandomMapInfo& map_info) const {
-	map_info.w = width_.get_selected() > 0 ? width_.get_selected() : Widelands::kMapDimensions[0];
-	map_info.h = height_.get_selected() > 0 ? height_.get_selected() : Widelands::kMapDimensions[0];
+	map_info.w = map_size_box_.selected_width();
+	map_info.h = map_size_box_.selected_height();
 	map_info.waterRatio = static_cast<double>(waterval_) / 100.0;
 	map_info.landRatio = static_cast<double>(landval_) / 100.0;
 	map_info.wastelandRatio = static_cast<double>(wastelandval_) / 100.0;

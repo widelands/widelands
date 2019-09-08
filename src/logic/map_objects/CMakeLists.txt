@@ -52,6 +52,8 @@ wl_library(logic_map_objects
     tribes/bill_of_materials.h
     tribes/building.cc
     tribes/building.h
+    tribes/building_settings.cc
+    tribes/building_settings.h
     tribes/carrier.cc
     tribes/carrier.h
     tribes/constructionsite.cc
@@ -129,6 +131,7 @@ wl_library(logic_map_objects
     graphic_image_io
     graphic_surface
     graphic_text_layout
+    graphic_toolbar_imageset
     io_fileread
     io_filesystem
     logic # TODO(GunChleoc): Circular dependency

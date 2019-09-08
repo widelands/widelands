@@ -11,14 +11,14 @@
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Владимир Куряев <istercul@gmail.com>, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
-# Олег Шевченко <olegrock@gmail.com>, 2018
-# Федор <Lunar-energy@ya.ru>, 2015
+# Олег Шевченко <olegrock@gmail.com>, 2018-2019
+# Fede4ka, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
-"PO-Revision-Date: 2019-05-25 10:11+0000\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-10 17:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -298,10 +298,10 @@ msgstr "Постройте плантацию"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
-"The third material necessary for improved buildings is thatch reed, used to "
-"cover roofs. Thatch reed is planted by a gardener around his building, the "
-"reed yard."
-msgstr "Третьим материалом требуемым для улучшенных строений является кровельный тростник, который используется для покрова крыш. Этот тростник выращивается садовниками вокруг их строений - плантаций."
+"The third material necessary for improved buildings is reed, used to cover "
+"roofs. Reed fields are planted by a gardener around his building, the reed "
+"yard."
+msgstr "Третий материал, необходимый для улучшения зданий - это тростник, используемый для покрытия крыш. Тростниковые поля засаживаются садовником вокруг его строения - плантации."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
@@ -1036,3 +1036,16 @@ msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
 msgstr "Но они боятся, что война положит конец этой спокойной жизни. Поэтому они решили присоединиться к нам, надеясь, что мы поможем друг другу."
+
+#: ../../data/scripting/richtext_scenarios.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:91
+msgid "New Objective"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr ""

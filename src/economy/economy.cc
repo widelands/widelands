@@ -52,7 +52,7 @@ Economy::Economy(Player& player) : Economy(player, last_economy_serial_++) {
 }
 
 Economy::Economy(Player& player, Serial init_serial)
-   : serial_(init_serial), owner_(player), request_timerid_(0), has_window_(false) {
+   : serial_(init_serial), owner_(player), request_timerid_(0), options_window_(nullptr) {
 	last_economy_serial_ = std::max(last_economy_serial_, serial_ + 1);
 	const TribeDescr& tribe = player.tribe();
 	DescriptionIndex const nr_wares = player.egbase().tribes().nrwares();
@@ -535,7 +535,7 @@ void Economy::merge(Economy& e) {
 
 	//  If the options window for e is open, but not the one for this, the user
 	//  should still have an options window after the merge.
-	if (e.has_window() && !has_window()) {
+	if (e.get_options_window() && !get_options_window()) {
 		Notifications::publish(NoteEconomy{e.serial(), serial_, NoteEconomy::Action::kMerged});
 	}
 
@@ -971,7 +971,7 @@ void Economy::create_requested_workers(Game& game) {
 static bool accept_warehouse_if_policy(Warehouse& wh,
                                        WareWorker type,
                                        DescriptionIndex ware,
-                                       Warehouse::StockPolicy policy) {
+                                       StockPolicy policy) {
 	return wh.get_stock_policy(type, ware) == policy;
 }
 
@@ -1005,8 +1005,8 @@ void Economy::handle_active_supplies(Game& game) {
 
 		for (uint32_t nwh = 0; nwh < warehouses_.size(); ++nwh) {
 			Warehouse* wh = warehouses_[nwh];
-			Warehouse::StockPolicy policy = wh->get_stock_policy(type, ware);
-			if (policy == Warehouse::StockPolicy::kPrefer) {
+			StockPolicy policy = wh->get_stock_policy(type, ware);
+			if (policy == StockPolicy::kPrefer) {
 				haveprefer = true;
 
 				// Getting count of worker/ware
@@ -1022,7 +1022,7 @@ void Economy::handle_active_supplies(Game& game) {
 					preferred_wh_stock = current_stock;
 				}
 			}
-			if (policy == Warehouse::StockPolicy::kNormal)
+			if (policy == StockPolicy::kNormal)
 				havenormal = true;
 		}
 		if (!havenormal && !haveprefer && type == wwWARE)
@@ -1034,10 +1034,9 @@ void Economy::handle_active_supplies(Game& game) {
 			wh = preferred_wh;
 		} else {
 			wh = find_closest_warehouse(supply.get_position(game)->base_flag(), type, nullptr, 0,
-			                            (!havenormal) ?
-			                               WarehouseAcceptFn() :
-			                               boost::bind(&accept_warehouse_if_policy, _1, type, ware,
-			                                           Warehouse::StockPolicy::kNormal));
+			                            (!havenormal) ? WarehouseAcceptFn() :
+			                                            boost::bind(&accept_warehouse_if_policy, _1,
+			                                                        type, ware, StockPolicy::kNormal));
 		}
 		if (!wh) {
 			log("Warning: Economy::handle_active_supplies "

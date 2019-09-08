@@ -67,13 +67,23 @@ void World::load_graphics() {
 }
 
 void World::postload() {
-
 	// Validate immovable grows/transforms data
 	for (DescriptionIndex i = 0; i < immovables_->size(); ++i) {
 		const ImmovableDescr& imm = immovables_->get(i);
 		for (const std::string& target : imm.becomes()) {
 			if (get_immovable_index(target) == INVALID_INDEX) {
 				throw GameDataError("Unknown grow/transform target '%s' for world immovable '%s'", target.c_str(), imm.name().c_str());
+			}
+		}
+	}
+
+	const size_t nr_t = get_nr_terrains();
+	for (size_t i = 0; i < nr_t; ++i) {
+		const TerrainDescription& t = terrain_descr(i);
+		if (!t.enhancement().empty()) {
+			if (!terrain_descr(t.enhancement())) {
+				throw GameDataError(
+				   "Terrain %s: Unknown enhancement %s", t.name().c_str(), t.enhancement().c_str());
 			}
 		}
 	}
@@ -144,6 +154,14 @@ TerrainDescription& World::terrain_descr(DescriptionIndex const i) const {
 const TerrainDescription* World::terrain_descr(const std::string& name) const {
 	int32_t const i = terrains_->get_index(name);
 	return i != INVALID_INDEX ? terrains_->get_mutable(i) : nullptr;
+}
+
+DescriptionIndex World::get_terrain_index(const std::string& name) const {
+	return terrains_->get_index(name);
+}
+
+DescriptionIndex World::get_nr_terrains() const {
+	return terrains_->size();
 }
 
 DescriptionIndex World::get_critter(char const* const l) const {

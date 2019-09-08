@@ -71,10 +71,10 @@ wl_library(ui_basic
     graphic_wordwrap
     io_filesystem
     notifications
-    profile
     scripting_lua_interface
     scripting_lua_table
     sound
     sound_constants
     widelands_ball_of_mud
+    widelands_options
 )

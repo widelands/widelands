@@ -24,13 +24,11 @@
 #include "chat/chat.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
-#include "profile/profile.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_main_menu_save_game.h"
-#include "wui/game_options_menu.h"
 #include "wui/general_statistics_menu.h"
 
 /**
@@ -40,48 +38,24 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
                                            Section& global_s,
                                            bool const multiplayer)
    : InteractiveGameBase(g, global_s, OBSERVER, multiplayer) {
-	if (is_multiplayer()) {
-		add_toolbar_button(
-		   "wui/menus/menu_options_menu", "options_menu", _("Main menu"), &options_, true);
-		options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
+	add_main_menu();
 
-	} else {
-		UI::Button* button =
-		   add_toolbar_button("wui/menus/menu_exit_game", "exit_replay", _("Exit replay"));
-		button->sigclicked.connect(boost::bind(&InteractiveSpectator::exit_btn, this));
-
-		add_toolbar_button(
-		   "wui/menus/menu_save_game", "save_game", _("Save game"), &main_windows_.savegame, true);
-		main_windows_.savegame.open_window = [this] {
-			new GameMainMenuSaveGame(*this, main_windows_.savegame);
-		};
-	}
-	add_toolbar_button("wui/menus/menu_general_stats", "general_stats", _("Statistics"),
-	                   &main_windows_.general_stats, true);
-	main_windows_.general_stats.open_window = [this] {
-		new GeneralStatisticsMenu(*this, main_windows_.general_stats);
+	add_toolbar_button("wui/menus/statistics_general", "general_stats", _("Statistics"),
+	                   &menu_windows_.stats_general, true);
+	menu_windows_.stats_general.open_window = [this] {
+		new GeneralStatisticsMenu(*this, menu_windows_.stats_general);
 	};
 
 	toolbar()->add_space(15);
 
-	add_toolbar_button(
-	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
-	minimap_registry().open_window = [this] { toggle_minimap(); };
-
-	toggle_buildhelp_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show building spaces (on/off)"));
-	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
-
-	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
-	reset_zoom_->sigclicked.connect([this] {
-		map_view()->zoom_around(
-		   1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
-	});
+	add_mapview_menu(MiniMapType::kStaticViewWindow);
+	add_showhide_menu();
+	add_gamespeed_menu();
 
 	toolbar()->add_space(15);
 
 	if (is_multiplayer()) {
-		add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
+		add_toolbar_button("wui/menus/chat", "chat", _("Chat"), &chat_, true);
 		chat_.open_window = [this] {
 			if (chat_provider_) {
 				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
@@ -89,7 +63,7 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 		};
 	}
 
-	adjust_toolbar_position();
+	finalize_toolbar();
 
 	// Setup all screen elements
 	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
@@ -222,17 +196,13 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
 			toggle_buildhelp();
 			return true;
 
-		case SDLK_m:
-			minimap_registry().toggle();
-			return true;
-
 		case SDLK_c:
 			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
 			return true;
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				new GameMainMenuSaveGame(*this, main_windows_.savegame);
+				new GameMainMenuSaveGame(*this, menu_windows_.savegame);
 			} else
 				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
 			return true;

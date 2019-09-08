@@ -36,13 +36,14 @@
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
+#include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
+#include "wlapplication_options.h"
 
 namespace {
 
@@ -104,23 +105,27 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      // Interface options
      language_dropdown_(&box_interface_left_,
+                        "dropdown_language",
                         0,
                         0,
                         100,  // 100 is arbitrary, will be resized in layout().
-                        100,  // 100 is arbitrary, will be resized in layout().
+                        50,
                         24,
                         _("Language"),
                         UI::DropdownType::kTextual,
-                        UI::PanelStyle::kFsMenu),
+                        UI::PanelStyle::kFsMenu,
+                        UI::ButtonStyle::kFsMenuMenu),
      resolution_dropdown_(&box_interface_left_,
+                          "dropdown_resolution",
                           0,
                           0,
                           100,  // 100 is arbitrary, will be resized in layout().
-                          100,  // 100 is arbitrary, will be resized in layout().
+                          50,
                           24,
                           _("Window Size"),
                           UI::DropdownType::kTextual,
-                          UI::PanelStyle::kFsMenu),
+                          UI::PanelStyle::kFsMenu,
+                          UI::ButtonStyle::kFsMenuMenu),
 
      fullscreen_(&box_interface_left_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
@@ -674,5 +679,5 @@ void OptionsCtrl::save_options() {
 	g_sh->save_config();
 
 	// Now write to file
-	g_options.write(kConfigFile.c_str(), true);
+	write_config();
 }
