@@ -48,6 +48,10 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(FlagDescr);
 };
 
+constexpr bool kPendingOnly = true;           // ignore non-pending wares
+constexpr int32_t kNotFoundAppropriate = -1;  // no ware appropiate for carrying
+constexpr int32_t kDenyDrop = -2;             // flag is full and no ware appropiate for swapping
+
 /**
  * Flag represents a flag as you see it on the map.
  *
@@ -122,7 +126,15 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	bool is_dead_end() const;
 
+	struct PendingWare {
+		WareInstance* ware;              ///< the ware itself
+		bool pending;                    ///< if the ware is pending
+		int32_t priority;                ///< carrier prefers the ware with highest priority
+		OPtr<PlayerImmovable> nextstep;  ///< next step that this ware is sent to
+	};
+
 	bool has_capacity() const;
+	bool has_capacity_for_ware(WareInstance&) const;
 	uint32_t total_capacity() {
 		return ware_capacity_;
 	}
@@ -132,10 +144,14 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void wait_for_capacity(Game&, Worker&);
 	void skip_wait_for_capacity(Game&, Worker&);
 	void add_ware(EditorGameBase&, WareInstance&);
-	bool has_pending_ware(Game&, Flag& destflag);
-	bool ack_pickup(Game&, Flag& destflag);
+	void init_ware(EditorGameBase&, WareInstance&, PendingWare&);
+	PendingWare* get_ware_for_flag(Flag&, bool pending_only = false);
 	bool cancel_pickup(Game&, Flag& destflag);
-	WareInstance* fetch_pending_ware(Game&, PlayerImmovable& dest);
+	void ware_departing(Game&);
+	bool allow_ware_from_flag(WareInstance&, Flag&);
+	int32_t find_swappable_ware(WareInstance&, Flag&);
+	int32_t find_pending_ware(PlayerImmovable&);
+	WareInstance* fetch_pending_ware(Game&, int32_t);
 	void propagate_promoted_road(Road* promoted_road);
 	Wares get_wares();
 	uint8_t count_wares_in_queue(PlayerImmovable& dest) const;
@@ -168,12 +184,7 @@ protected:
 	void set_flag_position(Coords coords);
 
 private:
-	struct PendingWare {
-		WareInstance* ware;              ///< the ware itself
-		bool pending;                    ///< if the ware is pending
-		int32_t priority;                ///< carrier prefers the ware with highest priority
-		OPtr<PlayerImmovable> nextstep;  ///< next step that this ware is sent to
-	};
+	bool update_ware_from_flag(Game&, PendingWare&, Road&, Flag&);
 
 	struct FlagJob {
 		Request* request;

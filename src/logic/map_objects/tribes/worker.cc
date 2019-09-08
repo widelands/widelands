@@ -138,18 +138,17 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 		totalres += amount;
 		totalchance += 8 * amount;
 
-		// Add penalty for fields that are running out
-		// Except for totally depleted fields or wrong ressource fields
-		// if we already know there is no ressource (left) we won't mine there
-		if (amount > 0) {
-			if (amount <= 2) {
-				totalchance += 6;
-			} else if (amount <= 4) {
-				totalchance += 4;
-			} else if (amount <= 6) {
-				totalchance += 2;
-			}
-		}
+		//  Add penalty for fields that are running out
+		//  Except for totally depleted fields or wrong ressource fields
+		//  if we already know there is no ressource (left) we won't mine there
+		if (amount == 0)
+			totalchance += 0;
+		else if (amount <= 2)
+			totalchance += 6;
+		else if (amount <= 4)
+			totalchance += 4;
+		else if (amount <= 6)
+			totalchance += 2;
 	} while (mr.advance(*map));
 
 	if (totalres == 0) {
@@ -1885,12 +1884,11 @@ void Worker::return_update(Game& game, State& state) {
 		if (upcast(Flag, flag, pos)) {
 			// Is this "our" flag?
 			if (flag->get_building() == location) {
-				if (state.ivar1 && flag->has_capacity()) {
-					if (WareInstance* const ware = fetch_carried_ware(game)) {
-						flag->add_ware(game, *ware);
-						set_animation(game, descr().get_animation("idle", this));
-						return schedule_act(game, 20);  //  rest a while
-					}
+				WareInstance* const ware = get_carried_ware(game);
+				if (state.ivar1 && ware && flag->has_capacity_for_ware(*ware)) {
+					flag->add_ware(game, *fetch_carried_ware(game));
+					set_animation(game, descr().get_animation("idle", this));
+					return schedule_act(game, 20);  //  rest a while
 				}
 
 				// Don't try to enter building if it is a dismantle site
@@ -2133,16 +2131,18 @@ void Worker::dropoff_update(Game& game, State&) {
 	if (ware) {
 		// We're in the building, walk onto the flag
 		if (upcast(Building, building, location)) {
-			if (start_task_waitforcapacity(game, building->base_flag())) {
-				return;
+			Flag& baseflag = building->base_flag();
+			if (baseflag.has_capacity_for_ware(*ware)) {
+				start_task_leavebuilding(game, false);  //  exit throttle
+			} else {
+				start_task_waitforcapacity(game, baseflag);
 			}
-
-			return start_task_leavebuilding(game, false);  //  exit throttle
+			return;
 		}
 
 		// We're on the flag, drop the ware and pause a little
 		if (upcast(Flag, flag, location)) {
-			if (flag->has_capacity()) {
+			if (flag->has_capacity_for_ware(*ware)) {
 				flag->add_ware(game, *fetch_carried_ware(game));
 
 				set_animation(game, descr().get_animation("idle", this));
@@ -2232,9 +2232,11 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 
 		// The ware has decided that it doesn't want to go to us after all
 		// In order to return to the warehouse, we're switching to State_DropOff
+		Flag& flag = dynamic_cast<Flag&>(*location);
 		if (WareInstance* const ware =
-		       dynamic_cast<Flag&>(*location).fetch_pending_ware(game, employer)) {
+		       flag.fetch_pending_ware(game, flag.find_pending_ware(employer))) {
 			set_carried_ware(game, ware);
+			flag.ware_departing(game);
 		}
 
 		set_animation(game, descr().get_animation("idle", this));
@@ -2298,25 +2300,15 @@ const Bob::Task Worker::taskWaitforcapacity = {
    static_cast<Bob::Ptr>(&Worker::waitforcapacity_pop), true};
 
 /**
- * Checks the capacity of the flag.
- *
- * If there is none, a wait task is pushed, and the worker is added to the
- * flag's wait queue. The function returns true in this case.
- * If the flag still has capacity, the function returns false and doesn't
- * act at all.
+ * Pushes a wait task and
+ * adds the worker to the flag's wait queue.
  */
-bool Worker::start_task_waitforcapacity(Game& game, Flag& flag) {
-	if (flag.has_capacity()) {
-		return false;
-	}
-
+void Worker::start_task_waitforcapacity(Game& game, Flag& flag) {
 	push_task(game, taskWaitforcapacity);
 
 	top_state().objvar1 = &flag;
 
 	flag.wait_for_capacity(game, *this);
-
-	return true;
 }
 
 void Worker::waitforcapacity_update(Game& game, State&) {
