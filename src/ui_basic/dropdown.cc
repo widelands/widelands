@@ -39,13 +39,6 @@ int base_height(int button_dimension, UI::PanelStyle style) {
 	   std::max(button_dimension, text_height(g_gr->styles().table_style(style).enabled()) + 2);
 	return result;
 }
-
-/*
-int BaseDropdown::base_height(int button_dimension) const {
-   return std::max(button_dimension,
-text_height(g_gr->styles().table_style(UI::PanelStyle::kWui).enabled()) + 2);
-}
-*/
 }  // namespace
 
 namespace UI {
@@ -428,13 +421,6 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_ESCAPE:
 			if (list_->is_visible()) {
 				list_->select(current_selection_);
-				toggle_list();
-				return true;
-			}
-			break;
-		case SDLK_DOWN:
-		case SDLK_UP:
-			if (!list_->is_visible() && !is_mouse_away()) {
 				toggle_list();
 				return true;
 			}

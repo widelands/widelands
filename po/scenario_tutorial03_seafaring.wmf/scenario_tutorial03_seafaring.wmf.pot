@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-07-05 07:01+0000\n"
+"POT-Creation-Date: 2019-09-06 07:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -407,4 +407,17 @@ msgid ""
 "On this map, there is no enemy to fear. As always, you can continue playing "
 "and watch how the ships deliver wares to the island when you construct some "
 "buildings there. There is also another island where you can build a port."
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:91
+msgid "New Objective"
+msgstr ""
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
 msgstr ""

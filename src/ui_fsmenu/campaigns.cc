@@ -25,9 +25,9 @@
 #include "base/log.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
+#include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
-#include "profile/profile.h"
 #include "scripting/lua_interface.h"
 
 namespace {
@@ -37,6 +37,7 @@ const std::string kCampVisFileLegacy = "save/campvis";
 Campaigns::Campaigns() {
 	// Load solved scenarios
 	std::unique_ptr<Profile> campvis;
+	g_fs->ensure_directory_exists(kSaveDir);
 	if (!(g_fs->file_exists(kCampVisFile))) {
 		// There is no campaigns.conf file - create one.
 		campvis.reset(new Profile(kCampVisFile.c_str()));

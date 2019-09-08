@@ -25,12 +25,14 @@
 
 #include <SDL_keycode.h>
 
+#include "graphic/toolbar_imageset.h"
+#include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "notifications/notifications.h"
-#include "profile/profile.h"
 #include "sound/note_sound.h"
 #include "ui_basic/box.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/chat_overlay.h"
@@ -116,7 +118,7 @@ public:
 	// Returns true if the buildhelp is currently displayed.
 	bool buildhelp() const;
 
-	// Sets if the buildhelp should be displayed. Will also call on_buildhelp_changed().
+	// Sets if the buildhelp should be displayed and then calls rebuild_showhide_menu
 	void show_buildhelp(bool t);
 
 	/**
@@ -171,6 +173,7 @@ public:
 	}
 
 	void toggle_minimap();
+	// Toggles the buildhelp and calls rebuild_showhide_menu
 	void toggle_buildhelp();
 
 	// Returns the list of landmarks that have been mapped to the keys 0-9
@@ -184,6 +187,16 @@ public:
 	}
 
 protected:
+	// For referencing the items in mapviewmenu_
+	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kDecreaseZoom, kResetZoom };
+
+	// Adds the mapviewmenu_ to the toolbar
+	void add_mapview_menu(MiniMapType minimap_type);
+	// Rebuilds the mapviewmenu_ according to current view settings
+	void rebuild_mapview_menu();
+	// Takes the appropriate action when an item in the mapviewmenu_ is selected
+	void mapview_menu_selected(MapviewMenuEntry entry);
+
 	/// Adds a toolbar button to the toolbar
 	/// \param image_basename:      File path for button image starting from 'images' and without
 	///                             file extension
@@ -197,12 +210,7 @@ protected:
 	                               UI::UniqueWindow::Registry* window = nullptr,
 	                               bool bind_default_toggle = false);
 
-	// Will be called whenever the buildhelp is changed with the new 'value'.
-	virtual void on_buildhelp_changed(bool value);
-
 	void hide_minimap();
-
-	MiniMap::Registry& minimap_registry();
 
 	void mainview_move();
 
@@ -231,16 +239,16 @@ protected:
 	const Image* get_sel_picture() {
 		return sel_.pic;
 	}
-	void adjust_toolbar_position() {
-		toolbar_.set_pos(Vector2i((get_inner_w() - toolbar_.get_w()) >> 1, get_inner_h() - 34));
-	}
+
+	// Sets the toolbar's position to the bottom middle and configures its background images
+	void finalize_toolbar();
 
 	ChatOverlay* chat_overlay() {
 		return chat_overlay_;
 	}
 
 	UI::Box* toolbar() {
-		return &toolbar_;
+		return &toolbar_.box;
 	}
 
 	// Returns the information which overlay text should currently be drawn.
@@ -267,6 +275,12 @@ protected:
 	/// Returns true if the current player is allowed to hear sounds from map objects on this field
 	virtual bool player_hears_field(const Widelands::Coords& coords) const = 0;
 
+	void set_toolbar_imageset(const ToolbarImageset& imageset);
+
+#ifndef NDEBUG  //  only in debug builds
+	UI::UniqueWindow::Registry debugconsole_;
+#endif
+
 private:
 	void play_sound_effect(const NoteSound& note) const;
 	void resize_chat_overlay();
@@ -274,6 +288,9 @@ private:
 	void roadb_remove_overlay();
 	void cmd_map_object(const std::vector<std::string>& args);
 	void cmd_lua(const std::vector<std::string>& args);
+
+	// Rebuilds the subclass' showhidemenu_ according to current map settings
+	virtual void rebuild_showhide_menu() = 0;
 
 	struct SelData {
 		SelData(const bool Freeze = false,
@@ -297,7 +314,27 @@ private:
 	MapView map_view_;
 	ChatOverlay* chat_overlay_;
 
-	UI::Box toolbar_;
+	/// A horizontal menu bar embellished with background graphics
+	struct Toolbar : UI::Panel {
+		Toolbar(UI::Panel* parent);
+
+		/// Sets the actual size and position of the toolbar
+		void finalize();
+		void draw(RenderTarget& dst) override;
+		void change_imageset(const ToolbarImageset& images);
+
+		/// A row of buttons and dropdown menus
+		UI::Box box;
+
+	private:
+		/// The set of background images
+		ToolbarImageset imageset;
+		/// How often the left and right images get repeated, calculated from the width of the box
+		int repeat;
+	} toolbar_;
+
+	// Map View menu on the toolbar
+	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;
 	// No unique_ptr on purpose: 'minimap_' is a UniqueWindow, its parent will
 	// delete it.
 	MiniMap* minimap_;
@@ -325,7 +362,6 @@ private:
 	Widelands::CoordPath* buildroad_;  //  path for the new road
 	Widelands::PlayerNumber road_build_player_;
 
-	UI::UniqueWindow::Registry debugconsole_;
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
 };

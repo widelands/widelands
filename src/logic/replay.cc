@@ -38,8 +38,9 @@
 namespace Widelands {
 
 // File format definitions
+constexpr uint32_t kReplayKnownToDesync = 0x2E21A100;
 constexpr uint32_t kReplayMagic = 0x2E21A101;
-constexpr uint8_t kCurrentPacketVersion = 2;
+constexpr uint8_t kCurrentPacketVersion = 3;
 constexpr uint32_t kSyncInterval = 200;
 
 enum { pkt_end = 2, pkt_playercommand = 3, pkt_syncreport = 4 };
@@ -93,13 +94,15 @@ ReplayReader::ReplayReader(Game& game, const std::string& filename) {
 
 	try {
 		const uint32_t magic = cmdlog_->unsigned_32();
-		if (magic == 0x2E21A100)
+		if (magic == kReplayKnownToDesync) {
 			// Note: This was never released as part of a build
 			throw wexception("%s is a replay from a version that is known to have desync "
 			                 "problems",
 			                 filename.c_str());
-		if (magic != kReplayMagic)
+		}
+		if (magic != kReplayMagic) {
 			throw wexception("%s apparently not a valid replay file", filename.c_str());
+		}
 
 		const uint8_t packet_version = cmdlog_->unsigned_8();
 		if (packet_version != kCurrentPacketVersion) {

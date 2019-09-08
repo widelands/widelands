@@ -312,6 +312,103 @@ std::string FileSystem::get_homedir() {
 	return homedir;
 }
 
+#ifdef USE_XDG
+/**
+ * Return $XDG_DATA_HOME/widelands. Falls back to $HOME/.local/share/widelands
+ * https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+ * Prioritises $HOME/.widelands if it exists.
+ */
+std::string FileSystem::get_userdatadir() {
+	std::string userdatadir = get_homedir();
+
+	// Use dotfolder for backwards compatibility if it exists.
+	RealFSImpl dot(userdatadir);
+	if (dot.is_directory(".widelands")) {
+		userdatadir = userdatadir + "/.widelands";
+	}
+#ifdef HAS_GETENV
+	else {
+		if (char const* const datahome = getenv("XDG_DATA_HOME")) {
+			userdatadir = std::string(datahome) + "/widelands";
+		} else {
+			// If XDG_DATA_HOME is not set, the default path is used.
+			userdatadir = userdatadir + "/.local/share/widelands";
+		}
+	}
+#else
+	else {
+		// Fallback to not dump all files into the current working dir.
+		userdatadir = userdatadir + "/.widelands";
+	}
+#endif
+
+	// Unlike the homedir function, this function includes the program name.
+	// This is handled in 'src/wlapplication.cc'.
+	return userdatadir;
+}
+
+/**
+ * Return $XDG_CONFIG_HOME/widelands. Falls back to $HOME/.config/widelands
+ * https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+ * Prioritises $HOME/.widelands if it exists.
+ */
+std::string FileSystem::get_userconfigdir() {
+	std::string userconfigdir = get_homedir();
+
+	// Use dotfolder for backwards compatibility if it exists.
+	RealFSImpl dot(userconfigdir);
+	if (dot.is_directory(".widelands")) {
+		userconfigdir = userconfigdir + "/.widelands";
+	}
+#ifdef HAS_GETENV
+	else {
+		if (char const* const confighome = getenv("XDG_CONFIG_HOME")) {
+			userconfigdir = std::string(confighome) + "/widelands";
+		} else {
+			// If XDG_CONFIG_HOME is not set, the default path is used.
+			userconfigdir = userconfigdir + "/.config/widelands";
+		}
+	}
+#else
+	else {
+		// Fallback to not dump all files into the current working dir.
+		userconfigdir = userconfigdir + "/.widelands";
+	}
+#endif
+
+	// Unlike the homedir function, this function includes the program name.
+	// This is handled in 'src/wlapplication.cc'.
+	return userconfigdir;
+}
+
+/**
+ * Return $XDG_DATA_DIRS. Falls back to /usr/local/share:/usr/share
+ * https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+ */
+std::vector<std::string> FileSystem::get_xdgdatadirs() {
+	std::vector<std::string> xdgdatadirs;
+	std::string environment;
+#ifdef HAS_GETENV
+	environment = getenv("XDG_DATA_DIRS");
+#endif
+	if (environment.empty()) {
+		environment = "/usr/local/share:/usr/share";
+	}
+
+	// https://stackoverflow.com/a/14266139
+	std::string token;
+	std::string delimiter = ":";
+	size_t pos = 0;
+	while ((pos = environment.find(delimiter)) != std::string::npos) {
+		token = environment.substr(0, pos);
+		xdgdatadirs.push_back(token);
+		environment.erase(0, pos + delimiter.length());
+	}
+	xdgdatadirs.push_back(environment);
+	return xdgdatadirs;
+}
+#endif
+
 // Returning a vector rather than a set because animations need the indices
 std::vector<std::string> FileSystem::get_sequential_files(const std::string& directory,
                                                           const std::string& basename,

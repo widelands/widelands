@@ -30,10 +30,10 @@
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
-#include "profile/profile.h"
 #include "random/random.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
+#include "wlapplication_options.h"
 
 namespace {
 
@@ -118,8 +118,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
 	   boost::bind(&FullscreenMenuInternetLobby::clicked_back, boost::ref(*this)));
 
 	// Set the texts and style of UI elements
-	Section& s = g_options.pull_section("global");  //  for playername
-	std::string server = s.get_string("servername", "");
+	const std::string server = get_config_string("servername", "");
 	servername_.set_text(server);
 	servername_.changed.connect(boost::bind(&FullscreenMenuInternetLobby::change_servername, this));
 
@@ -236,10 +235,10 @@ void FullscreenMenuInternetLobby::clicked_ok() {
 
 /// connects Widelands with the metaserver
 void FullscreenMenuInternetLobby::connect_to_metaserver() {
-	Section& s = g_options.pull_section("global");
-	const std::string& metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
-	uint32_t port = s.get_natural("metaserverport", kInternetGamingPort);
-	std::string auth = is_registered_ ? password_ : s.get_string("uuid");
+	const std::string& metaserver =
+	   get_config_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+	uint32_t port = get_config_natural("metaserverport", kInternetGamingPort);
+	std::string auth = is_registered_ ? password_ : get_config_string("uuid", nullptr);
 	assert(!auth.empty());
 	InternetGaming::ref().login(nickname_, auth, is_registered_, metaserver, port);
 }
@@ -256,17 +255,18 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 
 	if (games != nullptr) {  // If no communication error occurred, fill the list.
 		for (const InternetGame& game : *games) {
-			const Image* pic;
 			if (game.connectable == INTERNET_GAME_SETUP && game.build_id == localbuildid) {
 				// only clients with the same build number are displayed
-				pic = g_gr->images().get("images/ui_basic/continue.png");
-				opengames_list_.add(game.name, game, pic, false, game.build_id);
+				opengames_list_.add(richtext_escape(game.name), game,
+				                    g_gr->images().get("images/ui_basic/continue.png"), false,
+				                    game.build_id);
 			} else if (game.connectable == INTERNET_GAME_SETUP &&
 			           game.build_id.compare(0, 6, "build-") != 0 &&
 			           localbuildid.compare(0, 6, "build-") != 0) {
 				// only development clients are allowed to see games openend by such
-				pic = g_gr->images().get("images/ui_basic/different.png");
-				opengames_list_.add(game.name, game, pic, false, game.build_id);
+				opengames_list_.add(richtext_escape(game.name), game,
+				                    g_gr->images().get("images/ui_basic/different.png"), false,
+				                    game.build_id);
 			}
 		}
 	}
@@ -465,7 +465,7 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 		}
 	}
 
-	g_options.pull_section("global").set_string("servername", servername_ui);
+	set_config_string("servername", servername_ui);
 
 	// Set up the game
 	InternetGaming::ref().set_local_servername(servername_ui);

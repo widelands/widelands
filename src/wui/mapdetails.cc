@@ -42,6 +42,7 @@ MapDetails::MapDetails(
      style_(style),
      padding_(4),
      main_box_(this, 0, 0, UI::Box::Vertical, 0, 0, 0),
+     name_(""),
      name_label_(&main_box_,
                  0,
                  0,
@@ -86,6 +87,7 @@ void MapDetails::layout() {
 
 void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	clear();
+	name_ = mapdata.name;
 	// Show directory information
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
 		name_label_.set_text(

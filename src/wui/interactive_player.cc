@@ -39,7 +39,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
-#include "profile/profile.h"
 #include "ui_basic/unique_window.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
@@ -48,8 +47,6 @@
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_message_menu.h"
 #include "wui/game_objectives_menu.h"
-#include "wui/game_options_menu.h"
-#include "wui/game_statistics_menu.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/seafaring_statistics_menu.h"
 #include "wui/stock_menu.h"
@@ -161,36 +158,32 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
    : InteractiveGameBase(g, global_s, NONE, multiplayer),
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
      flag_to_connect_(Widelands::Coords::null()),
+     statisticsmenu_(toolbar(),
+                     "dropdown_menu_statistics",
+                     0,
+                     0,
+                     34U,
+                     10,
+                     34U,
+                     /** TRANSLATORS: Title for the statistics menu button in the game */
+                     _("Statistics"),
+                     UI::DropdownType::kPictorialMenu,
+                     UI::PanelStyle::kWui,
+                     UI::ButtonStyle::kWuiPrimary),
      grid_marker_pic_(g_gr->images().get("images/wui/overlays/grid_marker.png")) {
-	add_toolbar_button(
-	   "wui/menus/menu_options_menu", "options_menu", _("Main menu"), &options_, true);
-	options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
-
-	add_toolbar_button(
-	   "wui/menus/menu_toggle_menu", "statistics_menu", _("Statistics"), &statisticsmenu_, true);
-	statisticsmenu_.open_window = [this] {
-		new GameStatisticsMenu(*this, statisticsmenu_, main_windows_);
-	};
+	add_main_menu();
 
 	set_display_flag(InteractiveBase::dfShowWorkareaOverlap, true);  // enable by default
 
 	toolbar()->add_space(15);
 
-	add_toolbar_button(
-	   "wui/menus/menu_toggle_minimap", "minimap", _("Minimap"), &minimap_registry(), true);
-	minimap_registry().open_window = [this] { toggle_minimap(); };
+	add_mapview_menu(MiniMapType::kStaticViewWindow);
+	add_showhide_menu();
+	add_gamespeed_menu();
 
-	toggle_buildhelp_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show building spaces (on/off)"));
-	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
-	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
-	reset_zoom_->sigclicked.connect([this] {
-		map_view()->zoom_around(
-		   1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), MapView::Transition::Smooth);
-	});
 	toolbar()->add_space(15);
 	if (multiplayer) {
-		toggle_chat_ = add_toolbar_button("wui/menus/menu_chat", "chat", _("Chat"), &chat_, true);
+		toggle_chat_ = add_toolbar_button("wui/menus/chat", "chat", _("Chat"), &chat_, true);
 		chat_.open_window = [this] {
 			if (chat_provider_) {
 				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
@@ -199,13 +192,16 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		toolbar()->add_space(15);
 	}
 
-	add_toolbar_button(
-	   "wui/menus/menu_objectives", "objectives", _("Objectives"), &objectives_, true);
+	add_statistics_menu();
+
+	add_toolbar_button("wui/menus/objectives", "objectives", _("Objectives"), &objectives_, true);
 	objectives_.open_window = [this] { new GameObjectivesMenu(this, objectives_); };
 
-	toggle_message_menu_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_oldmessage_menu", "messages", _("Messages"), &message_menu_, true);
+	toggle_message_menu_ =
+	   add_toolbar_button("wui/menus/message_old", "messages", _("Messages"), &message_menu_, true);
 	message_menu_.open_window = [this] { new GameMessageMenu(*this, message_menu_); };
+
+	toolbar()->add_space(15);
 
 	add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &encyclopedia_, true);
 	encyclopedia_.open_window = [this] {
@@ -217,13 +213,111 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		node_action(node_and_triangle);
 	});
 
-	adjust_toolbar_position();
-
-	main_windows_.stock.open_window = [this] { new StockMenu(*this, main_windows_.stock); };
+	finalize_toolbar();
 
 #ifndef NDEBUG  //  only in debug builds
 	addCommand("switchplayer", boost::bind(&InteractivePlayer::cmdSwitchPlayer, this, _1));
 #endif
+
+	map_options_subscriber_ = Notifications::subscribe<NoteMapOptions>(
+	   [this](const NoteMapOptions&) { rebuild_statistics_menu(); });
+}
+
+void InteractivePlayer::add_statistics_menu() {
+	statisticsmenu_.set_image(g_gr->images().get("images/wui/menus/statistics.png"));
+	toolbar()->add(&statisticsmenu_);
+
+	menu_windows_.stats_seafaring.open_window = [this] {
+		new SeafaringStatisticsMenu(*this, menu_windows_.stats_seafaring);
+	};
+
+	menu_windows_.stats_stock.open_window = [this] {
+		new StockMenu(*this, menu_windows_.stats_stock);
+	};
+
+	menu_windows_.stats_buildings.open_window = [this] {
+		new BuildingStatisticsMenu(*this, menu_windows_.stats_buildings);
+	};
+
+	menu_windows_.stats_wares.open_window = [this] {
+		new WareStatisticsMenu(*this, menu_windows_.stats_wares);
+	};
+
+	menu_windows_.stats_general.open_window = [this] {
+		new GeneralStatisticsMenu(*this, menu_windows_.stats_general);
+	};
+
+	// NoteMapOptions takes care of the rebuilding
+
+	statisticsmenu_.selected.connect(
+	   [this] { statistics_menu_selected(statisticsmenu_.get_selected()); });
+}
+
+void InteractivePlayer::rebuild_statistics_menu() {
+	statisticsmenu_.clear();
+
+	if (egbase().map().allows_seafaring()) {
+		/** TRANSLATORS: An entry in the game's statistics menu */
+		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring,
+		                    g_gr->images().get("images/wui/menus/statistics_seafaring.png"), false,
+		                    "", "e");
+	}
+
+	/** TRANSLATORS: An entry in the game's statistics menu */
+	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock,
+	                    g_gr->images().get("images/wui/menus/statistics_stock.png"), false, "", "i");
+
+	/** TRANSLATORS: An entry in the game's statistics menu */
+	statisticsmenu_.add(_("Buildings"), StatisticsMenuEntry::kBuildings,
+	                    g_gr->images().get("images/wui/menus/statistics_buildings.png"), false, "",
+	                    "b");
+
+	/** TRANSLATORS: An entry in the game's statistics menu */
+	statisticsmenu_.add(_("Wares"), StatisticsMenuEntry::kWare,
+	                    g_gr->images().get("images/wui/menus/statistics_wares.png"));
+
+	/** TRANSLATORS: An entry in the game's statistics menu */
+	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral,
+	                    g_gr->images().get("images/wui/menus/statistics_general.png"));
+}
+
+void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
+	switch (entry) {
+	case StatisticsMenuEntry::kGeneral: {
+		menu_windows_.stats_general.toggle();
+	} break;
+	case StatisticsMenuEntry::kWare: {
+		menu_windows_.stats_wares.toggle();
+	} break;
+	case StatisticsMenuEntry::kBuildings: {
+		menu_windows_.stats_buildings.toggle();
+	} break;
+	case StatisticsMenuEntry::kStock: {
+		menu_windows_.stats_stock.toggle();
+	} break;
+	case StatisticsMenuEntry::kSeafaring: {
+		if (egbase().map().allows_seafaring()) {
+			menu_windows_.stats_seafaring.toggle();
+		}
+	} break;
+	}
+	statisticsmenu_.toggle();
+}
+
+void InteractivePlayer::rebuild_showhide_menu() {
+	InteractiveGameBase::rebuild_showhide_menu();
+
+	showhidemenu_.add(
+	   get_display_flag(dfShowWorkareaOverlap) ?
+	      /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
+	       * are highlighted */
+	      _("Hide Workarea Overlaps") :
+	      /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
+	       * are highlighted */
+	      _("Show Workarea Overlaps"),
+	   ShowHideEntry::kWorkareaOverlap,
+	   g_gr->images().get("images/wui/menus/show_workarea_overlap.png"), false,
+	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"), "w");
 }
 
 void InteractivePlayer::think() {
@@ -255,11 +349,11 @@ void InteractivePlayer::think() {
 		toggle_chat_->set_enabled(chat_provider_);
 	}
 	{
-		char const* msg_icon = "images/wui/menus/menu_toggle_oldmessage_menu.png";
+		char const* msg_icon = "images/wui/menus/message_old.png";
 		std::string msg_tooltip = _("Messages");
 		if (uint32_t const nr_new_messages =
 		       player().messages().nr_messages(Widelands::Message::Status::kNew)) {
-			msg_icon = "images/wui/menus/menu_toggle_newmessage_menu.png";
+			msg_icon = "images/wui/menus/message_new.png";
 			msg_tooltip =
 			   (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) %
 			    nr_new_messages)
@@ -427,11 +521,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_i:
-			main_windows_.stock.toggle();
-			return true;
-
-		case SDLK_m:
-			minimap_registry().toggle();
+			menu_windows_.stats_stock.toggle();
 			return true;
 
 		case SDLK_n:
@@ -451,26 +541,26 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 
 		case SDLK_b:
-			if (main_windows_.building_stats.window == nullptr) {
-				new BuildingStatisticsMenu(*this, main_windows_.building_stats);
+			if (menu_windows_.stats_buildings.window == nullptr) {
+				new BuildingStatisticsMenu(*this, menu_windows_.stats_buildings);
 			} else {
-				main_windows_.building_stats.toggle();
+				menu_windows_.stats_buildings.toggle();
 			}
 			return true;
 
 		case SDLK_e:
 			if (game().map().allows_seafaring()) {
-				if (main_windows_.seafaring_stats.window == nullptr) {
-					new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
+				if (menu_windows_.stats_seafaring.window == nullptr) {
+					new SeafaringStatisticsMenu(*this, menu_windows_.stats_seafaring);
 				} else {
-					main_windows_.seafaring_stats.toggle();
+					menu_windows_.stats_seafaring.toggle();
 				}
 			}
 			return true;
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				new GameMainMenuSaveGame(*this, main_windows_.savegame);
+				new GameMainMenuSaveGame(*this, menu_windows_.savegame);
 			else
 				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
 			return true;
@@ -520,12 +610,20 @@ void InteractivePlayer::set_player_number(uint32_t const n) {
 void InteractivePlayer::cleanup_for_load() {
 }
 
+void InteractivePlayer::postload() {
+	InteractiveGameBase::postload();
+
+	ToolbarImageset* imageset = player().tribe().toolbar_image_set();
+	if (imageset != nullptr) {
+		set_toolbar_imageset(*imageset);
+	}
+}
+
 bool InteractivePlayer::player_hears_field(const Widelands::Coords& coords) const {
 	const Widelands::Player& plr = player();
 	if (plr.see_all()) {
 		return true;
 	}
-
 	const Widelands::Map& map = egbase().map();
 	const Widelands::Player::Field& player_field =
 	   plr.fields()[map.get_index(coords, map.get_width())];
@@ -548,7 +646,7 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 	   str(boost::format("Switching from #%1% to #%2%.") % static_cast<int>(player_number_) % n));
 	player_number_ = n;
 
-	if (UI::UniqueWindow* const building_statistics_window = main_windows_.building_stats.window) {
+	if (UI::UniqueWindow* const building_statistics_window = menu_windows_.stats_buildings.window) {
 		dynamic_cast<BuildingStatisticsMenu&>(*building_statistics_window).update();
 	}
 }

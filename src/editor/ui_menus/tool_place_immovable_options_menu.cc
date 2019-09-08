@@ -48,7 +48,7 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent, const ImmovableDescr&
 
 EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
    EditorInteractive& parent, EditorPlaceImmovableTool& tool, UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Immovables")) {
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Immovables"), tool) {
 	const Widelands::World& world = parent.egbase().world();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>(
