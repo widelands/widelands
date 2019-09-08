@@ -19,13 +19,16 @@
 
 #include "wlapplication_options.h"
 
+#include <cassert>
+#include <memory>
+
 #include "base/log.h"
 #include "io/filesystem/disk_filesystem.h"
-#include "io/profile.h"
 #include "logic/filesystem_constants.h"
-#include "wlapplication.h"
 
 static Profile g_options(Profile::err_log);
+
+static std::unique_ptr<FileSystem> config_dir = nullptr;
 
 void check_config_used() {
 	g_options.check_used();
@@ -110,26 +113,21 @@ void set_config_string(const std::string& section,
 	g_options.pull_section(section.c_str()).set_string(name.c_str(), value.c_str());
 }
 
-void read_config(WLApplication* wlapplication) {
-#ifdef USE_XDG
-	RealFSImpl dir(wlapplication->get_userconfigdir());
-	dir.ensure_directory_exists(".");
-	log("Set configuration file: %s/%s\n", wlapplication->get_userconfigdir().c_str(),
-	    kConfigFile.c_str());
-	g_options.read(kConfigFile.c_str(), "global", dir);
-#else
-	g_options.read(kConfigFile.c_str(), "global");
-#endif
+void set_config_directory(const std::string& userconfigdir) {
+	config_dir.reset(new RealFSImpl(userconfigdir));
+	config_dir->ensure_directory_exists(".");
+	log("Set configuration file: %s/%s\n", userconfigdir.c_str(), kConfigFile.c_str());
 }
 
-void write_config(WLApplication* wlapplication) {
+void read_config() {
+	assert(config_dir != nullptr);
+	g_options.read(kConfigFile.c_str(), "global", *config_dir);
+}
+
+void write_config() {
+	assert(config_dir != nullptr);
 	try {  //  overwrite the old config file
-#ifdef USE_XDG
-		RealFSImpl dir(wlapplication->get_userconfigdir());
-		g_options.write(kConfigFile.c_str(), true, dir);
-#else
-		g_options.write(kConfigFile.c_str(), true);
-#endif
+		g_options.write(kConfigFile.c_str(), true, *config_dir);
 	} catch (const std::exception& e) {
 		log("WARNING: could not save configuration: %s\n", e.what());
 	} catch (...) {
