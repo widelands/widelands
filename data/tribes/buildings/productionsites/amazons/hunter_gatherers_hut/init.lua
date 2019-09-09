@@ -32,7 +32,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       collects_ware_from_map = "fish",
-      prohibited_till = 480
+      basic_amount = 1,
    },
 
    indicate_workarea_overlaps = {

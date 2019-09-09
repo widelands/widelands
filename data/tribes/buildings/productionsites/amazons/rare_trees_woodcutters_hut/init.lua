@@ -32,7 +32,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-
+      collects_ware_from_map = "ironwood",
    },
 
    working_positions = {

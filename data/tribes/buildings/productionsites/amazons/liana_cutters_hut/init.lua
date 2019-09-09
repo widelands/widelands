@@ -40,7 +40,8 @@ tribes:new_productionsite_type {
    aihints = {
       very_weak_ai_limit = 1,
       weak_ai_limit = 2,
-      basic_amount = 1,
+      basic_amount = 2,
+      collects_ware_from_map = "liana"
    },
 
    working_positions = {
