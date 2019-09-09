@@ -50,7 +50,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "coal", amount = 3 },
+      { name = "charcoal", amount = 3 },
       { name = "bread_amazons", amount = 6 },
       { name = "fish", amount = 6 },
       { name = "meat", amount = 6 },
@@ -74,7 +74,7 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 33
             "return=skipped unless economy needs ration",
-            "consume=bread_amazons:2 fish,meat:2 coal",
+            "consume=bread_amazons:2 fish,meat:2 charcoal",
             "sleep=5000",
             "animate=working 18000",
             "sleep=10000",

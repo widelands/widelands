@@ -47,7 +47,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "coal", amount = 8 },
+      { name = "charcoal", amount = 8 },
       { name = "gold_dust", amount = 8 },
    },
    outputs = {
@@ -68,7 +68,7 @@ tribes:new_productionsite_type {
          descname = _"smelting gold",
          actions = {
             "return=skipped unless economy needs gold",
-            "consume=coal gold_dust",
+            "consume=charcoal gold_dust",
             "sleep=30000",
             "animate=working_gold 42000",
             "produce=gold"
