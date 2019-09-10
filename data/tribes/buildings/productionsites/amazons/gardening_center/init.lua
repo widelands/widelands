@@ -33,12 +33,17 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      supports_production_of = { "balsa", "rubber", "ironwood" },
+      --supports_production_of = { "balsa", "rubber", "ironwood" },
       prohibited_till = 460
    },
 
    working_positions = {
       amazons_jungle_master = 1
+   },
+
+   inputs = {
+      { name = "charcoal", amount = 3 },
+      { name = "fish", amount = 3 },
    },
 
    indicate_workarea_overlaps = {
@@ -48,6 +53,20 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
+         -- TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
+         descname = _"enhancing the fertility of land",
+         actions = {
+            "consume=charcoal fish",
+            "call=terraform",
+            "call=terraform",
+            "call=terraform",
+            "call=terraform",
+            "call=terraform",
+            "call=terraform",
+            "return=no_stats"
+         }
+      },
+      terraform = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
          descname = _"enhancing the fertility of land",
          actions = {

@@ -33,6 +33,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       collects_ware_from_map = "ironwood",
+      requires_supporters = true,
    },
 
    working_positions = {
@@ -43,7 +44,6 @@ tribes:new_productionsite_type {
       "ironwood",
       "balsa",
       "rubber",
-      "log"
    },
 
    indicate_workarea_overlaps = {

@@ -8,10 +8,10 @@ tribes:new_ware_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-      amazons = 20
+      amazons = 30
    },
    preciousness = {
-      amazons = 7
+      amazons = 40
    },
 
    animations = {

@@ -122,5 +122,5 @@ tribes:new_trainingsite_type {
    },
 
    soldier_capacity = 8,
-   trainer_patience = 3
+   trainer_patience = 9
 }

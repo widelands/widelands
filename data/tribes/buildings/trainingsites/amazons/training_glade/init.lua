@@ -55,9 +55,9 @@ tribes:new_trainingsite_type {
    },
 
    inputs = {
-      { name = "fish", amount = 4 },
-      { name = "meat", amount = 4 },
-      { name = "bread_amazons", amount = 2 },
+      { name = "fish", amount = 6 },
+      { name = "meat", amount = 6 },
+      { name = "bread_amazons", amount = 5 },
       { name = "chocolate", amount = 5 },
       { name = "boots_sturdy", amount = 2 },
       { name = "boots_swift", amount = 2 },
@@ -242,5 +242,5 @@ tribes:new_trainingsite_type {
    },
 
    soldier_capacity = 6,
-   trainer_patience = 3
+   trainer_patience = 11
 }

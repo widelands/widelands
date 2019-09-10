@@ -30,7 +30,8 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      collects_ware_from_map = "log"
+      collects_ware_from_map = "log",
+      supports_production_of = { "liana" },
    },
 
    working_positions = {

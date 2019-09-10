@@ -32,7 +32,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       collects_ware_from_map = "water",
-      basic_amount = 1
+      needs_water = true,
    },
 
    working_positions = {

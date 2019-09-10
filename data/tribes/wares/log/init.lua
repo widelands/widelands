@@ -9,7 +9,7 @@ tribes:new_ware_type {
    icon = dirname .. "menu.png",
    default_target_quantity = {},
    preciousness = {
-      amazons = 14,
+      amazons = 24,
       atlanteans = 14,
       barbarians = 14,
       frisians = 4,

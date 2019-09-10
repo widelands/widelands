@@ -11,7 +11,7 @@ tribes:new_ware_type {
       amazons = 40
    },
    preciousness = {
-      amazons = 10
+      amazons = 50
    },
 
    animations = {

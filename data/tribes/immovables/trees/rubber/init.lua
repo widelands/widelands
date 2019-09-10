@@ -92,7 +92,7 @@ tribes:new_immovable_type{
    icon = dirname .. "old/idle_0.png",
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "tree_rubber" },
+   attributes = { "tree_rubber", "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       program = {

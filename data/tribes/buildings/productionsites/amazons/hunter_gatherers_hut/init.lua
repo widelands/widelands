@@ -32,7 +32,9 @@ tribes:new_productionsite_type {
 
    aihints = {
       collects_ware_from_map = "fish",
-      basic_amount = 1,
+      needs_water = true,
+      requires_supporters = true,
+      --basic_amount = 1,
    },
 
    indicate_workarea_overlaps = {
@@ -45,8 +47,8 @@ tribes:new_productionsite_type {
    },
 
    outputs = {
-      "meat",
-      "fish"
+      "fish",
+      "meat"
    },
 
    programs = {
