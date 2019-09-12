@@ -235,7 +235,7 @@ tribes:new_trainingsite_type {
             "animate=working 22800",
             "checksoldier=soldier defense 1", -- Because the soldier can be expelled by the player
             "consume=protector_padded bread_amazons chocolate fish,meat",
-            "train=soldier health 1 2",
+            "train=soldier defense 1 2",
 
          }
       },

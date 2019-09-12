@@ -47,11 +47,11 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "ironwood", amount = 4 },
-      { name = "balsa", amount = 4 },
-      { name = "rubber", amount = 8 },
-      { name = "rope", amount = 2 },
-      { name = "gold", amount = 2 },
+      { name = "ironwood", amount = 2 },
+      { name = "balsa", amount = 6 },
+      { name = "rubber", amount = 9 },
+      { name = "rope", amount = 6 },
+      { name = "gold", amount = 3 },
    },
    outputs = {
       "tunic",

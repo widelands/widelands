@@ -56,8 +56,23 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _"gathering",
          actions = {
+            "call=hunt",
+            "call=fish",
+            "return=no_stats",
+         }
+      },
+      hunt = {
+         -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
+         descname = _"gathering meat",
+         actions = {
             "callworker=hunt",
             "sleep=30000",
+         }
+      },
+      fish = {
+         -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
+         descname = _"gathering fish",
+         actions = {
             "callworker=fish",
             "sleep=30000",
          }

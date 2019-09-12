@@ -51,8 +51,8 @@ tribes:new_productionsite_type {
 
    inputs = {
       { name = "granite", amount = 7 },
-      { name = "log", amount = 5 },
-      { name = "ironwood", amount = 3 },
+      { name = "log", amount = 6 },
+      { name = "ironwood", amount = 5 },
    },
 
    outputs = {
@@ -222,7 +222,7 @@ tribes:new_productionsite_type {
          descname = _"making a hardened spear",
          actions = {
             "return=skipped unless economy needs spear_hardened",
-            "consume=ironwood:2 granite",
+            "consume=ironwood log granite",
             "sleep=32000",
             "animate=working 35000",
             "produce=spear_hardened"
