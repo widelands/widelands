@@ -526,27 +526,39 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 // like farm fileds. So our only option seems to be to keep all farm
 // fields, trees, rocks and such on triangles and keep the nodes
 // passable. See code structure issue #1096824.
+//
+// If landbased_ is false, the behaviour is modified to instead accept the node
+// only if *at least one* adjacent triangle has MOVECAPS_SWIM.
 struct FindNodeSpace {
-	explicit FindNodeSpace(BaseImmovable* const ignoreimm) : ignoreimmovable(ignoreimm) {
+	explicit FindNodeSpace(BaseImmovable* const ignoreimm, bool land) : ignore_immovable_(ignoreimm), landbased_(land) {
 	}
 
 	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
-		if (!(coords.field->nodecaps() & MOVECAPS_WALK))
+		if (!(coords.field->nodecaps() & MOVECAPS_WALK)) {
 			return false;
+		}
 
 		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			FCoords const neighb = egbase.map().get_neighbour(coords, dir);
-
-			if (!(neighb.field->nodecaps() & MOVECAPS_WALK) &&
-			    neighb.field->get_immovable() != ignoreimmovable)
-				return false;
+			if (neighb.field->get_immovable() == ignore_immovable) {
+				continue;
+			}
+			if (landbased_) {
+				if (!(neighb.field->nodecaps() & MOVECAPS_WALK))
+					return false;
+			} else {
+				if (neighb.field->nodecaps() & MOVECAPS_SWIM) {
+					return true;
+				}
+			}
 		}
 
-		return true;
+		return landbased_;
 	}
 
 private:
-	BaseImmovable* ignoreimmovable;
+	BaseImmovable* ignore_immovable_;
+	bool landbased_;
 };
 
 bool Worker::run_findspace(Game& game, State& state, const Action& action) {
@@ -559,7 +571,8 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	Area<FCoords> area(map.get_fcoords(get_position()), action.iparam1);
 
 	FindNodeAnd functor;
-	functor.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
+	const FindNodeSize::Size findnodesize = static_cast<FindNodeSize::Size>(action.iparam2);
+	functor.add(FindNodeSize(findnodesize));
 	if (action.sparam1.size()) {
 		if (action.iparam4)
 			functor.add(FindNodeResourceBreedable(world.get_resource(action.sparam1.c_str())));
@@ -571,7 +584,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 		functor.add(FindNodeImmovableAttribute(action.iparam5), true);
 
 	if (action.iparam3)
-		functor.add(FindNodeSpace(get_location(game)));
+		functor.add(FindNodeSpace(get_location(game), findnodesize != FindNodeSize::Size::sizeSwim));
 
 	if (action.iparam7)
 		functor.add(FindNodeTerraform());
@@ -593,7 +606,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 				functorAnyFull.add(FindNodeImmovableAttribute(action.iparam5), true);
 
 			if (action.iparam3)
-				functorAnyFull.add(FindNodeSpace(get_location(game)));
+				functorAnyFull.add(FindNodeSpace(get_location(game), findnodesize != FindNodeSize::Size::sizeSwim));
 
 			// If there are fields full of fish, we change the type of notification
 			if (map.find_reachable_fields(game, area, &list, cstep, functorAnyFull)) {
