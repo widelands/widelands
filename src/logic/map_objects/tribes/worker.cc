@@ -540,7 +540,7 @@ struct FindNodeSpace {
 
 		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			FCoords const neighb = egbase.map().get_neighbour(coords, dir);
-			if (neighb.field->get_immovable() == ignore_immovable) {
+			if (neighb.field->get_immovable() == ignore_immovable_) {
 				continue;
 			}
 			if (landbased_) {
