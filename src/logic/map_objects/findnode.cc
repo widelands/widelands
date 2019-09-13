@@ -78,7 +78,7 @@ bool FindNodeSize::accept(const EditorGameBase& egbase, const FCoords& coord) co
 		return (nodecaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_MEDIUM;
 	case sizeBig:
 		return (nodecaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_BIG;
-	case sizeSwim:
+	case sizeSwim: {
 		const World& world = egbase.world();
 		return (world.terrain_descr(coord.field->terrain_d()).get_is() & TerrainDescription::Is::kWater) ||
 				(world.terrain_descr(coord.field->terrain_r()).get_is() & TerrainDescription::Is::kWater) ||
@@ -86,6 +86,7 @@ bool FindNodeSize::accept(const EditorGameBase& egbase, const FCoords& coord) co
 				(world.terrain_descr(map.tl_n(coord).field->terrain_r()).get_is() & TerrainDescription::Is::kWater) ||
 				(world.terrain_descr(map.tr_n(coord).field->terrain_d()).get_is() & TerrainDescription::Is::kWater) ||
 				(world.terrain_descr(map.l_n(coord).field->terrain_r()).get_is() & TerrainDescription::Is::kWater);
+	}
 	case sizeAny:
 		return true;
 	}
