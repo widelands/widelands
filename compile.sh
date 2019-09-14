@@ -331,6 +331,13 @@ if ! [ -f src/wlapplication.cc ] ; then
   exit 1
 fi
 
+STATUS="$(git status)"
+if [[ "${STATUS}" != *"nothing to commit, working tree clean"* ]]; then
+  echo "You don't appear to be using Git, or your working tree is not clean. Aborting to prevent accidental changes"
+  echo "${STATUS}"
+  exit 1
+fi
+
 # Checkout master and pull latest version
 git checkout master
 git pull https://github.com/widelands/widelands.git master
