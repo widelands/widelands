@@ -24,3 +24,4 @@ wl_library(ai
     logic_map_objects
     scripting_lua_table
 )
+add_subdirectory(test)

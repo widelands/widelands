@@ -39,7 +39,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 4;
+constexpr uint16_t kCurrentPacketVersion = 5;
 
 void MapRoaddataPacket::read(FileSystem& fs,
                              EditorGameBase& egbase,
@@ -58,7 +58,8 @@ void MapRoaddataPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		// TODO(Nordfriese): Savegame compatibility
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
 			const Map& map = egbase.map();
 			PlayerNumber const nr_players = map.get_nrplayers();
 			while (!fr.end_of_file()) {
@@ -76,7 +77,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					road.set_owner(egbase.get_player(player_index));
 					road.wallet_ = fr.unsigned_32();
 					road.last_wallet_charge_ = fr.unsigned_32();
-					road.type_ = static_cast<RoadType>(fr.unsigned_8());
+					road.type_ = static_cast<RoadType>(packet_version >= 5 ? fr.unsigned_8() : fr.unsigned_32());
 					{
 						uint32_t const flag_0_serial = fr.unsigned_32();
 						try {
@@ -109,7 +110,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 							throw GameDataError("step #%" PRIuS ": %s", nr_steps - i, e.what());
 						}
 					road.set_path(egbase, p);
-					road.idle_index_ = p.get_nsteps() / 2;
+					road.idle_index_ = packet_version >= 5 ? p.get_nsteps() / 2 : fr.unsigned_32();
 
 					//  Now that all rudimentary data is set, init this road. Then
 					//  overwrite the initialization values.

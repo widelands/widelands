@@ -41,13 +41,11 @@ bool write_expedition_ship_economy(Economy* economy, const Map& map, FileWrite* 
 		Bob* bob = field->get_first_bob();
 		while (bob) {
 			if (upcast(Ship const, ship, bob)) {
-// NOCOM(codereview) Add savegame compatibility
-// NOCOM(Nordfriese): See reply in MapFlagPacket
 				if (ship->get_economy(economy->type()) == economy) {
 					// TODO(sirver): the 0xffffffff is ugly and fragile.
 					fw->unsigned_32(0xffffffff);  // Sentinel value.
 					fw->unsigned_32(field - &map[0]);
-					EconomyDataPacket d(economy);
+					EconomyDataPacket d(economy, nullptr);
 					d.write(*fw);
 					return true;
 				}
@@ -60,7 +58,7 @@ bool write_expedition_ship_economy(Economy* economy, const Map& map, FileWrite* 
 
 }  // namespace
 
-void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
+void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader* mol) {
 	try {
 		const Map& map = game.map();
 		MapIndex const max_index = map.max_index();
@@ -69,18 +67,19 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 		FileRead fr;
 		fr.open(fs, "binary/player_economies");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 5) {
 			iterate_players_existing(p, nr_players, game, player) try {
 				const size_t num_economies = fr.unsigned_32();
 				for (uint32_t i = 0; i < num_economies; ++i) {
-					WareWorker type = fr.unsigned_8() ? wwWORKER : wwWARE;
+					WareWorker type = packet_version >= 6 && fr.unsigned_8() ? wwWORKER : wwWARE;
 					uint32_t value = fr.unsigned_32();
 					if (value < 0xffffffff) {
 						if (upcast(Flag const, flag, map[value].get_immovable())) {
 							try {
 								assert(flag->get_economy(type)->owner().player_number() ==
 								       player->player_number());
-								EconomyDataPacket d(flag->get_economy(type));
+								// TODO(Nordfriese): Savegame compatibility
+								EconomyDataPacket d(flag->get_economy(type), packet_version >= 6 ? nullptr : mol);
 								d.read(fr);
 							} catch (const GameDataError& e) {
 								throw GameDataError(
@@ -101,7 +100,8 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 										assert(ship->get_economy(type));
 										assert(ship->get_economy(type)->owner().player_number() ==
 										       player->player_number());
-										EconomyDataPacket d(ship->get_economy(type));
+										EconomyDataPacket d(ship->get_economy(type),
+												packet_version >= 6 ? nullptr : mol);
 										d.read(fr);
 										read_this_economy = true;
 										break;
@@ -147,7 +147,7 @@ void GamePlayerEconomiesPacket::write(FileSystem& fs, Game& game, MapObjectSaver
 			Flag* arbitrary_flag = economy.second->get_arbitrary_flag();
 			if (arbitrary_flag != nullptr) {
 				fw.unsigned_32(map.get_fcoords(arbitrary_flag->get_position()).field - &map[0]);
-				EconomyDataPacket d(economy.second.get());
+				EconomyDataPacket d(economy.second.get(), nullptr);
 				d.write(fw);
 				continue;
 			}

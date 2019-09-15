@@ -158,7 +158,7 @@ void MapSaver::save() {
 	log("Writing Map Version ... ");
 	{
 		MapVersionPacket p;
-		p.write(fs_, egbase_, *mos_);
+		p.write(fs_, egbase_);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 

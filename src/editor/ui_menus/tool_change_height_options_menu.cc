@@ -32,7 +32,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
    EditorInteractive& parent,
    EditorIncreaseHeightTool& increase_tool,
    UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 350, 100, _("Height Tools Options")),
+   : EditorToolOptionsMenu(parent, registry, 350, 100, _("Height Tools Options"), increase_tool),
      increase_tool_(increase_tool),
      box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
      change_by_(&box_,

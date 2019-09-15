@@ -73,7 +73,6 @@ add_subdirectory(logic)
 add_subdirectory(map_io)
 add_subdirectory(network)
 add_subdirectory(notifications)
-add_subdirectory(profile)
 add_subdirectory(random)
 add_subdirectory(scripting)
 add_subdirectory(sound)
@@ -117,7 +116,6 @@ wl_library(widelands_ball_of_mud
     logic_single_player_game_settings
     map_io_map_loader
     network
-    profile
     random
     sound
     ui_basic
@@ -128,8 +126,24 @@ wl_library(widelands_ball_of_mud
     ui_fsmenu_misc
     ui_fsmenu_network
     ui_fsmenu_options
+    widelands_options
     wui
 )
+
+wl_library(widelands_options
+  SRCS
+    wlapplication_options.cc
+    wlapplication_options.h
+  USES_SDL2
+  USES_SDL2_IMAGE
+  USES_SDL2_TTF
+  DEPENDS
+    base_log
+    io_filesystem
+    io_profile
+    logic_filesystem_constants
+)
+
 
 # TODO(sirver): Split into libs with useful names.
 wl_library(helper

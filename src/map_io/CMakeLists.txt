@@ -109,6 +109,7 @@ wl_library(map_io
     graphic_surface
     io_fileread
     io_filesystem
+    io_profile
     logic
     logic_constants
     logic_exceptions
@@ -117,6 +118,5 @@ wl_library(map_io
     logic_objectives
     logic_widelands_geometry
     logic_widelands_geometry_io
-    profile
     scripting_logic
 )

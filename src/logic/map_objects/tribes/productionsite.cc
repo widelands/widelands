@@ -208,6 +208,28 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		}
 	}
 
+	if (table.has_key("indicate_workarea_overlaps")) {
+		items_table = table.get_table("indicate_workarea_overlaps");
+		for (const std::string& s : items_table->keys<std::string>()) {
+			if (highlight_overlapping_workarea_for_.find(s) !=
+			    highlight_overlapping_workarea_for_.end()) {
+				throw wexception("indicate_workarea_overlaps has duplicate entry");
+			}
+			highlight_overlapping_workarea_for_.emplace(s, items_table->get_bool(s));
+		}
+	}
+	if (workarea_info().empty() ^ highlight_overlapping_workarea_for_.empty()) {
+		if (highlight_overlapping_workarea_for_.empty()) {
+			log("WARNING: Productionsite %s has a workarea but does not inform about any conflicting "
+			    "buildings\n",
+			    name().c_str());
+		} else {
+			throw GameDataError(
+			   "Productionsite %s without a workarea must not inform about conflicting buildings",
+			   name().c_str());
+		}
+	}
+
 	// Verify that any map resource collected is valid
 	if (!hints().collects_ware_from_map().empty()) {
 		if (!(tribes.ware_exists(hints().collects_ware_from_map()))) {
@@ -445,13 +467,12 @@ bool ProductionSite::init(EditorGameBase& egbase) {
 	const BillOfMaterials& input_workers = descr().input_workers();
 	input_queues_.resize(input_wares.size() + input_workers.size());
 
-	for (WareRange i(input_wares); i; ++i) {
-		input_queues_[i.i] = new WaresQueue(*this, i.current->first, i.current->second);
+	size_t i = 0;
+	for (const WareAmount& pair : input_wares) {
+		input_queues_[i++] = new WaresQueue(*this, pair.first, pair.second);
 	}
-
-	for (WareRange i(input_workers); i; ++i) {
-		input_queues_[input_wares.size() + i.i] =
-		   new WorkersQueue(*this, i.current->first, i.current->second);
+	for (const WareAmount& pair : input_workers) {
+		input_queues_[i++] = new WorkersQueue(*this, pair.first, pair.second);
 	}
 
 	//  Request missing workers.
@@ -763,6 +784,7 @@ void ProductionSite::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
 	molog("is_stopped: %u\n", is_stopped_);
+	molog("main_worker: %i\n", main_worker_);
 }
 
 void ProductionSite::set_stopped(bool const stopped) {
@@ -784,18 +806,17 @@ bool ProductionSite::can_start_working() const {
 }
 
 void ProductionSite::try_start_working(Game& game) {
-	if (main_worker_ >= 0) {
-		return;
-	}
 	const size_t nr_workers = descr().working_positions().size();
 	for (uint32_t i = 0; i < nr_workers; ++i) {
-		if (Worker* worker = working_positions_[i].worker) {
-			// We may start even if can_start_working() returns false, because basic actions
-			// like unloading extra wares should take place anyway
-			main_worker_ = i;
-			worker->reset_tasks(game);
-			worker->start_task_buildingwork(game);
-			return;
+		if (main_worker_ == static_cast<int>(i) || main_worker_ < 0) {
+			if (Worker* worker = working_positions_[i].worker) {
+				// We may start even if can_start_working() returns false, because basic actions
+				// like unloading extra wares should take place anyway
+				main_worker_ = i;
+				worker->reset_tasks(game);
+				worker->start_task_buildingwork(game);
+				return;
+			}
 		}
 	}
 }
@@ -1029,6 +1050,38 @@ void ProductionSite::unnotify_player() {
 	set_production_result("");
 }
 
+const BuildingSettings* ProductionSite::create_building_settings() const {
+	ProductionsiteSettings* settings = new ProductionsiteSettings(descr());
+	settings->stopped = is_stopped_;
+	for (auto& pair : settings->ware_queues) {
+		pair.second.priority = get_priority(wwWARE, pair.first, false);
+		for (const auto& queue : input_queues_) {
+			if (queue->get_type() == wwWARE && queue->get_index() == pair.first) {
+				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());
+				if (pair.second.desired_fill == 0) {
+					// Players may set slots to 0 before enhancing a building to retrieve precious wares
+					// – we assume they want the slot to be fully filled in the upgraded building
+					pair.second.desired_fill = pair.second.max_fill;
+				}
+				break;
+			}
+		}
+	}
+	for (auto& pair : settings->worker_queues) {
+		pair.second.priority = get_priority(wwWORKER, pair.first, false);
+		for (const auto& queue : input_queues_) {
+			if (queue->get_type() == wwWORKER && queue->get_index() == pair.first) {
+				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());
+				if (pair.second.desired_fill == 0) {
+					pair.second.desired_fill = pair.second.max_fill;
+				}
+				break;
+			}
+		}
+	}
+	return settings;
+}
+
 /// Changes the default anim string to \li anim
 void ProductionSite::set_default_anim(std::string anim) {
 	if (default_anim_ == anim)
@@ -1046,7 +1099,7 @@ void ProductionSite::update_crude_statistics(uint32_t duration, const bool produ
 	static const uint32_t entire_duration = 10 * 60 * 1000;
 	if (duration > duration_cap) {
 		duration = duration_cap;
-	};
+	}
 	const uint32_t past_duration = entire_duration - duration;
 	crude_percent_ =
 	   (crude_percent_ * past_duration + produced * duration * 10000) / entire_duration;

@@ -56,11 +56,11 @@
 namespace Widelands {
 
 // Overall package version
-constexpr uint16_t kCurrentPacketVersion = 4;
+constexpr uint16_t kCurrentPacketVersion = 5;
 
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
-constexpr uint16_t kCurrentPacketVersionConstructionsite = 3;
+constexpr uint16_t kCurrentPacketVersionConstructionsite = 4;
 constexpr uint16_t kCurrentPacketPFBuilding = 1;
 // Responsible for warehouses and expedition bootstraps
 constexpr uint16_t kCurrentPacketVersionWarehouse = 7;
@@ -85,7 +85,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
 			while (!fr.end_of_file()) {
 				Serial const serial = fr.unsigned_32();
 				try {
@@ -144,10 +144,19 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 						building.leave_allow_ = nullptr;
 					}
 
-					while (fr.unsigned_8()) {
-						DescriptionIndex oldidx =
-						   building.owner().tribe().safe_building_index(fr.c_string());
-						building.old_buildings_.push_back(oldidx);
+					if (packet_version >= kCurrentPacketVersion) {
+						while (fr.unsigned_8()) {
+							DescriptionIndex oldidx =
+							   building.owner().tribe().safe_building_index(fr.c_string());
+							const std::string type(fr.c_string());
+							building.old_buildings_.push_back(std::make_pair(oldidx, type));
+						}
+					} else {
+						while (fr.unsigned_8()) {
+							DescriptionIndex oldidx =
+							   building.owner().tribe().safe_building_index(fr.c_string());
+							building.old_buildings_.push_back(std::make_pair(oldidx, ""));
+						}
 					}
 					// Only construction sites may have an empty list
 					if (building.old_buildings_.empty() && !is_a(ConstructionSite, &building)) {
@@ -275,7 +284,7 @@ void MapBuildingdataPacket::read_constructionsite(
    const TribesLegacyLookupTable& tribes_lookup_table) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version >= kCurrentPacketVersionConstructionsite) {
+		if (packet_version >= 3) {
 			read_partially_finished_building(constructionsite, fr, game, mol, tribes_lookup_table);
 
 			for (ConstructionSite::Wares::iterator wares_iter = constructionsite.wares_.begin();
@@ -285,6 +294,18 @@ void MapBuildingdataPacket::read_constructionsite(
 			}
 
 			constructionsite.fetchfromflag_ = fr.signed_32();
+
+			if (packet_version >= 4) {
+				const uint32_t intermediates = fr.unsigned_32();
+				for (uint32_t i = 0; i < intermediates; ++i) {
+					constructionsite.info_.intermediates.push_back(
+					   game.tribes().get_building_descr(game.tribes().building_index(fr.c_string())));
+				}
+				constructionsite.settings_.reset(
+				   BuildingSettings::load(game, constructionsite.owner().tribe(), fr));
+			} else {
+				constructionsite.init_settings();
+			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Constructionsite", packet_version,
 			                            kCurrentPacketVersionConstructionsite);
@@ -330,7 +351,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				const DescriptionIndex& id =
 				   tribe.ware_index(tribes_lookup_table.lookup_ware(fr.c_string()));
 				Quantity amount = fr.unsigned_32();
-				Warehouse::StockPolicy policy = static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
+				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
 				if (game.tribes().ware_exists(id)) {
 					warehouse.insert_wares(id, amount);
@@ -341,7 +362,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				const DescriptionIndex& id =
 				   tribe.worker_index(tribes_lookup_table.lookup_worker(fr.c_string()));
 				uint32_t amount = fr.unsigned_32();
-				Warehouse::StockPolicy policy = static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
+				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
 				if (game.tribes().worker_exists(id)) {
 					warehouse.insert_workers(id, amount);
@@ -895,10 +916,11 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 			}
 			{
 				const TribeDescr& td = building->owner().tribe();
-				for (DescriptionIndex b_idx : building->old_buildings_) {
-					const BuildingDescr* b_descr = td.get_building_descr(b_idx);
+				for (const auto& pair : building->old_buildings_) {
+					const BuildingDescr* b_descr = td.get_building_descr(pair.first);
 					fw.unsigned_8(1);
 					fw.string(b_descr->name());
+					fw.string(pair.second);
 				}
 				fw.unsigned_8(0);
 			}
@@ -980,6 +1002,14 @@ void MapBuildingdataPacket::write_constructionsite(const ConstructionSite& const
 	write_partially_finished_building(constructionsite, fw, game, mos);
 
 	fw.signed_32(constructionsite.fetchfromflag_);
+
+	fw.unsigned_32(constructionsite.info_.intermediates.size());
+	for (const BuildingDescr* d : constructionsite.info_.intermediates) {
+		fw.c_string(d->name().c_str());
+	}
+
+	assert(constructionsite.settings_);
+	constructionsite.settings_->save(game, fw);
 }
 
 void MapBuildingdataPacket::write_dismantlesite(const DismantleSite& dms,

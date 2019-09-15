@@ -32,7 +32,7 @@ wl_library(sound
     io_fileread
     io_filesystem
     logic_exceptions
-    profile
     random
     sound_constants
+    widelands_options
 )

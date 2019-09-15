@@ -45,6 +45,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -106,6 +107,12 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		} catch (const WException& e) {
 			throw GameDataError("size: %s", e.what());
 		}
+	}
+	if (table.has_key("built_over_immovable")) {
+		// Throws an error if no matching immovable exists
+		built_over_immovable_ = get_attribute_id(table.get_string("built_over_immovable"), false);
+	} else {
+		built_over_immovable_ = INVALID_INDEX;
 	}
 
 	// Parse build options
@@ -184,12 +191,54 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
                                 Coords const pos,
                                 bool const construct,
                                 bool loading,
-                                Building::FormerBuildings const former_buildings) const {
+                                FormerBuildings const former_buildings) const {
+	std::pair<DescriptionIndex, std::string> immovable = std::make_pair(INVALID_INDEX, "");
+	if (built_over_immovable_ != INVALID_INDEX) {
+		bool immovable_previously_found = false;
+		for (const auto& pair : former_buildings) {
+			if (!pair.second.empty()) {
+				const MapObjectDescr* d;
+				if (pair.second == "world") {
+					d = egbase.world().get_immovable_descr(pair.first);
+				} else if (pair.second == "tribe") {
+					d = egbase.tribes().get_immovable_descr(pair.first);
+				} else {
+					throw wexception("Invalid FormerBuildings type: %s", pair.second.c_str());
+				}
+				if (d->has_attribute(built_over_immovable_)) {
+					immovable_previously_found = true;
+					break;
+				}
+			}
+		}
+		if (!immovable_previously_found) {
+			// Must be done first, because the immovable will be gone the moment the building is placed
+			const FCoords f = egbase.map().get_fcoords(pos);
+			if (f.field->get_immovable() &&
+			    f.field->get_immovable()->has_attribute(built_over_immovable_)) {
+				upcast(const ImmovableDescr, imm, &f.field->get_immovable()->descr());
+				assert(imm);
+				immovable =
+				   imm->owner_type() == MapObjectDescr::OwnerType::kWorld ?
+				      std::make_pair(egbase.world().get_immovable_index(imm->name()), "world") :
+				      std::make_pair(egbase.tribes().safe_immovable_index(imm->name()), "tribe");
+			} else {
+				throw wexception(
+				   "Attempting to build %s at %dx%d – no immovable with required attribute %i found",
+				   name().c_str(), pos.x, pos.y, built_over_immovable_);
+			}
+		}
+	}
+
 	Building& b = construct ? create_constructionsite() : create_object();
 	b.position_ = pos;
 	b.set_owner(owner);
-	for (DescriptionIndex idx : former_buildings) {
-		b.old_buildings_.push_back(idx);
+	if (immovable.first != INVALID_INDEX) {
+		assert(!immovable.second.empty());
+		b.old_buildings_.push_back(immovable);
+	}
+	for (const auto& pair : former_buildings) {
+		b.old_buildings_.push_back(pair);
 	}
 	if (loading) {
 		b.Building::init(egbase);
@@ -200,8 +249,11 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 }
 
 bool BuildingDescr::suitability(const Map&, const FCoords& fc) const {
-	return mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
-	               size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
+	return (mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
+	                size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK)) &&
+	       (built_over_immovable_ == INVALID_INDEX ||
+	        (fc.field->get_immovable() &&
+	         fc.field->get_immovable()->has_attribute(built_over_immovable_)));
 }
 
 const BuildingHints& BuildingDescr::hints() const {
@@ -216,7 +268,7 @@ uint32_t BuildingDescr::get_unoccupied_animation() const {
 	return get_animation(is_animation_known("unoccupied") ? "unoccupied" : "idle", nullptr);
 }
 
-bool BuildingDescr::meets_requirements(bool seafaring_allowed, bool waterways_allowed) const {
+bool BuildingDescr::is_useful_on_map(bool seafaring_allowed, bool waterways_allowed) const {
 	if (needs_seafaring_ && needs_waterways_ ) {
 		return seafaring_allowed || waterways_allowed;
 	} else if (needs_seafaring_) {
@@ -275,6 +327,7 @@ Building::Building(const BuildingDescr& building_descr)
      leave_time_(0),
      defeating_player_(0),
      seeing_(false),
+     was_immovable_(nullptr),
      attack_target_(nullptr),
      soldier_control_(nullptr) {
 }
@@ -387,6 +440,21 @@ bool Building::init(EditorGameBase& egbase) {
 			flag = new Flag(egbase, get_owner(), neighb);
 		flag_ = flag;
 		flag->attach_building(egbase, *this);
+	}
+
+	for (const auto& pair : old_buildings_) {
+		if (!pair.second.empty()) {
+			assert(!was_immovable_);
+			if (pair.second == "world") {
+				was_immovable_ = egbase.world().get_immovable_descr(pair.first);
+			} else if (pair.second == "tribe") {
+				was_immovable_ = egbase.tribes().get_immovable_descr(pair.first);
+			} else {
+				throw wexception("Invalid FormerBuildings type: %s", pair.second.c_str());
+			}
+			assert(was_immovable_);
+			break;
+		}
 	}
 
 	// Start the animation
@@ -634,6 +702,11 @@ void Building::draw(uint32_t gametime,
                     const Widelands::Coords& coords,
                     const float scale,
                     RenderTarget* dst) {
+	if (was_immovable_) {
+		dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
+		                    gametime - animstart_, &get_owner()->get_playercolor());
+	}
+
 	dst->blit_animation(
 	   point_on_dst, coords, scale, anim_, gametime - animstart_, &get_owner()->get_playercolor());
 
@@ -662,13 +735,13 @@ void Building::draw_info(const TextToDraw draw_text,
 
 int32_t
 Building::get_priority(WareWorker type, DescriptionIndex const ware_index, bool adjust) const {
-	int32_t priority = DEFAULT_PRIORITY;
+	int32_t priority = kPriorityNormal;
 	if (type == wwWARE) {
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
 		std::map<DescriptionIndex, int32_t>::const_iterator it = ware_priorities_.find(ware_index);
 		if (it != ware_priorities_.end())
-			priority = adjust ? (priority * it->second / DEFAULT_PRIORITY) : it->second;
+			priority = adjust ? (priority * it->second / kPriorityNormal) : it->second;
 	}
 
 	return priority;
@@ -684,7 +757,7 @@ void Building::collect_priorities(std::map<int32_t, std::map<DescriptionIndex, i
 	std::map<DescriptionIndex, int32_t>& ware_priorities = p[wwWARE];
 	std::map<DescriptionIndex, int32_t>::const_iterator it;
 	for (it = ware_priorities_.begin(); it != ware_priorities_.end(); ++it) {
-		if (it->second == DEFAULT_PRIORITY)
+		if (it->second == kPriorityNormal)
 			continue;
 		ware_priorities[it->first] = it->second;
 	}

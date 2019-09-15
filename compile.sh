@@ -45,6 +45,8 @@ print_help () {
     echo "                      Release builds are created without AddressSanitizer"
     echo "                      by default."
     echo " "
+    echo "--without-xdg         Disable support for the XDG Base Directory Specification."
+    echo " "
     echo "Compiler options:"
     echo " "
     echo "-j <number> or --cores <number>"
@@ -88,6 +90,7 @@ BUILD_TESTS="ON"
 BUILD_TYPE="Debug"
 USE_ASAN="ON"
 COMPILER="default"
+USE_XDG="ON"
 
 if [ "$(uname)" = "Darwin" ]; then
   CORES="$(expr $(sysctl -n hw.ncpu) - 1)"
@@ -154,6 +157,10 @@ do
       fi
     shift
     ;;
+    --without-xdg)
+        USE_XDG="OFF"
+    shift
+    ;;
     *)
           # unknown option
     ;;
@@ -201,6 +208,18 @@ if [ $USE_ASAN = "ON" ]; then
   echo "You can use -a or --no-asan to switch it off."
 else
   echo "Will build without AddressSanitizer."
+fi
+if [ $USE_XDG = "ON" ]; then
+  echo " "
+  echo "Basic XDG Base Directory Specification will be used on Linux"
+  echo "if no existing \$HOME/.widelands folder is found."
+  echo "The widelands user data can be found in \$XDG_DATA_HOME/widelands"
+  echo "and defaults to \$HOME/.local/share/widelands."
+  echo "The widelands user configuration can be found in \$XDG_CONFIG_HOME/widelands"
+  echo "and defaults to \$HOME/.config/widelands."
+  echo "See https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+  echo "for more information."
+  echo " "
 fi
 echo " "
 echo "###########################################################"
@@ -260,9 +279,9 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   # Compile Widelands
   compile_widelands () {
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
-      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN
+      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG
     else
-      cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN
+      cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG
     fi
 
     $buildtool -j $CORES
@@ -360,6 +379,12 @@ else
   echo "# - No tests                                              #"
 fi
 
+if [ $USE_XDG = "ON" ]; then
+  echo "# - With support for the XDG Base Directory Specification #"
+else
+  echo "# - Without support for the XDG Base Directory            #"
+  echo "#   Specification                                         #"
+fi
 if [ $BUILD_WEBSITE = "ON" ]; then
   echo "# - Website-related executables                           #"
 else

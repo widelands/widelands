@@ -29,6 +29,7 @@ enum class NoteId : uint32_t {
 	ChatMessage,
 	LogMessage,
 	Immovable,
+	ConstructionsiteEnhanced,
 	FieldPossession,
 	FieldTerrainChanged,
 	ProductionSiteOutOfResources,
@@ -41,7 +42,8 @@ enum class NoteId : uint32_t {
 	NoteExpeditionCanceled,
 	Sound,
 	Dropdown,
-	GameSettings
+	GameSettings,
+	MapOptions
 };
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H

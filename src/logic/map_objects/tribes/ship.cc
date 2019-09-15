@@ -207,7 +207,7 @@ void Ship::wakeup_neighbours(Game& game) {
 	FCoords position = get_position();
 	Area<FCoords> area(position, 1);
 	std::vector<Bob*> ships;
-	game.map().find_bobs(area, &ships, FindBobShip());
+	game.map().find_bobs(game, area, &ships, FindBobShip());
 
 	for (std::vector<Bob*>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
 		if (*it == this)
@@ -406,7 +406,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 
 			// Check whether the maximum theoretical possible NodeCap of the field
 			// is of the size big and whether it can theoretically be a port space
-			if ((map->get_max_nodecaps(game.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG ||
+			if ((map->get_max_nodecaps(game, fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG ||
 			    map->find_portdock(fc).empty()) {
 				continue;
 			}
@@ -463,7 +463,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 			Area<FCoords> area(node, 0);
 			std::vector<Bob*> ships;
-			map.find_bobs(area, &ships, FindBobShip());
+			map.find_bobs(game, area, &ships, FindBobShip());
 
 			for (std::vector<Bob*>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
 				if (*it == this)
@@ -925,9 +925,9 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 
 	// Make sure that we have space to squeeze in a lumberjack
 	std::vector<ImmovableFound> trees_rocks;
-	game.map().find_immovables(Area<FCoords>(game.map().get_fcoords(c), 3), &trees_rocks,
+	game.map().find_immovables(game, Area<FCoords>(game.map().get_fcoords(c), 3), &trees_rocks,
 	                           FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
-	game.map().find_immovables(Area<FCoords>(game.map().get_fcoords(c), 3), &trees_rocks,
+	game.map().find_immovables(game, Area<FCoords>(game.map().get_fcoords(c), 3), &trees_rocks,
 	                           FindImmovableAttribute(MapObjectDescr::get_attribute_id("rocks")));
 	for (auto& immo : trees_rocks) {
 		immo.object->remove(game);
@@ -1159,20 +1159,21 @@ Load / Save implementation
 */
 
 constexpr uint8_t kCurrentPacketVersion = 9;
-// NOCOM(codereview) Add savegame compatibility
-// NOCOM(Nordfriese): See reply in MapFlagPacket
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")
 		return &taskShip;
 	return Bob::Loader::get_task(name);
 }
 
-void Ship::Loader::load(FileRead& fr) {
+void Ship::Loader::load(FileRead& fr, uint8_t pw) {
 	Bob::Loader::load(fr);
+	packet_version_ = pw;
 
 	// Economy
+	// TODO(Nordfriese): Savegame compatibility
 	ware_economy_serial_ = fr.unsigned_32();
-	worker_economy_serial_ = fr.unsigned_32();
+	worker_economy_serial_ = packet_version_ >= 9 ? fr.unsigned_32() :
+			mol().get_economy_savegame_compatibility(ware_economy_serial_);
 
 	// The state the ship is in
 	ship_state_ = static_cast<ShipStates>(fr.unsigned_8());
@@ -1244,7 +1245,12 @@ void Ship::Loader::load_finish() {
 	if (worker_economy_serial_ != kInvalidSerial) {
 		ship.worker_economy_ = ship.get_owner()->get_economy(worker_economy_serial_);
 		if (!ship.worker_economy_) {
+			const Serial last = Economy::last_economy_serial_;
 			ship.worker_economy_ = ship.get_owner()->create_economy(worker_economy_serial_, wwWORKER);
+			if (packet_version_ < 9) {
+				log("Reset economy serial from %u to %u\n", Economy::last_economy_serial_, last);
+				Economy::last_economy_serial_ = last;
+			}
 		}
 	}
 
@@ -1278,7 +1284,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 8) {
 			try {
 				const ShipDescr* descr = nullptr;
 				// Removing this will break the test suite
@@ -1286,7 +1292,7 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 				const DescriptionIndex& ship_index = egbase.tribes().safe_ship_index(name);
 				descr = egbase.tribes().get_ship_descr(ship_index);
 				loader->init(egbase, mol, descr->create_object());
-				loader->load(fr);
+				loader->load(fr, packet_version);
 			} catch (const WException& e) {
 				throw GameDataError("Failed to load ship: %s", e.what());
 			}

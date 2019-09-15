@@ -24,6 +24,7 @@
 
 #include "economy/economy.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -31,7 +32,6 @@
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/player.h"
-#include "profile/profile.h"
 #include "scripting/factory.h"
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"
@@ -785,7 +785,7 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	}
 	DescriptionIndex building_index = tribes.building_index(name);
 
-	BuildingDescr::FormerBuildings former_buildings;
+	FormerBuildings former_buildings;
 	find_former_buildings(tribes, building_index, &former_buildings);
 	if (constructionsite) {
 		former_buildings.pop_back();
@@ -878,8 +878,9 @@ int LuaPlayerBase::get_workers(lua_State* L) {
 
 	uint32_t nworkers = 0;
 	for (const auto& economy : player.economies()) {
-		if (economy.second->type() == Widelands::wwWORKER)
+		if (economy.second->type() == Widelands::wwWORKER) {
 			nworkers += economy.second->stock_ware_or_worker(worker);
+		}
 	}
 	lua_pushuint32(L, nworkers);
 	return 1;
@@ -905,8 +906,9 @@ int LuaPlayerBase::get_wares(lua_State* L) {
 
 	uint32_t nwares = 0;
 	for (const auto& economy : player.economies()) {
-		if (economy.second->type() == Widelands::wwWARE)
+		if (economy.second->type() == Widelands::wwWARE) {
 			nwares += economy.second->stock_ware_or_worker(ware);
+		}
 	}
 	lua_pushuint32(L, nwares);
 	return 1;

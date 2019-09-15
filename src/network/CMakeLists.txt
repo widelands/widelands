@@ -55,12 +55,12 @@ wl_library(network
     logic_game_settings
     logic_tribe_basic_info
     map_io_map_loader
-    profile
     random
     scripting_lua_interface
     scripting_lua_table
     ui_basic
     ui_fsmenu_gameloading
     widelands_ball_of_mud
+    widelands_options
     wui
 )

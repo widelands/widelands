@@ -31,11 +31,13 @@
 #include "map_io/widelands_map_loader.h"
 
 MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
+                                             Registry& registry,
                                              int no_of_bottom_rows,
                                              const std::string& name,
                                              const std::string& title,
                                              const std::string& basedir)
-   : UI::Window(&parent, name, 0, 0, parent.get_inner_w() - 40, parent.get_inner_h() - 40, title),
+   : UI::UniqueWindow(
+        &parent, name, &registry, parent.get_inner_w() - 40, parent.get_inner_h() - 40, title),
 
      // Values for alignment and size
      padding_(4),

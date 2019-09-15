@@ -162,7 +162,7 @@ bool FerryFleet::merge(EditorGameBase& egbase, FerryFleet* other) {
 	while (!other->ferries_.empty()) {
 		Ferry* ferry = other->ferries_.back();
 		other->ferries_.pop_back();
-		add_ferry(egbase, ferry);
+		add_ferry(ferry);
 	}
 
 	while (!other->pending_ferry_requests_.empty()) {
@@ -221,7 +221,7 @@ bool FerryFleet::has_ferry(const Waterway& ww) const {
 	return true;
 }
 
-void FerryFleet::add_ferry(EditorGameBase& /* egbase */, Ferry* ferry) {
+void FerryFleet::add_ferry(Ferry* ferry) {
 	ferries_.push_back(ferry);
 	ferry->set_fleet(this);
 }
@@ -289,9 +289,9 @@ void FerryFleet::reroute_ferry_request(Game& game, Waterway* oldww, Waterway* ne
 			return;
 		}
 	}
-	for (auto it = pending_ferry_requests_.begin(); it != pending_ferry_requests_.end(); ++it) {
-		if (it->second == oldww) {
-			it->second = newww;
+	for (auto& pair : pending_ferry_requests_) {
+		if (pair.second == oldww) {
+			pair.second = newww;
 			return;
 		}
 	}
@@ -303,7 +303,7 @@ bool FerryFleet::empty() const {
 }
 
 /**
- * Trigger an update of ship scheduling
+ * Trigger an update of ferry scheduling
  */
 void FerryFleet::update(EditorGameBase& egbase, uint32_t tdelta) {
 	if (act_pending_) {
@@ -456,13 +456,15 @@ MapObject::Loader* FerryFleet::load(EditorGameBase& egbase, MapObjectLoader& mol
 		uint8_t const packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
 			PlayerNumber owner_number = fr.unsigned_8();
-			if (!owner_number || owner_number > egbase.map().get_nrplayers())
+			if (!owner_number || owner_number > egbase.map().get_nrplayers()) {
 				throw GameDataError("owner number is %u but there are only %u players", owner_number,
 				                    egbase.map().get_nrplayers());
+			}
 
 			Player* owner = egbase.get_player(owner_number);
-			if (!owner)
+			if (!owner) {
 				throw GameDataError("owning player %u does not exist", owner_number);
+			}
 
 			loader->init(egbase, mol, *(new FerryFleet(owner)));
 			loader->load(fr);

@@ -20,6 +20,7 @@
 #ifndef WL_EDITOR_UI_MENUS_TOOL_RESIZE_OPTIONS_MENU_H
 #define WL_EDITOR_UI_MENUS_TOOL_RESIZE_OPTIONS_MENU_H
 
+#include "editor/ui_menus/map_size_box.h"
 #include "editor/ui_menus/tool_options_menu.h"
 #include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"
@@ -33,13 +34,11 @@ struct EditorToolResizeOptionsMenu : public EditorToolOptionsMenu {
 
 private:
 	EditorInteractive& eia();
-	void update_width();
-	void update_height();
+	void update_dimensions();
 
 	EditorResizeTool& resize_tool_;
 	UI::Box box_;
-	UI::Dropdown<int32_t> new_width_;
-	UI::Dropdown<int32_t> new_height_;
+	MapSizeBox map_size_box_;
 	UI::MultilineTextarea text_area_;
 };
 

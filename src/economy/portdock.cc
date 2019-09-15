@@ -148,11 +148,6 @@ void PortDock::set_economy(Economy* e, WareWorker type) {
 	}
 }
 
-void PortDock::draw(
-   uint32_t, const TextToDraw, const Vector2f&, const Widelands::Coords&, float, RenderTarget*) {
-	// do nothing
-}
-
 bool PortDock::init(EditorGameBase& egbase) {
 	PlayerImmovable::init(egbase);
 
@@ -445,12 +440,14 @@ uint32_t PortDock::count_waiting(WareWorker waretype, DescriptionIndex wareindex
 
 		switch (waretype) {
 			case wwWORKER:
-				if (worker && worker->descr().worker_index() == wareindex)
+				if (worker && worker->descr().worker_index() == wareindex) {
 					count++;
+				}
 				break;
 			case wwWARE:
-				if (ware && ware->descr_index() == wareindex)
+				if (ware && ware->descr_index() == wareindex) {
 					count++;
+				}
 				break;
 		}
 	}

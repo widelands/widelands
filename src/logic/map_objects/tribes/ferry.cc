@@ -90,7 +90,7 @@ void Ferry::unemployed_update(Game& game, State&) {
 		}
 		molog("[unemployed]: trying to find a flag\n");
 		std::vector<ImmovableFound> flags;
-		if (!map.find_reachable_immovables(Area<FCoords>(pos, 4),
+		if (!map.find_reachable_immovables(game, Area<FCoords>(pos, 4),
 				&flags,
 				CheckStepFerry(game),
 				FindImmovableType(MapObjectType::FLAG))) {
@@ -192,14 +192,15 @@ void Ferry::row_update(Game& game, State&) {
 			return start_task_road(game);
 		}
 		// If we get here, the waterway was destroyed and we didn't notice
-		molog("[row]: Reached the destination but it is no longer there\n");
+		molog("[row]: Reached the destination (%3dx%3d) but it is no longer there\n", get_position().x, get_position().y);
 		destination_.reset(nullptr);
 		return pop_task(game);
 	}
 
 	Path path(pos);
 	if (!map.findpath(pos, *destination_, 0, path, CheckStepFerry(game))) {
-		molog("[row]: Can't find a path to the waterway!\n");
+		molog("[row]: Can't find a path to the waterway! Ferry at %3dx%3d, Waterway at %3dx%3d\n",
+				get_position().x, get_position().y, destination_->x, destination_->y);
 		// try again later
 		return schedule_act(game, 50);
 	}
@@ -234,7 +235,7 @@ bool Ferry::init_fleet() {
 	assert(get_owner());
 	EditorGameBase& egbase = get_owner()->egbase();
 	FerryFleet* fleet = new FerryFleet(get_owner());
-	fleet->add_ferry(egbase, this);
+	fleet->add_ferry(this);
 	// fleet calls the set_fleet function appropriately
 	return fleet->init(egbase);
 }

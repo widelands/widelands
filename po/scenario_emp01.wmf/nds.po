@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
-"PO-Revision-Date: 2019-05-25 12:38+0000\n"
+"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"PO-Revision-Date: 2019-08-12 18:30+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -57,7 +57,7 @@ msgstr "Twee Boomhauereen un eene Saagmöhlen"
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
-msgstr "Bau noch twee Boomhauereen un eene Saagmöhlen sobald daar genoog Rüümte för is."
+msgstr "Bau noch twee Boomhauereen un eene Saagmöhlen sobold daar genoog Rüümte för is."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:54
 msgid "Build a forester’s house"
@@ -296,7 +296,7 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr "Leider sünd Boomstammen unnütz, um dat Schipp to repareren – wi mutten Planken daarut maken, de wi för 't Schipp un all grotern Husen bruuken. Also sallen wi eene Saagmöhlen bauen – sobald wi daar genoog Rüümte för hebben."
+msgstr "Leider sünd Boomstammen unnütz, um dat Schipp to repareren – wi mutten Planken daarut maken, de wi för 't Schipp un all grotern Husen bruuken. Also sallen wi eene Saagmöhlen bauen – sobold wi daar genoog Rüümte för hebben."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:180
 msgid "Amalea comes in…"
@@ -425,3 +425,16 @@ msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
 msgstr "Mienheer, deese Uthamm is nu bannig seker. Nu maak aver wieder!"
+
+#: ../../data/scripting/richtext_scenarios.lua:36
+#, lua-format
+msgid "“%s”"
+msgstr "“%s”"
+
+#: ../../data/scripting/richtext_scenarios.lua:91
+msgid "New Objective"
+msgstr "Neje Upgaav"
+
+#: ../../data/scripting/richtext_scenarios.lua:93
+msgid "New Objectives"
+msgstr "Neje Upgaven"

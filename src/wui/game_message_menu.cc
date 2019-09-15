@@ -104,7 +104,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 
 	scenariobtn_ = new UI::Button(this, "filter_scenario_messages", 5 * kPadding + 4 * kButtonSize,
 	                              kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-	                              g_gr->images().get("images/wui/menus/menu_objectives.png"));
+	                              g_gr->images().get("images/wui/menus/objectives.png"));
 	scenariobtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kScenario));
 
@@ -129,12 +129,10 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	centerviewbtn_ =
 	   new UI::Button(this, "center_main_mapview_on_location", kWindowWidth - kPadding - kButtonSize,
 	                  archivebtn_->get_y(), kButtonSize, kButtonSize, UI::ButtonStyle::kWuiPrimary,
-	                  g_gr->images().get("images/wui/menus/menu_goto.png"),
-	                  /** TRANSLATORS: %s is a tooltip, G is the corresponding hotkey */
-	                  (boost::format(_("G: %s"))
-	                   /** TRANSLATORS: Tooltip in the messages window */
-	                   % _("Center main mapview on location"))
-	                     .str());
+	                  g_gr->images().get("images/wui/menus/goto.png"),
+	                  as_tooltip_text_with_hotkey(
+	                     /** TRANSLATORS: Tooltip in the messages window */
+	                     _("Center main mapview on location"), "g"));
 	centerviewbtn_->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
 	centerviewbtn_->set_enabled(false);
 
@@ -524,10 +522,9 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 		message_filter_ = msgtype;
 
 		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
-		button.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-		                    /** TRANSLATORS: Tooltip in the messages window */
-		                    % _("Show all messages") % pgettext("hotkey", "Alt + 0"))
-		                      .str());
+		button.set_tooltip(as_tooltip_text_with_hotkey(
+		   /** TRANSLATORS: Tooltip in the messages window */
+		   _("Show all messages"), pgettext("hotkey", "Alt+0")));
 	}
 }
 
@@ -535,27 +532,21 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
  * Helper for filter_messages
  */
 void GameMessageMenu::set_filter_messages_tooltips() {
-	geologistsbtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-	                             /** TRANSLATORS: Tooltip in the messages window */
-	                             % _("Show geologists' messages only") %
-	                             pgettext("hotkey", "Alt + 1"))
-	                               .str());
-	economybtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-	                          /** TRANSLATORS: Tooltip in the messages window */
-	                          % _("Show economy messages only") % pgettext("hotkey", "Alt + 2"))
-	                            .str());
-	seafaringbtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-	                            /** TRANSLATORS: Tooltip in the messages window */
-	                            % _("Show seafaring messages only") % pgettext("hotkey", "Alt + 3"))
-	                              .str());
-	warfarebtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-	                          /** TRANSLATORS: Tooltip in the messages window */
-	                          % _("Show warfare messages only") % pgettext("hotkey", "Alt + 4"))
-	                            .str());
-	scenariobtn_->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-	                           /** TRANSLATORS: Tooltip in the messages window */
-	                           % _("Show scenario messages only") % pgettext("hotkey", "Alt + 5"))
-	                             .str());
+	geologistsbtn_->set_tooltip(as_tooltip_text_with_hotkey(
+	   /** TRANSLATORS: Tooltip in the messages window */
+	   _("Show geologists' messages only"), pgettext("hotkey", "Alt+1")));
+	economybtn_->set_tooltip(as_tooltip_text_with_hotkey(
+	   /** TRANSLATORS: Tooltip in the messages window */
+	   _("Show economy messages only"), pgettext("hotkey", "Alt+2")));
+	seafaringbtn_->set_tooltip(as_tooltip_text_with_hotkey(
+	   /** TRANSLATORS: Tooltip in the messages window */
+	   _("Show seafaring messages only"), pgettext("hotkey", "Alt+3")));
+	warfarebtn_->set_tooltip(as_tooltip_text_with_hotkey(
+	   /** TRANSLATORS: Tooltip in the messages window */
+	   _("Show warfare messages only"), pgettext("hotkey", "Alt+4")));
+	scenariobtn_->set_tooltip(as_tooltip_text_with_hotkey(
+	   /** TRANSLATORS: Tooltip in the messages window */
+	   _("Show scenario messages only"), pgettext("hotkey", "Alt+5")));
 }
 
 /**
@@ -572,7 +563,7 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 	case Widelands::Message::Type::kWarfare:
 		return "images/wui/messages/messages_warfare.png";
 	case Widelands::Message::Type::kScenario:
-		return "images/wui/menus/menu_objectives.png";
+		return "images/wui/menus/objectives.png";
 	case Widelands::Message::Type::kGameLogic:
 		return "images/ui_basic/menu_help.png";
 	case Widelands::Message::Type::kNoMessages:
@@ -651,6 +642,6 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		}
 		break;
 	}
-	/** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
-	archivebtn_->set_tooltip((boost::format(_("Del: %s")) % button_tooltip).str());
+	/** TRANSLATORS: Del is the "Delete" key on the keyboard */
+	archivebtn_->set_tooltip(as_tooltip_text_with_hotkey(button_tooltip, pgettext("hotkey", "Del")));
 }

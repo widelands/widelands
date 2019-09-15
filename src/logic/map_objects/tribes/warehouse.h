@@ -68,6 +68,40 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(WarehouseDescr);
 };
 
+/**
+ * Each ware and worker type has an associated per-warehouse
+ * stock policy that defines whether it will be stocked by this
+ * warehouse.
+ *
+ * \note The values of this enum are written directly into savegames,
+ * so be careful when changing them.
+ */
+enum class StockPolicy {
+	/**
+	 * The default policy allows stocking wares without any special priority.
+	 */
+	kNormal = 0,
+
+	/**
+	 * As long as there are warehouses with this policy for a ware, all
+	 * available unstocked supplies will be transferred to warehouses
+	 * with this policy.
+	 */
+	kPrefer = 1,
+
+	/**
+	 * If a ware has this stock policy, no more of this ware will enter
+	 * the warehouse.
+	 */
+	kDontStock = 2,
+
+	/**
+	 * Like \ref kDontStock, but in addition, existing stock of this ware
+	 * will be transported out of the warehouse over time.
+	 */
+	kRemove = 3,
+};
+
 class Warehouse : public Building {
 	friend class PortDock;
 	friend class MapBuildingdataPacket;
@@ -75,40 +109,6 @@ class Warehouse : public Building {
 	MO_DESCR(WarehouseDescr)
 
 public:
-	/**
-	 * Each ware and worker type has an associated per-warehouse
-	 * stock policy that defines whether it will be stocked by this
-	 * warehouse.
-	 *
-	 * \note The values of this enum are written directly into savegames,
-	 * so be careful when changing them.
-	 */
-	enum class StockPolicy {
-		/**
-		 * The default policy allows stocking wares without any special priority.
-		 */
-		kNormal = 0,
-
-		/**
-		 * As long as there are warehouses with this policy for a ware, all
-		 * available unstocked supplies will be transferred to warehouses
-		 * with this policy.
-		 */
-		kPrefer = 1,
-
-		/**
-		 * If a ware has this stock policy, no more of this ware will enter
-		 * the warehouse.
-		 */
-		kDontStock = 2,
-
-		/**
-		 * Like \ref kDontStock, but in addition, existing stock of this ware
-		 * will be transported out of the warehouse over time.
-		 */
-		kRemove = 3,
-	};
-
 	/**
 	 * Whether worker indices in count_workers() have to match exactly.
 	 */
@@ -207,6 +207,8 @@ public:
 	PortDock* get_portdock() const {
 		return portdock_;
 	}
+
+	const BuildingSettings* create_building_settings() const override;
 
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.

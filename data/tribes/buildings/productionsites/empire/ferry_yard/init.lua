@@ -32,6 +32,10 @@ tribes:new_productionsite_type {
 
    aihints = {},
 
+   indicate_workarea_overlaps = {
+      empire_ferry_yard = false,
+   },
+
    working_positions = {
       empire_shipwright = 1
    },

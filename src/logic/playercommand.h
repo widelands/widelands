@@ -24,6 +24,7 @@
 
 #include "economy/flag.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/trainingsite.h"
@@ -51,6 +52,8 @@ public:
 	PlayerCommand() : GameLogicCommand(0), sender_(0), cmdserial_(0) {
 	}
 
+	void write_id_and_sender(StreamWrite& ser);
+
 	PlayerNumber sender() const {
 		return sender_;
 	}
@@ -61,6 +64,7 @@ public:
 		cmdserial_ = s;
 	}
 
+	// For networking and replays
 	virtual void serialize(StreamWrite&) = 0;
 	static Widelands::PlayerCommand* deserialize(StreamRead&);
 
@@ -137,7 +141,7 @@ struct CmdBuildFlag : public PlayerCommand {
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kFlag;
+		return QueueCommandTypes::kBuildFlag;
 	}
 
 	void execute(Game&) override;
@@ -231,7 +235,7 @@ struct CmdStartStopBuilding : public PlayerCommand {
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kStopBuilding;
+		return QueueCommandTypes::kStartStopBuilding;
 	}
 
 	explicit CmdStartStopBuilding(StreamRead&);
@@ -281,7 +285,7 @@ struct CmdStartOrCancelExpedition : public PlayerCommand {
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kPortStartExpedition;
+		return QueueCommandTypes::kStartOrCancelExpedition;
 	}
 
 	explicit CmdStartOrCancelExpedition(StreamRead&);
@@ -380,7 +384,7 @@ struct CmdShipScoutDirection : public PlayerCommand {
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kShipScout;
+		return QueueCommandTypes::kShipScoutDirection;
 	}
 
 	explicit CmdShipScoutDirection(StreamRead&);
@@ -432,7 +436,7 @@ struct CmdShipExploreIsland : public PlayerCommand {
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kShipExplore;
+		return QueueCommandTypes::kShipExploreIsland;
 	}
 
 	explicit CmdShipExploreIsland(StreamRead&);
@@ -455,7 +459,7 @@ struct CmdShipSink : public PlayerCommand {
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	QueueCommandTypes id() const override {
-		return QueueCommandTypes::kSinkShip;
+		return QueueCommandTypes::kShipSink;
 	}
 
 	explicit CmdShipSink(StreamRead&);
@@ -499,7 +503,8 @@ struct CmdSetWarePriority : public PlayerCommand {
 	                   PlayerImmovable&,
 	                   int32_t type,
 	                   DescriptionIndex index,
-	                   int32_t priority);
+	                   int32_t priority,
+	                   bool cs);
 
 	// Write these commands to a file (for savegames)
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -519,6 +524,7 @@ private:
 	int32_t type_;  ///< this is always WARE right now
 	DescriptionIndex index_;
 	int32_t priority_;
+	bool is_constructionsite_setting_;
 };
 
 struct CmdSetInputMaxFill : public PlayerCommand {
@@ -529,7 +535,8 @@ struct CmdSetInputMaxFill : public PlayerCommand {
 	                   PlayerImmovable&,
 	                   DescriptionIndex,
 	                   WareWorker,
-	                   uint32_t maxfill);
+	                   uint32_t maxfill,
+	                   bool cs);
 
 	// Write these commands to a file (for savegames)
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -549,6 +556,7 @@ private:
 	DescriptionIndex index_;
 	WareWorker type_;
 	uint32_t max_fill_;
+	bool is_constructionsite_setting_;
 };
 
 struct CmdChangeTargetQuantity : public PlayerCommand {
@@ -849,10 +857,10 @@ struct CmdMessageSetStatusArchived : public PlayerMessageCommand {
 struct CmdSetStockPolicy : PlayerCommand {
 	CmdSetStockPolicy(uint32_t time,
 	                  PlayerNumber p,
-	                  Warehouse& wh,
+	                  Building& wh,
 	                  bool isworker,
 	                  DescriptionIndex ware,
-	                  Warehouse::StockPolicy policy);
+	                  StockPolicy policy);
 
 	QueueCommandTypes id() const override {
 		return QueueCommandTypes::kSetStockPolicy;
@@ -873,7 +881,7 @@ private:
 	Serial warehouse_;
 	bool isworker_;
 	DescriptionIndex ware_;
-	Warehouse::StockPolicy policy_;
+	StockPolicy policy_;
 };
 
 struct CmdProposeTrade : PlayerCommand {
@@ -897,6 +905,7 @@ struct CmdProposeTrade : PlayerCommand {
 private:
 	Trade trade_;
 };
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYERCOMMAND_H

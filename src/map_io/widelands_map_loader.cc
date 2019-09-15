@@ -84,6 +84,10 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 		mp.pre_read(*fs_, &map_);
 		old_world_name_ = mp.old_world_name();
 	}
+	{
+		MapVersionPacket version_packet;
+		version_packet.pre_read(*fs_, &map_, false, old_world_name_.empty());
+	}
 
 	{
 		MapPlayerNamesAndTribesPacket p;
@@ -200,7 +204,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log("Reading Map Version Data ... ");
 		{
 			MapVersionPacket p;
-			p.read(*fs_, egbase, is_game, *mol_);
+			p.read(*fs_, egbase, is_game, old_world_name_.empty());
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
@@ -364,7 +368,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		}
 	}  // load_type != MapLoader::LoadType::kEditor
 
-	map_.recalc_whole_map(egbase.world());
+	map_.recalc_whole_map(egbase);
 
 	map_.ensure_resource_consistency(egbase.world());
 
