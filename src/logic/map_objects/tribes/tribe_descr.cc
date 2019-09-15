@@ -71,17 +71,28 @@ TribeDescr::TribeDescr(const LuaTable& table,
 			                           animations_table->get_string("basename"));
 			animations_table = items_table->get_table("flag");
 			flag_animation_id_ =
-			   g_gr->animations().load(name_ + std::string("_frontier"), *animations_table,
+			   g_gr->animations().load(name_ + std::string("_flag"), *animations_table,
 			                           animations_table->get_string("basename"));
-		}
 
-		items_table = table.get_table("bridges");
-		bridge_e_animation_normal_id_ = g_gr->animations().load(*items_table->get_table("normal_e"));
-		bridge_se_animation_normal_id_ = g_gr->animations().load(*items_table->get_table("normal_se"));
-		bridge_sw_animation_normal_id_ = g_gr->animations().load(*items_table->get_table("normal_sw"));
-		bridge_e_animation_busy_id_ = g_gr->animations().load(*items_table->get_table("busy_e"));
-		bridge_se_animation_busy_id_ = g_gr->animations().load(*items_table->get_table("busy_se"));
-		bridge_sw_animation_busy_id_ = g_gr->animations().load(*items_table->get_table("busy_sw"));
+			animations_table = items_table->get_table("bridge_normal_e");
+			bridge_e_animation_normal_id_ = g_gr->animations().load(name_ + std::string("_bridge_e_normal"),
+					*animations_table, animations_table->get_string("basename"));
+			animations_table = items_table->get_table("bridge_busy_e");
+			bridge_e_animation_busy_id_ = g_gr->animations().load(name_ + std::string("_bridge_e_busy"),
+					*animations_table, animations_table->get_string("basename"));
+			animations_table = items_table->get_table("bridge_normal_se");
+			bridge_se_animation_normal_id_ = g_gr->animations().load(name_ + std::string("_bridge_se_normal"),
+					*animations_table, animations_table->get_string("basename"));
+			animations_table = items_table->get_table("bridge_busy_se");
+			bridge_se_animation_busy_id_ = g_gr->animations().load(name_ + std::string("_bridge_se_busy"),
+					*animations_table, animations_table->get_string("basename"));
+			animations_table = items_table->get_table("bridge_normal_sw");
+			bridge_sw_animation_normal_id_ = g_gr->animations().load(name_ + std::string("_bridge_sw_normal"),
+					*animations_table, animations_table->get_string("basename"));
+			animations_table = items_table->get_table("bridge_busy_sw");
+			bridge_sw_animation_busy_id_ = g_gr->animations().load(name_ + std::string("_bridge_sw_busy"),
+					*animations_table, animations_table->get_string("basename"));
+		}
 
 		items_table = table.get_table("roads");
 		const auto load_roads = [&items_table](

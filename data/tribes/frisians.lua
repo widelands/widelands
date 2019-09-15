@@ -3,37 +3,17 @@ image_dirname = path.dirname(__file__) .. "images/frisians/"
 animations = {}
 add_animation(animations, "frontier", image_dirname, "frontier", {9, 26})
 add_animation(animations, "flag", image_dirname, "flag", {10, 39}, 10)
+add_animation(animations, "bridge_normal_e", image_dirname, "bridge_normal_e", {-2, 12})
+add_animation(animations, "bridge_busy_e", image_dirname, "bridge_busy_e", {-2, 12})
+add_animation(animations, "bridge_normal_se", image_dirname, "bridge_normal_se", {5, 2})
+add_animation(animations, "bridge_busy_se", image_dirname, "bridge_busy_se", {5, 2})
+add_animation(animations, "bridge_normal_sw", image_dirname, "bridge_normal_sw", {36, 3})
+add_animation(animations, "bridge_busy_sw", image_dirname, "bridge_busy_sw", {36, 3})
 
 tribes:new_tribe {
    name = "frisians",
    animations = animations,
 
-   bridges = {
-      normal_e = {
-         pictures = path.list_files (dirname .. "images/frisians/bridge_normal_e_?.png"),
-         hotspot = { -2, 12 },
-      },
-      normal_se = {
-         pictures = path.list_files (dirname .. "images/frisians/bridge_normal_se_?.png"),
-         hotspot = { 5, 2 },
-      },
-      normal_sw = {
-         pictures = path.list_files (dirname .. "images/frisians/bridge_normal_sw_?.png"),
-         hotspot = { 36, 3 },
-      },
-      busy_e = {
-         pictures = path.list_files (dirname .. "images/frisians/bridge_busy_e_?.png"),
-         hotspot = { -2, 12 },
-      },
-      busy_se = {
-         pictures = path.list_files (dirname .. "images/frisians/bridge_busy_se_?.png"),
-         hotspot = { 5, 2 },
-      },
-      busy_sw = {
-         pictures = path.list_files (dirname .. "images/frisians/bridge_busy_sw_?.png"),
-         hotspot = { 36, 3 },
-      },
-   },
    bridge_height = 8,
 
    -- Image file paths for this tribe's road and waterway textures
