@@ -1283,10 +1283,10 @@ void InteractiveBase::waterway_building_add_overlay() {
 
 		map.get_neighbour(endpos, dir, &neighb);
 		caps = egbase().player(waterway_build_player_).get_buildcaps(neighb);
-		bool reachable = Widelands::CheckStepFerry(egbase()).reachable_dest(map, neighb);
+		Widelands::CheckStepFerry checkstep(egbase());
 
-		if (buildwaterway_->get_index(neighb) >= 0 || !neighb.field->is_interior(waterway_build_player_) ||
-				!reachable) {
+		if (!checkstep.reachable_dest(map, neighb) || buildwaterway_->get_index(neighb) >= 0 ||
+				!neighb.field->is_interior(waterway_build_player_)) {
 			continue;
 		}
 
@@ -1295,7 +1295,8 @@ void InteractiveBase::waterway_building_add_overlay() {
 			Widelands::FCoords nb;
 			for (int32_t d = 1; d <= 6; ++d) {
 				map.get_neighbour(neighb, d, &nb);
-				if (nb != endpos && buildwaterway_->get_index(nb) >= 0) {
+				if (nb != endpos && buildwaterway_->get_index(nb) >= 0 &&
+						checkstep.allowed(map, neighb, nb, d, Widelands::CheckStep::StepId::stepNormal)) {
 					next_to = true;
 					break;
 				}
@@ -1306,16 +1307,11 @@ void InteractiveBase::waterway_building_add_overlay() {
 		}
 
 		//  can't build on robusts
-		Widelands::BaseImmovable* const imm = map.get_immovable(neighb);
-		bool has_flag = false;
+		const Widelands::BaseImmovable* imm = map.get_immovable(neighb);
 		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
-			has_flag = dynamic_cast<const Widelands::Flag*>(imm);
-			if (!(has_flag || (caps & Widelands::BUILDCAPS_FLAG))) {
+			if (!(dynamic_cast<const Widelands::Flag*>(imm) ||
+			      (dynamic_cast<const Widelands::RoadBase*>(imm) && (caps & Widelands::BUILDCAPS_FLAG))))
 				continue;
-			}
-		}
-		if (!has_flag && !reachable && !(caps & Widelands::BUILDCAPS_FLAG)) {
-			continue;
 		}
 
 		int32_t slope;
