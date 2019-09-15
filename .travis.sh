@@ -31,7 +31,12 @@ cd build
 
 if [ "$BUILD_TYPE" == "Debug" ]; then
    # We test translations only on release builds, in order to help with job timeouts
-   cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="OFF" -DOPTION_ASAN="OFF"
+   # We also skip the website binaries in GCC for debug builds for the same reason
+   if [ "$CXX" = "g++" ]; then
+     cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="OFF" -DOPTION_ASAN="OFF" -DOPTION_BUILD_WEBSITE_TOOLS="OFF"
+   else
+      cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="OFF" -DOPTION_ASAN="OFF"
+   fi
 
    # Run the codecheck test suite.
    pushd ../cmake/codecheck
