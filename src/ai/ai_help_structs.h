@@ -450,6 +450,11 @@ struct BuildingObserver {
 	void set_is(BuildingAttribute);
 	void unset_is(BuildingAttribute);
 
+	// Building collects a ware from the map
+	bool has_collected_map_resource() const;
+	void set_collected_map_resource(const TribeDescr& tribe, const std::string& ware_name);
+	DescriptionIndex get_collected_map_resource() const;
+
 	char const* name;
 	Widelands::DescriptionIndex id;
 	Widelands::BuildingDescr const* desc;
@@ -487,14 +492,13 @@ struct BuildingObserver {
 	int32_t substitutes_count;
 
 	std::set<DescriptionIndex> production_hints;
-	DescriptionIndex collected_map_resource;
+
 	bool requires_supporters;
 
 	// information needed for decision on new building construction
 	int16_t initial_preciousness;
 	int16_t max_preciousness;
 	int16_t max_needed_preciousness;
-
 	int32_t cnt_built;
 	int32_t cnt_under_construction;
 	int32_t cnt_target;           // number of buildings as target
@@ -514,6 +518,7 @@ struct BuildingObserver {
 	bool build_material_shortage;
 
 private:
+	DescriptionIndex collected_map_resource;
 	std::set<BuildingAttribute> is_what;
 };
 

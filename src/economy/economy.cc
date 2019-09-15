@@ -52,7 +52,7 @@ Economy::Economy(Player& player, WareWorker wwtype) : Economy(player, last_econo
 }
 
 Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
-   : serial_(init_serial), owner_(player), type_(wwtype), request_timerid_(0), has_window_(false) {
+   : serial_(init_serial), owner_(player), type_(wwtype), request_timerid_(0), options_window_(nullptr) {
 	last_economy_serial_ = std::max(last_economy_serial_, serial_ + 1);
 	const TribeDescr& tribe = player.tribe();
 	DescriptionIndex const nr_wares_or_workers = wwtype == wwWARE ?
@@ -499,7 +499,7 @@ void Economy::merge(Economy& e) {
 
 	//  If the options window for e is open, but not the one for this, the user
 	//  should still have an options window after the merge.
-	if (e.has_window() && !has_window()) {
+	if (e.get_options_window() && !get_options_window()) {
 		Notifications::publish(NoteEconomy{e.serial(), serial_, NoteEconomy::Action::kMerged});
 	}
 

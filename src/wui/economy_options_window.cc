@@ -126,8 +126,8 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	main_box_.add_space(8);
 	main_box_.add(&dropdown_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	ware_economy->set_has_window(true);
-	worker_economy->set_has_window(true);
+	ware_economy->set_options_window(static_cast<void*>(this));
+	worker_economy->set_options_window(static_cast<void*>(this));
 	economynotes_subscriber_ = Notifications::subscribe<Widelands::NoteEconomy>(
 	   [this](const Widelands::NoteEconomy& note) { on_economy_note(note); });
 	profilenotes_subscriber_ =
@@ -146,13 +146,11 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 }
 
 EconomyOptionsWindow::~EconomyOptionsWindow() {
-	Widelands::Economy* e_wa = player_->get_economy(ware_serial_);
-	Widelands::Economy* e_wo = player_->get_economy(worker_serial_);
-	if (e_wa) {
-		e_wa->set_has_window(false);
+	if (Widelands::Economy* e_wa = player_->get_economy(ware_serial_)) {
+		e_wa->set_options_window(nullptr);
 	}
-	if (e_wo) {
-		e_wo->set_has_window(false);
+	if (Widelands::Economy* e_wo = player_->get_economy(worker_serial_)) {
+		e_wo->set_options_window(nullptr);
 	}
 	if (save_profile_dialog_) {
 		save_profile_dialog_->unset_parent();
@@ -171,7 +169,7 @@ void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
 				die();
 				return;
 			}
-			economy->set_has_window(true);
+			economy->set_options_window(static_cast<void*>(this));
 			(*serial == ware_serial_ ? ware_panel_ : worker_panel_)->set_economy(note.new_economy);
 			move_to_top();
 		} break;
