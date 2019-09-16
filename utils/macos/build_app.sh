@@ -2,7 +2,7 @@
 
 set -e
 
-USAGE="Usage: $0 <clang|gcc|gcc6> <debug|release> <bzr_repo_directory>"
+USAGE="Usage: $0 <clang|gcc|gcc6> <debug|release> <git_repo_directory>"
 USE_ASAN="OFF"
 
 if [ ! -z "$3" ]; then
@@ -77,7 +77,7 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
    fi
 fi
 
-REVISION=`bzr revno $SOURCE_DIR`
+REVISION=`git --git-dir=$SOURCE_DIR/.git rev-parse --abbrev-ref HEAD`-`git --git-dir=$SOURCE_DIR/.git rev-list --count HEAD`
 DESTINATION="WidelandsRelease"
 
 if [[ -f $SOURCE_DIR/WL_RELEASE ]]; then
