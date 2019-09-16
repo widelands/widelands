@@ -1,11 +1,15 @@
 set -ex
 
+BUILD_WEBSITE_TOOLS="ON"
+
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   #Install requested compiler version for linux
 
   if [ "$CXX" = "g++" ]; then
     sudo apt-get install -qq g++-$GCC_VERSION;
     export CXX="g++-$GCC_VERSION" CC="gcc-$GCC_VERSION";
+    # We skip the website binaries in GCC for debug builds, in order to help with job timeouts
+    BUILD_WEBSITE_TOOLS="OFF"
   fi
   if [ "$CXX" = "clang++" ]; then
     sudo apt-get install -qq clang-$CLANG_VERSION;
@@ -31,12 +35,8 @@ cd build
 
 if [ "$BUILD_TYPE" == "Debug" ]; then
    # We test translations only on release builds, in order to help with job timeouts
-   # We also skip the website binaries in GCC for debug builds for the same reason
-   if [ "$CXX" = "g++" ]; then
-     cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="OFF" -DOPTION_ASAN="OFF" -DOPTION_BUILD_WEBSITE_TOOLS="OFF"
-   else
-      cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="OFF" -DOPTION_ASAN="OFF"
-   fi
+   # We also skip the website binaries in GCC for debug builds, in order to help with job timeouts
+   cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="OFF" -DOPTION_ASAN="OFF" -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE_TOOLS
 
    # Run the codecheck test suite.
    pushd ../cmake/codecheck
