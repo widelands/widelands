@@ -5,7 +5,7 @@
 Run at a terminal:
 
 ```sh
-$ ./git-pre-commit-format install
+$ ./utils/clang-format-hooks/git-pre-commit-format install
 ```
 
 This will add a hook (in `.git/hooks/`) which is run every time you commit.
