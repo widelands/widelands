@@ -680,5 +680,5 @@ void OptionsCtrl::save_options() {
 	g_sh->save_config();
 
 	// Now write to file
-	write_config(WLApplication::get());
+	write_config();
 }

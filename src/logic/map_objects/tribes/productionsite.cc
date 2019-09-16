@@ -1090,7 +1090,7 @@ void ProductionSite::update_crude_statistics(uint32_t duration, const bool produ
 	static const uint32_t entire_duration = 10 * 60 * 1000;
 	if (duration > duration_cap) {
 		duration = duration_cap;
-	};
+	}
 	const uint32_t past_duration = entire_duration - duration;
 	crude_percent_ =
 	   (crude_percent_ * past_duration + produced * duration * 10000) / entire_duration;
