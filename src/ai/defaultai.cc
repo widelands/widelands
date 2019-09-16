@@ -256,7 +256,7 @@ void DefaultAI::think() {
 
 	// Here we collect data for "too late ..." message
 	if (delay_time > 5000) {
-		scheduler_delay_counter_ += 1;
+		++scheduler_delay_counter_;
 	} else {
 		scheduler_delay_counter_ = 0;
 	}
@@ -288,7 +288,7 @@ void DefaultAI::think() {
 	// Here we push SchedulerTask members into the temporary queue, providing that a task is due now
 	// and
 	// the limit (jobs_to_run_count) is not exceeded
-	for (uint8_t i = 0; i < jobs_to_run_count; i += 1) {
+	for (uint8_t i = 0; i < jobs_to_run_count; ++i) {
 		if (taskPool[i].due_time <= gametime) {
 			current_task_queue.push_back(taskPool[i]);
 			sort_task_pool();
@@ -307,7 +307,7 @@ void DefaultAI::think() {
 
 		due_task = current_task_queue[i].id;
 
-		sched_stat_[static_cast<uint32_t>(due_task)] += 1;
+		++sched_stat_[static_cast<uint32_t>(due_task)];
 
 		// Now AI runs a job selected above to be performed in this turn
 		// (only one but some of them needs to run check_economies() to
@@ -332,7 +332,7 @@ void DefaultAI::think() {
 			// testing 5 roads
 			{
 				const int32_t roads_to_check = roads.size() / 30 + 1;
-				for (int j = 0; j < roads_to_check; j += 1) {
+				for (int j = 0; j < roads_to_check; ++j) {
 					// improve_roads function will test one road and rotate roads vector
 					if (improve_roads(gametime)) {
 						// if significant change takes place do not go on
@@ -375,7 +375,7 @@ void DefaultAI::think() {
 				set_taskpool_task_time(gametime + 15000, SchedulerTaskId::kCheckProductionsites);
 				// testing 5 productionsites (if there are 5 of them)
 				int32_t ps_to_check = (productionsites.size() < 5) ? productionsites.size() : 5;
-				for (int j = 0; j < ps_to_check; j += 1) {
+				for (int j = 0; j < ps_to_check; ++j) {
 					// one productionsite per one check_productionsites() call
 					if (check_productionsites(gametime)) {
 						// if significant change takes place do not go on
@@ -1132,12 +1132,12 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 			if (non_small_needed > 0) {
 				int32_t const maxsize = player_->get_buildcaps(bf.coords) & BUILDCAPS_SIZEMASK;
 				if (maxsize > 1) {
-					non_small_needed -= 1;
+					--non_small_needed;
 				}
 			}
 			if (near_border_needed > 0) {
 				if (bf.near_border) {
-					near_border_needed -= 1;
+					--near_border_needed;
 				}
 			}
 		}
@@ -1145,7 +1145,7 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 		buildable_fields.push_back(&bf);
 		buildable_fields.pop_front();
 
-		i += 1;
+		++i;
 	}
 
 	// If needed we iterate once more and look for 'special' fields
@@ -1192,11 +1192,11 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 		// decreasing the counters
 		if (update_due_size) {
 			assert(non_small_needed > 0);
-			non_small_needed -= 1;
+			--non_small_needed;
 		}
 		if (update_due_border) {
 			assert(near_border_needed > 0);
-			near_border_needed -= 1;
+			--near_border_needed;
 		}
 
 		// and finnaly update the buildable field
@@ -1243,7 +1243,7 @@ void DefaultAI::update_all_mineable_fields(const uint32_t gametime) {
 		mineable_fields.push_back(mf);
 		mineable_fields.pop_front();
 
-		i += 1;
+		++i;
 	}
 	// Updating overall statistics, first we flush the data and then iterate over all mine fields
 	// ignoring fields that are blocked usually because they are not accessible
@@ -1381,7 +1381,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 			if (mr.location().field->get_owned_by() == 0 &&
 			    ports_vicinity.count(mr.location().hash()) > 0) {
-				field.unowned_portspace_vicinity_nearby += 1;
+				++field.unowned_portspace_vicinity_nearby;
 			}
 		} while (mr.advance(map));
 	}
@@ -1716,7 +1716,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 						if (field.coords != immovables.at(i).coords) {
 							field.military_loneliness *= static_cast<double_t>(dist) / radius;
 						}
-						field.military_in_constr_nearby += 1;
+						++field.military_in_constr_nearby;
 					}
 				}
 			} else if (!connected) {
@@ -1735,9 +1735,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 					   militarysite->soldier_control()->stationed_soldiers().size();
 
 					if (militarysite->soldier_control()->stationed_soldiers().empty()) {
-						field.military_unstationed += 1;
+						++field.military_unstationed;
 					} else {
-						field.military_stationed += 1;
+						++field.military_stationed;
 					}
 
 					if (field.coords != immovables.at(i).coords) {
@@ -2068,10 +2068,10 @@ void DefaultAI::update_productionsite_stats() {
 
 			// Check whether this building is completely occupied
 			if (!productionsites.front().site->can_start_working()) {
-				productionsites.front().bo->unoccupied_count += 1;
+				++productionsites.front().bo->unoccupied_count;
 			}
 		} else {
-			productionsites.front().bo->unconnected_count += 1;
+			++productionsites.front().bo->unconnected_count;
 		}
 
 		// Now reorder the buildings
@@ -2092,10 +2092,10 @@ void DefaultAI::update_productionsite_stats() {
 			mines_.front().bo->current_stats += mines_.front().site->get_statistics_percent();
 			// Check whether this building is completely occupied
 			if (!mines_.front().site->can_start_working()) {
-				mines_.front().bo->unoccupied_count += 1;
+				++mines_.front().bo->unoccupied_count
 			}
 		} else {
-			mines_.front().bo->unconnected_count += 1;
+			++mines_.front().bo->unconnected_count;
 		}
 
 		// Now reorder the buildings
@@ -2542,7 +2542,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			// here we increase or reset the counter
 			// The counter is added to score when considering new building
 			if (bo.max_needed_preciousness > 0) {
-				bo.new_building_overdue += 1;
+				++bo.new_building_overdue;
 			} else {
 				bo.new_building_overdue = 0;
 			}
@@ -2856,9 +2856,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						// frisian claypit and frisian farm
 					} else if (bo.is(BuildingAttribute::kSupportingProducer)) {
 						// we dont like trees nearby
-						prio += 1 - bf->trees_nearby / 3;
+						++prio - bf->trees_nearby / 3;
 						// and be far from rangers
-						prio += 1 - bf->rangers_nearby *
+						++prio - bf->rangers_nearby *
 						               std::abs(management_data.get_military_number_at(102)) / 5;
 
 						// This is for a special case this is also supporter, it considers
@@ -2912,9 +2912,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						// frisian berry farm
 					} else if (bo.is(BuildingAttribute::kSpaceConsumer)) {
 						// we dont like trees nearby
-						prio += 1 - bf->trees_nearby / 4;
+						++prio - bf->trees_nearby / 4;
 						// and be far from rangers
-						prio += 1 - bf->rangers_nearby *
+						++prio - bf->rangers_nearby *
 						               std::abs(management_data.get_military_number_at(102)) / 5;
 
 						// now we find out if the supporter is needed depending on stocklevel
@@ -3021,11 +3021,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 						if (bo.is(BuildingAttribute::kSpaceConsumer)) {  // e.g. farms
 							// we dont like trees nearby
-							prio += 1 - bf->trees_nearby / 4;
+							++prio - bf->trees_nearby / 4;
 							// we attempt to cluster space consumers together
 							prio += bf->space_consumers_nearby * 2;
 							// and be far from rangers
-							prio += 1 - bf->rangers_nearby *
+							++prio - bf->rangers_nearby *
 							               std::abs(management_data.get_military_number_at(102)) / 5;
 						} else {
 							// leave some free space between them
@@ -4369,7 +4369,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			site.bo->construction_decision_time = gametime;
 			en_bo.construction_decision_time = gametime;
 			site.upgrade_pending = true;
-			site.bo->cnt_upgrade_pending += 1;
+			++site.bo->cnt_upgrade_pending;
 			return true;
 		}
 	}
@@ -6094,7 +6094,7 @@ uint8_t DefaultAI::count_buildings_with_attribute(BuildingAttribute attribute) {
 
 	for (BuildingObserver& bo : buildings_) {
 		if (bo.is(attribute)) {
-			count += 1;
+			++count;
 		}
 	}
 
@@ -6114,7 +6114,7 @@ uint32_t DefaultAI::count_productionsites_without_buildings() {
 	for (BuildingObserver& bo : buildings_) {
 		if (bo.type == BuildingObserver::Type::kProductionsite &&
 		    bo.is(BuildingAttribute::kBuildable)) {
-			total += 1;
+			++total;
 			if (bo.cnt_built > 0) {
 				existing += 1000;
 			} else if (bo.cnt_under_construction > 0) {
@@ -6308,7 +6308,7 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance,
 		// increase mines counter
 		// (used when testing possible port location)
 		if (f->nodecaps() & BUILDCAPS_MINE) {
-			mineable_fields_count += 1;
+			++mineable_fields_count;
 		}
 
 		// add neighbours to a queue (duplicates are no problem)
@@ -6339,10 +6339,10 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			++numof_psites_in_constr;
 		}
 		if (target_bo.type == BuildingObserver::Type::kMilitarysite) {
-			msites_per_size[target_bo.desc->get_size()].in_construction += 1;
+			++msites_per_size[target_bo.desc->get_size()].in_construction;
 		}
 		if (target_bo.type == BuildingObserver::Type::kMine) {
-			mines_per_type[target_bo.mines].in_construction += 1;
+			++mines_per_type[target_bo.mines].in_construction;
 		}
 		if (target_bo.type == BuildingObserver::Type::kWarehouse) {
 			++numof_warehouses_in_const_;
@@ -6381,7 +6381,7 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 				productionsites.back().built_time = gametime;
 			}
 			productionsites.back().unoccupied_till = gametime;
-			productionsites.back().bo->unoccupied_count += 1;
+			++productionsites.back().bo->unoccupied_count;
 			if (bo.is(BuildingAttribute::kShipyard)) {
 				marine_task_queue.push_back(kStopShipyard);
 				marine_task_queue.push_back(kReprioritize);
@@ -6403,7 +6403,7 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			assert(mines_.back().no_resources_since == kNever);
 			assert(!mines_.back().upgrade_pending);
 			assert(mines_.back().dismantle_pending_since == kNever);
-			mines_.back().bo->unoccupied_count += 1;
+			++mines_.back().bo->unoccupied_count;
 
 			for (uint32_t i = 0; i < bo.ware_outputs.size(); ++i)
 				++wares.at(bo.ware_outputs.at(i)).producers;
@@ -6411,7 +6411,7 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
 				++wares.at(bo.inputs.at(i)).consumers;
 
-			mines_per_type[bo.mines].finished += 1;
+			++mines_per_type[bo.mines].finished;
 
 			if (bo.is(BuildingAttribute::kBuildingMatProducer)) {
 				++buil_material_mines_count;
@@ -6435,7 +6435,7 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 				militarysites.back().built_time = gametime;
 			}
 			militarysites.back().last_change = 0;
-			msites_per_size[bo.desc->get_size()].finished += 1;
+			++msites_per_size[bo.desc->get_size()].finished;
 
 		} else if (bo.type == BuildingObserver::Type::kTrainingsite) {
 			++ts_without_trainers_;
@@ -6469,10 +6469,10 @@ void DefaultAI::lose_building(const Building& b) {
 			--numof_psites_in_constr;
 		}
 		if (target_bo.type == BuildingObserver::Type::kMilitarysite) {
-			msites_per_size[target_bo.desc->get_size()].in_construction -= 1;
+			--msites_per_size[target_bo.desc->get_size()].in_construction;
 		}
 		if (target_bo.type == BuildingObserver::Type::kMine) {
-			mines_per_type[target_bo.mines].in_construction -= 1;
+			--mines_per_type[target_bo.mines].in_construction;
 		}
 		if (target_bo.type == BuildingObserver::Type::kWarehouse) {
 			--numof_warehouses_in_const_;
@@ -6502,7 +6502,7 @@ void DefaultAI::lose_building(const Building& b) {
 			     i != productionsites.end(); ++i)
 				if (i->site == &b) {
 					if (i->upgrade_pending) {
-						bo.cnt_upgrade_pending -= 1;
+						--bo.cnt_upgrade_pending;
 					}
 					assert(bo.cnt_upgrade_pending == 0 || bo.cnt_upgrade_pending == 1);
 					productionsites.erase(i);
@@ -6538,7 +6538,7 @@ void DefaultAI::lose_building(const Building& b) {
 				--wares.at(bo.inputs.at(i)).consumers;
 			}
 
-			mines_per_type[bo.mines].finished -= 1;
+			--mines_per_type[bo.mines].finished;
 
 			if (bo.is(BuildingAttribute::kBuildingMatProducer)) {
 				assert(buil_material_mines_count > 0);
@@ -6546,7 +6546,7 @@ void DefaultAI::lose_building(const Building& b) {
 			}
 
 		} else if (bo.type == BuildingObserver::Type::kMilitarysite) {
-			msites_per_size[bo.desc->get_size()].finished -= 1;
+			--msites_per_size[bo.desc->get_size()].finished;
 
 			for (std::deque<MilitarySiteObserver>::iterator i = militarysites.begin();
 			     i != militarysites.end(); ++i) {

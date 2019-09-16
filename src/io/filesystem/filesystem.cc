@@ -115,7 +115,7 @@ NumberGlob::NumberGlob(const std::string& file_template) : template_(file_templa
 		max_ *= 10;
 		to_replace_ += "?";
 	}
-	max_ -= 1;
+	--max_;
 }
 
 bool NumberGlob::next(std::string* s) {

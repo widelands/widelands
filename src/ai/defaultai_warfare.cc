@@ -39,7 +39,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	// Militarysites rotate (see check_militarysites())
 	int32_t i = 0;
 	for (MilitarySiteObserver mso : militarysites) {
-		i += 1;
+		++i;
 		if (i % 4 == 0)
 			continue;
 		if (i > 20)
@@ -510,7 +510,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	       player_->vision(Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;
 	enemy_sites[best_target].last_time_attacked = gametime;
-	enemy_sites[best_target].attack_counter += 1;
+	++enemy_sites[best_target].attack_counter;
 
 	last_attack_time_ = gametime;
 	for (int j = 0; j < attackers; ++j) {
@@ -782,7 +782,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	     site != trainingsites.end(); ++site) {
 
 		if (!site->site->can_start_working()) {
-			ts_without_trainers_ += 1;
+			++ts_without_trainers_;
 		}
 	}
 	return true;
