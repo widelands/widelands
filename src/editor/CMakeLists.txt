@@ -126,12 +126,12 @@ wl_library(editor
     map_io
     map_io_map_loader
     notifications
-    profile
     random
     scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
     ui_basic
+    widelands_options
     wui
     wui_common_mapdetails
     wui_mapview_pixelfunctions

@@ -39,7 +39,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
-#include "profile/profile.h"
 #include "ui_basic/unique_window.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
@@ -308,15 +307,14 @@ void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
 void InteractivePlayer::rebuild_showhide_menu() {
 	InteractiveGameBase::rebuild_showhide_menu();
 
-
 	showhidemenu_.add(
 	   get_display_flag(dfShowWorkareaOverlap) ?
-	                /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps are
-					 * highlighted */
-	                _("Hide Workarea Overlaps") :
-	                /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps are
-					 * highlighted */
-	                _("Show Workarea Overlaps"),
+	      /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
+	       * are highlighted */
+	      _("Hide Workarea Overlaps") :
+	      /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
+	       * are highlighted */
+	      _("Show Workarea Overlaps"),
 	   ShowHideEntry::kWorkareaOverlap,
 	   g_gr->images().get("images/wui/menus/show_workarea_overlap.png"), false,
 	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"), "w");

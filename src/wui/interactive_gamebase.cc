@@ -34,7 +34,8 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "network/gamehost.h"
-#include "profile/profile.h"
+#include "wui/constructionsitewindow.h"
+#include "wui/dismantlesitewindow.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_client_disconnected.h"
 #include "wui/game_exit_confirm_box.h"
@@ -133,7 +134,7 @@ void InteractiveGameBase::add_main_menu() {
 	              g_gr->images().get("images/wui/menus/save_game.png"));
 
 	mainmenu_.add(
-				/** TRANSLATORS: An entry in the game's main menu */
+	   /** TRANSLATORS: An entry in the game's main menu */
 	   _("Exit Game"), MainMenuEntry::kExitGame, g_gr->images().get("images/wui/menus/exit.png"));
 
 	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
@@ -186,14 +187,13 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                  ShowHideEntry::kCensus,
 	                  g_gr->images().get("images/wui/menus/toggle_census.png"), false, "", "c");
 
-
-	showhidemenu_.add(
-	   get_display_flag(dfShowStatistics) ?
-					/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building staristics are
-					 * shown */
-					_("Hide Statistics") : _("Show Statistics"),
-	   ShowHideEntry::kStatistics, g_gr->images().get("images/wui/menus/toggle_statistics.png"),
-	   false, "", "s");
+	showhidemenu_.add(get_display_flag(dfShowStatistics) ?
+	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+	                      * building staristics are shown */
+	                     _("Hide Statistics") :
+	                     _("Show Statistics"),
+	                  ShowHideEntry::kStatistics,
+	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "s");
 }
 
 void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
@@ -415,7 +415,7 @@ void InteractiveGameBase::postload() {
 	show_buildhelp(false);
 
 	// Recalc whole map for changed owner stuff
-	egbase().mutable_map()->recalc_whole_map(egbase().world());
+	egbase().mutable_map()->recalc_whole_map(egbase());
 
 	// Close game-relevant UI windows (but keep main menu open)
 	fieldaction_.destroy();
@@ -455,7 +455,7 @@ bool InteractiveGameBase::try_show_ship_window() {
 	}
 
 	std::vector<Widelands::Bob*> ships;
-	if (map.find_bobs(area, &ships, Widelands::FindBobShip())) {
+	if (map.find_bobs(egbase(), area, &ships, Widelands::FindBobShip())) {
 		for (Widelands::Bob* ship : ships) {
 			if (can_see(ship->owner().player_number())) {
 				// FindBobShip should have returned only ships

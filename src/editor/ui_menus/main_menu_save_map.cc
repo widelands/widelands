@@ -40,6 +40,7 @@
 #include "map_io/map_saver.h"
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/messagebox.h"
+#include "wlapplication_options.h"
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"
 
@@ -148,7 +149,7 @@ void MainMenuSaveMap::clicked_ok() {
 			                 filename.substr(0, filename_size - 4) :
 			                 filename);
 		}
-		if (save_map(filename, !g_options.pull_section("global").get_bool("nozip", false))) {
+		if (save_map(filename, !get_config_bool("nozip", false))) {
 			die();
 		} else {
 			table_.focus();
@@ -314,7 +315,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	Widelands::Map* map = egbase.mutable_map();
 
 	// Recompute seafaring tag
-	map->cleanup_port_spaces(egbase.world());
+	map->cleanup_port_spaces(egbase);
 	if (map->allows_seafaring()) {
 		map->add_tag("seafaring");
 	} else {

@@ -29,14 +29,11 @@
 
 // Triggered by BOOST_AUTO_TEST_CASE
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
-
-namespace Widelands {  // Needed?
-class World;
-}  // namespace Widelands
+CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
 using namespace Widelands;
 
-BOOST_AUTO_TEST_SUITE(ai)
+BOOST_AUTO_TEST_SUITE(warehouse_distance)
 
 BOOST_AUTO_TEST_CASE(flag_distance_soft_expiry) {
 	FlagWarehouseDistances fw;

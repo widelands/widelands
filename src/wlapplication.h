@@ -259,6 +259,9 @@ private:
 	bool should_die_;
 
 	std::string homedir_;
+#ifdef USE_XDG
+	std::string userconfigdir_;
+#endif
 
 	/// flag indicating if stdout and stderr have been redirected
 	bool redirected_stdio_;

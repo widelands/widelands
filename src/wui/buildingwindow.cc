@@ -58,7 +58,6 @@ BuildingWindow::BuildingWindow(InteractiveBase& parent,
      building_position_(b.get_position()),
      showing_workarea_(false),
      avoid_fastclick_(avoid_fastclick),
-     is_warping_(false),
      expeditionbtn_(nullptr) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) { on_building_note(note); });
@@ -72,10 +71,8 @@ BuildingWindow::BuildingWindow(InteractiveBase& parent,
 }
 
 BuildingWindow::~BuildingWindow() {
-	if (!is_warping_) {
-		// Accessing the toggle_workarea_ button can cause segfaults, so we leave it alone
-		hide_workarea(false);
-	}
+	// Accessing the toggle_workarea_ button can cause segfaults, so we leave it alone
+	hide_workarea(false);
 }
 
 bool BuildingWindow::check_can_act(Widelands::PlayerNumber p) const {
@@ -94,7 +91,6 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 		// The building is no more. Next think() will call die().
 		case Widelands::NoteBuilding::Action::kStartWarp:
 			ibase()->add_wanted_building_window(building_position_, get_pos(), is_minimal());
-			is_warping_ = true;
 			break;
 		default:
 			break;

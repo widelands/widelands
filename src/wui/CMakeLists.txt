@@ -31,9 +31,9 @@ wl_library(wui_chat_ui
     graphic_text
     graphic_text_layout
     logic
-    profile
     sound
     ui_basic
+    widelands_options
     wui
 )
 
@@ -49,7 +49,7 @@ wl_library(wui_economy_options
     logic_filesystem_constants
     logic_map_objects
     notifications
-    profile
+    io_profile
     ui_basic
     wui_waresdisplay
 )
@@ -152,9 +152,9 @@ wl_library(wui_mapview
     graphic_game_renderer
     logic_map
     logic_widelands_geometry
-    profile
     ui_basic
     widelands_ball_of_mud
+    widelands_options
     wui_mapview_pixelfunctions
 )
 
@@ -294,6 +294,7 @@ wl_library(wui
     graphic_toolbar_imageset
     io_fileread
     io_filesystem
+    io_profile
     logic
     logic_constants
     logic_commands
@@ -309,12 +310,12 @@ wl_library(wui
     network
     note_sound
     notifications
-    profile
     scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
     sound
     ui_basic
+    widelands_options
     wui_chat_ui
     wui_common_gamedetails
     wui_economy_options

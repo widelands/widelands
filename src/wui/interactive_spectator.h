@@ -22,7 +22,7 @@
 
 #include <SDL_keyboard.h>
 
-#include "profile/profile.h"
+#include "io/profile.h"
 #include "ui_basic/button.h"
 #include "wui/interactive_gamebase.h"
 
