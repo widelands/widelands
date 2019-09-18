@@ -3,8 +3,10 @@
 ## This script will check out the current master and then pull new translations
 ## from Transifex.
 ## It then updates the developers/authors file.
-## Afterwards, the catalogs will be updated and the result pushed to
-## the master branch on GitHub.
+## Afterwards, the catalogs will be updated.
+## We also run utils/fix_formatting.py to periodically format the source code.
+## Finally, the result will pushed to the master branch on GitHub
+## and to Transifex.
 
 # Exit as soon as any line in the bash script fails.
 set -e
@@ -73,9 +75,6 @@ else
   exit 1;
 fi
 
-# Fix formatting is being run by bunnybot
-# utils/fix_formatting.py
-
 # Update catalogs
 utils/buildcat.py
 
@@ -89,18 +88,14 @@ else
   exit 1;
 fi
 
-# Stage changes
-# - Translations
-git add po/*/*.po po/*/*.pot data/i18n/locales/*.json debian/translations/*.json || true
-# - Authors
-git add data/txts/*.lua || true
-# - Appdata
-git add debian/widelands.appdata.xml debian/org.widelands.widelands.desktop || true
-# - Statistics
-git add data/i18n/translation_stats.conf || true
+# Fix formatting for C++, Lua & Python
+python utils/fix_formatting.py
 
-# Commit and push.
-git commit -m "Fetched translations and updated catalogs."
+# Add any new translations
+git add po/*/*.po po/*/*.pot data/i18n/locales/*.json debian/translations/*.json || true
+
+# Stage changes, commit and push.
+git commit -am "Updated translations and source code formatting."
 git push https://github.com/widelands/widelands.git master
 
 # Push catalogs to Transifex
