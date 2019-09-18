@@ -193,25 +193,26 @@ public:
 		return &map_view_;
 	}
 
-	// Should return true only in EditorInteractive
+	// This function should return true only in EditorInteractive
 	virtual bool omnipotent() const {
 		return false;
 	}
-	// The following functions should be implemented only by InteractiveGameBase and its subclasses!
+	// These two functions should be overridden only by InteractiveGameBase
 	virtual Widelands::Game* get_game() const {
 		return nullptr;
 	}
 	virtual Widelands::Game& game() const {
 		NEVER_HERE();
 	}
+	// These three functions should be overridden only by InteractivePlayer
 	virtual bool can_see(Widelands::PlayerNumber) const {
-		NEVER_HERE();
+		return true;
 	}
 	virtual bool can_act(Widelands::PlayerNumber) const {
-		NEVER_HERE();
+		return false;
 	}
 	virtual Widelands::PlayerNumber player_number() const {
-		NEVER_HERE();
+		return 0;
 	}
 
 protected:

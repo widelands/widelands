@@ -31,6 +31,8 @@ inline EditorInteractive& ScenarioToolInfrastructureOptionsMenu::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
+constexpr uint8_t kIconGridColumns = 7;
+
 ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(EditorInteractive& parent,
                                                                      ScenarioInfrastructureTool& tool,
                                                                      UI::UniqueWindow::Registry& registry)
@@ -78,13 +80,17 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(Edi
 			switch (t) {
 			case Widelands::MapObjectType::BUILDING: {
 				UI::TabPanel* sizetabs = new UI::TabPanel(tab, UI::TabPanelStyle::kWuiDark);
-				UI::IconGrid* ig_small = new UI::IconGrid(sizetabs, 0, 0, 50, 50, 10);
-				UI::IconGrid* ig_medium = new UI::IconGrid(sizetabs, 0, 0, 50, 50, 10);
-				UI::IconGrid* ig_big = new UI::IconGrid(sizetabs, 0, 0, 50, 50, 10);
-				UI::IconGrid* ig_port = new UI::IconGrid(sizetabs, 0, 0, 50, 50, 10);
-				UI::IconGrid* ig_mine = new UI::IconGrid(sizetabs, 0, 0, 50, 50, 10);
+				UI::IconGrid* ig_small = new UI::IconGrid(sizetabs, 0, 0, 50, 50, kIconGridColumns);
+				UI::IconGrid* ig_medium = new UI::IconGrid(sizetabs, 0, 0, 50, 50, kIconGridColumns);
+				UI::IconGrid* ig_big = new UI::IconGrid(sizetabs, 0, 0, 50, 50, kIconGridColumns);
+				UI::IconGrid* ig_port = new UI::IconGrid(sizetabs, 0, 0, 50, 50, kIconGridColumns);
+				UI::IconGrid* ig_mine = new UI::IconGrid(sizetabs, 0, 0, 50, 50, kIconGridColumns);
 				for (Widelands::DescriptionIndex di : td->buildings()) {
 					const Widelands::BuildingDescr* descr = td->get_building_descr(di);
+					if (descr->type() == Widelands::MapObjectType::CONSTRUCTIONSITE ||
+							descr->type() == Widelands::MapObjectType::DISMANTLESITE) {
+						continue;
+					}
 					UI::IconGrid* i = nullptr;
 					if (descr->get_ismine()) {
 						i = ig_mine;
@@ -133,7 +139,7 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(Edi
 				break;
 			}
 			case Widelands::MapObjectType::IMMOVABLE: {
-				UI::IconGrid* i = new UI::IconGrid(tab, 0, 0, 50, 50, 10);
+				UI::IconGrid* i = new UI::IconGrid(tab, 0, 0, 50, 50, kIconGridColumns);
 				for (Widelands::DescriptionIndex di : td->immovables()) {
 					const Widelands::ImmovableDescr* descr = td->get_immovable_descr(di);
 					i->add(std::to_string(static_cast<int>(t)) + "_" + std::to_string(tribe) + "_" + descr->name(),

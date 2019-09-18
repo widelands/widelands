@@ -46,7 +46,9 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveBase& parent,
    : BuildingWindow(parent, reg, ps, avoid_fastclick),
      production_site_(&ps),
      worker_table_(nullptr),
-     worker_caps_(nullptr) {
+     worker_caps_(nullptr),
+     worker_type_(nullptr),
+     worker_xp_(nullptr) {
 	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) {
 		   if (is_dying_) {
@@ -114,7 +116,21 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		}
 		worker_table_->fit_height();
 
-		if (check_can_act(production_site->owner().player_number())) {
+		if (ibase()->omnipotent()) {
+			worker_type_ = new UI::Dropdown<Widelands::DescriptionIndex>(worker_caps_, "worker_type", 0, 0,
+					get_inner_w() / 3, 8, 24, _("Worker"), UI::DropdownType::kTextual,
+	 				UI::PanelStyle::kWui, UI::ButtonStylekWuiSecondary);
+			worker_xp_ = new UI::SpinBox(worker_caps_, 0, 0, get_inner_w() / 3, 50, 0, 0, 0,
+	        		UI::PanelStyle::kWui, _("Experience"));
+    		worker_caps_->add(worker_type_);
+			worker_caps_->add_inf_space();
+    		worker_caps_->add(worker_xp_);
+    		worker_type_->set_enabled(false);
+    		worker_table_->selected.connect(boost::bind(&ProductionSiteWindow::worker_table_selection_changed, this));
+    		worker_type_->selected.connect(boost::bind(&ProductionSiteWindow::worker_table_dropdown_clicked, this));
+    		worker_xp_->changed.connect(boost::bind(&ProductionSiteWindow::worker_table_xp_clicked, this));
+		}
+		else if (check_can_act(production_site->owner().player_number())) {
 			worker_caps_->add_inf_space();
 			UI::Button* evict_button =
 			   new UI::Button(worker_caps_, "evict", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
@@ -202,6 +218,102 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 			continue;
 		}
 	}
+}
+
+void ProductionSiteWindow::worker_table_selection_changed() {
+	Widelands::ProductionSite* ps = production_site_.get(ibase()->egbase());
+	if (ps == nullptr) {
+		return;
+	}
+
+	// This signal is only used in the editor
+	assert(ibase()->omnipotent());
+	assert(worker_table_);
+	assert(worker_type_);
+	assert(worker_xp_);
+
+	worker_type_->clear();
+	if (worker_table_->has_selection()) {
+		const std::vector<std::pair<Widelands::DescriptionIndex, Widelands::Quantity>> working_positions =
+				ps->descr().working_positions();
+		const size_t selected_index = worker_table_->get_selected();
+		const Widelands::Worker* worker = production_site->working_positions()[selected_index];
+		size_t descr_index = 0;
+		for (size_t i = 0; i < selected_index; ++descr_index) {
+			for (size_t j = 0; j < working_positions[i].second; ++j) {
+				++i;
+			}
+		}
+		// Now descr_index is the index for the selected entry in working_positions
+
+		worker_type_->set_enabled(true);
+		worker_type_->add(_("(vacant)"), Widelands::INVALID_INDEX, nullptr, worker == nullptr);
+		Widelands::DescriptionIndex di = working_positions[descr_index].first;
+		const Widelands::WorkerDescr* descr = ibase()->egbase().tribes().get_worker_descr(di);
+		while (descr) {
+			worker_type_->add(descr->descname(), di, descr->icon(), worker && &worker->descr() == descr);
+			di = descr->becomes();
+			descr = ibase()->egbase().tribes().get_worker_descr(di);
+		}
+		if (worker && worker->needs_experience()) {
+			worker_xp_.set_interval(0, worker->descr().get_needed_experience() - 1);
+			worker_xp_.set_value(worker->get_current_experience);
+		} else {
+			worker_xp_.set_value(0);
+			worker_xp_.set_interval(0, 0);
+		}
+	} else {
+		worker_type_->set_enabled(false);
+		worker_xp_->set_value(0);
+		worker_xp_->set_interval(0, 0);
+	}
+}
+
+void ProductionSiteWindow::worker_table_dropdown_clicked() {
+	Widelands::ProductionSite* ps = production_site_.get(ibase()->egbase());
+	if (ps == nullptr) {
+		return;
+	}
+
+	assert(ibase()->omnipotent());
+	assert(worker_table_ && worker_table_->has_selection());
+	assert(worker_type_ && worker_type_->has_selection());
+	const Widelands::DescriptionIndex selected = worker_type_->get_selected();
+
+	const std::vector<std::pair<Widelands::DescriptionIndex, Widelands::Quantity>> working_positions =
+			ps->descr().working_positions();
+	const size_t selected_index = worker_table_->get_selected();
+	Widelands::Worker* worker = production_site->working_positions()[selected_index];
+	size_t descr_index = 0;
+	for (size_t i = 0; i < selected_index; ++descr_index) {
+		for (size_t j = 0; j < working_positions[i].second; ++j) {
+			++i;
+		}
+	}
+
+	const Widelands::DescriptionIndex current = worker ?
+			ibase()->egbase().tribes().safe_worker_index(worker->descr().name()) : Widelands::INVALID_INDEX;
+	if (current == selected) {
+		return;
+	}
+	if (worker) {
+		worker->remove(ibase().egbase());
+	}
+	if (selected != Widelands::INVALID_INDEX) {
+#ifndef NDEBUG
+		const int result =
+#endif
+		ps->warp_worker(ibase()->egbase(), *ibase()->egbase().tribes().get_worker_descr(selected));
+#ifndef NDEBUG
+		assert(result == 0);
+#endif
+	}
+	// update experience slider and stuff
+	worker_table_selection_changed();
+}
+
+void ProductionSiteWindow::worker_table_xp_clicked() {
+	NOCOM
 }
 
 void ProductionSiteWindow::evict_worker() {

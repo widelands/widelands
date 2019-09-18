@@ -46,7 +46,8 @@ public:
 	                      uint32_t width,
 	                      Widelands::Warehouse& wh,
 	                      Widelands::WareWorker type,
-	                      bool selectable);
+	                      bool selectable,
+	                      bool show_all);
 
 protected:
 	void draw_ware(RenderTarget& dst, Widelands::DescriptionIndex ware) override;
@@ -59,11 +60,12 @@ WarehouseWaresDisplay::WarehouseWaresDisplay(UI::Panel* parent,
                                              uint32_t width,
                                              Widelands::Warehouse& wh,
                                              Widelands::WareWorker type,
-                                             bool selectable)
+                                             bool selectable,
+                                             bool show_all)
    : WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, selectable), warehouse_(wh) {
 	set_inner_size(width, 0);
 	add_warelist(type == Widelands::wwWORKER ? warehouse_.get_workers() : warehouse_.get_wares());
-	if (type == Widelands::wwWORKER) {
+	if (!show_all && type == Widelands::wwWORKER) {
 		const std::vector<Widelands::DescriptionIndex>& worker_types_without_cost =
 		   warehouse_.owner().tribe().worker_types_without_cost();
 		for (size_t i = 0; i < worker_types_without_cost.size(); ++i) {
@@ -109,6 +111,8 @@ struct WarehouseWaresPanel : UI::Box {
 	void set_policy(Widelands::StockPolicy);
 
 private:
+	void change_real_amount(int32_t delta);
+
 	InteractiveBase& ib_;
 	Widelands::Warehouse& wh_;
 	bool can_act_;
@@ -126,7 +130,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
      wh_(wh),
      can_act_(ib.omnipotent() || ib.can_act(wh_.owner().player_number())),
      type_(type),
-     display_(this, width, wh_, type_, can_act_) {
+     display_(this, width, wh_, type_, can_act_, ib.omnipotent()) {
 	add(&display_, Resizing::kFullSize);
 
 	if (can_act_) {
@@ -146,6 +150,55 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 		ADD_POLICY_BUTTON(prefer, Prefer, _("Preferably store selected wares here"))
 		ADD_POLICY_BUTTON(dontstock, DontStock, _("Do not store selected wares here"))
 		ADD_POLICY_BUTTON(remove, Remove, _("Remove selected wares from here"))
+
+		if (ib_.omnipotent()) {
+			buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+			add(buttons);
+			b = new UI::Button(buttons, "decrease_fast", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
+					g_gr->images().get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease storage by 10"));
+			b->sigclicked.connect(boost::bind(&WarehouseWaresPanel::change_real_amount, this, -10));
+			buttons->add(b);
+			b = new UI::Button(buttons, "decrease", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
+					g_gr->images().get("images/ui_basic/scrollbar_down.png"), _("Decrease storage by 1"));
+			b->sigclicked.connect(boost::bind(&WarehouseWaresPanel::change_real_amount, this, -1));
+			buttons->add(b);
+			b = new UI::Button(buttons, "increase", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
+					g_gr->images().get("images/ui_basic/scrollbar_up.png"), _("Increase storage by 1"));
+			b->sigclicked.connect(boost::bind(&WarehouseWaresPanel::change_real_amount, this, 1));
+			buttons->add(b);
+			b = new UI::Button(buttons, "increase_fast", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
+					g_gr->images().get("images/ui_basic/scrollbar_up_fast.png"), _("Increase storage by 10"));
+			b->sigclicked.connect(boost::bind(&WarehouseWaresPanel::change_real_amount, this, 10));
+			buttons->add(b);
+		}
+	}
+}
+
+void WarehouseWaresPanel::change_real_amount(int32_t delta) {
+	if (delta == 0) {
+		return;
+	}
+	assert(ib_.omnipotent());
+	const bool is_workers = type_ == Widelands::wwWORKER;
+	for (const Widelands::DescriptionIndex& index : is_workers ?
+			wh_.owner().tribe().workers() : wh_.owner().tribe().wares()) {
+		if (display_.ware_selected(index)) {
+			if (is_workers) {
+				if (delta > 0) {
+					wh_.insert_workers(index, delta);
+				} else {
+					const int32_t stock = wh_.get_workers().stock(index);
+					wh_.remove_workers(index, std::min(stock, -delta));
+				}
+			} else {
+				if (delta > 0) {
+					wh_.insert_wares(index, delta);
+				} else {
+					const int32_t stock = wh_.get_wares().stock(index);
+					wh_.remove_wares(index, std::min(stock, -delta));
+				}
+			}
+		}
 	}
 }
 
@@ -154,7 +207,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
  */
 void WarehouseWaresPanel::set_policy(Widelands::StockPolicy newpolicy) {
 	if (ib_.omnipotent() || ib_.can_act(wh_.owner().player_number())) {
-		bool is_workers = type_ == Widelands::wwWORKER;
+		const bool is_workers = type_ == Widelands::wwWORKER;
 		const std::set<Widelands::DescriptionIndex> indices =
 		   is_workers ? wh_.owner().tribe().workers() : wh_.owner().tribe().wares();
 

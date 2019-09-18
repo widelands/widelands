@@ -159,16 +159,6 @@ void InteractiveSpectator::exit_btn() {
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
-bool InteractiveSpectator::can_see(Widelands::PlayerNumber) const {
-	return true;
-}
-bool InteractiveSpectator::can_act(Widelands::PlayerNumber) const {
-	return false;
-}
-Widelands::PlayerNumber InteractiveSpectator::player_number() const {
-	return 0;
-}
-
 /**
  * Observer has clicked on the given node; bring up the context menu.
  */

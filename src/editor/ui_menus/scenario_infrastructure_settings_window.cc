@@ -29,6 +29,7 @@
 #include "editor/tools/scenario_infrastructure_settings_tool.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
+#include "wui/economy_options_window.h"
 
 inline EditorInteractive& ScenarioFlagSettingsWindow::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
@@ -38,18 +39,19 @@ ScenarioFlagSettingsWindow::ScenarioFlagSettingsWindow(EditorInteractive& parent
 		ScenarioInfrastructureSettingsTool& t, Widelands::Flag& f)
    : UI::Window(&parent, "scenario_flag_settings_" + std::to_string(f.serial()), 0, 0, 300, 100,
 			(boost::format(_("Flag at %1$dx%2$d")) % f.get_position().x % f.get_position().y).str()),
+     main_box_(this, 0, 0, UI::Box::Vertical),
+     wares_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     economy_options_(&main_box_, "economy_options", 0, 0, 50, 24, UI::ButtonStyle::kWuiSecondary,
+	    _("Economy Options"), _("Change the target quantities for wares and workers")),
      tool_(&t),
      flag_(&f) {
-	main_box_.reset(new UI::Box(this, 0, 0, UI::Box::Horizontal));
-	set_center_panel(main_box_.get());
-
 	const uint32_t capacity = f.total_capacity();
 	wares_on_flag_.reset(new Widelands::DescriptionIndex[capacity]);
 	dropdowns_.reset(new std::unique_ptr<UI::Dropdown<Widelands::DescriptionIndex>>[capacity]);
 	const Widelands::DescriptionIndex nr_wares = parent.egbase().tribes().nrwares();
 	const Widelands::TribeDescr& tribe = f.owner().tribe();
 	for (uint32_t i = 0; i < capacity; ++i) {
-		dropdowns_[i].reset(new UI::Dropdown<Widelands::DescriptionIndex>(main_box_.get(),
+		dropdowns_[i].reset(new UI::Dropdown<Widelands::DescriptionIndex>(&wares_box_,
 	         "ware_" + std::to_string(i), 50, 50, 34, 10, 34, _("Ware"),
 	         UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary));
 		dropdowns_[i]->add(_("(Empty)"), Widelands::INVALID_INDEX,
@@ -60,9 +62,15 @@ ScenarioFlagSettingsWindow::ScenarioFlagSettingsWindow(EditorInteractive& parent
 				dropdowns_[i]->add(d.descname(), di, d.icon());
 			}
 		}
-		main_box_->add(dropdowns_[i].get());
+		wares_box_.add(dropdowns_[i].get());
 		dropdowns_[i]->selected.connect(boost::bind(&ScenarioFlagSettingsWindow::select, this, i));
 	}
+
+	main_box_.add(&wares_box_, UI::Box::Resizing::kFullSize);
+	main_box_.add_space(8);
+	main_box_.add(&economy_options_, UI::Box::Resizing::kFullSize);
+	set_center_panel(&main_box_);
+	economy_options_.sigclicked.connect(boost::bind(&ScenarioFlagSettingsWindow::economy_options_clicked, this));
 
 	update();
 }
@@ -110,6 +118,18 @@ void ScenarioFlagSettingsWindow::select(uint32_t slot) {
 	}
 
 	update();
+}
+
+void ScenarioFlagSettingsWindow::economy_options_clicked() {
+	Widelands::EditorGameBase& egbase = eia().egbase();
+	Widelands::Flag* f = flag_.get(egbase);
+	if (!f) {
+		return;
+	}
+	assert(f->get_economy());
+	if (!f->economy().has_window()) {
+		new EconomyOptionsWindow(get_parent(), f->get_economy(), true);
+	}
 }
 
 void ScenarioFlagSettingsWindow::think() {

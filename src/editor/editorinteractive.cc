@@ -93,6 +93,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      need_save_(false),
      realtime_(SDL_GetTicks()),
      is_painting_(false),
+     players_finalized_(false),
      mainmenu_(toolbar(),
                "dropdown_menu_main",
                0,
@@ -407,6 +408,7 @@ void EditorInteractive::add_scenario_tool_menu() {
 
 	scenario_toolmenu_.selected.connect([this] { scenario_tool_menu_selected(scenario_toolmenu_.get_selected()); });
 	toolbar()->add(&scenario_toolmenu_);
+	scenario_toolmenu_.set_enabled(players_finalized_);
 }
 
 void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
@@ -895,7 +897,9 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_i:
 			if (code.mod & KMOD_SHIFT) {
-				select_tool(tools_->sc_infra_settings, EditorTool::First);
+				if (players_finalized_) {
+					select_tool(tools_->sc_infra_settings, EditorTool::First);
+				}
 			} else {
 				select_tool(tools_->info, EditorTool::First);
 			}
@@ -914,7 +918,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				menu_windows_.savemap.toggle();
-			} else {
+			} else if (players_finalized_) {
 				scenario_toolmenu_.toggle();
 			}
 			return true;
@@ -1069,6 +1073,9 @@ void EditorInteractive::map_changed(const MapWas& action) {
 			update_players();
 		}
 
+		// NOCOM: All this needs to be saveloaded instead of course!!
+		players_finalized_ = false;
+		scenario_toolmenu_.set_enabled(players_finalized_);
 		variables_.clear();
 		functions_.clear();
 		functions_.emplace(std::make_pair(kMainFunction, Function(true)));
@@ -1101,10 +1108,34 @@ EditorInteractive::Tools* EditorInteractive::tools() {
 	return tools_.get();
 }
 
+std::string EditorInteractive::try_finalize_players() {
+	if (players_finalized_) {
+		return _("Players are already finalized");
+	}
+	const Widelands::Map& map = egbase().map();
+	const size_t nr_players = map.get_nrplayers();
+	if (nr_players < 1) {
+		return _("The map has no players");
+	}
+	const Widelands::Tribes& t = egbase().tribes();
+	for (Widelands::PlayerNumber p = 1; p <= nr_players; ++p) {
+		if (!t.tribe_exists(t.tribe_index(map.get_scenario_player_tribe(p)))) {
+			return (boost::format(_("Invalid tribe \"%1$s\" for player %2$s (%3$s)")) %
+					map.get_scenario_player_tribe(p).c_str() % std::to_string(static_cast<int>(p)) %
+					map.get_scenario_player_name(p).c_str()).str();
+		}
+		if (!map.get_starting_pos(p)) {
+			return (boost::format(_("No starting position was set for player %s")) %
+					std::to_string(static_cast<int>(p))).str();
+		}
+	}
+	players_finalized_ = true;
+	scenario_toolmenu_.set_enabled(players_finalized_);
+	return "";
+}
+
 bool EditorInteractive::save_as_scenario() const {
-	// NOCOM EditorInteractive::save_as_scenario()
-	// return functions_.find(kMainFunction) != functions_.end();
-	return true;
+	return players_finalized_;
 }
 
 void EditorInteractive::write_lua(FileWrite& fw) const {

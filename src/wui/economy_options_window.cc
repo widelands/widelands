@@ -284,7 +284,7 @@ void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int delta) {
 		die();
 		return;
 	}
-	Widelands::Game& game = dynamic_cast<Widelands::Game&>(player_->egbase());
+	Widelands::Game* game = dynamic_cast<Widelands::Game*>(&player_->egbase());
 	const bool is_wares = type_ == Widelands::wwWARE;
 	const auto& items = is_wares ? player_->tribe().wares() : player_->tribe().workers();
 	for (const Widelands::DescriptionIndex& index : items) {
@@ -298,19 +298,27 @@ void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int delta) {
 			if (new_amount == old_amount) {
 				continue;
 			}
-			if (is_wares) {
-				game.send_player_command(new Widelands::CmdSetWareTargetQuantity(
-				   game.get_gametime(), player_->player_number(), serial_, index, new_amount));
+			if (game) {
+				if (is_wares) {
+					game->send_player_command(new Widelands::CmdSetWareTargetQuantity(
+					   game->get_gametime(), player_->player_number(), serial_, index, new_amount));
+				} else {
+					game->send_player_command(new Widelands::CmdSetWorkerTargetQuantity(
+					   game->get_gametime(), player_->player_number(), serial_, index, new_amount));
+				}
 			} else {
-				game.send_player_command(new Widelands::CmdSetWorkerTargetQuantity(
-				   game.get_gametime(), player_->player_number(), serial_, index, new_amount));
+				if (is_wares) {
+					player_->get_economy(serial_)->set_ware_target_quantity(index, new_amount, 0);
+				} else {
+					player_->get_economy(serial_)->set_worker_target_quantity(index, new_amount, 0);
+				}
 			}
 		}
 	}
 }
 
 void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
-	Widelands::Game& game = dynamic_cast<Widelands::Game&>(player_->egbase());
+	Widelands::Game* game = dynamic_cast<Widelands::Game*>(&player_->egbase());
 	const bool is_wares = type_ == Widelands::wwWARE;
 	const auto& items = is_wares ? player_->tribe().wares() : player_->tribe().workers();
 	const PredefinedTargets settings = economy_options_window_->get_selected_target();
@@ -325,14 +333,22 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 	for (const Widelands::DescriptionIndex& index : items) {
 		if (display_.ware_selected(index) ||
 		    (!anything_selected && !display_.is_ware_hidden(index))) {
-			if (is_wares) {
-				game.send_player_command(new Widelands::CmdSetWareTargetQuantity(
-				   game.get_gametime(), player_->player_number(), serial_, index,
-				   settings.wares.at(index)));
+			if (game) {
+				if (is_wares) {
+					game->send_player_command(new Widelands::CmdSetWareTargetQuantity(
+					   game->get_gametime(), player_->player_number(), serial_, index,
+					   settings.wares.at(index)));
+				} else {
+					game->send_player_command(new Widelands::CmdSetWorkerTargetQuantity(
+					   game->get_gametime(), player_->player_number(), serial_, index,
+					   settings.workers.at(index)));
+				}
 			} else {
-				game.send_player_command(new Widelands::CmdSetWorkerTargetQuantity(
-				   game.get_gametime(), player_->player_number(), serial_, index,
-				   settings.workers.at(index)));
+				if (is_wares) {
+					player_->get_economy(serial_)->set_ware_target_quantity(index, settings.wares.at(index), 0);
+				} else {
+					player_->get_economy(serial_)->set_worker_target_quantity(index, settings.workers.at(index), 0);
+				}
 			}
 		}
 	}

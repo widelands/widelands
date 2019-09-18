@@ -23,6 +23,8 @@
 #include <memory>
 
 #include "logic/map_objects/tribes/productionsite.h"
+#include "ui_basic/dropdown.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/table.h"
 #include "wui/buildingwindow.h"
 
@@ -46,6 +48,12 @@ private:
 	UI::Box* worker_caps_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>>
 	   productionsitenotes_subscriber_;
+
+	void worker_table_selection_changed();
+	void worker_table_dropdown_clicked();
+	void worker_table_xp_clicked();
+	UI::Dropdown<Widelands::DescriptionIndex>* worker_type_;
+	UI::SpinBox* worker_xp_;
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteWindow);
 };

@@ -45,13 +45,13 @@ private:
 	// Container with UI elements to set a player slot's properties
 	struct PlayerEditRow {
 		explicit PlayerEditRow(UI::Box* init_box,
-		                       UI::EditBox* init_name,
+		                       UI::Panel* init_name,
 		                       UI::Button* init_position,
 		                       UI::Dropdown<std::string>* init_tribe)
 		   : box(init_box), name(init_name), position(init_position), tribe(init_tribe) {
 		}
 		UI::Box* box;
-		UI::EditBox* name;
+		UI::Panel* name;
 		UI::Button* position;
 		UI::Dropdown<std::string>* tribe;
 	};
@@ -67,12 +67,15 @@ private:
 	/// Select starting position for the given row's player
 	void set_starting_pos_clicked(size_t row);
 
+	void finalize_clicked();
+
 	/// Resize window according to number of rows
 	void layout() override;
 
 	UI::Box box_;
 	UI::Dropdown<uintptr_t> no_of_players_;
 	std::vector<std::unique_ptr<PlayerEditRow>> rows_;
+	UI::Button finalize_button_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_PLAYER_MENU_H

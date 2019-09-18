@@ -26,6 +26,7 @@
 #include "economy/flag.h"
 #include "logic/widelands.h"
 #include "ui_basic/box.h"
+#include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/window.h"
 
@@ -47,13 +48,15 @@ protected:
 private:
 	EditorInteractive& eia();
 
-	std::unique_ptr<UI::Box> main_box_;
+	UI::Box main_box_, wares_box_;
 	std::unique_ptr<std::unique_ptr<UI::Dropdown<Widelands::DescriptionIndex>>[]> dropdowns_;
+	UI::Button economy_options_;
 
 	std::unique_ptr<Widelands::DescriptionIndex[]> wares_on_flag_;
 
 	void update();
 	void select(uint32_t slot);
+	void economy_options_clicked();
 
 	ScenarioInfrastructureSettingsTool* tool_;
 	Widelands::OPtr<Widelands::Flag> flag_;

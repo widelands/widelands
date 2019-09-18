@@ -160,6 +160,12 @@ public:
 	// Access to the tools.
 	Tools* tools();
 
+	bool players_finalized() const {
+		return players_finalized_;
+	}
+	// Returns the reason why finalizing failed, or "" on success
+	std::string try_finalize_players();
+
 	// Scripting access
 	const std::map<std::string, Variable>& variables() const {
 		return variables_;
@@ -242,6 +248,8 @@ private:
 	bool need_save_;
 	uint32_t realtime_;
 	bool is_painting_;
+
+	bool players_finalized_;
 
 	// All unique menu windows
 	struct EditorMenuWindows {
