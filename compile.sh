@@ -331,8 +331,8 @@ if ! [ -f src/wlapplication.cc ] ; then
   exit 1
 fi
 
-# Checkout master and pull latest version
-git checkout master
+# Checkout current branch and pull latest master
+git checkout
 git pull https://github.com/widelands/widelands.git master
 
 $COMMANDLINE
