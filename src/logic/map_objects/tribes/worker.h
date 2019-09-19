@@ -137,6 +137,8 @@ public:
 	bool needs_experience() const {
 		return descr().get_needed_experience() != INVALID_INDEX;
 	}
+	// For use in the editor only
+	void set_current_experience(int32_t);
 
 	// debug
 	void log_general_info(const EditorGameBase&) const override;

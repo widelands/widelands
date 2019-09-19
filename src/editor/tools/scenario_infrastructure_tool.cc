@@ -26,11 +26,10 @@
 #include "logic/mapregion.h"
 #include "logic/widelands_geometry.h"
 
-int32_t ScenarioInfrastructureTool::handle_click_impl(const Widelands::World&,
-                                                       const Widelands::NodeAndTriangle<>& center,
-                                                       EditorInteractive& eia,
-                                                       EditorActionArgs* args,
-                                                       Widelands::Map* map) {
+int32_t ScenarioInfrastructureTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                                      EditorInteractive& eia,
+                                                      EditorActionArgs* args,
+                                                      Widelands::Map* map) {
 	if (args->infrastructure_owner < 1 || args->infrastructure_owner > map->get_nrplayers() ||
 			args->infrastructure_types.empty()) {
 		return 0;
@@ -49,8 +48,8 @@ int32_t ScenarioInfrastructureTool::handle_click_impl(const Widelands::World&,
 						egbase.tribes().get_building_descr(item_to_place.second)->is_buildable()) {
 					mo = &egbase.get_player(args->infrastructure_owner)->force_csite(mr.location(), item_to_place.second);
 				} else {
-					Widelands::Building::FormerBuildings b;
-					b.push_back(item_to_place.second);
+					Widelands::FormerBuildings b;
+					b.push_back(std::make_pair(item_to_place.second, ""));
 					mo = &egbase.get_player(args->infrastructure_owner)->force_building(mr.location(), b);
 				}
 				break;
@@ -74,11 +73,10 @@ int32_t ScenarioInfrastructureTool::handle_click_impl(const Widelands::World&,
 	return mr.radius();
 }
 
-int32_t ScenarioInfrastructureTool::handle_undo_impl(const Widelands::World&,
-                                                      const Widelands::NodeAndTriangle<>&,
-                                                      EditorInteractive& eia,
-                                                      EditorActionArgs* args,
-                                                      Widelands::Map*) {
+int32_t ScenarioInfrastructureTool::handle_undo_impl(const Widelands::NodeAndTriangle<>&,
+                                                     EditorInteractive& eia,
+                                                     EditorActionArgs* args,
+                                                     Widelands::Map*) {
 	Widelands::ObjectManager& obj = eia.egbase().objects();
 	for (Widelands::Serial s : args->infrastructure_placed) {
 		if (Widelands::MapObject* mo = obj.get_object(s)) {
@@ -98,7 +96,7 @@ EditorActionArgs ScenarioInfrastructureTool::format_args_impl(EditorInteractive&
 	return a;
 }
 
-int32_t ScenarioInfrastructureDeleteTool::handle_click_impl(const Widelands::World&,
+int32_t ScenarioInfrastructureDeleteTool::handle_click_impl(
                                                        const Widelands::NodeAndTriangle<>& center,
                                                        EditorInteractive& eia,
                                                        EditorActionArgs* args,
@@ -139,7 +137,7 @@ int32_t ScenarioInfrastructureDeleteTool::handle_click_impl(const Widelands::Wor
 	return mr.radius();
 }
 
-int32_t ScenarioInfrastructureDeleteTool::handle_undo_impl(const Widelands::World&,
+int32_t ScenarioInfrastructureDeleteTool::handle_undo_impl(
                                                       const Widelands::NodeAndTriangle<>& center,
                                                       EditorInteractive& eia,
                                                       EditorActionArgs* args,
@@ -165,8 +163,8 @@ int32_t ScenarioInfrastructureDeleteTool::handle_undo_impl(const Widelands::Worl
 					egbase.get_player(it->owner)->force_csite(mr.location(),
 							egbase.tribes().safe_building_index(it->name));
 				} else {
-					Widelands::Building::FormerBuildings b;
-					b.push_back(egbase.tribes().safe_building_index(it->name));
+					Widelands::FormerBuildings b;
+					b.push_back(std::make_pair(egbase.tribes().safe_building_index(it->name), ""));
 					egbase.get_player(it->owner)->force_building(mr.location(), b);
 				}
 				break;

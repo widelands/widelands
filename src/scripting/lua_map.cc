@@ -5371,7 +5371,7 @@ int LuaProductionSite::create_new_worker(PlayerImmovable& pi,
                                          EditorGameBase& egbase,
                                          const WorkerDescr* wdes) {
 	ProductionSite& ps = static_cast<ProductionSite&>(pi);
-	return ps.warp_worker(egbase, *wdes);
+	return ps.warp_worker(egbase, *wdes) ? 0 : -1;
 }
 
 /* RST

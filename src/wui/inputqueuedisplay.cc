@@ -51,6 +51,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      priority_radiogroup_(nullptr),
      increase_max_fill_(nullptr),
      decrease_max_fill_(nullptr),
+     increase_real_fill_(nullptr),
+     decrease_real_fill_(nullptr),
      index_(queue.get_index()),
      type_(queue.get_type()),
      max_fill_indicator_(g_gr->images().get(pic_max_fill_indicator)),
@@ -98,6 +100,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      priority_radiogroup_(nullptr),
      increase_max_fill_(nullptr),
      decrease_max_fill_(nullptr),
+     increase_real_fill_(nullptr),
+     decrease_real_fill_(nullptr),
      index_(di),
      type_(ww),
      max_fill_indicator_(g_gr->images().get(pic_max_fill_indicator)),
@@ -168,6 +172,7 @@ uint32_t InputQueueDisplay::check_max_fill() const {
 void InputQueueDisplay::max_size_changed() {
 	uint32_t pbs = show_only_ ? 0 : PriorityButtonSize;
 	uint32_t ctrl_b_size = show_only_ ? 0 : 2 * kWareMenuPicWidth;
+	uint32_t real_size_buttons = ib_.omnipotent() ? 2 * (kWareMenuPicWidth + CellSpacing) : 0;
 
 	cache_size_ = check_max_size();
 
@@ -178,7 +183,7 @@ void InputQueueDisplay::max_size_changed() {
 		set_desired_size(0, 0);
 	} else {
 		set_desired_size(
-		   cache_size_ * (CellWidth + CellSpacing) + pbs + ctrl_b_size + 2 * Border, total_height_);
+		   cache_size_ * (CellWidth + CellSpacing) + pbs + ctrl_b_size + real_size_buttons + 2 * Border, total_height_);
 	}
 }
 
@@ -327,69 +332,134 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	delete decrease_max_fill_;
 	increase_max_fill_ = nullptr;
 	decrease_max_fill_ = nullptr;
-
-	if (cache_size_ <= 0 || show_only_)
-		return;
-
-	uint32_t x = Border;
-	uint32_t y = Border + (total_height_ - 2 * Border - kWareMenuPicWidth) / 2;
+	if (increase_real_fill_ || decrease_real_fill_) {
+		delete increase_real_fill_;
+		delete decrease_real_fill_;
+		increase_real_fill_ = nullptr;
+		decrease_real_fill_ = nullptr;
+	}
 
 	boost::format tooltip_format("<p>%s%s%s</p>");
 
-	decrease_max_fill_ = new UI::Button(
-	   this, "decrease_max_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
-	   UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_left.png"),
-	   (tooltip_format %
-	    g_gr->styles()
-	       .font_style(UI::FontStyle::kTooltipHeader)
-	       .as_font_tag(
-	          /** TRANSLATORS: Button tooltip in in a building's wares input queue */
-	          _("Decrease the number of wares you want to be stored here"))
+	const uint32_t y = Border + (total_height_ - 2 * Border - kWareMenuPicWidth) / 2;
+	if (cache_size_ > 0 && !show_only_) {
+		uint32_t x = Border;
+		decrease_max_fill_ = new UI::Button(
+		   this, "decrease_max_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
+		   UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_left.png"),
+		   (tooltip_format %
+			g_gr->styles()
+			   .font_style(UI::FontStyle::kTooltipHeader)
+			   .as_font_tag(
+			      /** TRANSLATORS: Button tooltip in in a building's wares input queue */
+			      _("Decrease the number of wares you want to be stored here"))
 
-	    %
-	    as_listitem(
-	       /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
-	          explanation */
-	       _("Hold down Shift to decrease all ware types at the same time"), UI::FontStyle::kTooltip)
+			%
+			as_listitem(
+			   /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+			      explanation */
+			   _("Hold down Shift to decrease all ware types at the same time"), UI::FontStyle::kTooltip)
 
-	    % as_listitem(
-	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
-	            explanation */
-	         _("Hold down Ctrl to allow none of this ware"), UI::FontStyle::kTooltip))
-	      .str());
-	decrease_max_fill_->sigclicked.connect(
-	   boost::bind(&InputQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
+			% as_listitem(
+			     /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+			        explanation */
+			     _("Hold down Ctrl to allow none of this ware"), UI::FontStyle::kTooltip))
+			  .str());
+		decrease_max_fill_->sigclicked.connect(
+		   boost::bind(&InputQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
 
-	x = Border + (cache_size_ + 1) * (CellWidth + CellSpacing);
+		x = Border + (cache_size_ + 1) * (CellWidth + CellSpacing);
 
-	increase_max_fill_ = new UI::Button(
-	   this, "increase_max_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
-	   UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_right.png"),
-	   (tooltip_format
+		increase_max_fill_ = new UI::Button(
+		   this, "increase_max_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
+		   UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_right.png"),
+		   (tooltip_format
 
-	    % g_gr->styles()
-	         .font_style(UI::FontStyle::kTooltipHeader)
-	         .as_font_tag(
-	            /** TRANSLATORS: Button tooltip in a building's wares input queue */
-	            _("Increase the number of wares you want to be stored here"))
+			% g_gr->styles()
+			     .font_style(UI::FontStyle::kTooltipHeader)
+			     .as_font_tag(
+			        /** TRANSLATORS: Button tooltip in a building's wares input queue */
+			        _("Increase the number of wares you want to be stored here"))
 
-	    %
-	    as_listitem(
-	       /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
-	          explanation */
-	       _("Hold down Shift to increase all ware types at the same time"), UI::FontStyle::kTooltip)
+			%
+			as_listitem(
+			   /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+			      explanation */
+			   _("Hold down Shift to increase all ware types at the same time"), UI::FontStyle::kTooltip)
 
-	    % as_listitem(
-	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
-	            explanation */
-	         _("Hold down Ctrl to allow all of this ware"), UI::FontStyle::kTooltip))
-	      .str());
-	increase_max_fill_->sigclicked.connect(
-	   boost::bind(&InputQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));
+			% as_listitem(
+			     /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+			        explanation */
+			     _("Hold down Ctrl to allow all of this ware"), UI::FontStyle::kTooltip))
+			  .str());
+		increase_max_fill_->sigclicked.connect(
+		   boost::bind(&InputQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));
+	}
 
-	increase_max_fill_->set_repeating(true);
-	decrease_max_fill_->set_repeating(true);
-	compute_max_fill_buttons_enabled_state();
+	if (ib_.omnipotent() && queue_) {
+		uint32_t x = Border + PriorityButtonSize + CellSpacing +
+				(cache_size_ + (increase_max_fill_ ? 2 : 0)) * (CellWidth + CellSpacing);
+		decrease_real_fill_ = new UI::Button(
+		   this, "decrease_real_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
+		   UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_down.png"),
+		   (tooltip_format %
+			g_gr->styles()
+			   .font_style(UI::FontStyle::kTooltipHeader)
+			   .as_font_tag(
+			      /** TRANSLATORS: Button tooltip in in a building's wares input queue */
+			      _("Decrease the number of wares currently stored here"))
+
+			%
+			as_listitem(
+			   /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+			      explanation */
+			   _("Hold down Shift to decrease all ware types at the same time"), UI::FontStyle::kTooltip)
+
+			% as_listitem(
+			     /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+			        explanation */
+			     _("Hold down Ctrl to remove all of this ware"), UI::FontStyle::kTooltip))
+			  .str());
+		decrease_real_fill_->sigclicked.connect(
+		   boost::bind(&InputQueueDisplay::decrease_real_fill_clicked, boost::ref(*this)));
+
+		x += CellWidth + CellSpacing;
+
+		increase_real_fill_ = new UI::Button(
+		   this, "increase_real_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
+		   UI::ButtonStyle::kWuiMenu, g_gr->images().get("images/ui_basic/scrollbar_up.png"),
+		   (tooltip_format
+
+			% g_gr->styles()
+			     .font_style(UI::FontStyle::kTooltipHeader)
+			     .as_font_tag(
+			        /** TRANSLATORS: Button tooltip in a building's wares input queue */
+			        _("Increase the number of wares currently stored here"))
+
+			%
+			as_listitem(
+			   /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+			      explanation */
+			   _("Hold down Shift to increase all ware types at the same time"), UI::FontStyle::kTooltip)
+
+			% as_listitem(
+			     /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+			        explanation */
+			     _("Hold down Ctrl to store as much of this ware as possible"), UI::FontStyle::kTooltip))
+			  .str());
+		increase_real_fill_->sigclicked.connect(
+		   boost::bind(&InputQueueDisplay::increase_real_fill_clicked, boost::ref(*this)));
+	}
+
+	if (increase_max_fill_) {
+		increase_max_fill_->set_repeating(true);
+		decrease_max_fill_->set_repeating(true);
+		compute_max_fill_buttons_enabled_state();
+	}
+	if (increase_real_fill_) {
+		increase_real_fill_->set_repeating(true);
+		decrease_real_fill_->set_repeating(true);
+	}
 }
 
 Widelands::ProductionsiteSettings& InputQueueDisplay::mutable_settings() const {
@@ -538,7 +608,7 @@ void InputQueueDisplay::decrease_max_fill_clicked() {
 	// Update other queues of this building
 	if (SDL_GetModState() & KMOD_SHIFT) {
 		// Using int16_t instead of int32_t on purpose to avoid over-/underflows
-		update_siblings_fill(
+		update_siblings_max_fill(
 		   ((SDL_GetModState() & KMOD_CTRL) ? std::numeric_limits<int16_t>::min() : -1));
 	}
 }
@@ -584,12 +654,12 @@ void InputQueueDisplay::increase_max_fill_clicked() {
 	increased_max_fill:
 
 	if (SDL_GetModState() & KMOD_SHIFT) {
-		update_siblings_fill(
+		update_siblings_max_fill(
 		   ((SDL_GetModState() & KMOD_CTRL) ? std::numeric_limits<int16_t>::max() : 1));
 	}
 }
 
-void InputQueueDisplay::update_siblings_fill(int32_t delta) {
+void InputQueueDisplay::update_siblings_max_fill(int32_t delta) {
 	Panel* sibling = get_parent()->get_first_child();
 	// Well, at least we should be a child of our parent
 	assert(sibling != nullptr);
@@ -651,3 +721,56 @@ void InputQueueDisplay::compute_max_fill_buttons_enabled_state() {
 			decrease_max_fill_->set_enabled(false);
 	}
 }
+
+void InputQueueDisplay::update_siblings_real_fill(bool ctrl_down, int32_t delta) {
+	assert(ib_.omnipotent());
+	Panel* sibling = get_parent()->get_first_child();
+	assert(sibling);
+	assert(delta != 0);
+	do {
+		if (sibling == this) {
+			continue;
+		}
+		if (InputQueueDisplay* display = dynamic_cast<InputQueueDisplay*>(sibling)) {
+			assert(display->queue_);
+			Widelands::InputQueue& q = building_.inputqueue(display->queue_->get_index(), display->queue_->get_type());
+			if (ctrl_down) {
+				q.set_filled(delta < 0 ? 0 : q.get_max_fill());
+			} else {
+				q.set_filled(std::max<int32_t>(0, std::min<int32_t>(q.get_max_fill(),
+						static_cast<int32_t>(q.get_filled()) + delta)));
+			}
+		}
+	} while ((sibling = sibling->get_next_sibling()));
+}
+
+void InputQueueDisplay::decrease_real_fill_clicked() {
+	assert(ib_.omnipotent());
+	assert(queue_);
+	Widelands::InputQueue& q = building_.inputqueue(queue_->get_index(), queue_->get_type());
+	const bool ctrl = (SDL_GetModState() & KMOD_CTRL);
+	if (ctrl) {
+		q.set_filled(0);
+	} else if (q.get_filled() > 0) {
+		q.set_filled(q.get_filled() - 1);
+	}
+	if (SDL_GetModState() & KMOD_SHIFT) {
+		update_siblings_real_fill(ctrl, -1);
+	}
+}
+
+void InputQueueDisplay::increase_real_fill_clicked() {
+	assert(ib_.omnipotent());
+	assert(queue_);
+	Widelands::InputQueue& q = building_.inputqueue(queue_->get_index(), queue_->get_type());
+	const bool ctrl = (SDL_GetModState() & KMOD_CTRL);
+	if (ctrl) {
+		q.set_filled(q.get_max_fill());
+	} else if (q.get_filled() < q.get_max_fill()) {
+		q.set_filled(q.get_filled() + 1);
+	}
+	if (SDL_GetModState() & KMOD_SHIFT) {
+		update_siblings_real_fill(ctrl, 1);
+	}
+}
+

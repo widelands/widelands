@@ -29,14 +29,12 @@ struct ScenarioInfrastructureDeleteTool : public EditorTool {
 	ScenarioInfrastructureDeleteTool() : EditorTool(*this, *this) {
 	}
 
-	int32_t handle_click_impl(const Widelands::World& world,
-	                          const Widelands::NodeAndTriangle<>& center,
+	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
-	int32_t handle_undo_impl(const Widelands::World& world,
-	                         const Widelands::NodeAndTriangle<>& center,
+	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
@@ -54,14 +52,12 @@ struct ScenarioInfrastructureTool : public EditorTool {
 			player_(1), index_(), construct_(false) {
 	}
 
-	int32_t handle_click_impl(const Widelands::World& world,
-	                          const Widelands::NodeAndTriangle<>& center,
+	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
-	int32_t handle_undo_impl(const Widelands::World& world,
-	                         const Widelands::NodeAndTriangle<>& center,
+	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
 	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;

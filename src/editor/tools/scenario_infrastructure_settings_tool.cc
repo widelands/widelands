@@ -27,7 +27,7 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 
-int32_t ScenarioInfrastructureSettingsTool::handle_click_impl(const Widelands::World&,
+int32_t ScenarioInfrastructureSettingsTool::handle_click_impl(
                                           const Widelands::NodeAndTriangle<>& center,
                                           EditorInteractive& parent,
                                           EditorActionArgs*,

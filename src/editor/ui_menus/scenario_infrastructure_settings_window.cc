@@ -127,7 +127,13 @@ void ScenarioFlagSettingsWindow::economy_options_clicked() {
 		return;
 	}
 	assert(f->get_economy());
-	if (!f->economy().has_window()) {
+	if (f->economy().get_options_window()) {
+		EconomyOptionsWindow& window = *static_cast<EconomyOptionsWindow*>(f->get_economy()->get_options_window());
+		if (window.is_minimal()) {
+			window.restore();
+		}
+		window.move_to_top();
+	} else {
 		new EconomyOptionsWindow(get_parent(), f->get_economy(), true);
 	}
 }

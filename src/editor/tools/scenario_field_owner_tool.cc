@@ -24,8 +24,7 @@
 #include "logic/mapregion.h"
 #include "logic/widelands_geometry.h"
 
-int32_t ScenarioFieldOwnerTool::handle_click_impl(const Widelands::World&,
-                                                       const Widelands::NodeAndTriangle<>& center,
+int32_t ScenarioFieldOwnerTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                        EditorInteractive& eia,
                                                        EditorActionArgs* args,
                                                        Widelands::Map* map) {
@@ -42,7 +41,7 @@ int32_t ScenarioFieldOwnerTool::handle_click_impl(const Widelands::World&,
 	return mr.radius();
 }
 
-int32_t ScenarioFieldOwnerTool::handle_undo_impl(const Widelands::World&,
+int32_t ScenarioFieldOwnerTool::handle_undo_impl(
                                                       const Widelands::NodeAndTriangle<>& center,
                                                       EditorInteractive& eia,
                                                       EditorActionArgs* args,

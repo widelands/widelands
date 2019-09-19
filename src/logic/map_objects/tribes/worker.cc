@@ -1145,6 +1145,13 @@ void Worker::log_general_info(const EditorGameBase& egbase) const {
 	FORMAT_WARNINGS_ON
 }
 
+void Worker::set_current_experience(int32_t xp) {
+	assert(needs_experience());
+	assert(xp >= 0);
+	assert(xp < descr().get_needed_experience());
+	current_exp_ = xp;
+}
+
 /**
  * Change the location. This should be called in the following situations:
  * \li worker creation (usually, location is a warehouse)
