@@ -123,8 +123,9 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		worker_table_->fit_height();
 
 		if (ibase()->omnipotent()) {
+			worker_caps_->set_desired_size(100, 50); // Prevent dropdown asserts
 			worker_type_ = new UI::Dropdown<Widelands::DescriptionIndex>(worker_caps_, "worker_type", 0, 0,
-					get_inner_w() / 3, 8, 24, _("Worker"), UI::DropdownType::kTextual,
+					100, 8, 24, _("Worker"), UI::DropdownType::kTextual,
 	 				UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
 			worker_xp_decrease_fast_ = new UI::Button(worker_caps_, "xp_decrease_fast", 0, 0, 44, 28,
 					UI::ButtonStyle::kWuiSecondary, g_gr->images().get("images/ui_basic/scrollbar_down_fast.png"),

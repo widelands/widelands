@@ -19,6 +19,8 @@
 
 #include "wui/soldierlist.h"
 
+#include <memory>
+
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
@@ -353,6 +355,7 @@ struct SoldierList : UI::Box {
 private:
 	void mouseover(const Soldier* soldier);
 	void eject(Soldier* soldier);
+	void show_soldier_options(Soldier* soldier);
 	void set_soldier_preference(int32_t changed_to);
 	void think() override;
 	bool check_can_act() const;
@@ -363,6 +366,7 @@ private:
 	SoldierPanel soldierpanel_;
 	UI::Radiogroup soldier_preference_;
 	UI::Textarea infotext_;
+	std::unique_ptr<UI::Button> create_new_soldier_;
 };
 
 SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building)
@@ -371,7 +375,8 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
      building_(building),
      font_style_(UI::FontStyle::kLabel),
      soldierpanel_(*this, ib.egbase(), building),
-     infotext_(this, _("Click soldier to send away")) {
+     infotext_(this, ib.omnipotent() ? _("Click soldier to configure levels") : _("Click soldier to send away")),
+     create_new_soldier_(nullptr) {
 	add(&soldierpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	add_space(2);
@@ -379,7 +384,8 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 	add(&infotext_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	soldierpanel_.set_mouseover(boost::bind(&SoldierList::mouseover, this, _1));
-	soldierpanel_.set_click(boost::bind(&SoldierList::eject, this, _1));
+	soldierpanel_.set_click(boost::bind(ibase_.omnipotent() ? &SoldierList::show_soldier_options :
+			&SoldierList::eject, this, _1));
 
 	// We don't want translators to translate this twice, so it's a bit involved.
 	int w = UI::g_fh
@@ -424,6 +430,18 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 			soldier_preference_.set_enabled(false);
 		}
 	}
+	if (ib.omnipotent()) {
+		buttons->add_inf_space();
+		create_new_soldier_.reset(new UI::Button(buttons, "", 0, 0, 32, 32, UI::ButtonStyle::kWuiSecondary,
+				building.owner().tribe().get_worker_descr(building.owner().tribe().soldier())->icon(),
+				_("Create and add a new soldier")));
+		buttons->add(create_new_soldier_.get());
+		create_new_soldier_->sigclicked.connect([this]() {
+			building_.mutable_soldier_control()->incorporate_soldier(ibase_.egbase(), dynamic_cast<Widelands::Soldier&>(
+					building_.owner().tribe().get_worker_descr(building_.owner().tribe().soldier())->create(
+					ibase_.egbase(), building_.get_owner(), &building_, building_.get_position())));
+		});
+	}
 	buttons->add_inf_space();
 	buttons->add(create_soldier_capacity_control(*buttons, ib, building));
 	add(buttons, UI::Box::Resizing::kFullSize);
@@ -438,11 +456,16 @@ const SoldierControl* SoldierList::soldiers() const {
 }
 
 void SoldierList::think() {
+	upcast(Widelands::MilitarySite, ms, &building_);
+	if (create_new_soldier_) {
+		create_new_soldier_->set_enabled(
+				ms->soldier_control()->soldier_capacity() > ms->soldier_control()->stationed_soldiers().size());
+	}
 	// Only update the soldiers pref radio if player is spectator
 	if (check_can_act()) {
 		return;
 	}
-	if (upcast(Widelands::MilitarySite, ms, &building_)) {
+	if (ms) {
 		switch (ms->get_soldier_preference()) {
 		case Widelands::SoldierPreference::kRookies:
 			soldier_preference_.set_state(0);
@@ -474,11 +497,8 @@ void SoldierList::eject(Soldier* soldier) {
 	bool over_min = capacity_min < soldiers()->present_soldiers().size();
 
 	if (check_can_act() && over_min) {
-		if (ibase_.get_game()) {
-			ibase_.game().send_player_drop_soldier(building_, soldier->serial());
-		} else {
-			building_.get_owner()->drop_soldier(building_, *soldier);
-		}
+		assert(ibase_.get_game());
+		ibase_.game().send_player_drop_soldier(building_, soldier->serial());
 	}
 }
 
@@ -492,6 +512,166 @@ void SoldierList::set_soldier_preference(int32_t changed_to) {
 		building_.get_owner()->military_site_set_soldier_preference(building_,
 				changed_to == 0 ? Widelands::SoldierPreference::kRookies : Widelands::SoldierPreference::kHeroes);
 	}
+}
+
+constexpr uint16_t kSliderWidth = 250;
+constexpr uint16_t kSliderHeight = 24;
+constexpr uint16_t kSpacing = 4;
+
+struct SoldierSettings : UI::Window {
+public:
+	SoldierSettings(InteractiveBase& ib, Widelands::Soldier& s)
+			: UI::Window(&ib, "soldier_settings_" + std::to_string(s.serial()), 0, 0, 200, 200,
+			(boost::format(_("Soldier %u")) % s.serial()).str()),
+			egbase_(ib.egbase()),
+			soldier_(s),
+			main_box_(this, 0, 0, UI::Box::Vertical),
+			upper_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+			label_box_(&upper_box_, 0, 0, UI::Box::Vertical),
+			slider_box_(&upper_box_, 0, 0, UI::Box::Vertical),
+			health_(&slider_box_, 0, 0, kSliderWidth, kSliderHeight, 0,
+					s.descr().get_max_health_level(), s.get_health_level(),
+					UI::SliderStyle::kWuiDark, _("The soldier’s health level")),
+			attack_(&slider_box_, 0, 0, kSliderWidth, kSliderHeight, 0,
+					s.descr().get_max_attack_level(), s.get_attack_level(),
+					UI::SliderStyle::kWuiDark, _("The soldier’s attack level")),
+			defense_(&slider_box_, 0, 0, kSliderWidth, kSliderHeight, 0,
+					s.descr().get_max_defense_level(), s.get_defense_level(),
+					UI::SliderStyle::kWuiDark, _("The soldier’s defense level")),
+			evade_(&slider_box_, 0, 0, kSliderWidth, kSliderHeight, 0,
+					s.descr().get_max_evade_level(), s.get_evade_level(),
+					UI::SliderStyle::kWuiDark, _("The soldier’s evade level")),
+			current_health_(&slider_box_, 0, 0, kSliderWidth, kSliderHeight, 1, 1, 1,
+					UI::SliderStyle::kWuiDark, _("The soldier’s current hitpoints")),
+			delete_(&main_box_, "delete", 0, 0, 100, 30, UI::ButtonStyle::kWuiSecondary,
+					_("Delete"), _("Delete this soldier")),
+			cancel_(&main_box_, "cancel", 0, 0, 100, 30, UI::ButtonStyle::kWuiSecondary,
+					_("Cancel"), _("Discard all changes")),
+			ok_(&main_box_, "ok", 0, 0, 100, 30, UI::ButtonStyle::kWuiPrimary,
+					_("OK"), _("Apply changes")),
+			hlabel_(&label_box_, "", UI::Align::kRight),
+			alabel_(&label_box_, "", UI::Align::kRight),
+			dlabel_(&label_box_, "", UI::Align::kRight),
+			elabel_(&label_box_, "", UI::Align::kRight),
+			clabel_(&label_box_, "", UI::Align::kRight) {
+		label_box_.add(&hlabel_, UI::Box::Resizing::kFullSize);
+		label_box_.add_inf_space();
+		label_box_.add(&alabel_, UI::Box::Resizing::kFullSize);
+		label_box_.add_inf_space();
+		label_box_.add(&dlabel_, UI::Box::Resizing::kFullSize);
+		label_box_.add_inf_space();
+		label_box_.add(&elabel_, UI::Box::Resizing::kFullSize);
+		label_box_.add_inf_space();
+		label_box_.add(&clabel_, UI::Box::Resizing::kFullSize);
+		slider_box_.add(&health_, UI::Box::Resizing::kFullSize);
+		slider_box_.add_space(kSpacing);
+		slider_box_.add(&attack_, UI::Box::Resizing::kFullSize);
+		slider_box_.add_space(kSpacing);
+		slider_box_.add(&defense_, UI::Box::Resizing::kFullSize);
+		slider_box_.add_space(kSpacing);
+		slider_box_.add(&evade_, UI::Box::Resizing::kFullSize);
+		slider_box_.add_space(kSpacing);
+		slider_box_.add(&current_health_, UI::Box::Resizing::kFullSize);
+
+		upper_box_.add(&label_box_, UI::Box::Resizing::kFullSize);
+		upper_box_.add_space(kSpacing);
+		upper_box_.add(&slider_box_, UI::Box::Resizing::kFullSize);
+		main_box_.add(&upper_box_, UI::Box::Resizing::kFullSize);
+		main_box_.add(&delete_, UI::Box::Resizing::kFullSize);
+		main_box_.add(&cancel_, UI::Box::Resizing::kFullSize);
+		main_box_.add(&ok_, UI::Box::Resizing::kFullSize);
+
+		health_.set_enabled(health_.get_max_value() > 0);
+		attack_.set_enabled(attack_.get_max_value() > 0);
+		defense_.set_enabled(defense_.get_max_value() > 0);
+		evade_.set_enabled(evade_.get_max_value() > 0);
+
+		health_.changed.connect(boost::bind(&SoldierSettings::health_slider_changed, this));
+		attack_.changed.connect(boost::bind(&SoldierSettings::update_label_a, this));
+		defense_.changed.connect(boost::bind(&SoldierSettings::update_label_d, this));
+		evade_.changed.connect(boost::bind(&SoldierSettings::update_label_e, this));
+		current_health_.changed.connect(boost::bind(&SoldierSettings::update_label_c, this));
+		delete_.sigclicked.connect(boost::bind(&SoldierSettings::clicked_delete, this));
+		cancel_.sigclicked.connect(boost::bind(&SoldierSettings::die, this));
+		ok_.sigclicked.connect(boost::bind(&SoldierSettings::clicked_ok, this));
+
+		health_slider_changed();
+		current_health_.set_value(soldier_.get_current_health());
+		update_label_a();
+		update_label_d();
+		update_label_e();
+
+		hlabel_.set_fixed_width(kSliderWidth);
+		alabel_.set_fixed_width(kSliderWidth);
+		dlabel_.set_fixed_width(kSliderWidth);
+		elabel_.set_fixed_width(kSliderWidth);
+		clabel_.set_fixed_width(kSliderWidth);
+
+		set_center_panel(&main_box_);
+		center_to_parent();
+	}
+	~SoldierSettings() {
+	}
+
+private:
+	Widelands::EditorGameBase& egbase_;
+	Widelands::Soldier& soldier_;
+
+	UI::Box main_box_, upper_box_, label_box_, slider_box_;
+	UI::HorizontalSlider health_, attack_, defense_, evade_, current_health_;
+	UI::Button delete_, cancel_, ok_;
+	UI::Textarea hlabel_, alabel_, dlabel_, elabel_, clabel_;
+
+	inline static void update_label(UI::Textarea& l, const UI::Slider& s, const std::string& prefix) {
+		l.set_text((boost::format(_("%1$s: %2$d / %3$d")) % prefix %
+				s.get_value() % s.get_max_value()).str());
+	}
+	void update_label_h() {
+		update_label(hlabel_, health_, _("Health level"));
+	}
+	void update_label_a() {
+		update_label(alabel_, attack_, _("Attack level"));
+	}
+	void update_label_d() {
+		update_label(dlabel_, defense_, _("Defense level"));
+	}
+	void update_label_e() {
+		update_label(elabel_, evade_, _("Evade level"));
+	}
+	void update_label_c() {
+		update_label(clabel_, current_health_, _("Hitpoints"));
+	}
+
+	void health_slider_changed() {
+		current_health_.set_max_value(soldier_.descr().get_base_health() +
+				health_.get_value() * soldier_.descr().get_health_incr_per_level());
+		update_label_h();
+		update_label_c();
+	}
+
+	void clicked_ok() {
+		soldier_.set_level(health_.get_value(), attack_.get_value(), defense_.get_value(), evade_.get_value());
+		const int32_t cur_h = soldier_.get_current_health();
+		const int32_t desired_h = current_health_.get_value();
+		if (cur_h < desired_h) {
+			soldier_.heal(desired_h - cur_h);
+		} else if (cur_h > desired_h) {
+			soldier_.damage(cur_h - desired_h);
+		}
+		die();
+	}
+	void clicked_delete() {
+		dynamic_cast<Widelands::Building*>(soldier_.get_location(egbase_))->
+				mutable_soldier_control()->outcorporate_soldier(soldier_);
+		soldier_.remove(egbase_);
+		die();
+	}
+};
+
+void SoldierList::show_soldier_options(Soldier* soldier) {
+	assert(ibase_.omnipotent());
+	SoldierSettings s(ibase_, *soldier);
+	s.run<UI::Panel::Returncodes>();
 }
 
 UI::Panel*
