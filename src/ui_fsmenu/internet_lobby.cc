@@ -223,7 +223,7 @@ void FullscreenMenuInternetLobby::connect_to_metaserver() {
 	const std::string& metaserver =
 	   get_config_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
 	uint32_t port = get_config_natural("metaserverport", kInternetGamingPort);
-	std::string auth = is_registered_ ? password_ : get_config_string("uuid", nullptr);
+	std::string auth = is_registered_ ? password_ : get_config_string("uuid", "");
 	assert(!auth.empty());
 	InternetGaming::ref().login(nickname_, auth, is_registered_, metaserver, port);
 }
