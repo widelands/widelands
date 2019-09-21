@@ -1,38 +1,14 @@
 set -ex
 
-if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-  #Install requested compiler version for linux
+export START_TIME=$(date +%s)
 
-  if [ "$CXX" = "g++" ]; then
-    sudo apt-get install -qq g++-$GCC_VERSION;
-    export CXX="g++-$GCC_VERSION" CC="gcc-$GCC_VERSION";
-  fi
-  if [ "$CXX" = "clang++" ]; then
-    sudo apt-get install -qq clang-$CLANG_VERSION;
-    export CXX="clang++-$CLANG_VERSION" CC="clang-$CLANG_VERSION";
-  fi
-fi
-
-if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-  # Upgrade homebrew
-  brew update && brew upgrade
-  # Install osx dependencies
-  # boost, cmake, gettext and icu4c are preinstalled :)
-  brew install glew sdl2 sdl2_image sdl2_mixer sdl2_ttf
-  # brew doesn't add a link by default
-  brew link --force gettext
-  # icu4c cannot be forced
-  export ICU_ROOT="$(brew --prefix icu4c)"
-fi
-
-# Configure the build
+# Create build folder.
 mkdir build
 cd build
 
 if [ "$BUILD_TYPE" == "Debug" ]; then
    # We test translations only on release builds, in order to help with job timeouts
    cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="OFF" -DOPTION_ASAN="OFF"
-
    # Run the codecheck test suite.
    pushd ../cmake/codecheck
    ./run_tests.py
@@ -50,12 +26,6 @@ else
 
    # We test the documentation on release builds to make timeouts for debug builds less likely.
    # Any warning is an error.
-   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-     sudo pip install sphinx
-   fi
-   if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-     pip2 install sphinx
-   fi
    pushd ../doc/sphinx
    mkdir source/_static
    ./extract_rst.py
@@ -66,8 +36,15 @@ fi
 # Do the actual build.
 make -k -j3
 
-if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-  # Run the regression suite. Haven't gotten it working on osx, due to problems with xvfb and/or opengl support.
-  cd ..
-  ./regression_test.py -b build/src/widelands
+export STOP_TIME=$(date +%s)
+
+# Run the regression suite only if compiling didn't take too long (to avoid timeouts).
+# On macOS it always fails with a broken GL installation message, so we ommit it.
+if [ "$TRAVIS_OS_NAME" = linux ]; then
+   if [ "$TRAVIS_COMPILER" = g++ ] && (( STOP_TIME - START_TIME >= 1980 )); then
+      echo "Not enough time left, to run the regression suit."
+   else
+      cd ..
+      ./regression_test.py -b build/src/widelands
+   fi
 fi
