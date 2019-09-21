@@ -28,8 +28,6 @@
 
 using std::endl;
 
-// test comment XXXXXXXXXXXXXXX // test comment XXXXXXXXXXXXXXX // test comment XXXXXXXXXXXXXXX// test comment XXXXXXXXXXXXXXX// test comment XXXXXXXXXXXXXXX// test comment XXXXXXXXXXXXXXX // test comment XXXXXXXXXXXXXXX
-
 /**
  * Print usage information
  */
