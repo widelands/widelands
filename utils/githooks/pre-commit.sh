@@ -4,5 +4,5 @@
 
 git diff --name-only | grep ".*\.\(h\|cc\)" | while read line ; do
    echo formatting file: $line
-   clang-format $line
+   clang-format -i $line
 done
