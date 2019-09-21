@@ -99,7 +99,7 @@
 
 namespace {
 
-// test comment XXXXXXXXXXXXXXX // test comment XXXXXXXXXXXXXXX // test comment XXXXXXXXXXXXXXX// test comment XXXXXXXXXXXXXXX// test comment XXXXXXXXXXXXXXX // test comment XXXXXXXXXXXXXXX
+// test comment XXXXXXXXXXXXXXX // test comment XXXXXXXXXXXXXXX// test comment XXXXXXXXXXXXXXX// test comment XXXXXXXXXXXXXXX// test comment XXXXXXXXXXXXXXX // test comment XXXXXXXXXXXXXXX
 
 /**
  * Shut the hardware down: stop graphics mode, stop sound handler
