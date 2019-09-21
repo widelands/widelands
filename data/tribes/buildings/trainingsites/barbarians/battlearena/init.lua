@@ -93,7 +93,8 @@ tribes:new_trainingsite_type {
             "return=failed unless site has barbarians_bread",
             "return=failed unless site has fish,meat",
             "return=failed unless site has beer_strong",
-            "animate=working 30000",
+            "sleep=15000",
+            "animate=working 15000",
             "checksoldier=soldier evade 0", -- Because the soldier can be expelled by the player
             "consume=barbarians_bread fish,meat beer_strong",
             "train=soldier evade 0 1"
@@ -107,7 +108,8 @@ tribes:new_trainingsite_type {
             "return=failed unless site has barbarians_bread:2",
             "return=failed unless site has fish,meat",
             "return=failed unless site has beer_strong",
-            "animate=working 30000",
+            "sleep=15000",
+            "animate=working 15000",
             "checksoldier=soldier evade 1", -- Because the soldier can be expulsed by the player
             "consume=barbarians_bread:2 fish,meat beer_strong",
             "train=soldier evade 1 2"

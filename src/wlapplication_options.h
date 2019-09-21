@@ -21,7 +21,6 @@
 #define WL_WLAPPLICATION_OPTIONS_H
 
 #include "io/profile.h"
-#include "wlapplication.h"
 
 /*
  * Further explanations for all functions and its return values
@@ -77,31 +76,20 @@ void set_config_string(const std::string& section,
                        const std::string& value);
 
 /*
- * Reads the configuration from kConfigFile.
- * Defaults to $XDG_CONFIG_HOME/widelands/config on Unix.
- * Defaults to homedir/config everywhere else, if homedir is set manually or if
- * built without XDG-support.
- *
- * This function needs access to the WLApplication object to distinguish
- * between multiple possible states.
- * While we could use WLApplication::get() this would get us in an infinite loop
- * because this function will be called in the constructor of said object and
- * WLApplication::get() spawns another object if there isn't one yet.
+ * Sets the directory where to read/write kConfigFile.
  */
-void read_config(WLApplication*);
+void set_config_directory(const std::string& userconfigdir);
+
+/*
+ * Reads the configuration from kConfigFile.
+ * Assumes that set_config_directory has been called.
+ */
+void read_config();
 
 /*
  * Writes the configuration to kConfigFile.
- * Defaults to $XDG_CONFIG_HOME/widelands/config on Unix.
- * Defaults to homedir/config everywhere else, if homedir is set manually or if
- * built without XDG-support.
- *
- * This function needs access to the WLApplication object to distinguish
- * between multiple possible states.
- * While we could use WLApplication::get() this would get us in an infinite loop
- * because this function will be called in the constructor of said object and
- * WLApplication::get() spawns another object if there isn't one yet.
+ * * Assumes that set_config_directory has been called.
  */
-void write_config(WLApplication*);
+void write_config();
 
 #endif  // end of include guard: WL_WLAPPLICATION_OPTIONS_H
