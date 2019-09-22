@@ -3,6 +3,13 @@ image_dirname = path.dirname(__file__) .. "images/barbarians/"
 tribes:new_tribe {
    name = "barbarians",
    animations = {
+      frontier = {
+         directory = image_dirname,
+         basename = "frontier",
+         hotspot = { 1, 19 }
+      },
+   },
+   spritesheets = {
       flag = {
          directory = image_dirname,
          basename = "flag",
@@ -11,12 +18,7 @@ tribes:new_tribe {
          columns = 4,
          rows = 4,
          hotspot = { 11, 39 }
-      },
-      frontier = {
-         directory = image_dirname,
-         basename = "frontier",
-         hotspot = { 1, 19 }
-      },
+      }
    },
 
    -- Image file paths for this tribe's road textures

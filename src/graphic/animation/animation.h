@@ -53,7 +53,7 @@ class Animation {
 public:
 	/// Whether we have an animation consisting of multiple files or of 1 single spritesheet file
 	enum class Type {
-		kFile,
+		kFiles,
 		kSpritesheet
 	};
 

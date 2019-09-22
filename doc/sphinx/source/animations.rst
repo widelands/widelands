@@ -115,8 +115,7 @@ then delete the old animation code in the map object's ``init.lua`` file and add
 The tool will print the new code to the console for you, so all you need to do is copy/paste
 and then add any missing optional parameters back in.
 
-Note that except for flag and frontier animations, the table for spritesheets is
-called ``spritesheets``, not ``animations``!
+Note that the table for spritesheets is called ``spritesheets``, not ``animations``!
 This distinction is necessary for performance reasons.
 
 Spritesheets have three additional mandatory parameters so that the engine can

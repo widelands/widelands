@@ -28,7 +28,7 @@
 
 uint32_t AnimationManager::load(const LuaTable& table, const std::string& basename, Animation::Type type) {
 	switch (type) {
-	case Animation::Type::kFile:
+	case Animation::Type::kFiles:
 		animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table, basename)));
 		break;
 	case Animation::Type::kSpritesheet:

@@ -88,6 +88,17 @@ void SpriteSheetAnimation::SpriteSheetMipMapEntry::load_graphics() {
 	// Frame width and height
 	w = sheet->width() / columns;
 	h = sheet->height() / rows;
+
+    if ((w * columns) != sheet->width()) {
+        throw Widelands::GameDataError(
+           "frame width (%d) x columns (%d) != sheet width (%d). The sheet's image is %s",
+           w, columns, sheet->width(), sheet_file.c_str());
+    }
+    if ((h * rows) != sheet->height()) {
+        throw Widelands::GameDataError(
+           "frame height (%d) x rows (%d) != sheet height (%d). The sheet's image is %s",
+           h, rows, sheet->height(), sheet_file.c_str());
+    }
 }
 
 void SpriteSheetAnimation::SpriteSheetMipMapEntry::blit(uint32_t idx,
@@ -161,6 +172,10 @@ SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table, const std::str
 
 		if (rows_ * columns_ < nr_frames_) {
 			throw Widelands::GameDataError("Animation has %d frames, which does not fit into %d rows x %d columns",
+										   nr_frames_, rows_, columns_);
+		}
+        if ((rows_ - 1) * columns_ > nr_frames_) {
+			throw Widelands::GameDataError("Animation has %d frames, which is giving us an extra row in %d rows x %d columns",
 										   nr_frames_, rows_, columns_);
 		}
 

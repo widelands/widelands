@@ -246,7 +246,7 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 	bool has_animations = false;
 	if (table.has_key("animations")) {
 		has_animations = true;
-		add_animations(*table.get_table("animations"), Animation::Type::kFile);
+		add_animations(*table.get_table("animations"), Animation::Type::kFiles);
 	}
 	if (table.has_key("spritesheets")) {
 		has_animations = true;
@@ -318,7 +318,7 @@ void MapObjectDescr::add_animations(const LuaTable& table, Animation::Type anim_
 			}
 		} catch (const std::exception& e) {
 			throw GameDataError(
-			   "Error loading animation for map object '%s': %s", name().c_str(), e.what());
+			   "Error loading animation '%s' for map object '%s': %s", animname.c_str(), name().c_str(), e.what());
 		}
 	}
 }

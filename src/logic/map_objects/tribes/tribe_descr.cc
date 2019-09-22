@@ -63,21 +63,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 	try {
 		initializations_ = info.initializations;
 
-		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
-		{
-			std::unique_ptr<LuaTable> animations_table = items_table->get_table("frontier");
-			frontier_animation_id_ =
-			   g_gr->animations().load(name_ + std::string("_frontier"), *animations_table,
-			                           animations_table->get_string("basename"),
-									   animations_table->has_key("columns") ? Animation::Type::kSpritesheet : Animation::Type::kFile);
-			animations_table = items_table->get_table("flag");
-			flag_animation_id_ =
-			   g_gr->animations().load(name_ + std::string("_flag"), *animations_table,
-			                           animations_table->get_string("basename"),
-									   animations_table->has_key("columns") ? Animation::Type::kSpritesheet : Animation::Type::kFile);
-		}
-
-		items_table = table.get_table("roads");
+		std::unique_ptr<LuaTable> items_table = table.get_table("roads");
 		const auto load_roads = [&items_table](
 		                           const std::string& road_type, std::vector<std::string>* images) {
 			std::vector<std::string> roads =
@@ -97,7 +83,33 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		load_roads("normal", &normal_road_paths_);
 		load_roads("busy", &busy_road_paths_);
 
-		items_table = table.get_table("wares_order");
+        // Frontier and flag animations can be a mix of file and spritesheet animations
+        const auto load_animations = [this](const LuaTable& animations_table, Animation::Type animation_type) {
+            if (animations_table.has_key("frontier")) {
+                std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
+                frontier_animation_id_ =
+                   g_gr->animations().load(name_ + std::string("_frontier"), *animation_table,
+                                           animation_table->get_string("basename"),
+                                           animation_type);
+            }
+            if (animations_table.has_key("flag")) {
+                std::unique_ptr<LuaTable> animation_table = animations_table.get_table("flag");
+                flag_animation_id_ =
+                   g_gr->animations().load(name_ + std::string("_flag"), *animation_table,
+                                           animation_table->get_string("basename"),
+                                           animation_type);
+            }
+        };
+
+        if (table.has_key("animations")) {
+            load_animations(*table.get_table("animations"), Animation::Type::kFiles);
+		}
+        if (table.has_key("spritesheets")) {
+            load_animations(*table.get_table("spritesheets"), Animation::Type::kSpritesheet);
+		}
+
+
+        items_table = table.get_table("wares_order");
 		for (const int key : items_table->keys<int>()) {
 			std::vector<DescriptionIndex> column;
 			std::vector<std::string> warenames =
