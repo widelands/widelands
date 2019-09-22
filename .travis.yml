@@ -53,11 +53,12 @@ jobs:
     - stage: tests
       name: "Codecheck Suite"
       script: ./.travis.sh codecheck
+      language: cpp
     - script: ./.travis.sh documentation
       name: "Documentation Test"
       language: python
+      cache: pip
       install: pip install sphinx
-      
 
 #stages:
 #  - tests
