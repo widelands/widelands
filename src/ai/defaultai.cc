@@ -2092,7 +2092,7 @@ void DefaultAI::update_productionsite_stats() {
 			mines_.front().bo->current_stats += mines_.front().site->get_statistics_percent();
 			// Check whether this building is completely occupied
 			if (!mines_.front().site->can_start_working()) {
-				++mines_.front().bo->unoccupied_count
+				++mines_.front().bo->unoccupied_count;
 			}
 		} else {
 			++mines_.front().bo->unconnected_count;
