@@ -83,33 +83,31 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		load_roads("normal", &normal_road_paths_);
 		load_roads("busy", &busy_road_paths_);
 
-        // Frontier and flag animations can be a mix of file and spritesheet animations
-        const auto load_animations = [this](const LuaTable& animations_table, Animation::Type animation_type) {
-            if (animations_table.has_key("frontier")) {
-                std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
-                frontier_animation_id_ =
-                   g_gr->animations().load(name_ + std::string("_frontier"), *animation_table,
-                                           animation_table->get_string("basename"),
-                                           animation_type);
-            }
-            if (animations_table.has_key("flag")) {
-                std::unique_ptr<LuaTable> animation_table = animations_table.get_table("flag");
-                flag_animation_id_ =
-                   g_gr->animations().load(name_ + std::string("_flag"), *animation_table,
-                                           animation_table->get_string("basename"),
-                                           animation_type);
-            }
-        };
+		// Frontier and flag animations can be a mix of file and spritesheet animations
+		const auto load_animations = [this](const LuaTable& animations_table,
+		                                    Animation::Type animation_type) {
+			if (animations_table.has_key("frontier")) {
+				std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
+				frontier_animation_id_ =
+				   g_gr->animations().load(name_ + std::string("_frontier"), *animation_table,
+				                           animation_table->get_string("basename"), animation_type);
+			}
+			if (animations_table.has_key("flag")) {
+				std::unique_ptr<LuaTable> animation_table = animations_table.get_table("flag");
+				flag_animation_id_ =
+				   g_gr->animations().load(name_ + std::string("_flag"), *animation_table,
+				                           animation_table->get_string("basename"), animation_type);
+			}
+		};
 
-        if (table.has_key("animations")) {
-            load_animations(*table.get_table("animations"), Animation::Type::kFiles);
+		if (table.has_key("animations")) {
+			load_animations(*table.get_table("animations"), Animation::Type::kFiles);
 		}
-        if (table.has_key("spritesheets")) {
-            load_animations(*table.get_table("spritesheets"), Animation::Type::kSpritesheet);
+		if (table.has_key("spritesheets")) {
+			load_animations(*table.get_table("spritesheets"), Animation::Type::kSpritesheet);
 		}
 
-
-        items_table = table.get_table("wares_order");
+		items_table = table.get_table("wares_order");
 		for (const int key : items_table->keys<int>()) {
 			std::vector<DescriptionIndex> column;
 			std::vector<std::string> warenames =
@@ -136,7 +134,8 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		items_table = table.get_table("workers_order");
 		for (const int key : items_table->keys<int>()) {
 			std::vector<DescriptionIndex> column;
-			for (const std::string& workername : items_table->get_table(key)->array_entries<std::string>()) {
+			for (const std::string& workername :
+			     items_table->get_table(key)->array_entries<std::string>()) {
 				add_worker(workername, column);
 			}
 			if (!column.empty()) {
@@ -445,12 +444,12 @@ void TribeDescr::add_building(const std::string& buildingname) {
 	}
 }
 
-void TribeDescr::add_worker(const std::string& workername, std::vector<DescriptionIndex>& workers_order_column) {
+void TribeDescr::add_worker(const std::string& workername,
+                            std::vector<DescriptionIndex>& workers_order_column) {
 	try {
 		DescriptionIndex workerindex = tribes_.safe_worker_index(workername);
 		if (has_worker(workerindex)) {
-			throw GameDataError(
-			   "Duplicate definition of worker '%s'", workername.c_str());
+			throw GameDataError("Duplicate definition of worker '%s'", workername.c_str());
 		}
 		workers_.insert(workerindex);
 		workers_order_column.push_back(workerindex);
@@ -460,8 +459,7 @@ void TribeDescr::add_worker(const std::string& workername, std::vector<Descripti
 			worker_types_without_cost_.push_back(workerindex);
 		}
 	} catch (const WException& e) {
-		throw GameDataError(
-		   "Failed adding worker '%s: %s", workername.c_str(), e.what());
+		throw GameDataError("Failed adding worker '%s: %s", workername.c_str(), e.what());
 	}
 }
 

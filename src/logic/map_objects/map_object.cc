@@ -301,7 +301,8 @@ void MapObjectDescr::add_animations(const LuaTable& table, Animation::Type anim_
 					const std::string directional_basename =
 					   basename + animation_direction_names[dir - 1];
 					anims_.insert(std::pair<std::string, uint32_t>(
-					   directional_animname, g_gr->animations().load(*anim, directional_basename, anim_type)));
+					   directional_animname,
+					   g_gr->animations().load(*anim, directional_basename, anim_type)));
 				}
 			} else {
 				if (is_animation_known(animname)) {
@@ -317,8 +318,8 @@ void MapObjectDescr::add_animations(const LuaTable& table, Animation::Type anim_
 				}
 			}
 		} catch (const std::exception& e) {
-			throw GameDataError(
-			   "Error loading animation '%s' for map object '%s': %s", animname.c_str(), name().c_str(), e.what());
+			throw GameDataError("Error loading animation '%s' for map object '%s': %s",
+			                    animname.c_str(), name().c_str(), e.what());
 		}
 	}
 }

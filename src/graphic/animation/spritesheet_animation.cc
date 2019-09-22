@@ -46,8 +46,18 @@ SpriteSheetAnimation::MipMapEntry IMPLEMENTATION
 ==============================================================================
 */
 
-SpriteSheetAnimation::SpriteSheetMipMapEntry::SpriteSheetMipMapEntry(const std::string& file, int init_rows, int init_columns)
-   : Animation::MipMapEntry(), sheet(nullptr), playercolor_mask_sheet(nullptr), rows(init_rows), columns(init_columns), w(0), h(0), sheet_file(file), playercolor_mask_sheet_file("") {
+SpriteSheetAnimation::SpriteSheetMipMapEntry::SpriteSheetMipMapEntry(const std::string& file,
+                                                                     int init_rows,
+                                                                     int init_columns)
+   : Animation::MipMapEntry(),
+     sheet(nullptr),
+     playercolor_mask_sheet(nullptr),
+     rows(init_rows),
+     columns(init_columns),
+     w(0),
+     h(0),
+     sheet_file(file),
+     playercolor_mask_sheet_file("") {
 
 	assert(g_fs->file_exists(file));
 
@@ -59,7 +69,6 @@ SpriteSheetAnimation::SpriteSheetMipMapEntry::SpriteSheetMipMapEntry(const std::
 		playercolor_mask_sheet_file = "";
 	}
 }
-
 
 void SpriteSheetAnimation::SpriteSheetMipMapEntry::ensure_graphics_are_loaded() const {
 	if (sheet == nullptr) {
@@ -74,14 +83,16 @@ void SpriteSheetAnimation::SpriteSheetMipMapEntry::load_graphics() {
 		playercolor_mask_sheet = g_gr->images().get(playercolor_mask_sheet_file);
 
 		if (sheet->width() != playercolor_mask_sheet->width()) {
-			throw Widelands::GameDataError(
-			   "animation sprite sheet has width %d but playercolor mask sheet has width %d. The sheet's image is %s",
-			   sheet->width(), playercolor_mask_sheet->width(), sheet_file.c_str());
+			throw Widelands::GameDataError("animation sprite sheet has width %d but playercolor mask "
+			                               "sheet has width %d. The sheet's image is %s",
+			                               sheet->width(), playercolor_mask_sheet->width(),
+			                               sheet_file.c_str());
 		}
 		if (sheet->height() != playercolor_mask_sheet->height()) {
-			throw Widelands::GameDataError(
-			   "animation sprite sheet has height %d but playercolor mask sheet has height %d. The sheet's image is %s",
-			   sheet->height(), playercolor_mask_sheet->height(), sheet_file.c_str());
+			throw Widelands::GameDataError("animation sprite sheet has height %d but playercolor mask "
+			                               "sheet has height %d. The sheet's image is %s",
+			                               sheet->height(), playercolor_mask_sheet->height(),
+			                               sheet_file.c_str());
 		}
 	}
 
@@ -89,23 +100,23 @@ void SpriteSheetAnimation::SpriteSheetMipMapEntry::load_graphics() {
 	w = sheet->width() / columns;
 	h = sheet->height() / rows;
 
-    if ((w * columns) != sheet->width()) {
-        throw Widelands::GameDataError(
-           "frame width (%d) x columns (%d) != sheet width (%d). The sheet's image is %s",
-           w, columns, sheet->width(), sheet_file.c_str());
-    }
-    if ((h * rows) != sheet->height()) {
-        throw Widelands::GameDataError(
-           "frame height (%d) x rows (%d) != sheet height (%d). The sheet's image is %s",
-           h, rows, sheet->height(), sheet_file.c_str());
-    }
+	if ((w * columns) != sheet->width()) {
+		throw Widelands::GameDataError(
+		   "frame width (%d) x columns (%d) != sheet width (%d). The sheet's image is %s", w, columns,
+		   sheet->width(), sheet_file.c_str());
+	}
+	if ((h * rows) != sheet->height()) {
+		throw Widelands::GameDataError(
+		   "frame height (%d) x rows (%d) != sheet height (%d). The sheet's image is %s", h, rows,
+		   sheet->height(), sheet_file.c_str());
+	}
 }
 
 void SpriteSheetAnimation::SpriteSheetMipMapEntry::blit(uint32_t idx,
-                                           const Rectf& source_rect,
-                                           const Rectf& destination_rect,
-                                           const RGBColor* clr,
-                                           Surface* target) const {
+                                                        const Rectf& source_rect,
+                                                        const Rectf& destination_rect,
+                                                        const RGBColor* clr,
+                                                        Surface* target) const {
 	assert(sheet != nullptr);
 	assert(target);
 	assert(static_cast<int>(idx) <= columns * rows);
@@ -113,15 +124,14 @@ void SpriteSheetAnimation::SpriteSheetMipMapEntry::blit(uint32_t idx,
 	const int column = idx % columns;
 	const int row = idx / columns;
 
-	Rectf frame_rect(source_rect.x + column * width(), source_rect.y + row * height(),
-					 source_rect.w, source_rect.h);
+	Rectf frame_rect(source_rect.x + column * width(), source_rect.y + row * height(), source_rect.w,
+	                 source_rect.h);
 
 	if (!has_playercolor_masks || clr == nullptr) {
 		target->blit(destination_rect, *sheet, frame_rect, 1., BlendMode::UseAlpha);
 	} else {
 		assert(playercolor_mask_sheet != nullptr);
-		target->blit_blended(
-		   destination_rect, *sheet, *playercolor_mask_sheet, frame_rect, *clr);
+		target->blit_blended(destination_rect, *sheet, *playercolor_mask_sheet, frame_rect, *clr);
 	}
 }
 
@@ -158,25 +168,29 @@ SpriteSheetAnimation::SpriteSheetAnimation(const LuaTable& table, const std::str
 		add_available_scales(basename, directory);
 
 		// Perform some checks to make sure that the data is complete and consistent
-		const SpriteSheetMipMapEntry& first = dynamic_cast<const SpriteSheetMipMapEntry&>(*mipmaps_.begin()->second.get());
+		const SpriteSheetMipMapEntry& first =
+		   dynamic_cast<const SpriteSheetMipMapEntry&>(*mipmaps_.begin()->second.get());
 		if (table.has_key("fps") && nr_frames_ == 1) {
-				throw Widelands::GameDataError("'%s' sprite sheet animation with one frame must not have 'fps'",
-				                               basename.c_str());
+			throw Widelands::GameDataError(
+			   "'%s' sprite sheet animation with one frame must not have 'fps'", basename.c_str());
 		}
 
 		if (representative_frame() < 0 || representative_frame() > nr_frames_ - 1) {
-			throw Widelands::GameDataError("Animation has %d as its representative frame, but the frame indices "
-			                 "available are 0 - %d",
-			                 representative_frame(), nr_frames_ - 1);
+			throw Widelands::GameDataError(
+			   "Animation has %d as its representative frame, but the frame indices "
+			   "available are 0 - %d",
+			   representative_frame(), nr_frames_ - 1);
 		}
 
 		if (rows_ * columns_ < nr_frames_) {
-			throw Widelands::GameDataError("Animation has %d frames, which does not fit into %d rows x %d columns",
-										   nr_frames_, rows_, columns_);
+			throw Widelands::GameDataError(
+			   "Animation has %d frames, which does not fit into %d rows x %d columns", nr_frames_,
+			   rows_, columns_);
 		}
-        if ((rows_ - 1) * columns_ > nr_frames_) {
-			throw Widelands::GameDataError("Animation has %d frames, which is giving us an extra row in %d rows x %d columns",
-										   nr_frames_, rows_, columns_);
+		if ((rows_ - 1) * columns_ > nr_frames_) {
+			throw Widelands::GameDataError(
+			   "Animation has %d frames, which is giving us an extra row in %d rows x %d columns",
+			   nr_frames_, rows_, columns_);
 		}
 
 		const bool should_have_playercolor = first.has_playercolor_masks;
@@ -209,7 +223,8 @@ std::vector<const Image*> SpriteSheetAnimation::pc_masks(float) const {
 }
 
 const Image* SpriteSheetAnimation::representative_image(const RGBColor* clr) const {
-	const SpriteSheetMipMapEntry& mipmap = dynamic_cast<const SpriteSheetMipMapEntry&>(mipmap_entry(1.0f));
+	const SpriteSheetMipMapEntry& mipmap =
+	   dynamic_cast<const SpriteSheetMipMapEntry&>(mipmap_entry(1.0f));
 	const int column = representative_frame() % columns_;
 	const int row = representative_frame() / columns_;
 	const int w = width();
@@ -219,19 +234,23 @@ const Image* SpriteSheetAnimation::representative_image(const RGBColor* clr) con
 	Rectf rect(Vector2f::zero(), w, h);
 	if (mipmap.has_playercolor_masks && clr) {
 		rv->fill_rect(rect, RGBAColor(0, 0, 0, 0));
-		rv->blit_blended(Rectf(column * w, row * h, w, h), *mipmap.sheet, *mipmap.playercolor_mask_sheet, rect, *clr);
+		rv->blit_blended(Rectf(column * w, row * h, w, h), *mipmap.sheet,
+		                 *mipmap.playercolor_mask_sheet, rect, *clr);
 	} else {
 		rv->blit(Rectf(column * w, row * h, w, h), *mipmap.sheet, rect, 1., BlendMode::Copy);
 	}
 	return rv;
 }
 
-void SpriteSheetAnimation::add_scale_if_files_present(const std::string& basename, const std::string& directory,
-			   float scale_as_float, const std::string& scale_as_string) {
+void SpriteSheetAnimation::add_scale_if_files_present(const std::string& basename,
+                                                      const std::string& directory,
+                                                      float scale_as_float,
+                                                      const std::string& scale_as_string) {
 	const std::string path =
 	   directory + g_fs->file_separator() + basename + scale_as_string + ".png";
 	if (g_fs->file_exists(path)) {
-		mipmaps_.insert(std::make_pair(
-		   scale_as_float, std::unique_ptr<SpriteSheetMipMapEntry>(new SpriteSheetMipMapEntry(path, rows_, columns_))));
+		mipmaps_.insert(
+		   std::make_pair(scale_as_float, std::unique_ptr<SpriteSheetMipMapEntry>(
+		                                     new SpriteSheetMipMapEntry(path, rows_, columns_))));
 	}
 }

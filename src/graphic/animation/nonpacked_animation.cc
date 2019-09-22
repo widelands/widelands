@@ -114,10 +114,10 @@ void NonPackedAnimation::NonPackedMipMapEntry::load_graphics() {
 }
 
 void NonPackedAnimation::NonPackedMipMapEntry::blit(uint32_t idx,
-                                           const Rectf& source_rect,
-                                           const Rectf& destination_rect,
-                                           const RGBColor* clr,
-                                           Surface* target) const {
+                                                    const Rectf& source_rect,
+                                                    const Rectf& destination_rect,
+                                                    const RGBColor* clr,
+                                                    Surface* target) const {
 	assert(!frames.empty());
 	assert(target);
 	assert(idx < frames.size());
@@ -151,14 +151,14 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 		// Get image files
 		if (table.has_key("pictures")) {
 			// TODO(GunChleoc): Old code - remove this option once conversion has been completed
-			mipmaps_.insert(std::make_pair(
-			   1.0f, std::unique_ptr<NonPackedMipMapEntry>(
-			            new NonPackedMipMapEntry(table.get_table("pictures")->array_entries<std::string>()))));
-            if (g_verbose) {
-                assert(!table.get_table("pictures")->array_entries<std::string>().empty());
-                log("Found deprecated 'pictures' parameter in animation with file\n   %s\n",
-                    table.get_table("pictures")->array_entries<std::string>().front().c_str());
-            }
+			mipmaps_.insert(
+			   std::make_pair(1.0f, std::unique_ptr<NonPackedMipMapEntry>(new NonPackedMipMapEntry(
+			                           table.get_table("pictures")->array_entries<std::string>()))));
+			if (g_verbose) {
+				assert(!table.get_table("pictures")->array_entries<std::string>().empty());
+				log("Found deprecated 'pictures' parameter in animation with file\n   %s\n",
+				    table.get_table("pictures")->array_entries<std::string>().front().c_str());
+			}
 		} else {
 			if (basename.empty() || !table.has_key("directory")) {
 				throw Widelands::GameDataError(
@@ -168,11 +168,12 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 		}
 
 		// Frames
-		const NonPackedMipMapEntry& first = dynamic_cast<const NonPackedMipMapEntry&>(*mipmaps_.begin()->second.get());
+		const NonPackedMipMapEntry& first =
+		   dynamic_cast<const NonPackedMipMapEntry&>(*mipmaps_.begin()->second.get());
 		nr_frames_ = first.image_files.size();
 		if (table.has_key("fps") && nr_frames_ == 1) {
-				throw Widelands::GameDataError("Animation with one picture %s must not have 'fps'",
-				                               first.image_files.front().c_str());
+			throw Widelands::GameDataError(
+			   "Animation with one picture %s must not have 'fps'", first.image_files.front().c_str());
 		}
 
 		if (representative_frame() < 0 || representative_frame() > nr_frames_ - 1) {
@@ -184,7 +185,8 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 		// Perform some checks to make sure that the data is complete and consistent
 		const bool should_have_playercolor = mipmaps_.begin()->second->has_playercolor_masks;
 		for (const auto& mipmap : mipmaps_) {
-			const NonPackedMipMapEntry& nonpacked_mipmap = dynamic_cast<const NonPackedMipMapEntry&>(*mipmap.second.get());
+			const NonPackedMipMapEntry& nonpacked_mipmap =
+			   dynamic_cast<const NonPackedMipMapEntry&>(*mipmap.second.get());
 			if (nonpacked_mipmap.image_files.size() != nr_frames_) {
 				throw Widelands::GameDataError(
 				   "Mismatched number of images for different scales in animation table: %" PRIuS
@@ -207,17 +209,20 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table, const std::string&
 }
 
 std::vector<const Image*> NonPackedAnimation::images(float scale) const {
-	const NonPackedMipMapEntry& mipmap = dynamic_cast<const NonPackedMipMapEntry&>(mipmap_entry(scale));
+	const NonPackedMipMapEntry& mipmap =
+	   dynamic_cast<const NonPackedMipMapEntry&>(mipmap_entry(scale));
 	return mipmap.frames;
 }
 
 std::vector<const Image*> NonPackedAnimation::pc_masks(float scale) const {
-	const NonPackedMipMapEntry& mipmap = dynamic_cast<const NonPackedMipMapEntry&>(mipmap_entry(scale));
+	const NonPackedMipMapEntry& mipmap =
+	   dynamic_cast<const NonPackedMipMapEntry&>(mipmap_entry(scale));
 	return mipmap.playercolor_mask_frames;
 }
 
 const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
-	const NonPackedMipMapEntry& mipmap = dynamic_cast<const NonPackedMipMapEntry&>(mipmap_entry(1.0f));
+	const NonPackedMipMapEntry& mipmap =
+	   dynamic_cast<const NonPackedMipMapEntry&>(mipmap_entry(1.0f));
 	assert(!mipmap.image_files.empty());
 	const std::string& image_filename = mipmap.image_files[representative_frame()];
 	const Image* image = (mipmap.has_playercolor_masks && clr) ?
@@ -232,12 +237,15 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	return rv;
 }
 
-void NonPackedAnimation::add_scale_if_files_present(const std::string& basename, const std::string& directory,
-			   float scale_as_float, const std::string& scale_as_string) {
+void NonPackedAnimation::add_scale_if_files_present(const std::string& basename,
+                                                    const std::string& directory,
+                                                    float scale_as_float,
+                                                    const std::string& scale_as_string) {
 	std::vector<std::string> filenames =
 	   g_fs->get_sequential_files(directory, basename + scale_as_string, "png");
 	if (!filenames.empty()) {
 		mipmaps_.insert(std::make_pair(
-		   scale_as_float, std::unique_ptr<NonPackedMipMapEntry>(new NonPackedMipMapEntry(std::move(filenames)))));
+		   scale_as_float,
+		   std::unique_ptr<NonPackedMipMapEntry>(new NonPackedMipMapEntry(std::move(filenames)))));
 	}
 }

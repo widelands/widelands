@@ -25,8 +25,8 @@
 #include "graphic/animation/spritesheet_animation.h"
 #include "graphic/graphic.h"
 
-
-uint32_t AnimationManager::load(const LuaTable& table, const std::string& basename, Animation::Type type) {
+uint32_t
+AnimationManager::load(const LuaTable& table, const std::string& basename, Animation::Type type) {
 	switch (type) {
 	case Animation::Type::kFiles:
 		animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table, basename)));
@@ -38,7 +38,8 @@ uint32_t AnimationManager::load(const LuaTable& table, const std::string& basena
 }
 uint32_t AnimationManager::load(const std::string& map_object_name,
                                 const LuaTable& table,
-                                const std::string& basename, Animation::Type type) {
+                                const std::string& basename,
+                                Animation::Type type) {
 	const size_t result = load(table, basename, type);
 	representative_animations_by_map_object_name_.insert(std::make_pair(map_object_name, result));
 	return result;

@@ -52,10 +52,7 @@ constexpr int kFrameLength = 250;
 class Animation {
 public:
 	/// Whether we have an animation consisting of multiple files or of 1 single spritesheet file
-	enum class Type {
-		kFiles,
-		kSpritesheet
-	};
+	enum class Type { kFiles, kSpritesheet };
 
 	/// The mipmap scales supported by the engine as float and filename suffix.
 	/// Ensure that this always matches supported_scales in data/scripting/mapobjects.lua.
@@ -102,11 +99,12 @@ public:
 	/// in which case the neutral image will be blitted. The Surface is the 'target'
 	/// for the blit operation and must be non-null.
 	void blit(uint32_t time,
-	                  const Widelands::Coords& coords,
-	                  const Rectf& source_rect,
-	                  const Rectf& destination_rect,
-	                  const RGBColor* clr,
-	                  Surface* target, float scale) const;
+	          const Widelands::Coords& coords,
+	          const Rectf& source_rect,
+	          const Rectf& destination_rect,
+	          const RGBColor* clr,
+	          Surface* target,
+	          float scale) const;
 
 	/// We need to expose these for the packed animation,
 	/// so that the create_spritesheet utility can use them.
@@ -131,7 +129,8 @@ protected:
 	struct MipMapEntry {
 
 		MipMapEntry();
-		virtual ~MipMapEntry() {}
+		virtual ~MipMapEntry() {
+		}
 
 		/// Loads the graphics if they are not yet loaded.
 		virtual void ensure_graphics_are_loaded() const = 0;
@@ -141,10 +140,10 @@ protected:
 
 		/// Blit the frame at the given index
 		virtual void blit(uint32_t idx,
-		          const Rectf& source_rect,
-		          const Rectf& destination_rect,
-		          const RGBColor* clr,
-		          Surface* target) const = 0;
+		                  const Rectf& source_rect,
+		                  const Rectf& destination_rect,
+		                  const RGBColor* clr,
+		                  Surface* target) const = 0;
 
 		/// The width of this mipmap entry's textures
 		virtual int width() const = 0;
@@ -155,7 +154,8 @@ protected:
 		bool has_playercolor_masks;
 	};
 
-	/// Register animations for the scales listed in kSupportedScales if available. The scale of 1.0 is mandatory.
+	/// Register animations for the scales listed in kSupportedScales if available. The scale of 1.0
+	/// is mandatory.
 	void add_available_scales(const std::string& basename, const std::string& directory);
 
 	/// Play the sound effect associated with this animation at the given time.
@@ -171,8 +171,9 @@ protected:
 
 	/// Reverse sort the zoom scales for faster lookup
 	struct MipMapCompare {
-	  inline bool operator() (const float lhs, const float rhs) const
-	  {return lhs > rhs;}
+		inline bool operator()(const float lhs, const float rhs) const {
+			return lhs > rhs;
+		}
 	};
 	/// Texture sets for different zoom scales
 	std::map<float, std::unique_ptr<MipMapEntry>, MipMapCompare> mipmaps_;
@@ -180,9 +181,12 @@ protected:
 private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);
 
-	/// Look for a file or files for the given scale, and if we have any, add a mipmap entry for them.
-	virtual void add_scale_if_files_present(const std::string& basename, const std::string& directory,
-							   float scale_as_float, const std::string& scale_as_string) = 0;
+	/// Look for a file or files for the given scale, and if we have any, add a mipmap entry for
+	/// them.
+	virtual void add_scale_if_files_present(const std::string& basename,
+	                                        const std::string& directory,
+	                                        float scale_as_float,
+	                                        const std::string& scale_as_string) = 0;
 
 	/// Find the best scale for blitting at the given zoom 'scale'
 	float find_best_scale(float scale) const;
@@ -198,7 +202,8 @@ private:
 	/// If this is 'true', don't loop the animation
 	const bool play_once_;
 
-	/// ID of sound effect that will be played at frame 0, or kNoSoundEffect if there is no sound effect to be played.
+	/// ID of sound effect that will be played at frame 0, or kNoSoundEffect if there is no sound
+	/// effect to be played.
 	FxId sound_effect_;
 	/// How likely it is that the sound effect will be played
 	int32_t sound_priority_;
