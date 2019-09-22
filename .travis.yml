@@ -9,6 +9,10 @@ before_script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
   - sleep 3 # give xvfb some time to start
 
+# Only build the master branch
+branches:
+  only:
+    - master
 
 # Let travis add additional repos and install packages for us (https://docs.travis-ci.com/user/migrating-from-legacy/#Adding-APT-Sources)
 addons:
