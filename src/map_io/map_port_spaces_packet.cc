@@ -24,11 +24,11 @@
 #include <boost/algorithm/string.hpp>
 
 #include "base/log.h"
+#include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "map_io/coords_profile.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 
@@ -52,8 +52,8 @@ void MapPortSpacesPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, Map
 			Section& s2 = prof.get_safe_section("port_spaces");
 			for (uint16_t i = 0; i < num; ++i) {
 				map->set_port_space(
-				   egbase.world(),
-				   get_safe_coords(std::to_string(static_cast<unsigned int>(i)), ext, &s2), true, true);
+				   egbase, get_safe_coords(std::to_string(static_cast<unsigned int>(i)), ext, &s2),
+				   true, true);
 			}
 		} else {
 			throw UnhandledVersionError("MapPortSpacesPacket", packet_version, kCurrentPacketVersion);

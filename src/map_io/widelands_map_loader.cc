@@ -352,7 +352,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		}
 	}  // load_type != MapLoader::LoadType::kEditor
 
-	map_.recalc_whole_map(egbase.world());
+	map_.recalc_whole_map(egbase);
 
 	map_.ensure_resource_consistency(egbase.world());
 

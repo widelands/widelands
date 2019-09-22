@@ -108,6 +108,7 @@ wl_library(scripting_logic
     economy
     io_fileread
     io_filesystem
+    io_profile
     logic
     logic_commands
     logic_constants
@@ -120,7 +121,6 @@ wl_library(scripting_logic
     logic_tribe_basic_info
     logic_widelands_geometry
     map_io
-    profile
     scripting_base
     scripting_coroutine
     scripting_errors
@@ -129,6 +129,7 @@ wl_library(scripting_logic
     scripting_luna
     third_party_eris
     ui_basic
+    widelands_options
     wui
     wui_mapview_pixelfunctions
 )
