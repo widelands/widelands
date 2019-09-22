@@ -23,13 +23,13 @@ We support compiling Widelands for Linux, Windows under MSys2, and MacOs with GC
 You will need to install the following dependencies:
 
 *  [libSDL](http://www.libsdl.org/) >=2.0
-*  [libSDL_image](http://www.libsdl.org/projects/SDL_image) 
+*  [libSDL_image](http://www.libsdl.org/projects/SDL_image)
 *  [libSDL_mixer](http://www.libsdl.org/projects/SDL_mixer) >= 2.0
 *  [libSDL_ttf](http://www.libsdl.org/projects/SDL_ttf) >= 2.0
-*  [gettext](http://www.gnu.org/software/gettext/gettext.html) 
+*  [gettext](http://www.gnu.org/software/gettext/gettext.html)
 * libiconv (on same mirrors as gettext)
-*  [zlib](http://www.zlib.net/) 
-*  [libpng](http://www.libpng.org/pub/png/libpng.html) 
+*  [zlib](http://www.zlib.net/)
+*  [libpng](http://www.libpng.org/pub/png/libpng.html)
 *  [Boost](http://www.boost.org/) >= 1.48
 *  [Python](http://www.python.org) >= 1.5.2
 *  [libglew](http://glew.sourceforge.net) or [glbinding](https://glbinding.org/)
@@ -154,4 +154,3 @@ For helping with issue management, see https://www.widelands.org/wiki/TriagingBu
 ## Obtaining Travis and AppVeyor builds
 
 Travis and AppVeyor builds are triggered for all pull requests and for new pushes to the `master` branch. If you want to get a build without making a pull request, temporarily add the name of your branch to the `branches` section in `.travis.yml`/`appveyor.yml`. This will not work if the branch is in a fork though.
-

@@ -1,6 +1,6 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2019 Widelands Development Team
-# 
+#
 # Translators:
 # Joonas Tamminen <hippimunqqi@gmail.com>, 2015
 # Jukka Pakarinen, 2016-2017,2019
