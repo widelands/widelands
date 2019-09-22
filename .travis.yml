@@ -59,7 +59,10 @@ jobs:
       language: python
       cache: pip
       install: pip install sphinx
+#    - stage: compile
 
-#stages:
-#  - tests
+script: ./.travis.sh build
+
+stages:
+  - tests
 #  - compile
