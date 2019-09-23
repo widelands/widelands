@@ -245,7 +245,7 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 		// Add penalty for fields that are running out
 		if (amount == 0)
 			// we already know it's completely empty, so punish is less
-			totalchance += 1;
+			++totalchance;
 		else if (amount <= 2)
 			totalchance += 6;
 		else if (amount <= 4)

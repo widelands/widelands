@@ -1130,7 +1130,7 @@ LUA_API int lua_next (lua_State *L, int idx) {
     api_incr_top(L);
   }
   else  /* no more elements */
-    L->top -= 1;  /* remove key */
+    --L->top;  /* remove key */
   lua_unlock(L);
   return more;
 }
