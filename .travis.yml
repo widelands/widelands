@@ -53,6 +53,8 @@ jobs:
       name: "Codecheck Suite"
       script: ./.travis.sh codecheck
       cache: false
+    - name: "Compiler Errors"
+      script: ./.travis.sh compiler
     - name: "Documentation Test"
       language: python
       cache: pip
@@ -64,86 +66,86 @@ jobs:
       name: "DEBUG: macOS 10.14 with Xcode 10.3"
       os: osx
       osx_image: xcode10.3
-      env: BUILD_TYPE="Debug" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
     - name: "RELEASE: macOS 10.14 with Xcode 10.3"
       os: osx
       osx_image: xcode10.3
-      env: BUILD_TYPE="Release" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
     - name: "DEBUG: macOS 10.13 with Xcode 9.4"
       os: osx
       osx_image: xcode9.4
-      env: BUILD_TYPE="Debug" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
     - name: "RELEASE: macOS 10.13 with Xcode 9.4"
       os: osx
       osx_image: xcode9.4
-      env: BUILD_TYPE="Release" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
     - name: "DEBUG: macOS 10.12 with XCode 8.3"
       os: osx
       osx_image: xcode8.3
-      env: BUILD_TYPE="Debug" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
     - name: "RELEASE: macOS 10.12 with XCode 8.3"
       os: osx
       osx_image: xcode8.3
-      env: BUILD_TYPE="Release" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
 
     ### Linux BUILDs
     - name: "DEBUG: Ubuntu 18.04 with clang 7"
       os: linux
       dist: bionic
       compiler: clang
-      env: BUILD_TYPE="Debug" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
       services: xvfb
       cache: false
     - name: "RELEASE: Ubuntu 18.04 with clang 7"
       os: linux
       dist: bionic
       compiler: clang
-      env: BUILD_TYPE="Release" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
       services: xvfb
       cache: false
     - name: "DEBUG: Ubuntu 18.04 with gcc 7.4"
       os: linux
       dist: bionic
-      env: BUILD_TYPE="Debug" BUILD_WEBSITE_TOOLS="OFF"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF"
       services: xvfb
       cache: false
     - name: "RELEASE: Ubuntu 18.04 with gcc 7.4"
       os: linux
       dist: bionic
-      env: BUILD_TYPE="Release" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
       services: xvfb
     - name: "DEBUG: Ubuntu 16.04 with gcc 5.4"
       os: linux
       dist: xenial
-      env: BUILD_TYPE="Debug" BUILD_WEBSITE_TOOLS="OFF"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF"
       services: xvfb
       cache: false
     - name: "RELEASE: Ubuntu 16.04 with gcc 5.4"
       os: linux
       dist: xenial
-      env: BUILD_TYPE="Release" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
       services: xvfb
     - name: "DEBUG: Ubuntu 14.04 with clang 3.4"
       os: linux
       dist: trusty
       compiler: clang
-      env: BUILD_TYPE="Debug" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
       cache: false
     - name: "RELEASE: Ubuntu 14.04 with clang 3.4"
       os: linux
       dist: trusty
       compiler: clang
-      env: BUILD_TYPE="Release" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
       cache: false
     - name: "DEBUG: Ubuntu 14.04 with gcc 4.8"
       os: linux
       dist: trusty
-      env: BUILD_TYPE="Debug" BUILD_WEBSITE_TOOLS="OFF"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF"
       cache: false
     - name: "RELEASE: Ubuntu 14.04 with gcc 4.8"
       os: linux
       dist: trusty
-      env: BUILD_TYPE="Release" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
 
 language: cpp
 

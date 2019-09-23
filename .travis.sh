@@ -6,13 +6,7 @@ cd build
 
 case "$1" in
 build)
-   if [ "$BUILD_TYPE" == "Debug" ]; then
-      # We skip translations and codecheck to speed things up
-      cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="OFF" -DOPTION_ASAN="OFF" -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE_TOOLS -DOPTION_BUILD_CODECHECK="OFF"
-   else
-      # We test translations only on release builds, in order to help with job timeouts
-      cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_ASAN="OFF" -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE_TOOLS
-   fi
+   cmake .. -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE_TOOLS -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF"
    # Do the actual build.
    make -k -j3
 
@@ -37,6 +31,12 @@ codecheck)
       echo "You have codecheck warnings (see above) Please fix."
       exit 1 # CodeCheck warnings.
    fi
+   ;;
+compiler)
+   # Just run this to test whether there are any error during compiling.
+   # If this job fails we don't need to run on the compile stage.
+   cmake .. -DCMAKE_BUILD_TYPE:STRING="Release" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="OFF"
+   make -k -j3
    ;;
 documentation)
    # Any warning is an error.
