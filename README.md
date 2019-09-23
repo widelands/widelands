@@ -1,4 +1,4 @@
-# Widelands
+# Widelands [![Build Status Travis-CI](https://travis-ci.org/widelands/widelands.svg?branch=master)](https://travis-ci.org/widelands/widelands) [![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/widelands/widelands?branch=master&svg=true)](https://ci.appveyor.com/project/widelands-dev/widelands)
 Widelands is a free, open source real-time strategy game with singleplayer campaigns and a multiplayer mode.
 The game was inspired by Settlers II™ (© Bluebyte) but has significantly more variety and depth to it.
 
@@ -45,7 +45,7 @@ We have some instructions on how to use Git to help you if you're new to GitHub:
 
 ### Code
 
-Before you make any changes to C++ code, we recommend tat you install our githook that will automatically
+Before you make any changes to C++ code, we recommend that you install our githook that will automatically
 format any changed files when you commit.
 
 1. Install `clang-format`
