@@ -1,14 +1,5 @@
 set -ex
 
-BUILD_WEBSITE_TOOLS="ON"
-
-if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-  if [ "$CXX" = "g++" ]; then
-    # We skip the website binaries in GCC for debug builds, in order to help with job timeouts
-    BUILD_WEBSITE_TOOLS="OFF"
-  fi
-fi
-
 # Create build folder.
 mkdir build
 cd build
@@ -20,7 +11,7 @@ build)
       cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="OFF" -DOPTION_ASAN="OFF" -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE_TOOLS -DOPTION_BUILD_CODECHECK="OFF"
    else
       # We test translations only on release builds, in order to help with job timeouts
-      cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_ASAN="OFF"
+      cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_ASAN="OFF" -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE_TOOLS
    fi
    # Do the actual build.
    make -k -j3
