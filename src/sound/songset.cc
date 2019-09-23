@@ -79,7 +79,7 @@ Mix_Music* Songset::get_song(uint32_t random) {
 
 	if (songs_.size() > 1) {
 		// Exclude current_song from playing two times in a row
-		current_song_ += 1 + random % (songs_.size() - 1);
+		++current_song_ + random % (songs_.size() - 1);
 		current_song_ = current_song_ % songs_.size();
 	}
 	filename = songs_.at(current_song_);
