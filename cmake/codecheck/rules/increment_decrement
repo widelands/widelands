@@ -8,7 +8,7 @@ Use ++/-- operators instead of += 1 or -= 1;
 
 error_msg="Use ++var / --var instead of var += 1 / var -= 1."
 
-regexp = r"""( (\+|\-)= 1(\D|$))"""
+regexp = r"""(\+|\-)= 1(((?=\D)(?=\S))|$)"""
 
 forbidden = [
     "inside_ifdefs += 1",
@@ -29,4 +29,7 @@ allowed = [
     "persistent_data->least_military_score -= 10 / divider;",
     "for (uint8_t i = 0; i < jobs_to_run_count; i += 11) {",
     "for (uint8_t i = foo.size() -1; i >=0; i -= 11) {",
+    "prio += 1 - bf->trees_nearby / 3;",
+    "prio += 1 - bf->rangers_nearby *",
+    "current_song_ += 1 + random % (songs_.size() - 1);"
 ]
