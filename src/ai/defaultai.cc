@@ -2856,9 +2856,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						// frisian claypit and frisian farm
 					} else if (bo.is(BuildingAttribute::kSupportingProducer)) {
 						// we dont like trees nearby
-						++prio - bf->trees_nearby / 3;
+						prio += 1 - bf->trees_nearby / 3;
 						// and be far from rangers
-						++prio - bf->rangers_nearby *
+						prio += 1 - bf->rangers_nearby *
 						               std::abs(management_data.get_military_number_at(102)) / 5;
 
 						// This is for a special case this is also supporter, it considers
@@ -2912,9 +2912,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						// frisian berry farm
 					} else if (bo.is(BuildingAttribute::kSpaceConsumer)) {
 						// we dont like trees nearby
-						++prio - bf->trees_nearby / 4;
+						prio += 1 - bf->trees_nearby / 4;
 						// and be far from rangers
-						++prio - bf->rangers_nearby *
+						prio += 1 - bf->rangers_nearby *
 						               std::abs(management_data.get_military_number_at(102)) / 5;
 
 						// now we find out if the supporter is needed depending on stocklevel
@@ -3021,11 +3021,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 						if (bo.is(BuildingAttribute::kSpaceConsumer)) {  // e.g. farms
 							// we dont like trees nearby
-							++prio - bf->trees_nearby / 4;
+							prio += 1 - bf->trees_nearby / 4;
 							// we attempt to cluster space consumers together
 							prio += bf->space_consumers_nearby * 2;
 							// and be far from rangers
-							++prio - bf->rangers_nearby *
+							prio += 1 - bf->rangers_nearby *
 							               std::abs(management_data.get_military_number_at(102)) / 5;
 						} else {
 							// leave some free space between them
