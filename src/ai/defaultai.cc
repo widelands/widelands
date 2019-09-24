@@ -741,6 +741,10 @@ void DefaultAI::late_initialization() {
 			if (bh.is_shipyard()) {
 				bo.set_is(BuildingAttribute::kShipyard);
 			}
+			if (bh.supports_seafaring()) {
+				bo.set_is(BuildingAttribute::kSupportsSeafaring);
+				printf ("DEBUG: %s supports seafaring\n", bo.name);
+			}
 			// Identify refined log producer
 			if (bo.ware_outputs.size() == 1 && bo.ware_outputs[0] == tribe_->refinedlog()) {
 				bo.set_is(BuildingAttribute::kLogRefiner);
