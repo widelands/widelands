@@ -578,7 +578,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			   game().map().get_starting_pos(player_number_), MapView::Transition::Smooth);
 			return true;
 		case SDLK_ESCAPE:
-			new GameOptionsMenu(*this, options_, main_windows_);
+			InteractiveGameBase::toggle_mainmenu();
 			return true;
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:

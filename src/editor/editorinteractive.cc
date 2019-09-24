@@ -841,7 +841,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			menu_windows_.help.toggle();
 			return true;
 		case SDLK_ESCAPE:
-			new EditorMainMenu(*this, mainmenu_);
+			mainmenu_.toggle();
 			return true;
 		default:
 			break;

@@ -471,6 +471,10 @@ void InteractiveGameBase::start() {
 	}
 }
 
+void InteractiveGameBase::toggle_mainmenu() {
+	mainmenu_.toggle();
+}
+
 void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords,
                                                      const Vector2i point,
                                                      bool was_minimal) {
