@@ -53,16 +53,15 @@ jobs:
       name: "Codecheck Suite"
       script: ./.travis.sh codecheck
       cache: false
-    - name: "Compiler Errors"
-      script: ./.travis.sh compiler
     - name: "Documentation Test"
       language: python
       cache: pip
       install: pip install sphinx
       script: ./.travis.sh documentation
 
-    - stage: compile
-      ### macOS BUILDS
+    - stage: compiler
+      # Run this stage to test whether there are any error during compiling.
+      # We use the macOS builds since they run the fastest.
       name: "DEBUG: macOS 10.14 with Xcode 10.3"
       os: osx
       osx_image: xcode10.3
@@ -71,7 +70,10 @@ jobs:
       os: osx
       osx_image: xcode10.3
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
-    - name: "DEBUG: macOS 10.13 with Xcode 9.4"
+
+    - stage: build
+      ### macOS BUILDS
+      name: "DEBUG: macOS 10.13 with Xcode 9.4"
       os: osx
       osx_image: xcode9.4
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
@@ -153,4 +155,5 @@ script: ./.travis.sh build
 
 stages:
   - tests
-  - compile
+  - compiler
+  - build

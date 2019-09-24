@@ -32,12 +32,6 @@ codecheck)
       exit 1 # CodeCheck warnings.
    fi
    ;;
-compiler)
-   # Just run this to test whether there are any error during compiling.
-   # If this job fails we don't need to run on the compile stage.
-   cmake .. -DCMAKE_BUILD_TYPE:STRING="Release" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="OFF"
-   make -k -j3
-   ;;
 documentation)
    # Any warning is an error.
    pushd ../doc/sphinx
