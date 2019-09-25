@@ -174,7 +174,7 @@ FontSets::FontSets() {
 	std::map<std::string, FontSets::Selector> fontset_selectors = {
 	   {"default", FontSets::Selector::kDefault}, {"arabic", FontSets::Selector::kArabic},
 	   {"cjk", FontSets::Selector::kCJK},         {"devanagari", FontSets::Selector::kDevanagari},
-	   {"hebrew", FontSets::Selector::kHebrew},   {"myanmar", FontSets::Selector::kMyanmar}};
+	   {"hebrew", FontSets::Selector::kHebrew}};
 
 	LuaInterface lua;
 

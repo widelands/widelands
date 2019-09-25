@@ -413,7 +413,7 @@ const std::map<UChar, UChar> kArabicLegacyDiacritics = {
 
 const std::set<UI::FontSets::Selector> kLTRScripts = {
    // We omit the default fontset, because we won't define code blocks for it - it's a catch-all.
-   UI::FontSets::Selector::kCJK, UI::FontSets::Selector::kMyanmar};
+   UI::FontSets::Selector::kCJK};
 
 // http://unicode.org/faq/blocks_ranges.html
 // http://unicode-table.com/en/blocks/
@@ -441,11 +441,6 @@ const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kLTRCodeBlocks = {
        UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_A,
        UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_B,
        UBlockCode::UBLOCK_HANGUL_SYLLABLES,
-    }},
-   {UI::FontSets::Selector::kMyanmar,
-    {
-       UBlockCode::UBLOCK_MYANMAR,
-       UBlockCode::UBLOCK_MYANMAR_EXTENDED_A,
     }}};
 
 const std::set<UI::FontSets::Selector> kRTLScripts = {
@@ -739,8 +734,6 @@ UI::FontSet const* find_fontset(const char* word, const UI::FontSets& fontsets) 
 		selector = UI::FontSets::Selector::kDevanagari;
 	} else if (has_script_character(word, UI::FontSets::Selector::kHebrew)) {
 		selector = UI::FontSets::Selector::kHebrew;
-	} else if (has_script_character(word, UI::FontSets::Selector::kMyanmar)) {
-		selector = UI::FontSets::Selector::kMyanmar;
 	} else {
 		selector = UI::FontSets::Selector::kDefault;
 	}

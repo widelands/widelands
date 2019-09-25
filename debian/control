@@ -51,7 +51,6 @@ Depends: fonts-freefont-ttf,
   fonts-dejavu-core,
   fonts-dejavu-extra,
   fonts-hosny-amiri,
-  fonts-lklug-sinhala,
   fonts-nakula,
   fonts-wqy-microhei,
   ${misc:Depends}

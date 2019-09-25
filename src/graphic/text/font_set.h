@@ -99,7 +99,7 @@ private:
 
 /// A repository of all available fontsets
 struct FontSets {
-	enum class Selector { kDefault, kArabic, kCJK, kDevanagari, kHebrew, kMyanmar, kUnknown };
+	enum class Selector { kDefault, kArabic, kCJK, kDevanagari, kHebrew, kUnknown };
 
 	FontSets();
 
