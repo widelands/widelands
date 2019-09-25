@@ -116,6 +116,14 @@ For contributing art, see https://www.widelands.org/wiki/GraphicsDevelopment/
 
 For contributing translations, see https://www.widelands.org/wiki/TranslatingWidelands/
 
+### Testing
+
+For helping with testing, see https://www.widelands.org/wiki/TestingBranches/
+
+### Triaging Issues
+
+For helping with issue management, see https://www.widelands.org/wiki/TriagingBugs/
+
 ## Directory Structure
 
 | Directory | Contents |
