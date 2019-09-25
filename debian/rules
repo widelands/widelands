@@ -36,8 +36,6 @@ override_dh_auto_install:
 	# ln -s /usr/share/fonts/truetype/wqy debian/tmp/usr/share/games/widelands/data/i18n/fonts/MicroHei
 	# rm -r debian/tmp/usr/share/games/widelands/data/i18n/fonts/Nakula
 	# ln -s /usr/share/fonts/truetype/Nakula debian/tmp/usr/share/games/widelands/data/i18n/fonts
-	# rm -r debian/tmp/usr/share/games/widelands/data/i18n/fonts/Sinhala
-	# ln -s /usr/share/fonts/truetype/sinhala debian/tmp/usr/share/games/widelands/data/i18n/fonts/Sinhala
 	# Remove the licenses that are included in debian/copyright
 	rm debian/tmp/usr/share/games/widelands/data/i18n/fonts/Culmus/LICENSE
 	rm debian/tmp/usr/share/games/widelands/data/i18n/fonts/Widelands/LICENSE
