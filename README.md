@@ -79,8 +79,13 @@ cmake -DCMAKE_BUILD_TYPE=Release ..
 For using the Ninja build system, call
 
 ~~~~
+mkdir build
+cd build
 cmake -G Ninja ..
+ninja-build
 ~~~~
+
+Depending on the Ninja installation, the last line can also be just `ninja`.
 
 Note that the options are prefixed with `-D`. These are the available options:
 
