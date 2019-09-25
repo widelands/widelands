@@ -76,6 +76,12 @@ We have various CMake options available. For example, to create a release build,
 cmake -DCMAKE_BUILD_TYPE=Release ..
 ~~~~
 
+For using the Ninja build system, call
+
+~~~~
+cmake -G Ninja ..
+~~~~
+
 Note that the options are prefixed with `-D`. These are the available options:
 
 | Name | Values | Default| Function
