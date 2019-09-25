@@ -106,7 +106,6 @@ struct FontSets {
 		kDevanagari,
 		kHebrew,
 		kMyanmar,
-		kSinhala,
 		kUnknown
 	};
 
