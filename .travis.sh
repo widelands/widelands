@@ -6,13 +6,7 @@ cd build
 
 case "$1" in
 build)
-   if [ "$BUILD_TYPE" == "Debug" ]; then
-      # We skip translations and codecheck to speed things up
-      cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="OFF" -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF"
-   else
-      # We test translations only on release builds, in order to help with job timeouts
-      cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_ASAN="OFF"
-   fi
+   cmake .. -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE_TOOLS -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF"
    # Do the actual build.
    make -k -j3
 
