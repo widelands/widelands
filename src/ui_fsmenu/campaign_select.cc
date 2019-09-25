@@ -73,6 +73,9 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
 	table_.focus();
 	fill_table();
 	layout();
+
+	table_.cancel.connect(
+	   boost::bind(&FullscreenMenuCampaignSelect::clicked_back, boost::ref(*this)));
 }
 
 void FullscreenMenuCampaignSelect::layout() {
