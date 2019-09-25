@@ -79,4 +79,7 @@ For contributing translations, see https://www.widelands.org/wiki/TranslatingWid
 | utils | Diverse utilities: Building translations, code formatting, packaging Mac & Windows, ... |
 
 
+## Obtaining Travis and AppVyor builds
+
+Travis and AppVeyor builds are triggered for all pull requests and for new pushes to the `master` branch. If you want to get a build without making a pull request, temporarily add the name of your branch to the `branches` section in `.travis.yml`/`appveyor.yml`. This will not work if the branch is in a fork though.
 
