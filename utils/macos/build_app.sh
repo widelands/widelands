@@ -77,13 +77,15 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
    fi
 fi
 
-REVISION=`bzr revno $SOURCE_DIR`
+pushd $SOURCE_DIR
+REVISION="r$(git rev-list --count HEAD)_$(git rev-parse --short HEAD)"
+popd
 DESTINATION="WidelandsRelease"
 
 if [[ -f $SOURCE_DIR/WL_RELEASE ]]; then
    WLVERSION="$(cat $SOURCE_DIR/WL_RELEASE)"
 else
-   WLVERSION="r$REVISION"
+   WLVERSION="$REVISION"
 fi
 
 echo ""
