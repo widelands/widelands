@@ -5902,6 +5902,16 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			                    std::abs(management_data.get_military_number_at(165)) / 20 :
 			                 0;
 			inputs[111] = bo.current_stats / (bo.ware_outputs.size() + 1);
+			// boost for buildings supporting seafaring NOCOM
+			if (bo.is(BuildingAttribute::kSupportsSeafaring) && map_allows_seafaring_) {
+
+				inputs[112] = std::abs(management_data.get_military_number_at(170)) / 10;
+				inputs[113] = 3;
+				if (bo.total_count() == 0) {
+					inputs[114] = std::abs(management_data.get_military_number_at(172)) / 10;
+					inputs[115] = 3;
+				}
+			}
 
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
