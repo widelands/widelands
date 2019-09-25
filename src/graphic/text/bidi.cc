@@ -446,8 +446,7 @@ const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kLTRCodeBlocks = {
     {
        UBlockCode::UBLOCK_MYANMAR,
        UBlockCode::UBLOCK_MYANMAR_EXTENDED_A,
-    }}
-};
+    }}};
 
 const std::set<UI::FontSets::Selector> kRTLScripts = {
    // Add "mandaic", "nko", "samaritan", "syriac", "thaana" if we get these languages.
