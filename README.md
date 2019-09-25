@@ -15,7 +15,12 @@ On how to download Widelands, see https://www.widelands.org/wiki/Download/
 
 ## Compiling
 
-We support compiling Widelands for Linux, Windows under MSys2, and MacOs with GCC >= 4.8 or Clang/LLVM >= 3.4, though it might work with other compilers too. You will need to install the following dependencies:
+We support compiling Widelands for Linux, Windows under MSys2, and MacOs with GCC >= 4.8 or Clang/LLVM >= 3.4, though it might work with other compilers too. We have more detailed documentation available at: https://www.widelands.org/wiki/BuildingWidelands/
+
+
+### Dependencies
+
+You will need to install the following dependencies:
 
 *  [libSDL](http://www.libsdl.org/) >=2.0
 *  [libSDL_image](http://www.libsdl.org/projects/SDL_image) 
@@ -29,6 +34,9 @@ We support compiling Widelands for Linux, Windows under MSys2, and MacOs with GC
 *  [Python](http://www.python.org) >= 1.5.2
 *  [libglew](http://glew.sourceforge.net) or [glbinding](https://glbinding.org/)
 
+
+### Compiling with our convenience script
+
 You can then compile by running our convenience script.
 
 | Command | Purpose |
@@ -37,7 +45,50 @@ You can then compile by running our convenience script.
 | `./compile.sh -r -w` | Release build |
 | `./compile.sh -h` | List available options |
 
-Read more: https://www.widelands.org/wiki/BuildingWidelands/
+When compiling has finished, you can call Widelands with
+
+~~~~
+./widelands
+~~~~
+
+### Compiling with CMake
+
+You can also call CMake manually:
+
+~~~~
+mkdir build
+cd build
+cmake ..
+make
+~~~~
+
+When compiling has finished, you can call Widelands with
+
+~~~~
+cd ..
+mv build/src/widelands .
+./widelands
+~~~~
+
+We have various CMake options available. For example, to create a release build, call
+
+~~~~
+cmake -DCMAKE_BUILD_TYPE=Release ..
+~~~~
+
+Note that the options are prefixed with `-D`. These are the available options:
+
+| Name | Values | Default| Function
+| --- | --- | --- | --- |
+| `CMAKE_BUILD_TYPE` | `Debug`/`Release` | `Debug` | Create a release or debug build |
+| `OPTION_ASAN` | `ON`/`OFF` | `ON` for Debug builds /`OFF` for Release builds | Use AddressSanitizer. Switching this off only works once. You will have to clear the `build` directory if you want to switch this off again in a later build. |
+| `OPTION_BUILD_TRANSLATIONS` | `ON`/`OFF` | `ON` | Build translations |
+| `OPTION_BUILD_CODECHECK` | `ON`/`OFF` | `ON` | Build codecheck. Only available in Debug builds. |
+| `OPTION_BUILD_WEBSITE_TOOLS` | `ON`/`OFF` | `ON` | Build website-related tools |
+| `OPTION_BUILD_TESTS` | `ON`/`OFF` | `ON` | Build Boost tests |
+| `USE_XDG` | `ON`/`OFF` | `ON` | Follow XDG-Basedir specification. Only available on Linux. |
+| `OPTION_USE_GLBINDING` | `ON`/`OFF` | `OFF` | Use glbinding instead of GLEW |
+| `OPTION_GLEW_STATIC` | `ON`/`OFF` | `OFF` | Use static GLEW Library |
 
 ## Contributing
 
