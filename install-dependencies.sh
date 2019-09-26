@@ -53,6 +53,7 @@ echo "* libiconv"
 echo "* zlib"
 echo "* libpng"
 echo "* libglew"
+echo "* git"
 echo " "
 echo "If any of these should fail, please let us know and give us the missing/failing"
 echo "package's name while specifying your operating system."
@@ -71,13 +72,14 @@ if [ -z "$DISTRO" ]; then
       DISTRO="gentoo"
    elif [ -f /etc/SuSE-release ]; then
       DISTRO="suse"
-      echo "Installing dependencies for SuSE"
    elif [ -f /etc/slackware-release -o -f /etc/slackware-version ]; then
       DISTRO="slackware"
    elif [ -f /etc/mandriva-release ]; then
       DISTRO="mandriva"
    elif [ -f /etc/debian_version ]; then
       DISTRO="debian"
+   elif [ -f /usr/local/Homebrew/bin/brew ]; then
+      DISTRO="homebrew"
    fi
 fi
 
@@ -133,7 +135,7 @@ elif [ "$DISTRO" == "msys64" ]; then
     mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew
 elif [ "$DISTRO" == "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
-   brew install boost bzrtools cmake doxygen gettext glew graphviz icu4c jpeg \
+   brew install boost git cmake doxygen gettext glew graphviz icu4c jpeg \
     libogg libpng libvorbis ninja python sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
 elif [ -z "$DISTRO" ]; then
    echo "ERROR. Unable to detect your operating system."
