@@ -109,9 +109,9 @@ function MakeDMG {
 
    echo "Creating DMG ..."
    if [ "$TYPE" == "Release" ]; then
-      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_$COMMIT_COUNT.dmg"
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_r${COMMIT_COUNT}.dmg"
    elif [ "$TYPE" == "Debug" ]; then
-      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${COMMIT_COUNT}_${TYPE}.dmg"
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_r${COMMIT_COUNT}_${TYPE}.dmg"
    fi
 }
 
