@@ -77,13 +77,14 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
    fi
 fi
 
-REVISION=`git --git-dir=$SOURCE_DIR/.git rev-parse --abbrev-ref HEAD`-`git --git-dir=$SOURCE_DIR/.git rev-list --count HEAD`
+REVISION=`git rev-parse --short=5 HEAD`[`git --git-dir=$SOURCE_DIR/.git rev-parse --abbrev-ref HEAD`]
+COMMIT_COUNT=`git --git-dir=$SOURCE_DIR/.git rev-list --count HEAD`
 DESTINATION="WidelandsRelease"
 
 if [[ -f $SOURCE_DIR/WL_RELEASE ]]; then
    WLVERSION="$(cat $SOURCE_DIR/WL_RELEASE)"
 else
-   WLVERSION="r$REVISION"
+   WLVERSION="git-$REVISION"
 fi
 
 echo ""
@@ -108,9 +109,9 @@ function MakeDMG {
 
    echo "Creating DMG ..."
    if [ "$TYPE" == "Release" ]; then
-      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_$WLVERSION.dmg"
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_$COMMIT_COUNT.dmg"
    elif [ "$TYPE" == "Debug" ]; then
-      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}_${TYPE}.dmg"
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${COMMIT_COUNT}_${TYPE}.dmg"
    fi
 }
 
@@ -181,7 +182,7 @@ function BuildWidelands() {
    PREFIX_PATH+=";$(brew --prefix zlib)"
    PREFIX_PATH+=";/usr/local"
    PREFIX_PATH+=";/usr/local/Homebrew"
-   
+
    export PATH="$(brew --prefix gettext)/bin:$PATH"
    export SDL2DIR="$(brew --prefix sdl2)"
    export SDL2IMAGEDIR="$(brew --prefix sdl2_image)"
