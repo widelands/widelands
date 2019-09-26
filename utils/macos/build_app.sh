@@ -78,13 +78,14 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
 fi
 
 REVISION=`git rev-parse --short=5 HEAD`[`git --git-dir=$SOURCE_DIR/.git rev-parse --abbrev-ref HEAD`]
-COMMIT_COUNT=`git --git-dir=$SOURCE_DIR/.git rev-list --count HEAD`
 DESTINATION="WidelandsRelease"
 
 if [[ -f $SOURCE_DIR/WL_RELEASE ]]; then
    WLVERSION="$(cat $SOURCE_DIR/WL_RELEASE)"
+   COMMIT_COUNT=$WLVERSION
 else
    WLVERSION="git-$REVISION"
+   COMMIT_COUNT=`git --git-dir=$SOURCE_DIR/.git rev-list --count HEAD`
 fi
 
 echo ""
