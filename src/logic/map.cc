@@ -395,10 +395,10 @@ Map::count_owned_valuable_fields(const std::string& immovable_attribute) const {
 		if (use_attribute) {
 			const BaseImmovable* imm = fcoords.field->get_immovable();
 			if (imm != nullptr && imm->has_attribute(attribute_id)) {
-				result[fcoords.field->get_owned_by()] += 1;
+				++result[fcoords.field->get_owned_by()];
 			}
 		} else {
-			result[fcoords.field->get_owned_by()] += 1;
+			++result[fcoords.field->get_owned_by()];
 		}
 	}
 	return result;
@@ -1560,7 +1560,7 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 			if (objsize == BaseImmovable::NONE)
 				continue;
 			if (avoidnature && obj->descr().type() == MapObjectType::IMMOVABLE)
-				objsize += 1;
+				++objsize;
 			if (objsize + buildsize > BaseImmovable::BIG)
 				buildsize = BaseImmovable::BIG - objsize + 1;
 		}

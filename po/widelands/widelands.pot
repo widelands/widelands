@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-09-06 07:24+0000\n"
+"POT-Creation-Date: 2019-09-23 20:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1314,7 +1314,7 @@ msgid "Initializing game…"
 msgstr ""
 
 #: ../../src/logic/game.cc:376 ../../src/logic/game.cc:415
-#: ../../src/ui_basic/progresswindow.cc:49 ../../src/wlapplication.cc:1458
+#: ../../src/ui_basic/progresswindow.cc:49 ../../src/wlapplication.cc:1465
 msgid "Loading…"
 msgstr ""
 
@@ -1886,39 +1886,39 @@ msgstr ""
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:159 ../../src/network/gamehost.cc:652
-#: ../../src/wlapplication.cc:1348
+#: ../../src/network/gameclient.cc:162 ../../src/network/gamehost.cc:651
+#: ../../src/wlapplication.cc:1355
 msgid "Preparing game"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:227 ../../src/network/internet_gaming.cc:114
+#: ../../src/network/gameclient.cc:230 ../../src/network/internet_gaming.cc:114
 msgid "Could not establish connection to host"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:228
+#: ../../src/network/gameclient.cc:231
 msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was running at the supposed port or the server shut down as "
 "you tried to connect."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:783
+#: ../../src/network/gameclient.cc:786
 msgid "/me 's file failed md5 checksumming."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:824
+#: ../../src/network/gameclient.cc:827
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
 
 #. * TRANSLATORS: %s contains an error message.
-#: ../../src/network/gameclient.cc:1076
+#: ../../src/network/gameclient.cc:1079
 #, c-format
 msgid "%s An automatic savegame will be created."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:1080
+#: ../../src/network/gameclient.cc:1083
 msgid "Disconnected from Host"
 msgstr ""
 
@@ -2037,12 +2037,12 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:1567
+#: ../../src/network/gamehost.cc:1566
 #, c-format
 msgid "Computer %u"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:1778
+#: ../../src/network/gamehost.cc:1777
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3196,11 +3196,11 @@ msgstr ""
 msgid "Load Game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1142
+#: ../../src/wlapplication.cc:1150
 msgid "Game data error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1150
+#: ../../src/wlapplication.cc:1158
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -3208,7 +3208,7 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1157
+#: ../../src/wlapplication.cc:1165
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3216,11 +3216,11 @@ msgid ""
 "It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1284
+#: ../../src/wlapplication.cc:1292
 msgid "Invalid Address"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1285
+#: ../../src/wlapplication.cc:1293
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr ""
 
@@ -4814,7 +4814,7 @@ msgctxt "unit_generic"
 msgid "minutes"
 msgstr ""
 
-#: ../../src/wui/plot_area.cc:355
+#: ../../src/wui/plot_area.cc:360
 msgid "game"
 msgstr ""
 
