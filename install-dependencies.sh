@@ -115,7 +115,7 @@ elif [ "$DISTRO" == "freebsd" ]; then
    echo "Installing dependencies for FreeBSD..."
    pkg install git boost-libs cmake gettext glew png sdl2_image sdl2_mixer \
     sdl2_net sdl2_ttf
-elif [ "$DISTRO" == "opebsd" ]; then
+elif [ "$DISTRO" == "openbsd" ]; then
    echo "Installing dependencies for OpenBSD..."
    pkg_add boost git cmake gcc g++ gettext-tools glew icu4c libexecinfo png \
     sdl2-image sdl2-mixer sdl2-net sdl2-ttf
