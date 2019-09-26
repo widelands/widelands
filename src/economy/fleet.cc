@@ -335,9 +335,9 @@ uint32_t Fleet::count_ships() const {
 
 uint32_t Fleet::count_ships_heading_here(EditorGameBase& egbase, PortDock* port) const {
 	uint32_t ships_on_way = 0;
-	for (uint16_t s = 0; s < ships_.size(); s += 1) {
+	for (uint16_t s = 0; s < ships_.size(); ++s) {
 		if (ships_[s]->get_destination(egbase) == port) {
-			ships_on_way += 1;
+			++ships_on_way;
 		}
 	}
 
@@ -797,7 +797,7 @@ PortDock* Fleet::find_next_dest(Game& game, const Ship& ship, const PortDock& fr
 			if (si.get_destination(game) == p) {
 				si.get(game, &ware, &worker);
 				if (ware) {
-					score += 1;  // TODO(ypopezios): increase by ware's importance
+					++score;  // TODO(ypopezios): increase by ware's importance
 				} else {        // worker
 					score += 4;
 				}
@@ -809,7 +809,7 @@ PortDock* Fleet::find_next_dest(Game& game, const Ship& ship, const PortDock& fr
 			if (si.get_destination(game) == p) {
 				si.get(game, &ware, &worker);
 				if (ware) {
-					score += 1;  // TODO(ypopezios): increase by ware's importance
+					++score;  // TODO(ypopezios): increase by ware's importance
 				} else {        // worker
 					score += 4;
 				}

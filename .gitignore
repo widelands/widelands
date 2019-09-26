@@ -1,6 +1,3 @@
-.bzr-repo
-tags
-
 # Scripting documentation ignores
 /doc/sphinx/build/
 /doc/sphinx/source/autogen*
