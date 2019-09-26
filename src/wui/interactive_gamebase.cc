@@ -348,6 +348,9 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_PAGEDOWN:
 			decrease_gamespeed();
 			return true;
+		case SDLK_ESCAPE:
+			InteractiveGameBase::toggle_mainmenu();
+			return true;
 		default:
 			break;
 		}
