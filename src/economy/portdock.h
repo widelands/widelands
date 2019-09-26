@@ -135,12 +135,8 @@ private:
 	friend struct Fleet;
 
 	// Does nothing - we do not show them on the map
-	void draw(uint32_t,
-	          InfoToDraw,
-	          const Vector2f&,
-	          const Coords&,
-	          float,
-			  RenderTarget*) override {}
+	void draw(uint32_t, InfoToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
+	}
 
 	void init_fleet(EditorGameBase& egbase);
 	void set_fleet(Fleet* fleet);

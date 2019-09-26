@@ -612,7 +612,8 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 	const int icon_size = get_health_level_pic()->height();
 
 	// Draw health info in building windows, or if kSoldierLevels is on.
-	const bool draw_health_bar = draw_mode == InfoMode::kInBuilding || (info_to_draw & InfoToDraw::kSoldierLevels);
+	const bool draw_health_bar =
+	   draw_mode == InfoMode::kInBuilding || (info_to_draw & InfoToDraw::kSoldierLevels);
 
 	switch (draw_mode) {
 	case InfoMode::kInBuilding:
@@ -637,7 +638,6 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 		dst->fill_rect(energy_outer, color);
 		dst->brighten_rect(energy_outer, 230 - color_sum / 3);
 
-
 		// Adjust health to current animation tick
 		uint32_t health_to_show = current_health_;
 		if (battle_) {
@@ -658,15 +658,15 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 		}
 
 		// Now draw the health bar itself
-		const int health_width =
-		   2 * (kSoldierHealthBarWidth - 1) * health_to_show / get_max_health();
+		const int health_width = 2 * (kSoldierHealthBarWidth - 1) * health_to_show / get_max_health();
 
 		Recti energy_inner(draw_position + Vector2i(-kSoldierHealthBarWidth + 1, 1) * scale,
 		                   health_width * scale, 3 * scale);
 		Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
 		                        (2 * (kSoldierHealthBarWidth - 1) - health_width) * scale, 3 * scale);
 
-		const RGBColor complement_color = color_sum > 128 * 3 ? RGBColor(32, 32, 32) : RGBColor(224, 224, 224);
+		const RGBColor complement_color =
+		   color_sum > 128 * 3 ? RGBColor(32, 32, 32) : RGBColor(224, 224, 224);
 		dst->fill_rect(energy_inner, color);
 		dst->fill_rect(energy_complement, complement_color);
 	}
@@ -674,10 +674,10 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 	// Draw level info in building windows, or if kSoldierLevels is on.
 	if (draw_mode == InfoMode::kInBuilding || (info_to_draw & InfoToDraw::kSoldierLevels)) {
 		const auto draw_level_image = [icon_size, scale, &draw_position, dst](
-			const Vector2i& offset, const Image* image) {
-			dst->blitrect_scale(Rectf(draw_position + offset * icon_size * scale, icon_size * scale,
-											  icon_size * scale),
-									  image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
+		                                 const Vector2i& offset, const Image* image) {
+			dst->blitrect_scale(
+			   Rectf(draw_position + offset * icon_size * scale, icon_size * scale, icon_size * scale),
+			   image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
 		};
 
 		draw_level_image(Vector2i(-1, -2), get_attack_level_pic());

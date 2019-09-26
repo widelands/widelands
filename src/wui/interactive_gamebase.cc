@@ -229,14 +229,14 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                  ShowHideEntry::kStatistics,
 	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "s");
 
-
 	showhidemenu_.add(get_display_flag(dfShowSoldierLevels) ?
 	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 	                      * level information is shown above soldiers' heads */
 	                     _("Hide Soldier Levels") :
 	                     _("Show Soldier Levels"),
 	                  ShowHideEntry::kSoldierLevels,
-	                  g_gr->images().get("images/wui/menus/toggle_soldier_levels.png"), false, "", "l");
+	                  g_gr->images().get("images/wui/menus/toggle_soldier_levels.png"), false, "",
+	                  "l");
 }
 
 void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {

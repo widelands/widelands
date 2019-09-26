@@ -703,8 +703,8 @@ void Building::draw_info(const InfoToDraw info_to_draw,
                          RenderTarget* dst) {
 	const std::string statistics_string =
 	   (info_to_draw & InfoToDraw::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";
-	do_draw_info(info_to_draw, info_string(InfoStringFormat::kCensus), statistics_string, point_on_dst,
-	             scale, dst);
+	do_draw_info(info_to_draw, info_string(InfoStringFormat::kCensus), statistics_string,
+	             point_on_dst, scale, dst);
 }
 
 int32_t

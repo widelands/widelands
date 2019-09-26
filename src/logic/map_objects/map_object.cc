@@ -520,7 +520,9 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 	const float granularity = 4.f;
 	float text_scale = scale;
 	// The formula is a bit fancy to avoid too much text overlap.
-	text_scale = std::round(granularity * (text_scale > 1.f ? std::sqrt(text_scale) : std::pow(text_scale, 2.f))) / granularity;
+	text_scale = std::round(granularity *
+	                        (text_scale > 1.f ? std::sqrt(text_scale) : std::pow(text_scale, 2.f))) /
+	             granularity;
 
 	// Skip tiny text for performance reasons
 	if (text_scale < 0.5f) {

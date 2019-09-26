@@ -26,8 +26,8 @@
 
 #include "base/macros.h"
 #include "economy/routing_node.h"
-#include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/walkingdir.h"
 
 namespace Widelands {

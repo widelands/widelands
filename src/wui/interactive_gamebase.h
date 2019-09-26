@@ -40,7 +40,7 @@ public:
 	                    Section& global_s,
 	                    PlayerType pt,
 	                    bool multiplayer,
-							  ChatProvider* chat_provider);
+	                    ChatProvider* chat_provider);
 	~InteractiveGameBase() override {
 	}
 	Widelands::Game* get_game() const;
@@ -87,7 +87,13 @@ public:
 
 protected:
 	// For referencing the items in showhidemenu_
-	enum class ShowHideEntry { kBuildingSpaces, kCensus, kStatistics, kSoldierLevels, kWorkareaOverlap };
+	enum class ShowHideEntry {
+		kBuildingSpaces,
+		kCensus,
+		kStatistics,
+		kSoldierLevels,
+		kWorkareaOverlap
+	};
 
 	// Adds the mapviewmenu_ to the toolbar
 	void add_main_menu();

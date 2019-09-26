@@ -798,7 +798,7 @@ PortDock* Fleet::find_next_dest(Game& game, const Ship& ship, const PortDock& fr
 				si.get(game, &ware, &worker);
 				if (ware) {
 					++score;  // TODO(ypopezios): increase by ware's importance
-				} else {        // worker
+				} else {     // worker
 					score += 4;
 				}
 			}
@@ -810,7 +810,7 @@ PortDock* Fleet::find_next_dest(Game& game, const Ship& ship, const PortDock& fr
 				si.get(game, &ware, &worker);
 				if (ware) {
 					++score;  // TODO(ypopezios): increase by ware's importance
-				} else {        // worker
+				} else {     // worker
 					score += 4;
 				}
 			}

@@ -338,13 +338,13 @@ void ProductionSite::update_statistics_string(std::string* s) {
 
 	if (nr_coming > 0) {
 		*s = g_gr->styles().color_tag(
-			  (nr_coming == 1 ?
-		          /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
-		          _("Worker is coming") :
-		          /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
-		             missing. If you need plural forms here, please let us know. */
-		          _("Workers are coming")),
-		        g_gr->styles().building_statistics_style().low_color());
+		   (nr_coming == 1 ?
+		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
+		       _("Worker is coming") :
+		       /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
+		          missing. If you need plural forms here, please let us know. */
+		       _("Workers are coming")),
+		   g_gr->styles().building_statistics_style().low_color());
 		return;
 	}
 

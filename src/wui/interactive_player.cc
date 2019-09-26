@@ -92,7 +92,6 @@ InfoToDraw filter_info_to_draw(InfoToDraw info_to_draw,
 	return result;
 }
 
-
 void draw_immovables_for_visible_field(const Widelands::EditorGameBase& egbase,
                                        const FieldsToDraw::Field& field,
                                        const float scale,

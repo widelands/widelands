@@ -474,7 +474,8 @@ void Immovable::draw(uint32_t gametime,
 	if (!anim_construction_total_) {
 		dst->blit_animation(point_on_dst, coords, scale, anim_, gametime - animstart_);
 		if (former_building_descr_) {
-			do_draw_info(info_to_draw, former_building_descr_->descname(), "", point_on_dst, scale, dst);
+			do_draw_info(
+			   info_to_draw, former_building_descr_->descname(), "", point_on_dst, scale, dst);
 		}
 	} else {
 		draw_construction(gametime, info_to_draw, point_on_dst, coords, scale, dst);

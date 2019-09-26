@@ -296,7 +296,8 @@ void SoldierPanel::draw(RenderTarget& dst) {
 			continue;
 
 		constexpr float kNoZoom = 1.f;
-		soldier->draw_info_icon(icon.pos + Vector2i(kIconBorder, kIconBorder), kNoZoom, Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels, &dst);
+		soldier->draw_info_icon(icon.pos + Vector2i(kIconBorder, kIconBorder), kNoZoom,
+		                        Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels, &dst);
 	}
 }
 
