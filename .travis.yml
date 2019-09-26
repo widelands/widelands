@@ -150,7 +150,7 @@ jobs:
       dist: trusty
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
     - name: "DEBUG: Ubuntu 18.04 with gcc 9.2"
-    - addons:
+      addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
@@ -162,7 +162,7 @@ jobs:
       services: xvfb
       cache: false
     - name: "DEBUG: Ubuntu 18.04 with clang 8"
-    - addons:
+      addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
