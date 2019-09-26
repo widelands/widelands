@@ -37,6 +37,9 @@ echo "Windows:"
 echo "* msys32    MSys 32bit"
 echo "* msys64    MSys 64bit"
 echo " "
+echo "Mac:"
+echo "*homebrew   Homebrew"
+echo " "
 echo "We will try to install the following dependencies:"
 echo " "
 echo "* Boost >= 1.48"
@@ -109,25 +112,29 @@ elif [ "$DISTRO" == "debian" ]; then
     libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev \
     libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev
 elif [ "$DISTRO" == "freebsd" ]; then
-   echo "Installing dependencies for FreeBSD"
+   echo "Installing dependencies for FreeBSD..."
    pkg install git boost-libs cmake gettext glew png sdl2_image sdl2_mixer \
     sdl2_net sdl2_ttf
 elif [ "$DISTRO" == "opebsd" ]; then
-   echo "Installing dependencies for OpenBSD"
+   echo "Installing dependencies for OpenBSD..."
    pkg_add boost git cmake gcc g++ gettext-tools glew icu4c libexecinfo png \
     sdl2-image sdl2-mixer sdl2-net sdl2-ttf
 elif [ "$DISTRO" == "msys32" ]; then
-   echo "Installing dependencies for 32-bit Windows"
+   echo "Installing dependencies for 32-bit Windows..."
    pacman -S pacman -S mingw-w64-i686-toolchain git mingw-w64-i686-cmake \
     mingw-w64-i686-ninja mingw-w64-i686-boost mingw-w64-i686-SDL2_ttf \
     mingw-w64-i686-SDL2_mixer mingw-w64-i686-SDL2_image \
     mingw-w64-i686-glbinding mingw-w64-i686-glew
 elif [ "$DISTRO" == "msys64" ]; then
-   echo "Installing dependencies for 64-bit Windows"
+   echo "Installing dependencies for 64-bit Windows..."
    pacman -S mingw-w64-x86_64-toolchain git mingw-w64-x86_64-cmake \
     mingw-w64-x86_64-ninja mingw-w64-x86_64-boost mingw-w64-x86_64-SDL2_ttf \
     mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image \
     mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew
+elif [ "$DISTRO" == "homebrew" ]; then
+   echo "Installing dependencies for Mac Homebrew..."
+   brew install boost bzrtools cmake doxygen gettext glew graphviz icu4c jpeg \
+    libogg libpng libvorbis ninja python sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
 elif [ -z "$DISTRO" ]; then
    echo "ERROR. Unable to detect your operating system."
    exit 1
