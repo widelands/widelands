@@ -743,7 +743,6 @@ void DefaultAI::late_initialization() {
 			}
 			if (bh.supports_seafaring()) {
 				bo.set_is(BuildingAttribute::kSupportsSeafaring);
-				printf ("DEBUG: %s supports seafaring\n", bo.name);
 			}
 			// Identify refined log producer
 			if (bo.ware_outputs.size() == 1 && bo.ware_outputs[0] == tribe_->refinedlog()) {
@@ -5902,14 +5901,13 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			                    std::abs(management_data.get_military_number_at(165)) / 20 :
 			                 0;
 			inputs[111] = bo.current_stats / (bo.ware_outputs.size() + 1);
-			// boost for buildings supporting seafaring NOCOM
+			// boost for buildings supporting seafaring
 			if (bo.is(BuildingAttribute::kSupportsSeafaring) && map_allows_seafaring_) {
-
 				inputs[112] = std::abs(management_data.get_military_number_at(170)) / 10;
-				inputs[113] = 3;
+				inputs[113] = 4;
 				if (bo.total_count() == 0) {
 					inputs[114] = std::abs(management_data.get_military_number_at(172)) / 10;
-					inputs[115] = 3;
+					inputs[115] = 4;
 				}
 			}
 
