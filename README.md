@@ -82,12 +82,14 @@ For using the Ninja build system, call
 mkdir build
 cd build
 cmake -G Ninja ..
-ninja-build
+ninja
 ~~~~
 
-Depending on the Ninja installation, the last line can also be just `ninja`.
+Depending on the Ninja installation, the last line can also be `ninja-build`.
 
-Note that the options are prefixed with `-D`. These are the available options:
+#### CMake options
+
+Note that CMake options are prefixed with `-D`. These are the available options:
 
 | Name | Values | Default| Function
 | --- | --- | --- | --- |
@@ -102,6 +104,18 @@ Note that the options are prefixed with `-D`. These are the available options:
 | `USE_XDG` | `ON`/`OFF` | `ON` | Follow XDG-Basedir specification. Only available on Linux. |
 | `OPTION_USE_GLBINDING` | `ON`/`OFF` | `OFF` | Use glbinding instead of GLEW |
 | `OPTION_GLEW_STATIC` | `ON`/`OFF` | `OFF` | Use static GLEW Library |
+
+#### make/ninja targets
+
+You can add targets to the `make` or `ninja` command, e.g. `make lang` to build only the translations. These are the available targets:
+
+| Name | Function |
+| --- | --- |
+| `ALL` or no target | Compile everything, up to executable with the settings from the `cmake` call |
+| `codecheck` | Run the codechecks (currently broken) |
+| `doc` | Generate Doxygen documentation. Currently only with Build Type Debug, but this is easily changed if necessary. |
+| `install` | Install into the target dir, this is `/usr/local` per default (you need root privileges!) unless you change it (see CMake options above) |
+| `lang` | Generate the translations |
 
 ## Contributing
 
