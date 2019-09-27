@@ -750,7 +750,7 @@ void MapBuildingdataPacket::read_productionsite(
 			productionsite.production_result_ = fr.c_string();
 
 			// TODO(GunChleoc): Savegame compatibility, remove after Build 21.
-			if (kCurrentPacketVersionProductionsite >= 7) {
+			if (packet_version >= 7) {
 				productionsite.main_worker_ = fr.signed_32();
 			} else {
 				productionsite.main_worker_ = productionsite.working_positions_[0].worker ? 0 : -1;
