@@ -108,6 +108,9 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	if (!load_or_save_.table().empty()) {
 		load_or_save_.table().select(0);
 	}
+
+	load_or_save_.table_.cancel.connect(
+	   boost::bind(&FullscreenMenuLoadGame::clicked_back, boost::ref(*this)));
 }
 
 void FullscreenMenuLoadGame::layout() {

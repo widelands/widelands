@@ -90,7 +90,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                10,
                34U,
                /** TRANSLATORS: Title for the main menu button in the game */
-               _("Main Menu"),
+               as_tooltip_text_with_hotkey(_("Main Menu"), pgettext("hotkey", "Esc")),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),
@@ -348,6 +348,9 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_PAGEDOWN:
 			decrease_gamespeed();
 			return true;
+		case SDLK_ESCAPE:
+			InteractiveGameBase::toggle_mainmenu();
+			return true;
 		default:
 			break;
 		}
@@ -469,6 +472,10 @@ void InteractiveGameBase::start() {
 			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
 		}
 	}
+}
+
+void InteractiveGameBase::toggle_mainmenu() {
+	mainmenu_.toggle();
 }
 
 void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords,

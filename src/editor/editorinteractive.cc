@@ -95,7 +95,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                10,
                34U,
                /** TRANSLATORS: Title for the main menu button in the editor */
-               as_tooltip_text_with_hotkey(_("Main Menu"), "h"),
+               as_tooltip_text_with_hotkey(_("Main Menu"), pgettext("hotkey", "Esc")),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),
@@ -840,7 +840,9 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_F1:
 			menu_windows_.help.toggle();
 			return true;
-
+		case SDLK_ESCAPE:
+			mainmenu_.toggle();
+			return true;
 		default:
 			break;
 		}
