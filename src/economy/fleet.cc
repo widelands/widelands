@@ -335,9 +335,9 @@ uint32_t Fleet::count_ships() const {
 
 uint32_t Fleet::count_ships_heading_here(EditorGameBase& egbase, PortDock* port) const {
 	uint32_t ships_on_way = 0;
-	for (uint16_t s = 0; s < ships_.size(); s += 1) {
+	for (uint16_t s = 0; s < ships_.size(); ++s) {
 		if (ships_[s]->get_current_destination(egbase) == port) {
-			ships_on_way += 1;
+			++ships_on_way;
 		}
 	}
 
@@ -637,7 +637,8 @@ void Fleet::update(EditorGameBase& egbase) {
  * Helper function for assigning ships to ports in need of a ship.
  * Penalizes the given ship if it is transporting wares.
  * A small detour to the given portdock is penalized very slightly, a longer detour drastically.
- * Returns false if the detour would be so long that this ship must not even be considered for serving this port.
+ * Returns false if the detour would be so long that this ship must not even be considered for
+ * serving this port.
  */
 bool Fleet::penalize_route(Game& game, PortDock& p, const Ship& s, uint32_t* route_length) {
 	const uint32_t real_length = *route_length;
@@ -807,9 +808,11 @@ void Fleet::act(Game& game, uint32_t /* data */) {
  * Tell the given ship where to go next. May push any number of destinations.
  */
 void Fleet::push_next_destinations(Game& game, Ship& ship, const PortDock& from_port) {
-	std::vector<std::pair<PortDock*, uint32_t>> destinations; // Destinations and the number of items waiting to go there
-	uint32_t total_items = ship.get_nritems(); // All waiting and shipping items
-	uint32_t waiting_items = 0; // Items that have a destination which this ship is not currently planning to visit
+	std::vector<std::pair<PortDock*, uint32_t>>
+	   destinations;  // Destinations and the number of items waiting to go there
+	uint32_t total_items = ship.get_nritems();  // All waiting and shipping items
+	uint32_t waiting_items =
+	   0;  // Items that have a destination which this ship is not currently planning to visit
 	// Count how many items are waiting to go to each portdock
 	for (auto& it : from_port.waiting_) {
 		if (PortDock* pd = it.destination_dock_.get(game)) {
@@ -849,8 +852,11 @@ void Fleet::push_next_destinations(Game& game, Ship& ship, const PortDock& from_
  * Send the given ship to the given portdock (with the given penalty factor)
  * if the detour this would mean for the ship is not too long
  */
-void Fleet::check_push_destination(Game& game, Ship& ship,
-		const PortDock& from_port, PortDock& destination, uint32_t penalty_factor) {
+void Fleet::check_push_destination(Game& game,
+                                   Ship& ship,
+                                   const PortDock& from_port,
+                                   PortDock& destination,
+                                   uint32_t penalty_factor) {
 	assert(!ship.has_destination(game, destination));
 	Path path;
 	get_path(from_port, destination, path);
