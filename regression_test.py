@@ -11,6 +11,7 @@ import sys
 import tempfile
 import unittest
 import platform
+from subprocess import call
 
 #Python2/3 compat code for iterating items
 try:
@@ -92,6 +93,13 @@ class WidelandsTestCase(unittest.TestCase):
                     '--nosound',
                     '--language=en_US' ]
             args += [ "--{}={}".format(key, value) for key, value in iteritems(wlargs) ]
+
+            print("\nDATADIR contents:")
+            call(['ls', datadir()])
+
+            print("\nDATADIR FOR TESTING contents:")
+            call(['ls', datadir_for_testing()])
+            print("\n")
 
             widelands = subprocess.Popen(
                     args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
