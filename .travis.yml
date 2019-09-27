@@ -149,18 +149,13 @@ jobs:
       os: linux
       dist: trusty
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
-    - name: "DEBUG: Ubuntu 18.04 with gcc 9.2"
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-9.2
-      os: linux
+
+    - name: "DEBUG: Ubuntu 18.04 with gcc 9"
       dist: bionic
-      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" MATRIX_EVAL="CC=gcc-9.2 && CXX=g++-9.2"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" GCC=9
       services: xvfb
       cache: false
+
     - name: "DEBUG: Ubuntu 18.04 with clang 8"
       addons:
         apt:
@@ -171,6 +166,7 @@ jobs:
             - clang-8
       os: linux
       dist: bionic
+      compiler: clang
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" MATRIX_EVAL="CC=clang-8 && CXX=clang++-8"
       services: xvfb
       cache: false
