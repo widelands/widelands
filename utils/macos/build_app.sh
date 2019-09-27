@@ -77,15 +77,20 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
    fi
 fi
 
-REVISION=`git rev-parse --short=5 HEAD`[`git --git-dir=$SOURCE_DIR/.git rev-parse --abbrev-ref HEAD`]
+
+REVISION=`git --git-dir=$SOURCE_DIR/.git rev-parse --abbrev-ref HEAD`
+if [ $REVISION == "master" ]; then
+  REVISION=`git --git-dir=$SOURCE_DIR/.git rev-list --count HEAD`[`git --git-dir=$SOURCE_DIR/.git rev-parse --short=7 HEAD`]
+else
+  REVISION=`git --git-dir=$SOURCE_DIR/.git rev-parse --short=7 HEAD`[$REVISION]
+fi
+
 DESTINATION="WidelandsRelease"
 
 if [[ -f $SOURCE_DIR/WL_RELEASE ]]; then
    WLVERSION="$(cat $SOURCE_DIR/WL_RELEASE)"
-   COMMIT_COUNT=$WLVERSION
 else
    WLVERSION="git-$REVISION"
-   COMMIT_COUNT=`git --git-dir=$SOURCE_DIR/.git rev-list --count HEAD`
 fi
 
 echo ""
@@ -110,9 +115,9 @@ function MakeDMG {
 
    echo "Creating DMG ..."
    if [ "$TYPE" == "Release" ]; then
-      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_r${COMMIT_COUNT}.dmg"
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg"
    elif [ "$TYPE" == "Debug" ]; then
-      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_r${COMMIT_COUNT}_${TYPE}.dmg"
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}_${TYPE}.dmg"
    fi
 }
 
