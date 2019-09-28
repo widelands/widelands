@@ -64,10 +64,8 @@ def detect_git_revision():
         )
         stdout, stderr = cmd.communicate()
         git_abbrev = stdout.rstrip()
-        if git_abbrev == "master":
-            return 'git-%s[%s]' % (git_count, git_revnum)
-        else:
-            return 'git-%s[%s]' % (git_revnum, git_abbrev)
+        if git_count and git_revnum and git_abbrev:
+            return 'r%s[%s@%s]' % (git_count, git_revnum, git_abbrev)
     except Exception as e:
         pass
     return None

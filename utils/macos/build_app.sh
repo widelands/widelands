@@ -77,20 +77,15 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
    fi
 fi
 
-
-REVISION=`git --git-dir=$SOURCE_DIR/.git rev-parse --abbrev-ref HEAD`
-if [ $REVISION == "master" ]; then
-  REVISION=`git --git-dir=$SOURCE_DIR/.git rev-list --count HEAD`[`git --git-dir=$SOURCE_DIR/.git rev-parse --short=7 HEAD`]
-else
-  REVISION=`git --git-dir=$SOURCE_DIR/.git rev-parse --short=7 HEAD`[$REVISION]
-fi
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+REVISION=`python $DIR/../detect_revision.py`
 
 DESTINATION="WidelandsRelease"
 
 if [[ -f $SOURCE_DIR/WL_RELEASE ]]; then
    WLVERSION="$(cat $SOURCE_DIR/WL_RELEASE)"
 else
-   WLVERSION="git-$REVISION"
+   WLVERSION="$REVISION"
 fi
 
 echo ""
