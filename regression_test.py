@@ -98,8 +98,15 @@ class WidelandsTestCase(unittest.TestCase):
             call(['ls', datadir()])
 
             print("\nDATADIR FOR TESTING contents:")
-            call(['ls', datadir_for_testing()])
+            call(['ls', '-l', datadir_for_testing()])
             print("\n")
+            print("\nDATADIR FOR TESTING/build contents:")
+            call(['ls', '-l', datadir_for_testing() + "/build"])
+            print("\n")
+            print("\nDATADIR FOR TESTING/build/locale contents:")
+            call(['ls', '-l', datadir_for_testing() + "/build/locale"])
+            print("DONE listing dirs\n")
+
 
             widelands = subprocess.Popen(
                     args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
