@@ -388,6 +388,12 @@ install(
   PATTERN "CMakeLists.txt" EXCLUDE
 )
 
+# Create and link locale dir. We always need one even if it's empty, because Widelands is checking for it to prevent crashes.
+add_custom_target(link_locale_dir ALL
+    COMMAND ${CMAKE_COMMAND} -E make_directory locale
+    COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_BINARY_DIR}/locale ${CMAKE_CURRENT_SOURCE_DIR}/data/locale
+)
+
 set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${WL_INSTALL_DATADIR}/locale)
 
 install(
