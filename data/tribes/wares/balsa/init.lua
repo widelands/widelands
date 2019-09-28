@@ -1,5 +1,8 @@
 dirname = path.dirname(__file__)
 
+animations = {}
+add_animation(animations, "idle", dirname, "idle", {8, 8})
+
 tribes:new_ware_type {
    msgctxt = "ware",
    name = "balsa",
@@ -14,10 +17,5 @@ tribes:new_ware_type {
       amazons = 20,
    },
 
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "idle.png"),
-         hotspot = {8, 8},
-      },
-   }
+   animations = animations,
 }
