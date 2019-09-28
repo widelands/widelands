@@ -269,13 +269,6 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     fi
   }
 
-  # Check if directories / links already exists and create / update them if needed.
-  prepare_directories_and_links () {
-    test -d build/locale || mkdir -p build/locale
-    test -e data/locale || ln -s ../build/locale data/locale
-    return 0
-  }
-
   # Compile Widelands
   compile_widelands () {
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
@@ -357,13 +350,6 @@ END_SCRIPT
 set -e
 basic_check
 set_buildtool
-prepare_directories_and_links
-
-# Dependency check doesn't work with ninja, so we do it manually here
-if [ $BUILD_TYPE = "Debug" -a \( $buildtool = "ninja" -o $buildtool = "ninja-build" \) ]; then
-  utils/build_deps.py
-fi
-
 mkdir -p build
 cd build
 compile_widelands
