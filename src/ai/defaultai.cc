@@ -714,7 +714,9 @@ void DefaultAI::late_initialization() {
 			}
 
 			iron_resource_id = game().world().get_resource("iron");
-			assert(iron_resource_id != INVALID_INDEX);
+			if (iron_resource_id == INVALID_INDEX) {
+				throw wexception("The AI needs the world to define the resource 'iron'");
+			}
 
 			if (bo.type == BuildingObserver::Type::kMine) {
 				// get the resource needed by the mine
@@ -889,17 +891,57 @@ void DefaultAI::late_initialization() {
 	// We must verify that some buildings has been identified
 	// Also note that the AI assumes that some buildings are unique, if you want to
 	// create e.g. two barracks or bakeries, the impact on the AI must be considered
-	assert(count_buildings_with_attribute(BuildingAttribute::kBarracks) == 1);
-	assert(count_buildings_with_attribute(BuildingAttribute::kLogRefiner) == 1);
-	assert(count_buildings_with_attribute(BuildingAttribute::kRanger) == 1);
-	assert(count_buildings_with_attribute(BuildingAttribute::kWell) == 1);
-	assert(count_buildings_with_attribute(BuildingAttribute::kLumberjack) == 1);
-	assert((count_buildings_with_attribute(BuildingAttribute::kHunter) == 1) ||
-	       (count_buildings_with_attribute(BuildingAttribute::kHunter) == 0));
-	assert(count_buildings_with_attribute(BuildingAttribute::kIronMine) >= 1);
-	assert(count_buildings_with_attribute(BuildingAttribute::kFisher) == 1);
+	if (count_buildings_with_attribute(BuildingAttribute::kBarracks) != 1) {
+		throw wexception("The AI needs the tribe '%s' to define 1 type of barracks building. "
+		                 "This is the building that produces the tribe's 'soldier' worker.",
+		                 tribe_->name().c_str());
+	}
+	if (count_buildings_with_attribute(BuildingAttribute::kLogRefiner) != 1) {
+		throw wexception("The AI needs the tribe '%s' to define 1 type of log refiner's building. "
+		                 "This is the building that produces the tribe's 'refinedlog' ware.",
+		                 tribe_->name().c_str());
+	}
+	if (count_buildings_with_attribute(BuildingAttribute::kRanger) != 1) {
+		throw wexception(
+		   "The AI needs the tribe '%s' to define 1 type of ranger's building. "
+		   "This is the building that has 'supports_production_of = { \"log\" }' in its AI hints.",
+		   tribe_->name().c_str());
+	}
+	if (count_buildings_with_attribute(BuildingAttribute::kWell) != 1) {
+		throw wexception(
+		   "The AI needs the tribe '%s' to define 1 type of well. "
+		   "This is the building that has 'collects_ware_from_map = \"water\"' in its AI hints.",
+		   tribe_->name().c_str());
+	}
+	if (count_buildings_with_attribute(BuildingAttribute::kLumberjack) != 1) {
+		throw wexception(
+		   "The AI needs the tribe '%s' to define 1 type of lumberjack's building. "
+		   "This is the building that has 'collects_ware_from_map = \"log\"' in its AI hints.",
+		   tribe_->name().c_str());
+	}
+
+	if (count_buildings_with_attribute(BuildingAttribute::kHunter) != 0 &&
+	    count_buildings_with_attribute(BuildingAttribute::kHunter) != 1) {
+		throw wexception(
+		   "The AI needs the tribe '%s' to define 1 type of hunter's building at the most. "
+		   "Hunters are buildings that have 'collects_ware_from_map = \"meat\"' in their AI hints.",
+		   tribe_->name().c_str());
+	}
+
+	if (count_buildings_with_attribute(BuildingAttribute::kFisher) != 1) {
+		throw wexception(
+		   "The AI needs the tribe '%s' to define 1 type of fisher's building. "
+		   "This is the building that has 'collects_ware_from_map = \"fish\"' in its AI hints "
+		   "and doesn't have any ware inputs.",
+		   tribe_->name().c_str());
+	}
 	// If there will be a tribe with more than 3 mines of the same type, just increase the number
-	assert(count_buildings_with_attribute(BuildingAttribute::kIronMine) <= 3);
+	if (count_buildings_with_attribute(BuildingAttribute::kIronMine) < 1 ||
+	    count_buildings_with_attribute(BuildingAttribute::kIronMine) > 3) {
+		throw wexception("The AI needs the tribe '%s' to define 1-3 types of iron mines. "
+		                 "These are the buildings that produces the tribe's 'ironore' ware.",
+		                 tribe_->name().c_str());
+	}
 
 	// atlanteans they consider water as a resource
 	// (together with mines, rocks and wood)

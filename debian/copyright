@@ -62,27 +62,6 @@ Files: data/i18n/fonts/Nakula/*
 Copyright: Nakula Devanagari font © 2006 University of Cambridge. Designed and developed by  IMRC, India. Latin and Cyrillic glyphs from the font Nimbus Roman No9 L Regular, © 1999 (URW)++ Design & Development; Cyrillic glyphs by Valek Filippov © 2001-2002.
 License: GPL-2+
 
-Files: data/i18n/fonts/Sinhala/*
-Copyright: 2004,2008 Anuradha Ratnaweera and Harshani Devadithya, 2006 Harshula Jayasuriya, 1994, The Wellcome Trust, London
-License:
-  LKLUG font is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License, version 2, as
-  published by the Free Software Foundation.
-
-  This program is distributed in the hope that it will be useful, but
-  WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-  General Public License, version 2, for more details.
-
-  The Debian packaging is (C) 2004,2008, Anuradha Ratnaweera, and is
-  licensed under the GNU General Public License, version 2.
-
-  You should have received a copy of the GNU General Public License,
-  version 2, in the file `COPYING', or on Debian based systems in the
-  file `/usr/share/common-licenses/GPL-2'; if not, write to the Free
-  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-  MA 02110-1301 USA.
-
 Files: data/i18n/fonts/MicroHei/*
 Copyright WenQuanYi Board of Trustees 2008-2009
 License: Apache 2.0
@@ -208,10 +187,6 @@ License: Apache 2.0
   required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing
   permissions and limitations under the License.
-
-Files: data/i18n/fonts/*mmrCensus*
-Copyright: SIG, http://www.myanmarlanguage.org/site-info/SIG-Myanmar-Language
-License: SIL-Open-Font-License
 
 Files: data/i18n/fonts/DejaVu/*
 Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is a trademark of Bitstream, Inc.
