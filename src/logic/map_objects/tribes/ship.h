@@ -25,7 +25,7 @@
 
 #include "base/macros.h"
 #include "economy/shippingitem.h"
-#include "graphic/diranimations.h"
+#include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
 
 namespace Widelands {
@@ -112,7 +112,9 @@ struct Ship : Bob {
 	void push_destination(Game&, PortDock&);
 	void pop_destination(Game&, PortDock&);
 	void clear_destinations(Game&);
-	uint32_t estimated_arrival_time(Game&, const PortDock& dest, const PortDock* intermediate = nullptr) const;
+	uint32_t estimated_arrival_time(Game&,
+	                                const PortDock& dest,
+	                                const PortDock* intermediate = nullptr) const;
 	size_t count_destinations() const {
 		return destinations_.size();
 	}

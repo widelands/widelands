@@ -32,6 +32,8 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "graphic/animation/animation.h"
+#include "graphic/animation/diranimations.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
@@ -43,7 +45,6 @@
 
 class FileRead;
 class RenderTarget;
-struct DirAnimations;
 
 namespace Widelands {
 
@@ -157,7 +158,7 @@ protected:
 	void assign_directional_animation(DirAnimations* anims, const std::string& basename);
 
 private:
-	void add_animations(const LuaTable& table);
+	void add_animations(const LuaTable& table, Animation::Type anim_type);
 
 	/// Throws an exception if the MapObjectDescr has no representative image
 	void check_representative_image();

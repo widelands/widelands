@@ -150,7 +150,8 @@ void ShippingItem::Loader::load(FileRead& fr) {
 				destination_serial_ = fr.unsigned_32();
 			} else {
 				// TODO(Nordfriese): Remove when we break savegame compatibility
-				log("WARNING: Loading shippingitem with possible nullptr destination, which may result in bugs later\n");
+				log("WARNING: Loading shippingitem with possible nullptr destination, which may result "
+				    "in bugs later\n");
 				destination_serial_ = 0;
 			}
 		} else {
@@ -165,7 +166,8 @@ ShippingItem ShippingItem::Loader::get(MapObjectLoader& mol) {
 	ShippingItem it;
 	if (serial_ != 0) {
 		it.object_ = &mol.get<MapObject>(serial_);
-		it.destination_dock_ = destination_serial_ ? &mol.get<PortDock>(destination_serial_) : nullptr;
+		it.destination_dock_ =
+		   destination_serial_ ? &mol.get<PortDock>(destination_serial_) : nullptr;
 	}
 	return it;
 }
