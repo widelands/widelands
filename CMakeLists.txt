@@ -49,6 +49,7 @@ option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
 option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
 option(OPTION_BUILD_TESTS "Build tests" ON)
+option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
 
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 IF(USE_XDG AND NOT APPLE AND NOT WIN32)

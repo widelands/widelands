@@ -172,11 +172,11 @@ void FontSet::set_font_group(const LuaTable& table,
 
 FontSets::FontSets() {
 	std::map<std::string, FontSets::Selector> fontset_selectors = {
-	   {"default", FontSets::Selector::kDefault}, {"arabic", FontSets::Selector::kArabic},
-	   {"cjk", FontSets::Selector::kCJK},         {"devanagari", FontSets::Selector::kDevanagari},
-	   {"hebrew", FontSets::Selector::kHebrew},   {"myanmar", FontSets::Selector::kMyanmar},
-	   {"sinhala", FontSets::Selector::kSinhala},
-	};
+	   {"default", FontSets::Selector::kDefault},
+	   {"arabic", FontSets::Selector::kArabic},
+	   {"cjk", FontSets::Selector::kCJK},
+	   {"devanagari", FontSets::Selector::kDevanagari},
+	   {"hebrew", FontSets::Selector::kHebrew}};
 
 	LuaInterface lua;
 
