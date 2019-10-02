@@ -276,9 +276,20 @@ int16_t BuildingHints::get_ai_limit(const Widelands::AiType ai_type) const {
 
 // TODO(GunChleoc): WareDescr has a bare "preciousness" table that should be moved below a new
 // "aihints" table.
-void WareWorkerHints::read_preciousness(const LuaTable& table) {
+void WareWorkerHints::read_preciousness(const std::string& name, const LuaTable& table) {
 	for (const std::string& key : table.keys<std::string>()) {
-		preciousnesses_.insert(std::make_pair(key, table.get_int(key)));
+		const int value = table.get_int(key);
+		if (value > 200) {
+			throw wexception("Preciousness of %d is far too high for ware/worker '%s' and tribe '%s'. "
+			                 "We recommend not going over 25.",
+			                 value, name.c_str(), key.c_str());
+		} else if (value > 25) {
+			log("WARNING: Preciousness of %d is a bit high for ware/worker '%s' and tribe '%s'. We "
+			    "recommend not going over 25.\n",
+			    value, name.c_str(), key.c_str());
+		}
+
+		preciousnesses_.insert(std::make_pair(key, value));
 	}
 }
 
@@ -290,10 +301,11 @@ int WareWorkerHints::preciousness(const std::string& tribename) const {
 	return Widelands::kInvalidWare;
 }
 
-WareHints::WareHints(const LuaTable& table) : WareWorkerHints() {
-	read_preciousness(table);
+WareHints::WareHints(const std::string& ware_name, const LuaTable& table) : WareWorkerHints() {
+	read_preciousness(ware_name, table);
 }
 
-WorkerHints::WorkerHints(const LuaTable& table) : WareWorkerHints() {
-	read_preciousness(*table.get_table("preciousness"));
+WorkerHints::WorkerHints(const std::string& worker_name, const LuaTable& table)
+   : WareWorkerHints() {
+	read_preciousness(worker_name, *table.get_table("preciousness"));
 }

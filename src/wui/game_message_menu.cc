@@ -360,6 +360,10 @@ void GameMessageMenu::double_clicked(uint32_t const /* t */) {
  * Handle message menu hotkeys.
  */
 bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
+	// Special ESCAPE handling
+	// When ESCAPE is pressed down is false
+	if (code.sym == SDLK_ESCAPE)
+		return UI::Window::handle_key(true, code);
 	if (down) {
 		switch (code.sym) {
 		// Don't forget to change the tooltips if any of these get reassigned

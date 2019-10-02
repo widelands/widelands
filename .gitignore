@@ -8,6 +8,7 @@
 update.sh
 widelands
 wl_map*_info
+wl_create_spritesheet
 locale
 VERSION
 

@@ -121,6 +121,9 @@ private:
 	PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse);
 	const PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse) const;
 
+	bool penalize_route(Game&, PortDock&, const Ship&, uint32_t*);
+	void check_push_destination(Game&, Ship&, const PortDock&, PortDock&, uint32_t);
+
 	std::vector<Ship*> ships_;
 	std::vector<PortDock*> ports_;
 
@@ -155,8 +158,7 @@ public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 
 	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
-	bool is_path_favourable(const PortDock& start, const PortDock& middle, const PortDock& finish);
-	PortDock* find_next_dest(Game&, const Ship&, const PortDock& from_port);
+	void push_next_destinations(Game&, Ship&, const PortDock& from_port);
 };
 
 }  // namespace Widelands

@@ -335,9 +335,9 @@ uint32_t Fleet::count_ships() const {
 
 uint32_t Fleet::count_ships_heading_here(EditorGameBase& egbase, PortDock* port) const {
 	uint32_t ships_on_way = 0;
-	for (uint16_t s = 0; s < ships_.size(); s += 1) {
-		if (ships_[s]->get_destination(egbase) == port) {
-			ships_on_way += 1;
+	for (uint16_t s = 0; s < ships_.size(); ++s) {
+		if (ships_[s]->get_current_destination(egbase) == port) {
+			++ships_on_way;
 		}
 	}
 
@@ -400,8 +400,8 @@ void Fleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
 	if (upcast(Game, game, &egbase))
 		ship->set_economy(*game, nullptr);
 
-	if (ship->get_destination(egbase)) {
-		ship->get_destination(egbase)->ship_coming(false);
+	if (ship->get_current_destination(egbase)) {
+		ship->get_current_destination(egbase)->ship_coming(*ship, false);
 		update(egbase);
 	}
 
@@ -633,6 +633,54 @@ void Fleet::update(EditorGameBase& egbase) {
 	}
 }
 
+/*
+ * Helper function for assigning ships to ports in need of a ship.
+ * Penalizes the given ship if it is transporting wares.
+ * A small detour to the given portdock is penalized very slightly, a longer detour drastically.
+ * Returns false if the detour would be so long that this ship must not even be considered for
+ * serving this port.
+ */
+bool Fleet::penalize_route(Game& game, PortDock& p, const Ship& s, uint32_t* route_length) {
+	const uint32_t real_length = *route_length;
+	uint32_t malus = 1;
+	uint32_t index = 0;
+	PortDock* iterator = nullptr;
+	uint32_t shortest_detour = std::numeric_limits<uint32_t>::max();
+	uint32_t best_index = std::numeric_limits<uint32_t>::max();
+	for (const auto& pair : s.destinations_) {
+		PortDock* pd = pair.first.get(game);
+		Path path;
+		uint32_t detour;
+		if (iterator == &p) {
+			detour = 0;
+		} else if (iterator) {
+			get_path(*iterator, p, path);
+			detour = path.get_nsteps();
+		} else {
+			s.calculate_sea_route(game, p, &path);
+			detour = path.get_nsteps();
+		}
+		if (&p != pd) {
+			get_path(p, *pd, path);
+			detour += path.get_nsteps();
+		}
+		if (detour < shortest_detour) {
+			shortest_detour = detour;
+			best_index = index;
+		}
+		malus += pair.second;
+		iterator = pd;
+		++index;
+	}
+	*route_length += shortest_detour * best_index;
+	if (*route_length + shortest_detour > real_length * malus) {
+		// Unreasonably long detour
+		return false;
+	}
+	*route_length *= malus;
+	return true;
+}
+
 /**
  * Act callback updates ship scheduling of idle ships.
  *
@@ -665,13 +713,14 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 		bool waiting = true;
 
 		for (Ship* s : ships_) {
-			if (s->get_destination(game)) {
-				if (s->get_destination(game) == p) {
+			bool fallback = false;
+			if (s->get_current_destination(game)) {
+				if (s->has_destination(game, *p)) {
 					waiting = false;
 					--waiting_ports;
 					break;
 				}
-				continue;  // The ship already has a destination
+				fallback = true;  // The ship already has a destination
 			}
 			if (s->get_ship_state() != Ship::ShipStates::kTransport) {
 				continue;  // Ship is not available, e.g. in expedition
@@ -699,6 +748,11 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 			if (route_length == kRouteNotCalculated) {
 				route_length = s->calculate_sea_route(game, *p);
 			}
+			if (fallback) {
+				if (!penalize_route(game, *p, *s, &route_length)) {
+					continue;
+				}
+			}
 
 			if (route_length < shortest_dist) {
 				shortest_dist = route_length;
@@ -708,7 +762,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 
 		if (waiting && closest_ship) {
 			--waiting_ports;
-			closest_ship->set_destination(p);
+			closest_ship->push_destination(game, *p);
 			closest_ship->send_signal(game, "wakeup");
 		}
 	}
@@ -721,7 +775,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 
 	// Deal with edge-case of losing destination before reaching it
 	for (Ship* s : ships_) {
-		if (s->get_destination(game)) {
+		if (s->get_current_destination(game)) {
 			continue;  // The ship has a destination
 		}
 		if (s->get_ship_state() != Ship::ShipStates::kTransport) {
@@ -744,107 +798,113 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 		}
 
 		if (closest_port) {
-			s->set_destination(closest_port);
+			s->push_destination(game, *closest_port);
 			s->send_signal(game, "wakeup");
 		}
 	}
 }
 
 /**
- * For the given three consecutive ports, decide if their path is favourable or not.
- * \return true if the path from start to finish >= the path from middle to finish
+ * Tell the given ship where to go next. May push any number of destinations.
  */
-bool Fleet::is_path_favourable(const PortDock& start,
-                               const PortDock& middle,
-                               const PortDock& finish) {
-	if (&middle != &finish) {
-		Path path_start_to_finish;
-		Path path_middle_to_finish;
-#ifndef NDEBUG
-		assert(get_path(start, finish, path_start_to_finish));
-#else
-		get_path(start, finish, path_start_to_finish);
-#endif
-		if (get_path(middle, finish, path_middle_to_finish)) {
-			if (path_middle_to_finish.get_nsteps() > path_start_to_finish.get_nsteps()) {
-				return false;
+void Fleet::push_next_destinations(Game& game, Ship& ship, const PortDock& from_port) {
+	std::vector<std::pair<PortDock*, uint32_t>>
+	   destinations;  // Destinations and the number of items waiting to go there
+	uint32_t total_items = ship.get_nritems();  // All waiting and shipping items
+	uint32_t waiting_items =
+	   0;  // Items that have a destination which this ship is not currently planning to visit
+	// Count how many items are waiting to go to each portdock
+	for (auto& it : from_port.waiting_) {
+		if (PortDock* pd = it.destination_dock_.get(game)) {
+			++total_items;
+			if (ship.has_destination(game, *pd)) {
+				continue;
+			}
+			++waiting_items;
+			bool found = false;
+			for (auto& pair : destinations) {
+				if (pair.first == pd) {
+					++pair.second;
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				destinations.push_back(std::make_pair(pd, 1));
 			}
 		}
 	}
-	return true;  // default
+	assert(waiting_items <= total_items);
+	if (waiting_items == 0) {
+		// Nothing to do
+		return;
+	}
+	total_items -= waiting_items;
+	// For each destination, decide whether to tell the ship to visit it
+	// or whether it would be better to wait for another ship
+	for (const auto& destpair : destinations) {
+		check_push_destination(game, ship, from_port, *destpair.first, destpair.second * total_items);
+	}
 }
 
-/**
- * For the given ship, go through all ports of this fleet
- * and find the one with the best score.
- * \return that port
+/*
+ * Helper function for push_next_destinations():
+ * Send the given ship to the given portdock (with the given penalty factor)
+ * if the detour this would mean for the ship is not too long
  */
-PortDock* Fleet::find_next_dest(Game& game, const Ship& ship, const PortDock& from_port) {
-	PortDock* best_port = nullptr;
-	float best_score = 0.0f;
+void Fleet::check_push_destination(Game& game,
+                                   Ship& ship,
+                                   const PortDock& from_port,
+                                   PortDock& destination,
+                                   uint32_t penalty_factor) {
+	assert(!ship.has_destination(game, destination));
+	Path path;
+	get_path(from_port, destination, path);
+	const uint32_t direct_route = path.get_nsteps();
+	assert(direct_route);
+	uint32_t malus = 1;
+	uint32_t shortest_detour = std::numeric_limits<uint32_t>::max();
+	uint32_t best_index = std::numeric_limits<uint32_t>::max();
+	if (ship.destinations_.empty()) {
+		// Idle ships are preferred
+		best_index = 0;
+		malus = 0;
+		shortest_detour = 0;
+	} else {
+		const PortDock* iterator = &from_port;
+		uint32_t index = 0;
+		// This ship is going somewhere else, penalize it's priority for this order by
+		// the detour, the number of items it's shipping and the number of items waiting here
+		for (const auto& pair : ship.destinations_) {
+			const PortDock* pd = pair.first.get(game);
+			uint32_t detour = 0;
 
-	for (PortDock* p : ports_) {
-		if (p == &from_port) {
-			continue;  // same port
-		}
+			assert(iterator != pd);
+			get_path(*iterator, *pd, path);
+			const uint32_t base_length = path.get_nsteps();
 
-		float score = 0.0f;
-		WareInstance* ware;
-		Worker* worker;
+			assert(iterator != &destination);
+			get_path(*iterator, destination, path);
+			detour += path.get_nsteps();
 
-		// Score for wares/workers onboard that ship for that port
-		for (const ShippingItem& si : ship.items_) {
-			if (si.get_destination(game) == p) {
-				si.get(game, &ware, &worker);
-				if (ware) {
-					score += 1;  // TODO(ypopezios): increase by ware's importance
-				} else {        // worker
-					score += 4;
-				}
+			assert(pd != &destination);
+			get_path(destination, *pd, path);
+			detour += path.get_nsteps();
+
+			detour -= std::min(detour, base_length);
+			if (detour < shortest_detour) {
+				shortest_detour = detour;
+				best_index = index;
 			}
-		}
-
-		// Score for wares/workers waiting at that port
-		for (const ShippingItem& si : from_port.waiting_) {
-			if (si.get_destination(game) == p) {
-				si.get(game, &ware, &worker);
-				if (ware) {
-					score += 1;  // TODO(ypopezios): increase by ware's importance
-				} else {        // worker
-					score += 4;
-				}
-			}
-		}
-
-		if (score == 0.0f && p->get_need_ship() == 0) {
-			continue;  // empty ship to empty port
-		}
-
-		// Here we get distance ship->port
-		uint32_t route_length = kRouteNotCalculated;
-
-		// Get precalculated distance if the ship is at a port
-		{
-			Path precalculated_path;
-			if (get_path(from_port, *p, precalculated_path)) {  // try to use precalculated path
-				route_length = precalculated_path.get_nsteps();
-			}
-		}
-
-		// Get distance for when the ship is not at a port (should not happen frequently)
-		if (route_length == kRouteNotCalculated) {
-			route_length = ship.calculate_sea_route(game, *p);
-		}
-
-		score = (score + 1.0f) * (score + p->get_need_ship());
-		score = score * (1.0f - route_length / (score + route_length));
-		if (score > best_score) {
-			best_score = score;
-			best_port = p;
+			malus += pair.second;
+			iterator = pd;
+			++index;
 		}
 	}
-
-	return best_port;
+	if (shortest_detour * malus * best_index <= direct_route * penalty_factor) {
+		// Send this ship if the penalty is not too high
+		ship.push_destination(game, destination);
+	}
 }
 
 void Fleet::log_general_info(const EditorGameBase& egbase) const {
