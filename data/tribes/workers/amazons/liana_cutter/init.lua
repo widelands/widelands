@@ -25,7 +25,7 @@ tribes:new_worker_type {
 
    buildcost = {
       amazons_carrier = 1,
-      shovel = 1
+      machete = 1
    },
 
    programs = {
