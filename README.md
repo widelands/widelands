@@ -5,9 +5,9 @@ The game was inspired by Settlers II™ (© Bluebyte) but has significantly more
 ![Widelands Screenshot](https://www.widelands.org/static/img/welcome.jpg)
 
 
-## License
+## License [![License](https://img.shields.io/github/license/widelands/widelands.svg?color=blue)](LICENCE)
 
-GPL v2+. Some at assets are released under various Creative Commons licenses – see the respective folders.
+GPL v2+. Some assets are released under various Creative Commons licenses – see the respective folders.
 
 ## Download
 
