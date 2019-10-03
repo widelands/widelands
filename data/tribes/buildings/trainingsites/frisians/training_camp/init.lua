@@ -121,7 +121,7 @@ tribes:new_trainingsite_type {
          actions = {
             "checksoldier=soldier attack 0", -- Fails when aren't any soldier of level 0 attack
             "return=failed unless site has sword_long",
-            "return=failed unless site has bread_frisians,beer,smoked_fish,smoked_meat",
+            "return=failed unless site has beer,bread_frisians,smoked_fish,smoked_meat",
             "sleep=12400",
             "animate=working 14000",
             "checksoldier=soldier attack 0", -- Because the soldier can be expelled by the player
