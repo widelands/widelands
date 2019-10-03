@@ -28,6 +28,7 @@ shallow_clone: true
 branches:
   only:
     - master
+    - amazons
 
 build_script:
   # copy modified libintl.h to solve an issue with boost
