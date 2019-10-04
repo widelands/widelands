@@ -8,6 +8,8 @@ animations = {
    }
 }
 
+animations = {}
+add_animation(animations, "", dirname, "", {, }, 10)
 add_directional_animation(animations, "walk", dirname, "walk", {21, 43}, 20)
 add_directional_animation(animations, "walkload", dirname, "walk", {21, 43}, 20)
 
@@ -21,13 +23,35 @@ tribes:new_carrier_type {
    vision_range = 2,
 
    default_target_quantity = 10,
-   ware_hotspot = { 0, 18 },
-
-   animations = animations,
 
    aihints = {
       preciousness = {
          frisians = 2
       },
-   }
+   },
+
+   ware_hotspot = {0, 18},
+
+   spritesheets = {
+      walk = walkload = {
+         directory = dirname,
+         basename = "walk",
+         fps = 20,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         directional = true,
+         hotspot = {21, 43}
+      },
+      idle = {
+         directory = dirname,
+         basename = "idle",
+         fps = 20,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         directional = true,
+         hotspot = {27, 21}
+      },
+   },
 }
