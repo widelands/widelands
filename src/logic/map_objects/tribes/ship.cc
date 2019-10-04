@@ -1387,7 +1387,9 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 		}
 	} else {
 		// TODO(Nordfriese): Remove when we break savegame compatibility
-		destinations_.push_back(std::make_pair(fr.unsigned_32(), 1));
+		if (uint32_t serial = fr.unsigned_32()) {
+			destinations_.push_back(std::make_pair(serial, 1));
+		}
 	}
 
 	items_.resize(fr.unsigned_32());
