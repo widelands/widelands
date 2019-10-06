@@ -44,6 +44,7 @@ before_script:
 branches:
   only:
     - master
+    - travis-latest-compilers
 
 cache: ccache
 
@@ -151,9 +152,6 @@ jobs:
 
     - name: "DEBUG: Ubuntu 18.04 with gcc 9"
       os: linux
-      branches:
-        only:
-          - travis-latest-compilers
       addons:
         apt:
           sources:
