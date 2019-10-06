@@ -91,10 +91,10 @@ jobs:
       osx_image: xcode8.3
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
 
-    ### LINUX BUILDS with additional repositories
-    - name: "DEBUG: Ubuntu 18.04 with gcc 9"
+    ### Linux BUILDS
+    - name: "DEBUG: Ubuntu 16.04 with gcc 9"
       os: linux
-      dist: bionic
+      dist: xenial
       addons:
         apt:
           sources:
@@ -117,15 +117,11 @@ jobs:
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" CC="gcc-9" CXX="g++-9"
       services: xvfb
       cache: false
-
     - name: "DEBUG: Ubuntu 18.04 with clang 8"
       os: linux
       dist: bionic
       addons:
         apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-bionic-8
           packages:
             - clang-8
             - libstdc++-8-dev
@@ -145,8 +141,6 @@ jobs:
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" CC="clang-8" CXX="clang++-8"
       services: xvfb
       cache: false
-
-    ### Linux BUILDS
     - name: "DEBUG: Ubuntu 18.04 with clang 7"
       os: linux
       dist: bionic
