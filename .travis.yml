@@ -69,7 +69,7 @@ jobs:
     - name: "RELEASE: macOS 10.14 with Xcode 10.3"
       os: osx
       osx_image: xcode10.3
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
 
     - stage: build
       ### macOS BUILDS
