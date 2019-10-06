@@ -44,7 +44,6 @@ before_script:
 branches:
   only:
     - master
-    - travis-latest-compilers
 
 cache: ccache
 
@@ -92,6 +91,31 @@ jobs:
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
 
     ### Linux BUILDS
+    - name: "DEBUG: Ubuntu 18.04 with clang 7"
+      os: linux
+      dist: bionic
+      compiler: clang
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
+      services: xvfb
+      cache: false
+    - name: "RELEASE: Ubuntu 18.04 with clang 7"
+      os: linux
+      dist: bionic
+      compiler: clang
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
+      services: xvfb
+      cache: false
+    - name: "DEBUG: Ubuntu 18.04 with gcc 7.4"
+      os: linux
+      dist: bionic
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF"
+      services: xvfb
+      cache: false
+    - name: "RELEASE: Ubuntu 18.04 with gcc 7.4"
+      os: linux
+      dist: bionic
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
+      services: xvfb
     - name: "DEBUG: Ubuntu 16.04 with clang 8"
       os: linux
       dist: xenial
@@ -115,6 +139,31 @@ jobs:
             - python-pip
             - zlib1g-dev
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" CC="clang-8" CXX="clang++-8"
+      services: xvfb
+      cache: false
+    - name: "RELEASE: Ubuntu 16.04 with clang 8"
+      os: linux
+      dist: xenial
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-xenial-8
+          packages:
+            - clang-8
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - python-pip
+            - zlib1g-dev
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON" CC="clang-8" CXX="clang++-8"
       services: xvfb
       cache: false
     - name: "DEBUG: Ubuntu 16.04 with gcc 9"
@@ -142,30 +191,29 @@ jobs:
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" CC="gcc-9" CXX="g++-9"
       services: xvfb
       cache: false
-    - name: "DEBUG: Ubuntu 18.04 with clang 7"
+    - name: "RELEASE: Ubuntu 16.04 with gcc 9"
       os: linux
-      dist: bionic
-      compiler: clang
-      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
-      services: xvfb
-      cache: false
-    - name: "RELEASE: Ubuntu 18.04 with clang 7"
-      os: linux
-      dist: bionic
-      compiler: clang
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
-      services: xvfb
-      cache: false
-    - name: "DEBUG: Ubuntu 18.04 with gcc 7.4"
-      os: linux
-      dist: bionic
-      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF"
-      services: xvfb
-      cache: false
-    - name: "RELEASE: Ubuntu 18.04 with gcc 7.4"
-      os: linux
-      dist: bionic
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
+      dist: xenial
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-9
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - python-pip
+            - zlib1g-dev
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON" CC="gcc-9" CXX="g++-9"
       services: xvfb
     - name: "DEBUG: Ubuntu 16.04 with gcc 5.4"
       os: linux
