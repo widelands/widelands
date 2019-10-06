@@ -44,7 +44,6 @@ before_script:
 branches:
   only:
     - master
-    - travis-latest-compilers
 
 cache: ccache
 
