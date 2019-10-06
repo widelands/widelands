@@ -91,6 +91,61 @@ jobs:
       osx_image: xcode8.3
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
 
+    ### LINUX BUILDS with additional repositories
+    - name: "DEBUG: Ubuntu 18.04 with gcc 9"
+      os: linux
+      dist: bionic
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-9
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - python-pip
+            - zlib1g-dev
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" CC="gcc-9" CXX="g++-9"
+      services: xvfb
+      cache: false
+
+    - name: "DEBUG: Ubuntu 18.04 with clang 8"
+      os: linux
+      dist: bionic
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-bionic-8
+          packages:
+            - clang-8
+            - libstdc++-8-dev
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - python-pip
+            - zlib1g-dev
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" CC="clang-8" CXX="clang++-8"
+      services: xvfb
+      cache: false
+
     ### Linux BUILDS
     - name: "DEBUG: Ubuntu 18.04 with clang 7"
       os: linux
@@ -149,58 +204,6 @@ jobs:
       os: linux
       dist: trusty
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
-
-    ### LINUX BUILDS with additional repositories
-    - name: "DEBUG: Ubuntu 18.04 with gcc 9"
-      os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-9
-            - libboost-dev
-            - libboost-regex-dev
-            - libboost-system-dev
-            - libboost-test-dev
-            - libglew-dev
-            - libicu-dev
-            - libpng-dev
-            - libsdl2-dev
-            - libsdl2-image-dev
-            - libsdl2-mixer-dev
-            - libsdl2-ttf-dev
-            - python-pip
-            - zlib1g-dev
-      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" CC="gcc-9" CXX="g++-9"
-      services: xvfb
-      cache: false
-
-    - name: "DEBUG: Ubuntu 18.04 with clang 8"
-      os: linux
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-bionic-8
-          packages:
-            - clang-8
-            - libstdc++-8-dev
-            - libboost-dev
-            - libboost-regex-dev
-            - libboost-system-dev
-            - libboost-test-dev
-            - libglew-dev
-            - libicu-dev
-            - libpng-dev
-            - libsdl2-dev
-            - libsdl2-image-dev
-            - libsdl2-mixer-dev
-            - libsdl2-ttf-dev
-            - python-pip
-            - zlib1g-dev
-      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" CC="clang-8" CXX="clang++-8"
-      services: xvfb
-      cache: false
 
 language: cpp
 
