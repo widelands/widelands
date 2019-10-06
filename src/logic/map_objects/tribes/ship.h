@@ -25,7 +25,7 @@
 
 #include "base/macros.h"
 #include "economy/shippingitem.h"
-#include "graphic/diranimations.h"
+#include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
 
 namespace Widelands {
@@ -80,6 +80,8 @@ private:
 
 constexpr int32_t kShipInterval = 1500;
 
+constexpr uint32_t kInvalidDestination = std::numeric_limits<uint32_t>::max();
+
 /**
  * Ships belong to a player and to an economy. The usually are in a (unique)
  * fleet for a player, but only if they are on standard duty. Exploration ships
@@ -96,7 +98,8 @@ struct Ship : Bob {
 
 	// Returns the current destination or nullptr if there is no current
 	// destination.
-	PortDock* get_destination(EditorGameBase& egbase) const;
+	PortDock* get_current_destination(EditorGameBase& egbase) const;
+	bool has_destination(EditorGameBase&, const PortDock&) const;
 
 	// Returns the last visited portdock of this ship or nullptr if there is none or
 	// the last visited was removed.
@@ -106,7 +109,15 @@ struct Ship : Bob {
 		return economy_;
 	}
 	void set_economy(Game&, Economy* e);
-	void set_destination(PortDock*);
+	void push_destination(Game&, PortDock&);
+	void pop_destination(Game&, PortDock&);
+	void clear_destinations(Game&);
+	uint32_t estimated_arrival_time(Game&,
+	                                const PortDock& dest,
+	                                const PortDock* intermediate = nullptr) const;
+	size_t count_destinations() const {
+		return destinations_.size();
+	}
 
 	void init_auto_task(Game&) override;
 
@@ -130,7 +141,6 @@ struct Ship : Bob {
 
 	void add_item(Game&, const ShippingItem&);
 	bool withdraw_item(Game&, PortDock&);
-	void unload_unfit_items(Game&, PortDock& here, const PortDock& nextdest);
 
 	// A ship with task expedition can be in four states: kExpeditionWaiting, kExpeditionScouting,
 	// kExpeditionPortspaceFound or kExpeditionColonizing in the first states, the owning player of
@@ -270,10 +280,16 @@ private:
 	Fleet* fleet_;
 	Economy* economy_;
 	OPtr<PortDock> lastdock_;
-	OPtr<PortDock> destination_;
 	std::vector<ShippingItem> items_;
 	ShipStates ship_state_;
 	std::string shipname_;
+
+	// Our destinations in the order on which we are planning to visit them.
+	// When destinations are added or removed, the whole list will be reordered under
+	// the aspect of efficiency. Every time an entry is postponed, its priority will
+	// be increased to make it less likely that it will never be visited.
+	std::vector<std::pair<OPtr<PortDock>, uint32_t>> destinations_;
+	void reorder_destinations(Game&);
 
 	struct Expedition {
 		~Expedition();
@@ -294,14 +310,14 @@ protected:
 
 		const Task* get_task(const std::string& name) override;
 
-		void load(FileRead& fr);
+		void load(FileRead& fr, uint8_t);
 		void load_pointers() override;
 		void load_finish() override;
 
 	private:
 		// Initialize everything to make cppcheck happy.
 		uint32_t lastdock_ = 0U;
-		uint32_t destination_ = 0U;
+		std::vector<std::pair<uint32_t, uint32_t>> destinations_;
 		Serial economy_serial_;
 		ShipStates ship_state_ = ShipStates::kTransport;
 		std::string shipname_;

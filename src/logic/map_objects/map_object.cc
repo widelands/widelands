@@ -29,6 +29,7 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -242,13 +243,20 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                     init_name,
                     init_descname,
                     table.has_key("helptext_script") ? table.get_string("helptext_script") : "") {
+	bool has_animations = false;
 	if (table.has_key("animations")) {
-		add_animations(*table.get_table("animations"));
+		has_animations = true;
+		add_animations(*table.get_table("animations"), Animation::Type::kFiles);
+	}
+	if (table.has_key("spritesheets")) {
+		has_animations = true;
+		add_animations(*table.get_table("spritesheets"), Animation::Type::kSpritesheet);
+	}
+	if (has_animations) {
 		if (!is_animation_known("idle")) {
 			throw GameDataError(
 			   "Map object %s has animations but no idle animation", init_name.c_str());
 		}
-
 		assert(g_gr->animations().get_representative_image(name())->width() > 0);
 	}
 	if (table.has_key("icon")) {
@@ -273,7 +281,7 @@ bool MapObjectDescr::is_animation_known(const std::string& animname) const {
 /**
  * Add all animations for this map object
  */
-void MapObjectDescr::add_animations(const LuaTable& table) {
+void MapObjectDescr::add_animations(const LuaTable& table, Animation::Type anim_type) {
 	for (const std::string& animname : table.keys<std::string>()) {
 		try {
 			std::unique_ptr<LuaTable> anim = table.get_table(animname);
@@ -293,7 +301,8 @@ void MapObjectDescr::add_animations(const LuaTable& table) {
 					const std::string directional_basename =
 					   basename + animation_direction_names[dir - 1];
 					anims_.insert(std::pair<std::string, uint32_t>(
-					   directional_animname, g_gr->animations().load(*anim, directional_basename)));
+					   directional_animname,
+					   g_gr->animations().load(*anim, directional_basename, anim_type)));
 				}
 			} else {
 				if (is_animation_known(animname)) {
@@ -302,15 +311,15 @@ void MapObjectDescr::add_animations(const LuaTable& table) {
 				}
 				if (animname == "idle") {
 					anims_.insert(std::pair<std::string, uint32_t>(
-					   animname, g_gr->animations().load(name_, *anim, basename)));
+					   animname, g_gr->animations().load(name_, *anim, basename, anim_type)));
 				} else {
 					anims_.insert(std::pair<std::string, uint32_t>(
-					   animname, g_gr->animations().load(*anim, basename)));
+					   animname, g_gr->animations().load(*anim, basename, anim_type)));
 				}
 			}
 		} catch (const std::exception& e) {
-			throw GameDataError(
-			   "Error loading animation for map object '%s': %s", name().c_str(), e.what());
+			throw GameDataError("Error loading animation '%s' for map object '%s': %s",
+			                    animname.c_str(), name().c_str(), e.what());
 		}
 	}
 }

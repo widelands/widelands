@@ -5696,7 +5696,7 @@ int LuaShip::get_debug_economy(lua_State* L) {
 // UNTESTED
 int LuaShip::get_destination(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
-	return upcasted_map_object_to_lua(L, get(L, egbase)->get_destination(egbase));
+	return upcasted_map_object_to_lua(L, get(L, egbase)->get_current_destination(egbase));
 }
 
 /* RST

@@ -577,7 +577,6 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			map_view()->scroll_to_field(
 			   game().map().get_starting_pos(player_number_), MapView::Transition::Smooth);
 			return true;
-
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			if (chat_provider_) {
