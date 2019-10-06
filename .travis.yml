@@ -91,7 +91,7 @@ jobs:
       osx_image: xcode8.3
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
 
-    ### Linux BUILDs
+    ### Linux BUILDS
     - name: "DEBUG: Ubuntu 18.04 with clang 7"
       os: linux
       dist: bionic
@@ -150,6 +150,7 @@ jobs:
       dist: trusty
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
 
+    ### LINUX BUILDS with additional repositories
     - name: "DEBUG: Ubuntu 18.04 with gcc 9"
       os: linux
       addons:
@@ -176,17 +177,28 @@ jobs:
       cache: false
 
     - name: "DEBUG: Ubuntu 18.04 with clang 8"
+      os: linux
       addons:
         apt:
           sources:
-            - ubuntu-toolchain-r-test
             - llvm-toolchain-bionic-8
           packages:
             - clang-8
             - libstdc++-8-dev
-      os: linux
-      compiler: clang
-      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" MATRIX_EVAL="CC=clang-8 && CXX=clang++-8"
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - python-pip
+            - zlib1g-dev
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" CC="clang-8" CXX="clang++-8"
       services: xvfb
       cache: false
 
