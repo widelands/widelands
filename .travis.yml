@@ -152,14 +152,29 @@ jobs:
 
     - name: "DEBUG: Ubuntu 18.04 with gcc 9"
       os: linux
-      compiler: gcc
+      branches:
+        only:
+          - travis-latest-compilers
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
           packages:
             - g++-9
-      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - python-pip
+            - zlib1g-dev
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" CC="gcc-9" CXX="g++-9"
       services: xvfb
       cache: false
 
