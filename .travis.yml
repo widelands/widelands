@@ -227,7 +227,7 @@ jobs:
           sources:
             - sourceline: 'ppa:ubuntu-toolchain-r/test'
           packages:
-            - gcc-9
+            - g++-9
             - doxygen
             - libboost-dev
             - libboost-regex-dev
@@ -253,7 +253,7 @@ jobs:
           sources:
             - sourceline: 'ppa:ubuntu-toolchain-r/test'
           packages:
-            - gcc-9
+            - g++-9
             - doxygen
             - libboost-dev
             - libboost-regex-dev
