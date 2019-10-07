@@ -2,6 +2,7 @@ addons:
   apt:
     packages:
       - doxygen
+      - graphviz
       - libboost-dev
       - libboost-regex-dev
       - libboost-system-dev
@@ -20,6 +21,7 @@ addons:
       - ccache
       - doxygen
       - glew
+      - graphviz
       - sdl2
       - sdl2_image
       - sdl2_mixer
@@ -57,7 +59,6 @@ jobs:
 
     - stage: compiler
       # Run this stage to test whether there are any error during compiling.
-      # We use the macOS builds since they run the fastest.
       name: "DEBUG: macOS 10.14 with Xcode 10.3"
       os: osx
       osx_image: xcode10.3
@@ -118,6 +119,7 @@ jobs:
           packages:
             - clang-9
             - doxygen
+            - graphviz
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -149,6 +151,7 @@ jobs:
           packages:
             - clang-9
             - doxygen
+            - graphviz
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -180,6 +183,7 @@ jobs:
           packages:
             - clang-8
             - doxygen
+            - graphviz
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -211,6 +215,7 @@ jobs:
           packages:
             - clang-8
             - doxygen
+            - graphviz
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -239,6 +244,7 @@ jobs:
           packages:
             - g++-9
             - doxygen
+            - graphviz
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -264,6 +270,7 @@ jobs:
           packages:
             - g++-9
             - doxygen
+            - graphviz
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
