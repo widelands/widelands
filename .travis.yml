@@ -225,7 +225,7 @@ jobs:
       addons:
         apt:
           sources:
-            - sourceline: 'ppa:ubuntu-toolchain-r/ppa'
+            - sourceline: 'ppa:ubuntu-toolchain-r/test'
           packages:
             - gcc-9
             - doxygen
@@ -251,7 +251,7 @@ jobs:
       addons:
         apt:
           sources:
-            - sourceline: 'ppa:ubuntu-toolchain-r/ppa'
+            - sourceline: 'ppa:ubuntu-toolchain-r/test'
           packages:
             - gcc-9
             - doxygen
