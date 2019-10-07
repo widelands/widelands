@@ -1,5 +1,11 @@
 set -ex
 
+if [ "$TRAVIS_OS_NAME" = linux ]; then
+    CORES="$(nproc)"
+else
+    CORES="$(sysctl -n hw.ncpu)"
+fi
+
 # Create build folder.
 mkdir build
 cd build
@@ -8,7 +14,7 @@ case "$1" in
 build)
    cmake .. -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE_TOOLS -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF"
    # Do the actual build.
-   make -k -j3
+   make -k -j$CORES
 
    # Run the regression suite only if compiling didn't take too long (to avoid timeouts).
    # On macOS it always fails with a broken GL installation message, so we ommit it.
