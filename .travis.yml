@@ -180,7 +180,9 @@ jobs:
             - zlib1g-dev
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON" CC="clang-8" CXX="clang++-8"
       services: xvfb
-      cache: false
+      before_script:
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-8'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-8'
     - name: "RELEASE: Ubuntu 18.04 with clang 8"
       os: linux
       dist: bionic
@@ -208,21 +210,27 @@ jobs:
             - zlib1g-dev
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON" CC="clang-8" CXX="clang++-8"
       services: xvfb
-      cache: false
+      before_script:
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-8'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-8'
     - name: "DEBUG: Ubuntu 18.04 with clang 7"
       os: linux
       dist: bionic
       compiler: clang
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
       services: xvfb
-      cache: false
+      before_script:
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-7'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-7'
     - name: "RELEASE: Ubuntu 18.04 with clang 7"
       os: linux
       dist: bionic
       compiler: clang
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF"
       services: xvfb
-      cache: false
+      before_script:
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-7'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-7'
     - name: "DEBUG: Ubuntu 18.04 with gcc 9"
       os: linux
       dist: bionic
@@ -301,13 +309,17 @@ jobs:
       dist: trusty
       compiler: clang
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
-      cache: false
+      before_script:
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-9'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
     - name: "RELEASE: Ubuntu 14.04 with clang 3.4"
       os: linux
       dist: trusty
       compiler: clang
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
-      cache: false
+      before_script:
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang-9'
+        - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
     - name: "DEBUG: Ubuntu 14.04 with gcc 4.8"
       os: linux
       dist: trusty
