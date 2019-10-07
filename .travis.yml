@@ -146,7 +146,7 @@ jobs:
             - libsdl2-ttf-dev
             - python-pip
             - zlib1g-dev
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF" CC="clang-9" CXX="clang++-9"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON" CC="clang-9" CXX="clang++-9"
       services: xvfb
       cache: false
     - name: "DEBUG: Ubuntu 18.04 with clang 8"
@@ -202,7 +202,7 @@ jobs:
             - libsdl2-ttf-dev
             - python-pip
             - zlib1g-dev
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF" CC="clang-8" CXX="clang++-8"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON" CC="clang-8" CXX="clang++-8"
       services: xvfb
       cache: false
     - name: "DEBUG: Ubuntu 18.04 with clang 7"
@@ -268,7 +268,7 @@ jobs:
             - libsdl2-ttf-dev
             - python-pip
             - zlib1g-dev
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF" CC="gcc-9" CXX="g++-9"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON" CC="gcc-9" CXX="g++-9"
       services: xvfb
     - name: "DEBUG: Ubuntu 18.04 with gcc 7.4"
       os: linux
@@ -290,7 +290,7 @@ jobs:
     - name: "RELEASE: Ubuntu 16.04 with gcc 5.4"
       os: linux
       dist: xenial
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
       services: xvfb
     - name: "DEBUG: Ubuntu 14.04 with clang 3.4"
       os: linux
@@ -302,7 +302,7 @@ jobs:
       os: linux
       dist: trusty
       compiler: clang
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
       cache: false
     - name: "DEBUG: Ubuntu 14.04 with gcc 4.8"
       os: linux
@@ -312,7 +312,7 @@ jobs:
     - name: "RELEASE: Ubuntu 14.04 with gcc 4.8"
       os: linux
       dist: trusty
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
 
 language: cpp
 
