@@ -38,7 +38,9 @@ before_script:
       export PATH="/usr/local/opt/ccache/libexec:$PATH"; \
     fi
 
-branches:only: master
+branches:
+  only:
+    - master
 
 cache: ccache
 
@@ -51,7 +53,10 @@ jobs:
     - name: "Documentation Test"
       language: python
       cache: pip
-      addons:apt:packages: python-pip
+      addons:
+        apt:
+          packages:
+            - python-pip
       install: pip install sphinx
       script: ./.travis.sh documentation
 
