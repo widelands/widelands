@@ -120,7 +120,9 @@ jobs:
             - zlib1g-dev
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON" CC="clang-9" CXX="clang++-9"
       services: xvfb
-      cache: false
+      before_script:
+        - 'ln -s /usr/bin/ccache /usr/lib/ccache/clang-9'
+        - 'ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
     - name: "RELEASE: Ubuntu 18.04 with clang 9"
       os: linux
       dist: bionic
@@ -148,7 +150,9 @@ jobs:
             - zlib1g-dev
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON" CC="clang-9" CXX="clang++-9"
       services: xvfb
-      cache: false
+      before_script:
+        - 'ln -s /usr/bin/ccache /usr/lib/ccache/clang-9'
+        - 'ln -s /usr/bin/ccache /usr/lib/ccache/clang++-9'
     - name: "DEBUG: Ubuntu 18.04 with clang 8"
       os: linux
       dist: bionic
