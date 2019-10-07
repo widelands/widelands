@@ -1,6 +1,7 @@
 addons:
   apt:
     packages:
+      - doxygen
       - libboost-dev
       - libboost-regex-dev
       - libboost-system-dev
@@ -17,6 +18,7 @@ addons:
   homebrew:
     packages:
       - ccache
+      - doxygen
       - glew
       - sdl2
       - sdl2_image
@@ -91,6 +93,33 @@ jobs:
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF"
 
     ### Linux BUILDS
+    - name: "DEBUG: Ubuntu 18.04 with clang 9"
+      os: linux
+      dist: bionic
+      addons:
+        apt:
+          sources:
+            - sourceline: 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
+            - sourceline: 'deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
+          packages:
+            - clang-9
+            - doxygen
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - python-pip
+            - zlib1g-dev
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" CC="clang-9" CXX="clang++-9"
+      services: xvfb
+      cache: false
     - name: "DEBUG: Ubuntu 18.04 with clang 7"
       os: linux
       dist: bionic
@@ -125,6 +154,7 @@ jobs:
             - llvm-toolchain-xenial-8
           packages:
             - clang-8
+            - doxygen
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -150,6 +180,7 @@ jobs:
             - llvm-toolchain-xenial-8
           packages:
             - clang-8
+            - doxygen
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -175,6 +206,7 @@ jobs:
             - ubuntu-toolchain-r-test
           packages:
             - g++-9
+            - doxygen
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -200,6 +232,7 @@ jobs:
             - ubuntu-toolchain-r-test
           packages:
             - g++-9
+            - doxygen
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
