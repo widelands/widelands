@@ -14,7 +14,6 @@ addons:
       - libsdl2-image-dev
       - libsdl2-mixer-dev
       - libsdl2-ttf-dev
-      - python-pip
       - zlib1g-dev
   homebrew:
     packages:
@@ -39,9 +38,7 @@ before_script:
       export PATH="/usr/local/opt/ccache/libexec:$PATH"; \
     fi
 
-branches:
-  only:
-    - master
+branches:only: master
 
 cache: ccache
 
@@ -54,6 +51,7 @@ jobs:
     - name: "Documentation Test"
       language: python
       cache: pip
+      addons:apt:packages: python-pip
       install: pip install sphinx
       script: ./.travis.sh documentation
 
@@ -131,7 +129,6 @@ jobs:
             - libsdl2-image-dev
             - libsdl2-mixer-dev
             - libsdl2-ttf-dev
-            - python-pip
             - zlib1g-dev
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON" CC="clang-9" CXX="clang++-9"
       services: xvfb
@@ -163,7 +160,6 @@ jobs:
             - libsdl2-image-dev
             - libsdl2-mixer-dev
             - libsdl2-ttf-dev
-            - python-pip
             - zlib1g-dev
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON" CC="clang-9" CXX="clang++-9"
       services: xvfb
@@ -195,7 +191,6 @@ jobs:
             - libsdl2-image-dev
             - libsdl2-mixer-dev
             - libsdl2-ttf-dev
-            - python-pip
             - zlib1g-dev
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON" CC="clang-8" CXX="clang++-8"
       services: xvfb
@@ -227,7 +222,6 @@ jobs:
             - libsdl2-image-dev
             - libsdl2-mixer-dev
             - libsdl2-ttf-dev
-            - python-pip
             - zlib1g-dev
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON" CC="clang-8" CXX="clang++-8"
       services: xvfb
@@ -256,7 +250,6 @@ jobs:
             - libsdl2-image-dev
             - libsdl2-mixer-dev
             - libsdl2-ttf-dev
-            - python-pip
             - zlib1g-dev
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON" CC="gcc-9" CXX="g++-9"
       services: xvfb
@@ -282,7 +275,6 @@ jobs:
             - libsdl2-image-dev
             - libsdl2-mixer-dev
             - libsdl2-ttf-dev
-            - python-pip
             - zlib1g-dev
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON" CC="gcc-9" CXX="g++-9"
       services: xvfb

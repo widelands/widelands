@@ -1,12 +1,5 @@
 set -ex
 
-# Get the number of available cores.
-if [ "$TRAVIS_OS_NAME" = linux ]; then
-    CORES="$(nproc)"
-else
-    CORES="$(sysctl -n hw.ncpu)"
-fi
-
 # Create build folder.
 mkdir build
 cd build
@@ -14,6 +7,13 @@ cd build
 case "$1" in
 build)
    cmake .. -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE_TOOLS -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF"
+
+   # Get the number of available cores.
+   if [ "$TRAVIS_OS_NAME" = linux ]; then
+      CORES="$(nproc)"
+   else
+      CORES="$(sysctl -n hw.ncpu)"
+   fi
    # Do the actual build.
    make -k -j$CORES
 
