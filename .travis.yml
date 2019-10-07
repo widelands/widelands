@@ -100,7 +100,6 @@ jobs:
         apt:
           sources:
             - sourceline: 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
-              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
             - sourceline: 'deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
               key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
@@ -129,7 +128,6 @@ jobs:
         apt:
           sources:
             - sourceline: 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
-              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
             - sourceline: 'deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
               key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
@@ -158,7 +156,6 @@ jobs:
         apt:
           sources:
             - sourceline: 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main'
-              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
             - sourceline: 'deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main'
               key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
@@ -187,7 +184,6 @@ jobs:
         apt:
           sources:
             - sourceline: 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main'
-              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
             - sourceline: 'deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main'
               key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
