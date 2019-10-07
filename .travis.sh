@@ -10,7 +10,7 @@ build)
 
    # Get the number of available cores.
    if [ "$TRAVIS_OS_NAME" = linux ]; then
-      CORES="$((`nproc`+2))"
+      CORES="$(nproc)"
    else
       CORES="$(sysctl -n hw.ncpu)"
    fi
