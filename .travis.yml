@@ -229,10 +229,7 @@ jobs:
       addons:
         apt:
           sources:
-            - sourceline: 'deb http://ppa.launchpad.net/ubuntu-toolchain-r/ppa/ubuntu bionic main'
-              key_url: 'https://keyserver.ubuntu.com/pks/lookup?fingerprint=on&op=index&search=0x60C317803A41BA51845E371A1E9377A2BA9EF27F'
-            - sourceline: 'deb-src http://ppa.launchpad.net/ubuntu-toolchain-r/ppa/ubuntu bionic main'
-              key_url: 'https://keyserver.ubuntu.com/pks/lookup?fingerprint=on&op=index&search=0x60C317803A41BA51845E371A1E9377A2BA9EF27F'
+            - sourceline: 'ppa:ubuntu-toolchain-r/ppa'
           packages:
             - g++-9
             - doxygen
@@ -258,10 +255,7 @@ jobs:
       addons:
         apt:
           sources:
-            - sourceline: 'deb http://ppa.launchpad.net/ubuntu-toolchain-r/ppa/ubuntu bionic main'
-              key_url: 'https://keyserver.ubuntu.com/pks/lookup?fingerprint=on&op=index&search=0x60C317803A41BA51845E371A1E9377A2BA9EF27F'
-            - sourceline: 'deb-src http://ppa.launchpad.net/ubuntu-toolchain-r/ppa/ubuntu bionic main'
-              key_url: 'https://keyserver.ubuntu.com/pks/lookup?fingerprint=on&op=index&search=0x60C317803A41BA51845E371A1E9377A2BA9EF27F'
+            - sourceline: 'ppa:ubuntu-toolchain-r/ppa'
           packages:
             - g++-9
             - doxygen
