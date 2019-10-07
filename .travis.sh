@@ -1,5 +1,6 @@
 set -ex
 
+# Get the number of available cores.
 if [ "$TRAVIS_OS_NAME" = linux ]; then
     CORES="$(nproc)"
 else
