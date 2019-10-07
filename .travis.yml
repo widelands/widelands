@@ -1,8 +1,6 @@
 addons:
   apt:
     packages:
-      - doxygen
-      - graphviz
       - libboost-dev
       - libboost-regex-dev
       - libboost-system-dev
@@ -18,9 +16,7 @@ addons:
   homebrew:
     packages:
       - ccache
-      - doxygen
       - glew
-      - graphviz
       - sdl2
       - sdl2_image
       - sdl2_mixer
@@ -121,8 +117,6 @@ jobs:
               key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
             - clang-9
-            - doxygen
-            - graphviz
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -152,8 +146,6 @@ jobs:
               key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
             - clang-9
-            - doxygen
-            - graphviz
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -183,8 +175,6 @@ jobs:
               key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
             - clang-8
-            - doxygen
-            - graphviz
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -214,8 +204,6 @@ jobs:
               key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
             - clang-8
-            - doxygen
-            - graphviz
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -242,8 +230,6 @@ jobs:
             - sourceline: 'ppa:ubuntu-toolchain-r/test'
           packages:
             - g++-9
-            - doxygen
-            - graphviz
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
@@ -267,8 +253,6 @@ jobs:
             - sourceline: 'ppa:ubuntu-toolchain-r/test'
           packages:
             - g++-9
-            - doxygen
-            - graphviz
             - libboost-dev
             - libboost-regex-dev
             - libboost-system-dev
