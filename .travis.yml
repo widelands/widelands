@@ -108,6 +108,7 @@ jobs:
     - name: "DEBUG: Ubuntu 18.04 with clang 9"
       os: linux
       dist: bionic
+      compiler: clang
       addons:
         apt:
           sources:
@@ -138,6 +139,7 @@ jobs:
     - name: "RELEASE: Ubuntu 18.04 with clang 9"
       os: linux
       dist: bionic
+      compiler: clang
       addons:
         apt:
           sources:
@@ -168,6 +170,7 @@ jobs:
     - name: "DEBUG: Ubuntu 18.04 with clang 8"
       os: linux
       dist: bionic
+      compiler: clang
       addons:
         apt:
           sources:
@@ -198,6 +201,7 @@ jobs:
     - name: "RELEASE: Ubuntu 18.04 with clang 8"
       os: linux
       dist: bionic
+      compiler: clang
       addons:
         apt:
           sources:
