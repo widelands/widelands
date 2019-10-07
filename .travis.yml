@@ -209,7 +209,6 @@ jobs:
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF" CC="clang-8" CXX="clang++-8"
       services: xvfb
       cache: false
-
     - name: "DEBUG: Ubuntu 18.04 with clang 7"
       os: linux
       dist: bionic
