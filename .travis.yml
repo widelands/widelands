@@ -67,7 +67,7 @@ jobs:
       name: "DEBUG: macOS 10.14 with Xcode 10.3"
       os: osx
       osx_image: xcode10.3
-      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
     - name: "RELEASE: macOS 10.14 with Xcode 10.3"
       os: osx
       osx_image: xcode10.3
@@ -78,7 +78,7 @@ jobs:
       name: "DEBUG: macOS 10.13 with Xcode 9.4"
       os: osx
       osx_image: xcode9.4
-      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF"
     - name: "RELEASE: macOS 10.13 with Xcode 9.4"
       os: osx
       osx_image: xcode9.4
@@ -86,7 +86,7 @@ jobs:
     - name: "DEBUG: macOS 10.12 with XCode 8.3"
       os: osx
       osx_image: xcode8.3
-      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF"
     - name: "RELEASE: macOS 10.12 with XCode 8.3"
       os: osx
       osx_image: xcode8.3
@@ -119,21 +119,108 @@ jobs:
             - libsdl2-ttf-dev
             - python-pip
             - zlib1g-dev
-      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" CC="clang-9" CXX="clang++-9"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON" CC="clang-9" CXX="clang++-9"
+      services: xvfb
+      cache: false
+    - name: "RELEASE: Ubuntu 18.04 with clang 9"
+      os: linux
+      dist: bionic
+      addons:
+        apt:
+          sources:
+            - sourceline: 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+            - sourceline: 'deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+          packages:
+            - clang-9
+            - doxygen
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - python-pip
+            - zlib1g-dev
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF" CC="clang-9" CXX="clang++-9"
+      services: xvfb
+      cache: false
+    - name: "DEBUG: Ubuntu 18.04 with clang 8"
+      os: linux
+      dist: bionic
+      addons:
+        apt:
+          sources:
+            - sourceline: 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+            - sourceline: 'deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+          packages:
+            - clang-8
+            - doxygen
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - python-pip
+            - zlib1g-dev
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON" CC="clang-8" CXX="clang++-8"
+      services: xvfb
+      cache: false
+    - name: "RELEASE: Ubuntu 18.04 with clang 8"
+      os: linux
+      dist: bionic
+      addons:
+        apt:
+          sources:
+            - sourceline: 'deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+            - sourceline: 'deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
+          packages:
+            - clang-8
+            - doxygen
+            - libboost-dev
+            - libboost-regex-dev
+            - libboost-system-dev
+            - libboost-test-dev
+            - libglew-dev
+            - libicu-dev
+            - libpng-dev
+            - libsdl2-dev
+            - libsdl2-image-dev
+            - libsdl2-mixer-dev
+            - libsdl2-ttf-dev
+            - python-pip
+            - zlib1g-dev
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF" CC="clang-8" CXX="clang++-8"
       services: xvfb
       cache: false
     - name: "DEBUG: Ubuntu 18.04 with clang 7"
       os: linux
       dist: bionic
       compiler: clang
-      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
       services: xvfb
       cache: false
     - name: "RELEASE: Ubuntu 18.04 with clang 7"
       os: linux
       dist: bionic
       compiler: clang
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF"
       services: xvfb
       cache: false
     - name: "DEBUG: Ubuntu 18.04 with gcc 7.4"
@@ -145,60 +232,8 @@ jobs:
     - name: "RELEASE: Ubuntu 18.04 with gcc 7.4"
       os: linux
       dist: bionic
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
       services: xvfb
-    - name: "DEBUG: Ubuntu 16.04 with clang 8"
-      os: linux
-      dist: xenial
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-xenial-8
-          packages:
-            - clang-8
-            - doxygen
-            - libboost-dev
-            - libboost-regex-dev
-            - libboost-system-dev
-            - libboost-test-dev
-            - libglew-dev
-            - libicu-dev
-            - libpng-dev
-            - libsdl2-dev
-            - libsdl2-image-dev
-            - libsdl2-mixer-dev
-            - libsdl2-ttf-dev
-            - python-pip
-            - zlib1g-dev
-      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" CC="clang-8" CXX="clang++-8"
-      services: xvfb
-      cache: false
-    - name: "RELEASE: Ubuntu 16.04 with clang 8"
-      os: linux
-      dist: xenial
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-xenial-8
-          packages:
-            - clang-8
-            - doxygen
-            - libboost-dev
-            - libboost-regex-dev
-            - libboost-system-dev
-            - libboost-test-dev
-            - libglew-dev
-            - libicu-dev
-            - libpng-dev
-            - libsdl2-dev
-            - libsdl2-image-dev
-            - libsdl2-mixer-dev
-            - libsdl2-ttf-dev
-            - python-pip
-            - zlib1g-dev
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON" CC="clang-8" CXX="clang++-8"
-      services: xvfb
-      cache: false
     - name: "DEBUG: Ubuntu 16.04 with gcc 9"
       os: linux
       dist: xenial
@@ -222,7 +257,7 @@ jobs:
             - libsdl2-ttf-dev
             - python-pip
             - zlib1g-dev
-      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF" CC="gcc-9" CXX="g++-9"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON" CC="gcc-9" CXX="g++-9"
       services: xvfb
       cache: false
     - name: "RELEASE: Ubuntu 16.04 with gcc 9"
@@ -248,7 +283,7 @@ jobs:
             - libsdl2-ttf-dev
             - python-pip
             - zlib1g-dev
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON" CC="gcc-9" CXX="g++-9"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF" CC="gcc-9" CXX="g++-9"
       services: xvfb
     - name: "DEBUG: Ubuntu 16.04 with gcc 5.4"
       os: linux
@@ -259,19 +294,19 @@ jobs:
     - name: "RELEASE: Ubuntu 16.04 with gcc 5.4"
       os: linux
       dist: xenial
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF"
       services: xvfb
     - name: "DEBUG: Ubuntu 14.04 with clang 3.4"
       os: linux
       dist: trusty
       compiler: clang
-      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="OFF"
+      env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
       cache: false
     - name: "RELEASE: Ubuntu 14.04 with clang 3.4"
       os: linux
       dist: trusty
       compiler: clang
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF"
       cache: false
     - name: "DEBUG: Ubuntu 14.04 with gcc 4.8"
       os: linux
@@ -281,7 +316,7 @@ jobs:
     - name: "RELEASE: Ubuntu 14.04 with gcc 4.8"
       os: linux
       dist: trusty
-      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
+      env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="OFF"
 
 language: cpp
 
