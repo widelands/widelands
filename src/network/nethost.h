@@ -22,8 +22,10 @@
 
 #include <map>
 #include <memory>
+#include <thread>
 
 #include "network/nethost_interface.h"
+#include "network/bufferedconnection.h"
 
 /**
  * NetHost manages the client connections of a network game in which this computer
@@ -49,8 +51,8 @@ public:
 	void close(ConnectionId id) override;
 	bool try_accept(ConnectionId* new_id) override;
 	std::unique_ptr<RecvPacket> try_receive(ConnectionId id) override;
-	void send(ConnectionId id, const SendPacket& packet) override;
-	void send(const std::vector<ConnectionId>& ids, const SendPacket& packet) override;
+	void send(ConnectionId id, const SendPacket& packet, NetPriority priority = NetPriority::kNormal) override;
+	void send(const std::vector<ConnectionId>& ids, const SendPacket& packet, NetPriority priority = NetPriority::kNormal) override;
 
 	/**
 	 * Stops listening for connections.
@@ -65,6 +67,8 @@ private:
 	// Feel free to make this method public if you need it
 	bool is_listening() const;
 
+	void start_accepting(boost::asio::ip::tcp::acceptor& acceptor);
+
 	/**
 	 * Tries to listen on the given port.
 	 * If it fails, is_listening() will return \c false.
@@ -75,26 +79,10 @@ private:
 	bool open_acceptor(boost::asio::ip::tcp::acceptor* acceptor,
 	                   const boost::asio::ip::tcp::endpoint& endpoint);
 
-	/**
-	 * Helper structure to store variables about a connected client.
-	 */
-	struct Client {
-		/**
-		 * Initializes the structure with the given socket.
-		 * \param sock The socket to listen on. The socket is moved by this
-		 *             constructor so the given socket is no longer valid.
-		 */
-		explicit Client(boost::asio::ip::tcp::socket&& sock);
-
-		/// The socket to send/receive with.
-		boost::asio::ip::tcp::socket socket;
-		/// The deserializer to feed the received data to. It will transform it into data packets.
-		Deserializer deserializer;
-	};
 
 	/// A map linking client ids to the respective data about the clients.
 	/// Client ids not in this map should be considered invalid.
-	std::map<NetHostInterface::ConnectionId, Client> clients_;
+	std::map<NetHostInterface::ConnectionId, std::unique_ptr<BufferedConnection>> clients_;
 	/// The next client id that will be used
 	NetHostInterface::ConnectionId next_id_;
 	/// An io_service needed by boost.asio. Primary needed for async operations.
@@ -103,6 +91,10 @@ private:
 	boost::asio::ip::tcp::acceptor acceptor_v4_;
 	/// The acceptor we get IPv6 connection requests to.
 	boost::asio::ip::tcp::acceptor acceptor_v6_;
+
+	std::thread asio_thread_;
+	std::queue<std::unique_ptr<BufferedConnection>> accept_queue_;
+	std::mutex mutex_accept_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETHOST_H
