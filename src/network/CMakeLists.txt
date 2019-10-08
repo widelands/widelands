@@ -22,8 +22,8 @@ wl_library(network
     nethost.h
     nethostproxy.cc
     nethostproxy.h
-    netrelayconnection.cc
-    netrelayconnection.h
+    bufferedconnection.cc
+    bufferedconnection.h
     network.cc
     network.h
     network_gaming_messages.cc
