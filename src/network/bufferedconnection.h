@@ -22,6 +22,7 @@
 
 #include <memory>
 #include <mutex>
+#include <thread>
 
 #include "network/network.h"
 #include "network/relay_protocol.h"
