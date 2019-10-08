@@ -69,7 +69,7 @@ jobs:
       env: BUILD_TYPE="Release" BUILD_TRANSLATIONS="ON" BUILD_WEBSITE_TOOLS="ON"
 
     - stage: build
-      ### DEBUG BUILDS
+    ### DEBUG BUILDS
       name: "DEBUG: macOS 10.13 with Xcode 9.4"
       os: osx
       osx_image: xcode9.4
@@ -82,6 +82,7 @@ jobs:
       os: linux
       dist: bionic
       compiler: clang
+      cache: false
       addons:
         apt:
           sources:
@@ -111,6 +112,7 @@ jobs:
       os: linux
       dist: bionic
       compiler: clang
+      cache: false
       addons:
         apt:
           sources:
@@ -140,6 +142,7 @@ jobs:
       os: linux
       dist: bionic
       compiler: clang
+      cache: false
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
       services: xvfb
       before_script:
@@ -149,6 +152,7 @@ jobs:
       os: linux
       dist: trusty
       compiler: clang
+      cache: false
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
       before_script:
         - 'sudo ln -s /usr/bin/ccache /usr/lib/ccache/clang'
@@ -157,6 +161,7 @@ jobs:
     - name: "DEBUG: Ubuntu 18.04 with gcc 9.1"
       os: linux
       dist: bionic
+      cache: false
       addons:
         apt:
           sources:
@@ -180,16 +185,19 @@ jobs:
     - name: "DEBUG: Ubuntu 18.04 with gcc 7.4"
       os: linux
       dist: bionic
+      cache: false
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
       services: xvfb
     - name: "DEBUG: Ubuntu 16.04 with gcc 5.4"
       os: linux
       dist: xenial
+      cache: false
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
       services: xvfb
     - name: "DEBUG: Ubuntu 14.04 with gcc 4.8"
       os: linux
       dist: trusty
+      cache: false
       env: BUILD_TYPE="Debug" BUILD_TRANSLATIONS="OFF" BUILD_WEBSITE_TOOLS="ON"
       before_script: 'export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3'
     ### RELEASE BUILDS
