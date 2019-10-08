@@ -75,7 +75,8 @@ bool BufferedConnection::Peeker::recvpacket() {
 		return false;
 	}
 
-	// RecvPackets have their size coded in their first two bytes
+	// RecvPackets have their size coded in their first two bytes.
+	// See SendPacket in network.cc
 	const uint16_t size = conn_->receive_buffer_[peek_pointer_ + 0] << 8 | conn_->receive_buffer_[peek_pointer_ + 1];
 	assert(size >= 2);
 
@@ -196,6 +197,7 @@ void BufferedConnection::receive(RecvPacket* packet) {
 	receive_buffer_.erase(receive_buffer_.begin(), receive_buffer_.begin() + size);
 }
 
+// Called by send() method but will only do something if not sending yet
 void BufferedConnection::start_sending() {
 
 	std::unique_lock<std::mutex> lock(mutex_send_);
@@ -222,6 +224,9 @@ void BufferedConnection::start_sending() {
 	currently_sending_ = true;
 	lock.unlock();
 
+	// Start writing to the socket. This might block if the network buffer within
+	// the operating system is currently full.
+	// When done with sending, call the lambda method defined below
 	boost::asio::async_write(socket_,
 		boost::asio::buffer(nonempty_queue->front()),
 #ifndef NDEBUG
@@ -249,8 +254,7 @@ void BufferedConnection::start_sending() {
 		});
 }
 
-
-
+// This method is run within a thread
 void BufferedConnection::start_receiving() {
 
 	if (!is_connected()) {

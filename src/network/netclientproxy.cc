@@ -141,7 +141,8 @@ void NetClientProxy::receive_commands() {
 		break;
 	case RelayCommand::kPing:
 		// TODO(Notabilis): Move the ping logic inside the receive-thread of BufferedConnection?
-		// Should speed up the measured RTT and could prevent disconnects while, e.g., loading a map
+		// Should speed up the measured RTT and could prevent disconnects while, e.g., loading a map.
+		// Would break the separation of the network layers, though.
 		if (peek.uint8_t()) {
 			conn_->receive(&cmd);
 			uint8_t seq;

@@ -277,12 +277,18 @@ private:
 	explicit BufferedConnection(boost::asio::ip::tcp::acceptor& acceptor);
 
 	/**
-	 * Reads data from network.
-	 * \return \c False if an error occurred.
+	 * Tries to send some data.
+	 * Is called by send() each time new data is given to this class but only
+	 * does something when not already sending.
+	 * Will continue sending until all buffers_to_send_ are empty.
 	 */
-	bool try_network_receive();
-
 	void start_sending();
+
+	/**
+	 * Waits on the socket until data can be received.
+	 * After data has been received, directly calls itself again to start
+	 * the next wait.
+	 */
 	void start_receiving();
 
 	/// The buffers that are waiting to be send.
@@ -296,17 +302,19 @@ private:
 	/// The socket that connects us to the host.
 	boost::asio::ip::tcp::socket socket_;
 
-	/// Buffer for arriving data. We need to store it until we have enough to return the required
-	/// type.
+	/// Buffer for arriving data. We need to store it until we have enough
+	/// to return the required type.
 	std::deque<uint8_t> receive_buffer_;
 	/// The buffer that is given to the asynchronous receive function
 	uint8_t asio_receive_buffer_[kNetworkBufferSize];
 
+	/// A thread used for the asynchronous send/receive methods
 	std::thread asio_thread_;
-	// Protects buffers_to_send_
+	/// Protects buffers_to_send_
 	std::mutex mutex_send_;
-	// Protects buffer_
+	/// Protects receive_buffer_
 	std::mutex mutex_receive_;
+	/// Whether we are currently sending something, used within start_sending()
 	bool currently_sending_;
 };
 

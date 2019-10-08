@@ -67,6 +67,12 @@ private:
 	// Feel free to make this method public if you need it
 	bool is_listening() const;
 
+	/**
+	 * Starts an asynchronous accept on the given acceptor.
+	 * If someone wants to connect, establish a connection
+	 * and add the connection to accept_queue_ and continue waiting.
+	 * @param acceptor The acceptor we should be listening on.
+	 */
 	void start_accepting(boost::asio::ip::tcp::acceptor& acceptor);
 
 	/**
@@ -76,11 +82,18 @@ private:
 	 */
 	explicit NetHost(uint16_t port);
 
+	/**
+	 * Prepare the given acceptor for accepting connections for the given
+	 * network protocol and port.
+	 * @param acceptor The acceptor to prepare.
+	 * @param endpoint The IP version, transport protocol and port number we should listen on.
+	 * @return \c True iff the acceptor is listening now.
+	 */
 	bool open_acceptor(boost::asio::ip::tcp::acceptor* acceptor,
 	                   const boost::asio::ip::tcp::endpoint& endpoint);
 
 
-	/// A map linking client ids to the respective data about the clients.
+	/// A map linking client ids to the respective network connections.
 	/// Client ids not in this map should be considered invalid.
 	std::map<NetHostInterface::ConnectionId, std::unique_ptr<BufferedConnection>> clients_;
 	/// The next client id that will be used
@@ -92,8 +105,12 @@ private:
 	/// The acceptor we get IPv6 connection requests to.
 	boost::asio::ip::tcp::acceptor acceptor_v6_;
 
+	/// A thread used to wait for connections on the acceptor.
 	std::thread asio_thread_;
+	/// The new connections the acceptor accepted. Will be moved to clients_
+	/// when try_accept() is called by the using class.
 	std::queue<std::unique_ptr<BufferedConnection>> accept_queue_;
+	/// A mutex avoiding concurrent access to accept_queue_.
 	std::mutex mutex_accept_;
 };
 

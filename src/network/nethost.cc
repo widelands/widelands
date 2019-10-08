@@ -133,15 +133,19 @@ void NetHost::send(const std::vector<ConnectionId>& ids, const SendPacket& packe
 	}
 }
 
+// This method is run within a thread
 void NetHost::start_accepting(boost::asio::ip::tcp::acceptor& acceptor) {
 
 	if (!is_listening()) {
 		return;
 	}
 
+	// Do an asynchronous wait until something can be read on the acceptor.
+	// If we can read something, then there is a client that wants to connect to us
 	acceptor.async_wait(boost::asio::ip::tcp::acceptor::wait_read,
 						[this, &acceptor](boost::system::error_code ec) {
 			if (!ec) {
+				// No error occurred, so try to establish a connection
 				std::unique_ptr<BufferedConnection> conn = BufferedConnection::accept(acceptor);
 				if (conn) {
 					assert(conn->is_connected());
@@ -149,6 +153,7 @@ void NetHost::start_accepting(boost::asio::ip::tcp::acceptor& acceptor) {
 					accept_queue_.push(std::move(conn));
 				}
 			}
+			// Wait for the next client
 			start_accepting(acceptor);
 		});
 }
