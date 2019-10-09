@@ -358,6 +358,12 @@ set -e
 basic_check
 set_buildtool
 prepare_directories_and_links
+
+# Dependency check doesn't work with ninja, so we do it manually here
+if [ $BUILD_TYPE = "Debug" -a \( $buildtool = "ninja" -o $buildtool = "ninja-build" \) ]; then
+  utils/build_deps.py
+fi
+
 mkdir -p build
 cd build
 compile_widelands
