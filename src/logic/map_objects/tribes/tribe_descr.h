@@ -171,7 +171,8 @@ public:
 
 private:
 	/// Registers a worker with the tribe and adds it to the bottom of the given worker column
-	void add_worker(const std::string& workername, std::vector<DescriptionIndex>& workers_order_column);
+	void add_worker(const std::string& workername,
+	                std::vector<DescriptionIndex>& workers_order_column);
 
 	// Helper function for adding a special worker type (carriers etc.)
 	DescriptionIndex add_special_worker(const std::string& workername);

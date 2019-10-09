@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-09-27 07:12+0000\n"
+"POT-Creation-Date: 2019-10-09 07:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -231,6 +231,12 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:79 ../../src/logic/game.cc:224
 #: ../../src/logic/game.cc:284
 msgid "Loading tribes"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:98
+#: ../../src/wui/interactive_gamebase.cc:93
+msgctxt "hotkey"
+msgid "Esc"
 msgstr ""
 
 #. * TRANSLATORS: Title for the main menu button in the editor
@@ -520,13 +526,13 @@ msgstr ""
 msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:907
+#: ../../src/editor/editorinteractive.cc:909
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:105
 msgid "Creating empty map…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:911
+#: ../../src/editor/editorinteractive.cc:913
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:110
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:488
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:146
@@ -535,7 +541,7 @@ msgid "No Name"
 msgstr ""
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:914
+#: ../../src/editor/editorinteractive.cc:916
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:111
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:489
 #: ../../src/logic/map.h:172
@@ -543,7 +549,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:921
+#: ../../src/editor/editorinteractive.cc:923
 #, c-format
 msgid "Loading map “%s”…"
 msgstr ""
@@ -726,7 +732,7 @@ msgid "Current: %s"
 msgstr ""
 
 #: ../../src/editor/ui_menus/help.cc:42 ../../src/ui_fsmenu/multiplayer.cc:124
-#: ../../src/wui/encyclopedia_window.cc:141 ../../src/wui/login_box.cc:192
+#: ../../src/wui/encyclopedia_window.cc:141 ../../src/wui/login_box.cc:195
 #: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
 msgstr ""
@@ -1193,21 +1199,7 @@ msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:228
-#: ../../src/graphic/gl/initialize.cc:247
-msgid "Widelands won’t work because your graphics driver is too old."
-msgstr ""
-
-#. * TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-#. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:231
-#: ../../src/graphic/gl/initialize.cc:250
-msgid "The shading language needs to be version 1.20 or newer."
-msgstr ""
-
-#. * TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-#. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:262
+#: ../../src/graphic/gl/initialize.cc:219
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
@@ -1215,10 +1207,24 @@ msgstr ""
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
 #. support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:266
+#: ../../src/graphic/gl/initialize.cc:223
 msgid ""
 "There is an unknown problem with reading the information from the graphics "
 "driver."
+msgstr ""
+
+#. * TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
+#. support is limited here, so do not use advanced typography *
+#: ../../src/graphic/gl/initialize.cc:251
+#: ../../src/graphic/gl/initialize.cc:270
+msgid "Widelands won’t work because your graphics driver is too old."
+msgstr ""
+
+#. * TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
+#. support is limited here, so do not use advanced typography *
+#: ../../src/graphic/gl/initialize.cc:254
+#: ../../src/graphic/gl/initialize.cc:273
+msgid "The shading language needs to be version 1.20 or newer."
 msgstr ""
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames. replaces tha
@@ -1405,13 +1411,13 @@ msgstr ""
 msgid "No description defined"
 msgstr ""
 
-#: ../../src/logic/map_objects/immovable.cc:529
-#: ../../src/logic/map_objects/tribes/constructionsite.cc:154
+#: ../../src/logic/map_objects/immovable.cc:530
+#: ../../src/logic/map_objects/tribes/constructionsite.cc:155
 #, c-format
 msgid "%i%% built"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/dismantlesite.cc:122
+#: ../../src/logic/map_objects/tribes/dismantlesite.cc:121
 #, c-format
 msgid "%u%% dismantled"
 msgstr ""
@@ -1716,21 +1722,21 @@ msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:893
+#: ../../src/logic/map_objects/tribes/ship.cc:1070
 msgctxt "ship"
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:893
+#: ../../src/logic/map_objects/tribes/ship.cc:1070
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:894
+#: ../../src/logic/map_objects/tribes/ship.cc:1071
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1037
+#: ../../src/logic/map_objects/tribes/ship.cc:1220
 #: ../../src/wui/seafaring_statistics_menu.cc:214
 msgctxt "ship_state"
 msgid "Shipping"
@@ -1738,28 +1744,28 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1041
+#: ../../src/logic/map_objects/tribes/ship.cc:1224
 #: ../../src/wui/seafaring_statistics_menu.cc:212
 msgctxt "ship_state"
 msgid "Idle"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1046
+#: ../../src/logic/map_objects/tribes/ship.cc:1229
 #: ../../src/wui/seafaring_statistics_menu.cc:216
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1050
+#: ../../src/logic/map_objects/tribes/ship.cc:1233
 #: ../../src/wui/seafaring_statistics_menu.cc:218
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1054
+#: ../../src/logic/map_objects/tribes/ship.cc:1237
 #: ../../src/wui/seafaring_statistics_menu.cc:220
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1767,14 +1773,14 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1059
+#: ../../src/logic/map_objects/tribes/ship.cc:1242
 #: ../../src/wui/seafaring_statistics_menu.cc:222
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1482
-#: ../../src/logic/map_objects/tribes/soldier.cc:1486
+#: ../../src/logic/map_objects/tribes/soldier.cc:1483
+#: ../../src/logic/map_objects/tribes/soldier.cc:1487
 msgid "Logic error"
 msgstr ""
 
@@ -2985,7 +2991,7 @@ msgctxt "game_state"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:255 ../../src/wui/login_box.cc:162
+#: ../../src/ui_fsmenu/netsetup_lan.cc:255 ../../src/wui/login_box.cc:165
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters."
@@ -3161,7 +3167,7 @@ msgstr ""
 msgid "#"
 msgstr ""
 
-#: ../../src/ui_fsmenu/scenario_select.cc:204
+#: ../../src/ui_fsmenu/scenario_select.cc:207
 #, c-format
 msgid "Invalid path to file in campaigns.lua of tutorials.lua: %s"
 msgstr ""
@@ -3769,7 +3775,7 @@ msgstr ""
 msgid "Error Saving Game!"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:52 ../../src/wui/game_message_menu.cc:593
+#: ../../src/wui/game_message_menu.cc:52 ../../src/wui/game_message_menu.cc:597
 msgid "Messages: Inbox"
 msgstr ""
 
@@ -3792,7 +3798,7 @@ msgid "Sent"
 msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:126
-#: ../../src/wui/game_message_menu.cc:596
+#: ../../src/wui/game_message_menu.cc:600
 msgid "Show Archive"
 msgstr ""
 
@@ -3801,77 +3807,77 @@ msgstr ""
 msgid "Center main mapview on location"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:527
+#: ../../src/wui/game_message_menu.cc:531
 #: ../../src/wui/seafaring_statistics_menu.cc:499
 msgctxt "hotkey"
 msgid "Alt+0"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:527
+#: ../../src/wui/game_message_menu.cc:531
 msgid "Show all messages"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:537
+#: ../../src/wui/game_message_menu.cc:541
 #: ../../src/wui/seafaring_statistics_menu.cc:507
 msgctxt "hotkey"
 msgid "Alt+1"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:537
+#: ../../src/wui/game_message_menu.cc:541
 msgid "Show geologists' messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:540
+#: ../../src/wui/game_message_menu.cc:544
 #: ../../src/wui/seafaring_statistics_menu.cc:510
 msgctxt "hotkey"
 msgid "Alt+2"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:540
+#: ../../src/wui/game_message_menu.cc:544
 msgid "Show economy messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:543
+#: ../../src/wui/game_message_menu.cc:547
 #: ../../src/wui/seafaring_statistics_menu.cc:513
 msgctxt "hotkey"
 msgid "Alt+3"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:543
+#: ../../src/wui/game_message_menu.cc:547
 msgid "Show seafaring messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:546
+#: ../../src/wui/game_message_menu.cc:550
 #: ../../src/wui/seafaring_statistics_menu.cc:516
 msgctxt "hotkey"
 msgid "Alt+4"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:546
+#: ../../src/wui/game_message_menu.cc:550
 msgid "Show warfare messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:549
+#: ../../src/wui/game_message_menu.cc:553
 #: ../../src/wui/seafaring_statistics_menu.cc:520
 msgctxt "hotkey"
 msgid "Alt+5"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:549
+#: ../../src/wui/game_message_menu.cc:553
 msgid "Show scenario messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:586
+#: ../../src/wui/game_message_menu.cc:590
 msgid "Messages: Archive"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:589
+#: ../../src/wui/game_message_menu.cc:593
 msgid "Show Inbox"
 msgstr ""
 
@@ -3879,7 +3885,7 @@ msgstr ""
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
 #.
-#: ../../src/wui/game_message_menu.cc:619
+#: ../../src/wui/game_message_menu.cc:623
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
@@ -3887,7 +3893,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:625
+#: ../../src/wui/game_message_menu.cc:629
 msgid "Restore selected message"
 msgstr ""
 
@@ -3895,7 +3901,7 @@ msgstr ""
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
 #.
-#: ../../src/wui/game_message_menu.cc:635
+#: ../../src/wui/game_message_menu.cc:639
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
@@ -3903,12 +3909,12 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:641
+#: ../../src/wui/game_message_menu.cc:645
 msgid "Archive selected message"
 msgstr ""
 
 #. * TRANSLATORS: Del is the "Delete" key on the keyboard
-#: ../../src/wui/game_message_menu.cc:646
+#: ../../src/wui/game_message_menu.cc:650
 msgctxt "hotkey"
 msgid "Del"
 msgstr ""
@@ -4248,7 +4254,7 @@ msgid "Pause the Game"
 msgstr ""
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:392
+#: ../../src/wui/interactive_gamebase.cc:395
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr ""
@@ -4577,11 +4583,11 @@ msgid ""
 "profile page."
 msgstr ""
 
-#: ../../src/wui/login_box.cc:158
+#: ../../src/wui/login_box.cc:161
 msgid "Please enter a nickname!"
 msgstr ""
 
-#: ../../src/wui/login_box.cc:168
+#: ../../src/wui/login_box.cc:171
 msgid "Please enter your password!"
 msgstr ""
 

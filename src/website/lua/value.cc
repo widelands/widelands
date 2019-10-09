@@ -37,7 +37,8 @@ std::string Double::as_string() const {
 	return strs.str();
 }
 
-Int::Int(int value) : int_value(value) {}
+Int::Int(int value) : int_value(value) {
+}
 std::string Int::as_string() const {
 	std::ostringstream strs;
 	strs << int_value;
@@ -48,15 +49,16 @@ std::string Empty::as_string() const {
 	return "nil";
 }
 
-String::String(const std::string& value) : string_value(value) {}
+String::String(const std::string& value) : string_value(value) {
+}
 std::string String::as_string() const {
 	return "\"" + string_value + "\"";
 }
 
-Raw::Raw(const std::string& value) : raw_value(value) {}
+Raw::Raw(const std::string& value) : raw_value(value) {
+}
 std::string Raw::as_string() const {
 	return raw_value;
 }
-
 
 }  // namespace LuaTree

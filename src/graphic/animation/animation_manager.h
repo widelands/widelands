@@ -30,28 +30,32 @@
 #include "scripting/lua_table.h"
 
 /**
-* The animation manager manages a list of all active animations.
-*/
+ * The animation manager manages a list of all active animations.
+ */
 class AnimationManager {
 public:
 	/**
 	 * Loads an animation, graphics sound and everything from a Lua table.
-	 * For the contents of the Lua table, cf. doc/sphinx/source/animations.rst or https://www.widelands.org/documentation/animations/.
+	 * For the contents of the Lua table, cf. doc/sphinx/source/animations.rst or
+	 * https://www.widelands.org/documentation/animations/.
 	 *
 	 * The 'basename' is the filename prefix for loading the images, e.g. "idle" or "walk_ne".
 	 */
 	uint32_t load(const LuaTable& table, const std::string& basename, Animation::Type type);
 	/// Same as above, but this animation will be used for getting a representative image by map
 	/// object name
-	uint32_t load(const std::string& map_object_name, const LuaTable& table, const std::string& basename, Animation::Type type);
+	uint32_t load(const std::string& map_object_name,
+	              const LuaTable& table,
+	              const std::string& basename,
+	              Animation::Type type);
 
 	/// Returns the animation with the given ID or throws an exception if it is
 	/// unknown.
 	const Animation& get_animation(uint32_t id) const;
 
-	/// Returns the representative image for the animation with the given 'id', using the given player color.
-	/// If this image has already been generated, it is pulled from the cache using
-	/// the clr argument that was used previously.
+	/// Returns the representative image for the animation with the given 'id', using the given
+	/// player color. If this image has already been generated, it is pulled from the cache using the
+	/// clr argument that was used previously.
 	const Image* get_representative_image(uint32_t id, const RGBColor* clr = nullptr);
 
 	/// Returns the representative image for the given map object, using the given player color.
