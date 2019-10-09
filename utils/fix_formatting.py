@@ -53,6 +53,7 @@ def main():
                     SPACES_PER_TAB) + line[m.end():]
             new_lines.append(line.rstrip() + '\n')
         write_text_file(filename, ''.join(new_lines))
+        call(['git', 'add', filename])
     print(' done.')
 
     sys.stdout.write('\nFormatting C++ ')
@@ -62,6 +63,7 @@ def main():
         sys.stdout.write('.')
         sys.stdout.flush()
         call(['clang-format', '-i', filename])
+        call(['git', 'add', filename])
     print(' done.')
 
     sys.stdout.write('\nFormatting Python utils ')
@@ -69,6 +71,7 @@ def main():
         sys.stdout.write('.')
         sys.stdout.flush()
         call(['pyformat', '-i', filename])
+        call(['git', 'add', filename])
     print(' done.')
 
     print 'Formatting finished.'
