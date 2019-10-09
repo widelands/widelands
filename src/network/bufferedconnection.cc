@@ -129,7 +129,10 @@ void BufferedConnection::close() {
 	}
 	// Stop the thread
 	io_service_.stop();
-	while (!io_service_.stopped()); // Not sure if that is required
+	// Not sure if that is required, wait up to one second for the io_service to stop
+	for (int i = 0; i < 1000 && !io_service_.stopped(); i++) {
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+	}
 	assert(io_service_.stopped());
 	if (asio_thread_.joinable()) {
 		try {

@@ -175,7 +175,7 @@ public:
 	 */
 	void receive(RecvPacket* out);
 
-	// Temporary method, will be removed.
+	// Temporary method, will be removed when display of RTT measurements are implemented.
 	// Removes a message from type kRoundTripTimeResponse from the buffer.
 	void ignore_rtt_response();
 
@@ -204,6 +204,7 @@ public:
 	void send(NetPriority priority, const Targs&... Fargs) {
 
 		std::vector<uint8_t> v;
+		v.reserve(kNetworkBufferSize);
 
 		send_T_(v, Fargs...);
 
