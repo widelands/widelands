@@ -34,6 +34,7 @@ struct Value {
 struct Boolean : Value {
 	explicit Boolean(bool value);
 	std::string as_string() const override;
+
 private:
 	const bool bool_value;
 };
@@ -41,6 +42,7 @@ private:
 struct Double : Value {
 	explicit Double(double value);
 	std::string as_string() const override;
+
 private:
 	const double double_value;
 };
@@ -53,6 +55,7 @@ struct Empty : Value {
 struct Int : Value {
 	explicit Int(int value);
 	std::string as_string() const override;
+
 private:
 	const int int_value;
 };
@@ -60,6 +63,7 @@ private:
 struct String : Value {
 	explicit String(const std::string& value);
 	std::string as_string() const override;
+
 private:
 	const std::string string_value;
 };
@@ -67,10 +71,10 @@ private:
 struct Raw : Value {
 	explicit Raw(const std::string& value);
 	std::string as_string() const override;
+
 private:
 	const std::string raw_value;
 };
-
 
 }  // namespace LuaTree
 #endif  // end of include guard: WL_WEBSITE_LUA_VALUE_H

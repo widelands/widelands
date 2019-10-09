@@ -37,7 +37,8 @@ void Element::add_bool(const std::string& key, bool value) {
 	if (key.empty()) {
 		keyless_values_.push_back(std::unique_ptr<LuaTree::Value>(new LuaTree::Boolean(value)));
 	} else {
-		values_.push_back(std::unique_ptr<KeyValuePair>(new KeyValuePair(key, new LuaTree::Boolean(value))));
+		values_.push_back(
+		   std::unique_ptr<KeyValuePair>(new KeyValuePair(key, new LuaTree::Boolean(value))));
 	}
 }
 
@@ -45,14 +46,16 @@ void Element::add_double(const std::string& key, double value) {
 	if (key.empty()) {
 		keyless_values_.push_back(std::unique_ptr<LuaTree::Value>(new LuaTree::Boolean(value)));
 	} else {
-		values_.push_back(std::unique_ptr<KeyValuePair>(new KeyValuePair(key, new LuaTree::Double(value))));
+		values_.push_back(
+		   std::unique_ptr<KeyValuePair>(new KeyValuePair(key, new LuaTree::Double(value))));
 	}
 }
 void Element::add_int(const std::string& key, int value) {
 	if (key.empty()) {
 		keyless_values_.push_back(std::unique_ptr<LuaTree::Value>(new LuaTree::Int(value)));
 	} else {
-		values_.push_back(std::unique_ptr<KeyValuePair>(new KeyValuePair(key, new LuaTree::Int(value))));
+		values_.push_back(
+		   std::unique_ptr<KeyValuePair>(new KeyValuePair(key, new LuaTree::Int(value))));
 	}
 }
 void Element::add_empty(const std::string& key) {
@@ -66,7 +69,8 @@ void Element::add_string(const std::string& key, const std::string& value) {
 	if (key.empty()) {
 		keyless_values_.push_back(std::unique_ptr<LuaTree::Value>(new LuaTree::String(value)));
 	} else {
-		values_.push_back(std::unique_ptr<KeyValuePair>(new KeyValuePair(key, new LuaTree::String(value))));
+		values_.push_back(
+		   std::unique_ptr<KeyValuePair>(new KeyValuePair(key, new LuaTree::String(value))));
 	}
 }
 
@@ -74,7 +78,8 @@ void Element::add_raw(const std::string& key, const std::string& value) {
 	if (key.empty()) {
 		keyless_values_.push_back(std::unique_ptr<LuaTree::Value>(new LuaTree::Raw(value)));
 	} else {
-		values_.push_back(std::unique_ptr<KeyValuePair>(new KeyValuePair(key, new LuaTree::Raw(value))));
+		values_.push_back(
+		   std::unique_ptr<KeyValuePair>(new KeyValuePair(key, new LuaTree::Raw(value))));
 	}
 }
 
@@ -110,13 +115,13 @@ std::string Element::values_as_string(const std::string& tabs) const {
 		for (size_t i = 0; i < values_.size() - 1; ++i) {
 			const auto& element = values_.at(i);
 			const std::string element_as_string = element->value->as_string();
-			result +=
-			   tabs + tab_ + key_to_string(element->key, element_as_string.empty()) + element_as_string + ",\n";
+			result += tabs + tab_ + key_to_string(element->key, element_as_string.empty()) +
+			          element_as_string + ",\n";
 		}
 		const auto& element = values_.at(values_.size() - 1);
 		const std::string element_as_string = element->value->as_string();
-		result += tabs + tab_ + key_to_string(element->key, element_as_string.empty()) + element_as_string +
-		          (children_.empty() ? "\n" : ",\n");
+		result += tabs + tab_ + key_to_string(element->key, element_as_string.empty()) +
+		          element_as_string + (children_.empty() ? "\n" : ",\n");
 	}
 	return result;
 }
