@@ -27,7 +27,8 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
-#include "graphic/animation.h"
+#include "graphic/animation/animation.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
@@ -79,25 +80,25 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		++animation_index;
 		assert(animation_index < animations.size());
 	}
-	const uint32_t anim_time = frame_index * FRAME_LENGTH;
+	const uint32_t anim_time = frame_index * kFrameLength;
 
 	if (frame_index > 0) {
 		// Not the first pic within this animation – draw the previous one
 		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-		                    animations[animation_index].first, anim_time - FRAME_LENGTH,
+		                    animations[animation_index].first, anim_time - kFrameLength,
 		                    &player_color);
 	} else if (animation_index > 0) {
 		// The first pic, but not the first series of animations – draw the last pic of the previous
 		// series
 		dst->blit_animation(
 		   point_on_dst, Widelands::Coords::null(), scale, animations[animation_index - 1].first,
-		   FRAME_LENGTH * (animations[animation_index - 1].second - 1), &player_color);
+		   kFrameLength * (animations[animation_index - 1].second - 1), &player_color);
 	} else if (was) {
 		//  First pic in first series, but there was another building here before –
 		//  get its most fitting picture and draw it instead
 		const uint32_t unocc = was->get_unoccupied_animation();
 		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, unocc,
-		                    FRAME_LENGTH * (g_gr->animations().get_animation(unocc).nr_frames() - 1),
+		                    kFrameLength * (g_gr->animations().get_animation(unocc).nr_frames() - 1),
 		                    &player_color);
 	}
 	// Now blit a segment of the current construction phase from the bottom.

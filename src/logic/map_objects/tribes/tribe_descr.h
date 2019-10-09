@@ -25,7 +25,7 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "graphic/animation.h"
+#include "graphic/animation/animation.h"
 #include "graphic/toolbar_imageset.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
@@ -161,12 +161,19 @@ public:
 		return ship_names_;
 	}
 
+	/// Registers a building with the tribe
 	void add_building(const std::string& buildingname);
+	/// Registers a worker with the tribe and adds it to the bottom of the last worker column
+	void add_worker(const std::string& workername);
 
 	// The custom toolbar imageset if any. Can be nullptr.
 	ToolbarImageset* toolbar_image_set() const;
 
 private:
+	/// Registers a worker with the tribe and adds it to the bottom of the given worker column
+	void add_worker(const std::string& workername,
+	                std::vector<DescriptionIndex>& workers_order_column);
+
 	// Helper function for adding a special worker type (carriers etc.)
 	DescriptionIndex add_special_worker(const std::string& workername);
 	// Helper function for adding a special building type (port etc.)

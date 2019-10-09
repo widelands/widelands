@@ -3,8 +3,10 @@
 ## This script will check out the current master and then pull new translations
 ## from Transifex.
 ## It then updates the developers/authors file.
-## Afterwards, the catalogs will be updated and the result pushed to
-## the master branch on GitHub.
+## Afterwards, the catalogs will be updated.
+## We also run utils/fix_formatting.py to periodically format the source code.
+## Finally, the result will pushed to the master branch on GitHub
+## and to Transifex.
 
 # Exit as soon as any line in the bash script fails.
 set -e
@@ -73,9 +75,6 @@ else
   exit 1;
 fi
 
-# Fix formatting is being run by bunnybot
-# utils/fix_formatting.py
-
 # Update catalogs
 utils/buildcat.py
 
@@ -88,6 +87,9 @@ else
   echo "Failed to update translation stats";
   exit 1;
 fi
+
+# Fix formatting for C++, Lua & Python
+python utils/fix_formatting.py
 
 # Stage changes
 # - Translations

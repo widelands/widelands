@@ -94,7 +94,10 @@ public:
 	/// Adds a specific tribe's configuration.
 	void add_tribe(const LuaTable& table);
 
+	/// Registers a custom scenario building with the tribes
 	void add_custom_building(const LuaTable& table);
+	/// Registers a custom scenario worker with the tribes
+	void add_custom_worker(const LuaTable& table);
 
 	size_t nrbuildings() const;
 	size_t nrtribes() const;

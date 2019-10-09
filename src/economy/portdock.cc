@@ -53,10 +53,7 @@ PortdockDescr::PortdockDescr(char const* const init_name, char const* const init
 }
 
 PortDock::PortDock(Warehouse* wh)
-   : PlayerImmovable(g_portdock_descr),
-     fleet_(nullptr),
-     warehouse_(wh),
-     expedition_ready_(false) {
+   : PlayerImmovable(g_portdock_descr), fleet_(nullptr), warehouse_(wh), expedition_ready_(false) {
 }
 
 PortDock::~PortDock() {
@@ -414,12 +411,14 @@ void PortDock::load_wares(Game& game, Ship& ship) {
 					// The ship is not planning to go there yet, perhaps we can ask for a detour?
 					t = s->estimated_arrival_time(game, *this);
 					assert(s->count_destinations() >= 1);
-					if (time > t + static_cast<int32_t>(direct_route.get_nsteps() * s->count_destinations())) {
+					if (time >
+					    t + static_cast<int32_t>(direct_route.get_nsteps() * s->count_destinations())) {
 						time = kInvalidDestination;
 						break;
 					}
 				} else if (t < time) {
-					// A ship is coming that is planning to visit the ware's destination sooner than this one
+					// A ship is coming that is planning to visit the ware's destination sooner than this
+					// one
 					time = kInvalidDestination;
 					break;
 				}

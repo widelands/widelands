@@ -758,8 +758,8 @@ void Ship::push_destination(Game& game, PortDock& pd) {
 	}
 	destinations_.push_back(std::make_pair(OPtr<PortDock>(&pd), 1));
 	reorder_destinations(game);
-	molog("push_destination(%u): rerouted to portdock %u (carrying %" PRIuS " items)\n",
-			pd.serial(), get_current_destination(game)->serial(), items_.size());
+	molog("push_destination(%u): rerouted to portdock %u (carrying %" PRIuS " items)\n", pd.serial(),
+	      get_current_destination(game)->serial(), items_.size());
 	pd.ship_coming(*this, true);
 	Notifications::publish(NoteShip(this, NoteShip::Action::kDestinationChanged));
 }
@@ -780,11 +780,11 @@ void Ship::pop_destination(Game& game, PortDock& pd) {
 			destinations_.erase(it);
 			reorder_destinations(game);
 			if (destinations_.empty()) {
-				molog("pop_destination(%u): no destinations and %" PRIuS " items left\n",
-						pd.serial(), items_.size());
+				molog("pop_destination(%u): no destinations and %" PRIuS " items left\n", pd.serial(),
+				      items_.size());
 			} else {
 				molog("pop_destination(%u): rerouted to portdock %u (carrying %" PRIuS " items)\n",
-						pd.serial(), get_current_destination(game)->serial(), items_.size());
+				      pd.serial(), get_current_destination(game)->serial(), items_.size());
 			}
 			return;
 		}
@@ -796,15 +796,17 @@ static inline float prioritised_distance(Path& path, uint32_t priority, uint32_t
 	return static_cast<float>(path.get_nsteps() * items) / (priority * priority);
 }
 using DestinationsQueue = std::vector<std::pair<PortDock*, uint32_t>>;
-static std::pair<DestinationsQueue, float> shortest_order(Game* game,
-                                                          Fleet* fleet,
-                                                          bool is_on_dock,
-                                                          void* start,
-                                                          const DestinationsQueue& remaining_to_visit,
-                                                          const std::map<PortDock*, uint32_t> shipping_items) {
+static std::pair<DestinationsQueue, float>
+shortest_order(Game* game,
+               Fleet* fleet,
+               bool is_on_dock,
+               void* start,
+               const DestinationsQueue& remaining_to_visit,
+               const std::map<PortDock*, uint32_t> shipping_items) {
 	const size_t nr_dests = remaining_to_visit.size();
 	assert(nr_dests > 0);
-	auto get_first_path = [game, start, remaining_to_visit, fleet, is_on_dock](Path& path, PortDock& dest) {
+	auto get_first_path = [game, start, remaining_to_visit, fleet, is_on_dock](
+	                         Path& path, PortDock& dest) {
 		if (is_on_dock) {
 			PortDock* p = static_cast<PortDock*>(start);
 			if (p != remaining_to_visit[0].first) {
@@ -818,8 +820,9 @@ static std::pair<DestinationsQueue, float> shortest_order(Game* game,
 		// Recursion break: Only one portdock left
 		Path path;
 		get_first_path(path, *remaining_to_visit[0].first);
-		return std::pair<DestinationsQueue, float>(remaining_to_visit, prioritised_distance(
-				path, remaining_to_visit[0].second, shipping_items.at(remaining_to_visit[0].first)));
+		return std::pair<DestinationsQueue, float>(
+		   remaining_to_visit, prioritised_distance(path, remaining_to_visit[0].second,
+		                                            shipping_items.at(remaining_to_visit[0].first)));
 	}
 
 	std::pair<DestinationsQueue, float> best_result;
@@ -835,7 +838,8 @@ static std::pair<DestinationsQueue, float> shortest_order(Game* game,
 		result.first.emplace(result.first.begin(), pair);
 		Path path;
 		get_first_path(path, *pair.first);
-		const float length = result.second + prioritised_distance(path, pair.second, shipping_items.at(pair.first));
+		const float length =
+		   result.second + prioritised_distance(path, pair.second, shipping_items.at(pair.first));
 		if (length < best_result.second) {
 			best_result.first = result.first;
 			best_result.second = length;
@@ -861,7 +865,8 @@ void Ship::reorder_destinations(Game& game) {
 				++nr_items;
 			}
 		}
-		if (nr_items == 0 && p->count_waiting() == 0 && !p->expedition_started() && (!pd || pd->count_waiting(p) == 0)) {
+		if (nr_items == 0 && p->count_waiting() == 0 && !p->expedition_started() &&
+		    (!pd || pd->count_waiting(p) == 0)) {
 			fallback_dest = p;
 			// We don't need to go there anymore
 			p->ship_coming(*this, false);
@@ -883,8 +888,10 @@ void Ship::reorder_destinations(Game& game) {
 	}
 
 	const OPtr<PortDock> old_dest = destinations_.front().first;
-	DestinationsQueue dq = shortest_order(&game, fleet_, pd,
-			pd ? static_cast<void*>(pd) : static_cast<void*>(this), old_dq, shipping_items).first;
+	DestinationsQueue dq =
+	   shortest_order(&game, fleet_, pd, pd ? static_cast<void*>(pd) : static_cast<void*>(this),
+	                  old_dq, shipping_items)
+	      .first;
 	assert(dq.size() == nr_dests);
 
 	std::vector<std::pair<OPtr<PortDock>, uint32_t>> old_destinations = destinations_;
@@ -913,10 +920,11 @@ void Ship::reorder_destinations(Game& game) {
  * Returns an estimation for the time in arbitrary units from now until the moment when
  * this ship will probably arrive at the given PortDock. This may change later when
  * destinations are added or removed.
- * Returns kInvalidDestination if we are not planning to visit this PortDock or if we are not planning
- * to visit the given intermediate portdock earlier than the destination.
+ * Returns kInvalidDestination if we are not planning to visit this PortDock or if we are not
+ * planning to visit the given intermediate portdock earlier than the destination.
  */
-uint32_t Ship::estimated_arrival_time(Game& game, const PortDock& dest, const PortDock* intermediate) const {
+uint32_t
+Ship::estimated_arrival_time(Game& game, const PortDock& dest, const PortDock* intermediate) const {
 	uint32_t time = 0;
 	const PortDock* iterator = nullptr;
 	for (const auto& pair : destinations_) {
@@ -1089,7 +1097,8 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 	assert(expedition_);
 	if (is_a(Building, game.map().get_fcoords(c).field->get_immovable())) {
 		// Another expedition ship (or an enemy player) was a second faster
-		set_ship_state_and_notify(ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
+		set_ship_state_and_notify(
+		   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
 		return;
 	}
 	get_owner()->force_csite(c, get_owner()->tribe().port());
@@ -1247,8 +1256,7 @@ void Ship::draw(const EditorGameBase& egbase,
 void Ship::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
-	molog("Ship belongs to fleet %u\nlastdock: %s\n",
-	      fleet_ ? fleet_->serial() : 0,
+	molog("Ship belongs to fleet %u\nlastdock: %s\n", fleet_ ? fleet_->serial() : 0,
 	      (lastdock_.is_set()) ? (boost::format("%u (%d x %d)") % lastdock_.serial() %
 	                              lastdock_.get(egbase)->get_positions(egbase)[0].x %
 	                              lastdock_.get(egbase)->get_positions(egbase)[0].y)
@@ -1257,15 +1265,16 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	                             "-");
 	molog("Has %" PRIuS " destination(s):\n", destinations_.size());
 	for (const auto& pair : destinations_) {
-		molog("    · %u (%3dx%3d) (priority %u)\n",
-				pair.first.serial(), pair.first.get(egbase)->get_positions(egbase)[0].x,
-				pair.first.get(egbase)->get_positions(egbase)[0].y, pair.second);
+		molog("    · %u (%3dx%3d) (priority %u)\n", pair.first.serial(),
+		      pair.first.get(egbase)->get_positions(egbase)[0].x,
+		      pair.first.get(egbase)->get_positions(egbase)[0].y, pair.second);
 	}
 
 	molog("In state: %u (%s)\n", static_cast<unsigned int>(ship_state_),
 	      (expedition_) ? "expedition" : "transportation");
 
-	if (!destinations_.empty() && get_position().field->get_immovable() == destinations_.front().first.get(egbase)) {
+	if (!destinations_.empty() &&
+	    get_position().field->get_immovable() == destinations_.front().first.get(egbase)) {
 		molog("Currently in destination portdock\n");
 	}
 
@@ -1378,7 +1387,9 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 		}
 	} else {
 		// TODO(Nordfriese): Remove when we break savegame compatibility
-		destinations_.push_back(std::make_pair(fr.unsigned_32(), 1));
+		if (uint32_t serial = fr.unsigned_32()) {
+			destinations_.push_back(std::make_pair(serial, 1));
+		}
 	}
 
 	items_.resize(fr.unsigned_32());
