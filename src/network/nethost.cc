@@ -135,6 +135,13 @@ void NetHost::send(const std::vector<ConnectionId>& ids, const SendPacket& packe
 	}
 }
 
+#ifdef THE_FUTURE_IS_HERE
+// TODO(Notabilis): Re-enable this code (and in nethost.h / bufferedconnection.cc/h)
+// when our minimal supported version of Boost reaches 1.66.0
+// Currently (2019-10-12) only 1.65.1 is supported by some of the test systems
+// and our compile scripts only requests 1.48. Update the compile script and
+// this code when the test systems support it
+
 // This method is run within a thread
 void NetHost::start_accepting(boost::asio::ip::tcp::acceptor& acceptor) {
 
@@ -145,7 +152,7 @@ void NetHost::start_accepting(boost::asio::ip::tcp::acceptor& acceptor) {
 	// Do an asynchronous wait until something can be read on the acceptor.
 	// If we can read something, then there is a client that wants to connect to us
 	acceptor.async_wait(boost::asio::ip::tcp::acceptor::wait_read,
-						[this, &acceptor](boost::system::error_code ec) {
+						[this, &acceptor](const boost::system::error_code& ec) {
 			if (!ec) {
 				// No error occurred, so try to establish a connection
 				std::unique_ptr<BufferedConnection> conn = BufferedConnection::accept(acceptor);
@@ -159,6 +166,34 @@ void NetHost::start_accepting(boost::asio::ip::tcp::acceptor& acceptor) {
 			start_accepting(acceptor);
 		});
 }
+#else
+// This method is run within a thread
+void NetHost::start_accepting(boost::asio::ip::tcp::acceptor& acceptor, std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair) {
+
+	if (!is_listening()) {
+		return;
+	}
+
+	if (!pair.first) {
+		assert(pair.second == nullptr);
+		pair = BufferedConnection::create_unconnected();
+	}
+
+	acceptor.async_accept(*(pair.second), [this, &acceptor, &pair](const boost::system::error_code& ec) {
+			if (!ec) {
+				// No error occurred, so try to establish a connection
+				pair.first->notify_connected();
+				assert(pair.first->is_connected());
+				std::lock_guard<std::mutex> lock(mutex_accept_);
+				accept_queue_.push(std::move(pair.first));
+				// pair.first is cleared by the std::move
+				pair.second = nullptr;
+			}
+			// Wait for the next client
+			start_accepting(acceptor, pair);
+		});
+}
+#endif // THE_FUTURE_IS_HERE
 
 NetHost::NetHost(const uint16_t port)
    : clients_(), next_id_(1), io_service_(), acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
@@ -172,8 +207,13 @@ NetHost::NetHost(const uint16_t port)
 		log("[NetHost]: Opening a listening IPv6 socket on TCP port %u\n", port);
 	}
 
+#ifdef THE_FUTURE_IS_HERE
 	start_accepting(acceptor_v4_);
 	start_accepting(acceptor_v6_);
+#else
+	start_accepting(acceptor_v4_, accept_pair_v4_);
+	start_accepting(acceptor_v6_, accept_pair_v6_);
+#endif
 	asio_thread_ = std::thread([this]() {
 		log("[NetHost] Starting networking thread\n");
 		io_service_.run();

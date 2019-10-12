@@ -73,7 +73,11 @@ private:
 	 * and add the connection to accept_queue_ and continue waiting.
 	 * @param acceptor The acceptor we should be listening on.
 	 */
+#ifdef THE_FUTURE_IS_HERE
 	void start_accepting(boost::asio::ip::tcp::acceptor& acceptor);
+#else
+	void start_accepting(boost::asio::ip::tcp::acceptor& acceptor, std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair);
+#endif
 
 	/**
 	 * Tries to listen on the given port.
@@ -104,6 +108,13 @@ private:
 	boost::asio::ip::tcp::acceptor acceptor_v4_;
 	/// The acceptor we get IPv6 connection requests to.
 	boost::asio::ip::tcp::acceptor acceptor_v6_;
+
+#ifndef THE_FUTURE_IS_HERE
+	/// Socket and unconnected BuffereConnection that will be used for accepting IPv4 connections
+	std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*> accept_pair_v4_;
+	/// Socket and unconnected BuffereConnection that will be used for accepting IPv6 connections
+	std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*> accept_pair_v6_;
+#endif
 
 	/// A thread used to wait for connections on the acceptor.
 	std::thread asio_thread_;

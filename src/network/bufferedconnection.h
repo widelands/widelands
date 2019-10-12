@@ -118,12 +118,28 @@ public:
 	 */
 	static std::unique_ptr<BufferedConnection> connect(const NetAddress& host);
 
+#ifdef THE_FUTURE_IS_HERE
 	/**
 	 * Tries to create a connection offered by the given acceptor.
 	 * \param host An acceptor which might have a pending connection.
 	 * \return A pointer to a connected \c BufferedConnection object or a \c nullptr.
 	 */
 	static std::unique_ptr<BufferedConnection> accept(boost::asio::ip::tcp::acceptor& acceptor);
+#else
+	/**
+	 * Prepares a socket but does not connect anywhere.
+	 * Connecting the socket has to be done by the caller, afterwards \c notify_connected() has to be called.
+	 * \return A pair with a pointer to an unconnected \c BufferedConnection object and a pointer
+	 *         to the internal socket.
+	 */
+	static std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*> create_unconnected();
+
+	/**
+	 * Informs this class that the internal socket has been connected to something
+	 * by the caller.
+	 */
+	void notify_connected();
+#endif
 
 	/**
 	 * Closes the connection.
@@ -271,12 +287,20 @@ private:
 	 */
 	explicit BufferedConnection(const NetAddress& host);
 
+#ifdef THE_FUTURE_IS_HERE
 	/**
 	 * Tries to create a connection offered by the given acceptor.
 	 * If the connection attempt failed, is_connected() will return \c false.
 	 * \param host An acceptor which might have a pending connection.
 	 */
 	explicit BufferedConnection(boost::asio::ip::tcp::acceptor& acceptor);
+#else
+	/**
+	 * Prepares a socket but does not connect anywhere.
+	 * Connecting the socket has to be done by the caller, afterwards \c notify_connected() has to be called.
+	 */
+	explicit BufferedConnection();
+#endif
 
 	/**
 	 * Tries to send some data.
