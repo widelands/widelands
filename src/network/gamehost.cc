@@ -219,6 +219,7 @@ struct HostChatProvider : public ChatProvider {
 	explicit HostChatProvider(GameHost* const init_host) : h(init_host), kickClient(0) {
 	}
 
+    // TODO(k.halfmann): this deserves a refactoring
 	void send(const std::string& msg) override {
 		ChatMessage c(msg);
 		c.playern = h->get_local_playerposition();
@@ -563,8 +564,9 @@ void GameHost::clear_computer_players() {
 }
 
 void GameHost::init_computer_player(Widelands::PlayerNumber p) {
-	d->computerplayers.push_back(ComputerPlayer::get_implementation(d->game->get_player(p)->get_ai())
-	                                ->instantiate(*d->game, p));
+	d->computerplayers.push_back(
+        ComputerPlayer::get_implementation(d->game->get_player(p)->get_ai())
+	        ->instantiate(*d->game, p));
 }
 
 void GameHost::replace_client_with_ai(uint8_t playernumber, const std::string& ai) {
@@ -600,6 +602,7 @@ void GameHost::init_computer_players() {
 	}
 }
 
+// TODO(k.halfmann): refactor into smaller functions
 void GameHost::run() {
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
@@ -988,7 +991,7 @@ bool GameHost::can_launch() {
 		if (usernum == -1) {
 			return false;
 		}
-		if (users[usernum].ready) {
+		if (!users[usernum].ready) {
 			return false;
 		}
 	}
@@ -1079,7 +1082,7 @@ void GameHost::set_map(const std::string& mapname,
 	broadcast(packet);
 
 	// If possible, offer the map / saved game as transfer
-	// TODO(unknown): not yet able to handle directory type maps / savegames
+	// TODO(unknown): not yet able to handle directory type maps / savegames, would involve zipping in place or such ...
 	if (!g_fs->is_directory(mapfilename)) {
 		// Read in the file
 		FileRead fr;
@@ -1597,15 +1600,15 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	// The client gets its own initial data set.
 	client.playernum = UserSettings::none();
 
-	if (!d->game)  // just in case we allow connection of spectators/players after game start
-		for (uint32_t i = 0; i < d->settings.users.size(); ++i)
+    if (!d->game) { // just in case we allow connection of spectators/players after game start
+        for (uint32_t i = 0; i < d->settings.users.size(); ++i) {
 			if (d->settings.users[i].position == UserSettings::not_connected()) {
 				client.usernum = i;
 				d->settings.users[i].result = Widelands::PlayerEndResult::kUndefined;
 				d->settings.users[i].ready = true;
 				break;
-			}
-	if (client.usernum == -1) {
+    }}}
+	if (client.usernum == -1) { // add the new client / user to the settings
 		client.usernum = d->settings.users.size();
 		UserSettings newuser;
 		newuser.result = Widelands::PlayerEndResult::kUndefined;
@@ -2228,8 +2231,9 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	    case NETCMD_WIN_CONDITION:
 	    case NETCMD_PEACEFUL_MODE:
 	    case NETCMD_LAUNCH:
-		if (!d->game) { // not expected whe game is in progress -> somethings wrong here
-			throw DisconnectException("NO_ACCESS_TO_SERVER");
+		if (!d->game) { // not expected while game is in progress -> something is wrong here
+            log("[Host]: Unexpected command %u while in game\n", cmd);
+			throw DisconnectException("NO_ACCESS_TO_SERVER"); // TODO(k.halfmann): better use "UNEXPECTED_COMMAND" ?
 		}
 		break;
 

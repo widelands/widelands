@@ -183,7 +183,7 @@ private:
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;
 	bool internet_;
-	bool forced_pause_;
+	bool forced_pause_; // TODO(k.halfmann): this is never really used?
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMEHOST_H
