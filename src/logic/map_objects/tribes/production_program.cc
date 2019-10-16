@@ -289,13 +289,13 @@ bool ProductionProgram::ActReturn::Negation::evaluate(const ProductionSite& ps) 
 }
 
 // Just a dummy to satisfy the superclass interface. Returns an empty string.
-std::string ProductionProgram::ActReturn::Negation::description(const Tribes&) const {
-	return "";
+std::string ProductionProgram::ActReturn::Negation::description(const Tribes& t) const {
+	return operand->description_negation(t);
 }
 
 // Just a dummy to satisfy the superclass interface. Returns an empty string.
-std::string ProductionProgram::ActReturn::Negation::description_negation(const Tribes&) const {
-	return "";
+std::string ProductionProgram::ActReturn::Negation::description_negation(const Tribes& t) const {
+	return operand->description(t);
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate(const ProductionSite& ps) const {

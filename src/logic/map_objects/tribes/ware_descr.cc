@@ -24,7 +24,6 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "graphic/animation.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 
@@ -36,7 +35,7 @@ namespace Widelands {
  */
 WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table)
    : MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname, table),
-     ai_hints_(new WareHints(*table.get_table("preciousness"))) {
+     ai_hints_(new WareHints(table.get_string("name"), *table.get_table("preciousness"))) {
 	if (helptext_script().empty()) {
 		throw GameDataError("Ware %s has no helptext script", name().c_str());
 	}

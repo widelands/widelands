@@ -2,7 +2,7 @@
 
 set -e
 
-USAGE="Usage: $0 <clang|gcc|gcc6> <debug|release> <bzr_repo_directory>"
+USAGE="Usage: $0 <clang|gcc|gcc6> <debug|release> <git_repo_directory>"
 USE_ASAN="OFF"
 
 if [ ! -z "$3" ]; then
@@ -77,13 +77,15 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
    fi
 fi
 
-REVISION=`bzr revno $SOURCE_DIR`
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+REVISION=`python $DIR/../detect_revision.py`
+
 DESTINATION="WidelandsRelease"
 
 if [[ -f $SOURCE_DIR/WL_RELEASE ]]; then
    WLVERSION="$(cat $SOURCE_DIR/WL_RELEASE)"
 else
-   WLVERSION="r$REVISION"
+   WLVERSION="$REVISION"
 fi
 
 echo ""
@@ -108,7 +110,7 @@ function MakeDMG {
 
    echo "Creating DMG ..."
    if [ "$TYPE" == "Release" ]; then
-      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_$WLVERSION.dmg"
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg"
    elif [ "$TYPE" == "Debug" ]; then
       hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}_${TYPE}.dmg"
    fi
@@ -181,7 +183,7 @@ function BuildWidelands() {
    PREFIX_PATH+=";$(brew --prefix zlib)"
    PREFIX_PATH+=";/usr/local"
    PREFIX_PATH+=";/usr/local/Homebrew"
-   
+
    export PATH="$(brew --prefix gettext)/bin:$PATH"
    export SDL2DIR="$(brew --prefix sdl2)"
    export SDL2IMAGEDIR="$(brew --prefix sdl2_image)"
