@@ -339,7 +339,7 @@ BufferedConnection::BufferedConnection(boost::asio::ip::tcp::acceptor& acceptor)
 	}
 	assert(is_connected());
 
-	log("[BufferedConnection]: Accepting connection from %s.\n",
+	log("[BufferedConnection] Accepting connection from %s.\n",
 		socket_.remote_endpoint().address().to_string().c_str());
 
 	start_receiving();
@@ -358,7 +358,7 @@ BufferedConnection::BufferedConnection()
 void BufferedConnection::notify_connected() {
 	assert(is_connected());
 
-	log("[BufferedConnection]: Connection to %s.\n",
+	log("[BufferedConnection] Connection to %s.\n",
 		socket_.remote_endpoint().address().to_string().c_str());
 
 	start_receiving();

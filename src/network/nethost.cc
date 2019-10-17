@@ -69,7 +69,7 @@ void NetHost::stop_listening() {
 	static const auto do_stop = [](boost::asio::ip::tcp::acceptor& acceptor) {
 		boost::system::error_code ec;
 		if (acceptor.is_open()) {
-			log("[NetHost]: Closing a listening IPv%d socket.\n", get_ip_version(acceptor));
+			log("[NetHost] Closing a listening IPv%d socket.\n", get_ip_version(acceptor));
 			acceptor.close(ec);
 		}
 		// Ignore errors
@@ -194,11 +194,11 @@ NetHost::NetHost(const uint16_t port)
 
 	if (open_acceptor(
 	       &acceptor_v4_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))) {
-		log("[NetHost]: Opening a listening IPv4 socket on TCP port %u\n", port);
+		log("[NetHost] Opening a listening IPv4 socket on TCP port %u\n", port);
 	}
 	if (open_acceptor(
 	       &acceptor_v6_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v6(), port))) {
-		log("[NetHost]: Opening a listening IPv6 socket on TCP port %u\n", port);
+		log("[NetHost] Opening a listening IPv6 socket on TCP port %u\n", port);
 	}
 
 #if BOOST_VERSION >= 106600
