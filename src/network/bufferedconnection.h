@@ -118,7 +118,7 @@ public:
 	 */
 	static std::unique_ptr<BufferedConnection> connect(const NetAddress& host);
 
-#ifdef THE_FUTURE_IS_HERE
+#if BOOST_VERSION >= 106600
 	/**
 	 * Tries to create a connection offered by the given acceptor.
 	 * \param host An acceptor which might have a pending connection.
@@ -287,7 +287,7 @@ private:
 	 */
 	explicit BufferedConnection(const NetAddress& host);
 
-#ifdef THE_FUTURE_IS_HERE
+#if BOOST_VERSION >= 106600
 	/**
 	 * Tries to create a connection offered by the given acceptor.
 	 * If the connection attempt failed, is_connected() will return \c false.

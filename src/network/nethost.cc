@@ -135,13 +135,7 @@ void NetHost::send(const std::vector<ConnectionId>& ids, const SendPacket& packe
 	}
 }
 
-#ifdef THE_FUTURE_IS_HERE
-// TODO(Notabilis): Re-enable this code (and in nethost.h / bufferedconnection.cc/h)
-// when our minimal supported version of Boost reaches 1.66.0
-// Currently (2019-10-12) only 1.65.1 is supported by some of the test systems
-// and our compile scripts only requests 1.48. Update the compile script and
-// this code when the test systems support it
-
+#if BOOST_VERSION >= 106600
 // This method is run within a thread
 void NetHost::start_accepting(boost::asio::ip::tcp::acceptor& acceptor) {
 
@@ -193,7 +187,7 @@ void NetHost::start_accepting(boost::asio::ip::tcp::acceptor& acceptor, std::pai
 			start_accepting(acceptor, pair);
 		});
 }
-#endif // THE_FUTURE_IS_HERE
+#endif // Boost version check
 
 NetHost::NetHost(const uint16_t port)
    : clients_(), next_id_(1), io_service_(), acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
@@ -207,10 +201,12 @@ NetHost::NetHost(const uint16_t port)
 		log("[NetHost]: Opening a listening IPv6 socket on TCP port %u\n", port);
 	}
 
-#ifdef THE_FUTURE_IS_HERE
+#if BOOST_VERSION >= 106600
+	log("[NetHost] Using the new acceptors\n");
 	start_accepting(acceptor_v4_);
 	start_accepting(acceptor_v6_);
 #else
+	log("[NetHost] Using the old acceptors\n");
 	start_accepting(acceptor_v4_, accept_pair_v4_);
 	start_accepting(acceptor_v6_, accept_pair_v6_);
 #endif

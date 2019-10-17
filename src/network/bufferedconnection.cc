@@ -97,7 +97,7 @@ std::unique_ptr<BufferedConnection> BufferedConnection::connect(const NetAddress
 	return ptr;
 }
 
-#ifdef THE_FUTURE_IS_HERE
+#if BOOST_VERSION >= 106600
 std::unique_ptr<BufferedConnection> BufferedConnection::accept(boost::asio::ip::tcp::acceptor& acceptor) {
 	assert(acceptor.is_open());
 	std::unique_ptr<BufferedConnection> ptr(new BufferedConnection(acceptor));
@@ -324,7 +324,7 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 	}
 }
 
-#ifdef THE_FUTURE_IS_HERE
+#if BOOST_VERSION >= 106600
 BufferedConnection::BufferedConnection(boost::asio::ip::tcp::acceptor& acceptor)
    : io_service_(), socket_(io_service_), receive_buffer_(), currently_sending_(false) {
 
