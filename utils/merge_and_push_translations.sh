@@ -97,7 +97,7 @@ git add po/*/*.po po/*/*.pot data/i18n/locales/*.json debian/translations/*.json
 # - Authors
 git add data/txts/*.lua || true
 # - Appdata
-git add debian/widelands.appdata.xml debian/org.widelands.widelands.desktop || true
+git add debian/org.widelands.Widelands.appdata.xml debian/org.widelands.Widelands.desktop || true
 # - Statistics
 git add data/i18n/translation_stats.conf || true
 

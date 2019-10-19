@@ -2,7 +2,7 @@
 Version=1.0
 Type=Application
 GENERIC_NAME_COMMENT_HOOK
-Icon=widelands
+Icon=org.widelands.Widelands
 TryExec=widelands
 Exec=widelands
 Categories=Game;StrategyGame;
@@ -10,4 +10,4 @@ Keywords=Game;RTS;Real-time;Strategy;
 Terminal=false
 StartupNotify=true
 StartupWMClass=widelands
-X-Flatpak-RenamedFrom=org.widelands.widelands.desktop;
+X-Flatpak-RenamedFrom=org.widelands.widelands.desktop;org.widelands.widelands;

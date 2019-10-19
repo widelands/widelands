@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2016 The Widelands Development Team <widelands-dev_at_lists.launchpad.net> -->
 <component type="desktop-application">
-  <id>org.widelands.widelands</id>
+  <id>org.widelands.Widelands</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <name>Widelands</name>
@@ -285,8 +285,9 @@ Widelands ayrıca size yapay zeka ile meydan okur.
   <provides>
     <binary>widelands</binary>
     <id>org.widelands.widelands.desktop</id>
+    <id>org.widelands.widelands</id>
   </provides>
-  <launchable type="desktop-id">org.widelands.widelands.desktop</launchable>
+  <launchable type="desktop-id">org.widelands.Widelands.desktop</launchable>
   <releases>
     <release date="2019-05-02" version="Build 20"/>
     <release date="2016-11-11" version="Build 19"/>
