@@ -32,6 +32,7 @@
   <update_contact>widelands-dev_at_lists.launchpad.net</update_contact>
   <provides>
     <binary>widelands</binary>
+    <id>org.widelands.widelands.desktop</id>
   </provides>
   <launchable type="desktop-id">org.widelands.widelands.desktop</launchable>
   <releases>
