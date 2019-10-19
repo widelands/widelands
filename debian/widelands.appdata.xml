@@ -281,7 +281,6 @@ Widelands ayrıca size yapay zeka ile meydan okur.
       <caption>Map Selection Screen</caption>
     </screenshot>
   </screenshots>
-  <url type="homepage">https://wl.widelands.org/</url>
   <update_contact>widelands-dev_at_lists.launchpad.net</update_contact>
   <provides>
     <binary>widelands</binary>
@@ -403,10 +402,12 @@ Widelands ayrıca size yapay zeka ile meydan okur.
   <translation type="gettext">widelands_editor</translation>
   <translation type="gettext">win_conditions</translation>
   <translation type="gettext">world</translation>
-  <url type="bugtracker">https://bugs.launchpad.net/widelands</url>
-  <url type="donation">https://wl.widelands.org/wiki/The%20Widelands%20Project/</url>
-  <url type="help">https://wl.widelands.org/wiki/Game%20Manual/</url>
-  <url type="translate">https://wl.widelands.org/wiki/TranslatingWidelands/</url>
+  <url type="bugtracker">https://github.com/widelands/widelands/issues</url>
+  <url type="donation">https://www.widelands.org/wiki/The%20Widelands%20Project/</url>
+  <url type="faq">https://www.widelands.org/wiki/Technical%20FAQ/</url>
+  <url type="help">https://www.widelands.org/wiki/Game%20Manual/</url>
+  <url type="homepage">https://www.widelands.org/</url>
+  <url type="translate">https://www.widelands.org/wiki/TranslatingWidelands/</url>
   <developer_name>The Widelands Development Team</developer_name>
   <content_rating type="oars-1.0">
     <content_attribute id="violence-cartoon">moderate</content_attribute>
