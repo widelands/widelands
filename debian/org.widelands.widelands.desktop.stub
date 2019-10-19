@@ -7,3 +7,6 @@ TryExec=widelands
 Exec=widelands
 Categories=Game;StrategyGame;
 Keywords=Game;RTS;Real-time;Strategy;
+Terminal=false
+StartupNotify=true
+StartupWMClass=widelands
