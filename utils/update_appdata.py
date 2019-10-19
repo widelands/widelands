@@ -60,7 +60,7 @@ print('- Reading textdomains:')
 textdomain_path = os.path.normpath(
     base_path + '/po')
 textdomains = []
-textdomain_path_contents = os.listdir(textdomain_path)
+textdomain_path_contents = sorted(os.listdir(textdomain_path), key=str.lower)
 for textdomain in textdomain_path_contents:
     if os.path.isdir(os.path.normpath(textdomain_path + '/' + textdomain)):
         textdomains.append(textdomain)
