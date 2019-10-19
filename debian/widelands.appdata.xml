@@ -4,7 +4,6 @@
   <id>org.widelands.widelands</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
-  <icon type="stock">widelands</icon>
   <name>Widelands</name>
   <name xml:lang="ko">와이드랜드</name>
   <summary>A real-time build-up strategy game</summary>

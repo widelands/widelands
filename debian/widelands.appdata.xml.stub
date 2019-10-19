@@ -4,7 +4,6 @@
   <id>org.widelands.widelands</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
-  <icon type="stock">widelands</icon>
   SUMMARY_DESCRIPTION_HOOK
   <screenshots>
     <screenshot type="default">
