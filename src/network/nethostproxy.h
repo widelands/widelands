@@ -24,7 +24,7 @@
 #include <memory>
 
 #include "network/nethost_interface.h"
-#include "network/netrelayconnection.h"
+#include "network/bufferedconnection.h"
 
 /**
  * Represents a host in-game, but talks through the 'wlnr' relay binary.
@@ -52,8 +52,8 @@ public:
 	void close(ConnectionId id) override;
 	bool try_accept(ConnectionId* new_id) override;
 	std::unique_ptr<RecvPacket> try_receive(ConnectionId id) override;
-	void send(ConnectionId id, const SendPacket& packet) override;
-	void send(const std::vector<ConnectionId>& ids, const SendPacket& packet) override;
+	void send(ConnectionId id, const SendPacket& packet, NetPriority priority = NetPriority::kNormal) override;
+	void send(const std::vector<ConnectionId>& ids, const SendPacket& packet, NetPriority priority = NetPriority::kNormal) override;
 
 private:
 	/**
@@ -69,7 +69,7 @@ private:
 
 	void receive_commands();
 
-	std::unique_ptr<NetRelayConnection> conn_;
+	std::unique_ptr<BufferedConnection> conn_;
 
 	/// A list of clients which want to connect.
 	std::queue<ConnectionId> accept_;
