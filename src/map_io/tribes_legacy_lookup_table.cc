@@ -65,3 +65,13 @@ const std::string& TribesLegacyLookupTable::lookup_building(const std::string& b
 const std::string& TribesLegacyLookupTable::lookup_ship(const std::string& ship) const {
 	return lookup_entry(ship, ships_);
 }
+
+const std::string&
+TribesLegacyLookupTable::lookup_entry(const std::string& entry,
+                                      const std::map<std::string, std::string>& table) const {
+	const auto& i = table.find(entry);
+	if (i != table.end()) {
+		return i->second;
+	}
+	return entry;
+}
