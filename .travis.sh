@@ -42,9 +42,8 @@ documentation)
    ;;
 formatting)
    # Check whether the code is properly formatted
-   pushd ../utils
-   ./fix_formatting.py
-   popd
+   cd ..
+   .utils/fix_formatting.py
    if [[ -n $(git status -s) ]]; then
      echo "Code not properly formatted. Run './utils/fix_formatting.py' or install the githooks"
      exit 1 # CodeStyle warnings.
