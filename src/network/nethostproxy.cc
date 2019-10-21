@@ -91,7 +91,9 @@ void NetHostProxy::send(const ConnectionId id, const SendPacket& packet, NetPrio
 	send(vec, packet, priority);
 }
 
-void NetHostProxy::send(const std::vector<ConnectionId>& ids, const SendPacket& packet, NetPriority priority) {
+void NetHostProxy::send(const std::vector<ConnectionId>& ids,
+                        const SendPacket& packet,
+                        NetPriority priority) {
 	if (ids.empty()) {
 		return;
 	}
@@ -146,7 +148,8 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	conn_->receive(&cmd);
 
 	if (cmd != RelayCommand::kWelcome) {
-		log("[NetHostProxy] Handshaking error (2): Received command code %i from relay server instead of Welcome (%i)\n",
+		log("[NetHostProxy] Handshaking error (2): Received command code %i from relay server "
+		    "instead of Welcome (%i)\n",
 		    static_cast<uint8_t>(cmd), static_cast<uint8_t>(RelayCommand::kWelcome));
 		conn_->close();
 		conn_.reset();
@@ -166,7 +169,8 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	uint8_t relay_proto_version;
 	conn_->receive(&relay_proto_version);
 	if (relay_proto_version != kRelayProtocolVersion) {
-		log("[NetHostProxy] Handshaking error (4): Relay server uses protocol version %i instead of our version %i\n",
+		log("[NetHostProxy] Handshaking error (4): Relay server uses protocol version %i instead of "
+		    "our version %i\n",
 		    static_cast<uint8_t>(relay_proto_version), static_cast<uint8_t>(kRelayProtocolVersion));
 		conn_->close();
 		conn_.reset();
@@ -186,7 +190,8 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	std::string game_name;
 	conn_->receive(&game_name);
 	if (game_name != name) {
-		log("[NetHostProxy] Handshaking error (6): Relay wants to connect us to game '%s' instead of our game '%s'\n",
+		log("[NetHostProxy] Handshaking error (6): Relay wants to connect us to game '%s' instead of "
+		    "our game '%s'\n",
 		    game_name.c_str(), name.c_str());
 		conn_->close();
 		conn_.reset();
@@ -283,7 +288,8 @@ void NetHostProxy::receive_commands() {
 	default:
 		// Other commands should not be possible.
 		// Then is either something wrong with the protocol or there is an implementation mistake
-		log("[NetHostProxy] Received command code %i from relay server, do not know what to do with it\n",
+		log("[NetHostProxy] Received command code %i from relay server, do not know what to do with "
+		    "it\n",
 		    static_cast<uint8_t>(cmd));
 		NEVER_HERE();
 	}

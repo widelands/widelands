@@ -22,9 +22,9 @@
 
 #include <memory>
 
+#include "network/bufferedconnection.h"
 #include "network/netclient_interface.h"
 #include "network/network.h"
-#include "network/bufferedconnection.h"
 
 /**
  * NetClient manages the network connection for a network game in which this computer
