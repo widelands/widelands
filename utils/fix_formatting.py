@@ -74,7 +74,7 @@ def main():
         call(['git', 'add', filename])
     print(' done.')
 
-    print 'Formatting finished.'
+    print('Formatting finished.')
     return 0
 
 
