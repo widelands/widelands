@@ -39,11 +39,10 @@ TribesLegacyLookupTable::TribesLegacyLookupTable()
         {"reed_tiny", "reedfield_tiny"},
         {"reed_ripe", "reedfield_ripe"},
      },
-	 // Buildings
+     // Buildings
      buildings_{},
-	 // Ships
-	 ships_{}
-     {
+     // Ships
+     ships_{} {
 }
 
 const std::string& TribesLegacyLookupTable::lookup_worker(const std::string& worker) const {
