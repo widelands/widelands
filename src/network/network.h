@@ -231,10 +231,6 @@ private:
  */
 // The values assigned to the entries are arbitrary, only their order is important
 // No "enum class" on purpose since this has to be interpreted as ints (I need a known ordering)
-enum NetPriority : uint8_t {
-	kPing = 10,
-	kNormal = 50,
-	kFiletransfer = 100
-};
+enum NetPriority : uint8_t { kPing = 10, kNormal = 50, kFiletransfer = 100 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_H

@@ -21,7 +21,6 @@ NetClient::~NetClient() {
 	}
 }
 
-
 bool NetClient::is_connected() const {
 	return conn_ != nullptr && conn_->is_connected();
 }
@@ -46,7 +45,6 @@ void NetClient::send(const SendPacket& packet, NetPriority priority) {
 	}
 	conn_->send(priority, packet);
 }
-
 
 NetClient::NetClient(const NetAddress& host) {
 
