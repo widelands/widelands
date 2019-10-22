@@ -77,7 +77,8 @@ bool BufferedConnection::Peeker::recvpacket() {
 
 	// RecvPackets have their size coded in their first two bytes.
 	// See SendPacket in network.cc
-	const uint16_t size = conn_->receive_buffer_[peek_pointer_ + 0] << 8 | conn_->receive_buffer_[peek_pointer_ + 1];
+	const uint16_t size =
+	   conn_->receive_buffer_[peek_pointer_ + 0] << 8 | conn_->receive_buffer_[peek_pointer_ + 1];
 	assert(size >= 2);
 
 	if (conn_->receive_buffer_.size() >= peek_pointer_ + size) {
@@ -98,7 +99,8 @@ std::unique_ptr<BufferedConnection> BufferedConnection::connect(const NetAddress
 }
 
 #if BOOST_VERSION >= 106600
-std::unique_ptr<BufferedConnection> BufferedConnection::accept(boost::asio::ip::tcp::acceptor& acceptor) {
+std::unique_ptr<BufferedConnection>
+BufferedConnection::accept(boost::asio::ip::tcp::acceptor& acceptor) {
 	assert(acceptor.is_open());
 	std::unique_ptr<BufferedConnection> ptr(new BufferedConnection(acceptor));
 	if (!ptr->is_connected()) {
@@ -107,7 +109,8 @@ std::unique_ptr<BufferedConnection> BufferedConnection::accept(boost::asio::ip::
 	return ptr;
 }
 #else
-std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*> BufferedConnection::create_unconnected() {
+std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>
+BufferedConnection::create_unconnected() {
 	std::unique_ptr<BufferedConnection> ptr(new BufferedConnection());
 	assert(!ptr->is_connected());
 	return std::make_pair(std::move(ptr), &(ptr->socket_));
@@ -202,7 +205,8 @@ void BufferedConnection::receive(RecvPacket* packet) {
 	assert(receive_buffer_.size() >= size);
 
 	packet->buffer.clear();
-	packet->buffer.insert(packet->buffer.end(), receive_buffer_.begin() + 2, receive_buffer_.begin() + size);
+	packet->buffer.insert(
+	   packet->buffer.end(), receive_buffer_.begin() + 2, receive_buffer_.begin() + size);
 	packet->index_ = 0;
 
 	receive_buffer_.erase(receive_buffer_.begin(), receive_buffer_.begin() + size);
@@ -219,7 +223,7 @@ void BufferedConnection::start_sending() {
 	}
 
 	// Find something to send
-	std::queue<std::vector<uint8_t>> *nonempty_queue = nullptr;
+	std::queue<std::vector<uint8_t>>* nonempty_queue = nullptr;
 	for (auto& entry : buffers_to_send_) {
 		if (!entry.second.empty()) {
 			nonempty_queue = &entry.second;
@@ -238,31 +242,30 @@ void BufferedConnection::start_sending() {
 	// Start writing to the socket. This might block if the network buffer within
 	// the operating system is currently full.
 	// When done with sending, call the lambda method defined below
-	boost::asio::async_write(socket_,
-		boost::asio::buffer(nonempty_queue->front()),
+	boost::asio::async_write(
+	   socket_, boost::asio::buffer(nonempty_queue->front()),
 #ifndef NDEBUG
-		[this, nonempty_queue](boost::system::error_code ec, std::size_t length) {
+	   [this, nonempty_queue](boost::system::error_code ec, std::size_t length) {
 #else
-		[this, nonempty_queue](boost::system::error_code ec, std::size_t /*length*/) {
+	   [this, nonempty_queue](boost::system::error_code ec, std::size_t /*length*/) {
 #endif
-			std::unique_lock<std::mutex> lock2(mutex_send_);
-			currently_sending_ = false;
-			if (!ec) {
-				// No error: Remove the buffer from the queue
-				assert(nonempty_queue != nullptr);
-				assert(!nonempty_queue->empty());
-				assert(nonempty_queue->front().size() == length);
-				nonempty_queue->pop();
-				lock2.unlock();
-				// Try to send some more data
-				start_sending();
-			} else {
-				throw wexception(
-						"[BufferedConnection] Error when sending packet to host (error %i: %s)",
-						ec.value(), ec.message().c_str());
-			}
-
-		});
+		   std::unique_lock<std::mutex> lock2(mutex_send_);
+		   currently_sending_ = false;
+		   if (!ec) {
+			   // No error: Remove the buffer from the queue
+			   assert(nonempty_queue != nullptr);
+			   assert(!nonempty_queue->empty());
+			   assert(nonempty_queue->front().size() == length);
+			   nonempty_queue->pop();
+			   lock2.unlock();
+			   // Try to send some more data
+			   start_sending();
+		   } else {
+			   throw wexception(
+			      "[BufferedConnection] Error when sending packet to host (error %i: %s)", ec.value(),
+			      ec.message().c_str());
+		   }
+	   });
 }
 
 // This method is run within a thread
@@ -272,28 +275,28 @@ void BufferedConnection::start_receiving() {
 		return;
 	}
 
-	socket_.async_read_some(boost::asio::buffer(asio_receive_buffer_, kNetworkBufferSize),
-		[this](boost::system::error_code ec, std::size_t length) {
-			if (!ec) {
-				assert(length > 0);
-				assert(length <= kNetworkBufferSize);
-				// Has read something
-				std::unique_lock<std::mutex> lock(mutex_receive_);
-				for (size_t i = 0; i < length; ++i) {
-					receive_buffer_.push_back(asio_receive_buffer_[i]);
-				}
-				lock.unlock();
-				// Try to send some more data
-				start_receiving();
-			} else if (ec == boost::asio::error::eof) {
-				// Connection has been closed, nothing more to do here
-			} else {
-				throw wexception(
-						"[BufferedConnection] Error when receiving data from host (error %i: %s)",
-						ec.value(), ec.message().c_str());
-			}
-
-		});
+	socket_.async_read_some(
+	   boost::asio::buffer(asio_receive_buffer_, kNetworkBufferSize),
+	   [this](boost::system::error_code ec, std::size_t length) {
+		   if (!ec) {
+			   assert(length > 0);
+			   assert(length <= kNetworkBufferSize);
+			   // Has read something
+			   std::unique_lock<std::mutex> lock(mutex_receive_);
+			   for (size_t i = 0; i < length; ++i) {
+				   receive_buffer_.push_back(asio_receive_buffer_[i]);
+			   }
+			   lock.unlock();
+			   // Try to send some more data
+			   start_receiving();
+		   } else if (ec == boost::asio::error::eof) {
+			   // Connection has been closed, nothing more to do here
+		   } else {
+			   throw wexception(
+			      "[BufferedConnection] Error when receiving data from host (error %i: %s)",
+			      ec.value(), ec.message().c_str());
+		   }
+	   });
 }
 
 BufferedConnection::BufferedConnection(const NetAddress& host)
@@ -316,7 +319,7 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 			log("[BufferedConnection] Starting networking thread\n");
 			io_service_.run();
 			log("[BufferedConnection] Stopping networking thread\n");
-			});
+		});
 	} else {
 		log("failed.\n");
 		socket_.close();
@@ -333,14 +336,15 @@ BufferedConnection::BufferedConnection(boost::asio::ip::tcp::acceptor& acceptor)
 	assert(ec != boost::asio::error::would_block);
 	if (ec) {
 		// Some error
-		log("[BufferedConnection] Error when trying to accept connection: %s.\n", ec.message().c_str());
+		log("[BufferedConnection] Error when trying to accept connection: %s.\n",
+		    ec.message().c_str());
 		assert(!is_connected());
 		return;
 	}
 	assert(is_connected());
 
 	log("[BufferedConnection] Accepting connection from %s.\n",
-		socket_.remote_endpoint().address().to_string().c_str());
+	    socket_.remote_endpoint().address().to_string().c_str());
 
 	start_receiving();
 	asio_thread_ = std::thread([this]() {
@@ -348,7 +352,7 @@ BufferedConnection::BufferedConnection(boost::asio::ip::tcp::acceptor& acceptor)
 		log("[BufferedConnection] Starting networking thread\n");
 		io_service_.run();
 		log("[BufferedConnection] Stopping networking thread\n");
-		});
+	});
 }
 #else
 BufferedConnection::BufferedConnection()
@@ -359,7 +363,7 @@ void BufferedConnection::notify_connected() {
 	assert(is_connected());
 
 	log("[BufferedConnection] Connection to %s.\n",
-		socket_.remote_endpoint().address().to_string().c_str());
+	    socket_.remote_endpoint().address().to_string().c_str());
 
 	start_receiving();
 	asio_thread_ = std::thread([this]() {
@@ -367,7 +371,7 @@ void BufferedConnection::notify_connected() {
 		log("[BufferedConnection] Starting networking thread\n");
 		io_service_.run();
 		log("[BufferedConnection] Stopping networking thread\n");
-		});
+	});
 }
 #endif
 

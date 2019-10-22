@@ -23,8 +23,8 @@
 #include <map>
 #include <memory>
 
-#include "network/netclient_interface.h"
 #include "network/bufferedconnection.h"
+#include "network/netclient_interface.h"
 
 /**
  * Represents a client in-game, but talks through the 'wlnr' relay binary.

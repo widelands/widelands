@@ -43,7 +43,7 @@ std::unique_ptr<RecvPacket> NetClientProxy::try_receive() {
 
 void NetClientProxy::send(const SendPacket& packet, NetPriority priority) {
 
-conn_->send(priority, RelayCommand::kToHost, packet);
+	conn_->send(priority, RelayCommand::kToHost, packet);
 }
 
 NetClientProxy::NetClientProxy(const NetAddress& address, const std::string& name)
