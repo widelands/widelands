@@ -205,7 +205,8 @@ bool Tribes::tribe_exists(DescriptionIndex index) const {
 }
 
 DescriptionIndex Tribes::safe_building_index(const std::string& buildingname) const {
-	const DescriptionIndex result = building_index(legacy_lookup_table_.get()->lookup_building(buildingname));
+	const DescriptionIndex result =
+	   building_index(legacy_lookup_table_.get()->lookup_building(buildingname));
 	if (!building_exists(result)) {
 		throw GameDataError("Unknown building type \"%s\"", buildingname.c_str());
 	}
@@ -213,7 +214,8 @@ DescriptionIndex Tribes::safe_building_index(const std::string& buildingname) co
 }
 
 DescriptionIndex Tribes::safe_immovable_index(const std::string& immovablename) const {
-	const DescriptionIndex result = immovable_index(legacy_lookup_table_.get()->lookup_immovable(immovablename));
+	const DescriptionIndex result =
+	   immovable_index(legacy_lookup_table_.get()->lookup_immovable(immovablename));
 	if (!immovable_exists(result)) {
 		throw GameDataError("Unknown immovable type \"%s\"", immovablename.c_str());
 	}
@@ -245,7 +247,8 @@ DescriptionIndex Tribes::safe_ware_index(const std::string& warename) const {
 }
 
 DescriptionIndex Tribes::safe_worker_index(const std::string& workername) const {
-	const DescriptionIndex result = worker_index(legacy_lookup_table_.get()->lookup_worker(workername));
+	const DescriptionIndex result =
+	   worker_index(legacy_lookup_table_.get()->lookup_worker(workername));
 	if (!worker_exists(result)) {
 		throw GameDataError("Unknown worker type \"%s\"", workername.c_str());
 	}
