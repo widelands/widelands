@@ -24,8 +24,8 @@
 #include <memory>
 #include <thread>
 
-#include "network/nethost_interface.h"
 #include "network/bufferedconnection.h"
+#include "network/nethost_interface.h"
 
 /**
  * NetHost manages the client connections of a network game in which this computer
@@ -51,8 +51,12 @@ public:
 	void close(ConnectionId id) override;
 	bool try_accept(ConnectionId* new_id) override;
 	std::unique_ptr<RecvPacket> try_receive(ConnectionId id) override;
-	void send(ConnectionId id, const SendPacket& packet, NetPriority priority = NetPriority::kNormal) override;
-	void send(const std::vector<ConnectionId>& ids, const SendPacket& packet, NetPriority priority = NetPriority::kNormal) override;
+	void send(ConnectionId id,
+	          const SendPacket& packet,
+	          NetPriority priority = NetPriority::kNormal) override;
+	void send(const std::vector<ConnectionId>& ids,
+	          const SendPacket& packet,
+	          NetPriority priority = NetPriority::kNormal) override;
 
 	/**
 	 * Stops listening for connections.
@@ -76,7 +80,9 @@ private:
 #if BOOST_VERSION >= 106600
 	void start_accepting(boost::asio::ip::tcp::acceptor& acceptor);
 #else
-	void start_accepting(boost::asio::ip::tcp::acceptor& acceptor, std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair);
+	void start_accepting(
+	   boost::asio::ip::tcp::acceptor& acceptor,
+	   std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair);
 #endif
 
 	/**
@@ -95,7 +101,6 @@ private:
 	 */
 	bool open_acceptor(boost::asio::ip::tcp::acceptor* acceptor,
 	                   const boost::asio::ip::tcp::endpoint& endpoint);
-
 
 	/// A map linking client ids to the respective network connections.
 	/// Client ids not in this map should be considered invalid.

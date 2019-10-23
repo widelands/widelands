@@ -146,23 +146,26 @@ void NetHost::start_accepting(boost::asio::ip::tcp::acceptor& acceptor) {
 	// Do an asynchronous wait until something can be read on the acceptor.
 	// If we can read something, then there is a client that wants to connect to us
 	acceptor.async_wait(boost::asio::ip::tcp::acceptor::wait_read,
-						[this, &acceptor](const boost::system::error_code& ec) {
-			if (!ec) {
-				// No error occurred, so try to establish a connection
-				std::unique_ptr<BufferedConnection> conn = BufferedConnection::accept(acceptor);
-				if (conn) {
-					assert(conn->is_connected());
-					std::lock_guard<std::mutex> lock(mutex_accept_);
-					accept_queue_.push(std::move(conn));
-				}
-			}
-			// Wait for the next client
-			start_accepting(acceptor);
-		});
+	                    [this, &acceptor](const boost::system::error_code& ec) {
+		                    if (!ec) {
+			                    // No error occurred, so try to establish a connection
+			                    std::unique_ptr<BufferedConnection> conn =
+			                       BufferedConnection::accept(acceptor);
+			                    if (conn) {
+				                    assert(conn->is_connected());
+				                    std::lock_guard<std::mutex> lock(mutex_accept_);
+				                    accept_queue_.push(std::move(conn));
+			                    }
+		                    }
+		                    // Wait for the next client
+		                    start_accepting(acceptor);
+	                    });
 }
 #else
 // This method is run within a thread
-void NetHost::start_accepting(boost::asio::ip::tcp::acceptor& acceptor, std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair) {
+void NetHost::start_accepting(
+   boost::asio::ip::tcp::acceptor& acceptor,
+   std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair) {
 
 	if (!is_listening()) {
 		return;
@@ -173,21 +176,22 @@ void NetHost::start_accepting(boost::asio::ip::tcp::acceptor& acceptor, std::pai
 		pair = BufferedConnection::create_unconnected();
 	}
 
-	acceptor.async_accept(*(pair.second), [this, &acceptor, &pair](const boost::system::error_code& ec) {
-			if (!ec) {
-				// No error occurred, so try to establish a connection
-				pair.first->notify_connected();
-				assert(pair.first->is_connected());
-				std::lock_guard<std::mutex> lock(mutex_accept_);
-				accept_queue_.push(std::move(pair.first));
-				// pair.first is cleared by the std::move
-				pair.second = nullptr;
-			}
-			// Wait for the next client
-			start_accepting(acceptor, pair);
-		});
+	acceptor.async_accept(
+	   *(pair.second), [this, &acceptor, &pair](const boost::system::error_code& ec) {
+		   if (!ec) {
+			   // No error occurred, so try to establish a connection
+			   pair.first->notify_connected();
+			   assert(pair.first->is_connected());
+			   std::lock_guard<std::mutex> lock(mutex_accept_);
+			   accept_queue_.push(std::move(pair.first));
+			   // pair.first is cleared by the std::move
+			   pair.second = nullptr;
+		   }
+		   // Wait for the next client
+		   start_accepting(acceptor, pair);
+	   });
 }
-#endif // Boost version check
+#endif  // Boost version check
 
 NetHost::NetHost(const uint16_t port)
    : clients_(), next_id_(1), io_service_(), acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
@@ -214,7 +218,7 @@ NetHost::NetHost(const uint16_t port)
 		log("[NetHost] Starting networking thread\n");
 		io_service_.run();
 		log("[NetHost] Stopping networking thread\n");
-		});
+	});
 }
 
 bool NetHost::open_acceptor(boost::asio::ip::tcp::acceptor* acceptor,

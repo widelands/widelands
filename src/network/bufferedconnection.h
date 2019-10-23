@@ -128,11 +128,12 @@ public:
 #else
 	/**
 	 * Prepares a socket but does not connect anywhere.
-	 * Connecting the socket has to be done by the caller, afterwards \c notify_connected() has to be called.
-	 * \return A pair with a pointer to an unconnected \c BufferedConnection object and a pointer
-	 *         to the internal socket.
+	 * Connecting the socket has to be done by the caller, afterwards \c notify_connected() has to be
+	 * called. \return A pair with a pointer to an unconnected \c BufferedConnection object and a
+	 * pointer to the internal socket.
 	 */
-	static std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*> create_unconnected();
+	static std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>
+	create_unconnected();
 
 	/**
 	 * Informs this class that the internal socket has been connected to something
@@ -216,8 +217,7 @@ public:
 	 calls send_T_() again, but with one argument less. This results in a "recursive" call
 	 until no more arguments are left.
 	 */
-	template<typename... Targs>
-	void send(NetPriority priority, const Targs&... Fargs) {
+	template <typename... Targs> void send(NetPriority priority, const Targs&... Fargs) {
 
 		std::vector<uint8_t> v;
 		v.reserve(kNetworkBufferSize);
@@ -225,21 +225,22 @@ public:
 		send_T_(v, Fargs...);
 
 		std::unique_lock<std::mutex> lock(mutex_send_);
-		// The map will automatically create the vector for the requested priority if it does not exist
+		// The map will automatically create the vector for the requested priority if it does not
+		// exist
 		buffers_to_send_[priority].push(v);
 		lock.unlock();
 		start_sending();
 	}
 
 private:
-
 	// I love this language... Sorry for the next functions,
 	// but you have to admit that this is cool! :-D
 
 	/**
 	 * Base function that is called when no arguments are left.
 	 */
-	void send_T_(std::vector<uint8_t>&) {}
+	void send_T_(std::vector<uint8_t>&) {
+	}
 
 	/**
 	 * Takes one element (here: a RelayCommand) and transforms it to an uint8_t.
@@ -248,32 +249,32 @@ private:
 	 * @param Fargs Further arguments that will be handled in the next iteration.
 	 */
 	/// @{
-	template<typename... Targs>
+	template <typename... Targs>
 	void send_T_(std::vector<uint8_t>& v, RelayCommand cmd, const Targs&... Fargs) {
 		v.push_back(static_cast<uint8_t>(cmd));
 		send_T_(v, Fargs...);
 	}
 
-	template<typename... Targs>
+	template <typename... Targs>
 	void send_T_(std::vector<uint8_t>& v, uint8_t u, const Targs&... Fargs) {
 		v.push_back(u);
 		send_T_(v, Fargs...);
 	}
 
-	template<typename... Targs>
+	template <typename... Targs>
 	void send_T_(std::vector<uint8_t>& v, const std::string& str, const Targs&... Fargs) {
 		v.insert(v.end(), str.cbegin(), str.cend());
 		v.push_back(0);
 		send_T_(v, Fargs...);
 	}
 
-	template<typename... Targs>
+	template <typename... Targs>
 	void send_T_(std::vector<uint8_t>& v, const std::vector<uint8_t>& data, const Targs&... Fargs) {
 		v.insert(v.end(), data.begin(), data.end());
 		send_T_(v, Fargs...);
 	}
 
-	template<typename... Targs>
+	template <typename... Targs>
 	void send_T_(std::vector<uint8_t>& v, const SendPacket& packet, const Targs&... Fargs) {
 		v.insert(v.end(), packet.get_data(), packet.get_data() + packet.get_size());
 		send_T_(v, Fargs...);
@@ -297,7 +298,8 @@ private:
 #else
 	/**
 	 * Prepares a socket but does not connect anywhere.
-	 * Connecting the socket has to be done by the caller, afterwards \c notify_connected() has to be called.
+	 * Connecting the socket has to be done by the caller, afterwards \c notify_connected() has to be
+	 * called.
 	 */
 	explicit BufferedConnection();
 #endif
