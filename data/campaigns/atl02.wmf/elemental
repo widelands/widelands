@@ -1,4 +1,4 @@
-# Automatically created by Widelands master-4587_Release_x64 (Release)
+# Automatically created by Widelands master-5536_Release_x64 (Release)
 
 [global]
 packet_version="1"
@@ -7,5 +7,7 @@ map_h="176"
 nr_players="3"
 name="Struggling for a new home again"
 author="SirVer,Nasenbaer,hessenfarmer"
-descr=_"After the quick escape from the drowning island, the atlanteans around Jundlina are faced with new challenges."
+descr="After the quick escape from the drowning island, the atlanteans around Jundlina are faced with new challenges."
+hint=
 background="campaigns/atl02.wmf/pics/background.jpg"
+tags=

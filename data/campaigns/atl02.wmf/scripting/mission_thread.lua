@@ -12,12 +12,26 @@ function iron()
       atlanteans_toolsmithy = 1,
    }) do sleep(3731) end
    tools.done = true
+   msg_boxes(tools_available)
+   run(mining)
 
 
 end
 
+function mining()
+   mining = add_campaign_objective(obj_mining)
+   while not check_for_buildings(p1, {
+      atlanteans_coalmine = 1,
+      atlanteans_ironmine = 1,
+      atlanteans_gold = 1
+   }) do sleep(3731) end
+   mining.done = true
+   msg_boxes(mining_established)
+
+end
+
 function spidercloth()
-   while count_in_warehouses("spidercloth") > 1 do sleep(2323) end
+   while count_in_warehouses("spidercloth") > 2 do sleep(2323) end
    msg_boxes(spidercloth_1)
    
    if #p1:get_buildings("atlanteans_farm") < 1 then

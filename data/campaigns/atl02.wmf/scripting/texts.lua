@@ -44,6 +44,14 @@ obj_tools = {
       p(_[[Most of our tools have been lost in the ship tragedy. Our people will not be able to fulfill their duties without proper tools. Luckily we still have some iron ore and plenty of coal. Build a production of tools, it is a prerequisite for success on island. Don't forget to build a smelter as well.]]))
 }
 
+obj_mining = {
+   name = "obj_mining",
+   title = _ "Explore the mountains for ressources",
+   number = 1,
+   body = objective_text(_"Build Mines",
+      p(_[[As we are able to make tools again, our supply of mining ressources needs to be replenished soon. Explore the mountains and build at least one mine of each type to mine coal, iron and gold.]]))
+}
+
 obj_explore = {
    name = "obj_explore",
    title = _"Explore the surroundings",
@@ -155,7 +163,7 @@ spidercloth_3 = {
       title = _"Opol Seeks Out Jundlina",
       body = opol(
          -- TRANSLATORS: Opol
-         _([[May Satul warm you, Jundlina! The weaving mill and spider farm buildings are complete and the weavers’ guild can start their work again. I promise we will deliver the finest cloth and some tabards soon. Maybe we can build a gold spinning mill later on to make better tabards as well.]]))
+         _([[Jundlina, may Satul warm you! The weaving mill and spider farm buildings are complete and the weavers’ guild can start their work again. I promise we will deliver the finest cloth and some tabards soon. Maybe we can build a gold spinning mill later on to make better tabards as well.]]))
    },
    {
       title = _"Jundlina Cheers",
@@ -170,13 +178,13 @@ enemy_1 = {
       title = _"Sidolus Reports foreign inhabitants",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina! The weaving mill, gold spinning mill and spider farm buildings are complete and the weavers’ guild can start their work again. I promise we will deliver the finest cloth and some tabards soon.]]))
+         _([[May Satul warm you, Jundlina! I have some disturbing news. We have seen some foreign reigned land, But we don't know what to expect from the foreigners.]]))
    },
    {
       title = _"Jundlina Cheers",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[This is good news indeed, Opol. Youmay go back to your work now, Opol, and may Satul warm you and the weavers' guild!]]))
+         _([[Sidolus, I agree this is very concerning. We need to find out more. We definitly need to send out a scout to gather some information.]]))
    }
 }
 
@@ -185,13 +193,13 @@ allies = {
       title = _"Allies?",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina! The weaving mill, gold spinning mill and spider farm buildings are complete and the weavers’ guild can start their work again. I promise we will deliver the finest cloth and some tabards soon.]]))
+         _([[May Satul warm you, Jundlina! We have made contact with the foreigners. They are in big trouble as they are in war with a mighty tribe in the north. They ask us for support.]]))
    },
    {
       title = _"Jundlina Cheers",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[This is good news indeed, Opol. Youmay go back to your work now, Opol, and may Satul warm you and the weavers' guild!]]))
+         _([[Sidolus, as we could need any ally we can get we should help them. Let's see what we can do for them. However we should improve our own military strength to become independent of others.]]))
    }
 }
 
@@ -199,7 +207,7 @@ infrastructure_1 = {
    {
       title = _"Building material ensured",
       body = loftomor(
-         -- TRANSLATORS: Sidolus
+         -- TRANSLATORS: loftomor
          _([[May Satul warm you, Jundlina! We have finished our supply of building materials.]]))
    },
    {
@@ -207,5 +215,36 @@ infrastructure_1 = {
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
          _([[This is good news indeed, Loftomor. Now we can think of constructing more sophisticated buildings to make our economy grow. Please advice if you feel we are missing necessary buildings.]]))
+   }
+}
+
+tools_available = {
+   {
+      title = _"Tool Supply Ensured",
+      body = loftomor(
+         -- TRANSLATORS: loftomor
+         _([[Jundlina, may Satul warm you! We have made some progress in building up our tool industry.]]))
+   },
+   {
+      title = _"Jundlina Enchanted",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[This is good news indeed, Loftomor. This enables us to operate all the buildings we are going to build in our new home. But now we should really look to get some resources from the mountains.]]))
+         .. new_objectives(obj_mining)
+   }
+}
+
+mining_established = {
+   {
+      title = _"Mining Established",
+      body = loftomor(
+         -- TRANSLATORS: loftomor
+         _([[Jundlina, may Satul warm you! Another issue solved. We have found some ressources and build a mine of each type.]]))
+   },
+   {
+      title = _"Jundlina is Excited",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[Well done, Loftomor, well done. May Satul warm our strong and brave miners. But now we need to ensure we can feed them. We need to built up bakeries and smokeries and all buildings to supply them.]]))
    }
 }
