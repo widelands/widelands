@@ -53,8 +53,8 @@ tribes:new_worker_type {
          basename = "work",
          fps = 10,
          frames = 75,
-         columns = 10,
-         rows = 8,
+         columns = 5,
+         rows = 15,
          sound_effect = {
             path = "sound/hammering/hammering",
             priority = 64
