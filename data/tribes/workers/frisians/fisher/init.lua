@@ -68,8 +68,8 @@ tribes:new_worker_type {
          basename = "fishing",
          fps = 10,
          frames = 30,
-         columns = 6,
-         rows = 5,
+         columns = 5,
+         rows = 6,
          hotspot = {9, 23}
       },
       release = {

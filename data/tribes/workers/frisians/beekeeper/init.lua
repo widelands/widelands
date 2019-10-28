@@ -51,8 +51,8 @@ tribes:new_worker_type {
          basename = "beeswarm",
          fps = 50,
          frames = 100,
-         columns = 10,
-         rows = 10,
+         columns = 5,
+         rows = 20,
          hotspot = {26, 31}
       },
    },

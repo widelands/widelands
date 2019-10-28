@@ -20,7 +20,17 @@ tribes:new_carrier_type {
    ware_hotspot = {0, 18},
 
    spritesheets = {
-      walk = walkload = {
+      walkload = {
+         directory = dirname,
+         basename = "walk",
+         fps = 20,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         directional = true,
+         hotspot = {21, 43}
+      },
+      walk = {
          directory = dirname,
          basename = "walk",
          fps = 20,

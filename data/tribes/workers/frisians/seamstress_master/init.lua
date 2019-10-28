@@ -37,7 +37,7 @@ tribes:new_worker_type {
       idle = {
          directory = dirname,
          basename = "idle",
-         hotspot = {, }
+         hotspot = {9, 23}
       },
    },
 }
