@@ -361,6 +361,206 @@ UI::Button* LoadOrSaveGame::delete_button() {
 	return delete_;
 }
 
+bool LoadOrSaveGame::is_valid_gametype(SavegameData& gamedata) {
+	// Skip singleplayer games in multiplayer mode and vice versa
+	if (filetype_ != FileType::kReplay && filetype_ != FileType::kShowAll) {
+		if (filetype_ == FileType::kGameMultiPlayer) {
+			if (gamedata.gametype == GameController::GameType::kSingleplayer) {
+				return false;
+			}
+		} else if ((gamedata.gametype != GameController::GameType::kSingleplayer) &&
+		           (gamedata.gametype != GameController::GameType::kReplay)) {
+			return false;
+		}
+	}
+	return true;
+}
+
+void LoadOrSaveGame::add_time_info(SavegameData& gamedata, Widelands::GamePreloadPacket& gpdp) {
+	gamedata.savetimestamp = gpdp.get_savetimestamp();
+	time_t t;
+	time(&t);
+	struct tm* currenttime = localtime(&t);
+	// We need to put these into variables because of a sideeffect of the localtime function.
+	int8_t current_year = currenttime->tm_year;
+	int8_t current_month = currenttime->tm_mon;
+	int8_t current_day = currenttime->tm_mday;
+
+	struct tm* savedate = localtime(&gamedata.savetimestamp);
+
+	if (gamedata.savetimestamp > 0) {
+		if (savedate->tm_year == current_year && savedate->tm_mon == current_month &&
+		    savedate->tm_mday == current_day) {  // Today
+
+			// Adding the 0 padding in a separate statement so translators won't have to deal
+			// with it
+			const std::string minute = (boost::format("%02u") % savedate->tm_min).str();
+
+			gamedata.savedatestring =
+			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
+			      hour:minute */
+			   (boost::format(_("Today, %1%:%2%")) % savedate->tm_hour % minute).str();
+			gamedata.savedonstring =
+			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
+			      hour:minute. This is part of a list. */
+			   (boost::format(_("saved today at %1%:%2%")) % savedate->tm_hour % minute).str();
+		} else if ((savedate->tm_year == current_year && savedate->tm_mon == current_month &&
+		            savedate->tm_mday == current_day - 1) ||
+		           (savedate->tm_year == current_year - 1 && savedate->tm_mon == 11 &&
+		            current_month == 0 && savedate->tm_mday == 31 &&
+		            current_day == 1)) {  // Yesterday
+			// Adding the 0 padding in a separate statement so translators won't have to deal
+			// with it
+			const std::string minute = (boost::format("%02u") % savedate->tm_min).str();
+
+			gamedata.savedatestring =
+			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
+			      hour:minute */
+			   (boost::format(_("Yesterday, %1%:%2%")) % savedate->tm_hour % minute).str();
+			gamedata.savedonstring =
+			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
+			      hour:minute. This is part of a list. */
+			   (boost::format(_("saved yesterday at %1%:%2%")) % savedate->tm_hour % minute).str();
+		} else {  // Older
+			gamedata.savedatestring =
+			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
+			      month day, year */
+			   (boost::format(_("%1% %2%, %3%")) % localize_month(savedate->tm_mon) %
+			    savedate->tm_mday % (1900 + savedate->tm_year))
+			      .str();
+			gamedata.savedonstring =
+			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
+			      month (short name) day (number), year (number). This is part of a list. */
+			   (boost::format(_("saved on %1% %2%, %3%")) % savedate->tm_mday %
+			    localize_month(savedate->tm_mon) % (1900 + savedate->tm_year))
+			      .str();
+		}
+	}
+}
+
+void LoadOrSaveGame::add_general_information(SavegameData& gamedata,
+                                             Widelands::GamePreloadPacket& gpdp) {
+	gamedata.gametype = gpdp.get_gametype();
+	gamedata.set_mapname(gpdp.get_mapname());
+	gamedata.set_gametime(gpdp.get_gametime());
+	gamedata.set_nrplayers(gpdp.get_number_of_players());
+	gamedata.version = gpdp.get_version();
+}
+
+void LoadOrSaveGame::create_and_add_valid_entry(SavegameData& gamedata) {
+	games_data_.push_back(gamedata);
+	UI::Table<uintptr_t const>::EntryRecord& te = table_.add(games_data_.size() - 1);
+	te.set_string(0, gamedata.savedatestring);
+
+	if (filetype_ != FileType::kGameSinglePlayer) {
+		std::string gametypestring;
+		switch (gamedata.gametype) {
+		case GameController::GameType::kSingleplayer:
+			/** TRANSLATORS: "Single Player" entry in the Game Mode table column. */
+			/** TRANSLATORS: "Keep this to 6 letters maximum. */
+			/** TRANSLATORS: A tooltip will explain the abbreviation. */
+			/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
+			gametypestring = _("SP");
+			break;
+		case GameController::GameType::kNetHost:
+			/** TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column. */
+			/** TRANSLATORS: "Keep this to 2 letters maximum. */
+			/** TRANSLATORS: A tooltip will explain the abbreviation. */
+			/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
+			/** TRANSLATORS: %1% is the number of players */
+			gametypestring = (boost::format(_("H (%1%)")) % gamedata.nrplayers).str();
+			break;
+		case GameController::GameType::kNetClient:
+			/** TRANSLATORS: "Multiplayer" entry in the Game Mode table column. */
+			/** TRANSLATORS: "Keep this to 2 letters maximum. */
+			/** TRANSLATORS: A tooltip will explain the abbreviation. */
+			/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
+			/** TRANSLATORS: %1% is the number of players */
+			gametypestring = (boost::format(_("MP (%1%)")) % gamedata.nrplayers).str();
+			break;
+		case GameController::GameType::kReplay:
+			gametypestring = "";
+			break;
+		case GameController::GameType::kUndefined:
+			NEVER_HERE();
+		}
+		te.set_string(1, gametypestring);
+		if (filetype_ == FileType::kReplay) {
+			const std::string map_basename =
+			   show_filenames_ ?
+			      map_filename(gamedata.filename, gamedata.mapname, localize_autosave_) :
+			      gamedata.mapname;
+			te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) % map_basename %
+			                  gamedata.gametime)
+			                    .str());
+		} else {
+			te.set_string(2, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
+		}
+	} else {
+		te.set_string(1, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
+	}
+}
+
+void LoadOrSaveGame::create_and_add_error_entry(SavegameData& gamedata, std::string errormessage) {
+	boost::replace_all(errormessage, "\n", "<br>");
+	gamedata.errormessage =
+	   ((boost::format("<p>%s</p><p>%s</p><p>%s</p>"))
+	    /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
+	    % _("This file has the wrong format and can’t be loaded."
+	        " Maybe it was created with an older version of Widelands.")
+	    /** TRANSLATORS: This text is on a separate line with an error message below */
+	    % _("Error message:") % errormessage)
+	      .str();
+
+	gamedata.mapname = FileSystem::filename_without_ext(gamedata.filename.c_str());
+	games_data_.push_back(gamedata);
+
+	UI::Table<uintptr_t const>::EntryRecord& te = table_.add(games_data_.size() - 1);
+	te.set_string(0, "");
+	if (filetype_ != FileType::kGameSinglePlayer) {
+		te.set_string(1, "");
+		/** TRANSLATORS: Prefix for incompatible files in load game screens */
+		te.set_string(2, (boost::format(_("Incompatible: %s")) % gamedata.mapname).str());
+	} else {
+		te.set_string(1, (boost::format(_("Incompatible: %s")) % gamedata.mapname).str());
+	}
+}
+
+void LoadOrSaveGame::add_entry(const std::string& gamefilename) {
+	SavegameData gamedata;
+	Widelands::GamePreloadPacket gpdp;
+	std::string savename = gamefilename;
+
+	if (filetype_ == FileType::kReplay) {
+		savename += kSavegameExtension;
+	}
+
+	if (!is_valid_gametype(gamedata)) {
+		return;
+	}
+
+	if (!g_fs->file_exists(savename.c_str())) {
+		return;
+	}
+
+	gamedata.filename = gamefilename;
+
+	try {
+		Widelands::GameLoader gl(savename.c_str(), game_);
+		gl.preload_game(gpdp);
+
+		add_general_information(gamedata, gpdp);
+		add_time_info(gamedata, gpdp);
+
+		gamedata.wincondition = gpdp.get_localized_win_condition();
+		gamedata.minimap_path = gpdp.get_minimap_path();
+
+		create_and_add_valid_entry(gamedata);
+	} catch (const std::exception& e) {
+		create_and_add_error_entry(gamedata, e.what());
+	}
+}
+
 void LoadOrSaveGame::fill_table() {
 
 	clear_selections();
@@ -380,186 +580,8 @@ void LoadOrSaveGame::fill_table() {
 		});
 	}
 
-	Widelands::GamePreloadPacket gpdp;
-
 	for (const std::string& gamefilename : gamefiles) {
-		SavegameData gamedata;
-
-		std::string savename = gamefilename;
-		if (filetype_ == FileType::kReplay) {
-			savename += kSavegameExtension;
-		}
-
-		if (!g_fs->file_exists(savename.c_str())) {
-			continue;
-		}
-
-		gamedata.filename = gamefilename;
-
-		try {
-			Widelands::GameLoader gl(savename.c_str(), game_);
-			gl.preload_game(gpdp);
-
-			gamedata.gametype = gpdp.get_gametype();
-
-			// Skip singleplayer games in multiplayer mode and vice versa
-			if (filetype_ != FileType::kReplay && filetype_ != FileType::kShowAll) {
-				if (filetype_ == FileType::kGameMultiPlayer) {
-					if (gamedata.gametype == GameController::GameType::kSingleplayer) {
-						continue;
-					}
-				} else if ((gamedata.gametype != GameController::GameType::kSingleplayer) &&
-				           (gamedata.gametype != GameController::GameType::kReplay)) {
-					continue;
-				}
-			}
-
-			gamedata.set_mapname(gpdp.get_mapname());
-			gamedata.set_gametime(gpdp.get_gametime());
-			gamedata.set_nrplayers(gpdp.get_number_of_players());
-			gamedata.version = gpdp.get_version();
-
-			gamedata.savetimestamp = gpdp.get_savetimestamp();
-			time_t t;
-			time(&t);
-			struct tm* currenttime = localtime(&t);
-			// We need to put these into variables because of a sideeffect of the localtime function.
-			int8_t current_year = currenttime->tm_year;
-			int8_t current_month = currenttime->tm_mon;
-			int8_t current_day = currenttime->tm_mday;
-
-			struct tm* savedate = localtime(&gamedata.savetimestamp);
-
-			if (gamedata.savetimestamp > 0) {
-				if (savedate->tm_year == current_year && savedate->tm_mon == current_month &&
-				    savedate->tm_mday == current_day) {  // Today
-
-					// Adding the 0 padding in a separate statement so translators won't have to deal
-					// with it
-					const std::string minute = (boost::format("%02u") % savedate->tm_min).str();
-
-					gamedata.savedatestring =
-					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-					      hour:minute */
-					   (boost::format(_("Today, %1%:%2%")) % savedate->tm_hour % minute).str();
-					gamedata.savedonstring =
-					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-					      hour:minute. This is part of a list. */
-					   (boost::format(_("saved today at %1%:%2%")) % savedate->tm_hour % minute).str();
-				} else if ((savedate->tm_year == current_year && savedate->tm_mon == current_month &&
-				            savedate->tm_mday == current_day - 1) ||
-				           (savedate->tm_year == current_year - 1 && savedate->tm_mon == 11 &&
-				            current_month == 0 && savedate->tm_mday == 31 &&
-				            current_day == 1)) {  // Yesterday
-					// Adding the 0 padding in a separate statement so translators won't have to deal
-					// with it
-					const std::string minute = (boost::format("%02u") % savedate->tm_min).str();
-
-					gamedata.savedatestring =
-					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-					      hour:minute */
-					   (boost::format(_("Yesterday, %1%:%2%")) % savedate->tm_hour % minute).str();
-					gamedata.savedonstring =
-					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-					      hour:minute. This is part of a list. */
-					   (boost::format(_("saved yesterday at %1%:%2%")) % savedate->tm_hour % minute)
-					      .str();
-				} else {  // Older
-					gamedata.savedatestring =
-					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-					      month day, year */
-					   (boost::format(_("%1% %2%, %3%")) % localize_month(savedate->tm_mon) %
-					    savedate->tm_mday % (1900 + savedate->tm_year))
-					      .str();
-					gamedata.savedonstring =
-					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-					      month (short name) day (number), year (number). This is part of a list. */
-					   (boost::format(_("saved on %1% %2%, %3%")) % savedate->tm_mday %
-					    localize_month(savedate->tm_mon) % (1900 + savedate->tm_year))
-					      .str();
-				}
-			}
-
-			gamedata.wincondition = gpdp.get_localized_win_condition();
-			gamedata.minimap_path = gpdp.get_minimap_path();
-			games_data_.push_back(gamedata);
-
-			UI::Table<uintptr_t const>::EntryRecord& te = table_.add(games_data_.size() - 1);
-			te.set_string(0, gamedata.savedatestring);
-
-			if (filetype_ != FileType::kGameSinglePlayer) {
-				std::string gametypestring;
-				switch (gamedata.gametype) {
-				case GameController::GameType::kSingleplayer:
-					/** TRANSLATORS: "Single Player" entry in the Game Mode table column. */
-					/** TRANSLATORS: "Keep this to 6 letters maximum. */
-					/** TRANSLATORS: A tooltip will explain the abbreviation. */
-					/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
-					gametypestring = _("SP");
-					break;
-				case GameController::GameType::kNetHost:
-					/** TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column. */
-					/** TRANSLATORS: "Keep this to 2 letters maximum. */
-					/** TRANSLATORS: A tooltip will explain the abbreviation. */
-					/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
-					/** TRANSLATORS: %1% is the number of players */
-					gametypestring = (boost::format(_("H (%1%)")) % gamedata.nrplayers).str();
-					break;
-				case GameController::GameType::kNetClient:
-					/** TRANSLATORS: "Multiplayer" entry in the Game Mode table column. */
-					/** TRANSLATORS: "Keep this to 2 letters maximum. */
-					/** TRANSLATORS: A tooltip will explain the abbreviation. */
-					/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
-					/** TRANSLATORS: %1% is the number of players */
-					gametypestring = (boost::format(_("MP (%1%)")) % gamedata.nrplayers).str();
-					break;
-				case GameController::GameType::kReplay:
-					gametypestring = "";
-					break;
-				case GameController::GameType::kUndefined:
-					NEVER_HERE();
-				}
-				te.set_string(1, gametypestring);
-				if (filetype_ == FileType::kReplay) {
-					const std::string map_basename =
-					   show_filenames_ ?
-					      map_filename(gamedata.filename, gamedata.mapname, localize_autosave_) :
-					      gamedata.mapname;
-					te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) %
-					                  map_basename % gamedata.gametime)
-					                    .str());
-				} else {
-					te.set_string(
-					   2, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
-				}
-			} else {
-				te.set_string(1, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
-			}
-		} catch (const std::exception& e) {
-			std::string errormessage = e.what();
-			boost::replace_all(errormessage, "\n", "<br>");
-			gamedata.errormessage =
-			   ((boost::format("<p>%s</p><p>%s</p><p>%s</p>"))
-			    /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
-			    % _("This file has the wrong format and can’t be loaded."
-			        " Maybe it was created with an older version of Widelands.")
-			    /** TRANSLATORS: This text is on a separate line with an error message below */
-			    % _("Error message:") % errormessage)
-			      .str();
-
-			gamedata.mapname = FileSystem::filename_without_ext(gamedata.filename.c_str());
-			games_data_.push_back(gamedata);
-
-			UI::Table<uintptr_t const>::EntryRecord& te = table_.add(games_data_.size() - 1);
-			te.set_string(0, "");
-			if (filetype_ != FileType::kGameSinglePlayer) {
-				te.set_string(1, "");
-				/** TRANSLATORS: Prefix for incompatible files in load game screens */
-				te.set_string(2, (boost::format(_("Incompatible: %s")) % gamedata.mapname).str());
-			} else {
-				te.set_string(1, (boost::format(_("Incompatible: %s")) % gamedata.mapname).str());
-			}
-		}
+		add_entry(gamefilename);
 	}
 	table_.sort();
 	table_.focus();

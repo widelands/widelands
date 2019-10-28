@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "game_io/game_preload_packet.h"
 #include "logic/game.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
@@ -100,6 +101,12 @@ private:
 	UI::Button* delete_;
 
 	Widelands::Game& game_;
+	void add_entry(const std::string& gamefilename);
+	bool is_valid_gametype(SavegameData& gamedata);
+	void add_time_info(SavegameData& gamedata, Widelands::GamePreloadPacket& gpdp);
+	void add_general_information(SavegameData& gamedata, Widelands::GamePreloadPacket& gpdp);
+	void create_and_add_valid_entry(SavegameData& gamedata);
+	void create_and_add_error_entry(SavegameData& gamedata, std::string errormessage);
 };
 
 #endif  // end of include guard: WL_WUI_LOAD_OR_SAVE_GAME_H
