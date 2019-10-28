@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-09-27 07:12+0000\n"
+"POT-Creation-Date: 2019-10-09 07:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -29,6 +29,11 @@ msgid "Help"
 msgstr ""
 
 #. TRANSLATORS: This is an access key combination.
+#: ../../data/scripting/editor/editor_controls.lua:18
+msgctxt "hotkey"
+msgid "Esc"
+msgstr ""
+
 #: ../../data/scripting/editor/editor_controls.lua:18
 msgid "Toggle main menu"
 msgstr ""

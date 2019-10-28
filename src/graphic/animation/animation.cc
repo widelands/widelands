@@ -29,18 +29,20 @@
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 
-const std::map<float, std::string> Animation::kSupportedScales { {0.5, "_0.5"}, {1, "_1"}, {2, "_2"}, {4, "_4"}};
+const std::map<float, std::string> Animation::kSupportedScales{
+   {0.5, "_0.5"}, {1, "_1"}, {2, "_2"}, {4, "_4"}};
 
 Animation::MipMapEntry::MipMapEntry() : has_playercolor_masks(false) {
 }
 
-Animation::Animation(const LuaTable& table) :
-	representative_frame_(table.has_key("representative_frame") ? table.get_int("representative_frame") : 0),
-	hotspot_(table.get_vector<std::string, int>("hotspot")),
-	frametime_(table.has_key("fps") ? (1000 / get_positive_int(table, "fps")) : kFrameLength),
-	play_once_(table.has_key("play_once") ? table.get_bool("play_once") : false),
-	sound_effect_(kNoSoundEffect),
-	sound_priority_(kFxPriorityLowest) {
+Animation::Animation(const LuaTable& table)
+   : representative_frame_(
+        table.has_key("representative_frame") ? table.get_int("representative_frame") : 0),
+     hotspot_(table.get_vector<std::string, int>("hotspot")),
+     frametime_(table.has_key("fps") ? (1000 / get_positive_int(table, "fps")) : kFrameLength),
+     play_once_(table.has_key("play_once") ? table.get_bool("play_once") : false),
+     sound_effect_(kNoSoundEffect),
+     sound_priority_(kFxPriorityLowest) {
 	try {
 		// Sound
 		if (table.has_key("sound_effect")) {
@@ -79,8 +81,8 @@ Rectf Animation::source_rectangle(const int percent_from_bottom, float scale) co
 }
 
 Rectf Animation::destination_rectangle(const Vector2f& position,
-                                                const Rectf& source_rect,
-                                                const float scale) const {
+                                       const Rectf& source_rect,
+                                       const float scale) const {
 	const float best_scale = find_best_scale(scale);
 	return Rectf(position.x - (hotspot_.x - source_rect.x / best_scale) * scale,
 	             position.y - (hotspot_.y - source_rect.y / best_scale) * scale,
@@ -148,7 +150,7 @@ void Animation::trigger_sound(uint32_t time, const Widelands::Coords& coords) co
 	}
 }
 
-std::set<float> Animation::available_scales() const  {
+std::set<float> Animation::available_scales() const {
 	std::set<float> result;
 	for (const auto& scale : kSupportedScales) {
 		if (mipmaps_.count(scale.first) == 1) {
@@ -159,12 +161,12 @@ std::set<float> Animation::available_scales() const  {
 }
 
 void Animation::blit(uint32_t time,
-                              const Widelands::Coords& coords,
-                              const Rectf& source_rect,
-                              const Rectf& destination_rect,
-                              const RGBColor* clr,
-                              Surface* target,
-                              float scale) const {
+                     const Widelands::Coords& coords,
+                     const Rectf& source_rect,
+                     const Rectf& destination_rect,
+                     const RGBColor* clr,
+                     Surface* target,
+                     float scale) const {
 	mipmap_entry(find_best_scale(scale))
 	   .blit(current_frame(time), source_rect, destination_rect, clr, target);
 	trigger_sound(time, coords);

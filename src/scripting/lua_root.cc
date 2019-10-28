@@ -540,7 +540,7 @@ const MethodType<LuaTribes> LuaTribes::Methods[] = {
    METHOD(LuaTribes, new_warehouse_type),
    METHOD(LuaTribes, new_worker_type),
    METHOD(LuaTribes, add_custom_building),
-	METHOD(LuaTribes, add_custom_worker),
+   METHOD(LuaTribes, add_custom_worker),
    {0, 0},
 };
 const PropertyType<LuaTribes> LuaTribes::Properties[] = {
@@ -926,7 +926,6 @@ int LuaTribes::add_custom_building(lua_State* L) {
 	}
 	return 0;
 }
-
 
 /* RST
    .. method:: add_custom_worker{table}

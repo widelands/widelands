@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-09-27 07:12+0000\n"
+"POT-Creation-Date: 2019-10-09 07:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1888,7 +1888,7 @@ msgid "Wood Hardener"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:60
+#: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:75
 msgid "hardening wood"
 msgstr ""
 
@@ -4748,7 +4748,7 @@ msgid "Builder"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/carrier/init.lua:13
+#: ../../data/tribes/workers/barbarians/carrier/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Carrier"
 msgstr ""
