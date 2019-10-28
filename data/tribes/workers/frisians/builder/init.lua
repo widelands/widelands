@@ -42,8 +42,8 @@ tribes:new_worker_type {
          basename = "idle",
          fps = 10,
          frames = 64,
-         columns = 5,
-         rows = 13,
+         columns = 8,
+         rows = 8,
          hotspot = {6, 18}
       },
       work = {
@@ -51,8 +51,8 @@ tribes:new_worker_type {
          basename = "work",
          fps = 10,
          frames = 75,
-         columns = 5,
-         rows = 15,
+         columns = 10,
+         rows = 8,
          hotspot = {9, 24},
          sound_effect = {
             path = "sound/hammering/hammering",
