@@ -7,9 +7,6 @@ terrain_affinity = {
    pickiness = 50,
 }
 
-animations = {}
-add_animation(animations, "idle", dirname .. "tiny", "idle", { 4, 10 })
-
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_currant_black_tiny",
@@ -26,11 +23,14 @@ tribes:new_immovable_type {
          "grow=berry_bush_currant_black_small",
       },
    },
-   animations = animations,
+   animations = {
+      idle = {
+         directory = dirname .. "tiny",
+         basename = "idle",
+         hotspot = {4, 10}
+      }
+   }
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "small", "idle", { 8, 20 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -48,11 +48,14 @@ tribes:new_immovable_type {
          "grow=berry_bush_currant_black_medium",
       },
    },
-   animations = animations,
+   animations = {
+      idle = {
+         directory = dirname .. "small",
+         basename = "idle",
+         hotspot = {8, 20}
+      }
+   }
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "medium", "idle", { 13, 33 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -70,11 +73,14 @@ tribes:new_immovable_type {
          "grow=berry_bush_currant_black_ripe",
       },
    },
-   animations = animations,
+   animations = {
+      idle = {
+         directory = dirname .. "medium",
+         basename = "idle",
+         hotspot = {13, 33}
+      }
+   }
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "ripe", "idle", { 13, 33 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -94,5 +100,11 @@ tribes:new_immovable_type {
          "remove=",
       }
    },
-   animations = animations,
+   animations = {
+      idle = {
+         directory = dirname .. "ripe",
+         basename = "idle",
+         hotspot = {13, 33}
+      }
+   }
 }

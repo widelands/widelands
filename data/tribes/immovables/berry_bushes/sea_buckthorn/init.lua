@@ -7,9 +7,6 @@ terrain_affinity = {
    pickiness = 15,              -- Lower means it is less picky, i.e. it can deal better.
 }
 
-animations = {}
-add_animation(animations, "idle", dirname .. "tiny", "idle", { 9, 19 })
-
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_sea_buckthorn_tiny",
@@ -26,11 +23,14 @@ tribes:new_immovable_type {
          "grow=berry_bush_sea_buckthorn_small",
       },
    },
-   animations = animations,
+   animations = {
+      idle = {
+         directory = dirname .. "tiny",
+         basename = "idle",
+         hotspot = {9, 19}
+      }
+   }
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "small", "idle", { 14, 32 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -48,11 +48,14 @@ tribes:new_immovable_type {
          "grow=berry_bush_sea_buckthorn_medium",
       },
    },
-   animations = animations,
+   animations = {
+      idle = {
+         directory = dirname .. "small",
+         basename = "idle",
+         hotspot = {14, 32}
+      }
+   }
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "medium", "idle", { 17, 40 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -70,11 +73,14 @@ tribes:new_immovable_type {
          "grow=berry_bush_sea_buckthorn_ripe",
       },
    },
-   animations = animations,
+   animations = {
+      idle = {
+         directory = dirname .. "medium",
+         basename = "idle",
+         hotspot = {17, 40}
+      }
+   }
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "ripe", "idle", { 17, 40 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -94,5 +100,11 @@ tribes:new_immovable_type {
          "remove=",
       }
    },
-   animations = animations,
+   animations = {
+      idle = {
+         directory = dirname .. "ripe",
+         basename = "idle",
+         hotspot = {17, 40}
+      }
+   }
 }
