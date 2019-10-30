@@ -26,7 +26,7 @@ tribes:new_productionsite_type {
       idle = {
          directory = dirname,
          basename = "idle",
-         hotspot = {, },
+         hotspot = {42, 68},
          frames = 10,
          columns = 5,
          rows = 2,
@@ -35,7 +35,7 @@ tribes:new_productionsite_type {
       working = {
          directory = dirname,
          basename = "working",
-         hotspot = {, },
+         hotspot = {42, 68},
          frames = 10,
          columns = 5,
          rows = 2,
@@ -46,7 +46,7 @@ tribes:new_productionsite_type {
       unoccupied = {
          directory = dirname,
          basename = "unoccupied",
-         hotspot = {, }
+         hotspot = {42, 56}
       }
    },
 

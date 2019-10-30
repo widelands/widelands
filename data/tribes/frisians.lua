@@ -13,10 +13,10 @@ tribes:new_tribe {
       flag = {
          directory = image_dirname,
          basename = "flag",
-         hotspot = {10, 39},
-         frames = 12,
-         columns = 4,
-         rows = 3,
+         hotspot = {11, 41},
+         frames = 10,
+         columns = 5,
+         rows = 2,
          fps = 10
       }
    },

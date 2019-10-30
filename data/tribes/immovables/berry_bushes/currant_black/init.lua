@@ -23,11 +23,14 @@ tribes:new_immovable_type {
          "grow=berry_bush_currant_black_small",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
          directory = dirname .. "tiny",
          basename = "idle",
-         hotspot = {4, 10}
+         hotspot = {4, 10},
+         frames = 4,
+         columns = 2,
+         rows = 2,
       }
    }
 }
@@ -48,11 +51,14 @@ tribes:new_immovable_type {
          "grow=berry_bush_currant_black_medium",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
          directory = dirname .. "small",
          basename = "idle",
-         hotspot = {8, 20}
+         hotspot = {8, 20},
+         frames = 4,
+         columns = 2,
+         rows = 2,
       }
    }
 }
@@ -73,11 +79,14 @@ tribes:new_immovable_type {
          "grow=berry_bush_currant_black_ripe",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
          directory = dirname .. "medium",
          basename = "idle",
-         hotspot = {13, 33}
+         hotspot = {13, 33},
+         frames = 4,
+         columns = 2,
+         rows = 2,
       }
    }
 }
@@ -100,11 +109,14 @@ tribes:new_immovable_type {
          "remove=",
       }
    },
-   animations = {
+   spritesheets = {
       idle = {
          directory = dirname .. "ripe",
          basename = "idle",
-         hotspot = {13, 33}
+         hotspot = {13, 33},
+         frames = 4,
+         columns = 2,
+         rows = 2,
       }
    }
 }
