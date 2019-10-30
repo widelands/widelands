@@ -14,12 +14,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/none.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "none",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -37,12 +37,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/water.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "water",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -60,12 +60,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/coal_1.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "coal_few",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -83,12 +83,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/gold_1.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "gold_few",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -106,12 +106,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/iron_1.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "iron_few",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -129,12 +129,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/stones_1.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "stone_few",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -152,12 +152,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/coal_2.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "coal_much",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -175,12 +175,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/gold_2.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "gold_much",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -198,12 +198,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/iron_2.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "iron_much",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -221,11 +221,11 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/stones_2.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "stone_much",
+         hotspot = {9, 19}
+      }
    }
 }
