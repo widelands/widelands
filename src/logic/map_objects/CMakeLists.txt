@@ -123,6 +123,7 @@ wl_library(logic_map_objects
     base_math
     economy
     graphic
+    graphic_animation
     graphic_color
     graphic_fonthandler
     graphic_image_io

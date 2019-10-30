@@ -80,6 +80,9 @@ LoginBox::LoginBox(Panel& parent)
 	}
 
 	eb_nickname->focus();
+
+	eb_nickname->cancel.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
+	eb_password->cancel.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
 }
 
 /// think function of the UI (main loop)

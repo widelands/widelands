@@ -109,13 +109,13 @@ public:
 
 	void shipping_item_arrived(Game&, ShippingItem&);
 	void shipping_item_returned(Game&, ShippingItem&);
-	void ship_coming(bool affirmative);
+	void ship_coming(Ship&, bool affirmative);
 	void ship_arrived(Game&, Ship&);
 
 	void log_general_info(const EditorGameBase&) const override;
 
 	uint32_t count_waiting(WareWorker waretype, DescriptionIndex wareindex) const;
-	uint32_t count_waiting() const;
+	uint32_t count_waiting(const PortDock* = nullptr) const;
 
 	// Returns true if a expedition is started or ready to be send out.
 	bool expedition_started() const;
@@ -143,11 +143,13 @@ private:
 	void update_shippingitem(Game&, std::list<ShippingItem>::iterator);
 	void set_need_ship(Game&, bool need);
 
+	void load_wares(Game&, Ship&);
+
 	Fleet* fleet_;
 	Warehouse* warehouse_;
 	PositionList dockpoints_;
 	std::list<ShippingItem> waiting_;
-	uint8_t ships_coming_;
+	std::set<OPtr<Ship>> ships_coming_;
 	bool expedition_ready_;
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
@@ -165,6 +167,7 @@ protected:
 	private:
 		uint32_t warehouse_;
 		std::vector<ShippingItem::Loader> waiting_;
+		std::set<Serial> ships_coming_;
 	};
 
 public:

@@ -19,22 +19,37 @@ tribes:new_productionsite_type {
    },
 
    animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
+      unoccupied = {
+         directory = dirname,
+         basename = "unoccupied",
          hotspot = { 52, 64 },
+      }
+   },
+   spritesheets = {
+      idle = {
+         directory = dirname,
+         basename = "idle",
+         frames = 20,
+         columns = 4,
+         rows = 5,
+         hotspot = { 50, 65 }
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 52, 64 },
+         directory = dirname,
+         basename = "build",
+         frames = 4,
+         columns = 2,
+         rows = 2,
+         hotspot = { 50, 61 }
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 52, 64 },
-      },
-      unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
-         hotspot = { 52, 64 },
-      },
+         directory = dirname,
+         basename = "working",
+         frames = 20,
+         columns = 4,
+         rows = 5,
+         hotspot = { 53, 65 }
+      }
    },
 
    aihints = {

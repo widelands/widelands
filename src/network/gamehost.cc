@@ -2287,7 +2287,7 @@ void GameHost::send_file_part(NetHostInterface::ConnectionId csock_id, uint32_t 
 	packet.unsigned_32(part);
 	packet.unsigned_32(size);
 	packet.data(file_->parts[part].part, size);
-	d->net->send(csock_id, packet);
+	d->net->send(csock_id, packet, NetPriority::kFiletransfer);
 }
 
 void GameHost::disconnect_player_controller(uint8_t const number, const std::string& name) {
