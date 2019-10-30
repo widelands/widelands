@@ -39,8 +39,8 @@ tribes:new_carrier_type {
          basename = "idle",
          fps = 10,
          frames = 124,
-         columns = 5,
-         rows = 25,
+         columns = 14,
+         rows = 9,
          hotspot = {17, 18}
       },
    },
