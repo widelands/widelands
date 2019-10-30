@@ -14,12 +14,15 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/none_?.png"),
-         hotspot = {0, 46},
-      },
+         directory = dirname .. "pics",
+         basename = "none",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -37,13 +40,15 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/water_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "water",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -61,13 +66,15 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/coal_1_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "coal_few",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -85,13 +92,15 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/gold_1_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "gold_few",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -109,13 +118,15 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/iron_1_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "iron_few",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -133,13 +144,15 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/stones_1_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "stone_few",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -157,13 +170,15 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/coal_2_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "coal_much",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -181,13 +196,15 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/gold_2_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "gold_much",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -205,13 +222,15 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/iron_2_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "iron_much",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
 
@@ -229,12 +248,14 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "pics/stones_2_?.png"),
-         hotspot = {0, 46},
-         fps = 4,
-      },
+         directory = dirname .. "pics",
+         basename = "stone_much",
+         hotspot = {0, 43},
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
    }
 }
