@@ -129,7 +129,7 @@ animations = {
       fps = 10
    },
    health_walk = {
-      directory = dirname .. "health",
+      directory = dirname .. "helm",
       basename = "walk",
       hotspot = {7, 25},
       fps = 15,
