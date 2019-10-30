@@ -22,11 +22,13 @@ except ImportError:
 
 base_path = p.abspath(p.join(p.dirname(__file__), p.pardir))
 
+
 def _communicate_utf8(cmd, **kwargs):
-    """Runs the 'cmd' with 'kwargs' and returns its output which is assumed to be utf-8."""
+    """Runs the 'cmd' with 'kwargs' and returns its output which is assumed to
+    be utf-8."""
     if sys.version_info >= (3, 0):
         output = subprocess.check_output(cmd, **kwargs)
-        return output.decode("utf-8")
+        return output.decode('utf-8')
     return subprocess.check_output(cmd, **kwargs)
 
 
@@ -50,11 +52,14 @@ def detect_debian_version():
 
 def detect_git_revision():
     try:
-        stdout = _communicate_utf8(['git', 'rev-list', '--count', 'HEAD'], cwd=base_path)
+        stdout = _communicate_utf8(
+            ['git', 'rev-list', '--count', 'HEAD'], cwd=base_path)
         git_count = stdout.rstrip()
-        stdout = _communicate_utf8(['git', 'rev-parse', '--short=7', 'HEAD'], cwd=base_path)
+        stdout = _communicate_utf8(
+            ['git', 'rev-parse', '--short=7', 'HEAD'], cwd=base_path)
         git_revnum = stdout.rstrip()
-        stdout = _communicate_utf8(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], cwd=base_path)
+        stdout = _communicate_utf8(
+            ['git', 'rev-parse', '--abbrev-ref', 'HEAD'], cwd=base_path)
         git_abbrev = stdout.rstrip()
         if git_count and git_revnum and git_abbrev:
             return 'r%s[%s@%s]' % (git_count, git_revnum, git_abbrev)
