@@ -6,7 +6,7 @@ tribes:new_tribe {
       frontier = {
          directory = image_dirname,
          basename = "frontier",
-         hotspot = {9, 26}
+         hotspot = {8, 26}
       }
    },
    spritesheets = {

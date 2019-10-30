@@ -503,8 +503,6 @@ tribes:new_soldier_type {
       max_level = 2,
       base = 12250,
       increase_per_level = 2955,
-      directory = dirname .. "rookie",
-      basename = "",
       pictures = path.list_files (dirname .. "health_level?.png"),
    },
    attack = {
@@ -512,24 +510,18 @@ tribes:new_soldier_type {
       base = 1300,
       maximum = 1600,
       increase_per_level = 1006,
-      directory = dirname .. "rookie",
-      basename = "",
       pictures = path.list_files (dirname .. "attack_level?.png"),
    },
    defense = {
       max_level = 2,
       base = 4,
       increase_per_level = 16,
-      directory = dirname .. "rookie",
-      basename = "",
       pictures = path.list_files (dirname .. "defense_level?.png"),
    },
    evade = {
       max_level = 0,
       base = 35,
       increase_per_level = 0,
-      directory = dirname .. "rookie",
-      basename = "",
       pictures = path.list_files (dirname .. "evade_level?.png"),
    },
 
