@@ -14,7 +14,7 @@ tribes:new_warehouse_type {
       idle = {
          directory = dirname,
          basename = "idle",
-         hotspot = {94, 100},
+         hotspot = {113, 119},
          frames = 10,
          columns = 5,
          rows = 2,
