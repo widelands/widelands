@@ -27,18 +27,18 @@ tribes:new_productionsite_type {
          directory = dirname,
          basename = "idle",
          hotspot = {, },
-         frames = 10,
+         frames = 20,
          columns = 5,
-         rows = 2,
+         rows = 4,
          fps = 10
       },
       working = {
          directory = dirname,
          basename = "working",
          hotspot = {, },
-         frames = 10,
+         frames = 20,
          columns = 5,
-         rows = 2,
+         rows = 4,
          fps = 10
       }
    },
