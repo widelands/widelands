@@ -20,7 +20,7 @@ tribes:new_ship_type {
          directory = dirname,
          basename = "sinking",
          fps = 7,
-         frames = 20,
+         frames = 21,
          columns = 7,
          rows = 3,
          hotspot = {88, 141}
