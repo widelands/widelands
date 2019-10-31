@@ -23,6 +23,15 @@ except ImportError:
 base_path = p.abspath(p.join(p.dirname(__file__), p.pardir))
 
 
+def _communicate_utf8(cmd, **kwargs):
+    """Runs the 'cmd' with 'kwargs' and returns its output which is assumed to
+    be utf-8."""
+    if sys.version_info >= (3, 0):
+        output = subprocess.check_output(cmd, **kwargs)
+        return output.decode('utf-8')
+    return subprocess.check_output(cmd, **kwargs)
+
+
 def detect_debian_version():
     """Parse bzr revision and branch information from debian/changelog."""
     if sys.platform.startswith('win'):
@@ -43,26 +52,14 @@ def detect_debian_version():
 
 def detect_git_revision():
     try:
-        cmd = subprocess.Popen(
-            ['git', 'rev-list', '--count', 'HEAD'],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE, cwd=base_path, text=True
-        )
-        stdout, stderr = cmd.communicate()
+        stdout = _communicate_utf8(
+            ['git', 'rev-list', '--count', 'HEAD'], cwd=base_path)
         git_count = stdout.rstrip()
-        cmd = subprocess.Popen(
-            ['git', 'rev-parse', '--short=7', 'HEAD'],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE, cwd=base_path, text=True
-        )
-        stdout, stderr = cmd.communicate()
+        stdout = _communicate_utf8(
+            ['git', 'rev-parse', '--short=7', 'HEAD'], cwd=base_path)
         git_revnum = stdout.rstrip()
-        cmd = subprocess.Popen(
-            ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE, cwd=base_path, text=True
-        )
-        stdout, stderr = cmd.communicate()
+        stdout = _communicate_utf8(
+            ['git', 'rev-parse', '--abbrev-ref', 'HEAD'], cwd=base_path)
         git_abbrev = stdout.rstrip()
         if git_count and git_revnum and git_abbrev:
             return 'r%s[%s@%s]' % (git_count, git_revnum, git_abbrev)
@@ -94,9 +91,8 @@ def detect_bzr_revision():
         # Windows stand alone installer do not come with bzrlib. We try to
         # parse the output of bzr then directly
         try:
-            def run_bzr(subcmd): return subprocess.Popen(
-                ['bzr', subcmd], stdout=subprocess.PIPE, cwd=base_path
-            ).stdout.read().strip().decode('utf-8')
+            def run_bzr(subcmd):
+                return _communicate_utf8(['bzr', subcmd], cwd=base_path).strip()
             revno = run_bzr('revno')
             nick = run_bzr('nick')
             return 'bzr%s[%s]' % (revno, nick)
