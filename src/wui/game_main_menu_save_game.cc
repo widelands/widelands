@@ -166,7 +166,7 @@ void GameMainMenuSaveGame::ok() {
 	if (save_game(filename, !get_config_bool("nozip", false))) {
 		die();
 	} else {
-		load_or_save_.table_.focus();
+		load_or_save_.table().focus();
 	}
 }
 

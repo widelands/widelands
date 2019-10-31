@@ -1,23 +1,86 @@
 #include "savegametable.h"
 
-SavegameTable::SavegameTable(
-   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
-   : UI::Table<uintptr_t>(parent, x, y, w, h, style) {
+SavegameTable::SavegameTable(UI::Panel* parent,
+                             int32_t x,
+                             int32_t y,
+                             uint32_t w,
+                             uint32_t h,
+                             UI::PanelStyle style,
+                             bool is_replay)
+   : UI::Table<uintptr_t>(parent, x, y, w, h, style, UI::TableRows::kMultiDescending) {
+	is_replay_ = is_replay;
 
 	add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
-	add_column(0, _("Description"),
+	add_columns_special();
+	add_column(260, _("Description"),
 	           _("The filename that the game was saved under followed by the map’s name, "
 	             "or the map’s name followed by the last objective achieved."),
 	           UI::Align::kLeft, UI::TableColumnType::kFlexible);
 
-	//    /** TRANSLATORS: Column title for number of players in map list */
-	//    add_column(35, _("Pl."), _("Number of players"), UI::Align::kCenter);
-	//    add_column(0, _("Filename"), _("The name of the map or scenario"), UI::Align::kLeft,
-	//               UI::TableColumnType::kFlexible);
-	//    add_column(90, _("Size"), _("The size of the map (Width x Height)"));
-
 	set_sort_column(0);
 }
+
+void SavegameTable::add_columns_special() {
+	//    if (filetype_ != FileType::kGameSinglePlayer) {
+	//		std::string game_mode_tooltip =
+	//		   /** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
+	//load.
+	//		    */
+	//		   /** TRANSLATORS: %s is a list of game modes. */
+	//		   g_gr->styles().font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
+
+	//		if (filetype_ == FileType::kReplay) {
+	//			/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
+	//			/** TRANSLATORS: Make sure that you keep consistency in your translation. */
+	//			game_mode_tooltip += as_listitem(_("SP = Single Player"), UI::FontStyle::kTooltip);
+	//		}
+	//		/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
+	//		/** TRANSLATORS: Make sure that you keep consistency in your translation. */
+	//		game_mode_tooltip += as_listitem(_("MP = Multiplayer"), UI::FontStyle::kTooltip);
+	//		/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
+	//		/** TRANSLATORS: Make sure that you keep consistency in your translation. */
+	//		game_mode_tooltip += as_listitem(_("H = Multiplayer (Host)"), UI::FontStyle::kTooltip);
+
+	//		game_mode_tooltip += g_gr->styles()
+	//		                        .font_style(UI::FontStyle::kTooltip)
+	//		                        .as_font_tag(_("Numbers are the number of players."));
+
+	//		table_.add_column(
+	//		   65,
+	//		   /** TRANSLATORS: Game Mode table column when choosing a game/replay to load. */
+	//		   /** TRANSLATORS: Keep this to 5 letters maximum. */
+	//		   /** TRANSLATORS: A tooltip will explain if you need to use an abbreviation. */
+	//		   _("Mode"), game_mode_tooltip);
+	//	}
+}
+
+const std::string SavegameTable::map_filename(const std::string& filename,
+                                              const std::string& mapname) {
+	std::string result = FileSystem::filename_without_ext(filename.c_str());
+
+	if (localize_autosave_ && boost::starts_with(result, kAutosavePrefix)) {
+		std::vector<std::string> autosave_name;
+		boost::split(autosave_name, result, boost::is_any_of("_"));
+		if (autosave_name.empty() || autosave_name.size() < 3) {
+			/** TRANSLATORS: %1% is a map's name. */
+			result = (boost::format(_("Autosave: %1%")) % mapname).str();
+		} else {
+			/** TRANSLATORS: %1% is a number, %2% a map's name. */
+			result = (boost::format(_("Autosave %1%: %2%")) % autosave_name.back() % mapname).str();
+		}
+	} else if (!(boost::starts_with(result, mapname))) {
+		/** TRANSLATORS: %1% is a filename, %2% a map's name. */
+		result = (boost::format(pgettext("filename_mapname", "%1%: %2%")) % result % mapname).str();
+	}
+	return result;
+}
+
+// bool SavegameTable::compare_date_descending(uint32_t rowa, uint32_t rowb) const {
+//    const SavegameData& r1 = games_data_[table_[rowa]];
+//    const SavegameData& r2 = games_data_[table_[rowb]];
+
+//    return r1.savetimestamp < r2.savetimestamp;
+//}
 
 void SavegameTable::fill(const std::vector<SavegameData>& entries) {
 	clear();
@@ -25,8 +88,6 @@ void SavegameTable::fill(const std::vector<SavegameData>& entries) {
 	for (size_t i = 0; i < entries.size(); ++i) {
 		const SavegameData& savegame = entries[i];
 		UI::Table<uintptr_t const>::EntryRecord& te = add(i);
-
-		te.set_string(0, savegame.savedatestring);
 
 		//        if (filetype_ != FileType::kGameSinglePlayer) {
 		//            std::string gametypestring;
@@ -80,15 +141,13 @@ void SavegameTable::fill(const std::vector<SavegameData>& entries) {
 		//            localize_autosave_));
 		//        }
 
-		te.set_string(1, "komplizierter name?");
-		//        te.set_string(1, map_filename(savegame.filename, savegame.mapname,
-		//        localize_autosave_));
-
 		//        if(savegame.is_directory()) {
 		//            //add directory
 		//        }
 		//        else {
 		//            //add savegame data
+		te.set_string(0, savegame.savedatestring);
+		te.set_string(1, map_filename(savegame.filename, savegame.mapname));
 		//        }
 
 		//		if (mapdata.maptype == MapData::MapType::kDirectory) {

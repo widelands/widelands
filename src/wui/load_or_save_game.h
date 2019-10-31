@@ -28,6 +28,7 @@
 #include "ui_basic/panel.h"
 #include "ui_basic/table.h"
 #include "wui/gamedetails.h"
+#include "wui/savegametable.h"
 
 /// Common functions for loading or saving a game or replay.
 class LoadOrSaveGame {
@@ -64,7 +65,8 @@ protected:
 	void set_show_filenames(bool);
 
 	/// The table panel
-	UI::Table<uintptr_t const>& table();
+	//	UI::Table<uintptr_t const>& table();
+	SavegameTable& table();
 
 	/// A vertical box wrapping the table. This can be used to add UI elements above/below the table.
 	UI::Box* table_box();
@@ -92,7 +94,8 @@ private:
 
 	UI::Panel* parent_;
 	UI::Box* table_box_;
-	UI::Table<uintptr_t const> table_;
+	// UI::Table<uintptr_t const> table_;
+	SavegameTable table_new_;
 	FileType filetype_;
 	bool show_filenames_;
 	bool localize_autosave_;

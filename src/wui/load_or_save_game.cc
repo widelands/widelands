@@ -74,7 +74,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                bool localize_autosave)
    : parent_(parent),
      table_box_(new UI::Box(parent, 0, 0, UI::Box::Vertical)),
-     table_(table_box_, 0, 0, 0, 0, style, UI::TableRows::kMultiDescending),
+     // table_(table_box_, 0, 0, 0, 0, style, UI::TableRows::kMultiDescending),
+     table_new_(table_box_, 0, 0, 0, 0, style, filetype == FileType::kReplay),
      filetype_(filetype),
      show_filenames_(false),
      localize_autosave_(localize_autosave),
@@ -93,48 +94,15 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                                                UI::ButtonStyle::kWuiSecondary,
                             _("Delete"))),
      game_(g) {
-	table_.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
 
-	if (filetype_ != FileType::kGameSinglePlayer) {
-		std::string game_mode_tooltip =
-		   /** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to load.
-		    */
-		   /** TRANSLATORS: %s is a list of game modes. */
-		   g_gr->styles().font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
-
-		if (filetype_ == FileType::kReplay) {
-			/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
-			/** TRANSLATORS: Make sure that you keep consistency in your translation. */
-			game_mode_tooltip += as_listitem(_("SP = Single Player"), UI::FontStyle::kTooltip);
-		}
-		/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
-		/** TRANSLATORS: Make sure that you keep consistency in your translation. */
-		game_mode_tooltip += as_listitem(_("MP = Multiplayer"), UI::FontStyle::kTooltip);
-		/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
-		/** TRANSLATORS: Make sure that you keep consistency in your translation. */
-		game_mode_tooltip += as_listitem(_("H = Multiplayer (Host)"), UI::FontStyle::kTooltip);
-
-		game_mode_tooltip += g_gr->styles()
-		                        .font_style(UI::FontStyle::kTooltip)
-		                        .as_font_tag(_("Numbers are the number of players."));
-
-		table_.add_column(
-		   65,
-		   /** TRANSLATORS: Game Mode table column when choosing a game/replay to load. */
-		   /** TRANSLATORS: Keep this to 5 letters maximum. */
-		   /** TRANSLATORS: A tooltip will explain if you need to use an abbreviation. */
-		   _("Mode"), game_mode_tooltip);
-	}
-	table_.add_column(0, _("Description"),
-	                  _("The filename that the game was saved under followed by the map’s name, "
-	                    "or the map’s name followed by the last objective achieved."),
-	                  UI::Align::kLeft, UI::TableColumnType::kFlexible);
-	table_.set_column_compare(
-	   0, boost::bind(&LoadOrSaveGame::compare_date_descending, this, _1, _2));
-	table_.set_sort_column(0);
+	//	table_.set_column_compare(
+	//	   0, boost::bind(&LoadOrSaveGame::compare_date_descending, this, _1, _2));
+	//	table_.set_sort_column(0);
 	fill_table();
 
-	table_box_->add(&table_, UI::Box::Resizing::kExpandBoth);
+	//	table_box_->add(&table_, UI::Box::Resizing::kExpandBoth);
+
+	table_box_->add(&table_new_, UI::Box::Resizing::kExpandBoth);
 
 	game_details_.button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	delete_->set_enabled(false);
@@ -142,13 +110,15 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 }
 
 const std::string LoadOrSaveGame::filename_list_string() const {
-	return filename_list_string(table_.selections());
+	//	return filename_list_string(table_.selections());
+	return filename_list_string(table_new_.selections());
 }
 
 const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>& selections) const {
 	boost::format message;
 	for (const uint32_t index : selections) {
-		const SavegameData& gamedata = games_data_[table_.get(table_.get_record(index))];
+		//		const SavegameData& gamedata = games_data_[table_.get(table_.get_record(index))];
+		const SavegameData& gamedata = games_data_[table_new_.get(table_new_.get_record(index))];
 
 		if (gamedata.errormessage.empty()) {
 			std::vector<std::string> listme;
@@ -162,17 +132,16 @@ const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>&
 	}
 	return message.str();
 }
-
 bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) const {
-	const SavegameData& r1 = games_data_[table_[rowa]];
-	const SavegameData& r2 = games_data_[table_[rowb]];
+	const SavegameData& r1 = games_data_[table_new_[rowa]];
+	const SavegameData& r2 = games_data_[table_new_[rowb]];
 
 	return r1.savetimestamp < r2.savetimestamp;
 }
 
 std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 	std::unique_ptr<SavegameData> result(new SavegameData());
-	size_t selections = table_.selections().size();
+	size_t selections = table_new_.selections().size();
 	if (selections == 1) {
 		delete_->set_tooltip(
 		   filetype_ == FileType::kReplay ?
@@ -180,7 +149,7 @@ std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 		      _("Delete this replay") :
 		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
 		      _("Delete this game"));
-		result.reset(new SavegameData(games_data_[table_.get_selected()]));
+		result.reset(new SavegameData(games_data_[table_new_.get_selected()]));
 	} else if (selections > 1) {
 		delete_->set_tooltip(
 		   filetype_ == FileType::kReplay ?
@@ -203,27 +172,27 @@ std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 }
 
 bool LoadOrSaveGame::has_selection() const {
-	return table_.has_selection();
+	return table_new_.has_selection();
 }
 
 void LoadOrSaveGame::clear_selections() {
-	table_.clear_selections();
+	table_new_.clear_selections();
 	game_details_.clear();
 }
 
 void LoadOrSaveGame::select_by_name(const std::string& name) {
-	table_.clear_selections();
-	for (size_t idx = 0; idx < table_.size(); ++idx) {
-		const SavegameData& gamedata = games_data_[table_[idx]];
+	table_new_.clear_selections();
+	for (size_t idx = 0; idx < table_new_.size(); ++idx) {
+		const SavegameData& gamedata = games_data_[table_new_[idx]];
 		if (name == gamedata.filename) {
-			table_.select(idx);
+			table_new_.select(idx);
 			return;
 		}
 	}
 }
 
-UI::Table<uintptr_t const>& LoadOrSaveGame::table() {
-	return table_;
+SavegameTable& LoadOrSaveGame::table() {
+	return table_new_;
 }
 
 UI::Box* LoadOrSaveGame::table_box() {
@@ -235,7 +204,7 @@ GameDetails* LoadOrSaveGame::game_details() {
 }
 
 const std::string LoadOrSaveGame::get_filename(int index) const {
-	return games_data_[table_.get(table_.get_record(index))].filename;
+	return games_data_[table_new_.get(table_new_.get_record(index))].filename;
 }
 
 void LoadOrSaveGame::clicked_delete() {
@@ -274,7 +243,7 @@ void LoadOrSaveGame::clicked_delete() {
 		   no_selections == 1 ? _("Confirm Deleting File") : _("Confirm Deleting Files"), message,
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		do_delete = confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
-		table_.focus();
+		table_new_.focus();
 	}
 	if (do_delete) {
 		// Failed deletions aren't a serious problem, we just catch the errors
@@ -344,13 +313,13 @@ void LoadOrSaveGame::clicked_delete() {
 
 		// Select something meaningful if possible, then scroll to it.
 		const uint32_t selectme = *selections.begin();
-		if (selectme < table_.size() - 1) {
-			table_.select(selectme);
-		} else if (!table_.empty()) {
-			table_.select(table_.size() - 1);
+		if (selectme < table_new_.size() - 1) {
+			table_new_.select(selectme);
+		} else if (!table_new_.empty()) {
+			table_new_.select(table_new_.size() - 1);
 		}
-		if (table_.has_selection()) {
-			table_.scroll_to_item(table_.selection_index() + 1);
+		if (table_new_.has_selection()) {
+			table_new_.scroll_to_item(table_new_.selection_index() + 1);
 		}
 		// Make sure that the game details are updated
 		entry_selected();
@@ -448,82 +417,80 @@ void LoadOrSaveGame::add_general_information(SavegameData& gamedata,
 }
 
 void LoadOrSaveGame::create_and_add_valid_entry(SavegameData& gamedata) {
-	games_data_.push_back(gamedata);
-	UI::Table<uintptr_t const>::EntryRecord& te = table_.add(games_data_.size() - 1);
-	te.set_string(0, gamedata.savedatestring);
+	//	games_data_.push_back(gamedata);
+	//	UI::Table<uintptr_t const>::EntryRecord& te = table_.add(games_data_.size() - 1);
+	//	te.set_string(0, gamedata.savedatestring);
 
-	if (filetype_ != FileType::kGameSinglePlayer) {
-		std::string gametypestring;
-		switch (gamedata.gametype) {
-		case GameController::GameType::kSingleplayer:
-			/** TRANSLATORS: "Single Player" entry in the Game Mode table column. */
-			/** TRANSLATORS: "Keep this to 6 letters maximum. */
-			/** TRANSLATORS: A tooltip will explain the abbreviation. */
-			/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
-			gametypestring = _("SP");
-			break;
-		case GameController::GameType::kNetHost:
-			/** TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column. */
-			/** TRANSLATORS: "Keep this to 2 letters maximum. */
-			/** TRANSLATORS: A tooltip will explain the abbreviation. */
-			/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
-			/** TRANSLATORS: %1% is the number of players */
-			gametypestring = (boost::format(_("H (%1%)")) % gamedata.nrplayers).str();
-			break;
-		case GameController::GameType::kNetClient:
-			/** TRANSLATORS: "Multiplayer" entry in the Game Mode table column. */
-			/** TRANSLATORS: "Keep this to 2 letters maximum. */
-			/** TRANSLATORS: A tooltip will explain the abbreviation. */
-			/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
-			/** TRANSLATORS: %1% is the number of players */
-			gametypestring = (boost::format(_("MP (%1%)")) % gamedata.nrplayers).str();
-			break;
-		case GameController::GameType::kReplay:
-			gametypestring = "";
-			break;
-		case GameController::GameType::kUndefined:
-			NEVER_HERE();
-		}
-		te.set_string(1, gametypestring);
-		if (filetype_ == FileType::kReplay) {
-			const std::string map_basename =
-			   show_filenames_ ?
-			      map_filename(gamedata.filename, gamedata.mapname, localize_autosave_) :
-			      gamedata.mapname;
-			te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) % map_basename %
-			                  gamedata.gametime)
-			                    .str());
-		} else {
-			te.set_string(2, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
-		}
-	} else {
-		te.set_string(1, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
-	}
+	//	if (filetype_ != FileType::kGameSinglePlayer) {
+	//		std::string gametypestring;
+	//		switch (gamedata.gametype) {
+	//		case GameController::GameType::kSingleplayer:
+	//			/** TRANSLATORS: "Single Player" entry in the Game Mode table column. */
+	//			/** TRANSLATORS: "Keep this to 6 letters maximum. */
+	//			/** TRANSLATORS: A tooltip will explain the abbreviation. */
+	//			/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
+	//			gametypestring = _("SP");
+	//			break;
+	//		case GameController::GameType::kNetHost:
+	//			/** TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column. */
+	//			/** TRANSLATORS: "Keep this to 2 letters maximum. */
+	//			/** TRANSLATORS: A tooltip will explain the abbreviation. */
+	//			/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
+	//			/** TRANSLATORS: %1% is the number of players */
+	//			gametypestring = (boost::format(_("H (%1%)")) % gamedata.nrplayers).str();
+	//			break;
+	//		case GameController::GameType::kNetClient:
+	//			/** TRANSLATORS: "Multiplayer" entry in the Game Mode table column. */
+	//			/** TRANSLATORS: "Keep this to 2 letters maximum. */
+	//			/** TRANSLATORS: A tooltip will explain the abbreviation. */
+	//			/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
+	//			/** TRANSLATORS: %1% is the number of players */
+	//			gametypestring = (boost::format(_("MP (%1%)")) % gamedata.nrplayers).str();
+	//			break;
+	//		case GameController::GameType::kReplay:
+	//			gametypestring = "";
+	//			break;
+	//		case GameController::GameType::kUndefined:
+	//			NEVER_HERE();
+	//		}
+	//		te.set_string(1, gametypestring);
+	//		if (filetype_ == FileType::kReplay) {
+	//			const std::string map_basename =
+	//			   show_filenames_ ?
+	//			      map_filename(gamedata.filename, gamedata.mapname, localize_autosave_) :
+	//			      gamedata.mapname;
+	//			te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) % map_basename
+	//% 			                  gamedata.gametime) 			                    .str()); 		} else { 			te.set_string(2, map_filename(gamedata.filename,
+	//gamedata.mapname, localize_autosave_));
+	//		}
+	//	} else {
+	//		te.set_string(1, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
+	//	}
 }
 
 void LoadOrSaveGame::create_and_add_error_entry(SavegameData& gamedata, std::string errormessage) {
-	boost::replace_all(errormessage, "\n", "<br>");
-	gamedata.errormessage =
-	   ((boost::format("<p>%s</p><p>%s</p><p>%s</p>"))
-	    /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
-	    % _("This file has the wrong format and can’t be loaded."
-	        " Maybe it was created with an older version of Widelands.")
-	    /** TRANSLATORS: This text is on a separate line with an error message below */
-	    % _("Error message:") % errormessage)
-	      .str();
+	//	boost::replace_all(errormessage, "\n", "<br>");
+	//	gamedata.errormessage =
+	//	   ((boost::format("<p>%s</p><p>%s</p><p>%s</p>"))
+	//	    /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
+	//	    % _("This file has the wrong format and can’t be loaded."
+	//	        " Maybe it was created with an older version of Widelands.")
+	//	    /** TRANSLATORS: This text is on a separate line with an error message below */
+	//	    % _("Error message:") % errormessage)
+	//	      .str();
 
-	gamedata.mapname = FileSystem::filename_without_ext(gamedata.filename.c_str());
-	games_data_.push_back(gamedata);
+	//	gamedata.mapname = FileSystem::filename_without_ext(gamedata.filename.c_str());
+	//	games_data_.push_back(gamedata);
 
-	UI::Table<uintptr_t const>::EntryRecord& te = table_.add(games_data_.size() - 1);
-	te.set_string(0, "");
-	if (filetype_ != FileType::kGameSinglePlayer) {
-		te.set_string(1, "");
-		/** TRANSLATORS: Prefix for incompatible files in load game screens */
-		te.set_string(2, (boost::format(_("Incompatible: %s")) % gamedata.mapname).str());
-	} else {
-		te.set_string(1, (boost::format(_("Incompatible: %s")) % gamedata.mapname).str());
-	}
+	//	UI::Table<uintptr_t const>::EntryRecord& te = table_.add(games_data_.size() - 1);
+	//	te.set_string(0, "");
+	//	if (filetype_ != FileType::kGameSinglePlayer) {
+	//		te.set_string(1, "");
+	//		/** TRANSLATORS: Prefix for incompatible files in load game screens */
+	//		te.set_string(2, (boost::format(_("Incompatible: %s")) % gamedata.mapname).str());
+	//	} else {
+	//		te.set_string(1, (boost::format(_("Incompatible: %s")) % gamedata.mapname).str());
+	//	}
 }
 
 void LoadOrSaveGame::add_entry(const std::string& gamefilename) {
@@ -555,16 +522,17 @@ void LoadOrSaveGame::add_entry(const std::string& gamefilename) {
 		gamedata.wincondition = gpdp.get_localized_win_condition();
 		gamedata.minimap_path = gpdp.get_minimap_path();
 
-		create_and_add_valid_entry(gamedata);
+		games_data_.push_back(gamedata);
+		//        create_and_add_valid_entry(gamedata);
 	} catch (const std::exception& e) {
-		create_and_add_error_entry(gamedata, e.what());
+		// create_and_add_error_entry(gamedata, e.what());
 	}
 }
 
 void LoadOrSaveGame::fill_table() {
 
 	clear_selections();
-	table_.clear();
+	//	table_.clear();
 
 	FilenameSet gamefiles;
 	if (filetype_ == FileType::kReplay) {
@@ -572,8 +540,9 @@ void LoadOrSaveGame::fill_table() {
 			return boost::algorithm::ends_with(fn, kReplayExtension);
 		});
 		// Update description column title for replays
-		table_.set_column_tooltip(2, show_filenames_ ? _("Filename: Map name (start of replay)") :
-		                                               _("Map name (start of replay)"));
+		//		table_.set_column_tooltip(2, show_filenames_ ? _("Filename: Map name (start of replay)")
+		//:
+		//		                                               _("Map name (start of replay)"));
 	} else {
 		gamefiles = g_fs->filter_directory(kSaveDir, [](const std::string& fn) {
 			return boost::algorithm::ends_with(fn, kSavegameExtension);
@@ -583,8 +552,11 @@ void LoadOrSaveGame::fill_table() {
 	for (const std::string& gamefilename : gamefiles) {
 		add_entry(gamefilename);
 	}
-	table_.sort();
-	table_.focus();
+
+	table_new_.fill(games_data_);
+
+	//	table_.sort();
+	//	table_.focus();
 }
 
 void LoadOrSaveGame::set_show_filenames(bool show_filenames) {
