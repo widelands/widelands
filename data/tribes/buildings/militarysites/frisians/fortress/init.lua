@@ -26,7 +26,7 @@ tribes:new_militarysite_type {
       idle = {
          directory = dirname,
          basename = "idle",
-         hotspot = {88, 105},
+         hotspot = {85, 99},
          frames = 10,
          columns = 5,
          rows = 2,
@@ -37,7 +37,7 @@ tribes:new_militarysite_type {
       unoccupied = {
          directory = dirname,
          basename = "unoccupied",
-         hotspot = {88, 105}
+         hotspot = {85, 99}
       }
    },
 
