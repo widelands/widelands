@@ -12,10 +12,10 @@ SavegameTable::SavegameTable(UI::Panel* parent,
                              bool is_replay,
                              bool is_single_player,
                              bool show_filenames)
-   : UI::Table<uintptr_t>(parent, x, y, w, h, style, UI::TableRows::kMultiDescending) {
-	is_replay_ = is_replay;
-	is_single_player_ = is_single_player;
-	show_filenames_ = show_filenames;
+   : UI::Table<uintptr_t>(parent, x, y, w, h, style, UI::TableRows::kMultiDescending),
+     is_replay_(is_replay),
+     is_single_player_(is_single_player),
+     show_filenames_(show_filenames) {
 
 	add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
 	if (!is_single_player_) {
@@ -205,4 +205,6 @@ void SavegameTable::fill(const std::vector<SavegameData>& entries) {
 
 void SavegameTable::set_show_filenames(bool show_filenames) {
 	show_filenames_ = show_filenames;
+	set_column_tooltip(2, show_filenames ? _("Filename: Map name (start of replay)") :
+	                                       _("Map name (start of replay)"));
 }

@@ -86,7 +86,6 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 }
 
 const std::string LoadOrSaveGame::filename_list_string() const {
-	//	return filename_list_string(table_.selections());
 	return filename_list_string(table_new_.selections());
 }
 
@@ -391,58 +390,6 @@ void LoadOrSaveGame::add_general_information(SavegameData& gamedata,
 	gamedata.version = gpdp.get_version();
 }
 
-void LoadOrSaveGame::create_and_add_valid_entry(SavegameData& gamedata) {
-	//	games_data_.push_back(gamedata);
-	//	UI::Table<uintptr_t const>::EntryRecord& te = table_.add(games_data_.size() - 1);
-	//	te.set_string(0, gamedata.savedatestring);
-
-	//	if (filetype_ != FileType::kGameSinglePlayer) {
-	//		std::string gametypestring;
-	//		switch (gamedata.gametype) {
-	//		case GameController::GameType::kSingleplayer:
-	//			/** TRANSLATORS: "Single Player" entry in the Game Mode table column. */
-	//			/** TRANSLATORS: "Keep this to 6 letters maximum. */
-	//			/** TRANSLATORS: A tooltip will explain the abbreviation. */
-	//			/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
-	//			gametypestring = _("SP");
-	//			break;
-	//		case GameController::GameType::kNetHost:
-	//			/** TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column. */
-	//			/** TRANSLATORS: "Keep this to 2 letters maximum. */
-	//			/** TRANSLATORS: A tooltip will explain the abbreviation. */
-	//			/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
-	//			/** TRANSLATORS: %1% is the number of players */
-	//			gametypestring = (boost::format(_("H (%1%)")) % gamedata.nrplayers).str();
-	//			break;
-	//		case GameController::GameType::kNetClient:
-	//			/** TRANSLATORS: "Multiplayer" entry in the Game Mode table column. */
-	//			/** TRANSLATORS: "Keep this to 2 letters maximum. */
-	//			/** TRANSLATORS: A tooltip will explain the abbreviation. */
-	//			/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
-	//			/** TRANSLATORS: %1% is the number of players */
-	//			gametypestring = (boost::format(_("MP (%1%)")) % gamedata.nrplayers).str();
-	//			break;
-	//		case GameController::GameType::kReplay:
-	//			gametypestring = "";
-	//			break;
-	//		case GameController::GameType::kUndefined:
-	//			NEVER_HERE();
-	//		}
-	//		te.set_string(1, gametypestring);
-	//		if (filetype_ == FileType::kReplay) {
-	//			const std::string map_basename =
-	//			   show_filenames_ ?
-	//			      map_filename(gamedata.filename, gamedata.mapname, localize_autosave_) :
-	//			      gamedata.mapname;
-	//			te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) %
-	//map_basename % 			                  gamedata.gametime) .str()); 		} else {
-	//te.set_string(2, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
-	//		}
-	//	} else {
-	//		te.set_string(1, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
-	//	}
-}
-
 void LoadOrSaveGame::add_error_info(SavegameData& gamedata, std::string errormessage) {
 	boost::replace_all(errormessage, "\n", "<br>");
 	gamedata.errormessage =
@@ -486,7 +433,6 @@ void LoadOrSaveGame::add_entry(const std::string& gamefilename) {
 		gamedata.wincondition = gpdp.get_localized_win_condition();
 		gamedata.minimap_path = gpdp.get_minimap_path();
 
-		//        create_and_add_valid_entry(gamedata);
 	} catch (const std::exception& e) {
 		add_error_info(gamedata, e.what());
 	}
@@ -497,16 +443,13 @@ void LoadOrSaveGame::add_entry(const std::string& gamefilename) {
 void LoadOrSaveGame::fill_table() {
 
 	clear_selections();
-	//	table_.clear();
 
 	FilenameSet gamefiles;
 	if (filetype_ == FileType::kReplay) {
 		gamefiles = g_fs->filter_directory(kReplayDir, [](const std::string& fn) {
 			return boost::algorithm::ends_with(fn, kReplayExtension);
 		});
-		// Update description column title for replays
-		table_new_.set_column_tooltip(2, show_filenames_ ? _("Filename: Map name (start of replay)") :
-		                                                   _("Map name (start of replay)"));
+
 	} else {
 		gamefiles = g_fs->filter_directory(kSaveDir, [](const std::string& fn) {
 			return boost::algorithm::ends_with(fn, kSavegameExtension);
