@@ -94,11 +94,11 @@ private:
 
 	UI::Panel* parent_;
 	UI::Box* table_box_;
-	// UI::Table<uintptr_t const> table_;
-	SavegameTable table_new_;
 	FileType filetype_;
+
 	bool show_filenames_;
 	bool localize_autosave_;
+	SavegameTable table_new_;
 	std::vector<SavegameData> games_data_;
 	GameDetails game_details_;
 	UI::Button* delete_;
@@ -109,7 +109,7 @@ private:
 	void add_time_info(SavegameData& gamedata, Widelands::GamePreloadPacket& gpdp);
 	void add_general_information(SavegameData& gamedata, Widelands::GamePreloadPacket& gpdp);
 	void create_and_add_valid_entry(SavegameData& gamedata);
-	void create_and_add_error_entry(SavegameData& gamedata, std::string errormessage);
+	void add_error_info(SavegameData& gamedata, std::string errormessage);
 };
 
 #endif  // end of include guard: WL_WUI_LOAD_OR_SAVE_GAME_H

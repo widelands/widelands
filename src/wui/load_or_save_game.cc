@@ -30,8 +30,6 @@
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
-#include "graphic/font_handler.h"
-#include "graphic/text_layout.h"
 #include "helper.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -41,32 +39,6 @@
 #include "logic/replay.h"
 #include "ui_basic/messagebox.h"
 
-namespace {
-// This function concatenates the filename and localized map name for a savegame/replay.
-// If the filename starts with the map name, the map name is omitted.
-// It also prefixes autosave files with a numbered and localized "Autosave" prefix.
-std::string
-map_filename(const std::string& filename, const std::string& mapname, bool localize_autosave) {
-	std::string result = FileSystem::filename_without_ext(filename.c_str());
-
-	if (localize_autosave && boost::starts_with(result, kAutosavePrefix)) {
-		std::vector<std::string> autosave_name;
-		boost::split(autosave_name, result, boost::is_any_of("_"));
-		if (autosave_name.empty() || autosave_name.size() < 3) {
-			/** TRANSLATORS: %1% is a map's name. */
-			result = (boost::format(_("Autosave: %1%")) % mapname).str();
-		} else {
-			/** TRANSLATORS: %1% is a number, %2% a map's name. */
-			result = (boost::format(_("Autosave %1%: %2%")) % autosave_name.back() % mapname).str();
-		}
-	} else if (!(boost::starts_with(result, mapname))) {
-		/** TRANSLATORS: %1% is a filename, %2% a map's name. */
-		result = (boost::format(pgettext("filename_mapname", "%1%: %2%")) % result % mapname).str();
-	}
-	return result;
-}
-}  // namespace
-
 LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                Widelands::Game& g,
                                FileType filetype,
@@ -74,16 +46,24 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                bool localize_autosave)
    : parent_(parent),
      table_box_(new UI::Box(parent, 0, 0, UI::Box::Vertical)),
-     // table_(table_box_, 0, 0, 0, 0, style, UI::TableRows::kMultiDescending),
-     table_new_(table_box_, 0, 0, 0, 0, style, filetype == FileType::kReplay),
      filetype_(filetype),
      show_filenames_(false),
      localize_autosave_(localize_autosave),
+     table_new_(table_box_,
+                0,
+                0,
+                0,
+                0,
+                style,
+                filetype == FileType::kReplay,
+                filetype == FileType::kGameSinglePlayer,
+                show_filenames_),
+
      // Savegame description
      game_details_(
         parent,
         style,
-        filetype_ == FileType::kReplay ? GameDetails::Mode::kReplay : GameDetails::Mode::kSavegame),
+        filetype == FileType::kReplay ? GameDetails::Mode::kReplay : GameDetails::Mode::kSavegame),
      delete_(new UI::Button(game_details()->button_box(),
                             "delete",
                             0,
@@ -97,12 +77,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 
 	//	table_.set_column_compare(
 	//	   0, boost::bind(&LoadOrSaveGame::compare_date_descending, this, _1, _2));
-	//	table_.set_sort_column(0);
-	fill_table();
-
-	//	table_box_->add(&table_, UI::Box::Resizing::kExpandBoth);
-
 	table_box_->add(&table_new_, UI::Box::Resizing::kExpandBoth);
+	fill_table();
 
 	game_details_.button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	delete_->set_enabled(false);
@@ -117,7 +93,6 @@ const std::string LoadOrSaveGame::filename_list_string() const {
 const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>& selections) const {
 	boost::format message;
 	for (const uint32_t index : selections) {
-		//		const SavegameData& gamedata = games_data_[table_.get(table_.get_record(index))];
 		const SavegameData& gamedata = games_data_[table_new_.get(table_new_.get_record(index))];
 
 		if (gamedata.errormessage.empty()) {
@@ -459,38 +434,27 @@ void LoadOrSaveGame::create_and_add_valid_entry(SavegameData& gamedata) {
 	//			   show_filenames_ ?
 	//			      map_filename(gamedata.filename, gamedata.mapname, localize_autosave_) :
 	//			      gamedata.mapname;
-	//			te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) % map_basename
-	//% 			                  gamedata.gametime) 			                    .str()); 		} else { 			te.set_string(2, map_filename(gamedata.filename,
-	//gamedata.mapname, localize_autosave_));
+	//			te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) %
+	//map_basename % 			                  gamedata.gametime) .str()); 		} else {
+	//te.set_string(2, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
 	//		}
 	//	} else {
 	//		te.set_string(1, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
 	//	}
 }
 
-void LoadOrSaveGame::create_and_add_error_entry(SavegameData& gamedata, std::string errormessage) {
-	//	boost::replace_all(errormessage, "\n", "<br>");
-	//	gamedata.errormessage =
-	//	   ((boost::format("<p>%s</p><p>%s</p><p>%s</p>"))
-	//	    /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
-	//	    % _("This file has the wrong format and can’t be loaded."
-	//	        " Maybe it was created with an older version of Widelands.")
-	//	    /** TRANSLATORS: This text is on a separate line with an error message below */
-	//	    % _("Error message:") % errormessage)
-	//	      .str();
+void LoadOrSaveGame::add_error_info(SavegameData& gamedata, std::string errormessage) {
+	boost::replace_all(errormessage, "\n", "<br>");
+	gamedata.errormessage =
+	   ((boost::format("<p>%s</p><p>%s</p><p>%s</p>"))
+	    /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
+	    % _("This file has the wrong format and can’t be loaded."
+	        " Maybe it was created with an older version of Widelands.")
+	    /** TRANSLATORS: This text is on a separate line with an error message below */
+	    % _("Error message:") % errormessage)
+	      .str();
 
-	//	gamedata.mapname = FileSystem::filename_without_ext(gamedata.filename.c_str());
-	//	games_data_.push_back(gamedata);
-
-	//	UI::Table<uintptr_t const>::EntryRecord& te = table_.add(games_data_.size() - 1);
-	//	te.set_string(0, "");
-	//	if (filetype_ != FileType::kGameSinglePlayer) {
-	//		te.set_string(1, "");
-	//		/** TRANSLATORS: Prefix for incompatible files in load game screens */
-	//		te.set_string(2, (boost::format(_("Incompatible: %s")) % gamedata.mapname).str());
-	//	} else {
-	//		te.set_string(1, (boost::format(_("Incompatible: %s")) % gamedata.mapname).str());
-	//	}
+	gamedata.mapname = FileSystem::filename_without_ext(gamedata.filename.c_str());
 }
 
 void LoadOrSaveGame::add_entry(const std::string& gamefilename) {
@@ -522,11 +486,12 @@ void LoadOrSaveGame::add_entry(const std::string& gamefilename) {
 		gamedata.wincondition = gpdp.get_localized_win_condition();
 		gamedata.minimap_path = gpdp.get_minimap_path();
 
-		games_data_.push_back(gamedata);
 		//        create_and_add_valid_entry(gamedata);
 	} catch (const std::exception& e) {
-		// create_and_add_error_entry(gamedata, e.what());
+		add_error_info(gamedata, e.what());
 	}
+
+	games_data_.push_back(gamedata);
 }
 
 void LoadOrSaveGame::fill_table() {
@@ -540,9 +505,8 @@ void LoadOrSaveGame::fill_table() {
 			return boost::algorithm::ends_with(fn, kReplayExtension);
 		});
 		// Update description column title for replays
-		//		table_.set_column_tooltip(2, show_filenames_ ? _("Filename: Map name (start of replay)")
-		//:
-		//		                                               _("Map name (start of replay)"));
+		table_new_.set_column_tooltip(2, show_filenames_ ? _("Filename: Map name (start of replay)") :
+		                                                   _("Map name (start of replay)"));
 	} else {
 		gamefiles = g_fs->filter_directory(kSaveDir, [](const std::string& fn) {
 			return boost::algorithm::ends_with(fn, kSavegameExtension);
@@ -564,4 +528,5 @@ void LoadOrSaveGame::set_show_filenames(bool show_filenames) {
 		return;
 	}
 	show_filenames_ = show_filenames;
+	table_new_.set_show_filenames(show_filenames);
 }
