@@ -96,20 +96,19 @@ private:
 	UI::Box* table_box_;
 	FileType filetype_;
 
-	bool show_filenames_;
 	bool localize_autosave_;
-	SavegameTable table_new_;
+	SavegameTable table_;
 	std::vector<SavegameData> games_data_;
 	GameDetails game_details_;
 	UI::Button* delete_;
 
 	Widelands::Game& game_;
-	void add_entry(const std::string& gamefilename);
+	void load_gamefile(const std::string& gamefilename);
 	bool is_valid_gametype(SavegameData& gamedata);
 	void add_time_info(SavegameData& gamedata, Widelands::GamePreloadPacket& gpdp);
 	void add_general_information(SavegameData& gamedata, Widelands::GamePreloadPacket& gpdp);
-	void create_and_add_valid_entry(SavegameData& gamedata);
 	void add_error_info(SavegameData& gamedata, std::string errormessage);
+	FilenameSet find_gamefiles();
 };
 
 #endif  // end of include guard: WL_WUI_LOAD_OR_SAVE_GAME_H

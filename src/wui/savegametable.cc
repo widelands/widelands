@@ -201,6 +201,7 @@ void SavegameTable::fill(const std::vector<SavegameData>& entries) {
 	}
 	sort();
 	layout();
+	focus();
 }
 
 void SavegameTable::set_show_filenames(bool show_filenames) {

@@ -47,17 +47,16 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
    : parent_(parent),
      table_box_(new UI::Box(parent, 0, 0, UI::Box::Vertical)),
      filetype_(filetype),
-     show_filenames_(false),
      localize_autosave_(localize_autosave),
-     table_new_(table_box_,
-                0,
-                0,
-                0,
-                0,
-                style,
-                filetype == FileType::kReplay,
-                filetype == FileType::kGameSinglePlayer,
-                show_filenames_),
+     table_(table_box_,
+            0,
+            0,
+            0,
+            0,
+            style,
+            filetype == FileType::kReplay,
+            filetype == FileType::kGameSinglePlayer,
+            false),
 
      // Savegame description
      game_details_(
@@ -75,9 +74,9 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                             _("Delete"))),
      game_(g) {
 
-	//	table_.set_column_compare(
-	//	   0, boost::bind(&LoadOrSaveGame::compare_date_descending, this, _1, _2));
-	table_box_->add(&table_new_, UI::Box::Resizing::kExpandBoth);
+	table_.set_column_compare(
+	   0, boost::bind(&LoadOrSaveGame::compare_date_descending, this, _1, _2));
+	table_box_->add(&table_, UI::Box::Resizing::kExpandBoth);
 	fill_table();
 
 	game_details_.button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
@@ -86,13 +85,13 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 }
 
 const std::string LoadOrSaveGame::filename_list_string() const {
-	return filename_list_string(table_new_.selections());
+	return filename_list_string(table_.selections());
 }
 
 const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>& selections) const {
 	boost::format message;
 	for (const uint32_t index : selections) {
-		const SavegameData& gamedata = games_data_[table_new_.get(table_new_.get_record(index))];
+		const SavegameData& gamedata = games_data_[table_.get(table_.get_record(index))];
 
 		if (gamedata.errormessage.empty()) {
 			std::vector<std::string> listme;
@@ -107,15 +106,15 @@ const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>&
 	return message.str();
 }
 bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) const {
-	const SavegameData& r1 = games_data_[table_new_[rowa]];
-	const SavegameData& r2 = games_data_[table_new_[rowb]];
+	const SavegameData& r1 = games_data_[table_[rowa]];
+	const SavegameData& r2 = games_data_[table_[rowb]];
 
 	return r1.savetimestamp < r2.savetimestamp;
 }
 
 std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 	std::unique_ptr<SavegameData> result(new SavegameData());
-	size_t selections = table_new_.selections().size();
+	size_t selections = table_.selections().size();
 	if (selections == 1) {
 		delete_->set_tooltip(
 		   filetype_ == FileType::kReplay ?
@@ -123,7 +122,7 @@ std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 		      _("Delete this replay") :
 		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
 		      _("Delete this game"));
-		result.reset(new SavegameData(games_data_[table_new_.get_selected()]));
+		result.reset(new SavegameData(games_data_[table_.get_selected()]));
 	} else if (selections > 1) {
 		delete_->set_tooltip(
 		   filetype_ == FileType::kReplay ?
@@ -146,27 +145,27 @@ std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 }
 
 bool LoadOrSaveGame::has_selection() const {
-	return table_new_.has_selection();
+	return table_.has_selection();
 }
 
 void LoadOrSaveGame::clear_selections() {
-	table_new_.clear_selections();
+	table_.clear_selections();
 	game_details_.clear();
 }
 
 void LoadOrSaveGame::select_by_name(const std::string& name) {
-	table_new_.clear_selections();
-	for (size_t idx = 0; idx < table_new_.size(); ++idx) {
-		const SavegameData& gamedata = games_data_[table_new_[idx]];
+	table_.clear_selections();
+	for (size_t idx = 0; idx < table_.size(); ++idx) {
+		const SavegameData& gamedata = games_data_[table_[idx]];
 		if (name == gamedata.filename) {
-			table_new_.select(idx);
+			table_.select(idx);
 			return;
 		}
 	}
 }
 
 SavegameTable& LoadOrSaveGame::table() {
-	return table_new_;
+	return table_;
 }
 
 UI::Box* LoadOrSaveGame::table_box() {
@@ -178,7 +177,7 @@ GameDetails* LoadOrSaveGame::game_details() {
 }
 
 const std::string LoadOrSaveGame::get_filename(int index) const {
-	return games_data_[table_new_.get(table_new_.get_record(index))].filename;
+	return games_data_[table_.get(table_.get_record(index))].filename;
 }
 
 void LoadOrSaveGame::clicked_delete() {
@@ -191,16 +190,18 @@ void LoadOrSaveGame::clicked_delete() {
 	if (filetype_ == FileType::kReplay) {
 		header = no_selections == 1 ? _("Do you really want to delete this replay?") :
 		                              /** TRANSLATORS: Used with multiple replays, 1 replay has a
-		                      separate string. DO NOT omit the placeholder in your translation. */
+		                                                    separate string. DO NOT omit the
+		                                 placeholder in your translation. */
 		            (boost::format(ngettext("Do you really want to delete this %d replay?",
 		                                    "Do you really want to delete these %d replays?",
 		                                    no_selections)) %
 		             no_selections)
 		               .str();
 	} else {
-		header = no_selections == 1 ? _("Do you really want to delete this game?") :
-		                              /** TRANSLATORS: Used with multiple games, 1 game has a separate
-		                     string. DO NOT omit the placeholder in your translation. */
+		header = no_selections == 1 ?
+		            _("Do you really want to delete this game?") :
+		            /** TRANSLATORS: Used with multiple games, 1 game has a separate
+		                                 string. DO NOT omit the placeholder in your translation. */
 		            (boost::format(ngettext("Do you really want to delete this %d game?",
 		                                    "Do you really want to delete these %d games?",
 		                                    no_selections)) %
@@ -217,7 +218,7 @@ void LoadOrSaveGame::clicked_delete() {
 		   no_selections == 1 ? _("Confirm Deleting File") : _("Confirm Deleting Files"), message,
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		do_delete = confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
-		table_new_.focus();
+		table_.focus();
 	}
 	if (do_delete) {
 		// Failed deletions aren't a serious problem, we just catch the errors
@@ -287,13 +288,13 @@ void LoadOrSaveGame::clicked_delete() {
 
 		// Select something meaningful if possible, then scroll to it.
 		const uint32_t selectme = *selections.begin();
-		if (selectme < table_new_.size() - 1) {
-			table_new_.select(selectme);
-		} else if (!table_new_.empty()) {
-			table_new_.select(table_new_.size() - 1);
+		if (selectme < table_.size() - 1) {
+			table_.select(selectme);
+		} else if (!table_.empty()) {
+			table_.select(table_.size() - 1);
 		}
-		if (table_new_.has_selection()) {
-			table_new_.scroll_to_item(table_new_.selection_index() + 1);
+		if (table_.has_selection()) {
+			table_.scroll_to_item(table_.selection_index() + 1);
 		}
 		// Make sure that the game details are updated
 		entry_selected();
@@ -341,11 +342,11 @@ void LoadOrSaveGame::add_time_info(SavegameData& gamedata, Widelands::GamePreloa
 
 			gamedata.savedatestring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-			      hour:minute */
+			         hour:minute */
 			   (boost::format(_("Today, %1%:%2%")) % savedate->tm_hour % minute).str();
 			gamedata.savedonstring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-			      hour:minute. This is part of a list. */
+			         hour:minute. This is part of a list. */
 			   (boost::format(_("saved today at %1%:%2%")) % savedate->tm_hour % minute).str();
 		} else if ((savedate->tm_year == current_year && savedate->tm_mon == current_month &&
 		            savedate->tm_mday == current_day - 1) ||
@@ -358,22 +359,22 @@ void LoadOrSaveGame::add_time_info(SavegameData& gamedata, Widelands::GamePreloa
 
 			gamedata.savedatestring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-			      hour:minute */
+			         hour:minute */
 			   (boost::format(_("Yesterday, %1%:%2%")) % savedate->tm_hour % minute).str();
 			gamedata.savedonstring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-			      hour:minute. This is part of a list. */
+			         hour:minute. This is part of a list. */
 			   (boost::format(_("saved yesterday at %1%:%2%")) % savedate->tm_hour % minute).str();
 		} else {  // Older
 			gamedata.savedatestring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-			      month day, year */
+			         month day, year */
 			   (boost::format(_("%1% %2%, %3%")) % localize_month(savedate->tm_mon) %
 			    savedate->tm_mday % (1900 + savedate->tm_year))
 			      .str();
 			gamedata.savedonstring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-			      month (short name) day (number), year (number). This is part of a list. */
+			         month (short name) day (number), year (number). This is part of a list. */
 			   (boost::format(_("saved on %1% %2%, %3%")) % savedate->tm_mday %
 			    localize_month(savedate->tm_mon) % (1900 + savedate->tm_year))
 			      .str();
@@ -388,6 +389,8 @@ void LoadOrSaveGame::add_general_information(SavegameData& gamedata,
 	gamedata.set_gametime(gpdp.get_gametime());
 	gamedata.set_nrplayers(gpdp.get_number_of_players());
 	gamedata.version = gpdp.get_version();
+	gamedata.wincondition = gpdp.get_localized_win_condition();
+	gamedata.minimap_path = gpdp.get_minimap_path();
 }
 
 void LoadOrSaveGame::add_error_info(SavegameData& gamedata, std::string errormessage) {
@@ -404,7 +407,7 @@ void LoadOrSaveGame::add_error_info(SavegameData& gamedata, std::string errormes
 	gamedata.mapname = FileSystem::filename_without_ext(gamedata.filename.c_str());
 }
 
-void LoadOrSaveGame::add_entry(const std::string& gamefilename) {
+void LoadOrSaveGame::load_gamefile(const std::string& gamefilename) {
 	SavegameData gamedata;
 	Widelands::GamePreloadPacket gpdp;
 	std::string savename = gamefilename;
@@ -412,11 +415,6 @@ void LoadOrSaveGame::add_entry(const std::string& gamefilename) {
 	if (filetype_ == FileType::kReplay) {
 		savename += kSavegameExtension;
 	}
-
-	if (!is_valid_gametype(gamedata)) {
-		return;
-	}
-
 	if (!g_fs->file_exists(savename.c_str())) {
 		return;
 	}
@@ -427,11 +425,12 @@ void LoadOrSaveGame::add_entry(const std::string& gamefilename) {
 		Widelands::GameLoader gl(savename.c_str(), game_);
 		gl.preload_game(gpdp);
 
+		if (!is_valid_gametype(gamedata)) {
+			return;
+		}
+
 		add_general_information(gamedata, gpdp);
 		add_time_info(gamedata, gpdp);
-
-		gamedata.wincondition = gpdp.get_localized_win_condition();
-		gamedata.minimap_path = gpdp.get_minimap_path();
 
 	} catch (const std::exception& e) {
 		add_error_info(gamedata, e.what());
@@ -440,10 +439,7 @@ void LoadOrSaveGame::add_entry(const std::string& gamefilename) {
 	games_data_.push_back(gamedata);
 }
 
-void LoadOrSaveGame::fill_table() {
-
-	clear_selections();
-
+FilenameSet LoadOrSaveGame::find_gamefiles() {
 	FilenameSet gamefiles;
 	if (filetype_ == FileType::kReplay) {
 		gamefiles = g_fs->filter_directory(kReplayDir, [](const std::string& fn) {
@@ -456,20 +452,24 @@ void LoadOrSaveGame::fill_table() {
 		});
 	}
 
+	return gamefiles;
+}
+
+void LoadOrSaveGame::fill_table() {
+	clear_selections();
+
+	FilenameSet gamefiles = find_gamefiles();
+
 	for (const std::string& gamefilename : gamefiles) {
-		add_entry(gamefilename);
+		load_gamefile(gamefilename);
 	}
 
-	table_new_.fill(games_data_);
-
-	//	table_.sort();
-	//	table_.focus();
+	table_.fill(games_data_);
 }
 
 void LoadOrSaveGame::set_show_filenames(bool show_filenames) {
 	if (filetype_ != FileType::kReplay) {
 		return;
 	}
-	show_filenames_ = show_filenames;
-	table_new_.set_show_filenames(show_filenames);
+	table_.set_show_filenames(show_filenames);
 }
