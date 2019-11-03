@@ -54,8 +54,8 @@ Flag::Flag()
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
      always_call_for_flag_(nullptr),
-	 last_update_(0),
-	 freeze_counter_(0) {
+     last_update_(0),
+     freeze_counter_(0) {
 	for (uint32_t i = 0; i < 6; ++i) {
 		roads_[i] = nullptr;
 	}
@@ -87,7 +87,7 @@ Flag::~Flag() {
 }
 
 void Flag::load_finish(EditorGameBase& egbase) {
-    last_update_ = egbase.get_gametime();
+	last_update_ = egbase.get_gametime();
 	auto should_be_deleted = [&egbase, this](const OPtr<Worker>& r) {
 		Worker& worker = *r.get(egbase);
 		Bob::State const* const state = worker.get_state(Worker::taskWaitforcapacity);
@@ -122,7 +122,7 @@ Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords, 
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
      always_call_for_flag_(nullptr),
-	 last_update_(egbase.get_gametime()),
+     last_update_(egbase.get_gametime()),
      freeze_counter_(0) {
 	for (uint32_t i = 0; i < 6; ++i) {
 		roads_[i] = nullptr;
@@ -156,7 +156,7 @@ Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords, 
 }
 
 void Flag::set_flag_position(Coords coords) {
-    // NOCOM last_update_ = owner().egbase().get_gametime();
+	// NOCOM last_update_ = owner().egbase().get_gametime();
 	position_ = coords;
 }
 
@@ -176,7 +176,7 @@ Flag& Flag::base_flag() {
  * Call this only from Economy code!
  */
 void Flag::set_economy(Economy* const e) {
-    // NOCOM last_update_ = owner().egbase().get_gametime();
+	// NOCOM last_update_ = owner().egbase().get_gametime();
 	Economy* const old = get_economy();
 
 	if (old == e) {
@@ -240,7 +240,7 @@ void Flag::detach_building(EditorGameBase& egbase) {
  * Call this only from the Road init!
  */
 void Flag::attach_road(int32_t const dir, Road* const road) {
-    // NOCOM last_update_ = owner().egbase().get_gametime();
+	// NOCOM last_update_ = owner().egbase().get_gametime();
 	assert(!roads_[dir - 1] || roads_[dir - 1] == road);
 
 	roads_[dir - 1] = road;
@@ -251,7 +251,7 @@ void Flag::attach_road(int32_t const dir, Road* const road) {
  * Call this only from the Road init!
  */
 void Flag::detach_road(int32_t const dir) {
-    // NOCOM last_update_ = owner().egbase().get_gametime();
+	// NOCOM last_update_ = owner().egbase().get_gametime();
 	assert(roads_[dir - 1]);
 
 	roads_[dir - 1]->set_economy(nullptr);
@@ -564,7 +564,7 @@ WareInstance* Flag::fetch_pending_ware(Game& game, PlayerImmovable& dest) {
  * Accelerate potential promotion of roads adjacent to a newly promoted road.
  */
 void Flag::propagate_promoted_road(Road* const promoted_road) {
-    // NOCOM last_update_ = owner().egbase().get_gametime();
+	// NOCOM last_update_ = owner().egbase().get_gametime();
 
 	// Abort if flag has a building attached to it
 	if (building_) {
@@ -854,8 +854,10 @@ void Flag::destroy(EditorGameBase& egbase) {
  * Add a new flag job to request the worker with the given ID,
  * and to execute the given program once it's completed.
  */
-void Flag::add_flag_job(Game& game, DescriptionIndex const workerware, const std::string& programname) {
-  last_update_ = game.get_gametime();
+void Flag::add_flag_job(Game& game,
+                        DescriptionIndex const workerware,
+                        const std::string& programname) {
+	last_update_ = game.get_gametime();
 	FlagJob j;
 
 	j.request = new Request(*this, workerware, Flag::flag_job_request_callback, wwWORKER);
@@ -922,12 +924,12 @@ void Flag::unfreeze_wares(Game& game) {
 			throw wexception("Frozen flag at %d, %d", get_position().x, get_position().y);
 			/*
 			for (int32_t i = 0; i < ware_filled_; ++i) {
-				init_ware(game, *wares_[i].ware, wares_[i]);
-				wares_[i].ware->update(game);
+			   init_ware(game, *wares_[i].ware, wares_[i]);
+			   wares_[i].ware->update(game);
 			}
 			*/
 		}
 		freeze_counter_ = 0;
 	}
 }
-} // namespace Widelands
+}  // namespace Widelands

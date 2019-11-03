@@ -141,8 +141,8 @@ Game::Game()
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
      replay_(false),
-		 last_frozen_flag_check_(0) {
-			 Economy::initialize_serial();
+     last_frozen_flag_check_(0) {
+	Economy::initialize_serial();
 }
 
 Game::~Game() {
@@ -604,15 +604,15 @@ void Game::think() {
 
 		if (gametime > last_frozen_flag_check_ + kTriggerPotentiallyFrozenFlagInterval) {
 			last_frozen_flag_check_ = gametime;
-            for (int x = 0; x < map().get_width(); ++x) {
-                for (int y = 0; y < map().get_height(); ++y) {
-                    const Coords coords(x, y);
-                    BaseImmovable* imm = map().get_immovable(coords);
-                    if (imm != nullptr && imm->descr().type() == MapObjectType::FLAG) {
-                        dynamic_cast<Flag*>(imm)->unfreeze_wares(*this);
-                    }
-                }
-            }
+			for (int x = 0; x < map().get_width(); ++x) {
+				for (int y = 0; y < map().get_height(); ++y) {
+					const Coords coords(x, y);
+					BaseImmovable* imm = map().get_immovable(coords);
+					if (imm != nullptr && imm->descr().type() == MapObjectType::FLAG) {
+						dynamic_cast<Flag*>(imm)->unfreeze_wares(*this);
+					}
+				}
+			}
 		}
 
 		// check if autosave is needed
