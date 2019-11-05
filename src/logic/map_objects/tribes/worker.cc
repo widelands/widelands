@@ -1116,8 +1116,12 @@ bool Worker::run_construct(Game& game, State& state, const Action& /* action */)
 }
 
 Worker::Worker(const WorkerDescr& worker_descr)
-   : Bob(worker_descr), worker_economy_(nullptr), ware_economy_(nullptr),
-   		supply_(nullptr), transfer_(nullptr), current_exp_(0) {
+   : Bob(worker_descr),
+     worker_economy_(nullptr),
+     ware_economy_(nullptr),
+     supply_(nullptr),
+     transfer_(nullptr),
+     current_exp_(0) {
 }
 
 Worker::~Worker() {
@@ -1245,7 +1249,8 @@ void Worker::set_economy(Economy* const economy, WareWorker type) {
 			supply_->set_economy(worker_economy_);
 		}
 		if (worker_economy_) {
-			worker_economy_->add_wares_or_workers(owner().tribe().worker_index(descr().name().c_str()), 1, ware_economy_);
+			worker_economy_->add_wares_or_workers(
+			   owner().tribe().worker_index(descr().name().c_str()), 1, ware_economy_);
 		}
 	} break;
 	}
@@ -1411,7 +1416,8 @@ DescriptionIndex Worker::level(Game& game) {
  */
 void Worker::init_auto_task(Game& game) {
 	if (PlayerImmovable* location = get_location(game)) {
-		if (get_economy(wwWORKER)->warehouses().size() || location->descr().type() >= MapObjectType::BUILDING)
+		if (get_economy(wwWORKER)->warehouses().size() ||
+		    location->descr().type() >= MapObjectType::BUILDING)
 			return start_task_gowarehouse(game);
 
 		set_location(nullptr);

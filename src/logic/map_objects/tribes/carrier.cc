@@ -112,10 +112,9 @@ void Carrier::road_update(Game& game, State& state) {
 		Road& r = dynamic_cast<Road&>(road);
 		r.charge_wallet(game);
 		// if road still promoted then schedule demotion, otherwise go fully idle waiting until signal
-		return r.get_roadtype() == RoadType::kBusy ?
-				schedule_act(game, (r.wallet() + 2) * 500) : skip_act();
-	}
-	else {
+		return r.get_roadtype() == RoadType::kBusy ? schedule_act(game, (r.wallet() + 2) * 500) :
+		                                             skip_act();
+	} else {
 		skip_act();
 	}
 }
@@ -185,7 +184,8 @@ void Carrier::transport_update(Game& game, State& state) {
 		// A sanity check is necessary, in case the building has been destroyed
 		PlayerImmovable* const next = ware.get_next_move_step(game);
 
-		if (next && next != &flag && &next->base_flag() == &flag && road.descr().type() == MapObjectType::ROAD) {
+		if (next && next != &flag && &next->base_flag() == &flag &&
+		    road.descr().type() == MapObjectType::ROAD) {
 			// Pay some coins before entering the building,
 			// to compensate for the time to be spent in its street-segment.
 			// Ferries cannot enter buildings, so they lave the ware at the flag
@@ -230,9 +230,8 @@ void Carrier::deliver_to_building(Game& game, State& state) {
 			} else {
 				molog("[Carrier]: Building switch from under us, return to road.\n");
 
-				state.ivar1 =
-				   &building->base_flag() ==
-				   &dynamic_cast<RoadBase&>(*get_location(game)).get_flag(static_cast<RoadBase::FlagId>(0));
+				state.ivar1 = &building->base_flag() == &dynamic_cast<RoadBase&>(*get_location(game))
+				                                            .get_flag(static_cast<RoadBase::FlagId>(0));
 				break;
 			}
 		}
@@ -434,11 +433,13 @@ void Carrier::find_pending_ware(Game& game) {
 
 	assert(promised_pickup_to_ == NOONE);
 
-	if (road.get_flag(RoadBase::FlagStart).has_pending_ware(game, road.get_flag(RoadBase::FlagEnd))) {
+	if (road.get_flag(RoadBase::FlagStart)
+	       .has_pending_ware(game, road.get_flag(RoadBase::FlagEnd))) {
 		havewarebits |= 1;
 	}
 
-	if (road.get_flag(RoadBase::FlagEnd).has_pending_ware(game, road.get_flag(RoadBase::FlagStart))) {
+	if (road.get_flag(RoadBase::FlagEnd)
+	       .has_pending_ware(game, road.get_flag(RoadBase::FlagStart))) {
 		havewarebits |= 2;
 	}
 

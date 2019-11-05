@@ -28,8 +28,8 @@
 namespace Widelands {
 
 struct MapAStarBase {
-	explicit MapAStarBase(Map& m, WareWorker type) :
-			map(m), pathfields(m.pathfieldmgr_->allocate()), queue(type) {
+	explicit MapAStarBase(Map& m, WareWorker type)
+	   : map(m), pathfields(m.pathfieldmgr_->allocate()), queue(type) {
 	}
 
 	bool empty() const {
@@ -110,7 +110,8 @@ struct StepEvalAStar {
  * @endcode
  */
 template <typename StepEval> struct MapAStar : MapAStarBase {
-	MapAStar(Map& map_, const StepEval& eval_, WareWorker type) : MapAStarBase(map_, type), eval(eval_) {
+	MapAStar(Map& map_, const StepEval& eval_, WareWorker type)
+	   : MapAStarBase(map_, type), eval(eval_) {
 	}
 
 	void push(Coords pos, int32_t cost = 0);

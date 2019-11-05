@@ -38,8 +38,8 @@
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/draw_text.h"
-#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/map_objects/tribes/training_attribute.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/tabpanel.h"
@@ -76,11 +76,11 @@ enum class MapObjectType : uint8_t {
 	IMMOVABLE = 30,
 
 	// everything below is at least a PlayerImmovable
-	FLAG = 40, // Flag
-	PORTDOCK,  // Portdock
-	ROADBASE,  // Roadbase
-	ROAD,      // Roadbase -- Road
-	WATERWAY,  // Roadbase -- Waterway
+	FLAG = 40,  // Flag
+	PORTDOCK,   // Portdock
+	ROADBASE,   // Roadbase
+	ROAD,       // Roadbase -- Road
+	WATERWAY,   // Roadbase -- Waterway
 
 	// everything below is at least a Building
 	BUILDING = 100,    // Building

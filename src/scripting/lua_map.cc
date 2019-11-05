@@ -311,8 +311,7 @@ WaresWorkersMap get_valid_workers_for(const RoadBase& r) {
 	WaresWorkersMap valid_workers;
 	if (r.get_roadtype() == RoadType::kWaterway) {
 		valid_workers.insert(WorkerAmount(r.owner().tribe().ferry(), 1));
-	}
-	else {
+	} else {
 		valid_workers.insert(WorkerAmount(r.owner().tribe().carrier(), 1));
 		if (r.get_roadtype() == RoadType::kBusy) {
 			valid_workers.insert(WorkerAmount(r.owner().tribe().carrier2(), 1));
@@ -3785,7 +3784,8 @@ void LuaEconomy::__unpersist(lua_State* L) {
    .. method:: target_quantity(name)
 
       Returns the amount of the given ware or worker that should be kept in stock for this economy.
-      Whether this works only for wares or only for workers is determined by the type of this economy.
+      Whether this works only for wares or only for workers is determined by the type of this
+   economy.
 
       **Warning**: Since economies can disappear when a player merges them
       through placing/deleting roads and flags, you must get a fresh economy
@@ -3797,26 +3797,26 @@ void LuaEconomy::__unpersist(lua_State* L) {
 int LuaEconomy::target_quantity(lua_State* L) {
 	const std::string wname = luaL_checkstring(L, 2);
 	switch (get()->type()) {
-		case Widelands::wwWARE: {
-			const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(wname);
-			if (get_egbase(L).tribes().ware_exists(index)) {
-				const Widelands::Economy::TargetQuantity& quantity = get()->target_quantity(index);
-				lua_pushinteger(L, quantity.permanent);
-			} else {
-				report_error(L, "There is no ware '%s'.", wname.c_str());
-			}
-			break;
+	case Widelands::wwWARE: {
+		const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(wname);
+		if (get_egbase(L).tribes().ware_exists(index)) {
+			const Widelands::Economy::TargetQuantity& quantity = get()->target_quantity(index);
+			lua_pushinteger(L, quantity.permanent);
+		} else {
+			report_error(L, "There is no ware '%s'.", wname.c_str());
 		}
-		case Widelands::wwWORKER: {
-			const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(wname);
-			if (get_egbase(L).tribes().worker_exists(index)) {
-				const Widelands::Economy::TargetQuantity& quantity = get()->target_quantity(index);
-				lua_pushinteger(L, quantity.permanent);
-			} else {
-				report_error(L, "There is no worker '%s'.", wname.c_str());
-			}
-			break;
+		break;
+	}
+	case Widelands::wwWORKER: {
+		const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(wname);
+		if (get_egbase(L).tribes().worker_exists(index)) {
+			const Widelands::Economy::TargetQuantity& quantity = get()->target_quantity(index);
+			lua_pushinteger(L, quantity.permanent);
+		} else {
+			report_error(L, "There is no worker '%s'.", wname.c_str());
 		}
+		break;
+	}
 	}
 	return 1;
 }
@@ -3824,8 +3824,9 @@ int LuaEconomy::target_quantity(lua_State* L) {
 /* RST
    .. method:: set_target_quantity(name)
 
-      Sets the amount of the given ware or worker type that should be kept in stock for this economy.
-      Whether this works only for wares or only for workers is determined by the type of this economy.
+      Sets the amount of the given ware or worker type that should be kept in stock for this
+   economy. Whether this works only for wares or only for workers is determined by the type of this
+   economy.
 
       **Warning**: Since economies can disappear when a player merges them
       through placing/deleting roads and flags, you must get a fresh economy
@@ -3840,32 +3841,32 @@ int LuaEconomy::target_quantity(lua_State* L) {
 int LuaEconomy::set_target_quantity(lua_State* L) {
 	const std::string wname = luaL_checkstring(L, 2);
 	switch (get()->type()) {
-		case Widelands::wwWARE: {
-			const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(wname);
-			if (get_egbase(L).tribes().ware_exists(index)) {
-				const int quantity = luaL_checkinteger(L, 3);
-				if (quantity < 0) {
-					report_error(L, "Target ware quantity needs to be >= 0 but was '%d'.", quantity);
-				}
-				get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
-			} else {
-				report_error(L, "There is no ware '%s'.", wname.c_str());
+	case Widelands::wwWARE: {
+		const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(wname);
+		if (get_egbase(L).tribes().ware_exists(index)) {
+			const int quantity = luaL_checkinteger(L, 3);
+			if (quantity < 0) {
+				report_error(L, "Target ware quantity needs to be >= 0 but was '%d'.", quantity);
 			}
-			break;
+			get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+		} else {
+			report_error(L, "There is no ware '%s'.", wname.c_str());
 		}
-		case Widelands::wwWORKER: {
-			const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(wname);
-			if (get_egbase(L).tribes().worker_exists(index)) {
-				const int quantity = luaL_checkinteger(L, 3);
-				if (quantity < 0) {
-					report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
-				}
-				get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
-			} else {
-				report_error(L, "There is no worker '%s'.", wname.c_str());
+		break;
+	}
+	case Widelands::wwWORKER: {
+		const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(wname);
+		if (get_egbase(L).tribes().worker_exists(index)) {
+			const int quantity = luaL_checkinteger(L, 3);
+			if (quantity < 0) {
+				report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
 			}
-			break;
+			get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+		} else {
+			report_error(L, "There is no worker '%s'.", wname.c_str());
 		}
+		break;
+	}
 	}
 	return 1;
 }
@@ -4241,11 +4242,8 @@ const MethodType<LuaFlag> LuaFlag::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
-   PROP_RO(LuaFlag, ware_economy),
-   PROP_RO(LuaFlag, worker_economy),
-   PROP_RO(LuaFlag, roads),
-   PROP_RO(LuaFlag, building),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaFlag, ware_economy), PROP_RO(LuaFlag, worker_economy), PROP_RO(LuaFlag, roads),
+   PROP_RO(LuaFlag, building),     {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5302,8 +5300,10 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 	for (const auto& sp : setpoints) {
 		if (!valid_inputs.count(sp.first)) {
 			report_error(L, "<%s> can't be stored in this building: %s!",
-					sp.first.second == wwWARE ? tribe.get_ware_descr(sp.first.first)->name().c_str() :
-					tribe.get_worker_descr(sp.first.first)->name().c_str(), ps->descr().name().c_str());
+			             sp.first.second == wwWARE ?
+			                tribe.get_ware_descr(sp.first.first)->name().c_str() :
+			                tribe.get_worker_descr(sp.first.first)->name().c_str(),
+			             ps->descr().name().c_str());
 		}
 		InputQueue& iq = ps->inputqueue(sp.first.first, sp.first.second);
 		if (sp.second > iq.get_max_size()) {
@@ -5349,7 +5349,7 @@ int LuaProductionSite::get_inputs(lua_State* L) {
 			break;
 		} else {
 			lua_pushstring(L, input.second == wwWARE ? tribe.get_ware_descr(input.first)->name() :
-					tribe.get_worker_descr(input.first)->name());
+			                                           tribe.get_worker_descr(input.first)->name());
 			lua_pushuint32(L, cnt);
 			lua_settable(L, -3);
 		}
@@ -5691,11 +5691,15 @@ const MethodType<LuaShip> LuaShip::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaShip> LuaShip::Properties[] = {
-   PROP_RO(LuaShip, debug_ware_economy), PROP_RO(LuaShip, debug_worker_economy),
+   PROP_RO(LuaShip, debug_ware_economy),
+   PROP_RO(LuaShip, debug_worker_economy),
    PROP_RO(LuaShip, last_portdock),
-   PROP_RO(LuaShip, destination),        PROP_RO(LuaShip, state),
-   PROP_RW(LuaShip, scouting_direction), PROP_RW(LuaShip, island_explore_direction),
-   PROP_RO(LuaShip, shipname),           {nullptr, nullptr, nullptr},
+   PROP_RO(LuaShip, destination),
+   PROP_RO(LuaShip, state),
+   PROP_RW(LuaShip, scouting_direction),
+   PROP_RW(LuaShip, island_explore_direction),
+   PROP_RO(LuaShip, shipname),
+   {nullptr, nullptr, nullptr},
 };
 
 /*

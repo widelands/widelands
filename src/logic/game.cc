@@ -1028,18 +1028,18 @@ void Game::sample_statistics() {
 			const TribeDescr& tribe = plr->tribe();
 
 			switch (economy.second->type()) {
-				case wwWARE:
-					for (const DescriptionIndex& ware_index : tribe.wares()) {
-						wastock += economy.second->stock_ware_or_worker(ware_index);
+			case wwWARE:
+				for (const DescriptionIndex& ware_index : tribe.wares()) {
+					wastock += economy.second->stock_ware_or_worker(ware_index);
+				}
+				break;
+			case wwWORKER:
+				for (const DescriptionIndex& worker_index : tribe.workers()) {
+					if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
+						wostock += economy.second->stock_ware_or_worker(worker_index);
 					}
-					break;
-				case wwWORKER:
-					for (const DescriptionIndex& worker_index : tribe.workers()) {
-						if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
-							wostock += economy.second->stock_ware_or_worker(worker_index);
-						}
-					}
-					break;
+				}
+				break;
 			}
 		}
 		nr_wares[p - 1] = wastock;

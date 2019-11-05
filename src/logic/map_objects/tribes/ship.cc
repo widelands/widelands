@@ -128,7 +128,11 @@ Bob& ShipDescr::create_object() const {
 }
 
 Ship::Ship(const ShipDescr& gdescr)
-   : Bob(gdescr), fleet_(nullptr), ware_economy_(nullptr), worker_economy_(nullptr), ship_state_(ShipStates::kTransport) {
+   : Bob(gdescr),
+     fleet_(nullptr),
+     ware_economy_(nullptr),
+     worker_economy_(nullptr),
+     ship_state_(ShipStates::kTransport) {
 }
 
 Ship::~Ship() {
@@ -1356,8 +1360,9 @@ void Ship::Loader::load(FileRead& fr, uint8_t pw) {
 	// Economy
 	// TODO(Nordfriese): Savegame compatibility
 	ware_economy_serial_ = fr.unsigned_32();
-	worker_economy_serial_ = packet_version_ >= 10 ? fr.unsigned_32() :
-			mol().get_economy_savegame_compatibility(ware_economy_serial_);
+	worker_economy_serial_ = packet_version_ >= 10 ?
+	                            fr.unsigned_32() :
+	                            mol().get_economy_savegame_compatibility(ware_economy_serial_);
 
 	// The state the ship is in
 	ship_state_ = static_cast<ShipStates>(fr.unsigned_8());

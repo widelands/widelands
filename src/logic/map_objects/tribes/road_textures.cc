@@ -30,7 +30,8 @@ const Image& RoadTextures::get_busy_texture(const Widelands::Coords& coords, int
 	return *busy_textures_.at((coords.x + coords.y + direction) % busy_textures_.size());
 }
 
-const Image& RoadTextures::get_waterway_texture(const Widelands::Coords& coords, int direction) const {
+const Image& RoadTextures::get_waterway_texture(const Widelands::Coords& coords,
+                                                int direction) const {
 	return *waterway_textures_.at((coords.x + coords.y + direction) % waterway_textures_.size());
 }
 

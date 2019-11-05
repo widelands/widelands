@@ -90,8 +90,8 @@ void TestingRoutingNode::get_neighbours(WareWorker type, RoutingNodeNeighbours& 
 	}
 }
 bool TestingRoutingNode::all_members_zeroed() {
-	bool integers_zero = !mpf_cycle_ware && !mpf_realcost_ware && !mpf_estimate_ware && !mpf_cycle_worker &&
-			!mpf_realcost_worker && !mpf_estimate_worker;
+	bool integers_zero = !mpf_cycle_ware && !mpf_realcost_ware && !mpf_estimate_ware &&
+	                     !mpf_cycle_worker && !mpf_realcost_worker && !mpf_estimate_worker;
 	bool pointers_zero = (mpf_backlink_ware == nullptr) && (mpf_backlink_worker == nullptr);
 
 	return pointers_zero && integers_zero;

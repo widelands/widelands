@@ -170,13 +170,15 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	needs_seafaring_ = false;
 	needs_waterways_ = false;
 	if (table.has_key("map_check")) {
-		for (const std::string& map_check : table.get_table("map_check")->array_entries<std::string>()) {
+		for (const std::string& map_check :
+		     table.get_table("map_check")->array_entries<std::string>()) {
 			if (map_check == "seafaring") {
 				needs_seafaring_ = true;
 			} else if (map_check == "waterways") {
 				needs_waterways_ = true;
 			} else {
-				throw GameDataError("Unexpected map_check item '%s' in building description", map_check.c_str());
+				throw GameDataError(
+				   "Unexpected map_check item '%s' in building description", map_check.c_str());
 			}
 		}
 	}
@@ -269,7 +271,7 @@ uint32_t BuildingDescr::get_unoccupied_animation() const {
 }
 
 bool BuildingDescr::is_useful_on_map(bool seafaring_allowed, bool waterways_allowed) const {
-	if (needs_seafaring_ && needs_waterways_ ) {
+	if (needs_seafaring_ && needs_waterways_) {
 		return seafaring_allowed || waterways_allowed;
 	} else if (needs_seafaring_) {
 		return seafaring_allowed;

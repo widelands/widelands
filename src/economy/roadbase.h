@@ -113,8 +113,8 @@ protected:
 	Path path_;            ///< path goes from start to end
 	uint32_t idle_index_;  ///< index into path where carriers should idle
 
-	RoadType type_;        ///< RoadType
+	RoadType type_;  ///< RoadType
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ROADBASE_H

@@ -41,17 +41,17 @@ bool Road::is_road_descr(MapObjectDescr const* const descr) {
 	return descr == &g_road_descr;
 }
 
-Road::CarrierSlot::CarrierSlot() : carrier(nullptr), carrier_request(nullptr), second_carrier(false) {
+Road::CarrierSlot::CarrierSlot()
+   : carrier(nullptr), carrier_request(nullptr), second_carrier(false) {
 }
 
 /**
  * Most of the actual work is done in init.
  */
-Road::Road()
-   : RoadBase(g_road_descr, RoadType::kNone), wallet_(0), last_wallet_charge_(0) {
+Road::Road() : RoadBase(g_road_descr, RoadType::kNone), wallet_(0), last_wallet_charge_(0) {
 	CarrierSlot slot;
-    carrier_slots_.push_back(slot);
-    carrier_slots_.push_back(slot);
+	carrier_slots_.push_back(slot);
+	carrier_slots_.push_back(slot);
 	carrier_slots_[0].second_carrier = false;
 	carrier_slots_[1].second_carrier = true;
 }
@@ -109,7 +109,8 @@ void Road::link_into_flags(EditorGameBase& egbase, bool) {
 				// This happens after a road split. Tell the carrier what's going on.
 				carrier->set_location(this);
 				carrier->update_task_road(*game);
-			} else if (!slot.carrier_request && (!slot.second_carrier || get_roadtype() == RoadType::kBusy)) {
+			} else if (!slot.carrier_request &&
+			           (!slot.second_carrier || get_roadtype() == RoadType::kBusy)) {
 				// Normal carriers are requested at once, second carriers only for busy roads
 				request_carrier(slot);
 			}
@@ -135,8 +136,9 @@ void Road::set_economy(Economy* const e, WareWorker type) {
  * been issued.
  */
 void Road::request_carrier(CarrierSlot& slot) {
-	slot.carrier_request = new Request(*this, slot.second_carrier ? owner().tribe().carrier2() :
-			owner().tribe().carrier(), request_carrier_callback, wwWORKER);
+	slot.carrier_request = new Request(
+	   *this, slot.second_carrier ? owner().tribe().carrier2() : owner().tribe().carrier(),
+	   request_carrier_callback, wwWORKER);
 }
 
 /**

@@ -113,7 +113,11 @@ void Flag::load_finish(EditorGameBase& egbase) {
 /**
  * Creates a flag at the given location.
  */
-Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords, Economy* ware_eco, Economy* worker_eco)
+Flag::Flag(EditorGameBase& egbase,
+           Player* owning_player,
+           const Coords& coords,
+           Economy* ware_eco,
+           Economy* worker_eco)
    : PlayerImmovable(g_flag_descr),
      building_(nullptr),
      ware_capacity_(8),
@@ -137,14 +141,16 @@ Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords, 
 			ware_eco->add_flag(*this);
 		} else {
 			//  we split a road, or a new, standalone flag is created
-			(road ? road->get_economy(wwWARE) : owning_player->create_economy(wwWARE))->add_flag(*this);
+			(road ? road->get_economy(wwWARE) : owning_player->create_economy(wwWARE))
+			   ->add_flag(*this);
 		}
 		if (worker_eco) {
 			// We're saveloading
 			worker_eco->add_flag(*this);
 		} else {
 			//  we split a road, or a new, standalone flag is created
-			(road ? road->get_economy(wwWORKER) : owning_player->create_economy(wwWORKER))->add_flag(*this);
+			(road ? road->get_economy(wwWORKER) : owning_player->create_economy(wwWORKER))
+			   ->add_flag(*this);
 		}
 		if (road && !ware_eco && !worker_eco) {
 			road->presplit(*game, coords);
@@ -284,7 +290,7 @@ void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
 
 		// Only wares, workers cannot use ferries
 		if (Waterway::is_waterway_descr(&road->descr()) && type == wwWORKER) {
-		    continue;
+			continue;
 		}
 
 		Flag* f = &road->get_flag(RoadBase::FlagEnd);
@@ -318,7 +324,8 @@ void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
 RoadBase* Flag::get_roadbase(Flag& flag) {
 	for (int8_t i = 0; i < 6; ++i) {
 		if (RoadBase* const road = roads_[i]) {
-			if (&road->get_flag(RoadBase::FlagStart) == &flag || &road->get_flag(RoadBase::FlagEnd) == &flag) {
+			if (&road->get_flag(RoadBase::FlagStart) == &flag ||
+			    &road->get_flag(RoadBase::FlagEnd) == &flag) {
 				return road;
 			}
 		}
@@ -328,7 +335,8 @@ RoadBase* Flag::get_roadbase(Flag& flag) {
 Road* Flag::get_road(Flag& flag) {
 	for (int8_t i = 1; i <= 6; ++i) {
 		if (Road* const road = get_road(i)) {
-			if (&road->get_flag(RoadBase::FlagStart) == &flag || &road->get_flag(RoadBase::FlagEnd) == &flag) {
+			if (&road->get_flag(RoadBase::FlagStart) == &flag ||
+			    &road->get_flag(RoadBase::FlagEnd) == &flag) {
 				return road;
 			}
 		}
@@ -338,13 +346,13 @@ Road* Flag::get_road(Flag& flag) {
 
 Road* Flag::get_road(uint8_t const dir) const {
 	if (roads_[dir - 1] && Road::is_road_descr(&roads_[dir - 1]->descr())) {
-	    return dynamic_cast<Road*>(roads_[dir - 1]);
+		return dynamic_cast<Road*>(roads_[dir - 1]);
 	}
 	return nullptr;
 }
 Waterway* Flag::get_waterway(uint8_t const dir) const {
 	if (roads_[dir - 1] && Waterway::is_waterway_descr(&roads_[dir - 1]->descr())) {
-	    return dynamic_cast<Waterway*>(roads_[dir - 1]);
+		return dynamic_cast<Waterway*>(roads_[dir - 1]);
 	}
 	return nullptr;
 }

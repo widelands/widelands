@@ -30,19 +30,19 @@
 namespace Widelands {
 
 FerryDescr::FerryDescr(const std::string& init_descname,
-                           const LuaTable& table,
-                           const Tribes& tribes)
+                       const LuaTable& table,
+                       const Tribes& tribes)
    : CarrierDescr(init_descname, table, tribes, MapObjectType::FERRY) {
 }
 
-// When pathfinding, we _always_ use a CheckStepFerry to account for our very special movement rules.
-// This function result ensures that bob code won't complain about our sometimes strange paths.
+// When pathfinding, we _always_ use a CheckStepFerry to account for our very special movement
+// rules. This function result ensures that bob code won't complain about our sometimes strange
+// paths.
 uint32_t FerryDescr::movecaps() const {
 	return MOVECAPS_SWIM | MOVECAPS_WALK;
 }
 
-Ferry::Ferry(const FerryDescr& ferry_descr)
-   : Carrier(ferry_descr), destination_(nullptr) {
+Ferry::Ferry(const FerryDescr& ferry_descr) : Carrier(ferry_descr), destination_(nullptr) {
 }
 
 bool Ferry::init(EditorGameBase& egbase) {
@@ -90,10 +90,8 @@ void Ferry::unemployed_update(Game& game, State&) {
 		}
 		molog("[unemployed]: trying to find a flag\n");
 		std::vector<ImmovableFound> flags;
-		if (!map.find_reachable_immovables(game, Area<FCoords>(pos, 4),
-				&flags,
-				CheckStepFerry(game),
-				FindImmovableType(MapObjectType::FLAG))) {
+		if (!map.find_reachable_immovables(game, Area<FCoords>(pos, 4), &flags, CheckStepFerry(game),
+		                                   FindImmovableType(MapObjectType::FLAG))) {
 			molog("[unemployed]: no flag found at all\n");
 			// Fall through to the selection of a random nearby location
 		} else {
@@ -104,7 +102,8 @@ void Ferry::unemployed_update(Game& game, State&) {
 							Path path(pos);
 							if (map.findpath(pos, flag->get_position(), 0, path, CheckStepFerry(game))) {
 								molog("[unemployed]: moving to nearby flag\n");
-								return start_task_movepath(game, path, descr().get_right_walk_anims(true, this));
+								return start_task_movepath(
+								   game, path, descr().get_right_walk_anims(true, this));
 							}
 							molog("[unemployed]: unable to row to reachable flag!\n");
 							return start_task_idle(game, descr().get_animation("idle", this), 50);
@@ -113,7 +112,8 @@ void Ferry::unemployed_update(Game& game, State&) {
 				}
 			}
 			molog("[unemployed]: no nearby flag has capacity\n");
-			// If no flag with capacity is nearby, fall through to the selection of a random nearby location
+			// If no flag with capacity is nearby, fall through to the selection of a random nearby
+			// location
 		}
 	}
 
@@ -135,7 +135,8 @@ void Ferry::unemployed_update(Game& game, State&) {
 		Path path(pos);
 		for (uint8_t i = 0; i < 5; i++) {
 			if (map.findpath(pos, game.random_location(pos, 2), 0, path, CheckStepFerry(game))) {
-				return start_task_movepath(game, path, descr().get_right_walk_anims(does_carry_ware(), this));
+				return start_task_movepath(
+				   game, path, descr().get_right_walk_anims(does_carry_ware(), this));
 			}
 		}
 		molog("[unemployed]: no suitable locations to row to found\n");
@@ -154,7 +155,8 @@ const Bob::Task Ferry::taskRow = {
 
 void Ferry::start_task_row(Game& game, Waterway* ww) {
 	// Our new destination is the middle of the waterway
-	destination_.reset(new Coords(CoordPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()]));
+	destination_.reset(
+	   new Coords(CoordPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()]));
 	send_signal(game, "row");
 }
 
@@ -192,7 +194,8 @@ void Ferry::row_update(Game& game, State&) {
 			return start_task_road(game);
 		}
 		// If we get here, the waterway was destroyed and we didn't notice
-		molog("[row]: Reached the destination (%3dx%3d) but it is no longer there\n", get_position().x, get_position().y);
+		molog("[row]: Reached the destination (%3dx%3d) but it is no longer there\n",
+		      get_position().x, get_position().y);
 		destination_.reset(nullptr);
 		return pop_task(game);
 	}
@@ -200,7 +203,7 @@ void Ferry::row_update(Game& game, State&) {
 	Path path(pos);
 	if (!map.findpath(pos, *destination_, 0, path, CheckStepFerry(game))) {
 		molog("[row]: Can't find a path to the waterway! Ferry at %3dx%3d, Waterway at %3dx%3d\n",
-				get_position().x, get_position().y, destination_->x, destination_->y);
+		      get_position().x, get_position().y, destination_->x, destination_->y);
 		// try again later
 		return schedule_act(game, 50);
 	}
@@ -252,8 +255,7 @@ void Ferry::set_destination(Game& game, Waterway* ww) {
 	set_location(nullptr);
 	if (ww) {
 		start_task_row(game, ww);
-	}
-	else {
+	} else {
 		send_signal(game, "cancel");
 	}
 }
@@ -291,8 +293,7 @@ void Ferry::Loader::load(FileRead& fr) {
 				int16_t dest_x = fr.signed_16();
 				int16_t dest_y = fr.signed_16();
 				ferry.destination_.reset(new Coords(dest_x, dest_y));
-			}
-			else {
+			} else {
 				ferry.destination_.reset(nullptr);
 			}
 			ferry.fleet_ = nullptr;
@@ -319,4 +320,4 @@ Ferry::Loader* Ferry::create_loader() {
 	return new Loader;
 }
 
-}
+}  // namespace Widelands

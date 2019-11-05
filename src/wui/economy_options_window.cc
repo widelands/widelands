@@ -158,8 +158,9 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 }
 
 void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
-	Widelands::Serial* serial = note.old_economy == ware_serial_ ? &ware_serial_ :
-			note.old_economy == worker_serial_ ? &worker_serial_ : nullptr;
+	Widelands::Serial* serial = note.old_economy == ware_serial_ ?
+	                               &ware_serial_ :
+	                               note.old_economy == worker_serial_ ? &worker_serial_ : nullptr;
 	if (serial) {
 		switch (note.action) {
 		case Widelands::NoteEconomy::Action::kMerged: {
@@ -349,7 +350,7 @@ constexpr unsigned kThinkInterval = 200;
 void EconomyOptionsWindow::think() {
 	const uint32_t time = player_->egbase().get_gametime();
 	if (time - time_last_thought_ < kThinkInterval || !player_->get_economy(ware_serial_) ||
-			!player_->get_economy(worker_serial_)) {
+	    !player_->get_economy(worker_serial_)) {
 		// If our economy has been deleted, die() was already called, no need to do anything
 		return;
 	}

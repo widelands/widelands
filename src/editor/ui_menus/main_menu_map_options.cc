@@ -129,10 +129,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Waterway length limit:")));
 	UI::Box* ww_box = new UI::Box(&tags_box_, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
-	waterway_length_box_ = new UI::SpinBox(ww_box, 0, 0, max_w_, max_w_ / 2, 1, 1, std::numeric_limits<int32_t>::max(),
-	        UI::PanelStyle::kWui,
-	        std::string(),
-	        UI::SpinBox::Units::kFields);
+	waterway_length_box_ =
+	   new UI::SpinBox(ww_box, 0, 0, max_w_, max_w_ / 2, 1, 1, std::numeric_limits<int32_t>::max(),
+	                   UI::PanelStyle::kWui, std::string(), UI::SpinBox::Units::kFields);
 	/** TRANSLATORS: Map Options: Waterways are disabled */
 	waterway_length_box_->add_replacement(1, _("Disabled"));
 	ww_box->add(waterway_length_box_, UI::Box::Resizing::kFullSize);

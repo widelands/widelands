@@ -293,7 +293,8 @@ void PortDock::update_shippingitem(Game& game, std::list<ShippingItem>::iterator
 	assert(dst != this);
 
 	// Destination might have vanished or be in another economy altogether.
-	if (dst && dst->get_economy(wwWARE) == get_economy(wwWARE) && dst->get_economy(wwWORKER) == get_economy(wwWORKER)) {
+	if (dst && dst->get_economy(wwWARE) == get_economy(wwWARE) &&
+	    dst->get_economy(wwWORKER) == get_economy(wwWORKER)) {
 		if (ships_coming_.empty()) {
 			set_need_ship(game, true);
 		}
@@ -460,16 +461,16 @@ uint32_t PortDock::count_waiting(WareWorker waretype, DescriptionIndex wareindex
 		shipping_item.get(owner().egbase(), &ware, &worker);
 
 		switch (waretype) {
-			case wwWORKER:
-				if (worker && worker->descr().worker_index() == wareindex) {
-					count++;
-				}
-				break;
-			case wwWARE:
-				if (ware && ware->descr_index() == wareindex) {
-					count++;
-				}
-				break;
+		case wwWORKER:
+			if (worker && worker->descr().worker_index() == wareindex) {
+				count++;
+			}
+			break;
+		case wwWARE:
+			if (ware && ware->descr_index() == wareindex) {
+				count++;
+			}
+			break;
 		}
 	}
 

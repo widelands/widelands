@@ -157,14 +157,16 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 
 	if (route_.get_nrsteps() >= 1)
 		if (upcast(RoadBase const, road, destination))
-			if (&road->get_flag(RoadBase::FlagEnd) == &route_.get_flag(game_, route_.get_nrsteps() - 1))
+			if (&road->get_flag(RoadBase::FlagEnd) ==
+			    &route_.get_flag(game_, route_.get_nrsteps() - 1))
 				route_.truncate(route_.get_nrsteps() - 1);
 
 	// Reroute into PortDocks or the associated warehouse when appropriate
 	if (route_.get_nrsteps() >= 1) {
 		Flag& curflag(route_.get_flag(game_, 0));
 		Flag& nextflag(route_.get_flag(game_, 1));
-		if (type == wwWORKER ? curflag.get_road(nextflag) == nullptr : curflag.get_roadbase(nextflag) == nullptr) {
+		if (type == wwWORKER ? curflag.get_road(nextflag) == nullptr :
+		                       curflag.get_roadbase(nextflag) == nullptr) {
 			upcast(Warehouse, wh, curflag.get_building());
 			assert(wh);
 

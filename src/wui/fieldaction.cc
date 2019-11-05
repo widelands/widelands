@@ -218,7 +218,8 @@ private:
 };
 
 static const char* const pic_tab_buildroad = "images/wui/fieldaction/menu_tab_buildroad.png";
-static const char* const pic_tab_buildwaterway = "images/wui/fieldaction/menu_tab_buildwaterway.png";
+static const char* const pic_tab_buildwaterway =
+   "images/wui/fieldaction/menu_tab_buildwaterway.png";
 static const char* const pic_tab_watch = "images/wui/fieldaction/menu_tab_watch.png";
 static const char* const pic_tab_buildhouse[] = {"images/wui/fieldaction/menu_tab_buildsmall.png",
                                                  "images/wui/fieldaction/menu_tab_buildmedium.png",
@@ -350,10 +351,10 @@ void FieldActionWindow::add_buttons_auto() {
 				add_button(buildbox, "build_road", pic_buildroad, &FieldActionWindow::act_buildroad,
 				           _("Build road"));
 				if (map_.get_waterway_max_length() >= 2 &&
-						Widelands::CheckStepFerry(igbase->egbase()).reachable_dest(map_, node_)) {
-					add_button(buildbox, "build_waterway", pic_buildwaterway, &FieldActionWindow::act_buildwaterway,
-						       _("Build waterway"));
-	           }
+				    Widelands::CheckStepFerry(igbase->egbase()).reachable_dest(map_, node_)) {
+					add_button(buildbox, "build_waterway", pic_buildwaterway,
+					           &FieldActionWindow::act_buildwaterway, _("Build waterway"));
+				}
 
 				Building* const building = flag->get_building();
 
@@ -390,8 +391,8 @@ void FieldActionWindow::add_buttons_auto() {
 				           _("Destroy a road"));
 
 			if (can_act && dynamic_cast<const Widelands::Waterway*>(imm))
-				add_button(buildbox, "destroy_waterway", pic_remwaterway, &FieldActionWindow::act_removewaterway,
-				           _("Destroy a Waterway"));
+				add_button(buildbox, "destroy_waterway", pic_remwaterway,
+				           &FieldActionWindow::act_removewaterway, _("Destroy a Waterway"));
 		}
 	} else if (player_ && 1 < player_->vision(Widelands::Map::get_index(
 	                             node_, ibase().egbase().map().get_width())))
@@ -473,8 +474,9 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 			    !player_->is_building_type_allowed(building_index)) {
 				continue;
 			}
-			if (!building_descr->is_useful_on_map(ibase().egbase().map().allows_seafaring(),
-					ibase().egbase().map().get_waterway_max_length() >= 2)) {
+			if (!building_descr->is_useful_on_map(
+			       ibase().egbase().map().allows_seafaring(),
+			       ibase().egbase().map().get_waterway_max_length() >= 2)) {
 				continue;
 			}
 		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced()) {
@@ -690,7 +692,8 @@ void FieldActionWindow::act_configure_economy() {
 		}
 		if (!window_open) {
 			new EconomyOptionsWindow(dynamic_cast<UI::Panel*>(&ibase()), ware_economy, worker_economy,
-					dynamic_cast<InteractiveGameBase&>(ibase()).can_act(ware_economy->owner().player_number()));
+			                         dynamic_cast<InteractiveGameBase&>(ibase()).can_act(
+			                            ware_economy->owner().player_number()));
 		}
 	}
 	die();
@@ -970,7 +973,7 @@ void show_field_action(InteractiveBase* const ibase,
 		if (target == ibase->get_build_road_end()) {
 			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
 			w.add_buttons_road(target != ibase->get_build_road_start() &&
-				               (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
+			                   (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
 			w.init();
 			return;
 		}
@@ -1002,8 +1005,7 @@ void show_field_action(InteractiveBase* const ibase,
 				return;
 			}
 		}
-	}
-	else if (ibase->is_building_waterway()) {
+	} else if (ibase->is_building_waterway()) {
 		// we're building a waterway right now
 		const Widelands::Map& map = player->egbase().map();
 		const Widelands::FCoords target = map.get_fcoords(ibase->get_sel_pos().node);
@@ -1012,7 +1014,7 @@ void show_field_action(InteractiveBase* const ibase,
 		if (target == ibase->get_build_waterway_end()) {
 			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
 			w.add_buttons_waterway(target != ibase->get_build_waterway_start() &&
-					(player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
+			                       (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
 			w.init();
 			return;
 		}
@@ -1051,8 +1053,7 @@ void show_field_action(InteractiveBase* const ibase,
 				return;
 			}
 		}
-	}
-	else {
+	} else {
 		FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
 		w.add_buttons_auto();
 		return w.init();

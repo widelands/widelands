@@ -343,8 +343,8 @@ void InteractivePlayer::think() {
 					   Widelands::TCoords<>(flag_to_connect_, Widelands::TriangleIndex::D)});
 					const Widelands::Map& map = egbase().map();
 					if (map.get_waterway_max_length() >= 2 &&
-							Widelands::CheckStepFerry(egbase()).reachable_dest(
-									map, Widelands::FCoords(flag_to_connect_, &field))) {
+					    Widelands::CheckStepFerry(egbase()).reachable_dest(
+					       map, Widelands::FCoords(flag_to_connect_, &field))) {
 						show_field_action(this, get_player(), &fieldaction_);
 					} else {
 						start_build_road(flag_to_connect_, field.get_owned_by());
@@ -424,17 +424,18 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			if (rinfo != road_building.road_previews.end()) {
 				for (uint8_t dir : rinfo->second) {
 					switch (dir) {
-						case Widelands::WALK_E:
-							f->road_e = Widelands::RoadType::kNormal;
-							break;
-						case Widelands::WALK_SE:
-							f->road_se = Widelands::RoadType::kNormal;
-							break;
-						case Widelands::WALK_SW:
-							f->road_sw = Widelands::RoadType::kNormal;
-							break;
-						default:
-							throw wexception("Attempt to set road-building overlay for invalid direction %i", dir);
+					case Widelands::WALK_E:
+						f->road_e = Widelands::RoadType::kNormal;
+						break;
+					case Widelands::WALK_SE:
+						f->road_se = Widelands::RoadType::kNormal;
+						break;
+					case Widelands::WALK_SW:
+						f->road_sw = Widelands::RoadType::kNormal;
+						break;
+					default:
+						throw wexception(
+						   "Attempt to set road-building overlay for invalid direction %i", dir);
 					}
 				}
 			}
@@ -442,17 +443,18 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			if (winfo != waterway_building.road_previews.end()) {
 				for (uint8_t dir : winfo->second) {
 					switch (dir) {
-						case Widelands::WALK_E:
-							f->road_e = Widelands::RoadType::kWaterway;
-							break;
-						case Widelands::WALK_SE:
-							f->road_se = Widelands::RoadType::kWaterway;
-							break;
-						case Widelands::WALK_SW:
-							f->road_sw = Widelands::RoadType::kWaterway;
-							break;
-						default:
-							throw wexception("Attempt to set waterway-building overlay for invalid direction %i", dir);
+					case Widelands::WALK_E:
+						f->road_e = Widelands::RoadType::kWaterway;
+						break;
+					case Widelands::WALK_SE:
+						f->road_se = Widelands::RoadType::kWaterway;
+						break;
+					case Widelands::WALK_SW:
+						f->road_sw = Widelands::RoadType::kWaterway;
+						break;
+					default:
+						throw wexception(
+						   "Attempt to set waterway-building overlay for invalid direction %i", dir);
 					}
 				}
 			}

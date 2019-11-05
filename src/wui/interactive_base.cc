@@ -854,7 +854,8 @@ void InteractiveBase::start_build_road(Coords road_start, Widelands::PlayerNumbe
 	set_sel_picture(g_gr->images().get("images/ui_basic/fsel_roadbuilding.png"));
 }
 
-void InteractiveBase::start_build_waterway(Coords waterway_start, Widelands::PlayerNumber const player) {
+void InteractiveBase::start_build_waterway(Coords waterway_start,
+                                           Widelands::PlayerNumber const player) {
 	// create an empty path
 	assert(!buildwaterway_);
 	buildwaterway_.reset(new CoordPath(waterway_start));
@@ -956,17 +957,19 @@ void InteractiveBase::finish_build_waterway() {
 
 	const size_t length = buildwaterway_->get_nsteps();
 	if (length > egbase().map().get_waterway_max_length()) {
-		log("Refusing to finish waterway building: length is %" PRIuS " but limit is %d\n",
-				length, egbase().map().get_waterway_max_length());
-	}
-	else if (length) {
+		log("Refusing to finish waterway building: length is %" PRIuS " but limit is %d\n", length,
+		    egbase().map().get_waterway_max_length());
+	} else if (length) {
 		upcast(Game, game, &egbase());
 
 		// Build the path as requested
 		if (game) {
-			game->send_player_build_waterway(waterway_build_player_, *new Widelands::Path(*buildwaterway_));
+			game->send_player_build_waterway(
+			   waterway_build_player_, *new Widelands::Path(*buildwaterway_));
 		} else {
-			egbase().get_player(waterway_build_player_)->build_waterway(*new Widelands::Path(*buildwaterway_));
+			egbase()
+			   .get_player(waterway_build_player_)
+			   ->build_waterway(*new Widelands::Path(*buildwaterway_));
 		}
 
 		if (allow_user_input() && (SDL_GetModState() & KMOD_CTRL)) {
@@ -1057,7 +1060,8 @@ bool InteractiveBase::append_build_waterway(Coords const field) {
 		Widelands::Path path;
 		Widelands::CheckStepAnd cstep;
 		cstep.add(Widelands::CheckStepFerry(egbase()));
-		cstep.add(Widelands::CheckStepRoad(player, Widelands::MOVECAPS_SWIM | Widelands::MOVECAPS_WALK));
+		cstep.add(
+		   Widelands::CheckStepRoad(player, Widelands::MOVECAPS_SWIM | Widelands::MOVECAPS_WALK));
 		if (map.findpath(buildwaterway_->get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0) {
 			return false;  //  could not find a path
 		}
@@ -1223,7 +1227,8 @@ void InteractiveBase::road_building_add_overlay() {
 		Widelands::BaseImmovable* const imm = map.get_immovable(neighb);
 		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
 			if (!(dynamic_cast<const Widelands::Flag*>(imm) ||
-			      (dynamic_cast<const Widelands::RoadBase*>(imm) && (caps & Widelands::BUILDCAPS_FLAG))))
+			      (dynamic_cast<const Widelands::RoadBase*>(imm) &&
+			       (caps & Widelands::BUILDCAPS_FLAG))))
 				continue;
 		}
 
@@ -1286,7 +1291,7 @@ void InteractiveBase::waterway_building_add_overlay() {
 		Widelands::CheckStepFerry checkstep(egbase());
 
 		if (!checkstep.reachable_dest(map, neighb) || buildwaterway_->get_index(neighb) >= 0 ||
-				!neighb.field->is_interior(waterway_build_player_)) {
+		    !neighb.field->is_interior(waterway_build_player_)) {
 			continue;
 		}
 
@@ -1296,13 +1301,13 @@ void InteractiveBase::waterway_building_add_overlay() {
 			for (int32_t d = 1; d <= 6; ++d) {
 				map.get_neighbour(neighb, d, &nb);
 				if (nb != endpos && buildwaterway_->get_index(nb) >= 0 &&
-						checkstep.allowed(map, neighb, nb, d, Widelands::CheckStep::StepId::stepNormal)) {
+				    checkstep.allowed(map, neighb, nb, d, Widelands::CheckStep::StepId::stepNormal)) {
 					next_to = true;
 					break;
 				}
 			}
 			if (!next_to && buildwaterway_->get_nsteps() >= map.get_waterway_max_length()) {
-				continue; // exceeds length limit
+				continue;  // exceeds length limit
 			}
 		}
 
@@ -1310,7 +1315,8 @@ void InteractiveBase::waterway_building_add_overlay() {
 		const Widelands::BaseImmovable* imm = map.get_immovable(neighb);
 		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
 			if (!(dynamic_cast<const Widelands::Flag*>(imm) ||
-			      (dynamic_cast<const Widelands::RoadBase*>(imm) && (caps & Widelands::BUILDCAPS_FLAG))))
+			      (dynamic_cast<const Widelands::RoadBase*>(imm) &&
+			       (caps & Widelands::BUILDCAPS_FLAG))))
 				continue;
 		}
 

@@ -96,8 +96,9 @@ Serial MapObjectLoader::get_economy_savegame_compatibility(Serial ware_economy) 
 		// That way it is highly unlikely that the running serial for new economies
 		// will collide with this savegame hack.
 		const Serial worker_economy = kInvalidSerial - 1 - economy_savegame_compatibility_.size();
-		log("Savegame compatibility: Splitting economy %u into ware economy %u and worker economy %u\n",
-				ware_economy, ware_economy, worker_economy);
+		log("Savegame compatibility: Splitting economy %u into ware economy %u and worker economy "
+		    "%u\n",
+		    ware_economy, ware_economy, worker_economy);
 		economy_savegame_compatibility_[ware_economy] = worker_economy;
 		return worker_economy;
 	}
@@ -107,9 +108,9 @@ Serial MapObjectLoader::get_economy_savegame_compatibility(Serial ware_economy) 
 Serial MapObjectLoader::get_existing_economy_savegame_compatibility(Serial ware_economy) const {
 	const auto it = economy_savegame_compatibility_.find(ware_economy);
 	if (it == economy_savegame_compatibility_.end()) {
-		throw GameDataError(
-				"MapObjectLoader::get_existing_economy_savegame_compatibility: "
-				"no matching worker economy found for ware economy %u", ware_economy);
+		throw GameDataError("MapObjectLoader::get_existing_economy_savegame_compatibility: "
+		                    "no matching worker economy found for ware economy %u",
+		                    ware_economy);
 	}
 	return it->second;
 }

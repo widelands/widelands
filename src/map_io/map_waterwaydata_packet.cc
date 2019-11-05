@@ -42,9 +42,9 @@ namespace Widelands {
 constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapWaterwaydataPacket::read(FileSystem& fs,
-                             EditorGameBase& egbase,
-                             bool const skip,
-                             MapObjectLoader& mol) {
+                                 EditorGameBase& egbase,
+                                 bool const skip,
+                                 MapObjectLoader& mol) {
 	if (skip) {
 		return;
 	}
@@ -71,7 +71,8 @@ void MapWaterwaydataPacket::read(FileSystem& fs,
 					}
 					PlayerNumber player_index = fr.unsigned_8();
 					if (!(0 < player_index && player_index <= nr_players)) {
-						throw GameDataError("Invalid player number: %i.", static_cast<unsigned int>(player_index));
+						throw GameDataError(
+						   "Invalid player number: %i.", static_cast<unsigned int>(player_index));
 					}
 
 					ww.set_owner(egbase.get_player(player_index));
@@ -142,7 +143,8 @@ void MapWaterwaydataPacket::read(FileSystem& fs,
 				}
 			}
 		} else {
-			throw UnhandledVersionError("MapWaterwaydataPacket", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(
+			   "MapWaterwaydataPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("waterwaydata: %s", e.what());
@@ -195,4 +197,4 @@ void MapWaterwaydataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 	}
 	fw.write(fs, "binary/waterway_data");
 }
-}
+}  // namespace Widelands

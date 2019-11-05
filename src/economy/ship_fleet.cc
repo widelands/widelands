@@ -161,7 +161,7 @@ bool ShipFleet::find_other_fleet(EditorGameBase& egbase) {
 				// this test, might be removed after some time
 				if (dock->get_fleet() == nullptr) {
 					log("The dock on %3dx%3d withouth a fleet!\n", dock->dockpoints_.front().x,
-						dock->dockpoints_.front().y);
+					    dock->dockpoints_.front().y);
 				}
 				if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
 					return dock->get_fleet()->merge(egbase, this);
@@ -174,7 +174,7 @@ bool ShipFleet::find_other_fleet(EditorGameBase& egbase) {
 			if (type == MapObjectType::SHIP) {
 				upcast(Ship, ship, bob);
 				if (ship->get_fleet() != nullptr && ship->get_fleet() != this &&
-					ship->get_owner() == get_owner()) {
+				    ship->get_owner() == get_owner()) {
 					return ship->get_fleet()->merge(egbase, this);
 				}
 			}
@@ -388,8 +388,7 @@ void ShipFleet::add_ship(Ship* ship) {
 		if (ports_.empty()) {
 			ship->set_economy(*game, nullptr, wwWARE);
 			ship->set_economy(*game, nullptr, wwWORKER);
-		}
-		else {
+		} else {
 			ship->set_economy(*game, ports_[0]->get_economy(wwWARE), wwWARE);
 			ship->set_economy(*game, ports_[0]->get_economy(wwWORKER), wwWORKER);
 		}
@@ -552,8 +551,10 @@ void ShipFleet::add_port(EditorGameBase& /* egbase */, PortDock* port) {
 		set_economy(ports_[0]->get_economy(wwWORKER), wwWORKER);
 	} else {
 		if (!ships_.empty()) {
-			ports_[0]->get_economy(wwWARE)->check_merge(ports_[0]->base_flag(), port->base_flag(), wwWARE);
-			ports_[0]->get_economy(wwWORKER)->check_merge(ports_[0]->base_flag(), port->base_flag(), wwWORKER);
+			ports_[0]->get_economy(wwWARE)->check_merge(
+			   ports_[0]->base_flag(), port->base_flag(), wwWARE);
+			ports_[0]->get_economy(wwWORKER)->check_merge(
+			   ports_[0]->base_flag(), port->base_flag(), wwWORKER);
 		}
 	}
 
@@ -887,10 +888,10 @@ void ShipFleet::push_next_destinations(Game& game, Ship& ship, const PortDock& f
  * if the detour this would mean for the ship is not too long
  */
 void ShipFleet::check_push_destination(Game& game,
-                                   Ship& ship,
-                                   const PortDock& from_port,
-                                   PortDock& destination,
-                                   uint32_t penalty_factor) {
+                                       Ship& ship,
+                                       const PortDock& from_port,
+                                       PortDock& destination,
+                                       uint32_t penalty_factor) {
 	assert(!ship.has_destination(game, destination));
 	Path path;
 	get_path(from_port, destination, path);
@@ -1056,7 +1057,6 @@ void ShipFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	}
 
 	fw.unsigned_8(act_pending_);
-
 }
 
 }  // namespace Widelands

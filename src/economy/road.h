@@ -64,7 +64,7 @@ struct Road : public RoadBase {
 
 	static Road& create(EditorGameBase&, Flag& start, Flag& end, const Path&);
 
-    // A CarrierSlot can store a carrier.
+	// A CarrierSlot can store a carrier.
 	struct CarrierSlot {
 		CarrierSlot();
 

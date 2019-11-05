@@ -828,12 +828,12 @@ int LuaTribes::new_carrier_type(lua_State* L) {
 }
 
 /* RST
-	.. method:: new_ferry_type{table}
+   .. method:: new_ferry_type{table}
 
-		Adds a new ferry worker type. Takes a single argument, a table with
-		the descriptions. See the files in tribes/ for usage examples.
+      Adds a new ferry worker type. Takes a single argument, a table with
+      the descriptions. See the files in tribes/ for usage examples.
 
-		:returns: :const:`nil`
+      :returns: :const:`nil`
 */
 int LuaTribes::new_ferry_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
