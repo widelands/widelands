@@ -799,7 +799,7 @@ static inline float prioritised_distance(Path& path, uint32_t priority, uint32_t
 using DestinationsQueue = std::vector<std::pair<PortDock*, uint32_t>>;
 static std::pair<DestinationsQueue, float>
 shortest_order(Game* game,
-               Fleet* fleet,
+               ShipFleet* fleet,
                bool is_on_dock,
                void* start,
                const DestinationsQueue& remaining_to_visit,
