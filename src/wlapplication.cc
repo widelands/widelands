@@ -869,18 +869,21 @@ void WLApplication::init_language() {
 
 	i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/locale"));
 
-    if (!g_fs->file_exists(i18n::get_localedir()) || !g_fs->is_directory(i18n::get_localedir())) {
-        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "'locale' directory not found", std::string(i18n::get_localedir() + " is not a directory. Please create it.").c_str(), NULL);
-        log("ERROR: %s is not a directory. Please create it.\n", i18n::get_localedir().c_str());
-        exit(1);
-    }
+	if (!g_fs->file_exists(i18n::get_localedir()) || !g_fs->is_directory(i18n::get_localedir())) {
+		SDL_ShowSimpleMessageBox(
+		   SDL_MESSAGEBOX_ERROR, "'locale' directory not found",
+		   std::string(i18n::get_localedir() + " is not a directory. Please create it.").c_str(),
+		   NULL);
+		log("ERROR: %s is not a directory. Please create it.\n", i18n::get_localedir().c_str());
+		exit(1);
+	}
 
-    assert(g_fs->file_exists(i18n::get_localedir()));
-    assert(g_fs->is_directory(i18n::get_localedir()));
+	assert(g_fs->file_exists(i18n::get_localedir()));
+	assert(g_fs->is_directory(i18n::get_localedir()));
 
-    if (g_fs->list_directory(i18n::get_localedir()).empty()) {
-        log("WARNING: No locale translations found in %s\n", i18n::get_localedir().c_str());
-    }
+	if (g_fs->list_directory(i18n::get_localedir()).empty()) {
+		log("WARNING: No locale translations found in %s\n", i18n::get_localedir().c_str());
+	}
 
 	i18n::grab_textdomain("widelands");
 
