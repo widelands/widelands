@@ -239,7 +239,7 @@ enum class RelayCommand : uint8_t {
 	/// \}
 
 	/**
-	 * Communication between relay and NetHostProxy.
+	 * Communication between relay and NetClientProxy.
 	 */
 	/// \{
 
