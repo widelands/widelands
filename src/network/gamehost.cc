@@ -219,7 +219,7 @@ struct HostChatProvider : public ChatProvider {
 	explicit HostChatProvider(GameHost* const init_host) : h(init_host), kickClient(0) {
 	}
 
-    // TODO(k.halfmann): this deserves a refactoring
+	// TODO(k.halfmann): this deserves a refactoring
 	void send(const std::string& msg) override {
 		ChatMessage c(msg);
 		c.playern = h->get_local_playerposition();
@@ -564,9 +564,8 @@ void GameHost::clear_computer_players() {
 }
 
 void GameHost::init_computer_player(Widelands::PlayerNumber p) {
-	d->computerplayers.push_back(
-        ComputerPlayer::get_implementation(d->game->get_player(p)->get_ai())
-	        ->instantiate(*d->game, p));
+	d->computerplayers.push_back(ComputerPlayer::get_implementation(d->game->get_player(p)->get_ai())
+	                                ->instantiate(*d->game, p));
 }
 
 void GameHost::replace_client_with_ai(uint8_t playernumber, const std::string& ai) {
@@ -984,7 +983,7 @@ bool GameHost::can_launch() {
 
 	// if there is one client that is currently receiving a file, we can not launch.
 
-	const std::vector<UserSettings> &users = d->settings.users;
+	const std::vector<UserSettings>& users = d->settings.users;
 
 	for (std::vector<Client>::iterator j = d->clients.begin(); j != d->clients.end(); ++j) {
 		const int usernum = j->usernum;
@@ -998,7 +997,7 @@ bool GameHost::can_launch() {
 
 	// all players must be connected to a controller (human/ai) or be closed.
 	// but not all should be closed!
-	bool one_not_closed = false; // TODO(k.halfmann): check this logic
+	bool one_not_closed = false;  // TODO(k.halfmann): check this logic
 	for (PlayerSettings& setting : d->settings.players) {
 		if (setting.state != PlayerSettings::State::kClosed)
 			one_not_closed = true;
@@ -1082,7 +1081,8 @@ void GameHost::set_map(const std::string& mapname,
 	broadcast(packet);
 
 	// If possible, offer the map / saved game as transfer
-	// TODO(unknown): not yet able to handle directory type maps / savegames, would involve zipping in place or such ...
+	// TODO(unknown): not yet able to handle directory type maps / savegames, would involve zipping
+	// in place or such ...
 	if (!g_fs->is_directory(mapfilename)) {
 		// Read in the file
 		FileRead fr;
@@ -1231,7 +1231,7 @@ void GameHost::set_player_tribe(uint8_t const number,
 			//  broadcast changes
 			SendPacket packet;
 			broadcast_setting_player(packet, number);
-			return; // TODO(k.halfmann): check this logic
+			return;  // TODO(k.halfmann): check this logic
 		}
 	}
 	log("Player %u attempted to change to tribe %s; not a valid tribe\n", number, tribe.c_str());
@@ -1600,15 +1600,17 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	// The client gets its own initial data set.
 	client.playernum = UserSettings::none();
 
-    if (!d->game) { // just in case we allow connection of spectators/players after game start
-        for (uint32_t i = 0; i < d->settings.users.size(); ++i) {
+	if (!d->game) {  // just in case we allow connection of spectators/players after game start
+		for (uint32_t i = 0; i < d->settings.users.size(); ++i) {
 			if (d->settings.users[i].position == UserSettings::not_connected()) {
 				client.usernum = i;
 				d->settings.users[i].result = Widelands::PlayerEndResult::kUndefined;
 				d->settings.users[i].ready = true;
 				break;
-    }}}
-	if (client.usernum == -1) { // add the new client / user to the settings
+			}
+		}
+	}
+	if (client.usernum == -1) {  // add the new client / user to the settings
 		client.usernum = d->settings.users.size();
 		UserSettings newuser;
 		newuser.result = Widelands::PlayerEndResult::kUndefined;
@@ -2046,7 +2048,10 @@ void GameHost::handle_ping(Client& client) {
 }
 
 /** Wait for NETCMD_HELLO and handle unexpected other commands */
-void GameHost::handle_hello(uint32_t const client_num, uint8_t const cmd, Client& client, RecvPacket& r) {
+void GameHost::handle_hello(uint32_t const client_num,
+                            uint8_t const cmd,
+                            Client& client,
+                            RecvPacket& r) {
 	// Now we wait for the client to say Hi in the right language,
 	// unless the game has already started
 	if (d->game) {
@@ -2131,8 +2136,8 @@ void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, 
 		throw DisconnectException("PLAYERCMD_WO_GAME");
 	int32_t time = r.signed_32();
 	Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
-	log("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n", client_num, client.playernum,
-	    static_cast<unsigned int>(plcmd->id()), plcmd->sender(), time);
+	log("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n", client_num,
+	    client.playernum, static_cast<unsigned int>(plcmd->id()), plcmd->sender(), time);
 	receive_client_time(client_num, time);
 	if (plcmd->sender() != client.playernum + 1)
 		throw DisconnectException("PLAYERCMD_FOR_OTHER");
@@ -2158,7 +2163,7 @@ void GameHost::handle_chat(Client& client, RecvPacket& r) {
 		// Personal message
 		std::string::size_type const space = c.msg.find(' ');
 		if (space >= c.msg.size() - 1)
-			return; // No Message after '@<User>'
+			return;  // No Message after '@<User>'
 		c.recipient = c.msg.substr(1, space - 1);
 		c.msg = c.msg.substr(space + 1);
 	}
@@ -2176,7 +2181,7 @@ void GameHost::handle_new_file(Client& client) {
 	if (!file_)  // Do we have a file for sending?
 		throw DisconnectException("REQUEST_OF_N_E_FILE");
 	send_system_message_code(
-	    "STARTED_SENDING_FILE", file_->filename, d->settings.users.at(client.usernum).name);
+	   "STARTED_SENDING_FILE", file_->filename, d->settings.users.at(client.usernum).name);
 	send_file_part(client.sock_id, 0);
 	// Remember client as "currently receiving file"
 	d->settings.users[client.usernum].ready = false;
@@ -2209,35 +2214,48 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	}
 
 	switch (cmd) {
-	    case NETCMD_PONG:
+	case NETCMD_PONG:
 		log("[Host]: Client %u: got pong\n", client_num);
 		break;
 
-	    case NETCMD_SETTING_CHANGETRIBE:    return handle_changetribe(client, r);
-	    case NETCMD_SETTING_CHANGESHARED:   return handle_changeshared(client, r);
-	    case NETCMD_SETTING_CHANGETEAM:     return handle_changeteam(client, r);
-	    case NETCMD_SETTING_CHANGEINIT:     return handle_changeinit(client, r);
-	    case NETCMD_SETTING_CHANGEPOSITION: return handle_changeposition(client, r);
-	    case NETCMD_TIME:                   return handle_nettime(client_num, r);
-	    case NETCMD_PLAYERCOMMAND:          return handle_playercommmand(client_num, client, r);
-	    case NETCMD_SYNCREPORT:             return handle_syncreport(client_num, client, r);
-	    case NETCMD_CHAT:                   return handle_chat(client, r);
-	    case NETCMD_SETSPEED:               return handle_speed(client, r);
-	    case NETCMD_NEW_FILE_AVAILABLE:     return handle_new_file(client);
-	    case NETCMD_FILE_PART:              return handle_file_part(client, r);
+	case NETCMD_SETTING_CHANGETRIBE:
+		return handle_changetribe(client, r);
+	case NETCMD_SETTING_CHANGESHARED:
+		return handle_changeshared(client, r);
+	case NETCMD_SETTING_CHANGETEAM:
+		return handle_changeteam(client, r);
+	case NETCMD_SETTING_CHANGEINIT:
+		return handle_changeinit(client, r);
+	case NETCMD_SETTING_CHANGEPOSITION:
+		return handle_changeposition(client, r);
+	case NETCMD_TIME:
+		return handle_nettime(client_num, r);
+	case NETCMD_PLAYERCOMMAND:
+		return handle_playercommmand(client_num, client, r);
+	case NETCMD_SYNCREPORT:
+		return handle_syncreport(client_num, client, r);
+	case NETCMD_CHAT:
+		return handle_chat(client, r);
+	case NETCMD_SETSPEED:
+		return handle_speed(client, r);
+	case NETCMD_NEW_FILE_AVAILABLE:
+		return handle_new_file(client);
+	case NETCMD_FILE_PART:
+		return handle_file_part(client, r);
 
-	    case NETCMD_SETTING_MAP:
-	    case NETCMD_SETTING_PLAYER:
-	    case NETCMD_WIN_CONDITION:
-	    case NETCMD_PEACEFUL_MODE:
-	    case NETCMD_LAUNCH:
-		if (!d->game) { // not expected while game is in progress -> something is wrong here
-            log("[Host]: Unexpected command %u while in game\n", cmd);
-			throw DisconnectException("NO_ACCESS_TO_SERVER"); // TODO(k.halfmann): better use "UNEXPECTED_COMMAND" ?
+	case NETCMD_SETTING_MAP:
+	case NETCMD_SETTING_PLAYER:
+	case NETCMD_WIN_CONDITION:
+	case NETCMD_PEACEFUL_MODE:
+	case NETCMD_LAUNCH:
+		if (!d->game) {  // not expected while game is in progress -> something is wrong here
+			log("[Host]: Unexpected command %u while in game\n", cmd);
+			throw DisconnectException(
+			   "NO_ACCESS_TO_SERVER");  // TODO(k.halfmann): better use "UNEXPECTED_COMMAND" ?
 		}
 		break;
 
-	    default:
+	default:
 		throw ProtocolException(cmd);
 	}
 }
@@ -2249,25 +2267,24 @@ void GameHost::handle_file_part(Client& client, RecvPacket& r) {
 	uint32_t part = r.unsigned_32();
 	std::string x = r.string();
 	if (x != file_->md5sum) {
-		log(
-		    "[Host]: File transfer checksum mismatch %s != %s\n", x.c_str(), file_->md5sum.c_str());
+		log("[Host]: File transfer checksum mismatch %s != %s\n", x.c_str(), file_->md5sum.c_str());
 		return;  // Surely the file was changed, so we cancel here.
 	}
 	if (part >= file_->parts.size())
 		throw DisconnectException("REQUEST_OF_N_E_FILEPART");
 	if (part == file_->parts.size() - 1) {
 		send_system_message_code(
-					 "COMPLETED_FILE_TRANSFER", file_->filename, d->settings.users.at(client.usernum).name);
+		   "COMPLETED_FILE_TRANSFER", file_->filename, d->settings.users.at(client.usernum).name);
 		d->settings.users[client.usernum].ready = true;
 		SendPacket packet;
 		broadcast_setting_user(packet, client.usernum);
 		return;
 	}
 	++part;
-	if (part % 100 == 0) // Show Progress message every 100th transfer
+	if (part % 100 == 0)  // Show Progress message every 100th transfer
 		send_system_message_code("SENDING_FILE_PART",
-					 (boost::format("%i/%i") % part % (file_->parts.size() + 1)).str(),
-					 file_->filename, d->settings.users.at(client.usernum).name);
+		                         (boost::format("%i/%i") % part % (file_->parts.size() + 1)).str(),
+		                         file_->filename, d->settings.users.at(client.usernum).name);
 	send_file_part(client.sock_id, part);
 }
 

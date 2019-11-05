@@ -57,7 +57,8 @@ struct PlayerSettings {
 	uint8_t shared_in;  // the number of the player that uses this player's starting position
 };
 
-struct UserSettings { // TODO(k.halfman): make this some const instead of calculating this every time
+struct UserSettings {  // TODO(k.halfman): make this some const instead of calculating this every
+	                    // time
 	static uint8_t none() {
 		return std::numeric_limits<uint8_t>::max();
 	}

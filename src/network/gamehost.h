@@ -165,10 +165,10 @@ private:
 
 	void broadcast(SendPacket&);
 	void write_setting_map(SendPacket&);
-	void     write_setting_player(SendPacket&, uint8_t number);
+	void write_setting_player(SendPacket&, uint8_t number);
 	void broadcast_setting_player(SendPacket&, uint8_t number);
 	void write_setting_all_players(SendPacket&);
-	void     write_setting_user(SendPacket& packet, uint32_t number);
+	void write_setting_user(SendPacket& packet, uint32_t number);
 	void broadcast_setting_user(SendPacket& packet, uint32_t number);
 	void write_setting_all_users(SendPacket&);
 	bool write_map_transfer_info(SendPacket&, std::string);
@@ -183,7 +183,7 @@ private:
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;
 	bool internet_;
-	bool forced_pause_; // TODO(k.halfmann): this is never really used?
+	bool forced_pause_;  // TODO(k.halfmann): this is never really used?
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMEHOST_H
