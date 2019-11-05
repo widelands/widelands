@@ -46,7 +46,7 @@ formatting)
    ./utils/fix_formatting.py
    if [[ -n $(git status -s) ]]; then
      echo "Code not properly formatted. Please run: './utils/fix_formatting.py'"
-     echi "Also, consider installing the githooks by running: './install-githooks.sh'"
+     echo "Also, consider installing the githooks by running: './install-githooks.sh'"
      exit 1 # CodeStyle warnings.
    fi
    ;;

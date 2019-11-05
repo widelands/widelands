@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-26 10:18+0000\n"
-"PO-Revision-Date: 2019-08-28 10:50+0000\n"
+"POT-Creation-Date: 2019-10-09 07:57+0000\n"
+"PO-Revision-Date: 2019-11-01 15:58+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -578,7 +578,7 @@ msgstr "Obriu la finestra d'estadístiques de béns"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:317
 msgid "Select the ‘Wares’ entry from the ‘Statistics’ menu."
-msgstr ""
+msgstr "Seleccioneu l'entrada «Béns» del menú d'«Estadístiques»."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:339
@@ -615,7 +615,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:342
 msgid ""
 "I’ll continue as soon as you click on the third tab (‘Economy health’)."
-msgstr ""
+msgstr "Continuaré tan aviat com feu clic a la tercera pestanya («Salut de l'economia»)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:352
@@ -634,7 +634,7 @@ msgstr "Proveu-ho. També podeu comparar-ho amb les dues pestanyes anteriors."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:355
 msgid "When you have seen enough, switch to the fourth tab (‘Stock’)."
-msgstr ""
+msgstr "Després, canvieu a la quarta pestanya («Estoc»)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:363
 msgid ""

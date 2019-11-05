@@ -134,6 +134,8 @@ function MakeAppPackage {
    cp $SOURCE_DIR/data/images/logos/widelands.icns $DESTINATION/Widelands.app/Contents/Resources/widelands.icns
    ln -s /Applications $DESTINATION/Applications
 
+   # TODO(stonerl): NSHighResolutionCapable = false; can be removed when issue #3542
+   # is resolved. This needs an updated SDL2.
    cat > $DESTINATION/Widelands.app/Contents/Info.plist << EOF
 {
    CFBundleName = widelands;
@@ -146,6 +148,7 @@ function MakeAppPackage {
    CFBundleSignature = wdld;
    CFBundleExecutable = widelands;
    CFBundleIconFile = "widelands.icns";
+   NSHighResolutionCapable = false;
 }
 EOF
 
