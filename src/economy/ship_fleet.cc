@@ -508,7 +508,7 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 				continue;
 
 			if (pd->get_fleet() && pd->get_fleet() != this) {
-				log("Fleet::connect_port: different fleets despite reachability\n");
+				log("ShipFleet::connect_port: different fleets despite reachability\n");
 				continue;
 			}
 
@@ -539,7 +539,7 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 	}
 
 	if (!se.targets.empty()) {
-		log("Fleet::connect_port: Could not reach all ports!\n");
+		log("ShipFleet::connect_port: Could not reach all ports!\n");
 	}
 }
 
@@ -668,7 +668,7 @@ void ShipFleet::update(EditorGameBase& egbase) {
  * Returns false if the detour would be so long that this ship must not even be considered for
  * serving this port.
  */
-bool Fleet::penalize_route(Game& game, PortDock& p, const Ship& s, uint32_t* route_length) {
+bool ShipFleet::penalize_route(Game& game, PortDock& p, const Ship& s, uint32_t* route_length) {
 	const uint32_t real_length = *route_length;
 	uint32_t malus = 1;
 	uint32_t index = 0;

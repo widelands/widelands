@@ -69,9 +69,9 @@ struct ShippingItem {
 	void save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw);
 
 private:
-	friend struct Fleet;
 	friend class PortDock;
 	friend struct Ship;
+	friend struct ShipFleet;
 
 	// Called when a port is reached. The item will act again on its own.
 	void end_shipping(Game&);
