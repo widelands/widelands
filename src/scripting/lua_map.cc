@@ -3785,7 +3785,7 @@ void LuaEconomy::__unpersist(lua_State* L) {
 
       Returns the amount of the given ware or worker that should be kept in stock for this economy.
       Whether this works only for wares or only for workers is determined by the type of this
-   economy.
+      economy.
 
       **Warning**: Since economies can disappear when a player merges them
       through placing/deleting roads and flags, you must get a fresh economy
@@ -3825,8 +3825,8 @@ int LuaEconomy::target_quantity(lua_State* L) {
    .. method:: set_target_quantity(name)
 
       Sets the amount of the given ware or worker type that should be kept in stock for this
-   economy. Whether this works only for wares or only for workers is determined by the type of this
-   economy.
+      economy. Whether this works only for wares or only for workers is determined by the type of
+      this economy.
 
       **Warning**: Since economies can disappear when a player merges them
       through placing/deleting roads and flags, you must get a fresh economy
