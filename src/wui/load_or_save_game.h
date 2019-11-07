@@ -96,8 +96,7 @@ private:
 	UI::Box* table_box_;
 	FileType filetype_;
 
-	bool localize_autosave_;
-	SavegameTable table_;
+	std::unique_ptr<SavegameTable> table_;
 	std::vector<SavegameData> games_data_;
 	GameDetails game_details_;
 	UI::Button* delete_;
