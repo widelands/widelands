@@ -71,15 +71,15 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 		table_.reset(new SavegameTableMultiplayer(table_box_, style, localize_autosave));
 	}
 
-	//    table_->set_column_compare(
-	//	   0, boost::bind(&LoadOrSaveGame::compare_date_descending, this, _1, _2));
+	table_->set_column_compare(
+	   0, boost::bind(&LoadOrSaveGame::compare_date_descending, this, _1, _2));
 
 	table_box_->add(table_.get(), UI::Box::Resizing::kExpandBoth);
-	fill_table();
-
 	game_details_.button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	delete_->set_enabled(false);
 	delete_->sigclicked.connect(boost::bind(&LoadOrSaveGame::clicked_delete, boost::ref(*this)));
+
+	fill_table();
 }
 
 const std::string LoadOrSaveGame::filename_list_string() const {
@@ -103,12 +103,11 @@ const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>&
 	}
 	return message.str();
 }
-// bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) const {
-//	const SavegameData& r1 = games_data_[table_[rowa]];
-//	const SavegameData& r2 = games_data_[table_[rowb]];
-
-//	return r1.savetimestamp < r2.savetimestamp;
-//}
+bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) const {
+	const SavegameData& r1 = games_data_[table_->get(table_->get_record(rowa))];
+	const SavegameData& r2 = games_data_[table_->get(table_->get_record(rowb))];
+	return r1.savetimestamp < r2.savetimestamp;
+}
 
 std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 	std::unique_ptr<SavegameData> result(new SavegameData());
@@ -386,7 +385,6 @@ void LoadOrSaveGame::add_time_info(SavegameData& gamedata, Widelands::GamePreloa
 
 void LoadOrSaveGame::add_general_information(SavegameData& gamedata,
                                              Widelands::GamePreloadPacket& gpdp) {
-	gamedata.gametype = gpdp.get_gametype();
 	gamedata.set_mapname(gpdp.get_mapname());
 	gamedata.set_gametime(gpdp.get_gametime());
 	gamedata.set_nrplayers(gpdp.get_number_of_players());
@@ -427,6 +425,7 @@ void LoadOrSaveGame::load_gamefile(const std::string& gamefilename) {
 		Widelands::GameLoader gl(savename.c_str(), game_);
 		gl.preload_game(gpdp);
 
+		gamedata.gametype = gpdp.get_gametype();
 		if (!is_valid_gametype(gamedata)) {
 			return;
 		}

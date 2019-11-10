@@ -112,10 +112,9 @@ void SavegameTable::fill(const std::vector<SavegameData>& entries) {
 	focus();
 }
 
-void SavegameTable::set_show_filenames(bool show_filenames) {
+void SavegameTable::set_show_filenames(bool) {
 }
 
-//#############################
 SavegameTableSinglePlayer::SavegameTableSinglePlayer(UI::Panel* parent,
                                                      UI::PanelStyle style,
                                                      bool localize_autosave)
@@ -145,7 +144,7 @@ void SavegameTableSinglePlayer::create_error_entry(UI::Table<uintptr_t const>::E
 	te.set_string(0, "");
 	te.set_string(1, (boost::format(_("Incompatible: %s")) % savegame.mapname).str());
 }
-//##################################
+
 SavegameTableReplay::SavegameTableReplay(UI::Panel* parent,
                                          UI::PanelStyle style,
                                          bool localize_autosave)
@@ -214,7 +213,6 @@ void SavegameTableReplay::set_show_filenames(bool show_filenames) {
 	set_column_tooltip(2, show_filenames ? _("Filename: Map name (start of replay)") :
 	                                       _("Map name (start of replay)"));
 }
-//##################################
 
 SavegameTableMultiplayer::SavegameTableMultiplayer(UI::Panel* parent,
                                                    UI::PanelStyle style,

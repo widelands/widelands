@@ -1,5 +1,5 @@
-#ifndef SAVEGAMETABLE_H
-#define SAVEGAMETABLE_H
+#ifndef WL_WUI_SAVEGAMETABLE_H
+#define WL_WUI_SAVEGAMETABLE_H
 #include <vector>
 
 #include "gamedetails.h"
@@ -7,11 +7,12 @@
 #include "ui_basic/table.h"
 #include "wui/mapdata.h"
 
+/// A Table that displays savegames
+/// It must be extended to set columns and so on
 class SavegameTable : public UI::Table<uintptr_t> {
 public:
 	SavegameTable(UI::Panel* parent, UI::PanelStyle style, bool localize_autosave);
 
-	/// Fill the table with maps and directories.
 	void fill(const std::vector<SavegameData>& entries);
 	virtual void set_show_filenames(bool show_filenames);
 
@@ -30,6 +31,7 @@ private:
 	                                const SavegameData& savegame) = 0;
 };
 
+/// A Table to display savegames in singleplayer mode (2 columns)
 class SavegameTableSinglePlayer : public SavegameTable {
 public:
 	SavegameTableSinglePlayer(UI::Panel* parent, UI::PanelStyle style, bool localize_autosave);
@@ -42,6 +44,7 @@ private:
 	                        const SavegameData& savegame) override;
 };
 
+/// A Table to display savegames in multiplayer mode (3 columns)
 class SavegameTableMultiplayer : public SavegameTable {
 public:
 	SavegameTableMultiplayer(UI::Panel* parent, UI::PanelStyle style, bool localize_autosave);
@@ -54,6 +57,7 @@ private:
 	                        const SavegameData& savegame) override;
 };
 
+/// A Table to display replays where filenames can be hidden/shown (3 columns)
 class SavegameTableReplay : public SavegameTable {
 public:
 	SavegameTableReplay(UI::Panel* parent, UI::PanelStyle style, bool localize_autosave);
@@ -68,4 +72,4 @@ private:
 	                        const SavegameData& savegame) override;
 };
 
-#endif  // SAVEGAMETABLE_H
+#endif  // WL_WUI_SAVEGAMETABLE_H
