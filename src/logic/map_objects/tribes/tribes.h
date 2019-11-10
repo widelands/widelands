@@ -157,6 +157,7 @@ private:
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
 	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
+	std::unique_ptr<TribesLegacyLookupTable> legacy_lookup_table_;
 
 	uint32_t largest_workarea_;
 
