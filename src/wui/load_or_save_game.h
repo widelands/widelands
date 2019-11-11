@@ -65,7 +65,6 @@ protected:
 	void set_show_filenames(bool);
 
 	/// The table panel
-	//	UI::Table<uintptr_t const>& table();
 	SavegameTable& table();
 
 	/// A vertical box wrapping the table. This can be used to add UI elements above/below the table.

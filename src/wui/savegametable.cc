@@ -1,7 +1,4 @@
 #include "savegametable.h"
-#include "graphic/font_handler.h"
-#include "graphic/graphic.h"
-#include "graphic/text_layout.h"
 
 SavegameTable::SavegameTable(UI::Panel* parent, UI::PanelStyle style, bool localize_autosave)
    : UI::Table<uintptr_t>(parent, 0, 0, 0, 0, style, UI::TableRows::kMultiDescending),
@@ -73,39 +70,6 @@ void SavegameTable::fill(const std::vector<SavegameData>& entries) {
 		} else {
 			create_error_entry(te, savegame);
 		}
-
-		//        }
-
-		//		if (mapdata.maptype == MapData::MapType::kDirectory) {
-		//			te.set_string(0, "");
-		//			te.set_picture(
-		//			   1, g_gr->images().get("images/ui_basic/ls_dir.png"), mapdata.localized_name);
-		//			te.set_string(2, "");
-		//		} else {
-		//			te.set_string(0, (boost::format("(%i)") % mapdata.nrplayers).str());
-
-		//			std::string picture = "images/ui_basic/ls_wlmap.png";
-		//			if (mapdata.maptype == MapData::MapType::kScenario) {
-		//				picture = "images/ui_basic/ls_wlscenario.png";
-		//			} else if (mapdata.maptype == MapData::MapType::kSettlers2) {
-		//				picture = "images/ui_basic/ls_s2map.png";
-		//			}
-
-		//			if (type == MapData::DisplayType::kFilenames) {
-		//				set_column_title(1, _("Filename"));
-		//				te.set_picture(1, g_gr->images().get(picture),
-		//				               FileSystem::filename_without_ext(mapdata.filename.c_str()));
-		//			} else {
-		//				set_column_title(1, _("Map Name"));
-		//				if (type == MapData::DisplayType::kMapnames) {
-		//					te.set_picture(1, g_gr->images().get(picture), mapdata.name);
-		//				} else {
-		//					te.set_picture(1, g_gr->images().get(picture), mapdata.localized_name);
-		//				}
-		//			}
-
-		//			te.set_string(2, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
-		//		}
 	}
 	sort();
 	layout();

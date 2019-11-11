@@ -3,6 +3,9 @@
 #include <vector>
 
 #include "gamedetails.h"
+#include "graphic/font_handler.h"
+#include "graphic/graphic.h"
+#include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
 #include "ui_basic/table.h"
 #include "wui/mapdata.h"
