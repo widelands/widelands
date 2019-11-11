@@ -166,6 +166,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
 				cs_soldier_capacity_display_ =
 				   new UI::Textarea(&soldier_capacity_box, "", UI::Align::kCenter);
+				cs_soldier_capacity_decrease_->set_repeating(true);
+				cs_soldier_capacity_increase_->set_repeating(true);
 				cs_soldier_capacity_decrease_->set_enabled(can_act);
 				cs_soldier_capacity_increase_->set_enabled(can_act);
 				cs_soldier_capacity_decrease_->sigclicked.connect([this, ts]() {
@@ -210,6 +212,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
 			cs_soldier_capacity_display_ =
 			   new UI::Textarea(&soldier_capacity_box, "", UI::Align::kCenter);
+			cs_soldier_capacity_decrease_->set_repeating(true);
+			cs_soldier_capacity_increase_->set_repeating(true);
 			cs_soldier_capacity_decrease_->set_enabled(can_act);
 			cs_soldier_capacity_increase_->set_enabled(can_act);
 			cs_soldier_capacity_decrease_->sigclicked.connect([this, ms]() {
@@ -242,6 +246,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_prefer_heroes_rookies_->add_button(
 			   &soldier_preference_panel, Vector2i(32, 0),
 			   g_gr->images().get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
+			cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1);
 			if (can_act) {
 				cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
 					igbase()->game().send_player_militarysite_set_soldier_preference(
@@ -430,7 +435,13 @@ void ConstructionSiteWindow::think() {
 		cs_soldier_capacity_decrease_->set_enabled(can_act && ms->desired_capacity > 1);
 		cs_soldier_capacity_increase_->set_enabled(can_act &&
 		                                           ms->desired_capacity < ms->max_capacity);
-		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1);
+		// Since this function triggers a changedto signal resulting in a playercommand,
+		// we can update the view only for spectators (which may be a problem if a script
+		// changes the state while the window is open for the interactive player, but this
+		// was never yet mentioned as a problem in militarysitewindows either).
+		if (!can_act) {
+			cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1);
+		}
 	} else if (upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings())) {
 		if (cs_launch_expedition_) {
 			cs_launch_expedition_->set_state(ws->launch_expedition);
