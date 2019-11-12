@@ -277,7 +277,6 @@ tribes:new_tribe {
       "atlanteans_toolsmithy",
       "atlanteans_weaponsmithy",
       "atlanteans_armorsmithy",
-      "atlanteans_shipyard",
       "atlanteans_barracks",
 
       -- Big
@@ -304,6 +303,9 @@ tribes:new_tribe {
       "atlanteans_tower",
       "atlanteans_tower_high",
       "atlanteans_castle",
+
+      -- Seafaring Sites - these are only displayed on seafaring maps
+      "atlanteans_shipyard",
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",

@@ -223,7 +223,6 @@ tribes:new_tribe {
       "empire_smelting_works",
       "empire_toolsmithy",
       "empire_armorsmithy",
-      "empire_shipyard",
       "empire_barracks",
 
       -- Big
@@ -258,6 +257,9 @@ tribes:new_tribe {
       "empire_tower",
       "empire_fortress",
       "empire_castle",
+
+      -- Seafaring Sites - these are only displayed on seafaring maps
+      "empire_shipyard",
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",

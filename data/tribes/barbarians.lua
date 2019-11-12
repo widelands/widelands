@@ -232,13 +232,11 @@ tribes:new_tribe {
       "barbarians_metal_workshop",
       "barbarians_warmill",
       "barbarians_ax_workshop",
-      "barbarians_shipyard",
       "barbarians_barracks",
 
       -- Big
       "barbarians_cattlefarm",
       "barbarians_farm",
-      "barbarians_weaving_mill",
       "barbarians_helmsmithy",
 
       -- Mines
@@ -263,6 +261,10 @@ tribes:new_tribe {
       "barbarians_tower",
       "barbarians_fortress",
       "barbarians_citadel",
+
+      -- Seafaring Sites - these are only displayed on seafaring maps
+      "barbarians_shipyard",
+      "barbarians_weaving_mill",
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
