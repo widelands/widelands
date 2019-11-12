@@ -2,13 +2,16 @@
 #define WL_WUI_SAVEGAMETABLE_H
 #include <vector>
 
+#include "base/i18n.h"
 #include "gamedetails.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/text_layout.h"
+#include "io/filesystem/filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "ui_basic/table.h"
-#include "wui/mapdata.h"
+#include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 
 /// A Table that displays savegames
 /// It must be extended to set columns and so on
