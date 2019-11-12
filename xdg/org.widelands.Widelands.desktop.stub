@@ -10,4 +10,4 @@ Keywords=Game;RTS;Real-time;Strategy;
 Terminal=false
 StartupNotify=true
 StartupWMClass=widelands
-X-Flatpak-RenamedFrom=org.widelands.widelands.desktop;org.widelands.widelands;
+X-Flatpak-RenamedFrom=widelands.desktop;org.widelands.widelands.desktop;
