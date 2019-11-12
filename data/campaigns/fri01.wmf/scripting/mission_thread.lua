@@ -127,7 +127,7 @@ function count(ware)
 end
 
 function backup_autosave()
-   while backup_mark.owner == nil do sleep(4273) end
+   while backup_mark.owner ~= p1 do sleep(4273) end
    -- TRANSLATORS: Name of a backup autosave
    wl.Game():save(_"The Great Stormflood (Backup Autosave)")
 end
