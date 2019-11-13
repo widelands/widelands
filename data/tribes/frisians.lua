@@ -308,7 +308,7 @@ tribes:new_tribe {
       -- Seafaring Sites - these are only displayed on seafaring maps
       "frisians_weaving_mill",
       "frisians_shipyard",
-      
+
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
       "dismantlesite",
