@@ -1,4 +1,4 @@
-#include "savegametable.h"
+#include "wui/savegametable.h"
 
 SavegameTable::SavegameTable(UI::Panel* parent, UI::PanelStyle style, bool localize_autosave)
    : UI::Table<uintptr_t>(parent, 0, 0, 0, 0, style, UI::TableRows::kMultiDescending),
