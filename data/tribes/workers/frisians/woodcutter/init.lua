@@ -67,7 +67,7 @@ tribes:new_worker_type {
          frames = 10,
          columns = 5,
          rows = 2,
-         hotspot = {19, 33}
+         hotspot = {14, 23}
       },
    },
 }
