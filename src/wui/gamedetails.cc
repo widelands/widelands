@@ -41,6 +41,23 @@ SavegameData::SavegameData()
      gametype(GameController::GameType::kSingleplayer) {
 }
 
+SavegameData::SavegameData(const std::string& fname)
+   : filename(fname),
+     gametime(""),
+     nrplayers("0"),
+     savetimestamp(0),
+     gametype(GameController::GameType::kSingleplayer),
+     type_(SavegameType::kNormal) {
+}
+SavegameData::SavegameData(const std::string& fname, const SavegameType& type)
+   : filename(fname),
+     gametime(""),
+     nrplayers("0"),
+     savetimestamp(0),
+     gametype(GameController::GameType::kSingleplayer),
+     type_(type) {
+}
+
 void SavegameData::set_gametime(uint32_t input_gametime) {
 	gametime = gametimestring(input_gametime);
 }

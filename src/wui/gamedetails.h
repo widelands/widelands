@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "graphic/image.h"
+#include "io/filesystem/filesystem.h"
 #include "logic/game_controller.h"
 #include "logic/widelands.h"
 #include "ui_basic/box.h"
@@ -33,6 +34,7 @@
  * Data about a savegame/replay that we're interested in.
  */
 struct SavegameData {
+	enum class SavegameType { kNormal, kDirectory };
 	/// The filename of the currenty selected file
 	std::string filename;
 	/// List of filenames when multiple files have been selected
@@ -61,8 +63,12 @@ struct SavegameData {
 	time_t savetimestamp;
 	/// Single payer, nethost, netclient or replay
 	GameController::GameType gametype;
+	/// Savegame or directory
+	SavegameType type_;
 
 	SavegameData();
+	SavegameData(const std::string& filename);
+	SavegameData(const std::string& filename, const SavegameType& type_);
 
 	/// Converts timestamp to UI string and assigns it to gametime
 	void set_gametime(uint32_t input_gametime);

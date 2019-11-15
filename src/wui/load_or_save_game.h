@@ -91,6 +91,18 @@ private:
 	/// Reverse default sort order for save date column
 	bool compare_date_descending(uint32_t, uint32_t) const;
 
+	/// The localized name of the parent directory
+	static std::string parent_name();
+
+	/// Get the ".." directory
+	static SavegameData create_parent_dir(const std::string& current_dir);
+
+	/// To display if the directory is empty and has no parent
+	static SavegameData create_empty_dir(const std::string& current_dir);
+
+	/// Create a subdirectory
+	static SavegameData create_directory(const std::string& directory);
+
 	UI::Panel* parent_;
 	UI::Box* table_box_;
 	FileType filetype_;
@@ -100,7 +112,11 @@ private:
 	GameDetails game_details_;
 	UI::Button* delete_;
 
+	const std::string basedir_;
+	std::string curdir_;
+
 	Widelands::Game& game_;
+	void fill_directory();
 	void load_gamefile(const std::string& gamefilename);
 	bool is_valid_gametype(SavegameData& gamedata);
 	void add_time_info(SavegameData& gamedata, Widelands::GamePreloadPacket& gpdp);

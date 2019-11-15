@@ -61,6 +61,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                             style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
                                                                UI::ButtonStyle::kWuiSecondary,
                             _("Delete"))),
+     basedir_(filetype_ == FileType::kReplay ? kReplayDir : kSaveDir),
+     curdir_(basedir_),
      game_(g) {
 
 	if (filetype_ == FileType::kGameSinglePlayer) {
@@ -106,6 +108,8 @@ const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>&
 bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) const {
 	const SavegameData& r1 = games_data_[table_->get(table_->get_record(rowa))];
 	const SavegameData& r2 = games_data_[table_->get(table_->get_record(rowb))];
+	if (r2.type_ == SavegameData::SavegameType::kDirectory)
+		return true;
 	return r1.savetimestamp < r2.savetimestamp;
 }
 
@@ -407,8 +411,31 @@ void LoadOrSaveGame::add_error_info(SavegameData& gamedata, std::string errormes
 	gamedata.mapname = FileSystem::filename_without_ext(gamedata.filename.c_str());
 }
 
+SavegameData LoadOrSaveGame::create_directory(const std::string& directory) {
+	std::string localized_name;
+	if (boost::equals(directory, "maps/MP_Scenarios")) {
+		/** TRANSLATORS: Directory name for MP Scenarios in map selection */
+		localized_name = _("Multiplayer Scenarios");
+	} else if (boost::equals(directory, "maps/My_Maps")) {
+		/** TRANSLATORS: Directory name for user maps in map selection */
+		localized_name = _("My Maps");
+	} else {
+		localized_name = FileSystem::fs_filename(directory.c_str());
+	}
+	return SavegameData(localized_name, SavegameData::SavegameType::kDirectory);
+}
+
 void LoadOrSaveGame::load_gamefile(const std::string& gamefilename) {
-	SavegameData gamedata;
+	log("filename: %s\n", gamefilename.c_str());
+	if (g_fs->is_directory(gamefilename)) {
+		// Add subdirectory to the list
+		const char* fs_filename = FileSystem::fs_filename(gamefilename.c_str());
+		if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, ".."))
+			return;
+		games_data_.push_back(LoadOrSaveGame::create_directory(gamefilename));
+		return;
+	}
+
 	Widelands::GamePreloadPacket gpdp;
 	std::string savename = gamefilename;
 
@@ -419,7 +446,7 @@ void LoadOrSaveGame::load_gamefile(const std::string& gamefilename) {
 		return;
 	}
 
-	gamedata.filename = gamefilename;
+	SavegameData gamedata(gamefilename);
 
 	try {
 		Widelands::GameLoader gl(savename.c_str(), game_);
@@ -441,19 +468,42 @@ void LoadOrSaveGame::load_gamefile(const std::string& gamefilename) {
 }
 
 FilenameSet LoadOrSaveGame::find_gamefiles() {
-	FilenameSet gamefiles;
-	if (filetype_ == FileType::kReplay) {
-		gamefiles = g_fs->filter_directory(kReplayDir, [](const std::string& fn) {
-			return boost::algorithm::ends_with(fn, kReplayExtension);
-		});
+	return g_fs->list_directory(curdir_);
+}
 
-	} else {
-		gamefiles = g_fs->filter_directory(kSaveDir, [](const std::string& fn) {
-			return boost::algorithm::ends_with(fn, kSavegameExtension);
-		});
+// static
+SavegameData LoadOrSaveGame::create_parent_dir(const std::string& current_dir) {
+	std::string filename = FileSystem::fs_dirname(current_dir);
+	if (!filename.empty()) {
+		// fs_dirname always returns a directory with a separator at the end.
+		filename.pop_back();
 	}
+	return SavegameData(parent_name(), SavegameData::SavegameType::kDirectory);
+}
 
-	return gamefiles;
+// static
+SavegameData LoadOrSaveGame::create_empty_dir(const std::string& current_dir) {
+	/** TRANSLATORS: This label is shown when a folder is empty */
+	return SavegameData(
+	   (boost::format("<%s>") % _("empty")).str(), SavegameData::SavegameType::kDirectory);
+}
+
+// static
+std::string LoadOrSaveGame::parent_name() {
+	/** TRANSLATORS: Parent directory/folder */
+	return (boost::format("<%s>") % _("parent")).str();
+}
+void LoadOrSaveGame::fill_directory() {
+	// Fill it with all files we find.
+	FilenameSet files = g_fs->list_directory(curdir_);
+
+	// If we are not at the top of the map directory hierarchy (we're not talking
+	// about the absolute filesystem top!) we manually add ".."
+	if (curdir_ != basedir_) {
+		games_data_.push_back(LoadOrSaveGame::create_parent_dir(curdir_));
+	} else if (files.empty()) {
+		games_data_.push_back(LoadOrSaveGame::create_empty_dir(curdir_));
+	}
 }
 
 void LoadOrSaveGame::fill_table() {
