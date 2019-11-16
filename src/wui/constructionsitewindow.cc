@@ -143,14 +143,12 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				InputQueueDisplay* queue = new InputQueueDisplay(
 				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWARE, pair.first);
 				settings_box.add(queue);
-				settings_box.add_space(8);
 				cs_ware_queues_.push_back(queue);
 			}
 			for (const auto& pair : ps->worker_queues) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
 				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWORKER, pair.first);
 				settings_box.add(queue);
-				settings_box.add_space(8);
 				cs_ware_queues_.push_back(queue);
 			}
 			if (upcast(Widelands::TrainingsiteSettings, ts, ps)) {
@@ -196,7 +194,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				}
 			});
 			settings_box.add(cs_stopped_, UI::Box::Resizing::kFullSize);
-			settings_box.add_space(8);
+			settings_box.add_space(6);
 			cs_stopped_->set_enabled(can_act);
 		} else if (upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings())) {
 			UI::Box& soldier_capacity_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
@@ -260,7 +258,6 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				UI::Box& mainbox = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 				*display = new FakeWaresDisplay(&mainbox, can_act, *construction_site, ww);
 				mainbox.add(*display, UI::Box::Resizing::kFullSize);
-				mainbox.add_space(8);
 				UI::Box& buttonsbox = *new UI::Box(&mainbox, 0, 0, UI::Box::Horizontal);
 				mainbox.add(&buttonsbox, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 				mainbox.add_space(8);
@@ -319,7 +316,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 					}
 				});
 				settings_box.add(cs_launch_expedition_, UI::Box::Resizing::kFullSize);
-				settings_box.add_space(8);
+				settings_box.add_space(6);
 				cs_launch_expedition_->set_enabled(can_act);
 			} else {
 				nothing_added = true;
