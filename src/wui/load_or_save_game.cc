@@ -108,12 +108,20 @@ const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>&
 bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) const {
 	const SavegameData& r1 = games_data_[table_->get(table_->get_record(rowa))];
 	const SavegameData& r2 = games_data_[table_->get(table_->get_record(rowb))];
-	if (r2.type_ == SavegameData::SavegameType::kDirectory)
+	if (r1.type_ == SavegameData::SavegameType::kDirectory &&
+	    r2.type_ != SavegameData::SavegameType::kDirectory)
+		return false;
+	if (r1.type_ != SavegameData::SavegameType::kDirectory &&
+	    r2.type_ == SavegameData::SavegameType::kDirectory)
 		return true;
+	if (r1.type_ == SavegameData::SavegameType::kDirectory &&
+	    r2.type_ == SavegameData::SavegameType::kDirectory)
+		return r1.filename < r2.filename;
 	return r1.savetimestamp < r2.savetimestamp;
 }
 
 std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
+	log("entry selected\n");
 	std::unique_ptr<SavegameData> result(new SavegameData());
 	size_t selections = table_->selections().size();
 	if (selections == 1) {
@@ -123,7 +131,9 @@ std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 		      _("Delete this replay") :
 		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
 		      _("Delete this game"));
+		log("wrong copy constructor?!?! %s\n", games_data_[table_->get_selected()].filename.c_str());
 		result.reset(new SavegameData(games_data_[table_->get_selected()]));
+		log("yeah wrong... %s\n", result->filename.c_str());
 	} else if (selections > 1) {
 		delete_->set_tooltip(
 		   filetype_ == FileType::kReplay ?
@@ -422,7 +432,7 @@ SavegameData LoadOrSaveGame::create_directory(const std::string& directory) {
 	} else {
 		localized_name = FileSystem::fs_filename(directory.c_str());
 	}
-	return SavegameData(localized_name, SavegameData::SavegameType::kDirectory);
+	return SavegameData(directory, SavegameData::SavegameType::kDirectory);
 }
 
 void LoadOrSaveGame::load_gamefile(const std::string& gamefilename) {
@@ -467,18 +477,17 @@ void LoadOrSaveGame::load_gamefile(const std::string& gamefilename) {
 	games_data_.push_back(gamedata);
 }
 
-FilenameSet LoadOrSaveGame::find_gamefiles() {
-	return g_fs->list_directory(curdir_);
-}
-
 // static
 SavegameData LoadOrSaveGame::create_parent_dir(const std::string& current_dir) {
+	log("creating parent dir for: %s\n", current_dir.c_str());
 	std::string filename = FileSystem::fs_dirname(current_dir);
+	log("dirname: %s\n", filename.c_str());
 	if (!filename.empty()) {
 		// fs_dirname always returns a directory with a separator at the end.
 		filename.pop_back();
 	}
-	return SavegameData(parent_name(), SavegameData::SavegameType::kDirectory);
+	log("created parent dir: %s\n", filename.c_str());
+	return SavegameData(filename, SavegameData::SavegameType::kDirectory);
 }
 
 // static
@@ -496,10 +505,11 @@ std::string LoadOrSaveGame::parent_name() {
 void LoadOrSaveGame::fill_directory() {
 	// Fill it with all files we find.
 	FilenameSet files = g_fs->list_directory(curdir_);
-
+	log("now searching %s for subdirectories\n", curdir_.c_str());
 	// If we are not at the top of the map directory hierarchy (we're not talking
 	// about the absolute filesystem top!) we manually add ".."
 	if (curdir_ != basedir_) {
+		log("not in basedir anymore. creating parent dir\n");
 		games_data_.push_back(LoadOrSaveGame::create_parent_dir(curdir_));
 	} else if (files.empty()) {
 		games_data_.push_back(LoadOrSaveGame::create_empty_dir(curdir_));
@@ -510,7 +520,17 @@ void LoadOrSaveGame::fill_table() {
 	clear_selections();
 	games_data_.clear();
 
-	FilenameSet gamefiles = find_gamefiles();
+	FilenameSet gamefiles = g_fs->list_directory(curdir_);
+
+	log("now searching %s for subdirectories\n", curdir_.c_str());
+	// If we are not at the top of the map directory hierarchy (we're not talking
+	// about the absolute filesystem top!) we manually add ".."
+	if (curdir_ != basedir_) {
+		log("not in basedir anymore. creating parent dir\n");
+		games_data_.push_back(LoadOrSaveGame::create_parent_dir(curdir_));
+	} else if (gamefiles.empty()) {
+		games_data_.push_back(LoadOrSaveGame::create_empty_dir(curdir_));
+	}
 
 	for (const std::string& gamefilename : gamefiles) {
 		load_gamefile(gamefilename);
@@ -524,4 +544,8 @@ void LoadOrSaveGame::set_show_filenames(bool show_filenames) {
 		return;
 	}
 	table_->set_show_filenames(show_filenames);
+}
+
+void LoadOrSaveGame::set_cur_dir(std::string& directory) {
+	curdir_ = directory;
 }

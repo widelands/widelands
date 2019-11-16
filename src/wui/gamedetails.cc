@@ -69,6 +69,10 @@ void SavegameData::set_mapname(const std::string& input_mapname) {
 	mapname = _(input_mapname);
 }
 
+bool SavegameData::is_directory() {
+	return type_ == SavegameType::kDirectory;
+}
+
 GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      style_(style),

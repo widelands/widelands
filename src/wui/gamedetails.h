@@ -68,7 +68,7 @@ struct SavegameData {
 
 	SavegameData();
 	SavegameData(const std::string& filename);
-	SavegameData(const std::string& filename, const SavegameType& type_);
+	SavegameData(const std::string& filename, const SavegameType& type);
 
 	/// Converts timestamp to UI string and assigns it to gametime
 	void set_gametime(uint32_t input_gametime);
@@ -76,6 +76,8 @@ struct SavegameData {
 	void set_nrplayers(Widelands::PlayerNumber input_nrplayers);
 	/// Sets the mapname as a localized string
 	void set_mapname(const std::string& input_mapname);
+
+	bool is_directory();
 };
 
 /**

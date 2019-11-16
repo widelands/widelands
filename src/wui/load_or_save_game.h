@@ -79,6 +79,8 @@ protected:
 	/// Show confirmation window and delete the selected file(s)
 	void clicked_delete();
 
+	void set_cur_dir(std::string& directory);
+
 private:
 	/// Returns the filename for the table entry at 'index'
 	const std::string get_filename(int index) const;
@@ -122,7 +124,6 @@ private:
 	void add_time_info(SavegameData& gamedata, Widelands::GamePreloadPacket& gpdp);
 	void add_general_information(SavegameData& gamedata, Widelands::GamePreloadPacket& gpdp);
 	void add_error_info(SavegameData& gamedata, std::string errormessage);
-	FilenameSet find_gamefiles();
 };
 
 #endif  // end of include guard: WL_WUI_LOAD_OR_SAVE_GAME_H
