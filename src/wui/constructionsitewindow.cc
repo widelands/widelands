@@ -97,7 +97,6 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
    : BuildingWindow(parent, reg, cs, cs.building(), avoid_fastclick),
      construction_site_(&cs),
      progress_(nullptr),
-     cs_enhance_(nullptr),
      cs_launch_expedition_(nullptr),
      cs_prefer_heroes_rookies_(nullptr),
      cs_soldier_capacity_decrease_(nullptr),
@@ -329,32 +328,6 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			NEVER_HERE();
 		}
 
-		if (can_act &&
-		    construction_site->get_info().becomes->enhancement() != Widelands::INVALID_INDEX) {
-			const Widelands::BuildingDescr& building_descr =
-			   *igbase()->egbase().tribes().get_building_descr(
-			      construction_site->get_info().becomes->enhancement());
-			std::string enhance_tooltip =
-			   (boost::format(_("Enhance to %s")) % building_descr.descname().c_str()).str() +
-			   "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
-			   waremap_to_richtext(
-			      construction_site->owner().tribe(), building_descr.enhancement_cost());
-			cs_enhance_ =
-			   new UI::Button(&settings_box, "enhance", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  building_descr.icon(), enhance_tooltip);
-			cs_enhance_->sigclicked.connect([this, construction_site] {
-				if (SDL_GetModState() & KMOD_CTRL) {
-					igbase()->game().send_player_enhance_building(
-					   *construction_site, Widelands::INVALID_INDEX);
-				} else {
-					show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *construction_site,
-					                     construction_site->get_info().becomes->enhancement(), true);
-				}
-			});
-			settings_box.add(cs_enhance_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-			settings_box.add_space(8);
-			nothing_added = false;
-		}
 		if (!nothing_added) {
 			get_tabs()->add("settings", g_gr->images().get(pic_tab_settings), &settings_box,
 			                _("Settings to apply after construction"));
