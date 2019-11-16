@@ -43,6 +43,7 @@ static const char pic_stock_policy_button_remove[] =
    "images/wui/buildings/stock_policy_button_remove.png";
 static const char pic_decrease_capacity[] = "images/wui/buildings/menu_down_train.png";
 static const char pic_increase_capacity[] = "images/wui/buildings/menu_up_train.png";
+constexpr uint16_t kSoldierCapacityDisplayWidth = 145;
 
 ConstructionSiteWindow::FakeWaresDisplay::FakeWaresDisplay(UI::Panel* parent,
                                                            bool can_act,
@@ -180,11 +181,10 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 					   SDL_GetModState() & KMOD_CTRL ? ts->max_capacity : ts->desired_capacity + 1);
 				});
 				soldier_capacity_box.add(cs_soldier_capacity_decrease_);
-				soldier_capacity_box.add_space(8);
 				soldier_capacity_box.add(
 				   cs_soldier_capacity_display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-				soldier_capacity_box.add_space(8);
 				soldier_capacity_box.add(cs_soldier_capacity_increase_);
+				cs_soldier_capacity_display_->set_fixed_width(kSoldierCapacityDisplayWidth);
 				settings_box.add_space(8);
 			}
 			cs_stopped_ = new UI::Checkbox(&settings_box, Vector2i::zero(), _("Stopped"),
@@ -226,11 +226,10 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				   SDL_GetModState() & KMOD_CTRL ? ms->max_capacity : ms->desired_capacity + 1);
 			});
 			soldier_capacity_box.add(cs_soldier_capacity_decrease_);
-			soldier_capacity_box.add_space(8);
 			soldier_capacity_box.add(
 			   cs_soldier_capacity_display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-			soldier_capacity_box.add_space(8);
 			soldier_capacity_box.add(cs_soldier_capacity_increase_);
+			cs_soldier_capacity_display_->set_fixed_width(kSoldierCapacityDisplayWidth);
 			settings_box.add_space(8);
 
 			UI::Box& soldier_preference_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
