@@ -43,7 +43,7 @@ static const char pic_stock_policy_button_remove[] =
    "images/wui/buildings/stock_policy_button_remove.png";
 static const char pic_decrease_capacity[] = "images/wui/buildings/menu_down_train.png";
 static const char pic_increase_capacity[] = "images/wui/buildings/menu_up_train.png";
-constexpr uint16_t kSoldierCapacityDisplayWidth = 240;
+constexpr uint16_t kSoldierCapacityDisplayWidth = 145;
 
 ConstructionSiteWindow::FakeWaresDisplay::FakeWaresDisplay(UI::Panel* parent,
                                                            bool can_act,
