@@ -147,9 +147,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 
 BaseDropdown::~BaseDropdown() {
 	// The list needs to be able to drop outside of windows, so it won't close with the window.
-	// Deleting here leads to a conflict as to who gets to delete it, so we just leave it.
-	// It will be hidden as soon as the mouse moves away anyway.
-	// TODO(GunChleoc): Investigate whether we can find a better solution for this
+	// So, we tell it to die.
+	list_->die();
 }
 
 void BaseDropdown::set_height(int height) {
