@@ -93,7 +93,6 @@ wl_library(wui_common_gamedetails
     helper
     game_io
     graphic
-    graphic_fonthandler
     graphic_image_io
     graphic_surface
     graphic_text_layout
