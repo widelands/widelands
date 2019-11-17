@@ -193,7 +193,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 					   *construction_site_.get(igbase()->egbase()));
 				}
 			});
-			settings_box.add(cs_stopped_, UI::Box::Resizing::kFullSize);
+			settings_box.add(cs_stopped_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			settings_box.add_space(6);
 			cs_stopped_->set_enabled(can_act);
 		} else if (upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings())) {
