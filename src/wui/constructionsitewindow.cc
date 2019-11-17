@@ -260,7 +260,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				mainbox.add(*display, UI::Box::Resizing::kFullSize);
 				UI::Box& buttonsbox = *new UI::Box(&mainbox, 0, 0, UI::Box::Horizontal);
 				mainbox.add(&buttonsbox, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-				mainbox.add_space(8);
+				mainbox.add_space(15);
 				UI::Button& sp_normal = *new UI::Button(
 				   &buttonsbox, "stock_policy_normal", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 				   g_gr->images().get(pic_stock_policy_button_normal), _("Normal policy"));
@@ -289,11 +289,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				sp_remove.set_enabled(can_act);
 				sp_prefer.set_enabled(can_act);
 				buttonsbox.add(&sp_normal);
-				buttonsbox.add_space(8);
 				buttonsbox.add(&sp_prefer);
-				buttonsbox.add_space(8);
 				buttonsbox.add(&sp_dont);
-				buttonsbox.add_space(8);
 				buttonsbox.add(&sp_remove);
 				if (ww == Widelands::wwWARE) {
 					get_tabs()->add("warehouse_wares", g_gr->images().get(pic_tab_settings_wares),
