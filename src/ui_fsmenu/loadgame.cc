@@ -149,9 +149,7 @@ void FullscreenMenuLoadGame::clicked_ok() {
 
 	std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
 	if (gamedata->is_directory()) {
-		log("setting directory to %s\n", gamedata->filename.c_str());
-		load_or_save_.set_cur_dir(gamedata->filename);
-		load_or_save_.fill_table();
+		load_or_save_.change_directory_to(gamedata->filename);
 	} else {
 		if (gamedata && gamedata->errormessage.empty()) {
 			filename_ = gamedata->filename;

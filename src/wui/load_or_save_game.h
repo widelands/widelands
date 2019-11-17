@@ -79,7 +79,7 @@ protected:
 	/// Show confirmation window and delete the selected file(s)
 	void clicked_delete();
 
-	void set_cur_dir(std::string& directory);
+	void change_directory_to(std::string& directory);
 
 private:
 	/// Returns the filename for the table entry at 'index'
@@ -92,12 +92,6 @@ private:
 
 	/// Reverse default sort order for save date column
 	bool compare_date_descending(uint32_t, uint32_t) const;
-
-	/// The localized name of the parent directory
-	static std::string parent_name();
-
-	/// Get the ".." directory
-	static SavegameData create_parent_dir(const std::string& current_dir);
 
 	/// To display if the directory is empty and has no parent
 	static SavegameData create_empty_dir(const std::string& current_dir);
@@ -118,12 +112,12 @@ private:
 	std::string curdir_;
 
 	Widelands::Game& game_;
-	void fill_directory();
 	void load_gamefile(const std::string& gamefilename);
 	bool is_valid_gametype(SavegameData& gamedata);
 	void add_time_info(SavegameData& gamedata, Widelands::GamePreloadPacket& gpdp);
 	void add_general_information(SavegameData& gamedata, Widelands::GamePreloadPacket& gpdp);
 	void add_error_info(SavegameData& gamedata, std::string errormessage);
+	void add_sub_dir(const std::string& gamefilename);
 };
 
 #endif  // end of include guard: WL_WUI_LOAD_OR_SAVE_GAME_H

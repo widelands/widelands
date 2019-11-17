@@ -42,12 +42,7 @@ SavegameData::SavegameData()
 }
 
 SavegameData::SavegameData(const std::string& fname)
-   : filename(fname),
-     gametime(""),
-     nrplayers("0"),
-     savetimestamp(0),
-     gametype(GameController::GameType::kSingleplayer),
-     type_(SavegameType::kNormal) {
+   : SavegameData(fname, SavegameType::kSavegame) {
 }
 SavegameData::SavegameData(const std::string& fname, const SavegameType& type)
    : filename(fname),
@@ -69,8 +64,30 @@ void SavegameData::set_mapname(const std::string& input_mapname) {
 	mapname = _(input_mapname);
 }
 
-bool SavegameData::is_directory() {
-	return type_ == SavegameType::kDirectory;
+bool SavegameData::is_directory() const {
+	return is_sub_directory() || is_parent_directory();
+}
+
+bool SavegameData::is_parent_directory() const {
+	return type_ == SavegameType::kParentDirectory;
+}
+
+bool SavegameData::is_sub_directory() const {
+	return type_ == SavegameType::kSubDirectory;
+}
+
+// static
+SavegameData SavegameData::create_parent_dir(const std::string& current_dir) {
+	std::string filename = FileSystem::fs_dirname(current_dir);
+	if (!filename.empty()) {
+		// fs_dirname always returns a directory with a separator at the end.
+		filename.pop_back();
+	}
+	return SavegameData(filename, SavegameData::SavegameType::kParentDirectory);
+}
+
+SavegameData SavegameData::create_sub_dir(const std::string& directory) {
+	return SavegameData(directory, SavegameData::SavegameType::kSubDirectory);
 }
 
 GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)

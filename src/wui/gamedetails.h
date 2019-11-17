@@ -34,7 +34,7 @@
  * Data about a savegame/replay that we're interested in.
  */
 struct SavegameData {
-	enum class SavegameType { kNormal, kDirectory };
+	enum class SavegameType { kSavegame, kParentDirectory, kSubDirectory };
 	/// The filename of the currenty selected file
 	std::string filename;
 	/// List of filenames when multiple files have been selected
@@ -69,6 +69,8 @@ struct SavegameData {
 	SavegameData();
 	SavegameData(const std::string& filename);
 	SavegameData(const std::string& filename, const SavegameType& type);
+	static SavegameData create_parent_dir(const std::string& current_dir);
+	static SavegameData create_sub_dir(const std::string& directory);
 
 	/// Converts timestamp to UI string and assigns it to gametime
 	void set_gametime(uint32_t input_gametime);
@@ -77,7 +79,11 @@ struct SavegameData {
 	/// Sets the mapname as a localized string
 	void set_mapname(const std::string& input_mapname);
 
-	bool is_directory();
+	bool is_directory() const;
+
+	bool is_parent_directory() const;
+
+	bool is_sub_directory() const;
 };
 
 /**

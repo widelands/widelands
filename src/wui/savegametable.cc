@@ -107,7 +107,16 @@ void SavegameTableSinglePlayer::add_columns() {
 void SavegameTableSinglePlayer::create_valid_entry(UI::Table<uintptr_t const>::EntryRecord& te,
                                                    const SavegameData& savegame) {
 	te.set_string(0, savegame.savedatestring);
-	te.set_string(1, map_filename(savegame.filename, savegame.mapname));
+
+	if (savegame.is_parent_directory()) {
+		te.set_string(1, (boost::format("<%s>") % _("parent")).str());
+	} else if (savegame.is_sub_directory()) {
+		te.set_string(
+		   1, (boost::format("<%s>") % FileSystem::filename_without_ext(savegame.filename.c_str()))
+		         .str());
+	} else {
+		te.set_string(1, map_filename(savegame.filename, savegame.mapname));
+	}
 }
 
 void SavegameTableSinglePlayer::create_error_entry(UI::Table<uintptr_t const>::EntryRecord& te,
@@ -166,11 +175,17 @@ void SavegameTableReplay::create_valid_entry(UI::Table<uintptr_t const>::EntryRe
 
 	te.set_string(1, find_game_type(savegame));
 
-	const std::string map_basename =
-	   show_filenames_ ? map_filename(savegame.filename, savegame.mapname) : savegame.mapname;
-	te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) % map_basename %
-	                  savegame.gametime)
-	                    .str());
+	if (savegame.is_parent_directory()) {
+		te.set_string(2, (boost::format("<%s>") % _("parent")).str());
+	} else if (savegame.is_sub_directory()) {
+		te.set_string(2, (boost::format("<%s>") % savegame.filename).str());
+	} else {
+		const std::string map_basename =
+		   show_filenames_ ? map_filename(savegame.filename, savegame.mapname) : savegame.mapname;
+		te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) % map_basename %
+		                  savegame.gametime)
+		                    .str());
+	}
 }
 
 void SavegameTableReplay::create_error_entry(UI::Table<uintptr_t const>::EntryRecord& te,
@@ -229,7 +244,13 @@ void SavegameTableMultiplayer::create_valid_entry(UI::Table<uintptr_t const>::En
                                                   const SavegameData& savegame) {
 	te.set_string(0, savegame.savedatestring);
 	te.set_string(1, find_game_type(savegame));
-	te.set_string(2, map_filename(savegame.filename, savegame.mapname));
+	if (savegame.is_parent_directory()) {
+		te.set_string(2, (boost::format("<%s>") % _("parent")).str());
+	} else if (savegame.is_sub_directory()) {
+		te.set_string(2, (boost::format("<%s>") % savegame.filename).str());
+	} else {
+		te.set_string(2, map_filename(savegame.filename, savegame.mapname));
+	}
 }
 
 void SavegameTableMultiplayer::create_error_entry(UI::Table<uintptr_t const>::EntryRecord& te,
