@@ -180,8 +180,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
      chat_(nullptr) {
 	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 11 / 20 - 2 * label_height_ +
 	                                               win_condition_dropdown_.get_h() + padding_));
-	ok_.set_pos(Vector2i(right_column_x_, peaceful_.get_y() + peaceful_.get_h() + padding_ + 1));
-	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
+	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240 - buth_ - padding_));
+	ok_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
 	win_condition_dropdown_.set_pos(
 	   Vector2i(right_column_x_, get_h() * 11 / 20 - 2 * label_height_));
 	title_.set_text(_("Multiplayer Game Setup"));
@@ -234,9 +234,10 @@ void FullscreenMenuLaunchMPG::layout() {
  */
 void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider& chat) {
 	delete chat_;
-	chat_ =
-	   new GameChatPanel(this, get_w() * 3 / 80, ok_.get_y(), get_w() * 53 / 80,
-	                     back_.get_y() + back_.get_h() - ok_.get_y(), chat, UI::PanelStyle::kFsMenu);
+	chat_ = new GameChatPanel(
+	   this, get_w() * 3 / 80, peaceful_.get_y() + peaceful_.get_h() + padding_, get_w() * 53 / 80,
+	   ok_.get_y() + ok_.get_h() - peaceful_.get_y() - peaceful_.get_h() - padding_ - 1, chat,
+	   UI::PanelStyle::kFsMenu);
 }
 
 /**
@@ -621,8 +622,8 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 
 	suggested_teams_box_->hide();
 	suggested_teams_box_->show(map.get_suggested_teams());
-	suggested_teams_box_->set_pos(Vector2i(
-	   suggested_teams_box_->get_x(), back_.get_y() - padding_ - suggested_teams_box_->get_h()));
+	suggested_teams_box_->set_pos(
+	   Vector2i(suggested_teams_box_->get_x(), peaceful_.get_y() + peaceful_.get_h() + padding_));
 }
 
 /// Show help
