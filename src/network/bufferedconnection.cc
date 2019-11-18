@@ -261,11 +261,11 @@ void BufferedConnection::start_sending() {
 			   start_sending();
 		   } else {
 			   if (socket_.is_open()) {
-			      log("[BufferedConnection] Error when sending packet to host (error %i: %s)\n", ec.value(),
-			          ec.message().c_str());
-			      log("[BufferedConnection] Closing socket\n");
-			      socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
-			      socket_.close();
+				   log("[BufferedConnection] Error when sending packet to host (error %i: %s)\n",
+				       ec.value(), ec.message().c_str());
+				   log("[BufferedConnection] Closing socket\n");
+				   socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+				   socket_.close();
 			   }
 		   }
 	   });
@@ -294,11 +294,11 @@ void BufferedConnection::start_receiving() {
 			   start_receiving();
 		   } else {
 			   if (socket_.is_open()) {
-			      log("[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
-			          ec.value(), ec.message().c_str());
-			      log("[BufferedConnection] Closing socket\n");
-			      socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
-			      socket_.close();
+				   log("[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
+				       ec.value(), ec.message().c_str());
+				   log("[BufferedConnection] Closing socket\n");
+				   socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+				   socket_.close();
 			   }
 		   }
 	   });
