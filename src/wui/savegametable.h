@@ -16,6 +16,8 @@ public:
 protected:
 	const std::string map_filename(const std::string& filename, const std::string& mapname);
 	const std::string find_game_type(const SavegameData& savegame);
+	void create_directory_entry(UI::Table<uintptr_t const>::EntryRecord& te,
+	                            const SavegameData& savegame);
 
 private:
 	bool localize_autosave_;
@@ -25,7 +27,7 @@ private:
 	virtual void create_valid_entry(UI::Table<uintptr_t const>::EntryRecord& te,
 	                                const SavegameData& savegame) = 0;
 	virtual void create_error_entry(UI::Table<uintptr_t const>::EntryRecord& te,
-	                                const SavegameData& savegame) = 0;
+	                                const SavegameData& savegame);
 };
 
 /// A Table to display savegames in singleplayer mode (2 columns)
@@ -37,8 +39,6 @@ private:
 	void add_columns() override;
 	void create_valid_entry(UI::Table<uintptr_t const>::EntryRecord& te,
 	                        const SavegameData& savegame) override;
-	void create_error_entry(UI::Table<uintptr_t const>::EntryRecord& te,
-	                        const SavegameData& savegame) override;
 };
 
 /// A Table to display savegames in multiplayer mode (3 columns)
@@ -49,8 +49,6 @@ public:
 private:
 	void add_columns() override;
 	void create_valid_entry(UI::Table<uintptr_t const>::EntryRecord& te,
-	                        const SavegameData& savegame) override;
-	void create_error_entry(UI::Table<uintptr_t const>::EntryRecord& te,
 	                        const SavegameData& savegame) override;
 };
 
@@ -64,8 +62,6 @@ private:
 	bool show_filenames_;
 	void add_columns() override;
 	void create_valid_entry(UI::Table<uintptr_t const>::EntryRecord& te,
-	                        const SavegameData& savegame) override;
-	void create_error_entry(UI::Table<uintptr_t const>::EntryRecord& te,
 	                        const SavegameData& savegame) override;
 };
 

@@ -83,6 +83,31 @@ void SavegameTable::fill(const std::vector<SavegameData>& entries) {
 	focus();
 }
 
+void SavegameTable::create_error_entry(UI::Table<uintptr_t const>::EntryRecord& te,
+                                       const SavegameData& savegame) {
+	size_t last_column_index = number_of_columns() - 1;
+	for (size_t col_index = 0; col_index < last_column_index; col_index++) {
+		te.set_string(col_index, "");
+	}
+	te.set_string(
+	   last_column_index, (boost::format(_("Incompatible: %s")) % savegame.mapname).str());
+}
+
+void SavegameTable::create_directory_entry(UI::Table<const uintptr_t>::EntryRecord& te,
+                                           const SavegameData& savegame) {
+	size_t last_column_index = number_of_columns() - 1;
+	for (size_t col_index = 0; col_index < last_column_index; col_index++) {
+		te.set_string(col_index, "");
+	}
+	if (savegame.is_parent_directory()) {
+		te.set_string(last_column_index, (boost::format("<%s>") % _("..")).str());
+	} else if (savegame.is_sub_directory()) {
+		te.set_string(last_column_index, (boost::format("<%s>") %
+		                                  FileSystem::filename_without_ext(savegame.filename.c_str()))
+		                                    .str());
+	}
+}
+
 void SavegameTable::set_show_filenames(bool) {
 }
 
@@ -106,23 +131,12 @@ void SavegameTableSinglePlayer::add_columns() {
 
 void SavegameTableSinglePlayer::create_valid_entry(UI::Table<uintptr_t const>::EntryRecord& te,
                                                    const SavegameData& savegame) {
-	te.set_string(0, savegame.savedatestring);
-
-	if (savegame.is_parent_directory()) {
-		te.set_string(1, (boost::format("<%s>") % _("parent")).str());
-	} else if (savegame.is_sub_directory()) {
-		te.set_string(
-		   1, (boost::format("<%s>") % FileSystem::filename_without_ext(savegame.filename.c_str()))
-		         .str());
+	if (savegame.is_directory()) {
+		create_directory_entry(te, savegame);
 	} else {
+		te.set_string(0, savegame.savedatestring);
 		te.set_string(1, map_filename(savegame.filename, savegame.mapname));
 	}
-}
-
-void SavegameTableSinglePlayer::create_error_entry(UI::Table<uintptr_t const>::EntryRecord& te,
-                                                   const SavegameData& savegame) {
-	te.set_string(0, "");
-	te.set_string(1, (boost::format(_("Incompatible: %s")) % savegame.mapname).str());
 }
 
 SavegameTableReplay::SavegameTableReplay(UI::Panel* parent,
@@ -171,15 +185,13 @@ void SavegameTableReplay::add_columns() {
 
 void SavegameTableReplay::create_valid_entry(UI::Table<uintptr_t const>::EntryRecord& te,
                                              const SavegameData& savegame) {
-	te.set_string(0, savegame.savedatestring);
 
-	te.set_string(1, find_game_type(savegame));
+	if (savegame.is_directory()) {
+		create_directory_entry(te, savegame);
 
-	if (savegame.is_parent_directory()) {
-		te.set_string(2, (boost::format("<%s>") % _("parent")).str());
-	} else if (savegame.is_sub_directory()) {
-		te.set_string(2, (boost::format("<%s>") % savegame.filename).str());
 	} else {
+		te.set_string(0, savegame.savedatestring);
+		te.set_string(1, find_game_type(savegame));
 		const std::string map_basename =
 		   show_filenames_ ? map_filename(savegame.filename, savegame.mapname) : savegame.mapname;
 		te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) % map_basename %
@@ -188,12 +200,6 @@ void SavegameTableReplay::create_valid_entry(UI::Table<uintptr_t const>::EntryRe
 	}
 }
 
-void SavegameTableReplay::create_error_entry(UI::Table<uintptr_t const>::EntryRecord& te,
-                                             const SavegameData& savegame) {
-	te.set_string(0, "");
-	te.set_string(1, "");
-	te.set_string(2, (boost::format(_("Incompatible: %s")) % savegame.mapname).str());
-}
 void SavegameTableReplay::set_show_filenames(bool show_filenames) {
 	show_filenames_ = show_filenames;
 	set_column_tooltip(2, show_filenames ? _("Filename: Map name (start of replay)") :
@@ -242,20 +248,11 @@ void SavegameTableMultiplayer::add_columns() {
 
 void SavegameTableMultiplayer::create_valid_entry(UI::Table<uintptr_t const>::EntryRecord& te,
                                                   const SavegameData& savegame) {
-	te.set_string(0, savegame.savedatestring);
-	te.set_string(1, find_game_type(savegame));
-	if (savegame.is_parent_directory()) {
-		te.set_string(2, (boost::format("<%s>") % _("parent")).str());
-	} else if (savegame.is_sub_directory()) {
-		te.set_string(2, (boost::format("<%s>") % savegame.filename).str());
+	if (savegame.is_directory()) {
+		create_directory_entry(te, savegame);
 	} else {
+		te.set_string(0, savegame.savedatestring);
+		te.set_string(1, find_game_type(savegame));
 		te.set_string(2, map_filename(savegame.filename, savegame.mapname));
 	}
-}
-
-void SavegameTableMultiplayer::create_error_entry(UI::Table<uintptr_t const>::EntryRecord& te,
-                                                  const SavegameData& savegame) {
-	te.set_string(0, "");
-	te.set_string(1, "");
-	te.set_string(2, (boost::format(_("Incompatible: %s")) % savegame.mapname).str());
 }

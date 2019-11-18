@@ -136,9 +136,7 @@ std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 		      _("Delete this replay") :
 		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
 		      _("Delete this game"));
-		log("wrong copy constructor?!?! %s\n", games_data_[table_->get_selected()].filename.c_str());
 		result.reset(new SavegameData(games_data_[table_->get_selected()]));
-		log("yeah wrong... %s\n", result->filename.c_str());
 	} else if (selections > 1) {
 		delete_->set_tooltip(
 		   filetype_ == FileType::kReplay ?

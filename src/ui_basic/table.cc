@@ -91,6 +91,10 @@ Table<void*>::~Table() {
 	multiselect_.clear();
 }
 
+size_t Table<void*>::number_of_columns() const {
+	return columns_.size();
+}
+
 /// Add a new column to this table.
 void Table<void*>::add_column(uint32_t const width,
                               const std::string& title,
