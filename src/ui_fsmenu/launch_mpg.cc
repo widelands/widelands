@@ -161,29 +161,29 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
           g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
      wincondition_type_(this,
                         right_column_x_ + (butw_ / 2),
-                        get_h() * 10 / 20 - 1.5 * label_height_,
+                        get_h() * 15 / 20 - 9 * label_height_,
                         0,
                         0,
                         _("Type of game"),
                         UI::Align::kCenter,
                         g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
-
      map_info_(this,
                right_column_x_,
                get_h() * 2 / 10,
                butw_,
-               get_h() * 23 / 80 - 1.6 * label_height_,
+               get_h() * 15 / 20 - 9.25 * label_height_ - get_h() * 2 / 10,
                UI::PanelStyle::kFsMenu),
      help_(nullptr),
 
      // Variables and objects used in the menu
      chat_(nullptr) {
-	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 11 / 20 - 2 * label_height_ +
+	win_condition_dropdown_.set_pos(
+	   Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_));
+	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_ +
 	                                               win_condition_dropdown_.get_h() + padding_));
 	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240 - buth_ - padding_));
 	ok_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
-	win_condition_dropdown_.set_pos(
-	   Vector2i(right_column_x_, get_h() * 11 / 20 - 2 * label_height_));
+
 	title_.set_text(_("Multiplayer Game Setup"));
 	change_map_or_save_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchMPG::change_map_or_save, boost::ref(*this)));
@@ -235,8 +235,8 @@ void FullscreenMenuLaunchMPG::layout() {
 void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider& chat) {
 	delete chat_;
 	chat_ = new GameChatPanel(
-	   this, get_w() * 3 / 80, peaceful_.get_y() + peaceful_.get_h() + padding_, get_w() * 53 / 80,
-	   ok_.get_y() + ok_.get_h() - peaceful_.get_y() - peaceful_.get_h() - padding_ - 1, chat,
+	   this, get_w() * 3 / 80, mpsg_->get_y() + mpsg_->get_h() + padding_, get_w() * 53 / 80,
+	   ok_.get_y() + ok_.get_h() - mpsg_->get_y() - mpsg_->get_h() - padding_ - 1, chat,
 	   UI::PanelStyle::kFsMenu);
 }
 
@@ -622,8 +622,8 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 
 	suggested_teams_box_->hide();
 	suggested_teams_box_->show(map.get_suggested_teams());
-	suggested_teams_box_->set_pos(
-	   Vector2i(suggested_teams_box_->get_x(), peaceful_.get_y() + peaceful_.get_h() + padding_));
+	suggested_teams_box_->set_pos(Vector2i(
+	   suggested_teams_box_->get_x(), back_.get_y() - padding_ - suggested_teams_box_->get_h()));
 }
 
 /// Show help
