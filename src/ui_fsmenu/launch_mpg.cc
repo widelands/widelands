@@ -108,12 +108,12 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
      // Buttons
      change_map_or_save_(this,
                          "change_map_or_save",
-                         right_column_x_ + butw_ - buth_,
+                         right_column_x_,
                          get_h() * 3 / 20,
-                         buth_,
+                         butw_,
                          buth_,
                          UI::ButtonStyle::kFsMenuSecondary,
-                         g_gr->images().get("images/wui/menus/toggle_minimap.png"),
+                         _("(no map)"),
                          _("Change map or saved game")),
      help_button_(this,
                   "help",
@@ -196,8 +196,13 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	map_.set_font_scale(scale_factor());
 	wincondition_type_.set_font_scale(scale_factor());
 
-	mapname_.set_text(_("(no map)"));
-	map_info_.set_text(_("The host has not yet selected a map or saved game."));
+	if (settings_->can_change_map()) {
+		map_info_.set_text(_("Please selected a map or saved game."));
+	} else {
+		change_map_or_save_.set_visible(settings_->can_change_map());
+		mapname_.set_text(_("(no map)"));
+		map_info_.set_text(_("The host has not yet selected a map or saved game."));
+	}
 
 	mpsg_ = new MultiPlayerSetupGroup(
 	   this, get_w() * 3 / 80, change_map_or_save_.get_y(), get_w() * 53 / 80,
@@ -426,8 +431,11 @@ void FullscreenMenuLaunchMPG::refresh() {
 			// It will also translate 'false-positively' on any user-made map which shares a name with
 			// the official maps, but this should not be a problem to worry about.
 			i18n::Textdomain td("maps");
-			mapname_.set_text(_(settings.mapname));
-			// map_info_.set_text(infotext);
+			if (settings_->can_change_map()) {
+				change_map_or_save_.set_title(_(settings.mapname));
+			} else {
+				mapname_.set_text(_(settings.mapname));
+			}
 		}
 	}
 
