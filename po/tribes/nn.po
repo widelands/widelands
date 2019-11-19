@@ -525,7 +525,7 @@ msgstr "Demonter stad"
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:94
 msgctxt "atlanteans_building"
 msgid "Armor Smithy"
-msgstr "Våpensmie"
+msgstr "Rustningsmie"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:143
