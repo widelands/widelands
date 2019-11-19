@@ -126,14 +126,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                   _("Show the help window")),
 
      // Text labels
-     mapname_(this,
-              right_column_x_,
-              get_h() * 3 / 20,
-              0,
-              0,
-              std::string(),
-              UI::Align::kLeft,
-              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupMapname)),
      clients_(this,
               // the width of the MultiPlayerSetupGroup is (get_w() * 53 / 80)
               get_w() * 3 / 80,
@@ -190,7 +182,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	help_button_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchMPG::help_clicked, boost::ref(*this)));
 
-	mapname_.set_font_scale(scale_factor());
 	clients_.set_font_scale(scale_factor());
 	players_.set_font_scale(scale_factor());
 	map_.set_font_scale(scale_factor());
@@ -199,8 +190,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	if (settings_->can_change_map()) {
 		map_info_.set_text(_("Please selected a map or saved game."));
 	} else {
-		change_map_or_save_.set_visible(settings_->can_change_map());
-		mapname_.set_text(_("(no map)"));
+		change_map_or_save_.set_enabled(settings_->can_change_map());
 		map_info_.set_text(_("The host has not yet selected a map or saved game."));
 	}
 
@@ -431,18 +421,12 @@ void FullscreenMenuLaunchMPG::refresh() {
 			// It will also translate 'false-positively' on any user-made map which shares a name with
 			// the official maps, but this should not be a problem to worry about.
 			i18n::Textdomain td("maps");
-			if (settings_->can_change_map()) {
-				change_map_or_save_.set_title(_(settings.mapname));
-			} else {
-				mapname_.set_text(_(settings.mapname));
-			}
+			change_map_or_save_.set_title(_(settings.mapname));
 		}
 	}
 
 	ok_.set_enabled(settings_->can_launch());
-
 	change_map_or_save_.set_enabled(settings_->can_change_map());
-	change_map_or_save_.set_visible(settings_->can_change_map());
 
 	update_peaceful_mode();
 	peaceful_.set_state(settings_->is_peaceful_mode());
