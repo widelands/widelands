@@ -4,8 +4,8 @@
 #include "ui_basic/table.h"
 class SavegameData;
 
-/// A Table that displays savegames
-/// It must be extended to set columns and so on
+/// A Table that displays savegames with support of displaying sub-directories
+/// It must be extended to define columns and how entries are created.
 class SavegameTable : public UI::Table<uintptr_t> {
 public:
 	SavegameTable(UI::Panel* parent, UI::PanelStyle style, bool localize_autosave);

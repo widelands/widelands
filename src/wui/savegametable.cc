@@ -100,11 +100,12 @@ void SavegameTable::create_directory_entry(UI::Table<const uintptr_t>::EntryReco
 		te.set_string(col_index, "");
 	}
 	if (savegame.is_parent_directory()) {
-		te.set_string(last_column_index, (boost::format("<%s>") % _("..")).str());
+		te.set_picture(last_column_index, g_gr->images().get("images/ui_basic/ls_dir.png"),
+		               (boost::format("%s") % _("..")).str());
 	} else if (savegame.is_sub_directory()) {
-		te.set_string(last_column_index, (boost::format("<%s>") %
-		                                  FileSystem::filename_without_ext(savegame.filename.c_str()))
-		                                    .str());
+		te.set_picture(
+		   last_column_index, g_gr->images().get("images/ui_basic/ls_dir.png"),
+		   (boost::format("%s") % FileSystem::filename_without_ext(savegame.filename.c_str())).str());
 	}
 }
 
@@ -135,7 +136,8 @@ void SavegameTableSinglePlayer::create_valid_entry(UI::Table<uintptr_t const>::E
 		create_directory_entry(te, savegame);
 	} else {
 		te.set_string(0, savegame.savedatestring);
-		te.set_string(1, map_filename(savegame.filename, savegame.mapname));
+		te.set_picture(1, g_gr->images().get("images/ui_basic/ls_wlmap.png"),
+		               map_filename(savegame.filename, savegame.mapname));
 	}
 }
 
@@ -185,7 +187,6 @@ void SavegameTableReplay::add_columns() {
 
 void SavegameTableReplay::create_valid_entry(UI::Table<uintptr_t const>::EntryRecord& te,
                                              const SavegameData& savegame) {
-
 	if (savegame.is_directory()) {
 		create_directory_entry(te, savegame);
 
@@ -194,9 +195,10 @@ void SavegameTableReplay::create_valid_entry(UI::Table<uintptr_t const>::EntryRe
 		te.set_string(1, find_game_type(savegame));
 		const std::string map_basename =
 		   show_filenames_ ? map_filename(savegame.filename, savegame.mapname) : savegame.mapname;
-		te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) % map_basename %
-		                  savegame.gametime)
-		                    .str());
+		te.set_picture(2, g_gr->images().get("images/ui_basic/ls_wlmap.png"),
+		               (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) % map_basename %
+		                savegame.gametime)
+		                  .str());
 	}
 }
 
@@ -253,6 +255,7 @@ void SavegameTableMultiplayer::create_valid_entry(UI::Table<uintptr_t const>::En
 	} else {
 		te.set_string(0, savegame.savedatestring);
 		te.set_string(1, find_game_type(savegame));
-		te.set_string(2, map_filename(savegame.filename, savegame.mapname));
+		te.set_picture(2, g_gr->images().get("images/ui_basic/ls_wlmap.png"),
+		               map_filename(savegame.filename, savegame.mapname));
 	}
 }
