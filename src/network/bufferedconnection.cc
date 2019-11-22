@@ -127,9 +127,6 @@ bool BufferedConnection::is_connected() const {
 }
 
 void BufferedConnection::close() {
-	if (!is_connected()) {
-		return;
-	}
 	boost::system::error_code ec;
 	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint(ec);
 	if (!ec) {
@@ -155,8 +152,10 @@ void BufferedConnection::close() {
 	// The thread should be stopped now
 	assert(!asio_thread_.joinable());
 	// Close the socket
-	socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
-	socket_.close(ec);
+	if (socket_.is_open()) {
+		socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+		socket_.close(ec);
+	}
 }
 
 void BufferedConnection::receive(std::string* str) {
@@ -261,9 +260,13 @@ void BufferedConnection::start_sending() {
 			   // Try to send some more data
 			   start_sending();
 		   } else {
-			   throw wexception(
-			      "[BufferedConnection] Error when sending packet to host (error %i: %s)", ec.value(),
-			      ec.message().c_str());
+			   if (socket_.is_open()) {
+				   log("[BufferedConnection] Error when sending packet to host (error %i: %s)\n",
+				       ec.value(), ec.message().c_str());
+				   log("[BufferedConnection] Closing socket\n");
+				   socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+				   socket_.close();
+			   }
 		   }
 	   });
 }
@@ -289,12 +292,14 @@ void BufferedConnection::start_receiving() {
 			   lock.unlock();
 			   // Try to send some more data
 			   start_receiving();
-		   } else if (ec == boost::asio::error::eof) {
-			   // Connection has been closed, nothing more to do here
 		   } else {
-			   throw wexception(
-			      "[BufferedConnection] Error when receiving data from host (error %i: %s)",
-			      ec.value(), ec.message().c_str());
+			   if (socket_.is_open()) {
+				   log("[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
+				       ec.value(), ec.message().c_str());
+				   log("[BufferedConnection] Closing socket\n");
+				   socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+				   socket_.close();
+			   }
 		   }
 	   });
 }

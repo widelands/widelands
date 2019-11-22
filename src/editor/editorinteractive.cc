@@ -108,7 +108,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                12,
                34U,
                /** TRANSLATORS: Title for the tool menu button in the editor */
-               as_tooltip_text_with_hotkey(_("Tools"), "t"),
+               as_tooltip_text_with_hotkey(_("Tools"), "T"),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),
@@ -195,7 +195,7 @@ void EditorInteractive::add_main_menu() {
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Load Map"), MainMenuEntry::kLoadMap,
 	              g_gr->images().get("images/wui/editor/menus/load_map.png"), false, "",
-	              pgettext("hotkey", "Ctrl+l"));
+	              pgettext("hotkey", "Ctrl+L"));
 
 	menu_windows_.savemap.open_window = [this] {
 		new MainMenuSaveMap(*this, menu_windows_.savemap, menu_windows_.mapoptions);
@@ -203,7 +203,7 @@ void EditorInteractive::add_main_menu() {
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Save Map"), MainMenuEntry::kSaveMap,
 	              g_gr->images().get("images/wui/editor/menus/save_map.png"), false, "",
-	              pgettext("hotkey", "Ctrl+s"));
+	              pgettext("hotkey", "Ctrl+S"));
 
 	menu_windows_.mapoptions.open_window = [this] {
 		new MainMenuMapOptions(*this, menu_windows_.mapoptions);
@@ -314,7 +314,7 @@ void EditorInteractive::add_tool_menu() {
 	toolmenu_.add(_("Players"), ToolMenuEntry::kPlayers,
 	              g_gr->images().get("images/wui/editor/tools/players.png"), false,
 	              /** TRANSLATORS: Tooltip for the map size tool in the editor */
-	              _("Set number of players and their names, tribes and starting positions"), "p");
+	              _("Set number of players and their names, tribes and starting positions"), "P");
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Map origin"), ToolMenuEntry::kMapOrigin,
@@ -336,7 +336,7 @@ void EditorInteractive::add_tool_menu() {
 	toolmenu_.add(_("Information"), ToolMenuEntry::kFieldInfo,
 	              g_gr->images().get("images/wui/editor/fsel_editor_info.png"), false,
 	              /** TRANSLATORS: Tooltip for the map information tool in the editor */
-	              _("Click on a field to show information about it"), "i");
+	              _("Click on a field to show information about it"), "I");
 	toolmenu_.selected.connect([this] { tool_menu_selected(toolmenu_.get_selected()); });
 	toolbar()->add(&toolmenu_);
 }
