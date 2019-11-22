@@ -114,6 +114,7 @@ wl_library(editor
     scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
+    sound
     ui_basic
     widelands_options
     wui
