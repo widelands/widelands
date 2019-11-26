@@ -33,7 +33,9 @@ tribes:new_productionsite_type {
 
    aihints = {
       collects_ware_from_map = "ironwood",
+      supports_production_of = { "clay" },
       requires_supporters = true,
+      basic_amount = 1,
    },
 
    working_positions = {

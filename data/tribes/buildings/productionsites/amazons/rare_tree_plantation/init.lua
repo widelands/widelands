@@ -33,12 +33,17 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      supports_production_of = { "balsa", "rubber", "ironwood" },
+      supports_production_of = { "ironwood", "balsa", "rubber", },
+      requires_supporters = true,
       space_consumer = true,
    },
 
    working_positions = {
       amazons_jungle_master = 1
+   },
+
+   outputs = {
+      "clay",
    },
 
    indicate_workarea_overlaps = {
