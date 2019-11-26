@@ -79,6 +79,10 @@ struct BuildingHints {
 		return shipyard_;
 	}
 
+	bool supports_seafaring() const {
+		return supports_seafaring_;
+	}
+
 	const std::string& collects_ware_from_map() const {
 		return collects_ware_from_map_;
 	}
@@ -113,6 +117,7 @@ private:
 	const bool fighting_;
 	const bool mountain_conqueror_;
 	const bool shipyard_;
+	const bool supports_seafaring_;
 	const std::string collects_ware_from_map_;
 	const int32_t prohibited_till_;
 	const uint32_t basic_amount_;

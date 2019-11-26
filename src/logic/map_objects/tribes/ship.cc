@@ -895,7 +895,9 @@ void Ship::reorder_destinations(Game& game) {
 	assert(dq.size() == nr_dests);
 
 	std::vector<std::pair<OPtr<PortDock>, uint32_t>> old_destinations = destinations_;
+#ifndef NDEBUG
 	const size_t nr_all_old_dests = old_destinations.size();
+#endif
 	destinations_.clear();
 	size_t index = 0;
 	for (const auto& pair : dq) {
@@ -1387,7 +1389,9 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 		}
 	} else {
 		// TODO(Nordfriese): Remove when we break savegame compatibility
-		destinations_.push_back(std::make_pair(fr.unsigned_32(), 1));
+		if (uint32_t serial = fr.unsigned_32()) {
+			destinations_.push_back(std::make_pair(serial, 1));
+		}
 	}
 
 	items_.resize(fr.unsigned_32());

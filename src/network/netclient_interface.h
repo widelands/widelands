@@ -69,7 +69,7 @@ public:
 	 * Calling this on a closed connection will silently fail.
 	 * \param packet The packet to send.
 	 */
-	virtual void send(const SendPacket& packet) = 0;
+	virtual void send(const SendPacket& packet, NetPriority priority = NetPriority::kNormal) = 0;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETCLIENT_INTERFACE_H

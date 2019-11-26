@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "network/bufferedconnection.h"
 #include "network/netclient_interface.h"
 #include "network/network.h"
 
@@ -31,6 +32,7 @@
  * This class only tries to create a single socket, either for IPv4 and IPv6.
  * Which is used depends on what kind of address is given on call to connect().
  */
+// This class is currently only an interface wrapper for BufferedConnection
 class NetClient : public NetClientInterface {
 public:
 	/**
@@ -42,19 +44,11 @@ public:
 
 	~NetClient() override;
 
-	/**
-	 * Returns the ip and port of the remote host we are connected to.
-	 * \param addr A pointer to a NetAddress structure to write the address to.
-	 * \return Returns \c false when addr could not be filled in.
-	 *  This should only happen when the client is not connected.
-	 */
-	bool get_remote_address(NetAddress* addr) const;
-
 	// Inherited from NetClientInterface
 	bool is_connected() const override;
 	void close() override;
 	std::unique_ptr<RecvPacket> try_receive() override;
-	void send(const SendPacket& packet) override;
+	void send(const SendPacket& packet, NetPriority priority = NetPriority::kNormal) override;
 
 private:
 	/**
@@ -64,14 +58,7 @@ private:
 	 */
 	explicit NetClient(const NetAddress& host);
 
-	/// An io_service needed by boost.asio. Primarily needed for asynchronous operations.
-	boost::asio::io_service io_service_;
-
-	/// The socket that connects us to the host.
-	boost::asio::ip::tcp::socket socket_;
-
-	/// Deserializer acts as a buffer for packets (splitting stream to packets)
-	Deserializer deserializer_;
+	std::unique_ptr<BufferedConnection> conn_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETCLIENT_H

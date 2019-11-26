@@ -47,8 +47,10 @@ public:
 	std::vector<const Image*> pc_masks(float scale) const override;
 
 private:
-	void add_scale_if_files_present(const std::string& basename, const std::string& directory,
-								   float scale_as_float, const std::string& scale_as_string) override;
+	void add_scale_if_files_present(const std::string& basename,
+	                                const std::string& directory,
+	                                float scale_as_float,
+	                                const std::string& scale_as_string) override;
 
 	struct SpriteSheetMipMapEntry : Animation::MipMapEntry {
 		explicit SpriteSheetMipMapEntry(const std::string& file, int init_rows, int columns);

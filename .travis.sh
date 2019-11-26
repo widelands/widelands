@@ -40,4 +40,14 @@ documentation)
    sphinx-build -W -b json -d build/doctrees source build/json
    popd
    ;;
+formatting)
+   # Check whether the code is properly formatted
+   cd ..
+   ./utils/fix_formatting.py
+   if [[ -n $(git status -s) ]]; then
+     echo "Code not properly formatted. Please run: './utils/fix_formatting.py'"
+     echo "Also, consider installing the githooks by running: './install-githooks.sh'"
+     exit 1 # CodeStyle warnings.
+   fi
+   ;;
 esac

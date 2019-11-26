@@ -1,5 +1,7 @@
 wl_library(network
   SRCS
+    bufferedconnection.cc
+    bufferedconnection.h
     constants.h
     crypto.h
     crypto.cc
@@ -22,8 +24,6 @@ wl_library(network
     nethost.h
     nethostproxy.cc
     nethostproxy.h
-    netrelayconnection.cc
-    netrelayconnection.h
     network.cc
     network.h
     network_gaming_messages.cc

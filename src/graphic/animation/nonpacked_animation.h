@@ -39,7 +39,7 @@
  */
 class NonPackedAnimation : public Animation {
 public:
-	~NonPackedAnimation() override  = default;
+	~NonPackedAnimation() override = default;
 	explicit NonPackedAnimation(const LuaTable& table, const std::string& basename);
 
 	const Image* representative_image(const RGBColor* clr) const override;
@@ -48,8 +48,10 @@ public:
 	std::vector<const Image*> pc_masks(float scale) const override;
 
 private:
-	void add_scale_if_files_present(const std::string& basename, const std::string& directory,
-								   float scale_as_float, const std::string& scale_as_string) override;
+	void add_scale_if_files_present(const std::string& basename,
+	                                const std::string& directory,
+	                                float scale_as_float,
+	                                const std::string& scale_as_string) override;
 
 	struct NonPackedMipMapEntry : Animation::MipMapEntry {
 		explicit NonPackedMipMapEntry(std::vector<std::string> files);
