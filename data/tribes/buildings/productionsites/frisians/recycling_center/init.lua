@@ -26,7 +26,7 @@ tribes:new_productionsite_type {
       idle = {
          directory = dirname,
          basename = "idle",
-         hotspot = {46, 65},
+         hotspot = {50, 70},
          frames = 10,
          columns = 5,
          rows = 2,
@@ -35,7 +35,7 @@ tribes:new_productionsite_type {
       working_metal = {
          directory = dirname,
          basename = "working_metal",
-         hotspot = {46, 66}, -- the whole animation is one pixel lower
+         hotspot = {50, 61}, -- the whole animation is one pixel lower
          frames = 10,
          columns = 5,
          rows = 2,
@@ -44,7 +44,7 @@ tribes:new_productionsite_type {
       working_fur = {
          directory = dirname,
          basename = "working_fur",
-         hotspot = {46, 65},
+         hotspot = {50, 70},
          frames = 10,
          columns = 5,
          rows = 2,
@@ -55,7 +55,7 @@ tribes:new_productionsite_type {
       unoccupied = {
          directory = dirname,
          basename = "unoccupied",
-         hotspot = {46, 54}
+         hotspot = {50, 58}
       }
    },
 
