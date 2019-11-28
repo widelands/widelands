@@ -285,7 +285,7 @@ void InteractiveBase::rebuild_mapview_menu() {
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(minimap_registry_.window != nullptr ? _("Hide Minimap") : _("Show Minimap"),
 	                 MapviewMenuEntry::kMinimap,
-	                 g_gr->images().get("images/wui/menus/toggle_minimap.png"), false, "", "m");
+	                 g_gr->images().get("images/wui/menus/toggle_minimap.png"), false, "", "M");
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom +"), MapviewMenuEntry::kIncreaseZoom,
