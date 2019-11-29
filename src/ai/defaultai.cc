@@ -4267,7 +4267,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	}
 
 	// first we werify if site is working yet (can be unoccupied since the start)
-	if (!site.site->can_start_working() && site.unoccupied_till == 0) {
+	if (!site.site->can_start_working()) {
 		site.unoccupied_till = game().get_gametime();
 	}
 
