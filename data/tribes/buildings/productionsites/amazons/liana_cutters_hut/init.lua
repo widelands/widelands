@@ -22,11 +22,6 @@ tribes:new_productionsite_type {
          hotspot = {49, 84},
          fps = 10,
       },
-      working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {49, 84},
-         fps = 10,
-      },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
          hotspot = {49, 63},

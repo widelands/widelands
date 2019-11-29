@@ -2,6 +2,7 @@ dirname = path.dirname (__file__)
 
 animations = {}
 add_animation(animations, "idle", dirname, "idle", {17, 18}, 10)
+add_animation(animations, "fetch_water", dirname, "idle", {17, 18}, 10)
 add_directional_animation(animations, "walk", dirname, "walk", {10, 23}, 15)
 add_directional_animation(animations, "walkload", dirname, "walkload", {10, 26}, 15)
 
@@ -20,6 +21,7 @@ tribes:new_carrier_type {
       fetch_water = {
          "findspace=size:swim radius:8",
          "walk=coords",
+         "animate=fetch_water 1000",
          "createware=water",
          "return"
       }
