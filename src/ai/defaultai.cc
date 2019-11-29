@@ -4267,7 +4267,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	}
 
 	// first we werify if site is working yet (can be unoccupied since the start)
-	if (!site.site->can_start_working()) {
+	if (!site.site->can_start_working() && site.unoccupied_till == 0) {
 		site.unoccupied_till = game().get_gametime();
 	}
 
@@ -4301,6 +4301,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	const DescriptionIndex enhancement = site.site->descr().enhancement();
 
 	bool considering_upgrade = enhancement != INVALID_INDEX;
+	
+	const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
+	BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
 	if (!basic_economy_established && management_data.f_neuron_pool[17].get_position(2)) {
 		considering_upgrade = false;
@@ -4368,14 +4371,12 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	}
 
 	// No upgrade without proper workers
-	if (considering_upgrade && !site.site->has_workers(enhancement, game())) {
+	if (considering_upgrade && !site.site->has_workers(enhancement, game()) && get_stocklevel(en_bo, gametime, kWorker) < 1) {
 		considering_upgrade = false;
 	}
 
 	if (considering_upgrade) {
 
-		const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
-		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 		bool doing_upgrade = false;
 
 		// 10 minutes is a time to productions statics to settle
@@ -5884,7 +5885,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					inputs[103] = 2;
 					inputs[104] = -2;
 				}
-				inputs[105] = -2;
+				inputs[105] = -3;
 				inputs[106] = -2;
 			}
 			inputs[107] =
@@ -5910,6 +5911,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					inputs[115] = 4;
 				}
 			}
+			inputs[116] = -(bo.unoccupied_count * bo.unoccupied_count);
+			inputs[117] = -(bo.unoccupied_count + bo.unoccupied_count);
 
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
