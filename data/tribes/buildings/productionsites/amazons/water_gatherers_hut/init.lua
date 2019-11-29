@@ -23,10 +23,9 @@ tribes:new_productionsite_type {
          pictures = path.list_files (dirname .. "idle_?.png"),
          hotspot = {23, 41},
       },
-      working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
+      unoccupied = {
+         pictures = path.list_files (dirname .. "idle_?.png"),
          hotspot = {23, 41},
-         fps = 10,
       },
    },
 

@@ -1,12 +1,25 @@
 image_dirname = path.dirname(__file__) .. "images/amazons/"
 
-animations = {}
-add_animation(animations, "frontier", image_dirname, "frontier", {5, 35})
-add_animation(animations, "flag", image_dirname, "flag", {26, 39}, 5)
-
 tribes:new_tribe {
    name = "amazons",
-   animations = animations,
+   animations = {
+      frontier = {
+         directory = image_dirname,
+         basename = "frontier",
+         hotspot = {5, 35}
+      }
+   },
+   spritesheets = {
+      flag = {
+         directory = image_dirname,
+         basename = "flag",
+         hotspot = {26, 39},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 5
+      }
+   },
 
    -- Image file paths for this tribe's road textures
    roads = {
