@@ -379,7 +379,7 @@ void DefaultAI::think() {
 					// one productionsite per one check_productionsites() call
 					if (check_productionsites(gametime)) {
 						// if significant change takes place do not go on
-						//break;
+						break;
 					}
 				}
 			}
