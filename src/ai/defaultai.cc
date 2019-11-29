@@ -4371,7 +4371,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	}
 
 	// No upgrade without proper workers
-	if (considering_upgrade && !site.site->has_workers(enhancement, game()) && get_stocklevel(en_bo, gametime, WareWorker::kWorker) < 1) {
+	if (considering_upgrade && !site.site->has_workers(enhancement, game()) && 
+	    get_stocklevel(en_bo, gametime, WareWorker::kWorker) < 1) {
 		considering_upgrade = false;
 	}
 
