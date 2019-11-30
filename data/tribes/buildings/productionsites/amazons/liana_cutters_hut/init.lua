@@ -18,14 +18,15 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {49, 84},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {39, 45}
       },
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {49, 63},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {39, 45}
+      }
    },
 
    indicate_workarea_overlaps = {
