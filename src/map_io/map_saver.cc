@@ -80,8 +80,6 @@ void MapSaver::save() {
 
 	bool is_game = is_a(Game, &egbase_);
 
-	assert(is_game ||
-	       !egbase_.get_loader_ui());  // No progress screen when saving a map in the editor
 	auto set_progress_message = [this](std::string s) {
 		// Progress messages for the autosave during gameloading
 		if (egbase_.get_loader_ui())
