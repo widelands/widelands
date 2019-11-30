@@ -457,18 +457,23 @@ void EditorInteractive::load(const std::string& filename) {
 		   filename.c_str());
 	ml->preload_map(true);
 
-	UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");
-	std::vector<std::string> tipstext;
-	tipstext.push_back("editor");
+	// We already have a loader window if WL was started with --editor=mapname
+	UI::ProgressWindow* loader_ui = egbase().get_loader_ui();
+	const bool create_loader_ui = loader_ui == nullptr;
+	if (create_loader_ui) {
+		loader_ui = new UI::ProgressWindow("images/loadscreens/editor.jpg");
+		std::vector<std::string> tipstext;
+		tipstext.push_back("editor");
 
-	GameTips editortips(loader_ui, tipstext);
-	egbase().set_loader_ui(&loader_ui);
+		GameTips editortips(*loader_ui, tipstext);
+		egbase().set_loader_ui(loader_ui);
+	}
 
 	load_all_tribes(&egbase());
 
 	// Create the players. TODO(SirVer): this must be managed better
 	// TODO(GunChleoc): Ugly - we only need this for the test suite right now
-	loader_ui.step(_("Creating players"));
+	loader_ui->step(_("Creating players"));
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		if (!map->get_scenario_player_tribe(p).empty()) {
 			egbase().add_player(
@@ -480,7 +485,11 @@ void EditorInteractive::load(const std::string& filename) {
 	egbase().postload();
 	egbase().load_graphics();
 	map_changed(MapWas::kReplaced);
-	egbase().set_loader_ui(nullptr);
+	if (create_loader_ui) {
+		// We created it, so we have to unset and delete it
+		egbase().set_loader_ui(nullptr);
+		delete loader_ui;
+	}
 }
 
 void EditorInteractive::cleanup_for_load() {
