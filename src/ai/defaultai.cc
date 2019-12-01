@@ -4260,6 +4260,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// Get link to productionsite that should be checked
 	ProductionSiteObserver& site = productionsites.front();
 
+
+
 	// Inform if we are above ai type limit.
 	if (site.bo->total_count() > site.bo->cnt_limit_by_aimode) {
 		log("AI check_productionsites: Too many %s: %d, ai limit: %d\n", site.bo->name,
@@ -4301,9 +4303,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	const DescriptionIndex enhancement = site.site->descr().enhancement();
 
 	bool considering_upgrade = enhancement != INVALID_INDEX;
-	
-	const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
-	BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 
 	if (!basic_economy_established && management_data.f_neuron_pool[17].get_position(2)) {
 		considering_upgrade = false;
@@ -4371,13 +4370,18 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	}
 
 	// No upgrade without proper workers
-	if (considering_upgrade && !site.site->has_workers(enhancement, game()) && 
-	    get_stocklevel(en_bo, gametime, WareWorker::kWorker) < 1) {
-		considering_upgrade = false;
+	if (considering_upgrade && !site.site->has_workers(enhancement, game())) {
+		const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
+		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+			if (get_stocklevel(en_bo, gametime, WareWorker::kWorker) < 1) {
+				considering_upgrade = false;
+			}
 	}
 
 	if (considering_upgrade) {
 
+		const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
+		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 		bool doing_upgrade = false;
 
 		// 10 minutes is a time to productions statics to settle
@@ -4398,7 +4402,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 				}
 			}
 
-			if (en_bo.total_count() > 1) {
+			if (en_bo.total_count() > 1 &&
+			    (site.bo->cnt_built > 2 || site.bo->is(BuildingAttribute::kUpgradeSubstitutes))) {
 				if (en_bo.current_stats > 75) {
 					doing_upgrade = true;
 				}
@@ -5913,7 +5918,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				}
 			}
 			inputs[116] = -(bo.unoccupied_count * bo.unoccupied_count);
-			inputs[117] = -(bo.unoccupied_count + bo.unoccupied_count);
+			inputs[117] = -(2 * bo.unoccupied_count);
 
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
@@ -6931,7 +6936,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 				btype = "?";
 			}
 
-			if (false)
+			if (true)
 				log(" %1s %-30s %5d(%3d%%)  %6d %6d %6d %8s %5d %5d %5d %5d\n", btype.c_str(), bo.name,
 				    bo.total_count() - bo.cnt_under_construction - bo.unoccupied_count -
 				       bo.unconnected_count,

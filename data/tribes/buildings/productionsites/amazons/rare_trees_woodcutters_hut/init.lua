@@ -33,10 +33,10 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      collects_ware_from_map = "ironwood",
-      supports_production_of = { "clay" },
+      collects_ware_from_map = "rubber",
+      -- dirty hack to inverse relation between cutter and plantation
+      supports_production_of = { "ironwood" },
       requires_supporters = true,
-      basic_amount = 1,
    },
 
    working_positions = {
@@ -44,9 +44,8 @@ tribes:new_productionsite_type {
    },
 
    outputs = {
-      "ironwood",
-      "balsa",
       "rubber",
+      "balsa",
    },
 
    indicate_workarea_overlaps = {

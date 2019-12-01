@@ -33,7 +33,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      supports_production_of = { "ironwood", "balsa", "rubber", },
+      supports_production_of = { "balsa", "rubber", },
       requires_supporters = true,
       space_consumer = true,
    },
@@ -42,8 +42,10 @@ tribes:new_productionsite_type {
       amazons_jungle_master = 1
    },
 
+   -- this is a dirty hack to make the link of plantation and woodcutter in the opposite direction
+   -- this hack is needed due to the rare cutter being an upgraded building
    outputs = {
-      "clay",
+      "ironwood",
    },
 
    indicate_workarea_overlaps = {

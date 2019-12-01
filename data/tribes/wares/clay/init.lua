@@ -9,11 +9,9 @@ tribes:new_ware_type {
    icon = dirname .. "menu.png",
    default_target_quantity = {
       frisians = 30,
-      amazons = 1
    },
    preciousness = {
       frisians = 9,
-      amazons = 1,
    },
 
    animations = {
