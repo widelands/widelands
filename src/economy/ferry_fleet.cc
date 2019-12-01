@@ -84,16 +84,17 @@ bool FerryFleet::init(EditorGameBase& egbase) {
 }
 
 struct StepEvalFindFerryFleet {
-	StepEvalFindFerryFleet(const EditorGameBase& egbase)
-		: checkstep_(new CheckStepFerry(egbase)) {
+	StepEvalFindFerryFleet(const EditorGameBase& egbase) : checkstep_(new CheckStepFerry(egbase)) {
 	}
 
 	int32_t estimate(Map& /* map */, FCoords /* pos */) const {
 		return 0;
 	}
-	int32_t stepcost(Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
+	int32_t
+	stepcost(Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
 		return checkstep_->allowed(map, from, to, dir, CheckStep::StepId::stepNormal) ? 1 : -1;
 	}
+
 private:
 	std::unique_ptr<CheckStepFerry> checkstep_;
 };
@@ -132,7 +133,7 @@ bool FerryFleet::find_other_fleet(EditorGameBase& egbase) {
 			if (type == MapObjectType::FERRY) {
 				upcast(Ferry, ferry, bob);
 				if (ferry->get_fleet() != nullptr && ferry->get_fleet() != this &&
-					ferry->get_owner() == get_owner()) {
+				    ferry->get_owner() == get_owner()) {
 					return ferry->get_fleet()->merge(egbase, this);
 				}
 			}
@@ -264,7 +265,8 @@ void FerryFleet::request_ferry(EditorGameBase& egbase, Waterway* waterway, int32
 
 void FerryFleet::cancel_ferry_request(Game& game, Waterway* waterway) {
 	for (Ferry* ferry : ferries_) {
-		if (game.objects().object_still_available(ferry) && ferry->get_destination(game) == waterway) {
+		if (game.objects().object_still_available(ferry) &&
+		    ferry->get_destination(game) == waterway) {
 			ferry->set_destination(game, nullptr);
 			return;
 		}
@@ -356,14 +358,15 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 		int32_t shortest_distance = 0;
 		for (Ferry* temp_ferry : idle_ferries) {
 			// Decide how far this ferry is from the waterway
-			int32_t f_distance = game.map().findpath(
-					temp_ferry->get_position(), ww->base_flag().get_position(),
-					0, *new Path(), CheckStepFerry(game));
+			int32_t f_distance =
+			   game.map().findpath(temp_ferry->get_position(), ww->base_flag().get_position(), 0,
+			                       *new Path(), CheckStepFerry(game));
 			if (f_distance < 0) {
 				log("FerryFleet(%u)::act: We have a ferry (%u at %dx%d) "
-						"that can't reach one of our waterways (%u at %dx%d)!\n",
-						serial_, temp_ferry->serial(), temp_ferry->get_position().x, temp_ferry->get_position().y,
-						ww->serial(), ww->base_flag().get_position().x, ww->base_flag().get_position().y);
+				    "that can't reach one of our waterways (%u at %dx%d)!\n",
+				    serial_, temp_ferry->serial(), temp_ferry->get_position().x,
+				    temp_ferry->get_position().y, ww->serial(), ww->base_flag().get_position().x,
+				    ww->base_flag().get_position().y);
 				continue;
 			}
 
@@ -382,7 +385,7 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 
 	if (!pending_ferry_requests_.empty()) {
 		molog("... there are %" PRIuS " waterways requesting a ferry we cannot satisfy yet\n",
-				pending_ferry_requests_.size());
+		      pending_ferry_requests_.size());
 		// try again later
 		return update(game, 5000);
 	}
@@ -391,7 +394,8 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 void FerryFleet::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
-	molog("%" PRIuS " ferries and %" PRIuS " waterways\n", ferries_.size(), pending_ferry_requests_.size());
+	molog("%" PRIuS " ferries and %" PRIuS " waterways\n", ferries_.size(),
+	      pending_ferry_requests_.size());
 	for (const Ferry* f : ferries_) {
 		molog("* Ferry %u\n", f->serial());
 	}

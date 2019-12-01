@@ -289,13 +289,13 @@ bool ProductionProgram::ActReturn::Negation::evaluate(const ProductionSite& ps) 
 }
 
 // Just a dummy to satisfy the superclass interface. Returns an empty string.
-std::string ProductionProgram::ActReturn::Negation::description(const Tribes&) const {
-	return "";
+std::string ProductionProgram::ActReturn::Negation::description(const Tribes& t) const {
+	return operand->description_negation(t);
 }
 
 // Just a dummy to satisfy the superclass interface. Returns an empty string.
-std::string ProductionProgram::ActReturn::Negation::description_negation(const Tribes&) const {
-	return "";
+std::string ProductionProgram::ActReturn::Negation::description_negation(const Tribes& t) const {
+	return operand->description(t);
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate(const ProductionSite& ps) const {
@@ -372,8 +372,9 @@ bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) c
 std::string ProductionProgram::ActReturn::SiteHas::description(const Tribes& tribes) const {
 	std::vector<std::string> condition_list;
 	for (const auto& entry : group.first) {
-		condition_list.push_back(entry.second == wwWARE ? tribes.get_ware_descr(entry.first)->descname() :
-				tribes.get_worker_descr(entry.first)->descname());
+		condition_list.push_back(entry.second == wwWARE ?
+		                            tribes.get_ware_descr(entry.first)->descname() :
+		                            tribes.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -395,8 +396,9 @@ std::string
 ProductionProgram::ActReturn::SiteHas::description_negation(const Tribes& tribes) const {
 	std::vector<std::string> condition_list;
 	for (const auto& entry : group.first) {
-		condition_list.push_back(entry.second == wwWARE ? tribes.get_ware_descr(entry.first)->descname() :
-				tribes.get_worker_descr(entry.first)->descname());
+		condition_list.push_back(entry.second == wwWARE ?
+		                            tribes.get_ware_descr(entry.first)->descname() :
+		                            tribes.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
@@ -867,8 +869,9 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 
 			std::vector<std::string> ware_list;
 			for (const auto& entry : group.first) {
-				ware_list.push_back(entry.second == wwWARE ? tribe.get_ware_descr(entry.first)->descname() :
-						tribe.get_worker_descr(entry.first)->descname());
+				ware_list.push_back(entry.second == wwWARE ?
+				                       tribe.get_ware_descr(entry.first)->descname() :
+				                       tribe.get_worker_descr(entry.first)->descname());
 			}
 			std::string ware_string = i18n::localize_list(ware_list, i18n::ConcatenateWith::OR);
 

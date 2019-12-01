@@ -2,7 +2,6 @@ image_dirname = path.dirname(__file__) .. "images/barbarians/"
 
 animations = {}
 add_animation(animations, "frontier", image_dirname, "frontier", {1, 19})
-add_animation(animations, "flag", image_dirname, "flag", {10, 38}, 5)
 add_animation(animations, "bridge_normal_e", image_dirname, "bridge_normal_e", {-1, 13})
 add_animation(animations, "bridge_busy_e", image_dirname, "bridge_busy_e", {-1, 13})
 add_animation(animations, "bridge_normal_se", image_dirname, "bridge_normal_se", {8, 3})
@@ -13,6 +12,17 @@ add_animation(animations, "bridge_busy_sw", image_dirname, "bridge_busy_sw", {41
 tribes:new_tribe {
    name = "barbarians",
    animations = animations,
+   spritesheets = {
+      flag = {
+         directory = image_dirname,
+         basename = "flag",
+         fps = 5,
+         frames = 16,
+         columns = 4,
+         rows = 4,
+         hotspot = { 11, 39 }
+      }
+   },
 
    bridge_height = 8,
 

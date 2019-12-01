@@ -65,16 +65,5 @@ return {
       representative_character = "א",
       direction = "rtl",
       size_offset = 4
-   },
-
-   myanmar = {
-      sans = "mmrCensus/mmrCensus.ttf",
-      representative_character = "မ",
-      size_offset = 2
-   },
-
-   sinhala = {
-      sans = "Sinhala/lklug.ttf",
-      representative_character = "ස",
    }
 }

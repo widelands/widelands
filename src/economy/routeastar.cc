@@ -41,7 +41,8 @@ void BaseRouteAStar::routeto(RoutingNode& to, IRoute& route) {
 	assert(mpf_cycle == (type_ == wwWARE ? to.mpf_cycle_ware : to.mpf_cycle_worker));
 
 	route.init(type_ == wwWARE ? to.mpf_realcost_ware : to.mpf_realcost_worker);
-	for (RoutingNode* node = &to; node; node = (type_ == wwWARE ? node->mpf_backlink_ware : node->mpf_backlink_worker))
+	for (RoutingNode* node = &to; node;
+	     node = (type_ == wwWARE ? node->mpf_backlink_ware : node->mpf_backlink_worker))
 		route.insert_as_first(node);
 }
 

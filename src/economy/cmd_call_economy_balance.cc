@@ -74,7 +74,8 @@ void CmdCallEconomyBalance::read(FileRead& fr, EditorGameBase& egbase, MapObject
 					if (upcast(Game, game, &egbase)) {
 						Economy* e = flag_.get(egbase)->get_economy(wwWORKER);
 						assert(e);
-						game->cmdqueue().enqueue(new CmdCallEconomyBalance(duetime(), e, e->request_timerid_));
+						game->cmdqueue().enqueue(
+						   new CmdCallEconomyBalance(duetime(), e, e->request_timerid_));
 					}
 				}
 			}

@@ -158,7 +158,8 @@ public:
 
 	void set_target_quantity(DescriptionIndex, Quantity, Time);
 
-	void add_wares_or_workers(DescriptionIndex, Quantity count = 1, Economy* other_economy = nullptr);
+	void
+	add_wares_or_workers(DescriptionIndex, Quantity count = 1, Economy* other_economy = nullptr);
 	void remove_wares_or_workers(DescriptionIndex, Quantity count = 1);
 
 	void add_warehouse(Warehouse&);
@@ -259,7 +260,7 @@ private:
 
 	using Flags = std::vector<Flag*>;
 	Flags flags_;
-	WareList wares_or_workers_;    ///< virtual storage with all wares/workers in this Economy
+	WareList wares_or_workers_;  ///< virtual storage with all wares/workers in this Economy
 	std::vector<Warehouse*> warehouses_;
 
 	WareWorker type_;  ///< whether we are a WareEconomy or a WorkerEconomy

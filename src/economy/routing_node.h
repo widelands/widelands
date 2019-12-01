@@ -79,21 +79,33 @@ struct RoutingNode {
 	int32_t mpf_estimate_worker;       ///< estimate of cost to destination
 
 public:
-	RoutingNode() : mpf_cycle_ware(0), mpf_realcost_ware(0), mpf_backlink_ware(nullptr), mpf_estimate_ware(0),
-			mpf_cycle_worker(0), mpf_realcost_worker(0), mpf_backlink_worker(nullptr), mpf_estimate_worker(0) {
+	RoutingNode()
+	   : mpf_cycle_ware(0),
+	     mpf_realcost_ware(0),
+	     mpf_backlink_ware(nullptr),
+	     mpf_estimate_ware(0),
+	     mpf_cycle_worker(0),
+	     mpf_realcost_worker(0),
+	     mpf_backlink_worker(nullptr),
+	     mpf_estimate_worker(0) {
 	}
 	virtual ~RoutingNode() {
 	}
 
 	void reset_path_finding_cycle(WareWorker which) {
 		switch (which) {
-			case wwWARE: mpf_cycle_ware = 0; break;
-			case wwWORKER: mpf_cycle_worker = 0; break;
+		case wwWARE:
+			mpf_cycle_ware = 0;
+			break;
+		case wwWORKER:
+			mpf_cycle_worker = 0;
+			break;
 		}
 	}
 
 	int32_t cost(WareWorker which) const {
-		return (which == wwWARE) ? mpf_realcost_ware + mpf_estimate_ware : mpf_realcost_worker + mpf_estimate_worker;
+		return (which == wwWARE) ? mpf_realcost_ware + mpf_estimate_ware :
+		                           mpf_realcost_worker + mpf_estimate_worker;
 	}
 	Queue::Cookie& cookie(WareWorker which) {
 		return which == wwWARE ? mpf_cookie_ware : mpf_cookie_worker;

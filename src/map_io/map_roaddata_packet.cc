@@ -77,7 +77,8 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					road.set_owner(egbase.get_player(player_index));
 					road.wallet_ = fr.unsigned_32();
 					road.last_wallet_charge_ = fr.unsigned_32();
-					road.type_ = static_cast<RoadType>(packet_version >= 5 ? fr.unsigned_8() : fr.unsigned_32());
+					road.type_ =
+					   static_cast<RoadType>(packet_version >= 5 ? fr.unsigned_8() : fr.unsigned_32());
 					{
 						uint32_t const flag_0_serial = fr.unsigned_32();
 						try {

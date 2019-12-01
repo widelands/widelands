@@ -83,8 +83,11 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	/// Create a new flag. Only specify an economy during saveloading.
 	/// Otherwise, a new economy will be created automatically if needed.
-	Flag(EditorGameBase&, Player* owner, const Coords&,
-			Economy* ware_economy = nullptr, Economy* worker_economy = nullptr);
+	Flag(EditorGameBase&,
+	     Player* owner,
+	     const Coords&,
+	     Economy* ware_economy = nullptr,
+	     Economy* worker_economy = nullptr);
 	~Flag() override;
 
 	void load_finish(EditorGameBase&) override;

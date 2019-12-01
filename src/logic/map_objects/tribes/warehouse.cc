@@ -161,20 +161,20 @@ void WarehouseSupply::set_economy(Economy* const e, WareWorker type) {
 	if (Economy* ec = (type == wwWARE ? ware_economy_ : worker_economy_)) {
 		ec->remove_supply(*this);
 		switch (type) {
-			case wwWARE:
-				for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i) {
-					if (wares_.stock(i)) {
-						ec->remove_wares_or_workers(i, wares_.stock(i));
-					}
+		case wwWARE:
+			for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i) {
+				if (wares_.stock(i)) {
+					ec->remove_wares_or_workers(i, wares_.stock(i));
 				}
-				break;
-			case wwWORKER:
-				for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i) {
-					if (workers_.stock(i)) {
-						ec->remove_wares_or_workers(i, workers_.stock(i));
-					}
+			}
+			break;
+		case wwWORKER:
+			for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i) {
+				if (workers_.stock(i)) {
+					ec->remove_wares_or_workers(i, workers_.stock(i));
 				}
-				break;
+			}
+			break;
 		}
 	}
 
@@ -182,20 +182,20 @@ void WarehouseSupply::set_economy(Economy* const e, WareWorker type) {
 
 	if (Economy* ec = (type == wwWARE ? ware_economy_ : worker_economy_)) {
 		switch (type) {
-			case wwWARE:
-				for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i) {
-					if (wares_.stock(i)) {
-						ec->add_wares_or_workers(i, wares_.stock(i), worker_economy_);
-					}
+		case wwWARE:
+			for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i) {
+				if (wares_.stock(i)) {
+					ec->add_wares_or_workers(i, wares_.stock(i), worker_economy_);
 				}
-				break;
-			case wwWORKER:
-				for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i) {
-					if (workers_.stock(i)) {
-						e->add_wares_or_workers(i, workers_.stock(i), ware_economy_);
-					}
+			}
+			break;
+		case wwWORKER:
+			for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i) {
+				if (workers_.stock(i)) {
+					e->add_wares_or_workers(i, workers_.stock(i), ware_economy_);
 				}
-				break;
+			}
+			break;
 		}
 		ec->add_supply(*this);
 	}
@@ -206,7 +206,7 @@ void WarehouseSupply::add_wares(DescriptionIndex const id, Quantity const count)
 	if (!count)
 		return;
 
-	if (ware_economy_) { // No economies in the editor
+	if (ware_economy_) {  // No economies in the editor
 		ware_economy_->add_wares_or_workers(id, count, worker_economy_);
 	}
 	wares_.add(id, count);
@@ -218,7 +218,7 @@ void WarehouseSupply::remove_wares(DescriptionIndex const id, uint32_t const cou
 		return;
 
 	wares_.remove(id, count);
-	if (ware_economy_) { // No economies in the editor
+	if (ware_economy_) {  // No economies in the editor
 		ware_economy_->remove_wares_or_workers(id, count);
 	}
 }
@@ -228,7 +228,7 @@ void WarehouseSupply::add_workers(DescriptionIndex const id, uint32_t const coun
 	if (!count)
 		return;
 
-	if (worker_economy_) { // No economies in the editor
+	if (worker_economy_) {  // No economies in the editor
 		worker_economy_->add_wares_or_workers(id, count, ware_economy_);
 	}
 	workers_.add(id, count);
@@ -243,7 +243,7 @@ void WarehouseSupply::remove_workers(DescriptionIndex const id, uint32_t const c
 		return;
 
 	workers_.remove(id, count);
-	if (worker_economy_) { // No economies in the editor
+	if (worker_economy_) {  // No economies in the editor
 		worker_economy_->remove_wares_or_workers(id, count);
 	}
 }

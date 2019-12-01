@@ -29,6 +29,7 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/wexception.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -63,6 +64,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 	try {
 		initializations_ = info.initializations;
 
+<<<<<<< HEAD
 		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
 		{
 			std::unique_ptr<LuaTable> animations_table = items_table->get_table("frontier");
@@ -95,6 +97,9 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		}
 
 		items_table = table.get_table("roads");
+=======
+		std::unique_ptr<LuaTable> items_table = table.get_table("roads");
+>>>>>>> 04689a21d508778c6e8fd1c62f490e6a2d12cc34
 		const auto load_roads = [&items_table](
 		                           const std::string& road_type, std::vector<std::string>* images) {
 			std::vector<std::string> roads =
@@ -114,6 +119,46 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		load_roads("normal", &normal_road_paths_);
 		load_roads("busy", &busy_road_paths_);
 		load_roads("waterway", &waterway_paths_);
+
+#define LOAD_BRIDGE_IF_PRESENT(dir, type) \
+if (animations_table.has_key("bridge_##type##_##dir##")) { \
+std::unique_ptr<LuaTable> animation_table = animations_table.get_table("bridge_##type##_##dir##"); \
+bridge_##dir##_animation_##type##_id_ = \
+g_gr->animations().load(name_ + std::string("_bridge_##dir##_##type##"), *animation_table, \
+animations_table->get_string("basename"), animation_type); \
+}
+
+		// Frontier and flag animations can be a mix of file and spritesheet animations
+		const auto load_animations = [this](const LuaTable& animations_table,
+		                                    Animation::Type animation_type) {
+			if (animations_table.has_key("frontier")) {
+				std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
+				frontier_animation_id_ =
+				   g_gr->animations().load(name_ + std::string("_frontier"), *animation_table,
+				                           animation_table->get_string("basename"), animation_type);
+			}
+			if (animations_table.has_key("flag")) {
+				std::unique_ptr<LuaTable> animation_table = animations_table.get_table("flag");
+				flag_animation_id_ =
+				   g_gr->animations().load(name_ + std::string("_flag"), *animation_table,
+				                           animation_table->get_string("basename"), animation_type);
+			}
+			LOAD_BRIDGE_IF_PRESENT(e, normal)
+			LOAD_BRIDGE_IF_PRESENT(e, busy)
+			LOAD_BRIDGE_IF_PRESENT(se, normal)
+			LOAD_BRIDGE_IF_PRESENT(se, busy)
+			LOAD_BRIDGE_IF_PRESENT(sw, normal)
+			LOAD_BRIDGE_IF_PRESENT(sw, busy)
+		};
+
+		if (table.has_key("animations")) {
+			load_animations(*table.get_table("animations"), Animation::Type::kFiles);
+		}
+		if (table.has_key("spritesheets")) {
+			load_animations(*table.get_table("spritesheets"), Animation::Type::kSpritesheet);
+		}
+
+#undef LOAD_BRIDGE_IF_PRESENT
 
 		items_table = table.get_table("wares_order");
 		for (const int key : items_table->keys<int>()) {
@@ -142,26 +187,9 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		items_table = table.get_table("workers_order");
 		for (const int key : items_table->keys<int>()) {
 			std::vector<DescriptionIndex> column;
-			std::vector<std::string> workernames =
-			   items_table->get_table(key)->array_entries<std::string>();
-			for (size_t rowindex = 0; rowindex < workernames.size(); ++rowindex) {
-				try {
-					DescriptionIndex workerindex = tribes_.safe_worker_index(workernames[rowindex]);
-					if (has_worker(workerindex)) {
-						throw GameDataError(
-						   "Duplicate definition of worker '%s'", workernames[rowindex].c_str());
-					}
-					workers_.insert(workerindex);
-					column.push_back(workerindex);
-
-					const WorkerDescr& worker_descr = *tribes_.get_worker_descr(workerindex);
-					if (worker_descr.is_buildable() && worker_descr.buildcost().empty()) {
-						worker_types_without_cost_.push_back(workerindex);
-					}
-				} catch (const WException& e) {
-					throw GameDataError(
-					   "Failed adding worker '%s: %s", workernames[rowindex].c_str(), e.what());
-				}
+			for (const std::string& workername :
+			     items_table->get_table(key)->array_entries<std::string>()) {
+				add_worker(workername, column);
 			}
 			if (!column.empty()) {
 				workers_order_.push_back(column);
@@ -493,6 +521,29 @@ void TribeDescr::add_building(const std::string& buildingname) {
 	} catch (const WException& e) {
 		throw GameDataError("Failed adding building '%s': %s", buildingname.c_str(), e.what());
 	}
+}
+
+void TribeDescr::add_worker(const std::string& workername,
+                            std::vector<DescriptionIndex>& workers_order_column) {
+	try {
+		DescriptionIndex workerindex = tribes_.safe_worker_index(workername);
+		if (has_worker(workerindex)) {
+			throw GameDataError("Duplicate definition of worker '%s'", workername.c_str());
+		}
+		workers_.insert(workerindex);
+		workers_order_column.push_back(workerindex);
+
+		const WorkerDescr& worker_descr = *tribes_.get_worker_descr(workerindex);
+		if (worker_descr.is_buildable() && worker_descr.buildcost().empty()) {
+			worker_types_without_cost_.push_back(workerindex);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("Failed adding worker '%s: %s", workername.c_str(), e.what());
+	}
+}
+
+void TribeDescr::add_worker(const std::string& workername) {
+	add_worker(workername, workers_order_.back());
 }
 
 ToolbarImageset* TribeDescr::toolbar_image_set() const {

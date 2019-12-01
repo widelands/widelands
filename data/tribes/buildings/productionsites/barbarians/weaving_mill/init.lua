@@ -36,7 +36,8 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 990
+      prohibited_till = 990,
+      supports_seafaring = true
    },
 
    working_positions = {

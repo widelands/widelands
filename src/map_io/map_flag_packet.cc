@@ -57,15 +57,16 @@ void MapFlagPacket::read(FileSystem& fs,
 			const Map& map = egbase.map();
 			PlayerNumber const nr_players = map.get_nrplayers();
 			Widelands::Extent const extent = map.extent();
-			std::set<Serial> all_economy_serials; // For savegame compatibility only
+			std::set<Serial> all_economy_serials;  // For savegame compatibility only
 			iterate_Map_FCoords(map, extent, fc) if (fr.unsigned_8()) {
 				PlayerNumber const owner = fr.unsigned_8();
 				if (!(0 < owner && owner <= nr_players)) {
 					throw GameDataError("Invalid player number: %i.", owner);
 				}
 				const Serial ware_economy_serial = fr.unsigned_32();
-				const Serial worker_economy_serial = packet_version >= 3 ? fr.unsigned_32() :
-						mol.get_economy_savegame_compatibility(ware_economy_serial);
+				const Serial worker_economy_serial =
+				   packet_version >= 3 ? fr.unsigned_32() :
+				                         mol.get_economy_savegame_compatibility(ware_economy_serial);
 				all_economy_serials.insert(ware_economy_serial);
 				all_economy_serials.insert(worker_economy_serial);
 
@@ -116,7 +117,8 @@ void MapFlagPacket::read(FileSystem& fs,
 					//  packet. We always create this, no matter what skip is
 					//  since we have to read the data packets. We delete this
 					//  object later again, if it is not wanted.
-					Flag* flag = new Flag(dynamic_cast<Game&>(egbase), player, fc, ware_economy, worker_economy);
+					Flag* flag =
+					   new Flag(dynamic_cast<Game&>(egbase), player, fc, ware_economy, worker_economy);
 					mol.register_object<Flag>(serial, *flag);
 
 				} catch (const WException& e) {

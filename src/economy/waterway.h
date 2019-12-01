@@ -90,6 +90,6 @@ private:
 	Ferry* ferry_;
 	FerryFleet* fleet_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_WATERWAY_H

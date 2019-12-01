@@ -492,7 +492,8 @@ Bob& EditorGameBase::create_ship(const Coords& c, const std::string& name, Playe
 }
 
 Bob& EditorGameBase::create_ferry(const Coords& c, Player* owner) {
-	const BobDescr* descr = dynamic_cast<const BobDescr*>(tribes().get_worker_descr(owner->tribe().ferry()));
+	const BobDescr* descr =
+	   dynamic_cast<const BobDescr*>(tribes().get_worker_descr(owner->tribe().ferry()));
 	return create_bob(c, *descr, owner);
 }
 
@@ -533,8 +534,7 @@ void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, RoadTyp
 	assert(f.y < m.get_height());
 	assert(&first_field <= f.field);
 	assert(f.field < &first_field + m.max_index());
-	assert(direction == WALK_SW || direction == WALK_SE ||
-	       direction == WALK_E);
+	assert(direction == WALK_SW || direction == WALK_SE || direction == WALK_E);
 
 	if (f.field->get_road(direction) == roadtype)
 		return;
@@ -561,17 +561,17 @@ void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, RoadTyp
 		Player::Field& player_field = (&first_player_field)[i];
 		if (1 < player_field.vision || 1 < (&first_player_field)[neighbour_i].vision) {
 			switch (direction) {
-				case WALK_SE:
-					player_field.r_se = roadtype;
-					break;
-				case WALK_SW:
-					player_field.r_sw = roadtype;
-					break;
-				case WALK_E:
-					player_field.r_e = roadtype;
-					break;
-				default:
-					NEVER_HERE();
+			case WALK_SE:
+				player_field.r_se = roadtype;
+				break;
+			case WALK_SW:
+				player_field.r_sw = roadtype;
+				break;
+			case WALK_E:
+				player_field.r_e = roadtype;
+				break;
+			default:
+				NEVER_HERE();
 			}
 		}
 	}

@@ -45,7 +45,7 @@ def generate_translation_stats(po_dir, output_file):
     sys.stdout.write('Fetching translation stats ')
 
     # Regex to extract the locale from the po filenames.
-    regex_po = re.compile(r"/\S+/(\w+)\.po")
+    regex_po = re.compile(r'/\S+/(\w+)\.po')
 
     # We get errors for non-po files in the base po dir, so we have to walk
     # the subdirs.

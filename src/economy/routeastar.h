@@ -152,12 +152,13 @@ template <typename Est_> RoutingNode* RouteAStar<Est_>::step() {
 		// We have already found the best path
 		// to this neighbour, no need to visit it again.
 		if ((type_ == wwWARE ? neighbour.mpf_cycle_ware : neighbour.mpf_cycle_worker) == mpf_cycle &&
-			!neighbour.cookie(type_).is_active()) {
+		    !neighbour.cookie(type_).is_active()) {
 			continue;
 		}
 
-		const int32_t realcost = (type_ == wwWARE ? current->mpf_realcost_ware : current->mpf_realcost_worker) +
-				temp_neighbour.get_cost();
+		const int32_t realcost =
+		   (type_ == wwWARE ? current->mpf_realcost_ware : current->mpf_realcost_worker) +
+		   temp_neighbour.get_cost();
 		push(neighbour, realcost, current);
 	}
 

@@ -63,6 +63,7 @@ struct ShippingItem {
 
 	private:
 		uint32_t serial_ = 0U;
+		uint32_t destination_serial_ = 0U;
 	};
 
 	void save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw);
@@ -70,6 +71,7 @@ struct ShippingItem {
 private:
 	friend class PortDock;
 	friend struct Ship;
+	friend struct ShipFleet;
 
 	// Called when a port is reached. The item will act again on its own.
 	void end_shipping(Game&);

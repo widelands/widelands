@@ -194,14 +194,12 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 			molog("Assigning the ferry to the NEW waterway\n");
 			ferry_->set_destination(game, &newww);
 			request_ferry(game);
-		}
-		else {
+		} else {
 			molog("Assigning the ferry to the OLD waterway\n");
 			ferry_->set_destination(game, this);
 			newww.request_ferry(game);
 		}
-	}
-	else {
+	} else {
 		// this is needed to make sure the ferry finds the way correctly
 		fleet_->reroute_ferry_request(game, this, this);
 		newww.request_ferry(game);

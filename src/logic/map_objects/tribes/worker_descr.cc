@@ -52,7 +52,9 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
      becomes_(table.has_key("experience") ? tribes.safe_worker_index(table.get_string("becomes")) :
                                             INVALID_INDEX),
      needed_experience_(table.has_key("becomes") ? table.get_int("experience") : INVALID_INDEX),
-     ai_hints_(table.has_key("aihints") ? new WorkerHints(*table.get_table("aihints")) : nullptr),
+     ai_hints_(table.has_key("aihints") ?
+                  new WorkerHints(table.get_string("name"), *table.get_table("aihints")) :
+                  nullptr),
      tribes_(tribes) {
 	if (helptext_script().empty()) {
 		throw GameDataError("Worker %s has no helptext script", name().c_str());
@@ -95,8 +97,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	assign_directional_animation(&walk_anims_, "walk");
 
 	// Many workers don't carry wares, so they have no walkload animation.
-	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
-	anims->do_not_warn_about_unaccessed_keys();
 	if (is_animation_known("walkload_e")) {
 		assign_directional_animation(&walkload_anims_, "walkload");
 	}

@@ -40,7 +40,8 @@ const std::string kDefaultEconomyProfile = "Default";
 
 // Used to indicate that a profile has been saved or deleted, so all open windows can update it
 struct NoteEconomyProfile {
-	NoteEconomyProfile(Widelands::Serial ware, Widelands::Serial worker) : ware_serial(ware), worker_serial(worker) {
+	NoteEconomyProfile(Widelands::Serial ware, Widelands::Serial worker)
+	   : ware_serial(ware), worker_serial(worker) {
 	}
 	Widelands::Serial ware_serial;
 	Widelands::Serial worker_serial;

@@ -79,8 +79,10 @@ enum class BuildingAttribute : uint8_t {
 	kUpgradeExtends,
 	kLogRefiner,
 	kIronMine,
-	// TODO(Nordfriese): Someone should update the AI code to handle buildings that need waterways enabled
+	// TODO(Nordfriese): Someone should update the AI code to handle buildings that need waterways
+	// enabled
 	kNeedsSeafaring,
+	kSupportsSeafaring,
 	kSupportingProducer,
 	kNeedsBerry,
 };

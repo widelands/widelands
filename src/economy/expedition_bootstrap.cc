@@ -36,7 +36,9 @@
 namespace Widelands {
 
 ExpeditionBootstrap::ExpeditionBootstrap(PortDock* const portdock)
-   : portdock_(portdock), ware_economy_(portdock->get_economy(wwWARE)), worker_economy_(portdock->get_economy(wwWORKER)) {
+   : portdock_(portdock),
+     ware_economy_(portdock->get_economy(wwWARE)),
+     worker_economy_(portdock->get_economy(wwWORKER)) {
 }
 
 ExpeditionBootstrap::~ExpeditionBootstrap() {
@@ -99,15 +101,15 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	Warehouse* const warehouse = portdock_->get_warehouse();
 	for (std::unique_ptr<InputQueue>& iq : queues_) {
 		switch (iq->get_type()) {
-			case wwWARE:
-				warehouse->insert_wares(iq->get_index(), iq->get_filled());
-				break;
-			case wwWORKER:
-				WorkersQueue* wq = dynamic_cast<WorkersQueue*>(iq.get());
-				while (iq->get_filled() > 0) {
-					warehouse->incorporate_worker(game, wq->extract_worker());
-				}
-				break;
+		case wwWARE:
+			warehouse->insert_wares(iq->get_index(), iq->get_filled());
+			break;
+		case wwWORKER:
+			WorkersQueue* wq = dynamic_cast<WorkersQueue*>(iq.get());
+			while (iq->get_filled() > 0) {
+				warehouse->incorporate_worker(game, wq->extract_worker());
+			}
+			break;
 		}
 		iq->cleanup();
 	}
@@ -169,23 +171,23 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares(Game& game,
                                                         std::vector<WareInstance*>* return_wares) {
 	for (std::unique_ptr<InputQueue>& iq : queues_) {
 		switch (iq->get_type()) {
-			case wwWARE: {
-				const DescriptionIndex ware_index = iq->get_index();
-				for (uint32_t j = 0; j < iq->get_filled(); ++j) {
-					WareInstance* temp = new WareInstance(ware_index, tribe.get_ware_descr(ware_index));
-					temp->init(game);
-					temp->set_location(game, portdock_);
-					return_wares->emplace_back(temp);
-				}
-				break;
+		case wwWARE: {
+			const DescriptionIndex ware_index = iq->get_index();
+			for (uint32_t j = 0; j < iq->get_filled(); ++j) {
+				WareInstance* temp = new WareInstance(ware_index, tribe.get_ware_descr(ware_index));
+				temp->init(game);
+				temp->set_location(game, portdock_);
+				return_wares->emplace_back(temp);
 			}
-			case wwWORKER: {
-				WorkersQueue* wq = dynamic_cast<WorkersQueue*>(iq.get());
-				while (iq->get_filled() > 0) {
-					return_workers->emplace_back(wq->extract_worker());
-				}
-				break;
+			break;
+		}
+		case wwWORKER: {
+			WorkersQueue* wq = dynamic_cast<WorkersQueue*>(iq.get());
+			while (iq->get_filled() > 0) {
+				return_workers->emplace_back(wq->extract_worker());
 			}
+			break;
+		}
 		}
 	}
 

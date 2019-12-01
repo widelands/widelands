@@ -356,7 +356,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						const MapObjectDescr* map_object_descr;
 						if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
 							map_object_descr = &base_immovable->descr();
-							if (Road::is_road_descr(map_object_descr) || Waterway::is_waterway_descr(map_object_descr))
+							if (Road::is_road_descr(map_object_descr) ||
+							    Waterway::is_waterway_descr(map_object_descr))
 								map_object_descr = nullptr;
 							else if (upcast(Building const, building, base_immovable))
 								if (building->get_position() != f)
@@ -599,7 +600,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					const MapObjectDescr* map_object_descr;
 					if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
 						map_object_descr = &base_immovable->descr();
-						if (Road::is_road_descr(map_object_descr) || Waterway::is_waterway_descr(map_object_descr))
+						if (Road::is_road_descr(map_object_descr) ||
+						    Waterway::is_waterway_descr(map_object_descr))
 							map_object_descr = nullptr;
 						else if (upcast(Building const, building, base_immovable))
 							if (building->get_position() != f)

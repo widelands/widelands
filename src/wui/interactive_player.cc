@@ -262,25 +262,26 @@ void InteractivePlayer::rebuild_statistics_menu() {
 		/** TRANSLATORS: An entry in the game's statistics menu */
 		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring,
 		                    g_gr->images().get("images/wui/menus/statistics_seafaring.png"), false,
-		                    "", "e");
+		                    "", "E");
 	}
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock,
-	                    g_gr->images().get("images/wui/menus/statistics_stock.png"), false, "", "i");
+	                    g_gr->images().get("images/wui/menus/statistics_stock.png"), false, "", "I");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Buildings"), StatisticsMenuEntry::kBuildings,
 	                    g_gr->images().get("images/wui/menus/statistics_buildings.png"), false, "",
-	                    "b");
+	                    "B");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Wares"), StatisticsMenuEntry::kWare,
-	                    g_gr->images().get("images/wui/menus/statistics_wares.png"));
+	                    g_gr->images().get("images/wui/menus/statistics_wares.png"), false, "", "P");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral,
-	                    g_gr->images().get("images/wui/menus/statistics_general.png"));
+	                    g_gr->images().get("images/wui/menus/statistics_general.png"), false, "",
+	                    "G");
 }
 
 void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
@@ -319,7 +320,7 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	      _("Show Workarea Overlaps"),
 	   ShowHideEntry::kWorkareaOverlap,
 	   g_gr->images().get("images/wui/menus/show_workarea_overlap.png"), false,
-	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"), "w");
+	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"), "W");
 }
 
 void InteractivePlayer::think() {
@@ -343,8 +344,8 @@ void InteractivePlayer::think() {
 					   Widelands::TCoords<>(flag_to_connect_, Widelands::TriangleIndex::D)});
 					const Widelands::Map& map = egbase().map();
 					if (map.get_waterway_max_length() >= 2 &&
-							Widelands::CheckStepFerry(egbase()).reachable_dest(
-									map, Widelands::FCoords(flag_to_connect_, &field))) {
+					    Widelands::CheckStepFerry(egbase()).reachable_dest(
+					       map, Widelands::FCoords(flag_to_connect_, &field))) {
 						show_field_action(this, get_player(), &fieldaction_);
 					} else {
 						start_build_road(flag_to_connect_, field.get_owned_by());
@@ -424,17 +425,18 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			if (rinfo != road_building.road_previews.end()) {
 				for (uint8_t dir : rinfo->second) {
 					switch (dir) {
-						case Widelands::WALK_E:
-							f->road_e = Widelands::RoadType::kNormal;
-							break;
-						case Widelands::WALK_SE:
-							f->road_se = Widelands::RoadType::kNormal;
-							break;
-						case Widelands::WALK_SW:
-							f->road_sw = Widelands::RoadType::kNormal;
-							break;
-						default:
-							throw wexception("Attempt to set road-building overlay for invalid direction %i", dir);
+					case Widelands::WALK_E:
+						f->road_e = Widelands::RoadType::kNormal;
+						break;
+					case Widelands::WALK_SE:
+						f->road_se = Widelands::RoadType::kNormal;
+						break;
+					case Widelands::WALK_SW:
+						f->road_sw = Widelands::RoadType::kNormal;
+						break;
+					default:
+						throw wexception(
+						   "Attempt to set road-building overlay for invalid direction %i", dir);
 					}
 				}
 			}
@@ -442,17 +444,18 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			if (winfo != waterway_building.road_previews.end()) {
 				for (uint8_t dir : winfo->second) {
 					switch (dir) {
-						case Widelands::WALK_E:
-							f->road_e = Widelands::RoadType::kWaterway;
-							break;
-						case Widelands::WALK_SE:
-							f->road_se = Widelands::RoadType::kWaterway;
-							break;
-						case Widelands::WALK_SW:
-							f->road_sw = Widelands::RoadType::kWaterway;
-							break;
-						default:
-							throw wexception("Attempt to set waterway-building overlay for invalid direction %i", dir);
+					case Widelands::WALK_E:
+						f->road_e = Widelands::RoadType::kWaterway;
+						break;
+					case Widelands::WALK_SE:
+						f->road_se = Widelands::RoadType::kWaterway;
+						break;
+					case Widelands::WALK_SW:
+						f->road_sw = Widelands::RoadType::kWaterway;
+						break;
+					default:
+						throw wexception(
+						   "Attempt to set waterway-building overlay for invalid direction %i", dir);
 					}
 				}
 			}
@@ -571,6 +574,10 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			toggle_buildhelp();
 			return true;
 
+		case SDLK_g:
+			menu_windows_.stats_general.toggle();
+			return true;
+
 		case SDLK_i:
 			menu_windows_.stats_stock.toggle();
 			return true;
@@ -581,6 +588,10 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_o:
 			objectives_.toggle();
+			return true;
+
+		case SDLK_p:
+			menu_windows_.stats_wares.toggle();
 			return true;
 
 		case SDLK_F1:
@@ -628,7 +639,6 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			map_view()->scroll_to_field(
 			   game().map().get_starting_pos(player_number_), MapView::Transition::Smooth);
 			return true;
-
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			if (chat_provider_) {

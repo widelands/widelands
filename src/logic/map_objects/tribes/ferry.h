@@ -33,9 +33,7 @@ struct Coords;
 
 class FerryDescr : public CarrierDescr {
 public:
-	FerryDescr(const std::string& init_descname,
-	             const LuaTable& table,
-	             const Tribes& tribes);
+	FerryDescr(const std::string& init_descname, const LuaTable& table, const Tribes& tribes);
 	~FerryDescr() override {
 	}
 
@@ -95,6 +93,7 @@ protected:
 		Loader() {
 		}
 		void load(FileRead&) override;
+
 	protected:
 		const Task* get_task(const std::string& name) override;
 	};
@@ -104,6 +103,6 @@ protected:
 public:
 	void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_FERRY_H
