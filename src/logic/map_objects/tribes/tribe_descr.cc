@@ -64,42 +64,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 	try {
 		initializations_ = info.initializations;
 
-<<<<<<< HEAD
-		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
-		{
-			std::unique_ptr<LuaTable> animations_table = items_table->get_table("frontier");
-			frontier_animation_id_ =
-			   g_gr->animations().load(name_ + std::string("_frontier"), *animations_table,
-			                           animations_table->get_string("basename"));
-			animations_table = items_table->get_table("flag");
-			flag_animation_id_ =
-			   g_gr->animations().load(name_ + std::string("_flag"), *animations_table,
-			                           animations_table->get_string("basename"));
-
-			animations_table = items_table->get_table("bridge_normal_e");
-			bridge_e_animation_normal_id_ = g_gr->animations().load(name_ + std::string("_bridge_e_normal"),
-					*animations_table, animations_table->get_string("basename"));
-			animations_table = items_table->get_table("bridge_busy_e");
-			bridge_e_animation_busy_id_ = g_gr->animations().load(name_ + std::string("_bridge_e_busy"),
-					*animations_table, animations_table->get_string("basename"));
-			animations_table = items_table->get_table("bridge_normal_se");
-			bridge_se_animation_normal_id_ = g_gr->animations().load(name_ + std::string("_bridge_se_normal"),
-					*animations_table, animations_table->get_string("basename"));
-			animations_table = items_table->get_table("bridge_busy_se");
-			bridge_se_animation_busy_id_ = g_gr->animations().load(name_ + std::string("_bridge_se_busy"),
-					*animations_table, animations_table->get_string("basename"));
-			animations_table = items_table->get_table("bridge_normal_sw");
-			bridge_sw_animation_normal_id_ = g_gr->animations().load(name_ + std::string("_bridge_sw_normal"),
-					*animations_table, animations_table->get_string("basename"));
-			animations_table = items_table->get_table("bridge_busy_sw");
-			bridge_sw_animation_busy_id_ = g_gr->animations().load(name_ + std::string("_bridge_sw_busy"),
-					*animations_table, animations_table->get_string("basename"));
-		}
-
-		items_table = table.get_table("roads");
-=======
 		std::unique_ptr<LuaTable> items_table = table.get_table("roads");
->>>>>>> 04689a21d508778c6e8fd1c62f490e6a2d12cc34
 		const auto load_roads = [&items_table](
 		                           const std::string& road_type, std::vector<std::string>* images) {
 			std::vector<std::string> roads =
