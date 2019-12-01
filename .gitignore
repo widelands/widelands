@@ -6,7 +6,7 @@
 # the compile.sh file creates some files, links and directories
 /build
 update.sh
-widelands
+/widelands
 wl_map*_info
 wl_create_spritesheet
 locale
