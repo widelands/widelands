@@ -77,8 +77,9 @@ constexpr uint32_t kItemSize = 28;
 constexpr uint32_t kAdditionalItemsBorder = 4;
 
 struct PortDockAdditionalItemsDisplay : UI::Box {
+public:
 	PortDockAdditionalItemsDisplay(
-			Game& g,
+			Widelands::Game& g,
 			Panel* parent,
 			bool can_act,
 			PortDock& pd,
@@ -90,18 +91,20 @@ struct PortDockAdditionalItemsDisplay : UI::Box {
 		assert(portdock_.expedition_bootstrap()->count_additional_queues() == capacity);
 		for (uint32_t c = 0; c < capacity; ++c) {
 			const InputQueue* iq = portdock_.expedition_bootstrap()->inputqueue(c);
-			UI::Dropdown& d = *new UI::Dropdown(this, (boost::format("additional_%u") % c).str(), 0, 0,
-					kWareMenuPicWidth, 8, kWareMenuPicHeight, "", UI::DropdownType::kPictorial,
-					UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
+			UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>& d =
+					*new UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>(
+							this, (boost::format("additional_%u") % c).str(), 0, 0,
+							kWareMenuPicWidth, 8, kWareMenuPicHeight, "", UI::DropdownType::kPictorial,
+							UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
 			d.add(_("(Empty)"), std::make_pair(Widelands::wwWARE, Widelands::INVALID_INDEX), nullptr, !iq, _("(Empty)"));
 			for (Widelands::DescriptionIndex i : pd.owner().tribe().wares()) {
-				const Widelands::WareDescription& w = pd.owner().tribe().get_ware_description(i);
-				d.add(i.descname(), std::make_pair(Widelands::wwWARE, i), i.icon(),
-						iq && iq->get_type() == Widelands::wwWARE && iq->get_index() == i, i.descname());
+				const Widelands::WareDescr& w = *pd.owner().tribe().get_ware_descr(i);
+				d.add(w.descname(), std::make_pair(Widelands::wwWARE, i), w.icon(),
+						iq && iq->get_type() == Widelands::wwWARE && iq->get_index() == i, w.descname());
 			}
 			for (Widelands::DescriptionIndex i : pd.owner().tribe().workers()) {
-				const Widelands::WorkerDescription& w = pd.owner().tribe().get_worker_description(i);
-				d.add(i.descname(), std::make_pair(Widelands::wwWORKER, i), i.icon(), false, i.descname());
+				const Widelands::WorkerDescr& w = *pd.owner().tribe().get_worker_descr(i);
+				d.add(w.descname(), std::make_pair(Widelands::wwWORKER, i), w.icon(), false, w.descname());
 			}
 			d.set_enabled(can_act);
 			d.selected.connect(boost::bind(&PortDockAdditionalItemsDisplay::select, this, c));
@@ -130,7 +133,7 @@ struct PortDockAdditionalItemsDisplay : UI::Box {
 	}
 
 private:
-	Game& game_;
+	Widelands::Game& game_;
 	PortDock& portdock_;
 	std::vector<UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>*> dropdowns_;
 };
@@ -151,7 +154,7 @@ create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, Interactive
 
 	if (capacity > 0) {
 		const bool can_act = igb.can_act(wh.get_owner()->player_number());
-		box.add(new PortDockAdditionalItemsDisplay(igb.game(), &box, 0, 0, parent->get_w(),
+		box.add(new PortDockAdditionalItemsDisplay(igb.game(), &box,
 				can_act, *wh.get_portdock(), capacity), UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	}
 

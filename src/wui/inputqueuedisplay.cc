@@ -58,7 +58,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      cache_size_(queue.get_max_size()),
      cache_max_fill_(queue.get_max_fill()),
      total_height_(0),
-     no_capacity_buttons_(no_capacity_buttons_),
+     no_capacity_buttons_(no_capacity_buttons),
      no_priority_buttons_(no_priority_buttons) {
 	if (type_ == Widelands::wwWARE) {
 		const Widelands::WareDescr& ware = *queue.owner().tribe().get_ware_descr(queue_->get_index());

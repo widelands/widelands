@@ -385,7 +385,7 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 }
 
 void PortDock::load_wares(Game& game, Ship& ship) {
-	uint32_t free_capacity = ship.descr().get_capacity() - ship.get_nritems();
+	uint32_t free_capacity = ship.get_capacity() - ship.get_nritems();
 	std::unordered_map<const PortDock*, bool> destination_check;
 	for (auto it = waiting_.begin(); it != waiting_.end() && free_capacity;) {
 		PortDock* dest = it->destination_dock_.get(game);

@@ -6050,7 +6050,7 @@ int LuaShip::make_expedition(lua_State* L) {
 			}
 		}
 	}
-	ship->set_destination(nullptr);
+	ship->clear_destinations(*game);
 	ship->start_task_expedition(*game);
 
 	return 0;
