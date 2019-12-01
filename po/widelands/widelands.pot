@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-10-09 07:57+0000\n"
+"POT-Creation-Date: 2019-11-30 13:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -228,12 +228,12 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:79 ../../src/logic/game.cc:224
+#: ../../src/editor/editorinteractive.cc:80 ../../src/logic/game.cc:224
 #: ../../src/logic/game.cc:284
 msgid "Loading tribes"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:98
+#: ../../src/editor/editorinteractive.cc:99
 #: ../../src/wui/interactive_gamebase.cc:93
 msgctxt "hotkey"
 msgid "Esc"
@@ -241,13 +241,13 @@ msgstr ""
 
 #. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
-#: ../../src/editor/editorinteractive.cc:98
+#: ../../src/editor/editorinteractive.cc:99
 #: ../../src/wui/interactive_gamebase.cc:93
 msgid "Main Menu"
 msgstr ""
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
-#: ../../src/editor/editorinteractive.cc:110
+#: ../../src/editor/editorinteractive.cc:111
 msgid "Tools"
 msgstr ""
 
@@ -255,97 +255,97 @@ msgstr ""
 #. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will show/hide
 #. building spaces, census, statistics
-#: ../../src/editor/editorinteractive.cc:123
+#: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:81
 msgid "Show / Hide"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:136
+#: ../../src/editor/editorinteractive.cc:137
 msgid "Tool size"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:148
+#: ../../src/editor/editorinteractive.cc:149
 msgid "Undo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:149
+#: ../../src/editor/editorinteractive.cc:150
 msgid "Redo"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:158
-#: ../../src/wui/buildingwindow.cc:359 ../../src/wui/interactive_player.cc:206
+#: ../../src/editor/editorinteractive.cc:159
+#: ../../src/wui/buildingwindow.cc:363 ../../src/wui/interactive_player.cc:206
 msgid "Help"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:181
+#: ../../src/editor/editorinteractive.cc:182
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:46
 msgid "New Map"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:188
+#: ../../src/editor/editorinteractive.cc:189
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:53
 msgid "New Random Map"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:195
+#: ../../src/editor/editorinteractive.cc:196
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:36
 msgid "Load Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:197
+#: ../../src/editor/editorinteractive.cc:198
 msgctxt "hotkey"
-msgid "Ctrl+l"
+msgid "Ctrl+L"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:203
+#: ../../src/editor/editorinteractive.cc:204
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:55
 msgid "Save Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:205
+#: ../../src/editor/editorinteractive.cc:206
 msgctxt "hotkey"
-msgid "Ctrl+s"
+msgid "Ctrl+S"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:211
+#: ../../src/editor/editorinteractive.cc:212
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:48
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:72
 msgid "Map Options"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:215
+#: ../../src/editor/editorinteractive.cc:216
 msgid "Exit Editor"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:251
+#: ../../src/editor/editorinteractive.cc:252
 msgid "Change height"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
-#: ../../src/editor/editorinteractive.cc:254
+#: ../../src/editor/editorinteractive.cc:255
 msgid "Change the terrain height"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:260
+#: ../../src/editor/editorinteractive.cc:261
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:95
 msgid "Random height"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
-#: ../../src/editor/editorinteractive.cc:263
+#: ../../src/editor/editorinteractive.cc:264
 msgid "Set the terrain height to random values"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:269
+#: ../../src/editor/editorinteractive.cc:270
 #: ../../src/editor/tools/info_tool.cc:116
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:89
 #: ../../src/wui/minimap.cc:121
@@ -353,94 +353,94 @@ msgid "Terrain"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
-#: ../../src/editor/editorinteractive.cc:272
+#: ../../src/editor/editorinteractive.cc:273
 msgid "Change the map’s terrain"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:279
+#: ../../src/editor/editorinteractive.cc:280
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
 msgid "Immovables"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
-#: ../../src/editor/editorinteractive.cc:282
+#: ../../src/editor/editorinteractive.cc:283
 msgid "Add or remove immovables"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:288
+#: ../../src/editor/editorinteractive.cc:289
 #: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:50
 msgid "Animals"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
-#: ../../src/editor/editorinteractive.cc:291
+#: ../../src/editor/editorinteractive.cc:292
 msgid "Add or remove animals"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:298
+#: ../../src/editor/editorinteractive.cc:299
 #: ../../src/editor/tools/info_tool.cc:202
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:48
 msgid "Resources"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
-#: ../../src/editor/editorinteractive.cc:301
+#: ../../src/editor/editorinteractive.cc:302
 msgid "Set or change resources"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:304
+#: ../../src/editor/editorinteractive.cc:305
 msgid "Port spaces"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
-#: ../../src/editor/editorinteractive.cc:307
+#: ../../src/editor/editorinteractive.cc:308
 msgid "Add or remove port spaces"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:313
+#: ../../src/editor/editorinteractive.cc:314
 #: ../../src/ui_fsmenu/launch_mpg.cc:151
 msgid "Players"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:316
+#: ../../src/editor/editorinteractive.cc:317
 msgid "Set number of players and their names, tribes and starting positions"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:319
+#: ../../src/editor/editorinteractive.cc:320
 msgid "Map origin"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
-#: ../../src/editor/editorinteractive.cc:322
+#: ../../src/editor/editorinteractive.cc:323
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the top-"
 "left corner of a generated minimap."
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:329
+#: ../../src/editor/editorinteractive.cc:330
 msgid "Map size"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:332
+#: ../../src/editor/editorinteractive.cc:333
 msgid "Change the map’s size"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:335
+#: ../../src/editor/editorinteractive.cc:336
 msgid "Information"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
-#: ../../src/editor/editorinteractive.cc:338
+#: ../../src/editor/editorinteractive.cc:339
 msgid "Click on a field to show information about it"
 msgstr ""
 
@@ -448,17 +448,17 @@ msgstr ""
 #. * shown
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether building spaces are
 #. * shown
-#: ../../src/editor/editorinteractive.cc:396
+#: ../../src/editor/editorinteractive.cc:397
 #: ../../src/wui/interactive_gamebase.cc:208
 msgid "Hide Building Spaces"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:396
+#: ../../src/editor/editorinteractive.cc:397
 #: ../../src/wui/interactive_gamebase.cc:208
 msgid "Show Building Spaces"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:399
+#: ../../src/editor/editorinteractive.cc:400
 #: ../../src/wui/interactive_gamebase.cc:211
 msgctxt "hotkey"
 msgid "Space"
@@ -466,73 +466,73 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map grid is shown
 #.
-#: ../../src/editor/editorinteractive.cc:403
+#: ../../src/editor/editorinteractive.cc:404
 msgid "Hide Grid"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:403
+#: ../../src/editor/editorinteractive.cc:404
 msgid "Show Grid"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether immovables (trees,
 #. * rocks etc.) are shown
-#: ../../src/editor/editorinteractive.cc:408
+#: ../../src/editor/editorinteractive.cc:409
 msgid "Hide Immovables"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:408
+#: ../../src/editor/editorinteractive.cc:409
 msgid "Show Immovables"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether animals are shown
-#: ../../src/editor/editorinteractive.cc:413
+#: ../../src/editor/editorinteractive.cc:414
 msgid "Hide Animals"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:413
+#: ../../src/editor/editorinteractive.cc:414
 msgid "Show Animals"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether resources are shown
-#: ../../src/editor/editorinteractive.cc:417
+#: ../../src/editor/editorinteractive.cc:418
 msgid "Hide Resources"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:417
+#: ../../src/editor/editorinteractive.cc:418
 msgid "Show Resources"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:453
+#: ../../src/editor/editorinteractive.cc:454
 msgid "Unsupported Format"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:454
+#: ../../src/editor/editorinteractive.cc:455
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:468 ../../src/logic/game.cc:234
+#: ../../src/editor/editorinteractive.cc:469 ../../src/logic/game.cc:234
 #: ../../src/logic/game.cc:291
 msgid "Creating players"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:519
+#: ../../src/editor/editorinteractive.cc:521
 msgid "Unsaved Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:520
+#: ../../src/editor/editorinteractive.cc:522
 msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:909
+#: ../../src/editor/editorinteractive.cc:912
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:105
 msgid "Creating empty map…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:913
+#: ../../src/editor/editorinteractive.cc:916
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:110
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:488
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:146
@@ -541,7 +541,7 @@ msgid "No Name"
 msgstr ""
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:916
+#: ../../src/editor/editorinteractive.cc:919
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:111
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:489
 #: ../../src/logic/map.h:172
@@ -549,7 +549,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:923
+#: ../../src/editor/editorinteractive.cc:926
 #, c-format
 msgid "Loading map “%s”…"
 msgstr ""
@@ -1176,8 +1176,8 @@ msgstr ""
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
-#: ../../src/ui_basic/dropdown.cc:266 ../../src/ui_basic/dropdown.cc:336
-#: ../../src/ui_basic/dropdown.cc:344
+#: ../../src/ui_basic/dropdown.cc:265 ../../src/ui_basic/dropdown.cc:335
+#: ../../src/ui_basic/dropdown.cc:343
 #: ../../src/wui/multiplayersetupgroup.cc:389
 msgid "%1%: %2%"
 msgstr ""
@@ -1453,8 +1453,8 @@ msgstr[1] ""
 #. * TRANSLATORS: Number of soldiers that should attack. Used in Attack box.
 #. * TRANSLATORS: Number of soldiers stationed at a militarysite.
 #: ../../src/logic/map_objects/tribes/militarysite.cc:379
-#: ../../src/wui/attack_box.cc:113 ../../src/wui/constructionsitewindow.cc:415
-#: ../../src/wui/constructionsitewindow.cc:427
+#: ../../src/wui/attack_box.cc:113 ../../src/wui/constructionsitewindow.cc:392
+#: ../../src/wui/constructionsitewindow.cc:404
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
@@ -1722,21 +1722,21 @@ msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:1070
+#: ../../src/logic/map_objects/tribes/ship.cc:1072
 msgctxt "ship"
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:1070
+#: ../../src/logic/map_objects/tribes/ship.cc:1072
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:1071
+#: ../../src/logic/map_objects/tribes/ship.cc:1073
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1220
+#: ../../src/logic/map_objects/tribes/ship.cc:1222
 #: ../../src/wui/seafaring_statistics_menu.cc:214
 msgctxt "ship_state"
 msgid "Shipping"
@@ -1744,28 +1744,28 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1224
+#: ../../src/logic/map_objects/tribes/ship.cc:1226
 #: ../../src/wui/seafaring_statistics_menu.cc:212
 msgctxt "ship_state"
 msgid "Idle"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1229
+#: ../../src/logic/map_objects/tribes/ship.cc:1231
 #: ../../src/wui/seafaring_statistics_menu.cc:216
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1233
+#: ../../src/logic/map_objects/tribes/ship.cc:1235
 #: ../../src/wui/seafaring_statistics_menu.cc:218
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1237
+#: ../../src/logic/map_objects/tribes/ship.cc:1239
 #: ../../src/wui/seafaring_statistics_menu.cc:220
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1773,7 +1773,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1242
+#: ../../src/logic/map_objects/tribes/ship.cc:1244
 #: ../../src/wui/seafaring_statistics_menu.cc:222
 msgctxt "ship_state"
 msgid "Founding a Colony"
@@ -2457,13 +2457,13 @@ msgctxt "dropdown"
 msgid "Select Item"
 msgstr ""
 
-#: ../../src/ui_basic/dropdown.cc:266 ../../src/ui_basic/dropdown.cc:268
+#: ../../src/ui_basic/dropdown.cc:265 ../../src/ui_basic/dropdown.cc:267
 #: ../../src/ui_fsmenu/launch_mpg.cc:464
 msgid "Error"
 msgstr ""
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:329
+#: ../../src/ui_basic/dropdown.cc:328
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr ""
@@ -3414,53 +3414,51 @@ msgstr ""
 msgid "Stop"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:253
-#: ../../src/wui/constructionsitewindow.cc:334
+#: ../../src/wui/buildingwindow.cc:256
 #, c-format
 msgid "Enhance to %s"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:258
-#: ../../src/wui/constructionsitewindow.cc:335 ../../src/wui/fieldaction.cc:99
+#: ../../src/wui/buildingwindow.cc:261 ../../src/wui/fieldaction.cc:99
 msgid "Construction costs:"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:275
+#: ../../src/wui/buildingwindow.cc:279
 msgid "Destroy"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:289 ../../src/wui/buildingwindow.cc:290
-#: ../../src/wui/buildingwindow.cc:296
+#: ../../src/wui/buildingwindow.cc:293 ../../src/wui/buildingwindow.cc:294
+#: ../../src/wui/buildingwindow.cc:300
 msgid "Dismantle"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:290 ../../src/wui/buildingwindow.cc:300
+#: ../../src/wui/buildingwindow.cc:294 ../../src/wui/buildingwindow.cc:304
 msgid "Returns:"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:340 ../../src/wui/fieldaction.cc:390
+#: ../../src/wui/buildingwindow.cc:344 ../../src/wui/fieldaction.cc:390
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:347
+#: ../../src/wui/buildingwindow.cc:351
 msgid "Center view on this"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:533
+#: ../../src/wui/buildingwindow.cc:549
 msgid "Hide work area"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:536
+#: ../../src/wui/buildingwindow.cc:552
 msgid "Show work area"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:569
-#: ../../src/wui/constructionsitewindow.cc:310
+#: ../../src/wui/buildingwindow.cc:585
+#: ../../src/wui/constructionsitewindow.cc:313
 msgid "Start an expedition"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:573
+#: ../../src/wui/buildingwindow.cc:589
 msgid "Cancel the expedition"
 msgstr ""
 
@@ -3470,68 +3468,68 @@ msgid "Building materials"
 msgstr ""
 
 #: ../../src/wui/constructionsitewindow.cc:162
-#: ../../src/wui/constructionsitewindow.cc:206
+#: ../../src/wui/constructionsitewindow.cc:207
 #: ../../src/wui/soldiercapacitycontrol.cc:72
 msgid ""
 "Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"
 msgstr ""
 
 #: ../../src/wui/constructionsitewindow.cc:166
-#: ../../src/wui/constructionsitewindow.cc:210
+#: ../../src/wui/constructionsitewindow.cc:211
 #: ../../src/wui/soldiercapacitycontrol.cc:81
 msgid ""
 "Increase capacity. Hold down Ctrl to set the capacity to the highest value"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:189
+#: ../../src/wui/constructionsitewindow.cc:190
 msgid "Stopped"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:190
+#: ../../src/wui/constructionsitewindow.cc:191
 msgid "Stop this building’s work after completion"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:241 ../../src/wui/soldierlist.cc:409
+#: ../../src/wui/constructionsitewindow.cc:243 ../../src/wui/soldierlist.cc:409
 msgid "Prefer heroes"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:244 ../../src/wui/soldierlist.cc:406
+#: ../../src/wui/constructionsitewindow.cc:246 ../../src/wui/soldierlist.cc:406
 msgid "Prefer rookies"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:266
+#: ../../src/wui/constructionsitewindow.cc:269
 #: ../../src/wui/warehousewindow.cc:145
 msgid "Normal policy"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:270
+#: ../../src/wui/constructionsitewindow.cc:273
 #: ../../src/wui/warehousewindow.cc:146
 msgid "Preferably store selected wares here"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:274
+#: ../../src/wui/constructionsitewindow.cc:277
 #: ../../src/wui/warehousewindow.cc:147
 msgid "Do not store selected wares here"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:278
+#: ../../src/wui/constructionsitewindow.cc:281
 #: ../../src/wui/warehousewindow.cc:148
 msgid "Remove selected wares from here"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:300
+#: ../../src/wui/constructionsitewindow.cc:303
 msgid "Ware settings to apply after construction"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:303
+#: ../../src/wui/constructionsitewindow.cc:306
 msgid "Worker settings to apply after construction"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:311
+#: ../../src/wui/constructionsitewindow.cc:314
 msgid "Start an expedition from this port after completion"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:356
+#: ../../src/wui/constructionsitewindow.cc:333
 msgid "Settings to apply after construction"
 msgstr ""
 
@@ -4266,7 +4264,7 @@ msgid "Statistics"
 msgstr ""
 
 #: ../../src/wui/interactive_player.cc:201
-#: ../../src/wui/interactive_player.cc:353
+#: ../../src/wui/interactive_player.cc:354
 msgid "Messages"
 msgstr ""
 
@@ -4289,23 +4287,23 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:314
+#: ../../src/wui/interactive_player.cc:315
 msgid "Hide Workarea Overlaps"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:317
+#: ../../src/wui/interactive_player.cc:318
 msgid "Show Workarea Overlaps"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:320
+#: ../../src/wui/interactive_player.cc:321
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:358
+#: ../../src/wui/interactive_player.cc:359
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"

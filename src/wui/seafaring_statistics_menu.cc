@@ -44,7 +44,7 @@ constexpr int kButtonSize = 34;
 
 SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                                                  UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&plr, "seafaring_statistics", &registry, 355, 375, _("Seafaring Statistics")),
+   : UI::UniqueWindow(&plr, "seafaring_statistics", &registry, 375, 375, _("Seafaring Statistics")),
      main_box_(this, kPadding, kPadding, UI::Box::Vertical, get_inner_w(), get_inner_h(), kPadding),
      filter_box_(
         &main_box_, 0, 0, UI::Box::Horizontal, get_inner_w() - 2 * kPadding, kButtonSize, kPadding),
@@ -137,7 +137,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	colony_icon_ = tribe.get_worker_descr(tribe.builder())->icon();
 
 	// Buttons for ship states
-	main_box_.add(&filter_box_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&filter_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	filter_box_.add(&idle_btn_);
 	filter_box_.add(&shipping_btn_);
 	filter_box_.add(&waiting_btn_);
@@ -177,7 +177,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	table_.double_clicked.connect(boost::bind(&SeafaringStatisticsMenu::double_clicked, this));
 	table_.add_column(
 	   0, pgettext("ship", "Name"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
-	table_.add_column(200, pgettext("ship", "Status"));
+	table_.add_column(230, pgettext("ship", "Status"));
 	table_.set_sort_column(ColName);
 	fill_table();
 

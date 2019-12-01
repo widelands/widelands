@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"POT-Creation-Date: 2019-10-09 07:57+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Renaud Bouchard, 2019\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -1058,12 +1058,12 @@ msgstr "Félicitations"
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "Nouvel objectif"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "Nouveaux objectifs"
