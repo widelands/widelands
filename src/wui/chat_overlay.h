@@ -39,7 +39,7 @@ struct ChatOverlay : public UI::Panel {
 	void draw(RenderTarget&) override;
 	void think() override;
 
-	// Check is position and size is still correct.
+	// Check if position and size is still correct.
 	void recompute();
 
 private:
