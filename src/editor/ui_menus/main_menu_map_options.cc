@@ -173,7 +173,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	cancel_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_cancel, boost::ref(*this)));
 
 	update();
-	ok_.set_enabled(false);
+	ok_.set_enabled(true);
 
 	name_.focus();
 	center_to_parent();
