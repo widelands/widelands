@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2016 The Widelands Development Team <widelands-dev_at_lists.launchpad.net> -->
 <component type="desktop-application">
-  <id>org.widelands.widelands</id>
+  <id>org.widelands.Widelands</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
-  <icon type="stock">widelands</icon>
   <name>Widelands</name>
   <name xml:lang="ko">와이드랜드</name>
   <summary>A real-time build-up strategy game</summary>
@@ -282,12 +281,14 @@ Widelands ayrıca size yapay zeka ile meydan okur.
       <caption>Map Selection Screen</caption>
     </screenshot>
   </screenshots>
-  <url type="homepage">https://wl.widelands.org/</url>
   <update_contact>widelands-dev_at_lists.launchpad.net</update_contact>
   <provides>
     <binary>widelands</binary>
+    <id>widelands.desktop</id>
+    <id>org.widelands.widelands.desktop</id>
+    <id>org.widelands.widelands</id>
   </provides>
-  <launchable type="desktop-id">org.widelands.widelands.desktop</launchable>
+  <launchable type="desktop-id">org.widelands.Widelands.desktop</launchable>
   <releases>
     <release date="2019-05-02" version="Build 20"/>
     <release date="2016-11-11" version="Build 19"/>
@@ -377,36 +378,38 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <lang>zh_CN</lang>
     <lang>zh_TW</lang>
   </languages>
-  <translation type="gettext">scenario_bar01.wmf</translation>
-  <translation type="gettext">mp_scenario_island_hopping.wmf</translation>
-  <translation type="gettext">scenario_emp03.wmf</translation>
-  <translation type="gettext">maps</translation>
-  <translation type="gettext">scenario_emp04.wmf</translation>
-  <translation type="gettext">tribes_encyclopedia</translation>
-  <translation type="gettext">scenario_fri01.wmf</translation>
-  <translation type="gettext">widelands</translation>
-  <translation type="gettext">scenario_atl01.wmf</translation>
-  <translation type="gettext">world</translation>
   <translation type="gettext">map_the_green_plateau.wmf</translation>
+  <translation type="gettext">maps</translation>
+  <translation type="gettext">mp_scenario_island_hopping.wmf</translation>
+  <translation type="gettext">mp_scenario_smugglers.wmf</translation>
+  <translation type="gettext">scenario_atl01.wmf</translation>
+  <translation type="gettext">scenario_bar01.wmf</translation>
   <translation type="gettext">scenario_bar02.wmf</translation>
-  <translation type="gettext">widelands_editor</translation>
+  <translation type="gettext">scenario_dummy.wmf</translation>
+  <translation type="gettext">scenario_emp01.wmf</translation>
+  <translation type="gettext">scenario_emp02.wmf</translation>
+  <translation type="gettext">scenario_emp03.wmf</translation>
+  <translation type="gettext">scenario_emp04.wmf</translation>
+  <translation type="gettext">scenario_fri01.wmf</translation>
+  <translation type="gettext">scenario_fri02.wmf</translation>
+  <translation type="gettext">scenario_tutorial01_basic_control.wmf</translation>
+  <translation type="gettext">scenario_tutorial02_warfare.wmf</translation>
   <translation type="gettext">scenario_tutorial03_seafaring.wmf</translation>
   <translation type="gettext">scenario_tutorial04_economy.wmf</translation>
-  <translation type="gettext">scenario_emp01.wmf</translation>
-  <translation type="gettext">win_conditions</translation>
-  <translation type="gettext">scenario_dummy.wmf</translation>
-  <translation type="gettext">scenario_emp02.wmf</translation>
   <translation type="gettext">texts</translation>
-  <translation type="gettext">scenario_tutorial02_warfare.wmf</translation>
-  <translation type="gettext">widelands_console</translation>
-  <translation type="gettext">scenario_tutorial01_basic_control.wmf</translation>
   <translation type="gettext">tribes</translation>
-  <translation type="gettext">mp_scenario_smugglers.wmf</translation>
-  <translation type="gettext">scenario_fri02.wmf</translation>
-  <url type="bugtracker">https://bugs.launchpad.net/widelands</url>
-  <url type="donation">https://wl.widelands.org/wiki/The%20Widelands%20Project/</url>
-  <url type="help">https://wl.widelands.org/wiki/Game%20Manual/</url>
-  <url type="translate">https://wl.widelands.org/wiki/TranslatingWidelands/</url>
+  <translation type="gettext">tribes_encyclopedia</translation>
+  <translation type="gettext">widelands</translation>
+  <translation type="gettext">widelands_console</translation>
+  <translation type="gettext">widelands_editor</translation>
+  <translation type="gettext">win_conditions</translation>
+  <translation type="gettext">world</translation>
+  <url type="bugtracker">https://github.com/widelands/widelands/issues</url>
+  <url type="donation">https://www.widelands.org/wiki/The%20Widelands%20Project/</url>
+  <url type="faq">https://www.widelands.org/wiki/Technical%20FAQ/</url>
+  <url type="help">https://www.widelands.org/wiki/Game%20Manual/</url>
+  <url type="homepage">https://www.widelands.org/</url>
+  <url type="translate">https://www.widelands.org/wiki/TranslatingWidelands/</url>
   <developer_name>The Widelands Development Team</developer_name>
   <content_rating type="oars-1.0">
     <content_attribute id="violence-cartoon">moderate</content_attribute>
