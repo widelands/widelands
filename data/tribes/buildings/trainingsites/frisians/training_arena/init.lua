@@ -24,21 +24,32 @@ tribes:new_trainingsite_type {
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {114, 124},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {83, 90},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {114, 124},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {83, 90},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {114, 98},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {83, 71}
+      }
    },
 
    aihints = {

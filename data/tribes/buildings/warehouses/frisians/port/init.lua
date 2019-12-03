@@ -27,16 +27,23 @@ tribes:new_warehouse_type {
       reed = 2
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {95, 178},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {64, 117},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       build = {
-         pictures = path.list_files (dirname .. "build_?.png"),
-         hotspot = {95, 178},
-      },
+         directory = dirname,
+         basename = "build",
+         hotspot = {64, 117}
+      }
    },
 
    aihints = {
