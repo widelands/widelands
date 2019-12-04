@@ -4295,6 +4295,19 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	const Map& map = game().map();
 
+	// First we check if we must release an experienced worker
+	for (auto worker : site.bo->positions) {
+		const Worker* cw = site.site->working_positions()[0].worker;
+			if (cw) {
+				DescriptionIndex current_worker = cw->descr().worker_index();
+				log("%s , %d, %d, %d\n", site.bo->name, worker, cw, current_worker);
+				if (current_worker != worker && calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
+					game().send_player_evict_worker(*site.site->working_positions()[0].worker);
+					return true;
+				}
+			}
+	}
+
 	// The code here is bit complicated
 	// a) Either this site is pending for upgrade, if ready, order the upgrade
 	// b) other site of type is pending for upgrade

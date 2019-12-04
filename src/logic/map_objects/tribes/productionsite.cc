@@ -990,9 +990,7 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		break;
 	case ProgramResult::kSkipped:
 		failed_skipped_programs_[program_name] = game.get_gametime();
-		//Hessenfarmer: This is screwing up the values for sites with multiple programs so let's see
-		//if something is going wrong we need to find a different solution until then skip it
-		//update_crude_statistics(current_duration, false);
+		update_crude_statistics(current_duration, false);
 		break;
 	case ProgramResult::kNone:
 		failed_skipped_programs_.erase(program_name);
@@ -1089,14 +1087,14 @@ void ProductionSite::set_default_anim(std::string anim) {
 void ProductionSite::update_crude_statistics(uint32_t duration, const bool produced) {
 	static const uint32_t duration_cap = 180 * 1000;  // This is highest allowed program duration
 	// just for case something went very wrong...
-	static const uint32_t entire_duration = 8 * 60 * 1000;
+	static const uint32_t entire_duration = 10 * 60 * 1000;
 	if (duration > duration_cap) {
 		duration = duration_cap;
 	}
 	const uint32_t past_duration = entire_duration - duration;
 	crude_percent_ =
-	   (crude_percent_ * past_duration + produced * duration * 10000) / entire_duration;
-	assert(crude_percent_ <= 10000);  // be sure we do not go above 100 %
+	   (crude_percent_ * past_duration + produced * duration * 1000) / entire_duration;
+	assert(crude_percent_ <= 1000);  // be sure we do not go above 100 %
 }
 
 }  // namespace Widelands
