@@ -237,7 +237,6 @@ tribes:new_tribe {
       "barbarians_warmill",
       "barbarians_ax_workshop",
       "barbarians_shipyard",
-      "barbarians_ferry_yard",
       "barbarians_barracks",
 
       -- Big
@@ -268,6 +267,8 @@ tribes:new_tribe {
       "barbarians_tower",
       "barbarians_fortress",
       "barbarians_citadel",
+
+      "barbarians_ferry_yard",
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",

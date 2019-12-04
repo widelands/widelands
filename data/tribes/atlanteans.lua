@@ -284,7 +284,6 @@ tribes:new_tribe {
       "atlanteans_weaponsmithy",
       "atlanteans_armorsmithy",
       "atlanteans_shipyard",
-      "atlanteans_ferry_yard",
       "atlanteans_barracks",
 
       -- Big
@@ -311,6 +310,8 @@ tribes:new_tribe {
       "atlanteans_tower",
       "atlanteans_tower_high",
       "atlanteans_castle",
+
+      "atlanteans_ferry_yard",
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",

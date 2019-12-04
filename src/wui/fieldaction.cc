@@ -392,7 +392,7 @@ void FieldActionWindow::add_buttons_auto() {
 
 			if (can_act && dynamic_cast<const Widelands::Waterway*>(imm))
 				add_button(buildbox, "destroy_waterway", pic_remwaterway,
-				           &FieldActionWindow::act_removewaterway, _("Destroy a Waterway"));
+				           &FieldActionWindow::act_removewaterway, _("Destroy a waterway"));
 		}
 	} else if (player_ && 1 < player_->vision(Widelands::Map::get_index(
 	                             node_, ibase().egbase().map().get_width())))

@@ -228,7 +228,6 @@ tribes:new_tribe {
       "empire_toolsmithy",
       "empire_armorsmithy",
       "empire_shipyard",
-      "empire_ferry_yard",
       "empire_barracks",
 
       -- Big
@@ -263,6 +262,8 @@ tribes:new_tribe {
       "empire_tower",
       "empire_fortress",
       "empire_castle",
+
+      "empire_ferry_yard",
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",

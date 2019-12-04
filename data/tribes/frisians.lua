@@ -297,7 +297,6 @@ tribes:new_tribe {
       "frisians_barracks",
       "frisians_weaving_mill",
       "frisians_shipyard",
-      "frisians_ferry_yard",
 
       -- Big
       "frisians_reindeer_farm",
@@ -324,6 +323,8 @@ tribes:new_tribe {
       "frisians_outpost",
       "frisians_tower",
       "frisians_fortress",
+
+      "frisians_ferry_yard",
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
