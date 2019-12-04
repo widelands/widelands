@@ -214,15 +214,15 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	assert(!loader_ui_);
 	loader_ui_ = new UI::ProgressWindow();
 
-	loader_ui_->step(_("Preloading map"));
+	loader_ui_->step(_("Preloading map…"));
 	maploader->preload_map(true);
 	std::string const background = map().get_background();
 	if (!background.empty()) {
 		loader_ui_->set_background(background);
 	}
-	loader_ui_->step(_("Loading world"));
+	loader_ui_->step(_("Loading world…"));
 	world();
-	loader_ui_->step(_("Loading tribes"));
+	loader_ui_->step(_("Loading tribes…"));
 	tribes();
 
 	// If the scenario has custrom tribe entites, load them.
@@ -232,7 +232,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	}
 
 	// We have to create the players here.
-	loader_ui_->step(_("Creating players"));
+	loader_ui_->step(_("Creating players…"));
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
 		// If tribe name is empty, pick a random tribe
@@ -277,23 +277,23 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 void Game::init_newgame(const GameSettings& settings) {
 	assert(loader_ui_);
 
-	loader_ui_->step(_("Preloading map"));
+	loader_ui_->step(_("Preloading map…"));
 
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(settings.mapfilename));
 	assert(maploader != nullptr);
 	maploader->preload_map(settings.scenario);
 
-	loader_ui_->step(_("Loading world"));
+	loader_ui_->step(_("Loading world…"));
 	world();
 
-	loader_ui_->step(_("Loading tribes"));
+	loader_ui_->step(_("Loading tribes…"));
 	tribes();
 
 	std::string const background = map().get_background();
 	if (!background.empty()) {
 		loader_ui_->set_background(background);
 	}
-	loader_ui_->step(_("Creating players"));
+	loader_ui_->step(_("Creating players…"));
 
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;
@@ -365,7 +365,7 @@ void Game::init_newgame(const GameSettings& settings) {
 void Game::init_savegame(const GameSettings& settings) {
 	assert(loader_ui_);
 
-	loader_ui_->step(_("Preloading map"));
+	loader_ui_->step(_("Preloading map…"));
 
 	try {
 		GameLoader gl(settings.mapfilename, *this);
@@ -401,7 +401,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 	GameTips tips(*loader_ui_, tipstext);
 	int8_t player_nr;
 
-	loader_ui_->step(_("Preloading map"));
+	loader_ui_->step(_("Preloading map…"));
 
 	{
 		GameLoader gl(filename, *this);
@@ -483,7 +483,7 @@ bool Game::run(StartGameType const start_game_type,
 	if (start_game_type != Loaded) {
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == NewNonScenario) {
-			loader_ui_->step(_("Creating player infrastructure"));
+			loader_ui_->step(_("Creating player infrastructure…"));
 			iterate_players_existing(p, nr_players, *this, plr) {
 				plr->create_default_infrastructure();
 			}
