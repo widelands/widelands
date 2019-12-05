@@ -705,7 +705,9 @@ void DefaultAI::late_initialization() {
 			}
 
 			for (const auto& temp_position : prod.working_positions()) {
-				bo.positions.push_back(temp_position.first);
+				for (uint8_t i = 0; i < temp_position.second; i++) {
+					bo.positions.push_back(temp_position.first);
+				}
 			}
 
 			// If this is a producer, does it act also as supporter?
@@ -4296,16 +4298,23 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	const Map& map = game().map();
 
 	// First we check if we must release an experienced worker
-	for (auto worker : site.bo->positions) {
-		const Worker* cw = site.site->working_positions()[0].worker;
-			if (cw) {
-				DescriptionIndex current_worker = cw->descr().worker_index();
-				log("%s , %d, %d, %d\n", site.bo->name, worker, cw, current_worker);
-				if (current_worker != worker && calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
-					game().send_player_evict_worker(*site.site->working_positions()[0].worker);
-					return true;
-				}
+	// iterate over all working positions of the actual productionsite
+	for (uint8_t i = 0; i <  site.site->descr().nr_working_positions(); i++) {
+		// get the pointer to the worker assigned to the actual position
+		const Worker* cw = site.site->working_positions()[i].worker;
+		if (cw) {  // a worker is assigned to the position
+			// get the descritpion index of the worker assigned on this position
+			DescriptionIndex current_worker = cw->descr().worker_index();
+			// if description indexes of assigned worker and normal worker differ
+			// (this means an experienced worker is assigned to the position)
+			// and we have none of the experienced workers on stock
+			if (current_worker != site.bo->positions.at(i) &&
+				calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
+				// kick out the worker
+				game().send_player_evict_worker(*site.site->working_positions()[i].worker);
+				return true;
 			}
+		}
 	}
 
 	// The code here is bit complicated
@@ -4812,6 +4821,19 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 		set_inputs_to_max(site);
 	} else {
 		set_inputs_to_zero(site);
+	}
+
+	// First we check if we must release an experienced worker
+	for (uint8_t i = 0; i <  site.site->descr().nr_working_positions(); i++) {
+		const Worker* cw = site.site->working_positions()[i].worker;
+		if (cw) {
+			DescriptionIndex current_worker = cw->descr().worker_index();
+			if (current_worker != site.bo->positions.at(i) &&
+				calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
+				game().send_player_evict_worker(*site.site->working_positions()[i].worker);
+				return true;
+			}
+		}
 	}
 
 	// Single _critical is a critical mine if it is the only one of its type, so it needs special
