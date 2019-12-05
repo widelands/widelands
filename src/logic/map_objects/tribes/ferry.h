@@ -87,6 +87,8 @@ private:
 	void unemployed_update(Game&, State&);
 	void row_update(Game&, State&);
 
+	uint32_t unemployed_since_;
+
 protected:
 	struct Loader : public Carrier::Loader {
 	public:
