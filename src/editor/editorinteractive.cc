@@ -76,8 +76,9 @@ namespace {
 using Widelands::Building;
 
 // Load all tribes from disk.
-void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* loader_ui) {
-	loader_ui->step(_("Loading tribes"));
+void load_all_tribes(Widelands::EditorGameBase* egbase) {
+	assert(egbase->get_loader_ui());
+	egbase->get_loader_ui()->step(_("Loading tribes"));
 	egbase->tribes();
 }
 
@@ -456,17 +457,23 @@ void EditorInteractive::load(const std::string& filename) {
 		   filename.c_str());
 	ml->preload_map(true);
 
-	UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");
-	std::vector<std::string> tipstext;
-	tipstext.push_back("editor");
+	// We already have a loader window if WL was started with --editor=mapname
+	UI::ProgressWindow* loader_ui = egbase().get_loader_ui();
+	const bool create_loader_ui = loader_ui == nullptr;
+	if (create_loader_ui) {
+		loader_ui = new UI::ProgressWindow("images/loadscreens/editor.jpg");
+		std::vector<std::string> tipstext;
+		tipstext.push_back("editor");
 
-	GameTips editortips(loader_ui, tipstext);
+		GameTips editortips(*loader_ui, tipstext);
+		egbase().set_loader_ui(loader_ui);
+	}
 
-	load_all_tribes(&egbase(), &loader_ui);
+	load_all_tribes(&egbase());
 
 	// Create the players. TODO(SirVer): this must be managed better
 	// TODO(GunChleoc): Ugly - we only need this for the test suite right now
-	loader_ui.step(_("Creating players"));
+	loader_ui->step(_("Creating players"));
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		if (!map->get_scenario_player_tribe(p).empty()) {
 			egbase().add_player(
@@ -476,8 +483,13 @@ void EditorInteractive::load(const std::string& filename) {
 
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
 	egbase().postload();
-	egbase().load_graphics(loader_ui);
+	egbase().load_graphics();
 	map_changed(MapWas::kReplaced);
+	if (create_loader_ui) {
+		// We created it, so we have to unset and delete it
+		egbase().set_loader_ui(nullptr);
+		delete loader_ui;
+	}
 }
 
 void EditorInteractive::cleanup_for_load() {
@@ -906,6 +918,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 		std::vector<std::string> tipstext;
 		tipstext.push_back("editor");
 		GameTips editortips(loader_ui, tipstext);
+		egbase.set_loader_ui(&loader_ui);
 
 		{
 			if (filename.empty()) {
@@ -918,9 +931,9 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
 				                     pgettext("author_name", "Unknown")));
 
-				load_all_tribes(&egbase, &loader_ui);
+				load_all_tribes(&egbase);
 
-				egbase.load_graphics(loader_ui);
+				egbase.load_graphics();
 				loader_ui.step(std::string());
 			} else {
 				loader_ui.step((boost::format(_("Loading map “%s”…")) % filename).str());
@@ -929,6 +942,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 		}
 
 		egbase.postload();
+		egbase.set_loader_ui(nullptr);
 
 		eia.start();
 

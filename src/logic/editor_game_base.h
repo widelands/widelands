@@ -115,8 +115,12 @@ public:
 	// loading stuff
 	void allocate_player_maps();
 	virtual void postload();
-	void load_graphics(UI::ProgressWindow& loader_ui);
+	void load_graphics();
 	virtual void cleanup_for_load();
+	void set_loader_ui(UI::ProgressWindow*);
+	UI::ProgressWindow* get_loader_ui() {
+		return loader_ui_;
+	}
 
 	void set_road(const FCoords&, uint8_t direction, RoadType roadtype);
 
@@ -198,6 +202,9 @@ public:
 
 	// Returns the mutable tribes. Prefer tribes() whenever possible.
 	Tribes* mutable_tribes();
+
+protected:
+	UI::ProgressWindow* loader_ui_;
 
 private:
 	/// Common function for create_critter and create_ship.
