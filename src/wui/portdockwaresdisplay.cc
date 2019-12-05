@@ -129,6 +129,9 @@ public:
 
 	void think() override {
 		UI::Box::think();
+		if (!portdock_.expedition_bootstrap()) {
+			return die();
+		}
 		update_selection();
 
 		for (uint32_t c = 0; c < capacity_; ++c) {
