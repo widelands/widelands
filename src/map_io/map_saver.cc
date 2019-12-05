@@ -217,7 +217,7 @@ void MapSaver::save() {
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Writing Road Data ... ");
-		set_progress_message(_("Map autosave: Roads (10/23)"));
+		set_progress_message(_("Map autosave: Roads and waterways (10/23)"));
 		{
 			MapRoadPacket p;
 			p.write(fs_, egbase_, *mos_);
@@ -272,7 +272,7 @@ void MapSaver::save() {
 
 		if (mos_->get_nr_roads()) {
 			log("Writing Roaddata Data ... ");
-			set_progress_message(_("Map autosave: Road details (15/23)"));
+			set_progress_message(_("Map autosave: Road and waterway details (15/23)"));
 			{
 				MapRoaddataPacket p;
 				p.write(fs_, egbase_, *mos_);
