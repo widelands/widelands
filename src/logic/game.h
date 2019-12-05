@@ -31,9 +31,6 @@
 #include "random/random.h"
 #include "scripting/logic.h"
 
-namespace UI {
-struct ProgressWindow;
-}
 struct ComputerPlayer;
 class InteractivePlayer;
 struct GameSettings;
@@ -177,13 +174,12 @@ public:
 	void set_write_replay(bool wr);
 	void set_write_syncstream(bool wr);
 	void save_syncstream(bool save);
-	void init_newgame(UI::ProgressWindow* loader_ui, const GameSettings&);
-	void init_savegame(UI::ProgressWindow* loader_ui, const GameSettings&);
+	void init_newgame(const GameSettings&);
+	void init_savegame(const GameSettings&);
 
 	enum StartGameType { NewSPScenario, NewNonScenario, Loaded, NewMPScenario };
 
-	bool run(UI::ProgressWindow* loader_ui,
-	         StartGameType,
+	bool run(StartGameType,
 	         const std::string& script_to_run,
 	         bool replay,
 	         const std::string& prefix_for_replays);
