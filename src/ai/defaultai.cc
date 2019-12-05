@@ -4262,8 +4262,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// Get link to productionsite that should be checked
 	ProductionSiteObserver& site = productionsites.front();
 
-
-
 	// Inform if we are above ai type limit.
 	if (site.bo->total_count() > site.bo->cnt_limit_by_aimode) {
 		log("AI check_productionsites: Too many %s: %d, ai limit: %d\n", site.bo->name,
