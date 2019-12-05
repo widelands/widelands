@@ -29,6 +29,7 @@ tribes:new_worker_type {
       buildferry_2 = {
          "findspace=size:swim radius:4",
          "walk=coords",
+         "animate=work 10000",
          "buildferry",
          "return"
       },
