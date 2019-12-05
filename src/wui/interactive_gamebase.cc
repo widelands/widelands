@@ -214,7 +214,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	 */
 	showhidemenu_.add(get_display_flag(dfShowCensus) ? _("Hide Census") : _("Show Census"),
 	                  ShowHideEntry::kCensus,
-	                  g_gr->images().get("images/wui/menus/toggle_census.png"), false, "", "c");
+	                  g_gr->images().get("images/wui/menus/toggle_census.png"), false, "", "C");
 
 	showhidemenu_.add(get_display_flag(dfShowStatistics) ?
 	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
@@ -222,7 +222,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                     _("Hide Statistics") :
 	                     _("Show Statistics"),
 	                  ShowHideEntry::kStatistics,
-	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "s");
+	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "S");
 }
 
 void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {

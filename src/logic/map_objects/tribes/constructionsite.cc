@@ -383,6 +383,10 @@ void ConstructionSite::enhance(Game&) {
 		work_steps_ += pair.second;
 	}
 
+	auto new_desired_capacity = [](uint32_t old_max, uint32_t old_des, uint32_t new_max) {
+		return old_max - old_des >= new_max ? 0 : new_max - old_max + old_des;
+	};
+
 	BuildingSettings* old_settings = settings_.release();
 	if (upcast(const WarehouseDescr, wd, building_)) {
 		upcast(WarehouseSettings, ws, old_settings);
@@ -406,8 +410,8 @@ void ConstructionSite::enhance(Game&) {
 			for (auto& pair_new : new_settings->ware_queues) {
 				if (pair_new.first == pair_old.first) {
 					pair_new.second.priority = pair_old.second.priority;
-					pair_new.second.desired_fill =
-					   std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					pair_new.second.desired_fill = new_desired_capacity(
+					   pair_old.second.max_fill, pair_old.second.desired_fill, pair_new.second.max_fill);
 					break;
 				}
 			}
@@ -416,13 +420,14 @@ void ConstructionSite::enhance(Game&) {
 			for (auto& pair_new : new_settings->worker_queues) {
 				if (pair_new.first == pair_old.first) {
 					pair_new.second.priority = pair_old.second.priority;
-					pair_new.second.desired_fill =
-					   std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					pair_new.second.desired_fill = new_desired_capacity(
+					   pair_old.second.max_fill, pair_old.second.desired_fill, pair_new.second.max_fill);
 					break;
 				}
 			}
 		}
-		new_settings->desired_capacity = std::min(new_settings->max_capacity, ts->desired_capacity);
+		new_settings->desired_capacity =
+		   new_desired_capacity(ts->max_capacity, ts->desired_capacity, new_settings->max_capacity);
 	} else if (upcast(const ProductionSiteDescr, pd, building_)) {
 		upcast(ProductionsiteSettings, ps, old_settings);
 		assert(ps);
@@ -433,8 +438,8 @@ void ConstructionSite::enhance(Game&) {
 			for (auto& pair_new : new_settings->ware_queues) {
 				if (pair_new.first == pair_old.first) {
 					pair_new.second.priority = pair_old.second.priority;
-					pair_new.second.desired_fill =
-					   std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					pair_new.second.desired_fill = new_desired_capacity(
+					   pair_old.second.max_fill, pair_old.second.desired_fill, pair_new.second.max_fill);
 					break;
 				}
 			}
@@ -443,8 +448,8 @@ void ConstructionSite::enhance(Game&) {
 			for (auto& pair_new : new_settings->worker_queues) {
 				if (pair_new.first == pair_old.first) {
 					pair_new.second.priority = pair_old.second.priority;
-					pair_new.second.desired_fill =
-					   std::min(pair_old.second.desired_fill, pair_new.second.max_fill);
+					pair_new.second.desired_fill = new_desired_capacity(
+					   pair_old.second.max_fill, pair_old.second.desired_fill, pair_new.second.max_fill);
 					break;
 				}
 			}
@@ -455,7 +460,8 @@ void ConstructionSite::enhance(Game&) {
 		MilitarysiteSettings* new_settings = new MilitarysiteSettings(*md);
 		settings_.reset(new_settings);
 		new_settings->desired_capacity = std::max<uint32_t>(
-		   1, std::min<uint32_t>(new_settings->max_capacity, ms->desired_capacity));
+		   1,
+		   new_desired_capacity(ms->max_capacity, ms->desired_capacity, new_settings->max_capacity));
 		new_settings->prefer_heroes = ms->prefer_heroes;
 	} else {
 		// TODO(Nordfriese): Add support for markets when trading is implemented

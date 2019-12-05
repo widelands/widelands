@@ -80,6 +80,7 @@ enum class BuildingAttribute : uint8_t {
 	kLogRefiner,
 	kIronMine,
 	kNeedsSeafaring,
+	kSupportsSeafaring,
 	kSupportingProducer,
 	kNeedsBerry,
 };

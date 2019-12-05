@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-10-09 07:57+0000\n"
+"POT-Creation-Date: 2019-11-30 13:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1865,7 +1865,7 @@ msgid "Weaving Mill"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:56
+#: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:57
 #: ../../data/tribes/buildings/productionsites/empire/weaving_mill/init.lua:60
 msgid "weaving"
 msgstr ""
