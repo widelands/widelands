@@ -38,6 +38,7 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
+#include "ui_basic/progresswindow.h"
 
 namespace Widelands {
 
@@ -65,6 +66,8 @@ int32_t GameLoader::preload_game(GamePreloadPacket& mp) {
 int32_t GameLoader::load_game(bool const multiplayer) {
 	ScopedTimer timer("GameLoader::load() took %ums");
 
+	assert(game_.get_loader_ui());
+	game_.get_loader_ui()->step(_("Loading elemental game data"));
 	log("Game: Reading Preload Data ... ");
 	{
 		GamePreloadPacket p;
@@ -109,6 +112,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	MapObjectLoader* const mol = M.get_map_object_loader();
 
 	log("Game: Reading Player Economies Info ... ");
+	game_.get_loader_ui()->step(_("Loading game: Economies (1/5)"));
 	{
 		GamePlayerEconomiesPacket p;
 		p.read(fs_, game_, mol);
@@ -116,6 +120,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading ai persistent data ... ");
+	game_.get_loader_ui()->step(_("Loading game: AI (2/5)"));
 	{
 		GamePlayerAiPersistentPacket p;
 		p.read(fs_, game_, mol);
@@ -123,6 +128,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Command Queue Data ... ");
+	game_.get_loader_ui()->step(_("Loading game: Command queue (3/5)"));
 	{
 		GameCmdQueuePacket p;
 		p.read(fs_, game_, mol);
@@ -131,6 +137,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 
 	//  This must be after the command queue has been read.
 	log("Game: Parsing messages ... ");
+	game_.get_loader_ui()->step(_("Loading game: Messages (4/5)"));
 	PlayerNumber const nr_players = game_.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game_, player) {
 		const MessageQueue& messages = player->messages();
@@ -147,6 +154,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	}
 	log("took %ums\n", timer.ms_since_last_query());
 
+	game_.get_loader_ui()->step(_("Loading game: Finishing (5/5)"));
 	// For compatibility hacks only
 	mol->load_finish_game(game_);
 
