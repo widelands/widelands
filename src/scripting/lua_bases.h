@@ -70,6 +70,7 @@ public:
 	int get_terrain_description(lua_State* L);
 	int save_campaign_data(lua_State* L);
 	int read_campaign_data(lua_State* L);
+	int set_loading_message(lua_State*);
 
 	/*
 	 * C methods
