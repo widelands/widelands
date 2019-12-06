@@ -11,6 +11,7 @@ init:
 
 install:
   # Installing various utilities
+  - choco install chocolatey-core.extension
   - choco install -y InnoSetup
   - cmd: "set PATH=%MINGWPATH%;C:\\msys64\\usr\\bin;C:\\Program Files (x86)\\Inno Setup 5;%PATH%"
   - cmd: "set CC=%MINGWPATH%\\gcc.exe"
@@ -28,6 +29,7 @@ shallow_clone: true
 branches:
   only:
     - master
+    - appveyor-test
 
 build_script:
   # copy modified libintl.h to solve an issue with boost
