@@ -895,7 +895,9 @@ void Ship::reorder_destinations(Game& game) {
 	assert(dq.size() == nr_dests);
 
 	std::vector<std::pair<OPtr<PortDock>, uint32_t>> old_destinations = destinations_;
+#ifndef NDEBUG
 	const size_t nr_all_old_dests = old_destinations.size();
+#endif
 	destinations_.clear();
 	size_t index = 0;
 	for (const auto& pair : dq) {

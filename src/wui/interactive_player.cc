@@ -260,25 +260,26 @@ void InteractivePlayer::rebuild_statistics_menu() {
 		/** TRANSLATORS: An entry in the game's statistics menu */
 		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring,
 		                    g_gr->images().get("images/wui/menus/statistics_seafaring.png"), false,
-		                    "", "e");
+		                    "", "E");
 	}
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock,
-	                    g_gr->images().get("images/wui/menus/statistics_stock.png"), false, "", "i");
+	                    g_gr->images().get("images/wui/menus/statistics_stock.png"), false, "", "I");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Buildings"), StatisticsMenuEntry::kBuildings,
 	                    g_gr->images().get("images/wui/menus/statistics_buildings.png"), false, "",
-	                    "b");
+	                    "B");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Wares"), StatisticsMenuEntry::kWare,
-	                    g_gr->images().get("images/wui/menus/statistics_wares.png"));
+	                    g_gr->images().get("images/wui/menus/statistics_wares.png"), false, "", "P");
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral,
-	                    g_gr->images().get("images/wui/menus/statistics_general.png"));
+	                    g_gr->images().get("images/wui/menus/statistics_general.png"), false, "",
+	                    "G");
 }
 
 void InteractivePlayer::statistics_menu_selected(StatisticsMenuEntry entry) {
@@ -317,7 +318,7 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	      _("Show Workarea Overlaps"),
 	   ShowHideEntry::kWorkareaOverlap,
 	   g_gr->images().get("images/wui/menus/show_workarea_overlap.png"), false,
-	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"), "w");
+	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"), "W");
 }
 
 void InteractivePlayer::think() {
@@ -520,6 +521,10 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			toggle_buildhelp();
 			return true;
 
+		case SDLK_g:
+			menu_windows_.stats_general.toggle();
+			return true;
+
 		case SDLK_i:
 			menu_windows_.stats_stock.toggle();
 			return true;
@@ -530,6 +535,10 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_o:
 			objectives_.toggle();
+			return true;
+
+		case SDLK_p:
+			menu_windows_.stats_wares.toggle();
 			return true;
 
 		case SDLK_F1:

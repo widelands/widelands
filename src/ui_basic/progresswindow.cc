@@ -103,10 +103,8 @@ void ProgressWindow::step(const std::string& description) {
 	UI::center_vertically(rendered_text->height(), &label_center_);
 	rendered_text->draw(rt, label_center_, UI::Align::kCenter);
 
-#ifdef _WIN32
-	// Pump events to prevent "not responding" on windows
+	// Pump events to prevent "not responding" on windows & "beach ball" on macOS
 	SDL_PumpEvents();
-#endif
 	update(true);
 }
 

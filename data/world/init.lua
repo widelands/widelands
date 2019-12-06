@@ -12,6 +12,8 @@
 
 world = wl.World()
 
+if wl.Game then egbase = wl.Game() else egbase = wl.Editor() end
+
 set_textdomain("world")
 
 include "scripting/mapobjects.lua"
@@ -19,10 +21,12 @@ include "scripting/mapobjects.lua"
 print("┏━ Running Lua for world:")
 print_loading_message("┗━ took", function()
    print_loading_message("┃    Resources", function()
+      egbase:set_loading_message(_("Loading world: Resources (1/4)"))
       include "world/resources/init.lua"
    end)
 
    print_loading_message("┃    Terrains", function()
+      egbase:set_loading_message(_("Loading world: Terrains (2/4)"))
 
 -- RST
 -- .. function:: new_editor_terrain_category{table}
@@ -59,6 +63,7 @@ print_loading_message("┗━ took", function()
    end)
 
    print_loading_message("┃    Immovables", function()
+      egbase:set_loading_message(_("Loading world: Immovables (3/4)"))
 -- RST
 -- .. function:: new_editor_immovable_category{table}
 --
@@ -265,6 +270,7 @@ print_loading_message("┗━ took", function()
    end)
 
    print_loading_message("┃    Critters", function()
+      egbase:set_loading_message(_("Loading world: Animals (4/4)"))
 
 -- RST
 -- .. function:: new_editor_critter_category{table}

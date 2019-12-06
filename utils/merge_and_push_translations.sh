@@ -93,11 +93,11 @@ python utils/fix_formatting.py
 
 # Stage changes
 # - Translations
-git add po/*/*.po po/*/*.pot data/i18n/locales/*.json debian/translations/*.json || true
+git add po/*/*.po po/*/*.pot data/i18n/locales/*.json xdg/translations/*.json || true
 # - Authors
 git add data/txts/*.lua || true
 # - Appdata
-git add debian/widelands.appdata.xml debian/org.widelands.widelands.desktop || true
+git add xdg/org.widelands.Widelands.appdata.xml xdg/org.widelands.Widelands.desktop || true
 # - Statistics
 git add data/i18n/translation_stats.conf || true
 
