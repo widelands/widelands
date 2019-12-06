@@ -39,7 +39,6 @@ GameChatMenu::GameChatMenu(UI::Panel* parent,
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}
-	set_can_focus(true);
 
 	chat_.sent.connect(boost::bind(&GameChatMenu::acknowledge, this));
 	chat_.aborted.connect(boost::bind(&GameChatMenu::acknowledge, this));
