@@ -309,7 +309,8 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 		log("Reading Roaddata Data ... ");
 		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Initializing roads and waterways (15/%u)")) % nr_steps).str());
+		   (boost::format(_("Loading map: Initializing roads and waterways (15/%u)")) % nr_steps)
+		      .str());
 		{
 			MapRoaddataPacket p;
 			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);

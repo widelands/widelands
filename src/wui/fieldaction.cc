@@ -567,11 +567,12 @@ void FieldActionWindow::add_buttons_road(bool flag) {
 	add_button(&buildbox, "cancel_road", pic_abort, &FieldActionWindow::act_abort_buildroad,
 	           _("Cancel road"));
 	const Widelands::Map& map = ibase().egbase().map();
-	if (map.get_waterway_max_length() >= 2 && Widelands::CheckStepFerry(ibase().egbase()).reachable_dest(
-			map, map.get_fcoords(ibase().get_build_road_start()))) {
+	if (map.get_waterway_max_length() >= 2 &&
+	    Widelands::CheckStepFerry(ibase().egbase())
+	       .reachable_dest(map, map.get_fcoords(ibase().get_build_road_start()))) {
 		add_button(&buildbox, "cancel_road_build_waterway", pic_buildwaterway,
-				&FieldActionWindow::act_abort_buildroad_and_start_buildwaterway,
-				_("Cancel road and start building waterway"));
+		           &FieldActionWindow::act_abort_buildroad_and_start_buildwaterway,
+		           _("Cancel road and start building waterway"));
 	}
 
 	// Add the box as tab
@@ -589,8 +590,8 @@ void FieldActionWindow::add_buttons_waterway(bool flag) {
 	add_button(&buildbox, "cancel_waterway", pic_abort, &FieldActionWindow::act_abort_buildwaterway,
 	           _("Cancel waterway"));
 	add_button(&buildbox, "cancel_waterway_build_road", pic_buildroad,
-			&FieldActionWindow::act_abort_buildwaterway_and_start_buildroad,
-			_("Cancel waterway and start building road"));
+	           &FieldActionWindow::act_abort_buildwaterway_and_start_buildroad,
+	           _("Cancel waterway and start building road"));
 
 	// Add the box as tab
 	add_tab("waterways", pic_tab_buildwaterway, &buildbox, _("Build waterways"));

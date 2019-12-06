@@ -42,7 +42,8 @@ uint32_t FerryDescr::movecaps() const {
 	return MOVECAPS_SWIM | MOVECAPS_WALK;
 }
 
-Ferry::Ferry(const FerryDescr& ferry_descr) : Carrier(ferry_descr), destination_(nullptr), unemployed_since_(0) {
+Ferry::Ferry(const FerryDescr& ferry_descr)
+   : Carrier(ferry_descr), destination_(nullptr), unemployed_since_(0) {
 }
 
 bool Ferry::init(EditorGameBase& egbase) {
@@ -59,7 +60,7 @@ void Ferry::start_task_unemployed(Game& game) {
 	unemployed_since_ = game.get_gametime();
 }
 
-constexpr uint32_t kUnemployedLifetime = 1000 * 60 * 10; // 10 minutes
+constexpr uint32_t kUnemployedLifetime = 1000 * 60 * 10;  // 10 minutes
 
 void Ferry::unemployed_update(Game& game, State&) {
 	if (get_signal().size()) {
