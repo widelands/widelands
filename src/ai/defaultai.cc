@@ -705,7 +705,9 @@ void DefaultAI::late_initialization() {
 			}
 
 			for (const auto& temp_position : prod.working_positions()) {
-				bo.positions.push_back(temp_position.first);
+				for (uint8_t i = 0; i < temp_position.second; i++) {
+					bo.positions.push_back(temp_position.first);
+				}
 			}
 
 			// If this is a producer, does it act also as supporter?
@@ -4311,6 +4313,26 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	const Map& map = game().map();
 
+	// First we check if we must release an experienced worker
+	// iterate over all working positions of the actual productionsite
+	for (uint8_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
+		// get the pointer to the worker assigned to the actual position
+		const Worker* cw = site.site->working_positions()[i].worker;
+		if (cw) {  // a worker is assigned to the position
+			// get the descritpion index of the worker assigned on this position
+			DescriptionIndex current_worker = cw->descr().worker_index();
+			// if description indexes of assigned worker and normal worker differ
+			// (this means an experienced worker is assigned to the position)
+			// and we have none of the experienced workers on stock
+			if (current_worker != site.bo->positions.at(i) &&
+			    calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
+				// kick out the worker
+				game().send_player_evict_worker(*site.site->working_positions()[i].worker);
+				return true;
+			}
+		}
+	}
+
 	// The code here is bit complicated
 	// a) Either this site is pending for upgrade, if ready, order the upgrade
 	// b) other site of type is pending for upgrade
@@ -4387,7 +4409,11 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	// No upgrade without proper workers
 	if (considering_upgrade && !site.site->has_workers(enhancement, game())) {
-		considering_upgrade = false;
+		const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
+		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+		if (get_stocklevel(en_bo, gametime, WareWorker::kWorker) < 1) {
+			considering_upgrade = false;
+		}
 	}
 
 	if (considering_upgrade) {
@@ -4414,7 +4440,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 				}
 			}
 
-			if (en_bo.total_count() > 1) {
+			if (en_bo.total_count() > 1 &&
+			    (site.bo->cnt_built > 2 || site.bo->is(BuildingAttribute::kUpgradeSubstitutes))) {
 				if (en_bo.current_stats > 75) {
 					doing_upgrade = true;
 				}
@@ -4812,6 +4839,19 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 		set_inputs_to_max(site);
 	} else {
 		set_inputs_to_zero(site);
+	}
+
+	// First we check if we must release an experienced worker
+	for (uint8_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
+		const Worker* cw = site.site->working_positions()[i].worker;
+		if (cw) {
+			DescriptionIndex current_worker = cw->descr().worker_index();
+			if (current_worker != site.bo->positions.at(i) &&
+			    calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
+				game().send_player_evict_worker(*site.site->working_positions()[i].worker);
+				return true;
+			}
+		}
 	}
 
 	// Single _critical is a critical mine if it is the only one of its type, so it needs special
@@ -5904,7 +5944,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					inputs[103] = 2;
 					inputs[104] = -2;
 				}
-				inputs[105] = -2;
+				inputs[105] = -3;
 				inputs[106] = -2;
 			}
 			inputs[107] =
@@ -5930,6 +5970,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					inputs[115] = 4;
 				}
 			}
+			inputs[116] = -(bo.unoccupied_count * bo.unoccupied_count);
+			inputs[117] = -(2 * bo.unoccupied_count);
 
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
@@ -6947,7 +6989,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 				btype = "?";
 			}
 
-			if (false)
+			if (true)
 				log(" %1s %-30s %5d(%3d%%)  %6d %6d %6d %8s %5d %5d %5d %5d\n", btype.c_str(), bo.name,
 				    bo.total_count() - bo.cnt_under_construction - bo.unoccupied_count -
 				       bo.unconnected_count,
