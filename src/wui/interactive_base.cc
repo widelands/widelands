@@ -1125,44 +1125,8 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		return true;
 	}
 
-	// If one of the arrow keys is pressed, scroll this distance
-	constexpr uint32_t kScrollDistance = 10;
-
 	if (down) {
 		switch (code.sym) {
-		// Scroll the map
-		case SDLK_KP_8:
-			if (SDL_GetModState() & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_UP:
-			map_view_.pan_by(Vector2i(0, -kScrollDistance));
-			return true;
-		case SDLK_KP_2:
-			if (SDL_GetModState() & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_DOWN:
-			map_view_.pan_by(Vector2i(0, kScrollDistance));
-			return true;
-		case SDLK_KP_4:
-			if (SDL_GetModState() & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_LEFT:
-			map_view_.pan_by(Vector2i(-kScrollDistance, 0));
-			return true;
-		case SDLK_KP_6:
-			if (SDL_GetModState() & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_RIGHT:
-			map_view_.pan_by(Vector2i(kScrollDistance, 0));
-			return true;
 #ifndef NDEBUG  //  only in debug builds
 		case SDLK_F6:
 			GameChatMenu::create_script_console(
@@ -1173,6 +1137,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			toggle_minimap();
 			return true;
 		default:
+			scroll_map();  // scroll map
 			break;
 		}
 	}
@@ -1211,4 +1176,27 @@ void InteractiveBase::cmd_map_object(const std::vector<std::string>& args) {
 	}
 
 	show_mapobject_debug(*this, *obj);
+}
+
+/**
+ * Scroll the map
+ */
+void InteractiveBase::scroll_map() {
+	// If one of the arrow keys is pressed, scroll this distance
+	const uint32_t scrollval = 10;
+
+	if (keyboard_free() && Panel::allow_user_input()) {
+		if (get_key_state(SDL_SCANCODE_UP) || (get_key_state(SDL_SCANCODE_KP_8))) {
+			map_view_.pan_by(Vector2i(0, -scrollval));
+		}
+		if (get_key_state(SDL_SCANCODE_DOWN) || (get_key_state(SDL_SCANCODE_KP_2))) {
+			map_view_.pan_by(Vector2i(0, scrollval));
+		}
+		if (get_key_state(SDL_SCANCODE_LEFT) || (get_key_state(SDL_SCANCODE_KP_4))) {
+			map_view_.pan_by(Vector2i(-scrollval, 0));
+		}
+		if (get_key_state(SDL_SCANCODE_RIGHT) || (get_key_state(SDL_SCANCODE_KP_6))) {
+			map_view_.pan_by(Vector2i(scrollval, 0));
+		}
+	}
 }

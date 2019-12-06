@@ -288,6 +288,7 @@ private:
 	void roadb_remove_overlay();
 	void cmd_map_object(const std::vector<std::string>& args);
 	void cmd_lua(const std::vector<std::string>& args);
+	void scroll_map();
 
 	// Rebuilds the subclass' showhidemenu_ according to current map settings
 	virtual void rebuild_showhide_menu() = 0;
