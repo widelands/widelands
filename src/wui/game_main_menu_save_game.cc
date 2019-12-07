@@ -118,6 +118,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	center_to_parent();
 	move_to_top();
 
+	set_can_focus(true);
 	filename_editbox_.focus();
 	pause_game(true);
 	set_thinks(false);
@@ -173,6 +174,12 @@ void GameMainMenuSaveGame::ok() {
 void GameMainMenuSaveGame::die() {
 	pause_game(false);
 	UI::UniqueWindow::die();
+}
+
+void GameMainMenuSaveGame::restore() {
+	Window::restore();
+	set_can_focus(true);
+	filename_editbox_.focus();
 }
 
 bool GameMainMenuSaveGame::handle_key(bool down, SDL_Keysym code) {
