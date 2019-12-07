@@ -97,7 +97,7 @@ function stonemason_and_marble_columns()
    local objective = add_campaign_objective(obj_lower_marble_column_demand)
 
    --- Check the headquarters' flag's economy
-   while sf.brn.immovable.economy:ware_target_quantity("marble_column") ~= 4 do
+   while sf.brn.immovable.ware_economy:target_quantity("marble_column") ~= 4 do
       sleep(2434)
    end
    sleep(4000)

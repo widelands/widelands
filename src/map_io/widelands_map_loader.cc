@@ -55,6 +55,8 @@
 #include "map_io/map_scripting_packet.h"
 #include "map_io/map_terrain_packet.h"
 #include "map_io/map_version_packet.h"
+#include "map_io/map_waterway_packet.h"
+#include "map_io/map_waterwaydata_packet.h"
 #include "map_io/map_wincondition_packet.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 #include "map_io/world_legacy_lookup_table.h"
@@ -272,9 +274,16 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 		log("Reading Road Data ... ");
 		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Roads (12/%u)")) % nr_steps).str());
+		   (boost::format(_("Loading map: Roads and waterways (12/%u)")) % nr_steps).str());
 		{
 			MapRoadPacket p;
+			p.read(*fs_, egbase, is_game, *mol_);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
+
+		log("Reading Waterway Data ... ");
+		{
+			MapWaterwayPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
@@ -300,10 +309,18 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 		log("Reading Roaddata Data ... ");
 		egbase.get_loader_ui()->step(
-		   (boost::format(_("Loading map: Initializing roads (15/%u)")) % nr_steps).str());
+		   (boost::format(_("Loading map: Initializing roads and waterways (15/%u)")) % nr_steps)
+		      .str());
 		{
 			MapRoaddataPacket p;
 			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
+
+		log("Reading Waterwaydata Data ... ");
+		{
+			MapWaterwaydataPacket p;
+			p.read(*fs_, egbase, is_game, *mol_);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 

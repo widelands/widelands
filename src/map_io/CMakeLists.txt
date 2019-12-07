@@ -90,6 +90,10 @@ wl_library(map_io
     map_terrain_packet.h
     map_version_packet.cc
     map_version_packet.h
+    map_waterway_packet.cc
+    map_waterway_packet.h
+    map_waterwaydata_packet.cc
+    map_waterwaydata_packet.h
     map_wincondition_packet.cc
     map_wincondition_packet.h
   DEPENDS

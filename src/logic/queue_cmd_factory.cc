@@ -38,6 +38,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdBuildFlag();
 	case QueueCommandTypes::kBuildRoad:
 		return *new CmdBuildRoad();
+	case QueueCommandTypes::kBuildWaterway:
+		return *new CmdBuildWaterway();
 	case QueueCommandTypes::kFlagAction:
 		return *new CmdFlagAction();
 	case QueueCommandTypes::kStartStopBuilding:
