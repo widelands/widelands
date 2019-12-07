@@ -101,16 +101,33 @@ RouteAStar<Est_>::RouteAStar(Router& router, WareWorker type, const Estimator& e
  */
 template <typename Est_>
 void RouteAStar<Est_>::push(RoutingNode& node, int32_t cost, RoutingNode* backlink) {
-	if (node.mpf_cycle != mpf_cycle) {
-		node.mpf_cycle = mpf_cycle;
-		node.mpf_backlink = backlink;
-		node.mpf_realcost = cost;
-		node.mpf_estimate = estimator_(node);
-		open_.push(&node);
-	} else if (node.mpf_cookie.is_active() && cost <= node.mpf_realcost) {
-		node.mpf_backlink = backlink;
-		node.mpf_realcost = cost;
-		open_.decrease_key(&node);
+	switch (type_) {
+	case wwWARE: {
+		if (node.mpf_cycle_ware != mpf_cycle) {
+			node.mpf_cycle_ware = mpf_cycle;
+			node.mpf_backlink_ware = backlink;
+			node.mpf_realcost_ware = cost;
+			node.mpf_estimate_ware = estimator_(node);
+			open_.push(&node);
+		} else if (node.mpf_cookie_ware.is_active() && cost <= node.mpf_realcost_ware) {
+			node.mpf_backlink_ware = backlink;
+			node.mpf_realcost_ware = cost;
+			open_.decrease_key(&node);
+		}
+	} break;
+	case wwWORKER: {
+		if (node.mpf_cycle_worker != mpf_cycle) {
+			node.mpf_cycle_worker = mpf_cycle;
+			node.mpf_backlink_worker = backlink;
+			node.mpf_realcost_worker = cost;
+			node.mpf_estimate_worker = estimator_(node);
+			open_.push(&node);
+		} else if (node.mpf_cookie_worker.is_active() && cost <= node.mpf_realcost_worker) {
+			node.mpf_backlink_worker = backlink;
+			node.mpf_realcost_worker = cost;
+			open_.decrease_key(&node);
+		}
+	} break;
 	}
 }
 
@@ -134,10 +151,14 @@ template <typename Est_> RoutingNode* RouteAStar<Est_>::step() {
 
 		// We have already found the best path
 		// to this neighbour, no need to visit it again.
-		if (neighbour.mpf_cycle == mpf_cycle && !neighbour.cookie().is_active())
+		if ((type_ == wwWARE ? neighbour.mpf_cycle_ware : neighbour.mpf_cycle_worker) == mpf_cycle &&
+		    !neighbour.cookie(type_).is_active()) {
 			continue;
+		}
 
-		int32_t realcost = current->mpf_realcost + temp_neighbour.get_cost();
+		const int32_t realcost =
+		   (type_ == wwWARE ? current->mpf_realcost_ware : current->mpf_realcost_worker) +
+		   temp_neighbour.get_cost();
 		push(neighbour, realcost, current);
 	}
 

@@ -44,8 +44,9 @@ WaresQueue::WaresQueue(PlayerImmovable& init_owner,
 void WaresQueue::cleanup() {
 	assert(index_ != INVALID_INDEX);
 
-	if (filled_ && owner_.get_economy())
-		owner_.get_economy()->remove_wares(index_, filled_);
+	if (filled_ && owner_.get_economy(wwWARE)) {
+		owner_.get_economy(wwWARE)->remove_wares_or_workers(index_, filled_);
+	}
 
 	filled_ = 0;
 	max_size_ = 0;
@@ -74,7 +75,7 @@ void WaresQueue::entered(
 
 void WaresQueue::remove_from_economy(Economy& e) {
 	if (index_ != INVALID_INDEX) {
-		e.remove_wares(index_, filled_);
+		e.remove_wares_or_workers(index_, filled_);
 		if (request_)
 			request_->set_economy(nullptr);
 	}
@@ -82,7 +83,7 @@ void WaresQueue::remove_from_economy(Economy& e) {
 
 void WaresQueue::add_to_economy(Economy& e) {
 	if (index_ != INVALID_INDEX) {
-		e.add_wares(index_, filled_);
+		e.add_wares_or_workers(index_, filled_);
 		if (request_)
 			request_->set_economy(&e);
 	}
@@ -93,11 +94,11 @@ void WaresQueue::set_filled(Quantity filled) {
 	if (filled > max_size_)
 		filled = max_size_;
 
-	if (owner_.get_economy()) {
+	if (owner_.get_economy(wwWARE)) {
 		if (filled > filled_)
-			owner_.get_economy()->add_wares(index_, filled - filled_);
+			owner_.get_economy(wwWARE)->add_wares_or_workers(index_, filled - filled_);
 		else if (filled < filled_)
-			owner_.get_economy()->remove_wares(index_, filled_ - filled);
+			owner_.get_economy(wwWARE)->remove_wares_or_workers(index_, filled_ - filled);
 	}
 
 	filled_ = filled;

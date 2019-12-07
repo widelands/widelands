@@ -33,7 +33,8 @@ struct MapObjectSaver;
 
 class EconomyDataPacket {
 public:
-	explicit EconomyDataPacket(Economy* e) : eco_(e) {
+	explicit EconomyDataPacket(Economy* e, const MapObjectLoader* for_savegame_compatibility_only)
+	   : eco_(e), mol_(for_savegame_compatibility_only) {
 		assert(eco_);
 	}
 
@@ -42,6 +43,8 @@ public:
 
 private:
 	Economy* eco_;
+	// TODO(Nordfriese): Savegame compatibility
+	const MapObjectLoader* mol_;
 };
 }  // namespace Widelands
 
