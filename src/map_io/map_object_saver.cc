@@ -20,11 +20,13 @@
 #include "map_io/map_object_saver.h"
 
 #include "base/wexception.h"
+#include "economy/ferry_fleet.h"
 #include "economy/flag.h"
-#include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "economy/road.h"
+#include "economy/ship_fleet.h"
 #include "economy/ware_instance.h"
+#include "economy/waterway.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/building.h"
@@ -34,13 +36,15 @@ namespace Widelands {
 
 MapObjectSaver::MapObjectSaver()
    : nr_roads_(0),
+     nr_waterways_(0),
      nr_flags_(0),
      nr_buildings_(0),
      nr_bobs_(0),
      nr_wares_(0),
      nr_immovables_(0),
      nr_battles_(0),
-     nr_fleets_(0),
+     nr_ship_fleets_(0),
+     nr_ferry_fleets_(0),
      nr_portdocks_(0),
      lastserial_(0) {
 }
@@ -97,6 +101,8 @@ Serial MapObjectSaver::register_object(const MapObject& obj) {
 		++nr_flags_;
 	else if (dynamic_cast<Road const*>(&obj))
 		++nr_roads_;
+	else if (dynamic_cast<Waterway const*>(&obj))
+		++nr_waterways_;
 	else if (dynamic_cast<Building const*>(&obj))
 		++nr_buildings_;
 	else if (dynamic_cast<Immovable const*>(&obj))
@@ -107,8 +113,10 @@ Serial MapObjectSaver::register_object(const MapObject& obj) {
 		++nr_bobs_;
 	else if (dynamic_cast<Battle const*>(&obj))
 		++nr_battles_;
-	else if (dynamic_cast<Fleet const*>(&obj))
-		++nr_fleets_;
+	else if (dynamic_cast<ShipFleet const*>(&obj))
+		++nr_ship_fleets_;
+	else if (dynamic_cast<FerryFleet const*>(&obj))
+		++nr_ferry_fleets_;
 	else if (dynamic_cast<PortDock const*>(&obj))
 		++nr_portdocks_;
 	else

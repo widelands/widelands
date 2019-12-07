@@ -58,6 +58,8 @@
 #include "map_io/map_scripting_packet.h"
 #include "map_io/map_terrain_packet.h"
 #include "map_io/map_version_packet.h"
+#include "map_io/map_waterway_packet.h"
+#include "map_io/map_waterwaydata_packet.h"
 #include "map_io/map_wincondition_packet.h"
 #include "ui_basic/progresswindow.h"
 
@@ -215,9 +217,16 @@ void MapSaver::save() {
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Writing Road Data ... ");
-		set_progress_message(_("Map autosave: Roads (10/23)"));
+		set_progress_message(_("Map autosave: Roads and waterways (10/23)"));
 		{
 			MapRoadPacket p;
+			p.write(fs_, egbase_, *mos_);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
+
+		log("Writing Waterway Data ... ");
+		{
+			MapWaterwayPacket p;
 			p.write(fs_, egbase_, *mos_);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
@@ -263,9 +272,18 @@ void MapSaver::save() {
 
 		if (mos_->get_nr_roads()) {
 			log("Writing Roaddata Data ... ");
-			set_progress_message(_("Map autosave: Road details (15/23)"));
+			set_progress_message(_("Map autosave: Road and waterway details (15/23)"));
 			{
 				MapRoaddataPacket p;
+				p.write(fs_, egbase_, *mos_);
+			}
+			log("took %ums\n ", timer.ms_since_last_query());
+		}
+
+		if (mos_->get_nr_waterways()) {
+			log("Writing Waterwaydata Data ... ");
+			{
+				MapWaterwaydataPacket p;
 				p.write(fs_, egbase_, *mos_);
 			}
 			log("took %ums\n ", timer.ms_since_last_query());

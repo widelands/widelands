@@ -21,7 +21,7 @@ tribes:new_tribe {
       }
    },
 
-   -- Image file paths for this tribe's road textures
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
          image_dirname .. "roadt_busy.png",
@@ -29,6 +29,9 @@ tribes:new_tribe {
       normal = {
          image_dirname .. "roadt_normal_00.png",
          image_dirname .. "roadt_normal_01.png",
+      },
+      waterway = {
+         "tribes/images/barbarians/waterway_0.png",
       },
    },
 
@@ -125,6 +128,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "barbarians_carrier",
+         "barbarians_ferry",
          "barbarians_ox",
          "barbarians_cattlebreeder"
       },
@@ -264,6 +268,8 @@ tribes:new_tribe {
       "barbarians_fortress",
       "barbarians_citadel",
 
+      "barbarians_ferry_yard",
+
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
       "dismantlesite",
@@ -313,6 +319,7 @@ tribes:new_tribe {
    geologist = "barbarians_geologist",
    soldier = "barbarians_soldier",
    ship = "barbarians_ship",
+   ferry = "barbarians_ferry",
    port = "barbarians_port",
    ironore = "iron_ore",
    rawlog = "log",

@@ -322,6 +322,11 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	} else {
 		map->delete_tag("seafaring");
 	}
+	if (map->get_waterway_max_length() >= 2) {
+		map->add_tag("ferries");
+	} else {
+		map->delete_tag("ferries");
+	}
 
 	if (map->has_artifacts()) {
 		map->add_tag("artifacts");

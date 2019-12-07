@@ -33,7 +33,9 @@
 namespace Widelands {
 class Building;
 class Request;
+struct RoadBase;
 struct Road;
+struct Waterway;
 class WareInstance;
 
 class FlagDescr : public MapObjectDescr {
@@ -51,9 +53,10 @@ private:
 /**
  * Flag represents a flag as you see it on the map.
  *
- * A flag itself doesn't do much. However, it can have up to 6 roads attached
- * to it. Instead of the WALK_NW road, it can also have a building attached to
- * it. Flags also have a store of up to 8 wares.
+ * A flag itself doesn't do much. However, it can have up to 6 roads/waterways
+ * attached to it. Instead of the WALK_NW road, it can also have a building
+ * attached to it. It cannot have more than one waterway.
+ * Flags also have a store of up to 8 wares.
  *
  * You can also assign an arbitrary number of "jobs" for a flag.
  * A job consists of a request for a worker, and the name of a program that the
@@ -80,7 +83,11 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	/// Create a new flag. Only specify an economy during saveloading.
 	/// Otherwise, a new economy will be created automatically if needed.
-	Flag(EditorGameBase&, Player* owner, const Coords&, Economy* economy = nullptr);
+	Flag(EditorGameBase&,
+	     Player* owner,
+	     const Coords&,
+	     Economy* ware_economy = nullptr,
+	     Economy* worker_economy = nullptr);
 	~Flag() override;
 
 	void load_finish(EditorGameBase&) override;
@@ -100,7 +107,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 		return ware_filled_;
 	}
 
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 
 	Building* get_building() const {
 		return building_;
@@ -108,16 +115,27 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void attach_building(EditorGameBase&, Building&);
 	void detach_building(EditorGameBase&);
 
-	bool has_road() const {
+	bool has_roadbase() const {
 		return roads_[0] || roads_[1] || roads_[2] || roads_[3] || roads_[4] || roads_[5];
 	}
-	Road* get_road(uint8_t const dir) const {
+	bool has_waterway() const {
+		return nr_of_waterways() > 0;
+	}
+	bool has_road() const {
+		return nr_of_roads() > 0;
+	}
+	RoadBase* get_roadbase(uint8_t dir) const {
 		return roads_[dir - 1];
 	}
+	Road* get_road(uint8_t dir) const;
+	Waterway* get_waterway(uint8_t dir) const;
+	uint8_t nr_of_roadbases() const;
 	uint8_t nr_of_roads() const;
-	void attach_road(int32_t dir, Road*);
+	uint8_t nr_of_waterways() const;
+	void attach_road(int32_t dir, RoadBase*);
 	void detach_road(int32_t dir);
 
+	RoadBase* get_roadbase(Flag&);
 	Road* get_road(Flag&);
 
 	bool is_dead_end() const;
@@ -184,7 +202,7 @@ private:
 	int32_t animstart_;
 
 	Building* building_;  ///< attached building (replaces road WALK_NW)
-	Road* roads_[WalkingDir::LAST_DIRECTION];
+	RoadBase* roads_[WalkingDir::LAST_DIRECTION];
 
 	int32_t ware_capacity_;  ///< size of wares_ array
 	int32_t ware_filled_;    ///< number of wares currently on the flag

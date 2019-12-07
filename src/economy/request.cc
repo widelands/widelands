@@ -57,7 +57,7 @@ Request::Request(PlayerImmovable& init_target,
      target_productionsite_(dynamic_cast<ProductionSite*>(&init_target)),
      target_warehouse_(dynamic_cast<Warehouse*>(&init_target)),
      target_constructionsite_(dynamic_cast<ConstructionSite*>(&init_target)),
-     economy_(init_target.get_economy()),
+     economy_(init_target.get_economy(w)),
      index_(index),
      count_(1),
      exact_match_(false),
@@ -179,12 +179,15 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 	//  Target and economy should be set. Same is true for callback stuff.
 
 	assert(type_ == wwWARE || type_ == wwWORKER);
-	if (type_ == wwWARE) {
+	switch (type_) {
+	case wwWARE:
 		assert(game.tribes().ware_exists(index_));
 		fw.c_string(game.tribes().get_ware_descr(index_)->name());
-	} else if (type_ == wwWORKER) {
+		break;
+	case wwWORKER:
 		assert(game.tribes().worker_exists(index_));
 		fw.c_string(game.tribes().get_worker_descr(index_)->name());
+		break;
 	}
 
 	fw.unsigned_32(count_);
@@ -389,20 +392,25 @@ void Request::start_transfer(Game& game, Supply& supp) {
 	ss.unsigned_32(supp.get_position(game)->serial());
 
 	Transfer* t;
-	if (get_type() == wwWORKER) {
+	switch (get_type()) {
+	case wwWORKER: {
 		//  Begin the transfer of a soldier or worker.
 		//  launch_worker() creates or starts the worker
 		Worker& s = supp.launch_worker(game, *this);
 		ss.unsigned_32(s.serial());
 		t = new Transfer(game, *this, s);
-	} else {
-		//  Begin the transfer of an ware. The ware itself is passive.
+		break;
+	}
+	case wwWARE: {
+		//  Begin the transfer of n ware. The ware itself is passive.
 		//  launch_ware() ensures the WareInstance is transported out of the
 		//  warehouse. Once it's on the flag, the flag code will decide what to
 		//  do with it.
 		WareInstance& ware = supp.launch_ware(game, *this);
 		ss.unsigned_32(ware.serial());
 		t = new Transfer(game, *this, ware);
+		break;
+	}
 	}
 
 	transfers_.push_back(t);
