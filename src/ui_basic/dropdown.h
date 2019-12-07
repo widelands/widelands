@@ -213,6 +213,8 @@ private:
 	uint32_t current_selection_;
 	DropdownType type_;
 	bool is_enabled_;
+
+	static void layout_if_alive(int);
 };
 
 /// A dropdown menu that lets the user select a value of the datatype 'Entry'.

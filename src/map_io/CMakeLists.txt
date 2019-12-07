@@ -19,6 +19,7 @@ wl_library(map_io_map_loader
     logic_map_objects
     map_io
     scripting_lua_interface
+    ui_basic
 )
 
 # TODO(sirver): separate map_object_loader/saver into
@@ -115,4 +116,5 @@ wl_library(map_io
     logic_widelands_geometry
     logic_widelands_geometry_io
     scripting_logic
+    ui_basic
 )

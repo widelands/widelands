@@ -11,6 +11,9 @@ init:
 
 install:
   # Installing various utilities
+  # As of 2019-12-06 we have to install 'chocolatey-core.extension' beforehand.
+  # Otherwise installing 'InnoSetup' will fail.
+  - choco install -y chocolatey-core.extension
   - choco install -y InnoSetup
   - cmd: "set PATH=%MINGWPATH%;C:\\msys64\\usr\\bin;C:\\Program Files (x86)\\Inno Setup 5;%PATH%"
   - cmd: "set CC=%MINGWPATH%\\gcc.exe"

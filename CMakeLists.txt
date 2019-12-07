@@ -397,3 +397,7 @@ install(
   CONFIGURATIONS Debug;Release
   COMPONENT CoreLanguageFiles
 )
+
+if (UNIX AND NOT APPLE)
+  add_subdirectory(xdg)
+endif (UNIX AND NOT APPLE)

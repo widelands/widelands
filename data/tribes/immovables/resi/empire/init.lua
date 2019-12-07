@@ -6,7 +6,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "No Resources"),
    helptext_script = dirname .. "../helptexts/none.lua",
-   icon = dirname .. "pics/none.png",
+   icon = dirname .. "pics/none_1.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -14,12 +14,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/none.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "none",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -29,7 +29,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "Water"),
    helptext_script = dirname .. "../helptexts/water.lua",
-   icon = dirname .. "pics/water.png",
+   icon = dirname .. "pics/water_1.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -37,12 +37,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/water.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "water",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -52,7 +52,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "Some Coal"),
    helptext_script = dirname .. "../helptexts/coal_1.lua",
-   icon = dirname .. "pics/coal_1.png",
+   icon = dirname .. "pics/coal_few_1.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -60,12 +60,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/coal_1.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "coal_few",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -75,7 +75,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "Some Gold"),
    helptext_script = dirname .. "../helptexts/gold_1.lua",
-   icon = dirname .. "pics/gold_1.png",
+   icon = dirname .. "pics/gold_few_1.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -83,12 +83,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/gold_1.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "gold_few",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -98,7 +98,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "Some Iron"),
    helptext_script = dirname .. "../helptexts/iron_1.lua",
-   icon = dirname .. "pics/iron_1.png",
+   icon = dirname .. "pics/iron_few_1.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -106,12 +106,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/iron_1.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "iron_few",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -121,7 +121,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "Some Marble"),
    helptext_script = dirname .. "../helptexts/stones_1.lua",
-   icon = dirname .. "pics/stones_1.png",
+   icon = dirname .. "pics/stone_few_1.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -129,12 +129,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/stones_1.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "stone_few",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -144,7 +144,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "A Lot of Coal"),
    helptext_script = dirname .. "../helptexts/coal_2.lua",
-   icon = dirname .. "pics/coal_2.png",
+   icon = dirname .. "pics/coal_much_1.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -152,12 +152,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/coal_2.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "coal_much",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -167,7 +167,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "A Lot of Gold"),
    helptext_script = dirname .. "../helptexts/gold_2.lua",
-   icon = dirname .. "pics/gold_2.png",
+   icon = dirname .. "pics/gold_much_1.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -175,12 +175,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/gold_2.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "gold_much",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -190,7 +190,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "A Lot of Iron"),
    helptext_script = dirname .. "../helptexts/iron_2.lua",
-   icon = dirname .. "pics/iron_2.png",
+   icon = dirname .. "pics/iron_much_1.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -198,12 +198,12 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/iron_2.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "iron_much",
+         hotspot = {9, 19}
+      }
    }
 }
 
@@ -213,7 +213,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "A Lot of Marble"),
    helptext_script = dirname .. "../helptexts/stones_2.lua",
-   icon = dirname .. "pics/stones_2.png",
+   icon = dirname .. "pics/stone_much_1.png",
    attributes = { "resi" },
    programs = {
       program = {
@@ -221,11 +221,11 @@ tribes:new_immovable_type {
          "remove="
       }
    },
-
    animations = {
       idle = {
-         pictures = { dirname .. "pics/stones_2.png" },
-         hotspot = {8, 22},
-      },
+         directory = dirname .. "pics",
+         basename = "stone_much",
+         hotspot = {9, 19}
+      }
    }
 }
