@@ -24,7 +24,7 @@
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
-#include "economy/fleet.h"
+#include "economy/ship_fleet.h"
 #include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "logic/game.h"

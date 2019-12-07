@@ -21,7 +21,7 @@ tribes:new_tribe {
       }
    },
 
-   -- Image file paths for this tribe's road textures
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
          image_dirname .. "roadt_busy.png",
@@ -29,6 +29,9 @@ tribes:new_tribe {
       normal = {
          image_dirname .. "roadt_normal_00.png",
          image_dirname .. "roadt_normal_01.png",
+      },
+      waterway = {
+         "tribes/images/frisians/waterway_0.png",
       },
    },
 
@@ -135,6 +138,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "frisians_carrier",
+         "frisians_ferry",
          "frisians_reindeer",
          "frisians_reindeer_breeder"
       },
@@ -320,6 +324,8 @@ tribes:new_tribe {
       "frisians_tower",
       "frisians_fortress",
 
+      "frisians_ferry_yard",
+
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
       "dismantlesite",
@@ -354,6 +360,7 @@ tribes:new_tribe {
    geologist = "frisians_geologist",
    soldier = "frisians_soldier",
    ship = "frisians_ship",
+   ferry = "frisians_ferry",
    port = "frisians_port",
    ironore = "iron_ore",
    rawlog = "log",
