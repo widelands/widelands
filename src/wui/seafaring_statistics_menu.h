@@ -106,6 +106,8 @@ private:
 	void watch_ship();
 	/// Open the currently selected ship's window. If CTRL is pressed, center the mapview on it.
 	void open_ship_window();
+	/// Regain focus when restoring minimized window.
+	void restore() override;
 
 	/**
 	 * Updates the status for the ship. If the ship is new and satisfies the 'ship_filter_',
