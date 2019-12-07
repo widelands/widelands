@@ -222,6 +222,7 @@ void MainMenuSaveMap::update_map_options() {
 	map_details_.update(mapdata, false);
 	if (old_name == editbox_->text()) {
 		editbox_->set_text(map_details_.name());
+		edit_box_changed();
 	}
 }
 /**

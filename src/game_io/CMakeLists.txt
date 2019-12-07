@@ -45,6 +45,7 @@ wl_library(game_io
     map_io_map_loader
     scripting_lua_interface
     scripting_lua_table
+    ui_basic
     wui
     wui_mapview_pixelfunctions
     wui_mapview

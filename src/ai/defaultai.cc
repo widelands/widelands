@@ -4299,7 +4299,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	// First we check if we must release an experienced worker
 	// iterate over all working positions of the actual productionsite
-	for (uint8_t i = 0; i <  site.site->descr().nr_working_positions(); i++) {
+	for (uint8_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
 		// get the pointer to the worker assigned to the actual position
 		const Worker* cw = site.site->working_positions()[i].worker;
 		if (cw) {  // a worker is assigned to the position
@@ -4309,7 +4309,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			// (this means an experienced worker is assigned to the position)
 			// and we have none of the experienced workers on stock
 			if (current_worker != site.bo->positions.at(i) &&
-				calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
+			    calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
 				// kick out the worker
 				game().send_player_evict_worker(*site.site->working_positions()[i].worker);
 				return true;
@@ -4395,9 +4395,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	if (considering_upgrade && !site.site->has_workers(enhancement, game())) {
 		const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
 		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
-			if (get_stocklevel(en_bo, gametime, WareWorker::kWorker) < 1) {
-				considering_upgrade = false;
-			}
+		if (get_stocklevel(en_bo, gametime, WareWorker::kWorker) < 1) {
+			considering_upgrade = false;
+		}
 	}
 
 	if (considering_upgrade) {
@@ -4824,12 +4824,12 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	}
 
 	// First we check if we must release an experienced worker
-	for (uint8_t i = 0; i <  site.site->descr().nr_working_positions(); i++) {
+	for (uint8_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
 		const Worker* cw = site.site->working_positions()[i].worker;
 		if (cw) {
 			DescriptionIndex current_worker = cw->descr().worker_index();
 			if (current_worker != site.bo->positions.at(i) &&
-				calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
+			    calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
 				game().send_player_evict_worker(*site.site->working_positions()[i].worker);
 				return true;
 			}

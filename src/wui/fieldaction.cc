@@ -307,7 +307,7 @@ void FieldActionWindow::init() {
 	move_out_of_the_way();
 
 	// Now force the mouse onto the first button
-	set_mouse_pos(Vector2i(17 + kBuildGridCellSize * best_tab_, fastclick_ ? 51 : 17));
+	set_mouse_pos(Vector2i(17 + 34 * best_tab_, fastclick_ ? 56 : 17));
 
 	// Will only do something if we explicitly set another fast click panel
 	// than the first button
@@ -360,14 +360,13 @@ void FieldActionWindow::add_buttons_auto() {
 			const int32_t nodecaps = map_.get_max_nodecaps(ibase().egbase(), node_);
 
 			// Add house building
-			const int32_t caps = buildcaps | nodecaps;
-			if (player_ &&
-			    ((caps & Widelands::BUILDCAPS_SIZEMASK) || (caps & Widelands::BUILDCAPS_MINE))) {
+			if (player_ && ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) ||
+			                (buildcaps & Widelands::BUILDCAPS_MINE))) {
 				add_buttons_build(buildcaps, nodecaps);
 			}
 
 			// Add build actions
-			if ((fastclick_ = buildcaps & Widelands::BUILDCAPS_FLAG))
+			if (buildcaps & Widelands::BUILDCAPS_FLAG)
 				add_button(buildbox, "build_flag", pic_buildflag, &FieldActionWindow::act_buildflag,
 				           _("Place a flag"));
 
