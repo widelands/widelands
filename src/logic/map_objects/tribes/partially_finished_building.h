@@ -48,7 +48,7 @@ public:
 	const Image* representative_image() const override;
 	void cleanup(EditorGameBase&) override;
 	bool init(EditorGameBase&) override;
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 
 	uint32_t get_nrwaresqueues() {
 		return wares_.size();

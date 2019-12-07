@@ -52,7 +52,7 @@ struct ShippingItem {
 	// only interested in the ware if it is the one or the other.
 	void get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const;
 
-	void set_economy(Game&, Economy* e);
+	void set_economy(Game&, Economy* e, WareWorker);
 	const PortDock* get_destination(Game&) const;
 
 	void remove(EditorGameBase&);
@@ -69,9 +69,9 @@ struct ShippingItem {
 	void save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw);
 
 private:
-	friend struct Fleet;
 	friend class PortDock;
 	friend struct Ship;
+	friend struct ShipFleet;
 
 	// Called when a port is reached. The item will act again on its own.
 	void end_shipping(Game&);

@@ -116,6 +116,13 @@ void Tribes::add_carrier_type(const LuaTable& table) {
 	   table, *this));
 }
 
+void Tribes::add_ferry_type(const LuaTable& table) {
+	i18n::Textdomain td("tribes");
+	workers_->add(new FerryDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, *this));
+}
+
 void Tribes::add_soldier_type(const LuaTable& table) {
 	i18n::Textdomain td("tribes");
 	workers_->add(new SoldierDescr(
@@ -324,6 +331,9 @@ void Tribes::load_graphics() {
 		}
 		for (const std::string& texture_path : tribe->busy_road_paths()) {
 			tribe->add_busy_road_texture(g_gr->images().get(texture_path));
+		}
+		for (const std::string& texture_path : tribe->waterway_paths()) {
+			tribe->add_waterway_texture(g_gr->images().get(texture_path));
 		}
 	}
 }

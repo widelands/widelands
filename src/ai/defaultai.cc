@@ -705,7 +705,9 @@ void DefaultAI::late_initialization() {
 			}
 
 			for (const auto& temp_position : prod.working_positions()) {
-				bo.positions.push_back(temp_position.first);
+				for (uint8_t i = 0; i < temp_position.second; i++) {
+					bo.positions.push_back(temp_position.first);
+				}
 			}
 
 			// If this is a producer, does it act also as supporter?
@@ -1744,7 +1746,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			assert(building->owner().player_number() == pn);
 
 			// connected to a warehouse
-			bool connected = !building->get_economy()->warehouses().empty();
+			// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
+			// ferries
+			bool connected = !building->get_economy(wwWORKER)->warehouses().empty();
 			if (connected) {
 				any_connected_imm = true;
 			}
@@ -2102,8 +2106,10 @@ void DefaultAI::update_productionsite_stats() {
 	for (uint32_t i = 0; i < productionsites.size(); ++i) {
 		assert(productionsites.front().bo->cnt_built > 0);
 		// is connected
+		// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
+		// ferries
 		const bool connected_to_wh =
-		   !productionsites.front().site->get_economy()->warehouses().empty();
+		   !productionsites.front().site->get_economy(wwWORKER)->warehouses().empty();
 
 		// unconnected buildings are excluded from statistics review
 		if (connected_to_wh) {
@@ -2129,7 +2135,8 @@ void DefaultAI::update_productionsite_stats() {
 	for (uint32_t i = 0; i < mines_.size(); ++i) {
 		assert(mines_.front().bo->cnt_built > 0);
 
-		const bool connected_to_wh = !mines_.front().site->get_economy()->warehouses().empty();
+		const bool connected_to_wh =
+		   !mines_.front().site->get_economy(wwWORKER)->warehouses().empty();
 
 		// unconnected mines are excluded from statistics review
 		if (connected_to_wh) {
@@ -3541,8 +3548,8 @@ bool DefaultAI::dismantle_dead_ends() {
 	const uint16_t stepping = roads.size() / 25 + 1;
 
 	for (uint16_t i = 0; i < roads.size(); i += stepping) {
-		const Flag& roadstartflag = roads[i]->get_flag(Road::FlagStart);
-		const Flag& roadendflag = roads[i]->get_flag(Road::FlagEnd);
+		const Flag& roadstartflag = roads[i]->get_flag(RoadBase::FlagStart);
+		const Flag& roadendflag = roads[i]->get_flag(RoadBase::FlagEnd);
 
 		if (!roadstartflag.get_building() && roadstartflag.is_dead_end()) {
 			game().send_player_bulldoze(*const_cast<Flag*>(&roadstartflag));
@@ -3662,7 +3669,9 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	if (flag_warehouse_distance.is_road_prohibited(flag_coords_hash, gametime)) {
 		return false;
 	}
-	const bool needs_warehouse = flag.get_economy()->warehouses().empty();
+	// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
+	// ferries
+	const bool needs_warehouse = flag.get_economy(wwWORKER)->warehouses().empty();
 
 	uint32_t tmp_wh;
 
@@ -3698,8 +3707,8 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 // the road can be dismantled
 bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 
-	Flag& roadstartflag = road.get_flag(Road::FlagStart);
-	Flag& roadendflag = road.get_flag(Road::FlagEnd);
+	Flag& roadstartflag = road.get_flag(RoadBase::FlagStart);
+	Flag& roadendflag = road.get_flag(RoadBase::FlagEnd);
 
 	// Calculating full road (from crossing/building to another crossing/building),
 	// this means we calculate vector of all flags of the "full road"
@@ -3722,11 +3731,11 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 				}
 
 				Flag* other_end;
-				if (near_road->get_flag(Road::FlagStart).get_position().hash() ==
+				if (near_road->get_flag(RoadBase::FlagStart).get_position().hash() ==
 				    full_road.back()->get_position().hash()) {
-					other_end = &near_road->get_flag(Road::FlagEnd);
+					other_end = &near_road->get_flag(RoadBase::FlagEnd);
 				} else {
-					other_end = &near_road->get_flag(Road::FlagStart);
+					other_end = &near_road->get_flag(RoadBase::FlagStart);
 				}
 
 				// Have we already the end of road in our full_road?
@@ -3821,10 +3830,10 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 				continue;
 			}
 
-			Flag* endflag = &near_road->get_flag(Road::FlagStart);
+			Flag* endflag = &near_road->get_flag(RoadBase::FlagStart);
 
 			if (endflag == nf.flag) {
-				endflag = &near_road->get_flag(Road::FlagEnd);
+				endflag = &near_road->get_flag(RoadBase::FlagEnd);
 			}
 
 			// When walking on nearby roads, we do not go too far from start and end of road
@@ -3865,14 +3874,16 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 
 	// Increasing the failed_connection_tries counter
 	// At the same time it indicates a time an economy is without a warehouse
-	EconomyObserver* eco = get_economy_observer(flag.economy());
+	// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
+	// ferries
+	EconomyObserver* eco = get_economy_observer(flag.economy(wwWORKER));
 	// if we passed grace time this will be last attempt and if it fails
 	// building is destroyed
 	bool last_attempt_ = false;
 
 	// this should not happen, but if the economy has a warehouse and a dismantle
 	// grace time set, we must 'zero' the dismantle grace time
-	if (!flag.get_economy()->warehouses().empty() && eco->dismantle_grace_time != kNever) {
+	if (!flag.get_economy(wwWORKER)->warehouses().empty() && eco->dismantle_grace_time != kNever) {
 		eco->dismantle_grace_time = kNever;
 	}
 
@@ -3880,7 +3891,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 	// and this is a flag belonging to a building/constructionsite
 	// such economy must get dismantle grace time (if not set yet)
 	// end sometimes extended checkradius
-	if (flag.get_economy()->warehouses().empty() && flag.get_building()) {
+	if (flag.get_economy(wwWORKER)->warehouses().empty() && flag.get_building()) {
 
 		// occupied military buildings get special treatment
 		// (extended grace time + longer radius)
@@ -3988,12 +3999,15 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 
 			// testing if a flag/road's economy has a warehouse, if not we are not
 			// interested to connect to it
-			if (player_immovable->economy().warehouses().size() == 0) {
+			// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
+			// ferries
+			if (player_immovable->economy(wwWORKER).warehouses().size() == 0) {
 				continue;
 			}
 
 			// This is a candidate, sending all necessary info to RoadCandidates
-			const bool is_different_economy = (player_immovable->get_economy() != flag.get_economy());
+			const bool is_different_economy =
+			   (player_immovable->get_economy(wwWORKER) != flag.get_economy(wwWORKER));
 			const uint16_t air_distance = map.calc_distance(flag.get_position(), reachable_coords);
 
 			if (!flag_candidates.has_candidate(reachable_coords_hash) &&
@@ -4096,7 +4110,9 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 	// Usually we block for 2 minutes, but if it is a last attempt we block for 10 minutes
 	// Note: we block the vicinity only if this economy (usually a sole flag with a building) is not
 	// connected to a warehouse
-	if (flag.get_economy()->warehouses().empty()) {
+	// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
+	// ferries
+	if (flag.get_economy(wwWORKER)->warehouses().empty()) {
 
 		// blocking only if latest block was less then 60 seconds ago or it is last attempt
 		if (eco->fields_block_last_time + kOneMinute < gametime || last_attempt_) {
@@ -4212,7 +4228,9 @@ bool DefaultAI::check_economies() {
 	while (!new_flags.empty()) {
 		const Flag& flag = *new_flags.front();
 		new_flags.pop_front();
-		get_economy_observer(flag.economy())->flags.push_back(&flag);
+		// TODO(Nordfriese): Someone must urgently update the code since the big economy splitting for
+		// the ferries
+		get_economy_observer(flag.economy(wwWORKER))->flags.push_back(&flag);
 	}
 
 	for (std::deque<EconomyObserver*>::iterator obs_iter = economies.begin();
@@ -4221,9 +4239,9 @@ bool DefaultAI::check_economies() {
 		std::deque<Flag const*>& fl = (*obs_iter)->flags;
 
 		for (std::deque<Flag const*>::iterator j = fl.begin(); j != fl.end();) {
-			if (&(*obs_iter)->economy != &(*j)->economy()) {
+			if (&(*obs_iter)->economy != &(*j)->economy(wwWORKER)) {
 				// the flag belongs to other economy so we must assign it there
-				get_economy_observer((*j)->economy())->flags.push_back(*j);
+				get_economy_observer((*j)->economy(wwWORKER))->flags.push_back(*j);
 				// and erase from this economy's observer
 				j = fl.erase(j);
 			} else {
@@ -4272,7 +4290,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	}
 
 	// is it connected to wh at all?
-	const bool connected_to_wh = !site.site->get_economy()->warehouses().empty();
+	// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
+	// ferries
+	const bool connected_to_wh = !site.site->get_economy(wwWORKER)->warehouses().empty();
 
 	// do not dismantle or upgrade the same type of building too soon - to give some time to update
 	// statistics
@@ -4292,6 +4312,26 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	}
 
 	const Map& map = game().map();
+
+	// First we check if we must release an experienced worker
+	// iterate over all working positions of the actual productionsite
+	for (uint8_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
+		// get the pointer to the worker assigned to the actual position
+		const Worker* cw = site.site->working_positions()[i].worker;
+		if (cw) {  // a worker is assigned to the position
+			// get the descritpion index of the worker assigned on this position
+			DescriptionIndex current_worker = cw->descr().worker_index();
+			// if description indexes of assigned worker and normal worker differ
+			// (this means an experienced worker is assigned to the position)
+			// and we have none of the experienced workers on stock
+			if (current_worker != site.bo->positions.at(i) &&
+			    calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
+				// kick out the worker
+				game().send_player_evict_worker(*site.site->working_positions()[i].worker);
+				return true;
+			}
+		}
+	}
 
 	// The code here is bit complicated
 	// a) Either this site is pending for upgrade, if ready, order the upgrade
@@ -4369,7 +4409,11 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	// No upgrade without proper workers
 	if (considering_upgrade && !site.site->has_workers(enhancement, game())) {
-		considering_upgrade = false;
+		const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
+		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+		if (get_stocklevel(en_bo, gametime, WareWorker::kWorker) < 1) {
+			considering_upgrade = false;
+		}
 	}
 
 	if (considering_upgrade) {
@@ -4396,7 +4440,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 				}
 			}
 
-			if (en_bo.total_count() > 1) {
+			if (en_bo.total_count() > 1 &&
+			    (site.bo->cnt_built > 2 || site.bo->is(BuildingAttribute::kUpgradeSubstitutes))) {
 				if (en_bo.current_stats > 75) {
 					doing_upgrade = true;
 				}
@@ -4769,7 +4814,9 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	// Get link to productionsite that should be checked
 	ProductionSiteObserver& site = mines_.front();
 
-	const bool connected_to_wh = !site.site->get_economy()->warehouses().empty();
+	// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
+	// ferries
+	const bool connected_to_wh = !site.site->get_economy(wwWORKER)->warehouses().empty();
 
 	// First we dismantle mines that are marked as such, generally we wait till all wares all gone
 	if (site.dismantle_pending_since != kNever) {
@@ -4792,6 +4839,19 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 		set_inputs_to_max(site);
 	} else {
 		set_inputs_to_zero(site);
+	}
+
+	// First we check if we must release an experienced worker
+	for (uint8_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
+		const Worker* cw = site.site->working_positions()[i].worker;
+		if (cw) {
+			DescriptionIndex current_worker = cw->descr().worker_index();
+			if (current_worker != site.bo->positions.at(i) &&
+			    calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
+				game().send_player_evict_worker(*site.site->working_positions()[i].worker);
+				return true;
+			}
+		}
 	}
 
 	// Single _critical is a critical mine if it is the only one of its type, so it needs special
@@ -5884,7 +5944,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					inputs[103] = 2;
 					inputs[104] = -2;
 				}
-				inputs[105] = -2;
+				inputs[105] = -3;
 				inputs[106] = -2;
 			}
 			inputs[107] =
@@ -5910,6 +5970,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					inputs[115] = 4;
 				}
 			}
+			inputs[116] = -(bo.unoccupied_count * bo.unoccupied_count);
+			inputs[117] = -(2 * bo.unoccupied_count);
 
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
@@ -6927,7 +6989,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 				btype = "?";
 			}
 
-			if (false)
+			if (true)
 				log(" %1s %-30s %5d(%3d%%)  %6d %6d %6d %8s %5d %5d %5d %5d\n", btype.c_str(), bo.name,
 				    bo.total_count() - bo.cnt_under_construction - bo.unoccupied_count -
 				       bo.unconnected_count,

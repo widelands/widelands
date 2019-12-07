@@ -30,7 +30,7 @@ local wc_desc = _ (
 return {
    name = wc_name,
    description = wc_desc,
-   peaceful_mode_allowed = false,
+   peaceful_mode_allowed = true,
    init = function()
       fields = wl.Game().map:count_conquerable_fields()
    end,

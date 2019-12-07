@@ -132,7 +132,8 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	if (can_act_) {
 		UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 		UI::Button* b;
-		add(buttons);
+		add(buttons, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		add_space(15);
 
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                             \
 	b = new UI::Button(                                                                             \

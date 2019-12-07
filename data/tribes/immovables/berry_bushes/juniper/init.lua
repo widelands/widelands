@@ -7,9 +7,6 @@ terrain_affinity = {
    pickiness = 15,
 }
 
-animations = {}
-add_animation(animations, "idle", dirname .. "tiny", "idle", { 3, 15 })
-
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_juniper_tiny",
@@ -26,11 +23,17 @@ tribes:new_immovable_type {
          "grow=berry_bush_juniper_small",
       },
    },
-   animations = animations,
+   spritesheets = {
+      idle = {
+         directory = dirname .. "tiny",
+         basename = "idle",
+         hotspot = {3, 15},
+         frames = 4,
+         columns = 2,
+         rows = 2,
+      }
+   }
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "small", "idle", { 6, 30 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -48,11 +51,17 @@ tribes:new_immovable_type {
          "grow=berry_bush_juniper_medium",
       },
    },
-   animations = animations,
+   spritesheets = {
+      idle = {
+         directory = dirname .. "small",
+         basename = "idle",
+         hotspot = {6, 30},
+         frames = 4,
+         columns = 2,
+         rows = 2,
+      }
+   }
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "medium", "idle", { 10, 47 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -70,11 +79,17 @@ tribes:new_immovable_type {
          "grow=berry_bush_juniper_ripe",
       },
    },
-   animations = animations,
+   spritesheets = {
+      idle = {
+         directory = dirname .. "medium",
+         basename = "idle",
+         hotspot = {10, 47},
+         frames = 4,
+         columns = 2,
+         rows = 2,
+      }
+   }
 }
-
-animations = {}
-add_animation(animations, "idle", dirname .. "ripe", "idle", { 11, 49 })
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -94,5 +109,14 @@ tribes:new_immovable_type {
          "remove=",
       }
    },
-   animations = animations,
+   spritesheets = {
+      idle = {
+         directory = dirname .. "ripe",
+         basename = "idle",
+         hotspot = {11, 49},
+         frames = 4,
+         columns = 2,
+         rows = 2,
+      }
+   }
 }

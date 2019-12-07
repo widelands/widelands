@@ -1,28 +1,5 @@
 dirname = path.dirname (__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = {8, 23},
-   },
-   dig = {
-      pictures = path.list_files (dirname .. "dig_??.png"),
-      hotspot = { 15, 20 },
-      fps = 20
-   },
-   planting = {
-      pictures = path.list_files (dirname .. "plant_??.png"),
-      hotspot = { 15, 18 },
-      fps = 10
-   },
-   water = {
-      pictures = path.list_files (dirname .. "water_??.png"),
-      hotspot = { 14, 20 },
-      fps = 10
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {11, 24}, 15)
-
 tribes:new_worker_type {
    msgctxt = "frisians_worker",
    name = "frisians_berry_farmer",
@@ -49,5 +26,51 @@ tribes:new_worker_type {
       }
    },
 
-   animations = animations,
+
+   spritesheets = {
+      walk = {
+         directory = dirname,
+         basename = "walk",
+         fps = 15,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         directional = true,
+         hotspot = {11, 24}
+      },
+      dig = {
+         directory = dirname,
+         basename = "dig",
+         fps = 20,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         hotspot = {15, 20}
+      },
+      water = {
+         directory = dirname,
+         basename = "water",
+         fps = 10,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         hotspot = {14, 20}
+      },
+      planting = {
+         directory = dirname,
+         basename = "plant",
+         fps = 10,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         hotspot = {15, 18}
+      },
+   },
+   animations = {
+      idle = {
+         directory = dirname,
+         basename = "idle",
+         hotspot = {8, 23}
+      },
+   },
 }
