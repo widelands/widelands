@@ -9,6 +9,7 @@
 # Lech Lorens <lech.lorens@gmail.com>, 2019
 # MikeNow <m.nowot@gmail.com>, 2015
 # Sebastian Janus <sebek89@gmail.com>, 2015
+# Sylwia Studzińska <sanuspg@gmail.com>, 2019
 # Szymon Gackowski <szymon.gackowski@gmail.com>, 2016
 # tombox <wptom@wp.pl>, 2015-2016,2018
 # tombox <wptom@wp.pl>, 2015
@@ -16,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-10-09 07:57+0000\n"
-"PO-Revision-Date: 2019-10-09 08:04+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-11-04 21:05+0000\n"
+"PO-Revision-Date: 2019-11-11 13:25+0000\n"
+"Last-Translator: Sylwia Studzińska <sanuspg@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5044,7 +5045,7 @@ msgstr ""
 #: ../../src/wui/seafaring_statistics_menu.cc:180
 msgctxt "ship"
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:499
@@ -5074,7 +5075,7 @@ msgstr "Pokaż ekspedycje zwiadowców"
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:519
 msgid "Show expeditions that have found a port space or are founding a colony"
-msgstr ""
+msgstr "Pokaż ekspedycje, które znalazły miejsce na postawienie portu lub zakładają kolonię."
 
 #: ../../src/wui/shipwindow.cc:79
 msgid "Scout towards the north west"
