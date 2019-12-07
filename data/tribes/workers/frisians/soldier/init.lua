@@ -22,337 +22,428 @@ dirname = path.dirname (__file__)
 -- may follow other conventions described in their respective init.lua's.
 
 animations = {
-   -- normal
+   -- Rookie
    idle = {
-      pictures = path.list_files (dirname .. "rookie/idle_??.png"),
+      directory = dirname .. "rookie",
+      basename = "idle",
       hotspot = {20, 24},
       fps = 10
    },
+   walk = {
+      directory = dirname .. "rookie",
+      basename = "walk",
+      hotspot = {7, 24},
+      fps = 15,
+      directional = true
+   },
    atk_ok_1_e = {
-      pictures = path.list_files (dirname .. "rookie/atk_ok_1_e_??.png"),
+      directory = dirname .. "rookie",
+      basename = "atk_ok_1_e",
       hotspot = {23, 24},
       fps = 10
    },
    atk_fail_1_e = {
-      pictures = path.list_files (dirname .. "rookie/atk_fail_1_e_??.png"),
+      directory = dirname .. "rookie",
+      basename = "atk_fail_1_e",
       hotspot = {23, 23},
       fps = 10
    },
    atk_ok_1_w = {
-      pictures = path.list_files (dirname .. "rookie/atk_ok_1_w_??.png"),
+      directory = dirname .. "rookie",
+      basename = "atk_ok_1_w",
       hotspot = {-1, 22},
       fps = 10
    },
    atk_fail_1_w = {
-      pictures = path.list_files (dirname .. "rookie/atk_fail_1_w_??.png"),
+      directory = dirname .. "rookie",
+      basename = "atk_fail_1_w",
       hotspot = {-1, 22},
       fps = 10
    },
    atk_ok_2_e = {
-      pictures = path.list_files (dirname .. "rookie/atk_ok_2_e_??.png"),
+      directory = dirname .. "rookie",
+      basename = "atk_ok_2_e",
       hotspot = {23, 23},
       fps = 10
    },
    atk_fail_2_e = {
-      pictures = path.list_files (dirname .. "rookie/atk_fail_2_e_??.png"),
+      directory = dirname .. "rookie",
+      basename = "atk_fail_2_e",
       hotspot = {23, 23},
       fps = 10
    },
    atk_ok_2_w = {
-      pictures = path.list_files (dirname .. "rookie/atk_ok_2_w_??.png"),
+      directory = dirname .. "rookie",
+      basename = "atk_ok_2_w",
       hotspot = {-1, 23},
       fps = 10
    },
    atk_fail_2_w = {
-      pictures = path.list_files (dirname .. "rookie/atk_fail_2_w_??.png"),
+      directory = dirname .. "rookie",
+      basename = "atk_fail_2_w",
       hotspot = {-1, 23},
       fps = 10
    },
    eva_ok_e = {
-      pictures = path.list_files (dirname .. "rookie/eva_ok_e_??.png"),
+      directory = dirname .. "rookie",
+      basename = "eva_ok_e",
       hotspot = {11, 23},
       fps = 10
    },
    eva_fail_e = {
-      pictures = path.list_files (dirname .. "rookie/eva_fail_e_??.png"),
+      directory = dirname .. "rookie",
+      basename = "eva_fail_e",
       hotspot = {12, 23},
       fps = 10
    },
    eva_ok_w = {
-      pictures = path.list_files (dirname .. "rookie/eva_ok_w_??.png"),
+      directory = dirname .. "rookie",
+      basename = "eva_ok_w",
       hotspot = {-1, 22},
       fps = 10
    },
    eva_fail_w = {
-      pictures = path.list_files (dirname .. "rookie/eva_fail_w_??.png"),
+      directory = dirname .. "rookie",
+      basename = "eva_fail_w",
       hotspot = {-1, 22},
       fps = 10
    },
    die_w = {
-      pictures = path.list_files (dirname .. "rookie/die_w_??.png"),
+      directory = dirname .. "rookie",
+      basename = "die_w",
       hotspot = {15, 25},
       fps = 10
    },
    die_e = {
-      pictures = path.list_files (dirname .. "rookie/die_e_??.png"),
+      directory = dirname .. "rookie",
+      basename = "die_e",
       hotspot = {12, 23},
       fps = 10
    },
-   -- health upgrade only
+
+   -- Health upgrade only
    health_idle = {
-      pictures = path.list_files (dirname .. "helm/idle_??.png"),
+      directory = dirname .. "helm",
+      basename = "idle",
       hotspot = {20, 25},
       fps = 10
    },
+   health_walk = {
+      directory = dirname .. "helm",
+      basename = "walk",
+      hotspot = {7, 25},
+      fps = 15,
+      directional = true
+   },
    health_atk_ok_1_e = {
-      pictures = path.list_files (dirname .. "helm/atk_ok_1_e_??.png"),
+      directory = dirname .. "helm",
+      basename = "atk_ok_1_e",
       hotspot = {23, 24},
       fps = 10
    },
    health_atk_fail_1_e = {
-      pictures = path.list_files (dirname .. "helm/atk_fail_1_e_??.png"),
+      directory = dirname .. "helm",
+      basename = "atk_fail_1_e",
       hotspot = {23, 24},
       fps = 10
    },
    health_atk_ok_1_w = {
-      pictures = path.list_files (dirname .. "helm/atk_ok_1_w_??.png"),
+      directory = dirname .. "helm",
+      basename = "atk_ok_1_w",
       hotspot = {-1, 24},
       fps = 10
    },
    health_atk_fail_1_w = {
-      pictures = path.list_files (dirname .. "helm/atk_fail_1_w_??.png"),
+      directory = dirname .. "helm",
+      basename = "atk_fail_1_w",
       hotspot = {-1, 24},
       fps = 10
    },
    health_atk_ok_2_e = {
-      pictures = path.list_files (dirname .. "helm/atk_ok_2_e_??.png"),
+      directory = dirname .. "helm",
+      basename = "atk_ok_2_e",
       hotspot = {23, 24},
       fps = 10
    },
    health_atk_fail_2_e = {
-      pictures = path.list_files (dirname .. "helm/atk_fail_2_e_??.png"),
+      directory = dirname .. "helm",
+      basename = "atk_fail_2_e",
       hotspot = {23, 24},
       fps = 10
    },
    health_atk_ok_2_w = {
-      pictures = path.list_files (dirname .. "helm/atk_ok_2_w_??.png"),
+      directory = dirname .. "helm",
+      basename = "atk_ok_2_w",
       hotspot = {-1, 24},
       fps = 10
    },
    health_atk_fail_2_w = {
-      pictures = path.list_files (dirname .. "helm/atk_fail_2_w_??.png"),
+      directory = dirname .. "helm",
+      basename = "atk_fail_2_w",
       hotspot = {-1, 24},
       fps = 10
    },
    health_eva_ok_e = {
-      pictures = path.list_files (dirname .. "helm/eva_ok_e_??.png"),
+      directory = dirname .. "helm",
+      basename = "eva_ok_e",
       hotspot = {11, 24},
       fps = 10
    },
    health_eva_fail_e = {
-      pictures = path.list_files (dirname .. "helm/eva_fail_e_??.png"),
+      directory = dirname .. "helm",
+      basename = "eva_fail_e",
       hotspot = {12, 24},
       fps = 10
    },
    health_eva_ok_w = {
-      pictures = path.list_files (dirname .. "helm/eva_ok_w_??.png"),
+      directory = dirname .. "helm",
+      basename = "eva_ok_w",
       hotspot = {-1, 24},
       fps = 10
    },
    health_eva_fail_w = {
-      pictures = path.list_files (dirname .. "helm/eva_fail_w_??.png"),
+      directory = dirname .. "helm",
+      basename = "eva_fail_w",
       hotspot = {-1, 24},
       fps = 10
    },
    health_die_f_w = {
-      pictures = path.list_files (dirname .. "helm/die_f_w_??.png"),
+      directory = dirname .. "helm",
+      basename = "die_f_w",
       hotspot = {-1, 24},
       fps = 10
    },
    health_die_f_e = {
-      pictures = path.list_files (dirname .. "helm/die_f_e_??.png"),
+      directory = dirname .. "helm",
+      basename = "die_f_e",
       hotspot = {19, 24},
       fps = 10
    },
    health_die_b_w = {
-      pictures = path.list_files (dirname .. "helm/die_b_w_??.png"),
+      directory = dirname .. "helm",
+      basename = "die_b_w",
       hotspot = {15, 24},
       fps = 10
    },
    health_die_b_e = {
-      pictures = path.list_files (dirname .. "helm/die_b_e_??.png"),
+      directory = dirname .. "helm",
+      basename = "die_b_e",
       hotspot = {12, 24},
       fps = 10
    },
-   -- health and attack upgrade
+
+   -- Health and attack upgrade
    hero_idle = {
-      pictures = path.list_files (dirname .. "hero/idle_??.png"),
+      directory = dirname .. "hero",
+      basename = "idle",
       hotspot = {20, 25},
       fps = 10
    },
+   hero_walk = {
+      directory = dirname .. "hero",
+      basename = "walk",
+      hotspot = {8, 25},
+      fps = 15,
+      directional = true
+   },
    hero_atk_ok_1_e = {
-      pictures = path.list_files (dirname .. "hero/atk_ok_1_e_??.png"),
+      directory = dirname .. "hero",
+      basename = "atk_ok_1_e",
       hotspot = {23, 25},
       fps = 10
    },
    hero_atk_fail_1_e = {
-      pictures = path.list_files (dirname .. "hero/atk_fail_1_e_??.png"),
+      directory = dirname .. "hero",
+      basename = "atk_fail_1_e",
       hotspot = {22, 25},
       fps = 10
    },
    hero_atk_ok_1_w = {
-      pictures = path.list_files (dirname .. "hero/atk_ok_1_w_??.png"),
+      directory = dirname .. "hero",
+      basename = "atk_ok_1_w",
       hotspot = {0, 25},
       fps = 10
    },
    hero_atk_fail_1_w = {
-      pictures = path.list_files (dirname .. "hero/atk_fail_1_w_??.png"),
+      directory = dirname .. "hero",
+      basename = "atk_fail_1_w",
       hotspot = {0, 25},
       fps = 10
    },
    hero_atk_ok_2_e = {
-      pictures = path.list_files (dirname .. "hero/atk_ok_2_e_??.png"),
+      directory = dirname .. "hero",
+      basename = "atk_ok_2_e",
       hotspot = {23, 25},
       fps = 10
    },
    hero_atk_fail_2_e = {
-      pictures = path.list_files (dirname .. "hero/atk_fail_2_e_??.png"),
+      directory = dirname .. "hero",
+      basename = "atk_fail_2_e",
       hotspot = {23, 25},
       fps = 10
    },
    hero_atk_ok_2_w = {
-      pictures = path.list_files (dirname .. "hero/atk_ok_2_w_??.png"),
+      directory = dirname .. "hero",
+      basename = "atk_ok_2_w",
       hotspot = {0, 25},
       fps = 10
    },
    hero_atk_fail_2_w = {
-      pictures = path.list_files (dirname .. "hero/atk_fail_2_w_??.png"),
+      directory = dirname .. "hero",
+      basename = "atk_fail_2_w",
       hotspot = {0, 25},
       fps = 10
    },
    hero_eva_ok_e = {
-      pictures = path.list_files (dirname .. "hero/eva_ok_e_??.png"),
+      directory = dirname .. "hero",
+      basename = "eva_ok_e",
       hotspot = {13, 25},
       fps = 10
    },
    hero_eva_fail_e = {
-      pictures = path.list_files (dirname .. "hero/eva_fail_e_??.png"),
+      directory = dirname .. "hero",
+      basename = "eva_fail_e",
       hotspot = {13, 25},
       fps = 10
    },
    hero_eva_ok_w = {
-      pictures = path.list_files (dirname .. "hero/eva_ok_w_??.png"),
+      directory = dirname .. "hero",
+      basename = "eva_ok_w",
       hotspot = {0, 25},
       fps = 10
    },
    hero_eva_fail_w = {
-      pictures = path.list_files (dirname .. "hero/eva_fail_w_??.png"),
+      directory = dirname .. "hero",
+      basename = "eva_fail_w",
       hotspot = {0, 25},
       fps = 10
    },
    hero_die_w = {
-      pictures = path.list_files (dirname .. "hero/die_w_??.png"),
+      directory = dirname .. "hero",
+      basename = "die_w",
       hotspot = {-1, 24},
       fps = 10
    },
    hero_die_e = {
-      pictures = path.list_files (dirname .. "hero/die_e_??.png"),
+      directory = dirname .. "hero",
+      basename = "die_e",
       hotspot = {19, 24},
       fps = 10
    },
-   -- sword upgrade only
+
+   -- Sword upgrade only
    attack_idle = {
-      pictures = path.list_files (dirname .. "sword/idle_??.png"),
+      directory = dirname .. "sword",
+      basename = "idle",
       hotspot = {20, 25},
       fps = 10
    },
+   attack_walk = {
+      directory = dirname .. "sword",
+      basename = "walk",
+      hotspot = {8, 24},
+      fps = 15,
+      directional = true
+   },
    attack_atk_ok_1_e = {
-      pictures = path.list_files (dirname .. "sword/atk_ok_1_e_??.png"),
+      directory = dirname .. "sword",
+      basename = "atk_ok_1_e",
       hotspot = {23, 24},
       fps = 10
    },
    attack_atk_fail_1_e = {
-      pictures = path.list_files (dirname .. "sword/atk_fail_1_e_??.png"),
+      directory = dirname .. "sword",
+      basename = "atk_fail_1_e",
       hotspot = {23, 24},
       fps = 10
    },
    attack_atk_ok_1_w = {
-      pictures = path.list_files (dirname .. "sword/atk_ok_1_w_??.png"),
+      directory = dirname .. "sword",
+      basename = "atk_ok_1_w",
       hotspot = {0, 23},
       fps = 10
    },
    attack_atk_fail_1_w = {
-      pictures = path.list_files (dirname .. "sword/atk_fail_1_w_??.png"),
+      directory = dirname .. "sword",
+      basename = "atk_fail_1_w",
       hotspot = {0, 23},
       fps = 10
    },
    attack_atk_ok_2_e = {
-      pictures = path.list_files (dirname .. "sword/atk_ok_2_e_??.png"),
+      directory = dirname .. "sword",
+      basename = "atk_ok_2_e",
       hotspot = {23, 23},
       fps = 10
    },
    attack_atk_fail_2_e = {
-      pictures = path.list_files (dirname .. "sword/atk_fail_2_e_??.png"),
+      directory = dirname .. "sword",
+      basename = "atk_fail_2_e",
       hotspot = {23, 23},
       fps = 10
    },
    attack_atk_ok_2_w = {
-      pictures = path.list_files (dirname .. "sword/atk_ok_2_w_??.png"),
+      directory = dirname .. "sword",
+      basename = "atk_ok_2_w",
       hotspot = {0, 23},
       fps = 10
    },
    attack_atk_fail_2_w = {
-      pictures = path.list_files (dirname .. "sword/atk_fail_2_w_??.png"),
+      directory = dirname .. "sword",
+      basename = "atk_fail_2_w",
       hotspot = {0, 23},
       fps = 10
    },
    attack_eva_ok_e = {
-      pictures = path.list_files (dirname .. "sword/eva_ok_e_??.png"),
+      directory = dirname .. "sword",
+      basename = "eva_ok_e",
       hotspot = {13, 23},
       fps = 10
    },
    attack_eva_fail_e = {
-      pictures = path.list_files (dirname .. "sword/eva_fail_e_??.png"),
+      directory = dirname .. "sword",
+      basename = "eva_fail_e",
       hotspot = {13, 23},
       fps = 10
    },
    attack_eva_ok_w = {
-      pictures = path.list_files (dirname .. "sword/eva_ok_w_??.png"),
+      directory = dirname .. "sword",
+      basename = "eva_ok_w",
       hotspot = {0, 24},
       fps = 10
    },
    attack_eva_fail_w = {
-      pictures = path.list_files (dirname .. "sword/eva_fail_w_??.png"),
+      directory = dirname .. "sword",
+      basename = "eva_fail_w",
       hotspot = {0, 23},
       fps = 10
    },
    attack_die_f_w = {
-      pictures = path.list_files (dirname .. "sword/die_f_w_??.png"),
+      directory = dirname .. "sword",
+      basename = "die_f_w",
       hotspot = {-1, 21},
       fps = 10
    },
    attack_die_f_e = {
-      pictures = path.list_files (dirname .. "sword/die_f_e_??.png"),
+      directory = dirname .. "sword",
+      basename = "die_f_e",
       hotspot = {19, 22},
       fps = 10
    },
    attack_die_b_w = {
-      pictures = path.list_files (dirname .. "sword/die_b_w_??.png"),
+      directory = dirname .. "sword",
+      basename = "die_b_w",
       hotspot = {17, 25},
       fps = 10
    },
    attack_die_b_e = {
-      pictures = path.list_files (dirname .. "sword/die_b_e_??.png"),
+      directory = dirname .. "sword",
+      basename = "die_b_e",
       hotspot = {13, 23},
       fps = 10
    },
 }
-add_directional_animation(animations, "walk", dirname .. "rookie", "walk", {7, 24}, 15)
-add_directional_animation(animations, "health_walk", dirname .. "helm", "walk", {7, 25}, 15)
-add_directional_animation(animations, "attack_walk", dirname .. "sword", "walk", {8, 24}, 15)
-add_directional_animation(animations, "hero_walk", dirname .. "hero", "walk", {8, 25}, 15)
 
--- convenience definitions so we don´t have to repeat this table for every single entry below
+-- Convenience definitions so we don´t have to repeat this table for every single entry below
 fri_health = {
    min_health = 1,
    min_attack = 0,

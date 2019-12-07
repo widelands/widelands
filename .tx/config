@@ -2,8 +2,8 @@
 host = https://www.transifex.com
 
 [widelands.appdata]
-file_filter = debian/translations/<lang>.json
-source_file = debian/translations/appdata.json
+file_filter = xdg/translations/<lang>.json
+source_file = xdg/translations/appdata.json
 source_lang = en
 type = KEYVALUEJSON
 

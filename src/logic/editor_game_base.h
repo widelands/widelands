@@ -115,29 +115,30 @@ public:
 	// loading stuff
 	void allocate_player_maps();
 	virtual void postload();
-	void load_graphics(UI::ProgressWindow& loader_ui);
+	void load_graphics();
 	virtual void cleanup_for_load();
+	void set_loader_ui(UI::ProgressWindow*);
+	UI::ProgressWindow* get_loader_ui() {
+		return loader_ui_;
+	}
 
 	void set_road(const FCoords&, uint8_t direction, uint8_t roadtype);
 
 	// warping stuff. instantly creating map_objects
-	Building&
-	warp_building(const Coords&,
-	              PlayerNumber,
-	              DescriptionIndex,
-	              Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	Building&
-	warp_constructionsite(const Coords&,
-	                      PlayerNumber,
-	                      DescriptionIndex,
-	                      bool loading = false,
-	                      Building::FormerBuildings former_buildings = Building::FormerBuildings(),
-	                      const BuildingSettings* settings = nullptr);
-	Building&
-	warp_dismantlesite(const Coords&,
-	                   PlayerNumber,
-	                   bool loading = false,
-	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
+	Building& warp_building(const Coords&,
+	                        PlayerNumber,
+	                        DescriptionIndex,
+	                        FormerBuildings former_buildings = FormerBuildings());
+	Building& warp_constructionsite(const Coords&,
+	                                PlayerNumber,
+	                                DescriptionIndex,
+	                                bool loading = false,
+	                                FormerBuildings former_buildings = FormerBuildings(),
+	                                const BuildingSettings* settings = nullptr);
+	Building& warp_dismantlesite(const Coords&,
+	                             PlayerNumber,
+	                             bool loading = false,
+	                             FormerBuildings former_buildings = FormerBuildings());
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
 	Immovable&
@@ -199,6 +200,9 @@ public:
 
 	// Returns the mutable tribes. Prefer tribes() whenever possible.
 	Tribes* mutable_tribes();
+
+protected:
+	UI::ProgressWindow* loader_ui_;
 
 private:
 	/// Common function for create_critter and create_ship.

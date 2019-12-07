@@ -196,13 +196,6 @@ struct WLApplication {
 	void replay();
 	static void emergency_save(Widelands::Game&);
 
-#ifdef USE_XDG
-	// this is only for src/wlapplication_options.cc
-	std::string get_userconfigdir() {
-		return userconfigdir_;
-	}
-#endif
-
 private:
 	WLApplication(int argc, char const* const* argv);
 

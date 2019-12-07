@@ -67,6 +67,7 @@ class Worker : public Bob {
 		int32_t iparam4;
 		int32_t iparam5;
 		int32_t iparam6;
+		int32_t iparam7;
 		std::string sparam1;
 
 		std::vector<std::string> sparamv;
@@ -256,6 +257,7 @@ private:
 	bool run_scout(Game&, State&, const Action&);
 	bool run_playsound(Game&, State&, const Action&);
 	bool run_construct(Game&, State&, const Action&);
+	bool run_terraform(Game&, State&, const Action&);
 
 	// Forester considers multiple spaces in findspace, unlike others.
 	int16_t findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game);

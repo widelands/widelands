@@ -42,12 +42,11 @@ struct EditorHistory {
 	uint32_t do_action(EditorTool& tool,
 	                   EditorTool::ToolIndex ind,
 	                   Widelands::Map& map,
-	                   const Widelands::World& world,
 	                   const Widelands::NodeAndTriangle<>& center,
 	                   EditorInteractive& parent,
 	                   bool draw = false);
-	uint32_t undo_action(const Widelands::World& world);
-	uint32_t redo_action(const Widelands::World& world);
+	uint32_t undo_action();
+	uint32_t redo_action();
 
 private:
 	UI::Button& undo_button_;

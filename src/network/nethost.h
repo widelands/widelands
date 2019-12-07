@@ -22,7 +22,9 @@
 
 #include <map>
 #include <memory>
+#include <thread>
 
+#include "network/bufferedconnection.h"
 #include "network/nethost_interface.h"
 
 /**
@@ -49,8 +51,12 @@ public:
 	void close(ConnectionId id) override;
 	bool try_accept(ConnectionId* new_id) override;
 	std::unique_ptr<RecvPacket> try_receive(ConnectionId id) override;
-	void send(ConnectionId id, const SendPacket& packet) override;
-	void send(const std::vector<ConnectionId>& ids, const SendPacket& packet) override;
+	void send(ConnectionId id,
+	          const SendPacket& packet,
+	          NetPriority priority = NetPriority::kNormal) override;
+	void send(const std::vector<ConnectionId>& ids,
+	          const SendPacket& packet,
+	          NetPriority priority = NetPriority::kNormal) override;
 
 	/**
 	 * Stops listening for connections.
@@ -66,35 +72,39 @@ private:
 	bool is_listening() const;
 
 	/**
+	 * Starts an asynchronous accept on the given acceptor.
+	 * If someone wants to connect, establish a connection
+	 * and add the connection to accept_queue_ and continue waiting.
+	 * @param acceptor The acceptor we should be listening on.
+	 */
+#if BOOST_VERSION >= 106600
+	void start_accepting(boost::asio::ip::tcp::acceptor& acceptor);
+#else
+	void start_accepting(
+	   boost::asio::ip::tcp::acceptor& acceptor,
+	   std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair);
+#endif
+
+	/**
 	 * Tries to listen on the given port.
 	 * If it fails, is_listening() will return \c false.
 	 * \param port The port to listen on.
 	 */
 	explicit NetHost(uint16_t port);
 
+	/**
+	 * Prepare the given acceptor for accepting connections for the given
+	 * network protocol and port.
+	 * @param acceptor The acceptor to prepare.
+	 * @param endpoint The IP version, transport protocol and port number we should listen on.
+	 * @return \c True iff the acceptor is listening now.
+	 */
 	bool open_acceptor(boost::asio::ip::tcp::acceptor* acceptor,
 	                   const boost::asio::ip::tcp::endpoint& endpoint);
 
-	/**
-	 * Helper structure to store variables about a connected client.
-	 */
-	struct Client {
-		/**
-		 * Initializes the structure with the given socket.
-		 * \param sock The socket to listen on. The socket is moved by this
-		 *             constructor so the given socket is no longer valid.
-		 */
-		explicit Client(boost::asio::ip::tcp::socket&& sock);
-
-		/// The socket to send/receive with.
-		boost::asio::ip::tcp::socket socket;
-		/// The deserializer to feed the received data to. It will transform it into data packets.
-		Deserializer deserializer;
-	};
-
-	/// A map linking client ids to the respective data about the clients.
+	/// A map linking client ids to the respective network connections.
 	/// Client ids not in this map should be considered invalid.
-	std::map<NetHostInterface::ConnectionId, Client> clients_;
+	std::map<NetHostInterface::ConnectionId, std::unique_ptr<BufferedConnection>> clients_;
 	/// The next client id that will be used
 	NetHostInterface::ConnectionId next_id_;
 	/// An io_service needed by boost.asio. Primary needed for async operations.
@@ -103,6 +113,21 @@ private:
 	boost::asio::ip::tcp::acceptor acceptor_v4_;
 	/// The acceptor we get IPv6 connection requests to.
 	boost::asio::ip::tcp::acceptor acceptor_v6_;
+
+#if BOOST_VERSION < 106600
+	/// Socket and unconnected BuffereConnection that will be used for accepting IPv4 connections
+	std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*> accept_pair_v4_;
+	/// Socket and unconnected BuffereConnection that will be used for accepting IPv6 connections
+	std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*> accept_pair_v6_;
+#endif
+
+	/// A thread used to wait for connections on the acceptor.
+	std::thread asio_thread_;
+	/// The new connections the acceptor accepted. Will be moved to clients_
+	/// when try_accept() is called by the using class.
+	std::queue<std::unique_ptr<BufferedConnection>> accept_queue_;
+	/// A mutex avoiding concurrent access to accept_queue_.
+	std::mutex mutex_accept_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETHOST_H

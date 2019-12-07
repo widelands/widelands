@@ -158,7 +158,7 @@ public:
 
 	void init();
 	void add_buttons_auto();
-	void add_buttons_build(int32_t buildcaps);
+	void add_buttons_build(int32_t buildcaps, int32_t max_nodecaps);
 	void add_buttons_road(bool flag);
 	void add_buttons_attack();
 
@@ -307,7 +307,7 @@ void FieldActionWindow::init() {
 	move_out_of_the_way();
 
 	// Now force the mouse onto the first button
-	set_mouse_pos(Vector2i(17 + kBuildGridCellSize * best_tab_, fastclick_ ? 51 : 17));
+	set_mouse_pos(Vector2i(17 + 34 * best_tab_, fastclick_ ? 56 : 17));
 
 	// Will only do something if we explicitly set another fast click panel
 	// than the first button
@@ -357,16 +357,16 @@ void FieldActionWindow::add_buttons_auto() {
 			}
 		} else {
 			const int32_t buildcaps = player_ ? player_->get_buildcaps(node_) : 0;
+			const int32_t nodecaps = map_.get_max_nodecaps(ibase().egbase(), node_);
 
 			// Add house building
-			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) ||
-			    (buildcaps & Widelands::BUILDCAPS_MINE)) {
-				assert(igbase->get_player());
-				add_buttons_build(buildcaps);
+			if (player_ && ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) ||
+			                (buildcaps & Widelands::BUILDCAPS_MINE))) {
+				add_buttons_build(buildcaps, nodecaps);
 			}
 
 			// Add build actions
-			if ((fastclick_ = buildcaps & Widelands::BUILDCAPS_FLAG))
+			if (buildcaps & Widelands::BUILDCAPS_FLAG)
 				add_button(buildbox, "build_flag", pic_buildflag, &FieldActionWindow::act_buildflag,
 				           _("Place a flag"));
 
@@ -422,9 +422,20 @@ void FieldActionWindow::add_buttons_attack() {
 Add buttons for house building.
 ===============
 */
-void FieldActionWindow::add_buttons_build(int32_t buildcaps) {
-	if (!player_)
+void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecaps) {
+	if (!player_) {
 		return;
+	}
+	const Widelands::FCoords brn = map_.br_n(node_);
+	if (!node_.field->is_interior(player_->player_number()) ||
+	    !brn.field->is_interior(player_->player_number())) {
+		return;
+	}
+	if (!(brn.field->get_immovable() &&
+	      brn.field->get_immovable()->descr().type() == Widelands::MapObjectType::FLAG) &&
+	    !(player_->get_buildcaps(brn) & Widelands::BUILDCAPS_FLAG)) {
+		return;
+	}
 	BuildGrid* bbg_house[4] = {nullptr, nullptr, nullptr, nullptr};
 	BuildGrid* bbg_mine = nullptr;
 
@@ -446,27 +457,49 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps) {
 			if (building_descr->needs_seafaring() && !ibase().egbase().map().allows_seafaring()) {
 				continue;
 			}
-		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced())
+		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced()) {
 			continue;
+		}
 
+		if (building_descr->get_built_over_immovable() != Widelands::INVALID_INDEX &&
+		    !(node_.field->get_immovable() && node_.field->get_immovable()->has_attribute(
+		                                         building_descr->get_built_over_immovable()))) {
+			continue;
+		}
 		// Figure out if we can build it here, and in which tab it belongs
 		if (building_descr->get_ismine()) {
-			if (!(buildcaps & Widelands::BUILDCAPS_MINE))
+			if (!((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
+			          buildcaps :
+			          max_nodecaps) &
+			      Widelands::BUILDCAPS_MINE)) {
 				continue;
+			}
 
 			ppgrid = &bbg_mine;
 		} else {
 			int32_t size = building_descr->get_size() - Widelands::BaseImmovable::SMALL;
 
-			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) < size + 1)
+			if (((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
+			         buildcaps :
+			         max_nodecaps) &
+			     Widelands::BUILDCAPS_SIZEMASK) < size + 1) {
 				continue;
-			if (building_descr->get_isport() && !(buildcaps & Widelands::BUILDCAPS_PORT))
+			}
+			if (building_descr->get_isport() && !(buildcaps & Widelands::BUILDCAPS_PORT)) {
 				continue;
+			}
+			if (building_descr->get_size() >= Widelands::BaseImmovable::BIG &&
+			    !((map_.l_n(node_).field->is_interior(player_->player_number())) &&
+			      (map_.tr_n(node_).field->is_interior(player_->player_number())) &&
+			      (map_.tl_n(node_).field->is_interior(player_->player_number())))) {
+				continue;
+			}
 
-			if (building_descr->get_isport())
+			if (building_descr->get_isport()) {
 				ppgrid = &bbg_house[3];
-			else
+			} else {
 				ppgrid = &bbg_house[size];
+			}
 		}
 
 		// Allocate the tab's grid if necessary
@@ -598,7 +631,14 @@ void FieldActionWindow::act_buildflag() {
 void FieldActionWindow::act_configure_economy() {
 	if (upcast(const Widelands::Flag, flag, node_.field->get_immovable())) {
 		Widelands::Economy* economy = flag->get_economy();
-		if (!economy->has_window()) {
+		if (economy->get_options_window()) {
+			EconomyOptionsWindow& window =
+			   *static_cast<EconomyOptionsWindow*>(economy->get_options_window());
+			if (window.is_minimal()) {
+				window.restore();
+			}
+			window.move_to_top();
+		} else {
 			bool can_act =
 			   dynamic_cast<InteractiveGameBase&>(ibase()).can_act(economy->owner().player_number());
 			new EconomyOptionsWindow(dynamic_cast<UI::Panel*>(&ibase()), economy, can_act);

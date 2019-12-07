@@ -200,6 +200,10 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
 			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
 			return true;
 
+		case SDLK_g:
+			menu_windows_.stats_general.toggle();
+			return true;
+
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				new GameMainMenuSaveGame(*this, menu_windows_.savegame);

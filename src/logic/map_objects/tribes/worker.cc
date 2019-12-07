@@ -245,7 +245,7 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 		// Add penalty for fields that are running out
 		if (amount == 0)
 			// we already know it's completely empty, so punish is less
-			totalchance += 1;
+			++totalchance;
 		else if (amount <= 2)
 			totalchance += 6;
 		else if (amount <= 4)
@@ -346,10 +346,10 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 			}
 			std::vector<ImmovableFound> list;
 			if (action.iparam2 < 0)
-				map.find_reachable_immovables(area, &list, cstep);
+				map.find_reachable_immovables(game, area, &list, cstep);
 			else
 				map.find_reachable_immovables(
-				   area, &list, cstep, FindImmovableAttribute(action.iparam2));
+				   game, area, &list, cstep, FindImmovableAttribute(action.iparam2));
 
 			for (int idx = list.size() - 1; idx >= 0; idx--) {
 				if (upcast(Immovable, imm, list[idx].object)) {
@@ -377,9 +377,9 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 			}
 			std::vector<Bob*> list;
 			if (action.iparam2 < 0)
-				map.find_reachable_bobs(area, &list, cstep);
+				map.find_reachable_bobs(game, area, &list, cstep);
 			else
-				map.find_reachable_bobs(area, &list, cstep, FindBobAttribute(action.iparam2));
+				map.find_reachable_bobs(game, area, &list, cstep, FindBobAttribute(action.iparam2));
 
 			for (int idx = list.size() - 1; idx >= 0; idx--) {
 				if (upcast(MapObject, bob, list[idx])) {
@@ -530,12 +530,12 @@ struct FindNodeSpace {
 	explicit FindNodeSpace(BaseImmovable* const ignoreimm) : ignoreimmovable(ignoreimm) {
 	}
 
-	bool accept(const Map& map, const FCoords& coords) const {
+	bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
 		if (!(coords.field->nodecaps() & MOVECAPS_WALK))
 			return false;
 
 		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-			FCoords const neighb = map.get_neighbour(coords, dir);
+			FCoords const neighb = egbase.map().get_neighbour(coords, dir);
 
 			if (!(neighb.field->nodecaps() & MOVECAPS_WALK) &&
 			    neighb.field->get_immovable() != ignoreimmovable)
@@ -573,7 +573,10 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	if (action.iparam3)
 		functor.add(FindNodeSpace(get_location(game)));
 
-	if (!map.find_reachable_fields(area, &list, cstep, functor)) {
+	if (action.iparam7)
+		functor.add(FindNodeTerraform());
+
+	if (!map.find_reachable_fields(game, area, &list, cstep, functor)) {
 
 		// This is default note "out of resources" sent to a player
 		FailNotificationType fail_notification_type = FailNotificationType::kDefault;
@@ -593,7 +596,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 				functorAnyFull.add(FindNodeSpace(get_location(game)));
 
 			// If there are fields full of fish, we change the type of notification
-			if (map.find_reachable_fields(area, &list, cstep, functorAnyFull)) {
+			if (map.find_reachable_fields(game, area, &list, cstep, functorAnyFull)) {
 				fail_notification_type = FailNotificationType::kFull;
 			}
 		}
@@ -915,6 +918,56 @@ bool Worker::run_createbob(Game& game, State& state, const Action& action) {
 	}
 
 	game.create_critter(get_position(), critter);
+	++state.ivar1;
+	schedule_act(game, 10);
+	return true;
+}
+
+bool Worker::run_terraform(Game& game, State& state, const Action&) {
+	const World& world = game.world();
+	std::map<TCoords<FCoords>, DescriptionIndex> triangles;
+	const FCoords f = get_position();
+	FCoords tln, ln, trn;
+	game.map().get_tln(f, &tln);
+	game.map().get_trn(f, &trn);
+	game.map().get_ln(f, &ln);
+
+	DescriptionIndex di =
+	   world.get_terrain_index(world.terrain_descr(f.field->terrain_r()).enhancement());
+	if (di != INVALID_INDEX) {
+		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::R), di));
+	}
+	di = world.get_terrain_index(world.terrain_descr(f.field->terrain_d()).enhancement());
+	if (di != INVALID_INDEX) {
+		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::D), di));
+	}
+	di = world.get_terrain_index(world.terrain_descr(tln.field->terrain_r()).enhancement());
+	if (di != INVALID_INDEX) {
+		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::R), di));
+	}
+	di = world.get_terrain_index(world.terrain_descr(tln.field->terrain_d()).enhancement());
+	if (di != INVALID_INDEX) {
+		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::D), di));
+	}
+	di = world.get_terrain_index(world.terrain_descr(ln.field->terrain_r()).enhancement());
+	if (di != INVALID_INDEX) {
+		triangles.emplace(std::make_pair(TCoords<FCoords>(ln, TriangleIndex::R), di));
+	}
+	di = world.get_terrain_index(world.terrain_descr(trn.field->terrain_d()).enhancement());
+	if (di != INVALID_INDEX) {
+		triangles.emplace(std::make_pair(TCoords<FCoords>(trn, TriangleIndex::D), di));
+	}
+
+	if (triangles.empty()) {
+		send_signal(game, "fail");
+		pop_task(game);
+		return false;
+	}
+	assert(game.mutable_map());
+	auto it = triangles.begin();
+	for (size_t rand = game.logic_rand() % triangles.size(); rand > 0; --rand)
+		++it;
+	game.mutable_map()->change_terrain(game, it->first, it->second);
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;
@@ -2462,7 +2515,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 	std::vector<ImmovableFound> flags;
 	uint32_t vision = descr().vision_range();
 	uint32_t maxdist = 4 * vision;
-	if (map.find_immovables(Area<FCoords>(map.get_fcoords(get_position()), maxdist), &flags,
+	if (map.find_immovables(game, Area<FCoords>(map.get_fcoords(get_position()), maxdist), &flags,
 	                        FindFlagWithPlayersWarehouse(*get_owner()))) {
 		uint32_t bestdist = 0;
 		Flag* best = nullptr;
@@ -2576,7 +2629,7 @@ void Worker::geologist_update(Game& game, State& state) {
 		ffa.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone), false);
 		ffa.add(FindNodeImmovableAttribute(RESI), true);
 
-		if (map.find_reachable_fields(owner_area, &list, cstep, ffa)) {
+		if (map.find_reachable_fields(game, owner_area, &list, cstep, ffa)) {
 			FCoords target;
 
 			// is center a mountain piece?
@@ -2840,7 +2893,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 		std::vector<ImmovableFound> found_sites;
 		CheckStepWalkOn csteb(MOVECAPS_WALK, true);
 		map.find_reachable_immovables(
-		   revealations, &found_sites, csteb, FindFlagOf(FindForeignMilitarysite(player)));
+		   game, revealations, &found_sites, csteb, FindFlagOf(FindForeignMilitarysite(player)));
 
 		add_sites(game, map, player, found_sites);
 
@@ -2868,7 +2921,7 @@ bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
 	Time oldest_time = game.get_gametime();
 
 	// if some fields can be reached
-	if (map.find_reachable_fields(exploring_area, &list, cstep, ffa) > 0) {
+	if (map.find_reachable_fields(game, exploring_area, &list, cstep, ffa) > 0) {
 		// Parse randomly the reachable fields, maximum 50 iterations
 		uint8_t iterations = list.size() % 51;
 		uint8_t oldest_distance = 0;
@@ -2942,7 +2995,7 @@ bool Worker::scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceT
 	// would fail. Therefore, the looping can be a bit silly to more knowledgeable readers.
 	for (unsigned vicinity = 1; vicinity < 4; vicinity++) {
 		Area<FCoords> exploring_area(map.get_fcoords(scoutat.scoutme), vicinity);
-		if (map.find_reachable_fields(exploring_area, &surrounding_places, cstep, fna) > 0) {
+		if (map.find_reachable_fields(game, exploring_area, &surrounding_places, cstep, fna) > 0) {
 			unsigned formax = surrounding_places.size();
 			if (3 + vicinity < formax) {
 				formax = 3 + vicinity;

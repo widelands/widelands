@@ -34,5 +34,5 @@ wl_library(sound
     logic_exceptions
     random
     sound_constants
-    widelands_ball_of_mud
+    widelands_options
 )

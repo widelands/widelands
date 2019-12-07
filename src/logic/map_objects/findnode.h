@@ -30,8 +30,8 @@ namespace Widelands {
 
 enum class AnimalBreedable { kDefault, kAnimalFull };
 
+class EditorGameBase;
 struct FCoords;
-class Map;
 
 struct FindNode {
 private:
@@ -48,14 +48,14 @@ private:
 			if (--refcount == 0)
 				delete this;
 		}
-		virtual bool accept(const Map&, const FCoords& coord) const = 0;
+		virtual bool accept(const EditorGameBase&, const FCoords& coord) const = 0;
 
 		int refcount;
 	};
 	template <typename T> struct Capsule : public BaseCapsule {
 		explicit Capsule(const T& init_op) : op(init_op) {
 		}
-		bool accept(const Map& map, const FCoords& coord) const override {
+		bool accept(const EditorGameBase& map, const FCoords& coord) const override {
 			return op.accept(map, coord);
 		}
 
@@ -85,7 +85,7 @@ public:
 	}
 
 	// Return true if this node should be returned by find_fields()
-	bool accept(const Map& map, const FCoords& coord) const {
+	bool accept(const EditorGameBase& map, const FCoords& coord) const {
 		return capsule->accept(map, coord);
 	}
 };
@@ -94,7 +94,7 @@ struct FindNodeCaps {
 	explicit FindNodeCaps(uint8_t init_mincaps) : mincaps(init_mincaps) {
 	}
 
-	bool accept(const Map&, const FCoords&) const;
+	bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	uint8_t mincaps;
@@ -107,7 +107,7 @@ struct FindNodeAnd {
 
 	void add(const FindNode&, bool negate = false);
 
-	bool accept(const Map&, const FCoords&) const;
+	bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	struct Subfunctor {
@@ -130,12 +130,13 @@ struct FindNodeSize {
 		sizeBig,
 		sizeMine,  //  can build a mine on this field
 		sizePort,  //  can build a port on this field
+		sizeSwim   // coast
 	};
 
 	explicit FindNodeSize(Size init_size) : size(init_size) {
 	}
 
-	bool accept(const Map&, const FCoords&) const;
+	bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	Size size;
@@ -148,7 +149,7 @@ struct FindNodeImmovableSize {
 	explicit FindNodeImmovableSize(uint32_t init_sizes) : sizes(init_sizes) {
 	}
 
-	bool accept(const Map&, const FCoords&) const;
+	bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	uint32_t sizes;
@@ -159,7 +160,7 @@ struct FindNodeImmovableAttribute {
 	explicit FindNodeImmovableAttribute(uint32_t attrib) : attribute(attrib) {
 	}
 
-	bool accept(const Map&, const FCoords&) const;
+	bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	uint32_t attribute;
@@ -170,7 +171,7 @@ struct FindNodeResource {
 	explicit FindNodeResource(DescriptionIndex res) : resource(res) {
 	}
 
-	bool accept(const Map&, const FCoords&) const;
+	bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	DescriptionIndex resource;
@@ -184,11 +185,17 @@ struct FindNodeResourceBreedable {
 	   : resource(res), strictness(br) {
 	}
 
-	bool accept(const Map&, const FCoords&) const;
+	bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	DescriptionIndex resource;
 	AnimalBreedable strictness;
+};
+
+/// Accepts a node where at least 1 adjacent triangle has enhancable terrain
+struct FindNodeTerraform {
+	FindNodeTerraform() = default;
+	bool accept(const EditorGameBase&, const FCoords&) const;
 };
 
 /// Accepts a node if it is a shore node in the sense that it is walkable
@@ -197,7 +204,7 @@ struct FindNodeShore {
 	explicit FindNodeShore(uint16_t f = 1) : min_fields(f) {
 	}
 
-	bool accept(const Map&, const FCoords&) const;
+	bool accept(const EditorGameBase&, const FCoords&) const;
 
 private:
 	// Minimal number of reachable swimmable fields. 1 is minimum for this to be considered "shore"

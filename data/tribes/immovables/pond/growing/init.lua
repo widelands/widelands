@@ -15,11 +15,11 @@ tribes:new_immovable_type {
          "transform=pond_mature",
       },
    },
-
    animations = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = { 8, 5 },
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {8, 5}
+      }
    }
 }

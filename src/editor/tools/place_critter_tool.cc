@@ -24,18 +24,18 @@
 #include "logic/field.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/world/critter.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 
 /**
  * Choses an object to place randomly from all enabled
  * and places this on the current field
  */
-int32_t EditorPlaceCritterTool::handle_click_impl(const Widelands::World& world,
-                                                  const Widelands::NodeAndTriangle<>& center,
-                                                  EditorInteractive& parent,
+int32_t EditorPlaceCritterTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                                  EditorInteractive& eia,
                                                   EditorActionArgs* args,
                                                   Widelands::Map* map) {
-
+	Widelands::EditorGameBase& egbase = eia.egbase();
 	if (get_nr_enabled() && args->old_bob_type.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   *map,
@@ -44,12 +44,11 @@ int32_t EditorPlaceCritterTool::handle_click_impl(const Widelands::World& world,
 			Widelands::Bob* const mbob = mr.location().field->get_first_bob();
 			args->old_bob_type.push_back((mbob ? &mbob->descr() : nullptr));
 			args->new_bob_type.push_back(dynamic_cast<const Widelands::BobDescr*>(
-			   world.get_critter_descr(get_random_enabled())));
+			   egbase.world().get_critter_descr(get_random_enabled())));
 		} while (mr.advance(*map));
 	}
 
 	if (!args->new_bob_type.empty()) {
-		Widelands::EditorGameBase& egbase = parent.egbase();
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   *map,
 		   Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
@@ -69,13 +68,12 @@ int32_t EditorPlaceCritterTool::handle_click_impl(const Widelands::World& world,
 }
 
 int32_t EditorPlaceCritterTool::handle_undo_impl(
-   const Widelands::World&,
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-   EditorInteractive& parent,
+   EditorInteractive& eia,
    EditorActionArgs* args,
    Widelands::Map* map) {
+	Widelands::EditorGameBase& egbase = eia.egbase();
 	if (!args->new_bob_type.empty()) {
-		Widelands::EditorGameBase& egbase = parent.egbase();
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   *map,
 		   Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));

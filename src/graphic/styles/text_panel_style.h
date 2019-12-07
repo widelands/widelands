@@ -38,7 +38,6 @@ struct TextPanelStyleInfo {
 	   : background_(new UI::PanelStyleInfo(other.background())),
 	     font_(new UI::FontStyleInfo(other.font())) {
 	}
-	TextPanelStyleInfo& operator=(const TextPanelStyleInfo& other) = default;
 
 	const UI::FontStyleInfo& font() const {
 		return *font_.get();

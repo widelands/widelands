@@ -289,13 +289,13 @@ bool ProductionProgram::ActReturn::Negation::evaluate(const ProductionSite& ps) 
 }
 
 // Just a dummy to satisfy the superclass interface. Returns an empty string.
-std::string ProductionProgram::ActReturn::Negation::description(const Tribes&) const {
-	return "";
+std::string ProductionProgram::ActReturn::Negation::description(const Tribes& t) const {
+	return operand->description_negation(t);
 }
 
 // Just a dummy to satisfy the superclass interface. Returns an empty string.
-std::string ProductionProgram::ActReturn::Negation::description_negation(const Tribes&) const {
-	return "";
+std::string ProductionProgram::ActReturn::Negation::description_negation(const Tribes& t) const {
+	return operand->description(t);
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate(const ProductionSite& ps) const {
@@ -1519,7 +1519,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	std::vector<ImmovableFound> immovables;
 	CheckStepWalkOn cstep(MOVECAPS_WALK, true);
 	Area<FCoords> area(map.get_fcoords(psite.base_flag().get_position()), radius);
-	if (map.find_reachable_immovables(area, &immovables, cstep, FindImmovableByDescr(descr))) {
+	if (map.find_reachable_immovables(game, area, &immovables, cstep, FindImmovableByDescr(descr))) {
 		state.objvar = immovables[0].object;
 
 		psite.working_positions_[psite.main_worker_].worker->update_task_buildingwork(game);
@@ -1532,7 +1532,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	// 10 is custom value to make sure the "water" is at least 10 nodes big
 	fna.add(FindNodeShore(10));
 	fna.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone));
-	if (map.find_reachable_fields(area, &fields, cstep, fna)) {
+	if (map.find_reachable_fields(game, area, &fields, cstep, fna)) {
 		// Testing received fields to get one with less immovables nearby
 		Coords best_coords = fields.back();  // Just to initialize it
 		uint32_t best_score = std::numeric_limits<uint32_t>::max();
@@ -1542,7 +1542,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 			// Counting immovables nearby
 			std::vector<ImmovableFound> found_immovables;
 			const uint32_t imm_count =
-			   map.find_immovables(Area<FCoords>(map.get_fcoords(coords), 2), &found_immovables);
+			   map.find_immovables(game, Area<FCoords>(map.get_fcoords(coords), 2), &found_immovables);
 			if (best_score > imm_count) {
 				best_score = imm_count;
 				best_coords = coords;

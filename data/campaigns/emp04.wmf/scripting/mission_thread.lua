@@ -13,7 +13,7 @@ function dismantle()
    local o = add_campaign_objective(obj_dismantle_buildings)
    local buildmessage = false
    sleep(5000)
-   while count_buildings(p1, {"empire_fishers_house", "empire_quarry", "empire_lumberjacks_house1", "empire_well1"}) > 0 do
+   while count_buildings(p1, {"empire_fishers_house", "empire_quarry", "empire_lumberjacks_house1", "empire_well1"}) > 2 do
       if mv.windows.field_action and mv.windows.field_action.tabs.small and not buildmessage then
          campaign_message_box(amalea_19)
          buildmessage = true
@@ -310,6 +310,7 @@ function training()
 
    -- after some training we have enough knowledge to build better training buildings
    p1:allow_buildings{"empire_trainingcamp", "empire_colosseum"}
+   p1:forbid_buildings{"empire_trainingcamp1"}
    campaign_message_box(saledus_7)
    local o2 = add_campaign_objective(obj_upgrade)
    sleep(5000)

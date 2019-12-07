@@ -106,15 +106,17 @@ void MainMenuNewMap::clicked_create_map() {
 
 	parent.cleanup_for_load();
 
-	map->create_empty_map(egbase.world(), map_size_box_.selected_width(),
-	                      map_size_box_.selected_height(), list_.get_selected(), _("No Name"),
+	map->create_empty_map(egbase, map_size_box_.selected_width(), map_size_box_.selected_height(),
+	                      list_.get_selected(), _("No Name"),
 	                      get_config_string("realname", pgettext("author_name", "Unknown")));
 
+	egbase.set_loader_ui(&loader_ui);
 	egbase.postload();
-	egbase.load_graphics(loader_ui);
+	egbase.load_graphics();
 
-	map->recalc_whole_map(egbase.world());
+	map->recalc_whole_map(egbase);
 	parent.map_changed(EditorInteractive::MapWas::kReplaced);
+	egbase.set_loader_ui(nullptr);
 	die();
 }
 

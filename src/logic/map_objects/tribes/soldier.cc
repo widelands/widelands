@@ -30,6 +30,7 @@
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
@@ -781,7 +782,7 @@ void Soldier::init_auto_task(Game& game) {
 struct FindNodeOwned {
 	explicit FindNodeOwned(PlayerNumber owner) : owner_(owner) {
 	}
-	bool accept(const Map&, const FCoords& coords) const {
+	bool accept(const EditorGameBase&, const FCoords& coords) const {
 		return (coords.field->get_owned_by() == owner_);
 	}
 
@@ -926,7 +927,7 @@ void Soldier::attack_update(Game& game, State& state) {
 				std::vector<Coords> coords;
 				uint32_t maxdist = descr().vision_range() * 2;
 				Area<FCoords> area(map.get_fcoords(get_position()), maxdist);
-				if (map.find_reachable_fields(area, &coords, CheckStepDefault(descr().movecaps()),
+				if (map.find_reachable_fields(game, area, &coords, CheckStepDefault(descr().movecaps()),
 				                              FindNodeOwned(get_owner()->player_number()))) {
 					// Found home land
 					target = coords.front();
@@ -971,8 +972,8 @@ void Soldier::attack_update(Game& game, State& state) {
 		}
 		//  Any enemy soldier at baseflag count as defender.
 		std::vector<Bob*> soldiers;
-		map.find_bobs(Area<FCoords>(map.get_fcoords(enemy->base_flag().get_position()), 0), &soldiers,
-		              FindBobEnemySoldier(get_owner()));
+		map.find_bobs(game, Area<FCoords>(map.get_fcoords(enemy->base_flag().get_position()), 0),
+		              &soldiers, FindBobEnemySoldier(get_owner()));
 		defenders += soldiers.size();
 	}
 
@@ -1172,7 +1173,7 @@ void Soldier::defense_update(Game& game, State& state) {
 			// Check if any attacker is waiting us to fight
 			std::vector<Bob*> soldiers;
 			game.map().find_bobs(
-			   Area<FCoords>(get_position(), 0), &soldiers, FindBobEnemySoldier(get_owner()));
+			   game, Area<FCoords>(get_position(), 0), &soldiers, FindBobEnemySoldier(get_owner()));
 
 			for (Bob* temp_bob : soldiers) {
 				if (upcast(Soldier, temp_soldier, temp_bob)) {
@@ -1196,7 +1197,7 @@ void Soldier::defense_update(Game& game, State& state) {
 
 	// We are outside our building, get list of enemy soldiers attacking us
 	std::vector<Bob*> soldiers;
-	game.map().find_bobs(Area<FCoords>(get_position(), 10), &soldiers,
+	game.map().find_bobs(game, Area<FCoords>(get_position(), 10), &soldiers,
 	                     FindBobSoldierAttackingPlayer(game, *get_owner()));
 
 	if (soldiers.empty() || (get_current_health() < get_retreat_health())) {
@@ -1643,7 +1644,8 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 void Soldier::send_space_signals(Game& game) {
 	std::vector<Bob*> soldiers;
 
-	game.map().find_bobs(Area<FCoords>(get_position(), 1), &soldiers, FindBobSoldierOnBattlefield());
+	game.map().find_bobs(
+	   game, Area<FCoords>(get_position(), 1), &soldiers, FindBobSoldierOnBattlefield());
 
 	for (Bob* temp_soldier : soldiers) {
 		if (upcast(Soldier, soldier, temp_soldier)) {
@@ -1659,7 +1661,7 @@ void Soldier::send_space_signals(Game& game) {
 		// Let's collect all reachable attack_target sites in vicinity (militarysites mainly)
 		std::vector<BaseImmovable*> attack_targets;
 		game.map().find_reachable_immovables_unique(
-		   Area<FCoords>(get_position(), kMaxProtectionRadius), attack_targets,
+		   game, Area<FCoords>(get_position(), kMaxProtectionRadius), attack_targets,
 		   CheckStepWalkOn(descr().movecaps(), false), FindImmovableAttackTarget());
 
 		for (BaseImmovable* temp_attack_target : attack_targets) {

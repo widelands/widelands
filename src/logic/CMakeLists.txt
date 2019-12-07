@@ -63,7 +63,7 @@ wl_library(logic_game_controller
     logic_commands
     logic_game_settings
     ui_basic
-    widelands_ball_of_mud
+    widelands_options
     wui
 )
 
@@ -258,7 +258,7 @@ wl_library(logic
     sound
     sound_constants
     ui_basic
-    widelands_ball_of_mud
+    widelands_options
     wui # TODO(GunChleoc): Circular dependency
 )
 

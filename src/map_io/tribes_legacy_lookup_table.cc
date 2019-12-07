@@ -38,7 +38,11 @@ TribesLegacyLookupTable::TribesLegacyLookupTable()
         {"reed_small", "reedfield_small"},
         {"reed_tiny", "reedfield_tiny"},
         {"reed_ripe", "reedfield_ripe"},
-     } {
+     },
+     // Buildings
+     buildings_{},
+     // Ships
+     ships_{} {
 }
 
 const std::string& TribesLegacyLookupTable::lookup_worker(const std::string& worker) const {
@@ -51,6 +55,14 @@ const std::string& TribesLegacyLookupTable::lookup_ware(const std::string& ware)
 
 const std::string& TribesLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
 	return lookup_entry(immovable, immovables_);
+}
+
+const std::string& TribesLegacyLookupTable::lookup_building(const std::string& building) const {
+	return lookup_entry(building, buildings_);
+}
+
+const std::string& TribesLegacyLookupTable::lookup_ship(const std::string& ship) const {
+	return lookup_entry(ship, ships_);
 }
 
 const std::string&

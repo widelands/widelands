@@ -69,7 +69,8 @@ initialization
 ============
 */
 EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
-   : gametime_(0),
+   : loader_ui_(nullptr),
+     gametime_(0),
      lua_(lua_interface),
      player_manager_(new PlayersManager(*this)),
      ibase_(nullptr),
@@ -82,6 +83,9 @@ EditorGameBase::~EditorGameBase() {
 	delete_tempfile();
 	if (g_sh != nullptr) {
 		g_sh->remove_fx_set(SoundType::kAmbient);
+	}
+	if (loader_ui_) {
+		delete loader_ui_;
 	}
 }
 
@@ -291,9 +295,14 @@ void EditorGameBase::postload() {
 		}
 	}
 
-	// Postload tribes
+	// Postload tribes and world
+	if (loader_ui_) {
+		loader_ui_->step(_("Postloading world and tribes…"));
+	}
 	assert(tribes_);
 	tribes_->postload();
+	assert(world_);
+	world_->postload();
 
 	for (DescriptionIndex i = 0; i < tribes_->nrtribes(); i++) {
 		const TribeDescr* tribe = tribes_->get_tribe_descr(i);
@@ -318,10 +327,16 @@ void EditorGameBase::postload() {
  * If the graphics system is to be replaced at runtime, the function must be called after that has
  * happened.
  */
-void EditorGameBase::load_graphics(UI::ProgressWindow& loader_ui) {
+void EditorGameBase::load_graphics() {
 	assert(tribes_);
-	loader_ui.step(_("Loading graphics"));
+	assert(loader_ui_);
+	loader_ui_->step(_("Loading graphics"));
 	tribes_->load_graphics();
+}
+
+void EditorGameBase::set_loader_ui(UI::ProgressWindow* w) {
+	assert((w == nullptr) ^ (loader_ui_ == nullptr));
+	loader_ui_ = w;
 }
 
 /**
@@ -333,7 +348,7 @@ void EditorGameBase::load_graphics(UI::ProgressWindow& loader_ui) {
 Building& EditorGameBase::warp_building(const Coords& c,
                                         PlayerNumber const owner,
                                         DescriptionIndex const idx,
-                                        Building::FormerBuildings former_buildings) {
+                                        FormerBuildings former_buildings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 	return tribe.get_building_descr(idx)->create(*this, plr, c, false, true, former_buildings);
@@ -350,7 +365,7 @@ Building& EditorGameBase::warp_constructionsite(const Coords& c,
                                                 PlayerNumber const owner,
                                                 DescriptionIndex idx,
                                                 bool loading,
-                                                Building::FormerBuildings former_buildings,
+                                                FormerBuildings former_buildings,
                                                 const BuildingSettings* settings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
@@ -370,7 +385,7 @@ Building& EditorGameBase::warp_constructionsite(const Coords& c,
 Building& EditorGameBase::warp_dismantlesite(const Coords& c,
                                              PlayerNumber const owner,
                                              bool loading,
-                                             Building::FormerBuildings former_buildings) {
+                                             FormerBuildings former_buildings) {
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 
@@ -507,10 +522,17 @@ Player* EditorGameBase::get_safe_player(PlayerNumber const n) {
  * make this object ready to load new data
  */
 void EditorGameBase::cleanup_for_load() {
+	auto set_progress_message = [this](std::string s) {
+		if (loader_ui_)
+			loader_ui_->step(s);
+	};
+	set_progress_message(_("Cleaning up for loading: Map objects (1/3)"));
 	cleanup_objects();  /// Clean all the stuff up, so we can load.
 
+	set_progress_message(_("Cleaning up for loading: Players (2/3)"));
 	player_manager_->cleanup();
 
+	set_progress_message(_("Cleaning up for loading: Map (3/3)"));
 	map_.cleanup();
 
 	delete_tempfile();
@@ -646,7 +668,7 @@ void EditorGameBase::conquer_area_no_building(PlayerArea<Area<FCoords>> player_a
 	//  This must reach two steps beyond the conquered area to adjust the borders
 	//  of neighbour players.
 	player_area.radius += 2;
-	map_.recalc_for_field_area(world(), player_area);
+	map_.recalc_for_field_area(*this, player_area);
 }
 
 /// Conquers the given area for that player; does the actual work.
@@ -721,7 +743,7 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 	// This must reach two steps beyond the conquered area to adjust the borders
 	// of neighbour players.
 	player_area.radius += 2;
-	map_.recalc_for_field_area(world(), player_area);
+	map_.recalc_for_field_area(*this, player_area);
 
 	//  Deal with player immovables in the lost area
 	//  Players are not allowed to have their immovables on their borders.
@@ -741,7 +763,7 @@ void EditorGameBase::cleanup_playerimmovables_area(PlayerArea<Area<FCoords>> con
 	std::vector<PlayerImmovable*> burnlist;
 
 	//  find all immovables that need fixing
-	map_.find_immovables(area, &immovables, FindImmovablePlayerImmovable());
+	map_.find_immovables(*this, area, &immovables, FindImmovablePlayerImmovable());
 
 	for (const ImmovableFound& temp_imm : immovables) {
 		upcast(PlayerImmovable, imm, temp_imm.object);

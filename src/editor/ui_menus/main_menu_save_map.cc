@@ -222,6 +222,7 @@ void MainMenuSaveMap::update_map_options() {
 	map_details_.update(mapdata, false);
 	if (old_name == editbox_->text()) {
 		editbox_->set_text(map_details_.name());
+		edit_box_changed();
 	}
 }
 /**
@@ -315,7 +316,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	Widelands::Map* map = egbase.mutable_map();
 
 	// Recompute seafaring tag
-	map->cleanup_port_spaces(egbase.world());
+	map->cleanup_port_spaces(egbase);
 	if (map->allows_seafaring()) {
 		map->add_tag("seafaring");
 	} else {

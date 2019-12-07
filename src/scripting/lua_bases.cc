@@ -35,6 +35,7 @@
 #include "scripting/factory.h"
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"
+#include "ui_basic/progresswindow.h"
 
 using namespace Widelands;
 
@@ -89,6 +90,7 @@ const MethodType<LuaEditorGameBase> LuaEditorGameBase::Methods[] = {
    METHOD(LuaEditorGameBase, get_terrain_description),
    METHOD(LuaEditorGameBase, save_campaign_data),
    METHOD(LuaEditorGameBase, read_campaign_data),
+   METHOD(LuaEditorGameBase, set_loading_message),
    {nullptr, nullptr},
 };
 const PropertyType<LuaEditorGameBase> LuaEditorGameBase::Properties[] = {
@@ -539,6 +541,19 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 	return 1;
 }
 
+/* RST
+   .. function:: set_loading_message(text)
+
+      :arg text: the text to display
+
+      Change the progress message on the loading screen.
+      May be used from the init.lua files for tribe/world loading only.
+*/
+int LuaEditorGameBase::set_loading_message(lua_State* L) {
+	get_egbase(L).get_loader_ui()->step(luaL_checkstring(L, 2));
+	return 0;
+}
+
 /*
  ==========================================================
  C METHODS
@@ -785,7 +800,7 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	}
 	DescriptionIndex building_index = tribes.building_index(name);
 
-	BuildingDescr::FormerBuildings former_buildings;
+	FormerBuildings former_buildings;
 	find_former_buildings(tribes, building_index, &former_buildings);
 	if (constructionsite) {
 		former_buildings.pop_back();

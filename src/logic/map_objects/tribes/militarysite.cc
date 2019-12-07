@@ -162,7 +162,8 @@ void MilitarySite::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) 
 	       map.calc_distance(enemy.get_position(), military_site_->get_position()))
 		return;
 
-	if (map.find_bobs(Area<FCoords>(map.get_fcoords(military_site_->base_flag().get_position()), 2),
+	if (map.find_bobs(game,
+	                  Area<FCoords>(map.get_fcoords(military_site_->base_flag().get_position()), 2),
 	                  nullptr, FindBobEnemySoldier(owner)))
 		return;
 
@@ -261,7 +262,7 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 	// In fact we do not conquer it, but place a new building of same type at
 	// the old location.
 
-	Building::FormerBuildings former_buildings = military_site_->old_buildings_;
+	FormerBuildings former_buildings = military_site_->old_buildings_;
 
 	// The enemy conquers the building
 	// In fact we do not conquer it, but place a new building of same type at
@@ -844,7 +845,7 @@ bool MilitarySite::military_presence_kept(Game& game) {
 
 	// Search in a radius of 3 (needed for big militarysites)
 	FCoords const fc = game.map().get_fcoords(get_position());
-	game.map().find_immovables(Area<FCoords>(fc, 3), &immovables);
+	game.map().find_immovables(game, Area<FCoords>(fc, 3), &immovables);
 
 	for (uint32_t i = 0; i < immovables.size(); ++i)
 		if (upcast(MilitarySite const, militarysite, immovables[i].object))

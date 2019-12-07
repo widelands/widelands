@@ -56,7 +56,7 @@
 namespace Widelands {
 
 // Overall package version
-constexpr uint16_t kCurrentPacketVersion = 4;
+constexpr uint16_t kCurrentPacketVersion = 5;
 
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
@@ -85,7 +85,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
 			while (!fr.end_of_file()) {
 				Serial const serial = fr.unsigned_32();
 				try {
@@ -144,10 +144,19 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 						building.leave_allow_ = nullptr;
 					}
 
-					while (fr.unsigned_8()) {
-						DescriptionIndex oldidx =
-						   building.owner().tribe().safe_building_index(fr.c_string());
-						building.old_buildings_.push_back(oldidx);
+					if (packet_version >= kCurrentPacketVersion) {
+						while (fr.unsigned_8()) {
+							DescriptionIndex oldidx =
+							   building.owner().tribe().safe_building_index(fr.c_string());
+							const std::string type(fr.c_string());
+							building.old_buildings_.push_back(std::make_pair(oldidx, type));
+						}
+					} else {
+						while (fr.unsigned_8()) {
+							DescriptionIndex oldidx =
+							   building.owner().tribe().safe_building_index(fr.c_string());
+							building.old_buildings_.push_back(std::make_pair(oldidx, ""));
+						}
 					}
 					// Only construction sites may have an empty list
 					if (building.old_buildings_.empty() && !is_a(ConstructionSite, &building)) {
@@ -741,7 +750,7 @@ void MapBuildingdataPacket::read_productionsite(
 			productionsite.production_result_ = fr.c_string();
 
 			// TODO(GunChleoc): Savegame compatibility, remove after Build 21.
-			if (kCurrentPacketVersionProductionsite >= 7) {
+			if (packet_version >= 7) {
 				productionsite.main_worker_ = fr.signed_32();
 			} else {
 				productionsite.main_worker_ = productionsite.working_positions_[0].worker ? 0 : -1;
@@ -905,10 +914,11 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 			}
 			{
 				const TribeDescr& td = building->owner().tribe();
-				for (DescriptionIndex b_idx : building->old_buildings_) {
-					const BuildingDescr* b_descr = td.get_building_descr(b_idx);
+				for (const auto& pair : building->old_buildings_) {
+					const BuildingDescr* b_descr = td.get_building_descr(pair.first);
 					fw.unsigned_8(1);
 					fw.string(b_descr->name());
+					fw.string(pair.second);
 				}
 				fw.unsigned_8(0);
 			}

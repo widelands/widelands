@@ -19,6 +19,7 @@ wl_library(ui_fsmenu_options
     ui_fsmenu_base
     sound
     widelands_ball_of_mud
+    widelands_options
     wui_sound_options
 )
 
@@ -81,7 +82,7 @@ wl_library(ui_fsmenu_loading_common
     ui_basic
     ui_fsmenu_base
     ui_fsmenu_main_menu
-    widelands_ball_of_mud
+    widelands_options
     wui_common_mapdetails
     wui
 )
@@ -118,7 +119,7 @@ wl_library(ui_fsmenu_gameloading
     ui_fsmenu_helpwindow
     ui_fsmenu_loading_common
     ui_fsmenu_maploading
-    widelands_ball_of_mud
+    widelands_options
     wui
     wui_chat_ui
     wui_common_gamedetails
@@ -177,7 +178,7 @@ wl_library(ui_fsmenu_network
     sound
     ui_basic
     ui_fsmenu_base
-    widelands_ball_of_mud
+    widelands_options
     wui_chat_ui
 )
 

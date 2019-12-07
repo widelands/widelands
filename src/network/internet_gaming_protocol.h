@@ -94,7 +94,7 @@ static const std::string INTERNET_GAME_RUNNING = "RUNNING";  // Playing
  * metaserver and the clients.
  *
  * The network stream of the internet gaming protocol is split up into
- * packets (see \ref Deserializer, \ref RecvPacket, \ref SendPacket).
+ * packets (see \ref RecvPacket, \ref SendPacket).
  * Every packet starts with a single-byte command code.
  *
  * \note ALL PAYLOADS SHALL BE STRINGS - this is for easier handling and debugging of the

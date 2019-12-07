@@ -31,11 +31,11 @@ constexpr uint8_t kMaxPlayers = 16;
 
 // Hard coded player colors
 const RGBColor kPlayerColors[kMaxPlayers] = {
-   RGBColor(2, 2, 198),      // blue
+   RGBColor(65, 105, 225),   // royal blue
    RGBColor(255, 41, 0),     // red
    RGBColor(255, 232, 0),    // yellow
    RGBColor(59, 223, 3),     // green
-   RGBColor(57, 57, 57),     // black/dark gray
+   RGBColor(128, 128, 128),  // gray
    RGBColor(255, 172, 0),    // orange
    RGBColor(215, 0, 218),    // purple
    RGBColor(255, 255, 255),  // white
@@ -46,7 +46,7 @@ const RGBColor kPlayerColors[kMaxPlayers] = {
    RGBColor(255, 120, 160),  // rose
    RGBColor(148, 56, 0),     // brown
    RGBColor(96, 0, 84),      // dark purple
-   RGBColor(144, 144, 144),  // light gray
+   RGBColor(192, 192, 192),  // silver
 };
 
 // Hard coded team colors

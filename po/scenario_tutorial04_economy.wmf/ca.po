@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-19 16:58+0000\n"
+"POT-Creation-Date: 2019-10-09 07:57+0000\n"
+"PO-Revision-Date: 2019-11-01 15:58+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -61,7 +61,7 @@ msgid ""
 "the east. A strange aura came from there, and no one wanted to set foot "
 "there. But the border could not be left undefended, and so you constructed "
 "three fortresses."
-msgstr ""
+msgstr "Però un dia vau descobrir un indret erm amb edificis abandonats a l'est. Hi notàveu una estranya aura i ningú hi volia posar els peus. Però no es podia deixar la frontera indefensa i per això hi vau construir tres fortaleses."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:34
 msgid ""
@@ -295,7 +295,7 @@ msgid ""
 "The stock window has four tabs. The first (and currently selected) one shows"
 " you all your current wares, including those on roads, at flags and inside "
 "buildings waiting for processing."
-msgstr ""
+msgstr "La finestra d'estoc té quatre pestanyes. La primera (la que està seleccionada ara) mostra els béns actuals, incloent-hi els que hi ha en els camins, banderes i dins dels edificis esperant ser processats."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:162
 msgid ""
@@ -334,7 +334,7 @@ msgstr "Heu tancat la finestra d'estoc!"
 msgid ""
 "You have closed the stock window, but I have not yet finished with my "
 "explanation. Would you please reopen it and choose the third tab?"
-msgstr ""
+msgstr "Heu tancat la finestra d'estoc, però no he acabat l'explicació. Si us plau, podeu tornar a obrir-la i escollir la tercera pestanya?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:197
@@ -346,7 +346,7 @@ msgid ""
 "You closed the stock window before I finished telling you everything about "
 "it. If you already know everything, please feel free to leave this tutorial "
 "at any time."
-msgstr ""
+msgstr "Heu tancat la finestra d'estoc abans que acabés d'explicar-vos-ho tot. No salteu passos del tutorial. Òbviament, si ja ho sabeu tot, podeu abandonar el tutorial en qualsevol moment."
 
 #. TRANSLATORS: "it" refers to the "Stock" window.
 #. TRANSLATORS: "it" refers to the ware statistics window.
@@ -578,7 +578,7 @@ msgstr "Obriu la finestra d'estadístiques de béns"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:317
 msgid "Select the ‘Wares’ entry from the ‘Statistics’ menu."
-msgstr ""
+msgstr "Seleccioneu l'entrada «Béns» del menú d'«Estadístiques»."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:339
@@ -615,7 +615,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:342
 msgid ""
 "I’ll continue as soon as you click on the third tab (‘Economy health’)."
-msgstr ""
+msgstr "Continuaré tan aviat com feu clic a la tercera pestanya («Salut de l'economia»)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:352
@@ -634,7 +634,7 @@ msgstr "Proveu-ho. També podeu comparar-ho amb les dues pestanyes anteriors."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:355
 msgid "When you have seen enough, switch to the fourth tab (‘Stock’)."
-msgstr ""
+msgstr "Després, canvieu a la quarta pestanya («Estoc»)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:363
 msgid ""
@@ -700,7 +700,7 @@ msgstr ""
 msgid ""
 "You have closed the ware statistics window, but I have not yet finished with"
 " my explanation. Would you please reopen it and choose the fourth tab?"
-msgstr ""
+msgstr "Heu tancat la finestra d'«Estadístiques de béns», però no he acabat l'explicació. Si us plau, podeu tornar a obrir-la i escollir la quarta pestanya?"
 
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:432
@@ -730,7 +730,7 @@ msgstr "Opcions de l'economia"
 msgid ""
 "I’ve shown you our stock window, where you could see which wares are at the "
 "warehouses. You remember?"
-msgstr ""
+msgstr "Us he mostrat la finestra d'estoc, on podreu veure quins béns estan als magatzems. Ho recordeu?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:451
 msgid ""

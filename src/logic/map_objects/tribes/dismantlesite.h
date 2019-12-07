@@ -73,7 +73,7 @@ public:
 	                       const Coords&,
 	                       Player*,
 	                       bool,
-	                       Building::FormerBuildings& former_buildings);
+	                       FormerBuildings& former_buildings);
 
 	bool burn_on_destroy() override;
 	bool init(EditorGameBase&) override;
@@ -84,6 +84,8 @@ public:
 
 protected:
 	void update_statistics_string(std::string*) override;
+
+	void cleanup(EditorGameBase&) override;
 
 	uint32_t build_step_time() const override {
 		return DISMANTLESITE_STEP_TIME;

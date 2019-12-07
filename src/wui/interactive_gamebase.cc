@@ -90,7 +90,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                10,
                34U,
                /** TRANSLATORS: Title for the main menu button in the game */
-               _("Main Menu"),
+               as_tooltip_text_with_hotkey(_("Main Menu"), pgettext("hotkey", "Esc")),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),
@@ -214,7 +214,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	 */
 	showhidemenu_.add(get_display_flag(dfShowCensus) ? _("Hide Census") : _("Show Census"),
 	                  ShowHideEntry::kCensus,
-	                  g_gr->images().get("images/wui/menus/toggle_census.png"), false, "", "c");
+	                  g_gr->images().get("images/wui/menus/toggle_census.png"), false, "", "C");
 
 	showhidemenu_.add(get_display_flag(dfShowStatistics) ?
 	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
@@ -222,7 +222,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	                     _("Hide Statistics") :
 	                     _("Show Statistics"),
 	                  ShowHideEntry::kStatistics,
-	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "s");
+	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "S");
 }
 
 void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
@@ -348,6 +348,9 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_PAGEDOWN:
 			decrease_gamespeed();
 			return true;
+		case SDLK_ESCAPE:
+			InteractiveGameBase::toggle_mainmenu();
+			return true;
 		default:
 			break;
 		}
@@ -444,7 +447,7 @@ void InteractiveGameBase::postload() {
 	show_buildhelp(false);
 
 	// Recalc whole map for changed owner stuff
-	egbase().mutable_map()->recalc_whole_map(egbase().world());
+	egbase().mutable_map()->recalc_whole_map(egbase());
 
 	// Close game-relevant UI windows (but keep main menu open)
 	fieldaction_.destroy();
@@ -469,6 +472,10 @@ void InteractiveGameBase::start() {
 			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
 		}
 	}
+}
+
+void InteractiveGameBase::toggle_mainmenu() {
+	mainmenu_.toggle();
 }
 
 void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords,
@@ -550,7 +557,7 @@ bool InteractiveGameBase::try_show_ship_window() {
 	}
 
 	std::vector<Widelands::Bob*> ships;
-	if (map.find_bobs(area, &ships, Widelands::FindBobShip())) {
+	if (map.find_bobs(egbase(), area, &ships, Widelands::FindBobShip())) {
 		for (Widelands::Bob* ship : ships) {
 			if (can_see(ship->owner().player_number())) {
 				// FindBobShip should have returned only ships
