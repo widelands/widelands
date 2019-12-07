@@ -30,6 +30,7 @@
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "economy/waterway.h"
 #include "graphic/color.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
@@ -264,7 +265,7 @@ void EditorGameBase::inform_players_about_ownership(MapIndex const i,
 }
 void EditorGameBase::inform_players_about_immovable(MapIndex const i,
                                                     MapObjectDescr const* const descr) {
-	if (!Road::is_road_descr(descr))
+	if (!Road::is_road_descr(descr) && !Waterway::is_waterway_descr(descr))
 		iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 			Player::Field& player_field = p->fields_[i];
 			if (1 < player_field.vision) {
@@ -503,6 +504,12 @@ Bob& EditorGameBase::create_ship(const Coords& c, const std::string& name, Playe
 	}
 }
 
+Bob& EditorGameBase::create_ferry(const Coords& c, Player* owner) {
+	const BobDescr* descr =
+	   dynamic_cast<const BobDescr*>(tribes().get_worker_descr(owner->tribe().ferry()));
+	return create_bob(c, *descr, owner);
+}
+
 /*
 ================
 Returns the correct player, creates it
@@ -538,7 +545,7 @@ void EditorGameBase::cleanup_for_load() {
 	delete_tempfile();
 }
 
-void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, uint8_t const roadtype) {
+void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, RoadType const roadtype) {
 	const Map& m = map();
 	const Field& first_field = m[0];
 	assert(0 <= f.x);
@@ -547,42 +554,45 @@ void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, uint8_t
 	assert(f.y < m.get_height());
 	assert(&first_field <= f.field);
 	assert(f.field < &first_field + m.max_index());
-	assert(direction == RoadType::kSouthWest || direction == RoadType::kSouthEast ||
-	       direction == RoadType::kEast);
-	assert(roadtype == RoadType::kNone || roadtype == RoadType::kNormal ||
-	       roadtype == RoadType::kBusy || roadtype == RoadType::kWater);
+	assert(direction == WALK_SW || direction == WALK_SE || direction == WALK_E);
 
 	if (f.field->get_road(direction) == roadtype)
 		return;
 	f.field->set_road(direction, roadtype);
 
 	FCoords neighbour;
-	uint8_t mask = 0;
 	switch (direction) {
-	case RoadType::kSouthWest:
+	case WALK_SW:
 		neighbour = m.bl_n(f);
-		mask = RoadType::kMask << RoadType::kSouthWest;
 		break;
-	case RoadType::kSouthEast:
+	case WALK_SE:
 		neighbour = m.br_n(f);
-		mask = RoadType::kMask << RoadType::kSouthEast;
 		break;
-	case RoadType::kEast:
+	case WALK_E:
 		neighbour = m.r_n(f);
-		mask = RoadType::kMask << RoadType::kEast;
 		break;
 	default:
 		NEVER_HERE();
 	}
-	uint8_t const road = f.field->get_roads() & mask;
 	MapIndex const i = f.field - &first_field;
 	MapIndex const neighbour_i = neighbour.field - &first_field;
 	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 		Player::Field& first_player_field = *p->fields_;
 		Player::Field& player_field = (&first_player_field)[i];
 		if (1 < player_field.vision || 1 < (&first_player_field)[neighbour_i].vision) {
-			player_field.roads &= ~mask;
-			player_field.roads |= road;
+			switch (direction) {
+			case WALK_SE:
+				player_field.r_se = roadtype;
+				break;
+			case WALK_SW:
+				player_field.r_sw = roadtype;
+				break;
+			case WALK_E:
+				player_field.r_e = roadtype;
+				break;
+			default:
+				NEVER_HERE();
+			}
 		}
 	}
 }

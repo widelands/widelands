@@ -158,5 +158,6 @@ function flag_tests:roads_and_buildings_test()
    assert_equal(self.f2.roads.tl.end_flag, self.f2)
    assert_equal(self.f1.building, self.w)
    assert_nil(self.f2.building)
-   assert_equal(self.f2.debug_economy, self.w.debug_economy)
+   assert_equal(self.f2.debug_ware_economy, self.w.debug_ware_economy)
+   assert_equal(self.f2.debug_worker_economy, self.w.debug_worker_economy)
 end

@@ -167,7 +167,21 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		return_enhanced_ = Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes_);
 	}
 
-	needs_seafaring_ = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
+	needs_seafaring_ = false;
+	needs_waterways_ = false;
+	if (table.has_key("map_check")) {
+		for (const std::string& map_check :
+		     table.get_table("map_check")->array_entries<std::string>()) {
+			if (map_check == "seafaring") {
+				needs_seafaring_ = true;
+			} else if (map_check == "waterways") {
+				needs_waterways_ = true;
+			} else {
+				throw GameDataError(
+				   "Unexpected map_check item '%s' in building description", map_check.c_str());
+			}
+		}
+	}
 
 	if (table.has_key("vision_range")) {
 		vision_range_ = table.get_int("vision_range");
@@ -254,6 +268,18 @@ void BuildingDescr::set_hints_trainingsites_max_percent(int percent) {
 
 uint32_t BuildingDescr::get_unoccupied_animation() const {
 	return get_animation(is_animation_known("unoccupied") ? "unoccupied" : "idle", nullptr);
+}
+
+bool BuildingDescr::is_useful_on_map(bool seafaring_allowed, bool waterways_allowed) const {
+	if (needs_seafaring_ && needs_waterways_) {
+		return seafaring_allowed || waterways_allowed;
+	} else if (needs_seafaring_) {
+		return seafaring_allowed;
+	} else if (needs_waterways_) {
+		return waterways_allowed;
+	} else {
+		return true;
+	}
 }
 
 /**

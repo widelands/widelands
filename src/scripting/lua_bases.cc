@@ -893,7 +893,9 @@ int LuaPlayerBase::get_workers(lua_State* L) {
 
 	uint32_t nworkers = 0;
 	for (const auto& economy : player.economies()) {
-		nworkers += economy.second->stock_worker(worker);
+		if (economy.second->type() == Widelands::wwWORKER) {
+			nworkers += economy.second->stock_ware_or_worker(worker);
+		}
 	}
 	lua_pushuint32(L, nworkers);
 	return 1;
@@ -919,7 +921,9 @@ int LuaPlayerBase::get_wares(lua_State* L) {
 
 	uint32_t nwares = 0;
 	for (const auto& economy : player.economies()) {
-		nwares += economy.second->stock_ware(ware);
+		if (economy.second->type() == Widelands::wwWARE) {
+			nwares += economy.second->stock_ware_or_worker(ware);
+		}
 	}
 	lua_pushuint32(L, nwares);
 	return 1;

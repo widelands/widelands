@@ -237,7 +237,7 @@ public:
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
 
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 
 	using InputQueues = std::vector<InputQueue*>;
 	const InputQueues& inputqueues() const {

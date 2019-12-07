@@ -8,7 +8,7 @@ tribes:new_tribe {
    name = "empire",
    animations = animations,
 
-   -- Image file paths for this tribe's road textures
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
          image_dirname .. "roadt_busy.png",
@@ -17,6 +17,9 @@ tribes:new_tribe {
          image_dirname .. "roadt_normal_00.png",
          image_dirname .. "roadt_normal_01.png",
          image_dirname .. "roadt_normal_02.png",
+      },
+      waterway = {
+         "tribes/images/empire/waterway_0.png",
       },
    },
 
@@ -116,6 +119,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "empire_carrier",
+         "empire_ferry",
          "empire_donkey",
          "empire_donkeybreeder"
       },
@@ -223,7 +227,6 @@ tribes:new_tribe {
       "empire_smelting_works",
       "empire_toolsmithy",
       "empire_armorsmithy",
-      "empire_shipyard",
       "empire_barracks",
 
       -- Big
@@ -258,6 +261,10 @@ tribes:new_tribe {
       "empire_tower",
       "empire_fortress",
       "empire_castle",
+
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      "empire_ferry_yard",
+      "empire_shipyard",
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
@@ -340,6 +347,7 @@ tribes:new_tribe {
    geologist = "empire_geologist",
    soldier = "empire_soldier",
    ship = "empire_ship",
+   ferry = "empire_ferry",
    port = "empire_port",
    ironore = "iron_ore",
    rawlog = "log",

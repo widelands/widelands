@@ -74,6 +74,7 @@ wl_library(logic_constants
     widelands.h
   DEPENDS
     base_macros
+    logic_map_objects
 )
 
 wl_library(logic_filesystem_constants

@@ -48,7 +48,9 @@ class Soldier;
 class TrainingSite;
 struct Flag;
 class TribeDescr;
+struct RoadBase;
 struct Road;
+struct Waterway;
 struct AttackController;
 
 /**
@@ -224,7 +226,9 @@ public:
 		Field()
 		   : military_influence(0),
 		     vision(0),
-		     roads(0),
+		     r_e(Widelands::RoadType::kNone),
+		     r_se(Widelands::RoadType::kNone),
+		     r_sw(Widelands::RoadType::kNone),
 		     owner(0),
 		     time_node_last_unseen(0),
 		     map_object_descr(nullptr),
@@ -303,7 +307,14 @@ public:
 		 */
 		Widelands::Field::Terrains terrains;
 
-		uint8_t roads;
+		/**
+		 * The road types of the 3 edges, as far as this player knows.
+		 * Each value is only valid when this player has seen this node
+		 * or the node to the the edge leads up to.
+		 */
+		Widelands::RoadType r_e;
+		Widelands::RoadType r_se;
+		Widelands::RoadType r_sw;
 
 		/**
 		 * The owner of this node, as far as this player knows.
@@ -324,24 +335,24 @@ public:
 		/// east, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// east.
-		uint8_t road_e() const {
-			return roads & RoadType::kMask;
+		Widelands::RoadType road_e() const {
+			return r_e;
 		}
 
 		/// Whether there is a road between this node and the node to the
 		/// southeast, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// southeast.
-		uint8_t road_se() const {
-			return roads >> RoadType::kSouthEast & RoadType::kMask;
+		Widelands::RoadType road_se() const {
+			return r_se;
 		}
 
 		/// Whether there is a road between this node and the node to the
 		/// southwest, as far as this player knows.
 		/// Only valid when this player has seen this node or the node to the
 		/// southwest.
-		uint8_t road_sw() const {
-			return roads >> RoadType::kSouthWest & RoadType::kMask;
+		Widelands::RoadType road_sw() const {
+			return r_sw;
 		}
 
 		/**
@@ -507,6 +518,8 @@ public:
 	Flag* build_flag(const Coords&);   /// Build a flag if it is allowed.
 	Road& force_road(const Path&);
 	Road* build_road(const Path&);  /// Build a road if it is allowed.
+	Waterway& force_waterway(const Path&);
+	Waterway* build_waterway(const Path&);  /// Build a waterway if it is allowed.
 	Building& force_building(Coords, const FormerBuildings&);
 	Building& force_csite(Coords, DescriptionIndex, const FormerBuildings& = FormerBuildings());
 	Building* build(Coords, DescriptionIndex, bool, FormerBuildings&);
@@ -519,8 +532,8 @@ public:
 	void enhance_building(Building*, DescriptionIndex index_of_new_building);
 	void dismantle_building(Building*);
 
-	Economy* create_economy();
-	Economy* create_economy(Serial serial);  // For saveloading only
+	Economy* create_economy(WareWorker);
+	Economy* create_economy(Serial serial, WareWorker);  // For saveloading only
 	void remove_economy(Serial serial);
 	const std::map<Serial, std::unique_ptr<Economy>>& economies() const;
 	Economy* get_economy(Widelands::Serial serial) const;

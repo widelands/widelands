@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_ECONOMY_FLEET_H
-#define WL_ECONOMY_FLEET_H
+#ifndef WL_ECONOMY_SHIP_FLEET_H
+#define WL_ECONOMY_SHIP_FLEET_H
 
 #include <boost/shared_ptr.hpp>
 
@@ -34,16 +34,16 @@ class PortDock;
 struct RoutingNodeNeighbour;
 struct Ship;
 
-class FleetDescr : public MapObjectDescr {
+class ShipFleetDescr : public MapObjectDescr {
 public:
-	FleetDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::FLEET, init_name, init_descname, "") {
+	ShipFleetDescr(char const* const init_name, char const* const init_descname)
+	   : MapObjectDescr(MapObjectType::SHIP_FLEET, init_name, init_descname, "") {
 	}
-	~FleetDescr() override {
+	~ShipFleetDescr() override {
 	}
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(FleetDescr);
+	DISALLOW_COPY_AND_ASSIGN(ShipFleetDescr);
 };
 
 constexpr int32_t kFleetInterval = 5000;
@@ -67,7 +67,7 @@ constexpr uint32_t kRouteNotCalculated = std::numeric_limits<uint32_t>::max();
  * again in reaction to changes in the map. However, this may not work
  * properly at the moment.
  */
-struct Fleet : MapObject {
+struct ShipFleet : MapObject {
 	struct PortPath {
 		int32_t cost;
 		boost::shared_ptr<Path> path;
@@ -76,14 +76,14 @@ struct Fleet : MapObject {
 		}
 	};
 
-	const FleetDescr& descr() const;
+	const ShipFleetDescr& descr() const;
 
-	explicit Fleet(Player* player);
+	explicit ShipFleet(Player* player);
 
 	PortDock* get_dock(Flag& flag) const;
 	PortDock* get_dock(EditorGameBase&, Coords) const;
 	PortDock* get_arbitrary_dock() const;
-	void set_economy(Economy* e);
+	void set_economy(Economy* e, WareWorker);
 
 	bool active() const;
 
@@ -107,12 +107,14 @@ struct Fleet : MapObject {
 	uint32_t count_ports() const;
 	bool get_act_pending() const;
 
+	bool empty() const;
+
 protected:
 	void act(Game&, uint32_t data) override;
 
 private:
 	bool find_other_fleet(EditorGameBase& egbase);
-	bool merge(EditorGameBase& egbase, Fleet* other);
+	bool merge(EditorGameBase& egbase, ShipFleet* other);
 	void check_merge_economy();
 	void connect_port(EditorGameBase& egbase, uint32_t idx);
 
@@ -163,4 +165,4 @@ public:
 
 }  // namespace Widelands
 
-#endif  // end of include guard: WL_ECONOMY_FLEET_H
+#endif  // end of include guard: WL_ECONOMY_SHIP_FLEET_H
