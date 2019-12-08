@@ -92,6 +92,7 @@ public:
 	int get_width(lua_State*);
 	int get_height(lua_State*);
 	int get_player_slots(lua_State*);
+	int get_waterway_max_length(lua_State*);
 
 	/*
 	 * Lua methods
@@ -105,6 +106,7 @@ public:
 	int recalculate_seafaring(lua_State*);
 	int set_port_space(lua_State*);
 	int sea_route_exists(lua_State*);
+	int set_waterway_max_length(lua_State*);
 
 	/*
 	 * C methods
@@ -137,6 +139,7 @@ public:
 	int get_buildings(lua_State*);
 	int get_carrier(lua_State*);
 	int get_carrier2(lua_State*);
+	int get_ferry(lua_State*);
 	int get_descname(lua_State*);
 	int get_immovables(lua_State*);
 	int get_resource_indicators(lua_State*);
@@ -796,10 +799,8 @@ public:
 	/*
 	 * Lua methods
 	 */
-	int ware_target_quantity(lua_State*);
-	int worker_target_quantity(lua_State*);
-	int set_ware_target_quantity(lua_State*);
-	int set_worker_target_quantity(lua_State*);
+	int target_quantity(lua_State*);
+	int set_target_quantity(lua_State*);
 
 	/*
 	 * C methods
@@ -911,7 +912,8 @@ public:
 	 * Properties
 	 */
 	int get_owner(lua_State* L);
-	int get_debug_economy(lua_State* L);
+	int get_debug_ware_economy(lua_State* L);
+	int get_debug_worker_economy(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -994,7 +996,8 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_economy(lua_State* L);
+	int get_ware_economy(lua_State* L);
+	int get_worker_economy(lua_State* L);
 	int get_roads(lua_State* L);
 	int get_building(lua_State* L);
 	/*
@@ -1015,7 +1018,7 @@ public:
 
 	LuaRoad() {
 	}
-	explicit LuaRoad(Widelands::Road& mo) : LuaPlayerImmovable(mo) {
+	explicit LuaRoad(Widelands::RoadBase& mo) : LuaPlayerImmovable(mo) {
 	}
 	explicit LuaRoad(lua_State* L) : LuaPlayerImmovable(L) {
 	}
@@ -1040,7 +1043,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Road)
+	CASTED_GET(RoadBase)
 	static int create_new_worker(Widelands::PlayerImmovable&,
 	                             Widelands::EditorGameBase&,
 	                             const Widelands::WorkerDescr*);
@@ -1344,7 +1347,8 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_debug_economy(lua_State* L);
+	int get_debug_ware_economy(lua_State* L);
+	int get_debug_worker_economy(lua_State* L);
 	int get_last_portdock(lua_State* L);
 	int get_destination(lua_State* L);
 	int get_state(lua_State* L);

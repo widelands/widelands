@@ -36,7 +36,9 @@
 namespace Widelands {
 
 ExpeditionBootstrap::ExpeditionBootstrap(PortDock* const portdock)
-   : portdock_(portdock), economy_(portdock->get_economy()) {
+   : portdock_(portdock),
+     ware_economy_(portdock->get_economy(wwWARE)),
+     worker_economy_(portdock->get_economy(wwWORKER)) {
 }
 
 ExpeditionBootstrap::~ExpeditionBootstrap() {
@@ -101,14 +103,16 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	// Put all wares from the WaresQueues back into the warehouse
 	Warehouse* const warehouse = portdock_->get_warehouse();
 	for (auto& iq : queues_) {
-		if (iq.first->get_type() == wwWARE) {
+		switch (iq.first->get_type()) {
+		case wwWARE:
 			warehouse->insert_wares(iq.first->get_index(), iq.first->get_filled());
-		} else {
-			assert(iq.first->get_type() == wwWORKER);
-			WorkersQueue* wq = dynamic_cast<WorkersQueue*>(iq.first.get());
-			while (wq->get_filled() > 0) {
-				warehouse->incorporate_worker(game, wq->extract_worker());
+			break;
+		case wwWORKER:
+			WorkersQueue& wq = dynamic_cast<WorkersQueue&>(*iq);
+			while (wq.get_filled() > 0) {
+				warehouse->incorporate_worker(game, wq.extract_worker());
 			}
+			break;
 		}
 		iq.first->cleanup();
 	}
@@ -212,21 +216,24 @@ size_t ExpeditionBootstrap::count_additional_queues() const {
 	return i;
 }
 
-void ExpeditionBootstrap::set_economy(Economy* new_economy) {
-	if (new_economy == economy_)
+void ExpeditionBootstrap::set_economy(Economy* new_economy, WareWorker type) {
+	if (new_economy == (type == wwWARE ? ware_economy_ : worker_economy_))
 		return;
 
 	// Transfer the wares and workers.
 	for (auto& iq : queues_) {
-		if (economy_) {
-			iq.first->remove_from_economy(*economy_);
+		if (type != iq.first->get_type()) {
+			continue;
+		}
+		if (Economy* e = type == wwWARE ? ware_economy_ : worker_economy_) {
+			iq.first->remove_from_economy(*e);
 		}
 		if (new_economy) {
 			iq.first->add_to_economy(*new_economy);
 		}
 	}
 
-	economy_ = new_economy;
+	(type == wwWARE ? ware_economy_ : worker_economy_) = new_economy;
 }
 
 void ExpeditionBootstrap::get_waiting_workers_and_wares(Game& game,
@@ -234,7 +241,8 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares(Game& game,
                                                         std::vector<Worker*>* return_workers,
                                                         std::vector<WareInstance*>* return_wares) {
 	for (auto& iq : queues_) {
-		if (iq.first->get_type() == wwWARE) {
+		switch (iq.first->get_type()) {
+		case wwWARE: {
 			const DescriptionIndex ware_index = iq.first->get_index();
 			for (uint32_t j = 0; j < iq.first->get_filled(); ++j) {
 				WareInstance* temp = new WareInstance(ware_index, tribe.get_ware_descr(ware_index));
@@ -242,12 +250,15 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares(Game& game,
 				temp->set_location(game, portdock_);
 				return_wares->emplace_back(temp);
 			}
-		} else {
-			assert(iq.first->get_type() == wwWORKER);
-			WorkersQueue* wq = dynamic_cast<WorkersQueue*>(iq.first.get());
-			while (wq->get_filled() > 0) {
-				return_workers->emplace_back(wq->extract_worker());
+			break;
+		}
+		case wwWORKER: {
+			WorkersQueue& wq = dynamic_cast<WorkersQueue&>(*iq.first);
+			while (wq.get_filled() > 0) {
+				return_workers->emplace_back(wq.extract_worker());
 			}
+			break;
+		}
 		}
 	}
 

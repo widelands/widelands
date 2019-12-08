@@ -32,7 +32,7 @@
 #include "base/wexception.h"
 #include "build_info.h"
 #include "economy/flag.h"
-#include "economy/road.h"
+#include "economy/roadbase.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
@@ -89,7 +89,8 @@ Map::Map()
      width_(0),
      height_(0),
      pathfieldmgr_(new PathfieldManager),
-     allows_seafaring_(false) {
+     allows_seafaring_(false),
+     waterway_max_length_(0) {
 }
 
 Map::~Map() {
@@ -732,6 +733,18 @@ void Map::calculate_needs_widelands_version_after(bool is_post_one_world) {
 }
 
 /*
+ * Getter and setter for the highest permitted length of a waterway on this map.
+ * A value of 0 or 1 means no waterways can be built.
+ */
+uint32_t Map::get_waterway_max_length() const {
+	return waterway_max_length_;
+}
+
+void Map::set_waterway_max_length(uint32_t max_length) {
+	waterway_max_length_ = max_length;
+}
+
+/*
  * The scenario get/set functions
  */
 const std::string& Map::get_scenario_player_tribe(const PlayerNumber p) const {
@@ -1357,9 +1370,9 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 	// if we are interested in the maximum theoretically available NodeCaps, this is not run
 	if (consider_mobs) {
 		//  3) General buildability check: if a "robust" MapObject is on this node
-		//  we cannot build anything on it. Exception: we can build flags on roads.
+		//  we cannot build anything on it. Exception: we can build flags on roads and waterways.
 		if (BaseImmovable* const imm = get_immovable(f))
-			if (!dynamic_cast<Road const*>(imm) && imm->get_size() >= BaseImmovable::SMALL) {
+			if (!dynamic_cast<RoadBase const*>(imm) && imm->get_size() >= BaseImmovable::SMALL) {
 				// 3b) [OVERRIDE] check for "unwalkable" MapObjects
 				if (!imm->get_passable())
 					caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
@@ -1951,6 +1964,7 @@ std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) 
  * \param inend end point of the search
  * \param path will receive the found path if successful
  * \param flags UNDOCUMENTED
+ * \param type whether to find a path for a ware or a worker
  *
  * \return the cost of the path (in milliseconds of normal walking
  * speed) or -1 if no path has been found.
@@ -1962,7 +1976,8 @@ int32_t Map::findpath(Coords instart,
                       Path& path,
                       const CheckStep& checkstep,
                       uint32_t const flags,
-                      uint32_t const caps_sensitivity) const {
+                      uint32_t const caps_sensitivity,
+                      WareWorker type) const {
 	FCoords start;
 	FCoords end;
 	int32_t upper_cost_limit;
@@ -1983,8 +1998,9 @@ int32_t Map::findpath(Coords instart,
 		return 0;  // duh...
 	}
 
-	if (!checkstep.reachable_dest(*this, end))
+	if (!checkstep.reachable_dest(*this, end)) {
 		return -1;
+	}
 
 	if (!persist)
 		upper_cost_limit = 0;
@@ -1994,7 +2010,7 @@ int32_t Map::findpath(Coords instart,
 
 	// Actual pathfinding
 	boost::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
-	Pathfield::Queue Open;
+	Pathfield::Queue Open(type);
 	Pathfield* curpf = &pathfields->fields[start.field - fields_.get()];
 	curpf->cycle = pathfields->cycle;
 	curpf->real_cost = 0;
@@ -2061,7 +2077,7 @@ int32_t Map::findpath(Coords instart,
 				neighbpf.estim_cost = calc_cost_lowerbound(neighb, end);
 				neighbpf.backlink = *direction;
 				Open.push(&neighbpf);
-			} else if (neighbpf.cost() > cost + neighbpf.estim_cost) {
+			} else if (neighbpf.cost(type) > cost + neighbpf.estim_cost) {
 				// found a better path to a field that's already Open
 				neighbpf.real_cost = cost;
 				neighbpf.backlink = *direction;

@@ -154,7 +154,7 @@ public:
 
 	void act(Game& game, uint32_t data) override;
 
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 
 	const WareList& get_wares() const;
 	const WareList& get_workers() const;

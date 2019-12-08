@@ -320,6 +320,9 @@ const std::string SpinBox::unit_text(int32_t value) const {
 	case (Units::kPixels):
 		/** TRANSLATORS: A spinbox unit */
 		return (boost::format(ngettext("%d pixel", "%d pixels", value)) % value).str();
+	case (Units::kFields):
+		/** TRANSLATORS: A spinbox unit */
+		return (boost::format(ngettext("%d field", "%d fields", value)) % value).str();
 	case (Units::kPercent):
 		/** TRANSLATORS: A spinbox unit */
 		return (boost::format(_("%i %%")) % value).str();

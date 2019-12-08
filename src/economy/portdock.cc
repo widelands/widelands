@@ -26,7 +26,7 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "economy/expedition_bootstrap.h"
-#include "economy/fleet.h"
+#include "economy/ship_fleet.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
 #include "io/filewrite.h"
@@ -79,11 +79,11 @@ Warehouse* PortDock::get_warehouse() const {
 }
 
 /**
- * Update which @ref Fleet we belong to.
+ * Update which @ref ShipFleet we belong to.
  *
- * @warning This should only be called via @ref Fleet itself.
+ * @warning This should only be called via @ref ShipFleet itself.
  */
-void PortDock::set_fleet(Fleet* fleet) {
+void PortDock::set_fleet(ShipFleet* fleet) {
 	fleet_ = fleet;
 }
 
@@ -121,24 +121,27 @@ uint32_t PortDock::get_need_ship() const {
  * Signal to the dock that it now belongs to the given economy.
  *
  * Called by @ref Warehouse::set_economy, and responsible for forwarding the
- * change to @ref Fleet.
+ * change to @ref ShipFleet.
  */
-void PortDock::set_economy(Economy* e) {
-	if (e == get_economy())
+void PortDock::set_economy(Economy* e, WareWorker type) {
+	if (e == get_economy(type)) {
 		return;
+	}
 
-	PlayerImmovable::set_economy(e);
-	if (fleet_)
-		fleet_->set_economy(e);
+	PlayerImmovable::set_economy(e, type);
+	if (fleet_) {
+		fleet_->set_economy(e, type);
+	}
 
 	if (upcast(Game, game, &get_owner()->egbase())) {
 		for (ShippingItem& shipping_item : waiting_) {
-			shipping_item.set_economy(*game, e);
+			shipping_item.set_economy(*game, e, type);
 		}
 	}
 
-	if (expedition_bootstrap_)
-		expedition_bootstrap_->set_economy(e);
+	if (expedition_bootstrap_) {
+		expedition_bootstrap_->set_economy(e, type);
+	}
 }
 
 bool PortDock::init(EditorGameBase& egbase) {
@@ -153,11 +156,11 @@ bool PortDock::init(EditorGameBase& egbase) {
 }
 
 /**
- * Create our initial singleton @ref Fleet. The fleet code ensures
+ * Create our initial singleton @ref ShipFleet. The fleet code ensures
  * that we merge with a larger fleet when possible.
  */
 void PortDock::init_fleet(EditorGameBase& egbase) {
-	Fleet* fleet = new Fleet(get_owner());
+	ShipFleet* fleet = new ShipFleet(get_owner());
 	fleet->add_port(egbase, this);
 	fleet->init(egbase);
 	// Note: the Fleet calls our set_fleet automatically
@@ -290,7 +293,8 @@ void PortDock::update_shippingitem(Game& game, std::list<ShippingItem>::iterator
 	assert(dst != this);
 
 	// Destination might have vanished or be in another economy altogether.
-	if (dst && dst->get_economy() == get_economy()) {
+	if (dst && dst->get_economy(wwWARE) == get_economy(wwWARE) &&
+	    dst->get_economy(wwWORKER) == get_economy(wwWORKER)) {
 		if (ships_coming_.empty()) {
 			set_need_ship(game, true);
 		}
@@ -456,12 +460,17 @@ uint32_t PortDock::count_waiting(WareWorker waretype, DescriptionIndex wareindex
 		Worker* worker;
 		shipping_item.get(owner().egbase(), &ware, &worker);
 
-		if (waretype == wwWORKER) {
-			if (worker && worker->descr().worker_index() == wareindex)
+		switch (waretype) {
+		case wwWORKER:
+			if (worker && worker->descr().worker_index() == wareindex) {
 				count++;
-		} else {
-			if (ware && ware->descr_index() == wareindex)
+			}
+			break;
+		case wwWARE:
+			if (ware && ware->descr_index() == wareindex) {
 				count++;
+			}
+			break;
 		}
 	}
 

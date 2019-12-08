@@ -185,7 +185,8 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 					}
 
 					//  Set economy now, some stuff below will count on this.
-					building.set_economy(building.flag_->get_economy());
+					building.set_economy(building.flag_->get_economy(wwWARE), wwWARE);
+					building.set_economy(building.flag_->get_economy(wwWORKER), wwWORKER);
 
 					Game& game = dynamic_cast<Game&>(egbase);
 
@@ -455,7 +456,8 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			if (warehouse.descr().get_isport()) {
 				if (Serial portdock = fr.unsigned_32()) {
 					warehouse.portdock_ = &mol.get<PortDock>(portdock);
-					warehouse.portdock_->set_economy(warehouse.get_economy());
+					warehouse.portdock_->set_economy(warehouse.get_economy(wwWARE), wwWARE);
+					warehouse.portdock_->set_economy(warehouse.get_economy(wwWORKER), wwWORKER);
 					// Expedition specific stuff. This is done in this packet
 					// because the "new style" loader is not supported and
 					// doesn't lend itself to request and other stuff.
