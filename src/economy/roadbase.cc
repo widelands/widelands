@@ -156,8 +156,7 @@ void RoadBase::set_path(EditorGameBase& egbase, const Path& path) {
 	idle_index_ = path.get_nsteps() / 2;
 }
 
-static inline void
-set_roadtype(EditorGameBase& egbase, const FCoords curf, uint8_t dir, RoadType type) {
+void RoadBase::set_roadtype(EditorGameBase& egbase, const FCoords curf, uint8_t dir, RoadType type) const {
 	if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E) {
 		if (type != RoadType::kNone && is_bridge(egbase, curf, dir)) {
 			switch (type) {

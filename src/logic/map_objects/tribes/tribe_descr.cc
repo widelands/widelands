@@ -86,11 +86,11 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		load_roads("waterway", &waterway_paths_);
 
 #define LOAD_BRIDGE_IF_PRESENT(dir, type) \
-if (animations_table.has_key("bridge_##type##_##dir##")) { \
-std::unique_ptr<LuaTable> animation_table = animations_table.get_table("bridge_##type##_##dir##"); \
+if (animations_table.has_key("bridge_" #type "_" #dir)) { \
+std::unique_ptr<LuaTable> animation_table = animations_table.get_table("bridge_" #type "_" #dir); \
 bridge_##dir##_animation_##type##_id_ = \
-g_gr->animations().load(name_ + std::string("_bridge_##dir##_##type##"), *animation_table, \
-animations_table->get_string("basename"), animation_type); \
+g_gr->animations().load(name_ + std::string("_bridge_" #dir "_" #type), *animation_table, \
+animation_table->get_string("basename"), animation_type); \
 }
 
 		// Frontier and flag animations can be a mix of file and spritesheet animations

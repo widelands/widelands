@@ -2,7 +2,6 @@ image_dirname = path.dirname(__file__) .. "images/frisians/"
 
 animations = {}
 add_animation(animations, "frontier", image_dirname, "frontier", {8, 26})
-add_animation(animations, "flag", image_dirname, "flag", {10, 39}, 10)
 add_animation(animations, "bridge_normal_e", image_dirname, "bridge_normal_e", {-2, 12})
 add_animation(animations, "bridge_busy_e", image_dirname, "bridge_busy_e", {-2, 12})
 add_animation(animations, "bridge_normal_se", image_dirname, "bridge_normal_se", {5, 2})
