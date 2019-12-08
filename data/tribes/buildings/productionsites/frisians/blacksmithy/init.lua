@@ -7,10 +7,10 @@ tribes:new_productionsite_type {
    descname = pgettext ("frisians_building", "Blacksmithy"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "medium",
+   size = "small",
 
    buildcost = {
-      brick = 2,
+      brick = 1,
       granite = 1,
       log = 1,
       reed = 2
