@@ -42,7 +42,8 @@ uint32_t FerryDescr::movecaps() const {
 	return MOVECAPS_SWIM | MOVECAPS_WALK;
 }
 
-Ferry::Ferry(const FerryDescr& ferry_descr) : Carrier(ferry_descr), destination_(nullptr) {
+Ferry::Ferry(const FerryDescr& ferry_descr)
+   : Carrier(ferry_descr), destination_(nullptr), unemployed_since_(0) {
 }
 
 bool Ferry::init(EditorGameBase& egbase) {
@@ -54,8 +55,12 @@ const Bob::Task Ferry::taskUnemployed = {
    "unemployed", static_cast<Bob::Ptr>(&Ferry::unemployed_update), nullptr, nullptr, true};
 
 void Ferry::start_task_unemployed(Game& game) {
+	assert(unemployed_since_ == 0);
 	push_task(game, taskUnemployed);
+	unemployed_since_ = game.get_gametime();
 }
+
+constexpr uint32_t kUnemployedLifetime = 1000 * 60 * 10;  // 10 minutes
 
 void Ferry::unemployed_update(Game& game, State&) {
 	if (get_signal().size()) {
@@ -63,6 +68,7 @@ void Ferry::unemployed_update(Game& game, State&) {
 		if (get_signal() == "row") {
 			assert(destination_);
 			signal_handled();
+			unemployed_since_ = 0;
 			pop_task(game);
 			push_task(game, taskRow);
 			return schedule_act(game, 10);
@@ -71,9 +77,15 @@ void Ferry::unemployed_update(Game& game, State&) {
 	if (destination_) {
 		// Sometimes (e.g. when reassigned directly from waterway servicing),
 		// the 'row' signal is consumed before we can receive it
+		unemployed_since_ = 0;
 		pop_task(game);
 		push_task(game, taskRow);
 		return schedule_act(game, 10);
+	}
+
+	assert(game.get_gametime() >= unemployed_since_);
+	if (game.get_gametime() - unemployed_since_ > kUnemployedLifetime) {
+		return schedule_destroy(game);
 	}
 
 	const Map& map = game.map();
@@ -117,16 +129,15 @@ void Ferry::unemployed_update(Game& game, State&) {
 		}
 	}
 
-	bool move = false;
+	bool move = true;
 	if (!(pos.field->nodecaps() & MOVECAPS_SWIM)) {
 		molog("[unemployed]: we are on shore\n");
-		move = true;
 	} else if (pos.field->get_immovable()) {
 		molog("[unemployed]: we are on location\n");
-		move = true;
 	} else if (pos.field->get_first_bob()->get_next_bob()) {
 		molog("[unemployed]: we are on another bob\n");
-		move = true;
+	} else {
+		move = false;
 	}
 
 	if (move) {
@@ -296,6 +307,7 @@ void Ferry::Loader::load(FileRead& fr) {
 			} else {
 				ferry.destination_.reset(nullptr);
 			}
+			ferry.unemployed_since_ = fr.unsigned_32();
 			ferry.fleet_ = nullptr;
 		} else {
 			throw UnhandledVersionError("Ferry", packet_version, kCurrentPacketVersion);
@@ -314,6 +326,7 @@ void Ferry::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) 
 		fw.signed_16(destination_->x);
 		fw.signed_16(destination_->y);
 	}
+	fw.unsigned_32(unemployed_since_);
 }
 
 Ferry::Loader* Ferry::create_loader() {

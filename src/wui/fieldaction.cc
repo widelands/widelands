@@ -172,9 +172,11 @@ public:
 	void act_ripflag();
 	void act_buildroad();
 	void act_abort_buildroad();
+	void act_abort_buildroad_and_start_buildwaterway();
 	void act_removeroad();
 	void act_buildwaterway();
 	void act_abort_buildwaterway();
+	void act_abort_buildwaterway_and_start_buildroad();
 	void act_removewaterway();
 	void act_build(Widelands::DescriptionIndex);
 	void building_icon_mouse_out(Widelands::DescriptionIndex);
@@ -317,7 +319,7 @@ void FieldActionWindow::init() {
 	move_out_of_the_way();
 
 	// Now force the mouse onto the first button
-	set_mouse_pos(Vector2i(17 + kBuildGridCellSize * best_tab_, fastclick_ ? 51 : 17));
+	set_mouse_pos(Vector2i(17 + 34 * best_tab_, fastclick_ ? 56 : 17));
 
 	// Will only do something if we explicitly set another fast click panel
 	// than the first button
@@ -375,14 +377,13 @@ void FieldActionWindow::add_buttons_auto() {
 			const int32_t nodecaps = map_.get_max_nodecaps(ibase().egbase(), node_);
 
 			// Add house building
-			const int32_t caps = buildcaps | nodecaps;
-			if (player_ &&
-			    ((caps & Widelands::BUILDCAPS_SIZEMASK) || (caps & Widelands::BUILDCAPS_MINE))) {
+			if (player_ && ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) ||
+			                (buildcaps & Widelands::BUILDCAPS_MINE))) {
 				add_buttons_build(buildcaps, nodecaps);
 			}
 
 			// Add build actions
-			if ((fastclick_ = buildcaps & Widelands::BUILDCAPS_FLAG))
+			if (buildcaps & Widelands::BUILDCAPS_FLAG)
 				add_button(buildbox, "build_flag", pic_buildflag, &FieldActionWindow::act_buildflag,
 				           _("Place a flag"));
 
@@ -392,7 +393,7 @@ void FieldActionWindow::add_buttons_auto() {
 
 			if (can_act && dynamic_cast<const Widelands::Waterway*>(imm))
 				add_button(buildbox, "destroy_waterway", pic_remwaterway,
-				           &FieldActionWindow::act_removewaterway, _("Destroy a Waterway"));
+				           &FieldActionWindow::act_removewaterway, _("Destroy a waterway"));
 		}
 	} else if (player_ && 1 < player_->vision(Widelands::Map::get_index(
 	                             node_, ibase().egbase().map().get_width())))
@@ -565,6 +566,14 @@ void FieldActionWindow::add_buttons_road(bool flag) {
 
 	add_button(&buildbox, "cancel_road", pic_abort, &FieldActionWindow::act_abort_buildroad,
 	           _("Cancel road"));
+	const Widelands::Map& map = ibase().egbase().map();
+	if (map.get_waterway_max_length() >= 2 &&
+	    Widelands::CheckStepFerry(ibase().egbase())
+	       .reachable_dest(map, map.get_fcoords(ibase().get_build_road_start()))) {
+		add_button(&buildbox, "cancel_road_build_waterway", pic_buildwaterway,
+		           &FieldActionWindow::act_abort_buildroad_and_start_buildwaterway,
+		           _("Cancel road and start building waterway"));
+	}
 
 	// Add the box as tab
 	add_tab("roads", pic_tab_buildroad, &buildbox, _("Build roads"));
@@ -580,6 +589,9 @@ void FieldActionWindow::add_buttons_waterway(bool flag) {
 
 	add_button(&buildbox, "cancel_waterway", pic_abort, &FieldActionWindow::act_abort_buildwaterway,
 	           _("Cancel waterway"));
+	add_button(&buildbox, "cancel_waterway_build_road", pic_buildroad,
+	           &FieldActionWindow::act_abort_buildwaterway_and_start_buildroad,
+	           _("Cancel waterway and start building road"));
 
 	// Add the box as tab
 	add_tab("waterways", pic_tab_buildwaterway, &buildbox, _("Build waterways"));
@@ -766,6 +778,26 @@ void FieldActionWindow::act_abort_buildwaterway() {
 	}
 
 	ibase().abort_build_waterway();
+	reset_mouse_and_die();
+}
+
+void FieldActionWindow::act_abort_buildroad_and_start_buildwaterway() {
+	if (!ibase().is_building_road() || ibase().is_building_waterway()) {
+		return;
+	}
+	const Widelands::Coords c = ibase().get_build_road_start();
+	ibase().abort_build_road();
+	ibase().start_build_waterway(c, player_->player_number());
+	reset_mouse_and_die();
+}
+
+void FieldActionWindow::act_abort_buildwaterway_and_start_buildroad() {
+	if (!ibase().is_building_waterway() || ibase().is_building_road()) {
+		return;
+	}
+	const Widelands::Coords c = ibase().get_build_waterway_start();
+	ibase().abort_build_waterway();
+	ibase().start_build_road(c, player_->player_number());
 	reset_mouse_and_die();
 }
 

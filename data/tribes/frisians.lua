@@ -1,7 +1,7 @@
 image_dirname = path.dirname(__file__) .. "images/frisians/"
 
 animations = {}
-add_animation(animations, "frontier", image_dirname, "frontier", {9, 26})
+add_animation(animations, "frontier", image_dirname, "frontier", {8, 26})
 add_animation(animations, "flag", image_dirname, "flag", {10, 39}, 10)
 add_animation(animations, "bridge_normal_e", image_dirname, "bridge_normal_e", {-2, 12})
 add_animation(animations, "bridge_busy_e", image_dirname, "bridge_busy_e", {-2, 12})
@@ -13,6 +13,17 @@ add_animation(animations, "bridge_busy_sw", image_dirname, "bridge_busy_sw", {36
 tribes:new_tribe {
    name = "frisians",
    animations = animations,
+   spritesheets = {
+      flag = {
+         directory = image_dirname,
+         basename = "flag",
+         hotspot = {11, 41},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
 
    bridge_height = 8,
 
@@ -290,9 +301,6 @@ tribes:new_tribe {
       "frisians_tavern",
       "frisians_drinking_hall",
       "frisians_barracks",
-      "frisians_weaving_mill",
-      "frisians_shipyard",
-      "frisians_ferry_yard",
 
       -- Big
       "frisians_reindeer_farm",
@@ -319,6 +327,12 @@ tribes:new_tribe {
       "frisians_outpost",
       "frisians_tower",
       "frisians_fortress",
+
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      "frisians_ferry_yard",
+      "frisians_shipyard",
+      "frisians_weaving_mill",
+
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",

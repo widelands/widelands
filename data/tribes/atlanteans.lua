@@ -17,10 +17,13 @@
 --
 --    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``. Each animation needs the parameters ``pictures`` (table of filenames) and ``hotspot`` (2 integer coordinates), and may also define ``fps`` (integer frames per second).
 --
+<<<<<<< HEAD
 --    **bridges**: Contains animations for ``normal_e``, ``normal_se``, ``normal_sw``, ``busy_e``, ``busy_se`` and ``busy_sw``.
 --
 --    **bridge_height**: The height in pixels of each bridge at it's summit at 1x scale.
 --
+=======
+>>>>>>> 902bd8406ca6ebe8608b5ef39748d5a033405918
 --    **roads**: The file paths for the tribe's road textures in 3 subtables ``busy``, ``normal`` and ``waterway``.
 --
 --    **resource_indicators**: The names for the resource indicators. This table contains a subtable for each resource name plus a subtable named "" for no resources. Each subtable is an array, in which the index of each entry is the highest amount of resources the indicator may indicate.
@@ -295,8 +298,6 @@ tribes:new_tribe {
       "atlanteans_toolsmithy",
       "atlanteans_weaponsmithy",
       "atlanteans_armorsmithy",
-      "atlanteans_shipyard",
-      "atlanteans_ferry_yard",
       "atlanteans_barracks",
 
       -- Big
@@ -323,6 +324,11 @@ tribes:new_tribe {
       "atlanteans_tower",
       "atlanteans_tower_high",
       "atlanteans_castle",
+
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      "atlanteans_ferry_yard",
+      "atlanteans_shipyard",
+
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",

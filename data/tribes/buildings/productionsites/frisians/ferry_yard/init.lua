@@ -55,8 +55,9 @@ tribes:new_productionsite_type {
          descname = _"working",
          actions = {
             "sleep=20000",
+            "callworker=buildferry_1",
             "consume=log:3",
-            "callworker=buildferry"
+            "callworker=buildferry_2"
          }
       },
    },

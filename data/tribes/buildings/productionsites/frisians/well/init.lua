@@ -19,16 +19,23 @@ tribes:new_productionsite_type {
       brick = 1
    },
 
+   spritesheets = {
+      working = {
+         directory = dirname,
+         basename = "working",
+         hotspot = {19, 33},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
    animations = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_?.png"),
-         hotspot = {23, 41},
-      },
-      working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {23, 41},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {19, 33}
+      }
    },
 
    aihints = {

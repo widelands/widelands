@@ -14,32 +14,6 @@ tribes:new_tribe {
    name = "empire",
    animations = animations,
 
-   bridges = {
-      normal_e = {
-         pictures = path.list_files (dirname .. "images/empire/bridge_normal_e_?.png"),
-         hotspot = { -2, 12 },
-      },
-      normal_se = {
-         pictures = path.list_files (dirname .. "images/empire/bridge_normal_se_?.png"),
-         hotspot = { 5, 2 },
-      },
-      normal_sw = {
-         pictures = path.list_files (dirname .. "images/empire/bridge_normal_sw_?.png"),
-         hotspot = { 36, 3 },
-      },
-      busy_e = {
-         pictures = path.list_files (dirname .. "images/empire/bridge_busy_e_?.png"),
-         hotspot = { -2, 12 },
-      },
-      busy_se = {
-         pictures = path.list_files (dirname .. "images/empire/bridge_busy_se_?.png"),
-         hotspot = { 5, 2 },
-      },
-      busy_sw = {
-         pictures = path.list_files (dirname .. "images/empire/bridge_busy_sw_?.png"),
-         hotspot = { 36, 3 },
-      },
-   },
    bridge_height = 8,
 
    -- Image file paths for this tribe's road and waterway textures
@@ -261,8 +235,6 @@ tribes:new_tribe {
       "empire_smelting_works",
       "empire_toolsmithy",
       "empire_armorsmithy",
-      "empire_shipyard",
-      "empire_ferry_yard",
       "empire_barracks",
 
       -- Big
@@ -297,6 +269,10 @@ tribes:new_tribe {
       "empire_tower",
       "empire_fortress",
       "empire_castle",
+
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      "empire_ferry_yard",
+      "empire_shipyard",
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",

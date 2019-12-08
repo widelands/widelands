@@ -106,7 +106,7 @@ protected:
 
 	virtual void link_into_flags(EditorGameBase&, bool = false);
 
-	inline void set_roadtype(EditorGameBase& egbase, const FCoords curf, uint8_t dir, RoadType type) const;
+	void set_roadtype(EditorGameBase& egbase, const FCoords curf, uint8_t dir, RoadType type) const;
 
 	Flag* flags_[2];      ///< start and end flag
 	int32_t flagidx_[2];  ///< index of this road in the flag's road array
