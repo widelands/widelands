@@ -7,13 +7,13 @@ tribes:new_productionsite_type {
    descname = pgettext ("frisians_building", "Charcoal Kiln"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "medium",
+   size = "small",
 
    buildcost = {
-      brick = 3,
+      brick = 2,
       granite = 1,
       log = 1,
-      reed = 2
+      reed = 1
    },
    return_on_dismantle = {
       brick = 2,
@@ -58,8 +58,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "log", amount = 8 },
-      { name = "clay", amount = 4 },
+      { name = "log", amount = 5 },
+      { name = "clay", amount = 2 },
    },
    outputs = {
       "coal"
