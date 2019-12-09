@@ -659,8 +659,6 @@ Called once per frame by the UI code
 void InteractiveBase::think() {
 	egbase().think();  // Call game logic here. The game advances.
 
-	scroll_map();  // scroll map
-
 	// Cleanup found port spaces if the ship sailed on or was destroyed
 	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end(); ++it) {
 		if (!egbase().objects().object_still_available(it->first) ||
@@ -1417,6 +1415,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			toggle_minimap();
 			return true;
 		default:
+			scroll_map();  // scroll map
 			break;
 		}
 	}
