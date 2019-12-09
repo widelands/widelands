@@ -301,14 +301,41 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 
 void InteractiveGameBase::increase_gamespeed() {
 	if (GameController* const ctrl = get_game()->game_controller()) {
-		ctrl->set_desired_speed(ctrl->desired_speed() + 1000);
+		uint32_t const speed = ctrl->desired_speed();
+		switch (speed) {
+		case 0:
+			FALLS_THROUGH;
+		case 500:
+			FALLS_THROUGH;
+		case 1000:
+			FALLS_THROUGH;
+		case 1500:
+			ctrl->set_desired_speed(speed + 500);
+			break;
+		default:
+			ctrl->set_desired_speed(speed + 1000);
+			break;
+		}
 	}
 }
 
 void InteractiveGameBase::decrease_gamespeed() {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		uint32_t const speed = ctrl->desired_speed();
-		ctrl->set_desired_speed(1000 < speed ? speed - 1000 : 0);
+		switch (speed) {
+		case 0:
+			break;
+		case 500:
+			FALLS_THROUGH;
+		case 1000:
+			FALLS_THROUGH;
+		case 1500:
+			ctrl->set_desired_speed(speed - 500);
+			break;
+		default:
+			ctrl->set_desired_speed(speed - 1000);
+			break;
+		}
 	}
 }
 
