@@ -65,9 +65,6 @@ private:
 	/// Pause/unpause the game
 	void pause_game(bool paused);
 
-	/// Regain focus when restoring minimized window.
-	void restore() override;
-
 	// UI coordinates and spacers
 	int32_t const padding_;  // Common padding between panels
 
