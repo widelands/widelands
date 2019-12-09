@@ -465,15 +465,6 @@ void GameMessageMenu::center_view() {
 }
 
 /**
- * restore minimized window and set focus
- */
-void GameMessageMenu::restore() {
-	Window::restore();
-	set_can_focus(true);
-	list->focus();
-}
-
-/**
  * Show only messages of a certain type
  * @param msgtype the types of messages to show
  */

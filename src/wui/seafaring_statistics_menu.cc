@@ -359,12 +359,6 @@ void SeafaringStatisticsMenu::update_button_states() {
 	watchbtn_.set_enabled(table_.has_selection());
 }
 
-void SeafaringStatisticsMenu::restore() {
-	Window::restore();
-	set_can_focus(true);
-	table_.focus();
-}
-
 bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {

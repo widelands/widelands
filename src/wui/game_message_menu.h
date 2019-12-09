@@ -65,7 +65,6 @@ private:
 	void archive_or_restore();
 	void toggle_mode();
 	void center_view();
-	void restore() override;
 	void filter_messages(Widelands::Message::Type);
 	void toggle_filter_messages_button(UI::Button&, Widelands::Message::Type);
 	void set_filter_messages_tooltips();
