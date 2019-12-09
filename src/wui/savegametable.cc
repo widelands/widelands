@@ -13,7 +13,7 @@ SavegameTable::SavegameTable(UI::Panel* parent, UI::PanelStyle style, bool local
 }
 
 const std::string SavegameTable::map_filename(const std::string& filename,
-                                              const std::string& mapname) {
+                                              const std::string& mapname) const {
 	std::string result = FileSystem::filename_without_ext(filename.c_str());
 
 	if (localize_autosave_ && boost::starts_with(result, kAutosavePrefix)) {
@@ -33,7 +33,7 @@ const std::string SavegameTable::map_filename(const std::string& filename,
 	return result;
 }
 
-const std::string SavegameTable::find_game_type(const SavegameData& savegame) {
+const std::string SavegameTable::find_game_type(const SavegameData& savegame) const {
 	switch (savegame.gametype) {
 	case GameController::GameType::kSingleplayer:
 		/** TRANSLATORS: "Single Player" entry in the Game Mode table column. */

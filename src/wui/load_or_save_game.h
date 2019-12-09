@@ -93,12 +93,6 @@ private:
 	/// Reverse default sort order for save date column
 	bool compare_date_descending(uint32_t, uint32_t) const;
 
-	/// To display if the directory is empty and has no parent
-	static SavegameData create_empty_dir(const std::string& current_dir);
-
-	/// Create a subdirectory
-	static SavegameData create_directory(const std::string& directory);
-
 	UI::Panel* parent_;
 	UI::Box* table_box_;
 	FileType filetype_;
@@ -113,10 +107,11 @@ private:
 
 	Widelands::Game& game_;
 	void load_gamefile(const std::string& gamefilename);
-	bool is_valid_gametype(SavegameData& gamedata);
-	void add_time_info(SavegameData& gamedata, Widelands::GamePreloadPacket& gpdp);
-	void add_general_information(SavegameData& gamedata, Widelands::GamePreloadPacket& gpdp);
-	void add_error_info(SavegameData& gamedata, std::string errormessage);
+	bool is_valid_gametype(const SavegameData& gamedata) const;
+	void add_time_info(SavegameData& gamedata, const Widelands::GamePreloadPacket& gpdp) const;
+	void add_general_information(SavegameData& gamedata,
+	                             const Widelands::GamePreloadPacket& gpdp) const;
+	void add_error_info(SavegameData& gamedata, std::string errormessage) const;
 	void add_sub_dir(const std::string& gamefilename);
 };
 

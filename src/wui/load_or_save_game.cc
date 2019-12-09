@@ -109,24 +109,28 @@ bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) const
 	const SavegameData& r1 = games_data_[table_->get(table_->get_record(rowa))];
 	const SavegameData& r2 = games_data_[table_->get(table_->get_record(rowb))];
 	// parent directory always on top
-	if (r1.is_parent_directory())
+	if (r1.is_parent_directory()) {
 		return false;
-	if (r2.is_parent_directory())
+	}
+	if (r2.is_parent_directory()) {
 		return true;
+	}
 	// sub directory before non-sub directory (aka actual savegame)
-	if (r1.is_sub_directory() && !r2.is_directory())
+	if (r1.is_sub_directory() && !r2.is_directory()) {
 		return false;
-	if (!r1.is_sub_directory() && r2.is_sub_directory())
+	}
+	if (!r1.is_sub_directory() && r2.is_sub_directory()) {
 		return true;
+	}
 	// sub directories sort after name
-	if (r1.is_sub_directory() && r2.is_sub_directory())
+	if (r1.is_sub_directory() && r2.is_sub_directory()) {
 		return r1.filename > r2.filename;
+	}
 	// savegames sort after timestamp
 	return r1.savetimestamp < r2.savetimestamp;
 }
 
 std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
-	log("entry selected\n");
 	std::unique_ptr<SavegameData> result(new SavegameData());
 	size_t selections = table_->selections().size();
 	if (selections == 1) {
@@ -322,7 +326,7 @@ UI::Button* LoadOrSaveGame::delete_button() {
 	return delete_;
 }
 
-bool LoadOrSaveGame::is_valid_gametype(SavegameData& gamedata) {
+bool LoadOrSaveGame::is_valid_gametype(const SavegameData& gamedata) const {
 	// Skip singleplayer games in multiplayer mode and vice versa
 	if (filetype_ != FileType::kReplay && filetype_ != FileType::kShowAll) {
 		if (filetype_ == FileType::kGameMultiPlayer) {
@@ -337,7 +341,8 @@ bool LoadOrSaveGame::is_valid_gametype(SavegameData& gamedata) {
 	return true;
 }
 
-void LoadOrSaveGame::add_time_info(SavegameData& gamedata, Widelands::GamePreloadPacket& gpdp) {
+void LoadOrSaveGame::add_time_info(SavegameData& gamedata,
+                                   const Widelands::GamePreloadPacket& gpdp) const {
 	gamedata.savetimestamp = gpdp.get_savetimestamp();
 	time_t t;
 	time(&t);
@@ -401,7 +406,7 @@ void LoadOrSaveGame::add_time_info(SavegameData& gamedata, Widelands::GamePreloa
 }
 
 void LoadOrSaveGame::add_general_information(SavegameData& gamedata,
-                                             Widelands::GamePreloadPacket& gpdp) {
+                                             const Widelands::GamePreloadPacket& gpdp) const {
 	gamedata.set_mapname(gpdp.get_mapname());
 	gamedata.set_gametime(gpdp.get_gametime());
 	gamedata.set_nrplayers(gpdp.get_number_of_players());
@@ -410,7 +415,7 @@ void LoadOrSaveGame::add_general_information(SavegameData& gamedata,
 	gamedata.minimap_path = gpdp.get_minimap_path();
 }
 
-void LoadOrSaveGame::add_error_info(SavegameData& gamedata, std::string errormessage) {
+void LoadOrSaveGame::add_error_info(SavegameData& gamedata, std::string errormessage) const {
 	boost::replace_all(errormessage, "\n", "<br>");
 	gamedata.errormessage =
 	   ((boost::format("<p>%s</p><p>%s</p><p>%s</p>"))

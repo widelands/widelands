@@ -14,8 +14,8 @@ public:
 	virtual void set_show_filenames(bool show_filenames);
 
 protected:
-	const std::string map_filename(const std::string& filename, const std::string& mapname);
-	const std::string find_game_type(const SavegameData& savegame);
+	const std::string map_filename(const std::string& filename, const std::string& mapname) const;
+	const std::string find_game_type(const SavegameData& savegame) const;
 	void create_directory_entry(UI::Table<uintptr_t const>::EntryRecord& te,
 	                            const SavegameData& savegame);
 

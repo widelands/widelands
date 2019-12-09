@@ -63,8 +63,6 @@ struct SavegameData {
 	time_t savetimestamp;
 	/// Single payer, nethost, netclient or replay
 	GameController::GameType gametype;
-	/// Savegame or directory
-	SavegameType type_;
 
 	SavegameData();
 	SavegameData(const std::string& filename);
@@ -84,6 +82,10 @@ struct SavegameData {
 	bool is_parent_directory() const;
 
 	bool is_sub_directory() const;
+
+private:
+	/// Savegame or directory
+	SavegameType type_;
 };
 
 /**
