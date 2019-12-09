@@ -455,7 +455,7 @@ void MapView::pan_by(Vector2i delta_pixels) {
 		return;
 	}
 	set_view(
-	   {view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, view_.zoom}, Transition::Jump);
+	   {view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, view_.zoom}, Transition::Smooth);
 }
 
 void MapView::stop_dragging() {
