@@ -88,6 +88,42 @@ end
 function conclude()
    additional_port_space.terr = "desert_steppe" -- make it land again so that the player can build a port
    message_box_objective(plr, conclusion)
+   sleep(5000)
+   waterways()
+end
+
+function waterways()
+   map:place_immovable("atlanteans_resi_gold_2", map:get_field(23, 102), "tribes")
+   message_box_objective(plr, ferry_1)
+   sleep(1000)
+   message_box_objective(plr, ferry_2)
+   sleep(500)
+   message_box_objective(plr, ferry_3)
+   sleep(500)
+   message_box_objective(plr, ferry_4)
+   plr:allow_buildings{"atlanteans_ferry_yard"}
+
+   -- Build waterway
+   click_on_field(waterway_field)
+   click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_waterway)
+   click_on_field(waterway_field.trn)
+   click_on_field(waterway_field.trn.trn)
+   click_on_field(waterway_field.trn.trn.tln)
+   sleep(1000)
+   click_on_field(waterway_field.trn)
+   click_on_panel(wl.ui.MapView().windows.field_action.buttons.destroy_waterway)
+
+   local o = message_box_objective(plr, ferry_5)
+   while #plr:get_buildings("atlanteans_ferry_yard") < 1 do sleep(2500) end
+   -- check for goldmine, and waterways with ferries
+   print("NOCOM: check for goldmine, and waterways with ferries")
+
+
+
+   set_objective_done(o)
+   message_box_objective(plr, ferry_6)
+   sleep(1000)
+   message_box_objective(plr, ferry_7)
 end
 
 run(introduction)
