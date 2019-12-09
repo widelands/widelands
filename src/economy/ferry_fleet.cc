@@ -358,9 +358,10 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 		int32_t shortest_distance = 0;
 		for (Ferry* temp_ferry : idle_ferries) {
 			// Decide how far this ferry is from the waterway
+			Path path;
 			int32_t f_distance =
-			   game.map().findpath(temp_ferry->get_position(), ww->base_flag().get_position(), 0,
-			                       *new Path(), CheckStepFerry(game));
+			   game.map().findpath(temp_ferry->get_position(), ww->base_flag().get_position(), 0, path,
+			                       CheckStepFerry(game));
 			if (f_distance < 0) {
 				log("FerryFleet(%u)::act: We have a ferry (%u at %dx%d) "
 				    "that can't reach one of our waterways (%u at %dx%d)!\n",
