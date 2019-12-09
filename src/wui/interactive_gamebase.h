@@ -154,9 +154,9 @@ private:
 	void rebuild_gamespeed_menu();
 
 	// Increases the gamespeed
-	void increase_gamespeed();
+	void increase_gamespeed(uint32_t speed);
 	// Decreases the gamespeed
-	void decrease_gamespeed();
+	void decrease_gamespeed(uint32_t speed);
 	// Pauses / Unpauses the game and calls rebuild_gamespeed_menu
 	void toggle_game_paused();
 
