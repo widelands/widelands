@@ -713,40 +713,40 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 		spos.x += triangle_w / 2.f;
 		spos.y += triangle_h;
 		bridge = end.field->road_southeast == RoadType::kBridgeNormal ||
-				end.field->road_southeast == RoadType::kBridgeBusy;
+		         end.field->road_southeast == RoadType::kBridgeBusy;
 		break;
 	case WALK_NE:
 		map.get_bln(end, &start);
 		spos.x -= triangle_w / 2.f;
 		spos.y += triangle_h;
 		bridge = end.field->road_southwest == RoadType::kBridgeNormal ||
-				end.field->road_southwest == RoadType::kBridgeBusy;
+		         end.field->road_southwest == RoadType::kBridgeBusy;
 		break;
 	case WALK_W:
 		map.get_rn(end, &start);
 		spos.x += triangle_w;
 		bridge = end.field->road_east == RoadType::kBridgeNormal ||
-				end.field->road_east == RoadType::kBridgeBusy;
+		         end.field->road_east == RoadType::kBridgeBusy;
 		break;
 	case WALK_E:
 		map.get_ln(end, &start);
 		spos.x -= triangle_w;
 		bridge = start.field->road_east == RoadType::kBridgeNormal ||
-				start.field->road_east == RoadType::kBridgeBusy;
+		         start.field->road_east == RoadType::kBridgeBusy;
 		break;
 	case WALK_SW:
 		map.get_trn(end, &start);
 		spos.x += triangle_w / 2.f;
 		spos.y -= triangle_h;
 		bridge = start.field->road_southwest == RoadType::kBridgeNormal ||
-				start.field->road_southwest == RoadType::kBridgeBusy;
+		         start.field->road_southwest == RoadType::kBridgeBusy;
 		break;
 	case WALK_SE:
 		map.get_tln(end, &start);
 		spos.x -= triangle_w / 2.f;
 		spos.y -= triangle_h;
 		bridge = start.field->road_southeast == RoadType::kBridgeNormal ||
-				start.field->road_southeast == RoadType::kBridgeBusy;
+		         start.field->road_southeast == RoadType::kBridgeBusy;
 		break;
 
 	case IDLE:
@@ -766,7 +766,7 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 		epos.y = f * epos.y + (1.f - f) * spos.y;
 		if (bridge) {
 			epos.y -= game.player(end.field->get_owned_by()).tribe().bridge_height() * scale *
-					(1 - 4 * (f - 0.5f) * (f - 0.5f));
+			          (1 - 4 * (f - 0.5f) * (f - 0.5f));
 		}
 	}
 	return epos;

@@ -58,7 +58,9 @@ namespace Widelands {
 TribeDescr::TribeDescr(const LuaTable& table,
                        const Widelands::TribeBasicInfo& info,
                        const Tribes& init_tribes)
-   : name_(table.get_string("name")), descname_(info.descname), tribes_(init_tribes),
+   : name_(table.get_string("name")),
+     descname_(info.descname),
+     tribes_(init_tribes),
      bridge_height_(table.get_int("bridge_height")) {
 
 	try {
@@ -85,13 +87,14 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		load_roads("busy", &busy_road_paths_);
 		load_roads("waterway", &waterway_paths_);
 
-#define LOAD_BRIDGE_IF_PRESENT(dir, type) \
-if (animations_table.has_key("bridge_" #type "_" #dir)) { \
-std::unique_ptr<LuaTable> animation_table = animations_table.get_table("bridge_" #type "_" #dir); \
-bridge_##dir##_animation_##type##_id_ = \
-g_gr->animations().load(name_ + std::string("_bridge_" #dir "_" #type), *animation_table, \
-animation_table->get_string("basename"), animation_type); \
-}
+#define LOAD_BRIDGE_IF_PRESENT(dir, type)                                                          \
+	if (animations_table.has_key("bridge_" #type "_" #dir)) {                                       \
+		std::unique_ptr<LuaTable> animation_table =                                                  \
+		   animations_table.get_table("bridge_" #type "_" #dir);                                     \
+		bridge_##dir##_animation_##type##_id_ =                                                      \
+		   g_gr->animations().load(name_ + std::string("_bridge_" #dir "_" #type), *animation_table, \
+		                           animation_table->get_string("basename"), animation_type);         \
+	}
 
 		// Frontier and flag animations can be a mix of file and spritesheet animations
 		const auto load_animations = [this](const LuaTable& animations_table,
@@ -381,10 +384,14 @@ uint32_t TribeDescr::flag_animation() const {
 
 uint32_t TribeDescr::bridge_animation(uint8_t dir, bool busy) const {
 	switch (dir) {
-		case WALK_E: return busy ? bridge_e_animation_busy_id_ : bridge_e_animation_normal_id_;
-		case WALK_SE: return busy ? bridge_se_animation_busy_id_ : bridge_se_animation_normal_id_;
-		case WALK_SW: return busy ? bridge_sw_animation_busy_id_ : bridge_sw_animation_normal_id_;
-		default: NEVER_HERE();
+	case WALK_E:
+		return busy ? bridge_e_animation_busy_id_ : bridge_e_animation_normal_id_;
+	case WALK_SE:
+		return busy ? bridge_se_animation_busy_id_ : bridge_se_animation_normal_id_;
+	case WALK_SW:
+		return busy ? bridge_sw_animation_busy_id_ : bridge_sw_animation_normal_id_;
+	default:
+		NEVER_HERE();
 	}
 }
 

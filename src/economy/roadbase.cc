@@ -102,35 +102,37 @@ bool RoadBase::is_bridge(const EditorGameBase& egbase, const FCoords& field, uin
 
 	FCoords fr, fd;
 	switch (dir) {
-		case WALK_SW:
-			fd = field;
-			map.get_ln(field, &fr);
-			break;
-		case WALK_SE:
-			fd = field;
-			fr = field;
-			break;
-		case WALK_NW:
-			map.get_tln(field, &fd);
-			fr = fd;
-			break;
-		case WALK_NE:
-			map.get_trn(field, &fd);
-			map.get_tln(field, &fr);
-			break;
-		case WALK_W:
-			map.get_tln(field, &fd);
-			map.get_ln(field, &fr);
-			break;
-		case WALK_E:
-			map.get_trn(field, &fd);
-			fr = field;
-			break;
-		default:
-			NEVER_HERE();
+	case WALK_SW:
+		fd = field;
+		map.get_ln(field, &fr);
+		break;
+	case WALK_SE:
+		fd = field;
+		fr = field;
+		break;
+	case WALK_NW:
+		map.get_tln(field, &fd);
+		fr = fd;
+		break;
+	case WALK_NE:
+		map.get_trn(field, &fd);
+		map.get_tln(field, &fr);
+		break;
+	case WALK_W:
+		map.get_tln(field, &fd);
+		map.get_ln(field, &fr);
+		break;
+	case WALK_E:
+		map.get_trn(field, &fd);
+		fr = field;
+		break;
+	default:
+		NEVER_HERE();
 	}
-	return (egbase.world().terrain_descr(fd.field->terrain_d()).get_is() & TerrainDescription::Is::kUnwalkable) &&
-			(egbase.world().terrain_descr(fr.field->terrain_r()).get_is() & TerrainDescription::Is::kUnwalkable);
+	return (egbase.world().terrain_descr(fd.field->terrain_d()).get_is() &
+	        TerrainDescription::Is::kUnwalkable) &&
+	       (egbase.world().terrain_descr(fr.field->terrain_r()).get_is() &
+	        TerrainDescription::Is::kUnwalkable);
 }
 
 /**
@@ -156,18 +158,21 @@ void RoadBase::set_path(EditorGameBase& egbase, const Path& path) {
 	idle_index_ = path.get_nsteps() / 2;
 }
 
-void RoadBase::set_roadtype(EditorGameBase& egbase, const FCoords curf, uint8_t dir, RoadType type) const {
+void RoadBase::set_roadtype(EditorGameBase& egbase,
+                            const FCoords curf,
+                            uint8_t dir,
+                            RoadType type) const {
 	if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E) {
 		if (type != RoadType::kNone && is_bridge(egbase, curf, dir)) {
 			switch (type) {
-				case RoadType::kNormal:
-					type = RoadType::kBridgeNormal;
-					break;
-				case RoadType::kBusy:
-					type = RoadType::kBridgeBusy;
-					break;
-				default:
-					NEVER_HERE();
+			case RoadType::kNormal:
+				type = RoadType::kBridgeNormal;
+				break;
+			case RoadType::kBusy:
+				type = RoadType::kBridgeBusy;
+				break;
+			default:
+				NEVER_HERE();
 			}
 		}
 		egbase.set_road(curf, dir, type);
