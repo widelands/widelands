@@ -1405,6 +1405,31 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RIGHT:
 			map_view_.pan_by(Vector2i(kScrollDistance, 0));
 			return true;
+		case SDLK_KP_1:
+			if (SDL_GetModState() & KMOD_NUM) {
+				break;
+			}
+			map_view_.pan_by(Vector2i(-kScrollDistance, kScrollDistance));
+			return true;
+		case SDLK_KP_3:
+			if (SDL_GetModState() & KMOD_NUM) {
+				break;
+			}
+			map_view_.pan_by(Vector2i(kScrollDistance, kScrollDistance));
+			return true;
+		case SDLK_KP_7:
+			if (SDL_GetModState() & KMOD_NUM) {
+				break;
+			}
+			map_view_.pan_by(Vector2i(-kScrollDistance, -kScrollDistance));
+			return true;
+		case SDLK_KP_9:
+			if (SDL_GetModState() & KMOD_NUM) {
+				break;
+			}
+			map_view_.pan_by(Vector2i(kScrollDistance, -kScrollDistance));
+			return true;
+
 #ifndef NDEBUG  //  only in debug builds
 		case SDLK_F6:
 			GameChatMenu::create_script_console(
@@ -1415,7 +1440,6 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			toggle_minimap();
 			return true;
 		default:
-			scroll_map();  // scroll map
 			break;
 		}
 	}

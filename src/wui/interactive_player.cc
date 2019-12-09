@@ -623,7 +623,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
 			return true;
 
-		case SDLK_KP_7:
+		case SDLK_KP_5:
 			if (code.mod & KMOD_NUM)
 				break;
 			FALLS_THROUGH;
