@@ -150,7 +150,7 @@ public:
 	void mouse_to_pixel(const Vector2i& pixel, const Transition& transition);
 
 	// Move the view by 'delta_pixels'.
-	void pan_by(Vector2i delta_pixels);
+	void pan_by(Vector2i delta_pixels, const Transition& transition);
 
 	// The current view area visible in the MapView in map pixel coordinates.
 	// The returned value always has 'x' > 0 and 'y' > 0.

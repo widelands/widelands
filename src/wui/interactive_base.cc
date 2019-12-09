@@ -1381,11 +1381,13 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			FALLS_THROUGH;
 		case SDLK_UP:
 			if (get_key_state(SDL_SCANCODE_LEFT)) {
-				map_view_.pan_by(Vector2i(-kScrollDistanceX, -kScrollDistanceY));
+				map_view_.pan_by(
+				   Vector2i(-kScrollDistanceX, -kScrollDistanceY), MapView::Transition::Smooth);
 			} else if (get_key_state(SDL_SCANCODE_RIGHT)) {
-				map_view_.pan_by(Vector2i(kScrollDistanceX, -kScrollDistanceY));
+				map_view_.pan_by(
+				   Vector2i(kScrollDistanceX, -kScrollDistanceY), MapView::Transition::Smooth);
 			} else {
-				map_view_.pan_by(Vector2i(0, -kScrollDistanceY));
+				map_view_.pan_by(Vector2i(0, -kScrollDistanceY), MapView::Transition::Smooth);
 			}
 			return true;
 		case SDLK_KP_2:
@@ -1395,11 +1397,13 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			FALLS_THROUGH;
 		case SDLK_DOWN:
 			if (get_key_state(SDL_SCANCODE_LEFT)) {
-				map_view_.pan_by(Vector2i(-kScrollDistanceX, kScrollDistanceY));
+				map_view_.pan_by(
+				   Vector2i(-kScrollDistanceX, kScrollDistanceY), MapView::Transition::Smooth);
 			} else if (get_key_state(SDL_SCANCODE_RIGHT)) {
-				map_view_.pan_by(Vector2i(kScrollDistanceX, kScrollDistanceY));
+				map_view_.pan_by(
+				   Vector2i(kScrollDistanceX, kScrollDistanceY), MapView::Transition::Smooth);
 			} else {
-				map_view_.pan_by(Vector2i(0, kScrollDistanceY));
+				map_view_.pan_by(Vector2i(0, kScrollDistanceY), MapView::Transition::Smooth);
 			}
 			return true;
 		case SDLK_KP_4:
@@ -1409,11 +1413,13 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			FALLS_THROUGH;
 		case SDLK_LEFT:
 			if (get_key_state(SDL_SCANCODE_UP)) {
-				map_view_.pan_by(Vector2i(-kScrollDistanceX, -kScrollDistanceY));
+				map_view_.pan_by(
+				   Vector2i(-kScrollDistanceX, -kScrollDistanceY), MapView::Transition::Smooth);
 			} else if (get_key_state(SDL_SCANCODE_DOWN)) {
-				map_view_.pan_by(Vector2i(-kScrollDistanceX, kScrollDistanceY));
+				map_view_.pan_by(
+				   Vector2i(-kScrollDistanceX, kScrollDistanceY), MapView::Transition::Smooth);
 			} else {
-				map_view_.pan_by(Vector2i(-kScrollDistanceX, 0));
+				map_view_.pan_by(Vector2i(-kScrollDistanceX, 0), MapView::Transition::Smooth);
 			}
 			return true;
 		case SDLK_KP_6:
@@ -1423,36 +1429,42 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			FALLS_THROUGH;
 		case SDLK_RIGHT:
 			if (get_key_state(SDL_SCANCODE_UP)) {
-				map_view_.pan_by(Vector2i(kScrollDistanceX, -kScrollDistanceY));
+				map_view_.pan_by(
+				   Vector2i(kScrollDistanceX, -kScrollDistanceY), MapView::Transition::Smooth);
 			} else if (get_key_state(SDL_SCANCODE_DOWN)) {
-				map_view_.pan_by(Vector2i(kScrollDistanceX, kScrollDistanceY));
+				map_view_.pan_by(
+				   Vector2i(kScrollDistanceX, kScrollDistanceY), MapView::Transition::Smooth);
 			} else {
-				map_view_.pan_by(Vector2i(kScrollDistanceX, 0));
+				map_view_.pan_by(Vector2i(kScrollDistanceX, 0), MapView::Transition::Smooth);
 			}
 			return true;
 		case SDLK_KP_1:
 			if (SDL_GetModState() & KMOD_NUM) {
 				break;
 			}
-			map_view_.pan_by(Vector2i(-kScrollDistanceX, kScrollDistanceY));
+			map_view_.pan_by(
+			   Vector2i(-kScrollDistanceX, kScrollDistanceY), MapView::Transition::Smooth);
 			return true;
 		case SDLK_KP_3:
 			if (SDL_GetModState() & KMOD_NUM) {
 				break;
 			}
-			map_view_.pan_by(Vector2i(kScrollDistanceX, kScrollDistanceY));
+			map_view_.pan_by(
+			   Vector2i(kScrollDistanceX, kScrollDistanceY), MapView::Transition::Smooth);
 			return true;
 		case SDLK_KP_7:
 			if (SDL_GetModState() & KMOD_NUM) {
 				break;
 			}
-			map_view_.pan_by(Vector2i(-kScrollDistanceX, -kScrollDistanceY));
+			map_view_.pan_by(
+			   Vector2i(-kScrollDistanceX, -kScrollDistanceY), MapView::Transition::Smooth);
 			return true;
 		case SDLK_KP_9:
 			if (SDL_GetModState() & KMOD_NUM) {
 				break;
 			}
-			map_view_.pan_by(Vector2i(kScrollDistanceX, -kScrollDistanceY));
+			map_view_.pan_by(
+			   Vector2i(kScrollDistanceX, -kScrollDistanceY), MapView::Transition::Smooth);
 			return true;
 
 #ifndef NDEBUG  //  only in debug builds

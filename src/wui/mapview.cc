@@ -450,12 +450,11 @@ const MapView::View& MapView::view() const {
 	return view_;
 }
 
-void MapView::pan_by(Vector2i delta_pixels) {
+void MapView::pan_by(Vector2i delta_pixels, const Transition& transition) {
 	if (is_animating()) {
 		return;
 	}
-	set_view(
-	   {view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, view_.zoom}, Transition::Smooth);
+	set_view({view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, view_.zoom}, transition);
 }
 
 void MapView::stop_dragging() {
@@ -496,7 +495,7 @@ bool MapView::handle_mousemove(
 
 	if (dragging_) {
 		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT)) {
-			pan_by(Vector2i(xdiff, ydiff));
+			pan_by(Vector2i(xdiff, ydiff), Transition::Jump);
 		} else {
 			stop_dragging();
 		}
