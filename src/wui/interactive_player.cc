@@ -342,14 +342,7 @@ void InteractivePlayer::think() {
 					set_sel_pos(Widelands::NodeAndTriangle<>{
 					   flag_to_connect_,
 					   Widelands::TCoords<>(flag_to_connect_, Widelands::TriangleIndex::D)});
-					const Widelands::Map& map = egbase().map();
-					if (map.get_waterway_max_length() >= 2 &&
-					    Widelands::CheckStepFerry(egbase()).reachable_dest(
-					       map, Widelands::FCoords(flag_to_connect_, &field))) {
-						show_field_action(this, get_player(), &fieldaction_);
-					} else {
-						start_build_road(flag_to_connect_, field.get_owned_by());
-					}
+					start_build_road(flag_to_connect_, field.get_owned_by());
 				}
 			flag_to_connect_ = Widelands::Coords::null();
 		}
