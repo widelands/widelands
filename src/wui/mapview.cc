@@ -592,42 +592,42 @@ bool MapView::scroll_map() {
 	uint32_t ScrollDistanceX = g_gr->get_xres() / 4;
 
 	if ((get_key_state(SDL_SCANCODE_UP) && get_key_state(SDL_SCANCODE_LEFT)) ||
-	    (get_key_state(SDL_SCANCODE_KP_7) && (SDL_GetModState() & KMOD_NUM))) {
+	    (get_key_state(SDL_SCANCODE_KP_7) && !(SDL_GetModState() & KMOD_NUM))) {
 		pan_by(Vector2i(-ScrollDistanceX, -ScrollDistanceY), Transition::Smooth);
 		return true;
 	}
 	if ((get_key_state(SDL_SCANCODE_UP) && get_key_state(SDL_SCANCODE_RIGHT)) ||
-	    (get_key_state(SDL_SCANCODE_KP_9) && (SDL_GetModState() & KMOD_NUM))) {
+	    (get_key_state(SDL_SCANCODE_KP_9) && !(SDL_GetModState() & KMOD_NUM))) {
 		pan_by(Vector2i(ScrollDistanceX, -ScrollDistanceY), Transition::Smooth);
 		return true;
 	}
 	if ((get_key_state(SDL_SCANCODE_DOWN) && get_key_state(SDL_SCANCODE_LEFT)) ||
-	    (get_key_state(SDL_SCANCODE_KP_1) && (SDL_GetModState() & KMOD_NUM))) {
+	    (get_key_state(SDL_SCANCODE_KP_1) && !(SDL_GetModState() & KMOD_NUM))) {
 		pan_by(Vector2i(-ScrollDistanceX, ScrollDistanceY), Transition::Smooth);
 		return true;
 	}
 	if ((get_key_state(SDL_SCANCODE_DOWN) && get_key_state(SDL_SCANCODE_RIGHT)) ||
-	    (get_key_state(SDL_SCANCODE_KP_3) && (SDL_GetModState() & KMOD_NUM))) {
+	    (get_key_state(SDL_SCANCODE_KP_3) && !(SDL_GetModState() & KMOD_NUM))) {
 		pan_by(Vector2i(ScrollDistanceX, ScrollDistanceY), Transition::Smooth);
 		return true;
 	}
 	if (get_key_state(SDL_SCANCODE_UP) ||
-	    (get_key_state(SDL_SCANCODE_KP_8) && (SDL_GetModState() & KMOD_NUM))) {
+	    (get_key_state(SDL_SCANCODE_KP_8) && !(SDL_GetModState() & KMOD_NUM))) {
 		pan_by(Vector2i(0, -ScrollDistanceY), Transition::Smooth);
 		return true;
 	}
 	if (get_key_state(SDL_SCANCODE_DOWN) ||
-	    (get_key_state(SDL_SCANCODE_KP_2) && (SDL_GetModState() & KMOD_NUM))) {
+	    (get_key_state(SDL_SCANCODE_KP_2) && !(SDL_GetModState() & KMOD_NUM))) {
 		pan_by(Vector2i(0, ScrollDistanceY), Transition::Smooth);
 		return true;
 	}
 	if (get_key_state(SDL_SCANCODE_LEFT) ||
-	    (get_key_state(SDL_SCANCODE_KP_4) && (SDL_GetModState() & KMOD_NUM))) {
+	    (get_key_state(SDL_SCANCODE_KP_4) && !(SDL_GetModState() & KMOD_NUM))) {
 		pan_by(Vector2i(-ScrollDistanceX, 0), Transition::Smooth);
 		return true;
 	}
 	if (get_key_state(SDL_SCANCODE_RIGHT) ||
-	    (get_key_state(SDL_SCANCODE_KP_6) && (SDL_GetModState() & KMOD_NUM))) {
+	    (get_key_state(SDL_SCANCODE_KP_6) && !(SDL_GetModState() & KMOD_NUM))) {
 		pan_by(Vector2i(ScrollDistanceX, 0), Transition::Smooth);
 		return true;
 	}
