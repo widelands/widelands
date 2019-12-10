@@ -21,26 +21,41 @@ tribes:new_productionsite_type {
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 80},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 66},
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 69},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working_iron = {
-         pictures = path.list_files (dirname .. "working_iron_??.png"),
-         hotspot = {56, 80},
-         fps = 10,
+         directory = dirname,
+         basename = "working_iron",
+         hotspot = {50, 69},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working_gold = {
-         pictures = path.list_files (dirname .. "working_gold_??.png"),
-         hotspot = {56, 80},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working_gold",
+         hotspot = {50, 69},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
+      unoccupied = {
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 58}
+      }
    },
 
    aihints = {

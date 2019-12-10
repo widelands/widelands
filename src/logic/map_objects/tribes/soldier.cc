@@ -30,6 +30,7 @@
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"

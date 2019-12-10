@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-26 10:18+0000\n"
-"PO-Revision-Date: 2019-08-28 10:48+0000\n"
+"POT-Creation-Date: 2019-10-09 07:57+0000\n"
+"PO-Revision-Date: 2019-11-01 15:55+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -77,7 +77,7 @@ msgstr "Tancament d'aquesta finestra"
 msgid ""
 "This is the ‘Objectives’ window. You can return to this window for "
 "instructions at any time."
-msgstr ""
+msgstr "Aquesta és la finestra d'objectius. Podeu tornar-hi quan vulgueu per comprovar-los."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
@@ -120,7 +120,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:68
 msgid "Show the building spaces now."
-msgstr ""
+msgstr "Mostreu els espais de construcció."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:73
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:88
@@ -428,7 +428,7 @@ msgstr "Com utilitzar el minimapa"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:295
 msgid "Try moving around by clicking on the minimap"
-msgstr ""
+msgstr "Proveu de moure-vos fent clic al minimapa."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:296
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
@@ -574,7 +574,7 @@ msgstr "Excel·lent! Després d'haver situat l'edifici, haurà canviat el mode a
 msgid ""
 "You can enter road building mode for any flag by left-clicking on a flag and"
 " selecting the road building symbol."
-msgstr ""
+msgstr "Podeu accedir al mode de construcció de camins fent clic esquerre en una bandera i seleccionant-ne el símbol corresponent."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:375
 msgid ""
@@ -741,7 +741,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:472
 msgid "Let me enable the census for you."
-msgstr ""
+msgstr "Deixeu-me activar-vos el cens."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
@@ -759,13 +759,13 @@ msgid ""
 "In order to show or hide the building statistics labels, you can select the "
 "‘Show Statistics’ entry from the ‘Show / Hide’ menu on the bottom, or press "
 "the ‘s’ key on the keyboard."
-msgstr ""
+msgstr "Per tal de mostrar o amagar les etiquetes d'estadístiques de construcció, podeu seleccionar l'entrada «Mostra estadístiques» del menú «Mostra amaga» que hi ha a la part inferior de la pantalla. També podeu prémer la tecla «S»."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:492
 msgid ""
 "Now, wouldn’t it be nice to check on our quarries’ progress without having "
 "to open their windows?"
-msgstr ""
+msgstr "I ara, no seria fantàstic poder comprovar el progrés de les pedreres sense haver-ne d'obrir les finestres?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:493
 msgid ""
@@ -1055,7 +1055,7 @@ msgstr "Feu clic al botó «Menú principal» a l'extrem esquerre de la part inf
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:642
 msgid "Then click on the ‘Exit Game’ entry."
-msgstr ""
+msgstr "Després feu clic en «Sortir de la partida»."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:643
 msgid ""

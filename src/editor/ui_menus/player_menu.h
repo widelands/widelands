@@ -38,8 +38,6 @@ public:
 	EditorPlayerMenu(EditorInteractive&,
 	                 EditorSetStartingPosTool& tool,
 	                 UI::UniqueWindow::Registry&);
-	~EditorPlayerMenu() override {
-	}
 
 private:
 	// Container with UI elements to set a player slot's properties

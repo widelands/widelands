@@ -150,7 +150,7 @@ public:
 	void mouse_to_pixel(const Vector2i& pixel, const Transition& transition);
 
 	// Move the view by 'delta_pixels'.
-	void pan_by(Vector2i delta_pixels);
+	void pan_by(Vector2i delta_pixels, const Transition& transition);
 
 	// The current view area visible in the MapView in map pixel coordinates.
 	// The returned value always has 'x' > 0 and 'y' > 0.
@@ -175,6 +175,9 @@ public:
 
 	// True if a 'Transition::Smooth' animation is playing.
 	bool is_animating() const;
+
+	// Scrolls the map and returns true if it did.
+	bool scroll_map();
 
 	// Schedules drawing of the terrain of this MapView. The returned value can
 	// be used to override contents of 'fields_to_draw' for player knowledge and

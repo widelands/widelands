@@ -39,7 +39,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 4;
+constexpr uint16_t kCurrentPacketVersion = 5;
 
 void MapRoaddataPacket::read(FileSystem& fs,
                              EditorGameBase& egbase,
@@ -58,7 +58,8 @@ void MapRoaddataPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		// TODO(Nordfriese): Savegame compatibility
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 4) {
 			const Map& map = egbase.map();
 			PlayerNumber const nr_players = map.get_nrplayers();
 			while (!fr.end_of_file()) {
@@ -75,7 +76,8 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					road.set_owner(egbase.get_player(player_index));
 					road.wallet_ = fr.unsigned_32();
 					road.last_wallet_charge_ = fr.unsigned_32();
-					road.type_ = fr.unsigned_32();
+					road.type_ =
+					   static_cast<RoadType>(packet_version >= 5 ? fr.unsigned_8() : fr.unsigned_32());
 					{
 						uint32_t const flag_0_serial = fr.unsigned_32();
 						try {
@@ -108,12 +110,11 @@ void MapRoaddataPacket::read(FileSystem& fs,
 							throw GameDataError("step #%" PRIuS ": %s", nr_steps - i, e.what());
 						}
 					road.set_path(egbase, p);
+					road.idle_index_ = packet_version >= 5 ? p.get_nsteps() / 2 : fr.unsigned_32();
 
 					//  Now that all rudimentary data is set, init this road. Then
 					//  overwrite the initialization values.
-					road.link_into_flags(egbase);
-
-					road.idle_index_ = fr.unsigned_32();
+					road.link_into_flags(egbase, true);
 
 					uint32_t const count = fr.unsigned_32();
 					if (!count)
@@ -140,10 +141,10 @@ void MapRoaddataPacket::read(FileSystem& fs,
 						} else {
 							carrier_request = nullptr;
 						}
-						uint8_t const carrier_type = fr.unsigned_32();
+						bool const carrier_type = fr.unsigned_32() == 2;
 
 						if (i < road.carrier_slots_.size() &&
-						    road.carrier_slots_[i].carrier_type == carrier_type) {
+						    road.carrier_slots_[i].second_carrier == carrier_type) {
 							assert(!road.carrier_slots_[i].carrier.get(egbase));
 
 							road.carrier_slots_[i].carrier = carrier;
@@ -195,7 +196,7 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				fw.unsigned_32(r->wallet_);
 				fw.unsigned_32(r->last_wallet_charge_);
 
-				fw.unsigned_32(r->type_);
+				fw.unsigned_8(r->type_);
 
 				//  serial of flags
 				assert(mos.is_object_known(*r->flags_[0]));
@@ -215,8 +216,6 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				for (Path::StepVector::size_type i = 0; i < nr_steps; ++i)
 					fw.unsigned_8(path[i]);
 
-				fw.unsigned_32(r->idle_index_);  //  TODO(unknown): do not save this
-
 				fw.unsigned_32(r->carrier_slots_.size());
 
 				for (const Road::CarrierSlot& temp_slot : r->carrier_slots_) {
@@ -233,7 +232,7 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 					} else {
 						fw.unsigned_8(0);
 					}
-					fw.unsigned_32(temp_slot.carrier_type);
+					fw.unsigned_32(temp_slot.second_carrier ? 2 : 1);
 				}
 				mos.mark_object_as_saved(*r);
 			}

@@ -420,10 +420,10 @@ void MainMenuNewRandomMap::normalize_landmass(ButtonId clicked_button) {
 
 	// Prefer changing mountainsval to keep consistency with old behaviour
 	while (sum_without_mountainsval + mountainsval_ > 100) {
-		mountainsval_ -= 1;
+		--mountainsval_;
 	}
 	while (sum_without_mountainsval + mountainsval_ < 100) {
-		mountainsval_ += 1;
+		++mountainsval_;
 	}
 
 	// Compensate if mountainsval got above 100% / below 0%
@@ -514,13 +514,15 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	}
 	log("\n");
 
+	egbase.set_loader_ui(&loader_ui);
 	gen.create_random_map();
 
 	egbase.postload();
-	egbase.load_graphics(loader_ui);
+	egbase.load_graphics();
 
 	map->recalc_whole_map(egbase);
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);
+	egbase.set_loader_ui(nullptr);
 	UI::WLMessageBox mbox(
 	   &eia,
 	   /** TRANSLATORS: Window title. This is shown after a random map has been created in the

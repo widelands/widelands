@@ -211,7 +211,7 @@ public:
 	void update_crude_statistics(uint32_t, bool);
 
 	uint8_t get_crude_statistics() {
-		return crude_percent_ / 100;
+		return crude_percent_ / 10;
 	}
 
 	const std::string& production_result() const {
@@ -237,7 +237,7 @@ public:
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
 
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 
 	using InputQueues = std::vector<InputQueue*>;
 	const InputQueues& inputqueues() const {
@@ -345,7 +345,7 @@ protected:  // TrainingSite must have access to this stuff
 	uint8_t last_stat_percent_;
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:
 	// 0-100)
-	uint32_t crude_percent_;  // basically this is percent * 100 to avoid floats
+	uint32_t crude_percent_;  // basically this is percent * 10 to avoid floats
 	uint32_t last_program_end_time;
 	bool is_stopped_;
 	std::string default_anim_;  // normally "idle", "empty", if empty mine.

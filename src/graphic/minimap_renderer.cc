@@ -23,7 +23,7 @@
 
 #include "base/macros.h"
 #include "economy/flag.h"
-#include "economy/road.h"
+#include "economy/roadbase.h"
 #include "logic/field.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
@@ -71,7 +71,7 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 		// visualize objects using white color.
 
 		if (upcast(PlayerImmovable const, immovable, f.field->get_immovable())) {
-			if ((layers & MiniMapLayer::Road) && dynamic_cast<Road const*>(immovable)) {
+			if ((layers & MiniMapLayer::Road) && dynamic_cast<RoadBase const*>(immovable)) {
 				color = blend_color(color, kWhite);
 			}
 

@@ -68,7 +68,6 @@ private:
 	UI::ProgressBar* progress_;
 
 	// BuildingSettings-related UI elements
-	UI::Button* cs_enhance_;
 	UI::Checkbox* cs_launch_expedition_;
 	std::unique_ptr<UI::Radiogroup> cs_prefer_heroes_rookies_;
 	UI::Button* cs_soldier_capacity_decrease_;

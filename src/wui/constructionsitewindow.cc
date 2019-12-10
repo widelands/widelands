@@ -43,6 +43,7 @@ static const char pic_stock_policy_button_remove[] =
    "images/wui/buildings/stock_policy_button_remove.png";
 static const char pic_decrease_capacity[] = "images/wui/buildings/menu_down_train.png";
 static const char pic_increase_capacity[] = "images/wui/buildings/menu_up_train.png";
+constexpr uint16_t kSoldierCapacityDisplayWidth = 145;
 
 ConstructionSiteWindow::FakeWaresDisplay::FakeWaresDisplay(UI::Panel* parent,
                                                            bool can_act,
@@ -96,7 +97,6 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveBase& parent,
    : BuildingWindow(parent, reg, cs, cs.building(), avoid_fastclick),
      construction_site_(&cs),
      progress_(nullptr),
-     cs_enhance_(nullptr),
      cs_launch_expedition_(nullptr),
      cs_prefer_heroes_rookies_(nullptr),
      cs_soldier_capacity_decrease_(nullptr),
@@ -143,14 +143,12 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				InputQueueDisplay* queue = new InputQueueDisplay(
 				   &settings_box, 0, 0, *ibase(), *construction_site, Widelands::wwWARE, pair.first);
 				settings_box.add(queue);
-				settings_box.add_space(8);
 				cs_ware_queues_.push_back(queue);
 			}
 			for (const auto& pair : ps->worker_queues) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
 				   &settings_box, 0, 0, *ibase(), *construction_site, Widelands::wwWORKER, pair.first);
 				settings_box.add(queue);
-				settings_box.add_space(8);
 				cs_ware_queues_.push_back(queue);
 			}
 			if (upcast(Widelands::TrainingsiteSettings, ts, ps)) {
@@ -166,6 +164,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
 				cs_soldier_capacity_display_ =
 				   new UI::Textarea(&soldier_capacity_box, "", UI::Align::kCenter);
+				cs_soldier_capacity_decrease_->set_repeating(true);
+				cs_soldier_capacity_increase_->set_repeating(true);
 				cs_soldier_capacity_decrease_->set_enabled(can_act);
 				cs_soldier_capacity_increase_->set_enabled(can_act);
 				cs_soldier_capacity_decrease_->sigclicked.connect([this, ts]() {
@@ -187,11 +187,10 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 					}
 				});
 				soldier_capacity_box.add(cs_soldier_capacity_decrease_);
-				soldier_capacity_box.add_space(8);
 				soldier_capacity_box.add(
 				   cs_soldier_capacity_display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-				soldier_capacity_box.add_space(8);
 				soldier_capacity_box.add(cs_soldier_capacity_increase_);
+				cs_soldier_capacity_display_->set_fixed_width(kSoldierCapacityDisplayWidth);
 				settings_box.add_space(8);
 			}
 			cs_stopped_ = new UI::Checkbox(&settings_box, Vector2i::zero(), _("Stopped"),
@@ -206,8 +205,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 					}
 				}
 			});
-			settings_box.add(cs_stopped_, UI::Box::Resizing::kFullSize);
-			settings_box.add_space(8);
+			settings_box.add(cs_stopped_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+			settings_box.add_space(6);
 			cs_stopped_->set_enabled(can_act);
 		} else if (upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings())) {
 			UI::Box& soldier_capacity_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
@@ -222,6 +221,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
 			cs_soldier_capacity_display_ =
 			   new UI::Textarea(&soldier_capacity_box, "", UI::Align::kCenter);
+			cs_soldier_capacity_decrease_->set_repeating(true);
+			cs_soldier_capacity_increase_->set_repeating(true);
 			cs_soldier_capacity_decrease_->set_enabled(can_act);
 			cs_soldier_capacity_increase_->set_enabled(can_act);
 			cs_soldier_capacity_decrease_->sigclicked.connect([this, ms]() {
@@ -243,11 +244,10 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				}
 			});
 			soldier_capacity_box.add(cs_soldier_capacity_decrease_);
-			soldier_capacity_box.add_space(8);
 			soldier_capacity_box.add(
 			   cs_soldier_capacity_display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-			soldier_capacity_box.add_space(8);
 			soldier_capacity_box.add(cs_soldier_capacity_increase_);
+			cs_soldier_capacity_display_->set_fixed_width(kSoldierCapacityDisplayWidth);
 			settings_box.add_space(8);
 
 			UI::Box& soldier_preference_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
@@ -262,6 +262,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_prefer_heroes_rookies_->add_button(
 			   &soldier_preference_panel, Vector2i(32, 0),
 			   g_gr->images().get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
+			cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1);
 			if (can_act) {
 				cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
 					if (ibase()->get_game()) {
@@ -281,10 +282,9 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				UI::Box& mainbox = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 				*display = new FakeWaresDisplay(&mainbox, can_act, *construction_site, ww);
 				mainbox.add(*display, UI::Box::Resizing::kFullSize);
-				mainbox.add_space(8);
 				UI::Box& buttonsbox = *new UI::Box(&mainbox, 0, 0, UI::Box::Horizontal);
 				mainbox.add(&buttonsbox, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-				mainbox.add_space(8);
+				mainbox.add_space(15);
 				UI::Button& sp_normal = *new UI::Button(
 				   &buttonsbox, "stock_policy_normal", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 				   g_gr->images().get(pic_stock_policy_button_normal), _("Normal policy"));
@@ -313,11 +313,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				sp_remove.set_enabled(can_act);
 				sp_prefer.set_enabled(can_act);
 				buttonsbox.add(&sp_normal);
-				buttonsbox.add_space(8);
 				buttonsbox.add(&sp_prefer);
-				buttonsbox.add_space(8);
 				buttonsbox.add(&sp_dont);
-				buttonsbox.add_space(8);
 				buttonsbox.add(&sp_remove);
 				if (ww == Widelands::wwWARE) {
 					get_tabs()->add("warehouse_wares", g_gr->images().get(pic_tab_settings_wares),
@@ -344,44 +341,13 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 					}
 				});
 				settings_box.add(cs_launch_expedition_, UI::Box::Resizing::kFullSize);
-				settings_box.add_space(8);
+				settings_box.add_space(6);
 				cs_launch_expedition_->set_enabled(can_act);
 			} else {
 				nothing_added = true;
 			}
 		} else {
 			NEVER_HERE();
-		}
-
-		if (can_act &&
-		    construction_site->get_info().becomes->enhancement() != Widelands::INVALID_INDEX) {
-			const Widelands::BuildingDescr& building_descr =
-			   *ibase()->egbase().tribes().get_building_descr(
-			      construction_site->get_info().becomes->enhancement());
-			std::string enhance_tooltip =
-			   (boost::format(_("Enhance to %s")) % building_descr.descname().c_str()).str() +
-			   "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
-			   waremap_to_richtext(
-			      construction_site->owner().tribe(), building_descr.enhancement_cost());
-			cs_enhance_ =
-			   new UI::Button(&settings_box, "enhance", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  building_descr.icon(), enhance_tooltip);
-			cs_enhance_->sigclicked.connect([this, construction_site] {
-				if (ibase()->get_game()) {
-					if (SDL_GetModState() & KMOD_CTRL) {
-						ibase()->game().send_player_enhance_building(
-						   *construction_site, Widelands::INVALID_INDEX);
-					} else {
-						show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*ibase()), *construction_site,
-							                 construction_site->get_info().becomes->enhancement(), true);
-					}
-				} else {
-					log("NOCOM: ConstructionSiteWindow cs_enhance_->sigclicked in editor not yet implemented\n");
-				}
-			});
-			settings_box.add(cs_enhance_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-			settings_box.add_space(8);
-			nothing_added = false;
 		}
 		if (!nothing_added) {
 			get_tabs()->add("settings", g_gr->images().get(pic_tab_settings), &settings_box,
@@ -470,7 +436,13 @@ void ConstructionSiteWindow::think() {
 		cs_soldier_capacity_decrease_->set_enabled(can_act && ms->desired_capacity > 1);
 		cs_soldier_capacity_increase_->set_enabled(can_act &&
 		                                           ms->desired_capacity < ms->max_capacity);
-		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1);
+		// Since this function triggers a changedto signal resulting in a playercommand,
+		// we can update the view only for spectators (which may be a problem if a script
+		// changes the state while the window is open for the interactive player, but this
+		// was never yet mentioned as a problem in militarysitewindows either).
+		if (!can_act) {
+			cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1);
+		}
 	} else if (upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings())) {
 		if (cs_launch_expedition_) {
 			cs_launch_expedition_->set_state(ws->launch_expedition);

@@ -149,6 +149,7 @@ bool GameClientImpl::run_map_menu(GameClient* parent) {
  * Show progress dialog and load map or saved game.
  */
 InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressWindow* loader) {
+	assert(loader);
 	std::vector<std::string> tipstext;
 	tipstext.push_back("general_game");
 	tipstext.push_back("multiplayer");
@@ -162,6 +163,7 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 	loader->step(_("Preparing game"));
 
 	game->set_game_controller(parent);
+	game->set_loader_ui(loader);
 	uint8_t const pn = settings.playernum + 1;
 	game->save_handler().set_autosave_filename(
 	   (boost::format("%s_netclient%u") % kAutosavePrefix % static_cast<unsigned int>(pn)).str());
@@ -174,10 +176,11 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 	game->set_ibase(igb);
 	igb->set_chat_provider(*parent);
 	if (settings.savegame) {  // savegame
-		game->init_savegame(loader, settings);
+		game->init_savegame(settings);
 	} else {  //  new map
-		game->init_newgame(loader, settings);
+		game->init_newgame(settings);
 	}
+	game->set_loader_ui(nullptr);
 	return igb;
 }
 
@@ -190,8 +193,9 @@ void GameClientImpl::run_game(InteractiveGameBase* igb, UI::ProgressWindow* load
 	lasttimestamp_realtime = SDL_GetTicks();
 
 	modal = igb;
-	game->run(loader,
-	          settings.savegame ? Widelands::Game::Loaded :
+	assert(loader);
+	game->set_loader_ui(loader);
+	game->run(settings.savegame ? Widelands::Game::Loaded :
 	                              settings.scenario ? Widelands::Game::NewMPScenario :
 	                                                  Widelands::Game::NewNonScenario,
 	          "", false, (boost::format("netclient_%d") % static_cast<int>(settings.usernum)).str());
@@ -201,6 +205,7 @@ void GameClientImpl::run_game(InteractiveGameBase* igb, UI::ProgressWindow* load
 		InternetGaming::ref().set_game_done();
 	}
 	modal = nullptr;
+	game->set_loader_ui(nullptr);
 	game = nullptr;
 }
 

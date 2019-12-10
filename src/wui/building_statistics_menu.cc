@@ -243,10 +243,11 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 	const Widelands::Player& player = iplayer().player();
 	const TribeDescr& tribe = player.tribe();
 	const bool map_allows_seafaring = iplayer().game().map().allows_seafaring();
+	const bool map_allows_waterways = iplayer().game().map().get_waterway_max_length() >= 2;
 	std::vector<DescriptionIndex> buildings_to_add[kNoOfBuildingTabs];
 	// Add the player's own tribe's buildings.
 	for (DescriptionIndex index : tribe.buildings()) {
-		if (own_building_is_valid(player, index, map_allows_seafaring)) {
+		if (own_building_is_valid(player, index, map_allows_seafaring, map_allows_waterways)) {
 			buildings_to_add[find_tab_for_building(*tribe.get_building_descr(index))].push_back(index);
 		}
 	}
@@ -316,10 +317,11 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 
 bool BuildingStatisticsMenu::own_building_is_valid(const Widelands::Player& player,
                                                    Widelands::DescriptionIndex index,
-                                                   bool map_allows_seafaring) const {
+                                                   bool map_allows_seafaring,
+                                                   bool map_allows_waterways) const {
 	const BuildingDescr& descr = *player.tribe().get_building_descr(index);
-	// Skip seafaring buildings if not needed
-	if (descr.needs_seafaring() && !map_allows_seafaring &&
+
+	if (!descr.is_useful_on_map(map_allows_seafaring, map_allows_waterways) &&
 	    player.get_building_statistics(index).empty()) {
 		return false;
 	}
@@ -374,9 +376,10 @@ int BuildingStatisticsMenu::find_tab_for_building(const Widelands::BuildingDescr
 void BuildingStatisticsMenu::update_building_list() {
 	const Widelands::Player& player = iplayer().player();
 	const bool map_allows_seafaring = iplayer().game().map().allows_seafaring();
+	const bool map_allows_waterways = iplayer().game().map().get_waterway_max_length() >= 2;
 	for (DescriptionIndex index = 0; index < nr_building_types_; ++index) {
 		const bool should_have_this_building =
-		   own_building_is_valid(player, index, map_allows_seafaring) ||
+		   own_building_is_valid(player, index, map_allows_seafaring, map_allows_waterways) ||
 		   foreign_tribe_building_is_valid(player, index);
 		const bool has_this_building = building_buttons_[index] != nullptr;
 		if (should_have_this_building != has_this_building) {

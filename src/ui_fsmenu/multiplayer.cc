@@ -111,8 +111,8 @@ void FullscreenMenuMultiPlayer::internet_login() {
 	// Try to connect to the metaserver
 	const std::string& meta = get_config_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
 	uint32_t port = get_config_natural("metaserverport", kInternetGamingPort);
-	std::string auth = register_ ? password_ : get_config_string("uuid", "");
-	assert(!auth.empty());
+	const std::string& auth = register_ ? password_ : get_config_string("uuid", "");
+	assert(!auth.empty() || !register_);
 	InternetGaming::ref().login(nickname_, auth, register_, meta, port);
 
 	// Check whether metaserver send some data

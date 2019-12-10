@@ -110,11 +110,13 @@ void MainMenuNewMap::clicked_create_map() {
 	                      list_.get_selected(), _("No Name"),
 	                      get_config_string("realname", pgettext("author_name", "Unknown")));
 
+	egbase.set_loader_ui(&loader_ui);
 	egbase.postload();
-	egbase.load_graphics(loader_ui);
+	egbase.load_graphics();
 
 	map->recalc_whole_map(egbase);
 	parent.map_changed(EditorInteractive::MapWas::kReplaced);
+	egbase.set_loader_ui(nullptr);
 	die();
 }
 

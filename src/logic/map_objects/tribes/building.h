@@ -128,6 +128,11 @@ public:
 	bool needs_seafaring() const {
 		return needs_seafaring_;
 	}
+	bool needs_waterways() const {
+		return needs_waterways_;
+	}
+
+	bool is_useful_on_map(bool seafaring_allowed, bool waterways_allowed) const;
 
 	// Returns the enhancement this building can become or
 	// INVALID_INDEX if it cannot be enhanced.
@@ -195,6 +200,8 @@ private:
 	bool mine_;
 	bool port_;
 	bool needs_seafaring_;  // This building should only be built on seafaring maps.
+	bool needs_waterways_;  // This building should only be built on maps with waterways/ferries
+	                        // enabled
 	DescriptionIndex enhancement_;
 	DescriptionIndex
 	   enhanced_from_;        // The building this building was enhanced from, or INVALID_INDEX

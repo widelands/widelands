@@ -14,11 +14,11 @@ tribes:new_immovable_type {
          "remove=",
       }
    },
-
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 21, 34 },
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {21, 34}
+      }
    }
 }

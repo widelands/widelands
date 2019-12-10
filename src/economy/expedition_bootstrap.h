@@ -71,7 +71,7 @@ public:
 	                                   std::vector<WareInstance*>* return_wares);
 
 	// Changes the economy for the wares that are already in store.
-	void set_economy(Economy* economy);
+	void set_economy(Economy* economy, WareWorker);
 
 	// Returns the wares and workers currently waiting for the expedition.
 	std::vector<InputQueue*> queues() const;
@@ -110,7 +110,8 @@ private:
 
 	/** The Expedition is bootstapped here. */
 	PortDock* const portdock_;  // not owned
-	Economy* economy_;
+	Economy* ware_economy_;
+	Economy* worker_economy_;
 
 	std::vector<std::unique_ptr<InputQueue>> queues_;
 
