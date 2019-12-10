@@ -326,7 +326,6 @@ tribes:new_tribe {
       "atlanteans_ferry_yard",
       "atlanteans_shipyard",
 
-
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
       "dismantlesite",

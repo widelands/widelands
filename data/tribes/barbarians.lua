@@ -276,7 +276,6 @@ tribes:new_tribe {
       "barbarians_shipyard",
       "barbarians_weaving_mill",
 
-
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
       "dismantlesite",
