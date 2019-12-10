@@ -595,36 +595,36 @@ bool MapView::scroll_map() {
 
 	// numpad keys
 	const bool kNumlockOff = !(SDL_GetModState() & KMOD_NUM);
-	const bool kNP1 = get_key_state(SDL_SCANCODE_KP_1);
-	const bool kNP2 = get_key_state(SDL_SCANCODE_KP_2);
-	const bool kNP3 = get_key_state(SDL_SCANCODE_KP_3);
-	const bool kNP4 = get_key_state(SDL_SCANCODE_KP_4);
-	const bool kNP6 = get_key_state(SDL_SCANCODE_KP_6);
-	const bool kNP7 = get_key_state(SDL_SCANCODE_KP_7);
-	const bool kNP8 = get_key_state(SDL_SCANCODE_KP_8);
-	const bool kNP9 = get_key_state(SDL_SCANCODE_KP_9);
+#define kNP(x) const bool kNP##x = kNumlockOff && get_key_state(SDL_SCANCODE_KP_##x);
+	kNP(1) kNP(2) kNP(3) kNP(4) kNP(6) kNP(7) kNP(8) kNP(9)
+#undef kNP
 
-	// set the scrolling distance
-	uint8_t denominator =
-	   ((SDL_GetModState() & KMOD_SHIFT) ? 4 : (SDL_GetModState() & KMOD_CTRL) ? 16 : 8);
-	uint16_t scroll_distance_y = g_gr->get_yres() / denominator;
-	uint16_t scroll_distance_x = g_gr->get_xres() / denominator;
+	   // set the scrolling distance
+	   const uint8_t denominator =
+	      ((SDL_GetModState() & KMOD_CTRL) ? 4 : (SDL_GetModState() & KMOD_SHIFT) ? 16 : 8);
+	const uint16_t scroll_distance_y = g_gr->get_yres() / denominator;
+	const uint16_t scroll_distance_x = g_gr->get_xres() / denominator;
 	int32_t distance_to_scroll_x = 0;
 	int32_t distance_to_scroll_y = 0;
 
 	// check the directions
-	if (kUP || (kNumlockOff && (kNP7 || kNP8 || kNP9)))
+	if (kUP || kNP7 || kNP8 || kNP9) {
 		distance_to_scroll_y -= scroll_distance_y;
-	if (kDOWN || (kNumlockOff && (kNP1 || kNP2 || kNP3)))
+	}
+	if (kDOWN || kNP1 || kNP2 || kNP3) {
 		distance_to_scroll_y += scroll_distance_y;
-	if (kLEFT || (kNumlockOff && (kNP1 || kNP4 || kNP7)))
+	}
+	if (kLEFT || kNP1 || kNP4 || kNP7) {
 		distance_to_scroll_x -= scroll_distance_x;
-	if (kRIGHT || (kNumlockOff && (kNP3 || kNP6 || kNP9)))
+	}
+	if (kRIGHT || kNP3 || kNP6 || kNP9) {
 		distance_to_scroll_x += scroll_distance_x;
+	}
 
 	// do the actual scrolling
-	if (distance_to_scroll_x == 0 && distance_to_scroll_y == 0)
+	if (distance_to_scroll_x == 0 && distance_to_scroll_y == 0) {
 		return false;
+	}
 	pan_by(Vector2i(distance_to_scroll_x, distance_to_scroll_y), Transition::Smooth);
 	return true;
 }
