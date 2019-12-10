@@ -59,6 +59,9 @@ std::string speed_string(int const speed) {
 	return _("PAUSE");
 }
 
+constexpr uint8_t kSpeedSlow = 250;
+constexpr uint16_t kSpeedDefault = 1000;
+constexpr uint16_t kSpeedFast = 10000;
 }  // namespace
 
 InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
@@ -282,24 +285,16 @@ void InteractiveGameBase::rebuild_gamespeed_menu() {
 void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	switch (entry) {
 	case GameSpeedEntry::kIncrease: {
-		if (SDL_GetModState() & KMOD_SHIFT) {
-			increase_gamespeed(250);
-		} else if (SDL_GetModState() & KMOD_CTRL) {
-			increase_gamespeed(10000);
-		} else {
-			increase_gamespeed(1000);
-		}
+		increase_gamespeed(SDL_GetModState() & KMOD_SHIFT ?
+		                      kSpeedSlow :
+		                      SDL_GetModState() & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;
 	case GameSpeedEntry::kDecrease: {
-		if (SDL_GetModState() & KMOD_SHIFT) {
-			decrease_gamespeed(250);
-		} else if (SDL_GetModState() & KMOD_CTRL) {
-			decrease_gamespeed(10000);
-		} else {
-			decrease_gamespeed(1000);
-		}
+		decrease_gamespeed(SDL_GetModState() & KMOD_SHIFT ?
+		                      kSpeedSlow :
+		                      SDL_GetModState() & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;
@@ -311,54 +306,23 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	}
 }
 
-void InteractiveGameBase::increase_gamespeed(uint32_t speed) {
+void InteractiveGameBase::increase_gamespeed(uint16_t speed) {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		uint32_t const current_speed = ctrl->desired_speed();
-		switch (speed) {
-		case 250:
-			ctrl->set_desired_speed(current_speed + speed);
-			break;
-		case 1000:
-			if (current_speed < 1000) {
-				ctrl->set_desired_speed(1000);
-			} else {
-				ctrl->set_desired_speed(current_speed - current_speed % speed + speed);
-			}
-			break;
-		case 10000:
-			ctrl->set_desired_speed(
-			   current_speed >= speed ? current_speed - current_speed % speed + speed : speed);
-			break;
-		default:
-			break;
-		}
+		ctrl->set_desired_speed(current_speed + speed);
 	}
 }
 
-void InteractiveGameBase::decrease_gamespeed(uint32_t speed) {
+void InteractiveGameBase::decrease_gamespeed(uint16_t speed) {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		uint32_t const current_speed = ctrl->desired_speed();
-		switch (speed) {
-		case 250:
-			ctrl->set_desired_speed(current_speed > speed ? current_speed - speed : 0);
-			break;
-		case 1000:
-			if (current_speed >= 2000) {
-				ctrl->set_desired_speed(current_speed - current_speed % speed - speed);
-			} else if (current_speed > 1000) {
-				ctrl->set_desired_speed(1000);
-			} else {
-				ctrl->set_desired_speed(0);
-			}
-			break;
-		case 10000:
-			ctrl->set_desired_speed(
-			   current_speed > speed ? current_speed - current_speed % speed - speed : 0);
-			break;
-		default:
-			ctrl->set_desired_speed(1000);
-			break;
-		}
+		ctrl->set_desired_speed(current_speed > speed ? current_speed - speed : 0);
+	}
+}
+
+void InteractiveGameBase::reset_gamespeed() {
+	if (GameController* const ctrl = get_game()->game_controller()) {
+		ctrl->set_desired_speed(kSpeedDefault);
 	}
 }
 
@@ -383,36 +347,24 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 			}
 			FALLS_THROUGH;
 		case SDLK_PAGEUP:
-			if (code.mod & KMOD_SHIFT) {
-				increase_gamespeed(250);
-			} else if (code.mod & KMOD_CTRL) {
-				increase_gamespeed(10000);
-			} else {
-				increase_gamespeed(1000);
-			}
+			increase_gamespeed(
+			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 			return true;
-
 		case SDLK_PAUSE:
 			if (code.mod & KMOD_SHIFT) {
-				decrease_gamespeed(0);
+				reset_gamespeed();
 			} else {
 				toggle_game_paused();
 			}
 			return true;
-
 		case SDLK_KP_3:
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
 			FALLS_THROUGH;
 		case SDLK_PAGEDOWN:
-			if (code.mod & KMOD_SHIFT) {
-				decrease_gamespeed(250);
-			} else if (code.mod & KMOD_CTRL) {
-				decrease_gamespeed(10000);
-			} else {
-				decrease_gamespeed(1000);
-			}
+			decrease_gamespeed(
+			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 			return true;
 		case SDLK_ESCAPE:
 			InteractiveGameBase::toggle_mainmenu();
