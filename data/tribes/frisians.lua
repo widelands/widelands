@@ -327,7 +327,6 @@ tribes:new_tribe {
       "frisians_shipyard",
       "frisians_weaving_mill",
 
-
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
       "dismantlesite",
