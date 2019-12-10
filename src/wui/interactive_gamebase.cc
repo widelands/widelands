@@ -341,11 +341,6 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 
 	if (down) {
 		switch (code.sym) {
-		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_PAGEUP:
 			increase_gamespeed(
 			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
@@ -357,11 +352,6 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 				toggle_game_paused();
 			}
 			return true;
-		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_PAGEDOWN:
 			decrease_gamespeed(
 			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
