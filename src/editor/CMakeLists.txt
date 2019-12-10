@@ -40,6 +40,8 @@ wl_library(editor
     tools/scenario_infrastructure_settings_tool.h
     tools/scenario_infrastructure_tool.cc
     tools/scenario_infrastructure_tool.h
+    tools/scenario_worker_tool.cc
+    tools/scenario_worker_tool.h
     tools/set_height_tool.cc
     tools/set_height_tool.h
     tools/set_origin_tool.cc
@@ -83,6 +85,8 @@ wl_library(editor
     ui_menus/scenario_tool_field_owner_options_menu.h
     ui_menus/scenario_tool_infrastructure_options_menu.cc
     ui_menus/scenario_tool_infrastructure_options_menu.h
+    ui_menus/scenario_tool_worker_options_menu.cc
+    ui_menus/scenario_tool_worker_options_menu.h
     ui_menus/tool_change_height_options_menu.cc
     ui_menus/tool_change_height_options_menu.h
     ui_menus/tool_change_resources_options_menu.cc

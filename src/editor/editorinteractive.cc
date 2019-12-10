@@ -49,6 +49,7 @@
 #include "editor/ui_menus/scenario_lua.h"
 #include "editor/ui_menus/scenario_tool_field_owner_options_menu.h"
 #include "editor/ui_menus/scenario_tool_infrastructure_options_menu.h"
+#include "editor/ui_menus/scenario_tool_worker_options_menu.h"
 #include "editor/ui_menus/tool_change_height_options_menu.h"
 #include "editor/ui_menus/tool_change_resources_options_menu.h"
 #include "editor/ui_menus/tool_noise_height_options_menu.h"
@@ -398,6 +399,15 @@ void EditorInteractive::add_scenario_tool_menu() {
 	              _("Create the initial settings for buildings and flags"),
 	              _("Shift+i"));
 
+	scenario_tool_windows_.worker.open_window = [this] {
+		new ScenarioToolWorkerOptionsMenu(*this, tools()->sc_worker, scenario_tool_windows_.worker);
+	};
+	/** TRANSLATORS: An entry in the editor's scenario tool menu */
+	scenario_toolmenu_.add(_("Workers and Ships"), ScenarioToolMenuEntry::kWorker,
+	              g_gr->images().get("images/wui/editor/tools/sc_worker.png"), false,
+	              /** TRANSLATORS: Tooltip for the place workers scenario tool in the editor */
+	              _("Place workers and ships on the map"));
+
 	scenario_tool_windows_.lua.open_window = [this] {
 		new ScenarioLuaOptionsMenu(*this, scenario_tool_windows_.lua);
 	};
@@ -461,6 +471,9 @@ void EditorInteractive::scenario_tool_menu_selected(ScenarioToolMenuEntry entry)
 		break;
 	case ScenarioToolMenuEntry::kInfrastructureSettings:
 		select_tool(tools()->sc_infra_settings, EditorTool::First);
+		break;
+	case ScenarioToolMenuEntry::kWorker:
+		scenario_tool_windows_.worker.toggle();
 		break;
 	case ScenarioToolMenuEntry::kLua:
 		scenario_tool_windows_.lua.toggle();

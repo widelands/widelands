@@ -17,31 +17,43 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_SCENARIO_TOOL_FIELD_OWNER_OPTIONS_MENU_H
-#define WL_EDITOR_UI_MENUS_SCENARIO_TOOL_FIELD_OWNER_OPTIONS_MENU_H
+#ifndef WL_EDITOR_UI_MENUS_SCENARIO_TOOL_WORKER_OPTIONS_MENU_H
+#define WL_EDITOR_UI_MENUS_SCENARIO_TOOL_WORKER_OPTIONS_MENU_H
 
 #include <memory>
 
-#include "editor/tools/scenario_field_owner_tool.h"
+#include "editor/tools/scenario_worker_tool.h"
 #include "editor/ui_menus/tool_options_menu.h"
-#include "logic/map.h"
+#include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/icongrid.h"
+#include "ui_basic/spinbox.h"
 
 class EditorInteractive;
 
-/// Tool menu for setting the initial owner of fields
-struct ScenarioToolFieldOwnerOptionsMenu : public EditorToolOptionsMenu {
-	ScenarioToolFieldOwnerOptionsMenu(EditorInteractive&, ScenarioFieldOwnerTool&, UI::UniqueWindow::Registry&);
-	~ScenarioToolFieldOwnerOptionsMenu() {
+struct ScenarioToolWorkerOptionsMenu : public EditorToolOptionsMenu {
+	ScenarioToolWorkerOptionsMenu(EditorInteractive&, ScenarioPlaceWorkerTool&, UI::UniqueWindow::Registry&);
+	~ScenarioToolWorkerOptionsMenu() {
 	}
+
+	void update();
 
 private:
 	EditorInteractive& eia();
-	ScenarioFieldOwnerTool& tool_;
+	ScenarioPlaceWorkerTool& tool_;
 
-	void select();
+	void select_player();
+	void toggle_item(int32_t);
+	void update_text();
 
-	UI::Dropdown<Widelands::PlayerNumber> list_;
+	UI::Box box_;
+	UI::Dropdown<Widelands::PlayerNumber> players_;
+	UI::IconGrid item_types_;
+	UI::SpinBox experience_;
+	UI::EditBox shipname_;
+	UI::MultilineTextarea selected_items_;
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_SCENARIO_TOOL_FIELD_OWNER_OPTIONS_MENU_H
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_SCENARIO_TOOL_WORKER_OPTIONS_MENU_H

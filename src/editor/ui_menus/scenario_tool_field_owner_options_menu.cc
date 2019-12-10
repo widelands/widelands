@@ -36,39 +36,22 @@ ScenarioToolFieldOwnerOptionsMenu::ScenarioToolFieldOwnerOptionsMenu(EditorInter
      tool_(tool),
      list_(this, "player", 0, 0, get_inner_w(), 8, get_inner_h(), "",
      		UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary) {
-	subscriber_ = Notifications::subscribe<Widelands::NoteEditorPlayerEdited>(
-		[this](const Widelands::NoteEditorPlayerEdited& n) {
-			if (n.map == &eia().egbase().map()) {
-				update();
-			}
-		});
 
 	list_.selected.connect(boost::bind(&ScenarioToolFieldOwnerOptionsMenu::select, this));
-	update();
-
-	if (get_usedefaultpos()) {
-		center_to_parent();
-	}
-}
-
-void ScenarioToolFieldOwnerOptionsMenu::update() {
-	const Widelands::Map& map = eia().egbase().map();
+	const Widelands::Map& map = parent.egbase().map();
 	const Widelands::PlayerNumber max = map.get_nrplayers();
-	if (&tool_ != &eia().tools()->sc_owner) {
-		// Happens if the window remains open during new map creation,
-		// because the EIA's order for us to die() is only executed after the map sends us a NoteEditorPlayerEdited
-		return;
-	}
 	const Widelands::PlayerNumber sel = tool_.get_new_owner();
-	list_.clear();
 	list_.add(_("Unset Owner"), 0, nullptr, sel == 0 || sel > max, _("Mark fields as unowned"));
 	for (Widelands::PlayerNumber p = 1; p <= max; ++p) {
 		const std::string name = map.get_scenario_player_name(p);
 		const std::string tribe = map.get_scenario_player_tribe(p);
 		list_.add((boost::format(_("Player %1$s (%2$s)")) % std::to_string(static_cast<int>(p)) % name).str(), p,
-				g_gr->images().get(tribe.empty() ? "images/ui_fsmenu/random.png" :
-						Widelands::get_tribeinfo(eia().egbase().map().get_scenario_player_tribe(p)).icon),
-						sel == p, (boost::format(_("Claim fields for %s")) % name).str());
+				g_gr->images().get(Widelands::get_tribeinfo(eia().egbase().map().get_scenario_player_tribe(p)).icon),
+				sel == p, (boost::format(_("Claim fields for %s")) % name).str());
+	}
+
+	if (get_usedefaultpos()) {
+		center_to_parent();
 	}
 }
 

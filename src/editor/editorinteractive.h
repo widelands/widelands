@@ -35,6 +35,7 @@
 #include "editor/tools/scenario_field_owner_tool.h"
 #include "editor/tools/scenario_infrastructure_settings_tool.h"
 #include "editor/tools/scenario_infrastructure_tool.h"
+#include "editor/tools/scenario_worker_tool.h"
 #include "editor/tools/set_origin_tool.h"
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_starting_pos_tool.h"
@@ -70,7 +71,9 @@ public:
 		     sc_owner(),
 		     sc_infra_del(),
 		     sc_infra(sc_infra_del),
-		     sc_infra_settings() {
+		     sc_infra_settings(),
+		     sc_worker_del(),
+		     sc_worker(sc_worker_del) {
 		}
 		EditorTool& current() const {
 			return *current_pointer;
@@ -101,6 +104,8 @@ public:
 		ScenarioInfrastructureDeleteTool sc_infra_del;
 		ScenarioInfrastructureTool sc_infra;
 		ScenarioInfrastructureSettingsTool sc_infra_settings;
+		ScenarioDeleteWorkerTool sc_worker_del;
+		ScenarioPlaceWorkerTool sc_worker;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
 
@@ -210,6 +215,7 @@ private:
 		kFieldOwner,
 		kInfrastructure,
 		kInfrastructureSettings,
+		kWorker,
 		kLua,
 	};
 
@@ -279,6 +285,7 @@ private:
 	struct ScenarioToolWindows {
 		UI::UniqueWindow::Registry fieldowner;
 		UI::UniqueWindow::Registry infrastructure;
+		UI::UniqueWindow::Registry worker;
 		UI::UniqueWindow::Registry lua;
 	} scenario_tool_windows_;
 

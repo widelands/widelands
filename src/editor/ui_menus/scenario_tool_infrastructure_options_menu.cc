@@ -65,7 +65,7 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(Edi
 		i->add("flag", g_gr->images().get("images/wui/fieldaction/menu_build_flag.png"),
 				reinterpret_cast<void*>(Widelands::INVALID_INDEX), _("Flag"));
 		i->icon_clicked.connect(boost::bind(&ScenarioToolInfrastructureOptionsMenu::toggle_selected,
-				this, i, Widelands::MapObjectType::FLAG, Widelands::INVALID_INDEX, _1));
+				this, i, Widelands::MapObjectType::FLAG, _1));
 		item_categories_->add(std::to_string(static_cast<int>(Widelands::MapObjectType::FLAG)),
 	    		g_gr->images().get("images/wui/fieldaction/menu_build_flag.png"), i, _("Flags"));
 		item_grids_.push_back(std::unique_ptr<UI::IconGrid>(i));
@@ -115,7 +115,7 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(Edi
 				}
 				for (UI::IconGrid* i : {ig_small, ig_medium, ig_big, ig_port, ig_mine}) {
 					i->icon_clicked.connect(boost::bind(&ScenarioToolInfrastructureOptionsMenu::toggle_selected,
-							this, i, t, tribe, _1));
+							this, i, t, _1));
 					item_grids_.push_back(std::unique_ptr<UI::IconGrid>(i));
 				}
 				sizetabs->add(td->name() + "_small",
@@ -146,7 +146,7 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(Edi
 							descr->representative_image(), reinterpret_cast<void*>(di), descr->descname());
 				}
 				i->icon_clicked.connect(boost::bind(&ScenarioToolInfrastructureOptionsMenu::toggle_selected,
-						this, i, t, tribe, _1));
+						this, i, t, _1));
 				tab->add(std::to_string(static_cast<int>(t)) + "_" + std::to_string(tribe),
 						icon, i, td->descname());
 				item_grids_.push_back(std::unique_ptr<UI::IconGrid>(i));
@@ -165,7 +165,8 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(Edi
 	}
 	main_box_->add(item_categories_.get(), UI::Box::Resizing::kExpandBoth);
 
-	selected_items_.reset(new UI::Textarea(main_box_.get(), "", UI::Align::kCenter));
+	selected_items_.reset(new UI::MultilineTextarea(main_box_.get(), 0, 0, 100, 10, UI::PanelStyle::kWui,
+			"", UI::Align::kCenter, UI::MultilineTextarea::ScrollMode::kNoScrolling));
 	main_box_->add(selected_items_.get(), UI::Box::Resizing::kFullSize);
 
 	subscriber_ = Notifications::subscribe<Widelands::NoteEditorPlayerEdited>(
@@ -242,13 +243,14 @@ void ScenarioToolInfrastructureOptionsMenu::update_text() {
 	};
 	std::string text = name_of(0);
 	for (size_t i = 1; i < nr_items; ++i) {
+		/** TRANSLATORS: Selected items: Item 1 · Item 2 · Item 3 · … */
 		text = (boost::format(_("%1$s · %2$s")) % text % name_of(i)).str();
 	}
 	selected_items_->set_text(text);
 }
 
-void ScenarioToolInfrastructureOptionsMenu::toggle_selected(UI::IconGrid* ig, Widelands::MapObjectType type,
-		Widelands::DescriptionIndex /* tribe */, int32_t grid_idx) {
+void ScenarioToolInfrastructureOptionsMenu::toggle_selected(UI::IconGrid* ig,
+		Widelands::MapObjectType type, int32_t grid_idx) {
 	auto& list = tool_.get_index();
 	const Widelands::DescriptionIndex di = static_cast<int32_t>(reinterpret_cast<intptr_t>(ig->get_data(grid_idx)));
 	auto pair = std::make_pair(type, di);

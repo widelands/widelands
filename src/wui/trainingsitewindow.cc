@@ -33,12 +33,13 @@ TrainingSiteWindow::TrainingSiteWindow(InteractiveBase& parent,
                                        Widelands::TrainingSite& ts,
                                        bool avoid_fastclick,
                                        bool workarea_preview_wanted)
-   : ProductionSiteWindow(parent, reg, ts, avoid_fastclick, workarea_preview_wanted),
+   : ProductionSiteWindow(parent, reg, ts, avoid_fastclick, workarea_preview_wanted, true),
      training_site_(&ts) {
 	init(avoid_fastclick, workarea_preview_wanted);
 }
 
 void TrainingSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
+	ProductionSiteWindow::init(avoid_fastclick, workarea_preview_wanted);
 	Widelands::ProductionSite* training_site = training_site_.get(ibase()->egbase());
 	assert(training_site != nullptr);
 	ProductionSiteWindow::init(avoid_fastclick, workarea_preview_wanted);

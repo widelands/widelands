@@ -60,10 +60,11 @@ struct EditorActionArgs {
 	Widelands::ResourceAmount set_to;                      // resources change tools
 	Widelands::Extent new_map_size;                        // resize tool
 
-	uint8_t new_owner; // set owner tool
-	std::list<std::pair<Widelands::MapObjectType, Widelands::DescriptionIndex>> infrastructure_types; // infrastructure tool
-	Widelands::PlayerNumber infrastructure_owner; // infrastructure tool
+	uint8_t new_owner; // set_owner, infrastructure, and worker tools
+	std::vector<std::pair<Widelands::MapObjectType, Widelands::DescriptionIndex>> infrastructure_types; // infrastructure tool
 	bool infrastructure_constructionsite; // infrastructure tool
+	std::vector<const Widelands::WorkerDescr*> worker_types; // worker tool
+	int32_t random_index; // infrastructure and worker tools
 
 	struct ResourceState {
 		Widelands::FCoords location;
@@ -101,8 +102,10 @@ struct EditorActionArgs {
 	ResizeHistory resized;                                                       // resize tool
 
 	std::list<uint8_t> old_owners; // set owner tool
-	std::list<Widelands::Serial> infrastructure_placed; // infrastructure tool
+	Widelands::Serial infrastructure_placed; // infrastructure and worker tool
 	std::list<InfrastructureHistory> infrastructure_deleted; // infrastructure delete tool
+	std::list<std::list<std::tuple<const Widelands::WorkerDescr*, uint8_t, uint32_t>>> workers_deleted; // worker delete tool
+	std::list<std::list<std::pair<uint8_t, std::string>>> ships_deleted; // worker delete tool
 
 	std::list<EditorToolAction*> draw_actions;  // draw tool
 

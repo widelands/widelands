@@ -30,66 +30,60 @@ int32_t ScenarioInfrastructureTool::handle_click_impl(const Widelands::NodeAndTr
                                                       EditorInteractive& eia,
                                                       EditorActionArgs* args,
                                                       Widelands::Map* map) {
-	if (args->infrastructure_owner < 1 || args->infrastructure_owner > map->get_nrplayers() ||
+	if (args->new_owner < 1 || args->new_owner > map->get_nrplayers() ||
 			args->infrastructure_types.empty()) {
 		return 0;
 	}
-	const size_t nr_items = index_.size();
+	const size_t nr_items = args->infrastructure_types.size();
 	Widelands::EditorGameBase& egbase = eia.egbase();
-	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
-	args->infrastructure_placed.clear();
-	do {
-		const auto& item_to_place = index_[std::rand() % nr_items];
-		Widelands::MapObject* mo = nullptr;
-		switch (item_to_place.first) {
-			case Widelands::MapObjectType::BUILDING: {
-				if (args->infrastructure_constructionsite &&
-						egbase.tribes().get_building_descr(item_to_place.second)->is_buildable()) {
-					mo = &egbase.get_player(args->infrastructure_owner)->force_csite(mr.location(), item_to_place.second);
-				} else {
-					Widelands::FormerBuildings b;
-					b.push_back(std::make_pair(item_to_place.second, ""));
-					mo = &egbase.get_player(args->infrastructure_owner)->force_building(mr.location(), b);
-				}
-				break;
+	args->infrastructure_placed = 0;
+	if (args->random_index < 0) {
+		args->random_index = std::rand() % nr_items;
+	}
+	const std::pair<Widelands::MapObjectType, Widelands::DescriptionIndex>& item_to_place =
+			args->infrastructure_types[args->random_index];
+	Widelands::MapObject* mo = nullptr;
+	switch (item_to_place.first) {
+		case Widelands::MapObjectType::BUILDING: {
+			if (args->infrastructure_constructionsite &&
+					egbase.tribes().get_building_descr(item_to_place.second)->is_buildable()) {
+				mo = &egbase.get_player(args->new_owner)->force_csite(center.node, item_to_place.second);
+			} else {
+				Widelands::FormerBuildings b;
+				b.push_back(std::make_pair(item_to_place.second, ""));
+				mo = &egbase.get_player(args->new_owner)->force_building(center.node, b);
 			}
-			case Widelands::MapObjectType::FLAG: {
-				mo = &egbase.get_player(args->infrastructure_owner)->force_flag(mr.location());
-				break;
-			}
-			case Widelands::MapObjectType::IMMOVABLE: {
-				mo = &egbase.create_immovable(mr.location(), item_to_place.second,
-						Widelands::MapObjectDescr::OwnerType::kTribe, egbase.get_player(args->infrastructure_owner));
-				break;
-			}
-			default:
-				NEVER_HERE();
+			break;
 		}
-		if (mo) {
-			args->infrastructure_placed.push_back(mo->serial());
+		case Widelands::MapObjectType::FLAG: {
+			mo = &egbase.get_player(args->new_owner)->force_flag(map->get_fcoords(center.node));
+			break;
 		}
-	} while (mr.advance(*map));
-	return mr.radius();
+		case Widelands::MapObjectType::IMMOVABLE: {
+			mo = &egbase.create_immovable(center.node, item_to_place.second,
+					Widelands::MapObjectDescr::OwnerType::kTribe, egbase.get_player(args->new_owner));
+			break;
+		}
+		default:
+			NEVER_HERE();
+	}
+	args->infrastructure_placed = mo ? mo->serial() : 0;
+	return 1;
 }
 
 int32_t ScenarioInfrastructureTool::handle_undo_impl(const Widelands::NodeAndTriangle<>&,
                                                      EditorInteractive& eia,
                                                      EditorActionArgs* args,
                                                      Widelands::Map*) {
-	Widelands::ObjectManager& obj = eia.egbase().objects();
-	for (Widelands::Serial s : args->infrastructure_placed) {
-		if (Widelands::MapObject* mo = obj.get_object(s)) {
-			mo->remove(eia.egbase());
-		}
-	}
-	return args->sel_radius;
+	eia.egbase().objects().get_object(args->infrastructure_placed)->remove(eia.egbase());
+	return 1;
 }
 
 EditorActionArgs ScenarioInfrastructureTool::format_args_impl(EditorInteractive& parent) {
 	EditorActionArgs a(parent);
-	a.infrastructure_owner = player_;
+	a.new_owner = player_;
 	a.infrastructure_constructionsite = construct_;
+	a.random_index = -1;
 	for (auto& pair : index_) {
 		a.infrastructure_types.push_back(pair);
 	}
@@ -103,7 +97,6 @@ int32_t ScenarioInfrastructureDeleteTool::handle_click_impl(
                                                        Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
-	args->infrastructure_deleted.clear();
 	do {
 		EditorActionArgs::InfrastructureHistory history;
 		if (upcast(Widelands::BaseImmovable, imm, mr.location().field->get_immovable())) {
@@ -173,6 +166,7 @@ int32_t ScenarioInfrastructureDeleteTool::handle_undo_impl(
 		}
 		++it;
 	} while (mr.advance(*map));
+	args->infrastructure_deleted.clear();
 	return mr.radius();
 }
 

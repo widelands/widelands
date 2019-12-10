@@ -380,7 +380,6 @@ void Soldier::set_level(uint32_t const health,
 	set_evade_level(evade);
 }
 void Soldier::set_health_level(const uint32_t health) {
-	assert(health_level_ <= health);
 	assert(health <= descr().get_max_health_level());
 
 	uint32_t oldmax = get_max_health();
@@ -391,19 +390,16 @@ void Soldier::set_health_level(const uint32_t health) {
 	current_health_ = current_health_ * newmax / oldmax;
 }
 void Soldier::set_attack_level(const uint32_t attack) {
-	assert(attack_level_ <= attack);
 	assert(attack <= descr().get_max_attack_level());
 
 	attack_level_ = attack;
 }
 void Soldier::set_defense_level(const uint32_t defense) {
-	assert(defense_level_ <= defense);
 	assert(defense <= descr().get_max_defense_level());
 
 	defense_level_ = defense;
 }
 void Soldier::set_evade_level(const uint32_t evade) {
-	assert(evade_level_ <= evade);
 	assert(evade <= descr().get_max_evade_level());
 
 	evade_level_ = evade;

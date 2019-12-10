@@ -20,15 +20,43 @@
 #ifndef WL_WUI_SOLDIERLIST_H
 #define WL_WUI_SOLDIERLIST_H
 
-class InteractiveBase;
+#include "ui_basic/box.h"
+#include "ui_basic/button.h"
+#include "ui_basic/slider.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/window.h"
 
-namespace UI {
-class Panel;
-}
+class InteractiveBase;
 
 namespace Widelands {
 class Building;
+class EditorGameBase;
+class Soldier;
 }
+
+struct SoldierSettings : UI::Window {
+public:
+	SoldierSettings(InteractiveBase& ib, Widelands::Soldier& s);
+	~SoldierSettings() {
+	}
+private:
+	Widelands::EditorGameBase& egbase_;
+	Widelands::Soldier& soldier_;
+
+	UI::Box main_box_, upper_box_, label_box_, slider_box_;
+	UI::HorizontalSlider health_, attack_, defense_, evade_, current_health_;
+	UI::Button delete_, cancel_, ok_;
+	UI::Textarea hlabel_, alabel_, dlabel_, elabel_, clabel_;
+
+	void update_label_h();
+	void update_label_a();
+	void update_label_d();
+	void update_label_e();
+	void update_label_c();
+	void health_slider_changed();
+	void clicked_ok();
+	void clicked_delete();
+};
 
 UI::Panel*
 create_soldier_list(UI::Panel& parent, InteractiveBase& igb, Widelands::Building& building);

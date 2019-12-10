@@ -45,7 +45,8 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveBase& parent,
                                            UI::UniqueWindow::Registry& reg,
                                            Widelands::ProductionSite& ps,
                                            bool avoid_fastclick,
-                                           bool workarea_preview_wanted)
+                                           bool workarea_preview_wanted,
+                                           bool do_not_init)
    : BuildingWindow(parent, reg, ps, avoid_fastclick),
      production_site_(&ps),
      worker_table_(nullptr),
@@ -74,7 +75,10 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveBase& parent,
 			   }
 		   }
 	   });
-	init(avoid_fastclick, workarea_preview_wanted);
+	if (!do_not_init) {
+		// Inheritance relations may cause problems with the dropdown when this is called from TrainingSiteWindow constructor
+		init(avoid_fastclick, workarea_preview_wanted);
+	}
 }
 
 void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {

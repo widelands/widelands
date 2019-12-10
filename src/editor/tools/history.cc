@@ -37,7 +37,6 @@ EditorActionArgs::EditorActionArgs(EditorInteractive& base)
      set_to(0),
      new_map_size(0, 0),
      new_owner(0),
-     infrastructure_owner(0),
      infrastructure_constructionsite(false),
      interval(0, 0),
      refcount(0) {

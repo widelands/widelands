@@ -31,7 +31,7 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/icongrid.h"
-#include "ui_basic/textarea.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/tabpanel.h"
 
 class EditorInteractive;
@@ -51,7 +51,7 @@ private:
 
 	void select_player();
 	void toggle_construct();
-	void toggle_selected(UI::IconGrid*, Widelands::MapObjectType, Widelands::DescriptionIndex, int32_t);
+	void toggle_selected(UI::IconGrid*, Widelands::MapObjectType, int32_t);
 
 	std::unique_ptr<UI::Box> main_box_;
 	std::unique_ptr<UI::Dropdown<Widelands::PlayerNumber>> players_;
@@ -59,7 +59,7 @@ private:
 	std::unique_ptr<UI::TabPanel> item_categories_;
 	std::vector<std::unique_ptr<UI::TabPanel>> item_tabs_;
 	std::vector<std::unique_ptr<UI::IconGrid>> item_grids_;
-	std::unique_ptr<UI::Textarea> selected_items_;
+	std::unique_ptr<UI::MultilineTextarea> selected_items_;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEditorPlayerEdited>> subscriber_;
 };
