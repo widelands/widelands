@@ -176,6 +176,9 @@ public:
 	// True if a 'Transition::Smooth' animation is playing.
 	bool is_animating() const;
 
+	// Scrolls the map and returns true if it did.
+	bool scroll_map();
+
 	// Schedules drawing of the terrain of this MapView. The returned value can
 	// be used to override contents of 'fields_to_draw' for player knowledge and
 	// visibility, and to correctly draw map objects, overlays and text.

@@ -586,9 +586,60 @@ Widelands::NodeAndTriangle<> MapView::track_sel(const Vector2i& p) {
 	return node_and_triangle;
 }
 
+bool MapView::scroll_map() {
+	// If one of the arrow keys is pressed, scroll this distance
+	uint32_t ScrollDistanceY = g_gr->get_yres() / 4;
+	uint32_t ScrollDistanceX = g_gr->get_xres() / 4;
+
+	if ((get_key_state(SDL_SCANCODE_UP) && get_key_state(SDL_SCANCODE_LEFT)) ||
+	    (get_key_state(SDL_SCANCODE_KP_7) && (SDL_GetModState() & KMOD_NUM))) {
+		pan_by(Vector2i(-ScrollDistanceX, -ScrollDistanceY), Transition::Smooth);
+		return true;
+	}
+	if ((get_key_state(SDL_SCANCODE_UP) && get_key_state(SDL_SCANCODE_RIGHT)) ||
+	    (get_key_state(SDL_SCANCODE_KP_9) && (SDL_GetModState() & KMOD_NUM))) {
+		pan_by(Vector2i(ScrollDistanceX, -ScrollDistanceY), Transition::Smooth);
+		return true;
+	}
+	if ((get_key_state(SDL_SCANCODE_DOWN) && get_key_state(SDL_SCANCODE_LEFT)) ||
+	    (get_key_state(SDL_SCANCODE_KP_1) && (SDL_GetModState() & KMOD_NUM))) {
+		pan_by(Vector2i(-ScrollDistanceX, ScrollDistanceY), Transition::Smooth);
+		return true;
+	}
+	if ((get_key_state(SDL_SCANCODE_DOWN) && get_key_state(SDL_SCANCODE_RIGHT)) ||
+	    (get_key_state(SDL_SCANCODE_KP_3) && (SDL_GetModState() & KMOD_NUM))) {
+		pan_by(Vector2i(ScrollDistanceX, ScrollDistanceY), Transition::Smooth);
+		return true;
+	}
+	if (get_key_state(SDL_SCANCODE_UP) ||
+	    (get_key_state(SDL_SCANCODE_KP_8) && (SDL_GetModState() & KMOD_NUM))) {
+		pan_by(Vector2i(0, -ScrollDistanceY), Transition::Smooth);
+		return true;
+	}
+	if (get_key_state(SDL_SCANCODE_DOWN) ||
+	    (get_key_state(SDL_SCANCODE_KP_2) && (SDL_GetModState() & KMOD_NUM))) {
+		pan_by(Vector2i(0, ScrollDistanceY), Transition::Smooth);
+		return true;
+	}
+	if (get_key_state(SDL_SCANCODE_LEFT) ||
+	    (get_key_state(SDL_SCANCODE_KP_4) && (SDL_GetModState() & KMOD_NUM))) {
+		pan_by(Vector2i(-ScrollDistanceX, 0), Transition::Smooth);
+		return true;
+	}
+	if (get_key_state(SDL_SCANCODE_RIGHT) ||
+	    (get_key_state(SDL_SCANCODE_KP_6) && (SDL_GetModState() & KMOD_NUM))) {
+		pan_by(Vector2i(ScrollDistanceX, 0), Transition::Smooth);
+		return true;
+	}
+	return false;
+}
+
 bool MapView::handle_key(bool down, SDL_Keysym code) {
 	if (!down) {
 		return false;
+	}
+	if (scroll_map()) {
+		return true;
 	}
 	if (!(code.mod & KMOD_CTRL)) {
 		return false;
