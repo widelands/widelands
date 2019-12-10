@@ -7,10 +7,10 @@ tribes:new_productionsite_type {
    descname = pgettext ("frisians_building", "Blacksmithy"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "small",
+   size = "medium",
 
    buildcost = {
-      brick = 1,
+      brick = 2,
       granite = 1,
       log = 1,
       reed = 2
@@ -61,9 +61,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "iron", amount = 2 },
-      { name = "log", amount = 3 },
-      { name = "reed", amount = 2 }
+      { name = "iron", amount = 8 },
+      { name = "log", amount = 8 },
+      { name = "reed", amount = 4 }
    },
    outputs = {
       "felling_ax",
