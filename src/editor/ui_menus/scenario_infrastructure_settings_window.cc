@@ -126,15 +126,31 @@ void ScenarioFlagSettingsWindow::economy_options_clicked() {
 	if (!f) {
 		return;
 	}
-	assert(f->get_economy());
-	if (f->economy().get_options_window()) {
-		EconomyOptionsWindow& window = *static_cast<EconomyOptionsWindow*>(f->get_economy()->get_options_window());
+	Widelands::Economy* ware_economy = f->get_economy(Widelands::wwWARE);
+	Widelands::Economy* worker_economy = f->get_economy(Widelands::wwWORKER);
+	assert(ware_economy);
+	assert(worker_economy);
+	bool window_open = false;
+	if (ware_economy->get_options_window()) {
+		window_open = true;
+		EconomyOptionsWindow& window =
+		   *static_cast<EconomyOptionsWindow*>(ware_economy->get_options_window());
 		if (window.is_minimal()) {
 			window.restore();
 		}
 		window.move_to_top();
-	} else {
-		new EconomyOptionsWindow(get_parent(), f->get_economy(), true);
+	}
+	if (worker_economy->get_options_window()) {
+		window_open = true;
+		EconomyOptionsWindow& window =
+		   *static_cast<EconomyOptionsWindow*>(worker_economy->get_options_window());
+		if (window.is_minimal()) {
+			window.restore();
+		}
+		window.move_to_top();
+	}
+	if (!window_open) {
+		new EconomyOptionsWindow(get_parent(), ware_economy, worker_economy, true);
 	}
 }
 

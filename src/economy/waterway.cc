@@ -127,15 +127,14 @@ void Waterway::set_fleet(FerryFleet* fleet) {
  * After the split, this road will span [start...new flag]. A new road will
  * be created to span [new flag...end]
  */
-// TODO(SirVer): This needs to take an EditorGameBase as well.
-void Waterway::postsplit(Game& game, Flag& flag) {
+void Waterway::postsplit(EditorGameBase& egbase, Flag& flag) {
 	Flag& oldend = *flags_[FlagEnd];
 
 	// detach from end
 	oldend.detach_road(flagidx_[FlagEnd]);
 
 	// build our new path and the new waterway's path
-	const Map& map = game.map();
+	const Map& map = egbase.map();
 	CoordPath path(map, path_);
 	CoordPath secondpath(path);
 	int32_t const index = path.get_index(flag.get_position());
@@ -157,27 +156,28 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 
 	// change waterway size and reattach
 	flags_[FlagEnd] = &flag;
-	set_path(game, path);
+	set_path(egbase, path);
 
 	const Direction dir = get_reverse_dir(path_[path_.get_nsteps() - 1]);
 	flags_[FlagEnd]->attach_road(dir, this);
 	flagidx_[FlagEnd] = dir;
 
 	// recreate waterway markings
-	mark_map(game);
+	mark_map(egbase);
 
 	// create the new waterway
 	Waterway& newww = *new Waterway();
 	newww.set_owner(get_owner());
 	newww.flags_[FlagStart] = &flag;  //  flagidx will be set on init()
 	newww.flags_[FlagEnd] = &oldend;
-	newww.set_path(game, secondpath);
+	newww.set_path(egbase, secondpath);
 
 	// Initialize the new waterway
-	newww.init(game);
+	newww.init(egbase);
 
+	upcast(Game, game, &egbase);
 	if (ferry_) {
-		assert(ferry_->get_location(game) == this);
+		assert(ferry_->get_location(egbase) == this);
 		// We assign the ferry to the waterway part it currently is on
 		bool other = true;
 		const Coords pos = ferry_->get_position();
@@ -190,24 +190,28 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 			map.get_neighbour(temp, path_[i], &temp);
 		}
 
-		if (other) {
-			molog("Assigning the ferry to the NEW waterway\n");
-			ferry_->set_destination(game, &newww);
-			request_ferry(game);
-		} else {
-			molog("Assigning the ferry to the OLD waterway\n");
-			ferry_->set_destination(game, this);
-			newww.request_ferry(game);
+		if (game) {
+			if (other) {
+				molog("Assigning the ferry to the NEW waterway\n");
+				ferry_->set_destination(*game, &newww);
+				request_ferry(*game);
+			} else {
+				molog("Assigning the ferry to the OLD waterway\n");
+				ferry_->set_destination(*game, this);
+				newww.request_ferry(*game);
+			}
 		}
-	} else {
+	} else if (game) {
 		// this is needed to make sure the ferry finds the way correctly
-		fleet_->reroute_ferry_request(game, this, this);
-		newww.request_ferry(game);
+		fleet_->reroute_ferry_request(*game, this, this);
+		newww.request_ferry(*game);
 	}
 
-	//  Make sure wares waiting on the original endpoint flags are dealt with.
-	flags_[FlagStart]->update_wares(game, &oldend);
-	oldend.update_wares(game, flags_[FlagStart]);
+	if (game) {
+		//  Make sure wares waiting on the original endpoint flags are dealt with.
+		flags_[FlagStart]->update_wares(*game, &oldend);
+		oldend.update_wares(*game, flags_[FlagStart]);
+	}
 }
 
 void Waterway::cleanup(EditorGameBase& egbase) {

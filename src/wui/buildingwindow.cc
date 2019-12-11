@@ -491,12 +491,16 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 	if (csite) {
 		upcast(Widelands::ConstructionSite, construction_site, building);
 		assert(construction_site);
-		if (SDL_GetModState() & KMOD_CTRL) {
-			igbase()->game().send_player_enhance_building(
-			   *construction_site, Widelands::INVALID_INDEX);
+		if (ibase()->get_game()) {
+			if (SDL_GetModState() & KMOD_CTRL) {
+				ibase()->game().send_player_enhance_building(
+				   *construction_site, Widelands::INVALID_INDEX);
+			} else {
+				show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*ibase()), *construction_site,
+					                 construction_site->get_info().becomes->enhancement(), true);
+			}
 		} else {
-			show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *construction_site,
-			                     construction_site->get_info().becomes->enhancement(), true);
+			construction_site->enhance();
 		}
 		return;
 	}

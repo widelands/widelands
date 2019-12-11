@@ -131,7 +131,7 @@ public:
 	}
 	void apply_settings(const BuildingSettings&);
 
-	void enhance(Game&);
+	void enhance();
 
 protected:
 	void update_statistics_string(std::string* statistics_string) override;

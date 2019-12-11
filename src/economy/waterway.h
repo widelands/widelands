@@ -54,7 +54,7 @@ struct Waterway : public RoadBase {
 
 	static Waterway& create(EditorGameBase&, Flag& start, Flag& end, const Path&);
 
-	void postsplit(Game&, Flag&) override;
+	void postsplit(EditorGameBase&, Flag&) override;
 
 	bool notify_ware(Game& game, FlagId flag) override;
 

@@ -334,7 +334,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 Start building the next enhancement even before the base building is completed.
 ===============
 */
-void ConstructionSite::enhance(Game&) {
+void ConstructionSite::enhance() {
 	assert(building_->enhancement() != INVALID_INDEX);
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 

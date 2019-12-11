@@ -156,7 +156,7 @@ Flag::Flag(EditorGameBase& egbase,
 
 	init(egbase);
 
-	if (!ware_eco && !worker_eco && road && game) {
+	if (!ware_eco && !worker_eco && road) {
 		road->postsplit(egbase, *this);
 	}
 }

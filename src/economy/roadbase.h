@@ -82,8 +82,8 @@ struct RoadBase : public PlayerImmovable {
 		return idle_index_;
 	}
 
-	void presplit(Game&, Coords split);
-	virtual void postsplit(Game&, Flag&);
+	void presplit(EditorGameBase&, Coords split);
+	virtual void postsplit(EditorGameBase&, Flag&);
 
 	virtual bool notify_ware(Game&, FlagId);
 

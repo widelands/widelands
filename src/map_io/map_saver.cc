@@ -97,7 +97,7 @@ void MapSaver::save() {
 		upcast(EditorInteractive, eia, egbase_.get_ibase());
 		assert(eia);
 		if (eia->save_as_scenario()) {
-			// This is a scenario – write the init.lua, and also save game-specific stuff
+			set_progress_message(_("Saving scenario…"));
 			is_game = true;
 			fs_.ensure_directory_exists("scripting");
 			FileWrite fw;

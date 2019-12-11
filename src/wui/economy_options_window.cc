@@ -314,11 +314,7 @@ void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int delta) {
 					   game->get_gametime(), player_->player_number(), serial_, index, new_amount));
 				}
 			} else {
-				if (is_wares) {
-					player_->get_economy(serial_)->set_ware_target_quantity(index, new_amount, 0);
-				} else {
-					player_->get_economy(serial_)->set_worker_target_quantity(index, new_amount, 0);
-				}
+				player_->get_economy(serial_)->set_target_quantity(index, new_amount, 0);
 			}
 		}
 	}
@@ -351,11 +347,7 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 					   settings.workers.at(index)));
 				}
 			} else {
-				if (is_wares) {
-					player_->get_economy(serial_)->set_ware_target_quantity(index, settings.wares.at(index), 0);
-				} else {
-					player_->get_economy(serial_)->set_worker_target_quantity(index, settings.workers.at(index), 0);
-				}
+				player_->get_economy(serial_)->set_target_quantity(index, settings.wares.at(index), 0);
 			}
 		}
 	}

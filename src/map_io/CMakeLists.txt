@@ -103,6 +103,7 @@ wl_library(map_io
     base_scoped_timer
     build_info
     economy
+    editor
     graphic
     graphic_image_io
     graphic_minimap_renderer

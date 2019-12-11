@@ -212,11 +212,11 @@ void RoadBase::cleanup(EditorGameBase& egbase) {
  * the new flag initializes. We remove markings to avoid interference with the
  * flag.
  */
-void RoadBase::presplit(Game& game, Coords) {
+void RoadBase::presplit(EditorGameBase& game, Coords) {
 	unmark_map(game);
 }
 
-void RoadBase::postsplit(Game&, Flag&) {
+void RoadBase::postsplit(EditorGameBase&, Flag&) {
 }
 
 void RoadBase::assign_carrier(Carrier&, uint8_t) {

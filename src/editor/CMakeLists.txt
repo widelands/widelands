@@ -112,11 +112,15 @@ wl_library(editor
     base_log
     base_macros
     base_scoped_timer
+    build_info
+    economy
     graphic
     graphic_fonthandler
+    graphic_game_renderer
     graphic_playercolor
     graphic_surface
     graphic_text_layout
+    io_fileread
     io_filesystem
     logic
     logic_constants
@@ -139,5 +143,6 @@ wl_library(editor
     widelands_options
     wui
     wui_common_mapdetails
+    wui_economy_options
     wui_mapview_pixelfunctions
 )
