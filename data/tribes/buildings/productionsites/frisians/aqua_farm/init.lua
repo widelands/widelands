@@ -49,9 +49,10 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "fruit", amount = 8 },
-      { name = "water", amount = 8 },
+      { name = "water", amount = 5 },
+      { name = "fruit", amount = 2 },
    },
+
    outputs = {
       "fish"
    },
