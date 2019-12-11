@@ -10,7 +10,7 @@ tribes:new_productionsite_type {
    size = "medium",
 
    buildcost = {
-      brick = 4,
+      brick = 3,
       granite = 2,
       log = 2,
       reed = 2
