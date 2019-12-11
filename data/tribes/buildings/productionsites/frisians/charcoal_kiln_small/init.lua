@@ -1,29 +1,40 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
    msgctxt = "frisians_building",
-   name = "frisians_aqua_farm",
+   name = "frisians_charcoal_kiln_small",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Aqua Farm"),
+   descname = pgettext ("frisians_building", "Small Charcoal Kiln"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
    buildcost = {
       brick = 2,
+      granite = 1,
       log = 1,
       reed = 1
    },
    return_on_dismantle = {
-      brick = 1,
-      log = 1
+      brick = 2,
+      log = 1,
+      reed = 1
    },
 
    spritesheets = {
       idle = {
          directory = dirname,
          basename = "idle",
-         hotspot = {40, 71},
+         hotspot = {50, 82},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      },
+      working = {
+         directory = dirname,
+         basename = "working",
+         hotspot = {50, 82},
          frames = 10,
          columns = 5,
          rows = 2,
@@ -34,27 +45,24 @@ tribes:new_productionsite_type {
       unoccupied = {
          directory = dirname,
          basename = "unoccupied",
-         hotspot = {40, 53}
+         hotspot = {50, 64}
       }
    },
 
    aihints = {
-      collects_ware_from_map = "fish",
-      prohibited_till = 760,
-      requires_supporters = true
+      basic_amount = 1
    },
 
    working_positions = {
-      frisians_fisher = 1
+      frisians_charcoal_burner = 1
    },
 
    inputs = {
-      { name = "water", amount = 5 },
-      { name = "fruit", amount = 2 },
+      { name = "log", amount = 6 },
    },
 
    outputs = {
-      "fish"
+      "coal"
    },
 
    indicate_workarea_overlaps = {
@@ -68,30 +76,29 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=breed_fish",
-            "call=fish_pond",
+            "call=erect_stack",
+            "call=collect_coal",
             "return=no_stats",
          },
       },
-      breed_fish = {
+      erect_stack = {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
-         descname = _"breeding fish",
+         descname = _"making a charcoal stack",
          actions = {
-            "return=skipped unless economy needs fish",
-            "return=failed unless site has water:2",
-            "return=failed unless site has fruit",
-            "callworker=breed_in_pond",
-            "consume=fruit water:2",
-            "sleep=23000",
+            "return=skipped unless economy needs coal",
+            "return=failed unless site has log:3",
+            "callworker=make_stack",
+            "consume=log:3",
+            "sleep=10000",
          },
       },
-      fish_pond = {
+      collect_coal = {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
          descname = _"fishing",
          actions = {
-            "return=skipped unless economy needs fish",
-            "sleep=9000",
-            "callworker=fish_in_pond",
+            "return=skipped unless economy needs coal",
+            "sleep=10000",
+            "callworker=collect_coal",
          },
       },
    },
@@ -99,8 +106,9 @@ tribes:new_productionsite_type {
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Ponds",
-      heading = _"Out of Fish Ponds",
-      message = pgettext ("frisians_building", "The fisher working at this aqua farm can’t find any fish ponds in his work area. Please make sure there is a working clay pit nearby and the aqua farm is supplied with all needed wares, or consider dismantling or destroying this building."),
+      heading = _"Out of Clay Ponds",
+      message = pgettext ("frisians_building", "The charcoal burner working at this small charcoal kiln can’t find any clay ponds in his work area. Please make sure there is a working clay pit nearby and the charcoal kiln is supplied with all needed wares, or consider dismantling or destroying this building."),
       productivity_threshold = 12
    },
 }
+

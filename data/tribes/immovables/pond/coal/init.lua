@@ -2,24 +2,21 @@ dirname = path.dirname (__file__)
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
-   name = "pond_dry",
+   name = "pond_coal",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
-   descname = pgettext ("immovable", "Dry Pond"),
+   descname = pgettext ("immovable", "Pond With Charcoal"),
    icon = dirname .. "menu.png",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
-   attributes = { "pond_dry" },
+   attributes = { "pond_coal" },
    programs = {
       program = {
          "animate=idle 400000",
-         "remove=",
+         "transform=pond_dry",
       },
-      with_fish = {
-         "transform=pond_growing",
+      fall_dry = {
+         "transform=pond_dry",
       },
-      with_stack = {
-         "transform=pond_burning",
-      }
    },
    animations = {
       idle = {

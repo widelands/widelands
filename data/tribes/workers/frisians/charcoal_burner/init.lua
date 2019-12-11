@@ -13,6 +13,24 @@ tribes:new_worker_type {
       frisians_carrier = 1
    },
 
+   programs = {
+      collect_coal = {
+         "findobject=attrib:pond_coal radius:8",
+         "walk=object",
+         "animate=collecting 3000",
+         "callobject=fall_dry",
+         "createware=coal",
+         "return"
+      },
+      make_stack = {
+         "findobject=attrib:pond_dry radius:8",
+         "walk=object",
+         "animate=stacking 2000",
+         "callobject=with_stack",
+         "return"
+      }
+   },
+
    ware_hotspot = {0, 20},
 
    spritesheets = {
@@ -35,6 +53,24 @@ tribes:new_worker_type {
          rows = 2,
          directional = true,
          hotspot = {10, 26}
+      },
+      collecting = {
+         directory = dirname,
+         basename = "collecting",
+         fps = 10,
+         frames = 30,
+         columns = 5,
+         rows = 6,
+         hotspot = {9, 23}
+      },
+      stacking = {
+         directory = dirname,
+         basename = "stacking",
+         fps = 10,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         hotspot = {15, 20}
       },
    },
    animations = {
