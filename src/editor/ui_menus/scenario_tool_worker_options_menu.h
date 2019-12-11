@@ -27,14 +27,16 @@
 #include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/icongrid.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/spinbox.h"
 
 class EditorInteractive;
 
 struct ScenarioToolWorkerOptionsMenu : public EditorToolOptionsMenu {
-	ScenarioToolWorkerOptionsMenu(EditorInteractive&, ScenarioPlaceWorkerTool&, UI::UniqueWindow::Registry&);
+	ScenarioToolWorkerOptionsMenu(EditorInteractive&,
+	                              ScenarioPlaceWorkerTool&,
+	                              UI::UniqueWindow::Registry&);
 	~ScenarioToolWorkerOptionsMenu() {
 	}
 
@@ -46,9 +48,9 @@ private:
 
 	void select_player();
 	void toggle_item(int32_t);
-	void update_text();
+	void update_text_and_spinner();
 
-	UI::Box box_;
+	UI::Box box_, bottombox_;
 	UI::Dropdown<Widelands::PlayerNumber> players_;
 	UI::IconGrid item_types_;
 	UI::SpinBox experience_;

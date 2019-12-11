@@ -82,6 +82,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
      teams_list_(
         &teams_box_, 0, 0, max_w_, 60, UI::PanelStyle::kWui, UI::ListselectLayout::kShowCheck),
 
+     waterway_length_box_(nullptr),
      registry_(registry) {
 
 	tab_box_.set_size(max_w_, get_inner_h() - labelh_ - 2 * padding_);
@@ -127,17 +128,28 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	add_tag_checkbox(&tags_box_, "3teams", localize_tag("3teams"));
 	add_tag_checkbox(&tags_box_, "4teams", localize_tag("4teams"));
 
-	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Waterway length limit:")));
-	UI::Box* ww_box = new UI::Box(&tags_box_, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
-	waterway_length_box_ =
-	   new UI::SpinBox(ww_box, 0, 0, max_w_, max_w_ / 2, 1, 1, std::numeric_limits<int32_t>::max(),
-	                   UI::PanelStyle::kWui, std::string(), UI::SpinBox::Units::kFields);
-	/** TRANSLATORS: Map Options: Waterways are disabled */
-	waterway_length_box_->add_replacement(1, _("Disabled"));
-	ww_box->add(waterway_length_box_, UI::Box::Resizing::kFullSize);
-	ww_box->add_space(checkbox_space_);
-	tags_box_.add(ww_box);
-	tags_box_.add_space(padding_);
+	if (parent.finalized()) {
+		const uint32_t l = parent.egbase().map().get_waterway_max_length();
+		tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_,
+		                               (boost::format(_("Waterway length limit: %s")) %
+		                                (l < 2 ? _("Disabled") : std::to_string(l)))
+		                                  .str()));
+	} else {
+		tags_box_.add(
+		   new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Waterway length limit:")));
+		UI::Box* ww_box =
+		   new UI::Box(&tags_box_, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
+		waterway_length_box_ = new UI::SpinBox(
+		   ww_box, 0, 0, max_w_, max_w_ / 2, 1, 1, std::numeric_limits<int32_t>::max(),
+		   UI::PanelStyle::kWui, std::string(), UI::SpinBox::Units::kFields);
+		/** TRANSLATORS: Map Options: Waterways are disabled */
+		waterway_length_box_->add_replacement(1, _("Disabled"));
+		ww_box->add(waterway_length_box_, UI::Box::Resizing::kFullSize);
+		ww_box->add_space(checkbox_space_);
+		tags_box_.add(ww_box);
+		tags_box_.add_space(padding_);
+		waterway_length_box_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+	}
 
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")));
 	teams_box_.add(&teams_list_);
@@ -164,7 +176,6 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	author_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	descr_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	hint_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
-	waterway_length_box_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	for (const auto& tag : tags_checkboxes_) {
 		tag.second->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	}
@@ -191,8 +202,10 @@ void MainMenuMapOptions::update() {
 	size_.set_text((boost::format(_("Size: %1% x %2%")) % map.get_width() % map.get_height()).str());
 	descr_->set_text(map.get_description());
 	hint_->set_text(map.get_hint());
-	// map.get_waterway_max_length() defaults to 0 for older maps
-	waterway_length_box_->set_value(std::max<uint32_t>(1, map.get_waterway_max_length()));
+	if (waterway_length_box_) {
+		// map.get_waterway_max_length() defaults to 0 for older maps
+		waterway_length_box_->set_value(std::max<uint32_t>(1, map.get_waterway_max_length()));
+	}
 
 	std::set<std::string> tags = map.get_tags();
 	for (auto tag : tags_checkboxes_) {
@@ -208,17 +221,21 @@ void MainMenuMapOptions::changed() {
 }
 
 void MainMenuMapOptions::clicked_ok() {
-	eia().egbase().mutable_map()->set_name(name_.text());
-	eia().egbase().mutable_map()->set_author(author_.text());
+	Widelands::Map* map = eia().egbase().mutable_map();
+	map->set_name(name_.text());
+	map->set_author(author_.text());
 	set_config_string("realname", author_.text());
-	eia().egbase().mutable_map()->set_description(descr_->get_text());
-	eia().egbase().mutable_map()->set_hint(hint_->get_text());
-	eia().egbase().mutable_map()->set_waterway_max_length(waterway_length_box_->get_value());
+	map->set_description(descr_->get_text());
+	map->set_hint(hint_->get_text());
+	if (waterway_length_box_) {
+		assert(!eia().finalized());
+		map->set_waterway_max_length(waterway_length_box_->get_value());
+	}
 
-	eia().egbase().mutable_map()->clear_tags();
+	map->clear_tags();
 	for (const auto& tag : tags_checkboxes_) {
 		if (tag.second->get_state()) {
-			eia().egbase().mutable_map()->add_tag(tag.first);
+			map->add_tag(tag.first);
 		}
 	}
 	Notifications::publish(NoteMapOptions());

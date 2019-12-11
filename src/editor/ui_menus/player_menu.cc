@@ -134,28 +134,13 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
                     _("Number of players"),
                     UI::DropdownType::kTextual,
                     UI::PanelStyle::kWui,
-                    UI::ButtonStyle::kWuiSecondary),
-     finalize_button_(&box_,
-	    "finalize",
-	    0,
-	    0,
-	    50,
-	    24,
-	    UI::ButtonStyle::kWuiSecondary,
-	    parent.players_finalized() ? _("Players are finalized") : _("Finalize Players"),
-	    parent.players_finalized() ?
-	    		_("The players were finalized to enable scenario editor features. "
-	    		"Their settings can not be changed anymore.") :
-	    		_("Forbid changing the player settings. This is required for using the scenario editor functions.")) {
+                    UI::ButtonStyle::kWuiSecondary) {
 	box_.set_size(100, 100);  // Prevent assert failures
-	box_.add(&finalize_button_, UI::Box::Resizing::kFullSize);
-	box_.add_space(kMargin);
 	box_.add(&no_of_players_, UI::Box::Resizing::kFullSize);
 	box_.add_space(2 * kMargin);
 
-	const bool finalized = parent.players_finalized();
+	const bool finalized = parent.finalized();
 	no_of_players_.set_enabled(!finalized);
-	finalize_button_.set_enabled(!finalized);
 
 	const Widelands::Map& map = eia().egbase().map();
 	const Widelands::PlayerNumber nr_players = map.get_nrplayers();
@@ -247,8 +232,10 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 	}
 
 	no_of_players_.select(nr_players);
-	if (!finalized) {
-		finalize_button_.sigclicked.connect(boost::bind(&EditorPlayerMenu::finalize_clicked, this));
+	if (finalized) {
+		// Suppress automatic button activation
+		parent.select_tool(parent.tools()->info, EditorTool::ToolIndex::First);
+	} else {
 		// Init button states
 		set_starting_pos_clicked(1);
 	}
@@ -258,14 +245,14 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 void EditorPlayerMenu::layout() {
 	assert(!rows_.empty());
 	const Widelands::PlayerNumber nr_players = eia().egbase().map().get_nrplayers();
-	box_.set_size(310, no_of_players_.get_h() + finalize_button_.get_h() + 2 * kMargin +
-	                      nr_players * (rows_.front()->name->get_h() + kMargin));
+	box_.set_size(310, no_of_players_.get_h() + kMargin +
+	                      nr_players * (rows_.front()->position->get_h() + kMargin));
 	set_inner_size(box_.get_w() + 2 * kMargin, box_.get_h() + 2 * kMargin);
 }
 
 void EditorPlayerMenu::no_of_players_clicked() {
 	EditorInteractive& menu = eia();
-	assert(!menu.players_finalized());
+	assert(!menu.finalized());
 	Widelands::Map* map = menu.egbase().mutable_map();
 	Widelands::PlayerNumber const old_nr_players = map->get_nrplayers();
 	Widelands::PlayerNumber const nr_players = no_of_players_.get_selected();
@@ -329,7 +316,7 @@ void EditorPlayerMenu::no_of_players_clicked() {
 
 void EditorPlayerMenu::player_tribe_clicked(size_t row) {
 	EditorInteractive& menu = eia();
-	assert(!menu.players_finalized());
+	assert(!menu.finalized());
 	const std::string& tribename = rows_.at(row)->tribe->get_selected();
 	assert(tribename.empty() || Widelands::tribe_exists(tribename));
 	menu.egbase().mutable_map()->set_scenario_player_tribe(row + 1, tribename);
@@ -338,7 +325,7 @@ void EditorPlayerMenu::player_tribe_clicked(size_t row) {
 
 void EditorPlayerMenu::set_starting_pos_clicked(size_t row) {
 	EditorInteractive& menu = eia();
-	assert(!menu.players_finalized());
+	assert(!menu.finalized());
 	//  jump to the current node
 	Widelands::Map* map = menu.egbase().mutable_map();
 	if (Widelands::Coords const sp = map->get_starting_pos(row)) {
@@ -368,38 +355,10 @@ void EditorPlayerMenu::set_starting_pos_clicked(size_t row) {
 void EditorPlayerMenu::name_changed(size_t row) {
 	//  Player name has been changed.
 	EditorInteractive& menu = eia();
-	assert(!menu.players_finalized());
+	assert(!menu.finalized());
 	upcast(UI::EditBox, e, rows_.at(row)->name);
 	assert(e);
 	Widelands::Map* map = menu.egbase().mutable_map();
 	map->set_scenario_player_name(row + 1, e->text());
 	menu.set_need_save(true);
 }
-
-void EditorPlayerMenu::finalize_clicked() {
-	EditorInteractive& menu = eia();
-	assert(!menu.players_finalized());
-	UI::WLMessageBox m(get_parent(),
-			_("Finalize Players"),
-			_("Are you sure you want to finalize the players? "
-			"This means you will not be able to add or remove players, rename them, "
-			"or change their tribe and starting position. "
-			"Finalizing players is only required if you want to design a scenario with the editor."),
-			UI::WLMessageBox::MBoxType::kOkCancel);
-	if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
-		return;
-	}
-	const std::string result = menu.try_finalize_players();
-	if (result.empty()) {
-		// Success
-		menu.select_tool(menu.tools()->info, EditorTool::ToolIndex::First);
-		die();
-		return;
-	}
-	UI::WLMessageBox error(get_parent(),
-			_("Finalize Players Failed"),
-			(boost::format(_("Finalizing the players failed! Reason: %s")) % result).str(),
-			UI::WLMessageBox::MBoxType::kOk);
-	error.run<UI::Panel::Returncodes>();
-}
-

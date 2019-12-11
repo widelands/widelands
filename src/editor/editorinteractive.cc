@@ -97,7 +97,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      need_save_(false),
      realtime_(SDL_GetTicks()),
      is_painting_(false),
-     players_finalized_(false),
+     finalized_(false),
      mainmenu_(toolbar(),
                "dropdown_menu_main",
                0,
@@ -123,17 +123,17 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),
      scenario_toolmenu_(toolbar(),
-               "dropdown_menu_scenario_tools",
-               0,
-               0,
-               34U,
-               12,
-               34U,
-               /** TRANSLATORS: Title for the tool menu button in the editor */
-               as_tooltip_text_with_hotkey(_("Scenario Tools"), "S"),
-               UI::DropdownType::kPictorialMenu,
-               UI::PanelStyle::kWui,
-               UI::ButtonStyle::kWuiPrimary),
+                        "dropdown_menu_scenario_tools",
+                        0,
+                        0,
+                        34U,
+                        12,
+                        34U,
+                        /** TRANSLATORS: Title for the tool menu button in the editor */
+                        as_tooltip_text_with_hotkey(_("Scenario Tools"), "S"),
+                        UI::DropdownType::kPictorialMenu,
+                        UI::PanelStyle::kWui,
+                        UI::ButtonStyle::kWuiPrimary),
      showhidemenu_(toolbar(),
                    "dropdown_menu_showhide",
                    0,
@@ -150,7 +150,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      undo_(nullptr),
      redo_(nullptr),
      tools_(new Tools(e.map())),
-     history_(nullptr) // history needs the undo/redo buttons
+     history_(nullptr)  // history needs the undo/redo buttons
 {
 	add_main_menu();
 	add_tool_menu();
@@ -197,18 +197,24 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	});
 
 	player_notes_ = Notifications::subscribe<Widelands::NoteEditorPlayerEdited>(
-		[this](const Widelands::NoteEditorPlayerEdited& n) {
-			if (n.map == &egbase().map()) {
-				update_players();
-			}
-		});
+	   [this](const Widelands::NoteEditorPlayerEdited& n) {
+		   if (n.map == &egbase().map()) {
+			   update_players();
+		   }
+	   });
 
 	update_players();
 }
 
 void EditorInteractive::add_main_menu() {
 	mainmenu_.set_image(g_gr->images().get("images/wui/editor/menus/main_menu.png"));
+	rebuild_main_menu();
+	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
+	toolbar()->add(&mainmenu_);
+}
 
+void EditorInteractive::rebuild_main_menu() {
+	mainmenu_.clear();
 	menu_windows_.newmap.open_window = [this] { new MainMenuNewMap(*this, menu_windows_.newmap); };
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Map"), MainMenuEntry::kNewMap,
@@ -244,11 +250,15 @@ void EditorInteractive::add_main_menu() {
 	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions,
 	              g_gr->images().get("images/wui/editor/menus/map_options.png"));
 
+	if (!finalized_) {
+		/** TRANSLATORS: An entry in the editor's main menu */
+		mainmenu_.add(_("Enable scenario functions"), MainMenuEntry::kFinalize,
+		              g_gr->images().get("images/wui/editor/menus/scenario.png"));
+	}
+
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor,
 	              g_gr->images().get("images/wui/menus/exit.png"));
-	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
-	toolbar()->add(&mainmenu_);
 }
 
 void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
@@ -267,6 +277,9 @@ void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
 	} break;
 	case MainMenuEntry::kMapOptions: {
 		menu_windows_.mapoptions.toggle();
+	} break;
+	case MainMenuEntry::kFinalize: {
+		finalize_clicked();
 	} break;
 	case MainMenuEntry::kExitEditor: {
 		exit();
@@ -377,51 +390,57 @@ void EditorInteractive::add_scenario_tool_menu() {
 	scenario_toolmenu_.set_image(g_gr->images().get("images/wui/editor/menus/scenario_tools.png"));
 
 	scenario_tool_windows_.fieldowner.open_window = [this] {
-		new ScenarioToolFieldOwnerOptionsMenu(*this, tools()->sc_owner, scenario_tool_windows_.fieldowner);
+		new ScenarioToolFieldOwnerOptionsMenu(
+		   *this, tools()->sc_owner, scenario_tool_windows_.fieldowner);
 	};
 	/** TRANSLATORS: An entry in the editor's scenario tool menu */
-	scenario_toolmenu_.add(_("Ownership"), ScenarioToolMenuEntry::kFieldOwner,
-	              g_gr->images().get("images/wui/editor/tools/sc_owner.png"), false,
-	              /** TRANSLATORS: Tooltip for the field ownership scenario tool in the editor */
-	              _("Set the initial ownership of fields"));
+	scenario_toolmenu_.add(
+	   _("Ownership"), ScenarioToolMenuEntry::kFieldOwner,
+	   g_gr->images().get("images/wui/editor/tools/sc_owner.png"), false,
+	   /** TRANSLATORS: Tooltip for the field ownership scenario tool in the editor */
+	   _("Set the initial ownership of fields"));
 
 	scenario_tool_windows_.infrastructure.open_window = [this] {
-		new ScenarioToolInfrastructureOptionsMenu(*this, tools()->sc_infra, scenario_tool_windows_.infrastructure);
+		new ScenarioToolInfrastructureOptionsMenu(
+		   *this, tools()->sc_infra, scenario_tool_windows_.infrastructure);
 	};
 	/** TRANSLATORS: An entry in the editor's scenario tool menu */
-	scenario_toolmenu_.add(_("Place Infrastructure"), ScenarioToolMenuEntry::kInfrastructure,
-	              g_gr->images().get("images/wui/editor/tools/sc_infra.png"), false,
-	              /** TRANSLATORS: Tooltip for the place infrastructure scenario tool in the editor */
-	              _("Place buildings, flags and tribe immovables"));
+	scenario_toolmenu_.add(
+	   _("Place Infrastructure"), ScenarioToolMenuEntry::kInfrastructure,
+	   g_gr->images().get("images/wui/editor/tools/sc_infra.png"), false,
+	   /** TRANSLATORS: Tooltip for the place infrastructure scenario tool in the editor */
+	   _("Place buildings, flags and tribe immovables"));
 
 	/** TRANSLATORS: An entry in the editor's scenario tool menu */
-	scenario_toolmenu_.add(_("Infrastructure Settings"), ScenarioToolMenuEntry::kInfrastructureSettings,
-	              g_gr->images().get("images/wui/editor/tools/sc_infra_settings.png"), false,
-	              /** TRANSLATORS: Tooltip for the infrastructure settings scenario tool in the editor */
-	              _("Create the initial settings for buildings and flags"),
-	              _("Shift+i"));
+	scenario_toolmenu_.add(
+	   _("Infrastructure Settings"), ScenarioToolMenuEntry::kInfrastructureSettings,
+	   g_gr->images().get("images/wui/editor/tools/sc_infra_settings.png"), false,
+	   /** TRANSLATORS: Tooltip for the infrastructure settings scenario tool in the editor */
+	   _("Create the initial settings for buildings and flags"), _("Shift+i"));
 
 	scenario_tool_windows_.worker.open_window = [this] {
 		new ScenarioToolWorkerOptionsMenu(*this, tools()->sc_worker, scenario_tool_windows_.worker);
 	};
 	/** TRANSLATORS: An entry in the editor's scenario tool menu */
-	scenario_toolmenu_.add(_("Workers and Ships"), ScenarioToolMenuEntry::kWorker,
-	              g_gr->images().get("images/wui/editor/tools/sc_worker.png"), false,
-	              /** TRANSLATORS: Tooltip for the place workers scenario tool in the editor */
-	              _("Place workers and ships on the map"));
+	scenario_toolmenu_.add(
+	   _("Workers and Ships"), ScenarioToolMenuEntry::kWorker,
+	   g_gr->images().get("images/wui/editor/tools/sc_worker.png"), false,
+	   /** TRANSLATORS: Tooltip for the place workers scenario tool in the editor */
+	   _("Place workers, ships and ferries on the map"));
 
 	scenario_tool_windows_.lua.open_window = [this] {
 		new ScenarioLuaOptionsMenu(*this, scenario_tool_windows_.lua);
 	};
 	/** TRANSLATORS: An entry in the editor's scenario tool menu */
 	scenario_toolmenu_.add(_("Scripting"), ScenarioToolMenuEntry::kLua,
-	              g_gr->images().get("images/wui/editor/menus/scripting.png"), false,
-	              /** TRANSLATORS: Tooltip for the scenario scripting menu in the editor */
-	              _("Edit the scenario storyline"));
+	                       g_gr->images().get("images/wui/editor/menus/scripting.png"), false,
+	                       /** TRANSLATORS: Tooltip for the scenario scripting menu in the editor */
+	                       _("Edit the scenario storyline"));
 
-	scenario_toolmenu_.selected.connect([this] { scenario_tool_menu_selected(scenario_toolmenu_.get_selected()); });
+	scenario_toolmenu_.selected.connect(
+	   [this] { scenario_tool_menu_selected(scenario_toolmenu_.get_selected()); });
 	toolbar()->add(&scenario_toolmenu_);
-	scenario_toolmenu_.set_enabled(players_finalized_);
+	scenario_toolmenu_.set_enabled(finalized_);
 }
 
 void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
@@ -926,7 +945,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_i:
 			if (code.mod & KMOD_SHIFT) {
-				if (players_finalized_) {
+				if (finalized_) {
 					select_tool(tools_->sc_infra_settings, EditorTool::First);
 				}
 			} else {
@@ -947,7 +966,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				menu_windows_.savemap.toggle();
-			} else if (players_finalized_) {
+			} else if (finalized_) {
 				scenario_toolmenu_.toggle();
 			}
 			return true;
@@ -1106,8 +1125,9 @@ void EditorInteractive::map_changed(const MapWas& action) {
 		}
 
 		// NOCOM: All this needs to be saveloaded instead of course!!
-		players_finalized_ = false;
-		scenario_toolmenu_.set_enabled(players_finalized_);
+		finalized_ = false;
+		rebuild_main_menu();
+		scenario_toolmenu_.set_enabled(finalized_);
 		variables_.clear();
 		functions_.clear();
 		functions_.emplace(std::make_pair(kMainFunction, Function(true)));
@@ -1140,9 +1160,36 @@ EditorInteractive::Tools* EditorInteractive::tools() {
 	return tools_.get();
 }
 
-std::string EditorInteractive::try_finalize_players() {
-	if (players_finalized_) {
-		return _("Players are already finalized");
+void EditorInteractive::finalize_clicked() {
+	assert(!finalized_);
+	UI::WLMessageBox m(
+	   this, _("Finalize"),
+	   _("Are you sure you want to finalize this map? "
+	     "This means you will not be able to add or remove players, rename them, "
+	     "or change their tribe and starting position. Nor can the waterway length limit be changed "
+	     "any more. "
+	     "This step is only required if you want to design a scenario with the editor."),
+	   UI::WLMessageBox::MBoxType::kOkCancel);
+	if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+		return;
+	}
+	const std::string result = try_finalize();
+	if (result.empty()) {
+		// Success!
+		tool_windows_.players.destroy();
+		menu_windows_.mapoptions.destroy();
+		select_tool(tools_->info, EditorTool::ToolIndex::First);
+		return;
+	}
+	UI::WLMessageBox error(this, _("Finalize Failed"),
+	                       (boost::format(_("Finalizing failed! Reason: %s")) % result).str(),
+	                       UI::WLMessageBox::MBoxType::kOk);
+	error.run<UI::Panel::Returncodes>();
+}
+
+std::string EditorInteractive::try_finalize() {
+	if (finalized_) {
+		return _("Already finalized");
 	}
 	const Widelands::Map& map = egbase().map();
 	const size_t nr_players = map.get_nrplayers();
@@ -1153,30 +1200,34 @@ std::string EditorInteractive::try_finalize_players() {
 	for (Widelands::PlayerNumber p = 1; p <= nr_players; ++p) {
 		if (!t.tribe_exists(t.tribe_index(map.get_scenario_player_tribe(p)))) {
 			return (boost::format(_("Invalid tribe \"%1$s\" for player %2$s (%3$s)")) %
-					map.get_scenario_player_tribe(p).c_str() % std::to_string(static_cast<int>(p)) %
-					map.get_scenario_player_name(p).c_str()).str();
+			        map.get_scenario_player_tribe(p).c_str() % std::to_string(static_cast<int>(p)) %
+			        map.get_scenario_player_name(p).c_str())
+			   .str();
 		}
 		if (!map.get_starting_pos(p)) {
 			return (boost::format(_("No starting position was set for player %s")) %
-					std::to_string(static_cast<int>(p))).str();
+			        std::to_string(static_cast<int>(p)))
+			   .str();
 		}
 	}
-	players_finalized_ = true;
-	scenario_toolmenu_.set_enabled(players_finalized_);
+	finalized_ = true;
+	rebuild_main_menu();
+	scenario_toolmenu_.set_enabled(finalized_);
 	return "";
 }
 
 bool EditorInteractive::save_as_scenario() const {
-	return players_finalized_;
+	return finalized_;
 }
 
 void EditorInteractive::write_lua(FileWrite& fw) const {
 	const Widelands::Map& map = egbase().map();
 
 	// Header
-	fw.print_f("-- Automatically created by Widelands %s (%s)\n", build_id().c_str(), build_type().c_str());
+	fw.print_f(
+	   "-- Automatically created by Widelands %s (%s)\n", build_id().c_str(), build_type().c_str());
 	fw.print_f("-- Do not modify this file. "
-			"All changes will be discarded the next time this map is saved in the editor.\n");
+	           "All changes will be discarded the next time this map is saved in the editor.\n");
 
 	// i18n
 	fw.print_f("\nset_textdomain(\"scenario_%s.wmf\")\n\n", map.get_name().c_str());
@@ -1219,4 +1270,3 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 		}
 	}
 }
-

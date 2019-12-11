@@ -373,7 +373,9 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
      building_(building),
      font_style_(UI::FontStyle::kLabel),
      soldierpanel_(*this, ib.egbase(), building),
-     infotext_(this, ib.omnipotent() ? _("Click soldier to configure levels") : _("Click soldier to send away")),
+     infotext_(
+        this,
+        ib.omnipotent() ? _("Click soldier to configure levels") : _("Click soldier to send away")),
      create_new_soldier_(nullptr) {
 	add(&soldierpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -382,8 +384,8 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 	add(&infotext_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	soldierpanel_.set_mouseover(boost::bind(&SoldierList::mouseover, this, _1));
-	soldierpanel_.set_click(boost::bind(ibase_.omnipotent() ? &SoldierList::show_soldier_options :
-			&SoldierList::eject, this, _1));
+	soldierpanel_.set_click(boost::bind(
+	   ibase_.omnipotent() ? &SoldierList::show_soldier_options : &SoldierList::eject, this, _1));
 
 	// We don't want translators to translate this twice, so it's a bit involved.
 	int w = UI::g_fh
@@ -430,14 +432,19 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 	}
 	if (ib.omnipotent()) {
 		buttons->add_inf_space();
-		create_new_soldier_.reset(new UI::Button(buttons, "", 0, 0, 32, 32, UI::ButtonStyle::kWuiSecondary,
-				building.owner().tribe().get_worker_descr(building.owner().tribe().soldier())->icon(),
-				_("Create and add a new soldier")));
+		create_new_soldier_.reset(new UI::Button(
+		   buttons, "", 0, 0, 32, 32, UI::ButtonStyle::kWuiSecondary,
+		   building.owner().tribe().get_worker_descr(building.owner().tribe().soldier())->icon(),
+		   _("Create and add a new soldier")));
 		buttons->add(create_new_soldier_.get());
 		create_new_soldier_->sigclicked.connect([this]() {
-			building_.mutable_soldier_control()->incorporate_soldier(ibase_.egbase(), dynamic_cast<Widelands::Soldier&>(
-					building_.owner().tribe().get_worker_descr(building_.owner().tribe().soldier())->create(
-					ibase_.egbase(), building_.get_owner(), &building_, building_.get_position())));
+			building_.mutable_soldier_control()->incorporate_soldier(
+			   ibase_.egbase(), dynamic_cast<Widelands::Soldier&>(
+			                       building_.owner()
+			                          .tribe()
+			                          .get_worker_descr(building_.owner().tribe().soldier())
+			                          ->create(ibase_.egbase(), building_.get_owner(), &building_,
+			                                   building_.get_position())));
 		});
 	}
 	buttons->add_inf_space();
@@ -454,16 +461,15 @@ const SoldierControl* SoldierList::soldiers() const {
 }
 
 void SoldierList::think() {
-	upcast(Widelands::MilitarySite, ms, &building_);
 	if (create_new_soldier_) {
-		create_new_soldier_->set_enabled(
-				ms->soldier_control()->soldier_capacity() > ms->soldier_control()->stationed_soldiers().size());
+		create_new_soldier_->set_enabled(building_.soldier_control()->soldier_capacity() >
+		                                 building_.soldier_control()->stationed_soldiers().size());
 	}
 	// Only update the soldiers pref radio if player is spectator
 	if (check_can_act()) {
 		return;
 	}
-	if (ms) {
+	if (upcast(Widelands::MilitarySite, ms, &building_)) {
 		switch (ms->get_soldier_preference()) {
 		case Widelands::SoldierPreference::kRookies:
 			soldier_preference_.set_state(0);
@@ -505,10 +511,11 @@ void SoldierList::set_soldier_preference(int32_t changed_to) {
 	if (ibase_.get_game()) {
 		ibase_.game().send_player_militarysite_set_soldier_preference(
 		   building_, changed_to == 0 ? Widelands::SoldierPreference::kRookies :
-			                            Widelands::SoldierPreference::kHeroes);
+		                                Widelands::SoldierPreference::kHeroes);
 	} else {
-		building_.get_owner()->military_site_set_soldier_preference(building_,
-				changed_to == 0 ? Widelands::SoldierPreference::kRookies : Widelands::SoldierPreference::kHeroes);
+		building_.get_owner()->military_site_set_soldier_preference(
+		   building_, changed_to == 0 ? Widelands::SoldierPreference::kRookies :
+		                                Widelands::SoldierPreference::kHeroes);
 	}
 }
 
@@ -523,39 +530,94 @@ constexpr uint16_t kSliderHeight = 24;
 constexpr uint16_t kSpacing = 4;
 
 SoldierSettings::SoldierSettings(InteractiveBase& ib, Widelands::Soldier& s)
-		: UI::Window(&ib, "soldier_settings_" + std::to_string(s.serial()), 0, 0, 200, 200,
-		(boost::format(_("Soldier %u")) % s.serial()).str()),
-		egbase_(ib.egbase()),
-		soldier_(s),
-		main_box_(this, 0, 0, UI::Box::Vertical),
-		upper_box_(&main_box_, 0, 0, UI::Box::Horizontal),
-		label_box_(&upper_box_, 0, 0, UI::Box::Vertical),
-		slider_box_(&upper_box_, 0, 0, UI::Box::Vertical),
-		health_(&slider_box_, 0, 0, kSliderWidth, kSliderHeight, 0,
-				s.descr().get_max_health_level(), s.get_health_level(),
-				UI::SliderStyle::kWuiDark, _("The soldier’s health level")),
-		attack_(&slider_box_, 0, 0, kSliderWidth, kSliderHeight, 0,
-				s.descr().get_max_attack_level(), s.get_attack_level(),
-				UI::SliderStyle::kWuiDark, _("The soldier’s attack level")),
-		defense_(&slider_box_, 0, 0, kSliderWidth, kSliderHeight, 0,
-				s.descr().get_max_defense_level(), s.get_defense_level(),
-				UI::SliderStyle::kWuiDark, _("The soldier’s defense level")),
-		evade_(&slider_box_, 0, 0, kSliderWidth, kSliderHeight, 0,
-				s.descr().get_max_evade_level(), s.get_evade_level(),
-				UI::SliderStyle::kWuiDark, _("The soldier’s evade level")),
-		current_health_(&slider_box_, 0, 0, kSliderWidth, kSliderHeight, 1, 1, 1,
-				UI::SliderStyle::kWuiDark, _("The soldier’s current hitpoints")),
-		delete_(&main_box_, "delete", 0, 0, 100, 30, UI::ButtonStyle::kWuiSecondary,
-				_("Delete"), _("Delete this soldier")),
-		cancel_(&main_box_, "cancel", 0, 0, 100, 30, UI::ButtonStyle::kWuiSecondary,
-				_("Cancel"), _("Discard all changes")),
-		ok_(&main_box_, "ok", 0, 0, 100, 30, UI::ButtonStyle::kWuiPrimary,
-				_("OK"), _("Apply changes")),
-		hlabel_(&label_box_, "", UI::Align::kRight),
-		alabel_(&label_box_, "", UI::Align::kRight),
-		dlabel_(&label_box_, "", UI::Align::kRight),
-		elabel_(&label_box_, "", UI::Align::kRight),
-		clabel_(&label_box_, "", UI::Align::kRight) {
+   : UI::Window(&ib,
+                "soldier_settings_" + std::to_string(s.serial()),
+                0,
+                0,
+                200,
+                200,
+                (boost::format(_("Soldier %u")) % s.serial()).str()),
+     egbase_(ib.egbase()),
+     soldier_(s),
+     main_box_(this, 0, 0, UI::Box::Vertical),
+     upper_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     label_box_(&upper_box_, 0, 0, UI::Box::Vertical),
+     slider_box_(&upper_box_, 0, 0, UI::Box::Vertical),
+     health_(&slider_box_,
+             0,
+             0,
+             kSliderWidth,
+             kSliderHeight,
+             0,
+             s.descr().get_max_health_level(),
+             s.get_health_level(),
+             UI::SliderStyle::kWuiDark,
+             _("The soldier’s health level")),
+     attack_(&slider_box_,
+             0,
+             0,
+             kSliderWidth,
+             kSliderHeight,
+             0,
+             s.descr().get_max_attack_level(),
+             s.get_attack_level(),
+             UI::SliderStyle::kWuiDark,
+             _("The soldier’s attack level")),
+     defense_(&slider_box_,
+              0,
+              0,
+              kSliderWidth,
+              kSliderHeight,
+              0,
+              s.descr().get_max_defense_level(),
+              s.get_defense_level(),
+              UI::SliderStyle::kWuiDark,
+              _("The soldier’s defense level")),
+     evade_(&slider_box_,
+            0,
+            0,
+            kSliderWidth,
+            kSliderHeight,
+            0,
+            s.descr().get_max_evade_level(),
+            s.get_evade_level(),
+            UI::SliderStyle::kWuiDark,
+            _("The soldier’s evade level")),
+     current_health_(&slider_box_,
+                     0,
+                     0,
+                     kSliderWidth,
+                     kSliderHeight,
+                     1,
+                     1,
+                     1,
+                     UI::SliderStyle::kWuiDark,
+                     _("The soldier’s current hitpoints")),
+     delete_(&main_box_,
+             "delete",
+             0,
+             0,
+             100,
+             30,
+             UI::ButtonStyle::kWuiSecondary,
+             _("Delete"),
+             _("Delete this soldier")),
+     cancel_(&main_box_,
+             "cancel",
+             0,
+             0,
+             100,
+             30,
+             UI::ButtonStyle::kWuiSecondary,
+             _("Cancel"),
+             _("Discard all changes")),
+     ok_(
+        &main_box_, "ok", 0, 0, 100, 30, UI::ButtonStyle::kWuiPrimary, _("OK"), _("Apply changes")),
+     hlabel_(&label_box_, "", UI::Align::kRight),
+     alabel_(&label_box_, "", UI::Align::kRight),
+     dlabel_(&label_box_, "", UI::Align::kRight),
+     elabel_(&label_box_, "", UI::Align::kRight),
+     clabel_(&label_box_, "", UI::Align::kRight) {
 	assert(ib.omnipotent());
 
 	label_box_.add(&hlabel_, UI::Box::Resizing::kFullSize);
@@ -617,8 +679,8 @@ SoldierSettings::SoldierSettings(InteractiveBase& ib, Widelands::Soldier& s)
 
 inline static void update_label(UI::Textarea& l, const UI::Slider& s, const std::string& prefix) {
 	/** TRANSLATORS: "XYZ level: 1 / 5" */
-	l.set_text((boost::format(_("%1$s: %2$d / %3$d")) % prefix %
-			s.get_value() % s.get_max_value()).str());
+	l.set_text(
+	   (boost::format(_("%1$s: %2$d / %3$d")) % prefix % s.get_value() % s.get_max_value()).str());
 }
 void SoldierSettings::update_label_h() {
 	/** TRANSLATORS: Part of a string: "Health level: 1 / 5" */
@@ -643,13 +705,15 @@ void SoldierSettings::update_label_c() {
 
 void SoldierSettings::health_slider_changed() {
 	current_health_.set_max_value(soldier_.descr().get_base_health() +
-			health_.get_value() * soldier_.descr().get_health_incr_per_level());
+	                              health_.get_value() *
+	                                 soldier_.descr().get_health_incr_per_level());
 	update_label_h();
 	update_label_c();
 }
 
 void SoldierSettings::clicked_ok() {
-	soldier_.set_level(health_.get_value(), attack_.get_value(), defense_.get_value(), evade_.get_value());
+	soldier_.set_level(
+	   health_.get_value(), attack_.get_value(), defense_.get_value(), evade_.get_value());
 	const int32_t cur_h = soldier_.get_current_health();
 	const int32_t desired_h = current_health_.get_value();
 	if (cur_h < desired_h) {
@@ -660,8 +724,9 @@ void SoldierSettings::clicked_ok() {
 	die();
 }
 void SoldierSettings::clicked_delete() {
-	dynamic_cast<Widelands::Building*>(soldier_.get_location(egbase_))->
-			mutable_soldier_control()->outcorporate_soldier(soldier_);
+	dynamic_cast<Widelands::Building*>(soldier_.get_location(egbase_))
+	   ->mutable_soldier_control()
+	   ->outcorporate_soldier(soldier_);
 	soldier_.remove(egbase_);
 	die();
 }

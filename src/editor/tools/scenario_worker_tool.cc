@@ -26,10 +26,11 @@
 #include "logic/widelands_geometry.h"
 
 int32_t ScenarioPlaceWorkerTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-		EditorInteractive& eia,
-		EditorActionArgs* args,
-		Widelands::Map* map) {
-	if (args->new_owner < 1 || args->new_owner > map->get_nrplayers() || args->worker_types.empty()) {
+                                                   EditorInteractive& eia,
+                                                   EditorActionArgs* args,
+                                                   Widelands::Map* map) {
+	if (args->new_owner < 1 || args->new_owner > map->get_nrplayers() ||
+	    args->worker_types.empty()) {
 		return 0;
 	}
 	const size_t nr_items = args->worker_types.size();
@@ -42,18 +43,26 @@ int32_t ScenarioPlaceWorkerTool::handle_click_impl(const Widelands::NodeAndTrian
 	const Widelands::WorkerDescr* wd = args->worker_types[args->random_index];
 	Widelands::Bob* bob = nullptr;
 	if (wd) {
-		bob = &wd->create(egbase, player, nullptr, center.node);
+		Widelands::Worker& worker = wd->create(egbase, player, nullptr, center.node);
+		if (wd->becomes() != Widelands::INVALID_INDEX) {
+			worker.set_current_experience(
+			   std::max<int32_t>(0, std::min<int32_t>(experience_, wd->get_needed_experience() - 1)));
+		}
+		bob = &worker;
 	} else {
 		bob = &egbase.create_ship(center.node, player->tribe().ship(), player);
+		if (!shipname_.empty()) {
+			dynamic_cast<Widelands::Ship*>(bob)->set_shipname(shipname_);
+		}
 	}
 	args->infrastructure_placed = bob->serial();
 	return 1;
 }
 
 int32_t ScenarioPlaceWorkerTool::handle_undo_impl(const Widelands::NodeAndTriangle<>&,
-		EditorInteractive& eia,
-		EditorActionArgs* args,
-		Widelands::Map*) {
+                                                  EditorInteractive& eia,
+                                                  EditorActionArgs* args,
+                                                  Widelands::Map*) {
 	eia.egbase().objects().get_object(args->infrastructure_placed)->remove(eia.egbase());
 	return 1;
 }
@@ -69,9 +78,9 @@ EditorActionArgs ScenarioPlaceWorkerTool::format_args_impl(EditorInteractive& pa
 }
 
 int32_t ScenarioDeleteWorkerTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-		EditorInteractive& eia,
-		EditorActionArgs* args,
-		Widelands::Map* map) {
+                                                    EditorInteractive& eia,
+                                                    EditorActionArgs* args,
+                                                    Widelands::Map* map) {
 	Widelands::EditorGameBase& egbase = eia.egbase();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
@@ -88,8 +97,9 @@ int32_t ScenarioDeleteWorkerTool::handle_click_impl(const Widelands::NodeAndTria
 		std::list<std::tuple<const Widelands::WorkerDescr*, uint8_t, uint32_t>> list_w;
 		std::list<std::pair<uint8_t, std::string>> list_s;
 		for (Widelands::Worker* w : workers_to_delete) {
-			list_w.push_back(std::make_tuple(&w->descr(),
-					w->owner().player_number(), w->needs_experience() ? w->get_current_experience() : 0u));
+			list_w.push_back(
+			   std::make_tuple(&w->descr(), w->owner().player_number(),
+			                   w->needs_experience() ? w->get_current_experience() : 0u));
 			w->remove(egbase);
 		}
 		for (Widelands::Ship* s : ships_to_delete) {
@@ -103,9 +113,9 @@ int32_t ScenarioDeleteWorkerTool::handle_click_impl(const Widelands::NodeAndTria
 }
 
 int32_t ScenarioDeleteWorkerTool::handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-		EditorInteractive& eia,
-		EditorActionArgs* args,
-		Widelands::Map* map) {
+                                                   EditorInteractive& eia,
+                                                   EditorActionArgs* args,
+                                                   Widelands::Map* map) {
 	Widelands::EditorGameBase& egbase = eia.egbase();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
@@ -119,8 +129,9 @@ int32_t ScenarioDeleteWorkerTool::handle_undo_impl(const Widelands::NodeAndTrian
 		}
 		for (const auto& pair : *args->ships_deleted.begin()) {
 			Widelands::Player* player = egbase.get_player(pair.first);
-			dynamic_cast<Widelands::Ship&>(egbase.create_ship(center.node,
-					player->tribe().ship(), player)).set_shipname(pair.second);
+			dynamic_cast<Widelands::Ship&>(
+			   egbase.create_ship(center.node, player->tribe().ship(), player))
+			   .set_shipname(pair.second);
 		}
 		args->workers_deleted.erase(args->workers_deleted.begin());
 		args->ships_deleted.erase(args->ships_deleted.begin());
@@ -133,4 +144,3 @@ int32_t ScenarioDeleteWorkerTool::handle_undo_impl(const Widelands::NodeAndTrian
 EditorActionArgs ScenarioDeleteWorkerTool::format_args_impl(EditorInteractive& parent) {
 	return EditorTool::format_args_impl(parent);
 }
-

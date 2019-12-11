@@ -65,15 +65,12 @@ private:
 	/// Select starting position for the given row's player
 	void set_starting_pos_clicked(size_t row);
 
-	void finalize_clicked();
-
 	/// Resize window according to number of rows
 	void layout() override;
 
 	UI::Box box_;
 	UI::Dropdown<uintptr_t> no_of_players_;
 	std::vector<std::unique_ptr<PlayerEditRow>> rows_;
-	UI::Button finalize_button_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_PLAYER_MENU_H

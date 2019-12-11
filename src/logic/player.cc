@@ -164,7 +164,8 @@ Player::Player(EditorGameBase& the_egbase,
 	for (size_t i = 0; i < allowed_building_types_.size(); ++i) {
 		const DescriptionIndex& building_index = static_cast<DescriptionIndex>(i);
 		const BuildingDescr& descr = *egbase_.tribes().get_building_descr(building_index);
-		if ((!get_tribe() || !tribe().has_building(building_index)) && descr.type() != MapObjectType::MILITARYSITE) {
+		if ((!get_tribe() || !tribe().has_building(building_index)) &&
+		    descr.type() != MapObjectType::MILITARYSITE) {
 			allowed_building_types_[i] = false;
 		}
 	}
@@ -1466,9 +1467,9 @@ const std::string Player::pick_shipname() {
 	++ship_name_counter_;
 
 	if (!remaining_shipnames_.empty()) {
-		Game& game = dynamic_cast<Game&>(egbase());
-		assert(is_a(Game, &egbase()));
-		const uint32_t index = game.logic_rand() % remaining_shipnames_.size();
+		upcast(Game, game, &egbase());
+		const uint32_t index =
+		   (game ? game->logic_rand() : std::rand()) % remaining_shipnames_.size();
 		std::unordered_set<std::string>::iterator it = remaining_shipnames_.begin();
 		std::advance(it, index);
 		std::string new_name = *it;

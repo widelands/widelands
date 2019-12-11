@@ -25,6 +25,15 @@
 #include "editor/tools/tool.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 
+/* NOCOM: Replace this with a tool to open an options window with
+ * · an experience spinbox (all workers),
+ * · sliders for training levels and health points (soldiers),
+ * · a shipname editbox (ships), and
+ * · a Delete button (all).
+ * Or perhaps keep this tool and implement such functionality
+ * into the infrastructure settings window instead?
+ * How should the case of multiple workers per tile be handled?
+ */
 // Place and delete workers and ships.
 struct ScenarioDeleteWorkerTool : public EditorTool {
 	explicit ScenarioDeleteWorkerTool() : EditorTool(*this, *this) {
@@ -48,7 +57,8 @@ struct ScenarioDeleteWorkerTool : public EditorTool {
 };
 
 struct ScenarioPlaceWorkerTool : public EditorTool {
-	explicit ScenarioPlaceWorkerTool(ScenarioDeleteWorkerTool& tool) : EditorTool(tool, tool), player_(1) {
+	explicit ScenarioPlaceWorkerTool(ScenarioDeleteWorkerTool& tool)
+	   : EditorTool(tool, tool), player_(1), shipname_(""), experience_(0) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
@@ -79,10 +89,24 @@ struct ScenarioPlaceWorkerTool : public EditorTool {
 	std::list<const Widelands::WorkerDescr*>& get_descr() {
 		return descr_;
 	}
+	const std::string& get_shipname() const {
+		return shipname_;
+	}
+	void set_shipname(const std::string& s) {
+		shipname_ = s;
+	}
+	uint32_t get_experience() const {
+		return experience_;
+	}
+	void set_experience(uint32_t e) {
+		experience_ = e;
+	}
 
 private:
 	uint8_t player_;
-	std::list<const Widelands::WorkerDescr*> descr_; // nullptr indicates ship
+	std::list<const Widelands::WorkerDescr*> descr_;  // nullptr indicates ship
+	std::string shipname_;
+	uint32_t experience_;
 };
 
-#endif // end of include guard: WL_EDITOR_TOOLS_SCENARIO_WORKER_TOOL_H
+#endif  // end of include guard: WL_EDITOR_TOOLS_SCENARIO_WORKER_TOOL_H

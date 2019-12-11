@@ -30,43 +30,101 @@ inline EditorInteractive& ScenarioToolWorkerOptionsMenu::eia() {
 }
 
 ScenarioToolWorkerOptionsMenu::ScenarioToolWorkerOptionsMenu(EditorInteractive& parent,
-                                                                     ScenarioPlaceWorkerTool& tool,
-                                                                     UI::UniqueWindow::Registry& registry)
-		: EditorToolOptionsMenu(parent, registry, 200, 100, _("Workers and Ships"), tool),
-		tool_(tool),
-		box_(this, 0, 0, UI::Box::Vertical),
-		players_(&box_, "player", 0, 0, get_inner_w(), 8, get_inner_h(), "",
-				UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary),
-		item_types_(&box_, 0, 0, 24, 24, 12),
-		experience_(&box_, 0, 0, 200, 50, 0, 0, 0, UI::PanelStyle::kWui, _("Experience")),
-		shipname_(&box_, 0, 0, 200, UI::PanelStyle::kWui),
-		selected_items_(&box_, 0, 0, 100, 10, UI::PanelStyle::kWui,
-			"", UI::Align::kCenter, UI::MultilineTextarea::ScrollMode::kNoScrolling) {
+                                                             ScenarioPlaceWorkerTool& tool,
+                                                             UI::UniqueWindow::Registry& registry)
+   : EditorToolOptionsMenu(parent, registry, 450, 300, _("Workers and Ships"), tool),
+     tool_(tool),
+     box_(this, 0, 0, UI::Box::Vertical),
+     bottombox_(&box_, 0, 0, UI::Box::Horizontal),
+     players_(&box_,
+              "player",
+              0,
+              0,
+              200,
+              8,
+              24,
+              "",
+              UI::DropdownType::kTextual,
+              UI::PanelStyle::kWui,
+              UI::ButtonStyle::kWuiSecondary),
+     item_types_(&box_, 0, 0, 24, 24, 20),
+     experience_(&bottombox_,
+                 0,
+                 0,
+                 200,
+                 80,
+                 tool.get_experience(),
+                 0,
+                 0,
+                 UI::PanelStyle::kWui,
+                 _("Experience")),
+     shipname_(&bottombox_, 0, 0, 150, UI::PanelStyle::kWui),
+     selected_items_(&box_,
+                     0,
+                     0,
+                     300,
+                     10,
+                     UI::PanelStyle::kWui,
+                     "",
+                     UI::Align::kCenter,
+                     UI::MultilineTextarea::ScrollMode::kNoScrolling) {
 	const Widelands::Map& map = parent.egbase().map();
 	const Widelands::PlayerNumber max = map.get_nrplayers();
 	const Widelands::PlayerNumber sel = tool_.get_player();
 	for (Widelands::PlayerNumber p = 1; p <= max; ++p) {
 		const std::string name = map.get_scenario_player_name(p);
 		const std::string tribe = map.get_scenario_player_tribe(p);
-		players_.add((boost::format(_("Player %1$s (%2$s)")) % std::to_string(static_cast<int>(p)) % name).str(), p,
-				g_gr->images().get(tribe.empty() ? "images/ui_fsmenu/random.png" :
-						Widelands::get_tribeinfo(parent.egbase().map().get_scenario_player_tribe(p)).icon),
-						sel == p, (boost::format(_("Claim fields for %s")) % name).str());
+		players_.add(
+		   (boost::format(_("Player %1$s (%2$s)")) % std::to_string(static_cast<int>(p)) % name)
+		      .str(),
+		   p,
+		   g_gr->images().get(
+		      tribe.empty() ?
+		         "images/ui_fsmenu/random.png" :
+		         Widelands::get_tribeinfo(parent.egbase().map().get_scenario_player_tribe(p)).icon),
+		   sel == p);
 	}
 	players_.selected.connect(boost::bind(&ScenarioToolWorkerOptionsMenu::select_player, this));
 
-	const Widelands::Tribes& tribes = parent.egbase().tribes();
-	const size_t nrw = tribes.nrworkers();
+	const Widelands::Tribes* tribes = &parent.egbase().tribes();
+	const size_t nrw = tribes->nrworkers();
+	const size_t nrt = tribes->nrtribes();
+	auto tribe_of_worker = [tribes, nrt](Widelands::DescriptionIndex i) {
+		for (size_t t = 0; t < nrt; ++t) {
+			const Widelands::TribeDescr& td = *tribes->get_tribe_descr(t);
+			if (td.has_worker(i)) {
+				return td.descname();
+			}
+		}
+		NEVER_HERE();
+	};
 	{
-		const Widelands::ShipDescr* s = tribes.get_ship_descr(0);
-		item_types_.add(s->name(), s->icon(), reinterpret_cast<void*>(Widelands::INVALID_INDEX), s->descname());
+		const Widelands::ShipDescr* s = tribes->get_ship_descr(0);
+		item_types_.add(
+		   s->name(), s->icon(), reinterpret_cast<void*>(Widelands::INVALID_INDEX), s->descname());
 	}
 	for (size_t i = 0; i < nrw; ++i) {
-		const Widelands::WorkerDescr* w = tribes.get_worker_descr(i);
-		item_types_.add(w->name(), w->icon(), reinterpret_cast<void*>(i), w->descname());
+		const Widelands::WorkerDescr* w = tribes->get_worker_descr(i);
+		item_types_.add(
+		   w->name(), w->icon(), reinterpret_cast<void*>(i),
+		   /** TRANSLATORS: Worker name (Tribe name) */
+		   (boost::format(_("%1$s (%2$s)")) % w->descname() % tribe_of_worker(i).c_str()).str());
 	}
 
-	update_text();
+	shipname_.set_text(tool_.get_shipname());
+	shipname_.changed.connect([this]() { tool_.set_shipname(shipname_.text()); });
+	item_types_.icon_clicked.connect(
+	   boost::bind(&ScenarioToolWorkerOptionsMenu::toggle_item, this, _1));
+
+	box_.add(&players_, UI::Box::Resizing::kFullSize);
+	box_.add(&item_types_, UI::Box::Resizing::kExpandBoth);
+	box_.add(&selected_items_, UI::Box::Resizing::kExpandBoth);
+	box_.add(&bottombox_, UI::Box::Resizing::kFullSize);
+	bottombox_.add(&experience_);
+	bottombox_.add(new UI::Textarea(&bottombox_, _("Ship name:")));
+	bottombox_.add(&shipname_, UI::Box::Resizing::kFullSize);
+	set_center_panel(&box_);
+	update_text_and_spinner();
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}
@@ -80,11 +138,34 @@ void ScenarioToolWorkerOptionsMenu::select_player() {
 	select_correct_tool();
 }
 
-void ScenarioToolWorkerOptionsMenu::update_text() {
+void ScenarioToolWorkerOptionsMenu::toggle_item(int32_t idx) {
+	select_correct_tool();
+	const Widelands::DescriptionIndex index =
+	   static_cast<int32_t>(reinterpret_cast<intptr_t>(item_types_.get_data(idx)));
+	const Widelands::WorkerDescr* descr =
+	   index == Widelands::INVALID_INDEX ? nullptr : eia().egbase().tribes().get_worker_descr(index);
+	std::list<const Widelands::WorkerDescr*>& list = tool_.get_descr();
+	if (SDL_GetModState() & KMOD_CTRL) {
+		for (auto it = list.begin(); it != list.end(); ++it) {
+			if (*it == descr) {
+				list.erase(it);
+				return update_text_and_spinner();
+			}
+		}
+	} else {
+		list.clear();
+	}
+	list.push_back(descr);
+	update_text_and_spinner();
+}
+
+void ScenarioToolWorkerOptionsMenu::update_text_and_spinner() {
 	const size_t nr_items = tool_.get_descr().size();
 	const Widelands::EditorGameBase* egbase = &eia().egbase();
 	if (nr_items == 0) {
 		selected_items_.set_text(_("Nothing selected"));
+		experience_.set_value(0);
+		experience_.set_interval(0, 0);
 		return;
 	}
 	auto tribe_of_worker = [this, egbase](Widelands::DescriptionIndex i) {
@@ -98,10 +179,18 @@ void ScenarioToolWorkerOptionsMenu::update_text() {
 		NEVER_HERE();
 	};
 	std::string text = "";
+	int32_t max_xp = 0;
 	for (auto it = tool_.get_descr().begin(); it != tool_.get_descr().end(); ++it) {
-		const std::string name = *it == nullptr ? egbase->tribes().get_ship_descr(egbase->player(
-				tool_.get_player()).tribe().ship())->descname() : (boost::format(_("(%1$s) %2$s")) %
-						tribe_of_worker((*it)->worker_index()) % (*it)->descname()).str();
+		const std::string name =
+		   *it == nullptr ? egbase->tribes()
+		                       .get_ship_descr(egbase->player(tool_.get_player()).tribe().ship())
+		                       ->descname() :
+		                    (boost::format(_("(%1$s) %2$s")) %
+		                     tribe_of_worker((*it)->worker_index()) % (*it)->descname())
+		                       .str();
+		if (*it && (*it)->becomes() != Widelands::INVALID_INDEX) {
+			max_xp = std::max(max_xp, (*it)->get_needed_experience() - 1);
+		}
 		if (text.empty()) {
 			text = name;
 		} else {
@@ -109,7 +198,8 @@ void ScenarioToolWorkerOptionsMenu::update_text() {
 			text = (boost::format(_("%1$s · %2$s")) % text % name).str();
 		}
 	}
+	experience_.set_interval(0, max_xp);
+	experience_.set_value(std::min(max_xp, experience_.get_value()));
 	assert(!text.empty());
 	selected_items_.set_text(text);
 }
-

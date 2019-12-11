@@ -154,21 +154,47 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 			std::vector<std::string> critternames;
 			std::vector<std::string> shipnames;
 			std::vector<std::string> workernames;
+			const Widelands::EditorGameBase* egbase = &parent.egbase();
+			auto tribe_of_worker = [egbase](Widelands::DescriptionIndex i) {
+				const size_t nr = egbase->tribes().nrtribes();
+				for (size_t t = 0; t < nr; ++t) {
+					const Widelands::TribeDescr& td = *egbase->tribes().get_tribe_descr(t);
+					if (td.has_worker(i)) {
+						return td.descname();
+					}
+				}
+				NEVER_HERE();
+			};
 			do {
 				switch (bob->descr().type()) {
 				case (Widelands::MapObjectType::CRITTER):
 					critternames.push_back(bob->descr().descname());
 					break;
 				case (Widelands::MapObjectType::SHIP): {
-					if (upcast(Widelands::Ship, ship, bob)) {
-						shipnames.push_back(ship->get_shipname());
-					}
+					upcast(Widelands::Ship, ship, bob);
+					assert(ship);
+					shipnames.push_back(ship->get_shipname());
 				} break;
 				case (Widelands::MapObjectType::WORKER):
 				case (Widelands::MapObjectType::CARRIER):
-				case (Widelands::MapObjectType::SOLDIER):
-					workernames.push_back(bob->descr().descname());
-					break;
+				case (Widelands::MapObjectType::FERRY):
+				// NOCOM: Seperate handling for soldier (training levels & health points)
+				case (Widelands::MapObjectType::SOLDIER): {
+					upcast(Widelands::Worker, worker, bob);
+					assert(worker);
+					workernames.push_back(
+					   (worker->needs_experience() ?
+					       /** TRANSLATORS: Worker name (Tribe name), Experience: 0/14 */
+					       ((boost::format(_("%1$s (%2$s), XP: %3$i/%4$i"))) %
+					        worker->descr().descname() %
+					        tribe_of_worker(worker->descr().worker_index()) %
+					        worker->get_current_experience() % worker->descr().get_needed_experience())
+					       /** TRANSLATORS: Worker name (Tribe name) */
+					       :
+					       ((boost::format(_("%1$s (%2$s)"))) % worker->descr().descname() %
+					        tribe_of_worker(worker->descr().worker_index())))
+					      .str());
+				} break;
 				default:
 					break;
 				}

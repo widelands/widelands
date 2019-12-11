@@ -165,11 +165,9 @@ public:
 	// Access to the tools.
 	Tools* tools();
 
-	bool players_finalized() const {
-		return players_finalized_;
+	bool finalized() const {
+		return finalized_;
 	}
-	// Returns the reason why finalizing failed, or "" on success
-	std::string try_finalize_players();
 
 	// Scripting access
 	const std::map<std::string, Variable>& variables() const {
@@ -193,6 +191,7 @@ private:
 		kLoadMap,
 		kSaveMap,
 		kMapOptions,
+		kFinalize,
 		kExitEditor,
 	};
 
@@ -224,6 +223,7 @@ private:
 
 	// Adds the mainmenu_ to the toolbar
 	void add_main_menu();
+	void rebuild_main_menu();
 	// Takes the appropriate action when an item in the mainmenu_ is selected
 	void main_menu_selected(MainMenuEntry entry);
 	// Adds the toolmenu_ to the toolbar
@@ -255,7 +255,11 @@ private:
 	uint32_t realtime_;
 	bool is_painting_;
 
-	bool players_finalized_;
+	bool finalized_;
+
+	// Returns the reason why finalizing failed, or "" on success
+	std::string try_finalize();
+	void finalize_clicked();
 
 	// All unique menu windows
 	struct EditorMenuWindows {
