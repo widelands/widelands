@@ -223,6 +223,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
      /** TRANSLATORS: and it also lets you jump to it on the map. */
      single_watchwin_(&box_game_, Vector2i::zero(), _("Use single watchwindow mode")),
+     /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
+     ctrl_zoom_(&box_game_, Vector2i::zero(), _("Zoom only when Ctrl is pressed")),
      os_(opt) {
 
 	// Buttons
@@ -273,6 +275,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_game_.add(&auto_roadbuild_mode_);
 	box_game_.add(&transparent_chat_);
 	box_game_.add(&single_watchwin_);
+	box_game_.add(&ctrl_zoom_);
 
 	// Bind actions
 	language_dropdown_.selected.connect(
@@ -336,6 +339,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	auto_roadbuild_mode_.set_state(opt.auto_roadbuild_mode);
 	transparent_chat_.set_state(opt.transparent_chat);
 	single_watchwin_.set_state(opt.single_watchwin);
+	ctrl_zoom_.set_state(opt.ctrl_zoom);
 
 	// Language options
 	add_languages_to_list(opt.language);
@@ -577,6 +581,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.auto_roadbuild_mode = auto_roadbuild_mode_.get_state();
 	os_.transparent_chat = transparent_chat_.get_state();
 	os_.single_watchwin = single_watchwin_.get_state();
+	os_.ctrl_zoom = ctrl_zoom_.get_state();
 
 	// Last tab for reloading the options menu
 	os_.active_tab = tabs_.active();
@@ -632,6 +637,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.auto_roadbuild_mode = opt_section_.get_bool("auto_roadbuild_mode", true);
 	opt.transparent_chat = opt_section_.get_bool("transparent_chat", true);
 	opt.single_watchwin = opt_section_.get_bool("single_watchwin", false);
+	opt.ctrl_zoom = opt_section_.get_bool("ctrl_zoom", false);
 
 	// Language options
 	opt.language = opt_section_.get_string("language", "");
@@ -668,6 +674,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("auto_roadbuild_mode", opt.auto_roadbuild_mode);
 	opt_section_.set_bool("transparent_chat", opt.transparent_chat);
 	opt_section_.set_bool("single_watchwin", opt.single_watchwin);
+	opt_section_.set_bool("ctrl_zoom", opt.ctrl_zoom);
 
 	// Language options
 	opt_section_.set_string("language", opt.language);

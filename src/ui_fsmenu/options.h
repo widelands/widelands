@@ -67,6 +67,7 @@ public:
 		bool auto_roadbuild_mode;
 		bool transparent_chat;
 		bool single_watchwin;
+		bool ctrl_zoom;
 
 		// Language options
 		std::string language;
@@ -153,6 +154,7 @@ private:
 	UI::Checkbox auto_roadbuild_mode_;
 	UI::Checkbox transparent_chat_;
 	UI::Checkbox single_watchwin_;
+	UI::Checkbox ctrl_zoom_;
 
 	OptionsCtrl::OptionsStruct os_;
 
