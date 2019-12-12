@@ -2,9 +2,9 @@ dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
    msgctxt = "frisians_building",
-   name = "frisians_charcoal_kiln_small",
+   name = "frisians_charcoal_burners_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Small Charcoal Kiln"),
+   descname = pgettext ("frisians_building", "Charcoal Burner's House"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
@@ -31,16 +31,8 @@ tribes:new_productionsite_type {
          rows = 2,
          fps = 10
       },
-      working = {
-         directory = dirname,
-         basename = "working",
-         hotspot = {50, 82},
-         frames = 10,
-         columns = 5,
-         rows = 2,
-         fps = 10
-      }
    },
+
    animations = {
       unoccupied = {
          directory = dirname,
@@ -50,7 +42,8 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      basic_amount = 1
+      prohibited_till = 760,
+      requires_supporters = true,
    },
 
    working_positions = {
@@ -82,7 +75,7 @@ tribes:new_productionsite_type {
          },
       },
       erect_stack = {
-         -- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack because ...
          descname = _"making a charcoal stack",
          actions = {
             "return=skipped unless economy needs coal",
@@ -93,8 +86,8 @@ tribes:new_productionsite_type {
          },
       },
       collect_coal = {
-         -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
-         descname = _"fishing",
+         -- TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
+         descname = _"collecting coal",
          actions = {
             "return=skipped unless economy needs coal",
             "sleep=10000",
@@ -107,7 +100,7 @@ tribes:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Ponds",
       heading = _"Out of Clay Ponds",
-      message = pgettext ("frisians_building", "The charcoal burner working at this small charcoal kiln can’t find any clay ponds in his work area. Please make sure there is a working clay pit nearby and the charcoal kiln is supplied with all needed wares, or consider dismantling or destroying this building."),
+      message = pgettext ("frisians_building", "The charcoal burner working at this charcoal burner's house can’t find any clay ponds in his work area. Please make sure there is a working clay pit nearby and the charcoal kiln is supplied with all needed wares, or consider dismantling or destroying this building."),
       productivity_threshold = 12
    },
 }
