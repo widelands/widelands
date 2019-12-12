@@ -412,7 +412,11 @@ void FullscreenMenuOptions::layout() {
 	write_syncstreams_.set_desired_size(tab_panel_width, write_syncstreams_.get_h());
 
 	// Game options
+	auto_roadbuild_mode_.set_desired_size(tab_panel_width, auto_roadbuild_mode_.get_h());
 	transparent_chat_.set_desired_size(tab_panel_width, transparent_chat_.get_h());
+	single_watchwin_.set_desired_size(tab_panel_width, single_watchwin_.get_h());
+	ctrl_zoom_.set_desired_size(tab_panel_width, ctrl_zoom_.get_h());
+	game_clock_.set_desired_size(tab_panel_width, game_clock_.get_h());
 }
 
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
