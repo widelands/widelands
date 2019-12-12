@@ -111,8 +111,9 @@ void draw_view_window(const Map& map,
 	}
 	}
 
-	const int width = zoom ? map.get_width() * 2 : map.get_width();
-	const int height = zoom ? map.get_height() * 2 : map.get_height();
+	const int width = zoom ? map.get_width() * 2 * scale_map(map) : map.get_width() * scale_map(map);
+	const int height =
+	   zoom ? map.get_height() * 2 * scale_map(map) : map.get_height() * scale_map(map);
 	const auto make_red = [width, height, &texture](int x, int y) {
 		if (x < 0) {
 			x += width;
@@ -160,15 +161,16 @@ void do_draw_minimap(Texture* texture,
 	const int32_t mapwidth = map.get_width();
 
 	for (uint32_t y = 0; y < surface_h; ++y) {
-		Widelands::Coords coords(
-		   Widelands::Coords(top_left.x, top_left.y + ((layers & MiniMapLayer::Zoom2) ? y / 2 : y)));
-		map.normalize_coords(coords);
-		Widelands::FCoords f = map.get_fcoords(coords);
-		Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
 		for (uint32_t x = 0; x < surface_w; ++x) {
-			if (x % 2 || !(layers & MiniMapLayer::Zoom2)) {
-				move_r(mapwidth, f, i);
-			}
+			Widelands::Coords coords(Widelands::Coords(
+			   top_left.x +
+			      ((layers & MiniMapLayer::Zoom2) ? x / (2 * scale_map(map)) : x / scale_map(map)),
+			   top_left.y +
+			      ((layers & MiniMapLayer::Zoom2) ? y / (2 * scale_map(map)) : y / scale_map(map))));
+			map.normalize_coords(coords);
+			Widelands::FCoords f = map.get_fcoords(coords);
+			Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
+			move_r(mapwidth, f, i);
 
 			uint16_t vision = 0;  // See Player::Field::Vision: 1 if seen once, > 1 if seen right now.
 			Widelands::PlayerNumber owner = 0;
@@ -215,7 +217,7 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
 		break;
 	}
 
-	const float multiplier = zoom ? 2.f : 1.f;
+	const float multiplier = zoom ? 2.f * scale_map(map) : 1.f * scale_map(map);
 	Vector2f map_pixel = top_left + Vector2f(minimap_pixel.x / multiplier * kTriangleWidth,
 	                                         minimap_pixel.y / multiplier * kTriangleHeight);
 	MapviewPixelFunctions::normalize_pix(map, &map_pixel);
@@ -231,8 +233,10 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	//       necessary. The created texture could be cached and only redrawn two
 	//       or three times per second
 	const Map& map = egbase.map();
-	const int16_t map_w = (layers & MiniMapLayer::Zoom2) ? map.get_width() * 2 : map.get_width();
-	const int16_t map_h = (layers & MiniMapLayer::Zoom2) ? map.get_height() * 2 : map.get_height();
+	const int16_t map_w = (layers & MiniMapLayer::Zoom2) ? map.get_width() * 2 * scale_map(map) :
+	                                                       map.get_width() * scale_map(map);
+	const int16_t map_h = (layers & MiniMapLayer::Zoom2) ? map.get_height() * 2 * scale_map(map) :
+	                                                       map.get_height() * scale_map(map);
 
 	std::unique_ptr<Texture> texture(new Texture(map_w, map_h));
 
@@ -255,4 +259,14 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	texture->unlock(Texture::Unlock_Update);
 
 	return texture;
+}
+
+int scale_map(const Widelands::Map& map) {
+	const uint16_t map_w = map.get_width();
+	const uint16_t map_h = map.get_height();
+	if (!(map_w > 300)) {
+		int longest_axis = (map_w >= map_h ? map_w : map_h);
+		return (300 - (300 % longest_axis)) / longest_axis;
+	}
+	return 1;
 }

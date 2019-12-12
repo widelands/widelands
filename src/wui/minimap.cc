@@ -72,7 +72,7 @@ bool MiniMap::View::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 
 void MiniMap::View::set_zoom(int32_t z) {
 	const Widelands::Map& map = ibase_.egbase().map();
-	set_size((map.get_width() * z), (map.get_height()) * z);
+	set_size(map.get_width() * z * scale_map(map), map.get_height() * z * scale_map(map));
 }
 
 /*
@@ -95,10 +95,10 @@ destructor
 ===============
 */
 inline uint32_t MiniMap::number_of_buttons_per_row() const {
-	return 3;
+	return 6;
 }
 inline uint32_t MiniMap::number_of_button_rows() const {
-	return 2;
+	return 1;
 }
 inline uint32_t MiniMap::but_w() const {
 	return view_.get_w() / number_of_buttons_per_row();
@@ -207,19 +207,24 @@ void MiniMap::toggle(MiniMapLayer const button) {
 void MiniMap::resize() {
 	view_.set_zoom((*view_.minimap_layers_ & MiniMapLayer::Zoom2) ? 2 : 1);
 	set_inner_size(view_.get_w(), view_.get_h() + number_of_button_rows() * but_h());
-	button_terrn.set_pos(Vector2i(but_w() * 0, view_.get_h() + but_h() * 0));
+	button_terrn.set_pos(Vector2i(but_w() * 0, view_.get_h()));
 	button_terrn.set_size(but_w(), but_h());
-	button_owner.set_pos(Vector2i(but_w() * 1, view_.get_h() + but_h() * 0));
+	button_owner.set_pos(Vector2i(but_w() * 1, view_.get_h()));
 	button_owner.set_size(but_w(), but_h());
-	button_flags.set_pos(Vector2i(but_w() * 2, view_.get_h() + but_h() * 0));
+	button_flags.set_pos(Vector2i(but_w() * 2, view_.get_h()));
 	button_flags.set_size(but_w(), but_h());
-	button_roads.set_pos(Vector2i(but_w() * 0, view_.get_h() + but_h() * 1));
+	button_roads.set_pos(Vector2i(but_w() * 3, view_.get_h()));
 	button_roads.set_size(but_w(), but_h());
-	button_bldns.set_pos(Vector2i(but_w() * 1, view_.get_h() + but_h() * 1));
+	button_bldns.set_pos(Vector2i(but_w() * 4, view_.get_h()));
 	button_bldns.set_size(but_w(), but_h());
-	button_zoom.set_pos(Vector2i(but_w() * 2, view_.get_h() + but_h() * 1));
+	button_zoom.set_pos(Vector2i(but_w() * 5, view_.get_h()));
 	button_zoom.set_size(but_w(), but_h());
+	if ((view_.get_w() > 300 || view_.get_h() > 300) &&
+	    !(*view_.minimap_layers_ & MiniMapLayer::Zoom2)) {
+		button_zoom.set_enabled(false);
+	}
 	move_inside_parent();
+	center_to_parent();
 }
 
 void MiniMap::update_button_permpressed() {
