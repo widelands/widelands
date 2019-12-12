@@ -25,7 +25,7 @@ tribes:new_worker_type {
       make_stack = {
          "findobject=attrib:pond_dry radius:8",
          "walk=object",
-         "animate=stacking 2000",
+         "animate=stacking 5000",
          "callobject=with_stack",
          "return"
       }
