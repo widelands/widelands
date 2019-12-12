@@ -219,7 +219,7 @@ void MiniMap::resize() {
 	button_bldns.set_size(but_w(), but_h());
 	button_zoom.set_pos(Vector2i(but_w() * 5, view_.get_h()));
 	button_zoom.set_size(but_w(), but_h());
-	if ((view_.get_w() > 300 || view_.get_h() > 300) &&
+	if ((view_.get_w() > 300 || view_.get_h() > 300 || (get_h() <= 620 && view_.get_h() >= 290)) &&
 	    !(*view_.minimap_layers_ & MiniMapLayer::Zoom2)) {
 		button_zoom.set_enabled(false);
 	}
