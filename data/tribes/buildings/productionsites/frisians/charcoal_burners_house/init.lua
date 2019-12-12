@@ -60,7 +60,7 @@ tribes:new_productionsite_type {
 
    indicate_workarea_overlaps = {
       frisians_aqua_farm = false,
-      frisians_charcoal_kiln_small = false,
+      frisians_charcoal_burners_house = false,
       frisians_clay_pit = true,
    },
 
