@@ -266,7 +266,11 @@ int scale_map(const Widelands::Map& map) {
 	const uint16_t map_h = map.get_height();
 	if (!(map_w > 300)) {
 		int longest_axis = (map_w >= map_h ? map_w : map_h);
-		return (300 - (300 % longest_axis)) / longest_axis;
+		if (longest_axis <= 150) {
+			return (300 - (300 % longest_axis)) / longest_axis;
+		} else {
+			return (600 - (600 % longest_axis)) / longest_axis;
+		}
 	}
 	return 1;
 }
