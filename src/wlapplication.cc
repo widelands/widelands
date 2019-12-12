@@ -810,6 +810,7 @@ bool WLApplication::init_settings() {
 	// Undocumented on command line, appears in game options
 	get_config_bool("single_watchwin", false);
 	get_config_bool("ctrl_zoom", false);
+	get_config_bool("game_clock", true);
 	get_config_bool("inputgrab", false);
 	get_config_bool("transparent_chat", false);
 	// Undocumented. Unique ID used to allow the metaserver to recognize players

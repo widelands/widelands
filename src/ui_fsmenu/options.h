@@ -68,6 +68,7 @@ public:
 		bool transparent_chat;
 		bool single_watchwin;
 		bool ctrl_zoom;
+		bool game_clock;
 
 		// Language options
 		std::string language;
@@ -155,6 +156,7 @@ private:
 	UI::Checkbox transparent_chat_;
 	UI::Checkbox single_watchwin_;
 	UI::Checkbox ctrl_zoom_;
+	UI::Checkbox game_clock_;
 
 	OptionsCtrl::OptionsStruct os_;
 
