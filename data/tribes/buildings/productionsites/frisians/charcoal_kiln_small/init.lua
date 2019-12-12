@@ -111,4 +111,3 @@ tribes:new_productionsite_type {
       productivity_threshold = 12
    },
 }
-
