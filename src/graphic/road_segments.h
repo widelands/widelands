@@ -33,6 +33,6 @@ enum RoadSegment {
 
 bool is_bridge_segment(RoadSegment);
 
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_GRAPHIC_ROAD_SEGMENTS_H
