@@ -70,9 +70,9 @@ bool MiniMap::View::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	return true;
 }
 
-void MiniMap::View::set_zoom(int32_t z) {
+void MiniMap::View::set_zoom(const bool zoom) {
 	const Widelands::Map& map = ibase_.egbase().map();
-	set_size(map.get_width() * z * scale_map(map), map.get_height() * z * scale_map(map));
+	set_size(map.get_width() * scale_map(map, zoom), map.get_height() * scale_map(map, zoom));
 }
 
 /*
@@ -205,7 +205,7 @@ void MiniMap::toggle(MiniMapLayer const button) {
 }
 
 void MiniMap::resize() {
-	view_.set_zoom((*view_.minimap_layers_ & MiniMapLayer::Zoom2) ? 2 : 1);
+	view_.set_zoom((*view_.minimap_layers_ & MiniMapLayer::Zoom2) ? true : false);
 	set_inner_size(view_.get_w(), view_.get_h() + number_of_button_rows() * but_h());
 	button_terrn.set_pos(Vector2i(but_w() * 0, view_.get_h()));
 	button_terrn.set_size(but_w(), but_h());

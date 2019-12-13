@@ -90,7 +90,7 @@ void draw_view_window(const Map& map,
                       const MiniMapType minimap_type,
                       const bool zoom,
                       Texture* texture) {
-	const float divider = zoom ? 1.f : 2.f;
+	const float divider = zoom ? scale_map(map, false) : scale_map(map, true);
 	const int half_width =
 	   round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth / divider));
 	const int half_height =
@@ -105,15 +105,16 @@ void draw_view_window(const Map& map,
 	case MiniMapType::kStaticMap: {
 		Vector2f origin = view_area.center();
 		MapviewPixelFunctions::normalize_pix(map, &origin);
-		center_pixel =
-		   Vector2i(origin.x / kTriangleWidth, origin.y / kTriangleHeight) * (zoom ? 2 : 1);
+		center_pixel = Vector2i(origin.x / kTriangleWidth, origin.y / kTriangleHeight) *
+		               (zoom ? scale_map(map, true) : scale_map(map, false));
 		break;
 	}
 	}
 
-	const int width = zoom ? map.get_width() * 2 * scale_map(map) : map.get_width() * scale_map(map);
+	const int width =
+	   zoom ? map.get_width() * scale_map(map, true) : map.get_width() * scale_map(map, false);
 	const int height =
-	   zoom ? map.get_height() * 2 * scale_map(map) : map.get_height() * scale_map(map);
+	   zoom ? map.get_height() * scale_map(map, true) : map.get_height() * scale_map(map, false);
 	const auto make_red = [width, height, &texture](int x, int y) {
 		if (x < 0) {
 			x += width;
@@ -163,10 +164,10 @@ void do_draw_minimap(Texture* texture,
 	for (uint32_t y = 0; y < surface_h; ++y) {
 		for (uint32_t x = 0; x < surface_w; ++x) {
 			Widelands::Coords coords(Widelands::Coords(
-			   top_left.x +
-			      ((layers & MiniMapLayer::Zoom2) ? x / (2 * scale_map(map)) : x / scale_map(map)),
-			   top_left.y +
-			      ((layers & MiniMapLayer::Zoom2) ? y / (2 * scale_map(map)) : y / scale_map(map))));
+			   top_left.x + ((layers & MiniMapLayer::Zoom2) ? x / scale_map(map, true) :
+			                                                  x / scale_map(map, false)),
+			   top_left.y + ((layers & MiniMapLayer::Zoom2) ? y / scale_map(map, true) :
+			                                                  y / scale_map(map, false))));
 			map.normalize_coords(coords);
 			Widelands::FCoords f = map.get_fcoords(coords);
 			Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
@@ -217,7 +218,7 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
 		break;
 	}
 
-	const float multiplier = zoom ? 2.f * scale_map(map) : 1.f * scale_map(map);
+	const float multiplier = zoom ? scale_map(map, true) : scale_map(map, false);
 	Vector2f map_pixel = top_left + Vector2f(minimap_pixel.x / multiplier * kTriangleWidth,
 	                                         minimap_pixel.y / multiplier * kTriangleHeight);
 	MapviewPixelFunctions::normalize_pix(map, &map_pixel);
@@ -233,10 +234,10 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	//       necessary. The created texture could be cached and only redrawn two
 	//       or three times per second
 	const Map& map = egbase.map();
-	const int16_t map_w = (layers & MiniMapLayer::Zoom2) ? map.get_width() * 2 * scale_map(map) :
-	                                                       map.get_width() * scale_map(map);
-	const int16_t map_h = (layers & MiniMapLayer::Zoom2) ? map.get_height() * 2 * scale_map(map) :
-	                                                       map.get_height() * scale_map(map);
+	const int16_t map_w = (layers & MiniMapLayer::Zoom2) ? map.get_width() * scale_map(map, true) :
+	                                                       map.get_width() * scale_map(map, false);
+	const int16_t map_h = (layers & MiniMapLayer::Zoom2) ? map.get_height() * scale_map(map, true) :
+	                                                       map.get_height() * scale_map(map, false);
 
 	std::unique_ptr<Texture> texture(new Texture(map_w, map_h));
 
@@ -261,15 +262,19 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	return texture;
 }
 
-int scale_map(const Widelands::Map& map) {
+int scale_map(const Widelands::Map& map, const bool zoom) {
+	// If a map is wider than 300px we don't scale. Otherwise we fit as much as possible into a 300px
+	// or 400px MiniMap window when zoom is disabled. Zoom fits the map into a 600px MiniMap.
 	const uint16_t map_w = map.get_width();
 	const uint16_t map_h = map.get_height();
 	if (!(map_w > 300)) {
 		int longest_axis = (map_w >= map_h ? map_w : map_h);
-		if (longest_axis <= 150) {
-			return (300 - (300 % longest_axis)) / longest_axis;
-		} else {
+		if (zoom) {
 			return (600 - (600 % longest_axis)) / longest_axis;
+		} else if (longest_axis > 150) {
+			return (400 - (400 % longest_axis)) / longest_axis;
+		} else if (longest_axis < 300) {
+			return (300 - (300 % longest_axis)) / longest_axis;
 		}
 	}
 	return 1;
