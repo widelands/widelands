@@ -450,12 +450,11 @@ const MapView::View& MapView::view() const {
 	return view_;
 }
 
-void MapView::pan_by(Vector2i delta_pixels) {
+void MapView::pan_by(Vector2i delta_pixels, const Transition& transition) {
 	if (is_animating()) {
 		return;
 	}
-	set_view(
-	   {view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, view_.zoom}, Transition::Jump);
+	set_view({view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, view_.zoom}, transition);
 }
 
 void MapView::stop_dragging() {
@@ -496,7 +495,7 @@ bool MapView::handle_mousemove(
 
 	if (dragging_) {
 		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT)) {
-			pan_by(Vector2i(xdiff, ydiff));
+			pan_by(Vector2i(xdiff, ydiff), Transition::Jump);
 		} else {
 			stop_dragging();
 		}
@@ -587,9 +586,55 @@ Widelands::NodeAndTriangle<> MapView::track_sel(const Vector2i& p) {
 	return node_and_triangle;
 }
 
+bool MapView::scroll_map() {
+	// arrow keys
+	const bool kUP = get_key_state(SDL_SCANCODE_UP);
+	const bool kDOWN = get_key_state(SDL_SCANCODE_DOWN);
+	const bool kLEFT = get_key_state(SDL_SCANCODE_LEFT);
+	const bool kRIGHT = get_key_state(SDL_SCANCODE_RIGHT);
+
+	// numpad keys
+	const bool kNumlockOff = !(SDL_GetModState() & KMOD_NUM);
+#define kNP(x) const bool kNP##x = kNumlockOff && get_key_state(SDL_SCANCODE_KP_##x);
+	kNP(1) kNP(2) kNP(3) kNP(4) kNP(6) kNP(7) kNP(8) kNP(9)
+#undef kNP
+
+	   // set the scrolling distance
+	   const uint8_t denominator =
+	      ((SDL_GetModState() & KMOD_CTRL) ? 4 : (SDL_GetModState() & KMOD_SHIFT) ? 16 : 8);
+	const uint16_t scroll_distance_y = g_gr->get_yres() / denominator;
+	const uint16_t scroll_distance_x = g_gr->get_xres() / denominator;
+	int32_t distance_to_scroll_x = 0;
+	int32_t distance_to_scroll_y = 0;
+
+	// check the directions
+	if (kUP || kNP7 || kNP8 || kNP9) {
+		distance_to_scroll_y -= scroll_distance_y;
+	}
+	if (kDOWN || kNP1 || kNP2 || kNP3) {
+		distance_to_scroll_y += scroll_distance_y;
+	}
+	if (kLEFT || kNP1 || kNP4 || kNP7) {
+		distance_to_scroll_x -= scroll_distance_x;
+	}
+	if (kRIGHT || kNP3 || kNP6 || kNP9) {
+		distance_to_scroll_x += scroll_distance_x;
+	}
+
+	// do the actual scrolling
+	if (distance_to_scroll_x == 0 && distance_to_scroll_y == 0) {
+		return false;
+	}
+	pan_by(Vector2i(distance_to_scroll_x, distance_to_scroll_y), Transition::Smooth);
+	return true;
+}
+
 bool MapView::handle_key(bool down, SDL_Keysym code) {
 	if (!down) {
 		return false;
+	}
+	if (scroll_map()) {
+		return true;
 	}
 	if (!(code.mod & KMOD_CTRL)) {
 		return false;

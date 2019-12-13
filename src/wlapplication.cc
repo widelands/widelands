@@ -582,7 +582,7 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 		case SDLK_f: {
 			// Toggle fullscreen
 			const uint32_t time = SDL_GetTicks();
-			if (time - last_resolution_change_ > 250) {
+			if ((time - last_resolution_change_ > 250) && (ctrl)) {
 				last_resolution_change_ = time;
 				bool value = !g_gr->fullscreen();
 				g_gr->set_fullscreen(value);
