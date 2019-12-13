@@ -530,6 +530,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/frisians/berry_farm/init.lua"
       include "tribes/buildings/productionsites/frisians/collectors_house/init.lua"
       include "tribes/buildings/productionsites/frisians/clay_pit/init.lua"
+      include "tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua"
       --Frisians medium
       include "tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua"
       include "tribes/buildings/productionsites/frisians/bakery/init.lua"
