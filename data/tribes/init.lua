@@ -177,6 +177,8 @@ print_loading_message("┗━ took", function()
       include "tribes/immovables/grapevine/ripe/init.lua"
       include "tribes/immovables/grapevine/small/init.lua"
       include "tribes/immovables/grapevine/tiny/init.lua"
+      include "tribes/immovables/pond/burning/init.lua"
+      include "tribes/immovables/pond/coal/init.lua"
       include "tribes/immovables/pond/growing/init.lua"
       include "tribes/immovables/pond/mature/init.lua"
       include "tribes/immovables/pond/dry/init.lua"
