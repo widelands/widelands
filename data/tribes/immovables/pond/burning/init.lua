@@ -4,14 +4,14 @@ tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "pond_burning",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
-   descname = pgettext ("immovable", "Pond With burning Charcoal Stack"),
+   descname = pgettext ("immovable", "Burning Charcoal Stack"),
    icon = dirname .. "menu.png",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = {},
    programs = {
       program = {
-         "animate=idle 50000",
+         "animate=idle 60000",
          "transform=pond_coal",
       },
    },

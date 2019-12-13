@@ -82,7 +82,7 @@ tribes:new_productionsite_type {
             "return=failed unless site has log:3",
             "callworker=make_stack",
             "consume=log:3",
-            "sleep=10000",
+            "sleep=15000",
          },
       },
       collect_coal = {
@@ -90,7 +90,7 @@ tribes:new_productionsite_type {
          descname = _"collecting coal",
          actions = {
             "return=skipped unless economy needs coal",
-            "sleep=10000",
+            "sleep=15000",
             "callworker=collect_coal",
          },
       },
