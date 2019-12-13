@@ -224,7 +224,7 @@ ferry_5 = {
    title = _"There is more to it…",
    body = (
       h1(_"Ferry Yards") ..
-      p(_[[Ferries are built in ferry yards. A ferry yard is a medium-sized building that needs to be built close to the shore. A ferry costs 3 logs and is quickly constructed. When you build a waterway, the closest idle ferry will assign itself to it.]]) ..
+      p(_[[Ferries are built in ferry yards. A ferry yard is a medium-sized building that needs to be built close to the shore. A ferry costs two logs and one piece of cloth and is quickly constructed. When you build a waterway, the closest idle ferry will assign itself to it.]]) ..
       p(_[[Now it’s your turn: Build a gold mine on the mountain in the south and connect it to the main land by building waterways over the streams.]])
    ),
    h = 200,
