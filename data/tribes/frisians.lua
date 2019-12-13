@@ -269,6 +269,7 @@ tribes:new_tribe {
       "frisians_reed_farm",
       "frisians_well",
       "frisians_clay_pit",
+      "frisians_charcoal_burners_house",
       "frisians_berry_farm",
       "frisians_collectors_house",
       "frisians_beekeepers_house",
