@@ -159,6 +159,7 @@ public:
 	 * Lua methods
 	 */
 	int new_carrier_type(lua_State* L);
+	int new_ferry_type(lua_State* L);
 	int new_constructionsite_type(lua_State* L);
 	int new_dismantlesite_type(lua_State* L);
 	int new_immovable_type(lua_State* L);

@@ -496,21 +496,29 @@ bool ProductionSite::init(EditorGameBase& egbase) {
  *
  * \note Workers are dealt with in the PlayerImmovable code.
  */
-void ProductionSite::set_economy(Economy* const e) {
-	if (Economy* const old = get_economy()) {
+void ProductionSite::set_economy(Economy* const e, WareWorker type) {
+	if (Economy* const old = get_economy(type)) {
 		for (InputQueue* ip_queue : input_queues_) {
-			ip_queue->remove_from_economy(*old);
+			if (ip_queue->get_type() == type) {
+				ip_queue->remove_from_economy(*old);
+			}
 		}
 	}
 
-	Building::set_economy(e);
-	for (uint32_t i = descr().nr_working_positions(); i;)
-		if (Request* const r = working_positions_[--i].worker_request)
-			r->set_economy(e);
+	Building::set_economy(e, type);
+	for (uint32_t i = descr().nr_working_positions(); i;) {
+		if (Request* const r = working_positions_[--i].worker_request) {
+			if (r->get_type() == type) {
+				r->set_economy(e);
+			}
+		}
+	}
 
 	if (e) {
 		for (InputQueue* ip_queue : input_queues_) {
-			ip_queue->add_to_economy(*e);
+			if (ip_queue->get_type() == type) {
+				ip_queue->add_to_economy(*e);
+			}
 		}
 	}
 }
@@ -781,7 +789,8 @@ void ProductionSite::log_general_info(const EditorGameBase& egbase) const {
 
 void ProductionSite::set_stopped(bool const stopped) {
 	is_stopped_ = stopped;
-	get_economy()->rebalance_supply();
+	get_economy(wwWARE)->rebalance_supply();
+	get_economy(wwWORKER)->rebalance_supply();
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 }
 
@@ -1092,9 +1101,8 @@ void ProductionSite::update_crude_statistics(uint32_t duration, const bool produ
 		duration = duration_cap;
 	}
 	const uint32_t past_duration = entire_duration - duration;
-	crude_percent_ =
-	   (crude_percent_ * past_duration + produced * duration * 10000) / entire_duration;
-	assert(crude_percent_ <= 10000);  // be sure we do not go above 100 %
+	crude_percent_ = (crude_percent_ * past_duration + produced * duration * 1000) / entire_duration;
+	assert(crude_percent_ <= 1000);  // be sure we do not go above 100 %
 }
 
 }  // namespace Widelands

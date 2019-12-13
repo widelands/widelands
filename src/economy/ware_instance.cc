@@ -25,9 +25,9 @@
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
-#include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
+#include "economy/ship_fleet.h"
 #include "economy/transfer.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -216,18 +216,19 @@ void WareInstance::cleanup(EditorGameBase& egbase) {
  * Ware accounting
  */
 void WareInstance::set_economy(Economy* const e) {
+	assert(!e || e->type() == wwWARE);
 	if (descr_index_ == INVALID_INDEX || economy_ == e)
 		return;
 
 	if (economy_)
-		economy_->remove_wares(descr_index_, 1);
+		economy_->remove_wares_or_workers(descr_index_, 1);
 
 	economy_ = e;
 	if (supply_)
 		supply_->set_economy(e);
 
 	if (economy_)
-		economy_->add_wares(descr_index_, 1);
+		economy_->add_wares_or_workers(descr_index_, 1);
 }
 
 /**
@@ -247,13 +248,13 @@ void WareInstance::set_location(EditorGameBase& egbase, MapObject* const locatio
 		Economy* eco = nullptr;
 
 		if (upcast(Flag const, flag, location))
-			eco = flag->get_economy();
+			eco = flag->get_economy(wwWARE);
 		else if (upcast(Worker const, worker, location))
-			eco = worker->get_economy();
+			eco = worker->get_economy(wwWARE);
 		else if (upcast(PortDock const, portdock, location))
-			eco = portdock->get_economy();
+			eco = portdock->get_economy(wwWARE);
 		else if (upcast(Ship const, ship, location))
-			eco = ship->get_economy();
+			eco = ship->get_economy(wwWARE);
 		else
 			throw wexception("WareInstance delivered to bad location %u", location->serial());
 

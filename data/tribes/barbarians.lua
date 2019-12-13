@@ -21,7 +21,7 @@ tribes:new_tribe {
       }
    },
 
-   -- Image file paths for this tribe's road textures
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
          image_dirname .. "roadt_busy.png",
@@ -29,6 +29,9 @@ tribes:new_tribe {
       normal = {
          image_dirname .. "roadt_normal_00.png",
          image_dirname .. "roadt_normal_01.png",
+      },
+      waterway = {
+         "tribes/images/barbarians/waterway_0.png",
       },
    },
 
@@ -125,6 +128,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "barbarians_carrier",
+         "barbarians_ferry",
          "barbarians_ox",
          "barbarians_cattlebreeder"
       },
@@ -232,13 +236,11 @@ tribes:new_tribe {
       "barbarians_metal_workshop",
       "barbarians_warmill",
       "barbarians_ax_workshop",
-      "barbarians_shipyard",
       "barbarians_barracks",
 
       -- Big
       "barbarians_cattlefarm",
       "barbarians_farm",
-      "barbarians_weaving_mill",
       "barbarians_helmsmithy",
 
       -- Mines
@@ -263,6 +265,11 @@ tribes:new_tribe {
       "barbarians_tower",
       "barbarians_fortress",
       "barbarians_citadel",
+
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      "barbarians_ferry_yard",
+      "barbarians_shipyard",
+      "barbarians_weaving_mill",
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
@@ -313,6 +320,7 @@ tribes:new_tribe {
    geologist = "barbarians_geologist",
    soldier = "barbarians_soldier",
    ship = "barbarians_ship",
+   ferry = "barbarians_ferry",
    port = "barbarians_port",
    ironore = "iron_ore",
    rawlog = "log",

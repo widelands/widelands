@@ -83,6 +83,8 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 	// A spectator cannot build roads.
 	assert(road_building_overlays().steepness_indicators.empty());
 	assert(road_building_overlays().road_previews.empty());
+	assert(waterway_building_overlays().steepness_indicators.empty());
+	assert(waterway_building_overlays().road_previews.empty());
 
 	// In-game, selection can never be on triangles or have a radius.
 	assert(get_sel_radius() == 0);

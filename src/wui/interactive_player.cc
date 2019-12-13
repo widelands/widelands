@@ -31,6 +31,7 @@
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -39,6 +40,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
+#include "logic/roadtype.h"
 #include "ui_basic/unique_window.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
@@ -387,6 +389,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	Workareas workareas = get_workarea_overlays(map);
 	auto* fields_to_draw = given_map_view->draw_terrain(gbase, workareas, false, dst);
 	const auto& road_building = road_building_overlays();
+	const auto& waterway_building = waterway_building_overlays();
 
 	const float scale = 1.f / given_map_view->view().zoom;
 
@@ -399,7 +402,9 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		// Adjust this field for visibility for this player.
 		if (!plr.see_all()) {
 			f->brightness = adjusted_field_brightness(f->fcoords, gametime, player_field);
-			f->roads = player_field.roads;
+			f->road_e = player_field.r_e;
+			f->road_se = player_field.r_se;
+			f->road_sw = player_field.r_sw;
 			f->vision = player_field.vision;
 			if (player_field.vision == 1) {
 				f->owner = player_field.owner != 0 ? gbase.get_player(player_field.owner) : nullptr;
@@ -409,9 +414,43 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		// Add road building overlays if applicable.
 		if (f->vision > 0) {
-			const auto it = road_building.road_previews.find(f->fcoords);
-			if (it != road_building.road_previews.end()) {
-				f->roads |= it->second;
+			const auto rinfo = road_building.road_previews.find(f->fcoords);
+			if (rinfo != road_building.road_previews.end()) {
+				for (uint8_t dir : rinfo->second) {
+					switch (dir) {
+					case Widelands::WALK_E:
+						f->road_e = Widelands::RoadType::kNormal;
+						break;
+					case Widelands::WALK_SE:
+						f->road_se = Widelands::RoadType::kNormal;
+						break;
+					case Widelands::WALK_SW:
+						f->road_sw = Widelands::RoadType::kNormal;
+						break;
+					default:
+						throw wexception(
+						   "Attempt to set road-building overlay for invalid direction %i", dir);
+					}
+				}
+			}
+			const auto winfo = waterway_building.road_previews.find(f->fcoords);
+			if (winfo != waterway_building.road_previews.end()) {
+				for (uint8_t dir : winfo->second) {
+					switch (dir) {
+					case Widelands::WALK_E:
+						f->road_e = Widelands::RoadType::kWaterway;
+						break;
+					case Widelands::WALK_SE:
+						f->road_se = Widelands::RoadType::kWaterway;
+						break;
+					case Widelands::WALK_SW:
+						f->road_sw = Widelands::RoadType::kWaterway;
+						break;
+					default:
+						throw wexception(
+						   "Attempt to set waterway-building overlay for invalid direction %i", dir);
+					}
+				}
 			}
 
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
@@ -453,10 +492,16 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 			// Draw road building slopes.
 			{
-				const auto it = road_building.steepness_indicators.find(f->fcoords);
-				if (it != road_building.steepness_indicators.end()) {
-					blit_field_overlay(dst, *f, it->second,
-					                   Vector2i(it->second->width() / 2, it->second->height() / 2),
+				const auto itb = road_building.steepness_indicators.find(f->fcoords);
+				if (itb != road_building.steepness_indicators.end()) {
+					blit_field_overlay(dst, *f, itb->second,
+					                   Vector2i(itb->second->width() / 2, itb->second->height() / 2),
+					                   scale);
+				}
+				const auto itw = waterway_building.steepness_indicators.find(f->fcoords);
+				if (itw != waterway_building.steepness_indicators.end()) {
+					blit_field_overlay(dst, *f, itw->second,
+					                   Vector2i(itw->second->width() / 2, itw->second->height() / 2),
 					                   scale);
 				}
 			}
@@ -491,7 +536,7 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 				return;
 			}
 
-		if (!is_building_road()) {
+		if (!is_building_road() && !is_building_waterway()) {
 			if (try_show_ship_window())
 				return;
 		}
@@ -578,7 +623,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
 			return true;
 
-		case SDLK_KP_7:
+		case SDLK_KP_5:
 			if (code.mod & KMOD_NUM)
 				break;
 			FALLS_THROUGH;

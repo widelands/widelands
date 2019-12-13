@@ -718,20 +718,28 @@ std::string to_string(const MapObjectType type) {
 		return "worker";
 	case MapObjectType::CARRIER:
 		return "carrier";
+	case MapObjectType::FERRY:
+		return "ferry";
 	case MapObjectType::SOLDIER:
 		return "soldier";
 	case MapObjectType::WARE:
 		return "ware";
 	case MapObjectType::BATTLE:
 		return "battle";
-	case MapObjectType::FLEET:
-		return "fleet";
+	case MapObjectType::SHIP_FLEET:
+		return "ship_fleet";
+	case MapObjectType::FERRY_FLEET:
+		return "ferry_fleet";
 	case MapObjectType::IMMOVABLE:
 		return "immovable";
 	case MapObjectType::FLAG:
 		return "flag";
 	case MapObjectType::ROAD:
 		return "road";
+	case MapObjectType::WATERWAY:
+		return "waterway";
+	case MapObjectType::ROADBASE:
+		return "roadbase";
 	case MapObjectType::PORTDOCK:
 		return "portdock";
 	case MapObjectType::BUILDING:

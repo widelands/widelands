@@ -216,6 +216,7 @@ print_loading_message("┗━ took", function()
    print_loading_message("┃    Workers", function()
       egbase:set_loading_message(_("Loading tribes: Atlantean workers (4/15)"))
       include "tribes/workers/atlanteans/carrier/init.lua"
+      include "tribes/workers/atlanteans/ferry/init.lua"
       include "tribes/workers/atlanteans/armorsmith/init.lua"
       include "tribes/workers/atlanteans/baker/init.lua"
       include "tribes/workers/atlanteans/blackroot_farmer/init.lua"
@@ -248,6 +249,7 @@ print_loading_message("┗━ took", function()
 
       egbase:set_loading_message(_("Loading tribes: Barbarian workers (5/15)"))
       include "tribes/workers/barbarians/carrier/init.lua"
+      include "tribes/workers/barbarians/ferry/init.lua"
       include "tribes/workers/barbarians/baker/init.lua"
       include "tribes/workers/barbarians/blacksmith_master/init.lua"
       include "tribes/workers/barbarians/blacksmith/init.lua"
@@ -282,6 +284,7 @@ print_loading_message("┗━ took", function()
 
       egbase:set_loading_message(_("Loading tribes: Empire workers (6/15)"))
       include "tribes/workers/empire/carrier/init.lua"
+      include "tribes/workers/empire/ferry/init.lua"
       include "tribes/workers/empire/armorsmith/init.lua"
       include "tribes/workers/empire/baker/init.lua"
       include "tribes/workers/empire/brewer/init.lua"
@@ -317,6 +320,7 @@ print_loading_message("┗━ took", function()
 
       egbase:set_loading_message(_("Loading tribes: Frisian workers (7/15)"))
       include "tribes/workers/frisians/carrier/init.lua"
+      include "tribes/workers/frisians/ferry/init.lua"
       include "tribes/workers/frisians/reindeer/init.lua"
       include "tribes/workers/frisians/builder/init.lua"
       include "tribes/workers/frisians/soldier/init.lua"
@@ -398,6 +402,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/atlanteans/bakery/init.lua"
       include "tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua"
       include "tribes/buildings/productionsites/atlanteans/smelting_works/init.lua"
+      include "tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua"
       include "tribes/buildings/productionsites/atlanteans/shipyard/init.lua"
       include "tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua"
       include "tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua"
@@ -438,6 +443,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/barbarians/tavern/init.lua"
       include "tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua"
       include "tribes/buildings/productionsites/barbarians/smelting_works/init.lua"
+      include "tribes/buildings/productionsites/barbarians/ferry_yard/init.lua"
       include "tribes/buildings/productionsites/barbarians/shipyard/init.lua"
       include "tribes/buildings/productionsites/barbarians/warmill/init.lua"
       include "tribes/buildings/productionsites/barbarians/ax_workshop/init.lua"
@@ -481,6 +487,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/empire/tavern/init.lua"
       include "tribes/buildings/productionsites/empire/charcoal_kiln/init.lua"
       include "tribes/buildings/productionsites/empire/smelting_works/init.lua"
+      include "tribes/buildings/productionsites/empire/ferry_yard/init.lua"
       include "tribes/buildings/productionsites/empire/shipyard/init.lua"
       include "tribes/buildings/productionsites/empire/toolsmithy/init.lua"
       include "tribes/buildings/productionsites/empire/armorsmithy/init.lua"
@@ -540,6 +547,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/frisians/brewery/init.lua"
       include "tribes/buildings/productionsites/frisians/weaving_mill/init.lua"
       include "tribes/buildings/productionsites/frisians/smokery/init.lua"
+      include "tribes/buildings/productionsites/frisians/ferry_yard/init.lua"
       include "tribes/buildings/productionsites/frisians/shipyard/init.lua"
       include "tribes/buildings/productionsites/frisians/furnace/init.lua"
       include "tribes/buildings/productionsites/frisians/recycling_center/init.lua"

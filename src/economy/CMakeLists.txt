@@ -8,10 +8,10 @@ wl_library(economy
     economy_data_packet.h
     expedition_bootstrap.cc
     expedition_bootstrap.h
+    ferry_fleet.cc
+    ferry_fleet.h
     flag.cc
     flag.h
-    fleet.cc
-    fleet.h
     idleworkersupply.cc
     idleworkersupply.h
     iroute.h
@@ -20,6 +20,8 @@ wl_library(economy
     portdock.h
     request.cc
     request.h
+    roadbase.cc
+    roadbase.h
     road.cc
     road.h
     route.cc
@@ -29,6 +31,8 @@ wl_library(economy
     router.cc
     router.h
     routing_node.h
+    ship_fleet.cc
+    ship_fleet.h
     shippingitem.cc
     shippingitem.h
     supply.h
@@ -44,6 +48,8 @@ wl_library(economy
     input_queue.h
     wares_queue.cc
     wares_queue.h
+    waterway.cc
+    waterway.h
     workers_queue.cc
     workers_queue.h
   DEPENDS
