@@ -10,7 +10,7 @@ terrain_affinity = {
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_stink_tree_tiny",
-   descname = _ "Stink Shepherd's Tree (tiny)",
+   descname = _ "Stink Shepherd’s Tree (tiny)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "tiny/menu.png",
@@ -26,9 +26,9 @@ tribes:new_immovable_type {
       idle = {
          directory = dirname .. "tiny",
          basename = "idle",
-         hotspot = {10, 9},
-         frames = 4,
-         columns = 2,
+         hotspot = {12, 10},
+         frames = 10,
+         columns = 5,
          rows = 2,
       }
    }
@@ -37,7 +37,7 @@ tribes:new_immovable_type {
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_stink_tree_small",
-   descname = _ "Stink Shepherd's Tree (small)",
+   descname = _ "Stink Shepherd’s Tree (small)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "small/menu.png",
@@ -53,9 +53,9 @@ tribes:new_immovable_type {
       idle = {
          directory = dirname .. "small",
          basename = "idle",
-         hotspot = {19, 21},
-         frames = 4,
-         columns = 2,
+         hotspot = {26, 22},
+         frames = 10,
+         columns = 5,
          rows = 2,
       }
    }
@@ -64,7 +64,7 @@ tribes:new_immovable_type {
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_stink_tree_medium",
-   descname = _ "Stink Shepherd's Tree (medium)",
+   descname = _ "Stink Shepherd’s Tree (medium)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "medium/menu.png",
@@ -80,9 +80,9 @@ tribes:new_immovable_type {
       idle = {
          directory = dirname .. "medium",
          basename = "idle",
-         hotspot = {21, 27},
-         frames = 4,
-         columns = 2,
+         hotspot = {36, 34},
+         frames = 10,
+         columns = 5,
          rows = 2,
       }
    }
@@ -91,7 +91,7 @@ tribes:new_immovable_type {
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_stink_tree_ripe",
-   descname = _ "Stink Shepherd's Tree (ripe)",
+   descname = _ "Stink Shepherd’s Tree (ripe)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "ripe/menu.png",
@@ -110,9 +110,9 @@ tribes:new_immovable_type {
       idle = {
          directory = dirname .. "ripe",
          basename = "idle",
-         hotspot = {21, 27},
-         frames = 4,
-         columns = 2,
+         hotspot = {36, 34},
+         frames = 10,
+         columns = 5,
          rows = 2,
       }
    }
