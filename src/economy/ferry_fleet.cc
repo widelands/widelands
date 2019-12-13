@@ -228,11 +228,13 @@ void FerryFleet::add_ferry(Ferry* ferry) {
 }
 
 void FerryFleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
-	std::vector<Ferry*>::iterator it = std::find(ferries_.begin(), ferries_.end(), ferry);
-	if (it != ferries_.end()) {
-		*it = ferries_.back();
-		ferries_.pop_back();
+	auto it = std::find(ferries_.begin(), ferries_.end(), ferry);
+	if (it == ferries_.end()) {
+		log("FerryFleet %u: Requested to remove ferry %u which is not in this fleet\n", serial(),
+		    ferry ? ferry->serial() : 0);
+		return;
 	}
+	ferries_.erase(it);
 	ferry->set_fleet(nullptr);
 
 	if (ferry->get_location(egbase)) {
