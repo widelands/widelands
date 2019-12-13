@@ -40,7 +40,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
-#include "logic/roadtype.h"
 #include "ui_basic/unique_window.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
@@ -419,13 +418,13 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				for (uint8_t dir : rinfo->second) {
 					switch (dir) {
 					case Widelands::WALK_E:
-						f->road_e = Widelands::RoadType::kNormal;
+						f->road_e = Widelands::RoadSegment::kNormal;
 						break;
 					case Widelands::WALK_SE:
-						f->road_se = Widelands::RoadType::kNormal;
+						f->road_se = Widelands::RoadSegment::kNormal;
 						break;
 					case Widelands::WALK_SW:
-						f->road_sw = Widelands::RoadType::kNormal;
+						f->road_sw = Widelands::RoadSegment::kNormal;
 						break;
 					default:
 						throw wexception(
@@ -438,13 +437,13 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				for (uint8_t dir : winfo->second) {
 					switch (dir) {
 					case Widelands::WALK_E:
-						f->road_e = Widelands::RoadType::kWaterway;
+						f->road_e = Widelands::RoadSegment::kWaterway;
 						break;
 					case Widelands::WALK_SE:
-						f->road_se = Widelands::RoadType::kWaterway;
+						f->road_se = Widelands::RoadSegment::kWaterway;
 						break;
 					case Widelands::WALK_SW:
-						f->road_sw = Widelands::RoadType::kWaterway;
+						f->road_sw = Widelands::RoadSegment::kWaterway;
 						break;
 					default:
 						throw wexception(

@@ -25,11 +25,11 @@
 
 #include <SDL_keycode.h>
 
+#include "graphic/road_segments.h"
 #include "graphic/toolbar_imageset.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
-#include "logic/roadtype.h"
 #include "notifications/notifications.h"
 #include "sound/note_sound.h"
 #include "ui_basic/box.h"

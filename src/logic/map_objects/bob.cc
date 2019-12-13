@@ -712,41 +712,35 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 		map.get_brn(end, &start);
 		spos.x += triangle_w / 2.f;
 		spos.y += triangle_h;
-		bridge = end.field->road_southeast == RoadType::kBridgeNormal ||
-		         end.field->road_southeast == RoadType::kBridgeBusy;
+		bridge = is_bridge_segment(end.field->road_southeast);
 		break;
 	case WALK_NE:
 		map.get_bln(end, &start);
 		spos.x -= triangle_w / 2.f;
 		spos.y += triangle_h;
-		bridge = end.field->road_southwest == RoadType::kBridgeNormal ||
-		         end.field->road_southwest == RoadType::kBridgeBusy;
+		bridge = is_bridge_segment(end.field->road_southwest);
 		break;
 	case WALK_W:
 		map.get_rn(end, &start);
 		spos.x += triangle_w;
-		bridge = end.field->road_east == RoadType::kBridgeNormal ||
-		         end.field->road_east == RoadType::kBridgeBusy;
+		bridge = is_bridge_segment(end.field->road_east);
 		break;
 	case WALK_E:
 		map.get_ln(end, &start);
 		spos.x -= triangle_w;
-		bridge = start.field->road_east == RoadType::kBridgeNormal ||
-		         start.field->road_east == RoadType::kBridgeBusy;
+		bridge = is_bridge_segment(start.field->road_east);
 		break;
 	case WALK_SW:
 		map.get_trn(end, &start);
 		spos.x += triangle_w / 2.f;
 		spos.y -= triangle_h;
-		bridge = start.field->road_southwest == RoadType::kBridgeNormal ||
-		         start.field->road_southwest == RoadType::kBridgeBusy;
+		bridge = is_bridge_segment(start.field->road_southwest);
 		break;
 	case WALK_SE:
 		map.get_tln(end, &start);
 		spos.x -= triangle_w / 2.f;
 		spos.y -= triangle_h;
-		bridge = start.field->road_southeast == RoadType::kBridgeNormal ||
-		         start.field->road_southeast == RoadType::kBridgeBusy;
+		bridge = is_bridge_segment(start.field->road_southeast);
 		break;
 
 	case IDLE:

@@ -28,8 +28,6 @@
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -37,8 +35,7 @@ namespace Widelands {
 /**
  * Most of the actual work is done in init.
  */
-RoadBase::RoadBase(const RoadBaseDescr& d, RoadType type)
-   : PlayerImmovable(d), idle_index_(0), type_(type) {
+RoadBase::RoadBase(const RoadBaseDescr& d) : PlayerImmovable(d), idle_index_(0) {
 	flags_[0] = flags_[1] = nullptr;
 	flagidx_[0] = flagidx_[1] = -1;
 }
@@ -71,70 +68,6 @@ Flag& RoadBase::base_flag() {
 	return *flags_[FlagStart];
 }
 
-// This returns true if and only if this is a road that covers the specified edge and
-// both triangles adjacent to that edge are unwalkable
-bool RoadBase::is_bridge(const EditorGameBase& egbase, const FCoords& field, uint8_t dir) const {
-	if (descr().type() != MapObjectType::ROAD) {
-		// waterways can't be bridges...
-		return false;
-	}
-
-	const Map& map = egbase.map();
-
-	FCoords iterate = map.get_fcoords(path_.get_start());
-	const Path::StepVector::size_type nr_steps = path_.get_nsteps();
-	bool found = false;
-	for (Path::StepVector::size_type i = 0; i <= nr_steps; ++i) {
-		if (iterate == field) {
-			if ((i < nr_steps && path_[i] == dir) || (i > 0 && path_[i - 1] == get_reverse_dir(dir))) {
-				found = true;
-				break;
-			}
-			return false;
-		}
-		if (i < nr_steps) {
-			map.get_neighbour(iterate, path_[i], &iterate);
-		}
-	}
-	if (!found) {
-		return false;
-	}
-
-	FCoords fr, fd;
-	switch (dir) {
-	case WALK_SW:
-		fd = field;
-		map.get_ln(field, &fr);
-		break;
-	case WALK_SE:
-		fd = field;
-		fr = field;
-		break;
-	case WALK_NW:
-		map.get_tln(field, &fd);
-		fr = fd;
-		break;
-	case WALK_NE:
-		map.get_trn(field, &fd);
-		map.get_tln(field, &fr);
-		break;
-	case WALK_W:
-		map.get_tln(field, &fd);
-		map.get_ln(field, &fr);
-		break;
-	case WALK_E:
-		map.get_trn(field, &fd);
-		fr = field;
-		break;
-	default:
-		NEVER_HERE();
-	}
-	return (egbase.world().terrain_descr(fd.field->terrain_d()).get_is() &
-	        TerrainDescription::Is::kUnwalkable) &&
-	       (egbase.world().terrain_descr(fr.field->terrain_r()).get_is() &
-	        TerrainDescription::Is::kUnwalkable);
-}
-
 /**
  * Return the cost of getting from fromflag to the other flag.
  */
@@ -161,15 +94,15 @@ void RoadBase::set_path(EditorGameBase& egbase, const Path& path) {
 void RoadBase::set_roadtype(EditorGameBase& egbase,
                             const FCoords curf,
                             uint8_t dir,
-                            RoadType type) const {
+                            RoadSegment type) const {
 	if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E) {
-		if (type != RoadType::kNone && is_bridge(egbase, curf, dir)) {
+		if (type != RoadSegment::kNone && is_bridge(egbase, curf, dir)) {
 			switch (type) {
-			case RoadType::kNormal:
-				type = RoadType::kBridgeNormal;
+			case RoadSegment::kNormal:
+				type = RoadSegment::kBridgeNormal;
 				break;
-			case RoadType::kBusy:
-				type = RoadType::kBridgeBusy;
+			case RoadSegment::kBusy:
+				type = RoadSegment::kBridgeBusy;
 				break;
 			default:
 				NEVER_HERE();
@@ -193,13 +126,13 @@ void RoadBase::mark_map(EditorGameBase& egbase) {
 
 		// mark the road that leads up to this field
 		if (steps > 0) {
-			set_roadtype(egbase, curf, get_reverse_dir(path_[steps - 1]), type_);
+			set_roadtype(egbase, curf, get_reverse_dir(path_[steps - 1]), road_type_for_drawing());
 		}
 
 		// mark the road that leads away from this field
 		if (steps < path_.get_nsteps()) {
 			const Direction dir = path_[steps];
-			set_roadtype(egbase, curf, dir, type_);
+			set_roadtype(egbase, curf, dir, road_type_for_drawing());
 			map.get_neighbour(curf, dir, &curf);
 		}
 	}
@@ -219,13 +152,13 @@ void RoadBase::unmark_map(EditorGameBase& egbase) {
 
 		// mark the road that leads up to this field
 		if (steps > 0) {
-			set_roadtype(egbase, curf, get_reverse_dir(path_[steps - 1]), RoadType::kNone);
+			set_roadtype(egbase, curf, get_reverse_dir(path_[steps - 1]), RoadSegment::kNone);
 		}
 
 		// mark the road that leads away from this field
 		if (steps < path_.get_nsteps()) {
 			const Direction dir = path_[steps];
-			set_roadtype(egbase, curf, dir, RoadType::kNone);
+			set_roadtype(egbase, curf, dir, RoadSegment::kNone);
 			map.get_neighbour(curf, dir, &curf);
 		}
 	}

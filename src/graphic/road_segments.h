@@ -17,14 +17,12 @@
  *
  */
 
-#ifndef WL_LOGIC_ROADTYPE_H
-#define WL_LOGIC_ROADTYPE_H
-
-#include "logic/map_objects/walkingdir.h"
+#ifndef WL_GRAPHIC_ROAD_SEGMENTS_H
+#define WL_GRAPHIC_ROAD_SEGMENTS_H
 
 namespace Widelands {
 
-enum RoadType : uint8_t {
+enum RoadSegment {
 	kNone = 0,
 	kNormal = 1,
 	kBusy = 2,
@@ -33,6 +31,8 @@ enum RoadType : uint8_t {
 	kBridgeBusy = 5,
 };
 
-}  // namespace Widelands
+bool is_bridge_segment(RoadSegment);
 
-#endif  // end of include guard: WL_LOGIC_ROADTYPE_H
+} // namespace Widelands
+
+#endif  // end of include guard: WL_GRAPHIC_ROAD_SEGMENTS_H

@@ -45,8 +45,7 @@ bool Waterway::is_waterway_descr(MapObjectDescr const* const descr) {
 /**
  * Most of the actual work is done in init.
  */
-Waterway::Waterway()
-   : RoadBase(g_waterway_descr, RoadType::kWaterway), ferry_(nullptr), fleet_(nullptr) {
+Waterway::Waterway() : RoadBase(g_waterway_descr), ferry_(nullptr), fleet_(nullptr) {
 }
 
 /**

@@ -772,25 +772,22 @@ void InteractiveBase::draw_bridges(RenderTarget* dst,
                                    const FieldsToDraw::Field* f,
                                    uint32_t gametime,
                                    float scale) const {
-	if (f->road_e == Widelands::RoadType::kBridgeNormal ||
-	    f->road_e == Widelands::RoadType::kBridgeBusy) {
+	if (Widelands::is_bridge_segment(static_cast<Widelands::RoadSegment>(f->road_e))) {
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
 		                    f->owner->tribe().bridge_animation(
-		                       Widelands::WALK_E, f->road_e == Widelands::RoadType::kBridgeBusy),
+		                       Widelands::WALK_E, f->road_e == Widelands::RoadSegment::kBridgeBusy),
 		                    gametime, &f->owner->get_playercolor());
 	}
-	if (f->road_sw == Widelands::RoadType::kBridgeNormal ||
-	    f->road_sw == Widelands::RoadType::kBridgeBusy) {
+	if (Widelands::is_bridge_segment(static_cast<Widelands::RoadSegment>(f->road_sw))) {
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
 		                    f->owner->tribe().bridge_animation(
-		                       Widelands::WALK_SW, f->road_sw == Widelands::RoadType::kBridgeBusy),
+		                       Widelands::WALK_SW, f->road_sw == Widelands::RoadSegment::kBridgeBusy),
 		                    gametime, &f->owner->get_playercolor());
 	}
-	if (f->road_se == Widelands::RoadType::kBridgeNormal ||
-	    f->road_se == Widelands::RoadType::kBridgeBusy) {
+	if (Widelands::is_bridge_segment(static_cast<Widelands::RoadSegment>(f->road_se))) {
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
 		                    f->owner->tribe().bridge_animation(
-		                       Widelands::WALK_SE, f->road_se == Widelands::RoadType::kBridgeBusy),
+		                       Widelands::WALK_SE, f->road_se == Widelands::RoadSegment::kBridgeBusy),
 		                    gametime, &f->owner->get_playercolor());
 	}
 }

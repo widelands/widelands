@@ -112,8 +112,7 @@ void Carrier::road_update(Game& game, State& state) {
 		Road& r = dynamic_cast<Road&>(road);
 		r.charge_wallet(game);
 		// if road still promoted then schedule demotion, otherwise go fully idle waiting until signal
-		return r.get_roadtype() == RoadType::kBusy ? schedule_act(game, (r.wallet() + 2) * 500) :
-		                                             skip_act();
+		return r.is_busy() ? schedule_act(game, (r.wallet() + 2) * 500) : skip_act();
 	} else {
 		skip_act();
 	}

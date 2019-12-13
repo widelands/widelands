@@ -29,7 +29,6 @@
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
 #include "logic/player.h"
-#include "logic/roadtype.h"
 
 // We target OpenGL 2.1 for the desktop here.
 RoadProgram::RoadProgram() {
@@ -51,7 +50,7 @@ void RoadProgram::add_road(const int renderbuffer_width,
                            const FieldsToDraw::Field& start,
                            const FieldsToDraw::Field& end,
                            const float scale,
-                           const Widelands::RoadType road_type,
+                           const Widelands::RoadSegment road_type,
                            const Direction direction,
                            uint32_t* gl_texture) {
 	// The thickness of the road in pixels on screen.
@@ -79,11 +78,14 @@ void RoadProgram::add_road(const int renderbuffer_width,
 		visible_owner = end.owner;
 	}
 
+	assert(road_type == Widelands::RoadSegment::kNormal ||
+	       road_type == Widelands::RoadSegment::kBusy ||
+	       road_type == Widelands::RoadSegment::kWaterway);
 	const Image& texture =
-	   road_type == Widelands::RoadType::kNormal ?
+	   road_type == Widelands::RoadSegment::kNormal ?
 	      visible_owner->tribe().road_textures().get_normal_texture(
 	         start.geometric_coords, direction) :
-	      road_type == Widelands::RoadType::kWaterway ?
+	      road_type == Widelands::RoadSegment::kWaterway ?
 	      visible_owner->tribe().road_textures().get_waterway_texture(
 	         start.geometric_coords, direction) :
 	      visible_owner->tribe().road_textures().get_busy_texture(start.geometric_coords, direction);
@@ -157,9 +159,10 @@ void RoadProgram::draw(const int renderbuffer_width,
 
 		// Road to right neighbor.
 		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
-			const Widelands::RoadType road = static_cast<Widelands::RoadType>(field.road_e);
-			if (road != Widelands::RoadType::kNone && road != Widelands::RoadType::kBridgeNormal &&
-			    road != Widelands::RoadType::kBridgeBusy) {
+			const Widelands::RoadSegment road = static_cast<Widelands::RoadSegment>(field.road_e);
+			if (road != Widelands::RoadSegment::kNone &&
+			    road != Widelands::RoadSegment::kBridgeNormal &&
+			    road != Widelands::RoadSegment::kBridgeBusy) {
 				add_road(renderbuffer_width, renderbuffer_height, field,
 				         fields_to_draw.at(field.rn_index), scale, road, kEast, &gl_texture);
 			}
@@ -167,9 +170,10 @@ void RoadProgram::draw(const int renderbuffer_width,
 
 		// Road to bottom right neighbor.
 		if (field.brn_index != FieldsToDraw::kInvalidIndex) {
-			const Widelands::RoadType road = static_cast<Widelands::RoadType>(field.road_se);
-			if (road != Widelands::RoadType::kNone && road != Widelands::RoadType::kBridgeNormal &&
-			    road != Widelands::RoadType::kBridgeBusy) {
+			const Widelands::RoadSegment road = static_cast<Widelands::RoadSegment>(field.road_se);
+			if (road != Widelands::RoadSegment::kNone &&
+			    road != Widelands::RoadSegment::kBridgeNormal &&
+			    road != Widelands::RoadSegment::kBridgeBusy) {
 				add_road(renderbuffer_width, renderbuffer_height, field,
 				         fields_to_draw.at(field.brn_index), scale, road, kSouthEast, &gl_texture);
 			}
@@ -177,9 +181,10 @@ void RoadProgram::draw(const int renderbuffer_width,
 
 		// Road to bottom left neighbor.
 		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
-			const Widelands::RoadType road = static_cast<Widelands::RoadType>(field.road_sw);
-			if (road != Widelands::RoadType::kNone && road != Widelands::RoadType::kBridgeNormal &&
-			    road != Widelands::RoadType::kBridgeBusy) {
+			const Widelands::RoadSegment road = static_cast<Widelands::RoadSegment>(field.road_sw);
+			if (road != Widelands::RoadSegment::kNone &&
+			    road != Widelands::RoadSegment::kBridgeNormal &&
+			    road != Widelands::RoadSegment::kBridgeBusy) {
 				add_road(renderbuffer_width, renderbuffer_height, field,
 				         fields_to_draw.at(field.bln_index), scale, road, kSouthWest, &gl_texture);
 			}
