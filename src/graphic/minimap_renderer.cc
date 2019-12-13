@@ -273,7 +273,7 @@ int scale_map(const Widelands::Map& map, const bool zoom) {
 			return (600 - (600 % longest_axis)) / longest_axis;
 		} else if (longest_axis > 150) {
 			return (400 - (400 % longest_axis)) / longest_axis;
-		} else if (longest_axis < 300) {
+		} else {
 			return (300 - (300 % longest_axis)) / longest_axis;
 		}
 	}
