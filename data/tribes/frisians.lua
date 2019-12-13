@@ -227,6 +227,8 @@ tribes:new_tribe {
       "pond_dry",
       "pond_growing",
       "pond_mature",
+      "pond_burning",
+      "pond_coal",
       "reedfield_tiny",
       "reedfield_small",
       "reedfield_medium",
