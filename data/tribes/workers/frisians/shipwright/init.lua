@@ -24,10 +24,10 @@ tribes:new_worker_type {
          "return"
       },
       buildferry_1 = {
-         "findspace=size:swim radius:4",
+         "findspace=size:swim radius:5",
       },
       buildferry_2 = {
-         "findspace=size:swim radius:4",
+         "findspace=size:swim radius:5",
          "walk=coords",
          "animate=work 10000",
          "buildferry",
