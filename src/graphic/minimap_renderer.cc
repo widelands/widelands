@@ -266,15 +266,13 @@ int scale_map(const Widelands::Map& map, const bool zoom) {
 	// If a map is wider than 300px we don't scale. Otherwise we fit as much as possible into a 300px
 	// or 400px MiniMap window when zoom is disabled. Zoom fits the map into a 600px MiniMap.
 	const uint16_t map_w = map.get_width();
-	const uint16_t map_h = map.get_height();
 	if (!(map_w > 300)) {
-		int longest_axis = (map_w >= map_h ? map_w : map_h);
 		if (zoom) {
-			return (600 - (600 % longest_axis)) / longest_axis;
-		} else if (longest_axis > 150) {
-			return (400 - (400 % longest_axis)) / longest_axis;
+			return (600 - (600 % map_w)) / map_w;
+		} else if (map_w > 150) {
+			return (400 - (400 % map_w)) / map_w;
 		} else {
-			return (300 - (300 % longest_axis)) / longest_axis;
+			return (300 - (300 % map_w)) / map_w;
 		}
 	}
 	return 1;

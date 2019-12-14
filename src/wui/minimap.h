@@ -79,6 +79,8 @@ private:
 
 		void set_zoom(const bool zoom);
 
+		bool can_zoom();
+
 	private:
 		InteractiveBase& ibase_;
 		Rectf view_area_;

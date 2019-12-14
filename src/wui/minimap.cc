@@ -75,6 +75,13 @@ void MiniMap::View::set_zoom(const bool zoom) {
 	set_size(map.get_width() * scale_map(map, zoom), map.get_height() * scale_map(map, zoom));
 }
 
+bool MiniMap::View::can_zoom() {
+	const Widelands::Map& map = ibase_.egbase().map();
+	if (scale_map(map, true) == 1 || map.get_height() * scale_map(map, true) > ibase_.get_h() - 40) {
+		return false;
+	}
+	return true;
+}
 /*
 ==============================================================================
 
@@ -219,8 +226,7 @@ void MiniMap::resize() {
 	button_bldns.set_size(but_w(), but_h());
 	button_zoom.set_pos(Vector2i(but_w() * 5, view_.get_h()));
 	button_zoom.set_size(but_w(), but_h());
-	if ((view_.get_w() > 300 || view_.get_h() > 300 || (get_h() <= 620 && view_.get_h() >= 290)) &&
-	    !(*view_.minimap_layers_ & MiniMapLayer::Zoom2)) {
+	if (!view_.can_zoom() && !(*view_.minimap_layers_ & MiniMapLayer::Zoom2)) {
 		button_zoom.set_enabled(false);
 	}
 	move_inside_parent();
