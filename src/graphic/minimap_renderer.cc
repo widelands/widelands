@@ -90,7 +90,7 @@ void draw_view_window(const Map& map,
                       const MiniMapType minimap_type,
                       const bool zoom,
                       Texture* texture) {
-	const float divider = zoom ? scale_map(map, false) : scale_map(map, true);
+	const float divider = scale_map(map, !zoom);
 	const int half_width =
 	   round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth / divider));
 	const int half_height =
@@ -105,16 +105,14 @@ void draw_view_window(const Map& map,
 	case MiniMapType::kStaticMap: {
 		Vector2f origin = view_area.center();
 		MapviewPixelFunctions::normalize_pix(map, &origin);
-		center_pixel = Vector2i(origin.x / kTriangleWidth, origin.y / kTriangleHeight) *
-		               (zoom ? scale_map(map, true) : scale_map(map, false));
+		center_pixel =
+		   Vector2i(origin.x / kTriangleWidth, origin.y / kTriangleHeight) * scale_map(map, zoom);
 		break;
 	}
 	}
 
-	const int width =
-	   zoom ? map.get_width() * scale_map(map, true) : map.get_width() * scale_map(map, false);
-	const int height =
-	   zoom ? map.get_height() * scale_map(map, true) : map.get_height() * scale_map(map, false);
+	const int width = map.get_width() * scale_map(map, zoom);
+	const int height = map.get_height() * scale_map(map, zoom);
 	const auto make_red = [width, height, &texture](int x, int y) {
 		if (x < 0) {
 			x += width;
@@ -218,7 +216,7 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
 		break;
 	}
 
-	const float multiplier = zoom ? scale_map(map, true) : scale_map(map, false);
+	const float multiplier = scale_map(map, zoom);
 	Vector2f map_pixel = top_left + Vector2f(minimap_pixel.x / multiplier * kTriangleWidth,
 	                                         minimap_pixel.y / multiplier * kTriangleHeight);
 	MapviewPixelFunctions::normalize_pix(map, &map_pixel);
@@ -263,8 +261,8 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 }
 
 int scale_map(const Widelands::Map& map, const bool zoom) {
-	// If a map is wider than 300px we don't scale. Otherwise we fit as much as possible into a 300px
-	// or 400px MiniMap window when zoom is disabled. Zoom fits the map into a 600px MiniMap.
+	// The MiniMap can have a maximum size of 600px. If a map is wider than 300px we don't scale.
+	// Otherwise we fit as much as possible into a 300px/400px MiniMap window when zoom is disabled.
 	const uint16_t map_w = map.get_width();
 	if (!(map_w > 300)) {
 		if (zoom) {
