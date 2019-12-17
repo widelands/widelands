@@ -230,7 +230,6 @@ void MiniMap::resize() {
 		button_zoom.set_enabled(false);
 	}
 	move_inside_parent();
-	center_to_parent();
 }
 
 void MiniMap::update_button_permpressed() {
