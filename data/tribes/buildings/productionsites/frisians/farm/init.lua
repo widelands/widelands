@@ -22,25 +22,40 @@ tribes:new_productionsite_type {
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {105, 138},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {91, 111},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {105, 138},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {105, 111},
+         directory = dirname,
+         basename = "working",
+         hotspot = {91, 111},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       build = {
-         pictures = path.list_files (dirname .. "build_?.png"),
-         hotspot = {105, 111},
-      },
+         directory = dirname,
+         basename = "build",
+         hotspot = {91, 90},
+         frames = 2,
+         columns = 2,
+         rows = 1
+      }
+   },
+   animations = {
+      unoccupied = {
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {91, 90}
+      }
    },
 
    aihints = {

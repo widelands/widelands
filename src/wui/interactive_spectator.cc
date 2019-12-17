@@ -83,6 +83,8 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 	// A spectator cannot build roads.
 	assert(road_building_overlays().steepness_indicators.empty());
 	assert(road_building_overlays().road_previews.empty());
+	assert(waterway_building_overlays().steepness_indicators.empty());
+	assert(waterway_building_overlays().road_previews.empty());
 
 	// In-game, selection can never be on triangles or have a radius.
 	assert(get_sel_radius() == 0);
@@ -198,6 +200,10 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_c:
 			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
+			return true;
+
+		case SDLK_g:
+			menu_windows_.stats_general.toggle();
 			return true;
 
 		case SDLK_s:

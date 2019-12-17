@@ -45,6 +45,17 @@ namespace UI {
 
 int BaseDropdown::next_id_ = 0;
 
+// Dropdowns hook into parent elements to be notified of layouting changes. We need to keep track of
+// whether a dropdown actually still exists when notified to avoid heap-use-after-free's.
+static std::map<int, BaseDropdown*> living_dropdowns_;
+// static
+void BaseDropdown::layout_if_alive(int id) {
+	auto it = living_dropdowns_.find(id);
+	if (it != living_dropdowns_.end()) {
+		it->second->layout();
+	}
+}
+
 BaseDropdown::BaseDropdown(UI::Panel* parent,
                            const std::string& name,
                            int32_t x,
@@ -137,10 +148,13 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	set_can_focus(true);
 	set_value();
 
+	const int serial = id_;  // Not a member variable, because when the lambda below is triggered we
+	                         // might no longer exist
+	living_dropdowns_.insert(std::make_pair(serial, this));
 	// Find parent windows, boxes etc. so that we can move the list along with them
 	UI::Panel* ancestor = this;
 	while ((ancestor = ancestor->get_parent()) != nullptr) {
-		ancestor->position_changed.connect([this] { layout(); });
+		ancestor->position_changed.connect([serial] { layout_if_alive(serial); });
 	}
 	layout();
 }
@@ -149,6 +163,10 @@ BaseDropdown::~BaseDropdown() {
 	// The list needs to be able to drop outside of windows, so it won't close with the window.
 	// So, we tell it to die.
 	list_->die();
+
+	// Unsubscribe from layouting hooks
+	assert(living_dropdowns_.find(id_) != living_dropdowns_.end());
+	living_dropdowns_.erase(living_dropdowns_.find(id_));
 }
 
 void BaseDropdown::set_height(int height) {

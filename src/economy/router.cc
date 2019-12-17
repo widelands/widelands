@@ -78,8 +78,10 @@ bool Router::find_route(RoutingNode& start,
 	astar.push(start);
 
 	while (RoutingNode* current = astar.step()) {
-		if (cost_cutoff >= 0 && current->mpf_realcost > cost_cutoff)
+		if (cost_cutoff >= 0 && (type == wwWARE ? current->mpf_realcost_ware :
+		                                          current->mpf_realcost_worker) > cost_cutoff) {
 			return false;
+		}
 
 		if (current == &end) {
 			// found our goal

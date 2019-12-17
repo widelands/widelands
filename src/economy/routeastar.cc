@@ -26,7 +26,7 @@
 namespace Widelands {
 
 BaseRouteAStar::BaseRouteAStar(Router& router, WareWorker type)
-   : type_(type), mpf_cycle(router.assign_cycle()) {
+   : open_(type), type_(type), mpf_cycle(router.assign_cycle()) {
 }
 
 /**
@@ -35,13 +35,14 @@ BaseRouteAStar::BaseRouteAStar(Router& router, WareWorker type)
  * The route is stored in @p route.
  */
 void BaseRouteAStar::routeto(RoutingNode& to, IRoute& route) {
-	if (to.cookie().is_active()) {
+	if (to.cookie(type_).is_active()) {
 		throw wexception("BaseRouteAStar::routeto should not have an active cookie.");
 	}
-	assert(to.mpf_cycle == mpf_cycle);
+	assert(mpf_cycle == (type_ == wwWARE ? to.mpf_cycle_ware : to.mpf_cycle_worker));
 
-	route.init(to.mpf_realcost);
-	for (RoutingNode* node = &to; node; node = node->mpf_backlink)
+	route.init(type_ == wwWARE ? to.mpf_realcost_ware : to.mpf_realcost_worker);
+	for (RoutingNode* node = &to; node;
+	     node = (type_ == wwWARE ? node->mpf_backlink_ware : node->mpf_backlink_worker))
 		route.insert_as_first(node);
 }
 
