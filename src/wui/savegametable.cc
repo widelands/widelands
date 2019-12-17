@@ -101,7 +101,7 @@ void SavegameTable::create_directory_entry(UI::Table<const uintptr_t>::EntryReco
 	}
 	if (savegame.is_parent_directory()) {
 		te.set_picture(last_column_index, g_gr->images().get("images/ui_basic/ls_dir.png"),
-		               (boost::format("%s") % _("..")).str());
+		               (boost::format("%s") % _("<parent>")).str());
 	} else if (savegame.is_sub_directory()) {
 		te.set_picture(
 		   last_column_index, g_gr->images().get("images/ui_basic/ls_dir.png"),

@@ -73,8 +73,10 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 		table_.reset(new SavegameTableMultiplayer(table_box_, style, localize_autosave));
 	}
 
-	table_->set_column_compare(
-	   0, boost::bind(&LoadOrSaveGame::compare_date_descending, this, _1, _2));
+	table_->set_column_compare(0, boost::bind(&LoadOrSaveGame::compare_save_time, this, _1, _2));
+
+	table_->set_column_compare(table_->number_of_columns() - 1,
+	                           boost::bind(&LoadOrSaveGame::compare_map_name, this, _1, _2));
 
 	table_box_->add(table_.get(), UI::Box::Resizing::kExpandBoth);
 	game_details_.button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
@@ -86,6 +88,17 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 
 const std::string LoadOrSaveGame::filename_list_string() const {
 	return filename_list_string(table_->selections());
+}
+
+bool LoadOrSaveGame::selection_contains_directory() const {
+	const std::set<uint32_t>& selections = table_->selections();
+	for (const uint32_t index : selections) {
+		const SavegameData& gamedata = games_data_[table_->get(table_->get_record(index))];
+		if (gamedata.is_directory()) {
+			return true;
+		}
+	}
+	return false;
 }
 
 const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>& selections) const {
@@ -105,29 +118,18 @@ const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>&
 	}
 	return message.str();
 }
-bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) const {
+bool LoadOrSaveGame::compare_save_time(uint32_t rowa, uint32_t rowb) const {
+	const SavegameData& r1 = games_data_[(*table_)[rowa]];
+	const SavegameData& r2 = games_data_[(*table_)[rowb]];
+
+	return r1.compare_save_time(r2);
+}
+
+bool LoadOrSaveGame::compare_map_name(uint32_t rowa, uint32_t rowb) const {
 	const SavegameData& r1 = games_data_[table_->get(table_->get_record(rowa))];
 	const SavegameData& r2 = games_data_[table_->get(table_->get_record(rowb))];
-	// parent directory always on top
-	if (r1.is_parent_directory()) {
-		return false;
-	}
-	if (r2.is_parent_directory()) {
-		return true;
-	}
-	// sub directory before non-sub directory (aka actual savegame)
-	if (r1.is_sub_directory() && !r2.is_directory()) {
-		return false;
-	}
-	if (!r1.is_sub_directory() && r2.is_sub_directory()) {
-		return true;
-	}
-	// sub directories sort after name
-	if (r1.is_sub_directory() && r2.is_sub_directory()) {
-		return r1.filename > r2.filename;
-	}
-	// savegames sort after timestamp
-	return r1.savetimestamp < r2.savetimestamp;
+
+	return r1.compare_map_name(r2);
 }
 
 std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
@@ -157,7 +159,12 @@ std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 		delete_->set_tooltip("");
 	}
 	game_details_.update(*result);
-	delete_->set_enabled(table().has_selection());
+	if (selections > 0 && !selection_contains_directory()) {
+		delete_->set_enabled(true);
+	} else {
+		delete_->set_enabled(false);
+		delete_->set_tooltip("");
+	}
 	// TODO(GunChleoc): Take care of the OK button too.
 	return result;
 }
@@ -174,7 +181,7 @@ void LoadOrSaveGame::clear_selections() {
 void LoadOrSaveGame::select_by_name(const std::string& name) {
 	table_->clear_selections();
 	for (size_t idx = 0; idx < table_->size(); ++idx) {
-		const SavegameData& gamedata = games_data_[table_->get(table_->get_record(idx))];
+		const SavegameData& gamedata = games_data_[(*table_)[idx]];
 		if (name == gamedata.filename) {
 			table_->select(idx);
 			return;

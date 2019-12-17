@@ -83,6 +83,12 @@ struct SavegameData {
 
 	bool is_sub_directory() const;
 
+	bool compare_save_time(const SavegameData& other) const;
+
+	bool compare_directories(const SavegameData& other) const;
+
+	bool compare_map_name(const SavegameData& other) const;
+
 private:
 	/// Savegame or directory
 	SavegameType type_;

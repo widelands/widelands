@@ -76,6 +76,43 @@ bool SavegameData::is_sub_directory() const {
 	return type_ == SavegameType::kSubDirectory;
 }
 
+bool SavegameData::compare_save_time(const SavegameData& other) const {
+	if (is_directory() || other.is_directory()) {
+		return compare_directories(other);
+	}
+	return savetimestamp < other.savetimestamp;
+}
+
+bool SavegameData::compare_map_name(const SavegameData& other) const {
+	if (is_directory() || other.is_directory()) {
+		return compare_directories(other);
+	}
+	return mapname < other.mapname;
+}
+
+bool SavegameData::compare_directories(const SavegameData& other) const {
+	// parent directory always on top
+	if (is_parent_directory()) {
+		return false;
+	}
+	if (other.is_parent_directory()) {
+		return true;
+	}
+	// sub directory before non-sub directory (aka actual savegame)
+	if (is_sub_directory() && !other.is_directory()) {
+		return false;
+	}
+	if (!is_sub_directory() && other.is_sub_directory()) {
+		return true;
+	}
+	// sub directories sort after name
+	if (is_sub_directory() && other.is_sub_directory()) {
+		return filename > other.filename;
+	}
+
+	return false;
+}
+
 // static
 SavegameData SavegameData::create_parent_dir(const std::string& current_dir) {
 	std::string filename = FileSystem::fs_dirname(current_dir);

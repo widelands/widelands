@@ -91,7 +91,8 @@ private:
 	const std::string filename_list_string(const std::set<uint32_t>& selections) const;
 
 	/// Reverse default sort order for save date column
-	bool compare_date_descending(uint32_t, uint32_t) const;
+	bool compare_save_time(uint32_t, uint32_t) const;
+	bool compare_map_name(uint32_t, uint32_t) const;
 
 	UI::Panel* parent_;
 	UI::Box* table_box_;
@@ -113,6 +114,7 @@ private:
 	                             const Widelands::GamePreloadPacket& gpdp) const;
 	void add_error_info(SavegameData& gamedata, std::string errormessage) const;
 	void add_sub_dir(const std::string& gamefilename);
+	bool selection_contains_directory() const;
 };
 
 #endif  // end of include guard: WL_WUI_LOAD_OR_SAVE_GAME_H
