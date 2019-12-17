@@ -77,7 +77,7 @@ private:
 
 		bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 
-		void set_zoom(const bool zoom);
+		void set_zoom(bool zoom);
 
 		bool can_zoom();
 

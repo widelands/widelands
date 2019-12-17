@@ -90,11 +90,11 @@ void draw_view_window(const Map& map,
                       const MiniMapType minimap_type,
                       const bool zoom,
                       Texture* texture) {
-	const float divider = scale_map(map, !zoom);
+	const float multiplier = scale_map(map, zoom);
 	const int half_width =
-	   round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth / divider));
+	   round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth * multiplier / 2.f));
 	const int half_height =
-	   round_up_to_nearest_even(std::ceil(view_area.h / kTriangleHeight / divider));
+	   round_up_to_nearest_even(std::ceil(view_area.h / kTriangleHeight * multiplier / 2.f));
 
 	Vector2i center_pixel = Vector2i::zero();
 	switch (minimap_type) {
@@ -260,7 +260,7 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	return texture;
 }
 
-int scale_map(const Widelands::Map& map, const bool zoom) {
+int scale_map(const Widelands::Map& map, bool zoom) {
 	// The MiniMap can have a maximum size of 600px. If a map is wider than 300px we don't scale.
 	// Otherwise we fit as much as possible into a 300px/400px MiniMap window when zoom is disabled.
 	const uint16_t map_w = map.get_width();
