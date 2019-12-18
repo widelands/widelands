@@ -198,9 +198,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 	button_zoom.sigclicked.connect(
 	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Zoom2));
 
-	resize();
-
-	update_button_permpressed();
+	check_boundaries();
 
 	if (get_usedefaultpos())
 		center_to_parent();
