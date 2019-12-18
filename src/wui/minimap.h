@@ -52,9 +52,13 @@ public:
 	}
 
 private:
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
+
 	void toggle(MiniMapLayer);
 	void update_button_permpressed();
 	void resize();
+	void check_boundaries();
 
 	/**
 	 * MiniMap::View is the panel that represents the pure representation of the

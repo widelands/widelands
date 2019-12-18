@@ -77,11 +77,13 @@ void MiniMap::View::set_zoom(const bool zoom) {
 
 bool MiniMap::View::can_zoom() {
 	const Widelands::Map& map = ibase_.egbase().map();
-	if (scale_map(map, true) == 1 || map.get_height() * scale_map(map, true) > ibase_.get_h() - 40) {
+	// The zoomed MiniMap needs to fit into: height - windows boarders - button height. -> 60px
+	if (scale_map(map, true) == 1 || map.get_height() * scale_map(map, true) > ibase_.get_h() - 60) {
 		return false;
 	}
 	return true;
 }
+
 /*
 ==============================================================================
 
@@ -202,6 +204,9 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 
 	if (get_usedefaultpos())
 		center_to_parent();
+
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged&) { check_boundaries(); });
 }
 
 void MiniMap::toggle(MiniMapLayer const button) {
@@ -226,9 +231,8 @@ void MiniMap::resize() {
 	button_bldns.set_size(but_w(), but_h());
 	button_zoom.set_pos(Vector2i(but_w() * 5, view_.get_h()));
 	button_zoom.set_size(but_w(), but_h());
-	if (!view_.can_zoom() && !(*view_.minimap_layers_ & MiniMapLayer::Zoom2)) {
-		button_zoom.set_enabled(false);
-	}
+	button_zoom.set_enabled(view_.can_zoom());
+
 	move_inside_parent();
 }
 
@@ -239,4 +243,12 @@ void MiniMap::update_button_permpressed() {
 	button_roads.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Road);
 	button_bldns.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Building);
 	button_zoom.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Zoom2);
+}
+
+void MiniMap::check_boundaries() {
+	if (!view_.can_zoom() && (*view_.minimap_layers_ & MiniMapLayer::Zoom2)) {
+		toggle(MiniMapLayer::Zoom2);
+	} else {
+		resize();
+	}
 }
