@@ -15,11 +15,15 @@ tribes:new_immovable_type {
          "transform=pond_coal",
       },
    },
-   animations = {
+   spritesheets = {
       idle = {
          directory = dirname,
          basename = "idle",
-         hotspot = {8, 5}
+         hotspot = {19, 56},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       }
    }
 }

@@ -25,8 +25,9 @@ tribes:new_worker_type {
       make_stack = {
          "findobject=attrib:pond_dry radius:8",
          "walk=object",
-         "animate=stacking 15000",
+         "animate=stacking_1 14000",
          "callobject=with_stack",
+         "animate=stacking_2 1000",
          "return"
       }
    },
@@ -58,19 +59,28 @@ tribes:new_worker_type {
          directory = dirname,
          basename = "collecting",
          fps = 10,
-         frames = 30,
+         frames = 10,
          columns = 5,
-         rows = 6,
-         hotspot = {9, 23}
+         rows = 2,
+         hotspot = {10, 19}
       },
-      stacking = {
+      stacking_1 = {
          directory = dirname,
-         basename = "stacking",
+         basename = "stacking_1",
          fps = 10,
-         frames = 20,
+         frames = 15,
          columns = 5,
-         rows = 4,
-         hotspot = {15, 20}
+         rows = 3,
+         hotspot = {9, 19}
+      },
+      stacking_2 = {
+         directory = dirname,
+         basename = "stacking_2",
+         fps = 10,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         hotspot = {9, 19}
       },
    },
    animations = {
