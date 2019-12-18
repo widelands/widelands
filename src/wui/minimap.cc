@@ -205,6 +205,8 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged&) { check_boundaries(); });
+
+	update_button_permpressed();
 }
 
 void MiniMap::toggle(MiniMapLayer const button) {
