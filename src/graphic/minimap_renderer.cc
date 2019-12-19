@@ -161,11 +161,9 @@ void do_draw_minimap(Texture* texture,
 
 	for (uint32_t y = 0; y < surface_h; ++y) {
 		for (uint32_t x = 0; x < surface_w; ++x) {
-			Widelands::Coords coords(Widelands::Coords(
-			   top_left.x + ((layers & MiniMapLayer::Zoom2) ? x / scale_map(map, true) :
-			                                                  x / scale_map(map, false)),
-			   top_left.y + ((layers & MiniMapLayer::Zoom2) ? y / scale_map(map, true) :
-			                                                  y / scale_map(map, false))));
+			Widelands::Coords coords(
+			   Widelands::Coords(top_left.x + x / scale_map(map, layers & MiniMapLayer::Zoom2),
+			                     top_left.y + y / scale_map(map, layers & MiniMapLayer::Zoom2)));
 			map.normalize_coords(coords);
 			Widelands::FCoords f = map.get_fcoords(coords);
 			Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
@@ -232,10 +230,8 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	//       necessary. The created texture could be cached and only redrawn two
 	//       or three times per second
 	const Map& map = egbase.map();
-	const int16_t map_w = (layers & MiniMapLayer::Zoom2) ? map.get_width() * scale_map(map, true) :
-	                                                       map.get_width() * scale_map(map, false);
-	const int16_t map_h = (layers & MiniMapLayer::Zoom2) ? map.get_height() * scale_map(map, true) :
-	                                                       map.get_height() * scale_map(map, false);
+	const int16_t map_w = map.get_width() * scale_map(map, layers & MiniMapLayer::Zoom2);
+	const int16_t map_h = map.get_height() * scale_map(map, layers & MiniMapLayer::Zoom2);
 
 	std::unique_ptr<Texture> texture(new Texture(map_w, map_h));
 
