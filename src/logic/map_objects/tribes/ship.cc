@@ -1333,7 +1333,7 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 10;
+constexpr uint8_t kCurrentPacketVersion = 11;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")
@@ -1383,7 +1383,7 @@ void Ship::Loader::load(FileRead& fr, uint8_t pw) {
 
 	shipname_ = fr.c_string();
 
-	capacity_ = packet_version >= 10 ? fr.unsigned_32() : -1;
+	capacity_ = packet_version_ >= 11 ? fr.unsigned_32() : -1;
 
 	lastdock_ = fr.unsigned_32();
 

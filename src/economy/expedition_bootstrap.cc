@@ -108,7 +108,7 @@ void ExpeditionBootstrap::cancel(Game& game) {
 			warehouse->insert_wares(iq.first->get_index(), iq.first->get_filled());
 			break;
 		case wwWORKER:
-			WorkersQueue& wq = dynamic_cast<WorkersQueue&>(*iq);
+			WorkersQueue& wq = dynamic_cast<WorkersQueue&>(*iq.first);
 			while (wq.get_filled() > 0) {
 				warehouse->incorporate_worker(game, wq.extract_worker());
 			}
