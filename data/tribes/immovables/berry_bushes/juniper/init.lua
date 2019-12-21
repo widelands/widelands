@@ -19,7 +19,6 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 10000",
-         "remove=60",
          "grow=berry_bush_juniper_small",
       },
    },
@@ -47,7 +46,6 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 10000",
-         "remove=20",
          "grow=berry_bush_juniper_medium",
       },
    },
@@ -75,7 +73,6 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 70000",
-         "remove=10",
          "grow=berry_bush_juniper_ripe",
       },
    },
