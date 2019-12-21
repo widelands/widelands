@@ -31,6 +31,7 @@
 #include "game_io/game_preload_packet.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/game.h"
+#include "ui_basic/progresswindow.h"
 
 namespace Widelands {
 
@@ -43,9 +44,17 @@ GameSaver::GameSaver(FileSystem& fs, Game& game) : fs_(fs), game_(game) {
 void GameSaver::save() {
 	ScopedTimer timer("GameSaver::save() took %ums");
 
+	auto set_progress_message = [this](std::string s) {
+		// Progress messages for the autosave during gameloading
+		if (game_.get_loader_ui())
+			game_.get_loader_ui()->step(s);
+	};
+	set_progress_message(_("Autosaving game…"));
+
 	fs_.ensure_directory_exists("binary");
 
 	log("Game: Writing Preload Data ... ");
+	set_progress_message(_("Game autosave: Elemental data (1/5)"));
 	{
 		GamePreloadPacket p;
 		p.write(fs_, game_, nullptr);
@@ -74,6 +83,7 @@ void GameSaver::save() {
 	MapObjectSaver* const mos = M.get_map_object_saver();
 
 	log("Game: Writing Player Economies Info ... ");
+	set_progress_message(_("Game autosave: Economies (2/5)"));
 	{
 		GamePlayerEconomiesPacket p;
 		p.write(fs_, game_, mos);
@@ -81,6 +91,7 @@ void GameSaver::save() {
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing ai persistent data ... ");
+	set_progress_message(_("Game autosave: AI (3/5)"));
 	{
 		GamePlayerAiPersistentPacket p;
 		p.write(fs_, game_, mos);
@@ -88,6 +99,7 @@ void GameSaver::save() {
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Command Queue Data ... ");
+	set_progress_message(_("Game autosave: Command queue (4/5)"));
 	{
 		GameCmdQueuePacket p;
 		p.write(fs_, game_, mos);
@@ -95,6 +107,7 @@ void GameSaver::save() {
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Interactive Player Data ... ");
+	set_progress_message(_("Game autosave: Interactive player (5/5)"));
 	{
 		GameInteractivePlayerPacket p;
 		p.write(fs_, game_, mos);

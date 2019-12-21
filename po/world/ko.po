@@ -6,16 +6,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2015,2018
 # ks k, 2017
-# ks k, 2017
+# ks k, 2017,2019
 # Moon Yeonki <backnii@gmail.com>, 2017
 # TaeMin An, 2017,2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-06-23 11:24+0000\n"
-"PO-Revision-Date: 2019-06-23 11:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-10-09 07:57+0000\n"
+"PO-Revision-Date: 2019-10-25 11:40+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,7 +61,7 @@ msgstr "담비"
 
 #: ../../data/world/critters/moose/init.lua:19
 msgid "Moose"
-msgstr ""
+msgstr "엘크"
 
 #: ../../data/world/critters/reindeer/init.lua:16
 msgid "Reindeer"
@@ -821,10 +821,10 @@ msgid "Stones"
 msgstr "석광"
 
 #: ../../data/world/resources/init.lua:148
-#: ../../data/world/terrains/init.lua:450
-#: ../../data/world/terrains/init.lua:759
-#: ../../data/world/terrains/init.lua:1055
-#: ../../data/world/terrains/init.lua:1350
+#: ../../data/world/terrains/init.lua:469
+#: ../../data/world/terrains/init.lua:792
+#: ../../data/world/terrains/init.lua:1102
+#: ../../data/world/terrains/init.lua:1413
 msgid "Water"
 msgstr "식수"
 
@@ -832,220 +832,220 @@ msgstr "식수"
 msgid "Fish"
 msgstr "물고기"
 
-#: ../../data/world/terrains/init.lua:152
+#: ../../data/world/terrains/init.lua:158
 msgid "Meadow 1"
 msgstr "목초지 1"
 
 #. TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if
 #. possible.
-#: ../../data/world/terrains/init.lua:157
-#: ../../data/world/terrains/init.lua:181
-#: ../../data/world/terrains/init.lua:202
-#: ../../data/world/terrains/init.lua:222
-#: ../../data/world/terrains/init.lua:290
-#: ../../data/world/terrains/init.lua:310
-#: ../../data/world/terrains/init.lua:476
-#: ../../data/world/terrains/init.lua:496
-#: ../../data/world/terrains/init.lua:516
-#: ../../data/world/terrains/init.lua:536
-#: ../../data/world/terrains/init.lua:556
-#: ../../data/world/terrains/init.lua:576
-#: ../../data/world/terrains/init.lua:612
-#: ../../data/world/terrains/init.lua:631
-#: ../../data/world/terrains/init.lua:786
-#: ../../data/world/terrains/init.lua:806
-#: ../../data/world/terrains/init.lua:826
-#: ../../data/world/terrains/init.lua:894
-#: ../../data/world/terrains/init.lua:913
-#: ../../data/world/terrains/init.lua:1110
-#: ../../data/world/terrains/init.lua:1130
-#: ../../data/world/terrains/init.lua:1150
-#: ../../data/world/terrains/init.lua:1170
-#: ../../data/world/terrains/init.lua:1190
-#: ../../data/world/terrains/init.lua:1209
+#: ../../data/world/terrains/init.lua:163
+#: ../../data/world/terrains/init.lua:187
+#: ../../data/world/terrains/init.lua:207
+#: ../../data/world/terrains/init.lua:227
+#: ../../data/world/terrains/init.lua:301
+#: ../../data/world/terrains/init.lua:321
+#: ../../data/world/terrains/init.lua:495
+#: ../../data/world/terrains/init.lua:517
+#: ../../data/world/terrains/init.lua:539
+#: ../../data/world/terrains/init.lua:559
+#: ../../data/world/terrains/init.lua:579
+#: ../../data/world/terrains/init.lua:599
+#: ../../data/world/terrains/init.lua:637
+#: ../../data/world/terrains/init.lua:656
+#: ../../data/world/terrains/init.lua:819
+#: ../../data/world/terrains/init.lua:839
+#: ../../data/world/terrains/init.lua:859
+#: ../../data/world/terrains/init.lua:933
+#: ../../data/world/terrains/init.lua:952
+#: ../../data/world/terrains/init.lua:1161
+#: ../../data/world/terrains/init.lua:1181
+#: ../../data/world/terrains/init.lua:1201
+#: ../../data/world/terrains/init.lua:1223
+#: ../../data/world/terrains/init.lua:1245
+#: ../../data/world/terrains/init.lua:1264
 msgid "likes trees"
 msgstr "나무같음??"
 
-#: ../../data/world/terrains/init.lua:176
+#: ../../data/world/terrains/init.lua:182
 msgid "Meadow 2"
 msgstr "목초지 2"
 
-#: ../../data/world/terrains/init.lua:197
+#: ../../data/world/terrains/init.lua:202
 msgid "Meadow 3"
 msgstr "목초지 3"
 
-#: ../../data/world/terrains/init.lua:217
+#: ../../data/world/terrains/init.lua:222
 msgid "Meadow 4"
 msgstr "목초지 4"
 
-#: ../../data/world/terrains/init.lua:237
-#: ../../data/world/terrains/init.lua:1105
+#: ../../data/world/terrains/init.lua:242
+#: ../../data/world/terrains/init.lua:1156
 msgid "Steppe"
 msgstr "대초원"
 
-#: ../../data/world/terrains/init.lua:253
+#: ../../data/world/terrains/init.lua:260
 msgid "Barren Steppe"
 msgstr "불모 대초원"
 
-#: ../../data/world/terrains/init.lua:269
-#: ../../data/world/terrains/init.lua:1145
+#: ../../data/world/terrains/init.lua:278
+#: ../../data/world/terrains/init.lua:1196
 msgid "Mountain Meadow"
 msgstr "산악 목초지"
 
-#: ../../data/world/terrains/init.lua:284
-#: ../../data/world/terrains/init.lua:607
-#: ../../data/world/terrains/init.lua:889
-#: ../../data/world/terrains/init.lua:1185
+#: ../../data/world/terrains/init.lua:295
+#: ../../data/world/terrains/init.lua:632
+#: ../../data/world/terrains/init.lua:928
+#: ../../data/world/terrains/init.lua:1240
 msgid "Forested Mountain 1"
 msgstr "숲이 우거진 산 1"
 
-#: ../../data/world/terrains/init.lua:304
-#: ../../data/world/terrains/init.lua:626
-#: ../../data/world/terrains/init.lua:908
-#: ../../data/world/terrains/init.lua:1204
+#: ../../data/world/terrains/init.lua:315
+#: ../../data/world/terrains/init.lua:651
+#: ../../data/world/terrains/init.lua:947
+#: ../../data/world/terrains/init.lua:1259
 msgid "Forested Mountain 2"
 msgstr "숲이 우거진 산 2"
 
-#: ../../data/world/terrains/init.lua:324
-#: ../../data/world/terrains/init.lua:645
-#: ../../data/world/terrains/init.lua:927
-#: ../../data/world/terrains/init.lua:1224
+#: ../../data/world/terrains/init.lua:335
+#: ../../data/world/terrains/init.lua:670
+#: ../../data/world/terrains/init.lua:966
+#: ../../data/world/terrains/init.lua:1279
 msgid "Mountain 1"
 msgstr "산 1"
 
-#: ../../data/world/terrains/init.lua:340
-#: ../../data/world/terrains/init.lua:661
-#: ../../data/world/terrains/init.lua:943
-#: ../../data/world/terrains/init.lua:1240
+#: ../../data/world/terrains/init.lua:353
+#: ../../data/world/terrains/init.lua:688
+#: ../../data/world/terrains/init.lua:984
+#: ../../data/world/terrains/init.lua:1297
 msgid "Mountain 2"
 msgstr "산 2"
 
-#: ../../data/world/terrains/init.lua:356
-#: ../../data/world/terrains/init.lua:677
-#: ../../data/world/terrains/init.lua:959
-#: ../../data/world/terrains/init.lua:1256
+#: ../../data/world/terrains/init.lua:371
+#: ../../data/world/terrains/init.lua:706
+#: ../../data/world/terrains/init.lua:1002
+#: ../../data/world/terrains/init.lua:1315
 msgid "Mountain 3"
 msgstr "산 3"
 
-#: ../../data/world/terrains/init.lua:372
-#: ../../data/world/terrains/init.lua:693
-#: ../../data/world/terrains/init.lua:975
-#: ../../data/world/terrains/init.lua:1272
+#: ../../data/world/terrains/init.lua:389
+#: ../../data/world/terrains/init.lua:724
+#: ../../data/world/terrains/init.lua:1020
+#: ../../data/world/terrains/init.lua:1333
 msgid "Mountain 4"
 msgstr "산 4"
 
-#: ../../data/world/terrains/init.lua:387
-#: ../../data/world/terrains/init.lua:709
-#: ../../data/world/terrains/init.lua:1005
-#: ../../data/world/terrains/init.lua:1334
+#: ../../data/world/terrains/init.lua:406
+#: ../../data/world/terrains/init.lua:742
+#: ../../data/world/terrains/init.lua:1052
+#: ../../data/world/terrains/init.lua:1397
 msgid "Beach"
 msgstr "해변"
 
-#: ../../data/world/terrains/init.lua:402
+#: ../../data/world/terrains/init.lua:421
 msgid "Swamp"
 msgstr "늪지대"
 
-#: ../../data/world/terrains/init.lua:417
-#: ../../data/world/terrains/init.lua:873
+#: ../../data/world/terrains/init.lua:436
+#: ../../data/world/terrains/init.lua:910
 msgid "Snow"
 msgstr "눈"
 
-#: ../../data/world/terrains/init.lua:433
+#: ../../data/world/terrains/init.lua:452
 msgid "Lava"
 msgstr "용암"
 
-#: ../../data/world/terrains/init.lua:471
+#: ../../data/world/terrains/init.lua:490
 msgid "Ashes 1"
 msgstr "잿더미 1"
 
-#: ../../data/world/terrains/init.lua:491
+#: ../../data/world/terrains/init.lua:512
 msgid "Ashes 2"
 msgstr "잿더미 2"
 
-#: ../../data/world/terrains/init.lua:511
+#: ../../data/world/terrains/init.lua:534
 msgid "Hard Ground 1"
 msgstr "굳은 지반 1"
 
-#: ../../data/world/terrains/init.lua:531
+#: ../../data/world/terrains/init.lua:554
 msgid "Hard Ground 2"
 msgstr "굳은 지반 2"
 
-#: ../../data/world/terrains/init.lua:551
+#: ../../data/world/terrains/init.lua:574
 msgid "Hard Ground 3"
 msgstr "굳은 지반 3"
 
-#: ../../data/world/terrains/init.lua:571
+#: ../../data/world/terrains/init.lua:594
 msgid "Hard Ground 4"
 msgstr "굳은 지반 4"
 
-#: ../../data/world/terrains/init.lua:591
+#: ../../data/world/terrains/init.lua:614
 msgid "Igneous Rocks"
 msgstr "화성암"
 
-#: ../../data/world/terrains/init.lua:725
+#: ../../data/world/terrains/init.lua:758
 msgid "Lava Rocks 1"
 msgstr "화산암 1"
 
-#: ../../data/world/terrains/init.lua:742
+#: ../../data/world/terrains/init.lua:775
 msgid "Lava Rocks 2"
 msgstr "화산암 2"
 
-#: ../../data/world/terrains/init.lua:781
+#: ../../data/world/terrains/init.lua:814
 msgid "Tundra 1"
 msgstr "동토대 1"
 
-#: ../../data/world/terrains/init.lua:801
+#: ../../data/world/terrains/init.lua:834
 msgid "Tundra 2"
 msgstr "동토대 2"
 
-#: ../../data/world/terrains/init.lua:821
+#: ../../data/world/terrains/init.lua:854
 msgid "Tundra 3"
 msgstr "동토대 3"
 
-#: ../../data/world/terrains/init.lua:841
+#: ../../data/world/terrains/init.lua:874
 msgid "Tundra Taiga"
 msgstr "동토대 북방침엽수림"
 
-#: ../../data/world/terrains/init.lua:857
+#: ../../data/world/terrains/init.lua:892
 msgid "Taiga"
 msgstr "북방침엽수림"
 
-#: ../../data/world/terrains/init.lua:989
+#: ../../data/world/terrains/init.lua:1036
 msgid "Ice"
 msgstr "얼음"
 
-#: ../../data/world/terrains/init.lua:1021
+#: ../../data/world/terrains/init.lua:1068
 msgid "Ice Floes 1"
 msgstr "떠 있는 얼음덩이 1"
 
-#: ../../data/world/terrains/init.lua:1038
+#: ../../data/world/terrains/init.lua:1085
 msgid "Ice Floes 2"
 msgstr "떠 있는 얼음덩이 2"
 
-#: ../../data/world/terrains/init.lua:1076
+#: ../../data/world/terrains/init.lua:1123
 msgid "Desert 4"
 msgstr "사막 4"
 
-#: ../../data/world/terrains/init.lua:1091
+#: ../../data/world/terrains/init.lua:1140
 msgid "Dry Soil"
 msgstr "건조한 흙"
 
-#: ../../data/world/terrains/init.lua:1125
+#: ../../data/world/terrains/init.lua:1176
 msgid "Meadow"
 msgstr "목초지"
 
-#: ../../data/world/terrains/init.lua:1165
+#: ../../data/world/terrains/init.lua:1218
 msgid "High Mountain Meadow"
 msgstr "고산 목초지"
 
-#: ../../data/world/terrains/init.lua:1286
+#: ../../data/world/terrains/init.lua:1349
 msgid "Desert 1"
 msgstr "사막 1"
 
-#: ../../data/world/terrains/init.lua:1302
+#: ../../data/world/terrains/init.lua:1365
 msgid "Desert 2"
 msgstr "사막 2"
 
-#: ../../data/world/terrains/init.lua:1318
+#: ../../data/world/terrains/init.lua:1381
 msgid "Desert 3"
 msgstr "사막 3"

@@ -31,7 +31,7 @@
 namespace Widelands {
 
 class Economy;
-struct Fleet;
+struct ShipFleet;
 class PortDock;
 
 // This can't be part of the Ship class because of forward declaration in game.h
@@ -94,7 +94,7 @@ struct Ship : Bob {
 	~Ship() override;
 
 	// Returns the fleet the ship is a part of.
-	Fleet* get_fleet() const;
+	ShipFleet* get_fleet() const;
 
 	// Returns the current destination or nullptr if there is no current
 	// destination.
@@ -105,10 +105,10 @@ struct Ship : Bob {
 	// the last visited was removed.
 	PortDock* get_lastdock(EditorGameBase& egbase) const;
 
-	Economy* get_economy() const {
-		return economy_;
+	Economy* get_economy(WareWorker type) const {
+		return type == wwWARE ? ware_economy_ : worker_economy_;
 	}
-	void set_economy(Game&, Economy* e);
+	void set_economy(Game&, Economy* e, WareWorker);
 	void push_destination(Game&, PortDock&);
 	void pop_destination(Game&, PortDock&);
 	void clear_destinations(Game&);
@@ -253,7 +253,7 @@ protected:
 	          RenderTarget* dst) const override;
 
 private:
-	friend struct Fleet;
+	friend struct ShipFleet;
 
 	void wakeup_neighbours(Game&);
 
@@ -269,7 +269,7 @@ private:
 	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
 
 	bool init_fleet(EditorGameBase&);
-	void set_fleet(Fleet* fleet);
+	void set_fleet(ShipFleet* fleet);
 
 	void send_message(Game& game,
 	                  const std::string& title,
@@ -277,8 +277,9 @@ private:
 	                  const std::string& description,
 	                  const std::string& picture);
 
-	Fleet* fleet_;
-	Economy* economy_;
+	ShipFleet* fleet_;
+	Economy* ware_economy_;
+	Economy* worker_economy_;
 	OPtr<PortDock> lastdock_;
 	std::vector<ShippingItem> items_;
 	ShipStates ship_state_;
@@ -300,7 +301,8 @@ private:
 		WalkingDir scouting_direction;
 		Coords exploration_start;
 		IslandExploreDirection island_explore_direction;
-		Economy* economy;  // Owned by Player
+		Economy* ware_economy;  // Owned by Player
+		Economy* worker_economy;
 	};
 	std::unique_ptr<Expedition> expedition_;
 
@@ -317,12 +319,14 @@ protected:
 	private:
 		// Initialize everything to make cppcheck happy.
 		uint32_t lastdock_ = 0U;
+		Serial ware_economy_serial_;
+		Serial worker_economy_serial_;
 		std::vector<std::pair<uint32_t, uint32_t>> destinations_;
-		Serial economy_serial_;
 		ShipStates ship_state_ = ShipStates::kTransport;
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<ShippingItem::Loader> items_;
+		uint8_t packet_version_ = 0;
 	};
 
 public:

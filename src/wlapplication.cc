@@ -582,7 +582,7 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 		case SDLK_f: {
 			// Toggle fullscreen
 			const uint32_t time = SDL_GetTicks();
-			if (time - last_resolution_change_ > 250) {
+			if ((time - last_resolution_change_ > 250) && (ctrl)) {
 				last_resolution_change_ = time;
 				bool value = !g_gr->fullscreen();
 				g_gr->set_fullscreen(value);
@@ -1355,8 +1355,10 @@ bool WLApplication::new_game() {
 			loader_ui.step(_("Preparing game"));
 
 			game.set_game_controller(ctrl.get());
-			game.init_newgame(&loader_ui, sp.settings());
-			game.run(&loader_ui, Widelands::Game::NewNonScenario, "", false, "single_player");
+			game.set_loader_ui(&loader_ui);
+			game.init_newgame(sp.settings());
+			game.run(Widelands::Game::NewNonScenario, "", false, "single_player");
+			game.set_loader_ui(nullptr);
 		} catch (const std::exception& e) {
 			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
@@ -1470,7 +1472,9 @@ void WLApplication::replay() {
 
 		game.save_handler().set_allow_saving(false);
 
-		game.run(&loader_ui, Widelands::Game::Loaded, "", true, "replay");
+		game.set_loader_ui(&loader_ui);
+		game.run(Widelands::Game::Loaded, "", true, "replay");
+		game.set_loader_ui(nullptr);
 	} catch (const std::exception& e) {
 		log("Fatal Exception: %s\n", e.what());
 		emergency_save(game);

@@ -85,7 +85,7 @@ protected:
 	void configure_workarea_button();
 	void act_start_stop();
 	void act_start_or_cancel_expedition();
-	void act_enhance(Widelands::DescriptionIndex);
+	void act_enhance(Widelands::DescriptionIndex, bool is_csite);
 	void clicked_goto();
 
 	void create_input_queue_panel(UI::Box*,

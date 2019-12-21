@@ -154,11 +154,13 @@ private:
 	void rebuild_gamespeed_menu();
 
 	// Increases the gamespeed
-	void increase_gamespeed();
+	void increase_gamespeed(uint16_t speed);
 	// Decreases the gamespeed
-	void decrease_gamespeed();
+	void decrease_gamespeed(uint16_t speed);
 	// Pauses / Unpauses the game and calls rebuild_gamespeed_menu
 	void toggle_game_paused();
+	// Resets the speed to 1x
+	void reset_gamespeed();
 
 	struct WantedBuildingWindow {
 		explicit WantedBuildingWindow(const Vector2i& pos,

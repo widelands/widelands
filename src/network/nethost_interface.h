@@ -78,16 +78,23 @@ public:
 	 * Calling this on a closed connection will silently fail.
 	 * \param id The connection id of the client that should be sent to.
 	 * \param packet The packet to send.
+	 * \param priority The priority to send the packet with. Packets with higher priority (e.g.,
+	 * pings) might overtake packets with lower priority (e.g., file transfers).
 	 */
-	virtual void send(ConnectionId id, const SendPacket& packet) = 0;
+	virtual void
+	send(ConnectionId id, const SendPacket& packet, NetPriority priority = NetPriority::kNormal) = 0;
 
 	/**
 	 * Sends a packet to a group of clients.
 	 * Calling this on a closed connection will silently fail.
 	 * \param ids The connection ids of the clients that should be sent to.
 	 * \param packet The packet to send.
+	 * \param priority The priority to send the packet with. Packets with higher priority (e.g.,
+	 * pings) might overtake packets with lower priority (e.g., file transfers).
 	 */
-	virtual void send(const std::vector<ConnectionId>& ids, const SendPacket& packet) = 0;
+	virtual void send(const std::vector<ConnectionId>& ids,
+	                  const SendPacket& packet,
+	                  NetPriority priority = NetPriority::kNormal) = 0;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETHOST_INTERFACE_H

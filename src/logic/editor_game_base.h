@@ -115,10 +115,14 @@ public:
 	// loading stuff
 	void allocate_player_maps();
 	virtual void postload();
-	void load_graphics(UI::ProgressWindow& loader_ui);
+	void load_graphics();
 	virtual void cleanup_for_load();
+	void set_loader_ui(UI::ProgressWindow*);
+	UI::ProgressWindow* get_loader_ui() {
+		return loader_ui_;
+	}
 
-	void set_road(const FCoords&, uint8_t direction, uint8_t roadtype);
+	void set_road(const FCoords&, uint8_t direction, RoadType roadtype);
 
 	// warping stuff. instantly creating map_objects
 	Building& warp_building(const Coords&,
@@ -146,6 +150,7 @@ public:
 	                                      const BuildingDescr* former_building);
 	Bob& create_ship(const Coords&, int ship_type_idx, Player* owner = nullptr);
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
+	Bob& create_ferry(const Coords&, Player* owner);
 
 	uint32_t get_gametime() const {
 		return gametime_;
@@ -158,6 +163,7 @@ public:
 	void inform_players_about_ownership(MapIndex, PlayerNumber);
 	void inform_players_about_immovable(MapIndex, MapObjectDescr const*);
 	void inform_players_about_road(FCoords, MapObjectDescr const*);
+	void inform_players_about_waterway(FCoords, MapObjectDescr const*);
 
 	void unconquer_area(PlayerArea<Area<FCoords>>, PlayerNumber destroying_player = 0);
 	void conquer_area(PlayerArea<Area<FCoords>>, bool conquer_guarded_location = false);
@@ -196,6 +202,9 @@ public:
 
 	// Returns the mutable tribes. Prefer tribes() whenever possible.
 	Tribes* mutable_tribes();
+
+protected:
+	UI::ProgressWindow* loader_ui_;
 
 private:
 	/// Common function for create_critter and create_ship.

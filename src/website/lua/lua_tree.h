@@ -60,9 +60,9 @@ protected:
 	static const std::string tab_;
 
 	struct KeyValuePair {
-		explicit KeyValuePair(const std::string& init_key, LuaTree::Value* init_value) :
-			key(init_key),
-			value(init_value) {}
+		explicit KeyValuePair(const std::string& init_key, LuaTree::Value* init_value)
+		   : key(init_key), value(init_value) {
+		}
 
 		const std::string key;
 		std::unique_ptr<LuaTree::Value> value;
