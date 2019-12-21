@@ -49,15 +49,17 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "fruit", amount = 8 },
-      { name = "water", amount = 8 },
+      { name = "water", amount = 5 },
+      { name = "fruit", amount = 2 },
    },
+
    outputs = {
       "fish"
    },
 
    indicate_workarea_overlaps = {
       frisians_aqua_farm = false,
+      frisians_charcoal_burners_house = false,
       frisians_clay_pit = true,
    },
 

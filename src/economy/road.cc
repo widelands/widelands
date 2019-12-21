@@ -37,32 +37,23 @@ namespace {
 const RoadDescr g_road_descr("road", "Road");
 }
 
-const RoadDescr& Road::descr() const {
-	return g_road_descr;
-}
-
 bool Road::is_road_descr(MapObjectDescr const* const descr) {
 	return descr == &g_road_descr;
+}
+
+Road::CarrierSlot::CarrierSlot()
+   : carrier(nullptr), carrier_request(nullptr), second_carrier(false) {
 }
 
 /**
  * Most of the actual work is done in init.
  */
-Road::Road()
-   : PlayerImmovable(g_road_descr), wallet_(0), last_wallet_charge_(0), type_(0), idle_index_(0) {
-	flags_[0] = flags_[1] = nullptr;
-	flagidx_[0] = flagidx_[1] = -1;
-
-	// Initialize the worker slots for the road
-	// TODO(unknown): make this configurable
+Road::Road() : RoadBase(g_road_descr, RoadType::kNone), wallet_(0), last_wallet_charge_(0) {
 	CarrierSlot slot;
 	carrier_slots_.push_back(slot);
 	carrier_slots_.push_back(slot);
-	carrier_slots_[0].carrier_type = 1;
-	carrier_slots_[1].carrier_type = 2;
-}
-
-Road::CarrierSlot::CarrierSlot() : carrier(nullptr), carrier_request(nullptr), carrier_type(0) {
+	carrier_slots_[0].second_carrier = false;
+	carrier_slots_[1].second_carrier = true;
 }
 
 /**
@@ -95,185 +86,9 @@ Road& Road::create(EditorGameBase& egbase, Flag& start, Flag& end, const Path& p
 	return road;
 }
 
-int32_t Road::get_size() const {
-	return SMALL;
-}
-
-bool Road::get_passable() const {
-	return true;
-}
-
-BaseImmovable::PositionList Road::get_positions(const EditorGameBase& egbase) const {
-	const Map& map = egbase.map();
-	Coords curf = map.get_fcoords(path_.get_start());
-
-	PositionList rv;
-	const Path::StepVector::size_type nr_steps = path_.get_nsteps();
-	for (Path::StepVector::size_type steps = 0; steps < nr_steps + 1; ++steps) {
-		if (steps > 0 && steps < path_.get_nsteps())
-			rv.push_back(curf);
-
-		if (steps < path_.get_nsteps())
-			map.get_neighbour(curf, path_[steps], &curf);
-	}
-	return rv;
-}
-
-Flag& Road::base_flag() {
-	return *flags_[FlagStart];
-}
-
-/**
- * Return the cost of getting from fromflag to the other flag.
- */
-int32_t Road::get_cost(FlagId fromflag) {
-	return cost_[fromflag];
-}
-
-/**
- * Set the new path, calculate costs.
- * You have to set start and end flags before calling this function.
- */
-void Road::set_path(EditorGameBase& egbase, const Path& path) {
-	assert(path.get_nsteps() >= 2);
-	assert(path.get_start() == flags_[FlagStart]->get_position());
-	assert(path.get_end() == flags_[FlagEnd]->get_position());
-
-	path_ = path;
-	egbase.map().calc_cost(path, &cost_[FlagStart], &cost_[FlagEnd]);
-
-	// Figure out where carriers should idle
-	idle_index_ = path.get_nsteps() / 2;
-}
-
-/**
- * Add road markings to the map
- */
-void Road::mark_map(EditorGameBase& egbase) {
-	const Map& map = egbase.map();
-	FCoords curf = map.get_fcoords(path_.get_start());
-
-	const Path::StepVector::size_type nr_steps = path_.get_nsteps();
-	for (Path::StepVector::size_type steps = 0; steps < nr_steps + 1; ++steps) {
-		if (steps > 0 && steps < path_.get_nsteps())
-			set_position(egbase, curf);
-
-		// mark the road that leads up to this field
-		if (steps > 0) {
-			const Direction dir = get_reverse_dir(path_[steps - 1]);
-			Direction const rdir = 2 * (dir - WALK_E);
-
-			if (rdir <= 4)
-				egbase.set_road(curf, rdir, type_);
-		}
-
-		// mark the road that leads away from this field
-		if (steps < path_.get_nsteps()) {
-			const Direction dir = path_[steps];
-			Direction const rdir = 2 * (dir - WALK_E);
-
-			if (rdir <= 4)
-				egbase.set_road(curf, rdir, type_);
-
-			map.get_neighbour(curf, dir, &curf);
-		}
-	}
-}
-
-/**
- * Remove road markings from the map
- */
-void Road::unmark_map(EditorGameBase& egbase) {
-	const Map& map = egbase.map();
-	FCoords curf(path_.get_start(), &map[path_.get_start()]);
-
-	const Path::StepVector::size_type nr_steps = path_.get_nsteps();
-	for (Path::StepVector::size_type steps = 0; steps < nr_steps + 1; ++steps) {
-		if (steps > 0 && steps < path_.get_nsteps())
-			unset_position(egbase, curf);
-
-		// mark the road that leads up to this field
-		if (steps > 0) {
-			const Direction dir = get_reverse_dir(path_[steps - 1]);
-			Direction const rdir = 2 * (dir - WALK_E);
-
-			if (rdir <= 4)
-				egbase.set_road(curf, rdir, RoadType::kNone);
-		}
-
-		// mark the road that leads away from this field
-		if (steps < path_.get_nsteps()) {
-			const Direction dir = path_[steps];
-			Direction const rdir = 2 * (dir - WALK_E);
-
-			if (rdir <= 4)
-				egbase.set_road(curf, rdir, RoadType::kNone);
-
-			map.get_neighbour(curf, dir, &curf);
-		}
-	}
-}
-
-/**
- * Initialize the road.
- */
-bool Road::init(EditorGameBase& egbase) {
-	PlayerImmovable::init(egbase);
-
-	if (2 <= path_.get_nsteps())
-		link_into_flags(egbase);
-	return true;
-}
-
-/**
- * This links into the flags, calls a carrier
- * and so on. This was formerly done in init (and
- * still is for normal games). But for save game loading
- * we needed to have this road already registered
- * as Map Object, thats why this is moved
- */
-void Road::link_into_flags(EditorGameBase& egbase) {
-	assert(path_.get_nsteps() >= 2);
-
-	// Link into the flags (this will also set our economy)
-	{
-		const Direction dir = path_[0];
-		flags_[FlagStart]->attach_road(dir, this);
-		flagidx_[FlagStart] = dir;
-	}
-
-	const Direction dir = get_reverse_dir(path_[path_.get_nsteps() - 1]);
-	flags_[FlagEnd]->attach_road(dir, this);
-	flagidx_[FlagEnd] = dir;
-
-	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd]);
-
-	// Mark Fields
-	mark_map(egbase);
-
-	/*
-	 * Iterate over all Carrierslots
-	 * If a carrier is set assign it to this road, else
-	 * request a new carrier
-	 */
-	if (upcast(Game, game, &egbase)) {
-		for (CarrierSlot& slot : carrier_slots_) {
-			if (Carrier* const carrier = slot.carrier.get(*game)) {
-				//  This happens after a road split. Tell the carrier what's going on.
-				carrier->set_location(this);
-				carrier->update_task_road(*game);
-			} else if (!slot.carrier_request && (slot.carrier_type == 1 || type_ == RoadType::kBusy)) {
-				request_carrier(slot);
-			}
-		}
-	}
-}
-
-/**
- * Cleanup the road
- */
 void Road::cleanup(EditorGameBase& egbase) {
-
+	Economy::check_split(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
+	Economy::check_split(*flags_[FlagStart], *flags_[FlagEnd], wwWORKER);
 	for (CarrierSlot& slot : carrier_slots_) {
 		delete slot.carrier_request;
 		slot.carrier_request = nullptr;
@@ -281,34 +96,35 @@ void Road::cleanup(EditorGameBase& egbase) {
 		// carrier will be released via PlayerImmovable::cleanup
 		slot.carrier = nullptr;
 	}
-
-	// Unmark Fields
-	unmark_map(egbase);
-
-	// Unlink from flags (also clears the economy)
-	flags_[FlagStart]->detach_road(flagidx_[FlagStart]);
-	flags_[FlagEnd]->detach_road(flagidx_[FlagEnd]);
-
-	Economy::check_split(*flags_[FlagStart], *flags_[FlagEnd]);
-
-	if (upcast(Game, game, &egbase)) {
-		flags_[FlagStart]->update_wares(*game, flags_[FlagEnd]);
-		flags_[FlagEnd]->update_wares(*game, flags_[FlagStart]);
-	}
-
-	PlayerImmovable::cleanup(egbase);
+	RoadBase::cleanup(egbase);
 }
 
-/**
- * Workers' economies are fixed by PlayerImmovable, but we need to handle
- * any requests ourselves.
- */
-void Road::set_economy(Economy* const e) {
-	PlayerImmovable::set_economy(e);
+void Road::link_into_flags(EditorGameBase& egbase, bool) {
+	RoadBase::link_into_flags(egbase);
+	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
+	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWORKER);
+	if (upcast(Game, game, &egbase)) {
+		for (CarrierSlot& slot : carrier_slots_) {
+			if (Carrier* const carrier = slot.carrier.get(*game)) {
+				// This happens after a road split. Tell the carrier what's going on.
+				carrier->set_location(this);
+				carrier->update_task_road(*game);
+			} else if (!slot.carrier_request &&
+			           (!slot.second_carrier || get_roadtype() == RoadType::kBusy)) {
+				// Normal carriers are requested at once, second carriers only for busy roads
+				request_carrier(slot);
+			}
+		}
+	}
+}
 
-	for (CarrierSlot& slot : carrier_slots_) {
-		if (slot.carrier_request) {
-			slot.carrier_request->set_economy(e);
+void Road::set_economy(Economy* const e, WareWorker type) {
+	RoadBase::set_economy(e, type);
+	if (type == wwWORKER) {
+		for (CarrierSlot& slot : carrier_slots_) {
+			if (slot.carrier_request) {
+				slot.carrier_request->set_economy(e);
+			}
 		}
 	}
 }
@@ -320,12 +136,9 @@ void Road::set_economy(Economy* const e) {
  * been issued.
  */
 void Road::request_carrier(CarrierSlot& slot) {
-	if (slot.carrier_type == 1)
-		slot.carrier_request =
-		   new Request(*this, owner().tribe().carrier(), Road::request_carrier_callback, wwWORKER);
-	else
-		slot.carrier_request =
-		   new Request(*this, owner().tribe().carrier2(), Road::request_carrier_callback, wwWORKER);
+	slot.carrier_request = new Request(
+	   *this, slot.second_carrier ? owner().tribe().carrier2() : owner().tribe().carrier(),
+	   request_carrier_callback, wwWORKER);
 }
 
 /**
@@ -397,15 +210,6 @@ void Road::assign_carrier(Carrier& c, uint8_t slot) {
 
 	carrier_slots_[slot].carrier = &c;
 	carrier_slots_[slot].carrier_request = nullptr;
-}
-
-/**
- * A flag has been placed that splits this road. This function is called before
- * the new flag initializes. We remove markings to avoid interference with the
- * flag.
- */
-void Road::presplit(Game& game, Coords) {
-	unmark_map(game);
 }
 
 /**
@@ -499,7 +303,7 @@ void Road::postsplit(Game& game, Flag& flag) {
 					old_slot.carrier = nullptr;
 					for (CarrierSlot& new_slot : newroad.carrier_slots_) {
 						if (!new_slot.carrier.get(game) && !new_slot.carrier_request &&
-						    new_slot.carrier_type == old_slot.carrier_type) {
+						    new_slot.second_carrier == old_slot.second_carrier) {
 							upcast(Carrier, new_carrier, w);
 							new_slot.carrier = new_carrier;
 							break;
@@ -528,7 +332,7 @@ void Road::postsplit(Game& game, Flag& flag) {
 	//  work correctly
 	for (CarrierSlot& slot : carrier_slots_) {
 		if (!slot.carrier.get(game) && !slot.carrier_request &&
-		    (slot.carrier_type == 1 || type_ == RoadType::kBusy)) {
+		    (!slot.second_carrier || type_ == RoadType::kBusy)) {
 			request_carrier(slot);
 		}
 	}
@@ -615,7 +419,7 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
 		flags_[1]->propagate_promoted_road(this);
 		mark_map(game);
 		for (CarrierSlot& slot : carrier_slots_) {
-			if (!slot.carrier.get(game) && !slot.carrier_request && slot.carrier_type != 1) {
+			if (!slot.carrier.get(game) && !slot.carrier_request && slot.second_carrier) {
 				request_carrier(slot);
 			}
 		}

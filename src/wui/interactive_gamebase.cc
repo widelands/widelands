@@ -59,6 +59,9 @@ std::string speed_string(int const speed) {
 	return _("PAUSE");
 }
 
+constexpr uint8_t kSpeedSlow = 250;
+constexpr uint16_t kSpeedDefault = 1000;
+constexpr uint16_t kSpeedFast = 10000;
 }  // namespace
 
 InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
@@ -282,12 +285,16 @@ void InteractiveGameBase::rebuild_gamespeed_menu() {
 void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	switch (entry) {
 	case GameSpeedEntry::kIncrease: {
-		increase_gamespeed();
+		increase_gamespeed(SDL_GetModState() & KMOD_SHIFT ?
+		                      kSpeedSlow :
+		                      SDL_GetModState() & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;
 	case GameSpeedEntry::kDecrease: {
-		decrease_gamespeed();
+		decrease_gamespeed(SDL_GetModState() & KMOD_SHIFT ?
+		                      kSpeedSlow :
+		                      SDL_GetModState() & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;
@@ -299,16 +306,23 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	}
 }
 
-void InteractiveGameBase::increase_gamespeed() {
+void InteractiveGameBase::increase_gamespeed(uint16_t speed) {
 	if (GameController* const ctrl = get_game()->game_controller()) {
-		ctrl->set_desired_speed(ctrl->desired_speed() + 1000);
+		uint32_t const current_speed = ctrl->desired_speed();
+		ctrl->set_desired_speed(current_speed + speed);
 	}
 }
 
-void InteractiveGameBase::decrease_gamespeed() {
+void InteractiveGameBase::decrease_gamespeed(uint16_t speed) {
 	if (GameController* const ctrl = get_game()->game_controller()) {
-		uint32_t const speed = ctrl->desired_speed();
-		ctrl->set_desired_speed(1000 < speed ? speed - 1000 : 0);
+		uint32_t const current_speed = ctrl->desired_speed();
+		ctrl->set_desired_speed(current_speed > speed ? current_speed - speed : 0);
+	}
+}
+
+void InteractiveGameBase::reset_gamespeed() {
+	if (GameController* const ctrl = get_game()->game_controller()) {
+		ctrl->set_desired_speed(kSpeedDefault);
 	}
 }
 
@@ -327,26 +341,20 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 
 	if (down) {
 		switch (code.sym) {
-		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_PAGEUP:
-			increase_gamespeed();
+			increase_gamespeed(
+			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 			return true;
-
 		case SDLK_PAUSE:
-			toggle_game_paused();
-			return true;
-
-		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM) {
-				break;
+			if (code.mod & KMOD_SHIFT) {
+				reset_gamespeed();
+			} else {
+				toggle_game_paused();
 			}
-			FALLS_THROUGH;
+			return true;
 		case SDLK_PAGEDOWN:
-			decrease_gamespeed();
+			decrease_gamespeed(
+			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 			return true;
 		case SDLK_ESCAPE:
 			InteractiveGameBase::toggle_mainmenu();
