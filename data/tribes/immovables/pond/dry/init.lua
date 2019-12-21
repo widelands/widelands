@@ -16,6 +16,9 @@ tribes:new_immovable_type {
       },
       with_fish = {
          "transform=pond_growing",
+      },
+      with_stack = {
+         "transform=pond_burning",
       }
    },
    animations = {

@@ -84,8 +84,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs honey_bread or workers need experience",
             "consume=barley water honey",
-            "sleep=35000",
-            "animate=working 35000",
+            "sleep=20000",
+            "animate=working 25000",
             "produce=honey_bread"
          }
       },

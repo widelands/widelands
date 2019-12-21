@@ -10,7 +10,7 @@ tribes:new_productionsite_type {
    size = "medium",
 
    enhancement_cost = {
-      brick = 2,
+      brick = 1,
       granite = 2,
       log = 1,
       reed = 1
