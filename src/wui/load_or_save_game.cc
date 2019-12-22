@@ -155,7 +155,6 @@ std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 		result->mapname =
 		   (boost::format(ngettext("Selected %d file:", "Selected %d files:", nr_files)) % nr_files)
 		      .str();
-
 	} else {
 		delete_->set_tooltip("");
 	}

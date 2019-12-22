@@ -183,7 +183,7 @@ void GameDetails::update(const SavegameData& gamedata) {
 	}
 
 	if (gamedata.errormessage.empty()) {
-		if (gamedata.filename_list.empty()) {
+		if (gamedata.filename_list.empty() && !gamedata.filename.empty()) {
 			name_label_.set_text(
 			   as_richtext(as_heading_with_content(_("Map Name:"), gamedata.mapname, style_, true)));
 
@@ -233,7 +233,7 @@ void GameDetails::update(const SavegameData& gamedata) {
 					log("Failed to load the minimap image : %s\n", e.what());
 				}
 			}
-		} else {
+		} else if (!gamedata.filename_list.empty()) {
 			std::string filename_list = richtext_escape(gamedata.filename_list);
 			boost::replace_all(filename_list, "\n", "<br> • ");
 			name_label_.set_text(
