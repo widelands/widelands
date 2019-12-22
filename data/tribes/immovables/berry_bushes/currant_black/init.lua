@@ -19,7 +19,6 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 20000",
-         "remove=10",
          "grow=berry_bush_currant_black_small",
       },
    },
@@ -47,7 +46,6 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 24000",
-         "remove=30",
          "grow=berry_bush_currant_black_medium",
       },
    },
@@ -75,7 +73,6 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 22000",
-         "remove=70",
          "grow=berry_bush_currant_black_ripe",
       },
    },

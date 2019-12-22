@@ -10,14 +10,14 @@ tribes:new_productionsite_type {
    size = "medium",
 
    buildcost = {
-      brick = 4,
+      brick = 3,
       granite = 2,
       log = 1,
       reed = 2
    },
    return_on_dismantle = {
       brick = 2,
-      log = 1,
+      granite = 1,
       reed = 1
    },
 
@@ -96,8 +96,10 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs iron",
             "consume=coal iron_ore",
-            "sleep=27000",
+            "sleep=25000",
+            "playsound=sound/metal/furnace 192",
             "animate=working_iron 35000",
+            "playsound=sound/metal/ironping 80",
             "produce=iron"
          },
       },
@@ -108,7 +110,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs gold",
             "consume=coal gold_ore",
             "sleep=27000",
+            "playsound=sound/metal/furnace 192",
             "animate=working_gold 35000",
+            "playsound=sound/metal/goldping 80",
             "produce=gold"
          },
       },

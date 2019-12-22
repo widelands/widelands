@@ -48,6 +48,7 @@ tribes:new_productionsite_type {
 
    indicate_workarea_overlaps = {
       frisians_aqua_farm = true,
+      frisians_charcoal_burners_house = true,
       frisians_clay_pit = false,
       frisians_berry_farm = false,
       frisians_reed_farm = false,
@@ -59,7 +60,7 @@ tribes:new_productionsite_type {
       very_weak_ai_limit = 1,
       weak_ai_limit = 2,
       basic_amount = 1,
-      supports_production_of = { "fish" }
+      supports_production_of = { "fish", "coal", }
    },
 
    working_positions = {
@@ -79,7 +80,8 @@ tribes:new_productionsite_type {
          descname = _"making clay",
          actions = {
 
-            "return=skipped unless economy needs clay or economy needs fish", -- Fish-producing aqua farms can stop working if the clay pits do so
+            "return=skipped unless economy needs clay or economy needs fish or economy needs coal",
+            -- Fish-producing aqua farms and charcoal burners houses can stop working if the clay pits do so
             "return=failed unless site has water",
             "callworker=dig",
             "consume=water",
