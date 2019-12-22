@@ -3,7 +3,7 @@ function ware_helptext(tribe)
       -- TRANSLATORS: Helptext for a ware: Gold Dust
       default = pgettext("ware", "Gold dust is washed in a gold digger dwelling."),
       -- TRANSLATORS: Helptext for a ware: Gold Dust
-      amazons = pgettext("amazons_ware", "Smelted in a smelting works, it turns into gold which is used as a precious building material and to produce armor."),
+      amazons = pgettext("amazons_ware", "Smelted in a furnace, it turns into gold which is used as a precious building material and to produce armor."),
    }
    local result = ""
    if tribe then

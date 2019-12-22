@@ -1,7 +1,7 @@
 function ware_helptext(tribe)
    local helptext = {
       -- TRANSLATORS: Helptext for a ware: Bread
-      amazons = pgettext("amazons_ware", "This tasty bread is made in cookeries out of cassava root and water. It is appreciated as basic food by miners, scouts and soldiers in training sites (labyrinth and dungeon).")
+      amazons = pgettext("amazons_ware", "This tasty bread is made in cookeries out of cassava root and water. It is the basic ingredient of a ration that is made by a food preserver. Soldiers like it too.")
    }
    local result = ""
    if tribe then
