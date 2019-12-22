@@ -56,6 +56,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
          descname = _"enhancing the fertility of land",
          actions = {
+            "callworker=check",
             "consume=charcoal fish",
             "call=terraform",
             "call=terraform",

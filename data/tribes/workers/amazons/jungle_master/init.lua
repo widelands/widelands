@@ -62,6 +62,9 @@ tribes:new_worker_type {
          "animate=water 2000",
          "return"
       },
+      check = {
+         "findspace=size:any radius:6 terraform",
+      },
       terraform = {
          "findspace=size:any radius:6 terraform",
          "walk=coords",
