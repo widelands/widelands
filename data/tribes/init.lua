@@ -397,6 +397,7 @@ print_loading_message("┗━ took", function()
 
       egbase:set_loading_message(_("Loading tribes: Amazonian workers (8/17)"))
       include "tribes/workers/amazons/carrier/init.lua"
+      include "tribes/workers/amazons/ferry/init.lua"
       include "tribes/workers/amazons/tapir/init.lua"
       include "tribes/workers/amazons/builder/init.lua"
       include "tribes/workers/amazons/soldier/init.lua"
@@ -654,6 +655,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/amazons/shipyard/init.lua"
       include "tribes/buildings/productionsites/amazons/stonecarvery/init.lua"
       include "tribes/buildings/productionsites/amazons/youth_gathering/init.lua"
+      include "tribes/buildings/productionsites/amazons/ferry_yard/init.lua"
       -- Amazons big
       include "tribes/buildings/productionsites/amazons/tapir_farm/init.lua"
       include "tribes/buildings/productionsites/amazons/cocoa_farm/init.lua"

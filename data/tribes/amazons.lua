@@ -127,6 +127,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "amazons_carrier",
+         "amazons_ferry",
          "amazons_tapir",
          "amazons_tapir_breeder"
       },
