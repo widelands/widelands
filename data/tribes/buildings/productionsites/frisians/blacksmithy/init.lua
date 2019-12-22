@@ -63,7 +63,7 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "iron", amount = 7 },
       { name = "log", amount = 7 },
-      { name = "reed", amount = 7 }
+      { name = "reed", amount = 4 }
    },
    outputs = {
       "felling_ax",
