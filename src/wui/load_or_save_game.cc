@@ -93,7 +93,7 @@ const std::string LoadOrSaveGame::filename_list_string() const {
 bool LoadOrSaveGame::selection_contains_directory() const {
 	const std::set<uint32_t>& selections = table_->selections();
 	for (const uint32_t index : selections) {
-		const SavegameData& gamedata = games_data_[table_->get(table_->get_record(index))];
+		const SavegameData& gamedata = get_savegame(index);
 		if (gamedata.is_directory()) {
 			return true;
 		}
@@ -101,12 +101,17 @@ bool LoadOrSaveGame::selection_contains_directory() const {
 	return false;
 }
 
+const SavegameData& LoadOrSaveGame::get_savegame(uint32_t index) const {
+	return games_data_[(*table_)[index]];
+}
+
 const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>& selections) const {
 	boost::format message;
 	for (const uint32_t index : selections) {
-		const SavegameData& gamedata = games_data_[table_->get(table_->get_record(index))];
-
-		if (gamedata.errormessage.empty()) {
+		const SavegameData& gamedata = get_savegame(index);
+		if (gamedata.is_directory()) {
+			continue;
+		} else if (gamedata.errormessage.empty()) {
 			std::vector<std::string> listme;
 			listme.push_back(richtext_escape(gamedata.mapname));
 			listme.push_back(gamedata.savedonstring);
@@ -119,17 +124,11 @@ const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>&
 	return message.str();
 }
 bool LoadOrSaveGame::compare_save_time(uint32_t rowa, uint32_t rowb) const {
-	const SavegameData& r1 = games_data_[(*table_)[rowa]];
-	const SavegameData& r2 = games_data_[(*table_)[rowb]];
-
-	return r1.compare_save_time(r2);
+	return get_savegame(rowa).compare_save_time(get_savegame(rowb));
 }
 
 bool LoadOrSaveGame::compare_map_name(uint32_t rowa, uint32_t rowb) const {
-	const SavegameData& r1 = games_data_[table_->get(table_->get_record(rowa))];
-	const SavegameData& r2 = games_data_[table_->get(table_->get_record(rowb))];
-
-	return r1.compare_map_name(r2);
+	return get_savegame(rowa).compare_map_name(get_savegame(rowb));
 }
 
 std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
@@ -150,11 +149,13 @@ std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
 		      _("Delete these replays") :
 		      /** TRANSLATORS: Tooltip for the delete button. The user has selected multiple files */
 		      _("Delete these games"));
-		result->mapname =
-		   (boost::format(ngettext("Selected %d file:", "Selected %d files:", selections)) %
-		    selections)
-		      .str();
 		result->filename_list = filename_list_string();
+		size_t nr_files =
+		   std::count(result->filename_list.begin(), result->filename_list.end(), '\n');
+		result->mapname =
+		   (boost::format(ngettext("Selected %d file:", "Selected %d files:", nr_files)) % nr_files)
+		      .str();
+
 	} else {
 		delete_->set_tooltip("");
 	}
@@ -180,8 +181,8 @@ void LoadOrSaveGame::clear_selections() {
 
 void LoadOrSaveGame::select_by_name(const std::string& name) {
 	table_->clear_selections();
-	for (size_t idx = 0; idx < table_->size(); ++idx) {
-		const SavegameData& gamedata = games_data_[(*table_)[idx]];
+	for (uint32_t idx = 0; idx < table_->size(); ++idx) {
+		const SavegameData& gamedata = get_savegame(idx);
 		if (name == gamedata.filename) {
 			table_->select(idx);
 			return;
@@ -201,8 +202,8 @@ GameDetails* LoadOrSaveGame::game_details() {
 	return &game_details_;
 }
 
-const std::string LoadOrSaveGame::get_filename(int index) const {
-	return games_data_[table_->get(table_->get_record(index))].filename;
+const std::string LoadOrSaveGame::get_filename(uint32_t index) const {
+	return get_savegame(index).filename;
 }
 
 void LoadOrSaveGame::clicked_delete() {
