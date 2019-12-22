@@ -57,7 +57,6 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
          descname = _"making a rope",
          actions = {
-            "return=skipped unless economy needs rope",
             "consume=liana:2",
             "sleep=32000",
             "animate=working 40000",
