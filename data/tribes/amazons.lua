@@ -30,6 +30,9 @@ tribes:new_tribe {
          image_dirname .. "roadt_normal_00.png",
          image_dirname .. "roadt_normal_01.png",
       },
+      waterway = {
+         "tribes/images/amazons/waterway_0.png",
+      },
    },
 
    resource_indicators = {
@@ -267,7 +270,6 @@ tribes:new_tribe {
       "amazons_food_preserver",
       "amazons_youth_gathering",
       "amazons_gardening_center",
-      "amazons_shipyard",
 
       -- Big
       "amazons_tapir_farm",
@@ -291,6 +293,10 @@ tribes:new_tribe {
       "amazons_fortress",
       "amazons_fortification",
 
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      "amazons_ferry_yard",
+      "amazons_shipyard",
+
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
       "dismantlesite",
@@ -313,6 +319,7 @@ tribes:new_tribe {
    geologist = "amazons_geologist",
    soldier = "amazons_soldier",
    ship = "amazons_ship",
+   ferry = "amazons_ferry",
    port = "amazons_port",
    ironore = "gold_dust",
    rawlog = "log",
