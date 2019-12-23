@@ -88,7 +88,7 @@ world:new_immovable_type{
    icon = dirname .. "old/idle_0.png",
    editor_category = "trees_wasteland",
    size = "small",
-   attributes = { "tree" },
+   attributes = { "tree", "normal_tree" },
    terrain_affinity = terrain_affinity,
    programs = {
       program = {
