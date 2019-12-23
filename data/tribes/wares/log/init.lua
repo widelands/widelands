@@ -7,10 +7,7 @@ tribes:new_ware_type {
    descname = pgettext("ware", "Log"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {
-      --amazons woodcutters should stop felling rare trees if not needed
-      amazons = 150,
-   },
+   default_target_quantity = {},
    preciousness = {
       amazons = 24,
       atlanteans = 14,
