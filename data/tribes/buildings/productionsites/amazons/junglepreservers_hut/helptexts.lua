@@ -18,7 +18,7 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("amazons_building", "The junglemaster's hut needs free space within the work area to plant the trees.")
+   return pgettext("amazons_building", "The junglepreserver's hut needs free space within the work area to plant the trees.")
 end
 
 function building_helptext_performance()

@@ -251,7 +251,7 @@ tribes:new_tribe {
       -- Small
       "amazons_stonecutters_hut",
       "amazons_woodcutters_hut",
-      "amazons_junglemasters_hut",
+      "amazons_junglepreservers_hut",
       "amazons_hunter_gatherers_hut",
       "amazons_liana_cutters_hut",
       "amazons_water_gatherers_hut",

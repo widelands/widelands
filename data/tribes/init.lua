@@ -637,7 +637,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/amazons/rare_trees_woodcutters_hut/init.lua"
       include "tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua"
       include "tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua"
-      include "tribes/buildings/productionsites/amazons/junglemasters_hut/init.lua"
+      include "tribes/buildings/productionsites/amazons/junglepreservers_hut/init.lua"
       include "tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua"
       include "tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua"
       include "tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua"
