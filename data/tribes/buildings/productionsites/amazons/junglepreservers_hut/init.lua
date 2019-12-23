@@ -42,7 +42,7 @@ tribes:new_productionsite_type {
       amazons_cocoa_farm = false,
       amazons_cassava_root_plantation = false,
       amazons_rare_tree_plantation = false,
-      amazons_junglemasters_hut = false,
+      amazons_junglepreservers_hut = false,
       amazons_liana_cutters_hut = true,
       amazons_woodcutters_hut = true,
    },
