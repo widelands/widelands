@@ -227,6 +227,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		   map_view_.set_size(message.width, message.height);
 		   resize_chat_overlay();
 		   finalize_toolbar();
+		   mainview_move();
 	   });
 	sound_subscriber_ = Notifications::subscribe<NoteSound>(
 	   [this](const NoteSound& note) { play_sound_effect(note); });

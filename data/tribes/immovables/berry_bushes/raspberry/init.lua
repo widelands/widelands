@@ -19,7 +19,6 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 20000",
-         "remove=60",
          "grow=berry_bush_raspberry_small",
       },
    },
@@ -47,7 +46,6 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 20000",
-         "remove=40",
          "grow=berry_bush_raspberry_medium",
       },
    },
@@ -75,7 +73,6 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 40000",
-         "remove=20",
          "grow=berry_bush_raspberry_ripe",
       },
    },
