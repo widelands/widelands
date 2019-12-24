@@ -217,24 +217,21 @@ void LoadOrSaveGame::clicked_delete() {
 		   no_selections == 1 ?
 		      _("Do you really want to delete this replay?") :
 		      /** TRANSLATORS: Used with multiple replays, 1 replay has a
-		                                                                                                                                                                                                                separate string. DO NOT omit the
-		                                                                                                                                                                                             placeholder in your translation. */
+		                      separate string. DO NOT omit the placeholder in your translation. */
 		      (boost::format(ngettext("Do you really want to delete this %d replay?",
 		                              "Do you really want to delete these %d replays?",
 		                              no_selections)) %
 		       no_selections)
 		         .str();
 	} else {
-		header =
-		   no_selections == 1 ?
-		      _("Do you really want to delete this game?") :
-		      /** TRANSLATORS: Used with multiple games, 1 game has a separate
-		                                                                                                   string. DO NOT omit the placeholder in your translation. */
-		      (boost::format(ngettext("Do you really want to delete this %d game?",
-		                              "Do you really want to delete these %d games?",
-		                              no_selections)) %
-		       no_selections)
-		         .str();
+		header = no_selections == 1 ? _("Do you really want to delete this game?") :
+		                              /** TRANSLATORS: Used with multiple games, 1 game has a separate
+		                                 string. DO NOT omit the placeholder in your translation. */
+		            (boost::format(ngettext("Do you really want to delete this %d game?",
+		                                    "Do you really want to delete these %d games?",
+		                                    no_selections)) %
+		             no_selections)
+		               .str();
 	}
 
 	bool do_delete = SDL_GetModState() & KMOD_CTRL;
@@ -439,13 +436,18 @@ void LoadOrSaveGame::add_error_info(SavegameData& gamedata, std::string errormes
 void LoadOrSaveGame::add_sub_dir(const std::string& gamefilename) {
 	// Add subdirectory to the list
 	const char* fs_filename = FileSystem::fs_filename(gamefilename.c_str());
-	if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, ".."))
+	if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {
 		return;
+	}
 	games_data_.push_back(SavegameData::create_sub_dir(gamefilename));
 }
-
+bool LoadOrSaveGame::is_savegame_dir(const std::string& gamefilename) const {
+	std::string preload_file = gamefilename + g_fs->file_separator() + "preload";
+	std::string map_file = gamefilename + g_fs->file_separator() + "minimap.png";
+	return g_fs->file_exists(preload_file) && g_fs->file_exists(map_file);
+}
 void LoadOrSaveGame::load_gamefile(const std::string& gamefilename) {
-	if (g_fs->is_directory(gamefilename)) {
+	if (g_fs->is_directory(gamefilename) && !is_savegame_dir(gamefilename)) {
 		add_sub_dir(gamefilename);
 		return;
 	}

@@ -96,20 +96,21 @@ void SavegameTable::create_error_entry(UI::Table<uintptr_t const>::EntryRecord& 
 void SavegameTable::create_directory_entry(UI::Table<const uintptr_t>::EntryRecord& te,
                                            const SavegameData& savegame) {
 	size_t last_column_index = number_of_columns() - 1;
-	for (size_t col_index = 0; col_index < last_column_index; col_index++) {
+	for (size_t col_index = 0; col_index < last_column_index; ++col_index) {
 		te.set_string(col_index, "");
 	}
 	if (savegame.is_parent_directory()) {
 		te.set_picture(last_column_index, g_gr->images().get("images/ui_basic/ls_dir.png"),
-		               (boost::format("%s") % _("<parent>")).str());
+		               /** TRANSLATORS: Parent directory/folder */
+		               (boost::format("<%s>") % _("parent")).str());
 	} else if (savegame.is_sub_directory()) {
-		te.set_picture(
-		   last_column_index, g_gr->images().get("images/ui_basic/ls_dir.png"),
-		   (boost::format("%s") % FileSystem::filename_without_ext(savegame.filename.c_str())).str());
+		te.set_picture(last_column_index, g_gr->images().get("images/ui_basic/ls_dir.png"),
+		               FileSystem::filename_without_ext(savegame.filename.c_str()));
 	}
 }
 
 void SavegameTable::set_show_filenames(bool) {
+	// empty on purpose, must be overridden for tables that support showing/hiding filenames
 }
 
 SavegameTableSinglePlayer::SavegameTableSinglePlayer(UI::Panel* parent,
@@ -152,9 +153,7 @@ void SavegameTableReplay::add_columns() {
 	add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
 	std::string game_mode_tooltip = "";
 	/** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
-	load.
-	            */
-	/** TRANSLATORS: %s is a list of game modes. */
+	load.*/
 	g_gr->styles().font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
 
 	/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
@@ -219,9 +218,7 @@ void SavegameTableMultiplayer::add_columns() {
 	add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
 	std::string game_mode_tooltip = "";
 	/** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
-	load.
-	            */
-	/** TRANSLATORS: %s is a list of game modes. */
+	load.*/
 	g_gr->styles().font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
 
 	/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
