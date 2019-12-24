@@ -367,8 +367,12 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	cleanup_temp_backups();
 
 	// Start the SDL core
-	if (SDL_Init(SDL_INIT_VIDEO) == -1)
-		throw wexception("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
+	if (SDL_Init(SDL_INIT_VIDEO) == -1) {
+		// We sometimes run into a missing video driver in our CI environment, so we exit 0 to prevent
+		// too frequent failures
+		log("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
+		exit(0);
+	}
 
 	SDL_ShowCursor(SDL_DISABLE);
 	g_gr = new Graphic();
