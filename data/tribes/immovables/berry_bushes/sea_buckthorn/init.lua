@@ -19,7 +19,6 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 14000",
-         "remove=15",
          "grow=berry_bush_sea_buckthorn_small",
       },
    },
@@ -47,7 +46,6 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 18000",
-         "remove=10",
          "grow=berry_bush_sea_buckthorn_medium",
       },
    },
@@ -75,7 +73,6 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "animate=idle 26000",
-         "remove=5",
          "grow=berry_bush_sea_buckthorn_ripe",
       },
    },
