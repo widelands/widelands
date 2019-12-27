@@ -509,7 +509,9 @@ bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
 	if (which != 0) {
 		return false;
 	}
-
+	if ((get_config_bool("ctrl_zoom", false)) && !(SDL_GetModState() & KMOD_CTRL)) {
+		return false;
+	}
 	if (is_animating()) {
 		return true;
 	}

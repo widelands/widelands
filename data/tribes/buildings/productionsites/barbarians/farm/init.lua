@@ -84,8 +84,8 @@ tribes:new_productionsite_type {
          descname = _"harvesting wheat",
          actions = {
             "callworker=harvest",
-            "animate=working 17000",
-            "sleep=3000"
+            "animate=working 3000",
+            "sleep=1000"
          }
       },
    },

@@ -48,6 +48,7 @@
 #include "logic/widelands_geometry.h"
 #include "scripting/lua_interface.h"
 #include "sound/sound_handler.h"
+#include "wlapplication_options.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
 #include "wui/logmessage.h"
@@ -732,7 +733,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	}
 
 	// In-game clock and FPS
-	if (game != nullptr) {
+	if ((game != nullptr) && get_config_bool("game_clock", true)) {
 		// Blit in-game clock
 		const std::string gametime(gametimestring(egbase().get_gametime(), true));
 		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
