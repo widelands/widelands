@@ -1533,6 +1533,7 @@ void Soldier::start_task_die(Game& game) {
 
 	// Dead soldier is not owned by a location
 	set_location(nullptr);
+	log("soldier dies!!\n");
 
 	const uint32_t anim =
 	   descr().get_rand_anim(game, combat_walking_ == CD_COMBAT_W ? "die_w" : "die_e", this);
@@ -1558,7 +1559,31 @@ void Soldier::die_update(Game& game, State& state) {
 void Soldier::die_pop(Game& game, State&) {
 	// Destroy the soldier!
 	molog("[die] soldier %u has died\n", serial());
+	log("[die] soldier %u has died\n", serial());
 	schedule_destroy(game);
+
+	PlayerNumber const land_owner = get_position().field->get_owned_by();
+	// First check if the soldier is standing on someone else's territory
+	if (land_owner != owner().player_number()) {
+		// Let's collect all reachable attack_target sites in vicinity (militarysites mainly)
+		std::vector<BaseImmovable*> attack_targets;
+		game.map().find_reachable_immovables_unique(
+		   game, Area<FCoords>(get_position(), kMaxProtectionRadius), attack_targets,
+		   CheckStepWalkOn(descr().movecaps(), false), FindImmovableAttackTarget());
+
+		for (BaseImmovable* temp_attack_target : attack_targets) {
+			Building* building = dynamic_cast<Building*>(temp_attack_target);
+			assert(building != nullptr && building->attack_target() != nullptr);
+			const Player& attack_target_player = building->owner();
+			// Let's inform the site that this (=enemy) soldier is nearby and within the site's owner's
+			// territory
+			if (attack_target_player.player_number() == land_owner &&
+			    attack_target_player.is_hostile(*get_owner())) {
+				log("notify building to check for enemy soldiers\n");
+				building->attack_target()->check_if_still_under_attack();
+			}
+		}
+	}
 }
 
 /**

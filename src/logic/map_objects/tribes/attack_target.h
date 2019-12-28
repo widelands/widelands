@@ -63,6 +63,16 @@ public:
 	};
 	virtual AttackResult attack(Soldier* attacker) const = 0;
 
+	bool is_under_attack() const {
+		return is_under_attack_;
+	}
+
+	virtual void check_if_still_under_attack() const {
+	}
+
+protected:
+	mutable bool is_under_attack_ = false;
+
 private:
 	DISALLOW_COPY_AND_ASSIGN(AttackTarget);
 };

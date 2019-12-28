@@ -279,6 +279,14 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			                  g_gr->images().get(pic_bulldoze), _("Destroy"));
 			destroybtn->sigclicked.connect(
 			   boost::bind(&BuildingWindow::act_bulldoze, boost::ref(*this)));
+			if (building->attack_target() && building->attack_target()->is_under_attack()) {
+				destroybtn->set_tooltip("Building cannot be destroyed while under attack");
+				destroybtn->set_enabled(false);
+			} else {
+				destroybtn->set_tooltip("");
+				destroybtn->set_enabled(true);
+			}
+
 			capsbuttons->add(destroybtn);
 
 			requires_destruction_separator = true;
@@ -305,6 +313,14 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				                     "<br>" + waremap_to_richtext(owner.tribe(), wares));
 				dismantlebtn->sigclicked.connect(
 				   boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
+				if (building->attack_target() && building->attack_target()->is_under_attack()) {
+					dismantlebtn->set_tooltip("Building cannot be dismantled while under attack");
+					dismantlebtn->set_enabled(false);
+				} else {
+					dismantlebtn->set_tooltip("");
+					dismantlebtn->set_enabled(true);
+				}
+
 				capsbuttons->add(dismantlebtn);
 				requires_destruction_separator = true;
 			}

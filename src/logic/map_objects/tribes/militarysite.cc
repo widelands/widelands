@@ -153,6 +153,23 @@ bool MilitarySite::AttackTarget::can_be_attacked() const {
 	return military_site_->didconquer_;
 }
 
+void MilitarySite::AttackTarget::check_if_still_under_attack() const {
+	if (!is_under_attack_) {
+		return;
+	}
+	Player* owner = military_site_->get_owner();
+	Game& game = dynamic_cast<Game&>(owner->egbase());
+	const Map& map = game.map();
+	uint32_t enemy_soldiers_nearby =
+	   map.find_bobs(game,
+	                 Area<FCoords>(map.get_fcoords(military_site_->base_flag().get_position()),
+	                               kMaxProtectionRadius),
+	                 nullptr, FindBobEnemySoldier(owner));
+	log("number of enemy soldiers: %i\n", enemy_soldiers_nearby);
+	if (enemy_soldiers_nearby == 0)
+		is_under_attack_ = false;
+}
+
 void MilitarySite::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) const {
 	Player* owner = military_site_->get_owner();
 	Game& game = dynamic_cast<Game&>(owner->egbase());
@@ -190,13 +207,23 @@ void MilitarySite::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) 
 	// message queue - a sound will automatically be played.
 	military_site_->notify_player(game, true);
 }
-
+/**
+ * Accept a Bob if it is a Soldier, is not dead and is running taskAttack or
+ * taskDefense.
+ */
+struct FindBobSoldierOnBattlefield : public FindBob {
+	bool accept(Bob* const bob) const override {
+		if (upcast(Soldier, soldier, bob))
+			return soldier->is_on_battlefield() && soldier->get_current_health();
+		return false;
+	}
+};
 AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) const {
 	Game& game = dynamic_cast<Game&>(military_site_->get_owner()->egbase());
 
 	std::vector<Soldier*> present = military_site_->soldier_control_.present_soldiers();
 	Soldier* defender = nullptr;
-
+	is_under_attack_ = true;
 	if (!present.empty()) {
 		// Find soldier with greatest health
 		uint32_t current_max = 0;
