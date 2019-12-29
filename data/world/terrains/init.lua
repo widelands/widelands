@@ -72,7 +72,7 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --
 --        *Note: There is currently some interdependency between ``is`` and
 --        ``valid_resources``, so not all combinations are possible. See*
---        `Bug 1505345 <https://bugs.launchpad.net/widelands/+bug/1505345>`_
+--        `Issue #2038 <https://github.com/widelands/widelands/issues/2038>`_
 --        *for more information.*
 --
 --    **tooltips**
@@ -90,7 +90,7 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --
 --        *Note: There is currently some interdependency between ``is`` and
 --        ``valid_resources``, so not all combinations are possible. See*
---        `Bug #1505345 <https://bugs.launchpad.net/widelands/+bug/1505345/>`_
+--        `Issue #2038 <https://github.com/widelands/widelands/issues/2038>`_
 --        *for more information.*
 --
 --    **default_resource**
