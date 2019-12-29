@@ -76,7 +76,8 @@ Radiogroup::Radiogroup() {
 Radiogroup::~Radiogroup() {
 	// Scan-build claims this results in double free.
 	// This is a false positive.
-	// The reason is that the variable will be reassigned in the destructor of the deleted child. This is very uncommon behavior and bad style, but will be non trivial to fix.
+	// The reason is that the variable will be reassigned in the destructor of the deleted child.
+	// This is very uncommon behavior and bad style, but will be non trivial to fix.
 	while (buttons_)
 		delete buttons_;
 }
