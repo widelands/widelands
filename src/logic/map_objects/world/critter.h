@@ -21,7 +21,7 @@
 #define WL_LOGIC_MAP_OBJECTS_WORLD_CRITTER_H
 
 #include "base/macros.h"
-#include "graphic/diranimations.h"
+#include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
 
 class LuaTable;

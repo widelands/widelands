@@ -420,10 +420,10 @@ void MainMenuNewRandomMap::normalize_landmass(ButtonId clicked_button) {
 
 	// Prefer changing mountainsval to keep consistency with old behaviour
 	while (sum_without_mountainsval + mountainsval_ > 100) {
-		mountainsval_ -= 1;
+		--mountainsval_;
 	}
 	while (sum_without_mountainsval + mountainsval_ < 100) {
-		mountainsval_ += 1;
+		++mountainsval_;
 	}
 
 	// Compensate if mountainsval got above 100% / below 0%

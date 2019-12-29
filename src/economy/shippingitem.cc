@@ -139,13 +139,21 @@ void ShippingItem::remove(EditorGameBase& egbase) {
 	}
 }
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+constexpr uint16_t kCurrentPacketVersion = 2;
 
 void ShippingItem::Loader::load(FileRead& fr) {
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version <= kCurrentPacketVersion) {
 			serial_ = fr.unsigned_32();
+			if (packet_version >= 2) {
+				destination_serial_ = fr.unsigned_32();
+			} else {
+				// TODO(Nordfriese): Remove when we break savegame compatibility
+				log("WARNING: Loading shippingitem with possible nullptr destination, which may result "
+				    "in bugs later\n");
+				destination_serial_ = 0;
+			}
 		} else {
 			throw UnhandledVersionError("ShippingItem", packet_version, kCurrentPacketVersion);
 		}
@@ -156,14 +164,18 @@ void ShippingItem::Loader::load(FileRead& fr) {
 
 ShippingItem ShippingItem::Loader::get(MapObjectLoader& mol) {
 	ShippingItem it;
-	if (serial_ != 0)
+	if (serial_ != 0) {
 		it.object_ = &mol.get<MapObject>(serial_);
+		it.destination_dock_ =
+		   destination_serial_ ? &mol.get<PortDock>(destination_serial_) : nullptr;
+	}
 	return it;
 }
 
 void ShippingItem::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(kCurrentPacketVersion);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(object_.get(egbase)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_dock_.get(egbase)));
 }
 
 }  // namespace Widelands

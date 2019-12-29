@@ -150,10 +150,10 @@ Parameter syntax::
 
   parameters                 ::= program [failure_handling_directive]
   failure_handling_directive ::= on failure failure_handling_method
-  failure_handling_method    ::= Fail | Repeat | Ignore
+  failure_handling_method    ::= Fail | Repeat | Skip
   Fail                       ::= fail
   Repeat                     ::= repeat
-  Ignore                     ::= ignore
+  Skip                       ::= skip
 
 Parameter semantics:
 
@@ -164,10 +164,10 @@ Parameter semantics:
 
     - If ``failure_handling_method`` is ``fail``, the command fails (with the same effect as executing ``return=failed``).
     - If ``failure_handling_method`` is ``repeat``, the command is repeated.
-    - If ``failure_handling_method`` is ``ignore``, the failure is ignored (the program is continued).
+    - If ``failure_handling_method`` is ``skip``, the failure is ignored (the program is continued).
 
 ``failure_handling_directive``
-    If omitted, the value ``Ignore`` is used for ``failure_handling_method``.
+    If omitted, the value ``Skip`` is used for ``failure_handling_method``.
 
 callworker
 ----------

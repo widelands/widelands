@@ -245,7 +245,7 @@ void Market::traded_ware_arrived(const int trade_id,
 	   *game->tribes().get_worker_descr(game->tribes().worker_index("barbarians_carrier"));
 	auto& worker = w_desc.create(*game, get_owner(), this, position_);
 	worker.start_task_dropoff(*game, *ware);
-	trade_order.received_traded_wares_in_this_batch += 1;
+	++trade_order.received_traded_wares_in_this_batch;
 	get_owner()->ware_produced(ware_index);
 
 	auto* other_market = dynamic_cast<Market*>(game->objects().get_object(trade_order.other_side));

@@ -90,7 +90,7 @@ def _parse_content(content):
     for line in content[::-1]:
         if not line.strip():
             continue
-        if re.match(r"^[A-Z0-9_-]+$", line):
+        if re.match(r'^[A-Z0-9_-]+$', line):
             rv[line] = opts
             opts = []
         else:

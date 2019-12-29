@@ -296,7 +296,7 @@ WaresWorkersMap count_wares_on_flag_(Flag& f, const Tribes& tribes) {
 		if (!rv.count(i))
 			rv.insert(Widelands::WareAmount(i, 1));
 		else
-			rv[i] += 1;
+			++rv[i];
 	}
 	return rv;
 }
@@ -354,7 +354,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WaresWorkersMa
 		if (!c_workers.count(i)) {
 			c_workers.insert(WorkerAmount(i, 1));
 		} else {
-			c_workers[i] += 1;
+			++c_workers[i];
 		}
 	}
 
@@ -409,7 +409,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 		if (!c_workers.count(i)) {
 			c_workers.insert(WorkerAmount(i, 1));
 		} else {
-			c_workers[i] += 1;
+			++c_workers[i];
 		}
 		if (!setpoints.count(std::make_pair(i, Widelands::WareWorker::wwWORKER))) {
 			setpoints.insert(std::make_pair(std::make_pair(i, Widelands::WareWorker::wwWORKER), 0));
@@ -534,7 +534,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 			if (i == hist.end())
 				hist[sd] = 1;
 			else
-				i->second += 1;
+				++i->second;
 		}
 
 		// Get this to Lua.
@@ -596,7 +596,7 @@ int do_set_soldiers(lua_State* L,
 		if (i == hist.end())
 			hist[sd] = 1;
 		else
-			i->second += 1;
+			++i->second;
 		if (!setpoints.count(sd))
 			setpoints[sd] = 0;
 	}
@@ -5696,7 +5696,7 @@ int LuaShip::get_debug_economy(lua_State* L) {
 // UNTESTED
 int LuaShip::get_destination(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
-	return upcasted_map_object_to_lua(L, get(L, egbase)->get_destination(egbase));
+	return upcasted_map_object_to_lua(L, get(L, egbase)->get_current_destination(egbase));
 }
 
 /* RST
