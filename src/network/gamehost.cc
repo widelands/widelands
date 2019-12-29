@@ -1192,10 +1192,10 @@ void GameHost::set_player_state(uint8_t const number,
 		player.name = get_computer_player_name(number);
 
 	// Broadcast change to player
-	SendPacket packet;
-	broadcast_setting_player(packet, number);
+	broadcast_setting_player(number);
 
 	// Let clients know whether their slot has changed
+	SendPacket packet;
 	packet.reset();
 	packet.unsigned_8(NETCMD_SETTING_ALLUSERS);
 	write_setting_all_users(packet);
@@ -1231,7 +1231,7 @@ void GameHost::set_player_tribe(uint8_t const number,
 
 			//  broadcast changes
 			SendPacket packet;
-			broadcast_setting_player(packet, number);
+			broadcast_setting_player(number);
 			return;  // TODO(k.halfmann): check this logic
 		}
 	}
@@ -1254,7 +1254,7 @@ void GameHost::set_player_init(uint8_t const number, uint8_t const index) {
 
 				//  broadcast changes
 				SendPacket packet;
-				broadcast_setting_player(packet, number);
+				broadcast_setting_player(number);
 				return;
 			} else
 				log("Attempted to change to out-of-range initialization index %u "
@@ -1276,7 +1276,7 @@ void GameHost::set_player_ai(uint8_t number, const std::string& name, bool const
 
 	// Broadcast changes
 	SendPacket packet;
-	broadcast_setting_player(packet, number);
+	broadcast_setting_player(number);
 }
 
 void GameHost::set_player_name(uint8_t const number, const std::string& name) {
@@ -1292,7 +1292,7 @@ void GameHost::set_player_name(uint8_t const number, const std::string& name) {
 
 	// Broadcast changes
 	SendPacket packet;
-	broadcast_setting_player(packet, number);
+	broadcast_setting_player(number);
 }
 
 void GameHost::set_player_closeable(uint8_t const number, bool closeable) {
@@ -1328,7 +1328,7 @@ void GameHost::set_player_shared(PlayerSlot number, Widelands::PlayerNumber shar
 
 	// Broadcast changes
 	SendPacket packet;
-	broadcast_setting_player(packet, number);
+	broadcast_setting_player(number);
 }
 
 void GameHost::set_player(uint8_t const number, const PlayerSettings& ps) {
@@ -1340,7 +1340,7 @@ void GameHost::set_player(uint8_t const number, const PlayerSettings& ps) {
 
 	// Broadcast changes
 	SendPacket packet;
-	broadcast_setting_player(packet, number);
+	broadcast_setting_player(number);
 }
 
 void GameHost::set_player_number(uint8_t const number) {
@@ -1421,7 +1421,7 @@ void GameHost::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 
 	// Broadcast changes
 	SendPacket packet;
-	broadcast_setting_player(packet, number);
+	broadcast_setting_player(number);
 }
 
 void GameHost::set_multiplayer_game_settings() {
@@ -1491,7 +1491,8 @@ void GameHost::write_setting_player(SendPacket& packet, uint8_t const number) {
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, number));
 }
 
-void GameHost::broadcast_setting_player(SendPacket& packet, uint8_t const number) {
+void GameHost::broadcast_setting_player(uint8_t const number) {
+	SendPacket packet;
 	packet.reset();
 	packet.unsigned_8(NETCMD_SETTING_PLAYER);
 	packet.unsigned_8(number);
