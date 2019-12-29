@@ -194,12 +194,13 @@ private:
 
 	uint32_t frontier_animation_id_;
 	uint32_t flag_animation_id_;
-	uint32_t bridge_e_animation_normal_id_;
-	uint32_t bridge_se_animation_normal_id_;
-	uint32_t bridge_sw_animation_normal_id_;
-	uint32_t bridge_e_animation_busy_id_;
-	uint32_t bridge_se_animation_busy_id_;
-	uint32_t bridge_sw_animation_busy_id_;
+	struct BridgeAnimationIDs {
+		uint32_t e;
+		uint32_t se;
+		uint32_t sw;
+	};
+	BridgeAnimationIDs bridges_normal_;
+	BridgeAnimationIDs bridges_busy_;
 	uint32_t bridge_height_;
 	std::vector<std::string> normal_road_paths_;
 	std::vector<std::string> busy_road_paths_;

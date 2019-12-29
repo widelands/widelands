@@ -87,15 +87,17 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		load_roads("busy", &busy_road_paths_);
 		load_roads("waterway", &waterway_paths_);
 
-#define LOAD_BRIDGE_IF_PRESENT(dir, type)                                                          \
-	if (animations_table.has_key("bridge_" #type "_" #dir)) {                                       \
-		std::unique_ptr<LuaTable> animation_table =                                                  \
-		   animations_table.get_table("bridge_" #type "_" #dir);                                     \
-		bridge_##dir##_animation_##type##_id_ =                                                      \
-		   g_gr->animations().load(name_ + std::string("_bridge_" #dir "_" #type), *animation_table, \
-		                           animation_table->get_string("basename"), animation_type);         \
-	}
-
+		const auto load_bridge_if_present = [](const LuaTable& animations_table,
+		                                       Animation::Type animation_type, std::string s_dir,
+		                                       std::string s_type, uint32_t* id) {
+			if (animations_table.has_key("bridge_" s_type "_" s_dir)) {
+				std::unique_ptr<LuaTable> animation_table =
+				   animations_table.get_table("bridge_" s_type "_" s_dir);
+				*id = g_gr->animations().load(name_ + std::string("_bridge_" s_type "_" s_dir),
+				                              *animation_table, animation_table->get_string("basename"),
+				                              animation_type);
+			}
+		};
 		// Frontier and flag animations can be a mix of file and spritesheet animations
 		const auto load_animations = [this](const LuaTable& animations_table,
 		                                    Animation::Type animation_type) {
@@ -111,12 +113,15 @@ TribeDescr::TribeDescr(const LuaTable& table,
 				   g_gr->animations().load(name_ + std::string("_flag"), *animation_table,
 				                           animation_table->get_string("basename"), animation_type);
 			}
-			LOAD_BRIDGE_IF_PRESENT(e, normal)
-			LOAD_BRIDGE_IF_PRESENT(e, busy)
-			LOAD_BRIDGE_IF_PRESENT(se, normal)
-			LOAD_BRIDGE_IF_PRESENT(se, busy)
-			LOAD_BRIDGE_IF_PRESENT(sw, normal)
-			LOAD_BRIDGE_IF_PRESENT(sw, busy)
+			load_bridge_if_present(
+			   animations_table, animation_type, "e", "normal", &bridges_normal_.e);
+			load_bridge_if_present(
+			   animations_table, animation_type, "se", "normal", &bridges_normal_.se);
+			load_bridge_if_present(
+			   animations_table, animation_type, "sw", "normal", &bridges_normal_.sw);
+			load_bridge_if_present(animations_table, animation_type, "e", "busy", &bridges_busy_.e);
+			load_bridge_if_present(animations_table, animation_type, "se", "busy", &bridges_busy_.se);
+			load_bridge_if_present(animations_table, animation_type, "sw", "busy", &bridges_busy_.sw);
 		};
 
 		if (table.has_key("animations")) {
@@ -125,8 +130,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		if (table.has_key("spritesheets")) {
 			load_animations(*table.get_table("spritesheets"), Animation::Type::kSpritesheet);
 		}
-
-#undef LOAD_BRIDGE_IF_PRESENT
 
 		items_table = table.get_table("wares_order");
 		for (const int key : items_table->keys<int>()) {
@@ -385,11 +388,11 @@ uint32_t TribeDescr::flag_animation() const {
 uint32_t TribeDescr::bridge_animation(uint8_t dir, bool busy) const {
 	switch (dir) {
 	case WALK_E:
-		return busy ? bridge_e_animation_busy_id_ : bridge_e_animation_normal_id_;
+		return (busy ? bridges_busy_ : bridges_normal_).e;
 	case WALK_SE:
-		return busy ? bridge_se_animation_busy_id_ : bridge_se_animation_normal_id_;
+		return (busy ? bridges_busy_ : bridges_normal_).se;
 	case WALK_SW:
-		return busy ? bridge_sw_animation_busy_id_ : bridge_sw_animation_normal_id_;
+		return (busy ? bridges_busy_ : bridges_normal_).sw;
 	default:
 		NEVER_HERE();
 	}

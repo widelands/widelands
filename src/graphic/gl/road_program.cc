@@ -159,34 +159,33 @@ void RoadProgram::draw(const int renderbuffer_width,
 
 		// Road to right neighbor.
 		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
-			const Widelands::RoadSegment road = static_cast<Widelands::RoadSegment>(field.road_e);
-			if (road != Widelands::RoadSegment::kNone &&
-			    road != Widelands::RoadSegment::kBridgeNormal &&
-			    road != Widelands::RoadSegment::kBridgeBusy) {
+			if (field.road_e != Widelands::RoadSegment::kNone &&
+			    field.road_e != Widelands::RoadSegment::kBridgeNormal &&
+			    field.road_e != Widelands::RoadSegment::kBridgeBusy) {
 				add_road(renderbuffer_width, renderbuffer_height, field,
-				         fields_to_draw.at(field.rn_index), scale, road, kEast, &gl_texture);
+				         fields_to_draw.at(field.rn_index), scale, field.road_e, kEast, &gl_texture);
 			}
 		}
 
 		// Road to bottom right neighbor.
 		if (field.brn_index != FieldsToDraw::kInvalidIndex) {
-			const Widelands::RoadSegment road = static_cast<Widelands::RoadSegment>(field.road_se);
-			if (road != Widelands::RoadSegment::kNone &&
-			    road != Widelands::RoadSegment::kBridgeNormal &&
-			    road != Widelands::RoadSegment::kBridgeBusy) {
+			if (field.road_se != Widelands::RoadSegment::kNone &&
+			    field.road_se != Widelands::RoadSegment::kBridgeNormal &&
+			    field.road_se != Widelands::RoadSegment::kBridgeBusy) {
 				add_road(renderbuffer_width, renderbuffer_height, field,
-				         fields_to_draw.at(field.brn_index), scale, road, kSouthEast, &gl_texture);
+				         fields_to_draw.at(field.brn_index), scale, field.road_se, kSouthEast,
+				         &gl_texture);
 			}
 		}
 
 		// Road to bottom left neighbor.
 		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
-			const Widelands::RoadSegment road = static_cast<Widelands::RoadSegment>(field.road_sw);
-			if (road != Widelands::RoadSegment::kNone &&
-			    road != Widelands::RoadSegment::kBridgeNormal &&
-			    road != Widelands::RoadSegment::kBridgeBusy) {
+			if (field.road_sw != Widelands::RoadSegment::kNone &&
+			    field.road_sw != Widelands::RoadSegment::kBridgeNormal &&
+			    field.road_sw != Widelands::RoadSegment::kBridgeBusy) {
 				add_road(renderbuffer_width, renderbuffer_height, field,
-				         fields_to_draw.at(field.bln_index), scale, road, kSouthWest, &gl_texture);
+				         fields_to_draw.at(field.bln_index), scale, field.road_sw, kSouthWest,
+				         &gl_texture);
 			}
 		}
 	}
