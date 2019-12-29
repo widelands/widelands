@@ -24,7 +24,7 @@
 
 #include "ai/ai_hints.h"
 #include "base/macros.h"
-#include "graphic/diranimations.h"
+#include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/immovable.h"
 #include "scripting/lua_table.h"

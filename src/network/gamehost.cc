@@ -652,6 +652,7 @@ void GameHost::run() {
 
 		d->game = &game;
 		game.set_game_controller(this);
+		game.set_loader_ui(loader_ui.get());
 		InteractiveGameBase* igb;
 		uint8_t pn = d->settings.playernum + 1;
 		game.save_handler().set_autosave_filename(
@@ -674,9 +675,9 @@ void GameHost::run() {
 		game.set_ibase(igb);
 
 		if (!d->settings.savegame)  // new game
-			game.init_newgame(loader_ui.get(), d->settings);
+			game.init_newgame(d->settings);
 		else  // savegame
-			game.init_savegame(loader_ui.get(), d->settings);
+			game.init_savegame(d->settings);
 		d->pseudo_networktime = game.get_gametime();
 		d->time.reset(d->pseudo_networktime);
 		d->lastframe = SDL_GetTicks();
@@ -692,12 +693,12 @@ void GameHost::run() {
 		// wait mode when there are no clients
 		check_hung_clients();
 		init_computer_players();
-		game.run(loader_ui.get(),
-		         d->settings.savegame ? Widelands::Game::Loaded :
+		game.run(d->settings.savegame ? Widelands::Game::Loaded :
 		                                d->settings.scenario ? Widelands::Game::NewMPScenario :
 		                                                       Widelands::Game::NewNonScenario,
 		         "", false, "nethost");
 
+		game.set_loader_ui(nullptr);
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (internet_)
 			InternetGaming::ref().set_game_done();
@@ -2286,7 +2287,7 @@ void GameHost::send_file_part(NetHostInterface::ConnectionId csock_id, uint32_t 
 	packet.unsigned_32(part);
 	packet.unsigned_32(size);
 	packet.data(file_->parts[part].part, size);
-	d->net->send(csock_id, packet);
+	d->net->send(csock_id, packet, NetPriority::kFiletransfer);
 }
 
 void GameHost::disconnect_player_controller(uint8_t const number, const std::string& name) {

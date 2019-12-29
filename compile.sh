@@ -301,6 +301,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     mv src/widelands ../widelands
 
     if [ $BUILD_WEBSITE = "ON" ]; then
+        mv ../build/src/website/wl_create_spritesheet ../wl_create_spritesheet
         mv ../build/src/website/wl_map_object_info ../wl_map_object_info
         mv ../build/src/website/wl_map_info ../wl_map_info
     fi
@@ -311,7 +312,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     # First check if this is an git checkout at all - only in that case,
     # creation of a script makes any sense.
     STATUS="$(git status)"
-    if [[ "${STATUS}" != *"nothing to commit, working tree clean"* ]]; then
+    if [ -n "${STATUS##*nothing to commit, working tree clean*}" ]; then
       echo "You don't appear to be using Git, or your working tree is not clean. An update script will not be created"
       echo "${STATUS}"
       return 0
@@ -357,6 +358,12 @@ set -e
 basic_check
 set_buildtool
 prepare_directories_and_links
+
+# Dependency check doesn't work with ninja, so we do it manually here
+if [ $BUILD_TYPE = "Debug" -a \( $buildtool = "ninja" -o $buildtool = "ninja-build" \) ]; then
+  utils/build_deps.py
+fi
+
 mkdir -p build
 cd build
 compile_widelands

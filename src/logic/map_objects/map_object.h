@@ -32,18 +32,20 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "graphic/animation/animation.h"
+#include "graphic/animation/diranimations.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/tribes/training_attribute.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/tabpanel.h"
 
 class FileRead;
 class RenderTarget;
-struct DirAnimations;
 
 namespace Widelands {
 
@@ -59,7 +61,8 @@ enum class MapObjectType : uint8_t {
 
 	WARE,  //  class WareInstance
 	BATTLE,
-	FLEET,
+	SHIP_FLEET,
+	FERRY_FLEET,
 
 	BOB = 10,  // Bob
 	CRITTER,   // Bob -- Critter
@@ -67,14 +70,17 @@ enum class MapObjectType : uint8_t {
 	WORKER,    // Bob -- Worker
 	CARRIER,   // Bob -- Worker -- Carrier
 	SOLDIER,   // Bob -- Worker -- Soldier
+	FERRY,     // Bob -- Worker -- Ferry
 
 	// everything below is at least a BaseImmovable
 	IMMOVABLE = 30,
 
 	// everything below is at least a PlayerImmovable
-	FLAG = 40,
-	ROAD,
-	PORTDOCK,
+	FLAG = 40,  // Flag
+	PORTDOCK,   // Portdock
+	ROADBASE,   // Roadbase
+	ROAD,       // Roadbase -- Road
+	WATERWAY,   // Roadbase -- Waterway
 
 	// everything below is at least a Building
 	BUILDING = 100,    // Building
@@ -157,7 +163,7 @@ protected:
 	void assign_directional_animation(DirAnimations* anims, const std::string& basename);
 
 private:
-	void add_animations(const LuaTable& table);
+	void add_animations(const LuaTable& table, Animation::Type anim_type);
 
 	/// Throws an exception if the MapObjectDescr has no representative image
 	void check_representative_image();
@@ -327,7 +333,8 @@ public:
 		HeaderWareInstance = 8,
 		HeaderShip = 9,
 		HeaderPortDock = 10,
-		HeaderFleet = 11,
+		HeaderShipFleet = 11,
+		HeaderFerryFleet = 12,
 	};
 
 	/**

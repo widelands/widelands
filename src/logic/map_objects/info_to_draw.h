@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_INFO_TO_DRAW_H
 #define WL_LOGIC_MAP_OBJECTS_INFO_TO_DRAW_H
 
+// This is a bitmask; use powers of 2.
 enum InfoToDraw {
 	kNone = 0,
 	kCensus = 1,

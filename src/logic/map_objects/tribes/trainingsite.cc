@@ -323,10 +323,10 @@ bool TrainingSite::init(EditorGameBase& egbase) {
  * \note the worker (but not the soldiers) is dealt with in the
  * PlayerImmovable code.
  */
-void TrainingSite::set_economy(Economy* e) {
-	ProductionSite::set_economy(e);
+void TrainingSite::set_economy(Economy* e, WareWorker type) {
+	ProductionSite::set_economy(e, type);
 
-	if (soldier_request_)
+	if (soldier_request_ && type == soldier_request_->get_type())
 		soldier_request_->set_economy(e);
 }
 

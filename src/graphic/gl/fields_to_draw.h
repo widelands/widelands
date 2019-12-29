@@ -55,7 +55,9 @@ public:
 		// The next values are not necessarily the true data of this field, but
 		// what the player should see. For example in fog of war we always draw
 		// what we saw last.
-		uint8_t roads;  // Bitmask of roads to render, see logic/roadtype.h.
+		uint8_t road_e;
+		uint8_t road_sw;
+		uint8_t road_se;
 		bool is_border;
 		Widelands::Vision vision;
 		Widelands::Player* owner;  // can be nullptr.
