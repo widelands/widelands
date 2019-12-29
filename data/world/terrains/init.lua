@@ -18,7 +18,7 @@
 --        \ /     \ /
 --         *-------*
 --
--- Terrain tiles have a triangular shape, and 6 of them will be combined to form a hexagon. Each vertex between the terrains (* in the figure) will form a node that is influenced by the 6 terrains surrounding it, and where other map entities can be placed. You can find more information on the terrains' shape and on how to create textures on the `wiki <https://wl.widelands.org/wiki/HelpTerrains/>`_.
+-- Terrain tiles have a triangular shape, and 6 of them will be combined to form a hexagon. Each vertex between the terrains (* in the figure) will form a node that is influenced by the 6 terrains surrounding it, and where other map entities can be placed. You can find more information on the terrains' shape and on how to create textures on the `wiki <https://www.widelands.org/wiki/HelpTerrains/>`_.
 --
 -- Each terrain tile will also influence some properties for the map entities that are placed on its 3 vertices, like:
 --

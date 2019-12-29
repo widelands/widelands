@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: widelands
-Source: http://www.widelands.org/
+Source: https://www.widelands.org/
 
 Files: *
 Copyright: 2002-2019 by the Widelands Development Team

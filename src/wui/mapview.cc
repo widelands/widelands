@@ -535,7 +535,7 @@ void MapView::zoom_around(float new_zoom,
 			return;
 		}
 		// Zoom around the current mouse position. See
-		// http://stackoverflow.com/questions/2916081/zoom-in-on-a-point-using-scale-and-translate
+		// https://stackoverflow.com/questions/2916081/zoom-in-on-a-point-using-scale-and-translate
 		// for a good explanation of this math.
 		set_view({current.view.viewpoint - panel_pixel * (new_zoom - current.view.zoom), new_zoom},
 		         Transition::Jump);
