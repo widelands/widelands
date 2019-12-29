@@ -1,16 +1,5 @@
 dirname = path.dirname (__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = {27, 21},
-      fps = 20
-   }
-}
-
-add_directional_animation(animations, "walk", dirname, "walk", {21, 43}, 20)
-add_directional_animation(animations, "walkload", dirname, "walk", {21, 43}, 20)
-
 tribes:new_carrier_type {
    msgctxt = "frisians_worker",
    name = "frisians_reindeer",
@@ -21,13 +10,44 @@ tribes:new_carrier_type {
    vision_range = 2,
 
    default_target_quantity = 10,
-   ware_hotspot = { 0, 18 },
-
-   animations = animations,
 
    aihints = {
       preciousness = {
          frisians = 2
       },
-   }
+   },
+
+   ware_hotspot = {0, 18},
+
+   spritesheets = {
+      walkload = {
+         directory = dirname,
+         basename = "walk",
+         fps = 20,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         directional = true,
+         hotspot = {15, 31}
+      },
+      walk = {
+         directory = dirname,
+         basename = "walk",
+         fps = 20,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         directional = true,
+         hotspot = {15, 31}
+      },
+      idle = {
+         directory = dirname,
+         basename = "idle",
+         fps = 20,
+         frames = 20,
+         columns = 5,
+         rows = 4,
+         hotspot = {22, 15}
+      },
+   },
 }

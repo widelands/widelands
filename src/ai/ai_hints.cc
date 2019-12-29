@@ -182,6 +182,11 @@ Production Sites
 
     **Note:** The AI expects exactly one such building type.
 
+**supports_seafaring**
+    This building is needed for expedition and seafaring, e.g.::
+
+        supports_seafaring = true,
+
 **space_consumer**
     The building needs a lot of space around it, for example a farm needs space for
     its fields, e.g.::
@@ -229,6 +234,8 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
      mountain_conqueror_(
         table->has_key("mountain_conqueror") ? table->get_bool("mountain_conqueror") : false),
      shipyard_(table->has_key("shipyard") ? table->get_bool("shipyard") : false),
+     supports_seafaring_(
+        table->has_key("supports_seafaring") ? table->get_bool("supports_seafaring") : false),
      collects_ware_from_map_(table->has_key("collects_ware_from_map") ?
                                 table->get_string("collects_ware_from_map") :
                                 ""),

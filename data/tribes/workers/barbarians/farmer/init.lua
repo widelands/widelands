@@ -52,9 +52,9 @@ tribes:new_worker_type {
          "findobject=attrib:ripe_wheat radius:2",
          "walk=object",
          "playsound=sound/farm/scythe 220",
-         "animate=harvesting 17000",
+         "animate=harvesting 10000",
          "callobject=harvest",
-         "animate=gathering 11000",
+         "animate=gathering 4000",
          "createware=wheat",
          "return"
       }
