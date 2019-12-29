@@ -37,7 +37,14 @@ bool FindBobEnemySoldier::accept(Bob* const imm) const {
 
 	return false;
 }
+bool FindBobAttackingEnemySoldier::accept(Bob* const imm) const {
+	if (upcast(Soldier, soldier, imm))
+		if (soldier->is_on_battlefield() && player && soldier->owner().is_hostile(*player) &&
+		    soldier->get_current_health() && soldier->is_attacking_player(*game, *player))
+			return true;
 
+	return false;
+}
 bool FindBobShip::accept(Bob* bob) const {
 	return bob->descr().type() == MapObjectType::SHIP;
 }

@@ -50,6 +50,20 @@ struct FindBobEnemySoldier : public FindBob {
 	Player* player;
 };
 
+/**
+ * Find soldiers which are hostile to the given player and attacking her (or no soldiers
+ * if player is 0).
+ */
+struct FindBobAttackingEnemySoldier : public FindBob {
+	explicit FindBobAttackingEnemySoldier(Game* init_game, Player* init_player)
+	   : game(init_game), player(init_player) {
+	}
+
+	bool accept(Bob*) const override;
+	Game* game;
+	Player* player;
+};
+
 struct FindBobShip : FindBob {
 	bool accept(Bob* bob) const override;
 };

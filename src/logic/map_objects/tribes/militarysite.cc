@@ -160,14 +160,12 @@ void MilitarySite::AttackTarget::check_if_still_under_attack() const {
 	Player* owner = military_site_->get_owner();
 	Game& game = dynamic_cast<Game&>(owner->egbase());
 	const Map& map = game.map();
-	uint32_t enemy_soldiers_nearby =
+	uint32_t attacking_enemy_soldiers_nearby =
 	   map.find_bobs(game,
 	                 Area<FCoords>(map.get_fcoords(military_site_->base_flag().get_position()),
 	                               kMaxProtectionRadius),
-	                 nullptr, FindBobEnemySoldier(owner));
-	log("number of enemy soldiers: %i\n", enemy_soldiers_nearby);
-	if (enemy_soldiers_nearby == 0)
-		is_under_attack_ = false;
+	                 nullptr, FindBobAttackingEnemySoldier(&game, owner));
+	is_under_attack_ = attacking_enemy_soldiers_nearby > 0;
 }
 
 void MilitarySite::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) const {
