@@ -1209,7 +1209,7 @@ void GameHost::set_player_tribe(uint8_t const number,
 
 	PlayerSettings& player = d->settings.players.at(number);
 
-	// TODDO(k.halfmann): check this logic, will tribe "survive" een when random is selected?
+	// TODDO(k.halfmann): check this logic, will tribe "survive" when random is selected?
 	if (player.tribe == tribe && player.random_tribe == random_tribe)
 		return;
 
@@ -2063,7 +2063,6 @@ void GameHost::handle_hello(uint32_t const client_num, uint8_t const cmd, Client
 	client.build_id = r.string();
 
 	welcome_client(client_num, clientname);
-	return;
 }
 
 void GameHost::handle_changetribe(Client& client, RecvPacket& r) {
