@@ -29,6 +29,7 @@
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
+#include "logic/map_objects/tribes/ferry.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -87,6 +88,9 @@ public:
 
 	/// Adds this worker type to the tribe description.
 	void add_soldier_type(const LuaTable& table);
+
+	/// Adds this worker type to the tribe description.
+	void add_ferry_type(const LuaTable& table);
 
 	/// Adds this worker type to the tribe description.
 	void add_worker_type(const LuaTable& table);
@@ -157,6 +161,7 @@ private:
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
 	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
+	std::unique_ptr<TribesLegacyLookupTable> legacy_lookup_table_;
 
 	uint32_t largest_workarea_;
 

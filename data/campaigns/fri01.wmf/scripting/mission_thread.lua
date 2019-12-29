@@ -126,6 +126,12 @@ function count(ware)
    return in_warehouses
 end
 
+function backup_autosave()
+   while backup_mark.owner ~= p1 do sleep(4273) end
+   -- TRANSLATORS: Name of a backup autosave
+   wl.Game():save(_"The Great Stormflood (Backup Autosave)")
+end
+
 function stormflood()
    local x
    local y
@@ -323,6 +329,7 @@ function mission_thread()
       while expansion_mark.owner == nil do sleep(4273) end
       set_objective_done(o)
    end
+   run(backup_autosave)
 
    -- A friendly chat between neighbours
    p1:reveal_fields(map.player_slots[2].starting_field:region(6))

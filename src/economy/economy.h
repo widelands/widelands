@@ -86,10 +86,19 @@ struct NoteEconomy {
  * are \b always in the same economy, but two flags in the same economy are not always
  * connected by roads or the seafaring network - though of course, most code operates
  * on the assumption that they are, with fallbacks for when they aren't.
+ *
+ * Everything that has economies now has one economy that handles only wares and one that handles
+ * only workers. The reason for this design is that two road networks connected only by ferries
+ * are the same economy from the ware point of view, but separate economies from a worker's point
+ * of view. This fix involves the least amount of code duplication.
  */
 class Economy {
 public:
 	friend class EconomyDataPacket;
+	// TODO(Nordfriese): These 3 friends are for savegame compatibility
+	friend struct CmdCallEconomyBalance;
+	friend class MapFlagPacket;
+	friend struct Ship;
 
 	// Initialize the global serial on game start
 	static void initialize_serial();
@@ -110,8 +119,8 @@ public:
 		Time last_modified;
 	};
 
-	explicit Economy(Player&);
-	explicit Economy(Player&, Serial serial);  // For saveloading
+	explicit Economy(Player&, WareWorker);
+	explicit Economy(Player&, Serial serial, WareWorker);  // For saveloading
 	~Economy();
 
 	Serial serial() const {
@@ -122,14 +131,17 @@ public:
 		return owner_;
 	}
 
-	static void check_merge(Flag&, Flag&);
-	static void check_split(Flag&, Flag&);
+	WareWorker type() const {
+		return type_;
+	}
 
-	bool find_route(Flag& start, Flag& end, Route* route, WareWorker type, int32_t cost_cutoff = -1);
+	static void check_merge(Flag&, Flag&, WareWorker);
+	static void check_split(Flag&, Flag&, WareWorker);
+
+	bool find_route(Flag& start, Flag& end, Route* route, int32_t cost_cutoff = -1);
 
 	using WarehouseAcceptFn = boost::function<bool(Warehouse&)>;
 	Warehouse* find_closest_warehouse(Flag& start,
-	                                  WareWorker type = wwWORKER,
 	                                  Route* route = nullptr,
 	                                  uint32_t cost_cutoff = 0,
 	                                  const WarehouseAcceptFn& acceptfn = WarehouseAcceptFn());
@@ -144,14 +156,11 @@ public:
 	// (i.e. an Expedition ship).
 	Flag* get_arbitrary_flag();
 
-	void set_ware_target_quantity(DescriptionIndex, Quantity, Time);
-	void set_worker_target_quantity(DescriptionIndex, Quantity, Time);
+	void set_target_quantity(DescriptionIndex, Quantity, Time);
 
-	void add_wares(DescriptionIndex, Quantity count = 1);
-	void remove_wares(DescriptionIndex, Quantity count = 1);
-
-	void add_workers(DescriptionIndex, Quantity count = 1);
-	void remove_workers(DescriptionIndex, Quantity count = 1);
+	void
+	add_wares_or_workers(DescriptionIndex, Quantity count = 1, Economy* other_economy = nullptr);
+	void remove_wares_or_workers(DescriptionIndex, Quantity count = 1);
 
 	void add_warehouse(Warehouse&);
 	void remove_warehouse(Warehouse&);
@@ -166,34 +175,20 @@ public:
 	void remove_supply(Supply&);
 
 	/// information about this economy
-	Quantity stock_ware(DescriptionIndex const i) {
-		return wares_.stock(i);
-	}
-	Quantity stock_worker(DescriptionIndex const i) {
-		return workers_.stock(i);
+	Quantity stock_ware_or_worker(DescriptionIndex const i) {
+		return wares_or_workers_.stock(i);
 	}
 
-	/// Whether the economy needs more of this ware type.
+	/// Whether the economy needs more of this ware/worker type.
 	/// Productionsites may ask this before they produce, to avoid depleting a
 	/// ware type by overproducing another from it.
-	bool needs_ware(DescriptionIndex) const;
+	bool needs_ware_or_worker(DescriptionIndex) const;
 
-	/// Whether the economy needs more of this worker type.
-	/// Productionsites may ask this before they produce, to avoid depleting a
-	/// ware type by overproducing a worker type from it.
-	bool needs_worker(DescriptionIndex) const;
-
-	const TargetQuantity& ware_target_quantity(DescriptionIndex const i) const {
-		return ware_target_quantities_[i];
+	const TargetQuantity& target_quantity(DescriptionIndex const i) const {
+		return target_quantities_[i];
 	}
-	TargetQuantity& ware_target_quantity(DescriptionIndex const i) {
-		return ware_target_quantities_[i];
-	}
-	const TargetQuantity& worker_target_quantity(DescriptionIndex const i) const {
-		return worker_target_quantities_[i];
-	}
-	TargetQuantity& worker_target_quantity(DescriptionIndex const i) {
-		return worker_target_quantities_[i];
+	TargetQuantity& target_quantity(DescriptionIndex const i) {
+		return target_quantities_[i];
 	}
 
 	void* get_options_window() const {
@@ -203,11 +198,8 @@ public:
 		options_window_ = window;
 	}
 
-	const WareList& get_wares() const {
-		return wares_;
-	}
-	const WareList& get_workers() const {
-		return workers_;
+	const WareList& get_wares_or_workers() const {
+		return wares_or_workers_;
 	}
 
 	///< called by \ref Cmd_Call_Economy_Balance
@@ -268,15 +260,15 @@ private:
 
 	using Flags = std::vector<Flag*>;
 	Flags flags_;
-	WareList wares_;    ///< virtual storage with all wares in this Economy
-	WareList workers_;  ///< virtual storage with all workers in this Economy
+	WareList wares_or_workers_;  ///< virtual storage with all wares/workers in this Economy
 	std::vector<Warehouse*> warehouses_;
+
+	WareWorker type_;  ///< whether we are a WareEconomy or a WorkerEconomy
 
 	RequestList requests_;  ///< requests
 	SupplyList supplies_;
 
-	TargetQuantity* ware_target_quantities_;
-	TargetQuantity* worker_target_quantities_;
+	TargetQuantity* target_quantities_;
 	std::unique_ptr<Router> router_;
 
 	using SplitPair = std::pair<OPtr<Flag>, OPtr<Flag>>;

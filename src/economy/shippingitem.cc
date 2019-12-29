@@ -61,15 +61,17 @@ void ShippingItem::get(const EditorGameBase& game, WareInstance** ware, Worker**
 	}
 }
 
-void ShippingItem::set_economy(Game& game, Economy* e) {
+void ShippingItem::set_economy(Game& game, Economy* e, WareWorker type) {
 	WareInstance* ware;
 	Worker* worker;
 	get(game, &ware, &worker);
 
-	if (ware)
+	if (ware && type == wwWARE) {
 		ware->set_economy(e);
-	if (worker)
-		worker->set_economy(e);
+	}
+	if (worker) {
+		worker->set_economy(e, type);
+	}
 }
 
 void ShippingItem::set_location(Game& game, MapObject* obj) {

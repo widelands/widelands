@@ -57,10 +57,10 @@ tribes:new_trainingsite_type {
    },
 
    inputs = {
-      { name = "fish", amount = 6 },
       { name = "meat", amount = 6 },
-      { name = "barbarians_bread", amount = 10 },
-      { name = "beer_strong", amount = 6 }
+      { name = "fish", amount = 6 },
+      { name = "barbarians_bread", amount = 8 },
+      { name = "beer_strong", amount = 8 }
    },
    outputs = {
       "barbarians_soldier",
@@ -105,13 +105,13 @@ tribes:new_trainingsite_type {
          descname = pgettext("barbarians_building", "upgrading soldier evade from level 1 to level 2"),
          actions = {
             "checksoldier=soldier evade 1", -- Fails when aren't any soldier of level 1 evade
-            "return=failed unless site has barbarians_bread:2",
+            "return=failed unless site has barbarians_bread",
             "return=failed unless site has fish,meat",
             "return=failed unless site has beer_strong",
             "sleep=15000",
             "animate=working 15000",
             "checksoldier=soldier evade 1", -- Because the soldier can be expulsed by the player
-            "consume=barbarians_bread:2 fish,meat beer_strong",
+            "consume=barbarians_bread fish,meat beer_strong",
             "train=soldier evade 1 2"
          }
       },

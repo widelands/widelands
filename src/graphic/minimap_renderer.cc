@@ -23,7 +23,7 @@
 
 #include "base/macros.h"
 #include "economy/flag.h"
-#include "economy/road.h"
+#include "economy/roadbase.h"
 #include "logic/field.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
@@ -70,7 +70,7 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 		// visualize objects using white color.
 
 		if (upcast(PlayerImmovable const, immovable, f.field->get_immovable())) {
-			if ((layers & MiniMapLayer::Road) && dynamic_cast<Road const*>(immovable)) {
+			if ((layers & MiniMapLayer::Road) && dynamic_cast<RoadBase const*>(immovable)) {
 				color = blend_color(color, kWhite);
 			}
 
@@ -90,11 +90,11 @@ void draw_view_window(const Map& map,
                       const MiniMapType minimap_type,
                       const bool zoom,
                       Texture* texture) {
-	const float divider = zoom ? 1.f : 2.f;
+	const float multiplier = scale_map(map, zoom);
 	const int half_width =
-	   round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth / divider));
+	   round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth * multiplier / 2.f));
 	const int half_height =
-	   round_up_to_nearest_even(std::ceil(view_area.h / kTriangleHeight / divider));
+	   round_up_to_nearest_even(std::ceil(view_area.h / kTriangleHeight * multiplier / 2.f));
 
 	Vector2i center_pixel = Vector2i::zero();
 	switch (minimap_type) {
@@ -106,13 +106,13 @@ void draw_view_window(const Map& map,
 		Vector2f origin = view_area.center();
 		MapviewPixelFunctions::normalize_pix(map, &origin);
 		center_pixel =
-		   Vector2i(origin.x / kTriangleWidth, origin.y / kTriangleHeight) * (zoom ? 2 : 1);
+		   Vector2i(origin.x / kTriangleWidth, origin.y / kTriangleHeight) * scale_map(map, zoom);
 		break;
 	}
 	}
 
-	const int width = zoom ? map.get_width() * 2 : map.get_width();
-	const int height = zoom ? map.get_height() * 2 : map.get_height();
+	const int width = map.get_width() * scale_map(map, zoom);
+	const int height = map.get_height() * scale_map(map, zoom);
 	const auto make_red = [width, height, &texture](int x, int y) {
 		if (x < 0) {
 			x += width;
@@ -160,15 +160,14 @@ void do_draw_minimap(Texture* texture,
 	const int32_t mapwidth = map.get_width();
 
 	for (uint32_t y = 0; y < surface_h; ++y) {
-		Widelands::Coords coords(
-		   Widelands::Coords(top_left.x, top_left.y + ((layers & MiniMapLayer::Zoom2) ? y / 2 : y)));
-		map.normalize_coords(coords);
-		Widelands::FCoords f = map.get_fcoords(coords);
-		Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
 		for (uint32_t x = 0; x < surface_w; ++x) {
-			if (x % 2 || !(layers & MiniMapLayer::Zoom2)) {
-				move_r(mapwidth, f, i);
-			}
+			Widelands::Coords coords(
+			   Widelands::Coords(top_left.x + x / scale_map(map, layers & MiniMapLayer::Zoom2),
+			                     top_left.y + y / scale_map(map, layers & MiniMapLayer::Zoom2)));
+			map.normalize_coords(coords);
+			Widelands::FCoords f = map.get_fcoords(coords);
+			Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
+			move_r(mapwidth, f, i);
 
 			uint16_t vision = 0;  // See Player::Field::Vision: 1 if seen once, > 1 if seen right now.
 			Widelands::PlayerNumber owner = 0;
@@ -215,7 +214,7 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
 		break;
 	}
 
-	const float multiplier = zoom ? 2.f : 1.f;
+	const float multiplier = scale_map(map, zoom);
 	Vector2f map_pixel = top_left + Vector2f(minimap_pixel.x / multiplier * kTriangleWidth,
 	                                         minimap_pixel.y / multiplier * kTriangleHeight);
 	MapviewPixelFunctions::normalize_pix(map, &map_pixel);
@@ -231,8 +230,8 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	//       necessary. The created texture could be cached and only redrawn two
 	//       or three times per second
 	const Map& map = egbase.map();
-	const int16_t map_w = (layers & MiniMapLayer::Zoom2) ? map.get_width() * 2 : map.get_width();
-	const int16_t map_h = (layers & MiniMapLayer::Zoom2) ? map.get_height() * 2 : map.get_height();
+	const int16_t map_w = map.get_width() * scale_map(map, layers & MiniMapLayer::Zoom2);
+	const int16_t map_h = map.get_height() * scale_map(map, layers & MiniMapLayer::Zoom2);
 
 	std::unique_ptr<Texture> texture(new Texture(map_w, map_h));
 
@@ -255,4 +254,20 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	texture->unlock(Texture::Unlock_Update);
 
 	return texture;
+}
+
+int scale_map(const Widelands::Map& map, bool zoom) {
+	// The MiniMap can have a maximum size of 600px. If a map is wider than 300px we don't scale.
+	// Otherwise we fit as much as possible into a 300px/400px MiniMap window when zoom is disabled.
+	const uint16_t map_w = map.get_width();
+	if (!(map_w > 300)) {
+		if (zoom) {
+			return (600 - (600 % map_w)) / map_w;
+		} else if (map_w > 150) {
+			return (400 - (400 % map_w)) / map_w;
+		} else {
+			return (300 - (300 % map_w)) / map_w;
+		}
+	}
+	return 1;
 }

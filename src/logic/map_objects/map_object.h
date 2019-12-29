@@ -39,6 +39,7 @@
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/tribes/training_attribute.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/tabpanel.h"
@@ -60,7 +61,8 @@ enum class MapObjectType : uint8_t {
 
 	WARE,  //  class WareInstance
 	BATTLE,
-	FLEET,
+	SHIP_FLEET,
+	FERRY_FLEET,
 
 	BOB = 10,  // Bob
 	CRITTER,   // Bob -- Critter
@@ -68,14 +70,17 @@ enum class MapObjectType : uint8_t {
 	WORKER,    // Bob -- Worker
 	CARRIER,   // Bob -- Worker -- Carrier
 	SOLDIER,   // Bob -- Worker -- Soldier
+	FERRY,     // Bob -- Worker -- Ferry
 
 	// everything below is at least a BaseImmovable
 	IMMOVABLE = 30,
 
 	// everything below is at least a PlayerImmovable
-	FLAG = 40,
-	ROAD,
-	PORTDOCK,
+	FLAG = 40,  // Flag
+	PORTDOCK,   // Portdock
+	ROADBASE,   // Roadbase
+	ROAD,       // Roadbase -- Road
+	WATERWAY,   // Roadbase -- Waterway
 
 	// everything below is at least a Building
 	BUILDING = 100,    // Building
@@ -328,7 +333,8 @@ public:
 		HeaderWareInstance = 8,
 		HeaderShip = 9,
 		HeaderPortDock = 10,
-		HeaderFleet = 11,
+		HeaderShipFleet = 11,
+		HeaderFerryFleet = 12,
 	};
 
 	/**

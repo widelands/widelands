@@ -445,20 +445,9 @@ bool Scrollbar::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		if (horizontal_) {
 			switch (code.sym) {
-			case SDLK_KP_6:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_RIGHT:
 				action(Area::Plus);
 				return true;
-
-			case SDLK_KP_4:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_LEFT:
 				action(Area::Minus);
 				return true;
@@ -467,38 +456,15 @@ bool Scrollbar::handle_key(bool down, SDL_Keysym code) {
 			}
 		} else {
 			switch (code.sym) {
-			case SDLK_KP_2:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_DOWN:
 				action(Area::Plus);
 				return true;
-
-			case SDLK_KP_8:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_UP:
 				action(Area::Minus);
 				return true;
-
-			case SDLK_KP_3:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_PAGEDOWN:
 				action(Area::PlusPage);
 				return true;
-
-			case SDLK_KP_9:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
 			case SDLK_PAGEUP:
 				action(Area::MinusPage);
 				return true;

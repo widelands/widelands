@@ -41,25 +41,22 @@ std::unique_ptr<RecvPacket> NetClientProxy::try_receive() {
 	return packet;
 }
 
-void NetClientProxy::send(const SendPacket& packet) {
-	conn_->send(RelayCommand::kToHost);
-	conn_->send(packet);
+void NetClientProxy::send(const SendPacket& packet, NetPriority priority) {
+
+	conn_->send(priority, RelayCommand::kToHost, packet);
 }
 
 NetClientProxy::NetClientProxy(const NetAddress& address, const std::string& name)
-   : conn_(NetRelayConnection::connect(address)) {
+   : conn_(BufferedConnection::connect(address)) {
 	if (conn_ == nullptr || !conn_->is_connected()) {
 		return;
 	}
 
-	conn_->send(RelayCommand::kHello);
-	conn_->send(kRelayProtocolVersion);
-	conn_->send(name);
-	conn_->send("client");
+	conn_->send(NetPriority::kNormal, RelayCommand::kHello, kRelayProtocolVersion, name, "client");
 
 	// Wait 10 seconds for an answer
 	time_t endtime = time(nullptr) + 10;
-	while (!NetRelayConnection::Peeker(conn_.get()).cmd()) {
+	while (!BufferedConnection::Peeker(conn_.get()).cmd()) {
 		if (time(nullptr) > endtime) {
 			// No message received in time
 			conn_->close();
@@ -79,7 +76,7 @@ NetClientProxy::NetClientProxy(const NetAddress& address, const std::string& nam
 
 	// Check version
 	endtime = time(nullptr) + 10;
-	while (!NetRelayConnection::Peeker(conn_.get()).uint8_t()) {
+	while (!BufferedConnection::Peeker(conn_.get()).uint8_t()) {
 		if (time(nullptr) > endtime) {
 			conn_->close();
 			conn_.reset();
@@ -95,7 +92,7 @@ NetClientProxy::NetClientProxy(const NetAddress& address, const std::string& nam
 
 	// Check game name
 	endtime = time(nullptr) + 10;
-	while (!NetRelayConnection::Peeker(conn_.get()).string()) {
+	while (!BufferedConnection::Peeker(conn_.get()).string()) {
 		if (time(nullptr) > endtime) {
 			conn_->close();
 			conn_.reset();
@@ -118,7 +115,7 @@ void NetClientProxy::receive_commands() {
 
 	// Receive all available commands
 	RelayCommand cmd;
-	NetRelayConnection::Peeker peek(conn_.get());
+	BufferedConnection::Peeker peek(conn_.get());
 	if (!peek.cmd(&cmd)) {
 		// No command to receive
 		return;
@@ -143,13 +140,15 @@ void NetClientProxy::receive_commands() {
 		}
 		break;
 	case RelayCommand::kPing:
+		// TODO(Notabilis): Move the ping logic inside the receive-thread of BufferedConnection?
+		// Should speed up the measured RTT and could prevent disconnects while, e.g., loading a map.
+		// Would break the separation of the network layers, though.
 		if (peek.uint8_t()) {
 			conn_->receive(&cmd);
 			uint8_t seq;
 			conn_->receive(&seq);
 			// Reply with a pong
-			conn_->send(RelayCommand::kPong);
-			conn_->send(seq);
+			conn_->send(NetPriority::kPing, RelayCommand::kPong, seq);
 		}
 		break;
 	case RelayCommand::kRoundTripTimeResponse:

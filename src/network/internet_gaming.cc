@@ -441,9 +441,9 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 				authenticator_ = crypto::sha1(clientname_ + authenticator_);
 			}
 			format_and_add_chat("", "", true, _("Our forums can be found at:"));
-			format_and_add_chat("", "", true, "https://wl.widelands.org/forum/");
+			format_and_add_chat("", "", true, "https://www.widelands.org/forum/");
 			format_and_add_chat("", "", true, _("For reporting bugs, visit:"));
-			format_and_add_chat("", "", true, "https://wl.widelands.org/wiki/ReportingBugs/");
+			format_and_add_chat("", "", true, "https://www.widelands.org/wiki/ReportingBugs/");
 			state_ = LOBBY;
 			// Append UTC time to login message to ease linking between client output and
 			// metaserver logs. The string returned by asctime is terminated by \n
