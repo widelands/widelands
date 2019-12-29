@@ -42,7 +42,17 @@ tribes:new_worker_type {
          "construct",
          "animate=work 5000",
          "return"
-      }
+      },
+      buildferry_1 = {
+         "findspace=size:swim radius:4",
+      },
+      buildferry_2 = {
+         "findspace=size:swim radius:4",
+         "walk=coords",
+         "animate=work 10000",
+         "buildferry",
+         "return"
+      },
    },
 
    animations = animations,

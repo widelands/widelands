@@ -228,6 +228,7 @@ wl_library(graphic_fields_to_draw
     graphic
     graphic_gl_utils
     logic
+    logic_constants
     logic_map_objects
     logic_widelands_geometry
     wui_mapview_pixelfunctions

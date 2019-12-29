@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-09-19 07:24+0000\n"
-"PO-Revision-Date: 2019-09-23 18:30+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2019-12-10 17:11+0000\n"
+"PO-Revision-Date: 2019-12-10 17:18+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -726,78 +726,94 @@ msgstr "Punainen Sateenvarjomainen Puu (Vanha)"
 msgid "Red Umbrella Tree"
 msgstr "Punainen Sateenvarjomainen Puu"
 
-#: ../../data/world/init.lua:35
+#: ../../data/world/init.lua:24
+msgid "Loading world: Resources (1/4)"
+msgstr ""
+
+#: ../../data/world/init.lua:29
+msgid "Loading world: Terrains (2/4)"
+msgstr ""
+
+#: ../../data/world/init.lua:39
 msgid "Summer"
 msgstr "Kesä"
 
-#: ../../data/world/init.lua:41
+#: ../../data/world/init.lua:45
 msgid "Wasteland"
 msgstr "Erämaa"
 
-#: ../../data/world/init.lua:47
+#: ../../data/world/init.lua:51
 msgid "Winter"
 msgstr "Talvi"
 
-#: ../../data/world/init.lua:53
+#: ../../data/world/init.lua:57
 msgid "Desert"
 msgstr "Aavikko"
 
-#: ../../data/world/init.lua:70
+#: ../../data/world/init.lua:66
+msgid "Loading world: Immovables (3/4)"
+msgstr ""
+
+#: ../../data/world/init.lua:75
 msgid "Miscellaneous"
 msgstr "Muuta"
 
-#: ../../data/world/init.lua:105
+#: ../../data/world/init.lua:110
 msgid "Artifacts"
 msgstr "Maamerkit"
 
-#: ../../data/world/init.lua:105
+#: ../../data/world/init.lua:110
 msgid "These immovables are used by the win condition “Artifacts”."
 msgstr "Näitä järkäleitä käytetään voittotilanteissa \"Maamerkkeinä\"."
 
-#: ../../data/world/init.lua:118
+#: ../../data/world/init.lua:123
 msgid "Plants"
 msgstr "Istutukset"
 
-#: ../../data/world/init.lua:139
+#: ../../data/world/init.lua:144
 msgid "Standing Stones"
 msgstr "Pystykiviä"
 
-#: ../../data/world/init.lua:170
+#: ../../data/world/init.lua:175
 msgid "Rocks"
 msgstr "Kivikot"
 
-#: ../../data/world/init.lua:203
+#: ../../data/world/init.lua:208
 msgid "Dead Trees"
 msgstr "Kuolleet Puut"
 
-#: ../../data/world/init.lua:210
+#: ../../data/world/init.lua:215
 msgid "Coniferous Trees"
 msgstr "Havupuut"
 
-#: ../../data/world/init.lua:217
+#: ../../data/world/init.lua:222
 msgid "Deciduous Trees"
 msgstr "Lehtipuut"
 
-#: ../../data/world/init.lua:224
+#: ../../data/world/init.lua:229
 msgid "Palm Trees"
 msgstr "Palmupuut"
 
-#: ../../data/world/init.lua:231
+#: ../../data/world/init.lua:236
 msgid "Wasteland Trees"
 msgstr "Joutomaa"
 
+#: ../../data/world/init.lua:273
+msgid "Loading world: Animals (4/4)"
+msgstr ""
+
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:278
+#: ../../data/world/init.lua:284
 msgid "Herbivores"
 msgstr "Kasvissyöjät"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:297
+#: ../../data/world/init.lua:303
 msgid "Carnivores"
 msgstr "Lihansyöjät"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:313
+#: ../../data/world/init.lua:319
 msgid "Aquatic"
 msgstr "Vesieläimet"
 

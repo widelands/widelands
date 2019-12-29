@@ -17,7 +17,7 @@
 --
 --    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``. Each animation needs the parameters ``pictures`` (table of filenames) and ``hotspot`` (2 integer coordinates), and may also define ``fps`` (integer frames per second).
 --
---    **roads**: The file paths for the tribes' road textures in 2 subtables ``busy`` and ``normal``
+--    **roads**: The file paths for the tribe's road textures in 3 subtables ``busy``, ``normal`` and ``waterway``.
 --
 --    **resource_indicators**: The names for the resource indicators. This table contains a subtable for each resource name plus a subtable named "" for no resources. Each subtable is an array, in which the index of each entry is the highest amount of resources the indicator may indicate.
 --
@@ -42,6 +42,8 @@
 --    **soldier**: The internal name of the tribe's soldier. This unit needs to be defined in the ``workers_order`` table too.
 --
 --    **ship**: The internal name of the tribe's ship.
+--
+--    **ferry**: The internal name of the tribe's ferry.
 --
 --    **port**: The internal name of the tribe's port building. This unit needs to be defined in the ``buildings`` table too.
 --
@@ -68,7 +70,7 @@ tribes:new_tribe {
    name = "atlanteans",
    animations = animations,
 
-   -- Image file paths for this tribe's road textures
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
          image_dirname .. "roadt_busy.png",
@@ -76,6 +78,9 @@ tribes:new_tribe {
       normal = {
          image_dirname .. "roadt_normal_00.png",
          image_dirname .. "roadt_normal_01.png",
+      },
+      waterway = {
+         "tribes/images/atlanteans/waterway_0.png",
       },
    },
 
@@ -176,6 +181,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "atlanteans_carrier",
+         "atlanteans_ferry",
          "atlanteans_horse",
          "atlanteans_horsebreeder"
       },
@@ -277,7 +283,6 @@ tribes:new_tribe {
       "atlanteans_toolsmithy",
       "atlanteans_weaponsmithy",
       "atlanteans_armorsmithy",
-      "atlanteans_shipyard",
       "atlanteans_barracks",
 
       -- Big
@@ -304,6 +309,10 @@ tribes:new_tribe {
       "atlanteans_tower",
       "atlanteans_tower_high",
       "atlanteans_castle",
+
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      "atlanteans_ferry_yard",
+      "atlanteans_shipyard",
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
@@ -378,6 +387,7 @@ tribes:new_tribe {
    geologist = "atlanteans_geologist",
    soldier = "atlanteans_soldier",
    ship = "atlanteans_ship",
+   ferry = "atlanteans_ferry",
    port = "atlanteans_port",
    ironore = "iron_ore",
    rawlog = "log",

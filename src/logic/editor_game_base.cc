@@ -30,6 +30,7 @@
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "economy/waterway.h"
 #include "graphic/color.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
@@ -69,7 +70,8 @@ initialization
 ============
 */
 EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
-   : gametime_(0),
+   : loader_ui_(nullptr),
+     gametime_(0),
      lua_(lua_interface),
      player_manager_(new PlayersManager(*this)),
      ibase_(nullptr),
@@ -82,6 +84,9 @@ EditorGameBase::~EditorGameBase() {
 	delete_tempfile();
 	if (g_sh != nullptr) {
 		g_sh->remove_fx_set(SoundType::kAmbient);
+	}
+	if (loader_ui_) {
+		delete loader_ui_;
 	}
 }
 
@@ -260,7 +265,7 @@ void EditorGameBase::inform_players_about_ownership(MapIndex const i,
 }
 void EditorGameBase::inform_players_about_immovable(MapIndex const i,
                                                     MapObjectDescr const* const descr) {
-	if (!Road::is_road_descr(descr))
+	if (!Road::is_road_descr(descr) && !Waterway::is_waterway_descr(descr))
 		iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 			Player::Field& player_field = p->fields_[i];
 			if (1 < player_field.vision) {
@@ -292,6 +297,9 @@ void EditorGameBase::postload() {
 	}
 
 	// Postload tribes and world
+	if (loader_ui_) {
+		loader_ui_->step(_("Postloading world and tribes…"));
+	}
 	assert(tribes_);
 	tribes_->postload();
 	assert(world_);
@@ -320,10 +328,16 @@ void EditorGameBase::postload() {
  * If the graphics system is to be replaced at runtime, the function must be called after that has
  * happened.
  */
-void EditorGameBase::load_graphics(UI::ProgressWindow& loader_ui) {
+void EditorGameBase::load_graphics() {
 	assert(tribes_);
-	loader_ui.step(_("Loading graphics"));
+	assert(loader_ui_);
+	loader_ui_->step(_("Loading graphics"));
 	tribes_->load_graphics();
+}
+
+void EditorGameBase::set_loader_ui(UI::ProgressWindow* w) {
+	assert((w == nullptr) ^ (loader_ui_ == nullptr));
+	loader_ui_ = w;
 }
 
 /**
@@ -490,6 +504,12 @@ Bob& EditorGameBase::create_ship(const Coords& c, const std::string& name, Playe
 	}
 }
 
+Bob& EditorGameBase::create_ferry(const Coords& c, Player* owner) {
+	const BobDescr* descr =
+	   dynamic_cast<const BobDescr*>(tribes().get_worker_descr(owner->tribe().ferry()));
+	return create_bob(c, *descr, owner);
+}
+
 /*
 ================
 Returns the correct player, creates it
@@ -509,16 +529,23 @@ Player* EditorGameBase::get_safe_player(PlayerNumber const n) {
  * make this object ready to load new data
  */
 void EditorGameBase::cleanup_for_load() {
+	auto set_progress_message = [this](std::string s) {
+		if (loader_ui_)
+			loader_ui_->step(s);
+	};
+	set_progress_message(_("Cleaning up for loading: Map objects (1/3)"));
 	cleanup_objects();  /// Clean all the stuff up, so we can load.
 
+	set_progress_message(_("Cleaning up for loading: Players (2/3)"));
 	player_manager_->cleanup();
 
+	set_progress_message(_("Cleaning up for loading: Map (3/3)"));
 	map_.cleanup();
 
 	delete_tempfile();
 }
 
-void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, uint8_t const roadtype) {
+void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, RoadType const roadtype) {
 	const Map& m = map();
 	const Field& first_field = m[0];
 	assert(0 <= f.x);
@@ -527,42 +554,45 @@ void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, uint8_t
 	assert(f.y < m.get_height());
 	assert(&first_field <= f.field);
 	assert(f.field < &first_field + m.max_index());
-	assert(direction == RoadType::kSouthWest || direction == RoadType::kSouthEast ||
-	       direction == RoadType::kEast);
-	assert(roadtype == RoadType::kNone || roadtype == RoadType::kNormal ||
-	       roadtype == RoadType::kBusy || roadtype == RoadType::kWater);
+	assert(direction == WALK_SW || direction == WALK_SE || direction == WALK_E);
 
 	if (f.field->get_road(direction) == roadtype)
 		return;
 	f.field->set_road(direction, roadtype);
 
 	FCoords neighbour;
-	uint8_t mask = 0;
 	switch (direction) {
-	case RoadType::kSouthWest:
+	case WALK_SW:
 		neighbour = m.bl_n(f);
-		mask = RoadType::kMask << RoadType::kSouthWest;
 		break;
-	case RoadType::kSouthEast:
+	case WALK_SE:
 		neighbour = m.br_n(f);
-		mask = RoadType::kMask << RoadType::kSouthEast;
 		break;
-	case RoadType::kEast:
+	case WALK_E:
 		neighbour = m.r_n(f);
-		mask = RoadType::kMask << RoadType::kEast;
 		break;
 	default:
 		NEVER_HERE();
 	}
-	uint8_t const road = f.field->get_roads() & mask;
 	MapIndex const i = f.field - &first_field;
 	MapIndex const neighbour_i = neighbour.field - &first_field;
 	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 		Player::Field& first_player_field = *p->fields_;
 		Player::Field& player_field = (&first_player_field)[i];
 		if (1 < player_field.vision || 1 < (&first_player_field)[neighbour_i].vision) {
-			player_field.roads &= ~mask;
-			player_field.roads |= road;
+			switch (direction) {
+			case WALK_SE:
+				player_field.r_se = roadtype;
+				break;
+			case WALK_SW:
+				player_field.r_sw = roadtype;
+				break;
+			case WALK_E:
+				player_field.r_e = roadtype;
+				break;
+			default:
+				NEVER_HERE();
+			}
 		}
 	}
 }

@@ -14,7 +14,6 @@ animations = {
 add_directional_animation(animations, "walk", dirname, "walk", {12, 28}, 10)
 add_directional_animation(animations, "walkload", dirname, "walkload", {12, 28}, 10)
 
-
 tribes:new_worker_type {
    msgctxt = "atlanteans_worker",
    name = "atlanteans_shipwright",
@@ -38,7 +37,18 @@ tribes:new_worker_type {
          "construct",
          "animate=idle 5000",
          "return"
-      }
+      },
+      buildferry_1 = {
+         -- checks whether water is available
+         "findspace=size:swim radius:4",
+      },
+      buildferry_2 = {
+         "findspace=size:swim radius:4",
+         "walk=coords",
+         "animate=idle 10000",
+         "buildferry",
+         "return"
+      },
    },
 
    animations = animations,

@@ -222,6 +222,7 @@ void MainMenuSaveMap::update_map_options() {
 	map_details_.update(mapdata, false);
 	if (old_name == editbox_->text()) {
 		editbox_->set_text(map_details_.name());
+		edit_box_changed();
 	}
 }
 /**
@@ -320,6 +321,11 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		map->add_tag("seafaring");
 	} else {
 		map->delete_tag("seafaring");
+	}
+	if (map->get_waterway_max_length() >= 2) {
+		map->add_tag("ferries");
+	} else {
+		map->delete_tag("ferries");
 	}
 
 	if (map->has_artifacts()) {

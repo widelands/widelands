@@ -76,7 +76,8 @@ enum class QueueCommandTypes : uint8_t {
 	kEvictWorker,
 
 	kMilitarysiteSetSoldierPreference,
-	kProposeTrade,  // 27
+	kProposeTrade,
+	kBuildWaterway,  // 28
 
 	kShipSink = 121,
 	kShipCancelExpedition,
