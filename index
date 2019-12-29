@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fullscreen image background</title>
+<style>
+html{
+	background:url('canadian_mountain_lake.jpg') no-repeat center fixed;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
+	-o-background-size:cover;
+	background-size: cover;
+}
+
+body{
+	color: #FFFFFF;
+}
+</style>
+</head>
+
+<body>
+
+<p style="text-align: center;" size="10" color="black">MY PERSONAL WEB PAGE</p>
+	
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+</html>
+<div>ERIC</div>
