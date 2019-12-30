@@ -15,11 +15,11 @@ tribes:new_immovable_type {
          "transform=barleyfield_small",
       }
    },
-
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 21, 13 },
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {21, 13}
+      }
    }
 }

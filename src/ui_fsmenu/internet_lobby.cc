@@ -125,9 +125,9 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
 	// Prepare the lists
 	const std::string t_tip =
 	   (boost::format("<rt padding=2><p align=center spacing=3>%s</p>"
-	                  "<p valign=bottom><img src=images/wui/overlays/roadb_green.png> %s"
-	                  "<br><img src=images/wui/overlays/roadb_yellow.png> %s"
-	                  "<br><img src=images/wui/overlays/roadb_red.png> %s</p></rt>") %
+	                  "<p valign=bottom><img src=images/wui/overlays/road_building_green.png> %s"
+	                  "<br><img src=images/wui/overlays/road_building_yellow.png> %s"
+	                  "<br><img src=images/wui/overlays/road_building_red.png> %s</p></rt>") %
 	    g_gr->styles().font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("User Status")) %
 	    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Administrator")) %
 	    g_gr->styles().font_style(UI::FontStyle::kTooltip).as_font_tag(_("Registered")) %
@@ -238,7 +238,7 @@ void FullscreenMenuInternetLobby::connect_to_metaserver() {
 	const std::string& metaserver =
 	   get_config_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
 	uint32_t port = get_config_natural("metaserverport", kInternetGamingPort);
-	std::string auth = is_registered_ ? password_ : get_config_string("uuid", nullptr);
+	std::string auth = is_registered_ ? password_ : get_config_string("uuid", "");
 	assert(!auth.empty());
 	InternetGaming::ref().login(nickname_, auth, is_registered_, metaserver, port);
 }
@@ -307,15 +307,15 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 			const Image* pic;
 			switch (convert_clienttype(client.type)) {
 			case kClientUnregistered:
-				pic = g_gr->images().get("images/wui/overlays/roadb_red.png");
+				pic = g_gr->images().get("images/wui/overlays/road_building_red.png");
 				er.set_picture(0, pic);
 				break;
 			case kClientRegistered:
-				pic = g_gr->images().get("images/wui/overlays/roadb_yellow.png");
+				pic = g_gr->images().get("images/wui/overlays/road_building_yellow.png");
 				er.set_picture(0, pic);
 				break;
 			case kClientSuperuser:
-				pic = g_gr->images().get("images/wui/overlays/roadb_green.png");
+				pic = g_gr->images().get("images/wui/overlays/road_building_green.png");
 				er.set_font_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupSuperuser));
 				er.set_picture(0, pic);
 				break;

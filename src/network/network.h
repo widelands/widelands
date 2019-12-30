@@ -34,7 +34,6 @@
 #include "logic/cmd_queue.h"
 #include "network/network_protocol.h"
 
-class Deserializer;
 class FileRead;
 
 constexpr size_t kNetworkBufferSize = 512;
@@ -162,7 +161,7 @@ private:
 };
 
 /**
- * One packet, as received by the deserializer.
+ * One packet, as received from the network.
  */
 struct RecvPacket : public StreamRead {
 public:
@@ -170,8 +169,7 @@ public:
 	bool end_of_file() const override;
 
 private:
-	friend class Deserializer;
-	friend class NetRelayConnection;
+	friend class BufferedConnection;
 	std::vector<uint8_t> buffer;
 	size_t index_ = 0U;
 };
@@ -189,23 +187,6 @@ struct NetTransferFile {
 	std::string filename;
 	std::string md5sum;
 	std::vector<FilePart> parts;
-};
-
-class Deserializer {
-public:
-	/**
-	 * Adds the given data to the internal buffer.
-	 */
-	void read_data(const uint8_t* data, int32_t len);
-
-	/**
-	 * \param packet The packet to fill with the received data.
-	 * \return \c true if an entire packet has been received and written to the given packet.
-	 */
-	bool write_packet(RecvPacket* packet);
-
-private:
-	std::vector<uint8_t> queue_;
 };
 
 /**
@@ -242,5 +223,14 @@ struct ProtocolException : public std::exception {
 private:
 	const std::string what_;
 };
+
+/**
+ * The priorities for sending data over the network when using a BufferedConnection.
+ * Data with low priority values is send first even when data with high priority values
+ * have been passed to a BufferedConnection first
+ */
+// The values assigned to the entries are arbitrary, only their order is important
+// No "enum class" on purpose since this has to be interpreted as ints (I need a known ordering)
+enum NetPriority : uint8_t { kPing = 10, kNormal = 50, kFiletransfer = 100 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_H

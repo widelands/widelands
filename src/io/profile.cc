@@ -689,7 +689,7 @@ void Profile::read(char const* const filename, char const* const global_section,
 					*tail++ = '\0';
 					key = p;
 					if (*tail == '_') {
-						tail += 1;  // skip =_, which is only used for translations
+						++tail;  // skip =_, which is only used for translations
 						translate_line = true;
 					}
 					tail = skipwhite(tail);

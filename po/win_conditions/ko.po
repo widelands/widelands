@@ -3,15 +3,15 @@
 # 
 # Translators:
 # ks k, 2018
-# ks k, 2018
+# ks k, 2018-2019
 # TaeMin An, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-10 07:33+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-10-09 07:57+0000\n"
+"PO-Revision-Date: 2019-10-25 11:49+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgstr "고대의 유물을 탐색하세요. 모든 유물들이 발견될 때, 
 
 #: ../../data/scripting/win_conditions/artifacts.lua:18
 msgid "Artifacts owned"
-msgstr ""
+msgstr "공예품 소유함"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:73
 msgid "No Artifacts"
@@ -177,7 +177,7 @@ msgstr "%1$s 이 땅의 %2$3.0f%% 를 소유했습니다 (%3$i 중 %4$i)."
 #. consistent with the translation of the Win condition.
 #: ../../data/scripting/win_conditions/territorial_functions.lua:60
 msgid "Territory percentage"
-msgstr ""
+msgstr "영역 비율"
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:195
 msgid "You own more than half of the map’s area."
@@ -213,7 +213,7 @@ msgstr "각각의 플레이어 혹은 팀은 지도 지역의 반 이상을 확�
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:56
 msgid "Currently no faction owns more than half of the map’s area."
-msgstr ""
+msgstr "현재 지도 면적의 절반 이상을 소유한 진영은 없습니다."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
@@ -240,7 +240,7 @@ msgstr[0] "%i 분"
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:295
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
-msgstr[0] ""
+msgstr[0] "%1%시간 %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:301

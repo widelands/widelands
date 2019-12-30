@@ -24,7 +24,6 @@
 #include <unordered_map>
 
 #include "base/macros.h"
-#include "graphic/animation.h"
 #include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/map_object.h"
@@ -335,16 +334,16 @@ struct PlayerImmovable : public BaseImmovable {
 	explicit PlayerImmovable(const MapObjectDescr&);
 	~PlayerImmovable() override;
 
-	Economy* get_economy() const {
-		return economy_;
+	Economy* get_economy(WareWorker type) const {
+		return type == wwWARE ? ware_economy_ : worker_economy_;
 	}
-	Economy& economy() const {
-		return *economy_;
+	Economy& economy(WareWorker type) const {
+		return *(type == wwWARE ? ware_economy_ : worker_economy_);
 	}
 
 	virtual Flag& base_flag() = 0;
 
-	virtual void set_economy(Economy*);
+	virtual void set_economy(Economy*, WareWorker);
 
 	virtual void add_worker(Worker&);
 	virtual void remove_worker(Worker&);
@@ -384,7 +383,8 @@ protected:
 	void cleanup(EditorGameBase&) override;
 
 private:
-	Economy* economy_;
+	Economy* ware_economy_;
+	Economy* worker_economy_;
 
 	Workers workers_;
 

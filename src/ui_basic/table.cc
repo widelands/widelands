@@ -370,12 +370,10 @@ bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 			}
 			break;
 		case SDLK_UP:
-		case SDLK_KP_8:
 			move_selection(-1);
 			return true;
 
 		case SDLK_DOWN:
-		case SDLK_KP_2:
 			move_selection(1);
 			return true;
 

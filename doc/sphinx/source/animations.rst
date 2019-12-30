@@ -7,9 +7,19 @@ This article covers how to get your animations into the Widelands engine.
 For information on how to create the animations' images with Blender, see
 `GraphicsDevelopment <https://wl.widelands.org/wiki/GraphicsDevelopment/>`_.
 
+The Blender export will give you a list of files for each animation.
+We call this a "file" animation.
+Once you have tested your animation in Widelands and are satisfied with the results,
+we recommend that you convert it to a :ref:`spritesheet <animations_spritesheets>`.
+This will save disk space and make animation loading faster.
+
 Animations are defined as `Lua tables <http://lua-users.org/wiki/TablesTutorial>`_.
 All :ref:`map objects <animations_map_object_types>` have a mandatory ``idle`` animation.
 They can then have further animations, depending on what their specific capabilities are.
+
+
+File Animations
+---------------
 
 We recommend that you use the :ref:`animations_convenience_functions` below for
 the Lua coding, but let's look at an example first to understand which options
@@ -89,6 +99,70 @@ We also support mipmaps here -- name the files ``walk_ne_0.5_00.png``,
 ``walk_ne_0.5_01.png`` etc. for scale `0.5`, ``walk_ne_1_00.png``,
 ``walk_ne_1_01.png`` etc. for scale `1` and so on.
 
+
+.. _animations_spritesheets:
+
+Spritesheet Animations
+----------------------
+
+The same map object can have a mix of file and spritesheet animations.
+For converting a file animation to a spritesheet animation, use the command line
+to call ``./wl_create_spritesheet`` from the Widelands program directory.
+This will print the command line options to use for converting your animation.
+
+After conversion, you will need to delete the old files and copy over the new files,
+then delete the old animation code in the map object's ``init.lua`` file and add the new code.
+The tool will print the new code to the console for you, so all you need to do is copy/paste
+and then add any missing optional parameters back in.
+
+Note that the table for spritesheets is called ``spritesheets``, not ``animations``!
+This distinction is necessary for performance reasons.
+
+Spritesheets have three additional mandatory parameters so that the engine can
+identify the individual textures in the sheet:
+
+**frames**
+  The number of frames (images) that this animation has. Equal to the number of
+  files in a file animation.
+
+**columns**
+  The number of image columns in the spritesheet.
+
+**rows**
+  The number of image rows in the spritesheet.
+
+
+Here's the example from above as spritesheets:
+
+.. code-block:: lua
+
+   spritesheets = {
+      idle = {
+         directory = path.dirname(__file__),
+         basename = "idle",
+         fps = 4,
+         frames = 150,
+         rows = 13,
+         columns = 12,
+         hotspot = { 5, 7 }
+         sound_effect = {
+            path = "sound/foo/bar",
+            priority = 128
+         },
+         representative_frame = 3,
+      },
+      walk = {
+         directory = path.dirname(__file__),
+         basename = "walk",
+         fps = 4,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 5, 7 }
+      },
+      ...
+   }
 
 
 .. _animations_convenience_functions:

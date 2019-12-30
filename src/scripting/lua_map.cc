@@ -296,7 +296,7 @@ WaresWorkersMap count_wares_on_flag_(Flag& f, const Tribes& tribes) {
 		if (!rv.count(i))
 			rv.insert(Widelands::WareAmount(i, 1));
 		else
-			rv[i] += 1;
+			++rv[i];
 	}
 	return rv;
 }
@@ -307,12 +307,16 @@ static int sort_claimers(const PlrInfluence& first, const PlrInfluence& second) 
 }
 
 // Return the valid workers for a Road.
-WaresWorkersMap get_valid_workers_for(const Road& r) {
+WaresWorkersMap get_valid_workers_for(const RoadBase& r) {
 	WaresWorkersMap valid_workers;
-	valid_workers.insert(WorkerAmount(r.owner().tribe().carrier(), 1));
-
-	if (r.get_roadtype() == RoadType::kBusy)
-		valid_workers.insert(WorkerAmount(r.owner().tribe().carrier2(), 1));
+	if (r.get_roadtype() == RoadType::kWaterway) {
+		valid_workers.insert(WorkerAmount(r.owner().tribe().ferry(), 1));
+	} else {
+		valid_workers.insert(WorkerAmount(r.owner().tribe().carrier(), 1));
+		if (r.get_roadtype() == RoadType::kBusy) {
+			valid_workers.insert(WorkerAmount(r.owner().tribe().carrier2(), 1));
+		}
+	}
 
 	return valid_workers;
 }
@@ -354,7 +358,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WaresWorkersMa
 		if (!c_workers.count(i)) {
 			c_workers.insert(WorkerAmount(i, 1));
 		} else {
-			c_workers[i] += 1;
+			++c_workers[i];
 		}
 	}
 
@@ -409,7 +413,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 		if (!c_workers.count(i)) {
 			c_workers.insert(WorkerAmount(i, 1));
 		} else {
-			c_workers[i] += 1;
+			++c_workers[i];
 		}
 		if (!setpoints.count(std::make_pair(i, Widelands::WareWorker::wwWORKER))) {
 			setpoints.insert(std::make_pair(std::make_pair(i, Widelands::WareWorker::wwWORKER), 0));
@@ -534,7 +538,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 			if (i == hist.end())
 				hist[sd] = 1;
 			else
-				i->second += 1;
+				++i->second;
 		}
 
 		// Get this to Lua.
@@ -596,7 +600,7 @@ int do_set_soldiers(lua_State* L,
 		if (i == hist.end())
 			hist[sd] = 1;
 		else
-			i->second += 1;
+			++i->second;
 		if (!setpoints.count(sd))
 			setpoints[sd] = 0;
 	}
@@ -727,6 +731,8 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const d
 			return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
 		case MapObjectType::CARRIER:
 			return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
+		case MapObjectType::FERRY:
+			return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
 		case MapObjectType::SOLDIER:
 			return CAST_TO_LUA(SoldierDescr, LuaSoldierDescription);
 		case MapObjectType::IMMOVABLE:
@@ -758,6 +764,9 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case MapObjectType::CARRIER:
 		// TODO(sirver): not yet implemented
 		return CAST_TO_LUA(Worker);
+	case MapObjectType::FERRY:
+		// TODO(Nordfriese): not yet implemented
+		return CAST_TO_LUA(Worker);
 	case MapObjectType::SOLDIER:
 		return CAST_TO_LUA(Soldier);
 
@@ -767,6 +776,12 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case MapObjectType::FLAG:
 		return CAST_TO_LUA(Flag);
 	case MapObjectType::ROAD:
+		return CAST_TO_LUA(Road);
+	case MapObjectType::WATERWAY:
+		// TODO(Nordfriese): not yet implemented
+		return CAST_TO_LUA(Road);
+	case MapObjectType::ROADBASE:
+		// TODO(Nordfriese): not yet implemented
 		return CAST_TO_LUA(Road);
 	case MapObjectType::PORTDOCK:
 		return CAST_TO_LUA(PortDock);
@@ -791,7 +806,8 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case MapObjectType::MAPOBJECT:
 	case MapObjectType::BATTLE:
 	case MapObjectType::BOB:
-	case MapObjectType::FLEET:
+	case MapObjectType::SHIP_FLEET:
+	case MapObjectType::FERRY_FLEET:
 	case MapObjectType::WARE:
 		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
 		                static_cast<int>(mo->descr().type()))
@@ -1923,8 +1939,8 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
 
              * :class:`flag <FlagDescription>`, a flag that can hold
                wares for transport,
-             * :class:`road <RoadDescription>`, a road connecting two
-               flags,
+             * :class:`road <RoadDescription>`, a road or waterway
+               connecting two flags,
              * :class:`portdock <PortdockDescription>`, a 'parking space'
                on water terrain where ships can load/unload wares and
                workers. A portdock is invisible to the player and one is
@@ -3740,10 +3756,8 @@ Economy
 */
 const char LuaEconomy::className[] = "Economy";
 const MethodType<LuaEconomy> LuaEconomy::Methods[] = {
-   METHOD(LuaEconomy, ware_target_quantity),
-   METHOD(LuaEconomy, worker_target_quantity),
-   METHOD(LuaEconomy, set_ware_target_quantity),
-   METHOD(LuaEconomy, set_worker_target_quantity),
+   METHOD(LuaEconomy, target_quantity),
+   METHOD(LuaEconomy, set_target_quantity),
    {nullptr, nullptr},
 };
 const PropertyType<LuaEconomy> LuaEconomy::Properties[] = {
@@ -3767,87 +3781,52 @@ void LuaEconomy::__unpersist(lua_State* L) {
 }
 
 /* RST
-   .. method:: ware_target_quantity(warename)
+   .. method:: target_quantity(name)
 
-      Returns the amount of the given ware that should be kept in stock for this economy.
-
-      **Warning**: Since economies can disappear when a player merges them
-      through placing/deleting roads and flags, you must get a fresh economy
-      object every time you use this function.
-
-      :arg warename: the name of the ware.
-      :type warename: :class:`string`
-*/
-int LuaEconomy::ware_target_quantity(lua_State* L) {
-	const std::string warename = luaL_checkstring(L, 2);
-	const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(warename);
-	if (get_egbase(L).tribes().ware_exists(index)) {
-		const Widelands::Economy::TargetQuantity& quantity = get()->ware_target_quantity(index);
-		lua_pushinteger(L, quantity.permanent);
-	} else {
-		report_error(L, "There is no ware '%s'.", warename.c_str());
-	}
-	return 1;
-}
-
-/* RST
-   .. method:: worker_target_quantity(workername)
-
-      Returns the amount of the given worker that should be kept in stock for this economy.
+      Returns the amount of the given ware or worker that should be kept in stock for this economy.
+      Whether this works only for wares or only for workers is determined by the type of this
+      economy.
 
       **Warning**: Since economies can disappear when a player merges them
       through placing/deleting roads and flags, you must get a fresh economy
       object every time you use this function.
 
-      :arg workername: the name of the worker.
-      :type workername: :class:`string`
+      :arg name: the name of the ware or worker.
+      :type name: :class:`string`
 */
-int LuaEconomy::worker_target_quantity(lua_State* L) {
-	const std::string workername = luaL_checkstring(L, 2);
-	const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(workername);
-	if (get_egbase(L).tribes().worker_exists(index)) {
-		const Widelands::Economy::TargetQuantity& quantity = get()->worker_target_quantity(index);
-		lua_pushinteger(L, quantity.permanent);
-	} else {
-		report_error(L, "There is no worker '%s'.", workername.c_str());
-	}
-	return 1;
-}
-
-/* RST
-   .. method:: set_ware_target_quantity(warename)
-
-      Sets the amount of the given ware type that should be kept in stock for this economy.
-
-      **Warning**: Since economies can disappear when a player merges them
-      through placing/deleting roads and flags, you must get a fresh economy
-      object every time you use this function.
-
-      :arg warename: the name of the ware type.
-      :type warename: :class:`string`
-
-      :arg amount: the new target amount for the ware. Needs to be >= 0.
-      :type amount: :class:`integer`
-*/
-int LuaEconomy::set_ware_target_quantity(lua_State* L) {
-	const std::string warename = luaL_checkstring(L, 2);
-	const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(warename);
-	if (get_egbase(L).tribes().ware_exists(index)) {
-		const int quantity = luaL_checkinteger(L, 3);
-		if (quantity < 0) {
-			report_error(L, "Target ware quantity needs to be >= 0 but was '%d'.", quantity);
+int LuaEconomy::target_quantity(lua_State* L) {
+	const std::string wname = luaL_checkstring(L, 2);
+	switch (get()->type()) {
+	case Widelands::wwWARE: {
+		const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(wname);
+		if (get_egbase(L).tribes().ware_exists(index)) {
+			const Widelands::Economy::TargetQuantity& quantity = get()->target_quantity(index);
+			lua_pushinteger(L, quantity.permanent);
+		} else {
+			report_error(L, "There is no ware '%s'.", wname.c_str());
 		}
-		get()->set_ware_target_quantity(index, quantity, get_egbase(L).get_gametime());
-	} else {
-		report_error(L, "There is no ware '%s'.", warename.c_str());
+		break;
+	}
+	case Widelands::wwWORKER: {
+		const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(wname);
+		if (get_egbase(L).tribes().worker_exists(index)) {
+			const Widelands::Economy::TargetQuantity& quantity = get()->target_quantity(index);
+			lua_pushinteger(L, quantity.permanent);
+		} else {
+			report_error(L, "There is no worker '%s'.", wname.c_str());
+		}
+		break;
+	}
 	}
 	return 1;
 }
 
 /* RST
-   .. method:: set_worker_target_quantity(workername)
+   .. method:: set_target_quantity(name)
 
-      Sets the amount of the given worker type that should be kept in stock for this economy.
+      Sets the amount of the given ware or worker type that should be kept in stock for this
+      economy. Whether this works only for wares or only for workers is determined by the type of
+      this economy.
 
       **Warning**: Since economies can disappear when a player merges them
       through placing/deleting roads and flags, you must get a fresh economy
@@ -3859,17 +3838,35 @@ int LuaEconomy::set_ware_target_quantity(lua_State* L) {
       :arg amount: the new target amount for the worker. Needs to be >= 0.
       :type amount: :class:`integer`
 */
-int LuaEconomy::set_worker_target_quantity(lua_State* L) {
-	const std::string workername = luaL_checkstring(L, 2);
-	const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(workername);
-	if (get_egbase(L).tribes().worker_exists(index)) {
-		const int quantity = luaL_checkinteger(L, 3);
-		if (quantity < 0) {
-			report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
+int LuaEconomy::set_target_quantity(lua_State* L) {
+	const std::string wname = luaL_checkstring(L, 2);
+	switch (get()->type()) {
+	case Widelands::wwWARE: {
+		const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(wname);
+		if (get_egbase(L).tribes().ware_exists(index)) {
+			const int quantity = luaL_checkinteger(L, 3);
+			if (quantity < 0) {
+				report_error(L, "Target ware quantity needs to be >= 0 but was '%d'.", quantity);
+			}
+			get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+		} else {
+			report_error(L, "There is no ware '%s'.", wname.c_str());
 		}
-		get()->set_worker_target_quantity(index, quantity, get_egbase(L).get_gametime());
-	} else {
-		report_error(L, "There is no worker '%s'.", workername.c_str());
+		break;
+	}
+	case Widelands::wwWORKER: {
+		const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(wname);
+		if (get_egbase(L).tribes().worker_exists(index)) {
+			const int quantity = luaL_checkinteger(L, 3);
+			if (quantity < 0) {
+				report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
+			}
+			get()->set_target_quantity(index, quantity, get_egbase(L).get_gametime());
+		} else {
+			report_error(L, "There is no worker '%s'.", wname.c_str());
+		}
+		break;
+	}
 	}
 	return 1;
 }
@@ -3983,16 +3980,20 @@ int LuaMapObject::get_descr(lua_State* L) {
 		return CAST_TO_LUA(ImmovableDescr, LuaImmovableDescription);
 	case MapObjectType::WORKER:
 	case MapObjectType::CARRIER:
+	case MapObjectType::FERRY:
 	case MapObjectType::SOLDIER:
 		return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
 	case MapObjectType::MAPOBJECT:
 	case MapObjectType::BATTLE:
 	case MapObjectType::BOB:
 	case MapObjectType::CRITTER:
-	case MapObjectType::FLEET:
+	case MapObjectType::FERRY_FLEET:
+	case MapObjectType::SHIP_FLEET:
 	case MapObjectType::SHIP:
 	case MapObjectType::FLAG:
 	case MapObjectType::ROAD:
+	case MapObjectType::WATERWAY:
+	case MapObjectType::ROADBASE:
 	case MapObjectType::PORTDOCK:
 	case MapObjectType::WARE:
 		return CAST_TO_LUA(MapObjectDescr, LuaMapObjectDescription);
@@ -4179,7 +4180,8 @@ const MethodType<LuaPlayerImmovable> LuaPlayerImmovable::Methods[] = {
 };
 const PropertyType<LuaPlayerImmovable> LuaPlayerImmovable::Properties[] = {
    PROP_RO(LuaPlayerImmovable, owner),
-   PROP_RO(LuaPlayerImmovable, debug_economy),
+   PROP_RO(LuaPlayerImmovable, debug_ware_economy),
+   PROP_RO(LuaPlayerImmovable, debug_worker_economy),
    {nullptr, nullptr, nullptr},
 };
 
@@ -4199,8 +4201,12 @@ int LuaPlayerImmovable::get_owner(lua_State* L) {
 }
 
 // UNTESTED, for debug only
-int LuaPlayerImmovable::get_debug_economy(lua_State* L) {
-	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy());
+int LuaPlayerImmovable::get_debug_ware_economy(lua_State* L) {
+	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy(wwWARE));
+	return 1;
+}
+int LuaPlayerImmovable::get_debug_worker_economy(lua_State* L) {
+	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy(wwWORKER));
 	return 1;
 }
 
@@ -4236,10 +4242,8 @@ const MethodType<LuaFlag> LuaFlag::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
-   PROP_RO(LuaFlag, economy),
-   PROP_RO(LuaFlag, roads),
-   PROP_RO(LuaFlag, building),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaFlag, ware_economy), PROP_RO(LuaFlag, worker_economy), PROP_RO(LuaFlag, roads),
+   PROP_RO(LuaFlag, building),     {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -4248,19 +4252,35 @@ const PropertyType<LuaFlag> LuaFlag::Properties[] = {
  ==========================================================
  */
 /* RST
-   .. attribute:: economy
+   .. attribute:: ware_economy
 
-      (RO) Returns the economy that this flag belongs to.
+      (RO) Returns the ware economy that this flag belongs to.
 
       **Warning**: Since economies can disappear when a player merges them
       through placing/deleting roads and flags, you must get a fresh economy
       object every time you call another function on the resulting economy object.
 
-      :returns: The :class:`Economy` associated with the flag.
+      :returns: The :class:`Economy` associated with the flag to handle wares.
 */
-int LuaFlag::get_economy(lua_State* L) {
+int LuaFlag::get_ware_economy(lua_State* L) {
 	const Flag* f = get(L, get_egbase(L));
-	return to_lua<LuaEconomy>(L, new LuaEconomy(f->get_economy()));
+	return to_lua<LuaEconomy>(L, new LuaEconomy(f->get_economy(wwWARE)));
+}
+
+/* RST
+   .. attribute:: worker_economy
+
+      (RO) Returns the worker economy that this flag belongs to.
+
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you must get a fresh economy
+      object every time you call another function on the resulting economy object.
+
+      :returns: The :class:`Economy` associated with the flag to handle workers.
+*/
+int LuaFlag::get_worker_economy(lua_State* L) {
+	const Flag* f = get(L, get_egbase(L));
+	return to_lua<LuaEconomy>(L, new LuaEconomy(f->get_economy(wwWORKER)));
 }
 
 /* RST
@@ -4268,6 +4288,7 @@ int LuaFlag::get_economy(lua_State* L) {
 
       (RO) Array of roads leading to the flag. Directions
       can be tr,r,br,bl,l and tl
+      Note that waterways are currently treated like roads.
 
       :returns: The array of 'direction:road', if any
 */
@@ -4281,9 +4302,9 @@ int LuaFlag::get_roads(lua_State* L) {
 	Flag* f = get(L, egbase);
 
 	for (uint32_t i = 1; i <= 6; i++) {
-		if (f->get_road(i) != nullptr) {
+		if (f->get_roadbase(i) != nullptr) {
 			lua_pushstring(L, directions.at(i - 1));
-			upcasted_map_object_to_lua(L, f->get_road(i));
+			upcasted_map_object_to_lua(L, f->get_roadbase(i));
 			lua_rawset(L, -3);
 		}
 	}
@@ -4436,6 +4457,9 @@ Road
    Child of: :class:`PlayerImmovable`, :class:`HasWorkers`
 
    A road connecting two flags in the economy of this Player.
+   Waterways are currently treated like roads in scripts; however,
+   there are significant differences. You can check whether an
+   instance of Road is a road or waterway using `get_road_type()`.
 
    More properties are available through this object's
    :class:`ImmovableDescription`, which you can access via :any:`MapObject.descr`.
@@ -4472,7 +4496,7 @@ int LuaRoad::get_length(lua_State* L) {
       (RO) The flag were this road starts
 */
 int LuaRoad::get_start_flag(lua_State* L) {
-	return to_lua<LuaFlag>(L, new LuaFlag(get(L, get_egbase(L))->get_flag(Road::FlagStart)));
+	return to_lua<LuaFlag>(L, new LuaFlag(get(L, get_egbase(L))->get_flag(RoadBase::FlagStart)));
 }
 
 /* RST
@@ -4481,7 +4505,7 @@ int LuaRoad::get_start_flag(lua_State* L) {
       (RO) The flag were this road ends
 */
 int LuaRoad::get_end_flag(lua_State* L) {
-	return to_lua<LuaFlag>(L, new LuaFlag(get(L, get_egbase(L))->get_flag(Road::FlagEnd)));
+	return to_lua<LuaFlag>(L, new LuaFlag(get(L, get_egbase(L))->get_flag(RoadBase::FlagEnd)));
 }
 
 /* RST
@@ -4491,6 +4515,7 @@ int LuaRoad::get_end_flag(lua_State* L) {
 
       * normal
       * busy
+      * waterway
 */
 int LuaRoad::get_road_type(lua_State* L) {
 	switch (get(L, get_egbase(L))->get_roadtype()) {
@@ -4500,6 +4525,9 @@ int LuaRoad::get_road_type(lua_State* L) {
 	case RoadType::kBusy:
 		lua_pushstring(L, "busy");
 		break;
+	case RoadType::kWaterway:
+		lua_pushstring(L, "waterway");
+		break;
 	default:
 		report_error(L, "Unknown Roadtype! This is a bug in widelands!");
 	}
@@ -4508,7 +4536,7 @@ int LuaRoad::get_road_type(lua_State* L) {
 
 // documented in parent class
 int LuaRoad::get_valid_workers(lua_State* L) {
-	Road* road = get(L, get_egbase(L));
+	RoadBase* road = get(L, get_egbase(L));
 	return workers_map_to_lua(L, get_valid_workers_for(*road));
 }
 
@@ -4520,12 +4548,12 @@ int LuaRoad::get_valid_workers(lua_State* L) {
 
 // documented in parent class
 int LuaRoad::get_workers(lua_State* L) {
-	Road* road = get(L, get_egbase(L));
+	RoadBase* road = get(L, get_egbase(L));
 	return do_get_workers(L, *road, get_valid_workers_for(*road));
 }
 
 int LuaRoad::set_workers(lua_State* L) {
-	Road* road = get(L, get_egbase(L));
+	RoadBase* road = get(L, get_egbase(L));
 	return do_set_workers<LuaRoad>(L, road, get_valid_workers_for(*road));
 }
 
@@ -4538,13 +4566,13 @@ int LuaRoad::set_workers(lua_State* L) {
 int LuaRoad::create_new_worker(PlayerImmovable& pi,
                                EditorGameBase& egbase,
                                const WorkerDescr* wdes) {
-	Road& r = static_cast<Road&>(pi);
+	RoadBase& r = static_cast<RoadBase&>(pi);
 
 	if (r.get_workers().size())
 		return -1;  // No space
 
 	// Determine Idle position.
-	Flag& start = r.get_flag(Road::FlagStart);
+	Flag& start = r.get_flag(RoadBase::FlagStart);
 	Coords idle_position = start.get_position();
 	const Path& path = r.get_path();
 	Path::StepVector::size_type idle_index = r.get_idle_index();
@@ -5271,15 +5299,11 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 	}
 	for (const auto& sp : setpoints) {
 		if (!valid_inputs.count(sp.first)) {
-			if (sp.first.second == wwWARE) {
-				report_error(L, "<%s> can't be stored in this building: %s!",
-				             tribe.get_ware_descr(sp.first.first)->name().c_str(),
-				             ps->descr().name().c_str());
-			} else {
-				report_error(L, "<%s> can't be stored in this building: %s!",
-				             tribe.get_worker_descr(sp.first.first)->name().c_str(),
-				             ps->descr().name().c_str());
-			}
+			report_error(L, "<%s> can't be stored in this building: %s!",
+			             sp.first.second == wwWARE ?
+			                tribe.get_ware_descr(sp.first.first)->name().c_str() :
+			                tribe.get_worker_descr(sp.first.first)->name().c_str(),
+			             ps->descr().name().c_str());
 		}
 		InputQueue& iq = ps->inputqueue(sp.first.first, sp.first.second);
 		if (sp.second > iq.get_max_size()) {
@@ -5324,11 +5348,8 @@ int LuaProductionSite::get_inputs(lua_State* L) {
 			lua_pushuint32(L, cnt);
 			break;
 		} else {
-			if (input.second == wwWARE) {
-				lua_pushstring(L, tribe.get_ware_descr(input.first)->name());
-			} else {
-				lua_pushstring(L, tribe.get_worker_descr(input.first)->name());
-			}
+			lua_pushstring(L, input.second == wwWARE ? tribe.get_ware_descr(input.first)->name() :
+			                                           tribe.get_worker_descr(input.first)->name());
 			lua_pushuint32(L, cnt);
 			lua_settable(L, -3);
 		}
@@ -5670,10 +5691,15 @@ const MethodType<LuaShip> LuaShip::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaShip> LuaShip::Properties[] = {
-   PROP_RO(LuaShip, debug_economy),      PROP_RO(LuaShip, last_portdock),
-   PROP_RO(LuaShip, destination),        PROP_RO(LuaShip, state),
-   PROP_RW(LuaShip, scouting_direction), PROP_RW(LuaShip, island_explore_direction),
-   PROP_RO(LuaShip, shipname),           {nullptr, nullptr, nullptr},
+   PROP_RO(LuaShip, debug_ware_economy),
+   PROP_RO(LuaShip, debug_worker_economy),
+   PROP_RO(LuaShip, last_portdock),
+   PROP_RO(LuaShip, destination),
+   PROP_RO(LuaShip, state),
+   PROP_RW(LuaShip, scouting_direction),
+   PROP_RW(LuaShip, island_explore_direction),
+   PROP_RO(LuaShip, shipname),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -5682,8 +5708,12 @@ const PropertyType<LuaShip> LuaShip::Properties[] = {
  ==========================================================
  */
 // UNTESTED, for debug only
-int LuaShip::get_debug_economy(lua_State* L) {
-	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy());
+int LuaShip::get_debug_ware_economy(lua_State* L) {
+	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy(wwWARE));
+	return 1;
+}
+int LuaShip::get_debug_worker_economy(lua_State* L) {
+	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy(wwWORKER));
 	return 1;
 }
 
@@ -5696,7 +5726,7 @@ int LuaShip::get_debug_economy(lua_State* L) {
 // UNTESTED
 int LuaShip::get_destination(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
-	return upcasted_map_object_to_lua(L, get(L, egbase)->get_destination(egbase));
+	return upcasted_map_object_to_lua(L, get(L, egbase)->get_current_destination(egbase));
 }
 
 /* RST
