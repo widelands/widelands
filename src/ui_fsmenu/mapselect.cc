@@ -106,12 +106,13 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 	add_tag_checkbox(hbox, "official", localize_tag("official"));
 	add_tag_checkbox(hbox, "unbalanced", localize_tag("unbalanced"));
-	add_tag_checkbox(hbox, "seafaring", localize_tag("seafaring"));
 	add_tag_checkbox(hbox, "artifacts", localize_tag("artifacts"));
 	add_tag_checkbox(hbox, "scenario", localize_tag("scenario"));
 	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
 
 	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
+	add_tag_checkbox(hbox, "seafaring", localize_tag("seafaring"));
+	add_tag_checkbox(hbox, "ferries", localize_tag("ferries"));
 	add_tag_checkbox(hbox, "ffa", localize_tag("ffa"));
 	add_tag_checkbox(hbox, "1v1", localize_tag("1v1"));
 	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
@@ -298,6 +299,8 @@ void FullscreenMenuMapSelect::fill_table() {
 		table_.select(0);
 	}
 	set_has_selection();
+
+	table_.cancel.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
 }
 
 /*

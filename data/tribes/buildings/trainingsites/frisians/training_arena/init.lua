@@ -24,21 +24,32 @@ tribes:new_trainingsite_type {
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {114, 124},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {83, 90},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {114, 124},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {83, 90},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {114, 98},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {83, 71}
+      }
    },
 
    aihints = {
@@ -122,12 +133,12 @@ tribes:new_trainingsite_type {
          actions = {
             "checksoldier=soldier attack 3",
             "return=failed unless site has sword_long",
-            "return=failed unless site has honey_bread",
-            "return=failed unless site has mead",
+            "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "animate=working 22800",
+            "sleep=10800",
+            "animate=working 12000",
             "checksoldier=soldier attack 3", -- Because the soldier can be expelled by the player
-            "consume=sword_long honey_bread mead smoked_fish,smoked_meat",
+            "consume=sword_long honey_bread,mead smoked_fish,smoked_meat",
             "train=soldier attack 3 4"
          }
       },
@@ -137,12 +148,12 @@ tribes:new_trainingsite_type {
          actions = {
             "checksoldier=soldier attack 4",
             "return=failed unless site has sword_broad",
-            "return=failed unless site has honey_bread",
-            "return=failed unless site has mead",
-            "return=failed unless site has smoked_fish,smoked_meat",
-            "animate=working 15600",
+            "return=failed unless site has honey_bread,mead",
+            "return=failed unless site has smoked_fish,smoked_meat:2",
+            "sleep=5600",
+            "animate=working 10000",
             "checksoldier=soldier attack 4", -- Because the soldier can be expelled by the player
-            "consume=sword_broad honey_bread mead smoked_fish,smoked_meat",
+            "consume=sword_broad honey_bread,mead smoked_fish,smoked_meat:2",
             "train=soldier attack 4 5",
             "produce=scrap_iron:2"
          }
@@ -156,7 +167,8 @@ tribes:new_trainingsite_type {
             "return=failed unless site has honey_bread",
             "return=failed unless site has mead",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "animate=working 15600",
+            "sleep=5600",
+            "animate=working 10000",
             "checksoldier=soldier attack 5", -- Because the soldier can be expelled by the player
             "consume=sword_double honey_bread mead smoked_fish,smoked_meat",
             "train=soldier attack 5 6",
@@ -171,7 +183,8 @@ tribes:new_trainingsite_type {
             "return=failed unless site has fur_garment_golden",
             "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "animate=working 22800",
+            "sleep=10800",
+            "animate=working 12000",
             "checksoldier=soldier defense 1", -- Because the soldier can be expelled by the player
             "consume=fur_garment_golden honey_bread,mead smoked_fish,smoked_meat",
             "train=soldier defense 1 2",
@@ -186,7 +199,8 @@ tribes:new_trainingsite_type {
             "return=failed unless site has helmet_golden",
             "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat",
-            "animate=working 22800",
+            "sleep=10800",
+            "animate=working 12000",
             "checksoldier=soldier health 1", -- Because the soldier can be expelled by the player
             "consume=helmet_golden honey_bread,mead smoked_fish,smoked_meat",
             "train=soldier health 1 2",

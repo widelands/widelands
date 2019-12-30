@@ -1,14 +1,27 @@
 image_dirname = path.dirname(__file__) .. "images/frisians/"
 
-animations = {}
-add_animation(animations, "frontier", image_dirname, "frontier", {9, 26})
-add_animation(animations, "flag", image_dirname, "flag", {10, 39}, 10)
-
 tribes:new_tribe {
    name = "frisians",
-   animations = animations,
+   animations = {
+      frontier = {
+         directory = image_dirname,
+         basename = "frontier",
+         hotspot = {8, 26}
+      }
+   },
+   spritesheets = {
+      flag = {
+         directory = image_dirname,
+         basename = "flag",
+         hotspot = {11, 41},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
 
-   -- Image file paths for this tribe's road textures
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
          image_dirname .. "roadt_busy.png",
@@ -16,6 +29,9 @@ tribes:new_tribe {
       normal = {
          image_dirname .. "roadt_normal_00.png",
          image_dirname .. "roadt_normal_01.png",
+      },
+      waterway = {
+         "tribes/images/frisians/waterway_0.png",
       },
    },
 
@@ -122,6 +138,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "frisians_carrier",
+         "frisians_ferry",
          "frisians_reindeer",
          "frisians_reindeer_breeder"
       },
@@ -198,6 +215,10 @@ tribes:new_tribe {
       "berry_bush_strawberry_small",
       "berry_bush_strawberry_medium",
       "berry_bush_strawberry_ripe",
+      "berry_bush_stink_tree_tiny",
+      "berry_bush_stink_tree_small",
+      "berry_bush_stink_tree_medium",
+      "berry_bush_stink_tree_ripe",
       "berry_bush_desert_hackberry_tiny",
       "berry_bush_desert_hackberry_small",
       "berry_bush_desert_hackberry_medium",
@@ -214,6 +235,8 @@ tribes:new_tribe {
       "pond_dry",
       "pond_growing",
       "pond_mature",
+      "pond_burning",
+      "pond_coal",
       "reedfield_tiny",
       "reedfield_small",
       "reedfield_medium",
@@ -254,6 +277,7 @@ tribes:new_tribe {
       "frisians_reed_farm",
       "frisians_well",
       "frisians_clay_pit",
+      "frisians_charcoal_burners_house",
       "frisians_berry_farm",
       "frisians_collectors_house",
       "frisians_beekeepers_house",
@@ -278,8 +302,6 @@ tribes:new_tribe {
       "frisians_tavern",
       "frisians_drinking_hall",
       "frisians_barracks",
-      "frisians_weaving_mill",
-      "frisians_shipyard",
 
       -- Big
       "frisians_reindeer_farm",
@@ -306,6 +328,11 @@ tribes:new_tribe {
       "frisians_outpost",
       "frisians_tower",
       "frisians_fortress",
+
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      "frisians_ferry_yard",
+      "frisians_shipyard",
+      "frisians_weaving_mill",
 
       -- Partially Finished Buildings - these are the same 2 buildings for all tribes
       "constructionsite",
@@ -341,6 +368,7 @@ tribes:new_tribe {
    geologist = "frisians_geologist",
    soldier = "frisians_soldier",
    ship = "frisians_ship",
+   ferry = "frisians_ferry",
    port = "frisians_port",
    ironore = "iron_ore",
    rawlog = "log",

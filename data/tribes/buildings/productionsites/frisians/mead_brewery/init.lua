@@ -20,21 +20,32 @@ tribes:new_productionsite_type {
       granite = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 94},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 82},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 94},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {50, 82},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 80},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 70}
+      }
    },
 
    aihints = {},
@@ -71,7 +82,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs mead or workers need experience",
             "consume=barley water honey",
-            "sleep=35000",
+            "sleep=30000",
             "animate=working 35000",
             "produce=mead"
          }
