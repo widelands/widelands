@@ -87,20 +87,20 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		load_roads("busy", &busy_road_paths_);
 		load_roads("waterway", &waterway_paths_);
 
-		const auto load_bridge_if_present = [](const LuaTable& animations_table,
-		                                       Animation::Type animation_type, std::string s_dir,
-		                                       std::string s_type, uint32_t* id) {
-			if (animations_table.has_key("bridge_" s_type "_" s_dir)) {
+		const auto load_bridge_if_present = [this](const LuaTable& animations_table,
+		                                           Animation::Type animation_type, std::string s_dir,
+		                                           std::string s_type, uint32_t* id) {
+			if (animations_table.has_key("bridge_" + s_type + "_" + s_dir)) {
 				std::unique_ptr<LuaTable> animation_table =
-				   animations_table.get_table("bridge_" s_type "_" s_dir);
-				*id = g_gr->animations().load(name_ + std::string("_bridge_" s_type "_" s_dir),
+				   animations_table.get_table("bridge_" + s_type + "_" + s_dir);
+				*id = g_gr->animations().load(name_ + std::string("_bridge_" + s_type + "_" + s_dir),
 				                              *animation_table, animation_table->get_string("basename"),
 				                              animation_type);
 			}
 		};
 		// Frontier and flag animations can be a mix of file and spritesheet animations
-		const auto load_animations = [this](const LuaTable& animations_table,
-		                                    Animation::Type animation_type) {
+		const auto load_animations = [this, load_bridge_if_present](const LuaTable& animations_table,
+		                                                            Animation::Type animation_type) {
 			if (animations_table.has_key("frontier")) {
 				std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
 				frontier_animation_id_ =
