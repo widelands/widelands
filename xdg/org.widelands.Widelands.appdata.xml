@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2016 The Widelands Development Team <widelands-dev_at_lists.launchpad.net> -->
+<!-- Copyright 2016 The Widelands Development Team <widelands-public_at_lists.sourceforge.net> -->
 <component type="desktop-application">
   <id>org.widelands.Widelands</id>
   <metadata_license>CC0-1.0</metadata_license>
@@ -261,27 +261,27 @@ Widelands ayrıca size yapay zeka ile meydan okur.
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2020/Four_Tribes_2.jpeg</image>
+      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Build%2020/Four_Tribes_2.jpeg</image>
       <caption>Seafaring of the Four Tribes</caption>
     </screenshot>
     <screenshot>
-      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2019/Dolomites.png</image>
+      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Build%2019/Dolomites.png</image>
       <caption>Dolomites Map</caption>
     </screenshot>
     <screenshot>
-      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2019/Last%20Survivors.png</image>
+      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Build%2019/Last%20Survivors.png</image>
       <caption>Last Survivors Map</caption>
     </screenshot>
     <screenshot>
-      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2019/Editor%20Help.png</image>
+      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Build%2019/Editor%20Help.png</image>
       <caption>Editor Help</caption>
     </screenshot>
     <screenshot>
-      <image>https://wl.widelands.org/wlmedia/wlscreens/screens/Build%2019/Map%20Selection%20Screen.png</image>
+      <image>https://www.widelands.org/wlmedia/wlscreens/screens/Build%2019/Map%20Selection%20Screen.png</image>
       <caption>Map Selection Screen</caption>
     </screenshot>
   </screenshots>
-  <update_contact>widelands-dev_at_lists.launchpad.net</update_contact>
+  <update_contact>widelands-public_at_lists.sourceforge.net</update_contact>
   <provides>
     <binary>widelands</binary>
     <id>widelands.desktop</id>
