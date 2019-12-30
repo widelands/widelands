@@ -315,17 +315,17 @@ void ProductionSite::update_statistics_string(std::string* s) {
 	uint32_t nr_coming = 0;
 	for (uint32_t i = 0; i < descr().nr_working_positions(); ++i) {
 		const Widelands::Request* request = working_positions_[i].worker_request;
-        // Check whether a request is being fulfilled or not
+		// Check whether a request is being fulfilled or not
 		if (request) {
 			if (request->is_open()) {
 				++nr_requests;
 			} else {
 				++nr_coming;
 			}
-        } else if (working_positions_[i].worker == nullptr) {
-            // We might have no request, but no worker either
-            ++nr_requests;
-        }
+		} else if (working_positions_[i].worker == nullptr) {
+			// We might have no request, but no worker either
+			++nr_requests;
+		}
 	}
 
 	if (nr_requests > 0) {

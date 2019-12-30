@@ -388,7 +388,7 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 			   InteractiveBase::dfShowCensus, !get_display_flag(InteractiveBase::dfShowCensus));
 			return true;
 
-        case SDLK_g:
+		case SDLK_g:
 			menu_windows_.stats_general.toggle();
 			return true;
 
@@ -408,7 +408,7 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 			InteractiveGameBase::toggle_mainmenu();
 			return true;
 
-        case SDLK_KP_ENTER:
+		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			if (chat_provider_) {
 				if (!chat_.window) {
