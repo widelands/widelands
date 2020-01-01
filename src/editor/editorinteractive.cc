@@ -1084,10 +1084,13 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 }
 
 void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex const which) {
-	if (is_building_road())
-		abort_build_road();
-	if (is_building_waterway())
-		abort_build_waterway();
+	if (&primary != tools_->current_pointer) {
+		// Leave road building mode when unselecting the roads tool
+		if (is_building_road())
+			abort_build_road();
+		if (is_building_waterway())
+			abort_build_waterway();
+	}
 	if (which == EditorTool::First && &primary != tools_->current_pointer) {
 		if (primary.has_size_one()) {
 			set_sel_radius(0);

@@ -54,7 +54,7 @@ constexpr uint16_t kButtonSize = 34;
 ScenarioToolRoadOptionsMenu::ScenarioToolRoadOptionsMenu(EditorInteractive& parent,
                                                          ScenarioPlaceRoadTool& tool,
                                                          UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 150, 200, _("Roads and waterways"), tool),
+   : EditorToolOptionsMenu(parent, registry, 250, 200, _("Roads and waterways"), tool),
      tool_(tool),
      main_box_(this, 0, 0, UI::Box::Vertical),
      buttons_(&main_box_,
@@ -75,7 +75,15 @@ ScenarioToolRoadOptionsMenu::ScenarioToolRoadOptionsMenu(EditorInteractive& pare
                        Vector2i(0, 0),
                        _("Create second carrier"),
                        _("Create a second carrier for busy roads")),
-     info_(new UI::Textarea(&main_box_, "", UI::Align::kCenter)) {
+     info_(&main_box_,
+           0,
+           0,
+           0,
+           0,
+           UI::PanelStyle::kWui,
+           "",
+           UI::Align::kCenter,
+           UI::MultilineTextarea::ScrollMode::kNoScrolling) {
 	force_.set_state(tool_.get_force());
 	create_primary_.set_state(tool_.get_create_primary_worker());
 	create_secondary_.set_state(tool_.get_create_secondary_worker());
@@ -109,7 +117,6 @@ ScenarioToolRoadOptionsMenu::ScenarioToolRoadOptionsMenu(EditorInteractive& pare
 	main_box_.add(&force_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&info_, UI::Box::Resizing::kFullSize);
 	set_center_panel(&main_box_);
-	set_thinks(true);
 	think();
 
 	if (get_usedefaultpos()) {
@@ -118,6 +125,7 @@ ScenarioToolRoadOptionsMenu::ScenarioToolRoadOptionsMenu(EditorInteractive& pare
 }
 
 void ScenarioToolRoadOptionsMenu::think() {
+	EditorToolOptionsMenu::think();
 	const EditorInteractive& e = eia();
 	info_.set_text(e.is_building_waterway() ?
 	                  e.get_build_waterway_start() == e.get_build_waterway_end() ?

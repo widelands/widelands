@@ -27,8 +27,8 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/radiobutton.h"
-#include "ui_basic/textarea.h"
 
 class EditorInteractive;
 
@@ -50,7 +50,7 @@ private:
 	UI::Panel buttons_;
 	UI::Checkbox force_, create_primary_, create_secondary_;
 	UI::Radiogroup type_;
-	UI::Textarea info_;
+	UI::MultilineTextarea info_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_SCENARIO_TOOL_ROAD_OPTIONS_MENU_H

@@ -74,8 +74,9 @@ static bool create_road(Widelands::EditorGameBase& egbase,
 			}
 			assert(!wws.empty());
 			for (Widelands::Waterway* w : wws) {
+				Widelands::CoordPath p(egbase.map(), w->get_path());
 				Widelands::Ferry& ferry = dynamic_cast<Widelands::Ferry&>(
-				   egbase.create_ferry(cv[ww->get_idle_index()], &player));
+				   egbase.create_ferry(p.get_coords()[w->get_idle_index()], &player));
 				w->assign_carrier(ferry, 0);
 				ferry.set_location(w);
 			}
@@ -109,18 +110,19 @@ static bool create_road(Widelands::EditorGameBase& egbase,
 			assert(!roads.empty());
 			for (Widelands::Road* r : roads) {
 				// r->busy_ = mode == EditorActionArgs::RoadMode::kBusy; // NOCOM
+				Widelands::CoordPath p(egbase.map(), r->get_path());
 				if (primary_carrier) {
 					Widelands::Carrier& c = dynamic_cast<Widelands::Carrier&>(
 					   egbase.tribes()
 					      .get_worker_descr(player.tribe().carrier())
-					      ->create(egbase, &player, r, cv[road->get_idle_index()]));
+					      ->create(egbase, &player, r, p.get_coords()[r->get_idle_index()]));
 					r->assign_carrier(c, 0);
 				}
 				if (secondary_carrier) {
 					Widelands::Carrier& c = dynamic_cast<Widelands::Carrier&>(
 					   egbase.tribes()
 					      .get_worker_descr(player.tribe().carrier2())
-					      ->create(egbase, &player, r, cv[road->get_idle_index()]));
+					      ->create(egbase, &player, r, p.get_coords()[r->get_idle_index()]));
 					r->assign_carrier(c, 1);
 				}
 			}
