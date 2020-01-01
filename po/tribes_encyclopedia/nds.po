@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-30 18:50+0000\n"
-"PO-Revision-Date: 2019-05-31 09:48+0000\n"
+"POT-Creation-Date: 2019-12-10 17:11+0000\n"
+"PO-Revision-Date: 2019-12-13 18:09+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -265,6 +265,24 @@ msgstr "Sait un arnt Mais."
 msgctxt "atlanteans_building"
 msgid "The farmer needs %1% on average to sow and harvest a sheaf of corn."
 msgstr "De Buur bruukt dör de Bank %1% um een Bünsel Mais to saien un to arnten."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/empire/ferry_yard/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/helptexts.lua:16
+msgctxt "building"
+msgid "Builds ferries."
+msgstr "Baut Fähren."
+
+#. TRANSLATORS: Note helptext for a building
+#: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/helptexts.lua:21
+#: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/helptexts.lua:21
+#: ../../data/tribes/buildings/productionsites/empire/ferry_yard/helptexts.lua:21
+#: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/helptexts.lua:21
+msgctxt "building"
+msgid "Needs water nearby."
+msgstr "Bruukt Water in de Naberskupp."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:6
@@ -4038,7 +4056,7 @@ msgstr "Husen"
 
 #: ../../data/tribes/scripting/help/init.lua:106
 msgid "Immovables"
-msgstr "Sekere Dingen"
+msgstr "Faste Dingen"
 
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
@@ -5811,6 +5829,15 @@ msgctxt "atlanteans_worker"
 msgid "Plants and harvests cornfields."
 msgstr "Sait un arnt Mais."
 
+#. TRANSLATORS: Helptext for a worker: Ferry
+#: ../../data/tribes/workers/atlanteans/ferry/helptexts.lua:3
+#: ../../data/tribes/workers/barbarians/ferry/helptexts.lua:3
+#: ../../data/tribes/workers/empire/ferry/helptexts.lua:3
+#: ../../data/tribes/workers/frisians/ferry/helptexts.lua:3
+msgctxt "frisians_worker"
+msgid "Ships wares across narrow rivers."
+msgstr "Fährt Waren över smale Stromen."
+
 #. TRANSLATORS: Helptext for a worker: Fish Breeder
 #: ../../data/tribes/workers/atlanteans/fishbreeder/helptexts.lua:3
 msgctxt "atlanteans_worker"
@@ -6031,7 +6058,7 @@ msgstr "De Deertentüchter passt up, dat 't alltied genoog Deerten in de Gegend 
 #: ../../data/tribes/workers/barbarians/gardener/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Plants and harvests reed fields."
-msgstr ""
+msgstr "Sait un arnt Reitfelden."
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/barbarians/geologist/helptexts.lua:3
@@ -6477,7 +6504,7 @@ msgstr "Warkt deep in de Bargwarken, um Köhle, Iesen, Gold of Flint oftoboen."
 #: ../../data/tribes/workers/frisians/reed_farmer/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Plants and harvests reed fields."
-msgstr ""
+msgstr "Sait un arnt Reitfelden."
 
 #. TRANSLATORS: Helptext for a worker: Reindeer
 #: ../../data/tribes/workers/frisians/reindeer/helptexts.lua:3

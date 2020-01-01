@@ -13,7 +13,7 @@ add_dependencies(codecheck run_build_deps)
 
 # A target that depends on all unit tests as 'make test' will not rebuild
 # tests:
-# http://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
+# https://stackoverflow.com/questions/733475/cmake-ctest-make-test-doesnt-build-tests
 add_custom_target(wl_tests)
 
 #include the cmake version dependend macro _include_directories

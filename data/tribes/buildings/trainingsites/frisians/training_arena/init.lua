@@ -133,13 +133,12 @@ tribes:new_trainingsite_type {
          actions = {
             "checksoldier=soldier attack 3",
             "return=failed unless site has sword_long",
-            "return=failed unless site has honey_bread",
-            "return=failed unless site has mead",
+            "return=failed unless site has honey_bread,mead",
             "return=failed unless site has smoked_fish,smoked_meat",
             "sleep=10800",
             "animate=working 12000",
             "checksoldier=soldier attack 3", -- Because the soldier can be expelled by the player
-            "consume=sword_long honey_bread mead smoked_fish,smoked_meat",
+            "consume=sword_long honey_bread,mead smoked_fish,smoked_meat",
             "train=soldier attack 3 4"
          }
       },
@@ -149,13 +148,12 @@ tribes:new_trainingsite_type {
          actions = {
             "checksoldier=soldier attack 4",
             "return=failed unless site has sword_broad",
-            "return=failed unless site has honey_bread",
-            "return=failed unless site has mead",
-            "return=failed unless site has smoked_fish,smoked_meat",
+            "return=failed unless site has honey_bread,mead",
+            "return=failed unless site has smoked_fish,smoked_meat:2",
             "sleep=5600",
             "animate=working 10000",
             "checksoldier=soldier attack 4", -- Because the soldier can be expelled by the player
-            "consume=sword_broad honey_bread mead smoked_fish,smoked_meat",
+            "consume=sword_broad honey_bread,mead smoked_fish,smoked_meat:2",
             "train=soldier attack 4 5",
             "produce=scrap_iron:2"
          }

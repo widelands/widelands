@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-10-09 07:57+0000\n"
-"PO-Revision-Date: 2019-10-25 11:40+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2019-12-10 17:11+0000\n"
+"PO-Revision-Date: 2019-12-10 17:18+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -729,78 +729,94 @@ msgstr "빨간 우산 나무 (고목)"
 msgid "Red Umbrella Tree"
 msgstr "빨간 우산 나무"
 
-#: ../../data/world/init.lua:35
+#: ../../data/world/init.lua:24
+msgid "Loading world: Resources (1/4)"
+msgstr ""
+
+#: ../../data/world/init.lua:29
+msgid "Loading world: Terrains (2/4)"
+msgstr ""
+
+#: ../../data/world/init.lua:39
 msgid "Summer"
 msgstr "여름"
 
-#: ../../data/world/init.lua:41
+#: ../../data/world/init.lua:45
 msgid "Wasteland"
 msgstr "황무지"
 
-#: ../../data/world/init.lua:47
+#: ../../data/world/init.lua:51
 msgid "Winter"
 msgstr "겨울"
 
-#: ../../data/world/init.lua:53
+#: ../../data/world/init.lua:57
 msgid "Desert"
 msgstr "사막"
 
-#: ../../data/world/init.lua:70
+#: ../../data/world/init.lua:66
+msgid "Loading world: Immovables (3/4)"
+msgstr ""
+
+#: ../../data/world/init.lua:75
 msgid "Miscellaneous"
 msgstr "여러가지"
 
-#: ../../data/world/init.lua:105
+#: ../../data/world/init.lua:110
 msgid "Artifacts"
 msgstr "유물"
 
-#: ../../data/world/init.lua:105
+#: ../../data/world/init.lua:110
 msgid "These immovables are used by the win condition “Artifacts”."
 msgstr "이러한 움직일 수 없는 물건은 승리 조건 “유물” 로 사용됩니다."
 
-#: ../../data/world/init.lua:118
+#: ../../data/world/init.lua:123
 msgid "Plants"
 msgstr "초목"
 
-#: ../../data/world/init.lua:139
+#: ../../data/world/init.lua:144
 msgid "Standing Stones"
 msgstr "선돌"
 
-#: ../../data/world/init.lua:170
+#: ../../data/world/init.lua:175
 msgid "Rocks"
 msgstr "바위"
 
-#: ../../data/world/init.lua:203
+#: ../../data/world/init.lua:208
 msgid "Dead Trees"
 msgstr "죽은나무"
 
-#: ../../data/world/init.lua:210
+#: ../../data/world/init.lua:215
 msgid "Coniferous Trees"
 msgstr "침엽수"
 
-#: ../../data/world/init.lua:217
+#: ../../data/world/init.lua:222
 msgid "Deciduous Trees"
 msgstr "낙엽수"
 
-#: ../../data/world/init.lua:224
+#: ../../data/world/init.lua:229
 msgid "Palm Trees"
 msgstr "야자수"
 
-#: ../../data/world/init.lua:231
+#: ../../data/world/init.lua:236
 msgid "Wasteland Trees"
 msgstr "황무지 나무"
 
+#: ../../data/world/init.lua:273
+msgid "Loading world: Animals (4/4)"
+msgstr ""
+
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:278
+#: ../../data/world/init.lua:284
 msgid "Herbivores"
 msgstr "초식동물"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:297
+#: ../../data/world/init.lua:303
 msgid "Carnivores"
 msgstr "육식동물"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:313
+#: ../../data/world/init.lua:319
 msgid "Aquatic"
 msgstr "수생 생물"
 

@@ -290,7 +290,7 @@ TerrainConverter::TerrainConverter(const Widelands::World& world,
 Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType world, int8_t c) const {
 	switch (c) {
 	// the following comments are valid for greenland - blackland and winterland have equivalents
-	// source: http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
+	// source: https://settlers2.net/documentation/world-map-file-format-wldswd/
 	case 0x00:
 		c = 0;
 		break;  // steppe meadow1
@@ -520,7 +520,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
 			uint8_t c = *pc;
 			// Harbour buildspace & textures - Information taken from:
-			// http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
+			// https://settlers2.net/documentation/world-map-file-format-wldswd/
 			if (c & 0x40) {
 				port_spaces_to_set_.insert(Widelands::Coords(x, y));
 			}
