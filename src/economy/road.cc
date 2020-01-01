@@ -203,10 +203,13 @@ void Road::assign_carrier(Carrier& c, uint8_t slot) {
 	// Send the worker home if it occupies our slot
 	CarrierSlot& s = carrier_slots_[slot];
 
-	delete s.carrier_request;
-	s.carrier_request = nullptr;
-	if (Carrier* const current_carrier = s.carrier.get(owner().egbase()))
+	if (s.carrier_request) {
+		delete s.carrier_request;
+		s.carrier_request = nullptr;
+	}
+	if (Carrier* const current_carrier = s.carrier.get(owner().egbase())) {
 		current_carrier->set_location(nullptr);
+	}
 
 	carrier_slots_[slot].carrier = &c;
 	carrier_slots_[slot].carrier_request = nullptr;
@@ -314,8 +317,10 @@ void Road::postsplit(EditorGameBase& egbase, Flag& flag) {
 			}
 		}
 
-		// Cause a worker update in any case
-		w->send_signal(*game, "road");
+		if (game) {
+			// Cause a worker update in any case
+			w->send_signal(*game, "road");
+		}
 	}
 
 	// Initialize the new road
@@ -334,7 +339,7 @@ void Road::postsplit(EditorGameBase& egbase, Flag& flag) {
 		//  work correctly
 		for (CarrierSlot& slot : carrier_slots_) {
 			if (!slot.carrier.get(*game) && !slot.carrier_request &&
-				(!slot.second_carrier || type_ == RoadType::kBusy)) {
+			    (!slot.second_carrier || type_ == RoadType::kBusy)) {
 				request_carrier(slot);
 			}
 		}

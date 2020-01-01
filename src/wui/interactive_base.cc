@@ -248,8 +248,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	   [this](const Widelands::NoteBuilding& note) {
 		   switch (note.action) {
 		   case Widelands::NoteBuilding::Action::kFinishWarp: {
-			   if (upcast(
-			          Widelands::Building const, building, egbase().objects().get_object(note.serial))) {
+			   if (upcast(Widelands::Building const, building,
+			              egbase().objects().get_object(note.serial))) {
 				   const Widelands::Coords coords = building->get_position();
 				   // Check whether the window is wanted
 				   if (wanted_building_windows_.count(coords.hash()) == 1) {
@@ -1166,6 +1166,14 @@ Coords InteractiveBase::get_build_waterway_end() const {
 	return buildwaterway_->get_end();
 }
 
+Widelands::CoordPath InteractiveBase::get_build_road_path() const {
+	return *buildroad_;
+}
+
+Widelands::CoordPath InteractiveBase::get_build_waterway_path() const {
+	return *buildwaterway_;
+}
+
 void InteractiveBase::log_message(const std::string& message) const {
 	// Send to linked receivers
 	LogMessage lm;
@@ -1394,16 +1402,16 @@ void InteractiveBase::waterway_building_remove_overlay() {
 }
 
 void InteractiveBase::add_wanted_building_window(const Widelands::Coords& coords,
-                                                     const Vector2i point,
-                                                     bool was_minimal) {
+                                                 const Vector2i point,
+                                                 bool was_minimal) {
 	wanted_building_windows_.insert(std::make_pair(
 	   coords.hash(), std::unique_ptr<const WantedBuildingWindow>(new WantedBuildingWindow(
 	                     point, was_minimal, has_workarea_preview(coords)))));
 }
 
 UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords& coord,
-                                                            bool avoid_fastclick,
-                                                            bool workarea_preview_wanted) {
+                                                        bool avoid_fastclick,
+                                                        bool workarea_preview_wanted) {
 	Widelands::BaseImmovable* immovable = egbase().map().get_immovable(coord);
 	upcast(Widelands::Building, building, immovable);
 	assert(building);

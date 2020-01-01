@@ -525,7 +525,7 @@ Road& Player::force_road(const Path& path) {
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
-		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
+		egbase().conquer_area_no_building(
 		   PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
 
 		if (BaseImmovable* const immovable = c.field->get_immovable()) {
@@ -591,7 +591,7 @@ Waterway& Player::force_waterway(const Path& path) {
 		log("Clearing for waterway at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
-		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
+		egbase().conquer_area_no_building(
 		   PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
 
 		if (BaseImmovable* const immovable = c.field->get_immovable()) {

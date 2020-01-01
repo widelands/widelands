@@ -1,0 +1,139 @@
+/*
+ * Copyright (C) 2002-2019 by the Widelands Development Team
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ */
+
+#include "editor/ui_menus/scenario_tool_road_options_menu.h"
+
+#include "editor/editorinteractive.h"
+
+inline EditorInteractive& ScenarioToolRoadOptionsMenu::eia() {
+	return dynamic_cast<EditorInteractive&>(*get_parent());
+}
+
+static EditorActionArgs::RoadMode roadmode(int32_t i) {
+	switch (i) {
+	case 0:
+		return EditorActionArgs::RoadMode::kNormal;
+	case 1:
+		return EditorActionArgs::RoadMode::kBusy;
+	case 2:
+		return EditorActionArgs::RoadMode::kWaterway;
+	default:
+		NEVER_HERE();
+	}
+}
+static int32_t roadmode(EditorActionArgs::RoadMode m) {
+	switch (m) {
+	case EditorActionArgs::RoadMode::kNormal:
+		return 0;
+	case EditorActionArgs::RoadMode::kBusy:
+		return 1;
+	case EditorActionArgs::RoadMode::kWaterway:
+		return 2;
+	}
+	NEVER_HERE();
+}
+
+constexpr uint16_t kButtonSize = 34;
+
+ScenarioToolRoadOptionsMenu::ScenarioToolRoadOptionsMenu(EditorInteractive& parent,
+                                                         ScenarioPlaceRoadTool& tool,
+                                                         UI::UniqueWindow::Registry& registry)
+   : EditorToolOptionsMenu(parent, registry, 150, 200, _("Roads and waterways"), tool),
+     tool_(tool),
+     main_box_(this, 0, 0, UI::Box::Vertical),
+     buttons_(&main_box_,
+              0,
+              0,
+              (parent.egbase().map().get_waterway_max_length() < 2 ? 2 : 3) * kButtonSize,
+              kButtonSize),
+     force_(&main_box_,
+            Vector2i(0, 0),
+            _("Force road"),
+            _("Allow placing roads where they can normally not be built, conquer the path for the "
+              "building player, and destroy flags that are too close to the end flag")),
+     create_primary_(&main_box_,
+                     Vector2i(0, 0),
+                     _("Create worker"),
+                     _("Create a carrier/ferry for the road/waterway")),
+     create_secondary_(&main_box_,
+                       Vector2i(0, 0),
+                       _("Create second carrier"),
+                       _("Create a second carrier for busy roads")),
+     info_(new UI::Textarea(&main_box_, "", UI::Align::kCenter)) {
+	force_.set_state(tool_.get_force());
+	create_primary_.set_state(tool_.get_create_primary_worker());
+	create_secondary_.set_state(tool_.get_create_secondary_worker());
+	type_.set_state(roadmode(tool_.get_mode()));
+	create_secondary_.set_enabled(tool_.get_mode() == EditorActionArgs::RoadMode::kBusy);
+
+	type_.changedto.connect([this](int32_t i) {
+		tool_.set_mode(roadmode(i));
+		create_secondary_.set_enabled(tool_.get_mode() == EditorActionArgs::RoadMode::kBusy);
+	});
+	force_.changedto.connect(boost::bind(&ScenarioPlaceRoadTool::set_force, boost::ref(tool_), _1));
+	create_primary_.changedto.connect(
+	   boost::bind(&ScenarioPlaceRoadTool::set_create_primary_worker, boost::ref(tool_), _1));
+	create_secondary_.changedto.connect(
+	   boost::bind(&ScenarioPlaceRoadTool::set_create_secondary_worker, boost::ref(tool_), _1));
+
+	type_.add_button(&buttons_, Vector2i(0, 0),
+	                 g_gr->images().get("images/wui/fieldaction/menu_build_way.png"),
+	                 _("Normal road"));
+	type_.add_button(&buttons_, Vector2i(kButtonSize, 0),
+	                 g_gr->images().get("images/wui/fieldaction/menu_tab_buildroad.png"),
+	                 _("Busy road"));
+	if (parent.egbase().map().get_waterway_max_length() >= 2) {
+		type_.add_button(&buttons_, Vector2i(2 * kButtonSize, 0),
+		                 g_gr->images().get("images/wui/fieldaction/menu_tab_buildwaterway.png"),
+		                 _("Waterway"));
+	}
+	main_box_.add(&buttons_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	main_box_.add(&create_primary_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&create_secondary_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&force_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&info_, UI::Box::Resizing::kFullSize);
+	set_center_panel(&main_box_);
+	set_thinks(true);
+	think();
+
+	if (get_usedefaultpos()) {
+		center_to_parent();
+	}
+}
+
+void ScenarioToolRoadOptionsMenu::think() {
+	const EditorInteractive& e = eia();
+	info_.set_text(e.is_building_waterway() ?
+	                  e.get_build_waterway_start() == e.get_build_waterway_end() ?
+	                  _("Click on fields to determine the waterway’s path, or click the start flag "
+	                    "again to cancel.") :
+	                  _("Click on fields to determine the waterway’s path. Click on the end field "
+	                    "again to build a flag there. Hold down Ctrl to automatically place flags "
+	                    "along the way. Double-click the start flag to cancel.") :
+	                  e.is_building_road() ?
+	                  e.get_build_road_start() == e.get_build_road_end() ?
+	                  _("Click on fields to determine the road’s path, or click the start flag "
+	                    "again to cancel.") :
+	                  _("Click on fields to determine the road’s path. Click on the end field again "
+	                    "to build a flag there. Hold down Ctrl to automatically place flags along "
+	                    "the way. Double-click the start flag to cancel.") :
+	                  roadmode(type_.get_state()) == EditorActionArgs::RoadMode::kWaterway ?
+	                  _("Click on a flag to start building a waterway.") :
+	                  _("Click on a flag to start building a road."));
+}

@@ -49,6 +49,7 @@
 #include "editor/ui_menus/scenario_lua.h"
 #include "editor/ui_menus/scenario_tool_field_owner_options_menu.h"
 #include "editor/ui_menus/scenario_tool_infrastructure_options_menu.h"
+#include "editor/ui_menus/scenario_tool_road_options_menu.h"
 #include "editor/ui_menus/scenario_tool_worker_options_menu.h"
 #include "editor/ui_menus/tool_change_height_options_menu.h"
 #include "editor/ui_menus/tool_change_resources_options_menu.h"
@@ -393,8 +394,8 @@ void EditorInteractive::add_scenario_tool_menu() {
 		new ScenarioToolFieldOwnerOptionsMenu(
 		   *this, tools()->sc_owner, scenario_tool_windows_.fieldowner);
 	};
-	/** TRANSLATORS: An entry in the editor's scenario tool menu */
 	scenario_toolmenu_.add(
+	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
 	   _("Ownership"), ScenarioToolMenuEntry::kFieldOwner,
 	   g_gr->images().get("images/wui/editor/tools/sc_owner.png"), false,
 	   /** TRANSLATORS: Tooltip for the field ownership scenario tool in the editor */
@@ -404,15 +405,15 @@ void EditorInteractive::add_scenario_tool_menu() {
 		new ScenarioToolInfrastructureOptionsMenu(
 		   *this, tools()->sc_infra, scenario_tool_windows_.infrastructure);
 	};
-	/** TRANSLATORS: An entry in the editor's scenario tool menu */
 	scenario_toolmenu_.add(
+	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
 	   _("Place Infrastructure"), ScenarioToolMenuEntry::kInfrastructure,
 	   g_gr->images().get("images/wui/editor/tools/sc_infra.png"), false,
 	   /** TRANSLATORS: Tooltip for the place infrastructure scenario tool in the editor */
 	   _("Place buildings, flags and tribe immovables"));
 
-	/** TRANSLATORS: An entry in the editor's scenario tool menu */
 	scenario_toolmenu_.add(
+	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
 	   _("Infrastructure Settings"), ScenarioToolMenuEntry::kInfrastructureSettings,
 	   g_gr->images().get("images/wui/editor/tools/sc_infra_settings.png"), false,
 	   /** TRANSLATORS: Tooltip for the infrastructure settings scenario tool in the editor */
@@ -421,12 +422,22 @@ void EditorInteractive::add_scenario_tool_menu() {
 	scenario_tool_windows_.worker.open_window = [this] {
 		new ScenarioToolWorkerOptionsMenu(*this, tools()->sc_worker, scenario_tool_windows_.worker);
 	};
-	/** TRANSLATORS: An entry in the editor's scenario tool menu */
 	scenario_toolmenu_.add(
+	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
 	   _("Workers and Ships"), ScenarioToolMenuEntry::kWorker,
 	   g_gr->images().get("images/wui/editor/tools/sc_worker.png"), false,
 	   /** TRANSLATORS: Tooltip for the place workers scenario tool in the editor */
 	   _("Place workers, ships and ferries on the map"));
+
+	scenario_tool_windows_.road.open_window = [this] {
+		new ScenarioToolRoadOptionsMenu(*this, tools()->sc_road, scenario_tool_windows_.road);
+	};
+	scenario_toolmenu_.add(
+	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
+	   _("Roads and Waterways"), ScenarioToolMenuEntry::kRoad,
+	   g_gr->images().get("images/wui/editor/tools/sc_road.png"), false,
+	   /** TRANSLATORS: Tooltip for the place roads scenario tool in the editor */
+	   _("Build roads and waterways"));
 
 	scenario_tool_windows_.lua.open_window = [this] {
 		new ScenarioLuaOptionsMenu(*this, scenario_tool_windows_.lua);
@@ -495,6 +506,9 @@ void EditorInteractive::scenario_tool_menu_selected(ScenarioToolMenuEntry entry)
 		break;
 	case ScenarioToolMenuEntry::kWorker:
 		scenario_tool_windows_.worker.toggle();
+		break;
+	case ScenarioToolMenuEntry::kRoad:
+		scenario_tool_windows_.road.toggle();
 		break;
 	case ScenarioToolMenuEntry::kLua:
 		scenario_tool_windows_.lua.toggle();
@@ -689,6 +703,8 @@ bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 void EditorInteractive::draw(RenderTarget& dst) {
 	const auto& ebase = egbase();
 	auto* fields_to_draw = map_view()->draw_terrain(ebase, Workareas(), draw_grid_, &dst);
+	const auto& road_building = road_building_overlays();
+	const auto& waterway_building = waterway_building_overlays();
 
 	const float scale = 1.f / map_view()->view().zoom;
 	const uint32_t gametime = ebase.get_gametime();
@@ -722,7 +738,46 @@ void EditorInteractive::draw(RenderTarget& dst) {
 
 	const auto& world = ebase.world();
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
-		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
+		FieldsToDraw::Field& field = *fields_to_draw->mutable_field(idx);
+
+		const auto rinfo = road_building.road_previews.find(field.fcoords);
+		if (rinfo != road_building.road_previews.end()) {
+			for (uint8_t dir : rinfo->second) {
+				switch (dir) {
+				case Widelands::WALK_E:
+					field.road_e = Widelands::RoadType::kNormal;
+					break;
+				case Widelands::WALK_SE:
+					field.road_se = Widelands::RoadType::kNormal;
+					break;
+				case Widelands::WALK_SW:
+					field.road_sw = Widelands::RoadType::kNormal;
+					break;
+				default:
+					throw wexception(
+					   "Attempt to set road-building overlay for invalid direction %i", dir);
+				}
+			}
+		}
+		const auto winfo = waterway_building.road_previews.find(field.fcoords);
+		if (winfo != waterway_building.road_previews.end()) {
+			for (uint8_t dir : winfo->second) {
+				switch (dir) {
+				case Widelands::WALK_E:
+					field.road_e = Widelands::RoadType::kWaterway;
+					break;
+				case Widelands::WALK_SE:
+					field.road_se = Widelands::RoadType::kWaterway;
+					break;
+				case Widelands::WALK_SW:
+					field.road_sw = Widelands::RoadType::kWaterway;
+					break;
+				default:
+					throw wexception(
+					   "Attempt to set waterway-building overlay for invalid direction %i", dir);
+				}
+			}
+		}
 
 		draw_border_markers(field, scale, *fields_to_draw, &dst);
 
@@ -805,6 +860,17 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				const Image* pic = get_sel_picture();
 				blit_overlay(&dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 			}
+		}
+
+		const auto itb = road_building.steepness_indicators.find(field.fcoords);
+		if (itb != road_building.steepness_indicators.end()) {
+			blit_field_overlay(&dst, field, itb->second,
+			                   Vector2i(itb->second->width() / 2, itb->second->height() / 2), scale);
+		}
+		const auto itw = waterway_building.steepness_indicators.find(field.fcoords);
+		if (itw != waterway_building.steepness_indicators.end()) {
+			blit_field_overlay(&dst, field, itw->second,
+			                   Vector2i(itw->second->width() / 2, itw->second->height() / 2), scale);
 		}
 	}
 }
@@ -1018,6 +1084,10 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 }
 
 void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex const which) {
+	if (is_building_road())
+		abort_build_road();
+	if (is_building_waterway())
+		abort_build_waterway();
 	if (which == EditorTool::First && &primary != tools_->current_pointer) {
 		if (primary.has_size_one()) {
 			set_sel_radius(0);

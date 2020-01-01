@@ -149,6 +149,7 @@ public:
 	bool append_build_road(Widelands::Coords field);
 	Widelands::Coords get_build_road_start() const;
 	Widelands::Coords get_build_road_end() const;
+	Widelands::CoordPath get_build_road_path() const;
 
 	bool is_building_waterway() const {
 		return buildwaterway_ != nullptr;
@@ -159,6 +160,7 @@ public:
 	bool append_build_waterway(Widelands::Coords field);
 	Widelands::Coords get_build_waterway_start() const;
 	Widelands::Coords get_build_waterway_end() const;
+	Widelands::CoordPath get_build_waterway_path() const;
 
 	virtual void cleanup_for_load() {
 	}

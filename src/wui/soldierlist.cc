@@ -678,8 +678,8 @@ SoldierSettings::SoldierSettings(InteractiveBase& ib, Widelands::Soldier& s)
 }
 
 inline static void update_label(UI::Textarea& l, const UI::Slider& s, const std::string& prefix) {
-	/** TRANSLATORS: "XYZ level: 1 / 5" */
 	l.set_text(
+	   /** TRANSLATORS: "XYZ level: 1 / 5" */
 	   (boost::format(_("%1$s: %2$d / %3$d")) % prefix % s.get_value() % s.get_max_value()).str());
 }
 void SoldierSettings::update_label_h() {

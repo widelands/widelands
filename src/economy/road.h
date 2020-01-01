@@ -56,6 +56,8 @@ constexpr int32_t kRoadMaxWallet = static_cast<int32_t>(2.5 * kRoadAnimalPrice);
 struct Road : public RoadBase {
 	friend class MapRoaddataPacket;  // For saving
 	friend class MapRoadPacket;      // For init()
+	friend struct ScenarioPlaceRoadTool;
+	friend struct ScenarioDeleteRoadTool;
 
 	static bool is_road_descr(MapObjectDescr const*);
 

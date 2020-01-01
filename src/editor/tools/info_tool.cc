@@ -188,9 +188,8 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 					       ((boost::format(_("%1$s (%2$s), XP: %3$i/%4$i"))) %
 					        worker->descr().descname() %
 					        tribe_of_worker(worker->descr().worker_index()) %
-					        worker->get_current_experience() % worker->descr().get_needed_experience())
+					        worker->get_current_experience() % worker->descr().get_needed_experience()) :
 					       /** TRANSLATORS: Worker name (Tribe name) */
-					       :
 					       ((boost::format(_("%1$s (%2$s)"))) % worker->descr().descname() %
 					        tribe_of_worker(worker->descr().worker_index())))
 					      .str());

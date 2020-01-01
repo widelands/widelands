@@ -38,6 +38,10 @@ EditorActionArgs::EditorActionArgs(EditorInteractive& base)
      new_map_size(0, 0),
      new_owner(0),
      infrastructure_constructionsite(false),
+     random_index(-1),
+     create_primary_worker(false),
+     create_secondary_worker(false),
+     force(false),
      interval(0, 0),
      refcount(0) {
 }

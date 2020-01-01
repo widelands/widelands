@@ -35,6 +35,7 @@
 #include "editor/tools/scenario_field_owner_tool.h"
 #include "editor/tools/scenario_infrastructure_settings_tool.h"
 #include "editor/tools/scenario_infrastructure_tool.h"
+#include "editor/tools/scenario_road_tool.h"
 #include "editor/tools/scenario_worker_tool.h"
 #include "editor/tools/set_origin_tool.h"
 #include "editor/tools/set_port_space_tool.h"
@@ -72,6 +73,8 @@ public:
 		     sc_infra_del(),
 		     sc_infra(sc_infra_del),
 		     sc_infra_settings(),
+		     sc_road_del(),
+		     sc_road(sc_road_del),
 		     sc_worker_del(),
 		     sc_worker(sc_worker_del) {
 		}
@@ -104,6 +107,8 @@ public:
 		ScenarioInfrastructureDeleteTool sc_infra_del;
 		ScenarioInfrastructureTool sc_infra;
 		ScenarioInfrastructureSettingsTool sc_infra_settings;
+		ScenarioDeleteRoadTool sc_road_del;
+		ScenarioPlaceRoadTool sc_road;
 		ScenarioDeleteWorkerTool sc_worker_del;
 		ScenarioPlaceWorkerTool sc_worker;
 	};
@@ -215,6 +220,7 @@ private:
 		kInfrastructure,
 		kInfrastructureSettings,
 		kWorker,
+		kRoad,
 		kLua,
 	};
 
@@ -290,6 +296,7 @@ private:
 		UI::UniqueWindow::Registry fieldowner;
 		UI::UniqueWindow::Registry infrastructure;
 		UI::UniqueWindow::Registry worker;
+		UI::UniqueWindow::Registry road;
 		UI::UniqueWindow::Registry lua;
 	} scenario_tool_windows_;
 
