@@ -1056,7 +1056,6 @@ void GameHost::set_map(const std::string& mapname,
 		set_player_number(UserSettings::none());
 	}
 
-
 	// Drop players not matching map any longer
 	while (oldplayers > maxplayers) {
 		--oldplayers;
@@ -1265,7 +1264,6 @@ void GameHost::set_player_tribe(uint8_t const number,
 				player.initialization_index = 0;
 
 			//  broadcast changes
-			SendPacket packet;
 			broadcast_setting_player(number);
 			return;  // TODO(k.halfmann): check this logic
 		}
@@ -1288,7 +1286,6 @@ void GameHost::set_player_init(uint8_t const number, uint8_t const index) {
 				player.initialization_index = index;
 
 				//  broadcast changes
-				SendPacket packet;
 				broadcast_setting_player(number);
 				return;
 			} else
@@ -1310,7 +1307,6 @@ void GameHost::set_player_ai(uint8_t number, const std::string& name, bool const
 	player.random_ai = random_ai;
 
 	// Broadcast changes
-	SendPacket packet;
 	broadcast_setting_player(number);
 }
 
@@ -1326,7 +1322,6 @@ void GameHost::set_player_name(uint8_t const number, const std::string& name) {
 	player.name = name;
 
 	// Broadcast changes
-	SendPacket packet;
 	broadcast_setting_player(number);
 }
 
@@ -1362,7 +1357,6 @@ void GameHost::set_player_shared(PlayerSlot number, Widelands::PlayerNumber shar
 	player.tribe = sharedplr.tribe;
 
 	// Broadcast changes
-	SendPacket packet;
 	broadcast_setting_player(number);
 }
 
@@ -1374,7 +1368,6 @@ void GameHost::set_player(uint8_t const number, const PlayerSettings& ps) {
 	player = ps;
 
 	// Broadcast changes
-	SendPacket packet;
 	broadcast_setting_player(number);
 }
 
@@ -1454,7 +1447,6 @@ void GameHost::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 	d->settings.players.at(number).team = team;
 
 	// Broadcast changes
-	SendPacket packet;
 	broadcast_setting_player(number);
 }
 
