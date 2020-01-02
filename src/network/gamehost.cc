@@ -88,30 +88,35 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		if (number >= settings().players.size()) {
 			return false;
 		}
-		if (settings().savegame)
+		if (settings().savegame) {
 			return settings().players.at(number).state != PlayerSettings::State::kClosed;
-		else if (settings().scenario)
+		} else if (settings().scenario) {
 			return ((settings().players.at(number).state == PlayerSettings::State::kOpen ||
 			         settings().players.at(number).state == PlayerSettings::State::kHuman) &&
 			        settings().players.at(number).closeable) ||
 			       settings().players.at(number).state == PlayerSettings::State::kClosed;
+		}
 		return true;
 	}
 	bool can_change_player_tribe(uint8_t const number) override {
 		return can_change_player_team(number);
 	}
 	bool can_change_player_init(uint8_t const number) override {
-		if (settings().scenario || settings().savegame)
+		if (settings().scenario || settings().savegame) {
 			return false;
+		}
 		return number < settings().players.size();
 	}
 	bool can_change_player_team(uint8_t number) override {
-		if (settings().scenario || settings().savegame)
+		if (settings().scenario || settings().savegame) {
 			return false;
-		if (number >= settings().players.size())
+		}
+		if (number >= settings().players.size()) {
 			return false;
-		if (number == settings().playernum)
+		}
+		if (number == settings().playernum) {
 			return true;
+		}
 		return settings().players.at(number).state == PlayerSettings::State::kComputer;
 	}
 
@@ -126,50 +131,55 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		host_->set_map(mapname, mapfilename, maxplayers, savegame);
 	}
 	void set_player_state(uint8_t number, PlayerSettings::State const state) override {
-		if (number >= settings().players.size())
+		if (number >= settings().players.size()) {
 			return;
-
+		}
 		host_->set_player_state(number, state);
 	}
 
 	void
 	set_player_tribe(uint8_t number, const std::string& tribe, bool const random_tribe) override {
-		if (number >= host_->settings().players.size())
+		if (number >= host_->settings().players.size()) {
 			return;
-
+		}
 		if (number == settings().playernum ||
 		    settings().players.at(number).state == PlayerSettings::State::kComputer ||
 		    settings().players.at(number).state == PlayerSettings::State::kShared ||
-		    settings().players.at(number).state ==
-		       PlayerSettings::State::kOpen)  // For savegame loading
+		    settings().players.at(number).state == PlayerSettings::State::kOpen)
+		{  // For savegame loading
 			host_->set_player_tribe(number, tribe, random_tribe);
+		}
 	}
 
 	void set_player_team(uint8_t number, Widelands::TeamNumber team) override {
-		if (number >= host_->settings().players.size())
+		if (number >= host_->settings().players.size()) {
 			return;
-
+		}
 		if (number == settings().playernum ||
 		    settings().players.at(number).state == PlayerSettings::State::kComputer)
+		{
 			host_->set_player_team(number, team);
+		}
 	}
 
 	void set_player_closeable(uint8_t number, bool closeable) override {
-		if (number >= host_->settings().players.size())
+		if (number >= host_->settings().players.size()) {
 			return;
+		}
 		host_->set_player_closeable(number, closeable);
 	}
 
 	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) override {
-		if (number >= host_->settings().players.size())
+		if (number >= host_->settings().players.size()) {
 			return;
+		}
 		host_->set_player_shared(number, shared);
 	}
 
 	void set_player_init(uint8_t const number, uint8_t const index) override {
-		if (number >= host_->settings().players.size())
+		if (number >= host_->settings().players.size()) {
 			return;
-
+		}
 		host_->set_player_init(number, index);
 	}
 
@@ -179,20 +189,24 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	}
 
 	void set_player_name(uint8_t const number, const std::string& name) override {
-		if (number >= host_->settings().players.size())
+		if (number >= host_->settings().players.size()) {
 			return;
+		}
 		host_->set_player_name(number, name);
 	}
 
 	void set_player(uint8_t const number, const PlayerSettings& ps) override {
-		if (number >= host_->settings().players.size())
+		if (number >= host_->settings().players.size()) {
 			return;
+		}
 		host_->set_player(number, ps);
 	}
 
 	void set_player_number(uint8_t const number) override {
-		if (number == UserSettings::none() || number < host_->settings().players.size())
+		if (number == UserSettings::none()
+                 || number < host_->settings().players.size()) {
 			host_->set_player_number(number);
+		}
 	}
 
 	std::string get_win_condition_script() override {
@@ -227,8 +241,9 @@ struct HostChatProvider : public ChatProvider {
 		if (c.msg.size() && *c.msg.begin() == '@') {
 			// Personal message
 			std::string::size_type const space = c.msg.find(' ');
-			if (space >= c.msg.size() - 1)
+			if (space >= c.msg.size() - 1) {
 				return;
+			}
 			c.recipient = c.msg.substr(1, space - 1);
 			c.msg = c.msg.substr(space + 1);
 		}
@@ -284,8 +299,9 @@ struct HostChatProvider : public ChatProvider {
 				if (arg1.empty()) {
 					c.msg = _("Wrong use, should be: /announce <message>");
 				} else {
-					if (arg2.size())
+					if (arg2.size()) {
 						arg1 += " " + arg2;
+					}
 					c.msg = "HOST ANNOUNCEMENT: " + arg1;
 				}
 			}
@@ -588,16 +604,20 @@ void GameHost::replace_client_with_ai(uint8_t playernumber, const std::string& a
 void GameHost::init_computer_players() {
 	const Widelands::PlayerNumber nr_players = d->game->map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, *d->game) {
-		if (p == d->settings.playernum + 1)
+		if (p == d->settings.playernum + 1) {
 			continue;
+		}
 
 		uint32_t client;
-		for (client = 0; client < d->clients.size(); ++client)
-			if (d->clients.at(client).playernum + 1 == p)
+		for (client = 0; client < d->clients.size(); ++client) {
+			if (d->clients.at(client).playernum + 1 == p) {
 				break;
+			}
+		}
 
-		if (client >= d->clients.size())
+		if (client >= d->clients.size()) {
 			init_computer_player(p);
+		}
 	}
 }
 
@@ -625,8 +645,9 @@ void GameHost::run() {
 	}
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
-		if (d->clients.at(i).playernum == UserSettings::not_connected())
+		if (d->clients.at(i).playernum == UserSettings::not_connected()) {
 			disconnect_client(i, "GAME_STARTED_AT_CONNECT");
+		}
 	}
 
 	SendPacket packet;
@@ -677,10 +698,11 @@ void GameHost::run() {
 		igb->set_chat_provider(d->chat);
 		game.set_ibase(igb);
 
-		if (!d->settings.savegame)  // new game
+		if (!d->settings.savegame) { // new game
 			game.init_newgame(d->settings);
-		else  // savegame
+		} else { // savegame
 			game.init_savegame(d->settings);
+		}
 		d->pseudo_networktime = game.get_gametime();
 		d->time.reset(d->pseudo_networktime);
 		d->lastframe = SDL_GetTicks();
@@ -703,8 +725,9 @@ void GameHost::run() {
 
 		game.set_loader_ui(nullptr);
 		// if this is an internet game, tell the metaserver that the game is done.
-		if (internet_)
+		if (internet_) {
 			InternetGaming::ref().set_game_done();
+		}
 		clear_computer_players();
 	} catch (...) {
 		WLApplication::emergency_save(game);
@@ -784,8 +807,9 @@ void GameHost::send_player_command(Widelands::PlayerCommand* pc) {
  * the sender (to show that the message was actually sent).
  */
 void GameHost::send(ChatMessage msg) {
-	if (msg.msg.empty())
+	if (msg.msg.empty()) {
 		return;
+	}
 
 	if (msg.recipient.empty()) {
 		SendPacket packet;
@@ -840,15 +864,16 @@ void GameHost::send(ChatMessage msg) {
 			}
 		}
 
-		if (msg.sender == msg.recipient)  //  he sent himself a private message
-			return;                        //  do not deliver it to him twice
+		if (msg.sender == msg.recipient) { //  sent itself a private message
+			return;                    //  do not deliver it twice
+		}
 
 		// Now find the sender and send either the message or the failure notice
-		else if (msg.playern == -2)  // private system message
+		else if (msg.playern == -2) { // private system message
 			return;
-		else if (d->localplayername == msg.sender)
+		} else if (d->localplayername == msg.sender) {
 			d->chat.receive(msg);
-		else {  // host is not the sender -> get sender
+		} else {  // host is not the sender -> get sender
 			uint16_t i = 0;
 			for (; i < d->settings.users.size(); ++i) {
 				const UserSettings& user = d->settings.users.at(i);
@@ -865,9 +890,10 @@ void GameHost::send(ChatMessage msg) {
 				else
 					// Better no wexception it would break the whole game
 					log("WARNING: user was found but no client is connected to it!\n");
-			} else
+			} else {
 				// Better no wexception it would break the whole game
 				log("WARNING: sender could not be found!");
+			}
 		}
 	}
 }
@@ -889,15 +915,18 @@ int32_t GameHost::check_client(const std::string& name) {
 	uint32_t client = 0;
 	for (; i < d->settings.users.size(); ++i) {
 		const UserSettings& user = d->settings.users.at(i);
-		if (user.name == name)
+		if (user.name == name) {
 			break;
+		}
 	}
 	if (i < d->settings.users.size()) {
 		for (; client < d->clients.size(); ++client)
-			if (d->clients.at(client).usernum == static_cast<int16_t>(i))
+			if (d->clients.at(client).usernum == static_cast<int16_t>(i)) {
 				break;
-		if (client >= d->clients.size())
+			}
+		if (client >= d->clients.size()) {
 			throw wexception("WARNING: user was found but no client is connected to it!\n");
+		}
 		return client;  // client found
 	} else {
 		return -1;  // no client found
@@ -922,24 +951,24 @@ void GameHost::split_command_array(const std::string& cmdarray,
 	assert(cmdarray.size() > 1);
 
 	std::string::size_type const space = cmdarray.find(' ');
-	if (space > cmdarray.size())
-		// only cmd
+	if (space > cmdarray.size()) { // only cmd
 		cmd = cmdarray;
-	else {
+	} else {
 		cmd = cmdarray.substr(0, space);
 		std::string::size_type const space2 = cmdarray.find(' ', space + 1);
-		if (space2 != std::string::npos) {
-			// cmd + arg1 + arg2
+		if (space2 != std::string::npos) { // cmd + arg1 + arg2
 			arg1 = cmdarray.substr(space + 1, space2 - space - 1);
 			arg2 = cmdarray.substr(space2 + 1);
-		} else if (space + 1 < cmdarray.size())
-			// cmd + arg1
+		} else if (space + 1 < cmdarray.size()) { // cmd + arg1
 			arg1 = cmdarray.substr(space + 1);
+		}
 	}
-	if (arg1.empty())
+	if (arg1.empty()) {
 		arg1 = "";
-	if (arg2.empty())
+	}
+	if (arg2.empty()) {
 		arg2 = "";
+	}
 }
 
 void GameHost::send_system_message_code(const std::string& code,
@@ -975,12 +1004,15 @@ const GameSettings& GameHost::settings() {
 }
 
 bool GameHost::can_launch() {
-	if (d->settings.mapname.empty())
+	if (d->settings.mapname.empty()) {
 		return false;
-	if (d->settings.players.size() < 1)
+	}
+	if (d->settings.players.size() < 1) {
 		return false;
-	if (d->game)
+	}
+	if (d->game) {
 		return false;
+	}
 
 	// if there is one client that is currently receiving a file, we can not launch.
 
@@ -1000,10 +1032,12 @@ bool GameHost::can_launch() {
 	// but not all should be closed!
 	bool one_not_closed = false;  // TODO(k.halfmann): check this logic
 	for (PlayerSettings& setting : d->settings.players) {
-		if (setting.state != PlayerSettings::State::kClosed)
+		if (setting.state != PlayerSettings::State::kClosed) {
 			one_not_closed = true;
-		if (setting.state == PlayerSettings::State::kOpen)
+		}
+		if (setting.state == PlayerSettings::State::kOpen) {
 			return false;
+		}
 	}
 	return one_not_closed;
 }
@@ -1035,9 +1069,11 @@ void GameHost::set_map(const std::string& mapname,
 
 				// for local settings
 				uint32_t j = 0;
-				for (; j < d->clients.size(); ++j)
-					if (d->clients.at(j).usernum == static_cast<int16_t>(i))
+				for (; j < d->clients.size(); ++j) {
+					if (d->clients.at(j).usernum == static_cast<int16_t>(i)) {
 						break;
+					}
+				}
 				d->clients.at(j).playernum = UserSettings::none();
 
 				// Broadcast change
@@ -1121,14 +1157,15 @@ void GameHost::set_player_state(uint8_t const number,
                                 PlayerSettings::State const state,
                                 bool const host) {
 
-	// ignore player numbers out of range
-	if (number >= d->settings.players.size())
-		return;
+	if (number >= d->settings.players.size()) {
+		return; // ignore player numbers out of range
+	}
 
 	PlayerSettings& player = d->settings.players.at(number);
 
-	if (player.state == state)
+	if (player.state == state) {
 		return;
+	}
 
 	if (player.state == PlayerSettings::State::kHuman) {
 		// kSpectatorPlayerNum has no client
@@ -1188,8 +1225,9 @@ void GameHost::set_player_state(uint8_t const number,
 		player.state = PlayerSettings::State::kOpen;
 	}
 
-	if (player.state == PlayerSettings::State::kComputer)
+	if (player.state == PlayerSettings::State::kComputer) {
 		player.name = get_computer_player_name(number);
+	}
 
 	// Broadcast change to player
 	broadcast_setting_player(number);
@@ -1205,8 +1243,9 @@ void GameHost::set_player_state(uint8_t const number,
 void GameHost::set_player_tribe(uint8_t const number,
                                 const std::string& tribe,
                                 bool const random_tribe) {
-	if (number >= d->settings.players.size())
+	if (number >= d->settings.players.size()) {
 		return;
+	}
 
 	PlayerSettings& player = d->settings.players.at(number);
 
@@ -2063,8 +2102,9 @@ void GameHost::handle_hello(uint32_t const client_num,
 		throw ProtocolException(cmd);
 	}
 	uint8_t version = r.unsigned_8();
-	if (version != NETWORK_PROTOCOL_VERSION)
+	if (version != NETWORK_PROTOCOL_VERSION) {
 		throw DisconnectException("DIFFERENT_PROTOCOL_VERS");
+	}
 
 	std::string clientname = r.string();
 	client.build_id = r.string();
@@ -2113,8 +2153,9 @@ void GameHost::handle_changeinit(Client& client, RecvPacket& r) {
 		// sending when a player changes slot. So, keeping the access to the client off for now.
 		// Would be nice to have though.
 		uint8_t num = r.unsigned_8();
-		if (num != client.playernum)
+		if (num != client.playernum) {
 			throw DisconnectException("NO_ACCESS_TO_PLAYER");
+		}
 		set_player_init(num, r.unsigned_8());
 	}
 }
@@ -2127,21 +2168,24 @@ void GameHost::handle_changeposition(Client& client, RecvPacket& r) {
 }
 
 void GameHost::handle_nettime(uint32_t const client_num, RecvPacket& r) {
-	if (!d->game)
+	if (!d->game) {
 		throw DisconnectException("TIME_SENT_NOT_READY");
+	}
 	receive_client_time(client_num, r.signed_32());
 }
 
 void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, RecvPacket& r) {
-	if (!d->game)
+	if (!d->game) {
 		throw DisconnectException("PLAYERCMD_WO_GAME");
+	}
 	int32_t time = r.signed_32();
 	Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
 	log("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n", client_num,
 	    client.playernum, static_cast<unsigned int>(plcmd->id()), plcmd->sender(), time);
 	receive_client_time(client_num, time);
-	if (plcmd->sender() != client.playernum + 1)
+	if (plcmd->sender() != client.playernum + 1) {
 		throw DisconnectException("PLAYERCMD_FOR_OTHER");
+	}
 	send_player_command(plcmd);
 }
 
@@ -2163,8 +2207,9 @@ void GameHost::handle_chat(Client& client, RecvPacket& r) {
 	if (c.msg.size() && *c.msg.begin() == '@') {
 		// Personal message
 		std::string::size_type const space = c.msg.find(' ');
-		if (space >= c.msg.size() - 1)
+		if (space >= c.msg.size() - 1) {
 			return;  // No Message after '@<User>'
+		}
 		c.recipient = c.msg.substr(1, space - 1);
 		c.msg = c.msg.substr(space + 1);
 	}
@@ -2179,8 +2224,9 @@ void GameHost::handle_speed(Client& client, RecvPacket& r) {
 
 /** a new file should be uploaded to all players */
 void GameHost::handle_new_file(Client& client) {
-	if (!file_)  // Do we have a file for sending?
+	if (!file_) {  // Do we have a file for sending?
 		throw DisconnectException("REQUEST_OF_N_E_FILE");
+	}
 	send_system_message_code(
 	   "STARTED_SENDING_FILE", file_->filename, d->settings.users.at(client.usernum).name);
 	send_file_part(client.sock_id, 0);
@@ -2263,16 +2309,18 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 
 /** Handle uploading part of a file  */
 void GameHost::handle_file_part(Client& client, RecvPacket& r) {
-	if (!file_)  // Do we have a file for sending
+	if (!file_) { // Do we have a file for sending
 		throw DisconnectException("REQUEST_OF_N_E_FILE");
+	}
 	uint32_t part = r.unsigned_32();
 	std::string x = r.string();
 	if (x != file_->md5sum) {
 		log("[Host]: File transfer checksum mismatch %s != %s\n", x.c_str(), file_->md5sum.c_str());
 		return;  // Surely the file was changed, so we cancel here.
 	}
-	if (part >= file_->parts.size())
+	if (part >= file_->parts.size()) {
 		throw DisconnectException("REQUEST_OF_N_E_FILEPART");
+	}
 	if (part == file_->parts.size() - 1) {
 		send_system_message_code(
 		   "COMPLETED_FILE_TRANSFER", file_->filename, d->settings.users.at(client.usernum).name);
@@ -2282,10 +2330,11 @@ void GameHost::handle_file_part(Client& client, RecvPacket& r) {
 		return;
 	}
 	++part;
-	if (part % 100 == 0)  // Show Progress message every 100th transfer
+	if (part % 100 == 0) { // Show Progress message every 100th transfer
 		send_system_message_code("SENDING_FILE_PART",
 		                         (boost::format("%i/%i") % part % (file_->parts.size() + 1)).str(),
 		                         file_->filename, d->settings.users.at(client.usernum).name);
+	}
 	send_file_part(client.sock_id, part);
 }
 
@@ -2416,10 +2465,11 @@ void GameHost::disconnect_client(uint32_t const client_number,
 void GameHost::reaper() {
 	uint32_t index = 0;
 	while (index < d->clients.size())
-		if (d->clients.at(index).sock_id > 0)
+		if (d->clients.at(index).sock_id > 0) {
 			++index;
-		else
+		} else {
 			d->clients.erase(d->clients.begin() + index);
+		}
 }
 
 void GameHost::report_result(uint8_t p_nr,
