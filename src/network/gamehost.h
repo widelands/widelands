@@ -169,7 +169,7 @@ private:
 	void broadcast_setting_player(uint8_t number);
 	void write_setting_all_players(SendPacket&);
 	void write_setting_user(SendPacket& packet, uint32_t number);
-	void broadcast_setting_user(SendPacket& packet, uint32_t number);
+	void broadcast_setting_user(uint32_t number);
 	void write_setting_all_users(SendPacket&);
 	bool write_map_transfer_info(SendPacket&, std::string);
 
@@ -183,7 +183,8 @@ private:
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;
 	bool internet_;
-	bool forced_pause_;  // triggered by the forcePause host chat command, see HostChatProvider in gamehost.cc
+	bool forced_pause_;  // triggered by the forcePause host chat command, see HostChatProvider in
+	                     // gamehost.cc
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMEHOST_H
