@@ -72,7 +72,7 @@ struct EditorActionArgs {
 	RoadMode road_mode;            // road tool
 	bool create_primary_worker;    // road tool
 	bool create_secondary_worker;  // road tool
-	bool force;                    // road tool
+	bool force;                    // infrastructure and road tool
 
 	struct ResourceState {
 		Widelands::FCoords location;

@@ -48,8 +48,8 @@ struct ScenarioInfrastructureDeleteTool : public EditorTool {
 
 // Place buildings, flags and player immovables
 struct ScenarioInfrastructureTool : public EditorTool {
-	ScenarioInfrastructureTool(ScenarioInfrastructureDeleteTool& t) : EditorTool(t, t),
-			player_(1), index_(), construct_(false) {
+	ScenarioInfrastructureTool(ScenarioInfrastructureDeleteTool& t)
+	   : EditorTool(t, t), player_(1), index_(), force_(false), construct_(false) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
@@ -71,7 +71,8 @@ struct ScenarioInfrastructureTool : public EditorTool {
 		return true;
 	}
 
-	const std::vector<std::pair<Widelands::MapObjectType, Widelands::DescriptionIndex>>& get_index() const {
+	const std::vector<std::pair<Widelands::MapObjectType, Widelands::DescriptionIndex>>&
+	get_index() const {
 		return index_;
 	}
 	std::vector<std::pair<Widelands::MapObjectType, Widelands::DescriptionIndex>>& get_index() {
@@ -89,10 +90,17 @@ struct ScenarioInfrastructureTool : public EditorTool {
 	void set_construct(bool p) {
 		construct_ = p;
 	}
+	bool get_force() const {
+		return force_;
+	}
+	void set_force(bool f) {
+		force_ = f;
+	}
 
 private:
 	Widelands::PlayerNumber player_;
 	std::vector<std::pair<Widelands::MapObjectType, Widelands::DescriptionIndex>> index_;
+	bool force_;
 	bool construct_;
 };
 

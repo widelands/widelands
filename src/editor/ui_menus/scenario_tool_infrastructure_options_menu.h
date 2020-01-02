@@ -38,7 +38,9 @@ class EditorInteractive;
 
 /// Tool menu for placing buldings, flags and player immovables
 struct ScenarioToolInfrastructureOptionsMenu : public EditorToolOptionsMenu {
-	ScenarioToolInfrastructureOptionsMenu(EditorInteractive&, ScenarioInfrastructureTool&, UI::UniqueWindow::Registry&);
+	ScenarioToolInfrastructureOptionsMenu(EditorInteractive&,
+	                                      ScenarioInfrastructureTool&,
+	                                      UI::UniqueWindow::Registry&);
 	~ScenarioToolInfrastructureOptionsMenu() {
 	}
 
@@ -50,11 +52,11 @@ private:
 	ScenarioInfrastructureTool& tool_;
 
 	void select_player();
-	void toggle_construct();
 	void toggle_selected(UI::IconGrid*, Widelands::MapObjectType, int32_t);
 
 	std::unique_ptr<UI::Box> main_box_;
 	std::unique_ptr<UI::Dropdown<Widelands::PlayerNumber>> players_;
+	std::unique_ptr<UI::Checkbox> force_;
 	std::unique_ptr<UI::Checkbox> construct_;
 	std::unique_ptr<UI::TabPanel> item_categories_;
 	std::vector<std::unique_ptr<UI::TabPanel>> item_tabs_;

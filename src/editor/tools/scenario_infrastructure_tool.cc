@@ -31,7 +31,7 @@ int32_t ScenarioInfrastructureTool::handle_click_impl(const Widelands::NodeAndTr
                                                       EditorActionArgs* args,
                                                       Widelands::Map* map) {
 	if (args->new_owner < 1 || args->new_owner > map->get_nrplayers() ||
-			args->infrastructure_types.empty()) {
+	    args->infrastructure_types.empty()) {
 		return 0;
 	}
 	const size_t nr_items = args->infrastructure_types.size();
@@ -41,31 +41,40 @@ int32_t ScenarioInfrastructureTool::handle_click_impl(const Widelands::NodeAndTr
 		args->random_index = std::rand() % nr_items;
 	}
 	const std::pair<Widelands::MapObjectType, Widelands::DescriptionIndex>& item_to_place =
-			args->infrastructure_types[args->random_index];
+	   args->infrastructure_types[args->random_index];
+	Widelands::Player& player = *egbase.get_player(args->new_owner);
 	Widelands::MapObject* mo = nullptr;
 	switch (item_to_place.first) {
-		case Widelands::MapObjectType::BUILDING: {
+	case Widelands::MapObjectType::BUILDING: {
+		Widelands::FormerBuildings b;
+		b.push_back(std::make_pair(item_to_place.second, ""));
+		if (args->force) {
 			if (args->infrastructure_constructionsite &&
-					egbase.tribes().get_building_descr(item_to_place.second)->is_buildable()) {
-				mo = &egbase.get_player(args->new_owner)->force_csite(center.node, item_to_place.second);
+			    egbase.tribes().get_building_descr(item_to_place.second)->is_buildable()) {
+				mo = &player.force_csite(center.node, item_to_place.second);
 			} else {
-				Widelands::FormerBuildings b;
-				b.push_back(std::make_pair(item_to_place.second, ""));
-				mo = &egbase.get_player(args->new_owner)->force_building(center.node, b);
+				mo = &player.force_building(center.node, b);
 			}
-			break;
+		} else {
+			mo = player.build(
+			   center.node, item_to_place.second, args->infrastructure_constructionsite, b);
 		}
-		case Widelands::MapObjectType::FLAG: {
-			mo = &egbase.get_player(args->new_owner)->force_flag(map->get_fcoords(center.node));
-			break;
-		}
-		case Widelands::MapObjectType::IMMOVABLE: {
+		break;
+	}
+	case Widelands::MapObjectType::FLAG: {
+		mo = args->force ? &player.force_flag(map->get_fcoords(center.node)) :
+		                   player.build_flag(map->get_fcoords(center.node));
+		break;
+	}
+	case Widelands::MapObjectType::IMMOVABLE: {
+		if (args->force || !(*map)[center.node].get_immovable()) {
 			mo = &egbase.create_immovable(center.node, item_to_place.second,
-					Widelands::MapObjectDescr::OwnerType::kTribe, egbase.get_player(args->new_owner));
-			break;
+			                              Widelands::MapObjectDescr::OwnerType::kTribe, &player);
 		}
-		default:
-			NEVER_HERE();
+		break;
+	}
+	default:
+		NEVER_HERE();
 	}
 	args->infrastructure_placed = mo ? mo->serial() : 0;
 	return 1;
@@ -82,6 +91,7 @@ int32_t ScenarioInfrastructureTool::handle_undo_impl(const Widelands::NodeAndTri
 EditorActionArgs ScenarioInfrastructureTool::format_args_impl(EditorInteractive& parent) {
 	EditorActionArgs a(parent);
 	a.new_owner = player_;
+	a.force = force_;
 	a.infrastructure_constructionsite = construct_;
 	a.random_index = -1;
 	for (auto& pair : index_) {
@@ -90,11 +100,11 @@ EditorActionArgs ScenarioInfrastructureTool::format_args_impl(EditorInteractive&
 	return a;
 }
 
-int32_t ScenarioInfrastructureDeleteTool::handle_click_impl(
-                                                       const Widelands::NodeAndTriangle<>& center,
-                                                       EditorInteractive& eia,
-                                                       EditorActionArgs* args,
-                                                       Widelands::Map* map) {
+int32_t
+ScenarioInfrastructureDeleteTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                                    EditorInteractive& eia,
+                                                    EditorActionArgs* args,
+                                                    Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
@@ -114,9 +124,11 @@ int32_t ScenarioInfrastructureDeleteTool::handle_click_impl(
 				}
 			} else if (upcast(Widelands::Building, b, imm)) {
 				history.type = Widelands::MapObjectType::BUILDING;
-				history.constructionsite = b->descr().type() == Widelands::MapObjectType::CONSTRUCTIONSITE;
+				history.constructionsite =
+				   b->descr().type() == Widelands::MapObjectType::CONSTRUCTIONSITE;
 				history.name = history.constructionsite ?
-						dynamic_cast<Widelands::ConstructionSite*>(b)->building().name() : b->descr().name();
+				                  dynamic_cast<Widelands::ConstructionSite*>(b)->building().name() :
+				                  b->descr().name();
 				history.owner = b->owner().player_number();
 				history.settings = b->create_building_settings();
 				destroy = true;
@@ -130,39 +142,39 @@ int32_t ScenarioInfrastructureDeleteTool::handle_click_impl(
 	return mr.radius();
 }
 
-int32_t ScenarioInfrastructureDeleteTool::handle_undo_impl(
-                                                      const Widelands::NodeAndTriangle<>& center,
-                                                      EditorInteractive& eia,
-                                                      EditorActionArgs* args,
-                                                      Widelands::Map* map) {
+int32_t
+ScenarioInfrastructureDeleteTool::handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
+                                                   EditorInteractive& eia,
+                                                   EditorActionArgs* args,
+                                                   Widelands::Map* map) {
 	Widelands::EditorGameBase& egbase = eia.egbase();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	auto it = args->infrastructure_deleted.begin();
 	do {
+		Widelands::Player& player = *egbase.get_player(it->owner);
 		switch (it->type) {
-			case Widelands::MapObjectType::MAPOBJECT:
-				// No item was here
-				break;
-			case Widelands::MapObjectType::FLAG:
-				egbase.get_player(it->owner)->force_flag(mr.location());
-				break;
-			case Widelands::MapObjectType::IMMOVABLE:
-				egbase.create_immovable(mr.location(), egbase.tribes().safe_immovable_index(it->name),
-						Widelands::MapObjectDescr::OwnerType::kTribe, egbase.get_player(it->owner));
-				break;
-			case Widelands::MapObjectType::BUILDING:
-				if (it->constructionsite) {
-					egbase.get_player(it->owner)->force_csite(mr.location(),
-							egbase.tribes().safe_building_index(it->name));
-				} else {
-					Widelands::FormerBuildings b;
-					b.push_back(std::make_pair(egbase.tribes().safe_building_index(it->name), ""));
-					egbase.get_player(it->owner)->force_building(mr.location(), b);
-				}
-				break;
-			default:
-				NEVER_HERE();
+		case Widelands::MapObjectType::MAPOBJECT:
+			// No item was here
+			break;
+		case Widelands::MapObjectType::FLAG:
+			player.force_flag(mr.location());
+			break;
+		case Widelands::MapObjectType::IMMOVABLE:
+			egbase.create_immovable(mr.location(), egbase.tribes().safe_immovable_index(it->name),
+			                        Widelands::MapObjectDescr::OwnerType::kTribe, &player);
+			break;
+		case Widelands::MapObjectType::BUILDING:
+			if (it->constructionsite) {
+				player.force_csite(mr.location(), egbase.tribes().safe_building_index(it->name));
+			} else {
+				Widelands::FormerBuildings b;
+				b.push_back(std::make_pair(egbase.tribes().safe_building_index(it->name), ""));
+				player.force_building(mr.location(), b);
+			}
+			break;
+		default:
+			NEVER_HERE();
 		}
 		++it;
 	} while (mr.advance(*map));

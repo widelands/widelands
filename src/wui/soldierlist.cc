@@ -483,7 +483,8 @@ void SoldierList::think() {
 
 void SoldierList::mouseover(const Soldier* soldier) {
 	if (!soldier) {
-		infotext_.set_text(_("Click soldier to send away"));
+		infotext_.set_text(ibase_.omnipotent() ? _("Click soldier to edit") :
+		                                         _("Click soldier to send away"));
 		return;
 	}
 
