@@ -49,7 +49,7 @@ struct ScenarioInfrastructureDeleteTool : public EditorTool {
 // Place buildings, flags and player immovables
 struct ScenarioInfrastructureTool : public EditorTool {
 	ScenarioInfrastructureTool(ScenarioInfrastructureDeleteTool& t)
-	   : EditorTool(t, t), player_(1), index_(), force_(false), construct_(false) {
+	   : EditorTool(t, t), player_(1), index_(), force_(true), construct_(false) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,

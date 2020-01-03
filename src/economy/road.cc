@@ -277,47 +277,47 @@ void Road::postsplit(EditorGameBase& egbase, Flag& flag) {
 	std::vector<Worker*> const workers = get_workers();
 	std::vector<Worker*> reassigned_workers;
 
-	for (Worker* w : workers) {
-		int32_t idx = path.get_index(w->get_position());
+	if (game) {
+		for (Worker* w : workers) {
+			int32_t idx = path.get_index(w->get_position());
 
-		// Careful! If the worker is currently inside the building at our
-		// starting flag, we *must not* reassign him.
-		// If he is in the building at our end flag or at the other road's
-		// end flag, he can be reassigned to the other road.
-		if (idx < 0) {
-			if (dynamic_cast<Building const*>(map.get_immovable(w->get_position()))) {
-				Coords pos;
-				map.get_brn(w->get_position(), &pos);
-				if (pos == path.get_start())
-					idx = 0;
+			// Careful! If the worker is currently inside the building at our
+			// starting flag, we *must not* reassign him.
+			// If he is in the building at our end flag or at the other road's
+			// end flag, he can be reassigned to the other road.
+			if (idx < 0) {
+				if (dynamic_cast<Building const*>(map.get_immovable(w->get_position()))) {
+					Coords pos;
+					map.get_brn(w->get_position(), &pos);
+					if (pos == path.get_start())
+						idx = 0;
+				}
 			}
-		}
 
-		if (game && idx < 0) {
-			reassigned_workers.push_back(w);
+			if (idx < 0) {
+				reassigned_workers.push_back(w);
 
-			/*
-			 * The current worker is not on this road. Search him
-			 * in this road and remove him. Than add him to the new road
-			 */
-			for (CarrierSlot& old_slot : carrier_slots_) {
-				Carrier const* const carrier = old_slot.carrier.get(*game);
+				/*
+				 * The current worker is not on this road. Search him
+				 * in this road and remove him. Then add him to the new road
+				 */
+				for (CarrierSlot& old_slot : carrier_slots_) {
+					Carrier const* const carrier = old_slot.carrier.get(egbase);
 
-				if (carrier == w) {
-					old_slot.carrier = nullptr;
-					for (CarrierSlot& new_slot : newroad.carrier_slots_) {
-						if (!new_slot.carrier.get(*game) && !new_slot.carrier_request &&
-						    new_slot.second_carrier == old_slot.second_carrier) {
-							upcast(Carrier, new_carrier, w);
-							new_slot.carrier = new_carrier;
-							break;
+					if (carrier == w) {
+						old_slot.carrier = nullptr;
+						for (CarrierSlot& new_slot : newroad.carrier_slots_) {
+							if (!new_slot.carrier.get(egbase) && !new_slot.carrier_request &&
+							    new_slot.second_carrier == old_slot.second_carrier) {
+								upcast(Carrier, new_carrier, w);
+								new_slot.carrier = new_carrier;
+								break;
+							}
 						}
 					}
 				}
 			}
-		}
 
-		if (game) {
 			// Cause a worker update in any case
 			w->send_signal(*game, "road");
 		}
@@ -347,6 +347,29 @@ void Road::postsplit(EditorGameBase& egbase, Flag& flag) {
 		//  Make sure wares waiting on the original endpoint flags are dealt with.
 		flags_[FlagStart]->update_wares(*game, &oldend);
 		oldend.update_wares(*game, flags_[FlagStart]);
+	} else {
+		for (Worker* w : workers) {
+			// In the editor, we keep all our carriers (teleporting them to the middle of the road) and
+			// create duplicates on the new road
+			const size_t nr_slots = carrier_slots_.size();
+			int32_t slot_idx = -1;
+			for (size_t i = 0; i < nr_slots; ++i) {
+				if (carrier_slots_[i].carrier.get(egbase) == w) {
+					slot_idx = i;
+					break;
+				}
+			}
+			if (slot_idx >= 0) {
+				assert(is_a(Carrier, w));
+				w->set_position(egbase, path.get_coords()[get_idle_index()]);
+				Carrier& new_carrier = dynamic_cast<Carrier&>(w->descr().create(
+				   egbase, get_owner(), &newroad, secondpath.get_coords()[newroad.get_idle_index()]));
+				newroad.assign_carrier(new_carrier, slot_idx);
+			} else {
+				log("ERROR: Road::postsplit found worker %s which is not one of our carriers!\n",
+				    w->descr().name().c_str());
+			}
+		}
 	}
 }
 

@@ -399,8 +399,9 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 	              font_style_))
 	           ->width();
 	uint32_t maxtextwidth = std::max(
-	   w, UI::g_fh->render(as_richtext_paragraph(_("Click soldier to send away"), font_style_))
-	         ->width());
+	   w,
+	   UI::g_fh->render(as_richtext_paragraph(_("Click soldier to configure levels"), font_style_))
+	      ->width());
 	set_min_desired_breadth(maxtextwidth + 4);
 
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
@@ -483,7 +484,7 @@ void SoldierList::think() {
 
 void SoldierList::mouseover(const Soldier* soldier) {
 	if (!soldier) {
-		infotext_.set_text(ibase_.omnipotent() ? _("Click soldier to edit") :
+		infotext_.set_text(ibase_.omnipotent() ? _("Click soldier to configure levels") :
 		                                         _("Click soldier to send away"));
 		return;
 	}

@@ -79,8 +79,8 @@ struct FerryFleet : MapObject {
 	bool has_ferry(const Waterway& ww) const;
 
 	void request_ferry(EditorGameBase& egbase, Waterway* waterway, int32_t gametime = -1);
-	void reroute_ferry_request(Game& game, Waterway* oldww, Waterway* newww);
-	void cancel_ferry_request(Game& game, Waterway* waterway);
+	void reroute_ferry_request(EditorGameBase& game, Waterway* oldww, Waterway* newww);
+	void cancel_ferry_request(EditorGameBase& game, Waterway* waterway);
 
 	bool empty() const;
 

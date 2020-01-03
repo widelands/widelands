@@ -1224,6 +1224,10 @@ void Worker::set_location(PlayerImmovable* const location) {
 			EditorGameBase& egbase = get_owner()->egbase();
 			if (upcast(Game, game, &egbase)) {
 				send_signal(*game, "location");
+			} else {
+				// In the editor, we delete workers in buildings/on roads/etc when deleting their
+				// workplace
+				remove(egbase);
 			}
 		}
 	}

@@ -263,12 +263,14 @@ void FerryFleet::request_ferry(EditorGameBase& egbase, Waterway* waterway, int32
 	waterway->set_fleet(this);
 }
 
-void FerryFleet::cancel_ferry_request(Game& game, Waterway* waterway) {
-	for (Ferry* ferry : ferries_) {
-		if (game.objects().object_still_available(ferry) &&
-		    ferry->get_destination(game) == waterway) {
-			ferry->set_destination(game, nullptr);
-			return;
+void FerryFleet::cancel_ferry_request(EditorGameBase& egbase, Waterway* waterway) {
+	if (upcast(Game, game, &egbase)) {
+		for (Ferry* ferry : ferries_) {
+			if (game->objects().object_still_available(ferry) &&
+			    ferry->get_destination(*game) == waterway) {
+				ferry->set_destination(*game, nullptr);
+				return;
+			}
 		}
 	}
 	for (auto it = pending_ferry_requests_.begin(); it != pending_ferry_requests_.end(); ++it) {
@@ -277,18 +279,20 @@ void FerryFleet::cancel_ferry_request(Game& game, Waterway* waterway) {
 			pending_ferry_requests_.erase(it);
 			if (empty()) {
 				// We're no longer needed, act() will destroy us soon
-				update(game);
+				update(egbase);
 			}
 			return;
 		}
 	}
 }
 
-void FerryFleet::reroute_ferry_request(Game& game, Waterway* oldww, Waterway* newww) {
-	for (Ferry* ferry : ferries_) {
-		if (ferry->get_destination(game) == oldww) {
-			ferry->set_destination(game, newww);
-			return;
+void FerryFleet::reroute_ferry_request(EditorGameBase& egbase, Waterway* oldww, Waterway* newww) {
+	if (upcast(Game, game, &egbase)) {
+		for (Ferry* ferry : ferries_) {
+			if (ferry->get_destination(*game) == oldww) {
+				ferry->set_destination(*game, newww);
+				return;
+			}
 		}
 	}
 	for (auto& pair : pending_ferry_requests_) {

@@ -93,12 +93,20 @@ ScenarioToolRoadOptionsMenu::ScenarioToolRoadOptionsMenu(EditorInteractive& pare
 	type_.changedto.connect([this](int32_t i) {
 		tool_.set_mode(roadmode(i));
 		create_secondary_.set_enabled(tool_.get_mode() == EditorActionArgs::RoadMode::kBusy);
+		select_correct_tool();
 	});
-	force_.changedto.connect(boost::bind(&ScenarioPlaceRoadTool::set_force, boost::ref(tool_), _1));
-	create_primary_.changedto.connect(
-	   boost::bind(&ScenarioPlaceRoadTool::set_create_primary_worker, boost::ref(tool_), _1));
-	create_secondary_.changedto.connect(
-	   boost::bind(&ScenarioPlaceRoadTool::set_create_secondary_worker, boost::ref(tool_), _1));
+	force_.changedto.connect([this](bool f) {
+		tool_.set_force(f);
+		select_correct_tool();
+	});
+	create_primary_.changedto.connect([this](bool c) {
+		tool_.set_create_primary_worker(c);
+		select_correct_tool();
+	});
+	create_secondary_.changedto.connect([this](bool c) {
+		tool_.set_create_secondary_worker(c);
+		select_correct_tool();
+	});
 
 	type_.add_button(&buttons_, Vector2i(0, 0),
 	                 g_gr->images().get("images/wui/fieldaction/menu_build_way.png"),
