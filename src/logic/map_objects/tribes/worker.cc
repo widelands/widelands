@@ -1121,7 +1121,8 @@ Worker::Worker(const WorkerDescr& worker_descr)
      ware_economy_(nullptr),
      supply_(nullptr),
      transfer_(nullptr),
-     current_exp_(0) {
+     current_exp_(0),
+     is_destroying_(false) {
 }
 
 Worker::~Worker() {
@@ -1224,7 +1225,7 @@ void Worker::set_location(PlayerImmovable* const location) {
 			EditorGameBase& egbase = get_owner()->egbase();
 			if (upcast(Game, game, &egbase)) {
 				send_signal(*game, "location");
-			} else {
+			} else if (!is_destroying_) {
 				// In the editor, we delete workers in buildings/on roads/etc when deleting their
 				// workplace
 				remove(egbase);
@@ -1287,6 +1288,9 @@ bool Worker::init(EditorGameBase& egbase) {
  * Remove the worker.
  */
 void Worker::cleanup(EditorGameBase& egbase) {
+	assert(!is_destroying_);
+	is_destroying_ = true;
+
 	WareInstance* const ware = get_carried_ware(egbase);
 
 	if (supply_) {
@@ -1302,11 +1306,13 @@ void Worker::cleanup(EditorGameBase& egbase) {
 	// or doing something else. Get Location might
 	// init a gowarehouse task or something and this results
 	// in a dirty stack. Nono, we do not want to end like this
-	if (upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase)) {
 		reset_tasks(*game);
+	}
 
-	if (get_location(egbase))
+	if (get_location(egbase)) {
 		set_location(nullptr);
+	}
 
 	set_economy(nullptr, wwWARE);
 	set_economy(nullptr, wwWORKER);

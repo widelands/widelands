@@ -299,6 +299,8 @@ private:
 	Transfer* transfer_;               ///< where we are currently being sent
 	int32_t current_exp_;              ///< current experience
 
+	bool is_destroying_;
+
 	// saving and loading
 protected:
 	struct Loader : public Bob::Loader {

@@ -147,6 +147,13 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	   boost::bind(&WarehouseWaresPanel::set_policy, this, Widelands::StockPolicy::k##policyname)), \
 	buttons->add(b);
 
+#define ADD_REAL_STORAGE_BUTTON(delta, img, tt)                                                    \
+	b = new UI::Button(buttons, "real_storage_" img, 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,  \
+	                   g_gr->images().get("images/ui_basic/scrollbar_" img ".png"), tt);            \
+	b->set_repeating(true);                                                                         \
+	b->sigclicked.connect(boost::bind(&WarehouseWaresPanel::change_real_amount, this, delta));      \
+	buttons->add(b);
+
 		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))
 		ADD_POLICY_BUTTON(prefer, Prefer, _("Preferably store selected wares here"))
 		ADD_POLICY_BUTTON(dontstock, DontStock, _("Do not store selected wares here"))
@@ -154,23 +161,11 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 
 		if (ib_.omnipotent()) {
 			buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-			add(buttons);
-			b = new UI::Button(buttons, "decrease_fast", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
-					g_gr->images().get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease storage by 10"));
-			b->sigclicked.connect(boost::bind(&WarehouseWaresPanel::change_real_amount, this, -10));
-			buttons->add(b);
-			b = new UI::Button(buttons, "decrease", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
-					g_gr->images().get("images/ui_basic/scrollbar_down.png"), _("Decrease storage by 1"));
-			b->sigclicked.connect(boost::bind(&WarehouseWaresPanel::change_real_amount, this, -1));
-			buttons->add(b);
-			b = new UI::Button(buttons, "increase", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
-					g_gr->images().get("images/ui_basic/scrollbar_up.png"), _("Increase storage by 1"));
-			b->sigclicked.connect(boost::bind(&WarehouseWaresPanel::change_real_amount, this, 1));
-			buttons->add(b);
-			b = new UI::Button(buttons, "increase_fast", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
-					g_gr->images().get("images/ui_basic/scrollbar_up_fast.png"), _("Increase storage by 10"));
-			b->sigclicked.connect(boost::bind(&WarehouseWaresPanel::change_real_amount, this, 10));
-			buttons->add(b);
+			add(buttons, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+			ADD_REAL_STORAGE_BUTTON(-10, "down_fast", _("Decrease storage by 10"))
+			ADD_REAL_STORAGE_BUTTON(-1, "down", _("Decrease storage by 1"))
+			ADD_REAL_STORAGE_BUTTON(1, "up", _("Increase storage by 1"))
+			ADD_REAL_STORAGE_BUTTON(10, "up_fast", _("Increase storage by 10"))
 		}
 	}
 }
@@ -181,8 +176,8 @@ void WarehouseWaresPanel::change_real_amount(int32_t delta) {
 	}
 	assert(ib_.omnipotent());
 	const bool is_workers = type_ == Widelands::wwWORKER;
-	for (const Widelands::DescriptionIndex& index : is_workers ?
-			wh_.owner().tribe().workers() : wh_.owner().tribe().wares()) {
+	for (const Widelands::DescriptionIndex& index :
+	     is_workers ? wh_.owner().tribe().workers() : wh_.owner().tribe().wares()) {
 		if (display_.ware_selected(index)) {
 			if (is_workers) {
 				if (delta > 0) {

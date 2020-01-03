@@ -89,7 +89,8 @@ int32_t ScenarioDeleteWorkerTool::handle_click_impl(const Widelands::NodeAndTria
 		std::list<Widelands::Ship*> ships_to_delete;
 		for (Widelands::Bob* b = mr.location().field->get_first_bob(); b; b = b->get_next_bob()) {
 			if (upcast(Widelands::Worker, w, b)) {
-				workers_to_delete.push_back(w);
+				if (!w->get_location(egbase))
+					workers_to_delete.push_back(w);
 			} else if (upcast(Widelands::Ship, s, b)) {
 				ships_to_delete.push_back(s);
 			}
