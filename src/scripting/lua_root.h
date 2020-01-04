@@ -60,6 +60,7 @@ public:
 	int get_allow_saving(lua_State*);
 	int set_allow_saving(lua_State*);
 	int get_type(lua_State*);
+	int get_scenario_difficulty(lua_State*);
 
 	/*
 	 * Lua methods
