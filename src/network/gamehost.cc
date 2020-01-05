@@ -1164,9 +1164,9 @@ void GameHost::set_player_state(uint8_t const number,
 	}
 
 	if (player.state == PlayerSettings::State::kHuman) {
-		// kSpectatorPlayerNum has no client
-		if (d->settings.users.at(kSpectatorPlayerNum).position == number) {
-			d->settings.users.at(kSpectatorPlayerNum).position = UserSettings::none();
+		// 0 is host and has no client
+		if (d->settings.users.at(0).position == number) {
+			d->settings.users.at(0).position = UserSettings::none();
 			d->settings.playernum = UserSettings::none();
 		}
 		for (uint8_t i = 1; i < d->settings.users.size(); ++i) {
