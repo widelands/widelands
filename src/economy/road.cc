@@ -28,6 +28,8 @@
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/world/terrain_description.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -48,7 +50,7 @@ Road::CarrierSlot::CarrierSlot()
 /**
  * Most of the actual work is done in init.
  */
-Road::Road() : RoadBase(g_road_descr, RoadType::kNone), wallet_(0), last_wallet_charge_(0) {
+Road::Road() : RoadBase(g_road_descr), busy_(false), wallet_(0), last_wallet_charge_(0) {
 	CarrierSlot slot;
 	carrier_slots_.push_back(slot);
 	carrier_slots_.push_back(slot);
@@ -75,7 +77,7 @@ Road& Road::create(EditorGameBase& egbase, Flag& start, Flag& end, const Path& p
 
 	Road& road = *new Road();
 	road.set_owner(start.get_owner());
-	road.type_ = RoadType::kNormal;
+	road.busy_ = false;
 	road.flags_[FlagStart] = &start;
 	road.flags_[FlagEnd] = &end;
 	// flagidx_ is set when attach_road() is called, i.e. in init()
@@ -84,6 +86,10 @@ Road& Road::create(EditorGameBase& egbase, Flag& start, Flag& end, const Path& p
 	road.init(egbase);
 
 	return road;
+}
+
+RoadSegment Road::road_type_for_drawing() const {
+	return busy_ ? RoadSegment::kBusy : RoadSegment::kNormal;
 }
 
 void Road::cleanup(EditorGameBase& egbase) {
@@ -109,8 +115,7 @@ void Road::link_into_flags(EditorGameBase& egbase, bool) {
 				// This happens after a road split. Tell the carrier what's going on.
 				carrier->set_location(this);
 				carrier->update_task_road(*game);
-			} else if (!slot.carrier_request &&
-			           (!slot.second_carrier || get_roadtype() == RoadType::kBusy)) {
+			} else if (!slot.carrier_request && (!slot.second_carrier || busy_)) {
 				// Normal carriers are requested at once, second carriers only for busy roads
 				request_carrier(slot);
 			}
@@ -261,7 +266,7 @@ void Road::postsplit(Game& game, Flag& flag) {
 	// create the new road
 	Road& newroad = *new Road();
 	newroad.set_owner(get_owner());
-	newroad.type_ = type_;
+	newroad.busy_ = busy_;
 	newroad.flags_[FlagStart] = &flag;  //  flagidx will be set on init()
 	newroad.flags_[FlagEnd] = &oldend;
 	newroad.set_path(game, secondpath);
@@ -331,8 +336,7 @@ void Road::postsplit(Game& game, Flag& flag) {
 	//  _after_ the new road initializes, otherwise request routing might not
 	//  work correctly
 	for (CarrierSlot& slot : carrier_slots_) {
-		if (!slot.carrier.get(game) && !slot.carrier_request &&
-		    (!slot.second_carrier || type_ == RoadType::kBusy)) {
+		if (!slot.carrier.get(game) && !slot.carrier_request && (!slot.second_carrier || busy_)) {
 			request_carrier(slot);
 		}
 	}
@@ -360,6 +364,65 @@ bool Road::notify_ware(Game& game, FlagId const flagid) {
 	return false;
 }
 
+// This returns true if and only if this is road covers the specified edge and
+// both triangles adjacent to that edge are unwalkable
+bool Road::is_bridge(const EditorGameBase& egbase, const FCoords& field, uint8_t dir) const {
+	const Map& map = egbase.map();
+
+	FCoords iterate = map.get_fcoords(path_.get_start());
+	const Path::StepVector::size_type nr_steps = path_.get_nsteps();
+	bool found = false;
+	for (Path::StepVector::size_type i = 0; i <= nr_steps; ++i) {
+		if (iterate == field) {
+			if ((i < nr_steps && path_[i] == dir) || (i > 0 && path_[i - 1] == get_reverse_dir(dir))) {
+				found = true;
+				break;
+			}
+			return false;
+		}
+		if (i < nr_steps) {
+			map.get_neighbour(iterate, path_[i], &iterate);
+		}
+	}
+	if (!found) {
+		return false;
+	}
+
+	FCoords fr, fd;
+	switch (dir) {
+	case WALK_SW:
+		fd = field;
+		map.get_ln(field, &fr);
+		break;
+	case WALK_SE:
+		fd = field;
+		fr = field;
+		break;
+	case WALK_NW:
+		map.get_tln(field, &fd);
+		fr = fd;
+		break;
+	case WALK_NE:
+		map.get_trn(field, &fd);
+		map.get_tln(field, &fr);
+		break;
+	case WALK_W:
+		map.get_tln(field, &fd);
+		map.get_ln(field, &fr);
+		break;
+	case WALK_E:
+		map.get_trn(field, &fd);
+		fr = field;
+		break;
+	default:
+		NEVER_HERE();
+	}
+	return (egbase.world().terrain_descr(fd.field->terrain_d()).get_is() &
+	        TerrainDescription::Is::kUnwalkable) &&
+	       (egbase.world().terrain_descr(fr.field->terrain_r()).get_is() &
+	        TerrainDescription::Is::kUnwalkable);
+}
+
 /**
  * Update last_wallet_charge_ with the current gametime.
  */
@@ -379,7 +442,7 @@ void Road::charge_wallet(Game& game) {
 
 	if (wallet_ < 0) {
 		wallet_ = 0;
-		if (type_ == RoadType::kBusy) {
+		if (busy_) {
 			// Demote the road
 			Carrier* const second_carrier = carrier_slots_[1].carrier.get(game);
 			if (second_carrier && second_carrier->top_state().task == &Carrier::taskRoad) {
@@ -389,7 +452,7 @@ void Road::charge_wallet(Game& game) {
 				// achieve, ie: cancelling the current task.
 				carrier_slots_[1].carrier = nullptr;
 				carrier_slots_[1].carrier_request = nullptr;
-				type_ = RoadType::kNormal;
+				busy_ = false;
 				mark_map(game);
 			}
 		}
@@ -411,10 +474,10 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
 	wallet_ += 2 * (carriers_count() + 1) * (4 * queue_length + path_.get_nsteps());
 	charge_wallet(game);
 
-	if (type_ == RoadType::kNormal && wallet_ > 1.5 * kRoadAnimalPrice) {
+	if (!busy_ && wallet_ > 1.5 * kRoadAnimalPrice) {
 		// Promote the road
 		wallet_ -= kRoadAnimalPrice;
-		type_ = RoadType::kBusy;
+		busy_ = true;
 		flags_[0]->propagate_promoted_road(this);
 		flags_[1]->propagate_promoted_road(this);
 		mark_map(game);
