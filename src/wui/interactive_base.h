@@ -62,11 +62,12 @@ struct WorkareaPreview {
 class InteractiveBase : public UI::Panel, public DebugConsole::Handler {
 public:
 	enum {
-		dfShowCensus = 1,      ///< show census report on buildings
-		dfShowStatistics = 2,  ///< show statistics report on buildings
-		dfDebug = 4,           ///< general debugging info
+		dfShowCensus = 1,         ///< show census report on buildings
+		dfShowStatistics = 2,     ///< show statistics report on buildings
+		dfShowSoldierLevels = 4,  ///< show level information above soldiers
 		dfShowWorkareaOverlap =
-		   8,  ///< highlight overlapping workareas when placing a constructionsite
+		   8,         ///< highlight overlapping workareas when placing a constructionsite
+		dfDebug = 16  ///< general debugging info
 	};
 
 	/// A build help overlay, i.e. small, big, mine, port ...
@@ -256,7 +257,8 @@ protected:
 	}
 
 	// Returns the information which overlay text should currently be drawn.
-	TextToDraw get_text_to_draw() const;
+	// Returns InfoToDraw::kNone if not 'show'
+	InfoToDraw get_info_to_draw(bool show) const;
 
 	// Returns the current overlays for the work area previews.
 	Workareas get_workarea_overlays(const Widelands::Map& map);

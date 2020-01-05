@@ -862,7 +862,7 @@ void Flag::cleanup(EditorGameBase& egbase) {
 }
 
 void Flag::draw(uint32_t gametime,
-                const TextToDraw,
+                const InfoToDraw,
                 const Vector2f& field_on_dst,
                 const Coords& coords,
                 float scale,
