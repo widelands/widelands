@@ -24,7 +24,9 @@ tribes:new_tribe {
       }
    },
 
-   -- Image file paths for this tribe's road textures
+   bridge_height = 8,
+
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
          image_dirname .. "roadt_busy.png",
