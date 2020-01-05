@@ -37,7 +37,7 @@
 #include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
-#include "logic/map_objects/draw_text.h"
+#include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
@@ -414,7 +414,7 @@ protected:
 	virtual void cleanup(EditorGameBase&);
 
 	/// Draws census and statistics on screen
-	void do_draw_info(const TextToDraw& draw_text,
+	void do_draw_info(const InfoToDraw& info_to_draw,
 	                  const std::string& census,
 	                  const std::string& statictics,
 	                  const Vector2f& field_on_dst,

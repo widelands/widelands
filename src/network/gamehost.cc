@@ -689,11 +689,10 @@ void GameHost::run() {
 		}
 
 		if ((pn > 0) && (pn <= UserSettings::highest_playernum())) {
-			igb = new InteractivePlayer(game, get_config_section(), pn, true);
+			igb = new InteractivePlayer(game, get_config_section(), pn, true, &d->chat);
 		} else {
-			igb = new InteractiveSpectator(game, get_config_section(), true);
+			igb = new InteractiveSpectator(game, get_config_section(), true, &d->chat);
 		}
-		igb->set_chat_provider(d->chat);
 		game.set_ibase(igb);
 
 		if (!d->settings.savegame) {  // new game

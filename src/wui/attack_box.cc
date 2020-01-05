@@ -404,7 +404,8 @@ void AttackBox::ListOfSoldiers::draw(RenderTarget& dst) {
 	int32_t row = 0;
 	for (uint32_t i = 0; i < nr_soldiers; ++i) {
 		Vector2i location(column * kSoldierIconWidth, row * kSoldierIconHeight);
-		soldiers_[i]->draw_info_icon(location, 1.0f, false, &dst);
+		soldiers_[i]->draw_info_icon(
+		   location, 1.0f, Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels, &dst);
 		if (restricted_row_number_) {
 			++row;
 			if (row >= current_size_) {

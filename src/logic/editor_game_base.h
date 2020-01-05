@@ -122,7 +122,7 @@ public:
 		return loader_ui_;
 	}
 
-	void set_road(const FCoords&, uint8_t direction, RoadType roadtype);
+	void set_road(const FCoords&, uint8_t direction, RoadSegment roadtype);
 
 	// warping stuff. instantly creating map_objects
 	Building& warp_building(const Coords&,

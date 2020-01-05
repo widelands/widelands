@@ -180,9 +180,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      workareas_cache_(nullptr),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
-     display_flags_(dfDebug),
+     display_flags_(dfDebug | kSoldierLevels),
 #else
-     display_flags_(0),
+     display_flags_(kSoldierLevels),
 #endif
      lastframe_(SDL_GetTicks()),
      frametime_(0),
@@ -397,16 +397,22 @@ void InteractiveBase::set_sel_picture(const Image* image) {
 	set_sel_pos(get_sel_pos());  //  redraw
 }
 
-TextToDraw InteractiveBase::get_text_to_draw() const {
-	TextToDraw text_to_draw = TextToDraw::kNone;
+InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
+	InfoToDraw info_to_draw = InfoToDraw::kNone;
+	if (!show) {
+		return info_to_draw;
+	}
 	auto display_flags = get_display_flags();
 	if (display_flags & InteractiveBase::dfShowCensus) {
-		text_to_draw = text_to_draw | TextToDraw::kCensus;
+		info_to_draw = info_to_draw | InfoToDraw::kCensus;
 	}
 	if (display_flags & InteractiveBase::dfShowStatistics) {
-		text_to_draw = text_to_draw | TextToDraw::kStatistics;
+		info_to_draw = info_to_draw | InfoToDraw::kStatistics;
 	}
-	return text_to_draw;
+	if (display_flags & InteractiveBase::dfShowSoldierLevels) {
+		info_to_draw = info_to_draw | InfoToDraw::kSoldierLevels;
+	}
+	return info_to_draw;
 }
 
 void InteractiveBase::unset_sel_picture() {
@@ -768,6 +774,30 @@ void InteractiveBase::blit_field_overlay(RenderTarget* dst,
                                          const Vector2i& hotspot,
                                          float scale) {
 	blit_overlay(dst, field.rendertarget_pixel.cast<int>(), image, hotspot, scale);
+}
+
+void InteractiveBase::draw_bridges(RenderTarget* dst,
+                                   const FieldsToDraw::Field* f,
+                                   uint32_t gametime,
+                                   float scale) const {
+	if (Widelands::is_bridge_segment(f->road_e)) {
+		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
+		                    f->owner->tribe().bridge_animation(
+		                       Widelands::WALK_E, f->road_e == Widelands::RoadSegment::kBridgeBusy),
+		                    gametime, &f->owner->get_playercolor());
+	}
+	if (Widelands::is_bridge_segment(f->road_sw)) {
+		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
+		                    f->owner->tribe().bridge_animation(
+		                       Widelands::WALK_SW, f->road_sw == Widelands::RoadSegment::kBridgeBusy),
+		                    gametime, &f->owner->get_playercolor());
+	}
+	if (Widelands::is_bridge_segment(f->road_se)) {
+		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
+		                    f->owner->tribe().bridge_animation(
+		                       Widelands::WALK_SE, f->road_se == Widelands::RoadSegment::kBridgeBusy),
+		                    gametime, &f->owner->get_playercolor());
+	}
 }
 
 void InteractiveBase::mainview_move() {
@@ -1377,6 +1407,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			   this, debugconsole_, *DebugConsole::get_chat_provider());
 			return true;
 #endif
+		// Common shortcuts for InteractivePlayer, InteractiveSpectator and EditorInteractive
+		case SDLK_SPACE:
+			toggle_buildhelp();
+			return true;
 		case SDLK_m:
 			toggle_minimap();
 			return true;

@@ -1215,16 +1215,16 @@ void Ship::sink_ship(Game& game) {
 }
 
 void Ship::draw(const EditorGameBase& egbase,
-                const TextToDraw& draw_text,
+                const InfoToDraw& info_to_draw,
                 const Vector2f& point_on_dst,
                 const Widelands::Coords& coords,
                 const float scale,
                 RenderTarget* dst) const {
-	Bob::draw(egbase, draw_text, point_on_dst, coords, scale, dst);
+	Bob::draw(egbase, info_to_draw, point_on_dst, coords, scale, dst);
 
 	// Show ship name and current activity
 	std::string statistics_string;
-	if ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone) {
+	if (info_to_draw & InfoToDraw::kStatistics) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
 			if (!destinations_.empty()) {
@@ -1261,8 +1261,8 @@ void Ship::draw(const EditorGameBase& egbase,
 		   statistics_string, g_gr->styles().building_statistics_style().medium_color());
 	}
 
-	do_draw_info(draw_text, shipname_, statistics_string, calc_drawpos(egbase, point_on_dst, scale),
-	             scale, dst);
+	do_draw_info(info_to_draw, shipname_, statistics_string,
+	             calc_drawpos(egbase, point_on_dst, scale), scale, dst);
 }
 
 void Ship::log_general_info(const EditorGameBase& egbase) const {

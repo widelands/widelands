@@ -25,7 +25,6 @@
 #include "base/macros.h"
 #include "economy/roadbase.h"
 #include "logic/path.h"
-#include "logic/roadtype.h"
 
 namespace Widelands {
 class Request;
@@ -91,12 +90,20 @@ struct Road : public RoadBase {
 
 	void log_general_info(const EditorGameBase&) const override;
 
+	bool is_busy() const {
+		return busy_;
+	}
+
+protected:
+	bool is_bridge(const EditorGameBase&, const FCoords&, uint8_t) const override;
+	RoadSegment road_type_for_drawing() const override;
+
 private:
 	void cleanup(EditorGameBase&) override;
 
 	void link_into_flags(EditorGameBase&, bool = false) override;
 
-private:
+	bool busy_;
 	/// Counter that is incremented when a ware does not get a carrier for this
 	/// road immediately and decremented over time.
 	int32_t wallet_;

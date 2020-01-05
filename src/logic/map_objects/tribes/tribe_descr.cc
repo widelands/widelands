@@ -58,7 +58,10 @@ namespace Widelands {
 TribeDescr::TribeDescr(const LuaTable& table,
                        const Widelands::TribeBasicInfo& info,
                        const Tribes& init_tribes)
-   : name_(table.get_string("name")), descname_(info.descname), tribes_(init_tribes) {
+   : name_(table.get_string("name")),
+     descname_(info.descname),
+     tribes_(init_tribes),
+     bridge_height_(table.get_int("bridge_height")) {
 
 	try {
 		initializations_ = info.initializations;
@@ -84,9 +87,20 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		load_roads("busy", &busy_road_paths_);
 		load_roads("waterway", &waterway_paths_);
 
+		const auto load_bridge_if_present = [this](const LuaTable& animations_table,
+		                                           Animation::Type animation_type, std::string s_dir,
+		                                           std::string s_type, uint32_t* id) {
+			if (animations_table.has_key("bridge_" + s_type + "_" + s_dir)) {
+				std::unique_ptr<LuaTable> animation_table =
+				   animations_table.get_table("bridge_" + s_type + "_" + s_dir);
+				*id = g_gr->animations().load(name_ + std::string("_bridge_" + s_type + "_" + s_dir),
+				                              *animation_table, animation_table->get_string("basename"),
+				                              animation_type);
+			}
+		};
 		// Frontier and flag animations can be a mix of file and spritesheet animations
-		const auto load_animations = [this](const LuaTable& animations_table,
-		                                    Animation::Type animation_type) {
+		const auto load_animations = [this, load_bridge_if_present](const LuaTable& animations_table,
+		                                                            Animation::Type animation_type) {
 			if (animations_table.has_key("frontier")) {
 				std::unique_ptr<LuaTable> animation_table = animations_table.get_table("frontier");
 				frontier_animation_id_ =
@@ -99,6 +113,15 @@ TribeDescr::TribeDescr(const LuaTable& table,
 				   g_gr->animations().load(name_ + std::string("_flag"), *animation_table,
 				                           animation_table->get_string("basename"), animation_type);
 			}
+			load_bridge_if_present(
+			   animations_table, animation_type, "e", "normal", &bridges_normal_.e);
+			load_bridge_if_present(
+			   animations_table, animation_type, "se", "normal", &bridges_normal_.se);
+			load_bridge_if_present(
+			   animations_table, animation_type, "sw", "normal", &bridges_normal_.sw);
+			load_bridge_if_present(animations_table, animation_type, "e", "busy", &bridges_busy_.e);
+			load_bridge_if_present(animations_table, animation_type, "se", "busy", &bridges_busy_.se);
+			load_bridge_if_present(animations_table, animation_type, "sw", "busy", &bridges_busy_.sw);
 		};
 
 		if (table.has_key("animations")) {
@@ -360,6 +383,23 @@ uint32_t TribeDescr::frontier_animation() const {
 
 uint32_t TribeDescr::flag_animation() const {
 	return flag_animation_id_;
+}
+
+uint32_t TribeDescr::bridge_animation(uint8_t dir, bool busy) const {
+	switch (dir) {
+	case WALK_E:
+		return (busy ? bridges_busy_ : bridges_normal_).e;
+	case WALK_SE:
+		return (busy ? bridges_busy_ : bridges_normal_).se;
+	case WALK_SW:
+		return (busy ? bridges_busy_ : bridges_normal_).sw;
+	default:
+		NEVER_HERE();
+	}
+}
+
+uint32_t TribeDescr::bridge_height() const {
+	return bridge_height_;
 }
 
 const std::vector<std::string>& TribeDescr::normal_road_paths() const {

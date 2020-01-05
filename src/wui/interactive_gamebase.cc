@@ -67,9 +67,10 @@ constexpr uint16_t kSpeedFast = 10000;
 InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                                          Section& global_s,
                                          PlayerType pt,
-                                         bool const multiplayer)
+                                         bool const multiplayer,
+                                         ChatProvider* chat_provider)
    : InteractiveBase(g, global_s),
-     chat_provider_(nullptr),
+     chat_provider_(chat_provider),
      multiplayer_(multiplayer),
      playertype_(pt),
      showhidemenu_(toolbar(),
@@ -135,6 +136,10 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 			   break;
 		   }
 	   });
+
+	if (chat_provider_ != nullptr) {
+		chat_overlay()->set_chat_provider(*chat_provider_);
+	}
 }
 
 void InteractiveGameBase::add_main_menu() {
@@ -221,11 +226,20 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 
 	showhidemenu_.add(get_display_flag(dfShowStatistics) ?
 	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-	                      * building staristics are shown */
+	                      * building statistics are shown */
 	                     _("Hide Statistics") :
 	                     _("Show Statistics"),
 	                  ShowHideEntry::kStatistics,
-	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "S");
+	                  g_gr->images().get("images/wui/menus/toggle_statistics.png"), false, "", "s");
+
+	showhidemenu_.add(get_display_flag(dfShowSoldierLevels) ?
+	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+	                      * level information is shown above soldiers' heads */
+	                     _("Hide Soldier Levels") :
+	                     _("Show Soldier Levels"),
+	                  ShowHideEntry::kSoldierLevels,
+	                  g_gr->images().get("images/wui/menus/toggle_soldier_levels.png"), false, "",
+	                  "l");
 }
 
 void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
@@ -238,6 +252,9 @@ void InteractiveGameBase::showhide_menu_selected(ShowHideEntry entry) {
 	} break;
 	case ShowHideEntry::kStatistics: {
 		set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+	} break;
+	case ShowHideEntry::kSoldierLevels: {
+		set_display_flag(dfShowSoldierLevels, !get_display_flag(dfShowSoldierLevels));
 	} break;
 	case ShowHideEntry::kWorkareaOverlap: {
 		set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
@@ -306,6 +323,15 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	}
 }
 
+void InteractiveGameBase::add_chat_ui() {
+	add_toolbar_button("wui/menus/chat", "chat", _("Chat"), &chat_, true);
+	chat_.open_window = [this] {
+		if (chat_provider_) {
+			GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+		}
+	};
+}
+
 void InteractiveGameBase::increase_gamespeed(uint16_t speed) {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		uint32_t const current_speed = ctrl->desired_speed();
@@ -356,9 +382,42 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 			decrease_gamespeed(
 			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
 			return true;
+
+		case SDLK_c:
+			set_display_flag(
+			   InteractiveBase::dfShowCensus, !get_display_flag(InteractiveBase::dfShowCensus));
+			return true;
+
+		case SDLK_g:
+			menu_windows_.stats_general.toggle();
+			return true;
+
+		case SDLK_l:
+			set_display_flag(dfShowSoldierLevels, !get_display_flag(dfShowSoldierLevels));
+			return true;
+
+		case SDLK_s:
+			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+				new GameMainMenuSaveGame(*this, menu_windows_.savegame);
+			} else {
+				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
+			}
+			return true;
+
 		case SDLK_ESCAPE:
 			InteractiveGameBase::toggle_mainmenu();
 			return true;
+
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			if (chat_provider_) {
+				if (!chat_.window) {
+					GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+				}
+				return dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
+			}
+			break;
+
 		default:
 			break;
 		}
@@ -373,15 +432,6 @@ Widelands::Game* InteractiveGameBase::get_game() const {
 
 Widelands::Game& InteractiveGameBase::game() const {
 	return dynamic_cast<Widelands::Game&>(egbase());
-}
-
-void InteractiveGameBase::set_chat_provider(ChatProvider& chat) {
-	chat_provider_ = &chat;
-	chat_overlay()->set_chat_provider(chat);
-}
-
-ChatProvider* InteractiveGameBase::get_chat_provider() {
-	return chat_provider_;
 }
 
 void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
