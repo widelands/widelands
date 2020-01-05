@@ -29,6 +29,7 @@
 
 #include "base/vector.h"
 #include "graphic/rendertarget.h"
+#include "graphic/road_segments.h"
 #include "logic/editor_game_base.h"
 #include "logic/widelands_geometry.h"
 
@@ -55,9 +56,9 @@ public:
 		// The next values are not necessarily the true data of this field, but
 		// what the player should see. For example in fog of war we always draw
 		// what we saw last.
-		uint8_t road_e;
-		uint8_t road_sw;
-		uint8_t road_se;
+		Widelands::RoadSegment road_e;
+		Widelands::RoadSegment road_sw;
+		Widelands::RoadSegment road_se;
 		bool is_border;
 		Widelands::Vision vision;
 		Widelands::Player* owner;  // can be nullptr.

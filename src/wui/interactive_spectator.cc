@@ -101,6 +101,7 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 
+		draw_bridges(dst, &field, gametime, scale);
 		draw_border_markers(field, scale, *fields_to_draw, dst);
 
 		Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();

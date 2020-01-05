@@ -1,14 +1,17 @@
 image_dirname = path.dirname(__file__) .. "images/barbarians/"
 
+animations = {}
+add_animation(animations, "frontier", image_dirname, "frontier", {1, 19})
+add_animation(animations, "bridge_normal_e", image_dirname, "bridge_normal_e", {-1, 13})
+add_animation(animations, "bridge_busy_e", image_dirname, "bridge_busy_e", {-1, 13})
+add_animation(animations, "bridge_normal_se", image_dirname, "bridge_normal_se", {8, 3})
+add_animation(animations, "bridge_busy_se", image_dirname, "bridge_busy_se", {8, 3})
+add_animation(animations, "bridge_normal_sw", image_dirname, "bridge_normal_sw", {41, 3})
+add_animation(animations, "bridge_busy_sw", image_dirname, "bridge_busy_sw", {41, 3})
+
 tribes:new_tribe {
    name = "barbarians",
-   animations = {
-      frontier = {
-         directory = image_dirname,
-         basename = "frontier",
-         hotspot = { 1, 19 }
-      },
-   },
+   animations = animations,
    spritesheets = {
       flag = {
          directory = image_dirname,
@@ -20,6 +23,8 @@ tribes:new_tribe {
          hotspot = { 11, 39 }
       }
    },
+
+   bridge_height = 8,
 
    -- Image file paths for this tribe's road and waterway textures
    roads = {

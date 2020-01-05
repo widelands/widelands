@@ -32,6 +32,7 @@
 #include "economy/road.h"
 #include "economy/waterway.h"
 #include "graphic/color.h"
+#include "graphic/road_segments.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -51,7 +52,6 @@
 #include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
-#include "logic/roadtype.h"
 #include "map_io/map_saver.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
@@ -545,7 +545,9 @@ void EditorGameBase::cleanup_for_load() {
 	delete_tempfile();
 }
 
-void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, RoadType const roadtype) {
+void EditorGameBase::set_road(const FCoords& f,
+                              uint8_t const direction,
+                              RoadSegment const roadtype) {
 	const Map& m = map();
 	const Field& first_field = m[0];
 	assert(0 <= f.x);
@@ -556,8 +558,9 @@ void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, RoadTyp
 	assert(f.field < &first_field + m.max_index());
 	assert(direction == WALK_SW || direction == WALK_SE || direction == WALK_E);
 
-	if (f.field->get_road(direction) == roadtype)
+	if (f.field->get_road(direction) == roadtype) {
 		return;
+	}
 	f.field->set_road(direction, roadtype);
 
 	FCoords neighbour;

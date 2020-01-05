@@ -770,6 +770,30 @@ void InteractiveBase::blit_field_overlay(RenderTarget* dst,
 	blit_overlay(dst, field.rendertarget_pixel.cast<int>(), image, hotspot, scale);
 }
 
+void InteractiveBase::draw_bridges(RenderTarget* dst,
+                                   const FieldsToDraw::Field* f,
+                                   uint32_t gametime,
+                                   float scale) const {
+	if (Widelands::is_bridge_segment(f->road_e)) {
+		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
+		                    f->owner->tribe().bridge_animation(
+		                       Widelands::WALK_E, f->road_e == Widelands::RoadSegment::kBridgeBusy),
+		                    gametime, &f->owner->get_playercolor());
+	}
+	if (Widelands::is_bridge_segment(f->road_sw)) {
+		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
+		                    f->owner->tribe().bridge_animation(
+		                       Widelands::WALK_SW, f->road_sw == Widelands::RoadSegment::kBridgeBusy),
+		                    gametime, &f->owner->get_playercolor());
+	}
+	if (Widelands::is_bridge_segment(f->road_se)) {
+		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
+		                    f->owner->tribe().bridge_animation(
+		                       Widelands::WALK_SE, f->road_se == Widelands::RoadSegment::kBridgeBusy),
+		                    gametime, &f->owner->get_playercolor());
+	}
+}
+
 void InteractiveBase::mainview_move() {
 	if (minimap_registry_.window) {
 		minimap_->set_view(map_view_.view_area().rect());
