@@ -135,6 +135,7 @@ class WidelandsTestCase(unittest.TestCase):
             with open(stdout_filename, 'r') as stdout_file:
                 for line in stdout_file.readlines():
                     print(line.strip())
+            out("SKIPPED.\n")
         else:
             common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
                     self.run_dir, stdout_filename, stdout)
@@ -147,7 +148,7 @@ class WidelandsTestCase(unittest.TestCase):
             self.assertFalse("lua_errors.cc" in stdout,
                 "Not all tests pass. {}.".format(common_msg)
             )
-        out("done.\n")
+            out("done.\n")
         if self.keep_output_around:
             out("    stdout: {}\n".format(stdout_filename))
 
