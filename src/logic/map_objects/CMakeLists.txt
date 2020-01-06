@@ -29,7 +29,6 @@ wl_library(logic_map_objects
     buildcost.h
     checkstep.cc
     checkstep.h
-    draw_text.h
     findbob.cc
     findbob.h
     findimmovable.cc
@@ -39,6 +38,7 @@ wl_library(logic_map_objects
     immovable.cc
     immovable.h
     immovable_program.h
+    info_to_draw.h
     map_object.cc
     map_object.h
     terrain_affinity.cc

@@ -105,7 +105,7 @@ std::string TextStream::till_any(std::string chars) {
 			break;
 
 		// Get rid of control characters
-		// http://en.cppreference.com/w/cpp/language/escape
+		// https://en.cppreference.com/w/cpp/language/escape
 		switch (text_[j]) {
 		case '\a':
 		case '\b':

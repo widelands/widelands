@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-12-22 16:29+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -282,9 +282,9 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:6
 msgctxt "atlanteans_building"
 msgid ""
-"‘‘Only after the last duck has been shot down<br>Only after the last deer "
-"has been put to death<br>Only after the last fish has been caught<br>Then "
-"will you find that spiders are not to be eaten.’"
+"‘Only after the last duck has been shot down<br>Only after the last deer has "
+"been put to death<br>Only after the last fish has been caught<br>Then will "
+"you find that spiders are not to be eaten.’"
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a building
@@ -3129,17 +3129,17 @@ msgstr ""
 #. TRANSLATORS: Helptext for a reed field
 #: ../../data/tribes/immovables/reedfield/medium/helptexts.lua:4
 #: ../../data/tribes/immovables/reedfield/small/helptexts.lua:4
-msgid "This reed is growing."
+msgid "This reed field is growing."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a reed field
 #: ../../data/tribes/immovables/reedfield/ripe/helptexts.lua:4
-msgid "This reed is ready for harvesting."
+msgid "This reed field is ready for harvesting."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a reed field
 #: ../../data/tribes/immovables/reedfield/tiny/helptexts.lua:4
-msgid "This reed has just been planted."
+msgid "This reed field has just been planted."
 msgstr ""
 
 #. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably want to lose the blank space here.

@@ -38,7 +38,7 @@ FILETYPE VFT_APP
 			 VALUE "FileDescription", "Widelands - realtime strategy game"
 			 VALUE "InternalName", "WL"
 			 VALUE "LegalCopyright", "GPL v2"
-			 VALUE "WWW", "http://www.widelands.org"
+			 VALUE "WWW", "https://www.widelands.org"
 			 VALUE "License", "Gnu GPL v2"
 			 VALUE "OriginalFilename", "widelands"
 			 VALUE "ProductName", "Widelands - an Open-Source realtime strategy game"

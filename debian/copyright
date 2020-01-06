@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: widelands
-Source: http://www.widelands.org/
+Source: https://www.widelands.org/
 
 Files: *
 Copyright: 2002-2019 by the Widelands Development Team
@@ -209,9 +209,9 @@ License: GPL-2+
  The media files of Widelands are distributed under the same license
  than the game itself. The blender source files are not included in the same
  source tree because of their size but can be retrieved online from
- https://bugs.launchpad.net/widelands-media/
+ https://launchpad.net/widelands-media/
  Some of these models were lost by the widelands authors, and currently
- reimplemented (see https://bugs.launchpad.net/widelands-media/+bug/677337).
+ reimplemented (see https://github.com/widelands/widelands/issues/1256).
 
 Files: debian/*
 Copyright: 2004-2019 Martin Quinson <mquinson@debian.org>

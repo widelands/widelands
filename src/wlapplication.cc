@@ -156,7 +156,7 @@ bool is_absolute_path(const std::string& path) {
 std::string absolute_path_if_not_windows(const std::string& path) {
 #ifndef _WIN32
 	char buffer[PATH_MAX];
-	// http://pubs.opengroup.org/onlinepubs/009695399/functions/realpath.html
+	// https://pubs.opengroup.org/onlinepubs/009695399/functions/realpath.html
 	char* rp = realpath(path.c_str(), buffer);
 	log("Realpath: %s\n", rp);
 	if (!rp) {
