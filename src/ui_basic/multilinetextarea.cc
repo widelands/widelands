@@ -88,7 +88,8 @@ void MultilineTextarea::recompute() {
 	for (int i = 0; i < 2; ++i) {
 		int height = 0;
 		if (!text_.empty()) {
-			const int text_width = get_eff_w() - 2 * kRichtextMargin;
+            // Ensure we have a text width. Simply overflow if there is no width available.
+			const int text_width = std::max(10, get_eff_w() - 2 * kRichtextMargin);
 			assert(text_width > 0);
 
 			if (!is_richtext(text_)) {

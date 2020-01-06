@@ -35,6 +35,9 @@
 #include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"
 
+// NOCOM relayout on fullscreen switch.
+// Back button is broken.
+
 namespace {
 
 // Constants for convert_clienttype() / compare_clienttype()

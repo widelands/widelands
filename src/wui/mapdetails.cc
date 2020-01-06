@@ -159,7 +159,6 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 			   (boost::format("%s%s") % description % as_content(mapdata.hint, style_)).str();
 		}
 
-		// NOCOM descr size is broken
 		descr_.set_text(as_richtext(description));
 
 		// Show / hide suggested teams
