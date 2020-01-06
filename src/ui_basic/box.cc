@@ -363,7 +363,6 @@ void Box::get_item_size(uint32_t const idx, int* depth, int* breadth) {
 
 	get_item_desired_size(idx, depth, breadth);
 	*depth += it.assigned_var_depth;
-	// Panel dimensions < 0 are not allowed.
 }
 
 /**
