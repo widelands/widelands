@@ -46,11 +46,18 @@ const uint8_t kClientIRC = 4;
 }  // namespace
 
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
-														 std::string& pwd,
+                                                         std::string& pwd,
                                                          bool registered)
    : FullscreenMenuLoadMapOrGame(),
      // Main title
-     title_(this, 0, 0, 0, 0, _("Metaserver Lobby"), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+     title_(this,
+            0,
+            0,
+            0,
+            0,
+            _("Metaserver Lobby"),
+            UI::Align::kCenter,
+            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Boxes
      left_column_(this, 0, 0, UI::Box::Vertical),
@@ -73,8 +80,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
                UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
      servername_label_(&right_column_, 0, 0, 0, 0, _("Name of your server:")),
-     servername_(
-        &right_column_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     servername_(&right_column_, 0, 0, 0, UI::PanelStyle::kFsMenu),
      hostgame_(&right_column_,
                "host_game",
                0,
@@ -83,8 +89,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
                0,
                UI::ButtonStyle::kFsMenuSecondary,
                _("Open a new game")),
-	 prev_clientlist_len_(1000),
- 	 new_client_fx_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_freshmen")),
+     prev_clientlist_len_(1000),
+     new_client_fx_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_freshmen")),
      // Login information
      nickname_(nick),
      password_(pwd),
@@ -299,7 +305,8 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 	clientsonline_table_.clear();
 	if (clients != nullptr) {  // If no communication error occurred, fill the list.
 		for (const InternetClient& client : *clients) {
-			UI::Table<const InternetClient* const>::EntryRecord& er = clientsonline_table_.add(&client);
+			UI::Table<const InternetClient* const>::EntryRecord& er =
+			   clientsonline_table_.add(&client);
 			er.set_string(1, client.name);
 			er.set_string(2, client.build_id);
 			er.set_string(3, client.game);

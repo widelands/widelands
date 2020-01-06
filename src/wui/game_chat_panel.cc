@@ -49,7 +49,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              UI::MultilineTextarea::ScrollMode::kScrollLogForced),
      editbox(this, 0, 0, w, style),
      chat_message_counter(0),
-	 chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
+     chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 
 	box_.add(&chatbox, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(4);
