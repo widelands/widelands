@@ -684,7 +684,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						//  The player has seen the SouthWest edge but does not see
 						//  it now. Load his information about this edge from file.
 						if (road_file_version == kCurrentPacketVersionRoads) {
-							f_player_field.r_sw = static_cast<RoadType>(roads_file.unsigned_8());
+							f_player_field.r_sw = static_cast<RoadSegment>(roads_file.unsigned_8());
 						} else {
 							throw UnhandledVersionError("MapPlayersViewPacket - Road file",
 							                            road_file_version, kCurrentPacketVersionRoads);
@@ -696,7 +696,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						//  The player has seen the SouthEast edge but does not see
 						//  it now. Load his information about this edge from file.
 						if (road_file_version == kCurrentPacketVersionRoads) {
-							f_player_field.r_se = static_cast<RoadType>(roads_file.unsigned_8());
+							f_player_field.r_se = static_cast<RoadSegment>(roads_file.unsigned_8());
 						} else {
 							throw UnhandledVersionError("MapPlayersViewPacket - Road file",
 							                            road_file_version, kCurrentPacketVersionRoads);
@@ -708,7 +708,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						//  The player has seen the      East edge but does not see
 						//  it now. Load his information about this edge from file.
 						if (road_file_version == kCurrentPacketVersionRoads) {
-							f_player_field.r_e = static_cast<RoadType>(roads_file.unsigned_8());
+							f_player_field.r_e = static_cast<RoadSegment>(roads_file.unsigned_8());
 						} else {
 							throw UnhandledVersionError("MapPlayersViewPacket - Road file",
 							                            road_file_version, kCurrentPacketVersionRoads);

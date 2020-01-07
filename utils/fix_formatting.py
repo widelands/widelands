@@ -40,6 +40,16 @@ def main():
         print('CWD is not the root of the repository.')
         return 1
 
+    sys.stdout.write('\nFormatting C++ ')
+    for filename in find_files('./src', ['.cc', '.h']):
+        if 'third_party' in filename:
+            continue
+        sys.stdout.write('.')
+        sys.stdout.flush()
+        call(['clang-format', '-i', filename])
+        call(['git', 'add', '--renormalize', filename])
+    print(' done.')
+
     sys.stdout.write('Fixing Lua tabs ')
     for filename in find_files('.', ['.lua']):
         sys.stdout.write('.')
@@ -53,16 +63,6 @@ def main():
                     SPACES_PER_TAB) + line[m.end():]
             new_lines.append(line.rstrip() + '\n')
         write_text_file(filename, ''.join(new_lines))
-        call(['git', 'add', '--renormalize', filename])
-    print(' done.')
-
-    sys.stdout.write('\nFormatting C++ ')
-    for filename in find_files('./src', ['.cc', '.h']):
-        if 'third_party' in filename:
-            continue
-        sys.stdout.write('.')
-        sys.stdout.flush()
-        call(['clang-format', '-i', filename])
         call(['git', 'add', '--renormalize', filename])
     print(' done.')
 

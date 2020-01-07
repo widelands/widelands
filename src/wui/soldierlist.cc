@@ -44,7 +44,7 @@ namespace {
 
 constexpr uint32_t kMaxColumns = 6;
 constexpr uint32_t kAnimateSpeed = 300;  ///< in pixels per second
-constexpr uint32_t kIconBorder = 2;
+constexpr int kIconBorder = 2;
 
 }  // namespace
 
@@ -105,8 +105,8 @@ private:
 	uint32_t rows_;
 	uint32_t cols_;
 
-	uint32_t icon_width_;
-	uint32_t icon_height_;
+	int icon_width_;
+	int icon_height_;
 
 	int32_t last_animate_time_;
 };
@@ -296,7 +296,8 @@ void SoldierPanel::draw(RenderTarget& dst) {
 			continue;
 
 		constexpr float kNoZoom = 1.f;
-		soldier->draw_info_icon(icon.pos + Vector2i(kIconBorder, kIconBorder), kNoZoom, false, &dst);
+		soldier->draw_info_icon(icon.pos + Vector2i(kIconBorder, kIconBorder), kNoZoom,
+		                        Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels, &dst);
 	}
 }
 
