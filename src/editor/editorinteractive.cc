@@ -635,6 +635,8 @@ void EditorInteractive::cleanup_for_load() {
 	scripting_saver_.reset(nullptr);
 	functions_.clear();
 	variables_.clear();
+	includes_global_.clear();
+	includes_local_.clear();
 }
 
 /// Called just before the editor starts, after postload, init and gfxload.
@@ -1293,13 +1295,13 @@ std::string EditorInteractive::try_finalize() {
 #else
 	functions_.push_back(new Function(*scripting_saver_, kMainFunction, true));
 #endif
+	// useful default includes
+	includes_global_.push_back("scripting/coroutine.lua");
+	includes_global_.push_back("scripting/objective_utils.lua");
+	includes_global_.push_back("scripting/table.lua");
 	rebuild_main_menu();
 	scenario_toolmenu_.set_enabled(true);
 	return "";
-}
-
-bool EditorInteractive::save_as_scenario() const {
-	return finalized_;
 }
 
 void EditorInteractive::write_lua(FileWrite& fw) const {
@@ -1332,13 +1334,16 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 			log("WARNING: Map name '%s' unsuited for creating a set_textdomain() argument\n", mapname);
 			textdomain = "invalid_name";
 		}
-		fw.print_f("set_textdomain(\"scenario_%s.wmf\")\n\n", textdomain.c_str());
+		fw.print_f("set_textdomain(\"scenario_%s.wmf\")\n", textdomain.c_str());
 	}
 
-	// Useful includes
-	fw.print_f("include \"scripting/coroutine.lua\"\n");
-	fw.print_f("include \"scripting/objective_utils.lua\"\n");
-	fw.print_f("include \"scripting/table.lua\"\n");
+	// builtin includes
+	if (!includes_global_.empty()) {
+		fw.print_f("\n");
+	}
+	for (const std::string& i : includes_global_) {
+		fw.print_f("include \"%s\"\n", i.c_str());
+	}
 
 	// Global variables
 	if (!variables_.empty()) {
@@ -1356,6 +1361,14 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	}
 	if (!main_function_found) {
 		throw wexception("Main function (%s) not defined or not a coroutine", kMainFunction.c_str());
+	}
+
+	// hand-written includes
+	if (!includes_local_.empty()) {
+		fw.print_f("\n");
+	}
+	for (const std::string& i : includes_local_) {
+		fw.print_f("include \"map:%s\"\n", i.c_str());
 	}
 
 	// Main function(s) call

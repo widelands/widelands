@@ -128,7 +128,7 @@ bool is(VariableType check, VariableType supposed_superclass);
              Abstract ScriptingObject and Assignable
 ************************************************************/
 
-struct ScriptingObject {
+class ScriptingObject {
 public:
 	virtual ~ScriptingObject() {
 	}
@@ -186,7 +186,7 @@ private:
 };
 
 // Helper struct: Everything that can stand right of " = " or be used as a function parameter.
-struct Assignable : public ScriptingObject {
+class Assignable : public ScriptingObject {
 protected:
 	Assignable(ScriptingSaver& s) : ScriptingObject(s) {
 	}
@@ -205,7 +205,7 @@ public:
 
 // A string literal, e.g. "xyz". You do NOT need to surround the value with escaped quotes –
 // they will be added automatically when writing the lua file.
-struct ConstexprString : public Assignable {
+class ConstexprString : public Assignable {
 public:
 	ConstexprString(ScriptingSaver& s, const std::string& v, bool t = false)
 	   : Assignable(s), value_(v), translate_(t) {
@@ -245,7 +245,7 @@ private:
 };
 
 // An integer constant, e.g. 123.
-struct ConstexprInteger : public Assignable {
+class ConstexprInteger : public Assignable {
 public:
 	ConstexprInteger(ScriptingSaver& s, int32_t i) : Assignable(s), value_(i) {
 	}
@@ -277,7 +277,7 @@ private:
 };
 
 // A boolean constant: true or false.
-struct ConstexprBoolean : public Assignable {
+class ConstexprBoolean : public Assignable {
 public:
 	ConstexprBoolean(ScriptingSaver& s, bool b) : Assignable(s), value_(b) {
 	}
@@ -309,7 +309,7 @@ private:
 };
 
 // The nil constant.
-struct ConstexprNil : public Assignable {
+class ConstexprNil : public Assignable {
 public:
 	// More constructors and as many attributes as there are flavours of nil…
 	ConstexprNil(ScriptingSaver& s) : Assignable(s) {
@@ -333,7 +333,7 @@ public:
 ************************************************************/
 
 // A concatenation of any number of Assignables with '..'.
-struct StringConcat : public Assignable {
+class StringConcat : public Assignable {
 public:
 	StringConcat(ScriptingSaver&, size_t argc = 0, Assignable** argv = nullptr);
 	StringConcat() : Assignable() {
@@ -379,7 +379,7 @@ private:
                           Variable
 ************************************************************/
 
-struct Variable : public Assignable {
+class Variable : public Assignable {
 public:
 	Variable(ScriptingSaver&, VariableType, const std::string&);
 	Variable() : Assignable() {
@@ -421,7 +421,7 @@ private:
 ************************************************************/
 
 // Abstract superclass. Subclasses below.
-struct FunctionStatement : public ScriptingObject {
+class FunctionStatement : public ScriptingObject {
 protected:
 	FunctionStatement(ScriptingSaver& s) : ScriptingObject(s) {
 	}
@@ -440,7 +440,7 @@ public:
                          Function
 ************************************************************/
 
-struct Function : public ScriptingObject {
+class Function : public ScriptingObject {
 public:
 	Function(ScriptingSaver&, const std::string&, bool = false);
 	Function() : ScriptingObject() {
@@ -509,7 +509,7 @@ private:
 ************************************************************/
 
 // Assigns a value or function result to a local or global variable.
-struct FS_LocalVarDeclOrAssign : public FunctionStatement {
+class FS_LocalVarDeclOrAssign : public FunctionStatement {
 public:
 	FS_LocalVarDeclOrAssign(ScriptingSaver&, bool, Variable&, Assignable* = nullptr);
 	FS_LocalVarDeclOrAssign() : FunctionStatement() {
@@ -564,7 +564,14 @@ private:
 };
 
 // Lua's builtin print() function.
-struct FS_Print : public FunctionStatement {
+/* NOCOM: We do NOT want a specialised class for every single builtin function!
+ * Instead we will have some `class BuiltinFunctionHeader` (with type-safe parameter lists
+ * and lots of static instances to represent all supported functions) of which print() will
+ * be just one specialisation of many. The builtins can then be called using the not yet
+ * implemented `FunctionCall` (to be derived from both `Assignable` and `FunctionStatement`).
+ * Implementing `FunctionCall` and `BuiltinFunctionHeader` is my next urgent task.
+ */
+class FS_Print : public FunctionStatement {
 public:
 	FS_Print(ScriptingSaver& s, Assignable* t) : FunctionStatement(s), text_(t) {
 	}

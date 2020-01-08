@@ -171,17 +171,16 @@ public:
 	};
 	void map_changed(const MapWas& action);
 
-	bool save_as_scenario() const;
-	void write_lua(FileWrite&) const;
-
 	// Access to the tools.
 	Tools* tools();
 
+	// Scripting access
 	bool finalized() const {
 		return finalized_;
 	}
 
-	// Scripting access
+	void write_lua(FileWrite&) const;
+
 	ScriptingSaver& scripting_saver() const {
 		return *scripting_saver_;
 	}
@@ -197,6 +196,18 @@ public:
 	}
 	std::list<Function*>& functions() {
 		return functions_;
+	}
+	const std::list<std::string>& includes_global() const {
+		return includes_global_;
+	}
+	std::list<std::string>& includes_global() {
+		return includes_global_;
+	}
+	const std::list<std::string>& includes_local() const {
+		return includes_local_;
+	}
+	std::list<std::string>& includes_local() {
+		return includes_local_;
 	}
 
 private:
@@ -327,6 +338,8 @@ private:
 
 	std::list<FS_LocalVarDeclOrAssign*> variables_;
 	std::list<Function*> functions_;
+	std::list<std::string> includes_global_;
+	std::list<std::string> includes_local_;
 	std::unique_ptr<ScriptingSaver> scripting_saver_;
 
 	void new_scripting_saver() {

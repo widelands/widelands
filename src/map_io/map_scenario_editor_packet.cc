@@ -82,6 +82,8 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 			eia->finalized_ = fr.unsigned_8();
 			eia->functions_.clear();
 			eia->variables_.clear();
+			eia->includes_global_.clear();
+			eia->includes_local_.clear();
 			if (eia->finalized_) {
 				eia->new_scripting_saver();
 
@@ -94,6 +96,12 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 				}
 				for (uint32_t n = fr.unsigned_32(); n; --n) {
 					eia->variables_.push_back(&loader.get<FS_LocalVarDeclOrAssign>(fr.unsigned_32()));
+				}
+				for (uint32_t n = fr.unsigned_32(); n; --n) {
+					eia->includes_global_.push_back(fr.c_string());
+				}
+				for (uint32_t n = fr.unsigned_32(); n; --n) {
+					eia->includes_local_.push_back(fr.c_string());
 				}
 			}
 		} else {
@@ -124,6 +132,14 @@ void MapScenarioEditorPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 		fw.unsigned_32(eia->variables_.size());
 		for (const auto& v : eia->variables_) {
 			fw.unsigned_32(v->serial());
+		}
+		fw.unsigned_32(eia->includes_global_.size());
+		for (const std::string& s : eia->includes_global_) {
+			fw.c_string(s.c_str());
+		}
+		fw.unsigned_32(eia->includes_local_.size());
+		for (const std::string& s : eia->includes_local_) {
+			fw.c_string(s.c_str());
 		}
 	} else {
 		fw.unsigned_8(0);

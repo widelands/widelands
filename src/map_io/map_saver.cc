@@ -98,10 +98,10 @@ void MapSaver::save() {
 
 	bool is_game = is_a(Game, &egbase_);
 	if (!is_game) {
-		// Save game-typical stuff also in the scenario editor
 		upcast(EditorInteractive, eia, egbase_.get_ibase());
 		assert(eia);
-		if (eia->save_as_scenario()) {
+		if (eia->finalized()) {
+			// Save game-typical stuff also in the scenario editor
 			is_game = true;
 
 			log("Writing Scenario Editor Data ... ");
