@@ -746,13 +746,13 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			for (uint8_t dir : rinfo->second) {
 				switch (dir) {
 				case Widelands::WALK_E:
-					field.road_e = Widelands::RoadType::kNormal;
+					field.road_e = Widelands::RoadSegment::kNormal;
 					break;
 				case Widelands::WALK_SE:
-					field.road_se = Widelands::RoadType::kNormal;
+					field.road_se = Widelands::RoadSegment::kNormal;
 					break;
 				case Widelands::WALK_SW:
-					field.road_sw = Widelands::RoadType::kNormal;
+					field.road_sw = Widelands::RoadSegment::kNormal;
 					break;
 				default:
 					throw wexception(
@@ -765,13 +765,13 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			for (uint8_t dir : winfo->second) {
 				switch (dir) {
 				case Widelands::WALK_E:
-					field.road_e = Widelands::RoadType::kWaterway;
+					field.road_e = Widelands::RoadSegment::kWaterway;
 					break;
 				case Widelands::WALK_SE:
-					field.road_se = Widelands::RoadType::kWaterway;
+					field.road_se = Widelands::RoadSegment::kWaterway;
 					break;
 				case Widelands::WALK_SW:
-					field.road_sw = Widelands::RoadType::kWaterway;
+					field.road_sw = Widelands::RoadSegment::kWaterway;
 					break;
 				default:
 					throw wexception(
@@ -786,7 +786,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 			if (imm != nullptr && imm->get_positions(ebase).front() == field.fcoords) {
 				imm->draw(
-				   gametime, TextToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
+				   gametime, InfoToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
 			}
 		}
 
@@ -794,7 +794,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 			     bob = bob->get_next_bob()) {
 				bob->draw(
-				   ebase, TextToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
+				   ebase, InfoToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
 			}
 		}
 
@@ -993,17 +993,8 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 				select_tool(tools_->current(), EditorTool::Third);
 			return true;
 
-		case SDLK_SPACE:
-			toggle_buildhelp();
-			return true;
-
 		case SDLK_g:
 			toggle_grid();
-			return true;
-
-		case SDLK_c:
-			set_display_flag(
-			   InteractiveBase::dfShowCensus, !get_display_flag(InteractiveBase::dfShowCensus));
 			return true;
 
 		case SDLK_h:
@@ -1233,10 +1224,10 @@ void EditorInteractive::finalize_clicked() {
 	assert(!finalized_);
 	UI::WLMessageBox m(
 	   this, _("Finalize"),
-	   _("Are you sure you want to finalize this map? "
+	   _("Are you sure you want to finalize this map?\n\n"
 	     "This means you will not be able to add or remove players, rename them, "
-	     "or change their tribe and starting position. Nor can the waterway length limit be changed "
-	     "any more. "
+	     "or change their tribe and starting position.\n"
+	     "Nor can the waterway length limit be changed any more.\n\n"
 	     "This step is only required if you want to design a scenario with the editor."),
 	   UI::WLMessageBox::MBoxType::kOkCancel);
 	if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
@@ -1289,11 +1280,12 @@ std::string EditorInteractive::try_finalize() {
 		   *scripting_saver_, true, var, new ConstexprInteger(*scripting_saver_, 5)));
 		main_func->mutable_body().push_back(new FS_LocalVarDeclOrAssign(
 		   *scripting_saver_, false, var, new ConstexprInteger(*scripting_saver_, 20)));
-		Assignable* c[]{
-		   new ConstexprString(*scripting_saver_, "NOCOM: ", false),
-		   new ConstexprString(*scripting_saver_, "Hello World!", true),
-		   &var,
-		};
+		Assignable* c[]  // comment: clang-format vs codecheck
+		   {
+		      new ConstexprString(*scripting_saver_, "NOCOM: ", false),
+		      new ConstexprString(*scripting_saver_, "Hello World!", true),
+		      &var,
+		   };
 		main_func->mutable_body().push_back(
 		   new FS_Print(*scripting_saver_, new StringConcat(*scripting_saver_, 3, c)));
 		functions_.push_back(main_func);
@@ -1314,8 +1306,8 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	const Widelands::Map& map = egbase().map();
 
 	// Header
-	/** TRANSLATORS: "build_version (build_config)", e.g. "build20 (Release)" */
 	fw.print_f("-- %s\n-- %s\n\n",
+	           /** TRANSLATORS: "build_version (build_config)", e.g. "build20 (Release)" */
 	           (boost::format(_("Automatically created by Widelands %1$s (%2$s)")) %
 	            build_id().c_str() % build_type().c_str())
 	              .str()

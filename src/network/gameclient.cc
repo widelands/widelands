@@ -169,12 +169,12 @@ InteractiveGameBase* GameClientImpl::init_game(GameClient* parent, UI::ProgressW
 	   (boost::format("%s_netclient%u") % kAutosavePrefix % static_cast<unsigned int>(pn)).str());
 	InteractiveGameBase* igb;
 	if (pn > 0) {
-		igb = new InteractivePlayer(*game, get_config_section(), pn, true);
+		igb = new InteractivePlayer(*game, get_config_section(), pn, true, parent);
 	} else {
-		igb = new InteractiveSpectator(*game, get_config_section(), true);
+		igb = new InteractiveSpectator(*game, get_config_section(), true, parent);
 	}
+
 	game->set_ibase(igb);
-	igb->set_chat_provider(*parent);
 	if (settings.savegame) {  // savegame
 		game->init_savegame(settings);
 	} else {  //  new map

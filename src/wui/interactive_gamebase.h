@@ -38,16 +38,13 @@ class InteractiveGameBase : public InteractiveBase {
 public:
 	InteractiveGameBase(Widelands::Game&,
 	                    Section& global_s,
-	                    PlayerType pt = NONE,
-	                    bool multiplayer = false);
+	                    PlayerType pt,
+	                    bool multiplayer,
+	                    ChatProvider* chat_provider);
 	~InteractiveGameBase() override {
 	}
 	Widelands::Game* get_game() const override;
 	Widelands::Game& game() const override;
-
-	// Chat messages
-	void set_chat_provider(ChatProvider&);
-	ChatProvider* get_chat_provider();
 
 	// Only the 'InteractiveGameBase' has all information of what should be
 	// drawn into a map_view (i.e. which overlays are available). The
@@ -81,7 +78,13 @@ public:
 
 protected:
 	// For referencing the items in showhidemenu_
-	enum class ShowHideEntry { kBuildingSpaces, kCensus, kStatistics, kWorkareaOverlap };
+	enum class ShowHideEntry {
+		kBuildingSpaces,
+		kCensus,
+		kStatistics,
+		kSoldierLevels,
+		kWorkareaOverlap
+	};
 
 	// Adds the mapviewmenu_ to the toolbar
 	void add_main_menu();
@@ -90,6 +93,9 @@ protected:
 	void rebuild_showhide_menu() override;
 	// Adds the gamespeedmenu_ to the toolbar
 	void add_gamespeed_menu();
+
+	// Adds a chat toolbar button and registers the chat console window
+	void add_chat_ui();
 
 	bool handle_key(bool down, SDL_Keysym code) override;
 
@@ -110,6 +116,7 @@ protected:
 	} menu_windows_;
 
 	ChatProvider* chat_provider_;
+	UI::UniqueWindow::Registry chat_;
 	bool multiplayer_;
 	PlayerType playertype_;
 

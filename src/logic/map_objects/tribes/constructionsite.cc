@@ -618,7 +618,7 @@ Draw the construction site.
 ===============
 */
 void ConstructionSite::draw(uint32_t gametime,
-                            TextToDraw draw_text,
+                            InfoToDraw info_to_draw,
                             const Vector2f& point_on_dst,
                             const Widelands::Coords& coords,
                             float scale,
@@ -649,6 +649,6 @@ void ConstructionSite::draw(uint32_t gametime,
 	info_.draw(point_on_dst, coords, scale, player_color, dst);
 
 	// Draw help strings
-	draw_info(draw_text, point_on_dst, scale, dst);
+	draw_info(info_to_draw, point_on_dst, scale, dst);
 }
 }  // namespace Widelands

@@ -53,7 +53,6 @@
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/playercommand.h"
-#include "logic/roadtype.h"
 #include "scripting/lua_table.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
