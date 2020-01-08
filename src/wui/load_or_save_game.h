@@ -99,7 +99,7 @@ private:
 	UI::Box* table_box_;
 	FileType filetype_;
 
-	std::unique_ptr<SavegameTable> table_;
+	SavegameTable* table_;
 	std::vector<SavegameData> games_data_;
 	GameDetails game_details_;
 	UI::Button* delete_;
@@ -116,7 +116,6 @@ private:
 	void add_error_info(SavegameData& gamedata, std::string errormessage) const;
 	void add_sub_dir(const std::string& gamefilename);
 	bool selection_contains_directory() const;
-	bool is_savegame_dir(const std::string& gamefilename) const;
 };
 
 #endif  // end of include guard: WL_WUI_LOAD_OR_SAVE_GAME_H

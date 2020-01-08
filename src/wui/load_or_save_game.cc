@@ -65,12 +65,15 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
      curdir_(basedir_),
      game_(g) {
 
-	if (filetype_ == FileType::kGameSinglePlayer) {
-		table_.reset(new SavegameTableSinglePlayer(table_box_, style, localize_autosave));
-	} else if (filetype_ == FileType::kReplay) {
-		table_.reset(new SavegameTableReplay(table_box_, style, localize_autosave));
-	} else {
-		table_.reset(new SavegameTableMultiplayer(table_box_, style, localize_autosave));
+	switch (filetype_) {
+	case FileType::kGameSinglePlayer:
+		table_ = new SavegameTableSinglePlayer(table_box_, style, localize_autosave);
+		break;
+	case FileType::kReplay:
+		table_ = new SavegameTableReplay(table_box_, style, localize_autosave);
+		break;
+	default:
+		table_ = new SavegameTableMultiplayer(table_box_, style, localize_autosave);
 	}
 
 	table_->set_column_compare(0, boost::bind(&LoadOrSaveGame::compare_save_time, this, _1, _2));
@@ -78,7 +81,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 	table_->set_column_compare(table_->number_of_columns() - 1,
 	                           boost::bind(&LoadOrSaveGame::compare_map_name, this, _1, _2));
 
-	table_box_->add(table_.get(), UI::Box::Resizing::kExpandBoth);
+	table_box_->add(table_, UI::Box::Resizing::kExpandBoth);
 	game_details_.button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	delete_->set_enabled(false);
 	delete_->sigclicked.connect(boost::bind(&LoadOrSaveGame::clicked_delete, boost::ref(*this)));
@@ -190,7 +193,7 @@ void LoadOrSaveGame::select_by_name(const std::string& name) {
 }
 
 SavegameTable& LoadOrSaveGame::table() {
-	return *table_.get();
+	return *table_;
 }
 
 UI::Box* LoadOrSaveGame::table_box() {
@@ -441,16 +444,8 @@ void LoadOrSaveGame::add_sub_dir(const std::string& gamefilename) {
 	}
 	games_data_.push_back(SavegameData::create_sub_dir(gamefilename));
 }
-bool LoadOrSaveGame::is_savegame_dir(const std::string& gamefilename) const {
-	std::string preload_file = gamefilename + g_fs->file_separator() + "preload";
-	std::string map_file = gamefilename + g_fs->file_separator() + "minimap.png";
-	return g_fs->file_exists(preload_file) && g_fs->file_exists(map_file);
-}
+
 void LoadOrSaveGame::load_gamefile(const std::string& gamefilename) {
-	if (g_fs->is_directory(gamefilename) && !is_savegame_dir(gamefilename)) {
-		add_sub_dir(gamefilename);
-		return;
-	}
 
 	Widelands::GamePreloadPacket gpdp;
 	std::string savename = gamefilename;
@@ -463,7 +458,6 @@ void LoadOrSaveGame::load_gamefile(const std::string& gamefilename) {
 	}
 
 	SavegameData gamedata(gamefilename);
-
 	try {
 		Widelands::GameLoader gl(savename.c_str(), game_);
 		gl.preload_game(gpdp);
@@ -472,12 +466,17 @@ void LoadOrSaveGame::load_gamefile(const std::string& gamefilename) {
 		if (!is_valid_gametype(gamedata)) {
 			return;
 		}
-
 		add_general_information(gamedata, gpdp);
 		add_time_info(gamedata, gpdp);
 
 	} catch (const std::exception& e) {
-		add_error_info(gamedata, e.what());
+
+		if (g_fs->is_directory(gamefilename)) {
+			add_sub_dir(gamefilename);
+			return;
+		} else {
+			add_error_info(gamedata, e.what());
+		}
 	}
 
 	games_data_.push_back(gamedata);
