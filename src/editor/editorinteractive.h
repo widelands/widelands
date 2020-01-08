@@ -50,12 +50,17 @@
 
 class FileWrite;
 class EditorTool;
+namespace Widelands {
+class MapScenarioEditorPacket;
+}
 
 /**
  * This is the EditorInteractive. It is like the InteractivePlayer class,
  * but for the Editor instead of the game
  */
 class EditorInteractive : public InteractiveBase {
+	friend class Widelands::MapScenarioEditorPacket;
+
 public:
 	struct Tools {
 		Tools(const Widelands::Map& map)
@@ -113,6 +118,8 @@ public:
 		ScenarioPlaceWorkerTool sc_worker;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
+	~EditorInteractive() override {
+	}
 
 	// Runs the Editor via the commandline --editor flag. Will load 'filename' as a
 	// map and run 'script_to_run' directly after all initialization is done.
@@ -175,16 +182,20 @@ public:
 	}
 
 	// Scripting access
-	const std::map<std::string, Variable>& variables() const {
+	ScriptingSaver& scripting_saver() const {
+		return *scripting_saver_;
+	}
+
+	const std::list<FS_LocalVarDeclOrAssign*>& variables() const {
 		return variables_;
 	}
-	std::map<std::string, Variable>& variables() {
+	std::list<FS_LocalVarDeclOrAssign*>& variables() {
 		return variables_;
 	}
-	const std::map<std::string, Function>& functions() const {
+	const std::list<Function*>& functions() const {
 		return functions_;
 	}
-	std::map<std::string, Function>& functions() {
+	std::list<Function*>& functions() {
 		return functions_;
 	}
 
@@ -314,8 +325,13 @@ private:
 	std::unique_ptr<Tools> tools_;
 	std::unique_ptr<EditorHistory> history_;
 
-	std::map<std::string, Variable> variables_;
-	std::map<std::string, Function> functions_;
+	std::list<FS_LocalVarDeclOrAssign*> variables_;
+	std::list<Function*> functions_;
+	std::unique_ptr<ScriptingSaver> scripting_saver_;
+
+	void new_scripting_saver() {
+		scripting_saver_.reset(new ScriptingSaver());
+	}
 
 	bool draw_resources_ = true;
 	bool draw_immovables_ = true;

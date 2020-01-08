@@ -632,6 +632,7 @@ void EditorInteractive::cleanup_for_load() {
 	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
 	// Instead, delete and re-create the egbase.
 	egbase().cleanup_for_load();
+	scripting_saver_.reset(nullptr);
 	functions_.clear();
 	variables_.clear();
 }
@@ -1197,13 +1198,8 @@ void EditorInteractive::map_changed(const MapWas& action) {
 			update_players();
 		}
 
-		// NOCOM: All this needs to be saveloaded instead of course!!
-		finalized_ = false;
 		rebuild_main_menu();
 		scenario_toolmenu_.set_enabled(finalized_);
-		variables_.clear();
-		functions_.clear();
-		functions_.emplace(std::make_pair(kMainFunction, Function(true)));
 
 		// Make sure that we will start at coordinates (0,0).
 		map_view()->set_view(MapView::View{Vector2f::zero(), 1.f}, MapView::Transition::Jump);
@@ -1284,8 +1280,29 @@ std::string EditorInteractive::try_finalize() {
 		}
 	}
 	finalized_ = true;
+	new_scripting_saver();
+#ifndef NDEBUG  // NOCOM for testing (in debug builds only)
+	{
+		Function* main_func = new Function(*scripting_saver_, kMainFunction, true);
+		Variable& var = *new Variable(*scripting_saver_, VariableType::Integer, "test");
+		main_func->mutable_body().push_back(new FS_LocalVarDeclOrAssign(
+		   *scripting_saver_, true, var, new ConstexprInteger(*scripting_saver_, 5)));
+		main_func->mutable_body().push_back(new FS_LocalVarDeclOrAssign(
+		   *scripting_saver_, false, var, new ConstexprInteger(*scripting_saver_, 20)));
+		Assignable* c[]{
+		   new ConstexprString(*scripting_saver_, "NOCOM: ", false),
+		   new ConstexprString(*scripting_saver_, "Hello World!", true),
+		   &var,
+		};
+		main_func->mutable_body().push_back(
+		   new FS_Print(*scripting_saver_, new StringConcat(*scripting_saver_, 3, c)));
+		functions_.push_back(main_func);
+	}
+#else
+	functions_.push_back(new Function(*scripting_saver_, kMainFunction, true));
+#endif
 	rebuild_main_menu();
-	scenario_toolmenu_.set_enabled(finalized_);
+	scenario_toolmenu_.set_enabled(true);
 	return "";
 }
 
@@ -1297,49 +1314,63 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	const Widelands::Map& map = egbase().map();
 
 	// Header
-	fw.print_f(
-	   "-- Automatically created by Widelands %s (%s)\n", build_id().c_str(), build_type().c_str());
-	fw.print_f("-- Do not modify this file. "
-	           "All changes will be discarded the next time this map is saved in the editor.\n");
+	/** TRANSLATORS: "build_version (build_config)", e.g. "build20 (Release)" */
+	fw.print_f("-- %s\n-- %s\n\n",
+	           (boost::format(_("Automatically created by Widelands %1$s (%2$s)")) %
+	            build_id().c_str() % build_type().c_str())
+	              .str()
+	              .c_str(),
+	           _("Do not modify this file. All changes will be discarded the next time this map is "
+	             "saved in the editor."));
 
 	// i18n
-	fw.print_f("\nset_textdomain(\"scenario_%s.wmf\")\n\n", map.get_name().c_str());
+	{
+		const char* mapname = map.get_name().c_str();
+		std::string textdomain = "";
+		for (const char* c = mapname; *c; ++c) {
+			if (*c == ' ' || *c == '_' || *c == '-' || *c == '.') {
+				textdomain += '_';
+			} else if ((*c >= 'a' && *c <= 'z') || (*c >= '0' && *c <= '9')) {
+				textdomain += *c;
+			} else if (*c >= 'A' && *c <= 'Z') {
+				textdomain += (*c + 'a' - 'A');
+			}
+		}
+		if (textdomain.empty()) {
+			log("WARNING: Map name '%s' unsuited for creating a set_textdomain() argument\n", mapname);
+			textdomain = "invalid_name";
+		}
+		fw.print_f("set_textdomain(\"scenario_%s.wmf\")\n\n", textdomain.c_str());
+	}
 
 	// Useful includes
 	fw.print_f("include \"scripting/coroutine.lua\"\n");
 	fw.print_f("include \"scripting/objective_utils.lua\"\n");
-	fw.print_f("include \"scripting/infrastructure.lua\"\n");
-	fw.print_f("include \"scripting/table.lua\"\n\n");
+	fw.print_f("include \"scripting/table.lua\"\n");
 
-	// Variables
-	for (const auto& pair : variables_) {
-		fw.print_f("%s = %s\n", pair.first.c_str(), pair.second.value.c_str());
+	// Global variables
+	if (!variables_.empty()) {
+		fw.print_f("\n");
+		for (const auto& var : variables_) {
+			var->write_lua(fw);
+		}
 	}
 
 	// Functions
-	for (const auto& pair : functions_) {
-		fw.print_f("\nfunction %s(", pair.first.c_str());
-		const size_t params = pair.second.parameters.size();
-		if (params) {
-			auto it = pair.second.parameters.begin();
-			fw.print_f("%s", it->c_str());
-			for (size_t i = 1; i < params; ++i) {
-				++it;
-				fw.print_f(", %s", it->c_str());
-			}
-			assert(it == pair.second.parameters.end());
-		}
-		fw.print_f(")\n");
-		// NOCOM function body
-		fw.print_f("   print(\"[NOCOM] Hello world! :)\")\n");
-		fw.print_f("end\n");
+	bool main_function_found = false;
+	for (const auto& f : functions_) {
+		main_function_found |= (f->get_name() == kMainFunction && f->get_autostart());
+		f->write_lua(fw);
+	}
+	if (!main_function_found) {
+		throw wexception("Main function (%s) not defined or not a coroutine", kMainFunction.c_str());
 	}
 
 	// Main function(s) call
-	for (const auto& pair : functions_) {
-		if (pair.second.autostart) {
-			assert(pair.second.parameters.empty());
-			fw.print_f("\nrun(%s)", pair.first.c_str());
+	for (const auto& f : functions_) {
+		if (f->get_autostart()) {
+			assert(f->parameters().empty());
+			fw.print_f("\nrun(%s)", f->get_name().c_str());
 		}
 	}
 }

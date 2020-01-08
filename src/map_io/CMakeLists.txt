@@ -86,6 +86,8 @@ wl_library(map_io
     map_saver.h
     map_scripting_packet.cc
     map_scripting_packet.h
+    map_scenario_editor_packet.cc
+    map_scenario_editor_packet.h
     map_terrain_packet.cc
     map_terrain_packet.h
     map_version_packet.cc

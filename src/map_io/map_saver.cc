@@ -56,6 +56,7 @@
 #include "map_io/map_resources_packet.h"
 #include "map_io/map_road_packet.h"
 #include "map_io/map_roaddata_packet.h"
+#include "map_io/map_scenario_editor_packet.h"
 #include "map_io/map_scripting_packet.h"
 #include "map_io/map_terrain_packet.h"
 #include "map_io/map_version_packet.h"
@@ -91,24 +92,33 @@ void MapSaver::save() {
 	delete mos_;
 	mos_ = new MapObjectSaver();
 
+	// The binary data is saved in an own directory
+	// to keep it hidden from the poor debuggers
+	fs_.ensure_directory_exists("binary");
+
 	bool is_game = is_a(Game, &egbase_);
 	if (!is_game) {
 		// Save game-typical stuff also in the scenario editor
 		upcast(EditorInteractive, eia, egbase_.get_ibase());
 		assert(eia);
 		if (eia->save_as_scenario()) {
-			set_progress_message(_("Saving scenario…"));
 			is_game = true;
+
+			log("Writing Scenario Editor Data ... ");
+			set_progress_message(_("Saving scenario data…"));
+			MapScenarioEditorPacket packet;
+			packet.write(fs_, egbase_, *mos_);
+			log("took %ums\n ", timer.ms_since_last_query());
+
+			log("Writing LUA Files ... ");
+			set_progress_message(_("Writing LUA files…"));
 			fs_.ensure_directory_exists("scripting");
 			FileWrite fw;
 			eia->write_lua(fw);
 			fw.write(fs_, "scripting/init.lua");
+			log("took %ums\n ", timer.ms_since_last_query());
 		}
 	}
-
-	// The binary data is saved in an own directory
-	// to keep it hidden from the poor debuggers
-	fs_.ensure_directory_exists("binary");
 
 	// MANDATORY PACKETS
 	// Start with writing the map out, first Elemental data

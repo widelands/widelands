@@ -128,6 +128,7 @@ wl_library(editor
     io_filesystem
     logic
     logic_constants
+    logic_exceptions
     logic_filesystem_constants
     logic_generic_save_handler
     logic_map
