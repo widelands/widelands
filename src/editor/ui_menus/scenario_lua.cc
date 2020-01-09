@@ -55,15 +55,12 @@ ScenarioLuaOptionsMenu::ScenarioLuaOptionsMenu(EditorInteractive& parent,
 	functions_dropdown_.reset(new UI::Dropdown<std::string>(
 	   functions_box_.get(), "functions_dropdown", 0, 0, get_inner_w(), 8, 30, _("Current function"),
 	   UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary));
-	functions_autostart_.reset(new UI::Checkbox(
-	   functions_box_.get(), Vector2i(0, 0), _("Run as coroutine on scenario start"),
-	   _("Run this function as a coroutine when the scenario starts")));
 	functions_lowerbox_.reset(new UI::Box(functions_box_.get(), 0, 0, UI::Box::Horizontal));
 	functions_body_.reset(new UI::Listselect<std::string>(
 	   functions_lowerbox_.get(), 0, 0, 600, 400, UI::PanelStyle::kWui));
 	functions_sidepanel_.reset(new UI::Box(functions_lowerbox_.get(), 0, 0, UI::Box::Vertical));
 
-	update_functions(kMainFunction);
+	update_functions();
 	functions_buttonbox_->add(functions_button_add_.get());
 	functions_buttonbox_->add(functions_button_edit_.get());
 	functions_buttonbox_->add(functions_button_delete_.get());
@@ -71,7 +68,6 @@ ScenarioLuaOptionsMenu::ScenarioLuaOptionsMenu(EditorInteractive& parent,
 	functions_lowerbox_->add(functions_sidepanel_.get(), UI::Box::Resizing::kExpandBoth);
 	functions_box_->add(functions_buttonbox_.get(), UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	functions_box_->add(functions_dropdown_.get(), UI::Box::Resizing::kFullSize);
-	functions_box_->add(functions_autostart_.get(), UI::Box::Resizing::kFullSize);
 	functions_box_->add(functions_lowerbox_.get(), UI::Box::Resizing::kExpandBoth);
 
 	// NOCOM add sidepanel buttons
@@ -118,8 +114,6 @@ ScenarioLuaOptionsMenu::ScenarioLuaOptionsMenu(EditorInteractive& parent,
 	   boost::bind(&ScenarioLuaOptionsMenu::clicked_edit_function, this));
 	functions_button_delete_->sigclicked.connect(
 	   boost::bind(&ScenarioLuaOptionsMenu::clicked_delete_function, this));
-	functions_autostart_->clickedto.connect(
-	   boost::bind(&ScenarioLuaOptionsMenu::toggle_autostart, this, _1));
 	functions_dropdown_->selected.connect(
 	   boost::bind(&ScenarioLuaOptionsMenu::update_function_body, this));
 
@@ -147,9 +141,11 @@ void ScenarioLuaOptionsMenu::clicked_add_variable() {
 		}
 	}
 
-	eia().variables().push_back(new FS_LocalVarDeclOrAssign(
-	   eia().scripting_saver(), false,
-	   *new Variable(eia().scripting_saver(), VariableType::Integer, name)));
+	Variable* var = new Variable(VariableType::Integer, name);
+	var->init(eia().scripting_saver());
+	FS_LocalVarDeclOrAssign* fs = new FS_LocalVarDeclOrAssign(false, var, nullptr);
+	fs->init(eia().scripting_saver());
+	eia().variables().push_back(fs);
 	update_variables(name);
 }
 
@@ -199,7 +195,8 @@ void ScenarioLuaOptionsMenu::clicked_add_function() {
 		}
 	}
 
-	eia().functions().push_back(new Function(eia().scripting_saver(), name, false));
+	LuaFunction* f = new LuaFunction(name);
+	f->init(eia().scripting_saver());
 	update_functions(name);
 }
 
@@ -211,13 +208,12 @@ void ScenarioLuaOptionsMenu::clicked_edit_function() {
 void ScenarioLuaOptionsMenu::clicked_delete_function() {
 	assert(functions_dropdown_->has_selection());
 	const std::string sel = functions_dropdown_->get_selected();
-	assert(sel != kMainFunction);
 	UI::WLMessageBox m(
 	   get_parent(), _("Delete Function"),
 	   _("Are you sure you want to delete this function? This action cannot be undone."),
 	   UI::WLMessageBox::MBoxType::kOkCancel);
 	m.ok.connect([this, sel] {
-		auto& f = eia().functions();
+		auto f = eia().scripting_saver().all<LuaFunction>();
 		for (auto it = f.begin(); it != f.end(); ++it) {
 			if (sel == (*it)->get_name()) {
 				f.erase(it);
@@ -228,20 +224,6 @@ void ScenarioLuaOptionsMenu::clicked_delete_function() {
 		NEVER_HERE();
 	});
 	m.run<UI::Panel::Returncodes>();
-}
-
-void ScenarioLuaOptionsMenu::toggle_autostart(bool on) {
-	assert(functions_dropdown_->has_selection());
-	const std::string sel = functions_dropdown_->get_selected();
-	assert(sel != kMainFunction);
-	auto& f = eia().functions();
-	for (auto it = f.begin(); it != f.end(); ++it) {
-		if (sel == (*it)->get_name()) {
-			(*it)->set_autostart(on);
-			return;
-		}
-	}
-	NEVER_HERE();
 }
 
 void ScenarioLuaOptionsMenu::update_variables(std::string sel) {
@@ -271,7 +253,7 @@ void ScenarioLuaOptionsMenu::update_functions(std::string sel) {
 		sel = functions_dropdown_->has_selection() ? functions_dropdown_->get_selected() : "";
 	}
 	functions_dropdown_->clear();
-	for (const auto& f : eia().functions()) {
+	for (const auto& f : eia().scripting_saver().all<LuaFunction>()) {
 		functions_dropdown_->add(f->get_name(), f->get_name(), nullptr, sel == f->get_name());
 	}
 	update_function_body();
@@ -280,26 +262,8 @@ void ScenarioLuaOptionsMenu::update_functions(std::string sel) {
 void ScenarioLuaOptionsMenu::update_function_body() {
 	functions_body_->clear();
 	const bool sel = functions_dropdown_->has_selection();
-	functions_autostart_->set_enabled(sel);
 	functions_button_edit_->set_enabled(sel);
 	functions_button_delete_->set_enabled(sel);
 	// NOCOM enable/disable all sidepanel buttons
-	if (sel) {
-		const std::string& name = functions_dropdown_->get_selected();
-		auto& f = eia().functions();
-		for (auto it = f.begin();; ++it) {
-			if (it == f.end())
-				NEVER_HERE();
-			else if (name == (*it)->get_name()) {
-				functions_autostart_->set_state((*it)->get_autostart());
-				break;
-			}
-		}
-		if (name == kMainFunction) {
-			functions_autostart_->set_enabled(false);
-			functions_button_edit_->set_enabled(false);
-			functions_button_delete_->set_enabled(false);
-		}
-		// NOCOM add function definition to the listselect
-	}
+	// NOCOM add function definition to the listselect
 }

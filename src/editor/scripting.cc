@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -52,11 +53,20 @@ void check_name_valid(const std::string& name) {
 
 uint32_t ScriptingObject::next_serial_ = 0;
 
+constexpr uint16_t kCurrentPacketVersionScriptingObjectHeader = 1;
 constexpr uint16_t kCurrentPacketVersionScriptingObject = 1;
-constexpr uint16_t kCurrentPacketVersionAssignable = 1;
-constexpr uint16_t kCurrentPacketVersionFunctionStatement = 1;
 
-ScriptingObject::ScriptingObject(ScriptingSaver& s) : serial_(++next_serial_) {
+void ScriptingObject::init(ScriptingSaver& s, bool init_serial) {
+	if (init_serial) {
+		if (serial_) {
+			throw wexception("ScriptingObject::init: %u already initialized", serial_);
+		}
+		serial_ = (++next_serial_);
+	} else {
+		if (!serial_) {
+			throw wexception("ScriptingObject::init: not initialized yet");
+		}
+	}
 	s.add(*this);
 }
 void ScriptingObject::load(FileRead& fr, ScriptingLoader&) {
@@ -74,8 +84,9 @@ void ScriptingObject::load(FileRead& fr, ScriptingLoader&) {
 }
 
 void ScriptingObject::save(FileWrite& fw) const {
-	fw.unsigned_16(kCurrentPacketVersionScriptingObject);
+	fw.unsigned_16(kCurrentPacketVersionScriptingObjectHeader);
 	fw.unsigned_16(static_cast<uint16_t>(id()));
+	fw.unsigned_16(kCurrentPacketVersionScriptingObject);
 	fw.unsigned_32(serial_);
 }
 
@@ -83,30 +94,34 @@ void ScriptingObject::save(FileWrite& fw) const {
 ScriptingObject* ScriptingObject::load(FileRead& fr) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version != kCurrentPacketVersionScriptingObject) {
+		if (packet_version != kCurrentPacketVersionScriptingObjectHeader) {
 			throw Widelands::UnhandledVersionError(
-			   "ScriptingObject", packet_version, kCurrentPacketVersionScriptingObject);
+			   "ScriptingObject Header", packet_version, kCurrentPacketVersionScriptingObjectHeader);
 		}
-		const ID id = static_cast<ID>(fr.unsigned_16());
-		switch (id) {
+		const uint16_t id = fr.unsigned_16();
+		switch (static_cast<ID>(id)) {
 		case ID::ConstexprString:
-			return new ConstexprString();
+			return new ConstexprString("");
 		case ID::ConstexprInteger:
-			return new ConstexprInteger();
+			return new ConstexprInteger(0);
 		case ID::ConstexprBoolean:
-			return new ConstexprBoolean();
+			return new ConstexprBoolean(false);
 		case ID::ConstexprNil:
 			return new ConstexprNil();
 		case ID::StringConcat:
-			return new StringConcat();
+			return new StringConcat({});
 		case ID::Variable:
-			return new Variable();
+			return new Variable(VariableType::Nil, "", false);
+		case ID::LuaFunction:
+			return new LuaFunction("", false);
+		case ID::FSFunctionCall:
+			return new FS_FunctionCall(nullptr, nullptr, {});
 		case ID::FSLocalVarDeclOrAssign:
-			return new FS_LocalVarDeclOrAssign();
-		case ID::FSPrint:
-			return new FS_Print();
+			return new FS_LocalVarDeclOrAssign(false, nullptr, nullptr);
+		case ID::FSLaunchCoroutine:
+			return new FS_LaunchCoroutine(nullptr);
 		default:
-			throw Widelands::GameDataError("Invalid ScriptingObject ID");
+			throw Widelands::GameDataError("Invalid ScriptingObject ID: %u", id);
 		}
 	} catch (const WException& e) {
 		throw wexception("editor abstract scripting object: %s", e.what());
@@ -201,11 +216,6 @@ int32_t ConstexprNil::write_lua(FileWrite& fw) const {
 ************************************************************/
 
 constexpr uint16_t kCurrentPacketVersionStringConcat = 1;
-StringConcat::StringConcat(ScriptingSaver& s, size_t argc, Assignable** argv) : Assignable(s) {
-	for (size_t i = 0; i < argc; ++i) {
-		append(argv[i]);
-	}
-}
 void StringConcat::load(FileRead& fr, ScriptingLoader& l) {
 	try {
 		Assignable::load(fr, l);
@@ -272,10 +282,9 @@ std::string StringConcat::readable() const {
 
 constexpr uint16_t kCurrentPacketVersionVariable = 1;
 
-Variable::Variable(ScriptingSaver& s, VariableType t, const std::string& n)
-   : Assignable(s), type_(t), name_(n) {
-	check_name_valid(name_);
-	assert(type_ != VariableType::kInvalidType);
+Variable::Variable(VariableType t, const std::string& n, bool spellcheck) : type_(t), name_(n) {
+	if (spellcheck)
+		check_name_valid(name_);
 }
 
 void Variable::load(FileRead& fr, ScriptingLoader& l) {
@@ -287,9 +296,6 @@ void Variable::load(FileRead& fr, ScriptingLoader& l) {
 			   "Variable", packet_version, kCurrentPacketVersionVariable);
 		}
 		type_ = static_cast<VariableType>(fr.unsigned_16());
-		if (type_ == VariableType::kInvalidType) {
-			throw Widelands::GameDataError("kInvalidType");
-		}
 		name_ = fr.c_string();
 		check_name_valid(name_);
 	} catch (const WException& e) {
@@ -313,48 +319,74 @@ int32_t Variable::write_lua(FileWrite& fw) const {
                   Functions implementation
 ************************************************************/
 
-constexpr uint16_t kCurrentPacketVersionFunction = 1;
-Function::Function(ScriptingSaver& s, const std::string& n, bool a)
-   : ScriptingObject(s), name_(n), autostart_(a) {
-	check_name_valid(name_);
+FunctionBase::FunctionBase(const std::string& n,
+                           VariableType c,
+                           VariableType r,
+                           std::list<std::pair<std::string, VariableType>> p,
+                           bool spellcheck)
+   : parameters_(p), name_(n), class_(c), returns_(r) {
+	if (spellcheck)
+		check_name_valid(name_);
+}
+FunctionBase::FunctionBase(const std::string& n, bool spellcheck)
+   : name_(n), class_(VariableType::Nil), returns_(VariableType::Nil) {
+	if (spellcheck)
+		check_name_valid(name_);
 }
 
-void Function::load(FileRead& fr, ScriptingLoader& l) {
+std::string FunctionBase::header(bool lua) const {
+	std::string s = lua ? "function" : descname(returns_);
+	s += " " + name_ + "(";
+	for (auto it = parameters_.begin(); it != parameters_.end(); ++it) {
+		if (it != parameters_.begin()) {
+			s += ", ";
+		}
+		if (!lua) {
+			s += descname(it->second) + " ";
+		}
+		s += it->first;
+	}
+	return s + ")";
+}
+
+constexpr uint16_t kCurrentPacketVersionFunction = 1;
+
+void LuaFunction::load(FileRead& fr, ScriptingLoader& l) {
 	try {
 		ScriptingObject::load(fr, l);
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version != kCurrentPacketVersionFunction) {
 			throw Widelands::UnhandledVersionError(
-			   "Function", packet_version, kCurrentPacketVersionFunction);
+			   "LuaFunction", packet_version, kCurrentPacketVersionFunction);
 		}
-		name_ = fr.c_string();
-		check_name_valid(name_);
-		autostart_ = fr.unsigned_8();
+		rename(fr.c_string());
+		set_returns(static_cast<VariableType>(fr.unsigned_16()));
 		for (size_t n = fr.unsigned_32(); n; --n) {
 			const std::string v(fr.c_string());
 			parameters_.push_back(std::make_pair(v, static_cast<VariableType>(fr.unsigned_16())));
 		}
-		Function::Loader& loader = l.loader<Function::Loader>(this);
+		LuaFunction::Loader& loader = l.loader<LuaFunction::Loader>(this);
 		for (size_t n = fr.unsigned_32(); n; --n) {
 			loader.body.push_back(fr.unsigned_32());
 		}
 	} catch (const WException& e) {
-		throw wexception("editor scripting function: %s", e.what());
+		throw wexception("editor scripting lua function: %s", e.what());
 	}
 }
 
-void Function::load_pointers(ScriptingLoader& l) {
+void LuaFunction::load_pointers(ScriptingLoader& l) {
 	ScriptingObject::load_pointers(l);
-	Function::Loader& loader = l.loader<Function::Loader>(this);
+	LuaFunction::Loader& loader = l.loader<LuaFunction::Loader>(this);
 	for (uint32_t s : loader.body) {
 		body_.push_back(&l.get<FunctionStatement>(s));
 	}
 }
 
-void Function::save(FileWrite& fw) const {
+void LuaFunction::save(FileWrite& fw) const {
+	ScriptingObject::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionFunction);
-	fw.c_string(name_);
-	fw.unsigned_8(autostart_ ? 1 : 0);
+	fw.c_string(get_name().c_str());
+	fw.unsigned_16(static_cast<uint16_t>(get_returns()));
 
 	fw.unsigned_32(parameters_.size());
 	for (const auto& pair : parameters_) {
@@ -364,27 +396,12 @@ void Function::save(FileWrite& fw) const {
 
 	fw.unsigned_32(body_.size());
 	for (const auto& f : body_) {
-		f->save(fw);
+		fw.unsigned_32(f->serial());
 	}
 }
 
-std::string Function::header() const {
-	std::string s = "function " + name_ + "(";
-	const size_t nr_params = parameters_.size();
-	if (nr_params) {
-		auto it = parameters_.begin();
-		s += it->first;
-		for (size_t i = 1; i < nr_params; ++i) {
-			++it;
-			s += ", " + it->first;
-		}
-		assert(it == parameters_.end());
-	}
-	return s + ")";
-}
-
-int32_t Function::write_lua(FileWrite& fw) const {
-	fw.print_f("\n%s\n", header().c_str());
+int32_t LuaFunction::write_lua(FileWrite& fw) const {
+	fw.print_f("\n%s\n", header(true).c_str());
 	int32_t indent = 1;
 	for (const auto& f : body_) {
 		for (int32_t i = 0; i < indent; ++i) {
@@ -397,21 +414,30 @@ int32_t Function::write_lua(FileWrite& fw) const {
 	return 0;
 }
 
-std::string Function::readable() const {
-	return header();
+// static
+int32_t function_to_serial(FunctionBase& f) {
+	if (upcast(ScriptingObject, so, &f)) {
+		return so->serial();
+	}
+	for (int32_t i = 0;; ++i) {
+		if (kBuiltinFunctions[i]->function.get() == &f) {
+			return -i;
+		}
+	}
+	NEVER_HERE();
+}
+// static
+inline FunctionBase& serial_to_function(ScriptingLoader& l, int32_t s) {
+	return s > 0 ? l.get<LuaFunction>(s) : *kBuiltinFunctions[-s]->function;
 }
 
 /************************************************************
           Specific function statement implementations
 ************************************************************/
 
+// Variable declaration and assignment
+
 constexpr uint16_t kCurrentPacketVersionFS_LocalVarDeclOrAssign = 1;
-FS_LocalVarDeclOrAssign::FS_LocalVarDeclOrAssign(ScriptingSaver& s,
-                                                 bool l,
-                                                 Variable& var,
-                                                 Assignable* val)
-   : FunctionStatement(s), variable_(&var), value_(val), declare_local_(l) {
-}
 void FS_LocalVarDeclOrAssign::load(FileRead& fr, ScriptingLoader& l) {
 	try {
 		FunctionStatement::load(fr, l);
@@ -465,43 +491,153 @@ std::string FS_LocalVarDeclOrAssign::readable() const {
 	return str;
 }
 
-constexpr uint16_t kCurrentPacketVersionFS_Print = 1;
-void FS_Print::load(FileRead& fr, ScriptingLoader& l) {
+// Function invoking
+
+constexpr uint16_t kCurrentPacketVersionFS_FunctionCall = 1;
+void FS_FunctionCall::load(FileRead& fr, ScriptingLoader& l) {
 	try {
 		FunctionStatement::load(fr, l);
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version != kCurrentPacketVersionFS_Print) {
+		if (packet_version != kCurrentPacketVersionFS_FunctionCall) {
 			throw Widelands::UnhandledVersionError(
-			   "FS_Print", packet_version, kCurrentPacketVersionFS_Print);
+			   "FS_FunctionCall", packet_version, kCurrentPacketVersionFS_FunctionCall);
 		}
-		FS_Print::Loader& loader = l.loader<FS_Print::Loader>(this);
-		loader.text = fr.unsigned_32();
+		FS_FunctionCall::Loader& loader = l.loader<FS_FunctionCall::Loader>(this);
+		loader.var = fr.unsigned_32();
+		loader.func = fr.signed_32();
+		for (uint32_t n = fr.unsigned_32(); n; --n) {
+			loader.params.push_back(fr.unsigned_32());
+		}
 	} catch (const WException& e) {
-		throw wexception("FS_Print: %s", e.what());
+		throw wexception("FS_FunctionCall: %s", e.what());
 	}
 }
-void FS_Print::load_pointers(ScriptingLoader& l) {
+void FS_FunctionCall::load_pointers(ScriptingLoader& l) {
 	FunctionStatement::load_pointers(l);
-	FS_Print::Loader& loader = l.loader<FS_Print::Loader>(this);
-	text_ = loader.text ? &l.get<Assignable>(loader.text) : nullptr;
+	Assignable::load_pointers(l);
+	FS_FunctionCall::Loader& loader = l.loader<FS_FunctionCall::Loader>(this);
+	variable_ = loader.var ? &l.get<Variable>(loader.var) : nullptr;
+	function_ = &serial_to_function(l, loader.func);
+	for (uint32_t s : loader.params) {
+		parameters_.push_back(&l.get<Assignable>(s));
+	}
 }
-void FS_Print::save(FileWrite& fw) const {
+void FS_FunctionCall::save(FileWrite& fw) const {
 	FunctionStatement::save(fw);
-	fw.unsigned_16(kCurrentPacketVersionFS_Print);
-	fw.unsigned_32(text_ ? text_->serial() : 0);
+	fw.unsigned_16(kCurrentPacketVersionFS_FunctionCall);
+	fw.unsigned_32(variable_ ? variable_->serial() : 0);
+	assert(function_);
+	fw.signed_32(function_to_serial(*function_));
+	fw.unsigned_32(parameters_.size());
+	for (const Assignable* p : parameters_) {
+		fw.unsigned_32(p->serial());
+	}
 }
-int32_t FS_Print::write_lua(FileWrite& fw) const {
-	fw.print_f("print(");
-	if (text_) {
-		text_->write_lua(fw);
+void FS_FunctionCall::check_parameters() const {
+	if (!function_) {
+		throw wexception("FS_FunctionCall: No function provided");
+	} else if (parameters_.size() != function_->parameters().size()) {
+		throw wexception("FS_FunctionCall %s: %" PRIuS " parameters provided, expected %" PRIuS,
+		                 function_->get_name().c_str(), parameters_.size(),
+		                 function_->parameters().size());
+	}
+	if (function_->get_class() == VariableType::Nil) {
+		if (variable_) {
+			throw wexception("FS_FunctionCall %s: static function cannot be called on a variable",
+			                 function_->get_name().c_str());
+		}
+	} else {
+		if (!variable_) {
+			throw wexception(
+			   "FS_FunctionCall %s: non-static function needs to be called on a variable",
+			   function_->get_name().c_str());
+		} else if (!is(function_->get_class(), variable_->type())) {
+			throw wexception("FS_FunctionCall %s: variable of type %s cannot be casted to %s",
+			                 function_->get_name().c_str(), typeid(variable_->type()).name(),
+			                 typeid(function_->get_class()).name());
+		}
+	}
+	auto it1 = parameters_.begin();
+	auto it2 = function_->parameters().begin();
+	for (; it1 != parameters_.end(); ++it1, ++it2) {
+		if (!is((*it1)->type(), it2->second)) {
+			throw wexception("FS_FunctionCall %s: argument of type %s cannot be casted to %s",
+			                 function_->get_name().c_str(), typeid((*it1)->type()).name(),
+			                 typeid(it2->second).name());
+		}
+	}
+}
+int32_t FS_FunctionCall::write_lua(FileWrite& fw) const {
+	check_parameters();
+	if (variable_) {
+		fw.print_f("%s:", variable_->get_name().c_str());
+	}
+	fw.print_f("%s(", function_->get_name().c_str());
+	for (auto it = parameters_.begin(); it != parameters_.end(); ++it) {
+		if (it != parameters_.begin()) {
+			fw.print_f(", ");
+		}
+		(*it)->write_lua(fw);
 	}
 	fw.print_f(")");
 	return 0;
 }
-std::string FS_Print::readable() const {
-	std::string str = "print(";
-	if (text_) {
-		str += text_->readable();
+std::string FS_FunctionCall::readable() const {
+	std::string str;
+	if (variable_) {
+		str += variable_->get_name() + ":";
+	}
+	str += function_->get_name() + "(";
+	for (auto it = parameters_.begin(); it != parameters_.end(); ++it) {
+		if (it != parameters_.begin()) {
+			str += ", ";
+		}
+		str += (*it)->readable();
+	}
+	return str + ")";
+}
+
+// Coroutine starting
+
+constexpr uint16_t kCurrentPacketVersionFS_LaunchCoroutine = 1;
+void FS_LaunchCoroutine::load(FileRead& fr, ScriptingLoader& l) {
+	try {
+		FunctionStatement::load(fr, l);
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version != kCurrentPacketVersionFS_LaunchCoroutine) {
+			throw Widelands::UnhandledVersionError(
+			   "FS_LaunchCoroutine", packet_version, kCurrentPacketVersionFS_LaunchCoroutine);
+		}
+		FS_LaunchCoroutine::Loader& loader = l.loader<FS_LaunchCoroutine::Loader>(this);
+		loader.func = fr.unsigned_32();
+	} catch (const WException& e) {
+		throw wexception("FS_LaunchCoroutine: %s", e.what());
+	}
+}
+void FS_LaunchCoroutine::load_pointers(ScriptingLoader& l) {
+	FunctionStatement::load_pointers(l);
+	FS_LaunchCoroutine::Loader& loader = l.loader<FS_LaunchCoroutine::Loader>(this);
+	function_ = &l.get<FS_FunctionCall>(loader.func);
+}
+void FS_LaunchCoroutine::save(FileWrite& fw) const {
+	FunctionStatement::save(fw);
+	fw.unsigned_16(kCurrentPacketVersionFS_LaunchCoroutine);
+	fw.unsigned_32(function_->serial());
+}
+int32_t FS_LaunchCoroutine::write_lua(FileWrite& fw) const {
+	function_->check_parameters();
+	fw.print_f("run(%s", function_->get_function()->get_name().c_str());
+	for (const Assignable* p : function_->parameters()) {
+		fw.print_f(", ");
+		p->write_lua(fw);
+	}
+	fw.print_f(")");
+	return 0;
+}
+std::string FS_LaunchCoroutine::readable() const {
+	std::string str = "run(" + function_->get_function()->get_name();
+	for (const Assignable* p : function_->parameters()) {
+		str += ", " + p->readable();
 	}
 	return str + ")";
 }
@@ -513,6 +649,8 @@ std::string FS_Print::readable() const {
 // static
 std::string descname(VariableType t) {
 	switch (t) {
+	case VariableType::Nil:
+		return _("Nil");
 	case VariableType::Integer:
 		return _("Integer");
 	case VariableType::Boolean:
@@ -637,9 +775,10 @@ std::string descname(VariableType t) {
 // Checks whether a variable of type s may be assigned a value of type t.
 // This is the case if t==s, or t is a subclass of s.
 // We do so by recursively calling is(s, direct_superclass_of_t)
+
 // static
 bool is(VariableType t, VariableType s) {
-	if (t == s) {
+	if (t == s || t == VariableType::Nil) {
 		return true;
 	}
 	switch (t) {
@@ -729,20 +868,58 @@ bool is(VariableType t, VariableType s) {
 }
 
 /************************************************************
+                      Builtin functions
+************************************************************/
+
+const BuiltinFunctionInfo& builtin(const std::string& name) {
+	for (size_t i = 0; kBuiltinFunctions[i]; ++i) {
+		if (kBuiltinFunctions[i]->unique_name == name) {
+			return *kBuiltinFunctions[i];
+		}
+	}
+	throw wexception("Unknown builtin function %s", name.c_str());
+}
+
+// Do not change the order! Indices are stored in map files!
+// The _() command is not contained here – access it instead via `ConstexprString`'s `translatable`
+// attribute.
+const BuiltinFunctionInfo* kBuiltinFunctions[] = {
+   new BuiltinFunctionInfo(
+      "print",
+      []() { return _("Prints debug information to the stdandard output."); },
+      new FunctionBase("print",
+                       VariableType::Nil,
+                       VariableType::Nil,
+                       {std::make_pair("text", VariableType::String)})),
+   /** TRANSLATORS: max is the name of a function parameter */
+   new BuiltinFunctionInfo(
+      "random_1",
+      []() { return _("Returns a random value between 1 and max."); },
+      new FunctionBase("math.random",
+                       VariableType::Nil,
+                       VariableType::Integer,
+                       {std::make_pair("max", VariableType::Integer)},
+                       false)),
+   /** TRANSLATORS: min and max are names of function parameters */
+   new BuiltinFunctionInfo(
+      "random_2",
+      []() { return _("Returns a random value between min and max."); },
+      new FunctionBase("math.random",
+                       VariableType::Nil,
+                       VariableType::Integer,
+                       {std::make_pair("min", VariableType::Integer),
+                        std::make_pair("max", VariableType::Integer)},
+                       false)),
+   // NOCOM Add all builtins of all the classes in src/scripting/ here…
+   nullptr};
+
+/************************************************************
                    Saveloading helper
 ************************************************************/
 
 constexpr uint16_t kCurrentPacketVersionScripting = 1;
 
 void ScriptingSaver::add(ScriptingObject& a) {
-	for (const auto& o : list_) {
-		if (o.get() == &a) {
-			throw Widelands::GameDataError("ScriptingObject %u was already declared", a.serial());
-		} else if (o->serial() == a.serial()) {
-			throw Widelands::GameDataError(
-			   "Two scripting objects have the same serial %u", a.serial());
-		}
-	}
 	list_.push_back(std::unique_ptr<ScriptingObject>(&a));
 }
 
@@ -764,12 +941,15 @@ ScriptingLoader::ScriptingLoader(FileRead& fr, ScriptingSaver& s) {
 
 		// First load phase: Create all saved objects.
 		for (uint32_t n = fr.unsigned_32(); n; --n) {
+			log("NOCOM ScriptingLoader no.%u ", n);
 			ScriptingObject* a = ScriptingObject::load(fr);
+			log("of type %s\n", typeid(*a).name());
 			list_.emplace(
 			   std::make_pair(a, std::unique_ptr<ScriptingObject::Loader>(a->create_loader())));
 			a->load(fr, *this);
-			s.add(*a);
+			a->init(s, false);
 		}
+
 		// Second load phase: Load pointers between objects.
 		for (const auto& pair : list_) {
 			pair.first->load_pointers(*this);

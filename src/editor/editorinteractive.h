@@ -191,10 +191,10 @@ public:
 	std::list<FS_LocalVarDeclOrAssign*>& variables() {
 		return variables_;
 	}
-	const std::list<Function*>& functions() const {
+	const std::list<FS_LaunchCoroutine*>& functions() const {
 		return functions_;
 	}
-	std::list<Function*>& functions() {
+	std::list<FS_LaunchCoroutine*>& functions() {
 		return functions_;
 	}
 	const std::list<std::string>& includes_global() const {
@@ -337,7 +337,7 @@ private:
 	std::unique_ptr<EditorHistory> history_;
 
 	std::list<FS_LocalVarDeclOrAssign*> variables_;
-	std::list<Function*> functions_;
+	std::list<FS_LaunchCoroutine*> functions_;
 	std::list<std::string> includes_global_;
 	std::list<std::string> includes_local_;
 	std::unique_ptr<ScriptingSaver> scripting_saver_;

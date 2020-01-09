@@ -92,7 +92,7 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 				ScriptingLoader loader(fr, eia->scripting_saver());
 
 				for (uint32_t n = fr.unsigned_32(); n; --n) {
-					eia->functions_.push_back(&loader.get<Function>(fr.unsigned_32()));
+					eia->functions_.push_back(&loader.get<FS_LaunchCoroutine>(fr.unsigned_32()));
 				}
 				for (uint32_t n = fr.unsigned_32(); n; --n) {
 					eia->variables_.push_back(&loader.get<FS_LocalVarDeclOrAssign>(fr.unsigned_32()));

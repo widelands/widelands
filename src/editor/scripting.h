@@ -26,6 +26,8 @@
 #include <string>
 #include <typeinfo>
 
+#include <boost/function.hpp>
+
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "logic/game_data_error.h"
@@ -34,8 +36,6 @@ class FileRead;
 class FileWrite;
 class ScriptingLoader;
 class ScriptingSaver;
-
-const std::string kMainFunction = "mission_thread";
 
 // Check whether a certain name may be used as a Lua identifier for variables or functions.
 // A valid name may contain only small letters, digits, and underscores;
@@ -51,7 +51,7 @@ void check_name_valid(const std::string&);
 // classes they will likely not need are not supported. (No editor-Lua functions,
 // generic classes like EGBase where only one subclass will ever be accessed, etc.)
 enum class VariableType : uint16_t {
-	kInvalidType = 0,  // NOCOM do we need this?
+	Nil = 0,
 
 	Integer,
 	Boolean,
@@ -128,9 +128,22 @@ bool is(VariableType check, VariableType supposed_superclass);
              Abstract ScriptingObject and Assignable
 ************************************************************/
 
+/* WARNING:
+ * If you instantiate any subclass of ScriptingObject, you HAVE TO
+ * call init() on it immediately afterwards!!
+ */
+
 class ScriptingObject {
+	friend class ScriptingLoader;
+
 public:
 	virtual ~ScriptingObject() {
+	}
+
+	static ScriptingObject* load(FileRead&);
+
+	void init(ScriptingSaver& s) {
+		init(s, true);
 	}
 
 	enum class ID : uint16_t {
@@ -140,10 +153,10 @@ public:
 		ConstexprNil,
 		StringConcat,
 		Variable,
-		Function,
-		FunctionCall,  // NOCOM not yet implemented
+		LuaFunction,
+		FSLaunchCoroutine,
+		FSFunctionCall,
 		FSLocalVarDeclOrAssign,
-		FSPrint,
 	};
 	virtual ScriptingObject::ID id() const = 0;
 
@@ -160,8 +173,6 @@ public:
 	// Localized human-readable description of this object
 	virtual std::string readable() const = 0;
 
-	static ScriptingObject* load(FileRead&);
-
 	struct Loader {
 		Loader() {
 		}
@@ -176,27 +187,30 @@ public:
 	}
 
 protected:
-	ScriptingObject(ScriptingSaver&);
-	ScriptingObject() {
-	}  // for saveloading only
+	ScriptingObject() : serial_(0) {
+	}
+
 private:
 	uint32_t serial_;
 	static uint32_t next_serial_;
+
+	void init(ScriptingSaver&, bool);
+
 	DISALLOW_COPY_AND_ASSIGN(ScriptingObject);
 };
 
 // Helper struct: Everything that can stand right of " = " or be used as a function parameter.
-class Assignable : public ScriptingObject {
-protected:
-	Assignable(ScriptingSaver& s) : ScriptingObject(s) {
-	}
-	// for saveloading only
-	Assignable() : ScriptingObject() {
-	}
-
+class Assignable : virtual public ScriptingObject {
 public:
 	~Assignable() override {
 	}
+
+	virtual VariableType type() const = 0;
+
+protected:
+	Assignable() = default;
+
+	DISALLOW_COPY_AND_ASSIGN(Assignable);
 };
 
 /************************************************************
@@ -207,15 +221,15 @@ public:
 // they will be added automatically when writing the lua file.
 class ConstexprString : public Assignable {
 public:
-	ConstexprString(ScriptingSaver& s, const std::string& v, bool t = false)
-	   : Assignable(s), value_(v), translate_(t) {
+	ConstexprString(const std::string& v, bool t = false) : value_(v), translate_(t) {
 	}
-	ConstexprString() : Assignable() {
-	}  // for saveloading only
 	~ConstexprString() override {
 	}
 	ScriptingObject::ID id() const override {
 		return ScriptingObject::ID::ConstexprString;
+	}
+	VariableType type() const override {
+		return VariableType::String;
 	}
 
 	const std::string& get_value() const {
@@ -242,19 +256,22 @@ public:
 private:
 	std::string value_;
 	bool translate_;
+
+	DISALLOW_COPY_AND_ASSIGN(ConstexprString);
 };
 
 // An integer constant, e.g. 123.
 class ConstexprInteger : public Assignable {
 public:
-	ConstexprInteger(ScriptingSaver& s, int32_t i) : Assignable(s), value_(i) {
+	ConstexprInteger(int32_t i) : value_(i) {
 	}
-	ConstexprInteger() : Assignable() {
-	}  // for saveloading only
 	~ConstexprInteger() override {
 	}
 	ScriptingObject::ID id() const override {
 		return ScriptingObject::ID::ConstexprInteger;
+	}
+	VariableType type() const override {
+		return VariableType::Integer;
 	}
 
 	int32_t get_value() const {
@@ -274,19 +291,22 @@ public:
 
 private:
 	int32_t value_;
+
+	DISALLOW_COPY_AND_ASSIGN(ConstexprInteger);
 };
 
 // A boolean constant: true or false.
 class ConstexprBoolean : public Assignable {
 public:
-	ConstexprBoolean(ScriptingSaver& s, bool b) : Assignable(s), value_(b) {
+	ConstexprBoolean(bool b) : value_(b) {
 	}
-	ConstexprBoolean() : Assignable() {
-	}  // for saveloading only
 	~ConstexprBoolean() override {
 	}
 	ScriptingObject::ID id() const override {
 		return ScriptingObject::ID::ConstexprBoolean;
+	}
+	VariableType type() const override {
+		return VariableType::Boolean;
 	}
 
 	bool get_value() const {
@@ -306,26 +326,29 @@ public:
 
 private:
 	bool value_;
+
+	DISALLOW_COPY_AND_ASSIGN(ConstexprBoolean);
 };
 
 // The nil constant.
 class ConstexprNil : public Assignable {
 public:
 	// More constructors and as many attributes as there are flavours of nil…
-	ConstexprNil(ScriptingSaver& s) : Assignable(s) {
-	}
-	// for saveloading only
-	ConstexprNil() : Assignable() {
-	}
+	ConstexprNil() = default;
 	~ConstexprNil() override {
 	}
 	ScriptingObject::ID id() const override {
 		return ScriptingObject::ID::ConstexprNil;
 	}
+	VariableType type() const override {
+		return VariableType::Nil;
+	}
 	int32_t write_lua(FileWrite&) const override;
 	std::string readable() const override {
 		return _("nil");
 	}
+
+	DISALLOW_COPY_AND_ASSIGN(ConstexprNil);
 };
 
 /************************************************************
@@ -335,13 +358,15 @@ public:
 // A concatenation of any number of Assignables with '..'.
 class StringConcat : public Assignable {
 public:
-	StringConcat(ScriptingSaver&, size_t argc = 0, Assignable** argv = nullptr);
-	StringConcat() : Assignable() {
-	}  // for saveloading only
+	StringConcat(std::list<Assignable*> v) : values_(v) {
+	}
 	~StringConcat() override {
 	}
 	ScriptingObject::ID id() const override {
 		return ScriptingObject::ID::StringConcat;
+	}
+	VariableType type() const override {
+		return VariableType::String;
 	}
 
 	const std::list<Assignable*>& values() const {
@@ -349,9 +374,6 @@ public:
 	}
 	std::list<Assignable*>& mutable_values() {
 		return values_;
-	}
-	void append(Assignable* a) {
-		values_.push_back(a);
 	}
 
 	void load(FileRead&, ScriptingLoader&) override;
@@ -373,6 +395,8 @@ public:
 
 private:
 	std::list<Assignable*> values_;
+
+	DISALLOW_COPY_AND_ASSIGN(StringConcat);
 };
 
 /************************************************************
@@ -381,9 +405,7 @@ private:
 
 class Variable : public Assignable {
 public:
-	Variable(ScriptingSaver&, VariableType, const std::string&);
-	Variable() : Assignable() {
-	}  // for saveloading only
+	Variable(VariableType, const std::string&, bool spellcheck = true);
 	~Variable() override {
 	}
 	ScriptingObject::ID id() const override {
@@ -393,7 +415,7 @@ public:
 	void load(FileRead&, ScriptingLoader&) override;
 	void save(FileWrite&) const override;
 
-	VariableType type() const {
+	VariableType type() const override {
 		return type_;
 	}
 	const std::string& get_name() const {
@@ -421,13 +443,9 @@ private:
 ************************************************************/
 
 // Abstract superclass. Subclasses below.
-class FunctionStatement : public ScriptingObject {
+class FunctionStatement : virtual public ScriptingObject {
 protected:
-	FunctionStatement(ScriptingSaver& s) : ScriptingObject(s) {
-	}
-	// for saveloading only
-	FunctionStatement() : ScriptingObject() {
-	}
+	FunctionStatement() = default;
 
 public:
 	~FunctionStatement() override {
@@ -437,24 +455,25 @@ public:
 };
 
 /************************************************************
-                         Function
+                      Abstract Function
 ************************************************************/
 
-class Function : public ScriptingObject {
+/* Not a child of ScriptingObject. LuaFunctions (defined by the user) inherit from this
+ * class as well as from ScriptingObject. This class is here to provide all the builtin function
+ * headers. Since this class is not derived from Assignable, its instances need to be embedded
+ * in a FunctionCall object to be used for anything.
+ */
+class FunctionBase {
 public:
-	Function(ScriptingSaver&, const std::string&, bool = false);
-	Function() : ScriptingObject() {
-	}  // for saveloading only
-	~Function() override {
-	}
-	ScriptingObject::ID id() const override {
-		return ScriptingObject::ID::Function;
-	}
+	// Full constructor, for builtin functions only
+	FunctionBase(const std::string&,
+	             VariableType c,
+	             VariableType r,
+	             std::list<std::pair<std::string, VariableType>>,
+	             bool = true);
 
-	void load(FileRead&, ScriptingLoader&) override;
-	void save(FileWrite&) const override;
-	int32_t write_lua(FileWrite&) const override;
-	std::string readable() const override;
+	virtual ~FunctionBase() {
+	}
 
 	const std::string& get_name() const {
 		return name_;
@@ -463,18 +482,65 @@ public:
 		check_name_valid(n);
 		name_ = n;
 	}
-	bool get_autostart() const {
-		return autostart_;
-	}
-	void set_autostart(bool a) {
-		autostart_ = a;
-	}
 	const std::list<std::pair<std::string, VariableType>>& parameters() const {
 		return parameters_;
 	}
 	std::list<std::pair<std::string, VariableType>>& mutable_parameters() {
 		return parameters_;
 	}
+
+	std::string header(bool lua_format) const;
+
+	VariableType get_class() const {
+		return class_;
+	}
+	VariableType get_returns() const {
+		return returns_;
+	}
+
+protected:
+	// for LuaFunction
+	FunctionBase(const std::string&, bool spellcheck = true);
+
+	void set_returns(VariableType r) {
+		returns_ = r;
+	}
+
+	std::list<std::pair<std::string, VariableType>> parameters_;
+
+private:
+	std::string name_;
+	VariableType class_;
+	VariableType returns_;
+
+	DISALLOW_COPY_AND_ASSIGN(FunctionBase);
+};
+
+int32_t function_to_serial(FunctionBase&);
+FunctionBase& serial_to_function(ScriptingLoader&, int32_t);
+
+/************************************************************
+                   User-defined functions
+************************************************************/
+
+class LuaFunction : public ScriptingObject, public FunctionBase {
+public:
+	LuaFunction(const std::string& n, bool spellcheck = true) : FunctionBase(n, spellcheck) {
+	}
+	~LuaFunction() override {
+	}
+	ScriptingObject::ID id() const override {
+		return ScriptingObject::ID::LuaFunction;
+	}
+
+	void load(FileRead&, ScriptingLoader&) override;
+	void save(FileWrite&) const override;
+	int32_t write_lua(FileWrite&) const override;
+
+	std::string readable() const override {
+		return header(true);
+	}
+
 	const std::list<FunctionStatement*>& body() const {
 		return body_;
 	}
@@ -489,31 +555,127 @@ public:
 		std::list<uint32_t> body;
 	};
 	ScriptingObject::Loader* create_loader() const override {
-		return new Function::Loader();
+		return new LuaFunction::Loader();
 	}
 	void load_pointers(ScriptingLoader&) override;
 
 private:
-	std::string name_;
-	bool autostart_;
-	std::list<std::pair<std::string, VariableType>> parameters_;
 	std::list<FunctionStatement*> body_;
 
-	std::string header() const;
-
-	DISALLOW_COPY_AND_ASSIGN(Function);
+	DISALLOW_COPY_AND_ASSIGN(LuaFunction);
 };
 
 /************************************************************
                   Function Statements
 ************************************************************/
 
+class FS_FunctionCall : public Assignable, public FunctionStatement {
+public:
+	FS_FunctionCall(FunctionBase* f, Variable* v, std::list<Assignable*> p)
+	   : function_(f), variable_(v), parameters_(p) {
+	}
+	~FS_FunctionCall() override {
+	}
+
+	void load(FileRead&, ScriptingLoader&) override;
+	void save(FileWrite&) const override;
+	int32_t write_lua(FileWrite&) const override;
+	inline ScriptingObject::ID id() const override {
+		return ScriptingObject::ID::FSFunctionCall;
+	}
+	VariableType type() const override {
+		assert(function_);
+		return function_->get_returns();
+	}
+	std::string readable() const override;
+
+	const FunctionBase* get_function() const {
+		return function_;
+	}
+	void set_function(FunctionBase* f) {
+		function_ = f;
+	}
+	const Variable* get_variable() const {
+		return variable_;
+	}
+	void set_variable(Variable* v);
+	const std::list<Assignable*>& parameters() const {
+		return parameters_;
+	}
+	std::list<Assignable*>& mutable_parameters() {
+		return parameters_;
+	}
+
+	void check_parameters() const;
+
+	struct Loader : public ScriptingObject::Loader {
+		Loader() = default;
+		~Loader() override {
+		}
+		uint32_t var;
+		// Indices <= 0 refer to the negative index in kBuiltinFunctions
+		int32_t func;
+		std::list<uint32_t> params;
+	};
+	ScriptingObject::Loader* create_loader() const override {
+		return new FS_FunctionCall::Loader();
+	}
+	void load_pointers(ScriptingLoader&) override;
+
+private:
+	FunctionBase* function_;
+	Variable* variable_;
+	std::list<Assignable*> parameters_;
+
+	DISALLOW_COPY_AND_ASSIGN(FS_FunctionCall);
+};
+
+// Launch a coroutine with the given parameters
+class FS_LaunchCoroutine : public FunctionStatement {
+public:
+	FS_LaunchCoroutine(FS_FunctionCall* f) : function_(f) {
+	}
+	~FS_LaunchCoroutine() override {
+	}
+
+	void load(FileRead&, ScriptingLoader&) override;
+	void save(FileWrite&) const override;
+	int32_t write_lua(FileWrite&) const override;
+	inline ScriptingObject::ID id() const override {
+		return ScriptingObject::ID::FSLaunchCoroutine;
+	}
+	std::string readable() const override;
+
+	FS_FunctionCall& get_function() const {
+		return *function_;
+	}
+	void set_function(FS_FunctionCall& f) {
+		function_ = &f;
+	}
+
+	struct Loader : public ScriptingObject::Loader {
+		Loader() = default;
+		~Loader() override {
+		}
+		uint32_t func;
+	};
+	ScriptingObject::Loader* create_loader() const override {
+		return new FS_LaunchCoroutine::Loader();
+	}
+	void load_pointers(ScriptingLoader&) override;
+
+private:
+	FS_FunctionCall* function_;
+
+	DISALLOW_COPY_AND_ASSIGN(FS_LaunchCoroutine);
+};
+
 // Assigns a value or function result to a local or global variable.
 class FS_LocalVarDeclOrAssign : public FunctionStatement {
 public:
-	FS_LocalVarDeclOrAssign(ScriptingSaver&, bool, Variable&, Assignable* = nullptr);
-	FS_LocalVarDeclOrAssign() : FunctionStatement() {
-	}  // for saveloading only
+	FS_LocalVarDeclOrAssign(bool l, Variable* var, Assignable* val)
+	   : variable_(var), value_(val), declare_local_(l) {
+	}
 	~FS_LocalVarDeclOrAssign() override {
 	}
 
@@ -563,55 +725,6 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(FS_LocalVarDeclOrAssign);
 };
 
-// Lua's builtin print() function.
-/* NOCOM: We do NOT want a specialised class for every single builtin function!
- * Instead we will have some `class BuiltinFunctionHeader` (with type-safe parameter lists
- * and lots of static instances to represent all supported functions) of which print() will
- * be just one specialisation of many. The builtins can then be called using the not yet
- * implemented `FunctionCall` (to be derived from both `Assignable` and `FunctionStatement`).
- * Implementing `FunctionCall` and `BuiltinFunctionHeader` is my next urgent task.
- */
-class FS_Print : public FunctionStatement {
-public:
-	FS_Print(ScriptingSaver& s, Assignable* t) : FunctionStatement(s), text_(t) {
-	}
-	FS_Print() : FunctionStatement() {
-	}  // for saveloading only
-	~FS_Print() override {
-	}
-
-	void load(FileRead&, ScriptingLoader&) override;
-	void save(FileWrite&) const override;
-	int32_t write_lua(FileWrite&) const override;
-	inline ScriptingObject::ID id() const override {
-		return ScriptingObject::ID::FSPrint;
-	}
-	std::string readable() const override;
-
-	const Assignable* get_text() const {
-		return text_;
-	}
-	void set_text(Assignable* t) {
-		text_ = t;
-	}
-
-	struct Loader : public ScriptingObject::Loader {
-		Loader() = default;
-		~Loader() override {
-		}
-		uint32_t text;
-	};
-	ScriptingObject::Loader* create_loader() const override {
-		return new FS_Print::Loader();
-	}
-	void load_pointers(ScriptingLoader&) override;
-
-private:
-	Assignable* text_;
-
-	DISALLOW_COPY_AND_ASSIGN(FS_Print);
-};
-
 /************************************************************
                    Saveloading support
 ************************************************************/
@@ -641,6 +754,16 @@ public:
 	}
 	void add(ScriptingObject&);
 	void save(FileWrite&) const;
+
+	template <typename T> std::list<T*> all() const {
+		std::list<T*> result;
+		for (auto& so : list_) {
+			if (upcast(T, t, so.get())) {
+				result.push_back(t);
+			}
+		}
+		return result;
+	}
 
 private:
 	std::list<std::unique_ptr<ScriptingObject>> list_;
@@ -684,5 +807,31 @@ private:
 	std::map<ScriptingObject*, std::unique_ptr<ScriptingObject::Loader>> list_;
 	DISALLOW_COPY_AND_ASSIGN(ScriptingLoader);
 };
+
+/************************************************************
+                      Builtin functions
+************************************************************/
+
+// Wrapper for a (static) FunctionBase object, for use in kBuiltinFunctions
+struct BuiltinFunctionInfo {
+	BuiltinFunctionInfo(std::string u, boost::function<std::string()> d, FunctionBase* f)
+	   : function(f), unique_name(u), description(d) {
+	}
+	~BuiltinFunctionInfo() {
+	}
+
+	const std::unique_ptr<FunctionBase> function;
+	// internal name, unique among all kBuiltinFunctions entries
+	const std::string unique_name;
+	// Implemented as a function to make it translatable
+	const boost::function<std::string()> description;
+
+	DISALLOW_COPY_AND_ASSIGN(BuiltinFunctionInfo);
+};
+
+// All supported builtin functions.
+const extern BuiltinFunctionInfo* kBuiltinFunctions[];
+// Quick access to a builtin by its unique name
+const BuiltinFunctionInfo& builtin(const std::string&);
 
 #endif  // end of include guard: WL_EDITOR_SCRIPTING_H

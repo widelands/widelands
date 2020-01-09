@@ -1276,24 +1276,51 @@ std::string EditorInteractive::try_finalize() {
 	new_scripting_saver();
 #ifndef NDEBUG  // NOCOM for testing (in debug builds only)
 	{
-		Function* main_func = new Function(*scripting_saver_, kMainFunction, true);
-		Variable& var = *new Variable(*scripting_saver_, VariableType::Integer, "test");
-		main_func->mutable_body().push_back(new FS_LocalVarDeclOrAssign(
-		   *scripting_saver_, true, var, new ConstexprInteger(*scripting_saver_, 5)));
-		main_func->mutable_body().push_back(new FS_LocalVarDeclOrAssign(
-		   *scripting_saver_, false, var, new ConstexprInteger(*scripting_saver_, 20)));
-		Assignable* c[]  // comment: clang-format vs codecheck
-		   {
-		      new ConstexprString(*scripting_saver_, "NOCOM: ", false),
-		      new ConstexprString(*scripting_saver_, "Hello World!", true),
-		      &var,
-		   };
-		main_func->mutable_body().push_back(
-		   new FS_Print(*scripting_saver_, new StringConcat(*scripting_saver_, 3, c)));
-		functions_.push_back(main_func);
+		LuaFunction* main_func = new LuaFunction("mission_thread");
+		main_func->init(*scripting_saver_);
+		Variable* var = new Variable(VariableType::Integer, "test");
+		var->init(*scripting_saver_);
+		{
+			ConstexprInteger* i = new ConstexprInteger(5);
+			i->init(*scripting_saver_);
+			FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(true, var, i);
+			f->init(*scripting_saver_);
+			main_func->mutable_body().push_back(f);
+		}
+		{
+			ConstexprInteger* i = new ConstexprInteger(20);
+			i->init(*scripting_saver_);
+			FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(false, var, i);
+			f->init(*scripting_saver_);
+			main_func->mutable_body().push_back(f);
+		}
+		{
+			ConstexprString* c1 = new ConstexprString("NOCOM: ", false);
+			c1->init(*scripting_saver_);
+			ConstexprString* c2 = new ConstexprString("Hello World!", true);
+			c2->init(*scripting_saver_);
+			StringConcat* sc = new StringConcat({c1, c2, var});
+			sc->init(*scripting_saver_);
+			FS_FunctionCall* fc = new FS_FunctionCall(builtin("print").function.get(), nullptr, {sc});
+			fc->init(*scripting_saver_);
+			main_func->mutable_body().push_back(fc);
+		}
+		FS_FunctionCall* fc = new FS_FunctionCall(main_func, nullptr, {});
+		fc->init(*scripting_saver_);
+		FS_LaunchCoroutine* lc = new FS_LaunchCoroutine(fc);
+		lc->init(*scripting_saver_);
+		functions_.push_back(lc);
 	}
 #else
-	functions_.push_back(new Function(*scripting_saver_, kMainFunction, true));
+	{
+		LuaFunction* lf = new LuaFunction("mission_thread");
+		lf->init(*scripting_saver_);
+		FS_FunctionCall* fc = new FS_FunctionCall(lf, nullptr, {});
+		fc->init(*scripting_saver_);
+		FS_LaunchCoroutine* lc = new FS_LaunchCoroutine(fc);
+		lc->init(*scripting_saver_);
+		functions_.push_back(lc);
+	}
 #endif
 	// useful default includes
 	includes_global_.push_back("scripting/coroutine.lua");
@@ -1337,7 +1364,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 		fw.print_f("set_textdomain(\"scenario_%s.wmf\")\n", textdomain.c_str());
 	}
 
-	// builtin includes
+	// Builtin includes
 	if (!includes_global_.empty()) {
 		fw.print_f("\n");
 	}
@@ -1353,17 +1380,14 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 		}
 	}
 
-	// Functions
-	bool main_function_found = false;
-	for (const auto& f : functions_) {
-		main_function_found |= (f->get_name() == kMainFunction && f->get_autostart());
+	// User-defined functions
+	for (const auto& f : scripting_saver_->all<LuaFunction>()) {
 		f->write_lua(fw);
 	}
-	if (!main_function_found) {
-		throw wexception("Main function (%s) not defined or not a coroutine", kMainFunction.c_str());
-	}
 
-	// hand-written includes
+	// Hand-written includes
+	// NOTE: Those should not contain "directly scripted" code but only functions which
+	// can then be invoked from the user-defined functions here (not yet implemented)
 	if (!includes_local_.empty()) {
 		fw.print_f("\n");
 	}
@@ -1373,9 +1397,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 
 	// Main function(s) call
 	for (const auto& f : functions_) {
-		if (f->get_autostart()) {
-			assert(f->parameters().empty());
-			fw.print_f("\nrun(%s)", f->get_name().c_str());
-		}
+		fw.print_f("\n");
+		f->write_lua(fw);
 	}
 }

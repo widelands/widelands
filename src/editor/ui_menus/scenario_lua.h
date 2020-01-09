@@ -45,7 +45,7 @@ private:
 	UI::TabPanel tabs_;
 
 	void update_variables(std::string sel = "");
-	void update_functions(std::string sel = kMainFunction);
+	void update_functions(std::string sel = "");
 	void update_variable_buttons();
 	void update_function_body();
 
@@ -55,18 +55,19 @@ private:
 	void clicked_add_function();
 	void clicked_edit_function();
 	void clicked_delete_function();
-	void toggle_autostart(bool);
 
 	// Functions tab
-	std::unique_ptr<UI::Box> functions_box_, functions_buttonbox_, functions_lowerbox_, functions_sidepanel_;
-	std::unique_ptr<UI::Button> functions_button_add_, functions_button_edit_, functions_button_delete_;
-	std::unique_ptr<UI::Checkbox> functions_autostart_;
+	std::unique_ptr<UI::Box> functions_box_, functions_buttonbox_, functions_lowerbox_,
+	   functions_sidepanel_;
+	std::unique_ptr<UI::Button> functions_button_add_, functions_button_edit_,
+	   functions_button_delete_;
 	std::unique_ptr<UI::Dropdown<std::string>> functions_dropdown_;
 	std::unique_ptr<UI::Listselect<std::string>> functions_body_;
 
 	// Variables tab
 	std::unique_ptr<UI::Box> variables_box_, variables_buttonbox_;
-	std::unique_ptr<UI::Button> variables_button_add_, variables_button_edit_, variables_button_delete_;
+	std::unique_ptr<UI::Button> variables_button_add_, variables_button_edit_,
+	   variables_button_delete_;
 	std::unique_ptr<UI::Table<uintptr_t>> variables_list_;
 };
 
