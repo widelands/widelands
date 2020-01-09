@@ -44,17 +44,18 @@ GameSaver::GameSaver(FileSystem& fs, Game& game) : fs_(fs), game_(game) {
 void GameSaver::save() {
 	ScopedTimer timer("GameSaver::save() took %ums");
 
-	auto set_progress_message = [this](std::string s) {
-		// Progress messages for the autosave during gameloading
-		if (game_.get_loader_ui())
-			game_.get_loader_ui()->step(s);
+	assert(game_.get_loader_ui());
+	auto set_progress_message = [this](std::string text, int step) {
+		game_.get_loader_ui()->step(
+		   step < 0 ? text :
+		              (boost::format(_("Saving game: %1$s (%2$d/%3$d)")) % text % step % 5).str());
 	};
-	set_progress_message(_("Autosaving game…"));
+	set_progress_message(_("Autosaving game…"), -1);
 
 	fs_.ensure_directory_exists("binary");
 
 	log("Game: Writing Preload Data ... ");
-	set_progress_message(_("Game autosave: Elemental data (1/5)"));
+	set_progress_message(_("Elemental data"), 1);
 	{
 		GamePreloadPacket p;
 		p.write(fs_, game_, nullptr);
@@ -83,7 +84,7 @@ void GameSaver::save() {
 	MapObjectSaver* const mos = M.get_map_object_saver();
 
 	log("Game: Writing Player Economies Info ... ");
-	set_progress_message(_("Game autosave: Economies (2/5)"));
+	set_progress_message(_("Economies"), 2);
 	{
 		GamePlayerEconomiesPacket p;
 		p.write(fs_, game_, mos);
@@ -91,7 +92,7 @@ void GameSaver::save() {
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing ai persistent data ... ");
-	set_progress_message(_("Game autosave: AI (3/5)"));
+	set_progress_message(_("AI"), 3);
 	{
 		GamePlayerAiPersistentPacket p;
 		p.write(fs_, game_, mos);
@@ -99,7 +100,7 @@ void GameSaver::save() {
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Command Queue Data ... ");
-	set_progress_message(_("Game autosave: Command queue (4/5)"));
+	set_progress_message(_("Command queue"), 4);
 	{
 		GameCmdQueuePacket p;
 		p.write(fs_, game_, mos);
@@ -107,7 +108,7 @@ void GameSaver::save() {
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Interactive Player Data ... ");
-	set_progress_message(_("Game autosave: Interactive player (5/5)"));
+	set_progress_message(_("Interactive player"), 5);
 	{
 		GameInteractivePlayerPacket p;
 		p.write(fs_, game_, mos);
