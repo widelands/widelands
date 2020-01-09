@@ -92,67 +92,67 @@ std::string localize_month(int8_t month) {
 		/** TRANSLATORS: January. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Jan");
 	case 1:
 		/** TRANSLATORS: February. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Feb");
 	case 2:
 		/** TRANSLATORS: March. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Mar");
 	case 3:
 		/** TRANSLATORS: April. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Apr");
 	case 4:
 		/** TRANSLATORS: May. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("May");
 	case 5:
 		/** TRANSLATORS: June. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Jun");
 	case 6:
 		/** TRANSLATORS: July. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Jul");
 	case 7:
 		/** TRANSLATORS: August. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Aug");
 	case 8:
 		/** TRANSLATORS: September. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Sep");
 	case 9:
 		/** TRANSLATORS: October. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Oct");
 	case 10:
 		/** TRANSLATORS: November. Keep this to 4 letters maximum. */
 		/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 		/** TRANSLATORS: definition if there is one for your language. */
-		/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
+		/** TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html */
 		return _("Nov");
 	case 11:
 		/** TRANSLATORS: December. Keep this to 4 letters maximum. */

@@ -603,7 +603,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 			if (imm != nullptr && imm->get_positions(ebase).front() == field.fcoords) {
 				imm->draw(
-				   gametime, TextToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
+				   gametime, InfoToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
 			}
 		}
 
@@ -611,7 +611,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 			     bob = bob->get_next_bob()) {
 				bob->draw(
-				   ebase, TextToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
+				   ebase, InfoToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
 			}
 		}
 
@@ -799,17 +799,8 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 				select_tool(tools_->current(), EditorTool::Third);
 			return true;
 
-		case SDLK_SPACE:
-			toggle_buildhelp();
-			return true;
-
 		case SDLK_g:
 			toggle_grid();
-			return true;
-
-		case SDLK_c:
-			set_display_flag(
-			   InteractiveBase::dfShowCensus, !get_display_flag(InteractiveBase::dfShowCensus));
 			return true;
 
 		case SDLK_h:

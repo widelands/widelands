@@ -1,7 +1,7 @@
 function immovable_helptext(tribe)
    local helptext = {
       -- TRANSLATORS: Helptext for a reed field
-      default = _("This reed is growing.")
+      default = _("This reed field is growing.")
    }
    local result = ""
    if tribe then

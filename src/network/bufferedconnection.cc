@@ -383,7 +383,7 @@ void BufferedConnection::notify_connected() {
 void BufferedConnection::ignore_rtt_response() {
 
 	// TODO(Notabilis): Implement GUI with display of RTTs and possibility to kick lagging players
-	//                  See https://bugs.launchpad.net/widelands/+bug/1734673
+	//                  See https://github.com/widelands/widelands/issues/3236
 	// TODO(Notabilis): Move this method somewhere where it makes sense.
 
 	uint8_t length_list = 0;
