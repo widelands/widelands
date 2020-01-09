@@ -17,6 +17,10 @@
 --
 --    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``. Each animation needs the parameters ``pictures`` (table of filenames) and ``hotspot`` (2 integer coordinates), and may also define ``fps`` (integer frames per second).
 --
+--    **bridges**: Contains animations for ``normal_e``, ``normal_se``, ``normal_sw``, ``busy_e``, ``busy_se`` and ``busy_sw``.
+--
+--    **bridge_height**: The height in pixels of each bridge at it's summit at 1x scale.
+--
 --    **roads**: The file paths for the tribe's road textures in 3 subtables ``busy``, ``normal`` and ``waterway``.
 --
 --    **resource_indicators**: The names for the resource indicators. This table contains a subtable for each resource name plus a subtable named "" for no resources. Each subtable is an array, in which the index of each entry is the highest amount of resources the indicator may indicate.
@@ -65,10 +69,18 @@ image_dirname = path.dirname(__file__) .. "images/atlanteans/"
 animations = {}
 add_animation(animations, "frontier", image_dirname, "frontier", {3, 12})
 add_animation(animations, "flag", image_dirname, "flag", {15, 35}, 10)
+add_animation(animations, "bridge_normal_e", image_dirname, "bridge_normal_e", {-2, 11})
+add_animation(animations, "bridge_busy_e", image_dirname, "bridge_busy_e", {-2, 11})
+add_animation(animations, "bridge_normal_se", image_dirname, "bridge_normal_se", {5, 2})
+add_animation(animations, "bridge_busy_se", image_dirname, "bridge_busy_se", {5, 2})
+add_animation(animations, "bridge_normal_sw", image_dirname, "bridge_normal_sw", {36, 6})
+add_animation(animations, "bridge_busy_sw", image_dirname, "bridge_busy_sw", {36, 3})
 
 tribes:new_tribe {
    name = "atlanteans",
    animations = animations,
+
+   bridge_height = 8,
 
    -- Image file paths for this tribe's road and waterway textures
    roads = {

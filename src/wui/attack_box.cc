@@ -175,6 +175,7 @@ void AttackBox::update_attack(bool action_on_panel) {
 	soldiers_slider_->set_enabled(max_attackers > 0);
 	more_soldiers_->set_enabled(max_attackers > soldiers_slider_->get_value());
 	less_soldiers_->set_enabled(soldiers_slider_->get_value() > 0);
+	attack_button_->set_enabled(soldiers_slider_->get_value() > 0);
 
 	soldiers_text_->set_text(slider_heading(soldiers_slider_->get_value()));
 
@@ -403,7 +404,8 @@ void AttackBox::ListOfSoldiers::draw(RenderTarget& dst) {
 	int32_t row = 0;
 	for (uint32_t i = 0; i < nr_soldiers; ++i) {
 		Vector2i location(column * kSoldierIconWidth, row * kSoldierIconHeight);
-		soldiers_[i]->draw_info_icon(location, 1.0f, false, &dst);
+		soldiers_[i]->draw_info_icon(
+		   location, 1.0f, Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels, &dst);
 		if (restricted_row_number_) {
 			++row;
 			if (row >= current_size_) {

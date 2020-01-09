@@ -228,7 +228,6 @@ wl_library(graphic_fields_to_draw
     graphic
     graphic_gl_utils
     logic
-    logic_constants
     logic_map_objects
     logic_widelands_geometry
     wui_mapview_pixelfunctions
@@ -251,13 +250,13 @@ wl_library(graphic_terrain_programs
     base_geometry
     base_log
     base_macros
+    graphic
     graphic_fields_to_draw
     graphic_gl_utils
     graphic_image_io
     graphic_surface
     io_filesystem
     logic
-    logic_constants
     logic_map_objects
     logic_map_objects_description_maintainer
     wui_mapview_pixelfunctions
@@ -319,6 +318,8 @@ wl_library(graphic
     style_manager.h
     rendertarget.cc
     rendertarget.h
+    road_segments.cc
+    road_segments.h
   USES_SDL2
   DEPENDS
     base_exceptions

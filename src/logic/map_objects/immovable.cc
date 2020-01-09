@@ -464,7 +464,7 @@ void Immovable::act(Game& game, uint32_t const data) {
 }
 
 void Immovable::draw(uint32_t gametime,
-                     const TextToDraw draw_text,
+                     const InfoToDraw info_to_draw,
                      const Vector2f& point_on_dst,
                      const Widelands::Coords& coords,
                      float scale,
@@ -475,15 +475,16 @@ void Immovable::draw(uint32_t gametime,
 	if (!anim_construction_total_) {
 		dst->blit_animation(point_on_dst, coords, scale, anim_, gametime - animstart_);
 		if (former_building_descr_) {
-			do_draw_info(draw_text, former_building_descr_->descname(), "", point_on_dst, scale, dst);
+			do_draw_info(
+			   info_to_draw, former_building_descr_->descname(), "", point_on_dst, scale, dst);
 		}
 	} else {
-		draw_construction(gametime, draw_text, point_on_dst, coords, scale, dst);
+		draw_construction(gametime, info_to_draw, point_on_dst, coords, scale, dst);
 	}
 }
 
 void Immovable::draw_construction(const uint32_t gametime,
-                                  const TextToDraw draw_text,
+                                  const InfoToDraw info_to_draw,
                                   const Vector2f& point_on_dst,
                                   const Widelands::Coords& coords,
                                   const float scale,
@@ -526,7 +527,7 @@ void Immovable::draw_construction(const uint32_t gametime,
 
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(
-	   draw_text, descr().descname(),
+	   info_to_draw, descr().descname(),
 	   g_gr->styles().color_tag((boost::format(_("%i%% built")) % (100 * done / total)).str(),
 	                            g_gr->styles().building_statistics_style().construction_color()),
 	   point_on_dst, scale, dst);

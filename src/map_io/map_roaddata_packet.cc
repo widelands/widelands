@@ -77,8 +77,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					road.set_owner(egbase.get_player(player_index));
 					road.wallet_ = fr.unsigned_32();
 					road.last_wallet_charge_ = fr.unsigned_32();
-					road.type_ =
-					   static_cast<RoadType>(packet_version >= 5 ? fr.unsigned_8() : fr.unsigned_32());
+					road.busy_ = (packet_version >= 5 ? fr.unsigned_8() : fr.unsigned_32()) > 1;
 					{
 						uint32_t const flag_0_serial = fr.unsigned_32();
 						try {
@@ -195,7 +194,7 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				fw.unsigned_32(r->wallet_);
 				fw.unsigned_32(r->last_wallet_charge_);
 
-				fw.unsigned_8(r->type_);
+				fw.unsigned_8(r->busy_ ? 2 : 1);
 
 				//  serial of flags
 				assert(mos.is_object_known(*r->flags_[0]));

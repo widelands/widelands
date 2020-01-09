@@ -36,8 +36,9 @@
  */
 InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
                                            Section& global_s,
-                                           bool const multiplayer)
-   : InteractiveGameBase(g, global_s, OBSERVER, multiplayer) {
+                                           bool const multiplayer,
+                                           ChatProvider* chat_provider)
+   : InteractiveGameBase(g, global_s, OBSERVER, multiplayer, chat_provider) {
 	add_main_menu();
 
 	add_toolbar_button("wui/menus/statistics_general", "general_stats", _("Statistics"),
@@ -55,12 +56,7 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	toolbar()->add_space(15);
 
 	if (is_multiplayer()) {
-		add_toolbar_button("wui/menus/chat", "chat", _("Chat"), &chat_, true);
-		chat_.open_window = [this] {
-			if (chat_provider_) {
-				GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
-			}
-		};
+		add_chat_ui();
 	}
 
 	finalize_toolbar();
@@ -97,20 +93,21 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 	const float scale = 1.f / given_map_view->view().zoom;
 	const uint32_t gametime = the_game.get_gametime();
 
-	const auto text_to_draw = get_text_to_draw();
+	const auto info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 
+		draw_bridges(dst, &field, gametime, scale);
 		draw_border_markers(field, scale, *fields_to_draw, dst);
 
 		Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 		if (imm != nullptr && imm->get_positions(the_game).front() == field.fcoords) {
-			imm->draw(gametime, text_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
+			imm->draw(gametime, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
 		}
 
 		for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 		     bob = bob->get_next_bob()) {
-			bob->draw(the_game, text_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
+			bob->draw(the_game, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
 		}
 
 		// Draw build help.
@@ -192,39 +189,5 @@ void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_
  * Global in-game keypresses:
  */
 bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
-	if (down)
-		switch (code.sym) {
-		case SDLK_SPACE:
-			toggle_buildhelp();
-			return true;
-
-		case SDLK_c:
-			set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
-			return true;
-
-		case SDLK_g:
-			menu_windows_.stats_general.toggle();
-			return true;
-
-		case SDLK_s:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				new GameMainMenuSaveGame(*this, menu_windows_.savegame);
-			} else
-				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
-			return true;
-
-		case SDLK_RETURN:
-		case SDLK_KP_ENTER:
-			if (chat_provider_) {
-				if (!chat_.window) {
-					GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
-				}
-				return dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
-			}
-			break;
-		default:
-			break;
-		}
-
 	return InteractiveGameBase::handle_key(down, code);
 }

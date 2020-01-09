@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-30 18:50+0000\n"
-"PO-Revision-Date: 2019-05-30 18:52+0000\n"
+"POT-Creation-Date: 2019-12-10 17:11+0000\n"
+"PO-Revision-Date: 2019-12-10 17:18+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -267,6 +267,24 @@ msgstr "Kukoricát vet és arat."
 msgctxt "atlanteans_building"
 msgid "The farmer needs %1% on average to sow and harvest a sheaf of corn."
 msgstr "A földművesnek átlagosan %1% szükséges egy kéve kukorica elvetéséhez és learatásához."
+
+#. TRANSLATORS: Purpose helptext for a building
+#: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/empire/ferry_yard/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/helptexts.lua:16
+msgctxt "building"
+msgid "Builds ferries."
+msgstr ""
+
+#. TRANSLATORS: Note helptext for a building
+#: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/helptexts.lua:21
+#: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/helptexts.lua:21
+#: ../../data/tribes/buildings/productionsites/empire/ferry_yard/helptexts.lua:21
+#: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/helptexts.lua:21
+msgctxt "building"
+msgid "Needs water nearby."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:6
@@ -5812,6 +5830,15 @@ msgstr "Faszenet éget."
 msgctxt "atlanteans_worker"
 msgid "Plants and harvests cornfields."
 msgstr "Feketegyöketet ültet és gyűjt."
+
+#. TRANSLATORS: Helptext for a worker: Ferry
+#: ../../data/tribes/workers/atlanteans/ferry/helptexts.lua:3
+#: ../../data/tribes/workers/barbarians/ferry/helptexts.lua:3
+#: ../../data/tribes/workers/empire/ferry/helptexts.lua:3
+#: ../../data/tribes/workers/frisians/ferry/helptexts.lua:3
+msgctxt "frisians_worker"
+msgid "Ships wares across narrow rivers."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Fish Breeder
 #: ../../data/tribes/workers/atlanteans/fishbreeder/helptexts.lua:3

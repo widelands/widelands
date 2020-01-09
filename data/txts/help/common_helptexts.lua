@@ -45,8 +45,8 @@ end
 function help_toggle_fullscreen_hotkey()
    set_textdomain("texts")
    return
-      -- TRANSLATORS: This is an access key combination. The hotkey is 'f'
-      dl(help_format_hotkey("Ctrl + F"), _"Toggle fullscreen (if supported by the OS)")
+      -- TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+      dl(help_format_hotkey(pgettext("hotkey", "Ctrl + F")), _"Toggle fullscreen (if supported by the OS)")
 end
 
 function help_toggle_minimap_hotkey()

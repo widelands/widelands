@@ -5,7 +5,7 @@ Animations
 
 This article covers how to get your animations into the Widelands engine.
 For information on how to create the animations' images with Blender, see
-`GraphicsDevelopment <https://wl.widelands.org/wiki/GraphicsDevelopment/>`_.
+`GraphicsDevelopment <https://www.widelands.org/wiki/GraphicsDevelopment/>`_.
 
 The Blender export will give you a list of files for each animation.
 We call this a "file" animation.
