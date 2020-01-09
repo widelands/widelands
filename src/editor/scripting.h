@@ -333,7 +333,7 @@ private:
 // The nil constant.
 class ConstexprNil : public Assignable {
 public:
-	// More constructors and as many attributes as there are flavours of nil…
+	// As many constructors and attributes as there are flavours of nil…
 	ConstexprNil() = default;
 	~ConstexprNil() override {
 	}

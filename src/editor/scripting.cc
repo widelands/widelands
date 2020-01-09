@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -941,9 +940,7 @@ ScriptingLoader::ScriptingLoader(FileRead& fr, ScriptingSaver& s) {
 
 		// First load phase: Create all saved objects.
 		for (uint32_t n = fr.unsigned_32(); n; --n) {
-			log("NOCOM ScriptingLoader no.%u ", n);
 			ScriptingObject* a = ScriptingObject::load(fr);
-			log("of type %s\n", typeid(*a).name());
 			list_.emplace(
 			   std::make_pair(a, std::unique_ptr<ScriptingObject::Loader>(a->create_loader())));
 			a->load(fr, *this);
