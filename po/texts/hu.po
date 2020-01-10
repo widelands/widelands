@@ -4,14 +4,14 @@
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2016-2017
 # GunChleoc, 2014
-# litoll <litoll@freemail.hu>, 2016-2017,2019
+# litoll <litoll@freemail.hu>, 2016-2017,2019-2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-22 05:17+0000\n"
-"PO-Revision-Date: 2019-05-05 13:21+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2020-01-09 11:13+0000\n"
 "Last-Translator: litoll <litoll@freemail.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -411,7 +411,12 @@ msgstr "Hely"
 msgid "Toggle building spaces"
 msgstr "Épülethelyek megjelenítése/elrejtése"
 
-#. TRANSLATORS: This is an access key combination. The hotkey is 'f'
+#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+#: ../../data/txts/help/common_helptexts.lua:49
+msgctxt "hotkey"
+msgid "Ctrl + F"
+msgstr ""
+
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Teljes képernyős mód (ha támogatja az OS)"
@@ -517,7 +522,7 @@ msgstr ""
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr ""
+msgstr "Mindig építs egy erdész- és egy favágóházat, hogy ne fogyj ki a farönkökből."
 
 #: ../../data/txts/tips/atlanteans.lua:12
 msgid ""
@@ -649,7 +654,7 @@ msgstr "Mindig küldj geológusokat arra a területre, ahol kutat vagy bányát 
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr "A területed különböző katonai épületekkel növelhető – például őrbódó, erőd, erődház stb."
+msgstr "A területed különböző katonai épületekkel növelhető – például őrbódé, erőd, erődház stb."
 
 #: ../../data/txts/tips/general_game.lua:18
 msgid "Miners will work only if supplied with food."
@@ -780,7 +785,7 @@ msgstr "Ha a csevegőüzenetet a „@játékosnév” kifejezéssel kezded, az �
 msgid ""
 "If the game should crash, don't worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "Ha a játék összeomlana, ne aggódj!\nA játék automatikusan mentésre kerül, így újra betöltheted utána."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7

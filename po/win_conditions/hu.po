@@ -5,15 +5,15 @@
 # Balázs Meskó <meskobalazs@gmail.com>, 2016,2018-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# litoll <litoll@freemail.hu>, 2016
+# litoll <litoll@freemail.hu>, 2016,2020
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-10 07:33+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2020-01-09 11:05+0000\n"
+"Last-Translator: litoll <litoll@freemail.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,7 +33,7 @@ msgstr "Keress ősi ereklyéket. Ha mind megtalálásra kerül, akkor az a csapa
 
 #: ../../data/scripting/win_conditions/artifacts.lua:18
 msgid "Artifacts owned"
-msgstr ""
+msgstr "Birtokolt ereklyék"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:73
 msgid "No Artifacts"
@@ -182,7 +182,7 @@ msgstr "%1$s birtokolta a szárazföld %2$3.0f%%-át (%3$i / %4$i)."
 #. consistent with the translation of the Win condition.
 #: ../../data/scripting/win_conditions/territorial_functions.lua:60
 msgid "Territory percentage"
-msgstr ""
+msgstr "Terület százaléka"
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:195
 msgid "You own more than half of the map’s area."
@@ -220,7 +220,7 @@ msgstr "Minden játékos vagy csapat igyekszik a térképnek több mint a felét
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:56
 msgid "Currently no faction owns more than half of the map’s area."
-msgstr ""
+msgstr "Jelenleg egyik csoport sem birtokolja a térkép területének több mint felét."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
