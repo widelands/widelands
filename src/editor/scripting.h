@@ -54,6 +54,7 @@ enum class VariableType : uint16_t {
 	Nil = 0,
 
 	Integer,
+	Double,
 	Boolean,
 	String,
 	Table,
@@ -64,6 +65,7 @@ enum class VariableType : uint16_t {
 	Player,
 	Message,
 	Objective,
+	Economy,
 
 	MapObject,
 
@@ -116,6 +118,9 @@ enum class VariableType : uint16_t {
 	FerryDescr,
 	SoldierDescr,
 	ShipDescr,
+
+	WareDescr,
+	TribeDescr,
 
 	TerrainDescr,
 	ResourceDescr,

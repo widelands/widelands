@@ -652,6 +652,8 @@ std::string descname(VariableType t) {
 		return _("Nil");
 	case VariableType::Integer:
 		return _("Integer");
+	case VariableType::Double:
+		return _("Double");
 	case VariableType::Boolean:
 		return _("Boolean");
 	case VariableType::String:
@@ -670,6 +672,8 @@ std::string descname(VariableType t) {
 		return _("Message");
 	case VariableType::Objective:
 		return _("Objective");
+	case VariableType::Economy:
+		return _("Economy");
 	case VariableType::MapObject:
 		return _("Map Object");
 	case VariableType::BaseImmovable:
@@ -762,6 +766,10 @@ std::string descname(VariableType t) {
 		return _("Soldier Description");
 	case VariableType::ShipDescr:
 		return _("Ship Description");
+	case VariableType::TribeDescr:
+		return _("Tribe Description");
+	case VariableType::WareDescr:
+		return _("Ware Description");
 	case VariableType::TerrainDescr:
 		return _("Terrain Description");
 	case VariableType::ResourceDescr:
@@ -782,6 +790,7 @@ bool is(VariableType t, VariableType s) {
 	}
 	switch (t) {
 	case VariableType::Integer:
+	case VariableType::Double:
 	case VariableType::Boolean:
 	case VariableType::Table:
 	case VariableType::String:
@@ -791,8 +800,11 @@ bool is(VariableType t, VariableType s) {
 	case VariableType::Player:
 	case VariableType::Message:
 	case VariableType::Objective:
+	case VariableType::Economy:
 	case VariableType::MapObject:
 	case VariableType::MapObjectDescr:
+	case VariableType::TribeDescr:
+	case VariableType::WareDescr:
 	case VariableType::TerrainDescr:
 	case VariableType::ResourceDescr:
 		return false;
@@ -880,36 +892,620 @@ const BuiltinFunctionInfo& builtin(const std::string& name) {
 }
 
 // Do not change the order! Indices are stored in map files!
-// The _() command is not contained here – access it instead via `ConstexprString`'s `translatable`
-// attribute.
+// The _() function is not contained here – access it instead via
+// `ConstexprString`'s `translatable` attribute.
 const BuiltinFunctionInfo* kBuiltinFunctions[] = {
+
+   // Real Lua builtins
+
    new BuiltinFunctionInfo(
       "print",
       []() { return _("Prints debug information to the stdandard output."); },
       new FunctionBase("print",
-                       VariableType::Nil,
-                       VariableType::Nil,
+                       VariableType::Nil, // call on
+                       VariableType::Nil, // returns
                        {std::make_pair("text", VariableType::String)})),
-   /** TRANSLATORS: max is the name of a function parameter */
    new BuiltinFunctionInfo(
       "random_1",
+      /** TRANSLATORS: max is the name of a function parameter */
       []() { return _("Returns a random value between 1 and max."); },
       new FunctionBase("math.random",
-                       VariableType::Nil,
-                       VariableType::Integer,
+                       VariableType::Nil, // call on
+                       VariableType::Integer, // returns
                        {std::make_pair("max", VariableType::Integer)},
-                       false)),
-   /** TRANSLATORS: min and max are names of function parameters */
+                       false /* no spellcheck because of '.' */ )),
    new BuiltinFunctionInfo(
       "random_2",
+      /** TRANSLATORS: min and max are names of function parameters */
       []() { return _("Returns a random value between min and max."); },
       new FunctionBase("math.random",
-                       VariableType::Nil,
-                       VariableType::Integer,
+                       VariableType::Nil, // call on
+                       VariableType::Integer, // returns
                        {std::make_pair("min", VariableType::Integer),
                         std::make_pair("max", VariableType::Integer)},
-                       false)),
-   // NOCOM Add all builtins of all the classes in src/scripting/ here…
+                       false /* no spellcheck because of '.' */ )),
+
+   // Game
+
+   new BuiltinFunctionInfo(
+      "game",
+      []() { return _("Returns the running game instance."); },
+      new FunctionBase("wl.Game",
+                       VariableType::Nil, // call on
+                       VariableType::Game, // returns
+                       {},
+                       false /* no spellcheck because of '.' */ )),
+   new BuiltinFunctionInfo(
+      "save",
+      []() { return _("Saves the game under the given name."); },
+      new FunctionBase("save",
+                       VariableType::Game, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "get_tribe_descr",
+      []() { return _("Returns the description for the tribe with the given name."); },
+      new FunctionBase("get_tribe_description",
+                       VariableType::Game, // call on
+                       VariableType::TribeDescr, // returns
+                       {std::make_pair("name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "get_terrain_descr",
+      []() { return _("Returns the description for the terrain with the given name."); },
+      new FunctionBase("get_terrain_description",
+                       VariableType::Game, // call on
+                       VariableType::TerrainDescr, // returns
+                       {std::make_pair("name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "get_resource_descr",
+      []() { return _("Returns the description for the resource with the given name."); },
+      new FunctionBase("get_resource_description",
+                       VariableType::Game, // call on
+                       VariableType::ResourceDescr, // returns
+                       {std::make_pair("name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "get_immovable_descr",
+      []() { return _("Returns the description for the immovable with the given name."); },
+      new FunctionBase("get_immovable_description",
+                       VariableType::Game, // call on
+                       VariableType::ImmovableDescr, // returns
+                       {std::make_pair("name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "get_building_descr",
+      []() { return _("Returns the description for the building with the given name."); },
+      new FunctionBase("get_building_description",
+                       VariableType::Game, // call on
+                       VariableType::BuildingDescr, // returns
+                       {std::make_pair("name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "get_worker_descr",
+      []() { return _("Returns the description for the worker with the given name."); },
+      new FunctionBase("get_worker_description",
+                       VariableType::Game, // call on
+                       VariableType::WorkerDescr, // returns
+                       {std::make_pair("name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "get_ware_descr",
+      []() { return _("Returns the description for the ware with the given name."); },
+      new FunctionBase("get_ware_description",
+                       VariableType::Game, // call on
+                       VariableType::WareDescr, // returns
+                       {std::make_pair("name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "save_campaign_data",
+      []() { return _("Saves information that can be read by others scenarios."); },
+      new FunctionBase("save_campaign_data",
+                       VariableType::Game, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("campaign_name", VariableType::String),
+                       std::make_pair("scenario_name", VariableType::String),
+                       std::make_pair("data", VariableType::Table)})),
+   new BuiltinFunctionInfo(
+      "read_campaign_data",
+      []() { return _("Read campaign data saved by another scenario."); },
+      new FunctionBase("read_campaign_data",
+                       VariableType::Game, // call on
+                       VariableType::Table, // returns
+                       {std::make_pair("campaign_name", VariableType::String),
+                       std::make_pair("scenario_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "report_result",
+      []() { return _("In an internet game, reports the ending of the game for a certain player to "
+                      "the metaserver. Valid result codes are 0 (lost), 1 (won), and 2 (resigned)."); },
+      new FunctionBase("wl.game.report_result",
+                       VariableType::Nil, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("player", VariableType::Player),
+                       std::make_pair("result", VariableType::Integer),
+                       std::make_pair("additional_info", VariableType::String)},
+                       false /* no spellcheck because of '.' */ )),
+
+   // Player
+
+   new BuiltinFunctionInfo(
+      "place_flag",
+      []() { return _("Place a flag on the given field."); },
+      new FunctionBase("place_flag",
+                       VariableType::Player, // call on
+                       VariableType::Flag, // returns
+                       {std::make_pair("field", VariableType::Field),
+                       std::make_pair("force", VariableType::Boolean)})),
+   new BuiltinFunctionInfo(
+      "place_flag_no_force",
+      []() { return _("Place a flag on the given field."); },
+      new FunctionBase("place_flag",
+                       VariableType::Player, // call on
+                       VariableType::Flag, // returns
+                       {std::make_pair("field", VariableType::Field)})),
+   new BuiltinFunctionInfo(
+      "place_building",
+      []() { return _("Place a building on the given field."); },
+      new FunctionBase("place_building",
+                       VariableType::Player, // call on
+                       VariableType::Building, // returns
+                       {std::make_pair("internal_building_name", VariableType::String),
+                       std::make_pair("field", VariableType::Field),
+                       std::make_pair("constructionsite", VariableType::Boolean),
+                       std::make_pair("force", VariableType::Boolean)})),
+   new BuiltinFunctionInfo(
+      "place_building_no_force",
+      []() { return _("Place a building on the given field."); },
+      new FunctionBase("place_building",
+                       VariableType::Player, // call on
+                       VariableType::Building, // returns
+                       {std::make_pair("internal_building_name", VariableType::String),
+                       std::make_pair("field", VariableType::Field)})),
+   new BuiltinFunctionInfo(
+      "place_ship",
+      []() { return _("Place a ship on the given field."); },
+      new FunctionBase("place_ship",
+                       VariableType::Player, // call on
+                       VariableType::Ship, // returns
+                       {std::make_pair("field", VariableType::Field)})),
+   new BuiltinFunctionInfo(
+      "conquer",
+      []() { return _("Conquer a region for this player."); },
+      new FunctionBase("conquer",
+                       VariableType::Player, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("field", VariableType::Field),
+                       std::make_pair("radius", VariableType::Integer)})),
+   new BuiltinFunctionInfo(
+      "player_get_workers",
+      []() { return _("Returns the number of workers of a certain type in the player’s stock."); },
+      new FunctionBase("get_workers",
+                       VariableType::Player, // call on
+                       VariableType::Integer, // returns
+                       {std::make_pair("internal_worker_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "player_get_wares",
+      []() { return _("Returns the number of wares of a certain type in the player’s stock."); },
+      new FunctionBase("get_wares",
+                       VariableType::Player, // call on
+                       VariableType::Integer, // returns
+                       {std::make_pair("internal_ware_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "send_msg",
+      []() { return _("Sends the player a message. The args table may contain the following keys:\n"
+                      " · 'field' – connect a field with this message\n"
+                      " · 'status' – 'new' (default), 'read', or 'archived'\n"
+                      " · 'popup' – Whether to immediately open the inbox on message reception (true or false)\n"
+                      " · 'icon' – path to the icon to show instead of the default message icon\n"
+                      " · 'heading' – Message header to show instead of 'title'\n"
+                      "All keys in args are optional. args may also be nil."); },
+      new FunctionBase("send_message",
+                       VariableType::Player, // call on
+                       VariableType::Message, // returns
+                       {std::make_pair("title", VariableType::String),
+                       std::make_pair("text", VariableType::String),
+                       std::make_pair("args", VariableType::Table)})),
+   new BuiltinFunctionInfo(
+      "msgbox",
+      []() { return _("Shows a story message box. The args table may contain the following keys:\n"
+                      " · 'field' – center the view on this field\n"
+                      " · 'w' – message box width in pixels (default: 400)\n"
+                      " · 'h' – message box height in pixels (default: 300)\n"
+                      " · 'posx' – horizontal message box position in pixels (default: centered)\n"
+                      " · 'posy' – vertical message box position in pixels (default: centered)\n"
+                      "All keys in args are optional. args may also be nil."); },
+      new FunctionBase("message_box",
+                       VariableType::Player, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("title", VariableType::String),
+                       std::make_pair("text", VariableType::String),
+                       std::make_pair("args", VariableType::Table)})),
+   new BuiltinFunctionInfo(
+      "player_sees",
+      []() { return _("Whether the player can currently see the given field."); },
+      new FunctionBase("sees_field",
+                       VariableType::Player, // call on
+                       VariableType::Boolean, // returns
+                       {std::make_pair("field", VariableType::Field)})),
+   new BuiltinFunctionInfo(
+      "player_seen",
+      []() { return _("Whether the player can currently see or has ever seen the given field."); },
+      new FunctionBase("seen_field",
+                       VariableType::Player, // call on
+                       VariableType::Boolean, // returns
+                       {std::make_pair("field", VariableType::Field)})),
+   new BuiltinFunctionInfo(
+      "player_reveal",
+      []() { return _("Reveal the specified fields to the player until they are explicitly hidden again."); },
+      new FunctionBase("reveal_fields",
+                       VariableType::Player, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("fields", VariableType::Table)})),
+   new BuiltinFunctionInfo(
+      "player_hide",
+      []() { return _("Undo the effects of reveal_fields()."); },
+      new FunctionBase("hide_fields",
+                       VariableType::Player, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("fields", VariableType::Table)})),
+   new BuiltinFunctionInfo(
+      "allow_bld",
+      []() { return _("Allow the player to build the specified buildings."); },
+      new FunctionBase("allow_buildings",
+                       VariableType::Player, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("buildings", VariableType::Table)})),
+   new BuiltinFunctionInfo(
+      "forbid_bld",
+      []() { return _("Forbid the player to build the specified buildings."); },
+      new FunctionBase("forbid_buildings",
+                       VariableType::Player, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("buildings", VariableType::Table)})),
+   new BuiltinFunctionInfo(
+      "scenario_solved",
+      []() { return _("Marks the current scenario as solved."); },
+      new FunctionBase("mark_scenario_as_solved",
+                       VariableType::Player, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("scenario_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "player_ships",
+      []() { return _("Returns an array of all the player’s ships."); },
+      new FunctionBase("get_ships",
+                       VariableType::Player, // call on
+                       VariableType::Table, // returns
+                       {})),
+   new BuiltinFunctionInfo(
+      "player_buildings",
+      []() { return _("Returns an array of all the player’s buildings of the specified type."); },
+      new FunctionBase("get_buildings",
+                       VariableType::Player, // call on
+                       VariableType::Table, // returns
+                       {std::make_pair("internal_building_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "player_suitability",
+      []() { return _("Checks whether the player may build the specified building type on the given field."); },
+      new FunctionBase("get_suitability",
+                       VariableType::Player, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("internal_building_name", VariableType::String),
+                       std::make_pair("field", VariableType::Field)})),
+   new BuiltinFunctionInfo(
+      "switchplayer",
+      []() { return _("Switch to the player with the given player number."); },
+      new FunctionBase("switchplayer",
+                       VariableType::Player, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("player_number", VariableType::Integer)})),
+   new BuiltinFunctionInfo(
+      "player_produced",
+      []() { return _("Returns the number of units the player produced of a given ware "
+                      "since the game was started."); },
+      new FunctionBase("switchplayer",
+                       VariableType::Player, // call on
+                       VariableType::Integer, // returns
+                       {std::make_pair("internal_ware_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "is_attack_forbidden",
+      []() { return _("Returns whether the player is currently forbidden to attack the player "
+                      "with the given player number."); },
+      new FunctionBase("is_attack_forbidden",
+                       VariableType::Player, // call on
+                       VariableType::Boolean, // returns
+                       {std::make_pair("player_number", VariableType::Integer)})),
+   new BuiltinFunctionInfo(
+      "set_attack_forbidden",
+      []() { return _("Sets whether the player is forbidden to attack the player with the given player number."); },
+      new FunctionBase("set_attack_forbidden",
+                       VariableType::Player, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("player_number", VariableType::Integer),
+                       std::make_pair("forbid", VariableType::Boolean)})),
+
+   // Map
+
+   new BuiltinFunctionInfo(
+      "field",
+      []() { return _("Returns the field with the given coordinates."); },
+      new FunctionBase("get_field",
+                       VariableType::Map, // call on
+                       VariableType::Field, // returns
+                       {std::make_pair("x", VariableType::Integer),
+                        std::make_pair("y", VariableType::Integer)})),
+   new BuiltinFunctionInfo(
+      "place_immovable",
+      []() { return _("Places the given 'world' or 'tribe' immovable on the given field."); },
+      new FunctionBase("place_immovable",
+                       VariableType::Map, // call on
+                       VariableType::Immovable, // returns
+                       {std::make_pair("internal_immovable_name", VariableType::String),
+                        std::make_pair("field", VariableType::Field),
+                        std::make_pair("world_or_tribe", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "map_recalc",
+      []() { return _("Needs to be called after changing the raw_height of a field to update "
+                      "slope steepness, buildcaps etc."); },
+      new FunctionBase("recalculate",
+                       VariableType::Map, // call on
+                       VariableType::Nil, // returns
+                       {})),
+   new BuiltinFunctionInfo(
+      "map_recalc_sf",
+      []() { return _("Check again whether the maps allows seafaring. Needs to be called only "
+                      "after changing watery terrains."); },
+      new FunctionBase("recalculate_seafaring",
+                       VariableType::Map, // call on
+                       VariableType::Nil, // returns
+                       {})),
+   new BuiltinFunctionInfo(
+      "map_setport",
+      []() { return _("Sets whether a port may be built at the given coordinates. "
+                      "Returns false if this could not be set."); },
+      new FunctionBase("set_port_space",
+                       VariableType::Map, // call on
+                       VariableType::Boolean, // returns
+                       {std::make_pair("x", VariableType::Integer),
+                       std::make_pair("y", VariableType::Integer),
+                       std::make_pair("allow_port_space", VariableType::Boolean)})),
+
+   // Field
+
+   new BuiltinFunctionInfo(
+      "field_region",
+      []() { return _("Returns an array with all fields within a certain radius of this field."); },
+      new FunctionBase("region",
+                       VariableType::Field, // call on
+                       VariableType::Table, // returns
+                       {std::make_pair("radius", VariableType::Integer)})),
+   new BuiltinFunctionInfo(
+      "field_region_hollow",
+      []() { return _("Returns an array with all fields inside a certain hollow area around this field."); },
+      new FunctionBase("region",
+                       VariableType::Field, // call on
+                       VariableType::Table, // returns
+                       {std::make_pair("outer_radius", VariableType::Integer),
+                       std::make_pair("inner_radius", VariableType::Integer)})),
+   new BuiltinFunctionInfo(
+      "field_caps",
+      []() { return _("Returns whether this field has the given caps. Valid caps are:\n"
+                      " · 'small' (suited for small buildings)\n"
+                      " · 'medium' (suited for  buildings)\n"
+                      " · 'big' (suited for big buildings)\n"
+                      " · 'port' (suited for ports)\n"
+                      " · 'mine' (suited for mines)\n"
+                      " · 'flag' (suited for a flag)\n"
+                      " · 'walkable' (bobs can walk here)\n"
+                      " · 'swimmable' (bobs can swim here)"); },
+      new FunctionBase("has_caps",
+                       VariableType::Field, // call on
+                       VariableType::Boolean, // returns
+                       {std::make_pair("caps", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "field_maxcaps",
+      []() { return _("Returns whether this field has the given caps when "
+                      "not taking nearby immovables into account."); },
+      new FunctionBase("has_max_caps",
+                       VariableType::Field, // call on
+                       VariableType::Boolean, // returns
+                       {std::make_pair("caps", VariableType::String)})),
+
+   // TribeDescr
+
+   new BuiltinFunctionInfo(
+      "tribe_has_bld",
+      []() { return _("Whether this tribe uses a building with the given name."); },
+      new FunctionBase("has_building",
+                       VariableType::TribeDescr, // call on
+                       VariableType::Boolean, // returns
+                       {std::make_pair("internal_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "tribe_has_ware",
+      []() { return _("Whether this tribe uses a ware with the given name."); },
+      new FunctionBase("has_ware",
+                       VariableType::TribeDescr, // call on
+                       VariableType::Boolean, // returns
+                       {std::make_pair("internal_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "tribe_has_worker",
+      []() { return _("Whether this tribe uses a worker with the given name."); },
+      new FunctionBase("has_worker",
+                       VariableType::TribeDescr, // call on
+                       VariableType::Boolean, // returns
+                       {std::make_pair("internal_name", VariableType::String)})),
+
+   // ImmovableDescr
+
+   new BuiltinFunctionInfo(
+      "immo_attr",
+      []() { return _("Whether this immovable has the given attribute."); },
+      new FunctionBase("has_attribute",
+                       VariableType::ImmovableDescr, // call on
+                       VariableType::Boolean, // returns
+                       {std::make_pair("attribute", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "immo_growchance",
+      []() { return _("Calculates the chance of this immovable to grow on the given terrain."); },
+      new FunctionBase("probability_to_grow",
+                       VariableType::ImmovableDescr, // call on
+                       VariableType::Double, // returns
+                       {std::make_pair("terrain", VariableType::TerrainDescr)})),
+
+   // ProductionSiteDescr
+
+   new BuiltinFunctionInfo(
+      "prodsite_prodwares",
+      []() { return _("Returns which wares are produced by a certain production program of this "
+                      "productionsite as a table of {ware_name = ware_amount} pairs."); },
+      new FunctionBase("produced_wares",
+                       VariableType::ProductionSiteDescr, // call on
+                       VariableType::Table, // returns
+                       {std::make_pair("production_program_internal_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "prodsite_recruits",
+      []() { return _("Returns which workers are recruited by a certain production program of this "
+                      "productionsite as a table of {worker_name = worker_amount} pairs."); },
+      new FunctionBase("recruited_workers",
+                       VariableType::ProductionSiteDescr, // call on
+                       VariableType::Table, // returns
+                       {std::make_pair("production_program_internal_name", VariableType::String)})),
+
+   // WareDescr
+
+   new BuiltinFunctionInfo(
+      "waredescr_consumers",
+      []() { return _("Returns an array with the BuildingDescriptions of all buildings "
+                      "of the given tribe that require this ware for production."); },
+      new FunctionBase("consumers",
+                       VariableType::WareDescr, // call on
+                       VariableType::Table, // returns
+                       {std::make_pair("tribe_internal_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "waredescr_producers",
+      []() { return _("Returns an array with the BuildingDescriptions of all buildings "
+                      "of the given tribe that produce this ware."); },
+      new FunctionBase("producers",
+                       VariableType::WareDescr, // call on
+                       VariableType::Table, // returns
+                       {std::make_pair("tribe_internal_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "waredescr_isconstructmat",
+      []() { return _("Returns whether the given tribe needs this ware for any constructionsite."); },
+      new FunctionBase("is_construction_material",
+                       VariableType::WareDescr, // call on
+                       VariableType::Boolean, // returns
+                       {std::make_pair("tribe_internal_name", VariableType::String)})),
+
+   // Economy
+
+   new BuiltinFunctionInfo(
+      "eco_target_get",
+      []() { return _("Returns the target quantity for the given ware/worker in this economy."); },
+      new FunctionBase("target_quantity",
+                       VariableType::Economy, // call on
+                       VariableType::Integer, // returns
+                       {std::make_pair("internal_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "eco_target_set",
+      []() { return _("Sets the target quantity for the given ware/worker in this economy."); },
+      new FunctionBase("set_target_quantity",
+                       VariableType::Economy, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("internal_name", VariableType::String),
+                       std::make_pair("amount", VariableType::Integer)})),
+
+   // MapObject
+
+   new BuiltinFunctionInfo(
+      "mo_destroy",
+      []() { return _("Destroy this map object immediately. May have special effects, "
+                       "e.g. a building will go up in flames."); },
+      new FunctionBase("destroy",
+                       VariableType::MapObject, // call on
+                       VariableType::Nil, // returns
+                       {})),
+   new BuiltinFunctionInfo(
+      "mo_remove",
+      []() { return _("Remove this map object immediately and without any special effects."); },
+      new FunctionBase("remove",
+                       VariableType::MapObject, // call on
+                       VariableType::Nil, // returns
+                       {})),
+
+   // ProductionSite
+
+   new BuiltinFunctionInfo(
+      "togglestartstop",
+      []() { return _("If this productionsite is stopped, start it; otherwise stop it."); },
+      new FunctionBase("toggle_start_stop",
+                       VariableType::ProductionSite, // call on
+                       VariableType::Nil, // returns
+                       {})),
+
+   // Warehouse
+
+   new BuiltinFunctionInfo(
+      "wh_setpol",
+      []() { return _("Set this warehouse’s storage policy for the given ware or worker. "
+                      "Valid policies are 'normal', 'prefer', 'dontstock', and 'remove'."); },
+      new FunctionBase("set_warehouse_policy",
+                       VariableType::Warehouse, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("internal_name", VariableType::String),
+                       std::make_pair("policy", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "wh_getpol",
+      []() { return _("Returns this warehouse’s storage policy for the given ware or worker."); },
+      new FunctionBase("get_warehouse_policy",
+                       VariableType::Warehouse, // call on
+                       VariableType::String, // returns
+                       {std::make_pair("internal_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "wh_exp_start",
+      []() { return _("Starts an expedition from this warehouse if it is a port."); },
+      new FunctionBase("start_expedition",
+                       VariableType::Warehouse, // call on
+                       VariableType::Nil, // returns
+                       {})),
+   new BuiltinFunctionInfo(
+      "wh_exp_cancel",
+      []() { return _("Cancel the preparations for an expedition from this warehouse if it "
+                      "is a port and an expedition is being prepared."); },
+      new FunctionBase("start_expedition",
+                       VariableType::Warehouse, // call on
+                       VariableType::Nil, // returns
+                       {})),
+
+   // Bob
+
+   new BuiltinFunctionInfo(
+      "bob_caps",
+      []() { return _("Returns whether this bob can 'walk' or 'swim'."); },
+      new FunctionBase("has_caps",
+                       VariableType::Bob, // call on
+                       VariableType::Boolean, // returns
+                       {std::make_pair("caps", VariableType::String)})),
+
+   // Ship
+
+   new BuiltinFunctionInfo(
+      "ship_get_wares",
+      []() { return _("Returns the number of wares on this ship."); },
+      new FunctionBase("get_wares",
+                       VariableType::Ship, // call on
+                       VariableType::Integer, // returns
+                       {})),
+   new BuiltinFunctionInfo(
+      "ship_get_workers",
+      []() { return _("Returns the number of workers on this ship."); },
+      new FunctionBase("get_workers",
+                       VariableType::Ship, // call on
+                       VariableType::Integer, // returns
+                       {})),
+   new BuiltinFunctionInfo(
+      "ship_buildport",
+      []() { return _("If this ship is an expedition ship that has found a port space, start "
+                      "building a colonization port. Returns whether colonising was started."); },
+      new FunctionBase("build_colonization_port",
+                       VariableType::Ship, // call on
+                       VariableType::Boolean, // returns
+                       {})),
+
+   // NOCOM These should be all builtin functions of interest to a scenario designer, or did I overlook any?
    nullptr};
 
 /************************************************************

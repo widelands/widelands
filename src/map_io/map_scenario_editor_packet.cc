@@ -47,19 +47,29 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 		upcast(Game, game, &egbase);
 		assert(game);
 		// We are starting a scenario designed with the editor. Now we need to enforce some
-		// MapObject updates because task stacks and act() commands are not properly created in the
-		// editor.
+		// MapObject updates because task stacks, act() commands and the like are not
+		// properly created in the editor.
 		log("NOCOM: MapScenarioEditorPacket::read for games: There´s a LOT left to do!!!\n");
 		const Map& map = egbase.map();
 		const Field* eof = &map[map.max_index()];
 		for (Field* f = &map[0]; f != eof; ++f) {
 			for (Bob* b = f->get_first_bob(); b; b = b->get_next_bob()) {
 				// b->reset_tasks(*game);
+				if (upcast(Worker, w, b)) {
+					if (PlayerImmovable* pi = w->get_location(*game)) {
+						w->set_location(nullptr);
+						w->set_location(pi);
+					}
+				}
 				b->send_signal(*game, "wakeup");
-				b->schedule_act(*game, 10);
+				b->schedule_act(*game, 0);
 			}
 			if (f->get_immovable()) {
-				f->get_immovable()->schedule_act(*game, 10);
+				f->get_immovable()->schedule_act(*game, 0);
+				if (upcast(Flag, flag, f->get_immovable())) {
+					flag->get_economy(wwWARE)->rebalance_supply();
+					flag->get_economy(wwWORKER)->rebalance_supply();
+				}
 			}
 		}
 		return;
@@ -69,6 +79,8 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 
 	eia->functions_.clear();
 	eia->variables_.clear();
+	eia->includes_global_.clear();
+	eia->includes_local_.clear();
 
 	if (!file_exists) {
 		// Not a scenario
@@ -80,10 +92,6 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			eia->finalized_ = fr.unsigned_8();
-			eia->functions_.clear();
-			eia->variables_.clear();
-			eia->includes_global_.clear();
-			eia->includes_local_.clear();
 			if (eia->finalized_) {
 				eia->new_scripting_saver();
 
