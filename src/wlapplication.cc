@@ -311,6 +311,8 @@ WLApplication* WLApplication::get(int const argc, char const** argv) {
 /**
  * Initialize an instance of WLApplication.
  *
+ * Exits with code 2 if the SDL/TTF system is not available.
+ *
  * This constructor is protected \e on \e purpose !
  * Use WLApplication::get() instead and look at the class description.
  *
@@ -371,14 +373,16 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		// We sometimes run into a missing video driver in our CI environment, so we exit 0 to prevent
 		// too frequent failures
 		log("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
-		exit(0);
+		exit(2);
 	}
 
 	SDL_ShowCursor(SDL_DISABLE);
 	g_gr = new Graphic();
 
-	if (TTF_Init() == -1)
-		throw wexception("True Type library did not initialize: %s\n", TTF_GetError());
+	if (TTF_Init() == -1) {
+		log("True Type library did not initialize: %s\n", TTF_GetError());
+		exit(2);
+	}
 
 	UI::g_fh = UI::create_fonthandler(
 	   &g_gr->images(), i18n::get_locale());  // This will create the fontset, so loading it first.
