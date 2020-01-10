@@ -54,9 +54,10 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 		const Field* eof = &map[map.max_index()];
 		for (Field* f = &map[0]; f != eof; ++f) {
 			for (Bob* b = f->get_first_bob(); b; b = b->get_next_bob()) {
-				// b->reset_tasks(*game);
+				b->reset_tasks(*game);
 				if (upcast(Worker, w, b)) {
 					if (PlayerImmovable* pi = w->get_location(*game)) {
+						// Properly assign workers to their intended locations
 						w->set_location(nullptr);
 						w->set_location(pi);
 					}
@@ -67,8 +68,13 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 			if (f->get_immovable()) {
 				f->get_immovable()->schedule_act(*game, 0);
 				if (upcast(Flag, flag, f->get_immovable())) {
+					// Economy updates
 					flag->get_economy(wwWARE)->rebalance_supply();
 					flag->get_economy(wwWORKER)->rebalance_supply();
+				} else if (upcast(Building, b, f->get_immovable())) {
+					// If you had the map open in the editor for an hour, it will
+					// otherwise take an hour until the building starts working…
+					b->leave_time_ = 0;
 				}
 			}
 		}

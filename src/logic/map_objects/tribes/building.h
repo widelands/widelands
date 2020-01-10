@@ -231,6 +231,7 @@ struct NoteBuilding {
 class Building : public PlayerImmovable {
 	friend class BuildingDescr;
 	friend class MapBuildingdataPacket;
+	friend class MapScenarioEditorPacket;
 	friend class Map;
 
 	MO_DESCR(BuildingDescr)
