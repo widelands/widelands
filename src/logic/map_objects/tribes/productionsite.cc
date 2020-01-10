@@ -287,7 +287,6 @@ ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
      program_timer_(false),
      program_time_(0),
      post_timer_(50),
-     statistics_(STATISTICS_VECTOR_LENGTH, false),
      last_stat_percent_(0),
      crude_percent_(0),
      last_program_end_time(0),
@@ -427,37 +426,25 @@ void ProductionSite::calc_statistics() {
 	// last few cycles, but it also formats them as a string and persists them
 	// into a string for reuse when the class is asked for the statistics
 	// string. However this string should only then be constructed.
-	uint8_t pos;
-	uint8_t ok = 0;
-	uint8_t lastOk = 0;
 
-	for (pos = 0; pos < STATISTICS_VECTOR_LENGTH; ++pos) {
-		if (statistics_[pos]) {
-			++ok;
-			if (pos >= STATISTICS_VECTOR_LENGTH / 2)
-				++lastOk;
-		}
-	}
 	// boost::format would treat uint8_t as char
-	const unsigned int percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
-	last_stat_percent_ = percOk;
-
-	const unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
+	const unsigned int percent = get_crude_statistics();
+	const unsigned int lastPercent = last_stat_percent_;
 
 	const std::string perc_str = g_gr->styles().color_tag(
-	   (boost::format(_("%i%%")) % percOk).str(),
-	   (percOk < 33) ? g_gr->styles().building_statistics_style().low_color() :
-	                   (percOk < 66) ? g_gr->styles().building_statistics_style().medium_color() :
+	   (boost::format(_("%i%%")) % percent).str(),
+	   (percent < 33) ? g_gr->styles().building_statistics_style().low_color() :
+	                   (percent < 66) ? g_gr->styles().building_statistics_style().medium_color() :
 	                                   g_gr->styles().building_statistics_style().high_color());
 
-	if (0 < percOk && percOk < 100) {
+	if (0 < percent && percent < 100) {
 		RGBColor color = g_gr->styles().building_statistics_style().high_color();
 		std::string trend;
-		if (lastPercOk > percOk) {
+		if (lastPercent < percent) {
 			trend_ = Trend::kRising;
 			color = g_gr->styles().building_statistics_style().high_color();
 			trend = "+";
-		} else if (lastPercOk < percOk) {
+		} else if (lastPercent > percent) {
 			trend_ = Trend::kFalling;
 			color = g_gr->styles().building_statistics_style().low_color();
 			trend = "-";
@@ -473,6 +460,7 @@ void ProductionSite::calc_statistics() {
 	} else {
 		statistics_string_on_changed_statistics_ = perc_str;
 	}
+	last_stat_percent_ = percent;
 }
 
 /**
@@ -1002,15 +990,11 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 	switch (result) {
 	case ProgramResult::kFailed:
 		failed_skipped_programs_[program_name] = game.get_gametime();
-		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
-		statistics_.push_back(false);
-		calc_statistics();
 		update_crude_statistics(current_duration, false);
+		calc_statistics();
 		break;
 	case ProgramResult::kCompleted:
 		failed_skipped_programs_.erase(program_name);
-		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
-		statistics_.push_back(true);
 		train_workers(game);
 		update_crude_statistics(current_duration, true);
 		calc_statistics();
@@ -1018,6 +1002,7 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 	case ProgramResult::kSkipped:
 		failed_skipped_programs_[program_name] = game.get_gametime();
 		update_crude_statistics(current_duration, false);
+		calc_statistics();
 		break;
 	case ProgramResult::kNone:
 		failed_skipped_programs_.erase(program_name);

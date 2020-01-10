@@ -744,10 +744,10 @@ void MapBuildingdataPacket::read_productionsite(
 				}
 			}
 
-			uint16_t const stats_size = fr.unsigned_16();
-			productionsite.statistics_.resize(stats_size);
-			for (uint32_t i = 0; i < productionsite.statistics_.size(); ++i)
-				productionsite.statistics_[i] = fr.unsigned_8();
+			// uint16_t const stats_size = fr.unsigned_16();
+			// productionsite.statistics_.resize(stats_size);
+			// for (uint32_t i = 0; i < productionsite.statistics_.size(); ++i)
+				// productionsite.statistics_[i] = fr.unsigned_8();
 			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
 			productionsite.production_result_ = fr.c_string();
 
@@ -1224,10 +1224,10 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 		}
 	}
 
-	const uint16_t statistics_size = productionsite.statistics_.size();
-	fw.unsigned_16(statistics_size);
-	for (uint32_t i = 0; i < statistics_size; ++i)
-		fw.unsigned_8(productionsite.statistics_[i]);
+	// const uint16_t statistics_size = productionsite.statistics_.size();
+	// fw.unsigned_16(statistics_size);
+	// for (uint32_t i = 0; i < statistics_size; ++i)
+		// fw.unsigned_8(productionsite.statistics_[i]);
 	fw.string(productionsite.statistics_string_on_changed_statistics_);
 	fw.string(productionsite.production_result());
 
