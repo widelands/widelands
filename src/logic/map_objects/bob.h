@@ -24,7 +24,7 @@
 #include "base/vector.h"
 #include "economy/route.h"
 #include "graphic/animation/diranimations.h"
-#include "logic/map_objects/draw_text.h"
+#include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/walkingdir.h"
 #include "logic/widelands_geometry.h"
@@ -263,7 +263,7 @@ public:
 	// starting field) in pixel space of 'dst' (including scale). The 'scale' is
 	// required to draw the bob in the right size.
 	virtual void draw(const EditorGameBase&,
-	                  const TextToDraw& draw_text,
+	                  const InfoToDraw& info_to_draw,
 	                  const Vector2f& field_on_dst,
 	                  const Coords& coords,
 	                  float scale,

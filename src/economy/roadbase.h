@@ -24,9 +24,9 @@
 
 #include "base/macros.h"
 #include "base/wexception.h"
+#include "graphic/road_segments.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/path.h"
-#include "logic/roadtype.h"
 
 namespace Widelands {
 struct Carrier;
@@ -58,14 +58,10 @@ struct RoadBase : public PlayerImmovable {
 
 	enum FlagId { FlagStart = 0, FlagEnd = 1 };
 
-	RoadBase(const RoadBaseDescr& d, RoadType type);
+	RoadBase(const RoadBaseDescr& d);
 
 	Flag& get_flag(FlagId const flag) const {
 		return *flags_[flag];
-	}
-
-	RoadType get_roadtype() const {
-		return type_;
 	}
 
 	int32_t get_size() const override;
@@ -94,7 +90,7 @@ protected:
 	void cleanup(EditorGameBase&) override;
 
 	/** The road is drawn by the terrain renderer via marked fields. */
-	void draw(uint32_t, TextToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
+	void draw(uint32_t, InfoToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
 	}
 
 	void set_path(EditorGameBase&, const Path&);
@@ -104,6 +100,12 @@ protected:
 
 	virtual void link_into_flags(EditorGameBase&, bool = false);
 
+	virtual RoadSegment road_type_for_drawing() const = 0;
+	void set_roadtype(EditorGameBase&, FCoords, uint8_t, RoadSegment) const;
+	virtual bool is_bridge(const EditorGameBase&, const FCoords&, uint8_t) const {
+		return false;
+	}
+
 	Flag* flags_[2];      ///< start and end flag
 	int32_t flagidx_[2];  ///< index of this road in the flag's road array
 
@@ -112,8 +114,6 @@ protected:
 
 	Path path_;            ///< path goes from start to end
 	uint32_t idle_index_;  ///< index into path where carriers should idle
-
-	RoadType type_;  ///< RoadType
 };
 }  // namespace Widelands
 

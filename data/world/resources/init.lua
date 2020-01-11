@@ -14,9 +14,6 @@
 --
 -- Which resource can be placed where on the map is defined in each terrain's
 -- ``valid_resources`` table.
---
--- The resource names are currently hard-coded in the ``geologist`` worker program
--- (`bug #1713706 <https://bugs.launchpad.net/widelands/+bug/1713706>`_), so we can't add any detectable resources at the moment.
 
 pics_dir = path.dirname(__file__) .. "pics/"
 

@@ -186,7 +186,7 @@ protected:
 	                        const float scale,
 	                        RenderTarget* dst) const;
 	void draw(const EditorGameBase&,
-	          const TextToDraw& draw_text,
+	          const InfoToDraw& info_to_draw,
 	          const Vector2f& field_on_dst,
 	          const Widelands::Coords& coords,
 	          float scale,

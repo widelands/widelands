@@ -58,6 +58,7 @@ struct PlayerSettings {
 };
 
 struct UserSettings {
+	// TODO(k.halfman): make this some const instead of calculating this every time
 	static uint8_t none() {
 		return std::numeric_limits<uint8_t>::max();
 	}
