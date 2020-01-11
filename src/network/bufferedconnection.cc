@@ -242,33 +242,55 @@ void BufferedConnection::start_sending() {
 	// the operating system is currently full.
 	// When done with sending, call the lambda method defined below
 	boost::asio::async_write(
-	   socket_, boost::asio::buffer(nonempty_queue->front()),
+		socket_, boost::asio::buffer(nonempty_queue->front()),
 #ifndef NDEBUG
-	   [this, nonempty_queue](boost::system::error_code ec, std::size_t length) {
+		[this, nonempty_queue](boost::system::error_code ec, std::size_t length) {
 #else
-	   [this, nonempty_queue](boost::system::error_code ec, std::size_t /*length*/) {
+		[this, nonempty_queue](boost::system::error_code ec, std::size_t /*length*/) {
 #endif
-		   std::unique_lock<std::mutex> lock2(mutex_send_);
-		   currently_sending_ = false;
-		   if (!ec) {
-			   // No error: Remove the buffer from the queue
-			   assert(nonempty_queue != nullptr);
-			   assert(!nonempty_queue->empty());
-			   assert(nonempty_queue->front().size() == length);
-			   nonempty_queue->pop();
-			   lock2.unlock();
-			   // Try to send some more data
-			   start_sending();
-		   } else {
-			   if (socket_.is_open()) {
-				   log("[BufferedConnection] Error when sending packet to host (error %i: %s)\n",
-				       ec.value(), ec.message().c_str());
-				   log("[BufferedConnection] Closing socket\n");
-				   socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
-				   socket_.close();
-			   }
-		   }
-	   });
+		std::unique_lock<std::mutex> lock2(mutex_send_);
+		currently_sending_ = false;
+		if (!ec) {
+			// No error: Remove the buffer from the queue
+			assert(nonempty_queue != nullptr);
+			assert(!nonempty_queue->empty());
+			assert(nonempty_queue->front().size() == length);
+			nonempty_queue->pop();
+			lock2.unlock();
+			// Try to send some more data
+			// Don't put too much data in the operating system buffer at once
+			// This doesn't really makes a problem, but results in relatively large
+			// delays with chat messages
+#ifdef __linux__
+			// In Linux, we can get the current buffer size. Make sure it stays small enough
+			// so non-file packets send are not blocked too long
+			int send_buffer_size;
+			ioctl(socket_.native_handle(), TIOCOUTQ, &send_buffer_size);
+			// Magic number ahead: 20 is some experimentally found size for the buffer
+			// It probably depends on the speed of my internet connection, for other systems
+			// other values might be better. But it should always be better than the default
+			while (send_buffer_size > 20 * static_cast<int>(kNetworkBufferSize)) {
+				// Keep the network buffer empty by waiting until it is empty enough
+				std::this_thread::yield();
+				ioctl(socket_.native_handle(), TIOCOUTQ, &send_buffer_size);
+			}
+#else
+			// For other operating systems there might be similar functions, feel free to add
+			// matching code. Otherwise, a simple sleep works well enough.
+			// 5 milliseconds is another experimentally found number
+			std::this_thread::sleep_for(std::chrono::milliseconds(5));
+#endif
+			start_sending();
+		} else {
+			if (socket_.is_open()) {
+				log("[BufferedConnection] Error when sending packet to host (error %i: %s)\n",
+				ec.value(), ec.message().c_str());
+				log("[BufferedConnection] Closing socket\n");
+				socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+				socket_.close();
+			}
+		}
+	});
 }
 
 // This method is run within a thread
@@ -304,6 +326,22 @@ void BufferedConnection::start_receiving() {
 	   });
 }
 
+void reduce_send_buffer(boost::asio::ip::tcp::socket& socket) {
+	// Reduce the size of the send buffer. This will result in (slightly) slower
+	// file transfers but keeps the program responsive (e.g., chat messages are
+	// displayed) while transmitting files
+	boost::system::error_code ec;
+	boost::asio::socket_base::send_buffer_size send_buffer_size;
+	socket.get_option(send_buffer_size, ec);
+	if (!ec && send_buffer_size.value() > 20 * static_cast<int>(kNetworkBufferSize)) {
+		const boost::asio::socket_base::send_buffer_size new_send_buffer_size(20 * kNetworkBufferSize);
+		// NOCOM: Re-enable next line and disable the "#ifdef __linux__" part to test the alternative
+		// socket.set_option(new_send_buffer_size, ec);
+		// Ignore error. When it fails, chat messages will lag while transmitting files.
+		// But nothing really bad happens
+	}
+}
+
 BufferedConnection::BufferedConnection(const NetAddress& host)
    : io_service_(), socket_(io_service_), receive_buffer_(), currently_sending_(false) {
 
@@ -315,6 +353,8 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 	socket_.connect(destination, ec);
 	if (!ec && is_connected()) {
 		log("success.\n");
+
+		reduce_send_buffer(socket_);
 
 		// start_receiving() has to be called before the thread is started,
 		// otherwise the thread terminates again immediately
@@ -351,6 +391,8 @@ BufferedConnection::BufferedConnection(boost::asio::ip::tcp::acceptor& acceptor)
 	log("[BufferedConnection] Accepting connection from %s.\n",
 	    socket_.remote_endpoint().address().to_string().c_str());
 
+	reduce_send_buffer(socket_);
+
 	start_receiving();
 	asio_thread_ = std::thread([this]() {
 		// The output might actually be messed up if it collides with the main thread...
@@ -369,6 +411,8 @@ void BufferedConnection::notify_connected() {
 
 	log("[BufferedConnection] Connection to %s.\n",
 	    socket_.remote_endpoint().address().to_string().c_str());
+
+	reduce_send_buffer(socket_);
 
 	start_receiving();
 	asio_thread_ = std::thread([this]() {
