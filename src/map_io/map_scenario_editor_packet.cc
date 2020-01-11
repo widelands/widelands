@@ -91,6 +91,7 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 	if (!file_exists) {
 		// Not a scenario
 		eia->finalized_ = false;
+		eia->player_relations_.reset(nullptr);
 		return;
 	}
 
@@ -99,8 +100,13 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 		if (packet_version == kCurrentPacketVersion) {
 			eia->finalized_ = fr.unsigned_8();
 			if (eia->finalized_) {
-				eia->new_scripting_saver();
+				const unsigned nrplayers = eia->egbase().map().get_nrplayers();
+				eia->player_relations_.reset(new uint8_t[nrplayers * nrplayers]);
+				for (unsigned i = 0; i < nrplayers * nrplayers; ++i) {
+					eia->player_relations_[i] = fr.unsigned_8();
+				}
 
+				eia->new_scripting_saver();
 				// The ScriptingLoader constructor will immediately load all ScriptingObjects
 				// (triggering both loading phases one after the other)
 				ScriptingLoader loader(fr, eia->scripting_saver());
@@ -117,6 +123,8 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 				for (uint32_t n = fr.unsigned_32(); n; --n) {
 					eia->includes_local_.push_back(fr.c_string());
 				}
+			} else {
+				eia->player_relations_.reset(nullptr);
 			}
 		} else {
 			throw UnhandledVersionError(
@@ -138,6 +146,12 @@ void MapScenarioEditorPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 
 	if (eia->finalized_) {
 		fw.unsigned_8(1);
+
+		const unsigned nrplayers = eia->egbase().map().get_nrplayers();
+		for (unsigned i = 0; i < nrplayers * nrplayers; ++i) {
+			fw.unsigned_8(eia->player_relations_[i]);
+		}
+
 		eia->scripting_saver().save(fw);
 		fw.unsigned_32(eia->functions_.size());
 		for (const auto& f : eia->functions_) {

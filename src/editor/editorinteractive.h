@@ -178,6 +178,9 @@ public:
 	bool finalized() const {
 		return finalized_;
 	}
+	uint8_t* player_relations() {
+		return player_relations_.get();
+	}
 
 	void write_lua(FileWrite&) const;
 
@@ -284,6 +287,10 @@ private:
 	bool is_painting_;
 
 	bool finalized_;
+	// nullptr when not finalized; otherwise an array of size (nrplayers²).
+	// Entry [p1 * nrplayers + p2] is 1 if p1 is forbidden to attack p2; 0 otherwise.
+	// The entry in case p1==p2 refers to p1's team number (0 for no team).
+	std::unique_ptr<uint8_t[]> player_relations_;
 
 	// Returns the reason why finalizing failed, or "" on success
 	std::string try_finalize();

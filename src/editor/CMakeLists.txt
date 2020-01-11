@@ -79,6 +79,8 @@ wl_library(editor
     ui_menus/map_size_box.h
     ui_menus/player_menu.cc
     ui_menus/player_menu.h
+    ui_menus/player_teams_menu.cc
+    ui_menus/player_teams_menu.h
     ui_menus/scenario_infrastructure_settings_window.h
     ui_menus/scenario_infrastructure_settings_window.cc
     ui_menus/scenario_lua.cc

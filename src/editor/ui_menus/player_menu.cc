@@ -139,9 +139,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 	box_.add(&no_of_players_, UI::Box::Resizing::kFullSize);
 	box_.add_space(2 * kMargin);
 
-	const bool finalized = parent.finalized();
-	no_of_players_.set_enabled(!finalized);
-
+	assert(!parent.finalized());
 	const Widelands::Map& map = eia().egbase().map();
 	const Widelands::PlayerNumber nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, kMaxPlayers) {
@@ -149,25 +147,20 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 
 		no_of_players_.add(boost::lexical_cast<std::string>(static_cast<unsigned int>(p)), p, nullptr,
 		                   p == nr_players);
-		if (!finalized) {
-			no_of_players_.selected.connect(
-			   boost::bind(&EditorPlayerMenu::no_of_players_clicked, boost::ref(*this)));
-		}
+		no_of_players_.selected.connect(
+		   boost::bind(&EditorPlayerMenu::no_of_players_clicked, boost::ref(*this)));
 
 		UI::Box* row = new UI::Box(&box_, 0, 0, UI::Box::Horizontal);
 
 		// Name
 		UI::Panel* plr_name;
-		if (finalized) {
-			plr_name = new UI::Textarea(row, map_has_player ? map.get_scenario_player_name(p) : "");
-		} else {
-			UI::EditBox* e = new UI::EditBox(row, 0, 0, 0, UI::PanelStyle::kWui);
-			if (map_has_player) {
-				e->set_text(map.get_scenario_player_name(p));
-			}
-			e->changed.connect(boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
-			plr_name = e;
+
+		UI::EditBox* e = new UI::EditBox(row, 0, 0, 0, UI::PanelStyle::kWui);
+		if (map_has_player) {
+			e->set_text(map.get_scenario_player_name(p));
 		}
+		e->changed.connect(boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
+		plr_name = e;
 
 		// Tribe
 		UI::Dropdown<std::string>* plr_tribe = new UI::Dropdown<std::string>(
@@ -189,12 +182,9 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		   (p <= map.get_nrplayers() && Widelands::tribe_exists(map.get_scenario_player_tribe(p))) ?
 		      map.get_scenario_player_tribe(p) :
 		      "");
-		if (finalized) {
-			plr_tribe->set_enabled(false);
-		} else {
-			plr_tribe->selected.connect(
-			   boost::bind(&EditorPlayerMenu::player_tribe_clicked, boost::ref(*this), p - 1));
-		}
+
+		plr_tribe->selected.connect(
+		   boost::bind(&EditorPlayerMenu::player_tribe_clicked, boost::ref(*this), p - 1));
 
 		// Starting position
 		const Image* player_image =
@@ -206,12 +196,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		   /** TRANSLATORS: Button tooltip in the editor for using a player's starting position tool
 		    */
 		   player_image, _("Set this player’s starting position"));
-		if (finalized) {
-			plr_position->set_enabled(false);
-		} else {
-			plr_position->sigclicked.connect(
-			   boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
-		}
+		plr_position->sigclicked.connect(
+		   boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 
 		// Add the elements to the row
 		row->add(plr_name, UI::Box::Resizing::kFillSpace);
@@ -232,13 +218,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 	}
 
 	no_of_players_.select(nr_players);
-	if (finalized) {
-		// Suppress automatic button activation
-		parent.select_tool(parent.tools()->info, EditorTool::ToolIndex::First);
-	} else {
-		// Init button states
-		set_starting_pos_clicked(1);
-	}
+	// Init button states
+	set_starting_pos_clicked(1);
 	layout();
 }
 

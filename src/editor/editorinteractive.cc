@@ -46,6 +46,7 @@
 #include "editor/ui_menus/main_menu_random_map.h"
 #include "editor/ui_menus/main_menu_save_map.h"
 #include "editor/ui_menus/player_menu.h"
+#include "editor/ui_menus/player_teams_menu.h"
 #include "editor/ui_menus/scenario_lua.h"
 #include "editor/ui_menus/scenario_tool_field_owner_options_menu.h"
 #include "editor/ui_menus/scenario_tool_infrastructure_options_menu.h"
@@ -99,6 +100,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      realtime_(SDL_GetTicks()),
      is_painting_(false),
      finalized_(false),
+     player_relations_(nullptr),
      mainmenu_(toolbar(),
                "dropdown_menu_main",
                0,
@@ -354,13 +356,19 @@ void EditorInteractive::add_tool_menu() {
 	              _("Add or remove port spaces"));
 
 	tool_windows_.players.open_window = [this] {
-		new EditorPlayerMenu(*this, tools()->set_starting_pos, tool_windows_.players);
+		if (finalized_)
+			new EditorPlayerTeamsMenu(*this, tools()->info, tool_windows_.players);
+		else
+			new EditorPlayerMenu(*this, tools()->set_starting_pos, tool_windows_.players);
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Players"), ToolMenuEntry::kPlayers,
 	              g_gr->images().get("images/wui/editor/tools/players.png"), false,
-	              /** TRANSLATORS: Tooltip for the map size tool in the editor */
-	              _("Set number of players and their names, tribes and starting positions"), "P");
+	              /** TRANSLATORS: Tooltip for the players tool in the editor */
+	              finalized_ ? _("Assign players to teams and set hostility relations") :
+	                           /** TRANSLATORS: Tooltip for the players tool in the editor */
+	                 _("Set number of players and their names, tribes and starting positions"),
+	              "P");
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Map origin"), ToolMenuEntry::kMapOrigin,
@@ -1273,6 +1281,9 @@ std::string EditorInteractive::try_finalize() {
 		}
 	}
 	finalized_ = true;
+	const unsigned nrplayers = egbase().map().get_nrplayers();
+	player_relations_.reset(new uint8_t[nrplayers * nrplayers]);
+	memset(player_relations_.get(), 0, sizeof(uint8_t) * nrplayers * nrplayers);
 	new_scripting_saver();
 #ifndef NDEBUG  // NOCOM for testing (in debug builds only)
 	{
@@ -1367,9 +1378,9 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	// Builtin includes
 	if (!includes_global_.empty()) {
 		fw.print_f("\n");
-	}
-	for (const std::string& i : includes_global_) {
-		fw.print_f("include \"%s\"\n", i.c_str());
+		for (const std::string& i : includes_global_) {
+			fw.print_f("include \"%s\"\n", i.c_str());
+		}
 	}
 
 	// Global variables
@@ -1385,17 +1396,33 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 		f->write_lua(fw);
 	}
 
+	// Player relations (yes, these are set via Lua, not saved in the map)
+	fw.print_f("\n");
+	const unsigned nrplayers = map.get_nrplayers();
+	for (unsigned p1 = 0; p1 < nrplayers; ++p1) {
+		for (unsigned p2 = 0; p2 < nrplayers; ++p2) {
+			if (p1 == p2) {
+				fw.print_f(
+				   "wl.Game().players[%u].team = %u\n", p1 + 1, player_relations_[p1 * nrplayers + p2]);
+			} else {
+				fw.print_f("wl.Game().players[%u]:set_attack_forbidden(%u, %s)\n", p1 + 1, p2 + 1,
+				           player_relations_[p1 * nrplayers + p2] ? "true" : "false");
+			}
+		}
+	}
+
 	// Hand-written includes
 	// NOTE: Those should not contain "directly scripted" code but only functions which
 	// can then be invoked from the user-defined functions here (not yet implemented)
 	if (!includes_local_.empty()) {
 		fw.print_f("\n");
-	}
-	for (const std::string& i : includes_local_) {
-		fw.print_f("include \"map:%s\"\n", i.c_str());
+		for (const std::string& i : includes_local_) {
+			fw.print_f("include \"map:%s\"\n", i.c_str());
+		}
 	}
 
 	// Main function(s) call
+	assert(!functions_.empty());
 	for (const auto& f : functions_) {
 		fw.print_f("\n");
 		f->write_lua(fw);
