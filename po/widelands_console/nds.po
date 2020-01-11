@@ -2,13 +2,13 @@
 # Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-25 10:10+0000\n"
-"PO-Revision-Date: 2019-05-25 12:37+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2020-01-02 17:15+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -127,9 +127,9 @@ msgstr " --editor             Stracks de Bewarker opmaken.\n                    
 #: ../../src/wlapplication_messages.cc:96
 msgid ""
 " --ai_training        Enables AI training mode. See\n"
-"                      https://wl.widelands.org/wiki/Ai%20Training/\n"
+"                      https://www.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
-msgstr " --ai_training        Dateien vun künstelken Spelers schrieven. Kiek bidde\n                      https://wl.widelands.org/wiki/Ai%20Training/\n                      an, um to sehen, wo dat gaht, de künstelken Spelers to verbetern."
+msgstr " --ai_training        Dateien vun künstelken Spelers schrieven. Kiek bidde\n                      https://www.widelands.org/wiki/Ai%20Training/\n                      an, um to sehen, wo dat gaht, de künstelken Spelers to verbetern."
 
 #: ../../src/wlapplication_messages.cc:100
 msgid ""
@@ -165,7 +165,7 @@ msgid ""
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
-msgstr " --auto_roadbuild_mode=[jau|nee]\n                      Oder man na de Setten vun eener Straat, wat\n                      nich an dat Stratennett ansluten is, automatisk\n                      klaar tum Stratenbauen wesen sall."
+msgstr " --auto_roadbuild_mode=[jau|nee]\n                      Of man na de Setten vun eener Straat, wat\n                      nich an dat Stratennett ansluten is, automatisk\n                      klaar tum Stratenbauen wesen sall."
 
 #: ../../src/wlapplication_messages.cc:121
 msgid "Graphic options:"
@@ -180,7 +180,7 @@ msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr " --fullscreen=[jau|nee]\n                      Oder de hele Billschirm bruukt worden sall."
+msgstr " --fullscreen=[jau|nee]\n                      Of de hele Billschirm bruukt worden sall."
 
 #: ../../src/wlapplication_messages.cc:130
 msgid " --xres=[...]         Width of the window in pixel."
@@ -206,7 +206,7 @@ msgstr "Instellens för de Fenster-Verwaltung im Speel:"
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
-msgstr " --animate_map_panning=[jau|nee]\n                      Oder automatiske Kaart-Bewegens spöölt worden."
+msgstr " --animate_map_panning=[jau|nee]\n                      Of automatiske Kaart-Bewegens spöölt worden."
 
 #: ../../src/wlapplication_messages.cc:141
 msgid ""
@@ -255,7 +255,7 @@ msgstr " --help               Deese Hülp wiesen"
 #: ../../src/wlapplication_messages.cc:167
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
-"        https://wl.widelands.org/\n"
+"        https://www.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Fehlers mellen? Vörslagen? Kiek uns' Internett-Sied an:\n        https://wl.widelands.org/\n\nHopentlik gefallt di deeses Speel!"
+msgstr "Fehlers mellen? Vörslagen? Kiek uns' Internett-Sied an:\n        https://www.widelands.org/\n\nHopentlik gefallt di deeses Speel!"
