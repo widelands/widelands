@@ -116,9 +116,36 @@ function waterways()
    local o = message_box_objective(plr, ferry_5)
    while #plr:get_buildings("atlanteans_ferry_yard") < 1 do sleep(2500) end
    -- check for goldmine, and waterways with ferries
-   print("NOCOM: check for goldmine, and waterways with ferries")
-
-
+   local field_for_mine = map:get_field(20, 102):region(5)
+   while field_for_mine do
+      sleep(3000)
+      for i,f in pairs(field_for_mine) do
+         if f.immovable and f.immovable.descr.name == "atlanteans_goldmine" then
+            field_for_mine = nil
+            break
+         end
+      end
+   end
+   local waterways = {}
+   while #waterways < 4 do
+      for x = 13, 51 do
+         sleep(250)
+         for y = 67, 100 do
+            local f = map:get_field(x, y)
+            if f.immovable and f.immovable.descr.type_name == "waterway" and
+                  f.get_workers("atlanteans_ferry") > 0 then
+               local ww = f.immovable
+               for i,w in pairs(waterways) do
+                  if w == ww then
+                     ww = nil
+                     break
+                  end
+               end
+               if ww then table.insert(waterways, ww) end
+            end
+         end
+      end
+   end
 
    set_objective_done(o)
    message_box_objective(plr, ferry_6)
