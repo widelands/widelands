@@ -2302,12 +2302,13 @@ void GameHost::handle_file_part(Client& client, RecvPacket& r) {
 	uint32_t part = r.unsigned_32();
 	std::string md5sum = r.string();
 	if (md5sum != file_->md5sum) {
-		log("[Host]: File transfer checksum mismatch %s != %s\n", md5sum.c_str(), file_->md5sum.c_str());
+		log("[Host]: File transfer checksum mismatch %s != %s\n", md5sum.c_str(),
+		    file_->md5sum.c_str());
 		return;  // Surely the file was changed, so we cancel here.
 	}
 	if (part >= file_->parts.size()) {
 		log("[Host]: Warning: Client reports to have received file part %u but we only have %lu\n",
-			part, file_->parts.size());
+		    part, file_->parts.size());
 		return;
 	}
 	if (part == file_->parts.size() - 1) {
