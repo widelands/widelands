@@ -61,4 +61,3 @@ function click_on_panel(panel)
    end
    blocker:lift_blocks()
 end
-
