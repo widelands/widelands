@@ -2214,7 +2214,10 @@ void GameHost::handle_new_file(Client& client) {
 	}
 	send_system_message_code(
 	   "STARTED_SENDING_FILE", file_->filename, d->settings.users.at(client.usernum).name);
-	send_file_part(client.sock_id, 0);
+	// Send all parts to the interested client
+	for (size_t part = 0; part < file_->parts.size(); ++part) {
+		send_file_part(client.sock_id, part);
+	}
 	// Remember client as "currently receiving file"
 	d->settings.users[client.usernum].ready = false;
 	broadcast_setting_user(client.usernum);
@@ -2297,28 +2300,22 @@ void GameHost::handle_file_part(Client& client, RecvPacket& r) {
 		throw DisconnectException("REQUEST_OF_N_E_FILE");
 	}
 	uint32_t part = r.unsigned_32();
-	std::string x = r.string();
-	if (x != file_->md5sum) {
-		log("[Host]: File transfer checksum mismatch %s != %s\n", x.c_str(), file_->md5sum.c_str());
+	std::string md5sum = r.string();
+	if (md5sum != file_->md5sum) {
+		log("[Host]: File transfer checksum mismatch %s != %s\n", md5sum.c_str(), file_->md5sum.c_str());
 		return;  // Surely the file was changed, so we cancel here.
 	}
 	if (part >= file_->parts.size()) {
-		throw DisconnectException("REQUEST_OF_N_E_FILEPART");
+		log("[Host]: Warning: Client reports to have received file part %u but we only have %lu\n",
+			part, file_->parts.size());
+		return;
 	}
 	if (part == file_->parts.size() - 1) {
 		send_system_message_code(
 		   "COMPLETED_FILE_TRANSFER", file_->filename, d->settings.users.at(client.usernum).name);
 		d->settings.users[client.usernum].ready = true;
 		broadcast_setting_user(client.usernum);
-		return;
 	}
-	++part;
-	if (part % 100 == 0) {  // Show Progress message every 100th transfer
-		send_system_message_code("SENDING_FILE_PART",
-		                         (boost::format("%i/%i") % part % (file_->parts.size() + 1)).str(),
-		                         file_->filename, d->settings.users.at(client.usernum).name);
-	}
-	send_file_part(client.sock_id, part);
 }
 
 void GameHost::send_file_part(NetHostInterface::ConnectionId csock_id, uint32_t part) {
