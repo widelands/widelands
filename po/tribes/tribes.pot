@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"POT-Creation-Date: 2020-01-10 12:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -3828,64 +3828,68 @@ msgctxt "immovable"
 msgid "Wheat Field (tiny)"
 msgstr ""
 
-#: ../../data/tribes/init.lua:30
-msgid "Loading tribes: Ships (1/15)"
+#: ../../data/tribes/init.lua:19
+msgid "Loading tribes: %1$s (%2$d/%3$d)"
 msgstr ""
 
-#: ../../data/tribes/init.lua:42
-msgid "Loading tribes: Wares (2/15)"
+#: ../../data/tribes/init.lua:33
+msgid "Ships"
 msgstr ""
 
-#: ../../data/tribes/init.lua:158
-msgid "Loading tribes: Immovables (3/15)"
+#: ../../data/tribes/init.lua:45 ../../data/tribes/scripting/help/init.lua:85
+msgid "Wares"
 msgstr ""
 
-#: ../../data/tribes/init.lua:218
-msgid "Loading tribes: Atlantean workers (4/15)"
+#: ../../data/tribes/init.lua:161 ../../data/tribes/scripting/help/init.lua:106
+msgid "Immovables"
 msgstr ""
 
-#: ../../data/tribes/init.lua:251
-msgid "Loading tribes: Barbarian workers (5/15)"
+#: ../../data/tribes/init.lua:221
+msgid "Atlantean workers"
 msgstr ""
 
-#: ../../data/tribes/init.lua:286
-msgid "Loading tribes: Empire workers (6/15)"
+#: ../../data/tribes/init.lua:254
+msgid "Barbarian workers"
 msgstr ""
 
-#: ../../data/tribes/init.lua:322
-msgid "Loading tribes: Frisian workers (7/15)"
+#: ../../data/tribes/init.lua:289
+msgid "Empire workers"
 msgstr ""
 
-#: ../../data/tribes/init.lua:366
-msgid "Loading tribes: Warehouses (8/15)"
+#: ../../data/tribes/init.lua:325
+msgid "Frisian workers"
 msgstr ""
 
-#: ../../data/tribes/init.lua:388
-msgid "Loading tribes: Atlantean productionsites (9/15)"
+#: ../../data/tribes/init.lua:369
+msgid "Warehouses"
 msgstr ""
 
-#: ../../data/tribes/init.lua:426
-msgid "Loading tribes: Barbarian productionsites (10/15)"
+#: ../../data/tribes/init.lua:391
+msgid "Atlantean productionsites"
 msgstr ""
 
-#: ../../data/tribes/init.lua:471
-msgid "Loading tribes: Empire productionsites (11/15)"
+#: ../../data/tribes/init.lua:429
+msgid "Barbarian productionsites"
 msgstr ""
 
-#: ../../data/tribes/init.lua:515
-msgid "Loading tribes: Frisian productionsites (12/15)"
+#: ../../data/tribes/init.lua:474
+msgid "Empire productionsites"
 msgstr ""
 
-#: ../../data/tribes/init.lua:570
-msgid "Loading tribes: Trainingsites (13/15)"
+#: ../../data/tribes/init.lua:518
+msgid "Frisian productionsites"
 msgstr ""
 
-#: ../../data/tribes/init.lua:587
-msgid "Loading tribes: Militarysites (14/15)"
+#: ../../data/tribes/init.lua:573
+msgid "Trainingsites"
 msgstr ""
 
-#: ../../data/tribes/init.lua:621
-msgid "Loading tribes: Finishing (15/15)"
+#: ../../data/tribes/init.lua:590
+msgid "Militarysites"
+msgstr ""
+
+#: ../../data/tribes/init.lua:624
+msgid "Finishing"
 msgstr ""
 
 #: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:32
@@ -3953,20 +3957,12 @@ msgstr ""
 msgid "Tips"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/init.lua:85
-msgid "Wares"
-msgstr ""
-
 #: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr ""
 
 #: ../../data/tribes/scripting/help/init.lua:99
 msgid "Buildings"
-msgstr ""
-
-#: ../../data/tribes/scripting/help/init.lua:106
-msgid "Immovables"
 msgstr ""
 
 #. TRANSLATORS: This is the name of a starting condition
