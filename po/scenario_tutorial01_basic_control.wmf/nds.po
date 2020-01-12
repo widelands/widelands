@@ -2,13 +2,13 @@
 # Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-12-10 17:11+0000\n"
-"PO-Revision-Date: 2019-12-13 18:11+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2020-01-02 17:13+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -304,8 +304,8 @@ msgstr "Laat uns dat Beschicken verfolgen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
 msgid ""
-"Click on the construction site to have a look at it, then close it again "
-"when you have seen enough."
+"Click on the construction site to have a look at it, then close its window "
+"again when you have seen enough."
 msgstr "Klick de Baustee an, um se genauer antokieken, un maak hör Fenster weer to, wenn du genoog sehn hest."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:204
@@ -373,7 +373,7 @@ msgstr "Over de anner Kant kannst du de rechte Muustaste enerwegens up de Kaart 
 msgid ""
 "The third one is to use the minimap. It is especially useful for traveling "
 "big distances."
-msgstr "Oder du kannst de Lütte Kaart bruuken. Dat is besünners för grote Ofstannen gadelk."
+msgstr "Of du kannst de Lütte Kaart bruuken. Dat is besünners för grote Ofstannen gadelk."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:256
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:258
@@ -600,7 +600,7 @@ msgstr "Ennelk de Straat. Ick maak mi klaar tum Stratenbauen un maak de Straat l
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:398
 msgid ""
 "Or, you can directly click the flag where the road should end, like so:"
-msgstr "Oder du kannst stracks up de Fahn, waar de Straat ennen sall, klicken. Also so:"
+msgstr "Of du kannst stracks up de Fahn, waar de Straat ennen sall, klicken. Also so:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:405
 msgid "Connect the quarry to the headquarters"
