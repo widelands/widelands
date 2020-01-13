@@ -172,7 +172,7 @@ conclusion = {
       p(_[[You’ve lead the expedition to a successful end and founded a new colony. I’ve sent out some geologists – they already report that they’ve found some iron ore.]]) ..
       p(_[[In this scenario, you’ve learned everything about seafaring: how to build ports and ships and how to send out an expedition. Remember that expeditions are sometimes the fastest way to reach essential resources – and sometimes the only one.]]) ..
       p(_[[But I want to speak a word of warning. Ports are like headquarters: they can be attacked by a nearby enemy. While your headquarters has soldiers to defend it, your newly built port won’t. You should therefore avoid settling next to an enemy.]]) ..
-      p(_[[On this map, there is no enemy to fear. As always, you can continue playing and watch how the ships deliver wares to the island when you construct some buildings there. There is also another island where you can build a port.]])
+      p(_[[On this map, there is no enemy to fear. In other games, you should make building one or two military fortifications around your new colonies a priority.]])
    ),
    h = 450
 }
@@ -183,7 +183,7 @@ ferry_1 = {
    title = _"There is more to it…",
    body = (
       h1(_"Another gold mountain") ..
-      p(_[[Now that you have learned all about ships, there is another way of water-based transport I would like you to learn about.]]) ..
+      p(_[[Now that you have learned all about ships, there is another way of water-based transport I would like to teach you.]]) ..
       p(_[[Ships have the advantage that they can carry large quantities of wares and workers at a time, but unfortunately their destinations are limited to a handful of spaces suited for a port.]]) ..
       p(_[[Look at this valley here in the far south. We have found a mountain with gold down here and would like to mine ores from it as well. But the streams seperating it from our main colony are too wide to build bridges and too narrow for ships to pass them. Our roads would have to take long curves, which slows down ware transport a lot.]])
    ),
@@ -257,7 +257,9 @@ ferry_7 = {
    title = _"Congratulations",
    body = (
       h1(_"Congratulations") ..
-      p(_[[You have learnt all there is to learn about ships and ferries! Practice a bit more on this map if you like, or get your captain’s license ready and try out your new skills in a real game…]])
+      p(_[[You have learnt all there is to learn about ships and ferries!]]) ..
+      p(_[[There is also another island where you can build a port if you wish to try launching another expedition.]]) ..
+      p(_[[As always, you can continue playing and practice a bit more on this map if you like, or get your captain’s license ready and try out your new skills in a real game…]])
    ),
    h = 150
 }
