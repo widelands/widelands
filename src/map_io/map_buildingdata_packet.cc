@@ -65,7 +65,7 @@ constexpr uint16_t kCurrentPacketPFBuilding = 1;
 // Responsible for warehouses and expedition bootstraps
 constexpr uint16_t kCurrentPacketVersionWarehouse = 7;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
-constexpr uint16_t kCurrentPacketVersionProductionsite = 7;
+constexpr uint16_t kCurrentPacketVersionProductionsite = 8;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;
 
 void MapBuildingdataPacket::read(FileSystem& fs,
@@ -744,7 +744,20 @@ void MapBuildingdataPacket::read_productionsite(
 				}
 			}
 
-			productionsite.crude_percent_ = fr.unsigned_32();
+			// TODO(hessenfarmer): Savegame compatibility, remove after Build 21.
+			if (packet_version >= 8) {
+				productionsite.crude_percent_ = fr.unsigned_32();
+			} else {
+				uint16_t const stats_size = fr.unsigned_16();
+				uint8_t ok = 0;
+				for (uint32_t i = 0; i < stats_size; ++i) {
+					if (fr.unsigned_8()) {
+						ok++;
+					}
+				}
+				productionsite.crude_percent_ = ok * 1000 / stats_size;
+			}
+
 			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
 			productionsite.production_result_ = fr.c_string();
 
