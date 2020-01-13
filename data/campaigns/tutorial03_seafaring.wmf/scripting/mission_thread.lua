@@ -133,7 +133,7 @@ function waterways()
          for y = 67, 100 do
             local f = map:get_field(x, y)
             if f.immovable and f.immovable.descr.type_name == "waterway" and
-                  f.get_workers("atlanteans_ferry") > 0 then
+                  f.immovable:get_workers("atlanteans_ferry") > 0 then
                local ww = f.immovable
                for i,w in pairs(waterways) do
                   if w == ww then
