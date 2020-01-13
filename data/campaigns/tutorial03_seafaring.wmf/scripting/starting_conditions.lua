@@ -167,23 +167,14 @@ function init_player()
 
    connected_road(plr,map:get_field(33,26).immovable,"r,tr|tr,tr|tr,tr|tr,tr|tl,tr")
 
-   print("AAA")
    connected_road(plr,map:get_field(20,72).immovable, "tr,tr|tr,tr|tr,tl")
-   print("bbb")
    connected_road(plr,map:get_field(20,72).immovable, "l,bl|br,br|r,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r,r")
-   print("ccc")
    connected_road(plr,map:get_field(40,75).immovable, "r,r|r,r|br,br|br,bl|br,bl|bl,bl|bl,l|l,l|l,l|l,l|tl,tl|l,l|l,l|l,l|l,l,bl")
-   print("ddd")
    connected_road(plr,map:get_field(27,83).immovable, "l,l|l,l|l,l|l,l|l,l|bl,bl|bl,bl|br,br|br,bl")
-   print("eee")
    connected_road(plr,map:get_field(16,91).immovable, "br,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r|br,r")
-   print("fff")
    connected_road(plr,map:get_field(37,93).immovable, "tr,r|r,r|r,r|r,r|r,br,r")
-   print("ggg")
    connected_road(plr,map:get_field(47,93).immovable, "br,br|bl,bl|bl,bl|bl,bl|l,l|l,bl")
-   print("hhh")
    connected_road(plr,map:get_field(42,102).immovable, "l,l|l,l|tl,tl|l,tl|l,tl|l,l|l,l|bl,l,bl")
-   print("iii")
    connected_road(plr,map:get_field(30,98).immovable, "l,tl|tl,tl")
 end
 
