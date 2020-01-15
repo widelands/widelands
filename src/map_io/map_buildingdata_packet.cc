@@ -746,16 +746,16 @@ void MapBuildingdataPacket::read_productionsite(
 
 			// TODO(hessenfarmer): Savegame compatibility, remove after Build 21.
 			if (packet_version >= 8) {
-				productionsite.crude_percent_ = fr.unsigned_32();
+				productionsite.actual_percent_ = fr.unsigned_32();
 			} else {
 				uint16_t const stats_size = fr.unsigned_16();
 				uint8_t ok = 0;
-				for (uint32_t i = 0; i < stats_size; ++i) {
+				for (uint16_t i = 0; i < stats_size; ++i) {
 					if (fr.unsigned_8()) {
 						ok++;
 					}
 				}
-				productionsite.crude_percent_ = ok * 1000 / stats_size;
+				productionsite.actual_percent_ = ok * 1000 / stats_size;
 			}
 
 			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
@@ -1234,7 +1234,7 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 		}
 	}
 
-	fw.unsigned_32(productionsite.crude_percent_);
+	fw.unsigned_32(productionsite.actual_percent_);
 	fw.string(productionsite.statistics_string_on_changed_statistics_);
 	fw.string(productionsite.production_result());
 

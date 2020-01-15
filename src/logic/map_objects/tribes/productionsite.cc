@@ -288,12 +288,12 @@ ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
      program_time_(0),
      post_timer_(50),
      last_stat_percent_(0),
-     crude_percent_(0),
+     actual_percent_(0),
      last_program_end_time(0),
      is_stopped_(false),
      default_anim_("idle"),
      main_worker_(-1) {
-	calc_statistics();
+	format_statistics_string();
 }
 
 ProductionSite::~ProductionSite() {
@@ -303,7 +303,7 @@ ProductionSite::~ProductionSite() {
 
 void ProductionSite::load_finish(EditorGameBase& egbase) {
 	Building::load_finish(egbase);
-	calc_statistics();
+	format_statistics_string();
 }
 
 /**
@@ -421,15 +421,13 @@ InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker con
 /**
  * Calculate statistic.
  */
-void ProductionSite::calc_statistics() {
-	// TODO(sirver): this method does too much: it calculates statistics for the
-	// last few cycles, but it also formats them as a string and persists them
-	// into a string for reuse when the class is asked for the statistics
-	// string. However this string should only then be constructed.
+void ProductionSite::format_statistics_string() {
+	// TODO(sirver): this method does too much: it formats the actual statistics
+	// as a string and persists them into a string for reuse when the class is
+	// asked for the statistics string. However this string should only then be constructed.
 
 	// boost::format would treat uint8_t as char
-	const unsigned int percent = get_crude_statistics();
-	const unsigned int lastPercent = last_stat_percent_;
+	const unsigned int percent = get_actual_statistics();
 
 	const std::string perc_str = g_gr->styles().color_tag(
 	   (boost::format(_("%i%%")) % percent).str(),
@@ -440,11 +438,11 @@ void ProductionSite::calc_statistics() {
 	if (0 < percent && percent < 100) {
 		RGBColor color = g_gr->styles().building_statistics_style().high_color();
 		std::string trend;
-		if (lastPercent < percent) {
+		if (last_stat_percent_ < actual_percent_) {
 			trend_ = Trend::kRising;
 			color = g_gr->styles().building_statistics_style().high_color();
 			trend = "+";
-		} else if (lastPercent > percent) {
+		} else if (last_stat_percent_ > actual_percent_) {
 			trend_ = Trend::kFalling;
 			color = g_gr->styles().building_statistics_style().low_color();
 			trend = "-";
@@ -460,7 +458,7 @@ void ProductionSite::calc_statistics() {
 	} else {
 		statistics_string_on_changed_statistics_ = perc_str;
 	}
-	last_stat_percent_ = percent;
+	last_stat_percent_ = actual_percent_;
 }
 
 /**
@@ -990,19 +988,19 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 	switch (result) {
 	case ProgramResult::kFailed:
 		failed_skipped_programs_[program_name] = game.get_gametime();
-		update_crude_statistics(current_duration, false);
-		calc_statistics();
+		update_actual_statistics(current_duration, false);
+		format_statistics_string();
 		break;
 	case ProgramResult::kCompleted:
 		failed_skipped_programs_.erase(program_name);
 		train_workers(game);
-		update_crude_statistics(current_duration, true);
-		calc_statistics();
+		update_actual_statistics(current_duration, true);
+		format_statistics_string();
 		break;
 	case ProgramResult::kSkipped:
 		failed_skipped_programs_[program_name] = game.get_gametime();
-		update_crude_statistics(current_duration, false);
-		calc_statistics();
+		update_actual_statistics(current_duration, false);
+		format_statistics_string();
 		break;
 	case ProgramResult::kNone:
 		failed_skipped_programs_.erase(program_name);
@@ -1020,8 +1018,8 @@ void ProductionSite::train_workers(Game& game) {
 }
 
 void ProductionSite::notify_player(Game& game, uint8_t minutes, FailNotificationType type) {
-	if (last_stat_percent_ == 0 ||
-	    (last_stat_percent_ <= descr().out_of_resource_productivity_threshold() &&
+	if (last_stat_percent_ / 10 == 0 ||
+	    (last_stat_percent_ / 10 <= descr().out_of_resource_productivity_threshold() &&
 	     trend_ == Trend::kFalling)) {
 
 		if (type == FailNotificationType::kFull) {
@@ -1096,7 +1094,7 @@ void ProductionSite::set_default_anim(std::string anim) {
 	default_anim_ = anim;
 }
 
-void ProductionSite::update_crude_statistics(uint32_t duration, const bool produced) {
+void ProductionSite::update_actual_statistics(uint32_t duration, const bool produced) {
 	static const uint32_t duration_cap = 180 * 1000;  // This is highest allowed program duration
 	// just for case something went very wrong...
 	static const uint32_t entire_duration = 10 * 60 * 1000;
@@ -1104,8 +1102,9 @@ void ProductionSite::update_crude_statistics(uint32_t duration, const bool produ
 		duration = duration_cap;
 	}
 	const uint32_t past_duration = entire_duration - duration;
-	crude_percent_ = (crude_percent_ * past_duration + produced * duration * 1000) / entire_duration;
-	assert(crude_percent_ <= 1000);  // be sure we do not go above 100 %
+	actual_percent_ =
+	   (actual_percent_ * past_duration + produced * duration * 1000) / entire_duration;
+	assert(actual_percent_ <= 1000);  // be sure we do not go above 100 %
 }
 
 }  // namespace Widelands
