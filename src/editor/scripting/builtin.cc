@@ -39,9 +39,6 @@ const BuiltinPropertyInfo& builtin_p(const std::string& name) {
 	throw wexception("Unknown builtin property %s", name.c_str());
 }
 
-// NOCOM Double-check whether all HasXXX functions and properties are listed here for their
-// appropriate subclasses
-
 /************************************************************
                      Builtin functions
 ************************************************************/
@@ -588,6 +585,57 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType::Nil, // returns
                        {})),
 
+	// Flag
+
+   new BuiltinFunctionInfo(
+      "flag_get_wares",
+      []() { return _("Returns the number of wares of a certain type currently waiting on this flag."); },
+      new FunctionBase("get_wares",
+                       VariableType::Flag, // call on
+                       VariableType::Integer, // returns
+                       {std::make_pair("ware_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "flag_set_wares",
+      []() { return _("Sets the number of wares of a certain type currently waiting in this flag."); },
+      new FunctionBase("set_wares",
+                       VariableType::Flag, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("ware_name", VariableType::String),
+                       std::make_pair("amount", VariableType::Integer)})),
+   new BuiltinFunctionInfo(
+      "wh_get_workers",
+      []() { return _("Returns the number of workers of a certain type currently stored in this warehouse."); },
+      new FunctionBase("get_workers",
+                       VariableType::Warehouse, // call on
+                       VariableType::Integer, // returns
+                       {std::make_pair("worker_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "wh_set_workers",
+      []() { return _("Sets the number of workers of a certain type currently stored in this warehouse."); },
+      new FunctionBase("set_workers",
+                       VariableType::Warehouse, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("worker_name", VariableType::String),
+                       std::make_pair("amount", VariableType::Integer)})),
+
+	// Road
+
+   new BuiltinFunctionInfo(
+      "road_get_workers",
+      []() { return _("Returns the number of workers of a certain type currently employed on this road."); },
+      new FunctionBase("get_workers",
+                       VariableType::Road, // call on
+                       VariableType::Integer, // returns
+                       {std::make_pair("worker_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "road_set_workers",
+      []() { return _("Sets the number of workers of a certain type currently employed on this road."); },
+      new FunctionBase("set_workers",
+                       VariableType::Road, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("worker_name", VariableType::String),
+                       std::make_pair("amount", VariableType::Integer)})),
+
    // ProductionSite
 
    new BuiltinFunctionInfo(
@@ -597,9 +645,119 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType::ProductionSite, // call on
                        VariableType::Nil, // returns
                        {})),
+   new BuiltinFunctionInfo(
+      "ps_get_workers",
+      []() { return _("Returns the number of workers of a certain type currently employed "
+      "in this productionsite."); },
+      new FunctionBase("get_workers",
+                       VariableType::ProductionSite, // call on
+                       VariableType::Integer, // returns
+                       {std::make_pair("worker_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "ps_set_workers",
+      []() { return _("Sets the number of workers of a certain type currently "
+      "employed in this productionsite."); },
+      new FunctionBase("set_workers",
+                       VariableType::ProductionSite, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("worker_name", VariableType::String),
+                       std::make_pair("amount", VariableType::Integer)})),
+
+	// MilitarySite
+
+   new BuiltinFunctionInfo(
+      "ms_get_soldiers",
+      []() { return _("Returns the number of soldiers matching the given soldier description "
+      "currently garrisoned here. A soldier description is an array that contains "
+      "the levels for health, attack, defense and evade (in this order)."); },
+      new FunctionBase("get_soldiers",
+                       VariableType::MilitarySite, // call on
+                       VariableType::Integer, // returns
+                       {std::make_pair("soldier_descr", VariableType::Table)})),
+   new BuiltinFunctionInfo(
+      "ms_set_soldiers",
+      []() { return _("Sets the number of soldiers garrisoned here. "
+      "The argument is a table of soldier_description:amount pairs. "
+      "A soldier description is an array that contains "
+      "the levels for health, attack, defense and evade (in this order)."); },
+      new FunctionBase("set_soldiers",
+                       VariableType::MilitarySite, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("soldiers", VariableType::Table)})),
+
+	// TrainingSite
+
+   new BuiltinFunctionInfo(
+      "ts_get_soldiers",
+      []() { return _("Returns the number of soldiers matching the given soldier description "
+      "in training here. A soldier description is an array that contains "
+      "the levels for health, attack, defense and evade (in this order)."); },
+      new FunctionBase("get_soldiers",
+                       VariableType::TrainingSite, // call on
+                       VariableType::Integer, // returns
+                       {std::make_pair("soldier_descr", VariableType::Table)})),
+   new BuiltinFunctionInfo(
+      "ts_set_soldiers",
+      []() { return _("Sets the number of soldiers in training here. "
+      "The argument is a table of soldier_description:amount pairs. "
+      "A soldier description is an array that contains "
+      "the levels for health, attack, defense and evade (in this order)."); },
+      new FunctionBase("set_soldiers",
+                       VariableType::TrainingSite, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("soldiers", VariableType::Table)})),
 
    // Warehouse
 
+   new BuiltinFunctionInfo(
+      "wh_get_wares",
+      []() { return _("Returns the number of wares of a certain type currently stored in this warehouse."); },
+      new FunctionBase("get_wares",
+                       VariableType::Warehouse, // call on
+                       VariableType::Integer, // returns
+                       {std::make_pair("ware_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "wh_set_wares",
+      []() { return _("Sets the number of wares of a certain type currently stored in this warehouse."); },
+      new FunctionBase("set_wares",
+                       VariableType::Warehouse, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("ware_name", VariableType::String),
+                       std::make_pair("amount", VariableType::Integer)})),
+   new BuiltinFunctionInfo(
+      "wh_get_workers",
+      []() { return _("Returns the number of workers of a certain type currently stored in this warehouse."); },
+      new FunctionBase("get_workers",
+                       VariableType::Warehouse, // call on
+                       VariableType::Integer, // returns
+                       {std::make_pair("worker_name", VariableType::String)})),
+   new BuiltinFunctionInfo(
+      "wh_set_workers",
+      []() { return _("Sets the number of workers of a certain type currently stored in this warehouse."); },
+      new FunctionBase("set_workers",
+                       VariableType::Warehouse, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("worker_name", VariableType::String),
+                       std::make_pair("amount", VariableType::Integer)})),
+   new BuiltinFunctionInfo(
+      "wh_get_soldiers",
+      []() { return _("Returns the number of soldiers matching the given soldier description "
+      "currently stored in this warehouse. A soldier description is an array that contains "
+      "the levels for health, attack, defense and evade (in this order)."); },
+      new FunctionBase("get_soldiers",
+                       VariableType::Warehouse, // call on
+                       VariableType::Integer, // returns
+                       {std::make_pair("soldier_descr", VariableType::Table)})),
+   new BuiltinFunctionInfo(
+      "wh_set_soldiers",
+      []() { return _("Sets the number of soldiers currently stored in this warehouse. "
+      "The argument is a table of soldier_description:amount pairs. "
+      "A soldier description is an array that contains "
+      "the levels for health, attack, defense and evade (in this order)."); },
+      new FunctionBase("set_soldiers",
+                       VariableType::Warehouse, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("soldiers", VariableType::Table)})),
    new BuiltinFunctionInfo(
       "wh_setpol",
       []() { return _("Set this warehouse’s storage policy for the given ware or worker. "
@@ -667,8 +825,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType::Boolean, // returns
                        {})),
 
-   // NOCOM These should be all builtin functions of interest to a scenario designer, or did I overlook any?
-   nullptr};
+nullptr};
 
 /************************************************************
                       Builtin properties
@@ -688,7 +845,7 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 	_("The speed the game is currently running at in milliseconds per real second."); },
 		new Property("real_speed", true,
 			VariableType::Game, // class
-			VariableType::Nil // type
+			VariableType::Integer // type
 		)),
 	new BuiltinPropertyInfo("desired_speed", []() { return
 	_("Sets the desired speed of the game in milliseconds per real second. "
@@ -866,7 +1023,8 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// Map
 
-	new BuiltinPropertyInfo("map_allows_seafaring", []() { return _("Whether seafaring is possible on this map."); },
+	new BuiltinPropertyInfo("map_allows_seafaring", []() { return
+			_("Whether seafaring is possible on this map."); },
 		new Property("allows_seafaring", true,
 			VariableType::Map, // class
 			VariableType::Boolean // type
@@ -1491,12 +1649,37 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Road, // class
 			VariableType::String // type
 		)),
+	new BuiltinPropertyInfo("road_valid_workers", []() { return
+			_("A table of the workers that can be employed on this road, "
+			"in the format worker_name:number_of_working_positions"); },
+		new Property("valid_workers", true,
+			VariableType::Road, // class
+			VariableType::Table // type
+		)),
 
 	// Building
 
 	new BuiltinPropertyInfo("bld_flag", []() { return _("The flag this building belongs to"); },
 		new Property("flag", true,
 			VariableType::Building, // class
+			VariableType::Flag // type
+		)),
+
+	// MilitarySite
+
+	new BuiltinPropertyInfo("ms_capacity", []() { return
+			_("The maximum number of soldiers that can be garrisoned in this building"); },
+		new Property("max_soldiers", true,
+			VariableType::MilitarySite, // class
+			VariableType::Flag // type
+		)),
+
+	// TrainingSite
+
+	new BuiltinPropertyInfo("ts_capacity", []() { return
+			_("The maximum number of soldiers that can train here at the same time"); },
+		new Property("max_soldiers", true,
+			VariableType::TrainingSite, // class
 			VariableType::Flag // type
 		)),
 
@@ -1531,6 +1714,13 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 		new Property("is_stopped", true,
 			VariableType::ProductionSite, // class
 			VariableType::Boolean // type
+		)),
+	new BuiltinPropertyInfo("ps_valid_workers", []() { return
+			_("A table of the workers that can be employed in this productionsite, "
+			"in the format worker_name:number_of_working_positions"); },
+		new Property("valid_workers", true,
+			VariableType::ProductionSite, // class
+			VariableType::Table // type
 		)),
 
 	// Bob
@@ -1747,11 +1937,4 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Field // type
 		)),
 
-	// //
-
-	// new BuiltinPropertyInfo("", []() { return _(""); },
-		// new Property("", true,
-			// VariableType::, // class
-			// VariableType:: // type
-		// )),
-};
+nullptr};
