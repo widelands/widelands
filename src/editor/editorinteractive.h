@@ -23,7 +23,7 @@
 #include <map>
 #include <memory>
 
-#include "editor/scripting.h"
+#include "editor/scripting/function_statements.h"
 #include "editor/tools/history.h"
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/increase_resources_tool.h"

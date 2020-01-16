@@ -25,6 +25,7 @@
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
+#include "editor/scripting/variable.h"
 #include "ui_basic/messagebox.h"
 
 inline EditorInteractive& ScenarioLuaOptionsMenu::eia() {

@@ -23,7 +23,6 @@
 #include <map>
 #include <memory>
 
-#include "editor/scripting.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"

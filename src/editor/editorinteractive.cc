@@ -1257,6 +1257,11 @@ void EditorInteractive::finalize_clicked() {
 	error.run<UI::Panel::Returncodes>();
 }
 
+// NOCOM for testing (in debug builds only)
+#include "editor/scripting/builtin.h"
+#include "editor/scripting/constexpr.h"
+#include "editor/scripting/variable.h"
+
 std::string EditorInteractive::try_finalize() {
 	if (finalized_) {
 		return _("Already finalized");
@@ -1312,7 +1317,8 @@ std::string EditorInteractive::try_finalize() {
 			c2->init(*scripting_saver_);
 			StringConcat* sc = new StringConcat({c1, c2, var});
 			sc->init(*scripting_saver_);
-			FS_FunctionCall* fc = new FS_FunctionCall(builtin("print").function.get(), nullptr, {sc});
+			FS_FunctionCall* fc =
+			   new FS_FunctionCall(builtin_f("print").function.get(), nullptr, {sc});
 			fc->init(*scripting_saver_);
 			main_func->mutable_body().push_back(fc);
 		}
