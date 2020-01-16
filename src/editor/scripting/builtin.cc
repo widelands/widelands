@@ -21,10 +21,6 @@
 
 #include "editor/scripting/function.h"
 
-/************************************************************
-                 Builtin functions and properties
-************************************************************/
-
 const BuiltinFunctionInfo& builtin_f(const std::string& name) {
 	for (size_t i = 0; kBuiltinFunctions[i]; ++i) {
 		if (kBuiltinFunctions[i]->unique_name == name) {
@@ -45,6 +41,10 @@ const BuiltinPropertyInfo& builtin_p(const std::string& name) {
 
 // NOCOM Double-check whether all HasXXX functions and properties are listed here for their
 // appropriate subclasses
+
+/************************************************************
+                     Builtin functions
+************************************************************/
 
 // Do not change the order! Indices are stored in map files!
 // The _() function is not contained here – access it instead via
@@ -670,6 +670,10 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
    // NOCOM These should be all builtin functions of interest to a scenario designer, or did I overlook any?
    nullptr};
 
+/************************************************************
+                      Builtin properties
+************************************************************/
+
 // Do not change the order! Indices are stored in map files!
 const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
@@ -680,22 +684,28 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Game, // class
 			VariableType::Map // type
 		)),
-	new BuiltinPropertyInfo("real_speed", []() { return _("The speed the game is currently running at in milliseconds per real second."); },
+	new BuiltinPropertyInfo("real_speed", []() { return
+	_("The speed the game is currently running at in milliseconds per real second."); },
 		new Property("real_speed", true,
 			VariableType::Game, // class
 			VariableType::Nil // type
 		)),
-	new BuiltinPropertyInfo("desired_speed", []() { return _("Sets the desired speed of the game in milliseconds per real second. Note that this will not work in network games as expected."); },
+	new BuiltinPropertyInfo("desired_speed", []() { return
+	_("Sets the desired speed of the game in milliseconds per real second. "
+	"Note that this will not work in network games as expected."); },
 		new Property("desired_speed", false,
 			VariableType::Game, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("gametime", []() { return _("The absolute time elapsed since the game was started in milliseconds."); },
+	new BuiltinPropertyInfo("gametime", []() { return
+	_("The absolute time elapsed since the game was started in milliseconds."); },
 		new Property("time", true,
 			VariableType::Game, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("gametype", []() { return _("One string out of ‘undefined’, ‘singleplayer’, ‘netclient’, ‘nethost’, ‘replay’, describing the type of game that is played."); },
+	new BuiltinPropertyInfo("gametype", []() { return
+	_("One string out of ‘undefined’, ‘singleplayer’, ‘netclient’, ‘nethost’, ‘replay’, "
+	"describing the type of game that is played."); },
 		new Property("type", true,
 			VariableType::Game, // class
 			VariableType::String // type
@@ -728,7 +738,8 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Player, // class
 			VariableType::TribeDescr // type
 		)),
-	new BuiltinPropertyInfo("pl_color", []() { return _("The playercolor assigned to this player, in hex notation."); },
+	new BuiltinPropertyInfo("pl_color", []() { return
+	_("The playercolor assigned to this player, in hex notation."); },
 		new Property("color", true,
 			VariableType::Player, // class
 			VariableType::String // type
@@ -743,27 +754,37 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Player, // class
 			VariableType::Boolean // type
 		)),
-	new BuiltinPropertyInfo("pl_see_all", []() { return _("If you set this to true, the map will be completely visible for this player."); },
+	new BuiltinPropertyInfo("pl_see_all", []() { return
+	_("If you set this to true, the map will be completely visible for this player."); },
 		new Property("see_all", true,
 			VariableType::Player, // class
 			VariableType::Boolean // type
 		)),
-	new BuiltinPropertyInfo("pl_allowed_buildings", []() { return _("An array with name:bool values with all buildings that are currently allowed for this player. Note that you can not enable/forbid a building by setting the value. Use allow_buildings() or forbid_buildings() for that."); },
+	new BuiltinPropertyInfo("pl_allowed_buildings", []() { return
+	_("An array with name:bool values with all buildings that are "
+	"currently allowed for this player. Note that you can not enable/forbid "
+	"a building by setting the value. Use allow_buildings() or forbid_buildings() for that."); },
 		new Property("allowed_buildings", true,
 			VariableType::Player, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("pl_objectives", []() { return _("A table of name:Objective. You can change the objectives in this table and it will be reflected in the game. To add a new item, use add_objective()."); },
+	new BuiltinPropertyInfo("pl_objectives", []() { return
+	_("A table of name:Objective. You can change the objectives in this table "
+	"and it will be reflected in the game. To add a new item, use add_objective()."); },
 		new Property("objectives", true,
 			VariableType::Player, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("pl_messages", []() { return _("An array of all the messages sent to the player. Note that you can’t add messages to this array, use send_message() for that."); },
+	new BuiltinPropertyInfo("pl_messages", []() { return
+	_("An array of all the messages sent to the player. Note that you can’t add "
+	"messages to this array, use send_message() for that."); },
 		new Property("messages", true,
 			VariableType::Player, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("pl_inbox", []() { return _("An array of the messages that are either read or new. Note that you can’t add messages to this array, use send_message() for that."); },
+	new BuiltinPropertyInfo("pl_inbox", []() { return
+	_("An array of the messages that are either read or new. Note that "
+	"you can’t add messages to this array, use send_message() for that."); },
 		new Property("inbox", true,
 			VariableType::Player, // class
 			VariableType::Table // type
@@ -771,7 +792,8 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// Objective
 
-	new BuiltinPropertyInfo("obj_name", []() { return _("The internal name, to reference this objective in Player.objectives."); },
+	new BuiltinPropertyInfo("obj_name", []() { return
+	_("The internal name, to reference this objective in Player.objectives."); },
 		new Property("name", true,
 			VariableType::Objective, // class
 			VariableType::String // type
@@ -781,17 +803,22 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Objective, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("obj_body", []() { return _("The complete localized objective text. May use richtext markup."); },
+	new BuiltinPropertyInfo("obj_body", []() { return
+	_("The complete localized objective text. May use richtext markup."); },
 		new Property("body", false,
 			VariableType::Objective, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("obj_visible", []() { return _("Whether this objective is shown in the Objectives menu."); },
+	new BuiltinPropertyInfo("obj_visible", []() { return
+	_("Whether this objective is shown in the Objectives menu."); },
 		new Property("visible", false,
 			VariableType::Objective, // class
 			VariableType::Boolean // type
 		)),
-	new BuiltinPropertyInfo("obj_done", []() { return _("Defines if this objective is already fulfilled. If done is true, the objective will not be shown to the user, no matter what. visible is set to. A savegame will be created when this attribute is changed to true."); },
+	new BuiltinPropertyInfo("obj_done", []() { return
+	_("Defines if this objective is already fulfilled. If done is true, "
+	"the objective will not be shown to the user, no matter what "
+	"visible is set to. A savegame will be created when this attribute is changed to true."); },
 		new Property("done", false,
 			VariableType::Objective, // class
 			VariableType::Boolean // type
@@ -814,7 +841,8 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Message, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("msg_sent", []() { return _("The game time in milliseconds when this message was sent."); },
+	new BuiltinPropertyInfo("msg_sent", []() { return
+	_("The game time in milliseconds when this message was sent."); },
 		new Property("sent", true,
 			VariableType::Message, // class
 			VariableType::Integer // type
@@ -824,7 +852,8 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Message, // class
 			VariableType::Field // type
 		)),
-	new BuiltinPropertyInfo("msg_icon_name", []() { return _("The filename for the icon that is shown with the message title."); },
+	new BuiltinPropertyInfo("msg_icon_name", []() { return
+	_("The filename for the icon that is shown with the message title."); },
 		new Property("icon_name", true,
 			VariableType::Message, // class
 			VariableType::String // type
@@ -847,7 +876,8 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Map, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("map_ports", []() { return _("An array of tables of {x, y} pairs with the coordinates of the port spaces."); },
+	new BuiltinPropertyInfo("map_ports", []() { return
+	_("An array of tables of {x, y} pairs with the coordinates of the port spaces."); },
 		new Property("port_spaces", true,
 			VariableType::Map, // class
 			VariableType::Table // type
@@ -875,22 +905,26 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::TribeDescr, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("td_carrier", []() { return _("The internal name of the carrier type that this tribe uses"); },
+	new BuiltinPropertyInfo("td_carrier", []() { return
+	_("The internal name of the carrier type that this tribe uses"); },
 		new Property("carrier", true,
 			VariableType::TribeDescr, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("td_carrier2", []() { return _("The internal name of the second carrier type that this tribe uses"); },
+	new BuiltinPropertyInfo("td_carrier2", []() { return
+	_("The internal name of the second carrier type that this tribe uses"); },
 		new Property("carrier2", true,
 			VariableType::TribeDescr, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("td_geologist", []() { return _("The internal name of the geologist that this tribe uses"); },
+	new BuiltinPropertyInfo("td_geologist", []() { return
+	_("The internal name of the geologist that this tribe uses"); },
 		new Property("geologist", true,
 			VariableType::TribeDescr, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("td_soldier", []() { return _("The internal name of the soldier that this tribe uses"); },
+	new BuiltinPropertyInfo("td_soldier", []() { return
+	_("The internal name of the soldier that this tribe uses"); },
 		new Property("soldier", true,
 			VariableType::TribeDescr, // class
 			VariableType::String // type
@@ -905,27 +939,32 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::TribeDescr, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("td_buildings", []() { return _("An array with all the BuildingDescriptions this tribe uses"); },
+	new BuiltinPropertyInfo("td_buildings", []() { return
+	_("An array with all the BuildingDescriptions this tribe uses"); },
 		new Property("buildings", true,
 			VariableType::TribeDescr, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("td_workers", []() { return _("An array with all the WorkerDescriptions this tribe uses"); },
+	new BuiltinPropertyInfo("td_workers", []() { return
+	_("An array with all the WorkerDescriptions this tribe uses"); },
 		new Property("workers", true,
 			VariableType::TribeDescr, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("td_wares", []() { return _("An array with all the WareDescriptions this tribe uses"); },
+	new BuiltinPropertyInfo("td_wares", []() { return
+	_("An array with all the WareDescriptions this tribe uses"); },
 		new Property("wares", true,
 			VariableType::TribeDescr, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("td_immovables", []() { return _("An array with all the ImmovableDescriptions this tribe uses"); },
+	new BuiltinPropertyInfo("td_immovables", []() { return
+	_("An array with all the ImmovableDescriptions this tribe uses"); },
 		new Property("immovables", true,
 			VariableType::TribeDescr, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("td_resi", []() { return _("A table with the resource indicators this tribe uses"); },
+	new BuiltinPropertyInfo("td_resi", []() { return
+	_("A table with the resource indicators this tribe uses"); },
 		new Property("resource_indicators", true,
 			VariableType::TribeDescr, // class
 			VariableType::Table // type
@@ -953,7 +992,8 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::MapObjectDescr, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("mo_d_help", []() { return _("The path and filename to the helptext script. Can be empty."); },
+	new BuiltinPropertyInfo("mo_d_help", []() { return
+	_("The path and filename to the helptext script. Can be empty."); },
 		new Property("helptext_script", true,
 			VariableType::MapObjectDescr, // class
 			VariableType::String // type
@@ -961,27 +1001,34 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// ImmovableDescr
 
-	new BuiltinPropertyInfo("immo_d_size", []() { return _("The size of this immovable: 'none', 'small', 'medium', or 'big'"); },
+	new BuiltinPropertyInfo("immo_d_size", []() { return
+	_("The size of this immovable: 'none', 'small', 'medium', or 'big'"); },
 		new Property("size", true,
 			VariableType::ImmovableDescr, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("immo_d_owner_type", []() { return _("'world' for world immovables and 'tribe' for tribe immovables"); },
+	new BuiltinPropertyInfo("immo_d_owner_type", []() { return
+	_("'world' for world immovables and 'tribe' for tribe immovables"); },
 		new Property("owner_type", true,
 			VariableType::ImmovableDescr, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("immo_d_terrain_affinity", []() { return _("A table containing numbers labeled as 'pickiness', 'preferred_fertility', 'preferred_humidity', and 'preferred_temperature', or nil if the immovable has no terrain affinity"); },
+	new BuiltinPropertyInfo("immo_d_terrain_affinity", []() { return
+	_("A table containing numbers labeled as 'pickiness', "
+	"'preferred_fertility', 'preferred_humidity', and 'preferred_temperature', "
+	"or nil if the immovable has no terrain affinity"); },
 		new Property("terrain_affinity", true,
 			VariableType::ImmovableDescr, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("immo_d_species", []() { return _("The localized species name of a tree (empty if this immovable is not a tree)"); },
+	new BuiltinPropertyInfo("immo_d_species", []() { return
+	_("The localized species name of a tree (empty if this immovable is not a tree)"); },
 		new Property("species", true,
 			VariableType::ImmovableDescr, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("immo_d_buildcost", []() { return _("A table of ware-to-count pairs describing the buildcost for the immovable"); },
+	new BuiltinPropertyInfo("immo_d_buildcost", []() { return
+	_("A table of ware-to-count pairs describing the buildcost for the immovable"); },
 		new Property("buildcost", true,
 			VariableType::ImmovableDescr, // class
 			VariableType::Table // type
@@ -999,52 +1046,62 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::BuildingDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("bld_d_workarea_radius", []() { return _("The first workarea radius of the building, or nil in case the building has no workarea"); },
+	new BuiltinPropertyInfo("bld_d_workarea_radius", []() { return
+	_("The first workarea radius of the building, or nil in case the building has no workarea"); },
 		new Property("workarea_radius", true,
 			VariableType::BuildingDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("bld_d_is_mine", []() { return _("Whether this building can be built only on mining plots"); },
+	new BuiltinPropertyInfo("bld_d_is_mine", []() { return
+	_("Whether this building can be built only on mining plots"); },
 		new Property("is_mine", true,
 			VariableType::BuildingDescr, // class
 			VariableType::Boolean // type
 		)),
-	new BuiltinPropertyInfo("bld_d_is_port", []() { return _("Whether this building can be built only on port spaces"); },
+	new BuiltinPropertyInfo("bld_d_is_port", []() { return
+	_("Whether this building can be built only on port spaces"); },
 		new Property("is_port", true,
 			VariableType::BuildingDescr, // class
 			VariableType::Boolean // type
 		)),
-	new BuiltinPropertyInfo("bld_d_buildable", []() { return _("Whether the building can be built directly by the player"); },
+	new BuiltinPropertyInfo("bld_d_buildable", []() { return
+	_("Whether the building can be built directly by the player"); },
 		new Property("buildable", true,
 			VariableType::BuildingDescr, // class
 			VariableType::Boolean // type
 		)),
-	new BuiltinPropertyInfo("bld_d_destructible", []() { return _("Whether the building can be burnt down by the player"); },
+	new BuiltinPropertyInfo("bld_d_destructible", []() { return
+	_("Whether the building can be burnt down by the player"); },
 		new Property("destructible", true,
 			VariableType::BuildingDescr, // class
 			VariableType::Boolean // type
 		)),
-	new BuiltinPropertyInfo("bld_d_enhanced_from", []() { return _("The building type that can be enhanced to this building, or nil if this is not an enhanced building"); },
+	new BuiltinPropertyInfo("bld_d_enhanced_from", []() { return
+	_("The building type that can be enhanced to this building, or nil if this is not an enhanced building"); },
 		new Property("enhanced_from", true,
 			VariableType::BuildingDescr, // class
 			VariableType::BuildingDescr // type
 		)),
-	new BuiltinPropertyInfo("bld_d_enhancement", []() { return _("The building type this building can be enhanced to, or nil if this building is not enhanceable"); },
+	new BuiltinPropertyInfo("bld_d_enhancement", []() { return
+	_("The building type this building can be enhanced to, or nil if this building is not enhanceable"); },
 		new Property("enhancement", true,
 			VariableType::BuildingDescr, // class
 			VariableType::BuildingDescr // type
 		)),
-	new BuiltinPropertyInfo("bld_d_enhancement_cost", []() { return _("The cost for enhancing this building"); },
+	new BuiltinPropertyInfo("bld_d_enhancement_cost", []() { return
+	_("The cost for enhancing this building"); },
 		new Property("enhancement_cost", true,
 			VariableType::BuildingDescr, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("bld_d_returned_wares", []() { return _("The list of wares returned upon dismantling"); },
+	new BuiltinPropertyInfo("bld_d_returned_wares", []() { return
+	_("The list of wares returned upon dismantling"); },
 		new Property("returned_wares", true,
 			VariableType::BuildingDescr, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("bld_d_returned_wares_enhanced", []() { return _("The list of wares returned upon dismantling an enhanced building"); },
+	new BuiltinPropertyInfo("bld_d_returned_wares_enhanced", []() {
+	return _("The list of wares returned upon dismantling an enhanced building"); },
 		new Property("returned_wares_enhanced", true,
 			VariableType::BuildingDescr, // class
 			VariableType::Table // type
@@ -1052,27 +1109,33 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// ProductionSiteDescr
 
-	new BuiltinPropertyInfo("pd_d_inputs", []() { return _("An array of WareDescriptions containing the wares this productionsite needs for its production"); },
+	new BuiltinPropertyInfo("pd_d_inputs", []() { return
+	_("An array of WareDescriptions containing the wares this productionsite needs for its production"); },
 		new Property("inputs", true,
 			VariableType::ProductionSiteDescr, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("pd_d_output_ware_types", []() { return _("An array with WareDescriptions containing the wares this productionsite can produce"); },
+	new BuiltinPropertyInfo("pd_d_output_ware_types", []() { return
+	_("An array with WareDescriptions containing the wares this productionsite can produce"); },
 		new Property("output_ware_types", true,
 			VariableType::ProductionSiteDescr, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("pd_d_output_worker_types", []() { return _("An array with WorkerDescriptions containing the workers this productionsite can recruit"); },
+	new BuiltinPropertyInfo("pd_d_output_worker_types", []() { return
+	_("An array with WorkerDescriptions containing the workers this productionsite can recruit"); },
 		new Property("output_worker_types", true,
 			VariableType::ProductionSiteDescr, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("pd_d_production_programs", []() { return _("An array with the production program names as string"); },
+	new BuiltinPropertyInfo("pd_d_production_programs", []() { return
+	_("An array with the production program names as string"); },
 		new Property("production_programs", true,
 			VariableType::ProductionSiteDescr, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("pd_d_working_positions", []() { return _("An array with WorkerDescriptions containing the workers that need to work here. If several instances of a certain worker type are required, this instance is contained several times."); },
+	new BuiltinPropertyInfo("pd_d_working_positions", []() { return
+	_("An array with WorkerDescriptions containing the workers that need to work here. "
+	"If several instances of a certain worker type are required, this instance is contained several times."); },
 		new Property("working_positions", true,
 			VariableType::ProductionSiteDescr, // class
 			VariableType::Table // type
@@ -1080,12 +1143,14 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// MilitarySiteDescr
 
-	new BuiltinPropertyInfo("ms_d_heal", []() { return _("The number of health healed per second by the militarysite"); },
+	new BuiltinPropertyInfo("ms_d_heal", []() { return
+	_("The number of health healed per second by the militarysite"); },
 		new Property("heal_per_second", true,
 			VariableType::MilitarySiteDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("ms_d_maxsoldiers", []() { return _("The number of soldiers that can be garrisoned at the militarysite"); },
+	new BuiltinPropertyInfo("ms_d_maxsoldiers", []() { return
+	_("The number of soldiers that can be garrisoned at the militarysite"); },
 		new Property("max_number_of_soldiers", true,
 			VariableType::MilitarySiteDescr, // class
 			VariableType::Integer // type
@@ -1093,7 +1158,8 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// WarehouseDescr
 
-	new BuiltinPropertyInfo("wh_d_heal", []() { return _("The number of health healed per second for soldiers in the warehouse"); },
+	new BuiltinPropertyInfo("wh_d_heal", []() { return
+	_("The number of health healed per second for soldiers in the warehouse"); },
 		new Property("heal_per_second", true,
 			VariableType::WarehouseDescr, // class
 			VariableType::Integer // type
@@ -1101,42 +1167,50 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// TrainingSiteDescr
 
-	new BuiltinPropertyInfo("ts_d_min_a", []() { return _("The minimum attack level soldier may start training with"); },
+	new BuiltinPropertyInfo("ts_d_min_a", []() { return
+	_("The minimum attack level soldier may start training with"); },
 		new Property("min_attack", true,
 			VariableType::TrainingSiteDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("ts_d_min_h", []() { return _("The minimum health level soldier may start training with"); },
+	new BuiltinPropertyInfo("ts_d_min_h", []() { return
+	_("The minimum health level soldier may start training with"); },
 		new Property("min_health", true,
 			VariableType::TrainingSiteDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("ts_d_min_d", []() { return _("The minimum defense level soldier may start training with"); },
+	new BuiltinPropertyInfo("ts_d_min_d", []() { return
+	_("The minimum defense level soldier may start training with"); },
 		new Property("min_defense", true,
 			VariableType::TrainingSiteDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("ts_d_min_e", []() { return _("The minimum evade level soldier may start training with"); },
+	new BuiltinPropertyInfo("ts_d_min_e", []() { return
+	_("The minimum evade level soldier may start training with"); },
 		new Property("min_evade", true,
 			VariableType::TrainingSiteDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("ts_d_max_a", []() { return _("The attack level up to which a soldier can train here"); },
+	new BuiltinPropertyInfo("ts_d_max_a", []() { return
+	_("The attack level up to which a soldier can train here"); },
 		new Property("max_attack", true,
 			VariableType::TrainingSiteDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("ts_d_max_h", []() { return _("The health level up to which a soldier can train here"); },
+	new BuiltinPropertyInfo("ts_d_max_h", []() { return
+	_("The health level up to which a soldier can train here"); },
 		new Property("max_health", true,
 			VariableType::TrainingSiteDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("ts_d_max_d", []() { return _("The defense level up to which a soldier can train here"); },
+	new BuiltinPropertyInfo("ts_d_max_d", []() { return
+	_("The defense level up to which a soldier can train here"); },
 		new Property("max_defense", true,
 			VariableType::TrainingSiteDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("ts_d_max_e", []() { return _("The evade level up to which a soldier can train here"); },
+	new BuiltinPropertyInfo("ts_d_max_e", []() { return
+	_("The evade level up to which a soldier can train here"); },
 		new Property("max_evade", true,
 			VariableType::TrainingSiteDescr, // class
 			VariableType::Integer // type
@@ -1144,27 +1218,32 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// WorkerDescr
 
-	new BuiltinPropertyInfo("wd_becomes", []() { return _("The WorkerDescription of the worker this one will level up to or nil if it never levels up."); },
+	new BuiltinPropertyInfo("wd_becomes", []() { return
+	_("The WorkerDescription of the worker this one will level up to or nil if it never levels up."); },
 		new Property("becomes", true,
 			VariableType::WorkerDescr, // class
 			VariableType::WorkerDescr // type
 		)),
-	new BuiltinPropertyInfo("wd_needed_experience", []() { return _("The amount of experience points this worker needs to level up"); },
+	new BuiltinPropertyInfo("wd_needed_experience", []() { return
+	_("The amount of experience points this worker needs to level up"); },
 		new Property("needed_experience", true,
 			VariableType::WorkerDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("wd_buildable", []() { return _("Whether this worker can be built in warehouses"); },
+	new BuiltinPropertyInfo("wd_buildable", []() { return
+	_("Whether this worker can be built in warehouses"); },
 		new Property("buildable", true,
 			VariableType::WorkerDescr, // class
 			VariableType::Boolean // type
 		)),
-	new BuiltinPropertyInfo("wd_buildcost", []() { return _("A table with the buildcost for this worker if it may be created in warehouses"); },
+	new BuiltinPropertyInfo("wd_buildcost", []() { return
+	_("A table with the buildcost for this worker if it may be created in warehouses"); },
 		new Property("buildcost", true,
 			VariableType::WorkerDescr, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("wd_employers", []() { return _("An array with BuildingDescriptions with buildings where this worker can be employed"); },
+	new BuiltinPropertyInfo("wd_employers", []() { return
+	_("An array with BuildingDescriptions with buildings where this worker can be employed"); },
 		new Property("employers", true,
 			VariableType::WorkerDescr, // class
 			VariableType::Table // type
@@ -1192,7 +1271,8 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::SoldierDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("sd_h_base", []() { return _("The number of health points this soldier starts with"); },
+	new BuiltinPropertyInfo("sd_h_base", []() { return
+	_("The number of health points this soldier starts with"); },
 		new Property("base_health", true,
 			VariableType::SoldierDescr, // class
 			VariableType::Integer // type
@@ -1202,12 +1282,14 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::SoldierDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("sd_d_base", []() { return _("The blow absorption percentage this soldier starts with"); },
+	new BuiltinPropertyInfo("sd_d_base", []() { return
+	_("The blow absorption percentage this soldier starts with"); },
 		new Property("base_defense", true,
 			VariableType::SoldierDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("sd_e_base", []() { return _("The evade chance in percent this soldier starts with"); },
+	new BuiltinPropertyInfo("sd_e_base", []() { return
+	_("The evade chance in percent this soldier starts with"); },
 		new Property("base_evade", true,
 			VariableType::SoldierDescr, // class
 			VariableType::Integer // type
@@ -1222,12 +1304,14 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::SoldierDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("sd_d_incr", []() { return _("The blow absorption rate increase gained per defense level in percent points"); },
+	new BuiltinPropertyInfo("sd_d_incr", []() { return
+	_("The blow absorption rate increase gained per defense level in percent points"); },
 		new Property("defense_incr_per_level", true,
 			VariableType::SoldierDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("sd_e_incr", []() { return _("The evade chance increase gained per evade level in percent points"); },
+	new BuiltinPropertyInfo("sd_e_incr", []() { return
+	_("The evade chance increase gained per evade level in percent points"); },
 		new Property("evade_incr_per_level", true,
 			VariableType::SoldierDescr, // class
 			VariableType::Integer // type
@@ -1250,12 +1334,14 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::ResourceDescr, // class
 			VariableType::Boolean // type
 		)),
-	new BuiltinPropertyInfo("rd_max_amount", []() { return _("The highest amount of this resource that can be contained on a field"); },
+	new BuiltinPropertyInfo("rd_max_amount", []() { return
+	_("The highest amount of this resource that can be contained on a field"); },
 		new Property("max_amount", true,
 			VariableType::ResourceDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("rd_representative_image", []() { return _("The path to the image representing this resource in the GUI"); },
+	new BuiltinPropertyInfo("rd_representative_image", []() { return
+	_("The path to the image representing this resource in the GUI"); },
 		new Property("representative_image", true,
 			VariableType::ResourceDescr, // class
 			VariableType::String // type
@@ -1273,37 +1359,44 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::TerrainDescr, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("td_default_resource", []() { return _("The resource that can be found here unless another resource is explicitly placed here. Can be nil."); },
+	new BuiltinPropertyInfo("td_default_resource", []() { return
+	_("The resource that can be found here unless another resource is explicitly placed here. Can be nil."); },
 		new Property("default_resource", true,
 			VariableType::TerrainDescr, // class
 			VariableType::ResourceDescr // type
 		)),
-	new BuiltinPropertyInfo("td_default_resource_amount", []() { return _("The amount of the default resource provided by this terrain"); },
+	new BuiltinPropertyInfo("td_default_resource_amount", []() { return
+	_("The amount of the default resource provided by this terrain"); },
 		new Property("default_resource_amount", true,
 			VariableType::TerrainDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("td_valid_resources", []() { return _("An array of ResourceDescriptions with all valid resources for this terrain"); },
+	new BuiltinPropertyInfo("td_valid_resources", []() { return
+	_("An array of ResourceDescriptions with all valid resources for this terrain"); },
 		new Property("valid_resources", true,
 			VariableType::TerrainDescr, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("td_representative_image", []() { return _("The file path to the representative image"); },
+	new BuiltinPropertyInfo("td_representative_image", []() { return
+	_("The file path to the representative image"); },
 		new Property("representative_image", true,
 			VariableType::TerrainDescr, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("td_temperature", []() { return _("The temperature of this terrain (regarding immovables’ terrain affinity)"); },
+	new BuiltinPropertyInfo("td_temperature", []() { return
+	_("The temperature of this terrain (regarding immovables’ terrain affinity)"); },
 		new Property("temperature", true,
 			VariableType::TerrainDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("td_humidity", []() { return _("The humidity of this terrain (regarding immovables’ terrain affinity)"); },
+	new BuiltinPropertyInfo("td_humidity", []() { return
+	_("The humidity of this terrain (regarding immovables’ terrain affinity)"); },
 		new Property("humidity", true,
 			VariableType::TerrainDescr, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("td_fertility", []() { return _("The fertility of this terrain (regarding immovables’ terrain affinity)"); },
+	new BuiltinPropertyInfo("td_fertility", []() { return
+	_("The fertility of this terrain (regarding immovables’ terrain affinity)"); },
 		new Property("fertility", true,
 			VariableType::TerrainDescr, // class
 			VariableType::Integer // type
@@ -1311,12 +1404,15 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// MapObject
 
-	new BuiltinPropertyInfo("mo_descr", []() { return _("The MapObjectDescr associated with this map object"); },
+	new BuiltinPropertyInfo("mo_descr", []() { return
+	_("The MapObjectDescr associated with this map object"); },
 		new Property("descr", true,
 			VariableType::MapObject, // class
 			VariableType::MapObjectDescr // type
 		)),
-	new BuiltinPropertyInfo("mo_serial", []() { return _("The unique serial number of this map object. Note that this value may not stay constant after saving/loading"); },
+	new BuiltinPropertyInfo("mo_serial", []() { return
+	_("The unique serial number of this map object. "
+	"Note that this value may not stay constant after saving/loading"); },
 		new Property("serial", true,
 			VariableType::MapObject, // class
 			VariableType::Integer // type
@@ -1324,7 +1420,10 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// BaseImmovable
 
-	new BuiltinPropertyInfo("baseimmo_fields", []() { return _("An array of Field that is occupied by this Immovable. If the immovable occupies more than one field (roads or big buildings for example) the first entry in this list will be the main field"); },
+	new BuiltinPropertyInfo("baseimmo_fields", []() { return
+	_("An array of Field that is occupied by this Immovable. "
+	"If the immovable occupies more than one field (roads or big buildings for "
+	"example) the first entry in this list will be the main field"); },
 		new Property("fields", true,
 			VariableType::BaseImmovable, // class
 			VariableType::Table // type
@@ -1340,8 +1439,21 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// Flag
 
-	new BuiltinPropertyInfo("flag_eco", []() { return _("The economy that this flag belongs to. Warning: Since economies can disappear when a player merges them through placing/deleting roads and flags, you must get a fresh economy object every time you call another function on the resulting economy object."); },
-		new Property("economy", true,
+	new BuiltinPropertyInfo("flag_waeco", []() { return
+	_("The ware economy that this flag belongs to. Warning: Since economies "
+	"can disappear when a player merges them through placing/deleting "
+	"roads and flags, you must get a fresh economy object every time you call "
+	"another function on the resulting economy object."); },
+		new Property("ware_economy", true,
+			VariableType::Flag, // class
+			VariableType::Economy // type
+		)),
+	new BuiltinPropertyInfo("flag_woeco", []() { return
+	_("The worker economy that this flag belongs to. Warning: Since economies "
+	"can disappear when a player merges them through placing/deleting "
+	"roads and flags, you must get a fresh economy object every time you call "
+	"another function on the resulting economy object."); },
+		new Property("worker_economy", true,
 			VariableType::Flag, // class
 			VariableType::Economy // type
 		)),
@@ -1350,7 +1462,8 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Flag, // class
 			VariableType::Building // type
 		)),
-	new BuiltinPropertyInfo("flag_roads", []() { return _("The roads leading to the flag. Directions can be 'tr', 'r', 'br', 'bl', 'l', and 'tl'."); },
+	new BuiltinPropertyInfo("flag_roads", []() { return
+	_("The roads leading to the flag. Directions can be 'tr', 'r', 'br', 'bl', 'l', and 'tl'."); },
 		new Property("roads", true,
 			VariableType::Flag, // class
 			VariableType::Table // type
@@ -1389,7 +1502,8 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// ConstructionSite
 
-	new BuiltinPropertyInfo("cs_building", []() { return _("The name of the building under construction"); },
+	new BuiltinPropertyInfo("cs_building", []() { return
+	_("The name of the building under construction"); },
 		new Property("building", true,
 			VariableType::ConstructionSite, // class
 			VariableType::String // type
@@ -1397,12 +1511,14 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// Warehouse
 
-	new BuiltinPropertyInfo("wh_portdock", []() { return _("The PortDock associated with this port, or nil if this warehouse is not a port."); },
+	new BuiltinPropertyInfo("wh_portdock", []() { return
+	_("The PortDock associated with this port, or nil if this warehouse is not a port."); },
 		new Property("portdock", true,
 			VariableType::Warehouse, // class
 			VariableType::PortDock // type
 		)),
-	new BuiltinPropertyInfo("wh_exp_in_p", []() { return _("Whether this is a port and an expedition is being prepared here"); },
+	new BuiltinPropertyInfo("wh_exp_in_p", []() { return
+	_("Whether this is a port and an expedition is being prepared here"); },
 		new Property("expedition_in_progress", true,
 			VariableType::Warehouse, // class
 			VariableType::Boolean // type
@@ -1410,7 +1526,8 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// ProductionSite
 
-	new BuiltinPropertyInfo("ps_stopped", []() { return _("Whether this productionsite is currently stopped"); },
+	new BuiltinPropertyInfo("ps_stopped", []() { return
+	_("Whether this productionsite is currently stopped"); },
 		new Property("is_stopped", true,
 			VariableType::ProductionSite, // class
 			VariableType::Boolean // type
@@ -1418,7 +1535,8 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// Bob
 
-	new BuiltinPropertyInfo("bob_field", []() { return _("The field this bob is currently located on"); },
+	new BuiltinPropertyInfo("bob_field", []() { return
+	_("The field this bob is currently located on"); },
 		new Property("field", true,
 			VariableType::Bob, // class
 			VariableType::Field // type
@@ -1431,22 +1549,29 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Ship, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("ship_destination", []() { return _("The port dock this ship is heading to, or nil if it has no destination"); },
+	new BuiltinPropertyInfo("ship_destination", []() { return
+	_("The port dock this ship is heading to, or nil if it has no destination"); },
 		new Property("destination", true,
 			VariableType::Ship, // class
 			VariableType::PortDock // type
 		)),
-	new BuiltinPropertyInfo("ship_last_portdock", []() { return _("nil if no port was ever visited or the last portdock was destroyed; otherwise the port dock of the last visited port"); },
+	new BuiltinPropertyInfo("ship_last_portdock", []() { return
+	_("nil if no port was ever visited or the last portdock was destroyed; "
+	"otherwise the port dock of the last visited port"); },
 		new Property("last_portdock", true,
 			VariableType::Ship, // class
 			VariableType::PortDock // type
 		)),
-	new BuiltinPropertyInfo("ship_state", []() { return _("What this ship is currently doing: 'transport', 'exp_scouting', 'exp_found_port_space', 'exp_colonizing', 'sink_request', or 'sink_animation'"); },
+	new BuiltinPropertyInfo("ship_state", []() { return
+	_("What this ship is currently doing: 'transport', 'exp_scouting', "
+	"'exp_found_port_space', 'exp_colonizing', 'sink_request', or 'sink_animation'"); },
 		new Property("state", true,
 			VariableType::Ship, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("ship_island_explore_direction", []() { return _("The direction if the ship is an expedition ship sailing around an island. Valid values are 'cw', 'ccw', and nil."); },
+	new BuiltinPropertyInfo("ship_island_explore_direction", []() { return
+	_("The direction if the ship is an expedition ship sailing "
+	"around an island. Valid values are 'cw', 'ccw', and nil."); },
 		new Property("island_explore_direction", false,
 			VariableType::Ship, // class
 			VariableType::String // type
@@ -1459,7 +1584,13 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Worker, // class
 			VariableType::Player // type
 		)),
-	new BuiltinPropertyInfo("worker_location", []() { return _("The location where this worker is situated. This will be either a Building, Road, Flag or nil. Note that a worker that is stored in a warehouse has a location nil. A worker that is out working (e.g. hunter) has as a location his building. A stationed soldier has his military building as location. Workers on transit usually have the Road they are currently on as location."); },
+	new BuiltinPropertyInfo("worker_location", []() { return
+	_("The location where this worker is situated. "
+	"This will be either a Building, Road, Flag or nil. "
+	"Note that a worker that is stored in a warehouse has a location nil. "
+	"A worker that is out working (e.g. hunter) has as a location his building. "
+	"A stationed soldier has his military building as location. "
+	"Workers on transit usually have the Road they are currently on as location."); },
 		new Property("location", true,
 			VariableType::Worker, // class
 			VariableType::PlayerImmovable // type
@@ -1500,27 +1631,39 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Field, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("f_height", []() { return _("The height of this field. Note though that if you change this value too much, all surrounding fields will also change their heights because the slope is constrained. If you are changing the height of many terrains at once, use raw_height instead and then call recalculate() afterwards."); },
+	new BuiltinPropertyInfo("f_height", []() { return
+	_("The height of this field. Note though that if you change this value "
+	"too much, all surrounding fields will also change their heights because "
+	"the slope is constrained. If you are changing the height of many terrains "
+	"at once, use raw_height instead and then call recalculate() afterwards."); },
 		new Property("height", false,
 			VariableType::Field, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("f_raw_height", []() { return _("The same as 'height', but setting this will not trigger a recalculation of the surrounding fields. You can use this field to change the height of many fields on a map quickly, then use recalculate() to make sure that everything is in order."); },
+	new BuiltinPropertyInfo("f_raw_height", []() { return
+	_("The same as 'height', but setting this will not trigger a recalculation "
+	"of the surrounding fields. You can use this field to change the height "
+	"of many fields on a map quickly, then use recalculate() to make sure that everything is in order."); },
 		new Property("raw_height", false,
 			VariableType::Field, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("f_viewpoint_x", []() { return _("Returns the position in pixels to move the view to to center this field for the current interactive player"); },
+	new BuiltinPropertyInfo("f_viewpoint_x", []() { return
+	_("Returns the position in pixels to move the view to to center "
+	"this field for the current interactive player"); },
 		new Property("viewpoint_x", true,
 			VariableType::Field, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("f_viewpoint_y", []() { return _("Returns the position in pixels to move the view to to center this field for the current interactive player"); },
+	new BuiltinPropertyInfo("f_viewpoint_y", []() { return
+	_("Returns the position in pixels to move the view to to center "
+	"this field for the current interactive player"); },
 		new Property("viewpoint_y", true,
 			VariableType::Field, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("f_resource", []() { return _("The name of the resource on this field. May be nil."); },
+	new BuiltinPropertyInfo("f_resource", []() { return
+	_("The name of the resource on this field. May be nil."); },
 		new Property("resource", false,
 			VariableType::Field, // class
 			VariableType::String // type
@@ -1530,7 +1673,8 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Field, // class
 			VariableType::Integer // type
 		)),
-	new BuiltinPropertyInfo("f_initial_resource_amount", []() { return _("The resource amount originally present on this field."); },
+	new BuiltinPropertyInfo("f_initial_resource_amount", []() { return
+	_("The resource amount originally present on this field."); },
 		new Property("initial_resource_amount", true,
 			VariableType::Field, // class
 			VariableType::Integer // type
@@ -1545,12 +1689,14 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Field, // class
 			VariableType::Table // type
 		)),
-	new BuiltinPropertyInfo("f_terd", []() { return _("The name of the terrain on the triangle straight south of this field "); },
+	new BuiltinPropertyInfo("f_terd", []() { return
+	_("The name of the terrain on the triangle straight south of this field "); },
 		new Property("terd", false,
 			VariableType::Field, // class
 			VariableType::String // type
 		)),
-	new BuiltinPropertyInfo("f_terr", []() { return _("The name of the terrain on the triangle southeast of this field "); },
+	new BuiltinPropertyInfo("f_terr", []() { return
+	_("The name of the terrain on the triangle southeast of this field "); },
 		new Property("terr", false,
 			VariableType::Field, // class
 			VariableType::String // type
@@ -1560,7 +1706,12 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType::Field, // class
 			VariableType::Player // type
 		)),
-	new BuiltinPropertyInfo("f_claimers", []() { return _("An array of players that have military influence over this field sorted by the amount of influence they have. Note that this does not necessarily mean that claimers[1] is also the owner of the field, as a field that houses a surrounded military building is owned by the surrounded player, but others have more military influence over it."); },
+	new BuiltinPropertyInfo("f_claimers", []() { return
+	_("An array of players that have military influence over this field "
+	"sorted by the amount of influence they have. Note that this does "
+	"not necessarily mean that claimers[1] is also the owner of the "
+	"field, as a field that houses a surrounded military building is "
+	"owned by the surrounded player, but others have more military influence over it."); },
 		new Property("claimers", true,
 			VariableType::Field, // class
 			VariableType::Table // type
