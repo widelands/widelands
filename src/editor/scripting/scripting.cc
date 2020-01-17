@@ -134,7 +134,7 @@ int32_t function_to_serial(FunctionBase& f) {
 	if (upcast(ScriptingObject, so, &f)) {
 		return so->serial();
 	}
-	for (int32_t i = 0;; ++i) {
+	for (int32_t i = 0; kBuiltinFunctions[i]; ++i) {
 		if (kBuiltinFunctions[i]->function.get() == &f) {
 			return -i;
 		}
@@ -144,6 +144,15 @@ int32_t function_to_serial(FunctionBase& f) {
 // static
 FunctionBase& serial_to_function(ScriptingLoader& l, int32_t s) {
 	return s > 0 ? l.get<LuaFunction>(s) : *kBuiltinFunctions[-s]->function;
+}
+// static
+uint32_t property_to_serial(Property& p) {
+	for (uint32_t i = 0; kBuiltinProperties[i]; ++i) {
+		if (kBuiltinProperties[i]->property.get() == &p) {
+			return i;
+		}
+	}
+	NEVER_HERE();
 }
 
 /************************************************************

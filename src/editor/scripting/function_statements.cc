@@ -19,6 +19,7 @@
 
 #include "editor/scripting/function_statements.h"
 
+#include "editor/scripting/builtin.h"
 #include "editor/scripting/variable.h"
 
 /************************************************************
@@ -185,6 +186,135 @@ std::string FS_FunctionCall::readable() const {
 		str += (*it)->readable();
 	}
 	return str + ")";
+}
+
+// Property access
+
+constexpr uint16_t kCurrentPacketVersionFS_GetProperty = 1;
+void FS_GetProperty::load(FileRead& fr, ScriptingLoader& l) {
+	try {
+		FunctionStatement::load(fr, l);
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version != kCurrentPacketVersionFS_GetProperty) {
+			throw Widelands::UnhandledVersionError(
+			   "FS_GetProperty", packet_version, kCurrentPacketVersionFS_GetProperty);
+		}
+		FS_GetProperty::Loader& loader = l.loader<FS_GetProperty::Loader>(this);
+		loader.var = fr.unsigned_32();
+		loader.prop = fr.unsigned_32();
+	} catch (const WException& e) {
+		throw wexception("FS_GetProperty: %s", e.what());
+	}
+}
+void FS_GetProperty::load_pointers(ScriptingLoader& l) {
+	FunctionStatement::load_pointers(l);
+	Assignable::load_pointers(l);
+	FS_GetProperty::Loader& loader = l.loader<FS_GetProperty::Loader>(this);
+	variable_ = &l.get<Variable>(loader.var);
+	property_ = kBuiltinProperties[loader.prop]->property.get();
+}
+void FS_GetProperty::save(FileWrite& fw) const {
+	FunctionStatement::save(fw);
+	fw.unsigned_16(kCurrentPacketVersionFS_GetProperty);
+	assert(variable_);
+	assert(property_);
+	fw.unsigned_32(variable_->serial());
+	fw.unsigned_32(property_to_serial(*property_));
+}
+VariableType FS_GetProperty::type() const {
+	assert(property_);
+	return property_->get_type();
+}
+void FS_GetProperty::set_property(Property& p) {
+	property_ = &p;
+	if (variable_ && !is(variable_->type(), property_->get_class())) {
+		variable_ = nullptr;
+	}
+}
+void FS_GetProperty::set_variable(Variable& v) {
+	variable_ = &v;
+	if (property_ && !is(variable_->type(), property_->get_class())) {
+		property_ = nullptr;
+	}
+}
+int32_t FS_GetProperty::write_lua(FileWrite& fw) const {
+	assert(variable_);
+	assert(property_);
+	assert(is(variable_->type(), property_->get_class()));
+	fw.print_f("%s.%s", variable_->get_name().c_str(), property_->get_name().c_str());
+	return 0;
+}
+std::string FS_GetProperty::readable() const {
+	assert(variable_);
+	assert(property_);
+	return variable_->get_name() + "." + property_->get_name();
+}
+
+// Property manipulation
+
+constexpr uint16_t kCurrentPacketVersionFS_SetProperty = 1;
+void FS_SetProperty::load(FileRead& fr, ScriptingLoader& l) {
+	try {
+		FunctionStatement::load(fr, l);
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version != kCurrentPacketVersionFS_SetProperty) {
+			throw Widelands::UnhandledVersionError(
+			   "FS_SetProperty", packet_version, kCurrentPacketVersionFS_SetProperty);
+		}
+		FS_SetProperty::Loader& loader = l.loader<FS_SetProperty::Loader>(this);
+		loader.var = fr.unsigned_32();
+		loader.prop = fr.unsigned_32();
+		loader.val = fr.unsigned_32();
+	} catch (const WException& e) {
+		throw wexception("FS_SetProperty: %s", e.what());
+	}
+}
+void FS_SetProperty::load_pointers(ScriptingLoader& l) {
+	FunctionStatement::load_pointers(l);
+	FS_SetProperty::Loader& loader = l.loader<FS_SetProperty::Loader>(this);
+	variable_ = &l.get<Variable>(loader.var);
+	property_ = kBuiltinProperties[loader.prop]->property.get();
+	value_ = &l.get<Assignable>(loader.val);
+}
+void FS_SetProperty::save(FileWrite& fw) const {
+	FunctionStatement::save(fw);
+	fw.unsigned_16(kCurrentPacketVersionFS_SetProperty);
+	assert(variable_);
+	assert(property_);
+	fw.unsigned_32(variable_->serial());
+	fw.unsigned_32(property_to_serial(*property_));
+	fw.unsigned_32(value_->serial());
+}
+void FS_SetProperty::set_property(Property& p) {
+	property_ = &p;
+	if (variable_ && !is(variable_->type(), property_->get_class())) {
+		variable_ = nullptr;
+	}
+	if (value_ && !is(value_->type(), property_->get_type())) {
+		value_ = nullptr;
+	}
+}
+void FS_SetProperty::set_variable(Variable& v) {
+	variable_ = &v;
+	if (property_ && !is(variable_->type(), property_->get_class())) {
+		property_ = nullptr;
+	}
+}
+int32_t FS_SetProperty::write_lua(FileWrite& fw) const {
+	assert(variable_);
+	assert(property_);
+	assert(value_);
+	assert(is(variable_->type(), property_->get_class()));
+	assert(is(value_->type(), property_->get_type()));
+	fw.print_f("%s.%s = ", variable_->get_name().c_str(), property_->get_name().c_str());
+	value_->write_lua(fw);
+	return 0;
+}
+std::string FS_SetProperty::readable() const {
+	assert(variable_);
+	assert(property_);
+	assert(value_);
+	return variable_->get_name() + "." + property_->get_name() + " = " + value_->readable();
 }
 
 // Coroutine starting

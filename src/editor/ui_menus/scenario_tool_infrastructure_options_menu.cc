@@ -19,8 +19,6 @@
 
 #include "editor/ui_menus/scenario_tool_infrastructure_options_menu.h"
 
-#include <memory>
-
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -37,14 +35,13 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
    EditorInteractive& parent,
    ScenarioInfrastructureTool& tool,
    UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 500, 300, _("Set Field Owner"), tool), tool_(tool) {
+   : EditorToolOptionsMenu(parent, registry, 500, 300, _("Place Infrastructure"), tool),
+     tool_(tool) {
 	main_box_.reset(new UI::Box(this, 0, 0, UI::Box::Vertical));
 	set_center_panel(main_box_.get());
 	players_.reset(new UI::Dropdown<Widelands::PlayerNumber>(
 	   main_box_.get(), "players", 0, 0, 300, 8, 24, _("Player"), UI::DropdownType::kTextual,
 	   UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary));
-	players_->selected.connect(
-	   boost::bind(&ScenarioToolInfrastructureOptionsMenu::select_player, this));
 	main_box_->add(players_.get(), UI::Box::Resizing::kFullSize);
 
 	force_.reset(new UI::Checkbox(main_box_.get(), Vector2i(0, 0), _("Force"),
@@ -66,132 +63,67 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 		select_correct_tool();
 	});
 
+	{
+		const Widelands::Map& map = parent.egbase().map();
+		const Widelands::PlayerNumber sel = tool_.get_player();
+		const Widelands::PlayerNumber max = map.get_nrplayers();
+		for (Widelands::PlayerNumber p = 1; p <= max; ++p) {
+			const std::string name = map.get_scenario_player_name(p);
+			const std::string tribe = map.get_scenario_player_tribe(p);
+			players_->add(
+			   (boost::format(_("Player %1$s (%2$s)")) % std::to_string(static_cast<int>(p)) % name)
+			      .str(),
+			   p, g_gr->images().get(Widelands::get_tribeinfo(map.get_scenario_player_tribe(p)).icon),
+			   sel == p);
+		}
+	}
+
+	const Widelands::Tribes& tribes = parent.egbase().tribes();
+	const size_t nr_tribes = tribes.nrtribes();
 	item_categories_.reset(new UI::TabPanel(main_box_.get(), UI::TabPanelStyle::kWuiDark));
+	// Flag
 	{
 		UI::IconGrid* i = new UI::IconGrid(item_categories_.get(), 0, 0, 50, 50, 1);
 		i->add("flag", g_gr->images().get("images/wui/fieldaction/menu_build_flag.png"),
 		       reinterpret_cast<void*>(Widelands::INVALID_INDEX), _("Flag"));
 		i->icon_clicked.connect(boost::bind(&ScenarioToolInfrastructureOptionsMenu::toggle_selected,
 		                                    this, i, Widelands::MapObjectType::FLAG, _1));
-		item_categories_->add(std::to_string(static_cast<int>(Widelands::MapObjectType::FLAG)),
-		                      g_gr->images().get("images/wui/fieldaction/menu_build_flag.png"), i,
-		                      _("Flag"));
-		item_grids_.push_back(std::unique_ptr<UI::IconGrid>(i));
+		item_categories_->add(
+		   "flag", g_gr->images().get("images/wui/fieldaction/menu_build_flag.png"), i, _("Flag"));
 	}
-	const size_t nr_tribes = parent.egbase().tribes().nrtribes();
-	for (Widelands::MapObjectType t :
-	     {Widelands::MapObjectType::BUILDING, Widelands::MapObjectType::IMMOVABLE}) {
+	// Immovables
+	{
 		UI::TabPanel* tab = new UI::TabPanel(item_categories_.get(), UI::TabPanelStyle::kWuiDark);
 		for (size_t tribe = 0; tribe < nr_tribes; ++tribe) {
 			const Widelands::TribeDescr* td = parent.egbase().tribes().get_tribe_descr(tribe);
 			const Image* icon = g_gr->images().get(Widelands::get_tribeinfo(td->name()).icon);
 			assert(td);
-			switch (t) {
-			case Widelands::MapObjectType::BUILDING: {
-				UI::TabPanel* sizetabs = new UI::TabPanel(tab, UI::TabPanelStyle::kWuiDark);
-				UI::IconGrid* ig_small = new UI::IconGrid(sizetabs, 0, 0, 50, 50, kIconGridColumns);
-				UI::IconGrid* ig_medium = new UI::IconGrid(sizetabs, 0, 0, 50, 50, kIconGridColumns);
-				UI::IconGrid* ig_big = new UI::IconGrid(sizetabs, 0, 0, 50, 50, kIconGridColumns);
-				UI::IconGrid* ig_port = new UI::IconGrid(sizetabs, 0, 0, 50, 50, kIconGridColumns);
-				UI::IconGrid* ig_mine = new UI::IconGrid(sizetabs, 0, 0, 50, 50, kIconGridColumns);
-				for (Widelands::DescriptionIndex di : td->buildings()) {
-					const Widelands::BuildingDescr* descr = td->get_building_descr(di);
-					if (descr->type() == Widelands::MapObjectType::CONSTRUCTIONSITE ||
-					    descr->type() == Widelands::MapObjectType::DISMANTLESITE) {
-						continue;
-					}
-					UI::IconGrid* i = nullptr;
-					if (descr->get_ismine()) {
-						i = ig_mine;
-					} else if (descr->get_isport()) {
-						i = ig_port;
-					} else
-						switch (descr->get_size()) {
-						case Widelands::BaseImmovable::BIG:
-							i = ig_big;
-							break;
-						case Widelands::BaseImmovable::MEDIUM:
-							i = ig_medium;
-							break;
-						case Widelands::BaseImmovable::SMALL:
-							i = ig_small;
-							break;
-						default:
-							NEVER_HERE();
-						}
-					assert(i);
-					i->add(std::to_string(static_cast<int>(t)) + "__" + descr->name(),
-					       descr->representative_image(), reinterpret_cast<void*>(di),
-					       descr->descname());
-				}
-				for (UI::IconGrid* i : {ig_small, ig_medium, ig_big, ig_port, ig_mine}) {
-					i->icon_clicked.connect(boost::bind(
-					   &ScenarioToolInfrastructureOptionsMenu::toggle_selected, this, i, t, _1));
-					item_grids_.push_back(std::unique_ptr<UI::IconGrid>(i));
-				}
-				sizetabs->add(td->name() + "_small",
-				              g_gr->images().get("images/wui/fieldaction/menu_tab_buildsmall.png"),
-				              ig_small, _("Small Buildings"));
-				sizetabs->add(td->name() + "_medium",
-				              g_gr->images().get("images/wui/fieldaction/menu_tab_buildmedium.png"),
-				              ig_medium, _("Medium Buildings"));
-				sizetabs->add(td->name() + "_big",
-				              g_gr->images().get("images/wui/fieldaction/menu_tab_buildbig.png"),
-				              ig_big, _("Big Buildings"));
-				sizetabs->add(td->name() + "_port",
-				              g_gr->images().get("images/wui/fieldaction/menu_tab_buildport.png"),
-				              ig_port, _("Ports"));
-				sizetabs->add(td->name() + "_mine",
-				              g_gr->images().get("images/wui/fieldaction/menu_tab_buildmine.png"),
-				              ig_mine, _("Mines"));
-				item_tabs_.push_back(std::unique_ptr<UI::TabPanel>(sizetabs));
-				tab->add(std::to_string(static_cast<int>(t)) + "_" + std::to_string(tribe), icon,
-				         sizetabs, td->descname());
-				break;
+			UI::IconGrid* i = new UI::IconGrid(tab, 0, 0, 50, 50, kIconGridColumns);
+			for (Widelands::DescriptionIndex di : td->immovables()) {
+				const Widelands::ImmovableDescr* descr = td->get_immovable_descr(di);
+				i->add(std::to_string(tribe) + "_" + descr->name(), descr->representative_image(),
+				       reinterpret_cast<void*>(di), descr->descname());
 			}
-			case Widelands::MapObjectType::IMMOVABLE: {
-				UI::IconGrid* i = new UI::IconGrid(tab, 0, 0, 50, 50, kIconGridColumns);
-				for (Widelands::DescriptionIndex di : td->immovables()) {
-					const Widelands::ImmovableDescr* descr = td->get_immovable_descr(di);
-					i->add(std::to_string(static_cast<int>(t)) + "_" + std::to_string(tribe) + "_" +
-					          descr->name(),
-					       descr->representative_image(), reinterpret_cast<void*>(di),
-					       descr->descname());
-				}
-				i->icon_clicked.connect(boost::bind(
-				   &ScenarioToolInfrastructureOptionsMenu::toggle_selected, this, i, t, _1));
-				tab->add(std::to_string(static_cast<int>(t)) + "_" + std::to_string(tribe), icon, i,
-				         td->descname());
-				item_grids_.push_back(std::unique_ptr<UI::IconGrid>(i));
-				break;
-			}
-			default:
-				NEVER_HERE();
-			}
+			i->icon_clicked.connect(
+			   boost::bind(&ScenarioToolInfrastructureOptionsMenu::toggle_selected, this, i,
+			               Widelands::MapObjectType::IMMOVABLE, _1));
+			tab->add(std::to_string(tribe), icon, i, td->descname());
 		}
-		item_categories_->add(
-		   std::to_string(static_cast<int>(t)),
-		   g_gr->images().get(t == Widelands::MapObjectType::BUILDING ?
-		                         "images/wui/stats/genstats_nrbuildings.png" :
-		                         "images/wui/menus/toggle_immovables.png"),
-		   tab, t == Widelands::MapObjectType::BUILDING ? _("Buildings") : _("Immovables"));
-		item_tabs_.push_back(std::unique_ptr<UI::TabPanel>(tab));
+		item_categories_->add("immovables",
+		                      g_gr->images().get("images/wui/menus/toggle_immovables.png"), tab,
+		                      _("Immovables"));
 	}
+	create_buildings_tab();
 	main_box_->add(item_categories_.get(), UI::Box::Resizing::kExpandBoth);
+
+	players_->selected.connect(
+	   boost::bind(&ScenarioToolInfrastructureOptionsMenu::select_player, this));
 
 	selected_items_.reset(new UI::MultilineTextarea(
 	   main_box_.get(), 0, 0, 100, 10, UI::PanelStyle::kWui, "", UI::Align::kCenter,
 	   UI::MultilineTextarea::ScrollMode::kNoScrolling));
 	main_box_->add(selected_items_.get(), UI::Box::Resizing::kFullSize);
 
-	subscriber_ = Notifications::subscribe<Widelands::NoteEditorPlayerEdited>(
-	   [this](const Widelands::NoteEditorPlayerEdited& n) {
-		   if (n.map == &eia().egbase().map()) {
-			   update_players();
-		   }
-	   });
-
-	update_players();
 	update_text();
 
 	if (get_usedefaultpos()) {
@@ -199,30 +131,107 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 	}
 }
 
-void ScenarioToolInfrastructureOptionsMenu::update_players() {
-	const Widelands::Map& map = eia().egbase().map();
-	const Widelands::PlayerNumber sel = tool_.get_player();
-	const Widelands::PlayerNumber max = map.get_nrplayers();
-	players_->clear();
-	for (Widelands::PlayerNumber p = 1; p <= max; ++p) {
-		const std::string name = map.get_scenario_player_name(p);
-		const std::string tribe = map.get_scenario_player_tribe(p);
-		players_->add(
-		   (boost::format(_("Player %1$s (%2$s)")) % std::to_string(static_cast<int>(p)) % name)
-		      .str(),
-		   p,
-		   g_gr->images().get(
-		      tribe.empty() ?
-		         "images/ui_fsmenu/random.png" :
-		         Widelands::get_tribeinfo(eia().egbase().map().get_scenario_player_tribe(p)).icon),
-		   sel == p);
+void ScenarioToolInfrastructureOptionsMenu::create_buildings_tab() {
+	assert(item_categories_);
+	item_categories_->remove_last_tab("buildings");
+
+	UI::TabPanel* sizetabs = new UI::TabPanel(item_categories_.get(), UI::TabPanelStyle::kWuiDark);
+	UI::IconGrid* ig_small = new UI::IconGrid(sizetabs, 0, 0, 50, 50, kIconGridColumns);
+	UI::IconGrid* ig_medium = new UI::IconGrid(sizetabs, 0, 0, 50, 50, kIconGridColumns);
+	UI::IconGrid* ig_big = new UI::IconGrid(sizetabs, 0, 0, 50, 50, kIconGridColumns);
+	UI::IconGrid* ig_port = new UI::IconGrid(sizetabs, 0, 0, 50, 50, kIconGridColumns);
+	UI::IconGrid* ig_mine = new UI::IconGrid(sizetabs, 0, 0, 50, 50, kIconGridColumns);
+	for (UI::IconGrid* i : {ig_small, ig_medium, ig_big, ig_port, ig_mine}) {
+		i->icon_clicked.connect(boost::bind(&ScenarioToolInfrastructureOptionsMenu::toggle_selected,
+		                                    this, i, Widelands::MapObjectType::BUILDING, _1));
 	}
+
+	const Widelands::TribeDescr& tribe = eia().egbase().player(players_->get_selected()).tribe();
+	std::set<Widelands::DescriptionIndex> buildings;
+	for (Widelands::DescriptionIndex di : tribe.buildings()) {
+		assert(!buildings.count(di));
+		buildings.insert(di);
+		const Widelands::BuildingDescr* descr = tribe.get_building_descr(di);
+		if (descr->type() == Widelands::MapObjectType::CONSTRUCTIONSITE ||
+		    descr->type() == Widelands::MapObjectType::DISMANTLESITE) {
+			continue;
+		}
+		UI::IconGrid* i = nullptr;
+		if (descr->get_ismine()) {
+			i = ig_mine;
+		} else if (descr->get_isport()) {
+			i = ig_port;
+		} else
+			switch (descr->get_size()) {
+			case Widelands::BaseImmovable::BIG:
+				i = ig_big;
+				break;
+			case Widelands::BaseImmovable::MEDIUM:
+				i = ig_medium;
+				break;
+			case Widelands::BaseImmovable::SMALL:
+				i = ig_small;
+				break;
+			default:
+				NEVER_HERE();
+			}
+		assert(i);
+		i->add(descr->name(), descr->representative_image(), reinterpret_cast<void*>(di),
+		       descr->descname());
+	}
+	const size_t nrb = eia().egbase().tribes().nrbuildings();
+	for (Widelands::DescriptionIndex di = 0; di < nrb; ++di) {
+		if (buildings.count(di))
+			continue;
+		buildings.insert(di);
+		const Widelands::BuildingDescr* descr = tribe.get_building_descr(di);
+		if (descr->type() != Widelands::MapObjectType::MILITARYSITE) {
+			continue;
+		}
+		UI::IconGrid* i = nullptr;
+		if (descr->get_ismine()) {
+			i = ig_mine;
+		} else if (descr->get_isport()) {
+			i = ig_port;
+		} else
+			switch (descr->get_size()) {
+			case Widelands::BaseImmovable::BIG:
+				i = ig_big;
+				break;
+			case Widelands::BaseImmovable::MEDIUM:
+				i = ig_medium;
+				break;
+			case Widelands::BaseImmovable::SMALL:
+				i = ig_small;
+				break;
+			default:
+				NEVER_HERE();
+			}
+		assert(i);
+		i->add(descr->name(), descr->representative_image(), reinterpret_cast<void*>(di),
+		       descr->descname());
+	}
+
+#define ADD_TAB(size, tt)                                                                          \
+	sizetabs->add(#size, g_gr->images().get("images/wui/fieldaction/menu_tab_build" #size ".png"),  \
+	              ig_##size, tt);
+	ADD_TAB(small, _("Small buildings"))
+	ADD_TAB(medium, _("Medium buildings"))
+	ADD_TAB(big, _("Big buildings"))
+	ADD_TAB(port, _("Ports"))
+	ADD_TAB(mine, _("Mines"))
+#undef ADD_TAB
+
+	item_categories_->add("buildings",
+	                      g_gr->images().get("images/wui/stats/genstats_nrbuildings.png"), sizetabs,
+	                      _("Buildings"));
 }
 
 void ScenarioToolInfrastructureOptionsMenu::select_player() {
 	const Widelands::PlayerNumber p = players_->get_selected();
 	assert(p <= eia().egbase().map().get_nrplayers());
 	tool_.set_player(p);
+	create_buildings_tab();
 	select_correct_tool();
 }
 

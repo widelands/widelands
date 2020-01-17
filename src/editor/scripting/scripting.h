@@ -34,6 +34,7 @@
 #include "logic/game_data_error.h"
 
 class FunctionBase;
+class Property;
 class ScriptingLoader;
 class ScriptingSaver;
 
@@ -47,6 +48,7 @@ void check_name_valid(const std::string&);
 
 int32_t function_to_serial(FunctionBase&);
 FunctionBase& serial_to_function(ScriptingLoader&, int32_t);
+uint32_t property_to_serial(Property&);
 
 // Lua is not typesafe, but we are. A "variable" is declared as a specific type
 // and it may be assigned only values of this type and its subtypes, and nil.

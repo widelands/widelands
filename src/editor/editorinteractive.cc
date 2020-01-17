@@ -1294,19 +1294,58 @@ std::string EditorInteractive::try_finalize() {
 	{
 		LuaFunction* main_func = new LuaFunction("mission_thread");
 		main_func->init(*scripting_saver_);
-		Variable* var = new Variable(VariableType::Integer, "test");
-		var->init(*scripting_saver_);
+
+		Variable* v_game = new Variable(VariableType::Game, "game");
+		v_game->init(*scripting_saver_);
+		Variable* v_map = new Variable(VariableType::Map, "map");
+		v_map->init(*scripting_saver_);
+		Variable* v_field = new Variable(VariableType::Field, "field");
+		v_field->init(*scripting_saver_);
 		{
-			ConstexprInteger* i = new ConstexprInteger(5);
-			i->init(*scripting_saver_);
-			FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(true, var, i);
+			ConstexprInteger* val = new ConstexprInteger(10000);
+			val->init(*scripting_saver_);
+			FS_FunctionCall* fc =
+			   new FS_FunctionCall(builtin_f("sleep").function.get(), nullptr, {val});
+			fc->init(*scripting_saver_);
+			main_func->mutable_body().push_back(fc);
+		}
+		{
+			FS_FunctionCall* fc = new FS_FunctionCall(builtin_f("game").function.get(), nullptr, {});
+			fc->init(*scripting_saver_);
+			FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(true, v_game, fc);
 			f->init(*scripting_saver_);
 			main_func->mutable_body().push_back(f);
 		}
 		{
-			ConstexprInteger* i = new ConstexprInteger(20);
-			i->init(*scripting_saver_);
-			FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(false, var, i);
+			FS_GetProperty* get = new FS_GetProperty(*v_game, *builtin_p("map").property);
+			get->init(*scripting_saver_);
+			FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(true, v_map, get);
+			f->init(*scripting_saver_);
+			main_func->mutable_body().push_back(f);
+		}
+		{
+			ConstexprNil* nil = new ConstexprNil();
+			nil->init(*scripting_saver_);
+			FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(true, v_field, nil);
+			f->init(*scripting_saver_);
+			main_func->mutable_body().push_back(f);
+		}
+		{
+			ConstexprInteger* x = new ConstexprInteger(20);
+			x->init(*scripting_saver_);
+			ConstexprInteger* y = new ConstexprInteger(5);
+			y->init(*scripting_saver_);
+			FS_FunctionCall* fcf =
+			   new FS_FunctionCall(builtin_f("field").function.get(), v_map, {x, y});
+			fcf->init(*scripting_saver_);
+			FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(false, v_field, fcf);
+			f->init(*scripting_saver_);
+			main_func->mutable_body().push_back(f);
+		}
+		{
+			ConstexprInteger* val = new ConstexprInteger(59);
+			val->init(*scripting_saver_);
+			FS_SetProperty* f = new FS_SetProperty(*v_field, *builtin_p("f_height").property, *val);
 			f->init(*scripting_saver_);
 			main_func->mutable_body().push_back(f);
 		}
@@ -1315,7 +1354,7 @@ std::string EditorInteractive::try_finalize() {
 			c1->init(*scripting_saver_);
 			ConstexprString* c2 = new ConstexprString("Hello World!", true);
 			c2->init(*scripting_saver_);
-			StringConcat* sc = new StringConcat({c1, c2, var});
+			StringConcat* sc = new StringConcat({c1, c2});
 			sc->init(*scripting_saver_);
 			FS_FunctionCall* fc =
 			   new FS_FunctionCall(builtin_f("print").function.get(), nullptr, {sc});
@@ -1382,6 +1421,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	}
 
 	// Builtin includes
+	// NOCOM: Get rid of includes_global_ and check ourselves which includes are required
 	if (!includes_global_.empty()) {
 		fw.print_f("\n");
 		for (const std::string& i : includes_global_) {
@@ -1407,12 +1447,14 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	const unsigned nrplayers = map.get_nrplayers();
 	for (unsigned p1 = 0; p1 < nrplayers; ++p1) {
 		for (unsigned p2 = 0; p2 < nrplayers; ++p2) {
-			if (p1 == p2) {
-				fw.print_f(
-				   "wl.Game().players[%u].team = %u\n", p1 + 1, player_relations_[p1 * nrplayers + p2]);
-			} else {
-				fw.print_f("wl.Game().players[%u]:set_attack_forbidden(%u, %s)\n", p1 + 1, p2 + 1,
-				           player_relations_[p1 * nrplayers + p2] ? "true" : "false");
+			if (const uint8_t r = player_relations_[p1 * nrplayers + p2]) {
+				if (p1 == p2) {
+					assert(r <= nrplayers / 2);
+					fw.print_f("wl.Game().players[%u].team = %u\n", p1 + 1, r);
+				} else {
+					assert(r == 1);
+					fw.print_f("wl.Game().players[%u]:set_attack_forbidden(%u, true)\n", p1 + 1, p2 + 1);
+				}
 			}
 		}
 	}

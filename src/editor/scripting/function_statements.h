@@ -22,6 +22,7 @@
 
 #include "editor/scripting/function.h"
 
+class Property;
 class Variable;
 
 /************************************************************
@@ -87,6 +88,99 @@ private:
 	std::list<Assignable*> parameters_;
 
 	DISALLOW_COPY_AND_ASSIGN(FS_FunctionCall);
+};
+
+// Get the property of a builtin (e.g. field.x)
+class FS_GetProperty : public Assignable, public FunctionStatement {
+public:
+	FS_GetProperty(Variable& v, Property& p) : variable_(&v), property_(&p) {
+	}
+	~FS_GetProperty() override {
+	}
+
+	void load(FileRead&, ScriptingLoader&) override;
+	void save(FileWrite&) const override;
+	int32_t write_lua(FileWrite&) const override;
+	inline ScriptingObject::ID id() const override {
+		return ScriptingObject::ID::FSGetProperty;
+	}
+	VariableType type() const override;
+	std::string readable() const override;
+
+	const Property* get_property() const {
+		return property_;
+	}
+	void set_property(Property&);
+	const Variable* get_variable() const {
+		return variable_;
+	}
+	void set_variable(Variable&);
+
+	struct Loader : public ScriptingObject::Loader {
+		Loader() = default;
+		~Loader() override {
+		}
+		uint32_t var, prop;
+	};
+	ScriptingObject::Loader* create_loader() const override {
+		return new FS_GetProperty::Loader();
+	}
+	void load_pointers(ScriptingLoader&) override;
+
+private:
+	Variable* variable_;
+	Property* property_;
+
+	DISALLOW_COPY_AND_ASSIGN(FS_GetProperty);
+};
+
+// Set the property of a builtin (e.g. field.height = 5)
+class FS_SetProperty : public FunctionStatement {
+public:
+	FS_SetProperty(Variable& v, Property& p, Assignable& a)
+	   : variable_(&v), property_(&p), value_(&a) {
+	}
+	~FS_SetProperty() override {
+	}
+
+	void load(FileRead&, ScriptingLoader&) override;
+	void save(FileWrite&) const override;
+	int32_t write_lua(FileWrite&) const override;
+	inline ScriptingObject::ID id() const override {
+		return ScriptingObject::ID::FSSetProperty;
+	}
+	std::string readable() const override;
+
+	const Property* get_property() const {
+		return property_;
+	}
+	void set_property(Property&);
+	const Variable* get_variable() const {
+		return variable_;
+	}
+	void set_variable(Variable&);
+	const Assignable* get_value() const {
+		return value_;
+	}
+	void set_value(Assignable&);
+
+	struct Loader : public ScriptingObject::Loader {
+		Loader() = default;
+		~Loader() override {
+		}
+		uint32_t var, prop, val;
+	};
+	ScriptingObject::Loader* create_loader() const override {
+		return new FS_SetProperty::Loader();
+	}
+	void load_pointers(ScriptingLoader&) override;
+
+private:
+	Variable* variable_;
+	Property* property_;
+	Assignable* value_;
+
+	DISALLOW_COPY_AND_ASSIGN(FS_SetProperty);
 };
 
 // Launch a coroutine with the given parameters

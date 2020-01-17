@@ -26,7 +26,6 @@
 #include "editor/tools/scenario_infrastructure_tool.h"
 #include "editor/ui_menus/tool_options_menu.h"
 #include "logic/map.h"
-#include "notifications/notifications.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
@@ -44,12 +43,13 @@ struct ScenarioToolInfrastructureOptionsMenu : public EditorToolOptionsMenu {
 	~ScenarioToolInfrastructureOptionsMenu() {
 	}
 
-	void update_players();
 	void update_text();
 
 private:
 	EditorInteractive& eia();
 	ScenarioInfrastructureTool& tool_;
+
+	void create_buildings_tab();
 
 	void select_player();
 	void toggle_selected(UI::IconGrid*, Widelands::MapObjectType, int32_t);
@@ -59,11 +59,7 @@ private:
 	std::unique_ptr<UI::Checkbox> force_;
 	std::unique_ptr<UI::Checkbox> construct_;
 	std::unique_ptr<UI::TabPanel> item_categories_;
-	std::vector<std::unique_ptr<UI::TabPanel>> item_tabs_;
-	std::vector<std::unique_ptr<UI::IconGrid>> item_grids_;
 	std::unique_ptr<UI::MultilineTextarea> selected_items_;
-
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteEditorPlayerEdited>> subscriber_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_SCENARIO_TOOL_INFRASTRUCTURE_OPTIONS_MENU_H
