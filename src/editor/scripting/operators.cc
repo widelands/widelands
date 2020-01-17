@@ -72,15 +72,14 @@ std::string OperatorBase::readable() const {
 	assert(b_);
 	return a_->readable() + " " + op() + " " + b_->readable();
 }
-int32_t OperatorBase::write_lua(FileWrite& fw) const {
+void OperatorBase::write_lua(int32_t i, FileWrite& fw) const {
 	assert(a_);
 	assert(b_);
 	fw.print_f("(");
-	a_->write_lua(fw);
+	a_->write_lua(i, fw);
 	fw.print_f(" %s ", op().c_str());
-	b_->write_lua(fw);
+	b_->write_lua(i, fw);
 	fw.print_f(")");
-	return 0;
 }
 
 // The 'not' operator
@@ -121,10 +120,9 @@ std::string OperatorNot::readable() const {
 	assert(a_);
 	return "not " + a_->readable();
 }
-int32_t OperatorNot::write_lua(FileWrite& fw) const {
+void OperatorNot::write_lua(int32_t i, FileWrite& fw) const {
 	assert(a_);
 	fw.print_f("(not ");
-	a_->write_lua(fw);
+	a_->write_lua(i, fw);
 	fw.print_f(")");
-	return 0;
 }

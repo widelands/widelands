@@ -103,18 +103,16 @@ void LuaFunction::save(FileWrite& fw) const {
 	}
 }
 
-int32_t LuaFunction::write_lua(FileWrite& fw) const {
+void LuaFunction::write_lua(int32_t indent, FileWrite& fw) const {
 	fw.print_f("\n%s\n", header(true).c_str());
-	int32_t indent = 1;
 	for (const auto& f : body_) {
-		for (int32_t i = 0; i < indent; ++i) {
+		for (int32_t i = 0; i <= indent; ++i) {
 			fw.print_f("   ");
 		}
-		indent += f->write_lua(fw);
+		f->write_lua(indent + 1, fw);
 		fw.print_f("\n");
 	}
-	fw.print_f("end\n");
-	return 0;
+	fw.print_f("end -- %s\n", get_name().c_str());
 }
 
 std::set<uint32_t> LuaFunction::references() const {

@@ -20,78 +20,6 @@
 #include "editor/scripting/constexpr.h"
 
 /************************************************************
-                StringConcat implementation
-************************************************************/
-
-constexpr uint16_t kCurrentPacketVersionStringConcat = 1;
-void StringConcat::load(FileRead& fr, Loader& loader) {
-	try {
-		Assignable::load(fr, loader);
-		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version != kCurrentPacketVersionStringConcat) {
-			throw Widelands::UnhandledVersionError(
-			   "StringConcat", packet_version, kCurrentPacketVersionStringConcat);
-		}
-		for (uint32_t n = fr.unsigned_32(); n; --n) {
-			loader.push_back(fr.unsigned_32());
-		}
-	} catch (const WException& e) {
-		throw wexception("editor string concatenation: %s", e.what());
-	}
-}
-void StringConcat::load_pointers(const ScriptingLoader& l, Loader& loader) {
-	Assignable::load_pointers(l, loader);
-	while (!loader.empty()) {
-		values_.push_back(&l.get<Assignable>(loader.front()));
-		loader.pop_front();
-	}
-}
-void StringConcat::save(FileWrite& fw) const {
-	Assignable::save(fw);
-	fw.unsigned_16(kCurrentPacketVersionStringConcat);
-	fw.unsigned_32(values_.size());
-	for (const Assignable* a : values_) {
-		fw.unsigned_32(a->serial());
-	}
-}
-int32_t StringConcat::write_lua(FileWrite& fw) const {
-	if (values_.empty()) {
-		fw.print_f("\"\"");
-	} else {
-		for (auto it = values_.begin(); it != values_.end(); ++it) {
-			if (it != values_.begin()) {
-				fw.print_f(" .. ");
-			}
-			(*it)->write_lua(fw);
-		}
-	}
-	return 0;
-}
-
-std::string StringConcat::readable() const {
-	if (values_.empty()) {
-		return "\"\"";
-	} else {
-		std::string res = "";
-		for (auto it = values_.begin(); it != values_.end(); ++it) {
-			if (it != values_.begin()) {
-				res += " .. ";  // No i18n markup for Lua syntax
-			}
-			res += (*it)->readable();
-		}
-		return res;
-	}
-}
-
-std::set<uint32_t> StringConcat::references() const {
-	auto set = Assignable::references();
-	for (const Assignable* a : values_) {
-		set.insert(a->serial());
-	}
-	return set;
-}
-
-/************************************************************
                  Constexpr implementations
 ************************************************************/
 
@@ -157,19 +85,15 @@ void ConstexprBoolean::save(FileWrite& fw) const {
 	fw.unsigned_8(value_ ? 1 : 0);
 }
 
-int32_t ConstexprString::write_lua(FileWrite& fw) const {
+void ConstexprString::write_lua(int32_t, FileWrite& fw) const {
 	fw.print_f(translate_ ? "_(\"%s\")" : "\"%s\"", value_.c_str());
-	return 0;
 }
-int32_t ConstexprInteger::write_lua(FileWrite& fw) const {
+void ConstexprInteger::write_lua(int32_t, FileWrite& fw) const {
 	fw.print_f("%i", value_);
-	return 0;
 }
-int32_t ConstexprBoolean::write_lua(FileWrite& fw) const {
+void ConstexprBoolean::write_lua(int32_t, FileWrite& fw) const {
 	fw.print_f(value_ ? "true" : "false");
-	return 0;
 }
-int32_t ConstexprNil::write_lua(FileWrite& fw) const {
+void ConstexprNil::write_lua(int32_t, FileWrite& fw) const {
 	fw.print_f("nil");
-	return 0;
 }

@@ -1259,6 +1259,7 @@ void EditorInteractive::finalize_clicked() {
 // NOCOM for testing (in debug builds only)
 #include "editor/scripting/builtin.h"
 #include "editor/scripting/constexpr.h"
+#include "editor/scripting/control_structures.h"
 #include "editor/scripting/operators.h"
 #include "editor/scripting/variable.h"
 
@@ -1305,50 +1306,102 @@ std::string EditorInteractive::try_finalize() {
 			main_func->mutable_body().push_back(f);
 		}
 		{
-			ConstexprInteger* val = new ConstexprInteger(10000);
-			val->init(*scripting_saver_);
-			FS_FunctionCall* fc =
-			   new FS_FunctionCall(builtin_f("sleep").function.get(), nullptr, {val});
-			fc->init(*scripting_saver_);
-			main_func->mutable_body().push_back(fc);
-		}
-		{
 			ConstexprBoolean* unused_dummy = new ConstexprBoolean(true);
 			unused_dummy->init(*scripting_saver_);
 		}
 		{
-			FS_FunctionCall* fc = new FS_FunctionCall(builtin_f("game").function.get(), nullptr, {});
-			fc->init(*scripting_saver_);
-			GetProperty* get = new GetProperty(fc, builtin_p("map").property.get());
-			get->init(*scripting_saver_);
-			ConstexprInteger* x = new ConstexprInteger(20);
-			x->init(*scripting_saver_);
-			ConstexprInteger* y = new ConstexprInteger(5);
-			y->init(*scripting_saver_);
-			ConstexprInteger* z = new ConstexprInteger(10);
-			z->init(*scripting_saver_);
-			OperatorMultiply* yz = new OperatorMultiply(y, z);
-			yz->init(*scripting_saver_);
-			FS_FunctionCall* fcf =
-			   new FS_FunctionCall(builtin_f("field").function.get(), get, {x, yz});
-			fcf->init(*scripting_saver_);
-			FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(false, v_field, fcf);
-			f->init(*scripting_saver_);
-			main_func->mutable_body().push_back(f);
+#define VAL(x)                                                                                     \
+	ConstexprInteger* val_##x = new ConstexprInteger(x);                                            \
+	val_##x->init(*scripting_saver_);
+			VAL(5)
+			VAL(10)
+			VAL(20)
+			VAL(30)
+			VAL(50)
+#undef VAL
+			   ConstexprBoolean* _true = new ConstexprBoolean(true);
+			_true->init(*scripting_saver_);
+			FS_While* _while = new FS_While(true, _true);
+			_while->init(*scripting_saver_);
+
+			{
+				ConstexprInteger* val = new ConstexprInteger(10000);
+				val->init(*scripting_saver_);
+				FS_FunctionCall* fc =
+				   new FS_FunctionCall(builtin_f("sleep").function.get(), nullptr, {val});
+				fc->init(*scripting_saver_);
+				_while->mutable_body().push_back(fc);
+			}
+			{
+				FS_FunctionCall* fc =
+				   new FS_FunctionCall(builtin_f("game").function.get(), nullptr, {});
+				fc->init(*scripting_saver_);
+				GetProperty* get = new GetProperty(fc, builtin_p("map").property.get());
+				get->init(*scripting_saver_);
+				FS_FunctionCall* rand =
+				   new FS_FunctionCall(builtin_f("random_2").function.get(), nullptr, {val_5, val_50});
+				rand->init(*scripting_saver_);
+				FS_FunctionCall* fcf =
+				   new FS_FunctionCall(builtin_f("field").function.get(), get, {val_20, rand});
+				fcf->init(*scripting_saver_);
+				FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(false, v_field, fcf);
+				f->init(*scripting_saver_);
+				_while->mutable_body().push_back(f);
+			}
+			{
+				GetProperty* get = new GetProperty(v_field, builtin_p("f_height").property.get());
+				get->init(*scripting_saver_);
+				OperatorLess* o_l_5 = new OperatorLess(get, val_5);
+				o_l_5->init(*scripting_saver_);
+				OperatorGreaterEq* o_g_50 = new OperatorGreaterEq(get, val_50);
+				o_g_50->init(*scripting_saver_);
+				OperatorGreater* o_g_20 = new OperatorGreater(get, val_20);
+				o_g_20->init(*scripting_saver_);
+
+				OperatorAdd* o_a_30 = new OperatorAdd(get, val_30);
+				o_a_30->init(*scripting_saver_);
+				OperatorSubtract* o_s_20 = new OperatorSubtract(get, val_20);
+				o_s_20->init(*scripting_saver_);
+				OperatorAdd* o_a_5 = new OperatorAdd(get, val_5);
+				o_a_5->init(*scripting_saver_);
+				OperatorSubtract* o_s_10 = new OperatorSubtract(get, val_10);
+				o_s_10->init(*scripting_saver_);
+
+				FS_SetProperty* set_5 =
+				   new FS_SetProperty(v_field, builtin_p("f_height").property.get(), o_a_5);
+				set_5->init(*scripting_saver_);
+				FS_SetProperty* set_30 =
+				   new FS_SetProperty(v_field, builtin_p("f_height").property.get(), o_a_30);
+				set_30->init(*scripting_saver_);
+				FS_SetProperty* set__10 =
+				   new FS_SetProperty(v_field, builtin_p("f_height").property.get(), o_s_10);
+				set__10->init(*scripting_saver_);
+				FS_SetProperty* set__20 =
+				   new FS_SetProperty(v_field, builtin_p("f_height").property.get(), o_s_20);
+				set__20->init(*scripting_saver_);
+
+				FS_If* _if = new FS_If(o_l_5);
+				_if->init(*scripting_saver_);
+				_while->mutable_body().push_back(_if);
+				_if->mutable_if_body().push_back(set_30);
+				_if->mutable_elseif_bodies().push_back(
+				   std::pair<Assignable*, std::list<FunctionStatement*>>(o_g_50, {set__20}));
+				_if->mutable_elseif_bodies().push_back(
+				   std::pair<Assignable*, std::list<FunctionStatement*>>(o_g_20, {set__10}));
+				_if->mutable_else_body().push_back(set_5);
+			}
+			main_func->mutable_body().push_back(_while);
 		}
 		{
-			ConstexprInteger* val = new ConstexprInteger(59);
-			val->init(*scripting_saver_);
-			FS_SetProperty* f = new FS_SetProperty(v_field, builtin_p("f_height").property.get(), val);
-			f->init(*scripting_saver_);
-			main_func->mutable_body().push_back(f);
-		}
-		{
-			ConstexprString* c1 = new ConstexprString("NOCOM: ", false);
+			ConstexprString* c1 = new ConstexprString("NOCOM:", false);
 			c1->init(*scripting_saver_);
-			ConstexprString* c2 = new ConstexprString("Hello World!", true);
+			ConstexprString* c2 = new ConstexprString(" Hello World! ", true);
 			c2->init(*scripting_saver_);
-			StringConcat* sc = new StringConcat({c1, c2});
+			ConstexprInteger* c3 = new ConstexprInteger(123);
+			c3->init(*scripting_saver_);
+			OperatorStringConcat* scc = new OperatorStringConcat(c1, c2);
+			scc->init(*scripting_saver_);
+			OperatorStringConcat* sc = new OperatorStringConcat(scc, c3);
 			sc->init(*scripting_saver_);
 			FS_FunctionCall* fc =
 			   new FS_FunctionCall(builtin_f("print").function.get(), nullptr, {sc});
@@ -1432,30 +1485,36 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	if (!variables_.empty()) {
 		fw.print_f("\n");
 		for (const auto& var : variables_) {
-			var->write_lua(fw);
+			var->write_lua(0, fw);
 		}
 	}
 
 	// User-defined functions
 	for (const auto& f : scripting_saver_->all<LuaFunction>()) {
-		f->write_lua(fw);
+		f->write_lua(0, fw);
 	}
 
 	// Player relations (yes, these are set via Lua, not saved in the map)
-	fw.print_f("\n");
-	const unsigned nrplayers = map.get_nrplayers();
-	for (unsigned p1 = 0; p1 < nrplayers; ++p1) {
-		for (unsigned p2 = 0; p2 < nrplayers; ++p2) {
-			if (const uint8_t r = player_relations_[p1 * nrplayers + p2]) {
-				if (p1 == p2) {
-					assert(r <= nrplayers / 2);
-					fw.print_f("wl.Game().players[%u].team = %u\n", p1 + 1, r);
-				} else {
-					assert(r == 1);
-					fw.print_f("wl.Game().players[%u]:set_attack_forbidden(%u, true)\n", p1 + 1, p2 + 1);
+	{
+		bool needs_newline = false;
+		const unsigned nrplayers = map.get_nrplayers();
+		for (unsigned p1 = 0; p1 < nrplayers; ++p1) {
+			for (unsigned p2 = 0; p2 < nrplayers; ++p2) {
+				if (const uint8_t r = player_relations_[p1 * nrplayers + p2]) {
+					needs_newline = true;
+					if (p1 == p2) {
+						assert(r <= nrplayers / 2);
+						fw.print_f("\nwl.Game().players[%u].team = %u", p1 + 1, r);
+					} else {
+						assert(r == 1);
+						fw.print_f(
+						   "\nwl.Game().players[%u]:set_attack_forbidden(%u, true)", p1 + 1, p2 + 1);
+					}
 				}
 			}
 		}
+		if (needs_newline)
+			fw.print_f("\n");
 	}
 
 	// Hand-written includes
@@ -1472,6 +1531,6 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	assert(!functions_.empty());
 	for (const auto& f : functions_) {
 		fw.print_f("\n");
-		f->write_lua(fw);
+		f->write_lua(0, fw);
 	}
 }

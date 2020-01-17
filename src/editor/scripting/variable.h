@@ -48,7 +48,7 @@ public:
 		check_name_valid(n);
 		name_ = n;
 	}
-	int32_t write_lua(FileWrite&) const override;
+	void write_lua(int32_t, FileWrite&) const override;
 
 	std::string readable() const override {
 		return name_;
@@ -71,7 +71,7 @@ public:
 
 	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
-	int32_t write_lua(FileWrite&) const override;
+	void write_lua(int32_t, FileWrite&) const override;
 	inline ScriptingObject::ID id() const override {
 		return ScriptingObject::ID::GetProperty;
 	}

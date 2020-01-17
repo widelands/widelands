@@ -55,9 +55,8 @@ void Variable::save(FileWrite& fw) const {
 	fw.c_string(name_.c_str());
 }
 
-int32_t Variable::write_lua(FileWrite& fw) const {
+void Variable::write_lua(int32_t, FileWrite& fw) const {
 	fw.print_f("%s", name_.c_str());
-	return 0;
 }
 
 /************************************************************
@@ -110,13 +109,12 @@ void GetProperty::set_variable(Assignable& v) {
 		property_ = nullptr;
 	}
 }
-int32_t GetProperty::write_lua(FileWrite& fw) const {
+void GetProperty::write_lua(int32_t i, FileWrite& fw) const {
 	assert(variable_);
 	assert(property_);
 	assert(is(variable_->type(), property_->get_class()));
-	variable_->write_lua(fw);
+	variable_->write_lua(i, fw);
 	fw.print_f(".%s", property_->get_name().c_str());
-	return 0;
 }
 std::string GetProperty::readable() const {
 	assert(variable_);

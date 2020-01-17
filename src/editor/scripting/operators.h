@@ -55,7 +55,7 @@ public:
 	void load(FileRead&, Loader&) override;
 	void load_pointers(const ScriptingLoader&, Loader&) override;
 	void save(FileWrite&) const override;
-	int32_t write_lua(FileWrite&) const override;
+	void write_lua(int32_t, FileWrite&) const override;
 
 	std::string readable() const override;
 
@@ -92,16 +92,22 @@ OPERATOR_FACTORY(Add, Integer, Integer, "+")
 OPERATOR_FACTORY(Subtract, Integer, Integer, "-")
 OPERATOR_FACTORY(Multiply, Integer, Integer, "*")
 OPERATOR_FACTORY(Divide, Integer, Integer, "/")
+
 OPERATOR_FACTORY(Less, Integer, Boolean, "<")
 OPERATOR_FACTORY(LessEq, Integer, Boolean, "<=")
 OPERATOR_FACTORY(Greater, Integer, Boolean, ">")
 OPERATOR_FACTORY(GreaterEq, Integer, Boolean, ">=")
+
 OPERATOR_FACTORY(MathematicalEquals, Integer, Boolean, "==")
 OPERATOR_FACTORY(MathematicalUnequal, Integer, Boolean, "~=")
+
 OPERATOR_FACTORY(LogicalEquals, Boolean, Boolean, "==")
 OPERATOR_FACTORY(LogicalUnequal, Boolean, Boolean, "~=")
+
 OPERATOR_FACTORY(And, Boolean, Boolean, "and")
 OPERATOR_FACTORY(Or, Boolean, Boolean, "or")
+
+OPERATOR_FACTORY(StringConcat, String, String, "..")
 
 #undef OPERATOR_FACTORY
 
@@ -131,7 +137,7 @@ public:
 	void load(FileRead&, Loader&) override;
 	void load_pointers(const ScriptingLoader&, Loader&) override;
 	void save(FileWrite&) const override;
-	int32_t write_lua(FileWrite&) const override;
+	void write_lua(int32_t, FileWrite&) const override;
 
 	std::string readable() const override;
 	ScriptingObject::ID id() const override {

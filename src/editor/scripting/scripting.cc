@@ -24,6 +24,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/scripting/builtin.h"
 #include "editor/scripting/constexpr.h"
+#include "editor/scripting/control_structures.h"
 #include "editor/scripting/function.h"
 #include "editor/scripting/function_statements.h"
 #include "editor/scripting/operators.h"
@@ -111,8 +112,6 @@ ScriptingObject* ScriptingObject::load(FileRead& fr) {
 			return new ConstexprBoolean(false);
 		case ID::ConstexprNil:
 			return new ConstexprNil();
-		case ID::StringConcat:
-			return new StringConcat({});
 		case ID::Variable:
 			return new Variable(VariableType::Nil, "", false);
 		case ID::GetProperty:
@@ -157,6 +156,12 @@ ScriptingObject* ScriptingObject::load(FileRead& fr) {
 			return new OperatorLess(nullptr, nullptr);
 		case ID::OperatorLessEq:
 			return new OperatorLessEq(nullptr, nullptr);
+		case ID::OperatorStringConcat:
+			return new OperatorStringConcat(nullptr, nullptr);
+		case ID::FSWhile:
+			return new FS_While(false, nullptr);
+		case ID::FSIf:
+			return new FS_If(nullptr);
 		default:
 			throw Widelands::GameDataError("Invalid ScriptingObject ID: %u", id);
 		}
@@ -341,11 +346,14 @@ bool is(VariableType t, VariableType s) {
 		return true;
 	}
 	switch (t) {
+	case VariableType::String:
 	case VariableType::Integer:
 	case VariableType::Double:
+		// Implicit conversion to String is allowed for numbers so they can be concatenated with '..'
+		return is(s, VariableType::String);
+
 	case VariableType::Boolean:
 	case VariableType::Table:
-	case VariableType::String:
 	case VariableType::Game:
 	case VariableType::Map:
 	case VariableType::Field:
@@ -516,6 +524,11 @@ ScriptingLoader::ScriptingLoader(FileRead& fr, ScriptingSaver& s) {
 		// Second load phase: Load pointers between objects.
 		for (const auto& pair : list_) {
 			pair.first->load_pointers(*this, *pair.second);
+			if (!pair.second->empty()) {
+				throw Widelands::GameDataError(
+				   "load_pointers: %" PRIuS " items left in loader for %s %u", pair.second->size(),
+				   typeid(*pair.first).name(), pair.first->serial());
+			}
 		}
 	} catch (const WException& e) {
 		throw wexception("ScriptingLoader: %s", e.what());

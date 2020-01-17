@@ -58,17 +58,16 @@ void FS_LocalVarDeclOrAssign::save(FileWrite& fw) const {
 	fw.unsigned_32(variable_->serial());
 	fw.unsigned_32(value_ ? value_->serial() : 0);
 }
-int32_t FS_LocalVarDeclOrAssign::write_lua(FileWrite& fw) const {
+void FS_LocalVarDeclOrAssign::write_lua(int32_t i, FileWrite& fw) const {
 	if (declare_local_) {
 		fw.print_f("local ");
 	}
 	assert(variable_);
-	variable_->write_lua(fw);
+	variable_->write_lua(i, fw);
 	if (value_) {
 		fw.print_f(" = ");
-		value_->write_lua(fw);
+		value_->write_lua(i, fw);
 	}
-	return 0;
 }
 std::string FS_LocalVarDeclOrAssign::readable() const {
 	std::string str = "";
@@ -167,10 +166,10 @@ void FS_FunctionCall::check_parameters() const {
 		}
 	}
 }
-int32_t FS_FunctionCall::write_lua(FileWrite& fw) const {
+void FS_FunctionCall::write_lua(int32_t i, FileWrite& fw) const {
 	check_parameters();
 	if (variable_) {
-		variable_->write_lua(fw);
+		variable_->write_lua(i, fw);
 		fw.print_f(":");
 	}
 	fw.print_f("%s(", function_->get_name().c_str());
@@ -178,10 +177,9 @@ int32_t FS_FunctionCall::write_lua(FileWrite& fw) const {
 		if (it != parameters_.begin()) {
 			fw.print_f(", ");
 		}
-		(*it)->write_lua(fw);
+		(*it)->write_lua(i, fw);
 	}
 	fw.print_f(")");
-	return 0;
 }
 std::string FS_FunctionCall::readable() const {
 	std::string str;
@@ -262,16 +260,15 @@ void FS_SetProperty::set_variable(Assignable& v) {
 		property_ = nullptr;
 	}
 }
-int32_t FS_SetProperty::write_lua(FileWrite& fw) const {
+void FS_SetProperty::write_lua(int32_t i, FileWrite& fw) const {
 	assert(variable_);
 	assert(property_);
 	assert(value_);
 	assert(is(variable_->type(), property_->get_class()));
 	assert(is(value_->type(), property_->get_type()));
-	variable_->write_lua(fw);
+	variable_->write_lua(i, fw);
 	fw.print_f(".%s = ", property_->get_name().c_str());
-	value_->write_lua(fw);
-	return 0;
+	value_->write_lua(i, fw);
 }
 std::string FS_SetProperty::readable() const {
 	assert(variable_);
@@ -314,15 +311,14 @@ void FS_LaunchCoroutine::save(FileWrite& fw) const {
 	fw.unsigned_16(kCurrentPacketVersionFS_LaunchCoroutine);
 	fw.unsigned_32(function_->serial());
 }
-int32_t FS_LaunchCoroutine::write_lua(FileWrite& fw) const {
+void FS_LaunchCoroutine::write_lua(int32_t i, FileWrite& fw) const {
 	function_->check_parameters();
 	fw.print_f("run(%s", function_->get_function()->get_name().c_str());
 	for (const Assignable* p : function_->parameters()) {
 		fw.print_f(", ");
-		p->write_lua(fw);
+		p->write_lua(i, fw);
 	}
 	fw.print_f(")");
-	return 0;
 }
 std::string FS_LaunchCoroutine::readable() const {
 	std::string str = "run(" + function_->get_function()->get_name();

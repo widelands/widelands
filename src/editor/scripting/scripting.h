@@ -167,7 +167,6 @@ public:
 		ConstexprString,
 		ConstexprInteger,
 		ConstexprBoolean,
-		StringConcat,
 		Variable,
 		GetProperty,
 		LuaFunction,
@@ -190,6 +189,9 @@ public:
 		OperatorLessEq,
 		OperatorGreater,
 		OperatorGreaterEq,
+		OperatorStringConcat,
+		FSIf,
+		FSWhile,
 	};
 	virtual ScriptingObject::ID id() const = 0;
 
@@ -201,7 +203,7 @@ public:
 
 	// Returns the amount by which to change the indentation: `if`/`for`/`while` statements etc
 	// should increase the indent level; `end` should decrease it.
-	virtual int32_t write_lua(FileWrite&) const = 0;
+	virtual void write_lua(int32_t, FileWrite&) const = 0;
 
 	// Localized human-readable description of this object
 	virtual std::string readable() const = 0;

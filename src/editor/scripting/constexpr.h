@@ -56,7 +56,7 @@ public:
 
 	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
-	int32_t write_lua(FileWrite&) const override;
+	void write_lua(int32_t, FileWrite&) const override;
 
 	std::string readable() const override {
 		return "\"" + value_ + "\"";
@@ -92,7 +92,7 @@ public:
 
 	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
-	int32_t write_lua(FileWrite&) const override;
+	void write_lua(int32_t, FileWrite&) const override;
 
 	std::string readable() const override {
 		return std::to_string(value_);
@@ -127,7 +127,7 @@ public:
 
 	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
-	int32_t write_lua(FileWrite&) const override;
+	void write_lua(int32_t, FileWrite&) const override;
 
 	std::string readable() const override {
 		return value_ ? _("true") : _("false");
@@ -152,53 +152,12 @@ public:
 	VariableType type() const override {
 		return VariableType::Nil;
 	}
-	int32_t write_lua(FileWrite&) const override;
+	void write_lua(int32_t, FileWrite&) const override;
 	std::string readable() const override {
 		return _("nil");
 	}
 
 	DISALLOW_COPY_AND_ASSIGN(ConstexprNil);
-};
-
-/************************************************************
-                   String concatenations
-************************************************************/
-
-// A concatenation of any number of Assignables with '..'.
-class StringConcat : public Assignable {
-public:
-	StringConcat(std::list<Assignable*> v) : values_(v) {
-	}
-	~StringConcat() override {
-	}
-	ScriptingObject::ID id() const override {
-		return ScriptingObject::ID::StringConcat;
-	}
-	VariableType type() const override {
-		return VariableType::String;
-	}
-
-	const std::list<Assignable*>& values() const {
-		return values_;
-	}
-	std::list<Assignable*>& mutable_values() {
-		return values_;
-	}
-
-	void load(FileRead&, Loader&) override;
-	void save(FileWrite&) const override;
-	int32_t write_lua(FileWrite&) const override;
-
-	std::string readable() const override;
-
-	std::set<uint32_t> references() const override;
-
-	void load_pointers(const ScriptingLoader&, Loader&) override;
-
-private:
-	std::list<Assignable*> values_;
-
-	DISALLOW_COPY_AND_ASSIGN(StringConcat);
 };
 
 #endif  // end of include guard: WL_EDITOR_SCRIPTING_CONSTEXPR_H

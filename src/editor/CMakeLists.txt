@@ -8,6 +8,8 @@ wl_library(editor
     scripting/builtin.h
     scripting/constexpr.cc
     scripting/constexpr.h
+    scripting/control_structures.cc
+    scripting/control_structures.h
     scripting/function.cc
     scripting/function.h
     scripting/function_statements.cc
