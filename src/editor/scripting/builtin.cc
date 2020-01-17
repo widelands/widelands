@@ -30,6 +30,15 @@ const BuiltinFunctionInfo& builtin_f(const std::string& name) {
 	throw wexception("Unknown builtin function %s", name.c_str());
 }
 
+const BuiltinFunctionInfo* builtin_f(const FunctionBase& f) {
+	for (size_t i = 0; kBuiltinFunctions[i]; ++i) {
+		if (kBuiltinFunctions[i]->function.get() == &f) {
+			return kBuiltinFunctions[i];
+		}
+	}
+	return nullptr;
+}
+
 const BuiltinPropertyInfo& builtin_p(const std::string& name) {
 	for (size_t i = 0; kBuiltinProperties[i]; ++i) {
 		if (kBuiltinProperties[i]->unique_name == name) {
@@ -50,13 +59,6 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
 
    // Real Lua builtins
 
-   new BuiltinFunctionInfo(
-      "sleep",
-      []() { return _("Pauses the current thread for the given number of milliseconds."); },
-      new FunctionBase("sleep",
-                       VariableType::Nil, // call on
-                       VariableType::Nil, // returns
-                       {std::make_pair("milliseconds", VariableType::Integer)})),
    new BuiltinFunctionInfo(
       "print",
       []() { return _("Prints debug information to the stdandard output."); },
@@ -83,6 +85,60 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        {std::make_pair("min", VariableType::Integer),
                         std::make_pair("max", VariableType::Integer)},
                        false /* no spellcheck because of '.' */ )),
+
+	// Shipped Lua functions
+
+   new BuiltinFunctionInfo(
+      "sleep",
+      []() { return _("Pauses the current thread for the given number of milliseconds."); },
+      new FunctionBase("sleep",
+                       VariableType::Nil, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("milliseconds", VariableType::Integer)}),
+      "scripting/coroutine.lua"),
+   new BuiltinFunctionInfo(
+      "wake_me",
+      []() { return _("Pauses the current thread and resumes it at the given gametime (in milliseconds)."); },
+      new FunctionBase("wake_me",
+                       VariableType::Nil, // call on
+                       VariableType::Nil, // returns
+                       {std::make_pair("time", VariableType::Integer)}),
+      "scripting/coroutine.lua"),
+   // TODO(Nordfriese): This function takes varargs
+   new BuiltinFunctionInfo("array_combine_2", []() { return
+		_("Concatenates the given arrays into a single array."); },
+		new FunctionBase("array_combine", VariableType::Nil, // call on
+   		VariableType::Table, // returns
+                       {std::make_pair("array1", VariableType::Table),
+                       std::make_pair("array2", VariableType::Table)}),
+      "scripting/table.lua"),
+   new BuiltinFunctionInfo("array_combine_3", []() { return
+		_("Concatenates the given arrays into a single array."); },
+		new FunctionBase("array_combine", VariableType::Nil, // call on
+   		VariableType::Table, // returns
+                       {std::make_pair("array1", VariableType::Table),
+                       std::make_pair("array2", VariableType::Table),
+                       std::make_pair("array3", VariableType::Table)}),
+      "scripting/table.lua"),
+   new BuiltinFunctionInfo("array_combine_4", []() {
+   		return _("Concatenates the given arrays into a single array."); },
+   		new FunctionBase("array_combine", VariableType::Nil, // call on
+   		VariableType::Table, // returns
+                       {std::make_pair("array1", VariableType::Table),
+                       std::make_pair("array2", VariableType::Table),
+                       std::make_pair("array3", VariableType::Table),
+                       std::make_pair("array4", VariableType::Table)}),
+      "scripting/table.lua"),
+   new BuiltinFunctionInfo("array_combine_5", []() {return
+   		_("Concatenates the given arrays into a single array."); },
+   		new FunctionBase("array_combine", VariableType::Nil, // call on
+   		VariableType::Table, // returns
+                       {std::make_pair("array1", VariableType::Table),
+                       std::make_pair("array2", VariableType::Table),
+                       std::make_pair("array3", VariableType::Table),
+                       std::make_pair("array4", VariableType::Table),
+                       std::make_pair("array5", VariableType::Table)}),
+      "scripting/table.lua"),
 
    // Game
 

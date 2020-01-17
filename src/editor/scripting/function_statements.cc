@@ -81,6 +81,14 @@ std::string FS_LocalVarDeclOrAssign::readable() const {
 	}
 	return str;
 }
+std::set<uint32_t> FS_LocalVarDeclOrAssign::references() const {
+	auto set = FunctionStatement::references();
+	assert(variable_);
+	set.insert(variable_->serial());
+	if (value_)
+		set.insert(value_->serial());
+	return set;
+}
 
 // Function invoking
 
@@ -107,7 +115,7 @@ void FS_FunctionCall::load_pointers(ScriptingLoader& l) {
 	FunctionStatement::load_pointers(l);
 	Assignable::load_pointers(l);
 	FS_FunctionCall::Loader& loader = l.loader<FS_FunctionCall::Loader>(this);
-	variable_ = loader.var ? &l.get<Variable>(loader.var) : nullptr;
+	variable_ = loader.var ? &l.get<Assignable>(loader.var) : nullptr;
 	function_ = &serial_to_function(l, loader.func);
 	for (uint32_t s : loader.params) {
 		parameters_.push_back(&l.get<Assignable>(s));
@@ -161,7 +169,8 @@ void FS_FunctionCall::check_parameters() const {
 int32_t FS_FunctionCall::write_lua(FileWrite& fw) const {
 	check_parameters();
 	if (variable_) {
-		fw.print_f("%s:", variable_->get_name().c_str());
+		variable_->write_lua(fw);
+		fw.print_f(":");
 	}
 	fw.print_f("%s(", function_->get_name().c_str());
 	for (auto it = parameters_.begin(); it != parameters_.end(); ++it) {
@@ -176,7 +185,7 @@ int32_t FS_FunctionCall::write_lua(FileWrite& fw) const {
 std::string FS_FunctionCall::readable() const {
 	std::string str;
 	if (variable_) {
-		str += variable_->get_name() + ":";
+		str += variable_->readable() + ":";
 	}
 	str += function_->get_name() + "(";
 	for (auto it = parameters_.begin(); it != parameters_.end(); ++it) {
@@ -187,67 +196,18 @@ std::string FS_FunctionCall::readable() const {
 	}
 	return str + ")";
 }
-
-// Property access
-
-constexpr uint16_t kCurrentPacketVersionFS_GetProperty = 1;
-void FS_GetProperty::load(FileRead& fr, ScriptingLoader& l) {
-	try {
-		FunctionStatement::load(fr, l);
-		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version != kCurrentPacketVersionFS_GetProperty) {
-			throw Widelands::UnhandledVersionError(
-			   "FS_GetProperty", packet_version, kCurrentPacketVersionFS_GetProperty);
-		}
-		FS_GetProperty::Loader& loader = l.loader<FS_GetProperty::Loader>(this);
-		loader.var = fr.unsigned_32();
-		loader.prop = fr.unsigned_32();
-	} catch (const WException& e) {
-		throw wexception("FS_GetProperty: %s", e.what());
+std::set<uint32_t> FS_FunctionCall::references() const {
+	auto set = FunctionStatement::references();
+	if (variable_) {
+		set.insert(variable_->serial());
 	}
-}
-void FS_GetProperty::load_pointers(ScriptingLoader& l) {
-	FunctionStatement::load_pointers(l);
-	Assignable::load_pointers(l);
-	FS_GetProperty::Loader& loader = l.loader<FS_GetProperty::Loader>(this);
-	variable_ = &l.get<Variable>(loader.var);
-	property_ = kBuiltinProperties[loader.prop]->property.get();
-}
-void FS_GetProperty::save(FileWrite& fw) const {
-	FunctionStatement::save(fw);
-	fw.unsigned_16(kCurrentPacketVersionFS_GetProperty);
-	assert(variable_);
-	assert(property_);
-	fw.unsigned_32(variable_->serial());
-	fw.unsigned_32(property_to_serial(*property_));
-}
-VariableType FS_GetProperty::type() const {
-	assert(property_);
-	return property_->get_type();
-}
-void FS_GetProperty::set_property(Property& p) {
-	property_ = &p;
-	if (variable_ && !is(variable_->type(), property_->get_class())) {
-		variable_ = nullptr;
+	if (upcast(const LuaFunction, f, function_)) {
+		set.insert(f->serial());
 	}
-}
-void FS_GetProperty::set_variable(Variable& v) {
-	variable_ = &v;
-	if (property_ && !is(variable_->type(), property_->get_class())) {
-		property_ = nullptr;
+	for (const Assignable* a : parameters_) {
+		set.insert(a->serial());
 	}
-}
-int32_t FS_GetProperty::write_lua(FileWrite& fw) const {
-	assert(variable_);
-	assert(property_);
-	assert(is(variable_->type(), property_->get_class()));
-	fw.print_f("%s.%s", variable_->get_name().c_str(), property_->get_name().c_str());
-	return 0;
-}
-std::string FS_GetProperty::readable() const {
-	assert(variable_);
-	assert(property_);
-	return variable_->get_name() + "." + property_->get_name();
+	return set;
 }
 
 // Property manipulation
@@ -272,7 +232,7 @@ void FS_SetProperty::load(FileRead& fr, ScriptingLoader& l) {
 void FS_SetProperty::load_pointers(ScriptingLoader& l) {
 	FunctionStatement::load_pointers(l);
 	FS_SetProperty::Loader& loader = l.loader<FS_SetProperty::Loader>(this);
-	variable_ = &l.get<Variable>(loader.var);
+	variable_ = &l.get<Assignable>(loader.var);
 	property_ = kBuiltinProperties[loader.prop]->property.get();
 	value_ = &l.get<Assignable>(loader.val);
 }
@@ -294,7 +254,7 @@ void FS_SetProperty::set_property(Property& p) {
 		value_ = nullptr;
 	}
 }
-void FS_SetProperty::set_variable(Variable& v) {
+void FS_SetProperty::set_variable(Assignable& v) {
 	variable_ = &v;
 	if (property_ && !is(variable_->type(), property_->get_class())) {
 		property_ = nullptr;
@@ -306,7 +266,8 @@ int32_t FS_SetProperty::write_lua(FileWrite& fw) const {
 	assert(value_);
 	assert(is(variable_->type(), property_->get_class()));
 	assert(is(value_->type(), property_->get_type()));
-	fw.print_f("%s.%s = ", variable_->get_name().c_str(), property_->get_name().c_str());
+	variable_->write_lua(fw);
+	fw.print_f(".%s = ", property_->get_name().c_str());
 	value_->write_lua(fw);
 	return 0;
 }
@@ -314,7 +275,15 @@ std::string FS_SetProperty::readable() const {
 	assert(variable_);
 	assert(property_);
 	assert(value_);
-	return variable_->get_name() + "." + property_->get_name() + " = " + value_->readable();
+	return variable_->readable() + "." + property_->get_name() + " = " + value_->readable();
+}
+std::set<uint32_t> FS_SetProperty::references() const {
+	auto set = FunctionStatement::references();
+	assert(variable_);
+	assert(value_);
+	set.insert(variable_->serial());
+	set.insert(value_->serial());
+	return set;
 }
 
 // Coroutine starting
@@ -360,4 +329,10 @@ std::string FS_LaunchCoroutine::readable() const {
 		str += ", " + p->readable();
 	}
 	return str + ")";
+}
+std::set<uint32_t> FS_LaunchCoroutine::references() const {
+	auto set = FunctionStatement::references();
+	assert(function_);
+	set.insert(function_->serial());
+	return set;
 }

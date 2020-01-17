@@ -31,7 +31,7 @@ class Variable;
 
 class FS_FunctionCall : public Assignable, public FunctionStatement {
 public:
-	FS_FunctionCall(FunctionBase* f, Variable* v, std::list<Assignable*> p)
+	FS_FunctionCall(FunctionBase* f, Assignable* v, std::list<Assignable*> p)
 	   : function_(f), variable_(v), parameters_(p) {
 	}
 	~FS_FunctionCall() override {
@@ -55,10 +55,10 @@ public:
 	void set_function(FunctionBase* f) {
 		function_ = f;
 	}
-	const Variable* get_variable() const {
+	const Assignable* get_variable() const {
 		return variable_;
 	}
-	void set_variable(Variable* v);
+	void set_variable(Assignable* v);
 	const std::list<Assignable*>& parameters() const {
 		return parameters_;
 	}
@@ -81,64 +81,21 @@ public:
 		return new FS_FunctionCall::Loader();
 	}
 	void load_pointers(ScriptingLoader&) override;
+	std::set<uint32_t> references() const override;
 
 private:
 	FunctionBase* function_;
-	Variable* variable_;
+	Assignable* variable_;
 	std::list<Assignable*> parameters_;
 
 	DISALLOW_COPY_AND_ASSIGN(FS_FunctionCall);
 };
 
-// Get the property of a builtin (e.g. field.x)
-class FS_GetProperty : public Assignable, public FunctionStatement {
-public:
-	FS_GetProperty(Variable& v, Property& p) : variable_(&v), property_(&p) {
-	}
-	~FS_GetProperty() override {
-	}
-
-	void load(FileRead&, ScriptingLoader&) override;
-	void save(FileWrite&) const override;
-	int32_t write_lua(FileWrite&) const override;
-	inline ScriptingObject::ID id() const override {
-		return ScriptingObject::ID::FSGetProperty;
-	}
-	VariableType type() const override;
-	std::string readable() const override;
-
-	const Property* get_property() const {
-		return property_;
-	}
-	void set_property(Property&);
-	const Variable* get_variable() const {
-		return variable_;
-	}
-	void set_variable(Variable&);
-
-	struct Loader : public ScriptingObject::Loader {
-		Loader() = default;
-		~Loader() override {
-		}
-		uint32_t var, prop;
-	};
-	ScriptingObject::Loader* create_loader() const override {
-		return new FS_GetProperty::Loader();
-	}
-	void load_pointers(ScriptingLoader&) override;
-
-private:
-	Variable* variable_;
-	Property* property_;
-
-	DISALLOW_COPY_AND_ASSIGN(FS_GetProperty);
-};
-
 // Set the property of a builtin (e.g. field.height = 5)
 class FS_SetProperty : public FunctionStatement {
 public:
-	FS_SetProperty(Variable& v, Property& p, Assignable& a)
-	   : variable_(&v), property_(&p), value_(&a) {
+	FS_SetProperty(Assignable* v, Property* p, Assignable* a)
+	   : variable_(v), property_(p), value_(a) {
 	}
 	~FS_SetProperty() override {
 	}
@@ -155,10 +112,10 @@ public:
 		return property_;
 	}
 	void set_property(Property&);
-	const Variable* get_variable() const {
+	const Assignable* get_variable() const {
 		return variable_;
 	}
-	void set_variable(Variable&);
+	void set_variable(Assignable&);
 	const Assignable* get_value() const {
 		return value_;
 	}
@@ -174,9 +131,10 @@ public:
 		return new FS_SetProperty::Loader();
 	}
 	void load_pointers(ScriptingLoader&) override;
+	std::set<uint32_t> references() const override;
 
 private:
-	Variable* variable_;
+	Assignable* variable_;
 	Property* property_;
 	Assignable* value_;
 
@@ -216,6 +174,7 @@ public:
 		return new FS_LaunchCoroutine::Loader();
 	}
 	void load_pointers(ScriptingLoader&) override;
+	std::set<uint32_t> references() const override;
 
 private:
 	FS_FunctionCall* function_;
@@ -269,6 +228,7 @@ public:
 		return new FS_LocalVarDeclOrAssign::Loader();
 	}
 	void load_pointers(ScriptingLoader&) override;
+	std::set<uint32_t> references() const override;
 
 private:
 	Variable* variable_;

@@ -21,10 +21,12 @@
 
 #include <memory>
 
+#include "editor/editorinteractive.h"
 #include "editor/scripting/builtin.h"
 #include "editor/scripting/constexpr.h"
 #include "editor/scripting/function.h"
 #include "editor/scripting/function_statements.h"
+#include "editor/scripting/operators.h"
 #include "editor/scripting/variable.h"
 
 // Identifier helper functions
@@ -80,7 +82,7 @@ void ScriptingObject::load(FileRead& fr, ScriptingLoader&) {
 		serial_ = fr.unsigned_32();
 		next_serial_ = std::max(next_serial_, serial_);
 	} catch (const WException& e) {
-		throw wexception("editor abstract assignable: %s", e.what());
+		throw wexception("editor abstract scripting object: %s", e.what());
 	}
 }
 
@@ -113,6 +115,8 @@ ScriptingObject* ScriptingObject::load(FileRead& fr) {
 			return new StringConcat({});
 		case ID::Variable:
 			return new Variable(VariableType::Nil, "", false);
+		case ID::GetProperty:
+			return new GetProperty(nullptr, nullptr);
 		case ID::LuaFunction:
 			return new LuaFunction("", false);
 		case ID::FSFunctionCall:
@@ -121,6 +125,38 @@ ScriptingObject* ScriptingObject::load(FileRead& fr) {
 			return new FS_LocalVarDeclOrAssign(false, nullptr, nullptr);
 		case ID::FSLaunchCoroutine:
 			return new FS_LaunchCoroutine(nullptr);
+		case ID::FSSetProperty:
+			return new FS_SetProperty(nullptr, nullptr, nullptr);
+		case ID::OperatorNot:
+			return new OperatorNot(nullptr);
+		case ID::OperatorAnd:
+			return new OperatorAnd(nullptr, nullptr);
+		case ID::OperatorOr:
+			return new OperatorOr(nullptr, nullptr);
+		case ID::OperatorLogicalEquals:
+			return new OperatorLogicalEquals(nullptr, nullptr);
+		case ID::OperatorLogicalUnequal:
+			return new OperatorLogicalUnequal(nullptr, nullptr);
+		case ID::OperatorMathematicalEquals:
+			return new OperatorMathematicalEquals(nullptr, nullptr);
+		case ID::OperatorMathematicalUnequal:
+			return new OperatorMathematicalUnequal(nullptr, nullptr);
+		case ID::OperatorAdd:
+			return new OperatorAdd(nullptr, nullptr);
+		case ID::OperatorSubtract:
+			return new OperatorSubtract(nullptr, nullptr);
+		case ID::OperatorMultiply:
+			return new OperatorMultiply(nullptr, nullptr);
+		case ID::OperatorDivide:
+			return new OperatorDivide(nullptr, nullptr);
+		case ID::OperatorGreater:
+			return new OperatorGreater(nullptr, nullptr);
+		case ID::OperatorGreaterEq:
+			return new OperatorGreaterEq(nullptr, nullptr);
+		case ID::OperatorLess:
+			return new OperatorLess(nullptr, nullptr);
+		case ID::OperatorLessEq:
+			return new OperatorLessEq(nullptr, nullptr);
 		default:
 			throw Widelands::GameDataError("Invalid ScriptingObject ID: %u", id);
 		}
@@ -301,7 +337,7 @@ std::string descname(VariableType t) {
 
 // static
 bool is(VariableType t, VariableType s) {
-	if (t == s || t == VariableType::Nil) {
+	if (t == s || t == VariableType::Nil || s == VariableType::Boolean) {
 		return true;
 	}
 	switch (t) {
@@ -410,6 +446,53 @@ void ScriptingSaver::save(FileWrite& fw) const {
 	fw.unsigned_32(list_.size());
 	for (const auto& a : list_) {
 		a->save(fw);
+	}
+}
+
+void ScriptingSaver::cleanup(const EditorInteractive& eia) {
+	std::list<const ScriptingObject*> cores;
+	std::set<uint32_t> reached;
+	for (const auto* v : eia.variables()) {
+		cores.push_back(v);
+		reached.insert(v->serial());
+	}
+	for (const auto* f : eia.functions()) {
+		cores.push_back(f);
+		reached.insert(f->serial());
+	}
+	while (!cores.empty()) {
+		const ScriptingObject& so = *cores.back();
+		cores.pop_back();
+		for (uint32_t serial : so.references()) {
+			if (!reached.count(serial)) {
+				reached.insert(serial);
+				cores.push_back(&get<ScriptingObject>(serial));
+			}
+		}
+	}
+	std::list<uint32_t> remove;
+	for (auto& s : list_) {
+		if (!reached.count(s->serial())) {
+			remove.push_back(s->serial());
+		}
+	}
+	if (remove.empty())
+		return;
+	log("ScriptingSaver::cleanup(): Deleting %" PRIuS " item(s):\n", remove.size());
+	while (!remove.empty()) {
+		bool found = false;
+		for (auto it = list_.begin(); it != list_.end(); ++it) {
+			if ((*it)->serial() == remove.back()) {
+				found = true;
+				log(" · %u %s\n", (*it)->serial(), typeid(**it).name());
+				remove.pop_back();
+				list_.erase(it);
+				break;
+			}
+		}
+		if (!found)
+			throw wexception(
+			   "ScriptingSaver::cleanup(): Attempt to delete nonexistent object %u", remove.back());
 	}
 }
 

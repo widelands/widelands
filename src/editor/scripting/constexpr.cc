@@ -84,6 +84,14 @@ std::string StringConcat::readable() const {
 	}
 }
 
+std::set<uint32_t> StringConcat::references() const {
+	auto set = Assignable::references();
+	for (const Assignable* a : values_) {
+		set.insert(a->serial());
+	}
+	return set;
+}
+
 /************************************************************
                  Constexpr implementations
 ************************************************************/

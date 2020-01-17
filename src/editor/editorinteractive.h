@@ -200,17 +200,11 @@ public:
 	std::list<FS_LaunchCoroutine*>& functions() {
 		return functions_;
 	}
-	const std::list<std::string>& includes_global() const {
-		return includes_global_;
+	const std::list<std::string>& includes() const {
+		return includes_;
 	}
-	std::list<std::string>& includes_global() {
-		return includes_global_;
-	}
-	const std::list<std::string>& includes_local() const {
-		return includes_local_;
-	}
-	std::list<std::string>& includes_local() {
-		return includes_local_;
+	std::list<std::string>& includes() {
+		return includes_;
 	}
 
 private:
@@ -345,8 +339,7 @@ private:
 
 	std::list<FS_LocalVarDeclOrAssign*> variables_;
 	std::list<FS_LaunchCoroutine*> functions_;
-	std::list<std::string> includes_global_;
-	std::list<std::string> includes_local_;
+	std::list<std::string> includes_;
 	std::unique_ptr<ScriptingSaver> scripting_saver_;
 
 	void new_scripting_saver() {

@@ -643,8 +643,7 @@ void EditorInteractive::cleanup_for_load() {
 	scripting_saver_.reset(nullptr);
 	functions_.clear();
 	variables_.clear();
-	includes_global_.clear();
-	includes_local_.clear();
+	includes_.clear();
 }
 
 /// Called just before the editor starts, after postload, init and gfxload.
@@ -1260,6 +1259,7 @@ void EditorInteractive::finalize_clicked() {
 // NOCOM for testing (in debug builds only)
 #include "editor/scripting/builtin.h"
 #include "editor/scripting/constexpr.h"
+#include "editor/scripting/operators.h"
 #include "editor/scripting/variable.h"
 
 std::string EditorInteractive::try_finalize() {
@@ -1295,12 +1295,15 @@ std::string EditorInteractive::try_finalize() {
 		LuaFunction* main_func = new LuaFunction("mission_thread");
 		main_func->init(*scripting_saver_);
 
-		Variable* v_game = new Variable(VariableType::Game, "game");
-		v_game->init(*scripting_saver_);
-		Variable* v_map = new Variable(VariableType::Map, "map");
-		v_map->init(*scripting_saver_);
 		Variable* v_field = new Variable(VariableType::Field, "field");
 		v_field->init(*scripting_saver_);
+		{
+			ConstexprNil* nil = new ConstexprNil();
+			nil->init(*scripting_saver_);
+			FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(true, v_field, nil);
+			f->init(*scripting_saver_);
+			main_func->mutable_body().push_back(f);
+		}
 		{
 			ConstexprInteger* val = new ConstexprInteger(10000);
 			val->init(*scripting_saver_);
@@ -1310,33 +1313,24 @@ std::string EditorInteractive::try_finalize() {
 			main_func->mutable_body().push_back(fc);
 		}
 		{
+			ConstexprBoolean* unused_dummy = new ConstexprBoolean(true);
+			unused_dummy->init(*scripting_saver_);
+		}
+		{
 			FS_FunctionCall* fc = new FS_FunctionCall(builtin_f("game").function.get(), nullptr, {});
 			fc->init(*scripting_saver_);
-			FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(true, v_game, fc);
-			f->init(*scripting_saver_);
-			main_func->mutable_body().push_back(f);
-		}
-		{
-			FS_GetProperty* get = new FS_GetProperty(*v_game, *builtin_p("map").property);
+			GetProperty* get = new GetProperty(fc, builtin_p("map").property.get());
 			get->init(*scripting_saver_);
-			FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(true, v_map, get);
-			f->init(*scripting_saver_);
-			main_func->mutable_body().push_back(f);
-		}
-		{
-			ConstexprNil* nil = new ConstexprNil();
-			nil->init(*scripting_saver_);
-			FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(true, v_field, nil);
-			f->init(*scripting_saver_);
-			main_func->mutable_body().push_back(f);
-		}
-		{
 			ConstexprInteger* x = new ConstexprInteger(20);
 			x->init(*scripting_saver_);
 			ConstexprInteger* y = new ConstexprInteger(5);
 			y->init(*scripting_saver_);
+			ConstexprInteger* z = new ConstexprInteger(10);
+			z->init(*scripting_saver_);
+			OperatorMultiply* yz = new OperatorMultiply(y, z);
+			yz->init(*scripting_saver_);
 			FS_FunctionCall* fcf =
-			   new FS_FunctionCall(builtin_f("field").function.get(), v_map, {x, y});
+			   new FS_FunctionCall(builtin_f("field").function.get(), get, {x, yz});
 			fcf->init(*scripting_saver_);
 			FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(false, v_field, fcf);
 			f->init(*scripting_saver_);
@@ -1345,7 +1339,7 @@ std::string EditorInteractive::try_finalize() {
 		{
 			ConstexprInteger* val = new ConstexprInteger(59);
 			val->init(*scripting_saver_);
-			FS_SetProperty* f = new FS_SetProperty(*v_field, *builtin_p("f_height").property, *val);
+			FS_SetProperty* f = new FS_SetProperty(v_field, builtin_p("f_height").property.get(), val);
 			f->init(*scripting_saver_);
 			main_func->mutable_body().push_back(f);
 		}
@@ -1378,10 +1372,6 @@ std::string EditorInteractive::try_finalize() {
 		functions_.push_back(lc);
 	}
 #endif
-	// useful default includes
-	includes_global_.push_back("scripting/coroutine.lua");
-	includes_global_.push_back("scripting/objective_utils.lua");
-	includes_global_.push_back("scripting/table.lua");
 	rebuild_main_menu();
 	scenario_toolmenu_.set_enabled(true);
 	return "";
@@ -1421,10 +1411,19 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	}
 
 	// Builtin includes
-	// NOCOM: Get rid of includes_global_ and check ourselves which includes are required
-	if (!includes_global_.empty()) {
+	{
+		// We always include this one because it defines run()
+		std::set<std::string> includes = {"scripting/coroutine.lua"};
+		// Check which other includes to include
+		for (const FS_FunctionCall* f : scripting_saver_->all<FS_FunctionCall>()) {
+			if (const BuiltinFunctionInfo* b = builtin_f(*f->get_function())) {
+				if (!b->included_from.empty() && !includes.count(b->included_from)) {
+					includes.insert(b->included_from);
+				}
+			}
+		}
 		fw.print_f("\n");
-		for (const std::string& i : includes_global_) {
+		for (const std::string& i : includes) {
 			fw.print_f("include \"%s\"\n", i.c_str());
 		}
 	}
@@ -1462,9 +1461,9 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	// Hand-written includes
 	// NOTE: Those should not contain "directly scripted" code but only functions which
 	// can then be invoked from the user-defined functions here (not yet implemented)
-	if (!includes_local_.empty()) {
+	if (!includes_.empty()) {
 		fw.print_f("\n");
-		for (const std::string& i : includes_local_) {
+		for (const std::string& i : includes_) {
 			fw.print_f("include \"map:%s\"\n", i.c_str());
 		}
 	}

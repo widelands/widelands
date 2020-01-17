@@ -23,6 +23,7 @@
 #include <list>
 #include <map>
 #include <memory>
+#include <set>
 #include <string>
 #include <typeinfo>
 
@@ -33,6 +34,7 @@
 #include "io/filewrite.h"
 #include "logic/game_data_error.h"
 
+class EditorInteractive;
 class FunctionBase;
 class Property;
 class ScriptingLoader;
@@ -157,19 +159,35 @@ public:
 		init(s, true);
 	}
 
+	// Do not change the order!
 	enum class ID : uint16_t {
+		ConstexprNil = 0,
 		ConstexprString,
 		ConstexprInteger,
 		ConstexprBoolean,
-		ConstexprNil,
 		StringConcat,
 		Variable,
+		GetProperty,
 		LuaFunction,
 		FSLaunchCoroutine,
 		FSFunctionCall,
-		FSGetProperty,
 		FSSetProperty,
 		FSLocalVarDeclOrAssign,
+		OperatorNot,
+		OperatorAnd,
+		OperatorOr,
+		OperatorLogicalEquals,
+		OperatorLogicalUnequal,
+		OperatorMathematicalEquals,
+		OperatorMathematicalUnequal,
+		OperatorAdd,
+		OperatorSubtract,
+		OperatorMultiply,
+		OperatorDivide,
+		OperatorLess,
+		OperatorLessEq,
+		OperatorGreater,
+		OperatorGreaterEq,
 	};
 	virtual ScriptingObject::ID id() const = 0;
 
@@ -185,6 +203,12 @@ public:
 
 	// Localized human-readable description of this object
 	virtual std::string readable() const = 0;
+
+	// Returns the serials of all ScriptingObjects this ScriptingObject references in some way (e.g.
+	// assignments reference a variable and a value)
+	virtual std::set<uint32_t> references() const {
+		return {};
+	}
 
 	struct Loader {
 		Loader() {
@@ -212,7 +236,8 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(ScriptingObject);
 };
 
-// Helper class: Everything that can stand right of " = " or be used as a function parameter.
+// Helper class: Everything that can stand right of "=" or left of '.' and ':' or be used as a
+// function parameter.
 class Assignable : virtual public ScriptingObject {
 public:
 	~Assignable() override {
@@ -271,6 +296,7 @@ public:
 	}
 	void add(ScriptingObject&);
 	void save(FileWrite&) const;
+	void cleanup(const EditorInteractive&);
 
 	template <typename T> std::list<T*> all() const {
 		std::list<T*> result;
@@ -280,6 +306,20 @@ public:
 			}
 		}
 		return result;
+	}
+	template <typename T> T& get(uint32_t serial) const {
+		for (const auto& so : list_) {
+			if (so->serial() == serial) {
+				if (upcast(T, t, so.get())) {
+					return *t;
+				}
+				throw Widelands::GameDataError(
+				   "ScriptingSaver::get: ScriptingObject with serial %u is a %s, expected %s", serial,
+				   typeid(*so).name(), typeid(T).name());
+			}
+		}
+		throw Widelands::GameDataError(
+		   "ScriptingLoader::get: ScriptingObject with serial %u not found", serial);
 	}
 
 private:
@@ -298,11 +338,13 @@ public:
 				if (upcast(T, t, pair.first)) {
 					return *t;
 				}
-				throw Widelands::GameDataError("ScriptingObject with serial %u is a %s, expected %s",
-				                               serial, typeid(pair.first).name(), typeid(T).name());
+				throw Widelands::GameDataError(
+				   "ScriptingLoader::get: ScriptingObject with serial %u is a %s, expected %s", serial,
+				   typeid(pair.first).name(), typeid(T).name());
 			}
 		}
-		throw Widelands::GameDataError("get: ScriptingObject with serial %u not found", serial);
+		throw Widelands::GameDataError(
+		   "ScriptingLoader::get: ScriptingObject with serial %u not found", serial);
 	}
 	template <typename T> T& loader(ScriptingObject* s) const {
 		for (const auto& pair : list_) {

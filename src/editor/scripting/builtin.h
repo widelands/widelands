@@ -24,9 +24,8 @@
 
 #include <boost/function.hpp>
 
+#include "editor/scripting/function.h"
 #include "editor/scripting/scripting.h"
-
-class FunctionBase;
 
 /************************************************************
                       Builtin functions
@@ -34,8 +33,11 @@ class FunctionBase;
 
 // Wrapper for a (static) FunctionBase object, for use in kBuiltinFunctions
 struct BuiltinFunctionInfo {
-	BuiltinFunctionInfo(std::string u, boost::function<std::string()> d, FunctionBase* f)
-	   : function(f), unique_name(u), description(d) {
+	BuiltinFunctionInfo(std::string u,
+	                    boost::function<std::string()> d,
+	                    FunctionBase* f,
+	                    std::string i = "")
+	   : function(f), unique_name(u), description(d), included_from(i) {
 	}
 	~BuiltinFunctionInfo() {
 	}
@@ -46,6 +48,8 @@ struct BuiltinFunctionInfo {
 	// Implemented as a function to make it translatable
 	const boost::function<std::string()> description;
 
+	const std::string included_from;
+
 	DISALLOW_COPY_AND_ASSIGN(BuiltinFunctionInfo);
 };
 
@@ -53,6 +57,7 @@ struct BuiltinFunctionInfo {
 const extern BuiltinFunctionInfo* kBuiltinFunctions[];
 // Quick access to a builtin by its unique name
 const BuiltinFunctionInfo& builtin_f(const std::string&);
+const BuiltinFunctionInfo* builtin_f(const FunctionBase&);
 
 /************************************************************
                        Property
@@ -60,7 +65,7 @@ const BuiltinFunctionInfo& builtin_f(const std::string&);
 
 // Used to access a member variable of a variable of builtin type. Since only builtins
 // have properties, you do not instantiate this class. Use kBuiltinProperties instead.
-// Property needs to be embedded in FS_GetProperty or FS_SetProperty to be used for anything.
+// Property needs to be embedded in GetProperty or FS_SetProperty to be used for anything.
 class Property {
 public:
 	Property(const std::string& n, bool ro, VariableType c, VariableType t)

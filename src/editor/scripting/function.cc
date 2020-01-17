@@ -117,3 +117,11 @@ int32_t LuaFunction::write_lua(FileWrite& fw) const {
 	fw.print_f("end\n");
 	return 0;
 }
+
+std::set<uint32_t> LuaFunction::references() const {
+	auto set = ScriptingObject::references();
+	for (const FunctionStatement* f : body_) {
+		set.insert(f->serial());
+	}
+	return set;
+}

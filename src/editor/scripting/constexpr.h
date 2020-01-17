@@ -191,6 +191,8 @@ public:
 
 	std::string readable() const override;
 
+	std::set<uint32_t> references() const override;
+
 	struct Loader : public ScriptingObject::Loader {
 		Loader() = default;
 		~Loader() override {

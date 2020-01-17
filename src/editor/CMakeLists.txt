@@ -12,6 +12,8 @@ wl_library(editor
     scripting/function.h
     scripting/function_statements.cc
     scripting/function_statements.h
+    scripting/operators.cc
+    scripting/operators.h
     scripting/scripting.cc
     scripting/scripting.h
     scripting/variable.cc

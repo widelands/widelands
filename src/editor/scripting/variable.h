@@ -61,4 +61,49 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(Variable);
 };
 
+// Get the property of a builtin (e.g. field.x)
+class GetProperty : public Assignable {
+public:
+	GetProperty(Assignable* v, Property* p) : variable_(v), property_(p) {
+	}
+	~GetProperty() override {
+	}
+
+	void load(FileRead&, ScriptingLoader&) override;
+	void save(FileWrite&) const override;
+	int32_t write_lua(FileWrite&) const override;
+	inline ScriptingObject::ID id() const override {
+		return ScriptingObject::ID::GetProperty;
+	}
+	VariableType type() const override;
+	std::string readable() const override;
+
+	const Property* get_property() const {
+		return property_;
+	}
+	void set_property(Property&);
+	const Assignable* get_variable() const {
+		return variable_;
+	}
+	void set_variable(Assignable&);
+
+	struct Loader : public ScriptingObject::Loader {
+		Loader() = default;
+		~Loader() override {
+		}
+		uint32_t var, prop;
+	};
+	ScriptingObject::Loader* create_loader() const override {
+		return new GetProperty::Loader();
+	}
+	void load_pointers(ScriptingLoader&) override;
+	std::set<uint32_t> references() const override;
+
+private:
+	Assignable* variable_;
+	Property* property_;
+
+	DISALLOW_COPY_AND_ASSIGN(GetProperty);
+};
+
 #endif  // end of include guard: WL_EDITOR_SCRIPTING_VARIABLE_H

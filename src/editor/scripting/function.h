@@ -108,6 +108,8 @@ public:
 		return header(true);
 	}
 
+	std::set<uint32_t> references() const override;
+
 	const std::list<FunctionStatement*>& body() const {
 		return body_;
 	}
