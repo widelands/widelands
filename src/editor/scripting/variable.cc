@@ -32,7 +32,7 @@ Variable::Variable(VariableType t, const std::string& n, bool spellcheck) : type
 		check_name_valid(name_);
 }
 
-void Variable::load(FileRead& fr, ScriptingLoader& l) {
+void Variable::load(FileRead& fr, Loader& l) {
 	try {
 		Assignable::load(fr, l);
 		uint16_t const packet_version = fr.unsigned_16();
@@ -65,26 +65,26 @@ int32_t Variable::write_lua(FileWrite& fw) const {
 ************************************************************/
 
 constexpr uint16_t kCurrentPacketVersionGetProperty = 1;
-void GetProperty::load(FileRead& fr, ScriptingLoader& l) {
+void GetProperty::load(FileRead& fr, Loader& loader) {
 	try {
-		Assignable::load(fr, l);
+		Assignable::load(fr, loader);
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version != kCurrentPacketVersionGetProperty) {
 			throw Widelands::UnhandledVersionError(
 			   "GetProperty", packet_version, kCurrentPacketVersionGetProperty);
 		}
-		GetProperty::Loader& loader = l.loader<GetProperty::Loader>(this);
-		loader.var = fr.unsigned_32();
-		loader.prop = fr.unsigned_32();
+		loader.push_back(fr.unsigned_32());
+		loader.push_back(fr.unsigned_32());
 	} catch (const WException& e) {
 		throw wexception("GetProperty: %s", e.what());
 	}
 }
-void GetProperty::load_pointers(ScriptingLoader& l) {
-	Assignable::load_pointers(l);
-	GetProperty::Loader& loader = l.loader<GetProperty::Loader>(this);
-	variable_ = &l.get<Assignable>(loader.var);
-	property_ = kBuiltinProperties[loader.prop]->property.get();
+void GetProperty::load_pointers(const ScriptingLoader& l, Loader& loader) {
+	Assignable::load_pointers(l, loader);
+	variable_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
+	property_ = kBuiltinProperties[loader.front()]->property.get();
+	loader.pop_front();
 }
 void GetProperty::save(FileWrite& fw) const {
 	Assignable::save(fw);

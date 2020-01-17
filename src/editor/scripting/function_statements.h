@@ -37,7 +37,7 @@ public:
 	~FS_FunctionCall() override {
 	}
 
-	void load(FileRead&, ScriptingLoader&) override;
+	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
 	int32_t write_lua(FileWrite&) const override;
 	inline ScriptingObject::ID id() const override {
@@ -68,19 +68,7 @@ public:
 
 	void check_parameters() const;
 
-	struct Loader : public ScriptingObject::Loader {
-		Loader() = default;
-		~Loader() override {
-		}
-		uint32_t var;
-		// Indices <= 0 refer to the negative index in kBuiltinFunctions
-		int32_t func;
-		std::list<uint32_t> params;
-	};
-	ScriptingObject::Loader* create_loader() const override {
-		return new FS_FunctionCall::Loader();
-	}
-	void load_pointers(ScriptingLoader&) override;
+	void load_pointers(const ScriptingLoader&, Loader&) override;
 	std::set<uint32_t> references() const override;
 
 private:
@@ -100,7 +88,7 @@ public:
 	~FS_SetProperty() override {
 	}
 
-	void load(FileRead&, ScriptingLoader&) override;
+	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
 	int32_t write_lua(FileWrite&) const override;
 	inline ScriptingObject::ID id() const override {
@@ -121,16 +109,7 @@ public:
 	}
 	void set_value(Assignable&);
 
-	struct Loader : public ScriptingObject::Loader {
-		Loader() = default;
-		~Loader() override {
-		}
-		uint32_t var, prop, val;
-	};
-	ScriptingObject::Loader* create_loader() const override {
-		return new FS_SetProperty::Loader();
-	}
-	void load_pointers(ScriptingLoader&) override;
+	void load_pointers(const ScriptingLoader&, Loader&) override;
 	std::set<uint32_t> references() const override;
 
 private:
@@ -149,7 +128,7 @@ public:
 	~FS_LaunchCoroutine() override {
 	}
 
-	void load(FileRead&, ScriptingLoader&) override;
+	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
 	int32_t write_lua(FileWrite&) const override;
 	inline ScriptingObject::ID id() const override {
@@ -164,16 +143,7 @@ public:
 		function_ = &f;
 	}
 
-	struct Loader : public ScriptingObject::Loader {
-		Loader() = default;
-		~Loader() override {
-		}
-		uint32_t func;
-	};
-	ScriptingObject::Loader* create_loader() const override {
-		return new FS_LaunchCoroutine::Loader();
-	}
-	void load_pointers(ScriptingLoader&) override;
+	void load_pointers(const ScriptingLoader&, Loader&) override;
 	std::set<uint32_t> references() const override;
 
 private:
@@ -191,7 +161,7 @@ public:
 	~FS_LocalVarDeclOrAssign() override {
 	}
 
-	void load(FileRead&, ScriptingLoader&) override;
+	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
 	int32_t write_lua(FileWrite&) const override;
 	inline ScriptingObject::ID id() const override {
@@ -218,16 +188,7 @@ public:
 		value_ = v;
 	}
 
-	struct Loader : public ScriptingObject::Loader {
-		Loader() = default;
-		~Loader() override {
-		}
-		uint32_t var, val;
-	};
-	ScriptingObject::Loader* create_loader() const override {
-		return new FS_LocalVarDeclOrAssign::Loader();
-	}
-	void load_pointers(ScriptingLoader&) override;
+	void load_pointers(const ScriptingLoader&, Loader&) override;
 	std::set<uint32_t> references() const override;
 
 private:

@@ -55,9 +55,9 @@ std::string FunctionBase::header(bool lua) const {
 
 constexpr uint16_t kCurrentPacketVersionFunction = 1;
 
-void LuaFunction::load(FileRead& fr, ScriptingLoader& l) {
+void LuaFunction::load(FileRead& fr, Loader& loader) {
 	try {
-		ScriptingObject::load(fr, l);
+		ScriptingObject::load(fr, loader);
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version != kCurrentPacketVersionFunction) {
 			throw Widelands::UnhandledVersionError(
@@ -69,20 +69,19 @@ void LuaFunction::load(FileRead& fr, ScriptingLoader& l) {
 			const std::string v(fr.c_string());
 			parameters_.push_back(std::make_pair(v, static_cast<VariableType>(fr.unsigned_16())));
 		}
-		LuaFunction::Loader& loader = l.loader<LuaFunction::Loader>(this);
 		for (size_t n = fr.unsigned_32(); n; --n) {
-			loader.body.push_back(fr.unsigned_32());
+			loader.push_back(fr.unsigned_32());
 		}
 	} catch (const WException& e) {
 		throw wexception("editor scripting lua function: %s", e.what());
 	}
 }
 
-void LuaFunction::load_pointers(ScriptingLoader& l) {
-	ScriptingObject::load_pointers(l);
-	LuaFunction::Loader& loader = l.loader<LuaFunction::Loader>(this);
-	for (uint32_t s : loader.body) {
-		body_.push_back(&l.get<FunctionStatement>(s));
+void LuaFunction::load_pointers(const ScriptingLoader& l, Loader& loader) {
+	ScriptingObject::load_pointers(l, loader);
+	while (!loader.empty()) {
+		body_.push_back(&l.get<FunctionStatement>(loader.front()));
+		loader.pop_front();
 	}
 }
 

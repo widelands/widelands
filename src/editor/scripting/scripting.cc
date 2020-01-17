@@ -72,7 +72,7 @@ void ScriptingObject::init(ScriptingSaver& s, bool init_serial) {
 	}
 	s.add(*this);
 }
-void ScriptingObject::load(FileRead& fr, ScriptingLoader&) {
+void ScriptingObject::load(FileRead& fr, Loader&) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version != kCurrentPacketVersionScriptingObject) {
@@ -178,7 +178,7 @@ int32_t function_to_serial(FunctionBase& f) {
 	NEVER_HERE();
 }
 // static
-FunctionBase& serial_to_function(ScriptingLoader& l, int32_t s) {
+FunctionBase& serial_to_function(const ScriptingLoader& l, int32_t s) {
 	return s > 0 ? l.get<LuaFunction>(s) : *kBuiltinFunctions[-s]->function;
 }
 // static
@@ -449,7 +449,7 @@ void ScriptingSaver::save(FileWrite& fw) const {
 	}
 }
 
-void ScriptingSaver::cleanup(const EditorInteractive& eia) {
+void ScriptingSaver::delete_unused(const EditorInteractive& eia) {
 	std::list<const ScriptingObject*> cores;
 	std::set<uint32_t> reached;
 	for (const auto* v : eia.variables()) {
@@ -507,15 +507,15 @@ ScriptingLoader::ScriptingLoader(FileRead& fr, ScriptingSaver& s) {
 		// First load phase: Create all saved objects.
 		for (uint32_t n = fr.unsigned_32(); n; --n) {
 			ScriptingObject* a = ScriptingObject::load(fr);
-			list_.emplace(
-			   std::make_pair(a, std::unique_ptr<ScriptingObject::Loader>(a->create_loader())));
-			a->load(fr, *this);
+			Loader* loader = new Loader();
+			a->load(fr, *loader);
 			a->init(s, false);
+			list_.emplace(std::make_pair(a, std::unique_ptr<Loader>(loader)));
 		}
 
 		// Second load phase: Load pointers between objects.
 		for (const auto& pair : list_) {
-			pair.first->load_pointers(*this);
+			pair.first->load_pointers(*this, *pair.second);
 		}
 	} catch (const WException& e) {
 		throw wexception("ScriptingLoader: %s", e.what());

@@ -100,7 +100,7 @@ public:
 		return ScriptingObject::ID::LuaFunction;
 	}
 
-	void load(FileRead&, ScriptingLoader&) override;
+	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
 	int32_t write_lua(FileWrite&) const override;
 
@@ -117,16 +117,7 @@ public:
 		return body_;
 	}
 
-	struct Loader : public ScriptingObject::Loader {
-		Loader() = default;
-		~Loader() override {
-		}
-		std::list<uint32_t> body;
-	};
-	ScriptingObject::Loader* create_loader() const override {
-		return new LuaFunction::Loader();
-	}
-	void load_pointers(ScriptingLoader&) override;
+	void load_pointers(const ScriptingLoader&, Loader&) override;
 
 private:
 	std::list<FunctionStatement*> body_;

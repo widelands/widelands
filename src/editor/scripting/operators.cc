@@ -30,26 +30,26 @@ OperatorBase::OperatorBase(VariableType in, VariableType out, Assignable* a, Ass
 	if (b_)
 		assert(is(b_->type(), input_type_));
 }
-void OperatorBase::load(FileRead& fr, ScriptingLoader& l) {
+void OperatorBase::load(FileRead& fr, Loader& loader) {
 	try {
-		Assignable::load(fr, l);
+		Assignable::load(fr, loader);
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version != kCurrentPacketVersionOperatorBase) {
 			throw Widelands::UnhandledVersionError(
 			   "OperatorBase", packet_version, kCurrentPacketVersionOperatorBase);
 		}
-		OperatorBase::Loader& loader = l.loader<OperatorBase::Loader>(this);
-		loader.a = fr.unsigned_32();
-		loader.b = fr.unsigned_32();
+		loader.push_back(fr.unsigned_32());
+		loader.push_back(fr.unsigned_32());
 	} catch (const WException& e) {
 		throw wexception("editor base operator: %s", e.what());
 	}
 }
-void OperatorBase::load_pointers(ScriptingLoader& l) {
-	Assignable::load_pointers(l);
-	OperatorBase::Loader& loader = l.loader<OperatorBase::Loader>(this);
-	a_ = &l.get<Assignable>(loader.a);
-	b_ = &l.get<Assignable>(loader.b);
+void OperatorBase::load_pointers(const ScriptingLoader& l, Loader& loader) {
+	Assignable::load_pointers(l, loader);
+	a_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
+	b_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
 }
 void OperatorBase::save(FileWrite& fw) const {
 	Assignable::save(fw);
@@ -87,24 +87,23 @@ int32_t OperatorBase::write_lua(FileWrite& fw) const {
 
 constexpr uint16_t kCurrentPacketVersionOperatorNot = 1;
 
-void OperatorNot::load(FileRead& fr, ScriptingLoader& l) {
+void OperatorNot::load(FileRead& fr, Loader& loader) {
 	try {
-		Assignable::load(fr, l);
+		Assignable::load(fr, loader);
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version != kCurrentPacketVersionOperatorNot) {
 			throw Widelands::UnhandledVersionError(
 			   "OperatorNot", packet_version, kCurrentPacketVersionOperatorNot);
 		}
-		OperatorNot::Loader& loader = l.loader<OperatorNot::Loader>(this);
-		loader.a = fr.unsigned_32();
+		loader.push_back(fr.unsigned_32());
 	} catch (const WException& e) {
 		throw wexception("editor not operator: %s", e.what());
 	}
 }
-void OperatorNot::load_pointers(ScriptingLoader& l) {
-	Assignable::load_pointers(l);
-	OperatorNot::Loader& loader = l.loader<OperatorNot::Loader>(this);
-	a_ = &l.get<Assignable>(loader.a);
+void OperatorNot::load_pointers(const ScriptingLoader& l, Loader& loader) {
+	Assignable::load_pointers(l, loader);
+	a_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
 }
 void OperatorNot::save(FileWrite& fw) const {
 	Assignable::save(fw);

@@ -52,17 +52,8 @@ public:
 
 	std::set<uint32_t> references() const override;
 
-	struct Loader : public ScriptingObject::Loader {
-		Loader() = default;
-		~Loader() override {
-		}
-		uint32_t a, b;
-	};
-	ScriptingObject::Loader* create_loader() const override {
-		return new OperatorBase::Loader();
-	}
-	void load(FileRead&, ScriptingLoader&) override;
-	void load_pointers(ScriptingLoader&) override;
+	void load(FileRead&, Loader&) override;
+	void load_pointers(const ScriptingLoader&, Loader&) override;
 	void save(FileWrite&) const override;
 	int32_t write_lua(FileWrite&) const override;
 
@@ -137,17 +128,8 @@ public:
 
 	std::set<uint32_t> references() const override;
 
-	struct Loader : public ScriptingObject::Loader {
-		Loader() = default;
-		~Loader() override {
-		}
-		uint32_t a;
-	};
-	ScriptingObject::Loader* create_loader() const override {
-		return new OperatorNot::Loader();
-	}
-	void load(FileRead&, ScriptingLoader&) override;
-	void load_pointers(ScriptingLoader&) override;
+	void load(FileRead&, Loader&) override;
+	void load_pointers(const ScriptingLoader&, Loader&) override;
 	void save(FileWrite&) const override;
 	int32_t write_lua(FileWrite&) const override;
 

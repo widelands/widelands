@@ -29,27 +29,27 @@
 // Variable declaration and assignment
 
 constexpr uint16_t kCurrentPacketVersionFS_LocalVarDeclOrAssign = 1;
-void FS_LocalVarDeclOrAssign::load(FileRead& fr, ScriptingLoader& l) {
+void FS_LocalVarDeclOrAssign::load(FileRead& fr, Loader& loader) {
 	try {
-		FunctionStatement::load(fr, l);
+		FunctionStatement::load(fr, loader);
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version != kCurrentPacketVersionFS_LocalVarDeclOrAssign) {
 			throw Widelands::UnhandledVersionError("FS_LocalVarDeclOrAssign", packet_version,
 			                                       kCurrentPacketVersionFS_LocalVarDeclOrAssign);
 		}
 		declare_local_ = fr.unsigned_8();
-		FS_LocalVarDeclOrAssign::Loader& loader = l.loader<FS_LocalVarDeclOrAssign::Loader>(this);
-		loader.var = fr.unsigned_32();
-		loader.val = fr.unsigned_32();
+		loader.push_back(fr.unsigned_32());
+		loader.push_back(fr.unsigned_32());
 	} catch (const WException& e) {
 		throw wexception("FS_LocalVarDeclOrAssign: %s", e.what());
 	}
 }
-void FS_LocalVarDeclOrAssign::load_pointers(ScriptingLoader& l) {
-	FunctionStatement::load_pointers(l);
-	FS_LocalVarDeclOrAssign::Loader& loader = l.loader<FS_LocalVarDeclOrAssign::Loader>(this);
-	variable_ = &l.get<Variable>(loader.var);
-	value_ = loader.val ? &l.get<Assignable>(loader.val) : nullptr;
+void FS_LocalVarDeclOrAssign::load_pointers(const ScriptingLoader& l, Loader& loader) {
+	FunctionStatement::load_pointers(l, loader);
+	variable_ = &l.get<Variable>(loader.front());
+	loader.pop_front();
+	value_ = loader.front() ? &l.get<Assignable>(loader.front()) : nullptr;
+	loader.pop_front();
 }
 void FS_LocalVarDeclOrAssign::save(FileWrite& fw) const {
 	FunctionStatement::save(fw);
@@ -93,32 +93,33 @@ std::set<uint32_t> FS_LocalVarDeclOrAssign::references() const {
 // Function invoking
 
 constexpr uint16_t kCurrentPacketVersionFS_FunctionCall = 1;
-void FS_FunctionCall::load(FileRead& fr, ScriptingLoader& l) {
+void FS_FunctionCall::load(FileRead& fr, Loader& loader) {
 	try {
-		FunctionStatement::load(fr, l);
+		FunctionStatement::load(fr, loader);
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version != kCurrentPacketVersionFS_FunctionCall) {
 			throw Widelands::UnhandledVersionError(
 			   "FS_FunctionCall", packet_version, kCurrentPacketVersionFS_FunctionCall);
 		}
-		FS_FunctionCall::Loader& loader = l.loader<FS_FunctionCall::Loader>(this);
-		loader.var = fr.unsigned_32();
-		loader.func = fr.signed_32();
+		loader.push_back(fr.unsigned_32());
+		loader.push_back(fr.signed_32());
 		for (uint32_t n = fr.unsigned_32(); n; --n) {
-			loader.params.push_back(fr.unsigned_32());
+			loader.push_back(fr.unsigned_32());
 		}
 	} catch (const WException& e) {
 		throw wexception("FS_FunctionCall: %s", e.what());
 	}
 }
-void FS_FunctionCall::load_pointers(ScriptingLoader& l) {
-	FunctionStatement::load_pointers(l);
-	Assignable::load_pointers(l);
-	FS_FunctionCall::Loader& loader = l.loader<FS_FunctionCall::Loader>(this);
-	variable_ = loader.var ? &l.get<Assignable>(loader.var) : nullptr;
-	function_ = &serial_to_function(l, loader.func);
-	for (uint32_t s : loader.params) {
-		parameters_.push_back(&l.get<Assignable>(s));
+void FS_FunctionCall::load_pointers(const ScriptingLoader& l, Loader& loader) {
+	FunctionStatement::load_pointers(l, loader);
+	Assignable::load_pointers(l, loader);
+	variable_ = loader.front() ? &l.get<Assignable>(loader.front()) : nullptr;
+	loader.pop_front();
+	function_ = &serial_to_function(l, loader.front());
+	loader.pop_front();
+	while (!loader.empty()) {
+		parameters_.push_back(&l.get<Assignable>(loader.front()));
+		loader.pop_front();
 	}
 }
 void FS_FunctionCall::save(FileWrite& fw) const {
@@ -213,28 +214,29 @@ std::set<uint32_t> FS_FunctionCall::references() const {
 // Property manipulation
 
 constexpr uint16_t kCurrentPacketVersionFS_SetProperty = 1;
-void FS_SetProperty::load(FileRead& fr, ScriptingLoader& l) {
+void FS_SetProperty::load(FileRead& fr, Loader& loader) {
 	try {
-		FunctionStatement::load(fr, l);
+		FunctionStatement::load(fr, loader);
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version != kCurrentPacketVersionFS_SetProperty) {
 			throw Widelands::UnhandledVersionError(
 			   "FS_SetProperty", packet_version, kCurrentPacketVersionFS_SetProperty);
 		}
-		FS_SetProperty::Loader& loader = l.loader<FS_SetProperty::Loader>(this);
-		loader.var = fr.unsigned_32();
-		loader.prop = fr.unsigned_32();
-		loader.val = fr.unsigned_32();
+		loader.push_back(fr.unsigned_32());
+		loader.push_back(fr.unsigned_32());
+		loader.push_back(fr.unsigned_32());
 	} catch (const WException& e) {
 		throw wexception("FS_SetProperty: %s", e.what());
 	}
 }
-void FS_SetProperty::load_pointers(ScriptingLoader& l) {
-	FunctionStatement::load_pointers(l);
-	FS_SetProperty::Loader& loader = l.loader<FS_SetProperty::Loader>(this);
-	variable_ = &l.get<Assignable>(loader.var);
-	property_ = kBuiltinProperties[loader.prop]->property.get();
-	value_ = &l.get<Assignable>(loader.val);
+void FS_SetProperty::load_pointers(const ScriptingLoader& l, Loader& loader) {
+	FunctionStatement::load_pointers(l, loader);
+	variable_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
+	property_ = kBuiltinProperties[loader.front()]->property.get();
+	loader.pop_front();
+	value_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
 }
 void FS_SetProperty::save(FileWrite& fw) const {
 	FunctionStatement::save(fw);
@@ -289,24 +291,23 @@ std::set<uint32_t> FS_SetProperty::references() const {
 // Coroutine starting
 
 constexpr uint16_t kCurrentPacketVersionFS_LaunchCoroutine = 1;
-void FS_LaunchCoroutine::load(FileRead& fr, ScriptingLoader& l) {
+void FS_LaunchCoroutine::load(FileRead& fr, Loader& loader) {
 	try {
-		FunctionStatement::load(fr, l);
+		FunctionStatement::load(fr, loader);
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version != kCurrentPacketVersionFS_LaunchCoroutine) {
 			throw Widelands::UnhandledVersionError(
 			   "FS_LaunchCoroutine", packet_version, kCurrentPacketVersionFS_LaunchCoroutine);
 		}
-		FS_LaunchCoroutine::Loader& loader = l.loader<FS_LaunchCoroutine::Loader>(this);
-		loader.func = fr.unsigned_32();
+		loader.push_back(fr.unsigned_32());
 	} catch (const WException& e) {
 		throw wexception("FS_LaunchCoroutine: %s", e.what());
 	}
 }
-void FS_LaunchCoroutine::load_pointers(ScriptingLoader& l) {
-	FunctionStatement::load_pointers(l);
-	FS_LaunchCoroutine::Loader& loader = l.loader<FS_LaunchCoroutine::Loader>(this);
-	function_ = &l.get<FS_FunctionCall>(loader.func);
+void FS_LaunchCoroutine::load_pointers(const ScriptingLoader& l, Loader& loader) {
+	FunctionStatement::load_pointers(l, loader);
+	function_ = &l.get<FS_FunctionCall>(loader.front());
+	loader.pop_front();
 }
 void FS_LaunchCoroutine::save(FileWrite& fw) const {
 	FunctionStatement::save(fw);

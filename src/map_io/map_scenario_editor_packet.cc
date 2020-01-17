@@ -148,7 +148,7 @@ void MapScenarioEditorPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 			fw.unsigned_8(eia->player_relations_[i]);
 		}
 
-		eia->scripting_saver().cleanup(*eia);
+		eia->scripting_saver().delete_unused(*eia);
 		eia->scripting_saver().save(fw);
 		fw.unsigned_32(eia->functions_.size());
 		for (const auto& f : eia->functions_) {

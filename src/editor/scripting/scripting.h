@@ -49,7 +49,7 @@ bool is_name_valid(const std::string&);
 void check_name_valid(const std::string&);
 
 int32_t function_to_serial(FunctionBase&);
-FunctionBase& serial_to_function(ScriptingLoader&, int32_t);
+FunctionBase& serial_to_function(const ScriptingLoader&, int32_t);
 uint32_t property_to_serial(Property&);
 
 // Lua is not typesafe, but we are. A "variable" is declared as a specific type
@@ -141,6 +141,8 @@ bool is(VariableType check, VariableType supposed_superclass);
              Abstract ScriptingObject and Assignable
 ************************************************************/
 
+using Loader = std::list<int32_t>;
+
 /* WARNING:
  * If you instantiate any subclass of ScriptingObject, you HAVE TO
  * call init() on it immediately afterwards!!
@@ -210,17 +212,8 @@ public:
 		return {};
 	}
 
-	struct Loader {
-		Loader() {
-		}
-		virtual ~Loader() {
-		}
-	};
-	virtual ScriptingObject::Loader* create_loader() const {
-		return new ScriptingObject::Loader();
-	}
-	virtual void load(FileRead&, ScriptingLoader&);
-	virtual void load_pointers(ScriptingLoader&) {
+	virtual void load(FileRead&, Loader&);
+	virtual void load_pointers(const ScriptingLoader&, Loader&) {
 	}
 
 protected:
@@ -275,12 +268,12 @@ public:
  * It takes care of deleting them all when the editor is closed or a new map is loaded.
  * Objects loaded from file do not register themselves; that is taken care of by the
  * ScriptingLoader that calls ScriptingObject::load(). Objects not loaded from file are
- * registered with the ScriptingSaver by the ScriptingObject constructor.
+ * registered with the ScriptingSaver by ScriptingObject::init().
  *
  * The ScriptingLoader class is instantiated in MapScenarioEditorPacket when loading
  * and is needed only until all ScriptingObjects have been loaded. Loading is performed
- * in two stages: First, all ScriptingObjects are loaded in arbitary order. More precisely:
- * They are loaded in the order in which they were saved, which is the order of their creation.
+ * in two stages: First, all ScriptingObjects are loaded in arbitary order. (More precisely,
+ * they are loaded in the order in which they were saved, which is the order of their creation.)
  * Since ScriptingObjects may have pointers to other ScriptingObjects which may not be loaded
  * yet, pointers are not initialized yet. Instead, the serials of the referenced objects are
  * stored in the object's Loader. When all objects were loaded, the second loading phase is
@@ -296,7 +289,7 @@ public:
 	}
 	void add(ScriptingObject&);
 	void save(FileWrite&) const;
-	void cleanup(const EditorInteractive&);
+	void delete_unused(const EditorInteractive&);
 
 	template <typename T> std::list<T*> all() const {
 		std::list<T*> result;
@@ -346,24 +339,9 @@ public:
 		throw Widelands::GameDataError(
 		   "ScriptingLoader::get: ScriptingObject with serial %u not found", serial);
 	}
-	template <typename T> T& loader(ScriptingObject* s) const {
-		for (const auto& pair : list_) {
-			if (pair.first == s) {
-				if (upcast(T, t, pair.second.get())) {
-					return *t;
-				}
-				throw Widelands::GameDataError(
-				   "ScriptingObject of type %s with serial %u has a loader of type %s, expected %s",
-				   typeid(s).name(), s ? s->serial() : 0, typeid(*pair.second).name(),
-				   typeid(T).name());
-			}
-		}
-		throw Widelands::GameDataError(
-		   "loader: ScriptingObject with serial %u not found", s ? s->serial() : 0);
-	}
 
 private:
-	std::map<ScriptingObject*, std::unique_ptr<ScriptingObject::Loader>> list_;
+	std::map<ScriptingObject*, std::unique_ptr<Loader>> list_;
 	DISALLOW_COPY_AND_ASSIGN(ScriptingLoader);
 };
 

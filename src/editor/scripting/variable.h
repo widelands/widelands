@@ -35,7 +35,7 @@ public:
 		return ScriptingObject::ID::Variable;
 	}
 
-	void load(FileRead&, ScriptingLoader&) override;
+	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
 
 	VariableType type() const override {
@@ -69,7 +69,7 @@ public:
 	~GetProperty() override {
 	}
 
-	void load(FileRead&, ScriptingLoader&) override;
+	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
 	int32_t write_lua(FileWrite&) const override;
 	inline ScriptingObject::ID id() const override {
@@ -87,16 +87,7 @@ public:
 	}
 	void set_variable(Assignable&);
 
-	struct Loader : public ScriptingObject::Loader {
-		Loader() = default;
-		~Loader() override {
-		}
-		uint32_t var, prop;
-	};
-	ScriptingObject::Loader* create_loader() const override {
-		return new GetProperty::Loader();
-	}
-	void load_pointers(ScriptingLoader&) override;
+	void load_pointers(const ScriptingLoader&, Loader&) override;
 	std::set<uint32_t> references() const override;
 
 private:

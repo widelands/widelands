@@ -54,7 +54,7 @@ public:
 		translate_ = t;
 	}
 
-	void load(FileRead&, ScriptingLoader&) override;
+	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
 	int32_t write_lua(FileWrite&) const override;
 
@@ -90,7 +90,7 @@ public:
 		value_ = v;
 	}
 
-	void load(FileRead&, ScriptingLoader&) override;
+	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
 	int32_t write_lua(FileWrite&) const override;
 
@@ -125,7 +125,7 @@ public:
 		value_ = v;
 	}
 
-	void load(FileRead&, ScriptingLoader&) override;
+	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
 	int32_t write_lua(FileWrite&) const override;
 
@@ -185,7 +185,7 @@ public:
 		return values_;
 	}
 
-	void load(FileRead&, ScriptingLoader&) override;
+	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
 	int32_t write_lua(FileWrite&) const override;
 
@@ -193,16 +193,7 @@ public:
 
 	std::set<uint32_t> references() const override;
 
-	struct Loader : public ScriptingObject::Loader {
-		Loader() = default;
-		~Loader() override {
-		}
-		std::list<uint32_t> values;
-	};
-	ScriptingObject::Loader* create_loader() const override {
-		return new StringConcat::Loader();
-	}
-	void load_pointers(ScriptingLoader&) override;
+	void load_pointers(const ScriptingLoader&, Loader&) override;
 
 private:
 	std::list<Assignable*> values_;

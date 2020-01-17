@@ -24,27 +24,26 @@
 ************************************************************/
 
 constexpr uint16_t kCurrentPacketVersionStringConcat = 1;
-void StringConcat::load(FileRead& fr, ScriptingLoader& l) {
+void StringConcat::load(FileRead& fr, Loader& loader) {
 	try {
-		Assignable::load(fr, l);
+		Assignable::load(fr, loader);
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version != kCurrentPacketVersionStringConcat) {
 			throw Widelands::UnhandledVersionError(
 			   "StringConcat", packet_version, kCurrentPacketVersionStringConcat);
 		}
-		StringConcat::Loader& loader = l.loader<StringConcat::Loader>(this);
 		for (uint32_t n = fr.unsigned_32(); n; --n) {
-			loader.values.push_back(fr.unsigned_32());
+			loader.push_back(fr.unsigned_32());
 		}
 	} catch (const WException& e) {
 		throw wexception("editor string concatenation: %s", e.what());
 	}
 }
-void StringConcat::load_pointers(ScriptingLoader& l) {
-	Assignable::load_pointers(l);
-	StringConcat::Loader& loader = l.loader<StringConcat::Loader>(this);
-	for (uint32_t s : loader.values) {
-		values_.push_back(&l.get<Assignable>(s));
+void StringConcat::load_pointers(const ScriptingLoader& l, Loader& loader) {
+	Assignable::load_pointers(l, loader);
+	while (!loader.empty()) {
+		values_.push_back(&l.get<Assignable>(loader.front()));
+		loader.pop_front();
 	}
 }
 void StringConcat::save(FileWrite& fw) const {
@@ -100,7 +99,7 @@ constexpr uint16_t kCurrentPacketVersionConstexprString = 1;
 constexpr uint16_t kCurrentPacketVersionConstexprInteger = 1;
 constexpr uint16_t kCurrentPacketVersionConstexprBoolean = 1;
 
-void ConstexprString::load(FileRead& fr, ScriptingLoader& l) {
+void ConstexprString::load(FileRead& fr, Loader& l) {
 	try {
 		Assignable::load(fr, l);
 		uint16_t const packet_version = fr.unsigned_16();
@@ -114,7 +113,7 @@ void ConstexprString::load(FileRead& fr, ScriptingLoader& l) {
 		throw wexception("editor constexpr string: %s", e.what());
 	}
 }
-void ConstexprInteger::load(FileRead& fr, ScriptingLoader& l) {
+void ConstexprInteger::load(FileRead& fr, Loader& l) {
 	try {
 		Assignable::load(fr, l);
 		uint16_t const packet_version = fr.unsigned_16();
@@ -127,7 +126,7 @@ void ConstexprInteger::load(FileRead& fr, ScriptingLoader& l) {
 		throw wexception("editor constexpr integer: %s", e.what());
 	}
 }
-void ConstexprBoolean::load(FileRead& fr, ScriptingLoader& l) {
+void ConstexprBoolean::load(FileRead& fr, Loader& l) {
 	try {
 		Assignable::load(fr, l);
 		uint16_t const packet_version = fr.unsigned_16();
