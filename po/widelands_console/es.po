@@ -3,16 +3,16 @@
 # 
 # Translators:
 # Facundo Gomez <facundogomez15@gmail.com>, 2019
-# G BR <gastbr@gmail.com>, 2016
+# Gastón <gastbr@gmail.com>, 2016
 # Gontzal M. Pujana <juchuf@gmail.com>, 2018
 # Madkat Here, 2015
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-10 07:33+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2019-12-30 08:11+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -131,9 +131,9 @@ msgstr " --editor             Inicia directamente el editor de Widelands.\n     
 #: ../../src/wlapplication_messages.cc:96
 msgid ""
 " --ai_training        Enables AI training mode. See\n"
-"                      https://wl.widelands.org/wiki/Ai%20Training/\n"
+"                      https://www.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
-msgstr " --ai_training        Habilitar el modo de entrenamiento de IA. Ver\n                      https://wl.widelands.org/wiki/Ai%20Training/\n                      para una descrpción completa de la lógica del entrenamiento con IA."
+msgstr ""
 
 #: ../../src/wlapplication_messages.cc:100
 msgid ""
@@ -259,7 +259,7 @@ msgstr " --help               Muestra esta ayuda"
 #: ../../src/wlapplication_messages.cc:167
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
-"        https://wl.widelands.org/\n"
+"        https://www.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Informes de fallos? Sugerencias? Visita la página web del proyecto:\n https://wl.widelands.org/\n\nEsperamos que disfrutes este juego!"
+msgstr ""

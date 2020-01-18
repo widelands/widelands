@@ -311,18 +311,24 @@ void ProductionSite::load_finish(EditorGameBase& egbase) {
  * Display whether we're occupied.
  */
 void ProductionSite::update_statistics_string(std::string* s) {
-	uint32_t const nr_working_positions = descr().nr_working_positions();
-	uint32_t nr_workers = 0;
-	for (uint32_t i = nr_working_positions; i;)
-		nr_workers += working_positions_[--i].worker ? 1 : 0;
-
-	if (nr_workers == 0) {
-		*s = g_gr->styles().color_tag(
-		   _("(not occupied)"), g_gr->styles().building_statistics_style().low_color());
-		return;
+	uint32_t nr_requests = 0;
+	uint32_t nr_coming = 0;
+	for (uint32_t i = 0; i < descr().nr_working_positions(); ++i) {
+		const Widelands::Request* request = working_positions_[i].worker_request;
+		// Check whether a request is being fulfilled or not
+		if (request) {
+			if (request->is_open()) {
+				++nr_requests;
+			} else {
+				++nr_coming;
+			}
+		} else if (working_positions_[i].worker == nullptr) {
+			// We might have no request, but no worker either
+			++nr_requests;
+		}
 	}
 
-	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
+	if (nr_requests > 0) {
 		*s = g_gr->styles().color_tag(
 		   (nr_requests == 1 ?
 		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
@@ -330,6 +336,18 @@ void ProductionSite::update_statistics_string(std::string* s) {
 		       /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
 		          missing. If you need plural forms here, please let us know. */
 		       _("Workers missing")),
+		   g_gr->styles().building_statistics_style().low_color());
+		return;
+	}
+
+	if (nr_coming > 0) {
+		*s = g_gr->styles().color_tag(
+		   (nr_coming == 1 ?
+		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
+		       _("Worker is coming") :
+		       /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
+		          missing. If you need plural forms here, please let us know. */
+		       _("Workers are coming")),
 		   g_gr->styles().building_statistics_style().low_color());
 		return;
 	}
