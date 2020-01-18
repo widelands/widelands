@@ -30,7 +30,14 @@
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
    : FullscreenMenuLoadMapOrGame(),
      // Main title
-     title_(this, 0, 0, 0, 0, _("Begin Network Game"), UI::Align::kCenter, g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+     title_(this,
+            0,
+            0,
+            0,
+            0,
+            _("Begin Network Game"),
+            UI::Align::kCenter,
+            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Boxes
      left_column_(this, 0, 0, UI::Box::Vertical),
@@ -42,8 +49,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 
      // Right column content
      label_playername_(&right_column_, 0, 0, 0, 0, _("Your nickname:")),
-     playername_(
-        &right_column_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     playername_(&right_column_, 0, 0, 0, UI::PanelStyle::kFsMenu),
      label_hostname_(&right_column_, 0, 0, 0, 0, _("Host to connect:")),
 
      host_box_(&right_column_, 0, 0, UI::Box::Horizontal),
@@ -273,7 +279,7 @@ void FullscreenMenuNetSetupLAN::change_playername() {
 	if (!InternetGaming::ref().valid_username(playername_.text())) {
 		playername_.set_warning(true);
 		playername_.set_tooltip(_("Enter a valid nickname. This value may contain only "
-		                         "English letters, numbers, and @ . + - _ characters."));
+		                          "English letters, numbers, and @ . + - _ characters."));
 		joingame_.set_enabled(false);
 		hostgame_.set_enabled(false);
 		return;
