@@ -161,6 +161,7 @@ private:
 
 class ProductionSite : public Building {
 	friend class MapBuildingdataPacket;
+	friend class MapScenarioEditorPacket;
 	friend struct ProductionProgram::ActReturn;
 	friend struct ProductionProgram::ActReturn::WorkersNeedExperience;
 	friend struct ProductionProgram::ActCall;

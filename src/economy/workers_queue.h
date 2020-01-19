@@ -39,6 +39,8 @@ class Worker;
  * This micro storage room can hold any number of items of a fixed worker.
  */
 class WorkersQueue : public InputQueue {
+	friend class MapScenarioEditorPacket;
+
 public:
 	WorkersQueue(PlayerImmovable&, DescriptionIndex, uint8_t size);
 

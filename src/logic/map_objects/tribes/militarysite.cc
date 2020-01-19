@@ -87,8 +87,6 @@ void MilitarySite::SoldierControl::set_soldier_capacity(uint32_t const capacity)
 }
 
 void MilitarySite::SoldierControl::drop_soldier(Soldier& soldier) {
-	Game& game = dynamic_cast<Game&>(military_site_->get_owner()->egbase());
-
 	if (!military_site_->is_present(soldier)) {
 		// This can happen when the "drop soldier" player command is delayed
 		// by network delay or a client has bugs.
@@ -100,10 +98,13 @@ void MilitarySite::SoldierControl::drop_soldier(Soldier& soldier) {
 		return;
 	}
 
-	soldier.reset_tasks(game);
-	soldier.start_task_leavebuilding(game, true);
-
-	military_site_->update_soldier_request();
+	if (upcast(Game, game, &military_site_->get_owner()->egbase())) {
+		soldier.reset_tasks(*game);
+		soldier.start_task_leavebuilding(*game, true);
+		military_site_->update_soldier_request();
+	} else {
+		soldier.remove(military_site_->get_owner()->egbase());
+	}
 }
 
 int MilitarySite::SoldierControl::incorporate_soldier(EditorGameBase& egbase, Soldier& s) {

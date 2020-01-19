@@ -218,8 +218,6 @@ void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity)
  * soldier is actually stationed here, without breaking anything if he isn't.
  */
 void TrainingSite::SoldierControl::drop_soldier(Soldier& soldier) {
-	Game& game = dynamic_cast<Game&>(training_site_->get_owner()->egbase());
-
 	std::vector<Soldier*>::iterator it =
 	   std::find(training_site_->soldiers_.begin(), training_site_->soldiers_.end(), &soldier);
 	if (it == training_site_->soldiers_.end()) {
@@ -230,13 +228,17 @@ void TrainingSite::SoldierControl::drop_soldier(Soldier& soldier) {
 
 	training_site_->soldiers_.erase(it);
 
-	soldier.reset_tasks(game);
-	soldier.start_task_leavebuilding(game, true);
+	if (upcast(Game, game, &training_site_->get_owner()->egbase())) {
+		soldier.reset_tasks(*game);
+		soldier.start_task_leavebuilding(*game, true);
 
-	// Schedule, so that we can call new soldiers on next act()
-	training_site_->schedule_act(game, 100);
-	Notifications::publish(
-	   NoteTrainingSiteSoldierTrained(training_site_, training_site_->get_owner()));
+		// Schedule, so that we can call new soldiers on next act()
+		training_site_->schedule_act(*game, 100);
+		Notifications::publish(
+		   NoteTrainingSiteSoldierTrained(training_site_, training_site_->get_owner()));
+	} else {
+		soldier.remove(training_site_->get_owner()->egbase());
+	}
 }
 
 int TrainingSite::SoldierControl::incorporate_soldier(EditorGameBase& egbase, Soldier& s) {

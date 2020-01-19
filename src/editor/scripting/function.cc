@@ -112,7 +112,7 @@ void LuaFunction::write_lua(int32_t indent, FileWrite& fw) const {
 		f->write_lua(indent + 1, fw);
 		fw.print_f("\n");
 	}
-	fw.print_f("end -- %s\n", get_name().c_str());
+	fw.print_f("end -- function %s\n", get_name().c_str());
 }
 
 std::set<uint32_t> LuaFunction::references() const {

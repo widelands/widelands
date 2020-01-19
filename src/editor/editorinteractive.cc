@@ -1245,9 +1245,6 @@ void EditorInteractive::finalize_clicked() {
 	const std::string result = try_finalize();
 	if (result.empty()) {
 		// Success!
-		tool_windows_.players.destroy();
-		menu_windows_.mapoptions.destroy();
-		select_tool(tools_->info, EditorTool::ToolIndex::First);
 		return;
 	}
 	UI::WLMessageBox error(this, _("Finalize Failed"),
@@ -1256,7 +1253,7 @@ void EditorInteractive::finalize_clicked() {
 	error.run<UI::Panel::Returncodes>();
 }
 
-// NOCOM for testing (in debug builds only)
+// NOCOM for testing
 #include "editor/scripting/builtin.h"
 #include "editor/scripting/constexpr.h"
 #include "editor/scripting/control_structures.h"
@@ -1291,7 +1288,8 @@ std::string EditorInteractive::try_finalize() {
 	player_relations_.reset(new uint8_t[nrplayers * nrplayers]);
 	memset(player_relations_.get(), 0, sizeof(uint8_t) * nrplayers * nrplayers);
 	new_scripting_saver();
-#ifndef NDEBUG  // NOCOM for testing (in debug builds only)
+#ifndef NDEBUG
+	// NOCOM for testing (in debug builds only)
 	{
 		LuaFunction* main_func = new LuaFunction("mission_thread");
 		main_func->init(*scripting_saver_);
@@ -1319,7 +1317,7 @@ std::string EditorInteractive::try_finalize() {
 			VAL(30)
 			VAL(50)
 #undef VAL
-			   ConstexprBoolean* _true = new ConstexprBoolean(true);
+			ConstexprBoolean* _true = new ConstexprBoolean(true);
 			_true->init(*scripting_saver_);
 			FS_While* _while = new FS_While(true, _true);
 			_while->init(*scripting_saver_);
@@ -1415,6 +1413,7 @@ std::string EditorInteractive::try_finalize() {
 		functions_.push_back(lc);
 	}
 #else
+	// Create a main function with an empty body
 	{
 		LuaFunction* lf = new LuaFunction("mission_thread");
 		lf->init(*scripting_saver_);
@@ -1425,8 +1424,11 @@ std::string EditorInteractive::try_finalize() {
 		functions_.push_back(lc);
 	}
 #endif
+	tool_windows_.players.destroy();
+	menu_windows_.mapoptions.destroy();
 	rebuild_main_menu();
 	scenario_toolmenu_.set_enabled(true);
+	select_tool(tools_->info, EditorTool::ToolIndex::First);
 	return "";
 }
 

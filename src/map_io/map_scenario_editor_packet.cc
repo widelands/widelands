@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include "economy/road.h"
+#include "economy/workers_queue.h"
 #include "editor/editorinteractive.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -46,36 +48,70 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 		}
 		upcast(Game, game, &egbase);
 		assert(game);
-		// We are starting a scenario designed with the editor. Now we need to enforce some
-		// MapObject updates because task stacks, act() commands and the like are not
-		// properly created in the editor.
-		log("NOCOM: MapScenarioEditorPacket::read for games: There´s a LOT left to do!!!\n");
+		// We are starting a scenario designed with the editor.
+		// In the editor, we create workers in buildings and carriers on roads, but they are not told
+		// to stay there because task stacks are only created in games. But they are there already, so
+		// no requests are issued which we could fulfill. We therefore need to manually inform the
+		// buildings and the workers that they are now bound to each other.
 		const Map& map = egbase.map();
 		const Field* eof = &map[map.max_index()];
 		for (Field* f = &map[0]; f != eof; ++f) {
+			upcast(Building, bld, f->get_immovable());
+			upcast(ProductionSite, ps, bld);
+			upcast(Road, road, f->get_immovable());
+
 			for (Bob* b = f->get_first_bob(); b; b = b->get_next_bob()) {
-				b->reset_tasks(*game);
 				if (upcast(Worker, w, b)) {
-					if (PlayerImmovable* pi = w->get_location(*game)) {
-						// Properly assign workers to their intended locations
-						w->set_location(nullptr);
-						w->set_location(pi);
+					w->reset_tasks(*game);
+					if (bld) {
+						if (bld->soldier_control()) {
+							// Is this a soldier that should be garrisoned in a military-/trainingsite?
+							if (upcast(Soldier, s, w)) {
+								bld->mutable_soldier_control()->incorporate_soldier(*game, *s);
+							}
+						}
+					} else if (road) {
+						// A carrier on a road
+						if (upcast(Carrier, c, w)) {
+							c->start_task_road(*game);
+						}
 					}
 				}
-				b->send_signal(*game, "wakeup");
-				b->schedule_act(*game, 0);
 			}
-			if (f->get_immovable()) {
-				f->get_immovable()->schedule_act(*game, 0);
-				if (upcast(Flag, flag, f->get_immovable())) {
-					// Economy updates
-					flag->get_economy(wwWARE)->rebalance_supply();
-					flag->get_economy(wwWORKER)->rebalance_supply();
-				} else if (upcast(Building, b, f->get_immovable())) {
-					// If you had the map open in the editor for an hour, it will
-					// otherwise take an hour until the building starts working…
-					b->leave_time_ = 0;
+			if (bld) {
+				// The editor messes up saved gametimes
+				bld->leave_time_ = 0;
+
+				if (ps) {
+					// main_worker_ is not set yet in the editor, but perhaps a worker is there already
+					assert(ps->main_worker_ < 0);
+					const size_t nr_workers = ps->descr().working_positions().size();
+					for (uint32_t i = 0; i < nr_workers; ++i) {
+						if (Worker* worker = ps->working_positions_[i].worker) {
+							ps->main_worker_ = i;
+							worker->start_task_buildingwork(*game);
+							break;
+						}
+					}
+					// Make sure recruits stay in their barracks’ input queues
+					for (InputQueue* iq : ps->input_queues_) {
+						if (iq->get_type() == wwWORKER) {
+							WorkersQueue& wq = dynamic_cast<WorkersQueue&>(*iq);
+							std::vector<Worker*> workers = wq.workers_;
+							wq.workers_.clear();
+							for (Worker* w : workers) {
+								wq.entered(w->descr().worker_index(), w);
+							}
+						}
+					}
+					ps->try_start_working(*game);
 				}
+			} else if (road) {
+				road->wallet_ = road->busy_ ? kRoadMaxWallet : 0;
+			} else if (upcast(Flag, flag, f->get_immovable())) {
+				// Economy updates
+				flag->get_economy(wwWARE)->rebalance_supply();
+				flag->get_economy(wwWORKER)->rebalance_supply();
 			}
 		}
 		return;
