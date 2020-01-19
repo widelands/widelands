@@ -1,7 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# adrien vigneron <adrienvigneron@ml1.net>, 2019
 # David D, 2018
 # xXxLolimixXx <e.osmaaane@gmail.com>, 2015
 # GunChleoc, 2016
@@ -9,14 +10,14 @@
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2015
 # nicolas jardin <niko472006@sfr.fr>, 2016
-# Renaud Bouchard, 2015-2019
+# Renaud Bouchard, 2015-2020
 # syl_, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-10-09 07:57+0000\n"
-"PO-Revision-Date: 2019-10-15 07:52+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-10 12:51+0000\n"
+"PO-Revision-Date: 2020-01-16 20:07+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +30,7 @@ msgstr ""
 msgid ""
 "Click on the ‘OK’ button or press the ‘Enter ⏎’ key on the keyboard to close"
 " this window."
-msgstr ""
+msgstr "Cliquez sur le bouton 'OK' ou pressez sur la touche 'Entrer' du clavier pour fermer cette fenêtre."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:14
 msgid "Nice And Easy Does It All the Time"
@@ -46,7 +47,7 @@ msgstr "Je suis désolé, mais je dois remettre ceci sur le tapis. Nous pourrion
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:33
 msgid "Close this window"
-msgstr ""
+msgstr "Fermer cette fenêtre"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:38
 msgid "Welcome to the Widelands Tutorial!"
@@ -65,7 +66,7 @@ msgstr "Widelands est un jeu de stratégie lent et progressif orienté vers la c
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 msgid "You will be guided through this tutorial by objectives"
-msgstr ""
+msgstr "Vous allez être guidé à travers ce tutoriel par des objectifs"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
@@ -79,7 +80,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 msgid "Closing this window"
-msgstr ""
+msgstr "Fermeture de la fenêtre"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid ""
@@ -107,12 +108,12 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:57
 msgid "Try it out."
-msgstr ""
+msgstr "Essayez le."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:63
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid "Show building spaces"
-msgstr ""
+msgstr "Affichez les espaces de construction"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid ""
@@ -128,12 +129,12 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:68
 msgid "Show the building spaces now."
-msgstr ""
+msgstr "Affichez les espaces de construction maintenant."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:73
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:88
 msgid "Building Spaces"
-msgstr ""
+msgstr "Espaces de construction"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
@@ -308,12 +309,12 @@ msgstr "Maintenant que vous avez segmenté la route en deux parties avec un port
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:202
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:213
 msgid "Let’s see the progress"
-msgstr ""
+msgstr "Voyons voir les progrès"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
 msgid ""
-"Click on the construction site to have a look at it, then close it again "
-"when you have seen enough."
+"Click on the construction site to have a look at it, then close its window "
+"again when you have seen enough."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:204
@@ -427,7 +428,7 @@ msgstr "Autres moyens de bouger la vue"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
 msgid "Excellent. Now there is a faster way to move, using the mouse instead."
-msgstr ""
+msgstr "Excellent. Maintenant un moyen plus rapide de se déplacer, utilise la souris à la place."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:292
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:294
@@ -436,7 +437,7 @@ msgstr "Apprenez à utiliser la mini-carte."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:295
 msgid "Try moving around by clicking on the minimap"
-msgstr ""
+msgstr "Essayez de vous déplacer aux alentours en cliquant sur la mini-carte"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:296
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
@@ -452,11 +453,11 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:303
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:318
 msgid "Using the Minimap"
-msgstr ""
+msgstr "Utilisation de la mini-carte"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:305
 msgid "Very good. And now about the minimap. "
-msgstr ""
+msgstr "Très bien. Et maintenant voyons la mini-carte."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:307
 msgid ""
@@ -466,7 +467,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:309
 msgid "I will open it for you."
-msgstr ""
+msgstr "Je vais l'ouvrir pour vous."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid ""
@@ -754,7 +755,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
 msgid "Show the building statistics"
-msgstr ""
+msgstr "Affichez la fenêtre des statistiques des bâtiments."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:484
 msgid ""
@@ -905,7 +906,7 @@ msgstr "Détruisez les deux carrières"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:574
 msgid "Destroy the Quarries"
-msgstr ""
+msgstr "Détruisez les carrières"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:575
 msgid ""
@@ -948,11 +949,11 @@ msgstr "Étendez votre territoire"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:599
 msgid "Make your Territory Grow"
-msgstr ""
+msgstr "Agrandissez votre territoire"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:600
 msgid "Build a military building on your border."
-msgstr ""
+msgstr "Construisez un bâtiment militaire sur votre frontière."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:601
 msgid ""
@@ -1053,7 +1054,7 @@ msgstr "Cependant, comme vous connaissez les contrôles de Widelands, vous pouve
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:640
 msgid "To leave this game and return to the main menu:"
-msgstr ""
+msgstr "Pour quitter le jeu et revenir au menu principal:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:641
 msgid ""
@@ -1078,8 +1079,8 @@ msgstr "“%s”"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "Nouvel objectif"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "Nouveaux objectifs"
