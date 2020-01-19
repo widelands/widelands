@@ -63,18 +63,18 @@ Button::Button  //  Common constructor
 	assert(!get_can_focus());
 }
 
-/// For textual buttons. If h = 0, h will resize according to the font's height. If both h = 0 and w = 0, will resize for text width as well.
-Button::Button
-   (Panel* const parent,
-    const std::string& name,
-    int32_t const x,
-    int32_t const y,
-    uint32_t const w,
-    uint32_t const h,
-    UI::ButtonStyle init_style,
-    const std::string& title_text,
-    const std::string& tooltip_text,
-    UI::Button::VisualState init_state)
+/// For textual buttons. If h = 0, h will resize according to the font's height. If both h = 0 and w
+/// = 0, will resize for text width as well.
+Button::Button(Panel* const parent,
+               const std::string& name,
+               int32_t const x,
+               int32_t const y,
+               uint32_t const w,
+               uint32_t const h,
+               UI::ButtonStyle init_style,
+               const std::string& title_text,
+               const std::string& tooltip_text,
+               UI::Button::VisualState init_state)
    : Button(parent,
             name,
             x,
@@ -92,13 +92,13 @@ Button::Button
 		int new_width = get_w();
 		const int new_height =
 		   std::max(text_height(g_gr->styles().button_style(init_style).enabled().font()),
-					text_height(g_gr->styles().button_style(init_style).disabled().font()))
-				+ 4 * kButtonImageMargin;
+		            text_height(g_gr->styles().button_style(init_style).disabled().font())) +
+		   4 * kButtonImageMargin;
 		if (w == 0) {
 			// Automatically resize for text width too.
 			new_width = std::max(text_width(richtext_escape(title_), style_->enabled().font()),
-								 text_width(richtext_escape(title_), style_->disabled().font()))
-						+ 8 * kButtonImageMargin;
+			                     text_width(richtext_escape(title_), style_->disabled().font())) +
+			            8 * kButtonImageMargin;
 		}
 		set_desired_size(new_width, new_height);
 		set_size(new_width, new_height);

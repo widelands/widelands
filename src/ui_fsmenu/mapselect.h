@@ -93,7 +93,7 @@ private:
 	UI::Dropdown<std::string>* official_tags_dropdown_;
 
 	UI::Dropdown<std::string>* balancing_tags_dropdown_;
-	bool unspecified_balancing_found_; // Backwards compatibility
+	bool unspecified_balancing_found_;  // Backwards compatibility
 
 	UI::Dropdown<std::string>* team_tags_dropdown_;
 
