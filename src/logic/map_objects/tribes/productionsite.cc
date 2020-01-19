@@ -1018,8 +1018,8 @@ void ProductionSite::train_workers(Game& game) {
 }
 
 void ProductionSite::notify_player(Game& game, uint8_t minutes, FailNotificationType type) {
-	if (last_stat_percent_ / 10 == 0 ||
-	    (last_stat_percent_ / 10 <= descr().out_of_resource_productivity_threshold() &&
+	if (get_actual_statistics() == 0 ||
+	    (get_actual_statistics() <= descr().out_of_resource_productivity_threshold() &&
 	     trend_ == Trend::kFalling)) {
 
 		if (type == FailNotificationType::kFull) {
