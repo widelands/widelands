@@ -28,7 +28,7 @@ tribes:new_worker_type {
       amazons_carrier = 1,
       felling_ax = 1
    },
-   
+
    experience = 15,
    becomes = "amazons_woodcutter_master",
 

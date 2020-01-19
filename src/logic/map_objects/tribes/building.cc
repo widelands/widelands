@@ -705,8 +705,9 @@ void Building::draw(uint32_t gametime,
                     const float scale,
                     RenderTarget* dst) {
 	if (was_immovable_) {
-		dst->blit_animation(point_on_dst, coords, scale, was_immovable_->get_animation("idle", nullptr),
-		                    gametime - animstart_, &get_owner()->get_playercolor());
+		dst->blit_animation(point_on_dst, coords, scale,
+		                    was_immovable_->get_animation("idle", nullptr), gametime - animstart_,
+		                    &get_owner()->get_playercolor());
 	}
 
 	dst->blit_animation(
