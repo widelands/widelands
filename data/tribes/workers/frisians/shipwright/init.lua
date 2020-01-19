@@ -1,23 +1,5 @@
 dirname = path.dirname (__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = {8, 23},
-   },
-   work = {
-      pictures = path.list_files (dirname .. "work_??.png"),
-      sound_effect = {
-         path = "sound/hammering/hammering",
-         priority = 64
-      },
-      hotspot = {9, 24},
-      fps = 10
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {11, 24}, 15)
-add_directional_animation(animations, "walkload", dirname, "walkload", {10, 26}, 15)
-
 tribes:new_worker_type {
    msgctxt = "frisians_worker",
    name = "frisians_shipwright",
@@ -40,9 +22,61 @@ tribes:new_worker_type {
          "construct",
          "animate=work 5000",
          "return"
-      }
+      },
+      buildferry_1 = {
+         "findspace=size:swim radius:4",
+      },
+      buildferry_2 = {
+         "findspace=size:swim radius:4",
+         "walk=coords",
+         "animate=work 10000",
+         "buildferry",
+         "return"
+      },
    },
 
    ware_hotspot = {0, 20},
-   animations = animations,
+
+   spritesheets = {
+      walk = {
+         directory = dirname,
+         basename = "walk",
+         fps = 15,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         directional = true,
+         hotspot = {11, 24}
+      },
+      walkload = {
+         directory = dirname,
+         basename = "walkload",
+         fps = 15,
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         directional = true,
+         hotspot = {10, 26}
+      },
+      work = {
+         directory = dirname,
+         basename = "work",
+         fps = 10,
+         frames = 75,
+         columns = 5,
+         rows = 15,
+         sound_effect = {
+            path = "sound/hammering/hammering",
+            priority = 64
+         },
+         hotspot = {9, 24},
+      },
+   },
+   animations = {
+      idle = {
+         directory = dirname,
+         basename = "idle",
+         hotspot = {8, 23}
+      },
+   },
 }

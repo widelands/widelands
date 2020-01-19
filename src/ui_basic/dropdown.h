@@ -141,7 +141,8 @@ public:
 	void set_size(int nw, int nh) override;
 	void set_desired_size(int w, int h) override;
 
-	/// Expand display button to make enough room for each entry's text. Call this before adding yna entries.
+	/// Expand display button to make enough room for each entry's text. Call this before adding yna
+	/// entries.
 	void set_autoexpand_display_button();
 
 protected:
@@ -175,6 +176,7 @@ protected:
 	void think() override;
 
 private:
+	static void layout_if_alive(int);
 	void layout() override;
 
 	/// Updates the buttons

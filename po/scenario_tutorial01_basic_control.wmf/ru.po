@@ -8,15 +8,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Viktor S <awsswa59@gmail.com>, 2019
 # Yuriy Sokolov <lention@mail.ru>, 2015
+# Евгений Кривошеев <euja@yandex.ru>, 2019
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2017-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-11-04 21:05+0000\n"
+"PO-Revision-Date: 2019-11-29 06:13+0000\n"
+"Last-Translator: Viktor S <awsswa59@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +29,7 @@ msgstr ""
 msgid ""
 "Click on the ‘OK’ button or press the ‘Enter ⏎’ key on the keyboard to close"
 " this window."
-msgstr ""
+msgstr "Нажмите ‘ОК’ или нажмите клавишу «Enter» на клавиатуре, чтобы закрыть это окно."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:14
 msgid "Nice And Easy Does It All the Time"
@@ -45,7 +46,7 @@ msgstr "Прошу прощения, но мне придётся разруши
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:33
 msgid "Close this window"
-msgstr ""
+msgstr "Закрыть это окно"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:38
 msgid "Welcome to the Widelands Tutorial!"
@@ -64,27 +65,27 @@ msgstr "«Widelands» - неторопливая накопительная ст
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 msgid "You will be guided through this tutorial by objectives"
-msgstr ""
+msgstr "В этом руководстве вы будете обучатся по целям"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:44
 msgid ""
 "Follow the intructions in the objective below so that I can show you where "
 "to find them."
-msgstr ""
+msgstr "Следуйте инструкциям Задания, чтобы я мог показать тебе, где их найти."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:50
 msgid "Objectives and how to close this window"
-msgstr ""
+msgstr "Задания и Пояснение закроют это окно"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 msgid "Closing this window"
-msgstr ""
+msgstr "Закрытие этого окна"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid ""
 "This is the ‘Objectives’ window. You can return to this window for "
 "instructions at any time."
-msgstr ""
+msgstr "Это окно \"Заданий\". Ты можешь вернуться в это окно с инструкциями в любое время."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
@@ -111,7 +112,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:63
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid "Show building spaces"
-msgstr ""
+msgstr "Показать места строительства"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid ""
@@ -127,12 +128,12 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:68
 msgid "Show the building spaces now."
-msgstr ""
+msgstr "Показать места строительства сейчас"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:73
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:88
 msgid "Building Spaces"
-msgstr ""
+msgstr "Места строительства"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
@@ -163,7 +164,7 @@ msgstr "Обычно игра начинается лишь с одним шта
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’."
-msgstr ""
+msgstr "Мы должны найти подходящее место для Хижины дровосека. Чтобы сделать это проще, мы можем активировать \"Показать места строительства\"."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:82
 msgid ""
@@ -307,7 +308,7 @@ msgstr "Теперь вы разделили дорогу на две части
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:202
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:213
 msgid "Let’s see the progress"
-msgstr ""
+msgstr "Давайте проверим степень готовности"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
 msgid ""
@@ -426,7 +427,7 @@ msgstr "Другие способы перемещения вида"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
 msgid "Excellent. Now there is a faster way to move, using the mouse instead."
-msgstr ""
+msgstr "Превосходно. Теперь есть более быстрый способ перемещения, используя вместо этого мышь."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:292
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:294
@@ -451,11 +452,11 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:303
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:318
 msgid "Using the Minimap"
-msgstr ""
+msgstr "Использование Миникарты"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:305
 msgid "Very good. And now about the minimap. "
-msgstr ""
+msgstr "Очень хорошо. Теперь о миникарте."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:307
 msgid ""
@@ -465,7 +466,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:309
 msgid "I will open it for you."
-msgstr ""
+msgstr "Я открою её для тебя."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid ""
@@ -595,7 +596,7 @@ msgstr "Теперь, об этой дороге. Помните: мы уже н
 msgid ""
 " Excellent! To enter road building mode for any flag, left-click on a flag "
 "and select the road building symbol."
-msgstr ""
+msgstr "Превосходно! Чтобы войти в режим дорожного строительства для любого флага, щелкните левой кнопкой мыши на флаге и выберите символ дорожного строительства."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:388
 msgid ""
@@ -748,12 +749,12 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:472
 msgid "Let me enable the census for you."
-msgstr ""
+msgstr "Позвольте мне включить перепись для вас."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
 msgid "Show the building statistics"
-msgstr ""
+msgstr "Показать статистику построек"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:484
 msgid ""
@@ -904,7 +905,7 @@ msgstr "Разрушьте две каменоломни"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:574
 msgid "Destroy the Quarries"
-msgstr ""
+msgstr "Разрушьте каменоломню"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:575
 msgid ""
@@ -947,11 +948,11 @@ msgstr "Расширьте свою территорию"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:599
 msgid "Make your Territory Grow"
-msgstr ""
+msgstr "Обеспечьте расширение вашей территории"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:600
 msgid "Build a military building on your border."
-msgstr ""
+msgstr "Постройте военное здание на своей границе."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:601
 msgid ""
@@ -1052,7 +1053,7 @@ msgstr "В любом случае, теперь вы изучили спосо�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:640
 msgid "To leave this game and return to the main menu:"
-msgstr ""
+msgstr "Для завершения игры и выхода в главное меню:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:641
 msgid ""
@@ -1062,7 +1063,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:642
 msgid "Then click on the ‘Exit Game’ entry."
-msgstr ""
+msgstr "Затем щелкнуть на «Выход из игры»."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:643
 msgid ""
@@ -1073,12 +1074,12 @@ msgstr "Спасибо, что прошли это обучение. Играй�
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "Новое задание"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "Новые задания"

@@ -30,9 +30,9 @@
 #include "economy/economy.h"
 #include "economy/expedition_bootstrap.h"
 #include "economy/flag.h"
-#include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
+#include "economy/ship_fleet.h"
 #include "economy/ware_instance.h"
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
@@ -122,11 +122,17 @@ AttackTarget::AttackResult Warehouse::AttackTarget::attack(Soldier* enemy) const
 }
 
 WarehouseSupply::~WarehouseSupply() {
-	if (economy_) {
+	if (ware_economy_) {
 		log("WarehouseSupply::~WarehouseSupply: Warehouse %u still belongs to "
-		    "an economy",
+		    "a ware_economy",
 		    warehouse_->serial());
-		set_economy(nullptr);
+		set_economy(nullptr, wwWARE);
+	}
+	if (worker_economy_) {
+		log("WarehouseSupply::~WarehouseSupply: Warehouse %u still belongs to "
+		    "a worker_economy",
+		    warehouse_->serial());
+		set_economy(nullptr, wwWORKER);
 	}
 
 	// We're removed from the Economy. Therefore, the wares can simply
@@ -148,30 +154,50 @@ void WarehouseSupply::set_nrworkers(DescriptionIndex const i) {
 }
 
 /// Add and remove our wares and the Supply to the economies as necessary.
-void WarehouseSupply::set_economy(Economy* const e) {
-	if (e == economy_)
+void WarehouseSupply::set_economy(Economy* const e, WareWorker type) {
+	if (e == (type == wwWARE ? ware_economy_ : worker_economy_))
 		return;
 
-	if (economy_) {
-		economy_->remove_supply(*this);
-		for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i)
-			if (wares_.stock(i))
-				economy_->remove_wares(i, wares_.stock(i));
-		for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i)
-			if (workers_.stock(i))
-				economy_->remove_workers(i, workers_.stock(i));
+	if (Economy* ec = (type == wwWARE ? ware_economy_ : worker_economy_)) {
+		ec->remove_supply(*this);
+		switch (type) {
+		case wwWARE:
+			for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i) {
+				if (wares_.stock(i)) {
+					ec->remove_wares_or_workers(i, wares_.stock(i));
+				}
+			}
+			break;
+		case wwWORKER:
+			for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i) {
+				if (workers_.stock(i)) {
+					ec->remove_wares_or_workers(i, workers_.stock(i));
+				}
+			}
+			break;
+		}
 	}
 
-	economy_ = e;
+	(type == wwWARE ? ware_economy_ : worker_economy_) = e;
 
-	if (economy_) {
-		for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i)
-			if (wares_.stock(i))
-				economy_->add_wares(i, wares_.stock(i));
-		for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i)
-			if (workers_.stock(i))
-				economy_->add_workers(i, workers_.stock(i));
-		economy_->add_supply(*this);
+	if (Economy* ec = (type == wwWARE ? ware_economy_ : worker_economy_)) {
+		switch (type) {
+		case wwWARE:
+			for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i) {
+				if (wares_.stock(i)) {
+					ec->add_wares_or_workers(i, wares_.stock(i), worker_economy_);
+				}
+			}
+			break;
+		case wwWORKER:
+			for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i) {
+				if (workers_.stock(i)) {
+					e->add_wares_or_workers(i, workers_.stock(i), ware_economy_);
+				}
+			}
+			break;
+		}
+		ec->add_supply(*this);
 	}
 }
 
@@ -180,8 +206,9 @@ void WarehouseSupply::add_wares(DescriptionIndex const id, Quantity const count)
 	if (!count)
 		return;
 
-	if (economy_)  // No economies in the editor
-		economy_->add_wares(id, count);
+	if (ware_economy_) {  // No economies in the editor
+		ware_economy_->add_wares_or_workers(id, count, worker_economy_);
+	}
 	wares_.add(id, count);
 }
 
@@ -191,8 +218,9 @@ void WarehouseSupply::remove_wares(DescriptionIndex const id, uint32_t const cou
 		return;
 
 	wares_.remove(id, count);
-	if (economy_)  // No economies in the editor
-		economy_->remove_wares(id, count);
+	if (ware_economy_) {  // No economies in the editor
+		ware_economy_->remove_wares_or_workers(id, count);
+	}
 }
 
 /// Add workers and update the economy.
@@ -200,8 +228,9 @@ void WarehouseSupply::add_workers(DescriptionIndex const id, uint32_t const coun
 	if (!count)
 		return;
 
-	if (economy_)  // No economies in the editor
-		economy_->add_workers(id, count);
+	if (worker_economy_) {  // No economies in the editor
+		worker_economy_->add_wares_or_workers(id, count, ware_economy_);
+	}
 	workers_.add(id, count);
 }
 
@@ -214,8 +243,9 @@ void WarehouseSupply::remove_workers(DescriptionIndex const id, uint32_t const c
 		return;
 
 	workers_.remove(id, count);
-	if (economy_)  // No economies in the editor
-		economy_->remove_workers(id, count);
+	if (worker_economy_) {  // No economies in the editor
+		worker_economy_->remove_wares_or_workers(id, count);
+	}
 }
 
 /// Return the position of the Supply, i.e. the owning Warehouse.
@@ -592,14 +622,19 @@ void Warehouse::init_portdock(EditorGameBase& egbase) {
 
 	portdock_ = new PortDock(this);
 	portdock_->set_owner(get_owner());
-	portdock_->set_economy(get_economy());
+	portdock_->set_economy(get_economy(wwWARE), wwWARE);
+	portdock_->set_economy(get_economy(wwWORKER), wwWORKER);
 	for (const Coords& coords : dock) {
 		portdock_->add_position(coords);
 	}
 	portdock_->init(egbase);
 
-	if (get_economy() != nullptr)
-		portdock_->set_economy(get_economy());
+	if (get_economy(wwWARE) != nullptr) {
+		portdock_->set_economy(get_economy(wwWARE), wwWARE);
+	}
+	if (get_economy(wwWORKER) != nullptr) {
+		portdock_->set_economy(get_economy(wwWORKER), wwWORKER);
+	}
 
 	// this is just to indicate something wrong is going on
 	PortDock* pd_tmp = portdock_;
@@ -764,8 +799,8 @@ void Warehouse::act(Game& game, uint32_t const data) {
 }
 
 /// Transfer our registration to the new economy.
-void Warehouse::set_economy(Economy* const e) {
-	Economy* const old = get_economy();
+void Warehouse::set_economy(Economy* const e, WareWorker type) {
+	Economy* const old = get_economy(type);
 
 	if (old == e)
 		return;
@@ -773,19 +808,19 @@ void Warehouse::set_economy(Economy* const e) {
 	if (old)
 		old->remove_warehouse(*this);
 
-	if (portdock_)
-		portdock_->set_economy(e);
-	supply_->set_economy(e);
-	Building::set_economy(e);
+	if (portdock_) {
+		portdock_->set_economy(e, type);
+	}
+	supply_->set_economy(e, type);
+	Building::set_economy(e, type);
 
 	for (const PlannedWorkers& pw : planned_workers_) {
 		for (Request* req : pw.requests) {
-			req->set_economy(e);
+			if (req->get_type() == type) {
+				req->set_economy(e);
+			}
 		}
 	}
-
-	if (portdock_)
-		portdock_->set_economy(e);
 
 	if (e)
 		e->add_warehouse(*this);
@@ -1358,7 +1393,7 @@ void Warehouse::log_general_info(const EditorGameBase& egbase) const {
 			molog("port needs ship: %s\n", (portdock_->get_need_ship()) ? "true" : "false");
 			molog("wares and workers waiting: %u\n", portdock_->count_waiting());
 			molog("exped. in progr.: %s\n", (portdock_->expedition_started()) ? "true" : "false");
-			Fleet* fleet = portdock_->get_fleet();
+			ShipFleet* fleet = portdock_->get_fleet();
 			if (fleet) {
 				molog("* fleet: %u\n", fleet->serial());
 				molog("  ships: %u, ports: %u\n", fleet->count_ships(), fleet->count_ports());

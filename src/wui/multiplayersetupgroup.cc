@@ -600,7 +600,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribes_dropdown_.set_enabled(false);
 			init_dropdown_.set_visible(false);
 			init_dropdown_.set_enabled(false);
-		} else {
+		} else {  // kHuman, kShared, kComputer
 			rebuild_tribes_dropdown(settings);
 			rebuild_init_dropdown(settings);
 			rebuild_team_dropdown(settings);

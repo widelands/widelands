@@ -441,9 +441,9 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 				authenticator_ = crypto::sha1(clientname_ + authenticator_);
 			}
 			format_and_add_chat("", "", true, _("Our forums can be found at:"));
-			format_and_add_chat("", "", true, "https://wl.widelands.org/forum/");
+			format_and_add_chat("", "", true, "https://www.widelands.org/forum/");
 			format_and_add_chat("", "", true, _("For reporting bugs, visit:"));
-			format_and_add_chat("", "", true, "https://wl.widelands.org/wiki/ReportingBugs/");
+			format_and_add_chat("", "", true, "https://www.widelands.org/wiki/ReportingBugs/");
 			state_ = LOBBY;
 			// Append UTC time to login message to ease linking between client output and
 			// metaserver logs. The string returned by asctime is terminated by \n
@@ -911,15 +911,16 @@ void InternetGaming::send(const std::string& msg) {
 
 		if (msg == "/help") {
 			format_and_add_chat("", "", true, _("Supported admin commands:"));
-			format_and_add_chat("", "", true, _("/motd <msg> sets a permanent greeting message"));
-			format_and_add_chat("", "", true, _("/announce <msg> send a one time system message"));
-			format_and_add_chat(
-			   "", "", true, _("/warn <user> <msg> send a private system message to the given user"));
+			format_and_add_chat("", "", true, _("/motd <msg> - Set a permanent greeting message"));
+			format_and_add_chat("", "", true, _("/announce <msg> - Send a one time system message"));
 			format_and_add_chat(
 			   "", "", true,
-			   _("/kick <user|game> removes the given user or game from the metaserver"));
+			   _("/warn <user> <msg> - Send a private system message to the given user"));
 			format_and_add_chat(
-			   "", "", true, _("/ban <user> bans a user for 24 hours from the metaserver"));
+			   "", "", true,
+			   _("/kick <user|game> - Remove the given user or game from the metaserver"));
+			format_and_add_chat(
+			   "", "", true, _("/ban <user> - Ban a user for 24 hours from the metaserver"));
 			return;
 		}
 

@@ -21,7 +21,8 @@
 
 #include "base/macros.h"
 #include "graphic/align.h"
-#include "graphic/animation.h"
+#include "graphic/animation/animation.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
 #include "graphic/surface.h"
 

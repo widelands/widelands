@@ -311,18 +311,24 @@ void ProductionSite::load_finish(EditorGameBase& egbase) {
  * Display whether we're occupied.
  */
 void ProductionSite::update_statistics_string(std::string* s) {
-	uint32_t const nr_working_positions = descr().nr_working_positions();
-	uint32_t nr_workers = 0;
-	for (uint32_t i = nr_working_positions; i;)
-		nr_workers += working_positions_[--i].worker ? 1 : 0;
-
-	if (nr_workers == 0) {
-		*s = g_gr->styles().color_tag(
-		   _("(not occupied)"), g_gr->styles().building_statistics_style().low_color());
-		return;
+	uint32_t nr_requests = 0;
+	uint32_t nr_coming = 0;
+	for (uint32_t i = 0; i < descr().nr_working_positions(); ++i) {
+		const Widelands::Request* request = working_positions_[i].worker_request;
+		// Check whether a request is being fulfilled or not
+		if (request) {
+			if (request->is_open()) {
+				++nr_requests;
+			} else {
+				++nr_coming;
+			}
+		} else if (working_positions_[i].worker == nullptr) {
+			// We might have no request, but no worker either
+			++nr_requests;
+		}
 	}
 
-	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
+	if (nr_requests > 0) {
 		*s = g_gr->styles().color_tag(
 		   (nr_requests == 1 ?
 		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
@@ -330,6 +336,18 @@ void ProductionSite::update_statistics_string(std::string* s) {
 		       /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
 		          missing. If you need plural forms here, please let us know. */
 		       _("Workers missing")),
+		   g_gr->styles().building_statistics_style().low_color());
+		return;
+	}
+
+	if (nr_coming > 0) {
+		*s = g_gr->styles().color_tag(
+		   (nr_coming == 1 ?
+		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
+		       _("Worker is coming") :
+		       /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
+		          missing. If you need plural forms here, please let us know. */
+		       _("Workers are coming")),
 		   g_gr->styles().building_statistics_style().low_color());
 		return;
 	}
@@ -496,21 +514,29 @@ bool ProductionSite::init(EditorGameBase& egbase) {
  *
  * \note Workers are dealt with in the PlayerImmovable code.
  */
-void ProductionSite::set_economy(Economy* const e) {
-	if (Economy* const old = get_economy()) {
+void ProductionSite::set_economy(Economy* const e, WareWorker type) {
+	if (Economy* const old = get_economy(type)) {
 		for (InputQueue* ip_queue : input_queues_) {
-			ip_queue->remove_from_economy(*old);
+			if (ip_queue->get_type() == type) {
+				ip_queue->remove_from_economy(*old);
+			}
 		}
 	}
 
-	Building::set_economy(e);
-	for (uint32_t i = descr().nr_working_positions(); i;)
-		if (Request* const r = working_positions_[--i].worker_request)
-			r->set_economy(e);
+	Building::set_economy(e, type);
+	for (uint32_t i = descr().nr_working_positions(); i;) {
+		if (Request* const r = working_positions_[--i].worker_request) {
+			if (r->get_type() == type) {
+				r->set_economy(e);
+			}
+		}
+	}
 
 	if (e) {
 		for (InputQueue* ip_queue : input_queues_) {
-			ip_queue->add_to_economy(*e);
+			if (ip_queue->get_type() == type) {
+				ip_queue->add_to_economy(*e);
+			}
 		}
 	}
 }
@@ -781,7 +807,8 @@ void ProductionSite::log_general_info(const EditorGameBase& egbase) const {
 
 void ProductionSite::set_stopped(bool const stopped) {
 	is_stopped_ = stopped;
-	get_economy()->rebalance_supply();
+	get_economy(wwWARE)->rebalance_supply();
+	get_economy(wwWORKER)->rebalance_supply();
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kChanged));
 }
 
@@ -1092,9 +1119,8 @@ void ProductionSite::update_crude_statistics(uint32_t duration, const bool produ
 		duration = duration_cap;
 	}
 	const uint32_t past_duration = entire_duration - duration;
-	crude_percent_ =
-	   (crude_percent_ * past_duration + produced * duration * 10000) / entire_duration;
-	assert(crude_percent_ <= 10000);  // be sure we do not go above 100 %
+	crude_percent_ = (crude_percent_ * past_duration + produced * duration * 1000) / entire_duration;
+	assert(crude_percent_ <= 1000);  // be sure we do not go above 100 %
 }
 
 }  // namespace Widelands

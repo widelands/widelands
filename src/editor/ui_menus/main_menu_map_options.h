@@ -28,6 +28,7 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilineeditbox.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
@@ -70,6 +71,7 @@ private:
 	UI::Dropdown<std::string> balancing_dropdown_;
 
 	UI::Listselect<std::string> teams_list_;
+	UI::SpinBox* waterway_length_box_;
 
 	UI::UniqueWindow::Registry& registry_;
 };

@@ -58,7 +58,10 @@
 #include "map_io/map_scripting_packet.h"
 #include "map_io/map_terrain_packet.h"
 #include "map_io/map_version_packet.h"
+#include "map_io/map_waterway_packet.h"
+#include "map_io/map_waterwaydata_packet.h"
 #include "map_io/map_wincondition_packet.h"
+#include "ui_basic/progresswindow.h"
 
 namespace Widelands {
 
@@ -77,10 +80,18 @@ void MapSaver::save() {
 	timer_message += "' took %ums";
 	ScopedTimer timer(timer_message);
 
+	bool is_game = is_a(Game, &egbase_);
+
+	assert(egbase_.get_loader_ui());
+	auto set_progress_message = [this](std::string text, int step) {
+		egbase_.get_loader_ui()->step(
+		   step < 0 ? text :
+		              (boost::format(_("Saving map: %1$s (%2$d/%3$d)")) % text % step % 23).str());
+	};
+	set_progress_message(_("Autosaving map…"), -1);
+
 	delete mos_;
 	mos_ = new MapObjectSaver();
-
-	bool is_game = is_a(Game, &egbase_);
 
 	// The binary data is saved in an own directory
 	// to keep it hidden from the poor debuggers
@@ -90,6 +101,7 @@ void MapSaver::save() {
 	// Start with writing the map out, first Elemental data
 	// PRELOAD DATA BEGIN
 	log("Writing Elemental Data ... ");
+	set_progress_message(_("Elemental data"), 1);
 	{
 		MapElementalPacket p;
 		p.write(fs_, egbase_, *mos_);
@@ -112,6 +124,7 @@ void MapSaver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Heights Data ... ");
+	set_progress_message(_("Heights"), 2);
 	{
 		MapHeightsPacket p;
 		p.write(fs_, egbase_, *mos_);
@@ -119,6 +132,7 @@ void MapSaver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Terrain Data ... ");
+	set_progress_message(_("Terrains"), 3);
 	{
 		MapTerrainPacket p;
 		p.write(fs_, egbase_);
@@ -126,6 +140,7 @@ void MapSaver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Player Start Position Data ... ");
+	set_progress_message(_("Starting positions"), 4);
 	{
 		MapPlayerPositionPacket p;
 		p.write(fs_, egbase_, *mos_);
@@ -138,6 +153,7 @@ void MapSaver::save() {
 		//    * command queue (PlayerMessageCommand, inherited by
 		//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
 		log("Writing Player Message Data ... ");
+		set_progress_message(_("Messages"), 5);
 		{
 			MapPlayersMessagesPacket p;
 			p.write(fs_, egbase_, *mos_);
@@ -146,6 +162,7 @@ void MapSaver::save() {
 	}
 
 	log("Writing Resources Data ... ");
+	set_progress_message(_("Resources"), 6);
 	{
 		MapResourcesPacket p;
 		p.write(fs_, egbase_);
@@ -154,6 +171,7 @@ void MapSaver::save() {
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	log("Writing Map Version ... ");
+	set_progress_message(_("Map version"), 7);
 	{
 		MapVersionPacket p;
 		p.write(fs_, egbase_);
@@ -166,6 +184,7 @@ void MapSaver::save() {
 
 		//  allowed worker types
 		log("Writing Allowed Worker Types Data ... ");
+		set_progress_message(_("Building restrictions"), 8);
 		{
 			MapAllowedWorkerTypesPacket p;
 			p.write(fs_, egbase_, *mos_);
@@ -191,6 +210,7 @@ void MapSaver::save() {
 		// change this order unless you know what you are doing
 		// EXISTING PACKETS
 		log("Writing Flag Data ... ");
+		set_progress_message(_("Flags"), 9);
 		{
 			MapFlagPacket p;
 			p.write(fs_, egbase_, *mos_);
@@ -198,13 +218,22 @@ void MapSaver::save() {
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Writing Road Data ... ");
+		set_progress_message(_("Roads and waterways"), 10);
 		{
 			MapRoadPacket p;
 			p.write(fs_, egbase_, *mos_);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
+		log("Writing Waterway Data ... ");
+		{
+			MapWaterwayPacket p;
+			p.write(fs_, egbase_, *mos_);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
+
 		log("Writing Building Data ... ");
+		set_progress_message(_("Buildings"), 11);
 		{
 			MapBuildingPacket p;
 			p.write(fs_, egbase_, *mos_);
@@ -214,6 +243,7 @@ void MapSaver::save() {
 
 	// We do need to save this one in the editor!
 	log("Writing Map Objects ... ");
+	set_progress_message(_("Map objects"), 12);
 	{
 		MapObjectPacket p;
 		p.write(fs_, egbase_, *mos_);
@@ -223,6 +253,7 @@ void MapSaver::save() {
 	if (is_game) {
 		// Map data used by win conditions
 		log("Writing Wincondition Data ... ");
+		set_progress_message(_("Win condition"), 13);
 		{
 			MapWinconditionPacket p;
 			p.write(fs_, *egbase_.mutable_map(), *mos_);
@@ -232,6 +263,7 @@ void MapSaver::save() {
 		// DATA PACKETS
 		if (mos_->get_nr_flags()) {
 			log("Writing Flagdata Data ... ");
+			set_progress_message(_("Flag details"), 14);
 			{
 				MapFlagdataPacket p;
 				p.write(fs_, egbase_, *mos_);
@@ -241,6 +273,7 @@ void MapSaver::save() {
 
 		if (mos_->get_nr_roads()) {
 			log("Writing Roaddata Data ... ");
+			set_progress_message(_("Road and waterway details"), 15);
 			{
 				MapRoaddataPacket p;
 				p.write(fs_, egbase_, *mos_);
@@ -248,8 +281,18 @@ void MapSaver::save() {
 			log("took %ums\n ", timer.ms_since_last_query());
 		}
 
+		if (mos_->get_nr_waterways()) {
+			log("Writing Waterwaydata Data ... ");
+			{
+				MapWaterwaydataPacket p;
+				p.write(fs_, egbase_, *mos_);
+			}
+			log("took %ums\n ", timer.ms_since_last_query());
+		}
+
 		if (mos_->get_nr_buildings()) {
 			log("Writing Buildingdata Data ... ");
+			set_progress_message(_("Building details"), 16);
 			{
 				MapBuildingdataPacket p;
 				p.write(fs_, egbase_, *mos_);
@@ -258,6 +301,7 @@ void MapSaver::save() {
 		}
 
 		log("Writing Node Ownership Data ... ");
+		set_progress_message(_("Territory"), 17);
 		{
 			MapNodeOwnershipPacket p;
 			p.write(fs_, egbase_, *mos_);
@@ -265,6 +309,7 @@ void MapSaver::save() {
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Writing Exploration Data ... ");
+		set_progress_message(_("Exploration"), 18);
 		{
 			MapExplorationPacket p;
 			p.write(fs_, egbase_, *mos_);
@@ -272,6 +317,7 @@ void MapSaver::save() {
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Writing Players Unseen Data ... ");
+		set_progress_message(_("Vision"), 19);
 		{
 			MapPlayersViewPacket p;
 			p.write(fs_, egbase_, *mos_);
@@ -281,6 +327,7 @@ void MapSaver::save() {
 
 	// We also want to write these in the editor.
 	log("Writing Scripting Data ... ");
+	set_progress_message(_("Scripting"), 20);
 	{
 		MapScriptingPacket p;
 		p.write(fs_, egbase_, *mos_);
@@ -288,21 +335,24 @@ void MapSaver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Objective Data ... ");
+	set_progress_message(_("Objectives"), 21);
 	write_objective_data(fs_, egbase_);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing map images ... ");
+	set_progress_message(_("Images"), 22);
 	save_map_images(&fs_, map.filesystem());
 	log("took %ums\n ", timer.ms_since_last_query());
 
-	if (is_game) {
 #ifndef NDEBUG
+	if (is_game) {
 		mos_->detect_unsaved_objects();
-#endif
 	}
+#endif
 
 	// Write minimap
 	{
+		set_progress_message(_("Minimap"), 23);
 		std::unique_ptr<Texture> minimap(
 		   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));
 		FileWrite fw;

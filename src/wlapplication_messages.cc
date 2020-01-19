@@ -94,7 +94,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	               "                      the map FILENAME in editor.")
 	          << endl
 	          << _(" --ai_training        Enables AI training mode. See\n"
-	               "                      https://wl.widelands.org/wiki/Ai%20Training/\n"
+	               "                      https://www.widelands.org/wiki/Ai%20Training/\n"
 	               "                      for a full description of the AI training logic.")
 	          << endl
 	          << _(" --auto_speed         In multiplayer games only, this will keep\n"
@@ -165,7 +165,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	std::cout << _(" --verbose            Enable verbose debug messages") << endl << endl;
 	std::cout << _(" --help               Show this help") << endl << endl;
 	std::cout << _("Bug reports? Suggestions? Check out the project website:\n"
-	               "        https://wl.widelands.org/\n\n"
+	               "        https://www.widelands.org/\n\n"
 	               "Hope you enjoy this game!")
 	          << endl;
 }

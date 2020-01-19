@@ -69,7 +69,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
      settings_(settings),
      ctrl_(ctrl),
      has_translated_mapname_(false),
-	 unspecified_balancing_found_(false) {
+     unspecified_balancing_found_(false) {
 	curdir_ = basedir_;
 	if (settings_->settings().multiplayer) {
 		back_.set_tooltip(_("Return to the multiplayer game setup"));
@@ -90,7 +90,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 
 	UI::Box* hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
-	show_all_maps_ = new UI::Button(hbox, "show_all_maps", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Show all maps"));
+	show_all_maps_ = new UI::Button(
+	   hbox, "show_all_maps", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Show all maps"));
 	cb_dont_localize_mapnames_ =
 	   new UI::Checkbox(hbox, Vector2i::zero(), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
@@ -105,16 +106,9 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 
 	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
-	official_tags_dropdown_ = new UI::Dropdown<std::string>(hbox,
-					   "dropdown_official_tags",
-					   0,
-					   0,
-					   200,
-					   50,
-					   24,
-					   "",
-					   UI::DropdownType::kTextual,
-					   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
+	official_tags_dropdown_ = new UI::Dropdown<std::string>(
+	   hbox, "dropdown_official_tags", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
+	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	official_tags_dropdown_->set_autoexpand_display_button();
 	official_tags_dropdown_->add(_("Official & Unofficial"), "");
 	official_tags_dropdown_->add(localize_tag("official"), "official");
@@ -124,16 +118,9 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 
 	hbox->add_space(checkbox_space_);
 
-	team_tags_dropdown_ = new UI::Dropdown<std::string>(hbox,
-					   "dropdown_team_tags",
-					   0,
-					   0,
-					   200,
-					   50,
-					   24,
-					   "",
-					   UI::DropdownType::kTextual,
-					   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
+	team_tags_dropdown_ = new UI::Dropdown<std::string>(
+	   hbox, "dropdown_team_tags", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
+	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	team_tags_dropdown_->set_autoexpand_display_button();
 	team_tags_dropdown_->add(_("Any Teams"), "");
 	team_tags_dropdown_->add(localize_tag("ffa"), "ffa");
@@ -146,16 +133,9 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 
 	hbox->add_space(checkbox_space_);
 
-	balancing_tags_dropdown_ = new UI::Dropdown<std::string>(hbox,
-					   "dropdown_balancing",
-					   0,
-					   0,
-					   200,
-					   50,
-					   24,
-					   "",
-					   UI::DropdownType::kTextual,
-					   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
+	balancing_tags_dropdown_ = new UI::Dropdown<std::string>(
+	   hbox, "dropdown_balancing", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
+	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	balancing_tags_dropdown_->set_autoexpand_display_button();
 	rebuild_balancing_dropdown();
 
@@ -167,6 +147,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 
 	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 	add_tag_checkbox(hbox, "seafaring", localize_tag("seafaring"));
+	add_tag_checkbox(hbox, "ferries", localize_tag("ferries"));
 	add_tag_checkbox(hbox, "artifacts", localize_tag("artifacts"));
 	add_tag_checkbox(hbox, "scenario", localize_tag("scenario"));
 	hbox->add_inf_space();
@@ -183,7 +164,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	   boost::bind(&FullscreenMenuMapSelect::fill_table, boost::ref(*this)));
 
 	for (size_t i = 0; i < tags_checkboxes_.size(); ++i) {
-		tags_checkboxes_.at(i)->changedto.connect(boost::bind(&FullscreenMenuMapSelect::tagbox_changed, this, i, _1));
+		tags_checkboxes_.at(i)->changedto.connect(
+		   boost::bind(&FullscreenMenuMapSelect::tagbox_changed, this, i, _1));
 	}
 
 	balancing_tags_dropdown_->selected.connect([this] { fill_table(); });
@@ -367,11 +349,13 @@ void FullscreenMenuMapSelect::fill_table() {
 				if (!mapdata.tags.count("balanced") && !mapdata.tags.count("unbalanced")) {
 					unspecified_balancing_found = true;
 				} else if (mapdata.tags.count("balanced") && mapdata.tags.count("unbalanced")) {
-					log("WARNING: Map '%s' is both balanced and unbalanced - please fix the 'elemental' packet\n", mapfilename.c_str());
+					log("WARNING: Map '%s' is both balanced and unbalanced - please fix the 'elemental' "
+					    "packet\n",
+					    mapfilename.c_str());
 				}
 
 				for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end();
-					 ++it) {
+				     ++it) {
 					has_all_tags &= mapdata.tags.count(tags_ordered_[*it]);
 				}
 
@@ -398,6 +382,8 @@ void FullscreenMenuMapSelect::fill_table() {
 		table_.select(0);
 	}
 	set_has_selection();
+	table_.cancel.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
+
 	if (unspecified_balancing_found != unspecified_balancing_found_) {
 		unspecified_balancing_found_ = unspecified_balancing_found;
 		rebuild_balancing_dropdown();
@@ -446,7 +432,8 @@ void FullscreenMenuMapSelect::clear_filter() {
 }
 
 void FullscreenMenuMapSelect::rebuild_balancing_dropdown() {
-	const std::string selected = balancing_tags_dropdown_->has_selection() ? balancing_tags_dropdown_->get_selected() : "";
+	const std::string selected =
+	   balancing_tags_dropdown_->has_selection() ? balancing_tags_dropdown_->get_selected() : "";
 	balancing_tags_dropdown_->clear();
 	balancing_tags_dropdown_->add(_("Balanced & Unbalanced"), "");
 	balancing_tags_dropdown_->add(localize_tag("balanced"), "balanced");

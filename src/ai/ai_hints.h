@@ -79,6 +79,10 @@ struct BuildingHints {
 		return shipyard_;
 	}
 
+	bool supports_seafaring() const {
+		return supports_seafaring_;
+	}
+
 	const std::string& collects_ware_from_map() const {
 		return collects_ware_from_map_;
 	}
@@ -113,6 +117,7 @@ private:
 	const bool fighting_;
 	const bool mountain_conqueror_;
 	const bool shipyard_;
+	const bool supports_seafaring_;
 	const std::string collects_ware_from_map_;
 	const int32_t prohibited_till_;
 	const uint32_t basic_amount_;
@@ -137,7 +142,7 @@ struct WareWorkerHints {
 	int preciousness(const std::string& tribename) const;
 
 protected:
-	void read_preciousness(const LuaTable& table);
+	void read_preciousness(const std::string& name, const LuaTable& table);
 
 private:
 	// tribename, preciousness. No default.
@@ -146,12 +151,12 @@ private:
 
 /// Hints for wares
 struct WareHints : WareWorkerHints {
-	explicit WareHints(const LuaTable& table);
+	explicit WareHints(const std::string& ware_name, const LuaTable& table);
 };
 
 /// Hints for workers
 struct WorkerHints : WareWorkerHints {
-	explicit WorkerHints(const LuaTable& table);
+	explicit WorkerHints(const std::string& worker_name, const LuaTable& table);
 };
 
 #endif  // end of include guard: WL_AI_AI_HINTS_H

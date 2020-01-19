@@ -185,7 +185,8 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 					}
 
 					//  Set economy now, some stuff below will count on this.
-					building.set_economy(building.flag_->get_economy());
+					building.set_economy(building.flag_->get_economy(wwWARE), wwWARE);
+					building.set_economy(building.flag_->get_economy(wwWORKER), wwWORKER);
 
 					Game& game = dynamic_cast<Game&>(egbase);
 
@@ -455,7 +456,8 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			if (warehouse.descr().get_isport()) {
 				if (Serial portdock = fr.unsigned_32()) {
 					warehouse.portdock_ = &mol.get<PortDock>(portdock);
-					warehouse.portdock_->set_economy(warehouse.get_economy());
+					warehouse.portdock_->set_economy(warehouse.get_economy(wwWARE), wwWARE);
+					warehouse.portdock_->set_economy(warehouse.get_economy(wwWORKER), wwWORKER);
 					// Expedition specific stuff. This is done in this packet
 					// because the "new style" loader is not supported and
 					// doesn't lend itself to request and other stuff.
@@ -750,7 +752,7 @@ void MapBuildingdataPacket::read_productionsite(
 			productionsite.production_result_ = fr.c_string();
 
 			// TODO(GunChleoc): Savegame compatibility, remove after Build 21.
-			if (kCurrentPacketVersionProductionsite >= 7) {
+			if (packet_version >= 7) {
 				productionsite.main_worker_ = fr.signed_32();
 			} else {
 				productionsite.main_worker_ = productionsite.working_positions_[0].worker ? 0 : -1;
