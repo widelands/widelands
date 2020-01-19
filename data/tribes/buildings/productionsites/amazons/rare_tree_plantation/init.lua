@@ -71,7 +71,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
          descname = _"planting balsatree",
          actions = {
-            -- time total: 33
+            -- time total: xx
             "return=skipped unless economy needs balsa",
             "callworker=plant_balsa",
             "sleep=12000"
@@ -81,7 +81,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
          descname = _"planting rubbertree",
          actions = {
-            -- time total: 33
+            -- time total: xx
             "return=skipped unless economy needs rubber",
             "callworker=plant_rubber",
             "sleep=12000"
@@ -91,7 +91,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
          descname = _"planting ironwoodtree",
          actions = {
-            -- time total: 33
+            -- time total: xx
             "return=skipped unless economy needs ironwood",
             "callworker=plant_ironwood",
             "sleep=12000"
