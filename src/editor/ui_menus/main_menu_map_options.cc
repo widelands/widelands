@@ -140,6 +140,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	balancing_dropdown_.add(localize_tag("unbalanced"), "unbalanced");
 	tags_box_.add(&balancing_dropdown_);
 
+	tags_box_.add_space(labelh_);
+
 	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Waterway length limit:")));
 	UI::Box* ww_box = new UI::Box(&tags_box_, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
 	waterway_length_box_ =
