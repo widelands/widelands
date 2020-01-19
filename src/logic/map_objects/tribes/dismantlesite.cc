@@ -262,7 +262,7 @@ void DismantleSite::draw(uint32_t gametime,
 
 	if (was_immovable_) {
 		dst->blit_animation(
-		   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
+		   point_on_dst, coords, scale, was_immovable_->get_animation("idle", nullptr), tanim, &player_color);
 	} else {
 		// Draw the construction site marker
 		dst->blit_animation(

@@ -396,7 +396,7 @@ print_loading_message("┗━ took", function()
       include "tribes/workers/frisians/shipwright/init.lua"
       include "tribes/workers/frisians/scout/init.lua"
 
-      set_loading_message(_("Amazonian workers", 8))
+      set_loading_message(_("Amazonian workers"), 8)
       include "tribes/workers/amazons/carrier/init.lua"
       include "tribes/workers/amazons/ferry/init.lua"
       include "tribes/workers/amazons/tapir/init.lua"
