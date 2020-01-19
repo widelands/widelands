@@ -311,6 +311,8 @@ WLApplication* WLApplication::get(int const argc, char const** argv) {
 /**
  * Initialize an instance of WLApplication.
  *
+ * Exits with code 2 if the SDL/TTF system is not available.
+ *
  * This constructor is protected \e on \e purpose !
  * Use WLApplication::get() instead and look at the class description.
  *
@@ -371,14 +373,16 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		// We sometimes run into a missing video driver in our CI environment, so we exit 0 to prevent
 		// too frequent failures
 		log("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
-		exit(0);
+		exit(2);
 	}
 
 	SDL_ShowCursor(SDL_DISABLE);
 	g_gr = new Graphic();
 
-	if (TTF_Init() == -1)
-		throw wexception("True Type library did not initialize: %s\n", TTF_GetError());
+	if (TTF_Init() == -1) {
+		log("True Type library did not initialize: %s\n", TTF_GetError());
+		exit(2);
+	}
 
 	UI::g_fh = UI::create_fonthandler(
 	   &g_gr->images(), i18n::get_locale());  // This will create the fontset, so loading it first.
@@ -1350,6 +1354,7 @@ bool WLApplication::new_game() {
 			game.set_ibase(new InteractivePlayer(game, get_config_section(), pn, false));
 			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
 			UI::ProgressWindow loader_ui;
+			game.set_loader_ui(&loader_ui);
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
 			tipstext.push_back("singleplayer");
@@ -1361,7 +1366,6 @@ bool WLApplication::new_game() {
 			loader_ui.step(_("Preparing game"));
 
 			game.set_game_controller(ctrl.get());
-			game.set_loader_ui(&loader_ui);
 			game.init_newgame(sp.settings());
 			game.run(Widelands::Game::NewNonScenario, "", false, "single_player");
 			game.set_loader_ui(nullptr);
@@ -1466,6 +1470,7 @@ void WLApplication::replay() {
 
 	try {
 		UI::ProgressWindow loader_ui;
+		game.set_loader_ui(&loader_ui);
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		GameTips tips(loader_ui, tipstext);
@@ -1478,7 +1483,6 @@ void WLApplication::replay() {
 
 		game.save_handler().set_allow_saving(false);
 
-		game.set_loader_ui(&loader_ui);
 		game.run(Widelands::Game::Loaded, "", true, "replay");
 		game.set_loader_ui(nullptr);
 	} catch (const std::exception& e) {

@@ -1,18 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# Balázs Meskó <meskobalazs@gmail.com>, 2016-2017
+# Balázs Meskó <meskobalazs@gmail.com>, 2016-2017,2020
 # GunChleoc, 2014
-# litoll <litoll@freemail.hu>, 2016-2017,2019
+# litoll <litoll@freemail.hu>, 2016-2017,2019-2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-04-22 05:17+0000\n"
-"PO-Revision-Date: 2019-05-05 13:21+0000\n"
-"Last-Translator: litoll <litoll@freemail.hu>\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-10 12:51+0000\n"
+"PO-Revision-Date: 2020-01-12 17:44+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,14 +84,14 @@ msgstr "MacOS-en a COPYING nevű fájlt a honlapról letöltött archívumban ta
 
 #: ../../data/txts/LICENSE.lua:23
 msgid "This game comes as-is and without any warranty."
-msgstr ""
+msgstr "A játék jelen állapotában és garancia nélkül érkezik."
 
 #: ../../data/txts/LICENSE.lua:24
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr ""
+msgstr "További információkért és segítségért keress minket a %1% (honlap, wiki, fórum a kérdéseknek illetve általános segítséghez), a %2% (hibakövető), vagy a %3% (fordítások) címen."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -322,7 +322,7 @@ msgstr "ZetaOS"
 
 #: ../../data/txts/developers.lua:3
 msgid "and many, many more (thank you for everything you've done)"
-msgstr ""
+msgstr "és még sokan mások (köszönjük mindenkinek)"
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
@@ -411,7 +411,12 @@ msgstr "Hely"
 msgid "Toggle building spaces"
 msgstr "Épülethelyek megjelenítése/elrejtése"
 
-#. TRANSLATORS: This is an access key combination. The hotkey is 'f'
+#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+#: ../../data/txts/help/common_helptexts.lua:49
+msgctxt "hotkey"
+msgid "Ctrl + F"
+msgstr "Ctrl + F"
+
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Teljes képernyős mód (ha támogatja az OS)"
@@ -511,19 +516,19 @@ msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house. After fish "
 "resources are exhausted in their work area, the fish supply cannot be "
 "regenerated."
-msgstr ""
+msgstr "Tartsd szemmel a halászaidat, és építs egy haltenyésztőházat. Ha a halak elfogynak a munkaterületükön, a halállomány már nem regenerálható."
 
 #: ../../data/txts/tips/atlanteans.lua:8
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr ""
+msgstr "Mindig építs egy erdész- és egy favágóházat, hogy ne fogyj ki a farönkökből."
 
 #: ../../data/txts/tips/atlanteans.lua:12
 msgid ""
 "Atlanteans need spidercloth for many buildings. Build the needed "
 "infrastructure early before you run out."
-msgstr ""
+msgstr "Az atlantisziaknak számos épülethez pókszövetre van szükségük. Még azelőtt építsd ki az infrastruktúrát, hogy kifogynál belőle."
 
 #: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
@@ -535,14 +540,14 @@ msgstr "Tartsd szemmel a halászaidat. Miután a halak elfogynak a munkaterület
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or game."
-msgstr ""
+msgstr "Mindig építs erdőőr- és vadőrházat, így nem fogysz ki farönkből vagy vadhúsból."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
 #: ../../data/txts/tips/frisians.lua:12
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
-msgstr ""
+msgstr "A legtöbb fejlesztett épülethez tapasztalt munkások kellenek. Ne fejlessz tovább épületeket, hacsak nincsenek meg a szükséges munkásaid."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:7
@@ -550,7 +555,7 @@ msgstr ""
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr ""
+msgstr "A térképszerkesztőhöz segítséget és egy rövid bevezetőt találhatsz a Widelands Wikin itt: %s"
 
 #: ../../data/txts/tips/editor.lua:11
 msgid ""
@@ -593,26 +598,26 @@ msgstr "A szóköz gomb hasonlóan működik, mint a normál játékban: ki-/bek
 msgid ""
 "When placing trees, use the help button to see which trees are more likely "
 "to survive on which terrain."
-msgstr ""
+msgstr "Ha fákat helyezel el, használd a súgó gombot, hogy lásd hogy mely fák, mely terepen élik túl a legnagyobb eséllyel."
 
 #: ../../data/txts/tips/editor.lua:39
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
-msgstr ""
+msgstr "Ha nem adsz meg víz és hal nyersanyagokat, akkor az alapértelmezett mennyiség lesz használva."
 
 #: ../../data/txts/tips/editor.lua:43
 msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
-msgstr ""
+msgstr "Olyan pontokra helyezhetsz közepes épületeket, ahol a lejtő nem meredekebb 1-esnél délkeleti irányban, és 2 pontos sugárban a pontok közti magasságkülönbség nem nagyobb 2-nél."
 
 #: ../../data/txts/tips/editor.lua:47
 msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr ""
+msgstr "Nagy épületet bármely olyan pontra rakhatsz, ahová közepes épületet is, ha nincsenek akadályok vagy művelésre alkalmatlan területek nyugatra, északnyugatra és északkeletre."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -620,14 +625,14 @@ msgstr "Mindig építs erdészházat, így nem fogysz ki farönkökből."
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
-msgstr ""
+msgstr "A birodalomnak sok márványra van szüksége. Mindig keresd a márvány nyersanyagot."
 
 #: ../../data/txts/tips/frisians.lua:4
 msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr ""
+msgstr "A téglák előállításához gránitra lesz szükséged; a gránit termeléséhez kőfejtő vagy kőbánya kell; azok építéséhez téglákra van szükséged. Figyelj rá, nehogy ördögi körbe kerülj."
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
@@ -649,7 +654,7 @@ msgstr "Mindig küldj geológusokat arra a területre, ahol kutat vagy bányát 
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr "A területed különböző katonai épületekkel növelhető – például őrbódó, erőd, erődház stb."
+msgstr "A területed különböző katonai épületekkel növelhető – például őrbódé, erőd, erődház stb."
 
 #: ../../data/txts/tips/general_game.lua:18
 msgid "Miners will work only if supplied with food."
@@ -667,13 +672,13 @@ msgstr "Oszd az utakat rövidebb részekre zászlók kitűzésével. Ez felgyors
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
-msgstr ""
+msgstr "További kérdéseid vannak? A Gyakran Ismételt Kérdéseket, a wikit és persze a közösségi fórumokat a %s oldalon találod."
 
 #: ../../data/txts/tips/general_game.lua:31
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware. Pressing Ctrl while clicking will adjust all wares at once."
-msgstr ""
+msgstr "A prioritás gomb az építés ablakban arra való, hogy szabályozd a megadott termék szállítását. A Ctrl lenyomása kattintás közben az összes árut egyszerre fogja állítani."
 
 #: ../../data/txts/tips/general_game.lua:35
 msgid ""
@@ -780,7 +785,7 @@ msgstr "Ha a csevegőüzenetet a „@játékosnév” kifejezéssel kezded, az �
 msgid ""
 "If the game should crash, don't worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "Ha a játék összeomlana, ne aggódj!\nA játék automatikusan mentésre kerül, így újra betöltheted utána."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7
