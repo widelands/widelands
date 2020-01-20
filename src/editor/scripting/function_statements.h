@@ -43,7 +43,7 @@ public:
 	inline ScriptingObject::ID id() const override {
 		return ScriptingObject::ID::FSFunctionCall;
 	}
-	VariableType type() const override {
+	const VariableType& type() const override {
 		assert(function_);
 		return function_->get_returns();
 	}
@@ -118,6 +118,46 @@ private:
 	Assignable* value_;
 
 	DISALLOW_COPY_AND_ASSIGN(FS_SetProperty);
+};
+
+// Set a table entry, e.g. points[2] = 100
+class FS_SetTable : public FunctionStatement {
+public:
+	FS_SetTable(Assignable* t, Assignable* p, Assignable* v) : table_(t), property_(p), value_(v) {
+	}
+	~FS_SetTable() override {
+	}
+
+	void load(FileRead&, Loader&) override;
+	void save(FileWrite&) const override;
+	void write_lua(int32_t, FileWrite&) const override;
+	inline ScriptingObject::ID id() const override {
+		return ScriptingObject::ID::FSSetTable;
+	}
+	std::string readable() const override;
+
+	const Assignable* get_property() const {
+		return property_;
+	}
+	void set_property(Assignable&);
+	const Assignable* get_table() const {
+		return table_;
+	}
+	void set_table(Assignable&);
+	const Assignable* get_value() const {
+		return value_;
+	}
+	void set_value(Assignable&);
+
+	void load_pointers(const ScriptingLoader&, Loader&) override;
+	std::set<uint32_t> references() const override;
+
+private:
+	Assignable* table_;
+	Assignable* property_;
+	Assignable* value_;
+
+	DISALLOW_COPY_AND_ASSIGN(FS_SetTable);
 };
 
 // Launch a coroutine with the given parameters

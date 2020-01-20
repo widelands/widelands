@@ -113,9 +113,11 @@ ScriptingObject* ScriptingObject::load(FileRead& fr) {
 		case ID::ConstexprNil:
 			return new ConstexprNil();
 		case ID::Variable:
-			return new Variable(VariableType::Nil, "", false);
+			return new Variable(VariableType(VariableTypeID::Nil), "", false);
 		case ID::GetProperty:
 			return new GetProperty(nullptr, nullptr);
+		case ID::GetTable:
+			return new GetTable(nullptr, nullptr);
 		case ID::LuaFunction:
 			return new LuaFunction("", false);
 		case ID::FSFunctionCall:
@@ -126,6 +128,10 @@ ScriptingObject* ScriptingObject::load(FileRead& fr) {
 			return new FS_LaunchCoroutine(nullptr);
 		case ID::FSSetProperty:
 			return new FS_SetProperty(nullptr, nullptr, nullptr);
+		case ID::FSSetTable:
+			return new FS_SetTable(nullptr, nullptr, nullptr);
+		case ID::OperatorIsNil:
+			return new OperatorIsNil(nullptr);
 		case ID::OperatorNot:
 			return new OperatorNot(nullptr);
 		case ID::OperatorAnd:
@@ -160,6 +166,8 @@ ScriptingObject* ScriptingObject::load(FileRead& fr) {
 			return new OperatorStringConcat(nullptr, nullptr);
 		case ID::FSWhile:
 			return new FS_While(false, nullptr);
+		case ID::FSForEach:
+			return new FS_ForEach(nullptr, nullptr, nullptr);
 		case ID::FSIf:
 			return new FS_If(nullptr);
 		default:
@@ -197,139 +205,199 @@ uint32_t property_to_serial(Property& p) {
 }
 
 /************************************************************
-             VariableType static helper functions
+                        VariableType
 ************************************************************/
 
+constexpr uint16_t kCurrentPacketVersionVariableType = 1;
+constexpr uint16_t kCurrentPacketVersionVariableTypeTable = 1;
+
 // static
-std::string descname(VariableType t) {
+VariableType VariableType::load(FileRead& fr) {
+	try {
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version != kCurrentPacketVersionVariableType) {
+			throw Widelands::UnhandledVersionError(
+			   "VariableType", packet_version, kCurrentPacketVersionVariableType);
+		}
+		VariableTypeID id = static_cast<VariableTypeID>(fr.unsigned_16());
+		if (id == VariableTypeID::Table) {
+			return VariableTypeTable::load(fr);
+		}
+		return VariableType(id);
+	} catch (const WException& e) {
+		throw wexception("VariableType: %s", e.what());
+	}
+}
+void VariableType::write(FileWrite& fw) const {
+	fw.unsigned_16(kCurrentPacketVersionVariableType);
+	fw.unsigned_16(static_cast<uint16_t>(id_));
+}
+
+bool VariableType::is_subclass(const VariableType& v) const {
+	return is(id_, v.id_);
+}
+
+// static
+VariableTypeTable VariableTypeTable::load(FileRead& fr) {
+	try {
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version != kCurrentPacketVersionVariableTypeTable) {
+			throw Widelands::UnhandledVersionError(
+			   "VariableTypeTable", packet_version, kCurrentPacketVersionVariableTypeTable);
+		}
+		VariableType k = VariableType::load(fr);
+		VariableType v = VariableType::load(fr);
+		return VariableTypeTable(k, v);
+	} catch (const WException& e) {
+		throw wexception("VariableTypeTable: %s", e.what());
+	}
+}
+void VariableTypeTable::write(FileWrite& fw) const {
+	VariableType::write(fw);
+	fw.unsigned_16(kCurrentPacketVersionVariableTypeTable);
+	key_.write(fw);
+	value_.write(fw);
+}
+
+bool VariableTypeTable::is_subclass(const VariableType& v) const {
+	if (upcast(const VariableTypeTable, t, &v)) {
+		return key_.is_subclass(t->key_) && value_.is_subclass(t->value_);
+	}
+	return false;
+}
+
+// static
+std::string descname(VariableTypeID t) {
 	switch (t) {
-	case VariableType::Nil:
+	case VariableTypeID::Any:
+		return _("Any");
+	case VariableTypeID::Nil:
 		return _("Nil");
-	case VariableType::Integer:
+	case VariableTypeID::Integer:
 		return _("Integer");
-	case VariableType::Double:
+	case VariableTypeID::Double:
 		return _("Double");
-	case VariableType::Boolean:
+	case VariableTypeID::Boolean:
 		return _("Boolean");
-	case VariableType::String:
+	case VariableTypeID::String:
 		return _("String");
-	case VariableType::Table:
+	case VariableTypeID::Table:
 		return _("Table");
-	case VariableType::Game:
+	case VariableTypeID::Game:
 		return _("Game");
-	case VariableType::Map:
+	case VariableTypeID::Map:
 		return _("Map");
-	case VariableType::Field:
+	case VariableTypeID::Field:
 		return _("Field");
-	case VariableType::Player:
+	case VariableTypeID::Player:
 		return _("Player");
-	case VariableType::Message:
+	case VariableTypeID::Message:
 		return _("Message");
-	case VariableType::Objective:
+	case VariableTypeID::Objective:
 		return _("Objective");
-	case VariableType::Economy:
+	case VariableTypeID::Economy:
 		return _("Economy");
-	case VariableType::MapObject:
+	case VariableTypeID::MapObject:
 		return _("Map Object");
-	case VariableType::BaseImmovable:
+	case VariableTypeID::BaseImmovable:
 		return _("Generic Immovable");
-	case VariableType::Immovable:
+	case VariableTypeID::Immovable:
 		return _("Map Immovable");
-	case VariableType::PlayerImmovable:
+	case VariableTypeID::PlayerImmovable:
 		return _("Generic Player Immovable");
-	case VariableType::Flag:
+	case VariableTypeID::Flag:
 		return _("Flag");
-	case VariableType::PortDock:
+	case VariableTypeID::PortDock:
 		return _("Port Dock");
-	case VariableType::Building:
+	case VariableTypeID::Building:
 		return _("Generic Building");
-	case VariableType::Warehouse:
+	case VariableTypeID::Warehouse:
 		return _("Warehouse");
-	case VariableType::MilitarySite:
+	case VariableTypeID::MilitarySite:
 		return _("Militarysite");
-	case VariableType::ProductionSite:
+	case VariableTypeID::ProductionSite:
 		return _("Productionsite");
-	case VariableType::TrainingSite:
+	case VariableTypeID::TrainingSite:
 		return _("Trainingsite");
-	case VariableType::PartiallyFinishedBuilding:
+	case VariableTypeID::PartiallyFinishedBuilding:
 		return _("Generic Partially Finished Building");
-	case VariableType::ConstructionSite:
+	case VariableTypeID::ConstructionSite:
 		return _("Constructionsite");
-	case VariableType::DismantleSite:
+	case VariableTypeID::DismantleSite:
 		return _("Dismantlesite");
-	case VariableType::Market:
+	case VariableTypeID::Market:
 		return _("Market");
-	case VariableType::RoadBase:
+	case VariableTypeID::RoadBase:
 		return _("Generic Road");
-	case VariableType::Road:
+	case VariableTypeID::Road:
 		return _("Road");
-	case VariableType::Waterway:
+	case VariableTypeID::Waterway:
 		return _("Waterway");
-	case VariableType::Bob:
+	case VariableTypeID::Bob:
 		return _("Bob");
-	case VariableType::Worker:
+	case VariableTypeID::Worker:
 		return _("Worker");
-	case VariableType::Carrier:
+	case VariableTypeID::Carrier:
 		return _("Carrier");
-	case VariableType::Ferry:
+	case VariableTypeID::Ferry:
 		return _("Ferry");
-	case VariableType::Soldier:
+	case VariableTypeID::Soldier:
 		return _("Soldier");
-	case VariableType::Ship:
+	case VariableTypeID::Ship:
 		return _("Ship");
-	case VariableType::MapObjectDescr:
+	case VariableTypeID::MapObjectDescr:
 		return _("Map Object Description");
-	case VariableType::BaseImmovableDescr:
+	case VariableTypeID::BaseImmovableDescr:
 		return _("Generic Immovable Description");
-	case VariableType::ImmovableDescr:
+	case VariableTypeID::ImmovableDescr:
 		return _("Map Immovable Description");
-	case VariableType::PlayerImmovableDescr:
+	case VariableTypeID::PlayerImmovableDescr:
 		return _("Generic Player Immovable Description");
-	case VariableType::FlagDescr:
+	case VariableTypeID::FlagDescr:
 		return _("Flag Description");
-	case VariableType::BuildingDescr:
+	case VariableTypeID::BuildingDescr:
 		return _("Generic Building Description");
-	case VariableType::WarehouseDescr:
+	case VariableTypeID::WarehouseDescr:
 		return _("Warehouse Description");
-	case VariableType::MilitarySiteDescr:
+	case VariableTypeID::MilitarySiteDescr:
 		return _("Militarysite Description");
-	case VariableType::ProductionSiteDescr:
+	case VariableTypeID::ProductionSiteDescr:
 		return _("Productionsite Description");
-	case VariableType::TrainingSiteDescr:
+	case VariableTypeID::TrainingSiteDescr:
 		return _("Trainingsite Description");
-	case VariableType::PartiallyFinishedBuildingDescr:
+	case VariableTypeID::PartiallyFinishedBuildingDescr:
 		return _("Generic Partially Finished Building Description");
-	case VariableType::ConstructionSiteDescr:
+	case VariableTypeID::ConstructionSiteDescr:
 		return _("Constructionsite Description");
-	case VariableType::DismantleSiteDescr:
+	case VariableTypeID::DismantleSiteDescr:
 		return _("Dismantlesite Description");
-	case VariableType::MarketDescr:
+	case VariableTypeID::MarketDescr:
 		return _("Market Description");
-	case VariableType::RoadBaseDescr:
+	case VariableTypeID::RoadBaseDescr:
 		return _("Generic Road Description");
-	case VariableType::RoadDescr:
+	case VariableTypeID::RoadDescr:
 		return _("Road Description");
-	case VariableType::WaterwayDescr:
+	case VariableTypeID::WaterwayDescr:
 		return _("Waterway Description");
-	case VariableType::BobDescr:
+	case VariableTypeID::BobDescr:
 		return _("Bob Description");
-	case VariableType::WorkerDescr:
+	case VariableTypeID::WorkerDescr:
 		return _("Worker Description");
-	case VariableType::CarrierDescr:
+	case VariableTypeID::CarrierDescr:
 		return _("Carrier Description");
-	case VariableType::FerryDescr:
+	case VariableTypeID::FerryDescr:
 		return _("Ferry Description");
-	case VariableType::SoldierDescr:
+	case VariableTypeID::SoldierDescr:
 		return _("Soldier Description");
-	case VariableType::ShipDescr:
+	case VariableTypeID::ShipDescr:
 		return _("Ship Description");
-	case VariableType::TribeDescr:
+	case VariableTypeID::TribeDescr:
 		return _("Tribe Description");
-	case VariableType::WareDescr:
+	case VariableTypeID::WareDescr:
 		return _("Ware Description");
-	case VariableType::TerrainDescr:
+	case VariableTypeID::TerrainDescr:
 		return _("Terrain Description");
-	case VariableType::ResourceDescr:
+	case VariableTypeID::ResourceDescr:
 		return _("Resource Description");
 	default:
 		NEVER_HERE();
@@ -338,102 +406,101 @@ std::string descname(VariableType t) {
 
 // Checks whether a variable of type s may be assigned a value of type t.
 // This is the case if t==s, or t is a subclass of s.
-// We do so by recursively calling is(s, direct_superclass_of_t)
+// We do so by recursively calling is(s, direct_superclass_of_t).
+// Implicit conversion to boolean is not permitted, use OperatorIsNil and OperatorNot(OperatorIsNil)
+// instead.
 
 // static
-bool is(VariableType t, VariableType s) {
-	if (t == s || t == VariableType::Nil || s == VariableType::Boolean) {
+bool is(VariableTypeID t, VariableTypeID s) {
+	if (t == s || t == VariableTypeID::Nil || s == VariableTypeID::Any) {
 		return true;
 	}
 	switch (t) {
-	case VariableType::String:
-	case VariableType::Integer:
-	case VariableType::Double:
-		// Implicit conversion to String is allowed for numbers so they can be concatenated with '..'
-		return is(s, VariableType::String);
-
-	case VariableType::Boolean:
-	case VariableType::Table:
-	case VariableType::Game:
-	case VariableType::Map:
-	case VariableType::Field:
-	case VariableType::Player:
-	case VariableType::Message:
-	case VariableType::Objective:
-	case VariableType::Economy:
-	case VariableType::MapObject:
-	case VariableType::MapObjectDescr:
-	case VariableType::TribeDescr:
-	case VariableType::WareDescr:
-	case VariableType::TerrainDescr:
-	case VariableType::ResourceDescr:
+	case VariableTypeID::Boolean:
+	case VariableTypeID::String:
+	case VariableTypeID::Integer:
+	case VariableTypeID::Double:
+	case VariableTypeID::Table:
+	case VariableTypeID::Game:
+	case VariableTypeID::Map:
+	case VariableTypeID::Field:
+	case VariableTypeID::Player:
+	case VariableTypeID::Message:
+	case VariableTypeID::Objective:
+	case VariableTypeID::Economy:
+	case VariableTypeID::MapObject:
+	case VariableTypeID::MapObjectDescr:
+	case VariableTypeID::TribeDescr:
+	case VariableTypeID::WareDescr:
+	case VariableTypeID::TerrainDescr:
+	case VariableTypeID::ResourceDescr:
 		return false;
 
-	case VariableType::BaseImmovable:
-	case VariableType::Bob:
-		return s == VariableType::MapObject;
-	case VariableType::Immovable:
-	case VariableType::PlayerImmovable:
-		return is(s, VariableType::BaseImmovable);
-	case VariableType::Flag:
-	case VariableType::PortDock:
-	case VariableType::Building:
-	case VariableType::RoadBase:
-		return is(s, VariableType::PlayerImmovable);
-	case VariableType::Warehouse:
-	case VariableType::MilitarySite:
-	case VariableType::ProductionSite:
-	case VariableType::PartiallyFinishedBuilding:
-	case VariableType::Market:
-		return is(s, VariableType::Building);
-	case VariableType::TrainingSite:
-		return is(s, VariableType::ProductionSite);
-	case VariableType::ConstructionSite:
-	case VariableType::DismantleSite:
-		return is(s, VariableType::PartiallyFinishedBuilding);
-	case VariableType::Road:
-	case VariableType::Waterway:
-		return is(s, VariableType::RoadBase);
-	case VariableType::Ship:
-	case VariableType::Worker:
-		return is(s, VariableType::Bob);
-	case VariableType::Soldier:
-	case VariableType::Carrier:
-		return is(s, VariableType::Worker);
-	case VariableType::Ferry:
-		return is(s, VariableType::Carrier);
-	case VariableType::BaseImmovableDescr:
-	case VariableType::BobDescr:
-		return s == VariableType::MapObjectDescr;
-	case VariableType::ImmovableDescr:
-	case VariableType::PlayerImmovableDescr:
-		return is(s, VariableType::BaseImmovableDescr);
-	case VariableType::FlagDescr:
-	case VariableType::BuildingDescr:
-	case VariableType::RoadBaseDescr:
-		return is(s, VariableType::PlayerImmovableDescr);
-	case VariableType::WarehouseDescr:
-	case VariableType::MilitarySiteDescr:
-	case VariableType::ProductionSiteDescr:
-	case VariableType::PartiallyFinishedBuildingDescr:
-	case VariableType::MarketDescr:
-		return is(s, VariableType::BuildingDescr);
-	case VariableType::TrainingSiteDescr:
-		return is(s, VariableType::ProductionSiteDescr);
-	case VariableType::ConstructionSiteDescr:
-	case VariableType::DismantleSiteDescr:
-		return is(s, VariableType::PartiallyFinishedBuildingDescr);
-	case VariableType::RoadDescr:
-	case VariableType::WaterwayDescr:
-		return is(s, VariableType::RoadBaseDescr);
-	case VariableType::WorkerDescr:
-	case VariableType::ShipDescr:
-		return is(s, VariableType::BobDescr);
-	case VariableType::SoldierDescr:
-	case VariableType::CarrierDescr:
-		return is(s, VariableType::WorkerDescr);
-	case VariableType::FerryDescr:
-		return is(s, VariableType::CarrierDescr);
+	case VariableTypeID::BaseImmovable:
+	case VariableTypeID::Bob:
+		return s == VariableTypeID::MapObject;
+	case VariableTypeID::Immovable:
+	case VariableTypeID::PlayerImmovable:
+		return is(s, VariableTypeID::BaseImmovable);
+	case VariableTypeID::Flag:
+	case VariableTypeID::PortDock:
+	case VariableTypeID::Building:
+	case VariableTypeID::RoadBase:
+		return is(s, VariableTypeID::PlayerImmovable);
+	case VariableTypeID::Warehouse:
+	case VariableTypeID::MilitarySite:
+	case VariableTypeID::ProductionSite:
+	case VariableTypeID::PartiallyFinishedBuilding:
+	case VariableTypeID::Market:
+		return is(s, VariableTypeID::Building);
+	case VariableTypeID::TrainingSite:
+		return is(s, VariableTypeID::ProductionSite);
+	case VariableTypeID::ConstructionSite:
+	case VariableTypeID::DismantleSite:
+		return is(s, VariableTypeID::PartiallyFinishedBuilding);
+	case VariableTypeID::Road:
+	case VariableTypeID::Waterway:
+		return is(s, VariableTypeID::RoadBase);
+	case VariableTypeID::Ship:
+	case VariableTypeID::Worker:
+		return is(s, VariableTypeID::Bob);
+	case VariableTypeID::Soldier:
+	case VariableTypeID::Carrier:
+		return is(s, VariableTypeID::Worker);
+	case VariableTypeID::Ferry:
+		return is(s, VariableTypeID::Carrier);
+	case VariableTypeID::BaseImmovableDescr:
+	case VariableTypeID::BobDescr:
+		return s == VariableTypeID::MapObjectDescr;
+	case VariableTypeID::ImmovableDescr:
+	case VariableTypeID::PlayerImmovableDescr:
+		return is(s, VariableTypeID::BaseImmovableDescr);
+	case VariableTypeID::FlagDescr:
+	case VariableTypeID::BuildingDescr:
+	case VariableTypeID::RoadBaseDescr:
+		return is(s, VariableTypeID::PlayerImmovableDescr);
+	case VariableTypeID::WarehouseDescr:
+	case VariableTypeID::MilitarySiteDescr:
+	case VariableTypeID::ProductionSiteDescr:
+	case VariableTypeID::PartiallyFinishedBuildingDescr:
+	case VariableTypeID::MarketDescr:
+		return is(s, VariableTypeID::BuildingDescr);
+	case VariableTypeID::TrainingSiteDescr:
+		return is(s, VariableTypeID::ProductionSiteDescr);
+	case VariableTypeID::ConstructionSiteDescr:
+	case VariableTypeID::DismantleSiteDescr:
+		return is(s, VariableTypeID::PartiallyFinishedBuildingDescr);
+	case VariableTypeID::RoadDescr:
+	case VariableTypeID::WaterwayDescr:
+		return is(s, VariableTypeID::RoadBaseDescr);
+	case VariableTypeID::WorkerDescr:
+	case VariableTypeID::ShipDescr:
+		return is(s, VariableTypeID::BobDescr);
+	case VariableTypeID::SoldierDescr:
+	case VariableTypeID::CarrierDescr:
+		return is(s, VariableTypeID::WorkerDescr);
+	case VariableTypeID::FerryDescr:
+		return is(s, VariableTypeID::CarrierDescr);
 	default:
 		NEVER_HERE();
 	}

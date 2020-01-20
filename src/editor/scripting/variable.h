@@ -28,7 +28,7 @@
 
 class Variable : public Assignable {
 public:
-	Variable(VariableType, const std::string&, bool spellcheck = true);
+	Variable(const VariableType&, const std::string&, bool spellcheck = true);
 	~Variable() override {
 	}
 	ScriptingObject::ID id() const override {
@@ -38,7 +38,7 @@ public:
 	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
 
-	VariableType type() const override {
+	const VariableType& type() const override {
 		return type_;
 	}
 	const std::string& get_name() const {
@@ -75,7 +75,7 @@ public:
 	inline ScriptingObject::ID id() const override {
 		return ScriptingObject::ID::GetProperty;
 	}
-	VariableType type() const override;
+	const VariableType& type() const override;
 	std::string readable() const override;
 
 	const Property* get_property() const {
@@ -95,6 +95,42 @@ private:
 	Property* property_;
 
 	DISALLOW_COPY_AND_ASSIGN(GetProperty);
+};
+
+// Get a field of a table, e.g. fields[1]
+class GetTable : public Assignable {
+public:
+	GetTable(Assignable* t, Assignable* p) : table_(t), property_(p) {
+	}
+	~GetTable() override {
+	}
+
+	void load(FileRead&, Loader&) override;
+	void save(FileWrite&) const override;
+	void write_lua(int32_t, FileWrite&) const override;
+	inline ScriptingObject::ID id() const override {
+		return ScriptingObject::ID::GetTable;
+	}
+	const VariableType& type() const override;
+	std::string readable() const override;
+
+	const Assignable* get_property() const {
+		return property_;
+	}
+	void set_property(Assignable&);
+	const Assignable* get_table() const {
+		return table_;
+	}
+	void set_table(Assignable&);
+
+	void load_pointers(const ScriptingLoader&, Loader&) override;
+	std::set<uint32_t> references() const override;
+
+private:
+	Assignable* table_;
+	Assignable* property_;
+
+	DISALLOW_COPY_AND_ASSIGN(GetTable);
 };
 
 #endif  // end of include guard: WL_EDITOR_SCRIPTING_VARIABLE_H

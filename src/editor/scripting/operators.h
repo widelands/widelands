@@ -20,7 +20,7 @@
 #ifndef WL_EDITOR_SCRIPTING_OPERATORS_H
 #define WL_EDITOR_SCRIPTING_OPERATORS_H
 
-#include "editor/scripting/scripting.h"
+#include "editor/scripting/constexpr.h"
 
 /************************************************************
               Mathematical operators: + - * /
@@ -31,7 +31,7 @@ class OperatorBase : public Assignable {
 public:
 	~OperatorBase() override {
 	}
-	VariableType type() const override {
+	const VariableType& type() const override {
 		return output_type_;
 	}
 
@@ -39,14 +39,14 @@ public:
 		return a_;
 	}
 	void set_a(Assignable& a) {
-		assert(is(a.type(), input_type_));
+		assert(a.type().is_subclass(input_type_));
 		a_ = &a;
 	}
 	Assignable* get_b() const {
 		return b_;
 	}
 	void set_b(Assignable& b) {
-		assert(is(b.type(), input_type_));
+		assert(b.type().is_subclass(input_type_));
 		b_ = &b;
 	}
 
@@ -62,7 +62,7 @@ public:
 	virtual std::string op() const = 0;
 
 protected:
-	OperatorBase(VariableType in, VariableType out, Assignable*, Assignable*);
+	OperatorBase(const VariableType& in, const VariableType& out, Assignable*, Assignable*);
 
 private:
 	Assignable* a_;
@@ -77,7 +77,7 @@ private:
 	class Operator##name : public OperatorBase {                                                    \
 	public:                                                                                         \
 		Operator##name(Assignable* a, Assignable* b)                                                 \
-		   : OperatorBase(VariableType::i, VariableType::o, a, b) {                                  \
+		   : OperatorBase(VariableType(VariableTypeID::i), VariableType(VariableTypeID::o), a, b) {  \
 		}                                                                                            \
 		ScriptingObject::ID id() const override {                                                    \
 			return ScriptingObject::ID::Operator##name;                                               \
@@ -107,28 +107,64 @@ OPERATOR_FACTORY(LogicalUnequal, Boolean, Boolean, "~=")
 OPERATOR_FACTORY(And, Boolean, Boolean, "and")
 OPERATOR_FACTORY(Or, Boolean, Boolean, "or")
 
-OPERATOR_FACTORY(StringConcat, String, String, "..")
-
 #undef OPERATOR_FACTORY
+
+// String concatenation with '..'
+class OperatorStringConcat : public Assignable {
+public:
+	OperatorStringConcat(Assignable*, Assignable*);
+	~OperatorStringConcat() override {
+	}
+	const VariableType& type() const override {
+		return kVTID_String;
+	}
+	ScriptingObject::ID id() const override {
+		return ScriptingObject::ID::OperatorStringConcat;
+	}
+
+	void set_a(Assignable&);
+	void set_b(Assignable&);
+	Assignable* get_a() const {
+		return a_;
+	}
+	Assignable* get_b() const {
+		return b_;
+	}
+
+	std::set<uint32_t> references() const override;
+
+	void load(FileRead&, Loader&) override;
+	void load_pointers(const ScriptingLoader&, Loader&) override;
+	void save(FileWrite&) const override;
+	void write_lua(int32_t, FileWrite&) const override;
+
+	std::string readable() const override;
+
+private:
+	Assignable* a_;
+	Assignable* b_;
+
+	DISALLOW_COPY_AND_ASSIGN(OperatorStringConcat);
+};
 
 // Logical not
 class OperatorNot : public Assignable {
 public:
 	OperatorNot(Assignable* a) : a_(a) {
 		if (a_)
-			assert(is(a_->type(), VariableType::Boolean));
+			assert(is(a_->type().id(), VariableTypeID::Boolean));
 	}
 	~OperatorNot() override {
 	}
-	VariableType type() const override {
-		return VariableType::Boolean;
+	const VariableType& type() const override {
+		return kVTID_Boolean;
 	}
 
 	Assignable* get_a() const {
 		return a_;
 	}
 	void set_a(Assignable& a) {
-		assert(is(a.type(), VariableType::Boolean));
+		assert(is(a.type().id(), VariableTypeID::Boolean));
 		a_ = &a;
 	}
 
@@ -148,6 +184,42 @@ private:
 	Assignable* a_;
 
 	DISALLOW_COPY_AND_ASSIGN(OperatorNot);
+};
+
+// Whether the parameter is nil. Replaces implicit conversions to boolean for type safety.
+class OperatorIsNil : public Assignable {
+public:
+	OperatorIsNil(Assignable* a) : a_(a) {
+	}
+	~OperatorIsNil() override {
+	}
+	const VariableType& type() const override {
+		return kVTID_Boolean;
+	}
+
+	Assignable* get_a() const {
+		return a_;
+	}
+	void set_a(Assignable& a) {
+		a_ = &a;
+	}
+
+	std::set<uint32_t> references() const override;
+
+	void load(FileRead&, Loader&) override;
+	void load_pointers(const ScriptingLoader&, Loader&) override;
+	void save(FileWrite&) const override;
+	void write_lua(int32_t, FileWrite&) const override;
+
+	std::string readable() const override;
+	ScriptingObject::ID id() const override {
+		return ScriptingObject::ID::OperatorIsNil;
+	}
+
+private:
+	Assignable* a_;
+
+	DISALLOW_COPY_AND_ASSIGN(OperatorIsNil);
 };
 
 #endif  // end of include guard: WL_EDITOR_SCRIPTING_OPERATORS_H

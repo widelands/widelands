@@ -24,6 +24,8 @@
 
 class FunctionStatement;
 
+void write_lua(int32_t indent, FileWrite&, const std::list<FunctionStatement*>&);
+
 /************************************************************
                       Abstract Function
 ************************************************************/
@@ -37,8 +39,8 @@ class FunctionBase {
 public:
 	// Full constructor, for builtin functions only
 	FunctionBase(const std::string&,
-	             VariableType c,
-	             VariableType r,
+	             const VariableType& c,
+	             const VariableType& r,
 	             std::list<std::pair<std::string, VariableType>>,
 	             bool = true);
 
@@ -61,10 +63,10 @@ public:
 
 	std::string header(bool lua_format) const;
 
-	VariableType get_class() const {
+	const VariableType& get_class() const {
 		return class_;
 	}
-	VariableType get_returns() const {
+	const VariableType& get_returns() const {
 		return returns_;
 	}
 
@@ -72,7 +74,7 @@ protected:
 	// for LuaFunction
 	FunctionBase(const std::string&, bool spellcheck = true);
 
-	void set_returns(VariableType r) {
+	void set_returns(const VariableType& r) {
 		returns_ = r;
 	}
 

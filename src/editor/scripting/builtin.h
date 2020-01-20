@@ -68,18 +68,18 @@ const BuiltinFunctionInfo* builtin_f(const FunctionBase&);
 // Property needs to be embedded in GetProperty or FS_SetProperty to be used for anything.
 class Property {
 public:
-	Property(const std::string& n, bool ro, VariableType c, VariableType t)
+	Property(const std::string& n, bool ro, const VariableType& c, const VariableType& t)
 	   : call_on_(c), type_(t), name_(n), read_only_(ro) {
-		assert(type_ != VariableType::Nil);
+		assert(type_.id() != VariableTypeID::Nil);
 	}
 
 	~Property() {
 	}
 
-	VariableType get_type() const {
+	const VariableType& get_type() const {
 		return type_;
 	}
-	VariableType get_class() const {
+	const VariableType& get_class() const {
 		return call_on_;
 	}
 	const std::string& get_name() const {

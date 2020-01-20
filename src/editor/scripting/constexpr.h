@@ -26,6 +26,11 @@
                         Constexprs
 ************************************************************/
 
+static const VariableType kVTID_Nil(VariableTypeID::Nil);
+static const VariableType kVTID_String(VariableTypeID::String);
+static const VariableType kVTID_Boolean(VariableTypeID::Boolean);
+static const VariableType kVTID_Integer(VariableTypeID::Integer);
+
 // A string literal, e.g. "xyz". You do NOT need to surround the value with escaped quotes –
 // they will be added automatically when writing the lua file.
 class ConstexprString : public Assignable {
@@ -37,8 +42,8 @@ public:
 	ScriptingObject::ID id() const override {
 		return ScriptingObject::ID::ConstexprString;
 	}
-	VariableType type() const override {
-		return VariableType::String;
+	const VariableType& type() const override {
+		return kVTID_String;
 	}
 
 	const std::string& get_value() const {
@@ -79,8 +84,8 @@ public:
 	ScriptingObject::ID id() const override {
 		return ScriptingObject::ID::ConstexprInteger;
 	}
-	VariableType type() const override {
-		return VariableType::Integer;
+	const VariableType& type() const override {
+		return kVTID_Integer;
 	}
 
 	int32_t get_value() const {
@@ -114,8 +119,8 @@ public:
 	ScriptingObject::ID id() const override {
 		return ScriptingObject::ID::ConstexprBoolean;
 	}
-	VariableType type() const override {
-		return VariableType::Boolean;
+	const VariableType& type() const override {
+		return kVTID_Boolean;
 	}
 
 	bool get_value() const {
@@ -149,8 +154,8 @@ public:
 	ScriptingObject::ID id() const override {
 		return ScriptingObject::ID::ConstexprNil;
 	}
-	VariableType type() const override {
-		return VariableType::Nil;
+	const VariableType& type() const override {
+		return kVTID_Nil;
 	}
 	void write_lua(int32_t, FileWrite&) const override;
 	std::string readable() const override {

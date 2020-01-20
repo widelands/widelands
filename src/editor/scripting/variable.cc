@@ -27,7 +27,8 @@
 
 constexpr uint16_t kCurrentPacketVersionVariable = 1;
 
-Variable::Variable(VariableType t, const std::string& n, bool spellcheck) : type_(t), name_(n) {
+Variable::Variable(const VariableType& t, const std::string& n, bool spellcheck)
+   : type_(t), name_(n) {
 	if (spellcheck)
 		check_name_valid(name_);
 }
@@ -40,7 +41,7 @@ void Variable::load(FileRead& fr, Loader& l) {
 			throw Widelands::UnhandledVersionError(
 			   "Variable", packet_version, kCurrentPacketVersionVariable);
 		}
-		type_ = static_cast<VariableType>(fr.unsigned_16());
+		type_ = VariableType::load(fr);
 		name_ = fr.c_string();
 		check_name_valid(name_);
 	} catch (const WException& e) {
@@ -51,7 +52,7 @@ void Variable::load(FileRead& fr, Loader& l) {
 void Variable::save(FileWrite& fw) const {
 	Assignable::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionVariable);
-	fw.unsigned_16(static_cast<uint16_t>(type_));
+	type_.write(fw);
 	fw.c_string(name_.c_str());
 }
 
@@ -93,26 +94,26 @@ void GetProperty::save(FileWrite& fw) const {
 	fw.unsigned_32(variable_->serial());
 	fw.unsigned_32(property_to_serial(*property_));
 }
-VariableType GetProperty::type() const {
+const VariableType& GetProperty::type() const {
 	assert(property_);
 	return property_->get_type();
 }
 void GetProperty::set_property(Property& p) {
 	property_ = &p;
-	if (variable_ && !is(variable_->type(), property_->get_class())) {
+	if (variable_ && !variable_->type().is_subclass(property_->get_class())) {
 		variable_ = nullptr;
 	}
 }
 void GetProperty::set_variable(Assignable& v) {
 	variable_ = &v;
-	if (property_ && !is(variable_->type(), property_->get_class())) {
+	if (property_ && !variable_->type().is_subclass(property_->get_class())) {
 		property_ = nullptr;
 	}
 }
 void GetProperty::write_lua(int32_t i, FileWrite& fw) const {
 	assert(variable_);
 	assert(property_);
-	assert(is(variable_->type(), property_->get_class()));
+	assert(variable_->type().is_subclass(property_->get_class()));
 	variable_->write_lua(i, fw);
 	fw.print_f(".%s", property_->get_name().c_str());
 }
@@ -125,5 +126,84 @@ std::set<uint32_t> GetProperty::references() const {
 	auto set = Assignable::references();
 	assert(variable_);
 	set.insert(variable_->serial());
+	return set;
+}
+
+/************************************************************
+                         Table access
+************************************************************/
+
+constexpr uint16_t kCurrentPacketVersionGetTable = 1;
+void GetTable::load(FileRead& fr, Loader& loader) {
+	try {
+		Assignable::load(fr, loader);
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version != kCurrentPacketVersionGetTable) {
+			throw Widelands::UnhandledVersionError(
+			   "GetTable", packet_version, kCurrentPacketVersionGetTable);
+		}
+		loader.push_back(fr.unsigned_32());
+		loader.push_back(fr.unsigned_32());
+	} catch (const WException& e) {
+		throw wexception("GetTable: %s", e.what());
+	}
+}
+void GetTable::load_pointers(const ScriptingLoader& l, Loader& loader) {
+	Assignable::load_pointers(l, loader);
+	table_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
+	property_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
+}
+void GetTable::save(FileWrite& fw) const {
+	Assignable::save(fw);
+	fw.unsigned_16(kCurrentPacketVersionGetTable);
+	assert(table_);
+	assert(property_);
+	fw.unsigned_32(table_->serial());
+	fw.unsigned_32(property_->serial());
+}
+const VariableType& GetTable::type() const {
+	return dynamic_cast<const VariableTypeTable&>(table_->type()).value_type();
+}
+void GetTable::set_table(Assignable& t) {
+	table_ = &t;
+	if (property_ && !property_->type().is_subclass(
+	                    dynamic_cast<const VariableTypeTable&>(table_->type()).key_type())) {
+		property_ = nullptr;
+	}
+}
+void GetTable::set_property(Assignable& p) {
+	property_ = &p;
+	if (table_ && !property_->type().is_subclass(
+	                 dynamic_cast<const VariableTypeTable&>(table_->type()).key_type())) {
+		table_ = nullptr;
+	}
+}
+void GetTable::write_lua(int32_t i, FileWrite& fw) const {
+	assert(table_);
+	assert(property_);
+	assert(dynamic_cast<const VariableTypeTable&>(table_->type())
+	          .key_type()
+	          .is_subclass(property_->type()));
+	table_->write_lua(i, fw);
+	// We do not use 'x.y' syntax even if we have a string as key type, because figuring
+	// out whether we have a string literal here and telling it not to use quotation marks
+	// would be more trouble than it's worth. So we just write 'x["y"]' instead.
+	fw.print_f("[");
+	property_->write_lua(i, fw);
+	fw.print_f("]");
+}
+std::string GetTable::readable() const {
+	assert(table_);
+	assert(property_);
+	return table_->readable() + "[" + property_->readable() + "]";
+}
+std::set<uint32_t> GetTable::references() const {
+	auto set = Assignable::references();
+	assert(table_);
+	assert(property_);
+	set.insert(table_->serial());
+	set.insert(property_->serial());
 	return set;
 }

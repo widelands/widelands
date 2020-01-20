@@ -57,8 +57,9 @@ uint32_t property_to_serial(Property&);
 // We support just about every Lua type and class the scenario scripter will need –
 // classes they will likely not need are not supported. (No editor-Lua functions,
 // generic classes like EGBase where only one subclass will ever be accessed, etc.)
-enum class VariableType : uint16_t {
+enum class VariableTypeID : uint16_t {
 	Nil = 0,
+	Any,
 
 	Integer,
 	Double,
@@ -134,8 +135,66 @@ enum class VariableType : uint16_t {
 	ResourceDescr,
 };
 
-std::string descname(VariableType);
-bool is(VariableType check, VariableType supposed_superclass);
+struct VariableType {
+public:
+	VariableType(VariableTypeID i) : id_(i) {
+	}
+
+	static VariableType load(FileRead&);
+
+	virtual ~VariableType() {
+	}
+
+	const VariableTypeID& id() const {
+		return id_;
+	}
+
+	virtual bool is_subclass(const VariableType&) const;
+
+	virtual void write(FileWrite&) const;
+
+	virtual bool operator==(const VariableType& v) const {
+		return id_ == v.id_;
+	}
+
+private:
+	VariableTypeID id_;
+};
+
+struct VariableTypeTable : public VariableType {
+public:
+	VariableTypeTable(const VariableType& k, const VariableType& v)
+	   : VariableType(VariableTypeID::Table), key_(k), value_(v) {
+	}
+	static VariableTypeTable load(FileRead&);
+
+	~VariableTypeTable() override {
+	}
+
+	const VariableType& key_type() const {
+		return key_;
+	}
+	const VariableType& value_type() const {
+		return value_;
+	}
+
+	bool is_subclass(const VariableType&) const override;
+
+	void write(FileWrite&) const override;
+
+	bool operator==(const VariableType& other) const override {
+		if (upcast(const VariableTypeTable, t, &other)) {
+			return key_ == t->key_ && value_ == t->value_;
+		}
+		return false;
+	}
+
+private:
+	VariableType key_, value_;
+};
+
+std::string descname(VariableTypeID);
+bool is(VariableTypeID check, VariableTypeID supposed_superclass);
 
 /************************************************************
              Abstract ScriptingObject and Assignable
@@ -169,11 +228,14 @@ public:
 		ConstexprBoolean,
 		Variable,
 		GetProperty,
+		GetTable,
 		LuaFunction,
 		FSLaunchCoroutine,
 		FSFunctionCall,
 		FSSetProperty,
+		FSSetTable,
 		FSLocalVarDeclOrAssign,
+		OperatorIsNil,
 		OperatorNot,
 		OperatorAnd,
 		OperatorOr,
@@ -191,6 +253,7 @@ public:
 		OperatorGreaterEq,
 		OperatorStringConcat,
 		FSIf,
+		FSForEach,
 		FSWhile,
 	};
 	virtual ScriptingObject::ID id() const = 0;
@@ -201,11 +264,9 @@ public:
 
 	virtual void save(FileWrite&) const;
 
-	// Returns the amount by which to change the indentation: `if`/`for`/`while` statements etc
-	// should increase the indent level; `end` should decrease it.
 	virtual void write_lua(int32_t, FileWrite&) const = 0;
 
-	// Localized human-readable description of this object
+	// ± localized human-readable description of this object
 	virtual std::string readable() const = 0;
 
 	// Returns the serials of all ScriptingObjects this ScriptingObject references in some way (e.g.
@@ -238,7 +299,7 @@ public:
 	~Assignable() override {
 	}
 
-	virtual VariableType type() const = 0;
+	virtual const VariableType& type() const = 0;
 
 protected:
 	Assignable() = default;

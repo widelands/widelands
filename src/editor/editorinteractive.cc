@@ -1294,7 +1294,7 @@ std::string EditorInteractive::try_finalize() {
 		LuaFunction* main_func = new LuaFunction("mission_thread");
 		main_func->init(*scripting_saver_);
 
-		Variable* v_field = new Variable(VariableType::Field, "field");
+		Variable* v_field = new Variable(VariableType(VariableTypeID::Field), "field");
 		v_field->init(*scripting_saver_);
 		{
 			ConstexprNil* nil = new ConstexprNil();

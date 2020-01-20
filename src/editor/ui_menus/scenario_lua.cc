@@ -142,7 +142,7 @@ void ScenarioLuaOptionsMenu::clicked_add_variable() {
 		}
 	}
 
-	Variable* var = new Variable(VariableType::Integer, name);
+	Variable* var = new Variable(VariableType(VariableTypeID::Integer), name);
 	var->init(eia().scripting_saver());
 	FS_LocalVarDeclOrAssign* fs = new FS_LocalVarDeclOrAssign(false, var, nullptr);
 	fs->init(eia().scripting_saver());

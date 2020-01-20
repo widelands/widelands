@@ -140,7 +140,7 @@ void FS_FunctionCall::check_parameters() const {
 		                 function_->get_name().c_str(), parameters_.size(),
 		                 function_->parameters().size());
 	}
-	if (function_->get_class() == VariableType::Nil) {
+	if (function_->get_class().id() == VariableTypeID::Nil) {
 		if (variable_) {
 			throw wexception("FS_FunctionCall %s: static function cannot be called on a variable",
 			                 function_->get_name().c_str());
@@ -150,7 +150,7 @@ void FS_FunctionCall::check_parameters() const {
 			throw wexception(
 			   "FS_FunctionCall %s: non-static function needs to be called on a variable",
 			   function_->get_name().c_str());
-		} else if (!is(function_->get_class(), variable_->type())) {
+		} else if (!function_->get_class().is_subclass(variable_->type())) {
 			throw wexception("FS_FunctionCall %s: variable of type %s cannot be casted to %s",
 			                 function_->get_name().c_str(), typeid(variable_->type()).name(),
 			                 typeid(function_->get_class()).name());
@@ -159,7 +159,7 @@ void FS_FunctionCall::check_parameters() const {
 	auto it1 = parameters_.begin();
 	auto it2 = function_->parameters().begin();
 	for (; it1 != parameters_.end(); ++it1, ++it2) {
-		if (!is((*it1)->type(), it2->second)) {
+		if (!(*it1)->type().is_subclass(it2->second)) {
 			throw wexception("FS_FunctionCall %s: argument of type %s cannot be casted to %s",
 			                 function_->get_name().c_str(), typeid((*it1)->type()).name(),
 			                 typeid(it2->second).name());
@@ -247,16 +247,16 @@ void FS_SetProperty::save(FileWrite& fw) const {
 }
 void FS_SetProperty::set_property(Property& p) {
 	property_ = &p;
-	if (variable_ && !is(variable_->type(), property_->get_class())) {
+	if (variable_ && !variable_->type().is_subclass(property_->get_class())) {
 		variable_ = nullptr;
 	}
-	if (value_ && !is(value_->type(), property_->get_type())) {
+	if (value_ && !value_->type().is_subclass(property_->get_type())) {
 		value_ = nullptr;
 	}
 }
 void FS_SetProperty::set_variable(Assignable& v) {
 	variable_ = &v;
-	if (property_ && !is(variable_->type(), property_->get_class())) {
+	if (property_ && !variable_->type().is_subclass(property_->get_class())) {
 		property_ = nullptr;
 	}
 }
@@ -264,8 +264,8 @@ void FS_SetProperty::write_lua(int32_t i, FileWrite& fw) const {
 	assert(variable_);
 	assert(property_);
 	assert(value_);
-	assert(is(variable_->type(), property_->get_class()));
-	assert(is(value_->type(), property_->get_type()));
+	assert(variable_->type().is_subclass(property_->get_class()));
+	assert(value_->type().is_subclass(property_->get_type()));
 	variable_->write_lua(i, fw);
 	fw.print_f(".%s = ", property_->get_name().c_str());
 	value_->write_lua(i, fw);
@@ -281,6 +281,99 @@ std::set<uint32_t> FS_SetProperty::references() const {
 	assert(variable_);
 	assert(value_);
 	set.insert(variable_->serial());
+	set.insert(value_->serial());
+	return set;
+}
+
+// Table manipulation
+
+constexpr uint16_t kCurrentPacketVersionFS_SetTable = 1;
+void FS_SetTable::load(FileRead& fr, Loader& loader) {
+	try {
+		FunctionStatement::load(fr, loader);
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version != kCurrentPacketVersionFS_SetTable) {
+			throw Widelands::UnhandledVersionError(
+			   "FS_SetTable", packet_version, kCurrentPacketVersionFS_SetTable);
+		}
+		loader.push_back(fr.unsigned_32());
+		loader.push_back(fr.unsigned_32());
+		loader.push_back(fr.unsigned_32());
+	} catch (const WException& e) {
+		throw wexception("FS_SetTable: %s", e.what());
+	}
+}
+void FS_SetTable::load_pointers(const ScriptingLoader& l, Loader& loader) {
+	FunctionStatement::load_pointers(l, loader);
+	table_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
+	property_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
+	value_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
+}
+void FS_SetTable::save(FileWrite& fw) const {
+	FunctionStatement::save(fw);
+	fw.unsigned_16(kCurrentPacketVersionFS_SetTable);
+	assert(table_);
+	assert(property_);
+	assert(value_);
+	fw.unsigned_32(table_->serial());
+	fw.unsigned_32(property_->serial());
+	fw.unsigned_32(value_->serial());
+}
+void FS_SetTable::set_property(Assignable& p) {
+	property_ = &p;
+	if (table_ && !property_->type().is_subclass(
+	                 dynamic_cast<const VariableTypeTable&>(table_->type()).key_type())) {
+		table_ = nullptr;
+	}
+}
+void FS_SetTable::set_value(Assignable& v) {
+	value_ = &v;
+	if (table_ && !value_->type().is_subclass(
+	                 dynamic_cast<const VariableTypeTable&>(table_->type()).value_type())) {
+		table_ = nullptr;
+	}
+}
+void FS_SetTable::set_table(Assignable& t) {
+	table_ = &t;
+	if (property_ && !property_->type().is_subclass(
+	                    dynamic_cast<const VariableTypeTable&>(table_->type()).key_type())) {
+		property_ = nullptr;
+	}
+	if (value_ && !value_->type().is_subclass(
+	                 dynamic_cast<const VariableTypeTable&>(table_->type()).value_type())) {
+		value_ = nullptr;
+	}
+}
+void FS_SetTable::write_lua(int32_t i, FileWrite& fw) const {
+	assert(table_);
+	assert(property_);
+	assert(value_);
+	assert(property_->type().is_subclass(
+	   dynamic_cast<const VariableTypeTable&>(table_->type()).key_type()));
+	assert(value_->type().is_subclass(
+	   dynamic_cast<const VariableTypeTable&>(table_->type()).value_type()));
+	table_->write_lua(i, fw);
+	fw.print_f("[");
+	property_->write_lua(i, fw);
+	fw.print_f("] = ");
+	value_->write_lua(i, fw);
+}
+std::string FS_SetTable::readable() const {
+	assert(table_);
+	assert(property_);
+	assert(value_);
+	return table_->readable() + "[" + property_->readable() + "] = " + value_->readable();
+}
+std::set<uint32_t> FS_SetTable::references() const {
+	auto set = FunctionStatement::references();
+	assert(table_);
+	assert(property_);
+	assert(value_);
+	set.insert(table_->serial());
+	set.insert(property_->serial());
 	set.insert(value_->serial());
 	return set;
 }

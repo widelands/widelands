@@ -24,8 +24,8 @@
 ************************************************************/
 
 FunctionBase::FunctionBase(const std::string& n,
-                           VariableType c,
-                           VariableType r,
+                           const VariableType& c,
+                           const VariableType& r,
                            std::list<std::pair<std::string, VariableType>> p,
                            bool spellcheck)
    : parameters_(p), name_(n), class_(c), returns_(r) {
@@ -33,20 +33,20 @@ FunctionBase::FunctionBase(const std::string& n,
 		check_name_valid(name_);
 }
 FunctionBase::FunctionBase(const std::string& n, bool spellcheck)
-   : name_(n), class_(VariableType::Nil), returns_(VariableType::Nil) {
+   : name_(n), class_(VariableTypeID::Nil), returns_(VariableTypeID::Nil) {
 	if (spellcheck)
 		check_name_valid(name_);
 }
 
 std::string FunctionBase::header(bool lua) const {
-	std::string s = lua ? "function" : descname(returns_);
+	std::string s = lua ? "function" : descname(returns_.id());
 	s += " " + name_ + "(";
 	for (auto it = parameters_.begin(); it != parameters_.end(); ++it) {
 		if (it != parameters_.begin()) {
 			s += ", ";
 		}
 		if (!lua) {
-			s += descname(it->second) + " ";
+			s += descname(it->second.id()) + " ";
 		}
 		s += it->first;
 	}
@@ -64,10 +64,10 @@ void LuaFunction::load(FileRead& fr, Loader& loader) {
 			   "LuaFunction", packet_version, kCurrentPacketVersionFunction);
 		}
 		rename(fr.c_string());
-		set_returns(static_cast<VariableType>(fr.unsigned_16()));
+		set_returns(VariableType::load(fr));
 		for (size_t n = fr.unsigned_32(); n; --n) {
 			const std::string v(fr.c_string());
-			parameters_.push_back(std::make_pair(v, static_cast<VariableType>(fr.unsigned_16())));
+			parameters_.push_back(std::make_pair(v, VariableType::load(fr)));
 		}
 		for (size_t n = fr.unsigned_32(); n; --n) {
 			loader.push_back(fr.unsigned_32());
@@ -89,12 +89,12 @@ void LuaFunction::save(FileWrite& fw) const {
 	ScriptingObject::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionFunction);
 	fw.c_string(get_name().c_str());
-	fw.unsigned_16(static_cast<uint16_t>(get_returns()));
+	get_returns().write(fw);
 
 	fw.unsigned_32(parameters_.size());
 	for (const auto& pair : parameters_) {
 		fw.c_string(pair.first.c_str());
-		fw.unsigned_16(static_cast<uint16_t>(pair.second));
+		pair.second.write(fw);
 	}
 
 	fw.unsigned_32(body_.size());
@@ -105,13 +105,7 @@ void LuaFunction::save(FileWrite& fw) const {
 
 void LuaFunction::write_lua(int32_t indent, FileWrite& fw) const {
 	fw.print_f("\n%s\n", header(true).c_str());
-	for (const auto& f : body_) {
-		for (int32_t i = 0; i <= indent; ++i) {
-			fw.print_f("   ");
-		}
-		f->write_lua(indent + 1, fw);
-		fw.print_f("\n");
-	}
+	::write_lua(indent, fw, body_);
 	fw.print_f("end -- function %s\n", get_name().c_str());
 }
 
@@ -121,4 +115,18 @@ std::set<uint32_t> LuaFunction::references() const {
 		set.insert(f->serial());
 	}
 	return set;
+}
+
+// static
+void write_lua(int32_t indent, FileWrite& fw, const std::list<FunctionStatement*>& body) {
+	for (const auto& f : body) {
+		for (int32_t i = 0; i <= indent; ++i) {
+			fw.print_f("   ");
+		}
+		f->write_lua(indent + 1, fw);
+		fw.print_f("\n");
+	}
+	for (int32_t i = 0; i < indent; ++i) {
+		fw.print_f("   ");
+	}
 }

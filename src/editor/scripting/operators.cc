@@ -23,12 +23,15 @@
 
 constexpr uint16_t kCurrentPacketVersionOperatorBase = 1;
 
-OperatorBase::OperatorBase(VariableType in, VariableType out, Assignable* a, Assignable* b)
+OperatorBase::OperatorBase(const VariableType& in,
+                           const VariableType& out,
+                           Assignable* a,
+                           Assignable* b)
    : a_(a), b_(b), input_type_(in), output_type_(out) {
 	if (a_)
-		assert(is(a_->type(), input_type_));
+		assert(a_->type().is_subclass(input_type_));
 	if (b_)
-		assert(is(b_->type(), input_type_));
+		assert(b_->type().is_subclass(input_type_));
 }
 void OperatorBase::load(FileRead& fr, Loader& loader) {
 	try {
@@ -82,6 +85,79 @@ void OperatorBase::write_lua(int32_t i, FileWrite& fw) const {
 	fw.print_f(")");
 }
 
+// The '..' operator
+
+constexpr uint16_t kCurrentPacketVersionOperatorStringConcat = 1;
+
+static inline bool is_string_convertible(const VariableTypeID& t) {
+	return t == VariableTypeID::String || t == VariableTypeID::Integer ||
+	       t == VariableTypeID::Double;
+}
+
+OperatorStringConcat::OperatorStringConcat(Assignable* a, Assignable* b) : a_(a), b_(b) {
+	assert(!a_ || is_string_convertible(a_->type().id()));
+	assert(!b_ || is_string_convertible(b_->type().id()));
+}
+void OperatorStringConcat::set_a(Assignable& a) {
+	assert(is_string_convertible(a.type().id()));
+	a_ = &a;
+}
+void OperatorStringConcat::set_b(Assignable& b) {
+	assert(is_string_convertible(b.type().id()));
+	b_ = &b;
+}
+
+void OperatorStringConcat::load(FileRead& fr, Loader& loader) {
+	try {
+		Assignable::load(fr, loader);
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version != kCurrentPacketVersionOperatorStringConcat) {
+			throw Widelands::UnhandledVersionError(
+			   "OperatorStringConcat", packet_version, kCurrentPacketVersionOperatorStringConcat);
+		}
+		loader.push_back(fr.unsigned_32());
+		loader.push_back(fr.unsigned_32());
+	} catch (const WException& e) {
+		throw wexception("editor string concat operator: %s", e.what());
+	}
+}
+void OperatorStringConcat::load_pointers(const ScriptingLoader& l, Loader& loader) {
+	Assignable::load_pointers(l, loader);
+	a_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
+	b_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
+}
+void OperatorStringConcat::save(FileWrite& fw) const {
+	Assignable::save(fw);
+	fw.unsigned_16(kCurrentPacketVersionOperatorStringConcat);
+	assert(a_);
+	assert(b_);
+	fw.unsigned_32(a_->serial());
+	fw.unsigned_32(b_->serial());
+}
+std::set<uint32_t> OperatorStringConcat::references() const {
+	auto set = Assignable::references();
+	assert(a_);
+	assert(b_);
+	set.insert(a_->serial());
+	set.insert(b_->serial());
+	return set;
+}
+std::string OperatorStringConcat::readable() const {
+	assert(a_);
+	assert(b_);
+	return "(" + a_->readable() + " .. " + b_->readable() + ")";
+}
+void OperatorStringConcat::write_lua(int32_t i, FileWrite& fw) const {
+	assert(a_);
+	fw.print_f("(");
+	a_->write_lua(i, fw);
+	fw.print_f(" .. ");
+	b_->write_lua(i, fw);
+	fw.print_f(")");
+}
+
 // The 'not' operator
 
 constexpr uint16_t kCurrentPacketVersionOperatorNot = 1;
@@ -125,4 +201,49 @@ void OperatorNot::write_lua(int32_t i, FileWrite& fw) const {
 	fw.print_f("(not ");
 	a_->write_lua(i, fw);
 	fw.print_f(")");
+}
+
+// The '== nil' operator
+
+constexpr uint16_t kCurrentPacketVersionOperatorIsNil = 1;
+
+void OperatorIsNil::load(FileRead& fr, Loader& loader) {
+	try {
+		Assignable::load(fr, loader);
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version != kCurrentPacketVersionOperatorIsNil) {
+			throw Widelands::UnhandledVersionError(
+			   "OperatorIsNil", packet_version, kCurrentPacketVersionOperatorIsNil);
+		}
+		loader.push_back(fr.unsigned_32());
+	} catch (const WException& e) {
+		throw wexception("editor IsNil operator: %s", e.what());
+	}
+}
+void OperatorIsNil::load_pointers(const ScriptingLoader& l, Loader& loader) {
+	Assignable::load_pointers(l, loader);
+	a_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
+}
+void OperatorIsNil::save(FileWrite& fw) const {
+	Assignable::save(fw);
+	fw.unsigned_16(kCurrentPacketVersionOperatorIsNil);
+	assert(a_);
+	fw.unsigned_32(a_->serial());
+}
+std::set<uint32_t> OperatorIsNil::references() const {
+	auto set = Assignable::references();
+	assert(a_);
+	set.insert(a_->serial());
+	return set;
+}
+std::string OperatorIsNil::readable() const {
+	assert(a_);
+	return a_->readable() + " == nil";
+}
+void OperatorIsNil::write_lua(int32_t i, FileWrite& fw) const {
+	assert(a_);
+	fw.print_f("(");
+	a_->write_lua(i, fw);
+	fw.print_f(" == nil)");
 }
