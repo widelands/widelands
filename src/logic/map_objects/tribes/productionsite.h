@@ -203,15 +203,15 @@ public:
 
 	virtual bool has_workers(DescriptionIndex targetSite, Game& game);
 	uint8_t get_statistics_percent() {
-		return last_stat_percent_;
+		return last_stat_percent_ / 10;
 	}
 
 	// receives the duration of the last period and the result (true if something was produced)
-	// and sets crude_percent_ to new value
-	void update_crude_statistics(uint32_t, bool);
+	// and sets actual_percent_ to new value
+	void update_actual_statistics(uint32_t, bool);
 
-	uint8_t get_crude_statistics() {
-		return crude_percent_ / 10;
+	uint8_t get_actual_statistics() {
+		return actual_percent_ / 10;
 	}
 
 	const std::string& production_result() const {
@@ -313,7 +313,7 @@ protected:
 	virtual void program_end(Game&, ProgramResult);
 	virtual void train_workers(Game&);
 
-	void calc_statistics();
+	void format_statistics_string();
 	void try_start_working(Game&);
 	void set_post_timer(int32_t const t) {
 		post_timer_ = t;
@@ -341,11 +341,10 @@ protected:  // TrainingSite must have access to this stuff
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;
 	InputQueues input_queues_;  ///< input queues for all inputs
-	std::vector<bool> statistics_;
-	uint8_t last_stat_percent_;
+	uint16_t last_stat_percent_;
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:
 	// 0-100)
-	uint32_t crude_percent_;  // basically this is percent * 10 to avoid floats
+	uint32_t actual_percent_;  // basically this is percent * 10 to avoid floats
 	uint32_t last_program_end_time;
 	bool is_stopped_;
 	std::string default_anim_;  // normally "idle", "empty", if empty mine.
