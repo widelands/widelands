@@ -48,6 +48,7 @@
 #include "logic/widelands_geometry.h"
 #include "scripting/lua_interface.h"
 #include "sound/sound_handler.h"
+#include "wlapplication_options.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
 #include "wui/logmessage.h"
@@ -179,9 +180,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      workareas_cache_(nullptr),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
-     display_flags_(dfDebug),
+     display_flags_(dfDebug | kSoldierLevels),
 #else
-     display_flags_(0),
+     display_flags_(kSoldierLevels),
 #endif
      lastframe_(SDL_GetTicks()),
      frametime_(0),
@@ -190,6 +191,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      road_build_player_(0),
      buildwaterway_(nullptr),
      waterway_build_player_(0),
+     waterway_work_area_(nullptr),
      unique_window_handler_(new UniqueWindowHandler()) {
 
 	// Load the buildhelp icons.
@@ -396,16 +398,22 @@ void InteractiveBase::set_sel_picture(const Image* image) {
 	set_sel_pos(get_sel_pos());  //  redraw
 }
 
-TextToDraw InteractiveBase::get_text_to_draw() const {
-	TextToDraw text_to_draw = TextToDraw::kNone;
+InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
+	InfoToDraw info_to_draw = InfoToDraw::kNone;
+	if (!show) {
+		return info_to_draw;
+	}
 	auto display_flags = get_display_flags();
 	if (display_flags & InteractiveBase::dfShowCensus) {
-		text_to_draw = text_to_draw | TextToDraw::kCensus;
+		info_to_draw = info_to_draw | InfoToDraw::kCensus;
 	}
 	if (display_flags & InteractiveBase::dfShowStatistics) {
-		text_to_draw = text_to_draw | TextToDraw::kStatistics;
+		info_to_draw = info_to_draw | InfoToDraw::kStatistics;
 	}
-	return text_to_draw;
+	if (display_flags & InteractiveBase::dfShowSoldierLevels) {
+		info_to_draw = info_to_draw | InfoToDraw::kSoldierLevels;
+	}
+	return info_to_draw;
 }
 
 void InteractiveBase::unset_sel_picture() {
@@ -732,7 +740,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	}
 
 	// In-game clock and FPS
-	if (game != nullptr) {
+	if ((game != nullptr) && get_config_bool("game_clock", true)) {
 		// Blit in-game clock
 		const std::string gametime(gametimestring(egbase().get_gametime(), true));
 		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
@@ -767,6 +775,30 @@ void InteractiveBase::blit_field_overlay(RenderTarget* dst,
                                          const Vector2i& hotspot,
                                          float scale) {
 	blit_overlay(dst, field.rendertarget_pixel.cast<int>(), image, hotspot, scale);
+}
+
+void InteractiveBase::draw_bridges(RenderTarget* dst,
+                                   const FieldsToDraw::Field* f,
+                                   uint32_t gametime,
+                                   float scale) const {
+	if (Widelands::is_bridge_segment(f->road_e)) {
+		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
+		                    f->owner->tribe().bridge_animation(
+		                       Widelands::WALK_E, f->road_e == Widelands::RoadSegment::kBridgeBusy),
+		                    gametime, &f->owner->get_playercolor());
+	}
+	if (Widelands::is_bridge_segment(f->road_sw)) {
+		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
+		                    f->owner->tribe().bridge_animation(
+		                       Widelands::WALK_SW, f->road_sw == Widelands::RoadSegment::kBridgeBusy),
+		                    gametime, &f->owner->get_playercolor());
+	}
+	if (Widelands::is_bridge_segment(f->road_se)) {
+		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
+		                    f->owner->tribe().bridge_animation(
+		                       Widelands::WALK_SE, f->road_se == Widelands::RoadSegment::kBridgeBusy),
+		                    gametime, &f->owner->get_playercolor());
+	}
 }
 
 void InteractiveBase::mainview_move() {
@@ -860,12 +892,48 @@ void InteractiveBase::start_build_waterway(Coords waterway_start,
 	// create an empty path
 	assert(!buildwaterway_);
 	buildwaterway_.reset(new CoordPath(waterway_start));
-
 	waterway_build_player_ = player;
-
 	waterway_building_add_overlay();
-
 	set_sel_picture(g_gr->images().get("images/ui_basic/fsel_waterwaybuilding.png"));
+
+	// Show workarea to visualise length limit
+	const Widelands::Map& map = egbase().map();
+	const uint32_t len = map.get_waterway_max_length();
+	assert(len > 1);
+	assert(!waterway_work_area_);
+	waterway_work_area_.reset(new WorkareaInfo());
+	waterway_work_area_->insert(std::make_pair(len, std::set<std::string>()));
+
+	std::map<Widelands::FCoords, bool> reachable_nodes;
+	Widelands::CheckStepFerry cstep(egbase());
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+	   map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(waterway_start), len));
+	do {
+		reachable_nodes.insert(
+		   std::make_pair(mr.location(), mr.location().field->get_owned_by() == player &&
+		                                    !mr.location().field->is_border() &&
+		                                    cstep.reachable_dest(map, mr.location())));
+	} while (mr.advance(map));
+	std::map<Widelands::TCoords<>, uint32_t> wa_data;
+	for (const auto& pair : reachable_nodes) {
+		const auto br = reachable_nodes.find(map.br_n(pair.first));
+		if (br == reachable_nodes.end()) {
+			continue;
+		}
+		auto it = reachable_nodes.find(map.bl_n(pair.first));
+		if (it != reachable_nodes.end()) {
+			wa_data.insert(
+			   std::make_pair(Widelands::TCoords<>(pair.first, Widelands::TriangleIndex::D),
+			                  pair.second && br->second && it->second ? 5 : 6));
+		}
+		it = reachable_nodes.find(map.r_n(pair.first));
+		if (it != reachable_nodes.end()) {
+			wa_data.insert(
+			   std::make_pair(Widelands::TCoords<>(pair.first, Widelands::TriangleIndex::R),
+			                  pair.second && br->second && it->second ? 5 : 6));
+		}
+	}
+	show_workarea(*waterway_work_area_, waterway_start, wa_data);
 }
 
 /*
@@ -887,6 +955,9 @@ void InteractiveBase::abort_build_road() {
 
 void InteractiveBase::abort_build_waterway() {
 	assert(buildwaterway_);
+	assert(waterway_work_area_);
+	hide_workarea(buildwaterway_->get_start(), true);
+	waterway_work_area_.reset(nullptr);
 
 	waterway_building_remove_overlay();
 
@@ -953,6 +1024,10 @@ void InteractiveBase::finish_build_road() {
 
 void InteractiveBase::finish_build_waterway() {
 	assert(buildwaterway_ != nullptr);
+
+	assert(waterway_work_area_);
+	hide_workarea(buildwaterway_->get_start(), true);
+	waterway_work_area_.reset(nullptr);
 
 	waterway_building_remove_overlay();
 
@@ -1376,6 +1451,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			   this, debugconsole_, *DebugConsole::get_chat_provider());
 			return true;
 #endif
+		// Common shortcuts for InteractivePlayer, InteractiveSpectator and EditorInteractive
+		case SDLK_SPACE:
+			toggle_buildhelp();
+			return true;
 		case SDLK_m:
 			toggle_minimap();
 			return true;

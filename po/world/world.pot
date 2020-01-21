@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-11-30 13:49+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-21 18:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -720,98 +720,118 @@ msgstr ""
 msgid "Red Umbrella Tree"
 msgstr ""
 
-#: ../../data/world/init.lua:35
+#: ../../data/world/init.lua:17
+msgid "Loading world: %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: ../../data/world/init.lua:27
+msgid "Resources"
+msgstr ""
+
+#: ../../data/world/init.lua:32
+msgid "Terrains"
+msgstr ""
+
+#: ../../data/world/init.lua:42
 msgid "Summer"
 msgstr ""
 
-#: ../../data/world/init.lua:41
+#: ../../data/world/init.lua:48
 msgid "Wasteland"
 msgstr ""
 
-#: ../../data/world/init.lua:47
+#: ../../data/world/init.lua:54
 msgid "Winter"
 msgstr ""
 
-#: ../../data/world/init.lua:53
+#: ../../data/world/init.lua:60
 msgid "Desert"
 msgstr ""
 
-#: ../../data/world/init.lua:70
+#: ../../data/world/init.lua:69
+msgid "Immovables"
+msgstr ""
+
+#: ../../data/world/init.lua:78
 msgid "Miscellaneous"
 msgstr ""
 
-#: ../../data/world/init.lua:105
+#: ../../data/world/init.lua:113
 msgid "Artifacts"
 msgstr ""
 
-#: ../../data/world/init.lua:105
+#: ../../data/world/init.lua:113
 msgid "These immovables are used by the win condition “Artifacts”."
 msgstr ""
 
-#: ../../data/world/init.lua:118
+#: ../../data/world/init.lua:126
 msgid "Plants"
 msgstr ""
 
-#: ../../data/world/init.lua:139
+#: ../../data/world/init.lua:147
 msgid "Standing Stones"
 msgstr ""
 
-#: ../../data/world/init.lua:170
+#: ../../data/world/init.lua:178
 msgid "Rocks"
 msgstr ""
 
-#: ../../data/world/init.lua:203
+#: ../../data/world/init.lua:211
 msgid "Dead Trees"
 msgstr ""
 
-#: ../../data/world/init.lua:210
+#: ../../data/world/init.lua:218
 msgid "Coniferous Trees"
 msgstr ""
 
-#: ../../data/world/init.lua:217
+#: ../../data/world/init.lua:225
 msgid "Deciduous Trees"
 msgstr ""
 
-#: ../../data/world/init.lua:224
+#: ../../data/world/init.lua:232
 msgid "Palm Trees"
 msgstr ""
 
-#: ../../data/world/init.lua:231
+#: ../../data/world/init.lua:239
 msgid "Wasteland Trees"
 msgstr ""
 
+#: ../../data/world/init.lua:276
+msgid "Animals"
+msgstr ""
+
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:278
+#: ../../data/world/init.lua:287
 msgid "Herbivores"
 msgstr ""
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:297
+#: ../../data/world/init.lua:306
 msgid "Carnivores"
 msgstr ""
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
-#: ../../data/world/init.lua:313
+#: ../../data/world/init.lua:322
 msgid "Aquatic"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:84
+#: ../../data/world/resources/init.lua:81
 msgid "Coal"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:100
+#: ../../data/world/resources/init.lua:97
 msgid "Gold"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:116
+#: ../../data/world/resources/init.lua:113
 msgid "Iron"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:132
+#: ../../data/world/resources/init.lua:129
 msgid "Stones"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:148
+#: ../../data/world/resources/init.lua:145
 #: ../../data/world/terrains/init.lua:469
 #: ../../data/world/terrains/init.lua:792
 #: ../../data/world/terrains/init.lua:1102
@@ -819,7 +839,7 @@ msgstr ""
 msgid "Water"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:164
+#: ../../data/world/resources/init.lua:161
 msgid "Fish"
 msgstr ""
 

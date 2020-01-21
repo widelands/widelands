@@ -90,6 +90,8 @@ private:
 	uint32_t unemployed_since_;
 
 protected:
+	void cleanup(EditorGameBase&) override;
+
 	struct Loader : public Carrier::Loader {
 	public:
 		Loader() {

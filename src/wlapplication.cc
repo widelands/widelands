@@ -156,7 +156,7 @@ bool is_absolute_path(const std::string& path) {
 std::string absolute_path_if_not_windows(const std::string& path) {
 #ifndef _WIN32
 	char buffer[PATH_MAX];
-	// http://pubs.opengroup.org/onlinepubs/009695399/functions/realpath.html
+	// https://pubs.opengroup.org/onlinepubs/009695399/functions/realpath.html
 	char* rp = realpath(path.c_str(), buffer);
 	log("Realpath: %s\n", rp);
 	if (!rp) {
@@ -311,6 +311,8 @@ WLApplication* WLApplication::get(int const argc, char const** argv) {
 /**
  * Initialize an instance of WLApplication.
  *
+ * Exits with code 2 if the SDL/TTF system is not available.
+ *
  * This constructor is protected \e on \e purpose !
  * Use WLApplication::get() instead and look at the class description.
  *
@@ -367,14 +369,20 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	cleanup_temp_backups();
 
 	// Start the SDL core
-	if (SDL_Init(SDL_INIT_VIDEO) == -1)
-		throw wexception("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
+	if (SDL_Init(SDL_INIT_VIDEO) == -1) {
+		// We sometimes run into a missing video driver in our CI environment, so we exit 0 to prevent
+		// too frequent failures
+		log("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
+		exit(2);
+	}
 
 	SDL_ShowCursor(SDL_DISABLE);
 	g_gr = new Graphic();
 
-	if (TTF_Init() == -1)
-		throw wexception("True Type library did not initialize: %s\n", TTF_GetError());
+	if (TTF_Init() == -1) {
+		log("True Type library did not initialize: %s\n", TTF_GetError());
+		exit(2);
+	}
 
 	UI::g_fh = UI::create_fonthandler(
 	   &g_gr->images(), i18n::get_locale());  // This will create the fontset, so loading it first.
@@ -789,9 +797,14 @@ bool WLApplication::init_settings() {
 
 	// Some of the options listed here are documented in wlapplication_messages.cc
 	get_config_bool("ai_training", false);
+	get_config_bool("auto_roadbuild_mode", false);
 	get_config_bool("auto_speed", false);
+	get_config_bool("dock_windows_to_edges", false);
 	get_config_bool("fullscreen", false);
+	get_config_bool("snap_windows_only_when_overlapping", false);
 	get_config_bool("animate_map_panning", false);
+	get_config_bool("write_syncstreams", false);
+	get_config_bool("nozip", false);
 	get_config_int("xres", 0);
 	get_config_int("yres", 0);
 	get_config_int("border_snap_distance", 0);
@@ -799,15 +812,14 @@ bool WLApplication::init_settings() {
 	get_config_int("panel_snap_distance", 0);
 	get_config_int("autosave", 0);
 	get_config_int("rolling_autosave", 0);
+	get_config_string("language", "");
+	get_config_string("metaserver", "");
+	get_config_natural("metaserverport", 0);
 	// Undocumented on command line, appears in game options
 	get_config_bool("single_watchwin", false);
-	get_config_bool("auto_roadbuild_mode", false);
-	// Undocumented on command line, appears in game options
-	get_config_bool("nozip", false);
-	get_config_bool("snap_windows_only_when_overlapping", false);
-	get_config_bool("dock_windows_to_edges", false);
-	get_config_bool("write_syncstreams", false);
-	// Undocumented on command line, appears in game options
+	get_config_bool("ctrl_zoom", false);
+	get_config_bool("game_clock", true);
+	get_config_bool("inputgrab", false);
 	get_config_bool("transparent_chat", false);
 	// Undocumented. Unique ID used to allow the metaserver to recognize players
 	get_config_string("uuid", "");
@@ -817,10 +829,6 @@ bool WLApplication::init_settings() {
 	// Undocumented, appears in online login box and LAN lobby
 	// The nickname used for LAN and online games
 	get_config_string("nickname", "");
-	// Undocumented. The plaintext password for online logins
-	// TODO(Notabilis): Remove next line after build 20.
-	// Currently left in to avoid removing stored passwords for users of both build 19 and trunk
-	get_config_string("password", "");
 	// Undocumented, appears in online login box. The hashed password for online logins
 	get_config_string("password_sha1", "");
 	// Undocumented, appears in online login box. Whether to automatically use the stored login
@@ -831,11 +839,20 @@ bool WLApplication::init_settings() {
 	get_config_string("servername", "");
 	// Undocumented, appears in editor. Name of map author
 	get_config_string("realname", "");
-	get_config_string("metaserver", "");
-	get_config_natural("metaserverport", 0);
 	// Undocumented, checkbox appears on "Watch Replay" screen
 	get_config_bool("display_replay_filenames", false);
 	get_config_bool("editor_player_menu_warn_too_many_players", false);
+	// Undocumented, on command line, appears in game options
+	get_config_bool("sound", "enable_ambient", true);
+	get_config_bool("sound", "enable_chat", true);
+	get_config_bool("sound", "enable_message", true);
+	get_config_bool("sound", "enable_music", true);
+	get_config_bool("sound", "enable_ui", true);
+	get_config_int("sound", "volume_ambient", 128);
+	get_config_int("sound", "volume_chat", 128);
+	get_config_int("sound", "volume_message", 128);
+	get_config_int("sound", "volume_music", 64);
+	get_config_int("sound", "volume_ui", 128);
 	// KLUDGE!
 
 	long int last_start = get_config_int("last_start", 0);
@@ -845,13 +862,6 @@ bool WLApplication::init_settings() {
 		get_config_string("uuid", generate_random_uuid().c_str());
 	}
 	get_config_int("last_start", time(nullptr));
-
-	// Replace the stored plaintext password with its SHA-1 hashed version
-	// Used to upgrade the stored password when upgrading widelands
-	if (get_config_string("password", "").length() > 0 &&
-	    get_config_string("password_sha1", "").length() == 0) {
-		get_config_string("password_sha1", crypto::sha1(get_config_string("password", "")).c_str());
-	}
 
 	// Save configuration now. Otherwise, the UUID is not saved
 	// when the game crashes, losing part of its advantage
@@ -1344,6 +1354,7 @@ bool WLApplication::new_game() {
 			game.set_ibase(new InteractivePlayer(game, get_config_section(), pn, false));
 			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
 			UI::ProgressWindow loader_ui;
+			game.set_loader_ui(&loader_ui);
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
 			tipstext.push_back("singleplayer");
@@ -1355,7 +1366,6 @@ bool WLApplication::new_game() {
 			loader_ui.step(_("Preparing game"));
 
 			game.set_game_controller(ctrl.get());
-			game.set_loader_ui(&loader_ui);
 			game.init_newgame(sp.settings());
 			game.run(Widelands::Game::NewNonScenario, "", false, "single_player");
 			game.set_loader_ui(nullptr);
@@ -1460,6 +1470,7 @@ void WLApplication::replay() {
 
 	try {
 		UI::ProgressWindow loader_ui;
+		game.set_loader_ui(&loader_ui);
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		GameTips tips(loader_ui, tipstext);
@@ -1472,7 +1483,6 @@ void WLApplication::replay() {
 
 		game.save_handler().set_allow_saving(false);
 
-		game.set_loader_ui(&loader_ui);
 		game.run(Widelands::Game::Loaded, "", true, "replay");
 		game.set_loader_ui(nullptr);
 	} catch (const std::exception& e) {

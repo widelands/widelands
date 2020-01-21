@@ -15,6 +15,9 @@
 --
 
 if wl.Game then egbase = wl.Game() else egbase = wl.Editor() end
+function set_loading_message(str, i)
+   egbase:set_loading_message(_("Loading tribes: %1$s (%2$d/%3$d)"):bformat(str, i, 15))
+end
 
 tribes = wl.Tribes()
 include "scripting/mapobjects.lua"
@@ -27,7 +30,7 @@ print_loading_message("┗━ took", function()
    -- ===================================
 
    print_loading_message("┃    Ships", function()
-      egbase:set_loading_message(_("Loading tribes: Ships (1/15)"))
+      set_loading_message(_("Ships"), 1)
       include "tribes/ships/atlanteans/init.lua"
       include "tribes/ships/barbarians/init.lua"
       include "tribes/ships/empire/init.lua"
@@ -39,7 +42,7 @@ print_loading_message("┗━ took", function()
    -- ===================================
 
    print_loading_message("┃    Wares", function()
-      egbase:set_loading_message(_("Loading tribes: Wares (2/15)"))
+      set_loading_message(_("Wares"), 2)
 
       include "tribes/wares/clay/init.lua"
       include "tribes/wares/brick/init.lua"
@@ -155,7 +158,7 @@ print_loading_message("┗━ took", function()
    -- ===================================
 
    print_loading_message("┃    Immovables", function()
-      egbase:set_loading_message(_("Loading tribes: Immovables (3/15)"))
+      set_loading_message(_("Immovables"), 3)
       include "tribes/immovables/ashes/init.lua"
       include "tribes/immovables/blackrootfield/harvested/init.lua"
       include "tribes/immovables/blackrootfield/medium/init.lua"
@@ -177,6 +180,8 @@ print_loading_message("┗━ took", function()
       include "tribes/immovables/grapevine/ripe/init.lua"
       include "tribes/immovables/grapevine/small/init.lua"
       include "tribes/immovables/grapevine/tiny/init.lua"
+      include "tribes/immovables/pond/burning/init.lua"
+      include "tribes/immovables/pond/coal/init.lua"
       include "tribes/immovables/pond/growing/init.lua"
       include "tribes/immovables/pond/mature/init.lua"
       include "tribes/immovables/pond/dry/init.lua"
@@ -197,6 +202,7 @@ print_loading_message("┗━ took", function()
       include "tribes/immovables/berry_bushes/currant_red/init.lua"
       include "tribes/immovables/berry_bushes/currant_black/init.lua"
       include "tribes/immovables/berry_bushes/strawberry/init.lua"
+      include "tribes/immovables/berry_bushes/stink_tree/init.lua"
       include "tribes/immovables/berry_bushes/sea_buckthorn/init.lua"
       include "tribes/immovables/berry_bushes/desert_hackberry/init.lua"
       include "tribes/immovables/berry_bushes/juniper/init.lua"
@@ -212,7 +218,7 @@ print_loading_message("┗━ took", function()
    -- ===================================
 
    print_loading_message("┃    Workers", function()
-      egbase:set_loading_message(_("Loading tribes: Atlantean workers (4/15)"))
+      set_loading_message(_("Atlantean workers"), 4)
       include "tribes/workers/atlanteans/carrier/init.lua"
       include "tribes/workers/atlanteans/ferry/init.lua"
       include "tribes/workers/atlanteans/armorsmith/init.lua"
@@ -245,7 +251,7 @@ print_loading_message("┗━ took", function()
       include "tribes/workers/atlanteans/weaver/init.lua"
       include "tribes/workers/atlanteans/woodcutter/init.lua"
 
-      egbase:set_loading_message(_("Loading tribes: Barbarian workers (5/15)"))
+      set_loading_message(_("Barbarian workers"), 5)
       include "tribes/workers/barbarians/carrier/init.lua"
       include "tribes/workers/barbarians/ferry/init.lua"
       include "tribes/workers/barbarians/baker/init.lua"
@@ -280,7 +286,7 @@ print_loading_message("┗━ took", function()
       include "tribes/workers/barbarians/trainer/init.lua"
       include "tribes/workers/barbarians/weaver/init.lua"
 
-      egbase:set_loading_message(_("Loading tribes: Empire workers (6/15)"))
+      set_loading_message(_("Empire workers"), 6)
       include "tribes/workers/empire/carrier/init.lua"
       include "tribes/workers/empire/ferry/init.lua"
       include "tribes/workers/empire/armorsmith/init.lua"
@@ -316,7 +322,7 @@ print_loading_message("┗━ took", function()
       include "tribes/workers/empire/weaponsmith/init.lua"
       include "tribes/workers/empire/weaver/init.lua"
 
-      egbase:set_loading_message(_("Loading tribes: Frisian workers (7/15)"))
+      set_loading_message(_("Frisian workers"), 7)
       include "tribes/workers/frisians/carrier/init.lua"
       include "tribes/workers/frisians/ferry/init.lua"
       include "tribes/workers/frisians/reindeer/init.lua"
@@ -360,7 +366,7 @@ print_loading_message("┗━ took", function()
    -- ===================================
 
    print_loading_message("┃    Warehouses", function()
-      egbase:set_loading_message(_("Loading tribes: Warehouses (8/15)"))
+      set_loading_message(_("Warehouses"), 8)
       include "tribes/buildings/warehouses/atlanteans/headquarters/init.lua"
       include "tribes/buildings/warehouses/atlanteans/port/init.lua"
       include "tribes/buildings/warehouses/atlanteans/warehouse/init.lua"
@@ -382,7 +388,7 @@ print_loading_message("┗━ took", function()
    -- ===================================
 
    print_loading_message("┃    Productionsites", function()
-      egbase:set_loading_message(_("Loading tribes: Atlantean productionsites (9/15)"))
+      set_loading_message(_("Atlantean productionsites"), 9)
       -- Atlanteans small
       include "tribes/buildings/productionsites/atlanteans/quarry/init.lua"
       include "tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua"
@@ -420,7 +426,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/atlanteans/ironmine/init.lua"
       include "tribes/buildings/productionsites/atlanteans/goldmine/init.lua"
       -- Barbarians small
-      egbase:set_loading_message(_("Loading tribes: Barbarian productionsites (10/15)"))
+      set_loading_message(_("Barbarian productionsites"), 10)
       include "tribes/buildings/productionsites/barbarians/quarry/init.lua"
       include "tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua"
       include "tribes/buildings/productionsites/barbarians/rangers_hut/init.lua"
@@ -465,7 +471,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua"
       include "tribes/buildings/productionsites/barbarians/goldmine/init.lua"
       -- Empire small
-      egbase:set_loading_message(_("Loading tribes: Empire productionsites (11/15)"))
+      set_loading_message(_("Empire productionsites"), 11)
       include "tribes/buildings/productionsites/empire/quarry/init.lua"
       include "tribes/buildings/productionsites/empire/lumberjacks_house/init.lua"
       include "tribes/buildings/productionsites/empire/foresters_house/init.lua"
@@ -509,7 +515,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/empire/goldmine/init.lua"
 
       --Frisians mines
-      egbase:set_loading_message(_("Loading tribes: Frisian productionsites (12/15)"))
+      set_loading_message(_("Frisian productionsites"), 12)
       include "tribes/buildings/productionsites/frisians/coalmine_deep/init.lua"
       include "tribes/buildings/productionsites/frisians/rockmine_deep/init.lua"
       include "tribes/buildings/productionsites/frisians/goldmine_deep/init.lua"
@@ -535,6 +541,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/frisians/berry_farm/init.lua"
       include "tribes/buildings/productionsites/frisians/collectors_house/init.lua"
       include "tribes/buildings/productionsites/frisians/clay_pit/init.lua"
+      include "tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua"
       --Frisians medium
       include "tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua"
       include "tribes/buildings/productionsites/frisians/bakery/init.lua"
@@ -563,7 +570,7 @@ print_loading_message("┗━ took", function()
    -- ===================================
 
    print_loading_message("┃    Trainingsites", function()
-      egbase:set_loading_message(_("Loading tribes: Trainingsites (13/15)"))
+      set_loading_message(_("Trainingsites"), 13)
       include "tribes/buildings/trainingsites/atlanteans/dungeon/init.lua"
       include "tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua"
       include "tribes/buildings/trainingsites/barbarians/battlearena/init.lua"
@@ -580,7 +587,7 @@ print_loading_message("┗━ took", function()
    -- ===================================
 
    print_loading_message("┃    Militarysites", function()
-      egbase:set_loading_message(_("Loading tribes: Militarysites (14/15)"))
+      set_loading_message(_("Militarysites"), 14)
       include "tribes/buildings/militarysites/atlanteans/guardhouse/init.lua"
       include "tribes/buildings/militarysites/atlanteans/guardhall/init.lua"
       include "tribes/buildings/militarysites/atlanteans/tower_small/init.lua"
@@ -614,7 +621,7 @@ print_loading_message("┗━ took", function()
    --    Partially Finished Buildings
    -- ===================================
 
-egbase:set_loading_message(_("Loading tribes: Finishing (15/15)"))
+   set_loading_message(_("Finishing"), 15)
 
    print_loading_message("┃    Partially finished buildings", function()
       include "tribes/buildings/partially_finished/constructionsite/init.lua"

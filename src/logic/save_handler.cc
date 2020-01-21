@@ -128,7 +128,6 @@ bool SaveHandler::check_next_tick(Widelands::Game& game, uint32_t realtime) {
 	log("Autosave: %d ms interval elapsed, current gametime: %s, saving...\n",
 	    autosave_interval_in_ms_, gametimestring(game.get_gametime(), true).c_str());
 
-	game.get_ibase()->log_message(_("Saving game…"));
 	return true;
 }
 

@@ -309,11 +309,13 @@ static int sort_claimers(const PlrInfluence& first, const PlrInfluence& second) 
 // Return the valid workers for a Road.
 WaresWorkersMap get_valid_workers_for(const RoadBase& r) {
 	WaresWorkersMap valid_workers;
-	if (r.get_roadtype() == RoadType::kWaterway) {
+	if (r.descr().type() == MapObjectType::WATERWAY) {
 		valid_workers.insert(WorkerAmount(r.owner().tribe().ferry(), 1));
 	} else {
 		valid_workers.insert(WorkerAmount(r.owner().tribe().carrier(), 1));
-		if (r.get_roadtype() == RoadType::kBusy) {
+		upcast(const Road, road, &r);
+		assert(road);
+		if (road->is_busy()) {
 			valid_workers.insert(WorkerAmount(r.owner().tribe().carrier2(), 1));
 		}
 	}
@@ -4546,18 +4548,13 @@ int LuaRoad::get_end_flag(lua_State* L) {
       * waterway
 */
 int LuaRoad::get_road_type(lua_State* L) {
-	switch (get(L, get_egbase(L))->get_roadtype()) {
-	case RoadType::kNormal:
-		lua_pushstring(L, "normal");
-		break;
-	case RoadType::kBusy:
-		lua_pushstring(L, "busy");
-		break;
-	case RoadType::kWaterway:
+	RoadBase* r = get(L, get_egbase(L));
+	if (r->descr().type() == MapObjectType::WATERWAY) {
 		lua_pushstring(L, "waterway");
-		break;
-	default:
-		report_error(L, "Unknown Roadtype! This is a bug in widelands!");
+	} else if (upcast(Road, road, r)) {
+		lua_pushstring(L, road->is_busy() ? "busy" : "normal");
+	} else {
+		report_error(L, "Unknown road type! Please report as a bug!");
 	}
 	return 1;
 }

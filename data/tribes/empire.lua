@@ -3,10 +3,18 @@ image_dirname = path.dirname(__file__) .. "images/empire/"
 animations = {}
 add_animation(animations, "frontier", image_dirname, "frontier", {1, 19})
 add_animation(animations, "flag", image_dirname, "flag", {14, 38}, 10)
+add_animation(animations, "bridge_normal_e", image_dirname, "bridge_normal_e", {-2, 12})
+add_animation(animations, "bridge_busy_e", image_dirname, "bridge_busy_e", {-2, 12})
+add_animation(animations, "bridge_normal_se", image_dirname, "bridge_normal_se", {5, 2})
+add_animation(animations, "bridge_busy_se", image_dirname, "bridge_busy_se", {5, 2})
+add_animation(animations, "bridge_normal_sw", image_dirname, "bridge_normal_sw", {36, 3})
+add_animation(animations, "bridge_busy_sw", image_dirname, "bridge_busy_sw", {36, 3})
 
 tribes:new_tribe {
    name = "empire",
    animations = animations,
+
+   bridge_height = 8,
 
    -- Image file paths for this tribe's road and waterway textures
    roads = {

@@ -2115,7 +2115,7 @@ void DefaultAI::update_productionsite_stats() {
 		if (connected_to_wh) {
 			// Add statistics value
 			productionsites.front().bo->current_stats +=
-			   productionsites.front().site->get_crude_statistics();
+			   productionsites.front().site->get_statistics_percent();
 
 			// Check whether this building is completely occupied
 			if (!productionsites.front().site->can_start_working()) {

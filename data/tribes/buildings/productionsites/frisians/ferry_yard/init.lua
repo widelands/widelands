@@ -23,16 +23,23 @@ tribes:new_productionsite_type {
       reed = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 87},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 75},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 66},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 58}
+      }
    },
 
    aihints = {},
@@ -46,7 +53,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "log", amount = 8 },
+      { name = "log", amount = 6 },
+      { name = "cloth", amount = 3 },
    },
 
    programs = {
@@ -56,7 +64,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=20000",
             "callworker=buildferry_1",
-            "consume=log:3",
+            "consume=log:2 cloth",
             "callworker=buildferry_2"
          }
       },

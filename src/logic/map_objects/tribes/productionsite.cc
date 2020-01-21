@@ -287,14 +287,13 @@ ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
      program_timer_(false),
      program_time_(0),
      post_timer_(50),
-     statistics_(STATISTICS_VECTOR_LENGTH, false),
      last_stat_percent_(0),
-     crude_percent_(0),
+     actual_percent_(0),
      last_program_end_time(0),
      is_stopped_(false),
      default_anim_("idle"),
      main_worker_(-1) {
-	calc_statistics();
+	format_statistics_string();
 }
 
 ProductionSite::~ProductionSite() {
@@ -304,25 +303,31 @@ ProductionSite::~ProductionSite() {
 
 void ProductionSite::load_finish(EditorGameBase& egbase) {
 	Building::load_finish(egbase);
-	calc_statistics();
+	format_statistics_string();
 }
 
 /**
  * Display whether we're occupied.
  */
 void ProductionSite::update_statistics_string(std::string* s) {
-	uint32_t const nr_working_positions = descr().nr_working_positions();
-	uint32_t nr_workers = 0;
-	for (uint32_t i = nr_working_positions; i;)
-		nr_workers += working_positions_[--i].worker ? 1 : 0;
-
-	if (nr_workers == 0) {
-		*s = g_gr->styles().color_tag(
-		   _("(not occupied)"), g_gr->styles().building_statistics_style().low_color());
-		return;
+	uint32_t nr_requests = 0;
+	uint32_t nr_coming = 0;
+	for (uint32_t i = 0; i < descr().nr_working_positions(); ++i) {
+		const Widelands::Request* request = working_positions_[i].worker_request;
+		// Check whether a request is being fulfilled or not
+		if (request) {
+			if (request->is_open()) {
+				++nr_requests;
+			} else {
+				++nr_coming;
+			}
+		} else if (working_positions_[i].worker == nullptr) {
+			// We might have no request, but no worker either
+			++nr_requests;
+		}
 	}
 
-	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
+	if (nr_requests > 0) {
 		*s = g_gr->styles().color_tag(
 		   (nr_requests == 1 ?
 		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
@@ -330,6 +335,18 @@ void ProductionSite::update_statistics_string(std::string* s) {
 		       /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
 		          missing. If you need plural forms here, please let us know. */
 		       _("Workers missing")),
+		   g_gr->styles().building_statistics_style().low_color());
+		return;
+	}
+
+	if (nr_coming > 0) {
+		*s = g_gr->styles().color_tag(
+		   (nr_coming == 1 ?
+		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
+		       _("Worker is coming") :
+		       /** TRANSLATORS: Productivity label on a building if there is more than 1 worker
+		          missing. If you need plural forms here, please let us know. */
+		       _("Workers are coming")),
 		   g_gr->styles().building_statistics_style().low_color());
 		return;
 	}
@@ -404,42 +421,28 @@ InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker con
 /**
  * Calculate statistic.
  */
-void ProductionSite::calc_statistics() {
-	// TODO(sirver): this method does too much: it calculates statistics for the
-	// last few cycles, but it also formats them as a string and persists them
-	// into a string for reuse when the class is asked for the statistics
-	// string. However this string should only then be constructed.
-	uint8_t pos;
-	uint8_t ok = 0;
-	uint8_t lastOk = 0;
+void ProductionSite::format_statistics_string() {
+	// TODO(sirver): this method does too much: it formats the actual statistics
+	// as a string and persists them into a string for reuse when the class is
+	// asked for the statistics string. However this string should only then be constructed.
 
-	for (pos = 0; pos < STATISTICS_VECTOR_LENGTH; ++pos) {
-		if (statistics_[pos]) {
-			++ok;
-			if (pos >= STATISTICS_VECTOR_LENGTH / 2)
-				++lastOk;
-		}
-	}
 	// boost::format would treat uint8_t as char
-	const unsigned int percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
-	last_stat_percent_ = percOk;
-
-	const unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
+	const unsigned int percent = get_actual_statistics();
 
 	const std::string perc_str = g_gr->styles().color_tag(
-	   (boost::format(_("%i%%")) % percOk).str(),
-	   (percOk < 33) ? g_gr->styles().building_statistics_style().low_color() :
-	                   (percOk < 66) ? g_gr->styles().building_statistics_style().medium_color() :
-	                                   g_gr->styles().building_statistics_style().high_color());
+	   (boost::format(_("%i%%")) % percent).str(),
+	   (percent < 33) ? g_gr->styles().building_statistics_style().low_color() :
+	                    (percent < 66) ? g_gr->styles().building_statistics_style().medium_color() :
+	                                     g_gr->styles().building_statistics_style().high_color());
 
-	if (0 < percOk && percOk < 100) {
+	if (0 < percent && percent < 100) {
 		RGBColor color = g_gr->styles().building_statistics_style().high_color();
 		std::string trend;
-		if (lastPercOk > percOk) {
+		if (last_stat_percent_ < actual_percent_) {
 			trend_ = Trend::kRising;
 			color = g_gr->styles().building_statistics_style().high_color();
 			trend = "+";
-		} else if (lastPercOk < percOk) {
+		} else if (last_stat_percent_ > actual_percent_) {
 			trend_ = Trend::kFalling;
 			color = g_gr->styles().building_statistics_style().low_color();
 			trend = "-";
@@ -455,6 +458,7 @@ void ProductionSite::calc_statistics() {
 	} else {
 		statistics_string_on_changed_statistics_ = perc_str;
 	}
+	last_stat_percent_ = actual_percent_;
 }
 
 /**
@@ -984,22 +988,19 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 	switch (result) {
 	case ProgramResult::kFailed:
 		failed_skipped_programs_[program_name] = game.get_gametime();
-		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
-		statistics_.push_back(false);
-		calc_statistics();
-		update_crude_statistics(current_duration, false);
+		update_actual_statistics(current_duration, false);
+		format_statistics_string();
 		break;
 	case ProgramResult::kCompleted:
 		failed_skipped_programs_.erase(program_name);
-		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
-		statistics_.push_back(true);
 		train_workers(game);
-		update_crude_statistics(current_duration, true);
-		calc_statistics();
+		update_actual_statistics(current_duration, true);
+		format_statistics_string();
 		break;
 	case ProgramResult::kSkipped:
 		failed_skipped_programs_[program_name] = game.get_gametime();
-		update_crude_statistics(current_duration, false);
+		update_actual_statistics(current_duration, false);
+		format_statistics_string();
 		break;
 	case ProgramResult::kNone:
 		failed_skipped_programs_.erase(program_name);
@@ -1017,8 +1018,8 @@ void ProductionSite::train_workers(Game& game) {
 }
 
 void ProductionSite::notify_player(Game& game, uint8_t minutes, FailNotificationType type) {
-	if (last_stat_percent_ == 0 ||
-	    (last_stat_percent_ <= descr().out_of_resource_productivity_threshold() &&
+	if (get_actual_statistics() == 0 ||
+	    (get_actual_statistics() <= descr().out_of_resource_productivity_threshold() &&
 	     trend_ == Trend::kFalling)) {
 
 		if (type == FailNotificationType::kFull) {
@@ -1093,7 +1094,7 @@ void ProductionSite::set_default_anim(std::string anim) {
 	default_anim_ = anim;
 }
 
-void ProductionSite::update_crude_statistics(uint32_t duration, const bool produced) {
+void ProductionSite::update_actual_statistics(uint32_t duration, const bool produced) {
 	static const uint32_t duration_cap = 180 * 1000;  // This is highest allowed program duration
 	// just for case something went very wrong...
 	static const uint32_t entire_duration = 10 * 60 * 1000;
@@ -1101,8 +1102,9 @@ void ProductionSite::update_crude_statistics(uint32_t duration, const bool produ
 		duration = duration_cap;
 	}
 	const uint32_t past_duration = entire_duration - duration;
-	crude_percent_ = (crude_percent_ * past_duration + produced * duration * 1000) / entire_duration;
-	assert(crude_percent_ <= 1000);  // be sure we do not go above 100 %
+	actual_percent_ =
+	   (actual_percent_ * past_duration + produced * duration * 1000) / entire_duration;
+	assert(actual_percent_ <= 1000);  // be sure we do not go above 100 %
 }
 
 }  // namespace Widelands

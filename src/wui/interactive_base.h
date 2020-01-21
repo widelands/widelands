@@ -25,11 +25,11 @@
 
 #include <SDL_keycode.h>
 
+#include "graphic/road_segments.h"
 #include "graphic/toolbar_imageset.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
-#include "logic/roadtype.h"
 #include "notifications/notifications.h"
 #include "sound/note_sound.h"
 #include "ui_basic/box.h"
@@ -62,11 +62,12 @@ struct WorkareaPreview {
 class InteractiveBase : public UI::Panel, public DebugConsole::Handler {
 public:
 	enum {
-		dfShowCensus = 1,      ///< show census report on buildings
-		dfShowStatistics = 2,  ///< show statistics report on buildings
-		dfDebug = 4,           ///< general debugging info
+		dfShowCensus = 1,         ///< show census report on buildings
+		dfShowStatistics = 2,     ///< show statistics report on buildings
+		dfShowSoldierLevels = 4,  ///< show level information above soldiers
 		dfShowWorkareaOverlap =
-		   8,  ///< highlight overlapping workareas when placing a constructionsite
+		   8,         ///< highlight overlapping workareas when placing a constructionsite
+		dfDebug = 16  ///< general debugging info
 	};
 
 	/// A build help overlay, i.e. small, big, mine, port ...
@@ -233,6 +234,11 @@ protected:
 	                        const Vector2i& hotspot,
 	                        float scale);
 
+	void draw_bridges(RenderTarget* dst,
+	                  const FieldsToDraw::Field* f,
+	                  uint32_t gametime,
+	                  float scale) const;
+
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
 	const Image* get_sel_picture() {
@@ -251,7 +257,8 @@ protected:
 	}
 
 	// Returns the information which overlay text should currently be drawn.
-	TextToDraw get_text_to_draw() const;
+	// Returns InfoToDraw::kNone if not 'show'
+	InfoToDraw get_info_to_draw(bool show) const;
 
 	// Returns the current overlays for the work area previews.
 	Workareas get_workarea_overlays(const Widelands::Map& map);
@@ -376,6 +383,7 @@ private:
 
 	std::unique_ptr<Widelands::CoordPath> buildwaterway_;
 	Widelands::PlayerNumber waterway_build_player_;
+	std::unique_ptr<WorkareaInfo> waterway_work_area_;
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];

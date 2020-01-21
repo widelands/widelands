@@ -1,14 +1,17 @@
 image_dirname = path.dirname(__file__) .. "images/frisians/"
 
+animations = {}
+add_animation(animations, "frontier", image_dirname, "frontier", {8, 26})
+add_animation(animations, "bridge_normal_e", image_dirname, "bridge_normal_e", {-2, 12})
+add_animation(animations, "bridge_busy_e", image_dirname, "bridge_busy_e", {-2, 12})
+add_animation(animations, "bridge_normal_se", image_dirname, "bridge_normal_se", {5, 2})
+add_animation(animations, "bridge_busy_se", image_dirname, "bridge_busy_se", {5, 2})
+add_animation(animations, "bridge_normal_sw", image_dirname, "bridge_normal_sw", {36, 3})
+add_animation(animations, "bridge_busy_sw", image_dirname, "bridge_busy_sw", {36, 3})
+
 tribes:new_tribe {
    name = "frisians",
-   animations = {
-      frontier = {
-         directory = image_dirname,
-         basename = "frontier",
-         hotspot = {8, 26}
-      }
-   },
+   animations = animations,
    spritesheets = {
       flag = {
          directory = image_dirname,
@@ -20,6 +23,8 @@ tribes:new_tribe {
          fps = 10
       }
    },
+
+   bridge_height = 8,
 
    -- Image file paths for this tribe's road and waterway textures
    roads = {
@@ -215,6 +220,10 @@ tribes:new_tribe {
       "berry_bush_strawberry_small",
       "berry_bush_strawberry_medium",
       "berry_bush_strawberry_ripe",
+      "berry_bush_stink_tree_tiny",
+      "berry_bush_stink_tree_small",
+      "berry_bush_stink_tree_medium",
+      "berry_bush_stink_tree_ripe",
       "berry_bush_desert_hackberry_tiny",
       "berry_bush_desert_hackberry_small",
       "berry_bush_desert_hackberry_medium",
@@ -231,6 +240,8 @@ tribes:new_tribe {
       "pond_dry",
       "pond_growing",
       "pond_mature",
+      "pond_burning",
+      "pond_coal",
       "reedfield_tiny",
       "reedfield_small",
       "reedfield_medium",
@@ -271,6 +282,7 @@ tribes:new_tribe {
       "frisians_reed_farm",
       "frisians_well",
       "frisians_clay_pit",
+      "frisians_charcoal_burners_house",
       "frisians_berry_farm",
       "frisians_collectors_house",
       "frisians_beekeepers_house",

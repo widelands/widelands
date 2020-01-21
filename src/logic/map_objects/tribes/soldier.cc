@@ -58,7 +58,7 @@
 namespace Widelands {
 
 namespace {
-
+constexpr int kSoldierHealthBarWidth = 13;
 constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 }  // namespace
 
@@ -549,7 +549,7 @@ Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
  * Draw this soldier. This basically draws him as a worker, but add health points
  */
 void Soldier::draw(const EditorGameBase& game,
-                   const TextToDraw&,
+                   const InfoToDraw& info_to_draw,
                    const Vector2f& field_on_dst,
                    const Coords& coords,
                    float scale,
@@ -563,133 +563,143 @@ void Soldier::draw(const EditorGameBase& game,
 	draw_info_icon(
 	   point_on_dst.cast<int>() -
 	      Vector2i(0, (g_gr->animations().get_animation(get_current_anim()).height() - 7) * scale),
-	   scale, true, dst);
+	   scale, InfoMode::kWalkingAround, info_to_draw, dst);
 	draw_inner(game, point_on_dst, coords, scale, dst);
 }
 
 /**
  * Draw the info icon (level indicators + health bar) for this soldier.
+ * 'draw_mode' determines whether the soldier info is displayed in a building window
+ * or on top of a soldier walking around. 'info_to_draw' checks which info the user wants to see
+ * for soldiers walking around.
  */
 void Soldier::draw_info_icon(Vector2i draw_position,
                              float scale,
-                             const bool anchor_below,
+                             const InfoMode draw_mode,
+                             const InfoToDraw info_to_draw,
                              RenderTarget* dst) const {
-	// Since the graphics below are all pixel perfect and scaling them as floats
-	// looks weird, we round to the nearest fullest integer.
-	scale = std::round(scale);
-	if (scale == 0.f) {
+	if (!(info_to_draw & InfoToDraw::kSoldierLevels)) {
 		return;
 	}
 
-	const Image* healthpic = get_health_level_pic();
-	const Image* attackpic = get_attack_level_pic();
-	const Image* defensepic = get_defense_level_pic();
-	const Image* evadepic = get_evade_level_pic();
+	// Since the graphics below are all pixel perfect and scaling them as floats
+	// looks weird, we round to the nearest fullest integer. We do allow half size though.
+	scale = std::max(0.5f, std::round(scale));
 
 #ifndef NDEBUG
-	// This function assumes stuff about our data files: level icons are all the
-	// same size and this is smaller than the width of the healthbar. This
-	// simplifies the drawing code below a lot. Before it had a lot of if () that
-	// were never tested - since our data files never changed.
-	const int dimension = attackpic->width();
-	assert(attackpic->height() == dimension);
-	assert(healthpic->width() == dimension);
-	assert(healthpic->height() == dimension);
-	assert(defensepic->width() == dimension);
-	assert(defensepic->height() == dimension);
-	assert(evadepic->width() == dimension);
-	assert(evadepic->height() == dimension);
-	assert(kSoldierHealthBarWidth > dimension);
+	{
+		// This function assumes stuff about our data files: level icons are all the
+		// same size and this is smaller than the width of the healthbar. This
+		// simplifies the drawing code below a lot. Before it had a lot of if () that
+		// were never tested - since our data files never changed.
+		const Image* healthpic = get_health_level_pic();
+
+		const Image* attackpic = get_attack_level_pic();
+		const Image* defensepic = get_defense_level_pic();
+		const Image* evadepic = get_evade_level_pic();
+
+		const int dimension = attackpic->width();
+		assert(attackpic->height() == dimension);
+		assert(healthpic->width() == dimension);
+		assert(healthpic->height() == dimension);
+		assert(defensepic->width() == dimension);
+		assert(defensepic->height() == dimension);
+		assert(evadepic->width() == dimension);
+		assert(evadepic->height() == dimension);
+		assert(kSoldierHealthBarWidth > dimension);
+	}
 #endif
 
-	const int icon_size = healthpic->width();
+	const int icon_size = get_health_level_pic()->height();
 
-	if (!anchor_below) {
+	// Draw health info in building windows, or if kSoldierLevels is on.
+	const bool draw_health_bar =
+	   draw_mode == InfoMode::kInBuilding || (info_to_draw & InfoToDraw::kSoldierLevels);
+
+	switch (draw_mode) {
+	case InfoMode::kInBuilding:
 		draw_position.x += kSoldierHealthBarWidth * scale;
 		draw_position.y += 2 * icon_size * scale;
-	} else {
-		draw_position.y -= 5 * scale;
-	}
-
-	// Draw energy bar
-	assert(get_max_health());
-	const Recti energy_outer(draw_position - Vector2i(kSoldierHealthBarWidth, 0) * scale,
-	                         kSoldierHealthBarWidth * 2 * scale, 5 * scale);
-	dst->fill_rect(energy_outer, RGBColor(255, 255, 255));
-
-	// Adjust health to current animation tick
-	uint32_t health_to_show = current_health_;
-	if (battle_) {
-		uint32_t pending_damage = battle_->get_pending_damage(this);
-		if (pending_damage > 0) {
-			int32_t timeshift = owner().egbase().get_gametime() - get_animstart();
-			timeshift = std::min(std::max(0, timeshift), 1000);
-
-			pending_damage *= timeshift;
-			pending_damage /= 1000;
-
-			if (pending_damage > health_to_show) {
-				health_to_show = 0;
-			} else {
-				health_to_show -= pending_damage;
-			}
+		break;
+	case InfoMode::kWalkingAround:
+		if (draw_health_bar) {
+			draw_position.y -= 5 * scale;
 		}
 	}
 
-	int health_width = 2 * (kSoldierHealthBarWidth - 1) * health_to_show / get_max_health();
-	Recti energy_inner(draw_position + Vector2i(-kSoldierHealthBarWidth + 1, 1) * scale,
-	                   health_width * scale, 3 * scale);
-	Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
-	                        (2 * (kSoldierHealthBarWidth - 1) - health_width) * scale, 3 * scale);
+	if (draw_health_bar) {
+		// Draw energy bar
+		assert(get_max_health());
+		const RGBColor& color = owner().get_playercolor();
+		const uint16_t color_sum = color.r + color.g + color.b;
 
-	const RGBColor& color = owner().get_playercolor();
-	RGBColor complement_color;
-	if (static_cast<uint32_t>(color.r) + color.g + color.b > 128 * 3) {
-		complement_color = RGBColor(32, 32, 32);
-	} else {
-		complement_color = RGBColor(224, 224, 224);
+		// The frame gets a slight tint of player color
+		const Recti energy_outer(draw_position - Vector2i(kSoldierHealthBarWidth, 0) * scale,
+		                         kSoldierHealthBarWidth * 2 * scale, 5 * scale);
+		dst->fill_rect(energy_outer, color);
+		dst->brighten_rect(energy_outer, 230 - color_sum / 3);
+
+		// Adjust health to current animation tick
+		uint32_t health_to_show = current_health_;
+		if (battle_) {
+			uint32_t pending_damage = battle_->get_pending_damage(this);
+			if (pending_damage > 0) {
+				int32_t timeshift = owner().egbase().get_gametime() - get_animstart();
+				timeshift = std::min(std::max(0, timeshift), 1000);
+
+				pending_damage *= timeshift;
+				pending_damage /= 1000;
+
+				if (pending_damage > health_to_show) {
+					health_to_show = 0;
+				} else {
+					health_to_show -= pending_damage;
+				}
+			}
+		}
+
+		// Now draw the health bar itself
+		const int health_width = 2 * (kSoldierHealthBarWidth - 1) * health_to_show / get_max_health();
+
+		Recti energy_inner(draw_position + Vector2i(-kSoldierHealthBarWidth + 1, 1) * scale,
+		                   health_width * scale, 3 * scale);
+		Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
+		                        (2 * (kSoldierHealthBarWidth - 1) - health_width) * scale, 3 * scale);
+
+		const RGBColor complement_color =
+		   color_sum > 128 * 3 ? RGBColor(32, 32, 32) : RGBColor(224, 224, 224);
+		dst->fill_rect(energy_inner, color);
+		dst->fill_rect(energy_complement, complement_color);
 	}
 
-	dst->fill_rect(energy_inner, color);
-	dst->fill_rect(energy_complement, complement_color);
+	// Draw level info in building windows, or if kSoldierLevels is on.
+	if (draw_mode == InfoMode::kInBuilding || (info_to_draw & InfoToDraw::kSoldierLevels)) {
+		const auto draw_level_image = [icon_size, scale, &draw_position, dst](
+		                                 const Vector2i& offset, const Image* image) {
+			dst->blitrect_scale(
+			   Rectf(draw_position + offset * icon_size * scale, icon_size * scale, icon_size * scale),
+			   image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
+		};
 
-	const auto draw_level_image = [icon_size, scale, &draw_position, dst](
-	                                 const Vector2i& offset, const Image* image) {
-		dst->blitrect_scale(
-		   Rectf(draw_position + offset * icon_size * scale, icon_size * scale, icon_size * scale),
-		   image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
-	};
-	draw_level_image(Vector2i(-1, -2), attackpic);
-	draw_level_image(Vector2i(0, -2), defensepic);
-	draw_level_image(Vector2i(-1, -1), healthpic);
-	draw_level_image(Vector2i(0, -1), evadepic);
+		draw_level_image(Vector2i(-1, -2), get_attack_level_pic());
+		draw_level_image(Vector2i(0, -2), get_defense_level_pic());
+		draw_level_image(Vector2i(-1, -1), get_health_level_pic());
+		draw_level_image(Vector2i(0, -1), get_evade_level_pic());
+	}
 }
 
 /**
  * Compute the size of the info icon (level indicators + health bar) for soldiers of
  * the given tribe.
  */
-void Soldier::calc_info_icon_size(const TribeDescr& tribe, uint32_t& w, uint32_t& h) {
+void Soldier::calc_info_icon_size(const TribeDescr& tribe, int& w, int& h) {
 	const SoldierDescr* soldierdesc =
 	   static_cast<const SoldierDescr*>(tribe.get_worker_descr(tribe.soldier()));
-	const Image* healthpic = soldierdesc->get_health_level_pic(0);
-	const Image* attackpic = soldierdesc->get_attack_level_pic(0);
-	const Image* defensepic = soldierdesc->get_defense_level_pic(0);
-	const Image* evadepic = soldierdesc->get_evade_level_pic(0);
-	uint16_t hpw = healthpic->width();
-	uint16_t hph = healthpic->height();
-	uint16_t atw = attackpic->width();
-	uint16_t ath = attackpic->height();
-	uint16_t dew = defensepic->width();
-	uint16_t deh = defensepic->height();
-	uint16_t evw = evadepic->width();
-	uint16_t evh = evadepic->height();
-
-	uint16_t animw;
-	animw = kSoldierHealthBarWidth;
-
-	w = std::max(std::max(atw + dew, hpw + evw), 2 * animw);
-	h = 5 + std::max(hph + ath, evh + deh);
+	// The function draw_info_icon() already assumes that all icons have the same dimensions,
+	// so we can make the same assumption here too.
+	const int dimension = soldierdesc->get_health_level_pic(0)->height();
+	w = 2 * std::max(dimension, kSoldierHealthBarWidth);
+	h = 5 + 2 * dimension;
 }
 
 void Soldier::pop_task_or_fight(Game& game) {

@@ -27,6 +27,7 @@
 #include "base/macros.h"
 #include "base/math.h"
 #include "base/wexception.h"
+#include "economy/roadbase.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
 #include "graphic/rendertarget.h"
@@ -705,34 +706,41 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 	const float triangle_w = kTriangleWidth * scale;
 	const float triangle_h = kTriangleHeight * scale;
 
+	bool bridge = false;
 	switch (walking_) {
 	case WALK_NW:
 		map.get_brn(end, &start);
 		spos.x += triangle_w / 2.f;
 		spos.y += triangle_h;
+		bridge = is_bridge_segment(end.field->road_southeast);
 		break;
 	case WALK_NE:
 		map.get_bln(end, &start);
 		spos.x -= triangle_w / 2.f;
 		spos.y += triangle_h;
+		bridge = is_bridge_segment(end.field->road_southwest);
 		break;
 	case WALK_W:
 		map.get_rn(end, &start);
 		spos.x += triangle_w;
+		bridge = is_bridge_segment(end.field->road_east);
 		break;
 	case WALK_E:
 		map.get_ln(end, &start);
 		spos.x -= triangle_w;
+		bridge = is_bridge_segment(start.field->road_east);
 		break;
 	case WALK_SW:
 		map.get_trn(end, &start);
 		spos.x += triangle_w / 2.f;
 		spos.y -= triangle_h;
+		bridge = is_bridge_segment(start.field->road_southwest);
 		break;
 	case WALK_SE:
 		map.get_tln(end, &start);
 		spos.x -= triangle_w / 2.f;
 		spos.y -= triangle_h;
+		bridge = is_bridge_segment(start.field->road_southeast);
 		break;
 
 	case IDLE:
@@ -750,6 +758,10 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 		   static_cast<float>(game.get_gametime() - walkstart_) / (walkend_ - walkstart_), 0.f, 1.f);
 		epos.x = f * epos.x + (1.f - f) * spos.x;
 		epos.y = f * epos.y + (1.f - f) * spos.y;
+		if (bridge) {
+			epos.y -= game.player(end.field->get_owned_by()).tribe().bridge_height() * scale *
+			          (1 - 4 * (f - 0.5f) * (f - 0.5f));
+		}
 	}
 	return epos;
 }
@@ -758,7 +770,7 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw(const EditorGameBase& egbase,
-               const TextToDraw&,
+               const InfoToDraw&,
                const Vector2f& field_on_dst,
                const Widelands::Coords& coords,
                const float scale,

@@ -82,7 +82,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs mead or workers need experience",
             "consume=barley water honey",
-            "sleep=35000",
+            "sleep=30000",
             "animate=working 35000",
             "produce=mead"
          }

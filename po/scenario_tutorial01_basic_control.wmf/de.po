@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # Wuzzy <almikes@aol.com>, 2016
@@ -11,15 +11,15 @@
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # ‮ <ovvv@web.de>, 2016
 # Raymond Vetter, 2018
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2019
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2020
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-21 08:08+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-10 12:51+0000\n"
+"PO-Revision-Date: 2020-01-10 22:02+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -315,8 +315,8 @@ msgstr "Lass uns den Fortschritt sehen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
 msgid ""
-"Click on the construction site to have a look at it, then close it again "
-"when you have seen enough."
+"Click on the construction site to have a look at it, then close its window "
+"again when you have seen enough."
 msgstr "Klicke auf die Baustelle, um einen Blick darauf zu werfen. Dann schließe das Fenster wieder, wenn du genug gesehen hast."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:204
