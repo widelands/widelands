@@ -429,6 +429,7 @@ private:
 
 	std::unique_ptr<Widelands::CoordPath> buildwaterway_;
 	Widelands::PlayerNumber waterway_build_player_;
+	std::unique_ptr<WorkareaInfo> waterway_work_area_;
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
