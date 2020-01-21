@@ -57,15 +57,19 @@ uint32_t property_to_serial(Property&);
 // We support just about every Lua type and class the scenario scripter will need –
 // classes they will likely not need are not supported. (No editor-Lua functions,
 // generic classes like EGBase where only one subclass will ever be accessed, etc.)
+// Do not change the order!
 enum class VariableTypeID : uint16_t {
 	Nil = 0,
+	// The Any type is BAD STYLE!!! DO NOT USE!!!
+	// Required for certain builtin functions like array_combine() and save_campaign_data()
 	Any,
+	// One type for both tables and arrays: Arrays are Tables with Integer as key type
+	Table,
 
 	Integer,
 	Double,
 	Boolean,
 	String,
-	Table,
 
 	Game,
 	Map,
@@ -137,60 +141,55 @@ enum class VariableTypeID : uint16_t {
 
 struct VariableType {
 public:
-	VariableType(VariableTypeID i) : id_(i) {
+	VariableType(VariableTypeID i) : id_(i), key_(nullptr), value_(nullptr) {
+	}
+	VariableType(const VariableType& k, const VariableType& v)
+	   : id_(VariableTypeID::Table), key_(new VariableType(k)), value_(new VariableType(v)) {
+	}
+	VariableType(FileRead&);
+
+	VariableType(const VariableType& vt)
+	   : id_(vt.id_),
+	     key_(vt.key_ ? new VariableType(*vt.key_) : nullptr),
+	     value_(vt.value_ ? new VariableType(*vt.value_) : nullptr) {
+	}
+	VariableType& operator=(const VariableType& vt) {
+		id_ = vt.id_;
+		key_.reset(vt.key_ ? new VariableType(*vt.key_) : nullptr);
+		value_.reset(vt.value_ ? new VariableType(*vt.value_) : nullptr);
+		return *this;
 	}
 
-	static VariableType load(FileRead&);
-
-	virtual ~VariableType() {
+	~VariableType() {
 	}
 
 	const VariableTypeID& id() const {
 		return id_;
 	}
+	const VariableType& key_type() const {
+		assert(key_);
+		return *key_;
+	}
+	const VariableType& value_type() const {
+		assert(value_);
+		return *value_;
+	}
 
-	virtual bool is_subclass(const VariableType&) const;
+	bool is_subclass(const VariableType&) const;
 
-	virtual void write(FileWrite&) const;
+	void write(FileWrite&) const;
 
-	virtual bool operator==(const VariableType& v) const {
-		return id_ == v.id_;
+	bool operator==(const VariableType& v) const {
+		return id_ == v.id_ &&
+		       (id_ != VariableTypeID::Table || (*key_ == *v.key_ && *value_ == *v.value_));
 	}
 
 private:
 	VariableTypeID id_;
-};
 
-struct VariableTypeTable : public VariableType {
-public:
-	VariableTypeTable(const VariableType& k, const VariableType& v)
-	   : VariableType(VariableTypeID::Table), key_(k), value_(v) {
-	}
-	static VariableTypeTable load(FileRead&);
-
-	~VariableTypeTable() override {
-	}
-
-	const VariableType& key_type() const {
-		return key_;
-	}
-	const VariableType& value_type() const {
-		return value_;
-	}
-
-	bool is_subclass(const VariableType&) const override;
-
-	void write(FileWrite&) const override;
-
-	bool operator==(const VariableType& other) const override {
-		if (upcast(const VariableTypeTable, t, &other)) {
-			return key_ == t->key_ && value_ == t->value_;
-		}
-		return false;
-	}
-
-private:
-	VariableType key_, value_;
+	// Valid only for tables
+	std::unique_ptr<VariableType> key_;
+	std::unique_ptr<VariableType> value_;
 };
 
 std::string descname(VariableTypeID);
@@ -259,6 +258,8 @@ public:
 	virtual ScriptingObject::ID id() const = 0;
 
 	uint32_t serial() const {
+		if (!serial_)
+			throw wexception("ScriptingObject of type %s was not initialized", typeid(*this).name());
 		return serial_;
 	}
 

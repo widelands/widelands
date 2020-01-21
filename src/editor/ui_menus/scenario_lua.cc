@@ -71,7 +71,8 @@ ScenarioLuaOptionsMenu::ScenarioLuaOptionsMenu(EditorInteractive& parent,
 	functions_box_->add(functions_dropdown_.get(), UI::Box::Resizing::kFullSize);
 	functions_box_->add(functions_lowerbox_.get(), UI::Box::Resizing::kExpandBoth);
 
-	// NOCOM add sidepanel buttons
+	// functions_body_->add(_("The scripting UI is not implemented yet."), 0, nullptr, false, "",
+	// ""); NOCOM add sidepanel buttons
 
 	variables_box_.reset(new UI::Box(&tabs_, 0, 0, UI::Box::Vertical));
 	tabs_.add("vars", _("Variables"), variables_box_.get(),

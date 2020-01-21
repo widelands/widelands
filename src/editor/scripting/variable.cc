@@ -41,7 +41,7 @@ void Variable::load(FileRead& fr, Loader& l) {
 			throw Widelands::UnhandledVersionError(
 			   "Variable", packet_version, kCurrentPacketVersionVariable);
 		}
-		type_ = VariableType::load(fr);
+		type_ = VariableType(fr);
 		name_ = fr.c_string();
 		check_name_valid(name_);
 	} catch (const WException& e) {
@@ -164,28 +164,24 @@ void GetTable::save(FileWrite& fw) const {
 	fw.unsigned_32(property_->serial());
 }
 const VariableType& GetTable::type() const {
-	return dynamic_cast<const VariableTypeTable&>(table_->type()).value_type();
+	return table_->type().value_type();
 }
 void GetTable::set_table(Assignable& t) {
 	table_ = &t;
-	if (property_ && !property_->type().is_subclass(
-	                    dynamic_cast<const VariableTypeTable&>(table_->type()).key_type())) {
+	if (property_ && !property_->type().is_subclass(table_->type().key_type())) {
 		property_ = nullptr;
 	}
 }
 void GetTable::set_property(Assignable& p) {
 	property_ = &p;
-	if (table_ && !property_->type().is_subclass(
-	                 dynamic_cast<const VariableTypeTable&>(table_->type()).key_type())) {
+	if (table_ && !property_->type().is_subclass(table_->type().key_type())) {
 		table_ = nullptr;
 	}
 }
 void GetTable::write_lua(int32_t i, FileWrite& fw) const {
 	assert(table_);
 	assert(property_);
-	assert(dynamic_cast<const VariableTypeTable&>(table_->type())
-	          .key_type()
-	          .is_subclass(property_->type()));
+	assert(table_->type().key_type().is_subclass(property_->type()));
 	table_->write_lua(i, fw);
 	// We do not use 'x.y' syntax even if we have a string as key type, because figuring
 	// out whether we have a string literal here and telling it not to use quotation marks

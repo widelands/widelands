@@ -324,26 +324,22 @@ void FS_SetTable::save(FileWrite& fw) const {
 }
 void FS_SetTable::set_property(Assignable& p) {
 	property_ = &p;
-	if (table_ && !property_->type().is_subclass(
-	                 dynamic_cast<const VariableTypeTable&>(table_->type()).key_type())) {
+	if (table_ && !property_->type().is_subclass(table_->type().key_type())) {
 		table_ = nullptr;
 	}
 }
 void FS_SetTable::set_value(Assignable& v) {
 	value_ = &v;
-	if (table_ && !value_->type().is_subclass(
-	                 dynamic_cast<const VariableTypeTable&>(table_->type()).value_type())) {
+	if (table_ && !value_->type().is_subclass(table_->type().value_type())) {
 		table_ = nullptr;
 	}
 }
 void FS_SetTable::set_table(Assignable& t) {
 	table_ = &t;
-	if (property_ && !property_->type().is_subclass(
-	                    dynamic_cast<const VariableTypeTable&>(table_->type()).key_type())) {
+	if (property_ && !property_->type().is_subclass(table_->type().key_type())) {
 		property_ = nullptr;
 	}
-	if (value_ && !value_->type().is_subclass(
-	                 dynamic_cast<const VariableTypeTable&>(table_->type()).value_type())) {
+	if (value_ && !value_->type().is_subclass(table_->type().value_type())) {
 		value_ = nullptr;
 	}
 }
@@ -351,10 +347,8 @@ void FS_SetTable::write_lua(int32_t i, FileWrite& fw) const {
 	assert(table_);
 	assert(property_);
 	assert(value_);
-	assert(property_->type().is_subclass(
-	   dynamic_cast<const VariableTypeTable&>(table_->type()).key_type()));
-	assert(value_->type().is_subclass(
-	   dynamic_cast<const VariableTypeTable&>(table_->type()).value_type()));
+	assert(property_->type().is_subclass(table_->type().key_type()));
+	assert(value_->type().is_subclass(table_->type().value_type()));
 	table_->write_lua(i, fw);
 	fw.print_f("[");
 	property_->write_lua(i, fw);

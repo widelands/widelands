@@ -64,10 +64,10 @@ void LuaFunction::load(FileRead& fr, Loader& loader) {
 			   "LuaFunction", packet_version, kCurrentPacketVersionFunction);
 		}
 		rename(fr.c_string());
-		set_returns(VariableType::load(fr));
+		set_returns(VariableType(fr));
 		for (size_t n = fr.unsigned_32(); n; --n) {
 			const std::string v(fr.c_string());
-			parameters_.push_back(std::make_pair(v, VariableType::load(fr)));
+			parameters_.push_back(std::make_pair(v, VariableType(fr)));
 		}
 		for (size_t n = fr.unsigned_32(); n; --n) {
 			loader.push_back(fr.unsigned_32());

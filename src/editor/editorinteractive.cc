@@ -1311,15 +1311,25 @@ std::string EditorInteractive::try_finalize() {
 #define VAL(x)                                                                                     \
 	ConstexprInteger* val_##x = new ConstexprInteger(x);                                            \
 	val_##x->init(*scripting_saver_);
+			VAL(1)
 			VAL(5)
 			VAL(10)
 			VAL(20)
 			VAL(30)
 			VAL(50)
 #undef VAL
-			ConstexprBoolean* _true = new ConstexprBoolean(true);
-			_true->init(*scripting_saver_);
-			FS_While* _while = new FS_While(true, _true);
+
+			FS_FunctionCall* fc1 = new FS_FunctionCall(builtin_f("game").function.get(), nullptr, {});
+			fc1->init(*scripting_saver_);
+			GetProperty* get2 = new GetProperty(fc1, builtin_p("players").property.get());
+			get2->init(*scripting_saver_);
+			GetTable* get3 = new GetTable(get2, val_1);
+			get3->init(*scripting_saver_);
+			GetProperty* get4 = new GetProperty(get3, builtin_p("pl_defeated").property.get());
+			get4->init(*scripting_saver_);
+			OperatorNot* _not = new OperatorNot(get4);
+			_not->init(*scripting_saver_);
+			FS_While* _while = new FS_While(true, _not);
 			_while->init(*scripting_saver_);
 
 			{
@@ -1360,13 +1370,24 @@ std::string EditorInteractive::try_finalize() {
 				o_a_30->init(*scripting_saver_);
 				OperatorSubtract* o_s_20 = new OperatorSubtract(get, val_20);
 				o_s_20->init(*scripting_saver_);
-				OperatorAdd* o_a_5 = new OperatorAdd(get, val_5);
-				o_a_5->init(*scripting_saver_);
 				OperatorSubtract* o_s_10 = new OperatorSubtract(get, val_10);
 				o_s_10->init(*scripting_saver_);
 
+				FS_If* _if = new FS_If(o_l_5);
+				_if->init(*scripting_saver_);
+
+				Variable* v_i = new Variable(VariableType(VariableTypeID::Integer), "i");
+				v_i->init(*scripting_saver_);
+				Variable* v_j = new Variable(VariableType(VariableTypeID::Field), "f");
+				v_j->init(*scripting_saver_);
+				FS_FunctionCall* f_r =
+				   new FS_FunctionCall(builtin_f("field_region").function.get(), v_field, {val_1});
+				f_r->init(*scripting_saver_);
+				FS_ForEach* _for = new FS_ForEach(v_i, v_j, f_r);
+				_for->init(*scripting_saver_);
+
 				FS_SetProperty* set_5 =
-				   new FS_SetProperty(v_field, builtin_p("f_height").property.get(), o_a_5);
+				   new FS_SetProperty(v_j, builtin_p("f_height").property.get(), v_i);
 				set_5->init(*scripting_saver_);
 				FS_SetProperty* set_30 =
 				   new FS_SetProperty(v_field, builtin_p("f_height").property.get(), o_a_30);
@@ -1378,15 +1399,14 @@ std::string EditorInteractive::try_finalize() {
 				   new FS_SetProperty(v_field, builtin_p("f_height").property.get(), o_s_20);
 				set__20->init(*scripting_saver_);
 
-				FS_If* _if = new FS_If(o_l_5);
-				_if->init(*scripting_saver_);
+				_for->mutable_body().push_back(set_5);
 				_while->mutable_body().push_back(_if);
 				_if->mutable_if_body().push_back(set_30);
 				_if->mutable_elseif_bodies().push_back(
 				   std::pair<Assignable*, std::list<FunctionStatement*>>(o_g_50, {set__20}));
 				_if->mutable_elseif_bodies().push_back(
 				   std::pair<Assignable*, std::list<FunctionStatement*>>(o_g_20, {set__10}));
-				_if->mutable_else_body().push_back(set_5);
+				_if->mutable_else_body().push_back(_for);
 			}
 			main_func->mutable_body().push_back(_while);
 		}

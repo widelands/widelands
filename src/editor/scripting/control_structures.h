@@ -93,13 +93,11 @@ public:
 		return table_;
 	}
 	void set_i(Variable& v) {
-		assert(
-		   dynamic_cast<const VariableTypeTable&>(table_->type()).key_type().is_subclass(v.type()));
+		assert(table_->type().key_type().is_subclass(v.type()));
 		i_ = &v;
 	}
 	void set_j(Variable& v) {
-		assert(
-		   dynamic_cast<const VariableTypeTable&>(table_->type()).value_type().is_subclass(v.type()));
+		assert(table_->type().value_type().is_subclass(v.type()));
 		j_ = &v;
 	}
 	void set_table(Assignable& t) {

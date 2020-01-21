@@ -205,25 +205,26 @@ uint32_t property_to_serial(Property& p) {
 }
 
 /************************************************************
-                        VariableType
+                       VariableTypes
 ************************************************************/
 
 constexpr uint16_t kCurrentPacketVersionVariableType = 1;
-constexpr uint16_t kCurrentPacketVersionVariableTypeTable = 1;
 
-// static
-VariableType VariableType::load(FileRead& fr) {
+VariableType::VariableType(FileRead& fr) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version != kCurrentPacketVersionVariableType) {
 			throw Widelands::UnhandledVersionError(
 			   "VariableType", packet_version, kCurrentPacketVersionVariableType);
 		}
-		VariableTypeID id = static_cast<VariableTypeID>(fr.unsigned_16());
-		if (id == VariableTypeID::Table) {
-			return VariableTypeTable::load(fr);
+		id_ = static_cast<VariableTypeID>(fr.unsigned_16());
+		if (id_ == VariableTypeID::Table) {
+			key_.reset(new VariableType(fr));
+			value_.reset(new VariableType(fr));
+		} else {
+			key_.reset(nullptr);
+			value_.reset(nullptr);
 		}
-		return VariableType(id);
 	} catch (const WException& e) {
 		throw wexception("VariableType: %s", e.what());
 	}
@@ -231,39 +232,20 @@ VariableType VariableType::load(FileRead& fr) {
 void VariableType::write(FileWrite& fw) const {
 	fw.unsigned_16(kCurrentPacketVersionVariableType);
 	fw.unsigned_16(static_cast<uint16_t>(id_));
+	if (id_ == VariableTypeID::Table) {
+		assert(key_);
+		assert(value_);
+		key_->write(fw);
+		value_->write(fw);
+	}
 }
 
 bool VariableType::is_subclass(const VariableType& v) const {
+	if (id_ == VariableTypeID::Table) {
+		return v.id_ == VariableTypeID::Table && key_->is_subclass(*v.key_) &&
+		       value_->is_subclass(*v.value_);
+	}
 	return is(id_, v.id_);
-}
-
-// static
-VariableTypeTable VariableTypeTable::load(FileRead& fr) {
-	try {
-		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version != kCurrentPacketVersionVariableTypeTable) {
-			throw Widelands::UnhandledVersionError(
-			   "VariableTypeTable", packet_version, kCurrentPacketVersionVariableTypeTable);
-		}
-		VariableType k = VariableType::load(fr);
-		VariableType v = VariableType::load(fr);
-		return VariableTypeTable(k, v);
-	} catch (const WException& e) {
-		throw wexception("VariableTypeTable: %s", e.what());
-	}
-}
-void VariableTypeTable::write(FileWrite& fw) const {
-	VariableType::write(fw);
-	fw.unsigned_16(kCurrentPacketVersionVariableTypeTable);
-	key_.write(fw);
-	value_.write(fw);
-}
-
-bool VariableTypeTable::is_subclass(const VariableType& v) const {
-	if (upcast(const VariableTypeTable, t, &v)) {
-		return key_.is_subclass(t->key_) && value_.is_subclass(t->value_);
-	}
-	return false;
 }
 
 // static
@@ -520,6 +502,10 @@ void ScriptingSaver::save(FileWrite& fw) const {
 	fw.unsigned_16(kCurrentPacketVersionScripting);
 	fw.unsigned_32(list_.size());
 	for (const auto& a : list_) {
+		if (!a->serial()) {
+			throw wexception(
+			   "ScriptingSaver: a scripting object of type %s was not initialized", typeid(*a).name());
+		}
 		a->save(fw);
 	}
 }

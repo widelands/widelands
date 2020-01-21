@@ -108,10 +108,10 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
    new BuiltinFunctionInfo("array_combine", []() { return
 		_("Concatenates the given arrays into a single array."); },
 		new FunctionBase("array_combine", VariableType(VariableTypeID::Nil), // call on
-   		VariableTypeTable(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Any)), // returns
-                       {std::make_pair("array1", VariableTypeTable(VariableType(VariableTypeID::Integer),
+   		VariableType(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Any)), // returns
+                       {std::make_pair("array1", VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Any))),
-                       std::make_pair("array2", VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       std::make_pair("array2", VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Any)))}),
       "scripting/table.lua"),
 
@@ -189,14 +189,14 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType(VariableTypeID::Nil), // returns
                        {std::make_pair("campaign_name", VariableType(VariableTypeID::String)),
                        std::make_pair("scenario_name", VariableType(VariableTypeID::String)),
-                       std::make_pair("data", VariableTypeTable(VariableType(VariableTypeID::String),
+                       std::make_pair("data", VariableType(VariableType(VariableTypeID::String),
                        VariableType(VariableTypeID::Any)))})),
    new BuiltinFunctionInfo(
       "read_campaign_data",
       []() { return _("Read campaign data saved by another scenario."); },
       new FunctionBase("read_campaign_data",
                        VariableType(VariableTypeID::Game), // call on
-                       VariableTypeTable(VariableType(VariableTypeID::Any),
+                       VariableType(VariableType(VariableTypeID::Any),
                        VariableType(VariableTypeID::Any)), // returns
                        {std::make_pair("campaign_name", VariableType(VariableTypeID::String)),
                        std::make_pair("scenario_name", VariableType(VariableTypeID::String))})),
@@ -290,7 +290,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType(VariableTypeID::Message), // returns
                        {std::make_pair("title", VariableType(VariableTypeID::String)),
                        std::make_pair("text", VariableType(VariableTypeID::String)),
-                       std::make_pair("args", VariableTypeTable(VariableType(VariableTypeID::String),
+                       std::make_pair("args", VariableType(VariableType(VariableTypeID::String),
                        VariableType(VariableTypeID::Any)))})),
    new BuiltinFunctionInfo(
       "msgbox",
@@ -306,7 +306,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType(VariableTypeID::Nil), // returns
                        {std::make_pair("title", VariableType(VariableTypeID::String)),
                        std::make_pair("text", VariableType(VariableTypeID::String)),
-                       std::make_pair("args", VariableTypeTable(VariableType(VariableTypeID::String),
+                       std::make_pair("args", VariableType(VariableType(VariableTypeID::String),
                        VariableType(VariableTypeID::Any)))})),
    new BuiltinFunctionInfo(
       "player_sees",
@@ -328,7 +328,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
       new FunctionBase("reveal_fields",
                        VariableType(VariableTypeID::Player), // call on
                        VariableType(VariableTypeID::Nil), // returns
-                       {std::make_pair("fields", VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       {std::make_pair("fields", VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Field)))})),
    new BuiltinFunctionInfo(
       "player_hide",
@@ -336,7 +336,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
       new FunctionBase("hide_fields",
                        VariableType(VariableTypeID::Player), // call on
                        VariableType(VariableTypeID::Nil), // returns
-                       {std::make_pair("fields", VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       {std::make_pair("fields", VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Field)))})),
    new BuiltinFunctionInfo(
       "allow_bld",
@@ -344,7 +344,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
       new FunctionBase("allow_buildings",
                        VariableType(VariableTypeID::Player), // call on
                        VariableType(VariableTypeID::Nil), // returns
-                       {std::make_pair("buildings", VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       {std::make_pair("buildings", VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Building)))})),
    new BuiltinFunctionInfo(
       "forbid_bld",
@@ -352,7 +352,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
       new FunctionBase("forbid_buildings",
                        VariableType(VariableTypeID::Player), // call on
                        VariableType(VariableTypeID::Nil), // returns
-                       {std::make_pair("buildings", VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       {std::make_pair("buildings", VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Building)))})),
    new BuiltinFunctionInfo(
       "scenario_solved",
@@ -366,7 +366,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
       []() { return _("Returns an array of all the player’s ships."); },
       new FunctionBase("get_ships",
                        VariableType(VariableTypeID::Player), // call on
-                       VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Ship)), // returns
                        {})),
    new BuiltinFunctionInfo(
@@ -374,7 +374,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
       []() { return _("Returns an array of all the player’s buildings of the specified type."); },
       new FunctionBase("get_buildings",
                        VariableType(VariableTypeID::Player), // call on
-                       VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Building)), // returns
                        {std::make_pair("internal_building_name", VariableType(VariableTypeID::String))})),
    new BuiltinFunctionInfo(
@@ -470,7 +470,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
       []() { return _("Returns an array with all fields within a certain radius of this field."); },
       new FunctionBase("region",
                        VariableType(VariableTypeID::Field), // call on
-                       VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Field)), // returns
                        {std::make_pair("radius", VariableType(VariableTypeID::Integer))})),
    new BuiltinFunctionInfo(
@@ -478,7 +478,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
       []() { return _("Returns an array with all fields inside a certain hollow area around this field."); },
       new FunctionBase("region",
                        VariableType(VariableTypeID::Field), // call on
-                       VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Field)), // returns
                        {std::make_pair("outer_radius", VariableType(VariableTypeID::Integer)),
                        std::make_pair("inner_radius", VariableType(VariableTypeID::Integer))})),
@@ -555,7 +555,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                       "productionsite as a table of {ware_name = ware_amount} pairs."); },
       new FunctionBase("produced_wares",
                        VariableType(VariableTypeID::ProductionSiteDescr), // call on
-                       VariableTypeTable(VariableType(VariableTypeID::String),
+                       VariableType(VariableType(VariableTypeID::String),
                        VariableType(VariableTypeID::Integer)), // returns
                        {std::make_pair("production_program_internal_name", VariableType(VariableTypeID::String))})),
    new BuiltinFunctionInfo(
@@ -564,7 +564,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                       "productionsite as a table of {worker_name = worker_amount} pairs."); },
       new FunctionBase("recruited_workers",
                        VariableType(VariableTypeID::ProductionSiteDescr), // call on
-                       VariableTypeTable(VariableType(VariableTypeID::String),
+                       VariableType(VariableType(VariableTypeID::String),
                        VariableType(VariableTypeID::Integer)), // returns
                        {std::make_pair("production_program_internal_name", VariableType(VariableTypeID::String))})),
 
@@ -576,7 +576,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                       "of the given tribe that require this ware for production."); },
       new FunctionBase("consumers",
                        VariableType(VariableTypeID::WareDescr), // call on
-                       VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::BuildingDescr)), // returns
                        {std::make_pair("tribe_internal_name", VariableType(VariableTypeID::String))})),
    new BuiltinFunctionInfo(
@@ -585,7 +585,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                       "of the given tribe that produce this ware."); },
       new FunctionBase("producers",
                        VariableType(VariableTypeID::WareDescr), // call on
-                       VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::BuildingDescr)), // returns
                        {std::make_pair("tribe_internal_name", VariableType(VariableTypeID::String))})),
    new BuiltinFunctionInfo(
@@ -721,7 +721,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType(VariableTypeID::MilitarySite), // call on
                        VariableType(VariableTypeID::Integer), // returns
                        {std::make_pair("soldier_descr",
-                       VariableTypeTable(VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       VariableType(VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Integer)), VariableType(VariableTypeID::Integer)))})),
    new BuiltinFunctionInfo(
       "ms_set_soldiers",
@@ -733,7 +733,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType(VariableTypeID::MilitarySite), // call on
                        VariableType(VariableTypeID::Nil), // returns
                        {std::make_pair("soldiers",
-                       VariableTypeTable(VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       VariableType(VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Integer)), VariableType(VariableTypeID::Integer)))})),
 
 	// TrainingSite
@@ -747,7 +747,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType(VariableTypeID::TrainingSite), // call on
                        VariableType(VariableTypeID::Integer), // returns
                        {std::make_pair("soldier_descr",
-                       VariableTypeTable(VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       VariableType(VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Integer)), VariableType(VariableTypeID::Integer)))})),
    new BuiltinFunctionInfo(
       "ts_set_soldiers",
@@ -759,7 +759,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType(VariableTypeID::TrainingSite), // call on
                        VariableType(VariableTypeID::Nil), // returns
                        {std::make_pair("soldiers",
-                       VariableTypeTable(VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       VariableType(VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Integer)), VariableType(VariableTypeID::Integer)))})),
 
    // Warehouse
@@ -803,7 +803,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType(VariableTypeID::Warehouse), // call on
                        VariableType(VariableTypeID::Integer), // returns
                        {std::make_pair("soldier_descr",
-                       VariableTypeTable(VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       VariableType(VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Integer)), VariableType(VariableTypeID::Integer)))})),
    new BuiltinFunctionInfo(
       "wh_set_soldiers",
@@ -815,7 +815,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType(VariableTypeID::Warehouse), // call on
                        VariableType(VariableTypeID::Nil), // returns
                        {std::make_pair("soldiers",
-                       VariableTypeTable(VariableTypeTable(VariableType(VariableTypeID::Integer),
+                       VariableType(VariableType(VariableType(VariableTypeID::Integer),
                        VariableType(VariableTypeID::Integer)), VariableType(VariableTypeID::Integer)))})),
    new BuiltinFunctionInfo(
       "wh_setpol",
@@ -929,7 +929,7 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 	new BuiltinPropertyInfo("players", []() { return _("An array with the player instances."); },
 		new Property("players", true,
 			VariableType(VariableTypeID::Game), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Player)) // type
+			VariableType(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Player)) // type
 		)),
 
 	// Player
@@ -982,28 +982,28 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 	"a building by setting the value. Use allow_buildings() or forbid_buildings() for that."); },
 		new Property("allowed_buildings", true,
 			VariableType(VariableTypeID::Player), // class
-			VariableTypeTable(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Boolean)) // type
+			VariableType(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Boolean)) // type
 		)),
 	new BuiltinPropertyInfo("pl_objectives", []() { return
 	_("A table of name:Objective. You can change the objectives in this table "
 	"and it will be reflected in the game. To add a new item, use add_objective()."); },
 		new Property("objectives", true,
 			VariableType(VariableTypeID::Player), // class
-			VariableTypeTable(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Objective)) // type
+			VariableType(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Objective)) // type
 		)),
 	new BuiltinPropertyInfo("pl_messages", []() { return
 	_("An array of all the messages sent to the player. Note that you can’t add "
 	"messages to this array), use send_message() for that."); },
 		new Property("messages", true,
 			VariableType(VariableTypeID::Player), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Message)) // type
+			VariableType(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Message)) // type
 		)),
 	new BuiltinPropertyInfo("pl_inbox", []() { return
 	_("An array of the messages that are either read or new. Note that "
 	"you can’t add messages to this array), use send_message() for that."); },
 		new Property("inbox", true,
 			VariableType(VariableTypeID::Player), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Message)) // type
+			VariableType(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Message)) // type
 		)),
 
 	// Objective
@@ -1097,8 +1097,8 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 	_("An array of tables of {x, y} pairs with the coordinates of the port spaces."); },
 		new Property("port_spaces", true,
 			VariableType(VariableTypeID::Map), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer),
-			VariableTypeTable(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Integer))) // type
+			VariableType(VariableType(VariableTypeID::Integer),
+			VariableType(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Integer))) // type
 		)),
 	new BuiltinPropertyInfo("map_w", []() { return _("The map’s width."); },
 		new Property("width", true,
@@ -1161,35 +1161,35 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 	_("An array with all the BuildingDescriptions this tribe uses"); },
 		new Property("buildings", true,
 			VariableType(VariableTypeID::TribeDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer),
+			VariableType(VariableType(VariableTypeID::Integer),
 			VariableType(VariableTypeID::BuildingDescr)) // type
 		)),
 	new BuiltinPropertyInfo("td_workers", []() { return
 	_("An array with all the WorkerDescriptions this tribe uses"); },
 		new Property("workers", true,
 			VariableType(VariableTypeID::TribeDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer),
+			VariableType(VariableType(VariableTypeID::Integer),
 			VariableType(VariableTypeID::WorkerDescr)) // type
 		)),
 	new BuiltinPropertyInfo("td_wares", []() { return
 	_("An array with all the WareDescriptions this tribe uses"); },
 		new Property("wares", true,
 			VariableType(VariableTypeID::TribeDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer),
+			VariableType(VariableType(VariableTypeID::Integer),
 			VariableType(VariableTypeID::WorkerDescr)) // type
 		)),
 	new BuiltinPropertyInfo("td_immovables", []() { return
 	_("An array with all the ImmovableDescriptions this tribe uses"); },
 		new Property("immovables", true,
 			VariableType(VariableTypeID::TribeDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer),
+			VariableType(VariableType(VariableTypeID::Integer),
 			VariableType(VariableTypeID::ImmovableDescr)) // type
 		)),
 	new BuiltinPropertyInfo("td_resi", []() { return
 	_("A table with the resource indicators this tribe uses"); },
 		new Property("resource_indicators", true,
 			VariableType(VariableTypeID::TribeDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer),
+			VariableType(VariableType(VariableTypeID::Integer),
 			VariableType(VariableTypeID::ImmovableDescr)) // type
 		)),
 
@@ -1242,7 +1242,7 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 	"or nil if the immovable has no terrain affinity"); },
 		new Property("terrain_affinity", true,
 			VariableType(VariableTypeID::ImmovableDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
+			VariableType(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
 		)),
 	new BuiltinPropertyInfo("immo_d_species", []() { return
 	_("The localized species name of a tree (empty if this immovable is not a tree)"); },
@@ -1254,7 +1254,7 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 	_("A table of ware-to-count pairs describing the buildcost for the immovable"); },
 		new Property("buildcost", true,
 			VariableType(VariableTypeID::ImmovableDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
+			VariableType(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
 		)),
 
 	// BuildingDescr
@@ -1315,19 +1315,19 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 	_("The cost for enhancing this building"); },
 		new Property("enhancement_cost", true,
 			VariableType(VariableTypeID::BuildingDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
+			VariableType(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
 		)),
 	new BuiltinPropertyInfo("bld_d_returned_wares", []() { return
 	_("The list of wares returned upon dismantling"); },
 		new Property("returned_wares", true,
 			VariableType(VariableTypeID::BuildingDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
+			VariableType(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
 		)),
 	new BuiltinPropertyInfo("bld_d_returned_wares_enhanced", []() {
 	return _("The list of wares returned upon dismantling an enhanced building"); },
 		new Property("returned_wares_enhanced", true,
 			VariableType(VariableTypeID::BuildingDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
+			VariableType(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
 		)),
 
 	// ProductionSiteDescr
@@ -1336,33 +1336,33 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 	_("An array of WareDescriptions containing the wares this productionsite needs for its production"); },
 		new Property("inputs", true,
 			VariableType(VariableTypeID::ProductionSiteDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::WareDescr)) // type
+			VariableType(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::WareDescr)) // type
 		)),
 	new BuiltinPropertyInfo("pd_d_output_ware_types", []() { return
 	_("An array with WareDescriptions containing the wares this productionsite can produce"); },
 		new Property("output_ware_types", true,
 			VariableType(VariableTypeID::ProductionSiteDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::WareDescr)) // type
+			VariableType(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::WareDescr)) // type
 		)),
 	new BuiltinPropertyInfo("pd_d_output_worker_types", []() { return
 	_("An array with WorkerDescriptions containing the workers this productionsite can recruit"); },
 		new Property("output_worker_types", true,
 			VariableType(VariableTypeID::ProductionSiteDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer),
+			VariableType(VariableType(VariableTypeID::Integer),
 			VariableType(VariableTypeID::WorkerDescr)) // type
 		)),
 	new BuiltinPropertyInfo("pd_d_production_programs", []() { return
 	_("An array with the production program names as string"); },
 		new Property("production_programs", true,
 			VariableType(VariableTypeID::ProductionSiteDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::String)) // type
+			VariableType(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::String)) // type
 		)),
 	new BuiltinPropertyInfo("pd_d_working_positions", []() { return
 	_("An array with WorkerDescriptions containing the workers that need to work here. "
 	"If several instances of a certain worker type are required), this instance is contained several times."); },
 		new Property("working_positions", true,
 			VariableType(VariableTypeID::ProductionSiteDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer),
+			VariableType(VariableType(VariableTypeID::Integer),
 			VariableType(VariableTypeID::WorkerDescr)) // type
 		)),
 
@@ -1465,13 +1465,13 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 	_("A table with the buildcost for this worker if it may be created in warehouses"); },
 		new Property("buildcost", true,
 			VariableType(VariableTypeID::WorkerDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
+			VariableType(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
 		)),
 	new BuiltinPropertyInfo("wd_employers", []() { return
 	_("An array with BuildingDescriptions with buildings where this worker can be employed"); },
 		new Property("employers", true,
 			VariableType(VariableTypeID::WorkerDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer),
+			VariableType(VariableType(VariableTypeID::Integer),
 			VariableType(VariableTypeID::BuildingDescr)) // type
 		)),
 
@@ -1601,7 +1601,7 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 	_("An array of ResourceDescriptions with all valid resources for this terrain"); },
 		new Property("valid_resources", true,
 			VariableType(VariableTypeID::TerrainDescr), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer),
+			VariableType(VariableType(VariableTypeID::Integer),
 			VariableType(VariableTypeID::ResourceDescr)) // type
 		)),
 	new BuiltinPropertyInfo("td_representative_image", []() { return
@@ -1653,7 +1653,7 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 	"example) the first entry in this list will be the main field"); },
 		new Property("fields", true,
 			VariableType(VariableTypeID::BaseImmovable), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Field)) // type
+			VariableType(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Field)) // type
 		)),
 
 	// PlayerImmovable
@@ -1693,7 +1693,7 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 	_("The roads leading to the flag. Directions can be 'tr', 'r', 'br', 'bl', 'l', and 'tl'."); },
 		new Property("roads", true,
 			VariableType(VariableTypeID::Flag), // class
-			VariableTypeTable(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Road)) // type
+			VariableType(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Road)) // type
 		)),
 
 	// Road
@@ -1723,7 +1723,7 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			"in the format worker_name:number_of_working_positions"); },
 		new Property("valid_workers", true,
 			VariableType(VariableTypeID::Road), // class
-			VariableTypeTable(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
+			VariableType(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
 		)),
 
 	// Building
@@ -1789,7 +1789,7 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			"in the format worker_name:number_of_working_positions"); },
 		new Property("valid_workers", true,
 			VariableType(VariableTypeID::ProductionSite), // class
-			VariableTypeTable(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
+			VariableType(VariableType(VariableTypeID::String), VariableType(VariableTypeID::Integer)) // type
 		)),
 
 	// Bob
@@ -1946,7 +1946,7 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 	new BuiltinPropertyInfo("f_bobs", []() { return _("An array with all bobs currently located on this field"); },
 		new Property("bobs", true,
 			VariableType(VariableTypeID::Field), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Bob)) // type
+			VariableType(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Bob)) // type
 		)),
 	new BuiltinPropertyInfo("f_terd", []() { return
 	_("The name of the terrain on the triangle straight south of this field "); },
@@ -1973,7 +1973,7 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 	"owned by the surrounded Player), but others have more military influence over it."); },
 		new Property("claimers", true,
 			VariableType(VariableTypeID::Field), // class
-			VariableTypeTable(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Player)) // type
+			VariableType(VariableType(VariableTypeID::Integer), VariableType(VariableTypeID::Player)) // type
 		)),
 	new BuiltinPropertyInfo("f_bln", []() { return _("The southwestern neighbour of this field"); },
 		new Property("bln", true,

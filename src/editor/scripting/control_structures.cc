@@ -164,29 +164,26 @@ std::string FS_ForEach::readable() const {
 	const uint32_t n = body_.size();
 	const std::string str = (boost::format(ngettext("%u statement", "%u statements", n)) % n).str();
 	return "for " + i_->get_name() + "," + i_->get_name() + " in " +
-	       (dynamic_cast<const VariableTypeTable&>(table_->type())
-	              .key_type()
-	              .is_subclass(VariableType(VariableTypeID::Integer)) ?
-	           "ipairs" :
-	           "pairs") +
+	       (table_->type().key_type().is_subclass(VariableType(VariableTypeID::Integer)) ? "ipairs" :
+	                                                                                       "pairs") +
 	       "(" + table_->readable() + ") do [" + str + "]";
 }
 void FS_ForEach::write_lua(int32_t indent, FileWrite& fw) const {
 	assert(table_);
 	assert(i_);
 	assert(j_);
-	const VariableTypeTable& type = dynamic_cast<const VariableTypeTable&>(table_->type());
-	assert(type.key_type().is_subclass(i_->type()));
-	assert(type.value_type().is_subclass(j_->type()));
+	assert(table_->type().key_type().is_subclass(i_->type()));
+	assert(table_->type().value_type().is_subclass(j_->type()));
 	fw.print_f("for ");
 	i_->write_lua(indent, fw);
 	fw.print_f(",");
 	j_->write_lua(indent, fw);
-	fw.print_f(" in %s(", type.key_type().is_subclass(VariableType(VariableTypeID::Integer)) ?
-	                         "ipairs" :
-	                         "pairs");
+	fw.print_f(
+	   " in %s(", table_->type().key_type().is_subclass(VariableType(VariableTypeID::Integer)) ?
+	                 "ipairs" :
+	                 "pairs");
 	table_->write_lua(indent, fw);
-	fw.print_f(") do");
+	fw.print_f(") do\n");
 	::write_lua(indent, fw, body_);
 	fw.print_f("end -- for %s,%s in ", i_->get_name().c_str(), j_->get_name().c_str());
 	table_->write_lua(indent, fw);
