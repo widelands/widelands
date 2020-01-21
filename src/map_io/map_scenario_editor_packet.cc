@@ -109,38 +109,29 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 			} else if (road) {
 				road->wallet_ = road->busy_ ? kRoadMaxWallet : 0;
 			} else if (upcast(Flag, flag, f->get_immovable())) {
-				// Economy updates
 				flag->get_economy(wwWARE)->rebalance_supply();
 				flag->get_economy(wwWORKER)->rebalance_supply();
 			}
 		}
 		return;
 	}
+
 	upcast(EditorInteractive, eia, egbase.get_ibase());
 	assert(eia);
-
-	eia->functions_.clear();
-	eia->variables_.clear();
-	eia->includes_.clear();
+	eia->unfinalize();
 
 	if (!file_exists) {
 		// Not a scenario
-		eia->finalized_ = false;
-		eia->player_relations_.reset(nullptr);
 		return;
 	}
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			eia->finalized_ = fr.unsigned_8();
-			if (eia->finalized_) {
-				const unsigned nrplayers = eia->egbase().map().get_nrplayers();
-				eia->player_relations_.reset(new uint8_t[nrplayers * nrplayers]);
-				for (unsigned i = 0; i < nrplayers * nrplayers; ++i) {
-					eia->player_relations_[i] = fr.unsigned_8();
-				}
+			if (fr.unsigned_8()) {
+				eia->finalized_ = true;
 
+				eia->init_allowed_buildings_windows_registries();
 				eia->new_scripting_saver();
 				// The ScriptingLoader constructor will immediately load all ScriptingObjects
 				// (triggering both loading phases one after the other)
@@ -155,8 +146,6 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 				for (uint32_t n = fr.unsigned_32(); n; --n) {
 					eia->includes_.push_back(fr.c_string());
 				}
-			} else {
-				eia->player_relations_.reset(nullptr);
 			}
 		} else {
 			throw UnhandledVersionError(
@@ -179,21 +168,19 @@ void MapScenarioEditorPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 	if (eia->finalized_) {
 		fw.unsigned_8(1);
 
-		const unsigned nrplayers = eia->egbase().map().get_nrplayers();
-		for (unsigned i = 0; i < nrplayers * nrplayers; ++i) {
-			fw.unsigned_8(eia->player_relations_[i]);
-		}
-
 		eia->scripting_saver().delete_unused(*eia);
 		eia->scripting_saver().save(fw);
+
 		fw.unsigned_32(eia->functions_.size());
 		for (const auto& f : eia->functions_) {
 			fw.unsigned_32(f->serial());
 		}
+
 		fw.unsigned_32(eia->variables_.size());
 		for (const auto& v : eia->variables_) {
 			fw.unsigned_32(v->serial());
 		}
+
 		fw.unsigned_32(eia->includes_.size());
 		for (const std::string& s : eia->includes_) {
 			fw.c_string(s.c_str());

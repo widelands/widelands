@@ -22,8 +22,10 @@
 
 #include <memory>
 #include <stdint.h>
+#include <vector>
 
 #include "editor/ui_menus/tool_options_menu.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/unique_window.h"
 
@@ -47,13 +49,29 @@ public:
 		EditorInteractive& eia_;
 		uint8_t nr_players_;
 
-		std::unique_ptr<UI::Dropdown<uint8_t>*[]> teams_;
+		std::vector<std::unique_ptr<UI::Dropdown<uint8_t>>> teams_;
+		std::vector<std::unique_ptr<UI::Button>> buttons_;
 
 		int8_t player_at(int32_t x) const;
 	};
 
 private:
 	PlayerRelationsPanel panel_;
+};
+
+// A long list of checkboxes which buildings a player may use originally.
+// TODO(Nordfriese): A possibility to define custom buildings should go here
+class EditorPlayerAllowedBuildingsWindow : public UI::UniqueWindow {
+public:
+	EditorPlayerAllowedBuildingsWindow(EditorInteractive*,
+	                                   Widelands::PlayerNumber,
+	                                   UI::UniqueWindow::Registry&);
+	~EditorPlayerAllowedBuildingsWindow() override {
+	}
+
+private:
+	UI::Box box_;
+	std::vector<UI::Checkbox*> checkboxes_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_PLAYER_TEAMS_MENU_H

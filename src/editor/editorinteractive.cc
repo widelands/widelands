@@ -100,7 +100,6 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      realtime_(SDL_GetTicks()),
      is_painting_(false),
      finalized_(false),
-     player_relations_(nullptr),
      mainmenu_(toolbar(),
                "dropdown_menu_main",
                0,
@@ -155,6 +154,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      tools_(new Tools(e.map())),
      history_(nullptr)  // history needs the undo/redo buttons
 {
+	unfinalize();
+
 	add_main_menu();
 	add_tool_menu();
 	add_scenario_tool_menu();
@@ -364,9 +365,11 @@ void EditorInteractive::add_tool_menu() {
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Players"), ToolMenuEntry::kPlayers,
 	              g_gr->images().get("images/wui/editor/tools/players.png"), false,
-	              /** TRANSLATORS: Tooltip for the players tool in the editor */
-	              finalized_ ? _("Assign players to teams and set hostility relations") :
-	                           /** TRANSLATORS: Tooltip for the players tool in the editor */
+	              finalized_ ?
+	                 /** TRANSLATORS: Tooltip for the players tool in the editor */
+	                 _("Assign players to teams, set hostility relations, and configure allowed "
+	                   "building types") :
+	                 /** TRANSLATORS: Tooltip for the players tool in the editor */
 	                 _("Set number of players and their names, tribes and starting positions"),
 	              "P");
 
@@ -640,6 +643,12 @@ void EditorInteractive::cleanup_for_load() {
 	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
 	// Instead, delete and re-create the egbase.
 	egbase().cleanup_for_load();
+	unfinalize();
+}
+
+void EditorInteractive::unfinalize() {
+	finalized_ = false;
+	allowed_buildings_windows_.clear();
 	scripting_saver_.reset(nullptr);
 	functions_.clear();
 	variables_.clear();
@@ -1229,6 +1238,17 @@ EditorInteractive::Tools* EditorInteractive::tools() {
 	return tools_.get();
 }
 
+void EditorInteractive::init_allowed_buildings_windows_registries() {
+	assert(finalized_);
+	assert(allowed_buildings_windows_.empty());
+	const unsigned nrplayers = egbase().map().get_nrplayers();
+	for (Widelands::PlayerNumber p = 1; p <= nrplayers; ++p) {
+		UI::UniqueWindow::Registry* r = new UI::UniqueWindow::Registry();
+		r->open_window = [this, p, r]() { new EditorPlayerAllowedBuildingsWindow(this, p, *r); };
+		allowed_buildings_windows_.push_back(std::unique_ptr<UI::UniqueWindow::Registry>(r));
+	}
+}
+
 void EditorInteractive::finalize_clicked() {
 	assert(!finalized_);
 	UI::WLMessageBox m(
@@ -1284,9 +1304,7 @@ std::string EditorInteractive::try_finalize() {
 		}
 	}
 	finalized_ = true;
-	const unsigned nrplayers = egbase().map().get_nrplayers();
-	player_relations_.reset(new uint8_t[nrplayers * nrplayers]);
-	memset(player_relations_.get(), 0, sizeof(uint8_t) * nrplayers * nrplayers);
+	init_allowed_buildings_windows_registries();
 	new_scripting_saver();
 #ifndef NDEBUG
 	// NOCOM for testing (in debug builds only)
@@ -1514,29 +1532,6 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	// User-defined functions
 	for (const auto& f : scripting_saver_->all<LuaFunction>()) {
 		f->write_lua(0, fw);
-	}
-
-	// Player relations (yes, these are set via Lua, not saved in the map)
-	{
-		bool needs_newline = false;
-		const unsigned nrplayers = map.get_nrplayers();
-		for (unsigned p1 = 0; p1 < nrplayers; ++p1) {
-			for (unsigned p2 = 0; p2 < nrplayers; ++p2) {
-				if (const uint8_t r = player_relations_[p1 * nrplayers + p2]) {
-					needs_newline = true;
-					if (p1 == p2) {
-						assert(r <= nrplayers / 2);
-						fw.print_f("\nwl.Game().players[%u].team = %u", p1 + 1, r);
-					} else {
-						assert(r == 1);
-						fw.print_f(
-						   "\nwl.Game().players[%u]:set_attack_forbidden(%u, true)", p1 + 1, p2 + 1);
-					}
-				}
-			}
-		}
-		if (needs_newline)
-			fw.print_f("\n");
 	}
 
 	// Hand-written includes

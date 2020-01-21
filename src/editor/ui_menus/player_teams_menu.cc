@@ -32,35 +32,47 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/panel.h"
 
-constexpr int16_t kPlayerRelationsCellSize = 32;
+constexpr int16_t kPlayerRelationsCellSize = 48;
 constexpr uint8_t kPlayerColorAlpha = 0x7f;
 
 EditorPlayerTeamsMenu::PlayerRelationsPanel::PlayerRelationsPanel(UI::Panel* parent,
                                                                   EditorInteractive& e,
                                                                   uint8_t n)
    : UI::Panel(
-        parent, 0, 0, (n + 1) * kPlayerRelationsCellSize, (n + 1) * kPlayerRelationsCellSize),
+        parent, 0, 0, (n + 2) * kPlayerRelationsCellSize, (n + 1) * kPlayerRelationsCellSize),
      eia_(e),
-     nr_players_(n),
-     teams_(new UI::Dropdown<uint8_t>*[n]) {
+     nr_players_(n) {
 	assert(eia_.finalized());
 	for (uint8_t i = 0; i < nr_players_; ++i) {
-		teams_[i] = new UI::Dropdown<uint8_t>(
+		UI::Dropdown<uint8_t>* dd = new UI::Dropdown<uint8_t>(
 		   this, "team_" + std::to_string(i + 1), kPlayerRelationsCellSize * (i + 1),
 		   kPlayerRelationsCellSize * (i + 1), kPlayerRelationsCellSize, nr_players_,
 		   kPlayerRelationsCellSize,
 		   (boost::format(_("Team for %s")) % eia_.egbase().map().get_scenario_player_name(i + 1))
 		      .str(),
 		   UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
-		const unsigned team = eia_.player_relations()[i * nr_players_ + i];
-		teams_[i]->add(
-		   "-", 0, g_gr->images().get("images/players/no_team.png"), team == 0, _("No team"));
+		const unsigned team = eia_.egbase().player(i + 1).team_number();
+		dd->add("-", 0, g_gr->images().get("images/players/no_team.png"), team == 0, _("No team"));
 		for (unsigned j = 1; j <= nr_players_ / 2; ++j) {
-			teams_[i]->add(std::to_string(j), j, playercolor_image(j - 1, "images/players/team.png"),
-			               team == j, (boost::format(_("Team %u")) % j).str());
+			dd->add(std::to_string(j), j, playercolor_image(j - 1, "images/players/team.png"),
+			        team == j, (boost::format(_("Team %u")) % j).str());
 		}
-		teams_[i]->selected.connect(
-		   [this, i]() { eia_.player_relations()[i * nr_players_ + i] = teams_[i]->get_selected(); });
+		dd->selected.connect(
+		   [this, i, dd]() { eia_.egbase().get_player(i + 1)->set_team_number(dd->get_selected()); });
+		assert(teams_.size() == i);
+		teams_.push_back(std::unique_ptr<UI::Dropdown<uint8_t>>(dd));
+
+		UI::Button* b = new UI::Button(
+		   this, "allowed_buildings_" + std::to_string(static_cast<unsigned>(i)),
+		   (n + 1) * kPlayerRelationsCellSize, (i + 1) * kPlayerRelationsCellSize,
+		   kPlayerRelationsCellSize, kPlayerRelationsCellSize, UI::ButtonStyle::kWuiSecondary,
+		   g_gr->images().get("images/wui/stats/genstats_nrbuildings.png"),
+		   (boost::format(_("Configure allowed building types for %s")) %
+		    eia_.egbase().map().get_scenario_player_name(i + 1))
+		      .str());
+		b->sigclicked.connect([this, i]() { eia_.show_allowed_buildings_window(i + 1); });
+		assert(buttons_.size() == i);
+		buttons_.push_back(std::unique_ptr<UI::Button>(b));
 	}
 }
 
@@ -89,10 +101,11 @@ void EditorPlayerTeamsMenu::PlayerRelationsPanel::draw(RenderTarget& r) {
 		           kPlayerRelationsCellSize / 2, p1);
 		draw_image(r, "images/players/player_position_menu.png", kPlayerRelationsCellSize / 2,
 		           (p1 + 1) * kPlayerRelationsCellSize + kPlayerRelationsCellSize / 2, p1);
+		const Widelands::Player& pl = eia_.egbase().player(p1 + 1);
 		for (uint8_t p2 = 0; p2 < nr_players_; ++p2) {
 			if (p1 != p2) {
 				draw_image(r,
-				           eia_.player_relations()[p1 * nr_players_ + p2] ?
+				           pl.is_attack_forbidden(p2 + 1) ?
 				              "images/wui/menus/chat.png" :
 				              "images/wui/menus/toggle_soldier_levels.png",
 				           (p1 + 1) * kPlayerRelationsCellSize + kPlayerRelationsCellSize / 2,
@@ -110,7 +123,7 @@ bool EditorPlayerTeamsMenu::PlayerRelationsPanel::handle_mousemove(
 		set_tooltip("");
 		return false;
 	}
-	set_tooltip((boost::format(eia_.player_relations()[(att - 1) * nr_players_ + (def - 1)] ?
+	set_tooltip((boost::format(eia_.egbase().player(att).is_attack_forbidden(def) ?
 	                              _("Click to allow %1$s to attack %2$s") :
 	                              _("Click to forbid %1$s to attack %2$s")) %
 	             eia_.egbase().map().get_scenario_player_name(att) %
@@ -120,31 +133,27 @@ bool EditorPlayerTeamsMenu::PlayerRelationsPanel::handle_mousemove(
 }
 
 bool EditorPlayerTeamsMenu::PlayerRelationsPanel::handle_mousepress(uint8_t, int32_t x, int32_t y) {
-	int8_t att = player_at(x);
-	if (att < 0)
+	const int8_t att = player_at(x);
+	if (att < 0) {
 		return false;
-	int8_t def = player_at(y);
-	if (def < 0)
+	}
+	const int8_t def = player_at(y);
+	if (def < 0 || (att == 0 && def == 0)) {
 		return false;
-	if (att == 0 && def == 0)
-		return false;
+	}
 	if (att == 0) {
-		--def;
-		for (uint8_t a = 0; a < nr_players_; ++a)
+		for (uint8_t a = 1; a <= nr_players_; ++a)
 			if (a != def)
-				eia_.player_relations()[a * nr_players_ + def] =
-				   !eia_.player_relations()[a * nr_players_ + def];
+				eia_.egbase().get_player(a)->set_attack_forbidden(
+				   def, !eia_.egbase().player(a).is_attack_forbidden(def));
 	} else if (def == 0) {
-		--att;
-		for (uint8_t d = 0; d < nr_players_; ++d)
+		for (uint8_t d = 1; d <= nr_players_; ++d)
 			if (d != att)
-				eia_.player_relations()[att * nr_players_ + d] =
-				   !eia_.player_relations()[att * nr_players_ + d];
+				eia_.egbase().get_player(att)->set_attack_forbidden(
+				   d, !eia_.egbase().player(att).is_attack_forbidden(d));
 	} else {
-		--att;
-		--def;
-		eia_.player_relations()[att * nr_players_ + def] =
-		   !eia_.player_relations()[att * nr_players_ + def];
+		eia_.egbase().get_player(att)->set_attack_forbidden(
+		   def, !eia_.egbase().player(att).is_attack_forbidden(def));
 	}
 	return true;
 }
@@ -162,6 +171,33 @@ EditorPlayerTeamsMenu::EditorPlayerTeamsMenu(EditorInteractive& parent,
    : EditorToolOptionsMenu(parent, registry, 0, 0, _("Player Relations"), tool),
      panel_(this, parent, parent.egbase().map().get_nrplayers()) {
 	set_center_panel(&panel_);
+	if (get_usedefaultpos()) {
+		center_to_parent();
+	}
+}
+
+EditorPlayerAllowedBuildingsWindow::EditorPlayerAllowedBuildingsWindow(
+   EditorInteractive* eia, Widelands::PlayerNumber p, UI::UniqueWindow::Registry& r)
+   : UI::UniqueWindow(eia,
+                      "allowed_buildings_" + std::to_string(static_cast<unsigned>(p)),
+                      &r,
+                      400,
+                      300,
+                      (boost::format(_("Allowed Building Types for %s")) %
+                       eia->egbase().map().get_scenario_player_name(p))
+                         .str()),
+     box_(this, 0, 0, UI::Box::Vertical) {
+	Widelands::Player* player = eia->egbase().get_player(p);
+	for (Widelands::DescriptionIndex di : player->tribe().buildings()) {
+		UI::Checkbox& c = *new UI::Checkbox(
+		   &box_, Vector2i(0, 0), eia->egbase().tribes().get_building_descr(di)->descname());
+		c.set_state(player->is_building_type_allowed(di));
+		c.changedto.connect([player, p, di](bool a) { player->allow_building_type(di, a); });
+		box_.add(&c);
+	}
+	box_.set_scrolling(true);
+	box_.set_max_size(500, 400);
+	set_center_panel(&box_);
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}

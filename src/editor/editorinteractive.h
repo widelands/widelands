@@ -178,8 +178,10 @@ public:
 	bool finalized() const {
 		return finalized_;
 	}
-	uint8_t* player_relations() {
-		return player_relations_.get();
+	void show_allowed_buildings_window(Widelands::PlayerNumber p) {
+		assert(p);
+		assert(p <= allowed_buildings_windows_.size());
+		allowed_buildings_windows_[p - 1]->create();
 	}
 
 	void write_lua(FileWrite&) const;
@@ -281,10 +283,6 @@ private:
 	bool is_painting_;
 
 	bool finalized_;
-	// nullptr when not finalized; otherwise an array of size (nrplayers²).
-	// Entry [p1 * nrplayers + p2] is 1 if p1 is forbidden to attack p2; 0 otherwise.
-	// The entry in case p1==p2 refers to p1's team number (0 for no team).
-	std::unique_ptr<uint8_t[]> player_relations_;
 
 	// Returns the reason why finalizing failed, or "" on success
 	std::string try_finalize();
@@ -322,6 +320,11 @@ private:
 		UI::UniqueWindow::Registry road;
 		UI::UniqueWindow::Registry lua;
 	} scenario_tool_windows_;
+
+	std::vector<std::unique_ptr<UI::UniqueWindow::Registry>> allowed_buildings_windows_;
+	void init_allowed_buildings_windows_registries();
+
+	void unfinalize();
 
 	// Main menu on the toolbar
 	UI::Dropdown<MainMenuEntry> mainmenu_;
