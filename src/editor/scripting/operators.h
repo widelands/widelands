@@ -92,6 +92,7 @@ OPERATOR_FACTORY(Add, Integer, Integer, "+")
 OPERATOR_FACTORY(Subtract, Integer, Integer, "-")
 OPERATOR_FACTORY(Multiply, Integer, Integer, "*")
 OPERATOR_FACTORY(Divide, Integer, Integer, "/")
+OPERATOR_FACTORY(Modulo, Integer, Integer, "%")
 
 OPERATOR_FACTORY(Less, Integer, Boolean, "<")
 OPERATOR_FACTORY(LessEq, Integer, Boolean, "<=")

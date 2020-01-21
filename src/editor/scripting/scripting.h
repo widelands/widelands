@@ -246,6 +246,7 @@ public:
 		OperatorSubtract,
 		OperatorMultiply,
 		OperatorDivide,
+		OperatorModulo,
 		OperatorLess,
 		OperatorLessEq,
 		OperatorGreater,

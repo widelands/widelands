@@ -154,6 +154,8 @@ ScriptingObject* ScriptingObject::load(FileRead& fr) {
 			return new OperatorMultiply(nullptr, nullptr);
 		case ID::OperatorDivide:
 			return new OperatorDivide(nullptr, nullptr);
+		case ID::OperatorModulo:
+			return new OperatorModulo(nullptr, nullptr);
 		case ID::OperatorGreater:
 			return new OperatorGreater(nullptr, nullptr);
 		case ID::OperatorGreaterEq:
