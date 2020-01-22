@@ -5,6 +5,8 @@
 
 #include "base/log.h"
 
+void reduce_send_buffer(boost::asio::ip::tcp::socket& socket);
+
 BufferedConnection::Peeker::Peeker(BufferedConnection* conn) : conn_(conn), peek_pointer_(0) {
 	assert(conn_);
 }
