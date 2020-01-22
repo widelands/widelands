@@ -26,18 +26,13 @@
 #include "logic/widelands.h"
 
 struct ScenarioInfrastructureDeleteTool : public EditorTool {
-	ScenarioInfrastructureDeleteTool() : EditorTool(*this, *this) {
+	ScenarioInfrastructureDeleteTool() : EditorTool(*this, *this, false) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
-
-	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
-	                         EditorActionArgs* args,
-	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 

@@ -31,6 +31,7 @@
 #include "logic/map.h"
 #include "logic/map_objects/tribes/building_settings.h"
 #include "logic/path.h"
+#include "logic/see_unsee_node.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
@@ -61,12 +62,13 @@ struct EditorActionArgs {
 	Widelands::ResourceAmount set_to;                      // resources change tools
 	Widelands::Extent new_map_size;                        // resize tool
 
-	uint8_t new_owner;  // set_owner, infrastructure, and worker tools
+	uint8_t new_owner;  // set_owner, vision, infrastructure, and worker tools
 	std::vector<std::pair<Widelands::MapObjectType, Widelands::DescriptionIndex>>
 	   infrastructure_types;                                  // infrastructure tool
 	bool infrastructure_constructionsite;                     // infrastructure tool
 	std::vector<const Widelands::WorkerDescr*> worker_types;  // worker tool
 	int32_t random_index;                                     // infrastructure and worker tools
+	Widelands::SeeUnseeNode vision;                           // vision tool
 
 	enum RoadMode { kNormal, kBusy, kWaterway };
 	RoadMode road_mode;            // road tool
@@ -85,25 +87,6 @@ struct EditorActionArgs {
 		std::set<Widelands::Coords> port_spaces;
 		std::vector<Widelands::Coords> starting_positions;
 	};
-	struct InfrastructureHistory {
-		Widelands::MapObjectType
-		   type;  // valid: FLAG, BUILDING, IMMOVABLE; 0 means no item stood here
-		Widelands::PlayerNumber owner;
-		std::string name = "";                        // for buildings and player immovables
-		bool constructionsite;                        // for buildings
-		const Widelands::BuildingSettings* settings;  // only for buildings
-		explicit InfrastructureHistory()
-		   : type(Widelands::MapObjectType::MAPOBJECT),
-		     owner(0),
-		     constructionsite(false),
-		     settings(nullptr) {
-		}
-		~InfrastructureHistory() {
-			if (settings) {
-				delete settings;
-			}
-		}
-	};
 
 	std::list<ResourceState> original_resource;                        // resources set tool
 	std::list<const Widelands::BobDescr*> old_bob_type, new_bob_type;  // bob change tools
@@ -113,9 +96,8 @@ struct EditorActionArgs {
 	std::list<Widelands::DescriptionIndex> terrain_type, original_terrain_type;  // set terrain tool
 	ResizeHistory resized;                                                       // resize tool
 
-	std::list<uint8_t> old_owners;                            // set owner tool
-	Widelands::Serial infrastructure_placed;                  // infrastructure, and workers tool
-	std::list<InfrastructureHistory> infrastructure_deleted;  // infrastructure delete tool
+	std::list<uint8_t> old_owners;            // set owner tool
+	Widelands::Serial infrastructure_placed;  // infrastructure, and workers tool
 	std::list<std::list<std::tuple<const Widelands::WorkerDescr*, uint8_t, uint32_t>>>
 	   workers_deleted;                                                   // worker delete tool
 	std::list<std::list<std::pair<uint8_t, std::string>>> ships_deleted;  // worker delete tool

@@ -47,12 +47,12 @@ int32_t ScenarioInfrastructureTool::handle_click_impl(const Widelands::NodeAndTr
 	switch (item_to_place.first) {
 	case Widelands::MapObjectType::BUILDING: {
 		Widelands::FormerBuildings b;
-		b.push_back(std::make_pair(item_to_place.second, ""));
 		if (args->force) {
 			if (args->infrastructure_constructionsite &&
 			    egbase.tribes().get_building_descr(item_to_place.second)->is_buildable()) {
 				mo = &player.force_csite(center.node, item_to_place.second);
 			} else {
+				b.push_back(std::make_pair(item_to_place.second, ""));
 				mo = &player.force_building(center.node, b);
 			}
 		} else {
@@ -108,77 +108,16 @@ ScenarioInfrastructureDeleteTool::handle_click_impl(const Widelands::NodeAndTria
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
-		EditorActionArgs::InfrastructureHistory history;
-		if (upcast(Widelands::BaseImmovable, imm, mr.location().field->get_immovable())) {
-			bool destroy = false;
-			if (upcast(Widelands::Flag, flag, imm)) {
-				history.type = Widelands::MapObjectType::FLAG;
-				history.owner = flag->owner().player_number();
-				destroy = true;
-			} else if (upcast(Widelands::Immovable, i, imm)) {
-				if (i->descr().owner_type() == Widelands::MapObjectDescr::OwnerType::kTribe) {
-					history.type = Widelands::MapObjectType::IMMOVABLE;
-					history.name = i->descr().name();
-					history.owner = i->owner().player_number();
-					destroy = true;
-				}
-			} else if (upcast(Widelands::Building, b, imm)) {
-				history.type = Widelands::MapObjectType::BUILDING;
-				history.constructionsite =
-				   b->descr().type() == Widelands::MapObjectType::CONSTRUCTIONSITE;
-				history.name = history.constructionsite ?
-				                  dynamic_cast<Widelands::ConstructionSite*>(b)->building().name() :
-				                  b->descr().name();
-				history.owner = b->owner().player_number();
-				history.settings = b->create_building_settings();
-				destroy = true;
+		if (Widelands::BaseImmovable* imm = mr.location().field->get_immovable()) {
+			if (imm->descr().type() != Widelands::MapObjectType::FLAG &&
+			    !is_a(Widelands::Building, imm)) {
+				upcast(Widelands::Immovable, i, imm);
+				if (!i || i->descr().owner_type() != Widelands::MapObjectDescr::OwnerType::kTribe)
+					continue;
 			}
-			if (destroy) {
-				imm->remove(eia.egbase());
-			}
+			imm->remove(eia.egbase());
 		}
-		args->infrastructure_deleted.push_back(history);
 	} while (mr.advance(*map));
-	return mr.radius();
-}
-
-int32_t
-ScenarioInfrastructureDeleteTool::handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-                                                   EditorInteractive& eia,
-                                                   EditorActionArgs* args,
-                                                   Widelands::Map* map) {
-	Widelands::EditorGameBase& egbase = eia.egbase();
-	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
-	auto it = args->infrastructure_deleted.begin();
-	do {
-		Widelands::Player& player = *egbase.get_player(it->owner);
-		switch (it->type) {
-		case Widelands::MapObjectType::MAPOBJECT:
-			// No item was here
-			break;
-		case Widelands::MapObjectType::FLAG:
-			player.force_flag(mr.location());
-			break;
-		case Widelands::MapObjectType::IMMOVABLE:
-			egbase.create_immovable(mr.location(), egbase.tribes().safe_immovable_index(it->name),
-			                        Widelands::MapObjectDescr::OwnerType::kTribe, &player);
-			break;
-		case Widelands::MapObjectType::BUILDING:
-			if (it->constructionsite) {
-				player.force_csite(mr.location(), egbase.tribes().safe_building_index(it->name));
-			} else {
-				Widelands::FormerBuildings b;
-				b.push_back(std::make_pair(egbase.tribes().safe_building_index(it->name), ""));
-				player.force_building(mr.location(), b);
-			}
-			break;
-		default:
-			NEVER_HERE();
-		}
-		++it;
-	} while (mr.advance(*map));
-	args->infrastructure_deleted.clear();
 	return mr.radius();
 }
 

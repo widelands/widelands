@@ -131,6 +131,8 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 			if (fr.unsigned_8()) {
 				eia->finalized_ = true;
 
+				eia->set_display_flag(InteractiveBase::dfShowCensus, fr.unsigned_8());
+
 				eia->init_allowed_buildings_windows_registries();
 				eia->new_scripting_saver();
 				// The ScriptingLoader constructor will immediately load all ScriptingObjects
@@ -167,6 +169,8 @@ void MapScenarioEditorPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 
 	if (eia->finalized_) {
 		fw.unsigned_8(1);
+
+		fw.unsigned_8(eia->get_display_flag(InteractiveBase::dfShowCensus) ? 1 : 0);
 
 		eia->scripting_saver().delete_unused(*eia);
 		eia->scripting_saver().save(fw);

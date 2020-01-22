@@ -109,7 +109,7 @@ static bool create_road(Widelands::EditorGameBase& egbase,
 			}
 			assert(!roads.empty());
 			for (Widelands::Road* r : roads) {
-				r->set_busy(mode == EditorActionArgs::RoadMode::kBusy);
+				r->set_busy(egbase, mode == EditorActionArgs::RoadMode::kBusy);
 				Widelands::CoordPath p(egbase.map(), r->get_path());
 				if (primary_carrier) {
 					Widelands::Carrier& c = dynamic_cast<Widelands::Carrier&>(

@@ -51,6 +51,7 @@
 #include "editor/ui_menus/scenario_tool_field_owner_options_menu.h"
 #include "editor/ui_menus/scenario_tool_infrastructure_options_menu.h"
 #include "editor/ui_menus/scenario_tool_road_options_menu.h"
+#include "editor/ui_menus/scenario_tool_vision_options_menu.h"
 #include "editor/ui_menus/scenario_tool_worker_options_menu.h"
 #include "editor/ui_menus/tool_change_height_options_menu.h"
 #include "editor/ui_menus/tool_change_resources_options_menu.h"
@@ -100,6 +101,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      realtime_(SDL_GetTicks()),
      is_painting_(false),
      finalized_(false),
+     illustrating_vision_for_(0),
      mainmenu_(toolbar(),
                "dropdown_menu_main",
                0,
@@ -412,6 +414,16 @@ void EditorInteractive::add_scenario_tool_menu() {
 	   /** TRANSLATORS: Tooltip for the field ownership scenario tool in the editor */
 	   _("Set the initial ownership of fields"));
 
+	scenario_tool_windows_.vision.open_window = [this] {
+		new ScenarioToolVisionOptionsMenu(*this, tools()->sc_vision, scenario_tool_windows_.vision);
+	};
+	scenario_toolmenu_.add(
+	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
+	   _("Vision"), ScenarioToolMenuEntry::kVision,
+	   g_gr->images().get("images/wui/editor/tools/sc_vis.png"), false,
+	   /** TRANSLATORS: Tooltip for the vision scenario tool in the editor */
+	   _("Reveal and hide fields to the players"));
+
 	scenario_tool_windows_.infrastructure.open_window = [this] {
 		new ScenarioToolInfrastructureOptionsMenu(
 		   *this, tools()->sc_infra, scenario_tool_windows_.infrastructure);
@@ -509,6 +521,9 @@ void EditorInteractive::scenario_tool_menu_selected(ScenarioToolMenuEntry entry)
 	case ScenarioToolMenuEntry::kFieldOwner:
 		scenario_tool_windows_.fieldowner.toggle();
 		break;
+	case ScenarioToolMenuEntry::kVision:
+		scenario_tool_windows_.vision.toggle();
+		break;
 	case ScenarioToolMenuEntry::kInfrastructure:
 		scenario_tool_windows_.infrastructure.toggle();
 		break;
@@ -566,6 +581,13 @@ void EditorInteractive::rebuild_showhide_menu() {
 	showhidemenu_.add(draw_resources_ ? _("Hide Resources") : _("Show Resources"),
 	                  ShowHideEntry::kResources,
 	                  g_gr->images().get("images/wui/menus/toggle_resources.png"));
+
+	if (finalized_)
+		/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building names are
+		 * shown */
+		showhidemenu_.add(get_display_flag(dfShowCensus) ? _("Hide Census") : _("Show Census"),
+		                  ShowHideEntry::kCensus,
+		                  g_gr->images().get("images/wui/menus/toggle_census.png"), false, "", "C");
 }
 
 void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
@@ -584,6 +606,9 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 	} break;
 	case ShowHideEntry::kResources: {
 		toggle_resources();
+	} break;
+	case ShowHideEntry::kCensus: {
+		set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
 	} break;
 	}
 	rebuild_showhide_menu();
@@ -648,11 +673,15 @@ void EditorInteractive::cleanup_for_load() {
 
 void EditorInteractive::unfinalize() {
 	finalized_ = false;
+	illustrating_vision_for_ = 0;
 	allowed_buildings_windows_.clear();
 	scripting_saver_.reset(nullptr);
 	functions_.clear();
 	variables_.clear();
 	includes_.clear();
+	set_display_flag(dfShowCensus, false);
+	rebuild_main_menu();
+	rebuild_showhide_menu();
 }
 
 /// Called just before the editor starts, after postload, init and gfxload.
@@ -719,11 +748,41 @@ bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	return InteractiveBase::handle_mousepress(btn, x, y);
 }
 
+static void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
+                                                      const Widelands::Player::Field& player_field,
+                                                      const float scale,
+                                                      RenderTarget* dst) {
+	if (player_field.map_object_descr == nullptr) {
+		return;
+	}
+
+	if (player_field.constructionsite.becomes) {
+		assert(field.owner != nullptr);
+		player_field.constructionsite.draw(
+		   field.rendertarget_pixel, field.fcoords, scale, field.owner->get_playercolor(), dst);
+
+	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
+		assert(field.owner != nullptr);
+		// this is a building therefore we either draw unoccupied or idle animation
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+		                    building->get_unoccupied_animation(), 0, &field.owner->get_playercolor());
+	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
+		assert(field.owner != nullptr);
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+		                    field.owner->tribe().flag_animation(), 0,
+		                    &field.owner->get_playercolor());
+	} else if (const uint32_t pic = player_field.map_object_descr->main_animation()) {
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, pic, 0,
+		                    (field.owner == nullptr) ? nullptr : &field.owner->get_playercolor());
+	}
+}
+
 void EditorInteractive::draw(RenderTarget& dst) {
 	const auto& ebase = egbase();
 	auto* fields_to_draw = map_view()->draw_terrain(ebase, Workareas(), draw_grid_, &dst);
 	const auto& road_building = road_building_overlays();
 	const auto& waterway_building = waterway_building_overlays();
+	const auto info_to_draw = get_info_to_draw(!map_view()->is_animating());
 
 	const float scale = 1.f / map_view()->view().zoom;
 	const uint32_t gametime = ebase.get_gametime();
@@ -759,93 +818,117 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		FieldsToDraw::Field& field = *fields_to_draw->mutable_field(idx);
 
-		const auto rinfo = road_building.road_previews.find(field.fcoords);
-		if (rinfo != road_building.road_previews.end()) {
-			for (uint8_t dir : rinfo->second) {
-				switch (dir) {
-				case Widelands::WALK_E:
-					field.road_e = Widelands::RoadSegment::kNormal;
-					break;
-				case Widelands::WALK_SE:
-					field.road_se = Widelands::RoadSegment::kNormal;
-					break;
-				case Widelands::WALK_SW:
-					field.road_sw = Widelands::RoadSegment::kNormal;
-					break;
-				default:
-					throw wexception(
-					   "Attempt to set road-building overlay for invalid direction %i", dir);
+		Widelands::Player::Field const* const player_field =
+		   illustrating_vision_for_ ? &ebase.player(illustrating_vision_for_)
+		                                  .fields()[map.get_index(field.fcoords, map.get_width())] :
+		                              nullptr;
+		if (player_field) {
+			field.vision = player_field->vision;
+			if (field.vision <= 1) {
+				field.road_e = field.vision * player_field->r_e;
+				field.road_se = field.vision * player_field->r_se;
+				field.road_sw = field.vision * player_field->r_sw;
+				field.owner = field.vision && player_field->owner != 0 ?
+				                 ebase.get_player(player_field->owner) :
+				                 nullptr;
+				field.is_border = field.vision * player_field->border;
+				// Allow the user a tiny sneak-peak at unseen fields for convenience
+				field.brightness /= field.vision ? 2.f : 8.f;
+			}
+		}
+
+		if (field.vision > 0) {
+			const auto rinfo = road_building.road_previews.find(field.fcoords);
+			if (rinfo != road_building.road_previews.end()) {
+				for (uint8_t dir : rinfo->second) {
+					switch (dir) {
+					case Widelands::WALK_E:
+						field.road_e = Widelands::RoadSegment::kNormal;
+						break;
+					case Widelands::WALK_SE:
+						field.road_se = Widelands::RoadSegment::kNormal;
+						break;
+					case Widelands::WALK_SW:
+						field.road_sw = Widelands::RoadSegment::kNormal;
+						break;
+					default:
+						throw wexception(
+						   "Attempt to set road-building overlay for invalid direction %i", dir);
+					}
 				}
 			}
-		}
-		const auto winfo = waterway_building.road_previews.find(field.fcoords);
-		if (winfo != waterway_building.road_previews.end()) {
-			for (uint8_t dir : winfo->second) {
-				switch (dir) {
-				case Widelands::WALK_E:
-					field.road_e = Widelands::RoadSegment::kWaterway;
-					break;
-				case Widelands::WALK_SE:
-					field.road_se = Widelands::RoadSegment::kWaterway;
-					break;
-				case Widelands::WALK_SW:
-					field.road_sw = Widelands::RoadSegment::kWaterway;
-					break;
-				default:
-					throw wexception(
-					   "Attempt to set waterway-building overlay for invalid direction %i", dir);
+			const auto winfo = waterway_building.road_previews.find(field.fcoords);
+			if (winfo != waterway_building.road_previews.end()) {
+				for (uint8_t dir : winfo->second) {
+					switch (dir) {
+					case Widelands::WALK_E:
+						field.road_e = Widelands::RoadSegment::kWaterway;
+						break;
+					case Widelands::WALK_SE:
+						field.road_se = Widelands::RoadSegment::kWaterway;
+						break;
+					case Widelands::WALK_SW:
+						field.road_sw = Widelands::RoadSegment::kWaterway;
+						break;
+					default:
+						throw wexception(
+						   "Attempt to set waterway-building overlay for invalid direction %i", dir);
+					}
 				}
 			}
-		}
 
-		draw_border_markers(field, scale, *fields_to_draw, &dst);
+			draw_border_markers(field, scale, *fields_to_draw, &dst);
 
-		if (draw_immovables_) {
-			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
-			if (imm != nullptr && imm->get_positions(ebase).front() == field.fcoords) {
-				imm->draw(
-				   gametime, InfoToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
+			if (draw_immovables_) {
+				if (field.vision > 1) {
+					Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
+					if (imm != nullptr && imm->get_positions(ebase).front() == field.fcoords) {
+						imm->draw(
+						   gametime, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, &dst);
+					}
+				} else if (field.vision > 0) {
+					draw_immovable_for_formerly_visible_field(field, *player_field, scale, &dst);
+				}
 			}
-		}
 
-		if (draw_bobs_) {
-			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
-			     bob = bob->get_next_bob()) {
-				bob->draw(
-				   ebase, InfoToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
+			if (draw_bobs_ && field.vision > 1) {
+				for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
+				     bob = bob->get_next_bob()) {
+					bob->draw(ebase, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, &dst);
+				}
 			}
-		}
 
-		// Draw resource overlay.
-		uint8_t const amount = field.fcoords.field->get_resources_amount();
-		if (draw_resources_ && amount > 0) {
-			const std::string& immname =
-			   world.get_resource(field.fcoords.field->get_resources())->editor_image(amount);
-			if (!immname.empty()) {
-				const auto* pic = g_gr->images().get(immname);
-				blit_field_overlay(
-				   &dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+			// Draw resource overlay.
+			uint8_t const amount = field.fcoords.field->get_resources_amount();
+			if (draw_resources_ && amount > 0) {
+				const std::string& immname =
+				   world.get_resource(field.fcoords.field->get_resources())->editor_image(amount);
+				if (!immname.empty()) {
+					const auto* pic = g_gr->images().get(immname);
+					blit_field_overlay(
+					   &dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+				}
 			}
-		}
 
-		// Draw build help.
-		if (buildhelp()) {
-			const auto* overlay =
-			   get_buildhelp_overlay(tools_->current().nodecaps_for_buildhelp(field.fcoords, ebase));
-			if (overlay != nullptr) {
-				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale);
+			// Draw build help.
+			if (buildhelp()) {
+				const auto* overlay = get_buildhelp_overlay(
+				   tools_->current().nodecaps_for_buildhelp(field.fcoords, ebase));
+				if (overlay != nullptr) {
+					blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale);
+				}
 			}
-		}
 
-		// Draw the player starting position overlays.
-		const auto it = starting_positions.find(field.fcoords);
-		if (it != starting_positions.end()) {
-			const Image* player_image =
-			   playercolor_image(it->second - 1, "images/players/player_position.png");
-			assert(player_image != nullptr);
-			constexpr int kStartingPosHotspotY = 55;
-			blit_field_overlay(&dst, field, player_image,
-			                   Vector2i(player_image->width() / 2, kStartingPosHotspotY), scale);
+			// Draw the player starting position overlays.
+			const auto it = starting_positions.find(field.fcoords);
+			if (it != starting_positions.end()) {
+				const Image* player_image =
+				   playercolor_image(it->second - 1, "images/players/player_position.png");
+				assert(player_image != nullptr);
+				constexpr int kStartingPosHotspotY = 55;
+				blit_field_overlay(&dst, field, player_image,
+				                   Vector2i(player_image->width() / 2, kStartingPosHotspotY), scale);
+			}
 		}
 
 		// Draw selection markers on the field.
@@ -881,15 +964,19 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 
-		const auto itb = road_building.steepness_indicators.find(field.fcoords);
-		if (itb != road_building.steepness_indicators.end()) {
-			blit_field_overlay(&dst, field, itb->second,
-			                   Vector2i(itb->second->width() / 2, itb->second->height() / 2), scale);
-		}
-		const auto itw = waterway_building.steepness_indicators.find(field.fcoords);
-		if (itw != waterway_building.steepness_indicators.end()) {
-			blit_field_overlay(&dst, field, itw->second,
-			                   Vector2i(itw->second->width() / 2, itw->second->height() / 2), scale);
+		if (field.vision > 0) {
+			const auto itb = road_building.steepness_indicators.find(field.fcoords);
+			if (itb != road_building.steepness_indicators.end()) {
+				blit_field_overlay(&dst, field, itb->second,
+				                   Vector2i(itb->second->width() / 2, itb->second->height() / 2),
+				                   scale);
+			}
+			const auto itw = waterway_building.steepness_indicators.find(field.fcoords);
+			if (itw != waterway_building.steepness_indicators.end()) {
+				blit_field_overlay(&dst, field, itw->second,
+				                   Vector2i(itw->second->width() / 2, itw->second->height() / 2),
+				                   scale);
+			}
 		}
 	}
 }
@@ -1051,6 +1138,13 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			toolmenu_.toggle();
 			return true;
 
+		case SDLK_c:
+			if (finalized_) {
+				set_display_flag(dfShowCensus, !get_display_flag(dfShowCensus));
+				rebuild_showhide_menu();
+			}
+			return true;
+
 		case SDLK_y:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				history_->redo_action();
@@ -1100,6 +1194,8 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 			abort_build_road();
 		if (is_building_waterway())
 			abort_build_waterway();
+		illustrating_vision_for_ =
+		   &primary == &tools_->sc_vision ? tools_->sc_vision.get_player() : 0;
 	}
 	if (which == EditorTool::First && &primary != tools_->current_pointer) {
 		if (primary.has_size_one()) {
@@ -1465,6 +1561,7 @@ std::string EditorInteractive::try_finalize() {
 	tool_windows_.players.destroy();
 	menu_windows_.mapoptions.destroy();
 	rebuild_main_menu();
+	rebuild_showhide_menu();
 	scenario_toolmenu_.set_enabled(true);
 	select_tool(tools_->info, EditorTool::ToolIndex::First);
 	return "";

@@ -96,9 +96,7 @@ struct Road : public RoadBase {
 	}
 
 	// Use in the editor only!
-	void set_busy(bool b) {
-		busy_ = b;
-	}
+	void set_busy(EditorGameBase& e, bool);
 
 protected:
 	bool is_bridge(const EditorGameBase&, const FCoords&, uint8_t) const override;

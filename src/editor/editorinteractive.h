@@ -36,6 +36,7 @@
 #include "editor/tools/scenario_infrastructure_settings_tool.h"
 #include "editor/tools/scenario_infrastructure_tool.h"
 #include "editor/tools/scenario_road_tool.h"
+#include "editor/tools/scenario_vision_tool.h"
 #include "editor/tools/scenario_worker_tool.h"
 #include "editor/tools/set_origin_tool.h"
 #include "editor/tools/set_port_space_tool.h"
@@ -75,6 +76,7 @@ public:
 		     set_origin(),
 		     resize(map.get_width(), map.get_height()),
 		     sc_owner(),
+		     sc_vision(),
 		     sc_infra_del(),
 		     sc_infra(sc_infra_del),
 		     sc_infra_settings(),
@@ -109,6 +111,7 @@ public:
 		EditorResizeTool resize;
 
 		ScenarioFieldOwnerTool sc_owner;
+		ScenarioVisionTool sc_vision;
 		ScenarioInfrastructureDeleteTool sc_infra_del;
 		ScenarioInfrastructureTool sc_infra;
 		ScenarioInfrastructureSettingsTool sc_infra_settings;
@@ -174,6 +177,15 @@ public:
 	// Access to the tools.
 	Tools* tools();
 
+	// Player vision tool
+	Widelands::PlayerNumber get_illustrating_vision_for() const {
+		return illustrating_vision_for_;
+	}
+	void set_illustrating_vision_for(Widelands::PlayerNumber p) {
+		assert(finalized_);
+		illustrating_vision_for_ = p;
+	}
+
 	// Scripting access
 	bool finalized() const {
 		return finalized_;
@@ -238,6 +250,7 @@ private:
 	// For referencing the items in scenario_toolmenu_
 	enum class ScenarioToolMenuEntry {
 		kFieldOwner,
+		kVision,
 		kInfrastructure,
 		kInfrastructureSettings,
 		kWorker,
@@ -246,7 +259,7 @@ private:
 	};
 
 	// For referencing the items in showhidemenu_
-	enum class ShowHideEntry { kBuildingSpaces, kGrid, kAnimals, kImmovables, kResources };
+	enum class ShowHideEntry { kBuildingSpaces, kGrid, kAnimals, kImmovables, kResources, kCensus };
 
 	// Adds the mainmenu_ to the toolbar
 	void add_main_menu();
@@ -315,6 +328,7 @@ private:
 	} tool_windows_;
 	struct ScenarioToolWindows {
 		UI::UniqueWindow::Registry fieldowner;
+		UI::UniqueWindow::Registry vision;
 		UI::UniqueWindow::Registry infrastructure;
 		UI::UniqueWindow::Registry worker;
 		UI::UniqueWindow::Registry road;
@@ -323,6 +337,7 @@ private:
 
 	std::vector<std::unique_ptr<UI::UniqueWindow::Registry>> allowed_buildings_windows_;
 	void init_allowed_buildings_windows_registries();
+	Widelands::PlayerNumber illustrating_vision_for_;
 
 	void unfinalize();
 

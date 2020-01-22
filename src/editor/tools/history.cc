@@ -59,7 +59,6 @@ EditorActionArgs::~EditorActionArgs() {
 	original_heights.clear();
 	original_terrain_type.clear();
 	terrain_type.clear();
-	infrastructure_deleted.clear();
 }
 
 // === EditorHistory === //
