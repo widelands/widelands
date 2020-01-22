@@ -4,6 +4,44 @@ wl_library(editor
     editorinteractive.h
     map_generator.cc
     map_generator.h
+    tools/action_args.h
+    tools/history.cc
+    tools/history.h
+    tools/tool.h
+    tools/tool_action.h
+  DEPENDS
+    base_macros
+    editor_ui
+    wui
+    ui_basic
+    editor_tools_ui
+    editor_scenario_tools
+    editor_scenario_tools_ui
+    graphic_surface
+    editor_tools
+    logic_map_objects
+    base_scoped_timer
+    scripting_lua_table
+    base_exceptions
+    map_io_map_loader
+    widelands_options
+    notifications
+    graphic_game_renderer
+    logic_widelands_geometry
+    sound
+    graphic
+    build_info
+    scripting_lua_interface
+    graphic_playercolor
+    editor_scripting
+    logic_map
+    logic
+    base_i18n
+    io_fileread
+    logic_tribe_basic_info
+)
+wl_library(editor_scripting
+  SRCS
     scripting/builtin.cc
     scripting/builtin.h
     scripting/constexpr.cc
@@ -20,7 +58,16 @@ wl_library(editor
     scripting/scripting.h
     scripting/variable.cc
     scripting/variable.h
-    tools/action_args.h
+  DEPENDS
+    base_exceptions
+    base_i18n
+    base_macros
+    editor
+    io_fileread
+    logic_exceptions
+)
+wl_library(editor_tools
+  SRCS
     tools/decrease_height_tool.cc
     tools/decrease_height_tool.h
     tools/decrease_resources_tool.cc
@@ -31,8 +78,6 @@ wl_library(editor
     tools/delete_immovable_tool.h
     tools/draw_tool.cc
     tools/draw_tool.h
-    tools/history.cc
-    tools/history.h
     tools/increase_height_tool.cc
     tools/increase_height_tool.h
     tools/increase_resources_tool.cc
@@ -48,18 +93,6 @@ wl_library(editor
     tools/place_immovable_tool.h
     tools/resize_tool.cc
     tools/resize_tool.h
-    tools/scenario_field_owner_tool.cc
-    tools/scenario_field_owner_tool.h
-    tools/scenario_infrastructure_settings_tool.cc
-    tools/scenario_infrastructure_settings_tool.h
-    tools/scenario_infrastructure_tool.cc
-    tools/scenario_infrastructure_tool.h
-    tools/scenario_road_tool.cc
-    tools/scenario_road_tool.h
-    tools/scenario_worker_tool.cc
-    tools/scenario_worker_tool.h
-    tools/scenario_vision_tool.cc
-    tools/scenario_vision_tool.h
     tools/set_height_tool.cc
     tools/set_height_tool.h
     tools/set_origin_tool.cc
@@ -72,8 +105,46 @@ wl_library(editor
     tools/set_starting_pos_tool.h
     tools/set_terrain_tool.cc
     tools/set_terrain_tool.h
-    tools/tool.h
-    tools/tool_action.h
+  DEPENDS
+    base_i18n
+    base_macros
+    editor
+    graphic_playercolor
+    graphic_text_layout
+    logic
+    logic_map
+    logic_map_objects
+    logic_widelands_geometry
+    ui_basic
+    wui_mapview_pixelfunctions
+)
+wl_library(editor_scenario_tools
+  SRCS
+    tools/scenario_field_owner_tool.cc
+    tools/scenario_field_owner_tool.h
+    tools/scenario_infrastructure_settings_tool.cc
+    tools/scenario_infrastructure_settings_tool.h
+    tools/scenario_infrastructure_tool.cc
+    tools/scenario_infrastructure_tool.h
+    tools/scenario_road_tool.cc
+    tools/scenario_road_tool.h
+    tools/scenario_worker_tool.cc
+    tools/scenario_worker_tool.h
+    tools/scenario_vision_tool.cc
+    tools/scenario_vision_tool.h
+  DEPENDS
+    base_i18n
+    economy
+    editor
+    editor_scenario_tools_ui
+    logic
+    logic_constants
+    logic_map
+    logic_map_objects
+    logic_widelands_geometry
+)
+wl_library(editor_ui
+  SRCS
     ui_menus/categorized_item_selection_menu.h
     ui_menus/help.cc
     ui_menus/help.h
@@ -93,14 +164,82 @@ wl_library(editor
     ui_menus/main_menu_save_map_make_directory.h
     ui_menus/map_size_box.cc
     ui_menus/map_size_box.h
+    ui_menus/scenario_lua.cc
+    ui_menus/scenario_lua.h
+    ui_menus/tool_options_menu.cc
+    ui_menus/tool_options_menu.h
+    ui_menus/toolsize_menu.cc
+    ui_menus/toolsize_menu.h
+  DEPENDS
+    base_macros
+    logic_map_objects_description_maintainer
+    random
+    io_filesystem
+    logic_filesystem_constants
+    wui
+    graphic_fonthandler
+    ui_basic
+    graphic_surface
+    base_log
+    editor
+    wui_common_mapdetails
+    logic_map_objects
+    base_exceptions
+    scripting_lua_table
+    scripting_coroutine
+    map_io_map_loader
+    map_io
+    logic_generic_save_handler
+    widelands_options
+    graphic
+    graphic_text_layout
+    scripting_lua_interface
+    editor_scripting
+    logic_map
+    logic
+    base_i18n
+)
+wl_library(editor_tools_ui
+  SRCS
     ui_menus/player_menu.cc
     ui_menus/player_menu.h
+    ui_menus/tool_change_height_options_menu.cc
+    ui_menus/tool_change_height_options_menu.h
+    ui_menus/tool_change_resources_options_menu.cc
+    ui_menus/tool_change_resources_options_menu.h
+    ui_menus/tool_noise_height_options_menu.cc
+    ui_menus/tool_noise_height_options_menu.h
+    ui_menus/tool_place_critter_options_menu.cc
+    ui_menus/tool_place_critter_options_menu.h
+    ui_menus/tool_place_immovable_options_menu.cc
+    ui_menus/tool_place_immovable_options_menu.h
+    ui_menus/tool_resize_options_menu.cc
+    ui_menus/tool_resize_options_menu.h
+    ui_menus/tool_set_terrain_options_menu.cc
+    ui_menus/tool_set_terrain_options_menu.h
+  DEPENDS
+    base_exceptions
+    base_i18n
+    editor
+    editor_tools
+    editor_ui
+    graphic
+    graphic_playercolor
+    graphic_surface
+    logic_constants
+    logic_map
+    logic_map_objects
+    logic_tribe_basic_info
+    logic_widelands_geometry
+    ui_basic
+    widelands_options
+)
+wl_library(editor_scenario_tools_ui
+  SRCS
     ui_menus/player_teams_menu.cc
     ui_menus/player_teams_menu.h
     ui_menus/scenario_infrastructure_settings_window.h
     ui_menus/scenario_infrastructure_settings_window.cc
-    ui_menus/scenario_lua.cc
-    ui_menus/scenario_lua.h
     ui_menus/scenario_tool_field_owner_options_menu.cc
     ui_menus/scenario_tool_field_owner_options_menu.h
     ui_menus/scenario_tool_infrastructure_options_menu.cc
@@ -111,63 +250,18 @@ wl_library(editor
     ui_menus/scenario_tool_worker_options_menu.h
     ui_menus/scenario_tool_vision_options_menu.cc
     ui_menus/scenario_tool_vision_options_menu.h
-    ui_menus/tool_change_height_options_menu.cc
-    ui_menus/tool_change_height_options_menu.h
-    ui_menus/tool_change_resources_options_menu.cc
-    ui_menus/tool_change_resources_options_menu.h
-    ui_menus/tool_noise_height_options_menu.cc
-    ui_menus/tool_noise_height_options_menu.h
-    ui_menus/tool_options_menu.cc
-    ui_menus/tool_options_menu.h
-    ui_menus/tool_place_critter_options_menu.cc
-    ui_menus/tool_place_critter_options_menu.h
-    ui_menus/tool_place_immovable_options_menu.cc
-    ui_menus/tool_place_immovable_options_menu.h
-    ui_menus/tool_resize_options_menu.cc
-    ui_menus/tool_resize_options_menu.h
-    ui_menus/tool_set_terrain_options_menu.cc
-    ui_menus/tool_set_terrain_options_menu.h
-    ui_menus/toolsize_menu.cc
-    ui_menus/toolsize_menu.h
-  USES_SDL2
   DEPENDS
-    base_exceptions
-    base_i18n
-    base_log
-    base_macros
-    base_scoped_timer
-    build_info
-    economy
-    graphic
-    graphic_fonthandler
-    graphic_game_renderer
-    graphic_playercolor
-    graphic_surface
-    graphic_text_layout
-    io_fileread
-    io_filesystem
-    logic
-    logic_constants
-    logic_exceptions
-    logic_filesystem_constants
-    logic_generic_save_handler
-    logic_map
-    logic_map_objects
-    logic_map_objects_description_maintainer
     logic_tribe_basic_info
-    logic_widelands_geometry
-    map_io
-    map_io_map_loader
-    notifications
-    random
-    scripting_coroutine
-    scripting_lua_interface
-    scripting_lua_table
-    sound
-    ui_basic
-    widelands_options
-    wui
-    wui_common_mapdetails
+    logic_map
+    graphic
+    editor_ui
+    editor_scenario_tools
+    graphic_playercolor
     wui_economy_options
-    wui_mapview_pixelfunctions
+    logic_constants
+    editor
+    logic_map_objects
+    base_i18n
+    ui_basic
+    economy
 )
