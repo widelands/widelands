@@ -39,14 +39,12 @@ public:
 		return a_;
 	}
 	void set_a(Assignable& a) {
-		assert(a.type().is_subclass(input_type_));
 		a_ = &a;
 	}
 	Assignable* get_b() const {
 		return b_;
 	}
 	void set_b(Assignable& b) {
-		assert(b.type().is_subclass(input_type_));
 		b_ = &b;
 	}
 
@@ -58,6 +56,8 @@ public:
 	void write_lua(int32_t, FileWrite&) const override;
 
 	std::string readable() const override;
+
+	void selftest() const override;
 
 	virtual std::string op() const = 0;
 
@@ -141,6 +141,8 @@ public:
 
 	std::string readable() const override;
 
+	void selftest() const override;
+
 private:
 	Assignable* a_;
 	Assignable* b_;
@@ -152,8 +154,6 @@ private:
 class OperatorNot : public Assignable {
 public:
 	OperatorNot(Assignable* a) : a_(a) {
-		if (a_)
-			assert(is(a_->type().id(), VariableTypeID::Boolean));
 	}
 	~OperatorNot() override {
 	}
@@ -165,7 +165,6 @@ public:
 		return a_;
 	}
 	void set_a(Assignable& a) {
-		assert(is(a.type().id(), VariableTypeID::Boolean));
 		a_ = &a;
 	}
 
@@ -180,6 +179,8 @@ public:
 	ScriptingObject::ID id() const override {
 		return ScriptingObject::ID::OperatorNot;
 	}
+
+	void selftest() const override;
 
 private:
 	Assignable* a_;
@@ -216,6 +217,8 @@ public:
 	ScriptingObject::ID id() const override {
 		return ScriptingObject::ID::OperatorIsNil;
 	}
+
+	void selftest() const override;
 
 private:
 	Assignable* a_;

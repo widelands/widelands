@@ -28,7 +28,8 @@
 
 class Variable : public Assignable {
 public:
-	Variable(const VariableType&, const std::string&, bool spellcheck = true);
+	Variable(const VariableType& t, const std::string& n) : type_(t), name_(n) {
+	}
 	~Variable() override {
 	}
 	ScriptingObject::ID id() const override {
@@ -45,7 +46,6 @@ public:
 		return name_;
 	}
 	void rename(const std::string& n) {
-		check_name_valid(n);
 		name_ = n;
 	}
 	void write_lua(int32_t, FileWrite&) const override;
@@ -53,6 +53,8 @@ public:
 	std::string readable() const override {
 		return name_;
 	}
+
+	void selftest() const override;
 
 private:
 	VariableType type_;
@@ -90,6 +92,8 @@ public:
 	void load_pointers(const ScriptingLoader&, Loader&) override;
 	std::set<uint32_t> references() const override;
 
+	void selftest() const override;
+
 private:
 	Assignable* variable_;
 	Property* property_;
@@ -125,6 +129,8 @@ public:
 
 	void load_pointers(const ScriptingLoader&, Loader&) override;
 	std::set<uint32_t> references() const override;
+
+	void selftest() const override;
 
 private:
 	Assignable* table_;

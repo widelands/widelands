@@ -27,10 +27,13 @@
 
 constexpr uint16_t kCurrentPacketVersionVariable = 1;
 
-Variable::Variable(const VariableType& t, const std::string& n, bool spellcheck)
-   : type_(t), name_(n) {
-	if (spellcheck)
-		check_name_valid(name_);
+void Variable::selftest() const {
+	Assignable::selftest();
+	check_name_valid(name_);
+	if (type_.id() == VariableTypeID::Nil)
+		throw wexception("type is nil");
+	else if (type_.id() == VariableTypeID::Any)
+		throw wexception("type is any");
 }
 
 void Variable::load(FileRead& fr, Loader& l) {
@@ -43,7 +46,6 @@ void Variable::load(FileRead& fr, Loader& l) {
 		}
 		type_ = VariableType(fr);
 		name_ = fr.c_string();
-		check_name_valid(name_);
 	} catch (const WException& e) {
 		throw wexception("editor scripting variable: %s", e.what());
 	}
@@ -89,13 +91,10 @@ void GetProperty::load_pointers(const ScriptingLoader& l, Loader& loader) {
 void GetProperty::save(FileWrite& fw) const {
 	Assignable::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionGetProperty);
-	assert(variable_);
-	assert(property_);
 	fw.unsigned_32(variable_->serial());
 	fw.unsigned_32(property_to_serial(*property_));
 }
 const VariableType& GetProperty::type() const {
-	assert(property_);
 	return property_->get_type();
 }
 void GetProperty::set_property(Property& p) {
@@ -111,20 +110,24 @@ void GetProperty::set_variable(Assignable& v) {
 	}
 }
 void GetProperty::write_lua(int32_t i, FileWrite& fw) const {
-	assert(variable_);
-	assert(property_);
-	assert(variable_->type().is_subclass(property_->get_class()));
 	variable_->write_lua(i, fw);
 	fw.print_f(".%s", property_->get_name().c_str());
 }
+void GetProperty::selftest() const {
+	Assignable::selftest();
+	if (!variable_)
+		throw wexception("variable not set");
+	if (!property_)
+		throw wexception("property not set");
+	if (!variable_->type().is_subclass(property_->get_class()))
+		throw wexception("%s cannot be casted to %s", descname(variable_->type()).c_str(),
+		                 descname(property_->get_class()).c_str());
+}
 std::string GetProperty::readable() const {
-	assert(variable_);
-	assert(property_);
 	return variable_->readable() + "." + property_->get_name();
 }
 std::set<uint32_t> GetProperty::references() const {
 	auto set = Assignable::references();
-	assert(variable_);
 	set.insert(variable_->serial());
 	return set;
 }
@@ -158,8 +161,6 @@ void GetTable::load_pointers(const ScriptingLoader& l, Loader& loader) {
 void GetTable::save(FileWrite& fw) const {
 	Assignable::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionGetTable);
-	assert(table_);
-	assert(property_);
 	fw.unsigned_32(table_->serial());
 	fw.unsigned_32(property_->serial());
 }
@@ -179,9 +180,6 @@ void GetTable::set_property(Assignable& p) {
 	}
 }
 void GetTable::write_lua(int32_t i, FileWrite& fw) const {
-	assert(table_);
-	assert(property_);
-	assert(table_->type().key_type().is_subclass(property_->type()));
 	table_->write_lua(i, fw);
 	// We do not use 'x.y' syntax even if we have a string as key type, because figuring
 	// out whether we have a string literal here and telling it not to use quotation marks
@@ -190,15 +188,21 @@ void GetTable::write_lua(int32_t i, FileWrite& fw) const {
 	property_->write_lua(i, fw);
 	fw.print_f("]");
 }
+void GetTable::selftest() const {
+	Assignable::selftest();
+	if (!table_)
+		throw wexception("table not set");
+	if (!property_)
+		throw wexception("property not set");
+	if (!property_->type().is_subclass(table_->type().key_type()))
+		throw wexception("%s cannot be casted to %s", descname(property_->type()).c_str(),
+		                 descname(table_->type().key_type()).c_str());
+}
 std::string GetTable::readable() const {
-	assert(table_);
-	assert(property_);
 	return table_->readable() + "[" + property_->readable() + "]";
 }
 std::set<uint32_t> GetTable::references() const {
 	auto set = Assignable::references();
-	assert(table_);
-	assert(property_);
 	set.insert(table_->serial());
 	set.insert(property_->serial());
 	return set;

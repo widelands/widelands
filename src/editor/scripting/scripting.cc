@@ -60,6 +60,10 @@ uint32_t ScriptingObject::next_serial_ = 0;
 constexpr uint16_t kCurrentPacketVersionScriptingObjectHeader = 1;
 constexpr uint16_t kCurrentPacketVersionScriptingObject = 1;
 
+void ScriptingObject::selftest() const {
+	if (!serial_)
+		throw wexception("not initialized");
+}
 void ScriptingObject::init(ScriptingSaver& s, bool init_serial) {
 	if (init_serial) {
 		if (serial_) {
@@ -113,13 +117,17 @@ ScriptingObject* ScriptingObject::load(FileRead& fr) {
 		case ID::ConstexprNil:
 			return new ConstexprNil();
 		case ID::Variable:
-			return new Variable(VariableType(VariableTypeID::Nil), "", false);
+			return new Variable(VariableType(VariableTypeID::Nil), "");
 		case ID::GetProperty:
 			return new GetProperty(nullptr, nullptr);
 		case ID::GetTable:
 			return new GetTable(nullptr, nullptr);
 		case ID::LuaFunction:
-			return new LuaFunction("", false);
+			return new LuaFunction("");
+		case ID::FSReturn:
+			return new FS_Return(nullptr);
+		case ID::FSBreak:
+			return new FS_Break();
 		case ID::FSFunctionCall:
 			return new FS_FunctionCall(nullptr, nullptr, {});
 		case ID::FSLocalVarDeclOrAssign:
@@ -168,6 +176,8 @@ ScriptingObject* ScriptingObject::load(FileRead& fr) {
 			return new OperatorStringConcat(nullptr, nullptr);
 		case ID::FSWhile:
 			return new FS_While(false, nullptr);
+		case ID::FSFor:
+			return new FS_For(nullptr, nullptr, nullptr);
 		case ID::FSForEach:
 			return new FS_ForEach(nullptr, nullptr, nullptr);
 		case ID::FSIf:
@@ -235,8 +245,6 @@ void VariableType::write(FileWrite& fw) const {
 	fw.unsigned_16(kCurrentPacketVersionVariableType);
 	fw.unsigned_16(static_cast<uint16_t>(id_));
 	if (id_ == VariableTypeID::Table) {
-		assert(key_);
-		assert(value_);
 		key_->write(fw);
 		value_->write(fw);
 	}
@@ -251,8 +259,12 @@ bool VariableType::is_subclass(const VariableType& v) const {
 }
 
 // static
-std::string descname(VariableTypeID t) {
-	switch (t) {
+std::string descname(const VariableType& t) {
+	switch (t.id()) {
+	case VariableTypeID::Table:
+		return (boost::format(_("Table<%1$s = %2$s>")) % descname(t.key_type()) %
+		        descname(t.value_type()))
+		   .str();
 	case VariableTypeID::Any:
 		return _("Any");
 	case VariableTypeID::Nil:
@@ -265,8 +277,6 @@ std::string descname(VariableTypeID t) {
 		return _("Boolean");
 	case VariableTypeID::String:
 		return _("String");
-	case VariableTypeID::Table:
-		return _("Table");
 	case VariableTypeID::Game:
 		return _("Game");
 	case VariableTypeID::Map:
@@ -500,16 +510,25 @@ void ScriptingSaver::add(ScriptingObject& a) {
 	list_.push_back(std::unique_ptr<ScriptingObject>(&a));
 }
 
+void ScriptingSaver::selftest() const {
+	for (const auto& a : list_) {
+		if (!a) {
+			throw wexception("ScriptingSaver: A list entry is nullptr");
+		}
+		try {
+			a->selftest();
+		} catch (const WException& w) {
+			throw wexception("selftest for ScriptingObject %s %u failed: %s", typeid(*a).name(),
+			                 a->serial(), w.what());
+		}
+	}
+}
+
 void ScriptingSaver::save(FileWrite& fw) const {
 	fw.unsigned_16(kCurrentPacketVersionScripting);
 	fw.unsigned_32(list_.size());
-	for (const auto& a : list_) {
-		if (!a->serial()) {
-			throw wexception(
-			   "ScriptingSaver: a scripting object of type %s was not initialized", typeid(*a).name());
-		}
+	for (const auto& a : list_)
 		a->save(fw);
-	}
 }
 
 void ScriptingSaver::delete_unused(const EditorInteractive& eia) {

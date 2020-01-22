@@ -26,8 +26,6 @@
 class FS_While : public FunctionStatement {
 public:
 	FS_While(bool w, Assignable* c) : is_while_(w), condition_(c) {
-		if (condition_)
-			assert(is(condition_->type().id(), VariableTypeID::Boolean));
 	}
 	~FS_While() override {
 	}
@@ -36,7 +34,6 @@ public:
 		return condition_;
 	}
 	void set_condition(Assignable& c) {
-		assert(is(c.type().id(), VariableTypeID::Boolean));
 		condition_ = &c;
 	}
 	const std::list<FunctionStatement*>& body() const {
@@ -64,6 +61,8 @@ public:
 		return ScriptingObject::ID::FSWhile;
 	}
 
+	void selftest() const override;
+
 private:
 	bool is_while_;
 	Assignable* condition_;
@@ -77,8 +76,6 @@ private:
 class FS_ForEach : public FunctionStatement {
 public:
 	FS_ForEach(Variable* i, Variable* j, Assignable* t) : table_(t), i_(i), j_(j) {
-		if (table_)
-			assert(is(table_->type().id(), VariableTypeID::Table));
 	}
 	~FS_ForEach() override {
 	}
@@ -93,15 +90,12 @@ public:
 		return table_;
 	}
 	void set_i(Variable& v) {
-		assert(table_->type().key_type().is_subclass(v.type()));
 		i_ = &v;
 	}
 	void set_j(Variable& v) {
-		assert(table_->type().value_type().is_subclass(v.type()));
 		j_ = &v;
 	}
 	void set_table(Assignable& t) {
-		assert(is(t.type().id(), VariableTypeID::Table));
 		table_ = &t;
 	}
 	const std::list<FunctionStatement*>& body() const {
@@ -123,6 +117,8 @@ public:
 		return ScriptingObject::ID::FSForEach;
 	}
 
+	void selftest() const override;
+
 private:
 	Assignable* table_;
 	Variable* i_;
@@ -132,12 +128,68 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(FS_ForEach);
 };
 
+// 'for x = 1,10 do'
+// Note that the iterator is implemented as an Integer variable. Both borders have to be Integer
+// Assignables.
+class FS_For : public FunctionStatement {
+public:
+	FS_For(Variable* v, Assignable* i, Assignable* j) : variable_(v), i_(i), j_(j) {
+	}
+	~FS_For() override {
+	}
+
+	Assignable* get_i() const {
+		return i_;
+	}
+	Assignable* get_j() const {
+		return j_;
+	}
+	Variable* get_variable() const {
+		return variable_;
+	}
+	void set_i(Assignable& v) {
+		i_ = &v;
+	}
+	void set_j(Assignable& v) {
+		j_ = &v;
+	}
+	void set_variable(Variable& v) {
+		variable_ = &v;
+	}
+	const std::list<FunctionStatement*>& body() const {
+		return body_;
+	}
+	std::list<FunctionStatement*>& mutable_body() {
+		return body_;
+	}
+
+	std::set<uint32_t> references() const override;
+
+	void load(FileRead&, Loader&) override;
+	void load_pointers(const ScriptingLoader&, Loader&) override;
+	void save(FileWrite&) const override;
+	void write_lua(int32_t, FileWrite&) const override;
+
+	std::string readable() const override;
+	ScriptingObject::ID id() const override {
+		return ScriptingObject::ID::FSFor;
+	}
+
+	void selftest() const override;
+
+private:
+	Variable* variable_;
+	Assignable* i_;
+	Assignable* j_;
+	std::list<FunctionStatement*> body_;
+
+	DISALLOW_COPY_AND_ASSIGN(FS_For);
+};
+
 // An if clause, optionally with an else clause and any number of elseif blocks
 class FS_If : public FunctionStatement {
 public:
 	FS_If(Assignable* c) : condition_(c) {
-		if (condition_)
-			assert(is(condition_->type().id(), VariableTypeID::Boolean));
 	}
 	~FS_If() override {
 	}
@@ -146,7 +198,6 @@ public:
 		return condition_;
 	}
 	void set_condition(Assignable& c) {
-		assert(is(c.type().id(), VariableTypeID::Boolean));
 		condition_ = &c;
 	}
 	const std::list<FunctionStatement*>& if_body() const {
@@ -179,6 +230,8 @@ public:
 	ScriptingObject::ID id() const override {
 		return ScriptingObject::ID::FSIf;
 	}
+
+	void selftest() const override;
 
 private:
 	Assignable* condition_;

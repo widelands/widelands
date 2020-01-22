@@ -173,6 +173,7 @@ void MapScenarioEditorPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 		fw.unsigned_8(eia->get_display_flag(InteractiveBase::dfShowCensus) ? 1 : 0);
 
 		eia->scripting_saver().delete_unused(*eia);
+		eia->scripting_saver().selftest();
 		eia->scripting_saver().save(fw);
 
 		fw.unsigned_32(eia->functions_.size());

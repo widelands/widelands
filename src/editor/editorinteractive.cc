@@ -825,13 +825,13 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		if (player_field) {
 			field.vision = player_field->vision;
 			if (field.vision <= 1) {
-				field.road_e = field.vision * player_field->r_e;
-				field.road_se = field.vision * player_field->r_se;
-				field.road_sw = field.vision * player_field->r_sw;
+				field.road_e = field.vision ? player_field->r_e : Widelands::RoadSegment::kNone;
+				field.road_se = field.vision ? player_field->r_se : Widelands::RoadSegment::kNone;
+				field.road_sw = field.vision ? player_field->r_sw : Widelands::RoadSegment::kNone;
 				field.owner = field.vision && player_field->owner != 0 ?
 				                 ebase.get_player(player_field->owner) :
 				                 nullptr;
-				field.is_border = field.vision * player_field->border;
+				field.is_border = field.vision && player_field->border;
 				// Allow the user a tiny sneak-peak at unseen fields for convenience
 				field.brightness /= field.vision ? 2.f : 8.f;
 			}

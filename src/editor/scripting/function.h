@@ -41,8 +41,7 @@ public:
 	FunctionBase(const std::string&,
 	             const VariableType& c,
 	             const VariableType& r,
-	             std::list<std::pair<std::string, VariableType>>,
-	             bool = true);
+	             std::list<std::pair<std::string, VariableType>>);
 
 	virtual ~FunctionBase() {
 	}
@@ -51,7 +50,6 @@ public:
 		return name_;
 	}
 	void rename(const std::string& n) {
-		check_name_valid(n);
 		name_ = n;
 	}
 	const std::list<std::pair<std::string, VariableType>>& parameters() const {
@@ -72,7 +70,7 @@ public:
 
 protected:
 	// for LuaFunction
-	FunctionBase(const std::string&, bool spellcheck = true);
+	FunctionBase(const std::string&);
 
 	void set_returns(const VariableType& r) {
 		returns_ = r;
@@ -94,7 +92,7 @@ private:
 
 class LuaFunction : public ScriptingObject, public FunctionBase {
 public:
-	LuaFunction(const std::string& n, bool spellcheck = true) : FunctionBase(n, spellcheck) {
+	LuaFunction(const std::string& n) : FunctionBase(n) {
 	}
 	~LuaFunction() override {
 	}
@@ -120,6 +118,8 @@ public:
 	}
 
 	void load_pointers(const ScriptingLoader&, Loader&) override;
+
+	void selftest() const override;
 
 private:
 	std::list<FunctionStatement*> body_;

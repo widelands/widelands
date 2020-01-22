@@ -26,6 +26,49 @@
           Specific function statement implementations
 ************************************************************/
 
+// Return statement
+
+constexpr uint16_t kCurrentPacketVersionFS_Return = 1;
+void FS_Return::load(FileRead& fr, Loader& loader) {
+	try {
+		FunctionStatement::load(fr, loader);
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version != kCurrentPacketVersionFS_Return) {
+			throw Widelands::UnhandledVersionError(
+			   "FS_Return", packet_version, kCurrentPacketVersionFS_Return);
+		}
+		loader.push_back(fr.unsigned_32());
+	} catch (const WException& e) {
+		throw wexception("FS_Return: %s", e.what());
+	}
+}
+void FS_Return::load_pointers(const ScriptingLoader& l, Loader& loader) {
+	FunctionStatement::load_pointers(l, loader);
+	return_ = loader.front() ? &l.get<Assignable>(loader.front()) : nullptr;
+	loader.pop_front();
+}
+void FS_Return::save(FileWrite& fw) const {
+	FunctionStatement::save(fw);
+	fw.unsigned_16(kCurrentPacketVersionFS_Return);
+	fw.unsigned_32(return_ ? return_->serial() : 0);
+}
+std::set<uint32_t> FS_Return::references() const {
+	auto set = FunctionStatement::references();
+	if (return_)
+		set.insert(return_->serial());
+	return set;
+}
+std::string FS_Return::readable() const {
+	return return_ ? "return " + return_->readable() : "return";
+}
+void FS_Return::write_lua(int32_t i, FileWrite& fw) const {
+	fw.print_f("return");
+	if (return_) {
+		fw.print_f(" ");
+		return_->write_lua(i, fw);
+	}
+}
+
 // Variable declaration and assignment
 
 constexpr uint16_t kCurrentPacketVersionFS_LocalVarDeclOrAssign = 1;
@@ -62,7 +105,6 @@ void FS_LocalVarDeclOrAssign::write_lua(int32_t i, FileWrite& fw) const {
 	if (declare_local_) {
 		fw.print_f("local ");
 	}
-	assert(variable_);
 	variable_->write_lua(i, fw);
 	if (value_) {
 		fw.print_f(" = ");
@@ -82,11 +124,18 @@ std::string FS_LocalVarDeclOrAssign::readable() const {
 }
 std::set<uint32_t> FS_LocalVarDeclOrAssign::references() const {
 	auto set = FunctionStatement::references();
-	assert(variable_);
 	set.insert(variable_->serial());
 	if (value_)
 		set.insert(value_->serial());
 	return set;
+}
+void FS_LocalVarDeclOrAssign::selftest() const {
+	FunctionStatement::selftest();
+	if (!variable_)
+		throw wexception("variable not set");
+	if (value_ && !value_->type().is_subclass(variable_->type()))
+		throw wexception("%s cannot be casted to %s", descname(value_->type()).c_str(),
+		                 descname(variable_->type()).c_str());
 }
 
 // Function invoking
@@ -125,49 +174,44 @@ void FS_FunctionCall::save(FileWrite& fw) const {
 	FunctionStatement::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionFS_FunctionCall);
 	fw.unsigned_32(variable_ ? variable_->serial() : 0);
-	assert(function_);
 	fw.signed_32(function_to_serial(*function_));
 	fw.unsigned_32(parameters_.size());
 	for (const Assignable* p : parameters_) {
 		fw.unsigned_32(p->serial());
 	}
 }
-void FS_FunctionCall::check_parameters() const {
+void FS_FunctionCall::selftest() const {
+	FunctionStatement::selftest();
+	Assignable::selftest();
 	if (!function_) {
-		throw wexception("FS_FunctionCall: No function provided");
+		throw wexception("no function provided");
 	} else if (parameters_.size() != function_->parameters().size()) {
-		throw wexception("FS_FunctionCall %s: %" PRIuS " parameters provided, expected %" PRIuS,
-		                 function_->get_name().c_str(), parameters_.size(),
+		throw wexception("%" PRIuS " parameters provided, expected %" PRIuS, parameters_.size(),
 		                 function_->parameters().size());
 	}
 	if (function_->get_class().id() == VariableTypeID::Nil) {
 		if (variable_) {
-			throw wexception("FS_FunctionCall %s: static function cannot be called on a variable",
-			                 function_->get_name().c_str());
+			throw wexception("static function cannot be called on a variable");
 		}
 	} else {
 		if (!variable_) {
-			throw wexception(
-			   "FS_FunctionCall %s: non-static function needs to be called on a variable",
-			   function_->get_name().c_str());
+			throw wexception("non-static function needs to be called on a variable");
 		} else if (!function_->get_class().is_subclass(variable_->type())) {
-			throw wexception("FS_FunctionCall %s: variable of type %s cannot be casted to %s",
-			                 function_->get_name().c_str(), typeid(variable_->type()).name(),
-			                 typeid(function_->get_class()).name());
+			throw wexception("variable of type %s cannot be casted to %s",
+			                 descname(variable_->type()).c_str(),
+			                 descname(function_->get_class()).c_str());
 		}
 	}
 	auto it1 = parameters_.begin();
 	auto it2 = function_->parameters().begin();
 	for (; it1 != parameters_.end(); ++it1, ++it2) {
 		if (!(*it1)->type().is_subclass(it2->second)) {
-			throw wexception("FS_FunctionCall %s: argument of type %s cannot be casted to %s",
-			                 function_->get_name().c_str(), typeid((*it1)->type()).name(),
-			                 typeid(it2->second).name());
+			throw wexception("argument of type %s cannot be casted to %s",
+			                 descname((*it1)->type()).c_str(), descname(it2->second).c_str());
 		}
 	}
 }
 void FS_FunctionCall::write_lua(int32_t i, FileWrite& fw) const {
-	check_parameters();
 	if (variable_) {
 		variable_->write_lua(i, fw);
 		fw.print_f(":");
@@ -239,8 +283,6 @@ void FS_SetProperty::load_pointers(const ScriptingLoader& l, Loader& loader) {
 void FS_SetProperty::save(FileWrite& fw) const {
 	FunctionStatement::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionFS_SetProperty);
-	assert(variable_);
-	assert(property_);
 	fw.unsigned_32(variable_->serial());
 	fw.unsigned_32(property_to_serial(*property_));
 	fw.unsigned_32(value_->serial());
@@ -261,28 +303,33 @@ void FS_SetProperty::set_variable(Assignable& v) {
 	}
 }
 void FS_SetProperty::write_lua(int32_t i, FileWrite& fw) const {
-	assert(variable_);
-	assert(property_);
-	assert(value_);
-	assert(variable_->type().is_subclass(property_->get_class()));
-	assert(value_->type().is_subclass(property_->get_type()));
 	variable_->write_lua(i, fw);
 	fw.print_f(".%s = ", property_->get_name().c_str());
 	value_->write_lua(i, fw);
 }
 std::string FS_SetProperty::readable() const {
-	assert(variable_);
-	assert(property_);
-	assert(value_);
 	return variable_->readable() + "." + property_->get_name() + " = " + value_->readable();
 }
 std::set<uint32_t> FS_SetProperty::references() const {
 	auto set = FunctionStatement::references();
-	assert(variable_);
-	assert(value_);
 	set.insert(variable_->serial());
 	set.insert(value_->serial());
 	return set;
+}
+void FS_SetProperty::selftest() const {
+	FunctionStatement::selftest();
+	if (!variable_)
+		throw wexception("variable not set");
+	if (!property_)
+		throw wexception("property not set");
+	if (!value_)
+		throw wexception("value not set");
+	if (!variable_->type().is_subclass(property_->get_class()))
+		throw wexception("variable %s cannot be casted to %s", descname(variable_->type()).c_str(),
+		                 descname(property_->get_class()).c_str());
+	if (!value_->type().is_subclass(property_->get_type()))
+		throw wexception("value %s cannot be casted to %s", descname(value_->type()).c_str(),
+		                 descname(property_->get_type()).c_str());
 }
 
 // Table manipulation
@@ -315,9 +362,6 @@ void FS_SetTable::load_pointers(const ScriptingLoader& l, Loader& loader) {
 void FS_SetTable::save(FileWrite& fw) const {
 	FunctionStatement::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionFS_SetTable);
-	assert(table_);
-	assert(property_);
-	assert(value_);
 	fw.unsigned_32(table_->serial());
 	fw.unsigned_32(property_->serial());
 	fw.unsigned_32(value_->serial());
@@ -343,12 +387,22 @@ void FS_SetTable::set_table(Assignable& t) {
 		value_ = nullptr;
 	}
 }
+void FS_SetTable::selftest() const {
+	FunctionStatement::selftest();
+	if (!table_)
+		throw wexception("table not set");
+	if (!property_)
+		throw wexception("property not set");
+	if (!value_)
+		throw wexception("value not set");
+	if (!property_->type().is_subclass(table_->type().key_type()))
+		throw wexception("%s cannot be casted to key type %s", descname(property_->type()).c_str(),
+		                 descname(table_->type().key_type()).c_str());
+	if (!value_->type().is_subclass(table_->type().value_type()))
+		throw wexception("%s cannot be casted to value type %s", descname(value_->type()).c_str(),
+		                 descname(table_->type().value_type()).c_str());
+}
 void FS_SetTable::write_lua(int32_t i, FileWrite& fw) const {
-	assert(table_);
-	assert(property_);
-	assert(value_);
-	assert(property_->type().is_subclass(table_->type().key_type()));
-	assert(value_->type().is_subclass(table_->type().value_type()));
 	table_->write_lua(i, fw);
 	fw.print_f("[");
 	property_->write_lua(i, fw);
@@ -356,16 +410,10 @@ void FS_SetTable::write_lua(int32_t i, FileWrite& fw) const {
 	value_->write_lua(i, fw);
 }
 std::string FS_SetTable::readable() const {
-	assert(table_);
-	assert(property_);
-	assert(value_);
 	return table_->readable() + "[" + property_->readable() + "] = " + value_->readable();
 }
 std::set<uint32_t> FS_SetTable::references() const {
 	auto set = FunctionStatement::references();
-	assert(table_);
-	assert(property_);
-	assert(value_);
 	set.insert(table_->serial());
 	set.insert(property_->serial());
 	set.insert(value_->serial());
@@ -399,7 +447,6 @@ void FS_LaunchCoroutine::save(FileWrite& fw) const {
 	fw.unsigned_32(function_->serial());
 }
 void FS_LaunchCoroutine::write_lua(int32_t i, FileWrite& fw) const {
-	function_->check_parameters();
 	fw.print_f("run(%s", function_->get_function()->get_name().c_str());
 	for (const Assignable* p : function_->parameters()) {
 		fw.print_f(", ");
@@ -416,7 +463,11 @@ std::string FS_LaunchCoroutine::readable() const {
 }
 std::set<uint32_t> FS_LaunchCoroutine::references() const {
 	auto set = FunctionStatement::references();
-	assert(function_);
 	set.insert(function_->serial());
 	return set;
+}
+void FS_LaunchCoroutine::selftest() const {
+	FunctionStatement::selftest();
+	if (!function_)
+		throw wexception("function not set");
 }

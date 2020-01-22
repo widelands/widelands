@@ -73,8 +73,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
       new FunctionBase("math.random",
                        VariableType(VariableTypeID::Nil), // call on
                        VariableType(VariableTypeID::Integer), // returns
-                       {std::make_pair("max", VariableType(VariableTypeID::Integer))},
-                       false /* no spellcheck because of '.' */ )),
+                       {std::make_pair("max", VariableType(VariableTypeID::Integer))})),
    new BuiltinFunctionInfo(
       "random_2",
       /** TRANSLATORS: min and max are names of function parameters */
@@ -83,8 +82,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType(VariableTypeID::Nil), // call on
                        VariableType(VariableTypeID::Integer), // returns
                        {std::make_pair("min", VariableType(VariableTypeID::Integer)),
-                        std::make_pair("max", VariableType(VariableTypeID::Integer))},
-                       false /* no spellcheck because of '.' */ )),
+                        std::make_pair("max", VariableType(VariableTypeID::Integer))})),
 
 	// Shipped Lua functions
 
@@ -123,8 +121,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
       new FunctionBase("wl.Game",
                        VariableType(VariableTypeID::Nil), // call on
                        VariableType(VariableTypeID::Game), // returns
-                       {},
-                       false /* no spellcheck because of '.' */ )),
+                       {})),
    new BuiltinFunctionInfo(
       "save",
       []() { return _("Saves the game under the given name."); },
@@ -209,8 +206,7 @@ const BuiltinFunctionInfo* kBuiltinFunctions[] = {
                        VariableType(VariableTypeID::Nil), // returns
                        {std::make_pair("player", VariableType(VariableTypeID::Player)),
                        std::make_pair("result", VariableType(VariableTypeID::Integer)),
-                       std::make_pair("additional_info", VariableType(VariableTypeID::String))},
-                       false /* no spellcheck because of '.' */ )),
+                       std::make_pair("additional_info", VariableType(VariableTypeID::String))})),
 
    // Player
 

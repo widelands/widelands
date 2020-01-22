@@ -105,6 +105,8 @@ void MapSaver::save() {
 			// Save game-typical stuff also in the scenario editor
 			is_game = true;
 
+			// We first write the binary and then the Lua script, because the binary writer
+			// also checks in detail that all the ScriptingObject stuff is not messed up
 			log("Writing Scenario Editor Data ... ");
 			set_progress_message(_("Saving scenario data…"), -1);
 			MapScenarioEditorPacket packet;

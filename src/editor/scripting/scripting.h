@@ -192,7 +192,7 @@ private:
 	std::unique_ptr<VariableType> value_;
 };
 
-std::string descname(VariableTypeID);
+std::string descname(const VariableType&);
 bool is(VariableTypeID check, VariableTypeID supposed_superclass);
 
 /************************************************************
@@ -229,6 +229,8 @@ public:
 		GetProperty,
 		GetTable,
 		LuaFunction,
+		FSReturn,
+		FSBreak,
 		FSLaunchCoroutine,
 		FSFunctionCall,
 		FSSetProperty,
@@ -253,6 +255,7 @@ public:
 		OperatorGreaterEq,
 		OperatorStringConcat,
 		FSIf,
+		FSFor,
 		FSForEach,
 		FSWhile,
 	};
@@ -270,6 +273,9 @@ public:
 
 	// ± localized human-readable description of this object
 	virtual std::string readable() const = 0;
+
+	// Throws wexception if some argument is invalid
+	virtual void selftest() const;
 
 	// Returns the serials of all ScriptingObjects this ScriptingObject references in some way (e.g.
 	// assignments reference a variable and a value)
@@ -355,6 +361,7 @@ public:
 	void add(ScriptingObject&);
 	void save(FileWrite&) const;
 	void delete_unused(const EditorInteractive&);
+	void selftest() const;
 
 	template <typename T> std::list<T*> all() const {
 		std::list<T*> result;

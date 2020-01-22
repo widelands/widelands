@@ -22,6 +22,7 @@
 #include <boost/format.hpp>
 
 #include "editor/scripting/function.h"
+#include "editor/scripting/function_statements.h"
 
 // While
 
@@ -56,7 +57,6 @@ void FS_While::load_pointers(const ScriptingLoader& l, Loader& loader) {
 void FS_While::save(FileWrite& fw) const {
 	FunctionStatement::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionFS_While);
-	assert(condition_);
 	fw.unsigned_8(is_while_ ? 1 : 0);
 	fw.unsigned_32(condition_->serial());
 	fw.unsigned_32(body_.size());
@@ -64,9 +64,18 @@ void FS_While::save(FileWrite& fw) const {
 		fw.unsigned_32(f->serial());
 	}
 }
+void FS_While::selftest() const {
+	FunctionStatement::selftest();
+	if (!condition_)
+		throw wexception("condition not set");
+	if (!is(condition_->type().id(), VariableTypeID::Boolean))
+		throw wexception("condition is not a boolean expression");
+	for (const FunctionStatement* a : body_)
+		if (!a)
+			throw wexception("nullptr body statement");
+}
 std::set<uint32_t> FS_While::references() const {
 	auto set = FunctionStatement::references();
-	assert(condition_);
 	set.insert(condition_->serial());
 	for (const FunctionStatement* f : body_) {
 		set.insert(f->serial());
@@ -74,14 +83,12 @@ std::set<uint32_t> FS_While::references() const {
 	return set;
 }
 std::string FS_While::readable() const {
-	assert(condition_);
 	const uint32_t n = body_.size();
 	const std::string str = (boost::format(ngettext("%u statement", "%u statements", n)) % n).str();
 	return is_while_ ? ("while " + condition_->readable() + " do [" + str + "]") :
 	                   ("repeat [" + str + "] until " + condition_->readable());
 }
 void FS_While::write_lua(int32_t indent, FileWrite& fw) const {
-	assert(condition_);
 	if (is_while_) {
 		fw.print_f("while ");
 		condition_->write_lua(indent, fw);
@@ -91,8 +98,6 @@ void FS_While::write_lua(int32_t indent, FileWrite& fw) const {
 	}
 	fw.print_f("\n");
 	::write_lua(indent, fw, body_);
-	fw.print_f(is_while_ ? "end -- while " : "until ");
-	condition_->write_lua(indent, fw);
 }
 
 // For Each
@@ -133,9 +138,6 @@ void FS_ForEach::load_pointers(const ScriptingLoader& l, Loader& loader) {
 void FS_ForEach::save(FileWrite& fw) const {
 	FunctionStatement::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionFS_ForEach);
-	assert(table_);
-	assert(i_);
-	assert(j_);
 	fw.unsigned_32(table_->serial());
 	fw.unsigned_32(i_->serial());
 	fw.unsigned_32(j_->serial());
@@ -144,11 +146,20 @@ void FS_ForEach::save(FileWrite& fw) const {
 		fw.unsigned_32(f->serial());
 	}
 }
+void FS_ForEach::selftest() const {
+	FunctionStatement::selftest();
+	if (!table_)
+		throw wexception("table not set");
+	if (!i_)
+		throw wexception("first variable not set");
+	if (!j_)
+		throw wexception("second variable not set");
+	for (const FunctionStatement* a : body_)
+		if (!a)
+			throw wexception("nullptr body statement");
+}
 std::set<uint32_t> FS_ForEach::references() const {
 	auto set = FunctionStatement::references();
-	assert(table_);
-	assert(i_);
-	assert(j_);
 	set.insert(table_->serial());
 	set.insert(j_->serial());
 	set.insert(i_->serial());
@@ -158,22 +169,14 @@ std::set<uint32_t> FS_ForEach::references() const {
 	return set;
 }
 std::string FS_ForEach::readable() const {
-	assert(table_);
-	assert(i_);
-	assert(j_);
 	const uint32_t n = body_.size();
 	const std::string str = (boost::format(ngettext("%u statement", "%u statements", n)) % n).str();
-	return "for " + i_->get_name() + "," + i_->get_name() + " in " +
+	return "for " + i_->get_name() + "," + j_->get_name() + " in " +
 	       (table_->type().key_type().is_subclass(VariableType(VariableTypeID::Integer)) ? "ipairs" :
 	                                                                                       "pairs") +
 	       "(" + table_->readable() + ") do [" + str + "]";
 }
 void FS_ForEach::write_lua(int32_t indent, FileWrite& fw) const {
-	assert(table_);
-	assert(i_);
-	assert(j_);
-	assert(table_->type().key_type().is_subclass(i_->type()));
-	assert(table_->type().value_type().is_subclass(j_->type()));
 	fw.print_f("for ");
 	i_->write_lua(indent, fw);
 	fw.print_f(",");
@@ -185,8 +188,91 @@ void FS_ForEach::write_lua(int32_t indent, FileWrite& fw) const {
 	table_->write_lua(indent, fw);
 	fw.print_f(") do\n");
 	::write_lua(indent, fw, body_);
-	fw.print_f("end -- for %s,%s in ", i_->get_name().c_str(), j_->get_name().c_str());
-	table_->write_lua(indent, fw);
+}
+
+// For
+
+constexpr uint16_t kCurrentPacketVersionFS_For = 1;
+
+void FS_For::load(FileRead& fr, Loader& loader) {
+	try {
+		FunctionStatement::load(fr, loader);
+		uint16_t const packet_version = fr.unsigned_16();
+		if (packet_version != kCurrentPacketVersionFS_For) {
+			throw Widelands::UnhandledVersionError(
+			   "FS_For", packet_version, kCurrentPacketVersionFS_For);
+		}
+		loader.push_back(fr.unsigned_32());
+		loader.push_back(fr.unsigned_32());
+		loader.push_back(fr.unsigned_32());
+		for (size_t n = fr.unsigned_32(); n; --n) {
+			loader.push_back(fr.unsigned_32());
+		}
+	} catch (const WException& e) {
+		throw wexception("editor for loop: %s", e.what());
+	}
+}
+void FS_For::load_pointers(const ScriptingLoader& l, Loader& loader) {
+	FunctionStatement::load_pointers(l, loader);
+	variable_ = &l.get<Variable>(loader.front());
+	loader.pop_front();
+	i_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
+	j_ = &l.get<Assignable>(loader.front());
+	loader.pop_front();
+	while (!loader.empty()) {
+		body_.push_back(&l.get<FunctionStatement>(loader.front()));
+		loader.pop_front();
+	}
+}
+void FS_For::save(FileWrite& fw) const {
+	FunctionStatement::save(fw);
+	fw.unsigned_16(kCurrentPacketVersionFS_For);
+	fw.unsigned_32(variable_->serial());
+	fw.unsigned_32(i_->serial());
+	fw.unsigned_32(j_->serial());
+	fw.unsigned_32(body_.size());
+	for (const auto& f : body_) {
+		fw.unsigned_32(f->serial());
+	}
+}
+void FS_For::selftest() const {
+	FunctionStatement::selftest();
+	if (!variable_)
+		throw wexception("variable not set");
+	if (!i_)
+		throw wexception("first border not set");
+	if (!j_)
+		throw wexception("second border not set");
+	for (const FunctionStatement* a : body_)
+		if (!a)
+			throw wexception("nullptr body statement");
+}
+std::set<uint32_t> FS_For::references() const {
+	auto set = FunctionStatement::references();
+	set.insert(variable_->serial());
+	set.insert(j_->serial());
+	set.insert(i_->serial());
+	for (const FunctionStatement* f : body_) {
+		set.insert(f->serial());
+	}
+	return set;
+}
+std::string FS_For::readable() const {
+	const uint32_t n = body_.size();
+	const std::string str = (boost::format(ngettext("%u statement", "%u statements", n)) % n).str();
+	return "for " + variable_->get_name() + " = " + i_->readable() + "," + j_->readable() + " do [" +
+	       str + "]";
+}
+void FS_For::write_lua(int32_t indent, FileWrite& fw) const {
+	fw.print_f("for ");
+	variable_->write_lua(indent, fw);
+	fw.print_f(" = ");
+	i_->write_lua(indent, fw);
+	fw.print_f(",");
+	j_->write_lua(indent, fw);
+	fw.print_f(" do\n");
+	::write_lua(indent, fw, body_);
 }
 
 // If
@@ -266,7 +352,6 @@ void FS_If::load_pointers(const ScriptingLoader& l, Loader& loader) {
 void FS_If::save(FileWrite& fw) const {
 	FunctionStatement::save(fw);
 	fw.unsigned_16(kCurrentPacketVersionFS_If);
-	assert(condition_);
 	fw.unsigned_32(condition_->serial());
 
 	fw.unsigned_32(if_body_.size());
@@ -290,7 +375,6 @@ void FS_If::save(FileWrite& fw) const {
 }
 std::set<uint32_t> FS_If::references() const {
 	auto set = FunctionStatement::references();
-	assert(condition_);
 	set.insert(condition_->serial());
 	for (const FunctionStatement* f : if_body_) {
 		set.insert(f->serial());
@@ -306,8 +390,41 @@ std::set<uint32_t> FS_If::references() const {
 	}
 	return set;
 }
+void FS_If::selftest() const {
+	FunctionStatement::selftest();
+	if (!condition_)
+		throw wexception("condition not set");
+	if (!is(condition_->type().id(), VariableTypeID::Boolean))
+		throw wexception("condition is not a boolean expression");
+	for (const FunctionStatement* a : if_body_) {
+		if (!a) {
+			throw wexception("nullptr if body statement");
+		} else if (is_a(FS_Break, a)) {
+			throw wexception("break statement outside for or while loop");
+		}
+	}
+	for (const FunctionStatement* a : else_body_) {
+		if (!a) {
+			throw wexception("nullptr else body statement");
+		} else if (is_a(FS_Break, a)) {
+			throw wexception("break statement outside for or while loop");
+		}
+	}
+	for (const auto& pair : elseif_bodies_) {
+		if (!pair.first)
+			throw wexception("elseif condition not set");
+		if (!is(pair.first->type().id(), VariableTypeID::Boolean))
+			throw wexception("elseif condition is not a boolean expression");
+		for (const FunctionStatement* a : pair.second) {
+			if (!a) {
+				throw wexception("nullptr elseif body statement");
+			} else if (is_a(FS_Break, a)) {
+				throw wexception("break statement outside for or while loop");
+			}
+		}
+	}
+}
 std::string FS_If::readable() const {
-	assert(condition_);
 	std::string str = "if " + condition_->readable() + " then …";
 	for (const auto& pair : elseif_bodies_) {
 		str += " elseif " + pair.first->readable() + " then …";
@@ -318,7 +435,6 @@ std::string FS_If::readable() const {
 	return str + " end";
 }
 void FS_If::write_lua(int32_t indent, FileWrite& fw) const {
-	assert(condition_);
 	fw.print_f("if ");
 	condition_->write_lua(indent, fw);
 	fw.print_f(" then\n");
@@ -348,7 +464,6 @@ void FS_If::write_lua(int32_t indent, FileWrite& fw) const {
 			 */
 			throw wexception("if statement %u: Empty elseif body", serial());
 		}
-		assert(is(pair.first->type().id(), VariableTypeID::Boolean));
 		fw.print_f("elseif ");
 		pair.first->write_lua(indent, fw);
 		fw.print_f(" then\n");
@@ -361,7 +476,4 @@ void FS_If::write_lua(int32_t indent, FileWrite& fw) const {
 		fw.print_f("else\n");
 		::write_lua(indent, fw, else_body_);
 	}
-
-	fw.print_f("end -- if ");
-	condition_->write_lua(indent, fw);
 }

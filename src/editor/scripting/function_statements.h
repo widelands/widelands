@@ -29,6 +29,60 @@ class Variable;
                   Function Statements
 ************************************************************/
 
+// Return (in functions)
+class FS_Return : public FunctionStatement {
+public:
+	FS_Return(Assignable* r) : return_(r) {
+	}
+	~FS_Return() override {
+	}
+
+	void load(FileRead&, Loader&) override;
+	void save(FileWrite&) const override;
+	void write_lua(int32_t, FileWrite&) const override;
+	inline ScriptingObject::ID id() const override {
+		return ScriptingObject::ID::FSReturn;
+	}
+	std::string readable() const override;
+
+	const Assignable* get_return() const {
+		return return_;
+	}
+	void set_return(Assignable* r) {
+		return_ = r;
+	}
+
+	void load_pointers(const ScriptingLoader&, Loader&) override;
+	std::set<uint32_t> references() const override;
+
+private:
+	Assignable* return_;
+
+	DISALLOW_COPY_AND_ASSIGN(FS_Return);
+};
+
+// Break (in for and while loops)
+class FS_Break : public FunctionStatement {
+	DISALLOW_COPY_AND_ASSIGN(FS_Break);
+
+public:
+	FS_Break() {
+	}
+	~FS_Break() override {
+	}
+
+	void write_lua(int32_t, FileWrite& fw) const override {
+		fw.print_f("break");
+	}
+	inline ScriptingObject::ID id() const override {
+		return ScriptingObject::ID::FSBreak;
+	}
+	std::string readable() const override {
+		return "break";
+	}
+};
+
+// Function invoking
 class FS_FunctionCall : public Assignable, public FunctionStatement {
 public:
 	FS_FunctionCall(FunctionBase* f, Assignable* v, std::list<Assignable*> p)
@@ -37,6 +91,8 @@ public:
 	~FS_FunctionCall() override {
 	}
 
+	void selftest() const override;
+
 	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
 	void write_lua(int32_t, FileWrite&) const override;
@@ -44,7 +100,6 @@ public:
 		return ScriptingObject::ID::FSFunctionCall;
 	}
 	const VariableType& type() const override {
-		assert(function_);
 		return function_->get_returns();
 	}
 	std::string readable() const override;
@@ -65,8 +120,6 @@ public:
 	std::list<Assignable*>& mutable_parameters() {
 		return parameters_;
 	}
-
-	void check_parameters() const;
 
 	void load_pointers(const ScriptingLoader&, Loader&) override;
 	std::set<uint32_t> references() const override;
@@ -95,6 +148,8 @@ public:
 		return ScriptingObject::ID::FSSetProperty;
 	}
 	std::string readable() const override;
+
+	void selftest() const override;
 
 	const Property* get_property() const {
 		return property_;
@@ -127,6 +182,8 @@ public:
 	}
 	~FS_SetTable() override {
 	}
+
+	void selftest() const override;
 
 	void load(FileRead&, Loader&) override;
 	void save(FileWrite&) const override;
@@ -175,6 +232,8 @@ public:
 		return ScriptingObject::ID::FSLaunchCoroutine;
 	}
 	std::string readable() const override;
+
+	void selftest() const override;
 
 	FS_FunctionCall& get_function() const {
 		return *function_;
@@ -227,6 +286,8 @@ public:
 	void set_value(Assignable* v) {
 		value_ = v;
 	}
+
+	void selftest() const override;
 
 	void load_pointers(const ScriptingLoader&, Loader&) override;
 	std::set<uint32_t> references() const override;
