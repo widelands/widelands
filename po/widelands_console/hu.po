@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# Balázs Meskó <meskobalazs@gmail.com>, 2016,2018
+# Balázs Meskó <meskobalazs@gmail.com>, 2016,2018,2020
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2017
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-12-30 07:55+0000\n"
-"PO-Revision-Date: 2019-12-30 08:11+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-01-10 12:51+0000\n"
+"PO-Revision-Date: 2020-01-12 17:15+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -133,7 +133,7 @@ msgid ""
 " --ai_training        Enables AI training mode. See\n"
 "                      https://www.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
-msgstr ""
+msgstr " --ai_training        MI oktatómód engedélyezése. Az MI\n                      kiképzési logika teljes leírásáért lásd:\n                      https://www.widelands.org/wiki/Ai%20Training/."
 
 #: ../../src/wlapplication_messages.cc:100
 msgid ""
@@ -262,4 +262,4 @@ msgid ""
 "        https://www.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
+msgstr "Hibabejelentések? Javaslatok? Nézd meg a projekt weblapját:\n        https://www.widelands.org/\n\nReméljük, hogy tetszett a játék!"

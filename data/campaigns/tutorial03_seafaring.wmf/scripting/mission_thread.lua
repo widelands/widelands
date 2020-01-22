@@ -88,6 +88,69 @@ end
 function conclude()
    additional_port_space.terr = "desert_steppe" -- make it land again so that the player can build a port
    message_box_objective(plr, conclusion)
+   sleep(5000)
+   waterways()
+end
+
+function waterways()
+   map:place_immovable("atlanteans_resi_gold_2", map:get_field(23, 102), "tribes")
+   message_box_objective(plr, ferry_1)
+   sleep(1000)
+   message_box_objective(plr, ferry_2)
+   sleep(500)
+   message_box_objective(plr, ferry_3)
+   sleep(500)
+   message_box_objective(plr, ferry_4)
+   plr:allow_buildings{"atlanteans_ferry_yard"}
+
+   -- Build waterway
+   click_on_field(waterway_field)
+   click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_waterway)
+   click_on_field(waterway_field.trn)
+   click_on_field(waterway_field.trn.trn)
+   click_on_field(waterway_field.trn.trn.tln)
+   sleep(1000)
+   click_on_field(waterway_field.trn)
+   click_on_panel(wl.ui.MapView().windows.field_action.buttons.destroy_waterway)
+
+   local o = message_box_objective(plr, ferry_5)
+   while #plr:get_buildings("atlanteans_ferry_yard") < 1 do sleep(2500) end
+   -- check for goldmine, and waterways with ferries
+   local field_for_mine = map:get_field(20, 102):region(5)
+   while field_for_mine do
+      sleep(3000)
+      for i,f in pairs(field_for_mine) do
+         if f.immovable and f.immovable.descr.name == "atlanteans_goldmine" then
+            field_for_mine = nil
+            break
+         end
+      end
+   end
+   local waterways = {}
+   while #waterways < 4 do
+      for x = 13, 51 do
+         sleep(250)
+         for y = 67, 100 do
+            local f = map:get_field(x, y)
+            if f.immovable and f.immovable.descr.type_name == "waterway" and
+                  f.immovable:get_workers("atlanteans_ferry") > 0 then
+               local ww = f.immovable
+               for i,w in pairs(waterways) do
+                  if w == ww then
+                     ww = nil
+                     break
+                  end
+               end
+               if ww then table.insert(waterways, ww) end
+            end
+         end
+      end
+   end
+
+   set_objective_done(o)
+   message_box_objective(plr, ferry_6)
+   sleep(1000)
+   message_box_objective(plr, ferry_7)
 end
 
 run(introduction)
