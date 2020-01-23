@@ -457,9 +457,14 @@ void EditorInteractive::load(const std::string& filename) {
 		   filename.c_str());
 	ml->preload_map(true);
 
-	UI::ProgressWindow* loader_ui = new UI::ProgressWindow("images/loadscreens/editor.jpg");
-	GameTips editortips(*loader_ui, {"editor"});
-	egbase().set_loader_ui(loader_ui);
+	UI::ProgressWindow* loader_ui = egbase().get_loader_ui();
+	// We already have a loader window if Widelands wa started with --editor=mapname
+	const bool create_loader_ui = !loader_ui;
+	if (create_loader_ui) {
+		create_loader_ui = new UI::ProgressWindow("images/loadscreens/editor.jpg");
+		GameTips editortips(*loader_ui, {"editor"});
+		egbase().set_loader_ui(loader_ui);
+	}
 
 	load_all_tribes(&egbase());
 
@@ -477,8 +482,11 @@ void EditorInteractive::load(const std::string& filename) {
 	egbase().postload();
 	egbase().load_graphics();
 	map_changed(MapWas::kReplaced);
-	egbase().set_loader_ui(nullptr);
-	delete loader_ui;
+	if (create_loader_ui) {
+		// We created it, so we have to unset and delete it
+		egbase().set_loader_ui(nullptr);
+		delete loader_ui;
+	}
 }
 
 void EditorInteractive::cleanup_for_load() {
