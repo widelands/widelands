@@ -47,8 +47,6 @@ namespace Widelands {
 
 namespace {
 
-constexpr size_t STATISTICS_VECTOR_LENGTH = 20;
-
 // Parses the descriptions of the working positions from 'items_table' and
 // fills in 'working_positions'. Throws an error if the table contains invalid
 // values.
@@ -289,6 +287,8 @@ ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
      post_timer_(50),
      last_stat_percent_(0),
      actual_percent_(0),
+     mean_working_time_(120*1000),
+     stat_duration_(3),
      last_program_end_time(0),
      is_stopped_(false),
      default_anim_("idle"),
@@ -1097,10 +1097,14 @@ void ProductionSite::set_default_anim(std::string anim) {
 void ProductionSite::update_actual_statistics(uint32_t duration, const bool produced) {
 	static const uint32_t duration_cap = 180 * 1000;  // This is highest allowed program duration
 	// just for case something went very wrong...
-	static const uint32_t entire_duration = 10 * 60 * 1000;
 	if (duration > duration_cap) {
 		duration = duration_cap;
 	}
+	if (produced) {
+		mean_working_time_ = (mean_working_time_ + duration) / 2;
+	}
+	static const uint32_t entire_duration = mean_working_time_ * stat_duration_;
+	
 	const uint32_t past_duration = entire_duration - duration;
 	actual_percent_ =
 	   (actual_percent_ * past_duration + produced * duration * 1000) / entire_duration;

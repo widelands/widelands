@@ -211,7 +211,7 @@ public:
 	void update_actual_statistics(uint32_t, bool);
 
 	uint8_t get_actual_statistics() {
-		return actual_percent_ / 10;
+		return (actual_percent_ + 9) / 10;
 	}
 
 	const std::string& production_result() const {
@@ -345,6 +345,9 @@ protected:  // TrainingSite must have access to this stuff
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:
 	// 0-100)
 	uint32_t actual_percent_;  // basically this is percent * 10 to avoid floats
+	uint32_t mean_working_time_;
+	// updated with every succesful production this is the mean value of producing cycles
+	uint8_t stat_duration_;  // multiplier for clcualting statistic duration
 	uint32_t last_program_end_time;
 	bool is_stopped_;
 	std::string default_anim_;  // normally "idle", "empty", if empty mine.
