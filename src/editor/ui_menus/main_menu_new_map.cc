@@ -37,7 +37,7 @@
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
-#include "wui/gametips.h"
+#include "wui/game_tips.h"
 
 inline EditorInteractive& MainMenuNewMap::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
