@@ -188,7 +188,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	wincondition_type_.set_font_scale(scale_factor());
 
 	if (settings_->can_change_map()) {
-		map_info_.set_text(_("Please selected a map or saved game."));
+		map_info_.set_text(_("Please select a map or saved game."));
 	} else {
 		change_map_or_save_.set_enabled(settings_->can_change_map());
 		map_info_.set_text(_("The host has not yet selected a map or saved game."));
