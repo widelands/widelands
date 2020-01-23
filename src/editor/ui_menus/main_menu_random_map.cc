@@ -471,7 +471,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	Widelands::EditorGameBase& egbase = eia.egbase();
 	Widelands::Map* map = egbase.mutable_map();
 	UI::ProgressWindow* loader_ui = new UI::ProgressWindow("images/loadscreens/editor.jpg");
-	GameTips tips(*loader_ui, {"editor});
+	GameTips tips(*loader_ui, {"editor"});
 
 	eia.cleanup_for_load();
 
