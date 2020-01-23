@@ -461,7 +461,7 @@ void EditorInteractive::load(const std::string& filename) {
 	// We already have a loader window if Widelands wa started with --editor=mapname
 	const bool create_loader_ui = !loader_ui;
 	if (create_loader_ui) {
-		create_loader_ui = new UI::ProgressWindow("images/loadscreens/editor.jpg");
+		loader_ui = new UI::ProgressWindow("images/loadscreens/editor.jpg");
 		GameTips editortips(*loader_ui, {"editor"});
 		egbase().set_loader_ui(loader_ui);
 	}
