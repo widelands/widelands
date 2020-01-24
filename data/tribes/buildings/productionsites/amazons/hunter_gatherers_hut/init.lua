@@ -4,7 +4,7 @@ tribes:new_productionsite_type {
    msgctxt = "amazons_building",
    name = "amazons_hunter_gatherers_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("amazons_building", "Hunter-Gatherer's Hut"),
+   descname = pgettext ("amazons_building", "Hunter-Gatherer’s Hut"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
@@ -20,14 +20,15 @@ tribes:new_productionsite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {49, 86},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {39, 46}
       },
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {49, 64},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {39, 46}
+      }
    },
 
    aihints = {
