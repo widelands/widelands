@@ -211,7 +211,7 @@ public:
 	void update_actual_statistics(uint32_t, bool);
 
 	uint8_t get_actual_statistics() {
-		return (actual_percent_ + 9) / 10;
+		return actual_percent_ / 10;
 	}
 
 	const std::string& production_result() const {
