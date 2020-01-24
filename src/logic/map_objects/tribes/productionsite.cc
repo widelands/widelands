@@ -1104,7 +1104,7 @@ void ProductionSite::update_actual_statistics(uint32_t duration, const bool prod
 	if (produced) {
 		mean_working_time_ = (mean_working_time_ * 9 + duration) / 10;
 	}
-	// TODO (hessenfarmer): needs to be deleted it is just to get a clue about working time
+	// TODO(hessenfarmer): needs to be deleted it is just to get a clue about working time
 	const uint32_t gametime = Game().get_gametime() % 1800000;
 	if (gametime < (mean_working_time_ + 10000)) {
 		log("Statistic: Productionsite %s mean time %d /n", descr().name().c_str(),
