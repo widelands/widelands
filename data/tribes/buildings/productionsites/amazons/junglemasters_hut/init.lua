@@ -22,7 +22,7 @@ tribes:new_productionsite_type {
          directory = dirname,
          basename = "idle",
          hotspot = {50, 46},
-         fps = 2,
+         fps = 4,
          frames = 4,
          columns = 2,
          rows = 2
