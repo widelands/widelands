@@ -35,9 +35,7 @@ using Widelands::SoldierControl;
  * via \ref SoldierControl
  */
 struct SoldierCapacityControl : UI::Box {
-	SoldierCapacityControl(UI::Panel* parent,
-	                       InteractiveBase& ib,
-	                       Widelands::Building& building);
+	SoldierCapacityControl(UI::Panel* parent, InteractiveBase& ib, Widelands::Building& building);
 
 protected:
 	void think() override;
@@ -102,8 +100,7 @@ void SoldierCapacityControl::think() {
 	uint32_t const capacity = soldiers->soldier_capacity();
 	value_.set_text(boost::lexical_cast<std::string>(capacity));
 
-	bool const can_act = ibase_.omnipotent() || ibase_.can_act(
-			building_.owner().player_number());
+	bool const can_act = ibase_.omnipotent() || ibase_.can_act(building_.owner().player_number());
 	decrease_.set_enabled(can_act && soldiers->min_soldier_capacity() < capacity);
 	increase_.set_enabled(can_act && soldiers->max_soldier_capacity() > capacity);
 }

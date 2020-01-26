@@ -36,13 +36,27 @@ inline EditorInteractive& ScenarioFlagSettingsWindow::eia() {
 }
 
 ScenarioFlagSettingsWindow::ScenarioFlagSettingsWindow(EditorInteractive& parent,
-		ScenarioInfrastructureSettingsTool& t, Widelands::Flag& f)
-   : UI::Window(&parent, "scenario_flag_settings_" + std::to_string(f.serial()), 0, 0, 300, 100,
-			(boost::format(_("Flag at %1$dx%2$d")) % f.get_position().x % f.get_position().y).str()),
+                                                       ScenarioInfrastructureSettingsTool& t,
+                                                       Widelands::Flag& f)
+   : UI::Window(
+        &parent,
+        "scenario_flag_settings_" + std::to_string(f.serial()),
+        0,
+        0,
+        300,
+        100,
+        (boost::format(_("Flag at %1$dx%2$d")) % f.get_position().x % f.get_position().y).str()),
      main_box_(this, 0, 0, UI::Box::Vertical),
      wares_box_(&main_box_, 0, 0, UI::Box::Horizontal),
-     economy_options_(&main_box_, "economy_options", 0, 0, 50, 24, UI::ButtonStyle::kWuiSecondary,
-	    _("Economy Options"), _("Change the target quantities for wares and workers")),
+     economy_options_(&main_box_,
+                      "economy_options",
+                      0,
+                      0,
+                      50,
+                      24,
+                      UI::ButtonStyle::kWuiSecondary,
+                      _("Economy Options"),
+                      _("Change the target quantities for wares and workers")),
      tool_(&t),
      flag_(&f) {
 	const uint32_t capacity = f.total_capacity();
@@ -51,11 +65,11 @@ ScenarioFlagSettingsWindow::ScenarioFlagSettingsWindow(EditorInteractive& parent
 	const Widelands::DescriptionIndex nr_wares = parent.egbase().tribes().nrwares();
 	const Widelands::TribeDescr& tribe = f.owner().tribe();
 	for (uint32_t i = 0; i < capacity; ++i) {
-		dropdowns_[i].reset(new UI::Dropdown<Widelands::DescriptionIndex>(&wares_box_,
-	         "ware_" + std::to_string(i), 50, 50, 34, 10, 34, _("Ware"),
-	         UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary));
+		dropdowns_[i].reset(new UI::Dropdown<Widelands::DescriptionIndex>(
+		   &wares_box_, "ware_" + std::to_string(i), 50, 50, 34, 10, 34, _("Ware"),
+		   UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary));
 		dropdowns_[i]->add(_("(Empty)"), Widelands::INVALID_INDEX,
-				g_gr->images().get("images/wui/editor/no_ware.png"));
+		                   g_gr->images().get("images/wui/editor/no_ware.png"));
 		for (Widelands::DescriptionIndex di = 0; di < nr_wares; ++di) {
 			if (tribe.has_ware(di)) {
 				const Widelands::WareDescr& d = *parent.egbase().tribes().get_ware_descr(di);
@@ -69,9 +83,10 @@ ScenarioFlagSettingsWindow::ScenarioFlagSettingsWindow(EditorInteractive& parent
 	main_box_.add(&wares_box_, UI::Box::Resizing::kFullSize);
 	main_box_.add_space(8);
 	main_box_.add(&economy_options_, UI::Box::Resizing::kFullSize);
-	set_center_panel(&main_box_);
-	economy_options_.sigclicked.connect(boost::bind(&ScenarioFlagSettingsWindow::economy_options_clicked, this));
+	economy_options_.sigclicked.connect(
+	   boost::bind(&ScenarioFlagSettingsWindow::economy_options_clicked, this));
 
+	set_center_panel(&main_box_);
 	update();
 }
 
@@ -112,7 +127,8 @@ void ScenarioFlagSettingsWindow::select(uint32_t slot) {
 
 	const Widelands::DescriptionIndex di = dropdowns_[slot]->get_selected();
 	if (di != Widelands::INVALID_INDEX) {
-		Widelands::WareInstance& w = *new Widelands::WareInstance(di, egbase.tribes().get_ware_descr(di));
+		Widelands::WareInstance& w =
+		   *new Widelands::WareInstance(di, egbase.tribes().get_ware_descr(di));
 		w.init(egbase);
 		f->add_ware(egbase, w);
 	}
@@ -155,7 +171,7 @@ void ScenarioFlagSettingsWindow::economy_options_clicked() {
 }
 
 void ScenarioFlagSettingsWindow::think() {
-	if (!flag_.get(eia().egbase())) {
+	if (!flag()) {
 		die();
 	}
 	UI::Window::think();
@@ -174,6 +190,5 @@ void ScenarioFlagSettingsWindow::die() {
 }
 
 const Widelands::Flag* ScenarioFlagSettingsWindow::flag() const {
-	return flag_.get(dynamic_cast<EditorInteractive&>(*get_parent()).egbase());
+	return flag_.get(dynamic_cast<const EditorInteractive&>(*get_parent()).egbase());
 }
-

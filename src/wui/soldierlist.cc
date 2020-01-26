@@ -524,7 +524,7 @@ void SoldierList::set_soldier_preference(int32_t changed_to) {
 
 void SoldierList::show_soldier_options(Soldier* soldier) {
 	assert(ibase_.omnipotent());
-	SoldierSettings s(ibase_, *soldier);
+	SoldierSettings s(ibase_, *soldier, true);
 	s.run<UI::Panel::Returncodes>();
 }
 
@@ -532,7 +532,7 @@ constexpr uint16_t kSliderWidth = 250;
 constexpr uint16_t kSliderHeight = 24;
 constexpr uint16_t kSpacing = 4;
 
-SoldierSettings::SoldierSettings(InteractiveBase& ib, Widelands::Soldier& s)
+SoldierSettings::SoldierSettings(InteractiveBase& ib, Widelands::Soldier& s, bool allow_delete)
    : UI::Window(&ib,
                 "soldier_settings_" + std::to_string(s.serial()),
                 0,
@@ -675,6 +675,11 @@ SoldierSettings::SoldierSettings(InteractiveBase& ib, Widelands::Soldier& s)
 	dlabel_.set_fixed_width(kSliderWidth);
 	elabel_.set_fixed_width(kSliderWidth);
 	clabel_.set_fixed_width(kSliderWidth);
+
+	if (!allow_delete) {
+		delete_.set_enabled(false);
+		delete_.set_tooltip(_("Use the Delete Workers tool if you wish to delete this soldier."));
+	}
 
 	set_center_panel(&main_box_);
 	center_to_parent();

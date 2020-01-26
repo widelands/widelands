@@ -164,7 +164,8 @@ Check the capabilities and setup the capsbutton panel in case they've changed.
 */
 void BuildingWindow::think() {
 	Widelands::Building* building = building_.get(parent_->egbase());
-	if (building == nullptr || !(ibase()->omnipotent() || ibase()->can_see(building->owner().player_number()))) {
+	if (building == nullptr ||
+	    !(ibase()->omnipotent() || ibase()->can_see(building->owner().player_number()))) {
 		die();
 		return;
 	}
@@ -497,7 +498,7 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 				   *construction_site, Widelands::INVALID_INDEX);
 			} else {
 				show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*ibase()), *construction_site,
-					                 construction_site->get_info().becomes->enhancement(), true);
+				                     construction_site->get_info().becomes->enhancement(), true);
 			}
 		} else {
 			construction_site->enhance();

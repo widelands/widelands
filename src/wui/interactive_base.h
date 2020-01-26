@@ -190,6 +190,7 @@ public:
 	void add_wanted_building_window(const Widelands::Coords& coords,
 	                                const Vector2i point,
 	                                bool was_minimal);
+	void show_ship_window(Widelands::Ship* ship);
 
 	MapView* map_view() {
 		return &map_view_;

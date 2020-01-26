@@ -33,8 +33,7 @@ AbstractWaresDisplay* create_portdock_wares_display(UI::Panel* parent,
                                                     const Widelands::PortDock& pd,
                                                     Widelands::WareWorker type);
 
-UI::Box* create_portdock_expedition_display(UI::Panel* parent,
-                                            Widelands::Warehouse& wh,
-                                            InteractiveBase&);
+UI::Box*
+create_portdock_expedition_display(UI::Panel* parent, Widelands::Warehouse& wh, InteractiveBase&);
 
 #endif  // end of include guard: WL_WUI_PORTDOCKWARESDISPLAY_H

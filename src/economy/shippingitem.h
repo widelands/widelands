@@ -77,7 +77,7 @@ private:
 	void end_shipping(Game&);
 
 	// Sets the location of this shippingitem, this could be a ship, a portdock or a warehouse.
-	void set_location(Game&, MapObject* obj);
+	void set_location(EditorGameBase&, MapObject* obj);
 
 	// Updates destination_dock_.
 	void update_destination(Game&, PortDock&);

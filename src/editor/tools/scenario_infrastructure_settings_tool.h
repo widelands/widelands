@@ -25,7 +25,9 @@
 #include "editor/tools/tool.h"
 #include "editor/ui_menus/scenario_infrastructure_settings_window.h"
 
-/// Open windows for buildings and flags where their initial settings can be configured
+// Open windows for buildings, flags, ships, and soldiers where their initial settings
+// can be configured. We do not show windows for ordinary workers – you can configure
+// their initial experience in the Place Worker tool window.
 struct ScenarioInfrastructureSettingsTool : public EditorTool {
 	ScenarioInfrastructureSettingsTool() : EditorTool(*this, *this, false) {
 	}
@@ -47,7 +49,7 @@ struct ScenarioInfrastructureSettingsTool : public EditorTool {
 	void window_closing(ScenarioFlagSettingsWindow*);
 
 private:
-	std::set<ScenarioFlagSettingsWindow*> open_windows_;
+	std::set<ScenarioFlagSettingsWindow*> open_flag_windows_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SCENARIO_INFRASTRUCTURE_SETTINGS_TOOL_H

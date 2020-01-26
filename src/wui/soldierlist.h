@@ -32,13 +32,14 @@ namespace Widelands {
 class Building;
 class EditorGameBase;
 class Soldier;
-}
+}  // namespace Widelands
 
 struct SoldierSettings : UI::Window {
 public:
-	SoldierSettings(InteractiveBase& ib, Widelands::Soldier& s);
+	SoldierSettings(InteractiveBase& ib, Widelands::Soldier& s, bool);
 	~SoldierSettings() {
 	}
+
 private:
 	Widelands::EditorGameBase& egbase_;
 	Widelands::Soldier& soldier_;

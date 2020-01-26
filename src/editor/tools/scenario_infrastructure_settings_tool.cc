@@ -26,42 +26,50 @@
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
+#include "wui/soldierlist.h"
 
-int32_t ScenarioInfrastructureSettingsTool::handle_click_impl(
-                                          const Widelands::NodeAndTriangle<>& center,
-                                          EditorInteractive& parent,
-                                          EditorActionArgs*,
-                                          Widelands::Map* map) {
+int32_t
+ScenarioInfrastructureSettingsTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                                      EditorInteractive& parent,
+                                                      EditorActionArgs*,
+                                                      Widelands::Map* map) {
 	parent.stop_painting();
 	Widelands::Field& f = (*map)[center.node];
-	if (!f.get_immovable()) {
-		return 0;
-	}
-	Widelands::BaseImmovable& imm = *f.get_immovable();
-	if (imm.descr().type() == Widelands::MapObjectType::FLAG) {
-		for (const ScenarioFlagSettingsWindow* w : open_windows_) {
-			if (w->flag() == &imm) {
-				return 0;
+	Widelands::BaseImmovable* imm = f.get_immovable();
+	if (is_a(Widelands::Building, imm)) {
+		parent.show_building_window(center.node, true, false);
+	} else {
+		for (Widelands::Bob* bob = f.get_first_bob(); bob; bob = bob->get_next_bob()) {
+			if (upcast(Widelands::Ship, ship, bob)) {
+				parent.show_ship_window(ship);
+			} else if (upcast(Widelands::Soldier, soldier, bob)) {
+				SoldierSettings s(parent, *soldier, false);
+				// SoldierSettings is implemented as a modal dialog
+				s.run<UI::Panel::Returncodes>();
 			}
 		}
-		open_windows_.insert(new ScenarioFlagSettingsWindow(parent, *this, dynamic_cast<Widelands::Flag&>(imm)));
-	} else if (is_a(Widelands::Building, &imm)) {
-		// This function uses UniqueWindow to ensure that the window doesn't open twice
-		parent.show_building_window(center.node, true, false);
+		if (imm && imm->descr().type() == Widelands::MapObjectType::FLAG) {
+			for (const auto& w : open_flag_windows_) {
+				if (w->flag() == imm) {
+					return 0;
+				}
+			}
+			open_flag_windows_.insert(
+			   new ScenarioFlagSettingsWindow(parent, *this, dynamic_cast<Widelands::Flag&>(*imm)));
+		}
 	}
 	return 0;
 }
 
 ScenarioInfrastructureSettingsTool::~ScenarioInfrastructureSettingsTool() {
-	for (ScenarioFlagSettingsWindow* w : open_windows_) {
-		// Make sure the window won't try to notify us after we are destroyed
+	// Make sure the windows won't try to notify us after we are destroyed
+	for (auto& w : open_flag_windows_) {
 		w->unset_tool();
 	}
 }
 
 void ScenarioInfrastructureSettingsTool::window_closing(ScenarioFlagSettingsWindow* w) {
-	auto it = open_windows_.find(w);
-	assert(it != open_windows_.end());
-	open_windows_.erase(it);
+	auto it = open_flag_windows_.find(w);
+	assert(it != open_flag_windows_.end());
+	open_flag_windows_.erase(it);
 }
-

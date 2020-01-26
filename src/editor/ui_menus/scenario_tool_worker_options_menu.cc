@@ -58,6 +58,17 @@ ScenarioToolWorkerOptionsMenu::ScenarioToolWorkerOptionsMenu(EditorInteractive& 
                  0,
                  UI::PanelStyle::kWui,
                  _("Experience")),
+     ware_(&bottombox_,
+           "ware",
+           0,
+           0,
+           24,
+           8,
+           24,
+           _("Ware type a new worker will be carrying"),
+           UI::DropdownType::kPictorial,
+           UI::PanelStyle::kWui,
+           UI::ButtonStyle::kWuiSecondary),
      shipname_(&bottombox_, 0, 0, 150, UI::PanelStyle::kWui),
      selected_items_(&box_,
                      0,
@@ -87,8 +98,9 @@ ScenarioToolWorkerOptionsMenu::ScenarioToolWorkerOptionsMenu(EditorInteractive& 
 	players_.selected.connect(boost::bind(&ScenarioToolWorkerOptionsMenu::select_player, this));
 
 	const Widelands::Tribes* tribes = &parent.egbase().tribes();
-	const size_t nrw = tribes->nrworkers();
+	const size_t nrwo = tribes->nrworkers();
 	const size_t nrt = tribes->nrtribes();
+	const size_t nrwa = tribes->nrwares();
 	auto tribe_of_worker = [tribes, nrt](Widelands::DescriptionIndex i) {
 		for (size_t t = 0; t < nrt; ++t) {
 			const Widelands::TribeDescr& td = *tribes->get_tribe_descr(t);
@@ -103,13 +115,21 @@ ScenarioToolWorkerOptionsMenu::ScenarioToolWorkerOptionsMenu(EditorInteractive& 
 		item_types_.add(
 		   s->name(), s->icon(), reinterpret_cast<void*>(Widelands::INVALID_INDEX), s->descname());
 	}
-	for (size_t i = 0; i < nrw; ++i) {
+	for (size_t i = 0; i < nrwo; ++i) {
 		const Widelands::WorkerDescr* w = tribes->get_worker_descr(i);
 		item_types_.add(
 		   w->name(), w->icon(), reinterpret_cast<void*>(i),
 		   /** TRANSLATORS: Worker name (Tribe name) */
 		   (boost::format(_("%1$s (%2$s)")) % w->descname() % tribe_of_worker(i).c_str()).str());
 	}
+	ware_.add(_("(Empty)"), Widelands::INVALID_INDEX,
+	          g_gr->images().get("images/wui/editor/no_ware.png"),
+	          tool_.get_carried_ware() == Widelands::INVALID_INDEX, _("No ware"));
+	for (size_t i = 0; i < nrwa; ++i) {
+		const Widelands::WareDescr* w = tribes->get_ware_descr(i);
+		ware_.add(w->descname(), i, w->icon(), i == tool_.get_carried_ware(), w->descname());
+	}
+	ware_.selected.connect(boost::bind(&ScenarioToolWorkerOptionsMenu::select_ware, this));
 
 	shipname_.set_text(tool_.get_shipname());
 	shipname_.changed.connect([this]() { tool_.set_shipname(shipname_.text()); });
@@ -121,6 +141,7 @@ ScenarioToolWorkerOptionsMenu::ScenarioToolWorkerOptionsMenu(EditorInteractive& 
 	box_.add(&selected_items_, UI::Box::Resizing::kExpandBoth);
 	box_.add(&bottombox_, UI::Box::Resizing::kFullSize);
 	bottombox_.add(&experience_);
+	bottombox_.add(&ware_);
 	bottombox_.add(new UI::Textarea(&bottombox_, _("Ship name:")));
 	bottombox_.add(&shipname_, UI::Box::Resizing::kFullSize);
 	set_center_panel(&box_);
@@ -135,6 +156,11 @@ void ScenarioToolWorkerOptionsMenu::select_player() {
 	assert(p > 0);
 	assert(p <= eia().egbase().map().get_nrplayers());
 	tool_.set_player(p);
+	select_correct_tool();
+}
+
+void ScenarioToolWorkerOptionsMenu::select_ware() {
+	tool_.set_carried_ware(ware_.get_selected());
 	select_correct_tool();
 }
 

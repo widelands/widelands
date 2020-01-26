@@ -28,6 +28,8 @@
 #include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
 
+class ShipCfg;
+
 namespace Widelands {
 
 class Economy;
@@ -257,6 +259,7 @@ protected:
 	          RenderTarget* dst) const override;
 
 private:
+	friend class ::ShipCfg;
 	friend struct ShipFleet;
 
 	void wakeup_neighbours(Game&);

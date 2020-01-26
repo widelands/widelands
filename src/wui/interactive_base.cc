@@ -59,6 +59,7 @@
 #include "wui/militarysitewindow.h"
 #include "wui/minimap.h"
 #include "wui/productionsitewindow.h"
+#include "wui/shipwindow.h"
 #include "wui/trainingsitewindow.h"
 #include "wui/unique_window_handler.h"
 #include "wui/warehousewindow.h"
@@ -1541,6 +1542,13 @@ UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords&
 	}
 	registry.create();
 	return registry.window;
+}
+
+void InteractiveBase::show_ship_window(Widelands::Ship* ship) {
+	UI::UniqueWindow::Registry& registry =
+	   unique_windows().get_registry((boost::format("ship_%d") % ship->serial()).str());
+	registry.open_window = [this, &registry, ship] { new ShipWindow(*this, registry, ship); };
+	registry.create();
 }
 
 bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {

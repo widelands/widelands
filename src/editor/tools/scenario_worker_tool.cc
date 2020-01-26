@@ -45,8 +45,14 @@ int32_t ScenarioPlaceWorkerTool::handle_click_impl(const Widelands::NodeAndTrian
 	if (wd) {
 		Widelands::Worker& worker = wd->create(egbase, player, nullptr, center.node);
 		if (wd->becomes() != Widelands::INVALID_INDEX) {
-			worker.set_current_experience(
-			   std::max<int32_t>(0, std::min<int32_t>(experience_, wd->get_needed_experience() - 1)));
+			worker.set_current_experience(std::max<int32_t>(
+			   0, std::min<int32_t>(args->experience, wd->get_needed_experience() - 1)));
+		}
+		if (args->carried_ware != Widelands::INVALID_INDEX) {
+			Widelands::WareInstance* wi = new Widelands::WareInstance(
+			   args->carried_ware, egbase.tribes().get_ware_descr(args->carried_ware));
+			wi->init(egbase);
+			worker.set_carried_ware(egbase, wi);
 		}
 		bob = &worker;
 	} else {
@@ -71,6 +77,8 @@ EditorActionArgs ScenarioPlaceWorkerTool::format_args_impl(EditorInteractive& pa
 	EditorActionArgs a(parent);
 	a.new_owner = player_;
 	a.random_index = -1;
+	a.experience = experience_;
+	a.carried_ware = carried_ware_;
 	for (const Widelands::WorkerDescr* d : descr_) {
 		a.worker_types.push_back(d);
 	}
@@ -95,12 +103,15 @@ int32_t ScenarioDeleteWorkerTool::handle_click_impl(const Widelands::NodeAndTria
 				ships_to_delete.push_back(s);
 			}
 		}
-		std::list<std::tuple<const Widelands::WorkerDescr*, uint8_t, uint32_t>> list_w;
+		std::list<EditorActionArgs::WorkerHistory> list_w;
 		std::list<std::pair<uint8_t, std::string>> list_s;
 		for (Widelands::Worker* w : workers_to_delete) {
-			list_w.push_back(
-			   std::make_tuple(&w->descr(), w->owner().player_number(),
-			                   w->needs_experience() ? w->get_current_experience() : 0u));
+			list_w.push_back(EditorActionArgs::WorkerHistory{
+			   &w->descr(), w->owner().player_number(),
+			   w->needs_experience() ? w->get_current_experience() : 0u,
+			   w->get_carried_ware(egbase) ?
+			      egbase.tribes().safe_ware_index(w->get_carried_ware(egbase)->descr().name()) :
+			      Widelands::INVALID_INDEX});
 			w->remove(egbase);
 		}
 		for (Widelands::Ship* s : ships_to_delete) {
@@ -122,10 +133,14 @@ int32_t ScenarioDeleteWorkerTool::handle_undo_impl(const Widelands::NodeAndTrian
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
 		for (const auto& tuple : *args->workers_deleted.begin()) {
-			Widelands::Player* player = egbase.get_player(std::get<1>(tuple));
-			Widelands::Worker& w = std::get<0>(tuple)->create(egbase, player, nullptr, mr.location());
-			if (const uint32_t xp = std::get<2>(tuple)) {
-				w.set_current_experience(xp);
+			Widelands::Player* player = egbase.get_player(tuple.owner);
+			Widelands::Worker& w = tuple.descr->create(egbase, player, nullptr, mr.location());
+			w.set_current_experience(tuple.experience);
+			if (tuple.carried_ware != Widelands::INVALID_INDEX) {
+				Widelands::WareInstance* wi = new Widelands::WareInstance(
+				   tuple.carried_ware, egbase.tribes().get_ware_descr(tuple.carried_ware));
+				wi->init(egbase);
+				w.set_carried_ware(egbase, wi);
 			}
 		}
 		for (const auto& pair : *args->ships_deleted.begin()) {

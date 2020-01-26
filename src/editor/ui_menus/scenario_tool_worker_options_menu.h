@@ -33,6 +33,9 @@
 
 class EditorInteractive;
 
+// NOCOM refactor: Use a tabpanel with one tab per player, offering only the player's tribe's
+// workers. Get rid of the shipname box. Remove the no-tribe/tribe-changed code.
+
 struct ScenarioToolWorkerOptionsMenu : public EditorToolOptionsMenu {
 	ScenarioToolWorkerOptionsMenu(EditorInteractive&,
 	                              ScenarioPlaceWorkerTool&,
@@ -47,6 +50,7 @@ private:
 	ScenarioPlaceWorkerTool& tool_;
 
 	void select_player();
+	void select_ware();
 	void toggle_item(int32_t);
 	void update_text_and_spinner();
 
@@ -54,6 +58,7 @@ private:
 	UI::Dropdown<Widelands::PlayerNumber> players_;
 	UI::IconGrid item_types_;
 	UI::SpinBox experience_;
+	UI::Dropdown<Widelands::DescriptionIndex> ware_;
 	UI::EditBox shipname_;
 	UI::MultilineTextarea selected_items_;
 };

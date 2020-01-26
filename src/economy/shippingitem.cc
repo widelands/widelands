@@ -74,22 +74,24 @@ void ShippingItem::set_economy(Game& game, Economy* e, WareWorker type) {
 	}
 }
 
-void ShippingItem::set_location(Game& game, MapObject* obj) {
+void ShippingItem::set_location(EditorGameBase& egbase, MapObject* obj) {
 	WareInstance* ware;
 	Worker* worker;
-	get(game, &ware, &worker);
+	get(egbase, &ware, &worker);
 
 	if (ware) {
 		if (upcast(Building, building, obj)) {
-			ware->enter_building(game, *building);
+			upcast(Game, game, &egbase);
+			assert(game);
+			ware->enter_building(*game, *building);
 		} else {
-			ware->set_location(game, obj);
+			ware->set_location(egbase, obj);
 		}
 	}
 	if (worker) {
 		worker->set_location(dynamic_cast<PlayerImmovable*>(obj));
 		if (upcast(Building, building, obj)) {
-			worker->set_position(game, building->get_position());
+			worker->set_position(egbase, building->get_position());
 		}
 	}
 }

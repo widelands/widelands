@@ -73,8 +73,7 @@ AbstractWaresDisplay* create_portdock_wares_display(UI::Panel* parent,
 }
 
 /// Create a panel that displays the wares and the builder waiting for the expedition to start.
-UI::Box*
-create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, InteractiveBase& ib) {
+UI::Box* create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, InteractiveBase& ib) {
 	UI::Box& box = *new UI::Box(parent, 0, 0, UI::Box::Vertical);
 
 	// Add the input queues.

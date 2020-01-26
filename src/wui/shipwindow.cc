@@ -19,6 +19,8 @@
 
 #include "wui/shipwindow.h"
 
+#include <memory>
+
 #include "base/macros.h"
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
@@ -37,6 +39,7 @@ static const char pic_goto[] = "images/wui/ship/menu_ship_goto.png";
 static const char pic_destination[] = "images/wui/ship/menu_ship_destination.png";
 static const char pic_sink[] = "images/wui/ship/menu_ship_sink.png";
 static const char pic_debug[] = "images/wui/fieldaction/menu_debug.png";
+static const char pic_editorcfg[] = "images/wui/buildings/menu_tab_wares_dock.png";
 static const char pic_cancel_expedition[] = "images/wui/ship/menu_ship_cancel_expedition.png";
 static const char pic_explore_cw[] = "images/wui/ship/ship_explore_island_cw.png";
 static const char pic_explore_ccw[] = "images/wui/ship/ship_explore_island_ccw.png";
@@ -53,9 +56,137 @@ constexpr int kPadding = 5;
 
 using namespace Widelands;
 
-ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Ship* ship)
-   : UniqueWindow(&igb, "shipwindow", &reg, 0, 0, ship->get_shipname()),
-     igbase_(igb),
+constexpr uint16_t kShipCfgIconSize = 24;
+constexpr uint16_t kShipCfgMaxColumns = 10;
+ShipCfg::ShipCfg(InteractiveBase& ib, Ship& s)
+   : UI::Window(&ib, "shipcfg", 0, 0, 240, 200, _("Configure Ship")),
+     ibase_(ib),
+     ship_(&s),
+     main_box_(this, 0, 0, UI::Box::Vertical),
+     shipname_(&main_box_, 0, 0, 200, UI::PanelStyle::kWui),
+     ok_(&main_box_,
+         "ok",
+         0,
+         0,
+         200,
+         30,
+         UI::ButtonStyle::kWuiPrimary,
+         _("OK"),
+         _("Close and apply changes")),
+     cancel_(&main_box_,
+             "cancel",
+             0,
+             0,
+             200,
+             30,
+             UI::ButtonStyle::kWuiSecondary,
+             _("Cancel"),
+             _("Close and discard changes")) {
+	shipname_.set_text(s.get_shipname());
+
+	{
+		const uint32_t capacity = s.descr().get_capacity();
+		const uint32_t carried_items = s.get_nritems();
+		uint32_t rows = capacity / kShipCfgMaxColumns;
+		if (kShipCfgMaxColumns * rows < capacity)
+			++rows;
+		assert(kShipCfgMaxColumns * rows >= capacity);
+
+		row_boxes_.resize(rows);
+		for (uint32_t i = 0; i < rows; ++i) {
+			row_boxes_[i].reset(new UI::Box(&main_box_, 0, 0, UI::Box::Horizontal));
+			main_box_.add(row_boxes_[i].get());
+		}
+
+		uint32_t rows_index = 0;
+		for (uint32_t i = 0; i < capacity; ++i) {
+			UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>* dd =
+			   new UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>(
+			      row_boxes_[rows_index].get(), "wareworker_" + std::to_string(i), 0, 0,
+			      kShipCfgIconSize, 8, kShipCfgIconSize, _("Ware/Worker"),
+			      UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
+			Widelands::WareInstance* shipping_ware = nullptr;
+			Widelands::Worker* shipping_worker = nullptr;
+			if (i < carried_items) {
+				s.get_item(i).get(ib.egbase(), &shipping_ware, &shipping_worker);
+			}
+			dd->add(_("(Empty)"), std::make_pair(Widelands::wwWARE, Widelands::INVALID_INDEX),
+			        g_gr->images().get("images/wui/editor/no_ware.png"),
+			        !shipping_ware && !shipping_worker, _("Empty slot"));
+			for (Widelands::DescriptionIndex di : s.owner().tribe().wares()) {
+				const Widelands::WareDescr& w = *s.owner().tribe().get_ware_descr(di);
+				dd->add(w.descname(), std::make_pair(Widelands::wwWARE, di), w.icon(),
+				        shipping_ware && shipping_ware->descr_index() == di, w.descname());
+			}
+			for (Widelands::DescriptionIndex di : s.owner().tribe().workers()) {
+				const Widelands::WorkerDescr& w = *s.owner().tribe().get_worker_descr(di);
+				dd->add(w.descname(), std::make_pair(Widelands::wwWORKER, di), w.icon(),
+				        shipping_worker && shipping_worker->descr().worker_index() == di, w.descname());
+			}
+
+			row_boxes_[rows_index]->add(dd);
+			items_.push_back(
+			   std::unique_ptr<
+			      UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>>(dd));
+			rows_index = (rows_index + 1) % rows;
+		}
+	}
+
+	ok_.sigclicked.connect(boost::bind(&ShipCfg::clicked_ok, this));
+	cancel_.sigclicked.connect(boost::bind(&ShipCfg::die, this));
+
+	main_box_.add(&shipname_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&cancel_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&ok_, UI::Box::Resizing::kFullSize);
+	set_center_panel(&main_box_);
+	center_to_parent();
+}
+const Ship* ShipCfg::ship() const {
+	return ship_.get(ibase_.egbase());
+}
+Ship* ShipCfg::ship() {
+	return ship_.get(ibase_.egbase());
+}
+void ShipCfg::think() {
+	if (!ship())
+		die();
+	UI::Window::think();
+}
+void ShipCfg::clicked_ok() {
+	if (Widelands::Ship* s = ship()) {
+		Widelands::EditorGameBase& egbase = ibase_.egbase();
+		if (!shipname_.text().empty()) {
+			s->set_shipname(shipname_.text());
+		}
+		while (!s->items_.empty()) {
+			s->items_.begin()->remove(egbase);
+			s->items_.erase(s->items_.begin());
+		}
+		for (const auto& dd : items_) {
+			if (dd && dd->get_selected().second != Widelands::INVALID_INDEX) {
+				if (dd->get_selected().first == Widelands::wwWARE) {
+					Widelands::WareInstance& w = *new Widelands::WareInstance(
+					   dd->get_selected().second,
+					   egbase.tribes().get_ware_descr(dd->get_selected().second));
+					w.init(egbase);
+					w.set_location(egbase, s);
+					s->items_.push_back(Widelands::ShippingItem(w));
+				} else {
+					Widelands::Worker& w =
+					   egbase.tribes()
+					      .get_worker_descr(dd->get_selected().second)
+					      ->create(egbase, s->get_owner(), nullptr, s->get_position());
+					s->items_.push_back(Widelands::ShippingItem(w));
+				}
+			}
+		}
+	}
+	die();
+}
+
+ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Ship* ship)
+   : UniqueWindow(&ib, "shipwindow", &reg, 0, 0, ship->get_shipname()),
+     ibase_(ib),
      ship_(ship),
      vbox_(this, 0, 0, UI::Box::Vertical),
      navigation_box_(&vbox_, 0, 0, UI::Box::Vertical),
@@ -125,9 +256,13 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 	UI::Box* buttons = new UI::Box(&vbox_, 0, 0, UI::Box::Horizontal);
 	vbox_.add(buttons, UI::Box::Resizing::kFullSize);
 
-	btn_sink_ = make_button(
-	   buttons, "sink", _("Sink the ship"), pic_sink, boost::bind(&ShipWindow::act_sink, this));
-	buttons->add(btn_sink_);
+	if (ibase_.get_game()) {
+		// Use the Delete Workers tool to remove the ship
+		btn_sink_ = make_button(
+		   buttons, "sink", _("Sink the ship"), pic_sink, boost::bind(&ShipWindow::act_sink, this));
+		buttons->add(btn_sink_);
+	} else
+		btn_sink_ = nullptr;
 
 	btn_cancel_expedition_ =
 	   make_button(buttons, "cancel_expedition", _("Cancel the Expedition"), pic_cancel_expedition,
@@ -136,17 +271,30 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 
 	buttons->add_inf_space();
 
-	if (igbase_.get_display_flag(InteractiveBase::dfDebug)) {
+	if (ibase_.get_display_flag(InteractiveBase::dfDebug)) {
 		btn_debug_ = make_button(buttons, "debug", _("Show Debug Window"), pic_debug,
 		                         boost::bind(&ShipWindow::act_debug, this));
 		btn_debug_->set_enabled(true);
 		buttons->add(btn_debug_);
-	}
+	} else
+		btn_debug_ = nullptr;
+	if (ibase_.omnipotent()) {
+		btn_editorcfg_ =
+		   make_button(buttons, "editorcfg", _("Configure wares and workers and rename the ship"),
+		               pic_editorcfg, boost::bind(&ShipWindow::act_editorcfg, this));
+		btn_editorcfg_->set_enabled(true);
+		buttons->add(btn_editorcfg_);
+	} else
+		btn_editorcfg_ = nullptr;
 
-	btn_destination_ = make_button(buttons, "destination", _("Go to destination"), pic_destination,
-	                               boost::bind(&ShipWindow::act_destination, this));
-	btn_destination_->set_enabled(false);
-	buttons->add(btn_destination_);
+	if (ibase_.get_game()) {
+		btn_destination_ =
+		   make_button(buttons, "destination", _("Go to destination"), pic_destination,
+		               boost::bind(&ShipWindow::act_destination, this));
+		btn_destination_->set_enabled(false);
+		buttons->add(btn_destination_);
+	} else
+		btn_destination_ = nullptr;
 
 	btn_goto_ = make_button(
 	   buttons, "goto", _("Go to ship"), pic_goto, boost::bind(&ShipWindow::act_goto, this));
@@ -191,7 +339,7 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 }
 
 void ShipWindow::set_button_visibility() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
@@ -207,12 +355,12 @@ void ShipWindow::set_button_visibility() {
 }
 
 void ShipWindow::no_port_error_message() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
-	if (upcast(InteractiveGameBase, igamebase, ship->get_owner()->egbase().get_ibase())) {
-		if (igamebase->can_act(ship->owner().player_number())) {
+	if (upcast(InteractiveBase, ibase, ship->get_owner()->egbase().get_ibase())) {
+		if (ibase->can_act(ship->owner().player_number()) || ibase_.omnipotent()) {
 			UI::WLMessageBox messagebox(
 			   get_parent(),
 			   /** TRANSLATORS: Window label when an expedition can't be canceled */
@@ -227,21 +375,23 @@ void ShipWindow::no_port_error_message() {
 
 void ShipWindow::think() {
 	UI::Window::think();
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
-	bool can_act = igbase_.can_act(ship->owner().player_number());
+	bool can_act = ibase_.can_act(ship->owner().player_number()) || ibase_.omnipotent();
 
-	btn_destination_->set_enabled(ship->get_current_destination(igbase_.egbase()));
-	btn_sink_->set_enabled(can_act);
+	if (btn_destination_)
+		btn_destination_->set_enabled(ship->get_current_destination(ibase_.egbase()));
+	if (btn_sink_)
+		btn_sink_->set_enabled(can_act);
 
 	display_->clear();
 	for (uint32_t idx = 0; idx < ship->get_nritems(); ++idx) {
 		Widelands::ShippingItem item = ship->get_item(idx);
 		Widelands::WareInstance* ware;
 		Widelands::Worker* worker;
-		item.get(igbase_.egbase(), &ware, &worker);
+		item.get(ibase_.egbase(), &ware, &worker);
 
 		if (ware) {
 			display_->add(false, ware->descr_index());
@@ -277,7 +427,8 @@ void ShipWindow::think() {
 		                                    (state != Ship::ShipStates::kExpeditionColonizing));
 		btn_explore_island_ccw_->set_enabled(can_act && coast_nearby &&
 		                                     (state != Ship::ShipStates::kExpeditionColonizing));
-		btn_sink_->set_enabled(can_act && (state != Ship::ShipStates::kExpeditionColonizing));
+		if (btn_sink_)
+			btn_sink_->set_enabled(can_act && (state != Ship::ShipStates::kExpeditionColonizing));
 	}
 	btn_cancel_expedition_->set_enabled(ship->state_is_expedition() && can_act &&
 	                                    (state != Ship::ShipStates::kExpeditionColonizing));
@@ -298,86 +449,91 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
 
 /// Move the main view towards the current ship location
 void ShipWindow::act_goto() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
-	igbase_.map_view()->scroll_to_field(ship->get_position(), MapView::Transition::Smooth);
+	ibase_.map_view()->scroll_to_field(ship->get_position(), MapView::Transition::Smooth);
 }
 
 /// Move the main view towards the current destination of the ship
 void ShipWindow::act_destination() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
-	if (PortDock* destination = ship->get_current_destination(igbase_.egbase())) {
-		igbase_.map_view()->scroll_to_field(
+	if (PortDock* destination = ship->get_current_destination(ibase_.egbase())) {
+		ibase_.map_view()->scroll_to_field(
 		   destination->get_warehouse()->get_position(), MapView::Transition::Smooth);
 	}
 }
 
 /// Sink the ship if confirmed
 void ShipWindow::act_sink() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
 	if (SDL_GetModState() & KMOD_CTRL) {
-		igbase_.game().send_player_sink_ship(*ship);
+		ibase_.game().send_player_sink_ship(*ship);
 	} else {
-		show_ship_sink_confirm(dynamic_cast<InteractivePlayer&>(igbase_), *ship);
+		show_ship_sink_confirm(dynamic_cast<InteractivePlayer&>(ibase_), *ship);
 	}
 }
 
 /// Show debug info
 void ShipWindow::act_debug() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
-	show_mapobject_debug(igbase_, *ship);
+	show_mapobject_debug(ibase_, *ship);
+}
+
+void ShipWindow::act_editorcfg() {
+	if (Widelands::Ship* ship = ship_.get(ibase_.egbase()))
+		new ShipCfg(ibase_, *ship);
 }
 
 /// Cancel expedition if confirmed
 void ShipWindow::act_cancel_expedition() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
 	if (SDL_GetModState() & KMOD_CTRL) {
-		igbase_.game().send_player_cancel_expedition_ship(*ship);
+		ibase_.game().send_player_cancel_expedition_ship(*ship);
 	} else {
-		show_ship_cancel_expedition_confirm(dynamic_cast<InteractivePlayer&>(igbase_), *ship);
+		show_ship_cancel_expedition_confirm(dynamic_cast<InteractivePlayer&>(ibase_), *ship);
 	}
 }
 
 /// Sends a player command to the ship to scout towards a specific direction
 void ShipWindow::act_scout_towards(WalkingDir direction) {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
 	// ignore request if the direction is not swimmable at all
 	if (!ship->exp_dir_swimmable(static_cast<Direction>(direction)))
 		return;
-	igbase_.game().send_player_ship_scouting_direction(*ship, direction);
+	ibase_.game().send_player_ship_scouting_direction(*ship, direction);
 }
 
 /// Constructs a port at the port build space in vision range
 void ShipWindow::act_construct_port() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
 	if (ship->exp_port_spaces().empty())
 		return;
-	igbase_.game().send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
+	ibase_.game().send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
 }
 
 /// Explores the island cw or ccw
 void ShipWindow::act_explore_island(IslandExploreDirection direction) {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
@@ -391,5 +547,5 @@ void ShipWindow::act_explore_island(IslandExploreDirection direction) {
 	}
 	if (!coast_nearby || !moveable)
 		return;
-	igbase_.game().send_player_ship_explore_island(*ship, direction);
+	ibase_.game().send_player_ship_explore_island(*ship, direction);
 }

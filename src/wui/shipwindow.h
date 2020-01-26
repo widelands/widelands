@@ -27,6 +27,7 @@
 #include "logic/map_objects/walkingdir.h"
 #include "notifications/notifications.h"
 #include "ui_basic/button.h"
+#include "ui_basic/editbox.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/itemwaresdisplay.h"
@@ -36,7 +37,7 @@
  */
 class ShipWindow : public UI::UniqueWindow {
 public:
-	ShipWindow(InteractiveGameBase& igb, UI::UniqueWindow::Registry& reg, Widelands::Ship* ship);
+	ShipWindow(InteractiveBase&, UI::UniqueWindow::Registry& reg, Widelands::Ship* ship);
 
 private:
 	void think() override;
@@ -53,12 +54,13 @@ private:
 	void act_destination();
 	void act_sink();
 	void act_debug();
+	void act_editorcfg();
 	void act_cancel_expedition();
 	void act_scout_towards(Widelands::WalkingDir);
 	void act_construct_port();
 	void act_explore_island(Widelands::IslandExploreDirection);
 
-	InteractiveGameBase& igbase_;
+	InteractiveBase& ibase_;
 	Widelands::OPtr<Widelands::Ship> ship_;
 
 	UI::Box vbox_;
@@ -67,6 +69,7 @@ private:
 	UI::Button* btn_destination_;
 	UI::Button* btn_sink_;
 	UI::Button* btn_debug_;
+	UI::Button* btn_editorcfg_;
 	UI::Button* btn_cancel_expedition_;
 	UI::Button* btn_explore_island_cw_;
 	UI::Button* btn_explore_island_ccw_;
@@ -77,6 +80,34 @@ private:
 	int navigation_box_height_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 	DISALLOW_COPY_AND_ASSIGN(ShipWindow);
+};
+
+class ShipCfg : public UI::Window {
+public:
+	ShipCfg(InteractiveBase&, Widelands::Ship&);
+	~ShipCfg() override {
+	}
+
+	const Widelands::Ship* ship() const;
+	Widelands::Ship* ship();
+
+protected:
+	void think() override;
+
+private:
+	InteractiveBase& ibase_;
+	Widelands::OPtr<Widelands::Ship> ship_;
+
+	UI::Box main_box_;
+	UI::EditBox shipname_;
+	UI::Button ok_;
+	UI::Button cancel_;
+	std::vector<std::unique_ptr<UI::Box>> row_boxes_;
+	std::vector<
+	   std::unique_ptr<UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>>>
+	   items_;
+
+	void clicked_ok();
 };
 
 #endif  // end of include guard: WL_WUI_SHIPWINDOW_H

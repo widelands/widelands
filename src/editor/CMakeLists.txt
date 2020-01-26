@@ -40,6 +40,7 @@ wl_library(editor
     io_fileread
     logic_tribe_basic_info
 )
+
 wl_library(editor_scripting
   SRCS
     scripting/builtin.cc
@@ -66,6 +67,7 @@ wl_library(editor_scripting
     io_fileread
     logic_exceptions
 )
+
 wl_library(editor_tools
   SRCS
     tools/decrease_height_tool.cc
@@ -118,6 +120,7 @@ wl_library(editor_tools
     ui_basic
     wui_mapview_pixelfunctions
 )
+
 wl_library(editor_scenario_tools
   SRCS
     tools/scenario_field_owner_tool.cc
@@ -142,7 +145,9 @@ wl_library(editor_scenario_tools
     logic_map
     logic_map_objects
     logic_widelands_geometry
+    wui
 )
+
 wl_library(editor_ui
   SRCS
     ui_menus/categorized_item_selection_menu.h
@@ -199,6 +204,7 @@ wl_library(editor_ui
     logic
     base_i18n
 )
+
 wl_library(editor_tools_ui
   SRCS
     ui_menus/player_menu.cc
@@ -234,6 +240,7 @@ wl_library(editor_tools_ui
     ui_basic
     widelands_options
 )
+
 wl_library(editor_scenario_tools_ui
   SRCS
     ui_menus/player_teams_menu.cc

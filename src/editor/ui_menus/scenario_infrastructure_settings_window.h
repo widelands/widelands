@@ -33,9 +33,13 @@
 class EditorInteractive;
 struct ScenarioInfrastructureSettingsTool;
 
-/// The control center for the scenario scripting
+/// Allows placing wares on a flag and changing economy targets
 struct ScenarioFlagSettingsWindow : public UI::Window {
-	ScenarioFlagSettingsWindow(EditorInteractive&, ScenarioInfrastructureSettingsTool&, Widelands::Flag&);
+	ScenarioFlagSettingsWindow(EditorInteractive&,
+	                           ScenarioInfrastructureSettingsTool&,
+	                           Widelands::Flag&);
+	~ScenarioFlagSettingsWindow() override {
+	}
 
 	const Widelands::Flag* flag() const;
 

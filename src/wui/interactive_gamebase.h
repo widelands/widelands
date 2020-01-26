@@ -63,7 +63,6 @@ public:
 	}
 
 	bool try_show_ship_window();
-	void show_ship_window(Widelands::Ship* ship);
 	bool is_multiplayer() {
 		return multiplayer_;
 	}
