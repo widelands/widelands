@@ -458,7 +458,7 @@ void EditorInteractive::load(const std::string& filename) {
 	ml->preload_map(true);
 
 	UI::ProgressWindow* loader_ui = egbase().get_loader_ui();
-	// We already have a loader window if Widelands wa started with --editor=mapname
+	// We already have a loader window if Widelands was started with --editor=mapname
 	const bool create_loader_ui = !loader_ui;
 	if (create_loader_ui) {
 		loader_ui = new UI::ProgressWindow("images/loadscreens/editor.jpg");
