@@ -17,16 +17,23 @@ tribes:new_productionsite_type {
       log = 2,
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {49, 91},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 46},
+         fps = 4,
+         frames = 4,
+         columns = 2,
+         rows = 2
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {49, 69},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {39, 46}
+      }
    },
 
    aihints = {
