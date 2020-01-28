@@ -38,7 +38,10 @@ namespace {
 
 constexpr uint16_t kCurrentPacketVersion = 7;
 
-bool write_expedition_ship_economy(Economy* economy, const Map& map, FileWrite* fw, MapObjectSaver* const mos) {
+bool write_expedition_ship_economy(Economy* economy,
+                                   const Map& map,
+                                   FileWrite* fw,
+                                   MapObjectSaver* const mos) {
 	for (Field const* field = &map[0]; field < &map[map.max_index()]; ++field) {
 		Bob* bob = field->get_first_bob();
 		while (bob) {
@@ -82,7 +85,8 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 								EconomyDataPacket d(flag->get_economy(type), nullptr);
 								d.read(fr);
 							} catch (const GameDataError& e) {
-								throw GameDataError("Error reading economy data for flag %u: %s", serial, e.what());
+								throw GameDataError(
+								   "Error reading economy data for flag %u: %s", serial, e.what());
 							}
 						} else if (upcast(const Ship, ship, &mo)) {
 							try {
@@ -92,10 +96,11 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 								d.read(fr);
 							} catch (const GameDataError& e) {
 								throw GameDataError("Error reading economy data for ship %u '%s': %s",
-										            serial, ship->get_shipname().c_str(), e.what());
+								                    serial, ship->get_shipname().c_str(), e.what());
 							}
 						} else {
-							throw GameDataError("Serial %u refers neither to a flag nor to a ship", serial);
+							throw GameDataError(
+							   "Serial %u refers neither to a flag nor to a ship", serial);
 						}
 					} else {
 						// TODO(Nordfriese): Savegame compatibility
@@ -104,7 +109,7 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 							if (upcast(Flag const, flag, map[value].get_immovable())) {
 								try {
 									assert(flag->get_economy(type)->owner().player_number() ==
-										   player->player_number());
+									       player->player_number());
 									// TODO(Nordfriese): Savegame compatibility
 									EconomyDataPacket d(
 									   flag->get_economy(type), packet_version >= 6 ? nullptr : mol);
@@ -127,7 +132,7 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 										try {
 											assert(ship->get_economy(type));
 											assert(ship->get_economy(type)->owner().player_number() ==
-												   player->player_number());
+											       player->player_number());
 											EconomyDataPacket d(
 											   ship->get_economy(type), packet_version >= 6 ? nullptr : mol);
 											d.read(fr);
@@ -135,7 +140,7 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 											break;
 										} catch (const GameDataError& e) {
 											throw GameDataError("error reading economy data for ship %s: %s",
-													            ship->get_shipname().c_str(), e.what());
+											                    ship->get_shipname().c_str(), e.what());
 										}
 									}
 								}
