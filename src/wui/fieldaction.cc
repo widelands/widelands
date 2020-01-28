@@ -897,8 +897,8 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						          .highlight_overlapping_workarea_for(d->name(), &positive))) ||
 						    ((descr.type() == Widelands::MapObjectType::MILITARYSITE ||
 						      descr.type() == Widelands::MapObjectType::WAREHOUSE) &&
-						     imm_type != Widelands::MapObjectType::MILITARYSITE &&
-						     imm_type != Widelands::MapObjectType::WAREHOUSE)) {
+						     d->type() != Widelands::MapObjectType::MILITARYSITE &&
+						     d->type() != Widelands::MapObjectType::WAREHOUSE)) {
 							continue;
 						}
 					} else if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
