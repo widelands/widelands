@@ -97,7 +97,7 @@ void FS_While::write_lua(int32_t indent, FileWrite& fw) const {
 		fw.print_f("repeat");
 	}
 	fw.print_f("\n");
-	::write_lua(indent, fw, body_);
+	::write_lua(indent, fw, body_, true);
 }
 
 // For Each
@@ -187,7 +187,7 @@ void FS_ForEach::write_lua(int32_t indent, FileWrite& fw) const {
 	                 "pairs");
 	table_->write_lua(indent, fw);
 	fw.print_f(") do\n");
-	::write_lua(indent, fw, body_);
+	::write_lua(indent, fw, body_, true);
 }
 
 // For
@@ -272,7 +272,7 @@ void FS_For::write_lua(int32_t indent, FileWrite& fw) const {
 	fw.print_f(",");
 	j_->write_lua(indent, fw);
 	fw.print_f(" do\n");
-	::write_lua(indent, fw, body_);
+	::write_lua(indent, fw, body_, true);
 }
 
 // If
@@ -449,7 +449,7 @@ void FS_If::write_lua(int32_t indent, FileWrite& fw) const {
 		 */
 		throw wexception("if statement %u: Empty if body", serial());
 	}
-	::write_lua(indent, fw, if_body_);
+	::write_lua(indent, fw, if_body_, false);
 
 	for (const auto& pair : elseif_bodies_) {
 		if (pair.second.empty()) {
@@ -467,13 +467,18 @@ void FS_If::write_lua(int32_t indent, FileWrite& fw) const {
 		fw.print_f("elseif ");
 		pair.first->write_lua(indent, fw);
 		fw.print_f(" then\n");
-		::write_lua(indent, fw, pair.second);
+		::write_lua(indent, fw, pair.second, false);
 	}
 
 	if (!else_body_.empty()) {
 		// Not a problem since else, unlike if and elseif, doesn't have a
 		// condition, so leaving it out won't effect any downstream clauses.
 		fw.print_f("else\n");
-		::write_lua(indent, fw, else_body_);
+		::write_lua(indent, fw, else_body_, false);
+	}
+
+	fw.print_f("end\n");
+	for (int32_t i = 0; i < indent; ++i) {
+		fw.print_f("   ");
 	}
 }

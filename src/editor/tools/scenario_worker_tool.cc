@@ -57,9 +57,6 @@ int32_t ScenarioPlaceWorkerTool::handle_click_impl(const Widelands::NodeAndTrian
 		bob = &worker;
 	} else {
 		bob = &egbase.create_ship(center.node, player->tribe().ship(), player);
-		if (!shipname_.empty()) {
-			dynamic_cast<Widelands::Ship*>(bob)->set_shipname(shipname_);
-		}
 	}
 	args->infrastructure_placed = bob->serial();
 	return 1;

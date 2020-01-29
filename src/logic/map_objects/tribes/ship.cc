@@ -731,13 +731,13 @@ void Ship::set_ship_state_and_notify(ShipStates state, NoteShip::Action action) 
 	}
 }
 
-void Ship::set_economy(Game& game, Economy* e, WareWorker type) {
+void Ship::set_economy(EditorGameBase& egbase, Economy* e, WareWorker type) {
 	// Do not check here that the economy actually changed, because on loading
 	// we rely that wares really get reassigned our economy.
 
 	(type == wwWARE ? ware_economy_ : worker_economy_) = e;
 	for (ShippingItem& shipping_item : items_) {
-		shipping_item.set_economy(game, e, type);
+		shipping_item.set_economy(egbase, e, type);
 	}
 }
 
@@ -1480,8 +1480,8 @@ void Ship::Loader::load_finish() {
 	// economy of all workers we're transporting so that they are in the correct
 	// economy. Also, we might are on an expedition which means that we just now
 	// created the economy of this ship and must inform all wares.
-	ship.set_economy(dynamic_cast<Game&>(egbase()), ship.ware_economy_, wwWARE);
-	ship.set_economy(dynamic_cast<Game&>(egbase()), ship.worker_economy_, wwWORKER);
+	ship.set_economy(egbase(), ship.ware_economy_, wwWARE);
+	ship.set_economy(egbase(), ship.worker_economy_, wwWORKER);
 	ship.get_owner()->add_ship(ship.serial());
 }
 

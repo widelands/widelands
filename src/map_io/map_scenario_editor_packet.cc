@@ -130,11 +130,10 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 		if (packet_version == kCurrentPacketVersion) {
 			if (fr.unsigned_8()) {
 				eia->finalized_ = true;
-
 				eia->set_display_flag(InteractiveBase::dfShowCensus, fr.unsigned_8());
-
 				eia->init_allowed_buildings_windows_registries();
 				eia->new_scripting_saver();
+
 				// The ScriptingLoader constructor will immediately load all ScriptingObjects
 				// (triggering both loading phases one after the other)
 				ScriptingLoader loader(fr, eia->scripting_saver());
@@ -148,6 +147,9 @@ void MapScenarioEditorPacket::read(FileSystem& fs,
 				for (uint32_t n = fr.unsigned_32(); n; --n) {
 					eia->includes_.push_back(fr.c_string());
 				}
+
+				eia->rebuild_scenario_tool_menu();
+				eia->rebuild_showhide_menu();
 			}
 		} else {
 			throw UnhandledVersionError(

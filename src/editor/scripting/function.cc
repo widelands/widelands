@@ -128,7 +128,7 @@ void LuaFunction::save(FileWrite& fw) const {
 
 void LuaFunction::write_lua(int32_t indent, FileWrite& fw) const {
 	fw.print_f("\n%s\n", header(true).c_str());
-	::write_lua(indent, fw, body_);
+	::write_lua(indent, fw, body_, true);
 }
 
 std::set<uint32_t> LuaFunction::references() const {
@@ -140,7 +140,10 @@ std::set<uint32_t> LuaFunction::references() const {
 }
 
 // static
-void write_lua(int32_t indent, FileWrite& fw, const std::list<FunctionStatement*>& body) {
+void write_lua(int32_t indent,
+               FileWrite& fw,
+               const std::list<FunctionStatement*>& body,
+               bool print_end) {
 	for (const auto& f : body) {
 		for (int32_t i = 0; i <= indent; ++i) {
 			fw.print_f("   ");
@@ -150,5 +153,11 @@ void write_lua(int32_t indent, FileWrite& fw, const std::list<FunctionStatement*
 	}
 	for (int32_t i = 0; i < indent; ++i) {
 		fw.print_f("   ");
+	}
+	if (print_end) {
+		fw.print_f("end\n");
+		for (int32_t i = 0; i < indent; ++i) {
+			fw.print_f("   ");
+		}
 	}
 }

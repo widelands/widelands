@@ -229,7 +229,6 @@ private:
 		kLoadMap,
 		kSaveMap,
 		kMapOptions,
-		kFinalize,
 		kExitEditor,
 	};
 
@@ -249,6 +248,7 @@ private:
 	};
 	// For referencing the items in scenario_toolmenu_
 	enum class ScenarioToolMenuEntry {
+		kFinalize,
 		kFieldOwner,
 		kVision,
 		kInfrastructure,
@@ -263,13 +263,13 @@ private:
 
 	// Adds the mainmenu_ to the toolbar
 	void add_main_menu();
-	void rebuild_main_menu();
 	// Takes the appropriate action when an item in the mainmenu_ is selected
 	void main_menu_selected(MainMenuEntry entry);
 	// Adds the toolmenu_ to the toolbar
 	void add_tool_menu();
 	// Adds the scenario_toolmenu_ to the toolbar
 	void add_scenario_tool_menu();
+	void rebuild_scenario_tool_menu();
 	// Takes the appropriate action when an item in the toolmenu_ is selected
 	void tool_menu_selected(ToolMenuEntry entry);
 	void scenario_tool_menu_selected(ScenarioToolMenuEntry entry);

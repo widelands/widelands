@@ -133,7 +133,6 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                         34U,
                         12,
                         34U,
-                        /** TRANSLATORS: Title for the tool menu button in the editor */
                         as_tooltip_text_with_hotkey(_("Scenario Tools"), "S"),
                         UI::DropdownType::kPictorialMenu,
                         UI::PanelStyle::kWui,
@@ -214,13 +213,6 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 void EditorInteractive::add_main_menu() {
 	mainmenu_.set_image(g_gr->images().get("images/wui/editor/menus/main_menu.png"));
-	rebuild_main_menu();
-	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
-	toolbar()->add(&mainmenu_);
-}
-
-void EditorInteractive::rebuild_main_menu() {
-	mainmenu_.clear();
 	menu_windows_.newmap.open_window = [this] { new MainMenuNewMap(*this, menu_windows_.newmap); };
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Map"), MainMenuEntry::kNewMap,
@@ -256,15 +248,11 @@ void EditorInteractive::rebuild_main_menu() {
 	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions,
 	              g_gr->images().get("images/wui/editor/menus/map_options.png"));
 
-	if (!finalized_) {
-		/** TRANSLATORS: An entry in the editor's main menu */
-		mainmenu_.add(_("Enable scenario functions"), MainMenuEntry::kFinalize,
-		              g_gr->images().get("images/wui/editor/menus/scenario.png"));
-	}
-
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor,
 	              g_gr->images().get("images/wui/menus/exit.png"));
+	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
+	toolbar()->add(&mainmenu_);
 }
 
 void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
@@ -283,9 +271,6 @@ void EditorInteractive::main_menu_selected(MainMenuEntry entry) {
 	} break;
 	case MainMenuEntry::kMapOptions: {
 		menu_windows_.mapoptions.toggle();
-	} break;
-	case MainMenuEntry::kFinalize: {
-		finalize_clicked();
 	} break;
 	case MainMenuEntry::kExitEditor: {
 		exit();
@@ -400,83 +385,6 @@ void EditorInteractive::add_tool_menu() {
 	toolbar()->add(&toolmenu_);
 }
 
-void EditorInteractive::add_scenario_tool_menu() {
-	scenario_toolmenu_.set_image(g_gr->images().get("images/wui/editor/menus/scenario_tools.png"));
-
-	scenario_tool_windows_.fieldowner.open_window = [this] {
-		new ScenarioToolFieldOwnerOptionsMenu(
-		   *this, tools()->sc_owner, scenario_tool_windows_.fieldowner);
-	};
-	scenario_toolmenu_.add(
-	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
-	   _("Ownership"), ScenarioToolMenuEntry::kFieldOwner,
-	   g_gr->images().get("images/wui/editor/tools/sc_owner.png"), false,
-	   /** TRANSLATORS: Tooltip for the field ownership scenario tool in the editor */
-	   _("Set the initial ownership of fields"));
-
-	scenario_tool_windows_.vision.open_window = [this] {
-		new ScenarioToolVisionOptionsMenu(*this, tools()->sc_vision, scenario_tool_windows_.vision);
-	};
-	scenario_toolmenu_.add(
-	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
-	   _("Vision"), ScenarioToolMenuEntry::kVision,
-	   g_gr->images().get("images/wui/editor/tools/sc_vis.png"), false,
-	   /** TRANSLATORS: Tooltip for the vision scenario tool in the editor */
-	   _("Reveal and hide fields to the players"));
-
-	scenario_tool_windows_.infrastructure.open_window = [this] {
-		new ScenarioToolInfrastructureOptionsMenu(
-		   *this, tools()->sc_infra, scenario_tool_windows_.infrastructure);
-	};
-	scenario_toolmenu_.add(
-	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
-	   _("Place Infrastructure"), ScenarioToolMenuEntry::kInfrastructure,
-	   g_gr->images().get("images/wui/editor/tools/sc_infra.png"), false,
-	   /** TRANSLATORS: Tooltip for the place infrastructure scenario tool in the editor */
-	   _("Place buildings, flags and tribe immovables"));
-
-	scenario_toolmenu_.add(
-	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
-	   _("Infrastructure Settings"), ScenarioToolMenuEntry::kInfrastructureSettings,
-	   g_gr->images().get("images/wui/editor/tools/sc_infra_settings.png"), false,
-	   /** TRANSLATORS: Tooltip for the infrastructure settings scenario tool in the editor */
-	   _("Create the initial settings for buildings and flags"), _("Shift+i"));
-
-	scenario_tool_windows_.worker.open_window = [this] {
-		new ScenarioToolWorkerOptionsMenu(*this, tools()->sc_worker, scenario_tool_windows_.worker);
-	};
-	scenario_toolmenu_.add(
-	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
-	   _("Workers and Ships"), ScenarioToolMenuEntry::kWorker,
-	   g_gr->images().get("images/wui/editor/tools/sc_worker.png"), false,
-	   /** TRANSLATORS: Tooltip for the place workers scenario tool in the editor */
-	   _("Place workers, ships and ferries on the map"));
-
-	scenario_tool_windows_.road.open_window = [this] {
-		new ScenarioToolRoadOptionsMenu(*this, tools()->sc_road, scenario_tool_windows_.road);
-	};
-	scenario_toolmenu_.add(
-	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
-	   _("Roads and Waterways"), ScenarioToolMenuEntry::kRoad,
-	   g_gr->images().get("images/wui/editor/tools/sc_road.png"), false,
-	   /** TRANSLATORS: Tooltip for the place roads scenario tool in the editor */
-	   _("Build roads and waterways"));
-
-	scenario_tool_windows_.lua.open_window = [this] {
-		new ScenarioLuaOptionsMenu(*this, scenario_tool_windows_.lua);
-	};
-	/** TRANSLATORS: An entry in the editor's scenario tool menu */
-	scenario_toolmenu_.add(_("Scripting"), ScenarioToolMenuEntry::kLua,
-	                       g_gr->images().get("images/wui/editor/menus/scripting.png"), false,
-	                       /** TRANSLATORS: Tooltip for the scenario scripting menu in the editor */
-	                       _("Edit the scenario storyline"));
-
-	scenario_toolmenu_.selected.connect(
-	   [this] { scenario_tool_menu_selected(scenario_toolmenu_.get_selected()); });
-	toolbar()->add(&scenario_toolmenu_);
-	scenario_toolmenu_.set_enabled(finalized_);
-}
-
 void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 	switch (entry) {
 	case ToolMenuEntry::kChangeHeight:
@@ -516,8 +424,99 @@ void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 	toolmenu_.toggle();
 }
 
+void EditorInteractive::add_scenario_tool_menu() {
+	scenario_toolmenu_.set_image(g_gr->images().get("images/wui/editor/menus/scenario_tools.png"));
+	rebuild_scenario_tool_menu();
+	scenario_toolmenu_.selected.connect(
+	   [this] { scenario_tool_menu_selected(scenario_toolmenu_.get_selected()); });
+	toolbar()->add(&scenario_toolmenu_);
+}
+
+void EditorInteractive::rebuild_scenario_tool_menu() {
+	scenario_toolmenu_.clear();
+
+	if (!finalized_) {
+		/** TRANSLATORS: An entry in the editor's scenario tool menu */
+		scenario_toolmenu_.add(_("Enable Scenario Functions…"), ScenarioToolMenuEntry::kFinalize,
+		                       g_gr->images().get("images/wui/editor/menus/scenario.png"));
+		return;
+	}
+
+	scenario_tool_windows_.fieldowner.open_window = [this] {
+		new ScenarioToolFieldOwnerOptionsMenu(
+		   *this, tools()->sc_owner, scenario_tool_windows_.fieldowner);
+	};
+	scenario_toolmenu_.add(
+	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
+	   _("Ownership"), ScenarioToolMenuEntry::kFieldOwner,
+	   g_gr->images().get("images/wui/editor/tools/sc_owner.png"), false,
+	   /** TRANSLATORS: Tooltip for the field ownership scenario tool in the editor */
+	   _("Set the initial ownership of fields"));
+
+	scenario_tool_windows_.vision.open_window = [this] {
+		new ScenarioToolVisionOptionsMenu(*this, tools()->sc_vision, scenario_tool_windows_.vision);
+	};
+	scenario_toolmenu_.add(
+	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
+	   _("Vision"), ScenarioToolMenuEntry::kVision,
+	   g_gr->images().get("images/wui/editor/tools/sc_vis.png"), false,
+	   /** TRANSLATORS: Tooltip for the vision scenario tool in the editor */
+	   _("Reveal and hide fields to the players"));
+
+	scenario_tool_windows_.infrastructure.open_window = [this] {
+		new ScenarioToolInfrastructureOptionsMenu(
+		   *this, tools()->sc_infra, scenario_tool_windows_.infrastructure);
+	};
+	scenario_toolmenu_.add(
+	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
+	   _("Place Infrastructure"), ScenarioToolMenuEntry::kInfrastructure,
+	   g_gr->images().get("images/wui/editor/tools/sc_infra.png"), false,
+	   /** TRANSLATORS: Tooltip for the place infrastructure scenario tool in the editor */
+	   _("Place buildings, flags and tribe immovables"));
+
+	scenario_tool_windows_.worker.open_window = [this] {
+		new ScenarioToolWorkerOptionsMenu(*this, tools()->sc_worker, scenario_tool_windows_.worker);
+	};
+	scenario_toolmenu_.add(
+	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
+	   _("Workers and Ships"), ScenarioToolMenuEntry::kWorker,
+	   g_gr->images().get("images/wui/editor/tools/sc_worker.png"), false,
+	   /** TRANSLATORS: Tooltip for the place workers scenario tool in the editor */
+	   _("Place workers, ships and ferries on the map"));
+
+	scenario_tool_windows_.road.open_window = [this] {
+		new ScenarioToolRoadOptionsMenu(*this, tools()->sc_road, scenario_tool_windows_.road);
+	};
+	scenario_toolmenu_.add(
+	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
+	   _("Roads and Waterways"), ScenarioToolMenuEntry::kRoad,
+	   g_gr->images().get("images/wui/editor/tools/sc_road.png"), false,
+	   /** TRANSLATORS: Tooltip for the place roads scenario tool in the editor */
+	   _("Build roads and waterways"));
+
+	scenario_toolmenu_.add(
+	   /** TRANSLATORS: An entry in the editor's scenario tool menu */
+	   _("Settings"), ScenarioToolMenuEntry::kInfrastructureSettings,
+	   g_gr->images().get("images/wui/editor/tools/sc_infra_settings.png"), false,
+	   /** TRANSLATORS: Tooltip for the infrastructure settings scenario tool in the editor */
+	   _("Create the initial settings for buildings, flags, workers, and ships"),
+	   pgettext("hotkey", "Shift+I"));
+
+	scenario_tool_windows_.lua.open_window = [this] {
+		new ScenarioLuaOptionsMenu(*this, scenario_tool_windows_.lua);
+	};
+	/** TRANSLATORS: An entry in the editor's scenario tool menu */
+	scenario_toolmenu_.add(_("Scripting"), ScenarioToolMenuEntry::kLua,
+	                       g_gr->images().get("images/wui/editor/menus/scripting.png"), false,
+	                       /** TRANSLATORS: Tooltip for the scenario scripting menu in the editor */
+	                       _("Edit the scenario storyline"));
+}
+
 void EditorInteractive::scenario_tool_menu_selected(ScenarioToolMenuEntry entry) {
 	switch (entry) {
+	case ScenarioToolMenuEntry::kFinalize:
+		finalize_clicked();
+		break;
 	case ScenarioToolMenuEntry::kFieldOwner:
 		scenario_tool_windows_.fieldowner.toggle();
 		break;
@@ -680,7 +679,7 @@ void EditorInteractive::unfinalize() {
 	variables_.clear();
 	includes_.clear();
 	set_display_flag(dfShowCensus, false);
-	rebuild_main_menu();
+	rebuild_scenario_tool_menu();
 	rebuild_showhide_menu();
 }
 
@@ -1129,7 +1128,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				menu_windows_.savemap.toggle();
-			} else if (finalized_) {
+			} else {
 				scenario_toolmenu_.toggle();
 			}
 			return true;
@@ -1303,8 +1302,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 			update_players();
 		}
 
-		rebuild_main_menu();
-		scenario_toolmenu_.set_enabled(finalized_);
+		rebuild_scenario_tool_menu();
 
 		// Make sure that we will start at coordinates (0,0).
 		map_view()->set_view(MapView::View{Vector2f::zero(), 1.f}, MapView::Transition::Jump);
@@ -1560,9 +1558,8 @@ std::string EditorInteractive::try_finalize() {
 #endif
 	tool_windows_.players.destroy();
 	menu_windows_.mapoptions.destroy();
-	rebuild_main_menu();
+	rebuild_scenario_tool_menu();
 	rebuild_showhide_menu();
-	scenario_toolmenu_.set_enabled(true);
 	select_tool(tools_->info, EditorTool::ToolIndex::First);
 	return "";
 }

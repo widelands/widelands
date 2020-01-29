@@ -26,40 +26,34 @@
 #include "editor/ui_menus/tool_options_menu.h"
 #include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/editbox.h"
 #include "ui_basic/icongrid.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/spinbox.h"
 
 class EditorInteractive;
 
-// NOCOM refactor: Use a tabpanel with one tab per player, offering only the player's tribe's
-// workers. Get rid of the shipname box. Remove the no-tribe/tribe-changed code.
-
 struct ScenarioToolWorkerOptionsMenu : public EditorToolOptionsMenu {
 	ScenarioToolWorkerOptionsMenu(EditorInteractive&,
 	                              ScenarioPlaceWorkerTool&,
 	                              UI::UniqueWindow::Registry&);
-	~ScenarioToolWorkerOptionsMenu() {
+	~ScenarioToolWorkerOptionsMenu() override {
 	}
-
-	void update();
 
 private:
 	EditorInteractive& eia();
 	ScenarioPlaceWorkerTool& tool_;
 
-	void select_player();
+	void select_tab();
 	void select_ware();
 	void toggle_item(int32_t);
 	void update_text_and_spinner();
 
 	UI::Box box_, bottombox_;
-	UI::Dropdown<Widelands::PlayerNumber> players_;
-	UI::IconGrid item_types_;
-	UI::SpinBox experience_;
+	UI::TabPanel tabs_;
+	std::vector<std::unique_ptr<UI::IconGrid>> items_;
+
 	UI::Dropdown<Widelands::DescriptionIndex> ware_;
-	UI::EditBox shipname_;
+	UI::SpinBox experience_;
 	UI::MultilineTextarea selected_items_;
 };
 

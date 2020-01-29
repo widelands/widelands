@@ -51,7 +51,6 @@ struct ScenarioPlaceWorkerTool : public EditorTool {
 	explicit ScenarioPlaceWorkerTool(ScenarioDeleteWorkerTool& tool)
 	   : EditorTool(tool, tool),
 	     player_(1),
-	     shipname_(""),
 	     experience_(0),
 	     carried_ware_(Widelands::INVALID_INDEX) {
 	}
@@ -84,12 +83,6 @@ struct ScenarioPlaceWorkerTool : public EditorTool {
 	std::list<const Widelands::WorkerDescr*>& get_descr() {
 		return descr_;
 	}
-	const std::string& get_shipname() const {
-		return shipname_;
-	}
-	void set_shipname(const std::string& s) {
-		shipname_ = s;
-	}
 	uint32_t get_experience() const {
 		return experience_;
 	}
@@ -106,7 +99,6 @@ struct ScenarioPlaceWorkerTool : public EditorTool {
 private:
 	uint8_t player_;
 	std::list<const Widelands::WorkerDescr*> descr_;  // nullptr indicates ship
-	std::string shipname_;                            // only ships
 	uint32_t experience_;                             // only workers
 	Widelands::DescriptionIndex carried_ware_;        // only workers
 };

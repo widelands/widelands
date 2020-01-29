@@ -110,7 +110,7 @@ struct Ship : Bob {
 	Economy* get_economy(WareWorker type) const {
 		return type == wwWARE ? ware_economy_ : worker_economy_;
 	}
-	void set_economy(Game&, Economy* e, WareWorker);
+	void set_economy(EditorGameBase&, Economy* e, WareWorker);
 	void push_destination(Game&, PortDock&);
 	void pop_destination(Game&, PortDock&);
 	void clear_destinations(Game&);

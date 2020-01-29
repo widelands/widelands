@@ -56,7 +56,7 @@ constexpr int kPadding = 5;
 
 using namespace Widelands;
 
-constexpr uint16_t kShipCfgIconSize = 24;
+constexpr uint16_t kShipCfgIconSize = 32;
 constexpr uint16_t kShipCfgMaxColumns = 10;
 ShipCfg::ShipCfg(InteractiveBase& ib, Ship& s)
    : UI::Window(&ib, "shipcfg", 0, 0, 240, 200, _("Configure Ship")),
@@ -379,6 +379,7 @@ void ShipWindow::think() {
 	if (ship == nullptr) {
 		return;
 	}
+	set_title(ship->get_shipname());
 	bool can_act = ibase_.can_act(ship->owner().player_number()) || ibase_.omnipotent();
 
 	if (btn_destination_)
