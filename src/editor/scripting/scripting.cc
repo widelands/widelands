@@ -313,20 +313,14 @@ std::string descname(const VariableType& t) {
 		return _("Productionsite");
 	case VariableTypeID::TrainingSite:
 		return _("Trainingsite");
-	case VariableTypeID::PartiallyFinishedBuilding:
-		return _("Generic Partially Finished Building");
 	case VariableTypeID::ConstructionSite:
 		return _("Constructionsite");
 	case VariableTypeID::DismantleSite:
 		return _("Dismantlesite");
 	case VariableTypeID::Market:
 		return _("Market");
-	case VariableTypeID::RoadBase:
-		return _("Generic Road");
 	case VariableTypeID::Road:
 		return _("Road");
-	case VariableTypeID::Waterway:
-		return _("Waterway");
 	case VariableTypeID::Bob:
 		return _("Bob");
 	case VariableTypeID::Worker:
@@ -359,20 +353,14 @@ std::string descname(const VariableType& t) {
 		return _("Productionsite Description");
 	case VariableTypeID::TrainingSiteDescr:
 		return _("Trainingsite Description");
-	case VariableTypeID::PartiallyFinishedBuildingDescr:
-		return _("Generic Partially Finished Building Description");
 	case VariableTypeID::ConstructionSiteDescr:
 		return _("Constructionsite Description");
 	case VariableTypeID::DismantleSiteDescr:
 		return _("Dismantlesite Description");
 	case VariableTypeID::MarketDescr:
 		return _("Market Description");
-	case VariableTypeID::RoadBaseDescr:
-		return _("Generic Road Description");
 	case VariableTypeID::RoadDescr:
 		return _("Road Description");
-	case VariableTypeID::WaterwayDescr:
-		return _("Waterway Description");
 	case VariableTypeID::BobDescr:
 		return _("Bob Description");
 	case VariableTypeID::WorkerDescr:
@@ -439,22 +427,17 @@ bool is(VariableTypeID t, VariableTypeID s) {
 	case VariableTypeID::Flag:
 	case VariableTypeID::PortDock:
 	case VariableTypeID::Building:
-	case VariableTypeID::RoadBase:
+	case VariableTypeID::Road:
 		return is(s, VariableTypeID::PlayerImmovable);
 	case VariableTypeID::Warehouse:
 	case VariableTypeID::MilitarySite:
 	case VariableTypeID::ProductionSite:
-	case VariableTypeID::PartiallyFinishedBuilding:
+	case VariableTypeID::ConstructionSite:
+	case VariableTypeID::DismantleSite:
 	case VariableTypeID::Market:
 		return is(s, VariableTypeID::Building);
 	case VariableTypeID::TrainingSite:
 		return is(s, VariableTypeID::ProductionSite);
-	case VariableTypeID::ConstructionSite:
-	case VariableTypeID::DismantleSite:
-		return is(s, VariableTypeID::PartiallyFinishedBuilding);
-	case VariableTypeID::Road:
-	case VariableTypeID::Waterway:
-		return is(s, VariableTypeID::RoadBase);
 	case VariableTypeID::Ship:
 	case VariableTypeID::Worker:
 		return is(s, VariableTypeID::Bob);
@@ -471,22 +454,17 @@ bool is(VariableTypeID t, VariableTypeID s) {
 		return is(s, VariableTypeID::BaseImmovableDescr);
 	case VariableTypeID::FlagDescr:
 	case VariableTypeID::BuildingDescr:
-	case VariableTypeID::RoadBaseDescr:
+	case VariableTypeID::RoadDescr:
 		return is(s, VariableTypeID::PlayerImmovableDescr);
 	case VariableTypeID::WarehouseDescr:
 	case VariableTypeID::MilitarySiteDescr:
 	case VariableTypeID::ProductionSiteDescr:
-	case VariableTypeID::PartiallyFinishedBuildingDescr:
+	case VariableTypeID::ConstructionSiteDescr:
+	case VariableTypeID::DismantleSiteDescr:
 	case VariableTypeID::MarketDescr:
 		return is(s, VariableTypeID::BuildingDescr);
 	case VariableTypeID::TrainingSiteDescr:
 		return is(s, VariableTypeID::ProductionSiteDescr);
-	case VariableTypeID::ConstructionSiteDescr:
-	case VariableTypeID::DismantleSiteDescr:
-		return is(s, VariableTypeID::PartiallyFinishedBuildingDescr);
-	case VariableTypeID::RoadDescr:
-	case VariableTypeID::WaterwayDescr:
-		return is(s, VariableTypeID::RoadBaseDescr);
 	case VariableTypeID::WorkerDescr:
 	case VariableTypeID::ShipDescr:
 		return is(s, VariableTypeID::BobDescr);

@@ -1635,19 +1635,44 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 
 	// MapObject
 
-	new BuiltinPropertyInfo("mo_descr", []() { return
-	_("The MapObjectDescr associated with this map object"); },
-		new Property("descr", true,
-			VariableType(VariableTypeID::MapObject), // class
-			VariableType(VariableTypeID::MapObjectDescr) // type
-		)),
 	new BuiltinPropertyInfo("mo_serial", []() { return
 	_("The unique serial number of this map object. "
-	"Note that this value may not stay constant after saving/loading"); },
+	"Note that this value may not stay constant after saving/loading."); },
 		new Property("serial", true,
 			VariableType(VariableTypeID::MapObject), // class
 			VariableType(VariableTypeID::Integer) // type
 		)),
+
+// MapObject descrs
+
+#define DESCR_FOR(type)                                                                            \
+	new BuiltinPropertyInfo(                                                                        \
+	   "descr_" #type, []() { return _("The MapObjectDescr associated with this map object"); },    \
+	   new Property("descr", true, VariableType(VariableTypeID::type),                              \
+	                VariableType(VariableTypeID::type##Descr), false))
+
+	DESCR_FOR(MapObject),
+	DESCR_FOR(Bob),
+	DESCR_FOR(Ship),
+	DESCR_FOR(Worker),
+	DESCR_FOR(Carrier),
+	DESCR_FOR(Ferry),
+	DESCR_FOR(Soldier),
+	DESCR_FOR(BaseImmovable),
+	DESCR_FOR(PlayerImmovable),
+	DESCR_FOR(Immovable),
+	DESCR_FOR(Flag),
+	DESCR_FOR(Road),
+	DESCR_FOR(Building),
+	DESCR_FOR(Warehouse),
+	DESCR_FOR(ProductionSite),
+	DESCR_FOR(TrainingSite),
+	DESCR_FOR(Market),
+	DESCR_FOR(MilitarySite),
+	DESCR_FOR(ConstructionSite),
+	DESCR_FOR(DismantleSite),
+
+#undef DESCR_FOR
 
 	// BaseImmovable
 
