@@ -1626,6 +1626,7 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	// User-defined functions
 	for (const auto& f : scripting_saver_->all<LuaFunction>()) {
 		f->write_lua(0, fw);
+		fw.print_f("\n");
 	}
 
 	// Hand-written includes

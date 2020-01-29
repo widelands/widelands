@@ -922,6 +922,14 @@ const BuiltinPropertyInfo* kBuiltinProperties[] = {
 			VariableType(VariableTypeID::Game), // class
 			VariableType(VariableTypeID::String) // type
 		)),
+	new BuiltinPropertyInfo("scenario_difficulty", []() { return
+	_("The difficulty level of the current scenario. Values range from 1 "
+	"to the number of levels specified in the campaign's configuration in "
+	"campaigns.lua. By convention higher values mean more difficult."); },
+		new Property("scenario_difficulty", true,
+			VariableType(VariableTypeID::Game), // class
+			VariableType(VariableTypeID::Integer) // type
+		)),
 	new BuiltinPropertyInfo("players", []() { return _("An array with the player instances."); },
 		new Property("players", true,
 			VariableType(VariableTypeID::Game), // class

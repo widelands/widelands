@@ -584,7 +584,7 @@ ScriptingLoader::ScriptingLoader(FileRead& fr, ScriptingSaver& s) {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version != kCurrentPacketVersionScripting) {
 			throw Widelands::UnhandledVersionError(
-			   "ScriptingSaver", packet_version, kCurrentPacketVersionScripting);
+			   "ScriptingLoader", packet_version, kCurrentPacketVersionScripting);
 		}
 
 		// First load phase: Create all saved objects.

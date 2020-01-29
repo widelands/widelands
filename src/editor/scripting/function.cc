@@ -140,9 +140,6 @@ void write_lua(int32_t indent,
 		fw.print_f("   ");
 	}
 	if (print_end) {
-		fw.print_f("end\n");
-		for (int32_t i = 0; i < indent; ++i) {
-			fw.print_f("   ");
-		}
+		fw.print_f("end");
 	}
 }

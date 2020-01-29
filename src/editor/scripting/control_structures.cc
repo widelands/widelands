@@ -36,7 +36,9 @@ void ControlStructure::load(FileRead& fr, Loader& loader) {
 			throw Widelands::UnhandledVersionError(
 			   "ControlStructure", packet_version, kCurrentPacketVersionControlStructure);
 		}
-		for (size_t n = fr.unsigned_32(); n; --n) {
+		size_t n = fr.unsigned_32();
+		loader.push_back(n);
+		for (; n; --n) {
 			loader.push_back(fr.unsigned_32());
 		}
 	} catch (const WException& e) {
@@ -45,7 +47,9 @@ void ControlStructure::load(FileRead& fr, Loader& loader) {
 }
 void ControlStructure::load_pointers(const ScriptingLoader& l, Loader& loader) {
 	FunctionStatement::load_pointers(l, loader);
-	while (!loader.empty()) {
+	size_t n = loader.front();
+	loader.pop_front();
+	for (; n; --n) {
 		body_.push_back(&l.get<FunctionStatement>(loader.front()));
 		loader.pop_front();
 	}
@@ -467,8 +471,5 @@ void FS_If::write_lua(int32_t indent, FileWrite& fw) const {
 		::write_lua(indent, fw, else_body_, false);
 	}
 
-	fw.print_f("end\n");
-	for (int32_t i = 0; i < indent; ++i) {
-		fw.print_f("   ");
-	}
+	fw.print_f("end");
 }

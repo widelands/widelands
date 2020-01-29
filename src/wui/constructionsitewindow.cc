@@ -272,15 +272,14 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			   g_gr->images().get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
 			cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1);
 			if (can_act) {
-				cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
+				cs_prefer_heroes_rookies_->changedto.connect([this, ms](int32_t state) {
 					if (ibase()->get_game()) {
 						ibase()->game().send_player_militarysite_set_soldier_preference(
 						   *construction_site_.get(ibase()->egbase()),
 						   state ? Widelands::SoldierPreference::kRookies :
 						           Widelands::SoldierPreference::kHeroes);
 					} else {
-						ms->prefer_heroes = state ? Widelands::SoldierPreference::kRookies :
-						                            Widelands::SoldierPreference::kHeroes;
+						ms->prefer_heroes = state == 0;
 					}
 				});
 			}
@@ -345,6 +344,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 							ibase()->game().send_player_start_or_cancel_expedition(
 							   *construction_site_.get(ibase()->egbase()));
 						} else {
+							assert(ws->launch_expedition_allowed);
 							ws->launch_expedition = launch;
 						}
 					}

@@ -132,7 +132,12 @@ bool EditorPlayerTeamsMenu::PlayerRelationsPanel::handle_mousemove(
 	return true;
 }
 
-bool EditorPlayerTeamsMenu::PlayerRelationsPanel::handle_mousepress(uint8_t, int32_t x, int32_t y) {
+bool EditorPlayerTeamsMenu::PlayerRelationsPanel::handle_mousepress(uint8_t b,
+                                                                    int32_t x,
+                                                                    int32_t y) {
+	if (b != SDL_BUTTON_LEFT) {
+		return false;
+	}
 	const int8_t att = player_at(x);
 	if (att < 0) {
 		return false;
@@ -181,22 +186,28 @@ EditorPlayerAllowedBuildingsWindow::EditorPlayerAllowedBuildingsWindow(
    : UI::UniqueWindow(eia,
                       "allowed_buildings_" + std::to_string(static_cast<unsigned>(p)),
                       &r,
-                      400,
                       300,
+                      250,
                       (boost::format(_("Allowed Building Types for %s")) %
                        eia->egbase().map().get_scenario_player_name(p))
                          .str()),
      box_(this, 0, 0, UI::Box::Vertical) {
 	Widelands::Player* player = eia->egbase().get_player(p);
 	for (Widelands::DescriptionIndex di : player->tribe().buildings()) {
-		UI::Checkbox& c = *new UI::Checkbox(
-		   &box_, Vector2i(0, 0), eia->egbase().tribes().get_building_descr(di)->descname());
+		const Widelands::BuildingDescr& d = *eia->egbase().tribes().get_building_descr(di);
+		UI::Checkbox& c =
+		   *new UI::Checkbox(&box_, Vector2i(0, 0),
+		                     (boost::format(
+		                         /** TRANSLATORS: Building Name (internal_building_name) */
+		                         _("%1$s (%2$s)")) %
+		                      d.descname() % d.name())
+		                        .str());
 		c.set_state(player->is_building_type_allowed(di));
 		c.changedto.connect([player, p, di](bool a) { player->allow_building_type(di, a); });
 		box_.add(&c);
 	}
 	box_.set_scrolling(true);
-	box_.set_max_size(500, 400);
+	box_.set_max_size(700, 400);
 	set_center_panel(&box_);
 	if (get_usedefaultpos()) {
 		center_to_parent();
