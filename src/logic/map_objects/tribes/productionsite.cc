@@ -287,8 +287,6 @@ ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
      post_timer_(50),
      last_stat_percent_(0),
      actual_percent_(0),
-     mean_working_time_(120 * 1000),
-     stat_duration_(4),
      last_program_end_time(0),
      is_stopped_(false),
      default_anim_("idle"),
@@ -1100,15 +1098,6 @@ void ProductionSite::update_actual_statistics(uint32_t duration, const bool prod
 	// just for case something went very wrong...
 	if (duration > duration_cap) {
 		duration = duration_cap;
-	}
-	if (produced) {
-		mean_working_time_ = (mean_working_time_ * 9 + duration) / 10;
-	}
-	// TODO (hessenfarmer): needs to be deleted it is just to get a clue about working time
-	const uint32_t gametime = Game().get_gametime() % 1800000;
-	if (gametime < (mean_working_time_ + 10000)) {
-		log("Statistic: Productionsite %s mean time %d /n", descr().name().c_str(),
-		    mean_working_time_);
 	}
 	static const uint32_t entire_duration = 5 * 60 * 1000;
 	const uint32_t past_duration = entire_duration - duration;
