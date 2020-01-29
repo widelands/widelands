@@ -560,7 +560,7 @@ void ScriptingSaver::delete_unused(const EditorInteractive& eia) {
 	}
 	if (remove.empty())
 		return;
-	log("ScriptingSaver::cleanup(): Deleting %" PRIuS " item(s):\n", remove.size());
+	log("ScriptingSaver::delete_unused(): Deleting %" PRIuS " item(s):\n", remove.size());
 	while (!remove.empty()) {
 		bool found = false;
 		for (auto it = list_.begin(); it != list_.end(); ++it) {
@@ -574,7 +574,8 @@ void ScriptingSaver::delete_unused(const EditorInteractive& eia) {
 		}
 		if (!found)
 			throw wexception(
-			   "ScriptingSaver::cleanup(): Attempt to delete nonexistent object %u", remove.back());
+			   "ScriptingSaver::delete_unused(): Attempt to delete nonexistent object %u",
+			   remove.back());
 	}
 }
 

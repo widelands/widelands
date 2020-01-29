@@ -177,9 +177,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 				} break;
 				case (Widelands::MapObjectType::WORKER):
 				case (Widelands::MapObjectType::CARRIER):
-				case (Widelands::MapObjectType::FERRY):
-				// NOCOM: Seperate handling for soldier (training levels & health points)
-				case (Widelands::MapObjectType::SOLDIER): {
+				case (Widelands::MapObjectType::FERRY): {
 					upcast(Widelands::Worker, worker, bob);
 					assert(worker);
 					workernames.push_back(
@@ -192,6 +190,25 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 					       /** TRANSLATORS: Worker name (Tribe name) */
 					       ((boost::format(_("%1$s (%2$s)"))) % worker->descr().descname() %
 					        tribe_of_worker(worker->descr().worker_index())))
+					      .str());
+				} break;
+				case (Widelands::MapObjectType::SOLDIER): {
+					upcast(Widelands::Soldier, s, bob);
+					assert(s);
+					workernames.push_back(
+					   (boost::format(
+					       /** TRANSLATORS: Soldier name (Tribe name), Hitpoint level: 1/2, Attack level:
+					          3/6, Defense level: 1/2, Evade level: 0/0, Health: 10000/20000 */
+					       _("%1$s (%2$s), HP: %3$u/%4$u, AT: %5$u/%6$u, DE: %7$u/%8$u, EV: %9$u/%10$u, "
+					         "Health: %11$u/%12$u")) %
+					    s->descr().descname() % tribe_of_worker(s->descr().worker_index()) %
+					    s->get_health_level() % s->descr().get_max_health_level() %
+					    s->get_attack_level() % s->descr().get_max_attack_level() %
+					    s->get_defense_level() % s->descr().get_max_defense_level() %
+					    s->get_evade_level() % s->descr().get_max_evade_level() %
+					    s->get_current_health() %
+					    (s->descr().get_base_health() +
+					     s->get_health_level() * s->descr().get_health_incr_per_level()))
 					      .str());
 				} break;
 				default:

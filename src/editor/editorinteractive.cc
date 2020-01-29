@@ -1513,7 +1513,7 @@ std::string EditorInteractive::try_finalize() {
 
 				_for->mutable_body().push_back(set_5);
 				_while->mutable_body().push_back(_if);
-				_if->mutable_if_body().push_back(set_30);
+				_if->mutable_body().push_back(set_30);
 				_if->mutable_elseif_bodies().push_back(
 				   std::pair<Assignable*, std::list<FunctionStatement*>>(o_g_50, {set__20}));
 				_if->mutable_elseif_bodies().push_back(

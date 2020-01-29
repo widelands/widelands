@@ -61,10 +61,10 @@ void ShippingItem::get(const EditorGameBase& game, WareInstance** ware, Worker**
 	}
 }
 
-void ShippingItem::set_economy(Game& game, Economy* e, WareWorker type) {
+void ShippingItem::set_economy(EditorGameBase& egbase, Economy* e, WareWorker type) {
 	WareInstance* ware;
 	Worker* worker;
-	get(game, &ware, &worker);
+	get(egbase, &ware, &worker);
 
 	if (ware && type == wwWARE) {
 		ware->set_economy(e);

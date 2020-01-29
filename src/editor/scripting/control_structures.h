@@ -22,8 +22,49 @@
 
 #include "editor/scripting/variable.h"
 
+class LuaFunction;
+
+// Abstract superclass
+class ControlStructure : public FunctionStatement {
+protected:
+	ControlStructure() = default;
+
+	virtual bool allow_break() const = 0;
+
+public:
+	virtual ~ControlStructure() {
+	}
+
+	static void selftest_body(const LuaFunction&,
+	                          const std::list<FunctionStatement*>&,
+	                          bool allow_break,
+	                          bool enforce_return);
+	virtual void selftest_body(const LuaFunction& f) const {
+		selftest_body(f, body_, allow_break(), false);
+	}
+	void selftest() const override;
+
+	std::set<uint32_t> references() const override;
+
+	const std::list<FunctionStatement*>& body() const {
+		return body_;
+	}
+	std::list<FunctionStatement*>& mutable_body() {
+		return body_;
+	}
+
+	void load(FileRead&, Loader&) override;
+	void load_pointers(const ScriptingLoader&, Loader&) override;
+	void save(FileWrite&) const override;
+
+private:
+	std::list<FunctionStatement*> body_;
+
+	DISALLOW_COPY_AND_ASSIGN(ControlStructure);
+};
+
 // This class can serve as a 'while' or a 'repeat … until' loop, depending on is_while_
-class FS_While : public FunctionStatement {
+class FS_While : public ControlStructure {
 public:
 	FS_While(bool w, Assignable* c) : is_while_(w), condition_(c) {
 	}
@@ -35,12 +76,6 @@ public:
 	}
 	void set_condition(Assignable& c) {
 		condition_ = &c;
-	}
-	const std::list<FunctionStatement*>& body() const {
-		return body_;
-	}
-	std::list<FunctionStatement*>& mutable_body() {
-		return body_;
 	}
 	bool is_while() const {
 		return is_while_;
@@ -63,17 +98,21 @@ public:
 
 	void selftest() const override;
 
+protected:
+	bool allow_break() const override {
+		return true;
+	}
+
 private:
 	bool is_while_;
 	Assignable* condition_;
-	std::list<FunctionStatement*> body_;
 
 	DISALLOW_COPY_AND_ASSIGN(FS_While);
 };
 
 // 'for i,x in [i]pairs(table) do'
 // Note that the two iterators are implemented as variables
-class FS_ForEach : public FunctionStatement {
+class FS_ForEach : public ControlStructure {
 public:
 	FS_ForEach(Variable* i, Variable* j, Assignable* t) : table_(t), i_(i), j_(j) {
 	}
@@ -98,12 +137,6 @@ public:
 	void set_table(Assignable& t) {
 		table_ = &t;
 	}
-	const std::list<FunctionStatement*>& body() const {
-		return body_;
-	}
-	std::list<FunctionStatement*>& mutable_body() {
-		return body_;
-	}
 
 	std::set<uint32_t> references() const override;
 
@@ -119,11 +152,15 @@ public:
 
 	void selftest() const override;
 
+protected:
+	bool allow_break() const override {
+		return true;
+	}
+
 private:
 	Assignable* table_;
 	Variable* i_;
 	Variable* j_;
-	std::list<FunctionStatement*> body_;
 
 	DISALLOW_COPY_AND_ASSIGN(FS_ForEach);
 };
@@ -131,7 +168,7 @@ private:
 // 'for x = 1,10 do'
 // Note that the iterator is implemented as an Integer variable. Both borders have to be Integer
 // Assignables.
-class FS_For : public FunctionStatement {
+class FS_For : public ControlStructure {
 public:
 	FS_For(Variable* v, Assignable* i, Assignable* j) : variable_(v), i_(i), j_(j) {
 	}
@@ -156,12 +193,6 @@ public:
 	void set_variable(Variable& v) {
 		variable_ = &v;
 	}
-	const std::list<FunctionStatement*>& body() const {
-		return body_;
-	}
-	std::list<FunctionStatement*>& mutable_body() {
-		return body_;
-	}
 
 	std::set<uint32_t> references() const override;
 
@@ -177,17 +208,21 @@ public:
 
 	void selftest() const override;
 
+protected:
+	bool allow_break() const override {
+		return true;
+	}
+
 private:
 	Variable* variable_;
 	Assignable* i_;
 	Assignable* j_;
-	std::list<FunctionStatement*> body_;
 
 	DISALLOW_COPY_AND_ASSIGN(FS_For);
 };
 
 // An if clause, optionally with an else clause and any number of elseif blocks
-class FS_If : public FunctionStatement {
+class FS_If : public ControlStructure {
 public:
 	FS_If(Assignable* c) : condition_(c) {
 	}
@@ -199,12 +234,6 @@ public:
 	}
 	void set_condition(Assignable& c) {
 		condition_ = &c;
-	}
-	const std::list<FunctionStatement*>& if_body() const {
-		return if_body_;
-	}
-	std::list<FunctionStatement*>& mutable_if_body() {
-		return if_body_;
 	}
 	const std::list<FunctionStatement*>& else_body() const {
 		return else_body_;
@@ -232,10 +261,15 @@ public:
 	}
 
 	void selftest() const override;
+	void selftest_body(const LuaFunction&) const override;
+
+protected:
+	bool allow_break() const override {
+		return false;
+	}
 
 private:
 	Assignable* condition_;
-	std::list<FunctionStatement*> if_body_;
 	std::list<std::pair<Assignable*, std::list<FunctionStatement*>>> elseif_bodies_;
 	std::list<FunctionStatement*> else_body_;
 

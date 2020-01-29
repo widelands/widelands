@@ -19,6 +19,7 @@
 
 #include "editor/scripting/function.h"
 
+#include "editor/scripting/control_structures.h"
 #include "editor/scripting/function_statements.h"
 
 /************************************************************
@@ -54,26 +55,10 @@ constexpr uint16_t kCurrentPacketVersionFunction = 1;
 
 void LuaFunction::selftest() const {
 	ScriptingObject::selftest();
-	for (const FunctionStatement* a : body_) {
-		if (!a) {
-			throw wexception("nullptr body statement");
-		} else if (is_a(FS_Break, a)) {
-			throw wexception("break statement outside for or while loop");
-		} else if (upcast(const FS_Return, r, a)) {
-			// NOCOM This does not check return statements within nested return loops.
-			// We should also check whether the function always returns with an
-			// explicit return statement unless we return nil.
-			if (get_returns().id() == VariableTypeID::Nil) {
-				if (r->get_return())
-					throw wexception("non-empty return statement in function returning nil");
-			} else {
-				if (!r->get_return())
-					throw wexception("empty return statement in function returning non-nil");
-				if (!r->get_return()->type().is_subclass(get_returns()))
-					throw wexception("in return statement: %s cannot be casted to %s",
-					                 descname(r->get_return()->type()).c_str(),
-					                 descname(get_returns()).c_str());
-			}
+	ControlStructure::selftest_body(*this, body_, false, true);
+	for (const auto& a : body_) {
+		if (upcast(const ControlStructure, c, a)) {
+			c->selftest_body(*this);
 		}
 	}
 }

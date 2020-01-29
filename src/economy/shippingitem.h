@@ -52,7 +52,7 @@ struct ShippingItem {
 	// only interested in the ware if it is the one or the other.
 	void get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const;
 
-	void set_economy(Game&, Economy* e, WareWorker);
+	void set_economy(EditorGameBase&, Economy* e, WareWorker);
 	const PortDock* get_destination(Game&) const;
 
 	void remove(EditorGameBase&);

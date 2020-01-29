@@ -319,7 +319,7 @@ protected:
                        Abstract FS
 ************************************************************/
 
-// Abstract superclass. Subclasses below.
+// Abstract superclass
 class FunctionStatement : virtual public ScriptingObject {
 protected:
 	FunctionStatement() = default;
