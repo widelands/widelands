@@ -20,15 +20,11 @@
 #ifndef WL_EDITOR_UI_MENUS_SCENARIO_TOOL_INFRASTRUCTURE_OPTIONS_MENU_H
 #define WL_EDITOR_UI_MENUS_SCENARIO_TOOL_INFRASTRUCTURE_OPTIONS_MENU_H
 
-#include <memory>
-#include <vector>
-
 #include "editor/tools/scenario_infrastructure_tool.h"
 #include "editor/ui_menus/tool_options_menu.h"
 #include "logic/map.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/dropdown.h"
 #include "ui_basic/icongrid.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/tabpanel.h"
@@ -49,17 +45,13 @@ private:
 	EditorInteractive& eia();
 	ScenarioInfrastructureTool& tool_;
 
-	void create_buildings_tab();
-
-	void select_player();
+	void select_tab();
 	void toggle_selected(UI::IconGrid*, Widelands::MapObjectType, int32_t);
 
-	std::unique_ptr<UI::Box> main_box_;
-	std::unique_ptr<UI::Dropdown<Widelands::PlayerNumber>> players_;
-	std::unique_ptr<UI::Checkbox> force_;
-	std::unique_ptr<UI::Checkbox> construct_;
-	std::unique_ptr<UI::TabPanel> item_categories_;
-	std::unique_ptr<UI::MultilineTextarea> selected_items_;
+	UI::Box box_;
+	UI::TabPanel tabs_;
+	UI::Checkbox force_;
+	UI::MultilineTextarea selected_items_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_SCENARIO_TOOL_INFRASTRUCTURE_OPTIONS_MENU_H
