@@ -60,28 +60,6 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 		   parent.egbase().tribes().tribe_index(map.get_scenario_player_tribe(p)));
 		UI::TabPanel* tab = new UI::TabPanel(&tabs_, UI::TabPanelStyle::kWuiLight);
 		{
-			const Image* icon = g_gr->images().get("images/wui/fieldaction/menu_build_flag.png");
-			UI::IconGrid* i = new UI::IconGrid(tab, 0, 0, kIconGridCellSize, kIconGridCellSize, 1);
-			i->add("flag", icon, reinterpret_cast<void*>(Widelands::INVALID_INDEX), _("Flag"));
-			i->icon_clicked.connect(
-			   boost::bind(&ScenarioToolInfrastructureOptionsMenu::toggle_selected, this, i,
-			               Widelands::MapObjectType::FLAG, _1));
-			tab->add("flag", icon, i, _("Flag"));
-		}
-		{
-			UI::IconGrid* i =
-			   new UI::IconGrid(tab, 0, 0, kIconGridCellSize, kIconGridCellSize, kIconGridColumns);
-			for (Widelands::DescriptionIndex di : tribe.immovables()) {
-				const Widelands::ImmovableDescr* d = tribe.get_immovable_descr(di);
-				i->add(d->name(), d->icon(), reinterpret_cast<void*>(di), d->descname());
-			}
-			i->icon_clicked.connect(
-			   boost::bind(&ScenarioToolInfrastructureOptionsMenu::toggle_selected, this, i,
-			               Widelands::MapObjectType::IMMOVABLE, _1));
-			tab->add("immovables", g_gr->images().get("images/wui/menus/toggle_immovables.png"), i,
-			         _("Immovables"));
-		}
-		{
 			UI::Box* box = new UI::Box(tab, 0, 0, UI::Box::Vertical);
 
 			UI::Checkbox* c = new UI::Checkbox(
@@ -183,6 +161,28 @@ ScenarioToolInfrastructureOptionsMenu::ScenarioToolInfrastructureOptionsMenu(
 			box->add(buildingtabs, UI::Box::Resizing::kFullSize);
 			tab->add("buildings", g_gr->images().get("images/wui/stats/genstats_nrbuildings.png"), box,
 			         _("Buildings"));
+		}
+		{
+			const Image* icon = g_gr->images().get("images/wui/fieldaction/menu_build_flag.png");
+			UI::IconGrid* i = new UI::IconGrid(tab, 0, 0, kIconGridCellSize, kIconGridCellSize, 1);
+			i->add("flag", icon, reinterpret_cast<void*>(Widelands::INVALID_INDEX), _("Flag"));
+			i->icon_clicked.connect(
+			   boost::bind(&ScenarioToolInfrastructureOptionsMenu::toggle_selected, this, i,
+			               Widelands::MapObjectType::FLAG, _1));
+			tab->add("flag", icon, i, _("Flag"));
+		}
+		{
+			UI::IconGrid* i =
+			   new UI::IconGrid(tab, 0, 0, kIconGridCellSize, kIconGridCellSize, kIconGridColumns);
+			for (Widelands::DescriptionIndex di : tribe.immovables()) {
+				const Widelands::ImmovableDescr* d = tribe.get_immovable_descr(di);
+				i->add(d->name(), d->icon(), reinterpret_cast<void*>(di), d->descname());
+			}
+			i->icon_clicked.connect(
+			   boost::bind(&ScenarioToolInfrastructureOptionsMenu::toggle_selected, this, i,
+			               Widelands::MapObjectType::IMMOVABLE, _1));
+			tab->add("immovables", g_gr->images().get("images/wui/menus/toggle_immovables.png"), i,
+			         _("Immovables"));
 		}
 		tabs_.add("player_" + std::to_string(static_cast<unsigned>(p)),
 		          map.get_scenario_player_name(p), tab);
