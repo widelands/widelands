@@ -28,15 +28,15 @@
 #include "editor/scripting/variable.h"
 #include "ui_basic/messagebox.h"
 
-inline EditorInteractive& ScenarioLuaOptionsMenu::eia() {
+inline EditorInteractive& ScenarioLuaEditor::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
 /**
  * Create all the buttons etc...
  */
-ScenarioLuaOptionsMenu::ScenarioLuaOptionsMenu(EditorInteractive& parent,
-                                               UI::UniqueWindow::Registry& registry)
+ScenarioLuaEditor::ScenarioLuaEditor(EditorInteractive& parent,
+                                     UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent, "scenario_lua", &registry, 700, 500, _("Scripting")),
      tabs_(this, UI::TabPanelStyle::kWuiLight) {
 	set_center_panel(&tabs_);
@@ -71,9 +71,6 @@ ScenarioLuaOptionsMenu::ScenarioLuaOptionsMenu(EditorInteractive& parent,
 	functions_box_->add(functions_dropdown_.get(), UI::Box::Resizing::kFullSize);
 	functions_box_->add(functions_lowerbox_.get(), UI::Box::Resizing::kExpandBoth);
 
-	// functions_body_->add(_("The scripting UI is not implemented yet."), 0, nullptr, false, "",
-	// ""); NOCOM add sidepanel buttons
-
 	variables_box_.reset(new UI::Box(&tabs_, 0, 0, UI::Box::Vertical));
 	tabs_.add("vars", _("Variables"), variables_box_.get(),
 	          _("Declare and set global variables and constants"));
@@ -100,32 +97,32 @@ ScenarioLuaOptionsMenu::ScenarioLuaOptionsMenu(EditorInteractive& parent,
 	variables_box_->add(variables_buttonbox_.get(), UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	variables_button_add_->sigclicked.connect(
-	   boost::bind(&ScenarioLuaOptionsMenu::clicked_add_variable, this));
+	   boost::bind(&ScenarioLuaEditor::clicked_add_variable, this));
 	variables_button_edit_->sigclicked.connect(
-	   boost::bind(&ScenarioLuaOptionsMenu::clicked_edit_variable, this));
+	   boost::bind(&ScenarioLuaEditor::clicked_edit_variable, this));
 	variables_button_delete_->sigclicked.connect(
-	   boost::bind(&ScenarioLuaOptionsMenu::clicked_delete_variable, this));
+	   boost::bind(&ScenarioLuaEditor::clicked_delete_variable, this));
 	variables_list_->selected.connect(
-	   boost::bind(&ScenarioLuaOptionsMenu::update_variable_buttons, this));
+	   boost::bind(&ScenarioLuaEditor::update_variable_buttons, this));
 	variables_list_->double_clicked.connect(
-	   boost::bind(&ScenarioLuaOptionsMenu::clicked_edit_variable, this));
+	   boost::bind(&ScenarioLuaEditor::clicked_edit_variable, this));
 
 	functions_button_add_->sigclicked.connect(
-	   boost::bind(&ScenarioLuaOptionsMenu::clicked_add_function, this));
+	   boost::bind(&ScenarioLuaEditor::clicked_add_function, this));
 	functions_button_edit_->sigclicked.connect(
-	   boost::bind(&ScenarioLuaOptionsMenu::clicked_edit_function, this));
+	   boost::bind(&ScenarioLuaEditor::clicked_edit_function, this));
 	functions_button_delete_->sigclicked.connect(
-	   boost::bind(&ScenarioLuaOptionsMenu::clicked_delete_function, this));
+	   boost::bind(&ScenarioLuaEditor::clicked_delete_function, this));
 	functions_dropdown_->selected.connect(
-	   boost::bind(&ScenarioLuaOptionsMenu::update_function_body, this));
+	   boost::bind(&ScenarioLuaEditor::update_function_body, this));
 
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}
 }
 
-void ScenarioLuaOptionsMenu::clicked_add_variable() {
-	// NOCOM Show dialog to enter the name and select the type from a dropdown
+void ScenarioLuaEditor::clicked_add_variable() {
+	// TODO(Nordfriese): Show dialog to enter the name and select the type from a dropdown
 
 	// Dummy to find a name that is not used yet
 	size_t i = 1;
@@ -151,13 +148,13 @@ void ScenarioLuaOptionsMenu::clicked_add_variable() {
 	update_variables(name);
 }
 
-void ScenarioLuaOptionsMenu::clicked_edit_variable() {
-	// NOCOM show a dialog with a text field for the name and
+void ScenarioLuaEditor::clicked_edit_variable() {
+	// TODO(Nordfriese): show a dialog with a text field for the name and
 	// an inputfield/spinner/checkbox/… for the value.
-	log("NOCOM: ScenarioLuaOptionsMenu::clicked_edit_variable: not yet implemented\n");
+	log("ScenarioLuaEditor::clicked_edit_variable: not yet implemented\n");
 }
 
-void ScenarioLuaOptionsMenu::clicked_delete_variable() {
+void ScenarioLuaEditor::clicked_delete_variable() {
 	assert(variables_list_->has_selection());
 	const std::string sel = variables_list_->get_selected_record().get_string(0);
 	UI::WLMessageBox m(
@@ -178,8 +175,8 @@ void ScenarioLuaOptionsMenu::clicked_delete_variable() {
 	m.run<UI::Panel::Returncodes>();
 }
 
-void ScenarioLuaOptionsMenu::clicked_add_function() {
-	// NOCOM Show dialog to enter the name and select the type from a dropdown
+void ScenarioLuaEditor::clicked_add_function() {
+	// TODO(Nordfriese): Show dialog to enter the name and select the type from a dropdown
 
 	// Dummy to find a name that is not used yet
 	size_t i = 1;
@@ -202,12 +199,12 @@ void ScenarioLuaOptionsMenu::clicked_add_function() {
 	update_functions(name);
 }
 
-void ScenarioLuaOptionsMenu::clicked_edit_function() {
-	// NOCOM show a dialog with a text field for the name.
-	log("NOCOM: ScenarioLuaOptionsMenu::clicked_edit_function: not yet implemented\n");
+void ScenarioLuaEditor::clicked_edit_function() {
+	// TODO(Nordfriese): show a dialog with a text field for the name.
+	log("ScenarioLuaEditor::clicked_edit_function: not yet implemented\n");
 }
 
-void ScenarioLuaOptionsMenu::clicked_delete_function() {
+void ScenarioLuaEditor::clicked_delete_function() {
 	assert(functions_dropdown_->has_selection());
 	const std::string sel = functions_dropdown_->get_selected();
 	UI::WLMessageBox m(
@@ -228,7 +225,7 @@ void ScenarioLuaOptionsMenu::clicked_delete_function() {
 	m.run<UI::Panel::Returncodes>();
 }
 
-void ScenarioLuaOptionsMenu::update_variables(std::string sel) {
+void ScenarioLuaEditor::update_variables(std::string sel) {
 	if (sel.empty()) {
 		sel = variables_list_->has_selection() ?
 		         variables_list_->get_selected_record().get_string(0) :
@@ -244,13 +241,13 @@ void ScenarioLuaOptionsMenu::update_variables(std::string sel) {
 	update_variable_buttons();
 }
 
-void ScenarioLuaOptionsMenu::update_variable_buttons() {
+void ScenarioLuaEditor::update_variable_buttons() {
 	const bool s = variables_list_->has_selection();
 	variables_button_edit_->set_enabled(s);
 	variables_button_delete_->set_enabled(s);
 }
 
-void ScenarioLuaOptionsMenu::update_functions(std::string sel) {
+void ScenarioLuaEditor::update_functions(std::string sel) {
 	if (sel.empty()) {
 		sel = functions_dropdown_->has_selection() ? functions_dropdown_->get_selected() : "";
 	}
@@ -261,11 +258,11 @@ void ScenarioLuaOptionsMenu::update_functions(std::string sel) {
 	update_function_body();
 }
 
-void ScenarioLuaOptionsMenu::update_function_body() {
+void ScenarioLuaEditor::update_function_body() {
 	functions_body_->clear();
 	const bool sel = functions_dropdown_->has_selection();
 	functions_button_edit_->set_enabled(sel);
 	functions_button_delete_->set_enabled(sel);
-	// NOCOM enable/disable all sidepanel buttons
-	// NOCOM add function definition to the listselect
+	// TODO(Nordfriese): enable/disable all sidepanel buttons
+	// TODO(Nordfriese): add function definition to the listselect
 }

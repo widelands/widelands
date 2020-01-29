@@ -30,6 +30,7 @@
 #include "base/scoped_timer.h"
 #include "base/warning.h"
 #include "build_info.h"
+#include "editor/scripting/builtin.h"
 #include "editor/tools/decrease_height_tool.h"
 #include "editor/tools/decrease_resources_tool.h"
 #include "editor/tools/increase_height_tool.h"
@@ -503,7 +504,13 @@ void EditorInteractive::rebuild_scenario_tool_menu() {
 	   pgettext("hotkey", "Shift+I"));
 
 	scenario_tool_windows_.lua.open_window = [this] {
-		new ScenarioLuaOptionsMenu(*this, scenario_tool_windows_.lua);
+		// TODO(Nordfriese): remove the warning when ScenarioLuaEditor is implemented properly
+		UI::WLMessageBox m(this, _("Not yet implemented"),
+		                   _("Please note that this feature is still under development and not in a "
+		                     "useable state yet."),
+		                   UI::WLMessageBox::MBoxType::kOkCancel);
+		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk)
+			new ScenarioLuaEditor(*this, scenario_tool_windows_.lua);
 	};
 	/** TRANSLATORS: An entry in the editor's scenario tool menu */
 	scenario_toolmenu_.add(_("Scripting"), ScenarioToolMenuEntry::kLua,
@@ -1367,13 +1374,6 @@ void EditorInteractive::finalize_clicked() {
 	error.run<UI::Panel::Returncodes>();
 }
 
-// NOCOM for testing
-#include "editor/scripting/builtin.h"
-#include "editor/scripting/constexpr.h"
-#include "editor/scripting/control_structures.h"
-#include "editor/scripting/operators.h"
-#include "editor/scripting/variable.h"
-
 std::string EditorInteractive::try_finalize() {
 	if (finalized_) {
 		return _("Already finalized");
@@ -1400,153 +1400,7 @@ std::string EditorInteractive::try_finalize() {
 	finalized_ = true;
 	init_allowed_buildings_windows_registries();
 	new_scripting_saver();
-#ifndef NDEBUG
-	// NOCOM for testing (in debug builds only)
-	{
-		LuaFunction* main_func = new LuaFunction("mission_thread");
-		main_func->init(*scripting_saver_);
-
-		Variable* v_field = new Variable(VariableType(VariableTypeID::Field), "field");
-		v_field->init(*scripting_saver_);
-		{
-			ConstexprNil* nil = new ConstexprNil();
-			nil->init(*scripting_saver_);
-			FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(true, v_field, nil);
-			f->init(*scripting_saver_);
-			main_func->mutable_body().push_back(f);
-		}
-		{
-			ConstexprBoolean* unused_dummy = new ConstexprBoolean(true);
-			unused_dummy->init(*scripting_saver_);
-		}
-		{
-#define VAL(x)                                                                                     \
-	ConstexprInteger* val_##x = new ConstexprInteger(x);                                            \
-	val_##x->init(*scripting_saver_);
-			VAL(1)
-			VAL(5)
-			VAL(10)
-			VAL(20)
-			VAL(30)
-			VAL(50)
-#undef VAL
-
-			FS_FunctionCall* fc1 = new FS_FunctionCall(builtin_f("game").function.get(), nullptr, {});
-			fc1->init(*scripting_saver_);
-			GetProperty* get2 = new GetProperty(fc1, builtin_p("players").property.get());
-			get2->init(*scripting_saver_);
-			GetTable* get3 = new GetTable(get2, val_1);
-			get3->init(*scripting_saver_);
-			GetProperty* get4 = new GetProperty(get3, builtin_p("pl_defeated").property.get());
-			get4->init(*scripting_saver_);
-			OperatorNot* _not = new OperatorNot(get4);
-			_not->init(*scripting_saver_);
-			FS_While* _while = new FS_While(true, _not);
-			_while->init(*scripting_saver_);
-
-			{
-				ConstexprInteger* val = new ConstexprInteger(10000);
-				val->init(*scripting_saver_);
-				FS_FunctionCall* fc =
-				   new FS_FunctionCall(builtin_f("sleep").function.get(), nullptr, {val});
-				fc->init(*scripting_saver_);
-				_while->mutable_body().push_back(fc);
-			}
-			{
-				FS_FunctionCall* fc =
-				   new FS_FunctionCall(builtin_f("game").function.get(), nullptr, {});
-				fc->init(*scripting_saver_);
-				GetProperty* get = new GetProperty(fc, builtin_p("map").property.get());
-				get->init(*scripting_saver_);
-				FS_FunctionCall* rand =
-				   new FS_FunctionCall(builtin_f("random_2").function.get(), nullptr, {val_5, val_50});
-				rand->init(*scripting_saver_);
-				FS_FunctionCall* fcf =
-				   new FS_FunctionCall(builtin_f("field").function.get(), get, {val_20, rand});
-				fcf->init(*scripting_saver_);
-				FS_LocalVarDeclOrAssign* f = new FS_LocalVarDeclOrAssign(false, v_field, fcf);
-				f->init(*scripting_saver_);
-				_while->mutable_body().push_back(f);
-			}
-			{
-				GetProperty* get = new GetProperty(v_field, builtin_p("f_height").property.get());
-				get->init(*scripting_saver_);
-				OperatorLess* o_l_5 = new OperatorLess(get, val_5);
-				o_l_5->init(*scripting_saver_);
-				OperatorGreaterEq* o_g_50 = new OperatorGreaterEq(get, val_50);
-				o_g_50->init(*scripting_saver_);
-				OperatorGreater* o_g_20 = new OperatorGreater(get, val_20);
-				o_g_20->init(*scripting_saver_);
-
-				OperatorAdd* o_a_30 = new OperatorAdd(get, val_30);
-				o_a_30->init(*scripting_saver_);
-				OperatorSubtract* o_s_20 = new OperatorSubtract(get, val_20);
-				o_s_20->init(*scripting_saver_);
-				OperatorSubtract* o_s_10 = new OperatorSubtract(get, val_10);
-				o_s_10->init(*scripting_saver_);
-
-				FS_If* _if = new FS_If(o_l_5);
-				_if->init(*scripting_saver_);
-
-				Variable* v_i = new Variable(VariableType(VariableTypeID::Integer), "i");
-				v_i->init(*scripting_saver_);
-				Variable* v_j = new Variable(VariableType(VariableTypeID::Field), "f");
-				v_j->init(*scripting_saver_);
-				FS_FunctionCall* f_r =
-				   new FS_FunctionCall(builtin_f("field_region").function.get(), v_field, {val_1});
-				f_r->init(*scripting_saver_);
-				FS_ForEach* _for = new FS_ForEach(v_i, v_j, f_r);
-				_for->init(*scripting_saver_);
-
-				FS_SetProperty* set_5 =
-				   new FS_SetProperty(v_j, builtin_p("f_height").property.get(), v_i);
-				set_5->init(*scripting_saver_);
-				FS_SetProperty* set_30 =
-				   new FS_SetProperty(v_field, builtin_p("f_height").property.get(), o_a_30);
-				set_30->init(*scripting_saver_);
-				FS_SetProperty* set__10 =
-				   new FS_SetProperty(v_field, builtin_p("f_height").property.get(), o_s_10);
-				set__10->init(*scripting_saver_);
-				FS_SetProperty* set__20 =
-				   new FS_SetProperty(v_field, builtin_p("f_height").property.get(), o_s_20);
-				set__20->init(*scripting_saver_);
-
-				_for->mutable_body().push_back(set_5);
-				_while->mutable_body().push_back(_if);
-				_if->mutable_body().push_back(set_30);
-				_if->mutable_elseif_bodies().push_back(
-				   std::pair<Assignable*, std::list<FunctionStatement*>>(o_g_50, {set__20}));
-				_if->mutable_elseif_bodies().push_back(
-				   std::pair<Assignable*, std::list<FunctionStatement*>>(o_g_20, {set__10}));
-				_if->mutable_else_body().push_back(_for);
-			}
-			main_func->mutable_body().push_back(_while);
-		}
-		{
-			ConstexprString* c1 = new ConstexprString("NOCOM:", false);
-			c1->init(*scripting_saver_);
-			ConstexprString* c2 = new ConstexprString(" Hello World! ", true);
-			c2->init(*scripting_saver_);
-			ConstexprInteger* c3 = new ConstexprInteger(123);
-			c3->init(*scripting_saver_);
-			OperatorStringConcat* scc = new OperatorStringConcat(c1, c2);
-			scc->init(*scripting_saver_);
-			OperatorStringConcat* sc = new OperatorStringConcat(scc, c3);
-			sc->init(*scripting_saver_);
-			FS_FunctionCall* fc =
-			   new FS_FunctionCall(builtin_f("print").function.get(), nullptr, {sc});
-			fc->init(*scripting_saver_);
-			main_func->mutable_body().push_back(fc);
-		}
-		FS_FunctionCall* fc = new FS_FunctionCall(main_func, nullptr, {});
-		fc->init(*scripting_saver_);
-		FS_LaunchCoroutine* lc = new FS_LaunchCoroutine(fc);
-		lc->init(*scripting_saver_);
-		functions_.push_back(lc);
-	}
-#else
-	// Create a main function with an empty body
-	{
+	{  // Create a main function with an empty body
 		LuaFunction* lf = new LuaFunction("mission_thread");
 		lf->init(*scripting_saver_);
 		FS_FunctionCall* fc = new FS_FunctionCall(lf, nullptr, {});
@@ -1555,7 +1409,6 @@ std::string EditorInteractive::try_finalize() {
 		lc->init(*scripting_saver_);
 		functions_.push_back(lc);
 	}
-#endif
 	tool_windows_.players.destroy();
 	menu_windows_.mapoptions.destroy();
 	rebuild_scenario_tool_menu();

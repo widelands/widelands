@@ -35,8 +35,8 @@
 class EditorInteractive;
 
 /// The control center for the scenario scripting
-struct ScenarioLuaOptionsMenu : public UI::UniqueWindow {
-	ScenarioLuaOptionsMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
+struct ScenarioLuaEditor : public UI::UniqueWindow {
+	ScenarioLuaEditor(EditorInteractive&, UI::UniqueWindow::Registry&);
 
 private:
 	EditorInteractive& eia();
