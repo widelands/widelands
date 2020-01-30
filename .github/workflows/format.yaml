@@ -9,7 +9,7 @@ jobs:
     - name: Invoking fix_formatting.py
       run: |
         sudo apt-get install clang-format || true
-        sudo apt-get -f
+        sudo apt-get install -f
         sudo apt-get install clang-format
         ./utils/fix_formatting.py
         git status
