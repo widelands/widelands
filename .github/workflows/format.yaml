@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
     - name: Invoking fix_formatting.py
-      run: all those commands
+      run: |
         set -v
         ls --all --recursive /
         ./utils/fix_formatting.py
