@@ -117,8 +117,10 @@ public:
 
 	void start_transfer(Game&, Supply&);
 
-	void
-	read(FileRead&, EditorGameBase&, MapObjectLoader&, const TribesLegacyLookupTable& tribes_lookup_table);
+	void read(FileRead&,
+	          EditorGameBase&,
+	          MapObjectLoader&,
+	          const TribesLegacyLookupTable& tribes_lookup_table);
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) const;
 	Worker* get_transfer_worker();
 

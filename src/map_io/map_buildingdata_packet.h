@@ -87,7 +87,8 @@ private:
 	                         MapObjectLoader&,
 	                         const TribesLegacyLookupTable& tribes_lookup_table);
 
-	void write_constructionsite(const ConstructionSite&, FileWrite&, EditorGameBase&, MapObjectSaver&);
+	void
+	write_constructionsite(const ConstructionSite&, FileWrite&, EditorGameBase&, MapObjectSaver&);
 	void write_dismantlesite(const DismantleSite&, FileWrite&, EditorGameBase&, MapObjectSaver&);
 	void write_partially_finished_building(const PartiallyFinishedBuilding&,
 	                                       FileWrite&,

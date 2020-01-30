@@ -41,10 +41,13 @@ void draw_border_markers(const FieldsToDraw::Field& field,
 	}
 	assert(field.owner != nullptr);
 
-	uint32_t const anim_idx = (&field.owner->tribe() == nullptr ?
-			// random tribe: a different marker on every field
-			field.owner->egbase().tribes().get_tribe_descr((field.fcoords.x + field.fcoords.y) %
-					field.owner->egbase().tribes().nrtribes()) : &field.owner->tribe())->frontier_animation();
+	uint32_t const anim_idx =
+	   (&field.owner->tribe() == nullptr ?
+	       // random tribe: a different marker on every field
+	       field.owner->egbase().tribes().get_tribe_descr(
+	          (field.fcoords.x + field.fcoords.y) % field.owner->egbase().tribes().nrtribes()) :
+	       &field.owner->tribe())
+	      ->frontier_animation();
 	if (field.vision) {
 		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, anim_idx, 0,
 		                    &field.owner->get_playercolor());

@@ -25,9 +25,9 @@
 #include "logic/widelands_geometry.h"
 
 int32_t ScenarioFieldOwnerTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                       EditorInteractive& eia,
-                                                       EditorActionArgs* args,
-                                                       Widelands::Map* map) {
+                                                  EditorInteractive& eia,
+                                                  EditorActionArgs* args,
+                                                  Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 
@@ -36,22 +36,23 @@ int32_t ScenarioFieldOwnerTool::handle_click_impl(const Widelands::NodeAndTriang
 		args->old_owners.push_back((*map)[mr.location()].get_owned_by());
 	} while (mr.advance(*map));
 
-	eia.egbase().conquer_area_no_building(Widelands::PlayerArea<Widelands::Area<Widelands::FCoords>>(args->new_owner,
-			Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius)));
+	eia.egbase().conquer_area_no_building(Widelands::PlayerArea<Widelands::Area<Widelands::FCoords>>(
+	   args->new_owner,
+	   Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius)));
 	return mr.radius();
 }
 
-int32_t ScenarioFieldOwnerTool::handle_undo_impl(
-                                                      const Widelands::NodeAndTriangle<>& center,
-                                                      EditorInteractive& eia,
-                                                      EditorActionArgs* args,
-                                                      Widelands::Map* map) {
+int32_t ScenarioFieldOwnerTool::handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
+                                                 EditorInteractive& eia,
+                                                 EditorActionArgs* args,
+                                                 Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	std::list<uint8_t>::iterator i = args->old_owners.begin();
 	do {
-		eia.egbase().conquer_area_no_building(Widelands::PlayerArea<Widelands::Area<Widelands::FCoords>>(*i,
-			Widelands::Area<Widelands::FCoords>(mr.location(), 0)));
+		eia.egbase().conquer_area_no_building(
+		   Widelands::PlayerArea<Widelands::Area<Widelands::FCoords>>(
+		      *i, Widelands::Area<Widelands::FCoords>(mr.location(), 0)));
 		++i;
 	} while (mr.advance(*map));
 	return mr.radius();

@@ -43,8 +43,7 @@ int32_t EditorDeleteImmovableTool::handle_click_impl(const Widelands::NodeAndTri
 			}
 		}
 		args->old_immovable_types.push_back("");
-	}
-	while (mr.advance(*map));
+	} while (mr.advance(*map));
 	return mr.radius() + 2;
 }
 

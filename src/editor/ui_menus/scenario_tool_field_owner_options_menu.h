@@ -31,7 +31,9 @@ class EditorInteractive;
 
 /// Tool menu for setting the initial owner of fields
 struct ScenarioToolFieldOwnerOptionsMenu : public EditorToolOptionsMenu {
-	ScenarioToolFieldOwnerOptionsMenu(EditorInteractive&, ScenarioFieldOwnerTool&, UI::UniqueWindow::Registry&);
+	ScenarioToolFieldOwnerOptionsMenu(EditorInteractive&,
+	                                  ScenarioFieldOwnerTool&,
+	                                  UI::UniqueWindow::Registry&);
 	~ScenarioToolFieldOwnerOptionsMenu() {
 	}
 

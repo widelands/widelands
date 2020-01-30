@@ -29,13 +29,21 @@ inline EditorInteractive& ScenarioToolFieldOwnerOptionsMenu::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
-ScenarioToolFieldOwnerOptionsMenu::ScenarioToolFieldOwnerOptionsMenu(EditorInteractive& parent,
-                                                                     ScenarioFieldOwnerTool& tool,
-                                                                     UI::UniqueWindow::Registry& registry)
+ScenarioToolFieldOwnerOptionsMenu::ScenarioToolFieldOwnerOptionsMenu(
+   EditorInteractive& parent, ScenarioFieldOwnerTool& tool, UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 300, 24, _("Set Field Owner"), tool),
      tool_(tool),
-     list_(this, "player", 0, 0, get_inner_w(), 8, get_inner_h(), "",
-     		UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary) {
+     list_(this,
+           "player",
+           0,
+           0,
+           get_inner_w(),
+           8,
+           get_inner_h(),
+           "",
+           UI::DropdownType::kTextual,
+           UI::PanelStyle::kWui,
+           UI::ButtonStyle::kWuiSecondary) {
 
 	list_.selected.connect(boost::bind(&ScenarioToolFieldOwnerOptionsMenu::select, this));
 	const Widelands::Map& map = parent.egbase().map();
@@ -45,9 +53,12 @@ ScenarioToolFieldOwnerOptionsMenu::ScenarioToolFieldOwnerOptionsMenu(EditorInter
 	for (Widelands::PlayerNumber p = 1; p <= max; ++p) {
 		const std::string name = map.get_scenario_player_name(p);
 		const std::string tribe = map.get_scenario_player_tribe(p);
-		list_.add((boost::format(_("Player %1$s (%2$s)")) % std::to_string(static_cast<int>(p)) % name).str(), p,
-				g_gr->images().get(Widelands::get_tribeinfo(eia().egbase().map().get_scenario_player_tribe(p)).icon),
-				sel == p, (boost::format(_("Claim fields for %s")) % name).str());
+		list_.add(
+		   (boost::format(_("Player %1$s (%2$s)")) % std::to_string(static_cast<int>(p)) % name)
+		      .str(),
+		   p, g_gr->images().get(
+		         Widelands::get_tribeinfo(eia().egbase().map().get_scenario_player_tribe(p)).icon),
+		   sel == p, (boost::format(_("Claim fields for %s")) % name).str());
 	}
 
 	if (get_usedefaultpos()) {
@@ -61,4 +72,3 @@ void ScenarioToolFieldOwnerOptionsMenu::select() {
 	tool_.set_new_owner(p);
 	select_correct_tool();
 }
-

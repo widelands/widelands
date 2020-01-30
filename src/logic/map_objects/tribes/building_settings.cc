@@ -139,7 +139,8 @@ constexpr uint8_t kCurrentPacketVersionTrainingsite = 1;
 constexpr uint8_t kCurrentPacketVersionWarehouse = 1;
 
 // static
-BuildingSettings* BuildingSettings::load(const EditorGameBase& egbase, const TribeDescr& tribe, FileRead& fr) {
+BuildingSettings*
+BuildingSettings::load(const EditorGameBase& egbase, const TribeDescr& tribe, FileRead& fr) {
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
@@ -154,8 +155,8 @@ BuildingSettings* BuildingSettings::load(const EditorGameBase& egbase, const Tri
 				break;
 			}
 			case BuildingType::kProductionsite: {
-				result = new ProductionsiteSettings(
-				   *dynamic_cast<const ProductionSiteDescr*>(egbase.tribes().get_building_descr(index)));
+				result = new ProductionsiteSettings(*dynamic_cast<const ProductionSiteDescr*>(
+				   egbase.tribes().get_building_descr(index)));
 				break;
 			}
 			case BuildingType::kMilitarysite: {

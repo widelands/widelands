@@ -296,8 +296,8 @@ void MapBuildingdataPacket::read_constructionsite(
 			if (packet_version >= 4) {
 				const uint32_t intermediates = fr.unsigned_32();
 				for (uint32_t i = 0; i < intermediates; ++i) {
-					constructionsite.info_.intermediates.push_back(
-					   egbase.tribes().get_building_descr(egbase.tribes().building_index(fr.c_string())));
+					constructionsite.info_.intermediates.push_back(egbase.tribes().get_building_descr(
+					   egbase.tribes().building_index(fr.c_string())));
 				}
 				constructionsite.settings_.reset(
 				   BuildingSettings::load(egbase, constructionsite.owner().tribe(), fr));
@@ -1205,7 +1205,8 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 		// TODO(GunChleoc): If we ever change this packet, we can have an uint8 here.
 		fw.signed_32(static_cast<int>(productionsite.stack_[i].phase));
 		fw.unsigned_32(productionsite.stack_[i].flags);
-		fw.unsigned_32(mos.get_object_file_index_or_zero(productionsite.stack_[i].objvar.get(egbase)));
+		fw.unsigned_32(
+		   mos.get_object_file_index_or_zero(productionsite.stack_[i].objvar.get(egbase)));
 		write_coords_32(&fw, productionsite.stack_[i].coord);
 	}
 	fw.unsigned_8(productionsite.program_timer_);

@@ -495,17 +495,17 @@ void Warehouse::load_finish(EditorGameBase& egbase) {
 		DescriptionIndex const worker_index = worker_types_without_cost.at(--i);
 		if (owner().is_worker_type_allowed(worker_index) &&
 		    next_worker_without_cost_spawn_[i] == never()) {
-		    if (Game* game = dynamic_cast<Game*>(&egbase)) {
+			if (Game* game = dynamic_cast<Game*>(&egbase)) {
 				if (next_spawn == never()) {
 					next_spawn = schedule_act(*game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 				}
 				next_worker_without_cost_spawn_[i] = next_spawn;
 				log("WARNING: player %u is allowed to create worker type %s but his "
-					"%s %u at (%i, %i) does not have a next_spawn time set for that "
-					"worker type; setting it to %u\n",
-					owner().player_number(),
-					owner().tribe().get_worker_descr(worker_index)->name().c_str(), descr().name().c_str(),
-					serial(), get_position().x, get_position().y, next_spawn);
+				    "%s %u at (%i, %i) does not have a next_spawn time set for that "
+				    "worker type; setting it to %u\n",
+				    owner().player_number(),
+				    owner().tribe().get_worker_descr(worker_index)->name().c_str(),
+				    descr().name().c_str(), serial(), get_position().x, get_position().y, next_spawn);
 			}
 		}
 	}
