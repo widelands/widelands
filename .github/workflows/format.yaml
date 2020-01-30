@@ -1,12 +1,12 @@
-name: Formatting your code
+name: Run fix_formatting.py
 on: push
 jobs: 
   run_formatting: 
-    name: Running fix_formatting.py
+    name: Formatting your code
     runs-on: ubuntu-latest
     steps: 
     - name: Invoking fix_formatting.py
       run: |
         set -v
-        ls --all --recursive /
+        ls --all --recursive
         ./utils/fix_formatting.py
