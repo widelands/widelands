@@ -8,7 +8,11 @@ jobs:
     - name: Invoking fix_formatting.py
       run: |
         set -v
-        cd /home/runner/work/widelands
+        cd /home
+        ls -a
+        cd runner
+        ls -a
+        cd work
         ls -a
         cd widelands
         ls -a
