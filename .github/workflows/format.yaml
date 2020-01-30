@@ -10,5 +10,6 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install clang-format
+        pip install pyformat
         ./utils/fix_formatting.py
         git status
