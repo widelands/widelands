@@ -14,6 +14,10 @@ jobs:
         ls -a
         cd work
         ls -a
+        cd _PipelineMapping
+        ls -a
+        cd Noordfrees
+        ls -a
         cd widelands
         ls -a
         ./utils/fix_formatting.py
