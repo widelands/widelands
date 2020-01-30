@@ -8,6 +8,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Invoking fix_formatting.py
       run: |
-        apt-get install clang-format
+        sudo apt-get install clang-format
         ./utils/fix_formatting.py
         git status
