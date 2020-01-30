@@ -3,12 +3,12 @@ on: push
 jobs: 
   run_formatting: 
     name: Formatting your code
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     steps: 
     - uses: actions/checkout@v2
     - name: Invoking fix_formatting.py
       run: |
-        sudo apt-get install -f
+        sudo apt-get update
         sudo apt-get install clang-format
         ./utils/fix_formatting.py
         git status
