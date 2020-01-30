@@ -10,5 +10,5 @@ jobs:
       name: Invoking fix_formatting.py
       run: |
         set -v
-        ls --all --recursive | grep wlapplication
+        ls --all --recursive /home | grep wlapplication
         ./utils/fix_formatting.py
