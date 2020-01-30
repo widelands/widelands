@@ -75,6 +75,7 @@ tribes:new_productionsite_type {
             "produce=smoked_meat:2"
          }
       },
+      -- 2 identical programs for fish to prevent unnecessary skipping penalty
       smoke_fish_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
          descname = _"smoking fish",

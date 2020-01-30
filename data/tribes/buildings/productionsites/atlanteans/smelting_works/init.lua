@@ -61,6 +61,7 @@ tribes:new_productionsite_type {
             "return=no_stats"
          }
       },
+      -- 2 identical programs for iron to prevent unnecessary skipping penalty
       smelt_iron_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
          descname = _"smelting iron",

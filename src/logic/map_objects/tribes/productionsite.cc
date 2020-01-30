@@ -1091,16 +1091,17 @@ void ProductionSite::set_default_anim(std::string anim) {
 	default_anim_ = anim;
 }
 
-void ProductionSite::update_actual_statistics(uint32_t duration, const bool produced) {
-	static const uint32_t duration_cap = 180 * 1000;  // This is highest allowed program duration
+constexpr uint32_t kStatsEntireDuration = 5 * 60 * 1000;  // statistic evaluation base
+constexpr uint32_t kStatsDurationCap = 180 * 1000;  // This is highest allowed program duration
+
+void ProductionSite::update_actual_statistics(uint32_t duration, const bool produced) { 
 	// just for case something went very wrong...
-	if (duration > duration_cap) {
-		duration = duration_cap;
+	if (duration > kStatsDurationCap) {
+		duration = kStatsDurationCap;
 	}
-	static const uint32_t entire_duration = 5 * 60 * 1000;
-	const uint32_t past_duration = entire_duration - duration;
+	const uint32_t past_duration = kStatsEntireDuration - duration;
 	actual_percent_ =
-	   (actual_percent_ * past_duration + produced * duration * 1000) / entire_duration;
+	   (actual_percent_ * past_duration + produced * duration * 1000) / kStatsEntireDuration;
 	assert(actual_percent_ <= 1000);  // be sure we do not go above 100 %
 }
 
