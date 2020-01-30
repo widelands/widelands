@@ -5,8 +5,8 @@ jobs:
     name: Formatting your code
     runs-on: ubuntu-latest
     steps: 
+    - uses: actions/checkout@v2
     - name: Invoking fix_formatting.py
-      uses: actions/checkout@v2
       run: |
         ls -a
         cd widelands
