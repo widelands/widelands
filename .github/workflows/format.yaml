@@ -8,5 +8,8 @@ jobs:
     - name: Invoking fix_formatting.py
       run: |
         set -v
-        ls --all --recursive / | grep wlapplication
+        cd /home/runner/work/widelands
+        ls -a
+        cd widelands
+        ls -a
         ./utils/fix_formatting.py
