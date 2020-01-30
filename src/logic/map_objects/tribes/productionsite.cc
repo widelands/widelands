@@ -1094,7 +1094,7 @@ void ProductionSite::set_default_anim(std::string anim) {
 constexpr uint32_t kStatsEntireDuration = 5 * 60 * 1000;  // statistic evaluation base
 constexpr uint32_t kStatsDurationCap = 180 * 1000;  // This is highest allowed program duration
 
-void ProductionSite::update_actual_statistics(uint32_t duration, const bool produced) { 
+void ProductionSite::update_actual_statistics(uint32_t duration, const bool produced) {
 	// just for case something went very wrong...
 	if (duration > kStatsDurationCap) {
 		duration = kStatsDurationCap;
