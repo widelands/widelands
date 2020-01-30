@@ -5,8 +5,10 @@ jobs:
     name: Formatting your code
     runs-on: ubuntu-latest
     steps: 
+    - with: 
+      repo-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Invoking fix_formatting.py
       run: |
         set -v
-        ls --all --recursive
+        ls --all --recursive | grep wlapplication
         ./utils/fix_formatting.py
