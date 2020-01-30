@@ -425,9 +425,7 @@ void ProductionSite::format_statistics_string() {
 	// asked for the statistics string. However this string should only then be constructed.
 
 	// boost::format would treat uint8_t as char
-	const unsigned int percent =
-	   (get_actual_statistics() * 100 / 98 > 100) ? 100 : get_actual_statistics() * 100 / 98;
-
+	const unsigned int percent = std::min(get_actual_statistics() * 100 / 98, 100);
 	const std::string perc_str = g_gr->styles().color_tag(
 	   (boost::format(_("%i%%")) % percent).str(),
 	   (percent < 33) ? g_gr->styles().building_statistics_style().low_color() :
