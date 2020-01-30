@@ -6,18 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
     - name: Invoking fix_formatting.py
+      uses: actions/checkout@v2
       run: |
-        set -v
-        cd /home
-        ls -a
-        cd runner
-        ls -a
-        cd work
-        ls -a
-        cd _PipelineMapping
-        ls -a
-        cd Noordfrees
         ls -a
         cd widelands
         ls -a
-        ./utils/fix_formatting.py
