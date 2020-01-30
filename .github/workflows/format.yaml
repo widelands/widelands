@@ -1,10 +1,10 @@
 name: Formatting your code
 on: push
-jobs:
-  run_formatting:
+jobs: 
+  run_formatting: 
     name: Running fix_formatting.py
       runs-on: ubuntu-latest
-      steps:
+      steps: 
       - name: Invoking fix_formatting.py
         run: |
           ./utils/fix_formatting.py
