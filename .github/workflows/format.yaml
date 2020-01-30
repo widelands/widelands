@@ -7,4 +7,6 @@ jobs:
     steps: 
     - name: Invoking fix_formatting.py
       run: |
+        set -v
+        ls -a
         ./utils/fix_formatting.py
