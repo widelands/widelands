@@ -336,14 +336,10 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		map->delete_tag("artifacts");
 	}
 
-	assert(!egbase.get_loader_ui());
-	UI::ProgressWindow ui("images/loadscreens/editor.jpg");
-	{
-		std::vector<std::string> tipstext;
-		tipstext.push_back("editor");
-		GameTips editortips(ui, tipstext);
-		egbase.set_loader_ui(&ui);
-	}
+	UI::ProgressWindow* loader_ui = new UI::ProgressWindow("images/loadscreens/editor.jpg");
+	GameTips tips(*loader_ui, {"editor"});
+	loader_ui->step("Saving the map…");
+	egbase.set_loader_ui(loader_ui);
 
 	// Try saving the map.
 	GenericSaveHandler gsh(
@@ -355,6 +351,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	GenericSaveHandler::Error error = gsh.save();
 
 	egbase.set_loader_ui(nullptr);
+	delete loader_ui;
 
 	// If only the temporary backup couldn't be deleted, we still treat it as
 	// success. Automatic cleanup will deal with later. No need to bother the
