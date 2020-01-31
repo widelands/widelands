@@ -19,12 +19,13 @@ jobs:
     - name: Invoking fix_formatting.py
       run: |
         python3 ./utils/fix_formatting.py
-    - name: Committing changes
+    - name: Gathering changes
       run: |
         echo "Test: headref is ${{ github.head_ref }}"
         export nrfiles=$(git status -s | wc -l)
         if [ $nrfiles == 0 ]
         then
+          echo "Nothing to do"
           return 0
         fi
         if [ $nrfiles == 1 ]
@@ -33,10 +34,11 @@ jobs:
         else
           export files="$nrfiles files were"
         fi
-    - uses: stefanzweifel/git-auto-commit-action@v2.5.0
+    - name: Committing and pushing changes
+      uses: stefanzweifel/git-auto-commit-action@v2.5.0
       with:
         commit_message: "$files automatically formatted."
-        branch: "${{ github.head_ref }}"
+        branch: ${{ github.head_ref }}
         commit_options: '--dry-run' '--author="Widelands Formatting Bot"'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
