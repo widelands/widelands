@@ -3,9 +3,7 @@ on: push
 jobs: 
   run_formatting: 
     name: Run fix_formatting.py
-    env: 
-      FILES: 'ERROR!!!'
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-16.04 # clang-format has broken dependencies on ubuntu-latest
     steps: 
     - name: Checkout
       uses: actions/checkout@v2
