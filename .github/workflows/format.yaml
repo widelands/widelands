@@ -1,8 +1,10 @@
-name: Run fix_formatting.py
+name: Formatting your code
 on: push
 jobs: 
   run_formatting: 
-    name: Formatting your code
+    name: Run fix_formatting.py
+    env: 
+      FILES: 'ERROR!!!'
     runs-on: ubuntu-16.04
     steps: 
     - name: Checkout
@@ -21,23 +23,24 @@ jobs:
         python3 ./utils/fix_formatting.py
     - name: Gathering changes
       run: |
-        echo "Test: GITHUB_REF = $GITHUB_REF"
-        echo "Test: GITHUB_BASE_REF = $GITHUB_BASE_REF"
-        echo "Test: GITHUB_HEAD_REF = $GITHUB_HEAD_REF"
-        export nrfiles=$(git status -s | wc -l)
+        nrfiles=$(git status -s | wc -l)
         if [ $nrfiles == 0 ]
         then
           echo "Nothing to do"
           return 0
+        elif [ $nrfiles == 1 ]
+        then
+          echo "1 file formatted"
+          nrfiles=$(git status -s)
+          export FILES="'${nrfiles# * }' was"
         else
-          echo "$nrfiles file(s) formatted:"
-          git status -s
+          echo "$nrfiles files formatted"
+          export FILES="$nrfiles were"
         fi
     - name: Committing and pushing changes
       uses: stefanzweifel/git-auto-commit-action@v2.5.0
       with: 
-        commit_message: Your code was automatically formatted.
+        commit_message: ${{ env.FILES }} automatically formatted.
         branch: action
-        commit_options: '--author="Widelands Formatting Bot"'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
