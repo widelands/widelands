@@ -42,7 +42,7 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v2.5.0
       with:
         branch: action
-        commit_message: ${{ env.COMMIT_MESSAGE }} automatically formatted.
+        commit_message: '${{ env.COMMIT_MESSAGE }} automatically formatted.'
         commit_options: '--dry-run' '--author="Widelands Formatting Bot"'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
