@@ -66,19 +66,21 @@ public:
 
 	using CallbackFn = void (*)(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
-	Request(PlayerImmovable& target, DescriptionIndex, CallbackFn, WareWorker);
+	Request(PlayerImmovable    &     target    
+,DescriptionIndex, CallbackFn               , WareWorker);
 	~Request();
 
 	PlayerImmovable& target() const {
 		return target_;
 	}
-	DescriptionIndex get_index() const {
+	DescriptionIndex get_index(      ) const {
 		return index_;
 	}
-	WareWorker get_type() const {
+	WareWorker get_type() const 
+	                        {
 		return type_;
 	}
-	Quantity get_count() const {
+	Quantity get_count    (     ) const {
 		return count_;
 	}
 	uint32_t get_open_count() const {
