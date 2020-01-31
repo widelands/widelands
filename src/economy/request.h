@@ -61,13 +61,14 @@ class ConstructionSite;
  */
 class Request : public Trackable {
 public:
-	friend class Economy;
+            	friend class Economy;
 	friend class RequestList;
 
-	using CallbackFn = void (*)(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
+	using CallbackFn = void       (*)(Game&,      Request&,
+	 DescriptionIndex, Worker*, PlayerImmovable&);
 
-	Request(PlayerImmovable& target, DescriptionIndex, CallbackFn, WareWorker);
-	~Request();
+	Request  (PlayerImmovable& target, DescriptionIndex, CallbackFn, WareWorker);
+	~Request(                   );
 
 	PlayerImmovable& target() const {
 		return target_;
