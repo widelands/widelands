@@ -6,11 +6,8 @@ on:
   # push to the head branch if it is in a fork. So we intercept all push events,
   # and then query whether the branch meets the above criteria.
   push:
-  pull_request:
-    branches:
-      # A pull request automatically creates a "merge commit" which generates
-      # a push - on master, not on the branch. We have to suppress that.
-      - '!**'
+    branches-ignore:
+      - 'master'
 jobs:
   run_formatting:
     name: Run fix_formatting.py
@@ -20,7 +17,6 @@ jobs:
       run: echo "::set-env name=BRANCH_NAME::${GITHUB_REF##*/}"
     - name: Checking relevance
       run: |
-        echo "$BRANCH_NAME ($GITHUB_REF)"
         if ! [ "$BRANCH_NAME" == "master" ]
         then
           forkname=${{ github.repository }}
