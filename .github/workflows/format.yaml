@@ -30,17 +30,19 @@ jobs:
         then
           echo "1 file formatted"
           nrfiles=$(git status -s)
-          export FILES="'${nrfiles# * }' was"
+          FILES="'${nrfiles#???}' was"
         else
           echo "$nrfiles files formatted"
-          export FILES="$nrfiles were"
+          FILES="$nrfiles were"
         fi
         echo "::set-env name=COMMIT_MESSAGE::\"$FILES automatically formatted.\""
         echo "::set-env name=BRANCH_NAME::$(git rev-parse --abbrev-ref HEAD)"
     - name: Check for remote updates
       if: env.DO_NOT_PUSH != true
       run: |
-        if [ -n "$(git fetch origin | grep \" $BRANCH_NAME \")" ]
+        changes=$(git fetch origin)
+        changes=$(echo $changes | grep " $BRANCH_NAME ")
+        if [ -n "$changes" ]
         then
           echo "The remote branch was updated, cancelling build"
           echo "::set-env name=DO_NOT_PUSH::true"
