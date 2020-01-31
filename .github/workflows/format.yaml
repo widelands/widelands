@@ -1,15 +1,17 @@
 name: Formatting your code
 on: push
-jobs: 
-  run_formatting: 
+jobs:
+  run_formatting:
     name: Run fix_formatting.py
     runs-on: ubuntu-16.04 # clang-format has broken dependencies on ubuntu-latest
-    steps: 
+    env:
+      COMMIT_MESSAGE: '(unknown number of files) automatically formatted.'
+    steps:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Installing python
       uses: actions/setup-python@v1
-      with: 
+      with:
         python-version: 3.x
     - name: Installing formatting tools
       run: |
@@ -40,7 +42,7 @@ jobs:
         git branch
     - name: Committing and pushing changes
       uses: stefanzweifel/git-auto-commit-action@v2.5.0
-      with: 
+      with:
         commit_message: ${{ COMMIT_MESSAGE }}
         branch: action #TODO ? ${{ github.ref }}
       env:
