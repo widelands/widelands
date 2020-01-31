@@ -39,8 +39,15 @@ jobs:
         echo ::set-env name=env.BRANCH_NAME::$(git rev-parse --abbrev-ref HEAD)
     - name: THIS STEP IS FOR TESTING ONLY
       run: |
-        echo "${env.BRANCH_NAME}"
-        if ! [ "${env.BRANCH_NAME}" == "action" ]; then exit 1; fi
+        echo "${BRANCH_NAME}"
+        echo "${COMMIT_MESSAGE}"
+        if ! [ "${BRANCH_NAME}" == "action" ]; then exit 1; fi
+    - name: Check for remote updates
+      run: |
+        git remote # for testing
+        update="$(git fetch origin)"
+        echo "$update"
+        
     - name: Committing and pushing changes
       uses: stefanzweifel/git-auto-commit-action@v2.5.0
       with:
