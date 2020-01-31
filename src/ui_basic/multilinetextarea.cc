@@ -166,9 +166,9 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 	case UI::Align::kLeft:
 		anchor = RICHTEXT_MARGIN;
 	}
-	rendered_text_->draw(dst, Vector2i(anchor, 0),
-	                     Recti(0, scrollbar_.get_scrollpos(), rendered_text_->width(),
-	                           rendered_text_->height() - scrollbar_.get_scrollpos()));
+	rendered_text_->draw(
+	   dst, Vector2i(anchor, 0), Recti(0, scrollbar_.get_scrollpos(), rendered_text_->width(),
+	                                   rendered_text_->height() - scrollbar_.get_scrollpos()));
 }
 
 bool MultilineTextarea::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {

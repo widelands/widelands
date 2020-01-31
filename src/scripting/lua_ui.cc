@@ -78,8 +78,7 @@ const PropertyType<LuaPanel> LuaPanel::Properties[] = {
    PROP_RW(LuaPanel, width),   PROP_RW(LuaPanel, height),     {nullptr, nullptr, nullptr},
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
-   METHOD(LuaPanel, get_descendant_position),
-   {nullptr, nullptr},
+   METHOD(LuaPanel, get_descendant_position), {nullptr, nullptr},
 };
 
 // Look for all descendant panels of class P and add the corresponding Lua version to the currently
@@ -294,13 +293,10 @@ Button
 */
 const char LuaButton::className[] = "Button";
 const MethodType<LuaButton> LuaButton::Methods[] = {
-   METHOD(LuaButton, press),
-   METHOD(LuaButton, click),
-   {nullptr, nullptr},
+   METHOD(LuaButton, press), METHOD(LuaButton, click), {nullptr, nullptr},
 };
 const PropertyType<LuaButton> LuaButton::Properties[] = {
-   PROP_RO(LuaButton, name),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaButton, name), {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -364,9 +360,7 @@ const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
-   PROP_RO(LuaDropdown, name),
-   PROP_RO(LuaDropdown, no_of_items),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaDropdown, name), PROP_RO(LuaDropdown, no_of_items), {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -414,9 +408,8 @@ int LuaDropdown::open(lua_State* /* L */) {
 int LuaDropdown::highlight_item(lua_State* L) {
 	unsigned int desired_item = luaL_checkuint32(L, -1);
 	if (desired_item < 1 || desired_item > get()->size()) {
-		report_error(L,
-		             "Attempted to highlight item %d on dropdown '%s'. Avaliable range for this "
-		             "dropdown is 1-%d.",
+		report_error(L, "Attempted to highlight item %d on dropdown '%s'. Avaliable range for this "
+		                "dropdown is 1-%d.",
 		             desired_item, get()->get_name().c_str(), get()->size());
 	}
 	log("Highlighting item %d in dropdown '%s'\n", desired_item, get()->get_name().c_str());
@@ -466,13 +459,10 @@ Tab
 */
 const char LuaTab::className[] = "Tab";
 const MethodType<LuaTab> LuaTab::Methods[] = {
-   METHOD(LuaTab, click),
-   {nullptr, nullptr},
+   METHOD(LuaTab, click), {nullptr, nullptr},
 };
 const PropertyType<LuaTab> LuaTab::Properties[] = {
-   PROP_RO(LuaTab, name),
-   PROP_RO(LuaTab, active),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaTab, name), PROP_RO(LuaTab, active), {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -525,12 +515,10 @@ Window
 */
 const char LuaWindow::className[] = "Window";
 const MethodType<LuaWindow> LuaWindow::Methods[] = {
-   METHOD(LuaWindow, close),
-   {nullptr, nullptr},
+   METHOD(LuaWindow, close), {nullptr, nullptr},
 };
 const PropertyType<LuaWindow> LuaWindow::Properties[] = {
-   PROP_RO(LuaWindow, name),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWindow, name), {nullptr, nullptr, nullptr},
 };
 
 /*
