@@ -4,8 +4,6 @@ jobs:
   run_formatting: 
     name: Formatting your code
     runs-on: ubuntu-16.04
-    env: 
-      COMMIT_MESSAGE: "ERROR!!!"
     steps: 
     - name: Checkout
       uses: actions/checkout@v2
@@ -31,18 +29,15 @@ jobs:
         then
           echo "Nothing to do"
           return 0
-        fi
-        if [ $nrfiles == 1 ]
-        then
-          export COMMIT_MESSAGE="$(git status -s) was"
         else
-          export COMMIT_MESSAGE="$nrfiles files were"
+          echo "$nrfiles file(s) formatted:"
+          git status -s
         fi
     - name: Committing and pushing changes
       uses: stefanzweifel/git-auto-commit-action@v2.5.0
       with:
         branch: action
-        commit_message: '${{ env.COMMIT_MESSAGE }} automatically formatted.'
+        commit_message: 'Your code was automatically formatted.'
         commit_options: '--dry-run' '--author="Widelands Formatting Bot"'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
