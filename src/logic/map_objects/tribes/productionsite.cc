@@ -47,8 +47,6 @@ namespace Widelands {
 
 namespace {
 
-constexpr size_t STATISTICS_VECTOR_LENGTH = 20;
-
 // Parses the descriptions of the working positions from 'items_table' and
 // fills in 'working_positions'. Throws an error if the table contains invalid
 // values.
@@ -427,8 +425,7 @@ void ProductionSite::format_statistics_string() {
 	// asked for the statistics string. However this string should only then be constructed.
 
 	// boost::format would treat uint8_t as char
-	const unsigned int percent = get_actual_statistics();
-
+	const unsigned int percent = std::min(get_actual_statistics() * 100 / 98, 100);
 	const std::string perc_str = g_gr->styles().color_tag(
 	   (boost::format(_("%i%%")) % percent).str(),
 	   (percent < 33) ? g_gr->styles().building_statistics_style().low_color() :
@@ -1094,16 +1091,17 @@ void ProductionSite::set_default_anim(std::string anim) {
 	default_anim_ = anim;
 }
 
+constexpr uint32_t kStatsEntireDuration = 5 * 60 * 1000;  // statistic evaluation base
+constexpr uint32_t kStatsDurationCap = 180 * 1000;  // This is highest allowed program duration
+
 void ProductionSite::update_actual_statistics(uint32_t duration, const bool produced) {
-	static const uint32_t duration_cap = 180 * 1000;  // This is highest allowed program duration
 	// just for case something went very wrong...
-	static const uint32_t entire_duration = 10 * 60 * 1000;
-	if (duration > duration_cap) {
-		duration = duration_cap;
+	if (duration > kStatsDurationCap) {
+		duration = kStatsDurationCap;
 	}
-	const uint32_t past_duration = entire_duration - duration;
+	const uint32_t past_duration = kStatsEntireDuration - duration;
 	actual_percent_ =
-	   (actual_percent_ * past_duration + produced * duration * 1000) / entire_duration;
+	   (actual_percent_ * past_duration + produced * duration * 1000) / kStatsEntireDuration;
 	assert(actual_percent_ <= 1000);  // be sure we do not go above 100 %
 }
 
