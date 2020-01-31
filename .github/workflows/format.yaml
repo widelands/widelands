@@ -21,6 +21,7 @@ jobs:
         python3 ./utils/fix_formatting.py
     - name: Committing changes
       run: |
+        echo "Test: headref is ${{ github.head_ref }}"
         export nrfiles=$(git status -s | wc -l)
         if [ $nrfiles == 0 ]
         then
@@ -32,15 +33,10 @@ jobs:
         else
           export files="$nrfiles files were"
         fi
-    - name: Committing changes
-      uses: EndBug/add-and-commit@v2
-      with: 
-        author_name: "Widelands' formatting bot"
-        message: "$files automatically formatted."
+    - uses: stefanzweifel/git-auto-commit-action@v2.5.0
+      with:
+        commit_message: "$files automatically formatted."
+        branch: ${{ github.head_ref }}
+        commit_options: '--dry-run --author=\"Widelands Formatting Bot\"'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Pushing changes
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        git push --dry-run
