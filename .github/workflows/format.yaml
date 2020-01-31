@@ -5,8 +5,10 @@ jobs:
     name: Formatting your code
     runs-on: ubuntu-16.04
     steps: 
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Installing python
+      uses: actions/setup-python@v1
       with: 
         python-version: 3.x
     - name: Installing formatting tools
@@ -19,15 +21,26 @@ jobs:
         python3 ./utils/fix_formatting.py
     - name: Committing changes
       run: |
-        nrfiles=$(git status -s | wc -l)
-        if [ $nrfiles > 0 ]
+        export nrfiles=$(git status -s | wc -l)
+        if [ $nrfiles == 0 ]
         then
-          if [ $nrfiles == 1 ]
-          then
-            files="$(git status -s) was"
-          else
-            files="$nrfiles files were"
-          fi
-          git commit -am "$files automatically formatted."
-          git push --dry-run
+          return 0
         fi
+        if [ $nrfiles == 1 ]
+        then
+          export files="$(git status -s) was"
+        else
+          export files="$nrfiles files were"
+        fi
+    - name: Committing changes
+      uses: EndBug/add-and-commit@v2
+      with: 
+        author_name: "Widelands' formatting bot"
+        message: "$files automatically formatted."
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Pushing changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git push --dry-run
