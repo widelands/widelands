@@ -7,9 +7,9 @@ on:
   # and then query whether the branch meets the above criteria.
   push:
 jobs:
-  run_formatting:
-    name: Run fix_formatting.py
-    runs-on: ubuntu-16.04 # clang-format has broken dependencies on ubuntu-latest
+  check_relevance:
+    name: Check whether fix_formatting.py should be run
+    runs-on: ubuntu-16.04
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -29,9 +29,15 @@ jobs:
           if [ -z "$output" ]
           then
             echo "Branch $BRANCH_NAME in repository $forkname does not have an open pull request"
-            exit 1
+            echo "::set-env name=BRANCH_NAME::"
           fi
         fi
+  run_formatting:
+    name: Run fix_formatting.py
+    runs-on: ubuntu-16.04 # clang-format has broken dependencies on ubuntu-latest
+    needs: check_relevance
+    if: BRANCH_NAME != ""
+    steps:
     - name: Installing python
       uses: actions/setup-python@v1
       with:
