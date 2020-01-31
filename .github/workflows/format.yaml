@@ -6,25 +6,25 @@ jobs:
     name: Run fix_formatting.py
     runs-on: ubuntu-16.04 # clang-format has broken dependencies on ubuntu-latest
     steps:
-# github.repository - Noordfrees/widelands
-# github.ref        - my_cool_branch
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Git info
+      run: echo "::set-env name=BRANCH_NAME::$(git rev-parse --abbrev-ref HEAD)"
     - name: Checking relevance
       run: |
         set -v #for testing
-        if [ ${{ github.ref }} == "master" ]
+        if [ $BRANCH_NAME == "master" ]
         then
           echo "master is formatted after every push"
         else
           forkname=${{ github.repository }}
-          output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:${{ github.ref }}" | grep "${{ github.ref }}")
+          output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$BRANCH_NAME" | grep "BRANCH_NAME")
           if [ -n "$output" ]
           then
-            echo "Branch ${{ github.ref }} in repository $forkname does not have an open pull request"
+            echo "Branch $BRANCH_NAME in repository $forkname does not have an open pull request"
             exit 1
           fi
         fi
-    - name: Checkout
-      uses: actions/checkout@v2
     - name: Installing python
       uses: actions/setup-python@v1
       with:
@@ -35,8 +35,7 @@ jobs:
         sudo apt-get install clang-format
         pip install pyformat
     - name: Invoking fix_formatting.py
-      run: |
-        python3 ./utils/fix_formatting.py
+      run: python3 ./utils/fix_formatting.py
     - name: Gathering changes
       run: |
         nrfiles=$(git status -s | wc -l)
