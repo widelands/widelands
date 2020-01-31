@@ -17,10 +17,8 @@ jobs:
       run: echo "::set-env name=BRANCH_NAME::$(git rev-parse --abbrev-ref HEAD)"
     - name: Checking relevance
       run: |
-        if [ $BRANCH_NAME == "master" ]
+        if ! [ $BRANCH_NAME == "master" ]
         then
-          echo "master is formatted after every push"
-        else
           forkname=${{ github.repository }}
           # grep returns 1 if $BRANCH_NAME is not found, but we want to log an error message before exiting
           set +e
