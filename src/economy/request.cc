@@ -53,7 +53,7 @@ Request::Request(PlayerImmovable& init_target,
                  WareWorker const w)
    :    type_(w),
              target_(init_target),
-     target_building_(dynamic_cast<
+     target_building_(dynamic_cast  <
 Building*>(&init_target)),       target_productionsite_(dynamic_cast<ProductionSite*>(&init_target)),
      target_warehouse_(dynamic_cast<Warehouse*>(&init_target)),
      target_constructionsite_(dynamic_cast<ConstructionSite*>(&init_target)),
