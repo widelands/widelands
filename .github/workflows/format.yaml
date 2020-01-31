@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-16.04 # clang-format has broken dependencies on ubuntu-latest
     steps:
     - name: Git info
-      run: "::set-env name=BRANCH_NAME:${GITHUB_REF##*/}"
+      run: echo "::set-env name=BRANCH_NAME:${GITHUB_REF##*/}"
     - name: Checking relevance
       run: |
         if ! [ $BRANCH_NAME == "master" ]
