@@ -19,5 +19,15 @@ jobs:
         python3 ./utils/fix_formatting.py
     - name: Committing changes
       run: |
-        git status
-        # TODO
+        nrfiles=$(git status -s | wc -l)
+        if [ $nrfiles > 0 ]
+        then
+          if [ $nrfiles == 1 ]
+          then
+            files="$(git status -s) was"
+          else
+            files="$nrfiles files were"
+          fi
+          git commit -am "$files automatically formatted."
+          git push --dry-run
+        fi
