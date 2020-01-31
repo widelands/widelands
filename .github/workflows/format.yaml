@@ -35,12 +35,13 @@ jobs:
           echo "$nrfiles files formatted"
           export FILES="$nrfiles were"
         fi
-        echo "$FILES automatically formatted." > ../tmp
+        echo ::set-env name=COMMIT_MESSAGE::"$FILES automatically formatted."
+        echo ${{ github.ref }}
         git branch
     - name: Committing and pushing changes
       uses: stefanzweifel/git-auto-commit-action@v2.5.0
       with: 
-        commit_message: ${{ cat ../tmp }}
-        branch: action #TODO
+        commit_message: ${{ COMMIT_MESSAGE }}
+        branch: action #TODO ? ${{ github.ref }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
