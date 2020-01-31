@@ -25,7 +25,6 @@ jobs:
         if [ $nrfiles == 0 ]
         then
           echo "Nothing to do"
-          echo "::set-env name=DO_NOT_PUSH::true"
         elif [ $nrfiles == 1 ]
         then
           echo "1 file formatted"
@@ -38,20 +37,18 @@ jobs:
         echo "::set-env name=COMMIT_MESSAGE::\"$FILES automatically formatted.\""
         echo "::set-env name=BRANCH_NAME::$(git rev-parse --abbrev-ref HEAD)"
     - name: Check for remote updates
-      if: env.DO_NOT_PUSH != true
       run: |
-        git fetch -nq origin
+        git fetch -n origin
         head1=$(git merge-base $BRANCH_NAME origin/$BRANCH_NAME)
-        head2=$(git rev-parse $BRANCH_NAME)
+        head2=$(git rev-parse origin/$BRANCH_NAME)
         if [ $head1 == $head2 ]
         then
-          echo "The remote branch was updated, cancelling build"
-          echo "::set-env name=DO_NOT_PUSH::true"
+          echo "No remote changes"
         else
-          echo "REMOVE THIS TESTING OUTPUT, IT SIGNALLS ALL OK"
+          echo "The remote branch was updated, cancelling build"
+          exit 1
         fi
     - name: Committing and pushing changes
-      if: env.DO_NOT_PUSH != true
       uses: stefanzweifel/git-auto-commit-action@v2.5.0
       with:
         commit_message: ${{ env.COMMIT_MESSAGE }}
