@@ -40,12 +40,13 @@ jobs:
     - name: Check for remote updates
       if: env.DO_NOT_PUSH != true
       run: |
-        changes=$(git fetch origin)
-        changes=$(echo $changes | grep " $BRANCH_NAME ")
+        changes=$(git fetch origin | grep " $BRANCH_NAME ")
         if [ -n "$changes" ]
         then
           echo "The remote branch was updated, cancelling build"
           echo "::set-env name=DO_NOT_PUSH::true"
+        else
+          echo "REMOVE THIS TESTING OUTPUT, IT SIGNALLS ALL OK"
         fi
     - name: Committing and pushing changes
       if: env.DO_NOT_PUSH != true
