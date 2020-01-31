@@ -7,14 +7,12 @@ on:
   # and then query whether the branch meets the above criteria.
   push:
 jobs:
-  check_relevance:
-    name: Check whether fix_formatting.py should be run
-    runs-on: ubuntu-16.04
+  run_formatting:
+    name: Run fix_formatting.py
+    runs-on: ubuntu-16.04 # clang-format has broken dependencies on ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
     - name: Git info
-      run: echo "::set-env name=BRANCH_NAME::$(git rev-parse --abbrev-ref HEAD)"
+      run: "::set-env name=BRANCH_NAME:${GITHUB_REF##*/}"
     - name: Checking relevance
       run: |
         if ! [ $BRANCH_NAME == "master" ]
@@ -27,14 +25,9 @@ jobs:
           if [ -z "$output" ]
           then
             echo "Branch $BRANCH_NAME in repository $forkname does not have an open pull request"
-            echo "::set-env name=BRANCH_NAME::"
+            exit 1
           fi
         fi
-  run_formatting:
-    name: Run fix_formatting.py
-    runs-on: ubuntu-16.04 # clang-format has broken dependencies on ubuntu-latest
-    needs: check_relevance
-    if: env.BRANCH_NAME != ""
     steps:
     - name: Installing python
       uses: actions/setup-python@v1
@@ -45,6 +38,8 @@ jobs:
         sudo apt-get update
         sudo apt-get install clang-format
         pip install pyformat
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Invoking fix_formatting.py
       run: python3 ./utils/fix_formatting.py
     - name: Gathering changes
@@ -75,6 +70,10 @@ jobs:
           echo "The remote branch was updated, cancelling build"
           exit 1
         fi
+      # In theory, a new push can hit th branch in this brief delay between check
+      # and push. But this is such a narrow time window that it's unlikely.
+      # If it does happen, the last step will most likely fail with a "branches
+      # have diverged" error without affecting the newer push.
     - name: Committing and pushing changes
       uses: stefanzweifel/git-auto-commit-action@v2.5.0
       with:
