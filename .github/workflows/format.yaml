@@ -28,7 +28,6 @@ jobs:
             exit 1
           fi
         fi
-    steps:
     - name: Installing python
       uses: actions/setup-python@v1
       with:
