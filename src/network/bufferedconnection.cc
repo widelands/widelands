@@ -263,7 +263,7 @@ void BufferedConnection::start_sending() {
 			// Don't put too much data in the operating system buffer at once
 			// This doesn't really makes a problem, but results in relatively large
 			// delays with chat messages
-#ifdef __linux__
+/*#ifdef __linux__
 			   // In Linux, we can get the current buffer size. Make sure it stays small enough
 			   // so non-file packets send are not blocked too long
 			   int send_buffer_size;
@@ -281,7 +281,7 @@ void BufferedConnection::start_sending() {
 			   // matching code. Otherwise, a simple sleep works well enough.
 			   // 5 milliseconds is another experimentally found number
 			   std::this_thread::sleep_for(std::chrono::milliseconds(5));
-#endif
+#endif*/
 			   start_sending();
 		   } else {
 			   if (socket_.is_open()) {
@@ -339,9 +339,14 @@ void reduce_send_buffer(boost::asio::ip::tcp::socket& socket) {
 		const boost::asio::socket_base::send_buffer_size new_send_buffer_size(20 *
 		                                                                      kNetworkBufferSize);
 		// NOCOM: Re-enable next line and disable the "#ifdef __linux__" part to test the alternative
-		// socket.set_option(new_send_buffer_size, ec);
+		 socket.set_option(new_send_buffer_size, ec);
 		// Ignore error. When it fails, chat messages will lag while transmitting files.
 		// But nothing really bad happens
+		if (!ec) {
+			log("[BufferedConnection] Reduced send buffer size\n");
+		} else {
+			log("[BufferedConnection] Warning: Failed to reduce send buffer size\n");
+		}
 	}
 }
 
