@@ -6,6 +6,8 @@ on:
   # push to the head branch if it is in a fork. So we intercept all push events,
   # and then query whether the branch meets the above criteria.
   push:
+  pull_request:
+    - '!**'
 jobs:
   run_formatting:
     name: Run fix_formatting.py
