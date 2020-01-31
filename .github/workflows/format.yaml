@@ -15,7 +15,8 @@ jobs:
       run: echo "::set-env name=BRANCH_NAME:${GITHUB_REF##*/}"
     - name: Checking relevance
       run: |
-        if ! [ $BRANCH_NAME == "master" ]
+        echo "$BRANCH_NAME ($GITHUB_REF)"
+        if ! [ "$BRANCH_NAME" == "master" ]
         then
           forkname=${{ github.repository }}
           # grep returns 1 if $BRANCH_NAME is not found, but we want to log an error message before exiting
