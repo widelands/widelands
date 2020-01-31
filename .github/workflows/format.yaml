@@ -6,12 +6,14 @@ jobs:
     runs-on: ubuntu-16.04
     steps: 
     - uses: actions/checkout@v2
+    - uses: actions/setup-python@v1
+      with: 
+        python-version: 3.x
     - name: Installing formatting tools
       run: |
-        pip install --upgrade pip
-        pip install pyformat
         sudo apt-get update
-        sudo apt-get install clang-format python3
+        sudo apt-get install clang-format
+        pip install pyformat
     - name: Invoking fix_formatting.py
       run: |
         python3 ./utils/fix_formatting.py
