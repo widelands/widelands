@@ -12,14 +12,13 @@ jobs:
       run: echo "::set-env name=BRANCH_NAME::$(git rev-parse --abbrev-ref HEAD)"
     - name: Checking relevance
       run: |
-        set -v #for testing
         if [ $BRANCH_NAME == "master" ]
         then
           echo "master is formatted after every push"
         else
           forkname=${{ github.repository }}
           echo "$forkname (${forkname%%/*}) $BRANCH_NAME"
-          output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$BRANCH_NAME" | grep "$BRANCH_NAME")
+          output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$BRANCH_NAME" | grep "$BRANCH_NAME") || true
           if [ -n "$output" ]
           then
             echo "Branch $BRANCH_NAME in repository $forkname does not have an open pull request"
