@@ -34,7 +34,7 @@ jobs:
     name: Run fix_formatting.py
     runs-on: ubuntu-16.04 # clang-format has broken dependencies on ubuntu-latest
     needs: check_relevance
-    if: BRANCH_NAME != ""
+    if: ${{ BRANCH_NAME }} != ""
     steps:
     - name: Installing python
       uses: actions/setup-python@v1
