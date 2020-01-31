@@ -5,7 +5,7 @@ jobs:
     name: Run fix_formatting.py
     runs-on: ubuntu-16.04 # clang-format has broken dependencies on ubuntu-latest
     env:
-      COMMIT_MESSAGE: '(unknown number of files) automatically formatted.'
+      COMMIT_MESSAGE: "(unknown number of files) automatically formatted."
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -37,7 +37,7 @@ jobs:
           echo "$nrfiles files formatted"
           export FILES="$nrfiles were"
         fi
-        echo ::set-env name=COMMIT_MESSAGE::"$FILES automatically formatted."
+        echo ::set-env name=env.COMMIT_MESSAGE::"$FILES automatically formatted."
         echo ${{ github.ref }}
         git branch
     - name: Committing and pushing changes
