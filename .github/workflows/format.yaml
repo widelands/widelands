@@ -6,10 +6,16 @@ jobs:
     runs-on: ubuntu-16.04
     steps: 
     - uses: actions/checkout@v2
-    - name: Invoking fix_formatting.py
+    - name: Installing formatting tools
       run: |
+        pip install --upgrade pip
+        pip install pyformat
         sudo apt-get update
         sudo apt-get install clang-format
-        pip install pyformat
+    - name: Invoking fix_formatting.py
+      run: |
         ./utils/fix_formatting.py
+    - name: Committing changes
+      run: |
         git status
+        # TODO
