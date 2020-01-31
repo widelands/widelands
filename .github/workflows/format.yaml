@@ -7,7 +7,10 @@ on:
   # and then query whether the branch meets the above criteria.
   push:
   pull_request:
-    - '!**'
+    branches:
+      # A pull request automatically creates a "merge commit" which generates
+      # a push - on master, not on the branch. We have to suppress that.
+      - '!**'
 jobs:
   run_formatting:
     name: Run fix_formatting.py
