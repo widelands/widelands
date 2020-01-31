@@ -18,7 +18,8 @@ jobs:
           echo "master is formatted after every push"
         else
           forkname=${{ github.repository }}
-          output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$BRANCH_NAME" | grep "BRANCH_NAME")
+          echo "$forkname (${forkname%%/*}) $BRANCH_NAME"
+          output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$BRANCH_NAME" | grep "$BRANCH_NAME")
           if [ -n "$output" ]
           then
             echo "Branch $BRANCH_NAME in repository $forkname does not have an open pull request"
