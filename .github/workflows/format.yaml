@@ -37,7 +37,8 @@ jobs:
         fi
         echo ::set-env name=env.COMMIT_MESSAGE::"$FILES automatically formatted."
         echo ::set-env name=env.BRANCH_NAME::$(git rev-parse --abbrev-ref HEAD)
-        if ! [ ${{ env.BRANCH_NAME }} == "action" ]; then exit 1; fi
+        echo "${{ env.BRANCH_NAME }}"
+        if ! [ "${{ env.BRANCH_NAME }}" == "action" ]; then exit 1; fi
     - name: Committing and pushing changes
       uses: stefanzweifel/git-auto-commit-action@v2.5.0
       with:
