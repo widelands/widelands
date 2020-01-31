@@ -37,6 +37,6 @@ jobs:
       with:
         commit_message: "$files automatically formatted."
         branch: ${{ github.head_ref }}
-        commit_options: '--dry-run --author=\"Widelands Formatting Bot\"'
+        commit_options: '--dry-run' '--author="Widelands Formatting Bot"'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
