@@ -1,5 +1,10 @@
 name: Formatting your code
 on:
+  # Actually we are only interested in pushes to master and to branches with
+  # open pull requests. We do not intercept pull_request events however,
+  # because those are created only on the base repo and we are not allowed to
+  # push to the head branch if it is in a fork. So we intercept all push events,
+  # and then query whether the branch meets the above criteria.
   push:
 jobs:
   run_formatting:
@@ -21,6 +26,7 @@ jobs:
           set +e
           output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$BRANCH_NAME" | grep "$BRANCH_NAME")
           set -e
+          echo "RESULT: $output"
           if [ -n "$output" ]
           then
             echo "Branch $BRANCH_NAME in repository $forkname does not have an open pull request"
