@@ -21,7 +21,9 @@ jobs:
         python3 ./utils/fix_formatting.py
     - name: Gathering changes
       run: |
-        echo "Test: headref is ${{ github.head_ref }}"
+        echo "Test: GITHUB_REF = $GITHUB_REF"
+        echo "Test: GITHUB_BASE_REF = $GITHUB_BASE_REF"
+        echo "Test: GITHUB_HEAD_REF = $GITHUB_HEAD_REF"
         export nrfiles=$(git status -s | wc -l)
         if [ $nrfiles == 0 ]
         then
@@ -38,7 +40,7 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v2.5.0
       with:
         commit_message: "$files automatically formatted."
-        branch: ${{ github.head_ref }}
+        branch: "actions" #todo
         commit_options: '--dry-run' '--author="Widelands Formatting Bot"'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
