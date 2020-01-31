@@ -1,5 +1,12 @@
 name: Formatting your code
-on: push
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+    types: [ edited, synchronize, opened, reopened ]
 jobs:
   run_formatting:
     name: Run fix_formatting.py
@@ -32,7 +39,7 @@ jobs:
           FILES="'${nrfiles#???}' was"
         else
           echo "$nrfiles files formatted"
-          FILES="$nrfiles were"
+          FILES="$nrfiles files were"
         fi
         echo "::set-env name=COMMIT_MESSAGE::\"$FILES automatically formatted.\""
         echo "::set-env name=BRANCH_NAME::$(git rev-parse --abbrev-ref HEAD)"
