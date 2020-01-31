@@ -1624,13 +1624,14 @@ bool WLApplication::redirect_output(std::string path) {
 		path = ".";
 #endif
 	}
-            	std::string stdoutfile = path + "/stdout.txt";
-    	/* Redirect standard output */
-	           FILE* newfp = freopen(stdoutfile.c_str(), "w", stdout);
-                            	if(!newfp)return false;
+	std::string stdoutfile = path + "/stdout.txt";
+	/* Redirect standard output */
+	FILE* newfp = freopen(stdoutfile.c_str(), "w", stdout);
+	if (!newfp)
+		return false;
 	/* Redirect standard error */
-	std::string stderrfile = path +     "/stderr.txt";
-	newfp = freopen(stderrfile.c_str(), "w",            stderr);
+	std::string stderrfile = path + "/stderr.txt";
+	newfp = freopen(stderrfile.c_str(), "w", stderr);
 	if (!newfp)
 		return false;
 
