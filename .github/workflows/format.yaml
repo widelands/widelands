@@ -28,19 +28,19 @@ jobs:
             exit 1
           fi
         fi
-    - name: Installing python
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.x
+#    - name: Installing python
+#      uses: actions/setup-python@v1
+#      with:
+#        python-version: 3.x
     - name: Installing formatting tools
       run: |
         sudo apt-get update
         sudo apt-get install clang-format
-        pip install pyformat
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Invoking fix_formatting.py
-      run: python3 ./utils/fix_formatting.py
+#        pip install pyformat
+#    - name: Checkout
+#      uses: actions/checkout@v2
+#    - name: Invoking fix_formatting.py
+#      run: python3 ./utils/fix_formatting.py
     - name: Gathering changes
       run: |
         nrfiles=$(git status -s | wc -l)
@@ -59,24 +59,16 @@ jobs:
         echo "::set-env name=COMMIT_MESSAGE::\"$FILES automatically formatted.\""
     - name: Check for remote updates
       run: |
-        git fetch -n origin
-        head1=$(git merge-base $BRANCH_NAME origin/$BRANCH_NAME)
-        head2=$(git rev-parse origin/$BRANCH_NAME)
-        if [ $head1 == $head2 ]
-        then
-          echo "No remote changes"
-        else
-          echo "The remote branch was updated, cancelling build"
-          exit 1
-        fi
+        echo "No remote changes"
+        echo "The remote branch was updated, cancelling build"
       # In theory, a new push can hit th branch in this brief delay between check
       # and push. But this is such a narrow time window that it's unlikely.
       # If it does happen, the last step will most likely fail with a "branches
       # have diverged" error without affecting the newer push.
-    - name: Committing and pushing changes
-      uses: stefanzweifel/git-auto-commit-action@v2.5.0
-      with:
-        commit_message: ${{ env.COMMIT_MESSAGE }}
-        branch: ${{ env.BRANCH_NAME }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#    - name: Committing and pushing changes
+#      uses: stefanzweifel/git-auto-commit-action@v2.5.0
+#      with:
+#        commit_message: ${{ env.COMMIT_MESSAGE }}
+#        branch: ${{ env.BRANCH_NAME }}
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
