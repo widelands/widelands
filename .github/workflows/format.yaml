@@ -17,8 +17,10 @@ jobs:
           echo "master is formatted after every push"
         else
           forkname=${{ github.repository }}
-          echo "$forkname (${forkname%%/*}) $BRANCH_NAME"
-          output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$BRANCH_NAME" | grep "$BRANCH_NAME") || true
+          # grep returns 1 if $BRANCH_NAME is not found, but we want to log an error message before exiting
+          set +e
+          output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$BRANCH_NAME" | grep "$BRANCH_NAME")
+          set -e
           if [ -n "$output" ]
           then
             echo "Branch $BRANCH_NAME in repository $forkname does not have an open pull request"
