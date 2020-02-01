@@ -47,11 +47,14 @@ jobs:
         if [ -n "$COMMIT_MESSAGE" ]
         # skip if there's nothing to do
         then
-          git remote show origin
-          git remote update origin
-          head1=$(git merge-base $BRANCH_NAME origin/$BRANCH_NAME)
-          head2=$(git rev-parse origin/$BRANCH_NAME)
-          if [ $head1 == $head2 ]
+          local_commit=$(git show -s --format="format:%H")
+          set +e # grep will cancel curl after the first match
+          remote_commit=$(curl -i "https://api.github.com/repos/widelands/commits?since:${timestamp%+*}")
+          set -e
+          remote_commit=${remote_commit##* \"}
+          remote_commit=${remote_commit%\",}
+          echo "<$local_commit> vs <$remote_commit>" # for testing
+          if [ "$local_commit" == "$remote_commit" ]
           then
             echo "No remote changes"
           else
