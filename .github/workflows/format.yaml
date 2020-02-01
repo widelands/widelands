@@ -42,12 +42,12 @@ jobs:
           FILES="$nrfiles files were automatically formatted."
         fi
         echo "::set-env name=COMMIT_MESSAGE::$FILES"
-    - name: Check for remote updates
+    - name: Checking for remote updates
       run: |
         if [ -n "$COMMIT_MESSAGE" ]
         # skip if there's nothing to do
         then
-          if [ "${{ github.event_type }}" == "pull_request" ]
+          if [ "${{ github.event_name }}" == "pull_request" ]
           then
             # In pull requests we need to figure out which branch in
             # which repo to check for changes from which commit
@@ -78,7 +78,7 @@ jobs:
           then
             echo "No remote changes"
           else
-            echo "The remote branch ($use_branch at $use_repo) was updated with $latest (we are on $use_sha), cancelling build"
+            echo "The remote branch '$use_branch' from 'use_repo' was updated with '$latest' (we are on '$use_sha'), cancelling build"
             exit 1
           fi
         fi
