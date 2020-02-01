@@ -726,12 +726,12 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	avg_usframetime_ = ((avg_usframetime_ * 15) + (frametime_ * 1000)) / 16;
 	lastframe_ = curframe;
 
-	Game* game = dynamic_cast<Game*>(&egbase());
+	Game* g = dynamic_cast<Game*>(&egbase());
 
 	// This portion of code keeps the speed of game so that FPS are kept within
 	// range 13 - 15, this is used for training of AI
-	if (game != nullptr) {
-		if (game->is_auto_speed()) {
+	if (g) {
+		if (g->is_auto_speed()) {
 			uint32_t cur_fps = 1000000 / avg_usframetime_;
 			int32_t speed_diff = 0;
 			if (cur_fps < 13) {
@@ -741,7 +741,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 				speed_diff = +100;
 			}
 			if (speed_diff != 0) {
-				if (GameController* const ctrl = game->game_controller()) {
+				if (GameController* const ctrl = g->game_controller()) {
 					if ((ctrl->desired_speed() > 950 && ctrl->desired_speed() < 30000) ||
 					    (ctrl->desired_speed() < 1000 && speed_diff > 0) ||
 					    (ctrl->desired_speed() > 29999 && speed_diff < 0)) {
@@ -754,7 +754,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 	// Node information
 	std::string node_text("");
-	if (game == nullptr) {
+	if (!g) {
 		// Always blit node information in the editor
 		static boost::format node_format("(%i, %i, %i)");
 		const int32_t height = egbase().map()[sel_.pos.node].get_height();
@@ -772,7 +772,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	}
 
 	// In-game clock and FPS
-	if ((game != nullptr) && get_config_bool("game_clock", true)) {
+	if (g && get_config_bool("game_clock", true)) {
 		// Blit in-game clock
 		const std::string gametime(gametimestring(egbase().get_gametime(), true));
 		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
@@ -1011,11 +1011,11 @@ void InteractiveBase::finish_build_road() {
 	road_building_remove_overlay();
 
 	if (buildroad_->get_nsteps()) {
-		upcast(Game, game, &egbase());
+		upcast(Game, g, &egbase());
 
 		// Build the path as requested
-		if (game)
-			game->send_player_build_road(road_build_player_, *new Widelands::Path(*buildroad_));
+		if (g)
+			g->send_player_build_road(road_build_player_, *new Widelands::Path(*buildroad_));
 		else
 			egbase().get_player(road_build_player_)->build_road(*new Widelands::Path(*buildroad_));
 
@@ -1031,8 +1031,8 @@ void InteractiveBase::finish_build_road() {
 					(std::vector<Coords>::const_iterator it = first;
 					 it <= last;
 					 ++it)
-					if (game)
-						game->send_player_build_flag(road_build_player_, map.get_fcoords(*it));
+					if (g)
+						g->send_player_build_flag(road_build_player_, map.get_fcoords(*it));
 					else
 						egbase().get_player(road_build_player_)->build_flag(map.get_fcoords(*it));
 
@@ -1041,8 +1041,8 @@ void InteractiveBase::finish_build_road() {
 					(std::vector<Coords>::const_iterator it = last;
 					 first <= it;
 					 --it)
-					if (game)
-						game->send_player_build_flag(road_build_player_, map.get_fcoords(*it));
+					if (g)
+						g->send_player_build_flag(road_build_player_, map.get_fcoords(*it));
 					else
 						egbase().get_player(road_build_player_)->build_flag(map.get_fcoords(*it));
 			}
@@ -1068,11 +1068,11 @@ void InteractiveBase::finish_build_waterway() {
 		log("Refusing to finish waterway building: length is %" PRIuS " but limit is %d\n", length,
 		    egbase().map().get_waterway_max_length());
 	} else if (length) {
-		upcast(Game, game, &egbase());
+		upcast(Game, g, &egbase());
 
 		// Build the path as requested
-		if (game) {
-			game->send_player_build_waterway(
+		if (g) {
+			g->send_player_build_waterway(
 			   waterway_build_player_, *new Widelands::Path(*buildwaterway_));
 		} else {
 			egbase()
@@ -1087,9 +1087,9 @@ void InteractiveBase::finish_build_waterway() {
 			std::vector<Coords>::const_iterator const first = c_vector.begin() + 2;
 			std::vector<Coords>::const_iterator const last = c_vector.end() - 2;
 
-			auto place_flag = [this, game](const Widelands::FCoords& coords) {
-				if (game) {
-					game->send_player_build_flag(waterway_build_player_, coords);
+			auto place_flag = [this, g](const Widelands::FCoords& coords) {
+				if (g) {
+					g->send_player_build_flag(waterway_build_player_, coords);
 				} else {
 					egbase().get_player(waterway_build_player_)->build_flag(coords);
 				}
