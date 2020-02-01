@@ -86,8 +86,8 @@ jobs:
         password ${{ secrets.GITHUB_TOKEN }}
         EOF
         chmod 600 $HOME/.netrc
-        set -v #testing
         git remote add repo "git@github.com:$use_repo.git"
+        git remote #test
         set +e
         latest=$(curl -i "https://api.github.com/repos/$use_repo/commits/$use_branch" | grep -m 1 "\"sha\": ")
         set -e
@@ -99,6 +99,6 @@ jobs:
           git commit -m "$COMMIT_MESSAGE"
           git push repo "$use_branch"
         else
-          echo "The remote branch '$use_branch' from '$use_repo' was updated with '$latest' (we are on '$use_sha'), not pushing changes"
+          echo "The remote branch '$use_branch' from '$use_repo' was updated from '$use_sha' to '$latest', cancel"
           exit 1
         fi
