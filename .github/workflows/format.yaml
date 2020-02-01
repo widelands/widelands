@@ -31,27 +31,32 @@ jobs:
         if [ $nrfiles == 0 ]
         then
           echo "Nothing to do"
+          FILES=""
         elif [ $nrfiles == 1 ]
         then
           echo "1 file formatted"
           nrfiles=$(git status -s)
-          FILES="'${nrfiles#???}' was"
+          FILES="'${nrfiles#???}' was automatically formatted."
         else
           echo "$nrfiles files formatted"
-          FILES="$nrfiles files were"
+          FILES="$nrfiles files were automatically formatted."
         fi
-        echo "::set-env name=COMMIT_MESSAGE::\"$FILES automatically formatted.\""
+        echo "::set-env name=COMMIT_MESSAGE::$FILES"
     - name: Check for remote updates
       run: |
-        git fetch -n origin
-        head1=$(git merge-base $BRANCH_NAME origin/$BRANCH_NAME)
-        head2=$(git rev-parse origin/$BRANCH_NAME)
-        if [ $head1 == $head2 ]
+        if [ -n "$COMMIT_MESSAGE" ]
+        # skip if there's nothing to do
         then
-          echo "No remote changes"
-        else
-          echo "The remote branch was updated, cancelling build"
-          exit 1
+          git fetch -n origin
+          head1=$(git merge-base $BRANCH_NAME origin/$BRANCH_NAME)
+          head2=$(git rev-parse origin/$BRANCH_NAME)
+          if [ $head1 == $head2 ]
+          then
+            echo "No remote changes"
+          else
+            echo "The remote branch was updated, cancelling build"
+            exit 1
+          fi
         fi
       # In theory, a new push can hit the branch in this brief delay between check
       # and push. But this is such a narrow time window that it's unlikely.
