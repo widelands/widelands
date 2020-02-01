@@ -97,6 +97,7 @@ jobs:
           echo "No remote changes"
           git commit -m "$COMMIT_MESSAGE"
           git remote add repo "https://github.com/$use_repo.git"
+          git remote fetch repo
           git push repo "$use_branch"
         else
           echo "The remote branch '$use_branch' from '$use_repo' was updated from '$use_sha' to '$latest', cancel"
