@@ -10,7 +10,7 @@ jobs:
     # clang-format has broken dependencies on ubuntu-latest
     runs-on: ubuntu-16.04
     steps:
-    - name: Git info
+    - name: Fetching branch info
       run: echo "::set-env name=BRANCH_NAME::${GITHUB_REF##*/}"
     - name: Installing python
       uses: actions/setup-python@v1
