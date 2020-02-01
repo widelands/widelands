@@ -58,7 +58,8 @@ jobs:
             label=$(curl -i "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.number }}" | grep -m 1 "\"label\": ")
             label=${label#*: \"}
             label=${label%\",}
-            use_repo=${label%:*}
+            # I assume here that forks are always called "username/widelands"
+            use_repo="${label%:*}/widelands"
             use_branch=${label#*:}
             set -e
           else
@@ -66,9 +67,6 @@ jobs:
             use_repo="${{ github.repository }}"
             use_sha="$GITHUB_SHA"
           fi
-          echo "TEST +++++++++++++++++"
-          echo "TEST $use_branch from $use_repo at $use_sha"
-          echo "TEST +++++++++++++++++"
           set +e # grep will cancel curl after the first match
           latest=$(curl -i "https://api.github.com/repos/$use_repo/commits/$use_branch" | grep -m 1 "\"sha\": ")
           set -e
@@ -78,7 +76,7 @@ jobs:
           then
             echo "No remote changes"
           else
-            echo "The remote branch '$use_branch' from 'use_repo' was updated with '$latest' (we are on '$use_sha'), cancelling build"
+            echo "The remote branch '$use_branch' from '$use_repo' was updated with '$latest' (we are on '$use_sha'), cancelling build"
             exit 1
           fi
         fi
