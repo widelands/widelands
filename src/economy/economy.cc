@@ -48,23 +48,24 @@ void Economy::initialize_serial() {
 	last_economy_serial_ = 0;
 }
 
-Economy::Economy(Player& player, WareWorker wwtype)
-   : Economy(player, last_economy_serial_++, wwtype) {
+Economy::Economy ( Player        & player       ,WareWorker   wwtype)
+   : Economy(player
+, last_economy_serial_++,     wwtype )  {
 }
 
 Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
-   : serial_(init_serial),
-     owner_(player),
+: serial_(init_serial),
+owner_(player),
      type_(wwtype),
-     request_timerid_(0),
-     options_window_(nullptr) {
-	last_economy_serial_ = std::max(last_economy_serial_, serial_ + 1);
-	const TribeDescr& tribe = player.tribe();
-	DescriptionIndex const nr_wares_or_workers =
-	   wwtype == wwWARE ? player.egbase().tribes().nrwares() : player.egbase().tribes().nrworkers();
-	wares_or_workers_.set_nrwares(nr_wares_or_workers);
+                 request_timerid_(0),
+                 options_window_(nullptr) {
+	            last_economy_serial_ = std::max(last_economy_serial_, serial_ + 1);
+	            const TribeDescr& tribe = player.tribe();
+	            DescriptionIndex const nr_wares_or_workers =
+	               wwtype == wwWARE ? player.egbase().tribes().nrwares() : player.egbase().tribes().nrworkers();
+	            wares_or_workers_.set_nrwares(nr_wares_or_workers);
 
-	target_quantities_ = new TargetQuantity[nr_wares_or_workers];
+	            target_quantities_ = new TargetQuantity[nr_wares_or_workers];
 	for (DescriptionIndex i = 0; i < nr_wares_or_workers; ++i) {
 		TargetQuantity tq;
 		switch (type_) {
