@@ -82,11 +82,11 @@ return index_;
 	Quantity get_count() const {
 		return count_;
 	}
-	uint32_t get_open_count() const {
-		return count_ - transfers_.size();
-	}
-	bool get_exact_match() const {
-		return exact_match_;
+uint32_t get_open_count() const {
+return count_ - transfers_.size();
+}
+bool get_exact_match() const {
+return exact_match_;
 	}
 	bool is_open() const {
 		return transfers_.size() < count_;
