@@ -51,7 +51,7 @@ jobs:
         echo "::set-env name=use_repo::$u_repo"
         echo "::set-env name=use_branch::$u_branch"
         git remote add repo "https://github.com/$use_repo.git"
-        git remote fetch repo
+        git fetch repo
         if [ "${{ github.event_name }}" == "pull_request" ]
         then
           # PRs are in detached head state by default
