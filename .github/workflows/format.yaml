@@ -16,18 +16,9 @@ jobs:
       run: |
         git config --global user.name "The Widelands Code Formatting Bot"
         git config --global user.email "actions@github.com"
-        # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
-        cat <<- EOF > $HOME/.netrc
-        machine github.com
-        login $GITHUB_ACTOR
-        password ${{ secrets.GITHUB_TOKEN }}
-        machine api.github.com
-        login $GITHUB_ACTOR
-        password ${{ secrets.GITHUB_TOKEN }}
-        EOF
-        chmod 600 $HOME/.netrc
         if [ "${{ github.event_name }}" == "pull_request" ]
         then
+          TOKEN=${{ secrets.WIDELANDS_FORMATTING_INTEGRATION_AUTHORIZATION }}
           # In pull requests we need to figure out which branch in
           # which repo to check for changes from which commit
           set +e # grep will cancel curl after the first match
@@ -48,10 +39,21 @@ jobs:
           git checkout "origin/$u_branch"
           git checkout -b "$u_branch"
         else
+          TOKEN=${{ secrets.GITHUB_TOKEN }}
           u_branch="${GITHUB_REF##*/}"
           u_repo="${{ github.repository }}"
           u_sha="$GITHUB_SHA"
         fi
+        # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
+        cat <<- EOF > $HOME/.netrc
+        machine github.com
+        login $GITHUB_ACTOR
+        password $TOKEN
+        machine api.github.com
+        login $GITHUB_ACTOR
+        password $TOKEN
+        EOF
+        chmod 600 $HOME/.netrc
         echo "${{ github.event_name }} event on branch '$u_branch' at repo '$u_repo', last commit '$u_sha'"
         echo "::set-env name=use_sha::$u_sha"
         echo "::set-env name=use_repo::$u_repo"
