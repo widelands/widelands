@@ -70,7 +70,7 @@ jobs:
           set +e # grep will cancel curl after the first match
           latest=$(curl -i "https://api.github.com/repos/$use_repo/commits/$use_branch" | grep -m 1 "\"sha\": ")
           set -e
-          latest=${latest#* \"}
+          latest=${latest#*: \"}
           latest=${latest%\",}
           if [ "$latest" == "$use_sha" ]
           then
