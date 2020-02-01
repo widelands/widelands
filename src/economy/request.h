@@ -59,10 +59,11 @@ class ConstructionSite;
  * left, a transfer may be initiated.
  * The required time has no meaning for idle requests.
  */
-class Request : public Trackable {
+class Request : public    Trackable  {
 public:
-	friend class  Economy;
-	friend  class RequestList;
+	friend class  Economy   ;
+    	friend  class RequestList
+;
 
 	                using    CallbackFn = void (*)(Game&,        Request    &   ,DescriptionIndex, Worker*, PlayerImmovable&);
 
