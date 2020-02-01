@@ -41,6 +41,12 @@ jobs:
           label=${label%\",}
           u_repo="${label%:*}/widelands"
           u_branch=${label#*:}
+          git remote rename origin upstream
+          git remote add origin "https://github.com/$u_repo.git"
+          git fetch origin
+          # PRs are in detached head state by default
+          git checkout "origin/$u_branch"
+          git checkout -b "$u_branch"
         else
           u_branch="${GITHUB_REF##*/}"
           u_repo="${{ github.repository }}"
@@ -50,14 +56,6 @@ jobs:
         echo "::set-env name=use_sha::$u_sha"
         echo "::set-env name=use_repo::$u_repo"
         echo "::set-env name=use_branch::$u_branch"
-        git remote add repo "https://github.com/$use_repo.git"
-        git fetch repo
-        if [ "${{ github.event_name }}" == "pull_request" ]
-        then
-          # PRs are in detached head state by default
-          git checkout "repo/$u_branch"
-          git checkout -b "$u_branch"
-        fi
     - name: Installing python
       uses: actions/setup-python@v1
       with:
@@ -103,7 +101,7 @@ jobs:
         then
           echo "No remote changes"
           git commit -m "$COMMIT_MESSAGE"
-          git push repo "$use_branch"
+          git push origin "$use_branch"
         else
           echo "The remote branch '$use_branch' from '$use_repo' was updated from '$use_sha' to '$latest', cancel"
           exit 1
