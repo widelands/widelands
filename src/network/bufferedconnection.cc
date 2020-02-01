@@ -5,8 +5,6 @@
 
 #include "base/log.h"
 
-void reduce_send_buffer(boost::asio::ip::tcp::socket& socket);
-
 BufferedConnection::Peeker::Peeker(BufferedConnection* conn) : conn_(conn), peek_pointer_(0) {
 	assert(conn_);
 }
@@ -259,29 +257,7 @@ void BufferedConnection::start_sending() {
 			   assert(nonempty_queue->front().size() == length);
 			   nonempty_queue->pop();
 			   lock2.unlock();
-			// Try to send some more data
-			// Don't put too much data in the operating system buffer at once
-			// This doesn't really makes a problem, but results in relatively large
-			// delays with chat messages
-/*#ifdef __linux__
-			   // In Linux, we can get the current buffer size. Make sure it stays small enough
-			   // so non-file packets send are not blocked too long
-			   int send_buffer_size;
-			   ioctl(socket_.native_handle(), TIOCOUTQ, &send_buffer_size);
-			   // Magic number ahead: 20 is some experimentally found size for the buffer
-			   // It probably depends on the speed of my internet connection, for other systems
-			   // other values might be better. But it should always be better than the default
-			   while (send_buffer_size > 20 * static_cast<int>(kNetworkBufferSize)) {
-				   // Keep the network buffer empty by waiting until it is empty enough
-				   std::this_thread::yield();
-				   ioctl(socket_.native_handle(), TIOCOUTQ, &send_buffer_size);
-			   }
-#else
-			   // For other operating systems there might be similar functions, feel free to add
-			   // matching code. Otherwise, a simple sleep works well enough.
-			   // 5 milliseconds is another experimentally found number
-			   std::this_thread::sleep_for(std::chrono::milliseconds(5));
-#endif*/
+			   // Try to send some more data
 			   start_sending();
 		   } else {
 			   if (socket_.is_open()) {
@@ -328,7 +304,7 @@ void BufferedConnection::start_receiving() {
 	   });
 }
 
-void reduce_send_buffer(boost::asio::ip::tcp::socket& socket) {
+void BufferedConnection::reduce_send_buffer(boost::asio::ip::tcp::socket& socket) {
 	// Reduce the size of the send buffer. This will result in (slightly) slower
 	// file transfers but keeps the program responsive (e.g., chat messages are
 	// displayed) while transmitting files
@@ -336,15 +312,11 @@ void reduce_send_buffer(boost::asio::ip::tcp::socket& socket) {
 	boost::asio::socket_base::send_buffer_size send_buffer_size;
 	socket.get_option(send_buffer_size, ec);
 	if (!ec && send_buffer_size.value() > 20 * static_cast<int>(kNetworkBufferSize)) {
-		const boost::asio::socket_base::send_buffer_size new_send_buffer_size(20 *
-		                                                                      kNetworkBufferSize);
-		// NOCOM: Re-enable next line and disable the "#ifdef __linux__" part to test the alternative
-		 socket.set_option(new_send_buffer_size, ec);
-		// Ignore error. When it fails, chat messages will lag while transmitting files.
-		// But nothing really bad happens
-		if (!ec) {
-			log("[BufferedConnection] Reduced send buffer size\n");
-		} else {
+		const boost::asio::socket_base::send_buffer_size new_buffer_size(20 * kNetworkBufferSize);
+		socket.set_option(new_buffer_size, ec);
+		// Ignore error. When it fails, chat messages will lag while transmitting files,
+		// but nothing really bad happens
+		if (ec) {
 			log("[BufferedConnection] Warning: Failed to reduce send buffer size\n");
 		}
 	}
