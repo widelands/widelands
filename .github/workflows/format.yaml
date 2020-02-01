@@ -11,7 +11,32 @@ jobs:
     runs-on: ubuntu-16.04
     steps:
     - name: Fetching branch info
-      run: echo "::set-env name=BRANCH_NAME::${GITHUB_REF##*/}"
+      run: |
+        # Some info for checking for remote updates prior to pushing
+        if [ "${{ github.event_name }}" == "pull_request" ]
+        then
+          # In pull requests we need to figure out which branch in
+          # which repo to check for changes from which commit
+          set +e
+          u_sha=$(curl -i "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.number }}" | grep -m 1 "\"sha\": ")
+          u_sha=${u_sha#*: \"}
+          u_sha=${u_sha%\",}
+          label=$(curl -i "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.number }}" | grep -m 1 "\"label\": ")
+          label=${label#*: \"}
+          label=${label%\",}
+          # I assume here that forks are always called "username/widelands"
+          u_repo="${label%:*}/widelands"
+          u_branch=${label#*:}
+          set -e
+        else
+          u_branch="${GITHUB_REF##*/}"
+          u_repo="${{ github.repository }}"
+          u_sha="$GITHUB_SHA"
+        fi
+        echo "${{ github.event_name }} event on branch '$u_branch' at repo '$u_repo', last commit '$u_sha'"
+        echo "::set-env name=use_sha::$u_sha"
+        echo "::set-env name=use_repo::$u_repo"
+        echo "::set-env name=use_branch::$u_branch"
     - name: Installing python
       uses: actions/setup-python@v1
       with:
@@ -47,26 +72,6 @@ jobs:
         if [ -n "$COMMIT_MESSAGE" ]
         # skip if there's nothing to do
         then
-          if [ "${{ github.event_name }}" == "pull_request" ]
-          then
-            # In pull requests we need to figure out which branch in
-            # which repo to check for changes from which commit
-            set +e
-            use_sha=$(curl -i "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.number }}" | grep -m 1 "\"sha\": ")
-            use_sha=${use_sha#*: \"}
-            use_sha=${use_sha%\",}
-            label=$(curl -i "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.number }}" | grep -m 1 "\"label\": ")
-            label=${label#*: \"}
-            label=${label%\",}
-            # I assume here that forks are always called "username/widelands"
-            use_repo="${label%:*}/widelands"
-            use_branch=${label#*:}
-            set -e
-          else
-            use_branch="$BRANCH_NAME"
-            use_repo="${{ github.repository }}"
-            use_sha="$GITHUB_SHA"
-          fi
           set +e # grep will cancel curl after the first match
           latest=$(curl -i "https://api.github.com/repos/$use_repo/commits/$use_branch" | grep -m 1 "\"sha\": ")
           set -e
@@ -88,6 +93,7 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v2.5.0
       with:
         commit_message: ${{ env.COMMIT_MESSAGE }}
-        branch: ${{ env.BRANCH_NAME }}
+        branch: ${{ env.use_branch }}
+        repository: ${{ env.use_repo }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
