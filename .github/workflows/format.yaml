@@ -47,18 +47,17 @@ jobs:
         if [ -n "$COMMIT_MESSAGE" ]
         # skip if there's nothing to do
         then
-          local_commit=$(git show -s --format="format:%H")
           set +e # grep will cancel curl after the first match
-          remote_commit=$(curl -i "https://api.github.com/repos/widelands/commits?since:${timestamp%+*}")
+          latest=$(curl -i "https://api.github.com/repos/${{ github.repository }}/commits/$BRANCH_NAME" | grep -m 1 "\"sha\": ")
           set -e
-          remote_commit=${remote_commit##* \"}
-          remote_commit=${remote_commit%\",}
-          echo "<$local_commit> vs <$remote_commit>" # for testing
-          if [ "$local_commit" == "$remote_commit" ]
+          latest=${latest##* \"}
+          latest=${latest%\",}
+          echo "TEST: $GITHUB_SHA - $latest"
+          if [ "$GITHUB_SHA" == "$latest" ]
           then
             echo "No remote changes"
           else
-            echo "The remote branch was updated, cancelling build"
+            echo "The remote branch was updated with $latest, cancelling build"
             exit 1
           fi
         fi
