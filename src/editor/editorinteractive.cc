@@ -1448,17 +1448,17 @@ void EditorInteractive::write_lua(FileWrite& fw) const {
 	// Builtin includes
 	{
 		// We always include this one because it defines run()
-		std::set<std::string> includes = {"scripting/coroutine.lua"};
+		std::set<std::string> builtin_includes = {"scripting/coroutine.lua"};
 		// Check which other includes to include
 		for (const FS_FunctionCall* f : scripting_saver_->all<FS_FunctionCall>()) {
 			if (const BuiltinFunctionInfo* b = builtin_f(*f->get_function())) {
-				if (!b->included_from.empty() && !includes.count(b->included_from)) {
-					includes.insert(b->included_from);
+				if (!b->included_from.empty() && !builtin_includes.count(b->included_from)) {
+					builtin_includes.insert(b->included_from);
 				}
 			}
 		}
 		fw.print_f("\n");
-		for (const std::string& i : includes) {
+		for (const std::string& i : builtin_includes) {
 			fw.print_f("include \"%s\"\n", i.c_str());
 		}
 	}
