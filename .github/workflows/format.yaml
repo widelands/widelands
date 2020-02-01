@@ -26,7 +26,7 @@ jobs:
         password ${{ secrets.GITHUB_TOKEN }}
         EOF
         chmod 600 $HOME/.netrc
-        git remote add repo "git@github.com:$use_repo.git"
+        git remote add repo "https://github.com:$use_repo.git"
         git fetch repo
         if [ "${{ github.event_name }}" == "pull_request" ]
         then
