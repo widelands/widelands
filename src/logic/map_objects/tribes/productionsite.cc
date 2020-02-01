@@ -428,9 +428,9 @@ void ProductionSite::format_statistics_string() {
 	const unsigned int percent = std::min(get_actual_statistics() * 100 / 98, 100);
 	const std::string perc_str = g_gr->styles().color_tag(
 	   (boost::format(_("%i%%")) % percent).str(),
-	   (percent < 33) ? g_gr->styles().building_statistics_style().low_color() :
-	                    (percent < 66) ? g_gr->styles().building_statistics_style().medium_color() :
-	                                     g_gr->styles().building_statistics_style().high_color());
+	   (percent < 33) ? g_gr->styles().building_statistics_style().low_color() : (percent < 66) ?
+	                    g_gr->styles().building_statistics_style().medium_color() :
+	                    g_gr->styles().building_statistics_style().high_color());
 
 	if (0 < percent && percent < 100) {
 		RGBColor color = g_gr->styles().building_statistics_style().high_color();

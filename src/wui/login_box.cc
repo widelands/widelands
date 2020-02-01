@@ -50,17 +50,17 @@ LoginBox::LoginBox(Panel& parent)
 	    "\n\nhttps://widelands.org/accounts/register/\n\n")
 	      .str());
 
-	loginbtn = new UI::Button(
-	   this, "login",
-	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 :
-	                                   (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
-	   get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kWuiPrimary, _("Save"));
+	loginbtn =
+	   new UI::Button(this, "login", UI::g_fh->fontset()->is_rtl() ?
+	                                    (get_inner_w() / 2 - 200) / 2 :
+	                                    (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
+	                  get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kWuiPrimary, _("Save"));
 
-	cancelbtn = new UI::Button(
-	   this, "cancel",
-	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
-	                                   (get_inner_w() / 2 - 200) / 2,
-	   loginbtn->get_y(), 200, 20, UI::ButtonStyle::kWuiSecondary, _("Cancel"));
+	cancelbtn =
+	   new UI::Button(this, "cancel", UI::g_fh->fontset()->is_rtl() ?
+	                                     (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
+	                                     (get_inner_w() / 2 - 200) / 2,
+	                  loginbtn->get_y(), 200, 20, UI::ButtonStyle::kWuiSecondary, _("Cancel"));
 
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
 	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));

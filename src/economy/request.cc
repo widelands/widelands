@@ -51,22 +51,21 @@ Request::Request(PlayerImmovable& init_target,
                  DescriptionIndex const index,
                  CallbackFn const cbfn,
                  WareWorker const w)
-   : type_(w    )    ,     target_(init_target),
-     target_building_( dynamic_cast<Building*>(&init_target)),
-		     target_productionsite_ ( dynamic_cast < ProductionSite * > ( & init_target ) ) ,        	  target_warehouse_(dynamic_cast<Warehouse*>(&init_target)),
+   : type_(w),
+     target_(init_target),
+     target_building_(dynamic_cast<Building*>(&init_target)),
+     target_productionsite_(dynamic_cast<ProductionSite*>(&init_target)),
+     target_warehouse_(dynamic_cast<Warehouse*>(&init_target)),
      target_constructionsite_(dynamic_cast<ConstructionSite*>(&init_target)),
      economy_(init_target.get_economy(w)),
      index_(index),
      count_(1),
      exact_match_(false),
      callbackfn_(cbfn),
-     required_time_(init_target.
-owner ( )
-            .egbase().get_gametime ( )),
-     required_interval_   ( 0 ),
-     last_request_time_(   required_time_) {
-	assert(type_ ==   wwWARE 
- || type_ == wwWORKER);
+     required_time_(init_target.owner().egbase().get_gametime()),
+     required_interval_(0),
+     last_request_time_(required_time_) {
+	assert(type_ == wwWARE || type_ == wwWORKER);
 	if (w == wwWARE && !init_target.owner().egbase().tribes().ware_exists(index))
 		throw wexception(
 		   "creating ware request with index %u, but the ware for this index doesn't exist", index);

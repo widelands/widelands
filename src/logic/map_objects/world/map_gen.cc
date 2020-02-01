@@ -66,7 +66,7 @@ MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& map_ge
 	critter_density_ = static_cast<uint8_t>(get_uint(table, "critter_density"));
 
 	const auto do_assign = [&table, &map_gen_info](
-	                          const std::string& key, const MapGenBobCategory** our_pointer) {
+	   const std::string& key, const MapGenBobCategory** our_pointer) {
 		const std::string value = table.get_string(key);
 		if (value.empty()) {
 			*our_pointer = nullptr;
@@ -88,7 +88,7 @@ MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
 	weight_ = get_positive_int(table, "weight");
 
 	const auto read_terrains = [&table, &world](
-	                              const std::string& key, std::vector<DescriptionIndex>* list) {
+	   const std::string& key, std::vector<DescriptionIndex>* list) {
 		const std::vector<std::string> terrains = table.get_table(key)->array_entries<std::string>();
 
 		for (const std::string& terrain : terrains) {
