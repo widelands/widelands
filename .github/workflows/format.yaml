@@ -14,8 +14,8 @@ jobs:
       uses: actions/checkout@v2
     - name: Fetching branch info
       run: |
-        git branch #test
-        git status #test
+        git remote add repo "git@github.com:$use_repo.git"
+        git fetch repo
         if [ "${{ github.event_name }}" == "pull_request" ]
         then
           # In pull requests we need to figure out which branch in
@@ -31,6 +31,7 @@ jobs:
           label=${label%\",}
           u_repo="${label%:*}/widelands"
           u_branch=${label#*:}
+          git checkout -b "$u_branch" # PRs are in detached head state by default
         else
           u_branch="${GITHUB_REF##*/}"
           u_repo="${{ github.repository }}"
@@ -88,9 +89,6 @@ jobs:
         password ${{ secrets.GITHUB_TOKEN }}
         EOF
         chmod 600 $HOME/.netrc
-        git remote add repo "git@github.com:$use_repo.git"
-        git remote show repo #test
-        git show-ref #test
         set +e
         latest=$(curl -i "https://api.github.com/repos/$use_repo/commits/$use_branch" | grep -m 1 "\"sha\": ")
         set -e
