@@ -10,24 +10,25 @@ jobs:
     # clang-format has broken dependencies on ubuntu-latest
     runs-on: ubuntu-16.04
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Fetching branch info
       run: |
-        # Some info for checking for remote updates prior to pushing
         if [ "${{ github.event_name }}" == "pull_request" ]
         then
           # In pull requests we need to figure out which branch in
           # which repo to check for changes from which commit
-          set +e
+          set +e # grep will cancel curl after the first match
           u_sha=$(curl -i "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.number }}" | grep -m 1 "\"sha\": ")
+          label=$(curl -i "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.number }}" | grep -m 1 "\"label\": ")
+          set -e
           u_sha=${u_sha#*: \"}
           u_sha=${u_sha%\",}
-          label=$(curl -i "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.number }}" | grep -m 1 "\"label\": ")
+          # I assume here that forks are always called "username/widelands"
           label=${label#*: \"}
           label=${label%\",}
-          # I assume here that forks are always called "username/widelands"
           u_repo="${label%:*}/widelands"
           u_branch=${label#*:}
-          set -e
         else
           u_branch="${GITHUB_REF##*/}"
           u_repo="${{ github.repository }}"
@@ -46,8 +47,6 @@ jobs:
         sudo apt-get update
         sudo apt-get install clang-format
         pip install pyformat
-    - name: Checkout
-      uses: actions/checkout@v2
     - name: Invoking fix_formatting.py
       run: python3 ./utils/fix_formatting.py
     - name: Gathering changes
@@ -72,7 +71,7 @@ jobs:
         if [ -n "$COMMIT_MESSAGE" ]
         # skip if there's nothing to do
         then
-          set +e # grep will cancel curl after the first match
+          set +e
           latest=$(curl -i "https://api.github.com/repos/$use_repo/commits/$use_branch" | grep -m 1 "\"sha\": ")
           set -e
           latest=${latest#*: \"}
@@ -90,10 +89,18 @@ jobs:
       # If it does happen, the last step will most likely fail with a "branches
       # have diverged" error without affecting the newer push.
     - name: Committing and pushing changes
-      uses: stefanzweifel/git-auto-commit-action@v2.5.0
-      with:
-        commit_message: ${{ env.COMMIT_MESSAGE }}
-        branch: ${{ env.use_branch }}
-        repository: ${{ env.use_repo }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
+        cat <<- EOF > $HOME/.netrc
+        machine github.com
+        login $GITHUB_ACTOR
+        password ${{ secrets.GITHUB_TOKEN }}
+        machine api.github.com
+        login $GITHUB_ACTOR
+        password ${{ secrets.GITHUB_TOKEN }}
+EOF
+        chmod 600 $HOME/.netrc
+        set -v #testing
+        git remote add repo "git@github.com:$use_repo.git"
+        git commit -m "$COMMIT_MESSAGE"
+        git push repo "$use_branch"
