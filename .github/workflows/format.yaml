@@ -1,9 +1,16 @@
 name: Formatting your code
 on:
+  # We are interested only in master and PRs, but GitHub explicitly forbids
+  # pushing to the fork when an event is triggered on the base repo.
+  # We therefore need to intercept all calls and filter out the ones we are
+  # interested in.
+  # For master, and branches with an open PR, we run utils/fix_formatting.py.
+  # We then commit and push the changes to the branch.
+  # If someone pushes to the branch while we're still formatting,
+  # we exit 1 instead of pushing.
+  # For other branches without an open PR, we also run fix_formatting.py, but
+  # we do not push anything, only signal the code quality by exiting 0 or 1.
   push:
-    branches: master
-  pull_request:
-    types: [ opened, edited, reopened, synchronize ]
 jobs:
   run_formatting:
     name: Run fix_formatting.py
@@ -14,50 +21,35 @@ jobs:
       uses: actions/checkout@v2
     - name: Fetching branch info
       run: |
+        b="${GITHUB_REF##*/}"
+        if [ "$b" == "master" ]
+        then
+          echo "Always format master ($GITHUB_REF)"
+        else
+          forkname=${{ github.repository }}
+          # grep returns 1 if the branch is not found
+          set +e
+          output=$(curl -i "https://api.github.com/repos/widelands/widelands/pulls?state=open&head=${forkname%%/*}:$b" | grep "$b")
+          set -e
+          if [ -z "$output" ]
+          then
+            echo "Branch $b in repository $forkname does not have an open pull request"
+            b=""
+          fi
+        fi
+        echo "::set-env name=branch::$b"
         git config --global user.name "The Widelands Code Formatting Bot"
         git config --global user.email "actions@github.com"
-        if [ "${{ github.event_name }}" == "pull_request" ]
-        then
-          TOKEN=${{ secrets.WIDELANDS_FORMATTING_INTEGRATION_AUTHORIZATION }}
-          # In pull requests we need to figure out which branch in
-          # which repo to check for changes from which commit
-          set +e # grep will cancel curl after the first match
-          u_sha=$(curl -i "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.number }}" | grep -m 1 "\"sha\": ")
-          label=$(curl -i "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.number }}" | grep -m 1 "\"label\": ")
-          set -e
-          u_sha=${u_sha#*: \"}
-          u_sha=${u_sha%\",}
-          # I assume here that forks are always called "username/widelands"
-          label=${label#*: \"}
-          label=${label%\",}
-          u_repo="${label%:*}/widelands"
-          u_branch=${label#*:}
-          git remote rename origin upstream
-          git remote add origin "https://github.com/$u_repo.git"
-          git fetch origin
-          # PRs are in detached head state by default
-          git checkout "origin/$u_branch"
-          git checkout -b "$u_branch"
-        else
-          TOKEN=${{ secrets.GITHUB_TOKEN }}
-          u_branch="${GITHUB_REF##*/}"
-          u_repo="${{ github.repository }}"
-          u_sha="$GITHUB_SHA"
-        fi
         # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
         cat <<- EOF > $HOME/.netrc
         machine github.com
         login $GITHUB_ACTOR
-        password $TOKEN
+        password ${{ secrets.GITHUB_TOKEN }}
         machine api.github.com
         login $GITHUB_ACTOR
-        password $TOKEN
+        password ${{ secrets.GITHUB_TOKEN }}
         EOF
         chmod 600 $HOME/.netrc
-        echo "${{ github.event_name }} event on branch '$u_branch' at repo '$u_repo', last commit '$u_sha'"
-        echo "::set-env name=use_sha::$u_sha"
-        echo "::set-env name=use_repo::$u_repo"
-        echo "::set-env name=use_branch::$u_branch"
     - name: Installing python
       uses: actions/setup-python@v1
       with:
@@ -75,36 +67,45 @@ jobs:
         if [ $nrfiles == 0 ]
         then
           echo "Nothing to do"
-          FILES=""
-        elif [ $nrfiles == 1 ]
-        then
-          echo "1 file formatted"
-          nrfiles=$(git status -s)
-          FILES="'${nrfiles#???}' was automatically formatted."
+          files=""
         else
-          echo "$nrfiles files formatted"
-          FILES="$nrfiles files were automatically formatted."
+          if [ $nrfiles == 1 ]
+          then
+            echo "1 file formatted"
+            nrfiles=$(git status -s)
+            files="'${nrfiles#???}' was automatically formatted."
+          else
+            echo "$nrfiles files formatted"
+            files="$nrfiles files were automatically formatted."
+          fi
+          if [ -z "$branch" ]
+          then
+            echo "Your branch does not have an open pull request, so no changes will be pushed. Please note however that your code is not properly formatted."
+            git diff
+            exit 1
+          fi
         fi
-        echo "::set-env name=COMMIT_MESSAGE::$FILES"
+        echo "::set-env name=COMMIT_MESSAGE::$files"
     - name: Getting the changes into the branch
       run: |
         if [ -z "$COMMIT_MESSAGE" ]
         # skip if there's nothing to do
         then
-          echo "Nothing to do"
+          echo "Code was already correctly formatted"
           exit 0
         fi
         set +e
-        latest=$(curl -i "https://api.github.com/repos/$use_repo/commits/$use_branch" | grep -m 1 "\"sha\": ")
+        latest=$(curl -i "https://api.github.com/repos/${{ github.repository }}/commits/$branch" | grep -m 1 "\"sha\": ")
         set -e
         latest=${latest#*: \"}
         latest=${latest%\",}
-        if [ "$latest" == "$use_sha" ]
+        if [ "$latest" == "${{ github.sha }}" ]
         then
           echo "No remote changes"
           git commit -m "$COMMIT_MESSAGE"
-          git push origin "$use_branch"
+          git push origin "$branch"
+          echo "Changes were successfully pushed to $branch at ${{ github.repository }}. Don't forget to run 'git pull' before pushing to the branch again."
         else
-          echo "The remote branch '$use_branch' from '$use_repo' was updated from '$use_sha' to '$latest', cancel"
+          echo "The remote branch '$branch' ($GITHUB_REF) from '${{ github.repository }}' was updated from '$${{ github.sha }}' to '$latest', cancel"
           exit 1
         fi
