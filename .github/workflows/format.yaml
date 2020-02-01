@@ -48,11 +48,14 @@ jobs:
         # skip if there's nothing to do
         then
           set +e # grep will cancel curl after the first match
+          curl -i "https://api.github.com/repos/${{ github.repository }}/commits/$BRANCH_NAME" | grep -m 1 "\"sha\": " #test
           latest=$(curl -i "https://api.github.com/repos/${{ github.repository }}/commits/$BRANCH_NAME" | grep -m 1 "\"sha\": ")
           set -e
+          echo "$latest" #test
           latest=${latest##* \"}
+          echo "$latest" #test
           latest=${latest%\",}
-          echo "TEST: $GITHUB_SHA - $latest"
+          echo "$latest" #test
           if [ "$GITHUB_SHA" == "$latest" ]
           then
             echo "No remote changes"
