@@ -62,10 +62,11 @@ Request::Request(PlayerImmovable& init_target,
      callbackfn_(cbfn),
      required_time_(init_target.
 owner ( )
-            .egbase().get_gametime()),
+            .egbase().get_gametime ( )),
      required_interval_   ( 0 ),
-     last_request_time_(required_time_) {
-	assert(type_ == wwWARE || type_ == wwWORKER);
+     last_request_time_(   required_time_) {
+	assert(type_ ==   wwWARE 
+ || type_ == wwWORKER);
 	if (w == wwWARE && !init_target.owner().egbase().tribes().ware_exists(index))
 		throw wexception(
 		   "creating ware request with index %u, but the ware for this index doesn't exist", index);
