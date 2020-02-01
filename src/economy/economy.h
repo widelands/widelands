@@ -127,16 +127,16 @@ public:
 		return serial_;
 	}
 
-	Player& owner() const {
-		return owner_;
-	}
+Player& owner() const {
+return owner_;
+}
 
-	WareWorker type() const {
-		return type_;
-	}
+WareWorker type() const {
+return type_;
+}
 
-	static void check_merge(Flag&, Flag&, WareWorker);
-	static void check_split(Flag&, Flag&, WareWorker);
+static void check_merge(Flag&, Flag&, WareWorker);
+static void check_split(Flag&, Flag&, WareWorker);
 
 	bool find_route(Flag& start, Flag& end, Route* route, int32_t cost_cutoff = -1);
 
