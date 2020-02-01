@@ -66,30 +66,16 @@ jobs:
           FILES="$nrfiles files were automatically formatted."
         fi
         echo "::set-env name=COMMIT_MESSAGE::$FILES"
-    - name: Checking for remote updates
+    - name: Getting the changes into the branch
       run: |
-        if [ -n "$COMMIT_MESSAGE" ]
+        if [ -z "$COMMIT_MESSAGE" ]
         # skip if there's nothing to do
         then
-          set +e
-          latest=$(curl -i "https://api.github.com/repos/$use_repo/commits/$use_branch" | grep -m 1 "\"sha\": ")
-          set -e
-          latest=${latest#*: \"}
-          latest=${latest%\",}
-          if [ "$latest" == "$use_sha" ]
-          then
-            echo "No remote changes"
-          else
-            echo "The remote branch '$use_branch' from '$use_repo' was updated with '$latest' (we are on '$use_sha'), cancelling build"
-            exit 1
-          fi
+          echo "Nothing to do"
+          exit 0
         fi
-      # In theory, a new push can hit the branch in this brief delay between check
-      # and push. But this is such a narrow time window that it's unlikely.
-      # If it does happen, the last step will most likely fail with a "branches
-      # have diverged" error without affecting the newer push.
-    - name: Committing and pushing changes
-      run: |
+        git config --global user.name "The Widelands Code Formatting Bot"
+        git config --global user.email "actions@github.com"
         # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
         cat <<- EOF > $HOME/.netrc
         machine github.com
@@ -102,5 +88,17 @@ jobs:
         chmod 600 $HOME/.netrc
         set -v #testing
         git remote add repo "git@github.com:$use_repo.git"
-        git commit -m "$COMMIT_MESSAGE"
-        git push repo "$use_branch"
+        set +e
+        latest=$(curl -i "https://api.github.com/repos/$use_repo/commits/$use_branch" | grep -m 1 "\"sha\": ")
+        set -e
+        latest=${latest#*: \"}
+        latest=${latest%\",}
+        if [ "$latest" == "$use_sha" ]
+        then
+          echo "No remote changes"
+          git commit -m "$COMMIT_MESSAGE"
+          git push repo "$use_branch"
+        else
+          echo "The remote branch '$use_branch' from '$use_repo' was updated with '$latest' (we are on '$use_sha'), not pushing changes"
+          exit 1
+        fi
