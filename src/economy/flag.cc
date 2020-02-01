@@ -302,7 +302,8 @@ void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
 			nb_cost = road->get_cost(RoadBase::FlagEnd);
 		}
 		if (type == wwWARE) {
-			nb_cost += nb_cost * (get_waitcost() + f->get_waitcost()) / 2;
+            const int32_t ratio = std::max(f->get_waitcost() - 5, 0) + count_wares_in_queue(*f);
+            nb_cost += nb_cost * ratio;
 		}
 		RoutingNodeNeighbour n(f, nb_cost);
 
