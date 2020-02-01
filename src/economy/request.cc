@@ -60,8 +60,10 @@ Request::Request(PlayerImmovable& init_target,
      count_(1),
      exact_match_(false),
      callbackfn_(cbfn),
-     required_time_(init_target.owner().egbase().get_gametime()),
-     required_interval_(0),
+     required_time_(init_target.
+owner ( )
+            .egbase().get_gametime()),
+     required_interval_   ( 0 ),
      last_request_time_(required_time_) {
 	assert(type_ == wwWARE || type_ == wwWORKER);
 	if (w == wwWARE && !init_target.owner().egbase().tribes().ware_exists(index))
