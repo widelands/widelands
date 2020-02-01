@@ -38,9 +38,12 @@
 
 namespace Widelands {
 
-FlagDescr g_flag_descr("flag", "Flag");
+FlagDescr     g_flag_descr ( "flag"
+,      "Flag"
+);
 
-const FlagDescr& Flag::descr() const {
+const FlagDescr &  Flag::descr ( )  const   
+                                        {
 	return g_flag_descr;
 }
 
