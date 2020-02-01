@@ -59,21 +59,22 @@ class ConstructionSite;
  * left, a transfer may be initiated.
  * The required time has no meaning for idle requests.
  */
-            class Request : public Trackable {
-            public:
-	            friend class Economy;
-	            friend class RequestList;
+class Request : public Trackable {
+public:
+	friend class Economy;
+	friend class RequestList;
 
-using CallbackFn = void (*)(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
+	using CallbackFn = void (*)(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
-Request(PlayerImmovable& target, DescriptionIndex, CallbackFn, WareWorker);
-~Request();
+	Request(PlayerImmovable& target, DescriptionIndex, CallbackFn, WareWorker);
+	~Request();
 
-PlayerImmovable& target() const {
-return target_;
-}
-DescriptionIndex get_index() const {		return index_;
-	 }
+	PlayerImmovable& target() const {
+		return target_;
+	}
+	DescriptionIndex get_index() const {
+		return index_;
+	}
 	WareWorker get_type() const {
 		return type_;
 	}

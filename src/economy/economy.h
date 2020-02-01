@@ -50,14 +50,14 @@ struct Router;
 struct Supply;
 class Economy;
 
-    struct        NoteEconomy    {
-	CAN_BE_SENT_AS_NOTE(NoteId::Economy        )
+struct NoteEconomy {
+	CAN_BE_SENT_AS_NOTE(NoteId::Economy)
 
-// When 2 economies have been merged, this is the economy number that has
-// been removed, while the other one is the number of the resulting economy.
-// For all other messages old_economy == new_economy.
-Widelands::Serial old_economy;
-Widelands::Serial new_economy;
+	// When 2 economies have been merged, this is the economy number that has
+	// been removed, while the other one is the number of the resulting economy.
+	// For all other messages old_economy == new_economy.
+	Widelands::Serial old_economy;
+	Widelands::Serial new_economy;
 
 	enum class Action { kMerged, kDeleted };
 	const Action action;
@@ -123,17 +123,17 @@ public:
 	explicit Economy(Player&, Serial serial, WareWorker);  // For saveloading
 	~Economy();
 
-Serial serial() const {
-return serial_;
-}
+	Serial serial() const {
+		return serial_;
+	}
 
 	Player& owner() const {
 		return owner_;
-}
+	}
 
-WareWorker type() const {
-return type_;
-}
+	WareWorker type() const {
+		return type_;
+	}
 
 	static void check_merge(Flag&, Flag&, WareWorker);
 	static void check_split(Flag&, Flag&, WareWorker);
