@@ -47,7 +47,8 @@ jobs:
         if [ -n "$COMMIT_MESSAGE" ]
         # skip if there's nothing to do
         then
-          git fetch -n origin
+          git remote #for testing
+          git fetch origin
           head1=$(git merge-base $BRANCH_NAME origin/$BRANCH_NAME)
           head2=$(git rev-parse origin/$BRANCH_NAME)
           if [ $head1 == $head2 ]
