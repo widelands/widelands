@@ -47,21 +47,38 @@ jobs:
         if [ -n "$COMMIT_MESSAGE" ]
         # skip if there's nothing to do
         then
-          echo "$BRANCH_NAME ($GITHUB_REF)" #test
-          curl -i "https://api.github.com/repos/${{ github.repository }}/commits/$BRANCH_NAME" #test
+          if [[ $GITHUB_REF =~ refs\/pulls\/[0-9]+\/merge ]]
+          then
+            # In pull requests we need to figure out which branch in
+            # which repo to check for changes from which commit
+            set +e
+            use_sha=$(curl -i "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.number }}" | grep -m 1 "\"sha\": ")
+            use_sha=${use_sha#*: \"}
+            use_sha=${use_sha%\",}
+            label=$(curl -i "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.number }}" | grep -m 1 "\"label\": ")
+            label=${label#*: \"}
+            label=${label%\",}
+            use_repo=${label%:*}
+            use_branch=${label#*:}
+            set -e
+          else
+            use_branch="$BRANCH_NAME"
+            use_repo="${{ github.repository }}"
+            use_sha="$GITHUB_SHA"
+          fi
+          echo "TEST +++++++++++++++++"
+          echo "TEST $use_branch from $use_repo at $use_sha"
+          echo "TEST +++++++++++++++++"
           set +e # grep will cancel curl after the first match
-          latest=$(curl -i "https://api.github.com/repos/${{ github.repository }}/commits/$BRANCH_NAME" | grep -m 1 "\"sha\": ")
+          latest=$(curl -i "https://api.github.com/repos/$use_repo/commits/$use_branch" | grep -m 1 "\"sha\": ")
           set -e
-          echo "$latest" #test
-          latest=${latest##* \"}
-          echo "$latest" #test
+          latest=${latest#* \"}
           latest=${latest%\",}
-          echo "$latest" #test
-          if [ "$GITHUB_SHA" == "$latest" ]
+          if [ "$latest" == "$use_sha" ]
           then
             echo "No remote changes"
           else
-            echo "The remote branch was updated with $latest, cancelling build"
+            echo "The remote branch ($use_branch at $use_repo) was updated with $latest (we are on $use_sha), cancelling build"
             exit 1
           fi
         fi
