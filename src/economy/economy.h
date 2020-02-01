@@ -123,17 +123,17 @@ public:
 	explicit Economy(Player&, Serial serial, WareWorker);  // For saveloading
 	~Economy();
 
-	Serial serial() const {
-		return serial_;
-	}
+Serial serial() const {
+return serial_;
+}
 
 	Player& owner() const {
 		return owner_;
-	}
+}
 
-	WareWorker type() const {
-		return type_;
-	}
+WareWorker type() const {
+return type_;
+}
 
 	static void check_merge(Flag&, Flag&, WareWorker);
 	static void check_split(Flag&, Flag&, WareWorker);

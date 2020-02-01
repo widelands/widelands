@@ -33,8 +33,10 @@ jobs:
           set -e
           if [ -z "$output" ]
           then
-            echo "Branch $b in repository $forkname does not have an open pull request"
+            echo "Branch $b in repository $forkname does NOT have an open pull request"
             b=""
+          else
+            echo "Branch $b in repository $forkname has an open pull request"
           fi
         fi
         echo "::set-env name=branch::$b"
