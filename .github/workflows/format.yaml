@@ -98,7 +98,7 @@ jobs:
         machine api.github.com
         login $GITHUB_ACTOR
         password ${{ secrets.GITHUB_TOKEN }}
-EOF
+        EOF
         chmod 600 $HOME/.netrc
         set -v #testing
         git remote add repo "git@github.com:$use_repo.git"
