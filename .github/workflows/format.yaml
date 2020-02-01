@@ -47,6 +47,7 @@ jobs:
         if [ -n "$COMMIT_MESSAGE" ]
         # skip if there's nothing to do
         then
+          git remote show origin
           git remote update origin
           head1=$(git merge-base $BRANCH_NAME origin/$BRANCH_NAME)
           head2=$(git rev-parse origin/$BRANCH_NAME)
