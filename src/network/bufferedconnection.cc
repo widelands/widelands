@@ -304,6 +304,24 @@ void BufferedConnection::start_receiving() {
 	   });
 }
 
+void BufferedConnection::reduce_send_buffer(boost::asio::ip::tcp::socket& socket) {
+	// Reduce the size of the send buffer. This will result in (slightly) slower
+	// file transfers but keeps the program responsive (e.g., chat messages are
+	// displayed) while transmitting files
+	boost::system::error_code ec;
+	boost::asio::socket_base::send_buffer_size send_buffer_size;
+	socket.get_option(send_buffer_size, ec);
+	if (!ec && send_buffer_size.value() > 20 * static_cast<int>(kNetworkBufferSize)) {
+		const boost::asio::socket_base::send_buffer_size new_buffer_size(20 * kNetworkBufferSize);
+		socket.set_option(new_buffer_size, ec);
+		// Ignore error. When it fails, chat messages will lag while transmitting files,
+		// but nothing really bad happens
+		if (ec) {
+			log("[BufferedConnection] Warning: Failed to reduce send buffer size\n");
+		}
+	}
+}
+
 BufferedConnection::BufferedConnection(const NetAddress& host)
    : io_service_(), socket_(io_service_), receive_buffer_(), currently_sending_(false) {
 
@@ -315,6 +333,8 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 	socket_.connect(destination, ec);
 	if (!ec && is_connected()) {
 		log("success.\n");
+
+		reduce_send_buffer(socket_);
 
 		// start_receiving() has to be called before the thread is started,
 		// otherwise the thread terminates again immediately
@@ -351,6 +371,8 @@ BufferedConnection::BufferedConnection(boost::asio::ip::tcp::acceptor& acceptor)
 	log("[BufferedConnection] Accepting connection from %s.\n",
 	    socket_.remote_endpoint().address().to_string().c_str());
 
+	reduce_send_buffer(socket_);
+
 	start_receiving();
 	asio_thread_ = std::thread([this]() {
 		// The output might actually be messed up if it collides with the main thread...
@@ -369,6 +391,8 @@ void BufferedConnection::notify_connected() {
 
 	log("[BufferedConnection] Connection to %s.\n",
 	    socket_.remote_endpoint().address().to_string().c_str());
+
+	reduce_send_buffer(socket_);
 
 	start_receiving();
 	asio_thread_ = std::thread([this]() {
