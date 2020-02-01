@@ -40,5 +40,4 @@ documentation)
    sphinx-build -W -b json -d build/doctrees source build/json
    popd
    ;;
-   ;;
 esac
