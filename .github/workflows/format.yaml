@@ -26,8 +26,6 @@ jobs:
         password ${{ secrets.GITHUB_TOKEN }}
         EOF
         chmod 600 $HOME/.netrc
-        git remote add repo "https://github.com:${use_repo}.git"
-        git fetch repo
         if [ "${{ github.event_name }}" == "pull_request" ]
         then
           # In pull requests we need to figure out which branch in
@@ -53,6 +51,7 @@ jobs:
         echo "::set-env name=use_sha::$u_sha"
         echo "::set-env name=use_repo::$u_repo"
         echo "::set-env name=use_branch::$u_branch"
+        git remote add repo "https://github.com:$u_repo.git"
     - name: Installing python
       uses: actions/setup-python@v1
       with:
