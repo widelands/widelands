@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-01-18 16:28+0000\n"
+"POT-Creation-Date: 2020-01-21 18:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -526,7 +526,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:54
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:65
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:58
-#: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:51
+#: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:52
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:68
@@ -541,7 +541,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:67
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:50
+#: ../../data/tribes/buildings/productionsites/barbarians/ferry_yard/init.lua:51
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:54
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:68
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:58
@@ -555,7 +555,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:54
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:68
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:57
-#: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:50
+#: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:51
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:54
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:66
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:47
@@ -574,7 +574,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:70
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:87
-#: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:55
+#: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:71
@@ -4717,7 +4717,7 @@ msgid "Farmer"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/ferry/init.lua:28
+#: ../../data/tribes/workers/atlanteans/ferry/init.lua:7
 msgctxt "atlanteans_worker"
 msgid "Ferry"
 msgstr ""
@@ -4921,7 +4921,7 @@ msgid "Farmer"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/barbarians/ferry/init.lua:28
+#: ../../data/tribes/workers/barbarians/ferry/init.lua:7
 msgctxt "barbarians_worker"
 msgid "Ferry"
 msgstr ""
@@ -5119,7 +5119,7 @@ msgid "Farmer"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/empire/ferry/init.lua:28
+#: ../../data/tribes/workers/empire/ferry/init.lua:7
 msgctxt "empire_worker"
 msgid "Ferry"
 msgstr ""
@@ -5347,7 +5347,7 @@ msgid "Farmer"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/frisians/ferry/init.lua:28
+#: ../../data/tribes/workers/frisians/ferry/init.lua:7
 msgctxt "frisians_worker"
 msgid "Ferry"
 msgstr ""

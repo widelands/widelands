@@ -65,7 +65,7 @@ constexpr uint16_t kCurrentPacketPFBuilding = 1;
 // Responsible for warehouses and expedition bootstraps
 constexpr uint16_t kCurrentPacketVersionWarehouse = 7;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
-constexpr uint16_t kCurrentPacketVersionProductionsite = 7;
+constexpr uint16_t kCurrentPacketVersionProductionsite = 8;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 5;
 
 void MapBuildingdataPacket::read(FileSystem& fs,
@@ -744,10 +744,20 @@ void MapBuildingdataPacket::read_productionsite(
 				}
 			}
 
-			uint16_t const stats_size = fr.unsigned_16();
-			productionsite.statistics_.resize(stats_size);
-			for (uint32_t i = 0; i < productionsite.statistics_.size(); ++i)
-				productionsite.statistics_[i] = fr.unsigned_8();
+			// TODO(hessenfarmer): Savegame compatibility, remove after Build 21.
+			if (packet_version >= 8) {
+				productionsite.actual_percent_ = fr.unsigned_32();
+			} else {
+				uint16_t const stats_size = fr.unsigned_16();
+				uint8_t ok = 0;
+				for (uint16_t i = 0; i < stats_size; ++i) {
+					if (fr.unsigned_8()) {
+						ok++;
+					}
+				}
+				productionsite.actual_percent_ = ok * 1000 / stats_size;
+			}
+
 			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();
 			productionsite.production_result_ = fr.c_string();
 
@@ -1224,10 +1234,7 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 		}
 	}
 
-	const uint16_t statistics_size = productionsite.statistics_.size();
-	fw.unsigned_16(statistics_size);
-	for (uint32_t i = 0; i < statistics_size; ++i)
-		fw.unsigned_8(productionsite.statistics_[i]);
+	fw.unsigned_32(productionsite.actual_percent_);
 	fw.string(productionsite.statistics_string_on_changed_statistics_);
 	fw.string(productionsite.production_result());
 
