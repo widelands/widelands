@@ -42,7 +42,8 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "log", amount = 8 },
+      { name = "log", amount = 6 },
+      { name = "spidercloth", amount = 3 },
    },
 
    programs = {
@@ -52,7 +53,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=20000",
             "callworker=buildferry_1",
-            "consume=log:3",
+            "consume=log:2 spidercloth",
             "callworker=buildferry_2"
          }
       },

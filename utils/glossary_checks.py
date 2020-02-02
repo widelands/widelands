@@ -48,7 +48,7 @@ class GlossaryEntry:
     """An entry in our parsed glossaries."""
 
     def __init__(self):
-         # Base form of the term, followed by any inflected forms
+        # Base form of the term, followed by any inflected forms
         self.terms = []
         # Base form of the translation, followed by any inflected forms
         self.translations = []
@@ -79,7 +79,7 @@ class HunspellLocale:
     installed."""
 
     def __init__(self, locale):
-         # Specific language/country code for Hunspell, e.g. el_GR
+        # Specific language/country code for Hunspell, e.g. el_GR
         self.locale = locale
         # Whether a dictionary has been found for the locale
         self.is_available = False

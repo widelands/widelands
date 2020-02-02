@@ -74,6 +74,7 @@ static RGBAColor workarea_colors[]  // Comment to prevent clang-format from brea
       RGBAColor(63, 0, 127, kWorkareaTransparency),   // Inner and medium circle
       RGBAColor(127, 0, 0, kWorkareaTransparency),    // Medium circle
       RGBAColor(0, 0, 127, kWorkareaTransparency),    // Inner circle
+      RGBAColor(0, 0, 0, 0),
    };
 static inline RGBAColor apply_color(RGBAColor c1, RGBAColor c2) {
 	if (c1.a == 0 && c2.a == 0) {

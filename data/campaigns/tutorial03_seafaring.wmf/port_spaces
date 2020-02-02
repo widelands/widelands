@@ -1,7 +1,8 @@
-# Automatically created by Widelands bzr7199[trunk] (Release)
+# Automatically created by Widelands r24299[902bd84@ferry2] (Release)
 
 [global]
 packet_version="1"
+waterway_max_length="5"
 number_of_port_spaces="4"
 
 [port_spaces]
