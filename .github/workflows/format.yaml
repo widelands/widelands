@@ -96,7 +96,7 @@ jobs:
           echo "Code was already correctly formatted"
           exit 0
         fi
-        set +e
+        set +e # curl exits 23 because grep will kill it after the first match
         latest=$(curl -i "https://api.github.com/repos/${{ github.repository }}/commits/$branch" | grep -m 1 "\"sha\": ")
         set -e
         latest=${latest#*: \"}
@@ -108,6 +108,6 @@ jobs:
           git push origin "$branch"
           echo "Changes were successfully pushed to $branch at ${{ github.repository }}. Don't forget to run 'git pull' before pushing to the branch again."
         else
-          echo "The remote branch '$branch' ($GITHUB_REF) from '${{ github.repository }}' was updated from '$${{ github.sha }}' to '$latest', cancel"
+          echo "The remote branch '$branch' ($GITHUB_REF) from '${{ github.repository }}' was updated from '${{ github.sha }}' to '$latest', cancel"
           exit 1
         fi
