@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # Jaypad <ju-ju@nataju.fr>, 2015
-# Renaud Bouchard, 2016-2019
+# Renaud Bouchard, 2016-2020
 # Tubuntu <tubuntu@testimonium.be>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-10-09 07:57+0000\n"
-"PO-Revision-Date: 2019-10-15 07:53+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-10 12:51+0000\n"
+"PO-Revision-Date: 2020-01-16 20:17+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Afterwards, choose ‘Buildings’."
-msgstr ""
+msgstr "Après ça, choisissez 'Bâtiments'."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:59
 msgid "You can also use the hotkey ‘b’."
@@ -133,7 +133,7 @@ msgstr "Regardez combien de tavernes vous possédez"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:76
 msgid "We want to know whether we still have taverns."
-msgstr ""
+msgstr "Nous voulons savoir si nous avons toujours des tavernes."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:78
 msgid "Choose the ‘Medium buildings’ tab in the building statistics window."
@@ -210,7 +210,7 @@ msgstr "Si vous n'avez aucun bâtiment d'un certain type, il sera grisé."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
 msgid "This is enough explanation for now. Now try it out yourself."
-msgstr ""
+msgstr "Assez d'explications pour l'instant. Maintenant essayez par vous même."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:103
 msgid "You closed the building statistics window!"
@@ -251,7 +251,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 msgid "Afterwards, choose ‘Stock’."
-msgstr ""
+msgstr "Après ça, choisissez 'Stock'."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:133
 msgid ""
@@ -443,7 +443,7 @@ msgstr "A soldat à besoin d'une lance en bois et d'un casque – D'un point à 
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:254
 msgid "Use the encyclopedia to find out how to create new soldiers."
-msgstr ""
+msgstr "Utilisez l'encyclopédie pour trouver comment créer de nouveau soldats."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:255
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
@@ -617,7 +617,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:342
 msgid ""
 "I’ll continue as soon as you click on the third tab (‘Economy health’)."
-msgstr ""
+msgstr "Je continuerai dès que vous cliquerez sur le troisième onglet ('Santé économique')."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:352
@@ -636,7 +636,7 @@ msgstr "Essayez maintenant. Vous pouvez aussi comparer avec les deux onglets pr�
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:355
 msgid "When you have seen enough, switch to the fourth tab (‘Stock’)."
-msgstr ""
+msgstr "Quand vous en avez assez vu, basculez vers le quatrième onglet ('Stock')."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:363
 msgid ""

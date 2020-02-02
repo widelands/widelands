@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-12-10 17:11+0000\n"
-"PO-Revision-Date: 2019-12-13 18:10+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2020-01-02 17:13+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -573,11 +573,12 @@ msgstr "Panzersmee"
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:56
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:66
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:52
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:67
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:69
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:74
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:74
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:65
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:86
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:70
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:87
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:55
@@ -590,7 +591,7 @@ msgstr "Panzersmee"
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:74
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:68
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:75
+#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:76
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:76
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:61
@@ -831,7 +832,7 @@ msgstr "Fisstüchteree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:76
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:78
 msgid "breeding fish"
 msgstr "Fisse to tüchten"
 
@@ -873,7 +874,7 @@ msgstr "Fiskeree"
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:57
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:49
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:88
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:90
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:62
 msgid "fishing"
 msgstr "Fisse to fangen"
@@ -1176,7 +1177,7 @@ msgstr "Iesen to smelten"
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:79
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:83
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:84
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:106
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:108
 msgid "smelting gold"
 msgstr "Gold to smelten"
 
@@ -1188,13 +1189,13 @@ msgstr "Rökelkamer"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:68
-#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:95
+#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:96
 msgid "smoking meat"
 msgstr "Fleesk to rökeln"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:80
-#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:85
 msgid "smoking fish"
 msgstr "Fisse to rökeln"
 
@@ -2411,22 +2412,23 @@ msgctxt "frisians_building"
 msgid "Aqua Farm"
 msgstr "Fissbuurderee"
 
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:101
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:101
 msgid "No Ponds"
 msgstr "Keene Polen"
 
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:100
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:102
 msgid "Out of Fish Ponds"
 msgstr "Hebb keene Polen mehr"
 
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:101
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:103
 msgctxt "frisians_building"
 msgid ""
 "The fisher working at this aqua farm can’t find any fish ponds in his work "
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr "De Fisker dat warkt bi deese Fissbuurderee hett keene Polen mehr. Bidde pass up dat eene Lehmkuhl in de Naberskupp arbeidt un de Fissbuurderee all’s hett wat se tum Arbeiden bruukt. Oder Överlegg di, of du dat Huus ofbrannen of plattrieten willt."
+msgstr "De Fisker dat warkt bi deese Fissbuurderee hett keene Polen mehr. Bidde pass up dat eene Lehmkuhl in de Naberskupp arbeidt un de Fissbuurderee all’s hett wat se tum Arbeiden bruukt. Of överlegg di, of du dat Huus ofbrannen of plattrieten willt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:7
@@ -2514,7 +2516,7 @@ msgid ""
 "The beekeeper working at this beekeepers’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr "De Imker dat warkt bi deese Imkeree hett keene Felden of Busken mit Blössems in de Naberskupp. Bau een Buurderee of Buskenplanteree of Överlegg di, of du dat Huus plattrieten of ofbrannen willt."
+msgstr "De Imker dat warkt bi deese Imkeree hett keene Felden of Busken mit Blössems in de Naberskupp. Bau een Buurderee of Buskenplanteree of överlegg di, of du dat Huus plattrieten of ofbrannen willt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:7
@@ -2567,6 +2569,36 @@ msgid "burning bricks"
 msgstr "Backstenen to brannen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:7
+msgctxt "frisians_building"
+msgid "Charcoal Burner’s House"
+msgstr "Köhleree"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack
+#. because ...
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:79
+msgid "making a charcoal stack"
+msgstr "eenen Köhler-Stapel uptoschichten"
+
+#. TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:90
+msgid "collecting coal"
+msgstr "Köhl to pottjen"
+
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:102
+msgid "Out of Clay Ponds"
+msgstr "Hebb keene Kuhlen mehr"
+
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:103
+msgctxt "frisians_building"
+msgid ""
+"The charcoal burner working at this charcoal burner’s house can’t find any "
+"clay ponds in his work area. Please make sure there is a working clay pit "
+"nearby and the charcoal burner’s house is supplied with all needed wares, or"
+" consider dismantling or destroying this building."
+msgstr "De Holtköhlbranner dat warkt bi deese Köhleree hett keene Kuhlen mehr. Bidde pass up dat eene Lehmkuhl in de Naberskupp arbeidt un de Köhleree all’s hett wat se tum Arbeiden bruukt. Of överlegg di, of du dat Huus ofbrannen of plattrieten willt."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:7
 msgctxt "frisians_building"
 msgid "Charcoal Kiln"
@@ -2579,20 +2611,20 @@ msgid "Clay Pit"
 msgstr "Lehmkuhl"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
-#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:79
+#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:80
 msgid "making clay"
 msgstr "Lehm to maken"
 
 #. TRANSLATORS: Short for "No Level Ground" for clay pits
-#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:95
+#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:97
 msgid "No Ground"
 msgstr "Keen Klei"
 
-#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:96
+#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:98
 msgid "No Level Ground"
 msgstr "Hebb keen Klei mehr"
 
-#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:97
+#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:99
 msgctxt "frisians_building"
 msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
@@ -2652,7 +2684,7 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr "De Früchtenpottjer dat warkt bi deese Früchtenpottjeree hett keene Busken mit Früchten in de Naberskupp. Bau een Buskenplanteree of Överlegg di, of du dat Huus plattrieten of ofbrannen willt."
+msgstr "De Früchtenpottjer dat warkt bi deese Früchtenpottjeree hett keene Busken mit Früchten in de Naberskupp. Bau een Buskenplanteree of överlegg di, of du dat Huus plattrieten of ofbrannen willt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:7
@@ -3242,25 +3274,25 @@ msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "Soldaten-Angriff vun Stand 3 to Stand 4 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:148
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:147
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "Soldaten-Angriff vun Stand 4 to Stand 5 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:165
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:163
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
 msgstr "Soldaten-Angriff vun Stand 5 to Stand 6 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:182
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:180
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "Soldaten-Verteidigung vun Stand 1 to Stand 2 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:198
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:196
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "Soldaten-Gesundheid vun Stand 1 to Stand 2 to verbetern"
@@ -3284,19 +3316,19 @@ msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "Soldaten-Angriff vun Stand 1 to Stand 2 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:163
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:162
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "Soldaten-Angriff vun Stand 2 to Stand 3 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:180
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:178
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "Soldaten-Gesundheid vun Stand 0 to Stand 1 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:194
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:192
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "Soldaten-Verteidigung vun Stand 0 to Stand 1 to verbetern"
@@ -3420,15 +3452,15 @@ msgstr "Garstenacker (ganz lütt)"
 msgid "Blueberry Bush (tiny)"
 msgstr "Bickbeei (ganz lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:43
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:42
 msgid "Blueberry Bush (small)"
 msgstr "Bickbeei (lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:71
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:69
 msgid "Blueberry Bush (medium)"
 msgstr "Bickbeei (middel)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:99
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:96
 msgid "Blueberry Bush (ripe)"
 msgstr "Bickbeei (riep)"
 
@@ -3436,15 +3468,15 @@ msgstr "Bickbeei (riep)"
 msgid "Black Currant (tiny)"
 msgstr "Kakelbeei (ganz lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:41
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:40
 msgid "Black Currant (small)"
 msgstr "Kakelbeei (lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:69
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:67
 msgid "Black Currant (medium)"
 msgstr "Kakelbeei (middel)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:97
+#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:94
 msgid "Black Currant (ripe)"
 msgstr "Kakelbeei (riep)"
 
@@ -3452,15 +3484,15 @@ msgstr "Kakelbeei (riep)"
 msgid "Red Currant (tiny)"
 msgstr "Albeei (ganz lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:41
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:40
 msgid "Red Currant (small)"
 msgstr "Albeei (lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:69
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:67
 msgid "Red Currant (medium)"
 msgstr "Albeei (middel)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:97
+#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:94
 msgid "Red Currant (ripe)"
 msgstr "Albeei (riep)"
 
@@ -3468,15 +3500,15 @@ msgstr "Albeei (riep)"
 msgid "Desert Hackberry (tiny)"
 msgstr "Wüüstenbeei (ganz lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:41
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:40
 msgid "Desert Hackberry (small)"
 msgstr "Wüüstenbeei (lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:69
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:67
 msgid "Desert Hackberry (medium)"
 msgstr "Wüüstenbeei (middel)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:97
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:94
 msgid "Desert Hackberry (ripe)"
 msgstr "Wüüstenbeei (riep)"
 
@@ -3484,15 +3516,15 @@ msgstr "Wüüstenbeei (riep)"
 msgid "Juniper (tiny)"
 msgstr "Wacholder (ganz lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:41
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:40
 msgid "Juniper (small)"
 msgstr "Wacholder (lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:69
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:67
 msgid "Juniper (medium)"
 msgstr "Wacholder (middel)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:97
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:94
 msgid "Juniper (ripe)"
 msgstr "Wacholder (riep)"
 
@@ -3500,15 +3532,15 @@ msgstr "Wacholder (riep)"
 msgid "Raspberry Bush (tiny)"
 msgstr "Henntjebeei (ganz lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:41
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:40
 msgid "Raspberry Bush (small)"
 msgstr "Henntjebeei (lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:69
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:67
 msgid "Raspberry Bush (medium)"
 msgstr "Henntjebeei (middel)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:97
+#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:94
 msgid "Raspberry Bush (ripe)"
 msgstr "Henntjebeei (riep)"
 
@@ -3516,31 +3548,47 @@ msgstr "Henntjebeei (riep)"
 msgid "Sea Buckthorn (tiny)"
 msgstr "Sanddoorn (ganz lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:41
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:40
 msgid "Sea Buckthorn (small)"
 msgstr "Sanddoorn (lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:69
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:67
 msgid "Sea Buckthorn (medium)"
 msgstr "Sanddoorn (middel)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:97
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:94
 msgid "Sea Buckthorn (ripe)"
 msgstr "Sanddoorn (riep)"
+
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:13
+msgid "Stink Shepherd’s Tree (tiny)"
+msgstr "Stinkerboomtje (ganz lütt)"
+
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:40
+msgid "Stink Shepherd’s Tree (small)"
+msgstr "Stinkerboomtje (lütt)"
+
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:67
+msgid "Stink Shepherd’s Tree (medium)"
+msgstr "Stinkerboomtje (middel)"
+
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:94
+msgid "Stink Shepherd’s Tree (ripe)"
+msgstr "Stinkerboomtje (riep)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
 msgid "Strawberries (tiny)"
 msgstr "Eerdjebeei (ganz lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:41
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:40
 msgid "Strawberries (small)"
 msgstr "Eerdjebeei (lütt)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:69
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:67
 msgid "Strawberries (medium)"
 msgstr "Eerdjebeei (middel)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:97
+#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:94
 msgid "Strawberries (ripe)"
 msgstr "Eerdjebeei (riep)"
 
@@ -3633,6 +3681,18 @@ msgstr "Wiendruven (lütt)"
 msgctxt "immovable"
 msgid "Grapevine (tiny)"
 msgstr "Wiendruven (ganz lütt)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/pond/burning/init.lua:7
+msgctxt "immovable"
+msgid "Burning Charcoal Stack"
+msgstr "Köhler-Stapel"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/pond/coal/init.lua:7
+msgctxt "immovable"
+msgid "Pond With Charcoal"
+msgstr "Kuhl mit Holtköhl"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/dry/init.lua:7
@@ -3837,51 +3897,51 @@ msgstr "Lade de Lüü: Waren (2/15)"
 msgid "Loading tribes: Immovables (3/15)"
 msgstr "Lade de Lüü: Faste Dingen (3/15)"
 
-#: ../../data/tribes/init.lua:215
+#: ../../data/tribes/init.lua:218
 msgid "Loading tribes: Atlantean workers (4/15)"
 msgstr "Lade de Lüü: Atlantiske Arbeiders (4/15)"
 
-#: ../../data/tribes/init.lua:248
+#: ../../data/tribes/init.lua:251
 msgid "Loading tribes: Barbarian workers (5/15)"
 msgstr "Lade de Lüü: Wille Arbeiders (5/15)"
 
-#: ../../data/tribes/init.lua:283
+#: ../../data/tribes/init.lua:286
 msgid "Loading tribes: Empire workers (6/15)"
 msgstr "Lade de Lüü: Rieks-Arbeiders (6/15)"
 
-#: ../../data/tribes/init.lua:319
+#: ../../data/tribes/init.lua:322
 msgid "Loading tribes: Frisian workers (7/15)"
 msgstr "Lade de Lüü: Freeske Arbeiders (7/15)"
 
-#: ../../data/tribes/init.lua:363
+#: ../../data/tribes/init.lua:366
 msgid "Loading tribes: Warehouses (8/15)"
 msgstr "Lade de Lüü: Kraamhusen (8/15)"
 
-#: ../../data/tribes/init.lua:385
+#: ../../data/tribes/init.lua:388
 msgid "Loading tribes: Atlantean productionsites (9/15)"
 msgstr "Lade de Lüü: Atlantiske Warkhusen (9/15)"
 
-#: ../../data/tribes/init.lua:423
+#: ../../data/tribes/init.lua:426
 msgid "Loading tribes: Barbarian productionsites (10/15)"
 msgstr "Lade de Lüü: Wille Warkhusen (10/15)"
 
-#: ../../data/tribes/init.lua:468
+#: ../../data/tribes/init.lua:471
 msgid "Loading tribes: Empire productionsites (11/15)"
 msgstr "Lade de Lüü: Rieks-Warkhusen (11/15)"
 
-#: ../../data/tribes/init.lua:512
+#: ../../data/tribes/init.lua:515
 msgid "Loading tribes: Frisian productionsites (12/15)"
 msgstr "Lade de Lüü: Freeske Warkhusen (12/15)"
 
-#: ../../data/tribes/init.lua:566
+#: ../../data/tribes/init.lua:570
 msgid "Loading tribes: Trainingsites (13/15)"
 msgstr "Lade de Lüü: Övens-Boen (13/15)"
 
-#: ../../data/tribes/init.lua:583
+#: ../../data/tribes/init.lua:587
 msgid "Loading tribes: Militarysites (14/15)"
 msgstr "Lade de Lüü: Soldateree-Boen (14/15)"
 
-#: ../../data/tribes/init.lua:617
+#: ../../data/tribes/init.lua:621
 msgid "Loading tribes: Finishing (15/15)"
 msgstr "Lade de Lüü: All klaarmaken (15/15)"
 

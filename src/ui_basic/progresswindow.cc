@@ -63,8 +63,8 @@ void ProgressWindow::draw(RenderTarget& rt) {
 
 	const uint32_t h = text_height(style_.font());
 
-	label_rectangle_.x = get_w() / 4;
-	label_rectangle_.w = get_w() / 2;
+	label_rectangle_.x = get_w() / 6;
+	label_rectangle_.w = get_w() * 2 / 3;
 	label_rectangle_.y = label_center_.y - h / 2 - PROGRESS_STATUS_RECT_PADDING;
 	label_rectangle_.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
 

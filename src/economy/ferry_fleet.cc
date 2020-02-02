@@ -228,11 +228,13 @@ void FerryFleet::add_ferry(Ferry* ferry) {
 }
 
 void FerryFleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
-	std::vector<Ferry*>::iterator it = std::find(ferries_.begin(), ferries_.end(), ferry);
-	if (it != ferries_.end()) {
-		*it = ferries_.back();
-		ferries_.pop_back();
+	auto it = std::find(ferries_.begin(), ferries_.end(), ferry);
+	if (it == ferries_.end()) {
+		log("FerryFleet %u: Requested to remove ferry %u which is not in this fleet\n", serial(),
+		    ferry ? ferry->serial() : 0);
+		return;
 	}
+	ferries_.erase(it);
 	ferry->set_fleet(nullptr);
 
 	if (ferry->get_location(egbase)) {
@@ -358,9 +360,10 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 		int32_t shortest_distance = 0;
 		for (Ferry* temp_ferry : idle_ferries) {
 			// Decide how far this ferry is from the waterway
+			Path path;
 			int32_t f_distance =
-			   game.map().findpath(temp_ferry->get_position(), ww->base_flag().get_position(), 0,
-			                       *new Path(), CheckStepFerry(game));
+			   game.map().findpath(temp_ferry->get_position(), ww->base_flag().get_position(), 0, path,
+			                       CheckStepFerry(game));
 			if (f_distance < 0) {
 				log("FerryFleet(%u)::act: We have a ferry (%u at %dx%d) "
 				    "that can't reach one of our waterways (%u at %dx%d)!\n",

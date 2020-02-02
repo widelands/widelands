@@ -40,10 +40,10 @@ tribes:new_worker_type {
       },
       buildferry_1 = {
          -- checks whether water is available
-         "findspace=size:swim radius:4",
+         "findspace=size:swim radius:5",
       },
       buildferry_2 = {
-         "findspace=size:swim radius:4",
+         "findspace=size:swim radius:5",
          "walk=coords",
          "animate=idle 10000",
          "buildferry",
