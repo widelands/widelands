@@ -319,6 +319,12 @@ private:
 	 */
 	void start_receiving();
 
+	/**
+	 * Reduces the send buffer of the given socket to only contain 20 packets.
+	 * @param socket The socket to modify.
+	 */
+	static void reduce_send_buffer(boost::asio::ip::tcp::socket& socket);
+
 	/// The buffers that are waiting to be send.
 	/// The map key is the priority of the packets stored in the queue.
 	/// Each packet in the queue is a vector of uint8_t.
