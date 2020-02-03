@@ -681,6 +681,7 @@ void MapBuildingdataPacket::read_productionsite(
 			//  skipped programs
 			uint32_t const gametime = game.get_gametime();
 			for (uint8_t i = fr.unsigned_8(); i; --i) {
+				
 				char const* const program_name = fr.c_string();
 				if (pr_descr.programs().count(program_name)) {
 					uint32_t const skip_time = fr.unsigned_32();
@@ -701,7 +702,7 @@ void MapBuildingdataPacket::read_productionsite(
 			uint16_t const nr_progs = fr.unsigned_16();
 			productionsite.stack_.resize(nr_progs);
 			for (uint16_t i = 0; i < nr_progs; ++i) {
-				std::string program_name = fr.c_string();
+				std::string program_name = tribes_lookup_table.lookup_program(fr.c_string());
 				std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
 
 				productionsite.stack_[i].program = productionsite.descr().get_program(program_name);
