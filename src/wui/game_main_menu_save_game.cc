@@ -135,7 +135,9 @@ void GameMainMenuSaveGame::entry_selected() {
 	load_or_save_.delete_button()->set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {
 		std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
-		filename_editbox_.set_text(FileSystem::filename_without_ext(gamedata->filename.c_str()));
+		if (!gamedata->is_directory()) {
+			filename_editbox_.set_text(FileSystem::filename_without_ext(gamedata->filename.c_str()));
+		}
 	}
 }
 
@@ -161,12 +163,18 @@ void GameMainMenuSaveGame::ok() {
 	if (!ok_.enabled()) {
 		return;
 	}
-
-	std::string filename = filename_editbox_.text();
-	if (save_game(filename, !get_config_bool("nozip", false))) {
-		die();
+	if (load_or_save_.has_selection() && load_or_save_.entry_selected()->is_directory()) {
+		std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
+		load_or_save_.change_directory_to(gamedata->filename);
+		curdir_ = gamedata->filename;
+		filename_editbox_.focus();
 	} else {
-		load_or_save_.table_.focus();
+		std::string filename = filename_editbox_.text();
+		if (save_game(filename, !get_config_bool("nozip", false))) {
+			die();
+		} else {
+			load_or_save_.table().focus();
+		}
 	}
 }
 
