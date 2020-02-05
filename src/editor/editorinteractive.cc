@@ -457,15 +457,12 @@ void EditorInteractive::load(const std::string& filename) {
 		   filename.c_str());
 	ml->preload_map(true);
 
-	// We already have a loader window if WL was started with --editor=mapname
 	UI::ProgressWindow* loader_ui = egbase().get_loader_ui();
-	const bool create_loader_ui = loader_ui == nullptr;
+	// We already have a loader window if Widelands was started with --editor=mapname
+	const bool create_loader_ui = !loader_ui;
 	if (create_loader_ui) {
 		loader_ui = new UI::ProgressWindow("images/loadscreens/editor.jpg");
-		std::vector<std::string> tipstext;
-		tipstext.push_back("editor");
-
-		GameTips editortips(*loader_ui, tipstext);
+		GameTips editortips(*loader_ui, {"editor"});
 		egbase().set_loader_ui(loader_ui);
 	}
 
@@ -906,9 +903,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	{
 		UI::ProgressWindow loader_ui("images/loadscreens/editor.jpg");
-		std::vector<std::string> tipstext;
-		tipstext.push_back("editor");
-		GameTips editortips(loader_ui, tipstext);
+		GameTips editortips(loader_ui, {"editor"});
 		egbase.set_loader_ui(&loader_ui);
 
 		{

@@ -218,7 +218,9 @@ void FullscreenMenuNetSetupLAN::game_doubleclicked(uint32_t) {
 
 void FullscreenMenuNetSetupLAN::update_game_info(
    UI::Table<NetOpenGame const* const>::EntryRecord& er, const NetGameInfo& info) {
+	assert(info.hostname[sizeof(info.hostname) - 1] == '\0');
 	er.set_string(0, info.hostname);
+	assert(info.map[sizeof(info.map) - 1] == '\0');
 	er.set_string(1, info.map);
 
 	switch (info.state) {
