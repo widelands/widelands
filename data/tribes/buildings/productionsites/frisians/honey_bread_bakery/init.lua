@@ -79,7 +79,7 @@ tribes:new_productionsite_type {
          }
       },
       -- 2 identical programs for honey bread to prevent unnecessary skipping penalty
-      bake_honey_1 = {
+      bake_honey = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking honey bread because ...
          descname = _"baking honey bread",
          actions = {
