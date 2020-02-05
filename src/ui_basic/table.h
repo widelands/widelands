@@ -199,6 +199,8 @@ public:
 	void set_column_tooltip(uint8_t col, const std::string& tooltip);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
 
+	size_t number_of_columns() const;
+
 	void clear();
 	void set_sort_column(uint8_t const col) {
 		assert(col < columns_.size());

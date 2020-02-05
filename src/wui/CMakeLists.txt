@@ -84,6 +84,8 @@ wl_library(wui_common_gamedetails
     gamedetails.h
     load_or_save_game.cc
     load_or_save_game.h
+    savegametable.cc
+    savegametable.h
   DEPENDS
     base_i18n
     base_log
@@ -91,7 +93,6 @@ wl_library(wui_common_gamedetails
     helper
     game_io
     graphic
-    graphic_fonthandler
     graphic_image_io
     graphic_surface
     graphic_text_layout
