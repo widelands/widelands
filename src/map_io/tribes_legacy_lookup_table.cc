@@ -44,12 +44,7 @@ TribesLegacyLookupTable::TribesLegacyLookupTable()
      // Ships
      ships_{},
      // Working Programs
-     programs_{
-        {"smelt_iron", "smelt_iron_1"},
-        {"smoke_fish", "smoke_fish_1"},
-        {"bake_honey", "bake_honey_1"},
-        {"brew_mead", "brew_mead_1"},
-     } {
+     programs_{} {
 }
 
 const std::string& TribesLegacyLookupTable::lookup_worker(const std::string& worker) const {

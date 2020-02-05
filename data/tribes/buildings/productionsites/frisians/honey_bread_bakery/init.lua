@@ -72,7 +72,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=bake_honey_1",
+            "call=bake_honey",
             "call=bake_normal",
             "call=bake_honey_2",
             "return=no_stats"
