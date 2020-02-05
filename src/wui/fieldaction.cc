@@ -891,6 +891,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 					if (imm_type == Widelands::MapObjectType::CONSTRUCTIONSITE) {
 						upcast(Widelands::ConstructionSite, cs, imm);
 						d = cs->get_info().becomes;
+						assert(d);
 						if ((descr.type() == Widelands::MapObjectType::PRODUCTIONSITE &&
 						     (d->type() != Widelands::MapObjectType::PRODUCTIONSITE ||
 						      !dynamic_cast<const Widelands::ProductionSiteDescr&>(descr)
