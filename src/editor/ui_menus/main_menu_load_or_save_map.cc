@@ -71,15 +71,15 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      // Options
      basedir_(basedir),
      has_translated_mapname_(false),
-     showing_mapames_(false) {
+     showing_mapnames_(false) {
 	// NOCOM relayout on fullscreen switch
 	g_fs->ensure_directory_exists(basedir_);
 	curdir_ = basedir_;
 
 	main_box_.add(&show_mapnames_box_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&table_and_details_box_, UI::Box::Resizing::kExpandBoth);
+	main_box_.add_space(padding_);
 	main_box_.add(&table_footer_box_, UI::Box::Resizing::kFullSize);
-	main_box_.add_space(0);
 	main_box_.add(&directory_info_, UI::Box::Resizing::kFullSize);
 	main_box_.add_space(padding_);
 	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
@@ -99,7 +99,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	table_.set_column_compare(2, boost::bind(&MainMenuLoadOrSaveMap::compare_size, this, _1, _2));
 
 	table_and_details_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
-	table_and_details_box_.add_space(padding_);
+	table_and_details_box_.add_space(0);
 	table_and_details_box_.add(&map_details_box_, UI::Box::Resizing::kFullSize);
 	map_details_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 
@@ -137,21 +137,21 @@ bool MainMenuLoadOrSaveMap::compare_size(uint32_t rowa, uint32_t rowb) {
 }
 
 void MainMenuLoadOrSaveMap::toggle_mapnames() {
-	if (showing_mapames_) {
+	if (showing_mapnames_) {
 		show_mapnames_.set_title(_("Show Map Names"));
 	} else {
 		show_mapnames_.set_title(_("Show Filenames"));
 	}
-	showing_mapames_ = !showing_mapames_;
+	showing_mapnames_ = !showing_mapnames_;
 	fill_table();
 }
 
 void MainMenuLoadOrSaveMap::layout() {
-	log("NOCOM triggered!!!\n");
 	set_size(get_parent()->get_w(), get_parent()->get_h());
 	main_box_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 2 * padding_);
 
-	map_details_box_.set_size(main_box_.get_w() * 12 / 7, table_and_details_box_.get_h());
+	// Set the width. Height is controlled by expanding into the outer box
+	map_details_box_.set_desired_size(main_box_.get_w() / 3, 100);
 
 	center_to_parent();
 }
@@ -176,7 +176,7 @@ void MainMenuLoadOrSaveMap::fill_table() {
 	}
 
 	MapData::DisplayType display_type;
-	if (!showing_mapames_) {
+	if (!showing_mapnames_) {
 		display_type = MapData::DisplayType::kFilenames;
 	} else if (cb_dont_localize_mapnames_->get_state()) {
 		display_type = MapData::DisplayType::kMapnames;

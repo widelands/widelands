@@ -77,10 +77,11 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
      illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
 	set_current_directory(curdir_);
 
-	map_details_box_.add(&edit_options_);
+	map_details_box_.add(&edit_options_, UI::Box::Resizing::kFullSize);
 	table_footer_box_.add(&editbox_label_);
 	table_footer_box_.add(&editbox_, UI::Box::Resizing::kExpandBoth);
-	table_footer_box_.add(&make_directory_, UI::Box::Resizing::kFillSpace);
+	table_footer_box_.add_space(0);
+	table_footer_box_.add(&make_directory_);
 
 	table_.selected.connect(boost::bind(&MainMenuSaveMap::clicked_item, boost::ref(*this)));
 	table_.double_clicked.connect(
@@ -121,6 +122,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 
 	subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions&) { update_map_options(); });
+
+	layout();
 }
 
 /**
@@ -281,6 +284,11 @@ void MainMenuSaveMap::set_current_directory(const std::string& filename) {
 	   /** TRANSLATORS: The folder that a file will be saved to. */
 	   (boost::format(_("Current directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
 	      .str());
+}
+
+void MainMenuSaveMap::layout() {
+	MainMenuLoadOrSaveMap::layout();
+	make_directory_.set_desired_size(edit_options_.get_w(), edit_options_.get_h());
 }
 
 /**
