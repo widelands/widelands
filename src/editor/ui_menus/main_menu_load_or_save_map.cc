@@ -35,13 +35,12 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                                              const std::string& name,
                                              const std::string& title,
                                              const std::string& basedir)
-   : UI::UniqueWindow(
-        &parent, name, &registry, parent.get_inner_w() - 40, parent.get_inner_h() - 40, title),
+   : UI::UniqueWindow(&parent, name, &registry, parent.get_w(), parent.get_h(), title),
 
      // Values for alignment and size
      padding_(4),
 
-     main_box_(this, 0, 0, UI::Box::Vertical),
+     main_box_(this, padding_, padding_, UI::Box::Vertical, 0, 0, padding_),
 
      show_mapnames_box_(&main_box_, 0, 0, UI::Box::Horizontal),
      show_mapnames_(&show_mapnames_box_,
@@ -53,19 +52,19 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                     UI::ButtonStyle::kWuiSecondary,
                     _("Show Map Names")),
 
-     table_and_details_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     table_and_details_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
 
      table_(
         &table_and_details_box_, 0, 0, get_inner_w() / 2, get_inner_h() / 2, UI::PanelStyle::kWui),
-     map_details_box_(&table_and_details_box_, 0, 0, UI::Box::Vertical),
+     map_details_box_(&table_and_details_box_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
      map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui),
 
-     table_footer_box_(&main_box_, 0, 0, 0, 0),
+     table_footer_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
 
      directory_info_(&main_box_, 0, 0, 0, 0),
 
      // Bottom button row
-     button_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     button_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
      ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
      cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
 
@@ -80,7 +79,9 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	main_box_.add(&show_mapnames_box_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&table_and_details_box_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add(&table_footer_box_, UI::Box::Resizing::kFullSize);
+	main_box_.add_space(0);
 	main_box_.add(&directory_info_, UI::Box::Resizing::kFullSize);
+	main_box_.add_space(padding_);
 	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
 
 	show_mapnames_box_.add(&show_mapnames_);
@@ -119,8 +120,6 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	show_mapnames_.sigclicked.connect(
 	   boost::bind(&MainMenuLoadOrSaveMap::toggle_mapnames, boost::ref(*this)));
 
-	set_center_panel(&main_box_);
-	center_to_parent();
 	move_to_top();
 	layout();
 }
@@ -149,10 +148,12 @@ void MainMenuLoadOrSaveMap::toggle_mapnames() {
 
 void MainMenuLoadOrSaveMap::layout() {
 	log("NOCOM triggered!!!\n");
-	set_size(get_parent()->get_inner_w(), get_parent()->get_inner_h());
-	UI::Window::layout();
+	set_size(get_parent()->get_w(), get_parent()->get_h());
+	main_box_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 2 * padding_);
 
-	map_details_box_.set_size(get_inner_w() * 12 / 7, table_and_details_box_.get_h());
+	map_details_box_.set_size(main_box_.get_w() * 12 / 7, table_and_details_box_.get_h());
+
+	center_to_parent();
 }
 
 /**

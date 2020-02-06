@@ -79,7 +79,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 
 	map_details_box_.add(&edit_options_);
 	table_footer_box_.add(&editbox_label_);
-	table_footer_box_.add(&editbox_, UI::Box::Resizing::kFillSpace);
+	table_footer_box_.add(&editbox_, UI::Box::Resizing::kExpandBoth);
 	table_footer_box_.add(&make_directory_, UI::Box::Resizing::kFillSpace);
 
 	table_.selected.connect(boost::bind(&MainMenuSaveMap::clicked_item, boost::ref(*this)));
