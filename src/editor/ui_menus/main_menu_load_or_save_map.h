@@ -62,6 +62,9 @@ protected:
 	int32_t right_column_x_;
 	int32_t butw_;  // Button dimensions
 
+    UI::Box main_box_;
+
+    UI::Box table_and_details_box_;
 	MapTable table_;
 	std::vector<MapData> maps_data_;
 	MapDetails map_details_;

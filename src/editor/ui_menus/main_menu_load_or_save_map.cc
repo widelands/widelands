@@ -47,23 +47,31 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      tabley_(buth_ + 2 * padding_),
 
      // Arbitrary values to get started. Real values are set in layout().
-     tablew_(100),
-     tableh_(100),
-     right_column_x_(50),
+     tablew_(get_inner_w() / 2),
+     tableh_(get_inner_h() / 2),
+     right_column_x_(tablew_),
      butw_(50),
-     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kWui),
-     map_details_(this,
-                  right_column_x_,
-                  tabley_,
-                  get_inner_w() - right_column_x_ - padding_,
-                  tableh_,
+
+     main_box_(this, 0, 0, UI::Box::Vertical),
+
+     table_and_details_box_(&main_box_,
+                 0,
+                 0,
+                 UI::Box::Horizontal),
+
+     table_(&table_and_details_box_, 0, 0, tablew_, tableh_, UI::PanelStyle::kWui),
+     map_details_(&table_and_details_box_,
+                  0,
+                  0,
+                  100,
+                  100,
                   UI::PanelStyle::kWui),
      directory_info_(this, padding_, get_inner_h() - 2 * buth_ - 4 * padding_, 0, 0),
 
      // Bottom button row
-     button_box_(this,
-                 padding_,
-                 get_inner_h() - padding_ - buth_,
+     button_box_(&main_box_,
+                 0,
+                 0,
                  UI::Box::Horizontal),
      ok_(&button_box_,
          "ok",
@@ -90,6 +98,9 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	g_fs->ensure_directory_exists(basedir_);
 	curdir_ = basedir_;
 
+    main_box_.add(&table_and_details_box_, UI::Box::Resizing::kExpandBoth);
+    main_box_.add(&button_box_);
+
 	UI::Box* vbox = new UI::Box(this, tablex_, padding_, UI::Box::Horizontal, padding_, get_w());
 	show_mapnames_ = new UI::Button(vbox, "show_mapnames", 0, 0, 2 * butw_, buth_,
 	                                UI::ButtonStyle::kWuiSecondary, _("Show Map Names"));
@@ -108,6 +119,10 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	   1, boost::bind(&MainMenuLoadOrSaveMap::compare_mapnames, this, _1, _2));
 	table_.set_column_compare(2, boost::bind(&MainMenuLoadOrSaveMap::compare_size, this, _1, _2));
 
+    table_and_details_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
+    table_and_details_box_.add_space(padding_);
+    table_and_details_box_.add(&map_details_, UI::Box::Resizing::kFullSize);
+
 	table_.focus();
 	fill_table();
 
@@ -125,6 +140,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	show_mapnames_->sigclicked.connect(
 	   boost::bind(&MainMenuLoadOrSaveMap::toggle_mapnames, boost::ref(*this)));
 
+    set_center_panel(&main_box_);
 	center_to_parent();
 	move_to_top();
     layout();
@@ -154,11 +170,17 @@ void MainMenuLoadOrSaveMap::toggle_mapnames() {
 
 void MainMenuLoadOrSaveMap::layout() {
     log("NOCOM triggered!!!\n");
+    set_size(get_parent()->get_inner_w() - 40, get_parent()->get_inner_h() - 40);
+    UI::Window::layout();
 
     tablew_ = get_inner_w() * 7 / 12;
     tableh_ = get_inner_h() - tabley_ - (no_of_bottom_rows_ + 1) * buth_ -
             no_of_bottom_rows_ * padding_;
     right_column_x_ = tablew_ + 2 * padding_;
+
+    table_and_details_box_.set_size(get_inner_w(), tableh_);
+
+    map_details_.set_size(get_inner_w() - right_column_x_, map_details_.get_h());
     butw_ = (get_inner_w() - right_column_x_ - 2 * padding_) / 2;
 
     button_box_.set_size(get_inner_w(), buth_);
