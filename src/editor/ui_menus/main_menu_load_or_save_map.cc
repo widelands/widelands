@@ -146,7 +146,6 @@ void MainMenuLoadOrSaveMap::toggle_mapnames() {
 }
 
 void MainMenuLoadOrSaveMap::layout() {
-	set_size(get_parent()->get_w(), get_parent()->get_h());
 	main_box_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 2 * padding_);
 
 	// Set the width. Height is controlled by expanding into the outer box
