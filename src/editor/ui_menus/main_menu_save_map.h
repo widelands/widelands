@@ -59,10 +59,12 @@ private:
 
 	bool save_map(std::string, bool);
 
-	UI::Button make_directory_, edit_options_;
+	UI::Button edit_options_;
 
 	UI::Textarea editbox_label_;
-	UI::EditBox* editbox_;
+	UI::EditBox editbox_;
+	UI::Button make_directory_;
+
 	const std::string illegal_filename_tooltip_;
 
 	std::unique_ptr<Notifications::Subscriber<NoteMapOptions>> subscriber_;

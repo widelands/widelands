@@ -37,7 +37,6 @@
 struct MainMenuLoadOrSaveMap : public UI::UniqueWindow {
 	MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	                      UI::UniqueWindow::Registry& registry,
-	                      int no_of_bottom_rows,
 	                      const std::string& name,
 	                      const std::string& title,
 	                      const std::string& basedir = kMapsDir);
@@ -56,10 +55,6 @@ protected:
 
 	// UI coordinates and spacers
 	int32_t const padding_;  // Common padding between panels
-	int32_t const buth_;     // Button dimensions
-	const int no_of_bottom_rows_;
-	int32_t tablex_, tabley_, tablew_, tableh_;
-	int32_t right_column_x_;
 
 	UI::Box main_box_;
 
@@ -69,7 +64,11 @@ protected:
 	UI::Box table_and_details_box_;
 	MapTable table_;
 	std::vector<MapData> maps_data_;
+
+	UI::Box map_details_box_;
 	MapDetails map_details_;
+
+	UI::Box table_footer_box_;
 
 	UI::Textarea directory_info_;
 

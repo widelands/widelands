@@ -32,7 +32,6 @@
 
 MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                                              Registry& registry,
-                                             int no_of_bottom_rows,
                                              const std::string& name,
                                              const std::string& title,
                                              const std::string& basedir)
@@ -41,15 +40,6 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
      // Values for alignment and size
      padding_(4),
-     buth_(20),
-     no_of_bottom_rows_(no_of_bottom_rows),
-     tablex_(padding_),
-     tabley_(buth_ + 2 * padding_),
-
-     // Arbitrary values to get started. Real values are set in layout().
-     tablew_(get_inner_w() / 2),
-     tableh_(get_inner_h() / 2),
-     right_column_x_(tablew_),
 
      main_box_(this, 0, 0, UI::Box::Vertical),
 
@@ -65,8 +55,12 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
      table_and_details_box_(&main_box_, 0, 0, UI::Box::Horizontal),
 
-     table_(&table_and_details_box_, 0, 0, tablew_, tableh_, UI::PanelStyle::kWui),
-     map_details_(&table_and_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui),
+     table_(
+        &table_and_details_box_, 0, 0, get_inner_w() / 2, get_inner_h() / 2, UI::PanelStyle::kWui),
+     map_details_box_(&table_and_details_box_, 0, 0, UI::Box::Vertical),
+     map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui),
+
+     table_footer_box_(&main_box_, 0, 0, 0, 0),
 
      directory_info_(&main_box_, 0, 0, 0, 0),
 
@@ -85,6 +79,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
 	main_box_.add(&show_mapnames_box_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&table_and_details_box_, UI::Box::Resizing::kExpandBoth);
+	main_box_.add(&table_footer_box_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&directory_info_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
 
@@ -104,7 +99,8 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
 	table_and_details_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 	table_and_details_box_.add_space(padding_);
-	table_and_details_box_.add(&map_details_, UI::Box::Resizing::kFullSize);
+	table_and_details_box_.add(&map_details_box_, UI::Box::Resizing::kFullSize);
+	map_details_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 
 	table_.focus();
 	fill_table();
@@ -156,12 +152,7 @@ void MainMenuLoadOrSaveMap::layout() {
 	set_size(get_parent()->get_inner_w(), get_parent()->get_inner_h());
 	UI::Window::layout();
 
-	tablew_ = get_inner_w() * 7 / 12;
-	tableh_ =
-	   get_inner_h() - tabley_ - (no_of_bottom_rows_ + 1) * buth_ - no_of_bottom_rows_ * padding_;
-	right_column_x_ = tablew_ + 2 * padding_;
-
-	map_details_.set_size(get_inner_w() - right_column_x_, map_details_.get_h());
+	map_details_box_.set_size(get_inner_w() * 12 / 7, table_and_details_box_.get_h());
 }
 
 /**
