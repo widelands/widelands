@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-01-21 18:02+0000\n"
+"POT-Creation-Date: 2020-02-06 08:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1153,18 +1153,22 @@ msgid "Smelting Works"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:70
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:71
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:95
+#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:67
+#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:71
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:72
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:96
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:109
 msgid "smelting iron"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:79
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:83
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:84
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:108
+#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:93
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:97
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:98
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:122
 msgid "smelting gold"
 msgstr ""
 
@@ -1181,7 +1185,8 @@ msgid "smoking meat"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:81
+#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:93
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:85
 msgid "smoking fish"
 msgstr ""
@@ -1783,7 +1788,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:56
 #: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:54
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:72
-#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:92
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:104
 msgid "brewing beer"
 msgstr ""
 
@@ -2430,7 +2435,7 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:73
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:94
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:106
 msgid "baking bread"
 msgstr ""
 
@@ -2726,7 +2731,8 @@ msgid "Honey Bread Bakery"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking honey bread because ...
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:83
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:95
 msgid "baking honey bread"
 msgstr ""
 
@@ -2778,7 +2784,8 @@ msgid "Mead Brewery"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
-#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:81
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:82
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:93
 msgid "brewing mead"
 msgstr ""
 
