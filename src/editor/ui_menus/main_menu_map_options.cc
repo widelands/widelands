@@ -78,10 +78,19 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
      name_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
      author_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
      size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
-
+     balancing_dropdown_(&tags_box_,
+                         "dropdown_balancing",
+                         0,
+                         0,
+                         200,
+                         50,
+                         24,
+                         "",
+                         UI::DropdownType::kTextual,
+                         UI::PanelStyle::kWui,
+                         UI::ButtonStyle::kWuiSecondary),
      teams_list_(
         &teams_box_, 0, 0, max_w_, 60, UI::PanelStyle::kWui, UI::ListselectLayout::kShowCheck),
-
      registry_(registry) {
 
 	tab_box_.set_size(max_w_, get_inner_h() - labelh_ - 2 * padding_);
@@ -120,12 +129,18 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	main_box_.add_space(indent_);
 
 	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Tags:")));
-	add_tag_checkbox(&tags_box_, "unbalanced", localize_tag("unbalanced"));
 	add_tag_checkbox(&tags_box_, "ffa", localize_tag("ffa"));
 	add_tag_checkbox(&tags_box_, "1v1", localize_tag("1v1"));
 	add_tag_checkbox(&tags_box_, "2teams", localize_tag("2teams"));
 	add_tag_checkbox(&tags_box_, "3teams", localize_tag("3teams"));
 	add_tag_checkbox(&tags_box_, "4teams", localize_tag("4teams"));
+
+	balancing_dropdown_.set_autoexpand_display_button();
+	balancing_dropdown_.add(localize_tag("balanced"), "balanced");
+	balancing_dropdown_.add(localize_tag("unbalanced"), "unbalanced");
+	tags_box_.add(&balancing_dropdown_);
+
+	tags_box_.add_space(labelh_);
 
 	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Waterway length limit:")));
 	UI::Box* ww_box = new UI::Box(&tags_box_, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
@@ -169,6 +184,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 		tag.second->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	}
 
+	balancing_dropdown_.selected.connect([this] { changed(); });
+
 	ok_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_ok, boost::ref(*this)));
 	cancel_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_cancel, boost::ref(*this)));
 
@@ -198,6 +215,8 @@ void MainMenuMapOptions::update() {
 	for (auto tag : tags_checkboxes_) {
 		tag.second->set_state(tags.count(tag.first) > 0);
 	}
+
+	balancing_dropdown_.select(tags.count("balanced") ? "balanced" : "unbalanced");
 }
 
 /**
@@ -221,6 +240,7 @@ void MainMenuMapOptions::clicked_ok() {
 			eia().egbase().mutable_map()->add_tag(tag.first);
 		}
 	}
+	eia().egbase().mutable_map()->add_tag(balancing_dropdown_.get_selected());
 	Notifications::publish(NoteMapOptions());
 	registry_.destroy();
 }
