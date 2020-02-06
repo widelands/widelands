@@ -54,8 +54,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
      table_and_details_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
 
-     table_(
-        &table_and_details_box_, 0, 0, get_inner_w() / 2, get_inner_h() / 2, UI::PanelStyle::kWui),
+     table_(&table_and_details_box_, 0, 0, 200, 200, UI::PanelStyle::kWui),
      map_details_box_(&table_and_details_box_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
      map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui),
 
@@ -72,7 +71,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      basedir_(basedir),
      has_translated_mapname_(false),
      showing_mapnames_(false) {
-	// NOCOM relayout on fullscreen switch
+
 	g_fs->ensure_directory_exists(basedir_);
 	curdir_ = basedir_;
 
