@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -11,9 +11,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-05-10 07:32+0000\n"
-"PO-Revision-Date: 2019-05-10 07:33+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-01-21 18:02+0000\n"
+"PO-Revision-Date: 2020-01-21 18:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -162,8 +162,8 @@ msgstr "الإبحار"
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
-"ships and ports."
-msgstr "في هذا الدرس التعليمي، أنت سوف تتعلم عن الإبحار، حيث سوف تتعلم كيف تتعامل مع السفن و المرافئ."
+"ships and ports, and how to use ferries and waterways."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"

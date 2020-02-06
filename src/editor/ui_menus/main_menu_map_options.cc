@@ -78,10 +78,19 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
      name_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
      author_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
      size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
-
+     balancing_dropdown_(&tags_box_,
+                         "dropdown_balancing",
+                         0,
+                         0,
+                         200,
+                         50,
+                         24,
+                         "",
+                         UI::DropdownType::kTextual,
+                         UI::PanelStyle::kWui,
+                         UI::ButtonStyle::kWuiSecondary),
      teams_list_(
         &teams_box_, 0, 0, max_w_, 60, UI::PanelStyle::kWui, UI::ListselectLayout::kShowCheck),
-
      waterway_length_box_(nullptr),
      registry_(registry) {
 
@@ -121,12 +130,18 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	main_box_.add_space(indent_);
 
 	tags_box_.add(new UI::Textarea(&tags_box_, 0, 0, max_w_, labelh_, _("Tags:")));
-	add_tag_checkbox(&tags_box_, "unbalanced", localize_tag("unbalanced"));
 	add_tag_checkbox(&tags_box_, "ffa", localize_tag("ffa"));
 	add_tag_checkbox(&tags_box_, "1v1", localize_tag("1v1"));
 	add_tag_checkbox(&tags_box_, "2teams", localize_tag("2teams"));
 	add_tag_checkbox(&tags_box_, "3teams", localize_tag("3teams"));
 	add_tag_checkbox(&tags_box_, "4teams", localize_tag("4teams"));
+
+	balancing_dropdown_.set_autoexpand_display_button();
+	balancing_dropdown_.add(localize_tag("balanced"), "balanced");
+	balancing_dropdown_.add(localize_tag("unbalanced"), "unbalanced");
+	tags_box_.add(&balancing_dropdown_);
+
+	tags_box_.add_space(labelh_);
 
 	if (parent.finalized()) {
 		const uint32_t l = parent.egbase().map().get_waterway_max_length();
@@ -150,6 +165,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 		tags_box_.add_space(padding_);
 		waterway_length_box_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	}
+	tags_box_.add_space(padding_);
 
 	teams_box_.add(new UI::Textarea(&teams_box_, 0, 0, max_w_, labelh_, _("Suggested Teams:")));
 	teams_box_.add(&teams_list_);
@@ -179,6 +195,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	for (const auto& tag : tags_checkboxes_) {
 		tag.second->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	}
+
+	balancing_dropdown_.selected.connect([this] { changed(); });
 
 	ok_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_ok, boost::ref(*this)));
 	cancel_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_cancel, boost::ref(*this)));
@@ -211,6 +229,8 @@ void MainMenuMapOptions::update() {
 	for (auto tag : tags_checkboxes_) {
 		tag.second->set_state(tags.count(tag.first) > 0);
 	}
+
+	balancing_dropdown_.select(tags.count("balanced") ? "balanced" : "unbalanced");
 }
 
 /**
@@ -238,6 +258,7 @@ void MainMenuMapOptions::clicked_ok() {
 			map->add_tag(tag.first);
 		}
 	}
+	eia().egbase().mutable_map()->add_tag(balancing_dropdown_.get_selected());
 	Notifications::publish(NoteMapOptions());
 	registry_.destroy();
 }
