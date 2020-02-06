@@ -113,10 +113,12 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
 
 	{
 		uint32_t val = 0;
-		assert(!campaign_->difficulties.empty());
-		for (const std::string& d : campaign_->difficulties) {
-			++val;  // We use values from 1 up because that's how Lua indexes arrays
-			scenario_difficulty_.add(d, val, nullptr, val == campaign_->default_difficulty);
+		if (campaign_) {
+			assert(!campaign_->difficulties.empty());
+			for (const std::string& d : campaign_->difficulties) {
+				++val;  // We use values from 1 up because that's how Lua indexes arrays
+				scenario_difficulty_.add(d, val, nullptr, val == campaign_->default_difficulty);
+			}
 		}
 		scenario_difficulty_.set_enabled(val > 1);
 	}
