@@ -2,13 +2,13 @@
 # Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 19:58+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-12-30 07:55+0000\n"
+"PO-Revision-Date: 2020-01-02 17:11+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -401,7 +401,7 @@ msgstr "Maak 't op. Dat kannst du mit de Knoop rechts am unnern Rand doon."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:233
 msgid "Alternatively, you can access it directly with the ‘F1’ key."
-msgstr "Oder du kannst se stracks mit de Handigtast »F1« openmaaken."
+msgstr "Of du kannst se stracks mit de Handigtast »F1« openmaaken."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
 msgid "Encyclopedia"
@@ -504,7 +504,7 @@ msgstr "De Listenwessler »Husen« hett all Informationen över all Husen, de di
 msgid ""
 "Finally, the ‘Immovables’ tab shows information about the specific "
 "immovables that your tribe’s workers can place on the map."
-msgstr "Un de Listenwessler »Sekere Dingen« wiest Informationen över de sekere Dingen, de diene Arbeiders up de Kaart setten könen."
+msgstr "Un de Listenwessler »Faste Dingen« wiest Informationen över de fasten Dingen, de diene Arbeiders up de Kaart setten könen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:278
 msgid "You closed the encyclopedia!"

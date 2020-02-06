@@ -29,6 +29,7 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -242,13 +243,20 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                     init_name,
                     init_descname,
                     table.has_key("helptext_script") ? table.get_string("helptext_script") : "") {
+	bool has_animations = false;
 	if (table.has_key("animations")) {
-		add_animations(*table.get_table("animations"));
+		has_animations = true;
+		add_animations(*table.get_table("animations"), Animation::Type::kFiles);
+	}
+	if (table.has_key("spritesheets")) {
+		has_animations = true;
+		add_animations(*table.get_table("spritesheets"), Animation::Type::kSpritesheet);
+	}
+	if (has_animations) {
 		if (!is_animation_known("idle")) {
 			throw GameDataError(
 			   "Map object %s has animations but no idle animation", init_name.c_str());
 		}
-
 		assert(g_gr->animations().get_representative_image(name())->width() > 0);
 	}
 	if (table.has_key("icon")) {
@@ -273,7 +281,7 @@ bool MapObjectDescr::is_animation_known(const std::string& animname) const {
 /**
  * Add all animations for this map object
  */
-void MapObjectDescr::add_animations(const LuaTable& table) {
+void MapObjectDescr::add_animations(const LuaTable& table, Animation::Type anim_type) {
 	for (const std::string& animname : table.keys<std::string>()) {
 		try {
 			std::unique_ptr<LuaTable> anim = table.get_table(animname);
@@ -293,7 +301,8 @@ void MapObjectDescr::add_animations(const LuaTable& table) {
 					const std::string directional_basename =
 					   basename + animation_direction_names[dir - 1];
 					anims_.insert(std::pair<std::string, uint32_t>(
-					   directional_animname, g_gr->animations().load(*anim, directional_basename)));
+					   directional_animname,
+					   g_gr->animations().load(*anim, directional_basename, anim_type)));
 				}
 			} else {
 				if (is_animation_known(animname)) {
@@ -302,15 +311,15 @@ void MapObjectDescr::add_animations(const LuaTable& table) {
 				}
 				if (animname == "idle") {
 					anims_.insert(std::pair<std::string, uint32_t>(
-					   animname, g_gr->animations().load(name_, *anim, basename)));
+					   animname, g_gr->animations().load(name_, *anim, basename, anim_type)));
 				} else {
 					anims_.insert(std::pair<std::string, uint32_t>(
-					   animname, g_gr->animations().load(*anim, basename)));
+					   animname, g_gr->animations().load(*anim, basename, anim_type)));
 				}
 			}
 		} catch (const std::exception& e) {
-			throw GameDataError(
-			   "Error loading animation for map object '%s': %s", name().c_str(), e.what());
+			throw GameDataError("Error loading animation '%s' for map object '%s': %s",
+			                    animname.c_str(), name().c_str(), e.what());
 		}
 	}
 }
@@ -506,20 +515,26 @@ void MapObject::cleanup(EditorGameBase& egbase) {
 	egbase.objects().remove(*this);
 }
 
-void MapObject::do_draw_info(const TextToDraw& draw_text,
+void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
                              const std::string& census,
                              const std::string& statictics,
                              const Vector2f& field_on_dst,
                              float scale,
                              RenderTarget* dst) const {
-	if (draw_text == TextToDraw::kNone) {
+	if (!(info_to_draw & (InfoToDraw::kCensus | InfoToDraw::kStatistics))) {
 		return;
 	}
 
 	// Rendering text is expensive, so let's just do it for only a few sizes.
+	const float granularity = 4.f;
+	float text_scale = scale;
 	// The formula is a bit fancy to avoid too much text overlap.
-	scale = std::round(2.f * (scale > 1.f ? std::sqrt(scale) : std::pow(scale, 2.f))) / 2.f;
-	if (scale < 1.f) {
+	text_scale = std::round(granularity *
+	                        (text_scale > 1.f ? std::sqrt(text_scale) : std::pow(text_scale, 2.f))) /
+	             granularity;
+
+	// Skip tiny text for performance reasons
+	if (text_scale < 0.5f) {
 		return;
 	}
 
@@ -530,11 +545,12 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	std::shared_ptr<const UI::RenderedText> rendered_census =
 	   UI::g_fh->render(as_richtext_paragraph(census, census_font, UI::Align::kCenter), 120 * scale);
 	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
-	if ((draw_text & TextToDraw::kCensus) != TextToDraw::kNone) {
+	if (info_to_draw & InfoToDraw::kCensus) {
 		rendered_census->draw(*dst, position, UI::Align::kCenter);
 	}
 
-	if ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone && !statictics.empty()) {
+	// Draw statistics if we want them, they are available and they fill fit
+	if (info_to_draw & InfoToDraw::kStatistics && !statictics.empty() && scale >= 0.5f) {
 		UI::FontStyleInfo statistics_font(
 		   g_gr->styles().building_statistics_style().statistics_font());
 		statistics_font.set_size(scale * statistics_font.size());
@@ -709,20 +725,28 @@ std::string to_string(const MapObjectType type) {
 		return "worker";
 	case MapObjectType::CARRIER:
 		return "carrier";
+	case MapObjectType::FERRY:
+		return "ferry";
 	case MapObjectType::SOLDIER:
 		return "soldier";
 	case MapObjectType::WARE:
 		return "ware";
 	case MapObjectType::BATTLE:
 		return "battle";
-	case MapObjectType::FLEET:
-		return "fleet";
+	case MapObjectType::SHIP_FLEET:
+		return "ship_fleet";
+	case MapObjectType::FERRY_FLEET:
+		return "ferry_fleet";
 	case MapObjectType::IMMOVABLE:
 		return "immovable";
 	case MapObjectType::FLAG:
 		return "flag";
 	case MapObjectType::ROAD:
 		return "road";
+	case MapObjectType::WATERWAY:
+		return "waterway";
+	case MapObjectType::ROADBASE:
+		return "roadbase";
 	case MapObjectType::PORTDOCK:
 		return "portdock";
 	case MapObjectType::BUILDING:

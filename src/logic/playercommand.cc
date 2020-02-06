@@ -95,6 +95,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdBuildFlag(des);
 	case QueueCommandTypes::kBuildRoad:
 		return new CmdBuildRoad(des);
+	case QueueCommandTypes::kBuildWaterway:
+		return new CmdBuildWaterway(des);
 	case QueueCommandTypes::kFlagAction:
 		return new CmdFlagAction(des);
 	case QueueCommandTypes::kStartStopBuilding:
@@ -334,23 +336,20 @@ CmdBuildRoad::CmdBuildRoad(StreamRead& des)
      path(nullptr),
      start(read_coords_32(&des)),
      nsteps(des.unsigned_16()),
-     steps(new char[nsteps]) {
+     steps(new uint8_t[nsteps]) {
 	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		steps[i] = des.unsigned_8();
 	}
 }
 
 CmdBuildRoad::~CmdBuildRoad() {
-	delete path;
-
-	delete[] steps;
 }
 
 void CmdBuildRoad::execute(Game& game) {
 	if (path == nullptr) {
 		assert(steps);
 
-		path = new Path(start);
+		path.reset(new Path(start));
 		for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
 			path->append(game.map(), steps[i]);
 	}
@@ -378,8 +377,8 @@ void CmdBuildRoad::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& m
 			PlayerCommand::read(fr, egbase, mol);
 			start = read_coords_32(&fr, egbase.map().extent());
 			nsteps = fr.unsigned_16();
-			path = nullptr;
-			steps = new char[nsteps];
+			path.reset(nullptr);
+			steps.reset(new uint8_t[nsteps]);
 			for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
 				steps[i] = fr.unsigned_8();
 		} else {
@@ -397,8 +396,93 @@ void CmdBuildRoad::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& 
 	PlayerCommand::write(fw, egbase, mos);
 	write_coords_32(&fw, start);
 	fw.unsigned_16(nsteps);
-	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		fw.unsigned_8(path ? (*path)[i] : steps[i]);
+	}
+}
+
+/*** class Cmd_BuildWaterway ***/
+
+CmdBuildWaterway::CmdBuildWaterway(uint32_t t, int32_t p, Path& pa)
+   : PlayerCommand(t, p),
+     path(&pa),
+     start(pa.get_start()),
+     nsteps(pa.get_nsteps()),
+     steps(nullptr) {
+}
+
+CmdBuildWaterway::CmdBuildWaterway(StreamRead& des)
+   : PlayerCommand(0, des.unsigned_8()),
+     // We cannot completely deserialize the path here because we don't have a Map
+     path(nullptr),
+     start(read_coords_32(&des)),
+     nsteps(des.unsigned_16()),
+     steps(new uint8_t[nsteps]) {
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
+		steps[i] = des.unsigned_8();
+	}
+}
+
+CmdBuildWaterway::~CmdBuildWaterway() {
+}
+
+void CmdBuildWaterway::execute(Game& game) {
+	if (path == nullptr) {
+		assert(steps);
+
+		path.reset(new Path(start));
+		for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
+			path->append(game.map(), steps[i]);
+		}
+	}
+
+	game.get_player(sender())->build_waterway(*path);
+}
+
+void CmdBuildWaterway::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	write_coords_32(&ser, start);
+	ser.unsigned_16(nsteps);
+
+	assert(path || steps);
+
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
+		ser.unsigned_8(path ? (*path)[i] : steps[i]);
+	}
+}
+
+constexpr uint16_t kCurrentPacketVersionCmdBuildWaterway = 1;
+
+void CmdBuildWaterway::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersionCmdBuildWaterway) {
+			PlayerCommand::read(fr, egbase, mol);
+			start = read_coords_32(&fr, egbase.map().extent());
+			nsteps = fr.unsigned_16();
+			path.reset(nullptr);
+			steps.reset(new uint8_t[nsteps]);
+			for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
+				steps[i] = fr.unsigned_8();
+			}
+		} else {
+			throw UnhandledVersionError(
+			   "CmdBuildWaterway", packet_version, kCurrentPacketVersionCmdBuildWaterway);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("build waterway: %s", e.what());
+	}
+}
+void CmdBuildWaterway::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	// First, write version
+	fw.unsigned_16(kCurrentPacketVersionCmdBuildWaterway);
+	// Write base classes
+	PlayerCommand::write(fw, egbase, mos);
+	write_coords_32(&fw, start);
+	fw.unsigned_16(nsteps);
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
+		fw.unsigned_8(path ? (*path)[i] : steps[i]);
+	}
 }
 
 /*** Cmd_FlagAction ***/
@@ -1151,11 +1235,7 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 	fw.signed_32(index_);
-	if (type_ == wwWARE) {
-		fw.unsigned_8(0);
-	} else {
-		fw.unsigned_8(1);
-	}
+	fw.unsigned_8(type_ == wwWARE ? 0 : 1);
 	fw.unsigned_32(max_fill_);
 	fw.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
@@ -1199,11 +1279,7 @@ void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	ser.unsigned_32(serial_);
 	ser.signed_32(index_);
-	if (type_ == wwWARE) {
-		ser.unsigned_8(0);
-	} else {
-		ser.unsigned_8(1);
-	}
+	ser.unsigned_8(type_ == wwWARE ? 0 : 1);
 	ser.unsigned_32(max_fill_);
 	ser.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
@@ -1253,7 +1329,7 @@ CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(const uint32_t init_duetime,
 void CmdSetWareTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
 	if (player->has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
-		player->get_economy(economy())->set_ware_target_quantity(ware_type(), permanent_, duetime());
+		player->get_economy(economy())->set_target_quantity(ware_type(), permanent_, duetime());
 	}
 }
 
@@ -1304,7 +1380,7 @@ void CmdResetWareTargetQuantity::execute(Game& game) {
 	const TribeDescr& tribe = player->tribe();
 	if (player->has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
 		const int count = tribe.get_ware_descr(ware_type())->default_target_quantity(tribe.name());
-		player->get_economy(economy())->set_ware_target_quantity(ware_type(), count, duetime());
+		player->get_economy(economy())->set_target_quantity(ware_type(), count, duetime());
 	}
 }
 
@@ -1350,8 +1426,7 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const uint32_t init_dueti
 void CmdSetWorkerTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
 	if (player->has_economy(economy()) && game.tribes().worker_exists(ware_type())) {
-		player->get_economy(economy())->set_worker_target_quantity(
-		   ware_type(), permanent_, duetime());
+		player->get_economy(economy())->set_target_quantity(ware_type(), permanent_, duetime());
 	}
 }
 
@@ -1402,7 +1477,7 @@ void CmdResetWorkerTargetQuantity::execute(Game& game) {
 	const TribeDescr& tribe = player->tribe();
 	if (player->has_economy(economy()) && game.tribes().worker_exists(ware_type())) {
 		const int count = tribe.get_worker_descr(ware_type())->default_target_quantity();
-		player->get_economy(economy())->set_worker_target_quantity(ware_type(), count, duetime());
+		player->get_economy(economy())->set_target_quantity(ware_type(), count, duetime());
 	}
 }
 

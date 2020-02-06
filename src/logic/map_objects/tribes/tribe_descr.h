@@ -25,7 +25,7 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "graphic/animation.h"
+#include "graphic/animation/animation.h"
 #include "graphic/toolbar_imageset.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
@@ -116,6 +116,7 @@ public:
 	DescriptionIndex geologist() const;
 	DescriptionIndex soldier() const;
 	DescriptionIndex ship() const;
+	DescriptionIndex ferry() const;
 	DescriptionIndex port() const;
 	DescriptionIndex ironore() const;
 	DescriptionIndex rawlog() const;
@@ -127,17 +128,23 @@ public:
 
 	uint32_t frontier_animation() const;
 	uint32_t flag_animation() const;
+	uint32_t bridge_animation(uint8_t dir, bool busy) const;
+
+	// Bridge height in pixels at 1x scale, for drawing bobs walking over a bridge
+	uint32_t bridge_height() const;
 
 	// A vector of all texture images that can be used for drawing a
-	// (normal|busy) road. The images are guaranteed to exist.
+	// (normal|busy) road or a waterway. The images are guaranteed to exist.
 	const std::vector<std::string>& normal_road_paths() const;
 	const std::vector<std::string>& busy_road_paths() const;
+	const std::vector<std::string>& waterway_paths() const;
 
-	// Add the corresponding texture for roads.
+	// Add the corresponding texture for roads/waterways.
 	void add_normal_road_texture(const Image* texture);
 	void add_busy_road_texture(const Image* texture);
+	void add_waterway_texture(const Image* texture);
 
-	// The road textures used for drawing roads.
+	// The road textures used for drawing roads and waterways.
 	const RoadTextures& road_textures() const;
 
 	DescriptionIndex get_resource_indicator(const ResourceDescription* const res,
@@ -161,12 +168,19 @@ public:
 		return ship_names_;
 	}
 
+	/// Registers a building with the tribe
 	void add_building(const std::string& buildingname);
+	/// Registers a worker with the tribe and adds it to the bottom of the last worker column
+	void add_worker(const std::string& workername);
 
 	// The custom toolbar imageset if any. Can be nullptr.
 	ToolbarImageset* toolbar_image_set() const;
 
 private:
+	/// Registers a worker with the tribe and adds it to the bottom of the given worker column
+	void add_worker(const std::string& workername,
+	                std::vector<DescriptionIndex>& workers_order_column);
+
 	// Helper function for adding a special worker type (carriers etc.)
 	DescriptionIndex add_special_worker(const std::string& workername);
 	// Helper function for adding a special building type (port etc.)
@@ -180,8 +194,17 @@ private:
 
 	uint32_t frontier_animation_id_;
 	uint32_t flag_animation_id_;
+	struct BridgeAnimationIDs {
+		uint32_t e;
+		uint32_t se;
+		uint32_t sw;
+	};
+	BridgeAnimationIDs bridges_normal_;
+	BridgeAnimationIDs bridges_busy_;
+	uint32_t bridge_height_;
 	std::vector<std::string> normal_road_paths_;
 	std::vector<std::string> busy_road_paths_;
+	std::vector<std::string> waterway_paths_;
 	RoadTextures road_textures_;
 
 	std::vector<DescriptionIndex> buildings_;
@@ -199,6 +222,7 @@ private:
 	DescriptionIndex geologist_;   // This tribe's geologist worker
 	DescriptionIndex soldier_;     // The soldier that this tribe uses
 	DescriptionIndex ship_;        // The ship that this tribe uses
+	DescriptionIndex ferry_;       // The ferry that this tribe uses
 	DescriptionIndex port_;        // The port that this tribe uses
 	DescriptionIndex ironore_;     // Iron ore
 	DescriptionIndex rawlog_;      // Simple log

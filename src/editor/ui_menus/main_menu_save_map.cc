@@ -40,7 +40,9 @@
 #include "map_io/map_saver.h"
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/messagebox.h"
+#include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
+#include "wui/game_tips.h"
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"
 
@@ -222,6 +224,7 @@ void MainMenuSaveMap::update_map_options() {
 	map_details_.update(mapdata, false);
 	if (old_name == editbox_->text()) {
 		editbox_->set_text(map_details_.name());
+		edit_box_changed();
 	}
 }
 /**
@@ -321,12 +324,22 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	} else {
 		map->delete_tag("seafaring");
 	}
+	if (map->get_waterway_max_length() >= 2) {
+		map->add_tag("ferries");
+	} else {
+		map->delete_tag("ferries");
+	}
 
 	if (map->has_artifacts()) {
 		map->add_tag("artifacts");
 	} else {
 		map->delete_tag("artifacts");
 	}
+
+	UI::ProgressWindow* loader_ui = new UI::ProgressWindow("images/loadscreens/editor.jpg");
+	GameTips tips(*loader_ui, {"editor"});
+	loader_ui->step("Saving the map…");
+	egbase.set_loader_ui(loader_ui);
 
 	// Try saving the map.
 	GenericSaveHandler gsh(
@@ -336,6 +349,9 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	   },
 	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
 	GenericSaveHandler::Error error = gsh.save();
+
+	egbase.set_loader_ui(nullptr);
+	delete loader_ui;
 
 	// If only the temporary backup couldn't be deleted, we still treat it as
 	// success. Automatic cleanup will deal with later. No need to bother the

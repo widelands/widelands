@@ -8,7 +8,7 @@ the tribes. It contains the following subdirectories:
   in-game help ('Tribal Encyclopedia'). Unit-specific help is loaded with the
   help of each unit's ``helptexts.lua`` script.
 * ``data/tribes/scripting/mapobject_info``: These scripts are used to generate
-  help information for the `Encyclopedia <https://wl.widelands.org/encyclopedia/>`_
+  help information for the `Encyclopedia <https://www.widelands.org/encyclopedia/>`_
   on our website. Again, unit-specific help is loaded with the help of each
   unit's ``helptexts.lua`` script.
 * ``data/tribes/scripting/starting_conditions``: Contains a subdirectory with

@@ -78,8 +78,8 @@ private:
 
 	UI::Button change_map_or_save_;
 	UI::Button help_button_;
-	UI::Textarea mapname_, clients_, players_, map_, wincondition_type_;
-	UI::MultilineTextarea map_info_, client_info_;
+	UI::Textarea clients_, players_, map_, wincondition_type_;
+	UI::MultilineTextarea map_info_;
 	std::unique_ptr<UI::FullscreenHelpWindow> help_;
 	GameChatPanel* chat_;
 	MultiPlayerSetupGroup* mpsg_;

@@ -29,7 +29,7 @@
 // are stuck with it. Before making any changes here, see:
 // https://www.opengl.org/wiki/OpenGL_Loading_Library
 // and
-// http://stackoverflow.com/questions/13558073/program-crash-on-glgenvertexarrays-call.
+// https://stackoverflow.com/questions/13558073/program-crash-on-glgenvertexarrays-call.
 //
 // TODO(sirver): glbinding seems to be a sane solution to the GL
 // loading problem. Switch to it everywhere. (https://github.com/hpicgs/glbinding).

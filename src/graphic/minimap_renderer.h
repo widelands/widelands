@@ -78,4 +78,7 @@ std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
                                       const MiniMapType& map_draw_type,
                                       MiniMapLayer layers);
 
+// Find an even multiplier to fit the map into 300px
+int scale_map(const Widelands::Map& map, bool zoom);
+
 #endif  // end of include guard: WL_GRAPHIC_MINIMAP_RENDERER_H

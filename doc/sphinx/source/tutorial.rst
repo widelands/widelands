@@ -307,7 +307,7 @@ prefixed by ``-- TRANSLATORS:``, like this:
 Working with Placeholders
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you have multiple variables in your script that you wish to include dynamically in the same string, please use ordered placeholders to give translators control over the word order. We have implemented a special Lua function for this called `bformat <https://wl.widelands.org/docs/wl/autogen_globals/#string.bformat>`_ that works just like the ``boost::format`` function in C++. Example:
+If you have multiple variables in your script that you wish to include dynamically in the same string, please use ordered placeholders to give translators control over the word order. We have implemented a special Lua function for this called `bformat <https://www.widelands.org/docs/wl/autogen_globals/#string.bformat>`_ that works just like the ``boost::format`` function in C++. Example:
 
 .. code-block:: lua
 

@@ -271,7 +271,7 @@ uint32_t EventTimeQueue::count(const uint32_t current_time, const uint32_t addit
 		uint32_t cnt = 0;
 		for (auto item : queue) {
 			if (item.second == additional_id) {
-				cnt += 1;
+				++cnt;
 			}
 		}
 		return cnt;
@@ -418,7 +418,7 @@ void MineFieldsObserver::zero() {
 
 // Increase counter by one for specific ore/minefield type
 void MineFieldsObserver::add(const Widelands::DescriptionIndex idx) {
-	stat[idx] += 1;
+	++stat[idx];
 }
 
 // Add ore into critical_ores
@@ -449,7 +449,7 @@ uint8_t MineFieldsObserver::count_types() {
 	uint16_t count = 0;
 	for (auto material : stat) {
 		if (material.second > 0) {
-			count += 1;
+			++count;
 		}
 	}
 	return count;
@@ -483,7 +483,7 @@ void Neuron::set_weight(int8_t w) {
 // This has to be recalculated when the weight or curve type change
 void Neuron::recalculate() {
 	assert(neuron_curves.size() > type);
-	for (uint8_t i = 0; i <= kNeuronMaxPosition; i += 1) {
+	for (uint8_t i = 0; i <= kNeuronMaxPosition; ++i) {
 		results[i] = weight * neuron_curves[type][i] / kNeuronWeightLimit;
 	}
 }
@@ -843,17 +843,17 @@ void ManagementData::mutate(const uint8_t pn) {
 				uint8_t changed_bits = 0;
 				// is this a preferred neuron
 				if (preferred_f_neurons.count(item.get_id()) > 0) {
-					for (uint8_t i = 0; i < kFNeuronBitSize; i += 1) {
+					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 						if (std::rand() % 5 == 0) {
 							item.flip_bit(i);
-							changed_bits += 1;
+							++changed_bits;
 						}
 					}
 				} else {  // normal mutation
-					for (uint8_t i = 0; i < kFNeuronBitSize; i += 1) {
+					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 						if (std::rand() % (probability * 3) == 0) {
 							item.flip_bit(i);
-							changed_bits += 1;
+							++changed_bits;
 						}
 					}
 				}
@@ -1101,7 +1101,7 @@ uint8_t PlayersStrengths::enemies_seen_lately_count(const uint32_t gametime) {
 	uint8_t count = 0;
 	for (auto& item : all_stats) {
 		if (get_is_enemy(item.first) && player_seen_lately(item.first, gametime)) {
-			count += 1;
+			++count;
 		}
 	}
 	return count;

@@ -85,6 +85,7 @@ private:
 	void parse_callobject(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_plant(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_createbob(Worker::Action* act, const std::vector<std::string>& cmd);
+	void parse_buildferry(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_removeobject(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_repeatsearch(Worker::Action* act, const std::vector<std::string>& cmd);
 	void parse_findresources(Worker::Action* act, const std::vector<std::string>& cmd);

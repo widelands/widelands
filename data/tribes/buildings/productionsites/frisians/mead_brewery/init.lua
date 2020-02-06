@@ -20,21 +20,32 @@ tribes:new_productionsite_type {
       granite = 1
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 94},
-         fps = 10,
+         directory = dirname,
+         basename = "idle",
+         hotspot = {50, 82},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 94},
-         fps = 10,
-      },
+         directory = dirname,
+         basename = "working",
+         hotspot = {50, 82},
+         frames = 10,
+         columns = 5,
+         rows = 2,
+         fps = 10
+      }
+   },
+   animations = {
       unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 80},
-      },
+         directory = dirname,
+         basename = "unoccupied",
+         hotspot = {50, 70}
+      }
    },
 
    aihints = {},
@@ -59,19 +70,31 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=brew_mead",
+            "call=brew_mead_1",
             "call=brew_beer",
-            "call=brew_mead",
+            "call=brew_mead_2",
             "return=no_stats"
          }
       },
-      brew_mead = {
+      -- 2 identical programs for mead to prevent unnecessary skipping penalty
+      brew_mead_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
          descname = _"brewing mead",
          actions = {
             "return=skipped unless economy needs mead or workers need experience",
             "consume=barley water honey",
-            "sleep=35000",
+            "sleep=30000",
+            "animate=working 35000",
+            "produce=mead"
+         }
+      },
+      brew_mead_2 = {
+         -- TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
+         descname = _"brewing mead",
+         actions = {
+            "return=skipped unless economy needs mead or workers need experience",
+            "consume=barley water honey",
+            "sleep=30000",
             "animate=working 35000",
             "produce=mead"
          }

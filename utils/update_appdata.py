@@ -9,21 +9,21 @@ import sys
 
 # This script collects translations for the appdata.xml and .desktop files
 #
-# All non-translatable content for ../debian/widelands.appdata.xml is taken from
-# ../debian/widelands.appdata.xml.stub
+# All non-translatable content for ../xdg/org.widelands.Widelands.appdata.xml is taken from
+# ../xdg/org.widelands.Widelands.appdata.xml.stub
 # That file contains a SUMMARY_DESCRIPTION_HOOK where the translatable information
 # is inserted.
 # A language list and textdomain info is inserted into LANGUAGES_HOOK
 #
-# The output is written to ../debian/widelands.appdata.xml
+# The output is written to ../xdg/org.widelands.Widelands.appdata.xml
 #
-# All non-translatable content for ../debian/org.widelands.widelands.desktop is taken from
-# ../debian/org.widelands.widelands.desktop.stub
+# All non-translatable content for ../xdg/org.widelands.Widelands.desktop is taken from
+# ../xdg/org.widelands.Widelands.desktop.stub
 # That file contains a GENERIC_NAME_COMMENT_HOOK where the translatable information
 # is inserted.
-# The output is written to ../debian/org.widelands.widelands.desktop
+# The output is written to ../xdg/org.widelands.Widelands.desktop
 #
-# All translations are sourced from ../debian/translations/
+# All translations are sourced from ../xdg/translations/
 
 
 print('Updating appdata.xml and .desktop files')
@@ -33,24 +33,24 @@ base_path = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir))
 
 appdata_input_filename = os.path.normpath(
-    base_path + '/debian/widelands.appdata.xml.stub')
+    base_path + '/xdg/org.widelands.Widelands.appdata.xml.stub')
 if (not os.path.isfile(appdata_input_filename)):
     print('Error: File ' + appdata_input_filename + ' not found.')
     sys.exit(1)
 
 desktop_input_filename = os.path.normpath(
-    base_path + '/debian/org.widelands.widelands.desktop.stub')
+    base_path + '/xdg/org.widelands.Widelands.desktop.stub')
 if (not os.path.isfile(desktop_input_filename)):
     print('Error: File ' + desktop_input_filename + ' not found.')
     sys.exit(1)
 
-translations_path = os.path.normpath(base_path + '/debian/translations')
+translations_path = os.path.normpath(base_path + '/xdg/translations')
 if (not os.path.isdir(translations_path)):
     print('Error: Path ' + translations_path + ' not found.')
     sys.exit(1)
 
 english_source_filename = os.path.normpath(
-    base_path + '/debian/translations/appdata.json')
+    base_path + '/xdg/translations/appdata.json')
 if (not os.path.isfile(english_source_filename)):
     print('Error: File ' + english_source_filename + ' not found.')
     sys.exit(1)
@@ -60,7 +60,7 @@ print('- Reading textdomains:')
 textdomain_path = os.path.normpath(
     base_path + '/po')
 textdomains = []
-textdomain_path_contents = os.listdir(textdomain_path)
+textdomain_path_contents = sorted(os.listdir(textdomain_path), key=str.lower)
 for textdomain in textdomain_path_contents:
     if os.path.isdir(os.path.normpath(textdomain_path + '/' + textdomain)):
         textdomains.append(textdomain)
@@ -135,7 +135,7 @@ for translation_filename in translation_files:
         translation_file.close()
 descriptions += '  </description>\n'
 
-print('- Writing widelands.appdata.xml')
+print('- Writing org.widelands.Widelands.appdata.xml')
 input_file = open(appdata_input_filename, 'r')
 appdata = ''
 
@@ -154,7 +154,7 @@ for line in input_file:
 
 input_file.close()
 
-appdata_filepath = base_path + '/debian/widelands.appdata.xml'
+appdata_filepath = base_path + '/xdg/org.widelands.Widelands.appdata.xml'
 dest_file = codecs.open(appdata_filepath, encoding='utf-8', mode='w')
 dest_file.write(appdata)
 dest_file.close()
@@ -171,7 +171,7 @@ for line in input_file:
 
 input_file.close()
 
-desktop_filepath = base_path + '/debian/org.widelands.widelands.desktop'
+desktop_filepath = base_path + '/xdg/org.widelands.Widelands.desktop'
 dest_file = codecs.open(desktop_filepath, encoding='utf-8', mode='w')
 dest_file.write(desktop)
 dest_file.close()

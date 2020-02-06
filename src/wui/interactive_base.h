@@ -25,6 +25,7 @@
 
 #include <SDL_keycode.h>
 
+#include "graphic/road_segments.h"
 #include "graphic/toolbar_imageset.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
@@ -61,20 +62,12 @@ struct WorkareaPreview {
 class InteractiveBase : public UI::Panel, public DebugConsole::Handler {
 public:
 	enum {
-		dfShowCensus = 1,      ///< show census report on buildings
-		dfShowStatistics = 2,  ///< show statistics report on buildings
-		dfDebug = 4,           ///< general debugging info
+		dfShowCensus = 1,         ///< show census report on buildings
+		dfShowStatistics = 2,     ///< show statistics report on buildings
+		dfShowSoldierLevels = 4,  ///< show level information above soldiers
 		dfShowWorkareaOverlap =
-		   8,  ///< highlight overlapping workareas when placing a constructionsite
-	};
-
-	// Overlays displayed while a road is under construction.
-	struct RoadBuildingOverlays {
-		// The roads that are displayed while a road is being built. They are not
-		// yet logically in the game, but need to be displayed for the user as
-		// visual guide. The data type is the same as for Field::road.
-		std::map<Widelands::Coords, uint8_t> road_previews;
-		std::map<Widelands::Coords, const Image*> steepness_indicators;
+		   8,         ///< highlight overlapping workareas when placing a constructionsite
+		dfDebug = 16  ///< general debugging info
 	};
 
 	/// A build help overlay, i.e. small, big, mine, port ...
@@ -149,10 +142,7 @@ public:
 
 	//  road building
 	bool is_building_road() const {
-		return buildroad_;
-	}
-	Widelands::CoordPath* get_build_road() {
-		return buildroad_;
+		return buildroad_ != nullptr;
 	}
 	void start_build_road(Widelands::Coords start, Widelands::PlayerNumber player);
 	void abort_build_road();
@@ -160,6 +150,16 @@ public:
 	bool append_build_road(Widelands::Coords field);
 	Widelands::Coords get_build_road_start() const;
 	Widelands::Coords get_build_road_end() const;
+
+	bool is_building_waterway() const {
+		return buildwaterway_ != nullptr;
+	}
+	void start_build_waterway(Widelands::Coords start, Widelands::PlayerNumber player);
+	void abort_build_waterway();
+	void finish_build_waterway();
+	bool append_build_waterway(Widelands::Coords field);
+	Widelands::Coords get_build_waterway_start() const;
+	Widelands::Coords get_build_waterway_end() const;
 
 	virtual void cleanup_for_load() {
 	}
@@ -234,6 +234,11 @@ protected:
 	                        const Vector2i& hotspot,
 	                        float scale);
 
+	void draw_bridges(RenderTarget* dst,
+	                  const FieldsToDraw::Field* f,
+	                  uint32_t gametime,
+	                  float scale) const;
+
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
 	const Image* get_sel_picture() {
@@ -252,7 +257,8 @@ protected:
 	}
 
 	// Returns the information which overlay text should currently be drawn.
-	TextToDraw get_text_to_draw() const;
+	// Returns InfoToDraw::kNone if not 'show'
+	InfoToDraw get_info_to_draw(bool show) const;
 
 	// Returns the current overlays for the work area previews.
 	Workareas get_workarea_overlays(const Widelands::Map& map);
@@ -262,8 +268,18 @@ protected:
 	// to be displayed on this field.
 	const BuildhelpOverlay* get_buildhelp_overlay(Widelands::NodeCaps caps) const;
 
+	// Overlays displayed while a road or waterway is under construction.
+	struct RoadBuildingOverlays {
+		std::map<Widelands::Coords, std::vector<uint8_t>> road_previews;
+		std::map<Widelands::Coords, const Image*> steepness_indicators;
+	};
+
 	const RoadBuildingOverlays& road_building_overlays() const {
 		return road_building_overlays_;
+	}
+
+	const RoadBuildingOverlays& waterway_building_overlays() const {
+		return waterway_building_overlays_;
 	}
 
 	/// Returns true if there is a workarea preview being shown at the given coordinates.
@@ -284,8 +300,10 @@ protected:
 private:
 	void play_sound_effect(const NoteSound& note) const;
 	void resize_chat_overlay();
-	void roadb_add_overlay();
-	void roadb_remove_overlay();
+	void road_building_add_overlay();
+	void road_building_remove_overlay();
+	void waterway_building_add_overlay();
+	void waterway_building_remove_overlay();
 	void cmd_map_object(const std::vector<std::string>& args);
 	void cmd_lua(const std::vector<std::string>& args);
 
@@ -348,6 +366,7 @@ private:
 	std::map<Widelands::Ship*, Widelands::Coords> expedition_port_spaces_;
 
 	RoadBuildingOverlays road_building_overlays_;
+	RoadBuildingOverlays waterway_building_overlays_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
@@ -359,8 +378,12 @@ private:
 	uint32_t frametime_;        //  in millseconds
 	uint32_t avg_usframetime_;  //  in microseconds!
 
-	Widelands::CoordPath* buildroad_;  //  path for the new road
+	std::unique_ptr<Widelands::CoordPath> buildroad_;  //  path for the new road
 	Widelands::PlayerNumber road_build_player_;
+
+	std::unique_ptr<Widelands::CoordPath> buildwaterway_;
+	Widelands::PlayerNumber waterway_build_player_;
+	std::unique_ptr<WorkareaInfo> waterway_work_area_;
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
