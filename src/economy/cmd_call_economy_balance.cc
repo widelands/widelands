@@ -34,8 +34,11 @@ CmdCallEconomyBalance::CmdCallEconomyBalance(uint32_t const starttime,
                                              Economy* const economy,
                                              uint32_t const timerid)
    : GameLogicCommand(starttime) {
-	flag_ = economy->get_arbitrary_flag();
+	Flag* flag = economy->get_arbitrary_flag();
+	flag_ = flag;
 	timerid_ = timerid;
+	type_ = economy->type();
+	assert(flag->get_economy(type_) == economy);
 }
 
 /**
@@ -44,10 +47,10 @@ CmdCallEconomyBalance::CmdCallEconomyBalance(uint32_t const starttime,
  */
 void CmdCallEconomyBalance::execute(Game& game) {
 	if (Flag* const flag = flag_.get(game))
-		flag->get_economy()->balance(timerid_);
+		flag->get_economy(type_)->balance(timerid_);
 }
 
-constexpr uint16_t kCurrentPacketVersion = 3;
+constexpr uint16_t kCurrentPacketVersion = 4;
 
 /**
  * Read and write
@@ -55,12 +58,27 @@ constexpr uint16_t kCurrentPacketVersion = 3;
 void CmdCallEconomyBalance::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version <= kCurrentPacketVersion && packet_version >= 3) {
 			GameLogicCommand::read(fr, egbase, mol);
 			uint32_t serial = fr.unsigned_32();
-			if (serial)
+			if (serial) {
 				flag_ = &mol.get<Flag>(serial);
+			}
 			timerid_ = fr.unsigned_32();
+			if (packet_version >= 4) {
+				type_ = fr.unsigned_8() ? wwWORKER : wwWARE;
+			} else {
+				// TODO(Nordfriese): Savegame compatibility
+				type_ = wwWARE;
+				if (serial) {
+					if (upcast(Game, game, &egbase)) {
+						Economy* e = flag_.get(egbase)->get_economy(wwWORKER);
+						assert(e);
+						game->cmdqueue().enqueue(
+						   new CmdCallEconomyBalance(duetime(), e, e->request_timerid_));
+					}
+				}
+			}
 		} else {
 			throw UnhandledVersionError(
 			   "CmdCallEconomyBalance", packet_version, kCurrentPacketVersion);
@@ -79,5 +97,6 @@ void CmdCallEconomyBalance::write(FileWrite& fw, EditorGameBase& egbase, MapObje
 	else
 		fw.unsigned_32(0);
 	fw.unsigned_32(timerid_);
+	fw.unsigned_8(type_);
 }
 }  // namespace Widelands

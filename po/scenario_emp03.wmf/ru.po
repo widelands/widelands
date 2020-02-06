@@ -5,16 +5,16 @@
 # Translators:
 # Anton Khabarov <2233009@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2018
-# Viktor S <awsswa59@gmail.com>, 2018
 # Fede4ka, 2019
+# Viktor S <awsswa59@gmail.com>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"POT-Creation-Date: 2019-10-09 07:57+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Fede4ka, 2019\n"
+"Last-Translator: Viktor S <awsswa59@gmail.com>, 2019\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1284,12 +1284,12 @@ msgstr "Найден артефакт"
 #: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/richtext_scenarios.lua:91
 msgid "New Objective"
-msgstr ""
+msgstr "Новое задание"
 
 #: ../../data/scripting/richtext_scenarios.lua:93
 msgid "New Objectives"
-msgstr ""
+msgstr "Новые задания"

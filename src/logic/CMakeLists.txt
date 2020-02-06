@@ -69,7 +69,6 @@ wl_library(logic_game_controller
 
 wl_library(logic_constants
   SRCS
-    roadtype.h
     widelands.cc
     widelands.h
   DEPENDS
@@ -137,6 +136,7 @@ wl_library(logic_map
     base_scoped_timer
     build_info
     economy
+    graphic
     graphic_playercolor
     io_fileread
     io_filesystem

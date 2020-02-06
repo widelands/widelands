@@ -244,8 +244,11 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			}
 		}  // upcast to productionsite
 
-		if (capscache_ & Widelands::Building::PCap_Enhancable) {
-			const Widelands::DescriptionIndex& enhancement = building->descr().enhancement();
+		upcast(Widelands::ConstructionSite, cs, building);
+		if ((capscache_ & Widelands::Building::PCap_Enhancable) ||
+		    (cs && cs->get_info().becomes->enhancement() != Widelands::INVALID_INDEX)) {
+			const Widelands::DescriptionIndex& enhancement =
+			   cs ? cs->get_info().becomes->enhancement() : building->descr().enhancement();
 			const Widelands::TribeDescr& tribe = owner.tribe();
 			if (owner.is_building_type_allowed(enhancement)) {
 				const Widelands::BuildingDescr& building_descr = *tribe.get_building_descr(enhancement);
@@ -263,7 +266,8 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				                  building_descr.icon(), enhance_tooltip);
 
 				//  button id = building id
-				enhancebtn->sigclicked.connect([this, enhancement] { act_enhance(enhancement); });
+				enhancebtn->sigclicked.connect(
+				   [this, enhancement, cs] { act_enhance(enhancement, cs); });
 				capsbuttons->add(enhancebtn);
 				requires_destruction_separator = true;
 			}
@@ -458,9 +462,21 @@ void BuildingWindow::act_start_or_cancel_expedition() {
 Callback for enhancement request
 ===============
 */
-void BuildingWindow::act_enhance(Widelands::DescriptionIndex id) {
+void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (building == nullptr) {
+		return;
+	}
+	if (csite) {
+		upcast(Widelands::ConstructionSite, construction_site, building);
+		assert(construction_site);
+		if (SDL_GetModState() & KMOD_CTRL) {
+			igbase()->game().send_player_enhance_building(
+			   *construction_site, Widelands::INVALID_INDEX);
+		} else {
+			show_enhance_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *construction_site,
+			                     construction_site->get_info().becomes->enhancement(), true);
+		}
 		return;
 	}
 

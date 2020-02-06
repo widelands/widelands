@@ -108,12 +108,12 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
      // Buttons
      change_map_or_save_(this,
                          "change_map_or_save",
-                         right_column_x_ + butw_ - buth_,
+                         right_column_x_,
                          get_h() * 3 / 20,
-                         buth_,
+                         butw_,
                          buth_,
                          UI::ButtonStyle::kFsMenuSecondary,
-                         g_gr->images().get("images/wui/menus/toggle_minimap.png"),
+                         _("(no map)"),
                          _("Change map or saved game")),
      help_button_(this,
                   "help",
@@ -126,14 +126,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                   _("Show the help window")),
 
      // Text labels
-     mapname_(this,
-              right_column_x_,
-              get_h() * 3 / 20,
-              0,
-              0,
-              std::string(),
-              UI::Align::kLeft,
-              g_gr->styles().font_style(UI::FontStyle::kFsGameSetupMapname)),
      clients_(this,
               // the width of the MultiPlayerSetupGroup is (get_w() * 53 / 80)
               get_w() * 3 / 80,
@@ -161,48 +153,46 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
           g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
      wincondition_type_(this,
                         right_column_x_ + (butw_ / 2),
-                        get_h() * 10 / 20 - 1.5 * label_height_,
+                        get_h() * 15 / 20 - 9 * label_height_,
                         0,
                         0,
                         _("Type of game"),
                         UI::Align::kCenter,
                         g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings)),
-
      map_info_(this,
                right_column_x_,
                get_h() * 2 / 10,
                butw_,
-               get_h() * 23 / 80 - 1.6 * label_height_,
+               get_h() * 15 / 20 - 9.25 * label_height_ - get_h() * 2 / 10,
                UI::PanelStyle::kFsMenu),
-     client_info_(this,
-                  right_column_x_,
-                  get_h() * 15 / 20 - 2 * label_height_,
-                  butw_,
-                  get_h(),
-                  UI::PanelStyle::kFsMenu),
      help_(nullptr),
 
      // Variables and objects used in the menu
      chat_(nullptr) {
-	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 25 / 40 - 2 * label_height_));
-	ok_.set_pos(Vector2i(right_column_x_, get_h() * 14 / 20 - 2 * label_height_));
-	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
 	win_condition_dropdown_.set_pos(
-	   Vector2i(right_column_x_, get_h() * 11 / 20 - 2 * label_height_));
+	   Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_));
+	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 4 / 5 - 9.5 * label_height_ +
+	                                               win_condition_dropdown_.get_h() + padding_));
+	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240 - buth_ - padding_));
+	ok_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
+
 	title_.set_text(_("Multiplayer Game Setup"));
 	change_map_or_save_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchMPG::change_map_or_save, boost::ref(*this)));
 	help_button_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchMPG::help_clicked, boost::ref(*this)));
 
-	mapname_.set_font_scale(scale_factor());
 	clients_.set_font_scale(scale_factor());
 	players_.set_font_scale(scale_factor());
 	map_.set_font_scale(scale_factor());
 	wincondition_type_.set_font_scale(scale_factor());
 
-	mapname_.set_text(_("(no map)"));
-	map_info_.set_text(_("The host has not yet selected a map or saved game."));
+	if (settings_->can_change_map()) {
+		map_info_.set_text(_("Please select a map or saved game."));
+	} else {
+		change_map_or_save_.set_enabled(settings_->can_change_map());
+		map_info_.set_text(_("The host has not yet selected a map or saved game."));
+	}
 
 	mpsg_ = new MultiPlayerSetupGroup(
 	   this, get_w() * 3 / 80, change_map_or_save_.get_y(), get_w() * 53 / 80,
@@ -239,9 +229,10 @@ void FullscreenMenuLaunchMPG::layout() {
  */
 void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider& chat) {
 	delete chat_;
-	chat_ = new GameChatPanel(this, get_w() * 3 / 80, get_h() * 17 / 30 + 0.5 * label_height_,
-	                          get_w() * 53 / 80, get_h() * 11 / 30, chat, UI::PanelStyle::kFsMenu);
-	chat_->focus_edit();
+	chat_ = new GameChatPanel(
+	   this, get_w() * 3 / 80, mpsg_->get_y() + mpsg_->get_h() + padding_, get_w() * 53 / 80,
+	   ok_.get_y() + ok_.get_h() - mpsg_->get_y() - mpsg_->get_h() - padding_ - 1, chat,
+	   UI::PanelStyle::kFsMenu);
 }
 
 /**
@@ -404,13 +395,12 @@ void FullscreenMenuLaunchMPG::refresh() {
 
 	if (settings.mapfilename != filename_proof_) {
 		if (!g_fs->file_exists(settings.mapfilename)) {
-			client_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kWarning));
-			client_info_.set_text(
-			   _("The selected file can not be found. If it is not automatically "
-			     "transferred to you, please write to the host about this problem."));
+			map_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kWarning));
+			map_info_.set_text(_("The selected file can not be found. If it is not automatically "
+			                     "transferred to you, please write to the host about this problem."));
 		} else {
 			// Reset font color
-			client_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kLabel));
+			map_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kLabel));
 
 			// Update local nr of players - needed for the client UI
 			nr_players_ = settings.players.size();
@@ -431,21 +421,12 @@ void FullscreenMenuLaunchMPG::refresh() {
 			// It will also translate 'false-positively' on any user-made map which shares a name with
 			// the official maps, but this should not be a problem to worry about.
 			i18n::Textdomain td("maps");
-			mapname_.set_text(_(settings.mapname));
+			change_map_or_save_.set_title(_(settings.mapname));
 		}
-	} else {
-		// Write client infos
-		std::string client_info =
-		   (settings.playernum >= 0) && (settings.playernum < kMaxPlayers) ?
-		      (boost::format(_("You are Player %i.")) % (settings.playernum + 1)).str() :
-		      _("You are a spectator.");
-		client_info_.set_text(client_info);
 	}
 
 	ok_.set_enabled(settings_->can_launch());
-
 	change_map_or_save_.set_enabled(settings_->can_change_map());
-	change_map_or_save_.set_visible(settings_->can_change_map());
 
 	update_peaceful_mode();
 	peaceful_.set_state(settings_->is_peaceful_mode());
@@ -633,9 +614,8 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 
 	suggested_teams_box_->hide();
 	suggested_teams_box_->show(map.get_suggested_teams());
-	suggested_teams_box_->set_pos(
-	   Vector2i(suggested_teams_box_->get_x(),
-	            back_.get_y() - padding_ - suggested_teams_box_->get_h() - padding_));
+	suggested_teams_box_->set_pos(Vector2i(
+	   suggested_teams_box_->get_x(), back_.get_y() - padding_ - suggested_teams_box_->get_h()));
 }
 
 /// Show help

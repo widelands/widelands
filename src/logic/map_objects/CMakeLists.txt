@@ -29,7 +29,6 @@ wl_library(logic_map_objects
     buildcost.h
     checkstep.cc
     checkstep.h
-    draw_text.h
     findbob.cc
     findbob.h
     findimmovable.cc
@@ -39,6 +38,7 @@ wl_library(logic_map_objects
     immovable.cc
     immovable.h
     immovable_program.h
+    info_to_draw.h
     map_object.cc
     map_object.h
     terrain_affinity.cc
@@ -57,6 +57,8 @@ wl_library(logic_map_objects
     tribes/constructionsite.h
     tribes/dismantlesite.cc
     tribes/dismantlesite.h
+    tribes/ferry.cc
+    tribes/ferry.h
     tribes/market.cc
     tribes/market.h
     tribes/militarysite.cc
@@ -123,6 +125,7 @@ wl_library(logic_map_objects
     base_math
     economy
     graphic
+    graphic_animation
     graphic_color
     graphic_fonthandler
     graphic_image_io
