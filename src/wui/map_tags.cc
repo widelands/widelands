@@ -27,6 +27,10 @@ const std::map<std::string, std::string> kMapTags = {
    /** TRANSLATORS: This is a map tag */
    {"official", _("Official")},
    /** TRANSLATORS: This is a map tag */
+   {"unofficial", _("Unofficial")},
+   /** TRANSLATORS: This is a map tag */
+   {"balanced", _("Balanced")},
+   /** TRANSLATORS: This is a map tag */
    {"unbalanced", _("Unbalanced")},
    /** TRANSLATORS: This is a map tag */
    {"seafaring", _("Seafaring")},
